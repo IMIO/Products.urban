@@ -46,6 +46,18 @@ class AskComplementsDate(StartDate):
         return ask_complements_date
 
 
+class ComplementsDepositDate(StartDate):
+    """
+    Returns the missing part event date of the licence.
+    """
+
+    def start_date(self):
+        licence = self.task_container
+        missing_part_deposit = licence.getLastMissingPartDeposit()
+        deposit_date = missing_part_deposit and missing_part_deposit.getEventDate() or None
+        return deposit_date
+
+
 class AcknowledgmentDate(StartDate):
     """
     Returns the deposit date of the licence.

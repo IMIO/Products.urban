@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2018-07-16 11:49+0000\n"
+"POT-Creation-Date: 2018-07-17 12:46+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -288,11 +288,11 @@ msgstr "Historique sauvegardé"
 msgid "IAcknowledgment type marker interface"
 msgstr "Accusé de réception"
 
-#: ../interfaces.py:437
+#: ../interfaces.py:441
 msgid "IAnnouncement type marker interface"
 msgstr "Annonce de projet"
 
-#: ../interfaces.py:429
+#: ../interfaces.py:433
 msgid "ICODTProcedureChoiceNotified type marker interface"
 msgstr "Notification du choix de la procédure"
 
@@ -300,12 +300,12 @@ msgstr "Notification du choix de la procédure"
 msgid "ICollege type marker interface"
 msgstr "College"
 
-#: ../interfaces.py:441
+#: ../interfaces.py:445
 msgid "ICollegeOpinionTransmitToSPWEvent type marker interface"
 msgstr "Transmis de l'avis collège au SPW"
 
 #. Default: "College report"
-#: ../interfaces.py:461
+#: ../interfaces.py:465
 msgid "ICollegeReport type marker interface"
 msgstr "Rapport du collège"
 
@@ -314,7 +314,7 @@ msgstr "Rapport du collège"
 msgid "ICommunalCouncil type marker interface"
 msgstr "Conseil communal"
 
-#: ../interfaces.py:445
+#: ../interfaces.py:449
 msgid "IDecisionProjectFromSPWEvent type marker interface"
 msgstr "Projet de décision du SPW"
 
@@ -327,11 +327,11 @@ msgstr "Accusé de réception par défaut"
 msgid "IDeposit type marker interface"
 msgstr "Dépôt de la demande"
 
-#: ../interfaces.py:477
+#: ../interfaces.py:481
 msgid "IDisplayingTheDecisionEvent type marker interface"
 msgstr "Affichage de la décision"
 
-#: ../interfaces.py:501
+#: ../interfaces.py:505
 msgid "IEnvironmentOnly type marker interface"
 msgstr "Événement exclusif à l'environnement (permis unique)"
 
@@ -340,32 +340,32 @@ msgid "IEnvironmentSimpleCollegeEvent type marker interface"
 msgstr "Collège simple (environnement)"
 
 #. Default: "Inquiry"
-#: ../interfaces.py:433
+#: ../interfaces.py:437
 msgid "IInquiry type marker interface"
 msgstr "Enquête publique"
 
-#: ../interfaces.py:517
+#: ../interfaces.py:521
 msgid "IInternalPrelimaryAdvice type marker interface"
 msgstr "Avis préliminaire interne"
 
-#: ../interfaces.py:449
+#: ../interfaces.py:453
 msgid "ILicenceDelivery type marker interface"
 msgstr "Délivrance du permis (environnement)"
 
-#: ../interfaces.py:453
+#: ../interfaces.py:457
 msgid "ILicenceEffectiveStart type marker interface"
 msgstr "Début du permis"
 
-#: ../interfaces.py:457
+#: ../interfaces.py:461
 msgid "ILicenceExpiration type marker interface"
 msgstr "Expiration du permis"
 
-#: ../interfaces.py:473
+#: ../interfaces.py:477
 msgid "ILicenceNotification type marker interface"
 msgstr "Notification du permis"
 
 #. Default: "Missing part"
-#: ../interfaces.py:425
+#: ../interfaces.py:429
 msgid "IMissingPart type marker interface"
 msgstr "Pièces manquantes"
 
@@ -374,8 +374,12 @@ msgstr "Pièces manquantes"
 msgid "IMissingPartDeposit type marker interface"
 msgstr "Dépôt des pièces manquantes"
 
-#. Default: "Modification deposit"
 #: ../interfaces.py:421
+msgid "IMissingPartTransmitToSPWEvent type marker interface"
+msgstr "Transmis des compléments au SPW"
+
+#. Default: "Modification deposit"
+#: ../interfaces.py:425
 msgid "IModificationDeposit type marker interface"
 msgstr "Dépôt d'un modificatif de la demande"
 
@@ -385,15 +389,15 @@ msgid "IOpinionRequest type marker interface"
 msgstr "Demande d'avis"
 
 #. Default: "Prorogation"
-#: ../interfaces.py:493
+#: ../interfaces.py:497
 msgid "IProrogation type marker interface"
 msgstr "Prorogation"
 
-#: ../interfaces.py:481
+#: ../interfaces.py:485
 msgid "IRecourseEvent type marker interface"
 msgstr "Recours"
 
-#: ../interfaces.py:497
+#: ../interfaces.py:501
 msgid "IRefusedIncompleteness type marker interface"
 msgstr "Refus pour incomplétude"
 
@@ -407,7 +411,7 @@ msgid "ITechnicalServiceOpinionRequest type marker interface"
 msgstr "Demande d'avis du service technique"
 
 #. Default: "Licence delivery"
-#: ../interfaces.py:465
+#: ../interfaces.py:469
 msgid "ITheLicence type marker interface"
 msgstr "Délivrance du permis/certificat/..."
 
@@ -415,11 +419,11 @@ msgstr "Délivrance du permis/certificat/..."
 msgid "ITransmitToSPWEvent type marker interface"
 msgstr "Transmis du dossier au SPW"
 
-#: ../interfaces.py:509
+#: ../interfaces.py:513
 msgid "IUrbanAndEnvironment type marker interface"
 msgstr "Événement commun à l'urbanisme et l'environnement (permis unique)"
 
-#: ../interfaces.py:505
+#: ../interfaces.py:509
 msgid "IUrbanOrEnvironment type marker interface"
 msgstr "Événement exclusif au service de la tendance du dossier (permis unique)"
 
@@ -438,15 +442,15 @@ msgid "IWalloonRegionPrimo type marker interface"
 msgstr "Envoi du primo dossier"
 
 #. Default: "Work beginning"
-#: ../interfaces.py:485
+#: ../interfaces.py:489
 msgid "IWorkBeginning type marker interface"
 msgstr "Début des travaux"
 
-#: ../interfaces.py:489
+#: ../interfaces.py:493
 msgid "IWorkEnd type marker interface"
 msgstr "Fin des travaux"
 
-#: ../interfaces.py:513
+#: ../interfaces.py:517
 msgid "ImpactStudy event type marker interface"
 msgstr "Étude d'incidence"
 
@@ -2624,7 +2628,7 @@ msgstr "Date de la séance d'audition"
 
 #. Default: "Authority"
 #: ../content/licence/CODT_UniqueLicence.py:85
-#: ../content/licence/EnvironmentLicence.py:56
+#: ../content/licence/EnvironmentLicence.py:55
 msgid "urban_label_authority"
 msgstr "Autorité compétente"
 
@@ -2756,7 +2760,7 @@ msgstr "Date de début de la séance de réclamations"
 
 #. Default: "Claimssynthesis"
 #: ../content/licence/CODT_UniqueLicence.py:183
-#: ../content/licence/EnvironmentLicence.py:113
+#: ../content/licence/EnvironmentLicence.py:112
 msgid "urban_label_claimsSynthesis"
 msgstr "Synthèse des réclamations"
 
@@ -2795,7 +2799,7 @@ msgstr "Commentaires"
 
 #. Default: "Commentsonspwopinion"
 #: ../content/licence/CODT_UniqueLicence.py:206
-#: ../content/licence/EnvironmentLicence.py:136
+#: ../content/licence/EnvironmentLicence.py:135
 msgid "urban_label_commentsOnSPWOpinion"
 msgstr "Commentaires sur la décision du SPW"
 
@@ -2803,7 +2807,7 @@ msgstr "Commentaires sur la décision du SPW"
 msgid "urban_label_comments_on_decision_project"
 msgstr "Commentaires sur le projet de décision"
 
-#: ../content/licence/EnvironmentLicence.py:168
+#: ../content/licence/EnvironmentLicence.py:167
 msgid "urban_label_complement"
 msgstr "Compléments"
 
@@ -2837,7 +2841,7 @@ msgstr "Date de réunion de concertation"
 
 #. Default: "Conclusions"
 #: ../content/licence/CODT_UniqueLicence.py:218
-#: ../content/licence/EnvironmentLicence.py:148
+#: ../content/licence/EnvironmentLicence.py:147
 msgid "urban_label_conclusions"
 msgstr "Conclusions"
 
@@ -3035,7 +3039,7 @@ msgstr "Détails concernant l'équipement suffisant de la voirie"
 
 #. Default: "Environmenttechnicaladviceafterinquiry"
 #: ../content/licence/CODT_UniqueLicence.py:194
-#: ../content/licence/EnvironmentLicence.py:124
+#: ../content/licence/EnvironmentLicence.py:123
 msgid "urban_label_environmentTechnicalAdviceAfterInquiry"
 msgstr "Avis technique après enquête (environnement)"
 
@@ -3201,7 +3205,7 @@ msgstr "Composition (formulaire(s) de demande)"
 
 #. Default: "Ftsolicitopinionsto"
 #: ../content/licence/CODT_UniqueLicence.py:106
-#: ../content/licence/EnvironmentLicence.py:102
+#: ../content/licence/EnvironmentLicence.py:101
 msgid "urban_label_ftSolicitOpinionsTo"
 msgstr "Instances sollicitées par le FT"
 
@@ -3258,7 +3262,7 @@ msgid "urban_label_hasAdditionalConditions"
 msgstr "Des conditions complémentaires sont requises"
 
 #. Default: "Hasenvironmentimpactstudy"
-#: ../content/licence/EnvironmentLicence.py:86
+#: ../content/licence/EnvironmentLicence.py:85
 msgid "urban_label_hasEnvironmentImpactStudy"
 msgstr "Étude d'incidences sur l'environnement"
 
@@ -3427,7 +3431,7 @@ msgid "urban_label_isSameAddressAsWorks"
 msgstr "Adresse identique à l'adresse du bien?"
 
 #. Default: "Isseveso"
-#: ../content/licence/EnvironmentLicence.py:94
+#: ../content/licence/EnvironmentLicence.py:93
 msgid "urban_label_isSeveso"
 msgstr "Établissement SEVESO"
 
@@ -3930,7 +3934,7 @@ msgid "urban_label_prenuDetails"
 msgstr "Détails concernant le Périmètre de Rénovation Urbaine"
 
 #. Default: "Previouslicences"
-#: ../content/licence/EnvironmentLicence.py:65
+#: ../content/licence/EnvironmentLicence.py:64
 msgid "urban_label_previousLicences"
 msgstr "Permissions, enregistrements et déclarations existantes"
 
@@ -3961,7 +3965,7 @@ msgid "urban_label_protectedBuildingDetails"
 msgstr "Détails concernant le bien (classé ou assimilé)"
 
 #. Default: "Publicroadmodifications"
-#: ../content/licence/EnvironmentLicence.py:77
+#: ../content/licence/EnvironmentLicence.py:76
 msgid "urban_label_publicRoadModifications"
 msgstr "Modifications souhaitées au tracé et à l'équipement des voiries publiques"
 

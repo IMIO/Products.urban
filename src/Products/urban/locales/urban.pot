@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2018-07-16 11:49+0000\n"
+"POT-Creation-Date: 2018-07-17 12:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -285,11 +285,11 @@ msgstr ""
 msgid "IAcknowledgment type marker interface"
 msgstr ""
 
-#: ../interfaces.py:437
+#: ../interfaces.py:441
 msgid "IAnnouncement type marker interface"
 msgstr ""
 
-#: ../interfaces.py:429
+#: ../interfaces.py:433
 msgid "ICODTProcedureChoiceNotified type marker interface"
 msgstr ""
 
@@ -297,11 +297,11 @@ msgstr ""
 msgid "ICollege type marker interface"
 msgstr ""
 
-#: ../interfaces.py:441
+#: ../interfaces.py:445
 msgid "ICollegeOpinionTransmitToSPWEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:461
+#: ../interfaces.py:465
 msgid "ICollegeReport type marker interface"
 msgstr ""
 
@@ -309,7 +309,7 @@ msgstr ""
 msgid "ICommunalCouncil type marker interface"
 msgstr ""
 
-#: ../interfaces.py:445
+#: ../interfaces.py:449
 msgid "IDecisionProjectFromSPWEvent type marker interface"
 msgstr ""
 
@@ -321,11 +321,11 @@ msgstr ""
 msgid "IDeposit type marker interface"
 msgstr ""
 
-#: ../interfaces.py:477
+#: ../interfaces.py:481
 msgid "IDisplayingTheDecisionEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:501
+#: ../interfaces.py:505
 msgid "IEnvironmentOnly type marker interface"
 msgstr ""
 
@@ -333,31 +333,31 @@ msgstr ""
 msgid "IEnvironmentSimpleCollegeEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:433
+#: ../interfaces.py:437
 msgid "IInquiry type marker interface"
 msgstr ""
 
-#: ../interfaces.py:517
+#: ../interfaces.py:521
 msgid "IInternalPrelimaryAdvice type marker interface"
 msgstr ""
 
-#: ../interfaces.py:449
+#: ../interfaces.py:453
 msgid "ILicenceDelivery type marker interface"
 msgstr ""
 
-#: ../interfaces.py:453
+#: ../interfaces.py:457
 msgid "ILicenceEffectiveStart type marker interface"
 msgstr ""
 
-#: ../interfaces.py:457
+#: ../interfaces.py:461
 msgid "ILicenceExpiration type marker interface"
 msgstr ""
 
-#: ../interfaces.py:473
+#: ../interfaces.py:477
 msgid "ILicenceNotification type marker interface"
 msgstr ""
 
-#: ../interfaces.py:425
+#: ../interfaces.py:429
 msgid "IMissingPart type marker interface"
 msgstr ""
 
@@ -366,6 +366,10 @@ msgid "IMissingPartDeposit type marker interface"
 msgstr ""
 
 #: ../interfaces.py:421
+msgid "IMissingPartTransmitToSPWEvent type marker interface"
+msgstr ""
+
+#: ../interfaces.py:425
 msgid "IModificationDeposit type marker interface"
 msgstr ""
 
@@ -373,15 +377,15 @@ msgstr ""
 msgid "IOpinionRequest type marker interface"
 msgstr ""
 
-#: ../interfaces.py:493
+#: ../interfaces.py:497
 msgid "IProrogation type marker interface"
 msgstr ""
 
-#: ../interfaces.py:481
+#: ../interfaces.py:485
 msgid "IRecourseEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:497
+#: ../interfaces.py:501
 msgid "IRefusedIncompleteness type marker interface"
 msgstr ""
 
@@ -393,7 +397,7 @@ msgstr ""
 msgid "ITechnicalServiceOpinionRequest type marker interface"
 msgstr ""
 
-#: ../interfaces.py:465
+#: ../interfaces.py:469
 msgid "ITheLicence type marker interface"
 msgstr ""
 
@@ -401,11 +405,11 @@ msgstr ""
 msgid "ITransmitToSPWEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:509
+#: ../interfaces.py:513
 msgid "IUrbanAndEnvironment type marker interface"
 msgstr ""
 
-#: ../interfaces.py:505
+#: ../interfaces.py:509
 msgid "IUrbanOrEnvironment type marker interface"
 msgstr ""
 
@@ -421,15 +425,15 @@ msgstr ""
 msgid "IWalloonRegionPrimo type marker interface"
 msgstr ""
 
-#: ../interfaces.py:485
+#: ../interfaces.py:489
 msgid "IWorkBeginning type marker interface"
 msgstr ""
 
-#: ../interfaces.py:489
+#: ../interfaces.py:493
 msgid "IWorkEnd type marker interface"
 msgstr ""
 
-#: ../interfaces.py:513
+#: ../interfaces.py:517
 msgid "ImpactStudy event type marker interface"
 msgstr ""
 
@@ -2590,7 +2594,7 @@ msgstr ""
 
 #. Default: "Authority"
 #: ../content/licence/CODT_UniqueLicence.py:85
-#: ../content/licence/EnvironmentLicence.py:56
+#: ../content/licence/EnvironmentLicence.py:55
 msgid "urban_label_authority"
 msgstr ""
 
@@ -2722,7 +2726,7 @@ msgstr ""
 
 #. Default: "Claimssynthesis"
 #: ../content/licence/CODT_UniqueLicence.py:183
-#: ../content/licence/EnvironmentLicence.py:113
+#: ../content/licence/EnvironmentLicence.py:112
 msgid "urban_label_claimsSynthesis"
 msgstr ""
 
@@ -2761,7 +2765,7 @@ msgstr ""
 
 #. Default: "Commentsonspwopinion"
 #: ../content/licence/CODT_UniqueLicence.py:206
-#: ../content/licence/EnvironmentLicence.py:136
+#: ../content/licence/EnvironmentLicence.py:135
 msgid "urban_label_commentsOnSPWOpinion"
 msgstr ""
 
@@ -2769,7 +2773,7 @@ msgstr ""
 msgid "urban_label_comments_on_decision_project"
 msgstr ""
 
-#: ../content/licence/EnvironmentLicence.py:168
+#: ../content/licence/EnvironmentLicence.py:167
 msgid "urban_label_complement"
 msgstr ""
 
@@ -2803,7 +2807,7 @@ msgstr ""
 
 #. Default: "Conclusions"
 #: ../content/licence/CODT_UniqueLicence.py:218
-#: ../content/licence/EnvironmentLicence.py:148
+#: ../content/licence/EnvironmentLicence.py:147
 msgid "urban_label_conclusions"
 msgstr ""
 
@@ -3000,7 +3004,7 @@ msgstr ""
 
 #. Default: "Environmenttechnicaladviceafterinquiry"
 #: ../content/licence/CODT_UniqueLicence.py:194
-#: ../content/licence/EnvironmentLicence.py:124
+#: ../content/licence/EnvironmentLicence.py:123
 msgid "urban_label_environmentTechnicalAdviceAfterInquiry"
 msgstr ""
 
@@ -3165,7 +3169,7 @@ msgstr ""
 
 #. Default: "Ftsolicitopinionsto"
 #: ../content/licence/CODT_UniqueLicence.py:106
-#: ../content/licence/EnvironmentLicence.py:102
+#: ../content/licence/EnvironmentLicence.py:101
 msgid "urban_label_ftSolicitOpinionsTo"
 msgstr ""
 
@@ -3222,7 +3226,7 @@ msgid "urban_label_hasAdditionalConditions"
 msgstr ""
 
 #. Default: "Hasenvironmentimpactstudy"
-#: ../content/licence/EnvironmentLicence.py:86
+#: ../content/licence/EnvironmentLicence.py:85
 msgid "urban_label_hasEnvironmentImpactStudy"
 msgstr ""
 
@@ -3391,7 +3395,7 @@ msgid "urban_label_isSameAddressAsWorks"
 msgstr ""
 
 #. Default: "Isseveso"
-#: ../content/licence/EnvironmentLicence.py:94
+#: ../content/licence/EnvironmentLicence.py:93
 msgid "urban_label_isSeveso"
 msgstr ""
 
@@ -3894,7 +3898,7 @@ msgid "urban_label_prenuDetails"
 msgstr ""
 
 #. Default: "Previouslicences"
-#: ../content/licence/EnvironmentLicence.py:65
+#: ../content/licence/EnvironmentLicence.py:64
 msgid "urban_label_previousLicences"
 msgstr ""
 
@@ -3925,7 +3929,7 @@ msgid "urban_label_protectedBuildingDetails"
 msgstr ""
 
 #. Default: "Publicroadmodifications"
-#: ../content/licence/EnvironmentLicence.py:77
+#: ../content/licence/EnvironmentLicence.py:76
 msgid "urban_label_publicRoadModifications"
 msgstr ""
 
