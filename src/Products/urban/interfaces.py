@@ -258,7 +258,7 @@ class IUrbanConfigurationValue(Interface):
     """
 
 
-class IEnvironmentBase(Interface):
+class IEnvironmentBase(IGenericLicence):
     """Marker interface for .EnvironmentBase.EnvironmentBase
     """
 
@@ -278,12 +278,12 @@ class IOpinionRequestEventType(Interface):
     """
 
 
-class IEnvironmentLicence(Interface):
+class IEnvironmentLicence(IEnvironmentBase):
     """Marker interface for .EnvironmentLicence.EnvironmentLicence
     """
 
 
-class IEnvClassThree(Interface):
+class IEnvClassThree(IEnvironmentBase):
     """Marker interface for .EnvClassThree.EnvClassThree
     """
 

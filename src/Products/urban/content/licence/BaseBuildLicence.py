@@ -556,6 +556,9 @@ class BaseBuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin)
     def getLastMissingPart(self):
         return self.getLastEvent(interfaces.IMissingPartEvent)
 
+    def getAllMissingPart(self):
+        return self.getAllEvents(interfaces.IMissingPartEvent)
+
     def getLastMissingPartDeposit(self):
         return self.getLastEvent(interfaces.IMissingPartDepositEvent)
 
