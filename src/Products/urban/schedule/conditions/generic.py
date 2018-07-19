@@ -353,6 +353,16 @@ class OpinionRequestsDone(Condition):
 
         return True
 
+class RubricsChoiceDone(Condition):
+    """
+    Rubrics field has values selected.
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+        return bool(licence.getRubrics())
+
+
 
 class CollegeOpinionTransmitToSPWDoneCondition(Condition):
     """

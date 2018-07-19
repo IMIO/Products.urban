@@ -54,6 +54,14 @@
     />
 
     <adapter
+        for="Products.urban.interfaces.IEnvironmentLicence
+             imio.schedule.content.task_config.ITaskConfig"
+        provides="imio.schedule.interfaces.ICreationCondition"
+        factory=".creation.AcknowledgmentDoneCondition"
+        name="urban.schedule.condition.acknowledgment_done"
+    />
+
+    <adapter
         for="Products.urban.interfaces.IBaseAllBuildLicence
              imio.schedule.content.task_config.ITaskConfig"
         provides="imio.schedule.interfaces.ICreationCondition"
@@ -202,6 +210,14 @@
         provides="imio.schedule.interfaces.ICreationCondition"
         factory=".creation.SPWProjectReceivedCondition"
         name="urban.schedule.condition.spw_project_receipt_done"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.IEnvironmentLicence
+             imio.schedule.content.task_config.ITaskConfig"
+        provides="imio.schedule.interfaces.ICreationCondition"
+        factory=".creation.LicenceAuthorityIsCollege"
+        name="urban.schedule.condition.authority_is_college"
     />
 
 </configure>

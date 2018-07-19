@@ -318,7 +318,14 @@ class IncompleteForTheSecondTime(CreationCondition):
             task_config_UID=incomplete_UID,
             review_state='closed',
         )
-        return len(brains) > 0
+        first_incomplete_done = len(brains) > 0
+        if not first_incomplete_done:
+            return False
+        wf_history = context.workflow_history
+        two_incomplete_transitions = len([tr for tr in wf_history[wf_history.keys()[0]] if tr['action'] == 'isincomplete'])
+        if not two_incomplete_transitions:
+            return False
+        return True
 
 
 class SPWProjectReceivedCondition(CreationCondition):
@@ -335,3 +342,14 @@ class SPWProjectReceivedCondition(CreationCondition):
             receipt_done = api.content.get_state(receipt_event) == 'closed'
 
         return receipt_done
+
+
+class LicenceAuthorityIsCollege(CreationCondition):
+    """
+    Environment licence authority is college
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+        authority_is_college = licence.getAuthorithy() == 'college'
+        return authority_is_college

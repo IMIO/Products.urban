@@ -52,6 +52,7 @@ schema = Schema((
     StringField(
         name='authority',
         widget=SelectionWidget(
+            format='select',
             label=_('urban_label_authority', 'Authority'),
         ),
         schemata='urban_description',
@@ -253,6 +254,15 @@ class EnvironmentLicence(BaseFolder, EnvironmentBase, BrowserDefaultMixin):
 
     def getLastMissingPartTransmitToSPW(self):
         return self.getLastEvent(interfaces.IMissingPartTransmitToSPWEvent)
+
+    def getLastAcknowledgment(self):
+        return self.getLastEvent(interfaces.IAcknowledgmentEvent)
+
+    def getLastCollegeOpinionTransmitToSPW(self):
+        return self.getLastEvent(interfaces.ICollegeOpinionTransmitToSPWEvent)
+
+    def getLastDecisionProjectFromSPW(self):
+        return self.getLastEvent(interfaces.IDecisionProjectFromSPWEvent)
 
     security.declarePublic('getFTOpinionRequestAddresses')
     def getFTOpinionRequestAddresses(self):
