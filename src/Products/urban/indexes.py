@@ -231,7 +231,7 @@ def genericlicence_decisiondate(licence):
             meeting_date = linked_pm_items[0]['meeting_date']
             if not (meeting_date.day == meeting_date.month == 1 and meeting_date.year == 1950):
                 return meeting_date
-        return decision_event.getEventDate()
+        return decision.getDecisionDate() or decision_event.getEventDate()
 
 
 @indexer(IGenericLicence)
