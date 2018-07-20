@@ -11,5 +11,5 @@ def setExploitationConditions(licence, event):
         licence.setMinimumLegalConditions([])
     else:
         condition_field = rubrics[0].getField('exploitationCondition')
-        conditions_uid = list(set([condition_field.getRaw(rubric) for rubric in rubrics]))
+        conditions_uid = list(set([condition_field.getRaw(rubric) for rubric in rubrics if condition_field.getRaw(rubric)]))
         licence.setMinimumLegalConditions(conditions_uid)
