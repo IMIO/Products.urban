@@ -21,15 +21,26 @@ from Products.urban.content.licence.EnvironmentLicence import EnvironmentLicence
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.urban.config import *
+from Products.urban import UrbanMessage as _
+from Products.urban.widget.urbanreferencewidget import UrbanBackReferenceWidget
 
 ##code-section module-header #fill in your manual code here
 ##/code-section module-header
 
 schema = Schema((
-
-
-),
-)
+    StringField(
+        name='explosive_possession_reference',
+        widget=UrbanBackReferenceWidget(
+            label=_('urban_label_explosive_reference',
+                    default='Explosive Possession Reference'),
+            portal_types=['ExplosivesPossession'],
+        ),
+        required=False,
+        schemata='urban_description',
+        default_method='getDefaultText',
+        validators=('isReference', ),
+    ),
+))
 
 ##code-section after-local-schema #fill in your manual code here
 ##/code-section after-local-schema
