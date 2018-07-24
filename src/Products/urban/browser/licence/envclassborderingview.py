@@ -7,7 +7,7 @@ from plone import api
 
 class EnvClassBorderingView(EnvironmentLicenceView):
   """
-    This manage the view of EnvClassOne
+    This manage the view of EnvClassBordering
   """
   def __init__(self, context, request):
     super(EnvClassBorderingView, self).__init__(context, request)
@@ -23,8 +23,6 @@ class EnvClassBorderingView(EnvironmentLicenceView):
       plone_utils.addPortalMessage(_('warning_add_a_proprietary'), type="warning")
     if self.hasOutdatedParcels():
       plone_utils.addPortalMessage(_('warning_outdated_parcel'), type="warning")
-
-    print "EnvClassBorderingView"
 
   def getMacroViewName(self):
     return 'envclassbordering-macros'

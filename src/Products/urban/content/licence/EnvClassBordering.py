@@ -44,7 +44,7 @@ EnvClassBordering_schema = EnvClassOne.schema.copy() + schema.copy()
 class EnvClassBordering(EnvClassOne):
   """
   """
-  implements(interfaces.IEnvClassBordering, interfaces.IEnvClassOne)
+  implements(interfaces.IEnvClassBordering)
 
   meta_type = 'EnvClassBordering'
 

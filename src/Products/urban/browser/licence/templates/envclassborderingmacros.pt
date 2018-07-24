@@ -1,4 +1,3 @@
-
 <metal:description define-macro="description_macro" i18n:domain="urban">
 
     <tal:vars define="exclude python:[
