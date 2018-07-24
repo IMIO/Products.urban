@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2018-07-24 06:46+0000\n"
+"POT-Creation-Date: 2018-07-24 11:06+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -24,11 +24,11 @@ msgstr ""
 msgid "%s_urbanconfig_title"
 msgstr ""
 
-#: ../content/licence/ExplosivesPossession.py:132
+#: ../content/licence/ExplosivesPossession.py:128
 msgid "1st class"
 msgstr "1ère classe : Collège provincial"
 
-#: ../content/licence/ExplosivesPossession.py:133
+#: ../content/licence/ExplosivesPossession.py:129
 msgid "2nd class"
 msgstr "2ème classe : Collège communal"
 
@@ -2691,7 +2691,7 @@ msgstr "Boîte"
 msgid "urban_label_businessDescription"
 msgstr "Description de l'exploitation"
 
-#: ../content/licence/ExplosivesPossession.py:55
+#: ../content/licence/ExplosivesPossession.py:51
 msgid "urban_label_businessLocation"
 msgstr "Adresse de l'exploitation"
 
@@ -2773,7 +2773,7 @@ msgid "urban_label_claimsText"
 msgstr "Texte des réclamations"
 
 #. Default: "Class"
-#: ../content/licence/ExplosivesPossession.py:31
+#: ../content/licence/ExplosivesPossession.py:26
 msgid "urban_label_class"
 msgstr "Classe"
 
@@ -2806,7 +2806,7 @@ msgstr "Commentaires"
 msgid "urban_label_commentsOnSPWOpinion"
 msgstr "Commentaires sur la décision du SPW"
 
-#: ../content/licence/ExplosivesPossession.py:56
+#: ../content/licence/ExplosivesPossession.py:52
 msgid "urban_label_comments_on_decision_project"
 msgstr "Commentaires sur le projet de décision"
 
@@ -3106,6 +3106,12 @@ msgstr "Date de debut de la séance d'explications"
 #: EnvironmentRubricTerm.py
 msgid "urban_label_exploitationCondition"
 msgstr "Condition d'exploitation liée"
+
+#. Default: "Explosive Possession Reference"
+#: ../content/licence/EnvClassOne.py:34
+#: ../content/licence/EnvClassTwo.py:43
+msgid "urban_label_explosive_reference"
+msgstr "Référence à la procédure de détention d'explosifs"
 
 #. Default: "Exponent"
 #: PortionsOut.py
@@ -3829,7 +3835,7 @@ msgid "urban_label_pcaZone"
 msgstr "Zone de pca"
 
 #. Default: "PE Reference"
-#: ../content/licence/ExplosivesPossession.py:41
+#: ../content/licence/ExplosivesPossession.py:36
 msgid "urban_label_pe_reference"
 msgstr "Référence du permis d'environnement"
 
@@ -4473,7 +4479,7 @@ msgid "urban_label_templateStyles"
 msgstr "Fichier gérant les styles utilisés dans les différents modèles de document"
 
 #. Default: "Temporaryexploitation"
-#: ../content/licence/EnvClassTwo.py:35
+#: ../content/licence/EnvClassTwo.py:36
 msgid "urban_label_temporaryExploitation"
 msgstr "Établissement temporaire"
 
