@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2018-07-24 06:46+0000\n"
+"POT-Creation-Date: 2018-07-24 11:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,11 +23,11 @@ msgstr ""
 msgid "%s_urbanconfig_title"
 msgstr ""
 
-#: ../content/licence/ExplosivesPossession.py:132
+#: ../content/licence/ExplosivesPossession.py:128
 msgid "1st class"
 msgstr ""
 
-#: ../content/licence/ExplosivesPossession.py:133
+#: ../content/licence/ExplosivesPossession.py:129
 msgid "2nd class"
 msgstr ""
 
@@ -2657,7 +2657,7 @@ msgstr ""
 msgid "urban_label_businessDescription"
 msgstr ""
 
-#: ../content/licence/ExplosivesPossession.py:55
+#: ../content/licence/ExplosivesPossession.py:51
 msgid "urban_label_businessLocation"
 msgstr ""
 
@@ -2739,7 +2739,7 @@ msgid "urban_label_claimsText"
 msgstr ""
 
 #. Default: "Class"
-#: ../content/licence/ExplosivesPossession.py:31
+#: ../content/licence/ExplosivesPossession.py:26
 msgid "urban_label_class"
 msgstr ""
 
@@ -2772,7 +2772,7 @@ msgstr ""
 msgid "urban_label_commentsOnSPWOpinion"
 msgstr ""
 
-#: ../content/licence/ExplosivesPossession.py:56
+#: ../content/licence/ExplosivesPossession.py:52
 msgid "urban_label_comments_on_decision_project"
 msgstr ""
 
@@ -3069,6 +3069,12 @@ msgstr ""
 #. Default: "Exploitationcondition"
 #: EnvironmentRubricTerm.py
 msgid "urban_label_exploitationCondition"
+msgstr ""
+
+#. Default: "Explosive Possession Reference"
+#: ../content/licence/EnvClassOne.py:34
+#: ../content/licence/EnvClassTwo.py:43
+msgid "urban_label_explosive_reference"
 msgstr ""
 
 #. Default: "Exponent"
@@ -3793,7 +3799,7 @@ msgid "urban_label_pcaZone"
 msgstr ""
 
 #. Default: "PE Reference"
-#: ../content/licence/ExplosivesPossession.py:41
+#: ../content/licence/ExplosivesPossession.py:36
 msgid "urban_label_pe_reference"
 msgstr ""
 
@@ -4437,7 +4443,7 @@ msgid "urban_label_templateStyles"
 msgstr ""
 
 #. Default: "Temporaryexploitation"
-#: ../content/licence/EnvClassTwo.py:35
+#: ../content/licence/EnvClassTwo.py:36
 msgid "urban_label_temporaryExploitation"
 msgstr ""
 
