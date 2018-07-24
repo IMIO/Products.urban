@@ -175,6 +175,10 @@
                    Products.DCWorkflow.interfaces.IAfterTransitionEvent"
               handler=".urbanEventEvents.notifyLicence" />
 
+  <subscriber for="..interfaces.IExplosivesPossession
+                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+              handler=".explosive_possessions.update_reference" />
+
   <!-- do this to update schedule tasks when sending a college event to PM -->
   <subscriber for="..interfaces.IUrbanEvent
                    imio.pm.wsclient.interfaces.ISentToPMEvent"
