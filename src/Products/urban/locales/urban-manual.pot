@@ -2602,3 +2602,6 @@ msgstr ""
 
 msgid "ExplosivesPossession"
 msgstr ""
+
+msgid "EnvClassBordering"
+msgstr ""

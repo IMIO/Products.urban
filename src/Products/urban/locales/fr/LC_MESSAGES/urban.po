@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2018-07-24 06:24+0000\n"
+"POT-Creation-Date: 2018-07-24 06:46+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -216,6 +216,9 @@ msgstr ""
 #: ../profiles/default/actions.xml
 msgid "Emails"
 msgstr "Email"
+
+msgid "EnvClassBordering"
+msgstr "Permis d'environnement limitrophes"
 
 msgid "EnvClassOne"
 msgstr "Permis d'environnement classe 1"
