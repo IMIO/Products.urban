@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2018-07-24 11:06+0000\n"
+"POT-Creation-Date: 2018-07-25 06:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2453,7 +2453,7 @@ msgid "urban_label_activatedFields"
 msgstr ""
 
 #. Default: "Additionalconditions"
-#: ../content/licence/EnvClassThree.py:76
+#: ../content/licence/EnvClassThree.py:79
 msgid "urban_label_additionalConditions"
 msgstr ""
 
@@ -2909,7 +2909,7 @@ msgstr ""
 
 #. Default: "Deposittype"
 #: ../UrbanEvent.py:60
-#: ../content/licence/EnvClassThree.py:48
+#: ../content/licence/EnvClassThree.py:51
 msgid "urban_label_depositType"
 msgstr ""
 
@@ -3230,7 +3230,7 @@ msgid "urban_label_habitationsBeforeLicence"
 msgstr ""
 
 #. Default: "Hasadditionalconditions"
-#: ../content/licence/EnvClassThree.py:67
+#: ../content/licence/EnvClassThree.py:70
 msgid "urban_label_hasAdditionalConditions"
 msgstr ""
 
@@ -3259,8 +3259,13 @@ msgid "urban_label_implantationCODT"
 msgstr ""
 
 #. Default: "Inadmissibilityreasons"
-#: ../content/licence/EnvClassThree.py:85
+#: ../content/licence/EnvClassThree.py:88
 msgid "urban_label_inadmissibilityReasons"
+msgstr ""
+
+#. Default: "Inadmissibilityreasonsdetails"
+#: ../content/licence/EnvClassThree.py:99
+msgid "urban_label_inadmissibilityreasonsDetails"
 msgstr ""
 
 #. Default: "Initials"
@@ -4378,7 +4383,7 @@ msgid "urban_label_subjects"
 msgstr ""
 
 #. Default: "Submissionnumber"
-#: ../content/licence/EnvClassThree.py:57
+#: ../content/licence/EnvClassThree.py:60
 msgid "urban_label_submissionNumber"
 msgstr ""
 

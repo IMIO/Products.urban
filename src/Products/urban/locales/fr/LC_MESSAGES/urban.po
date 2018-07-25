@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2018-07-24 11:06+0000\n"
+"POT-Creation-Date: 2018-07-25 06:27+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -2488,7 +2488,7 @@ msgid "urban_label_activatedFields"
 msgstr "Champ(s) activé(s)"
 
 #. Default: "Additionalconditions"
-#: ../content/licence/EnvClassThree.py:76
+#: ../content/licence/EnvClassThree.py:79
 msgid "urban_label_additionalConditions"
 msgstr "Conditions d'exploitations complémentaires"
 
@@ -2943,7 +2943,7 @@ msgstr "Dénomination ou raison sociale"
 
 #. Default: "Deposittype"
 #: ../UrbanEvent.py:60
-#: ../content/licence/EnvClassThree.py:48
+#: ../content/licence/EnvClassThree.py:51
 msgid "urban_label_depositType"
 msgstr "Type de dépôt"
 
@@ -3266,7 +3266,7 @@ msgid "urban_label_habitationsBeforeLicence"
 msgstr "Nombre total de logements avant permis"
 
 #. Default: "Hasadditionalconditions"
-#: ../content/licence/EnvClassThree.py:67
+#: ../content/licence/EnvClassThree.py:70
 msgid "urban_label_hasAdditionalConditions"
 msgstr "Des conditions complémentaires sont requises"
 
@@ -3295,9 +3295,14 @@ msgid "urban_label_implantationCODT"
 msgstr "Implantation (art D.IV.172)"
 
 #. Default: "Inadmissibilityreasons"
-#: ../content/licence/EnvClassThree.py:85
+#: ../content/licence/EnvClassThree.py:88
 msgid "urban_label_inadmissibilityReasons"
 msgstr "Motifs d'irrecevabilité"
+
+#. Default: "Inadmissibilityreasonsdetails"
+#: ../content/licence/EnvClassThree.py:99
+msgid "urban_label_inadmissibilityreasonsDetails"
+msgstr "Détails concernant les motifs d'irrecevabilité"
 
 #. Default: "Initials"
 #: FolderManager.py
@@ -4414,7 +4419,7 @@ msgid "urban_label_subjects"
 msgstr "Rubriques"
 
 #. Default: "Submissionnumber"
-#: ../content/licence/EnvClassThree.py:57
+#: ../content/licence/EnvClassThree.py:60
 msgid "urban_label_submissionNumber"
 msgstr "N° de soumission"
 
