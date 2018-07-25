@@ -18,6 +18,7 @@ from Products.Archetypes.atapi import *
 from zope.interface import implements
 from Products.urban import interfaces
 from Products.urban.content.licence.EnvironmentBase import EnvironmentBase
+from Products.urban.utils import setOptionalAttributes, setSchemataForCODT_UniqueLicenceInquiry
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.urban import UrbanMessage as _
@@ -35,7 +36,10 @@ slave_fields_additionalconditions = (
     },
 )
 
-optional_fields = ['depositType', 'submissionNumber', 'inadmissibilityReasons']
+optional_fields = [
+    'depositType', 'submissionNumber', 'inadmissibilityReasons',
+    'inadmissibilityreasonsDetails'
+]
 
 ##/code-section module-header
 
@@ -90,11 +94,23 @@ schema = Schema((
         vocabulary=UrbanVocabulary(path='inadmissibilityreasons', sort_on='getObjPositionInParent'),
         default_method='getDefaultValue',
     ),
+    TextField(
+        name='inadmissibilityreasonsDetails',
+        widget=RichWidget(
+            label=_('urban_label_inadmissibilityreasonsDetails', default='Inadmissibilityreasonsdetails'),
+        ),
+        default_content_type='text/html',
+        allowable_content_types=('text/html',),
+        schemata='urban_description',
+        default_method='getDefaultText',
+        default_output_type='text/html',
+    ),
 
 ),
 )
 
 ##code-section after-local-schema #fill in your manual code here
+setOptionalAttributes(schema, optional_fields)
 ##/code-section after-local-schema
 
 EnvClassThree_schema = BaseFolderSchema.copy() + \
