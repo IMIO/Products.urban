@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2018-07-25 06:27+0000\n"
+"POT-Creation-Date: 2018-07-26 08:13+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -1126,6 +1126,12 @@ msgstr "Date de clôture"
 msgid "elements_by_page"
 msgstr "Résultats/page"
 
+msgid "envclassbordering_urbanconfig_title"
+msgstr "Paramètres des Permis d'environnement limitrophes"
+
+msgid "envclassborderings"
+msgstr "Permis d'environnement limitrophes"
+
 msgid "envclassone_urbanconfig_title"
 msgstr "Paramètres des Permis d'environnement classe 1"
 
@@ -1171,12 +1177,12 @@ msgid "equipmenttypes_folder_title"
 msgstr "Equipements de la voirie"
 
 #. Default: "Bis should be a number < 100"
-#: ../validators/validator.py:157
+#: ../validators/validator.py:160
 msgid "error_bis"
 msgstr "Bis doit être un nombre compris entre 0 et 100 (ex: 42)"
 
 #. Default: "Exposant should be uppercase letters or digits"
-#: ../validators/validator.py:169
+#: ../validators/validator.py:172
 msgid "error_exposant"
 msgstr "L'exposant doit être une lettre majuscule ou un nombre"
 
@@ -1184,27 +1190,27 @@ msgid "error_in_expr_contact_admin"
 msgstr "<b>Erreur dans l'expression ${expr} liée à ce terme de vocabulaire, contactez votre administrateur !!!</b>"
 
 #. Default: "Cannot select class 1 and class 2 toghether"
-#: ../validators/validator.py:115
+#: ../validators/validator.py:118
 msgid "error_multiple_class_type"
 msgstr ""
 
 #. Default: "Please select only ONE of the inquiry types"
-#: ../validators/validator.py:110
+#: ../validators/validator.py:113
 msgid "error_multiple_inquiry_type"
 msgstr ""
 
 #. Default: "Cannot select 'unknown' with another value"
-#: ../validators/validator.py:105
+#: ../validators/validator.py:108
 msgid "error_procedure_choice_unknown"
 msgstr ""
 
 #. Default: "Puissance should be a number < 100"
-#: ../validators/validator.py:181
+#: ../validators/validator.py:184
 msgid "error_puissance"
 msgstr "La puissance doit être un nombre compris entre 0 et 100 (ex: 42)"
 
 #. Default: "Radical should be a number"
-#: ../validators/validator.py:145
+#: ../validators/validator.py:148
 msgid "error_radical"
 msgstr "Le radical doit être un nombre (ex:42) "
 
@@ -1219,7 +1225,7 @@ msgid "error_reference_format"
 msgstr ""
 
 #. Default: "Section should be a single uppercase letter"
-#: ../validators/validator.py:133
+#: ../validators/validator.py:136
 msgid "error_section"
 msgstr "La section doit être une seule lettre majuscule (ex: C)"
 
@@ -2488,7 +2494,7 @@ msgid "urban_label_activatedFields"
 msgstr "Champ(s) activé(s)"
 
 #. Default: "Additionalconditions"
-#: ../content/licence/EnvClassThree.py:79
+#: ../content/licence/EnvClassThree.py:80
 msgid "urban_label_additionalConditions"
 msgstr "Conditions d'exploitations complémentaires"
 
@@ -2943,7 +2949,7 @@ msgstr "Dénomination ou raison sociale"
 
 #. Default: "Deposittype"
 #: ../UrbanEvent.py:60
-#: ../content/licence/EnvClassThree.py:51
+#: ../content/licence/EnvClassThree.py:52
 msgid "urban_label_depositType"
 msgstr "Type de dépôt"
 
@@ -3266,7 +3272,7 @@ msgid "urban_label_habitationsBeforeLicence"
 msgstr "Nombre total de logements avant permis"
 
 #. Default: "Hasadditionalconditions"
-#: ../content/licence/EnvClassThree.py:70
+#: ../content/licence/EnvClassThree.py:71
 msgid "urban_label_hasAdditionalConditions"
 msgstr "Des conditions complémentaires sont requises"
 
@@ -3295,12 +3301,12 @@ msgid "urban_label_implantationCODT"
 msgstr "Implantation (art D.IV.172)"
 
 #. Default: "Inadmissibilityreasons"
-#: ../content/licence/EnvClassThree.py:88
+#: ../content/licence/EnvClassThree.py:89
 msgid "urban_label_inadmissibilityReasons"
 msgstr "Motifs d'irrecevabilité"
 
 #. Default: "Inadmissibilityreasonsdetails"
-#: ../content/licence/EnvClassThree.py:99
+#: ../content/licence/EnvClassThree.py:100
 msgid "urban_label_inadmissibilityreasonsDetails"
 msgstr "Détails concernant les motifs d'irrecevabilité"
 
@@ -4419,7 +4425,7 @@ msgid "urban_label_subjects"
 msgstr "Rubriques"
 
 #. Default: "Submissionnumber"
-#: ../content/licence/EnvClassThree.py:60
+#: ../content/licence/EnvClassThree.py:61
 msgid "urban_label_submissionNumber"
 msgstr "N° de soumission"
 

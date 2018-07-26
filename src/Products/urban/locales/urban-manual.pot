@@ -2605,3 +2605,9 @@ msgstr ""
 
 msgid "EnvClassBordering"
 msgstr ""
+
+msgid "envclassbordering_urbanconfig_title"
+msgstr ""
+
+msgid "envclassborderings"
+msgstr ""
