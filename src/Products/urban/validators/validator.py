@@ -100,6 +100,9 @@ class procedureChoiceValidator:
         self.name = name
 
     def __call__(self, value, *args, **kwargs):
+        if type(value) is str:
+            return True
+
         if 'ukn' in value and len(value) > 2:
             return translate(
                 _('error_procedure_choice_unknown',
