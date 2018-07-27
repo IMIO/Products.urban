@@ -69,7 +69,6 @@ schema = Schema((
         schemata='urban_description',
         default_method='getDefaultSPEReference',
     ),
-
     StringField(
         name='referenceFT',
         widget=StringField._properties['widget'](

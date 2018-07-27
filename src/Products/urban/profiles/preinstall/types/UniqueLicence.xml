@@ -11,7 +11,7 @@
  <property name="product">urban</property>
  <property name="factory">addUniqueLicence</property>
  <!-- not a mistake, article127 and buildlicence are the same -->
- <property name="immediate_view">buildlicenceview</property>
+ <property name="immediate_view">uniquelicenceview</property>
  <property name="global_allow">True</property>
  <property name="filter_content_types">True</property>
  <property name="allowed_content_types">
@@ -34,13 +34,12 @@
   <element value="folder_tabular_view"/>
   <element value="atct_album_view"/>
   <element value="folder_listing"/>
-  <!-- not a mistake, article127 and buildlicence are the same -->
-  <element value="buildlicenceview"/>
+  <element value="uniquelicenceview"/>
  </property>
  <property name="default_view_fallback">False</property>
  <alias from="(Default)" to="(dynamic view)"/>
  <!-- not a mistake, article127 and buildlicence are the same -->
- <alias from="view" to="buildlicenceview"/>
+ <alias from="view" to="uniquelicenceview"/>
  <alias from="edit" to="base_edit"/>
  <alias from="sharing" to="@@sharing"/>
  <action title="View"
