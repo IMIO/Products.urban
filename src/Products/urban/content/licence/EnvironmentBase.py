@@ -44,7 +44,7 @@ from plone import api
 optional_fields = [
     'roadTechnicalAdvice', 'locationTechnicalAdvice', 'additionalLegalConditions',
     'businessOldLocation', 'applicationReasons', 'validityDelay',
-    'environmentTechnicalRemarks',
+    'environmentTechnicalRemarks', 'rubricsDetails',
 ]
 
 slave_fields_natura2000 = (
@@ -345,7 +345,7 @@ class EnvironmentBase(BaseFolder, GenericLicence, CODT_UniqueLicenceInquiry, Bro
     def listProcedureChoices(self):
         vocabulary = (
             ('ukn', 'Non determiné'),
-            ('simple', 'Simple'),
+            ('simple', 'Classique'),
             ('temporary', 'Temporaire'),
         )
         return DisplayList(vocabulary)
