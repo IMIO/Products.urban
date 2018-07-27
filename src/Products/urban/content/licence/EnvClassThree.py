@@ -38,7 +38,7 @@ slave_fields_additionalconditions = (
 
 optional_fields = [
     'depositType', 'submissionNumber', 'inadmissibilityReasons',
-    'inadmissibilityreasonsDetails'
+    'inadmissibilityreasonsDetails', 'annoncedDelay', 'annoncedDelayDetails'
 ]
 
 ##/code-section module-header
@@ -110,7 +110,6 @@ schema = Schema((
 )
 
 ##code-section after-local-schema #fill in your manual code here
-setOptionalAttributes(schema, optional_fields)
 ##/code-section after-local-schema
 
 EnvClassThree_schema = BaseFolderSchema.copy() + \
@@ -118,6 +117,9 @@ EnvClassThree_schema = BaseFolderSchema.copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
+# must be done after schema extension to be sure to make fields
+# of parents schema optional
+setOptionalAttributes(EnvClassThree_schema, optional_fields)
 ##/code-section after-schema
 
 class EnvClassThree(BaseFolder, EnvironmentBase, BrowserDefaultMixin):
