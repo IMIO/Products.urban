@@ -3,7 +3,8 @@
     <tal:vars define="exclude python:[
                           'title', 'workLocations', 'businessOldLocation',
                           'additionalLegalConditions', 'additionalConditions',
-                          'additionalPreviousLicences',
+                          'additionalPreviousLicences', 'manualParcels', 'manualOldParcels',
+                          'city', 'zipcode'
                       ];
                       custom python:[
                           'rubrics', 'minimumLegalConditions', 'hasAdditionalConditions',
@@ -15,7 +16,68 @@
             </metal:applicants>
 
             <metal:worklocations fill-slot="worklocations">
-                <metal:worklocation use-macro="here/@@worklocation-macro/env_worklocations_macro" />
+<div metal:define-macro="env_worklocations_macro" i18n:domain="urban">
+    <fieldset tal:define="workLocations context/getWorkLocations;
+                          manual_parcels context/getManualParcels;">
+        <legend i18n:translate="urban_label_situation">Situation</legend>
+        <div tal:condition="workLocations">
+            <metal:myfield use-macro="python:here.widget('workLocations', mode='view')" />
+            <br />
+            <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%>
+            <tr tal:repeat="field python: [context.getField('city'), context.getField('zipcode')]">
+                <tal:vars define="fieldname field/getName;
+                                  value python: field.getAccessor(context)();
+                                  nullvalue python: value == '' or value == ();">
+            <td valign="top"><b><span tal:content="field/widget/label | field/widget/label_msgid" i18n:translate=""></span>:</b></td>
+            <td width="10px"></td>
+            <td valign="top">
+                <tal:non_null_value condition="not: nullvalue">
+                    <metal:myfield use-macro="python:context.widget(fieldname, mode='view')" />
+                </tal:non_null_value>
+                <span tal:condition="nullvalue" class="discreet" i18n:translate="content_none">None</span>
+            </td>
+                </tal:vars>
+            </tr>
+            </table>
+            <br />
+        </div>
+        <div tal:condition="manual_parcels">
+            <metal:myfield use-macro="python:here.widget('manualParcels', mode='view')" />
+        </div>
+        <span tal:condition="python: not workLocations and not manual_parcels" class="discreet" i18n:translate="content_none">None</span>
+    </fieldset>
+
+    <fieldset tal:define="workLocations context/getBusinessOldLocation;
+                          manual_parcels context/getManualOldParcels;"
+              tal:condition="python: 'businessOldLocation' in view.getUsedAttributes()">
+        <legend i18n:translate="urban_label_businessOldLocation">Old business location</legend>
+        <div tal:condition="workLocations">
+            <metal:myfield use-macro="python:here.widget('businessOldLocation', mode='view')" />
+            <br />
+            <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%>
+            <tr tal:repeat="field python: [context.getField('city'), context.getField('zipcode')]">
+                <tal:vars define="fieldname field/getName;
+                                  value python: field.getAccessor(context)();
+                                  nullvalue python: value == '' or value == ();">
+            <td valign="top"><b><span tal:content="field/widget/label | field/widget/label_msgid" i18n:translate=""></span>:</b></td>
+            <td width="10px"></td>
+            <td valign="top">
+                <tal:non_null_value condition="not: nullvalue">
+                    <metal:myfield use-macro="python:context.widget(fieldname, mode='view')" />
+                </tal:non_null_value>
+                <span tal:condition="nullvalue" class="discreet" i18n:translate="content_none">None</span>
+            </td>
+                </tal:vars>
+            </tr>
+            </table>
+            <br />
+        </div>
+        <div tal:condition="manual_parcels">
+            <metal:myfield use-macro="python:here.widget('manualOldParcels', mode='view')" />
+        </div>
+        <span tal:condition="python: not workLocations and not manual_parcels" class="discreet" i18n:translate="content_none">None</span>
+    </fieldset>
+</div>
             </metal:worklocations>
         </metal:parent_call>
     </tal:vars>

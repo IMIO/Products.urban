@@ -154,7 +154,7 @@ registerType(EnvClassThree, PROJECTNAME)
 # end of class EnvClassThree
 
 ##code-section module-footer #fill in your manual code here
-def finalizeSchema(schema, folderish=False, moveDiscussion=True):
+def finalizeSchema(schema):
     """
        Finalizes the type schema to alter some fields
     """
@@ -168,6 +168,7 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     schema.moveField('missingPartsDetails', after='missingParts')
     schema['validityDelay'].default = 10
     return schema
+
 
 finalizeSchema(EnvClassThree_schema)
 ##/code-section module-footer
