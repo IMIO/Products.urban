@@ -420,7 +420,7 @@ class EnvironmentBase(BaseFolder, GenericLicence, CODT_UniqueLicenceInquiry, Bro
 
     security.declarePrivate('_getConditions')
 
-    def _getConditions(self, restrict=['CI/CS', 'CI', 'CS']):
+    def _getConditions(self, restrict=['CI/CS', 'CI', 'CS', 'CS-Eau', 'Ville']):
         all_conditions = self.getMinimumLegalConditions()
         all_conditions.extend(self.getAdditionalLegalConditions())
         return [cond for cond in all_conditions if cond.getExtraValue() in restrict]
@@ -448,6 +448,18 @@ class EnvironmentBase(BaseFolder, GenericLicence, CODT_UniqueLicenceInquiry, Bro
          Return all the integral & sectorial conditions,
         """
         return self._getConditions(restrict=['CI/CS'])
+
+    def getWaterConditions(self):
+        """
+         Return all the water conditions,
+        """
+        return self._getConditions(restrict=['CS-Eau'])
+
+    def getTownshipConditions(self):
+        """
+         Return all the water conditions,
+        """
+        return self._getConditions(restrict=['Ville'])
 
     security.declarePublic('getLicenceSEnforceableDate')
 

@@ -484,16 +484,16 @@ def addRubricValues(context, config_folder):
             new_rubric = getattr(rubric_folder, rubric_id)
             new_rubric.processForm()
 
-            bound_condition = mapping[rubric_id]
-            if bound_condition:
+            conditions_uid = []
+            for bound_condition in mapping[rubric_id]:
                 condition_type = bound_condition['type'].replace('/', '_').replace('-', '_')
                 condition_id = bound_condition['id']
                 conditions_folder = getattr(site.portal_urban.exploitationconditions, condition_type)
                 condition = getattr(conditions_folder, condition_id)
-                condition_uid = condition.UID()
+                conditions_uid.append(condition.UID())
 
-                rubric = getattr(rubric_folder, rubric_id)
-                rubric.setExploitationCondition(condition_uid)
+            rubric = getattr(rubric_folder, rubric_id)
+            rubric.setExploitationCondition(conditions_uid)
 
 
 def addExploitationConditions(context, config_folder):

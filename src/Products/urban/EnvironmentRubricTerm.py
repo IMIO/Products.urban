@@ -26,6 +26,7 @@ from Products.urban.config import *
 from Products.CMFCore.utils import getToolByName
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
 from Products.urban.utils import strip_tags
+from Products.urban import UrbanMessage as _
 ##/code-section module-header
 
 schema = Schema((
@@ -33,9 +34,7 @@ schema = Schema((
     StringField(
         name='number',
         widget=StringField._properties['widget'](
-            label='Number',
-            label_msgid='urban_label_number',
-            i18n_domain='urban',
+            label=_('urban_label_number', 'Number'),
         ),
     ),
     ReferenceField(
@@ -47,11 +46,10 @@ schema = Schema((
             startup_directory_method='getExploitationConditionsPath',
             show_indexes= False,
             wild_card_search= True,
-            label='Exploitationcondition',
-            label_msgid='urban_label_exploitationCondition',
-            i18n_domain='urban',
+            label=_('urban_label_exploitationCondition', 'Exploitationcondition'),
         ),
         relationship='exploitationConditions',
+        multiValued=True,
     ),
 
 ),
