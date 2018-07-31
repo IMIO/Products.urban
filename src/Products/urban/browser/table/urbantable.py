@@ -189,6 +189,7 @@ class EventsTable(UrbanTable, SequenceTable):
 
     sortOn = 'table-eventdateColumn-1'
     cssClasses = {'table': 'listing largetable'}
+    batchSize = 999
 
 
 class DocumentsTable(UrbanTable, SequenceTable):
