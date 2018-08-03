@@ -1,10 +1,27 @@
 # encoding: utf-8
 
+from Products.urban.config import URBAN_TYPES
+
 from plone import api
 
 import logging
 
 logger = logging.getLogger('urban: migrations')
+
+
+def update_urban_dashboard_collection(context):
+    """
+    """
+    logger = logging.getLogger('urban: update filtered licence types of urban "all" collection')
+    logger.info("starting migration step")
+    site = api.portal.get()
+    urban_folder = getattr(site, 'urban')
+    all_licences_collection = getattr(urban_folder, 'collection_all_licences')
+    filter_type = [type for type in URBAN_TYPES]
+    query = [{'i': 'portal_type', 'o': 'plone.app.querystring.operation.selection.is', 'v': filter_type}]
+    all_licences_collection.setQuery(query)
+    logger.info("migration step done!")
+
 
 
 def copy_sol_values_from_pca(context):
@@ -71,6 +88,7 @@ def migrate(context):
     logger.info("starting migration steps")
     setup_tool = api.portal.get_tool('portal_setup')
     setup_tool.runImportStepFromProfile('profile-Products.urban:default', 'urban-postInstall')
+    update_urban_dashboard_collection(context)
     copy_sol_values_from_pca(context)
     move_noteworthytrees_vocabulary(context)
     migrate_eventtypes_values()
