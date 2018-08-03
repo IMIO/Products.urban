@@ -18,6 +18,7 @@ from Products.urban.interfaces import IDivision
 from Products.urban.interfaces import IEnvClassOne
 from Products.urban.interfaces import IEnvClassThree
 from Products.urban.interfaces import IEnvClassTwo
+from Products.urban.interfaces import IEnvClassBordering
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.interfaces import IIntegratedLicence
 from Products.urban.interfaces import IMiscDemand
@@ -62,6 +63,7 @@ URBAN_TYPES_INTERFACES = {
     'EnvClassOne': IEnvClassOne,
     'EnvClassTwo': IEnvClassTwo,
     'EnvClassThree': IEnvClassThree,
+    'EnvClassBordering': IEnvClassBordering,
     'GenericLicence': IGenericLicence,
     'IntegratedLicence': IIntegratedLicence,
     'MiscDemand': IMiscDemand,

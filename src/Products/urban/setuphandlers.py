@@ -136,6 +136,7 @@ def postInstall(context):
         'UrbanCertificateTwo': 1,
         'EnvClassThree': 1,
         'EnvClassOne': 1,
+        'EnvClassBordering': 1,
         'NotaryLetter': 1,
         'PreliminaryNotice': 1,
         'PatrimonyCertificate': 1,
@@ -483,16 +484,16 @@ def addRubricValues(context, config_folder):
             new_rubric = getattr(rubric_folder, rubric_id)
             new_rubric.processForm()
 
-            bound_condition = mapping[rubric_id]
-            if bound_condition:
+            conditions_uid = []
+            for bound_condition in mapping[rubric_id]:
                 condition_type = bound_condition['type'].replace('/', '_').replace('-', '_')
                 condition_id = bound_condition['id']
                 conditions_folder = getattr(site.portal_urban.exploitationconditions, condition_type)
                 condition = getattr(conditions_folder, condition_id)
-                condition_uid = condition.UID()
+                conditions_uid.append(condition.UID())
 
-                rubric = getattr(rubric_folder, rubric_id)
-                rubric.setExploitationCondition(condition_uid)
+            rubric = getattr(rubric_folder, rubric_id)
+            rubric.setExploitationCondition(conditions_uid)
 
 
 def addExploitationConditions(context, config_folder):
@@ -795,7 +796,7 @@ def addApplicationFolders(context):
                 licence_folder.manage_permission('urban: Add UrbanCertificateBase', ['Manager', 'Contributor', ], acquire=0)
             if urban_type in ['EnvClassThree', ]:
                 licence_folder.manage_permission('urban: Add EnvironmentBase', ['Manager', 'Contributor', ], acquire=0)
-            if urban_type in ['EnvClassOne', 'EnvClassTwo']:
+            if urban_type in ['EnvClassOne', 'EnvClassTwo', 'EnvClassBordering']:
                 licence_folder.manage_permission('urban: Add EnvironmentLicence', ['Manager', 'Contributor', ], acquire=0)
         newFolder.moveObjectsToBottom([licence_folder_id])
 

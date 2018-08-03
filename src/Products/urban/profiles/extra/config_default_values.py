@@ -634,6 +634,19 @@ default_values = {
             {'id': "soumission", 'title': u"Soumission"},
         ],
     },
+    'EnvClassBordering': {
+        'decisions': [
+            'UrbanVocabularyTerm',
+            {'id': "octroi", 'title': u"Octroi", 'extraValue': "Recevable"},
+            {'id': "refus", 'title': u"Refus", 'extraValue': "Irrecevable"},
+        ],
+        'folderdelays': [
+            'UrbanDelay',
+            {'id': "40j", 'title': u"40 jours", 'deadLineDelay': 40, 'alertDelay': 20},
+            {'id': "140j", 'title': u"140 jours", 'deadLineDelay': 140, 'alertDelay': 20},
+            {'id': "inconnu", 'title': u"Inconnu", 'deadLineDelay': 0, 'alertDelay': 20},
+        ],
+    },
     'Division': {
         'foldercategories': [
             'UrbanVocabularyTerm',
@@ -750,7 +763,7 @@ default_values = {
         ],
 
         'ftSolicitOpinionsTo': [
-            'UrbanVocabularyTerm', ['EnvClassOne', 'EnvClassTwo'],
+            'UrbanVocabularyTerm', ['EnvClassOne', 'EnvClassTwo', 'EnvClassBordering'],
             {
                 'id': 'spw-dgo1',
                 'title': "SPW-DGO1",
@@ -855,20 +868,20 @@ default_values = {
         ],
 
         'authority': [
-            'UrbanVocabularyTerm', ['EnvClassOne', 'EnvClassTwo', 'UniqueLicence', 'CODT_UniqueLicence'],
+            'UrbanVocabularyTerm', ['EnvClassOne', 'EnvClassTwo', 'EnvClassBordering', 'UniqueLicence', 'CODT_UniqueLicence'],
             {'id': "college", 'title': u"Collège"},
             {'id': "ft", 'title': u"Fonctionnaire technique"},
         ],
 
         'inadmissibilityreasons': [
-            'UrbanVocabularyTerm', ['EnvClassOne', 'EnvClassTwo', 'EnvClassThree'],
+            'UrbanVocabularyTerm', ['EnvClassOne', 'EnvClassTwo', 'EnvClassThree', 'EnvClassBordering'],
             {'id': "missing_parts", 'title': u"Pièces/renseignements manquants"},
             {'id': "no_deposit_receipt", 'title': u"Le dossier n'a pas été déposé contre récipissé"},
             {'id': "no_recommanded_deposit", 'title': u"Le dossier n'a pas été envoyé par recommandé"},
         ],
 
         'applicationreasons': [
-            'UrbanVocabularyTerm', ['EnvClassOne', 'EnvClassTwo', 'EnvClassThree'],
+            'UrbanVocabularyTerm', ['EnvClassOne', 'EnvClassTwo', 'EnvClassThree', 'EnvClassBordering'],
             {'id': "new_business", 'title': u"Mise en activité d'un établissement nouveau"},
             {'id': "class_change", 'title': u"Maintien en activité d'un établissement qui vient d'être rangé en classe 3 suite à une modification de la liste des installations et activités classées"},
             {'id': "licence_expiration", 'title': u"Maintien en activité d’un établissement dont la durée de validité de la déclaration est arrivée à expiration"},

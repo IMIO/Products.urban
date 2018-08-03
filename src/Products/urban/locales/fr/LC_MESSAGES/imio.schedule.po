@@ -44,6 +44,9 @@ msgstr "Créer l'événement 'dossier incomplet' et le clôturer"
 msgid "urban.schedule.condition.complements_received"
 msgstr "Créer l'événement 'récépissé d'un complément' et le clôturer"
 
+msgid "urban.schedule.condition.complements_transmit_to_spw"
+msgstr "Créer l'événement 'transmis des compléments au SPW' et le clôturer"
+
 msgid "urban.schedule.condition.decision_delivered"
 msgstr "Créer l'événement de notification de la décision du permis d'environnement et le clôturer"
 
@@ -116,6 +119,9 @@ msgstr "Créer l'événement 'Réception du choix de la procédure par le FD' et
 msgid "urban.schedule.condition.refused"
 msgstr "Refuser le dossier"
 
+msgid "urban.schedule.condition.rubrics_choice_done"
+msgstr "Sélectionner les rubriques du dossier"
+
 msgid "urban.schedule.condition.spw_project_receipt_done"
 msgstr "Créer l'événement 'Réception du projet d'arrêté du SPW' et le clôturer"
 
@@ -142,6 +148,12 @@ msgstr "Date de transmis de l'accusé de réception"
 
 msgid "urban.schedule.start_date.announcement_end_date"
 msgstr "Date de fin de l'annonce de projet"
+
+msgid "urban.schedule.start_date.ask_complements_date"
+msgstr "Date d'incomplétude du dossier"
+
+msgid "urban.schedule.start_date.complements_deposit_date"
+msgstr "Date de réception des compléments"
 
 msgid "urban.schedule.start_date.creation_date"
 msgstr "Date de création du dossier"
