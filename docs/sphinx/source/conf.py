@@ -31,7 +31,6 @@ import os
 extensions = [
     'sphinx.ext.todo',
     'sphinx.ext.ifconfig',
-    'rst2pdf.pdfbuilder',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -53,7 +52,8 @@ project = u'iA.Urban'
 copyright = u'2018, IMIO'
 author = u'jja'
 
-pdf_documents = [(master_doc, u'iaurban', u'iA.Urban doc', u'Imio'),]
+# Variable rst2pdf, impossible à compiler sous python 3 avec RTD
+# pdf_documents = [(master_doc, u'iaurban', u'iA.Urban doc', u'Imio'),]
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
