@@ -13,9 +13,7 @@ Contents:
    :maxdepth: 2
 
    using_urban
-   using_carto
-   using_schedule
-   tutoriel
+   config_urban
 
 ##################
 Indices and tables
