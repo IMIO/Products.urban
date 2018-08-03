@@ -27,10 +27,6 @@ Indices and tables
 Ressources
 ##########
 
-* Télécharger cette documentation:
+..
+   * Télécharger cette documentation:
    `PDF <http://docs.imio.be/iaurban/_downloads/iaurban.pdf>`_ / `Epub <http://docs.imio.be/iaurban/_downloads/iaurban.epub>`_
-
-
-
-
-
