@@ -30,7 +30,6 @@ from Products.urban import UrbanMessage as _
 
 ##code-section module-header #fill in your manual code here
 from Products.urban.interfaces import IEnvironmentBase
-from Products.urban.interfaces import ILicenceDeliveryEvent
 from Products.urban.utils import setOptionalAttributes
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 
@@ -53,6 +52,7 @@ schema = Schema((
     StringField(
         name='authority',
         widget=SelectionWidget(
+            format='select',
             label=_('urban_label_authority', 'Authority'),
         ),
         schemata='urban_description',
@@ -64,7 +64,7 @@ schema = Schema((
         widget=ReferenceBrowserWidget(
             label=_('urban_label_previousLicences', 'Previouslicences'),
         ),
-        allowed_types=('EnvClassThree', 'EnvClassTwo', 'EnvClassOne'),
+        allowed_types=('EnvClassThree', 'EnvClassTwo', 'EnvClassOne', 'EnvClassBordering'),
         schemata='urban_description',
         multiValued=True,
         relationship='previousLicences',
@@ -243,8 +243,26 @@ class EnvironmentLicence(BaseFolder, EnvironmentBase, BrowserDefaultMixin):
     def previouslicencesBaseQuery(self):
         return {'object_provides': IEnvironmentBase.__identifier__}
 
+    def getLastTransmitToSPW(self):
+        return self.getLastEvent(interfaces.ITransmitToSPWEvent)
+
     def getLastMissingPart(self):
         return self.getLastEvent(interfaces.IMissingPartEvent)
+
+    def getLastMissingPartDeposit(self):
+        return self.getLastEvent(interfaces.IMissingPartDepositEvent)
+
+    def getLastMissingPartTransmitToSPW(self):
+        return self.getLastEvent(interfaces.IMissingPartTransmitToSPWEvent)
+
+    def getLastAcknowledgment(self):
+        return self.getLastEvent(interfaces.IAcknowledgmentEvent)
+
+    def getLastCollegeOpinionTransmitToSPW(self):
+        return self.getLastEvent(interfaces.ICollegeOpinionTransmitToSPWEvent)
+
+    def getLastDecisionProjectFromSPW(self):
+        return self.getLastEvent(interfaces.IDecisionProjectFromSPWEvent)
 
     security.declarePublic('getFTOpinionRequestAddresses')
     def getFTOpinionRequestAddresses(self):

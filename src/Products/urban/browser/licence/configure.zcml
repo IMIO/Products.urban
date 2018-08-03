@@ -104,7 +104,22 @@
   <browser:page
      name="codt_buildlicence-macros"
      for="Products.urban.interfaces.ICODT_BaseBuildLicence"
-     template="templates/codt_uniquelicencemacros.pt"
+     template="templates/codt_buildlicencemacros.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="Products.urban.interfaces.IUniqueLicence"
+     name="uniquelicenceview"
+     class=".uniquelicenceview.UniqueLicenceView"
+     template="templates/buildlicenceview.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     name="uniquelicence-macros"
+     for="Products.urban.interfaces.IUniqueLicence"
+     template="templates/uniquelicencemacros.pt"
      permission="zope2.View"
   />
 
@@ -259,6 +274,14 @@
   />
 
   <browser:page
+    for="Products.urban.interfaces.IEnvironmentLicence"
+    name="envclassborderingview"
+    class=".envclassborderingview.EnvClassBorderingView"
+    template="templates/envclassborderingview.pt"
+    permission="zope2.View"
+  />
+
+  <browser:page
      name="envclasstwo-macros"
      for="Products.urban.interfaces.IEnvironmentBase"
      template="templates/envclasstwomacros.pt"
@@ -277,6 +300,13 @@
      name="envclassone-macros"
      for="Products.urban.interfaces.IEnvironmentBase"
      template="templates/envclassonemacros.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     name="envclassbordering-macros"
+     for="Products.urban.interfaces.IEnvironmentBase"
+     template="templates/envclassborderingmacros.pt"
      permission="zope2.View"
   />
 

@@ -258,7 +258,7 @@ class IUrbanConfigurationValue(Interface):
     """
 
 
-class IEnvironmentBase(Interface):
+class IEnvironmentBase(IGenericLicence):
     """Marker interface for .EnvironmentBase.EnvironmentBase
     """
 
@@ -278,12 +278,12 @@ class IOpinionRequestEventType(Interface):
     """
 
 
-class IEnvironmentLicence(Interface):
+class IEnvironmentLicence(IEnvironmentBase):
     """Marker interface for .EnvironmentLicence.EnvironmentLicence
     """
 
 
-class IEnvClassThree(Interface):
+class IEnvClassThree(IEnvironmentBase):
     """Marker interface for .EnvClassThree.EnvClassThree
     """
 
@@ -303,13 +303,18 @@ class IApplicant(Interface):
     """
 
 
-class IEnvClassTwo(Interface):
+class IEnvClassTwo(IEnvironmentLicence):
     """Marker interface for .EnvClassTwo.EnvClassTwo
     """
 
 
-class IEnvClassOne(Interface):
+class IEnvClassOne(IEnvironmentLicence):
     """Marker interface for .EnvClassOne.EnvClassOne
+    """
+
+
+class IEnvClassBordering(IEnvironmentLicence):
+    """Marker interface for EnvClassBordering
     """
 
 
@@ -415,6 +420,10 @@ class IDepositEvent(Interface):
 
 class IMissingPartDepositEvent(IDepositEvent):
     __doc__ = _("""IMissingPartDeposit type marker interface""")
+
+
+class IMissingPartTransmitToSPWEvent(IDepositEvent):
+    __doc__ = _("""IMissingPartTransmitToSPWEvent type marker interface""")
 
 
 class IModificationDepositEvent(IDepositEvent):
@@ -548,6 +557,11 @@ class IEnvClassThree(Interface):
 
 
 class IEnvCLassOne(Interface):
+    """Marker interface for EnvClassOne
+    """
+
+
+class IEnvClassBordering(Interface):
     """Marker interface for EnvClassOne
     """
 

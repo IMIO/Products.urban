@@ -117,6 +117,10 @@
     type=".interfaces.IEventTypeType"/>
 
   <interface
+    interface=".interfaces.IMissingPartTransmitToSPWEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
     interface=".interfaces.IDefaultCODTAcknowledgmentEvent"
     type=".interfaces.IEventTypeType"/>
 

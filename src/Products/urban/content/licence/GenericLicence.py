@@ -48,7 +48,6 @@ from Products.urban.interfaces import IUrbanEvent
 from Products.urban.utils import setOptionalAttributes
 from Products.urban.utils import get_interface_by_path
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
-from Products.urban import UrbanMessage as _
 
 from zope.component import createObject
 

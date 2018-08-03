@@ -359,7 +359,7 @@ class EnvironmentLicenceView(LicenceView):
         """
         sort exploitation conditions in this order: CI/CS, CI, CS
         """
-        order = ['CI/CS', 'CI', 'CS', 'CS-Eau']
+        order = ['CI/CS', 'CI', 'CS', 'CS-Eau', 'Ville']
         sorted_conditions = dict([(val, [],) for val in order])
         for cond in conditions:
             val = cond.getExtraValue()

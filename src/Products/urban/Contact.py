@@ -345,6 +345,7 @@ class Contact(BaseContent, BrowserDefaultMixin):
         street = self.getStreet()
         zip = self.getZipcode()
         city = self.getCity()
+        country = self.getField('country').vocabulary.getAllVocTerms(self)[self.getCountry()].Title()
         if not linebyline:
             result = []
             if inverted_address:
@@ -365,6 +366,8 @@ class Contact(BaseContent, BrowserDefaultMixin):
                 result.append("à %s" % zip)
             if city:
                 result.append(city)
+            if self.getCountry() != 'belgium':
+                result.append(country)
             return ' '.join(result)
         else:
             number = cgi.escape(number)
@@ -379,6 +382,8 @@ class Contact(BaseContent, BrowserDefaultMixin):
                 address = mask_address % (number, street, zip, city)
             else:
                 address = mask_address % (street, number, zip, city)
+            if self.getCountry() != 'belgium':
+                address = address.replace("</p>", "<br />{country}</p>".format(country=country))
             return address
 
     security.declarePublic('getPersonTitle')

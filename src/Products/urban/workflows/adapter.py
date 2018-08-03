@@ -147,7 +147,7 @@ class LocalRoleAdapter(object):
                 if callable(group_name):
                     msg = "Group '{}' computed by '{}' method does not exist.".format(
                         group_value,
-                        group_name.__func__.__name__
+                        group_name.__name__
                     )
                 else:
                     msg = "'{}' is neither an existing group nor a method on mapping object {}.".format(
