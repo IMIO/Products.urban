@@ -371,6 +371,11 @@ class IExplosivesPossession(Interface):
     """
 
 
+class IRoadDecree(Interface):
+    """Marker interface for .BuildLicence.BuildLicence
+    """
+
+
 class ICollegeEvent(Interface):
     __doc__ = _("""ICollege type marker interface""")
 

@@ -145,6 +145,7 @@ def postInstall(context):
         'Proprietary': 1,
         'Applicant': 1,
         'Claimant': 1,
+        'RoadDecree': 1,
     }
     alreadyRegTypes.update(typesToRegister)
     factory_tool.manage_setPortalFactoryTypes(listOfTypeIds=alreadyRegTypes)

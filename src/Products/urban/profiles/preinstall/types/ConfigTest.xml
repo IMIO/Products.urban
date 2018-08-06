@@ -39,6 +39,7 @@
   <element value="CODT_UrbanCertificateTwo"/>
   <element value="CODT_IntegratedLicence"/>
 
+
  </property>
  <property name="allow_discussion">False</property>
 

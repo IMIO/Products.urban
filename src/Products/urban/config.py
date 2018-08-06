@@ -117,6 +117,7 @@ ADD_CONTENT_PERMISSIONS = {
     'UrbanEventOpinionRequest': 'urban: Add UrbanEventOpinionRequest',
     'UrbanConfigurationValue': 'urban: Add UrbanConfigurationValue',
     'ExplosivesPossession': 'urban: Add ExplosivesPossession',
+    'RoadDecree': 'urban: Add RoadDecree',
 }
 
 setDefaultRoles('urban: Add Applicant', ("Manager", "Contributor"))
@@ -178,6 +179,7 @@ setDefaultRoles('urban: Add UrbanEventOpinionRequest', ("Manager", "Contributor"
 setDefaultRoles('urban: Add UrbanConfigurationValue', ('Manager', ))
 setDefaultRoles('urban: Add UrbanVocabularyTerm', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add ExplosivesPossession', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add RoadDecree', ("Manager", "Contributor"))
 
 product_globals = globals()
 
@@ -202,6 +204,7 @@ URBAN_TYPES = [
     'MiscDemand', 'Division',
     'NotaryLetter', 'CODT_NotaryLetter',
     'ProjectMeeting', 'ExplosivesPossession',
+    'RoadDecree',
 ]
 
 URBAN_CWATUPE_TYPES = [

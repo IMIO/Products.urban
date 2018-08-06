@@ -416,4 +416,19 @@
      permission="zope2.View"
   />
 
+  <browser:page
+          for="Products.urban.interfaces.IRoadDecree"
+          name="roaddecreeview"
+          class=".roaddecreeview.RoadDecreeView"
+          template="templates/roaddecreeview.pt"
+          permission="zope2.View"
+  />
+
+  <browser:page
+          name="roaddecree-macros"
+          for="Products.urban.interfaces.IRoadDecree"
+          template="templates/roaddecreemacros.pt"
+          permission="zope2.View"
+  />
+
 </configure>
