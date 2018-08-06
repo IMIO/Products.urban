@@ -1327,7 +1327,7 @@ default_values = {
             'UrbanVocabularyTerm', [
                 'BuildLicence', 'Article127', 'UniqueLicence', 'IntegratedLicence',
                 'ParcelOutLicence', 'UrbanCertificateTwo', 'CODT_UniqueLicence',
-                'CODT_IntegratedLicence', 'CODT_CommercialLicence',
+                'CODT_IntegratedLicence', 'CODT_CommercialLicence', 'RoadDecree',
             ],
             {'id': "deficient-equipment", 'title': u"Voire insuffisamment équipée"},
             {'id': "transformation", 'title': u"Transformation sans nouveau raccordement à l'égout"},
