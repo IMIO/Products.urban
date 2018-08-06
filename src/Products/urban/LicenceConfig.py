@@ -367,6 +367,7 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
                 'environment',
             ],
             'envclassbordering': env_inquiry_tabs_config,
+            'RoadDecree': buildlicence_tabs_config,
         }
         licence_type = self.id
 

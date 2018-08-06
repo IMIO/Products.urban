@@ -186,6 +186,7 @@ def initialize(context):
     import content.licence.UrbanCertificateTwo
     import content.licence.UniqueLicence
     import content.licence.ExplosivesPossession
+    import content.licence.RoadDecree
     import ConfigTest
 
     # Initialize portal tools
