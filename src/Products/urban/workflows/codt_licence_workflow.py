@@ -9,7 +9,7 @@ class StateRolesMapping(LocalRoleAdapter):
     mapping = {
         'deposit': {
             'urban_readers': ('Reader',),
-            'urban_editors': ('Reader', 'Editor', 'Contributor'),
+            'urban_editors': ('Reader', 'Editor', 'Contributor', 'Reviewer'),
             'urban_managers': ('Reader', 'Editor', 'Contributor', 'Reviewer'),
         },
 
@@ -21,32 +21,32 @@ class StateRolesMapping(LocalRoleAdapter):
 
         'incomplete': {
             'urban_readers': ('Reader',),
-            'urban_editors': ('Reader', 'Editor', 'Contributor'),
+            'urban_editors': ('Reader', 'Editor', 'Contributor', 'Reviewer'),
             'urban_managers': ('Reader', 'Editor', 'Contributor', 'Reviewer'),
         },
 
         'complete': {
             'urban_readers': ('Reader',),
-            'urban_editors': ('Reader', 'Editor', 'Contributor'),
+            'urban_editors': ('Reader', 'Editor', 'Contributor', 'Reviewer'),
             'urban_managers': ('Reader', 'Editor', 'Contributor', 'Reviewer'),
         },
 
         'refused': {
             'urban_readers': ('Reader',),
             'urban_editors': ('Reader', 'Contributor'),
-            'urban_managers': ('Reader', 'Contributor'),
+            'urban_managers': ('Reader', 'Contributor', 'Reviewer'),
         },
 
         'retired': {
             'urban_readers': ('Reader',),
             'urban_editors': ('Reader', 'Contributor'),
-            'urban_managers': ('Reader', 'Contributor'),
+            'urban_managers': ('Reader', 'Contributor', 'Reviewer'),
         },
 
         'inacceptable': {
             'urban_readers': ('Reader',),
             'urban_editors': ('Reader', 'Contributor'),
-            'urban_managers': ('Reader', 'Contributor'),
+            'urban_managers': ('Reader', 'Contributor', 'Reviewer'),
         },
 
     }
