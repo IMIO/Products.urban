@@ -216,22 +216,6 @@ class PortionOut(BaseContent, BrowserDefaultMixin):
 
         return references
 
-    security.declarePublic('getIndexValue')
-    def getIndexValue(self):
-        res = []
-        res.append(self.getDivisionCode())
-        res.append(self.getSection())
-        res.append(self.getRadical())
-        res.append(self.getBis().lstrip('0'))
-        res.append(self.getExposant())
-        res.append(self.getPuissance())
-        if self.getPartie():
-            res.append('1')
-        else:
-            res.append('0')
-        res = [part or '' for part in res]
-        return ",".join(res)
-
     security.declarePublic('getDivisionName')
     def getDivisionName(self):
         return self.listDivisionNames().getValue(self.getDivision())
@@ -257,19 +241,19 @@ class PortionOut(BaseContent, BrowserDefaultMixin):
     def hasRelatedLicences(self, licence_type=''):
         catalog = getToolByName(self, 'portal_catalog')
         container = self.aq_parent
-        parcel_infos = self.getIndexValue()
+        capakey = self.get_capakey()
         brains = []
         if licence_type:
             brains = catalog(
                 portal_type=licence_type,
                 sort_limit=2,
-                parcelInfosIndex=parcel_infos,
+                parcelInfosIndex=capakey,
                 object_provides=IGenericLicence.__identifier__
             )
         else:
             brains = catalog(
                 sort_limit=2,
-                parcelInfosIndex=parcel_infos,
+                parcelInfosIndex=capakey,
                 object_provides=IGenericLicence.__identifier__
             )
         return len([brain for brain in brains if brain.id != container.id]) > 0
@@ -278,12 +262,12 @@ class PortionOut(BaseContent, BrowserDefaultMixin):
     def getRelatedLicences(self, licence_type=''):
         catalog = getToolByName(self, 'portal_catalog')
         licence = self.aq_parent
-        parcel_infos = self.getIndexValue()
+        capakey = self.get_capakey()
         brains = []
         if licence_type:
-            brains = catalog(portal_type=licence_type, parcelInfosIndex=parcel_infos)
+            brains = catalog(portal_type=licence_type, parcelInfosIndex=capakey)
         else:
-            brains = catalog(parcelInfosIndex=parcel_infos)
+            brains = catalog(parcelInfosIndex=capakey)
         return [brain for brain in brains if brain.id != licence.id]
 
     security.declarePublic('getCSSClass')
