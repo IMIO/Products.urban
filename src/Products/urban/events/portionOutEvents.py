@@ -67,11 +67,11 @@ def setEnvironmentLicencePreviousLicencesField(parcel, event):
 
     catalog = api.portal.get_tool('portal_catalog')
     parcels = licence.objectValues('PortionOut')
-    parcel_infos = set()
+    capakeys = set()
     cadastre = services.cadastre.new_session()
 
     for parcel in parcels:
-        parcel_infos.add(parcel.getIndexValue())
+        capakeys.add(parcel.get_capakey())
 
         if not parcel.getIsOfficialParcel() or not parcel.getDivision():
             continue
@@ -86,13 +86,13 @@ def setEnvironmentLicencePreviousLicencesField(parcel, event):
             continue
 
         for ref in parcel_historic.get_all_reference_indexes():
-            parcel_infos.add(ref)
+            capakeys.add(ref)
 
     cadastre.close()
 
     related_brains = catalog(
         object_provides=IEnvironmentBase.__identifier__,
-        parcelInfosIndex=list(parcel_infos),
+        parcelInfosIndex=list(capakeys),
         sort_on='sortable_title'
     )
     relatedlicences_UIDs = [brain.UID for brain in related_brains]
