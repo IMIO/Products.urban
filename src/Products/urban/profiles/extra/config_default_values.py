@@ -1866,5 +1866,10 @@ default_values = {
             {'id': "8", 'title': u"Annexe VIII - Travaux techniques"},
             {'id': "9", 'title': u"Annexe IX - Permis d'urbanisme dispensé d'un architecte ou autre que les demandes visées aux annexes 5 à 8"},
         ],
+
+        'town_roaddecree': [
+            'UrbanVocabularyTerm',
+            {'id': "default", 'title': u"ma commune par défaut"},
+        ],
     },
 }
