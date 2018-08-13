@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2018-07-30 09:45+0000\n"
+"POT-Creation-Date: 2018-08-13 09:54+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -1013,9 +1013,9 @@ msgid "content_no_urbaneventinquiry"
 msgstr "Aucun événement n'est encore lié à cette enquête publique"
 
 #. Default: "None"
+#: ../browser/licence/templates/envclassborderingmacros.pt:37
 #: ../browser/licence/templates/licencemacros.pt:5
 #: ../browser/licence/templates/licencetabsmacros.pt:77
-#: ../browser/licence/templates/worklocation_macro.pt:7
 msgid "content_none"
 msgstr "N.C."
 
@@ -2704,9 +2704,9 @@ msgid "urban_label_businessLocation"
 msgstr "Adresse de l'exploitation"
 
 #. Default: "Old business location"
+#: ../browser/licence/templates/envclassborderingmacros.pt:53
 #: ../browser/licence/templates/worklocation_macro.pt:22
 #: ../content/licence/EnvClassBordering.py:62
-#: ../content/licence/EnvironmentBase.py:147
 msgid "urban_label_businessOldLocation"
 msgstr "Ancienne adresse de l'exploitation"
 
@@ -2901,7 +2901,7 @@ msgid "urban_label_decisionDate"
 msgstr "Date de la décision"
 
 #. Default: "Decisionproject"
-#: ../UrbanEvent.py:372
+#: ../UrbanEvent.py:382
 msgid "urban_label_decisionProject"
 msgstr "Projet de décision"
 
@@ -2970,7 +2970,7 @@ msgid "urban_label_derogationDetails"
 msgstr "Détails concernant les dérogations"
 
 #. Default: "Description"
-#: ../UrbanEvent.py:383
+#: ../UrbanEvent.py:393
 #: ../content/licence/EnvironmentBase.py:258
 #: ../content/licence/GenericLicence.py:192
 msgid "urban_label_description"
@@ -2985,6 +2985,11 @@ msgstr "Informations de dispatch"
 #: ../UrbanEvent.py:364
 msgid "urban_label_displayDate"
 msgstr "Date d'affichage"
+
+#. Default: "Displaydateiend"
+#: ../UrbanEvent.py:374
+msgid "urban_label_displayDateEnd"
+msgstr "Date de fin d'affichage"
 
 #. Default: "Displayemptykeydates"
 #: ../UrbanTool.py:117
@@ -3117,7 +3122,7 @@ msgid "urban_label_explanationsDate"
 msgstr "Date de debut de la séance d'explications"
 
 #. Default: "Exploitationcondition"
-#: EnvironmentRubricTerm.py
+#: ../EnvironmentRubricTerm.py:49
 msgid "urban_label_exploitationCondition"
 msgstr "Condition d'exploitation liée"
 
@@ -3739,8 +3744,7 @@ msgid "urban_label_noteworthyTrees"
 msgstr "Arbres et haies remarquables"
 
 #. Default: "Number"
-#: Contact.py
-#: PcaTerm.py
+#: ../EnvironmentRubricTerm.py:37
 msgid "urban_label_number"
 msgstr "Numéro"
 
@@ -4314,6 +4318,7 @@ msgid "urban_label_signatureNumber"
 msgstr "Nombre de signature"
 
 #. Default: "Situation"
+#: ../browser/licence/templates/envclassborderingmacros.pt:22
 #: ../browser/licence/templates/worklocation_macro.pt:13
 #: ../content/licence/EnvironmentBase.py:304
 msgid "urban_label_situation"

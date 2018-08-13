@@ -365,6 +365,16 @@ schema = Schema((
         ),
         optional=True,
     ),
+    DateTimeField(
+        name='displayDateEnd',
+        widget=DateTimeField._properties['widget'](
+            show_hm=False,
+            format="%d/%m/%Y",
+            starting_year=1960,
+            label=_('urban_label_displayDateEnd', default='Displaydateiend'),
+        ),
+        optional=True,
+    ),
     TextField(
         name='decisionProject',
         allowable_content_types=('text/html',),
