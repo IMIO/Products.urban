@@ -1587,6 +1587,19 @@ default_values = {
             {'id': "ssc-activites-economiques-tertiaires", 'title': u"Zone d'activités économiques tertiaires"},
         ],
 
+        'sct': [
+            'UrbanVocabularyTerm',
+            {'id': "sct-zone-urbaine-de-centre-ville-de-grande-mixite", 'title': u"Zone urbaine de centre ville de grande mixité (minimum 50 log/ha)"},
+            {'id': "sct-zone-urbaine", 'title': u"Zone urbaine (de 40 à 60 log/ha)"},
+            {'id': "sct-zone-de-village-et-ou-peri-urbaine", 'title': u"Zone de village et/ou péri-urbaine (de 20 à 40 log/ha)"},
+            {'id': "sct-zone-residentielle", 'title': u"Zone résidentielle (de 12 à 20 log/ha)"},
+            {'id': "sct-zone-paysagere-de-tres-faible-densite", 'title': u"Zone paysagère de très faible densité (maximum 5 log/ha)"},
+            {'id': "sct-zone-ecologique", 'title': u"Zone écologique"},
+            {'id': "sct-perimetre-de-protection-paysagere", 'title': u"Périmètre de protection paysagère"},
+            {'id': "sct-activite-economique-mixte", 'title': u"Activité économique mixte"},
+            {'id': "sct-activite-economique-industrielle", 'title': u"Activité économique industrielle"},
+        ],
+
         'sdc': [
             'UrbanVocabularyTerm',
             {'id': "sdc-centre-ville", 'title': u"Zone d'habitat urbain de centre-ville"},
