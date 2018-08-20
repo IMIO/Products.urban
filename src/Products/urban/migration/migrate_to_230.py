@@ -83,6 +83,25 @@ def migrate_eventtypes_values():
     logger.info("migration step done!")
 
 
+def migrate_sct(context):
+    """
+    """
+    logger = logging.getLogger('urban: migrate karst constraints')
+    logger.info("starting migration step")
+
+    container = api.portal.get_tool('portal_urban')
+    sct_vocabularies_config = default_values['global']['sct']
+    allowedtypes = sct_vocabularies_config[0]
+    sct_folder_config = createVocabularyFolder(container, 'sct', context, allowedtypes)
+    createFolderDefaultValues(
+            sct_folder_config,
+            default_values['global']['sct'][1:],
+            default_values['global']['sct'][0]
+    )
+
+    logger.info("migration step done!")
+
+
 def migrate(context):
     logger = logging.getLogger('urban: migrate to 2.3')
     logger.info("starting migration steps")
@@ -92,4 +111,5 @@ def migrate(context):
     copy_sol_values_from_pca(context)
     move_noteworthytrees_vocabulary(context)
     migrate_eventtypes_values()
+    migrate_sct(context)
     logger.info("migration done!")
