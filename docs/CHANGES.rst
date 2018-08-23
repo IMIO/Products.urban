@@ -2,6 +2,11 @@
 
 Changes
 =======
+2.3.x (unreleased)
+-------------------
+- Fix translations
+  [fngaha]
+
 
 2.3.x (unreleased)
 -------------------
@@ -16,9 +21,15 @@ Changes
 
 2.3.0 (unreleased)
 -------------------
-- add attributes SCT, sctDetails
+- Add attributes SCT, sctDetails
+  [fngaha]
+
 - Add translations for SCT, sctDetails
+  [fngaha]
+
 - Add vocabularies configuration for SCT
+  [fngaha]
+
 - Add migration source code
   [fngaha]
 
