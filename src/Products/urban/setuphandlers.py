@@ -49,6 +49,7 @@ from plone.portlets.constants import CONTEXT_CATEGORY, GROUP_CATEGORY, CONTENT_T
 
 from imio.schedule.utils import interface_to_tuple
 from imio.schedule.utils import _set_faceted_view
+from imio.schedule.utils import set_schedule_view
 
 from zExceptions import BadRequest
 from zope.interface import alsoProvides
@@ -165,6 +166,9 @@ def postInstall(context):
     logger.info("setupSchedule : starting...")
     setupSchedule(context)
     logger.info("setupSchedule : Done")
+    logger.info("setupOpinionsSchedule : starting...")
+    setupOpinionsSchedule(context)
+    logger.info("setupOpinionsSchedule : Done")
     logger.info("setupTest : starting...")
     setupTest(context.getSite())
     logger.info("setupTest : Done")
@@ -562,6 +566,10 @@ def addUrbanGroups(context):
     #one with map Readers
     site.portal_groups.addGroup("urban_map_readers", title="Urban Map Readers")
     site.portal_groups.setRolesForGroup('urban_map_readers', ('UrbanMapReader', ))
+    # add opinion editors group
+    site.portal_groups.addGroup("opinions_editors", title="Opinion Editors")
+    site.portal_groups.setRolesForGroup('opinions_editors', ('UrbanMapReader', ))
+    site.portal_urban.manage_addLocalRoles("opinions_editors", ("Reader", ))
 
 
 def setDefaultApplicationSecurity(context):
@@ -991,13 +999,40 @@ def setupSchedule(context):
                 title=licence_name
             )
 
-        collection_folder = getattr(schedule_folder, folder_id)
-        config_path = '{}/schedule/config/{}.xml'.format(
-            os.path.dirname(__file__),
-            folder_id
-        )
-        _set_faceted_view(collection_folder, config_path, [schedule_config])
+            # only apply faceted view if the the folder does not exist to keep
+            # custom changes
+            collection_folder = getattr(schedule_folder, folder_id)
+            config_path = '{}/schedule/config/{}.xml'.format(
+                os.path.dirname(__file__),
+                folder_id
+            )
+            _set_faceted_view(collection_folder, config_path, [schedule_config])
     setFolderAllowedTypes(schedule_folder, [])
+
+
+def setupOpinionsSchedule(context):
+    """
+    Enable schedule faceted navigation on schedule folder.
+    """
+    site = context.getSite()
+    urban_folder = site.urban
+    portal_urban = api.portal.get_tool('portal_urban')
+
+    if not hasattr(urban_folder, 'opinions_schedule'):
+        urban_folder.invokeFactory('Folder', id='opinions_schedule')
+    schedule_folder = getattr(urban_folder, 'opinions_schedule')
+    schedule_folder.manage_addLocalRoles("opinions_editors", ("Reader", ))
+    schedule_folder.reindexObjectSecurity()
+
+    schedule_config = createScheduleConfig(
+        container=portal_urban,
+        portal_type='UrbanEventOpinionRequest',
+        id='opinions_schedule',
+        title=u'Configuration d\'échéances avis de services',
+    )
+
+    config_path = '{}/schedule/config/opinions_schedule.xml'.format(os.path.dirname(__file__))
+    set_schedule_view(schedule_folder, config_path, schedule_config)
 
 
 def setupTest(context):

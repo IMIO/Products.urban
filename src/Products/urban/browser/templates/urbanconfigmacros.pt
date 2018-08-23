@@ -112,6 +112,7 @@
 
 <div metal:define-macro="schedule_macro" i18n:domain="urban">
 
+    <!--tal:filter define="folderContents view/getScheduleConfigs"-->
     <tal:filter define="folderContents view/getScheduleConfigs">
 
         <metal:main_macro tal:define="
