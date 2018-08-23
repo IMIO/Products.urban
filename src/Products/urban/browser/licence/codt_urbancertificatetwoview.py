@@ -1,15 +1,15 @@
 from Acquisition import aq_inner
-from Products.urban.browser.licence.licenceview import UrbanCertificateBaseView
+from Products.urban.browser.licence.licenceview import CODTUrbanCertificateBaseView
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import PloneMessageFactory as _
 
 
-class UrbanCertificateTwoView(UrbanCertificateBaseView):
+class CODTUrbanCertificateTwoView(CODTUrbanCertificateBaseView):
     """
       This manage the view of UrbanCertificateTwo
     """
     def __init__(self, context, request):
-        super(UrbanCertificateTwoView, self).__init__(context, request)
+        super(CODTUrbanCertificateTwoView, self).__init__(context, request)
         self.context = context
         self.request = request
         # disable portlets on licences
@@ -25,8 +25,7 @@ class UrbanCertificateTwoView(UrbanCertificateBaseView):
 
     def getInquiriesForDisplay(self):
         """
-          Returns the inquiries to display on the buildlicence_view
-          This will move to the buildlicenceview when it will exist...
+          Returns the inquiries to display on the environmentlicence_view
         """
         context = aq_inner(self.context)
         inquiries = context.getInquiries()

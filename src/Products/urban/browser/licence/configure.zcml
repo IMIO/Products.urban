@@ -133,7 +133,7 @@
   <browser:page
      for="Products.urban.interfaces.ICODT_ParcelOutLicence"
      name="parceloutlicenceview"
-     class=".parceloutlicenceview.ParcelOutLicenceView"
+     class=".codt_parceloutlicenceview.CODTParcelOutLicenceView"
      template="templates/parceloutlicenceview.pt"
      permission="zope2.View"
   />
@@ -179,6 +179,14 @@
      for="Products.urban.interfaces.IUrbanCertificateTwo"
      name="urbancertificatetwoview"
      class=".urbancertificatetwoview.UrbanCertificateTwoView"
+     template="templates/urbancertificatetwoview.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="Products.urban.interfaces.ICODT_UrbanCertificateTwo"
+     name="urbancertificatetwoview"
+     class=".codt_urbancertificatetwoview.CODTUrbanCertificateTwoView"
      template="templates/urbancertificatetwoview.pt"
      permission="zope2.View"
   />

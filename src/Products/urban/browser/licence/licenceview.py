@@ -342,7 +342,19 @@ class UrbanCertificateBaseView(LicenceView):
         context = aq_inner(self.context)
         accessor = getattr(context, 'get%sSpecificFeatures' % subtype.capitalize())
         specific_features = accessor()
-        return [spf.get('value', spf['text']) for spf in specific_features if not 'check' in spf or spf['check']]
+        return [spf.get('value', spf['text']) for spf in specific_features if 'check' not in spf or spf['check']]
+
+
+class CODTUrbanCertificateBaseView(LicenceView):
+    """
+      This manage the view of CODT UrbanCertificate
+    """
+
+    def getInquiryFields(self, exclude=[], context=None):
+        return self.context.get_inquiry_fields_to_display(exclude=exclude)
+
+    def getInquiryType(self):
+        return 'CODT_Inquiry'
 
 
 class EnvironmentLicenceView(LicenceView):
@@ -354,8 +366,7 @@ class EnvironmentLicenceView(LicenceView):
 
     def getInquiriesForDisplay(self):
         """
-          Returns the inquiries to display on the buildlicence_view
-          This will move to the buildlicenceview when it will exist...
+          Returns the inquiries to display on the environmentlicence_view
         """
         context = aq_inner(self.context)
         inquiries = context.getInquiries()
