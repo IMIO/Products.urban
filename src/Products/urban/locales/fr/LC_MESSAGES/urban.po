@@ -2435,6 +2435,10 @@ msgstr "Règlement Communal d'Urbanisme (R.C.U.)"
 msgid "urban_label_SAR"
 msgstr "Périmètre d'un site d'activité économique désaffecté"
 
+#. Default: "Sct"
+msgid "urban_label_SCT"
+msgstr "Schéma de Cohérence Territoriale"
+
 #. Default: "Sdc"
 #: ../content/licence/CODT_BaseBuildLicence.py:84
 msgid "urban_label_SDC"
@@ -4263,6 +4267,10 @@ msgstr "Explications sur les rubriques"
 #: ../content/licence/GenericLicence.py:648
 msgid "urban_label_sarDetails"
 msgstr "Détails concernant le périmètre du site d'activité économique désaffecté"
+
+#. Default: "Sctdetails"
+msgid "urban_label_sctDetails"
+msgstr "Détails concernant le Schéma de Cohérence Territoriale"
 
 #. Default: "Sdcdetails"
 #: ../content/licence/CODT_BaseBuildLicence.py:95
