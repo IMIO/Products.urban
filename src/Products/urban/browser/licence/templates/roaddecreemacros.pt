@@ -49,7 +49,4 @@
     <metal:parent_call use-macro="here/@@licencetabs-macros/advices_macro" />
 </metal:advices>
 
-<metal:advices define-macro="advices_macro" i18n:domain="urban">
-    <metal:parent_call use-macro="here/@@licencetabs-macros/advices_macro" />
-</metal:advices>
 

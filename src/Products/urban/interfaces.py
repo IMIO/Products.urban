@@ -372,7 +372,8 @@ class IExplosivesPossession(Interface):
 
 
 class IRoadDecree(Interface):
-    """Marker interface for .BuildLicence.BuildLicence
+    """
+    Marker interface for road degree
     """
 
 
