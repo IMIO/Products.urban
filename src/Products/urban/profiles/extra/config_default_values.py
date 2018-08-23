@@ -1337,6 +1337,16 @@ default_values = {
             {'id': "aide-opinion", 'title': u"Avis AIDE sollicité"},
         ],
 
+        'roadmissingpiece': [
+            'UrbanVocabularyTerm', ['RoadDecree'],
+            {'id': "roadmissingpiece-piece1", 'title': u"Piece manquante par défaut"},
+        ],
+
+        'townroaddecree': [
+            'UrbanVocabularyTerm', ['RoadDecree'],
+            {'id': "Liege", 'title': u"Liège et commune voisine"},
+        ],
+
         'folderdelays': [
             'UrbanDelay', ['BuildLicence', 'ParcelOutLicence', 'UrbanCertificateTwo'],
             {'id': "30j", 'title': u"30 jours", 'deadLineDelay': 30, 'alertDelay': 20},
@@ -1867,9 +1877,5 @@ default_values = {
             {'id': "9", 'title': u"Annexe IX - Permis d'urbanisme dispensé d'un architecte ou autre que les demandes visées aux annexes 5 à 8"},
         ],
 
-        'town_roaddecree': [
-            'UrbanVocabularyTerm',
-            {'id': "default", 'title': u"ma commune par défaut"},
-        ],
     },
 }

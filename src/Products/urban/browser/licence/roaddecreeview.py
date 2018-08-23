@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
 
-from Products.urban.browser.licence.licenceview import LicenceView
 from Products.CMFPlone import PloneMessageFactory as _
-
+from Products.urban.browser.licence.buildlicenceview import BuildLicenceView
 from plone import api
 
 
-class RoadDecreeView(LicenceView):
+class RoadDecreeView(BuildLicenceView):
 
     def __init__(self, context, request):
         super(RoadDecreeView, self).__init__(context, request)
