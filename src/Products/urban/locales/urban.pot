@@ -2400,6 +2400,14 @@ msgstr ""
 msgid "urban_label_SAR"
 msgstr ""
 
+#. Default: "Sct"
+msgid "urban_label_SCT"
+msgstr ""
+
+#. Default: "Sctdetails"
+msgid "urban_label_sctDetails"
+msgstr ""
+
 #. Default: "Sdc"
 #: ../content/licence/CODT_BaseBuildLicence.py:84
 msgid "urban_label_SDC"

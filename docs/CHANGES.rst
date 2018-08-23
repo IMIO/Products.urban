@@ -14,6 +14,15 @@ Changes
 - fix advanced searching Applicant field for all licences, and not just 'all'
   [jjaumotte]
 
+2.3.0 (unreleased)
+-------------------
+- add attributes SCT, sctDetails
+- Add translations for SCT, sctDetails
+- Add vocabularies configuration for SCT
+- Add migration source code
+  [fngaha]
+
+
 1.11.1 (unreleased)
 -------------------
 - add query_parcels_in_radius method to view
