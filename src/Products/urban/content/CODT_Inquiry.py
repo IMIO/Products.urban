@@ -208,6 +208,33 @@ class CODT_Inquiry(BaseContent, Inquiry, BrowserDefaultMixin):
         )
         return DisplayList(vocabulary)
 
+    security.declarePublic('mayAddOpinionRequestEvent')
+
+    def mayAddOpinionRequestEvent(self, organisation):
+        """
+           This is used as TALExpression for the UrbanEventOpinionRequest
+           We may add an OpinionRequest if we asked one in an inquiry on the licence
+           We may add another if another inquiry defined on the licence ask for it and so on
+        """
+        opinions = self.getSolicitOpinionsTo()
+        opinions += self.getSolicitOpinionsToOptional()
+        limit = organisation in opinions and 1 or 0
+        inquiries = [inq for inq in self.getInquiriesAndAnnouncements() if inq != self]
+        for inquiry in inquiries:
+            if organisation in inquiry.getSolicitOpinionsTo() or organisation in inquiry.getSolicitOpinionsToOptional():
+                limit += 1
+        limit = limit - len(self.getOpinionRequests(organisation))
+        return limit > 0
+
+    security.declarePublic('getInquiriesAndAnnouncements')
+
+    def getInquiriesAndAnnouncements(self):
+        """
+        Returns the existing inquiries
+        """
+        inqs = [inq for inq in self._get_inquiry_objs(all_=False)]
+        return inqs
+
     security.declarePublic('getInquiries')
 
     def getInquiries(self):

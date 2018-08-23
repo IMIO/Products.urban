@@ -28,7 +28,7 @@ class CODTUrbanCertificateTwoView(CODTUrbanCertificateBaseView):
           Returns the inquiries to display on the environmentlicence_view
         """
         context = aq_inner(self.context)
-        inquiries = context.getInquiries()
+        inquiries = context.getInquiriesAndAnnouncements()
         if not inquiries:
             #we want to display at least the informations about the inquiry
             #defined on the licence even if no data have been entered
