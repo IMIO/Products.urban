@@ -5,6 +5,9 @@ Changes
 
 2.3.x (unreleased)
 -------------------
+- fix the creation of an applicant from a parcel
+  [fngaha]
+
 - add generic "Permis Publics" templates and linked event configuration
   [jjaumotte]
 
