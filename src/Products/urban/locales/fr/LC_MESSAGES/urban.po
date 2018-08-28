@@ -3336,7 +3336,7 @@ msgstr "Implantation (art. 137)"
 
 #: ../content/licence/CODT_BaseBuildLicence.py:345
 msgid "urban_label_implantationCODT"
-msgstr "Implantation (art D.IV.172)"
+msgstr "Implantation (art D.IV.72)"
 
 #. Default: "Inadmissibilityreasons"
 #: ../content/licence/EnvClassThree.py:89
@@ -4201,7 +4201,7 @@ msgstr "Détails concernant le Règlement Général sur les Bâtisses en Site Ru
 #. Default: "Roadadaptation"
 #: ../content/licence/BaseBuildLicence.py:277
 msgid "urban_label_roadAdaptation"
-msgstr "Ouverture, modification, supression de la voirie"
+msgstr "Ouverture, modification, suppression de la voirie"
 
 #. Default: "Roadanalysis"
 #: ../content/licence/GenericLicence.py:239
@@ -4389,7 +4389,7 @@ msgstr "Avis sollicité(s) facultatif(s)"
 #. Default: "Solicitroadopinionsto"
 #: ../content/licence/GenericLicence.py:692
 msgid "urban_label_solicitRoadOpinionsTo"
-msgstr "Un avis sera solicité par la voirie à"
+msgstr "Un avis sera sollicité par la voirie à"
 
 #. Default: "Specialfunctionname"
 #: UrbanEventType.py
