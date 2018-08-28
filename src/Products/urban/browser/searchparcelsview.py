@@ -218,8 +218,12 @@ class SearchParcelsView(BrowserView):
         container = self.context
         same_address = self._areSameAdresses(proprietary_address, parcel_address)
         city = proprietary_city.split()
-        zipcode = city[0]
-        city = ' '.join(city[1:])
+        if city:
+            zipcode = city[0]
+            city = ' '.join(city[1:])
+        else:
+            zipcode = ''
+            city = ''
         person_street, person_number = self._extractStreetAndNumber(proprietary_address)
 
         contacts = proprietary.split('&')
@@ -240,13 +244,14 @@ class SearchParcelsView(BrowserView):
         container.updateTitle()
 
     def _extractStreetAndNumber(self, address):
+        streetAndNumber = (address, '')
         address_words = address.split()
-        number = address_words[-1]
-        if re.match('\d', number) and number.lower() != '1er':
-            street = ' '.join(address_words[0:-1])
-            return (street, number)
-        else:
-            return (address, '')
+        if address_words:
+            number = address_words[-1]
+            if re.match('\d', number) and number.lower() != '1er':
+                street = ' '.join(address_words[0:-1])
+                streetAndNumber = (street, number)
+        return streetAndNumber
 
     def _areSameAdresses(self, address_a, address_b):
         """
