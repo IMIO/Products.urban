@@ -2,9 +2,17 @@
 
 Changes
 =======
+2.3.x (unreleased)
+-------------------
+- Fix translations
+  [fngaha]
+
 
 2.3.x (unreleased)
 -------------------
+- fix the creation of an applicant from a parcel
+  [fngaha]
+
 - add generic "Permis Publics" templates and linked event configuration
   [jjaumotte]
 
@@ -16,9 +24,15 @@ Changes
 
 2.3.0 (unreleased)
 -------------------
-- add attributes SCT, sctDetails
+- Add attributes SCT, sctDetails
+  [fngaha]
+
 - Add translations for SCT, sctDetails
+  [fngaha]
+
 - Add vocabularies configuration for SCT
+  [fngaha]
+
 - Add migration source code
   [fngaha]
 
