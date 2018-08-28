@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2018-08-13 09:54+0000\n"
+"POT-Creation-Date: 2018-08-24 13:43+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -16,11 +16,11 @@ msgstr ""
 "X-is-fallback-for: fr-fr fr-be fr-ca\n"
 
 #. Default: "urban"
-#: ../setuphandlers.py:245
+#: ../setuphandlers.py:249
 msgid "%s_folder_title"
 msgstr ""
 
-#: ../setuphandlers.py:345
+#: ../setuphandlers.py:349
 msgid "%s_urbanconfig_title"
 msgstr ""
 
@@ -82,7 +82,7 @@ msgid "Add this parcel"
 msgstr "Ajouter cette parcelle"
 
 #. Default: "urban"
-#: ../setuphandlers.py:893
+#: ../setuphandlers.py:902
 msgid "All"
 msgstr "Tous"
 
@@ -460,6 +460,10 @@ msgstr "Étude d'incidence"
 msgid "IntegratedLicence"
 msgstr "Permis intégré"
 
+#: ../interfaces.py:635
+msgid "Internal opinion services"
+msgstr ""
+
 msgid "Licence state"
 msgstr "Etat du permis"
 
@@ -562,7 +566,7 @@ msgid "Road type"
 msgstr "Type de voirie"
 
 #. Default: "imio.schedule"
-#: ../setuphandlers.py:272
+#: ../setuphandlers.py:276
 msgid "ScheduleConfig"
 msgstr "Configuration d'échéancier"
 
@@ -585,6 +589,18 @@ msgstr "Sélectionner les types de contenues autorisés pour ce modèle"
 
 #: ../dashboard/widgets/select_to_list.py:20
 msgid "Select to list"
+msgstr ""
+
+#: ../browser/urbanconfigview.py:74
+msgid "Service full name"
+msgstr ""
+
+#: ../browser/urbanconfigview.py:79
+msgid "Service id"
+msgstr ""
+
+#: ../interfaces.py:636
+msgid "Services that can give their opinion directly through urban"
 msgstr ""
 
 #: ../browser/templates/map.pt:76
@@ -663,7 +679,7 @@ msgid "Update"
 msgstr "Mettre à jour"
 
 #. Default: "urban"
-#: ../setuphandlers.py:770
+#: ../setuphandlers.py:779
 msgid "Urban"
 msgstr ""
 
@@ -797,7 +813,7 @@ msgid "additional_layers_folder_title"
 msgstr "Configuration des couches supplémentaires"
 
 #. Default: "urban"
-#: ../setuphandlers.py:711
+#: ../setuphandlers.py:720
 msgid "additonal_layers_folder_title"
 msgstr ""
 
@@ -853,7 +869,7 @@ msgid "applicationreasons_folder_title"
 msgstr "Motifs de la demande"
 
 #. Default: "urban"
-#: ../setuphandlers.py:808
+#: ../setuphandlers.py:817
 msgid "architects_folder_title"
 msgstr "Architectes"
 
@@ -1039,7 +1055,7 @@ msgid "creation date"
 msgstr "Date de création"
 
 #. Default: "urban"
-#: ../setuphandlers.py:662
+#: ../setuphandlers.py:671
 msgid "dashboardtemplates_folder_title"
 msgstr "Modèles tableaux de bord"
 
@@ -1169,7 +1185,7 @@ msgid "envclasstwos"
 msgstr "Permis d'environnement classe 2"
 
 #. Default: "urban"
-#: ../setuphandlers.py:700
+#: ../setuphandlers.py:709
 msgid "environmenttemplates_folder_title"
 msgstr "modèles des procédures d'environnement"
 
@@ -1314,6 +1330,9 @@ msgstr "Paramètres avancés"
 msgid "fieldsetlegend-urban_events"
 msgstr "Événements"
 
+msgid "fieldsetlegend-urban_internal_services"
+msgstr "Services internes à la ville"
+
 msgid "fieldsetlegend-urban_licences_config"
 msgstr "Paramètres des procédures"
 
@@ -1419,19 +1438,19 @@ msgstr "${cityName}, le ${formattedDate}"
 
 # this is an HTML content for the front-page
 #. Default: "urban"
-#: ../setuphandlers.py:742
+#: ../setuphandlers.py:751
 msgid "front_page_descr"
 msgstr "Bienvenue sur le site vous permettant d'utiliser la gestion des permis d'urbanisme"
 
 # this is an HTML content for the front-page
 #. Default: "urban"
-#: ../setuphandlers.py:743
+#: ../setuphandlers.py:752
 msgid "front_page_text"
 msgstr "<p>L'application intègre la gestion des permis d'urbanisme, d'urbanisation, des déclarations, divisions notariales, CU1, CU2, lettres d'informations notariales, rendez-vous, avant-projets et déclarations environnementales :</p><ul><li>gestion de la demande</li><li>gestion des demandeurs, architectes, agents traitants, ...</li><li>production des documents</li><li>workflow de suivi de la demande</li><li>cartographie avec calcul du rayon de 50m, visualisation des parcelles, ...</li><li>échéancier</li><li>...</li></ul><p><a href='urban'>Cliquez ici pour accéder à l'application</a></p><p class='discreet'>Vous devez disposer d'un nom d'utilisateur et d'un mot de passe pour accéder à l'application</p>"
 
 # title of the front-page
 #. Default: "urban"
-#: ../setuphandlers.py:741
+#: ../setuphandlers.py:750
 msgid "front_page_title"
 msgstr "Gestion de l'Urbanisme"
 
@@ -1455,13 +1474,13 @@ msgid "generate_a_linked_doc"
 msgstr "Générer un document lié au dossier"
 
 #. Default: "urban"
-#: ../setuphandlers.py:822
+#: ../setuphandlers.py:831
 msgid "geometricians_folder_title"
 msgstr "Géomètres"
 
 #. Default: "Global templates"
 #: ../browser/templates/templatessummary.pt:19
-#: ../setuphandlers.py:673
+#: ../setuphandlers.py:682
 msgid "globaltemplates_folder_title"
 msgstr "Modèles généraux"
 
@@ -1817,7 +1836,7 @@ msgid "not_permitted_to_add_urbanevent"
 msgstr "Vous ne pouvez pas générer de documents"
 
 #. Default: "urban"
-#: ../setuphandlers.py:836
+#: ../setuphandlers.py:845
 msgid "notaries_folder_title"
 msgstr "Notaires"
 
@@ -1886,7 +1905,7 @@ msgid "parcelLinkedLicences"
 msgstr "Dossier(s) lié(s)"
 
 #. Default: "urban"
-#: ../setuphandlers.py:850
+#: ../setuphandlers.py:859
 msgid "parcellings_folder_title"
 msgstr "Lotissements"
 
@@ -2215,7 +2234,7 @@ msgstr "Si l'interpréteur Python qui tourne Zope et Plone ne dispose pas de la 
 
 #: ../profiles.zcml:25
 #: ../profiles/default/actions.xml
-#: ../setuphandlers.py:194
+#: ../setuphandlers.py:198
 msgid "urban"
 msgstr "Urbanisme"
 
@@ -2436,11 +2455,12 @@ msgid "urban_label_SAR"
 msgstr "Périmètre d'un site d'activité économique désaffecté"
 
 #. Default: "Sct"
+#: ../content/licence/CODT_BaseBuildLicence.py:84
 msgid "urban_label_SCT"
 msgstr "Schéma de Cohérence Territoriale"
 
 #. Default: "Sdc"
-#: ../content/licence/CODT_BaseBuildLicence.py:84
+#: ../content/licence/CODT_BaseBuildLicence.py:106
 msgid "urban_label_SDC"
 msgstr "Schéma de développement communal"
 
@@ -3106,7 +3126,7 @@ msgstr "Catégorie du type d'événement"
 msgid "urban_label_exemptFDArticle"
 msgstr "Article 107"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:322
+#: ../content/licence/CODT_BaseBuildLicence.py:344
 msgid "urban_label_exemptFDArticleCODT"
 msgstr "Article D IV.15"
 
@@ -3314,7 +3334,7 @@ msgstr "Etude d'incidence?"
 msgid "urban_label_implantation"
 msgstr "Implantation (art. 137)"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:323
+#: ../content/licence/CODT_BaseBuildLicence.py:345
 msgid "urban_label_implantationCODT"
 msgstr "Implantation (art D.IV.172)"
 
@@ -3478,11 +3498,11 @@ msgstr "Établissement SEVESO"
 msgid "urban_label_isSupplementary"
 msgstr "Supplémentaire?"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:316
+#: ../content/licence/CODT_BaseBuildLicence.py:338
 msgid "urban_label_is_in_parceloutlicences"
 msgstr "Le bien se situe dans un permis d'urbanisation"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:320
+#: ../content/licence/CODT_BaseBuildLicence.py:342
 msgid "urban_label_is_in_sol"
 msgstr "Le bien se situe dans un SOL"
 
@@ -3828,11 +3848,11 @@ msgstr "Propriétaire"
 msgid "urban_label_parcellings"
 msgstr "Lotissement"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:315
+#: ../content/licence/CODT_BaseBuildLicence.py:337
 msgid "urban_label_parceloutlicences"
 msgstr "Permis d'urbanisation"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:317
+#: ../content/licence/CODT_BaseBuildLicence.py:339
 msgid "urban_label_parceloutlicences_details"
 msgstr "Détails sur le permis d'urbanisation"
 
@@ -4114,12 +4134,12 @@ msgid "urban_label_regionalRoad"
 msgstr "Code de route régionale"
 
 #. Default: "Regional_guide"
-#: ../content/licence/CODT_BaseBuildLicence.py:128
+#: ../content/licence/CODT_BaseBuildLicence.py:150
 msgid "urban_label_regional_guide"
 msgstr "Guide régional d'urbanisme"
 
 #. Default: "Regional_guide_details"
-#: ../content/licence/CODT_BaseBuildLicence.py:138
+#: ../content/licence/CODT_BaseBuildLicence.py:160
 msgid "urban_label_regional_guide_details"
 msgstr "Détails concernant le guide régional d'urbanisme"
 
@@ -4269,11 +4289,12 @@ msgid "urban_label_sarDetails"
 msgstr "Détails concernant le périmètre du site d'activité économique désaffecté"
 
 #. Default: "Sctdetails"
+#: ../content/licence/CODT_BaseBuildLicence.py:95
 msgid "urban_label_sctDetails"
 msgstr "Détails concernant le Schéma de Cohérence Territoriale"
 
 #. Default: "Sdcdetails"
-#: ../content/licence/CODT_BaseBuildLicence.py:95
+#: ../content/licence/CODT_BaseBuildLicence.py:117
 msgid "urban_label_sdcDetails"
 msgstr "Détails concernant le schéma de développement communal"
 
@@ -4337,15 +4358,15 @@ msgstr "Situation"
 msgid "urban_label_society"
 msgstr "Société"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:318
+#: ../content/licence/CODT_BaseBuildLicence.py:340
 msgid "urban_label_sol"
 msgstr "SOL"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:319
+#: ../content/licence/CODT_BaseBuildLicence.py:341
 msgid "urban_label_solZone"
 msgstr "Zone de SOL"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:321
+#: ../content/licence/CODT_BaseBuildLicence.py:343
 msgid "urban_label_sol_details"
 msgstr "Détails concernant le SOL"
 
@@ -4576,12 +4597,12 @@ msgid "urban_label_townshipSpecificFeaturesDetail"
 msgstr "Détails"
 
 #. Default: "Township_guide"
-#: ../content/licence/CODT_BaseBuildLicence.py:106
+#: ../content/licence/CODT_BaseBuildLicence.py:128
 msgid "urban_label_township_guide"
 msgstr "Guide communal d'urbanisme"
 
 #. Default: "Township_guide_details"
-#: ../content/licence/CODT_BaseBuildLicence.py:117
+#: ../content/licence/CODT_BaseBuildLicence.py:139
 msgid "urban_label_township_guide_details"
 msgstr "Détails concernant le guide communal d'urbanisme"
 
@@ -4839,12 +4860,12 @@ msgid "urbancertificatetwos"
 msgstr "Certificats d'urbanisme 2"
 
 #. Default: "urban"
-#: ../setuphandlers.py:365
+#: ../setuphandlers.py:369
 msgid "urbaneventtypes_folder_title"
 msgstr "Types d'évènements"
 
 #. Default: "urban"
-#: ../setuphandlers.py:689
+#: ../setuphandlers.py:698
 msgid "urbantemplates_folder_title"
 msgstr "modèles des procédures d'urbanisme"
 

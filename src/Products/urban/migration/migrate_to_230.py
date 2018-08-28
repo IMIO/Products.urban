@@ -23,7 +23,6 @@ def update_urban_dashboard_collection(context):
     logger.info("migration step done!")
 
 
-
 def copy_sol_values_from_pca(context):
     """
     Duplicate pca values vocabulary to sol vocabulary
@@ -107,10 +106,11 @@ def migrate(context):
     logger.info("starting migration steps")
     setup_tool = api.portal.get_tool('portal_setup')
     setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'typeinfo')
+    setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'update-workflow-rolemap')
     setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'urban-postInstall')
     update_urban_dashboard_collection(context)
     copy_sol_values_from_pca(context)
     move_noteworthytrees_vocabulary(context)
     migrate_eventtypes_values()
-    migrate_sct(context)
+    #migrate_sct(context)
     logger.info("migration done!")

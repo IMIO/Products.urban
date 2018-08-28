@@ -184,7 +184,7 @@ class CODT_Inquiry(BaseContent, Inquiry, BrowserDefaultMixin):
         if brefs:
             #linkedInquiry may come from a UrbanEventInquiry or an UrbanEventOpinionRequest
             for bref in brefs:
-                if bref and bref.portal_type == 'UrbanEventAnnouncement':
+                if bref and bref.portal_type in ['UrbanEventAnnouncement', 'UrbanEventInquiry']:
                     return bref
         else:
             return None

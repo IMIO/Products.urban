@@ -627,3 +627,16 @@ class ICODT_UniqueLicence_spe_reference_config(Interface):
         title=u"Generation expression",
         default=u"python: 'PU/' + numerotation"
     )
+
+
+class IInternalOpinionServices(Interface):
+    """ """
+    services = schema.Dict(
+        title=_(u"Internal opinion services"),
+        description=_(u"Services that can give their opinion directly through urban"),
+        key_type=schema.ASCIILine(),
+        value_type=schema.Dict(
+            key_type=schema.ASCIILine(),
+            value_type=schema.List(value_type=schema.ASCIILine())
+        )
+    )
