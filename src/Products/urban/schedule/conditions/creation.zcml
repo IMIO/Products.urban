@@ -151,6 +151,14 @@
         name="urban.schedule.condition.opinion_requests_done"
     />
 
+    <adapter
+        for="Products.urban.interfaces.IUrbanEventOpinionRequest
+             imio.schedule.content.task_config.ITaskConfig"
+        provides="imio.schedule.interfaces.ICreationCondition"
+        factory=".creation.IsInternalOpinionRequest"
+        name="urban.schedule.condition.is_internal_opinion"
+    />
+
     <!-- FD opinions conditions-->
     <adapter
         for="Products.urban.interfaces.IBaseAllBuildLicence

@@ -216,6 +216,9 @@
 <type type_id="UrbanEventNotificationCollege">
  <bound-workflow workflow_id="urbanevent_workflow" />
 </type>
+<type type_id="UrbanEventOpinionRequest">
+ <bound-workflow workflow_id="opinion_request_workflow" />
+</type>
 <type type_id="WorkLocation">
   <bound-workflow workflow_id="" />
 </type>

@@ -545,6 +545,9 @@ msgstr ""
 msgid "fieldsetlegend-urban_events"
 msgstr ""
 
+msgid "fieldsetlegend-urban_internal_services"
+msgstr ""
+
 msgid "fieldsetlegend-urban_licences_config"
 msgstr ""
 

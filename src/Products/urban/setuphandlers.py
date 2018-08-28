@@ -478,6 +478,7 @@ def addRubricValues(context, config_folder):
             rubric_id = rubric['id']
             if rubric_id not in rubric_folder:
                 rubric_id = rubric_folder.invokeFactory('EnvironmentRubricTerm', **rubric)
+                print "created rubric %ss" % rubric_id
             else:
                 old_rubric = getattr(rubric_folder, rubric_id)
                 rubric.pop('id')
@@ -1020,6 +1021,8 @@ def setupOpinionsSchedule(context):
 
     if not hasattr(urban_folder, 'opinions_schedule'):
         urban_folder.invokeFactory('Folder', id='opinions_schedule')
+        schedule_folder = getattr(urban_folder, 'opinions_schedule')
+        setFolderAllowedTypes(schedule_folder, ['TaskConfig', 'MacroTaskConfig'])
     schedule_folder = getattr(urban_folder, 'opinions_schedule')
     schedule_folder.manage_addLocalRoles("opinions_editors", ("Reader", ))
     schedule_folder.reindexObjectSecurity()

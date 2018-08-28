@@ -17,13 +17,28 @@ from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 import interfaces
+from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 from Products.urban.UrbanEventType import UrbanEventType
 from Products.urban.UrbanVocabularyTerm import UrbanVocabularyTerm
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.urban.config import *
 
+from plone import api
+
+from zope.schema.vocabulary import SimpleTerm
+from zope.schema.vocabulary import SimpleVocabulary
+
 ##code-section module-header #fill in your manual code here
+
+slave_field_internal_service = (
+    # applicant is either represented by a society or by another contact but not both at the same time
+    {
+        'name': 'internal_service',
+        'action': 'show',
+        'hide_values': (True, ),
+    },
+)
 ##/code-section module-header
 
 schema = Schema((
@@ -85,6 +100,27 @@ schema = Schema((
             i18n_domain='urban',
         ),
     ),
+    BooleanField(
+        name='is_internal_service',
+        default=False,
+        widget=MasterBooleanWidget(
+            slave_fields=slave_field_internal_service,
+            label='Is_internal_service',
+            label_msgid='urban_label_is_internal_service',
+            i18n_domain='urban',
+        ),
+    ),
+    StringField(
+        name='internal_service',
+        widget=SelectionWidget(
+            format='select',
+            label='Internal_service',
+            label_msgid='urban_label_internal_service',
+            i18n_domain='urban',
+        ),
+        enforceVocabulary=True,
+        vocabulary='listInternalServices',
+    ),
 ),
 )
 
@@ -115,6 +151,16 @@ class OpinionRequestEventType(OrderedBaseFolder, UrbanEventType, UrbanVocabulary
     # Methods
 
     # Manually created methods
+
+    security.declarePublic('listInternalServices')
+
+    def listInternalServices(self):
+        registry = api.portal.get_tool('portal_registry')
+        registry_field = registry['Products.urban.interfaces.IInternalOpinionServices.services']
+        voc_terms = [(key, value['full_name'][0]) for key, value in registry_field.iteritems()]
+        vocabulary = DisplayList(voc_terms)
+        return vocabulary
+
 
     security.declarePublic('getAddressCSV')
     def getAddressCSV(self):
