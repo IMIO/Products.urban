@@ -1,7 +1,8 @@
 # encoding: utf-8
 
-#from Products.urban.profiles.extra.config_default_values import default_values
-#from Products.urban.setuphandlers import createVocabularyFolder
+from Products.urban.profiles.extra.config_default_values import default_values
+from Products.urban.setuphandlers import createVocabularyFolder
+from Products.urban.setuphandlers import createFolderDefaultValues
 from plone import api
 
 import logging
