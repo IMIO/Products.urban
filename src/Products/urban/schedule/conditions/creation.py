@@ -254,7 +254,7 @@ class IsInternalOpinionRequest(CreationCondition):
             return False
 
         record = registry_field.get(opinion_config.getInternal_service(), None)
-        if record and self.task_config.id in record['task_config_ids']:
+        if record and self.task_config.id in record['task_ids']:
             return True
 
         return False

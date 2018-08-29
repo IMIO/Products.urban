@@ -202,6 +202,6 @@ class AddInternalServiceForm(form.Form):
         services[service_id] = {
             'validator_group_id': [validator_group],
             'editor_group_id': [editor_group],
-            'full_name': [editor_group],
+            'full_name': [service_name],
             'task_ids': task_config_ids,
         }
