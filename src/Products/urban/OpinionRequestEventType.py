@@ -23,6 +23,7 @@ from Products.urban.UrbanVocabularyTerm import UrbanVocabularyTerm
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.urban.config import *
+from Products.urban import UrbanMessage as _
 
 from plone import api
 
@@ -47,57 +48,43 @@ schema = Schema((
     StringField(
         name='recipientSName',
         widget=StringField._properties['widget'](
-            label='Recipientsname',
-            label_msgid='urban_label_recipientSName',
-            i18n_domain='urban',
+            label=_('urban_label_recipientSName', default='Recipientsname'),
         ),
     ),
     StringField(
         name='function_department',
         widget=StringField._properties['widget'](
-            label='Function_department',
-            label_msgid='urban_label_function_department',
-            i18n_domain='urban',
+            label=_('urban_label_function_department', default='Function_department'),
         ),
     ),
     StringField(
         name='organization',
         widget=StringField._properties['widget'](
-            label='Organization',
-            label_msgid='urban_label_organization',
-            i18n_domain='urban',
+            label=_('urban_label_organization', default='Organization'),
         ),
     ),
     StringField(
         name='dispatchSInformation',
         widget=StringField._properties['widget'](
-            label='Dispatchsinformation',
-            label_msgid='urban_label_dispatchSInformation',
-            i18n_domain='urban',
+            label=_('urban_label_dispatchSInformation', default='Dispatchsinformation'),
         ),
     ),
     StringField(
         name='typeAndStreetName_number_box',
         widget=StringField._properties['widget'](
-            label='Typeandstreetname_number_box',
-            label_msgid='urban_label_typeAndStreetName_number_box',
-            i18n_domain='urban',
+            label=_('urban_label_typeAndStreetName_number_box', default='Typeandstreetname_number_box'),
         ),
     ),
     StringField(
         name='postcode_locality',
         widget=StringField._properties['widget'](
-            label='Postcode_locality',
-            label_msgid='urban_label_postcode_locality',
-            i18n_domain='urban',
+            label=_('urban_label_postcode_locality', default='Postcode_locality'),
         ),
     ),
     StringField(
         name='country',
         widget=StringField._properties['widget'](
-            label='Country',
-            label_msgid='urban_label_country',
-            i18n_domain='urban',
+            label=_('urban_label_country', default='Country'),
         ),
     ),
     BooleanField(
@@ -105,18 +92,14 @@ schema = Schema((
         default=False,
         widget=MasterBooleanWidget(
             slave_fields=slave_field_internal_service,
-            label='Is_internal_service',
-            label_msgid='urban_label_is_internal_service',
-            i18n_domain='urban',
+            label=_('urban_label_is_internal_service', default='Is_internal_service'),
         ),
     ),
     StringField(
         name='internal_service',
         widget=SelectionWidget(
             format='select',
-            label='Internal_service',
-            label_msgid='urban_label_internal_service',
-            i18n_domain='urban',
+            label=_('urban_label_internal_service', default='Internal_service'),
         ),
         enforceVocabulary=True,
         vocabulary='listInternalServices',

@@ -1485,11 +1485,6 @@ msgstr ""
 msgid "urban_label_concerned_elements"
 msgstr ""
 
-#. Default: "Country"
-#: Contact.py
-msgid "urban_label_country"
-msgstr ""
-
 #. Default: "Customspecificfeatures"
 #: UrbanCertificateBase.py
 msgid "urban_label_customSpecificFeatures"
@@ -1551,11 +1546,6 @@ msgstr ""
 #. Default: "Derogationdetails"
 #: GenericLicence.py
 msgid "urban_label_derogationDetails"
-msgstr ""
-
-#. Default: "dispatchSInformation"
-#: OpinionRequestEventType.py
-msgid "urban_label_dispatchSInformation"
 msgstr ""
 
 msgid "urban_label_divergence"
@@ -1647,11 +1637,6 @@ msgstr ""
 #. Default: "Ftsolicitopinionsto"
 #: EnvironmentLicence.py
 msgid "urban_label_ftSolicitOpinionsTo"
-msgstr ""
-
-#. Default: "function_department"
-#: OpinionRequestEventType.py
-msgid "urban_label_function_department"
 msgstr ""
 
 #. Default: "Gender"
@@ -1990,11 +1975,6 @@ msgstr ""
 msgid "urban_label_opinionsToAskIfWorks"
 msgstr ""
 
-#. Default: "organization"
-#: OpinionRequestEventType.py
-msgid "urban_label_organization"
-msgstr ""
-
 #. Default: "Outdated"
 #: PortionOut.py
 msgid "urban_label_outdated"
@@ -2076,11 +2056,6 @@ msgstr ""
 msgid "urban_label_portionsouts"
 msgstr ""
 
-#. Default: "postcode_locality"
-#: OpinionRequestEventType.py
-msgid "urban_label_postcode_locality"
-msgstr ""
-
 #. Default: "Previouslicences"
 #: EnvironmentLicence.py
 msgid "urban_label_previousLicences"
@@ -2102,11 +2077,6 @@ msgstr ""
 #. Default: "Queryable"
 #: Layer.py
 msgid "urban_label_queryable"
-msgstr ""
-
-#. Default: "recipientSName"
-#: OpinionRequestEventType.py
-msgid "urban_label_recipientSName"
 msgstr ""
 
 #. Default: "Recipients"
@@ -2401,11 +2371,6 @@ msgstr ""
 
 #. Default: "Type"
 msgid "urban_label_type"
-msgstr ""
-
-#. Default: "typeAndStreetName_number_box"
-#: OpinionRequestEventType.py
-msgid "urban_label_typeAndStreetName_number_box"
 msgstr ""
 
 #. Default: "Path of a UNO-enabled Python interpreter (ie /usr/bin/python)"

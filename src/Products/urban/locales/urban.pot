@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2018-08-24 13:43+0000\n"
+"POT-Creation-Date: 2018-08-29 15:07+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2861,7 +2861,7 @@ msgid "urban_label_coring_id"
 msgstr ""
 
 #. Default: "Country"
-#: Contact.py
+#: ../OpinionRequestEventType.py:87
 msgid "urban_label_country"
 msgstr ""
 
@@ -2966,8 +2966,8 @@ msgstr ""
 msgid "urban_label_description"
 msgstr ""
 
-#. Default: "dispatchSInformation"
-#: OpinionRequestEventType.py
+#. Default: "Dispatchsinformation"
+#: ../OpinionRequestEventType.py:69
 msgid "urban_label_dispatchSInformation"
 msgstr ""
 
@@ -3226,8 +3226,8 @@ msgstr ""
 msgid "urban_label_ftSolicitOpinionsTo"
 msgstr ""
 
-#. Default: "function_department"
-#: OpinionRequestEventType.py
+#. Default: "Function_department"
+#: ../OpinionRequestEventType.py:57
 msgid "urban_label_function_department"
 msgstr ""
 
@@ -3325,6 +3325,11 @@ msgstr ""
 #. Default: "Inquiry_type"
 #: ../content/CODT_Inquiry.py:102
 msgid "urban_label_inquiry_type"
+msgstr ""
+
+#. Default: "Internal_service"
+#: ../OpinionRequestEventType.py:102
+msgid "urban_label_internal_service"
 msgstr ""
 
 #. Default: "Invertaddressnames"
@@ -3468,6 +3473,11 @@ msgstr ""
 
 #: ../content/licence/CODT_BaseBuildLicence.py:342
 msgid "urban_label_is_in_sol"
+msgstr ""
+
+#. Default: "Is_internal_service"
+#: ../OpinionRequestEventType.py:95
+msgid "urban_label_is_internal_service"
 msgstr ""
 
 #. Default: "Karstconstraints"
@@ -3782,8 +3792,8 @@ msgstr ""
 msgid "urban_label_opinionsToAskIfWorks"
 msgstr ""
 
-#. Default: "organization"
-#: OpinionRequestEventType.py
+#. Default: "Organization"
+#: ../OpinionRequestEventType.py:63
 msgid "urban_label_organization"
 msgstr ""
 
@@ -3946,8 +3956,8 @@ msgstr ""
 msgid "urban_label_portionsouts"
 msgstr ""
 
-#. Default: "postcode_locality"
-#: OpinionRequestEventType.py
+#. Default: "Postcode_locality"
+#: ../OpinionRequestEventType.py:81
 msgid "urban_label_postcode_locality"
 msgstr ""
 
@@ -4038,8 +4048,8 @@ msgstr ""
 msgid "urban_label_receivedDocumentReference"
 msgstr ""
 
-#. Default: "recipientSName"
-#: OpinionRequestEventType.py
+#. Default: "Recipientsname"
+#: ../OpinionRequestEventType.py:51
 msgid "urban_label_recipientSName"
 msgstr ""
 
@@ -4598,8 +4608,8 @@ msgstr ""
 msgid "urban_label_type"
 msgstr ""
 
-#. Default: "typeAndStreetName_number_box"
-#: OpinionRequestEventType.py
+#. Default: "Typeandstreetname_number_box"
+#: ../OpinionRequestEventType.py:75
 msgid "urban_label_typeAndStreetName_number_box"
 msgstr ""
 
