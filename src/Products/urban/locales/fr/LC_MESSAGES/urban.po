@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2018-08-24 13:43+0000\n"
+"POT-Creation-Date: 2018-08-29 15:07+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -2895,7 +2895,7 @@ msgid "urban_label_coring_id"
 msgstr "Identification carotage"
 
 #. Default: "Country"
-#: Contact.py
+#: ../OpinionRequestEventType.py:87
 msgid "urban_label_country"
 msgstr "Pays"
 
@@ -3000,8 +3000,8 @@ msgstr "Détails concernant les dérogations"
 msgid "urban_label_description"
 msgstr "Observations"
 
-#. Default: "dispatchSInformation"
-#: OpinionRequestEventType.py
+#. Default: "Dispatchsinformation"
+#: ../OpinionRequestEventType.py:69
 msgid "urban_label_dispatchSInformation"
 msgstr "Informations de dispatch"
 
@@ -3262,8 +3262,8 @@ msgstr "Composition (formulaire(s) de demande)"
 msgid "urban_label_ftSolicitOpinionsTo"
 msgstr "Instances sollicitées par le FT"
 
-#. Default: "function_department"
-#: OpinionRequestEventType.py
+#. Default: "Function_department"
+#: ../OpinionRequestEventType.py:57
 msgid "urban_label_function_department"
 msgstr "Fonction, Département"
 
@@ -3362,6 +3362,11 @@ msgstr "Type d'enquête"
 #: ../content/CODT_Inquiry.py:102
 msgid "urban_label_inquiry_type"
 msgstr "Type de publicité"
+
+#. Default: "Internal_service"
+#: ../OpinionRequestEventType.py:102
+msgid "urban_label_internal_service"
+msgstr "Service interne à la ville"
 
 #. Default: "Invertaddressnames"
 #: ../UrbanTool.py:189
@@ -3505,6 +3510,11 @@ msgstr "Le bien se situe dans un permis d'urbanisation"
 #: ../content/licence/CODT_BaseBuildLicence.py:342
 msgid "urban_label_is_in_sol"
 msgstr "Le bien se situe dans un SOL"
+
+#. Default: "Is_internal_service"
+#: ../OpinionRequestEventType.py:95
+msgid "urban_label_is_internal_service"
+msgstr "Réponse via service interne à la ville"
 
 #. Default: "Karstconstraints"
 #: ../content/licence/GenericLicence.py:346
@@ -3818,8 +3828,8 @@ msgstr "Texte de l'avis / conditions"
 msgid "urban_label_opinionsToAskIfWorks"
 msgstr "Avis à demander en cas de travaux"
 
-#. Default: "organization"
-#: OpinionRequestEventType.py
+#. Default: "Organization"
+#: ../OpinionRequestEventType.py:63
 msgid "urban_label_organization"
 msgstr "Organisation"
 
@@ -3982,8 +3992,8 @@ msgstr "Parcelles"
 msgid "urban_label_portionsouts"
 msgstr "Parcelles"
 
-#. Default: "postcode_locality"
-#: OpinionRequestEventType.py
+#. Default: "Postcode_locality"
+#: ../OpinionRequestEventType.py:81
 msgid "urban_label_postcode_locality"
 msgstr "Code postal et localité"
 
@@ -4074,8 +4084,8 @@ msgstr "Date de réception"
 msgid "urban_label_receivedDocumentReference"
 msgstr "Référence du document reçu"
 
-#. Default: "recipientSName"
-#: OpinionRequestEventType.py
+#. Default: "Recipientsname"
+#: ../OpinionRequestEventType.py:51
 msgid "urban_label_recipientSName"
 msgstr "Nom du destinataire"
 
@@ -4635,8 +4645,8 @@ msgstr "N° TVA"
 msgid "urban_label_type"
 msgstr "Type"
 
-#. Default: "typeAndStreetName_number_box"
-#: OpinionRequestEventType.py
+#. Default: "Typeandstreetname_number_box"
+#: ../OpinionRequestEventType.py:75
 msgid "urban_label_typeAndStreetName_number_box"
 msgstr "Type et nom de rue, numéro et boîte"
 
