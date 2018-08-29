@@ -261,7 +261,7 @@
  <transition transition_id="receive_opinion" title="receive_opinion" new_state="opinion_given" trigger="USER" before_script="" after_script="">
   <action url="" category="workflow" icon="">receive_opinion</action>
   <guard>
-   <guard-permission>Modify portal content</guard-permission>
+   <guard-permission>Products.urban: Validate</guard-permission>
    <guard-group>urban_editors</guard-group>
    <guard-group>environment_editors</guard-group>
   </guard>
