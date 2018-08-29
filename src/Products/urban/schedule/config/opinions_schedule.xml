@@ -23,7 +23,7 @@
    <property name="hidealloption">1</property>
    <property name="maxitems"></property>
    <property name="sortreversed"></property>
-   <property name="default">f96c37cbe1204d1cbab06641a5fbe33d</property>
+   <property name="default">94597104123647e1a5a9603ec3510fab</property>
   </criterion>
   <criterion name="c4">
    <property name="widget">checkbox</property>
@@ -31,31 +31,14 @@
    <property name="position">top</property>
    <property name="section">advanced</property>
    <property name="hidden">0</property>
-   <property name="count">0</property>
-   <property name="sortcountable">0</property>
-   <property name="hidezerocount">0</property>
-   <property name="index">review_state</property>
-   <property name="operator">or</property>
-   <property name="operator_visible">0</property>
-   <property name="vocabulary">schedule.TaskWorkflowStates</property>
-   <property name="catalog"></property>
-   <property name="maxitems"></property>
-   <property name="sortreversed">0</property>
-   <property name="default"></property>
-  </criterion>
-  <criterion name="c6">
-   <property name="widget">radio</property>
-   <property name="title">Type de tâche</property>
-   <property name="position">center</property>
-   <property name="section">default</property>
-   <property name="hidden">0</property>
    <property name="count"></property>
    <property name="sortcountable"></property>
    <property name="hidezerocount"></property>
-   <property name="index">task_config_UID</property>
-   <property name="vocabulary">configuration-da-c-cha-c-ances</property>
+   <property name="index">review_state</property>
+   <property name="operator">or</property>
+   <property name="operator_visible"></property>
+   <property name="vocabulary">schedule.TaskWorkflowStates</property>
    <property name="catalog"></property>
-   <property name="hidealloption"></property>
    <property name="maxitems"></property>
    <property name="sortreversed"></property>
    <property name="default"></property>
@@ -71,19 +54,19 @@
    <property name="onlyallelements">1</property>
    <property name="wildcard">1</property>
   </criterion>
-  <criterion name="c5">
+  <criterion name="c7">
    <property name="widget">select</property>
    <property name="title">Assigné à</property>
    <property name="position">center</property>
    <property name="section">default</property>
    <property name="hidden">0</property>
-   <property name="count"></property>
-   <property name="sortcountable"></property>
-   <property name="hidezerocount"></property>
+   <property name="count">0</property>
+   <property name="sortcountable">0</property>
+   <property name="hidezerocount">0</property>
    <property name="index">assigned_user</property>
-   <property name="vocabulary">liege.survey_users</property>
+   <property name="vocabulary">urban.internal_opinions_users</property>
    <property name="catalog"></property>
-   <property name="sortreversed"></property>
+   <property name="sortreversed">0</property>
    <property name="default"></property>
   </criterion>
   <criterion name="c3">

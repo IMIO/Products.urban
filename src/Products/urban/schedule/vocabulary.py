@@ -135,3 +135,10 @@ class UsersFromGroupsVocabularyFactory(object):
 
         vocabulary = SimpleVocabulary(base_terms + sorted(voc_terms, key=lambda term: term.title))
         return vocabulary
+
+
+class OpinionUsersVocabularyFactory(UsersFromGroupsVocabularyFactory):
+    """
+    Vocabulary factory listing all the users of the survey group.
+    """
+    group_ids = ['opinions_editors']
