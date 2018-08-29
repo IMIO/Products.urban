@@ -20,6 +20,9 @@ from Products.urban import interfaces
 from Products.urban.content.licence.CODT_BaseBuildLicence import CODT_BaseBuildLicence
 from Products.urban.content.licence.CODT_BuildLicence import finalizeSchema
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
+from Products.urban.widget.urbanreferencewidget import UrbanReferenceWidget
+from Products.urban import UrbanMessage as _
+
 
 from Products.urban.config import *
 
@@ -27,7 +30,17 @@ from Products.urban.config import *
 ##/code-section module-header
 
 schema = Schema((
-
+    StringField(
+            name='road_decree_reference',
+            widget=UrbanReferenceWidget(
+                    label=_('road_decree_reference', default='road_decree_reference'),
+                    portal_types=['RoadDecree'],
+            ),
+            required=False,
+            schemata='urban_description',
+            default_method='getDefaultText',
+            validators=('isRoadDecreeReference',),
+    ),
 
 ),
 )
