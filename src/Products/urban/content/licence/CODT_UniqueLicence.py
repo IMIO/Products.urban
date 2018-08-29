@@ -31,6 +31,7 @@ from Products.urban.utils import setOptionalAttributes
 from Products.urban.utils import setSchemataForCODT_UniqueLicenceInquiry
 from Products.urban.widget.historizereferencewidget import HistorizeReferenceBrowserWidget
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
+from Products.urban.widget.urbanreferencewidget import UrbanReferenceWidget
 
 from Products.urban.config import *
 from Products.urban import UrbanMessage as _
@@ -232,6 +233,17 @@ schema = Schema((
         default_method='getDefaultText',
         schemata='urban_environment',
         default_output_type='text/html',
+    ),
+    StringField(
+            name='road_decree_reference',
+            widget=UrbanReferenceWidget(
+                    label=_('road_decree_reference', default='road_decree_reference'),
+                    portal_types=['RoadDecree'],
+            ),
+            required=False,
+            schemata='urban_description',
+            default_method='getDefaultText',
+            validators=('isRoadDecreeReference',),
     ),
 ),
 )

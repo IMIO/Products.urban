@@ -23,6 +23,8 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.urban.config import *
 from Products.urban import UrbanMessage as _
+from Products.urban.widget.urbanreferencewidget import UrbanReferenceWidget
+
 
 ##code-section module-header #fill in your manual code here
 optional_fields = ['limitedImpact', 'SDC_divergence']
@@ -45,6 +47,17 @@ schema = Schema((
             label=_('urban_label_SDC_divergence', default='SDC_divergence'),
         ),
         schemata='urban_analysis',
+    ),
+    StringField(
+            name='road_decree_reference',
+            widget=UrbanReferenceWidget(
+                    label=_('road_decree_reference', default='road_decree_reference'),
+                    portal_types=['RoadDecree'],
+            ),
+            required=False,
+            schemata='urban_description',
+            default_method='getDefaultText',
+            validators=('isRoadDecreeReference',),
     ),
 
 ),

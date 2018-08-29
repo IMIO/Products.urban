@@ -23,6 +23,9 @@ from Products.urban.content.licence.CODT_UniqueLicence import finalizeSchema as 
 from Products.urban.utils import setSchemataForCODT_UniqueLicenceInquiry
 from Products.urban.widget.historizereferencewidget import HistorizeReferenceBrowserWidget
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
+from Products.urban.widget.urbanreferencewidget import UrbanReferenceWidget
+from Products.urban import UrbanMessage as _
+
 
 from Products.urban.config import *
 
@@ -40,6 +43,17 @@ schema = Schema((
         schemata='urban_description',
         vocabulary='listRegionalAuthorities',
         default=['dgo6'],
+    ),
+    StringField(
+            name='road_decree_reference',
+            widget=UrbanReferenceWidget(
+                    label=_('road_decree_reference', default='road_decree_reference'),
+                    portal_types=['RoadDecree'],
+            ),
+            required=False,
+            schemata='urban_description',
+            default_method='getDefaultText',
+            validators=('isRoadDecreeReference',),
     ),
 
 ),
