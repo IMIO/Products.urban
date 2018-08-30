@@ -64,7 +64,7 @@ def move_noteworthytrees_vocabulary(context):
                     api.content.move(getattr(licence_config.noteworthytrees, voc_id), noteworthytrees)
             try:
                 api.content.delete(licence_config.noteworthytrees)
-            except:
+            except Exception:
                 continue
 
     logger.info("migration step done!")
@@ -96,9 +96,9 @@ def migrate_sct(context):
     allowedtypes = sct_vocabularies_config[0]
     sct_folder_config = createVocabularyFolder(container, 'sct', context, allowedtypes)
     createFolderDefaultValues(
-            sct_folder_config,
-            default_values['global']['sct'][1:],
-            default_values['global']['sct'][0]
+        sct_folder_config,
+        default_values['global']['sct'][1:],
+        default_values['global']['sct'][0]
     )
 
     logger.info("migration step done!")
@@ -115,5 +115,5 @@ def migrate(context):
     copy_sol_values_from_pca(context)
     move_noteworthytrees_vocabulary(context)
     migrate_eventtypes_values()
-    #migrate_sct(context)
+    migrate_sct(context)
     logger.info("migration done!")
