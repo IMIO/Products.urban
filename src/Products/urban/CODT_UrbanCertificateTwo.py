@@ -1,1 +1,0 @@
-from Products.urban.content.licence.CODT_UrbanCertificateTwo import CODT_UrbanCertificateTwo
