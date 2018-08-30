@@ -128,13 +128,15 @@
 
 
 <div metal:define-macro="internal_services_macro" i18n:domain="urban">
-<tal:form define="form python: view.form">
 
-<tal:with-form-as-view define="view nocall:form">
-<metal:block use-macro="form/@@ploneform-macros/titlelessform" />
-</tal:with-form-as-view>
+    <tal:form define="form python: view.form">
+       <tal:with-form-as-view define="view nocall:form">
+           <metal:block use-macro="form/@@ploneform-macros/titlelessform" />
+       </tal:with-form-as-view>
+   </tal:form>
 
-</tal:form>
+   <tal:listing content="structure view/renderInternalServicesListing" />
+
 </div>
 
 

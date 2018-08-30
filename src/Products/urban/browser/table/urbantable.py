@@ -1,4 +1,6 @@
-## -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
+
+from plone import api
 
 from z3c.table.table import Table
 from z3c.table.table import SequenceTable
@@ -7,24 +9,7 @@ from zope.interface import implements
 
 from Products.ZCatalog.Lazy import LazyMap
 
-from Products.urban.browser.table.interfaces import IApplicantTable
-from Products.urban.browser.table.interfaces import IApplicantHistoryTable
-from Products.urban.browser.table.interfaces import IArchitectsTable
-from Products.urban.browser.table.interfaces import IAttachmentsTable
-from Products.urban.browser.table.interfaces import IClaimantsTable
-from Products.urban.browser.table.interfaces import IContactTable
-from Products.urban.browser.table.interfaces import IDocumentsTable
-from Products.urban.browser.table.interfaces import IEventsTable
-from Products.urban.browser.table.interfaces import IFolderContentTable
-from Products.urban.browser.table.interfaces import IGeometriciansTable
-from Products.urban.browser.table.interfaces import INestedAttachmentsTable
-from Products.urban.browser.table.interfaces import INotariesTable
-from Products.urban.browser.table.interfaces import IParcellingsTable
-from Products.urban.browser.table.interfaces import IParcelsTable
-from Products.urban.browser.table.interfaces import IProprietaryTable
-from Products.urban.browser.table.interfaces import IRecipientsCadastreTable
-from Products.urban.browser.table.interfaces import ISearchResultTable
-from Products.urban.browser.table.interfaces import IUrbanColumn
+from Products.urban.browser.table import interfaces
 
 
 def getSortMethod(idx):
@@ -37,7 +22,7 @@ def getSortMethod(idx):
             # custom part: we unwrap the item if we are not in an UrbanTable
             column = sublist[1]
             item = sublist[0]
-            if not IUrbanColumn.providedBy(column):
+            if not interfaces.IUrbanColumn.providedBy(column):
                 item = item.getRawValue()
             # custom part end
             return column.getSortKey(item)
@@ -63,13 +48,13 @@ class UrbanTable(Table):
 class FolderContentTable(UrbanTable):
     """
     """
-    implements(IFolderContentTable)
+    implements(interfaces.IFolderContentTable)
 
 
 class SearchResultTable(UrbanTable, SequenceTable):
     """
     """
-    implements(ISearchResultTable)
+    implements(interfaces.ISearchResultTable)
 
     cssClasses = {'table': 'listing largetable'}
     sortOrder = 'descending'
@@ -78,7 +63,7 @@ class SearchResultTable(UrbanTable, SequenceTable):
 
 class ParcellingsTable(FolderContentTable):
     """ Table used to display parcellings"""
-    implements(IParcellingsTable)
+    implements(interfaces.IParcellingsTable)
 
     cssClasses = {'table': 'listing largetable'}
     batchSize = 20
@@ -87,7 +72,7 @@ class ParcellingsTable(FolderContentTable):
 class ContactTable(UrbanTable):
     """
     """
-    implements(IContactTable)
+    implements(interfaces.IContactTable)
 
     sortOn = None
     cssClasses = {'table': 'listing largetable'}
@@ -96,7 +81,7 @@ class ContactTable(UrbanTable):
 class ApplicantTable(ContactTable):
     """
     """
-    implements(IApplicantTable)
+    implements(interfaces.IApplicantTable)
 
     cssClasses = {'table': 'listing largetable'}
 
@@ -104,7 +89,7 @@ class ApplicantTable(ContactTable):
 class ApplicantHistoryTable(ContactTable):
     """
     """
-    implements(IApplicantHistoryTable)
+    implements(interfaces.IApplicantHistoryTable)
 
     cssClasses = {'table': 'listing largetable'}
 
@@ -112,7 +97,7 @@ class ApplicantHistoryTable(ContactTable):
 class ProprietaryTable(ContactTable):
     """
     """
-    implements(IProprietaryTable)
+    implements(interfaces.IProprietaryTable)
 
     cssClasses = {'table': 'listing largetable'}
 
@@ -123,7 +108,7 @@ class NotariesTable(FolderContentTable, ContactTable):
      We define our own class so we can implement a marker interface used to find
      the correct translation for column headers
     """
-    implements(INotariesTable)
+    implements(interfaces.INotariesTable)
 
     batchSize = 20
 
@@ -134,7 +119,7 @@ class GeometriciansTable(FolderContentTable, ContactTable):
      We define our own class so we can implement a marker interface used to find
      the correct translation for column headers
     """
-    implements(IGeometriciansTable)
+    implements(interfaces.IGeometriciansTable)
 
     batchSize = 20
 
@@ -145,7 +130,7 @@ class ArchitectsTable(FolderContentTable, ContactTable):
      We define our own class so we can implement a marker interface used to find
      the correct translation for column headers
     """
-    implements(IArchitectsTable)
+    implements(interfaces.IArchitectsTable)
 
     batchSize = 20
 
@@ -156,14 +141,14 @@ class ClaimantsTable(ContactTable):
      We define our own class so we can implement a marker interface used to find
      the correct translation for column headers
     """
-    implements(IClaimantsTable)
+    implements(interfaces.IClaimantsTable)
 
     batchSize = 999
 
 
 class RecipientsCadastreTable(UrbanTable, SequenceTable):
     """  """
-    implements(IRecipientsCadastreTable)
+    implements(interfaces.IRecipientsCadastreTable)
 
     cssClasses = {'table': 'listing largetable'}
     batchStart = 0
@@ -174,7 +159,7 @@ class RecipientsCadastreTable(UrbanTable, SequenceTable):
 class ParcelsTable(UrbanTable, SequenceTable):
     """
     """
-    implements(IParcelsTable)
+    implements(interfaces.IParcelsTable)
 
     cssClasses = {'table': 'listing largetable'}
     batchStart = 0
@@ -185,7 +170,7 @@ class ParcelsTable(UrbanTable, SequenceTable):
 class EventsTable(UrbanTable, SequenceTable):
     """
     """
-    implements(IEventsTable)
+    implements(interfaces.IEventsTable)
 
     sortOn = 'table-eventdateColumn-1'
     cssClasses = {'table': 'listing largetable'}
@@ -195,7 +180,7 @@ class EventsTable(UrbanTable, SequenceTable):
 class DocumentsTable(UrbanTable, SequenceTable):
     """
     """
-    implements(IDocumentsTable)
+    implements(interfaces.IDocumentsTable)
 
     sortOn = 'table-creationdateColumn-1'
     cssClasses = {'table': 'listing largetable'}
@@ -205,7 +190,7 @@ class AttachmentsTable(UrbanTable, SequenceTable):
     """
     Documents and annexes use (almost) the same listing tables.
     """
-    implements(IAttachmentsTable)
+    implements(interfaces.IAttachmentsTable)
 
     sortOn = 'table-creationdateColumn-1'
     cssClasses = {'table': 'listing largetable'}
@@ -215,7 +200,24 @@ class NestedAttachmentsTable(UrbanTable, SequenceTable):
     """
     Render nested attachments from subfolders.
     """
-    implements(INestedAttachmentsTable)
+    implements(interfaces.INestedAttachmentsTable)
 
     sortOn = 'table-creationdateColumn-1'
     cssClasses = {'table': 'listing largetable'}
+
+
+class InternalOpinionServicesTable(SequenceTable):
+    """
+    Render nested attachments from subfolders.
+    """
+    implements(interfaces.IInternalOpinionServicesTable)
+
+    cssClasses = {'table': 'listing largetable'}
+
+    @property
+    def values(self):
+        registry = api.portal.get_tool('portal_registry')
+        all_services = registry['Products.urban.interfaces.IInternalOpinionServices.services']
+        for key, values in all_services.iteritems():
+            values['id'] = key
+        return all_services.values()

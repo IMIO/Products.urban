@@ -747,6 +747,18 @@ msgstr ""
 msgid "label_colname_recipient_data"
 msgstr ""
 
+msgid "label_service_groups"
+msgstr ""
+
+msgid "label_service_id"
+msgstr ""
+
+msgid "label_service_name"
+msgstr ""
+
+msgid "label_service_taskconfigs"
+msgstr ""
+
 msgid "label_colname_street"
 msgstr ""
 

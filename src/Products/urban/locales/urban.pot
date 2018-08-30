@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2018-08-29 15:07+0000\n"
+"POT-Creation-Date: 2018-08-30 09:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -573,11 +573,11 @@ msgstr ""
 msgid "Select to list"
 msgstr ""
 
-#: ../browser/urbanconfigview.py:74
+#: ../browser/urbanconfigview.py:80
 msgid "Service full name"
 msgstr ""
 
-#: ../browser/urbanconfigview.py:79
+#: ../browser/urbanconfigview.py:85
 msgid "Service id"
 msgstr ""
 
@@ -1655,6 +1655,18 @@ msgid "label_remove"
 msgstr ""
 
 msgid "label_select_street"
+msgstr ""
+
+msgid "label_service_groups"
+msgstr ""
+
+msgid "label_service_id"
+msgstr ""
+
+msgid "label_service_name"
+msgstr ""
+
+msgid "label_service_taskconfigs"
 msgstr ""
 
 #. Default: "History"

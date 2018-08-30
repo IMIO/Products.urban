@@ -4,6 +4,7 @@ from Acquisition import aq_inner
 from Products.Five import BrowserView
 from Products.urban import UrbanMessage as _
 from Products.urban.setuphandlers import _create_task_configs
+from Products.urban.browser.table.urbantable import InternalOpinionServicesTable
 
 from imio.schedule.content.object_factories import CreationConditionObject
 
@@ -67,6 +68,11 @@ class UrbanConfigView(BrowserView):
         schedules = [schedule for schedule in [survey_schedule, opinions_schedule] if schedule]
         return schedules
 
+    def renderInternalServicesListing(self):
+        table = InternalOpinionServicesTable(self.context, self.request)
+        table.update()
+        return table.render()
+
 
 class IAddInternalServiceForm(Interface):
 
@@ -101,6 +107,25 @@ class AddInternalServiceForm(form.Form):
         with api.env.adopt_roles(['Manager']):
             task_config_ids = self.create_task_configs(service_id, service_name, editor_group_id, validator_group_id)
         self.set_registry_mapping(service_id, service_name, editor_group_id, validator_group_id, task_config_ids)
+
+    @button.buttonAndHandler(u'Disable')
+    def handleDisable(self, action):
+        data, errors = self.extractData()
+        if errors:
+            return False
+        service_id = data['service_id']
+        registry = api.portal.get_tool('portal_registry')
+        registry_field = registry['Products.urban.interfaces.IInternalOpinionServices.services']
+
+        values = registry_field.get(service_id, None)
+
+        if values:
+            portal_urban = api.portal.get_tool('portal_urban')
+            schedule_folder = portal_urban.opinions_schedule
+
+            task_configs = [getattr(schedule_folder, id_) for id_ in values['task_ids']]
+            for task_config in task_configs:
+                task_config.enabled = False
 
     @button.buttonAndHandler(u'Delete')
     def handleDelete(self, action):

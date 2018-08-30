@@ -131,9 +131,15 @@ class IDocumentsTable(IUrbanTable):
     """
 
 
-class IAttachmentsTable (IUrbanTable):
+class IAttachmentsTable(IUrbanTable):
     """
     Marker interface for a table displaying attachments of an urban event
+    """
+
+
+class IInternalOpinionServicesTable(Interface):
+    """
+    Marker interface for a table displaying internal services for opinion requests.
     """
 
 
