@@ -27,7 +27,6 @@ from Products.urban import UrbanMessage as _
 ##code-section module-header #fill in your manual code here
 from OFS.ObjectManager import BeforeDeleteException
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
-from Products.CMFPlone import PloneMessageFactory as _
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from plone import api
 

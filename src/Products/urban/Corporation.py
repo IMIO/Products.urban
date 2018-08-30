@@ -157,6 +157,7 @@ class Corporation(BaseContent, Applicant, BrowserDefaultMixin):
         return title
 
     def _getNameSignaletic(self, short, linebyline, reverse=False, invertnames=False):
+        title = self.getPersonTitleValue(short, False, reverse)
         nameSignaletic = '{} {}'.format(self.getLegalForm(), self.getDenomination())
         if linebyline:
             #escape HTML special characters like HTML entities

@@ -39,6 +39,14 @@ color: green !important;
 color: green !important;
 }
 
+.state-acceptable {
+color: green !important;
+}
+
+.state-inacceptable {
+color: red !important;
+}
+
 .state-retired {
 color: grey !important;
 }
@@ -169,6 +177,14 @@ a.datagridwidget-add-button, a.datagridwidget-add-button:hover {
 }
 
 #datagridwidget-table-workLocations {
+    width: 600px !important;
+}
+
+#datagridwidget-table-manualParcels {
+    width: 600px !important;
+}
+
+#datagridwidget-table-manualOldParcels {
     width: 600px !important;
 }
 
@@ -406,7 +422,7 @@ span.option {
    display: block;
 }
 
-.searchButton.addHistory {
+.searchButton.addHistory, .searchButton.showHistory {
     font-size: 90%;
     height: 2em;
     vertical-align: top;

@@ -175,6 +175,13 @@
                            popup_height widget/popup_height|string:550;"
                tal:attributes="src string:${context/absolute_url}/refhistorybrowser_popup?form.widgets.field=${field/getName}&amp;at_url=${at_url}&amp;_authenticator=${context/@@authenticator/token|nothing};
                            rel string:#history_${overlay_id}" />
+          <input type="button" class="searchButton showHistory" value="History"
+                 i18n:domain="urban"
+                 i18n:attributes="value label_show_history"
+                 tal:define="popup_width widget/popup_width|string:500;
+                           popup_height widget/popup_height|string:550;"
+                 tal:attributes="src string:${context/absolute_url}/specificcontenthistory?item=${field/getName}&amp;at_url=${at_url}&amp;_authenticator=${context/@@authenticator/token|nothing};
+                           rel string:#history_${overlay_id}" />
            </div><div id="atrb" tal:attributes="id overlay_id" class="overlay overlay-ajax"><div class="close"><span>Close</span></div>
            <div class="pb-ajax">
              <!-- <a href="" i18n:translate="referencebrowser_back" class="refbrowser_back">Back</a> -->
@@ -188,7 +195,7 @@
            </div>
            <script type="text/javascript">
               jQuery(document).ready(function($) {
-                $('input.addHistory').prepOverlay({
+                $('input.addHistory, input.showHistory').prepOverlay({
                   subtype: 'ajax',
                   formselector: 'form',
                   noform: 'reload',

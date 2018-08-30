@@ -74,6 +74,9 @@ class TransitionsPanelView(ActionsPanelView):
 
         return to_confirm
 
+    def showHistoryForContext(self):
+        return True
+
 
 class ConfigValueActionsPanelView(ActionsPanelView):
     """

@@ -95,8 +95,10 @@ class ConfigRenderer(base.Renderer):
         else:
             context = self.context
 
-        roles = api.user.get_roles(user=api.user.get_current(), obj=context)
-        available = 'Manager' in roles or 'Editor' in roles
+        current_user = api.user.get_current()
+        roles = api.user.get_roles(user=current_user, obj=context)
+        groups = [g.id for g in api.group.get_groups(user=current_user)]
+        available = 'Manager' in roles or 'urban_editors' in groups or 'environment_editors' in groups or 'urban_managers' in groups
         return available
 
     def render(self):

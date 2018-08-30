@@ -30,7 +30,6 @@ from Products.urban import UrbanMessage as _
 
 ##code-section module-header #fill in your manual code here
 from Products.urban.interfaces import IEnvironmentBase
-from Products.urban.interfaces import ILicenceDeliveryEvent
 from Products.urban.utils import setOptionalAttributes
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 
@@ -43,8 +42,8 @@ from zope.i18n import translate
 
 optional_fields = [
     'publicRoadModifications', 'previousLicences',
-    'referenceSPE', 'referenceFT', 'environmentTechnicalRemarks',
-    'claimsSynthesis', 'conclusions', 'commentsOnSPWOpinion',
+    'referenceSPE', 'referenceFT', 'claimsSynthesis',
+    'conclusions', 'commentsOnSPWOpinion',
 ]
 ##/code-section module-header
 
@@ -53,6 +52,7 @@ schema = Schema((
     StringField(
         name='authority',
         widget=SelectionWidget(
+            format='select',
             label=_('urban_label_authority', 'Authority'),
         ),
         schemata='urban_description',
@@ -64,7 +64,7 @@ schema = Schema((
         widget=ReferenceBrowserWidget(
             label=_('urban_label_previousLicences', 'Previouslicences'),
         ),
-        allowed_types=('EnvClassThree', 'EnvClassTwo', 'EnvClassOne'),
+        allowed_types=('EnvClassThree', 'EnvClassTwo', 'EnvClassOne', 'EnvClassBordering'),
         schemata='urban_description',
         multiValued=True,
         relationship='previousLicences',
@@ -152,18 +152,6 @@ schema = Schema((
         schemata='urban_environment',
         default_output_type='text/html',
     ),
-    TextField(
-        name='environmentTechnicalRemarks',
-        allowable_content_types=('text/html',),
-        widget=RichWidget(
-            label=_('urban_label_environmentTechnicalRemarks',
-                    default='Environmenttechnicalremarks'),
-        ),
-        default_content_type='text/html',
-        default_method='getDefaultText',
-        schemata='urban_environment',
-        default_output_type='text/html',
-    ),
 
 ),
 )
@@ -202,31 +190,6 @@ class EnvironmentLicence(BaseFolder, EnvironmentBase, BrowserDefaultMixin):
         """
         To implements in subclasses
         """
-
-    security.declarePublic('getApplicants')
-    def getApplicants(self):
-        """
-        """
-        applicants = self.getCorporations()
-        applicants.extend(super(EnvironmentLicence, self).getApplicants())
-        return applicants
-
-    security.declarePublic('get_applicants_history')
-    def get_applicants_history(self):
-        applicants = self.get_corporations_history()
-        applicants.extend(super(EnvironmentLicence, self).get_applicants_history())
-        return applicants
-
-    security.declarePublic('getCorporations')
-    def getCorporations(self):
-        corporations = [corp for corp in self.objectValues('Corporation')
-                        if api.content.get_state(corp) == 'enabled']
-        return corporations
-
-    security.declarePublic('get_corporations_history')
-    def get_corporations_history(self):
-        return [corp for corp in self.objectValues('Corporation')
-                if api.content.get_state(corp) == 'disabled']
 
     security.declarePublic('getFtSolicitOpinionsTo')
     def getFtSolicitOpinionsTo(self, get_obj=False):
@@ -280,11 +243,26 @@ class EnvironmentLicence(BaseFolder, EnvironmentBase, BrowserDefaultMixin):
     def previouslicencesBaseQuery(self):
         return {'object_provides': IEnvironmentBase.__identifier__}
 
-    def getLastLicenceDelivery(self):
-        return self.getLastEvent(ILicenceDeliveryEvent)
+    def getLastTransmitToSPW(self):
+        return self.getLastEvent(interfaces.ITransmitToSPWEvent)
 
     def getLastMissingPart(self):
         return self.getLastEvent(interfaces.IMissingPartEvent)
+
+    def getLastMissingPartDeposit(self):
+        return self.getLastEvent(interfaces.IMissingPartDepositEvent)
+
+    def getLastMissingPartTransmitToSPW(self):
+        return self.getLastEvent(interfaces.IMissingPartTransmitToSPWEvent)
+
+    def getLastAcknowledgment(self):
+        return self.getLastEvent(interfaces.IAcknowledgmentEvent)
+
+    def getLastCollegeOpinionTransmitToSPW(self):
+        return self.getLastEvent(interfaces.ICollegeOpinionTransmitToSPWEvent)
+
+    def getLastDecisionProjectFromSPW(self):
+        return self.getLastEvent(interfaces.IDecisionProjectFromSPWEvent)
 
     security.declarePublic('getFTOpinionRequestAddresses')
     def getFTOpinionRequestAddresses(self):
@@ -328,6 +306,7 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     schema.moveField('natura2000location', after='natura2000')
     schema.moveField('natura2000Details', after='natura2000location')
     schema.moveField('description', after='validityDelay')
+    schema.moveField('environmentTechnicalRemarks', after='conclusions')
 
 finalizeSchema(EnvironmentLicence_schema)
 ##/code-section module-footer

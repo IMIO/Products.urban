@@ -73,15 +73,16 @@
                                                      </td>
                                                 </tr>
                                                 <tal:evtfield repeat="field fields">
-                                                    <tr valign="top">
+                                                    <tr valign="top" tal:define="field_name python: field.__name__;
+                                                                                 field_label python: str(field.widget.label);">
                                                         <td>
-                                                            <strong i18n:translate="" tal:content="python: 'urban_label_' + field">
+                                                            <strong i18n:translate="" tal:content="field_label">
                                                                 Inquiry field label
                                                             </strong>:&nbsp;&nbsp;&nbsp;&nbsp;
                                                         </td>
-                                                        <tal:manage_show_nc_if_needed define="value python: getattr(context, field)">
+                                                        <tal:manage_show_nc_if_needed define="value python: field.getAccessor(context)()">
                                                             <td tal:condition="value">
-                                                                <metal:myfield use-macro="python: context.widget(field, mode='view')" />
+                                                                <metal:myfield use-macro="python: context.widget(field_name, mode='view')" />
                                                             </td>
                                                             <td tal:condition="not: value">
                                                                 <span tal:condition="not: value" class="discreet" i18n:translate="content_none">None</span>

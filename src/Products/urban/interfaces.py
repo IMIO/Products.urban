@@ -1,6 +1,7 @@
 #-*- coding: utf-8 -*-
 
 from zope.interface import Interface
+from zope import schema
 
 ##code-section HEAD
 from zope.interface.interfaces import IInterface
@@ -257,7 +258,7 @@ class IUrbanConfigurationValue(Interface):
     """
 
 
-class IEnvironmentBase(Interface):
+class IEnvironmentBase(IGenericLicence):
     """Marker interface for .EnvironmentBase.EnvironmentBase
     """
 
@@ -277,12 +278,12 @@ class IOpinionRequestEventType(Interface):
     """
 
 
-class IEnvironmentLicence(Interface):
+class IEnvironmentLicence(IEnvironmentBase):
     """Marker interface for .EnvironmentLicence.EnvironmentLicence
     """
 
 
-class IEnvClassThree(Interface):
+class IEnvClassThree(IEnvironmentBase):
     """Marker interface for .EnvClassThree.EnvClassThree
     """
 
@@ -302,13 +303,18 @@ class IApplicant(Interface):
     """
 
 
-class IEnvClassTwo(Interface):
+class IEnvClassTwo(IEnvironmentLicence):
     """Marker interface for .EnvClassTwo.EnvClassTwo
     """
 
 
-class IEnvClassOne(Interface):
+class IEnvClassOne(IEnvironmentLicence):
     """Marker interface for .EnvClassOne.EnvClassOne
+    """
+
+
+class IEnvClassBordering(IEnvironmentLicence):
+    """Marker interface for EnvClassBordering
     """
 
 
@@ -414,6 +420,10 @@ class IDepositEvent(Interface):
 
 class IMissingPartDepositEvent(IDepositEvent):
     __doc__ = _("""IMissingPartDeposit type marker interface""")
+
+
+class IMissingPartTransmitToSPWEvent(IDepositEvent):
+    __doc__ = _("""IMissingPartTransmitToSPWEvent type marker interface""")
 
 
 class IModificationDepositEvent(IDepositEvent):
@@ -551,6 +561,11 @@ class IEnvCLassOne(Interface):
     """
 
 
+class IEnvClassBordering(Interface):
+    """Marker interface for EnvClassOne
+    """
+
+
 class IContactFolder(Interface):
     """Marker interface for folders containing contacts
     """
@@ -600,3 +615,28 @@ class IIsArchive(Interface):
 
 class ITestConfig(Interface):
     """ Marker interface for TestConfig."""
+
+
+class ICODT_UniqueLicence_spe_reference_config(Interface):
+    """ """
+    numerotation = schema.Int(
+        title=u"Numérotation",
+        default=0
+    )
+    tal_expression = schema.TextLine(
+        title=u"Generation expression",
+        default=u"python: 'PU/' + numerotation"
+    )
+
+
+class IInternalOpinionServices(Interface):
+    """ """
+    services = schema.Dict(
+        title=_(u"Internal opinion services"),
+        description=_(u"Services that can give their opinion directly through urban"),
+        key_type=schema.ASCIILine(),
+        value_type=schema.Dict(
+            key_type=schema.ASCIILine(),
+            value_type=schema.List(value_type=schema.ASCIILine())
+        )
+    )

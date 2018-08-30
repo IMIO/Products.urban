@@ -38,7 +38,11 @@ def extractRubricsTerm(rubric_ids):
         for row in rows:
             rubric = extractOneRubricTerm(row)
             if rubric:
-                rubrics[rubric['id']] = rubric
+                if rubric['id'] not in rubrics:
+                    rubrics[rubric['id']] = rubric
+                elif rubric['conditions']:
+                    new_condition = rubric['conditions'][0]
+                    rubrics[rubric['id']]['conditions'].append(new_condition)
 
     return rubrics
 
@@ -63,9 +67,14 @@ def extractOneRubricTerm(row):
         'number': number,
         'extraValue': extraValue or '0',
         'description': description,
-        'condition_type': condition_type,
-        'condition_id': condition_id,
+        'conditions': []
     }
+    if condition_id:
+        condition = {
+            'condition_type': condition_type,
+            'condition_id': condition_id,
+        }
+        rubric['conditions'].append(condition)
     return rubric
 
 
@@ -143,20 +152,23 @@ def buildMappingAndExtractAllConditions(rubric_terms):
     conditions = {'CI': {}, 'CS': {}, 'CS-Eau': {}, 'CI/CS': {}}
 
     for rubric_id, rubric in rubric_terms.iteritems():
-        condition_id = rubric.pop('condition_id')
-        condition_type = rubric.pop('condition_type')
-        # no conditions associated to the rubric
-        if not condition_id:
-            condition = None
-        # this condition has already been extracted from the site
-        elif condition_id in conditions[condition_type]:
-            condition = conditions[condition_type][condition_id]
-        # new condition to extract !
-        else:
-            condition = extractCondition(condition_id, condition_type)
-            conditions[condition_type][condition_id] = condition
+        to_map = []
+        for raw_condition in rubric.pop('conditions'):
+            condition_id = raw_condition['condition_id']
+            condition_type = raw_condition['condition_type']
+            # no conditions associated to the rubric
+            if not condition_id:
+                condition = None
+            # this condition has already been extracted from the site
+            elif condition_id in conditions[condition_type]:
+                condition = conditions[condition_type][condition_id]
+            # new condition to extract !
+            else:
+                condition = extractCondition(condition_id, condition_type)
+                conditions[condition_type][condition_id] = condition
 
-        to_map = condition_type != u'Non' and {'type': condition_type, 'id': condition_id} or None
+            to_map.append({'type': condition_type, 'id': condition_id})
+
         mapping[rubric_id] = to_map
 
     return mapping, conditions

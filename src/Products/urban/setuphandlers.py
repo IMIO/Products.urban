@@ -49,6 +49,7 @@ from plone.portlets.constants import CONTEXT_CATEGORY, GROUP_CATEGORY, CONTENT_T
 
 from imio.schedule.utils import interface_to_tuple
 from imio.schedule.utils import _set_faceted_view
+from imio.schedule.utils import set_schedule_view
 
 from zExceptions import BadRequest
 from zope.interface import alsoProvides
@@ -136,6 +137,7 @@ def postInstall(context):
         'UrbanCertificateTwo': 1,
         'EnvClassThree': 1,
         'EnvClassOne': 1,
+        'EnvClassBordering': 1,
         'NotaryLetter': 1,
         'PreliminaryNotice': 1,
         'PatrimonyCertificate': 1,
@@ -164,6 +166,9 @@ def postInstall(context):
     logger.info("setupSchedule : starting...")
     setupSchedule(context)
     logger.info("setupSchedule : Done")
+    logger.info("setupOpinionsSchedule : starting...")
+    setupOpinionsSchedule(context)
+    logger.info("setupOpinionsSchedule : Done")
     logger.info("setupTest : starting...")
     setupTest(context.getSite())
     logger.info("setupTest : Done")
@@ -473,6 +478,7 @@ def addRubricValues(context, config_folder):
             rubric_id = rubric['id']
             if rubric_id not in rubric_folder:
                 rubric_id = rubric_folder.invokeFactory('EnvironmentRubricTerm', **rubric)
+                print "created rubric %ss" % rubric_id
             else:
                 old_rubric = getattr(rubric_folder, rubric_id)
                 rubric.pop('id')
@@ -483,16 +489,16 @@ def addRubricValues(context, config_folder):
             new_rubric = getattr(rubric_folder, rubric_id)
             new_rubric.processForm()
 
-            bound_condition = mapping[rubric_id]
-            if bound_condition:
+            conditions_uid = []
+            for bound_condition in mapping[rubric_id]:
                 condition_type = bound_condition['type'].replace('/', '_').replace('-', '_')
                 condition_id = bound_condition['id']
                 conditions_folder = getattr(site.portal_urban.exploitationconditions, condition_type)
                 condition = getattr(conditions_folder, condition_id)
-                condition_uid = condition.UID()
+                conditions_uid.append(condition.UID())
 
-                rubric = getattr(rubric_folder, rubric_id)
-                rubric.setExploitationCondition(condition_uid)
+            rubric = getattr(rubric_folder, rubric_id)
+            rubric.setExploitationCondition(conditions_uid)
 
 
 def addExploitationConditions(context, config_folder):
@@ -561,6 +567,10 @@ def addUrbanGroups(context):
     #one with map Readers
     site.portal_groups.addGroup("urban_map_readers", title="Urban Map Readers")
     site.portal_groups.setRolesForGroup('urban_map_readers', ('UrbanMapReader', ))
+    # add opinion editors group
+    site.portal_groups.addGroup("opinions_editors", title="Opinion Editors")
+    site.portal_groups.setRolesForGroup('opinions_editors', ('UrbanMapReader', ))
+    site.portal_urban.manage_addLocalRoles("opinions_editors", ("Reader", ))
 
 
 def setDefaultApplicationSecurity(context):
@@ -612,12 +622,14 @@ def setDefaultApplicationSecurity(context):
                 folder.manage_addProperty('urbanConfigId', folder_name.strip('s'), 'string')
             except BadRequest:
                 pass
+            folder.manage_delLocalRoles(["urban_editors"])
+            folder.manage_delLocalRoles(["environment_editors"])
             if folder_name in urban_folder_names:
                 folder.manage_addLocalRoles("urban_readers", ("Reader", ))
-                folder.manage_addLocalRoles("urban_editors", ("Editor", "Contributor"))
+                folder.manage_addLocalRoles("urban_editors", ("Contributor",))
             if folder_name in environment_folder_names:
                 folder.manage_addLocalRoles("environment_readers", ("Reader", ))
-                folder.manage_addLocalRoles("environment_editors", ("Editor", "Contributor"))
+                folder.manage_addLocalRoles("environment_editors", ("Contributor",))
 
     #objects application folder : "urban_readers" can read and "urban_editors" can edit...
     objectsfolder_names = ['architects', 'geometricians', 'notaries', 'parcellings']
@@ -628,9 +640,8 @@ def setDefaultApplicationSecurity(context):
             folder.manage_addLocalRoles("urban_managers", ("Contributor", "Reviewer", "Editor", "Reader", ))
             folder.manage_addLocalRoles("urban_readers", ("Reader", ))
             folder.manage_addLocalRoles("urban_editors", ("Editor", "Contributor"))
-            folder.manage_addLocalRoles("environment_managers", ("Contributor", "Reviewer", "Editor", "Reader", ))
             folder.manage_addLocalRoles("environment_readers", ("Reader", ))
-            folder.manage_addLocalRoles("environment_editors", ("Editor", "Contributor"))
+            folder.manage_addLocalRoles("environment_editors", ("Contributor",))
             # mark them with IContactFolder interface use some view methods, like 'getemails', on it
             alsoProvides(folder, IContactFolder)
 
@@ -778,24 +789,24 @@ def addApplicationFolders(context):
     for i, urban_type in enumerate(URBAN_TYPES):
         licence_folder_id = getLicenceFolderId(urban_type)
         if not hasattr(newFolder, licence_folder_id):
-            newFolderid = newFolder.invokeFactory(
+            licence_folder_id = newFolder.invokeFactory(
                 "Folder", id=licence_folder_id,
                 title=_(urban_type, 'urban')
             )
-            newSubFolder = getattr(newFolder, newFolderid)
-            alsoProvides(newSubFolder, ILicenceContainer)
-            setFolderAllowedTypes(newSubFolder, urban_type)
-            #manage the 'Add' permissions...
-            try:
-                newSubFolder.manage_permission('urban: Add %s' % urban_type, ['Manager', 'Editor', ], acquire=0)
-            except ValueError:
-                #exception for some portal_types having a different meta_type
-                if urban_type in ['UrbanCertificateOne', 'NotaryLetter', ]:
-                    newSubFolder.manage_permission('urban: Add UrbanCertificateBase', ['Manager', 'Editor', ], acquire=0)
-                if urban_type in ['EnvClassThree', ]:
-                    newSubFolder.manage_permission('urban: Add EnvironmentBase', ['Manager', 'Editor', ], acquire=0)
-                if urban_type in ['EnvClassOne', 'EnvClassTwo']:
-                    newSubFolder.manage_permission('urban: Add EnvironmentLicence', ['Manager', 'Editor', ], acquire=0)
+        licence_folder = getattr(newFolder, licence_folder_id)
+        alsoProvides(licence_folder, ILicenceContainer)
+        setFolderAllowedTypes(licence_folder, urban_type)
+        #manage the 'Add' permissions...
+        try:
+            licence_folder.manage_permission('urban: Add %s' % urban_type, ['Manager', 'Contributor', ], acquire=0)
+        except ValueError:
+            #exception for some portal_types having a different meta_type
+            if urban_type in ['UrbanCertificateOne', 'NotaryLetter', ]:
+                licence_folder.manage_permission('urban: Add UrbanCertificateBase', ['Manager', 'Contributor', ], acquire=0)
+            if urban_type in ['EnvClassThree', ]:
+                licence_folder.manage_permission('urban: Add EnvironmentBase', ['Manager', 'Contributor', ], acquire=0)
+            if urban_type in ['EnvClassOne', 'EnvClassTwo', 'EnvClassBordering']:
+                licence_folder.manage_permission('urban: Add EnvironmentLicence', ['Manager', 'Contributor', ], acquire=0)
         newFolder.moveObjectsToBottom([licence_folder_id])
 
     #add a folder that will contains architects
@@ -989,13 +1000,42 @@ def setupSchedule(context):
                 title=licence_name
             )
 
-        collection_folder = getattr(schedule_folder, folder_id)
-        config_path = '{}/schedule/config/{}.xml'.format(
-            os.path.dirname(__file__),
-            folder_id
-        )
-        _set_faceted_view(collection_folder, config_path, [schedule_config])
+            # only apply faceted view if the the folder does not exist to keep
+            # custom changes
+            collection_folder = getattr(schedule_folder, folder_id)
+            config_path = '{}/schedule/config/{}.xml'.format(
+                os.path.dirname(__file__),
+                folder_id
+            )
+            _set_faceted_view(collection_folder, config_path, [schedule_config])
     setFolderAllowedTypes(schedule_folder, [])
+
+
+def setupOpinionsSchedule(context):
+    """
+    Enable schedule faceted navigation on schedule folder.
+    """
+    site = context.getSite()
+    urban_folder = site.urban
+    portal_urban = api.portal.get_tool('portal_urban')
+
+    if not hasattr(urban_folder, 'opinions_schedule'):
+        urban_folder.invokeFactory('Folder', id='opinions_schedule')
+        schedule_folder = getattr(urban_folder, 'opinions_schedule')
+        setFolderAllowedTypes(schedule_folder, ['TaskConfig', 'MacroTaskConfig'])
+    schedule_folder = getattr(urban_folder, 'opinions_schedule')
+    schedule_folder.manage_addLocalRoles("opinions_editors", ("Reader", ))
+    schedule_folder.reindexObjectSecurity()
+
+    schedule_config = createScheduleConfig(
+        container=portal_urban,
+        portal_type='UrbanEventOpinionRequest',
+        id='opinions_schedule',
+        title=u'Configuration d\'échéances avis de services',
+    )
+
+    config_path = '{}/schedule/config/opinions_schedule.xml'.format(os.path.dirname(__file__))
+    set_schedule_view(schedule_folder, config_path, schedule_config)
 
 
 def setupTest(context):

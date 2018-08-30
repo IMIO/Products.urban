@@ -4,6 +4,30 @@
 
     <!-- unique licence incomplete conditions-->
     <adapter
+        for="Products.urban.interfaces.IEnvironmentLicence
+             imio.schedule.content.task_config.ITaskConfig"
+        provides="imio.schedule.interfaces.ICreationCondition"
+        factory=".creation.SingleComplementAsked"
+        name="urban.schedule.condition.complements_asked"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.IEnvironmentLicence
+             imio.schedule.content.task_config.ITaskConfig"
+        provides="imio.schedule.interfaces.ICreationCondition"
+        factory=".creation.SingleComplementReceived"
+        name="urban.schedule.condition.complements_received"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.IEnvironmentLicence
+             imio.schedule.content.task_config.ITaskConfig"
+             provides="imio.schedule.interfaces.ICreationCondition"
+        factory=".creation.ComplementsTransmitToSPW"
+        name="urban.schedule.condition.complements_transmit_to_spw"
+    />
+
+    <adapter
         for="Products.urban.interfaces.IBaseAllBuildLicence
              imio.schedule.content.task_config.ITaskConfig"
         provides="imio.schedule.interfaces.ICreationCondition"
@@ -11,9 +35,26 @@
         name="urban.schedule.condition.incomplete_for_6_months"
     />
 
+    <adapter
+        for="Products.urban.interfaces.IEnvironmentLicence
+             imio.schedule.content.task_config.ITaskConfig"
+        provides="imio.schedule.interfaces.ICreationCondition"
+        factory=".creation.IncompleteForSixMonths"
+        name="urban.schedule.condition.incomplete_for_6_months"
+    />
+
+
     <!-- acknowlegdment conditions-->
     <adapter
         for="Products.urban.interfaces.IBaseAllBuildLicence
+             imio.schedule.content.task_config.ITaskConfig"
+        provides="imio.schedule.interfaces.ICreationCondition"
+        factory=".creation.AcknowledgmentDoneCondition"
+        name="urban.schedule.condition.acknowledgment_done"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.IEnvironmentLicence
              imio.schedule.content.task_config.ITaskConfig"
         provides="imio.schedule.interfaces.ICreationCondition"
         factory=".creation.AcknowledgmentDoneCondition"
@@ -87,11 +128,35 @@
     />
 
     <adapter
+        for="Products.urban.interfaces.IEnvironmentLicence
+             imio.schedule.content.task_config.ITaskConfig"
+        provides="imio.schedule.interfaces.ICreationCondition"
+        factory=".creation.HasOpinionRequests"
+        name="urban.schedule.condition.has_opinion_requests"
+    />
+
+    <adapter
         for="Products.urban.interfaces.IBaseAllBuildLicence
              imio.schedule.content.task_config.ITaskConfig"
         provides="imio.schedule.interfaces.ICreationCondition"
         factory=".creation.OpinionRequestsDone"
         name="urban.schedule.condition.opinion_requests_done"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.IEnvironmentLicence
+             imio.schedule.content.task_config.ITaskConfig"
+        provides="imio.schedule.interfaces.ICreationCondition"
+        factory=".creation.OpinionRequestsDone"
+        name="urban.schedule.condition.opinion_requests_done"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.IUrbanEventOpinionRequest
+             imio.schedule.content.task_config.ITaskConfig"
+        provides="imio.schedule.interfaces.ICreationCondition"
+        factory=".creation.IsInternalOpinionRequest"
+        name="urban.schedule.condition.is_internal_opinion"
     />
 
     <!-- FD opinions conditions-->
@@ -153,6 +218,14 @@
         provides="imio.schedule.interfaces.ICreationCondition"
         factory=".creation.SPWProjectReceivedCondition"
         name="urban.schedule.condition.spw_project_receipt_done"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.IEnvironmentLicence
+             imio.schedule.content.task_config.ITaskConfig"
+        provides="imio.schedule.interfaces.ICreationCondition"
+        factory=".creation.LicenceAuthorityIsCollege"
+        name="urban.schedule.condition.authority_is_college"
     />
 
 </configure>

@@ -122,14 +122,14 @@ def parcelinfoindex(obj):
     This index is a ZCTextIndex based on the plone_lexicon so we
     are sure that indexed values are lowercase
     """
-    return [obj.getIndexValue()]
+    return [obj.get_capakey()]
 
 
 @indexer(IGenericLicence)
 def genericlicence_parcelinfoindex(obj):
     parcels_infos = []
     if hasattr(obj, 'getParcels'):
-        parcels_infos = list(set([p.getIndexValue() for p in obj.getParcels()]))
+        parcels_infos = list(set([p.get_capakey() for p in obj.getParcels()]))
     return parcels_infos
 
 
@@ -140,7 +140,7 @@ def parcellingterm_parcelinfoindex(obj):
     """
     parcels_infos = []
     if hasattr(obj, 'getParcels'):
-        parcels_infos = list(set([p.getIndexValue() for p in obj.getParcels()]))
+        parcels_infos = list(set([p.get_capakey() for p in obj.getParcels()]))
     return parcels_infos
 
 
@@ -231,7 +231,7 @@ def genericlicence_decisiondate(licence):
             meeting_date = linked_pm_items[0]['meeting_date']
             if not (meeting_date.day == meeting_date.month == 1 and meeting_date.year == 1950):
                 return meeting_date
-        return decision_event.getEventDate()
+        return decision_event.getDecisionDate() or decision_event.getEventDate()
 
 
 @indexer(IGenericLicence)

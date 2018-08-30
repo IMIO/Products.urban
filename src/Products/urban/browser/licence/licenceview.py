@@ -323,6 +323,17 @@ class UrbanCertificateBaseView(LicenceView):
         return [spf.get('value', spf['text']) for spf in specific_features if not 'check' in spf or spf['check']]
 
 
+class CODTUrbanCertificateBaseView(UrbanCertificateBaseView):
+    """
+      This manage the view of CODT UrbanCertificate
+    """
+
+    def getInquiryFields(self, exclude=[], context=None):
+        return self.context.get_inquiry_fields_to_display(exclude=exclude)
+
+    def getInquiryType(self):
+        return 'CODT_Inquiry'
+
 class EnvironmentLicenceView(LicenceView):
     """
       This manage helper methods for all environment licences views
@@ -359,7 +370,7 @@ class EnvironmentLicenceView(LicenceView):
         """
         sort exploitation conditions in this order: CI/CS, CI, CS
         """
-        order = ['CI/CS', 'CI', 'CS', 'CS-Eau']
+        order = ['CI/CS', 'CI', 'CS', 'CS-Eau', 'Ville']
         sorted_conditions = dict([(val, [],) for val in order])
         for cond in conditions:
             val = cond.getExtraValue()
@@ -382,14 +393,6 @@ class EnvironmentLicenceView(LicenceView):
         context = aq_inner(self.context)
         min_conditions = context.getMinimumLegalConditions()
         return self._sortConditions(min_conditions)
-
-    def getAdditionalConditions(self):
-        """
-        sort the conditions from the field 'additionalLegalConditions'  by type (integral, sectorial, ...)
-        """
-        context = aq_inner(self.context)
-        sup_conditions = context.getAdditionalLegalConditions()
-        return self._sortConditions(sup_conditions)
 
 
 class ShowEditTabbing(BrowserView):

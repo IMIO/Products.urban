@@ -144,23 +144,17 @@
 
 
 <metal:legal_conditions define-macro="minimumLegalConditions">
-    <tal:vars define="min_conditions view/getMinimumConditions;
-                      sup_conditions view/getAdditionalConditions">
+<tal:vars define="min_conditions view/getMinimumConditions;">
         <td valign="top"><b><span i18n:translate="urban_label_minimumLegalConditions">Exploitation conditions</span>:</b></td>
         <td width="10px"></td>
-        <td tal:condition="python: not (min_conditions or sup_conditions)" valign="top">
+        <td tal:condition="python: not min_conditions" valign="top">
             <span class="discreet" i18n:translate="content_none">None</span>
         </td>
-        <td id="urban-minimum-conditions" tal:condition="python: min_conditions or sup_conditions">
+        <td id="urban-minimum-conditions" tal:condition="python: min_conditions">
             <ul>
                 <tal:rubric repeat="cond min_conditions">
                     <li><span tal:content="python: '%s :' % cond['type']">condition type</span>
                     <a tal:attributes="href python: cond['url']; class python: 'link-overlay'" tal:content="python: cond['title']"></a>
-                </tal:rubric>
-                <hr tal:condition="sup_conditions">
-                <tal:rubric repeat="cond sup_conditions">
-                     <li><span tal:content="python: '%s :' % cond['type']">condition type</span>
-                     <a tal:attributes="href python: cond['url']; class python: 'link-overlay'" tal:content="python: cond['title']"></a>
                 </tal:rubric>
             </ul>
         </td>

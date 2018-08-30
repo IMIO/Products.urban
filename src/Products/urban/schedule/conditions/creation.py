@@ -45,6 +45,54 @@ class DefaultCODTAcknowledgmentCondition(CreationCondition):
         return acknowledgment_event
 
 
+class SingleComplementAsked(CreationCondition):
+    """
+    Licence MissingPart event is created and closed.
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+
+        complements_asked = False
+        missing_part_event = licence.getLastMissingPart()
+        if missing_part_event:
+            complements_asked = api.content.get_state(missing_part_event) == 'closed'
+
+        return complements_asked
+
+
+class SingleComplementReceived(CreationCondition):
+    """
+    Licence MissingPartDeposit event is created and closed.
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+
+        complements_received = False
+        deposit_part_event = licence.getLastMissingPartDeposit()
+        if deposit_part_event:
+            complements_received = api.content.get_state(deposit_part_event) == 'closed'
+
+        return complements_received
+
+
+class ComplementsTransmitToSPW(CreationCondition):
+    """
+    Licence MissingPartTransmitToSPW event is created and closed.
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+
+        complements_transmit = False
+        deposit_part_event = licence.getLastMissingPartTransmitToSPW()
+        if deposit_part_event:
+            complements_transmit = api.content.get_state(deposit_part_event) == 'closed'
+
+        return complements_transmit
+
+
 class IncompleteForSixMonths(CreationCondition):
     """
     Unique licence have been incomplete for 6 months
@@ -191,6 +239,27 @@ class OpinionRequestsDone(CreationCondition):
         return True
 
 
+class IsInternalOpinionRequest(CreationCondition):
+    """
+    Urban event is an internal opinion request
+    """
+
+    def evaluate(self):
+        registry = api.portal.get_tool('portal_registry')
+        registry_field = registry['Products.urban.interfaces.IInternalOpinionServices.services']
+        opinion_request = self.task_container
+        opinion_config = opinion_request.getUrbaneventtypes()
+
+        if not opinion_config.getIs_internal_service():
+            return False
+
+        record = registry_field.get(opinion_config.getInternal_service(), None)
+        if record and self.task_config.id in record['task_ids']:
+            return True
+
+        return False
+
+
 class HasFDOpinionRequest(CreationCondition):
     """
     'FD' is selected on the field 'procedureChoice'.
@@ -270,7 +339,14 @@ class IncompleteForTheSecondTime(CreationCondition):
             task_config_UID=incomplete_UID,
             review_state='closed',
         )
-        return len(brains) > 0
+        first_incomplete_done = len(brains) > 0
+        if not first_incomplete_done:
+            return False
+        wf_history = licence.workflow_history
+        two_incomplete_transitions = len([tr for tr in wf_history[wf_history.keys()[0]] if tr['action'] == 'isincomplete'])
+        if not two_incomplete_transitions:
+            return False
+        return True
 
 
 class SPWProjectReceivedCondition(CreationCondition):
@@ -287,3 +363,14 @@ class SPWProjectReceivedCondition(CreationCondition):
             receipt_done = api.content.get_state(receipt_event) == 'closed'
 
         return receipt_done
+
+
+class LicenceAuthorityIsCollege(CreationCondition):
+    """
+    Environment licence authority is college
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+        authority_is_college = licence.getAuthorithy() == 'college'
+        return authority_is_college

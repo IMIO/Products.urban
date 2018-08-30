@@ -264,6 +264,7 @@ class UrbanBase(object):
             'Declaration': 'Decl',
             'Division': 'Div',
             'MiscDemand': 'DD',
+            'ExplosivesPossession': 'EXP',
         }
         if "notaryletter" in self.id:
             return 'Not'
@@ -349,17 +350,29 @@ class UrbanBase(object):
         return not self.hasSingleApplicant()
 
     security.declarePublic('getMultipleApplicantsCSV')
-    def getMultipleApplicantsCSV(self):
+    def getMultipleApplicantsCSV(self, only_foreign_country=True):
         """
           Returns a formatted version of the applicants to be used in POD templates
         """
         applicants = self.getApplicants()
-        toreturn = '[CSV]Titre|TitreR|Nom|Prenom|AdresseLigne1|AdresseLigne2'
+        toreturn = '[CSV]Titre|TitreR|Nom|Prenom|AdresseLigne1|AdresseLigne2|Pays'
+
+        portal_urban = api.portal.get_tool('portal_urban')
+        country_mapping = {'': ''}
+        country_folder = portal_urban.country
+        for country_obj in country_folder.objectValues():
+            country_mapping[country_obj.id] = country_obj.Title()
+
         for applicant in applicants:
+            if only_foreign_country and applicant.getCountry() and applicant.getCountry().lower() == 'belgium':
+                country = ''
+            else:
+                country = country_mapping[applicant['country']]
             toreturn = toreturn + '%' + applicant.getPersonTitleValue() + '|' + \
                        applicant.getPersonTitleValue(reverse=True) + '|' + applicant.getName1().decode('utf8') + '|' + \
                        applicant.getName2().decode('utf8') + '|' + applicant.getStreet().decode('utf8') + ', ' + \
-                       applicant.getNumber() + '|' + applicant.getZipcode() + ' ' + applicant.getCity().decode('utf8')
+                       applicant.getNumber() + '|' + applicant.getZipcode() + ' ' + applicant.getCity().decode('utf8') \
+                       + '|' + country
         toreturn = toreturn + '[/CSV]'
         return toreturn
     getMultipleApplicants = getMultipleApplicantsCSV

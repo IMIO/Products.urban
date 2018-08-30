@@ -203,14 +203,13 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
             #this should not happen...
             return None
         displayed_fields = self.getUsedAttributes()
-        inquiryAttributes = utils.getSchemataFields(linkedInquiry, displayed_fields, 'urban_inquiry')
-        for inquiryAttribute in inquiryAttributes:
-            inquiryAttributeName = inquiryAttribute.getName()
-            if inquiryAttributeName == "claimsText":
+        inquiry_fields = utils.getSchemataFields(linkedInquiry, displayed_fields, 'urban_inquiry')
+        for inquiry_field in inquiry_fields:
+            if inquiry_field.__name__ == "claimsText":
                 #as this text can be very long, we do not want to show it with the other
                 #fields, we will display it in the "Claimants" part of the template
                 continue
-            fields.append(inquiryAttributeName)
+            fields.append(inquiry_field)
 
         return fields
 
@@ -289,6 +288,7 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
         reader = csv.DictReader(claimants_file, fieldnames, delimiter=';', quotechar='"')
         claimant_args = [row for row in reader if row['name1']][1:]
         for claimant_arg in claimant_args:
+            claimant_arg.pop(None, None)
             # default values
             if not claimant_arg['claimType']:
                 claimant_arg['claimType'] = 'writedClaim'
@@ -403,7 +403,7 @@ class UrbanEventInquiryView(UrbanEventInquiryBaseView):
         )
 
         for parcel in neighbour_parcels:
-            owners = cadastre.query_owners_of_parcel(**parcel.reference_as_dict())
+            owners = cadastre.query_owners_of_parcel(parcel.capakey)
             for owner in owners:
                 pe = owner.pe and str(owner.pe.encode('utf-8')) or ''
                 adr1 = owner.adr1 and str(owner.adr1.encode('utf-8')) or ''

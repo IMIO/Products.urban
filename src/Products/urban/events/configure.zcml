@@ -43,6 +43,10 @@
                    Products.Archetypes.interfaces.IObjectInitializedEvent"
               handler=".licenceEvents.postCreationActions"/>
 
+  <subscriber for="..interfaces.ICODT_UniqueLicence
+                   Products.Archetypes.interfaces.IObjectInitializedEvent"
+              handler=".codt_uniquelicence_events.UniqueLicencePostCreationActions"/>
+
   <subscriber for="..interfaces.IGenericLicence
                    zope.lifecycleevent.IObjectModifiedEvent"
               handler=".licenceEvents.updateLicenceTitle"/>
@@ -171,6 +175,10 @@
                    Products.DCWorkflow.interfaces.IAfterTransitionEvent"
               handler=".urbanEventEvents.notifyLicence" />
 
+  <subscriber for="..interfaces.IExplosivesPossession
+                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+              handler=".explosive_possessions.update_reference" />
+
   <!-- do this to update schedule tasks when sending a college event to PM -->
   <subscriber for="..interfaces.IUrbanEvent
                    imio.pm.wsclient.interfaces.ISentToPMEvent"
@@ -179,7 +187,6 @@
   <subscriber for="imio.dashboard.interfaces.IDashboardCollection
                    zope.lifecycleevent.interfaces.IObjectCreatedEvent"
               handler=".dashboard_collection.set_dashboard_columns" />
-
 
 
 </configure>
