@@ -1,1 +1,0 @@
-from Products.urban.content.licence.UrbanCertificateBase import UrbanCertificateBase
