@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2018-08-29 15:07+0000\n"
+"POT-Creation-Date: 2018-08-30 09:16+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -591,11 +591,11 @@ msgstr "Sélectionner les types de contenues autorisés pour ce modèle"
 msgid "Select to list"
 msgstr ""
 
-#: ../browser/urbanconfigview.py:74
+#: ../browser/urbanconfigview.py:80
 msgid "Service full name"
 msgstr ""
 
-#: ../browser/urbanconfigview.py:79
+#: ../browser/urbanconfigview.py:85
 msgid "Service id"
 msgstr ""
 
@@ -1688,6 +1688,18 @@ msgstr "Supprimer"
 
 msgid "label_select_street"
 msgstr "Sélectionner une rue"
+
+msgid "label_service_groups"
+msgstr "Groupes plone"
+
+msgid "label_service_id"
+msgstr "Id"
+
+msgid "label_service_name"
+msgstr "Nom complet"
+
+msgid "label_service_taskconfigs"
+msgstr "Taches échéancier"
 
 #. Default: "History"
 #: ../skins/urban_templates/historizereferencebrowser.pt:178

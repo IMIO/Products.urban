@@ -238,6 +238,42 @@
      name="actionsColumn"
   />
 
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.table.interfaces.IInternalOpinionServicesTable"
+     factory=".column.InternalServiceId"
+     provides="z3c.table.interfaces.IColumn"
+     name="internal_service_id_column"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.table.interfaces.IInternalOpinionServicesTable"
+     factory=".column.InternalServiceName"
+     provides="z3c.table.interfaces.IColumn"
+     name="internal_service_name_column"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.table.interfaces.IInternalOpinionServicesTable"
+     factory=".column.InternalServiceGroups"
+     provides="z3c.table.interfaces.IColumn"
+     name="internal_service_groups_column"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.table.interfaces.IInternalOpinionServicesTable"
+     factory=".column.InternalServiceTaskConfigs"
+     provides="z3c.table.interfaces.IColumn"
+     name="internal_service_task_configs_column"
+  />
+
   <!-- table values adapter -->
 
   <!-- the next two adapters wrap any item used in an UrbanTable into an adapter
