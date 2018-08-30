@@ -9,7 +9,7 @@ class StateRolesMapping(BaseRoleMapping):
     mapping = {
         'deposit': {
             BaseRoleMapping.get_readers: ('Reader',),
-            BaseRoleMapping.get_editors: ('Reader', 'Editor', 'Contributor'),
+            BaseRoleMapping.get_editors: ('Reader', 'Editor', 'Contributor', 'Reviewer'),
             BaseRoleMapping.get_opinion_editors: ('Reader',),
         },
 
@@ -21,7 +21,7 @@ class StateRolesMapping(BaseRoleMapping):
 
         'incomplete': {
             BaseRoleMapping.get_readers: ('Reader',),
-            BaseRoleMapping.get_editors: ('Reader', 'Editor', 'Contributor'),
+            BaseRoleMapping.get_editors: ('Reader', 'Editor', 'Contributor', 'Reviewer'),
             BaseRoleMapping.get_opinion_editors: ('Reader',),
         },
 
@@ -33,19 +33,19 @@ class StateRolesMapping(BaseRoleMapping):
 
         'refused': {
             BaseRoleMapping.get_readers: ('Reader',),
-            BaseRoleMapping.get_editors: ('Reader', 'Contributor'),
+            BaseRoleMapping.get_editors: ('Reader', 'Reviewer'),
             BaseRoleMapping.get_opinion_editors: ('Reader',),
         },
 
         'retired': {
             BaseRoleMapping.get_readers: ('Reader',),
-            BaseRoleMapping.get_editors: ('Reader', 'Contributor'),
+            BaseRoleMapping.get_editors: ('Reader', 'Reviewer'),
             BaseRoleMapping.get_opinion_editors: ('Reader',),
         },
 
         'inacceptable': {
             BaseRoleMapping.get_readers: ('Reader',),
-            BaseRoleMapping.get_editors: ('Reader', 'Contributor'),
+            BaseRoleMapping.get_editors: ('Reader', 'Reviewer'),
         },
 
     }
