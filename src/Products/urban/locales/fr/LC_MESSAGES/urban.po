@@ -1699,7 +1699,7 @@ msgid "label_service_name"
 msgstr "Nom complet"
 
 msgid "label_service_taskconfigs"
-msgstr "Taches échéancier"
+msgstr "Tâches échéancier"
 
 #. Default: "History"
 #: ../skins/urban_templates/historizereferencebrowser.pt:178
