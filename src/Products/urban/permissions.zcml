@@ -8,6 +8,11 @@
     />
 
   <permission
+    id="Products.urban.validate"
+    title="Products.urban: Validate"
+    />
+
+  <permission
     id="urban.send_to_pm"
     title="Products.urban: SendToPM"
     />

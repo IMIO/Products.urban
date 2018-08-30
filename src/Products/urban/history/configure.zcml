@@ -4,14 +4,13 @@
     xmlns:browser="http://namespaces.zope.org/browser"
     i18n_domain="urban">
 
-
   <browser:view
-      for="Products.urban.interfaces.IEnvironmentBase"
-      name="contenthistory"
-      class=".view.HistoryView"
-      layer="imio.history.interfaces.IImioHistoryLayer"
-      permission="zope.Public"
-      />
+          for="Products.urban.interfaces.IEnvironmentBase"
+          name="specificcontenthistory"
+          class=".view.SpecificHistoryView"
+          layer="imio.history.interfaces.IImioHistoryLayer"
+          permission="zope.Public"
+          />
 
   <adapter
     for="Products.urban.interfaces.IEnvironmentBase"
@@ -23,7 +22,7 @@
   <adapter
     for="Products.urban.interfaces.IEnvironmentBase"
     factory=".environment.EnvironmentAdditionalLegalConditionsHistory"
-    name="additionalLegalCondition_history"
+    name="additionalLegalConditions_history"
     provides="imio.history.interfaces.IImioHistory"
     />
 

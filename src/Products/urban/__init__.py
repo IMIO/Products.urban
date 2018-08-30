@@ -137,6 +137,7 @@ def initialize(context):
     import content.licence.EnvClassThree
     import content.licence.EnvClassTwo
     import content.licence.EnvClassOne
+    import content.licence.EnvClassBordering
     import content.licence.EnvironmentBase
     import content.licence.EnvironmentLicence
     import content.licence.GenericLicence

@@ -32,9 +32,13 @@ def setValidParcel(parcel, event):
      Check if the manually added parcel exists in he cadastral DB
      and set its "isvalidparcel" attribute accordingly.
     """
-
     is_official = True
-    references = parcel.reference_as_dict()
+    parcel.setDivisionCode(parcel.getDivision())
+    parcel.bis = parcel.bis or '0'
+    parcel.puissance = parcel.puissance or '0'
+    parcel.reindexObject()
+
+    references = parcel.reference_as_dict(True)
     try:
         cadastre = services.cadastre.new_session()
         is_outdated = cadastre.is_outdated_parcel(**references)
@@ -63,29 +67,32 @@ def setEnvironmentLicencePreviousLicencesField(parcel, event):
 
     catalog = api.portal.get_tool('portal_catalog')
     parcels = licence.objectValues('PortionOut')
-    parcel_infos = set()
+    capakeys = set()
     cadastre = services.cadastre.new_session()
 
     for parcel in parcels:
-        parcel_infos.add(parcel.getIndexValue())
+        capakeys.add(parcel.get_capakey())
 
         if not parcel.getIsOfficialParcel() or not parcel.getDivision():
-            break
+            continue
 
         references = parcel.reference_as_dict()
-        parcel_historic = cadastre.query_parcel_historic(**references)
+        try:
+            parcel_historic = cadastre.query_parcel_historic(**references)
+        except services.cadastral.UnreferencedParcelError:
+            continue
 
         if not parcel_historic:
-            break
+            continue
 
         for ref in parcel_historic.get_all_reference_indexes():
-            parcel_infos.add(ref)
+            capakeys.add(ref)
 
     cadastre.close()
 
     related_brains = catalog(
         object_provides=IEnvironmentBase.__identifier__,
-        parcelInfosIndex=list(parcel_infos),
+        parcelInfosIndex=list(capakeys),
         sort_on='sortable_title'
     )
     relatedlicences_UIDs = [brain.UID for brain in related_brains]

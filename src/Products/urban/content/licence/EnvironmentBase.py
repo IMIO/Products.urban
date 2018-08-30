@@ -39,9 +39,12 @@ from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import Reference
 from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 
+from plone import api
+
 optional_fields = [
     'roadTechnicalAdvice', 'locationTechnicalAdvice', 'additionalLegalConditions',
-    'businessOldLocation', 'applicationReasons', 'validityDelay'
+    'businessOldLocation', 'applicationReasons', 'validityDelay',
+    'environmentTechnicalRemarks', 'rubricsDetails',
 ]
 
 slave_fields_natura2000 = (
@@ -261,6 +264,18 @@ schema = Schema((
         default_output_type='text/html',
         accessor="Description",
     ),
+    TextField(
+        name='environmentTechnicalRemarks',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            label=_('urban_label_environmentTechnicalRemarks',
+                    default='Environmenttechnicalremarks'),
+        ),
+        default_content_type='text/html',
+        default_method='getDefaultText',
+        schemata='urban_environment',
+        default_output_type='text/html',
+    ),
 
 ),
 )
@@ -330,7 +345,7 @@ class EnvironmentBase(BaseFolder, GenericLicence, CODT_UniqueLicenceInquiry, Bro
     def listProcedureChoices(self):
         vocabulary = (
             ('ukn', 'Non determiné'),
-            ('simple', 'Simple'),
+            ('simple', 'Classique'),
             ('temporary', 'Temporaire'),
         )
         return DisplayList(vocabulary)
@@ -340,6 +355,31 @@ class EnvironmentBase(BaseFolder, GenericLicence, CODT_UniqueLicenceInquiry, Bro
         To implements in subclasses
         """
 
+    security.declarePublic('getApplicants')
+    def getApplicants(self):
+        """
+        """
+        applicants = self.getCorporations()
+        applicants.extend(super(EnvironmentBase, self).getApplicants())
+        return applicants
+
+    security.declarePublic('getCorporations')
+    def getCorporations(self):
+        corporations = [corp for corp in self.objectValues('Corporation')
+                        if api.content.get_state(corp) == 'enabled']
+        return corporations
+
+    security.declarePublic('get_corporations_history')
+    def get_corporations_history(self):
+        return [corp for corp in self.objectValues('Corporation')
+                if api.content.get_state(corp) == 'disabled']
+
+    security.declarePublic('get_applicants_history')
+    def get_applicants_history(self):
+        applicants = self.get_corporations_history()
+        applicants.extend(super(EnvironmentBase, self).get_applicants_history())
+        return applicants
+
     def getLastDeposit(self):
         return self.getLastEvent(interfaces.IDepositEvent)
 
@@ -348,6 +388,9 @@ class EnvironmentBase(BaseFolder, GenericLicence, CODT_UniqueLicenceInquiry, Bro
 
     def getLastDisplayingTheDecision(self):
         return self.getLastEvent(interfaces.IDisplayingTheDecisionEvent)
+
+    def getLastLicenceDelivery(self):
+        return self.getLastEvent(interfaces.ILicenceDeliveryEvent)
 
     def getLastRecourse(self):
         return self.getLastEvent(interfaces.IRecourseEvent)
@@ -377,7 +420,7 @@ class EnvironmentBase(BaseFolder, GenericLicence, CODT_UniqueLicenceInquiry, Bro
 
     security.declarePrivate('_getConditions')
 
-    def _getConditions(self, restrict=['CI/CS', 'CI', 'CS']):
+    def _getConditions(self, restrict=['CI/CS', 'CI', 'CS', 'CS-Eau', 'Ville']):
         all_conditions = self.getMinimumLegalConditions()
         all_conditions.extend(self.getAdditionalLegalConditions())
         return [cond for cond in all_conditions if cond.getExtraValue() in restrict]
@@ -405,6 +448,18 @@ class EnvironmentBase(BaseFolder, GenericLicence, CODT_UniqueLicenceInquiry, Bro
          Return all the integral & sectorial conditions,
         """
         return self._getConditions(restrict=['CI/CS'])
+
+    def getWaterConditions(self):
+        """
+         Return all the water conditions,
+        """
+        return self._getConditions(restrict=['CS-Eau'])
+
+    def getTownshipConditions(self):
+        """
+         Return all the water conditions,
+        """
+        return self._getConditions(restrict=['Ville'])
 
     security.declarePublic('getLicenceSEnforceableDate')
 

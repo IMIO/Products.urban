@@ -17,13 +17,29 @@ from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 import interfaces
+from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 from Products.urban.UrbanEventType import UrbanEventType
 from Products.urban.UrbanVocabularyTerm import UrbanVocabularyTerm
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.urban.config import *
+from Products.urban import UrbanMessage as _
+
+from plone import api
+
+from zope.schema.vocabulary import SimpleTerm
+from zope.schema.vocabulary import SimpleVocabulary
 
 ##code-section module-header #fill in your manual code here
+
+slave_field_internal_service = (
+    # applicant is either represented by a society or by another contact but not both at the same time
+    {
+        'name': 'internal_service',
+        'action': 'show',
+        'hide_values': (True, ),
+    },
+)
 ##/code-section module-header
 
 schema = Schema((
@@ -32,58 +48,61 @@ schema = Schema((
     StringField(
         name='recipientSName',
         widget=StringField._properties['widget'](
-            label='Recipientsname',
-            label_msgid='urban_label_recipientSName',
-            i18n_domain='urban',
+            label=_('urban_label_recipientSName', default='Recipientsname'),
         ),
     ),
     StringField(
         name='function_department',
         widget=StringField._properties['widget'](
-            label='Function_department',
-            label_msgid='urban_label_function_department',
-            i18n_domain='urban',
+            label=_('urban_label_function_department', default='Function_department'),
         ),
     ),
     StringField(
         name='organization',
         widget=StringField._properties['widget'](
-            label='Organization',
-            label_msgid='urban_label_organization',
-            i18n_domain='urban',
+            label=_('urban_label_organization', default='Organization'),
         ),
     ),
     StringField(
         name='dispatchSInformation',
         widget=StringField._properties['widget'](
-            label='Dispatchsinformation',
-            label_msgid='urban_label_dispatchSInformation',
-            i18n_domain='urban',
+            label=_('urban_label_dispatchSInformation', default='Dispatchsinformation'),
         ),
     ),
     StringField(
         name='typeAndStreetName_number_box',
         widget=StringField._properties['widget'](
-            label='Typeandstreetname_number_box',
-            label_msgid='urban_label_typeAndStreetName_number_box',
-            i18n_domain='urban',
+            label=_('urban_label_typeAndStreetName_number_box', default='Typeandstreetname_number_box'),
         ),
     ),
     StringField(
         name='postcode_locality',
         widget=StringField._properties['widget'](
-            label='Postcode_locality',
-            label_msgid='urban_label_postcode_locality',
-            i18n_domain='urban',
+            label=_('urban_label_postcode_locality', default='Postcode_locality'),
         ),
     ),
     StringField(
         name='country',
         widget=StringField._properties['widget'](
-            label='Country',
-            label_msgid='urban_label_country',
-            i18n_domain='urban',
+            label=_('urban_label_country', default='Country'),
         ),
+    ),
+    BooleanField(
+        name='is_internal_service',
+        default=False,
+        widget=MasterBooleanWidget(
+            slave_fields=slave_field_internal_service,
+            label=_('urban_label_is_internal_service', default='Is_internal_service'),
+        ),
+    ),
+    StringField(
+        name='internal_service',
+        widget=SelectionWidget(
+            format='select',
+            label=_('urban_label_internal_service', default='Internal_service'),
+        ),
+        enforceVocabulary=True,
+        vocabulary='listInternalServices',
     ),
 ),
 )
@@ -115,6 +134,16 @@ class OpinionRequestEventType(OrderedBaseFolder, UrbanEventType, UrbanVocabulary
     # Methods
 
     # Manually created methods
+
+    security.declarePublic('listInternalServices')
+
+    def listInternalServices(self):
+        registry = api.portal.get_tool('portal_registry')
+        registry_field = registry['Products.urban.interfaces.IInternalOpinionServices.services']
+        voc_terms = [(key, value['full_name'][0]) for key, value in registry_field.iteritems()]
+        vocabulary = DisplayList(voc_terms)
+        return vocabulary
+
 
     security.declarePublic('getAddressCSV')
     def getAddressCSV(self):

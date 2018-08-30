@@ -103,6 +103,8 @@
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="EnvClassOne"
          meta_type="Factory-based Type Information with dynamic views"/>
+ <object name="EnvClassBordering"
+         meta_type="Factory-based Type Information with dynamic views"/>
  <object name="Article127"
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="CODT_Article127"
@@ -139,6 +141,8 @@
  <object name="CODT_UrbanCertificateOne"
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="EnvClassOne"
+         meta_type="Factory-based Type Information with dynamic views"/>
+ <object name="EnvClassBordering"
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="EnvClassTwo"
          meta_type="Factory-based Type Information with dynamic views"/>

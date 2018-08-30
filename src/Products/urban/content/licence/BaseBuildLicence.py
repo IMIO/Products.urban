@@ -538,8 +538,8 @@ class BaseBuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin)
           This vocabulary for field requirementsFromFD returns this list: decision, opinion
         """
         vocab = (
-            ('opinion', 'location_fdrequirement_opinion'),
-            ('decision', 'location_fdrequirement_decision'),
+            ('opinion', 'Avis simple'),
+            ('decision', 'Avis conforme'),
         )
         return DisplayList(vocab)
 
@@ -555,6 +555,9 @@ class BaseBuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin)
 
     def getLastMissingPart(self):
         return self.getLastEvent(interfaces.IMissingPartEvent)
+
+    def getAllMissingPart(self):
+        return self.getAllEvents(interfaces.IMissingPartEvent)
 
     def getLastMissingPartDeposit(self):
         return self.getLastEvent(interfaces.IMissingPartDepositEvent)

@@ -20,9 +20,10 @@
    <element value="UrbanEvent"/>
    <element value="UrbanEventInquiry"/>
    <element value="UrbanEventOpinionRequest"/>
+   <element value="UrbanEventAnnouncement"/>
    <element value="UrbanEventCollege"/>
    <element value="UrbanEventNotificationCollege"/>
-   <element value="Inquiry"/>
+   <element value="CODT_Inquiry"/>
    <element value="File"/>
    <element value="Task"/>
    <element value="ConfigTest"/>

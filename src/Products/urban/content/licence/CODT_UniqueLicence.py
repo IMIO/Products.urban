@@ -34,11 +34,18 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.urban.config import *
 from Products.urban import UrbanMessage as _
+from Products.CMFCore.Expression import Expression
+from Products.PageTemplates.Expressions import getEngine
+
+from plone import api
+from DateTime import DateTime
+from zope.i18n import translate
 
 ##code-section module-header #fill in your manual code here
 optional_fields = [
     'referenceSPE', 'referenceFT', 'environmentTechnicalRemarks',
     'claimsSynthesis', 'conclusions', 'commentsOnSPWOpinion',
+    'ftSolicitOpinionsTo'
 ]
 
 slave_fields_ = (
@@ -60,8 +67,8 @@ schema = Schema((
             label=_('urban_label_referenceSPE', default='Referencespe'),
         ),
         schemata='urban_description',
+        default_method='getDefaultSPEReference',
     ),
-
     StringField(
         name='referenceFT',
         widget=StringField._properties['widget'](
@@ -73,10 +80,11 @@ schema = Schema((
     StringField(
         name='authority',
         widget=SelectionWidget(
+            format='select',
             label=_('urban_label_authority', default='Authority'),
         ),
         schemata='urban_description',
-        vocabulary=UrbanVocabulary('authority', inUrbanConfig=True),
+        vocabulary=UrbanVocabulary('authority', inUrbanConfig=True, with_empty_value=True),
         default_method='getDefaultValue',
     ),
     StringField(
@@ -88,6 +96,17 @@ schema = Schema((
         enforceVocabulary=True,
         schemata='urban_description',
         vocabulary=UrbanVocabulary('foldertendencies', with_empty_value=True),
+        default_method='getDefaultValue',
+    ),
+    LinesField(
+        name='ftSolicitOpinionsTo',
+        widget=MultiSelectionWidget(
+            format='checkbox',
+            label=_('urban_label_ftSolicitOpinionsTo', default='Ftsolicitopinionsto'),
+        ),
+        schemata='urban_description',
+        multiValued=1,
+        vocabulary=UrbanVocabulary('ftSolicitOpinionsTo', inUrbanConfig=True),
         default_method='getDefaultValue',
     ),
     ReferenceField(
@@ -254,6 +273,25 @@ class CODT_UniqueLicence(BaseFolder, CODT_UniqueLicenceInquiry, CODT_BaseBuildLi
 
     # Methods
 
+    security.declarePublic('updateTitle')
+
+    def updateTitle(self):
+        """
+           Update the title to clearly identify the licence
+        """
+        if self.getApplicants():
+            applicantTitle = self.getApplicants()[0].Title()
+        else:
+            applicantTitle = translate('no_applicant_defined', 'urban', context=self.REQUEST).encode('utf8')
+        title = "%s - %s - %s - %s" % (
+            self.getReferenceSPE(),
+            self.getReference(),
+            self.getLicenceSubject(),
+            applicantTitle
+        )
+        self.setTitle(title)
+        self.reindexObject(idxs=('Title', 'applicantInfosIndex', 'sortable_title', ))
+
     def listProcedureChoices(self):
         vocab = (
             ('ukn', 'Non determiné'),
@@ -297,6 +335,34 @@ class CODT_UniqueLicence(BaseFolder, CODT_UniqueLicenceInquiry, CODT_BaseBuildLi
     def getLastImpactStudyEvent(self):
         return self.getLastEvent(interfaces.IImpactStudyEvent)
 
+    security.declarePublic('getDefaultSPEReference')
+
+    def getDefaultSPEReference(self):
+        """
+          Returns the reference for the new element
+        """
+        registry = api.portal.get_tool('portal_registry')
+
+        tal_expression = registry['Products.urban.interfaces.ICODT_UniqueLicence_spe_reference_config.tal_expression']
+        last_value = registry['Products.urban.interfaces.ICODT_UniqueLicence_spe_reference_config.numerotation']
+        last_value = last_value + 1
+
+        #evaluate the numerotationTALExpression and pass it obj, lastValue and self
+        data = {
+            'obj': self,
+            'tool': api.portal.get_tool('portal_urban'),
+            'numerotation': str(last_value),
+            'portal': api.portal.getSite(),
+            'date': DateTime(),
+        }
+        res = ''
+        try:
+            ctx = getEngine().getContext(data)
+            res = Expression(tal_expression)(ctx)
+        except Exception:
+            pass
+        return res
+
 
 registerType(CODT_UniqueLicence, PROJECTNAME)
 # end of class CODT_UniqueLicence
@@ -316,7 +382,8 @@ def finalizeSchema(schema):
     schema.moveField('rubricsDetails', after='rubrics')
     schema.moveField('minimumLegalConditions', after='rubricsDetails')
     schema.moveField('additionalLegalConditions', after='minimumLegalConditions')
-    schema.moveField('description', after='impactStudy')
+    schema.moveField('ftSolicitOpinionsTo', after='impactStudy')
+    schema.moveField('description', after='ftSolicitOpinionsTo')
     schema.moveField('locationTechnicalAdviceAfterInquiry', after='locationTechnicalAdvice')
 
 #finalizeSchema comes from BuildLicence to be sure to have the same changes reflected

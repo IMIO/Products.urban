@@ -81,10 +81,12 @@ class StateRolesMapping(LocalRoleAdapter):
         'in_progress': {
             get_editors: ('Editor',),
             get_readers: ('Reader',),
+            LocalRoleAdapter.get_opinion_editors: ('Reader',),
         },
 
         'closed': {
             get_editors: ('Editor',),
             get_readers: ('Reader',),
+            LocalRoleAdapter.get_opinion_editors: ('Reader',),
         },
     }

@@ -32,6 +32,12 @@ class UrbanRedirectsView(BrowserView):
         if can_view:
             path = 'urban'
 
+        if user.getId() is not None:
+            user_groups = api.group.get_groups(user=user)
+            group_ids = [g.id for g in user_groups]
+            if 'opinions_editors' in group_ids:
+                path = 'urban/opinions_schedule'
+
         redirects_adapter = queryAdapter(user, IUrbanRootRedirects)
         if redirects_adapter:
             path = redirects_adapter.get_redirection_path()

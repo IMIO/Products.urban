@@ -21,6 +21,7 @@
   <element value="PreliminaryNotice"/>
   <element value="PatrimonyCertificate"/>
   <element value="EnvClassOne"/>
+  <element value="EnvClassBordering"/>
   <element value="EnvClassThree"/>
   <element value="EnvClassTwo"/>
   <element value="ParcelOutLicence"/>

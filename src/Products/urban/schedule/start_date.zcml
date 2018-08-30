@@ -35,6 +35,14 @@
     />
 
     <adapter
+        for="Products.urban.interfaces.IEnvironmentLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IStartDate"
+        factory=".start_date.AskComplementsDate"
+        name="urban.schedule.start_date.complements_deposit_date"
+    />
+
+    <adapter
         for="Products.urban.interfaces.IGenericLicence
              imio.schedule.content.task.IAutomatedTask"
         provides="imio.schedule.interfaces.IStartDate"
