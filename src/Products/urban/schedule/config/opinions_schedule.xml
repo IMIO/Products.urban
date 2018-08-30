@@ -12,7 +12,7 @@
   </criterion>
   <criterion name="c1">
    <property name="widget">collection-link</property>
-   <property name="title">Échéancier Survey</property>
+   <property name="title">Échéancier Avis Internes</property>
    <property name="position">top</property>
    <property name="section">default</property>
    <property name="hidden">1</property>
