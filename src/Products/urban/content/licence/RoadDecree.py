@@ -149,25 +149,25 @@ class RoadDecree(CODT_BuildLicence):
 
 def getDecisionalDelays(self, *values):
     print "-------"
-    # selection = [v['val'] for v in values if v['selected']]
-    # unknown = 'ukn' in selection
-    # opinions = 'IsAlignment_plan' in selection
-    # inquiry = 'inquiry' in selection
-    # FD = 'FD' in selection
-    # print "fooo"
-    #
-    # if unknown:
-    #     return ''
-    # elif (opinions or inquiry) and FD:
-    #     return '115j'
-    # elif opinions and inquiry and not FD:
-    #     return '70j'
-    # elif opinions and not (inquiry or FD):
-    #     return '70j'
-    # elif inquiry and not (opinions or FD):
-    #     return '70j'
-    # elif FD and not (opinions or inquiry):
-    #     return '75j'
+    selection = [v['val'] for v in values if v['selected']]
+    unknown = 'ukn' in selection
+    opinions = 'IsAlignment_plan' in selection
+    inquiry = 'inquiry' in selection
+    FD = 'FD' in selection
+    print "fooo"
+
+    if unknown:
+        return ''
+    elif (opinions or inquiry) and FD:
+        return '115j'
+    elif opinions and inquiry and not FD:
+        return '70j'
+    elif opinions and not (inquiry or FD):
+        return '70j'
+    elif inquiry and not (opinions or FD):
+        return '70j'
+    elif FD and not (opinions or inquiry):
+        return '75j'
 
 
 registerType(RoadDecree, PROJECTNAME)
