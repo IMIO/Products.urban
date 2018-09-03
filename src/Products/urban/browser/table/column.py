@@ -473,7 +473,7 @@ class InternalServiceName(UrbanColumn):
     weight = 20
 
     def renderCell(self, record):
-        return record['full_name'][0]
+        return record['full_name']
 
 
 class InternalServiceGroups(UrbanColumn):
@@ -484,7 +484,7 @@ class InternalServiceGroups(UrbanColumn):
     def renderCell(self, record):
         portal = api.portal.get()
 
-        group_ids = [record['validator_group_id'][0], record['editor_group_id'][0]]
+        group_ids = [record['validator_group_id'], record['editor_group_id']]
         groups = dict([(id_, api.group.get(id_)) for id_ in group_ids])
         cell = ''
 
@@ -514,7 +514,7 @@ class InternalServiceTaskConfigs(UrbanColumn):
         portal_urban = api.portal.get_tool('portal_urban')
         schedule_folder = portal_urban.opinions_schedule
 
-        task_ids = record['task_ids']
+        task_ids = [record['task_answer_id'], record['task_validate_id']]
         task_configs = dict([(id_, getattr(schedule_folder, id_, None)) for id_ in task_ids])
         cell = ''
 

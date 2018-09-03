@@ -637,6 +637,6 @@ class IInternalOpinionServices(Interface):
         key_type=schema.ASCIILine(),
         value_type=schema.Dict(
             key_type=schema.ASCIILine(),
-            value_type=schema.List(value_type=schema.ASCIILine())
+            value_type=schema.ASCIILine()
         )
     )

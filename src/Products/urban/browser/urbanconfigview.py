@@ -105,8 +105,8 @@ class AddInternalServiceForm(form.Form):
         service_name = data['service_name']
         editor_group_id, validator_group_id = self.create_groups(service_id, service_name)
         with api.env.adopt_roles(['Manager']):
-            task_config_ids = self.create_task_configs(service_id, service_name, editor_group_id, validator_group_id)
-        self.set_registry_mapping(service_id, service_name, editor_group_id, validator_group_id, task_config_ids)
+            task_config_answer, task_config_validate = self.create_task_configs(service_id, service_name, editor_group_id, validator_group_id)
+        self.set_registry_mapping(service_id, service_name, editor_group_id, validator_group_id, task_config_answer, task_config_validate)
 
     @button.buttonAndHandler(u'Disable')
     def handleDisable(self, action):
@@ -143,8 +143,9 @@ class AddInternalServiceForm(form.Form):
             schedule_folder = portal_urban.opinions_schedule
 
             with api.env.adopt_roles(['Manager']):
-                task_configs = [getattr(schedule_folder, id_) for id_ in values['task_ids']]
-                api.content.delete(objects=task_configs)
+                task_config_answer = getattr(schedule_folder, values['task_config_answer'])
+                task_config_validate = getattr(schedule_folder, values['task_config_validate'])
+                api.content.delete(objects=[task_config_answer, task_config_validate])
 
             api.group.delete(groupname=values['editor_group_id'][0])
             api.group.delete(groupname=values['validator_group_id'][0])
@@ -213,9 +214,9 @@ class AddInternalServiceForm(form.Form):
             }
         ]
         _create_task_configs(schedule_folder, task_configs)
-        return [ask_opinion_task_id, give_opinion_task_id]
+        return ask_opinion_task_id, give_opinion_task_id
 
-    def set_registry_mapping(self, service_id, service_name, editor_group, validator_group, task_config_ids):
+    def set_registry_mapping(self, service_id, service_name, editor_group, validator_group, task_answer_id, task_validate_id):
         """
         """
         registry = api.portal.get_tool('portal_registry')
@@ -224,9 +225,11 @@ class AddInternalServiceForm(form.Form):
             registry['Products.urban.interfaces.IInternalOpinionServices.services'] = {}
 
         services = registry['Products.urban.interfaces.IInternalOpinionServices.services']
-        services[service_id] = {
-            'validator_group_id': [validator_group],
-            'editor_group_id': [editor_group],
-            'full_name': [service_name],
-            'task_ids': task_config_ids,
+        services[service_id.encode('utf-8')] = {
+            'validator_group_id': validator_group,
+            'editor_group_id': editor_group,
+            'full_name': service_name.encode('utf-8'),
+            'task_answer_id': task_answer_id,
+            'task_validate_id': task_validate_id,
         }
+        registry['Products.urban.interfaces.IInternalOpinionServices.services'] = services.copy()
