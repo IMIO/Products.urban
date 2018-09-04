@@ -17,8 +17,11 @@ from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 from Products.urban import interfaces
-from Products.urban.content.licence.CODT_BaseBuildLicence import CODT_BaseBuildLicence
-from Products.urban.content.licence.CODT_BuildLicence import finalizeSchema
+from Products.urban import UrbanMessage as _
+from Products.urban.content.licence.CODT_UniqueLicence import CODT_UniqueLicence
+from Products.urban.content.licence.CODT_UniqueLicence import finalizeSchema as firstBaseFinalizeSchema
+from Products.urban.utils import setSchemataForCODT_UniqueLicenceInquiry
+from Products.urban.widget.historizereferencewidget import HistorizeReferenceBrowserWidget
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.urban.config import *
@@ -28,6 +31,16 @@ from Products.urban.config import *
 
 schema = Schema((
 
+    LinesField(
+        name='regional_authority',
+        widget=MultiSelectionWidget(
+            format='checkbox',
+            label=_('urban_label_regional_authority', default='Regional_authority'),
+        ),
+        schemata='urban_description',
+        vocabulary='listRegionalAuthorities',
+        default=['dgo6'],
+    ),
 
 ),
 )
@@ -36,14 +49,15 @@ schema = Schema((
 ##/code-section after-local-schema
 
 CODT_IntegratedLicence_schema = BaseFolderSchema.copy() + \
-    getattr(CODT_BaseBuildLicence, 'schema', Schema(())).copy() + \
+    getattr(CODT_UniqueLicence, 'schema', Schema(())).copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
+setSchemataForCODT_UniqueLicenceInquiry(CODT_IntegratedLicence_schema)
 ##/code-section after-schema
 
 
-class CODT_IntegratedLicence(BaseFolder, CODT_BaseBuildLicence, BrowserDefaultMixin):
+class CODT_IntegratedLicence(BaseFolder, CODT_UniqueLicence, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()
@@ -87,6 +101,17 @@ class CODT_IntegratedLicence(BaseFolder, CODT_BaseBuildLicence, BrowserDefaultMi
 
         return '{}j'.format(str(delay))
 
+    security.declarePublic('listInternalServices')
+
+    def listRegionalAuthorities(self):
+        voc_terms = (
+            ('dgo3', 'DGO3/DPE : Fonctionnaire technique'),
+            ('dgo4', 'DGO4 : Fonctionnaire délégué'),
+            ('dgo6', 'DGO6 : Fonctionnaire des implantations commerciales'),
+        )
+        vocabulary = DisplayList(voc_terms)
+        return vocabulary
+
     def getLastWalloonRegionDecisionEvent(self):
         return self.getLastEvent(interfaces.IWalloonRegionDecisionEvent)
 
@@ -97,5 +122,5 @@ registerType(CODT_IntegratedLicence, PROJECTNAME)
 ##code-section module-footer #fill in your manual code here
 
 #finalizeSchema comes from BuildLicence to be sure to have the same changes reflected
-finalizeSchema(CODT_IntegratedLicence_schema)
+firstBaseFinalizeSchema(CODT_IntegratedLicence_schema)
 ##/code-section module-footer

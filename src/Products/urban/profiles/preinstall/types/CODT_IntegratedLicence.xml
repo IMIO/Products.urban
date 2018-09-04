@@ -10,8 +10,7 @@
  <property name="content_meta_type">CODT_IntegratedLicence</property>
  <property name="product">urban</property>
  <property name="factory">addCODT_IntegratedLicence</property>
- <!-- not a mistake, article127 and buildlicence are the same -->
- <property name="immediate_view">codt_buildlicenceview</property>
+ <property name="immediate_view">codt_integratedlicenceview</property>
  <property name="global_allow">True</property>
  <property name="filter_content_types">True</property>
  <property name="allowed_content_types">
@@ -29,19 +28,19 @@
    <element value="ConfigTest"/>
  </property>
  <property name="allow_discussion">False</property>
- <property name="default_view">codt_buildlicenceview</property>
+ <property name="default_view">codt_integratedlicenceview</property>
  <property name="view_methods">
   <element value="folder_summary_view"/>
   <element value="folder_tabular_view"/>
   <element value="atct_album_view"/>
   <element value="folder_listing"/>
   <!-- not a mistake, article127 and buildlicence are the same -->
-  <element value="codt_buildlicenceview"/>
+  <element value="codt_integratedlicenceview"/>
  </property>
  <property name="default_view_fallback">False</property>
  <alias from="(Default)" to="(dynamic view)"/>
  <!-- not a mistake, article127 and buildlicence are the same -->
- <alias from="view" to="codt_buildlicenceview"/>
+ <alias from="view" to="codt_integratedlicenceview"/>
  <alias from="edit" to="base_edit"/>
  <alias from="sharing" to="@@sharing"/>
  <action title="View"
