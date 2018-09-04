@@ -182,16 +182,6 @@ def postInstall(context):
     logger.info("adaptDefaultPortal : starting...")
     adaptDefaultPortal(context)
     logger.info("adaptDefaultPortal : Done")
-    logger.info("refresh catalog : starting...")
-    recursive_reindex(site.portal_urban)
-    logger.info("refresh catalog : Done")
-
-
-def recursive_reindex(context):
-    context.reindexObject()
-    if hasattr(context, 'objectValues'):
-        for obj in context.objectValues():
-            recursive_reindex(obj)
 
 
 ##code-section FOOT
@@ -217,9 +207,6 @@ def extraPostInstall(context):
     logger.info("addEventTypesAndTemplates : starting...")
     addEventTypesAndTemplates(context)
     logger.info("addEventTypesAndTemplates : Done")
-    logger.info("refresh catalog : starting...")
-    recursive_reindex(site.portal_urban)
-    logger.info("refresh catalog : Done")
 
 
 def setFolderAllowedTypes(folder, portal_types):
