@@ -51,3 +51,24 @@ class LicenceEditView(BrowserView):
 
     def getMacroViewName(self):
         return 'licenceedit'
+
+
+class CODT_IntegratedLicenceEditView(LicenceEditView):
+    """
+    """
+
+    def getTabs(self):
+        cfg = self.getLicenceConfig()
+        available_tabs = self.context.schema.getSchemataNames()
+        tabs = []
+        for active_tab in cfg.getActiveTabs():
+            tab = {
+                'id': 'urban_{}'.format(active_tab['value']),
+                'display_name': active_tab['display_name']
+            }
+            if tab['id'] in available_tabs:
+                # only display environment tab if unique or environment licence
+                if tab['id'] == 'urban_environment' and 'dgo3' not in self.context.getRegional_authority():
+                    continue
+                tabs.append(tab)
+        return tabs
