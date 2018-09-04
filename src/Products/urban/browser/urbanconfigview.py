@@ -143,13 +143,13 @@ class AddInternalServiceForm(form.Form):
             schedule_folder = portal_urban.opinions_schedule
 
             with api.env.adopt_roles(['Manager']):
-                task_config_answer = getattr(schedule_folder, values['task_config_answer'])
-                task_config_validate = getattr(schedule_folder, values['task_config_validate'])
+                task_config_answer = getattr(schedule_folder, values['task_answer_id'])
+                task_config_validate = getattr(schedule_folder, values['task_validate_id'])
                 api.content.delete(objects=[task_config_answer, task_config_validate])
 
-            api.group.delete(groupname=values['editor_group_id'][0])
-            api.group.delete(groupname=values['validator_group_id'][0])
-            registry['Products.urban.interfaces.IInternalOpinionServices.services'] = registry_field
+            api.group.delete(groupname=values['editor_group_id'])
+            api.group.delete(groupname=values['validator_group_id'])
+            registry['Products.urban.interfaces.IInternalOpinionServices.services'] = registry_field.copy()
 
     def create_groups(self, service_id, service_name):
         """
@@ -188,7 +188,7 @@ class AddInternalServiceForm(form.Form):
                 'creation_conditions': (
                     CreationConditionObject('urban.schedule.condition.is_internal_opinion'),
                 ),
-                'start_date': 'liege.urban.schedule.asking_date',
+                'start_date': 'urban.schedule.start_date.asking_date',
                 'calculation_delay': (
                     'schedule.calculation_default_delay',
                 ),
@@ -206,7 +206,7 @@ class AddInternalServiceForm(form.Form):
                 'creation_conditions': (
                     CreationConditionObject('urban.schedule.condition.is_internal_opinion'),
                 ),
-                'start_date': 'liege.urban.schedule.asking_date',
+                'start_date': 'urban.schedule.start_date.asking_date',
                 'calculation_delay': (
                     'schedule.calculation_default_delay',
                 ),
