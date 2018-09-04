@@ -140,7 +140,7 @@ class OpinionRequestEventType(OrderedBaseFolder, UrbanEventType, UrbanVocabulary
     def listInternalServices(self):
         registry = api.portal.get_tool('portal_registry')
         registry_field = registry['Products.urban.interfaces.IInternalOpinionServices.services']
-        voc_terms = [(key, value['full_name'][0]) for key, value in registry_field.iteritems()]
+        voc_terms = [(key, value['full_name']) for key, value in registry_field.iteritems()]
         vocabulary = DisplayList(voc_terms)
         return vocabulary
 
