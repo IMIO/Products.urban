@@ -104,6 +104,21 @@ def migrate_sct(context):
     logger.info("migration step done!")
 
 
+def migrate_opinionrequest_event_portaltype(context):
+    """ """
+    logger = logging.getLogger('urban: migrate opinion request portal type')
+    logger.info("starting migration step")
+
+    catalog = api.portal.get_tool('portal_catalog')
+    opinion_request_cfgs = [b.getObject() for b in catalog(portal_type='OpinionRequestEventType')]
+    for cfg in opinion_request_cfgs:
+        if cfg.getEventPortalType() != 'UrbanEventOpinionRequest':
+            cfg.setEventPortalType('UrbanEventOpinionRequest')
+            print "migrated {}".format(cfg)
+
+    logger.info("migration step done!")
+
+
 def migrate(context):
     logger = logging.getLogger('urban: migrate to 2.3')
     logger.info("starting migration steps")
@@ -116,4 +131,5 @@ def migrate(context):
     move_noteworthytrees_vocabulary(context)
     migrate_eventtypes_values()
     migrate_sct(context)
+    migrate_opinionrequest_event_portaltype(context)
     logger.info("migration done!")
