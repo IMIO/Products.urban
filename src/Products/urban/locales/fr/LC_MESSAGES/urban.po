@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2018-08-30 09:16+0000\n"
+"POT-Creation-Date: 2018-09-04 07:19+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -4154,6 +4154,11 @@ msgstr "Regex d'identification de la référence"
 #: Street.py
 msgid "urban_label_regionalRoad"
 msgstr "Code de route régionale"
+
+#. Default: "Regional_authority"
+#: ../content/licence/CODT_IntegratedLicence.py:38
+msgid "urban_label_regional_authority"
+msgstr ""
 
 #. Default: "Regional_guide"
 #: ../content/licence/CODT_BaseBuildLicence.py:150
