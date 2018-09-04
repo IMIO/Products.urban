@@ -26,9 +26,9 @@ class StateRolesMapping(LocalRoleAdapter):
             record = registry_field.get(opinion_config.getInternal_service(), None)
             if record:
                 if groupe_type is 'editors':
-                    return record['editor_group_id']
+                    return (record['editor_group_id'],)
                 elif groupe_type is 'validators':
-                    return record['validator_group_id']
+                    return (record['validator_group_id'],)
 
         return ('urban_editors', 'environment_editors')
 
