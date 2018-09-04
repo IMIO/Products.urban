@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2018-08-30 09:16+0000\n"
+"POT-Creation-Date: 2018-09-04 07:19+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -4117,6 +4117,11 @@ msgstr ""
 #. Default: "Regionalroad"
 #: Street.py
 msgid "urban_label_regionalRoad"
+msgstr ""
+
+#. Default: "Regional_authority"
+#: ../content/licence/CODT_IntegratedLicence.py:38
+msgid "urban_label_regional_authority"
 msgstr ""
 
 #. Default: "Regional_guide"
