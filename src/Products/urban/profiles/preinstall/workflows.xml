@@ -21,6 +21,9 @@
   <type type_id="CODT_BuildLicence">
      <bound-workflow workflow_id="codt_buildlicence_workflow" />
   </type>
+  <type type_id="CODT_CommercialLicence">
+     <bound-workflow workflow_id="codt_buildlicence_workflow" />
+  </type>
   <type type_id="CODT_IntegratedLicence">
      <bound-workflow workflow_id="codt_buildlicence_workflow" />
   </type>

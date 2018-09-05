@@ -128,6 +128,7 @@ def initialize(context):
     import content.licence.BuildLicence
     import content.licence.CODT_Article127
     import content.licence.CODT_BuildLicence
+    import content.licence.CODT_CommercialLicence
     import content.licence.CODT_IntegratedLicence
     import content.licence.CODT_ParcelOutLicence
     import content.licence.CODT_UniqueLicence

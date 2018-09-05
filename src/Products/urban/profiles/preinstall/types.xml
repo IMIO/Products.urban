@@ -117,6 +117,8 @@
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="CODT_IntegratedLicence"
          meta_type="Factory-based Type Information with dynamic views"/>
+ <object name="CODT_CommercialLicence"
+         meta_type="Factory-based Type Information with dynamic views"/>
  <!-- ##code-section TYPES -->
  <object name="Applicant"
          meta_type="Factory-based Type Information with dynamic views"/>

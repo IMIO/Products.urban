@@ -75,33 +75,32 @@ class CODT_IntegratedLicence(BaseFolder, CODT_UniqueLicence, BrowserDefaultMixin
             ('ukn', 'Non determiné'),
             ('internal_opinions', 'Sollicitation d\'avis internes'),
             ('external_opinions', 'Sollicitation d\'avis externes'),
-            ('light_inquiry', 'Annonce de projet'),
-            ('initiative_light_inquiry', 'Annonce de projet d\'initiative'),
             ('inquiry', 'Enquête publique'),
-            ('initiative_inquiry', 'Enquête publique d\'initiative'),
+            ('class_1', 'Classe 1'),
+            ('big', 'Superficie >= 2500m²'),
         )
         return DisplayList(vocab)
 
     def getProcedureDelays(self, *values):
         selection = [v['val'] for v in values if v['selected']]
         unknown = 'ukn' in selection
-        opinions = 'external_opinions' in selection
-        inquiry = 'inquiry' in selection or 'light_inquiry' in selection
+        class_1 = 'class_1' in selection
+        big = 'big' in selection
         delay = 30
 
         if unknown:
             return ''
-        elif opinions and inquiry:
-            delay = 70
-        elif opinions and not inquiry:
-            delay = 70
+        elif big or class_1:
+            delay = 140
+        else:
+            delay = 90
 
         if self.prorogation:
             delay += 30
 
         return '{}j'.format(str(delay))
 
-    security.declarePublic('listInternalServices')
+    security.declarePublic('listRegionalAuthorities')
 
     def listRegionalAuthorities(self):
         voc_terms = (
@@ -112,8 +111,13 @@ class CODT_IntegratedLicence(BaseFolder, CODT_UniqueLicence, BrowserDefaultMixin
         vocabulary = DisplayList(voc_terms)
         return vocabulary
 
-    def getLastWalloonRegionDecisionEvent(self):
-        return self.getLastEvent(interfaces.IWalloonRegionDecisionEvent)
+    security.declarePublic('getDefaultSPEReference')
+
+    def getDefaultSPEReference(self):
+        """
+          Returns the reference for the new element
+        """
+        return ''
 
 
 registerType(CODT_IntegratedLicence, PROJECTNAME)
@@ -121,6 +125,13 @@ registerType(CODT_IntegratedLicence, PROJECTNAME)
 
 ##code-section module-footer #fill in your manual code here
 
+def finalizeSchema(schema):
+    """
+       Finalizes the type schema to alter some fields
+    """
+    schema.moveField('regional_authority', after='authority')
+
 #finalizeSchema comes from BuildLicence to be sure to have the same changes reflected
 firstBaseFinalizeSchema(CODT_IntegratedLicence_schema)
+finalizeSchema(CODT_IntegratedLicence_schema)
 ##/code-section module-footer
