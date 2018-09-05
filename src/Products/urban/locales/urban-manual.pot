@@ -62,6 +62,9 @@ msgstr ""
 msgid "CODT_BuildLicence"
 msgstr ""
 
+msgid "CODT_CommercialLicence"
+msgstr ""
+
 msgid "CODT_IntegratedLicence"
 msgstr ""
 
@@ -381,6 +384,9 @@ msgid "codt_article127_urbanconfig_title"
 msgstr ""
 
 msgid "codt_buildlicence_urbanconfig_title"
+msgstr ""
+
+msgid "codt_commerciallicence_urbanconfig_title"
 msgstr ""
 
 msgid "codt_integratedlicence_urbanconfig_title"

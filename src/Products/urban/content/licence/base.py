@@ -254,6 +254,7 @@ class UrbanBase(object):
             'Article127': 'PU',
             'UniqueLicence': 'U',
             'IntegratedLicence': 'PI',
+            'CODT_IntegratedLicence': 'PI',
             'ParcelOutLicence': 'PL',
             'UrbanCertificateOne': 'CU1',
             'UrbanCertificateBase': 'CU1',

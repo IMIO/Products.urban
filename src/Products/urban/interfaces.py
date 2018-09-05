@@ -94,7 +94,12 @@ class IBuildLicence(IBaseBuildLicence):
 
 
 class ICODT_BuildLicence(ICODT_BaseBuildLicence):
-    """Marker interface for CODT_ BuildLicence
+    """Marker interface for CODT_BuildLicence
+    """
+
+
+class ICODT_CommercialLicence(ICODT_BaseBuildLicence):
+    """Marker interface for CODT_CommercialLicence
     """
 
 

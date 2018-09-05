@@ -62,6 +62,7 @@ ADD_CONTENT_PERMISSIONS = {
     'BuildLicence': 'urban: Add BuildLicence',
     'CODT_Article127': 'urban: Add CODT_Article127',
     'CODT_BuildLicence': 'urban: Add CODT_BuildLicence',
+    'CODT_CommercialLicence': 'urban: Add CODT_CommercialLicence',
     'CODT_IntegratedLicence': 'urban: Add CODT_IntegratedLicence',
     'CODT_ParcelOutLicence': 'urban: Add CODT_ParcelOutLicence',
     'CODT_UniqueLicence': 'urban: Add CODT_UniqueLicence',
@@ -124,6 +125,7 @@ setDefaultRoles('urban: Add City', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add Claimant', ("Manager", "Contributor", "ClaimantEditor"))
 setDefaultRoles('urban: Add CODT_Article127', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add CODT_BuildLicence', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add CODT_CommercialLicence', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add CODT_IntegratedLicence', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add CODT_NotaryLetter', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add CODT_ParcelOutLicence', ("Manager", "Contributor"))
@@ -172,7 +174,7 @@ setDefaultRoles('urban: Add UrbanCertificateBase', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add UrbanCertificateTwo', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add UrbanDelay', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add UrbanEventOpinionRequest', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add UrbanConfigurationValue',  ('Manager', ))
+setDefaultRoles('urban: Add UrbanConfigurationValue', ('Manager', ))
 setDefaultRoles('urban: Add UrbanVocabularyTerm', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add ExplosivesPossession', ("Manager", "Contributor"))
 
@@ -186,6 +188,7 @@ ADDITIONAL_LAYERS_FOLDER = "additional_layers"
 URBAN_TYPES = [
     'BuildLicence', 'CODT_BuildLicence',
     'Article127', 'CODT_Article127',
+    'CODT_CommercialLicence',
     'IntegratedLicence', 'CODT_IntegratedLicence',
     'UniqueLicence', 'CODT_UniqueLicence',
     'Declaration',
@@ -207,8 +210,8 @@ URBAN_CWATUPE_TYPES = [
 ]
 
 URBAN_CODT_TYPES = [
-    'CODT_BuildLicence', 'CODT_Article127', 'CODT_IntegratedLicence', 'CODT_ParcelOutLicence',
-    'CODT_UniqueLicence', 'CODT_UrbanCertificateTwo', 'CODT_UrbanCertificateOne',
+    'CODT_BuildLicence', 'CODT_Article127', 'CODT_CommercialLicence', 'CODT_IntegratedLicence',
+    'CODT_ParcelOutLicence', 'CODT_UniqueLicence', 'CODT_UrbanCertificateTwo', 'CODT_UrbanCertificateOne',
     'CODT_NotaryLetter', 'ProjectMeeting', 'MiscDemand', 'PreliminaryNotice',
     'PatrimonyCertificate', 'Division',
 ]
