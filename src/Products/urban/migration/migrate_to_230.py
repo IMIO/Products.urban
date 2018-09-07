@@ -125,6 +125,7 @@ def migrate(context):
     setup_tool = api.portal.get_tool('portal_setup')
     setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'typeinfo')
     setup_tool.runAllImportStepsFromProfile('profile-Products.urban:preinstall')
+    setup_tool.runAllImportStepsFromProfile('profile-urban.vocabulary:default')
     setup_tool.runImportStepFromProfile('profile-Products.urban:extra', 'urban-postInstall')
     update_urban_dashboard_collection(context)
     copy_sol_values_from_pca(context)
