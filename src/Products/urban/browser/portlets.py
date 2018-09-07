@@ -93,6 +93,8 @@ class ConfigRenderer(base.Renderer):
     def available(self):
         if api.user.is_anonymous():
             return False
+        if api.user.has_permission('Manage portal'):
+            return True
 
         site = api.portal.get()
         if self.context == site.urban:
