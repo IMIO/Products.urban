@@ -90,7 +90,7 @@ registerType(CODT_CommercialLicence, PROJECTNAME)
 # end of class CODT_CommercialLicence
 
 ##code-section module-footer #fill in your manual code here
-
-
 finalizeSchema(CODT_CommercialLicence_schema)
+del CODT_CommercialLicence_schema['usage']
+CODT_CommercialLicence_schema['referenceDGATLP'].widget.label=_('urban_label_referenceDGO6')
 ##/code-section module-footer

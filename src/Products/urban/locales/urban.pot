@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2018-09-05 09:44+0000\n"
+"POT-Creation-Date: 2018-09-06 06:58+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -4098,6 +4098,10 @@ msgstr ""
 
 #: ../content/licence/EnvironmentBase.py:303
 msgid "urban_label_referenceDGO3"
+msgstr ""
+
+#: ../content/licence/CODT_CommercialLicence.py:95
+msgid "urban_label_referenceDGO6"
 msgstr ""
 
 #. Default: "Referenceft"

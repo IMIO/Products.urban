@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2018-09-05 09:44+0000\n"
+"POT-Creation-Date: 2018-09-06 06:58+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -4135,6 +4135,10 @@ msgstr "Référence DGO4"
 #: ../content/licence/EnvironmentBase.py:303
 msgid "urban_label_referenceDGO3"
 msgstr "Référence DGO3"
+
+#: ../content/licence/CODT_CommercialLicence.py:95
+msgid "urban_label_referenceDGO6"
+msgstr "Référence DGO6"
 
 #. Default: "Referenceft"
 #: ../content/licence/CODT_UniqueLicence.py:76
