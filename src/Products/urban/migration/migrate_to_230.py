@@ -124,6 +124,7 @@ def migrate(context):
     logger.info("starting migration steps")
     setup_tool = api.portal.get_tool('portal_setup')
     setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'typeinfo')
+    setup_tool.runImportStepFromProfile('profile-Products.urban:default', 'plone.app.registry')
     setup_tool.runAllImportStepsFromProfile('profile-Products.urban:preinstall')
     setup_tool.runAllImportStepsFromProfile('profile-urban.vocabulary:default')
     setup_tool.runImportStepFromProfile('profile-Products.urban:extra', 'urban-postInstall')
