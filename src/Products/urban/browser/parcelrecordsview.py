@@ -49,11 +49,11 @@ class ParcelRecordsView(BrowserView):
         context = aq_inner(self.context)
         catalog = api.portal.get_tool('portal_catalog')
         parcel = getattr(context, self.parcel_id)
-        parcel_infos = parcel.getIndexValue()
+        capakey = parcel.get_capakey()
 
         related_brains = catalog(
             object_provides=IGenericLicence.__identifier__,
-            parcelInfosIndex=parcel_infos,
+            parcelInfosIndex=capakey,
             sort_on='sortable_title'
         )
 
@@ -80,16 +80,16 @@ class ParcelHistoricRecordsView(ParcelRecordsView):
         context = aq_inner(self.context)
         catalog = api.portal.get_tool('portal_catalog')
         parcel = getattr(context, self.parcel_id)
-        parcel_infos = set()
+        capakeys = set()
 
-        parcel_infos.add(parcel.getIndexValue())
+        capakeys.add(parcel.get_capakey())
         parcel_historic = parcel.get_historic()
         for ref in parcel_historic.get_all_reference_indexes():
-            parcel_infos.add(ref)
+            capakeys.add(ref)
 
         related_brains = catalog(
             object_provides=IGenericLicence.__identifier__,
-            parcelInfosIndex=list(parcel_infos),
+            parcelInfosIndex=list(capakeys),
             sort_on='sortable_title'
         )
 

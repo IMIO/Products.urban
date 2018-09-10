@@ -6,6 +6,7 @@ from Products.urban.interfaces import IBaseAllBuildLicence
 from Products.urban.interfaces import ICODT_Article127
 from Products.urban.interfaces import ICODT_BaseBuildLicence
 from Products.urban.interfaces import ICODT_BuildLicence
+from Products.urban.interfaces import ICODT_CommercialLicence
 from Products.urban.interfaces import ICODT_IntegratedLicence
 from Products.urban.interfaces import ICODT_NotaryLetter
 from Products.urban.interfaces import ICODT_ParcelOutLicence
@@ -48,6 +49,7 @@ URBAN_TYPES_INTERFACES = {
     'CODT_Article127': ICODT_Article127,
     'CODT_BaseBuildLicence': ICODT_BaseBuildLicence,
     'CODT_BuildLicence': ICODT_BuildLicence,
+    'CODT_CommercialLicence': ICODT_CommercialLicence,
     'CODT_IntegratedLicence': ICODT_IntegratedLicence,
     'CODT_NotaryLetter': ICODT_NotaryLetter,
     'CODT_ParcelOutLicence': ICODT_ParcelOutLicence,
@@ -135,3 +137,10 @@ class UsersFromGroupsVocabularyFactory(object):
 
         vocabulary = SimpleVocabulary(base_terms + sorted(voc_terms, key=lambda term: term.title))
         return vocabulary
+
+
+class OpinionUsersVocabularyFactory(UsersFromGroupsVocabularyFactory):
+    """
+    Vocabulary factory listing all the users of the survey group.
+    """
+    group_ids = ['opinions_editors']

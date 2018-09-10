@@ -1,4 +1,4 @@
-## -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 
 from DateTime import DateTime
 
@@ -448,3 +448,88 @@ class StreetColumn(Column):
         street = '%s<br />%s' % (street, secondary_street)
 
         return street.decode('utf-8')
+
+
+class InternalServiceColumn(Column):
+    """ """
+
+    def renderHeadCell(self):
+        """Header cell content."""
+        return translate(self.header, 'urban', context=self.request)
+
+
+class InternalServiceId(UrbanColumn):
+    """ """
+    header = 'label_service_id'
+    weight = 10
+
+    def renderCell(self, record):
+        return record['id']
+
+
+class InternalServiceName(UrbanColumn):
+    """ """
+    header = 'label_service_name'
+    weight = 20
+
+    def renderCell(self, record):
+        return record['full_name']
+
+
+class InternalServiceGroups(UrbanColumn):
+    """ """
+    header = 'label_service_groups'
+    weight = 30
+
+    def renderCell(self, record):
+        portal = api.portal.get()
+
+        group_ids = [record['validator_group_id'], record['editor_group_id']]
+        groups = dict([(id_, api.group.get(id_)) for id_ in group_ids])
+        cell = ''
+
+        for group_id, group in groups.iteritems():
+            if group:
+                cell = '{cell}<div><a href="{url}/@@usergroup-groupmembership?groupname={group_id}">{name}</a></div>'.format(
+                    cell=cell,
+                    name=group.getProperty('title'),
+                    url=portal.absolute_url(),
+                    group_id=group_id,
+                )
+            else:
+                cell = '{cell}<div class="late-event-delay">{group_id}: GROUPE MANQUANT !</div>'.format(
+                    cell=cell,
+                    group_id=group_id,
+                )
+
+        return cell.decode('utf-8')
+
+
+class InternalServiceTaskConfigs(UrbanColumn):
+    """ """
+    header = 'label_service_taskconfigs'
+    weight = 40
+
+    def renderCell(self, record):
+        portal_urban = api.portal.get_tool('portal_urban')
+        schedule_folder = portal_urban.opinions_schedule
+
+        task_ids = [record['task_answer_id'], record['task_validate_id']]
+        task_configs = dict([(id_, getattr(schedule_folder, id_, None)) for id_ in task_ids])
+        cell = ''
+
+        for task_config_id, task_config in task_configs.iteritems():
+            if task_config:
+                cell = '{cell}<div><a href="{url}/">{name}</a>{active}</div>'.format(
+                    cell=cell,
+                    name=task_config.Title(),
+                    url=task_config.absolute_url(),
+                    active=not task_config.enabled and ':&nbsp;<span class="late-event-delay">DÉSACTIVÉ !</span>' or ''
+                )
+            else:
+                cell = '{cell}<div class="late-event-delay">{task_config_id}: TACHE MANQUANTE !</div>'.format(
+                    cell=cell,
+                    task_config_id=task_config_id,
+                )
+
+        return cell.decode('utf-8')

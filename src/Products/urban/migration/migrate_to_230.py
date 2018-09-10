@@ -1,5 +1,8 @@
 # encoding: utf-8
 
+from Products.urban.profiles.extra.config_default_values import default_values
+from Products.urban.setuphandlers import createVocabularyFolder
+from Products.urban.setuphandlers import createFolderDefaultValues
 from Products.urban.config import URBAN_TYPES
 
 from plone import api
@@ -21,7 +24,6 @@ def update_urban_dashboard_collection(context):
     query = [{'i': 'portal_type', 'o': 'plone.app.querystring.operation.selection.is', 'v': filter_type}]
     all_licences_collection.setQuery(query)
     logger.info("migration step done!")
-
 
 
 def copy_sol_values_from_pca(context):
@@ -62,7 +64,7 @@ def move_noteworthytrees_vocabulary(context):
                     api.content.move(getattr(licence_config.noteworthytrees, voc_id), noteworthytrees)
             try:
                 api.content.delete(licence_config.noteworthytrees)
-            except:
+            except Exception:
                 continue
 
     logger.info("migration step done!")
@@ -83,13 +85,53 @@ def migrate_eventtypes_values():
     logger.info("migration step done!")
 
 
+def migrate_sct(context):
+    """
+    """
+    logger = logging.getLogger('urban: migrate karst constraints')
+    logger.info("starting migration step")
+
+    container = api.portal.get_tool('portal_urban')
+    sct_vocabularies_config = default_values['global']['sct']
+    allowedtypes = sct_vocabularies_config[0]
+    sct_folder_config = createVocabularyFolder(container, 'sct', context, allowedtypes)
+    createFolderDefaultValues(
+        sct_folder_config,
+        default_values['global']['sct'][1:],
+        default_values['global']['sct'][0]
+    )
+
+    logger.info("migration step done!")
+
+
+def migrate_opinionrequest_event_portaltype(context):
+    """ """
+    logger = logging.getLogger('urban: migrate opinion request portal type')
+    logger.info("starting migration step")
+
+    catalog = api.portal.get_tool('portal_catalog')
+    opinion_request_cfgs = [b.getObject() for b in catalog(portal_type='OpinionRequestEventType')]
+    for cfg in opinion_request_cfgs:
+        if cfg.getEventPortalType() != 'UrbanEventOpinionRequest':
+            cfg.setEventPortalType('UrbanEventOpinionRequest')
+            print "migrated {}".format(cfg)
+
+    logger.info("migration step done!")
+
+
 def migrate(context):
     logger = logging.getLogger('urban: migrate to 2.3')
     logger.info("starting migration steps")
     setup_tool = api.portal.get_tool('portal_setup')
-    setup_tool.runImportStepFromProfile('profile-Products.urban:default', 'urban-postInstall')
+    setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'typeinfo')
+    setup_tool.runImportStepFromProfile('profile-Products.urban:default', 'plone.app.registry')
+    setup_tool.runAllImportStepsFromProfile('profile-Products.urban:preinstall')
+    setup_tool.runAllImportStepsFromProfile('profile-urban.vocabulary:default')
+    setup_tool.runImportStepFromProfile('profile-Products.urban:extra', 'urban-postInstall')
     update_urban_dashboard_collection(context)
     copy_sol_values_from_pca(context)
     move_noteworthytrees_vocabulary(context)
     migrate_eventtypes_values()
+    migrate_sct(context)
+    migrate_opinionrequest_event_portaltype(context)
     logger.info("migration done!")

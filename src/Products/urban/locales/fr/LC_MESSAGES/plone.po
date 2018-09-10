@@ -174,6 +174,12 @@ msgstr "Accepté"
 msgid "additionalLegalConditions_history"
 msgstr "Registre des modifications pour les conditions intégrales et sectorielles supplémentaires"
 
+msgid "ask_opinion"
+msgstr "Demander l'avis"
+
+msgid "ask_validation"
+msgstr "Faire valider"
+
 msgid "cannot_remove_inquiry_linkedurbaneventinquiry"
 msgstr "Vous ne pouvez pas supprimer cette enquête car un événement 'Enquête publique' y est lié.  Supprimez d'abord l'événement lié.  <a href='${linkedurbaneventurl}'>Cliquez ici pour y accéder</a>"
 
@@ -188,6 +194,9 @@ msgstr "Clôturé"
 
 msgid "complete"
 msgstr "Complet"
+
+msgid "creation"
+msgstr "Création"
 
 msgid "db_connection_error"
 msgstr "Une erreur est survenue lors de la connexion à la base de données.  Le message d'erreur est : '${error}'"
@@ -238,6 +247,9 @@ msgstr "Irrecevable"
 msgid "incomplete"
 msgstr "Incomplet"
 
+msgid "invalidate_opinion"
+msgstr "Refuser"
+
 msgid "iscomplete"
 msgstr "Complet"
 
@@ -274,8 +286,17 @@ msgstr "PEB"
 msgid "label_schema_urban_road"
 msgstr "Voirie"
 
+msgid "opinion_given"
+msgstr "Avis rendu"
+
+msgid "opinion_validation"
+msgstr "Validation"
+
 msgid "please_enter_more_letters"
 msgstr "Il est nécessaire que vous entriez plusieurs lettres pour effectuer la recherche"
+
+msgid "receive_opinion"
+msgstr "Recevoir l'avis"
 
 msgid "refuse"
 msgstr "Refuser"
@@ -296,11 +317,17 @@ msgstr "Retiré"
 msgid "rubrics_history"
 msgstr "Registre des modifications pour les rubriques"
 
+msgid "send_opinion"
+msgstr "Envoyer l'avis"
+
 msgid "update_additionalLegalConditions"
 msgstr "Mise à jour des Registre des conditions intégrales et sectorielles supplémentaires"
 
 msgid "update_rubrics"
 msgstr "Mise à jour des rubriques"
+
+msgid "waiting_opinion"
+msgstr "En attente de l'avis"
 
 # error messages...
 msgid "warning_add_a_parcel"

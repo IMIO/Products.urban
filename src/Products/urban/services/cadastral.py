@@ -469,8 +469,15 @@ class Parcel(object):
         return [getattr(self, attr, '') for attr in self._reference_keys if attr not in ignore]
 
     def to_index(self):
-        index = ','.join(self.values())
-        index = '{},0'.format(index)
+        raw_values = self.values()
+        index = '{:05d}{}{:04d}/{:02d}{}{:03d}'.format(
+            int(raw_values[0] or 0),
+            raw_values[1],
+            int(raw_values[2] or 0),
+            int(raw_values[3] or 0),
+            raw_values[4] or '_',
+            int(raw_values[5] or 0),
+        )
         return index
 
     def reference_as_dict(self):

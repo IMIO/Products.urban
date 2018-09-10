@@ -1,1 +1,0 @@
-from Products.urban.content.licence.CODT_ParcelOutLicence import CODT_ParcelOutLicence

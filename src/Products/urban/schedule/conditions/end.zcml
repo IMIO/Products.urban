@@ -52,7 +52,7 @@
     />
 
     <adapter
-        for="Products.urban.interfaces.IEnvironmentLicence
+        for="Products.urban.interfaces.IEnvironmentBase
              imio.schedule.content.task.IAutomatedTask"
         provides="imio.schedule.interfaces.IEndCondition"
         factory=".generic.SingleComplementAsked"
@@ -76,7 +76,7 @@
     />
 
     <adapter
-        for="Products.urban.interfaces.IEnvironmentLicence
+        for="Products.urban.interfaces.IEnvironmentBase
              imio.schedule.content.task.IAutomatedTask"
         provides="imio.schedule.interfaces.IEndCondition"
         factory=".generic.SingleComplementReceived"
@@ -84,7 +84,7 @@
     />
 
     <adapter
-        for="Products.urban.interfaces.IEnvironmentLicence
+        for="Products.urban.interfaces.IEnvironmentBase
              imio.schedule.content.task.IAutomatedTask"
         provides="imio.schedule.interfaces.IEndCondition"
         factory=".generic.ComplementsTransmitToSPW"
@@ -92,7 +92,7 @@
     />
 
     <adapter
-        for="Products.urban.interfaces.IEnvironmentLicence
+        for="Products.urban.interfaces.IEnvironmentBase
              imio.schedule.content.task.IAutomatedTask"
         provides="imio.schedule.interfaces.IEndCondition"
         factory=".generic.SingleComplementReceived"
@@ -101,7 +101,7 @@
 
     <!-- SPW transmit conditions-->
     <adapter
-        for="Products.urban.interfaces.IEnvironmentLicence
+        for="Products.urban.interfaces.IEnvironmentBase
              imio.schedule.content.task.IAutomatedTask"
         provides="imio.schedule.interfaces.IEndCondition"
         factory=".generic.TransmitSPWDoneCondition"
@@ -126,7 +126,7 @@
     />
 
     <adapter
-        for="Products.urban.interfaces.IEnvironmentLicence
+        for="Products.urban.interfaces.IEnvironmentBase
              imio.schedule.content.task.IAutomatedTask"
         provides="imio.schedule.interfaces.IEndCondition"
         factory=".generic.RubricsChoiceDone"
@@ -167,7 +167,7 @@
     />
 
     <adapter
-        for="Products.urban.interfaces.IEnvironmentLicence
+        for="Products.urban.interfaces.IEnvironmentBase
              imio.schedule.content.task.IAutomatedTask"
         provides="imio.schedule.interfaces.IEndCondition"
         factory=".generic.OpinionRequestsEventsCreated"
@@ -175,7 +175,7 @@
     />
 
     <adapter
-        for="Products.urban.interfaces.IEnvironmentLicence
+        for="Products.urban.interfaces.IEnvironmentBase
              imio.schedule.content.task.IAutomatedTask"
         provides="imio.schedule.interfaces.IEndCondition"
         factory=".generic.OpinionRequestsDone"
@@ -192,7 +192,7 @@
     />
 
     <adapter
-        for="Products.urban.interfaces.IEnvironmentLicence
+        for="Products.urban.interfaces.IEnvironmentBase
              imio.schedule.content.task.IAutomatedTask"
         provides="imio.schedule.interfaces.IEndCondition"
         factory=".generic.CollegeOpinionTransmitToSPWDoneCondition"
@@ -209,7 +209,7 @@
     />
 
     <adapter
-        for="Products.urban.interfaces.IEnvironmentLicence
+        for="Products.urban.interfaces.IEnvironmentBase
              imio.schedule.content.task.IAutomatedTask"
         provides="imio.schedule.interfaces.IEndCondition"
         factory=".generic.SPWProjectReceivedCondition"
@@ -242,7 +242,7 @@
     />
 
     <adapter
-        for="Products.urban.interfaces.IEnvironmentLicence
+        for="Products.urban.interfaces.IEnvironmentBase
              imio.schedule.content.task.IAutomatedTask"
         provides="imio.schedule.interfaces.IEndCondition"
         factory=".generic.InquiryDatesDefinedCondition"
@@ -250,7 +250,7 @@
     />
 
     <adapter
-        for="Products.urban.interfaces.IEnvironmentLicence
+        for="Products.urban.interfaces.IEnvironmentBase
              imio.schedule.content.task.IAutomatedTask"
         provides="imio.schedule.interfaces.IEndCondition"
         factory=".generic.InquiryDoneCondition"

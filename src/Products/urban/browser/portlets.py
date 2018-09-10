@@ -50,10 +50,15 @@ class ToolsRenderer(base.Renderer):
 
     def is_opinion_editor(self):
         current_user = api.user.get_current()
+        if api.user.has_permission('Manage portal'):
+            return True
+
         user_groups = api.group.get_groups(user=current_user)
         group_ids = [g.id for g in user_groups]
-        is_opinion_editor = 'opinions_editors' in group_ids or api.user.has_permission('Manage portal')
-        return is_opinion_editor
+        if 'opinions_editors' in group_ids:
+            return True
+
+        return False
 
 
 class ToolsAddForm(base.AddForm):
@@ -88,6 +93,8 @@ class ConfigRenderer(base.Renderer):
     def available(self):
         if api.user.is_anonymous():
             return False
+        if api.user.has_permission('Manage portal'):
+            return True
 
         site = api.portal.get()
         if self.context == site.urban:

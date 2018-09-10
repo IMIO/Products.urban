@@ -323,6 +323,17 @@ class UrbanCertificateBaseView(LicenceView):
         return [spf.get('value', spf['text']) for spf in specific_features if not 'check' in spf or spf['check']]
 
 
+class CODTUrbanCertificateBaseView(UrbanCertificateBaseView):
+    """
+      This manage the view of CODT UrbanCertificate
+    """
+
+    def getInquiryFields(self, exclude=[], context=None):
+        return self.context.get_inquiry_fields_to_display(exclude=exclude)
+
+    def getInquiryType(self):
+        return 'CODT_Inquiry'
+
 class EnvironmentLicenceView(LicenceView):
     """
       This manage helper methods for all environment licences views

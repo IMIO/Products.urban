@@ -1,1 +1,0 @@
-from Products.urban.content.UrbanEventAnnouncement import UrbanEventAnnouncement

@@ -236,10 +236,10 @@ default_values = {
     'CODT_IntegratedLicence': {
         'folderdelays': [
             'UrbanDelay',
-            {'id': "30j", 'title': u"30 jours", 'deadLineDelay': 30, 'alertDelay': 20},
-            {'id': "60j", 'title': u"60 jours", 'deadLineDelay': 60, 'alertDelay': 20},
-            {'id': "70j", 'title': u"70 jours", 'deadLineDelay': 70, 'alertDelay': 20},
-            {'id': "100j", 'title': u"100 jours", 'deadLineDelay': 100, 'alertDelay': 20},
+            {'id': "90j", 'title': u"90 jours", 'deadLineDelay': 90, 'alertDelay': 20},
+            {'id': "120j", 'title': u"120 jours", 'deadLineDelay': 120, 'alertDelay': 20},
+            {'id': "140j", 'title': u"140 jours", 'deadLineDelay': 140, 'alertDelay': 20},
+            {'id': "170j", 'title': u"170 jours", 'deadLineDelay': 170, 'alertDelay': 20},
             {'id': "inconnu", 'title': u"Inconnu", 'deadLineDelay': 0, 'alertDelay': 20},
         ],
         'investigationarticles': [
@@ -274,6 +274,56 @@ default_values = {
             {'id': "ecart-gcu", 'title': u"au Guide Communal d'Urbanisme"},
             {'id': "ecart-gru", 'title': u"au Règlement Régional d'Urbanisme"},
             {'id': "ecart-sol", 'title': u"au Schéma d'Orientation Local"},
+        ],
+    },
+    'CODT_CommercialLicence': {
+        'folderdelays': [
+            'UrbanDelay',
+            {'id': "100j", 'title': u"100 jours", 'deadLineDelay': 100, 'alertDelay': 20},
+            {'id': "130j", 'title': u"130 jours", 'deadLineDelay': 130, 'alertDelay': 20},
+            {'id': "140j", 'title': u"140 jours", 'deadLineDelay': 140, 'alertDelay': 20},
+            {'id': "170j", 'title': u"170 jours", 'deadLineDelay': 170, 'alertDelay': 20},
+            {'id': "inconnu", 'title': u"Inconnu", 'deadLineDelay': 0, 'alertDelay': 20},
+        ],
+        'investigationarticles': [
+            'UrbanVocabularyTerm',
+            {'id': "enquete-derogation", 'title': u"Article D.IV.40 - Dérogation à un plan ou aux normes d'un guide régional", 'description': u"<p>Application de l'article D.IV.40 : Les demandes impliquant une ou plusieurs dérogations au plan de secteur ou aux normes du guide régional sont soumises à enquête publique.</p> "},
+            {'id': "enquete-derogation-facultative", 'title': u"Article D.VIII.13 - Procédure d'enquête publique \"facultative\"", 'description': u"<p>Application de l'article D.VIII.13. L’autorité compétente pour adopter le plan, périmètre, schéma ou le guide et pour délivrer les<br /> permis et certificats d’urbanisme no 2, ainsi que les collèges communaux des communes organisant l’annonce de projet<br /> ou l’enquête publique, peuvent procéder à toute forme supplémentaire de publicité et d’information dans le respect des<br /> délais de décision qui sont impartis à l’autorité compétente.</p>"},
+            {'id': "R.IV.40-1.1.1", 'title': u"R.IV.40-1.§1-1° - Hauteur des constructions", 'description': u"<p>Article R.IV.40-1.§1-2° du CoDT : «&nbsp;la construction, la reconstruction d'un magasin ou la modification de la destination d'un bâtiment en magasin dont la surface commerciale nette est supérieure à quatre cents mètres carrés ; la transformation de bâtiments ayant pour effet de placer ceux-ci dans les mêmes conditions&nbsp;»</p> "},
+            {'id': "R.IV.40-1.1.2", 'title': u"R.IV.40-1.§1-2°- Magasin de plus de 400m2", 'description': u"<p>Article R.IV.40-1.§1.3° du CoDT: «&nbsp;la construction, la reconstruction de bureaux ou la modification de la destination d'un bâtiment en bureaux dont la superficie des planchers est supérieure à sixccent cinquante mètres carrés, la transformation de bâtiments ayant pour effet de placer ceux-ci dans les mêmes conditions&nbsp;»</p>"},
+            {'id': "R.IV.40-1.1.3", 'title': u"R.IV.40-1.§1.3° - Usage destiné aux bureaux de plus de 650m2", 'description': u"<p>Article R.IV.40-1.§1.4° du CoDT : «&nbsp;la construction, la reconstruction ou la modification de la destination d'un bâtiment en atelier, entrepôt ou hall de stockage à caractère non agricole dont la superficie des planchers est supérieure à quatre cents mètres carrés, la transformation de bâtiments ayant pour effet de placer ceux-ci dans les mêmes conditions&nbsp;»</p>"},
+            {'id': "R.IV.40-1.1.4", 'title': u"R.IV.40-1.§1.4° - Destination à usage de stockage supérieur à 400m2", 'description': u"<p>Article R.IV.40-1.§1.5° du CoDT : «&nbsp;l'utilisation habituelle d'un terrain pour le dépôt d'un ou plusieurs véhicules usagés, de mitrailles, de matériaux ou de déchets&nbsp;»</p> "},
+            {'id': "R.IV.40-1.1.5", 'title': u"R.IV.40-1.§1.5° - Utilisation habituelle d'un terrain pour le dépôt d'un ou plusieurs véhicules usagés, de mitrailles, de matériaux ou de déchets", 'description': u"<p>Article R.IV.40-1.§1.6° du CoDT : «&nbsp;la construction, la reconstruction ou la transformation d'un bâtiment qui se rapporte à des biens immobiliers inscrits sur la liste de sauvegarde, classés, situés dans une zone de protectioon visée à l'article 209 du Code wallon du Patrimoine ou localisés dans un site repris à l'inventaire du patrimoine archéologique visé à l'article 233 du Code wallon du Patrimoine »</p> "},
+            {'id': "R.IV.40-1.1.6", 'title': u"R.IV.40-1.§1.6° - Les demandes de permis d'urbanisation et les demandes de permis d'urbanisme relatives à la construction, la reconstruction ou la transformation d'un bâtiment inscrit sur la liste de sauvegarde ou classés", 'description': u""},
+            {'id': "R.IV.40-1.1.7", 'title': u"R.IV.40-1.§1.7° - Ouverture ou modification de la voirie communale", 'description': u"i<p>Article R.IV.40-1.§1.7° du CoDT« les demande de permis d'urbanisation, de permis d'urbanisme ou de certificats d'urbanisme n°2 visées à l'article D.IV.41 »</p> "},
+            {'id': "R.IV.40-1.1.8", 'title': u"R.IV.40-1.§1.8° - Voiries régionales", 'description': u"<p>Article R.IV.40-1.§1.8° du CoD - \" les voiries visées à l'article R.II.21-1,1° pour autant que les actes et travaux impliquent une modification de leur gabarit\"</p>"},
+        ],
+        'announcementarticles': [
+            'UrbanVocabularyTerm',
+            {'id': "ecarts", 'title': u"Article D.IV.40 - Ecarts à un schéma, à un guide ou à un permis d'urbanisation", 'description': u"<p>Application de l'article D.IV.40. : Les demandes impliquant un ou plusieurs écarts aux plans communaux d’aménagement adoptés avant l’entrée en vigueur du Code et devenus schémas d’orientation locaux, aux règlements adoptés avant l’entrée en vigueur du Code et devenus guides et aux permis d’urbanisation sont soumises à annonce de projet, et ce, jusqu’à la révision ou à l’abrogation du schéma ou du guide.</p> "},
+            {'id': "ecarts-facultatifs", 'title': u"Article D.VIII.13 - Procédure d'annonce de projet \"facultative\"", 'description': u"<p>Art. D.VIII.13. L’autorité compétente pour adopter le plan, périmètre, schéma ou le guide et pour délivrer les<br /> permis et certificats d’urbanisme no 2, ainsi que les collèges communaux des communes organisant l’annonce de projet<br /> ou l’enquête publique, peuvent procéder à toute forme supplémentaire de publicité et d’information dans le respect des<br /> délais de décision qui sont impartis à l’autorité compétente.</p> "},
+            {'id': "R.IV.40-2-1-1", 'title': u"R.IV.40-2.§1.1° - Hauteur des constructions", 'description': u"<p>Article R.IV.40-2.§1-1°du CoDT : «&nbsp;la construction ou la reconstruction de bâtiments dont la hauteur est d’au moins trois niveaux ou neuf mètres sous corniche et dépasse de trois mètres ou plus la moyenne des hauteurs sous corniche des bâtiments situés dans la même rue jusqu’à cinquante mètres de part et d’autre de la construction projetée; la transformation de bâtiments ayant pour effet de placer ceux-ci dans les mêmes conditions;»</p> "},
+            {'id': "R.IV.40-2-1-2", 'title': u"R.IV.40-2 § 2° - Profondeur de bâtisse", 'description': u"<p>Article R.IV.40-2.§1-2°: «&nbsp;la construction ou la reconstruction de bâtiments dont la profondeur, mesurée à partir de l'alignement ou du front de bâtisse lorsque les constructions voisines ne sont pas implantées sur l'alignement, est supérieure à 15 mètres et dépasse de plus de 4 mètres les bâtiments situés sur les parcelles contiguës, la transformation de bâtiments ayant pour effet de placer ceux-ci dans les mêmes conditions&nbsp;»</p>"},
+            {'id': "R.IV.40-2-1-3", 'title': u"R.IV.40-2.§1-3° - Magasin de moins de 400m2", 'description': u"<p>Article R.IV.40-2.§1-3 : «&nbsp;la construction, la reconstruction d'un magasin ou la modification de la destination d'un bâtiment en magasin dont la surface commerciale nette est inférieure à quatre cent mètres carrés ; la transformation de bâtiments ayant pour effet de placer ceux-ci dans les mêmes conditions&nbsp;»</p>"},
+        ],
+        'derogations': [
+            'UrbanVocabularyTerm',
+            {'id': "dero-ps", 'title': u"au plan de secteur"},
+            {'id': "dero-gru", 'title': u"à une ou des norme(s) du Guide Régional d'Urbanisme "},
+        ],
+        'divergences': [
+            'UrbanVocabularyTerm',
+            {'id': "ecart-purba", 'title': u"au permis d'urbanisation"},
+            {'id': "ecart-gcu", 'title': u"au Guide Communal d'Urbanisme"},
+            {'id': "ecart-gru", 'title': u"au Règlement Régional d'Urbanisme"},
+            {'id': "ecart-sol", 'title': u"au Schéma d'Orientation Local"},
+        ],
+        'missingparts': [
+            'UrbanVocabularyTerm',
+            {'id': "form_demande", 'title': u"Formulaire de demande (annexe 20) en 2 exemplaires"},
+            {'id': "plan_travaux", 'title': u"Plan des travaux en 4 exemplaires"},
+            {'id': "attestation_archi", 'title': u"Attestation de l'architecte (annexe 21) en 2 exemplaires"},
+            {'id': "attestation_ordre_archi", 'title': u"Attestation de l'architecte soumis au visa du conseil de l'ordre (annexe 22) en 2 exemplaires"},
         ],
     },
     'CODT_UniqueLicence': {
@@ -710,11 +760,7 @@ default_values = {
     'shared_vocabularies': {
 
         'decisions': [
-            'UrbanVocabularyTerm', [
-                'BuildLicence', 'Article127', 'ParcelOutLicence', 'Declaration', 'Division', 'NotaryLetter',
-                'UrbanCertificateOne', 'UrbanCertificateTwo', 'EnvClassThree', 'MiscDemand',
-                'UniqueLicence', 'IntegratedLicence'
-            ],
+            'UrbanVocabularyTerm', URBAN_TYPES,
             {'id': "favorable", 'title': u"Favorable", 'extraValue': "Recevable"},
             {'id': "defavorable", 'title': u"Défavorable", 'extraValue': "Irrecevable"},
         ],
@@ -730,6 +776,7 @@ default_values = {
         'pebcategories': [
             'UrbanVocabularyTerm', [
                 'BuildLicence', 'Article127', 'CODT_BuildLicence', 'CODT_ParcelOutLicence', 'CODT_Article127',
+                'CODT_IntegratedLicence', 'CODT_CommercialLicence',
             ],
             {'id': "not_applicable", 'title': 'Non applicable'},
             {'id': "complete_process", 'title': 'Procédure complète'},
@@ -763,7 +810,7 @@ default_values = {
         ],
 
         'ftSolicitOpinionsTo': [
-            'UrbanVocabularyTerm', ['EnvClassOne', 'EnvClassTwo', 'EnvClassBordering'],
+            'UrbanVocabularyTerm', ['CODT_IntegratedLicence', 'CODT_UniqueLicence', 'EnvClassOne', 'EnvClassTwo', 'EnvClassBordering'],
             {
                 'id': 'spw-dgo1',
                 'title': "SPW-DGO1",
@@ -868,7 +915,10 @@ default_values = {
         ],
 
         'authority': [
-            'UrbanVocabularyTerm', ['EnvClassOne', 'EnvClassTwo', 'EnvClassBordering', 'UniqueLicence', 'CODT_UniqueLicence'],
+            'UrbanVocabularyTerm', [
+                'EnvClassOne', 'EnvClassTwo', 'EnvClassBordering', 'UniqueLicence',
+                'CODT_UniqueLicence', 'CODT_IntegratedLicence',
+            ],
             {'id': "college", 'title': u"Collège"},
             {'id': "ft", 'title': u"Fonctionnaire technique"},
         ],
@@ -881,7 +931,7 @@ default_values = {
         ],
 
         'applicationreasons': [
-            'UrbanVocabularyTerm', ['EnvClassOne', 'EnvClassTwo', 'EnvClassThree', 'EnvClassBordering'],
+            'UrbanVocabularyTerm', ['EnvClassOne', 'EnvClassTwo', 'EnvClassThree', 'EnvClassBordering', 'CODT_IntegratedLicence'],
             {'id': "new_business", 'title': u"Mise en activité d'un établissement nouveau"},
             {'id': "class_change", 'title': u"Maintien en activité d'un établissement qui vient d'être rangé en classe 3 suite à une modification de la liste des installations et activités classées"},
             {'id': "licence_expiration", 'title': u"Maintien en activité d’un établissement dont la durée de validité de la déclaration est arrivée à expiration"},
@@ -1274,7 +1324,11 @@ default_values = {
         ],
 
         'roadanalysis': [
-            'UrbanVocabularyTerm', ['BuildLicence', 'Article127', 'UniqueLicence', 'IntegratedLicence', 'ParcelOutLicence', 'UrbanCertificateTwo'],
+            'UrbanVocabularyTerm', [
+                'BuildLicence', 'Article127', 'UniqueLicence', 'IntegratedLicence',
+                'ParcelOutLicence', 'UrbanCertificateTwo', 'CODT_UniqueLicence',
+                'CODT_IntegratedLicence', 'CODT_CommercialLicence',
+            ],
             {'id': "deficient-equipment", 'title': u"Voire insuffisamment équipée"},
             {'id': "transformation", 'title': u"Transformation sans nouveau raccordement à l'égout"},
             {'id': "extension", 'title': u"Extension de réseau"},
@@ -1294,7 +1348,10 @@ default_values = {
         ],
 
         'derogations': [
-            'UrbanVocabularyTerm', ['BuildLicence', 'Article127', 'UniqueLicence', 'IntegratedLicence', 'ParcelOutLicence', 'UrbanCertificateTwo'],
+            'UrbanVocabularyTerm', [
+                'BuildLicence', 'Article127', 'UniqueLicence', 'IntegratedLicence', 'ParcelOutLicence',
+                'UrbanCertificateTwo', 'CODT_UniqueLicence', 'CODT_IntegratedLicence', 'CODT_CommercialLicence',
+            ],
             {'id': "dero-ps", 'title': u"au Plan de secteur"},
             {'id': "dero-pca", 'title': u"au Plan Communal d'Aménagement"},
             {'id': "dero-rru", 'title': u"au Règlement Régional d'Urbanisme"},
@@ -1305,7 +1362,8 @@ default_values = {
         'folderbuildworktypes': [
             'UrbanVocabularyTerm', [
                 'BuildLicence', 'Article127', 'UniqueLicence', 'IntegratedLicence', 'ParcelOutLicence', 'UrbanCertificateTwo',
-                'CODT_BuildLicence', 'CODT_ParcelOutLicence', 'CODT_UrbanCertificateTwo'
+                'CODT_BuildLicence', 'CODT_ParcelOutLicence', 'CODT_UrbanCertificateTwo', 'CODT_UniqueLicence',
+                'CODT_IntegratedLicence', 'CODT_CommercialLicence',
             ],
             {'id': 'AUTRE', 'title': u"Autres", 'extraValue': 'AUTRE'},
             {'id': 'DEM', 'title': u"Démolition", 'extraValue': 'DEM'},
@@ -1585,6 +1643,19 @@ default_values = {
             {'id': "ssc-forestiere-mixte", 'title': u"Zone forestière mixte"},
             {'id': "ssc-activites-economiques-mixtes", 'title': u"Zone d'activités économiques mixtes"},
             {'id': "ssc-activites-economiques-tertiaires", 'title': u"Zone d'activités économiques tertiaires"},
+        ],
+
+        'sct': [
+            'UrbanVocabularyTerm',
+            {'id': "sct-zone-urbaine-de-centre-ville-de-grande-mixite", 'title': u"Zone urbaine de centre ville de grande mixité (minimum 50 log/ha)"},
+            {'id': "sct-zone-urbaine", 'title': u"Zone urbaine (de 40 à 60 log/ha)"},
+            {'id': "sct-zone-de-village-et-ou-peri-urbaine", 'title': u"Zone de village et/ou péri-urbaine (de 20 à 40 log/ha)"},
+            {'id': "sct-zone-residentielle", 'title': u"Zone résidentielle (de 12 à 20 log/ha)"},
+            {'id': "sct-zone-paysagere-de-tres-faible-densite", 'title': u"Zone paysagère de très faible densité (maximum 5 log/ha)"},
+            {'id': "sct-zone-ecologique", 'title': u"Zone écologique"},
+            {'id': "sct-perimetre-de-protection-paysagere", 'title': u"Périmètre de protection paysagère"},
+            {'id': "sct-activite-economique-mixte", 'title': u"Activité économique mixte"},
+            {'id': "sct-activite-economique-industrielle", 'title': u"Activité économique industrielle"},
         ],
 
         'sdc': [

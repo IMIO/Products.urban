@@ -157,7 +157,14 @@ class CadastralReferenceSuggest(SuggestView):
         all_divisions = dict(session.get_all_divisions())
         session.close()
         all_divisions = dict([(str(int(k)), v) for k, v in all_divisions.iteritems()])
-        all_values = [(v.replace(v.split(',')[0], all_divisions.get(v.split(',')[0])), v) for v in values]
+        all_values = [('{} {} {} {} {} {}'.format(
+            all_divisions.get(v[0:5]),
+            v[5].lstrip('0'),
+            v[6:10].lstrip('0'),
+            v[11:13].lstrip('0'),
+            v[13].lstrip('0'),
+            v[14:].lstrip('0')), v)
+            for v in values]
         return all_values
 
     def compute_suggestions(self):

@@ -94,7 +94,12 @@ class IBuildLicence(IBaseBuildLicence):
 
 
 class ICODT_BuildLicence(ICODT_BaseBuildLicence):
-    """Marker interface for CODT_ BuildLicence
+    """Marker interface for CODT_BuildLicence
+    """
+
+
+class ICODT_CommercialLicence(ICODT_BaseBuildLicence):
+    """Marker interface for CODT_CommercialLicence
     """
 
 
@@ -626,4 +631,17 @@ class ICODT_UniqueLicence_spe_reference_config(Interface):
     tal_expression = schema.TextLine(
         title=u"Generation expression",
         default=u"python: 'PU/' + numerotation"
+    )
+
+
+class IInternalOpinionServices(Interface):
+    """ """
+    services = schema.Dict(
+        title=_(u"Internal opinion services"),
+        description=_(u"Services that can give their opinion directly through urban"),
+        key_type=schema.ASCIILine(),
+        value_type=schema.Dict(
+            key_type=schema.ASCIILine(),
+            value_type=schema.ASCIILine()
+        )
     )
