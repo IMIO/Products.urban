@@ -39,7 +39,10 @@ from Products.urban.interfaces import IUrbanEventType
 from Products.urban.schedule.interfaces import ILicenceDeliveryTask
 from Products.urban.utils import get_ws_meetingitem_infos
 
+from plone import api
 from plone.indexer import indexer
+
+from suds import WebFault
 
 from zope.component import queryAdapter
 
@@ -122,14 +125,14 @@ def parcelinfoindex(obj):
     This index is a ZCTextIndex based on the plone_lexicon so we
     are sure that indexed values are lowercase
     """
-    return [obj.getIndexValue()]
+    return [obj.get_capakey()]
 
 
 @indexer(IGenericLicence)
 def genericlicence_parcelinfoindex(obj):
     parcels_infos = []
     if hasattr(obj, 'getParcels'):
-        parcels_infos = list(set([p.getIndexValue() for p in obj.getParcels()]))
+        parcels_infos = list(set([p.get_capakey() for p in obj.getParcels()]))
     return parcels_infos
 
 
@@ -140,7 +143,7 @@ def parcellingterm_parcelinfoindex(obj):
     """
     parcels_infos = []
     if hasattr(obj, 'getParcels'):
-        parcels_infos = list(set([p.getIndexValue() for p in obj.getParcels()]))
+        parcels_infos = list(set([p.get_capakey() for p in obj.getParcels()]))
     return parcels_infos
 
 
@@ -226,12 +229,18 @@ def genericlicence_representative(licence):
 def genericlicence_decisiondate(licence):
     decision_event = licence.getLastTheLicence()
     if decision_event:
-        linked_pm_items = get_ws_meetingitem_infos(decision_event)
+        try:
+            linked_pm_items = get_ws_meetingitem_infos(decision_event)
+        except WebFault:
+            catalog = api.portal.get_tool('portal_catalog')
+            brain = catalog(UID=licence.UID())
+            if brain.getDecisionDate:
+                return brain.getDecisionDate
         if linked_pm_items:
             meeting_date = linked_pm_items[0]['meeting_date']
             if not (meeting_date.day == meeting_date.month == 1 and meeting_date.year == 1950):
                 return meeting_date
-        return decision.getDecisionDate() or decision_event.getEventDate()
+        return decision_event.getDecisionDate() or decision_event.getEventDate()
 
 
 @indexer(IGenericLicence)

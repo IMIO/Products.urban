@@ -5,6 +5,7 @@
  <object name="codt_buildlicence_workflow" meta_type="Workflow"/>
  <object name="urbandivision_workflow" meta_type="Workflow"/>
  <object name="urbanevent_workflow" meta_type="Workflow"/>
+ <object name="opinion_request_workflow" meta_type="Workflow"/>
 <!-- ##code-section workflowobjects -->
 <!-- ##/code-section workflowobjects -->
  <bindings>
@@ -18,6 +19,9 @@
      <bound-workflow workflow_id="codt_buildlicence_workflow" />
   </type>
   <type type_id="CODT_BuildLicence">
+     <bound-workflow workflow_id="codt_buildlicence_workflow" />
+  </type>
+  <type type_id="CODT_CommercialLicence">
      <bound-workflow workflow_id="codt_buildlicence_workflow" />
   </type>
   <type type_id="CODT_IntegratedLicence">
@@ -141,7 +145,7 @@
      <bound-workflow workflow_id="urbanevent_workflow" />
   </type>
   <type type_id="UrbanEventOpinionRequest">
-     <bound-workflow workflow_id="urbanevent_workflow" />
+     <bound-workflow workflow_id="opinion_request_workflow" />
   </type>
   <type type_id="UrbanEventType">
      <bound-workflow workflow_id="activation_workflow" />
@@ -184,7 +188,7 @@
   <bound-workflow workflow_id="" />
 </type>
 <type type_id="PortionOut">
-  <bound-workflow workflow_id="" />
+  <bound-workflow workflow_id="one_state_workflow" />
 </type>
 <type type_id="Proprietary">
   <bound-workflow workflow_id="" />

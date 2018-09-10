@@ -111,9 +111,6 @@ msgstr ""
 msgid "ParcellingTerm"
 msgstr ""
 
-msgid "Street"
-msgstr ""
-
 msgid "WorkLocation"
 msgstr ""
 
@@ -170,6 +167,18 @@ msgstr ""
 msgid "disabled"
 msgstr ""
 
+msgid "creation"
+msgstr ""
+
+msgid "waiting_opinion"
+msgstr ""
+
+msgid "opinion_validation"
+msgstr ""
+
+msgid "opinion_given"
+msgstr ""
+
 #transitions
 msgid "retire"
 msgstr ""
@@ -196,6 +205,21 @@ msgid "enable"
 msgstr ""
 
 msgid "disable"
+msgstr ""
+
+msgid "ask_opinion"
+msgstr ""
+
+msgid "ask_validation"
+msgstr ""
+
+msgid "invalidate_opinion"
+msgstr ""
+
+msgid "receive_opinion"
+msgstr ""
+
+msgid "send_opinion"
 msgstr ""
 
 #control panel

@@ -231,6 +231,7 @@
  <state state_id="complete"
         title="complete"
         i18n:attributes="title">
+  <exit-transition transition_id="reopen_incomplete"/>
   <exit-transition transition_id="refuse"/>
   <exit-transition transition_id="accept"/>
   <exit-transition transition_id="retire"/>

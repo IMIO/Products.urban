@@ -239,6 +239,27 @@ class OpinionRequestsDone(CreationCondition):
         return True
 
 
+class IsInternalOpinionRequest(CreationCondition):
+    """
+    Urban event is an internal opinion request
+    """
+
+    def evaluate(self):
+        registry = api.portal.get_tool('portal_registry')
+        registry_field = registry['Products.urban.interfaces.IInternalOpinionServices.services']
+        opinion_request = self.task_container
+        opinion_config = opinion_request.getUrbaneventtypes()
+
+        if not opinion_config.getIs_internal_service():
+            return False
+
+        record = registry_field.get(opinion_config.getInternal_service(), None)
+        if record and self.task_config.id in [record['task_answer_id'], record['task_validate_id']]:
+            return True
+
+        return False
+
+
 class HasFDOpinionRequest(CreationCondition):
     """
     'FD' is selected on the field 'procedureChoice'.
@@ -321,7 +342,7 @@ class IncompleteForTheSecondTime(CreationCondition):
         first_incomplete_done = len(brains) > 0
         if not first_incomplete_done:
             return False
-        wf_history = context.workflow_history
+        wf_history = licence.workflow_history
         two_incomplete_transitions = len([tr for tr in wf_history[wf_history.keys()[0]] if tr['action'] == 'isincomplete'])
         if not two_incomplete_transitions:
             return False

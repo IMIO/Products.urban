@@ -27,6 +27,14 @@
   />
 
   <browser:page
+     for="Products.urban.interfaces.ICODT_IntegratedLicence"
+     name="licenceedit"
+     class=".licenceedit.CODT_IntegratedLicenceEditView"
+     template="templates/licenceedit.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
      for="Products.urban.interfaces.IUrbanCertificateBase"
      name="urbancertificatebase_edit"
      class=".urbancertificatebaseedit.UrbanCertificateBaseEditView"
@@ -112,7 +120,7 @@
      for="Products.urban.interfaces.IUniqueLicence"
      name="uniquelicenceview"
      class=".uniquelicenceview.UniqueLicenceView"
-     template="templates/buildlicenceview.pt"
+     template="templates/uniquelicenceview.pt"
      permission="zope2.View"
   />
 
@@ -127,7 +135,7 @@
      for="Products.urban.interfaces.ICODT_UniqueLicence"
      name="codt_uniquelicenceview"
      class=".codt_uniquelicenceview.CODTUniqueLicenceView"
-     template="templates/buildlicenceview.pt"
+     template="templates/codt_uniquelicenceview.pt"
      permission="zope2.View"
   />
 
@@ -135,6 +143,21 @@
      name="codt_uniquelicence-macros"
      for="Products.urban.interfaces.ICODT_UniqueLicence"
      template="templates/codt_uniquelicencemacros.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="Products.urban.interfaces.ICODT_IntegratedLicence"
+     name="codt_integratedlicenceview"
+     class=".codt_integratedlicenceview.CODTIntegratedLicenceView"
+     template="templates/codt_integratedlicenceview.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     name="codt_integratedlicence-macros"
+     for="Products.urban.interfaces.ICODT_IntegratedLicence"
+     template="templates/codt_integratedlicencemacros.pt"
      permission="zope2.View"
   />
 
@@ -148,7 +171,7 @@
   <browser:page
      for="Products.urban.interfaces.IParcelOutLicence"
      name="parceloutlicenceview"
-     class=".parceloutlicenceview.ParcelOutLicenceView"
+     class=".codt_parceloutlicenceview.CODTParcelOutLicenceView"
      template="templates/parceloutlicenceview.pt"
      permission="zope2.View"
   />
@@ -217,6 +240,14 @@
      name="urbancertificatetwo-macros"
      for="Products.urban.interfaces.IUrbanCertificateTwo"
      template="templates/urbancertificatetwomacros.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="Products.urban.interfaces.ICODT_UrbanCertificateTwo"
+     name="urbancertificatetwoview"
+     class=".codt_urbancertificatetwoview.CODTUrbanCertificateTwoView"
+     template="templates/urbancertificatetwoview.pt"
      permission="zope2.View"
   />
 

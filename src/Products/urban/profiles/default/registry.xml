@@ -3,16 +3,18 @@
       <value key="numerotation">0</value>
       <value key="tal_expression">python: 'PU/2/' + numerotation</value>
   </records>
+  <records interface="Products.urban.interfaces.IInternalOpinionServices" field="services">
+  </records>
   <records interface="plone.app.referenceintegrity.interfaces.ISettings">
-    <value key="reference_types">
-        <element>licenceArchitects</element>
-        <element>licenceFolderManagers</element>
-        <element>licenceParcelling</element>
-        <element>notary</element>
-        <element>parcelOutGeometricians</element>
-        <element>recipients</element>
-        <element>referenceableVocabularyTerm</element>
-    </value>
+      <value key="reference_types">
+          <element>licenceArchitects</element>
+          <element>licenceFolderManagers</element>
+          <element>licenceParcelling</element>
+          <element>notary</element>
+          <element>parcelOutGeometricians</element>
+          <element>recipients</element>
+          <element>referenceableVocabularyTerm</element>
+      </value>
   </records>
   <records interface="collective.js.jqueryui.controlpanel.IJQueryUIPlugins">
       <value key="ui_core">False</value>

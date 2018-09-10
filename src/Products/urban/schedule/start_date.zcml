@@ -98,4 +98,12 @@
         name="urban.schedule.start_date.walloonregion_decision_date"
     />
 
+    <adapter
+        for="Products.urban.interfaces.IUrbanEventOpinionRequest
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IStartDate"
+        factory=".start_date.AskOpinionDate"
+        name="urban.schedule.start_date.asking_date"
+    />
+
 </configure>
