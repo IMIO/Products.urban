@@ -218,6 +218,9 @@ class InternalOpinionServicesTable(SequenceTable):
     def values(self):
         registry = api.portal.get_tool('portal_registry')
         all_services = registry['Products.urban.interfaces.IInternalOpinionServices.services']
-        for key, values in all_services.iteritems():
-            values['id'] = key
-        return all_services.values()
+        if all_services:
+            for key, values in all_services.iteritems():
+                values['id'] = key
+            return all_services.values()
+        else:
+            return []
