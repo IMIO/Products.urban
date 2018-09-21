@@ -4,10 +4,13 @@ Changes
 =======
 2.3.x (unreleased)
 -------------------
-- Add a z3c.table column for mailing with his icon
+- add mailing_list method
   [fngaha]
 
-- Fix translations
+- add a z3c.table column for mailing with his icon
+  [fngaha]
+
+- fix translations
   [fngaha]
 
 - fix the creation of an applicant from a parcel

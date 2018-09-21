@@ -464,6 +464,16 @@ class UrbanDocGenerationLicenceHelperView(UrbanDocGenerationHelperView):
 class UrbanDocGenerationEventHelperView(UrbanDocGenerationHelperView):
     """
     """
+    def mailing_list(self, gen_context = None):
+        mailing_list = []
+        if gen_context.has_key('publipostage'):
+            if gen_context['publipostage'] == 'demandeurs':
+                mailing_list = self.real_context.getParentNode().getApplicants()
+            elif gen_context['publipostage'] == 'architectes':
+                mailing_list = self.context.getArchitects()
+            elif gen_context['publipostage'] == 'reclamants':
+                mailing_list = self.context.getClaimants()
+        return mailing_list
 
 
 class UrbanDocGenerationFacetedHelperView(ATDocumentGenerationHelperView):
@@ -955,7 +965,6 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
         for opinion in opinions:
             descriptions.append(opinion.getLinkedOrganisationTerm().Description())
         return descriptions
-
 
 class EventDisplayProxyObject(ATDisplayProxyObject):
     """
