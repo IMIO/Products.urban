@@ -4,12 +4,12 @@ Changes
 =======
 2.3.x (unreleased)
 -------------------
+- Add a z3c.table column for mailing with his icon
+  [fngaha]
+
 - Fix translations
   [fngaha]
 
-
-2.3.x (unreleased)
--------------------
 - fix the creation of an applicant from a parcel
   [fngaha]
 
