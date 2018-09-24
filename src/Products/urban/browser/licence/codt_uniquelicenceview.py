@@ -41,3 +41,6 @@ class CODTUniqueLicenceView(CODTBuildLicenceView, EnvironmentLicenceView):
             }
             return infos
         return {}
+
+    def getInquiryType(self):
+        return 'CODT_UniqueLicenceInquiry'
