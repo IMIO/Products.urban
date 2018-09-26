@@ -22,7 +22,7 @@ class CoringUtility(object):
         self.values = values
         self.context = context
         voc = getUtility(IVocabularyFactory, name=self.vocabulary_name)
-        self.vocabulary = voc(context)
+        self.vocabulary = voc(context, all=True)
 
     @property
     def _coring_values(self):
@@ -46,6 +46,10 @@ class CoringUtility(object):
         terms = self._get_terms(values)
         return [True in [t.title for t in terms]]
 
+    def _to_reference(self, values):
+        terms = self._get_terms(values)
+        return [t.title for t in terms]
+
     def _convert_to_value(self, values):
         method = getattr(self, '_to_{0}'.format(self.valuetype), None)
         if method:
@@ -55,6 +59,9 @@ class CoringUtility(object):
     def _display_values(self, values, terms):
         if self.valuetype == 'str':
             return values
+        if self.valuetype == 'reference':
+            catalog = api.portal.get_tool('portal_catalog')
+            return [b.Title for b in catalog(UID=values)]
         return [t.title for t in terms]
 
     def get_values(self):
@@ -70,14 +77,30 @@ class CoringUtility(object):
         }
 
 
-class CoringSOL(CoringUtility):
+class CoringReferenceUtility(CoringUtility):
+    """ """
+
+    def get_values(self):
+        raw_values = self._coring_values
+        terms = self._get_terms(raw_values)
+        values = [t.token for t in terms]
+        values = self._convert_to_value(values)
+        display_values = self._display_values(values, terms)
+        return self.fieldname, {
+            'values': values,
+            'display_values': display_values,
+            'type': self.valuetype,
+        }
+
+
+class CoringSOLZone(CoringUtility):
     fieldname = 'pcaZone'
     vocabulary_name = 'urban.vocabulary.SOLZones'
     valuetype = 'list'
     coring_attribute = u'CODECARTO'
 
 
-class CoringSOLBoolean(CoringSOL):
+class CoringSOLBoolean(CoringSOLZone):
     fieldname = 'isInPCA'
     vocabulary_name = 'urban.vocabulary.SOLZonesBoolean'
     valuetype = 'boolean'
@@ -97,22 +120,20 @@ class CoringNatura2000(CoringUtility):
     coring_attribute = u'CODE_SITE'
 
 
-class CoringParcellings(CoringUtility):
-    fieldname = 'subdivisionDetails'
+class CoringParcellings(CoringReferenceUtility):
+    fieldname = 'parcellings'
     vocabulary_name = 'urban.vocabulary.Parcellings'
-    valuetype = 'str'
+    valuetype = 'reference'
     coring_attribute = u'CODEUNIQUE'
-
-    def _to_str(self, values):
-        terms = self._get_terms(values)
-        values = [u'{0} ({1})'.format(t.title, t.token) for t in terms]
-        return [u', '.join(values)]
 
 
 class CoringParcellingsBoolean(CoringParcellings):
     fieldname = 'isInSubdivision'
-    vocabulary_name = 'urban.vocabulary.ParcellingsBoolean'
+    vocabulary_name = 'urban.vocabulary.Parcellings'
     valuetype = 'boolean'
+
+    def _to_boolean(self, values):
+        return [bool(values)]
 
 
 class CoringReparcellings(CoringUtility):
@@ -133,16 +154,40 @@ class CoringNoteworthyTrees(CoringUtility):
     coring_attribute = u'SITEAR'
 
 
+class CoringFolderZone(CoringUtility):
+    fieldname = 'folderZone'
+    vocabulary_name = 'urban.vocabulary.AreaPlan'
+    valuetype = 'list'
+    coring_attribute = u'AFFECT'
+
+
+class CoringCatchmentArea(CoringUtility):
+    fieldname = 'catchmentArea'
+    vocabulary_name = 'urban.vocabulary.CatchmentArea'
+    valuetype = 'list'
+    coring_attribute = u'TYPE_CODE'
+
+
 MATCH_CORING = {
     2: CoringNatura2000,
-    7: (CoringSOL, CoringSOLBoolean),
     8: (CoringParcellings, CoringParcellingsBoolean),
     12: CoringProtectedBuilding,
     16: CoringProtectedBuilding,
     18: CoringProtectedBuilding,
     14: CoringNoteworthyTrees,
     15: CoringNoteworthyTrees,
+    29: CoringFolderZone,
     30: CoringReparcellings,
+    37: CoringFolderZone,
+    38: CoringFolderZone,
+    39: CoringFolderZone,
+    40: CoringFolderZone,
+    41: CoringFolderZone,
+    42: CoringCatchmentArea,
+    43: CoringCatchmentArea,
+    44: CoringCatchmentArea,
+    46: CoringCatchmentArea,
+    45: (CoringSOLZone, CoringSOLBoolean),
 }
 
 
@@ -173,6 +218,7 @@ class ParcelCoringView(BrowserView):
         fields_to_update = []
         fields = {}
         for layer in coring_json:
+            print layer['layer_id']
             if not layer.get('attributes'):
                 continue
             if layer.get('layer_id') not in MATCH_CORING:
