@@ -76,57 +76,44 @@ schema = Schema((
         columns=('ref', 'capakey'),
     ),
     StringField(
-            name='envclasschoices',
-            default='ukn',
-            widget=MasterSelectWidget(
-                    label='Type de classe d\'environement',
-                    label_msgid='urban_label_listenvclasschoices',
-                    i18n_domain='urban',
-            ),
-            schemata='urban_description',
-            multiValued=1,
-            vocabulary='listEnvClassChoices',
+        name='envclasschoices',
+        default='ukn',
+        widget=MasterSelectWidget(
+            label='Type de classe d\'environement',
+            label_msgid='urban_label_listenvclasschoices',
+            i18n_domain='urban',
+        ),
+        schemata='urban_description',
+        multiValued=1,
+        vocabulary='listEnvClassChoices',
     ),
 ),
 )
 
-##code-section after-local-schema #fill in your manual code here
-##/code-section after-local-schema
-
 EnvClassBordering_schema = EnvClassOne.schema.copy() + schema.copy()
 
 
-##code-section after-schema #fill in your manual code here
-##/code-section after-schema
-
 class EnvClassBordering(EnvClassOne):
-  """
-  """
-  implements(interfaces.IEnvClassBordering)
+    """
+    """
+    implements(interfaces.IEnvClassBordering)
 
-  meta_type = 'EnvClassBordering'
+    meta_type = 'EnvClassBordering'
 
-  schema = EnvClassBordering_schema
-  ##code-section class-header #fill in your manual code here
-  ##/code-section class-header
+    schema = EnvClassBordering_schema
 
-
-
-  def listEnvClassChoices(self):
-    vocab = (
-      ('ukn', 'Non determiné'),
-      ('EnvClassOne', 'classe 1'),
-      ('EnvClassTwo', 'classe 2'),
-    )
-    return DisplayList(vocab)
+    def listEnvClassChoices(self):
+        vocab = (
+            ('ukn', 'Non determiné'),
+            ('EnvClassOne', 'classe 1'),
+            ('EnvClassTwo', 'classe 2'),
+        )
+        return DisplayList(vocab)
 
 
 registerType(EnvClassBordering, PROJECTNAME)
 
 
-# end of class EnvClassOne
-
-##code-section module-footer #fill in your manual code here
 def finalizeSchema(schema):
     """
        Finalizes the type schema to alter some fields
@@ -143,4 +130,3 @@ def finalizeSchema(schema):
 
 
 finalizeSchema(EnvClassBordering_schema)
-##/code-section module-footer
