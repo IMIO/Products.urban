@@ -249,6 +249,23 @@ class UniqueLicence(BaseFolder, BaseBuildLicence, EnvironmentBase, BrowserDefaul
 
     # Methods
 
+    def updateTitle(self):
+        """
+           Update the title to clearly identify the licence
+        """
+        if self.getApplicants():
+            applicantTitle = self.getApplicants()[0].Title()
+        else:
+            applicantTitle = translate('no_applicant_defined', 'urban', context=self.REQUEST).encode('utf8')
+        title = "%s - %s - %s - %s" % (
+            self.getReferenceSPE(),
+            self.getReference(),
+            self.getLicenceSubject(),
+            applicantTitle
+        )
+        self.setTitle(title)
+        self.reindexObject(idxs=('Title', 'applicantInfosIndex', 'sortable_title', ))
+
     def listProcedureChoices(self):
         vocab = (
             ('ukn', 'Non determiné'),
