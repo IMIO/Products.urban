@@ -54,27 +54,6 @@ schema = Schema((
         allow_oddeven=True,
         columns=('ref', 'capakey'),
     ),
-    DataGridField(
-        name='businessOldLocation',
-        schemata="urban_description",
-        widget=DataGridWidget(
-            columns={'number': Column("Number"), 'street': Column("Street")},
-            label=_('urban_label_businessOldLocation', default='Businessoldlocation'),
-        ),
-        allow_oddeven=True,
-        columns=('number', 'street'),
-        validators=('isValidStreetName',),
-    ),
-    DataGridField(
-        name='manualOldParcels',
-        schemata="urban_description",
-        widget=DataGridWidget(
-            columns={'ref': Column("Référence cadastrale"), 'capakey': Column("Capakey")},
-            label=_('urban_label_manualOldParcels', default='Manualoldparcels'),
-        ),
-        allow_oddeven=True,
-        columns=('ref', 'capakey'),
-    ),
     StringField(
         name='envclasschoices',
         default='ukn',
@@ -121,11 +100,16 @@ def finalizeSchema(schema):
     schema.moveField('city', after='workLocations')
     schema.moveField('zipcode', after='city')
     schema.moveField('manualParcels', after='zipcode')
-    schema.moveField('businessOldLocation', after='manualParcels')
-    schema.moveField('manualOldParcels', after='businessOldLocation')
-    schema.moveField('foldermanagers', after='manualOldParcels')
+    schema.moveField('foldermanagers', after='manualParcels')
     schema.moveField('description', after='additionalLegalConditions')
     schema.moveField('missingPartsDetails', after='missingParts')
+    to_remove_fields = (
+        'annoncedDelay',
+        'ftSolicitOpinionsTo',
+    )
+    for field in to_remove_fields:
+        if field in schema:
+            del schema[field]
     return schema
 
 
