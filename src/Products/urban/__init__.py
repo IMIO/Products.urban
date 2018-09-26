@@ -86,13 +86,47 @@ validation.register(isReferenceValidator('isReference'))
 import Products
 from Products.urban.content.licence.BuildLicence import BuildLicence
 
+from Products.urban.content.licence import Article127  # noqa
+from Products.urban.content.licence import BuildLicence  # noqa
+from Products.urban.content.licence import CODT_Article127  # noqa
+from Products.urban.content.licence import CODT_BuildLicence  # noqa
+from Products.urban.content.licence import CODT_CommercialLicence  # noqa
+from Products.urban.content.licence import CODT_IntegratedLicence  # noqa
+from Products.urban.content.licence import CODT_ParcelOutLicence  # noqa
+from Products.urban.content.licence import CODT_UniqueLicence  # noqa
+from Products.urban.content.licence import CODT_UrbanCertificateTwo  # noqa
+from Products.urban.content.licence import Declaration  # noqa
+from Products.urban.content.licence import Division  # noqa
+from Products.urban.content.licence import EnvClassThree  # noqa
+from Products.urban.content.licence import EnvClassTwo  # noqa
+from Products.urban.content.licence import EnvClassOne  # noqa
+from Products.urban.content.licence import EnvClassBordering  # noqa
+from Products.urban.content.licence import EnvironmentBase  # noqa
+from Products.urban.content.licence import EnvironmentLicence  # noqa
+from Products.urban.content.licence import GenericLicence  # noqa
+from Products.urban.content.licence import IntegratedLicence  # noqa
+from Products.urban.content.licence import MiscDemand  # noqa
+from Products.urban.content.licence import ParcelOutLicence  # noqa
+from Products.urban.content.licence import PatrimonyCertificate  # noqa
+from Products.urban.content.licence import PreliminaryNotice  # noqa
+from Products.urban.content.licence import ProjectMeeting  # noqa
+from Products.urban.content.licence import UrbanCertificateBase  # noqa
+from Products.urban.content.licence import UrbanCertificateTwo  # noqa
+from Products.urban.content.licence import UniqueLicence  # noqa
+from Products.urban.content.licence import ExplosivesPossession  # noqa
+from Products.urban.content.licence import RoadDecree  # noqa
+from Products.urban.content import CODT_Inquiry  # noqa
+from Products.urban.content import CODT_UniqueLicenceInquiry  # noqa
+from Products.urban.content import Inquiry  # noqa
+from Products.urban.content import UrbanEventAnnouncement  # noqa
+from Products.urban.content import UrbanEventInquiry  # noqa
+
+
 def initialize(context):
     """initialize product (called by zope)"""
     ##code-section custom-init-top #fill in your manual code here
     ##/code-section custom-init-top
-
     # imports packages and types for registration
-
     import Applicant
     import City
     import Claimant

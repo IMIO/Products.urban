@@ -29,6 +29,7 @@ from ConfigParser import ConfigParser
 from Products.CMFCore.permissions import setDefaultRoles
 
 import os
+import importlib
 
 PROJECTNAME = "urban"
 URBAN_CFG_DIR = '{}/../../var/urban'.format(os.environ['INSTANCE_HOME'])
@@ -327,9 +328,12 @@ def registerClasses():
     global ADD_CONTENT_PERMISSIONS
     classNames = ADD_CONTENT_PERMISSIONS.keys()
     for name in classNames:
-        exec 'import Products.urban.%s as module' % name
-        klass = None  # PEP8
-        exec 'klass = module.%s' % name
+        print name
+        try:
+            exec 'import Products.urban.%s as module' % name
+        except ImportError:
+            module = getattr(importlib.import_module('Products.urban'), name)
+        klass = getattr(module, name)
         key = 'urban.%s' % name
         if key in Products.Archetypes.ATToolModule._types:
             # Unregister the class
