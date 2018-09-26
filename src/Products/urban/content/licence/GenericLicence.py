@@ -325,7 +325,7 @@ schema = Schema((
         ),
         schemata='urban_road',
         multiValued=1,
-        vocabulary='listCatchmentAreas',
+        vocabulary_factory='urban.vocabulary.CatchmentArea',
     ),
     TextField(
         name='catchmentAreaDetails',
@@ -505,7 +505,7 @@ schema = Schema((
         ),
         schemata='urban_location',
         multiValued=True,
-        vocabulary=UrbanVocabulary('folderzones', inUrbanConfig=False),
+        vocabulary_factory='urban.vocabulary.AreaPlan',
         default_method='getDefaultValue',
     ),
     TextField(
@@ -940,7 +940,7 @@ schema = Schema((
         ),
         allowed_types=('ParcellingTerm',),
         schemata='urban_location',
-        multiValued=False,
+        multiValued=True,
         relationship='licenceParcelling',
     ),
     LinesField(

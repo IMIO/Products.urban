@@ -343,7 +343,6 @@ def finalizeSchema(schema):
     schema['pcaDetails'].widget.label = _('urban_label_sol_details')
     schema['exemptFDArticle'].widget.label = _('urban_label_exemptFDArticleCODT')
     schema['implantation'].widget.label = _('urban_label_implantationCODT')
-    schema['pca'].vocabulary = UrbanVocabulary('sols', vocType="PcaTerm", inUrbanConfig=False)
     schema['pcaZone'].vocabulary_factory = 'urban.vocabulary.SOLZones'
     return schema
 
