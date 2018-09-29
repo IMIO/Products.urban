@@ -217,7 +217,7 @@ URBAN_CODT_TYPES = [
     'CODT_BuildLicence', 'CODT_Article127', 'CODT_CommercialLicence', 'CODT_IntegratedLicence',
     'CODT_ParcelOutLicence', 'CODT_UniqueLicence', 'CODT_UrbanCertificateTwo', 'CODT_UrbanCertificateOne',
     'CODT_NotaryLetter', 'ProjectMeeting', 'MiscDemand', 'PreliminaryNotice',
-    'PatrimonyCertificate', 'Division',
+    'PatrimonyCertificate', 'Division', 'RoadDecree',
 ]
 
 URBAN_ENVIRONMENT_TYPES = [
