@@ -200,22 +200,3 @@ class isReferenceValidator(object):
         if len(catalog(getReference=value)) > 0:
             return 1
         return translate(_('error_reference', default=u"The reference does not exist"))
-
-
-
-class isRoadDecreeReferenceValidator(object):
-    """
-    Check that the reference is used by a licence
-    """
-    implements(IValidator)
-
-    def __init__(self, name):
-        self.name = name
-
-    def __call__(self, value, *args, **kwargs):
-        catalog = api.portal.get_tool('portal_catalog')
-        if not value:
-            return 1
-        if len(catalog(getRoad_decree_reference=value)) > 0:
-            return 1
-        return translate(_('error_reference_road_decree', default=u"The reference of road decree does not exist"))
