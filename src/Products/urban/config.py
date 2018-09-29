@@ -331,7 +331,6 @@ def registerClasses():
     global ADD_CONTENT_PERMISSIONS
     classNames = ADD_CONTENT_PERMISSIONS.keys()
     for name in classNames:
-        print name
         try:
             exec 'import Products.urban.%s as module' % name
         except ImportError:
