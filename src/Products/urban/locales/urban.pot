@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2018-09-06 06:58+0000\n"
+"POT-Creation-Date: 2018-09-29 09:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -45,15 +45,15 @@ msgstr ""
 msgid "Add Category Switch Portlet"
 msgstr ""
 
-#: ../browser/portlets.py:116
+#: ../browser/portlets.py:123
 msgid "Add Urban config Portlet"
 msgstr ""
 
-#: ../browser/portlets.py:186
+#: ../browser/portlets.py:193
 msgid "Add Urban scheduled licences Portlet"
 msgstr ""
 
-#: ../browser/portlets.py:61
+#: ../browser/portlets.py:66
 msgid "Add Urban tools Portlet"
 msgstr ""
 
@@ -202,15 +202,15 @@ msgstr ""
 msgid "Edit Category Switch Portlet"
 msgstr ""
 
-#: ../browser/portlets.py:125
+#: ../browser/portlets.py:132
 msgid "Edit Urban config Portlet"
 msgstr ""
 
-#: ../browser/portlets.py:195
+#: ../browser/portlets.py:202
 msgid "Edit Urban scheduled licences Portlet"
 msgstr ""
 
-#: ../browser/portlets.py:70
+#: ../browser/portlets.py:75
 msgid "Edit Urban tools Portlet"
 msgstr ""
 
@@ -622,15 +622,15 @@ msgstr ""
 msgid "This UrbanEventInquiry is not linked to an existing Inquiry !  Define a new inquiry on the licence !"
 msgstr ""
 
-#: ../browser/portlets.py:187
+#: ../browser/portlets.py:194
 msgid "This portlet lists scheduled licences."
 msgstr ""
 
-#: ../browser/portlets.py:117
+#: ../browser/portlets.py:124
 msgid "This portlet lists urban configuration."
 msgstr ""
 
-#: ../browser/portlets.py:62
+#: ../browser/portlets.py:67
 msgid "This portlet lists various urban functionnalities."
 msgstr ""
 
