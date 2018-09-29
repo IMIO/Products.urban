@@ -81,8 +81,6 @@ from validators.validator import isNotDuplicatedReferenceValidator
 validation.register(isNotDuplicatedReferenceValidator('isNotDuplicatedReference'))
 from validators.validator import isReferenceValidator
 validation.register(isReferenceValidator('isReference'))
-from validators.validator import isRoadDecreeReferenceValidator
-validation.register(isReferenceValidator('isRoadDecreeReference'))
 ##/code-section custom-init-head
 
 import Products

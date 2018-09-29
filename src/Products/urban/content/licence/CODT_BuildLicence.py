@@ -23,7 +23,7 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.urban.config import *
 from Products.urban import UrbanMessage as _
-from Products.urban.widget.urbanreferencewidget import UrbanReferenceWidget
+from Products.urban.widget.urbanreferencewidget import UrbanBackReferenceWidget
 
 
 ##code-section module-header #fill in your manual code here
@@ -49,15 +49,15 @@ schema = Schema((
         schemata='urban_analysis',
     ),
     StringField(
-            name='road_decree_reference',
-            widget=UrbanReferenceWidget(
-                    label=_('road_decree_reference', default='road_decree_reference'),
-                    portal_types=['RoadDecree'],
-            ),
-            required=False,
-            schemata='urban_description',
-            default_method='getDefaultText',
-            validators=('isRoadDecreeReference',),
+        name='road_decree_reference',
+        widget=UrbanBackReferenceWidget(
+            label=_('road_decree_reference', default='road_decree_reference'),
+            portal_types=['RoadDecree'],
+        ),
+        required=False,
+        schemata='urban_description',
+        default_method='getDefaultText',
+        validators=('isReference',),
     ),
 
 ),
