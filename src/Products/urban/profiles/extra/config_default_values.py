@@ -1344,7 +1344,7 @@ default_values = {
 
         'townroaddecree': [
             'UrbanVocabularyTerm', ['RoadDecree'],
-            {'id': "Liege", 'title': u"Liège et commune voisine"},
+            {'id': "commune", 'title': u"Commune"},
         ],
 
         'folderdelays': [
