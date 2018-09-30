@@ -2597,3 +2597,9 @@ msgstr ""
 
 msgid "envclassborderings"
 msgstr ""
+
+msgid "RoadDecree"
+msgstr ""
+
+msgid "roaddecrees"
+msgstr ""
