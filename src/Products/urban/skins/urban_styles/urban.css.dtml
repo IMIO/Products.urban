@@ -430,4 +430,16 @@ span.option {
     padding-bottom: 3px;
 }
 
+/* ckeditor styles */
+body.cke_editable table:not([border='0']):not([style*="border"])  tr td,
+body.cke_editable table.cke_show_border:not([border='0']):not([style*="border"])  tr td {
+    border: 1px solid black;
+}
+body.cke_editable table:not([cellpadding='0']) tr td,
+body.cke_editable table:not([cellpadding='0']) tr th,
+body.cke_editable table[cellpadding='0'] tr td,
+body.cke_editable table[cellpadding='0'] tr th,
+/* ckeditor styles end */
+
+
 /* </dtml-with> */
