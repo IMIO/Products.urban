@@ -452,6 +452,13 @@ div.pmMoreInfo table[cellpadding='0'] tr td,
 div.pmMoreInfo table[cellpadding='0'] tr th {
     padding: 0em !important;
 }
+#content fieldset, body#content.cke_editable {
+    line-height: 1.25em;
+}
+#content p, #content table, #content dl, dl.portlet p, dl.portlet {
+    margin-bottom: 1em;
+}
+
 /* ckeditor styles end */
 
 
