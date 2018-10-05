@@ -437,8 +437,21 @@ body.cke_editable table.cke_show_border:not([border='0']):not([style*="border"])
 }
 body.cke_editable table:not([cellpadding='0']) tr td,
 body.cke_editable table:not([cellpadding='0']) tr th,
+div[id^='hook_'] table:not([cellpadding='0']) tr td,
+div[id^='hook_'] table:not([cellpadding='0']) tr th,
+div.pmMoreInfo table:not([cellpadding='0']) tr td,
+div.pmMoreInfo table:not([cellpadding='0']) tr th {
+    padding: 0.3em;
+}
+/* force no padding when cellpadding="0" */
 body.cke_editable table[cellpadding='0'] tr td,
 body.cke_editable table[cellpadding='0'] tr th,
+div[id^='hook_'] table[cellpadding='0'] tr td,
+div[id^='hook_'] table[cellpadding='0'] tr th,
+div.pmMoreInfo table[cellpadding='0'] tr td,
+div.pmMoreInfo table[cellpadding='0'] tr th {
+    padding: 0em !important;
+}
 /* ckeditor styles end */
 
 
