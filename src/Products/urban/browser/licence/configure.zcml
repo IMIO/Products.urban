@@ -171,7 +171,7 @@
   <browser:page
      for="Products.urban.interfaces.IParcelOutLicence"
      name="parceloutlicenceview"
-     class=".codt_parceloutlicenceview.CODTParcelOutLicenceView"
+     class=".parceloutlicenceview.ParcelOutLicenceView"
      template="templates/parceloutlicenceview.pt"
      permission="zope2.View"
   />
@@ -186,7 +186,6 @@
   <browser:page
      for="Products.urban.interfaces.ICODT_ParcelOutLicence"
      name="parceloutlicenceview"
-     class=".parceloutlicenceview.ParcelOutLicenceView"
      template="templates/parceloutlicenceview.pt"
      permission="zope2.View"
   />
@@ -194,6 +193,7 @@
   <browser:page
      name="parceloutlicence-macros"
      for="Products.urban.interfaces.ICODT_ParcelOutLicence"
+     class=".codt_parceloutlicenceview.CODTParcelOutLicenceView"
      template="templates/parceloutlicencemacros.pt"
      permission="zope2.View"
   />
