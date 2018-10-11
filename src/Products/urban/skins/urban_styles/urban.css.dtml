@@ -176,20 +176,11 @@ a.datagridwidget-add-button, a.datagridwidget-add-button:hover {
     width: 150px;
 }
 
-#datagridwidget-table-workLocations {
-    width: 600px !important;
-}
-
-#datagridwidget-table-manualParcels {
-    width: 600px !important;
-}
-
-#datagridwidget-table-manualOldParcels {
-    width: 600px !important;
-}
-
+#datagridwidget-table-workLocations,
+#datagridwidget-table-manualParcels,
+#datagridwidget-table-manualOldParcels,
 #datagridwidget-table-businessOldLocation {
-    width: 600px !important;
+    width: 800px !important;
 }
 
 #datagridwidget-table-roadEquipments {
