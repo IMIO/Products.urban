@@ -194,7 +194,7 @@
   <browser:page
      name="parceloutlicence-macros"
      for="Products.urban.interfaces.ICODT_ParcelOutLicence"
-     template="templates/parceloutlicencemacros.pt"
+     template="templates/codt_parceloutlicencemacros.pt"
      permission="zope2.View"
   />
 
