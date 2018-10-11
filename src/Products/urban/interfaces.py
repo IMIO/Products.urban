@@ -1,9 +1,8 @@
-#-*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 
 from zope.interface import Interface
 from zope import schema
 
-##code-section HEAD
 from zope.interface.interfaces import IInterface
 
 from Products.urban import UrbanMessage as _
@@ -28,14 +27,13 @@ class IGeometrician(Interface):
     """Marker interface for .Geometrician.Geometrician
     """
 
+
 CONTACT_INTERFACES = {
     'Architect': IArchitect,
     'Geometrician': IGeometrician,
     'Notary': INotary,  # to be taken into account if notary.py is removed
     'Proprietary': IProprietary,  # to be taken into account if proprietary.py is removed
 }
-
-##/code-section HEAD
 
 
 class IGenericLicence(Interface):
@@ -562,17 +560,7 @@ class ICODT_NotaryLetter(Interface):
     """
 
 
-class IEnvClassThree(Interface):
-    """Marker interface for EnvClassThree
-    """
-
-
 class IEnvCLassOne(Interface):
-    """Marker interface for EnvClassOne
-    """
-
-
-class IEnvClassBordering(Interface):
     """Marker interface for EnvClassOne
     """
 
@@ -621,7 +609,6 @@ class IIsArchive(Interface):
 
     def is_archive(self):
         """ """
-##/code-section FOOT
 
 
 class ITestConfig(Interface):
@@ -650,4 +637,14 @@ class IInternalOpinionServices(Interface):
             key_type=schema.ASCIILine(),
             value_type=schema.ASCIILine()
         )
+    )
+
+
+class IAsyncInquiryRadius(Interface):
+    """ """
+    inquiries_to_do = schema.Dict(
+        title=_(u"Planned inquiries"),
+        description=_(u"inquiries planned for radius search"),
+        key_type=schema.ASCIILine(),
+        value_type=schema.Int()
     )
