@@ -23,6 +23,7 @@ from Acquisition import aq_base
 from Products.Archetypes.event import ObjectInitializedEvent
 from Products.Archetypes.event import EditBegunEvent
 from Products.CMFPlone.utils import base_hasattr
+from Products.cron4plone.browser.configlets.cron_configuration import ICronConfiguration
 from Products.urban.config import DefaultTexts
 from Products.urban.config import URBAN_CFG_DIR
 from Products.urban.config import URBAN_TYPES
@@ -173,7 +174,6 @@ def postInstall(context):
     logger.info("setupTest : starting...")
     setupTest(context.getSite())
     logger.info("setupTest : Done")
-
     logger.info("setDefaultApplicationSecurity : starting...")
     setDefaultApplicationSecurity(context)
     logger.info("setDefaultApplicationSecurity : Done")
@@ -183,6 +183,9 @@ def postInstall(context):
     logger.info("adaptDefaultPortal : starting...")
     adaptDefaultPortal(context)
     logger.info("adaptDefaultPortal : Done")
+    logger.info("addDefaultCronJobs : starting...")
+    addDefaultCronJobs(context)
+    logger.info("addDefaultCronJobs : Done")
 
 
 ##code-section FOOT
@@ -209,6 +212,13 @@ def extraPostInstall(context):
     addEventTypesAndTemplates(context)
     logger.info("addEventTypesAndTemplates : Done")
 
+
+def addDefaultCronJobs(context):
+    cron_cfg = queryUtility(ICronConfiguration, name='cron4plone_config', context=api.portal.get())
+    cron_cfg.cronjobs = [
+        u'0 0 * * portal/@@update_college_done_tasks',
+        u'0 2 * * portal/@@inquiry_radius',
+    ]
 
 def setFolderAllowedTypes(folder, portal_types):
     """

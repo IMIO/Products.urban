@@ -192,6 +192,15 @@ schema = Schema((
         schemata='public_settings',
     ),
     BooleanField(
+        name='asyncInquiryRadius',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label=_('urban_label_asyncInquiryRadius',
+                    default='Asyncinquiryradius'),
+        ),
+        schemata='public_settings',
+    ),
+    BooleanField(
         name='logMapRequests',
         default=True,
         widget=BooleanField._properties['widget'](

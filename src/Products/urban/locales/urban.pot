@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2018-09-30 15:24+0000\n"
+"POT-Creation-Date: 2018-10-10 12:56+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -303,166 +303,166 @@ msgstr ""
 msgid "History saved"
 msgstr ""
 
-#: ../interfaces.py:417
+#: ../interfaces.py:415
 msgid "IAcknowledgment type marker interface"
 msgstr ""
 
-#: ../interfaces.py:457
+#: ../interfaces.py:455
 msgid "IAnnouncement type marker interface"
 msgstr ""
 
-#: ../interfaces.py:449
+#: ../interfaces.py:447
 msgid "ICODTProcedureChoiceNotified type marker interface"
 msgstr ""
 
-#: ../interfaces.py:381
+#: ../interfaces.py:379
 msgid "ICollege type marker interface"
 msgstr ""
 
-#: ../interfaces.py:461
+#: ../interfaces.py:459
 msgid "ICollegeOpinionTransmitToSPWEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:481
+#: ../interfaces.py:479
 msgid "ICollegeReport type marker interface"
 msgstr ""
 
-#: ../interfaces.py:425
+#: ../interfaces.py:423
 msgid "ICommunalCouncil type marker interface"
 msgstr ""
 
-#: ../interfaces.py:465
+#: ../interfaces.py:463
 msgid "IDecisionProjectFromSPWEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:421
+#: ../interfaces.py:419
 msgid "IDefaultCODTAcknowledgmentEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:429
+#: ../interfaces.py:427
 msgid "IDeposit type marker interface"
 msgstr ""
 
-#: ../interfaces.py:497
+#: ../interfaces.py:495
 msgid "IDisplayingTheDecisionEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:521
+#: ../interfaces.py:519
 msgid "IEnvironmentOnly type marker interface"
 msgstr ""
 
-#: ../interfaces.py:409
+#: ../interfaces.py:407
 msgid "IEnvironmentSimpleCollegeEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:453
+#: ../interfaces.py:451
 msgid "IInquiry type marker interface"
 msgstr ""
 
-#: ../interfaces.py:537
+#: ../interfaces.py:535
 msgid "IInternalPrelimaryAdvice type marker interface"
 msgstr ""
 
-#: ../interfaces.py:469
+#: ../interfaces.py:467
 msgid "ILicenceDelivery type marker interface"
 msgstr ""
 
-#: ../interfaces.py:473
+#: ../interfaces.py:471
 msgid "ILicenceEffectiveStart type marker interface"
 msgstr ""
 
-#: ../interfaces.py:477
+#: ../interfaces.py:475
 msgid "ILicenceExpiration type marker interface"
 msgstr ""
 
-#: ../interfaces.py:493
+#: ../interfaces.py:491
 msgid "ILicenceNotification type marker interface"
 msgstr ""
 
-#: ../interfaces.py:445
+#: ../interfaces.py:443
 msgid "IMissingPart type marker interface"
 msgstr ""
 
-#: ../interfaces.py:433
+#: ../interfaces.py:431
 msgid "IMissingPartDeposit type marker interface"
 msgstr ""
 
-#: ../interfaces.py:437
+#: ../interfaces.py:435
 msgid "IMissingPartTransmitToSPWEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:441
+#: ../interfaces.py:439
 msgid "IModificationDeposit type marker interface"
 msgstr ""
 
-#: ../interfaces.py:389
+#: ../interfaces.py:387
 msgid "IOpinionRequest type marker interface"
 msgstr ""
 
-#: ../interfaces.py:513
+#: ../interfaces.py:511
 msgid "IProrogation type marker interface"
 msgstr ""
 
-#: ../interfaces.py:501
+#: ../interfaces.py:499
 msgid "IRecourseEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:517
+#: ../interfaces.py:515
 msgid "IRefusedIncompleteness type marker interface"
 msgstr ""
 
-#: ../interfaces.py:405
+#: ../interfaces.py:403
 msgid "ISimpleCollegeEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:385
+#: ../interfaces.py:383
 msgid "ITechnicalServiceOpinionRequest type marker interface"
 msgstr ""
 
-#: ../interfaces.py:485
+#: ../interfaces.py:483
 msgid "ITheLicence type marker interface"
 msgstr ""
 
-#: ../interfaces.py:413
+#: ../interfaces.py:411
 msgid "ITransmitToSPWEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:529
+#: ../interfaces.py:527
 msgid "IUrbanAndEnvironment type marker interface"
 msgstr ""
 
-#: ../interfaces.py:525
+#: ../interfaces.py:523
 msgid "IUrbanOrEnvironment type marker interface"
 msgstr ""
 
-#: ../interfaces.py:401
+#: ../interfaces.py:399
 msgid "IWalloonRegionDecisionEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:397
+#: ../interfaces.py:395
 msgid "IWalloonRegionOpinionRequest type marker interface"
 msgstr ""
 
-#: ../interfaces.py:393
+#: ../interfaces.py:391
 msgid "IWalloonRegionPrimo type marker interface"
 msgstr ""
 
-#: ../interfaces.py:505
+#: ../interfaces.py:503
 msgid "IWorkBeginning type marker interface"
 msgstr ""
 
-#: ../interfaces.py:509
+#: ../interfaces.py:507
 msgid "IWorkEnd type marker interface"
 msgstr ""
 
-#: ../interfaces.py:533
+#: ../interfaces.py:531
 msgid "ImpactStudy event type marker interface"
 msgstr ""
 
 msgid "IntegratedLicence"
 msgstr ""
 
-#: ../interfaces.py:646
+#: ../interfaces.py:633
 msgid "Internal opinion services"
 msgstr ""
 
@@ -519,6 +519,10 @@ msgid "ParcelOutLicence"
 msgstr ""
 
 msgid "PatrimonyCertificate"
+msgstr ""
+
+#: ../interfaces.py:646
+msgid "Planned inquiries"
 msgstr ""
 
 msgid "PreliminaryNotice"
@@ -603,7 +607,7 @@ msgstr ""
 msgid "Service id"
 msgstr ""
 
-#: ../interfaces.py:647
+#: ../interfaces.py:634
 msgid "Services that can give their opinion directly through urban"
 msgstr ""
 
@@ -631,6 +635,10 @@ msgstr ""
 
 #: ../browser/longtextview.py:30
 msgid "The field does not exist !!!"
+msgstr ""
+
+#: ../browser/urbaneventviews.py:356
+msgid "The parcel radius search will be ready tomorrow!"
 msgstr ""
 
 #: ../browser/urbaneventviews.py:354
@@ -1495,6 +1503,10 @@ msgid "help_search_parcels"
 msgstr ""
 
 msgid "inadmissibilityreasons_folder_title"
+msgstr ""
+
+#: ../interfaces.py:647
+msgid "inquiries planned for radius search"
 msgstr ""
 
 #. Default: "Inquiry data"
@@ -2682,6 +2694,11 @@ msgstr ""
 msgid "urban_label_askingDate"
 msgstr ""
 
+#. Default: "Asyncinquiryradius"
+#: ../UrbanTool.py:198
+msgid "urban_label_asyncInquiryRadius"
+msgstr ""
+
 #. Default: "Auditiondate"
 #: ../UrbanEvent.py:112
 msgid "urban_label_auditionDate"
@@ -2755,7 +2772,6 @@ msgid "urban_label_businessLocation"
 msgstr ""
 
 #. Default: "Old business location"
-#: ../browser/licence/templates/envclassborderingmacros.pt:53
 #: ../browser/licence/templates/worklocation_macro.pt:22
 #: ../content/licence/EnvironmentBase.py:147
 msgid "urban_label_businessOldLocation"
@@ -3700,7 +3716,7 @@ msgid "urban_label_locationTechnicalRemarks"
 msgstr ""
 
 #. Default: "Logmaprequests"
-#: ../UrbanTool.py:198
+#: ../UrbanTool.py:207
 msgid "urban_label_logMapRequests"
 msgstr ""
 
@@ -4719,7 +4735,7 @@ msgid "urban_label_usage"
 msgstr ""
 
 #. Default: "Useplonemeetingwsclient"
-#: ../UrbanTool.py:207
+#: ../UrbanTool.py:216
 msgid "urban_label_usePloneMeetingWSClient"
 msgstr ""
 

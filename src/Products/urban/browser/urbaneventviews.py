@@ -3,7 +3,7 @@
 from Acquisition import aq_inner
 from Products.urban import utils
 from Products.Five import BrowserView
-from Products.CMFPlone import PloneMessageFactory as _
+from Products.urban import UrbanMessage as _
 from Products.urban.browser.mapview import MapView
 from Products.urban.browser.licence.licenceview import LicenceView
 from Products.urban.browser.table.urbantable import DocumentsTable
@@ -200,14 +200,14 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
         linkedInquiry = context.getLinkedInquiry()
         fields = []
         if not linkedInquiry:
-            #this should not happen...
+            # this should not happen...
             return None
         displayed_fields = self.getUsedAttributes()
         inquiry_fields = utils.getSchemataFields(linkedInquiry, displayed_fields, 'urban_inquiry')
         for inquiry_field in inquiry_fields:
             if inquiry_field.__name__ == "claimsText":
-                #as this text can be very long, we do not want to show it with the other
-                #fields, we will display it in the "Claimants" part of the template
+                # as this text can be very long, we do not want to show it with the other
+                # fields, we will display it in the "Claimants" part of the template
                 continue
             fields.append(inquiry_field)
 
@@ -245,7 +245,7 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
         linkedInquiry = context.getLinkedInquiry()
         if linkedInquiry:
             if not linkedInquiry.portal_type == 'Inquiry':
-                #we do not use Title as this inquiry is the licence
+                # we do not use Title as this inquiry is the licence
                 return linkedInquiry.generateInquiryTitle()
             else:
                 return linkedInquiry.Title()
@@ -352,6 +352,8 @@ class UrbanEventInquiryView(UrbanEventInquiryBaseView):
             plone_utils.addPortalMessage(_('This UrbanEventInquiry is not linked to an existing Inquiry !  Define a new inquiry on the licence !'), type="error")
         if self.hasPOWithoutAddress():
             plone_utils.addPortalMessage(_('There are parcel owners without any address found! Desactivate them!'), type="warning")
+        if self.is_planned_inquiry:
+            plone_utils.addPortalMessage(_('The parcel radius search will be ready tomorrow!'), type="warning")
         # disable portlets
         self.request.set('disable_plone.rightcolumn', 1)
         self.request.set('disable_plone.leftcolumn', 1)
@@ -381,14 +383,25 @@ class UrbanEventInquiryView(UrbanEventInquiryBaseView):
                 return True
         return False
 
-    def getInvestigationPOs(self, radius=0):
+    @property
+    def is_planned_inquiry(self):
+        planned_inquiries = api.portal.get_registry_record(
+            'Products.urban.interfaces.IAsyncInquiryRadius.inquiries_to_do'
+        ) or {}
+        is_planned = self.context.UID() in planned_inquiries
+        return is_planned
+
+    def getInvestigationPOs(self, radius=0, force=False):
         """
         Search parcel owners in a radius of 50 meters...
         """
-        #if we do the search again, we first delete old datas...
-        #remove every RecipientCadastre
+        # if we do the search again, we first delete old datas...
+        # remove every RecipientCadastre
         context = aq_inner(self.context)
+        urban_tool = api.portal.get_tool('portal_urban')
         recipients = context.getRecipients()
+        if self.is_planned_inquiry and not force:
+            return self.request.response.redirect(self.context.absolute_url())
         if recipients:
             context.manage_delObjects([recipient.getId() for recipient in recipients if recipient.Title()])
 
@@ -402,6 +415,19 @@ class UrbanEventInquiryView(UrbanEventInquiryBaseView):
             radius=radius
         )
 
+        if not force and urban_tool.getAsyncInquiryRadius() and len(neighbour_parcels) > 40:
+            planned_inquiries = api.portal.get_registry_record(
+                'Products.urban.interfaces.IAsyncInquiryRadius.inquiries_to_do'
+            ) or {}
+            planned_inquiries[self.context.UID()] = radius
+            api.portal.set_registry_record(
+                'Products.urban.interfaces.IAsyncInquiryRadius.inquiries_to_do',
+                planned_inquiries
+            )
+            return self.request.response.redirect(
+                self.context.absolute_url() + '/#fieldsetlegend-urbaneventinquiry_recipients'
+            )
+
         for parcel in neighbour_parcels:
             owners = cadastre.query_owners_of_parcel(parcel.capakey)
             for owner in owners:
@@ -409,8 +435,8 @@ class UrbanEventInquiryView(UrbanEventInquiryBaseView):
                 adr1 = owner.adr1 and str(owner.adr1.encode('utf-8')) or ''
                 adr2 = owner.adr2 and str(owner.adr2.encode('utf-8')) or ''
                 print pe, adr1, adr2
-                #to avoid having several times the same Recipient (that could for example be on several parcels
-                #we first look in portal_catalog where Recipients are catalogued
+                # to avoid having several times the same Recipient (that could for example be on several parcels
+                # we first look in portal_catalog where Recipients are catalogued
                 brains = context.portal_catalog(
                     portal_type="RecipientCadastre",
                     path={'query': event_path, },
@@ -441,7 +467,7 @@ class UrbanEventInquiryView(UrbanEventInquiryBaseView):
                             daa=owner.daa
                         )
                         newrecipient = getattr(context, newrecipientname)
-                #create the PortionOut using the createPortionOut method...
+                # create the PortionOut using the createPortionOut method...
                 with api.env.adopt_roles(['Manager']):
                     context.portal_urban.createPortionOut(container=newrecipient, **parcel.reference_as_dict())
         cadastre.close()
