@@ -458,6 +458,12 @@ div.pmMoreInfo table[cellpadding='0'] tr th {
 #content p, #content table, #content dl, dl.portlet p, dl.portlet {
     margin-bottom: 1em;
 }
+.highlight-red {
+    color: red;
+}
+.highlight-yellow {
+    background-color: yellow;
+}
 
 /* ckeditor styles end */
 
