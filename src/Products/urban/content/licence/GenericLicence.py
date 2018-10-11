@@ -118,7 +118,7 @@ schema = Schema((
     StringField(
         name='licenceSubject',
         widget=StringField._properties['widget'](
-            size=50,
+            size=120,
             label=_('urban_label_licenceSubject', default='Licencesubject'),
         ),
         schemata='urban_description',
@@ -126,7 +126,7 @@ schema = Schema((
     StringField(
         name='reference',
         widget=StringField._properties['widget'](
-            size=30,
+            size=60,
             label=_('urban_label_reference', default='Reference'),
         ),
         schemata='urban_description',
@@ -135,7 +135,7 @@ schema = Schema((
     StringField(
         name='referenceDGATLP',
         widget=StringField._properties['widget'](
-            size=30,
+            size=60,
             label=_('urban_label_referenceDGATLP', default='Referencedgatlp'),
         ),
         schemata='urban_description',
