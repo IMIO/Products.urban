@@ -49,6 +49,28 @@
 </metal:pca>
 
 
+<metal:subdivision define-macro="delayAfterModifiedBlueprints">
+    <tal:modified_blueprints define="modified_blueprints context/getHasModifiedBlueprints" condition="modified_blueprints">
+        <td valign="top"><b><span i18n:translate="urban_label_delayAfterModifiedBlueprints">Modified blueprints?</span>:</b></td>
+        <td width="10px"></td>
+        <td width="49%" valign="top" valign="top">
+            <metal:myfield use-macro="python:here.widget('delayAfterModifiedBlueprints', mode='view')" />
+        </td>
+    </tal:modified_blueprints>
+</metal:subdivision>
+
+
+<metal:subdivision define-macro="delayAfterModifiedBlueprintsDetails">
+    <tal:modified_blueprints define="modified_blueprints context/getHasModifiedBlueprints" condition="modified_blueprints">
+        <td valign="top"><b><span i18n:translate="urban_label_delayAfterModifiedBlueprintsDetails">Modified blueprints?</span>:</b></td>
+        <td width="10px"></td>
+        <td width="49%" valign="top" valign="top">
+            <metal:myfield use-macro="python:here.widget('delayAfterModifiedBlueprintsDetails', mode='view')" />
+        </td>
+    </tal:modified_blueprints>
+</metal:subdivision>
+
+
 <metal:investigationArticles define-macro="investigationArticles">
 
     <tr tal:define="investigationArticles context/getCustomInvestigationArticles" tal:repeat="investigationArticle investigationArticles">
