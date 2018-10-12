@@ -46,7 +46,6 @@ optional_fields = [
 ]
 
 slave_fields_habitation = (
-    # if in a pca, display a selectbox
     {
         'name': 'shouldNumerotateBuildings',
         'action': 'hide',
@@ -103,7 +102,19 @@ slave_fields_procedurechoice = (
         'toggle_method': 'showRequirementFromFD',
         'control_param': 'values',
     },
+)
 
+slave_fields_modified_blueprints = (
+    {
+        'name': 'delayAfterModifiedBlueprints',
+        'action': 'show',
+        'hide_values': (True, ),
+    },
+    {
+        'name': 'delayAfterModifiedBlueprintsDetails',
+        'action': 'show',
+        'hide_values': (True, ),
+    },
 )
 
 slave_fields_composition = (
@@ -405,6 +416,41 @@ schema = Schema((
         schemata='urban_analysis',
         vocabulary=UrbanVocabulary('exemptfdarticle', with_empty_value=True),
         default_method='getDefaultValue',
+    ),
+    BooleanField(
+        name='hasModifiedBlueprints',
+        default=False,
+        widget=MasterBooleanWidget(
+            slave_fields=slave_fields_modified_blueprints,
+            label=_('urban_label_hasModifiedBlueprints', default='Hasmodifiedblueprints'),
+        ),
+        schemata='urban_analysis',
+    ),
+    StringField(
+        name='delayAfterModifiedBlueprints',
+        widget=SelectionWidget(
+            label=_(
+                'urban_label_delayAfterModifiedBlueprints',
+                default='Delayaftermodifiedblueprints'
+            ),
+        ),
+        schemata='urban_analysis',
+        vocabulary=UrbanVocabulary('folderdelays', vocType='UrbanDelay', with_empty_value=True),
+        default_method='getDefaultValue',
+    ),
+    TextField(
+        name='delayAfterModifiedBlueprintsDetails',
+        allowable_content_types=('text/plain',),
+        widget=TextAreaWidget(
+            label=_(
+                'urban_label_delayAfterModifiedBlueprintsDetails',
+                default='Delayaftermodifiedblueprintsdetails'
+            ),
+        ),
+        schemata='urban_analysis',
+        default_method='getDefaultText',
+        default_content_type='text/plain',
+        default_output_type='text/html',
     ),
     BooleanField(
         name='water',
@@ -712,7 +758,10 @@ def finalizeSchema(schema):
     schema.moveField('requirementFromFD', before='annoncedDelay')
     schema.moveField('townshipCouncilFolder', after='futureRoadCoating')
     schema.moveField('annoncedDelayDetails', after='annoncedDelay')
-    schema.moveField('impactStudy', after='annoncedDelayDetails')
+    schema.moveField('hasModifiedBlueprints', after='annoncedDelayDetails')
+    schema.moveField('delayAfterModifiedBlueprints', after='hasModifiedBlueprints')
+    schema.moveField('delayAfterModifiedBlueprintsDetails', after='delayAfterModifiedBlueprints')
+    schema.moveField('impactStudy', after='delayAfterModifiedBlueprintsDetails')
     schema.moveField('procedureChoice', before='description')
     schema.moveField('exemptFDArticle', after='procedureChoice')
     schema.moveField('water', after='futureRoadCoating')

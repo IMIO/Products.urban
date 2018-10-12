@@ -5,11 +5,14 @@ from imio.schedule.content.delay import BaseCalculationDelay
 
 class AnnoncedDelay(BaseCalculationDelay):
     """
-    Return the slected annonced delay of the procedure.
+    Return the selected annonced delay of the procedure.
     """
 
     def calculate_delay(self):
-        delay = self.task_container.getAnnoncedDelay()
+        licence = self.task_container
+        delay = licence.getAnnoncedDelay()
+        if licence.getHasModifiedBlueprints():
+            delay = licence.getDelayAfterModifiedBlueprints()
         if delay.endswith('j'):
             return int(delay[:-1])
         return 0
@@ -24,6 +27,8 @@ class UniqueLicenceAnnoncedDelay(BaseCalculationDelay):
     def calculate_delay(self):
         licence = self.task_container
         raw_delay = licence.getAnnoncedDelay()
+        if licence.getHasModifiedBlueprints():
+            raw_delay = licence.getDelayAfterModifiedBlueprints()
         delay = 0
         if raw_delay.endswith('j'):
             delay = int(raw_delay[:-1])
