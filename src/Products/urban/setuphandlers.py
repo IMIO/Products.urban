@@ -99,6 +99,18 @@ def updateRoleMappings(context):
     wft = getToolByName(context.getSite(), 'portal_workflow')
     wft.updateRoleMappings()
 
+
+def rebuildCatalog(context):
+    """ """
+    if context.readDataFile("urban_new_install_marker.txt") is None:
+        return
+
+    portal_catalog = api.portal.get_tool('portal_catalog')
+    logger.info("Refresh portal_catalog : starting...")
+    portal_catalog.refreshCatalog(clear=True)
+    logger.info("Refresh portal_catalog : Done!")
+
+
 def postInstall(context):
     """Called as at the end of the setup process. """
     # the right place for your custom code

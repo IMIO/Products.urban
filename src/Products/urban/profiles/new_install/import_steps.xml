@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<import-steps>
+
+ <import-step 
+    id="rebuild_catalog" 
+    handler="Products.urban.setuphandlers.rebuildCatalog"
+    title="Clear and rebuild catalog"
+    version="2015-06-02T09:05:41.873479">
+   Clear and rebuild catalog
+ </import-step>
+
+</import-steps>
+ 

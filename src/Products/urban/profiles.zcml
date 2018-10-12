@@ -40,6 +40,15 @@
       description="Full config profile for urban."
       provides="Products.GenericSetup.interfaces.EXTENSION"
   />
+
+  <genericsetup:registerProfile
+      name="new_install"
+      title="urban-new-install"
+      directory="profiles/new_install"
+      description="New install profile for for urban."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+  />
+
   <genericsetup:registerProfile
       name="migrations"
       title="urban-migrations"
@@ -48,6 +57,7 @@
       provides="Products.GenericSetup.interfaces.EXTENSION"
       for="Products.urban.interfaces.IUrbanTool"
   />
+
   <genericsetup:registerProfile
       name="demo"
       title="urban-demo"
