@@ -25,7 +25,7 @@
    <property name="hidealloption">1</property>
    <property name="maxitems"></property>
    <property name="sortreversed"></property>
-   <property name="default">40282a819e08457db1a2d0e799cd6e95</property>
+   <property name="default">12ffe12f7dc04b3ba4e82906b83abfbc</property>
   </criterion>
   <criterion name="c10">
    <property name="widget">text</property>
@@ -104,21 +104,6 @@
    <property name="hidezerocount"></property>
    <property name="index">folder_manager</property>
    <property name="vocabulary">urban.folder_managers</property>
-   <property name="catalog"></property>
-   <property name="sortreversed"></property>
-   <property name="default"></property>
-  </criterion>
-  <criterion name="c3">
-   <property name="widget">select</property>
-   <property name="title">État</property>
-   <property name="position">center</property>
-   <property name="section">default</property>
-   <property name="hidden">0</property>
-   <property name="count"></property>
-   <property name="sortcountable"></property>
-   <property name="hidezerocount"></property>
-   <property name="index">review_state</property>
-   <property name="vocabulary">urban.LicencesWorkflowStates</property>
    <property name="catalog"></property>
    <property name="sortreversed"></property>
    <property name="default"></property>

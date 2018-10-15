@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<object name="urbancertificateones" meta_type="ATFolder">
+<object name="codt_urbancertificateones" meta_type="ATFolder">
  <criteria>
   <criterion name="c1">
    <property name="widget">sorting</property>
@@ -25,7 +25,7 @@
    <property name="hidealloption">1</property>
    <property name="maxitems"></property>
    <property name="sortreversed"></property>
-   <property name="default">4739edc4dd28477f9873d29060d33c4c</property>
+   <property name="default">1d9a2c1805894e6d8217ff073c253b75</property>
   </criterion>
   <criterion name="c10">
    <property name="widget">text</property>
@@ -110,19 +110,22 @@
    <property name="default"></property>
   </criterion>
   <criterion name="c3">
-   <property name="widget">select</property>
+   <property name="widget">checkbox</property>
    <property name="title">État</property>
    <property name="position">center</property>
    <property name="section">default</property>
    <property name="hidden">0</property>
-   <property name="count"></property>
-   <property name="sortcountable"></property>
-   <property name="hidezerocount"></property>
+   <property name="count">0</property>
+   <property name="sortcountable">0</property>
+   <property name="hidezerocount">0</property>
    <property name="index">review_state</property>
-   <property name="vocabulary">urban.LicencesWorkflowStates</property>
+   <property name="operator">or</property>
+   <property name="operator_visible">0</property>
+   <property name="vocabulary">urban.rootfolder_licence_state</property>
    <property name="catalog"></property>
-   <property name="sortreversed"></property>
-   <property name="default"></property>
+   <property name="maxitems"></property>
+   <property name="sortreversed">0</property>
+   <property name="default"/>
   </criterion>
   <criterion name="c0">
    <property name="widget">resultsperpage</property>
