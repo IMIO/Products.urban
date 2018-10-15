@@ -30,7 +30,7 @@ def add_licence_ended_condition():
             end_conditions = task_cfg.end_conditions or []
             end_condition_ids = end_conditions and [c.condition for c in end_conditions]
             condition_id = 'urban.schedule.licence_ended'
-            if (end_condition_ids or not ending_states) and condition_id not in end_condition_ids:
+            if end_condition_ids and condition_id not in end_condition_ids:
                 if task_cfg.portal_type == 'MacroTaskConfig':
                     condition = MacroEndConditionObject(
                         condition=condition_id,
@@ -44,8 +44,8 @@ def add_licence_ended_condition():
                         display_status=False
                     )
                 task_cfg.end_conditions = (condition,) + tuple(end_conditions)
-            elif ending_states:
-                old_ending_states = list(task_cfg.ending_states)
+            else:
+                old_ending_states = list(task_cfg.ending_states or [])
                 new_ending_states = list(set(old_ending_states + LICENCE_FINAL_STATES))
                 task_cfg.ending_states = new_ending_states
 

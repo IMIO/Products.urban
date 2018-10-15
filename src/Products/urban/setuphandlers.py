@@ -28,6 +28,7 @@ from Products.urban.config import DefaultTexts
 from Products.urban.config import URBAN_CFG_DIR
 from Products.urban.config import URBAN_TYPES
 from Products.urban.exportimport import updateAllUrbanTemplates
+from Products.urban.Extensions.update_task_configs import add_licence_ended_condition
 from Products.urban.interfaces import IContactFolder
 from Products.urban.interfaces import ILicenceContainer
 from Products.urban.schedule.vocabulary import URBAN_TYPES_INTERFACES
@@ -314,6 +315,8 @@ def addScheduleConfigs(context):
             schedule_folder = getattr(config_folder, 'schedule')
             taskconfigs = schedule_config[licence_config_id]
             _create_task_configs(schedule_folder, taskconfigs)
+
+    add_licence_ended_condition()
 
 
 def getSharedVocabularies(urban_type, licence_vocabularies):
