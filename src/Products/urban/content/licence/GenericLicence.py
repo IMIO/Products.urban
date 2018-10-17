@@ -20,7 +20,6 @@ from collective.faceted.task.interfaces import IFacetedTaskContainer
 
 from collective.task.behaviors import ITask
 
-from eea.facetednavigation.search.interfaces import ICollection
 from eea.facetednavigation.subtypes.interfaces import IPossibleFacetedNavigable
 
 from Products.Archetypes.atapi import *
@@ -978,7 +977,6 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
     implements(
         interfaces.IGenericLicence,
         IFacetedTaskContainer,
-        ICollection,
         IPossibleFacetedNavigable
     )
 
