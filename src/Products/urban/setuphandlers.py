@@ -129,38 +129,29 @@ def postInstall(context):
         )
     )
     #for collective.externaleditor
-    try:
-        from collective.externaleditor.browser.controlpanel import IExternalEditorSchema
-        control_panel_adapter_obj = IExternalEditorSchema(site)
-        control_panel_adapter_obj.ext_editor = True
-        if not 'UrbanTemplate' in control_panel_adapter_obj.externaleditor_enabled_types:
-            control_panel_adapter_obj.externaleditor_enabled_types.append('UrbanTemplate')
-        if not 'SubTemplate' in control_panel_adapter_obj.externaleditor_enabled_types:
-            control_panel_adapter_obj.externaleditor_enabled_types.append('SubTemplate')
-        if not 'StyleTemplate' in control_panel_adapter_obj.externaleditor_enabled_types:
-            control_panel_adapter_obj.externaleditor_enabled_types.append('StyleTemplate')
-    except:
-        pass
+    from collective.externaleditor.browser.controlpanel import IExternalEditorSchema
+    control_panel_adapter_obj = IExternalEditorSchema(site)
+    control_panel_adapter_obj.ext_editor = True
+    if not 'UrbanTemplate' in control_panel_adapter_obj.externaleditor_enabled_types:
+        control_panel_adapter_obj.externaleditor_enabled_types.append('UrbanTemplate')
+    if not 'SubTemplate' in control_panel_adapter_obj.externaleditor_enabled_types:
+        control_panel_adapter_obj.externaleditor_enabled_types.append('SubTemplate')
+    if not 'StyleTemplate' in control_panel_adapter_obj.externaleditor_enabled_types:
+        control_panel_adapter_obj.externaleditor_enabled_types.append('StyleTemplate')
 
     #add our own portal_types to portal_factory
     factory_tool = api.portal.get_tool('portal_factory')
     alreadyRegTypes = factory_tool.getFactoryTypes()
     typesToRegister = {
         'Architect': 1,
-        'UrbanCertificateOne': 1,
-        'UrbanCertificateTwo': 1,
-        'EnvClassThree': 1,
-        'EnvClassOne': 1,
-        'EnvClassBordering': 1,
-        'NotaryLetter': 1,
-        'PreliminaryNotice': 1,
-        'PatrimonyCertificate': 1,
         'Notary': 1,
         'Proprietary': 1,
         'Applicant': 1,
         'Claimant': 1,
-        'RoadDecree': 1,
     }
+    for licence_type in URBAN_TYPES:
+        typesToRegister[licence_type] = 1
+
     alreadyRegTypes.update(typesToRegister)
     factory_tool.manage_setPortalFactoryTypes(listOfTypeIds=alreadyRegTypes)
     logger.info("addApplicationFolders : starting...")
