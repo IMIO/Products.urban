@@ -272,10 +272,7 @@ class UrbanBase(object):
         try:
             return licenceTypes[self.portal_type]
         except KeyError:
-            #in some case (a portal_type not equals to the meta_type)
-            #the portal_type is not set yet at factory time, try to find it
-            portal_type = self.REQUEST['__factory__info__']['stack'][0]
-            return licenceTypes[portal_type]
+            return 'PU'
 
     security.declarePublic('hasSingleApplicant')
     def hasSingleApplicant(self):
