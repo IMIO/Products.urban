@@ -71,7 +71,7 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
             return u_date
         else:
             # we need to translate the month and maybe the day (1er)
-            year, month, day, hour = str(date.strftime('%Y/%m/%d/%Hh%M')).split('/')
+            year, month, day, hour = str(date.asdatetime().strftime('%Y/%m/%d/%Hh%M')).split('/')
             # special case when the day need to be translated
             # for example in french '1' becomes '1er' but in english, '1' becomes '1st'
             # if no translation is available, then we use the default where me remove foregoing '0'
