@@ -993,3 +993,8 @@ class EventDisplayProxyObject(ATDisplayProxyObject):
         if decision_text != 'NO FIELD {} FOUND'.format(field_name):
             decision_text = self.helper_view.xhtml(decision_text, style)
         return decision_text
+
+    def get_wspm_meeting_state(self):
+        field_name = 'review_state'
+        state = self._get_wspm_field(field_name)
+        return state
