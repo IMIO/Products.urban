@@ -161,6 +161,13 @@ class CoringFolderZone(CoringUtility):
     coring_attribute = u'AFFECT'
 
 
+class CoringFolderZonePIP(CoringUtility):
+    fieldname = 'folderZone'
+    vocabulary_name = 'urban.vocabulary.AreaPlan'
+    valuetype = 'list'
+    coring_attribute = u'STYPE'
+
+
 class CoringCatchmentArea(CoringUtility):
     fieldname = 'catchmentArea'
     vocabulary_name = 'urban.vocabulary.CatchmentArea'
@@ -178,7 +185,7 @@ MATCH_CORING = {
     15: CoringNoteworthyTrees,
     29: CoringFolderZone,
     30: CoringReparcellings,
-    37: CoringFolderZone,
+    37: CoringFolderZonePIP,
     38: CoringFolderZone,
     39: CoringFolderZone,
     40: CoringFolderZone,
