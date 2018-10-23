@@ -27,7 +27,7 @@
                         <input type="checkbox" value=""
                                tal:attributes="value field_to_update/new_value;
                                                name field_name;
-                                               checked new_value">
+                                               checked field_to_update/new_value">
                     </td>
                 </tal:vars>
             </tr>

@@ -249,7 +249,7 @@ class ParcelCoringView(BrowserView):
                     'label': getattr(context_field.widget, 'label_msgid',
                                      context_field.widget.label),
                     'new_value_display': ', '.join(display_values),
-                    'new_value': json.dumps(new_value),
+                    'new_value': new_value and json.dumps(new_value) or '',
                 })
         return fields_to_update
 
