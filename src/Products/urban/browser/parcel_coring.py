@@ -241,16 +241,14 @@ class ParcelCoringView(BrowserView):
             context_field = self.context.getField(key)
             if not context_field:
                 continue
-            current_value = context_field.get(self.context)
             new_value, display_values = self._format_values(field_values)
-            if self._compare_values(new_value, current_value):
-                fields_to_update.append({
-                    'field': key,
-                    'label': getattr(context_field.widget, 'label_msgid',
-                                     context_field.widget.label),
-                    'new_value_display': ', '.join(display_values),
-                    'new_value': new_value and json.dumps(new_value) or '',
-                })
+            fields_to_update.append({
+                'field': key,
+                'label': getattr(context_field.widget, 'label_msgid',
+                                    context_field.widget.label),
+                'new_value_display': ', '.join(display_values),
+                'new_value': new_value and json.dumps(new_value) or '',
+            })
         return fields_to_update
 
     @staticmethod
