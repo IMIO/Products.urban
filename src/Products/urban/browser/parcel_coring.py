@@ -28,7 +28,7 @@ class CoringUtility(object):
     def _coring_values(self):
         values = []
         normalizer = getUtility(IIDNormalizer)
-        for attributes in self.values['attributes']:
+        for attributes in self.values.get('attributes', []):
             values.append(attributes['attributes'][self.coring_attribute])
         return map(normalizer.normalize, values)
 
@@ -226,8 +226,6 @@ class ParcelCoringView(BrowserView):
         fields = {}
         for layer in coring_json:
             print layer['layer_id']
-            if not layer.get('attributes'):
-                continue
             if layer.get('layer_id') not in MATCH_CORING:
                 continue
             classes = MATCH_CORING[layer['layer_id']]
