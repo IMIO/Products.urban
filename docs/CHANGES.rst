@@ -4,6 +4,9 @@ Changes
 =======
 2.3.x (unreleased)
 -------------------
+- Update getLimitDate
+  [fngaha]
+
 - Fix translations
   [fngaha]
 
