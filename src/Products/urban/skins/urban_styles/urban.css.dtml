@@ -456,6 +456,15 @@ div.pmMoreInfo table[cellpadding='0'] tr th {
     background-color: yellow;
 }
 
+form[id$="-base-edit"] div.formControls {
+    position: fixed;
+    z-index : 1;
+    padding-right: 15px;
+    right: 0;
+    top: 100%;
+    margin-top: -2.5em;
+}
+
 /* ckeditor styles end */
 
 
