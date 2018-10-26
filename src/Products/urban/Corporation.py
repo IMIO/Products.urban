@@ -158,12 +158,22 @@ class Corporation(BaseContent, Applicant, BrowserDefaultMixin):
 
     def _getNameSignaletic(self, short, linebyline, reverse=False, invertnames=False):
         title = self.getPersonTitleValue(short, False, reverse)
+        legalForm = self.getLegalForm()
+        denomination = self.getDenomination()
+        firstName = self.getName2()
+        lastName = self.getName1()
+        personRole = self.getPersonRole()
         nameSignaletic = '{} {}'.format(self.getLegalForm(), self.getDenomination())
         if linebyline:
             #escape HTML special characters like HTML entities
-            return cgi.escape(nameSignaletic)
-        else:
-            return nameSignaletic
+            title = cgi.escape(title)
+            legalForm = cgi.escape(legalForm)
+            denomination = cgi.escape(denomination)
+            firstName = cgi.escape(firstName)
+            lastName = cgi.escape(lastName)
+            personRole = cgi.escape(personRole)
+            nameSignaletic = "%s, %s<br />%s %s %s" % (legalForm, denomination, title, firstName, lastName)
+        return nameSignaletic
 
 
 
