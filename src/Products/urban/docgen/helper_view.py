@@ -369,11 +369,10 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
         return self.format_date(expirationDate + relativedelta(years=year))
 
     def getLimitDate(self, firstDepositDate, delay=20):
-        firstDepositDate = _date(firstDepositDate.year(), firstDepositDate.month(), firstDepositDate.day())
         context = self.real_context
         if context.annoncedDelay:
             delay = context.getValueForTemplate('annoncedDelay', context, subfield='deadLineDelay')
-        limitDate = firstDepositDate + relativedelta(days=int(delay))
+        limitDate = firstDepositDate + int(delay)
         return self.format_date(limitDate)
 
     def get_parcels(self):

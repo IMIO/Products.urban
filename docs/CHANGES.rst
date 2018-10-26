@@ -6,6 +6,9 @@ Changes
 -------------------
 - Fix format_date
   [fngaha]
+  
+- Update getLimitDate
+  [fngaha]
 
 - Fix translations
   [fngaha]
