@@ -24,9 +24,10 @@
                     <td tal:content="structure python: view.helper.display(field_name)"></td>
                     <td tal:content="field_to_update/new_value_display" i18n:translate=""></td>
                     <td style="text-align:center; width:6em">
-                        <input type="checkbox" value="" checked
+                        <input type="checkbox" value=""
                                tal:attributes="value field_to_update/new_value;
-                                               name field_name">
+                                               name field_name;
+                                               checked field_to_update/new_value">
                     </td>
                 </tal:vars>
             </tr>

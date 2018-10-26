@@ -28,7 +28,7 @@ class CoringUtility(object):
     def _coring_values(self):
         values = []
         normalizer = getUtility(IIDNormalizer)
-        for attributes in self.values['attributes']:
+        for attributes in self.values.get('attributes', []):
             values.append(attributes['attributes'][self.coring_attribute])
         return map(normalizer.normalize, values)
 
@@ -161,6 +161,13 @@ class CoringFolderZone(CoringUtility):
     coring_attribute = u'AFFECT'
 
 
+class CoringFolderZonePIP(CoringUtility):
+    fieldname = 'folderZone'
+    vocabulary_name = 'urban.vocabulary.AreaPlan'
+    valuetype = 'list'
+    coring_attribute = u'STYPE'
+
+
 class CoringCatchmentArea(CoringUtility):
     fieldname = 'catchmentArea'
     vocabulary_name = 'urban.vocabulary.CatchmentArea'
@@ -178,7 +185,7 @@ MATCH_CORING = {
     15: CoringNoteworthyTrees,
     29: CoringFolderZone,
     30: CoringReparcellings,
-    37: CoringFolderZone,
+    37: CoringFolderZonePIP,
     38: CoringFolderZone,
     39: CoringFolderZone,
     40: CoringFolderZone,
@@ -219,8 +226,6 @@ class ParcelCoringView(BrowserView):
         fields = {}
         for layer in coring_json:
             print layer['layer_id']
-            if not layer.get('attributes'):
-                continue
             if layer.get('layer_id') not in MATCH_CORING:
                 continue
             classes = MATCH_CORING[layer['layer_id']]
@@ -236,16 +241,14 @@ class ParcelCoringView(BrowserView):
             context_field = self.context.getField(key)
             if not context_field:
                 continue
-            current_value = context_field.get(self.context)
             new_value, display_values = self._format_values(field_values)
-            if self._compare_values(new_value, current_value):
-                fields_to_update.append({
-                    'field': key,
-                    'label': getattr(context_field.widget, 'label_msgid',
-                                     context_field.widget.label),
-                    'new_value_display': ', '.join(display_values),
-                    'new_value': json.dumps(new_value),
-                })
+            fields_to_update.append({
+                'field': key,
+                'label': getattr(context_field.widget, 'label_msgid',
+                                    context_field.widget.label),
+                'new_value_display': ', '.join(display_values),
+                'new_value': new_value and json.dumps(new_value) or '',
+            })
         return fields_to_update
 
     @staticmethod
