@@ -204,7 +204,7 @@ URBAN_TYPES = [
     'MiscDemand', 'Division',
     'NotaryLetter', 'CODT_NotaryLetter',
     'ProjectMeeting', 'ExplosivesPossession',
-    'RoadDecree',
+    # 'RoadDecree',
 ]
 
 URBAN_CWATUPE_TYPES = [
@@ -217,11 +217,11 @@ URBAN_CODT_TYPES = [
     'CODT_BuildLicence', 'CODT_Article127', 'CODT_CommercialLicence', 'CODT_IntegratedLicence',
     'CODT_ParcelOutLicence', 'CODT_UniqueLicence', 'CODT_UrbanCertificateTwo', 'CODT_UrbanCertificateOne',
     'CODT_NotaryLetter', 'ProjectMeeting', 'MiscDemand', 'PreliminaryNotice',
-    'PatrimonyCertificate', 'Division', 'RoadDecree',
+    'PatrimonyCertificate', 'Division',  # 'RoadDecree',
 ]
 
 URBAN_ENVIRONMENT_TYPES = [
-    'EnvClassOne', 'EnvClassTwo', 'EnvClassThree', 'ExplosivesPossession', 'EnvClassBordering',
+    'EnvClassOne', 'EnvClassTwo', 'EnvClassThree', 'EnvClassBordering',  # 'ExplosivesPossession',
 ]
 
 LICENCE_FINAL_STATES = [
