@@ -16,6 +16,9 @@ Changes
 
 2.3.x (unreleased)
 -------------------
+- update signaletic for corporation's applicant
+  [fngaha]
+
 - fix the creation of an applicant from a parcel
   [fngaha]
 
