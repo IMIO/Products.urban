@@ -4,6 +4,9 @@ Changes
 =======
 2.3.x (unreleased)
 -------------------
+- Fix format_date
+  [fngaha]
+  
 - Update getLimitDate
   [fngaha]
 
