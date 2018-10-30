@@ -5,17 +5,17 @@
     i18n_domain="urban">
 
   <browser:page
-     for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-     name="check_opinion_requests"
-      class=".opinions_request.CheckOpinionsRequest"
-     permission="zope2.View"
+    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    name="check_opinion_requests"
+    class=".opinions_request.CheckOpinionsRequest"
+    permission="zope2.View"
   />
 
   <browser:page
-     for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-     name="inquiry_radius"
-      class=".inquiry_radius.InquiryRadiusSearch"
-     permission="cmf.ManagePortal"
+    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    name="inquiry_radius"
+    class=".inquiry_radius.InquiryRadiusSearch"
+    permission="cmf.ManagePortal"
   />
 
   <browser:page
@@ -24,5 +24,12 @@
     class=".tasks.TaskCronView"
     permission="zope2.View"
     />
+
+  <browser:page
+    name="update_college_done_tasks"
+    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    permission="cmf.ManagePortal"
+    class=".cron.UpdateCollegeEventDoneTasks"
+  />
 
 </configure>
