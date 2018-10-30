@@ -3,6 +3,7 @@
  <object name="activation_workflow" meta_type="Workflow"/>
  <object name="urban_licence_workflow" meta_type="Workflow"/>
  <object name="codt_buildlicence_workflow" meta_type="Workflow"/>
+ <object name="college_event_workflow" meta_type="Workflow"/>
  <object name="urbandivision_workflow" meta_type="Workflow"/>
  <object name="urbanevent_workflow" meta_type="Workflow"/>
  <object name="opinion_request_workflow" meta_type="Workflow"/>
@@ -215,7 +216,7 @@
  <bound-workflow workflow_id="urbanevent_workflow" />
 </type>
 <type type_id="UrbanEventCollege">
- <bound-workflow workflow_id="urbanevent_workflow" />
+ <bound-workflow workflow_id="college_event_workflow" />
 </type>
 <type type_id="UrbanEventNotificationCollege">
  <bound-workflow workflow_id="urbanevent_workflow" />
