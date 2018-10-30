@@ -29,7 +29,7 @@
     name="update_college_done_tasks"
     for="Products.CMFPlone.interfaces.IPloneSiteRoot"
     permission="cmf.ManagePortal"
-    class=".cron.UpdateCollegeEventDoneTasks"
+    class=".tasks.UpdateCollegeEventDoneTasks"
   />
 
 </configure>
