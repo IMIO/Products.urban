@@ -27,7 +27,7 @@ class StateRolesMapping(BaseRoleMapping):
 
         'complete': {
             BaseRoleMapping.get_readers: ('Reader',),
-            BaseRoleMapping.get_editors: ('Reader', 'Editor', 'Contributor'),
+            BaseRoleMapping.get_editors: ('Reader', 'Editor', 'Contributor', 'Reviewer'),
             BaseRoleMapping.get_opinion_editors: ('Reader',),
         },
 
