@@ -51,7 +51,16 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "codt_pu_depot_de_la_demande.odt", 'title': "Dépôt de la demande"},
+                {
+                    'id': "codt_pu_depot_de_la_demande.odt",
+                    'title': "Dépôt de la demande",
+                    'context_variables': [
+                        {
+                            'name':'publipostage',
+                            'value':'demandeurs'
+                        }
+                    ]
+                },
             ),
             'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
         },
@@ -64,9 +73,30 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "codt_pu_annexe_17_dossier_incomplet_demandeur.odt", 'title': "Dossier incomplet (lettre au demandeur, Annexe 17)"},
-                {'id': "codt_pu_dossier_incomplet_architecte.odt", 'title': "Dossier incomplet (lettre à l'architecte)"},
-                {'id': "codt_pu_dossier_incomplet_fd.odt", 'title': "Dossier incomplet (lettre au FD)"},
+                {
+                    'id': "codt_pu_annexe_17_dossier_incomplet_demandeur.odt",
+                    'title': "Dossier incomplet (lettre au demandeur, Annexe 17)",
+                    'context_variables': [
+                        {
+                            'name':'publipostage',
+                            'value':'demandeurs'
+                        }
+                    ]
+                },
+                {
+                    'id': "codt_pu_dossier_incomplet_architecte.odt",
+                    'title': "Dossier incomplet (lettre à l'architecte)",
+                    'context_variables': [
+                        {
+                            'name':'publipostage',
+                            'value':'architectes'
+                        }
+                    ]
+                },
+                {
+                    'id': "codt_pu_dossier_incomplet_fd.odt",
+                    'title': "Dossier incomplet (lettre au FD)"
+                },
             ),
         },
         {
@@ -75,7 +105,16 @@ urbanEventTypes = {
             'activatedFields': [],
             'deadLineDelay': 15,
             'podTemplates': (
-                {'id': "codt_pu_recepisse_depot_complements.odt", 'title': "Récépissé de dépôt de compléments"},
+                {
+                    'id': "codt_pu_recepisse_depot_complements.odt",
+                    'title': "Récépissé de dépôt de compléments",
+                    'context_variables': [
+                        {
+                            'name':'publipostage',
+                            'value':'demandeurs'
+                        }
+                    ]
+                },
             ),
             'eventTypeType': 'Products.urban.interfaces.IMissingPartDepositEvent',
         },
@@ -88,7 +127,16 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "codt_pu_dossier_incomplet_2eme_fois_irrecevable.odt", 'title': "Deuxième dossier incomplet (irrecevable)"},
+                {
+                    'id': "codt_pu_dossier_incomplet_2eme_fois_irrecevable.odt",
+                    'title': "Deuxième dossier incomplet (irrecevable)",
+                    'context_variables': [
+                        {
+                            'name':'publipostage',
+                            'value':'demandeurs'
+                        }
+                    ]
+                },
             ),
         },
         {
@@ -100,7 +148,16 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "codt_pu_annexe_18_accuse_reception.odt", 'title': "Accusé de réception (Annexe 18)"},
+                {
+                    'id': "codt_pu_annexe_18_accuse_reception.odt",
+                    'title': "Accusé de réception (Annexe 18)",
+                    'context_variables': [
+                        {
+                            'name':'publipostage',
+                            'value':'demandeurs'
+                        }
+                    ]
+                },
             ),
         },
         {
@@ -199,10 +256,34 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "codt_pu_prorogation_si_non_automatique_deliberation.odt", 'title': "Délibération CODT - PROROGATION si non automatique"},
-                {'id': "codt_pu_prorogation_info_demandeur.odt", 'title': "Information au demandeur de la prorogation"},
-                {'id': "codt_pu_prorogation_info_architecte.odt", 'title': "Information à l'architecte de la prorogation"},
-                {'id': "codt_pu_formulaire_envoi_prorogation_fd_grille.odt", 'title': "Formulaire d'envoi de la prorogation au FD (GRILLE)"},
+                {
+                    'id': "codt_pu_prorogation_si_non_automatique_deliberation.odt",
+                    'title': "Délibération CODT - PROROGATION si non automatique"
+                },
+                {
+                    'id': "codt_pu_prorogation_info_demandeur.odt",
+                    'title': "Information au demandeur de la prorogation",
+                    'context_variables': [
+                        {
+                            'name':'publipostage',
+                            'value':'demandeurs'
+                        }
+                    ]
+                },
+                {
+                    'id': "codt_pu_prorogation_info_architecte.odt",
+                    'title': "Information à l'architecte de la prorogation",
+                    'context_variables': [
+                        {
+                            'name':'publipostage',
+                            'value':'architectes'
+                        }
+                    ]
+                },
+                {
+                    'id': "codt_pu_formulaire_envoi_prorogation_fd_grille.odt",
+                    'title': "Formulaire d'envoi de la prorogation au FD (GRILLE)"
+                },
             ),
         },
         {
@@ -228,8 +309,20 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "codt_pu_annexe_12_decision_octroi_refus.odt", 'title': "Décision (Annexe 12)"},
-                {'id': "codt_pu_decision_octroi_refus_lettre_architecte.odt", 'title': "Décision lettre à l'architecte"},
+                {
+                    'id': "codt_pu_annexe_12_decision_octroi_refus.odt",
+                    'title': "Décision (Annexe 12)"
+                },
+                {
+                    'id': "codt_pu_decision_octroi_refus_lettre_architecte.odt",
+                    'title': "Décision lettre à l'architecte",
+                    'context_variables': [
+                        {
+                            'name':'publipostage',
+                            'value':'architectes'
+                        }
+                    ]
+                },
             ),
             'eventTypeType': ('Products.urban.interfaces.ITheLicenceEvent', 'Products.urban.interfaces.ILicenceNotificationEvent'),
         },
