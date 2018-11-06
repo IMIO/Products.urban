@@ -21,7 +21,7 @@ schema = Schema((
             label=_('urban_label_IsAlignment_plan',
                     default='IsAlignment_plan'),
         ),
-        schemata='urban_road',
+        schemata='urban_analysis',
     ),
     StringField(
         name='road_decree_reference',
@@ -36,7 +36,7 @@ schema = Schema((
             ],
         ),
         required=False,
-        schemata='urban_description',
+        schemata='urban_analysis',
         default_method='getDefaultText',
         validators=('isReference',),
     ),
@@ -46,31 +46,9 @@ schema = Schema((
         widget=MasterSelectWidget(
             label=_('urban_label_commune_choices', default='urban_commune'),
         ),
-        schemata='urban_road',
+        schemata='urban_analysis',
         multiValued=1,
         vocabulary=UrbanVocabulary('townroaddecree', with_empty_value=True),
-    ),
-    StringField(
-        name='missing_piece_choices',
-        default='ukn',
-        widget=SelectionWidget(
-            label=_('urban_label_missing_piece_choices',
-                    default='missing_piece_choices'),
-        ),
-        schemata='urban_road',
-        multiValued=1,
-        vocabulary=UrbanVocabulary('roadmissingpiece'),
-    ),
-    TextField(
-        name='missing_piece_details',
-        allowable_content_types=('text/html',),
-        widget=RichWidget(
-            label=_('missing_piece_details', default='missing_piece_details'),
-        ),
-        default_content_type='text/html',
-        default_method='getDefaultText',
-        schemata='urban_road',
-        default_output_type='text/html',
     ),
     StringField(
         name='decisional_delay',
@@ -78,7 +56,7 @@ schema = Schema((
             label=_('urban_label_decisional_delay',
                     default='DecisionalDelay'),
         ),
-        schemata='urban_description',
+        schemata='urban_analysis',
         vocabulary='list_decisional_delay',
         default_method='getDefaultValue',
     ),
@@ -130,6 +108,11 @@ def finalize_schema(schema, folderish=False, moveDiscussion=True):
     """
        Finalizes the type schema to alter some fields
     """
+    schema['locationTechnicalAdvice'].widget.label = _(
+        'urban_label_technicalAdvice',
+        default='technicaladvice',
+    )
+    schema['roadAdaptation'].schemata = 'urban_analysis'
     schema['decisional_delay'].widget.visible = {
         'view': 'visible',
         'edit': 'invisible',

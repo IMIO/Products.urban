@@ -903,7 +903,7 @@ default_values = {
             },
         ],
         'missingparts': [
-            'UrbanVocabularyTerm', ['NotaryLetter', 'MiscDemand', 'Division', 'Declaration'],
+            'UrbanVocabularyTerm', ['NotaryLetter', 'MiscDemand', 'Division', 'Declaration', 'RoadDecree'],
         ],
 
         'roadmissingparts': [
@@ -911,7 +911,7 @@ default_values = {
         ],
 
         'locationmissingparts': [
-            'UrbanVocabularyTerm', ['NotaryLetter', 'MiscDemand', 'Division', 'Declaration'],
+            'UrbanVocabularyTerm', ['NotaryLetter', 'MiscDemand', 'Division', 'Declaration', 'RoadDecree'],
         ],
 
         'authority': [
@@ -1335,11 +1335,6 @@ default_values = {
             {'id': "fallback-zone", 'title': u"Zone de recul supérieure à 5 m"},
             {'id': "built-surface", 'title': u"Surface bâtie supérieure au 1/4 de la parcelle"},
             {'id': "aide-opinion", 'title': u"Avis AIDE sollicité"},
-        ],
-
-        'roadmissingpiece': [
-            'UrbanVocabularyTerm', ['RoadDecree'],
-            {'id': "roadmissingpiece-piece1", 'title': u"Piece manquante par défaut"},
         ],
 
         'townroaddecree': [
