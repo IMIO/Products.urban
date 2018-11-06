@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2018-11-04 02:38+0000\n"
+"POT-Creation-Date: 2018-11-06 01:46+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -4640,7 +4640,7 @@ msgstr "Onglets"
 #. Default: "technicaladvice"
 #: ../content/licence/RoadDecree.py:111
 msgid "urban_label_technicalAdvice"
-msgstr ""
+msgstr "Avis technique"
 
 #. Default: "Technicalremarks"
 #: ../content/licence/GenericLicence.py:469
