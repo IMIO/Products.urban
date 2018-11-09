@@ -1355,6 +1355,11 @@ msgstr "${name}, domiciliées ${address}"
 
 #. Default: "${name} residing at ${address}"
 #: Contact.py
+msgid "architect_residing"
+msgstr "${name}, au bureau d'architecte ${address}"
+
+#. Default: "${name} residing at ${address}"
+#: Contact.py
 msgid "feminine_singular_residing"
 msgstr "${name}, domiciliée ${address}"
 
