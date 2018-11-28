@@ -127,7 +127,7 @@ def migrate(context):
     setup_tool.runImportStepFromProfile('profile-Products.urban:default', 'plone.app.registry')
     setup_tool.runAllImportStepsFromProfile('profile-Products.urban:preinstall')
     setup_tool.runAllImportStepsFromProfile('profile-urban.vocabulary:default')
-    setup_tool.runImportStepFromProfile('profile-Products.urban:extra', 'urban-postInstall')
+    setup_tool.runImportStepFromProfile('profile-Products.urban:extra', 'urban-extraPostInstall')
     update_urban_dashboard_collection(context)
     copy_sol_values_from_pca(context)
     move_noteworthytrees_vocabulary(context)
