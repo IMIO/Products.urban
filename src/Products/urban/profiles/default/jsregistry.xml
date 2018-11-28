@@ -52,6 +52,15 @@
              expression=""
              id="++resource++Products.urban/actionspanel.js"
              inline="False"/>
+
+ <javascript cacheable="True"
+             compression="safe"
+             cookable="True"
+             enabled="True"
+             expression=""
+             id="cwatupe_licence_breadcrumb.js"
+             inline="False"/>
+ -->
  <!-- ##/code-section jsregistry.xml -->
 
 </object>
