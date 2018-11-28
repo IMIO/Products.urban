@@ -60,7 +60,8 @@ def updateTemplate(context, container, template, new_content, position_after='')
         #if in the correct profile but old template has been customised or has the same content than the new one -> no changes
         elif profile_name == old_template.getProperty("profileName"):
             # Is the template different on the file system
-            if new_md5_signature != old_template.getProperty("md5Loaded"):
+            data = type(old_template.odt_file) in [list, tuple] and old_template.odt_file[0].data or old_template.odt_file.data
+            if getMd5Signature(data) != old_template.getProperty("md5Modified")
                 # We will replace unless the template has been manually modified and we don't force replace
                 if getMd5Signature(old_template.odt_file.data) != old_template.getProperty("md5Modified"):
                     status.append('no update: the template has been modified')
