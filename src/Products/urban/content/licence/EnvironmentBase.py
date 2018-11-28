@@ -401,8 +401,10 @@ class EnvironmentBase(BaseFolder, GenericLicence, CODT_UniqueLicenceInquiry, Bro
     def getLastLicenceExpiration(self):
         return self.getLastEvent(interfaces.ILicenceExpirationEvent)
 
-    security.declarePublic('getAdditionalLayers')
+    def getLastWalloonRegionDecisionEvent(self):
+        return self.getLastEvent(interfaces.IWalloonRegionDecisionEvent)
 
+    security.declarePublic('getAdditionalLayers')
     def getAdditionalLayers(self):
         """
           Return a list of additional layers that will be used
