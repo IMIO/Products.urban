@@ -15,7 +15,7 @@ class UrbanTaskTableView(FacetedTaskTableView):
         col_names = [
             u'simple_status',
             u'path',
-            u'assigned_user_column',
+            u'assigned_user',
             u'CreationDate',
             u'due_date',
             u'task_actions_column',
