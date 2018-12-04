@@ -648,3 +648,7 @@ class IAsyncInquiryRadius(Interface):
         key_type=schema.ASCIILine(),
         value_type=schema.Int()
     )
+
+
+class IFacetedCollection(Interface):
+    """ Adapts an object into a faceted collection """

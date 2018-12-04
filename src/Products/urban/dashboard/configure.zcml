@@ -28,4 +28,10 @@
         editview=".portlet.EditForm"
     />
 
+    <adapter
+        for="Products.urban.interfaces.IGenericLicence"
+        factory=".faceted_catalog.LicenceToFacetedCollection"
+        provides="Products.urban.interfaces.IFacetedCollection"
+    />
+
 </configure>
