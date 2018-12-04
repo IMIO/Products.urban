@@ -18,9 +18,6 @@ from AccessControl import ClassSecurityInfo
 from collective.archetypes.select2.select2widget import MultiSelect2Widget
 from collective.faceted.task.interfaces import IFacetedTaskContainer
 
-from collective.task.behaviors import ITask
-
-from eea.facetednavigation.search.interfaces import ICollection
 from eea.facetednavigation.subtypes.interfaces import IPossibleFacetedNavigable
 
 from Products.Archetypes.atapi import *
@@ -978,7 +975,6 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
     implements(
         interfaces.IGenericLicence,
         IFacetedTaskContainer,
-        ICollection,
         IPossibleFacetedNavigable
     )
 
@@ -1061,24 +1057,6 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
         """
         urban_event = createObject('UrbanEvent', self, urban_event_type, **kwargs)
         return urban_event
-
-    security.declarePublic('getRawQuery')
-
-    def getRawQuery(self):
-        """ """
-        query = [
-            {
-                'i': 'object_provides',
-                'o': 'plone.app.querystring.operation.selection.is',
-                'v': ITask.__identifier__
-            },
-            {
-                'i': 'path',
-                'o': 'plone.app.querystring.operation.string.relativePath',
-                'v': '.'
-            },
-        ]
-        return query
 
     def divideList(self, divider, list):
         res = []

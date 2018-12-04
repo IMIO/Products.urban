@@ -40,6 +40,10 @@
         />
     </configure>
 
+    <configure package="eea.facetednavigation">
+        <utility factory="Products.urban.dashboard.faceted_catalog.UrbanFacetedCatalog" />
+    </configure>
+
     <configure package="imio.dashboard">
         <utility
            factory="Products.urban.dashboard.vocabularies.DashboardCollections"
