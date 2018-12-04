@@ -5017,30 +5017,30 @@ urbanEventTypes = {
             'title': "Dépôt de la demande",
             'activatedFields': [],
             'deadLineDelay': 15,
+            'eventDateLabel': "Date de dépôt",
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
-            'podTemplates': ({'id': "env3-recepisse.odt", 'title': "Récepissé de la déclaration"},),
+            'podTemplates': ({'id': "dec3_recepisse_depot_demande.odt", 'title': "Récépissé de la déclaration"},),
             'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
         },
         {
             'id': "refus-de-la-demande",
             'title': "Demande irrecevable",
             'activatedFields': [],
+            'eventDateLabel': "Date de notification",
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
-            'podTemplates': ({'id': "env3-demande-irrecevable.odt", 'title': "Demande irrecevable (lettre au demandeur)"},),
+            'podTemplates': ({'id': "dec3_demande_irrecevable.odt", 'title': "Demande irrecevable (lettre au demandeur)"},),
+            'eventTypeType': 'Products.urban.interfaces.IRefusedIncompletenessEvent',
         },
         {
-            'id': "acceptation-de-la-demande",
-            'title': "Prise d'acte sans conditions",
+            'id': "demande-de-paiement",
+            'title': "Demande de paiement",
             'activatedFields': [],
             'isKeyEvent': True,
+            'eventDateLabel': "Date de notification",
             'keyDates': ('eventDate',),
-            'podTemplates': (
-                {'id': "env3-demande-recevable.odt", 'title': "Déclaration recevable sans conditions complémentaires (lettre au demandeur)"},
-                {'id': "env3-demande-recevable-fdft.odt", 'title': "Déclaration recevable sans conditions complémentaires (lettre au FD/FT)"},
-                {'id': "env3-demande-paiement.odt", 'title': "Demande de paiement"},
-            ),
+            'podTemplates': ({'id': "dec3_demande_paiement.odt", 'title': "Demande de paiement"},),
             'eventTypeType': 'Products.urban.interfaces.IAcknowledgmentEvent',
         },
         {
@@ -5317,50 +5317,26 @@ urbanEventTypes = {
             'title': "Prise d'acte avec conditions",
             'activatedFields': [],
             'isKeyEvent': True,
+            'eventDateLabel': "Date de prise d'acte",
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "env3-demande-recevable-cond.odt", 'title': "Déclaration recevable avec conditions complémentaires (lettre au demandeur)"},
-                {'id': "env3-demande-recevable-cond-fdft.odt", 'title': "Déclaration recevable avec conditions complémentaires (lettre au FD/FT)"},
-                {'id': "env3-demande-paiement.odt", 'title': "Demande de paiement"},
+                {'id': "dec3_recevable_conditions_demandeur.odt", 'title': "Déclaration recevable avec conditions complémentaires - Lettre au demandeur"},
+                {'id': "dec3_recevable_conditions_dgo3dgo4.odt", 'title': "Déclaration recevable avec conditions complémentaires - Lettres DGO3 et DGO4"},
             ),
             'eventTypeType': 'Products.urban.interfaces.IAcknowledgmentEvent',
         },
         {
-            'id': "rapport-au-college",
-            'title': "Rapport du service au collège",
-            'activatedFields': [],
-            'isKeyEvent': True,
-            'keyDates': ('eventDate',),
-            'podTemplates': ({'id': "env3-rapport-au-college.odt", 'title': "Rapport au collège"},),
-        },
-        {
             'id': "passage-college",
-            'title': "Passage au collège",
-            'activatedFields': ['decisionDate'],
+            'title': "Passage au Collège",
+            'activatedFields': ['decisionDate','decision'],
             'eventDateLabel': "Date de notification",
             'isKeyEvent': True,
             'keyDates': ('decisionDate',),
             'podTemplates': (
-                {
-                    'id': "env3-decision-college.odt", 'title': "Décision du collège des conditions complémentaires",
-                    'TALCondition': "python: licence.getHasAdditionalConditions()"
-                },
-                {
-                    'id': "env3-transmis-sans-conditions.odt", 'title': "Transmis décision sans conditions complémentaires (lettre au demandeur)",
-                    'TALCondition': "python: not licence.getHasAdditionalConditions()"
-                },
-                {
-                    'id': "env3-transmis-conditions.odt", 'title': "Transmis décision avec conditions complémentaires (lettre au demandeur)",
-                    'TALCondition': "python: licence.getHasAdditionalConditions()"
-                },
-                {
-                    'id': "env3-transmis-sans-conditions-fdft.odt", 'title': "Transmis décision sans conditions complémentaires (lettre au FD/FT)",
-                    'TALCondition': "python: not licence.getHasAdditionalConditions()"
-                },
-                {
-                    'id': "env3-transmis-conditions-fdft.odt", 'title': "Transmis décision avec conditions complémentaires (lettre au FD/FT)",
-                    'TALCondition': "python: licence.getHasAdditionalConditions()"
-                },
+                {'id': "dec3_transmis_sans_conditions_demandeur.odt", 'title': "Transmis décision sans conditions complémentaires (lettre au demandeur)"},
+                {'id': "dec3_transmis_conditions_demandeur.odt", 'title': "Transmis décision avec conditions complémentaires (lettre au demandeur)",},
+                {'id': "dec3_transmis_sans_conditions_dgo3dgo4.odt", 'title': "Transmis décision sans conditions complémentaires (lettre au FD/FT)",},
+                {'id': "dec3_transmis_conditions_dgo3dgo4.odt", 'title': "Transmis décision avec conditions complémentaires (lettre au FD/FT)",},
             ),
         },
     ),
