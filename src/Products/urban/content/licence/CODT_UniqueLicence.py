@@ -295,8 +295,10 @@ class CODT_UniqueLicence(BaseFolder, CODT_UniqueLicenceInquiry, CODT_BaseBuildLi
             applicantTitle = self.getApplicants()[0].Title()
         else:
             applicantTitle = translate('no_applicant_defined', 'urban', context=self.REQUEST).encode('utf8')
-        title = "%s - %s - %s - %s" % (
-            self.getReferenceSPE(),
+        config = self.getUrbanConfig()
+        with_SPE_ref = 'referenceSPE' in config.getUsedAttributes()
+        title = "%s%s - %s - %s" % (
+            with_SPE_ref and self.getReferenceSPE() + ' - ' or '',
             self.getReference(),
             self.getLicenceSubject(),
             applicantTitle
