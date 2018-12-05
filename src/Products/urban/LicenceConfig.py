@@ -185,7 +185,7 @@ schema = Schema((
         relationship='licenceFolderManagers',
         required=False,
         schemata='public_settings',
-        multiValued=False,
+        multiValued=True,
         allowed_types=('FolderManager',),
     ),
 
