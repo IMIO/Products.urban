@@ -41,6 +41,8 @@ default_texts = {
 
 
 
+
+
 urbanEventTypes = {
     'codt_buildlicence': (
         {
@@ -617,46 +619,50 @@ urbanEventTypes = {
             'id': "depot-de-la-demande-codt",
             'title': "Dépôt de la demande",
             'eventDateLabel': "Date de dépôt",
-            'activatedFields': [],
+            'activatedFields': ['transmitDate'],
             'deadLineDelay': 15,
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
+                {'id': "pi_recepisse_depot_demande.odt", 'title': "Récépissé du dépôt de la demande"},
+                {'id': "pi_entete_farde_dossier.odt", 'title': "Entête farde dossier"},
+                {'id': "pi_transmis_demande_dgo3.odt", 'title': "Transmis à la DGO3"},
+                {'id': "pi_transmis_demande_dgo4.odt", 'title': "Transmis à la DGO4"},
+                {'id': "pi_transmis_demande_dgo6.odt", 'title': "Transmis à la DGO6"},
+                {'id': "pi_information_demandeur.odt", 'title': "Lettre d'informations au demandeur"},
             ),
             'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
         },
         {
             'id': "dossier-incomplet-codt",
-            'title': "1er dossier incomplet",
+            'title': "Dossier incomplet",
+            'eventDateLabel': "Date de notification",
             'activatedFields': [],
             'deadLineDelay': 15,
-            'eventTypeType': 'Products.urban.interfaces.IMissingPartEvent',
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
-            'podTemplates': (
-                {'id': "codt-dossier-incomplet-demandeur.odt", 'title': "Dossier incomplet (lettre au demandeur)"},
-            ),
+            'podTemplates': (),
+            'eventTypeType': 'Products.urban.interfaces.IMissingPartEvent',
         },
         {
             'id': "recepisse-complement-codt",
-            'title': "Récépissé d'un complément à une demande de permis",
+            'title': "Récépissé d'un complément au dépôt de la demande",
+            'eventDateLabel': "Date de notification",
             'activatedFields': [],
             'deadLineDelay': 15,
-            'podTemplates': (
-                {'id': "codt-recepisse-complement.odt", 'title': "Récépissé de dépôt de compléments"},
-            ),
+            'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IMissingPartDepositEvent',
         },
         {
             'id': "dossier-incomplet-irrecevable-codt",
-            'title': "2ème dossier incomplet (irrecevable)",
+            'title': "Dossier irrecevable",
+            'eventDateLabel': "Date de notification",
             'activatedFields': [],
             'deadLineDelay': 15,
-            'eventTypeType': 'Products.urban.interfaces.IRefusedIncompletenessEvent',
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
-            'podTemplates': (
-            ),
+            'podTemplates': (),
+            'eventTypeType': 'Products.urban.interfaces.IRefusedIncompletenessEvent',
         },
         {
             'id': "accuse-de-reception-codt",
