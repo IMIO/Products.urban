@@ -48,7 +48,7 @@ class isValidStreetNameValidator:
 
     def __call__(self, value, *args, **kwargs):
         for line in value:
-            if line['orderindex_'] != 'template_row_marker' and not line['street']:
+            if 'orderindex_' in line and line['orderindex_'] != 'template_row_marker' and not line['street']:
                 return translate(
                     _('error_streetname', default=u"Please select a valid street")
                 )

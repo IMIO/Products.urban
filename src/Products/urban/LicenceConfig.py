@@ -18,6 +18,7 @@ from Products.Archetypes.atapi import *
 from zope.interface import implements
 import interfaces
 
+from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.DataGridField import DataGridField, DataGridWidget
 from Products.DataGridField.Column import Column
@@ -34,11 +35,13 @@ from Products.DataGridField.DataGridField import FixedRow
 from Products.DataGridField.FixedColumn import FixedColumn
 from Products.DataGridField.CheckboxColumn import CheckboxColumn
 from Products.urban.utils import getLicenceSchema
+from Products.urban import UrbanMessage as _
 from zope.interface import Interface
 from Products.PageTemplates.Expressions import getEngine
 from Products.CMFCore.Expression import Expression
 from plone import api
 from DateTime import DateTime
+
 ##/code-section module-header
 
 schema = Schema((
@@ -168,6 +171,22 @@ schema = Schema((
             i18n_domain='urban',
         ),
         schemata='public_settings',
+    ),
+    ReferenceField(
+        name='default_foldermanager',
+        widget=ReferenceBrowserWidget(
+            allow_browse=False,
+            base_query='get_authorized_folder_managers_base_query',
+            show_results_without_query=True,
+            wild_card_search=True,
+            allow_search=False,
+            label=_('urban_label_default_foldermanagers', default='Foldermanagers'),
+        ),
+        relationship='licenceFolderManagers',
+        required=False,
+        schemata='public_settings',
+        multiValued=True,
+        allowed_types=('FolderManager',),
     ),
 
 ),
@@ -427,6 +446,24 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
 
     def default_numerotation_source(self):
         return self.id
+
+    security.declarePublic('get_authorized_folder_managers_base_query')
+
+    def get_authorized_folder_managers_base_query(self):
+        """
+          Return the folder were are stored folder managers
+        """
+        portal = api.portal.get_tool('portal_url').getPortalObject()
+        rootPath = '/'.join(portal.getPhysicalPath())
+        urban_tool = api.portal.get_tool('portal_urban')
+        ids = []
+        for foldermanager in urban_tool.foldermanagers.objectValues():
+            if self.id in map(str.lower, foldermanager.getManageableLicences()):
+                ids.append(foldermanager.getId())
+        dict = {}
+        dict['path'] = {'query': '%s/portal_urban/foldermanagers' % (rootPath)}
+        dict['id'] = ids
+        return dict
 
 
 registerType(LicenceConfig, PROJECTNAME)
