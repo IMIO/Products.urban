@@ -3350,6 +3350,11 @@ msgstr "Détails concernant le zonage"
 msgid "urban_label_foldermanagers"
 msgstr "Agent(s) traitant(s)"
 
+#. Default: "Foldermanagers"
+#: ../LicenceConfig.py:180
+msgid "urban_label_default_foldermanagers"
+msgstr "Agent traitant par défaut"
+
 #. Default: "Form_composition"
 #: ../content/licence/CODT_BaseBuildLicence.py:74
 msgid "urban_label_form_composition"
