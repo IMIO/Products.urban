@@ -35,6 +35,7 @@ schema = Schema((
                 'CODT_Article127',
             ],
         ),
+        schemata='urban_description',
         required=False,
         default_method='getDefaultText',
         validators=('isReference',),
