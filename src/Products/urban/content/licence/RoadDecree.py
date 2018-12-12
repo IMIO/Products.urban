@@ -8,9 +8,15 @@ from zope.interface import implements
 from Products.urban import UrbanMessage as _
 from Products.urban import interfaces
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
+from Products.urban.utils import setOptionalAttributes
 from Products.urban.config import *
 from Products.urban.content.licence.CODT_BuildLicence import CODT_BuildLicence
 from Products.urban.widget.urbanreferencewidget import UrbanReferenceWidget
+
+
+optional_fields = [
+    'hasModifiedBlueprints', 'annoncedDelayDetails', 'form_composition'
+]
 
 
 schema = Schema((
@@ -63,6 +69,7 @@ schema = Schema((
 ),
 )
 RoadDecree_schema = CODT_BuildLicence.schema.copy() + schema.copy()
+setOptionalAttributes(RoadDecree_schema, optional_fields)
 
 
 class RoadDecree(CODT_BuildLicence):
