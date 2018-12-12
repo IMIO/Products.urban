@@ -193,8 +193,7 @@ MATCH_CORING = {
     42: CoringCatchmentArea,
     43: CoringCatchmentArea,
     44: CoringCatchmentArea,
-    46: CoringCatchmentArea,
-    45: (CoringSOLZone, CoringSOLBoolean),
+    46: (CoringSOLZone, CoringSOLBoolean),
 }
 
 
