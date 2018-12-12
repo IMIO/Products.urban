@@ -36,7 +36,6 @@ schema = Schema((
             ],
         ),
         required=False,
-        schemata='urban_analysis',
         default_method='getDefaultText',
         validators=('isReference',),
     ),
@@ -113,6 +112,12 @@ def finalize_schema(schema, folderish=False, moveDiscussion=True):
         default='technicaladvice',
     )
     schema['roadAdaptation'].schemata = 'urban_analysis'
+
+    schema['pash'].schemata = 'urban_location'
+    schema['pashDetails'].schemata = 'urban_location'
+    schema['sevesoSite'].schemata = 'urban_location'
+    schema['natura_2000'].schemata = 'urban_location'
+
     schema['decisional_delay'].widget.visible = {
         'view': 'visible',
         'edit': 'invisible',
