@@ -14,13 +14,13 @@
     <property name="global_allow">True</property>
     <property name="filter_content_types">True</property>
     <property name="allowed_content_types">
-        <element value="UrbanEventOpinionRequest"/>
         <element value="Applicant"/>
         <element value="Corporation"/>
-        <element value="UrbanEventCollege"/>
-        <element value="UrbanEvent"/>
         <element value="File"/>
         <element value="PortionOut"/>
+        <element value="UrbanEvent"/>
+        <element value="UrbanEventCollege"/>
+        <element value="UrbanEventOpinionRequest"/>
         <element value="task"/>
     </property>
     <property name="allow_discussion">False</property>
