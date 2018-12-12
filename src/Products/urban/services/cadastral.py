@@ -84,7 +84,7 @@ class CadastreSession(SQLSession):
         # filter on parcel reference arguments
         query = self._filter(query, self.tables.capa, division, section, radical, bis, exposant, puissance)
         records = query.all()
-        return bool(records)
+        return not bool(records)
 
     def query_parcels(self, division=IGNORE, section=IGNORE, radical=IGNORE, bis=IGNORE,
                       exposant=IGNORE, puissance=IGNORE, location=IGNORE, parcel_owner=IGNORE):
