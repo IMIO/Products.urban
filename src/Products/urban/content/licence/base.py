@@ -266,6 +266,7 @@ class UrbanBase(object):
             'Division': 'Div',
             'MiscDemand': 'DD',
             'ExplosivesPossession': 'EXP',
+            'RoadDecree': 'DV',
         }
         if "notaryletter" in self.id:
             return 'Not'
