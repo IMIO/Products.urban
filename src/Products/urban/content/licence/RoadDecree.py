@@ -57,7 +57,7 @@ schema = Schema((
         vocabulary=UrbanVocabulary('townroaddecree', with_empty_value=True),
     ),
     StringField(
-        name='decisional_delay',
+        name='annoncedDelay',
         widget=SelectionWidget(
             label=_('urban_label_decisional_delay',
                     default='DecisionalDelay'),
@@ -94,7 +94,7 @@ class RoadDecree(CODT_BuildLicence):
         )
         return DisplayList(vocabulary)
 
-    def getDecisional_delay(self, *values):
+    def getAnnoncedDelay(self, *values):
         alignment = getattr(self, 'IsAlignment_plan', False)
         municipality = getattr(self, 'commune_choices', 'ukn')
         external_municipality = municipality != 'commune'
@@ -126,7 +126,7 @@ def finalize_schema(schema, folderish=False, moveDiscussion=True):
     schema['sevesoSite'].schemata = 'urban_location'
     schema['natura_2000'].schemata = 'urban_location'
 
-    schema['decisional_delay'].widget.visible = {
+    schema['annoncedDelay'].widget.visible = {
         'view': 'visible',
         'edit': 'invisible',
     }
