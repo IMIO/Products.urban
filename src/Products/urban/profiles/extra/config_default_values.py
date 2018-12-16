@@ -907,7 +907,7 @@ default_values = {
         ],
 
         'roadmissingparts': [
-            'UrbanVocabularyTerm', ['NotaryLetter', 'MiscDemand', 'Division', 'Declaration'],
+            'UrbanVocabularyTerm', ['NotaryLetter', 'MiscDemand', 'Division', 'Declaration', 'RoadDecree'],
         ],
 
         'locationmissingparts': [
