@@ -28,8 +28,9 @@ class CoringUtility(object):
     def _coring_values(self):
         values = []
         normalizer = getUtility(IIDNormalizer)
-        for attributes in self.values.get('attributes', []):
-            values.append(attributes['attributes'][self.coring_attribute])
+        if self.values.get('attributes', []):
+            for attributes in self.values.get('attributes', []):
+                values.append(attributes['attributes'][self.coring_attribute])
         return map(normalizer.normalize, values)
 
     def _get_terms(self, values):
@@ -193,8 +194,7 @@ MATCH_CORING = {
     42: CoringCatchmentArea,
     43: CoringCatchmentArea,
     44: CoringCatchmentArea,
-    46: CoringCatchmentArea,
-    45: (CoringSOLZone, CoringSOLBoolean),
+    46: (CoringSOLZone, CoringSOLBoolean),
 }
 
 
