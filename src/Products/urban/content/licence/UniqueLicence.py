@@ -31,6 +31,7 @@ from Products.urban.config import *
 from Products.urban import UrbanMessage as _
 from plone import api
 from DateTime import DateTime
+from zope.i18n import translate
 
 ##code-section module-header #fill in your manual code here
 optional_fields = [
