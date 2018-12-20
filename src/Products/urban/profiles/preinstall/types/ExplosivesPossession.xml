@@ -16,7 +16,11 @@
  <property name="allowed_content_types">
    <element value="UrbanEventOpinionRequest"/>
    <element value="Applicant"/>
+   <element value="Corporation"/>
    <element value="UrbanEvent"/>
+   <element value="UrbanEventInquiry"/>
+   <element value="UrbanEventCollege"/>
+   <element value="UrbanEventMayor"/>
    <element value="File"/>
    <element value="PortionOut"/>
    <element value="task"/>
