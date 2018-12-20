@@ -35,7 +35,7 @@ from zope.i18n import translate
 
 ##code-section module-header #fill in your manual code here
 optional_fields = [
-    'referenceSPE', 'referenceFT', 'environmentTechnicalRemarks',
+    'referenceSPE', 'environmentTechnicalRemarks',
     'claimsSynthesis', 'conclusions', 'commentsOnSPWOpinion',
     'ftSolicitOpinionsTo'
 ]
@@ -60,14 +60,6 @@ schema = Schema((
         ),
         schemata='urban_description',
         default_method='getDefaultSPEReference',
-    ),
-    StringField(
-        name='referenceFT',
-        widget=StringField._properties['widget'](
-            size=30,
-            label=_('urban_label_referenceFT', default='Referenceft'),
-        ),
-        schemata='urban_description',
     ),
     StringField(
         name='authority',

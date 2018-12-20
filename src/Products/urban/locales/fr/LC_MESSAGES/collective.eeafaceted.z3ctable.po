@@ -35,11 +35,5 @@ msgstr "Titre"
 msgid "header_task_actions_column"
 msgstr "Actions"
 
-msgid "header_assigned_user"
-msgstr "Assigné à"
-
-msgid "header_path"
-msgstr "Titre"
-
 msgid "sortable_title"
 msgstr "Titre faceted"
