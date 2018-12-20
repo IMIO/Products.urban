@@ -1786,6 +1786,33 @@ urbanEventTypes = {
             'eventTypeType': 'Products.urban.interfaces.IInquiryEvent',
         },
         {
+            'id': "config-opinion-request",
+            'title': "*** Demande d'avis CONFIG ***",
+            'activatedFields': [],
+            'TALCondition': "python: False",
+            'podTemplates': (
+                {'id': "codt-avis.odt", 'title': "Courrier de demande d'avis"},
+            ),
+            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
+        },
+        # {
+        #     'portal_type': 'OpinionRequestEventType',
+        #     'id': 'demande-davis-ccatm',
+        #     'title': "Demande d'avis à la CCATM",
+        #     'extraValue': "CCATM",
+        #     'description': '<p>Adresse de la CCATM</p>',
+        #     'activatedFields': ['transmitDate', 'receiptDate', 'receivedDocumentReference',
+        #                         'adviceAgreementLevel', 'isOptional', 'externalDecision', ],
+        #     'deadLineDelay': 15,
+        #     'TALCondition': "python: here.mayAddOpinionRequestEvent('demande-davis-ccatm')",
+        #     'podTemplates': (
+        #         {'id': "codt_punq_demande_avis_ccatm.odt", 'title': "Demande d’avis à la CCATM"}
+        #     ),
+        #     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+        #     'eventPortalType': 'UrbanEventOpinionRequest',
+        # },
+        {
             'id': "avis-college",
             'title': "Avis préalable du Collège",
             'eventDateLabel': "Date de notification",
@@ -1869,22 +1896,6 @@ urbanEventTypes = {
                 {'id': "codt_punq_attestation_affichage_decision.odt", 'title': "Attestation d'affichage de la décision"},
             ),
             'eventTypeType': 'Products.urban.interfaces.IDisplayingTheDecisionEvent',
-        },
-        {
-            'portal_type': 'OpinionRequestEventType',
-            'id': 'demande-davis-ccatm',
-            'title': "Demande d'avis à la CCATM",
-            'extraValue': "CCATM",
-            'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
-            'activatedFields': ['transmitDate', 'receiptDate', 'receivedDocumentReference',
-                                'adviceAgreementLevel', 'isOptional', 'externalDecision', ],
-            'deadLineDelay': 15,
-            'TALCondition': "python: here.mayAddOpinionRequestEvent('demande-davis-ccatm')",
-            'podTemplates': (
-                {'id': "codt_punq_demande_avis_ccatm.odt", 'title': "Demande d’avis à la CCATM"}
-            ),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
-            'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'id': "recours-gouvernement",
