@@ -44,7 +44,7 @@ from plone import api
 optional_fields = [
     'roadTechnicalAdvice', 'locationTechnicalAdvice', 'additionalLegalConditions',
     'businessOldLocation', 'applicationReasons', 'validityDelay',
-    'environmentTechnicalRemarks', 'rubricsDetails',
+    'environmentTechnicalRemarks', 'rubricsDetails', 'referenceFT'
 ]
 
 slave_fields_natura2000 = (
@@ -73,6 +73,14 @@ slave_fields_procedurechoice = (
 
 schema = Schema((
 
+    StringField(
+        name='referenceFT',
+        widget=StringField._properties['widget'](
+            size=30,
+            label=_('urban_label_referenceFT', default='Referenceft'),
+        ),
+        schemata='urban_description',
+    ),
     ReferenceField(
         name='rubrics',
         widget=HistorizeReferenceBrowserWidget(
@@ -483,6 +491,7 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     schema.moveField('foldermanagers', after='businessOldLocation')
     schema.moveField('rubrics', after='folderCategory')
     schema.moveField('description', after='additionalLegalConditions')
+    schema.moveField('referenceFT', after='referenceDGATLP')
     return schema
 
 
