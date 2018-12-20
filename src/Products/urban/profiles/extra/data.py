@@ -1796,22 +1796,22 @@ urbanEventTypes = {
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
-        # {
-        #     'portal_type': 'OpinionRequestEventType',
-        #     'id': 'demande-davis-ccatm',
-        #     'title': "Demande d'avis à la CCATM",
-        #     'extraValue': "CCATM",
-        #     'description': '<p>Adresse de la CCATM</p>',
-        #     'activatedFields': ['transmitDate', 'receiptDate', 'receivedDocumentReference',
-        #                         'adviceAgreementLevel', 'isOptional', 'externalDecision', ],
-        #     'deadLineDelay': 15,
-        #     'TALCondition': "python: here.mayAddOpinionRequestEvent('demande-davis-ccatm')",
-        #     'podTemplates': (
-        #         {'id': "codt_punq_demande_avis_ccatm.odt", 'title': "Demande d’avis à la CCATM"}
-        #     ),
-        #     'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
-        #     'eventPortalType': 'UrbanEventOpinionRequest',
-        # },
+        {
+            'portal_type': 'OpinionRequestEventType',
+            'id': 'demande-davis-ccatm',
+            'title': "Demande d'avis à la CCATM",
+            'extraValue': "CCATM",
+            'description': '<p>Adresse de la CCATM</p>',
+            'activatedFields': ['transmitDate', 'receiptDate', 'receivedDocumentReference',
+                                'adviceAgreementLevel', 'isOptional', 'externalDecision', ],
+            'deadLineDelay': 15,
+            'TALCondition': "python: here.mayAddOpinionRequestEvent('demande-davis-ccatm')",
+            'podTemplates': (
+                {'id': "codt_punq_demande_avis_ccatm.odt", 'title': "Demande d’avis à la CCATM"},
+            ),
+            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventPortalType': 'UrbanEventOpinionRequest',
+        },
         {
             'id': "avis-college",
             'title': "Avis préalable du Collège",
