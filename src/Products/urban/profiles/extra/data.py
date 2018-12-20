@@ -1877,11 +1877,11 @@ urbanEventTypes = {
             'extraValue': "CCATM",
             'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
             'activatedFields': ['transmitDate', 'receiptDate', 'receivedDocumentReference',
-                              'adviceAgreementLevel', 'isOptional', 'externalDecision', ],
+                                'adviceAgreementLevel', 'isOptional', 'externalDecision', ],
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('demande-davis-ccatm')",
             'podTemplates': (
-                {'id': "codt_punq_demande_avis_ccatm", 'title': "Demande d’avis à la CCATM"}
+                {'id': "codt_punq_demande_avis_ccatm.odt", 'title': "Demande d’avis à la CCATM"}
             ),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
             'eventPortalType': 'UrbanEventOpinionRequest',
