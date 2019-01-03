@@ -1784,6 +1784,7 @@ urbanEventTypes = {
                 {'id': "codt_punq_transmis_elements_enquete_dgo4.odt", 'title': "Transmis des éléments d'enquête à la DGO4"},
             ),
             'eventTypeType': 'Products.urban.interfaces.IInquiryEvent',
+            'eventPortalType': 'UrbanEventInquiry',
         },
         {
             'id': "config-opinion-request",
