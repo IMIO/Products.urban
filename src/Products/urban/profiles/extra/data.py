@@ -1930,17 +1930,6 @@ urbanEventTypes = {
             ),
             'eventTypeType': 'Products.urban.interfaces.IRecourseEvent',
         },
-        {
-            'id': "etude-incidence",
-            'title': "Étude d'incidence",
-            'eventDateLabel': "Date de notification",
-            'activatedFields': ['concertationDate'],
-            'deadLineDelay': 15,
-            'isKeyEvent': True,
-            'keyDates': ('eventDate',),
-            'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IImpactStudyEvent',
-        },
     ),
     'uniquelicence': (
         {
@@ -5253,7 +5242,7 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IWalloonRegionOpinionRequestEvent',
+            'eventTypeType': 'Products.urban.interfaces.IDecisionProjectFromSPWEvent',
         },
         {
             'id': "modified-blueprints",
