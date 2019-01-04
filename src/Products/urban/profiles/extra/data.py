@@ -180,8 +180,7 @@ urbanEventTypes = {
             'specialFunctionName': "Rechercher les propriétaires situés dans un rayon de 50m",
             'specialFunctionUrl': "addInvestigationPO",
             'podTemplates': (
-                {'id': "codt_pu_annexe_26_enq_pub_avis_riverains.odt", 'title': "Avis enquête (Lettre riverains, Annexe 26)"},
-                {'id': "codt_pu_annexe_26_enq_pub_avis_riverains_affiche.odt", 'title': "Lettre aux riverains : Affiche (Annexe 26)"},
+                {'id': "codt_pu_annexe_26_affiche_jaune.odt", 'title': "Affiche jaune (annexe 26)"},
             ),
             'eventTypeType': 'Products.urban.interfaces.IInquiryEvent',
             'eventPortalType': 'UrbanEventInquiry',
