@@ -5722,6 +5722,33 @@ urbanEventTypes = {
             'eventTypeType': ('Products.urban.interfaces.ITheLicenceEvent', 'Products.urban.interfaces.ILicenceNotificationEvent'),
         },
     ),
+    'projectmeetings': (
+        {
+            'id': "depot-de-la-demande",
+            'title': "Dépôt de la demande",
+            'activatedFields': [],
+            'isKeyEvent': True,
+            'eventDateLabel': "Date de réception",
+            'keyDates': ('eventDate',),
+            'podTemplates': (),
+            'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
+        },
+        {
+            'id': "convocation",
+            'title': "Convocation",
+            'activatedFields': [],
+            'isKeyEvent': True,
+            'eventDateLabel': "Date d'envoi des convocations",
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+                {'id': "codt_RP_convocation_demandeur.odt", 'title': "Convocation au demandeur"},
+                {'id': "codt_RP_convocation_FD.odt", 'title': "Convocation à la DGO4"},
+                {'id': "codt_RP_convocation_architecte.odt", 'title': "Convocation à l’architecte"},
+                {'id': "codt_RP_convocation_autre.odt", 'title': "Convocation autre"},
+            ),
+            'eventTypeType': 'Products.urban.interfaces.IAcknowledgmentEvent',
+        },
+    ),
     'preliminarynotice': (
         {
             'id': "depot-de-la-demande",
