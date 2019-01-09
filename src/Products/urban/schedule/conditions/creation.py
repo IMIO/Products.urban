@@ -343,7 +343,7 @@ class IncompleteForTheSecondTime(CreationCondition):
         if not first_incomplete_done:
             return False
         wf_history = licence.workflow_history
-        two_incomplete_transitions = len([tr for tr in wf_history[wf_history.keys()[0]] if tr['action'] == 'isincomplete'])
+        two_incomplete_transitions = 2 <= len([tr for tr in wf_history[wf_history.keys()[0]] if tr['action'] == 'isincomplete'])
         if not two_incomplete_transitions:
             return False
         return True
