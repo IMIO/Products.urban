@@ -119,6 +119,19 @@ def migrate_opinionrequest_event_portaltype(context):
     logger.info("migration step done!")
 
 
+def migrate_users_in_environment_groups(context):
+    """ """
+    logger = logging.getLogger('urban: migrate users in environment groups')
+    logger.info("starting migration step")
+
+    for user in api.user.get_users(groupname='urban_editors'):
+        api.group.add_user(user=user, groupname='environment_editors')
+    for user in api.user.get_users(groupname='urban_readers'):
+        api.group.add_user(user=user, groupname='environment_readers')
+
+    logger.info("migration step done!")
+
+
 def migrate(context):
     logger = logging.getLogger('urban: migrate to 2.3')
     logger.info("starting migration steps")
@@ -134,4 +147,5 @@ def migrate(context):
     migrate_eventtypes_values()
     migrate_sct(context)
     migrate_opinionrequest_event_portaltype(context)
+    migrate_users_in_environment_groups(context)
     logger.info("migration done!")
