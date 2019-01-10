@@ -177,7 +177,7 @@ class CoringCatchmentArea(CoringUtility):
 
 MATCH_CORING = {
     2: CoringNatura2000,
-    8: (CoringParcellings, CoringParcellingsBoolean),
+    8: CoringParcellingsBoolean,
     12: CoringProtectedBuilding,
     16: CoringProtectedBuilding,
     18: CoringProtectedBuilding,
