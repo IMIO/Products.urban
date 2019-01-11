@@ -1,41 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from Products.urban.interfaces import IArticle127
-from Products.urban.interfaces import IBaseBuildLicence
-from Products.urban.interfaces import IBaseAllBuildLicence
-from Products.urban.interfaces import ICODT_Article127
-from Products.urban.interfaces import ICODT_BaseBuildLicence
-from Products.urban.interfaces import ICODT_BuildLicence
-from Products.urban.interfaces import ICODT_CommercialLicence
-from Products.urban.interfaces import ICODT_IntegratedLicence
-from Products.urban.interfaces import ICODT_NotaryLetter
-from Products.urban.interfaces import ICODT_ParcelOutLicence
-from Products.urban.interfaces import ICODT_UniqueLicence
-from Products.urban.interfaces import ICODT_UrbanCertificateOne
-from Products.urban.interfaces import ICODT_UrbanCertificateTwo
-from Products.urban.interfaces import IBuildLicence
-from Products.urban.interfaces import IDeclaration
-from Products.urban.interfaces import IDivision
-from Products.urban.interfaces import IEnvClassOne
-from Products.urban.interfaces import IEnvClassThree
-from Products.urban.interfaces import IEnvClassTwo
-from Products.urban.interfaces import IEnvClassBordering
-from Products.urban.interfaces import IGenericLicence
-from Products.urban.interfaces import IIntegratedLicence
-from Products.urban.interfaces import IMiscDemand
-from Products.urban.interfaces import INotaryLetter
-from Products.urban.interfaces import IParcelOutLicence
-from Products.urban.interfaces import IPatrimonyCertificate
-from Products.urban.interfaces import IPreliminaryNotice
-from Products.urban.interfaces import IProjectMeeting
-from Products.urban.interfaces import IUniqueLicence
-from Products.urban.interfaces import IUrbanCertificateOne
-from Products.urban.interfaces import IUrbanCertificateTwo
-from Products.urban.interfaces import IUrbanEventOpinionRequest
-from Products.urban.interfaces import IExplosivesPossession
-from Products.urban.interfaces import IRoadDecree
-
-
+from Products.urban import interfaces
 from Products.urban import UrbanMessage
 
 from imio.schedule.content.vocabulary import ScheduledContentTypeVocabulary
@@ -47,40 +12,42 @@ from zope.schema.vocabulary import SimpleVocabulary
 
 
 URBAN_TYPES_INTERFACES = {
-    'CODT_Article127': ICODT_Article127,
-    'CODT_BaseBuildLicence': ICODT_BaseBuildLicence,
-    'CODT_BuildLicence': ICODT_BuildLicence,
-    'CODT_CommercialLicence': ICODT_CommercialLicence,
-    'CODT_IntegratedLicence': ICODT_IntegratedLicence,
-    'CODT_NotaryLetter': ICODT_NotaryLetter,
-    'CODT_ParcelOutLicence': ICODT_ParcelOutLicence,
-    'CODT_UniqueLicence': ICODT_UniqueLicence,
-    'CODT_UrbanCertificateOne': ICODT_UrbanCertificateOne,
-    'CODT_UrbanCertificateTwo': ICODT_UrbanCertificateTwo,
-    'Article127': IArticle127,
-    'Base BuildLicence (PU, 127, CU2)': IBaseBuildLicence,
-    'All Base BuildLicence (PU, 127, CU2 CWTUP and CODT)': IBaseAllBuildLicence,
-    'BuildLicence': IBuildLicence,
-    'Declaration': IDeclaration,
-    'Division': IDivision,
-    'EnvClassOne': IEnvClassOne,
-    'EnvClassTwo': IEnvClassTwo,
-    'EnvClassThree': IEnvClassThree,
-    'EnvClassBordering': IEnvClassBordering,
-    'GenericLicence': IGenericLicence,
-    'IntegratedLicence': IIntegratedLicence,
-    'MiscDemand': IMiscDemand,
-    'NotaryLetter': INotaryLetter,
-    'ParcelOutLicence': IParcelOutLicence,
-    'PatrimonyCertificate': IPatrimonyCertificate,
-    'PreliminaryNotice': IPreliminaryNotice,
-    'ProjectMeeting': IProjectMeeting,
-    'UniqueLicence': IUniqueLicence,
-    'UrbanCertificateOne': IUrbanCertificateOne,
-    'UrbanCertificateTwo': IUrbanCertificateTwo,
-    'UrbanEventOpinionRequest': IUrbanEventOpinionRequest,
-    'ExplosivesPossession': IExplosivesPossession,
-    'RoadDecree': IRoadDecree,
+    'CODT_Article127': interfaces.ICODT_Article127,
+    'CODT_BaseBuildLicence': interfaces.ICODT_BaseBuildLicence,
+    'CODT_BuildLicence': interfaces.ICODT_BuildLicence,
+    'CODT_CommercialLicence': interfaces.ICODT_CommercialLicence,
+    'CODT_IntegratedLicence': interfaces.ICODT_IntegratedLicence,
+    'CODT_NotaryLetter': interfaces.ICODT_NotaryLetter,
+    'CODT_ParcelOutLicence': interfaces.ICODT_ParcelOutLicence,
+    'CODT_UniqueLicence': interfaces.ICODT_UniqueLicence,
+    'CODT_UrbanCertificateOne': interfaces.ICODT_UrbanCertificateOne,
+    'CODT_UrbanCertificateTwo': interfaces.ICODT_UrbanCertificateTwo,
+    'Article127': interfaces.IArticle127,
+    'Base BuildLicence (PU, 127, CU2)': interfaces.IBaseBuildLicence,
+    'All Base BuildLicence (PU, 127, CU2 CWATUP and CODT)': interfaces.IBaseAllBuildLicence,
+    'Urban and environment BuildLicences (PU, 127, CU2 CWATUP/CODT, PE1, PE2)':
+        (interfaces.IBaseAllBuildLicence, interfaces.IEnvironmentLicence),
+    'BuildLicence': interfaces.IBuildLicence,
+    'Declaration': interfaces.IDeclaration,
+    'Division': interfaces.IDivision,
+    'EnvClassOne': interfaces.IEnvClassOne,
+    'EnvClassTwo': interfaces.IEnvClassTwo,
+    'EnvClassThree': interfaces.IEnvClassThree,
+    'EnvClassBordering': interfaces.IEnvClassBordering,
+    'GenericLicence': interfaces.IGenericLicence,
+    'IntegratedLicence': interfaces.IIntegratedLicence,
+    'MiscDemand': interfaces.IMiscDemand,
+    'NotaryLetter': interfaces.INotaryLetter,
+    'ParcelOutLicence': interfaces.IParcelOutLicence,
+    'PatrimonyCertificate': interfaces.IPatrimonyCertificate,
+    'PreliminaryNotice': interfaces.IPreliminaryNotice,
+    'ProjectMeeting': interfaces.IProjectMeeting,
+    'UniqueLicence': interfaces.IUniqueLicence,
+    'UrbanCertificateOne': interfaces.IUrbanCertificateOne,
+    'UrbanCertificateTwo': interfaces.IUrbanCertificateTwo,
+    'UrbanEventOpinionRequest': interfaces.IUrbanEventOpinionRequest,
+    'ExplosivesPossession': interfaces.IExplosivesPossession,
+    'RoadDecree': interfaces.IRoadDecree,
 }
 
 
