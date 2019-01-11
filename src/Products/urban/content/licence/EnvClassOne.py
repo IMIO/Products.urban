@@ -71,7 +71,9 @@ class EnvClassOne(BaseFolder, EnvironmentLicence, BrowserDefaultMixin):
     # Manually created methods
 
     def rubrics_base_query(self):
-        return {'extraValue': ['0', '1', '2', '3']}
+        base_query = super(EnvClassOne, self).rubrics_base_query().copy()
+        base_query['extraValue'] = ['0', '1', '2', '3']
+        return base_query
 
     def getProcedureDelays(self, *values):
         selection = [v['val'] for v in values if v['selected']]

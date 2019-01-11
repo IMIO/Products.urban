@@ -340,7 +340,7 @@ class EnvironmentBase(BaseFolder, GenericLicence, CODT_UniqueLicenceInquiry, Bro
 
     def rubrics_base_query(self):
         """ to be overriden """
-        return {}
+        return {'review_state': 'enabled'}
 
     def listProcedureChoices(self):
         vocabulary = (

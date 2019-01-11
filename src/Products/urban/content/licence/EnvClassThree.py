@@ -144,7 +144,9 @@ class EnvClassThree(BaseFolder, EnvironmentBase, BrowserDefaultMixin):
         return 10
 
     def rubrics_base_query(self):
-        return {'extraValue': ['0', '3']}
+        base_query = super(EnvClassThree, self).rubrics_base_query().copy()
+        base_query['extraValue'] = ['0', '3']
+        return base_query
 
     def getProcedureDelays(self, *values):
         return '15j'
