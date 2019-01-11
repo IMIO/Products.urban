@@ -216,6 +216,7 @@ setOptionalAttributes(schema, optional_fields)
 
 UniqueLicence_schema = BaseFolderSchema.copy() + \
     getattr(BaseBuildLicence, 'schema', Schema(())).copy() + \
+    getattr(EnvironmentBase, 'schema', Schema(())).copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
