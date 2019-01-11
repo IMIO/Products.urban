@@ -7,6 +7,10 @@ from Products.urban.config import URBAN_TYPES
 
 from plone import api
 
+from zope.event import notify
+from zope.lifecycleevent import ObjectModifiedEvent
+
+
 import logging
 
 logger = logging.getLogger('urban: migrations')
@@ -132,6 +136,21 @@ def migrate_users_in_environment_groups(context):
     logger.info("migration step done!")
 
 
+def migrate_college_urban_event_types(context):
+    """ """
+    logger = logging.getLogger('urban: migrate colleg urban event types')
+    logger.info("starting migration step")
+    portal_urban = api.portal.get_tool('portal_urban')
+    licence_configs = portal_urban.objectValues('LicenceConfig')
+    for licence_config in licence_configs:
+        eventtype_folder = licence_config.urbaneventtypes
+        for event_type in eventtype_folder.objectValues():
+            if event_type.getEventPortalType().endswith('College'):
+                notify(ObjectModifiedEvent(event_type))
+
+    logger.info("migration step done!")
+
+
 def migrate(context):
     logger = logging.getLogger('urban: migrate to 2.3')
     logger.info("starting migration steps")
@@ -148,4 +167,5 @@ def migrate(context):
     migrate_sct(context)
     migrate_opinionrequest_event_portaltype(context)
     migrate_users_in_environment_groups(context)
+    migrate_college_urban_event_types(context)
     logger.info("migration done!")
