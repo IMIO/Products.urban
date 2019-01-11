@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
-
 from Products.urban.events.urbanEventEvents import setEventTypeType
-from Products.urban.interfaces import IEventTypeType
-from Products.urban.interfaces import IUrbanEvent
-
+from Products.urban import interfaces
 
 from zope.annotation import IAnnotations
 from zope.interface import noLongerProvides
@@ -36,10 +33,29 @@ def updateEventType(urban_event_type, event):
     annotations['urban.eventtype'] = set(new_eventtype_interface)
 
     for urban_event in urban_event_type.getLinkedUrbanEvents():
-        if IUrbanEvent.providedBy(urban_event):
+        if interfaces.IUrbanEvent.providedBy(urban_event):
             # clean previous event type interface
             for provided_interface in providedBy(urban_event).flattened():
-                if IEventTypeType.providedBy(provided_interface):
+                if interfaces.IEventTypeType.providedBy(provided_interface):
                     noLongerProvides(urban_event, provided_interface)
             # add new provided interface
             setEventTypeType(urban_event, event)
+
+
+def forceEventTypeCollege(urban_event_type, event):
+    """
+    """
+
+    college_event_interfaces = set([
+        interfaces.ISimpleCollegeEvent,
+        interfaces.IEnvironmentSimpleCollegeEvent,
+    ])
+    default_college_interface = interfaces.ISimpleCollegeEvent
+
+    if urban_event_type.getEventPortalType().endswith('College'):
+        selected_interfaces = event.getEventTypeType()
+        if not college_event_interfaces.intersection(set(selected_interfaces)):
+            new_marker_interfaces = [default_college_interface]
+            for old_interface in selected_interfaces:
+                new_marker_interfaces.append(old_interface)
+            urban_event_type.setEventTypeType(new_marker_interfaces)

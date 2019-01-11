@@ -143,6 +143,10 @@
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".urbanEventTypesEvents.updateEventType" />
 
+  <subscriber for="..interfaces.IUrbanEventType
+                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+              handler=".urbanEventTypesEvents.forceEventTypeCollege" />
+
   <subscriber for="..interfaces.IEnvironmentRubricTerm
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".rubricTermEvents.updateTitle" />
