@@ -343,6 +343,9 @@ class CODT_UniqueLicence(BaseFolder, CODT_UniqueLicenceInquiry, CODT_BaseBuildLi
     def getLastDecisionProjectFromSPW(self):
         return self.getLastEvent(interfaces.IDecisionProjectFromSPWEvent)
 
+    def getLastModificationDeposit(self):
+        return self.getLastEvent(interfaces.IModificationDepositEvent)
+
     def getLastWalloonRegionDecisionEvent(self):
         return self.getLastEvent(interfaces.IWalloonRegionDecisionEvent)
 
