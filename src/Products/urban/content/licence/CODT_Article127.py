@@ -98,7 +98,7 @@ class CODT_Article127(BaseFolder, CODT_BaseBuildLicence, BrowserDefaultMixin):
         else:
             return '130j'
 
-    def getLastWalloonRegionDecisionEvent(self):
+    def getLastWalloonRegionDecision(self):
         return self.getLastEvent(interfaces.IWalloonRegionDecisionEvent)
 
 
