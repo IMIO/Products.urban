@@ -1,4 +1,4 @@
-## -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 
 from DateTime import DateTime
 
@@ -462,7 +462,7 @@ class GenerationColumn(LinkColumn):
         url = item.getURL()
         doc_url = url.rsplit('/', 1)[0]
         # must use new view with title given and reference to mailing template
-        return '%s/@@mailing-loop-persistent-document-generation?document_uid=%s' % (doc_url, item.UID())
+        return '%s/@@mailing-loop-persistent-document-generation?document_url_path=%s' % (doc_url, item.absolute_url_path())
 
     def getLinkContent(self, item):
         return u"""<img title="%s" src="%s" />""" % (_t(u"Mailing"), '%s/%s' % (self.table.portal_url, self.iconName))

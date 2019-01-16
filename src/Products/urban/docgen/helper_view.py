@@ -464,7 +464,7 @@ class UrbanDocGenerationLicenceHelperView(UrbanDocGenerationHelperView):
 class UrbanDocGenerationEventHelperView(UrbanDocGenerationHelperView):
     """
     """
-    def mailing_list(self, gen_context = None):
+    def mailing_list(self, gen_context=None):
         mailing_list = []
         if gen_context.has_key('publipostage'):
             if gen_context['publipostage'] == 'demandeurs':
@@ -473,6 +473,8 @@ class UrbanDocGenerationEventHelperView(UrbanDocGenerationHelperView):
                 mailing_list = self.context.getArchitects()
             elif gen_context['publipostage'] == 'reclamants':
                 mailing_list = self.context.getClaimants()
+            elif gen_context['publipostage'] == 'proprietaires':
+                mailing_list = self.context.getRecipients()
         return mailing_list
 
 
