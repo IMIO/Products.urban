@@ -7,6 +7,7 @@ from Products.urban.setuphandlers import _create_task_configs
 from Products.urban.browser.table.urbantable import InternalOpinionServicesTable
 
 from imio.schedule.content.object_factories import CreationConditionObject
+from imio.schedule.content.object_factories import RecurrenceConditionObject
 
 from plone import api
 
@@ -155,11 +156,11 @@ class AddInternalServiceForm(form.Form):
         """
         """
         editor_group = api.group.create(
-            groupname='{}_editor'.format(service_id),
+            groupname='{}_editors'.format(service_id),
             title='{} Editors'.format(service_name),
         )
         validator_group = api.group.create(
-            groupname='{}_validator'.format(service_id),
+            groupname='{}_validators'.format(service_id),
             title='{} Validators'.format(service_name),
         )
         portal_groups = api.portal.get_tool('portal_groups')
@@ -174,7 +175,7 @@ class AddInternalServiceForm(form.Form):
         portal_urban = api.portal.get_tool('portal_urban')
         schedule_folder = portal_urban.opinions_schedule
         ask_opinion_task_id = 'ask_{}_opinion'.format(service_id)
-        give_opinion_task_id = 'give_{}_opinion'.format(service_id)
+        give_opinion_task_id = 'ask_{}_opinion_1'.format(service_id)
         task_configs = [
             {
                 'type_name': 'TaskConfig',
@@ -185,9 +186,14 @@ class AddInternalServiceForm(form.Form):
                 'creation_state': ('creation',),
                 'starting_states': ('waiting_opinion',),
                 'ending_states': ('opinion_validation',),
+                'recurrence_states': ('waiting_opinion',),
                 'creation_conditions': (
                     CreationConditionObject('urban.schedule.condition.is_internal_opinion'),
                 ),
+                'recurrence_conditions': (
+                    RecurrenceConditionObject('urban.schedule.condition.is_internal_opinion'),
+                ),
+                'activate_recurrency': True,
                 'start_date': 'urban.schedule.start_date.asking_date',
                 'calculation_delay': (
                     'schedule.calculation_default_delay',
@@ -202,10 +208,15 @@ class AddInternalServiceForm(form.Form):
                 'default_assigned_user': 'to_assign',
                 'creation_state': ('waiting_opinion',),
                 'starting_states': ('opinion_validation',),
-                'ending_states': ('opinion_given',),
+                'ending_states': ('opinion_given', 'waiting_opinion'),
+                'recurrence_states': ('opinion_validation',),
                 'creation_conditions': (
                     CreationConditionObject('urban.schedule.condition.is_internal_opinion'),
                 ),
+                'recurrence_conditions': (
+                    RecurrenceConditionObject('urban.schedule.condition.is_internal_opinion'),
+                ),
+                'activate_recurrency': True,
                 'start_date': 'urban.schedule.start_date.asking_date',
                 'calculation_delay': (
                     'schedule.calculation_default_delay',
