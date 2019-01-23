@@ -102,9 +102,9 @@ class AddInternalServiceForm(form.Form):
         data, errors = self.extractData()
         if errors:
             return False
-        service_id = data['service_id']
+        service_id = data['service_id'].lower()
         service_name = data['service_name']
-        editor_group_id, validator_group_id = self.create_groups(service_id, service_name)
+        editor_group_id, validator_group_id = self.create_groups(service_id.capitalize(), service_name)
         with api.env.adopt_roles(['Manager']):
             task_config_answer, task_config_validate = self.create_task_configs(service_id, service_name, editor_group_id, validator_group_id)
         self.set_registry_mapping(service_id, service_name, editor_group_id, validator_group_id, task_config_answer, task_config_validate)
@@ -114,7 +114,7 @@ class AddInternalServiceForm(form.Form):
         data, errors = self.extractData()
         if errors:
             return False
-        service_id = data['service_id']
+        service_id = data['service_id'].lower()
         registry = api.portal.get_tool('portal_registry')
         registry_field = registry['Products.urban.interfaces.IInternalOpinionServices.services']
 
@@ -133,7 +133,7 @@ class AddInternalServiceForm(form.Form):
         data, errors = self.extractData()
         if errors:
             return False
-        service_id = data['service_id']
+        service_id = data['service_id'].lower()
         registry = api.portal.get_tool('portal_registry')
         registry_field = registry['Products.urban.interfaces.IInternalOpinionServices.services']
 
