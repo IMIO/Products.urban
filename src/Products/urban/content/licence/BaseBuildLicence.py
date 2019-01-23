@@ -626,6 +626,9 @@ class BaseBuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin)
     def getLastCollegeReport(self):
         return self.getLastEvent(interfaces.ICollegeReportEvent)
 
+    def getLastModificationDeposit(self):
+        return self.getLastEvent(interfaces.IModificationDepositEvent)
+
     def getLastTheLicence(self):
         return self.getLastEvent(interfaces.ITheLicenceEvent)
 
