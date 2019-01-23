@@ -175,7 +175,7 @@ class AddInternalServiceForm(form.Form):
         portal_urban = api.portal.get_tool('portal_urban')
         schedule_folder = portal_urban.opinions_schedule
         ask_opinion_task_id = 'ask_{}_opinion'.format(service_id)
-        give_opinion_task_id = 'ask_{}_opinion_1'.format(service_id)
+        give_opinion_task_id = 'give_{}_opinion'.format(service_id)
         task_configs = [
             {
                 'type_name': 'TaskConfig',
