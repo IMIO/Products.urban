@@ -63,3 +63,31 @@
     <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/main-layout.js'%staticPylonsHost"></script>
     <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/main-map.js'%staticPylonsHost"></script>
 </div>
+
+<div metal:define-macro="imioSpwMapSetup" tal:define="staticUrbanmapHostHost context/portal_urban/getStaticPylonsHost">
+
+		<script type="text/javascript" src="http://geoservices.wallonie.be/geoviewer/4.0/?t=I2PHLK3WBK"></script>
+		<link rel="stylesheet" type="text/css" href="http://geoservices.wallonie.be/geoviewer/4.0/style/"/>
+		<style>
+            #spwViewerDiv {
+                position: absolute;
+                top: 0px;
+                bottom: 0px;
+                height: 100%;
+                width: 100%;
+                overflow: hidden;
+            }
+            #map {
+                position:absolute;
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+			.draw-point {
+				text-align: center;
+				padding: 10px;
+			}
+		</style>
+        <script type="text/javascript" src="http://localhost/static/imiomapspw.js"></script>
+</div>
