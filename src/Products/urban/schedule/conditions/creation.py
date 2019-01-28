@@ -372,5 +372,5 @@ class LicenceAuthorityIsCollege(CreationCondition):
 
     def evaluate(self):
         licence = self.task_container
-        authority_is_college = licence.getAuthorithy() == 'college'
+        authority_is_college = licence.getAuthority() == 'college'
         return authority_is_college

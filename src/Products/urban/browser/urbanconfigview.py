@@ -7,6 +7,7 @@ from Products.urban.setuphandlers import _create_task_configs
 from Products.urban.browser.table.urbantable import InternalOpinionServicesTable
 
 from imio.schedule.content.object_factories import CreationConditionObject
+from imio.schedule.content.object_factories import RecurrenceConditionObject
 
 from plone import api
 
@@ -101,9 +102,9 @@ class AddInternalServiceForm(form.Form):
         data, errors = self.extractData()
         if errors:
             return False
-        service_id = data['service_id']
+        service_id = data['service_id'].lower()
         service_name = data['service_name']
-        editor_group_id, validator_group_id = self.create_groups(service_id, service_name)
+        editor_group_id, validator_group_id = self.create_groups(service_id.capitalize(), service_name)
         with api.env.adopt_roles(['Manager']):
             task_config_answer, task_config_validate = self.create_task_configs(service_id, service_name, editor_group_id, validator_group_id)
         self.set_registry_mapping(service_id, service_name, editor_group_id, validator_group_id, task_config_answer, task_config_validate)
@@ -113,7 +114,7 @@ class AddInternalServiceForm(form.Form):
         data, errors = self.extractData()
         if errors:
             return False
-        service_id = data['service_id']
+        service_id = data['service_id'].lower()
         registry = api.portal.get_tool('portal_registry')
         registry_field = registry['Products.urban.interfaces.IInternalOpinionServices.services']
 
@@ -132,7 +133,7 @@ class AddInternalServiceForm(form.Form):
         data, errors = self.extractData()
         if errors:
             return False
-        service_id = data['service_id']
+        service_id = data['service_id'].lower()
         registry = api.portal.get_tool('portal_registry')
         registry_field = registry['Products.urban.interfaces.IInternalOpinionServices.services']
 
@@ -155,11 +156,11 @@ class AddInternalServiceForm(form.Form):
         """
         """
         editor_group = api.group.create(
-            groupname='{}_editor'.format(service_id),
+            groupname='{}_editors'.format(service_id),
             title='{} Editors'.format(service_name),
         )
         validator_group = api.group.create(
-            groupname='{}_validator'.format(service_id),
+            groupname='{}_validators'.format(service_id),
             title='{} Validators'.format(service_name),
         )
         portal_groups = api.portal.get_tool('portal_groups')
@@ -185,9 +186,14 @@ class AddInternalServiceForm(form.Form):
                 'creation_state': ('creation',),
                 'starting_states': ('waiting_opinion',),
                 'ending_states': ('opinion_validation',),
+                'recurrence_states': ('waiting_opinion',),
                 'creation_conditions': (
                     CreationConditionObject('urban.schedule.condition.is_internal_opinion'),
                 ),
+                'recurrence_conditions': (
+                    RecurrenceConditionObject('urban.schedule.condition.is_internal_opinion'),
+                ),
+                'activate_recurrency': True,
                 'start_date': 'urban.schedule.start_date.asking_date',
                 'calculation_delay': (
                     'schedule.calculation_default_delay',
@@ -202,10 +208,15 @@ class AddInternalServiceForm(form.Form):
                 'default_assigned_user': 'to_assign',
                 'creation_state': ('waiting_opinion',),
                 'starting_states': ('opinion_validation',),
-                'ending_states': ('opinion_given',),
+                'ending_states': ('opinion_given', 'waiting_opinion'),
+                'recurrence_states': ('opinion_validation',),
                 'creation_conditions': (
                     CreationConditionObject('urban.schedule.condition.is_internal_opinion'),
                 ),
+                'recurrence_conditions': (
+                    RecurrenceConditionObject('urban.schedule.condition.is_internal_opinion'),
+                ),
+                'activate_recurrency': True,
                 'start_date': 'urban.schedule.start_date.asking_date',
                 'calculation_delay': (
                     'schedule.calculation_default_delay',
