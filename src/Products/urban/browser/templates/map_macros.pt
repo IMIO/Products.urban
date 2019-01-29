@@ -65,9 +65,14 @@
 </div>
 
 <div metal:define-macro="imioSpwMapSetup" tal:define="staticUrbanmapHostHost context/portal_urban/getStaticPylonsHost">
-
 		<script type="text/javascript" src="http://geoservices.wallonie.be/geoviewer/4.0/?t=I2PHLK3WBK"></script>
 		<link rel="stylesheet" type="text/css" href="http://geoservices.wallonie.be/geoviewer/4.0/style/"/>
+        <script type="text/javascript" src="http://localhost/static/imiomapspw.js"></script>
+         <script tal:content="string:var NISNum='${context/portal_urban/getNISNum}';var urbanProrietariesCapakeyArray=${view/getListProprietariesCapaKey};var urbanCapakeyArray=${view/getListCapaKey};var proxyUrl='${context/portal_url}/portal_urban/getProxy?url=';var urbanMapWMCUrl='${context/absolute_url}/wmc';">
+	    </script>
+</div>
+
+<div metal:define-macro="fullmapCSS" tal:define="staticUrbanmapHostHost context/portal_urban/getStaticPylonsHost">
 		<style>
             #spwViewerDiv {
                 position: absolute;
@@ -89,5 +94,28 @@
 				padding: 10px;
 			}
 		</style>
-        <script type="text/javascript" src="http://localhost/static/imiomapspw.js"></script>
+
 </div>
+
+<div metal:define-macro="parcelmapCSS" tal:define="staticUrbanmapHostHost context/portal_urban/getStaticPylonsHost">
+		<style>
+            #spwViewerDiv {
+                position: relative;
+                top: 0px;
+                bottom: 0px;
+                height: 800px;
+                width: 100%;
+                overflow: hidden;
+            }
+			.draw-point {
+				text-align: center;
+				padding: 10px;
+			}
+		</style>
+
+</div>
+
+<div metal:define-macro="spwMapConfigParcel" tal:define="staticUrbanmapHostHost context/portal_urban/getStaticPylonsHost">
+		<script tal:content='python: view.getMapConfig()'></script>
+</div>
+

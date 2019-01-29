@@ -8,14 +8,19 @@
             tal:define="global parcels view/getParcels;" />
 
 <head>
+
 <tal:block condition="parcels">
+
+
 <div metal:fill-slot="style_slot" >
+    <metal:listing use-macro="here/@@map-macros/spwMapConfigParcel" />
     <metal:listing use-macro="here/@@map-macros/imioSpwMapSetup" />
+    <metal:listing use-macro="here/@@map-macros/parcelmapCSS" />
 </div>
 </tal:block>
 </head>
 
-<body class="claro">
+<body>
 <metal:main fill-slot="main">
 <metal:main_macro define-macro="main">
     <metal:body define-macro="body_macro"
@@ -87,8 +92,9 @@
    <form>
     <input type="hidden" id="map_initialized" value="0" />
    </form>
-   <fieldset><strong><legend i18n:translate="cartography">Cartography</legend></strong></fieldset>
-   <div id="spwViewerDiv" style="width:100%; height:800px"></div>
+   <fieldset><strong><legend i18n:translate="cartography">Cartography</legend></strong>
+   <div id="spwViewerDiv" style="width:100%; height:800px" class="claro"></div>
+   </fieldset>
   </tal:block>
 
   <div tal:replace="structure provider:plone.belowcontentbody" />

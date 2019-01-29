@@ -45,6 +45,28 @@ class MapView(BrowserView):
         parceltable.update()
         return parceltable.render()
 
+    def getMapConfig(self):
+        """
+        """
+        portal_urban = api.portal.get_tool('portal_urban')
+        script = """
+            var dojoConfig = {
+            async: true,
+            parseOnLoad: true,
+            isDebug: true,
+            locale: 'fr',
+            configBasePath: 'http://%s/static/default/fr',
+            packages: [{
+            name: 'exemple',
+            location: 'http://%s/static/widget'
+            },{
+            name: 'urbanmap',
+            location: 'http://%s/static/urbanmap'
+            }]
+            };
+            """ % (portal_urban.getStaticPylonsHost(),portal_urban.getStaticPylonsHost(),portal_urban.getStaticPylonsHost())
+        return script
+
     def getListCapaKey(self):
         """
            Return the list of capaKeys for each parcel
