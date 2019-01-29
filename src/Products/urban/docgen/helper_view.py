@@ -13,7 +13,9 @@ from Products.urban.utils import getCurrentFolderManager
 from Products.urban.utils import get_ws_meetingitem_infos
 from Products.urban.services import cadastre
 
+from zope.component import getUtility
 from zope.i18n import translate
+from zope.schema.interfaces import IVocabularyFactory
 from plone import api
 from DateTime import DateTime
 
@@ -158,11 +160,11 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
         first_div = None
         first_section = None
         for portionOutObj in self.context.getParcels():
-            #add a separator between every parcel
-            #either a '\n'
+            # add a separator between every parcel
+            # either a '\n'
             if not isFirst and linebyline:
                 toreturn += '\n'
-            #or an "and "
+            # or an "and "
             elif not isFirst:
                 toreturn += ', '
             elif isFirst:
@@ -534,7 +536,7 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
                             return False
 
                         def __call__(self):
-                            return  None
+                            return None
 
                     return EventNotFound()
             return getUrbanEventProxy
@@ -629,8 +631,34 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
             return opinions
         return []
 
+    def all_voc_terms(self, field_name='', with_coring_values=False):
+        field = self.context.getField(field_name)
+        voc_terms = []
+        if field.vocabulary:
+            voc_terms = field.vocabulary.getAllVocTerms(self.context).values()
+        elif field.vocabulary_factory:
+            voc_utility = getUtility(IVocabularyFactory, field.vocabulary_factory)
+            if with_coring_values:
+                simple_voc = voc_utility(self.context)
+                return simple_voc.by_value.values()
+            else:
+                voc_terms = voc_utility._get_config_vocabulary_values(self.context)
+
+        voc_terms_proxy = []
+        for v in voc_terms:
+            voc_terms_view = v.restrictedTraverse('@@document_generation_helper_view')
+            voc_terms_view.appy_renderer = self.helper_view.appy_renderer
+            voc_terms_proxy.append(voc_terms_view.context)
+        return voc_terms_proxy
+
+    def voc_terms(self, field_name='', with_coring_values=False):
+        all_voc_terms = self.all_voc_terms(field_name, with_coring_values)
+        selected_values = self.context.getField(field_name).get(self.context)
+        voc_terms = [t for t in all_voc_terms if getattr(t, 'id', t.value) in selected_values]
+        return voc_terms
+
 # Contact(s)
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
     def _get_personTitle_dict(self, id):
         """
         # Titre
@@ -683,8 +711,7 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
                 'Féminin-Pluriel': ' domiciliées '
             },
             reversed_name=False,
-            withaddress=True
-                    ):
+            withaddress=True):
         """
         """
         contact = self._get_contact_dict(contact)
@@ -712,7 +739,7 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
         return contact
 
 # Architecte(s)
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
     def get_architect_dict(self, index):
         """
         """
@@ -734,8 +761,7 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
                 'Féminin-Pluriel': ' domiciliées '
             },
             reversed_name=False,
-            withaddress=True
-                      ):
+            withaddress=True):
         result = self._get_contact(architect, resident, reversed_name, withaddress)
         return result
 
@@ -749,8 +775,7 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
             },
             reversed_name=False,
             withaddress=True,
-            separator=', '
-            ):
+            separator=', '):
         context = self.context
         architects = context.getArchitects()
         result = self._get_architect(architects[0], resident, reversed_name, withaddress)
@@ -759,7 +784,7 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
         return result
 
 # Agent(s) traitant(s)
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
     def get_current_foldermanager(self):
         return getCurrentFolderManager()
 
@@ -788,8 +813,7 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
                 'Féminin-Pluriel': ' domiciliées '
             },
             reversed_name=False,
-            withaddress=False
-            ):
+            withaddress=False):
         result = self._get_contact(foldermanager, resident, reversed_name, withaddress)
         return result
 
@@ -803,8 +827,7 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
             },
             reversed_name=False,
             withaddress=False,
-            separator=', '
-            ):
+            separator=', '):
         context = self.context
         foldermanagers = context.getFoldermanagers()
         result = self._get_foldermanager(foldermanagers[0], resident, reversed_name, withaddress)
@@ -831,7 +854,7 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
         return result
 
 # Demandeur(s)
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
     def get_applicants_names_and_address(
             self,
             applicant_separator=', ',
@@ -848,8 +871,7 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
                 'Féminin-Singulier': ' représentée par',
                 'Féminin-Pluriel': ' représentées par'
             },
-            reversed_name=True,
-        ):
+            reversed_name=True):
         applicants = self.getApplicants()
         applicants_names_and_address = ""
         if applicants:
@@ -875,7 +897,7 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
         if applicant['representedBySociety']:
             gender_multiplicity = applicant['gender'] + '-' + applicant['multiplicity']
             applicant_names_and_address += represented[gender_multiplicity] +\
-                    self._get_representedBy_names_and_address(applicant, resident, reversed_name, representedBy_separator)
+                self._get_representedBy_names_and_address(applicant, resident, reversed_name, representedBy_separator)
         return applicant_names_and_address
 
     def get_applicants_list_dict(self):
@@ -900,15 +922,15 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
         representedBy_names_and_address = ""
         if representedBy_list:
             representedBy_names_and_address = self._get_contact(
-                    representedBy_list[0],
-                    resident,
-                    reversed_name
+                representedBy_list[0],
+                resident,
+                reversed_name
             )
             for representedBy in representedBy_list[1:]:
                 representedBy_names_and_address += representedBy_separator + self._get_contact(
-                        representedBy,
-                        resident,
-                        reversed_name
+                    representedBy,
+                    resident,
+                    reversed_name
                 )
         return representedBy_names_and_address
 
@@ -930,8 +952,9 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
         if applicants:
             applicants_names = self._get_contact(applicants[0], reversed_name=reversed_name, withaddress=False)
             for applicant in applicants[1:]:
-                applicants_names += separator + self._get_contact(applicant, reversed_name=reversed_name,
-                        withaddress=False)
+                applicants_names += separator + self._get_contact(
+                    applicant, reversed_name=reversed_name, withaddress=False
+                )
         return applicants_names
 
     def _get_date(self, event, date_name='eventDate', translatemonth=True, long_format=False):
