@@ -26,6 +26,7 @@
 			};
 		</script>
 		<metal:listing use-macro="here/@@map-macros/imioSpwMapSetup" />
+		<metal:listing use-macro="here/@@map-macros/fullmapCSS" />
 	</head>
 <body class="claro">
 		<div id="spwViewerDiv"></div>
