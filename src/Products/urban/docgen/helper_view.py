@@ -660,6 +660,8 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
     def voc_term(self, field_name='', with_coring_values=False):
         all_voc_terms = self.all_voc_terms(field_name, with_coring_values)
         selected_value = self.context.getField(field_name).get(self.context)
+        if type(selected_value) in [list, tuple]:
+            selected_value = selected_value[0]
         for term in all_voc_terms:
             term_value = hasattr(term, 'id') and term.id or term.value
             if term_value == selected_value:
