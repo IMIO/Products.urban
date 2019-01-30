@@ -657,6 +657,15 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
         voc_terms = [t for t in all_voc_terms if getattr(t, 'id', t.value) in selected_values]
         return voc_terms
 
+    def voc_term(self, field_name='', with_coring_values=False):
+        all_voc_terms = self.all_voc_terms(field_name, with_coring_values)
+        selected_value = self.context.getField(field_name).get(self.context)
+        for term in all_voc_terms:
+            term_value = hasattr(term, 'id') and term.id or term.value
+            if term_value == selected_value:
+                return term
+        return None
+
 # Contact(s)
 # ------------------------------------------------------------------------------
     def _get_personTitle_dict(self, id):
