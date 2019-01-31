@@ -143,7 +143,7 @@ class ClaimantsTable(ContactTable):
     """
     implements(interfaces.IClaimantsTable)
 
-    batchSize = 999
+    batchSize = 9999
 
 
 class RecipientsCadastreTable(UrbanTable, SequenceTable):
@@ -152,8 +152,8 @@ class RecipientsCadastreTable(UrbanTable, SequenceTable):
 
     cssClasses = {'table': 'listing largetable'}
     batchStart = 0
-    batchSize = 999
-    startBatchingAt = 999
+    batchSize = 9999
+    startBatchingAt = 9999
 
 
 class ParcelsTable(UrbanTable, SequenceTable):
