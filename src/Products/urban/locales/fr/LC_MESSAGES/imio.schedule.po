@@ -167,6 +167,9 @@ msgstr "Date de fin de l'enquête publique"
 msgid "urban.schedule.start_date.spw_decision_project_receipt_date"
 msgstr "Date de réception du projet de décision du SPW"
 
+msgid "urban.schedule.start_date.spw_decision_project_receipt_date_or_acknowledgment_date"
+msgstr "Date de réception du projet de décision du SPW, sinon date d'accusé de réception"
+
 msgid "urban.schedule.start_date.spw_receipt_date"
 msgstr "Date de transmis du dossier au SPW"
 

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2018-12-20 13:05+0000\n"
+"POT-Creation-Date: 2019-01-31 09:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1323,11 +1323,6 @@ msgstr ""
 #: ../content/licence/GenericLicence.py:1111
 msgid "far_prevention_area"
 msgstr ""
-
-#. Default: "${name} residing at ${address}"
-#: Contact.py
-msgid "architect_residing"
-msgstr "${name}, dont les bureaux se situent ${address}"
 
 #. Default: "${name} residing at ${address}"
 #: Contact.py
