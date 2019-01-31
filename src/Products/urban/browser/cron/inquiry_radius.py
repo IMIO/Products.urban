@@ -26,4 +26,8 @@ class InquiryRadiusSearch(BrowserView):
             inquiry = catalog.unrestrictedSearchResults(UID=inquiry_UID)[0].getObject()
             inquiry_view = inquiry.restrictedTraverse('@@urbaneventinquiryview')
             inquiry_view.getInvestigationPOs(radius=radius, force=True)
+            api.portal.set_registry_record(
+                'Products.urban.interfaces.IAsyncInquiryRadius.inquiries_to_do',
+                planned_inquiries
+            )
             transaction.commit()
