@@ -159,3 +159,20 @@ class AskOpinionDate(StartDate):
                     ask_date = wf_action['time']
 
         return ask_date
+
+
+class DecisionProjectFromSPWReceiptDateOrAcknowledgmentDate(StartDate):
+    """
+    Returns the receipt date of the licence project sent by the SPW
+    or the last acknowledgement date if no licence project yet.
+    """
+
+    def start_date(self):
+        licence = self.task_container
+        ack = licence.getLastAcknowledgment()
+        ack_date = ack and ack.getEventDate() or None
+        receipt = licence.getLastDecisionProjectFromSPW()
+        receipt_date = receipt and receipt.getEventDate() or None
+        ack = licence.getLastAcknowledgment()
+        ack_date = ack and ack.getEventDate() or None
+        return receipt_date or ack_date
