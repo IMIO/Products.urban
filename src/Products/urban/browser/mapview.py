@@ -49,13 +49,15 @@ class MapView(BrowserView):
         """
         """
         portal_urban = api.portal.get_tool('portal_urban')
+        city_name = portal_urban.getCityName()
+        urbanmap_host = portal_urban.getStaticPylonsHost()
         script = """
             var dojoConfig = {
             async: true,
             parseOnLoad: true,
             isDebug: true,
             locale: 'fr',
-            configBasePath: 'http://%s/static/default/fr',
+            configBasePath: 'http://%s/static/%s/fr',
             packages: [{
             name: 'exemple',
             location: 'http://%s/static/widget'
@@ -64,7 +66,7 @@ class MapView(BrowserView):
             location: 'http://%s/static/urbanmap'
             }]
             };
-            """ % (portal_urban.getStaticPylonsHost(),portal_urban.getStaticPylonsHost(),portal_urban.getStaticPylonsHost())
+            """ % (urbanmap_host, city_name, urbanmap_host, urbanmap_host)
         return script
 
     def getListCapaKey(self):
