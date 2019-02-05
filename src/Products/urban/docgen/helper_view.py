@@ -278,28 +278,22 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
         """
           Returns the licences related to a parcel
         """
-        context = self.real_context.aq_parent
+        context = self.context
         parcels = context.getParcels()
         relatedLicences = []
         for parcel in parcels:
             parcelRecordsView = context.restrictedTraverse('parcelrecordsview')
             parcelRecordsView.parcel_id = parcel.id
-            relatedLicences += parcelRecordsView.getRelatedLicencesOfParcel()
+            relatedLicences += parcelRecordsView.get_related_licences_of_parcel()
         return relatedLicences
 
     def get_related_licences_titles_of_parcel(self):
         """
           Returns the titles of licences related to a parcel
         """
-        context = self.real_context
-        parcels = context.getParcels()
         relatedLicencesTitles = []
-        for parcel in parcels:
-            parcelRecordsView = context.restrictedTraverse('parcelrecordsview')
-            parcelRecordsView.parcel_id = parcel.id
-            relatedLicences = parcelRecordsView.getRelatedLicencesOfParcel()
-            for relatedLicence in relatedLicences:
-                relatedLicencesTitles.append(relatedLicence['title'].decode('utf8'))
+        for relatedLicence in self.get_related_licences_of_parcel():
+            relatedLicencesTitles.append(relatedLicence['title'].decode('utf8'))
         return relatedLicencesTitles
 
     def get_specific_features_text(self):
@@ -678,22 +672,16 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
         for parcel in parcels:
             parcelRecordsView = context.restrictedTraverse('parcelrecordsview')
             parcelRecordsView.parcel_id = parcel.id
-            relatedLicences += parcelRecordsView.getRelatedLicencesOfParcel()
+            relatedLicences += parcelRecordsView.get_related_licences_of_parcel()
         return relatedLicences
 
     def get_related_licences_titles_of_parcel(self):
         """
           Returns the titles of licences related to a parcel
         """
-        context = self.context
-        parcels = context.getParcels()
         relatedLicencesTitles = []
-        for parcel in parcels:
-            parcelRecordsView = context.restrictedTraverse('parcelrecordsview')
-            parcelRecordsView.parcel_id = parcel.id
-            relatedLicences = parcelRecordsView.getRelatedLicencesOfParcel()
-            for relatedLicence in relatedLicences:
-                relatedLicencesTitles.append(relatedLicence['title'].decode('utf8'))
+        for relatedLicence in self.get_related_licences_of_parcel():
+            relatedLicencesTitles.append(relatedLicence['title'].decode('utf8'))
         return relatedLicencesTitles
 
     def get_specific_features_text(self):
