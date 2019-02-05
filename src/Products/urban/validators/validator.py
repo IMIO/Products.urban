@@ -81,6 +81,8 @@ class isNotDuplicatedReferenceValidator:
             )
 
         ref_num = match.groups()
+        if not ref_num:
+            return 1
 
         similar_licences = catalog(getReference=ref_num, portal_type=types_to_check)
 
