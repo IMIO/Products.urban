@@ -668,6 +668,53 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
                 return term
         return None
 
+    def get_related_licences_of_parcel(self):
+        """
+          Returns the licences related to a parcel
+        """
+        context = self.context
+        parcels = context.getParcels()
+        relatedLicences = []
+        for parcel in parcels:
+            parcelRecordsView = context.restrictedTraverse('parcelrecordsview')
+            parcelRecordsView.parcel_id = parcel.id
+            relatedLicences += parcelRecordsView.getRelatedLicencesOfParcel()
+        return relatedLicences
+
+    def get_related_licences_titles_of_parcel(self):
+        """
+          Returns the titles of licences related to a parcel
+        """
+        context = self.context
+        parcels = context.getParcels()
+        relatedLicencesTitles = []
+        for parcel in parcels:
+            parcelRecordsView = context.restrictedTraverse('parcelrecordsview')
+            parcelRecordsView.parcel_id = parcel.id
+            relatedLicences = parcelRecordsView.getRelatedLicencesOfParcel()
+            for relatedLicence in relatedLicences:
+                relatedLicencesTitles.append(relatedLicence['title'].decode('utf8'))
+        return relatedLicencesTitles
+
+    def get_specific_features_text(self):
+        """
+        # Particularité(s) du bien
+        """
+        context = self.context
+        specificFeatures = context.getSpecificFeatures()
+        specific_features_text = []
+        tool = getToolByName(self, 'portal_urban')
+        for specificFeature in specificFeatures:
+            if specificFeature['check']:
+                if specificFeature['text']:
+                    specific_feature_text = tool.renderText(text=specificFeature['text'], context=context)
+                    specific_features_text.append(specific_feature_text)
+            else:
+                if specificFeature['defaultText']:
+                    specific_feature_text = tool.renderText(text=specificFeature['defaultText'], context=context)
+                    specific_features_text.append(specific_feature_text)
+        return specific_features_text
+
 # Contact(s)
 # ------------------------------------------------------------------------------
     def _get_personTitle_dict(self, id):
