@@ -17,8 +17,9 @@ from AccessControl import ClassSecurityInfo
 
 from collective.archetypes.select2.select2widget import MultiSelect2Widget
 from collective.faceted.task.interfaces import IFacetedTaskContainer
-
 from collective.task.behaviors import ITask
+
+from DateTime import DateTime
 
 from eea.facetednavigation.search.interfaces import ICollection
 from eea.facetednavigation.subtypes.interfaces import IPossibleFacetedNavigable
@@ -1337,6 +1338,25 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
                 elif licence_type in ['UrbanCertificateTwo', 'UrbanCertificateOne']:
                     licences.append(licence)
         return licences
+
+    security.declarePublic('getBuildlicencesOfTheParcels')
+
+    def getBuildlicencesOfTheParcels(self):
+        limit_date = DateTime('1977/01/01')
+        return self.getLicenceOfTheParcels('BuildLicence', limit_date)
+
+    security.declarePublic('getUrbanCertificateOneOfTheParcels')
+
+    def getUrbanCertificateOneOfTheParcels(self):
+        #cu1 cannot be older than 2 years
+        limit_date = self.getLastTheLicence().getEventDate() - 731
+        return self.getLicenceOfTheParcels('UrbanCertificateOne', limit_date)
+
+    security.declarePublic('getParceloutlicenceOfTheParcels')
+
+    def getParceloutlicenceOfTheParcels(self):
+        limit_date = DateTime('1977/01/01')
+        return self.getLicenceOfTheParcels('ParcelOutLicence', limit_date)
 
     security.declarePublic('getUrbanCertificateTwoOfTheParcels')
 

@@ -21,8 +21,6 @@ from Products.urban.content.licence.GenericLicence import GenericLicence
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.DataGridField import DataGridField, DataGridWidget
-from Products.DataGridField.Column import Column
-from Products.DataGridField.SelectColumn import SelectColumn
 
 from Products.urban.config import *
 from Products.urban import UrbanMessage as _
@@ -38,7 +36,6 @@ from Products.urban.utils import setOptionalAttributes
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.UrbanDataGridColumns.FormFocusColumn import FormFocusColumn
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
-from DateTime import DateTime
 
 optional_fields = ['specificFeatures', 'roadSpecificFeatures', 'locationSpecificFeatures',
                    'customSpecificFeatures', 'townshipSpecificFeatures', 'opinionsToAskIfWorks',
@@ -413,22 +410,6 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
                 for csf in self.getCustomSpecificFeatures():
                     res.append("<p>%s</p>" % csf['text'])
         return res
-
-    security.declarePublic('getBuildlicencesOfTheParcels')
-    def getBuildlicencesOfTheParcels(self):
-        limit_date = DateTime('1977/01/01')
-        return self.getLicenceOfTheParcels('BuildLicence', limit_date)
-
-    security.declarePublic('getUrbanCertificateOneOfTheParcels')
-    def getUrbanCertificateOneOfTheParcels(self):
-        #cu1 cannot be older than 2 years
-        limit_date = self.getLastTheLicence().getEventDate() - 731
-        return self.getLicenceOfTheParcels('UrbanCertificateOne', limit_date)
-
-    security.declarePublic('getParceloutlicenceOfTheParcels')
-    def getParceloutlicenceOfTheParcels(self):
-        limit_date = DateTime('1977/01/01')
-        return self.getLicenceOfTheParcels('ParcelOutLicence', limit_date)
 
     security.declarePublic('getApplicantsSignaletic')
     def getProprietariesSignaletic(self, withaddress=False):
