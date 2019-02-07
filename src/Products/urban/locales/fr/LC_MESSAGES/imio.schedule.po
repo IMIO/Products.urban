@@ -63,6 +63,9 @@ msgid "urban.schedule.condition.deposit_past_20days"
 msgstr "La date de dépôt ne dépasse pas 20 jours"
 
 msgid "urban.schedule.condition.deposit_past_30days"
+msgstr "La date de dépôt dépasse les 30 jours"
+
+msgid "urban.schedule.condition.deposit_under_30days"
 msgstr "La date de dépôt ne dépasse pas 30 jours"
 
 msgid "urban.schedule.condition.dont_need_FD_opinion"
