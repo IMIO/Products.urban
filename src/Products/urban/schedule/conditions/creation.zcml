@@ -193,6 +193,14 @@
         name="urban.schedule.condition.deposit_past_30days"
     />
 
+    <adapter
+        for="Products.urban.interfaces.IBaseAllBuildLicence
+             imio.schedule.content.task_config.ITaskConfig"
+        provides="imio.schedule.interfaces.ICreationCondition"
+        factory=".creation.DepositDateIsUnder30Days"
+        name="urban.schedule.condition.deposit_under_30days"
+    />
+
     <!-- incomplete -->
 
     <adapter

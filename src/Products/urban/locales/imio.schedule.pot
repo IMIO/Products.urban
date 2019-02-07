@@ -131,6 +131,9 @@ msgstr ""
 msgid "urban.schedule.condition.deposit_past_30days"
 msgstr ""
 
+msgid "urban.schedule.condition.deposit_under_30days"
+msgstr ""
+
 msgid "urban.schedule.condition.incomplete_first_time"
 msgstr ""
 
