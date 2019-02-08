@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-02-07 14:04+0000\n"
+"POT-Creation-Date: 2019-02-08 15:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -880,6 +880,11 @@ msgid "applicants_history"
 msgstr ""
 
 msgid "applicationreasons_folder_title"
+msgstr ""
+
+#. Default: "${name} residing at ${address}"
+#: Contact.py
+msgid "architect_residing"
 msgstr ""
 
 #. Default: "urban"
