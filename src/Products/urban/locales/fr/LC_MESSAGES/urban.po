@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2019-02-07 14:04+0000\n"
+"POT-Creation-Date: 2019-02-08 15:51+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -901,6 +901,11 @@ msgstr "Historique des demandeurs"
 
 msgid "applicationreasons_folder_title"
 msgstr "Motifs de la demande"
+
+#. Default: "${name} residing at ${address}"
+#: Contact.py
+msgid "architect_residing"
+msgstr "${name}, dont les bureaux se situent ${address}"
 
 #. Default: "urban"
 #: ../setuphandlers.py:821
