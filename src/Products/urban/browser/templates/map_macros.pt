@@ -67,8 +67,9 @@
 <div metal:define-macro="imioSpwMapSetup" tal:define="staticUrbanmapHostHost context/portal_urban/getStaticPylonsHost">
 		<script type="text/javascript" src="http://geoservices.wallonie.be/geoviewer/4.0/?t=I2PHLK3WBK"></script>
 		<link rel="stylesheet" type="text/css" href="http://geoservices.wallonie.be/geoviewer/4.0/style/"/>
-        <script type="text/javascript" src="http://localhost/static/imiomapspw.js"></script>
-         <script tal:content="string:var NISNum='${context/portal_urban/getNISNum}';var urbanProrietariesCapakeyArray=${view/getListProprietariesCapaKey};var urbanCapakeyArray=${view/getListCapaKey};var proxyUrl='${context/portal_url}/portal_urban/getProxy?url=';var urbanMapWMCUrl='${context/absolute_url}/wmc';">
+        <link rel="stylesheet" type="text/css" tal:attributes="href python:'http://%s/static/spwfix.css'%staticUrbanmapHostHost"/>
+        <script type="text/javascript" tal:attributes="src python:'http://%s/static/imiomapspw.js'%staticUrbanmapHostHost"></script>
+        <script tal:content="string:var NISNum='${context/portal_urban/getNISNum}';var urbanProrietariesCapakeyArray=${view/getListProprietariesCapaKey};var urbanCapakeyArray=${view/getListCapaKey};var proxyUrl='${context/portal_url}/portal_urban/getProxy?url=';var urbanMapWMCUrl='${context/absolute_url}/wmc';">
 	    </script>
 </div>
 
