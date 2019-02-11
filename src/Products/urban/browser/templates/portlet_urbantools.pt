@@ -21,7 +21,7 @@
             </li>
             <li>
                 <img src="../engrenage.png" />
-                <a href="activityreport" i18n:translate="urban_statistics">Statistics</a>
+                <a href="urbanstatsview" i18n:translate="urban_statistics">Statistics</a>
             </li>
         </ul>
     </dd>

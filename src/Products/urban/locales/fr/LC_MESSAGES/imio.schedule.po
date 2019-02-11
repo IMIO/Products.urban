@@ -60,9 +60,12 @@ msgid "urban.schedule.condition.deposit_done"
 msgstr "Créer l'événement de dépôt et le clôturer"
 
 msgid "urban.schedule.condition.deposit_past_20days"
-msgstr "La date de dépôt ne dépasse pas 20 jours"
+msgstr "La date de dépôt dépasse 20 jours"
 
 msgid "urban.schedule.condition.deposit_past_30days"
+msgstr "La date de dépôt dépasse 30 jours"
+
+msgid "urban.schedule.condition.deposit_under_30days"
 msgstr "La date de dépôt ne dépasse pas 30 jours"
 
 msgid "urban.schedule.condition.dont_need_FD_opinion"
@@ -166,6 +169,9 @@ msgstr "Date de fin de l'enquête publique"
 
 msgid "urban.schedule.start_date.spw_decision_project_receipt_date"
 msgstr "Date de réception du projet de décision du SPW"
+
+msgid "urban.schedule.start_date.spw_decision_project_receipt_date_or_acknowledgment_date"
+msgstr "Date de réception du projet de décision du SPW, sinon date d'accusé de réception"
 
 msgid "urban.schedule.start_date.spw_receipt_date"
 msgstr "Date de transmis du dossier au SPW"

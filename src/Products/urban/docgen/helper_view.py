@@ -13,7 +13,9 @@ from Products.urban.utils import getCurrentFolderManager
 from Products.urban.utils import get_ws_meetingitem_infos
 from Products.urban.services import cadastre
 
+from zope.component import getUtility
 from zope.i18n import translate
+from zope.schema.interfaces import IVocabularyFactory
 from plone import api
 from DateTime import DateTime
 
@@ -158,11 +160,11 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
         first_div = None
         first_section = None
         for portionOutObj in self.context.getParcels():
-            #add a separator between every parcel
-            #either a '\n'
+            # add a separator between every parcel
+            # either a '\n'
             if not isFirst and linebyline:
                 toreturn += '\n'
-            #or an "and "
+            # or an "and "
             elif not isFirst:
                 toreturn += ', '
             elif isFirst:
@@ -276,28 +278,22 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
         """
           Returns the licences related to a parcel
         """
-        context = self.real_context.aq_parent
+        context = self.context
         parcels = context.getParcels()
         relatedLicences = []
         for parcel in parcels:
             parcelRecordsView = context.restrictedTraverse('parcelrecordsview')
             parcelRecordsView.parcel_id = parcel.id
-            relatedLicences += parcelRecordsView.getRelatedLicencesOfParcel()
+            relatedLicences += parcelRecordsView.get_related_licences_of_parcel()
         return relatedLicences
 
     def get_related_licences_titles_of_parcel(self):
         """
           Returns the titles of licences related to a parcel
         """
-        context = self.real_context
-        parcels = context.getParcels()
         relatedLicencesTitles = []
-        for parcel in parcels:
-            parcelRecordsView = context.restrictedTraverse('parcelrecordsview')
-            parcelRecordsView.parcel_id = parcel.id
-            relatedLicences = parcelRecordsView.getRelatedLicencesOfParcel()
-            for relatedLicence in relatedLicences:
-                relatedLicencesTitles.append(relatedLicence['title'].decode('utf8'))
+        for relatedLicence in self.get_related_licences_of_parcel():
+            relatedLicencesTitles.append(relatedLicence['title'].decode('utf8'))
         return relatedLicencesTitles
 
     def get_specific_features_text(self):
@@ -534,7 +530,7 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
                             return False
 
                         def __call__(self):
-                            return  None
+                            return None
 
                     return EventNotFound()
             return getUrbanEventProxy
@@ -629,8 +625,86 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
             return opinions
         return []
 
+    def all_voc_terms(self, field_name='', with_coring_values=False):
+        field = self.context.getField(field_name)
+        voc_terms = []
+        if field.vocabulary:
+            voc_terms = field.vocabulary.getAllVocTerms(self.context).values()
+        elif field.vocabulary_factory:
+            voc_utility = getUtility(IVocabularyFactory, field.vocabulary_factory)
+            if with_coring_values:
+                simple_voc = voc_utility(self.context)
+                return simple_voc.by_value.values()
+            else:
+                voc_terms = voc_utility._get_config_vocabulary_values(self.context)
+
+        voc_terms_proxy = []
+        for v in voc_terms:
+            voc_terms_view = v.restrictedTraverse('@@document_generation_helper_view')
+            voc_terms_view.appy_renderer = self.helper_view.appy_renderer
+            voc_terms_proxy.append(voc_terms_view.context)
+        return voc_terms_proxy
+
+    def voc_terms(self, field_name='', with_coring_values=False):
+        all_voc_terms = self.all_voc_terms(field_name, with_coring_values)
+        selected_values = self.context.getField(field_name).get(self.context)
+        voc_terms = [t for t in all_voc_terms if hasattr(t, 'id') and t.id or t.value in selected_values]
+        return voc_terms
+
+    def voc_term(self, field_name='', with_coring_values=False):
+        all_voc_terms = self.all_voc_terms(field_name, with_coring_values)
+        selected_value = self.context.getField(field_name).get(self.context)
+        if type(selected_value) in [list, tuple]:
+            selected_value = selected_value[0]
+        for term in all_voc_terms:
+            term_value = hasattr(term, 'id') and term.id or term.value
+            if term_value == selected_value:
+                return term
+        return None
+
+    def get_related_licences_of_parcel(self):
+        """
+          Returns the licences related to a parcel
+        """
+        context = self.context
+        parcels = context.getParcels()
+        relatedLicences = []
+        for parcel in parcels:
+            parcelRecordsView = context.restrictedTraverse('parcelrecordsview')
+            parcelRecordsView.parcel_id = parcel.id
+            relatedLicences += parcelRecordsView.get_related_licences_of_parcel()
+        return relatedLicences
+
+    def get_related_licences_titles_of_parcel(self):
+        """
+          Returns the titles of licences related to a parcel
+        """
+        relatedLicencesTitles = []
+        for relatedLicence in self.get_related_licences_of_parcel():
+            relatedLicencesTitles.append(relatedLicence['title'].decode('utf8'))
+        return relatedLicencesTitles
+
+    def get_specific_features_text(self):
+        """
+        # Particularité(s) du bien
+        """
+        context = self.context
+        specificFeatures = context.getSpecificFeatures()
+        specific_features_text = []
+        tool = getToolByName(self, 'portal_urban')
+        for specificFeature in specificFeatures:
+            if specificFeature['check']:
+                if specificFeature['text']:
+                    specific_feature_text = tool.renderText(text=specificFeature['text'], context=context)
+                    specific_features_text.append(specific_feature_text)
+            else:
+                if specificFeature['defaultText']:
+                    specific_feature_text = tool.renderText(text=specificFeature['defaultText'], context=context)
+                    specific_features_text.append(specific_feature_text)
+        return specific_features_text
+
 # Contact(s)
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
     def _get_personTitle_dict(self, id):
         """
         # Titre
@@ -683,8 +757,7 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
                 'Féminin-Pluriel': ' domiciliées '
             },
             reversed_name=False,
-            withaddress=True
-                    ):
+            withaddress=True):
         """
         """
         contact = self._get_contact_dict(contact)
@@ -712,7 +785,7 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
         return contact
 
 # Architecte(s)
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
     def get_architect_dict(self, index):
         """
         """
@@ -734,8 +807,7 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
                 'Féminin-Pluriel': ' domiciliées '
             },
             reversed_name=False,
-            withaddress=True
-                      ):
+            withaddress=True):
         result = self._get_contact(architect, resident, reversed_name, withaddress)
         return result
 
@@ -749,8 +821,7 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
             },
             reversed_name=False,
             withaddress=True,
-            separator=', '
-            ):
+            separator=', '):
         context = self.context
         architects = context.getArchitects()
         result = self._get_architect(architects[0], resident, reversed_name, withaddress)
@@ -759,7 +830,7 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
         return result
 
 # Agent(s) traitant(s)
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
     def get_current_foldermanager(self):
         return getCurrentFolderManager()
 
@@ -788,8 +859,7 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
                 'Féminin-Pluriel': ' domiciliées '
             },
             reversed_name=False,
-            withaddress=False
-            ):
+            withaddress=False):
         result = self._get_contact(foldermanager, resident, reversed_name, withaddress)
         return result
 
@@ -803,8 +873,7 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
             },
             reversed_name=False,
             withaddress=False,
-            separator=', '
-            ):
+            separator=', '):
         context = self.context
         foldermanagers = context.getFoldermanagers()
         result = self._get_foldermanager(foldermanagers[0], resident, reversed_name, withaddress)
@@ -831,7 +900,7 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
         return result
 
 # Demandeur(s)
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
     def get_applicants_names_and_address(
             self,
             applicant_separator=', ',
@@ -848,8 +917,7 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
                 'Féminin-Singulier': ' représentée par',
                 'Féminin-Pluriel': ' représentées par'
             },
-            reversed_name=True,
-        ):
+            reversed_name=True):
         applicants = self.getApplicants()
         applicants_names_and_address = ""
         if applicants:
@@ -875,7 +943,7 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
         if applicant['representedBySociety']:
             gender_multiplicity = applicant['gender'] + '-' + applicant['multiplicity']
             applicant_names_and_address += represented[gender_multiplicity] +\
-                    self._get_representedBy_names_and_address(applicant, resident, reversed_name, representedBy_separator)
+                self._get_representedBy_names_and_address(applicant, resident, reversed_name, representedBy_separator)
         return applicant_names_and_address
 
     def get_applicants_list_dict(self):
@@ -900,15 +968,15 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
         representedBy_names_and_address = ""
         if representedBy_list:
             representedBy_names_and_address = self._get_contact(
-                    representedBy_list[0],
-                    resident,
-                    reversed_name
+                representedBy_list[0],
+                resident,
+                reversed_name
             )
             for representedBy in representedBy_list[1:]:
                 representedBy_names_and_address += representedBy_separator + self._get_contact(
-                        representedBy,
-                        resident,
-                        reversed_name
+                    representedBy,
+                    resident,
+                    reversed_name
                 )
         return representedBy_names_and_address
 
@@ -930,8 +998,9 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
         if applicants:
             applicants_names = self._get_contact(applicants[0], reversed_name=reversed_name, withaddress=False)
             for applicant in applicants[1:]:
-                applicants_names += separator + self._get_contact(applicant, reversed_name=reversed_name,
-                        withaddress=False)
+                applicants_names += separator + self._get_contact(
+                    applicant, reversed_name=reversed_name, withaddress=False
+                )
         return applicants_names
 
     def _get_date(self, event, date_name='eventDate', translatemonth=True, long_format=False):

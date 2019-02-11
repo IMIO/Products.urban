@@ -49,6 +49,8 @@ CODT_UniqueLicenceInquiry_schema = BaseSchema.copy() + \
 
 ##code-section after-schema #fill in your manual code here
 CODT_UniqueLicenceInquiry_schema['title'].widget.visible = False
+CODT_UniqueLicenceInquiry_schema['inquiry_type'].widget.visible = {'view': 'invisible', 'edit': 'invisible'}
+CODT_UniqueLicenceInquiry_schema['inquiry_type'].default = 'inquiry'
 ##/code-section after-schema
 
 
@@ -98,8 +100,6 @@ def finalizeSchema(schema):
     """
        Finalizes the type schema to alter some fields
     """
-    schema['inquiry_type'].widget.visible = {'view': 'invisible', 'edit': 'invisible'}
-    schema['inquiry_type'].default = 'inquiry'
     schema.delField('announcementArticles')
     schema.delField('announcementArticlesText')
     schema.moveField('derogation', after='investigationArticlesText')
