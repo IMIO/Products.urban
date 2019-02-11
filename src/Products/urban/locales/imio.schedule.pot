@@ -116,6 +116,9 @@ msgstr ""
 msgid "urban.schedule.start_date.spw_decision_project_receipt_date"
 msgstr ""
 
+msgid "urban.schedule.start_date.spw_decision_project_receipt_date_or_acknowledgment_date"
+msgstr ""
+
 msgid "urban.schedule.start_date.spw_receipt_date"
 msgstr ""
 
@@ -126,6 +129,9 @@ msgid "urban.schedule.condition.deposit_past_20days"
 msgstr ""
 
 msgid "urban.schedule.condition.deposit_past_30days"
+msgstr ""
+
+msgid "urban.schedule.condition.deposit_under_30days"
 msgstr ""
 
 msgid "urban.schedule.condition.incomplete_first_time"
@@ -162,9 +168,6 @@ msgid "urban.schedule.condition.procedure_choice_received_from_FD"
 msgstr ""
 
 msgid "urban.schedule.condition.spw_project_receipt_done"
-msgstr ""
-
-msgid "urban.schedule.condition.need_FD_opinion"
 msgstr ""
 
 msgid "urban.schedule.delay.annonced_delay"

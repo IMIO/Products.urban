@@ -312,6 +312,15 @@ class DepositDateIsPast30Days(CreationCondition):
         return False
 
 
+class DepositDateIsUnder30Days(DepositDateIsPast30Days):
+    """
+    The deposit date is past by 30 days
+    """
+
+    def evaluate(self):
+        return not super(DepositDateIsUnder30Days, self).evaluate()
+
+
 class IncompleteForTheFirstTime(CreationCondition):
     """
     This is the first time that the folder is incomplete
