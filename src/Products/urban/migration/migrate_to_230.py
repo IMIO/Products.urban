@@ -151,6 +151,24 @@ def migrate_college_urban_event_types(context):
     logger.info("migration step done!")
 
 
+def migrate_create_voc_mainsignatures(context):
+    """
+    """
+    logger = logging.getLogger('urban: migrate mainsignatures')
+    logger.info("starting migration step")
+    container = api.portal.get_tool('portal_urban')
+    mainsignatures_vocabularies_config = default_values['global']['mainsignatures']
+    allowedtypes = mainsignatures_vocabularies_config[0]
+    mainsignatures_vocabularies_config = createVocabularyFolder(container, 'mainsignatures', context, allowedtypes)
+    createFolderDefaultValues(
+        mainsignatures_vocabularies_config,
+        default_values['global']['mainsignatures'][1:],
+        default_values['global']['mainsignatures'][0]
+    )
+
+    logger.info("migration step done!")
+
+
 def migrate(context):
     logger = logging.getLogger('urban: migrate to 2.3')
     logger.info("starting migration steps")
@@ -168,4 +186,5 @@ def migrate(context):
     migrate_opinionrequest_event_portaltype(context)
     migrate_users_in_environment_groups(context)
     migrate_college_urban_event_types(context)
+    migrate_create_voc_mainsignatures(context)
     logger.info("migration done!")
