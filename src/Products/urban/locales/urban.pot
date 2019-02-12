@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-02-12 13:33+0000\n"
+"POT-Creation-Date: 2019-02-12 14:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1776,6 +1776,9 @@ msgstr ""
 msgid "lotusages_folder_title"
 msgstr ""
 
+msgid "mainsignatures_folder_title"
+msgstr ""
+
 #. Default: "Manage architects"
 #: ../browser/templates/portlet_urbanconfig.pt:10
 msgid "manage_architects"
@@ -3200,7 +3203,7 @@ msgstr ""
 msgid "urban_label_exemptFDArticle"
 msgstr ""
 
-#: ../content/licence/CODT_BaseBuildLicence.py:344
+#: ../content/licence/CODT_BaseBuildLicence.py:346
 msgid "urban_label_exemptFDArticleCODT"
 msgstr ""
 
@@ -3413,7 +3416,7 @@ msgstr ""
 msgid "urban_label_implantation"
 msgstr ""
 
-#: ../content/licence/CODT_BaseBuildLicence.py:345
+#: ../content/licence/CODT_BaseBuildLicence.py:347
 msgid "urban_label_implantationCODT"
 msgstr ""
 
@@ -3586,7 +3589,7 @@ msgstr ""
 msgid "urban_label_is_in_parceloutlicences"
 msgstr ""
 
-#: ../content/licence/CODT_BaseBuildLicence.py:342
+#: ../content/licence/CODT_BaseBuildLicence.py:344
 msgid "urban_label_is_in_sol"
 msgstr ""
 
@@ -4461,15 +4464,15 @@ msgstr ""
 msgid "urban_label_society"
 msgstr ""
 
-#: ../content/licence/CODT_BaseBuildLicence.py:340
+#: ../content/licence/CODT_BaseBuildLicence.py:341
 msgid "urban_label_sol"
 msgstr ""
 
-#: ../content/licence/CODT_BaseBuildLicence.py:341
+#: ../content/licence/CODT_BaseBuildLicence.py:343
 msgid "urban_label_solZone"
 msgstr ""
 
-#: ../content/licence/CODT_BaseBuildLicence.py:343
+#: ../content/licence/CODT_BaseBuildLicence.py:345
 msgid "urban_label_sol_details"
 msgstr ""
 
