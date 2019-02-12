@@ -466,6 +466,9 @@ msgstr ""
 msgid "delegatesignatures_folder_title"
 msgstr ""
 
+msgid "mainsignatures_folder_title"
+msgstr ""
+
 msgid "deposittype_folder_title"
 msgstr ""
 
