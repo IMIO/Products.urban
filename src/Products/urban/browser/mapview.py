@@ -57,13 +57,13 @@ class MapView(BrowserView):
             parseOnLoad: true,
             isDebug: true,
             locale: 'fr',
-            configBasePath: 'http://%s/static/%s/fr',
+            configBasePath: '//%s/static/%s/fr',
             packages: [{
             name: 'exemple',
-            location: 'http://%s/static/widget'
+            location: '//%s/static/widget'
             },{
             name: 'urbanmap',
-            location: 'http://%s/static/urbanmap'
+            location: '//%s/static/urbanmap'
             }]
             };
             """ % (urbanmap_host, city_name, urbanmap_host, urbanmap_host)
