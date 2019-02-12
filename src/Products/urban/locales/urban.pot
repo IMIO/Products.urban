@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-02-08 15:51+0000\n"
+"POT-Creation-Date: 2019-02-12 13:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2627,7 +2627,7 @@ msgid "urban_label_alsoCalled"
 msgstr ""
 
 #. Default: "Amount_collected"
-#: ../UrbanEvent.py:354
+#: ../UrbanEvent.py:364
 msgid "urban_label_amount_collected"
 msgstr ""
 
@@ -2725,12 +2725,12 @@ msgid "urban_label_authorizationDate"
 msgstr ""
 
 #. Default: "Bank_account"
-#: ../UrbanEvent.py:339
+#: ../UrbanEvent.py:349
 msgid "urban_label_bank_account"
 msgstr ""
 
 #. Default: "Bank_account_owner"
-#: ../UrbanEvent.py:346
+#: ../UrbanEvent.py:356
 msgid "urban_label_bank_account_owner"
 msgstr ""
 
@@ -2981,7 +2981,7 @@ msgid "urban_label_decisionDate"
 msgstr ""
 
 #. Default: "Decisionproject"
-#: ../UrbanEvent.py:382
+#: ../UrbanEvent.py:392
 msgid "urban_label_decisionProject"
 msgstr ""
 
@@ -3070,7 +3070,7 @@ msgid "urban_label_derogationDetails"
 msgstr ""
 
 #. Default: "Description"
-#: ../UrbanEvent.py:393
+#: ../UrbanEvent.py:403
 #: ../content/licence/EnvironmentBase.py:266
 #: ../content/licence/GenericLicence.py:191
 msgid "urban_label_description"
@@ -3082,12 +3082,12 @@ msgid "urban_label_dispatchSInformation"
 msgstr ""
 
 #. Default: "Displaydate"
-#: ../UrbanEvent.py:364
+#: ../UrbanEvent.py:374
 msgid "urban_label_displayDate"
 msgstr ""
 
 #. Default: "Displaydateiend"
-#: ../UrbanEvent.py:374
+#: ../UrbanEvent.py:384
 msgid "urban_label_displayDateEnd"
 msgstr ""
 
@@ -3746,6 +3746,11 @@ msgstr ""
 #. Default: "Logmaprequests"
 #: ../UrbanTool.py:207
 msgid "urban_label_logMapRequests"
+msgstr ""
+
+#. Default: "Mainsignatures"
+#: ../UrbanEvent.py:340
+msgid "urban_label_mainSignatures"
 msgstr ""
 
 #. Default: "Manageablelicences"
