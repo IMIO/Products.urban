@@ -42,13 +42,13 @@ def copy_sol_values_from_pca(context):
     sol_folder = urban_tool.sols
     if not sol_folder.objectIds():
         for pca_term in pca_folder.objectValues():
-            api.content.move(pca_term, sol_folder)
+            api.content.copy(pca_term, sol_folder)
 
     pcazone_folder = urban_tool.pcazones
     solzone_folder = urban_tool.solzones
     if not solzone_folder.objectIds():
         for pca_zone in pcazone_folder.objectValues():
-            api.content.move(pca_zone, solzone_folder)
+            api.content.copy(pca_zone, solzone_folder)
 
     logger.info("migration step done!")
 
