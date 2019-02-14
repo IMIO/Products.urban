@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from imio.schedule.content.task import IAutomatedTask
+from imio.schedule.utils import get_container_tasks
 
 
 def reindex_tasks(licence, event):
@@ -14,10 +14,5 @@ def reindex_tasks(licence, event):
         'applicantInfosIndex'
     )
 
-    to_explore = [licence]
-    while to_explore:
-        current = to_explore.pop()
-        if IAutomatedTask.providedBy(current):
-            current.reindexObject(idxs=to_reindex)
-        if hasattr(current, 'objectValues'):
-            to_explore.extend(current.objectValues())
+    for task in get_container_tasks(licence):
+        task.reindexObject(idxs=to_reindex)
