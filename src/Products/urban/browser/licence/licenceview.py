@@ -363,7 +363,7 @@ class EnvironmentLicenceView(LicenceView):
         rubric_uids = context.getField('rubrics').getRaw(context)
         rubric_brains = catalog(UID=rubric_uids)
         rubrics = [brain.getObject() for brain in rubric_brains]
-        rubrics_display = ['<p>%s</p>%s' % (rub.getNumber(), rub.Description()) for rub in rubrics]
+        rubrics_display = ['<p>classe %s, %s</p>%s' % (rub.getExtraValue(), rub.getNumber(), rub.Description()) for rub in rubrics]
         return rubrics_display
 
     def _sortConditions(self, conditions):
