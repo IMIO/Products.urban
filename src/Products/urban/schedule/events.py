@@ -2,14 +2,11 @@
 
 from imio.schedule.content.task import IAutomatedTask
 
-from plone import api
-
 
 def reindex_tasks(licence, event):
     """
     Reindex some task indexes with licence values.
     """
-    catalog = api.portal.get_tool('portal_catalog')
     to_reindex = (
         'getReference',
         'StreetsUID',
@@ -17,11 +14,10 @@ def reindex_tasks(licence, event):
         'applicantInfosIndex'
     )
 
-    tasks_brains = catalog(
-        object_provides=IAutomatedTask.__identifier__,
-        path={'query': '/'.join(licence.getPhysicalPath())}
-    )
-    with api.env.adopt_roles(['Manager']):
-        all_tasks = [brain.getObject() for brain in tasks_brains]
-    for task in all_tasks:
-        task.reindexObject(idxs=to_reindex)
+    to_explore = [licence]
+    while to_explore:
+        current = to_explore.pop()
+        if IAutomatedTask.providedBy(current):
+            current.reindexObject(idxs=to_reindex)
+        if hasattr(current, 'objectValues'):
+            to_explore.extend(current.objectValues())
