@@ -7,6 +7,22 @@ from plone import api
 from imio.schedule.content.condition import CreationCondition
 
 
+class DepositDoneCondition(CreationCondition):
+    """
+    Licence folderComplete event is created.
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+
+        deposit_done = False
+        deposit_event = licence.getLastDeposit()
+        if deposit_event:
+            deposit_done = api.content.get_state(deposit_event) == 'closed'
+
+        return deposit_done
+
+
 class AcknowledgmentDoneCondition(CreationCondition):
     """
     Licence folderComplete event is created.
