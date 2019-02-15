@@ -2,6 +2,14 @@
     xmlns="http://namespaces.zope.org/zope"
     i18n_domain="Products.urban">
 
+    <adapter
+        for="Products.urban.interfaces.IGenericLicence
+             imio.schedule.content.task_config.ITaskConfig"
+        provides="imio.schedule.interfaces.ICreationCondition"
+        factory=".generic.DepositDoneCondition"
+        name="urban.schedule.condition.deposit_done"
+    />
+
     <!-- unique licence incomplete conditions-->
     <adapter
         for="Products.urban.interfaces.IEnvironmentLicence
