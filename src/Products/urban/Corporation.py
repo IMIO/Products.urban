@@ -163,7 +163,7 @@ class Corporation(BaseContent, Applicant, BrowserDefaultMixin):
         firstName = self.getName2()
         lastName = self.getName1()
         personRole = self.getPersonRole()
-        nameSignaletic = '{} {}'.format(self.getLegalForm() self.getDenomination())
+        nameSignaletic = '{} {}'.format(self.getLegalForm(), self.getDenomination())
         if linebyline:
             #escape HTML special characters like HTML entities
             title = cgi.escape(title)
@@ -172,7 +172,7 @@ class Corporation(BaseContent, Applicant, BrowserDefaultMixin):
             firstName = cgi.escape(firstName)
             lastName = cgi.escape(lastName)
             personRole = cgi.escape(personRole)
-            nameSignaletic = "%s, %s<br />%s %s %s" % (legalForm, denomination, title, firstName, lastName)
+            nameSignaletic = "%s %s<br />%s %s %s" % (legalForm, denomination, title, firstName, lastName)
         return nameSignaletic
 
 
