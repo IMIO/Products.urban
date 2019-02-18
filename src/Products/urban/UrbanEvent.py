@@ -333,6 +333,16 @@ schema = Schema((
         vocabulary=UrbanVocabulary('delegatesignatures', inUrbanConfig=False),
         default_method='getDefaultValue',
     ),
+    LinesField(
+        name='mainSignatures',
+        widget=MultiSelectionWidget(
+            format='checkbox',
+            label=_('urban_label_mainSignatures',
+                    default='Mainsignatures'),
+        ),
+        multiValued=True,
+        vocabulary=UrbanVocabulary('mainsignatures', inUrbanConfig=False),
+    ),
     StringField(
         name='bank_account',
         widget=StringField._properties['widget'](
