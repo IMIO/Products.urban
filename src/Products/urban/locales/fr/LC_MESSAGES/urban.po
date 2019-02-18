@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2019-02-08 15:51+0000\n"
+"POT-Creation-Date: 2019-02-12 14:24+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -1808,6 +1808,9 @@ msgstr "Particularités du bien (urbanisme)"
 msgid "lotusages_folder_title"
 msgstr "Destination"
 
+msgid "mainsignatures_folder_title"
+msgstr "Signatures principales"
+
 #. Default: "Manage architects"
 #: ../browser/templates/portlet_urbanconfig.pt:10
 msgid "manage_architects"
@@ -2666,7 +2669,7 @@ msgid "urban_label_alsoCalled"
 msgstr "Synonymes"
 
 #. Default: "Amount_collected"
-#: ../UrbanEvent.py:354
+#: ../UrbanEvent.py:364
 msgid "urban_label_amount_collected"
 msgstr "Montant perçu"
 
@@ -2764,12 +2767,12 @@ msgid "urban_label_authorizationDate"
 msgstr "Date d'autorisation"
 
 #. Default: "Bank_account"
-#: ../UrbanEvent.py:339
+#: ../UrbanEvent.py:349
 msgid "urban_label_bank_account"
 msgstr "N° de compte"
 
 #. Default: "Bank_account_owner"
-#: ../UrbanEvent.py:346
+#: ../UrbanEvent.py:356
 msgid "urban_label_bank_account_owner"
 msgstr "Titulaire du compte"
 
@@ -3020,7 +3023,7 @@ msgid "urban_label_decisionDate"
 msgstr "Date de la décision"
 
 #. Default: "Decisionproject"
-#: ../UrbanEvent.py:382
+#: ../UrbanEvent.py:392
 msgid "urban_label_decisionProject"
 msgstr "Projet de décision"
 
@@ -3104,9 +3107,9 @@ msgid "urban_label_derogationDetails"
 msgstr "Détails concernant les dérogations"
 
 #. Default: "Description"
-#: ../UrbanEvent.py:393
-#: ../content/licence/EnvironmentBase.py:258
-#: ../content/licence/GenericLicence.py:193
+#: ../UrbanEvent.py:403
+#: ../content/licence/EnvironmentBase.py:266
+#: ../content/licence/GenericLicence.py:191
 msgid "urban_label_description"
 msgstr "Observations"
 
@@ -3116,12 +3119,12 @@ msgid "urban_label_dispatchSInformation"
 msgstr "Informations de dispatch"
 
 #. Default: "Displaydate"
-#: ../UrbanEvent.py:364
+#: ../UrbanEvent.py:374
 msgid "urban_label_displayDate"
 msgstr "Date d'affichage"
 
 #. Default: "Displaydateiend"
-#: ../UrbanEvent.py:374
+#: ../UrbanEvent.py:384
 msgid "urban_label_displayDateEnd"
 msgstr "Date de fin d'affichage"
 
@@ -3236,7 +3239,7 @@ msgstr "Catégorie du type d'événement"
 msgid "urban_label_exemptFDArticle"
 msgstr "Article 107"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:344
+#: ../content/licence/CODT_BaseBuildLicence.py:346
 msgid "urban_label_exemptFDArticleCODT"
 msgstr "Article D IV.15"
 
@@ -3449,7 +3452,7 @@ msgstr "Etude d'incidence?"
 msgid "urban_label_implantation"
 msgstr "Implantation (art. 137)"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:345
+#: ../content/licence/CODT_BaseBuildLicence.py:347
 msgid "urban_label_implantationCODT"
 msgstr "Implantation (art D.IV.72)"
 
@@ -3622,7 +3625,7 @@ msgstr "Supplémentaire?"
 msgid "urban_label_is_in_parceloutlicences"
 msgstr "Le bien se situe dans un permis d'urbanisation"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:342
+#: ../content/licence/CODT_BaseBuildLicence.py:344
 msgid "urban_label_is_in_sol"
 msgstr "Le bien se situe dans un SOL"
 
@@ -3783,6 +3786,11 @@ msgstr "Remarques techniques (Fiche Urbanisme)"
 #: ../UrbanTool.py:207
 msgid "urban_label_logMapRequests"
 msgstr "Logger les accès à la cartographie avec collective.fingerpointing"
+
+#. Default: "Mainsignatures"
+#: ../UrbanEvent.py:340
+msgid "urban_label_mainSignatures"
+msgstr "Signatures principales"
 
 #. Default: "Manageablelicences"
 #: FolderManager.py
@@ -4497,15 +4505,15 @@ msgstr "Situation"
 msgid "urban_label_society"
 msgstr "Société"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:340
+#: ../content/licence/CODT_BaseBuildLicence.py:341
 msgid "urban_label_sol"
 msgstr "SOL"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:341
+#: ../content/licence/CODT_BaseBuildLicence.py:343
 msgid "urban_label_solZone"
 msgstr "Zone de SOL"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:343
+#: ../content/licence/CODT_BaseBuildLicence.py:345
 msgid "urban_label_sol_details"
 msgstr "Détails concernant le SOL"
 

@@ -1867,6 +1867,14 @@ default_values = {
             {'id': "adam", 'title': u"Adam Smith"},
         ],
 
+        'mainsignatures': [
+            'UrbanVocabularyTerm',
+            {'id': "sig_echevin_urbanisme", 'title': u"Échevin de l'urbanisme"},
+            {'id': "sig_echevin_environnement", 'title': u"Échevin de l'environnement"},
+            {'id': "sig_dg", 'title': u"Direction Générale"},
+            {'id': "sig_dg_adjoint", 'title': u"Direction Générale (Adjoint)"},
+        ],
+
         'form_composition': [
             'UrbanVocabularyTerm',
             {'id': "4", 'title': u"Annexe IV - Demande de permis avec concours d'un architecte"},
