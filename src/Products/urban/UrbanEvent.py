@@ -342,6 +342,7 @@ schema = Schema((
         ),
         multiValued=True,
         vocabulary=UrbanVocabulary('mainsignatures', inUrbanConfig=False),
+        default_method='getDefaultValue',
     ),
     StringField(
         name='bank_account',
