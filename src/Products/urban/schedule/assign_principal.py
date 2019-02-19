@@ -11,5 +11,7 @@ class LicenceFolderManager(AssignTaskUser):
 
     def user_id(self):
         licence = self.task_container
-        folder_manager = licence.getFoldermanagers()[0]
-        return folder_manager.getPloneUserId()
+        if licence.getFoldermanagers():
+            folder_manager = licence.getFoldermanagers()[0]
+            return folder_manager.getPloneUserId()
+        return 'to_assign'
