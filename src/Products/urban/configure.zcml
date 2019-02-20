@@ -197,6 +197,30 @@
     type=".interfaces.IEventTypeType"/>
 
   <interface
+    interface=".interfaces.IProvocationEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.IIILEPrescriptionEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.IActivityEndedEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.IForcedEndEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.IModificationRegistryEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.ISentToArchivesEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
     interface=".interfaces.IImpactStudyEvent"
     type=".interfaces.IEventTypeType"/>
 

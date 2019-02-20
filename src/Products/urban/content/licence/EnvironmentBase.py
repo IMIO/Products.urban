@@ -394,11 +394,17 @@ class EnvironmentBase(BaseFolder, GenericLicence, CODT_UniqueLicenceInquiry, Bro
     def getLastCollegeReport(self):
         return self.getLastEvent(interfaces.ICollegeReportEvent)
 
+    def getLastLicenceNotification(self):
+        return self.getLastEvent(interfaces.ILicenceNotificationEvent)
+
     def getLastDisplayingTheDecision(self):
         return self.getLastEvent(interfaces.IDisplayingTheDecisionEvent)
 
     def getLastLicenceDelivery(self):
         return self.getLastEvent(interfaces.ILicenceDeliveryEvent)
+
+    def getLastProvocation(self):
+        return self.getLastEvent(interfaces.IProvocationEvent)
 
     def getLastRecourse(self):
         return self.getLastEvent(interfaces.IRecourseEvent)
@@ -408,6 +414,21 @@ class EnvironmentBase(BaseFolder, GenericLicence, CODT_UniqueLicenceInquiry, Bro
 
     def getLastLicenceExpiration(self):
         return self.getLastEvent(interfaces.ILicenceExpirationEvent)
+
+    def getLastIILEPrescription(self):
+        return self.getLastEvent(interfaces.IIILEPrescriptionEvent)
+
+    def getLastActivityEnded(self):
+        return self.getLastEvent(interfaces.IActivityEndedEvent)
+
+    def getLastForcedEnd(self):
+        return self.getLastEvent(interfaces.IForcedEndEvent)
+
+    def getLastModificationRegistry(self):
+        return self.getLastEvent(interfaces.IModificationRegistryEvent)
+
+    def getLastSentToArchives(self):
+        return self.getLastEvent(interfaces.ISentToArchivesEvent)
 
     def getLastWalloonRegionDecisionEvent(self):
         return self.getLastEvent(interfaces.IWalloonRegionDecisionEvent)
