@@ -42,7 +42,7 @@ class UnknownSQLTable(object):
     def __init__(self, name):
         self.name = name
 
-    def __getattribute__(self, name):
+    def __getatt__(self, name):
         raise NoSuchTableError(self.name)
 
 
