@@ -192,7 +192,7 @@ msgstr "Commentaire - {0}"
 
 #: ../browser/templates/coring_update.pt:7
 msgid "Coring"
-msgstr "Carrotage"
+msgstr "Carottage"
 
 msgid "Create proprietary/applicant"
 msgstr "Créer le(s) demandeur(s)/propriétaire(s)"
