@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2019-02-08 15:51+0000\n"
+"POT-Creation-Date: 2019-02-20 13:51+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -192,7 +192,7 @@ msgstr "Commentaire - {0}"
 
 #: ../browser/templates/coring_update.pt:7
 msgid "Coring"
-msgstr "Carrotage"
+msgstr "Carottage"
 
 msgid "Create proprietary/applicant"
 msgstr "Créer le(s) demandeur(s)/propriétaire(s)"
@@ -310,6 +310,10 @@ msgstr "Historique sauvegardé"
 msgid "IAcknowledgment type marker interface"
 msgstr "Accusé de réception"
 
+#: ../interfaces.py:527
+msgid "IActivityEndedEvent type marker interface"
+msgstr "Cessastion d'activité"
+
 #: ../interfaces.py:455
 msgid "IAnnouncement type marker interface"
 msgstr "Annonce de projet"
@@ -353,7 +357,7 @@ msgstr "Dépôt de la demande"
 msgid "IDisplayingTheDecisionEvent type marker interface"
 msgstr "Affichage de la décision"
 
-#: ../interfaces.py:519
+#: ../interfaces.py:543
 msgid "IEnvironmentOnly type marker interface"
 msgstr "Événement exclusif à l'environnement (permis unique)"
 
@@ -361,12 +365,20 @@ msgstr "Événement exclusif à l'environnement (permis unique)"
 msgid "IEnvironmentSimpleCollegeEvent type marker interface"
 msgstr "Collège simple (environnement)"
 
+#: ../interfaces.py:531
+msgid "IForcedEndEvent type marker interface"
+msgstr "Fin forcée"
+
+#: ../interfaces.py:523
+msgid "IIILEPrescriptionEvent type marker interface"
+msgstr "Prescription IILE"
+
 #. Default: "Inquiry"
 #: ../interfaces.py:451
 msgid "IInquiry type marker interface"
 msgstr "Enquête publique"
 
-#: ../interfaces.py:535
+#: ../interfaces.py:559
 msgid "IInternalPrelimaryAdvice type marker interface"
 msgstr "Avis préliminaire interne"
 
@@ -405,6 +417,10 @@ msgstr "Transmis des compléments au SPW"
 msgid "IModificationDeposit type marker interface"
 msgstr "Dépôt d'un modificatif de la demande"
 
+#: ../interfaces.py:535
+msgid "IModificationRegistryEvent type marker interface"
+msgstr "Registre de modification"
+
 #. Default: "Opinion request"
 #: ../interfaces.py:387
 msgid "IOpinionRequest type marker interface"
@@ -415,13 +431,21 @@ msgstr "Demande d'avis"
 msgid "IProrogation type marker interface"
 msgstr "Prorogation"
 
+#: ../interfaces.py:515
+msgid "IProvocationEvent type marker interface"
+msgstr "Provocation"
+
 #: ../interfaces.py:499
 msgid "IRecourseEvent type marker interface"
 msgstr "Recours"
 
-#: ../interfaces.py:515
+#: ../interfaces.py:519
 msgid "IRefusedIncompleteness type marker interface"
 msgstr "Refus pour incomplétude"
+
+#: ../interfaces.py:539
+msgid "ISentToArchivesEvent type marker interface"
+msgstr "Envoi aux archives"
 
 #: ../interfaces.py:403
 msgid "ISimpleCollegeEvent type marker interface"
@@ -441,11 +465,11 @@ msgstr "Délivrance du permis/certificat/..."
 msgid "ITransmitToSPWEvent type marker interface"
 msgstr "Transmis du dossier au SPW"
 
-#: ../interfaces.py:527
+#: ../interfaces.py:551
 msgid "IUrbanAndEnvironment type marker interface"
 msgstr "Événement commun à l'urbanisme et l'environnement (permis unique)"
 
-#: ../interfaces.py:523
+#: ../interfaces.py:547
 msgid "IUrbanOrEnvironment type marker interface"
 msgstr "Événement exclusif au service de la tendance du dossier (permis unique)"
 
@@ -472,14 +496,14 @@ msgstr "Début des travaux"
 msgid "IWorkEnd type marker interface"
 msgstr "Fin des travaux"
 
-#: ../interfaces.py:531
+#: ../interfaces.py:555
 msgid "ImpactStudy event type marker interface"
 msgstr "Étude d'incidence"
 
 msgid "IntegratedLicence"
 msgstr "Permis intégré"
 
-#: ../interfaces.py:633
+#: ../interfaces.py:657
 msgid "Internal opinion services"
 msgstr "Avis de services internes à la ville"
 
@@ -542,7 +566,7 @@ msgstr "Permis d'urbanisation"
 msgid "PatrimonyCertificate"
 msgstr "Certificat de patrimoine"
 
-#: ../interfaces.py:646
+#: ../interfaces.py:670
 msgid "Planned inquiries"
 msgstr "Rayons d'enquête planifiés"
 
@@ -629,7 +653,7 @@ msgstr ""
 msgid "Service id"
 msgstr ""
 
-#: ../interfaces.py:634
+#: ../interfaces.py:658
 msgid "Services that can give their opinion directly through urban"
 msgstr ""
 
@@ -1546,7 +1570,7 @@ msgstr "Choisissez une des 3 recherches ci-dessous.  Si vous savez exactement ce
 msgid "inadmissibilityreasons_folder_title"
 msgstr "Motifs d'irrecevabilité"
 
-#: ../interfaces.py:647
+#: ../interfaces.py:671
 msgid "inquiries planned for radius search"
 msgstr ""
 
@@ -1807,6 +1831,9 @@ msgstr "Particularités du bien (urbanisme)"
 
 msgid "lotusages_folder_title"
 msgstr "Destination"
+
+msgid "mainsignatures_folder_title"
+msgstr "Signatures principales"
 
 #. Default: "Manage architects"
 #: ../browser/templates/portlet_urbanconfig.pt:10
@@ -2661,7 +2688,7 @@ msgid "urban_label_alsoCalled"
 msgstr "Synonymes"
 
 #. Default: "Amount_collected"
-#: ../UrbanEvent.py:354
+#: ../UrbanEvent.py:365
 msgid "urban_label_amount_collected"
 msgstr "Montant perçu"
 
@@ -2759,12 +2786,12 @@ msgid "urban_label_authorizationDate"
 msgstr "Date d'autorisation"
 
 #. Default: "Bank_account"
-#: ../UrbanEvent.py:339
+#: ../UrbanEvent.py:350
 msgid "urban_label_bank_account"
 msgstr "N° de compte"
 
 #. Default: "Bank_account_owner"
-#: ../UrbanEvent.py:346
+#: ../UrbanEvent.py:357
 msgid "urban_label_bank_account_owner"
 msgstr "Titulaire du compte"
 
@@ -3015,7 +3042,7 @@ msgid "urban_label_decisionDate"
 msgstr "Date de la décision"
 
 #. Default: "Decisionproject"
-#: ../UrbanEvent.py:382
+#: ../UrbanEvent.py:393
 msgid "urban_label_decisionProject"
 msgstr "Projet de décision"
 
@@ -3104,7 +3131,7 @@ msgid "urban_label_derogationDetails"
 msgstr "Détails concernant les dérogations"
 
 #. Default: "Description"
-#: ../UrbanEvent.py:393
+#: ../UrbanEvent.py:404
 #: ../content/licence/EnvironmentBase.py:266
 #: ../content/licence/GenericLicence.py:191
 msgid "urban_label_description"
@@ -3116,12 +3143,12 @@ msgid "urban_label_dispatchSInformation"
 msgstr "Informations de dispatch"
 
 #. Default: "Displaydate"
-#: ../UrbanEvent.py:364
+#: ../UrbanEvent.py:375
 msgid "urban_label_displayDate"
 msgstr "Date d'affichage"
 
 #. Default: "Displaydateiend"
-#: ../UrbanEvent.py:374
+#: ../UrbanEvent.py:385
 msgid "urban_label_displayDateEnd"
 msgstr "Date de fin d'affichage"
 
@@ -3236,7 +3263,7 @@ msgstr "Catégorie du type d'événement"
 msgid "urban_label_exemptFDArticle"
 msgstr "Article 107"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:344
+#: ../content/licence/CODT_BaseBuildLicence.py:346
 msgid "urban_label_exemptFDArticleCODT"
 msgstr "Article D IV.15"
 
@@ -3449,7 +3476,7 @@ msgstr "Etude d'incidence?"
 msgid "urban_label_implantation"
 msgstr "Implantation (art. 137)"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:345
+#: ../content/licence/CODT_BaseBuildLicence.py:347
 msgid "urban_label_implantationCODT"
 msgstr "Implantation (art D.IV.72)"
 
@@ -3622,7 +3649,7 @@ msgstr "Supplémentaire?"
 msgid "urban_label_is_in_parceloutlicences"
 msgstr "Le bien se situe dans un permis d'urbanisation"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:342
+#: ../content/licence/CODT_BaseBuildLicence.py:344
 msgid "urban_label_is_in_sol"
 msgstr "Le bien se situe dans un SOL"
 
@@ -3783,6 +3810,11 @@ msgstr "Remarques techniques (Fiche Urbanisme)"
 #: ../UrbanTool.py:207
 msgid "urban_label_logMapRequests"
 msgstr "Logger les accès à la cartographie avec collective.fingerpointing"
+
+#. Default: "Mainsignatures"
+#: ../UrbanEvent.py:340
+msgid "urban_label_mainSignatures"
+msgstr "Signatures principales"
 
 #. Default: "Manageablelicences"
 #: FolderManager.py
@@ -4492,15 +4524,15 @@ msgstr "Situation"
 msgid "urban_label_society"
 msgstr "Société"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:340
+#: ../content/licence/CODT_BaseBuildLicence.py:341
 msgid "urban_label_sol"
 msgstr "SOL"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:341
+#: ../content/licence/CODT_BaseBuildLicence.py:343
 msgid "urban_label_solZone"
 msgstr "Zone de SOL"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:343
+#: ../content/licence/CODT_BaseBuildLicence.py:345
 msgid "urban_label_sol_details"
 msgstr "Détails concernant le SOL"
 

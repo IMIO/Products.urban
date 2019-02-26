@@ -1,3 +1,4 @@
+#!/bin/bash
 declare -a languages=("fr")
 for lang in "${languages[@]}"; do
 		mkdir -p $lang/LC_MESSAGES

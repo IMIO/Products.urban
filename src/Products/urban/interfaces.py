@@ -511,8 +511,32 @@ class IProrogationEvent(Interface):
     __doc__ = _("""IProrogation type marker interface""")
 
 
+class IProvocationEvent(Interface):
+    __doc__ = _("""IProvocationEvent type marker interface""")
+
+
 class IRefusedIncompletenessEvent(Interface):
     __doc__ = _("""IRefusedIncompleteness type marker interface""")
+
+
+class IIILEPrescriptionEvent(Interface):
+    __doc__ = _("""IIILEPrescriptionEvent type marker interface""")
+
+
+class IActivityEndedEvent(Interface):
+    __doc__ = _("""IActivityEndedEvent type marker interface""")
+
+
+class IForcedEndEvent(Interface):
+    __doc__ = _("""IForcedEndEvent type marker interface""")
+
+
+class IModificationRegistryEvent(Interface):
+    __doc__ = _("""IModificationRegistryEvent type marker interface""")
+
+
+class ISentToArchivesEvent(Interface):
+    __doc__ = _("""ISentToArchivesEvent type marker interface""")
 
 
 class IEnvironmentOnlyEvent(Interface):
