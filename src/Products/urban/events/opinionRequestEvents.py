@@ -9,5 +9,5 @@ def setDefaultLinkedInquiry(opinionRequest, event):
             inquiries = licence.getInquiriesAndAnnouncements()
         else:
             inquiries = licence.getInquiries()
-        inquiry = inquiries[-1] or licence
+        inquiry = inquiries and inquiries[-1] or licence
         opinionRequest.setLinkedInquiry(inquiry)
