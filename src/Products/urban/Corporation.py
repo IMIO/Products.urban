@@ -172,7 +172,7 @@ class Corporation(BaseContent, Applicant, BrowserDefaultMixin):
             firstName = cgi.escape(firstName)
             lastName = cgi.escape(lastName)
             personRole = cgi.escape(personRole)
-            nameSignaletic = "%s, %s<br />%s %s %s" % (legalForm, denomination, title, firstName, lastName)
+            nameSignaletic = "%s %s<br />%s %s %s" % (legalForm, denomination, title, firstName, lastName)
         return nameSignaletic
 
 
