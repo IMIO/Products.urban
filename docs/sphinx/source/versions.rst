@@ -30,10 +30,21 @@ Le carottage permet de récupérer des informations des couches de la Région po
   :width: 400
   :alt: versions_carottage1
 
+Les informations concernées par le carottage sont :
+
+* Le bien se situe dans un SOL
+* Arbres et haies remarquables
+* Le bien se situe dans un permis d'urbanisation
+* Zonage de plan de secteur
+* Zone de SOL
+* Zone de captage
+* Détails concernant le Périmètre de Remembrement
+* Bien classé ou assimilé
+
 Les informations issues du carottage vous sont proposées à l'ajout avant de les intégrer au dossier
 
 .. image:: resources/images/versions_carottage_form.png
-  :width: 400
+  :width: 700
   :alt: versions_carottage_form
 
 
