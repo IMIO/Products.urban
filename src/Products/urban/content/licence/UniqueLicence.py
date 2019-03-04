@@ -129,6 +129,7 @@ schema = Schema((
             startup_directory='portal_urban/exploitationconditions',
             restrict_browsing_to_startup_directory=True,
             wild_card_search=True,
+            base_query='legalconditions_base_query',
             label=_('urban_label_additionalLegalConditions', default='Additionallegalconditions'),
         ),
         allowed_types=('UrbanVocabularyTerm',),
