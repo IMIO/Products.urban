@@ -50,7 +50,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'iA.Urban'
-copyright = u'2018, IMIO'
+copyright = u'2019, IMIO'
 author = u'jja'
 
 # Variable rst2pdf, impossible à compiler sous python 3 avec RTD
