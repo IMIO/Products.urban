@@ -14,6 +14,7 @@ Contents:
 
    using_urban
    config_urban
+   versions
 
 ##################
 Indices and tables
