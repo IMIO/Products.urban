@@ -75,7 +75,9 @@ def _export_document_templates(licence_types=URBAN_TYPES, with_event_structure=T
                             doc_name += '.odt'
 
                         doc_export = open(doc_name, 'arw')
-                        doc_export.write(doc.get_file().data)
+                        named_file = doc.get_file()
+                        named_file = type(named_file) in [str, tuple] and named_file[0] or named_file
+                        doc_export.write(named_file.data)
                         doc_export.close()
 
     return export_path
