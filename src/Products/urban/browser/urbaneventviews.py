@@ -481,4 +481,7 @@ class UrbanEventInquiryView(UrbanEventInquiryBaseView):
         if hasattr(licence, 'impactStudy'):
             if licence.getImpactStudy():
                 return 200
+        if hasattr(licence, 'inquiry_category'):
+            if licence.getInquiry_category() == 'B':
+                return 200
         return 50
