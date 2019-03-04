@@ -128,6 +128,7 @@ schema = Schema((
             startup_directory='portal_urban/exploitationconditions',
             restrict_browsing_to_startup_directory=True,
             wild_card_search=True,
+            base_query='legalconditions_base_query',
             label=_('urban_label_additionalLegalConditions', default='Additionallegalconditions'),
         ),
         allowed_types=('UrbanVocabularyTerm',),
@@ -348,6 +349,9 @@ class EnvironmentBase(BaseFolder, GenericLicence, CODT_UniqueLicenceInquiry, Bro
 
     def rubrics_base_query(self):
         """ to be overriden """
+        return {'review_state': ['enabled', 'private']}
+
+    def legalconditions_base_query(self):
         return {'review_state': ['enabled', 'private']}
 
     def listProcedureChoices(self):
