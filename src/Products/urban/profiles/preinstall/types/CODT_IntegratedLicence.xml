@@ -22,7 +22,7 @@
    <element value="UrbanEventCollege"/>
    <element value="UrbanEventNotificationCollege"/>
    <element value="UrbanEventOpinionRequest"/>
-   <element value="CODT_Inquiry"/>
+   <element value="CODT_UniqueLicenceInquiry"/>
    <element value="File"/>
    <element value="task"/>
    <element value="ConfigTest"/>
