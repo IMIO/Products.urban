@@ -694,7 +694,6 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
             if delivered and (delivered.getDecisionDate() or delivered.getEventDate()) > limit_date:
                 if delivered.getDecision() == 'favorable':
                     licences.append(licence)
-                    licences.append(licence)
         return licences
 
     def get_related_Buildlicences(self):
