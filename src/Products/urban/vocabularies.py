@@ -194,6 +194,11 @@ class DateIndexVocabulary(object):
                 translate('creation date', 'urban', context=request)
             ),
             SimpleTerm(
+                'modified',
+                'modified',
+                translate('modification date', 'urban', context=request)
+            ),
+            SimpleTerm(
                 'getDepositDate',
                 'getDepositDate',
                 translate('IDeposit type marker interface', 'urban', context=request)
