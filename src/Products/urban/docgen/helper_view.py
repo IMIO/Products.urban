@@ -684,6 +684,53 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
             relatedLicencesTitles.append(relatedLicence['title'].decode('utf8'))
         return relatedLicencesTitles
 
+    def get_delivered_related_licences(self, limit_date, licence_types=[]):
+        licences = []
+        for brain in self.get_related_licences_of_parcel():
+            licence = brain.getObject()
+            if licence.portal_type in licence_types:
+                delivered = licence.getLastTheLicence()
+                if delivered and (delivered.getDecisionDate() or delivered.getEventDate()) > limit_date:
+                    if delivered.getDecision() == 'favorable':
+                        licences.append(licence)
+                        licences.append(licence)
+        return licences
+
+    def get_related_Buildlicences(self):
+        limit_date = DateTime('1977/01/01')
+        return self.get_delivered_related_licences(
+            limit_date,
+            ['BuildLicence', 'CODT_BuildLicence']
+        )
+
+    def getUrbanCertificateOneOfTheParcels(self):
+        # cu1 cannot be older than 2 years
+        limit_date = self.getLastTheLicence().getEventDate() - 731
+        return self.get_delivered_related_licences(
+            limit_date,
+            ['UrbanCertificateOne', 'CODT_UrbanCertificateOne'],
+        )
+
+    def getParceloutlicenceOfTheParcels(self):
+        limit_date = DateTime('1977/01/01')
+        return self.get_delivered_related_licences(
+            limit_date,
+            ['ParcelOutLicence', 'CODT_ParcelOutLicence'],
+        )
+
+    def getUrbanCertificateTwoOfTheParcels(self, date=None):
+        # cu2 cannot be older than 2 years
+        if self.getLastTheLicence():
+            limit_date = self.getLastTheLicence().getEventDate() - 731
+        elif date:
+            limit_date = date - 731
+        else:
+            limit_date = self.getLastDeposit().getEventDate() - 731
+        return self.get_delivered_related_licences(
+            limit_date,
+            ['UrbanCertificateTwo', 'CODT_UrbanCertificateTwo'],
+        )
+
     def get_specific_features_text(self):
         """
         # Particularité(s) du bien
