@@ -674,6 +674,7 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
             for brain in parcel.getRelatedLicences(licence_type=licence_types):
                 if brain.UID not in licence_uids:
                     relatedLicences.append(brain)
+                    licence_uids.add(brain.UID)
         return relatedLicences
 
     def get_related_licences_titles_of_parcel(self):
