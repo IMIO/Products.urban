@@ -662,17 +662,18 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
                 return term
         return None
 
-    def get_related_licences_of_parcel(self):
+    def get_related_licences_of_parcel(self, licence_types=[]):
         """
           Returns the licences related to a parcel
         """
         context = self.context
         parcels = context.getParcels()
         relatedLicences = []
+        licence_uids = set([])
         for parcel in parcels:
-            parcelRecordsView = context.restrictedTraverse('parcelrecordsview')
-            parcelRecordsView.parcel_id = parcel.id
-            relatedLicences += parcelRecordsView.get_related_licences_of_parcel()
+            for brain in parcel.getRelatedLicences(licence_type=licence_types):
+                if brain.UID not in licence_uids:
+                    relatedLicences.append(brain)
         return relatedLicences
 
     def get_related_licences_titles_of_parcel(self):
@@ -681,19 +682,18 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
         """
         relatedLicencesTitles = []
         for relatedLicence in self.get_related_licences_of_parcel():
-            relatedLicencesTitles.append(relatedLicence['title'].decode('utf8'))
+            relatedLicencesTitles.append(relatedLicence.Title.decode('utf8'))
         return relatedLicencesTitles
 
     def get_delivered_related_licences(self, limit_date, licence_types=[]):
         licences = []
-        for brain in self.get_related_licences_of_parcel():
+        for brain in self.get_related_licences_of_parcel(licence_types):
             licence = brain.getObject()
-            if licence.portal_type in licence_types:
-                delivered = licence.getLastTheLicence()
-                if delivered and (delivered.getDecisionDate() or delivered.getEventDate()) > limit_date:
-                    if delivered.getDecision() == 'favorable':
-                        licences.append(licence)
-                        licences.append(licence)
+            delivered = licence.getLastTheLicence()
+            if delivered and (delivered.getDecisionDate() or delivered.getEventDate()) > limit_date:
+                if delivered.getDecision() == 'favorable':
+                    licences.append(licence)
+                    licences.append(licence)
         return licences
 
     def get_related_Buildlicences(self):
