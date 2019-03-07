@@ -703,7 +703,7 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
             ['BuildLicence', 'CODT_BuildLicence']
         )
 
-    def getUrbanCertificateOneOfTheParcels(self):
+    def get_related_UrbanCertificateOne(self):
         # cu1 cannot be older than 2 years
         limit_date = self.getLastTheLicence().getEventDate() - 731
         return self.get_delivered_related_licences(
@@ -711,14 +711,14 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
             ['UrbanCertificateOne', 'CODT_UrbanCertificateOne'],
         )
 
-    def getParceloutlicenceOfTheParcels(self):
+    def get_related_Parceloutlicence(self):
         limit_date = DateTime('1977/01/01')
         return self.get_delivered_related_licences(
             limit_date,
             ['ParcelOutLicence', 'CODT_ParcelOutLicence'],
         )
 
-    def getUrbanCertificateTwoOfTheParcels(self, date=None):
+    def get_related_UrbanCertificateTwo(self, date=None):
         # cu2 cannot be older than 2 years
         if self.getLastTheLicence():
             limit_date = self.getLastTheLicence().getEventDate() - 731
