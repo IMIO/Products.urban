@@ -865,6 +865,9 @@ msgstr ""
 msgid "mixed_residing"
 msgstr ""
 
+msgid "modification date"
+msgstr ""
+
 #. Default: "Plural"
 #: PersonTitleTerm.py
 msgid "multiplicity_plural"
