@@ -601,7 +601,8 @@ def setDefaultApplicationSecurity(context):
     #global application folder : "urban_readers" and "urban_editors" can read...
     if hasattr(site, "urban"):
         app_folder = getattr(site, "urban")
-        app_folder.manage_addLocalRoles("urban_managers", ("Contributor", "Reviewer", "Editor", "Reader", ))
+        app_folder.manage_delLocalRoles(["urban_managers"])
+        app_folder.manage_addLocalRoles("urban_managers", ("Reviewer", "Editor", "Reader", ))
         app_folder.manage_addLocalRoles("urban_readers", ("Reader", ))
         app_folder.manage_addLocalRoles("urban_editors", ("Reader", ))
         app_folder.manage_addLocalRoles("environment_readers", ("Reader", ))
@@ -614,7 +615,12 @@ def setDefaultApplicationSecurity(context):
 
     licencesfolder_names = getAllLicenceFolderIds()
     urban_folder_names = getUrbanOnlyLicenceFolderIds()
-    uniquelicences_names = [getLicenceFolderId('UniqueLicence'), getLicenceFolderId('CODT_UniqueLicence')]
+    uniquelicences_names = [
+        getLicenceFolderId('UniqueLicence'),
+        getLicenceFolderId('CODT_UniqueLicence'),
+        getLicenceFolderId('IntegratedLicence'),
+        getLicenceFolderId('CODT_IntegratedLicence'),
+    ]
     environment_folder_names = getEnvironmentLicenceFolderIds() + uniquelicences_names
     #licence folder : "urban_readers" can read and "urban_editors" can edit...
     for folder_name in licencesfolder_names:
