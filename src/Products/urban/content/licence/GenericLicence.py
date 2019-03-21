@@ -1302,6 +1302,12 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
     def getLastSimpleCollege(self):
         return self.getLastEvent(interfaces.ISimpleCollegeEvent)
 
+    def getLastMayorCollege(self):
+        return self.getLastEvent(interfaces.IMayorCollegeEvent)
+
+    def getAllMayorColleges(self):
+        return self.getAllEvents(interfaces.IMayorCollegeEvent)
+
     def getAllEvents(self, eventInterface=IUrbanEvent):
         return self.getAllEventsByObjectValues(eventInterface)
 

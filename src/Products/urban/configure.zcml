@@ -185,6 +185,10 @@
     type=".interfaces.IEventTypeType"/>
 
   <interface
+    interface=".interfaces.IMayorCollegeEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
     interface=".interfaces.IEnvironmentSimpleCollegeEvent"
     type=".interfaces.IEventTypeType"/>
 
