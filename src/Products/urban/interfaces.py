@@ -403,6 +403,10 @@ class ISimpleCollegeEvent(ICollegeEvent):
     __doc__ = _("""ISimpleCollegeEvent type marker interface""")
 
 
+class IMayorCollegeEvent(ICollegeEvent):
+    __doc__ = _("""IMayorCollegeEvent type marker interface""")
+
+
 class IEnvironmentSimpleCollegeEvent(ICollegeEvent):
     __doc__ = _("""IEnvironmentSimpleCollegeEvent type marker interface""")
 
