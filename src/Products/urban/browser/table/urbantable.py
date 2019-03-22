@@ -7,6 +7,8 @@ from z3c.table.table import SequenceTable
 
 from zope.interface import implements
 
+from plone.api import portal
+
 from Products.ZCatalog.Lazy import LazyMap
 
 from Products.urban.browser.table import interfaces
@@ -38,6 +40,10 @@ class UrbanTable(Table):
 
     batchProviderName = 'plonebatch'
     startBatchingAt = 20
+
+    def __init__(self, context, request):
+        super(UrbanTable, self).__init__(context, request)
+        self.portal_url = portal.get().absolute_url()
 
     # override setUpRows: use a Lazymap rather than a comprehension list for
     # performance issues (see #6444)

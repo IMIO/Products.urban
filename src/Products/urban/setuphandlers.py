@@ -709,8 +709,8 @@ def addGlobalFolders(context):
         )
         templates = getattr(folder, templates_id)
         templates.setConstrainTypesMode(1)
-        templates.setLocallyAllowedTypes(['SubTemplate', 'StyleTemplate'])
-        templates.setImmediatelyAddableTypes(['SubTemplate', 'StyleTemplate'])
+        templates.setLocallyAllowedTypes(['SubTemplate', 'StyleTemplate', 'MailingLoopTemplate'])
+        templates.setImmediatelyAddableTypes(['SubTemplate', 'StyleTemplate', 'MailingLoopTemplate'])
 
     if not hasattr(folder, "environmenttemplates"):
         templates_id = folder.invokeFactory(
@@ -720,8 +720,8 @@ def addGlobalFolders(context):
         )
         templates = getattr(folder, templates_id)
         templates.setConstrainTypesMode(1)
-        templates.setLocallyAllowedTypes(['SubTemplate', 'StyleTemplate'])
-        templates.setImmediatelyAddableTypes(['SubTemplate', 'StyleTemplate'])
+        templates.setLocallyAllowedTypes(['SubTemplate', 'StyleTemplate', 'MailingLoopTemplate'])
+        templates.setImmediatelyAddableTypes(['SubTemplate', 'StyleTemplate', 'MailingLoopTemplate'])
 
     if not hasattr(tool, "additional_layers"):
         additional_layers_id = tool.invokeFactory(
