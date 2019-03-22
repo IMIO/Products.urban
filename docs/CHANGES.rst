@@ -11,11 +11,33 @@ Changes
   [fngaha]
 
 - Fix translations
+- Update the mailing merge fields in all the mailing templates
   [fngaha]
 
+- Specify at installation the mailing source of the models that can be mailed via the context variable
+  [fngaha]
 
-2.3.x (unreleased)
--------------------
+- Select at the installation the mailing template in all models succeptible to be mailed
+  [fngaha]
+
+- Referencing the mailing template in the general templates configuration (urban and environment)
+  [fngaha]
+
+- Allow content type 'MailingLoopTemplate' in general templates
+  [fngaha]
+
+- added the mailing template
+  [fngaha]
+
+- add mailing_list method
+  [fngaha]
+
+- add a z3c.table column for mailing with his icon
+  [fngaha]
+
+- fix translations
+  [fngaha]
+
 - update signaletic for corporation's applicant
   [fngaha]
 
