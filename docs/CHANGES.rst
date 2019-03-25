@@ -2,6 +2,12 @@
 
 Changes
 =======
+2.5 (unreleased)
+----------------
+
+- Nothing changed yet.
+
+
 2.4 (2019-03-25)
 ----------------
 - Fix format_date
