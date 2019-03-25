@@ -9,11 +9,13 @@ setup(name='Products.urban',
       long_description=open("README.txt").read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read(),
       classifiers=[
+          "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
           "Programming Language :: Python",
+          "Programming Language :: Python :: 2.7",
       ],
-      keywords='',
-      author='',
-      author_email='',
+      keywords='Urban IMIO',
+      author='Simon Delcourt',
+      author_email='simon.delcourt@imio.be',
       url='http://www.communesplone.org/les-outils/applications-metier/'
           'gestion-des-permis-durbanisme',
       license='GPL',
