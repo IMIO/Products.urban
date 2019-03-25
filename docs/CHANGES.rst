@@ -2,7 +2,7 @@
 
 Changes
 =======
-2.3.x (unreleased)
+2.4.0 (unreleased)
 -------------------
 - Fix format_date
   [fngaha]
@@ -53,8 +53,8 @@ Changes
 - fix advanced searching Applicant field for all licences, and not just 'all'
   [jjaumotte]
 
-2.3.0 (unreleased)
--------------------
+2.3.0
+-----
 - Add attributes SCT, sctDetails
   [fngaha]
 
