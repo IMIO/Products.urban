@@ -237,27 +237,11 @@
      permission="zope2.View"
   />
 
-  <browser:page
-     for="Products.urban.interfaces.IGenericLicence"
-     name="parcelhistoricrecordsview"
-     class=".parcelrecordsview.ParcelHistoricRecordsView"
-     template="templates/parcelhistoricrecordsview.pt"
-     permission="zope2.View"
-  />
-
   <!-- register the parcel recordview for parcellingterms as well since they can now contains parcels object -->
   <browser:page
      for="Products.urban.interfaces.IParcellingTerm"
      name="parcelrecordsview"
      class=".parcelrecordsview.ParcelRecordsView"
-     template="templates/parcelrecordsview.pt"
-     permission="zope2.View"
-  />
-
-  <browser:page
-     for="Products.urban.interfaces.IParcellingTerm"
-     name="parcelhistoricrecordsview"
-     class=".parcelrecordsview.ParcelHistoricRecordsView"
      template="templates/parcelrecordsview.pt"
      permission="zope2.View"
   />

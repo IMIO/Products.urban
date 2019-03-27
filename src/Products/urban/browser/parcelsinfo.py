@@ -1,10 +1,9 @@
-## -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 
 from Products.Five import BrowserView
 
 from Products.urban.interfaces import IGenericLicence
 from Products.urban import services
-from Products.urban.services.cadastral import ParcelHistoric
 
 from plone import api
 
@@ -19,10 +18,9 @@ class ParcelsInfo(BrowserView):
         Find licences with parcel paramaters
         """
         catalog = api.portal.get_tool('portal_catalog')
-        parcel_historic = ParcelHistoric(**parcel.reference_as_dict())
         licence_brains = catalog(
             object_provides=IGenericLicence.__identifier__,
-            parcelInfosIndex=parcel_historic.get_all_reference_indexes()
+            parcelInfosIndex=parcel.get_capakey()
         )
         return licence_brains
 

@@ -32,20 +32,20 @@ def setValidParcel(parcel, event):
      Check if the manually added parcel exists in he cadastral DB
      and set its "isvalidparcel" attribute accordingly.
     """
-    is_official = True
     parcel.setDivisionCode(parcel.getDivision())
     parcel.bis = parcel.bis or '0'
     parcel.puissance = parcel.puissance or '0'
     parcel.reindexObject()
 
     references = parcel.reference_as_dict(True)
+
+    is_official = False
     try:
         cadastre = services.cadastre.new_session()
-        is_outdated = cadastre.is_outdated_parcel(**references)
+        is_official = cadastre.is_official_parcel(**references)
         cadastre.close()
-        parcel.setOutdated(is_outdated)
     except:
-        is_official = False
+        pass
 
     parcel.setIsOfficialParcel(is_official)
     parcel.reindexObject()
@@ -75,18 +75,6 @@ def setEnvironmentLicencePreviousLicencesField(parcel, event):
 
         if not parcel.getIsOfficialParcel() or not parcel.getDivision():
             continue
-
-        references = parcel.reference_as_dict()
-        try:
-            parcel_historic = cadastre.query_parcel_historic(**references)
-        except services.cadastral.UnreferencedParcelError:
-            continue
-
-        if not parcel_historic:
-            continue
-
-        for ref in parcel_historic.get_all_reference_indexes():
-            capakeys.add(ref)
 
     cadastre.close()
 
