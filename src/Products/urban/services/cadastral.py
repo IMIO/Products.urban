@@ -2,7 +2,6 @@
 
 from Products.urban.services.base import SQLService
 from Products.urban.services.base import SQLSession
-from Products.urban.services.base import UnknownSQLTable
 from plone.memoize import ram
 from time import time
 
@@ -49,7 +48,7 @@ class CadastreService(SQLService):
 
 
 def all_divisions_cache_key(method, self):
-    return time() // 3600
+    return time() // 86400
 
 
 class CadastreSession(SQLSession):
@@ -70,12 +69,8 @@ class CadastreSession(SQLSession):
         """
         Tell if a reference exists in the cadastral DB (including old parcels).
         """
-        query = self._base_query_parcels(self.tables.parcels)
-
-        # filter on parcel reference arguments
-        query = self._filter(query, self.tables.parcels, division, section, radical, bis, exposant, puissance)
-        records = query.all()
-        return bool(records)
+        parcel = self.query_exact_parcel(division, section, radical, bis, exposant, puissance)
+        return bool(parcel)
 
     def query_parcels(self, division=IGNORE, section=IGNORE, radical=IGNORE, bis=IGNORE,
                       exposant=IGNORE, puissance=IGNORE, location=IGNORE, parcel_owner=IGNORE):
@@ -85,7 +80,7 @@ class CadastreSession(SQLSession):
         """
         query = self._base_query_parcels()
         # filter on parcel reference arguments
-        query = self._filter(query, self.tables.capa, division, section, radical, bis, exposant, puissance)
+        query = self._filter(query, division, section, radical, bis, exposant, puissance)
 
         # filter on parcel location/proprietary name arguments
         map_ = self.tables.map
@@ -105,7 +100,7 @@ class CadastreSession(SQLSession):
         """
         query = self._base_query_parcels()
         # filter on parcel reference arguments
-        query = self._filter(query, self.table.parcels, division, section, radical, bis, exposant, puissance)
+        query = self._filter(query, division, section, radical, bis, exposant, puissance)
         try:
             record = query.distinct().one()
         except:
@@ -254,15 +249,16 @@ class CadastreSession(SQLSession):
 
         return coordinates
 
-    def _filter(self, query, table, division=IGNORE, section=IGNORE, radical=IGNORE,
+    def _filter(self, query, division=IGNORE, section=IGNORE, radical=IGNORE,
                 bis=IGNORE, exposant=IGNORE, puissance=IGNORE):
-        da = self.tables.da
-        query = division is IGNORE and query or query.filter(da.da == division)
-        query = section is IGNORE and query or query.filter(table.section == section)
-        query = radical is IGNORE and query or query.filter(table.radical == radical)
-        query = bis is IGNORE and query or query.filter(table.bis == bis)
-        query = exposant is IGNORE and query or query.filter(table.exposant == exposant)
-        query = puissance is IGNORE and query or query.filter(table.puissance == puissance)
+        divisions = self.tables.divisions
+        parcels = self.tables.parcels
+        query = division is IGNORE and query or query.filter(divisions.da == division)
+        query = section is IGNORE and query or query.filter(parcels.section == section)
+        query = radical is IGNORE and query or query.filter(parcels.primarynumber == radical)
+        query = bis is IGNORE and query or query.filter(parcels.bisnumber == bis)
+        query = exposant is IGNORE and query or query.filter(parcels.exponentletter == exposant)
+        query = puissance is IGNORE and query or query.filter(parcels.exponentletter == puissance)
         return query
 
     def _base_query_parcels(self):
@@ -276,27 +272,28 @@ class CadastreSession(SQLSession):
             divisions.divname,
             divisions.da.label('division'),
             parcels.section,
-            parcels.radical,
-            parcels.exposant,
-            parcels.bis,
-            parcels.puissance,
+            parcels.primarynumber.label('radical'),
+            parcels.exponentletter.label('exposant'),
+            parcels.bisnumber.label('bis'),
+            parcels.exponentnumber.label('puissance'),
+            parcels.capakey,
         )
         # join of given table (pas or capa) and da
-        query = query.filter(divisions.da == parcels.da)
+        query = query.filter(divisions.da == parcels.divcad)
 
-        map_ = self.tables.map
+#        map_ = self.tables.map
         # additional columns to return
-        query = query.add_columns(
-            parcels.capakey,
-            map_.prc,
-            map_.pe.label('proprietary'),
-            map_.adr1.label('proprietary_city'),
-            map_.adr2.label('proprietary_street'),
-            map_.sl1.label('location'),
-            map_.na1.label('usage')
-        )
+#        query = query.add_columns(
+#            parcels.capakey,
+#            map_.prc,
+#            map_.pe.label('proprietary'),
+#            map_.adr1.label('proprietary_city'),
+#            map_.adr2.label('proprietary_street'),
+#            map_.sl1.label('location'),
+#            map_.na1.label('usage')
+#        )
         # join of capa and map
-        query = query.filter(parcels.capakey == map_.capakey)
+#        query = query.filter(parcels.capakey == map_.capakey)
         return query
 
 
