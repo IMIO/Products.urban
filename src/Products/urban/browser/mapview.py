@@ -120,10 +120,6 @@ class MapView(BrowserView):
                     listCapaKey.append(capaKey)
         return listCapaKey
 
-    def getOldParcels(self):
-        context = aq_inner(self.context)
-        return [parcel.get_historic() for parcel in context.getParcels() if parcel.getOutdated()]
-
     def getParcels(self):
         context = aq_inner(self.context)
         request = aq_inner(self.request)

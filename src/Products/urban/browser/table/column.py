@@ -71,14 +71,6 @@ class RelatedLicencesColumn(Column):
         url = parcel.aq_parent.absolute_url()
         id = parcel.getId()
 
-        # if the parcel is not in the cadastral DB we cannot browse its historic
-        if parcel.getIsOfficialParcel():
-            img = '<img  src="linkedhistoricfolders.png" class="urban-linkedfolders-icon"/>'
-            link = '<a class="link-overlay" href="%s/@@parcelhistoricrecordsview?id=%s">%s</a>' % (url, id, img)
-            cell = '&nbsp;<span id="urban-parcel-historic-related-licences">%s</span>' % link
-        else:
-            cell = '&nbsp;<span>-</span>'
-
         if not parcel.hasRelatedLicences():
             cell = '<span>-</span>%s' % cell
         else:
