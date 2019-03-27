@@ -93,8 +93,8 @@ class CadastreSession(SQLSession):
         parcels = [ActualParcel(**record._asdict()) for record in records]
         return parcels
 
-    def query_exact_parcel(self, division, section=None, radical='0', bis='0', exposant=None,
-                           puissance='0'):
+    def query_exact_parcel(self, division, section=None, radical='', bis='', exposant=None,
+                           puissance=''):
         """
         Return the unique parcel exactly matching search criterias.
         """
@@ -113,7 +113,7 @@ class CadastreSession(SQLSession):
         Return the unique parcel exactly matching capakey 'capakey'.
         """
         query = self._base_query_parcels()
-        query = query.filter(self.tables.capa.capakey == capakey)
+        query = query.filter(self.tables.parcels.capakey == capakey)
         try:
             record = query.distinct().one()
         except:
@@ -258,7 +258,7 @@ class CadastreSession(SQLSession):
         query = radical is IGNORE and query or query.filter(parcels.primarynumber == radical)
         query = bis is IGNORE and query or query.filter(parcels.bisnumber == bis)
         query = exposant is IGNORE and query or query.filter(parcels.exponentletter == exposant)
-        query = puissance is IGNORE and query or query.filter(parcels.exponentletter == puissance)
+        query = puissance is IGNORE and query or query.filter(parcels.exponentnumber == puissance)
         return query
 
     def _base_query_parcels(self):
