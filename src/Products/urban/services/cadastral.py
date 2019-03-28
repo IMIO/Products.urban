@@ -37,13 +37,26 @@ class CadastreService(SQLService):
             self._init_table(
                 'parcels',
                 column_names=[
+                    'propertysituationid',
+                    'street_uid', 'number',
                     'capakey',
                     'divcad', 'section', 'primarynumber', 'bisnumber', 'exponentletter', 'exponentnumber', 'partnumber'
                 ]
             )
             self._init_table(
-                'map',
-                column_names=['capakey', 'prc', 'pe', 'adr1', 'adr2', 'sl1', 'na1']
+                'parcelsstreets',
+                column_names=[
+                    'street_uid', 'street_situation',
+                ]
+            )
+            self._init_table(
+                'owners_imp',
+                column_names=[
+                    'propertysituationidf',
+                    'owner_name', 'owner_firstname',
+                    'owner_country', 'owner_zipcode', 'owner_municipality_fr',
+                    'owner_street_fr', 'owner_number', 'owner_boxnumber'
+                ]
             )
 
 
@@ -83,11 +96,12 @@ class CadastreSession(SQLSession):
         query = self._filter(query, division, section, radical, bis, exposant, puissance)
 
         # filter on parcel location/proprietary name arguments
-        map_ = self.tables.map
         if parcel_owner is not IGNORE:
+            map_ = self.tables.map
             query = query.filter(map_.pe.ilike('%{}%'.format(parcel_owner)))
         if location is not IGNORE:
-            query = query.filter(map_.sl1.ilike('%{}%'.format(location)))
+            parcel_streets = self.tables.parcelsstreets
+            query = query.filter(parcel_streets.street_situation.ilike('%{}%'.format(location)))
 
         records = query.distinct().all()
         parcels = [ActualParcel(**record._asdict()) for record in records]
@@ -181,10 +195,6 @@ class CadastreSession(SQLSession):
         result = query.all()
         return result
 
-    def query_wmc(self, parcels):
-        """
-        """
-
     def normalize_coordinates(self, subquery):
         """
         'subquery' should be a sqlalchemy subquery of this type:
@@ -271,60 +281,24 @@ class CadastreSession(SQLSession):
             parcels.bisnumber.label('bis'),
             parcels.exponentnumber.label('puissance'),
             parcels.capakey,
+            parcels.number,
         )
         # join of given table (pas or capa) and da
         query = query.filter(divisions.da == parcels.divcad)
 
-#        map_ = self.tables.map
+        parcel_streets = self.tables.parcelsstreets
         # additional columns to return
-#        query = query.add_columns(
-#            parcels.capakey,
-#            map_.prc,
-#            map_.pe.label('proprietary'),
-#            map_.adr1.label('proprietary_city'),
-#            map_.adr2.label('proprietary_street'),
-#            map_.sl1.label('location'),
-#            map_.na1.label('usage')
-#        )
-        # join of capa and map
-#        query = query.filter(parcels.capakey == map_.capakey)
+        query = query.add_columns(
+#            parcel_streets.prc,
+#            parcel_streets.pe.label('proprietary'),
+#            parcel_streets.adr1.label('proprietary_city'),
+#            parcel_streets.adr2.label('proprietary_street'),
+            parcel_streets.street_situation.label('location'),
+#            parcel_streets.na1.label('usage')
+        )
+        # join of parcels and parcel_streets
+        query = query.filter(parcels.street_uid == parcel_streets.street_uid)
         return query
-
-
-def compute_prc(division, section='', radical='', bis='', exposant='', puissance=''):
-    """
-    Boilerplate to construct a parcel prc key (prca or prcc) value
-    """
-    parcel_key = ''
-    blank = 0
-    if section:
-        parcel_key = section
-
-    blank += 4
-    if radical and radical != '0':
-        blank -= len(radical)
-        parcel_key = '{}{}{}'.format(parcel_key, blank * ' ', radical)
-        blank = 0
-
-    blank += 3
-    if bis and bis != '0':
-        zero = 2 - len(bis)
-        parcel_key = '{}/{}{}'.format(parcel_key, zero * '0', bis)
-        blank = 0
-
-    blank += 1
-    if exposant:
-        blank -= len(exposant)
-        parcel_key = '{}{}{}'.format(parcel_key, blank * ' ', exposant)
-        blank = 0
-
-    blank += 3
-    if puissance and puissance != '0':
-        blank -= len(puissance)
-        parcel_key = '{}{}{}'.format(parcel_key, blank * ' ', puissance)
-        blank = 0
-
-    return parcel_key
 
 
 class Parcel(object):
@@ -374,24 +348,6 @@ class Parcel(object):
     def reference_as_dict(self):
         return dict([(ref, getattr(self, ref)) for ref in self._reference_keys if getattr(self, ref)])
 
-    @property
-    def as_prca(self):
-        """
-        Return prca representation value of this parcel
-        """
-        reference = self.reference_as_dict()
-        prca = compute_prc(**reference)
-        return prca
-
-    @property
-    def as_prcc(self):
-        """
-        Return prcc representation value of this parcel
-        """
-        reference = self.reference_as_dict()
-        prcc = compute_prc(**reference)
-        return prcc
-
 
 class ActualParcel(Parcel):
     """
@@ -401,7 +357,11 @@ class ActualParcel(Parcel):
         super(ActualParcel, self).__init__(**infos)
         self.capakey = capakey
         self.location = self.proprietary = self.proprietary_city = self.proprietary_street = ''
-        self._infos_keys = ['location', 'proprietary', 'proprietary_city', 'proprietary_street', 'usage']
+        self._infos_keys = [
+            'location', 'number',
+            'proprietary', 'proprietary_city', 'proprietary_street',
+            'usage'
+        ]
         self._init_infos(**infos)
 
     def _init_infos(self, **kwargs):
