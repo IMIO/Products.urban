@@ -72,7 +72,7 @@ class RelatedLicencesColumn(Column):
         id = parcel.getId()
 
         if not parcel.hasRelatedLicences():
-            cell = '<span>-</span>%s' % cell
+            cell = '<span>-</span>'
         else:
             img = '<img  src="linkedfolders.png" class="urban-linkedfolders-icon"/>'
             link = '<a class="link-overlay" href="%s/@@parcelrecordsview?id=%s">%s</a>' % (url, id, img)
