@@ -692,6 +692,17 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
             res = getattr(tool.decisions, res)
         return res
 
+    security.declarePublic('getDecision')
+    def getExternalDecision(self, theObject=False):
+        """
+          Returns the external decision value or the UrbanVocabularyTerm if theObject=True
+        """
+        res = self.getField('externalDecision').get(self)
+        if res and theObject:
+            tool = getToolByName(self, 'portal_urban')
+            res = getattr(tool.externaldecisions, res)
+        return res
+
 
 registerType(UrbanEvent, PROJECTNAME)
 # end of class UrbanEvent
