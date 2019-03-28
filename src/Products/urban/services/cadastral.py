@@ -131,12 +131,8 @@ class CadastreSession(SQLSession):
 
         parcel_filters = []
         for parcel in parcels:
-            parcel_ref = parcel.reference_as_dict()
             parcel_filters.append(
-                and_(
-                    capa.da == parcel_ref.pop('division'),
-                    *[getattr(capa, ref) == val for ref, val in parcel_ref.iteritems()]
-                )
+                and_(capa.capakey == parcel.get_capakey())
             )
         query_geom = query_geom.filter(or_(*parcel_filters))
         records = query_geom.all()
@@ -148,22 +144,20 @@ class CadastreSession(SQLSession):
         Query parcels around 'center_parcels' in a radius of 'radius' m.
         """
         capa = self.tables.capa
+        parcels = self.tables.parcels
 
         query_geom = self.session.query(func.ST_MemUnion(capa.the_geom).label('geo_union'))
 
         parcel_filters = []
         for parcel in center_parcels:
-            parcel_ref = parcel.reference_as_dict()
             parcel_filters.append(
-                and_(
-                    capa.da == parcel_ref.pop('division'),
-                    *[getattr(capa, ref) == val for ref, val in parcel_ref.iteritems()]
-                )
+                and_(capa.capakey == parcel.get_capakey())
             )
         query_geom = query_geom.filter(or_(*parcel_filters))
         subquery = query_geom.subquery()
 
         query = self._base_query_parcels()
+        query = query.filter(capa.capakey == parcels.capakey)
         query = query.filter(
             func.ST_Intersects(func.ST_Buffer(subquery.c.geo_union, radius), capa.the_geom)
         )
