@@ -160,10 +160,12 @@
                                     <tr>
                                         <td>
                                             <span tal:content="python: parcel.display()"/><br>
-                                            <span tal:condition="python: hasattr(parcel, 'locations')" tal:define="locations python: parcel.locations">
+                                            <span tal:condition="python: hasattr(parcel, 'locations')" tal:define="locations python: parcel.locations.values()">
                                                 <div tal:repeat="location locations" tal:content="python: location['street_name'] + ' ' + location['number']"/>
                                             </span>
-                                            <span tal:condition="python: hasattr(parcel, 'proprietary')" tal:content="python: parcel.proprietary"/><br>
+                                            <span tal:condition="python: hasattr(parcel, 'owners')" tal:define="owners python: parcel.owners.values()">
+                                                <div tal:repeat="owner owners" tal:content="python: owner['name'] + ' ' + owner['firstname']"/>
+                                            </span>
                                         </td>
                                         <td>
                                             <form i18n:domain="urban" name="quickAddParcel" action="#" method="post"
