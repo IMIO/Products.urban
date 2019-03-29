@@ -27,8 +27,6 @@ class CadastreService(SQLService):
 
         if self.can_connect():
             self._init_table('divisions', column_names=['da', 'divname'])
-            self._init_table('pe', column_names=['pe', 'adr1', 'adr2', 'daa'])
-            self._init_table('prc', column_names=['prc', 'daa', 'na1', 'capakey'])
 
             self._init_table(
                 'capa',
@@ -104,7 +102,7 @@ class CadastreSession(SQLSession):
             query = query.filter(parcel_streets.street_situation.ilike('%{}%'.format(location)))
 
         records = query.distinct().all()
-        parcels = [ActualParcel(**record._asdict()) for record in records]
+        parcels = self.merge_parcel_results(records)
         return parcels
 
     def query_exact_parcel(self, division, section=None, radical='', bis='', exposant=None,
@@ -115,12 +113,11 @@ class CadastreSession(SQLSession):
         query = self._base_query_parcels()
         # filter on parcel reference arguments
         query = self._filter(query, division, section, radical, bis, exposant, puissance)
-        try:
-            record = query.distinct().one()
-        except:
+        records = query.distinct().all()
+        parcels = self.merge_parcel_results(records)
+        if len(parcels) != 1:
             return
-        parcel = ActualParcel(session=self, **record._asdict())
-        return parcel
+        return parcels[0]
 
     def query_parcel_by_capakey(self, capakey):
         """
@@ -289,16 +286,28 @@ class CadastreSession(SQLSession):
         parcel_streets = self.tables.parcelsstreets
         # additional columns to return
         query = query.add_columns(
-#            parcel_streets.prc,
 #            parcel_streets.pe.label('proprietary'),
 #            parcel_streets.adr1.label('proprietary_city'),
 #            parcel_streets.adr2.label('proprietary_street'),
-            parcel_streets.street_situation.label('location'),
+            parcel_streets.street_situation.label('street_name'),
 #            parcel_streets.na1.label('usage')
         )
         # join of parcels and parcel_streets
         query = query.filter(parcels.street_uid == parcel_streets.street_uid)
         return query
+
+    def merge_parcel_results(self, query_result):
+        parcels = {}
+        for record in query_result:
+            if record.capakey not in parcels:
+                parcel = ActualParcel(**record._asdict())
+                parcels[record.capakey] = parcel
+            else:
+                parcel = parcels[record.capakey]
+            parcel.add_location(record.street_name, record.number)
+
+        return parcels.values()
+
 
 
 class Parcel(object):
@@ -356,21 +365,16 @@ class ActualParcel(Parcel):
     def __init__(self, capakey, **infos):
         super(ActualParcel, self).__init__(**infos)
         self.capakey = capakey
-        self.location = self.proprietary = self.proprietary_city = self.proprietary_street = ''
-        self._infos_keys = [
-            'location', 'number',
-            'proprietary', 'proprietary_city', 'proprietary_street',
-            'usage'
-        ]
-        self._init_infos(**infos)
+        self.locations = []
 
     def _init_infos(self, **kwargs):
         for ref in self._infos_keys:
             val = kwargs.get(ref, '') and unicode(kwargs[ref]) or ''
             val = val.encode('utf-8')
-            if val not in['divname', 'division']:
-                val = val.upper()
             setattr(self, ref, val)
+
+    def add_location(self, street_name, number):
+        self.locations.append({'street_name': street_name, 'number': number})
 
 
 def parse_cadastral_reference(capakey):

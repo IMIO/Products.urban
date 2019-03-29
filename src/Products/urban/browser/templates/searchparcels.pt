@@ -160,8 +160,9 @@
                                     <tr>
                                         <td>
                                             <span tal:content="python: parcel.display()"/><br>
-                                            <span tal:condition="python: hasattr(parcel, 'location')" tal:content="python: parcel.location"/>
-                                            <span tal:condition="python: hasattr(parcel, 'number')" tal:content="python: parcel.number"/><br>
+                                            <span tal:condition="python: hasattr(parcel, 'locations')" tal:define="locations python: parcel.locations">
+                                                <div tal:repeat="location locations" tal:content="python: location['street_name'] + ' ' + location['number']"/>
+                                            </span>
                                             <span tal:condition="python: hasattr(parcel, 'proprietary')" tal:content="python: parcel.proprietary"/><br>
                                         </td>
                                         <td>
