@@ -51,6 +51,7 @@ class CadastreService(SQLService):
                 'owners_imp',
                 column_names=[
                     'propertysituationidf',
+                    'owner_officialid',
                     'owner_name', 'owner_firstname',
                     'owner_country', 'owner_zipcode', 'owner_municipality_fr',
                     'owner_street_fr', 'owner_number', 'owner_boxnumber'
@@ -125,12 +126,11 @@ class CadastreSession(SQLSession):
         """
         query = self._base_query_parcels()
         query = query.filter(self.tables.parcels.capakey == capakey)
-        try:
-            record = query.distinct().one()
-        except:
+        records = query.distinct().all()
+        parcels = self.merge_parcel_results(records)
+        if len(parcels) != 1:
             return
-        parcel = ActualParcel(**record._asdict())
-        return parcel
+        return parcel[0]
 
     def query_parcels_wkt(self, parcels):
         """
@@ -174,7 +174,7 @@ class CadastreSession(SQLSession):
         )
 
         records = query.all()
-        parcels_in_radius = [ActualParcel(**record._asdict()) for record in records]
+        parcels_in_radius = self.merge_parcel_results(records)
         return parcels_in_radius
 
     def query_owners_of_parcel(self, capakey):
@@ -266,9 +266,10 @@ class CadastreSession(SQLSession):
         """
         """
         parcels = self.tables.parcels
-        # parcel reference columns to return (section, division, radical, ...)
+        parcel_streets = self.tables.parcelsstreets
         divisions = self.tables.divisions
-        # columns to return
+        owners_imp = self.tables.owners_imp
+        # parcel reference columns to return (section, division, radical, ...)
         query = self.session.query(
             divisions.divname,
             divisions.da.label('division'),
@@ -278,22 +279,23 @@ class CadastreSession(SQLSession):
             parcels.bisnumber.label('bis'),
             parcels.exponentnumber.label('puissance'),
             parcels.capakey,
+            parcels.street_uid,
             parcels.number,
-        )
-        # join of given table (pas or capa) and da
-        query = query.filter(divisions.da == parcels.divcad)
-
-        parcel_streets = self.tables.parcelsstreets
-        # additional columns to return
-        query = query.add_columns(
-#            parcel_streets.pe.label('proprietary'),
-#            parcel_streets.adr1.label('proprietary_city'),
-#            parcel_streets.adr2.label('proprietary_street'),
             parcel_streets.street_situation.label('street_name'),
-#            parcel_streets.na1.label('usage')
+            owners_imp.owner_officialid.label('owner_id'),
+            owners_imp.owner_name,
+            owners_imp.owner_firstname,
+            owners_imp.owner_country,
+            owners_imp.owner_zipcode,
+            owners_imp.owner_municipality_fr.label('owner_city'),
+            owners_imp.owner_street_fr.label('owner_street'),
+            owners_imp.owner_number,
         )
-        # join of parcels and parcel_streets
+        # table joins
+        query = query.filter(divisions.da == parcels.divcad)
         query = query.filter(parcels.street_uid == parcel_streets.street_uid)
+        query = query.filter(parcels.propertysituationid == owners_imp.propertysituationidf)
+
         return query
 
     def merge_parcel_results(self, query_result):
@@ -304,7 +306,21 @@ class CadastreSession(SQLSession):
                 parcels[record.capakey] = parcel
             else:
                 parcel = parcels[record.capakey]
-            parcel.add_location(record.street_name, record.number)
+            parcel.add_location(
+                record.street_uid,
+                record.street_name,
+                record.number and record.number.replace(' ', '') or ''
+            )
+            parcel.add_owner(
+                record.owner_id,
+                record.owner_name or '',
+                record.owner_firstname or '',
+                record.owner_country or '',
+                record.owner_zipcode or '',
+                record.owner_city or '',
+                record.owner_street or '',
+                record.owner_number or '',
+            )
 
         return parcels.values()
 
@@ -365,7 +381,8 @@ class ActualParcel(Parcel):
     def __init__(self, capakey, **infos):
         super(ActualParcel, self).__init__(**infos)
         self.capakey = capakey
-        self.locations = []
+        self.locations = {}
+        self.owners = {}
 
     def _init_infos(self, **kwargs):
         for ref in self._infos_keys:
@@ -373,8 +390,22 @@ class ActualParcel(Parcel):
             val = val.encode('utf-8')
             setattr(self, ref, val)
 
-    def add_location(self, street_name, number):
-        self.locations.append({'street_name': street_name, 'number': number})
+    def add_location(self, street_uid, street_name, number):
+        self.locations['{}/{}'.format(street_uid, number)] = {
+            'street_name': street_name,
+            'number': number
+        }
+
+    def add_owner(self, owner_id, name, firstname, country, zipcode, city, street, number):
+        self.owners[owner_id] = {
+            'name': name,
+            'firstname': firstname,
+            'country': country,
+            'zipcode': zipcode,
+            'city': city,
+            'street': street,
+            'number': number,
+        }
 
 
 def parse_cadastral_reference(capakey):
