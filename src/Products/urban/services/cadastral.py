@@ -96,8 +96,13 @@ class CadastreSession(SQLSession):
 
         # filter on parcel location/proprietary name arguments
         if parcel_owner is not IGNORE:
-            map_ = self.tables.map
-            query = query.filter(map_.pe.ilike('%{}%'.format(parcel_owner)))
+            parcel_owners = self.tables.owners_imp
+            query = query.filter(
+                or_(
+                    parcel_owners.owner_name.ilike('%{}%'.format(parcel_owner)),
+                    parcel_owners.owner_firstname.ilike('%{}%'.format(parcel_owner)),
+                )
+            )
         if location is not IGNORE:
             parcel_streets = self.tables.parcelsstreets
             query = query.filter(parcel_streets.street_situation.ilike('%{}%'.format(location)))
