@@ -1,12 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from Products.urban.interfaces import IEnvironmentBase
-from Products.urban.interfaces import IEnvironmentLicence
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.interfaces import ILicencePortionOut
 from Products.urban import services
-
-from plone import api
 
 from zope.interface import alsoProvides
 
@@ -57,32 +53,3 @@ def setDivisionCode(parcel, event):
     """
     parcel.setDivisionCode(parcel.getDivision())
     parcel.reindexObject()
-
-
-def setEnvironmentLicencePreviousLicencesField(parcel, event):
-    licence = parcel.aq_parent
-
-    if not IEnvironmentLicence.providedBy(licence):
-        return
-
-    catalog = api.portal.get_tool('portal_catalog')
-    parcels = licence.objectValues('PortionOut')
-    capakeys = set()
-    cadastre = services.cadastre.new_session()
-
-    for parcel in parcels:
-        capakeys.add(parcel.get_capakey())
-
-        if not parcel.getIsOfficialParcel() or not parcel.getDivision():
-            continue
-
-    cadastre.close()
-
-    related_brains = catalog(
-        object_provides=IEnvironmentBase.__identifier__,
-        parcelInfosIndex=list(capakeys),
-        sort_on='sortable_title'
-    )
-    relatedlicences_UIDs = [brain.UID for brain in related_brains]
-
-    licence.setPreviousLicences(relatedlicences_UIDs)
