@@ -166,7 +166,6 @@ class CadastreSession(SQLSession):
         """
         Query parcels around 'center_parcels' in a radius of 'radius' m.
         """
-        radius = 50
         capa = self.tables.capa
         parcels = self.tables.parcels
 
