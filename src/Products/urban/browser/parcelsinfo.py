@@ -20,7 +20,7 @@ class ParcelsInfo(BrowserView):
         catalog = api.portal.get_tool('portal_catalog')
         licence_brains = catalog(
             object_provides=IGenericLicence.__identifier__,
-            parcelInfosIndex=parcel.get_capakey()
+            parcelInfosIndex=parcel.to_index()
         )
         return licence_brains
 
