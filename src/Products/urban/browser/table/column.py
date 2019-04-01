@@ -281,14 +281,8 @@ class RecipientCadastreTitleDisplay(TitleDisplay):
         portal_type = recipient.portal_type.lower()
         state = urbanlist_item.getState()
         css_class = 'contenttype-%s state-%s' % (portal_type, state)
-        title = recipient.getName()
+        title = recipient.Title()
         title = '<span class="%s">%s</span>' % (css_class, title)
-
-        secondary_title = recipient.Title()
-        secondary_title = '<span class="discreet">%s</span>' % secondary_title
-
-        title = '%s<br />%s' % (title, secondary_title)
-
         return title
 
 
