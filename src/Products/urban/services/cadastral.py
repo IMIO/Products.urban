@@ -38,13 +38,20 @@ class CadastreService(SQLService):
                     'propertysituationid',
                     'street_uid', 'number',
                     'capakey',
-                    'divcad', 'section', 'primarynumber', 'bisnumber', 'exponentletter', 'exponentnumber', 'partnumber'
+                    'divcad', 'section', 'primarynumber', 'bisnumber', 'exponentletter', 'exponentnumber', 'partnumber',
+                    'nature'
                 ]
             )
             self._init_table(
                 'parcelsstreets',
                 column_names=[
                     'street_uid', 'street_situation',
+                ]
+            )
+            self._init_table(
+                'global_natures',
+                column_names=[
+                    'nature_pk', 'nature_fr',
                 ]
             )
             self._init_table(
@@ -135,7 +142,7 @@ class CadastreSession(SQLSession):
         parcels = self.merge_parcel_results(records)
         if len(parcels) != 1:
             return
-        return parcel[0]
+        return parcels[0]
 
     def query_parcels_wkt(self, parcels):
         """
@@ -159,6 +166,7 @@ class CadastreSession(SQLSession):
         """
         Query parcels around 'center_parcels' in a radius of 'radius' m.
         """
+        radius = 50
         capa = self.tables.capa
         parcels = self.tables.parcels
 
@@ -175,27 +183,12 @@ class CadastreSession(SQLSession):
         query = self._base_query_parcels()
         query = query.filter(capa.capakey == parcels.capakey)
         query = query.filter(
-            func.ST_Intersects(func.ST_Buffer(subquery.c.geo_union, radius), capa.the_geom)
+            func.ST_DWithin(subquery.c.geo_union, capa.the_geom, radius)
         )
 
         records = query.all()
         parcels_in_radius = self.merge_parcel_results(records)
         return parcels_in_radius
-
-    def query_owners_of_parcel(self, capakey):
-        """
-        Return estate owners of a given parcel.
-        """
-
-        pe = self.tables.pe
-        prc = self.tables.prc
-
-        query = self.session.query(pe.pe, pe.adr1, pe.adr2, pe.daa)
-        query = query.filter(pe.daa == prc.daa)
-        query = query.filter(prc.capakey == capakey)
-
-        result = query.all()
-        return result
 
     def normalize_coordinates(self, subquery):
         """
@@ -274,10 +267,9 @@ class CadastreSession(SQLSession):
         parcel_streets = self.tables.parcelsstreets
         divisions = self.tables.divisions
         owners_imp = self.tables.owners_imp
+        natures = self.tables.global_natures
         # parcel reference columns to return (section, division, radical, ...)
         query = self.session.query(
-            divisions.divname,
-            divisions.da.label('division'),
             parcels.section,
             parcels.primarynumber.label('radical'),
             parcels.exponentletter.label('exposant'),
@@ -286,6 +278,8 @@ class CadastreSession(SQLSession):
             parcels.capakey,
             parcels.street_uid,
             parcels.number,
+            divisions.divname,
+            divisions.da.label('division'),
             parcel_streets.street_situation.label('street_name'),
             owners_imp.owner_officialid.label('owner_id'),
             owners_imp.owner_name,
@@ -295,11 +289,13 @@ class CadastreSession(SQLSession):
             owners_imp.owner_municipality_fr.label('owner_city'),
             owners_imp.owner_street_fr.label('owner_street'),
             owners_imp.owner_number,
+            natures.nature_fr,
         )
         # table joins
         query = query.filter(divisions.da == parcels.divcad)
-        query = query.filter(parcels.street_uid == parcel_streets.street_uid)
         query = query.filter(parcels.propertysituationid == owners_imp.propertysituationidf)
+        query = query.filter(parcels.nature == natures.nature_pk)
+        query = query.outerjoin(parcel_streets, parcels.street_uid == parcel_streets.street_uid)
 
         return query
 
@@ -311,6 +307,7 @@ class CadastreSession(SQLSession):
                 parcels[record.capakey] = parcel
             else:
                 parcel = parcels[record.capakey]
+            parcel.add_nature(record.nature_fr)
             parcel.add_location(
                 record.street_uid,
                 record.street_name,
@@ -328,7 +325,6 @@ class CadastreSession(SQLSession):
             )
 
         return parcels.values()
-
 
 
 class Parcel(object):
@@ -388,12 +384,7 @@ class ActualParcel(Parcel):
         self.capakey = capakey
         self.locations = {}
         self.owners = {}
-
-    def _init_infos(self, **kwargs):
-        for ref in self._infos_keys:
-            val = kwargs.get(ref, '') and unicode(kwargs[ref]) or ''
-            val = val.encode('utf-8')
-            setattr(self, ref, val)
+        self.natures = []
 
     def add_location(self, street_uid, street_name, number):
         self.locations['{}/{}'.format(street_uid, number)] = {
@@ -411,6 +402,10 @@ class ActualParcel(Parcel):
             'street': street,
             'number': number,
         }
+
+    def add_nature(self, nature):
+        if nature not in self.natures:
+            self.natures.append(nature)
 
 
 def parse_cadastral_reference(capakey):
