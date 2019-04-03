@@ -4,13 +4,15 @@ from DateTime import DateTime
 
 from plone import api
 
-from z3c.table.column import Column, GetAttrColumn
+from z3c.table.column import Column, GetAttrColumn, LinkColumn
 from z3c.table.interfaces import IColumnHeader
 
+from zope.annotation.interfaces import IAnnotations
 from zope.component import queryMultiAdapter
 from zope.interface import implements
 from zope.i18n import translate
 
+from Products.urban.setuphandlers import _ as _t
 from Products.urban.browser.table.interfaces import ITitleColumn, \
     IActionsColumn, \
     ILocalityColumn, \
@@ -533,3 +535,31 @@ class InternalServiceTaskConfigs(UrbanColumn):
                 )
 
         return cell.decode('utf-8')
+
+
+class GenerationColumn(LinkColumn):
+    header = ""
+    weight = 7
+    iconName = "++resource++Products.urban/mailing.gif"
+
+    def getLinkURL(self, item):
+        """Setup link url."""
+        url = item.getURL()
+        doc_url = url.rsplit('/', 1)[0]
+        # must use new view with title given and reference to mailing template
+        return '%s/@@mailing-loop-persistent-document-generation?document_url_path=%s' % (doc_url, item.absolute_url_path())
+
+    def getLinkContent(self, item):
+        return u"""<img title="%s" src="%s" />""" % (_t(u"Mailing"), '%s/%s' % (self.table.portal_url, self.iconName))
+
+    def has_mailing(self, item):
+        obj = item.getObject()
+        annot = IAnnotations(obj)
+        if 'documentgenerator' in annot and annot['documentgenerator']['need_mailing']:
+            return True
+        return False
+
+    def renderCell(self, item):
+        if not self.has_mailing(item):
+            return ''
+        return super(GenerationColumn, self).renderCell(item)

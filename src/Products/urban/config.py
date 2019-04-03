@@ -244,6 +244,7 @@ GLOBAL_TEMPLATES = {
         {'id':'footer.odt', 'portal_type': 'SubTemplate', 'title':'Pied de page urbanisme'},
         {'id':'reference.odt', 'portal_type': 'SubTemplate', 'title':'\'Référence\' urbanisme'},
         {'id':'signatures.odt', 'portal_type': 'SubTemplate', 'title':'Signatures urbanisme'},
+        {'id':'publipostage.odt', 'portal_type': 'MailingLoopTemplate', 'title':'Publipostage urbanisme'},
     ],
     'environmenttemplates': [
         {'id':'styles.odt', 'portal_type': 'StyleTemplate', 'title':'Styles environnement'},
@@ -251,6 +252,7 @@ GLOBAL_TEMPLATES = {
         {'id':'footer.odt', 'portal_type': 'SubTemplate', 'title':'Pied de page environnement'},
         {'id':'reference.odt', 'portal_type': 'SubTemplate', 'title':'\'Référence\' environnement'},
         {'id':'signatures.odt', 'portal_type': 'SubTemplate', 'title':'Signatures environnement'},
+        {'id':'publipostage.odt', 'portal_type': 'MailingLoopTemplate', 'title':'Publipostage environnement'},
     ],
 }
 

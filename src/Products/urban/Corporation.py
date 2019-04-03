@@ -168,7 +168,7 @@ class Corporation(BaseContent, Applicant, BrowserDefaultMixin):
             #escape HTML special characters like HTML entities
             title = cgi.escape(title)
             legalForm = cgi.escape(legalForm)
-            denomination = cgi.escape(denomination)
+            denomination = cgi.escape(denomination).decode('utf8')
             firstName = cgi.escape(firstName)
             lastName = cgi.escape(lastName)
             personRole = cgi.escape(personRole)
