@@ -22,8 +22,6 @@
   <adapter name="getDepositDate" factory=".indexes.genericlicence_depositdate" />
   <adapter name="archive" factory=".indexes.genericlicence_archive" />
   <adapter name="licence_final_duedate" factory=".indexes.genericlicence_final_duedate" />
-  <adapter name="effective" factory=".indexes.environmentlicence_effectivestart_date" />
-  <adapter name="expires" factory=".indexes.environmentlicence_expiration_date" />
   <adapter name="investigationStart" factory=".indexes.investigation_start_date" />
   <adapter name="investigationEnd" factory=".indexes.investigation_end_date" />
 
