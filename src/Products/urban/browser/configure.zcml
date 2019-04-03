@@ -412,5 +412,14 @@
       permission="zope2.View"
   />
 
+  <adapter
+      for="zope.interface.Interface
+           zope.publisher.interfaces.browser.IBrowserRequest
+           Products.urban.browser.table.interfaces.IDocumentsTable"
+      factory=".table.column.GenerationColumn"
+      provides="z3c.table.interfaces.IColumn"
+      name="urban.generation"
+    />
+
 
 </configure>

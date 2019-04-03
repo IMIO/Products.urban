@@ -136,6 +136,18 @@ def migrate_users_in_environment_groups(context):
     logger.info("migration step done!")
 
 
+def migrate_users_in_urbanmanagers_group(context):
+    """ """
+    logger = logging.getLogger('urban: migrate users in urban managers group')
+    logger.info("starting migration step")
+
+    for user in api.user.get_users(groupname='urban_managers'):
+        api.group.add_user(user=user, groupname='urban_editors')
+        api.group.add_user(user=user, groupname='environment_editors')
+
+    logger.info("migration step done!")
+
+
 def migrate_college_urban_event_types(context):
     """ """
     logger = logging.getLogger('urban: migrate colleg urban event types')
@@ -185,6 +197,7 @@ def migrate(context):
     migrate_sct(context)
     migrate_opinionrequest_event_portaltype(context)
     migrate_users_in_environment_groups(context)
+    migrate_users_in_urbanmanagers_group(context)
     migrate_college_urban_event_types(context)
     migrate_create_voc_mainsignatures(context)
     logger.info("migration done!")

@@ -120,7 +120,7 @@ def postInstall(context):
         return
 
     site = context.getSite()
-    #we need external edition so make sure it is activated
+    # we need external edition so make sure it is activated
     site.portal_properties.site_properties.manage_changeProperties(ext_editor=True)
     site.portal_memberdata.manage_changeProperties(ext_editor=True)
     site.portal_properties.site_properties.manage_changeProperties(
@@ -128,18 +128,17 @@ def postInstall(context):
             'Image', 'File', 'UrbanTemplate', 'SubTemplate', 'StyleTemplate'
         )
     )
-    #for collective.externaleditor
-    from collective.externaleditor.browser.controlpanel import IExternalEditorSchema
-    control_panel_adapter_obj = IExternalEditorSchema(site)
-    control_panel_adapter_obj.ext_editor = True
-    if not 'UrbanTemplate' in control_panel_adapter_obj.externaleditor_enabled_types:
-        control_panel_adapter_obj.externaleditor_enabled_types.append('UrbanTemplate')
-    if not 'SubTemplate' in control_panel_adapter_obj.externaleditor_enabled_types:
-        control_panel_adapter_obj.externaleditor_enabled_types.append('SubTemplate')
-    if not 'StyleTemplate' in control_panel_adapter_obj.externaleditor_enabled_types:
-        control_panel_adapter_obj.externaleditor_enabled_types.append('StyleTemplate')
+    # for collective.externaleditor
+    values = api.portal.get_registry_record('externaleditor.externaleditor_enabled_types')
+    if 'UrbanTemplate' not in values:
+        values.append('UrbanTemplate')
+    if 'SubTemplate' not in values:
+        values.append('SubTemplate')
+    if 'StyleTemplate' not in values:
+        values.append('StyleTemplate')
+    api.portal.set_registry_record('externaleditor.externaleditor_enabled_types', values)
 
-    #add our own portal_types to portal_factory
+    # add our own portal_types to portal_factory
     factory_tool = api.portal.get_tool('portal_factory')
     alreadyRegTypes = factory_tool.getFactoryTypes()
     typesToRegister = {
@@ -709,8 +708,8 @@ def addGlobalFolders(context):
         )
         templates = getattr(folder, templates_id)
         templates.setConstrainTypesMode(1)
-        templates.setLocallyAllowedTypes(['SubTemplate', 'StyleTemplate'])
-        templates.setImmediatelyAddableTypes(['SubTemplate', 'StyleTemplate'])
+        templates.setLocallyAllowedTypes(['SubTemplate', 'StyleTemplate', 'MailingLoopTemplate'])
+        templates.setImmediatelyAddableTypes(['SubTemplate', 'StyleTemplate', 'MailingLoopTemplate'])
 
     if not hasattr(folder, "environmenttemplates"):
         templates_id = folder.invokeFactory(
@@ -720,8 +719,8 @@ def addGlobalFolders(context):
         )
         templates = getattr(folder, templates_id)
         templates.setConstrainTypesMode(1)
-        templates.setLocallyAllowedTypes(['SubTemplate', 'StyleTemplate'])
-        templates.setImmediatelyAddableTypes(['SubTemplate', 'StyleTemplate'])
+        templates.setLocallyAllowedTypes(['SubTemplate', 'StyleTemplate', 'MailingLoopTemplate'])
+        templates.setImmediatelyAddableTypes(['SubTemplate', 'StyleTemplate', 'MailingLoopTemplate'])
 
     if not hasattr(tool, "additional_layers"):
         additional_layers_id = tool.invokeFactory(
