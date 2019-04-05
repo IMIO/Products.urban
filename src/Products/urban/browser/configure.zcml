@@ -421,5 +421,11 @@
       name="urban.generation"
     />
 
+  <browser:page
+      for="*"
+      name="json_export"
+      class=".export_as_json.ExportFolderAsJSON"
+      permission="cmf.ManagePortal"
+      />
 
 </configure>
