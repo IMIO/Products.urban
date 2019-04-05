@@ -62,7 +62,7 @@ class ExportFolderAsJSON(BrowserView):
         Export Archetypes schemad data as dictionary object.
         Binary fields are encoded as BASE64.
         """
-        data = {}
+        data = {'UID': obj.UID()}
         for field in obj.Schema().fields():
             name = field.getName()
             value = field.getRaw(obj)
