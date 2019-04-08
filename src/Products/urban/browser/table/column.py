@@ -76,8 +76,7 @@ class RelatedLicencesColumn(Column):
         else:
             img = '<img  src="linkedfolders.png" class="urban-linkedfolders-icon"/>'
             link = '<a class="link-overlay" href="%s/@@parcelrecordsview?id=%s">%s</a>' % (url, id, img)
-            span = '<span id="urban-parcel-related-licences">%s</span>' % link
-            cell = '%s%s' % (span, cell)
+            cell = '<span id="urban-parcel-related-licences">%s</span>' % link
         return cell
 
 
