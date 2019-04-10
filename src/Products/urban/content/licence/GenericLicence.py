@@ -941,7 +941,7 @@ schema = Schema((
         ),
         allowed_types=('ParcellingTerm',),
         schemata='urban_location',
-        multiValued=True,
+        multiValued=False,
         relationship='licenceParcelling',
     ),
     LinesField(
