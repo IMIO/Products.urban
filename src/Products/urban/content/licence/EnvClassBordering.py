@@ -106,9 +106,9 @@ class EnvClassBordering(EnvClassOne):
             if signaletic:
                 signaletic += ' %s ' % translate('and', 'urban', context=self.REQUEST).encode('utf8')
             if number:
-                signaletic += "%s %s à %s %s" % (streetName, number.encode('utf8'), zipcode, city.Title())
+                signaletic += "%s %s à %s %s" % (streetName, number.encode('utf8'), zipcode, city)
             else:
-                signaletic += "%s - %s %s" % (streetName, zipcode, city.Title())
+                signaletic += "%s - %s %s" % (streetName, zipcode, city)
             if auto_back_to_the_line:
                 signaletic += "\n"
 
