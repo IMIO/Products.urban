@@ -102,7 +102,7 @@ class EnvClassBordering(EnvClassOne):
             streetName = wl['street']
             number = wl['number']
             city = self.getCity()
-            zipcode = self.getZipCode()
+            zipcode = self.getZipcode()
             if signaletic:
                 signaletic += ' %s ' % translate('and', 'urban', context=self.REQUEST).encode('utf8')
             if number:
