@@ -160,7 +160,7 @@ def genericlicence_streetnumber(licence):
 
 @indexer(IGenericLicence)
 def genericlicence_address(licence):
-    return licence.getWorkLocationSignaletic()
+    return licence.getStreetAndNumber()
 
 
 @indexer(IGenericLicence)
