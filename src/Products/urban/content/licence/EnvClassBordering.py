@@ -5,8 +5,6 @@ from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 from Products.urban import interfaces
-from Products.urban.content.licence.EnvironmentLicence import EnvironmentLicence
-from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
 from Products.urban.content.licence.EnvClassOne import EnvClassOne
 
@@ -76,6 +74,8 @@ EnvClassBordering_schema = EnvClassOne.schema.copy() + schema.copy()
 class EnvClassBordering(EnvClassOne):
     """
     """
+    security = ClassSecurityInfo()
+
     implements(interfaces.IEnvClassBordering)
 
     meta_type = 'EnvClassBordering'
