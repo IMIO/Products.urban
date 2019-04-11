@@ -12,6 +12,7 @@ from Products.urban.content.licence.EnvClassOne import EnvClassOne
 
 from Products.urban.config import *
 from Products.urban import UrbanMessage as _
+from zope.i18n import translate
 
 
 ##code-section module-header #fill in your manual code here
@@ -88,6 +89,48 @@ class EnvClassBordering(EnvClassOne):
             ('EnvClassTwo', 'classe 2'),
         )
         return DisplayList(vocab)
+
+    security.declarePublic('getDefaultWorkLocationSignaletic')
+
+    def getDefaultWorkLocationSignaletic(self, auto_back_to_the_line=False):
+        """
+          Returns a string reprensenting the different worklocations
+        """
+        signaletic = ''
+
+        for wl in self.getWorkLocations():
+            streetName = wl['street']
+            number = wl['number']
+            city = self.getCity()
+            zipcode = self.getZipCode()
+            if signaletic:
+                signaletic += ' %s ' % translate('and', 'urban', context=self.REQUEST).encode('utf8')
+            if number:
+                signaletic += "%s %s à %s %s" % (streetName, number.encode('utf8'), zipcode, city.Title())
+            else:
+                signaletic += "%s - %s %s" % (streetName, zipcode, city.Title())
+            if auto_back_to_the_line:
+                signaletic += "\n"
+
+        return signaletic
+
+    security.declarePublic('getDefaultStreetAndNumber')
+
+    def getDefaultStreetAndNumber(self):
+        """
+          Returns a string reprensenting the different streets and numbers
+        """
+        signaletic = ''
+
+        for wl in self.getWorkLocations():
+            street = wl['street']
+            number = wl['number']
+            if number:
+                signaletic = '{} {} {}'.format(signaletic, street, number)
+            else:
+                signaletic = '{} {}'.format(signaletic, street)
+
+        return signaletic
 
 
 registerType(EnvClassBordering, PROJECTNAME)
