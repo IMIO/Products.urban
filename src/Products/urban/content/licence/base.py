@@ -244,6 +244,42 @@ class UrbanBase(object):
 
         return signaletic
 
+    security.declarePublic('getStreetAndNumber')
+
+    def getStreetAndNumber(self):
+        """
+          Returns a string reprensenting the different streets and numbers
+        """
+
+        adress_signaletic_adapter = queryAdapter(self, IWorklocationSignaletic)
+        if adress_signaletic_adapter:
+            return adress_signaletic_adapter.get_street_and_number()
+
+        return self.getDefaultStreetAndNumber()
+
+    security.declarePublic('getDefaultStreetAndNumber')
+
+    def getDefaultStreetAndNumber(self):
+        """
+          Returns a string reprensenting the different streets and numbers
+        """
+        catalog = api.portal.get_tool("uid_catalog")
+        signaletic = ''
+
+        for wl in self.getWorkLocations():
+            street_brains = catalog(UID=wl['street'])
+            if not street_brains:
+                continue
+            street = street_brains[0].getObject()
+            streetName = street.getStreetName()
+            number = wl['number']
+            if number:
+                signaletic = '{} {} {}'.format(signaletic, streetName, number)
+            else:
+                signaletic = '{} {}'.format(signaletic, streetName)
+
+        return signaletic
+
     security.declarePublic('getLicenceTypeAcronym')
     def getLicenceTypeAcronym(self):
         """
