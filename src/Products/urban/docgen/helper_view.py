@@ -372,6 +372,9 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
         return self.format_date(limitDate)
 
     def get_parcels(self):
+        """
+            Return a displayable version of the parcels, grouped by Divisions and Sections
+        """
         result = u""
         context = self.real_context
         parcels = context.getParcels()
@@ -406,7 +409,7 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
                 if section != p[1].getSection():
                     section = p[1].getSection()
                     result += 'section {} '.format(section)
-                if p[1].getBis() and not '0':
+                if p[1].getBis() and not p[1].getBis() == '0':
                     result += u"n° {}/{} {}".format(
                         p[1].getRadical(), p[1].getBis(), p[1].getExposant()
                     )
@@ -414,7 +417,7 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
                     result += u"n° {} {}".format(
                         p[1].getRadical(), p[1].getExposant()
                     )
-                if p[1].getPuissance() and not '0':
+                if p[1].getPuissance() and not p[1].getPuissance() == '0':
                     result += u" {}".format(p[1].getPuissance())
                 if p[0] + 1 != len(gp[1]):
                     result += ', '
