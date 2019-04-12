@@ -385,7 +385,7 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
         for parcel in parcels:
             if parcel.getDivisionAlternativeName() != division:
                 division = parcel.getDivisionAlternativeName()
-                grouped_parcels = []
+                del grouped_parcels[:]
                 grouped_parcels.append(parcel)
                 list_grouped_parcels.append(grouped_parcels)
             else:
@@ -396,16 +396,26 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
                     if elms[i].getSection() > elms[j].getSection():
                         elms[i], elms[j] = elms[j], elms[i]
         for gp in enumerate(list_grouped_parcels):
-            result += gp[1][0].getDivisionAlternativeName() + ' '
+            if not gp[1][0].getDivisionAlternativeName():
+                result += 'None '
+            else:
+                result += gp[1][0].getDivisionAlternativeName() + ' '
             section = gp[1][0].getSection()
             result += 'section {} '.format(section)
             for p in enumerate(gp[1]):
                 if section != p[1].getSection():
                     section = p[1].getSection()
                     result += 'section {} '.format(section)
-                result += u"n° {}{}{}{}".format(
-                    p[1].getRadical(), p[1].getBis(), p[1].getExposant(), p[1].getPuissance()
-                )
+                if p[1].getBis() and not '0':
+                    result += u"n° {}/{} {}".format(
+                        p[1].getRadical(), p[1].getBis(), p[1].getExposant()
+                    )
+                else:
+                    result += u"n° {} {}".format(
+                        p[1].getRadical(), p[1].getExposant()
+                    )
+                if p[1].getPuissance() and not '0':
+                    result += u" {}".format(p[1].getPuissance())
                 if p[0] + 1 != len(gp[1]):
                     result += ', '
             if gp[0] + 1 != len(list_grouped_parcels):
