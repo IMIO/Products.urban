@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-03-21 14:05+0000\n"
+"POT-Creation-Date: 2019-04-16 09:32+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,11 +15,11 @@ msgstr ""
 "Domain: urban\n"
 
 #. Default: "urban"
-#: ../setuphandlers.py:251
+#: ../setuphandlers.py:259
 msgid "%s_folder_title"
 msgstr ""
 
-#: ../setuphandlers.py:353
+#: ../setuphandlers.py:361
 msgid "%s_urbanconfig_title"
 msgstr ""
 
@@ -96,7 +96,7 @@ msgid "Add this parcel"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:912
+#: ../setuphandlers.py:920
 msgid "All"
 msgstr ""
 
@@ -607,7 +607,7 @@ msgid "RoadDecree"
 msgstr ""
 
 #. Default: "imio.schedule"
-#: ../setuphandlers.py:278
+#: ../setuphandlers.py:286
 msgid "ScheduleConfig"
 msgstr ""
 
@@ -723,7 +723,7 @@ msgid "Update"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:789
+#: ../setuphandlers.py:797
 msgid "Urban"
 msgstr ""
 
@@ -856,7 +856,7 @@ msgid "additional_layers_folder_title"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:730
+#: ../setuphandlers.py:738
 msgid "additonal_layers_folder_title"
 msgstr ""
 
@@ -916,7 +916,7 @@ msgid "architect_residing"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:827
+#: ../setuphandlers.py:835
 msgid "architects_folder_title"
 msgstr ""
 
@@ -1102,7 +1102,7 @@ msgid "creation date"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:681
+#: ../setuphandlers.py:689
 msgid "dashboardtemplates_folder_title"
 msgstr ""
 
@@ -1232,7 +1232,7 @@ msgid "envclasstwos"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:719
+#: ../setuphandlers.py:727
 msgid "environmenttemplates_folder_title"
 msgstr ""
 
@@ -1479,17 +1479,17 @@ msgid "formatted_date_with_cityname"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:761
+#: ../setuphandlers.py:769
 msgid "front_page_descr"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:762
+#: ../setuphandlers.py:770
 msgid "front_page_text"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:760
+#: ../setuphandlers.py:768
 msgid "front_page_title"
 msgstr ""
 
@@ -1512,13 +1512,13 @@ msgid "generate_a_linked_doc"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:841
+#: ../setuphandlers.py:849
 msgid "geometricians_folder_title"
 msgstr ""
 
 #. Default: "Global templates"
 #: ../browser/templates/templatessummary.pt:19
-#: ../setuphandlers.py:692
+#: ../setuphandlers.py:700
 msgid "globaltemplates_folder_title"
 msgstr ""
 
@@ -1896,7 +1896,7 @@ msgid "not_permitted_to_add_urbanevent"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:855
+#: ../setuphandlers.py:863
 msgid "notaries_folder_title"
 msgstr ""
 
@@ -1964,7 +1964,7 @@ msgid "parcelLinkedLicences"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:869
+#: ../setuphandlers.py:877
 msgid "parcellings_folder_title"
 msgstr ""
 
@@ -2306,7 +2306,7 @@ msgstr ""
 
 #: ../profiles.zcml:25
 #: ../profiles/default/actions.xml
-#: ../setuphandlers.py:196
+#: ../setuphandlers.py:204
 msgid "urban"
 msgstr ""
 
@@ -2845,7 +2845,7 @@ msgid "urban_label_changesDescription"
 msgstr ""
 
 #. Default: "City"
-#: ../content/licence/EnvClassBordering.py:44
+#: ../content/licence/EnvClassBordering.py:43
 msgid "urban_label_city"
 msgstr ""
 
@@ -3793,7 +3793,7 @@ msgid "urban_label_manageableLicences"
 msgstr ""
 
 #. Default: "Manualparcels"
-#: ../content/licence/EnvClassBordering.py:52
+#: ../content/licence/EnvClassBordering.py:51
 msgid "urban_label_manualParcels"
 msgstr ""
 
@@ -4853,7 +4853,7 @@ msgstr ""
 
 #. Default: "Work locations"
 #: ../browser/licence/templates/worklocation_macro.pt:2
-#: ../content/licence/EnvClassBordering.py:28
+#: ../content/licence/EnvClassBordering.py:27
 #: ../content/licence/GenericLicence.py:148
 msgid "urban_label_workLocations"
 msgstr ""
@@ -4868,7 +4868,7 @@ msgid "urban_label_zipCode"
 msgstr ""
 
 #. Default: "Zipcode"
-#: ../content/licence/EnvClassBordering.py:37
+#: ../content/licence/EnvClassBordering.py:36
 msgid "urban_label_zipcode"
 msgstr ""
 
@@ -5001,12 +5001,12 @@ msgid "urbancertificatetwos"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:373
+#: ../setuphandlers.py:381
 msgid "urbaneventtypes_folder_title"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:708
+#: ../setuphandlers.py:716
 msgid "urbantemplates_folder_title"
 msgstr ""
 

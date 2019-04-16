@@ -399,3 +399,14 @@ class LicenceAuthorityIsCollege(CreationCondition):
         licence = self.task_container
         authority_is_college = licence.getAuthority() == 'college'
         return authority_is_college
+
+
+class IsNotTemporaryLicence(CreationCondition):
+    """
+    Environment licence procedure type is not temporary.
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+        not_temporary = licence.getProcedureChoice() != 'temporary'
+        return not_temporary
