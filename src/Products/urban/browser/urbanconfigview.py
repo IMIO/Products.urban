@@ -206,7 +206,7 @@ class AddInternalServiceForm(form.Form):
                 'title': 'Remise d\'avis {}'.format(service_name),
                 'default_assigned_group': validator_group,
                 'default_assigned_user': 'to_assign',
-                'creation_state': ('waiting_opinion',),
+                'creation_state': ('opinion_validation',),
                 'starting_states': ('opinion_validation',),
                 'ending_states': ('opinion_given', 'waiting_opinion'),
                 'recurrence_states': ('opinion_validation',),
