@@ -408,5 +408,5 @@ class IsNotTemporaryLicence(CreationCondition):
 
     def evaluate(self):
         licence = self.task_container
-        not_temporary = 'temporary' not in licence.getProcedureChoice()
+        not_temporary = licence.getProcedureChoice() != 'temporary'
         return not_temporary
