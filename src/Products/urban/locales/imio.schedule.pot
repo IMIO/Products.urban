@@ -140,6 +140,9 @@ msgstr ""
 msgid "urban.schedule.condition.incomplete_second_time"
 msgstr ""
 
+msgid "urban.schedule.condition.is_not_temporary_licence"
+msgstr ""
+
 msgid "urban.schedule.condition.refused"
 msgstr ""
 

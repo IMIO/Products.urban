@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2019-03-21 14:05+0000\n"
+"POT-Creation-Date: 2019-04-16 09:32+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -16,11 +16,11 @@ msgstr ""
 "X-is-fallback-for: fr-fr fr-be fr-ca\n"
 
 #. Default: "urban"
-#: ../setuphandlers.py:251
+#: ../setuphandlers.py:259
 msgid "%s_folder_title"
 msgstr ""
 
-#: ../setuphandlers.py:353
+#: ../setuphandlers.py:361
 msgid "%s_urbanconfig_title"
 msgstr ""
 
@@ -98,7 +98,7 @@ msgid "Add this parcel"
 msgstr "Ajouter cette parcelle"
 
 #. Default: "urban"
-#: ../setuphandlers.py:912
+#: ../setuphandlers.py:920
 msgid "All"
 msgstr "Tous"
 
@@ -624,7 +624,7 @@ msgid "RoadDecree"
 msgstr "Décret Voirie"
 
 #. Default: "imio.schedule"
-#: ../setuphandlers.py:278
+#: ../setuphandlers.py:286
 msgid "ScheduleConfig"
 msgstr "Configuration d'échéancier"
 
@@ -741,7 +741,7 @@ msgid "Update"
 msgstr "Mettre à jour"
 
 #. Default: "urban"
-#: ../setuphandlers.py:789
+#: ../setuphandlers.py:797
 msgid "Urban"
 msgstr ""
 
@@ -875,7 +875,7 @@ msgid "additional_layers_folder_title"
 msgstr "Configuration des couches supplémentaires"
 
 #. Default: "urban"
-#: ../setuphandlers.py:730
+#: ../setuphandlers.py:738
 msgid "additonal_layers_folder_title"
 msgstr ""
 
@@ -936,7 +936,7 @@ msgid "architect_residing"
 msgstr "${name}, dont les bureaux se situent ${address}"
 
 #. Default: "urban"
-#: ../setuphandlers.py:827
+#: ../setuphandlers.py:835
 msgid "architects_folder_title"
 msgstr "Architectes"
 
@@ -1125,7 +1125,7 @@ msgid "creation date"
 msgstr "Date de création"
 
 #. Default: "urban"
-#: ../setuphandlers.py:681
+#: ../setuphandlers.py:689
 msgid "dashboardtemplates_folder_title"
 msgstr "Modèles tableaux de bord"
 
@@ -1255,7 +1255,7 @@ msgid "envclasstwos"
 msgstr "Permis d'environnement classe 2"
 
 #. Default: "urban"
-#: ../setuphandlers.py:719
+#: ../setuphandlers.py:727
 msgid "environmenttemplates_folder_title"
 msgstr "modèles des procédures d'environnement"
 
@@ -1508,19 +1508,19 @@ msgstr "${cityName}, le ${formattedDate}"
 
 # this is an HTML content for the front-page
 #. Default: "urban"
-#: ../setuphandlers.py:761
+#: ../setuphandlers.py:769
 msgid "front_page_descr"
 msgstr "Bienvenue sur le site vous permettant d'utiliser la gestion des permis d'urbanisme"
 
 # this is an HTML content for the front-page
 #. Default: "urban"
-#: ../setuphandlers.py:762
+#: ../setuphandlers.py:770
 msgid "front_page_text"
 msgstr "<p>L'application intègre la gestion des permis d'urbanisme, d'urbanisation, des déclarations, divisions notariales, CU1, CU2, lettres d'informations notariales, rendez-vous, avant-projets et déclarations environnementales :</p><ul><li>gestion de la demande</li><li>gestion des demandeurs, architectes, agents traitants, ...</li><li>production des documents</li><li>workflow de suivi de la demande</li><li>cartographie avec calcul du rayon de 50m, visualisation des parcelles, ...</li><li>échéancier</li><li>...</li></ul><p><a href='urban'>Cliquez ici pour accéder à l'application</a></p><p class='discreet'>Vous devez disposer d'un nom d'utilisateur et d'un mot de passe pour accéder à l'application</p>"
 
 # title of the front-page
 #. Default: "urban"
-#: ../setuphandlers.py:760
+#: ../setuphandlers.py:768
 msgid "front_page_title"
 msgstr "Gestion de l'Urbanisme"
 
@@ -1544,13 +1544,13 @@ msgid "generate_a_linked_doc"
 msgstr "Générer un document lié au dossier"
 
 #. Default: "urban"
-#: ../setuphandlers.py:841
+#: ../setuphandlers.py:849
 msgid "geometricians_folder_title"
 msgstr "Géomètres"
 
 #. Default: "Global templates"
 #: ../browser/templates/templatessummary.pt:19
-#: ../setuphandlers.py:692
+#: ../setuphandlers.py:700
 msgid "globaltemplates_folder_title"
 msgstr "Modèles généraux"
 
@@ -1928,7 +1928,7 @@ msgid "not_permitted_to_add_urbanevent"
 msgstr "Vous ne pouvez pas générer de documents"
 
 #. Default: "urban"
-#: ../setuphandlers.py:855
+#: ../setuphandlers.py:863
 msgid "notaries_folder_title"
 msgstr "Notaires"
 
@@ -1997,7 +1997,7 @@ msgid "parcelLinkedLicences"
 msgstr "Dossier(s) lié(s)"
 
 #. Default: "urban"
-#: ../setuphandlers.py:869
+#: ../setuphandlers.py:877
 msgid "parcellings_folder_title"
 msgstr "Lotissements"
 
@@ -2340,7 +2340,7 @@ msgstr "Si l'interpréteur Python qui tourne Zope et Plone ne dispose pas de la 
 
 #: ../profiles.zcml:25
 #: ../profiles/default/actions.xml
-#: ../setuphandlers.py:196
+#: ../setuphandlers.py:204
 msgid "urban"
 msgstr "Urbanisme"
 
@@ -2879,7 +2879,7 @@ msgid "urban_label_changesDescription"
 msgstr "Modifications du lotissement"
 
 #. Default: "City"
-#: ../content/licence/EnvClassBordering.py:44
+#: ../content/licence/EnvClassBordering.py:43
 msgid "urban_label_city"
 msgstr "Localité"
 
@@ -3829,7 +3829,7 @@ msgid "urban_label_manageableLicences"
 msgstr "Type de permis gérés"
 
 #. Default: "Manualparcels"
-#: ../content/licence/EnvClassBordering.py:52
+#: ../content/licence/EnvClassBordering.py:51
 msgid "urban_label_manualParcels"
 msgstr "Parcelles"
 
@@ -4890,7 +4890,7 @@ msgstr "Numéro et boîte"
 
 #. Default: "Work locations"
 #: ../browser/licence/templates/worklocation_macro.pt:2
-#: ../content/licence/EnvClassBordering.py:28
+#: ../content/licence/EnvClassBordering.py:27
 #: ../content/licence/GenericLicence.py:148
 msgid "urban_label_workLocations"
 msgstr "Adresse(s) des travaux"
@@ -4905,7 +4905,7 @@ msgid "urban_label_zipCode"
 msgstr "Code Postal"
 
 #. Default: "Zipcode"
-#: ../content/licence/EnvClassBordering.py:37
+#: ../content/licence/EnvClassBordering.py:36
 msgid "urban_label_zipcode"
 msgstr "Code Postal"
 
@@ -5038,12 +5038,12 @@ msgid "urbancertificatetwos"
 msgstr "Certificats d'urbanisme 2"
 
 #. Default: "urban"
-#: ../setuphandlers.py:373
+#: ../setuphandlers.py:381
 msgid "urbaneventtypes_folder_title"
 msgstr "Types d'évènements"
 
 #. Default: "urban"
-#: ../setuphandlers.py:708
+#: ../setuphandlers.py:716
 msgid "urbantemplates_folder_title"
 msgstr "modèles des procédures d'urbanisme"
 

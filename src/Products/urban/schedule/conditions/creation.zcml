@@ -244,4 +244,13 @@
         name="urban.schedule.condition.authority_is_college"
     />
 
+    <!-- Env class 2 temporary licences dont have public inquiries -->
+    <adapter
+        for="Products.urban.interfaces.IEnvironmentLicence
+             imio.schedule.content.task_config.ITaskConfig"
+        provides="imio.schedule.interfaces.ICreationCondition"
+        factory=".creation.IsNotTemporaryLicence"
+        name="urban.schedule.condition.is_not_temporary_licence"
+    />
+
 </configure>
