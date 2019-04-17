@@ -673,18 +673,20 @@ def addGlobalFolders(context):
     vocabularies = default_values['global']
     createVocabularyFolders(container=tool, vocabularies=vocabularies, site=site)
 
-    if not hasattr(tool, "dashboardtemplates"):
+    templates_id = "dashboardtemplates"
+    if not hasattr(tool, templates_id):
         templates_id = tool.invokeFactory(
             "Folder",
             id="dashboardtemplates",
             title=_("dashboardtemplates_folder_title", 'urban')
         )
-        templates = getattr(tool, templates_id)
-        templates.setConstrainTypesMode(1)
-        templates.setLocallyAllowedTypes(['DashboardPODTemplate'])
-        templates.setImmediatelyAddableTypes(['DashboardPODTemplate'])
+    templates = getattr(tool, templates_id)
+    templates.setConstrainTypesMode(1)
+    templates.setLocallyAllowedTypes(['DashboardPODTemplate'])
+    templates.setImmediatelyAddableTypes(['DashboardPODTemplate'])
 
-    if not hasattr(tool, "globaltemplates"):
+    templates_id = "globaltemplates"
+    if not hasattr(tool, templates_id):
         templates_id = tool.invokeFactory(
             "Folder",
             id="globaltemplates",
@@ -694,33 +696,35 @@ def addGlobalFolders(context):
                 domain='urban',
             ),
         )
-        templates = getattr(tool, templates_id)
-        templates.setConstrainTypesMode(1)
-        templates.setLocallyAllowedTypes(['UrbanTemplate', 'StyleTemplate', 'Folder'])
-        templates.setImmediatelyAddableTypes(['UrbanTemplate', 'StyleTemplate', 'Folder'])
+    templates = getattr(tool, templates_id)
+    templates.setConstrainTypesMode(1)
+    templates.setLocallyAllowedTypes(['UrbanTemplate', 'StyleTemplate', 'Folder'])
+    templates.setImmediatelyAddableTypes(['UrbanTemplate', 'StyleTemplate', 'Folder'])
 
     folder = tool.globaltemplates
-    if not hasattr(folder, "urbantemplates"):
+    templates_id = "urbantemplates"
+    if not hasattr(folder, templates_id):
         templates_id = folder.invokeFactory(
             "Folder",
             id="urbantemplates",
             title=_("urbantemplates_folder_title", 'urban')
         )
-        templates = getattr(folder, templates_id)
-        templates.setConstrainTypesMode(1)
-        templates.setLocallyAllowedTypes(['SubTemplate', 'StyleTemplate', 'MailingLoopTemplate'])
-        templates.setImmediatelyAddableTypes(['SubTemplate', 'StyleTemplate', 'MailingLoopTemplate'])
+    templates = getattr(folder, templates_id)
+    templates.setConstrainTypesMode(1)
+    templates.setLocallyAllowedTypes(['SubTemplate', 'StyleTemplate', 'MailingLoopTemplate'])
+    templates.setImmediatelyAddableTypes(['SubTemplate', 'StyleTemplate', 'MailingLoopTemplate'])
 
-    if not hasattr(folder, "environmenttemplates"):
+    templates_id = "environmenttemplates"
+    if not hasattr(folder, templates_id):
         templates_id = folder.invokeFactory(
             "Folder",
             id="environmenttemplates",
             title=_("environmenttemplates_folder_title", 'urban')
         )
-        templates = getattr(folder, templates_id)
-        templates.setConstrainTypesMode(1)
-        templates.setLocallyAllowedTypes(['SubTemplate', 'StyleTemplate', 'MailingLoopTemplate'])
-        templates.setImmediatelyAddableTypes(['SubTemplate', 'StyleTemplate', 'MailingLoopTemplate'])
+    templates = getattr(folder, templates_id)
+    templates.setConstrainTypesMode(1)
+    templates.setLocallyAllowedTypes(['SubTemplate', 'StyleTemplate', 'MailingLoopTemplate'])
+    templates.setImmediatelyAddableTypes(['SubTemplate', 'StyleTemplate', 'MailingLoopTemplate'])
 
     if not hasattr(tool, "additional_layers"):
         additional_layers_id = tool.invokeFactory(
