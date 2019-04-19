@@ -95,7 +95,7 @@ schema = Schema((
             i18n_domain='urban',
         ),
         required=True,
-        validators=('isInt',),
+        # validators=('isInt',),
     ),
     TextField(
         name='changesDescription',

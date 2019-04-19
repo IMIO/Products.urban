@@ -131,7 +131,7 @@ schema = Schema((
         enforceVocabulary=True,
         optional=True,
         vocabulary=UrbanVocabulary('decisions', inUrbanConfig=True),
-        default_method='getDefaultValue',
+        # default_method='getDefaultValue',
     ),
     TextField(
         name='decisionText',
@@ -139,7 +139,7 @@ schema = Schema((
         widget=RichWidget(
             label=_('urban_label_decisionText', default='Decisiontext'),
         ),
-        default_method='getDefaultText',
+        # default_method='getDefaultText',
         default_content_type='text/html',
         default_output_type='text/html',
         optional=True,
