@@ -288,6 +288,7 @@ class CadastreSession(SQLSession):
             owners_imp.owner_municipality_fr.label('owner_city'),
             owners_imp.owner_street_fr.label('owner_street'),
             owners_imp.owner_number,
+            owners_imp.owner_boxnumber,
             natures.nature_fr,
         )
         # table joins
@@ -321,6 +322,7 @@ class CadastreSession(SQLSession):
                 record.owner_city or '',
                 record.owner_street or '',
                 record.owner_number or '',
+                record.owner_boxnumber or '',
             )
 
         return parcels.values()
@@ -391,7 +393,7 @@ class ActualParcel(Parcel):
             'number': number
         }
 
-    def add_owner(self, owner_id, name, firstname, country, zipcode, city, street, number):
+    def add_owner(self, owner_id, name, firstname, country, zipcode, city, street, number, boxnumber):
         self.owners[owner_id] = {
             'name': name,
             'firstname': firstname,
@@ -399,7 +401,7 @@ class ActualParcel(Parcel):
             'zipcode': zipcode,
             'city': city,
             'street': street,
-            'number': number,
+            'number': boxnumber and '{}/{}'.format(number, boxnumber) or number,
         }
 
     def add_nature(self, nature):
