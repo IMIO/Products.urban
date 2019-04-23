@@ -531,8 +531,11 @@ class GenerationColumn(LinkColumn):
         """Setup link url."""
         url = item.getURL()
         doc_url = url.rsplit('/', 1)[0]
+        doc_path = item.absolute_url_path() or ''
+        if doc_path.startswith('/'):
+            doc_path = doc_path[1:]
         # must use new view with title given and reference to mailing template
-        return '%s/@@mailing-loop-persistent-document-generation?document_url_path=%s' % (doc_url, item.absolute_url_path())
+        return '%s/@@mailing-loop-persistent-document-generation?document_url_path=%s' % (doc_url,)
 
     def getLinkContent(self, item):
         return u"""<img title="%s" src="%s" />""" % (_t(u"Mailing"), '%s/%s' % (self.table.portal_url, self.iconName))
