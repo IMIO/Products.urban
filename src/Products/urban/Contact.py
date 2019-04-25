@@ -295,7 +295,7 @@ class Contact(BaseContent, BrowserDefaultMixin):
                 return result.encode('utf8')
             else:
                 #remove the <p></p> from adressSignaletic
-                addressSignaletic = addressSignaletic[3:-4]
+                addressSignaletic = addressSignaletic[3:-4].decode('utf8')
                 address = '<p>%s<br />%s</p>' % (nameSignaletic, addressSignaletic)
                 return address
 
