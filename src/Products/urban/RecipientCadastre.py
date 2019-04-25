@@ -23,6 +23,7 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 ##/code-section module-header
 
 schema = Schema((
@@ -32,6 +33,15 @@ schema = Schema((
         widget=StringField._properties['widget'](
             label='Name',
             label_msgid='urban_label_name',
+            i18n_domain='urban',
+        ),
+        required=True,
+    ),
+    StringField(
+        name='firstname',
+        widget=StringField._properties['widget'](
+            label='Firstname',
+            label_msgid='urban_label_firstname',
             i18n_domain='urban',
         ),
         required=True,
@@ -60,9 +70,41 @@ schema = Schema((
             label_msgid='urban_label_street',
             i18n_domain='urban',
         ),
-        required=True,
     ),
-
+    StringField(
+        name='number',
+        widget=StringField._properties['widget'](
+            label='Number',
+            label_msgid='urban_label_number',
+            i18n_domain='urban',
+        ),
+    ),
+    StringField(
+        name='zipcode',
+        widget=StringField._properties['widget'](
+            label='Zipcode',
+            label_msgid='urban_label_zipcode',
+            i18n_domain='urban',
+        ),
+    ),
+    StringField(
+        name='city',
+        widget=StringField._properties['widget'](
+            label='City',
+            label_msgid='urban_label_city',
+            i18n_domain='urban',
+        ),
+    ),
+    StringField(
+        name='country',
+        default="belgium",
+        widget=SelectionWidget(
+            label='Country',
+            label_msgid='urban_label_country',
+            i18n_domain='urban',
+        ),
+        vocabulary=UrbanVocabulary('country', vocType='UrbanVocabularyTerm', inUrbanConfig=False),
+    ),
 ),
 )
 

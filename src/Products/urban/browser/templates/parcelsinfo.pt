@@ -11,16 +11,22 @@
         <table border=0>
             <tr>
                 <td><b><u i18n:translate="urban_label_owner">owner:</u></b> </td>
+            </tr>
+            <tr tal:repeat="owner python: parcel.owners.values()">
                 <td>
-                    <span tal:content="python:parcel.proprietary"/><br>
-                    <span tal:content="python:parcel.proprietary_city"/><br>
-                    <span tal:content="python:parcel.proprietary_street"/><br>
+                    <span tal:content="python:owner['name']"/>
+                    <span tal:content="python:owner['firstname']"/>
+                    <span tal:content="python:owner['city']"/>
+                    <span tal:content="python:owner['number']"/>
+                    <span tal:content="python:owner['street']"/><br>
                 </td>
             </tr>
             <tr>
                 <td><b><u i18n:translate="urban_label_type">type:</u></b> </td>
+            </tr>
+            <tr tal:repeat="nature python: parcel.natures">
                 <td>
-                    <span tal:content="python:parcel.usage"/><br>
+                    <span tal:content="nature"/><br>
                 </td>
             </tr>
         </table>

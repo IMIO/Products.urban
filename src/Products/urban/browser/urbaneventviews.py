@@ -405,9 +405,6 @@ class UrbanEventInquiryView(UrbanEventInquiryBaseView):
         if recipients:
             context.manage_delObjects([recipient.getId() for recipient in recipients if recipient.Title()])
 
-        portal_url = api.portal.get_tool('portal_url')
-        event_path = portal_url.getPortalPath() + '/' + '/'.join(portal_url.getRelativeContentPath(context))
-
         licence = context.aq_inner.aq_parent
         cadastre = services.cadastre.new_session()
         neighbour_parcels = cadastre.query_parcels_in_radius(
@@ -429,47 +426,38 @@ class UrbanEventInquiryView(UrbanEventInquiryBaseView):
             )
 
         for parcel in neighbour_parcels:
-            owners = cadastre.query_owners_of_parcel(parcel.capakey)
-            for owner in owners:
-                pe = owner.pe and str(owner.pe.encode('utf-8')) or ''
-                adr1 = owner.adr1 and str(owner.adr1.encode('utf-8')) or ''
-                adr2 = owner.adr2 and str(owner.adr2.encode('utf-8')) or ''
-                print pe, adr1, adr2
+            for owner_id, owner in parcel.owners.iteritems():
+                name = str(owner['name'].encode('utf-8'))
+                firstname = str(owner['firstname'].encode('utf-8'))
+                country = str(owner['country'].encode('utf-8'))
+                zipcode = str(owner['zipcode'].encode('utf-8'))
+                city = str(owner['city'].encode('utf-8'))
+                street = str(owner['street'].encode('utf-8'))
+                number = str(owner['number'].encode('utf-8'))
+                print name, firstname
                 # to avoid having several times the same Recipient (that could for example be on several parcels
                 # we first look in portal_catalog where Recipients are catalogued
-                brains = context.portal_catalog(
-                    portal_type="RecipientCadastre",
-                    path={'query': event_path, },
-                    Title=pe.replace('(', ' ').replace(')', ' ')
-                )
-                if len(brains) > 0:
-                    newrecipient = brains[0].getObject()
-                else:
-                    address = adr1 and adr2 and '{} {}'.format(adr1, adr2)
-                    brains = context.portal_catalog(
-                        portal_type="RecipientCadastre", path={'query': event_path},
-                        getRecipientAddress=address
+                owner_obj = context.get(owner_id)
+                if not owner_obj:
+                    new_owner_id = context.invokeFactory(
+                        "RecipientCadastre",
+                        id=owner_id,
+                        name=name,
+                        firstname=firstname,
+                        # keep adr1 and adr2 fields for historical reasons.
+                        adr1='{} {}'.format(zipcode, city),
+                        adr2='{} {}'.format(street, number),
+                        number=number,
+                        street=street,
+                        zipcode=zipcode,
+                        city=city,
+                        country=country.lower(),
                     )
-                    if len(brains) > 0:
-                        newrecipient = brains[0].getObject()
-                        newrecipient.setTitle(newrecipient.Title() + ' & ' + pe)
-                        newrecipient.setName(newrecipient.getName() + ' - ' + context.parseCadastreName(pe))
-                        newrecipient.reindexObject()
-                    else:
-                        newrecipientname = context.invokeFactory(
-                            "RecipientCadastre",
-                            id=context.generateUniqueId('RecipientCadastre'),
-                            title=owner.pe,
-                            name=context.parseCadastreName(pe),
-                            adr1=owner.adr1,
-                            adr2=owner.adr2,
-                            street=context.parseCadastreStreet(adr2),
-                            daa=owner.daa
-                        )
-                        newrecipient = getattr(context, newrecipientname)
+                    owner_obj = getattr(context, new_owner_id)
+                    owner_obj.setTitle('{} {}'.format(name, firstname))
                 # create the PortionOut using the createPortionOut method...
                 with api.env.adopt_roles(['Manager']):
-                    context.portal_urban.createPortionOut(container=newrecipient, **parcel.reference_as_dict())
+                    context.portal_urban.createPortionOut(container=owner_obj, **parcel.reference_as_dict())
         cadastre.close()
         return context.REQUEST.RESPONSE.redirect(context.absolute_url() + '/#fieldsetlegend-urbaneventinquiry_recipients')
 
