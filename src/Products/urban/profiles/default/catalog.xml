@@ -47,11 +47,6 @@
   </index>
   <column value="StreetsUID"/>
 
-  <index name="getRecipientAddress"
-         meta_type="FieldIndex">
-    <indexed_attr value="getRecipientAddress"/>
-  </index>
-
   <column value="parcelInfosIndex"/>
   <index name="parcelInfosIndex" meta_type="KeywordIndex">
     <indexed_attr value="parcelInfosIndex"/>

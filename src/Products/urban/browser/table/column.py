@@ -71,21 +71,12 @@ class RelatedLicencesColumn(Column):
         url = parcel.aq_parent.absolute_url()
         id = parcel.getId()
 
-        # if the parcel is not in the cadastral DB we cannot browse its historic
-        if parcel.getIsOfficialParcel():
-            img = '<img  src="linkedhistoricfolders.png" class="urban-linkedfolders-icon"/>'
-            link = '<a class="link-overlay" href="%s/@@parcelhistoricrecordsview?id=%s">%s</a>' % (url, id, img)
-            cell = '&nbsp;<span id="urban-parcel-historic-related-licences">%s</span>' % link
-        else:
-            cell = '&nbsp;<span>-</span>'
-
         if not parcel.hasRelatedLicences():
-            cell = '<span>-</span>%s' % cell
+            cell = '<span>-</span>'
         else:
             img = '<img  src="linkedfolders.png" class="urban-linkedfolders-icon"/>'
             link = '<a class="link-overlay" href="%s/@@parcelrecordsview?id=%s">%s</a>' % (url, id, img)
-            span = '<span id="urban-parcel-related-licences">%s</span>' % link
-            cell = '%s%s' % (span, cell)
+            cell = '<span id="urban-parcel-related-licences">%s</span>' % link
         return cell
 
 
@@ -289,14 +280,8 @@ class RecipientCadastreTitleDisplay(TitleDisplay):
         portal_type = recipient.portal_type.lower()
         state = urbanlist_item.getState()
         css_class = 'contenttype-%s state-%s' % (portal_type, state)
-        title = recipient.getName()
+        title = recipient.Title()
         title = '<span class="%s">%s</span>' % (css_class, title)
-
-        secondary_title = recipient.Title()
-        secondary_title = '<span class="discreet">%s</span>' % secondary_title
-
-        title = '%s<br />%s' % (title, secondary_title)
-
         return title
 
 
@@ -546,8 +531,11 @@ class GenerationColumn(LinkColumn):
         """Setup link url."""
         url = item.getURL()
         doc_url = url.rsplit('/', 1)[0]
+        doc_path = item.absolute_url_path() or ''
+        if doc_path.startswith('/'):
+            doc_path = doc_path[1:]
         # must use new view with title given and reference to mailing template
-        return '%s/@@mailing-loop-persistent-document-generation?document_url_path=%s' % (doc_url, item.absolute_url_path())
+        return '%s/@@mailing-loop-persistent-document-generation?document_url_path=%s' % (doc_url, doc_path)
 
     def getLinkContent(self, item):
         return u"""<img title="%s" src="%s" />""" % (_t(u"Mailing"), '%s/%s' % (self.table.portal_url, self.iconName))

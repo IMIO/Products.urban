@@ -88,9 +88,8 @@ class SearchParcelsView(BrowserView):
 
     def extract_search_criterions(self, request):
         arguments = self.extract_parcel_reference_criterions(request)
-        if not request.get('browse_old_parcels', False):
-            arguments['location'] = request.get('location', '') or IGNORE
-            arguments['parcel_owner'] = request.get('parcel_owner', '') or IGNORE
+        arguments['location'] = request.get('location', '') or IGNORE
+        arguments['parcel_owner'] = request.get('parcel_owner', '') or IGNORE
 
         return arguments
 
@@ -102,13 +101,6 @@ class SearchParcelsView(BrowserView):
             if ref_value:
                 arguments[ref] = ref_value
 
-        return arguments
-
-    def extract_search_options(self, request):
-        arguments = {
-            'parcel_history': request.get('parcel_history', False),
-            'browse_old_parcels': request.get('browse_old_parcels', False),
-        }
         return arguments
 
     def has_enough_criterions(self, request):
@@ -132,71 +124,15 @@ class SearchParcelsView(BrowserView):
         Return parcels macthing search criterions.
         """
         search_args = self.extract_search_criterions(self.request)
-        options = self.extract_search_options(self.request)
 
         if not self.has_enough_criterions(self.request):
-            return []
-        if options.get('parcel_history'):
             return []
 
         cadastre = services.cadastre.new_session()
         query_result = cadastre.query_parcels(**search_args)
         cadastre.close()
 
-        if options.get('browse_old_parcels'):
-            old_parcels = self.search_old_parcels(parcels_to_ignore=query_result)
-            query_result.extend(old_parcels)
-
         return query_result
-
-    def search_old_parcels(self, parcels_to_ignore=[]):
-        """
-        Return old parcels macthing search criterions 'search_args'.
-        """
-        to_ignore = set([str(prc) for prc in parcels_to_ignore])
-        search_args = self.extract_search_criterions(self.request)
-
-        cadastre = services.cadastre.new_session()
-        query_result = cadastre.query_old_parcels(**search_args)
-        cadastre.close()
-
-        search_result = []
-        for parcel in query_result:
-            if str(parcel) not in to_ignore:
-                setattr(parcel, 'old', True)
-                search_result.append(parcel)
-
-        return search_result
-
-    def search_parcels_custom(self, old=False, **search_args):
-        """
-        Return parcels matching method parameters.
-        """
-        cadastre = services.cadastre.new_session()
-        search_result = []
-        search_args = dict((k, v) for k, v in search_args.iteritems() if v)
-        try:
-            if old:
-                query_result_old = cadastre.query_old_parcels(**search_args)
-                for parcel in query_result_old:
-                    setattr(parcel, 'old', True)
-                    search_result.append(parcel)
-            else:
-                search_result = cadastre.query_parcels(**search_args)
-        finally:
-            cadastre.close()
-
-        return search_result
-
-    def search_historic_of_parcel(self):
-        """
-        Return the concerned parcels
-        """
-        search_args = self.extract_parcel_reference_criterions(self.request)
-        cadastre = services.cadastre.new_session()
-        historic = cadastre.query_parcel_historic(**search_args)
-        cadastre.close()
-        return historic
 
     def createParcelAndProprietary(self, parcel_data, proprietary_data):
         parcel_address = parcel_data.pop('location')

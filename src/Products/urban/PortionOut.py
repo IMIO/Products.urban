@@ -278,17 +278,6 @@ class PortionOut(BaseContent, BrowserDefaultMixin):
             return 'manual_parcel'
         return ''
 
-    security.declarePublic('get_historic')
-    def get_historic(self):
-        """
-         Return the "parcel historic" object of this parcel
-        """
-        reference = self.reference_as_dict()
-        cadastre = services.cadastre.new_session()
-        historic = cadastre.query_parcel_historic(**reference)
-        cadastre.close()
-        return historic
-
     def get_capakey(self):
         capakey = "%s%s%04d/%02d%s%03d" % (
             self.getDivisionCode(),
