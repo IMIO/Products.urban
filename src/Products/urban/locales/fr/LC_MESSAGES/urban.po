@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2019-04-30 13:54+0000\n"
+"POT-Creation-Date: 2019-04-30 14:21+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -2160,7 +2160,7 @@ msgstr "Supression"
 
 #. Default: "road_decree_reference"
 #: ../content/licence/CODT_Article127.py:36
-#: ../content/licence/CODT_BuildLicence.py:69
+#: ../content/licence/CODT_BuildLicence.py:74
 #: ../content/licence/CODT_IntegratedLicence.py:50
 msgid "road_decree_reference"
 msgstr "Référence à la procédure de décret voirie"
@@ -2561,7 +2561,7 @@ msgid "urban_label_SDC"
 msgstr "Schéma de développement communal"
 
 #. Default: "SDC_divergence"
-#: ../content/licence/CODT_BuildLicence.py:62
+#: ../content/licence/CODT_BuildLicence.py:67
 msgid "urban_label_SDC_divergence"
 msgstr "dossier en écart au Schéma de développement communal"
 
@@ -2725,7 +2725,7 @@ msgid "urban_label_approvalDate"
 msgstr "Date d'approbation"
 
 #. Default: "Archeological_site"
-#: ../content/licence/CODT_BuildLicence.py:90
+#: ../content/licence/CODT_BuildLicence.py:95
 msgid "urban_label_archeological_site"
 msgstr "Site archéologique"
 
@@ -3712,7 +3712,7 @@ msgid "urban_label_licenceeventtypes"
 msgstr "Type d'événement"
 
 #. Default: "Limitedimpact"
-#: ../content/licence/CODT_BuildLicence.py:54
+#: ../content/licence/CODT_BuildLicence.py:59
 msgid "urban_label_limitedImpact"
 msgstr "Dossier d'impact limité"
 
@@ -4025,7 +4025,7 @@ msgid "urban_label_pashDetails"
 msgstr "Détails concernant le PASH"
 
 #. Default: "Patrimony"
-#: ../content/licence/CODT_BuildLicence.py:81
+#: ../content/licence/CODT_BuildLicence.py:86
 msgid "urban_label_patrimony"
 msgstr "Patrimoine"
 
@@ -4184,7 +4184,7 @@ msgid "urban_label_protectedBuildingDetails"
 msgstr "Détails concernant le bien (classé ou assimilé)"
 
 #. Default: "Protection_zone"
-#: ../content/licence/CODT_BuildLicence.py:98
+#: ../content/licence/CODT_BuildLicence.py:103
 msgid "urban_label_protection_zone"
 msgstr "Zone de protection"
 
@@ -4306,6 +4306,11 @@ msgstr "Guide régional d'urbanisme"
 #: ../content/licence/CODT_BaseBuildLicence.py:160
 msgid "urban_label_regional_guide_details"
 msgstr "Détails concernant le guide régional d'urbanisme"
+
+#. Default: "Regional_inventory_building"
+#: ../content/licence/CODT_BuildLicence.py:111
+msgid "urban_label_regional_inventory_building"
+msgstr "Bien pastillé à l’inventaire régional du patrimoine"
 
 #. Default: "Registrationnumber"
 #: Contact.py
