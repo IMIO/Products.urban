@@ -262,6 +262,7 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
             'urban_habitation': '(log) ',
             'urban_environment': '(environnement) ',
             'urban_peb': '(peb) ',
+            'urban_patrimony': '(patrimony) ',
         }
         if not getLicenceSchema(self.getLicencePortalType()):
             return DisplayList()
@@ -354,10 +355,12 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
             'road': 'Voirie',
             'habitation': 'Logement',
             'peb': 'PEB',
+            'patrimony': 'Patrimoine',
         }
         minimum_tabs_config = ['description', 'analysis', 'location', 'road']
         inquiry_tabs_config = ['description', 'advices', 'inquiry', 'analysis', 'location', 'road']
-        buildlicence_tabs_config = ['description', 'advices', 'inquiry', 'analysis', 'location', 'road', 'habitation', 'peb']
+        buildlicence_tabs_config = ['description', 'advices', 'inquiry', 'analysis', 'location', 'road', 'habitation',
+                'peb', 'patrimony']
         uniquelicence_tabs_config = ['description', 'advices', 'inquiry', 'analysis', 'environment', 'location', 'road', 'habitation', 'peb']
         env_advice_tabs_config = ['description', 'advices', 'analysis', 'environment', 'location', 'road']
         env_inquiry_tabs_config = ['description', 'advices', 'inquiry', 'analysis', 'environment', 'location', 'road']
