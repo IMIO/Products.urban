@@ -49,3 +49,6 @@
     <metal:parent_call use-macro="here/@@licencetabs-macros/advices_macro" />
 </metal:advices>
 
+<metal:patrimony define-macro="patrimony_macro" i18n:domain="urban">
+    <metal:parent_call use-macro="here/@@licencetabs-macros/patrimony_macro" />
+</metal:patrimony>
