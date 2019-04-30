@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-04-30 13:08+0000\n"
+"POT-Creation-Date: 2019-04-30 13:54+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2127,7 +2127,7 @@ msgstr ""
 
 #. Default: "road_decree_reference"
 #: ../content/licence/CODT_Article127.py:36
-#: ../content/licence/CODT_BuildLicence.py:64
+#: ../content/licence/CODT_BuildLicence.py:69
 #: ../content/licence/CODT_IntegratedLicence.py:50
 msgid "road_decree_reference"
 msgstr ""
@@ -2526,7 +2526,7 @@ msgid "urban_label_SDC"
 msgstr ""
 
 #. Default: "SDC_divergence"
-#: ../content/licence/CODT_BuildLicence.py:57
+#: ../content/licence/CODT_BuildLicence.py:62
 msgid "urban_label_SDC_divergence"
 msgstr ""
 
@@ -2691,7 +2691,7 @@ msgid "urban_label_approvalDate"
 msgstr ""
 
 #. Default: "Archeological_site"
-#: ../content/licence/CODT_BuildLicence.py:85
+#: ../content/licence/CODT_BuildLicence.py:90
 msgid "urban_label_archeological_site"
 msgstr ""
 
@@ -3676,7 +3676,7 @@ msgid "urban_label_licenceeventtypes"
 msgstr ""
 
 #. Default: "Limitedimpact"
-#: ../content/licence/CODT_BuildLicence.py:49
+#: ../content/licence/CODT_BuildLicence.py:54
 msgid "urban_label_limitedImpact"
 msgstr ""
 
@@ -3989,7 +3989,7 @@ msgid "urban_label_pashDetails"
 msgstr ""
 
 #. Default: "Patrimony"
-#: ../content/licence/CODT_BuildLicence.py:76
+#: ../content/licence/CODT_BuildLicence.py:81
 msgid "urban_label_patrimony"
 msgstr ""
 
@@ -4145,6 +4145,11 @@ msgstr ""
 #. Default: "Protectedbuildingdetails"
 #: ../content/licence/GenericLicence.py:715
 msgid "urban_label_protectedBuildingDetails"
+msgstr ""
+
+#. Default: "Protection_zone"
+#: ../content/licence/CODT_BuildLicence.py:98
+msgid "urban_label_protection_zone"
 msgstr ""
 
 #. Default: "Publicroadmodifications"

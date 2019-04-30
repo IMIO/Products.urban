@@ -36,6 +36,11 @@ full_patrimony_slave_fields = (
             'action': 'hide',
             'hide_values': ('none',),
         },
+        {
+            'name': 'protection_zone',
+            'action': 'hide',
+            'hide_values': ('none',),
+        },
 
 )
 ##/code-section module-header
@@ -83,6 +88,14 @@ schema = Schema((
         default=False,
         widget=BooleanField._properties['widget'](
             label=_('urban_label_archeological_site', default='Archeological_site'),
+        ),
+        schemata='urban_patrimony',
+    ),
+    BooleanField(
+        name='protection_zone',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label=_('urban_label_protection_zone', default='Protection_zone'),
         ),
         schemata='urban_patrimony',
     ),
