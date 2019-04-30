@@ -41,6 +41,11 @@ full_patrimony_slave_fields = (
             'action': 'hide',
             'hide_values': ('none',),
         },
+        {
+            'name': 'regional_inventory_building',
+            'action': 'hide',
+            'hide_values': ('none',),
+        },
 
 )
 ##/code-section module-header
@@ -96,6 +101,14 @@ schema = Schema((
         default=False,
         widget=BooleanField._properties['widget'](
             label=_('urban_label_protection_zone', default='Protection_zone'),
+        ),
+        schemata='urban_patrimony',
+    ),
+    BooleanField(
+        name='regional_inventory_building',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label=_('urban_label_regional_inventory_building', default='Regional_inventory_building'),
         ),
         schemata='urban_patrimony',
     ),
