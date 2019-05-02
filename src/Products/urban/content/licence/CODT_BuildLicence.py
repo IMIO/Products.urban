@@ -51,6 +51,11 @@ full_patrimony_slave_fields = (
             'action': 'hide',
             'hide_values': ('none',),
         },
+        {
+            'name': 'communal_inventory',
+            'action': 'hide',
+            'hide_values': ('none',),
+        },
 
 )
 ##/code-section module-header
@@ -122,6 +127,14 @@ schema = Schema((
         default=False,
         widget=BooleanField._properties['widget'](
             label=_('urban_label_small_popular_patrimony', default='Small_popular_patrimony'),
+        ),
+        schemata='urban_patrimony',
+    ),
+    BooleanField(
+        name='communal_inventory',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label=_('urban_label_communal_inventory', default='Communal_inventory'),
         ),
         schemata='urban_patrimony',
     ),
