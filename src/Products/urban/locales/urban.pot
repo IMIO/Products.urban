@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-04-30 14:21+0000\n"
+"POT-Creation-Date: 2019-05-02 07:44+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -4489,6 +4489,11 @@ msgstr ""
 #: ../browser/licence/templates/worklocation_macro.pt:13
 #: ../content/licence/EnvironmentBase.py:313
 msgid "urban_label_situation"
+msgstr ""
+
+#. Default: "Small_popular_patrimony"
+#: ../content/licence/CODT_BuildLicence.py:119
+msgid "urban_label_small_popular_patrimony"
 msgstr ""
 
 #. Default: "Society"
