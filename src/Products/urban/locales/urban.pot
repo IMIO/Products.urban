@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-05-02 07:44+0000\n"
+"POT-Creation-Date: 2019-05-02 08:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2127,7 +2127,7 @@ msgstr ""
 
 #. Default: "road_decree_reference"
 #: ../content/licence/CODT_Article127.py:36
-#: ../content/licence/CODT_BuildLicence.py:74
+#: ../content/licence/CODT_BuildLicence.py:84
 #: ../content/licence/CODT_IntegratedLicence.py:50
 msgid "road_decree_reference"
 msgstr ""
@@ -2526,7 +2526,7 @@ msgid "urban_label_SDC"
 msgstr ""
 
 #. Default: "SDC_divergence"
-#: ../content/licence/CODT_BuildLicence.py:67
+#: ../content/licence/CODT_BuildLicence.py:77
 msgid "urban_label_SDC_divergence"
 msgstr ""
 
@@ -2691,7 +2691,7 @@ msgid "urban_label_approvalDate"
 msgstr ""
 
 #. Default: "Archeological_site"
-#: ../content/licence/CODT_BuildLicence.py:95
+#: ../content/licence/CODT_BuildLicence.py:105
 msgid "urban_label_archeological_site"
 msgstr ""
 
@@ -2914,6 +2914,11 @@ msgstr ""
 
 #: ../content/licence/ExplosivesPossession.py:52
 msgid "urban_label_comments_on_decision_project"
+msgstr ""
+
+#. Default: "Communal_inventory"
+#: ../content/licence/CODT_BuildLicence.py:137
+msgid "urban_label_communal_inventory"
 msgstr ""
 
 #. Default: "urban_commune"
@@ -3676,7 +3681,7 @@ msgid "urban_label_licenceeventtypes"
 msgstr ""
 
 #. Default: "Limitedimpact"
-#: ../content/licence/CODT_BuildLicence.py:59
+#: ../content/licence/CODT_BuildLicence.py:69
 msgid "urban_label_limitedImpact"
 msgstr ""
 
@@ -3989,7 +3994,7 @@ msgid "urban_label_pashDetails"
 msgstr ""
 
 #. Default: "Patrimony"
-#: ../content/licence/CODT_BuildLicence.py:86
+#: ../content/licence/CODT_BuildLicence.py:96
 msgid "urban_label_patrimony"
 msgstr ""
 
@@ -4148,7 +4153,7 @@ msgid "urban_label_protectedBuildingDetails"
 msgstr ""
 
 #. Default: "Protection_zone"
-#: ../content/licence/CODT_BuildLicence.py:103
+#: ../content/licence/CODT_BuildLicence.py:113
 msgid "urban_label_protection_zone"
 msgstr ""
 
@@ -4272,7 +4277,7 @@ msgid "urban_label_regional_guide_details"
 msgstr ""
 
 #. Default: "Regional_inventory_building"
-#: ../content/licence/CODT_BuildLicence.py:111
+#: ../content/licence/CODT_BuildLicence.py:121
 msgid "urban_label_regional_inventory_building"
 msgstr ""
 
@@ -4492,7 +4497,7 @@ msgid "urban_label_situation"
 msgstr ""
 
 #. Default: "Small_popular_patrimony"
-#: ../content/licence/CODT_BuildLicence.py:119
+#: ../content/licence/CODT_BuildLicence.py:129
 msgid "urban_label_small_popular_patrimony"
 msgstr ""
 
