@@ -46,6 +46,11 @@ full_patrimony_slave_fields = (
             'action': 'hide',
             'hide_values': ('none',),
         },
+        {
+            'name': 'small_popular_patrimony',
+            'action': 'hide',
+            'hide_values': ('none',),
+        },
 
 )
 ##/code-section module-header
@@ -109,6 +114,14 @@ schema = Schema((
         default=False,
         widget=BooleanField._properties['widget'](
             label=_('urban_label_regional_inventory_building', default='Regional_inventory_building'),
+        ),
+        schemata='urban_patrimony',
+    ),
+    BooleanField(
+        name='small_popular_patrimony',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label=_('urban_label_small_popular_patrimony', default='Small_popular_patrimony'),
         ),
         schemata='urban_patrimony',
     ),
