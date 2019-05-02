@@ -253,12 +253,14 @@ class Contact(BaseContent, BrowserDefaultMixin):
         else:
             #escape HTML special characters like HTML entities
             addressSignaletic = self.getAddress(linebyline=linebyline, remove_comma=remove_comma, inverted_address=inverted_address)
+            addressSignaletic = addressSignaletic.decode('utf8')
+            nameSignaletic = nameSignaletic.decode('utf8')
             if not linebyline:
-                mapping = dict(name=nameSignaletic.decode('utf8'),
-                               address=addressSignaletic.decode('utf8'))
+                mapping = dict(name=nameSignaletic,
+                               address=addressSignaletic)
                 result = u"{} {}".format(
-                    nameSignaletic.decode('utf8'),
-                    addressSignaletic.decode('utf8')
+                    nameSignaletic,
+                    addressSignaletic
                 )
                 if self.portal_type == 'Architect':
                     result = translate(
@@ -295,7 +297,7 @@ class Contact(BaseContent, BrowserDefaultMixin):
                 return result.encode('utf8')
             else:
                 #remove the <p></p> from adressSignaletic
-                addressSignaletic = addressSignaletic[3:-4].decode('utf8')
+                addressSignaletic = addressSignaletic[3:-4]
                 address = '<p>%s<br />%s</p>' % (nameSignaletic, addressSignaletic)
                 return address
 
