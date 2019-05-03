@@ -262,7 +262,7 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
             'urban_habitation': '(log) ',
             'urban_environment': '(environnement) ',
             'urban_peb': '(peb) ',
-            'urban_patrimony': '(patrimony) ',
+            'urban_patrimony': '(patrimoine) ',
         }
         if not getLicenceSchema(self.getLicencePortalType()):
             return DisplayList()
@@ -428,6 +428,7 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
             'urban_analysis': '(analyse) ',
             'urban_environment': '(environnement) ',
             'urban_description': '',
+            'urban_patrimony': '(patrimoine) ',
         }
         available_fields = [field for field in licence_schema.fields() if field.getType() == 'Products.Archetypes.Field.TextField' and field.getName() != 'rights']
         vocabulary_fields = [
