@@ -1880,5 +1880,21 @@ default_values = {
             {'id': "9", 'title': u"Annexe IX - Permis d'urbanisme dispensé d'un architecte ou autre que les demandes visées aux annexes 5 à 8"},
         ],
 
+        'classification_order_scope': [
+            'UrbanVocabularyTerm',
+            {'id': "ensemble_charpente", 'title': u"Ensemble charpente", 'extraValue': "Ensemble charpente"},
+            {'id': "facade", 'title': u"Façade", 'extraValue': "Façade"},
+            {'id': "toiture", 'title': u"Toiture", 'extraValue': "Toiture"},
+            {'id': "immeuble", 'title': u"Immeuble", 'extraValue': "Immeuble"},
+        ],
+
+        'general_disposition': [
+            'UrbanVocabularyTerm',
+            {'id': "dispense", 'title': u"Déclaration pour dispense de permis"},
+            {'id': "d_4_14", 'title': u"Permis D.IV.14 du collège communal"},
+            {'id': "d_4_24", 'title': u"Art D.IV.24 décision sur recours"},
+            {'id': "d_4_25", 'title': u"Permis D.IV.25"},
+        ],
+
     },
 }
