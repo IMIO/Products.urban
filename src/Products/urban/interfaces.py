@@ -563,6 +563,10 @@ class IInternalPreliminaryAdviceEvent(Interface):
     __doc__ = _("""IInternalPrelimaryAdvice type marker interface""")
 
 
+class IPatrimonyMeetingEvent(Interface):
+    __doc__ = _("""IPatrimonyMeetingEvent type marker interface""")
+
+
 class IUrbanBase(Interface):
     """Marker interface for .Base.UrbanBase
     """
