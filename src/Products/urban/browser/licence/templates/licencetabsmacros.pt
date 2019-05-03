@@ -214,9 +214,22 @@
                tal:define="default_custom python: [];
                            custom custom | python: []; custom python: custom + default_custom">
 
-            <tal:loop repeat="field view/getPatrimonyFields">
-                <metal:field_display use-macro="here/@@licencetabs-macros/field_display" />
-            </tal:loop>
+            <tr>
+                <tal:loop repeat="field view/getPatrimonyFields">
+                    <metal:field_display use-macro="here/@@licencetabs-macros/field_display" />
+                </tal:loop>
+            </tr>
+            <tr>
+                <th>
+                    <span i18n:translate="ranking_ordinance">
+                        ranking_ordinance
+                    </span>
+                <th>
+                <td>
+                    <a href="#" tal:attributes="href python: view.getRankingOrdinanceLink()" tal:content="python: view.getRankingOrdinanceTitle()">ranking_ordinance
+                    </a>
+                <td>
+            </tr>
 
         </table>
     </fieldset>
