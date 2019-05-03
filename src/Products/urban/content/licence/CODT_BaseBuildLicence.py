@@ -232,13 +232,13 @@ schema = Schema((
     ),
     LinesField(
         name='classification_order_scope',
-        widget=MultiSelect2Widget(
+        widget=MultiSelectionWidget(
             format='checkbox',
             label=_('urban_label_classification_order_scope', default='Classification_order_scope'),
         ),
         schemata='urban_patrimony',
         multiValued=1,
-        vocabulary_factory='urban.vocabulary.classificationorderscope',
+        vocabulary=UrbanVocabulary('classification_order_scope', inUrbanConfig=False),
         default_method='getDefaultValue',
     ),
     StringField(
