@@ -897,7 +897,7 @@ msgstr "Demandeur(s)"
 #. Default: "Applicant(s) history"
 #: ../browser/licence/templates/licencemacros.pt:133
 msgid "applicants_history"
-msgstr "Historique des demandeurs"
+msgstr "Demandeurs inactifs"
 
 msgid "applicationreasons_folder_title"
 msgstr "Motifs de la demande"
