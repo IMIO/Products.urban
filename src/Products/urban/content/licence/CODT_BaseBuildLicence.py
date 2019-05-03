@@ -14,6 +14,7 @@ __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEUL
 __docformat__ = 'plaintext'
 
 from AccessControl import ClassSecurityInfo
+from collective.archetypes.select2.select2widget import MultiSelect2Widget
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
@@ -164,6 +165,89 @@ schema = Schema((
         default_method='getDefaultText',
         schemata='urban_location',
         default_output_type='text/plain',
+    ),
+    TextField(
+        name='patrimony_analysis',
+        widget=RichWidget(
+            label=_('urban_label_patrimony_analysis', default='Patrimony_analysis'),
+        ),
+        default_content_type='text/html',
+        allowable_content_types=('text/html',),
+        schemata='urban_patrimony',
+        default_method='getDefaultText',
+        default_output_type='text/html',
+        accessor="PatrimonyAnalysis",
+    ),
+    BooleanField(
+        name='patrimony_architectural_complex',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label=_('urban_label_patrimony_architectural_complex', default='Patrimony_architectural_complex'),
+        ),
+        schemata='urban_patrimony',
+    ),
+    BooleanField(
+        name='patrimony_site',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label=_('urban_label_patrimony_site', default='Patrimony_site'),
+        ),
+        schemata='urban_patrimony',
+    ),
+    BooleanField(
+        name='patrimony_archaeological_map',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label=_('urban_label_patrimony_archaeological_map', default='Patrimony_archaeological_map'),
+        ),
+        schemata='urban_patrimony',
+    ),
+    BooleanField(
+        name='patrimony_project_gtoret_1ha',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label=_('urban_label_patrimony_project_gtoret_1ha', default='Patrimony_project_gtoret_1ha'),
+        ),
+        schemata='urban_patrimony',
+    ),
+    BooleanField(
+        name='patrimony_monument',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label=_('urban_label_patrimony_monument', default='Patrimony_monument'),
+        ),
+        schemata='urban_patrimony',
+    ),
+    TextField(
+        name='patrimony_observation',
+        widget=RichWidget(
+            label=_('urban_label_patrimony_observation', default='Patrimony_observation'),
+        ),
+        default_content_type='text/html',
+        allowable_content_types=('text/html',),
+        schemata='urban_patrimony',
+        default_method='getDefaultText',
+        default_output_type='text/html',
+        accessor="PatrimonyObservation",
+    ),
+    LinesField(
+        name='classification_order_scope',
+        widget=MultiSelect2Widget(
+            format='checkbox',
+            label=_('urban_label_classification_order_scope', default='Classification_order_scope'),
+        ),
+        schemata='urban_patrimony',
+        multiValued=1,
+        vocabulary_factory='urban.vocabulary.classificationorderscope',
+        default_method='getDefaultValue',
+    ),
+    StringField(
+        name='general_disposition',
+        widget=SelectionWidget(
+            label=_('urban_label_general_disposition', default='General_disposition'),
+        ),
+        schemata='urban_patrimony',
+        vocabulary=UrbanVocabulary('general_disposition', inUrbanConfig=False, with_empty_value=True),
     ),
 ),
 )
