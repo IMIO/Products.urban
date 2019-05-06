@@ -42,17 +42,3 @@ class CODTBuildLicenceView(CODTLicenceView):
 
     def getPebFields(self):
         return self.getSchemataFields(schemata='urban_peb')
-
-    def getPatrimonyFields(self):
-        return self.getSchemataFields(schemata='urban_patrimony')
-
-    def getRankingOrdinanceTitle(self):
-        code_dgo4 = 'code dgo4'
-        libelle = 'libelle'
-        historique_dossier = 'historique_dossier'
-        liendoc = 'liendoc'
-        return "{} - {} - {} - {}".format(code_dgo4, libelle, historique_dossier, liendoc)
-
-    def getRankingOrdinanceLink(self):
-        liendoc = 'http://spw.wallonie.be/dgo4/index.php?thema=bc_pat&details=57081-CLT-0239-01'
-        return liendoc
