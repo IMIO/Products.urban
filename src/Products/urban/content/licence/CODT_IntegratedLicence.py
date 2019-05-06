@@ -21,15 +21,17 @@ from Products.urban import UrbanMessage as _
 from Products.urban.content.licence.CODT_UniqueLicence import CODT_UniqueLicence
 from Products.urban.content.licence.CODT_UniqueLicence import finalizeSchema as firstBaseFinalizeSchema
 from Products.urban.utils import setSchemataForCODT_UniqueLicenceInquiry
-from Products.urban.widget.historizereferencewidget import HistorizeReferenceBrowserWidget
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
+from Products.urban.utils import setOptionalAttributes
 from Products.urban.widget.urbanreferencewidget import UrbanBackReferenceWidget
-from Products.urban import UrbanMessage as _
 
 
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
+optional_fields = [
+    'reference_bic', 'reference_dgo6',
+]
 ##/code-section module-header
 
 schema = Schema((
@@ -43,6 +45,22 @@ schema = Schema((
         schemata='urban_description',
         vocabulary='listRegionalAuthorities',
         default=['dgo6'],
+    ),
+    StringField(
+        name='reference_bic',
+        widget=StringField._properties['widget'](
+            size=60,
+            label=_('urban_label_reference_bic', default='Reference_bic'),
+        ),
+        schemata='urban_description',
+    ),
+    StringField(
+        name='reference_dgo6',
+        widget=StringField._properties['widget'](
+            size=60,
+            label=_('urban_label_reference_dgo6', default='Reference_dgo6'),
+        ),
+        schemata='urban_description',
     ),
     StringField(
         name='road_decree_reference',
@@ -60,6 +78,7 @@ schema = Schema((
 )
 
 ##code-section after-local-schema #fill in your manual code here
+setOptionalAttributes(schema, optional_fields)
 ##/code-section after-local-schema
 
 CODT_IntegratedLicence_schema = BaseFolderSchema.copy() + \
@@ -144,6 +163,9 @@ def finalizeSchema(schema):
        Finalizes the type schema to alter some fields
     """
     schema.moveField('regional_authority', after='authority')
+    schema.moveField('reference_bic', after='reference')
+    schema.moveField('reference_dgo6', after='referenceFT')
+
 
 #finalizeSchema comes from BuildLicence to be sure to have the same changes reflected
 firstBaseFinalizeSchema(CODT_IntegratedLicence_schema)
