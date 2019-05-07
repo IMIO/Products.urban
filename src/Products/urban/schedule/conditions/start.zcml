@@ -55,7 +55,7 @@
 
     <!-- inquiry conditions-->
     <adapter
-        for="Products.urban.interfaces.IBaseBuildLicence
+        for="Products.urban.interfaces.IBaseAllBuildLicence
              imio.schedule.content.task.IAutomatedTask"
         provides="imio.schedule.interfaces.IStartCondition"
         factory=".generic.NoInquiryCondition"
@@ -63,7 +63,7 @@
     />
 
     <adapter
-        for="Products.urban.interfaces.IBaseBuildLicence
+        for="Products.urban.interfaces.IBaseAllBuildLicence
              imio.schedule.content.task.IAutomatedTask"
         provides="imio.schedule.interfaces.IStartCondition"
         factory=".generic.InquiryDoneCondition"
