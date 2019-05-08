@@ -560,7 +560,11 @@ class IImpactStudyEvent(Interface):
 
 
 class IInternalPreliminaryAdviceEvent(Interface):
-    __doc__ = _("""IInternalPrelimaryAdvice type marker interface""")
+    __doc__ = _("""IInternalPreliminaryAdvice type marker interface""")
+
+
+class IRoadAdaptationEvent(Interface):
+    __doc__ = _("""IRoadAdaptation type marker interface""")
 
 
 class IUrbanBase(Interface):

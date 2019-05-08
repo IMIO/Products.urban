@@ -374,7 +374,7 @@ msgid "IInquiry type marker interface"
 msgstr "Enquête publique"
 
 #: ../interfaces.py:563
-msgid "IInternalPrelimaryAdvice type marker interface"
+msgid "IInternalPreliminaryAdvice type marker interface"
 msgstr "Avis préliminaire interne"
 
 #: ../interfaces.py:471
@@ -498,6 +498,10 @@ msgstr "Fin des travaux"
 #: ../interfaces.py:559
 msgid "ImpactStudy event type marker interface"
 msgstr "Étude d'incidence"
+
+#: ../interfaces.py:567
+msgid "IRoadAdaptation type marker interface"
+msgstr "Procédure voirie"
 
 msgid "IntegratedLicence"
 msgstr "Permis intégré"

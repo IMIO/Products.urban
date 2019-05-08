@@ -244,6 +244,10 @@
     interface=".interfaces.IUrbanAndEnvironmentEvent"
     type=".interfaces.IEventTypeType"/>
 
+   <interface
+    interface=".interfaces.IRoadAdaptationEvent"
+    type=".interfaces.IEventTypeType"/>
+
   <adapter
     for="Products.CMFCore.interfaces.ICatalogAware
         Products.Archetypes.interfaces.IUIDCatalog"

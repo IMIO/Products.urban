@@ -647,6 +647,9 @@ class BaseBuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin)
     def getLastProrogation(self):
         return self.getLastEvent(interfaces.IProrogationEvent)
 
+    def getLastRoadAdaptation(self):
+        return self.getLastEvent(interfaces.IRoadAdaptationEvent)
+
     def getLastRefusedNotification(self):
         return self.getLastEvent(interfaces.IRefusedIncompletenessEvent)
 
