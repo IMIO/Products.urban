@@ -258,13 +258,12 @@ urbanEventTypes = {
         },
         {
             'id': "prorogation-codt",
-            'title': "Prorogation du permis",
+            'title': "Prorogation du délai de procédure",
             'activatedFields': ['decisionDate', 'decision', 'decisionText'],
             'deadLineDelay': 15,
             'eventDateLabel': "Date de notification",
             'TALCondition': "python: here.getProrogation()",
-            'eventTypeType': 'Products.urban.interfaces.ISimpleCollegeEvent',
-            'eventPortalType': 'UrbanEventCollege',
+            'eventTypeType': 'Products.urban.interfaces.IProrogationEvent',
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
@@ -299,14 +298,30 @@ urbanEventTypes = {
             ),
         },
         {
+            'id': "plans-modificatifs",
+            'title': "Plans modificatifs",
+            'activatedFields': ['transmitDate', 'decisionDate'],
+            'deadLineDelay': 15,
+            'eventDateLabel': "Date de notification",
+            'eventTypeType': 'Products.urban.interfaces.IAcknowledgmentEvent',
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+                {'id': "codt_pu_demande_plans_modificatifs_demandeur.odt",
+                 'title': "Demande de plans modificatifs - Lettre au demandeur"},
+                {'id': "codt_pu_demande_plans_modificatifs_architecte.odt",
+                 'title': "Demande de plans modificatifs - Lettre à l'architecte"},
+                {'id': "codt_pu_transmis_plans_modificatifs_dgo4.odt",
+                 'title': "Transmis de la demande de plans modificatifs à la DGO4"},
+            ),
+        },
+        {
             'id': "procedure-voirie-codt",
             'title': "Procédure voirie",
             'activatedFields': ['decisionDate', 'decision', 'decisionText'],
             'deadLineDelay': 15,
             'eventDateLabel': "Date de notification",
-            'TALCondition': "python: here.getProrogation()",
-            'eventTypeType': 'Products.urban.interfaces.ISimpleCollegeEvent',
-            'eventPortalType': 'UrbanEventCollege',
+            'eventTypeType': 'Products.urban.interfaces.ILicenceNotificationEvent',
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
@@ -525,8 +540,7 @@ urbanEventTypes = {
             'deadLineDelay': 15,
             'eventDateLabel': "Date de notification",
             'TALCondition': "python: here.getProrogation()",
-            'eventTypeType': 'Products.urban.interfaces.ISimpleCollegeEvent',
-            'eventPortalType': 'UrbanEventCollege',
+            'eventTypeType': 'Products.urban.interfaces.IProrogationEvent',
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
@@ -541,9 +555,7 @@ urbanEventTypes = {
             'activatedFields': ['decisionDate', 'decision', 'decisionText'],
             'deadLineDelay': 15,
             'eventDateLabel': "Date de notification",
-            'TALCondition': "python: here.getProrogation()",
-            'eventTypeType': 'Products.urban.interfaces.ISimpleCollegeEvent',
-            'eventPortalType': 'UrbanEventCollege',
+            'eventTypeType': 'Products.urban.interfaces.ILicenceNotificationEvent',
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
@@ -937,7 +949,6 @@ urbanEventTypes = {
                 {'id': "pi_transmis_decision_dgo6.odt", 'title': "Transmis de la décision du Collège à la DGO6"},
             ),
             'eventTypeType': ('Products.urban.interfaces.ITheLicenceEvent'),
-            'eventPortalType': 'UrbanEventCollege',
         },
         {
             'id': "affichage-decision",
@@ -2004,11 +2015,11 @@ urbanEventTypes = {
         },
         {
             'id': "prorogation",
-            'title': "Prorogation du permis",
+            'title': "Prorogation du délai de procédure",
             'deadLineDelay': 15,
             'activatedFields': ['decisionDate', 'decision', 'receiptDate', ],
             'podTemplates': (
-                {'id': "urb-prorogation.odt", 'title': "Délibération du Collège Communal concernant la prorogation du permis"},
+                {'id': "urb-prorogation.odt", 'title': "Délibération du Collège Communal concernant la prorogation du délai de procédure"},
                 {'id': "urb-prorogation-transmis-refus.odt", 'title': "Refus de prorogation (lettre au demandeur)"},
                 {'id': "urb-prorogation-transmis-accept.odt", 'title': "Acceptation de prorogation (lettre au demandeur)"},
                 {'id': "urb-prorogation-transmis-accept-fd.odt", 'title': "Acceptation de prorogation (lettre au fonctionnaire délégué)"},
@@ -2882,11 +2893,11 @@ urbanEventTypes = {
         },
         {
             'id': "prorogation",
-            'title': "Prorogation du permis",
+            'title': "Prorogation du délai de procédure",
             'deadLineDelay': 15,
             'activatedFields': ['decisionDate', 'decision', 'receiptDate', ],
             'podTemplates': (
-                {'id': "urb-prorogation.odt", 'title': "Délibération du Collège Communal concernant la prorogation du permis"},
+                {'id': "urb-prorogation.odt", 'title': "Délibération du Collège Communal concernant la prorogation du délai de procédure"},
                 {'id': "urb-prorogation-transmis-refus.odt", 'title': "Refus de prorogation (lettre au demandeur)"},
                 {'id': "urb-prorogation-transmis-accept.odt", 'title': "Acceptation de prorogation (lettre au demandeur)"},
                 {'id': "urb-prorogation-transmis-accept-fd.odt", 'title': "Acceptation de prorogation (lettre au fonctionnaire délégué)"},
@@ -3527,11 +3538,11 @@ urbanEventTypes = {
         },
         {
             'id': "prorogation",
-            'title': "Prorogation du permis",
+            'title': "Prorogation du délai de procédure",
             'deadLineDelay': 15,
             'activatedFields': ['decisionDate', 'decision', 'receiptDate', ],
             'podTemplates': (
-                {'id': "urb-prorogation.odt", 'title': "Délibération du Collège Communal concernant la prorogation du permis"},
+                {'id': "urb-prorogation.odt", 'title': "Délibération du Collège Communal concernant la prorogation du délai de procédure"},
                 {'id': "urb-prorogation-transmis-refus.odt", 'title': "Refus de prorogation (lettre au demandeur)"},
                 {'id': "urb-prorogation-transmis-accept.odt", 'title': "Acceptation de prorogation (lettre au demandeur)"},
                 {'id': "urb-prorogation-transmis-accept-fd.odt", 'title': "Acceptation de prorogation (lettre au fonctionnaire délégué)"},
@@ -4181,11 +4192,11 @@ urbanEventTypes = {
         },
         {
             'id': "prorogation",
-            'title': "Prorogation du permis",
+            'title': "Prorogation du délai de procédure",
             'deadLineDelay': 15,
             'activatedFields': ['decisionDate', 'decision', 'receiptDate', ],
             'podTemplates': (
-                {'id': "urb-prorogation.odt", 'title': "Délibération du Collège Communal concernant la prorogation du permis"},
+                {'id': "urb-prorogation.odt", 'title': "Délibération du Collège Communal concernant la prorogation du délai de procédure"},
                 {'id': "urb-prorogation-transmis-refus.odt", 'title': "Refus de prorogation (lettre au demandeur)"},
                 {'id': "urb-prorogation-transmis-accept.odt", 'title': "Acceptation de prorogation (lettre au demandeur)"},
                 {'id': "urb-prorogation-transmis-accept-fd.odt", 'title': "Acceptation de prorogation (lettre au fonctionnaire délégué)"},
@@ -5667,7 +5678,6 @@ urbanEventTypes = {
                 {'id': "pe_transmis_decision_instances.odt", 'title': "Transmis de la décision aux instances"},
             ),
             'eventTypeType': 'Products.urban.interfaces.ILicenceDeliveryEvent',
-            'eventPortalType': 'UrbanEventCollege',
         },
         {
             'id': "reception-decision-dgo3",
