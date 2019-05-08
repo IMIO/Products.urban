@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-04-30 11:41+0000\n"
+"POT-Creation-Date: 2019-04-16 09:32+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,11 +15,11 @@ msgstr ""
 "Domain: urban\n"
 
 #. Default: "urban"
-#: ../setuphandlers.py:250
+#: ../setuphandlers.py:259
 msgid "%s_folder_title"
 msgstr ""
 
-#: ../setuphandlers.py:352
+#: ../setuphandlers.py:361
 msgid "%s_urbanconfig_title"
 msgstr ""
 
@@ -80,11 +80,11 @@ msgstr ""
 msgid "Add a work location"
 msgstr ""
 
-#: ../browser/licence/templates/licencetabsmacros.pt:453
+#: ../browser/licence/templates/licencetabsmacros.pt:437
 msgid "Add all advices"
 msgstr ""
 
-#: ../browser/licence/templates/licencetabsmacros.pt:429
+#: ../browser/licence/templates/licencetabsmacros.pt:413
 msgid "Add an event"
 msgstr ""
 
@@ -96,7 +96,7 @@ msgid "Add this parcel"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:915
+#: ../setuphandlers.py:920
 msgid "All"
 msgstr ""
 
@@ -119,7 +119,7 @@ msgstr ""
 msgid "Article127"
 msgstr ""
 
-#: ../browser/licence/templates/licencetabsmacros.pt:393
+#: ../browser/licence/templates/licencetabsmacros.pt:377
 #: ../browser/licence/templates/licenceview.pt:50
 msgid "Attachments"
 msgstr ""
@@ -247,11 +247,11 @@ msgstr ""
 msgid "EnvClassTwo"
 msgstr ""
 
-#: ../browser/licence/templates/licencetabsmacros.pt:437
+#: ../browser/licence/templates/licencetabsmacros.pt:421
 msgid "Events"
 msgstr ""
 
-#: ../browser/licence/templates/licencetabsmacros.pt:408
+#: ../browser/licence/templates/licencetabsmacros.pt:392
 msgid "Events attachments"
 msgstr ""
 
@@ -275,7 +275,7 @@ msgstr ""
 msgid "Found folder(s)"
 msgstr ""
 
-#: ../browser/templates/searchparcels.pt:153
+#: ../browser/templates/searchparcels.pt:178
 msgid "Found parcel(s)"
 msgstr ""
 
@@ -284,6 +284,11 @@ msgid "Full config profile for urban."
 msgstr ""
 
 msgid "Geometrician data"
+msgstr ""
+
+#: ../browser/templates/map.pt:42
+#: ../browser/templates/searchparcels.pt:240
+msgid "Historique de la parcelle"
 msgstr ""
 
 #: ../widget/templates/historizereferenceformview.pt:9
@@ -489,7 +494,7 @@ msgstr ""
 msgid "IntegratedLicence"
 msgstr ""
 
-#: ../interfaces.py:665
+#: ../interfaces.py:661
 msgid "Internal opinion services"
 msgstr ""
 
@@ -552,7 +557,7 @@ msgstr ""
 msgid "PatrimonyCertificate"
 msgstr ""
 
-#: ../interfaces.py:678
+#: ../interfaces.py:674
 msgid "Planned inquiries"
 msgstr ""
 
@@ -606,7 +611,7 @@ msgid "RoadDecree"
 msgstr ""
 
 #. Default: "imio.schedule"
-#: ../setuphandlers.py:277
+#: ../setuphandlers.py:286
 msgid "ScheduleConfig"
 msgstr ""
 
@@ -614,11 +619,11 @@ msgstr ""
 msgid "Scheduled licences"
 msgstr ""
 
-#: ../browser/templates/searchparcels.pt:142
+#: ../browser/templates/searchparcels.pt:166
 msgid "Search"
 msgstr ""
 
-#: ../browser/templates/searchparcels.pt:41
+#: ../browser/templates/searchparcels.pt:43
 msgid "Search parcel(s)"
 msgstr ""
 
@@ -638,8 +643,12 @@ msgstr ""
 msgid "Service id"
 msgstr ""
 
-#: ../interfaces.py:666
+#: ../interfaces.py:662
 msgid "Services that can give their opinion directly through urban"
+msgstr ""
+
+#: ../browser/templates/map.pt:76
+msgid "Show this parcel on map"
 msgstr ""
 
 msgid "Sort by licence type"
@@ -718,7 +727,7 @@ msgid "Update"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:792
+#: ../setuphandlers.py:797
 msgid "Urban"
 msgstr ""
 
@@ -827,7 +836,7 @@ msgstr ""
 msgid "add_an_applicant"
 msgstr ""
 
-#: ../browser/licence/templates/licencetabsmacros.pt:402
+#: ../browser/licence/templates/licencetabsmacros.pt:386
 #: ../browser/templates/urbaneventmacros.pt:89
 msgid "add_an_attachment"
 msgstr ""
@@ -835,7 +844,7 @@ msgstr ""
 msgid "add_an_equipment"
 msgstr ""
 
-#: ../browser/licence/templates/licencetabsmacros.pt:384
+#: ../browser/licence/templates/licencetabsmacros.pt:368
 msgid "add_an_inquiry"
 msgstr ""
 
@@ -843,7 +852,7 @@ msgid "add_event"
 msgstr ""
 
 #. Default: "This will automatically generate following advices:"
-#: ../browser/licence/templates/licencetabsmacros.pt:457
+#: ../browser/licence/templates/licencetabsmacros.pt:441
 msgid "add_every_advices_descr"
 msgstr ""
 
@@ -851,7 +860,7 @@ msgid "additional_layers_folder_title"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:733
+#: ../setuphandlers.py:738
 msgid "additonal_layers_folder_title"
 msgstr ""
 
@@ -911,7 +920,7 @@ msgid "architect_residing"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:830
+#: ../setuphandlers.py:835
 msgid "architects_folder_title"
 msgstr ""
 
@@ -969,12 +978,12 @@ msgid "cannot_remove_urbaneventinquiry_notthelast"
 msgstr ""
 
 #. Default: "Cartography"
-#: ../browser/templates/map.pt:44
+#: ../browser/templates/map.pt:93
 msgid "cartography"
 msgstr ""
 
 #. Default: "A map will be displayed when you will have defined concerned parcels"
-#: ../browser/templates/map.pt:37
+#: ../browser/templates/map.pt:86
 msgid "cartography_map_descr"
 msgstr ""
 
@@ -1055,7 +1064,7 @@ msgstr ""
 
 #. Default: "Concerned parcel(s)"
 #: ../browser/licence/templates/parcels_macro.pt:3
-#: ../browser/templates/map.pt:31
+#: ../browser/templates/map.pt:32
 #: ../browser/templates/parcellingtermview.pt:23
 msgid "concerned_parcels"
 msgstr ""
@@ -1069,7 +1078,7 @@ msgid "contact_recipients"
 msgstr ""
 
 #. Default: "There is no UrbanEventInquiry linked to this inquiry"
-#: ../browser/licence/templates/licencetabsmacros.pt:370
+#: ../browser/licence/templates/licencetabsmacros.pt:354
 msgid "content_no_urbaneventinquiry"
 msgstr ""
 
@@ -1100,7 +1109,7 @@ msgid "creation date"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:681
+#: ../setuphandlers.py:689
 msgid "dashboardtemplates_folder_title"
 msgstr ""
 
@@ -1230,7 +1239,7 @@ msgid "envclasstwos"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:722
+#: ../setuphandlers.py:727
 msgid "environmenttemplates_folder_title"
 msgstr ""
 
@@ -1420,7 +1429,7 @@ msgid "flooding_level_verylow"
 msgstr ""
 
 #. Default: "Folder advices"
-#: ../browser/licence/templates/licencetabsmacros.pt:448
+#: ../browser/licence/templates/licencetabsmacros.pt:432
 msgid "folder_advice"
 msgstr ""
 
@@ -1477,17 +1486,17 @@ msgid "formatted_date_with_cityname"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:764
+#: ../setuphandlers.py:769
 msgid "front_page_descr"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:765
+#: ../setuphandlers.py:770
 msgid "front_page_text"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:763
+#: ../setuphandlers.py:768
 msgid "front_page_title"
 msgstr ""
 
@@ -1513,13 +1522,13 @@ msgid "generate_a_linked_doc"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:844
+#: ../setuphandlers.py:849
 msgid "geometricians_folder_title"
 msgstr ""
 
 #. Default: "Global templates"
 #: ../browser/templates/templatessummary.pt:19
-#: ../setuphandlers.py:693
+#: ../setuphandlers.py:700
 msgid "globaltemplates_folder_title"
 msgstr ""
 
@@ -1531,19 +1540,19 @@ msgid "go_back"
 msgstr ""
 
 #. Default: "You can not search for parcels for now because there was a problem. Please contact your system administrator and give him the red error message here above"
-#: ../browser/templates/searchparcels.pt:42
+#: ../browser/templates/searchparcels.pt:44
 msgid "help_search_connection_problem"
 msgstr ""
 
 #. Default: "Choose one of the following forms to search for parcels. You can cumulate criteria if you exactly know what you are looking for"
-#: ../browser/templates/searchparcels.pt:47
+#: ../browser/templates/searchparcels.pt:49
 msgid "help_search_parcels"
 msgstr ""
 
 msgid "inadmissibilityreasons_folder_title"
 msgstr ""
 
-#: ../interfaces.py:679
+#: ../interfaces.py:675
 msgid "inquiries planned for radius search"
 msgstr ""
 
@@ -1562,7 +1571,7 @@ msgid "inquiry_suspension_folder_title"
 msgstr ""
 
 #. Default: "Inquiry ${number}"
-#: ../browser/licence/templates/licencetabsmacros.pt:318
+#: ../browser/licence/templates/licencetabsmacros.pt:302
 msgid "inquiry_title_and_number"
 msgstr ""
 
@@ -1699,7 +1708,7 @@ msgstr ""
 msgid "label_colname_transmitDate"
 msgstr ""
 
-#: ../browser/licence/templates/licencetabsmacros.pt:334
+#: ../browser/licence/templates/licencetabsmacros.pt:318
 msgid "label_edit"
 msgstr ""
 
@@ -1725,7 +1734,7 @@ msgstr ""
 msgid "label_ok"
 msgstr ""
 
-#: ../browser/licence/templates/licencetabsmacros.pt:343
+#: ../browser/licence/templates/licencetabsmacros.pt:327
 msgid "label_remove"
 msgstr ""
 
@@ -1897,7 +1906,7 @@ msgid "not_permitted_to_add_urbanevent"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:858
+#: ../setuphandlers.py:863
 msgid "notaries_folder_title"
 msgstr ""
 
@@ -1939,6 +1948,11 @@ msgstr ""
 msgid "number_of_recipients"
 msgstr ""
 
+#. Default: "Old parcels historic"
+#: ../browser/templates/map.pt:37
+msgid "old_parcels_history"
+msgstr ""
+
 #. Default: "OpenOfficePort"
 #: UrbanTool.py
 msgid "open_office_port"
@@ -1960,7 +1974,7 @@ msgid "parcelLinkedLicences"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:872
+#: ../setuphandlers.py:877
 msgid "parcellings_folder_title"
 msgstr ""
 
@@ -2094,6 +2108,10 @@ msgstr ""
 msgid "proprietaries"
 msgstr ""
 
+#: ../browser/licence/templates/licencetabsmacros.pt:224
+msgid "ranking_ordinance"
+msgstr ""
+
 #. Default: "RCU"
 #: setuphandlers.py
 msgid "rcu_folder_title"
@@ -2183,7 +2201,7 @@ msgid "search-last-elements"
 msgstr ""
 
 #: ../browser/templates/globalmacros.pt:33
-#: ../browser/templates/searchparcels.pt:29
+#: ../browser/templates/searchparcels.pt:31
 #: ../skins/urban_templates/lot_view.pt:26
 msgid "search_parcels"
 msgstr ""
@@ -2311,7 +2329,7 @@ msgstr ""
 
 #: ../profiles.zcml:25
 #: ../profiles/default/actions.xml
-#: ../setuphandlers.py:195
+#: ../setuphandlers.py:204
 msgid "urban"
 msgstr ""
 
@@ -2369,6 +2387,11 @@ msgstr ""
 
 #. Default: Set the number of days the alert will be shown before the deadline delay
 msgid "urban_alertdelay_descr"
+msgstr ""
+
+#. Default: "Browse old parcels (Only works with the parcel reference)"
+#: ../browser/templates/searchparcels.pt:162
+msgid "urban_browse_old_parcels"
 msgstr ""
 
 #. Default: "Here above are data defined for the inquiry. If you want to change these informations, click on the name of the linked inquiry here above."
@@ -2535,12 +2558,12 @@ msgid "urban_label_SAR"
 msgstr ""
 
 #. Default: "Sct"
-#: ../content/licence/CODT_BaseBuildLicence.py:85
+#: ../content/licence/CODT_BaseBuildLicence.py:84
 msgid "urban_label_SCT"
 msgstr ""
 
 #. Default: "Sdc"
-#: ../content/licence/CODT_BaseBuildLicence.py:107
+#: ../content/licence/CODT_BaseBuildLicence.py:106
 msgid "urban_label_SDC"
 msgstr ""
 
@@ -2709,6 +2732,11 @@ msgstr ""
 msgid "urban_label_approvalDate"
 msgstr ""
 
+#. Default: "Archeological_site"
+#: ../content/licence/CODT_BuildLicence.py:105
+msgid "urban_label_archeological_site"
+msgstr ""
+
 #. Default: "Architect(s)"
 #: ../browser/licence/templates/licencemacros.pt:10
 #: ../content/licence/BaseBuildLicence.py:380
@@ -2732,7 +2760,7 @@ msgid "urban_label_article"
 msgstr ""
 
 #. Default: "Asking Date"
-#: ../browser/licence/templates/licencetabsmacros.pt:253
+#: ../browser/licence/templates/licencetabsmacros.pt:237
 msgid "urban_label_askingDate"
 msgstr ""
 
@@ -2794,7 +2822,7 @@ msgid "urban_label_bestAddressKey"
 msgstr ""
 
 #. Default: "Bis"
-#: ../browser/templates/searchparcels.pt:81
+#: ../browser/templates/searchparcels.pt:83
 msgid "urban_label_bis"
 msgstr ""
 
@@ -2933,6 +2961,11 @@ msgstr ""
 
 #: ../content/licence/ExplosivesPossession.py:52
 msgid "urban_label_comments_on_decision_project"
+msgstr ""
+
+#. Default: "Communal_inventory"
+#: ../content/licence/CODT_BuildLicence.py:137
+msgid "urban_label_communal_inventory"
 msgstr ""
 
 #. Default: "urban_commune"
@@ -3146,7 +3179,7 @@ msgid "urban_label_divergenceDetails"
 msgstr ""
 
 #. Default: "Division"
-#: ../browser/templates/searchparcels.pt:62
+#: ../browser/templates/searchparcels.pt:64
 msgid "urban_label_division"
 msgstr ""
 
@@ -3239,7 +3272,7 @@ msgstr ""
 msgid "urban_label_exemptFDArticle"
 msgstr ""
 
-#: ../content/licence/CODT_BaseBuildLicence.py:430
+#: ../content/licence/CODT_BaseBuildLicence.py:346
 msgid "urban_label_exemptFDArticleCODT"
 msgstr ""
 
@@ -3275,7 +3308,7 @@ msgid "urban_label_exponent"
 msgstr ""
 
 #. Default: "Exposant"
-#: ../browser/templates/searchparcels.pt:85
+#: ../browser/templates/searchparcels.pt:87
 msgid "urban_label_exposant"
 msgstr ""
 
@@ -3291,7 +3324,7 @@ msgstr ""
 
 #. Default: "Advice"
 #: ../UrbanEvent.py:189
-#: ../browser/licence/templates/licencetabsmacros.pt:255
+#: ../browser/licence/templates/licencetabsmacros.pt:239
 msgid "urban_label_externalDecision"
 msgstr ""
 
@@ -3364,7 +3397,7 @@ msgid "urban_label_foldermanagers"
 msgstr ""
 
 #. Default: "Form_composition"
-#: ../content/licence/CODT_BaseBuildLicence.py:75
+#: ../content/licence/CODT_BaseBuildLicence.py:74
 msgid "urban_label_form_composition"
 msgstr ""
 
@@ -3457,7 +3490,7 @@ msgstr ""
 msgid "urban_label_implantation"
 msgstr ""
 
-#: ../content/licence/CODT_BaseBuildLicence.py:431
+#: ../content/licence/CODT_BaseBuildLicence.py:347
 msgid "urban_label_implantationCODT"
 msgstr ""
 
@@ -3626,11 +3659,11 @@ msgstr ""
 msgid "urban_label_isSupplementary"
 msgstr ""
 
-#: ../content/licence/CODT_BaseBuildLicence.py:422
+#: ../content/licence/CODT_BaseBuildLicence.py:338
 msgid "urban_label_is_in_parceloutlicences"
 msgstr ""
 
-#: ../content/licence/CODT_BaseBuildLicence.py:428
+#: ../content/licence/CODT_BaseBuildLicence.py:344
 msgid "urban_label_is_in_sol"
 msgstr ""
 
@@ -3981,11 +4014,11 @@ msgstr ""
 msgid "urban_label_parcellings"
 msgstr ""
 
-#: ../content/licence/CODT_BaseBuildLicence.py:421
+#: ../content/licence/CODT_BaseBuildLicence.py:337
 msgid "urban_label_parceloutlicences"
 msgstr ""
 
-#: ../content/licence/CODT_BaseBuildLicence.py:423
+#: ../content/licence/CODT_BaseBuildLicence.py:339
 msgid "urban_label_parceloutlicences_details"
 msgstr ""
 
@@ -3998,7 +4031,7 @@ msgid "urban_label_parcelsLocations"
 msgstr ""
 
 #. Default: "Partie"
-#: ../browser/templates/searchparcels.pt:93
+#: ../browser/templates/searchparcels.pt:95
 msgid "urban_label_partie"
 msgstr ""
 
@@ -4010,6 +4043,11 @@ msgstr ""
 #. Default: "Pashdetails"
 #: ../content/licence/GenericLicence.py:311
 msgid "urban_label_pashDetails"
+msgstr ""
+
+#. Default: "Patrimony"
+#: ../content/licence/CODT_BuildLicence.py:96
+msgid "urban_label_patrimony"
 msgstr ""
 
 #. Default: "Patrimony_analysis"
@@ -4187,7 +4225,7 @@ msgid "urban_label_procedureChoice"
 msgstr ""
 
 #. Default: "Prorogation"
-#: ../content/licence/CODT_BaseBuildLicence.py:66
+#: ../content/licence/CODT_BaseBuildLicence.py:65
 msgid "urban_label_prorogation"
 msgstr ""
 
@@ -4201,13 +4239,18 @@ msgstr ""
 msgid "urban_label_protectedBuildingDetails"
 msgstr ""
 
+#. Default: "Protection_zone"
+#: ../content/licence/CODT_BuildLicence.py:113
+msgid "urban_label_protection_zone"
+msgstr ""
+
 #. Default: "Publicroadmodifications"
 #: ../content/licence/EnvironmentLicence.py:77
 msgid "urban_label_publicRoadModifications"
 msgstr ""
 
 #. Default: "Puissance"
-#: ../browser/templates/searchparcels.pt:89
+#: ../browser/templates/searchparcels.pt:91
 msgid "urban_label_puissance"
 msgstr ""
 
@@ -4222,7 +4265,7 @@ msgid "urban_label_queryable"
 msgstr ""
 
 #. Default: "Radical"
-#: ../browser/templates/searchparcels.pt:77
+#: ../browser/templates/searchparcels.pt:79
 msgid "urban_label_radical"
 msgstr ""
 
@@ -4233,7 +4276,7 @@ msgstr ""
 
 #. Default: "Receipt date"
 #: ../UrbanEvent.py:94
-#: ../browser/licence/templates/licencetabsmacros.pt:254
+#: ../browser/licence/templates/licencetabsmacros.pt:238
 msgid "urban_label_receiptDate"
 msgstr ""
 
@@ -4311,13 +4354,18 @@ msgid "urban_label_regional_authority"
 msgstr ""
 
 #. Default: "Regional_guide"
-#: ../content/licence/CODT_BaseBuildLicence.py:151
+#: ../content/licence/CODT_BaseBuildLicence.py:150
 msgid "urban_label_regional_guide"
 msgstr ""
 
 #. Default: "Regional_guide_details"
-#: ../content/licence/CODT_BaseBuildLicence.py:161
+#: ../content/licence/CODT_BaseBuildLicence.py:160
 msgid "urban_label_regional_guide_details"
+msgstr ""
+
+#. Default: "Regional_inventory_building"
+#: ../content/licence/CODT_BuildLicence.py:121
+msgid "urban_label_regional_inventory_building"
 msgstr ""
 
 #. Default: "Registrationnumber"
@@ -4361,7 +4409,7 @@ msgid "urban_label_representedBySociety"
 msgstr ""
 
 #. Default: "Organisation"
-#: ../browser/licence/templates/licencetabsmacros.pt:252
+#: ../browser/licence/templates/licencetabsmacros.pt:236
 msgid "urban_label_requestedOrganisation"
 msgstr ""
 
@@ -4481,12 +4529,12 @@ msgid "urban_label_sarDetails"
 msgstr ""
 
 #. Default: "Sctdetails"
-#: ../content/licence/CODT_BaseBuildLicence.py:96
+#: ../content/licence/CODT_BaseBuildLicence.py:95
 msgid "urban_label_sctDetails"
 msgstr ""
 
 #. Default: "Sdcdetails"
-#: ../content/licence/CODT_BaseBuildLicence.py:118
+#: ../content/licence/CODT_BaseBuildLicence.py:117
 msgid "urban_label_sdcDetails"
 msgstr ""
 
@@ -4499,7 +4547,7 @@ msgid "urban_label_searchbyname_descr"
 msgstr ""
 
 #. Default: "Section"
-#: ../browser/templates/searchparcels.pt:72
+#: ../browser/templates/searchparcels.pt:74
 msgid "urban_label_section"
 msgstr ""
 
@@ -4545,20 +4593,25 @@ msgstr ""
 msgid "urban_label_situation"
 msgstr ""
 
+#. Default: "Small_popular_patrimony"
+#: ../content/licence/CODT_BuildLicence.py:129
+msgid "urban_label_small_popular_patrimony"
+msgstr ""
+
 #. Default: "Society"
 #: Contact.py
 msgid "urban_label_society"
 msgstr ""
 
-#: ../content/licence/CODT_BaseBuildLicence.py:425
+#: ../content/licence/CODT_BaseBuildLicence.py:341
 msgid "urban_label_sol"
 msgstr ""
 
-#: ../content/licence/CODT_BaseBuildLicence.py:427
+#: ../content/licence/CODT_BaseBuildLicence.py:343
 msgid "urban_label_solZone"
 msgstr ""
 
-#: ../content/licence/CODT_BaseBuildLicence.py:429
+#: ../content/licence/CODT_BaseBuildLicence.py:345
 msgid "urban_label_sol_details"
 msgstr ""
 
@@ -4568,7 +4621,7 @@ msgid "urban_label_solicitLocationOpinionsTo"
 msgstr ""
 
 #. Default: "Solicit opinion to"
-#: ../browser/licence/templates/licencetabsmacros.pt:230
+#: ../browser/licence/templates/licencetabsmacros.pt:214
 #: ../content/Inquiry.py:124
 msgid "urban_label_solicitOpinionsTo"
 msgstr ""
@@ -4793,12 +4846,12 @@ msgid "urban_label_townshipSpecificFeaturesDetail"
 msgstr ""
 
 #. Default: "Township_guide"
-#: ../content/licence/CODT_BaseBuildLicence.py:129
+#: ../content/licence/CODT_BaseBuildLicence.py:128
 msgid "urban_label_township_guide"
 msgstr ""
 
 #. Default: "Township_guide_details"
-#: ../content/licence/CODT_BaseBuildLicence.py:140
+#: ../content/licence/CODT_BaseBuildLicence.py:139
 msgid "urban_label_township_guide_details"
 msgstr ""
 
@@ -4928,7 +4981,7 @@ msgid "urban_label_zipcode"
 msgstr ""
 
 #. Default: "Click here to access the linked urban event inquiry"
-#: ../browser/licence/templates/licencetabsmacros.pt:365
+#: ../browser/licence/templates/licencetabsmacros.pt:349
 msgid "urban_link_to_the_linked_urbaneventinquiry"
 msgstr ""
 
@@ -4936,7 +4989,7 @@ msgid "urban_linked_inquiry_help"
 msgstr ""
 
 #. Default: "Linked urban event inquiry"
-#: ../browser/licence/templates/licencetabsmacros.pt:361
+#: ../browser/licence/templates/licencetabsmacros.pt:345
 msgid "urban_linked_urbaneventinquiry"
 msgstr ""
 
@@ -4946,7 +4999,7 @@ msgid "urban_no_event_added"
 msgstr ""
 
 #. Default: "No event type is defined in the configuration for this element"
-#: ../browser/licence/templates/licencetabsmacros.pt:431
+#: ../browser/licence/templates/licencetabsmacros.pt:415
 msgid "urban_no_eventtype_defined"
 msgstr ""
 
@@ -4959,7 +5012,7 @@ msgid "urban_search_parameters"
 msgstr ""
 
 #. Default: "Cadastral reference"
-#: ../browser/templates/searchparcels.pt:56
+#: ../browser/templates/searchparcels.pt:58
 msgid "urban_search_parcel_by_cadastral_reference"
 msgstr ""
 
@@ -4968,7 +5021,7 @@ msgid "urban_search_parcel_by_folder_reference"
 msgstr ""
 
 #. Default: "Location"
-#: ../browser/templates/searchparcels.pt:107
+#: ../browser/templates/searchparcels.pt:109
 msgid "urban_search_parcel_by_location"
 msgstr ""
 
@@ -4977,7 +5030,7 @@ msgid "urban_search_parcel_by_name"
 msgstr ""
 
 #. Default: "Proprietary"
-#: ../browser/templates/searchparcels.pt:126
+#: ../browser/templates/searchparcels.pt:129
 msgid "urban_search_parcel_by_proprietary"
 msgstr ""
 
@@ -5056,12 +5109,12 @@ msgid "urbancertificatetwos"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:372
+#: ../setuphandlers.py:381
 msgid "urbaneventtypes_folder_title"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:710
+#: ../setuphandlers.py:716
 msgid "urbantemplates_folder_title"
 msgstr ""
 

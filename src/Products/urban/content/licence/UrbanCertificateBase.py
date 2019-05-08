@@ -36,12 +36,42 @@ from Products.urban.utils import setOptionalAttributes
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.UrbanDataGridColumns.FormFocusColumn import FormFocusColumn
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
+from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
 
 optional_fields = ['specificFeatures', 'roadSpecificFeatures', 'locationSpecificFeatures',
                    'customSpecificFeatures', 'townshipSpecificFeatures', 'opinionsToAskIfWorks',
                    'basement', 'ZIP', 'pollution', 'annoncedDelay', 'annoncedDelayDetails',
                    'notaryContact']
 ##/code-section module-header
+
+full_patrimony_slave_fields = (
+        {
+            'name': 'archeological_site',
+            'action': 'hide',
+            'hide_values': ('none',),
+        },
+        {
+            'name': 'protection_zone',
+            'action': 'hide',
+            'hide_values': ('none',),
+        },
+        {
+            'name': 'regional_inventory_building',
+            'action': 'hide',
+            'hide_values': ('none',),
+        },
+        {
+            'name': 'small_popular_patrimony',
+            'action': 'hide',
+            'hide_values': ('none',),
+        },
+        {
+            'name': 'communal_inventory',
+            'action': 'hide',
+            'hide_values': ('none',),
+        },
+
+)
 
 schema = Schema((
 
@@ -271,6 +301,55 @@ schema = Schema((
         ),
         schemata='urban_patrimony',
         vocabulary=UrbanVocabulary('general_disposition', inUrbanConfig=False, with_empty_value=True),
+    ),
+    StringField(
+        name='patrimony',
+        widget=MasterSelectWidget(
+            slave_fields=full_patrimony_slave_fields,
+            label=_('urban_label_patrimony', default='Patrimony'),
+        ),
+        vocabulary='list_patrimony_types',
+        schemata='urban_patrimony',
+    ),
+    BooleanField(
+        name='archeological_site',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label=_('urban_label_archeological_site', default='Archeological_site'),
+        ),
+        schemata='urban_patrimony',
+    ),
+    BooleanField(
+        name='protection_zone',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label=_('urban_label_protection_zone', default='Protection_zone'),
+        ),
+        schemata='urban_patrimony',
+    ),
+    BooleanField(
+        name='regional_inventory_building',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label=_('urban_label_regional_inventory_building', default='Regional_inventory_building'),
+        ),
+        schemata='urban_patrimony',
+    ),
+    BooleanField(
+        name='small_popular_patrimony',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label=_('urban_label_small_popular_patrimony', default='Small_popular_patrimony'),
+        ),
+        schemata='urban_patrimony',
+    ),
+    BooleanField(
+        name='communal_inventory',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label=_('urban_label_communal_inventory', default='Communal_inventory'),
+        ),
+        schemata='urban_patrimony',
     ),
 
 ),
@@ -508,6 +587,15 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
             signaletic += proprietary.getSignaletic(withaddress=withaddress)
         return signaletic
 
+    def list_patrimony_types(self):
+        """
+        """
+        vocabulary = (
+                ('none', 'aucune incidence'),
+                ('patrimonial', 'incidence patrimoniale'),
+                ('classified', 'bien classé'),
+        )
+        return DisplayList(vocabulary)
 
 
 registerType(UrbanCertificateBase, PROJECTNAME)
