@@ -313,6 +313,8 @@ urbanEventTypes = {
                  'title': "Demande de plans modificatifs - Lettre à l'architecte"},
                 {'id': "codt_pu_transmis_plans_modificatifs_dgo4.odt",
                  'title': "Transmis de la demande de plans modificatifs à la DGO4"},
+                {'id': "codt_pu_deliberation_college.odt",
+                 'title': "Délibération collège sur les plans modificatifs"},
             ),
         },
         {
