@@ -28,7 +28,6 @@ from Products.urban.widget.urbanreferencewidget import UrbanBackReferenceWidget
 
 ##code-section module-header #fill in your manual code here
 optional_fields = ['limitedImpact', 'SDC_divergence']
-
 ##/code-section module-header
 
 schema = Schema((
@@ -87,10 +86,6 @@ class CODT_BuildLicence(BaseFolder, CODT_BaseBuildLicence, BrowserDefaultMixin):
 
     schema = CODT_BuildLicence_schema
 
-    ##code-section class-header #fill in your manual code here
-    ##/code-section class-header
-
-    # Methods
 
 registerType(CODT_BuildLicence, PROJECTNAME)
 # end of class CODT_BuildLicence

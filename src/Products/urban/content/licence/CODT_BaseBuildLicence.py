@@ -61,6 +61,16 @@ slave_fields_form_composition = (
 
 full_patrimony_slave_fields = (
         {
+            'name': 'patrimony_site',
+            'action': 'hide',
+            'hide_values': ('none',),
+        },
+        {
+            'name': 'patrimony_architectural_complex',
+            'action': 'hide',
+            'hide_values': ('none',),
+        },
+        {
             'name': 'archeological_site',
             'action': 'hide',
             'hide_values': ('none',),
@@ -85,7 +95,31 @@ full_patrimony_slave_fields = (
             'action': 'hide',
             'hide_values': ('none',),
         },
-
+        {
+            'name': 'patrimony_archaeological_map',
+            'action': 'hide',
+            'hide_values': ('none',),
+        },
+        {
+            'name': 'patrimony_project_gtoret_1ha',
+            'action': 'hide',
+            'hide_values': ('none',),
+        },
+        {
+            'name': 'observation',
+            'action': 'hide',
+            'hide_values': ('none',),
+        },
+        {
+            'name': 'patrimony_monument',
+            'action': 'hide',
+            'hide_values': ('none', 'patrimonial'),
+        },
+        {
+            'name': 'classification_order_scope',
+            'action': 'hide',
+            'hide_values': ('none', 'patrimonial'),
+        },
 )
 
 schema = Schema((
@@ -199,6 +233,7 @@ schema = Schema((
     ),
     StringField(
         name='patrimony',
+        default='none',
         widget=MasterSelectWidget(
             slave_fields=full_patrimony_slave_fields,
             label=_('urban_label_patrimony', default='Patrimony'),
@@ -507,6 +542,19 @@ def finalizeSchema(schema):
     schema.moveField('township_guide', after='sdcDetails')
     schema.moveField('township_guide_details', after='township_guide')
     schema.moveField('form_composition', before='missingParts')
+    schema.moveField('patrimony_analysis', after='protectedBuildingDetails')
+    schema.moveField('patrimony_observation', after='patrimony_analysis')
+    schema.moveField('general_disposition', after='patrimony_observation')
+    schema.moveField('regional_inventory_building', after='patrimony')
+    schema.moveField('patrimony_archaeological_map', after='regional_inventory_building')
+    schema.moveField('patrimony_architectural_complex', after='patrimony_archaeological_map')
+    schema.moveField('communal_inventory', after='patrimony_architectural_complex')
+    schema.moveField('patrimony_monument', after='communal_inventory')
+    schema.moveField('small_popular_patrimony', after='patrimony_monument')
+    schema.moveField('patrimony_project_gtoret_1ha', after='small_popular_patrimony')
+    schema.moveField('patrimony_site', after='patrimony_project_gtoret_1ha')
+    schema.moveField('archeological_site', after='patrimony_site')
+    schema.moveField('protection_zone', after='archeological_site')
     schema['missingParts'].widget.format = None
     schema['parcellings'].widget.label = _('urban_label_parceloutlicences')
     schema['isInSubdivision'].widget.label = _('urban_label_is_in_parceloutlicences')
