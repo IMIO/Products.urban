@@ -662,6 +662,7 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     schema.moveField('patrimony_site', after='patrimony_project_gtoret_1ha')
     schema.moveField('archeological_site', after='patrimony_site')
     schema.moveField('protection_zone', after='archeological_site')
+    schema.moveField('classification_order_scope', after='protection_zone')
     return schema
 
 finalizeSchema(UrbanCertificateBase_schema)
