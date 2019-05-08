@@ -1884,8 +1884,8 @@ default_values = {
             'UrbanVocabularyTerm',
             {'id': "ensemble_charpente", 'title': u"Ensemble charpente", 'extraValue': "Ensemble charpente"},
             {'id': "facade", 'title': u"Façade", 'extraValue': "Façade"},
-            {'id': "toiture", 'title': u"Toiture", 'extraValue': "Toiture"},
             {'id': "immeuble", 'title': u"Immeuble", 'extraValue': "Immeuble"},
+            {'id': "toiture", 'title': u"Toiture", 'extraValue': "Toiture"},
         ],
 
         'general_disposition': [
