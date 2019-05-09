@@ -342,7 +342,7 @@ urbanEventTypes = {
             'id': "premiere-reunion-patrimoine",
             'title': "Première réunion patrimoine",
             'eventDateLabel': "Date de la réunion",
-            'activatedFields': ['reportCreationDate', 'reportReceptionDate'],
+            'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
@@ -353,7 +353,7 @@ urbanEventTypes = {
             'id': "deuxieme-reunion-patrimoine",
             'title': "Deuxième réunion patrimoine",
             'eventDateLabel': "Date de la réunion",
-            'activatedFields': ['reportCreationDate', 'reportReceptionDate'],
+            'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
@@ -612,7 +612,7 @@ urbanEventTypes = {
             'id': "premiere-reunion-patrimoine",
             'title': "Première réunion patrimoine",
             'eventDateLabel': "Date de la réunion",
-            'activatedFields': ['reportCreationDate', 'reportReceptionDate'],
+            'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
@@ -623,7 +623,7 @@ urbanEventTypes = {
             'id': "deuxieme-reunion-patrimoine",
             'title': "Deuxième réunion patrimoine",
             'eventDateLabel': "Date de la réunion",
-            'activatedFields': ['reportCreationDate', 'reportReceptionDate'],
+            'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
@@ -771,7 +771,7 @@ urbanEventTypes = {
             'id': "premiere-reunion-patrimoine",
             'title': "Première réunion patrimoine",
             'eventDateLabel': "Date de la réunion",
-            'activatedFields': ['reportCreationDate', 'reportReceptionDate'],
+            'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
@@ -782,7 +782,7 @@ urbanEventTypes = {
             'id': "deuxieme-reunion-patrimoine",
             'title': "Deuxième réunion patrimoine",
             'eventDateLabel': "Date de la réunion",
-            'activatedFields': ['reportCreationDate', 'reportReceptionDate'],
+            'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
@@ -819,7 +819,7 @@ urbanEventTypes = {
             'id': "premiere-reunion-patrimoine",
             'title': "Première réunion patrimoine",
             'eventDateLabel': "Date de la réunion",
-            'activatedFields': ['reportCreationDate', 'reportReceptionDate'],
+            'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
@@ -830,7 +830,7 @@ urbanEventTypes = {
             'id': "deuxieme-reunion-patrimoine",
             'title': "Deuxième réunion patrimoine",
             'eventDateLabel': "Date de la réunion",
-            'activatedFields': ['reportCreationDate', 'reportReceptionDate'],
+            'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
@@ -1109,7 +1109,7 @@ urbanEventTypes = {
             'id': "premiere-reunion-patrimoine",
             'title': "Première réunion patrimoine",
             'eventDateLabel': "Date de la réunion",
-            'activatedFields': ['reportCreationDate', 'reportReceptionDate'],
+            'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
@@ -1120,7 +1120,7 @@ urbanEventTypes = {
             'id': "deuxieme-reunion-patrimoine",
             'title': "Deuxième réunion patrimoine",
             'eventDateLabel': "Date de la réunion",
-            'activatedFields': ['reportCreationDate', 'reportReceptionDate'],
+            'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
@@ -1157,7 +1157,7 @@ urbanEventTypes = {
             'id': "premiere-reunion-patrimoine",
             'title': "Première réunion patrimoine",
             'eventDateLabel': "Date de la réunion",
-            'activatedFields': ['reportCreationDate', 'reportReceptionDate'],
+            'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
@@ -1168,7 +1168,7 @@ urbanEventTypes = {
             'id': "deuxieme-reunion-patrimoine",
             'title': "Deuxième réunion patrimoine",
             'eventDateLabel': "Date de la réunion",
-            'activatedFields': ['reportCreationDate', 'reportReceptionDate'],
+            'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
@@ -1642,7 +1642,7 @@ urbanEventTypes = {
             'id': "premiere-reunion-patrimoine",
             'title': "Première réunion patrimoine",
             'eventDateLabel': "Date de la réunion",
-            'activatedFields': ['reportCreationDate', 'reportReceptionDate'],
+            'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
@@ -1653,7 +1653,7 @@ urbanEventTypes = {
             'id': "deuxieme-reunion-patrimoine",
             'title': "Deuxième réunion patrimoine",
             'eventDateLabel': "Date de la réunion",
-            'activatedFields': ['reportCreationDate', 'reportReceptionDate'],
+            'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
@@ -2553,7 +2553,7 @@ urbanEventTypes = {
             'id': "premiere-reunion-patrimoine",
             'title': "Première réunion patrimoine",
             'eventDateLabel': "Date de la réunion",
-            'activatedFields': ['reportCreationDate', 'reportReceptionDate'],
+            'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
@@ -2564,7 +2564,7 @@ urbanEventTypes = {
             'id': "deuxieme-reunion-patrimoine",
             'title': "Deuxième réunion patrimoine",
             'eventDateLabel': "Date de la réunion",
-            'activatedFields': ['reportCreationDate', 'reportReceptionDate'],
+            'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
@@ -5515,7 +5515,7 @@ urbanEventTypes = {
             'id': "premiere-reunion-patrimoine",
             'title': "Première réunion patrimoine",
             'eventDateLabel': "Date de la réunion",
-            'activatedFields': ['reportCreationDate', 'reportReceptionDate'],
+            'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
@@ -5526,7 +5526,7 @@ urbanEventTypes = {
             'id': "deuxieme-reunion-patrimoine",
             'title': "Deuxième réunion patrimoine",
             'eventDateLabel': "Date de la réunion",
-            'activatedFields': ['reportCreationDate', 'reportReceptionDate'],
+            'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
@@ -6020,7 +6020,7 @@ urbanEventTypes = {
             'id': "premiere-reunion-patrimoine",
             'title': "Première réunion patrimoine",
             'eventDateLabel': "Date de la réunion",
-            'activatedFields': ['reportCreationDate', 'reportReceptionDate'],
+            'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
@@ -6031,7 +6031,7 @@ urbanEventTypes = {
             'id': "deuxieme-reunion-patrimoine",
             'title': "Deuxième réunion patrimoine",
             'eventDateLabel': "Date de la réunion",
-            'activatedFields': ['reportCreationDate', 'reportReceptionDate'],
+            'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
@@ -6382,7 +6382,7 @@ urbanEventTypes = {
             'id': "premiere-reunion-patrimoine",
             'title': "Première réunion patrimoine",
             'eventDateLabel': "Date de la réunion",
-            'activatedFields': ['reportCreationDate', 'reportReceptionDate'],
+            'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
@@ -6393,7 +6393,7 @@ urbanEventTypes = {
             'id': "deuxieme-reunion-patrimoine",
             'title': "Deuxième réunion patrimoine",
             'eventDateLabel': "Date de la réunion",
-            'activatedFields': ['reportCreationDate', 'reportReceptionDate'],
+            'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
