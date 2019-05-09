@@ -124,6 +124,9 @@ Vous pouvez facilement adapter vos modèles de documents pour prendre en charge 
 Décret Patrimoine
 -----------------
 
-.. todo::
 
-   Précisions à venir.
+#. Le Code wallon du Patrimoine entrant en vigueur ce 1er juin 2019, un onglet "Patrimoine" a été ajouté aux permis CODT
+
+.. image:: resources/images/patrimony_example.png
+  :width: 700
+  :alt: patrimony_example
