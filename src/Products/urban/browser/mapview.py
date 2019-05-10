@@ -55,7 +55,7 @@ class MapView(BrowserView):
             var dojoConfig = {
             async: true,
             parseOnLoad: true,
-            isDebug: true,
+            isDebug: false,
             locale: 'fr',
             configBasePath: '//%s/static/%s/fr',
             packages: [{
