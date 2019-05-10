@@ -65,7 +65,7 @@
 </div>
 
 <div metal:define-macro="imioSpwMapSetup" tal:define="staticUrbanmapHostHost context/portal_urban/getStaticPylonsHost">
-		<script type="text/javascript" src="//geoservices.wallonie.be/geoviewer/4.0/?t=I2PHLK3WBK"></script>
+		<script type="text/javascript" src="//geoservices.test.wallonie.be/geoviewer/4.0/?t=RSBD1ZGRZG"></script>
 		<link rel="stylesheet" type="text/css" href="//geoservices.wallonie.be/geoviewer/4.0/style/"/>
         <link rel="stylesheet" type="text/css" tal:attributes="href python:'//%s/static/spwfix.css'%staticUrbanmapHostHost"/>
         <script type="text/javascript" tal:attributes="src python:'//%s/static/imiomapspw.js'%staticUrbanmapHostHost"></script>
