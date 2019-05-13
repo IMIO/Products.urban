@@ -437,8 +437,8 @@ class UrbanEventInquiryView(UrbanEventInquiryBaseView):
                 print name, firstname
                 # to avoid having several times the same Recipient (that could for example be on several parcels
                 # we first look in portal_catalog where Recipients are catalogued
-                owner_obj = context.get(owner_id)
-                if not owner_obj:
+                owner_obj = owner_id and getattr(context, owner_id, None)
+                if owner_id and not owner_obj:
                     new_owner_id = context.invokeFactory(
                         "RecipientCadastre",
                         id=owner_id,
