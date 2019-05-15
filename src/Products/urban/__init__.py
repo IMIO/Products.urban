@@ -104,6 +104,7 @@ from Products.urban.content.licence import EnvClassBordering  # noqa
 from Products.urban.content.licence import EnvironmentBase  # noqa
 from Products.urban.content.licence import EnvironmentLicence  # noqa
 from Products.urban.content.licence import GenericLicence  # noqa
+from Products.urban.content.licence import Inspection  # noqa
 from Products.urban.content.licence import IntegratedLicence  # noqa
 from Products.urban.content.licence import MiscDemand  # noqa
 from Products.urban.content.licence import ParcelOutLicence  # noqa
@@ -120,6 +121,7 @@ from Products.urban.content import CODT_UniqueLicenceInquiry  # noqa
 from Products.urban.content import Inquiry  # noqa
 from Products.urban.content import UrbanEventAnnouncement  # noqa
 from Products.urban.content import UrbanEventInquiry  # noqa
+from Products.urban.content import UrbanEventInspectionReport  # noqa
 
 
 def initialize(context):

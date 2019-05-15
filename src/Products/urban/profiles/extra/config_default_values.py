@@ -1881,4 +1881,15 @@ default_values = {
         ],
 
     },
+    'Inspection': {
+
+        'inspectioncontexts': [
+            'UrbanVocabularyTerm',
+            {'id': "suite", 'title': u"Suite permis"},
+            {'id': "plainte", 'title': u"Plainte"},
+            {'id': "observation", 'title': u"Observation"},
+            {'id': "interne", 'title': u"Demande interne"},
+            {'id': "externe", 'title': u"Demande externe"},
+        ],
+    }
 }

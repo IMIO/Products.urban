@@ -75,6 +75,10 @@ class IUrbanEvent(Interface):
     """Marker interface for .UrbanEvent.UrbanEvent
     """
 
+class IUrbanEventInspectionReport(Interface):
+    """Marker interface for UrbanEventInspectionReport
+    """
+
 
 class IUrbanEventType(Interface):
     """Marker interface for .UrbanEventType.UrbanEventType
@@ -363,9 +367,15 @@ class IEventTypeType(IInterface):
     """
 
 
-class IExplosivesPossession(Interface):
+class IExplosivesPossession(IGenericLicence):
     """
     Marker interface for explosives possession
+    """
+
+
+class IInspection(IGenericLicence):
+    """
+    Marker interface for inspection
     """
 
 
@@ -561,6 +571,10 @@ class IImpactStudyEvent(Interface):
 
 class IInternalPreliminaryAdviceEvent(Interface):
     __doc__ = _("""IInternalPrelimaryAdvice type marker interface""")
+
+
+class IInspectionReportEvent(Interface):
+    __doc__ = _("""IInspectionReportEvent type marker interface""")
 
 
 class IUrbanBase(Interface):
