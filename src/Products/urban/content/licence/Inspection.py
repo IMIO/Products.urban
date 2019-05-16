@@ -14,8 +14,16 @@ from Products.urban.content.Inquiry import Inquiry
 from Products.urban.utils import setSchemataForInquiry
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
+from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 from plone import api
 
+slave_fields_bound_licence = (
+    {
+        'name': 'workLocations',
+        'action': 'hide',
+        'hide_values': (True, ),
+    },
+)
 
 schema = Schema((
     ReferenceField(
@@ -43,6 +51,15 @@ schema = Schema((
         schemata='urban_description',
         multiValued=False,
         relationship="bound_licence",
+    ),
+    BooleanField(
+        name='use_bound_licence_infos',
+        default=False,
+        widget=MasterBooleanWidget(
+            slave_fields=slave_fields_bound_licence,
+            label=_('urban_label_use_bound_licence_infos', default='Use_bound_licence_infos'),
+        ),
+        schemata='urban_description',
     ),
     StringField(
         name='inspection_context',
@@ -77,9 +94,42 @@ class Inspection(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
 
     security.declarePublic('getApplicants')
 
+    def getWorkLocations(self):
+        if self.getUse_bound_licence_infos():
+            bound_licence = self.getBound_licence()
+            if bound_licence:
+                return bound_licence.getWorkLocations()
+
+        field = self.getField('workLocations')
+        worklocations = field.get(self)
+        return worklocations
+
+    def getParcels(self):
+        if self.getUse_bound_licence_infos():
+            bound_licence = self.getBound_licence()
+            if bound_licence:
+                return bound_licence.getParcels()
+
+        return super(Inspection, self).getParcels()
+
+    security.declarePublic('getOfficialParcels')
+
+    def getOfficialParcels(self):
+        if self.getUse_bound_licence_infos():
+            bound_licence = self.getBound_licence()
+            if bound_licence:
+                return bound_licence.getOfficialParcels()
+
+        return super(Inspection, self).getOfficialParcels()
+
     def getApplicants(self):
         """
         """
+        if self.getUse_bound_licence_infos():
+            bound_licence = self.getBound_licence()
+            if bound_licence:
+                return bound_licence.getApplicants()
+
         applicants = self.getCorporations()
         applicants.extend(super(Inspection, self).getApplicants())
         return applicants
@@ -87,6 +137,11 @@ class Inspection(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
     security.declarePublic('get_applicants_history')
 
     def get_applicants_history(self):
+        if self.getUse_bound_licence_infos():
+            bound_licence = self.getBound_licence()
+            if bound_licence:
+                return bound_licence.get_applicants_history()
+
         applicants = self.get_corporations_history()
         applicants.extend(super(Inspection, self).get_applicants_history())
         return applicants
@@ -94,6 +149,11 @@ class Inspection(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
     security.declarePublic('getCorporations')
 
     def getCorporations(self):
+        if self.getUse_bound_licence_infos():
+            bound_licence = self.getBound_licence()
+            if bound_licence:
+                return bound_licence.getCorporations()
+
         corporations = [corp for corp in self.objectValues('Corporation')
                         if api.content.get_state(corp) == 'enabled']
         return corporations
@@ -101,6 +161,11 @@ class Inspection(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
     security.declarePublic('get_corporations_history')
 
     def get_corporations_history(self):
+        if self.getUse_bound_licence_infos():
+            bound_licence = self.getBound_licence()
+            if bound_licence:
+                return bound_licence.get_corporations_history()
+
         return [corp for corp in self.objectValues('Corporation')
                 if api.content.get_state(corp) == 'disabled']
 
@@ -116,15 +181,18 @@ def finalize_schema(schema, folderish=False, moveDiscussion=True):
        Finalizes the type schema to alter some fields
     """
     for field in schema.fields():
-        if field.schemata not in [
-                'urban_description',
-                'urban_advices',
-                'metadata',
-                'default'
-            ]:
+        allowed_schematas = [
+            'urban_description',
+            'urban_advices',
+            'metadata',
+            'default'
+        ]
+        if field.schemata not in allowed_schematas:
             schema.delField(field.__name__)
     schema.delField('folderCategory')
     schema.moveField('description', after='inspection_context')
+    schema.moveField('bound_licence', before='workLocations')
+    schema.moveField('use_bound_licence_infos', after='bound_licence')
     return schema
 
 
