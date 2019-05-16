@@ -185,6 +185,9 @@
 <type type_id="Inquiry">
   <bound-workflow workflow_id="" />
 </type>
+<type type_id="Inspection">
+  <bound-workflow workflow_id="urban_licence_workflow" />
+</type>
 <type type_id="Layer">
   <bound-workflow workflow_id="" />
 </type>
@@ -217,6 +220,9 @@
 </type>
 <type type_id="UrbanEventCollege">
  <bound-workflow workflow_id="college_event_workflow" />
+</type>
+<type type_id="UrbanEventInspectionReport">
+  <bound-workflow workflow_id="urbanevent_workflow" />
 </type>
 <type type_id="UrbanEventNotificationCollege">
  <bound-workflow workflow_id="urbanevent_workflow" />
