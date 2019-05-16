@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2019-05-15 13:50+0000\n"
+"POT-Creation-Date: 2019-05-16 08:36+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -1114,8 +1114,8 @@ msgstr "Aucun événement n'est encore lié à cette enquête publique"
 
 #. Default: "None"
 #: ../browser/licence/templates/envclassborderingmacros.pt:40
+#: ../browser/licence/templates/inspectionmacros.pt:15
 #: ../browser/licence/templates/licencemacros.pt:5
-#: ../browser/licence/templates/licencetabsmacros.pt:84
 msgid "content_none"
 msgstr "N.C."
 
@@ -2875,7 +2875,7 @@ msgid "urban_label_bis"
 msgstr "Bis"
 
 #. Default: "Bound licence"
-#: ../content/licence/Inspection.py:31
+#: ../content/licence/Inspection.py:39
 msgid "urban_label_bound_licence"
 msgstr "Dossier lié"
 
@@ -3565,7 +3565,7 @@ msgid "urban_label_inquiry_type"
 msgstr "Type de publicité"
 
 #. Default: "Inspection_context"
-#: ../content/licence/Inspection.py:51
+#: ../content/licence/Inspection.py:68
 msgid "urban_label_inspection_context"
 msgstr "Contexte d'inspection"
 
@@ -4935,6 +4935,11 @@ msgstr "Utiliser les onglets supplémentaires pour l'affichage"
 msgid "urban_label_useTabbingForEdit"
 msgstr "Utiliser les onglets supplémentaires pour l'édition"
 
+#. Default: "Use_bound_licence_infos"
+#: ../content/licence/Inspection.py:60
+msgid "urban_label_use_bound_licence_infos"
+msgstr "Prendre les données du permis lié"
+
 #. Default: "Usedattributes"
 #: LicenceConfig.py
 msgid "urban_label_usedAttributes"
@@ -4971,9 +4976,9 @@ msgid "urban_label_workLocationHouseNumber"
 msgstr "Numéro et boîte"
 
 #. Default: "Work locations"
+#: ../browser/licence/templates/inspectionmacros.pt:11
 #: ../browser/licence/templates/worklocation_macro.pt:2
 #: ../content/licence/EnvClassBordering.py:27
-#: ../content/licence/GenericLicence.py:148
 msgid "urban_label_workLocations"
 msgstr "Adresse(s) des travaux"
 
