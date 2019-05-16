@@ -4042,7 +4042,7 @@ msgstr "Organisation"
 #. Default: "other_followup_proposition"
 #: ../content/UrbanEventInspectionReport.py:74
 msgid "urban_label_other_followup_proposition"
-msgstr ""
+msgstr "Autre proposition de suivi"
 
 #. Default: "OutOfTime"
 #: ../Claimant.py:70
