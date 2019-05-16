@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-05-15 13:50+0000\n"
+"POT-Creation-Date: 2019-05-16 08:36+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1091,8 +1091,8 @@ msgstr ""
 
 #. Default: "None"
 #: ../browser/licence/templates/envclassborderingmacros.pt:40
+#: ../browser/licence/templates/inspectionmacros.pt:15
 #: ../browser/licence/templates/licencemacros.pt:5
-#: ../browser/licence/templates/licencetabsmacros.pt:84
 msgid "content_none"
 msgstr ""
 
@@ -2841,7 +2841,7 @@ msgid "urban_label_bis"
 msgstr ""
 
 #. Default: "Bound licence"
-#: ../content/licence/Inspection.py:31
+#: ../content/licence/Inspection.py:39
 msgid "urban_label_bound_licence"
 msgstr ""
 
@@ -3529,7 +3529,7 @@ msgid "urban_label_inquiry_type"
 msgstr ""
 
 #. Default: "Inspection_context"
-#: ../content/licence/Inspection.py:51
+#: ../content/licence/Inspection.py:68
 msgid "urban_label_inspection_context"
 msgstr ""
 
@@ -4898,6 +4898,11 @@ msgstr ""
 msgid "urban_label_useTabbingForEdit"
 msgstr ""
 
+#. Default: "Use_bound_licence_infos"
+#: ../content/licence/Inspection.py:60
+msgid "urban_label_use_bound_licence_infos"
+msgstr ""
+
 #. Default: "Usedattributes"
 #: LicenceConfig.py
 msgid "urban_label_usedAttributes"
@@ -4934,9 +4939,9 @@ msgid "urban_label_workLocationHouseNumber"
 msgstr ""
 
 #. Default: "Work locations"
+#: ../browser/licence/templates/inspectionmacros.pt:11
 #: ../browser/licence/templates/worklocation_macro.pt:2
 #: ../content/licence/EnvClassBordering.py:27
-#: ../content/licence/GenericLicence.py:148
 msgid "urban_label_workLocations"
 msgstr ""
 
