@@ -227,7 +227,7 @@ schema = Schema((
             label=_('urban_label_natura2000Details', default='Natura2000details'),
         ),
         default_content_type='text/html',
-        default_method='getDefaultText',
+        # default_method='getDefaultText',
         schemata='urban_description',
         default_output_type='text/html',
     ),
