@@ -5,7 +5,8 @@ Changes
 2.5 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- provide the add company feature to the CU1 process
+  [fngaha]
 
 
 2.4 (2019-03-25)
