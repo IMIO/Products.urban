@@ -365,6 +365,7 @@ urbanEventTypes = {
             'title': "Réunion patrimoine supplémentaire",
             'eventDateLabel': "Date de la réunion",
             'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
+            'showTitle' : True,
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
@@ -635,6 +636,7 @@ urbanEventTypes = {
             'title': "Réunion patrimoine supplémentaire",
             'eventDateLabel': "Date de la réunion",
             'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
+            'showTitle' : True,
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
@@ -794,6 +796,7 @@ urbanEventTypes = {
             'title': "Réunion patrimoine supplémentaire",
             'eventDateLabel': "Date de la réunion",
             'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
+            'showTitle' : True,
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
@@ -842,6 +845,7 @@ urbanEventTypes = {
             'title': "Réunion patrimoine supplémentaire",
             'eventDateLabel': "Date de la réunion",
             'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
+            'showTitle' : True,
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
@@ -1132,6 +1136,7 @@ urbanEventTypes = {
             'title': "Réunion patrimoine supplémentaire",
             'eventDateLabel': "Date de la réunion",
             'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
+            'showTitle' : True,
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
@@ -1180,6 +1185,7 @@ urbanEventTypes = {
             'title': "Réunion patrimoine supplémentaire",
             'eventDateLabel': "Date de la réunion",
             'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
+            'showTitle' : True,
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
@@ -1665,6 +1671,7 @@ urbanEventTypes = {
             'title': "Réunion patrimoine supplémentaire",
             'eventDateLabel': "Date de la réunion",
             'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
+            'showTitle' : True,
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
@@ -2576,6 +2583,7 @@ urbanEventTypes = {
             'title': "Réunion patrimoine supplémentaire",
             'eventDateLabel': "Date de la réunion",
             'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
+            'showTitle' : True,
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
@@ -5538,6 +5546,7 @@ urbanEventTypes = {
             'title': "Réunion patrimoine supplémentaire",
             'eventDateLabel': "Date de la réunion",
             'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
+            'showTitle' : True,
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
@@ -6043,6 +6052,7 @@ urbanEventTypes = {
             'title': "Réunion patrimoine supplémentaire",
             'eventDateLabel': "Date de la réunion",
             'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
+            'showTitle' : True,
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
@@ -6405,6 +6415,7 @@ urbanEventTypes = {
             'title': "Réunion patrimoine supplémentaire",
             'eventDateLabel': "Date de la réunion",
             'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
+            'showTitle' : True,
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
