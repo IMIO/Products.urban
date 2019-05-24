@@ -106,6 +106,16 @@ full_patrimony_slave_fields = (
             'action': 'hide',
             'hide_values': ('none', 'patrimonial'),
         },
+        {
+            'name': 'patrimony_analysis',
+            'action': 'hide',
+            'hide_values': ('none',),
+        },
+        {
+            'name': 'patrimony_observation',
+            'action': 'hide',
+            'hide_values': ('none',),
+        },
 )
 
 schema = Schema((
