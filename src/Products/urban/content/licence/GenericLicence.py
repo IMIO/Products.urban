@@ -703,7 +703,7 @@ schema = Schema((
             label=_('urban_label_protectedBuilding',
                     default='Protectedbuilding'),
         ),
-        schemata='urban_location',
+        schemata='urban_patrimony',
         multiValued=1,
         vocabulary_factory='urban.vocabulary.ProtectedBuilding',
         default_method='getDefaultValue',
@@ -717,7 +717,7 @@ schema = Schema((
         ),
         default_content_type='text/plain',
         default_method='getDefaultText',
-        schemata='urban_location',
+        schemata='urban_patrimony',
         default_output_type='text/html',
     ),
     LinesField(
@@ -1298,6 +1298,15 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
 
     def getFirstDeposit(self):
         return self.getFirstEvent(interfaces.IDepositEvent)
+
+    def getFirstPatrimonyMeeting(self):
+        return self.getFirstEvent(interfaces.IPatrimonyMeetingEvent)
+
+    def getLastPatrimonyMeeting(self):
+        return self.getLastEvent(interfaces.IPatrimonyMeetingEvent)
+
+    def getAllPatrimonyMeeting(self):
+        return self.getAllEvents(interfaces.IPatrimonyMeetingEvent)
 
     def getLastSimpleCollege(self):
         return self.getLastEvent(interfaces.ISimpleCollegeEvent)
