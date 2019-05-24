@@ -67,9 +67,10 @@
             You must encode applicant(s)
         </p>
         <tal:listing content="structure view/renderApplicantListing" />
+              <!--tal:condition="python: member.has_permission('urban: Add Contact', context)"-->
         <form tal:define="ctype python: context.portal_types.getTypeInfo('Applicant');
                          member context/@@plone_portal_state/member;"
-              tal:condition="python: member.has_permission('urban: Add Contact', context)"
+              tal:condition="python: False and member.has_permission('urban: Add Contact', context)"
               tal:attributes="action python: context.absolute_url() + '/createObject'"
               i18n:domain="urban" name="quickAdd"  action="createObject" method="post">
             <input type="hidden" name="type_name" value="#" tal:attributes="value ctype/id" />
@@ -91,7 +92,7 @@
         </div>
         <form tal:define="ctype python: context.portal_types.getTypeInfo('Proprietary');
                           member context/@@plone_portal_state/member;"
-              tal:condition="python: member.has_permission('urban: Add Contact', context)"
+              tal:condition="python: not getattr(context, 'use_bound_licence_infos', False) and member.has_permission('urban: Add Contact', context)"
               tal:attributes="action python: context.absolute_url() + '/createObject'"
               i18n:domain="urban" name="quickAdd"  action="createObject" method="post">
             <input type="hidden" name="type_name" value="#" tal:attributes="value ctype/id" />
@@ -111,7 +112,7 @@
         <tal:listing content="structure view/renderApplicantListing" />
         <form tal:define="ctype python: context.portal_types.getTypeInfo('Applicant');
                          member context/@@plone_portal_state/member;"
-              tal:condition="python: member.has_permission('urban: Add Contact', context)"
+              tal:condition="python: not getattr(context, 'use_bound_licence_infos', False) and member.has_permission('urban: Add Contact', context)"
               tal:attributes="action python: context.absolute_url() + '/createObject'"
               i18n:domain="urban" name="quickAdd"  action="createObject" method="post" style="float: left">
             <input type="hidden" name="type_name" value="#" tal:attributes="value ctype/id" />
@@ -119,7 +120,7 @@
         </form>
         <form tal:define="ctype python: context.portal_types.getTypeInfo('Corporation');
                          member context/@@plone_portal_state/member;"
-              tal:condition="python: member.has_permission('urban: Add Corporation', context)"
+              tal:condition="python: not getattr(context, 'use_bound_licence_infos', False) and member.has_permission('urban: Add Corporation', context)"
               tal:attributes="action python: context.absolute_url() + '/createObject'"
               i18n:domain="urban" name="quickAdd"  action="createObject" method="post" style="float: left">
             <input type="hidden" name="type_name" value="#" tal:attributes="value ctype/id" />

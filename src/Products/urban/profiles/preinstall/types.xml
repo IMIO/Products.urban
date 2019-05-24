@@ -152,6 +152,8 @@
          meta_type="Dexterity FTI"/>
  <object name="UrbanEventInquiry"
          meta_type="Factory-based Type Information with dynamic views"/>
+ <object name="UrbanEventInspectionReport"
+         meta_type="Factory-based Type Information with dynamic views"/>
  <object name="UrbanDoc"
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="PreliminaryNotice"
@@ -165,6 +167,8 @@
  <object name="ExplosivesPossession"
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="RoadDecree"
+         meta_type="Factory-based Type Information with dynamic views"/>
+ <object name="Inspection"
          meta_type="Factory-based Type Information with dynamic views"/>
  <!-- ##/code-section TYPES -->
 </object>

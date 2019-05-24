@@ -179,6 +179,10 @@
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".road_decree.update_reference" />
 
+  <subscriber for="..interfaces.IInspection
+                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+              handler=".inspectionEvents.setInspectionBoundLicence" />
+
   <!-- do this to update schedule tasks when sending a college event to PM -->
   <subscriber for="..interfaces.IUrbanEvent
                    imio.pm.wsclient.interfaces.ISentToPMEvent"

@@ -431,4 +431,19 @@
           permission="zope2.View"
   />
 
+  <browser:page
+     for="Products.urban.interfaces.IInspection"
+     name="inspectionview"
+     class=".inspectionview.InspectionView"
+     template="templates/inspectionview.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     name="inspection-macros"
+     for="Products.urban.interfaces.IInspection"
+     template="templates/inspectionmacros.pt"
+     permission="zope2.View"
+  />
+
 </configure>

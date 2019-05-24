@@ -35,6 +35,7 @@ URBAN_TYPES_INTERFACES = {
     'EnvClassThree': interfaces.IEnvClassThree,
     'EnvClassBordering': interfaces.IEnvClassBordering,
     'GenericLicence': interfaces.IGenericLicence,
+    'Inspection': interfaces.IInspection,
     'IntegratedLicence': interfaces.IIntegratedLicence,
     'MiscDemand': interfaces.IMiscDemand,
     'NotaryLetter': interfaces.INotaryLetter,

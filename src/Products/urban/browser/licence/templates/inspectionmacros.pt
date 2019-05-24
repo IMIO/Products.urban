@@ -10,26 +10,12 @@
                 </tal:show_disabled_applicants>
             </metal:applicants>
 
-            <metal:representatives fill-slot="representatives">
-                <metal:representatives_macro use-macro="here/@@licencemacros/urbanArchitectsMacro" />
-            </metal:representatives>
 
         </metal:parent_call>
     <!--/tal:vars-->
 
 </metal:description>
 
-<metal:analysis define-macro="analysis_macro" i18n:domain="urban">
-    <metal:parent_call use-macro="here/@@licencetabs-macros/analysis_macro">
-    </metal:parent_call>
-</metal:analysis>
-
-<metal:road define-macro="road_macro" i18n:domain="urban">
-    <metal:parent_call use-macro="here/@@licencetabs-macros/road_macro">
-    </metal:parent_call>
-</metal:road>
-
-<metal:location define-macro="location_macro" i18n:domain="urban">
-    <metal:parent_call use-macro="here/@@licencetabs-macros/location_macro">
-    </metal:parent_call>
-</metal:location>
+<metal:advices define-macro="advices_macro" i18n:domain="urban">
+    <metal:parent_call use-macro="here/@@licencetabs-macros/advices_macro" />
+</metal:advices>
