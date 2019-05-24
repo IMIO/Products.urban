@@ -469,6 +469,21 @@ msgstr ""
 msgid "delegatesignatures_folder_title"
 msgstr ""
 
+msgid "general_disposition_folder_title"
+msgstr ""
+
+msgid "classification_order_scope_folder_title"
+msgstr ""
+
+msgid "sct_folder_title"
+msgstr ""
+
+msgid "sdc_folder_title"
+msgstr ""
+
+msgid "pcazones_folder_title"
+msgstr ""
+
 msgid "mainsignatures_folder_title"
 msgstr ""
 
@@ -2626,3 +2641,37 @@ msgstr ""
 
 msgid "roaddecrees"
 msgstr ""
+
+msgid "urban_label_patrimony_analysis"
+msgstr ""
+
+msgid "urban_label_patrimony_architectural_complex"
+msgstr ""
+
+msgid "urban_label_patrimony_site"
+msgstr ""
+
+msgid "urban_label_patrimony_archaeological_map"
+msgstr ""
+
+msgid "urban_label_patrimony_project_gtoret_1ha"
+msgstr ""
+
+msgid "urban_label_patrimony_monument"
+msgstr ""
+
+msgid "urban_label_patrimony_observation"
+msgstr ""
+
+msgid "urban_label_classification_order_scope"
+msgstr ""
+
+msgid "urban_label_general_disposition"
+msgstr ""
+
+msgid "urban_label_reportCreationDate"
+msgstr ""
+
+msgid "urban_label_reportReceptionDate"
+msgstr ""
+
