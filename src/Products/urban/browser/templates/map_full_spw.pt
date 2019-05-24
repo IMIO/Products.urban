@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html tal:define="pylonsHost context/portal_url/portal_urban/getPylonsHost">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>map4imio</title>
+    	
+		<metal:listing use-macro="here/@@map-macros/spwMapConfigParcel" />
+    	<metal:listing use-macro="here/@@map-macros/imioSpwMapSetup" />
+    	<metal:listing use-macro="here/@@map-macros/parcelmapCSS" />
+		<metal:listing use-macro="here/@@map-macros/fullmapCSS" />
+	</head>
+<body class="claro">
+		<div id="spwViewerDiv"></div>
+</body>
+</html>
