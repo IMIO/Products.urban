@@ -18,6 +18,7 @@ from Products.urban.interfaces import IUrbanDoc
 
 from plone import api
 from plone.memoize import view
+from zope.annotation import IAnnotations
 
 
 class LicenceView(BrowserView):
@@ -294,6 +295,26 @@ class LicenceView(BrowserView):
 
     def get_state(self):
         return api.content.get_state(self.context)
+
+    def has_bound_inspections(self):
+        annotations = IAnnotations(self.context)
+        inspections = annotations.get('urban.bound_inspections', [])
+        return inspections
+
+    def get_bound_inspections(self):
+        annotations = IAnnotations(self.context)
+        inspection_UIDs = list(annotations['urban.bound_inspections'])
+        if inspection_UIDs:
+            licence_folder = api.portal.get().urban
+            catalog = api.portal.get_tool('portal_catalog')
+            inspection_brains = catalog(UID=inspection_UIDs)
+            inspections = [{
+                'title': b.Title,
+                'url': '{}/{}s/{}'.format(licence_folder.absolute_url(), b.portal_type.lower(), b.id),
+                'state': b.review_state
+                }
+                for b in inspection_brains]
+            return inspections
 
 
 class CODTLicenceView(LicenceView):

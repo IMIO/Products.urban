@@ -225,7 +225,7 @@ Problèmes à l'ouverture du fichier
 
 **Note:** Pour les applications iA.Urban et iA.Docs, les documents générés et les modèles à éditer sont au format :samp:`.odt` et il est impératif de les ouvrir avec LibreOffice, comme indiqué dans les prérequis.
 
-Si un autre éditeur de texte ouvre le document, se référer à la `Configuration de ZopeEdit`_  et modifier aussi la ligne :samp:`editor=` avec le chemin de l'exécutable de LibreOffice Writer. Sur une installation par défaut, ce sera par exemple: :samp:`editor=C:\Program Files\LibreOffice\program\swriter.exe`.
+Si un autre éditeur de texte ouvre le document, se référer à la `Configuration de ZopeEdit`_  et modifier aussi la ligne :samp:`editor=` avec le chemin de l'exécutable de LibreOffice Writer. Sur une installation par défaut, ce sera par exemple: :samp:`editor=C:\\Program Files\\LibreOffice\\program\\swriter.exe`.
 
 Configuration de Firefox
 ^^^^^^^^^^^^^^^^^^^^^^^^

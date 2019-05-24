@@ -60,6 +60,13 @@
 
     <div class="licence-column">
 
+        <fieldset tal:condition="view/has_bound_inspections">
+                <legend i18n:translate="urban_bound_inspections">Bound inspections</legend><br/><br/>
+            <tal:inspections repeat='inspection view/get_bound_inspections'>
+                <div> <a tal:attributes="href python:inspection['url']" tal:content="python: inspection['title']"/>
+                </div>
+            </tal:inspections>
+        </fieldset>
         <fieldset>
             <legend i18n:translate="urban_description_key_dates_legend">Key dates</legend>
             <table tal:define="keyDates view/getKeyDates"

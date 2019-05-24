@@ -123,6 +123,9 @@ msgstr ""
 msgid "Geometrician data"
 msgstr ""
 
+msgid "Inspection"
+msgstr ""
+
 msgid "IntegratedLicence"
 msgstr ""
 
@@ -663,6 +666,12 @@ msgstr ""
 msgid "inquiry_to"
 msgstr ""
 
+msgid "inspection_urbanconfig_title"
+msgstr ""
+
+msgid "inspectioncontexts_folder_title"
+msgstr ""
+
 msgid "integratedlicence_urbanconfig_title"
 msgstr ""
 
@@ -1007,6 +1016,9 @@ msgid "persons_grades_folder_title"
 msgstr ""
 
 msgid "persons_titles_folder_title"
+msgstr ""
+
+msgid "roaddecree_urbanconfig_title"
 msgstr ""
 
 msgid "inquiry_suspension_folder_title"

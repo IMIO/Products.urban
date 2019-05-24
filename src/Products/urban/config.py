@@ -54,6 +54,8 @@ class ExternalConfig(object):
         return self.sections.get(section_name, {})
 
 
+WAL_MAP_CFG = ExternalConfig('carto.cfg')
+
 # Permissions
 DEFAULT_ADD_CONTENT_PERMISSION = "Add portal content"
 setDefaultRoles(DEFAULT_ADD_CONTENT_PERMISSION, ('Manager', 'Owner', 'Contributor'))
@@ -117,6 +119,7 @@ ADD_CONTENT_PERMISSIONS = {
     'UrbanEventOpinionRequest': 'urban: Add UrbanEventOpinionRequest',
     'UrbanConfigurationValue': 'urban: Add UrbanConfigurationValue',
     'ExplosivesPossession': 'urban: Add ExplosivesPossession',
+    'Inspection': 'urban: Add Inspection',
     'RoadDecree': 'urban: Add RoadDecree',
 }
 
@@ -149,6 +152,7 @@ setDefaultRoles('urban: Add Division', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add FolderManager', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add GenericLicence', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add IntegratedLicence', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add Inspection', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add Inquiry', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add CODT_Inquiry', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add Layer', ("Manager", "Contributor"))
@@ -205,6 +209,7 @@ URBAN_TYPES = [
     'NotaryLetter', 'CODT_NotaryLetter',
     'ProjectMeeting', 'ExplosivesPossession',
     'RoadDecree',
+    'Inspection',
 ]
 
 URBAN_CWATUPE_TYPES = [
@@ -217,7 +222,7 @@ URBAN_CODT_TYPES = [
     'CODT_BuildLicence', 'CODT_Article127', 'CODT_CommercialLicence', 'CODT_IntegratedLicence',
     'CODT_ParcelOutLicence', 'CODT_UniqueLicence', 'CODT_UrbanCertificateTwo', 'CODT_UrbanCertificateOne',
     'CODT_NotaryLetter', 'ProjectMeeting', 'MiscDemand', 'PreliminaryNotice',
-    'PatrimonyCertificate', 'Division', 'RoadDecree',
+    'PatrimonyCertificate', 'Division', 'RoadDecree', 'Inspection'
 ]
 
 URBAN_ENVIRONMENT_TYPES = [

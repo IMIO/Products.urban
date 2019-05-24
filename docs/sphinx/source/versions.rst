@@ -67,3 +67,66 @@ Découplage des autorisations entre urbanisme et environnement : la gestion des 
   :width: 300
   :alt: versions_add_env_user_group
 
+
+
+*********
+Urban 2.4
+*********
+
+
+
+Nouveautés
+==========
+
+Gestion du cadastre 2018
+------------------------
+
+À partir des données cadastrales en version 2018, nous vous permettons de rechercher et ajouter des parcelles à jour pour l'année 2018.
+La recherche dans l'historique cadastral n'est plus présente, ces données n'étant plus fournies par le cadastre.
+
+La recherche des propriétaires pour une enquête publique reprend maintenant les différents propriétaires possédant un bien à la même adresse de manière indépendante : une ligne par propriétaire.
+
+
+Publipostage sans extension
+---------------------------
+
+L'extension pour LibreOffice n'est plus nécessaire : vous pouvez dorénavant utiliser les dernières versions de `LibreOffice
+<https://fr.libreoffice.org//>`_!
+
+Pour cela, il faut procéder en deux temps :
+
+* Adaptez vos modèles utilisant le publipostage
+
+Vous pouvez facilement adapter vos modèles de documents pour prendre en charge cette nouvelle manière de procéder, en indiquant les informations souhaitées dans le "pavé" de destination :
+
+.. image:: resources/images/new_mailing_fusion.png
+  :width: 400
+  :alt: new_mailing_fusion
+
+* Utilisez le publipostage
+
+
+   #. Générez le document, comme avant, permettra de fusionner les champs à partir du modèle (hormis le destinataire).
+   #. Ensuite cliquez sur la petite icône multi-page pour appliquer le publipostage
+   #. Cela créera une pièce jointe à l'événement reprenant le document généré pour chaque destinataire concerné.
+
+.. image:: resources/images/new_mailing_example.png
+  :width: 700
+  :alt: new_mailing_example
+
+.. warning::
+   Le changement de version de LibreOffice nécessite dans certains cas d'adapter la configuration ZopeEdit au niveau du chemin vers LibreOffice  : :ref:`lo-path-issue` .
+
+
+
+
+
+Décret Patrimoine
+-----------------
+
+
+#. Le Code wallon du Patrimoine entrant en vigueur ce 1er juin 2019, un onglet "Patrimoine" a été ajouté aux permis CODT
+
+.. image:: resources/images/patrimony_example.png
+  :width: 700
+  :alt: patrimony_example
