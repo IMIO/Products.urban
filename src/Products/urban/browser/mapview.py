@@ -4,6 +4,7 @@ from Acquisition import aq_inner, aq_base
 
 from Products.CMFPlone import PloneMessageFactory as _
 from Products.Five import BrowserView
+from Products.urban.config import WAL_MAP_CFG
 from Products.urban.fingerpointing import map_logger
 from Products.urban.interfaces import IInquiry
 from Products.urban.browser.table.urbantable import ParcelsTable
@@ -154,6 +155,14 @@ class MapView(BrowserView):
         if request.get('show_old_parcel'):
             return True
         return [parcel for parcel in context.getParcels() if parcel.getIsOfficialParcel() and not parcel.getOutdated()]
+
+    def get_mapviewer_url(self):
+        url = WAL_MAP_CFG and WAL_MAP_CFG.url or ''
+        return url
+
+    def get_mapviewer_js_id(self):
+        js_id = WAL_MAP_CFG and WAL_MAP_CFG.javascript_id or ''
+        return js_id
 
 
 class FullMapView(MapView):
