@@ -408,6 +408,26 @@ schema = Schema((
         default_output_type='text/html',
         optional=True,
     ),
+    DateTimeField(
+        name='reportCreationDate',
+        widget=DateTimeField._properties['widget'](
+            show_hm=False,
+            format="%d/%m/%Y",
+            starting_year=2010,
+            label=_('urban_label_reportCreationDate', default='ReportCreationDate'),
+        ),
+        optional=True,
+    ),
+    DateTimeField(
+        name='reportReceptionDate',
+        widget=DateTimeField._properties['widget'](
+            show_hm=False,
+            format="%d/%m/%Y",
+            starting_year=2010,
+            label=_('urban_label_reportReceptionDate', default='ReportReceptionDate'),
+        ),
+        optional=True,
+    ),
 
 ),
 )

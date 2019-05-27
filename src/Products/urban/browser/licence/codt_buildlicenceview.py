@@ -42,3 +42,6 @@ class CODTBuildLicenceView(CODTLicenceView):
 
     def getPebFields(self):
         return self.getSchemataFields(schemata='urban_peb')
+
+    def getPatrimonyFields(self):
+        return self.getSchemataFields(schemata='urban_patrimony')

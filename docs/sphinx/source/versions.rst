@@ -19,10 +19,10 @@ Urban 2.3
 
 
 Nouveautés
-==========
+**********
 
 Carottage
----------
+=========
 
 Le carottage permet de récupérer des informations des couches de la Région pour préremplir votre dossier à partir des parcelles encodées.
 
@@ -49,7 +49,7 @@ Les informations issues du carottage vous sont proposées à l'ajout avant de le
 
 
 Nouvelles procédures
---------------------
+====================
 
 "Permis d'environnement limitrophes" et "Permis d'implantation commerciale" ont été ajoutées.
 
@@ -59,7 +59,7 @@ Nouvelles procédures
 
 
 Nouveaux groupes d'utilisateurs d'environnement
------------------------------------------------
+===============================================
 
 Découplage des autorisations entre urbanisme et environnement : la gestion des permissions est maintenant plus fine à ce niveau.
 
@@ -76,10 +76,10 @@ Urban 2.4
 
 
 Nouveautés
-==========
+**********
 
 Gestion du cadastre 2018
-------------------------
+========================
 
 À partir des données cadastrales en version 2018, nous vous permettons de rechercher et ajouter des parcelles à jour pour l'année 2018.
 La recherche dans l'historique cadastral n'est plus présente, ces données n'étant plus fournies par le cadastre.
@@ -88,7 +88,7 @@ La recherche des propriétaires pour une enquête publique reprend maintenant le
 
 
 Publipostage sans extension
----------------------------
+===========================
 
 L'extension pour LibreOffice n'est plus nécessaire : vous pouvez dorénavant utiliser les dernières versions de `LibreOffice
 <https://fr.libreoffice.org//>`_!
@@ -122,11 +122,27 @@ Vous pouvez facilement adapter vos modèles de documents pour prendre en charge 
 
 
 Décret Patrimoine
------------------
+=================
 
 
-#. Le Code wallon du Patrimoine entrant en vigueur ce 1er juin 2019, un onglet "Patrimoine" a été ajouté aux permis CODT
+Le Code wallon du Patrimoine entrant en vigueur ce 1er juin 2019, un onglet "Patrimoine" a été ajouté aux permis CODT
+---------------------------------------------------------------------------------------------------------------------
 
 .. image:: resources/images/patrimony_example.png
   :width: 700
   :alt: patrimony_example
+
+
+Nouvelles couches carottables
+-----------------------------
+
+.. todo::
+   À venir
+
+
+Nouvelle interface graphique pour la cartographie
+=================================================
+
+.. todo::
+   À venir
+
