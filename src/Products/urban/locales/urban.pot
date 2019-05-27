@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-05-15 13:50+0000\n"
+"POT-Creation-Date: 2019-05-16 08:36+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -420,6 +420,10 @@ msgstr ""
 
 #: ../interfaces.py:397
 msgid "IOpinionRequest type marker interface"
+msgstr ""
+
+#: ../interfaces.py:567
+msgid "IPatrimonyMeetingEvent type marker interface"
 msgstr ""
 
 #: ../interfaces.py:525
@@ -1018,6 +1022,9 @@ msgstr ""
 msgid "choose_a_value"
 msgstr ""
 
+msgid "classification_order_scope_folder_title"
+msgstr ""
+
 msgid "click_to_view_or_add"
 msgstr ""
 
@@ -1091,8 +1098,8 @@ msgstr ""
 
 #. Default: "None"
 #: ../browser/licence/templates/envclassborderingmacros.pt:40
+#: ../browser/licence/templates/inspectionmacros.pt:15
 #: ../browser/licence/templates/licencemacros.pt:5
-#: ../browser/licence/templates/licencetabsmacros.pt:84
 msgid "content_none"
 msgstr ""
 
@@ -1530,6 +1537,9 @@ msgstr ""
 #. Default: "Male"
 #: PersonTitleTerm.py
 msgid "gender_male"
+msgstr ""
+
+msgid "general_disposition_folder_title"
 msgstr ""
 
 #. Default: "Generate a linked document"
@@ -2050,6 +2060,9 @@ msgstr ""
 msgid "pcaszone_folder_title"
 msgstr ""
 
+msgid "pcazones_folder_title"
+msgstr ""
+
 msgid "peb_complete_process"
 msgstr ""
 
@@ -2128,6 +2141,10 @@ msgstr ""
 #. Default: "Proprietary(ies)"
 #: ../browser/licence/templates/licencemacros.pt:83
 msgid "proprietaries"
+msgstr ""
+
+#: ../browser/licence/templates/licencetabsmacros.pt:224
+msgid "ranking_ordinance"
 msgstr ""
 
 #. Default: "RCU"
@@ -2214,6 +2231,12 @@ msgid "root-stats-search"
 msgstr ""
 
 msgid "rubrics_folder_title"
+msgstr ""
+
+msgid "sct_folder_title"
+msgstr ""
+
+msgid "sdc_folder_title"
 msgstr ""
 
 msgid "search-last-elements"
@@ -2751,6 +2774,11 @@ msgstr ""
 msgid "urban_label_approvalDate"
 msgstr ""
 
+#. Default: "Archeological_site"
+#: ../content/licence/CODT_BuildLicence.py:105
+msgid "urban_label_archeological_site"
+msgstr ""
+
 #. Default: "Architect(s)"
 #: ../browser/licence/templates/licencemacros.pt:10
 #: ../content/licence/BaseBuildLicence.py:380
@@ -2841,7 +2869,7 @@ msgid "urban_label_bis"
 msgstr ""
 
 #. Default: "Bound licence"
-#: ../content/licence/Inspection.py:31
+#: ../content/licence/Inspection.py:39
 msgid "urban_label_bound_licence"
 msgstr ""
 
@@ -2943,6 +2971,11 @@ msgstr ""
 msgid "urban_label_class"
 msgstr ""
 
+#. Default: "Classification_order_scope"
+#: ../content/licence/CODT_BaseBuildLicence.py:237
+msgid "urban_label_classification_order_scope"
+msgstr ""
+
 #. Default: "College Holidays"
 #: ../UrbanTool.py:130
 msgid "urban_label_collegeHolidays"
@@ -2975,6 +3008,11 @@ msgstr ""
 
 #: ../content/licence/ExplosivesPossession.py:52
 msgid "urban_label_comments_on_decision_project"
+msgstr ""
+
+#. Default: "Communal_inventory"
+#: ../content/licence/CODT_BuildLicence.py:137
+msgid "urban_label_communal_inventory"
 msgstr ""
 
 #. Default: "urban_commune"
@@ -3437,6 +3475,11 @@ msgstr ""
 msgid "urban_label_gender"
 msgstr ""
 
+#. Default: "General_disposition"
+#: ../content/licence/CODT_BaseBuildLicence.py:247
+msgid "urban_label_general_disposition"
+msgstr ""
+
 #. Default: "Generatesingletondocuments"
 #: ../UrbanTool.py:180
 msgid "urban_label_generateSingletonDocuments"
@@ -3529,7 +3572,7 @@ msgid "urban_label_inquiry_type"
 msgstr ""
 
 #. Default: "Inspection_context"
-#: ../content/licence/Inspection.py:51
+#: ../content/licence/Inspection.py:68
 msgid "urban_label_inspection_context"
 msgstr ""
 
@@ -4064,6 +4107,46 @@ msgstr ""
 msgid "urban_label_pashDetails"
 msgstr ""
 
+#. Default: "Patrimony"
+#: ../content/licence/CODT_BuildLicence.py:96
+msgid "urban_label_patrimony"
+msgstr ""
+
+#. Default: "Patrimony_analysis"
+#: ../content/licence/CODT_BaseBuildLicence.py:172
+msgid "urban_label_patrimony_analysis"
+msgstr ""
+
+#. Default: "Patrimony_archaeological_map"
+#: ../content/licence/CODT_BaseBuildLicence.py:201
+msgid "urban_label_patrimony_archaeological_map"
+msgstr ""
+
+#. Default: "Patrimony_architectural_complex"
+#: ../content/licence/CODT_BaseBuildLicence.py:185
+msgid "urban_label_patrimony_architectural_complex"
+msgstr ""
+
+#. Default: "Patrimony_monument"
+#: ../content/licence/CODT_BaseBuildLicence.py:217
+msgid "urban_label_patrimony_monument"
+msgstr ""
+
+#. Default: "Patrimony_observation"
+#: ../content/licence/CODT_BaseBuildLicence.py:224
+msgid "urban_label_patrimony_observation"
+msgstr ""
+
+#. Default: "Patrimony_project_gtoret_1ha"
+#: ../content/licence/CODT_BaseBuildLicence.py:209
+msgid "urban_label_patrimony_project_gtoret_1ha"
+msgstr ""
+
+#. Default: "Patrimony_site"
+#: ../content/licence/CODT_BaseBuildLicence.py:193
+msgid "urban_label_patrimony_site"
+msgstr ""
+
 #. Default: "Pca"
 #: ../content/licence/GenericLicence.py:534
 msgid "urban_label_pca"
@@ -4218,6 +4301,11 @@ msgstr ""
 msgid "urban_label_protectedBuildingDetails"
 msgstr ""
 
+#. Default: "Protection_zone"
+#: ../content/licence/CODT_BuildLicence.py:113
+msgid "urban_label_protection_zone"
+msgstr ""
+
 #. Default: "Publicroadmodifications"
 #: ../content/licence/EnvironmentLicence.py:77
 msgid "urban_label_publicRoadModifications"
@@ -4347,6 +4435,11 @@ msgstr ""
 msgid "urban_label_regional_guide_details"
 msgstr ""
 
+#. Default: "Regional_inventory_building"
+#: ../content/licence/CODT_BuildLicence.py:121
+msgid "urban_label_regional_inventory_building"
+msgstr ""
+
 #. Default: "Registrationnumber"
 #: Contact.py
 msgid "urban_label_registrationNumber"
@@ -4366,6 +4459,15 @@ msgstr ""
 #: ../content/licence/GenericLicence.py:826
 msgid "urban_label_reparcellingDetails"
 msgstr ""
+
+#. Default: "ReportCreationDate"
+#: ../UrbanEvent.py:417
+msgid "urban_label_reportCreationDate"
+msgstr ""
+
+#. Default: "ReportReceptionDate"
+#: ../UrbanEvent.py:427
+msgid "urban_label_reportReceptionDate"
 
 #. Default: "Report"
 #: ../content/UrbanEventInspectionReport.py:54
@@ -4570,6 +4672,11 @@ msgstr ""
 #: ../browser/licence/templates/worklocation_macro.pt:13
 #: ../content/licence/EnvironmentBase.py:313
 msgid "urban_label_situation"
+msgstr ""
+
+#. Default: "Small_popular_patrimony"
+#: ../content/licence/CODT_BuildLicence.py:129
+msgid "urban_label_small_popular_patrimony"
 msgstr ""
 
 #. Default: "Society"
@@ -4898,6 +5005,11 @@ msgstr ""
 msgid "urban_label_useTabbingForEdit"
 msgstr ""
 
+#. Default: "Use_bound_licence_infos"
+#: ../content/licence/Inspection.py:60
+msgid "urban_label_use_bound_licence_infos"
+msgstr ""
+
 #. Default: "Usedattributes"
 #: LicenceConfig.py
 msgid "urban_label_usedAttributes"
@@ -4934,9 +5046,9 @@ msgid "urban_label_workLocationHouseNumber"
 msgstr ""
 
 #. Default: "Work locations"
+#: ../browser/licence/templates/inspectionmacros.pt:11
 #: ../browser/licence/templates/worklocation_macro.pt:2
 #: ../content/licence/EnvClassBordering.py:27
-#: ../content/licence/GenericLicence.py:148
 msgid "urban_label_workLocations"
 msgstr ""
 

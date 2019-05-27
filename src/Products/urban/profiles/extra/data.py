@@ -338,6 +338,41 @@ urbanEventTypes = {
             ),
             'eventTypeType': ('Products.urban.interfaces.ITheLicenceEvent', 'Products.urban.interfaces.ILicenceNotificationEvent'),
         },
+        {
+            'id': "premiere-reunion-patrimoine",
+            'title': "Première réunion patrimoine",
+            'eventDateLabel': "Date de la réunion",
+            'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+            ),
+            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
+        },
+        {
+            'id': "deuxieme-reunion-patrimoine",
+            'title': "Deuxième réunion patrimoine",
+            'eventDateLabel': "Date de la réunion",
+            'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+            ),
+            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
+        },
+        {
+            'id': "reunion-patrimoine-supplementaire",
+            'title': "Réunion patrimoine supplémentaire",
+            'eventDateLabel': "Date de la réunion",
+            'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
+            'showTitle' : True,
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+            ),
+            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
+        },
+
     ),
     'codt_parceloutlicence': (
         {
@@ -574,6 +609,40 @@ urbanEventTypes = {
             ),
             'eventTypeType': ('Products.urban.interfaces.ITheLicenceEvent', 'Products.urban.interfaces.ILicenceNotificationEvent'),
         },
+        {
+            'id': "premiere-reunion-patrimoine",
+            'title': "Première réunion patrimoine",
+            'eventDateLabel': "Date de la réunion",
+            'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+            ),
+            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
+        },
+        {
+            'id': "deuxieme-reunion-patrimoine",
+            'title': "Deuxième réunion patrimoine",
+            'eventDateLabel': "Date de la réunion",
+            'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+            ),
+            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
+        },
+        {
+            'id': "reunion-patrimoine-supplementaire",
+            'title': "Réunion patrimoine supplémentaire",
+            'eventDateLabel': "Date de la réunion",
+            'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
+            'showTitle' : True,
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+            ),
+            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
+        },
     ),
     'codt_article127': (
         {
@@ -700,6 +769,40 @@ urbanEventTypes = {
 
             ),
         },
+        {
+            'id': "premiere-reunion-patrimoine",
+            'title': "Première réunion patrimoine",
+            'eventDateLabel': "Date de la réunion",
+            'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+            ),
+            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
+        },
+        {
+            'id': "deuxieme-reunion-patrimoine",
+            'title': "Deuxième réunion patrimoine",
+            'eventDateLabel': "Date de la réunion",
+            'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+            ),
+            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
+        },
+        {
+            'id': "reunion-patrimoine-supplementaire",
+            'title': "Réunion patrimoine supplémentaire",
+            'eventDateLabel': "Date de la réunion",
+            'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
+            'showTitle' : True,
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+            ),
+            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
+        },
     ),
     'codt_notaryletter': (
         {
@@ -714,6 +817,40 @@ urbanEventTypes = {
           ),
           'eventTypeType': ('Products.urban.interfaces.ITheLicenceEvent',
                             'Products.urban.interfaces.ILicenceNotificationEvent'),
+        },
+        {
+            'id': "premiere-reunion-patrimoine",
+            'title': "Première réunion patrimoine",
+            'eventDateLabel': "Date de la réunion",
+            'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+            ),
+            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
+        },
+        {
+            'id': "deuxieme-reunion-patrimoine",
+            'title': "Deuxième réunion patrimoine",
+            'eventDateLabel': "Date de la réunion",
+            'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+            ),
+            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
+        },
+        {
+            'id': "reunion-patrimoine-supplementaire",
+            'title': "Réunion patrimoine supplémentaire",
+            'eventDateLabel': "Date de la réunion",
+            'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
+            'showTitle' : True,
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+            ),
+            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
         },
     ),
     'codt_integratedlicence': (
@@ -972,6 +1109,40 @@ urbanEventTypes = {
                  'title': "Transmis des pièces au CRIC"},
             ),
         },
+        {
+            'id': "premiere-reunion-patrimoine",
+            'title': "Première réunion patrimoine",
+            'eventDateLabel': "Date de la réunion",
+            'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+            ),
+            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
+        },
+        {
+            'id': "deuxieme-reunion-patrimoine",
+            'title': "Deuxième réunion patrimoine",
+            'eventDateLabel': "Date de la réunion",
+            'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+            ),
+            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
+        },
+        {
+            'id': "reunion-patrimoine-supplementaire",
+            'title': "Réunion patrimoine supplémentaire",
+            'eventDateLabel': "Date de la réunion",
+            'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
+            'showTitle' : True,
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+            ),
+            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
+        },
     ),
     'codt_urbancertificateone': (
         {
@@ -986,6 +1157,40 @@ urbanEventTypes = {
             ),
             'eventTypeType': ('Products.urban.interfaces.ITheLicenceEvent',
                               'Products.urban.interfaces.ILicenceNotificationEvent'),
+        },
+        {
+            'id': "premiere-reunion-patrimoine",
+            'title': "Première réunion patrimoine",
+            'eventDateLabel': "Date de la réunion",
+            'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+            ),
+            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
+        },
+        {
+            'id': "deuxieme-reunion-patrimoine",
+            'title': "Deuxième réunion patrimoine",
+            'eventDateLabel': "Date de la réunion",
+            'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+            ),
+            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
+        },
+        {
+            'id': "reunion-patrimoine-supplementaire",
+            'title': "Réunion patrimoine supplémentaire",
+            'eventDateLabel': "Date de la réunion",
+            'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
+            'showTitle' : True,
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+            ),
+            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
         },
     ),
     'codt_urbancertificatetwo': (
@@ -1438,6 +1643,40 @@ urbanEventTypes = {
             ),
             'eventTypeType': ('Products.urban.interfaces.ITheLicenceEvent',
                               'Products.urban.interfaces.ILicenceNotificationEvent'),
+        },
+        {
+            'id': "premiere-reunion-patrimoine",
+            'title': "Première réunion patrimoine",
+            'eventDateLabel': "Date de la réunion",
+            'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+            ),
+            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
+        },
+        {
+            'id': "deuxieme-reunion-patrimoine",
+            'title': "Deuxième réunion patrimoine",
+            'eventDateLabel': "Date de la réunion",
+            'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+            ),
+            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
+        },
+        {
+            'id': "reunion-patrimoine-supplementaire",
+            'title': "Réunion patrimoine supplémentaire",
+            'eventDateLabel': "Date de la réunion",
+            'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
+            'showTitle' : True,
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+            ),
+            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
         },
     ),
     'buildlicence': (
@@ -2316,6 +2555,40 @@ urbanEventTypes = {
                  'title': "Affichage de la décision"},
             ),
             'eventTypeType': 'Products.urban.interfaces.IRecourseEvent',
+        },
+        {
+            'id': "premiere-reunion-patrimoine",
+            'title': "Première réunion patrimoine",
+            'eventDateLabel': "Date de la réunion",
+            'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+            ),
+            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
+        },
+        {
+            'id': "deuxieme-reunion-patrimoine",
+            'title': "Deuxième réunion patrimoine",
+            'eventDateLabel': "Date de la réunion",
+            'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+            ),
+            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
+        },
+        {
+            'id': "reunion-patrimoine-supplementaire",
+            'title': "Réunion patrimoine supplémentaire",
+            'eventDateLabel': "Date de la réunion",
+            'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
+            'showTitle' : True,
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+            ),
+            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
         },
     ),
     'uniquelicence': (
@@ -5246,6 +5519,40 @@ urbanEventTypes = {
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IRecourseEvent',
         },
+        {
+            'id': "premiere-reunion-patrimoine",
+            'title': "Première réunion patrimoine",
+            'eventDateLabel': "Date de la réunion",
+            'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+            ),
+            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
+        },
+        {
+            'id': "deuxieme-reunion-patrimoine",
+            'title': "Deuxième réunion patrimoine",
+            'eventDateLabel': "Date de la réunion",
+            'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+            ),
+            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
+        },
+        {
+            'id': "reunion-patrimoine-supplementaire",
+            'title': "Réunion patrimoine supplémentaire",
+            'eventDateLabel': "Date de la réunion",
+            'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
+            'showTitle' : True,
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+            ),
+            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
+        },
     ),
     'envclasstwo': (
         {
@@ -5718,6 +6025,40 @@ urbanEventTypes = {
             ),
             'eventTypeType': 'Products.urban.interfaces.IRecourseEvent',
         },
+        {
+            'id': "premiere-reunion-patrimoine",
+            'title': "Première réunion patrimoine",
+            'eventDateLabel': "Date de la réunion",
+            'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+            ),
+            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
+        },
+        {
+            'id': "deuxieme-reunion-patrimoine",
+            'title': "Deuxième réunion patrimoine",
+            'eventDateLabel': "Date de la réunion",
+            'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+            ),
+            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
+        },
+        {
+            'id': "reunion-patrimoine-supplementaire",
+            'title': "Réunion patrimoine supplémentaire",
+            'eventDateLabel': "Date de la réunion",
+            'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
+            'showTitle' : True,
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+            ),
+            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
+        },
     ),
     'envclassthree': (
         {
@@ -6046,6 +6387,40 @@ urbanEventTypes = {
                 {'id': "dec3_transmis_sans_conditions_dgo3dgo4.odt", 'title': "Transmis décision sans conditions complémentaires (lettre au FD/FT)",},
                 {'id': "dec3_transmis_conditions_dgo3dgo4.odt", 'title': "Transmis décision avec conditions complémentaires (lettre au FD/FT)",},
             ),
+        },
+        {
+            'id': "premiere-reunion-patrimoine",
+            'title': "Première réunion patrimoine",
+            'eventDateLabel': "Date de la réunion",
+            'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+            ),
+            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
+        },
+        {
+            'id': "deuxieme-reunion-patrimoine",
+            'title': "Deuxième réunion patrimoine",
+            'eventDateLabel': "Date de la réunion",
+            'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+            ),
+            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
+        },
+        {
+            'id': "reunion-patrimoine-supplementaire",
+            'title': "Réunion patrimoine supplémentaire",
+            'eventDateLabel': "Date de la réunion",
+            'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
+            'showTitle' : True,
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+            ),
+            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
         },
     ),
     'miscdemand': (

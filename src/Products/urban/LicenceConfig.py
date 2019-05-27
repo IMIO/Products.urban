@@ -262,6 +262,7 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
             'urban_habitation': '(log) ',
             'urban_environment': '(environnement) ',
             'urban_peb': '(peb) ',
+            'urban_patrimony': '(patrimoine) ',
         }
         if not getLicenceSchema(self.getLicencePortalType()):
             return DisplayList()
@@ -354,11 +355,15 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
             'road': 'Voirie',
             'habitation': 'Logement',
             'peb': 'PEB',
+            'patrimony': 'Patrimoine',
         }
         minimum_tabs_config = ['description', 'analysis', 'location', 'road']
-        inquiry_tabs_config = ['description', 'advices', 'inquiry', 'analysis', 'location', 'road']
-        buildlicence_tabs_config = ['description', 'advices', 'inquiry', 'analysis', 'location', 'road', 'habitation', 'peb']
-        uniquelicence_tabs_config = ['description', 'advices', 'inquiry', 'analysis', 'environment', 'location', 'road', 'habitation', 'peb']
+        certificatebase_tabs_config = ['description', 'analysis', 'location', 'road', 'patrimony']
+        inquiry_tabs_config = ['description', 'advices', 'inquiry', 'analysis', 'location', 'road', 'patrimony']
+        buildlicence_tabs_config = ['description', 'advices', 'inquiry', 'analysis', 'location', 'road', 'habitation',
+                'peb', 'patrimony']
+        uniquelicence_tabs_config = ['description', 'advices', 'inquiry', 'analysis', 'environment', 'location', 'road',
+                'habitation', 'peb', 'patrimony']
         env_advice_tabs_config = ['description', 'advices', 'analysis', 'environment', 'location', 'road']
         env_inquiry_tabs_config = ['description', 'advices', 'inquiry', 'analysis', 'environment', 'location', 'road']
         inspection_tabs_config = ['description', 'advices']
@@ -377,6 +382,8 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
             'codt_commerciallicence': buildlicence_tabs_config,
             'codt_integratedlicence': uniquelicence_tabs_config,
             'codt_urbancertificatetwo': buildlicence_tabs_config,
+            'codt_urbancertificateone': certificatebase_tabs_config,
+            'codt_notaryletter': certificatebase_tabs_config,
             'envclassthree': env_advice_tabs_config,
             'envclassone': env_inquiry_tabs_config,
             'envclasstwo': env_inquiry_tabs_config,
@@ -427,6 +434,7 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
             'urban_analysis': '(analyse) ',
             'urban_environment': '(environnement) ',
             'urban_description': '',
+            'urban_patrimony': '(patrimoine) ',
         }
         available_fields = [field for field in licence_schema.fields() if field.getType() == 'Products.Archetypes.Field.TextField' and field.getName() != 'rights']
         vocabulary_fields = [
