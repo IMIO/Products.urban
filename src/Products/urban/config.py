@@ -54,7 +54,7 @@ class ExternalConfig(object):
         return self.sections.get(section_name, {})
 
 
-WAL_MAP_CFG = ExternalConfig('carto.cfg')
+WAL_MAP_CFG = ExternalConfig('carto')
 
 # Permissions
 DEFAULT_ADD_CONTENT_PERMISSION = "Add portal content"

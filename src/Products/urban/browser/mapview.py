@@ -108,6 +108,11 @@ class MapView(BrowserView):
 
         return listCapaKey
 
+    def getOldParcels(self):
+        return []
+        context = aq_inner(self.context)
+        return [parcel.get_historic() for parcel in context.getParcels() if parcel.getOutdated()]
+
     def getListProprietariesCapaKey(self):
         """
            Return the list of capaKeys for each parcel of concerned proprietaries
@@ -153,11 +158,11 @@ class MapView(BrowserView):
         return [parcel for parcel in context.getParcels() if parcel.getIsOfficialParcel() and not parcel.getOutdated()]
 
     def get_mapviewer_url(self):
-        url = WAL_MAP_CFG and WAL_MAP_CFG.url or ''
+        url = WAL_MAP_CFG and WAL_MAP_CFG.viewer['url'] or ''
         return url
 
     def get_mapviewer_js_id(self):
-        js_id = WAL_MAP_CFG and WAL_MAP_CFG.javascript_id or ''
+        js_id = WAL_MAP_CFG and WAL_MAP_CFG.viewer['javascript_id'] or ''
         return js_id
 
 
