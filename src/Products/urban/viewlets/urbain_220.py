@@ -5,6 +5,7 @@ from DateTime import DateTime
 from Products.Five import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
+from Products.urban.config import NIS
 from Products.urban.interfaces import IToUrbain220Street
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 
@@ -145,15 +146,13 @@ class UrbainXMLExport(BrowserView):
                 error.append(error_message)
             return condition
 
-        portal_urban = api.portal.get_tool('portal_urban')
-
         xml = []
         error = []
         html_list = []
         xml.append('<?xml version="1.0" encoding="iso-8859-1"?>')
         xml.append('<dataroot>')
         xml.append('  <E_220_herkomst>')
-        xml.append('    <E_220_NIS_Gem>%s</E_220_NIS_Gem>' % portal_urban.getNISNum())
+        xml.append('    <E_220_NIS_Gem>%s</E_220_NIS_Gem>' % NIS)
         xml.append('    <E_220_Periode_van>%s</E_220_Periode_van>' % datefrom.strftime('%Y%m%d'))
         xml.append('    <E_220_Periode_tot>%s</E_220_Periode_tot>' % dateto.strftime('%Y%m%d'))
         xml.append('    <E_220_ICT>COM</E_220_ICT>')

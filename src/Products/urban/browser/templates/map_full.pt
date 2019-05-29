@@ -1,7 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
       lang="en"
       i18n:domain="urban"
-      tal:define="pylonsHost context/portal_url/portal_urban/getPylonsHost">
+      tal:define="urbanMapHost view/get_urbanmap_url">
 
 <head>
     <metal:listing use-macro="here/@@map-macros/urbanMapCSS" />

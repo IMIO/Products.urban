@@ -67,7 +67,7 @@ class WMC(BrowserView):
         """
         Samples:
         layers = [
-                {'url' : defaulturl, 'srs':'EPSG:31370', 'title':'N° de parcelle', 'name' : 'urban'+tool.getNISNum()+':canu', 'format':'image/png', 'style':'ParcelsNum', 'hidden': 0},
+                {'url' : defaulturl, 'srs':'EPSG:31370', 'title':'N° de parcelle', 'name' : '', ':canu', 'format':'image/png', 'style':'ParcelsNum', 'hidden': 0},
                 ]
         """
         layers = []
@@ -97,13 +97,13 @@ class WMC(BrowserView):
     def wmc(self):
         """
           Initialize the map on element
-          if no context get the mapextent from config
+          if no context get the map coordinates from config
         """
         urbantool = api.portal.get_tool('portal_urban')
         context = aq_inner(self.context)
         if not hasattr(aq_base(context), "getParcels"):
             try:
-                extent = [coord.strip() for coord in urbantool.getMapExtent().split(',')]
+                extent = [coord.strip() for coord in config.URBANMAP_CFG.urbanmap.get('map_coordinates', '').split(',')]
                 self.xmin = extent[0]
                 self.ymin = extent[1]
                 self.xmax = extent[2]
