@@ -28,6 +28,7 @@ from collective.datagridcolumns.DateColumn import DateColumn
 
 from Products.urban.config import NIS
 from Products.urban.config import URBANMAP_CFG
+from Products.urban.config import *
 from Products.urban.interfaces import IUrbanEventType
 from Products.urban import UrbanMessage as _
 
