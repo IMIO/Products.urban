@@ -367,31 +367,6 @@ class EnvironmentBase(BaseFolder, GenericLicence, CODT_UniqueLicenceInquiry, Bro
         To implements in subclasses
         """
 
-    security.declarePublic('getApplicants')
-    def getApplicants(self):
-        """
-        """
-        applicants = self.getCorporations()
-        applicants.extend(super(EnvironmentBase, self).getApplicants())
-        return applicants
-
-    security.declarePublic('getCorporations')
-    def getCorporations(self):
-        corporations = [corp for corp in self.objectValues('Corporation')
-                        if api.content.get_state(corp) == 'enabled']
-        return corporations
-
-    security.declarePublic('get_corporations_history')
-    def get_corporations_history(self):
-        return [corp for corp in self.objectValues('Corporation')
-                if api.content.get_state(corp) == 'disabled']
-
-    security.declarePublic('get_applicants_history')
-    def get_applicants_history(self):
-        applicants = self.get_corporations_history()
-        applicants.extend(super(EnvironmentBase, self).get_applicants_history())
-        return applicants
-
     def getLastDeposit(self):
         return self.getLastEvent(interfaces.IDepositEvent)
 

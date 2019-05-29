@@ -87,19 +87,6 @@ class MiscDemand(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
 
     # Methods
 
-    security.declarePublic('getApplicants')
-
-    def getApplicants(self):
-        """
-        """
-        applicants = self.getCorporations() or super(MiscDemand, self).getApplicants()
-        return applicants
-
-    security.declarePublic('getCorporations')
-
-    def getCorporations(self):
-        corporations = [corp for corp in self.objectValues('Corporation')]
-        return corporations
 
     security.declarePublic('getRepresentatives')
 
