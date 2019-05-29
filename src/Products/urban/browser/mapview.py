@@ -6,6 +6,7 @@ from Products.CMFPlone import PloneMessageFactory as _
 from Products.Five import BrowserView
 from Products.urban.config import MAP_VIEWER_CFG
 from Products.urban.config import URBANMAP_CFG
+from Products.urban.config import NIS
 from Products.urban.fingerpointing import map_logger
 from Products.urban.interfaces import IInquiry
 from Products.urban.browser.table.urbantable import ParcelsTable
@@ -169,6 +170,9 @@ class MapView(BrowserView):
     def get_urbanmap_url(self):
         url = URBANMAP_CFG.urbanmap.get('url', '')
         return url
+
+    def get_NIS(self):
+        return NIS
 
 
 class FullMapView(MapView):
