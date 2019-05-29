@@ -92,20 +92,6 @@ class Declaration(BaseFolder, GenericLicence, BrowserDefaultMixin):
 
     # Manually created methods
 
-    security.declarePublic('getApplicants')
-
-    def getApplicants(self):
-        """
-        """
-        applicants = self.getCorporations() or super(Declaration, self).getApplicants()
-        return applicants
-
-    security.declarePublic('getCorporations')
-
-    def getCorporations(self):
-        corporations = [corp for corp in self.objectValues('Corporation')]
-        return corporations
-
     security.declarePublic('getAdditionalLayers')
     def getAdditionalLayers(self):
         """

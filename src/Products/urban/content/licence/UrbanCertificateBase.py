@@ -634,27 +634,6 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
             signaletic += proprietary.getSignaletic(withaddress=withaddress)
         return signaletic
 
-    def getApplicants(self):
-        """
-        """
-        applicants = self.getCorporations()
-        applicants.extend(super(UrbanCertificateBase, self).getApplicants())
-        return applicants
-
-    def getCorporations(self):
-        corporations = [corp for corp in self.objectValues('Corporation')
-                        if api.content.get_state(corp) == 'enabled']
-        return corporations
-
-    def get_applicants_history(self):
-        applicants = self.get_corporations_history()
-        applicants.extend(super(UrbanCertificateBase, self).get_applicants_history())
-        return applicants
-
-    def get_corporations_history(self):
-        return [corp for corp in self.objectValues('Corporation')
-                if api.content.get_state(corp) == 'disabled']
-
     def list_patrimony_types(self):
         """
         """

@@ -53,6 +53,8 @@ class UrbanBase(object):
         applicants = [app for app in self.objectValues('Applicant')
                       if app.portal_type == 'Applicant'
                       and api.content.get_state(app) == 'enabled']
+        corporations = self.getCorporations()
+        applicants.extend(corporations)
         return applicants
 
     security.declarePublic('get_applicants_history')
@@ -60,9 +62,23 @@ class UrbanBase(object):
         """
         Return the history of applicants for the Licence
         """
-        return [app for app in self.objectValues('Applicant')
+        applicants = [app for app in self.objectValues('Applicant')
                 if app.portal_type == 'Applicant'
                 and api.content.get_state(app) == 'disabled']
+        corporations = self.get_corporations_history()
+        applicants.extend(corporations)
+        return applicants
+
+    security.declarePublic('getCorporations')
+    def getCorporations(self):
+        corporations = [corp for corp in self.objectValues('Corporation')
+                        if api.content.get_state(corp) == 'enabled']
+        return corporations
+
+    security.declarePublic('get_corporations_history')
+    def get_corporations_history(self):
+        return [corp for corp in self.objectValues('Corporation')
+                if api.content.get_state(corp) == 'disabled']
 
     security.declarePublic('getProprietaries')
     def getProprietaries(self):
