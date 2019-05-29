@@ -26,21 +26,13 @@ from Products.DataGridField import DataGridField, DataGridWidget
 from Products.DataGridField.Column import Column
 from collective.datagridcolumns.DateColumn import DateColumn
 
-from Products.urban.config import *
+from Products.urban.config import NIS
+from Products.urban.config import URBANMAP_CFG
 from Products.urban.interfaces import IUrbanEventType
 from Products.urban import UrbanMessage as _
 
-from zope.component import getUtility
 from zope.interface import implements
-from zope.schema.interfaces import IVocabularyFactory
 
-import interfaces
-
-
-##code-section module-header #fill in your manual code here
-import logging
-logger = logging.getLogger('urban: UrbanTool')
-import re
 from AccessControl import getSecurityManager
 from plone import api
 from zope.i18n import translate
@@ -54,13 +46,14 @@ from Products.DataGridField.FixedColumn import FixedColumn
 from Products.urban.utils import getCurrentFolderManager
 from Products.urban.config import GENERATED_DOCUMENT_FORMATS
 from Products.urban.interfaces import IUrbanVocabularyTerm, IContactFolder
-from Products.urban.cartography import config as carto_config
 from Products.urban import services
-
 from datetime import date as _date
 
-##/code-section module-header
+import interfaces
+import logging
+import re
 
+logger = logging.getLogger('urban: UrbanTool')
 
 
 schema = Schema((
@@ -71,14 +64,6 @@ schema = Schema((
             visible=False,
             label=_('urban_label_title', default='Title'),
         ),
-    ),
-    StringField(
-        name='NISNum',
-        widget=StringField._properties['widget'](
-            label=_('urban_label_NISNum', default='Nisnum'),
-        ),
-        schemata='admin_settings',
-        write_permission=permissions.ManagePortal,
     ),
     StringField(
         name='cityName',
@@ -133,24 +118,6 @@ schema = Schema((
         allow_reorder=False,
         schemata='public_settings',
         columns=('from', 'to'),
-    ),
-    StringField(
-        name='pylonsHost',
-        widget=StringField._properties['widget'](
-            label=_('urban_label_pylonsHost', default='Pylonshost'),
-        ),
-        schemata='admin_settings',
-        write_permission=permissions.ManagePortal,
-    ),
-    StringField(
-        name='mapExtent',
-        widget=StringField._properties['widget'](
-            description="Enter the 4 coordinates of the map, each coordinate separated by a comma.",
-            description_msgid="urban_descr_mapExtent",
-            label=_('urban_label_mapExtent', default='Mapextent'),
-        ),
-        schemata='admin_settings',
-        write_permission=permissions.ManagePortal,
     ),
     StringField(
         name='mapUrl',
@@ -424,8 +391,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         import urllib2
         import cgi
         method = self.REQUEST["REQUEST_METHOD"]
-        #allowedHosts = ['10.211.55.10: 8080']
-        allowedHosts = carto_config.geoserver.get('host')
+        allowedHosts = URBANMAP_CFG.get('host', '')
 
         if method == "POST":
             qs = self.REQUEST["QUERY_STRING"]
@@ -437,7 +403,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                 return "Illegal request."
         else:
             fs = cgi.FieldStorage()
-            url = fs.getvalue('url', "http: //www.urban%s.com" % self.getNISNum())
+            url = fs.getvalue('url', "http: //www.urban%s.com" % NIS)
 
         try:
             host = url.split("/")[2]
@@ -551,9 +517,9 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         """
           Return a generated JS file based on the cql query
         """
-        #if we do not have a display zone, we return the default mapExtent
+        # if we do not have a display zone, we return the default map coordinates
         if not zoneExtent:
-            zoneExtent = self.getMapExtent()
+            zoneExtent = URBANMAP_CFG.urbanmap.get('map_coordinates', '')
         bound_names = {}
         args = {}
         kw = {}
@@ -795,18 +761,6 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
 
     def isContactFolder(self, folder):
         return IContactFolder.providedBy(folder)
-
-    def _pylonsHostChange(method, self):
-        return self.getPylonsHost()
-
-    security.declarePublic('getStaticPylonsHost')
-    def getStaticPylonsHost(self):
-        """
-          Returns the domain name of the pylonsHost attribute
-        """
-        #res = urlparse(self.getPylonsHost()) #getPylonsHost doesn't contain a valid url beginning with http
-        #return '%s: //%s'%(res.scheme, res.netloc)
-        return '/'.join(self.getPylonsHost().split('/')[:3])  # don't use os.path!
 
 
 registerType(UrbanTool, PROJECTNAME)

@@ -1219,11 +1219,6 @@ msgstr ""
 msgid "urban_alertdelay_descr"
 msgstr ""
 
-#. Default: "Enter the 4 coordinates of the map, each coordinate separated by a comma."
-#: UrbanTool.py
-msgid "urban_descr_mapExtent"
-msgstr ""
-
 #. Default: "Select the optional fields you want to use. Multiple selection or deselection when clicking with CTRL"
 #: LicenceConfig.py
 msgid "urban_descr_usedAttributes"
