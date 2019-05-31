@@ -718,13 +718,13 @@ urbanEventTypes = {
     'codt_notaryletter': (
         {
           'id': "notaryletter-codt",
-          'title': "Lettre de notaire",
+          'title': "Informations notariales",
           'deadLineDelay': 15,
           'eventDateLabel': 'Date de notification',
           'isKeyEvent': True,
           'keyDates': ('eventDate',),
           'podTemplates': (
-              {'id': "codt_ln_annexe16.odt", 'title': "Lettre de notaire - Annexe 16"},
+              {'id': "codt_ln_infos_notariales.odt", 'title': "Informations notariales"},
           ),
           'eventTypeType': ('Products.urban.interfaces.ITheLicenceEvent',
                             'Products.urban.interfaces.ILicenceNotificationEvent'),
