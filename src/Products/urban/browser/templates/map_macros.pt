@@ -64,8 +64,8 @@
 </div>
 
 <div metal:define-macro="imioSpwMapSetup" tal:define="staticUrbanMapHost view/get_urbanmap_url">
-		<script type="text/javascript" tal:attributes="src python: '//' + view.get_mapviewer_url() + '/?t=' + view.get_mapviewer_js_id()" src=""></script>
-		<link rel="stylesheet" type="text/css" tal:attributes="href python: '//' + view.get_mapviewer_url() + '/style'" href=""/>
+        <script type="text/javascript" tal:attributes="src python: 'https://{}/?t={}'.format(view.get_mapviewer_url(), view.get_mapviewer_js_id())" src=""></script>
+		<link rel="stylesheet" type="text/css" tal:attributes="href python: '//%s/static/geoviewer4.css' % staticUrbanMapHost"/>
         <link rel="stylesheet" type="text/css" tal:attributes="href python:'//%s/static/spwfix.css'%staticUrbanMapHost"/>
         <script type="text/javascript" tal:attributes="src python:'//%s/static/imiomapspw.js'%staticUrbanMapHost"></script>
         <script tal:content="string:var NIS='${view/get_NIS}';var urbanProrietariesCapakeyArray=${view/getListProprietariesCapaKey};var urbanCapakeyArray=${view/getListCapaKey};var proxyUrl='${context/portal_url}/portal_urban/getProxy?url=';var urbanMapWMCUrl='${context/absolute_url}/wmc';">
