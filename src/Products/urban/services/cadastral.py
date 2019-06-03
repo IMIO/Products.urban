@@ -389,8 +389,8 @@ class ActualParcel(Parcel):
 
     def add_location(self, street_uid, street_name, number):
         self.locations['{}/{}'.format(street_uid, number)] = {
-            'street_name': street_name,
-            'number': number
+            'street_name': street_name or '',
+            'number': number or ''
         }
 
     def add_owner(self, owner_id, name, firstname, country, zipcode, city, street, number, boxnumber):
@@ -401,7 +401,7 @@ class ActualParcel(Parcel):
             'zipcode': zipcode,
             'city': city,
             'street': street,
-            'number': boxnumber and '{}/{}'.format(number, boxnumber) or number,
+            'number': boxnumber and u'{}/{}'.format(number, boxnumber) or number,
         }
 
     def add_nature(self, nature):
