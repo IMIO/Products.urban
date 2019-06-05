@@ -37,12 +37,6 @@ from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
 optional_fields = [
     'SCT', 'sctDetails', 'SDC', 'sdcDetails', 'regional_guide', 'regional_guide_details',
     'township_guide', 'township_guide_details', 'prorogation',
-    'patrimony_site', 'patrimony_architectural_complex', 'archeological_site',
-    'protection_zone', 'regional_inventory_building', 'small_popular_patrimony',
-    'communal_inventory', 'patrimony_project_gtoret_1ha', 'observation',
-    'patrimony_monument', 'classification_order_scope', 'patrimony_analysis',
-    'patrimony_observation', 'patrimony_archeological_map_ground_modification',
-    'patrimony_archeological_map_structure_modification', 'patrimony_save_list',
 ]
 
 slave_fields_prorogation = (
