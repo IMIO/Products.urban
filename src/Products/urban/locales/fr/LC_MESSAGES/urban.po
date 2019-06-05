@@ -4517,7 +4517,7 @@ msgstr "Détails concernant le guide régional d'urbanisme"
 #: ../content/licence/CODT_BaseBuildLicence.py:306
 #: ../content/licence/UrbanCertificateBase.py:379
 msgid "urban_label_regional_inventory_building"
-msgstr "Bien pastillé à l’inventaire régional du patrimoine"
+msgstr "Bien pastillé à l’inventaire régional du patrimoine (IPIC)"
 
 #. Default: "Registrationnumber"
 #: Contact.py
