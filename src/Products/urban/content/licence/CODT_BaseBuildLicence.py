@@ -130,6 +130,21 @@ full_patrimony_slave_fields = (
             'action': 'hide',
             'hide_values': ('none',),
         },
+        {
+            'name': 'patrimony_archeological_map_ground_modification',
+            'action': 'hide',
+            'hide_values': ('none',),
+        },
+        {
+            'name': 'patrimony_archeological_map_structure_modification',
+            'action': 'hide',
+            'hide_values': ('none',),
+        },
+        {
+            'name': 'patrimony_save_list',
+            'action': 'hide',
+            'hide_values': ('none',),
+        },
 )
 
 schema = Schema((
@@ -252,10 +267,42 @@ schema = Schema((
         schemata='urban_patrimony',
     ),
     BooleanField(
+        name='patrimony_site',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label=_('urban_label_patrimony_site', default='Patrimony_site'),
+        ),
+        schemata='urban_patrimony',
+    ),
+    BooleanField(
         name='archeological_site',
         default=False,
         widget=BooleanField._properties['widget'](
             label=_('urban_label_archeological_site', default='Archeological_site'),
+        ),
+        schemata='urban_patrimony',
+    ),
+    BooleanField(
+        name='patrimony_monument',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label=_('urban_label_patrimony_monument', default='Patrimony_monument'),
+        ),
+        schemata='urban_patrimony',
+    ),
+    BooleanField(
+        name='patrimony_architectural_complex',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label=_('urban_label_patrimony_architectural_complex', default='Patrimony_architectural_complex'),
+        ),
+        schemata='urban_patrimony',
+    ),
+    BooleanField(
+        name='patrimony_save_list',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label=_('urban_label_patrimony_save_list', default='Patrimony_save_list'),
         ),
         schemata='urban_patrimony',
     ),
@@ -276,6 +323,14 @@ schema = Schema((
         schemata='urban_patrimony',
     ),
     BooleanField(
+        name='communal_inventory',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label=_('urban_label_communal_inventory', default='Communal_inventory'),
+        ),
+        schemata='urban_patrimony',
+    ),
+    BooleanField(
         name='small_popular_patrimony',
         default=False,
         widget=BooleanField._properties['widget'](
@@ -284,10 +339,26 @@ schema = Schema((
         schemata='urban_patrimony',
     ),
     BooleanField(
-        name='communal_inventory',
+        name='patrimony_archeological_map_structure_modification',
         default=False,
         widget=BooleanField._properties['widget'](
-            label=_('urban_label_communal_inventory', default='Communal_inventory'),
+            label=_('urban_label_patrimony_archeological_map_structure_modification', default='Patrimony_archeological_map_structure_modification'),
+        ),
+        schemata='urban_patrimony',
+    ),
+    BooleanField(
+        name='patrimony_archeological_map_ground_modification',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label=_('urban_label_patrimony_archeological_map_ground_modification', default='Patrimony_archeological_map_ground_modification'),
+        ),
+        schemata='urban_patrimony',
+    ),
+    BooleanField(
+        name='patrimony_project_gtoret_1ha',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label=_('urban_label_patrimony_project_gtoret_1ha', default='Patrimony_project_gtoret_1ha'),
         ),
         schemata='urban_patrimony',
     ),
@@ -302,46 +373,6 @@ schema = Schema((
         default_method='getDefaultText',
         default_output_type='text/html',
         accessor="PatrimonyAnalysis",
-    ),
-    BooleanField(
-        name='patrimony_architectural_complex',
-        default=False,
-        widget=BooleanField._properties['widget'](
-            label=_('urban_label_patrimony_architectural_complex', default='Patrimony_architectural_complex'),
-        ),
-        schemata='urban_patrimony',
-    ),
-    BooleanField(
-        name='patrimony_site',
-        default=False,
-        widget=BooleanField._properties['widget'](
-            label=_('urban_label_patrimony_site', default='Patrimony_site'),
-        ),
-        schemata='urban_patrimony',
-    ),
-    BooleanField(
-        name='patrimony_archaeological_map',
-        default=False,
-        widget=BooleanField._properties['widget'](
-            label=_('urban_label_patrimony_archaeological_map', default='Patrimony_archaeological_map'),
-        ),
-        schemata='urban_patrimony',
-    ),
-    BooleanField(
-        name='patrimony_project_gtoret_1ha',
-        default=False,
-        widget=BooleanField._properties['widget'](
-            label=_('urban_label_patrimony_project_gtoret_1ha', default='Patrimony_project_gtoret_1ha'),
-        ),
-        schemata='urban_patrimony',
-    ),
-    BooleanField(
-        name='patrimony_monument',
-        default=False,
-        widget=BooleanField._properties['widget'](
-            label=_('urban_label_patrimony_monument', default='Patrimony_monument'),
-        ),
-        schemata='urban_patrimony',
     ),
     TextField(
         name='patrimony_observation',
@@ -553,18 +584,6 @@ def finalizeSchema(schema):
     schema.moveField('township_guide_details', after='township_guide')
     schema.moveField('form_composition', before='missingParts')
     schema.moveField('patrimony', pos='top')
-    schema.moveField('regional_inventory_building', after='patrimony')
-    schema.moveField('patrimony_archaeological_map', after='regional_inventory_building')
-    schema.moveField('patrimony_architectural_complex', after='patrimony_archaeological_map')
-    schema.moveField('communal_inventory', after='patrimony_architectural_complex')
-    schema.moveField('patrimony_monument', after='communal_inventory')
-    schema.moveField('small_popular_patrimony', after='patrimony_monument')
-    schema.moveField('patrimony_project_gtoret_1ha', after='small_popular_patrimony')
-    schema.moveField('patrimony_site', after='patrimony_project_gtoret_1ha')
-    schema.moveField('archeological_site', after='patrimony_site')
-    schema.moveField('protection_zone', after='archeological_site')
-    schema.moveField('classification_order_scope', after='protection_zone')
-    schema.moveField('general_disposition', after='classification_order_scope')
     schema.moveField('protectedBuilding', after='general_disposition')
     schema.moveField('protectedBuildingDetails', after='protectedBuilding')
     schema.moveField('patrimony_analysis', after='protectedBuildingDetails')
