@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html tal:define="pylonsHost context/portal_url/portal_urban/getPylonsHost">
+<html tal:define="urbanMapHost view/get_urbanmap_url">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">

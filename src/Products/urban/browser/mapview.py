@@ -4,7 +4,9 @@ from Acquisition import aq_inner, aq_base
 
 from Products.CMFPlone import PloneMessageFactory as _
 from Products.Five import BrowserView
-from Products.urban.config import WAL_MAP_CFG
+from Products.urban.config import MAP_VIEWER_CFG
+from Products.urban.config import URBANMAP_CFG
+from Products.urban.config import NIS
 from Products.urban.fingerpointing import map_logger
 from Products.urban.interfaces import IInquiry
 from Products.urban.browser.table.urbantable import ParcelsTable
@@ -51,7 +53,7 @@ class MapView(BrowserView):
         """
         portal_urban = api.portal.get_tool('portal_urban')
         city_name = portal_urban.getCityName()
-        urbanmap_host = portal_urban.getStaticPylonsHost()
+        urbanmap_host = URBANMAP_CFG.urbanmap.get('url', '')
         script = """
             var dojoConfig = {
             async: true,
@@ -108,6 +110,11 @@ class MapView(BrowserView):
 
         return listCapaKey
 
+    def getOldParcels(self):
+        return []
+        context = aq_inner(self.context)
+        return [parcel.get_historic() for parcel in context.getParcels() if parcel.getOutdated()]
+
     def getListProprietariesCapaKey(self):
         """
            Return the list of capaKeys for each parcel of concerned proprietaries
@@ -119,9 +126,9 @@ class MapView(BrowserView):
         if not hasattr(aq_base(context), "getParcels"):
             return listCapaKey
 
-        #add the inquiry parcels if possible
+        # add the inquiry parcels if possible
         if IInquiry.providedBy(context):
-            #get last inquiry
+            # get last inquiry
             lastInquiry = context.getLastInquiry()
             if lastInquiry:
                 # only display active parcels on the map
@@ -153,12 +160,19 @@ class MapView(BrowserView):
         return [parcel for parcel in context.getParcels() if parcel.getIsOfficialParcel() and not parcel.getOutdated()]
 
     def get_mapviewer_url(self):
-        url = WAL_MAP_CFG and WAL_MAP_CFG.url or ''
+        url = MAP_VIEWER_CFG.viewer.get('url', '')
         return url
 
     def get_mapviewer_js_id(self):
-        js_id = WAL_MAP_CFG and WAL_MAP_CFG.javascript_id or ''
+        js_id = MAP_VIEWER_CFG.viewer.get('javascript_id', '')
         return js_id
+
+    def get_urbanmap_url(self):
+        url = URBANMAP_CFG.urbanmap.get('url', '')
+        return url
+
+    def get_NIS(self):
+        return NIS
 
 
 class FullMapView(MapView):

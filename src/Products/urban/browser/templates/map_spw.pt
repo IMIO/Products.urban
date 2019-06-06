@@ -2,7 +2,7 @@
       lang="en"
       metal:use-macro="here/main_template/macros/master"
       i18n:domain="urban"
-      tal:define="pylonsHost context/portal_url/portal_urban/getPylonsHost">
+      tal:define="urbanMapHost view/get_urbanmap_url">
 
 <metal:block fill-slot="top_slot"
             tal:define="global parcels view/getParcels;" />

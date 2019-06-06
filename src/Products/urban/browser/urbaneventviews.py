@@ -455,9 +455,6 @@ class UrbanEventInquiryView(UrbanEventInquiryBaseView):
                     )
                     owner_obj = getattr(context, new_owner_id)
                     owner_obj.setTitle('{} {}'.format(name, firstname))
-                # create the PortionOut using the createPortionOut method...
-                with api.env.adopt_roles(['Manager']):
-                    context.portal_urban.createPortionOut(container=owner_obj, **parcel.reference_as_dict())
         cadastre.close()
         return context.REQUEST.RESPONSE.redirect(context.absolute_url() + '/#fieldsetlegend-urbaneventinquiry_recipients')
 
