@@ -26,6 +26,7 @@ from Products.CMFPlone.utils import base_hasattr
 from Products.cron4plone.browser.configlets.cron_configuration import ICronConfiguration
 from Products.urban.config import DefaultTexts
 from Products.urban.config import URBAN_CFG_DIR
+from Products.urban.config import URBANMAP_CFG
 from Products.urban.config import URBAN_TYPES
 from Products.urban.exportimport import updateAllUrbanTemplates
 from Products.urban.Extensions.update_task_configs import add_licence_ended_condition
@@ -1444,13 +1445,9 @@ def setupExtra(context):
     logger.info('Setup default schedule configuration')
     addScheduleConfigs(context)
 
-    nis = portal_urban.getNISNum()
-    if not nis:
-        logger.error("No NIS defined in portal_urban!")
-        return
-
-    #we add the map coordinates
-    if not portal_urban.getMapExtent() or portal_urban.getMapExtent().count(', ') != 3:
+    # we add the map coordinates
+    map_coordinates = URBANMAP_CFG.urbanmap.get('map_coordinates', '')
+    if not map_coordinates or map_coordinates.count(', ') != 3:
         session = services.cadastre.new_session()
         coords = session.query_map_coordinates()
         session.close()

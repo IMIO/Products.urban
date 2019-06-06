@@ -67,20 +67,6 @@ class ExplosivesPossession(BaseFolder, EnvironmentLicence, BrowserDefaultMixin):
         'urban_investigation_and_advices',
     ]
 
-    security.declarePublic('getApplicants')
-
-    def getApplicants(self):
-        """
-        """
-        applicants = self.getCorporations() or super(ExplosivesPossession, self).getApplicants()
-        return applicants
-
-    security.declarePublic('getCorporations')
-
-    def getCorporations(self):
-        corporations = [corp for corp in self.objectValues('Corporation')]
-        return corporations
-
     security.declarePublic('getApplicantsSignaletic')
 
     def getApplicantsSignaletic(self, withaddress=False):

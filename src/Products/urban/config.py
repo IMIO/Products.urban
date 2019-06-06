@@ -54,7 +54,9 @@ class ExternalConfig(object):
         return self.sections.get(section_name, {})
 
 
-WAL_MAP_CFG = ExternalConfig('carto.cfg')
+MAP_VIEWER_CFG = ExternalConfig('mapviewer')
+URBANMAP_CFG = ExternalConfig('urbanmap')
+NIS = URBANMAP_CFG.urbanmap.get('NIS', '')
 
 # Permissions
 DEFAULT_ADD_CONTENT_PERMISSION = "Add portal content"
