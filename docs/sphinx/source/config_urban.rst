@@ -81,15 +81,15 @@ Pour les autres événements, il faut faire comme suit:
 #. Un formulaire apparait, avec les champs :
 
 	- Titre : Nom de l'événement, example "Dépôt de la demande".
-	- Délai : Délai légal.
-	- Délai d'alerte : Utilisé par l'échéancier d'Urban pour rappeler que le délai légal arrive à son terme.
-	- Condition TAL : A laisser vide dans un premier temps.
-	- Label de la date de l'événement : Par défaut tout événement contient au moins une date, ce champs permet de nommer cette date par défaut.
-	- Champs activés : Champs qui vont être encodé à la création d'un événement de ce type. Par défaut seule la date de l'événement est activée.
-	- Édition du titre : Si coché, permet d'éditer le titre de l'événement via son formulaire d'édition.
-	- Catégorie du type d'événement : C'est en fonction de cette catégorie que la date d'un événement va apparaitre dans le récapitulatif des dates clés du permis.
-	- Eventportaltype : Ce champ permet de choisir le type d'événement. Le choix par défaut est "Événement du dossier" dans la majorité des cas, mais il est parfois nécessaire de modifier ce champ, dans le cas d'un événement qui peut être envoyé vers un point collège de l'application Délib, ou pour un événement de demande d'avis.
-	- Événement clé : Cette cas à cocher permet de déterminer si la date sera affichée comme date clé sous le titre du dossier dans les tableaux de bord.
+    - Délai : Délai légal.
+    - Délai d'alerte : Utilisé par l'échéancier d'Urban pour rappeler que le délai légal arrive à son terme.
+    - Condition TAL : A laisser vide dans un premier temps.
+    - Label de la date de l'événement : Par défaut tout événement contient au moins une date, ce champs permet de nommer cette date par défaut.
+    - Champs activés : Champs qui vont être encodé à la création d'un événement de ce type. Par défaut seule la date de l'événement est activée.
+    - Édition du titre : Si coché, permet d'éditer le titre de l'événement via son formulaire d'édition.
+    - Catégorie du type d'événement : C'est en fonction de cette catégorie que la date d'un événement va apparaitre dans le récapitulatif des dates clés du permis.
+    - Eventportaltype : Ce champ permet de choisir le type d'événement. Le choix par défaut est "Événement du dossier" dans la majorité des cas, mais il est parfois nécessaire de modifier ce champ, dans le cas d'un événement qui peut être envoyé vers un point collège de l'application Délib, ou pour un événement de demande d'avis.
+    - Événement clé : Cette cas à cocher permet de déterminer si la date sera affichée comme date clé sous le titre du dossier dans les tableaux de bord.
 	
 #. Enregistrer: l'événement a bien été ajouté.
 
@@ -228,7 +228,7 @@ Cette fonctionalité permet d'obtenir le fichier correspondant à la liste 220 �
 Au moment de générer la liste, plusieurs erreurs peuvent apparaitre, car certains champs dans les dossiers sont à renseigner obligatoirement pour la liste 220. Les erreurs les plus communes :
 
 * :samp:`unknown worktype` : le type de travaux n'a pas été renseigné pour le permis. Il faut renseigner le champ "Nature des travaux (liste 220)" dans le dossier concerné.
-* :samp:`no street (with code) found` : la rue renseignée dans le dossier n'a pas de code rue (INS). Il faut aller renseigné ce champ dans la page de la rue concernée.
+* :samp:`no street (with code) found` : la rue renseignée dans le dossier n'a pas de code rue (INS). Il faut renseigner ce champ dans la page de la rue concernée.
 
 ***************************************
 Exporter le fichier de statistiques INS
