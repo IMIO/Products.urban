@@ -129,7 +129,7 @@ Le Code wallon du Patrimoine entrant en vigueur ce 1er juin 2019, un onglet "Pat
 ---------------------------------------------------------------------------------------------------------------------
 
 .. image:: resources/images/patrimony_example.png
-  :width: 700
+  :width: 550
   :alt: patrimony_example
 
 
