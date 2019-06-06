@@ -43,6 +43,22 @@ class CadastreService(SQLService):
                 ]
             )
             self._init_table(
+                'old_parcels',
+                column_names=[
+                    'capakey',
+                    'divcad', 'section', 'primarynumber', 'bisnumber', 'exponentletter', 'exponentnumber', 'partnumber',
+                    'propertysituationid',
+                ]
+            )
+            self._init_table(
+                'parcels_genealogy',
+                column_names=[
+                    'capakey',
+                    'predecessors',
+                    'successors',
+                ]
+            )
+            self._init_table(
                 'parcelsstreets',
                 column_names=[
                     'street_uid', 'street_situation',
@@ -118,6 +134,78 @@ class CadastreSession(SQLSession):
         parcels = self.merge_parcel_results(records)
         return parcels
 
+    def query_old_parcels(self, division=IGNORE, section=IGNORE, radical=IGNORE, bis=IGNORE,
+                          exposant=IGNORE, puissance=IGNORE, location=IGNORE, parcel_owner=IGNORE):
+        """
+        Return parcels partially matching any defined criterias.
+        Any argument with the value IGNORE is ignored.
+        """
+        parcels = self.tables.old_parcels
+        divisions = self.tables.divisions
+        owners_imp = self.tables.owners_imp
+        # parcel reference columns to return (section, division, radical, ...)
+        query = self.session.query(
+            parcels.section,
+            parcels.primarynumber.label('radical'),
+            parcels.exponentletter.label('exposant'),
+            parcels.bisnumber.label('bis'),
+            parcels.exponentnumber.label('puissance'),
+            parcels.capakey,
+            parcels.partnumber,
+            divisions.divname,
+            divisions.da.label('division'),
+            owners_imp.owner_officialid.label('owner_id'),
+            owners_imp.owner_name,
+            owners_imp.owner_firstname,
+            owners_imp.owner_country,
+            owners_imp.owner_zipcode,
+            owners_imp.owner_municipality_fr.label('owner_city'),
+            owners_imp.owner_street_fr.label('owner_street'),
+            owners_imp.owner_number,
+            owners_imp.owner_boxnumber,
+        )
+        # table joins
+        query = query.filter(divisions.da == parcels.divcad)
+        query = query.outerjoin(owners_imp, parcels.propertysituationid == owners_imp.propertysituationidf)
+        # filter on parcel reference arguments
+        query = self._filter(query, division, section, radical, bis, exposant, puissance, parcels_table=parcels)
+
+        # filter on parcel location/proprietary name arguments
+        if parcel_owner is not IGNORE:
+            parcel_owners = self.tables.owners_imp
+            query = query.filter(
+                or_(
+                    parcel_owners.owner_name.ilike('%{}%'.format(parcel_owner)),
+                    parcel_owners.owner_firstname.ilike('%{}%'.format(parcel_owner)),
+                )
+            )
+        if location is not IGNORE:
+            parcel_streets = self.tables.parcelsstreets
+            query = query.filter(parcel_streets.street_situation.ilike('%{}%'.format(location)))
+
+        records = query.distinct().all()
+        parcels = {}
+        for record in records:
+            if record.capakey not in parcels:
+                parcel = ActualParcel(**record._asdict())
+                parcels[record.capakey] = parcel
+            else:
+                parcel = parcels[record.capakey]
+            if record.owner_id:
+                parcel.add_owner(
+                    record.owner_id,
+                    record.owner_name or '',
+                    record.owner_firstname or '',
+                    record.owner_country or '',
+                    record.owner_zipcode or '',
+                    record.owner_city or '',
+                    record.owner_street or '',
+                    record.owner_number or '',
+                    record.owner_boxnumber or '',
+                )
+
+        return parcels.values()
+
     def query_exact_parcel(self, division, section=None, radical='', bis='', exposant=None,
                            puissance=''):
         """
@@ -143,6 +231,18 @@ class CadastreSession(SQLSession):
         if len(parcels) != 1:
             return
         return parcels[0]
+
+    def query_parcel_historic(self, capakey):
+        parcels_genealogy = self.tables.parcels_genealogy
+        query = self.session.query(
+            parcels_genealogy.predecessors,
+            parcels_genealogy.successors,
+        )
+        query = query.filter(
+            parcels_genealogy.capakey == capakey
+        )
+        records = query.distinct().all()
+        return records
 
     def query_parcels_wkt(self, parcels):
         """
@@ -248,9 +348,12 @@ class CadastreSession(SQLSession):
         return coordinates
 
     def _filter(self, query, division=IGNORE, section=IGNORE, radical=IGNORE,
-                bis=IGNORE, exposant=IGNORE, puissance=IGNORE):
+                bis=IGNORE, exposant=IGNORE, puissance=IGNORE, parcels_table=None):
         divisions = self.tables.divisions
-        parcels = self.tables.parcels
+        if parcels_table is not None:
+            parcels = parcels_table
+        else:
+            parcels = self.tables.parcels
         query = division is IGNORE and query or query.filter(divisions.da == division)
         query = section is IGNORE and query or query.filter(parcels.section == section)
         query = radical is IGNORE and query or query.filter(parcels.primarynumber == radical)
@@ -277,6 +380,7 @@ class CadastreSession(SQLSession):
             parcels.capakey,
             parcels.street_uid,
             parcels.number,
+            parcels.partnumber,
             divisions.divname,
             divisions.da.label('division'),
             parcel_streets.street_situation.label('street_name'),

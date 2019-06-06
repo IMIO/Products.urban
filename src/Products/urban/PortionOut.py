@@ -27,6 +27,8 @@ from Products.CMFCore.utils import getToolByName
 from Products.Archetypes.utils import DisplayList
 from Products.urban.interfaces import IGenericLicence
 from Products.urban import services
+
+import ast
 ##/code-section module-header
 
 schema = Schema((
@@ -237,27 +239,6 @@ class PortionOut(BaseContent, BrowserDefaultMixin):
         divisions = urban_tool.getDivisionsRenaming()
         return DisplayList([(str(div['division']), unicode(div[name].decode('utf-8'))) for div in divisions])
 
-    security.declarePublic('hasRelatedLicences')
-    def hasRelatedLicences(self, licence_type=''):
-        catalog = getToolByName(self, 'portal_catalog')
-        container = self.aq_parent
-        capakey = self.get_capakey()
-        brains = []
-        if licence_type:
-            brains = catalog(
-                portal_type=licence_type,
-                sort_limit=2,
-                parcelInfosIndex=capakey,
-                object_provides=IGenericLicence.__identifier__
-            )
-        else:
-            brains = catalog(
-                sort_limit=2,
-                parcelInfosIndex=capakey,
-                object_provides=IGenericLicence.__identifier__
-            )
-        return len([brain for brain in brains if brain.id != container.id]) > 0
-
     security.declarePublic('getRelatedLicences')
     def getRelatedLicences(self, licence_type=''):
         catalog = getToolByName(self, 'portal_catalog')
@@ -289,5 +270,20 @@ class PortionOut(BaseContent, BrowserDefaultMixin):
         )
         return capakey
 
+    @property
+    def capakey(self):
+        return self.get_capakey()
+
+    security.declarePublic('get_historic')
+
+    def get_historic(self):
+        """
+        Return the "parcel historic" object of this parcel
+        """
+        session = services.cadastre.new_session()
+        raw_historic = session.query_parcel_historic(self.capakey)
+        session.close()
+        historic = ast.literal_eval(raw_historic[0][0])
+        return historic
 
 registerType(PortionOut, PROJECTNAME)

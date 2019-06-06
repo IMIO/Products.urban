@@ -70,13 +70,9 @@ class RelatedLicencesColumn(Column):
     def renderCell(self, parcel):
         url = parcel.aq_parent.absolute_url()
         id = parcel.getId()
-
-        if not parcel.hasRelatedLicences():
-            cell = '<span>-</span>'
-        else:
-            img = '<img  src="linkedfolders.png" class="urban-linkedfolders-icon"/>'
-            link = '<a class="link-overlay" href="%s/@@parcelrecordsview?id=%s">%s</a>' % (url, id, img)
-            cell = '<span id="urban-parcel-related-licences">%s</span>' % link
+        img = '<img  src="linkedfolders.png" class="urban-linkedfolders-icon"/>'
+        link = '<a class="link-overlay" href="%s/@@parcelrecordsview?id=%s">%s</a>' % (url, id, img)
+        cell = '<span id="urban-parcel-related-licences">%s</span>' % link
         return cell
 
 
