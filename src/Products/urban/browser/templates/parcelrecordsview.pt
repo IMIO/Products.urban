@@ -12,7 +12,9 @@
 <metal:main_macro define-macro="main">
     <metal:body define-macro="body_macro">
 
-    <tal:display define="licences view/get_related_licences_of_parcel">
+    <tal:display define="displays view/get_related_licences_displays;
+                         licences python: displays[0];
+                         parcel_historic python: displays[1];">
        <tal:no_result condition="python: not licences">
           <h1 i18n:translate="">No related licences</h1>
        </tal:no_result>
@@ -25,7 +27,43 @@
                  tal:content="python: licence_info['title']" i18n:translate="">lien vers les anciens permis</a>
           </div>
        </tal:result>
-   </tal:display>
+
+       <span tal:condition="parcel_historic">
+          <h1 i18n:translate="">History of the parcel and related licences</h1>
+            <table class="listing" class="listing" border="0" cellspacing="0">
+                <tal:lines repeat="line_result parcel_historic">
+                <tr tal:define="oddrow repeat/line_result/odd;"
+                    tal:attributes="class python: oddrow and 'even' or 'odd'">
+                    <tal:line repeat="parcel line_result">
+                        <td fcolor="#FF0000"
+                            tal:define="old python: getattr(parcel, 'old', None);
+                                        root python: getattr(parcel, 'level', None) == 0;
+                                        licences python: getattr(parcel, 'licences', []);
+                                        center python: False;
+                                        is_parcel python: hasattr(parcel, 'division')"
+                            tal:attributes="style python: root and 'background-color:yellow' or '';
+                                            class  python: center and 'center-parcel' or 'left-parcel';
+                                            colspan python: parcel.width">
+                            <div class="parcel-name">
+                                <span tal:attributes="class python: not old and 'leaf-parcel' or ''"
+                                      tal:content="parcel/display"></span>
+                                <span tal:condition="licences">:</span>
+                            </div>
+                        <tal:licences condition="licences">
+                            <div tal:repeat="licence licences" style="text-align: left; padding-left: 1.6em">
+                                <a class="link-overlay"
+                                   tal:attributes="href python: licence['url']; class python: licence['class']"
+                                   tal:content="python: licence['title']" i18n:translate="">lien vers les anciens permis</a>
+                            </div>
+                        </tal:licences>
+                        </td>
+                    </tal:line>
+                </tr>
+                </tal:lines>
+            </table>
+          <br />
+       </span>
+    </tal:display>
 
 </metal:body>
 </metal:main_macro>
