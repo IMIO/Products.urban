@@ -80,6 +80,14 @@ schema = Schema((
         ),
     ),
     StringField(
+        name='communalReference',
+        widget=StringField._properties['widget'](
+            label='Communalreference',
+            label_msgid='urban_label_CommunalReference',
+            i18n_domain='urban',
+        ),
+    ),
+    StringField(
         name='DGO4Reference',
         widget=StringField._properties['widget'](
             label='Dgo4reference',
