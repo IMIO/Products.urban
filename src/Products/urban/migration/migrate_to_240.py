@@ -59,6 +59,8 @@ def migrate(context):
     setup_tool.runAllImportStepsFromProfile('profile-Products.urban:preinstall')
     setup_tool.runAllImportStepsFromProfile('profile-urban.vocabulary:default')
     setup_tool.runImportStepFromProfile('profile-Products.urban:extra', 'urban-extraPostInstall')
+    setup_tool.runAllImportStepsFromProfile('profile-collective.externaleditor:default')
+    setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'urban-postInstall')
     migrate_create_voc_classification_order_scope(context)
     migrate_create_voc_general_disposition(context)
     logger.info("migration done!")
