@@ -281,9 +281,8 @@ class PortionOut(BaseContent, BrowserDefaultMixin):
         Return the "parcel historic" object of this parcel
         """
         session = services.cadastre.new_session()
-        raw_historic = session.query_parcel_historic(self.capakey)
+        historic = session.query_parcel_historic(self.capakey)
         session.close()
-        historic = ast.literal_eval(raw_historic[0][0])
         return historic
 
 registerType(PortionOut, PROJECTNAME)

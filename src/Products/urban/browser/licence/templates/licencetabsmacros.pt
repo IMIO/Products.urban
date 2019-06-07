@@ -53,7 +53,7 @@
         </metal:custom_left_fieldset>
 
         <metal:parcels define-slot="parcels">
-            <metal:applicants_macro use-macro="here/@@parcels-macro/parcels_macro" />
+            <metal:parcels_macro use-macro="here/@@parcels-macro/parcels_macro" />
         </metal:parcels>
 
     </div>

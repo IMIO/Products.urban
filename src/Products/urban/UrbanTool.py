@@ -763,5 +763,10 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
     def isContactFolder(self, folder):
         return IContactFolder.providedBy(folder)
 
+    def get_division_name(self, division_code, alternative_name=True):
+        mapping = dict([(str(int(l['division'])), l['alternative_name']) for l in self.getDivisionsRenaming()])
+        name = mapping[str(int(division_code))]
+        return name
+
 
 registerType(UrbanTool, PROJECTNAME)

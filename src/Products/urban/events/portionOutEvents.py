@@ -33,17 +33,16 @@ def setValidParcel(parcel, event):
     parcel.puissance = parcel.puissance or '0'
     parcel.reindexObject()
 
-    references = parcel.reference_as_dict(True)
-
-    is_official = False
+    parcel_status = False
     try:
         cadastre = services.cadastre.new_session()
-        is_official = cadastre.is_official_parcel(**references)
+        parcel_status = cadastre.get_parcel_status(parcel.capakey)
         cadastre.close()
-    except:
+    except services.cadastral.UnreferencedParcelError:
         pass
 
-    parcel.setIsOfficialParcel(is_official)
+    parcel.setIsOfficialParcel(parcel_status in ['old_parcel', 'actual_parcel'])
+    parcel.setOutdated(parcel_status in ['old_parcel'])
     parcel.reindexObject()
 
 
