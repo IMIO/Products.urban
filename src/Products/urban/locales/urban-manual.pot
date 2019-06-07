@@ -1290,6 +1290,11 @@ msgstr ""
 
 #. Default: "Dgo4reference"
 #: ParcellingTerm.py
+msgid "urban_label_CommunalReference"
+msgstr ""
+
+#. Default: "Dgo4reference"
+#: ParcellingTerm.py
 msgid "urban_label_DGO4Reference"
 msgstr ""
 

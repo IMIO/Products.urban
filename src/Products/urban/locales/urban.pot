@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-05-29 12:38+0000\n"
+"POT-Creation-Date: 2019-06-07 13:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2541,6 +2541,11 @@ msgstr ""
 
 #. Default: "Dgo4reference"
 #: ParcellingTerm.py
+msgid "urban_label_CommunalReference"
+msgstr ""
+
+#. Default: "Dgo4reference"
+#: ParcellingTerm.py
 msgid "urban_label_DGO4Reference"
 msgstr ""
 
@@ -2813,7 +2818,7 @@ msgid "urban_label_askingDate"
 msgstr ""
 
 #. Default: "Asyncinquiryradius"
-#: ../UrbanTool.py:165
+#: ../UrbanTool.py:166
 msgid "urban_label_asyncInquiryRadius"
 msgstr ""
 
@@ -2931,7 +2936,7 @@ msgid "urban_label_city"
 msgstr ""
 
 #. Default: "Cityname"
-#: ../UrbanTool.py:72
+#: ../UrbanTool.py:73
 msgid "urban_label_cityName"
 msgstr ""
 
@@ -2984,7 +2989,7 @@ msgid "urban_label_classification_order_scope"
 msgstr ""
 
 #. Default: "College Holidays"
-#: ../UrbanTool.py:115
+#: ../UrbanTool.py:116
 msgid "urban_label_collegeHolidays"
 msgstr ""
 
@@ -3219,7 +3224,7 @@ msgid "urban_label_displayDateEnd"
 msgstr ""
 
 #. Default: "Displayemptykeydates"
-#: ../UrbanTool.py:102
+#: ../UrbanTool.py:103
 msgid "urban_label_displayEmptyKeyDates"
 msgstr ""
 
@@ -3249,12 +3254,12 @@ msgid "urban_label_divisionSubject"
 msgstr ""
 
 #. Default: "Divisionsrenaming"
-#: ../UrbanTool.py:80
+#: ../UrbanTool.py:81
 msgid "urban_label_divisionsRenaming"
 msgstr ""
 
 #. Default: "Editionoutputformat"
-#: ../UrbanTool.py:136
+#: ../UrbanTool.py:137
 msgid "urban_label_editionOutputFormat"
 msgstr ""
 
@@ -3490,7 +3495,7 @@ msgid "urban_label_general_disposition"
 msgstr ""
 
 #. Default: "Generatesingletondocuments"
-#: ../UrbanTool.py:147
+#: ../UrbanTool.py:148
 msgid "urban_label_generateSingletonDocuments"
 msgstr ""
 
@@ -3591,7 +3596,7 @@ msgid "urban_label_internal_service"
 msgstr ""
 
 #. Default: "Invertaddressnames"
-#: ../UrbanTool.py:156
+#: ../UrbanTool.py:157
 msgid "urban_label_invertAddressNames"
 msgstr ""
 
@@ -3667,7 +3672,7 @@ msgid "urban_label_isAnOpinion"
 msgstr ""
 
 #. Default: "Isdecentralized"
-#: ../UrbanTool.py:94
+#: ../UrbanTool.py:95
 msgid "urban_label_isDecentralized"
 msgstr ""
 
@@ -3887,7 +3892,7 @@ msgid "urban_label_locationTechnicalRemarks"
 msgstr ""
 
 #. Default: "Logmaprequests"
-#: ../UrbanTool.py:174
+#: ../UrbanTool.py:175
 msgid "urban_label_logMapRequests"
 msgstr ""
 
@@ -3907,7 +3912,7 @@ msgid "urban_label_manualParcels"
 msgstr ""
 
 #. Default: "Map Url"
-#: ../UrbanTool.py:127
+#: ../UrbanTool.py:128
 msgid "urban_label_mapUrl"
 msgstr ""
 
@@ -4917,7 +4922,7 @@ msgid "urban_label_theLicenceDate"
 msgstr ""
 
 #. Default: "Title"
-#: ../UrbanTool.py:65
+#: ../UrbanTool.py:66
 #: ../content/licence/GenericLicence.py:111
 msgid "urban_label_title"
 msgstr ""
@@ -5002,7 +5007,7 @@ msgid "urban_label_usage"
 msgstr ""
 
 #. Default: "Useplonemeetingwsclient"
-#: ../UrbanTool.py:183
+#: ../UrbanTool.py:184
 msgid "urban_label_usePloneMeetingWSClient"
 msgstr ""
 

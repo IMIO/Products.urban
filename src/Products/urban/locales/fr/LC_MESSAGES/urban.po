@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2019-05-29 12:38+0000\n"
+"POT-Creation-Date: 2019-06-07 13:23+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -2575,6 +2575,11 @@ msgstr "Numérotation des permis d'urbanisme"
 
 #. Default: "Dgo4reference"
 #: ParcellingTerm.py
+msgid "urban_label_CommunalReference"
+msgstr "Référence communale"
+
+#. Default: "Dgo4reference"
+#: ParcellingTerm.py
 msgid "urban_label_DGO4Reference"
 msgstr "Référence de la région wallone"
 
@@ -2846,7 +2851,7 @@ msgid "urban_label_askingDate"
 msgstr "Date de demande"
 
 #. Default: "Asyncinquiryradius"
-#: ../UrbanTool.py:165
+#: ../UrbanTool.py:166
 msgid "urban_label_asyncInquiryRadius"
 msgstr "Délayer les rayons d'enquêtes importants"
 
@@ -2964,7 +2969,7 @@ msgid "urban_label_city"
 msgstr "Localité"
 
 #. Default: "Cityname"
-#: ../UrbanTool.py:72
+#: ../UrbanTool.py:73
 msgid "urban_label_cityName"
 msgstr "Nom de la commune"
 
@@ -3017,7 +3022,7 @@ msgid "urban_label_classification_order_scope"
 msgstr "Portée de l'arrêté de classement"
 
 #. Default: "College Holidays"
-#: ../UrbanTool.py:115
+#: ../UrbanTool.py:116
 msgid "urban_label_collegeHolidays"
 msgstr ""
 
@@ -3252,7 +3257,7 @@ msgid "urban_label_displayDateEnd"
 msgstr "Date de fin d'affichage"
 
 #. Default: "Displayemptykeydates"
-#: ../UrbanTool.py:102
+#: ../UrbanTool.py:103
 msgid "urban_label_displayEmptyKeyDates"
 msgstr "Afficher les dates clés vides"
 
@@ -3283,12 +3288,12 @@ msgid "urban_label_divisionSubject"
 msgstr "Objet"
 
 #. Default: "Divisionsrenaming"
-#: ../UrbanTool.py:80
+#: ../UrbanTool.py:81
 msgid "urban_label_divisionsRenaming"
 msgstr "Nom alternatif des divisions pour la génération des documents"
 
 #. Default: "Editionoutputformat"
-#: ../UrbanTool.py:136
+#: ../UrbanTool.py:137
 msgid "urban_label_editionOutputFormat"
 msgstr "Format de fichier des modèles générés"
 
@@ -3525,7 +3530,7 @@ msgid "urban_label_general_disposition"
 msgstr "Disposition générale"
 
 #. Default: "Generatesingletondocuments"
-#: ../UrbanTool.py:147
+#: ../UrbanTool.py:148
 msgid "urban_label_generateSingletonDocuments"
 msgstr "Générer directement les documents uniques"
 
@@ -3626,7 +3631,7 @@ msgid "urban_label_internal_service"
 msgstr "Service interne à la ville"
 
 #. Default: "Invertaddressnames"
-#: ../UrbanTool.py:156
+#: ../UrbanTool.py:157
 msgid "urban_label_invertAddressNames"
 msgstr "Inverser le nom et prénom des destinataires de courriers"
 
@@ -3702,7 +3707,7 @@ msgid "urban_label_isAnOpinion"
 msgstr "Est un avis?"
 
 #. Default: "Isdecentralized"
-#: ../UrbanTool.py:94
+#: ../UrbanTool.py:95
 msgid "urban_label_isDecentralized"
 msgstr "Commune décentralisée?"
 
@@ -3922,7 +3927,7 @@ msgid "urban_label_locationTechnicalRemarks"
 msgstr "Remarques techniques (Fiche Urbanisme)"
 
 #. Default: "Logmaprequests"
-#: ../UrbanTool.py:174
+#: ../UrbanTool.py:175
 msgid "urban_label_logMapRequests"
 msgstr "Logger les accès à la cartographie avec collective.fingerpointing"
 
@@ -3942,7 +3947,7 @@ msgid "urban_label_manualParcels"
 msgstr "Parcelles"
 
 #. Default: "Map Url"
-#: ../UrbanTool.py:127
+#: ../UrbanTool.py:128
 msgid "urban_label_mapUrl"
 msgstr ""
 
@@ -4953,7 +4958,7 @@ msgid "urban_label_theLicenceDate"
 msgstr "Date de notification"
 
 #. Default: "Title"
-#: ../UrbanTool.py:65
+#: ../UrbanTool.py:66
 #: ../content/licence/GenericLicence.py:111
 msgid "urban_label_title"
 msgstr "Titre"
@@ -5038,7 +5043,7 @@ msgid "urban_label_usage"
 msgstr "Statistiques INS"
 
 #. Default: "Useplonemeetingwsclient"
-#: ../UrbanTool.py:183
+#: ../UrbanTool.py:184
 msgid "urban_label_usePloneMeetingWSClient"
 msgstr "Utiliser le lien PloneMeeting plutôt que les documents de délibération du collège"
 
