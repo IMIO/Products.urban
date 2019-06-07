@@ -1,145 +1,167 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-      xmlns:tal="http://xml.zope.org/namespaces/tal"
-      xmlns:metal="http://xml.zope.org/namespaces/metal"
-      xml:lang="en" lang="en"
-      i18n:domain="urban"
-      metal:use-macro="here/main_template/macros/master">
+xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+xmlns:tal="http://xml.zope.org/namespaces/tal"
+xmlns:metal="http://xml.zope.org/namespaces/metal"
+xml:lang="en" lang="en"
+i18n:domain="urban"
+metal:use-macro="here/main_template/macros/master">
 
 
-    <metal:block fill-slot="top_slot"
-                 tal:define="dummy python:request.set('disable_border',1)" />
+<metal:block fill-slot="top_slot"
+                tal:define="dummy python:request.set('disable_border',1)" />
 
-    <body>
-        <div metal:fill-slot="main">
-        <!-- définition des variables -->
-            <div tal:define="division request/division | nothing;
-                             section python: request.get('section', '').upper();
-                             radical python: request.get('radical', '').upper();
-                             bis python: request.get('bis', '').upper();
-                             exposant python: request.get('exposant', '').upper();
-                             puissance python: request.get('puissance', '').upper();
-                             partie request/partie | nothing;
-                             location request/location | nothing;
-                             parcel_owner request/parcel_owner | nothing;
-                             divisions view/divisions;
-                             prca request/prca | nothing;
-                             divname request/divname | nothing;">
+<body>
+<div metal:fill-slot="main">
+<!-- définition des variables -->
+        <div tal:define="division request/division | nothing;
+                        section python: request.get('section', '').upper();
+                        radical python: request.get('radical', '').upper();
+                        bis python: request.get('bis', '').upper();
+                        exposant python: request.get('exposant', '').upper();
+                        puissance python: request.get('puissance', '').upper();
+                        partie request/partie | nothing;
+                        location request/location | nothing;
+                        parcel_owner request/parcel_owner | nothing;
+                        divisions view/divisions;
+                        prca request/prca | nothing;
+                        divname request/divname | nothing;">
 
-            <h1 class="documentFirstHeading" i18n:translate="search_parcels"></h1>
+        <h1 class="documentFirstHeading" i18n:translate="search_parcels"></h1>
 
-            <tal:comment replace="nothing">Go back...</tal:comment>
-            <metal:listing use-macro="here/@@globalmacros/goBackToMacro" />
+        <tal:comment replace="nothing">Go back...</tal:comment>
+        <metal:listing use-macro="here/@@globalmacros/goBackToMacro" />
 
-                <!-- Display the list of already added parcels -->
-                <fieldset><legend i18n:translate="concerned_parcels">Concerned parcel(s)</legend>
-                    <div style="width: 800px">
-                        <tal:listing content="structure view/renderParcelsListing" />
-                    </div>
-                </fieldset>
+        <!-- Display the list of already added parcels -->
+        <fieldset><legend i18n:translate="concerned_parcels">Concerned parcel(s)</legend>
+                <div style="width: 800px">
+                <tal:listing content="structure view/renderParcelsListing" />
+                </div>
+        </fieldset>
 
-                <fieldset><legend i18n:translate="">Search parcel(s)</legend>
-                    <p tal:condition="not: divisions" i18n:translate="help_search_connection_problem">
-                         You can not search for parcels for now because there was a problem.
-                         Please contact your system administrator and give him the red error message here above
-                    </p>
-                    <tal:searchIsEnabled condition="divisions">
-                        <p class="discreet" i18n:translate="help_search_parcels">
-                            Choose one of the following forms to search for parcels.
-                            You can cumulate criteria if you exactly know what you are looking for
-                        </p>
-                        <p>&nbsp;</p>
-                        <form action="" method="GET">
-                            <table class="listing" width=800>
-                                 <thead>
-                                     <tr>
-                                         <th colspan="7"><strong i18n:translate="urban_search_parcel_by_cadastral_reference">Cadastral reference</strong></th>
-                                     </tr>
-                                 </thead>
-                                 <tbody>
-                                     <tr align=center>
-                                         <td>
-                                             <label class="discreet" i18n:translate="urban_label_division">Division</label><br />
-                                             <select name="division" value="division">
-                                                 <tal:block condition="python: type(divisions) is list"
-                                                            repeat="div divisions">
-                                                     <option tal:attributes="selected python: str(div[0]) == division; value python: div[0];"
-                                                             tal:content="python: div[1]" />
-                                                 </tal:block>
-                                             </select>
-                                         </td>
-                                         <td>
-                                             <label class="discreet" i18n:translate="urban_label_section">Section</label><br />
-                                                 <input style="text-transform: uppercase" size="5" maxlength="1" type="text" name="section"
-                                                        tal:attributes="value section">
-                                         </td>
-                                         <td>
-                                             <label class="discreet" i18n:translate="urban_label_radical">Radical</label><br />
-                                             <input size="5" maxlength="4" type="text" name="radical" tal:attributes="value radical">
-                                         </td>
-                                         <td>
-                                             <label class="discreet" i18n:translate="urban_label_bis">Bis</label><br />
-                                           / <input size="4" maxlength="2" type="text" name="bis" tal:attributes="value bis">
-                                         </td>
-                                         <td>
-                                             <label class="discreet" i18n:translate="urban_label_exposant">Exposant</label><br />
-                                             <input style="text-transform: uppercase" size="5" maxlength="1" type="text" name="exposant" tal:attributes="value exposant">
-                                         </td>
-                                         <td>
-                                             <label class="discreet" i18n:translate="urban_label_puissance">Puissance</label><br />
-                                             <input size="5" type="text" name="puissance" maxlength="2" tal:attributes="value puissance">
-                                         </td>
-                                         <td>
-                                             <label class="discreet" i18n:translate="urban_label_partie">Partie</label><br />
-                                             <input type="checkbox" name="partie" tal:attributes="value partie">
-                                         </td>
-                                     </tr>
-                                 </tbody>
-                             </table>
-
-                             <table style="margin-bottom: 0em;">
-                                 <tr>
-                                     <td width="390px" valign="top">
-                                         <table width=100% class="listing">
-                                             <thead>
-                                                 <tr>
-                                                     <th>
-                                                         <strong i18n:translate="urban_search_parcel_by_location">Location</strong>
-                                                     </th>
-                                                 </tr>
-                                             </thead>
-                                             <tbody>
-                                                 <tr>
-                                                     <td>
-                                                         <input type="text" id="location" name="location" tal:attributes="value location;" />
-                                                     </td>
-                                                 </tr>
-                                            </tbody>
-                                        </table>
-                                    </td>
-                                    <td width="20px"></td>
-                                    <td width="390px" valign="top">
-                                        <table width=100% class="listing">
-                                            <thead>
-                                                <tr>
-                                                    <th>
-                                                        <strong i18n:translate="urban_search_parcel_by_proprietary">Proprietary</strong>
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <input type="text" id="parcel_owner" name="parcel_owner"
-                                                                tal:attributes="value parcel_owner;" />
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </td>
+        <fieldset><legend i18n:translate="">Search parcel(s)</legend>
+                <p tal:condition="not: divisions" i18n:translate="help_search_connection_problem">
+                        You can not search for parcels for now because there was a problem.
+                        Please contact your system administrator and give him the red error message here above
+                </p>
+                <tal:searchIsEnabled condition="divisions">
+                <p class="discreet" i18n:translate="help_search_parcels">
+                        Choose one of the following forms to search for parcels.
+                        You can cumulate criteria if you exactly know what you are looking for
+                </p>
+                <p>&nbsp;</p>
+                <form action="" method="GET">
+                        <table class="listing" width=800>
+                                <thead>
+                                <tr>
+                                        <th colspan="7"><strong i18n:translate="urban_search_parcel_by_cadastral_reference">Cadastral reference</strong></th>
                                 </tr>
-                            </table><br/>
-                            <input class="context" type="submit" value="Search" i18n:attributes="value" />
+                                </thead>
+                                <tbody>
+                                <tr align=center>
+                                        <td>
+                                        <label class="discreet" i18n:translate="urban_label_division">Division</label><br />
+                                        <select name="division" value="division">
+                                                <tal:block condition="python: type(divisions) is list"
+                                                        repeat="div divisions">
+                                                <option tal:attributes="selected python: str(div[0]) == division; value python: div[0];"
+                                                        tal:content="python: div[1]" />
+                                                </tal:block>
+                                        </select>
+                                        </td>
+                                        <td>
+                                        <label class="discreet" i18n:translate="urban_label_section">Section</label><br />
+                                                <input style="text-transform: uppercase" size="5" maxlength="1" type="text" name="section"
+                                                tal:attributes="value section">
+                                        </td>
+                                        <td>
+                                        <label class="discreet" i18n:translate="urban_label_radical">Radical</label><br />
+                                        <input size="5" maxlength="4" type="text" name="radical" tal:attributes="value radical">
+                                        </td>
+                                        <td>
+                                        <label class="discreet" i18n:translate="urban_label_bis">Bis</label><br />
+                                        / <input size="4" maxlength="2" type="text" name="bis" tal:attributes="value bis">
+                                        </td>
+                                        <td>
+                                        <label class="discreet" i18n:translate="urban_label_exposant">Exposant</label><br />
+                                        <input style="text-transform: uppercase" size="5" maxlength="1" type="text" name="exposant" tal:attributes="value exposant">
+                                        </td>
+                                        <td>
+                                        <label class="discreet" i18n:translate="urban_label_puissance">Puissance</label><br />
+                                        <input size="5" type="text" name="puissance" maxlength="2" tal:attributes="value puissance">
+                                        </td>
+                                        <td>
+                                        <label class="discreet" i18n:translate="urban_label_partie">Partie</label><br />
+                                        <input type="checkbox" name="partie" tal:attributes="value partie">
+                                        </td>
+                                </tr>
+                                </tbody>
+                        </table>
+
+                        <table style="margin-bottom: 0em;">
+                                <tr>
+                                <td width="390px" valign="top">
+                                        <table width=100% class="listing">
+                                        <thead>
+                                                <tr>
+                                                <th>
+                                                        <strong i18n:translate="urban_search_parcel_by_location">Location</strong>
+                                                </th>
+                                                </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                <td>
+                                                        <input type="text" id="location" name="location"
+                                                               tal:attributes="value location; disabled python: request.get('browse_old_parcels') and 'disabled' or ''" />
+                                                </td>
+                                                </tr>
+                                        </tbody>
+                                </table>
+                                </td>
+                                <td width="20px"></td>
+                                <td width="390px" valign="top">
+                                <table width=100% class="listing">
+                                        <thead>
+                                        <tr>
+                                                <th>
+                                                <strong i18n:translate="urban_search_parcel_by_proprietary">Proprietary</strong>
+                                                </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                                <td>
+                                                <input type="text" id="parcel_owner" name="parcel_owner"
+                                                        tal:attributes="value parcel_owner; disabled python: request.get('browse_old_parcels') and 'disabled' or ''" />
+                                                </td>
+                                        </tr>
+                                        </tbody>
+                                </table>
+                                </td>
+                        </tr>
+                        <tr>
+                                <td colspan=3>
+                                        <input onclick="var adress = document.getElementById('location');
+                                                var owner = document.getElementById('parcel_owner');
+                                                var browse_old_parcels = document.getElementById('browse_old_parcels');
+                                                var oldParcels = (browse_old_parcels.getAttribute('checked') != 'checked');
+                                                if (oldParcels) {
+                                                        owner.setAttribute('disabled', 'disabled');
+                                                        adress.setAttribute('disabled', 'disabled');
+                                                        browse_old_parcels.setAttribute('checked', 'checked');
+                                                }
+                                                else {
+                                                        adress.removeAttribute('disabled');
+                                                        owner.removeAttribute('disabled');
+                                                        browse_old_parcels.setAttribute('checked', '');
+                                                }"
+                                        type="checkbox" id="browse_old_parcels" name="browse_old_parcels" value="1" checked="bla"
+                                        tal:attributes="checked python: request.get('browse_old_parcels') and 'checked' or ''"/>
+                                        <label i18n:translate="urban_browse_old_parcels">Browse old parcels (Only works with the parcel reference)</label>
+                                <td>
+                        </tr>
+                        </table><br/>
+                        <input class="context" type="submit" value="Search" i18n:attributes="value" />
                         </form>
 
                         <!-- Display results -->
@@ -159,6 +181,7 @@
                                 <tal:block tal:repeat="parcel results">
                                     <tr>
                                         <td>
+                                            <img src="old.png" tal:condition="python: getattr(parcel, 'old', None)" style="padding-right:0.5em"/>
                                             <span tal:content="python: parcel.display()"/><br>
                                             <span tal:condition="python: hasattr(parcel, 'locations')" tal:define="locations python: parcel.locations.values()">
                                                 <div tal:repeat="location locations" tal:content="python: location['street_name'] + ' ' + location['number']"/>
