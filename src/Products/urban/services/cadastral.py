@@ -2,12 +2,15 @@
 
 from Products.urban.services.base import SQLService
 from Products.urban.services.base import SQLSession
+from plone import api
 from plone.memoize import ram
 from time import time
 
 from sqlalchemy import and_
 from sqlalchemy import or_
 from sqlalchemy.sql.expression import func
+
+import ast
 
 IGNORE = []
 
@@ -99,13 +102,15 @@ class CadastreSession(SQLSession):
 
         return result
 
-    def is_official_parcel(self, division, section=None, radical='0', bis='0', exposant=None,
-                           puissance='0'):
+    def get_parcel_status(self, capakey):
         """
         Tell if a reference exists in the cadastral DB (including old parcels).
         """
-        parcel = self.query_exact_parcel(division, section, radical, bis, exposant, puissance)
-        return bool(parcel)
+        if self.query_parcel_by_capakey(capakey):
+            return 'actual_parcel'
+        elif self.query_old_parcel_by_capakey(capakey):
+            return 'old_parcel'
+        raise UnreferencedParcelError()
 
     def query_parcels(self, division=IGNORE, section=IGNORE, radical=IGNORE, bis=IGNORE,
                       exposant=IGNORE, puissance=IGNORE, location=IGNORE, parcel_owner=IGNORE):
@@ -140,35 +145,9 @@ class CadastreSession(SQLSession):
         Return parcels partially matching any defined criterias.
         Any argument with the value IGNORE is ignored.
         """
-        parcels = self.tables.old_parcels
-        divisions = self.tables.divisions
-        owners_imp = self.tables.owners_imp
-        # parcel reference columns to return (section, division, radical, ...)
-        query = self.session.query(
-            parcels.section,
-            parcels.primarynumber.label('radical'),
-            parcels.exponentletter.label('exposant'),
-            parcels.bisnumber.label('bis'),
-            parcels.exponentnumber.label('puissance'),
-            parcels.capakey,
-            parcels.partnumber,
-            divisions.divname,
-            divisions.da.label('division'),
-            owners_imp.owner_officialid.label('owner_id'),
-            owners_imp.owner_name,
-            owners_imp.owner_firstname,
-            owners_imp.owner_country,
-            owners_imp.owner_zipcode,
-            owners_imp.owner_municipality_fr.label('owner_city'),
-            owners_imp.owner_street_fr.label('owner_street'),
-            owners_imp.owner_number,
-            owners_imp.owner_boxnumber,
-        )
-        # table joins
-        query = query.filter(divisions.da == parcels.divcad)
-        query = query.outerjoin(owners_imp, parcels.propertysituationid == owners_imp.propertysituationidf)
+        query = self._base_query_old_parcels()
         # filter on parcel reference arguments
-        query = self._filter(query, division, section, radical, bis, exposant, puissance, parcels_table=parcels)
+        query = self._filter(query, division, section, radical, bis, exposant, puissance, parcels_table=self.tables.old_parcels)
 
         # filter on parcel location/proprietary name arguments
         if parcel_owner is not IGNORE:
@@ -184,27 +163,8 @@ class CadastreSession(SQLSession):
             query = query.filter(parcel_streets.street_situation.ilike('%{}%'.format(location)))
 
         records = query.distinct().all()
-        parcels = {}
-        for record in records:
-            if record.capakey not in parcels:
-                parcel = ActualParcel(**record._asdict())
-                parcels[record.capakey] = parcel
-            else:
-                parcel = parcels[record.capakey]
-            if record.owner_id:
-                parcel.add_owner(
-                    record.owner_id,
-                    record.owner_name or '',
-                    record.owner_firstname or '',
-                    record.owner_country or '',
-                    record.owner_zipcode or '',
-                    record.owner_city or '',
-                    record.owner_street or '',
-                    record.owner_number or '',
-                    record.owner_boxnumber or '',
-                )
-
-        return parcels.values()
+        parcels = self.merge_parcel_results(records)
+        return parcels
 
     def query_exact_parcel(self, division, section=None, radical='', bis='', exposant=None,
                            puissance=''):
@@ -232,6 +192,18 @@ class CadastreSession(SQLSession):
             return
         return parcels[0]
 
+    def query_old_parcel_by_capakey(self, capakey):
+        """
+        Return the unique parcel exactly matching capakey 'capakey'.
+        """
+        query = self._base_query_old_parcels()
+        query = query.filter(self.tables.parcels.capakey == capakey)
+        records = query.distinct().all()
+        parcels = self.merge_parcel_results(records)
+        if len(parcels) != 1:
+            return
+        return parcels[0]
+
     def query_parcel_historic(self, capakey):
         parcels_genealogy = self.tables.parcels_genealogy
         query = self.session.query(
@@ -242,7 +214,9 @@ class CadastreSession(SQLSession):
             parcels_genealogy.capakey == capakey
         )
         records = query.distinct().all()
-        return records
+        if records:
+            historic = ParcelHistoric(capakey, ast.literal_eval(records[0][0]), ast.literal_eval(records[0][1]))
+            return historic
 
     def query_parcels_wkt(self, parcels):
         """
@@ -403,31 +377,66 @@ class CadastreSession(SQLSession):
 
         return query
 
+    def _base_query_old_parcels(self):
+        """
+        """
+        parcels = self.tables.old_parcels
+        divisions = self.tables.divisions
+        owners_imp = self.tables.owners_imp
+        # parcel reference columns to return (section, division, radical, ...)
+        query = self.session.query(
+            parcels.section,
+            parcels.primarynumber.label('radical'),
+            parcels.exponentletter.label('exposant'),
+            parcels.bisnumber.label('bis'),
+            parcels.exponentnumber.label('puissance'),
+            parcels.capakey,
+            parcels.partnumber,
+            divisions.divname,
+            divisions.da.label('division'),
+            owners_imp.owner_officialid.label('owner_id'),
+            owners_imp.owner_name,
+            owners_imp.owner_firstname,
+            owners_imp.owner_country,
+            owners_imp.owner_zipcode,
+            owners_imp.owner_municipality_fr.label('owner_city'),
+            owners_imp.owner_street_fr.label('owner_street'),
+            owners_imp.owner_number,
+            owners_imp.owner_boxnumber,
+        )
+        # table joins
+        query = query.filter(divisions.da == parcels.divcad)
+        query = query.outerjoin(owners_imp, parcels.propertysituationid == owners_imp.propertysituationidf)
+
+        return query
+
     def merge_parcel_results(self, query_result):
         parcels = {}
         for record in query_result:
             if record.capakey not in parcels:
-                parcel = ActualParcel(**record._asdict())
+                parcel = Parcel(**record._asdict())
                 parcels[record.capakey] = parcel
             else:
                 parcel = parcels[record.capakey]
             parcel.add_nature(record.nature_fr)
-            parcel.add_location(
-                record.street_uid,
-                record.street_name,
-                record.number and record.number.replace(' ', '') or ''
-            )
-            parcel.add_owner(
-                record.owner_id,
-                record.owner_name or '',
-                record.owner_firstname or '',
-                record.owner_country or '',
-                record.owner_zipcode or '',
-                record.owner_city or '',
-                record.owner_street or '',
-                record.owner_number or '',
-                record.owner_boxnumber or '',
-            )
+            if hasattr(record, 'street_uid'):
+                parcel.add_location(
+                    record.street_uid,
+                    record.street_name,
+                    record.number and record.number.replace(' ', '') or ''
+                )
+            if record.owner_id:
+                parcel.add_owner(
+                    record.owner_id,
+                    record.owner_name or '',
+                    record.owner_firstname or '',
+                    record.owner_country or '',
+                    record.owner_zipcode or '',
+                    record.owner_city or '',
+                    record.owner_street or '',
+                    record.owner_number or '',
+                    record.owner_boxnumber or '',
+                )
 
         return parcels.values()
 
@@ -437,16 +446,21 @@ class Parcel(object):
     Proxy base class to represent a parcel from query result
     """
 
-    def __init__(self, **reference):
+    def __init__(self, capakey):
         self.division = self.section = self.radical = self.bis = self.exposant = self.puissance = ''
         self._reference_keys = ['division', 'section', 'radical', 'bis', 'exposant', 'puissance']
-        divname = reference.get('divname', '')
-        self.divname = type(divname) is unicode and divname.encode('utf-8') or divname
-        self._init_reference(**reference)
+        portal_urban = api.portal.get_tool('portal_urban')
+        self.divname = portal_urban.get_division_name(capakey[:5])
+        self._init_reference(capakey)
+        self.capakey = capakey
+        self.locations = {}
+        self.owners = {}
+        self.natures = []
 
-    def _init_reference(self, **kwargs):
+    def _init_reference(self, capakey):
+        ref_as_dict = capakey_as_dict(capakey)
         for ref in self._reference_keys:
-            val = kwargs.get(ref, '') and unicode(kwargs[ref]) or ''
+            val = ref_as_dict.get(ref, '') and unicode(ref_as_dict[ref]) or ''
             val = val.upper().encode('utf-8')
             setattr(self, ref, val)
 
@@ -464,32 +478,8 @@ class Parcel(object):
     def values(self, ignore=[]):
         return [getattr(self, attr, '') for attr in self._reference_keys if attr not in ignore]
 
-    def to_index(self):
-        raw_values = self.values()
-        index = '{:05d}{}{:04d}/{:02d}{}{:03d}'.format(
-            int(raw_values[0] or 0),
-            raw_values[1],
-            int(raw_values[2] or 0),
-            int(raw_values[3] or 0),
-            raw_values[4] or '_',
-            int(raw_values[5] or 0),
-        )
-        return index
-
     def reference_as_dict(self):
         return dict([(ref, getattr(self, ref)) for ref in self._reference_keys if getattr(self, ref)])
-
-
-class ActualParcel(Parcel):
-    """
-    Class to represent query result of an actual parcel.
-    """
-    def __init__(self, capakey, **infos):
-        super(ActualParcel, self).__init__(**infos)
-        self.capakey = capakey
-        self.locations = {}
-        self.owners = {}
-        self.natures = []
 
     def add_location(self, street_uid, street_name, number):
         self.locations['{}/{}'.format(street_uid, number)] = {
@@ -513,7 +503,146 @@ class ActualParcel(Parcel):
             self.natures.append(nature)
 
 
-def parse_cadastral_reference(capakey):
+class SiblingParcelHistoric(Parcel):
+    """
+    Base class for parcel historic
+    """
+
+    def __init__(self, capakey, parent_node, siblings):
+        super(SiblingParcelHistoric, self).__init__(capakey)
+        self.parent_node = parent_node
+        self.level = parent_node.level - 1
+        self.branches = self._init_siblings_historic(siblings)
+        self.width = self._init_width()
+        self.old = True  # a sibling parcel is ALWAYS old
+
+    def _init_width(self):
+        width = sum([node.width for node in self.branches]) or 1
+        return width
+
+    @property
+    def root(self):
+        """
+        Return the root node of the this node tree
+        """
+        parent = self.parent_node
+        while parent:
+            parent = parent.parent_node
+        return parent
+
+    def _init_siblings_historic(self, siblings):
+        """
+        Recursively initialize the chain of all parents parcels
+        """
+        branches = [SiblingParcelHistoric(capakey, parent_node=self, siblings=tail) for capakey, tail in siblings.iteritems()]
+        return branches
+
+    def display(self):
+        return ' '.join(self.values(ignore=['division']))
+
+
+class ParcelHistoric(SiblingParcelHistoric):
+    """
+    Class to represent a parcel query result and all its siblings (parents/childs)
+    """
+
+    def __init__(self, capakey, parents, children):
+        super(SiblingParcelHistoric, self).__init__(capakey)
+        self.level = 0
+        self.parents = self._init_siblings_historic(parents)
+        self.children = self._init_siblings_historic(children)
+        self.branches = self.parents + self.children
+        self.width = max(
+            sum([n.width for n in self.parents]),
+            sum([n.width for n in self.children])
+        )
+        self.old = bool(self.children)  # this parcel is old only if it has children
+
+    def display(self):
+        return super(ParcelHistoric, self).display()
+
+    def get_all_capakeys(self):
+        """
+        List the reference index values of the parcel and all its siblings
+        """
+        indexes = [node.capakey for node in self.all_nodes()]
+        return indexes
+
+    def all_nodes(self):
+        """
+        Return a list of all nodes of this historic.
+        """
+        to_explore = list([self])
+        all_nodes = []
+        while to_explore:
+            next_node = to_explore.pop()
+            all_nodes.append(next_node)
+            for sub_node in next_node.branches:
+                to_explore.append(sub_node)
+        return all_nodes
+
+    def table_display(self):
+        """
+        Return nested lists representing this parcel tree to easily build
+        an html table:
+        - the whole nested list is a <table>
+        - each line is a <tr>
+        - each item of a line is a <td> (with colspan set to item.width)
+        """
+        class Blank(object):
+            def __init__(self, width=1):
+                self.width = width
+
+            def display(self):
+                return ''
+
+        def recursive_build_table(table=[[]]):
+            """
+            Build tables lines by looking on elements of the previous line
+
+            first line    |       a       |
+                          |     b . c d   |
+                          | m . . o . p q |
+                          ...
+            previous line | v w . u . . s |
+            new line      | . x . y ...
+            """
+            previous_line = table[-1]
+            # base case: the last line is a single Blank or is empty
+            is_blank_line = len(previous_line) == 1 and type(previous_line[0]) is Blank
+            if not previous_line or is_blank_line:
+                return table[:-1]
+
+            line = []
+            for leaf in previous_line:
+                if isinstance(leaf, Parcel) and leaf.branches:
+                    for branch in leaf.branches:
+                        line.append(branch)
+                else:
+                    new_blank = Blank(leaf.width)
+                    # if left neighbour is also a blank, merge them
+                    if line and type(line[-1]) is Blank:
+                        line[-1].width += new_blank.width
+                    else:
+                        line.append(new_blank)
+            # recursive call
+            table.append(line)
+            return recursive_build_table(table)
+
+        table = [[self]]
+        for sibling in ['children', 'parents']:
+            siblings = list(getattr(self, sibling))
+            table.append(siblings)
+            width_delta = self.width - sum([s.width for s in siblings])
+            if width_delta:
+                siblings.append(Blank(width_delta))
+            table = recursive_build_table(table)
+            table.reverse()
+
+        return table
+
+
+def capakey_as_dict(capakey):
     """
     """
     reference_as_dict = {
