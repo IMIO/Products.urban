@@ -252,7 +252,7 @@ class UrbanBase(object):
             if street.portal_type == 'Locality':
                 signaletic += '%s ' % translate('locality_for_worklocation', 'urban', context=self.REQUEST, default='locality').encode('utf8')
             if number:
-                signaletic += "%s %s à %s %s" % (streetName, number.encode('utf8'), city.getZipCode(), city.Title())
+                signaletic += "%s %s à %s %s" % (streetName, number, city.getZipCode(), city.Title())
             else:
                 signaletic += "%s - %s %s" % (streetName, city.getZipCode(), city.Title())
             if auto_back_to_the_line:
