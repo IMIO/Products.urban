@@ -414,7 +414,7 @@ class CadastreSession(SQLSession):
         parcels = {}
         for record in query_result:
             if record.capakey not in parcels:
-                parcel = Parcel(**record._asdict())
+                parcel = Parcel(record.capakey))
                 parcels[record.capakey] = parcel
             else:
                 parcel = parcels[record.capakey]
