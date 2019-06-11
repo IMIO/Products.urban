@@ -422,7 +422,7 @@ class CadastreSession(SQLSession):
             if hasattr(record, 'street_uid'):
                 parcel.add_location(
                     record.street_uid,
-                    record.street_name,
+                    record.street_name or '',
                     record.number and record.number.replace(' ', '') or ''
                 )
             if record.owner_id:
