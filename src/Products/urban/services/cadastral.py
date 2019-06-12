@@ -216,7 +216,9 @@ class CadastreSession(SQLSession):
         records = query.distinct().all()
         if records:
             historic = ParcelHistoric(capakey, ast.literal_eval(records[0][0]), ast.literal_eval(records[0][1]))
-            return historic
+        else:
+            historic = ParcelHistoric(capakey, {}, {})
+        return historic
 
     def query_parcels_wkt(self, parcels):
         """
