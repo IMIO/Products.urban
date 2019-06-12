@@ -65,7 +65,7 @@ class MapView(BrowserView):
             packages: [{{
             name: 'exemple',
             location: '//{}/static/widget'
-            }},\{{
+            }},{{
             name: 'urbanmap',
             location: '//{}/static/urbanmap'
             }}]
