@@ -53,6 +53,7 @@ class MapView(BrowserView):
         """
         portal_urban = api.portal.get_tool('portal_urban')
         city_name = portal_urban.getCityName()
+        directory = self.get_map_directory()
         urbanmap_host = URBANMAP_CFG.urbanmap.get('url', '')
         script = """
             var dojoConfig = {
@@ -69,8 +70,11 @@ class MapView(BrowserView):
             location: '//%s/static/urbanmap'
             }]
             };
-            """ % (urbanmap_host, city_name, urbanmap_host, urbanmap_host)
+            """ % (urbanmap_host, city_name, directory, urbanmap_host, urbanmap_host)
         return script
+
+    def get_map_directory(self):
+        return 'fr'
 
     def getListCapaKey(self):
         """
@@ -187,3 +191,6 @@ class FullMapView(MapView):
         is_map_user = member.has_role('UrbanMapReader')
         is_manager = member.has_role('Manager')
         return is_map_user or is_manager
+
+    def get_map_directory(self):
+        return 'frfullmap'
