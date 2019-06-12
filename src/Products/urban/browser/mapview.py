@@ -61,16 +61,16 @@ class MapView(BrowserView):
             parseOnLoad: true,
             isDebug: false,
             locale: 'fr',
-            configBasePath: '//%s/static/%s/fr',
+            configBasePath: '//{}/static/{}/{}',
             packages: [{
             name: 'exemple',
-            location: '//%s/static/widget'
+            location: '//{}/static/widget'
             },{
             name: 'urbanmap',
-            location: '//%s/static/urbanmap'
+            location: '//{}/static/urbanmap'
             }]
             };
-            """ % (urbanmap_host, city_name, directory, urbanmap_host, urbanmap_host)
+            """.format(urbanmap_host, city_name, directory, urbanmap_host, urbanmap_host)
         return script
 
     def get_map_directory(self):
