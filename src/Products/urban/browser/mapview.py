@@ -56,20 +56,20 @@ class MapView(BrowserView):
         directory = self.get_map_directory()
         urbanmap_host = URBANMAP_CFG.urbanmap.get('url', '')
         script = """
-            var dojoConfig = {
+            var dojoConfig = {{
             async: true,
             parseOnLoad: true,
             isDebug: false,
             locale: 'fr',
             configBasePath: '//{}/static/{}/{}',
-            packages: [{
+            packages: [{{
             name: 'exemple',
             location: '//{}/static/widget'
-            },{
+            }},\{{
             name: 'urbanmap',
             location: '//{}/static/urbanmap'
-            }]
-            };
+            }}]
+            }};
             """.format(urbanmap_host, city_name, directory, urbanmap_host, urbanmap_host)
         return script
 
