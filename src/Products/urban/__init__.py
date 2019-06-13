@@ -138,7 +138,6 @@ def initialize(context):
     import EnvironmentRubricTerm
     import FolderManager
     import content.Inquiry
-    import Layer
     import LicenceConfig
     import Locality
     import OpinionRequestEventType
