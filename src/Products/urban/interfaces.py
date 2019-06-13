@@ -75,6 +75,7 @@ class IUrbanEvent(Interface):
     """Marker interface for .UrbanEvent.UrbanEvent
     """
 
+
 class IUrbanEventInspectionReport(Interface):
     """Marker interface for UrbanEventInspectionReport
     """
@@ -132,11 +133,6 @@ class IPortionOut(Interface):
 
 class IRecipientCadastre(Interface):
     """Marker interface for .RecipientCadastre.RecipientCadastre
-    """
-
-
-class ILayer(Interface):
-    """Marker interface for .Layer.Layer
     """
 
 
@@ -576,7 +572,7 @@ class IInternalPreliminaryAdviceEvent(Interface):
 class IPatrimonyMeetingEvent(Interface):
     __doc__ = _("""IPatrimonyMeetingEvent type marker interface""")
 
-    
+
 class IInspectionReportEvent(Interface):
     __doc__ = _("""IInspectionReportEvent type marker interface""")
 
