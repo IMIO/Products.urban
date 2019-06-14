@@ -2339,6 +2339,11 @@ msgstr ""
 msgid "urban_label_tabsConfig"
 msgstr ""
 
+#. Default: "Tax"
+#: GenericLicence.py
+msgid "urban_label_tax"
+msgstr ""
+
 #. Default: "Templatefooter"
 #: UrbanTool.py
 msgid "urban_label_templateFooter"

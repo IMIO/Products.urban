@@ -50,6 +50,25 @@ def migrate_create_voc_general_disposition(context):
     logger.info("migration step done!")
 
 
+def migrate_create_voc_tax(context):
+    """
+    """
+    logger = logging.getLogger('urban: migrate create_voc_tax')
+    logger.info("starting migration step")
+    container = api.portal.get_tool('portal_urban')
+    tax_vocabularies_config = default_values['shared_vocabularies']['tax']
+    allowedtypes = tax_vocabularies_config[0]
+    tax_vocabularies_config = createVocabularyFolder(container, 'tax',context, allowedtypes)
+
+    createFolderDefaultValues(
+        tax_vocabularies_config,
+        default_values['shared_vocabularies']['tax'][1:],
+        default_values['shared_vocabularies']['tax'][0]
+    )
+
+    logger.info("migration step done!")
+
+
 def migrate(context):
     logger = logging.getLogger('urban: migrate to 2.4')
     logger.info("starting migration steps")
