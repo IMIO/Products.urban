@@ -11,6 +11,9 @@ Changes
 
 2.4 (2019-03-25)
 ----------------
+- add tax field in GenericLicence
+  [fngaha]
+
 - add communalReference field in ParcellingTerm
   [fngaha]
 

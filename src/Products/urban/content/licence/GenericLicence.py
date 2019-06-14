@@ -99,7 +99,7 @@ optional_fields = [
     'concentratedRunoffSRisk', 'concentratedRunoffSRiskDetails', 'sevesoSite', 'natura_2000', 'sewers',
     'sewersDetails', 'roadAnalysis', 'futureRoadCoating', 'expropriation', 'expropriationDetails',
     'preemption', 'preemptionDetails', 'SAR', 'sarDetails', 'enoughRoadEquipment', 'enoughRoadEquipmentDetails',
-    'reparcelling', 'reparcellingDetails', 'noteworthyTrees', 'pipelines', 'pipelinesDetails'
+    'reparcelling', 'reparcellingDetails', 'noteworthyTrees', 'pipelines', 'pipelinesDetails', 'redevence'
 ]
 ##/code-section module-header
 
@@ -160,6 +160,17 @@ schema = Schema((
         enforceVocabulary=True,
         schemata='urban_description',
         vocabulary=UrbanVocabulary('foldercategories', with_empty_value=True),
+        default_method='getDefaultValue',
+    ),
+    StringField(
+        name='tax',
+        widget=SelectionWidget(
+            label=_('urban_label_tax',
+                    default='Tax'),
+        ),
+        enforceVocabulary=True,
+        schemata='urban_description',
+        vocabulary=UrbanVocabulary('tax', with_empty_value=True, sort_on='sortable_title'),
         default_method='getDefaultValue',
     ),
     LinesField(

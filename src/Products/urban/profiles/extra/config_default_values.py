@@ -1422,6 +1422,12 @@ default_values = {
             {'id': 'WIJZRELIEF', 'title': u"Transformation non-bâti - Transformation relief", 'extraValue': 'WIJZRELIEF'},
         ],
 
+        'tax': [
+            'UrbanVocabularyTerm', URBAN_TYPES,
+            {'id': "150", 'title': u"150"},
+            {'id': "180", 'title': u"180"},
+        ],
+
     },
     'global': {
 
