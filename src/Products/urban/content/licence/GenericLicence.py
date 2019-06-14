@@ -100,6 +100,7 @@ optional_fields = [
     'sewersDetails', 'roadAnalysis', 'futureRoadCoating', 'expropriation', 'expropriationDetails',
     'preemption', 'preemptionDetails', 'SAR', 'sarDetails', 'enoughRoadEquipment', 'enoughRoadEquipmentDetails',
     'reparcelling', 'reparcellingDetails', 'noteworthyTrees', 'pipelines', 'pipelinesDetails', 'tax'
+    'groundStateStatus', 'groundstatestatusDetails'
 ]
 ##/code-section module-header
 
@@ -481,6 +482,29 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_road',
+        default_output_type='text/html',
+    ),
+    LinesField(
+        name='groundStateStatus',
+        widget=MultiSelectionWidget(
+            format='checkbox',
+            label=_('urban_label_groundStateStatus',
+                    default='Groundstatestatus'),
+        ),
+        schemata='urban_road',
+        vocabulary=UrbanVocabulary('groundstatestatus', inUrbanConfig=False),
+        default_method='getDefaultValue',
+    ),
+    TextField(
+        name='groundstatestatusDetails',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            label=_('urban_label_groundStateStatusDetails',
+                    default='Groundstatestatusdetails'),
+        ),
+        schemata='urban_road',
+        default_method='getDefaultText',
+        default_content_type='text/plain',
         default_output_type='text/html',
     ),
     LinesField(

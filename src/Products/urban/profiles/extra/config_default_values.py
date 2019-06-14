@@ -1863,6 +1863,13 @@ default_values = {
             {'id': "yyy", 'title': u"Périmètre NATURA 2000 de YYY"},
         ],
 
+        'groundstatestatus': [
+            'UrbanVocabularyTerm',
+            {'id': "no", 'title': u"Non repris"},
+            {'id': "lavande", 'title': u"Couleur bleu lavande (indicatif)"},
+            {'id': "peche", 'title': u"Couleur pêche (démarches faites ou à prévoir)"},
+        ],
+
         'delegatesignatures': [
             'UrbanVocabularyTerm',
             {'id': "adam", 'title': u"Adam Smith"},
