@@ -93,7 +93,17 @@ Publipostage sans extension
 L'extension pour LibreOffice n'est plus nécessaire : vous pouvez dorénavant utiliser les dernières versions de `LibreOffice
 <https://fr.libreoffice.org//>`_!
 
-Pour cela, il faut procéder en deux temps :
+Pour cela, il faut procéder en plusieurs temps :
+
+* Mettez à jour la configuration du modèle :
+
+   #. Ajoutez dans les variables de contexte une ligne avec "publipostage" comme nom de variable et le type de contact dans valeur. Le type de contact est par exemple "proprietaires" si nous sommes dans le cas d'une enquête publique ou "demandeurs" dans la plupart des autres cas.
+   #. Ensuite, sélectionnez le modèle de boucle de publipostage "Publipostage urbanisme" ou "Publipostage environnement"
+
+.. image:: resources/images/template_mailing_configuration1.png
+  :width: 700
+  :alt: template_mailing_configuration1
+
 
 * Adaptez vos modèles utilisant le publipostage
 
@@ -140,8 +150,8 @@ Nouvelles couches carottables
    À venir
 
 
-Nouvelle interface graphique pour la cartographie
-=================================================
+Nouveau portail cartographique
+===============================
 
 .. image:: resources/images/new_map_portal_example.png
   :width: 700
