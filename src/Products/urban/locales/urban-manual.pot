@@ -2608,6 +2608,9 @@ msgstr ""
 msgid "divergences_folder_title"
 msgstr ""
 
+msgid "groundstatestatus_folder_title"
+msgstr ""
+
 msgid "natura_2000_folder_title"
 msgstr ""
 
