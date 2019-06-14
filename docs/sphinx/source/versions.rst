@@ -143,6 +143,10 @@ Nouvelles couches carottables
 Nouvelle interface graphique pour la cartographie
 =================================================
 
+.. image:: resources/images/new_map_portal_example.png
+  :width: 700
+  :alt: new_map_portal_example
+
 .. todo::
-   À venir
+   Plus de détails à venir
 
