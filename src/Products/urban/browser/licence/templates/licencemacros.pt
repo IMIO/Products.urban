@@ -103,10 +103,9 @@
 
 <fieldset metal:define-macro="urbanApplicantsAndCorporationsMacro" i18n:domain="urban">
     <legend i18n:translate="applicants">Applicant(s)</legend>
-    <div class="#" tal:define="corporations context/getCorporations;
-                               applicants context/getApplicants"
-                   tal:attributes="class python: (applicants or corporations) and 'field' or 'field warning'">
-        <p tal:condition="python: not (corporations or applicants)" i18n:translate="warning_add_an_applicant">
+    <div class="#" tal:define="applicants context/getApplicants"
+                   tal:attributes="class python: applicants and 'field' or 'field warning'">
+        <p tal:condition="python: not applicants" i18n:translate="warning_add_an_applicant">
             You must encode applicant(s)
         </p>
         <tal:listing content="structure view/renderApplicantListing" />
