@@ -1583,7 +1583,7 @@ default_values = {
             {'id': "electricite", 'title': u"distribution électrique"},
             {'id': "epuration", 'title': u"canalisation reliée à une station d'épuration publique"},
             {'id': "nonepuration", 'title': u"canalisation non-reliée à une station d'épuration publique"},
-            {'id': "egoutsep", 'title': u"réseau d'égoutage séparatif"},
+            {'id': "egoutsep", 'title': u"réseau d'égouttage séparatif"},
             {'id': "pascollecteeaux", 'title': u"pas de canalisation de collecte des eaux"},
             {'id': "fosse", 'title': u"fossé"},
         ],
