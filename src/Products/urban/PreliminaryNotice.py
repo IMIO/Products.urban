@@ -1,0 +1,1 @@
+from Products.urban.content.licence.PreliminaryNotice import PreliminaryNotice
