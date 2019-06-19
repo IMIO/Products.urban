@@ -3,13 +3,6 @@
     <!--tal:vars define="exclude python:[]"-->
         <metal:parent_call use-macro="here/@@licencetabs-macros/description_macro">
 
-            <metal:applicants fill-slot="applicant_slot">
-                <metal:applicants_and_corporations_macro use-macro="here/@@licencemacros/urbanApplicantsAndCorporationsMacro" />
-                <tal:show_disabled_applicants condition= "here/get_applicants_history">
-                    <metal:disabled_applicants_and_corporations_macro use-macro="here/@@licencemacros/urbanApplicantsHistoricAndCorporationsMacro" />
-                </tal:show_disabled_applicants>
-            </metal:applicants>
-
             <metal:representatives fill-slot="representatives">
                 <metal:representatives_macro use-macro="here/@@licencemacros/urbanArchitectsMacro" />
             </metal:representatives>
