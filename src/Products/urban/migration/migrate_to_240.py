@@ -3,7 +3,6 @@
 from Products.urban.profiles.extra.config_default_values import default_values
 from Products.urban.setuphandlers import createVocabularyFolder
 from Products.urban.setuphandlers import createFolderDefaultValues
-from Products.urban.config import URBAN_TYPES
 
 from plone import api
 
@@ -58,7 +57,7 @@ def migrate_create_voc_tax(context):
     container = api.portal.get_tool('portal_urban')
     tax_vocabularies_config = default_values['shared_vocabularies']['tax']
     allowedtypes = tax_vocabularies_config[0]
-    tax_vocabularies_config = createVocabularyFolder(container, 'tax',context, allowedtypes)
+    tax_vocabularies_config = createVocabularyFolder(container, 'tax', context, allowedtypes)
 
     createFolderDefaultValues(
         tax_vocabularies_config,
@@ -82,4 +81,6 @@ def migrate(context):
     setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'urban-postInstall')
     migrate_create_voc_classification_order_scope(context)
     migrate_create_voc_general_disposition(context)
+    catalog = api.portal.get_tool('portal_catalog')
+    catalog.clearFindAndRebuild()
     logger.info("migration done!")
