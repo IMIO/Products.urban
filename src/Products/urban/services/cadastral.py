@@ -420,7 +420,8 @@ class CadastreSession(SQLSession):
                 parcels[record.capakey] = parcel
             else:
                 parcel = parcels[record.capakey]
-            parcel.add_nature(record.nature_fr)
+            if hasattr(record, 'nature_fr'):
+                parcel.add_nature(record.nature_fr)
             if hasattr(record, 'street_uid'):
                 parcel.add_location(
                     record.street_uid,
