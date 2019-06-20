@@ -164,7 +164,7 @@ class CadastralReferenceSuggest(SuggestView):
             v[11:13].lstrip('0'),
             v[13].lstrip('0'),
             v[14:].lstrip('0')), v)
-            for v in values]
+            for v in values if len(v) > 14]
         return all_values
 
     def compute_suggestions(self):
