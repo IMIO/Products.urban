@@ -194,10 +194,7 @@ class UrbanVocabulary(object):
 
     def getDisplayList(self, context):
         raw_voc = self.get_raw_voc(context)
-        try:
-            result = DisplayList([(id_, v['title']) for id_, v in raw_voc.iteritems() if v['enabled']])
-        except:
-            import ipdb; ipdb.set_trace()
+        result = DisplayList([(id_, v['title']) for id_, v in raw_voc.iteritems() if v['enabled']])
         raw_voc = self.get_raw_voc(context)
         return result
 
