@@ -90,8 +90,8 @@ ADD_CONTENT_PERMISSIONS = {
     'GenericLicence': 'urban: Add GenericLicence',
     'Inquiry': 'urban: Add Inquiry',
     'CODT_Inquiry': 'urban: Add CODT_Inquiry',
+    'CODT_UniqueLicenceInquiry': 'urban: Add CODT_UniqueLicenceInquiry',
     'IntegratedLicence': 'urban: Add IntegratedLicence',
-    'Layer': 'urban: Add Layer',
     'LicenceConfig': 'urban: Add LicenceConfig',
     'Locality': 'urban: Add Locality',
     'MiscDemand': 'urban: Add MiscDemand',
@@ -157,7 +157,6 @@ setDefaultRoles('urban: Add IntegratedLicence', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add Inspection', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add Inquiry', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add CODT_Inquiry', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add Layer', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add LicenceConfig', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add Locality', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add MiscDemand', ("Manager", "Contributor"))
@@ -237,6 +236,11 @@ LICENCE_FINAL_STATES = [
     'retired',
     'abandoned',
     'inacceptable',
+]
+
+VOCABULARY_TYPES = [
+    'UrbanVocabularyTerm', 'PcaTerm',
+    'PersonTitleTerm', 'OrganisationTerm',
 ]
 
 # all types that can be used as a licence applicant

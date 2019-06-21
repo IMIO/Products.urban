@@ -178,7 +178,30 @@ class UrbanVocabulary(object):
         self.with_empty_value = with_empty_value
         self.datagridfield_key = datagridfield_key
 
-    def getDisplayList(self, content_instance):
+    def get_raw_voc(self, context):
+        portal_urban = api.portal.get_tool('portal_urban')
+        raw_voc = portal_urban.get_vocabulary(
+            in_urban_config=self.inUrbanConfig,
+            procedure=context.portal_type.lower(),
+            name=self.path
+        )
+        return raw_voc
+
+    def get_default_values(self):
+        raw_voc = self.get_raw_voc()
+        default_values = [v for v in raw_voc if v['default']]
+        return default_values
+
+    def getDisplayList(self, context):
+        raw_voc = self.get_raw_voc(context)
+        try:
+            result = DisplayList([(id_, v['title']) for id_, v in raw_voc.iteritems() if v['enabled']])
+        except:
+            import ipdb; ipdb.set_trace()
+        raw_voc = self.get_raw_voc(context)
+        return result
+
+    def old_getDisplayList(self, content_instance):
         portal_urban = api.portal.get_tool('portal_urban')
         result = DisplayList(portal_urban.listVocabulary(self.path,
             content_instance, vocType=self.vocType, id_to_use=self.id_to_use, value_to_use=self.value_to_use, sort_on=self.sort_on,\

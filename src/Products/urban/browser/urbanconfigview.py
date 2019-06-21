@@ -25,8 +25,10 @@ class UrbanConfigView(BrowserView):
         super(UrbanConfigView, self).__init__(context, request)
         self.context = context
         self.request = request
-        self.form = AddInternalServiceForm(context, request)
-        self.form.update()
+        self.default_values_form = UpdateDefaultValuesForm(context, request)
+        self.default_values_form.update()
+        self.internal_services_form = AddInternalServiceForm(context, request)
+        self.internal_services_form.update()
 
     def getTabMacro(self, tab):
         context = aq_inner(self.context)
@@ -44,12 +46,6 @@ class UrbanConfigView(BrowserView):
             'admin_settings'
         ]
 
-    def getAdminFolders(self):
-        context = aq_inner(self.context)
-        names = ['additional_layers']
-        folders = [folder for folder in context.objectValues('ATFolder') if folder.id in names]
-        return folders
-
     def getMiscConfigFolders(self):
         context = aq_inner(self.context)
         names = ['globaltemplates', 'dashboardtemplates', 'foldermanagers', 'streets']
@@ -58,7 +54,7 @@ class UrbanConfigView(BrowserView):
 
     def getVocabularyFolders(self):
         context = aq_inner(self.context)
-        other_folders = self.getAdminFolders() + self.getMiscConfigFolders()
+        other_folders = self.getMiscConfigFolders()
         folders = [folder for folder in context.objectValues('ATFolder') if folder not in other_folders]
         return folders
 
@@ -93,9 +89,6 @@ class AddInternalServiceForm(form.Form):
     method = 'get'
     fields = field.Fields(IAddInternalServiceForm)
     ignoreContext = True
-
-    def updateWidgets(self):
-        super(AddInternalServiceForm, self).updateWidgets()
 
     @button.buttonAndHandler(u'Add')
     def handleAdd(self, action):
@@ -244,3 +237,55 @@ class AddInternalServiceForm(form.Form):
             'task_validate_id': task_validate_id,
         }
         registry['Products.urban.interfaces.IInternalOpinionServices.services'] = services.copy()
+
+
+class UpdateDefaultValuesForm(form.Form):
+
+    method = 'get'
+    ignoreContext = True
+
+    @button.buttonAndHandler(u'Update')
+    def handleUpdate(self, action):
+        """
+        """
+        registry = api.portal.get_tool('portal_registry')
+        portal_urban = api.portal.get_tool('portal_urban')
+        all_vocabularies = {'global': {}}
+        global_voc_folders = portal_urban.get_vocabulary_folders()
+        for folder in global_voc_folders:
+            all_vocabularies['global'][folder.id] = self.voc_folder_to_vocabulary_dict(folder)
+
+        licences_configs = portal_urban.get_all_licence_configs()
+        for config in licences_configs:
+            for folder in config.get_vocabulary_folders():
+                if config.id not in all_vocabularies:
+                    all_vocabularies[config.id] = {}
+                all_vocabularies[config.id][folder.id] = self.voc_folder_to_vocabulary_dict(folder)
+        registry['Products.urban.interfaces.IUrbanVocabulariesDefaultValues.default_values'] = all_vocabularies
+
+    def voc_folder_to_vocabulary_dict(self, folder):
+        vocabulary_dict = {}
+        for voc_term in folder.objectValues():
+            if voc_term.portal_type == 'PcaTerm':
+                vocabulary_dict[voc_term.id] = {
+                    'title': voc_term.Title(),
+                    'default': voc_term.getIsDefaultValue(),
+                    'enabled': api.content.get_state(voc_term) == 'enabled',
+                    'label': voc_term.getLabel(),
+                    'number': voc_term.getNumber(),
+                    'decreeDate': voc_term.getDecreeDate(),
+                    'decreeType': voc_term.getDecreeType(),
+                    'changes': voc_term.getChanges(),
+                    'comment': voc_term.getComment(),
+                }
+            else:
+                vocabulary_dict[voc_term.id] = {
+                    'title': voc_term.Title(),
+                    'default': voc_term.getIsDefaultValue(),
+                    'enabled': api.content.get_state(voc_term) == 'enabled',
+                    'extraValue': voc_term.getExtraValue(),
+                    'description': voc_term.Description(),
+                    'numbering': voc_term.getNumbering(),
+                    'coring_id': voc_term.getCoring_id(),
+                }
+        return vocabulary_dict
