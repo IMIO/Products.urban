@@ -232,7 +232,7 @@ class CODT_Inquiry(BaseContent, Inquiry, BrowserDefaultMixin):
         """
         Returns the existing inquiries
         """
-        inqs = [inq for inq in self._get_inquiry_objs(all_=False) if inq.getInquiry_type() == 'inquiry']
+        inqs = [inq for inq in self._get_inquiry_objs(all_=False) if 'inquiry' in inq.getInquiry_type()]
         return inqs
 
     security.declarePublic('getAllInquiries')
@@ -241,7 +241,7 @@ class CODT_Inquiry(BaseContent, Inquiry, BrowserDefaultMixin):
         """
         Returns the existing inquiries
         """
-        inqs = [inq for inq in self._get_inquiry_objs(all_=True) if inq.getInquiry_type() == 'inquiry']
+        inqs = [inq for inq in self._get_inquiry_objs(all_=True) if 'inquiry' in inq.getInquiry_type()]
         return inqs
 
     def _get_inquiry_objs(self, all_=False):
