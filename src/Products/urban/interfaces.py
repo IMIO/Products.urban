@@ -682,22 +682,6 @@ class IInternalOpinionServices(Interface):
     )
 
 
-class IUrbanVocabulariesDefaultValues(Interface):
-    """ """
-    default_values = schema.Dict(
-        title=_(u"Vocabularies default values"),
-        description=_(u"Dictionaries storing configurables fields default values"),
-        key_type=schema.ASCIILine(),
-        value_type=schema.Dict(
-            key_type=schema.ASCIILine(),
-            value_type=schema.Dict(
-                key_type=schema.ASCIILine(),
-                value_type=schema.ASCIILine(),
-            )
-        )
-    )
-
-
 class IAsyncInquiryRadius(Interface):
     """ """
     inquiries_to_do = schema.Dict(

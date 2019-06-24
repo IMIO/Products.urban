@@ -33,6 +33,7 @@ from Products.urban.config import *
 from Products.urban.interfaces import IUrbanEventType
 from Products.urban import UrbanMessage as _
 
+from zope.annotation import IAnnotations
 from zope.interface import implements
 
 from AccessControl import getSecurityManager
@@ -316,33 +317,22 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             res[getattr(brain, id_to_use)] = brain.getObject()
         return res
 
-    @cache(get_key=lambda x, y:42, get_request='self.REQUEST')
-    def get_full_vocabulary(self):
-        registry = api.portal.get_tool('portal_registry')
-        full_voc = registry['Products.urban.interfaces.IUrbanVocabulariesDefaultValues.default_values']
-        return full_voc
+    @cache(get_key=lambda method, self, folder: folder.id, get_request='self.REQUEST')
+    def get_full_vocabulary(self, folder):
+        annotations = IAnnotations(folder)
+        vocabularies = annotations['Products.urban.vocabulary_cache']
+        return vocabularies
 
     def get_vocabulary(self, in_urban_config=True, procedure='', name=''):
-        full_voc = self.get_full_vocabulary()
-        if in_urban_config:
-            if procedure in full_voc:
-                procedure_voc = full_voc[procedure]
-                if name:
-                    if name in procedure_voc:
-                        return procedure_voc[name]
-                    else:
-                        return None
-                else:
-                    return procedure_voc
-        else:
-            global_voc = full_voc['global']
-            if name:
-                if name in global_voc:
-                    return global_voc[name]
-                else:
-                    return None
+        folder = in_urban_config and getattr(self, procedure) or self
+        voc = self.get_full_vocabulary(folder)
+        if name:
+            if name in voc:
+                return voc[name]
             else:
-                return global_voc
+                return {}
+        else:
+            return voc
 
     security.declarePublic('checkPermission')
     def checkPermission(self, permission, obj):
@@ -790,7 +780,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
 
     def get_vocabulary_folders(self):
         voc_types = set(VOCABULARY_TYPES)
-        folders = [ob for ob in self.objectValues() if voc_types.intersection(set([t.id for t in ob.allowedContentTypes()]))]
+        folders = [ob for ob in self.objectValues() if hasattr(ob, 'immediatelyAddableTypes') and voc_types.intersection(set(ob.immediatelyAddableTypes))]
         return folders
 
 

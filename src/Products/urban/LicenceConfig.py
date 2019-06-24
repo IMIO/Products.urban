@@ -476,10 +476,9 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
         dict['id'] = ids
         return dict
 
-
     def get_vocabulary_folders(self):
         voc_types = set(VOCABULARY_TYPES)
-        folders = [ob for ob in self.objectValues() if voc_types.intersection(set([t.id for t in ob.allowedContentTypes()]))]
+        folders = [ob for ob in self.objectValues() if hasattr(ob, 'immediatelyAddableTypes') and voc_types.intersection(set(ob.immediatelyAddableTypes))]
         return folders
 
 

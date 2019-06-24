@@ -181,14 +181,11 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
     def getDefaultValue(self, context=None, field=None):
         if not context or not field:
             return ['']
-        urban_tool = getToolByName(self, 'portal_urban')
 
-        default_value = urban_tool.getVocabularyDefaultValue(
-            vocabulary=field.vocabulary or field.vocabulary_factory,
-            context=context,
-            multivalued=field.multiValued,
-        )
-        return default_value
+        empty_value = getattr(field, 'multivalued', '') and [] or ''
+        if hasattr(field, 'vocabulary') and isinstance(field.vocabulary, UrbanVocabulary):
+            return field.vocabulary.get_default_values(context)
+        return empty_value
 
     security.declarePublic('getDefaultText')
     def getDefaultText(self, context=None, field=None, html=False):

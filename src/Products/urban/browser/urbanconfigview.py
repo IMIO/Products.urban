@@ -14,6 +14,7 @@ from plone import api
 from z3c.form import button
 from z3c.form import form, field
 
+from zope.annotation import IAnnotations
 from zope.interface import Interface
 from zope.schema import TextLine
 
@@ -248,20 +249,20 @@ class UpdateDefaultValuesForm(form.Form):
     def handleUpdate(self, action):
         """
         """
-        registry = api.portal.get_tool('portal_registry')
         portal_urban = api.portal.get_tool('portal_urban')
-        all_vocabularies = {'global': {}}
-        global_voc_folders = portal_urban.get_vocabulary_folders()
-        for folder in global_voc_folders:
-            all_vocabularies['global'][folder.id] = self.voc_folder_to_vocabulary_dict(folder)
+        self.cache_vocabulary(portal_urban)
 
         licences_configs = portal_urban.get_all_licence_configs()
         for config in licences_configs:
-            for folder in config.get_vocabulary_folders():
-                if config.id not in all_vocabularies:
-                    all_vocabularies[config.id] = {}
-                all_vocabularies[config.id][folder.id] = self.voc_folder_to_vocabulary_dict(folder)
-        registry['Products.urban.interfaces.IUrbanVocabulariesDefaultValues.default_values'] = all_vocabularies
+            self.cache_vocabulary(config)
+
+    def cache_vocabulary(self, folder):
+        vocabularies = {}
+        voc_folders = folder.get_vocabulary_folders()
+        for voc_folder in voc_folders:
+            vocabularies[voc_folder.id] = self.voc_folder_to_vocabulary_dict(voc_folder)
+        annotations = IAnnotations(folder)
+        annotations['Products.urban.vocabulary_cache'] = vocabularies
 
     def voc_folder_to_vocabulary_dict(self, folder):
         vocabulary_dict = {}
@@ -269,8 +270,8 @@ class UpdateDefaultValuesForm(form.Form):
             if voc_term.portal_type == 'PcaTerm':
                 vocabulary_dict[voc_term.id] = {
                     'title': voc_term.Title(),
-                    'default': voc_term.getIsDefaultValue(),
-                    'enabled': api.content.get_state(voc_term) == 'enabled',
+                    'default': voc_term.getIsDefaultValue() and '1' or '',
+                    'enabled': api.content.get_state(voc_term) == 'enabled' and '1' or '',
                     'label': voc_term.getLabel(),
                     'number': voc_term.getNumber(),
                     'decreeDate': voc_term.getDecreeDate(),
@@ -281,8 +282,8 @@ class UpdateDefaultValuesForm(form.Form):
             else:
                 vocabulary_dict[voc_term.id] = {
                     'title': voc_term.Title(),
-                    'default': voc_term.getIsDefaultValue(),
-                    'enabled': api.content.get_state(voc_term) == 'enabled',
+                    'default': voc_term.getIsDefaultValue() and '1' or '',
+                    'enabled': api.content.get_state(voc_term) == 'enabled' and '1' or '',
                     'extraValue': voc_term.getExtraValue(),
                     'description': voc_term.Description(),
                     'numbering': voc_term.getNumbering(),
