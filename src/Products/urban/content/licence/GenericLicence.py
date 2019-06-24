@@ -1051,9 +1051,9 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
         if not context or not field:
             return ['']
 
-        empty_value = field.multivalued and [] or ''
+        empty_value = getattr(field, 'multivalued', '') and [] or ''
         if hasattr(field, 'vocabulary') and isinstance(field.vocabulary, UrbanVocabulary):
-            return field.vocabulary.get_default_values()
+            return field.vocabulary.get_default_values(context)
         return empty_value
 
     security.declarePublic('getDefaultText')

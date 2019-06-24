@@ -187,9 +187,9 @@ class UrbanVocabulary(object):
         )
         return raw_voc
 
-    def get_default_values(self):
-        raw_voc = self.get_raw_voc()
-        default_values = [v for v in raw_voc if v['default']]
+    def get_default_values(self, context):
+        raw_voc = self.get_raw_voc(context)
+        default_values = [id_ for id_, v in raw_voc.iteritems() if v['default']]
         return default_values
 
     def getDisplayList(self, context):
