@@ -270,8 +270,8 @@ class UpdateDefaultValuesForm(form.Form):
             if voc_term.portal_type == 'PcaTerm':
                 vocabulary_dict[voc_term.id] = {
                     'title': voc_term.Title(),
-                    'default': voc_term.getIsDefaultValue() and '1' or '',
-                    'enabled': api.content.get_state(voc_term) == 'enabled' and '1' or '',
+                    'default': voc_term.getIsDefaultValue(),
+                    'enabled': api.content.get_state(voc_term) == 'enabled',
                     'label': voc_term.getLabel(),
                     'number': voc_term.getNumber(),
                     'decreeDate': voc_term.getDecreeDate(),
@@ -282,8 +282,8 @@ class UpdateDefaultValuesForm(form.Form):
             else:
                 vocabulary_dict[voc_term.id] = {
                     'title': voc_term.Title(),
-                    'default': voc_term.getIsDefaultValue() and '1' or '',
-                    'enabled': api.content.get_state(voc_term) == 'enabled' and '1' or '',
+                    'default': voc_term.getIsDefaultValue(),
+                    'enabled': api.content.get_state(voc_term) == 'enabled',
                     'extraValue': voc_term.getExtraValue(),
                     'description': voc_term.Description(),
                     'numbering': voc_term.getNumbering(),
