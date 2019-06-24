@@ -261,7 +261,7 @@ class CODT_Inquiry(BaseContent, Inquiry, BrowserDefaultMixin):
         """
         Returns the existing announcements
         """
-        inqs = [inq for inq in self._get_inquiry_objs(all_=False) if inq.getInquiry_type() == 'announcement']
+        inqs = [inq for inq in self._get_inquiry_objs(all_=False) if 'announcement' in inq.getInquiry_type()]
         return inqs
 
     security.declarePublic('getAllAnnouncements')
@@ -270,7 +270,7 @@ class CODT_Inquiry(BaseContent, Inquiry, BrowserDefaultMixin):
         """
         Returns the existing announcements
         """
-        inqs = [inq for inq in self._get_inquiry_objs(all_=True) if inq.getInquiry_type() == 'announcement']
+        inqs = [inq for inq in self._get_inquiry_objs(all_=True) if 'announcement' in inq.getInquiry_type()]
         return inqs
 
     security.declarePublic('getUrbanEventAnnouncements')
