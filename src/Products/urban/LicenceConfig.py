@@ -362,6 +362,8 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
         certificatebase_tabs_config = ['description', 'analysis', 'location', 'road', 'patrimony']
         inquiry_tabs_config = ['description', 'advices', 'inquiry', 'analysis', 'location', 'road', 'patrimony']
         buildlicence_tabs_config = ['description', 'advices', 'inquiry', 'analysis', 'location', 'road', 'habitation',
+                'peb']
+        codt_buildlicence_tabs_config = ['description', 'advices', 'inquiry', 'analysis', 'location', 'road', 'habitation',
                 'peb', 'patrimony']
         uniquelicence_tabs_config = ['description', 'advices', 'inquiry', 'analysis', 'environment', 'location', 'road',
                 'habitation', 'peb', 'patrimony']
@@ -376,13 +378,13 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
             'integratedlicence': buildlicence_tabs_config,
             'parceloutlicence': inquiry_tabs_config,
             'urbancertificatetwo': buildlicence_tabs_config,
-            'codt_buildlicence': buildlicence_tabs_config,
-            'codt_article127': buildlicence_tabs_config,
+            'codt_buildlicence': codt_buildlicence_tabs_config,
+            'codt_article127': codt_buildlicence_tabs_config,
             'codt_parceloutlicence': inquiry_tabs_config,
             'codt_uniquelicence': uniquelicence_tabs_config,
-            'codt_commerciallicence': buildlicence_tabs_config,
+            'codt_commerciallicence': codt_buildlicence_tabs_config,
             'codt_integratedlicence': uniquelicence_tabs_config,
-            'codt_urbancertificatetwo': buildlicence_tabs_config,
+            'codt_urbancertificatetwo': codt_buildlicence_tabs_config,
             'codt_urbancertificateone': certificatebase_tabs_config,
             'codt_notaryletter': certificatebase_tabs_config,
             'envclassthree': env_advice_tabs_config,
