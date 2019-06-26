@@ -470,14 +470,11 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
         if not context or not field:
             return ['']
 
-        urban_tool = api.portal.get_tool('portal_urban')
-
-        default_value = urban_tool.getVocabularyDefaultValue(
-            vocabulary=field.vocabulary or field.vocabulary_factory,
-            context=context,
-            multivalued=field.multiValued
-        )
-        return default_value
+        empty_value = getattr(field, 'multivalued', '') and [] or ''
+        if hasattr(field, 'vocabulary') and isinstance(field.vocabulary, UrbanVocabulary):
+            licence = context.aq_parent
+            return field.vocabulary.get_default_values(licence)
+        return empty_value
 
     security.declarePublic('getDefaultText')
     def getDefaultText(self, context=None, field=None, html=False):

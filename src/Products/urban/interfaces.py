@@ -261,6 +261,11 @@ class IUrbanConfigurationValue(Interface):
     """
 
 
+class IUrbanConfigurationFolder(Interface):
+    """Marker interface for .UrbanConfigurationValue.UrbanConfigurationValue
+    """
+
+
 class IEnvironmentBase(IGenericLicence):
     """Marker interface for .EnvironmentBase.EnvironmentBase
     """
