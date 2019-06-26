@@ -32,6 +32,7 @@ from Products.urban.exportimport import updateAllUrbanTemplates
 from Products.urban.Extensions.update_task_configs import add_licence_ended_condition
 from Products.urban.interfaces import IContactFolder
 from Products.urban.interfaces import ILicenceContainer
+from Products.urban.interfaces import IUrbanConfigurationFolder
 from Products.urban.schedule.vocabulary import URBAN_TYPES_INTERFACES
 from Products.urban import services
 from Products.urban.utils import generatePassword
@@ -254,6 +255,7 @@ def createVocabularyFolder(container, folder_id, site, allowedtypes='UrbanVocabu
     else:
         new_folder = getattr(container, folder_id)
         new_folder.setTitle(_("%s_folder_title" % folder_id, 'urban'))
+    alsoProvides(new_folder, IUrbanConfigurationFolder)
     return new_folder
 
 

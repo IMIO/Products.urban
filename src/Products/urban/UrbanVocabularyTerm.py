@@ -19,12 +19,13 @@ from zope.interface import implements
 import interfaces
 from Products.urban.UrbanConfigurationValue import UrbanConfigurationValue
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
+from Products.Archetypes.interfaces import IVocabulary
 
 from Products.urban.config import *
+from zope.globalrequest import getRequest
 
 ##code-section module-header #fill in your manual code here
 from plone import api
-from plone.app.referenceintegrity.interfaces import IReferenceableVocabulary
 
 import re
 import logging
@@ -165,7 +166,7 @@ registerType(UrbanVocabularyTerm, PROJECTNAME)
 ##code-section module-footer #fill in your manual code here
 class UrbanVocabulary(object):
 
-    implements(IReferenceableVocabulary)
+    implements(IVocabulary)
 
     def __init__(self, path, vocType="UrbanVocabularyTerm", id_to_use="id", value_to_use="Title", sort_on="getObjPositionInParent", inUrbanConfig=True, allowedStates=['enabled'], with_empty_value=False, datagridfield_key='street'):
         self.path = path
@@ -182,27 +183,23 @@ class UrbanVocabulary(object):
         portal_urban = api.portal.get_tool('portal_urban')
         raw_voc = portal_urban.get_vocabulary(
             in_urban_config=self.inUrbanConfig,
-            procedure=context.portal_type.lower(),
+            context=context,
             name=self.path
         )
-        return raw_voc
+        voc = [v for v in raw_voc if v['portal_type'] in self.vocType]
+        return voc
 
     def get_default_values(self, context):
         raw_voc = self.get_raw_voc(context)
-        default_values = [id_ for id_, v in raw_voc.iteritems() if v['default']]
+        default_values = [v['id'] for v in raw_voc if v['isDefaultValue']]
         return default_values
 
     def getDisplayList(self, context):
         raw_voc = self.get_raw_voc(context)
-        result = DisplayList([(id_, v['title']) for id_, v in raw_voc.iteritems() if v['enabled']])
-        raw_voc = self.get_raw_voc(context)
-        return result
-
-    def old_getDisplayList(self, content_instance):
-        portal_urban = api.portal.get_tool('portal_urban')
-        result = DisplayList(portal_urban.listVocabulary(self.path,
-            content_instance, vocType=self.vocType, id_to_use=self.id_to_use, value_to_use=self.value_to_use, sort_on=self.sort_on,\
-            inUrbanConfig=self.inUrbanConfig, allowedStates=self.allowedStates, with_empty_value=self.with_empty_value))
+        if getRequest().getURL().endswith('edit'):
+            result = DisplayList([(v['id'], v['title']) for v in raw_voc if v['enabled']])
+        else:
+            result = DisplayList([(v['id'], v['title']) for v in raw_voc])
         return result
 
     def getDisplayListForTemplate(self, content_instance):

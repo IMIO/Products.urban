@@ -31,6 +31,7 @@ from Products.urban.config import URBANMAP_CFG
 from Products.urban.config import VOCABULARY_TYPES
 from Products.urban.config import *
 from Products.urban.interfaces import IUrbanEventType
+from Products.urban.interfaces import IGenericLicence
 from Products.urban import UrbanMessage as _
 
 from zope.annotation import IAnnotations
@@ -318,14 +319,19 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         return res
 
     @cache(get_key=lambda method, self, folder: folder.id, get_request='self.REQUEST')
-    def get_full_vocabulary(self, folder):
+    def _get_procedure_vocabulary(self, folder):
         annotations = IAnnotations(folder)
         vocabularies = annotations['Products.urban.vocabulary_cache']
         return vocabularies
 
-    def get_vocabulary(self, in_urban_config=True, procedure='', name=''):
-        folder = in_urban_config and getattr(self, procedure) or self
-        voc = self.get_full_vocabulary(folder)
+    def get_vocabulary(self, in_urban_config=True, context=None, name=''):
+        folder = self
+        if in_urban_config:
+            portal = api.portal.get()
+            while not IGenericLicence.providedBy(context) or context == portal:
+                context = context.aq_parent
+            folder = getattr(self, context.portal_type.lower())
+        voc = self._get_procedure_vocabulary(folder)
         if name:
             if name in voc:
                 return voc[name]

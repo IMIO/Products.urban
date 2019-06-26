@@ -14,7 +14,6 @@ from plone import api
 from z3c.form import button
 from z3c.form import form, field
 
-from zope.annotation import IAnnotations
 from zope.interface import Interface
 from zope.schema import TextLine
 
@@ -245,48 +244,18 @@ class UpdateDefaultValuesForm(form.Form):
     method = 'get'
     ignoreContext = True
 
-    @button.buttonAndHandler(u'Update')
+    @button.buttonAndHandler(u'Update voc cache')
     def handleUpdate(self, action):
         """
         """
         portal_urban = api.portal.get_tool('portal_urban')
-        self.cache_vocabulary(portal_urban)
+        cache_view = portal_urban.unrestrictedTraverse('urban_vocabulary_cache')
+        cache_view.update_all_cache()
 
-        licences_configs = portal_urban.get_all_licence_configs()
-        for config in licences_configs:
-            self.cache_vocabulary(config)
-
-    def cache_vocabulary(self, folder):
-        vocabularies = {}
-        voc_folders = folder.get_vocabulary_folders()
-        for voc_folder in voc_folders:
-            vocabularies[voc_folder.id] = self.voc_folder_to_vocabulary_dict(voc_folder)
-        annotations = IAnnotations(folder)
-        annotations['Products.urban.vocabulary_cache'] = vocabularies
-
-    def voc_folder_to_vocabulary_dict(self, folder):
-        vocabulary_dict = {}
-        for voc_term in folder.objectValues():
-            if voc_term.portal_type == 'PcaTerm':
-                vocabulary_dict[voc_term.id] = {
-                    'title': voc_term.Title(),
-                    'default': voc_term.getIsDefaultValue(),
-                    'enabled': api.content.get_state(voc_term) == 'enabled',
-                    'label': voc_term.getLabel(),
-                    'number': voc_term.getNumber(),
-                    'decreeDate': voc_term.getDecreeDate(),
-                    'decreeType': voc_term.getDecreeType(),
-                    'changes': voc_term.getChanges(),
-                    'comment': voc_term.getComment(),
-                }
-            else:
-                vocabulary_dict[voc_term.id] = {
-                    'title': voc_term.Title(),
-                    'default': voc_term.getIsDefaultValue(),
-                    'enabled': api.content.get_state(voc_term) == 'enabled',
-                    'extraValue': voc_term.getExtraValue(),
-                    'description': voc_term.Description(),
-                    'numbering': voc_term.getNumbering(),
-                    'coring_id': voc_term.getCoring_id(),
-                }
-        return vocabulary_dict
+    @button.buttonAndHandler(u'Clear voc cache')
+    def handleClear(self, action):
+        """
+        """
+        portal_urban = api.portal.get_tool('portal_urban')
+        cache_view = portal_urban.unrestrictedTraverse('urban_vocabulary_cache')
+        cache_view.reset_all_cache()

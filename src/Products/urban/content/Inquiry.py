@@ -312,14 +312,20 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
         """
           Return the corresponding opinion value from the given opinionId
         """
-        return self.Vocabulary('solicitOpinionsTo')[0].getValue(opinionId)
+        vocabulary = self.getField('solicitOpinionsTo').vocabulary
+        title = [v['title'] for v in vocabulary.get_raw_voc(self) if v['id'] == opinionId]
+        title = title and title[0] or ''
+        return title
 
     security.declarePublic('getSolicitOpinionOptionalValue')
     def getSolicitOpinionOptionalValue(self, opinionId):
         """
           Return the corresponding opinion value from the given opinionId
         """
-        return self.Vocabulary('solicitOpinionsToOptional')[0].getValue(opinionId)
+        vocabulary = self.getField('solicitOpinionsToOptional').vocabulary
+        title = [v['title'] for v in vocabulary.get_raw_voc(self) if v['id'] == opinionId]
+        title = title and title[0] or ''
+        return title
 
     security.declarePublic('mayAddOpinionRequestEvent')
     def mayAddOpinionRequestEvent(self, organisation):

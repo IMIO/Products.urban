@@ -239,7 +239,8 @@ LICENCE_FINAL_STATES = [
 ]
 
 VOCABULARY_TYPES = [
-    'UrbanVocabularyTerm', 'PcaTerm',
+    'UrbanVocabularyTerm', 'PcaTerm', 'UrbanDelay',
+    'UrbanEventType', 'OpinionRequestEventType',
     'PersonTitleTerm', 'OrganisationTerm',
 ]
 
@@ -250,34 +251,34 @@ APPLICANTS_TYPES = ['Applicant', 'Proprietary', 'Corporation']
 GLOBAL_TEMPLATES = {
     '.': [],
     'urbantemplates': [
-        {'id':'styles.odt', 'portal_type': 'StyleTemplate', 'title':'Styles urbanisme'},
-        {'id':'header.odt', 'portal_type': 'SubTemplate', 'title':'En-tête urbanisme'},
-        {'id':'footer.odt', 'portal_type': 'SubTemplate', 'title':'Pied de page urbanisme'},
-        {'id':'reference.odt', 'portal_type': 'SubTemplate', 'title':'\'Référence\' urbanisme'},
-        {'id':'signatures.odt', 'portal_type': 'SubTemplate', 'title':'Signatures urbanisme'},
-        {'id':'publipostage.odt', 'portal_type': 'MailingLoopTemplate', 'title':'Publipostage urbanisme'},
+        {'id': 'styles.odt', 'portal_type': 'StyleTemplate', 'title': 'Styles urbanisme'},
+        {'id': 'header.odt', 'portal_type': 'SubTemplate', 'title': 'En-tête urbanisme'},
+        {'id': 'footer.odt', 'portal_type': 'SubTemplate', 'title': 'Pied de page urbanisme'},
+        {'id': 'reference.odt', 'portal_type': 'SubTemplate', 'title': '\'Référence\' urbanisme'},
+        {'id': 'signatures.odt', 'portal_type': 'SubTemplate', 'title': 'Signatures urbanisme'},
+        {'id': 'publipostage.odt', 'portal_type': 'MailingLoopTemplate', 'title': 'Publipostage urbanisme'},
     ],
     'environmenttemplates': [
-        {'id':'styles.odt', 'portal_type': 'StyleTemplate', 'title':'Styles environnement'},
-        {'id':'header.odt', 'portal_type': 'SubTemplate', 'title':'En-tête environnement'},
-        {'id':'footer.odt', 'portal_type': 'SubTemplate', 'title':'Pied de page environnement'},
-        {'id':'reference.odt', 'portal_type': 'SubTemplate', 'title':'\'Référence\' environnement'},
-        {'id':'signatures.odt', 'portal_type': 'SubTemplate', 'title':'Signatures environnement'},
-        {'id':'publipostage.odt', 'portal_type': 'MailingLoopTemplate', 'title':'Publipostage environnement'},
+        {'id': 'styles.odt', 'portal_type': 'StyleTemplate', 'title': 'Styles environnement'},
+        {'id': 'header.odt', 'portal_type': 'SubTemplate', 'title': 'En-tête environnement'},
+        {'id': 'footer.odt', 'portal_type': 'SubTemplate', 'title': 'Pied de page environnement'},
+        {'id': 'reference.odt', 'portal_type': 'SubTemplate', 'title': '\'Référence\' environnement'},
+        {'id': 'signatures.odt', 'portal_type': 'SubTemplate', 'title': 'Signatures environnement'},
+        {'id': 'publipostage.odt', 'portal_type': 'MailingLoopTemplate', 'title': 'Publipostage environnement'},
     ],
 }
 
 DASHBOARD_TEMPLATES = {
     '.': [
         {
-            'id':'statsins.odt',
+            'id': 'statsins.odt',
             'portal_type': 'DashboardPODTemplate',
-            'title':'Statistiques INS',
+            'title': 'Statistiques INS',
         },
         # {
-            # 'id':'folderlisting.odt',
+            # 'id': 'folderlisting.odt',
             # 'portal_type': 'DashboardPODTemplate',
-            # 'title':'Liste',
+            # 'title': 'Liste',
         # },
     ],
 }
