@@ -1,3 +1,3 @@
 if(ploneFormTabbing){
-    ploneFormTabbing.max_tabs = 11;
+    ploneFormTabbing.max_tabs = 12;
 }
