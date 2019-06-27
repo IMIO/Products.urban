@@ -24,7 +24,7 @@ from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
 from plone import api
-from plone.app.referenceintegrity.interfaces import IReferenceableVocabulary
+from Products.Archetypes.interfaces import IVocabulary
 
 import re
 import logging
@@ -165,7 +165,7 @@ registerType(UrbanVocabularyTerm, PROJECTNAME)
 ##code-section module-footer #fill in your manual code here
 class UrbanVocabulary(object):
 
-    implements(IReferenceableVocabulary)
+    implements(IVocabulary)
 
     def __init__(self, path, vocType="UrbanVocabularyTerm", id_to_use="id", value_to_use="Title", sort_on="getObjPositionInParent", inUrbanConfig=True, allowedStates=['enabled'], with_empty_value=False, datagridfield_key='street'):
         self.path = path
