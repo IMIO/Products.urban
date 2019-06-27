@@ -32,3 +32,6 @@ class InspectionView(LicenceView):
           Returns the inquiries to display on the buildlicence_view
         """
         return [self.context]
+
+    def getInspectionFields(self, exclude=[]):
+        return self.getSchemataFields('urban_inspection', exclude)

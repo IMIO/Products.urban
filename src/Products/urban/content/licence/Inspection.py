@@ -72,6 +72,28 @@ schema = Schema((
         vocabulary=UrbanVocabulary('inspectioncontexts', with_empty_value=True),
         default_method='getDefaultValue',
     ),
+    TextField(
+        name='report',
+        widget=RichWidget(
+            label=_('urban_label_report', default='Report'),
+        ),
+        default_content_type='text/html',
+        allowable_content_types=('text/html',),
+        schemata='urban_inspection',
+        default_method='getDefaultText',
+        default_output_type='text/html',
+    ),
+    TextField(
+        name='inspectionDescription',
+        widget=RichWidget(
+            label=_('urban_label_inspectionDescription', default='Inspectiondescription'),
+        ),
+        default_content_type='text/html',
+        allowable_content_types=('text/html',),
+        schemata='urban_inspection',
+        default_method='getDefaultText',
+        default_output_type='text/html',
+    ),
 ),
 )
 Inspection_schema = BaseFolderSchema.copy() + \
@@ -184,6 +206,7 @@ def finalize_schema(schema, folderish=False, moveDiscussion=True):
         allowed_schematas = [
             'urban_description',
             'urban_advices',
+            'urban_inspection',
             'metadata',
             'default'
         ]
