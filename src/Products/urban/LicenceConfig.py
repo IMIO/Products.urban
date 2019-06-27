@@ -357,6 +357,7 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
             'habitation': 'Logement',
             'peb': 'PEB',
             'patrimony': 'Patrimoine',
+            'inspection': 'Inspection',
         }
         minimum_tabs_config = ['description', 'analysis', 'location', 'road']
         certificatebase_tabs_config = ['description', 'analysis', 'location', 'road', 'patrimony']
@@ -369,7 +370,7 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
                 'habitation', 'peb', 'patrimony']
         env_advice_tabs_config = ['description', 'advices', 'analysis', 'environment', 'location', 'road']
         env_inquiry_tabs_config = ['description', 'advices', 'inquiry', 'analysis', 'environment', 'location', 'road']
-        inspection_tabs_config = ['description', 'advices']
+        inspection_tabs_config = ['description', 'advices', 'inspection']
 
         types = {
             'buildlicence': buildlicence_tabs_config,
