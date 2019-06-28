@@ -452,6 +452,10 @@ class UrbanEventInquiryView(UrbanEventInquiryBaseView):
                         zipcode=zipcode,
                         city=city,
                         country=country.lower(),
+                        capakey=parcel.capakey,
+                        parcel_street=parcel.locations and parcel.locations.values()[0]['street_name'] or '',
+                        parcel_police_number=parcel.locations and parcel.locations.values()[0]['number'] or '',
+                        parcel_nature=', '.join(parcel.natures)
                     )
                     owner_obj = getattr(context, new_owner_id)
                     owner_obj.setTitle('{} {}'.format(name, firstname))
