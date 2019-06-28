@@ -51,8 +51,7 @@ class MapView(BrowserView):
     def getMapConfig(self):
         """
         """
-        portal_urban = api.portal.get_tool('portal_urban')
-        city_name = portal_urban.getCityName()
+        city_name = URBANMAP_CFG.urbanmap.get('imiomap_name', '')
         directory = self.get_map_directory()
         urbanmap_host = URBANMAP_CFG.urbanmap.get('url', '')
         script = """

@@ -34,6 +34,7 @@ from collective.datagridcolumns.TextAreaColumn import TextAreaColumn
 from Products.DataGridField.DataGridField import FixedRow
 from Products.DataGridField.FixedColumn import FixedColumn
 from Products.DataGridField.CheckboxColumn import CheckboxColumn
+from Products.urban.config import VOCABULARY_TYPES
 from Products.urban.utils import getLicenceSchema
 from Products.urban import UrbanMessage as _
 from zope.interface import Interface
@@ -288,7 +289,7 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
         """
         """
         portal_urban = api.portal.get_tool('portal_urban')
-        res = [(c.id, c.Title()) for c in portal_urban.objectValues('LicenceConfig')]
+        res = [(c.id, c.Title()) for c in portal_urban.get_all_licence_configs()]
         return DisplayList(tuple(res)).sortedByValue()
 
     security.declarePublic('getNumerotation')
@@ -476,6 +477,11 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
         dict['path'] = {'query': '%s/portal_urban/foldermanagers' % (rootPath)}
         dict['id'] = ids
         return dict
+
+    def get_vocabulary_folders(self):
+        voc_types = set(VOCABULARY_TYPES)
+        folders = [ob for ob in self.objectValues() if hasattr(ob, 'immediatelyAddableTypes') and voc_types.intersection(set(ob.immediatelyAddableTypes))]
+        return folders
 
 
 registerType(LicenceConfig, PROJECTNAME)

@@ -16,6 +16,7 @@ __docformat__ = 'plaintext'
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
+from plone import api
 import interfaces
 
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
@@ -64,6 +65,20 @@ class UrbanConfigurationValue(BaseContent, BrowserDefaultMixin):
     ##/code-section class-header
 
     # Methods
+
+    def to_dict(self):
+        dict_ = {
+            'UID': self.UID(),
+            'enabled': api.content.get_state(self) == 'enabled',
+            'portal_type': self.portal_type,
+        }
+        for f in self.schema.fields():
+            if f.schemata != 'metadata':
+                val = f.getAccessor(self)()
+                if type(val) is str:
+                    val = val.decode('utf8')
+                dict_[f.__name__] = val
+        return dict_
 
 
 registerType(UrbanConfigurationValue, PROJECTNAME)

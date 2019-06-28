@@ -426,6 +426,10 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
         return locations
 
     def listVocTerms(self, field):
+        """
+        Deprecated/backward compatibility only
+        See voc_terms
+        """
         context = self.real_context
         field = context.getField(field)
         keys = type(field.getRaw(context)) in (list, tuple) and field.getRaw(context) or [field.getRaw(context)]
@@ -660,7 +664,7 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
     def voc_terms(self, field_name='', with_coring_values=False):
         all_voc_terms = self.all_voc_terms(field_name, with_coring_values)
         selected_values = self.context.getField(field_name).get(self.context)
-        voc_terms = [t for t in all_voc_terms if hasattr(t, 'id') and t.id or t.value in selected_values]
+        voc_terms = [t for t in all_voc_terms if (hasattr(t, 'id') and t.id or t.value) in selected_values]
         return voc_terms
 
     def voc_term(self, field_name='', with_coring_values=False):

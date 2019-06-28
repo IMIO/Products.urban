@@ -28,14 +28,18 @@ from collective.datagridcolumns.DateColumn import DateColumn
 
 from Products.urban.config import NIS
 from Products.urban.config import URBANMAP_CFG
+from Products.urban.config import VOCABULARY_TYPES
 from Products.urban.config import *
 from Products.urban.interfaces import IUrbanEventType
+from Products.urban.interfaces import IGenericLicence
 from Products.urban import UrbanMessage as _
 
+from zope.annotation import IAnnotations
 from zope.interface import implements
 
 from AccessControl import getSecurityManager
 from plone import api
+from plone.memoize.request import cache
 from zope.i18n import translate
 from Products.CMFCore import permissions
 from Products.CMFCore.utils import getToolByName
@@ -243,20 +247,6 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         cadastre.close()
         return rows
 
-    security.declarePublic('getVocabularyDefaultValue')
-    def getVocabularyDefaultValue(self, vocabulary, context, multivalued=False):
-        """
-         Return the first vocabulary term marked as default value of the vocabulary named vocabulary_name
-        """
-        empty_value = multivalued and [] or ''
-        if isinstance(vocabulary, basestring):
-            default_values = []
-        else:
-            #search in an urbanConfig or in the tool
-            voc_terms = vocabulary.getAllVocTerms(context).values()
-            default_values = [voc_term.id for voc_term in voc_terms
-                              if voc_term.getIsDefaultValue()]
-        return default_values and default_values or empty_value
 
     security.declarePublic('getTextDefaultValue')
     def getTextDefaultValue(self, fieldname, context, html=False, config=None):
@@ -327,6 +317,28 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         for brain in brains:
             res[getattr(brain, id_to_use)] = brain.getObject()
         return res
+
+    @cache(get_key=lambda method, self, folder: folder.id, get_request='self.REQUEST')
+    def _get_procedure_vocabulary(self, folder):
+        annotations = IAnnotations(folder)
+        vocabularies = annotations['Products.urban.vocabulary_cache']
+        return vocabularies
+
+    def get_vocabulary(self, in_urban_config=True, context=None, name=''):
+        folder = self
+        if in_urban_config:
+            portal = api.portal.get()
+            while not IGenericLicence.providedBy(context) or context == portal:
+                context = context.aq_parent
+            folder = getattr(self, context.portal_type.lower())
+        voc = self._get_procedure_vocabulary(folder)
+        if name:
+            if name in voc:
+                return voc[name]
+            else:
+                return {}
+        else:
+            return voc
 
     security.declarePublic('checkPermission')
     def checkPermission(self, permission, obj):
@@ -767,6 +779,15 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         mapping = dict([(str(int(l['division'])), l['alternative_name']) for l in self.getDivisionsRenaming()])
         name = mapping[str(int(division_code))]
         return name
+
+    def get_all_licence_configs(self):
+        configs = [ob for ob in self.objectValues() if ob.portal_type == 'LicenceConfig']
+        return configs
+
+    def get_vocabulary_folders(self):
+        voc_types = set(VOCABULARY_TYPES)
+        folders = [ob for ob in self.objectValues() if hasattr(ob, 'immediatelyAddableTypes') and voc_types.intersection(set(ob.immediatelyAddableTypes))]
+        return folders
 
 
 registerType(UrbanTool, PROJECTNAME)
