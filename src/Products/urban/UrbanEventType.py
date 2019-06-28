@@ -17,7 +17,7 @@ from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 import interfaces
-from Products.urban.UrbanDelay import UrbanDelay
+from Products.urban.UrbanConfigurationValue import UrbanConfigurationValue
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.DataGridField import DataGridField, DataGridWidget
@@ -156,14 +156,14 @@ schema = Schema((
 ##/code-section after-local-schema
 
 UrbanEventType_schema = OrderedBaseFolderSchema.copy() + \
-    getattr(UrbanDelay, 'schema', Schema(())).copy() + \
+    getattr(UrbanConfigurationValue, 'schema', Schema(())).copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
 ##/code-section after-schema
 
 
-class UrbanEventType(OrderedBaseFolder, UrbanDelay, BrowserDefaultMixin):
+class UrbanEventType(OrderedBaseFolder, UrbanConfigurationValue, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()

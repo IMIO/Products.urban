@@ -391,7 +391,7 @@ class TestGenericLicenceFields(SchemaFieldsTestCase):
     def test_solicitRoadOpinionsTo(self):
         for licence in self.licences:
             msg = "field 'solicitRoadOpinionsTo' not visible on {}".format(licence.getPortalTypeName())
-            self._is_field_visible("<span>Un avis sera solicité par l'urbanisme à</span>:", licence, msg)
+            self._is_field_visible("<span>Un avis sera sollicité par l'urbanisme à</span>:", licence, msg)
 
     def test_has_attribute_isInSubdivision(self):
         field_name = 'isInSubdivision'
@@ -446,7 +446,7 @@ class TestGenericLicenceFields(SchemaFieldsTestCase):
     def test_solicitLocationOpinionsTo(self):
         for licence in self.licences:
             msg = "field 'solicitLocationOpinionsTo' not visible on {}".format(licence.getPortalTypeName())
-            self._is_field_visible("<span>Un avis sera solicité par l'urbanisme à</span>:", licence, msg)
+            self._is_field_visible("<span>Un avis sera sollicité par l'urbanisme à</span>:", licence, msg)
 
     def test_has_attribute_folderCategoryTownship(self):
         field_name = 'folderCategoryTownship'

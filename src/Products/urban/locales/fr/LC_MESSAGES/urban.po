@@ -2240,7 +2240,7 @@ msgstr "Modification"
 
 #: ../content/licence/BaseBuildLicence.py:524
 msgid "road_adaptation_supress"
-msgstr "Supression"
+msgstr "Suppression"
 
 #. Default: "road_decree_reference"
 #: ../content/licence/CODT_Article127.py:36
@@ -4764,7 +4764,7 @@ msgstr "Détails concernant le SOL"
 #. Default: "Solicitlocationopinionsto"
 #: ../content/licence/GenericLicence.py:916
 msgid "urban_label_solicitLocationOpinionsTo"
-msgstr "Un avis sera solicité par l'urbanisme à"
+msgstr "Un avis sera sollicité par l'urbanisme à"
 
 #. Default: "Solicit opinion to"
 #: ../browser/licence/templates/licencetabsmacros.pt:250

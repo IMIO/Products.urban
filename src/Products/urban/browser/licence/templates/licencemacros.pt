@@ -70,7 +70,7 @@
               <!--tal:condition="python: member.has_permission('urban: Add Contact', context)"-->
         <form tal:define="ctype python: context.portal_types.getTypeInfo('Applicant');
                          member context/@@plone_portal_state/member;"
-              tal:condition="python: False and member.has_permission('urban: Add Contact', context)"
+              tal:condition="python: member.has_permission('urban: Add Contact', context)"
               tal:attributes="action python: context.absolute_url() + '/createObject'"
               i18n:domain="urban" name="quickAdd"  action="createObject" method="post">
             <input type="hidden" name="type_name" value="#" tal:attributes="value ctype/id" />
@@ -103,10 +103,9 @@
 
 <fieldset metal:define-macro="urbanApplicantsAndCorporationsMacro" i18n:domain="urban">
     <legend i18n:translate="applicants">Applicant(s)</legend>
-    <div class="#" tal:define="corporations context/getCorporations;
-                               applicants context/getApplicants"
-                   tal:attributes="class python: (applicants or corporations) and 'field' or 'field warning'">
-        <p tal:condition="python: not (corporations or applicants)" i18n:translate="warning_add_an_applicant">
+    <div class="#" tal:define="applicants context/getApplicants"
+                   tal:attributes="class python: applicants and 'field' or 'field warning'">
+        <p tal:condition="python: not applicants" i18n:translate="warning_add_an_applicant">
             You must encode applicant(s)
         </p>
         <tal:listing content="structure view/renderApplicantListing" />
