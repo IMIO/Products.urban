@@ -828,9 +828,8 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
             contact.get('personTitle', '') + ' ' +\
             contact['name1'] + ' ' +\
             contact['name2']
-        contact = contact_names
         if reversed_name:
-            contact = reversed_contact_names
+            contact_names = reversed_contact_names
         if withaddress:
             gender_multiplicity = contact['gender'] + '-' + contact['multiplicity']
             gender_multiplicity = gender_multiplicity.encode('utf8')
@@ -840,8 +839,8 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
                 contact['number'] + ' ' +\
                 contact['zipcode'] + ' ' +\
                 contact['city']
-            contact += contact_address
-        return contact
+            contact_names += contact_address
+        return contact_names
 
 # Architecte(s)
 # ------------------------------------------------------------------------------
