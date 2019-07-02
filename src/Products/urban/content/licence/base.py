@@ -24,9 +24,12 @@ from Products.urban.utils import getCurrentFolderManager as currentFolderManager
 from Products.urban.utils import removeItems
 from plone import api
 from zope.component import queryAdapter
+from zope.component import getUtility
 from zope.i18n import translate
+from zope.schema.interfaces import IVocabularyFactory
 from zope.interface import implements
 from Products.urban import interfaces
+from urban.vocabulary.vocabularies.base import BaseVocabulary
 
 
 class UrbanBase(object):
@@ -669,6 +672,9 @@ class UrbanBase(object):
             if field.vocabulary:
                 keys = type(field.getRaw(obj)) in (list, tuple) and field.getRaw(obj) or [field.getRaw(obj)]
                 objs = [field.vocabulary.getAllVocTerms(obj).get(key, None) for key in keys]
+            elif field.vocabulary_factory:
+                voc_utility = getUtility(IVocabularyFactory, field.vocabulary_factory)
+                objs = voc_utility._get_config_vocabulary_values(self.context)
             else:
                 catalog = api.portal.get_tool('portal_catalog')
                 objs = [obj_.getObject() for obj_ in catalog(UID=field.getRaw(obj))]
@@ -726,6 +732,8 @@ class UrbanBase(object):
             displaylist = getattr(obj, vocabulary)()
         elif type(vocabulary) in (list, tuple):
             displaylist = DisplayList(vocabulary)
+        elif isinstance(vocabulary, BaseVocabulary):
+            displaylist = DisplayList([(k, v.title) for k, v in vocabulary(obj).by_value.iteritems()])
         return displaylist
 
     security.declarePublic('listVocabularyForTemplate')
