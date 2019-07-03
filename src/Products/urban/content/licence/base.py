@@ -724,7 +724,7 @@ class UrbanBase(object):
         fieldname = type(fieldname) is str and fieldname or fieldname[0]
         field = obj.getField(fieldname)
         vocabulary = getattr(field, 'vocabulary', None)
-        if not vocabulary and hasattr(field, 'vocabulary_factory'):
+        if not vocabulary and getattr(field, 'vocabulary_factory', None):
             vocabulary = getUtility(IVocabularyFactory, field.vocabulary_factory)
         if not vocabulary:
             return None
