@@ -278,6 +278,8 @@ class RecipientCadastreTitleDisplay(TitleDisplay):
         css_class = 'contenttype-%s state-%s' % (portal_type, state)
         title = recipient.Title()
         title = '<span class="%s">%s</span>' % (css_class, title)
+        parcels_info = '<span class="discreet">%s %s</span>' % (recipient.getCapakey(), recipient.getParcel_nature())
+        title = '%s<br />%s' % (title, parcels_info)
         return title
 
 

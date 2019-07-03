@@ -82,4 +82,6 @@ def migrate(context):
     setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'urban-postInstall')
     migrate_create_voc_classification_order_scope(context)
     migrate_create_voc_general_disposition(context)
+    catalog = api.portal.get_tool('portal_catalog')
+    catalog.clearFindAndRebuild()
     logger.info("migration done!")
