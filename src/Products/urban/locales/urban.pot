@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-06-27 09:25+0000\n"
+"POT-Creation-Date: 2019-07-02 13:31+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -96,7 +96,7 @@ msgid "Add this parcel"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:907
+#: ../setuphandlers.py:913
 msgid "All"
 msgstr ""
 
@@ -738,7 +738,7 @@ msgid "Update"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:784
+#: ../setuphandlers.py:790
 msgid "Urban"
 msgstr ""
 
@@ -934,7 +934,7 @@ msgid "architect_residing"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:822
+#: ../setuphandlers.py:828
 msgid "architects_folder_title"
 msgstr ""
 
@@ -1129,7 +1129,7 @@ msgid "creation date"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:684
+#: ../setuphandlers.py:690
 msgid "dashboardtemplates_folder_title"
 msgstr ""
 
@@ -1259,7 +1259,7 @@ msgid "envclasstwos"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:725
+#: ../setuphandlers.py:731
 msgid "environmenttemplates_folder_title"
 msgstr ""
 
@@ -1518,17 +1518,17 @@ msgid "formatted_date_with_cityname"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:756
+#: ../setuphandlers.py:762
 msgid "front_page_descr"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:757
+#: ../setuphandlers.py:763
 msgid "front_page_text"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:755
+#: ../setuphandlers.py:761
 msgid "front_page_title"
 msgstr ""
 
@@ -1554,13 +1554,13 @@ msgid "generate_a_linked_doc"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:836
+#: ../setuphandlers.py:842
 msgid "geometricians_folder_title"
 msgstr ""
 
 #. Default: "Global templates"
 #: ../browser/templates/templatessummary.pt:19
-#: ../setuphandlers.py:696
+#: ../setuphandlers.py:702
 msgid "globaltemplates_folder_title"
 msgstr ""
 
@@ -1951,7 +1951,7 @@ msgid "not_permitted_to_add_urbanevent"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:850
+#: ../setuphandlers.py:856
 msgid "notaries_folder_title"
 msgstr ""
 
@@ -2023,7 +2023,7 @@ msgid "parcelLinkedLicences"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:864
+#: ../setuphandlers.py:870
 msgid "parcellings_folder_title"
 msgstr ""
 
@@ -5241,7 +5241,7 @@ msgid "urbaneventtypes_folder_title"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:713
+#: ../setuphandlers.py:719
 msgid "urbantemplates_folder_title"
 msgstr ""
 
