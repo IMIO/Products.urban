@@ -105,6 +105,38 @@ schema = Schema((
         ),
         vocabulary=UrbanVocabulary('country', vocType='UrbanVocabularyTerm', inUrbanConfig=False),
     ),
+    StringField(
+        name='capakey',
+        widget=StringField._properties['widget'](
+            label='Capakey',
+            label_msgid='urban_label_capakey',
+            i18n_domain='urban',
+        ),
+    ),
+    StringField(
+        name='parcel_nature',
+        widget=StringField._properties['widget'](
+            label='Parcel_nature',
+            label_msgid='urban_label_parcel_nature',
+            i18n_domain='urban',
+        ),
+    ),
+    StringField(
+        name='parcel_street',
+        widget=StringField._properties['widget'](
+            label='Parcel_street',
+            label_msgid='urban_label_parcel_street',
+            i18n_domain='urban',
+        ),
+    ),
+    StringField(
+        name='parcel_police_number',
+        widget=StringField._properties['widget'](
+            label='Parcel_police_number',
+            label_msgid='urban_label_parcel_police_number',
+            i18n_domain='urban',
+        ),
+    ),
 ),
 )
 
