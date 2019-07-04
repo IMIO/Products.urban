@@ -8,7 +8,7 @@ from Products.urban import UrbanMessage as _
 from Products.urban import interfaces
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.config import PROJECTNAME
-from Products.urban.config import URBAN_CODT_TYPES
+from Products.urban.config import URBAN_TYPES
 from Products.urban.content.licence.GenericLicence import GenericLicence
 from Products.urban.content.Inquiry import Inquiry
 from Products.urban.utils import setSchemataForInquiry
@@ -39,13 +39,15 @@ schema = Schema((
             label=_('urban_label_bound_licence', default='Bound licence'),
         ),
         allowed_types=[
-            t for t in URBAN_CODT_TYPES
+            t for t in URBAN_TYPES
             if t not in [
                 'Inspection',
                 'ProjectMeeting',
                 'PatrimonyCertificate',
                 'CODT_NotaryLetter',
                 'CODT_UrbanCertificateOne'
+                'NotaryLetter',
+                'UrbanCertificateOne',
             ]
         ],
         schemata='urban_description',
