@@ -84,6 +84,11 @@ full_patrimony_slave_fields = (
             'hide_values': ('none',),
         },
         {
+            'name': 'regional_inventory',
+            'action': 'hide',
+            'hide_values': ('none',),
+        },
+        {
             'name': 'patrimony_archaeological_map',
             'action': 'hide',
             'hide_values': ('none',),
@@ -398,6 +403,14 @@ schema = Schema((
         ),
         schemata='urban_patrimony',
     ),
+    BooleanField(
+        name='regional_inventory',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label=_('urban_label_regional_inventory', default='Regional_inventory'),
+        ),
+        schemata='urban_patrimony',
+    ),
 
 ),
 )
@@ -666,7 +679,8 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     schema.moveField('patrimony_archaeological_map', after='regional_inventory_building')
     schema.moveField('patrimony_architectural_complex', after='patrimony_archaeological_map')
     schema.moveField('communal_inventory', after='patrimony_architectural_complex')
-    schema.moveField('patrimony_monument', after='communal_inventory')
+    schema.moveField('regional_inventory', after='communal_inventory')
+    schema.moveField('patrimony_monument', after='regional_inventory')
     schema.moveField('small_popular_patrimony', after='patrimony_monument')
     schema.moveField('patrimony_project_gtoret_1ha', after='small_popular_patrimony')
     schema.moveField('patrimony_site', after='patrimony_project_gtoret_1ha')
