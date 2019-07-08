@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-06-14 09:42+0000\n"
+"POT-Creation-Date: 2019-07-08 09:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2614,12 +2614,12 @@ msgid "urban_label_SAR"
 msgstr ""
 
 #. Default: "Sct"
-#: ../content/licence/CODT_BaseBuildLicence.py:160
+#: ../content/licence/CODT_BaseBuildLicence.py:165
 msgid "urban_label_SCT"
 msgstr ""
 
 #. Default: "Sdc"
-#: ../content/licence/CODT_BaseBuildLicence.py:182
+#: ../content/licence/CODT_BaseBuildLicence.py:187
 msgid "urban_label_SDC"
 msgstr ""
 
@@ -2789,7 +2789,7 @@ msgid "urban_label_approvalDate"
 msgstr ""
 
 #. Default: "Archeological_site"
-#: ../content/licence/CODT_BaseBuildLicence.py:258
+#: ../content/licence/CODT_BaseBuildLicence.py:263
 #: ../content/licence/UrbanCertificateBase.py:365
 msgid "urban_label_archeological_site"
 msgstr ""
@@ -2987,7 +2987,7 @@ msgid "urban_label_class"
 msgstr ""
 
 #. Default: "Classification_order_scope"
-#: ../content/licence/CODT_BaseBuildLicence.py:362
+#: ../content/licence/CODT_BaseBuildLicence.py:375
 #: ../content/licence/UrbanCertificateBase.py:337
 msgid "urban_label_classification_order_scope"
 msgstr ""
@@ -3027,7 +3027,7 @@ msgid "urban_label_comments_on_decision_project"
 msgstr ""
 
 #. Default: "Communal_inventory"
-#: ../content/licence/CODT_BaseBuildLicence.py:290
+#: ../content/licence/CODT_BaseBuildLicence.py:295
 #: ../content/licence/UrbanCertificateBase.py:397
 msgid "urban_label_communal_inventory"
 msgstr ""
@@ -3336,7 +3336,7 @@ msgstr ""
 msgid "urban_label_exemptFDArticle"
 msgstr ""
 
-#: ../content/licence/CODT_BaseBuildLicence.py:582
+#: ../content/licence/CODT_BaseBuildLicence.py:595
 msgid "urban_label_exemptFDArticleCODT"
 msgstr ""
 
@@ -3466,7 +3466,7 @@ msgid "urban_label_followup_proposition"
 msgstr ""
 
 #. Default: "Form_composition"
-#: ../content/licence/CODT_BaseBuildLicence.py:150
+#: ../content/licence/CODT_BaseBuildLicence.py:155
 msgid "urban_label_form_composition"
 msgstr ""
 
@@ -3493,7 +3493,7 @@ msgid "urban_label_gender"
 msgstr ""
 
 #. Default: "General_disposition"
-#: ../content/licence/CODT_BaseBuildLicence.py:372
+#: ../content/licence/CODT_BaseBuildLicence.py:385
 #: ../content/licence/UrbanCertificateBase.py:347
 msgid "urban_label_general_disposition"
 msgstr ""
@@ -3570,7 +3570,7 @@ msgstr ""
 msgid "urban_label_implantation"
 msgstr ""
 
-#: ../content/licence/CODT_BaseBuildLicence.py:583
+#: ../content/licence/CODT_BaseBuildLicence.py:596
 msgid "urban_label_implantationCODT"
 msgstr ""
 
@@ -3744,11 +3744,11 @@ msgstr ""
 msgid "urban_label_isSupplementary"
 msgstr ""
 
-#: ../content/licence/CODT_BaseBuildLicence.py:574
+#: ../content/licence/CODT_BaseBuildLicence.py:587
 msgid "urban_label_is_in_parceloutlicences"
 msgstr ""
 
-#: ../content/licence/CODT_BaseBuildLicence.py:580
+#: ../content/licence/CODT_BaseBuildLicence.py:593
 msgid "urban_label_is_in_sol"
 msgstr ""
 
@@ -4099,11 +4099,11 @@ msgstr ""
 msgid "urban_label_parcellings"
 msgstr ""
 
-#: ../content/licence/CODT_BaseBuildLicence.py:573
+#: ../content/licence/CODT_BaseBuildLicence.py:586
 msgid "urban_label_parceloutlicences"
 msgstr ""
 
-#: ../content/licence/CODT_BaseBuildLicence.py:575
+#: ../content/licence/CODT_BaseBuildLicence.py:588
 msgid "urban_label_parceloutlicences_details"
 msgstr ""
 
@@ -4131,49 +4131,49 @@ msgid "urban_label_pashDetails"
 msgstr ""
 
 #. Default: "Patrimony"
-#: ../content/licence/CODT_BaseBuildLicence.py:249
+#: ../content/licence/CODT_BaseBuildLicence.py:254
 #: ../content/licence/UrbanCertificateBase.py:356
 msgid "urban_label_patrimony"
 msgstr ""
 
 #. Default: "Patrimony_analysis"
-#: ../content/licence/CODT_BaseBuildLicence.py:297
+#: ../content/licence/CODT_BaseBuildLicence.py:310
 #: ../content/licence/UrbanCertificateBase.py:272
 msgid "urban_label_patrimony_analysis"
 msgstr ""
 
 #. Default: "Patrimony_archaeological_map"
-#: ../content/licence/CODT_BaseBuildLicence.py:326
+#: ../content/licence/CODT_BaseBuildLicence.py:339
 #: ../content/licence/UrbanCertificateBase.py:301
 msgid "urban_label_patrimony_archaeological_map"
 msgstr ""
 
 #. Default: "Patrimony_architectural_complex"
-#: ../content/licence/CODT_BaseBuildLicence.py:310
+#: ../content/licence/CODT_BaseBuildLicence.py:323
 #: ../content/licence/UrbanCertificateBase.py:285
 msgid "urban_label_patrimony_architectural_complex"
 msgstr ""
 
 #. Default: "Patrimony_monument"
-#: ../content/licence/CODT_BaseBuildLicence.py:342
+#: ../content/licence/CODT_BaseBuildLicence.py:355
 #: ../content/licence/UrbanCertificateBase.py:317
 msgid "urban_label_patrimony_monument"
 msgstr ""
 
 #. Default: "Patrimony_observation"
-#: ../content/licence/CODT_BaseBuildLicence.py:349
+#: ../content/licence/CODT_BaseBuildLicence.py:362
 #: ../content/licence/UrbanCertificateBase.py:324
 msgid "urban_label_patrimony_observation"
 msgstr ""
 
 #. Default: "Patrimony_project_gtoret_1ha"
-#: ../content/licence/CODT_BaseBuildLicence.py:334
+#: ../content/licence/CODT_BaseBuildLicence.py:347
 #: ../content/licence/UrbanCertificateBase.py:309
 msgid "urban_label_patrimony_project_gtoret_1ha"
 msgstr ""
 
 #. Default: "Patrimony_site"
-#: ../content/licence/CODT_BaseBuildLicence.py:318
+#: ../content/licence/CODT_BaseBuildLicence.py:331
 #: ../content/licence/UrbanCertificateBase.py:293
 msgid "urban_label_patrimony_site"
 msgstr ""
@@ -4318,7 +4318,7 @@ msgid "urban_label_procedureChoice"
 msgstr ""
 
 #. Default: "Prorogation"
-#: ../content/licence/CODT_BaseBuildLicence.py:141
+#: ../content/licence/CODT_BaseBuildLicence.py:146
 msgid "urban_label_prorogation"
 msgstr ""
 
@@ -4333,7 +4333,7 @@ msgid "urban_label_protectedBuildingDetails"
 msgstr ""
 
 #. Default: "Protection_zone"
-#: ../content/licence/CODT_BaseBuildLicence.py:266
+#: ../content/licence/CODT_BaseBuildLicence.py:271
 #: ../content/licence/UrbanCertificateBase.py:373
 msgid "urban_label_protection_zone"
 msgstr ""
@@ -4453,17 +4453,22 @@ msgid "urban_label_regional_authority"
 msgstr ""
 
 #. Default: "Regional_guide"
-#: ../content/licence/CODT_BaseBuildLicence.py:226
+#: ../content/licence/CODT_BaseBuildLicence.py:231
 msgid "urban_label_regional_guide"
 msgstr ""
 
 #. Default: "Regional_guide_details"
-#: ../content/licence/CODT_BaseBuildLicence.py:236
+#: ../content/licence/CODT_BaseBuildLicence.py:241
 msgid "urban_label_regional_guide_details"
 msgstr ""
 
+#. Default: "Regional_inventory"
+#: ../content/licence/CODT_BaseBuildLicence.py:303
+msgid "urban_label_regional_inventory"
+msgstr ""
+
 #. Default: "Regional_inventory_building"
-#: ../content/licence/CODT_BaseBuildLicence.py:274
+#: ../content/licence/CODT_BaseBuildLicence.py:279
 #: ../content/licence/UrbanCertificateBase.py:381
 msgid "urban_label_regional_inventory_building"
 msgstr ""
@@ -4639,12 +4644,12 @@ msgid "urban_label_sarDetails"
 msgstr ""
 
 #. Default: "Sctdetails"
-#: ../content/licence/CODT_BaseBuildLicence.py:171
+#: ../content/licence/CODT_BaseBuildLicence.py:176
 msgid "urban_label_sctDetails"
 msgstr ""
 
 #. Default: "Sdcdetails"
-#: ../content/licence/CODT_BaseBuildLicence.py:193
+#: ../content/licence/CODT_BaseBuildLicence.py:198
 msgid "urban_label_sdcDetails"
 msgstr ""
 
@@ -4704,7 +4709,7 @@ msgid "urban_label_situation"
 msgstr ""
 
 #. Default: "Small_popular_patrimony"
-#: ../content/licence/CODT_BaseBuildLicence.py:282
+#: ../content/licence/CODT_BaseBuildLicence.py:287
 #: ../content/licence/UrbanCertificateBase.py:389
 msgid "urban_label_small_popular_patrimony"
 msgstr ""
@@ -4714,15 +4719,15 @@ msgstr ""
 msgid "urban_label_society"
 msgstr ""
 
-#: ../content/licence/CODT_BaseBuildLicence.py:577
+#: ../content/licence/CODT_BaseBuildLicence.py:590
 msgid "urban_label_sol"
 msgstr ""
 
-#: ../content/licence/CODT_BaseBuildLicence.py:579
+#: ../content/licence/CODT_BaseBuildLicence.py:592
 msgid "urban_label_solZone"
 msgstr ""
 
-#: ../content/licence/CODT_BaseBuildLicence.py:581
+#: ../content/licence/CODT_BaseBuildLicence.py:594
 msgid "urban_label_sol_details"
 msgstr ""
 
@@ -4962,12 +4967,12 @@ msgid "urban_label_townshipSpecificFeaturesDetail"
 msgstr ""
 
 #. Default: "Township_guide"
-#: ../content/licence/CODT_BaseBuildLicence.py:204
+#: ../content/licence/CODT_BaseBuildLicence.py:209
 msgid "urban_label_township_guide"
 msgstr ""
 
 #. Default: "Township_guide_details"
-#: ../content/licence/CODT_BaseBuildLicence.py:215
+#: ../content/licence/CODT_BaseBuildLicence.py:220
 msgid "urban_label_township_guide_details"
 msgstr ""
 
