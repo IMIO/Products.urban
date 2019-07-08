@@ -209,8 +209,8 @@ URBAN_TYPES = [
     'MiscDemand', 'Division',
     'NotaryLetter', 'CODT_NotaryLetter',
     'ProjectMeeting', 'ExplosivesPossession',
-    'RoadDecree',
-    'Inspection',
+#    'RoadDecree',
+#    'Inspection',
 ]
 
 URBAN_CWATUPE_TYPES = [
