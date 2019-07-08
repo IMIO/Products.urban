@@ -32,6 +32,7 @@ from Products.urban.exportimport import updateAllUrbanTemplates
 from Products.urban.Extensions.update_task_configs import add_licence_ended_condition
 from Products.urban.interfaces import IContactFolder
 from Products.urban.interfaces import ILicenceContainer
+from Products.urban.interfaces import IUrbanConfigurationFolder
 from Products.urban.schedule.vocabulary import URBAN_TYPES_INTERFACES
 from Products.urban import services
 from Products.urban.utils import generatePassword
@@ -254,6 +255,7 @@ def createVocabularyFolder(container, folder_id, site, allowedtypes='UrbanVocabu
     else:
         new_folder = getattr(container, folder_id)
         new_folder.setTitle(_("%s_folder_title" % folder_id, 'urban'))
+    alsoProvides(new_folder, IUrbanConfigurationFolder)
     return new_folder
 
 
@@ -575,6 +577,10 @@ def addUrbanGroups(context):
     site.portal_groups.addGroup("opinions_editors", title="Opinion Editors")
     site.portal_groups.setRolesForGroup('opinions_editors', ('UrbanMapReader', ))
     site.portal_urban.manage_addLocalRoles("opinions_editors", ("Reader", ))
+    # add inspection editors group
+    site.portal_groups.addGroup("inspection_editors", title="Inspection Editors")
+    site.portal_groups.setRolesForGroup('inspection_editors', ('UrbanMapReader', ))
+    site.portal_groups.addPrincipalToGroup("inspection_editors", 'urban_readers')
 
 
 def setDefaultApplicationSecurity(context):
@@ -640,6 +646,8 @@ def setDefaultApplicationSecurity(context):
             if folder_name in environment_folder_names:
                 folder.manage_addLocalRoles("environment_readers", ("Reader", ))
                 folder.manage_addLocalRoles("environment_editors", ("Contributor",))
+            if folder_name == getLicenceFolderId('Inspection'):
+                folder.manage_addLocalRoles("inspection_editors", ("Contributor", ))
 
     #objects application folder : "urban_readers" can read and "urban_editors" can edit...
     objectsfolder_names = ['architects', 'geometricians', 'notaries', 'parcellings']

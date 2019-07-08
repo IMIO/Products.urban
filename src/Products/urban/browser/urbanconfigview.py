@@ -25,8 +25,10 @@ class UrbanConfigView(BrowserView):
         super(UrbanConfigView, self).__init__(context, request)
         self.context = context
         self.request = request
-        self.form = AddInternalServiceForm(context, request)
-        self.form.update()
+        self.default_values_form = UpdateDefaultValuesForm(context, request)
+        self.default_values_form.update()
+        self.internal_services_form = AddInternalServiceForm(context, request)
+        self.internal_services_form.update()
 
     def getTabMacro(self, tab):
         context = aq_inner(self.context)
@@ -44,12 +46,6 @@ class UrbanConfigView(BrowserView):
             'admin_settings'
         ]
 
-    def getAdminFolders(self):
-        context = aq_inner(self.context)
-        names = ['additional_layers']
-        folders = [folder for folder in context.objectValues('ATFolder') if folder.id in names]
-        return folders
-
     def getMiscConfigFolders(self):
         context = aq_inner(self.context)
         names = ['globaltemplates', 'dashboardtemplates', 'foldermanagers', 'streets']
@@ -58,7 +54,7 @@ class UrbanConfigView(BrowserView):
 
     def getVocabularyFolders(self):
         context = aq_inner(self.context)
-        other_folders = self.getAdminFolders() + self.getMiscConfigFolders()
+        other_folders = self.getMiscConfigFolders()
         folders = [folder for folder in context.objectValues('ATFolder') if folder not in other_folders]
         return folders
 
@@ -93,9 +89,6 @@ class AddInternalServiceForm(form.Form):
     method = 'get'
     fields = field.Fields(IAddInternalServiceForm)
     ignoreContext = True
-
-    def updateWidgets(self):
-        super(AddInternalServiceForm, self).updateWidgets()
 
     @button.buttonAndHandler(u'Add')
     def handleAdd(self, action):
@@ -244,3 +237,25 @@ class AddInternalServiceForm(form.Form):
             'task_validate_id': task_validate_id,
         }
         registry['Products.urban.interfaces.IInternalOpinionServices.services'] = services.copy()
+
+
+class UpdateDefaultValuesForm(form.Form):
+
+    method = 'get'
+    ignoreContext = True
+
+    @button.buttonAndHandler(u'Update voc cache')
+    def handleUpdate(self, action):
+        """
+        """
+        portal_urban = api.portal.get_tool('portal_urban')
+        cache_view = portal_urban.unrestrictedTraverse('urban_vocabulary_cache')
+        cache_view.update_all_cache()
+
+    @button.buttonAndHandler(u'Clear voc cache')
+    def handleClear(self, action):
+        """
+        """
+        portal_urban = api.portal.get_tool('portal_urban')
+        cache_view = portal_urban.unrestrictedTraverse('urban_vocabulary_cache')
+        cache_view.reset_all_cache()

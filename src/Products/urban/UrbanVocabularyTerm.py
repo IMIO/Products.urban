@@ -19,12 +19,13 @@ from zope.interface import implements
 import interfaces
 from Products.urban.UrbanConfigurationValue import UrbanConfigurationValue
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
+from Products.Archetypes.interfaces import IVocabulary
 
 from Products.urban.config import *
+from zope.globalrequest import getRequest
 
 ##code-section module-header #fill in your manual code here
 from plone import api
-from Products.Archetypes.interfaces import IVocabulary
 
 import re
 import logging
@@ -178,11 +179,27 @@ class UrbanVocabulary(object):
         self.with_empty_value = with_empty_value
         self.datagridfield_key = datagridfield_key
 
-    def getDisplayList(self, content_instance):
+    def get_raw_voc(self, context):
         portal_urban = api.portal.get_tool('portal_urban')
-        result = DisplayList(portal_urban.listVocabulary(self.path,
-            content_instance, vocType=self.vocType, id_to_use=self.id_to_use, value_to_use=self.value_to_use, sort_on=self.sort_on,\
-            inUrbanConfig=self.inUrbanConfig, allowedStates=self.allowedStates, with_empty_value=self.with_empty_value))
+        raw_voc = portal_urban.get_vocabulary(
+            in_urban_config=self.inUrbanConfig,
+            context=context,
+            name=self.path
+        )
+        voc = [v for v in raw_voc if v['portal_type'] in self.vocType]
+        return voc
+
+    def get_default_values(self, context):
+        raw_voc = self.get_raw_voc(context)
+        default_values = [v['id'] for v in raw_voc if v['isDefaultValue']]
+        return default_values
+
+    def getDisplayList(self, context):
+        raw_voc = self.get_raw_voc(context)
+        if getRequest().getURL().endswith('edit'):
+            result = DisplayList([(v['id'], v['title']) for v in raw_voc if v['enabled']])
+        else:
+            result = DisplayList([(v['id'], v['title']) for v in raw_voc])
         return result
 
     def getDisplayListForTemplate(self, content_instance):
