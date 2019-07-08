@@ -27,17 +27,6 @@ from zope.i18n import translate as _
 ##/code-section module-header
 
 schema = Schema((
-
-    StringField(
-        name='title',
-        widget=StringField._properties['widget'](
-            visible=False,
-            label='Title',
-            label_msgid='urban_label_title',
-            i18n_domain='urban',
-        ),
-        accessor="Title",
-    ),
     StringField(
         name='label',
         widget=StringField._properties['widget'](
@@ -143,8 +132,7 @@ class PcaTerm(BaseContent, UrbanConfigurationValue, BrowserDefaultMixin):
 
     # Manually created methods
 
-    security.declarePublic('Title')
-    def Title(self):
+    def updateTitle(self):
         """
            Override the Title method to display several data
         """

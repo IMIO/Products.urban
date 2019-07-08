@@ -426,6 +426,10 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
         return locations
 
     def listVocTerms(self, field):
+        """
+        Deprecated/backward compatibility only
+        See voc_terms
+        """
         context = self.real_context
         field = context.getField(field)
         keys = type(field.getRaw(context)) in (list, tuple) and field.getRaw(context) or [field.getRaw(context)]

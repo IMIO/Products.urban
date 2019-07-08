@@ -222,6 +222,12 @@ msgstr ""
 msgid "send_opinion"
 msgstr ""
 
+msgid "give_answer"
+msgstr ""
+
+msgid "administrative_answer"
+msgstr ""
+
 #control panel
 msgid "UrbanTool"
 msgstr ""
@@ -324,6 +330,9 @@ msgid "inacceptable"
 msgstr ""
 
 msgid "isinacceptable"
+msgstr ""
+
+msgid "ended"
 msgstr ""
 
 msgid "update_rubrics"

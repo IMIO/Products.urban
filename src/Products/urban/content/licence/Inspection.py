@@ -8,7 +8,7 @@ from Products.urban import UrbanMessage as _
 from Products.urban import interfaces
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.config import PROJECTNAME
-from Products.urban.config import URBAN_CODT_TYPES
+from Products.urban.config import URBAN_TYPES
 from Products.urban.content.licence.GenericLicence import GenericLicence
 from Products.urban.content.Inquiry import Inquiry
 from Products.urban.utils import setSchemataForInquiry
@@ -39,13 +39,15 @@ schema = Schema((
             label=_('urban_label_bound_licence', default='Bound licence'),
         ),
         allowed_types=[
-            t for t in URBAN_CODT_TYPES
+            t for t in URBAN_TYPES
             if t not in [
                 'Inspection',
                 'ProjectMeeting',
                 'PatrimonyCertificate',
                 'CODT_NotaryLetter',
                 'CODT_UrbanCertificateOne'
+                'NotaryLetter',
+                'UrbanCertificateOne',
             ]
         ],
         schemata='urban_description',
@@ -71,6 +73,28 @@ schema = Schema((
         schemata='urban_description',
         vocabulary=UrbanVocabulary('inspectioncontexts', with_empty_value=True),
         default_method='getDefaultValue',
+    ),
+    TextField(
+        name='report',
+        widget=RichWidget(
+            label=_('urban_label_report', default='Report'),
+        ),
+        default_content_type='text/html',
+        allowable_content_types=('text/html',),
+        schemata='urban_inspection',
+        default_method='getDefaultText',
+        default_output_type='text/html',
+    ),
+    TextField(
+        name='inspectionDescription',
+        widget=RichWidget(
+            label=_('urban_label_inspectionDescription', default='Inspectiondescription'),
+        ),
+        default_content_type='text/html',
+        allowable_content_types=('text/html',),
+        schemata='urban_inspection',
+        default_method='getDefaultText',
+        default_output_type='text/html',
     ),
 ),
 )
@@ -184,6 +208,7 @@ def finalize_schema(schema, folderish=False, moveDiscussion=True):
         allowed_schematas = [
             'urban_description',
             'urban_advices',
+            'urban_inspection',
             'metadata',
             'default'
         ]
