@@ -14,6 +14,7 @@ from zope.i18n import translate
 
 import Levenshtein
 import re
+import ast
 
 
 class SearchParcelsView(BrowserView):
@@ -174,15 +175,14 @@ class SearchParcelsView(BrowserView):
         container = self.context
         for owner in owners.values():
             contact_info = {
-                    'name1': owner['name'],
-                    'name2': owner['firstname'],
-                    'zipcode': owner['zipcode'],
-                    'city': owner['city'],
-                    'street': owner['street'],
-                    'number': owner['number'],
+                'name1': owner['name'],
+                'name2': owner['firstname'],
+                'zipcode': owner['zipcode'],
+                'city': owner['city'],
+                'street': owner['street'],
+                'number': owner['number'],
             }
-            applicantId = container.invokeFactory(contact_type, id=container.generateUniqueId(contact_type),
-                    **contact_info)
+            applicantId = container.invokeFactory(contact_type, id=container.generateUniqueId(contact_type), **contact_info)
             applicant = getattr(container, applicantId)
             isSameAddressAsWorks = self._areSameAdresses(owner['street'] + ' ' + owner['number'], worklocations)
             setattr(applicant, 'isSameAddressAsWorks', isSameAddressAsWorks)

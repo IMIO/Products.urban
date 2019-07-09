@@ -193,11 +193,8 @@ metal:use-macro="here/main_template/macros/master">
                                         <td>
                                             <form i18n:domain="urban" name="quickAddParcel" action="#" method="post"
                                                   tal:attributes="action string: ${context/absolute_url}/searchparcels">
-                                                <tal:create_owner condition="python: view.contextIsLicence() and hasattr(parcel, 'proprietary')">
-                                                    <input type="checkbox" name="proprietary" value="#" tal:attributes="value python: parcel.proprietary"/>
-                                                    <input type="hidden" name="proprietary_city" value="#" tal:attributes="value python: parcel.proprietary_city" />
-                                                    <input type="hidden" name="proprietary_street" value="#"
-                                                           tal:attributes="value python: parcel.proprietary_street" />
+                                                <tal:create_owner condition="python: view.contextIsLicence() and hasattr(parcel, 'owners')">
+                                                    <input type="checkbox" name="owners" value="#" tal:attributes="value python: parcel.owners"/>
                                                     <img src="Proprietary.png"/>
                                                 </tal:create_owner>
                                                 <input type="hidden" name="division" value="#" tal:attributes="value python: parcel.division" />
