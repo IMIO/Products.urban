@@ -232,7 +232,7 @@ urbanEventTypes = {
         {
             'id': "enquete-publique-codt",
             'title': "Enquête publique",
-            'activatedFields': ['investigationStart', 'investigationEnd', 'claimsDate', 'claimEndSDate', 'explanationStartSDate', 'explanationEndSDate', 'claimsText'],
+            'activatedFields': ['investigationStart', 'investigationEnd', 'claimsDate', 'explanationStartSDate', 'explanationEndSDate', 'claimsText'],
             'deadLineDelay': 15,
             'TALCondition': "here/mayAddInquiryEvent",
             'specialFunctionName': "Rechercher les propriétaires situés dans un rayon de 50m",
