@@ -14,6 +14,7 @@ from zope.i18n import translate
 
 import Levenshtein
 import re
+import ast
 
 
 class SearchParcelsView(BrowserView):
@@ -48,14 +49,10 @@ class SearchParcelsView(BrowserView):
                 'partie': self.request.get('partie', None),
                 'outdated': self.request.get('old', False),
             }
-            if 'proprietary' in self.request.form:
-                proprietary_data = {
-                    'proprietary': self.request.get('proprietary', None),
-                    'proprietary_city': self.request.get('proprietary_city', None),
-                    'proprietary_address': self.request.get('proprietary_street', None),
-                }
-                parcel_data['location'] = self.request.get('location')
-                self.createParcelAndProprietary(parcel_data, proprietary_data)
+            if 'owners' in self.request.form:
+                owners = ast.literal_eval(self.request.get('owners', None))
+                parcel_data['location'] = self.request.get('location').decode('utf8')
+                self.createParcelAndProprietary(parcel_data, owners)
             else:
                 self.createParcel(parcel_data)
 
@@ -158,16 +155,16 @@ class SearchParcelsView(BrowserView):
 
         return search_result
 
-    def createParcelAndProprietary(self, parcel_data, proprietary_data):
+    def createParcelAndProprietary(self, parcel_data, owners):
         parcel_address = parcel_data.pop('location')
-        self.createApplicantFromParcel(parcel_address=parcel_address, **proprietary_data)
+        self.createApplicantFromParcel(owners, parcel_address)
         self.createParcel(parcel_data)
 
     def createParcel(self, parcel_data):
         portal_urban = api.portal.get_tool('portal_urban')
         portal_urban.createPortionOut(container=self.context, **parcel_data)
 
-    def createApplicantFromParcel(self, proprietary, proprietary_city, proprietary_address, parcel_address):
+    def createApplicantFromParcel(self, owners, parcel_address):
         """
            Create the PortionOut with given parameters...
         """
@@ -176,31 +173,17 @@ class SearchParcelsView(BrowserView):
             contact_type = 'Proprietary'
 
         container = self.context
-        same_address = self._areSameAdresses(proprietary_address, parcel_address)
-        city = proprietary_city.split()
-        if city:
-            zipcode = city[0]
-            city = ' '.join(city[1:])
-        else:
-            zipcode = ''
-            city = ''
-        person_street, person_number = self._extractStreetAndNumber(proprietary_address)
-
-        contacts = proprietary.split('&')
-        for contact in contacts:
-            names = contact.split(',')
+        for owner in owners:
             contact_info = {
-                'isSameAddressAsWorks': same_address,
-                'name1': names[0],
-                'zipcode': zipcode,
-                'city': city,
-                'street': person_street,
-                'number': person_number,
+                    'isSameAddressAsWorks': self._areSameAdresses(owners[owner]['street'], parcel_address),
+                    'name1': owners[owner]['name'],
+                    'name2': owners[owner]['firstname'],
+                    'zipcode': owners[owner]['zipcode'],
+                    'city': owners[owner]['city'],
+                    'street': owners[owner]['street'],
+                    'number': owners[owner]['number'],
             }
-            if len(names) > 1:
-                contact_info['name2'] = names[1].split()[0].capitalize()
             container.invokeFactory(contact_type, id=container.generateUniqueId(contact_type), **contact_info)
-
         container.updateTitle()
 
     def _extractStreetAndNumber(self, address):
