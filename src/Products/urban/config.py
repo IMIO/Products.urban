@@ -90,8 +90,8 @@ ADD_CONTENT_PERMISSIONS = {
     'GenericLicence': 'urban: Add GenericLicence',
     'Inquiry': 'urban: Add Inquiry',
     'CODT_Inquiry': 'urban: Add CODT_Inquiry',
+    'CODT_UniqueLicenceInquiry': 'urban: Add CODT_UniqueLicenceInquiry',
     'IntegratedLicence': 'urban: Add IntegratedLicence',
-    'Layer': 'urban: Add Layer',
     'LicenceConfig': 'urban: Add LicenceConfig',
     'Locality': 'urban: Add Locality',
     'MiscDemand': 'urban: Add MiscDemand',
@@ -157,7 +157,6 @@ setDefaultRoles('urban: Add IntegratedLicence', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add Inspection', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add Inquiry', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add CODT_Inquiry', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add Layer', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add LicenceConfig', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add Locality', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add MiscDemand', ("Manager", "Contributor"))
@@ -239,6 +238,12 @@ LICENCE_FINAL_STATES = [
     'inacceptable',
 ]
 
+VOCABULARY_TYPES = [
+    'UrbanVocabularyTerm', 'PcaTerm', 'UrbanDelay',
+    'UrbanEventType', 'OpinionRequestEventType',
+    'PersonTitleTerm', 'OrganisationTerm',
+]
+
 # all types that can be used as a licence applicant
 APPLICANTS_TYPES = ['Applicant', 'Proprietary', 'Corporation']
 
@@ -246,34 +251,34 @@ APPLICANTS_TYPES = ['Applicant', 'Proprietary', 'Corporation']
 GLOBAL_TEMPLATES = {
     '.': [],
     'urbantemplates': [
-        {'id':'styles.odt', 'portal_type': 'StyleTemplate', 'title':'Styles urbanisme'},
-        {'id':'header.odt', 'portal_type': 'SubTemplate', 'title':'En-tête urbanisme'},
-        {'id':'footer.odt', 'portal_type': 'SubTemplate', 'title':'Pied de page urbanisme'},
-        {'id':'reference.odt', 'portal_type': 'SubTemplate', 'title':'\'Référence\' urbanisme'},
-        {'id':'signatures.odt', 'portal_type': 'SubTemplate', 'title':'Signatures urbanisme'},
-        {'id':'publipostage.odt', 'portal_type': 'MailingLoopTemplate', 'title':'Publipostage urbanisme'},
+        {'id': 'styles.odt', 'portal_type': 'StyleTemplate', 'title': 'Styles urbanisme'},
+        {'id': 'header.odt', 'portal_type': 'SubTemplate', 'title': 'En-tête urbanisme'},
+        {'id': 'footer.odt', 'portal_type': 'SubTemplate', 'title': 'Pied de page urbanisme'},
+        {'id': 'reference.odt', 'portal_type': 'SubTemplate', 'title': '\'Référence\' urbanisme'},
+        {'id': 'signatures.odt', 'portal_type': 'SubTemplate', 'title': 'Signatures urbanisme'},
+        {'id': 'publipostage.odt', 'portal_type': 'MailingLoopTemplate', 'title': 'Publipostage urbanisme'},
     ],
     'environmenttemplates': [
-        {'id':'styles.odt', 'portal_type': 'StyleTemplate', 'title':'Styles environnement'},
-        {'id':'header.odt', 'portal_type': 'SubTemplate', 'title':'En-tête environnement'},
-        {'id':'footer.odt', 'portal_type': 'SubTemplate', 'title':'Pied de page environnement'},
-        {'id':'reference.odt', 'portal_type': 'SubTemplate', 'title':'\'Référence\' environnement'},
-        {'id':'signatures.odt', 'portal_type': 'SubTemplate', 'title':'Signatures environnement'},
-        {'id':'publipostage.odt', 'portal_type': 'MailingLoopTemplate', 'title':'Publipostage environnement'},
+        {'id': 'styles.odt', 'portal_type': 'StyleTemplate', 'title': 'Styles environnement'},
+        {'id': 'header.odt', 'portal_type': 'SubTemplate', 'title': 'En-tête environnement'},
+        {'id': 'footer.odt', 'portal_type': 'SubTemplate', 'title': 'Pied de page environnement'},
+        {'id': 'reference.odt', 'portal_type': 'SubTemplate', 'title': '\'Référence\' environnement'},
+        {'id': 'signatures.odt', 'portal_type': 'SubTemplate', 'title': 'Signatures environnement'},
+        {'id': 'publipostage.odt', 'portal_type': 'MailingLoopTemplate', 'title': 'Publipostage environnement'},
     ],
 }
 
 DASHBOARD_TEMPLATES = {
     '.': [
         {
-            'id':'statsins.odt',
+            'id': 'statsins.odt',
             'portal_type': 'DashboardPODTemplate',
-            'title':'Statistiques INS',
+            'title': 'Statistiques INS',
         },
         # {
-            # 'id':'folderlisting.odt',
+            # 'id': 'folderlisting.odt',
             # 'portal_type': 'DashboardPODTemplate',
-            # 'title':'Liste',
+            # 'title': 'Liste',
         # },
     ],
 }
