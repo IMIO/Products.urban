@@ -70,6 +70,9 @@ class CODT_UniqueLicenceInquiry(BaseContent, CODT_Inquiry, BrowserDefaultMixin):
 
     # Methods
 
+    def getInquiry_type(self):
+        return CODT_UniqueLicenceInquiry_schema['inquiry_type'].default
+
     def list_inquiry_category(self):
         """
         """
