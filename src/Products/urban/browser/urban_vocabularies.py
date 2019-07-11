@@ -4,6 +4,8 @@ from collections import OrderedDict
 
 from Products.Five import BrowserView
 
+from Products.urban.interfaces import IUrbanConfigurationValue
+
 from zope.annotation import IAnnotations
 
 
@@ -39,17 +41,18 @@ class UrbanVocabulariesCache(BrowserView):
             for k, v in stored_value.iteritems():
                 if k not in updated_values:
                     v['enabled'] = False
-                # use updated_values as the base for the result to ensures
-                # we also keep track of the values reordering
-                updated_values[k] = v
+                    # use updated_values as the base for the result to ensures
+                    # we also keep track of the values reordering
+                    updated_values[k] = v
             vocabularies[voc_folder.id] = updated_values.values()
         annotations['Products.urban.vocabulary_cache'] = vocabularies
 
     def voc_folder_to_vocabulary_list(self, folder):
         vocabulary_list = []
         for voc_term in folder.objectValues():
-            vocterm_dict = voc_term.to_dict()
-            vocabulary_list.append(vocterm_dict)
+            if IUrbanConfigurationValue.providedBy(voc_term):
+                vocterm_dict = voc_term.to_dict()
+                vocabulary_list.append(vocterm_dict)
         return vocabulary_list
 
     def reset_all_cache(self):
