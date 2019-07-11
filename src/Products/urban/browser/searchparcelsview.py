@@ -48,14 +48,10 @@ class SearchParcelsView(BrowserView):
                 'partie': self.request.get('partie', None),
                 'outdated': self.request.get('old', False),
             }
-            if 'proprietary' in self.request.form:
-                proprietary_data = {
-                    'proprietary': self.request.get('proprietary', None),
-                    'proprietary_city': self.request.get('proprietary_city', None),
-                    'proprietary_address': self.request.get('proprietary_street', None),
-                }
-                parcel_data['location'] = self.request.get('location')
-                self.createParcelAndProprietary(parcel_data, proprietary_data)
+            if 'owners' in self.request.form:
+                owners = ast.literal_eval(self.request.get('owners', None))
+                parcel_data['worklocations'] = self.context.getWorkLocations()
+                self.createParcelAndProprietary(parcel_data, owners)
             else:
                 self.createParcel(parcel_data)
 
@@ -158,16 +154,16 @@ class SearchParcelsView(BrowserView):
 
         return search_result
 
-    def createParcelAndProprietary(self, parcel_data, proprietary_data):
-        parcel_address = parcel_data.pop('location')
-        self.createApplicantFromParcel(parcel_address=parcel_address, **proprietary_data)
+    def createParcelAndProprietary(self, parcel_data, owners):
+        worklocations = parcel_data.pop('worklocations')
+        self.createApplicantFromParcel(owners, worklocations)
         self.createParcel(parcel_data)
 
     def createParcel(self, parcel_data):
         portal_urban = api.portal.get_tool('portal_urban')
         portal_urban.createPortionOut(container=self.context, **parcel_data)
 
-    def createApplicantFromParcel(self, proprietary, proprietary_city, proprietary_address, parcel_address):
+    def createApplicantFromParcel(self, owners, worklocations):
         """
            Create the PortionOut with given parameters...
         """
@@ -176,31 +172,20 @@ class SearchParcelsView(BrowserView):
             contact_type = 'Proprietary'
 
         container = self.context
-        same_address = self._areSameAdresses(proprietary_address, parcel_address)
-        city = proprietary_city.split()
-        if city:
-            zipcode = city[0]
-            city = ' '.join(city[1:])
-        else:
-            zipcode = ''
-            city = ''
-        person_street, person_number = self._extractStreetAndNumber(proprietary_address)
-
-        contacts = proprietary.split('&')
-        for contact in contacts:
-            names = contact.split(',')
+        for owner in owners.values():
             contact_info = {
-                'isSameAddressAsWorks': same_address,
-                'name1': names[0],
-                'zipcode': zipcode,
-                'city': city,
-                'street': person_street,
-                'number': person_number,
+                    'name1': owner['name'],
+                    'name2': owner['firstname'],
+                    'zipcode': owner['zipcode'],
+                    'city': owner['city'],
+                    'street': owner['street'],
+                    'number': owner['number'],
             }
-            if len(names) > 1:
-                contact_info['name2'] = names[1].split()[0].capitalize()
-            container.invokeFactory(contact_type, id=container.generateUniqueId(contact_type), **contact_info)
-
+            applicantId = container.invokeFactory(contact_type, id=container.generateUniqueId(contact_type),
+                    **contact_info)
+            applicant = getattr(container, applicantId)
+            isSameAddressAsWorks = self._areSameAdresses(owner['street'] + ' ' + owner['number'], worklocations)
+            setattr(applicant, 'isSameAddressAsWorks', isSameAddressAsWorks)
         container.updateTitle()
 
     def _extractStreetAndNumber(self, address):
@@ -213,17 +198,28 @@ class SearchParcelsView(BrowserView):
                 streetAndNumber = (street, number)
         return streetAndNumber
 
-    def _areSameAdresses(self, address_a, address_b):
+    def _areSameAdresses(self, address, worklocations):
         """
          Addresses are the same if fuzzy match on street name and EXACT match on number
         """
-        street_a, number_a = self._extractStreetAndNumber(address_a)
-        street_b, number_b = self._extractStreetAndNumber(address_b)
+        street_a, number_a = self._extractStreetAndNumber(address)
+        catalog = api.portal.get_tool("uid_catalog")
+        # wl is a dict with street as the street obj uid and number as the number in the street
+        for wl in worklocations:
+            street_brains = catalog(UID=wl['street'])
+            if not street_brains:
+                continue
+            street = street_brains[0].getObject()
+            if street.getPortalTypeName() == 'Locality':
+                street_b = street.getLocalityName().decode('utf8')
+            else:
+                street_b = street.getStreetName().decode('utf8')
+            number_b = wl['number']
 
         same_street = Levenshtein.ratio(street_a, street_b) > 0.8
         same_number = self._haveSameNumbers(number_a, number_b)
 
-        return same_street and same_number
+        return same_street and bool(same_number)
 
     def _haveSameNumbers(self, num_a, num_b):
         match_expr = '\d+'
