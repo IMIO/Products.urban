@@ -41,9 +41,9 @@ class UrbanVocabulariesCache(BrowserView):
             for k, v in stored_value.iteritems():
                 if k not in updated_values:
                     v['enabled'] = False
-                # use updated_values as the base for the result to ensures
-                # we also keep track of the values reordering
-                updated_values[k] = v
+                    # use updated_values as the base for the result to ensures
+                    # we also keep track of the values reordering
+                    updated_values[k] = v
             vocabularies[voc_folder.id] = updated_values.values()
         annotations['Products.urban.vocabulary_cache'] = vocabularies
 
