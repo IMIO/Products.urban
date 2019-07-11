@@ -51,7 +51,7 @@ class SearchParcelsView(BrowserView):
             }
             if 'owners' in self.request.form:
                 owners = ast.literal_eval(self.request.get('owners', None))
-                parcel_data['location'] = self.request.get('location').decode('utf8')
+                parcel_data['worklocations'] = self.context.getWorkLocations()
                 self.createParcelAndProprietary(parcel_data, owners)
             else:
                 self.createParcel(parcel_data)
@@ -156,15 +156,15 @@ class SearchParcelsView(BrowserView):
         return search_result
 
     def createParcelAndProprietary(self, parcel_data, owners):
-        parcel_address = parcel_data.pop('location')
-        self.createApplicantFromParcel(owners, parcel_address)
+        worklocations = parcel_data.pop('worklocations')
+        self.createApplicantFromParcel(owners, worklocations)
         self.createParcel(parcel_data)
 
     def createParcel(self, parcel_data):
         portal_urban = api.portal.get_tool('portal_urban')
         portal_urban.createPortionOut(container=self.context, **parcel_data)
 
-    def createApplicantFromParcel(self, owners, parcel_address):
+    def createApplicantFromParcel(self, owners, worklocations):
         """
            Create the PortionOut with given parameters...
         """
@@ -173,17 +173,20 @@ class SearchParcelsView(BrowserView):
             contact_type = 'Proprietary'
 
         container = self.context
-        for owner in owners:
+        for owner in owners.values():
             contact_info = {
-                    'isSameAddressAsWorks': self._areSameAdresses(owners[owner]['street'], parcel_address),
-                    'name1': owners[owner]['name'],
-                    'name2': owners[owner]['firstname'],
-                    'zipcode': owners[owner]['zipcode'],
-                    'city': owners[owner]['city'],
-                    'street': owners[owner]['street'],
-                    'number': owners[owner]['number'],
+                    'name1': owner['name'],
+                    'name2': owner['firstname'],
+                    'zipcode': owner['zipcode'],
+                    'city': owner['city'],
+                    'street': owner['street'],
+                    'number': owner['number'],
             }
-            container.invokeFactory(contact_type, id=container.generateUniqueId(contact_type), **contact_info)
+            applicantId = container.invokeFactory(contact_type, id=container.generateUniqueId(contact_type),
+                    **contact_info)
+            applicant = getattr(container, applicantId)
+            isSameAddressAsWorks = self._areSameAdresses(owner['street'] + ' ' + owner['number'], worklocations)
+            setattr(applicant, 'isSameAddressAsWorks', isSameAddressAsWorks)
         container.updateTitle()
 
     def _extractStreetAndNumber(self, address):
@@ -196,17 +199,28 @@ class SearchParcelsView(BrowserView):
                 streetAndNumber = (street, number)
         return streetAndNumber
 
-    def _areSameAdresses(self, address_a, address_b):
+    def _areSameAdresses(self, address, worklocations):
         """
          Addresses are the same if fuzzy match on street name and EXACT match on number
         """
-        street_a, number_a = self._extractStreetAndNumber(address_a)
-        street_b, number_b = self._extractStreetAndNumber(address_b)
+        street_a, number_a = self._extractStreetAndNumber(address)
+        catalog = api.portal.get_tool("uid_catalog")
+        # wl is a dict with street as the street obj uid and number as the number in the street
+        for wl in worklocations:
+            street_brains = catalog(UID=wl['street'])
+            if not street_brains:
+                continue
+            street = street_brains[0].getObject()
+            if street.getPortalTypeName() == 'Locality':
+                street_b = street.getLocalityName().decode('utf8')
+            else:
+                street_b = street.getStreetName().decode('utf8')
+            number_b = wl['number']
 
         same_street = Levenshtein.ratio(street_a, street_b) > 0.8
         same_number = self._haveSameNumbers(number_a, number_b)
 
-        return same_street and same_number
+        return same_street and bool(same_number)
 
     def _haveSameNumbers(self, num_a, num_b):
         match_expr = '\d+'

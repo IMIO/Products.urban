@@ -187,7 +187,7 @@ metal:use-macro="here/main_template/macros/master">
                                                 <div tal:repeat="location locations" tal:content="python: location['street_name'] + ' ' + location['number']"/>
                                             </span>
                                             <span tal:condition="python: hasattr(parcel, 'owners')" tal:define="owners python: parcel.owners.values()">
-                                                <div tal:repeat="owner owners" tal:content="python: owner['name'] + ' ' + owner['firstname']"/>
+                                                <div tal:repeat="owner owners" tal:content="python: owner['name'] + ' ' + owner['firstname'] + ' ' + owner['street'] + ' ' + owner['number'] + ' ' + owner['zipcode'] + ' ' + owner['city']"/>
                                             </span>
                                         </td>
                                         <td>
@@ -205,7 +205,6 @@ metal:use-macro="here/main_template/macros/master">
                                                 <input type="hidden" name="puissance" value="#" tal:attributes="value python: parcel.puissance" />
                                                 <input type="hidden" name="partie" value="#" tal:attributes="value partie" />
                                                 <input type="hidden" name="old" value="#" tal:attributes="value python: getattr(parcel, 'old', False)"/>
-                                                <input type="hidden" name="location" value="#" tal:attributes="value python: getattr(parcel, 'location', '')" />
                                                 <input type="image" src="icon_add.gif" name="add_parcel" alt="Add this parcel"/>
                                             </form>
                                         </td>
