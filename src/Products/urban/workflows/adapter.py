@@ -14,6 +14,7 @@ from Products.CMFCore.WorkflowCore import WorkflowException
 
 from Products.urban.interfaces import ICODT_UniqueLicence
 from Products.urban.interfaces import IEnvironmentBase
+from Products.urban.interfaces import IIntegratedLicence
 from Products.urban.interfaces import IUniqueLicence
 
 from zope.interface import implements
@@ -44,7 +45,7 @@ class LocalRoleAdapter(object):
         self.licence = self.context
 
     def get_allowed_groups(self, licence):
-        if IUniqueLicence.providedBy(licence) or ICODT_UniqueLicence.providedBy(licence):
+        if IUniqueLicence.providedBy(licence) or ICODT_UniqueLicence.providedBy(licence) or IIntegratedLicence.providedBy(licence):
             return 'urban_and_environment'
         elif IEnvironmentBase.providedBy(licence):
             return 'environment_only'
