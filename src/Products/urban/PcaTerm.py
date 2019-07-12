@@ -142,9 +142,10 @@ class PcaTerm(BaseContent, UrbanConfigurationValue, BrowserDefaultMixin):
         date = plone.toLocalizedTime(self.getDecreeDate()).encode('utf8')
         decree_type = self.displayValue(self.Vocabulary('decreeType')[0],
                 self.getDecreeType()).encode('utf8')
-        result = "%s (%s - %s - %s)" % (
+        title = "%s (%s - %s - %s)" % (
             label, number, date, decree_type)
-        return result
+        self.setTitle(title)
+        self.reindexObject(idxs=('Title', 'sortable_title', ))
 
 
 
