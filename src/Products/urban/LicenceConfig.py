@@ -264,6 +264,7 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
             'urban_environment': '(environnement) ',
             'urban_peb': '(peb) ',
             'urban_patrimony': '(patrimoine) ',
+            'urban_inspection': '(inspection) ',
         }
         if not getLicenceSchema(self.getLicencePortalType()):
             return DisplayList()
