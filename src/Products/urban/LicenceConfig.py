@@ -439,6 +439,7 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
             'urban_environment': '(environnement) ',
             'urban_description': '',
             'urban_patrimony': '(patrimoine) ',
+            'urban_inspection': '(inspection) ',
         }
         available_fields = [field for field in licence_schema.fields() if field.getType() == 'Products.Archetypes.Field.TextField' and field.getName() != 'rights']
         vocabulary_fields = [
