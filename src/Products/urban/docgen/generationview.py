@@ -36,7 +36,7 @@ class UrbanDocGenerationView(PersistentDocumentGenerationView):
             output_format = output_formats[0]
         return output_format
 
-    def get_base_generation_context(self, helper_view, pod_template):
+    def get_base_generation_context(self):
         """
         Backward compatibility with code used in old urban templates.
         """

@@ -469,7 +469,7 @@ class UrbanDocGenerationEventHelperView(UrbanDocGenerationHelperView):
     """
     def mailing_list(self, gen_context=None):
         mailing_list = []
-        if gen_context and gen_context.has_key('publipostage'):
+        if gen_context and 'publipostage' in gen_context:
             if gen_context['publipostage'] == 'demandeurs':
                 mailing_list = self.real_context.getParentNode().getApplicants()
             elif gen_context['publipostage'] == 'architectes':
@@ -1089,6 +1089,7 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
         for opinion in opinions:
             descriptions.append(opinion.getLinkedOrganisationTerm().Description())
         return descriptions
+
 
 class EventDisplayProxyObject(ATDisplayProxyObject):
     """
