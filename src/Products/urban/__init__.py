@@ -81,6 +81,8 @@ from validators.validator import isNotDuplicatedReferenceValidator
 validation.register(isNotDuplicatedReferenceValidator('isNotDuplicatedReference'))
 from validators.validator import isReferenceValidator
 validation.register(isReferenceValidator('isReference'))
+from validators.validator import isValidInquiryEndDate
+validation.register(isValidInquiryEndDate('isValidInvestigationEnd'))
 ##/code-section custom-init-head
 
 import Products

@@ -30,6 +30,8 @@ from Products.CMFCore.utils import getToolByName
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.utils import setOptionalAttributes
 from collective.archetypes.select2.select2widget import Select2Widget
+from plone import api
+from DateTime import DateTime
 
 optional_fields = [
     'derogationDetails', 'investigationDetails', 'investigationReasons',
@@ -407,6 +409,34 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
             toreturn = toreturn + '%' + foldermaker.getAddressCSV()
         toreturn = toreturn + '[/CSV]'
         return toreturn
+
+    def get_suspension_delay(self):
+        inquiry_event = self.getLinkedUrbanEventInquiry()
+        if not inquiry_event:
+            return 0
+
+        start_date = inquiry_event.getInvestigationStart()
+        if not start_date:
+            return 0
+
+        portal_urban = api.portal.get_tool('portal_urban')
+        suspension_periods = portal_urban.getInquirySuspensionPeriods()
+        suspension_delay = 0
+        inquiry_duration = 15
+        if hasattr(self, 'getRoadAdaptation'):
+            if self.getRoadAdaptation() and self.getRoadAdaptation() != ['']:
+                inquiry_duration = 30
+        theorical_end_date = start_date + inquiry_duration
+        for suspension_period in suspension_periods:
+            suspension_start = DateTime(suspension_period['from'])
+            suspension_end = DateTime(suspension_period['to'])
+            if start_date < suspension_start and theorical_end_date > suspension_start:
+                suspension_delay = suspension_end - suspension_start
+                return int(suspension_delay)
+            elif start_date >= suspension_start and start_date < suspension_end + 1:
+                suspension_delay = suspension_end - start_date + 1
+                return suspension_delay
+        return suspension_delay
 
 
 registerType(Inquiry, PROJECTNAME)
