@@ -430,7 +430,7 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
         for suspension_period in suspension_periods:
             suspension_start = DateTime(suspension_period['from'])
             suspension_end = DateTime(suspension_period['to'])
-            if start_date < suspension_start and theorical_end_date > suspension_start:
+            if start_date < suspension_start and theorical_end_date >= suspension_start:
                 suspension_delay = suspension_end - suspension_start
                 return int(suspension_delay)
             elif start_date >= suspension_start and start_date < suspension_end + 1:
