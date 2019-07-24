@@ -2,6 +2,8 @@
 
 from imio.schedule.content.delay import BaseCalculationDelay
 
+from Products.urban.interfaces import IInquiry
+
 
 class AnnoncedDelay(BaseCalculationDelay):
     """
@@ -11,7 +13,13 @@ class AnnoncedDelay(BaseCalculationDelay):
     def calculate_delay(self):
         delay = self.task_container.getAnnoncedDelay()
         if delay.endswith('j'):
-            return int(delay[:-1])
+            delay = int(delay[:-1])
+            delay += self.inquiry_suspension_delay()
+        return delay
+
+    def inquiry_suspension_delay(self):
+        if IInquiry.providedBy(self.task_container):
+            return self.task_container.get_suspension_delay()
         return 0
 
 
@@ -32,6 +40,7 @@ class UniqueLicenceAnnoncedDelay(BaseCalculationDelay):
             if 'class_2' in licence.getProcedureChoice():
                 delay = delay - 20
 
+        delay += self.inquiry_suspension_delay()
         return delay
 
 
@@ -55,4 +64,5 @@ class UniqueLicenceNotificationDelay(BaseCalculationDelay):
                 delay = int(delay[:-1])
             else:
                 delay = 0
+        delay += self.inquiry_suspension_delay()
         return delay
