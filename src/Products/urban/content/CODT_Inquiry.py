@@ -244,15 +244,11 @@ class CODT_Inquiry(BaseContent, Inquiry, BrowserDefaultMixin):
         inqs = [inq for inq in self._get_inquiry_objs(all_=True) if 'inquiry' in inq.getInquiry_type()]
         return inqs
 
-    def _get_inquiry_objs(self, all_=False):
+    def _get_inquiry_objs(self, all_=False, portal_type='CODT_Inquiry'):
         """
         Returns the existing inquiries or announcements
         """
-        all_inquiries = []
-        other_inquiries = self.objectValues('CODT_Inquiry')
-        if all_ or other_inquiries:
-            all_inquiries.append(self)
-        all_inquiries.extend(list(other_inquiries))
+        all_inquiries = super(CODT_Inquiry, self)._get_inquiry_objs(all_=all_, portal_type=portal_type)
         return all_inquiries
 
     security.declarePublic('getAnnouncements')

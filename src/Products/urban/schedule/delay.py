@@ -2,6 +2,7 @@
 
 from imio.schedule.content.delay import BaseCalculationDelay
 
+from Products.urban.interfaces import ICODT_Inquiry
 from Products.urban.interfaces import IInquiry
 
 
@@ -18,9 +19,15 @@ class AnnoncedDelay(BaseCalculationDelay):
         return delay
 
     def inquiry_suspension_delay(self):
-        if IInquiry.providedBy(self.task_container):
-            return self.task_container.get_suspension_delay()
-        return 0
+        licence = self.task_container
+        delay = 0
+        if IInquiry.providedBy(licence):
+            for inquiry in licence.getAllInquiries():
+                delay += inquiry.get_suspension_delay()
+        if ICODT_Inquiry.providedBy(licence):
+            for announcement in licence.getAllAnnouncements():
+                delay += announcement.get_suspension_delay()
+        return delay
 
 
 class UniqueLicenceAnnoncedDelay(BaseCalculationDelay):
