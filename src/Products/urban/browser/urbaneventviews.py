@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from Acquisition import aq_inner
+from DateTime import DateTime
 from Products.urban import utils
 from Products.Five import BrowserView
 from Products.urban import UrbanMessage as _
@@ -313,6 +314,32 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
                 surname=claimant_arg['name2'],
             )
 
+    def check_dates_for_suspension(self):
+        inquiry_event = self.context
+        start_date = inquiry_event.getInvestigationStart()
+        end_date = inquiry_event.getInvestigationEnd()
+        if not start_date or not end_date:
+            return True, '', ''
+
+        licence = inquiry_event.aq_parent
+        portal_urban = api.portal.get_tool('portal_urban')
+        suspension_periods = portal_urban.getInquirySuspensionPeriods()
+        suspension_delay = 0
+        inquiry_duration = 15
+        if hasattr(licence, 'getRoadAdaptation'):
+            if licence.getRoadAdaptation() and licence.getRoadAdaptation() != ['']:
+                inquiry_duration = 30
+        theorical_end_date = start_date + inquiry_duration
+
+        for suspension_period in suspension_periods:
+            suspension_start = DateTime(suspension_period['from'])
+            suspension_end = DateTime(suspension_period['to'])
+            if start_date >= suspension_start and start_date < suspension_end + 1:
+                suspension_delay = suspension_end - start_date + 1
+                if end_date < theorical_end_date + suspension_delay:
+                    return False, suspension_period['from'], suspension_period['to']
+        return True, '', ''
+
 
 class UrbanEventAnnouncementView(UrbanEventInquiryBaseView):
     """
@@ -325,6 +352,15 @@ class UrbanEventAnnouncementView(UrbanEventInquiryBaseView):
         self.linkedInquiry = self.context.getLinkedInquiry()
         if not self.linkedInquiry:
             plone_utils.addPortalMessage(_('This UrbanEventInquiry is not linked to an existing Inquiry !  Define a new inquiry on the licence !'), type="error")
+        suspension_check, suspension_start, suspension_end = self.check_dates_for_suspension()
+        if not suspension_check:
+            plone_utils.addPortalMessage(
+                _(
+                    'Suspension period from to: please check the end date',
+                    mapping={"from": suspension_start, "to": suspension_end}
+                ),
+                type="warning"
+            )
         # disable portlets
         self.request.set('disable_plone.rightcolumn', 1)
         self.request.set('disable_plone.leftcolumn', 1)
@@ -354,6 +390,15 @@ class UrbanEventInquiryView(UrbanEventInquiryBaseView):
             plone_utils.addPortalMessage(_('There are parcel owners without any address found! Desactivate them!'), type="warning")
         if self.is_planned_inquiry:
             plone_utils.addPortalMessage(_('The parcel radius search will be ready tomorrow!'), type="warning")
+        suspension_check, suspension_start, suspension_end = self.check_dates_for_suspension()
+        if not suspension_check:
+            plone_utils.addPortalMessage(
+                _(
+                    'Suspension period from to: please check the end date',
+                    mapping={"from": suspension_start, "to": suspension_end}
+                ),
+                type="warning"
+            )
         # disable portlets
         self.request.set('disable_plone.rightcolumn', 1)
         self.request.set('disable_plone.leftcolumn', 1)

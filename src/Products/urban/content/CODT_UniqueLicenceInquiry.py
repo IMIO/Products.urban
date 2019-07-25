@@ -79,15 +79,11 @@ class CODT_UniqueLicenceInquiry(BaseContent, CODT_Inquiry, BrowserDefaultMixin):
         )
         return DisplayList(vocabulary)
 
-    def _get_inquiry_objs(self, all_=False):
+    def _get_inquiry_objs(self, all_=False, portal_type='CODT_UniqueLicenceInquiry'):
         """
         Returns the existing inquiries or announcements
         """
-        all_inquiries = []
-        other_inquiries = self.objectValues('CODT_UniqueLicenceInquiry')
-        if all_ or other_inquiries:
-            all_inquiries.append(self)
-        all_inquiries.extend(list(other_inquiries))
+        all_inquiries = super(CODT_UniqueLicenceInquiry, self)._get_inquiry_objs(all_=all_, portal_type=portal_type)
         return all_inquiries
 
 registerType(CODT_UniqueLicenceInquiry, PROJECTNAME)

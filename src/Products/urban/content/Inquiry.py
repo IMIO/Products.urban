@@ -27,6 +27,7 @@ from Products.urban.config import *
 from zope.i18n import translate
 from OFS.ObjectManager import BeforeDeleteException
 from Products.CMFCore.utils import getToolByName
+from Products.urban.interfaces import IGenericLicence
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.utils import setOptionalAttributes
 from collective.archetypes.select2.select2widget import Select2Widget
@@ -282,12 +283,12 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
         """
         return self._get_inquiry_objs(all_=True)
 
-    def _get_inquiry_objs(self, all_=False):
+    def _get_inquiry_objs(self, all_=False, portal_type='Inquiry'):
         """
         Returns the existing inquiries or announcements
         """
         all_inquiries = []
-        other_inquiries = self.objectValues('Inquiry')
+        other_inquiries = self.objectValues(portal_type)
         if all_ or other_inquiries:
             all_inquiries.append(self)
         all_inquiries.extend(list(other_inquiries))
@@ -420,13 +421,15 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
             return 0
 
         portal_urban = api.portal.get_tool('portal_urban')
+        licence = IGenericLicence.providedBy(self) and self or self.aq_parent
         suspension_periods = portal_urban.getInquirySuspensionPeriods()
         suspension_delay = 0
         inquiry_duration = 15
-        if hasattr(self, 'getRoadAdaptation'):
+        if hasattr(licence, 'getRoadAdaptation'):
             if self.getRoadAdaptation() and self.getRoadAdaptation() != ['']:
                 inquiry_duration = 30
         theorical_end_date = start_date + inquiry_duration
+
         for suspension_period in suspension_periods:
             suspension_start = DateTime(suspension_period['from'])
             suspension_end = DateTime(suspension_period['to'])
@@ -436,6 +439,7 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
             elif start_date >= suspension_start and start_date < suspension_end + 1:
                 suspension_delay = suspension_end - start_date + 1
                 return suspension_delay
+
         return suspension_delay
 
 
