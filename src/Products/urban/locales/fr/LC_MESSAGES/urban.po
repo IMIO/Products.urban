@@ -696,7 +696,7 @@ msgstr "Valider"
 
 #: ../browser/urbaneventviews.py:357
 msgid "Suspension period from to: please check the end date"
-msgstr "Période de suspension du ${from} au ${to}: VÉRIFIEZ LA DATE DE FIN."
+msgstr "Période de suspension du ${from} au ${to}: CORRIGEZ LA DATE DE FIN DE PUBLICITE."
 
 #: ../browser/urbaneventviews.py:390
 msgid "Suspension period from {} to {}: please check the end date"
