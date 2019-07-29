@@ -335,7 +335,7 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
             suspension_start = DateTime(suspension_period['from'])
             suspension_end = DateTime(suspension_period['to'])
             if start_date >= suspension_start and start_date < suspension_end + 1:
-                suspension_delay = suspension_end - start_date + 1
+                suspension_delay = suspension_end - start_date
                 if end_date < theorical_end_date + suspension_delay:
                     return False, suspension_period['from'], suspension_period['to']
         return True, '', ''
