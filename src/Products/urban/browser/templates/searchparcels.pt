@@ -21,6 +21,7 @@ metal:use-macro="here/main_template/macros/master">
                         puissance python: request.get('puissance', '').upper();
                         partie request/partie | nothing;
                         location request/location | nothing;
+                        street_number request/street_number | nothing;
                         parcel_owner request/parcel_owner | nothing;
                         divisions view/divisions;
                         prca request/prca | nothing;
@@ -100,11 +101,14 @@ metal:use-macro="here/main_template/macros/master">
                         <table style="margin-bottom: 0em;">
                                 <tr>
                                 <td width="390px" valign="top">
-                                        <table width=100% class="listing">
+                                <table width=100% class="listing">
                                         <thead>
                                                 <tr>
                                                 <th>
                                                         <strong i18n:translate="urban_search_parcel_by_location">Location</strong>
+                                                </th>
+                                                <th>
+                                                        <strong i18n:translate="urban_search_parcel_by_street_number">n°</strong>
                                                 </th>
                                                 </tr>
                                         </thead>
@@ -113,6 +117,10 @@ metal:use-macro="here/main_template/macros/master">
                                                 <td>
                                                         <input type="text" id="location" name="location"
                                                                tal:attributes="value location; disabled python: request.get('browse_old_parcels') and 'disabled' or ''" />
+                                                </td>
+                                                <td>
+                                                        <input type="text" id="street_number" name="street_number"
+                                                               tal:attributes="value street_number; disabled python: request.get('browse_old_parcels') and 'disabled' or ''" />
                                                 </td>
                                                 </tr>
                                         </tbody>

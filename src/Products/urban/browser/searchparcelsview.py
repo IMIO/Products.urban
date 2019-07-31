@@ -87,6 +87,7 @@ class SearchParcelsView(BrowserView):
         arguments = self.extract_parcel_reference_criterions(request)
         if not request.get('browse_old_parcels', False):
             arguments['location'] = request.get('location', '') or IGNORE
+            arguments['street_number'] = request.get('street_number', '') or IGNORE
             arguments['parcel_owner'] = request.get('parcel_owner', '') or IGNORE
 
         return arguments
