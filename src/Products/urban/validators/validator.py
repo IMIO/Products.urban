@@ -203,7 +203,7 @@ class isReferenceValidator(object):
             return 1
         if len(catalog(getReference=value)) > 0:
             return 1
-        return translate(_('error_reference', default=u"The reference does not exist"))
+        return translate(_('error_reference_does_not_exist', default=u"The reference does not exist"))
 
 
 class isValidInquiryEndDate(object):
