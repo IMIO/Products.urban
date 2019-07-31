@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from Products.urban.browser.licence.licenceview import LicenceView
+from Products.urban.browser.table.urbantable import PlaintiffTable
 from Products.CMFPlone import PloneMessageFactory as _
 
 from plone import api
@@ -35,3 +36,9 @@ class InspectionView(LicenceView):
 
     def getInspectionFields(self, exclude=[]):
         return self.getSchemataFields('urban_inspection', exclude)
+
+    def renderPlaintiffListing(self):
+        if not self.context.getPlaintiffs():
+            return ''
+        contacttable = PlaintiffTable(self.context, self.request)
+        return self.renderListing(contacttable)

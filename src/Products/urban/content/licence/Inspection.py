@@ -154,8 +154,7 @@ class Inspection(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
             if bound_licence:
                 return bound_licence.getApplicants()
 
-        applicants = self.getCorporations()
-        applicants.extend(super(Inspection, self).getApplicants())
+        applicants = super(Inspection, self).getApplicants()
         return applicants
 
     security.declarePublic('get_applicants_history')
@@ -166,8 +165,7 @@ class Inspection(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
             if bound_licence:
                 return bound_licence.get_applicants_history()
 
-        applicants = self.get_corporations_history()
-        applicants.extend(super(Inspection, self).get_applicants_history())
+        applicants = super(Inspection, self).get_applicants_history()
         return applicants
 
     security.declarePublic('getCorporations')
@@ -179,7 +177,8 @@ class Inspection(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
                 return bound_licence.getCorporations()
 
         corporations = [corp for corp in self.objectValues('Corporation')
-                        if api.content.get_state(corp) == 'enabled']
+                        if corp.portal_type == 'Corporation'
+                        and api.content.get_state(corp) == 'enabled']
         return corporations
 
     security.declarePublic('get_corporations_history')
@@ -191,10 +190,27 @@ class Inspection(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
                 return bound_licence.get_corporations_history()
 
         return [corp for corp in self.objectValues('Corporation')
-                if api.content.get_state(corp) == 'disabled']
+                if corp.portal_type == 'Corporation'
+                and api.content.get_state(corp) == 'disabled']
 
-    def getLastInspectionReport(self):
-        return self.getLastEvent(interfaces.IInspectionReportEvent)
+    security.declarePublic('getApplicants')
+
+    def getPlaintiffs(self):
+        """
+           Return the list of plaintiffs for the Licence
+        """
+        plaintiffs = [app for app in self.objectValues('Applicant')
+                      if app.portal_type == 'Plaintiff']
+        corporations = self.getCorporationPlaintiffs()
+        plaintiffs.extend(corporations)
+        return plaintiffs
+
+    security.declarePublic('getCorporationPlaintiffs')
+
+    def getCorporationPlaintiffs(self):
+        corporations = [corp for corp in self.objectValues('Corporation')
+                        if corp.portal_type == 'CorporationPlaintiff']
+        return corporations
 
 
 registerType(Inspection, PROJECTNAME)

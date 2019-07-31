@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2019-07-25 11:45+0000\n"
+"POT-Creation-Date: 2019-07-31 12:06+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -280,10 +280,6 @@ msgstr "Agent traitant"
 
 msgid "Found folder(s)"
 msgstr "Dossier(s) trouvé(s)"
-
-#: ../browser/templates/searchparcels.pt:175
-msgid "Found parcel(s)"
-msgstr "Parcelle(s) trouvée(s)"
 
 #: ../profiles.zcml:42
 msgid "Full config profile for urban."
@@ -647,12 +643,8 @@ msgstr "Configuration d'échéancier"
 msgid "Scheduled licences"
 msgstr "Échéancier par procédure"
 
-#: ../browser/templates/searchparcels.pt:164
-msgid "Search"
-msgstr "Rechercher"
-
 # PortionOutSearch
-#: ../browser/templates/searchparcels.pt:41
+#: ../browser/templates/searchparcels.pt:42
 msgid "Search parcel(s)"
 msgstr "Recherche de parcelles"
 
@@ -694,13 +686,9 @@ msgstr ""
 msgid "Submit"
 msgstr "Valider"
 
-#: ../browser/urbaneventviews.py:357
+#: ../browser/urbaneventviews.py:358
 msgid "Suspension period from to: please check the end date"
 msgstr "Période de suspension du ${from} au ${to}: CORRIGEZ LA DATE DE FIN DE PUBLICITE."
-
-#: ../browser/urbaneventviews.py:390
-msgid "Suspension period from {} to {}: please check the end date"
-msgstr ""
 
 #: ../testing.zcml:15
 msgid "Tests Extension profile for urban."
@@ -710,11 +698,11 @@ msgstr ""
 msgid "The field does not exist !!!"
 msgstr ""
 
-#: ../browser/urbaneventviews.py:386
+#: ../browser/urbaneventviews.py:392
 msgid "The parcel radius search will be ready tomorrow!"
 msgstr "La recherche des propriétaires concernés par le rayon de cette enquête a bien été enregistrée et sera éxécutée cette nuit."
 
-#: ../browser/urbaneventviews.py:384
+#: ../browser/urbaneventviews.py:390
 msgid "There are parcel owners without any address found! Desactivate them!"
 msgstr ""
 
@@ -854,24 +842,32 @@ msgstr "Ajouter une adresse"
 msgid "add_a_claimant"
 msgstr "Ajouter un réclamant"
 
-#: ../browser/licence/templates/licencemacros.pt:126
+#: ../browser/licence/templates/licencemacros.pt:113
 msgid "add_a_corporation"
 msgstr "Ajouter un demandeur (p. morale)"
+
+#: ../browser/licence/templates/licencemacros.pt:149
+msgid "add_a_corporation_plaintiff"
+msgstr "Ajouter un plaignant (p.morale)"
+
+#: ../browser/licence/templates/licencemacros.pt:86
+msgid "add_a_corporationproprietary"
+msgstr "Ajouter un propriétaire (p. morale)"
 
 msgid "add_a_lot"
 msgstr "Ajouter un lot"
 
-#: ../browser/licence/templates/licencemacros.pt:118
+#: ../browser/licence/templates/licencemacros.pt:105
 msgid "add_a_physical_applicant"
 msgstr "Ajouter un demandeur"
 
-#: ../browser/licence/templates/licencemacros.pt:99
+#: ../browser/licence/templates/licencemacros.pt:141
+msgid "add_a_physical_plaintiff"
+msgstr "Ajouter un plaignant"
+
+#: ../browser/licence/templates/licencemacros.pt:78
 msgid "add_a_proprietary"
 msgstr "Ajouter un propriétaire"
-
-#: ../browser/licence/templates/licencemacros.pt:77
-msgid "add_an_applicant"
-msgstr "Ajouter un demandeur"
 
 # urbanevent_view
 #: ../browser/licence/templates/licencetabsmacros.pt:440
@@ -944,12 +940,12 @@ msgstr "réponse au plaignant"
 
 # buildlicence_view
 #. Default: "Applicant(s)"
-#: ../browser/licence/templates/licencemacros.pt:63
+#: ../browser/licence/templates/licencemacros.pt:92
 msgid "applicants"
 msgstr "Demandeur(s)"
 
 #. Default: "Applicant(s) history"
-#: ../browser/licence/templates/licencemacros.pt:133
+#: ../browser/licence/templates/licencemacros.pt:120
 msgid "applicants_history"
 msgstr "Demandeurs inactifs"
 
@@ -983,6 +979,11 @@ msgstr "Autorité compétente"
 
 msgid "basement_folder_title"
 msgstr "Sous-sol"
+
+#. Default: "Bound licence applicant(s)"
+#: ../browser/licence/templates/licencemacros.pt:156
+msgid "bound_licence_applicants"
+msgstr "Demandeur(s) du permis"
 
 msgid "buildings_layer_title"
 msgstr "Couche bâtiments"
@@ -1345,6 +1346,11 @@ msgstr "Le radical doit être un nombre (ex:42) "
 msgid "error_reference"
 msgstr "La référence existe déjà sur un autre permis"
 
+#. Default: "The reference does not exist"
+#: ../validators/validator.py:206
+msgid "error_reference_does_not_exist"
+msgstr ""
+
 #. Default: "This reference does not match the expected format of {}"
 #: ../validators/validator.py:82
 msgid "error_reference_format"
@@ -1620,12 +1626,12 @@ msgid "groundstatestatus_folder_title"
 msgstr "Repris à la banque de données d'état des sols"
 
 #. Default: "You can not search for parcels for now because there was a problem. Please contact your system administrator and give him the red error message here above"
-#: ../browser/templates/searchparcels.pt:42
+#: ../browser/templates/searchparcels.pt:43
 msgid "help_search_connection_problem"
 msgstr "Vous ne pouvez pas effectuer de recherche pour l'instant car une erreur s'est produite.  Contactez votre aministrateur système et donnez lui le message d'erreur affiché en rouge ci-dessus."
 
 #. Default: "Choose one of the following forms to search for parcels. You can cumulate criteria if you exactly know what you are looking for"
-#: ../browser/templates/searchparcels.pt:47
+#: ../browser/templates/searchparcels.pt:48
 msgid "help_search_parcels"
 msgstr "Choisissez une des 3 recherches ci-dessous.  Si vous savez exactement ce que vous cherchez, vous pouvez croiser les critères de recherche (encoder l'adresse et le nom du propriétaire par exemple)"
 
@@ -1775,6 +1781,9 @@ msgstr "Lotissements"
 
 msgid "label_colname_parcelrefs"
 msgstr "Référence cadastrale"
+
+msgid "label_colname_plaintiff_data"
+msgstr "Coordonnées du plaignant"
 
 msgid "label_colname_proprietary_data"
 msgstr "Coordonnées du propriétaire"
@@ -2172,6 +2181,11 @@ msgstr "Monsieur"
 msgid "pipelines_folder_title"
 msgstr "Canalisations"
 
+#. Default: "Plaintiff(s)"
+#: ../browser/licence/templates/licencemacros.pt:128
+msgid "plaintiffs"
+msgstr "Plaignant(s)"
+
 #: ../dashboard/vocabularies.py:36
 msgid "plone"
 msgstr ""
@@ -2199,7 +2213,7 @@ msgid "projectmeeting_urbanconfig_title"
 msgstr "Paramètres des réunions de projet"
 
 #. Default: "Proprietary(ies)"
-#: ../browser/licence/templates/licencemacros.pt:84
+#: ../browser/licence/templates/licencemacros.pt:63
 msgid "proprietaries"
 msgstr "Propriétaire(s)"
 
@@ -2303,7 +2317,7 @@ msgid "search-last-elements"
 msgstr "Derniers éléments"
 
 #: ../browser/templates/globalmacros.pt:33
-#: ../browser/templates/searchparcels.pt:29
+#: ../browser/templates/searchparcels.pt:30
 #: ../skins/urban_templates/lot_view.pt:26
 msgid "search_parcels"
 msgstr "Ajouter"
@@ -2496,11 +2510,6 @@ msgstr "Nombre de jour restant à partir duquel une alerte doit être indiquée 
 #: ../browser/licence/templates/licencetabsmacros.pt:64
 msgid "urban_bound_inspections"
 msgstr "Dossiers d'inspections liés"
-
-#. Default: "Browse old parcels (Only works with the parcel reference)"
-#: ../browser/templates/searchparcels.pt:160
-msgid "urban_browse_old_parcels"
-msgstr "Inclure les anciennes parcelles"
 
 #. Default: "Here above are data defined for the inquiry. If you want to change these informations, click on the name of the linked inquiry here above."
 #: ../browser/templates/urbaneventannouncementview.pt:57
@@ -2925,7 +2934,7 @@ msgid "urban_label_bestAddressKey"
 msgstr "Clé BestAddress"
 
 #. Default: "Bis"
-#: ../browser/templates/searchparcels.pt:81
+#: ../browser/templates/searchparcels.pt:82
 msgid "urban_label_bis"
 msgstr "Bis"
 
@@ -3289,7 +3298,7 @@ msgid "urban_label_divergenceDetails"
 msgstr "Détails concernant l'écart"
 
 #. Default: "Division"
-#: ../browser/templates/searchparcels.pt:62
+#: ../browser/templates/searchparcels.pt:63
 msgid "urban_label_division"
 msgstr "Division"
 
@@ -3420,7 +3429,7 @@ msgid "urban_label_exponent"
 msgstr "Exposant"
 
 #. Default: "Exposant"
-#: ../browser/templates/searchparcels.pt:85
+#: ../browser/templates/searchparcels.pt:86
 msgid "urban_label_exposant"
 msgstr "Exposant"
 
@@ -4174,7 +4183,7 @@ msgid "urban_label_parcelsLocations"
 msgstr "Adresse(s) du bien"
 
 #. Default: "Partie"
-#: ../browser/templates/searchparcels.pt:93
+#: ../browser/templates/searchparcels.pt:94
 msgid "urban_label_partie"
 msgstr "Partie"
 
@@ -4402,7 +4411,7 @@ msgid "urban_label_publicRoadModifications"
 msgstr "Modifications souhaitées au tracé et à l'équipement des voiries publiques"
 
 #. Default: "Puissance"
-#: ../browser/templates/searchparcels.pt:89
+#: ../browser/templates/searchparcels.pt:90
 msgid "urban_label_puissance"
 msgstr "Puissance"
 
@@ -4412,7 +4421,7 @@ msgid "urban_label_queryable"
 msgstr "Questionnable"
 
 #. Default: "Radical"
-#: ../browser/templates/searchparcels.pt:77
+#: ../browser/templates/searchparcels.pt:78
 msgid "urban_label_radical"
 msgstr "Radical"
 
@@ -4722,7 +4731,7 @@ msgid "urban_label_searchbyname_descr"
 msgstr "Entrez le nom, le prénom ou le numéro de registre national.  Vous pouvez utiliser le caractère '*' pour spécifier que vous cherchez sur une partie de mot"
 
 #. Default: "Section"
-#: ../browser/templates/searchparcels.pt:72
+#: ../browser/templates/searchparcels.pt:73
 msgid "urban_label_section"
 msgstr "Section"
 
@@ -5199,7 +5208,7 @@ msgid "urban_search_parameters"
 msgstr "Critères de la recherche"
 
 #. Default: "Cadastral reference"
-#: ../browser/templates/searchparcels.pt:56
+#: ../browser/templates/searchparcels.pt:57
 msgid "urban_search_parcel_by_cadastral_reference"
 msgstr "Référence cadastrale"
 
@@ -5208,18 +5217,16 @@ msgid "urban_search_parcel_by_folder_reference"
 msgstr "Référence du dossier"
 
 #. Default: "Location"
-#: ../browser/templates/searchparcels.pt:107
+#: ../browser/templates/searchparcels.pt:108
 msgid "urban_search_parcel_by_location"
-msgstr "Adresse"
+msgstr "Rue"
 
 #. Default: "Name"
 msgid "urban_search_parcel_by_name"
 msgstr "Nom"
 
-#. Default: "Proprietary"
-#: ../browser/templates/searchparcels.pt:127
-msgid "urban_search_parcel_by_proprietary"
-msgstr "Propriétaire"
+msgid "urban_search_parcel_by_street_number"
+msgstr "N° de police"
 
 msgid "urban_search_result"
 msgstr "Résultat de la recherche"
@@ -5341,6 +5348,11 @@ msgstr "Veuillez renseigner le ou les propriétaire(s)"
 #: ../browser/licence/codt_buildlicenceview.py:24
 msgid "warning_add_an_applicant"
 msgstr "Veuillez renseigner le ou les demandeur(s)"
+
+#. Default: "You must encode plaintiff(s)"
+#: ../browser/licence/templates/licencemacros.pt:131
+msgid "warning_add_an_plaintiff"
+msgstr ""
 
 #. Default: "!!!Warning, no deposit date found!!!"
 #: base.py

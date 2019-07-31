@@ -1,4 +1,4 @@
-## -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 
 from Acquisition import aq_inner
 
@@ -163,6 +163,13 @@ class ValuesForProprietariesListing(ValuesForUrbanListing):
     def getItems(self):
         proprietaries = self.context.getProprietaries()
         return proprietaries
+
+
+class ValuesForPlaintiffListing(ValuesForUrbanListing):
+    """  return contact values from the context """
+
+    def getItems(self):
+        return self.context.getPlaintiffs()
 
 
 class ValuesForClaimantsListing(ValuesForUrbanListing):

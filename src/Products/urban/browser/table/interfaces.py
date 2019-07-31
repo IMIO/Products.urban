@@ -82,6 +82,11 @@ class IProprietaryTable(IContactTable):
     """
 
 
+class IPlaintiffTable(IContactTable):
+    """
+    Marker interface for a table displaying plaintiffs
+    """
+
 class INotariesTable(IUrbanTable):
     """
     Marker interface for a table displaying notaries
