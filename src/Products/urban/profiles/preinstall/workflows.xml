@@ -168,7 +168,16 @@
 <type type_id="Contact">
   <bound-workflow workflow_id="" />
 </type>
+<type type_id="Plaintiff">
+  <bound-workflow workflow_id="activation_workflow" />
+</type>
 <type type_id="Corporation">
+  <bound-workflow workflow_id="activation_workflow" />
+</type>
+<type type_id="CorporationProprietary">
+  <bound-workflow workflow_id="activation_workflow" />
+</type>
+<type type_id="CorporationPlaintiff">
   <bound-workflow workflow_id="activation_workflow" />
 </type>
 <type type_id="EnvClassOne">
@@ -196,7 +205,7 @@
   <bound-workflow workflow_id="one_state_workflow" />
 </type>
 <type type_id="Proprietary">
-  <bound-workflow workflow_id="" />
+  <bound-workflow workflow_id="activation_workflow" />
 </type>
 <type type_id="Recipient">
   <bound-workflow workflow_id="" />

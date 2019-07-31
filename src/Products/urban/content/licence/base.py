@@ -88,8 +88,17 @@ class UrbanBase(object):
         """
            Return the list of proprietaries for the Licence
         """
-        proprietaries = [pro for pro in self.objectValues('Applicant') if pro.portal_type == 'Proprietary']
+        proprietaries = [pro for pro in self.objectValues('Applicant')
+                         if pro.portal_type == 'Proprietary']
+        corporations = self.getCorporationsProprietary()
+        proprietaries.extend(corporations)
         return proprietaries
+
+    security.declarePublic('getCorporationsProprietary')
+    def getCorporationsProprietary(self):
+        corporations = [corp for corp in self.objectValues('Corporation')
+                        if corp.portal_type == 'CorporationProprietary']
+        return corporations
 
     security.declarePublic('getApplicantsSignaletic')
     def getApplicantsSignaletic(self, withaddress=False, linebyline=False, remove_comma=False):

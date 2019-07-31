@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-07-25 11:45+0000\n"
+"POT-Creation-Date: 2019-07-31 12:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -277,10 +277,6 @@ msgid "FolderManager"
 msgstr ""
 
 msgid "Found folder(s)"
-msgstr ""
-
-#: ../browser/templates/searchparcels.pt:175
-msgid "Found parcel(s)"
 msgstr ""
 
 #: ../profiles.zcml:42
@@ -630,11 +626,7 @@ msgstr ""
 msgid "Scheduled licences"
 msgstr ""
 
-#: ../browser/templates/searchparcels.pt:164
-msgid "Search"
-msgstr ""
-
-#: ../browser/templates/searchparcels.pt:41
+#: ../browser/templates/searchparcels.pt:42
 msgid "Search parcel(s)"
 msgstr ""
 
@@ -676,12 +668,8 @@ msgstr ""
 msgid "Submit"
 msgstr ""
 
-#: ../browser/urbaneventviews.py:357
+#: ../browser/urbaneventviews.py:358
 msgid "Suspension period from to: please check the end date"
-msgstr ""
-
-#: ../browser/urbaneventviews.py:390
-msgid "Suspension period from {} to {}: please check the end date"
 msgstr ""
 
 #: ../testing.zcml:15
@@ -692,11 +680,11 @@ msgstr ""
 msgid "The field does not exist !!!"
 msgstr ""
 
-#: ../browser/urbaneventviews.py:386
+#: ../browser/urbaneventviews.py:392
 msgid "The parcel radius search will be ready tomorrow!"
 msgstr ""
 
-#: ../browser/urbaneventviews.py:384
+#: ../browser/urbaneventviews.py:390
 msgid "There are parcel owners without any address found! Desactivate them!"
 msgstr ""
 
@@ -836,23 +824,31 @@ msgstr ""
 msgid "add_a_claimant"
 msgstr ""
 
-#: ../browser/licence/templates/licencemacros.pt:126
+#: ../browser/licence/templates/licencemacros.pt:113
 msgid "add_a_corporation"
+msgstr ""
+
+#: ../browser/licence/templates/licencemacros.pt:149
+msgid "add_a_corporation_plaintiff"
+msgstr ""
+
+#: ../browser/licence/templates/licencemacros.pt:86
+msgid "add_a_corporationproprietary"
 msgstr ""
 
 msgid "add_a_lot"
 msgstr ""
 
-#: ../browser/licence/templates/licencemacros.pt:118
+#: ../browser/licence/templates/licencemacros.pt:105
 msgid "add_a_physical_applicant"
 msgstr ""
 
-#: ../browser/licence/templates/licencemacros.pt:99
-msgid "add_a_proprietary"
+#: ../browser/licence/templates/licencemacros.pt:141
+msgid "add_a_physical_plaintiff"
 msgstr ""
 
-#: ../browser/licence/templates/licencemacros.pt:77
-msgid "add_an_applicant"
+#: ../browser/licence/templates/licencemacros.pt:78
+msgid "add_a_proprietary"
 msgstr ""
 
 #: ../browser/licence/templates/licencetabsmacros.pt:440
@@ -924,12 +920,12 @@ msgid "answer_to_plaintif"
 msgstr ""
 
 #. Default: "Applicant(s)"
-#: ../browser/licence/templates/licencemacros.pt:63
+#: ../browser/licence/templates/licencemacros.pt:92
 msgid "applicants"
 msgstr ""
 
 #. Default: "Applicant(s) history"
-#: ../browser/licence/templates/licencemacros.pt:133
+#: ../browser/licence/templates/licencemacros.pt:120
 msgid "applicants_history"
 msgstr ""
 
@@ -962,6 +958,11 @@ msgid "authority_folder_title"
 msgstr ""
 
 msgid "basement_folder_title"
+msgstr ""
+
+#. Default: "Bound licence applicant(s)"
+#: ../browser/licence/templates/licencemacros.pt:156
+msgid "bound_licence_applicants"
 msgstr ""
 
 msgid "buildings_layer_title"
@@ -1322,6 +1323,11 @@ msgstr ""
 msgid "error_reference"
 msgstr ""
 
+#. Default: "The reference does not exist"
+#: ../validators/validator.py:206
+msgid "error_reference_does_not_exist"
+msgstr ""
+
 #. Default: "This reference does not match the expected format of {}"
 #: ../validators/validator.py:82
 msgid "error_reference_format"
@@ -1588,12 +1594,12 @@ msgid "groundstatestatus_folder_title"
 msgstr ""
 
 #. Default: "You can not search for parcels for now because there was a problem. Please contact your system administrator and give him the red error message here above"
-#: ../browser/templates/searchparcels.pt:42
+#: ../browser/templates/searchparcels.pt:43
 msgid "help_search_connection_problem"
 msgstr ""
 
 #. Default: "Choose one of the following forms to search for parcels. You can cumulate criteria if you exactly know what you are looking for"
-#: ../browser/templates/searchparcels.pt:47
+#: ../browser/templates/searchparcels.pt:48
 msgid "help_search_parcels"
 msgstr ""
 
@@ -1742,6 +1748,9 @@ msgid "label_colname_parcellingterm_data"
 msgstr ""
 
 msgid "label_colname_parcelrefs"
+msgstr ""
+
+msgid "label_colname_plaintiff_data"
 msgstr ""
 
 msgid "label_colname_proprietary_data"
@@ -2139,6 +2148,11 @@ msgstr ""
 msgid "pipelines_folder_title"
 msgstr ""
 
+#. Default: "Plaintiff(s)"
+#: ../browser/licence/templates/licencemacros.pt:128
+msgid "plaintiffs"
+msgstr ""
+
 #: ../dashboard/vocabularies.py:36
 msgid "plone"
 msgstr ""
@@ -2166,7 +2180,7 @@ msgid "projectmeeting_urbanconfig_title"
 msgstr ""
 
 #. Default: "Proprietary(ies)"
-#: ../browser/licence/templates/licencemacros.pt:84
+#: ../browser/licence/templates/licencemacros.pt:63
 msgid "proprietaries"
 msgstr ""
 
@@ -2270,7 +2284,7 @@ msgid "search-last-elements"
 msgstr ""
 
 #: ../browser/templates/globalmacros.pt:33
-#: ../browser/templates/searchparcels.pt:29
+#: ../browser/templates/searchparcels.pt:30
 #: ../skins/urban_templates/lot_view.pt:26
 msgid "search_parcels"
 msgstr ""
@@ -2461,11 +2475,6 @@ msgstr ""
 #. Default: "Bound inspections"
 #: ../browser/licence/templates/licencetabsmacros.pt:64
 msgid "urban_bound_inspections"
-msgstr ""
-
-#. Default: "Browse old parcels (Only works with the parcel reference)"
-#: ../browser/templates/searchparcels.pt:160
-msgid "urban_browse_old_parcels"
 msgstr ""
 
 #. Default: "Here above are data defined for the inquiry. If you want to change these informations, click on the name of the linked inquiry here above."
@@ -2892,7 +2901,7 @@ msgid "urban_label_bestAddressKey"
 msgstr ""
 
 #. Default: "Bis"
-#: ../browser/templates/searchparcels.pt:81
+#: ../browser/templates/searchparcels.pt:82
 msgid "urban_label_bis"
 msgstr ""
 
@@ -3256,7 +3265,7 @@ msgid "urban_label_divergenceDetails"
 msgstr ""
 
 #. Default: "Division"
-#: ../browser/templates/searchparcels.pt:62
+#: ../browser/templates/searchparcels.pt:63
 msgid "urban_label_division"
 msgstr ""
 
@@ -3385,7 +3394,7 @@ msgid "urban_label_exponent"
 msgstr ""
 
 #. Default: "Exposant"
-#: ../browser/templates/searchparcels.pt:85
+#: ../browser/templates/searchparcels.pt:86
 msgid "urban_label_exposant"
 msgstr ""
 
@@ -4139,7 +4148,7 @@ msgid "urban_label_parcelsLocations"
 msgstr ""
 
 #. Default: "Partie"
-#: ../browser/templates/searchparcels.pt:93
+#: ../browser/templates/searchparcels.pt:94
 msgid "urban_label_partie"
 msgstr ""
 
@@ -4367,7 +4376,7 @@ msgid "urban_label_publicRoadModifications"
 msgstr ""
 
 #. Default: "Puissance"
-#: ../browser/templates/searchparcels.pt:89
+#: ../browser/templates/searchparcels.pt:90
 msgid "urban_label_puissance"
 msgstr ""
 
@@ -4377,7 +4386,7 @@ msgid "urban_label_queryable"
 msgstr ""
 
 #. Default: "Radical"
-#: ../browser/templates/searchparcels.pt:77
+#: ../browser/templates/searchparcels.pt:78
 msgid "urban_label_radical"
 msgstr ""
 
@@ -4687,7 +4696,7 @@ msgid "urban_label_searchbyname_descr"
 msgstr ""
 
 #. Default: "Section"
-#: ../browser/templates/searchparcels.pt:72
+#: ../browser/templates/searchparcels.pt:73
 msgid "urban_label_section"
 msgstr ""
 
@@ -5163,7 +5172,7 @@ msgid "urban_search_parameters"
 msgstr ""
 
 #. Default: "Cadastral reference"
-#: ../browser/templates/searchparcels.pt:56
+#: ../browser/templates/searchparcels.pt:57
 msgid "urban_search_parcel_by_cadastral_reference"
 msgstr ""
 
@@ -5172,7 +5181,7 @@ msgid "urban_search_parcel_by_folder_reference"
 msgstr ""
 
 #. Default: "Location"
-#: ../browser/templates/searchparcels.pt:107
+#: ../browser/templates/searchparcels.pt:108
 msgid "urban_search_parcel_by_location"
 msgstr ""
 
@@ -5180,9 +5189,7 @@ msgstr ""
 msgid "urban_search_parcel_by_name"
 msgstr ""
 
-#. Default: "Proprietary"
-#: ../browser/templates/searchparcels.pt:127
-msgid "urban_search_parcel_by_proprietary"
+msgid "urban_search_parcel_by_street_number"
 msgstr ""
 
 msgid "urban_search_result"
@@ -5303,6 +5310,11 @@ msgstr ""
 #: ../browser/licence/buildlicenceview.py:24
 #: ../browser/licence/codt_buildlicenceview.py:24
 msgid "warning_add_an_applicant"
+msgstr ""
+
+#. Default: "You must encode plaintiff(s)"
+#: ../browser/licence/templates/licencemacros.pt:131
+msgid "warning_add_an_plaintiff"
 msgstr ""
 
 #. Default: "!!!Warning, no deposit date found!!!"

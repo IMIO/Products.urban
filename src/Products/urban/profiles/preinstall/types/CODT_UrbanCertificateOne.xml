@@ -14,6 +14,7 @@
  <property name="filter_content_types">True</property>
  <property name="allowed_content_types">
    <element value="Proprietary"/>
+   <element value="CorporationProprietary"/>
    <element value="PortionOut"/>
    <element value="UrbanEvent"/>
    <element value="UrbanEventCollege"/>

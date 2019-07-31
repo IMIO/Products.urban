@@ -776,6 +776,9 @@ msgstr ""
 msgid "label_colname_parcelrefs"
 msgstr ""
 
+msgid "label_colname_plaintiff_data"
+msgstr ""
+
 msgid "label_colname_proprietary_data"
 msgstr ""
 
@@ -2683,3 +2686,5 @@ msgstr ""
 msgid "urban_label_reportReceptionDate"
 msgstr ""
 
+msgid "urban_search_parcel_by_street_number"
+msgstr ""
