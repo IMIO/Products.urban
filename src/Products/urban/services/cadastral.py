@@ -112,8 +112,8 @@ class CadastreSession(SQLSession):
             return 'old_parcel'
         raise UnreferencedParcelError()
 
-    def query_parcels(self, division=IGNORE, section=IGNORE, radical=IGNORE, bis=IGNORE,
-                      exposant=IGNORE, puissance=IGNORE, location=IGNORE, parcel_owner=IGNORE):
+    def query_parcels(self, division=IGNORE, section=IGNORE, radical=IGNORE, bis=IGNORE, exposant=IGNORE,
+                      puissance=IGNORE, location=IGNORE, street_number=IGNORE, parcel_owner=IGNORE):
         """
         Return parcels partially matching any defined criterias.
         Any argument with the value IGNORE is ignored.
@@ -132,6 +132,9 @@ class CadastreSession(SQLSession):
                 )
             )
         if location is not IGNORE:
+            if street_number is not IGNORE:
+                parcels = self.tables.parcels
+                query = query.filter(parcels.number.ilike('%{}%'.format(street_number)))
             parcel_streets = self.tables.parcelsstreets
             query = query.filter(parcel_streets.street_situation.ilike('%{}%'.format(location)))
 
@@ -140,7 +143,7 @@ class CadastreSession(SQLSession):
         return parcels
 
     def query_old_parcels(self, division=IGNORE, section=IGNORE, radical=IGNORE, bis=IGNORE,
-                          exposant=IGNORE, puissance=IGNORE, location=IGNORE, parcel_owner=IGNORE):
+                          exposant=IGNORE, puissance=IGNORE):
         """
         Return parcels partially matching any defined criterias.
         Any argument with the value IGNORE is ignored.
@@ -148,20 +151,6 @@ class CadastreSession(SQLSession):
         query = self._base_query_old_parcels()
         # filter on parcel reference arguments
         query = self._filter(query, division, section, radical, bis, exposant, puissance, parcels_table=self.tables.old_parcels)
-
-        # filter on parcel location/proprietary name arguments
-        if parcel_owner is not IGNORE:
-            parcel_owners = self.tables.owners_imp
-            query = query.filter(
-                or_(
-                    parcel_owners.owner_name.ilike('%{}%'.format(parcel_owner)),
-                    parcel_owners.owner_firstname.ilike('%{}%'.format(parcel_owner)),
-                )
-            )
-        if location is not IGNORE:
-            parcel_streets = self.tables.parcelsstreets
-            query = query.filter(parcel_streets.street_situation.ilike('%{}%'.format(location)))
-
         records = query.distinct().all()
         parcels = self.merge_parcel_results(records)
         return parcels
