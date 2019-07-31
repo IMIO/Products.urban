@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2019-07-02 13:31+0000\n"
+"POT-Creation-Date: 2019-07-31 09:41+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -280,10 +280,6 @@ msgstr "Agent traitant"
 
 msgid "Found folder(s)"
 msgstr "Dossier(s) trouvé(s)"
-
-#: ../browser/templates/searchparcels.pt:175
-msgid "Found parcel(s)"
-msgstr "Parcelle(s) trouvée(s)"
 
 #: ../profiles.zcml:42
 msgid "Full config profile for urban."
@@ -647,12 +643,8 @@ msgstr "Configuration d'échéancier"
 msgid "Scheduled licences"
 msgstr "Échéancier par procédure"
 
-#: ../browser/templates/searchparcels.pt:164
-msgid "Search"
-msgstr "Rechercher"
-
 # PortionOutSearch
-#: ../browser/templates/searchparcels.pt:41
+#: ../browser/templates/searchparcels.pt:42
 msgid "Search parcel(s)"
 msgstr "Recherche de parcelles"
 
@@ -1607,12 +1599,12 @@ msgid "groundstatestatus_folder_title"
 msgstr "Repris à la banque de données d'état des sols"
 
 #. Default: "You can not search for parcels for now because there was a problem. Please contact your system administrator and give him the red error message here above"
-#: ../browser/templates/searchparcels.pt:42
+#: ../browser/templates/searchparcels.pt:43
 msgid "help_search_connection_problem"
 msgstr "Vous ne pouvez pas effectuer de recherche pour l'instant car une erreur s'est produite.  Contactez votre aministrateur système et donnez lui le message d'erreur affiché en rouge ci-dessus."
 
 #. Default: "Choose one of the following forms to search for parcels. You can cumulate criteria if you exactly know what you are looking for"
-#: ../browser/templates/searchparcels.pt:47
+#: ../browser/templates/searchparcels.pt:48
 msgid "help_search_parcels"
 msgstr "Choisissez une des 3 recherches ci-dessous.  Si vous savez exactement ce que vous cherchez, vous pouvez croiser les critères de recherche (encoder l'adresse et le nom du propriétaire par exemple)"
 
@@ -2290,7 +2282,7 @@ msgid "search-last-elements"
 msgstr "Derniers éléments"
 
 #: ../browser/templates/globalmacros.pt:33
-#: ../browser/templates/searchparcels.pt:29
+#: ../browser/templates/searchparcels.pt:30
 #: ../skins/urban_templates/lot_view.pt:26
 msgid "search_parcels"
 msgstr "Ajouter"
@@ -2483,11 +2475,6 @@ msgstr "Nombre de jour restant à partir duquel une alerte doit être indiquée 
 #: ../browser/licence/templates/licencetabsmacros.pt:64
 msgid "urban_bound_inspections"
 msgstr "Dossiers d'inspections liés"
-
-#. Default: "Browse old parcels (Only works with the parcel reference)"
-#: ../browser/templates/searchparcels.pt:160
-msgid "urban_browse_old_parcels"
-msgstr "Inclure les anciennes parcelles"
 
 #. Default: "Here above are data defined for the inquiry. If you want to change these informations, click on the name of the linked inquiry here above."
 #: ../browser/templates/urbaneventannouncementview.pt:57
@@ -2693,7 +2680,7 @@ msgid "urban_label_WMSUrl"
 msgstr "Adresse WMS (url)"
 
 #. Default: "Zip"
-#: ../content/licence/UrbanCertificateBase.py:242
+#: ../content/licence/UrbanCertificateBase.py:247
 msgid "urban_label_ZIP"
 msgstr "Zone d'initiative privilégiée"
 
@@ -2785,14 +2772,14 @@ msgstr ""
 #. Default: "Annonceddelay"
 #: ../content/licence/BaseBuildLicence.py:154
 #: ../content/licence/EnvironmentBase.py:189
-#: ../content/licence/UrbanCertificateBase.py:252
+#: ../content/licence/UrbanCertificateBase.py:257
 msgid "urban_label_annoncedDelay"
 msgstr "Délai annoncé"
 
 #. Default: "Annonceddelaydetails"
 #: ../content/licence/BaseBuildLicence.py:164
 #: ../content/licence/EnvironmentBase.py:199
-#: ../content/licence/UrbanCertificateBase.py:262
+#: ../content/licence/UrbanCertificateBase.py:267
 msgid "urban_label_annoncedDelayDetails"
 msgstr "Détails concernant le délai annoncé"
 
@@ -2823,7 +2810,7 @@ msgstr "Date d'approbation"
 
 #. Default: "Archeological_site"
 #: ../content/licence/CODT_BaseBuildLicence.py:263
-#: ../content/licence/UrbanCertificateBase.py:365
+#: ../content/licence/UrbanCertificateBase.py:370
 msgid "urban_label_archeological_site"
 msgstr "Site archéologique"
 
@@ -2892,7 +2879,7 @@ msgid "urban_label_baseLayer"
 msgstr "Couche de base (BaseLayer)?"
 
 #. Default: "Basement"
-#: ../content/licence/UrbanCertificateBase.py:223
+#: ../content/licence/UrbanCertificateBase.py:228
 msgid "urban_label_basement"
 msgstr "Sous-sol"
 
@@ -2912,7 +2899,7 @@ msgid "urban_label_bestAddressKey"
 msgstr "Clé BestAddress"
 
 #. Default: "Bis"
-#: ../browser/templates/searchparcels.pt:81
+#: ../browser/templates/searchparcels.pt:82
 msgid "urban_label_bis"
 msgstr "Bis"
 
@@ -3021,7 +3008,7 @@ msgstr "Classe"
 
 #. Default: "Classification_order_scope"
 #: ../content/licence/CODT_BaseBuildLicence.py:375
-#: ../content/licence/UrbanCertificateBase.py:337
+#: ../content/licence/UrbanCertificateBase.py:342
 msgid "urban_label_classification_order_scope"
 msgstr "Portée de l'arrêté de classement"
 
@@ -3061,7 +3048,7 @@ msgstr "Commentaires sur le projet de décision"
 
 #. Default: "Communal_inventory"
 #: ../content/licence/CODT_BaseBuildLicence.py:295
-#: ../content/licence/UrbanCertificateBase.py:397
+#: ../content/licence/UrbanCertificateBase.py:402
 msgid "urban_label_communal_inventory"
 msgstr "Inventaire communal"
 
@@ -3125,7 +3112,7 @@ msgid "urban_label_country"
 msgstr "Pays"
 
 #. Default: "Customspecificfeatures"
-#: ../content/licence/UrbanCertificateBase.py:189
+#: ../content/licence/UrbanCertificateBase.py:194
 msgid "urban_label_customSpecificFeatures"
 msgstr "Particularité(s) diverse(s) du bien"
 
@@ -3276,7 +3263,7 @@ msgid "urban_label_divergenceDetails"
 msgstr "Détails concernant l'écart"
 
 #. Default: "Division"
-#: ../browser/templates/searchparcels.pt:62
+#: ../browser/templates/searchparcels.pt:63
 msgid "urban_label_division"
 msgstr "Division"
 
@@ -3371,7 +3358,7 @@ msgstr "Catégorie du type d'événement"
 msgid "urban_label_exemptFDArticle"
 msgstr "Article 107"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:595
+#: ../content/licence/CODT_BaseBuildLicence.py:596
 msgid "urban_label_exemptFDArticleCODT"
 msgstr "Article D IV.15"
 
@@ -3407,7 +3394,7 @@ msgid "urban_label_exponent"
 msgstr "Exposant"
 
 #. Default: "Exposant"
-#: ../browser/templates/searchparcels.pt:85
+#: ../browser/templates/searchparcels.pt:86
 msgid "urban_label_exposant"
 msgstr "Exposant"
 
@@ -3529,7 +3516,7 @@ msgstr "Genre"
 
 #. Default: "General_disposition"
 #: ../content/licence/CODT_BaseBuildLicence.py:385
-#: ../content/licence/UrbanCertificateBase.py:347
+#: ../content/licence/UrbanCertificateBase.py:352
 msgid "urban_label_general_disposition"
 msgstr "Disposition générale"
 
@@ -3605,7 +3592,7 @@ msgstr "Etude d'incidence?"
 msgid "urban_label_implantation"
 msgstr "Implantation (art. 137)"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:596
+#: ../content/licence/CODT_BaseBuildLicence.py:597
 msgid "urban_label_implantationCODT"
 msgstr "Implantation (art D.IV.72)"
 
@@ -3635,12 +3622,12 @@ msgid "urban_label_inquiry_type"
 msgstr "Type de publicité"
 
 #. Default: "Inspectiondescription"
-#: ../content/licence/Inspection.py:89
+#: ../content/licence/Inspection.py:91
 msgid "urban_label_inspectionDescription"
 msgstr "Observations"
 
 #. Default: "Inspection_context"
-#: ../content/licence/Inspection.py:68
+#: ../content/licence/Inspection.py:70
 msgid "urban_label_inspection_context"
 msgstr "Contexte d'inspection"
 
@@ -3784,11 +3771,11 @@ msgstr "Établissement SEVESO"
 msgid "urban_label_isSupplementary"
 msgstr "Supplémentaire?"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:587
+#: ../content/licence/CODT_BaseBuildLicence.py:588
 msgid "urban_label_is_in_parceloutlicences"
 msgstr "Le bien se situe dans un permis d'urbanisation"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:593
+#: ../content/licence/CODT_BaseBuildLicence.py:594
 msgid "urban_label_is_in_sol"
 msgstr "Le bien se situe dans un SOL"
 
@@ -3914,7 +3901,7 @@ msgid "urban_label_locationMissingPartsDetails"
 msgstr "Détails concernant pièces manquantes (Fiche Urbanisme)"
 
 #. Default: "Locationspecificfeatures"
-#: ../content/licence/UrbanCertificateBase.py:175
+#: ../content/licence/UrbanCertificateBase.py:180
 msgid "urban_label_locationSpecificFeatures"
 msgstr "Particularités du bien (Fiche Urbanisme)"
 
@@ -4100,7 +4087,7 @@ msgid "urban_label_opinionText"
 msgstr "Texte de l'avis / conditions"
 
 #. Default: "Opinionstoaskifworks"
-#: ../content/licence/UrbanCertificateBase.py:212
+#: ../content/licence/UrbanCertificateBase.py:217
 msgid "urban_label_opinionsToAskIfWorks"
 msgstr "Avis à demander en cas de travaux"
 
@@ -4139,11 +4126,11 @@ msgstr "Propriétaire"
 msgid "urban_label_parcellings"
 msgstr "Lotissement"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:586
+#: ../content/licence/CODT_BaseBuildLicence.py:587
 msgid "urban_label_parceloutlicences"
 msgstr "Permis d'urbanisation"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:588
+#: ../content/licence/CODT_BaseBuildLicence.py:589
 msgid "urban_label_parceloutlicences_details"
 msgstr "Détails sur le permis d'urbanisation"
 
@@ -4156,7 +4143,7 @@ msgid "urban_label_parcelsLocations"
 msgstr "Adresse(s) du bien"
 
 #. Default: "Partie"
-#: ../browser/templates/searchparcels.pt:93
+#: ../browser/templates/searchparcels.pt:94
 msgid "urban_label_partie"
 msgstr "Partie"
 
@@ -4172,49 +4159,49 @@ msgstr "Détails concernant le PASH"
 
 #. Default: "Patrimony"
 #: ../content/licence/CODT_BaseBuildLicence.py:254
-#: ../content/licence/UrbanCertificateBase.py:356
+#: ../content/licence/UrbanCertificateBase.py:361
 msgid "urban_label_patrimony"
 msgstr "Patrimoine"
 
 #. Default: "Patrimony_analysis"
 #: ../content/licence/CODT_BaseBuildLicence.py:310
-#: ../content/licence/UrbanCertificateBase.py:272
+#: ../content/licence/UrbanCertificateBase.py:277
 msgid "urban_label_patrimony_analysis"
 msgstr "Analyse patrimoine"
 
 #. Default: "Patrimony_archaeological_map"
 #: ../content/licence/CODT_BaseBuildLicence.py:339
-#: ../content/licence/UrbanCertificateBase.py:301
+#: ../content/licence/UrbanCertificateBase.py:306
 msgid "urban_label_patrimony_archaeological_map"
 msgstr "Carte archéologique"
 
 #. Default: "Patrimony_architectural_complex"
 #: ../content/licence/CODT_BaseBuildLicence.py:323
-#: ../content/licence/UrbanCertificateBase.py:285
+#: ../content/licence/UrbanCertificateBase.py:290
 msgid "urban_label_patrimony_architectural_complex"
 msgstr "Ensemble architectural"
 
 #. Default: "Patrimony_monument"
 #: ../content/licence/CODT_BaseBuildLicence.py:355
-#: ../content/licence/UrbanCertificateBase.py:317
+#: ../content/licence/UrbanCertificateBase.py:322
 msgid "urban_label_patrimony_monument"
 msgstr "Monument"
 
 #. Default: "Patrimony_observation"
 #: ../content/licence/CODT_BaseBuildLicence.py:362
-#: ../content/licence/UrbanCertificateBase.py:324
+#: ../content/licence/UrbanCertificateBase.py:329
 msgid "urban_label_patrimony_observation"
 msgstr "Observations"
 
 #. Default: "Patrimony_project_gtoret_1ha"
 #: ../content/licence/CODT_BaseBuildLicence.py:347
-#: ../content/licence/UrbanCertificateBase.py:309
+#: ../content/licence/UrbanCertificateBase.py:314
 msgid "urban_label_patrimony_project_gtoret_1ha"
 msgstr "Projet ⩾ 1ha"
 
 #. Default: "Patrimony_site"
 #: ../content/licence/CODT_BaseBuildLicence.py:331
-#: ../content/licence/UrbanCertificateBase.py:293
+#: ../content/licence/UrbanCertificateBase.py:298
 msgid "urban_label_patrimony_site"
 msgstr "Site"
 
@@ -4309,7 +4296,7 @@ msgid "urban_label_pmTitle"
 msgstr "Titre du point PloneMeeting"
 
 #. Default: "Pollution"
-#: ../content/licence/UrbanCertificateBase.py:234
+#: ../content/licence/UrbanCertificateBase.py:239
 msgid "urban_label_pollution"
 msgstr "Situé en zone polluée"
 
@@ -4374,7 +4361,7 @@ msgstr "Détails concernant le bien (classé ou assimilé)"
 
 #. Default: "Protection_zone"
 #: ../content/licence/CODT_BaseBuildLicence.py:271
-#: ../content/licence/UrbanCertificateBase.py:373
+#: ../content/licence/UrbanCertificateBase.py:378
 msgid "urban_label_protection_zone"
 msgstr "Zone de protection"
 
@@ -4384,7 +4371,7 @@ msgid "urban_label_publicRoadModifications"
 msgstr "Modifications souhaitées au tracé et à l'équipement des voiries publiques"
 
 #. Default: "Puissance"
-#: ../browser/templates/searchparcels.pt:89
+#: ../browser/templates/searchparcels.pt:90
 msgid "urban_label_puissance"
 msgstr "Puissance"
 
@@ -4394,7 +4381,7 @@ msgid "urban_label_queryable"
 msgstr "Questionnable"
 
 #. Default: "Radical"
-#: ../browser/templates/searchparcels.pt:77
+#: ../browser/templates/searchparcels.pt:78
 msgid "urban_label_radical"
 msgstr "Radical"
 
@@ -4504,12 +4491,13 @@ msgstr "Détails concernant le guide régional d'urbanisme"
 
 #. Default: "Regional_inventory"
 #: ../content/licence/CODT_BaseBuildLicence.py:303
+#: ../content/licence/UrbanCertificateBase.py:410
 msgid "urban_label_regional_inventory"
 msgstr "Inventaire regional"
 
 #. Default: "Regional_inventory_building"
 #: ../content/licence/CODT_BaseBuildLicence.py:279
-#: ../content/licence/UrbanCertificateBase.py:381
+#: ../content/licence/UrbanCertificateBase.py:386
 msgid "urban_label_regional_inventory_building"
 msgstr "Bien pastillé à l’inventaire régional du patrimoine"
 
@@ -4535,7 +4523,7 @@ msgstr "Détails concernant le Périmètre de Remembrement"
 
 #. Default: "Report"
 #: ../content/UrbanEventInspectionReport.py:54
-#: ../content/licence/Inspection.py:78
+#: ../content/licence/Inspection.py:80
 msgid "urban_label_report"
 msgstr "Rapport"
 
@@ -4640,7 +4628,7 @@ msgid "urban_label_roadModificationSubject"
 msgstr "Objet lié à la modification de voirie"
 
 #. Default: "Roadspecificfeatures"
-#: ../content/licence/UrbanCertificateBase.py:161
+#: ../content/licence/UrbanCertificateBase.py:166
 msgid "urban_label_roadSpecificFeatures"
 msgstr "Particularités du bien (Fiche Voirie)"
 
@@ -4703,7 +4691,7 @@ msgid "urban_label_searchbyname_descr"
 msgstr "Entrez le nom, le prénom ou le numéro de registre national.  Vous pouvez utiliser le caractère '*' pour spécifier que vous cherchez sur une partie de mot"
 
 #. Default: "Section"
-#: ../browser/templates/searchparcels.pt:72
+#: ../browser/templates/searchparcels.pt:73
 msgid "urban_label_section"
 msgstr "Section"
 
@@ -4751,7 +4739,7 @@ msgstr "Situation"
 
 #. Default: "Small_popular_patrimony"
 #: ../content/licence/CODT_BaseBuildLicence.py:287
-#: ../content/licence/UrbanCertificateBase.py:389
+#: ../content/licence/UrbanCertificateBase.py:394
 msgid "urban_label_small_popular_patrimony"
 msgstr "Petit patrimoine populaire"
 
@@ -4760,15 +4748,15 @@ msgstr "Petit patrimoine populaire"
 msgid "urban_label_society"
 msgstr "Société"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:590
+#: ../content/licence/CODT_BaseBuildLicence.py:591
 msgid "urban_label_sol"
 msgstr "SOL"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:592
+#: ../content/licence/CODT_BaseBuildLicence.py:593
 msgid "urban_label_solZone"
 msgstr "Zone de SOL"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:594
+#: ../content/licence/CODT_BaseBuildLicence.py:595
 msgid "urban_label_sol_details"
 msgstr "Détails concernant le SOL"
 
@@ -4804,7 +4792,7 @@ msgid "urban_label_specialFunctionUrl"
 msgstr "URL de la fonction spéciale"
 
 #. Default: "Specificfeatures"
-#: ../content/licence/UrbanCertificateBase.py:147
+#: ../content/licence/UrbanCertificateBase.py:152
 msgid "urban_label_specificFeatures"
 msgstr "Particularité(s) du bien"
 
@@ -4999,7 +4987,7 @@ msgid "urban_label_townshipCouncilFolder"
 msgstr "Dossier \"Conseil Communal\""
 
 #. Default: "Townshipspecificfeatures"
-#: ../content/licence/UrbanCertificateBase.py:198
+#: ../content/licence/UrbanCertificateBase.py:203
 msgid "urban_label_townshipSpecificFeatures"
 msgstr "Particularité(s) communale(s) du bien"
 
@@ -5088,7 +5076,7 @@ msgid "urban_label_useTabbingForEdit"
 msgstr "Utiliser les onglets supplémentaires pour l'édition"
 
 #. Default: "Use_bound_licence_infos"
-#: ../content/licence/Inspection.py:60
+#: ../content/licence/Inspection.py:62
 msgid "urban_label_use_bound_licence_infos"
 msgstr "Prendre les données du permis lié"
 
@@ -5180,7 +5168,7 @@ msgid "urban_search_parameters"
 msgstr "Critères de la recherche"
 
 #. Default: "Cadastral reference"
-#: ../browser/templates/searchparcels.pt:56
+#: ../browser/templates/searchparcels.pt:57
 msgid "urban_search_parcel_by_cadastral_reference"
 msgstr "Référence cadastrale"
 
@@ -5189,18 +5177,16 @@ msgid "urban_search_parcel_by_folder_reference"
 msgstr "Référence du dossier"
 
 #. Default: "Location"
-#: ../browser/templates/searchparcels.pt:107
+#: ../browser/templates/searchparcels.pt:108
 msgid "urban_search_parcel_by_location"
-msgstr "Adresse"
+msgstr "Rue"
 
 #. Default: "Name"
 msgid "urban_search_parcel_by_name"
 msgstr "Nom"
 
-#. Default: "Proprietary"
-#: ../browser/templates/searchparcels.pt:127
-msgid "urban_search_parcel_by_proprietary"
-msgstr "Propriétaire"
+msgid "urban_search_parcel_by_street_number"
+msgstr "N° de police"
 
 msgid "urban_search_result"
 msgstr "Résultat de la recherche"
