@@ -2,6 +2,7 @@
 
 from Products.urban.browser.licence.licenceview import LicenceView
 from Products.urban.browser.table.urbantable import PlaintiffTable
+from Products.urban.browser.table.urbantable import InspectionReportsTable
 from Products.CMFPlone import PloneMessageFactory as _
 
 from plone import api
@@ -42,3 +43,7 @@ class InspectionView(LicenceView):
             return ''
         contacttable = PlaintiffTable(self.context, self.request)
         return self.renderListing(contacttable)
+
+    def renderRepportsListing(self):
+        reporttable = InspectionReportsTable(self.context, self.request)
+        return self.renderListing(reporttable)

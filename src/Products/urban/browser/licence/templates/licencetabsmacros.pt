@@ -246,6 +246,9 @@
 <div class="licence-column" metal:define-macro="inspection_macro" i18n:domain="urban">
     <fieldset>
         <legend i18n:translate="legend_details">Details</legend>
+        <div class="clear">
+            <tal:reports replace="structure view/renderRepportsListing"></tal:reports>
+        </div>
         <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%
                tal:define="default_custom python: [];
                            custom custom | python: []; custom python: custom + default_custom">

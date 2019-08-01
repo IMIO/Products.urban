@@ -87,6 +87,7 @@ class IPlaintiffTable(IContactTable):
     Marker interface for a table displaying plaintiffs
     """
 
+
 class INotariesTable(IUrbanTable):
     """
     Marker interface for a table displaying notaries
@@ -216,3 +217,9 @@ class ITitleCell(ICell):
     """
     def render():
         """ return the html rendering of Title Column cell """
+
+
+class IInspectionReportsTable(Interface):
+    """
+    Marker interface for a table displaying inspection report events.
+    """

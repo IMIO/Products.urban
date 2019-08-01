@@ -555,3 +555,54 @@ class GenerationColumn(LinkColumn):
         if not self.has_mailing(item):
             return ''
         return super(GenerationColumn, self).renderCell(item)
+
+
+class InspectionReportText(UrbanColumn):
+
+    header = 'urban_label_report'
+    weight = 6
+
+    def renderCell(self, report):
+        url = report.absolute_url() + '/@@longtextview?field=report'
+        img = '<img  src="Report.png" "urban-report-icon"/>'
+        link = '<a class="link-overlay" href="{}">{}</a>'.format(url, img)
+        cell = '<span id="inspection_report_text">{}</span>'.format(link)
+        return cell
+
+
+class InspectionReportVisitDate(UrbanColumn):
+
+    header = 'urban_label_reportVisitDate'
+    weight = 7
+
+    def renderCell(self, report):
+        raw_date = report.getEventDate()
+        date = raw_date and raw_date.strftime('%d/%m/%Y') or 'no date defined'
+        return date
+
+
+class InspectionReportDate(UrbanColumn):
+
+    header = 'urban_label_reportDate'
+    weight = 8
+
+    def renderCell(self, report):
+        raw_date = report.getReportDate()
+        date = raw_date and raw_date.strftime('%d/%m/%Y') or 'no date defined'
+        return date
+
+
+class InspectionReportFollowUp(UrbanColumn):
+
+    header = 'urban_label_followup_proposition'
+    weight = 9
+
+    def renderCell(self, report):
+        voc = report.listFollowupPropositions().items()
+        selected = report.getFollowup_proposition()
+        cell = u', '.join([v for k, v in voc if k in selected and k != 'other'])
+        if 'other' in selected:
+            url = report.absolute_url() + '/@@longtextview?field=other_followup_proposition'
+            link = '<a class="link-overlay" href="{}">autre</a>'.format(url)
+            cell = u'<span>{}, </span><span id="inspection_other_followup">{}</span>'.format(cell, link)
+        return cell

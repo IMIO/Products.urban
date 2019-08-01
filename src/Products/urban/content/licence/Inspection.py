@@ -75,17 +75,6 @@ schema = Schema((
         default_method='getDefaultValue',
     ),
     TextField(
-        name='report',
-        widget=RichWidget(
-            label=_('urban_label_report', default='Report'),
-        ),
-        default_content_type='text/html',
-        allowable_content_types=('text/html',),
-        schemata='urban_inspection',
-        default_method='getDefaultText',
-        default_output_type='text/html',
-    ),
-    TextField(
         name='inspectionDescription',
         widget=RichWidget(
             label=_('urban_label_inspectionDescription', default='Inspectiondescription'),
