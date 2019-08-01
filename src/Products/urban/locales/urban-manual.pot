@@ -2688,3 +2688,6 @@ msgstr ""
 
 msgid "urban_search_parcel_by_street_number"
 msgstr ""
+
+msgid "urban_label_reportVisitDate"
+msgstr ""

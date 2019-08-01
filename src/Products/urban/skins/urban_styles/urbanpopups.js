@@ -33,4 +33,12 @@ jQuery(function($){
     $('#urban-specificfeatures-field a').prepOverlay({
        subtype: 'ajax',
     });
+    // Inspection report text
+    $('#inspection_report_text a').prepOverlay({
+       subtype: 'ajax',
+    });
+    // Inspection report other followup
+    $('#inspection_other_followup a').prepOverlay({
+       subtype: 'ajax',
+    });
 });

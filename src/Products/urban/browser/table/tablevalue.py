@@ -232,3 +232,11 @@ class ValuesForAllLicencesListing(ValuesForLicenceListing):
     def queryLicences(self):
         query_string = {'sort_on': 'created'}
         return super(ValuesForAllLicencesListing, self).queryLicences(**query_string)
+
+
+class ValuesForInspectionReportsListing(ValuesForUrbanListing):
+    """  return inspection reports from the context """
+
+    def getItems(self):
+        reports = self.context.objectValues('UrbanEventInspectionReport')
+        return reports

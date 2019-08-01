@@ -283,6 +283,42 @@
      name="internal_service_task_configs_column"
   />
 
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.table.interfaces.IInspectionReportsTable"
+     factory=".column.InspectionReportVisitDate"
+     provides="z3c.table.interfaces.IColumn"
+     name="inspection_visit_date_column"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.table.interfaces.IInspectionReportsTable"
+     factory=".column.InspectionReportDate"
+     provides="z3c.table.interfaces.IColumn"
+     name="inspection_report_date_column"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.table.interfaces.IInspectionReportsTable"
+     factory=".column.InspectionReportText"
+     provides="z3c.table.interfaces.IColumn"
+     name="inspection_report_text_column"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.table.interfaces.IInspectionReportsTable"
+     factory=".column.InspectionReportFollowUp"
+     provides="z3c.table.interfaces.IColumn"
+     name="inspection_report_followup_column"
+  />
+
   <!-- table values adapter -->
 
   <!-- the next two adapters wrap any item used in an UrbanTable into an adapter
@@ -352,6 +388,14 @@
           zope.publisher.interfaces.browser.IBrowserRequest
           Products.urban.browser.table.interfaces.IFolderContentTable"
      factory=".tablevalue.ValuesForFolderListing"
+     provides="z3c.table.interfaces.IValues"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.table.interfaces.IInspectionReportsTable"
+     factory=".tablevalue.ValuesForInspectionReportsListing"
      provides="z3c.table.interfaces.IValues"
   />
   <!-- table values adapters end -->

@@ -238,3 +238,12 @@ class InternalOpinionServicesTable(SequenceTable):
             return all_services.values()
         else:
             return []
+
+
+class InspectionReportsTable(UrbanTable, SequenceTable):
+    """
+    Render nested attachments from subfolders.
+    """
+    implements(interfaces.IInspectionReportsTable)
+
+    cssClasses = {'table': 'listing largetable'}
