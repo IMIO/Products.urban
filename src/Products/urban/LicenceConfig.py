@@ -361,12 +361,15 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
         }
         minimum_tabs_config = ['description', 'analysis', 'location', 'road']
         certificatebase_tabs_config = ['description', 'analysis', 'location', 'road', 'patrimony']
-        inquiry_tabs_config = ['description', 'advices', 'inquiry', 'analysis', 'location', 'road', 'patrimony']
+        inquiry_tabs_config = ['description', 'advices', 'inquiry', 'analysis', 'location', 'road']
+        codt_inquiry_tabs_config = ['description', 'advices', 'inquiry', 'analysis', 'location', 'road', 'patrimony']
         buildlicence_tabs_config = ['description', 'advices', 'inquiry', 'analysis', 'location', 'road', 'habitation',
                 'peb']
         codt_buildlicence_tabs_config = ['description', 'advices', 'inquiry', 'analysis', 'location', 'road', 'habitation',
                 'peb', 'patrimony']
         uniquelicence_tabs_config = ['description', 'advices', 'inquiry', 'analysis', 'environment', 'location', 'road',
+                'habitation', 'peb']
+        codt_uniquelicence_tabs_config = ['description', 'advices', 'inquiry', 'analysis', 'environment', 'location', 'road',
                 'habitation', 'peb', 'patrimony']
         env_advice_tabs_config = ['description', 'advices', 'analysis', 'environment', 'location', 'road']
         env_inquiry_tabs_config = ['description', 'advices', 'inquiry', 'analysis', 'environment', 'location', 'road']
@@ -381,10 +384,10 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
             'urbancertificatetwo': buildlicence_tabs_config,
             'codt_buildlicence': codt_buildlicence_tabs_config,
             'codt_article127': codt_buildlicence_tabs_config,
-            'codt_parceloutlicence': inquiry_tabs_config,
-            'codt_uniquelicence': uniquelicence_tabs_config,
+            'codt_parceloutlicence': codt_inquiry_tabs_config,
+            'codt_uniquelicence': codt_uniquelicence_tabs_config,
             'codt_commerciallicence': codt_buildlicence_tabs_config,
-            'codt_integratedlicence': uniquelicence_tabs_config,
+            'codt_integratedlicence': codt_uniquelicence_tabs_config,
             'codt_urbancertificatetwo': codt_buildlicence_tabs_config,
             'codt_urbancertificateone': certificatebase_tabs_config,
             'codt_notaryletter': certificatebase_tabs_config,
