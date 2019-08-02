@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-08-01 12:32+0000\n"
+"POT-Creation-Date: 2019-08-02 11:34+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -427,6 +427,10 @@ msgstr ""
 msgid "IPatrimonyMeetingEvent type marker interface"
 msgstr ""
 
+#: ../interfaces.py:586
+msgid "IProprietaryChangeEvent type marker interface"
+msgstr ""
+
 #: ../interfaces.py:526
 msgid "IProrogation type marker interface"
 msgstr ""
@@ -501,7 +505,7 @@ msgstr ""
 msgid "IntegratedLicence"
 msgstr ""
 
-#: ../interfaces.py:680
+#: ../interfaces.py:684
 msgid "Internal opinion services"
 msgstr ""
 
@@ -564,7 +568,7 @@ msgstr ""
 msgid "PatrimonyCertificate"
 msgstr ""
 
-#: ../interfaces.py:693
+#: ../interfaces.py:697
 msgid "Planned inquiries"
 msgstr ""
 
@@ -646,7 +650,7 @@ msgstr ""
 msgid "Service id"
 msgstr ""
 
-#: ../interfaces.py:681
+#: ../interfaces.py:685
 msgid "Services that can give their opinion directly through urban"
 msgstr ""
 
@@ -1606,7 +1610,7 @@ msgstr ""
 msgid "inadmissibilityreasons_folder_title"
 msgstr ""
 
-#: ../interfaces.py:694
+#: ../interfaces.py:698
 msgid "inquiries planned for radius search"
 msgstr ""
 
