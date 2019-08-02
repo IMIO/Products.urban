@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2019-08-01 12:32+0000\n"
+"POT-Creation-Date: 2019-08-02 11:34+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -438,6 +438,10 @@ msgstr "Demande d'avis"
 msgid "IPatrimonyMeetingEvent type marker interface"
 msgstr "Réunion patrimoine"
 
+#: ../interfaces.py:586
+msgid "IProprietaryChangeEvent type marker interface"
+msgstr "Changement d'exploitant"
+
 #. Default: "Prorogation"
 #: ../interfaces.py:526
 msgid "IProrogation type marker interface"
@@ -518,7 +522,7 @@ msgstr "Inspection"
 msgid "IntegratedLicence"
 msgstr "Permis intégré"
 
-#: ../interfaces.py:680
+#: ../interfaces.py:684
 msgid "Internal opinion services"
 msgstr "Avis de services internes à la ville"
 
@@ -581,7 +585,7 @@ msgstr "Permis d'urbanisation"
 msgid "PatrimonyCertificate"
 msgstr "Certificat de patrimoine"
 
-#: ../interfaces.py:693
+#: ../interfaces.py:697
 msgid "Planned inquiries"
 msgstr "Rayons d'enquête planifiés"
 
@@ -664,7 +668,7 @@ msgstr ""
 msgid "Service id"
 msgstr ""
 
-#: ../interfaces.py:681
+#: ../interfaces.py:685
 msgid "Services that can give their opinion directly through urban"
 msgstr ""
 
@@ -1638,7 +1642,7 @@ msgstr "Choisissez une des 3 recherches ci-dessous.  Si vous savez exactement ce
 msgid "inadmissibilityreasons_folder_title"
 msgstr "Motifs d'irrecevabilité"
 
-#: ../interfaces.py:694
+#: ../interfaces.py:698
 msgid "inquiries planned for radius search"
 msgstr ""
 
