@@ -415,6 +415,9 @@ class EnvironmentBase(BaseFolder, GenericLicence, CODT_UniqueLicenceInquiry, Bro
     def getLastDecisionProjectFromSPWEvent(self):
         return self.getLastEvent(interfaces.IDecisionProjectFromSPWEvent)
 
+    def getLastProprietaryChangeEvent(self):
+        return self.getLastEvent(interfaces.IProprietaryChangeEvent)
+
     security.declarePublic('getAdditionalLayers')
     def getAdditionalLayers(self):
         """
