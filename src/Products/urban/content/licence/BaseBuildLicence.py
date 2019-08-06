@@ -282,7 +282,6 @@ schema = Schema((
     ),
     StringField(
         name='roadAdaptation',
-        default='no',
         widget=MultiSelectionWidget(
             format='checkbox',
             label=_('urban_label_roadAdaptation', default='Roadadaptation'),
