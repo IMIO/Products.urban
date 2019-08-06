@@ -327,7 +327,7 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
         suspension_delay = 0
         inquiry_duration = 15
         if hasattr(licence, 'getRoadAdaptation'):
-            if licence.getRoadAdaptation() and licence.getRoadAdaptation() != ['']:
+            if licence.getRoadAdaptation() and licence.getRoadAdaptation() not in [[''], 'no']:
                 inquiry_duration = 30
         theorical_end_date = start_date + inquiry_duration
 
