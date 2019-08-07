@@ -30,7 +30,7 @@ class AnnoncedDelay(BaseCalculationDelay):
         return delay
 
 
-class UniqueLicenceAnnoncedDelay(BaseCalculationDelay):
+class UniqueLicenceAnnoncedDelay(AnnoncedDelay):
     """
     Return the selected annonced delay of the procedure -20 if class 2
     or -30 if class 1.
@@ -51,7 +51,7 @@ class UniqueLicenceAnnoncedDelay(BaseCalculationDelay):
         return delay
 
 
-class UniqueLicenceNotificationDelay(BaseCalculationDelay):
+class UniqueLicenceNotificationDelay(AnnoncedDelay):
     """
     Return 20 if class 2 or 30 if class 1 only if spw licence project
     has been received, else return licence annonced delay.
