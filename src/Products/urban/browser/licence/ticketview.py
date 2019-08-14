@@ -2,6 +2,7 @@
 
 from Products.urban.browser.licence.licenceview import LicenceView
 from Products.urban.browser.table.urbantable import PlaintiffTable
+from Products.urban.browser.table.urbantable import TenantTable
 from Products.CMFPlone import PloneMessageFactory as _
 
 from plone import api
@@ -24,6 +25,12 @@ class TicketView(LicenceView):
 
     def getMacroViewName(self):
         return 'ticket-macros'
+
+    def renderTenantListing(self):
+        if not self.context.getTenants():
+            return ''
+        contacttable = TenantTable(self.context, self.request)
+        return self.renderListing(contacttable)
 
     def renderPlaintiffListing(self):
         if not self.context.getPlaintiffs():

@@ -174,6 +174,7 @@ setDefaultRoles('urban: Add Recipient', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add RecipientCadastre', ("Manager", "Contributor", "Editor"))
 setDefaultRoles('urban: Add SpecificFeatureTerm', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add Street', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add Ticket', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add UrbanEvent', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add UniqueLicence', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add UrbanEventType', ("Manager", "Contributor"))
@@ -209,21 +210,22 @@ URBAN_TYPES = [
     'MiscDemand', 'Division',
     'NotaryLetter', 'CODT_NotaryLetter',
     'ProjectMeeting', 'ExplosivesPossession',
-#    'RoadDecree',
-#    'Inspection',
+    'RoadDecree',
+    'Inspection', 'Ticket'
 ]
 
 URBAN_CWATUPE_TYPES = [
     'BuildLicence', 'Article127', 'IntegratedLicence', 'UniqueLicence', 'Declaration',
     'UrbanCertificateOne', 'UrbanCertificateTwo', 'PreliminaryNotice',
     'PatrimonyCertificate', 'ParcelOutLicence', 'MiscDemand', 'Division', 'NotaryLetter',
+    'RoadDecree', 'Inspection', 'Ticket'
 ]
 
 URBAN_CODT_TYPES = [
     'CODT_BuildLicence', 'CODT_Article127', 'CODT_CommercialLicence', 'CODT_IntegratedLicence',
     'CODT_ParcelOutLicence', 'CODT_UniqueLicence', 'CODT_UrbanCertificateTwo', 'CODT_UrbanCertificateOne',
     'CODT_NotaryLetter', 'ProjectMeeting', 'MiscDemand', 'PreliminaryNotice',
-    'PatrimonyCertificate', 'Division', 'RoadDecree', 'Inspection'
+    'PatrimonyCertificate', 'Division', 'RoadDecree', 'Inspection', 'Ticket'
 ]
 
 URBAN_ENVIRONMENT_TYPES = [

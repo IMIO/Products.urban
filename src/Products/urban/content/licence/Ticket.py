@@ -145,7 +145,7 @@ class Ticket(BaseFolder, GenericLicence, BrowserDefaultMixin):
             if bound_inspection:
                 applicants.extend(bound_inspection.getApplicants())
 
-        return applicants
+        return list(set(applicants))
 
     security.declarePublic('get_applicants_history')
 
@@ -156,7 +156,7 @@ class Ticket(BaseFolder, GenericLicence, BrowserDefaultMixin):
             if bound_inspection:
                 applicants.extend(bound_inspection.get_applicants_history())
 
-        return applicants
+        return list(set(applicants))
 
     security.declarePublic('getProprietaries')
 
@@ -181,7 +181,7 @@ class Ticket(BaseFolder, GenericLicence, BrowserDefaultMixin):
             bound_inspection = self.getBound_inspection()
             if bound_inspection:
                 corporations.extend(bound_inspection.getCorporations())
-        return corporations
+        return list(set(corporations))
 
     security.declarePublic('get_corporations_history')
 
@@ -193,9 +193,23 @@ class Ticket(BaseFolder, GenericLicence, BrowserDefaultMixin):
             bound_inspection = self.getBound_inspection()
             if bound_inspection:
                 corporations.extend(bound_inspection.get_corporations_history())
-        return corporations
+        return list(set(corporations))
 
-    security.declarePublic('getApplicants')
+    security.declarePublic('getTenants')
+
+    def getTenants(self):
+        """
+           Return the list of plaintiffs for the Licence
+        """
+        tenants = [app for app in self.objectValues('Applicant')
+                   if app.portal_type == 'Tenant']
+        if self.getUse_bound_inspection_infos():
+            bound_inspection = self.getBound_inspection()
+            if bound_inspection:
+                tenants.extend(bound_inspection.getTenants())
+        return list(set(tenants))
+
+    security.declarePublic('getPlaintiffs')
 
     def getPlaintiffs(self):
         """

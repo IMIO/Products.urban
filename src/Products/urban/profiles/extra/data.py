@@ -40,9 +40,6 @@ default_texts = {
 }
 
 
-
-
-
 urbanEventTypes = {
     'codt_buildlicence': (
         {
@@ -59,8 +56,8 @@ urbanEventTypes = {
                     'title': "Dépôt de la demande",
                     'context_variables': [
                         {
-                            'name':'publipostage',
-                            'value':'demandeurs'
+                            'name': 'publipostage',
+                            'value': 'demandeurs'
                         }
                     ]
                 },
@@ -81,8 +78,8 @@ urbanEventTypes = {
                     'title': "Dossier incomplet (lettre au demandeur, Annexe 17)",
                     'context_variables': [
                         {
-                            'name':'publipostage',
-                            'value':'demandeurs'
+                            'name': 'publipostage',
+                            'value': 'demandeurs'
                         }
                     ]
                 },
@@ -91,8 +88,8 @@ urbanEventTypes = {
                     'title': "Dossier incomplet (lettre à l'architecte)",
                     'context_variables': [
                         {
-                            'name':'publipostage',
-                            'value':'architectes'
+                            'name': 'publipostage',
+                            'value': 'architectes'
                         }
                     ]
                 },
@@ -113,8 +110,8 @@ urbanEventTypes = {
                     'title': "Récépissé de dépôt de compléments",
                     'context_variables': [
                         {
-                            'name':'publipostage',
-                            'value':'demandeurs'
+                            'name': 'publipostage',
+                            'value': 'demandeurs'
                         }
                     ]
                 },
@@ -135,8 +132,8 @@ urbanEventTypes = {
                     'title': "Deuxième dossier incomplet (irrecevable)",
                     'context_variables': [
                         {
-                            'name':'publipostage',
-                            'value':'demandeurs'
+                            'name': 'publipostage',
+                            'value': 'demandeurs'
                         }
                     ]
                 },
@@ -156,8 +153,8 @@ urbanEventTypes = {
                     'title': "Accusé de réception (Annexe 18)",
                     'context_variables': [
                         {
-                            'name':'publipostage',
-                            'value':'demandeurs'
+                            'name': 'publipostage',
+                            'value': 'demandeurs'
                         }
                     ]
                 },
@@ -287,8 +284,8 @@ urbanEventTypes = {
                     'title': "Information à l'architecte de la prorogation",
                     'context_variables': [
                         {
-                            'name':'publipostage',
-                            'value':'architectes'
+                            'name': 'publipostage',
+                            'value': 'architectes'
                         }
                     ]
                 },
@@ -330,8 +327,8 @@ urbanEventTypes = {
                     'title': "Décision lettre à l'architecte",
                     'context_variables': [
                         {
-                            'name':'publipostage',
-                            'value':'architectes'
+                            'name': 'publipostage',
+                            'value': 'architectes'
                         }
                     ]
                 },
@@ -365,7 +362,7 @@ urbanEventTypes = {
             'title': "Réunion patrimoine supplémentaire",
             'eventDateLabel': "Date de la réunion",
             'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
-            'showTitle' : True,
+            'showTitle': True,
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
@@ -636,7 +633,7 @@ urbanEventTypes = {
             'title': "Réunion patrimoine supplémentaire",
             'eventDateLabel': "Date de la réunion",
             'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
-            'showTitle' : True,
+            'showTitle': True,
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
@@ -796,7 +793,7 @@ urbanEventTypes = {
             'title': "Réunion patrimoine supplémentaire",
             'eventDateLabel': "Date de la réunion",
             'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
-            'showTitle' : True,
+            'showTitle': True,
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
@@ -806,17 +803,17 @@ urbanEventTypes = {
     ),
     'codt_notaryletter': (
         {
-          'id': "notaryletter-codt",
-          'title': "Lettre de notaire",
-          'deadLineDelay': 15,
-          'eventDateLabel': 'Date de notification',
-          'isKeyEvent': True,
-          'keyDates': ('eventDate',),
-          'podTemplates': (
-              {'id': "codt_ln_annexe16.odt", 'title': "Lettre de notaire - Annexe 16"},
-          ),
-          'eventTypeType': ('Products.urban.interfaces.ITheLicenceEvent',
-                            'Products.urban.interfaces.ILicenceNotificationEvent'),
+            'id': "notaryletter-codt",
+            'title': "Lettre de notaire",
+            'deadLineDelay': 15,
+            'eventDateLabel': 'Date de notification',
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+                {'id': "codt_ln_annexe16.odt", 'title': "Lettre de notaire - Annexe 16"},
+            ),
+            'eventTypeType': ('Products.urban.interfaces.ITheLicenceEvent',
+                              'Products.urban.interfaces.ILicenceNotificationEvent'),
         },
         {
             'id': "premiere-reunion-patrimoine",
@@ -845,7 +842,7 @@ urbanEventTypes = {
             'title': "Réunion patrimoine supplémentaire",
             'eventDateLabel': "Date de la réunion",
             'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
-            'showTitle' : True,
+            'showTitle': True,
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
@@ -1018,7 +1015,7 @@ urbanEventTypes = {
         {
             'id': "plans-modificatifs",
             'title': "Plans modificatifs",
-            'activatedFields': ['transmitDate','decisionDate'],
+            'activatedFields': ['transmitDate', 'decisionDate'],
             'deadLineDelay': 15,
             'eventDateLabel': "Date de notification",
             'eventTypeType': 'Products.urban.interfaces.IAcknowledgmentEvent',
@@ -1061,7 +1058,7 @@ urbanEventTypes = {
         {
             'id': "delivrance-du-permis-octroi-ou-refus-codt",
             'title': "Délivrance du permis (octroi ou refus)",
-            'activatedFields': ['decisionDate', 'decision','transmitDate'],
+            'activatedFields': ['decisionDate', 'decision', 'transmitDate'],
             'deadLineDelay': 15,
             'eventDateLabel': "Date de notification",
             'isKeyEvent': True,
@@ -1136,7 +1133,7 @@ urbanEventTypes = {
             'title': "Réunion patrimoine supplémentaire",
             'eventDateLabel': "Date de la réunion",
             'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
-            'showTitle' : True,
+            'showTitle': True,
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
@@ -1185,7 +1182,7 @@ urbanEventTypes = {
             'title': "Réunion patrimoine supplémentaire",
             'eventDateLabel': "Date de la réunion",
             'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
-            'showTitle' : True,
+            'showTitle': True,
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
@@ -1671,7 +1668,7 @@ urbanEventTypes = {
             'title': "Réunion patrimoine supplémentaire",
             'eventDateLabel': "Date de la réunion",
             'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
-            'showTitle' : True,
+            'showTitle': True,
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
@@ -2583,7 +2580,7 @@ urbanEventTypes = {
             'title': "Réunion patrimoine supplémentaire",
             'eventDateLabel': "Date de la réunion",
             'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
-            'showTitle' : True,
+            'showTitle': True,
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
@@ -5546,7 +5543,7 @@ urbanEventTypes = {
             'title': "Réunion patrimoine supplémentaire",
             'eventDateLabel': "Date de la réunion",
             'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
-            'showTitle' : True,
+            'showTitle': True,
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
@@ -5630,11 +5627,11 @@ urbanEventTypes = {
         {
             'id': "enquete-publique",
             'title': "Enquête publique",
-            'activatedFields': ['investigationStart', 'investigationEnd', 'claimsDate', 'claimEndSDate', 'explanationStartSDate', 'explanationEndSDate', 'claimsText','transmitDate'],
+            'activatedFields': ['investigationStart', 'investigationEnd', 'claimsDate', 'claimEndSDate', 'explanationStartSDate', 'explanationEndSDate', 'claimsText', 'transmitDate'],
             'deadLineDelay': 15,
             'eventDateLabel': 'Date de notification',
             'isKeyEvent': True,
-            'keyDates': ('investigationStart','investigationEnd'),
+            'keyDates': ('investigationStart', 'investigationEnd'),
             'specialFunctionName': "Rechercher les propriétaires situés dans un rayon de 50m",
             'specialFunctionUrl': "addInvestigationPO",
             'TALCondition': "here/mayAddInquiryEvent",
@@ -5963,7 +5960,7 @@ urbanEventTypes = {
         {
             'id': "decision",
             'title': "Décision du Collège (octroi ou refus)",
-            'activatedFields': ['decisionDate', 'decision','transmitDate'],
+            'activatedFields': ['decisionDate', 'decision', 'transmitDate'],
             'eventDateLabel': "Date de notification",
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
@@ -6052,7 +6049,7 @@ urbanEventTypes = {
             'title': "Réunion patrimoine supplémentaire",
             'eventDateLabel': "Date de la réunion",
             'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
-            'showTitle' : True,
+            'showTitle': True,
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
@@ -6377,15 +6374,15 @@ urbanEventTypes = {
         {
             'id': "passage-college",
             'title': "Passage au Collège",
-            'activatedFields': ['decisionDate','decision'],
+            'activatedFields': ['decisionDate', 'decision'],
             'eventDateLabel': "Date de notification",
             'isKeyEvent': True,
             'keyDates': ('decisionDate',),
             'podTemplates': (
                 {'id': "dec3_transmis_sans_conditions_demandeur.odt", 'title': "Transmis décision sans conditions complémentaires (lettre au demandeur)"},
-                {'id': "dec3_transmis_conditions_demandeur.odt", 'title': "Transmis décision avec conditions complémentaires (lettre au demandeur)",},
-                {'id': "dec3_transmis_sans_conditions_dgo3dgo4.odt", 'title': "Transmis décision sans conditions complémentaires (lettre au FD/FT)",},
-                {'id': "dec3_transmis_conditions_dgo3dgo4.odt", 'title': "Transmis décision avec conditions complémentaires (lettre au FD/FT)",},
+                {'id': "dec3_transmis_conditions_demandeur.odt", 'title': "Transmis décision avec conditions complémentaires (lettre au demandeur)"},
+                {'id': "dec3_transmis_sans_conditions_dgo3dgo4.odt", 'title': "Transmis décision sans conditions complémentaires (lettre au FD/FT)"},
+                {'id': "dec3_transmis_conditions_dgo3dgo4.odt", 'title': "Transmis décision avec conditions complémentaires (lettre au FD/FT)"},
             ),
         },
         {
@@ -6415,7 +6412,7 @@ urbanEventTypes = {
             'title': "Réunion patrimoine supplémentaire",
             'eventDateLabel': "Date de la réunion",
             'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
-            'showTitle' : True,
+            'showTitle': True,
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
@@ -7216,7 +7213,7 @@ urbanEventTypes = {
             'eventTypeType': 'Products.urban.interfaces.ILicenceNotificationEvent',
         },
     ),
-    'inspection' : (
+    'inspection': (
         {
             'id': "rapport",
             'title': "Rapport",
@@ -7229,5 +7226,7 @@ urbanEventTypes = {
             'eventTypeType': 'Products.urban.interfaces.IInspectionReportEvent',
             'eventPortalType': 'UrbanEventInspectionReport',
         },
+    ),
+    'ticket': (
     ),
 }

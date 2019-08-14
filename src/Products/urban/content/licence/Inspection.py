@@ -138,51 +138,60 @@ class Inspection(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
     def getApplicants(self):
         """
         """
+        applicants = super(Inspection, self).getApplicants()
         if self.getUse_bound_licence_infos():
             bound_licence = self.getBound_licence()
             if bound_licence:
-                return bound_licence.getApplicants()
-
-        applicants = super(Inspection, self).getApplicants()
-        return applicants
+                applicants.extend(bound_licence.getApplicants())
+        return list(set(applicants))
 
     security.declarePublic('get_applicants_history')
 
     def get_applicants_history(self):
+        applicants = super(Inspection, self).get_applicants_history()
         if self.getUse_bound_licence_infos():
             bound_licence = self.getBound_licence()
             if bound_licence:
-                return bound_licence.get_applicants_history()
-
-        applicants = super(Inspection, self).get_applicants_history()
-        return applicants
+                applicants.extend(bound_licence.get_applicants_history())
+        return list(set(applicants))
 
     security.declarePublic('getCorporations')
 
     def getCorporations(self):
+        corporations = [corp for corp in self.objectValues('Corporation')
+                        if corp.portal_type == 'Corporation' and
+                        api.content.get_state(corp) == 'enabled']
         if self.getUse_bound_licence_infos():
             bound_licence = self.getBound_licence()
             if bound_licence:
-                return bound_licence.getCorporations()
-
-        corporations = [corp for corp in self.objectValues('Corporation')
-                        if corp.portal_type == 'Corporation'
-                        and api.content.get_state(corp) == 'enabled']
-        return corporations
+                corporations.extend(bound_licence.getCorporations())
+        return list(set(corporations))
 
     security.declarePublic('get_corporations_history')
 
     def get_corporations_history(self):
+        corporations = [corp for corp in self.objectValues('Corporation')
+                        if corp.portal_type == 'Corporation' and
+                        api.content.get_state(corp) == 'disabled']
         if self.getUse_bound_licence_infos():
             bound_licence = self.getBound_licence()
             if bound_licence:
-                return bound_licence.get_corporations_history()
+                corporations.extend(bound_licence.get_corporations_history())
+        return list(set(corporations))
 
-        return [corp for corp in self.objectValues('Corporation')
-                if corp.portal_type == 'Corporation'
-                and api.content.get_state(corp) == 'disabled']
+    security.declarePublic('getTenants')
 
-    security.declarePublic('getApplicants')
+    def getTenants(self):
+        """
+           Return the list of plaintiffs for the Licence
+        """
+        tenants = [app for app in self.objectValues('Applicant')
+                   if app.portal_type == 'Tenant']
+        return tenants
+
+    security.declarePublic('getCorporationPlaintiffs')
+
+    security.declarePublic('getPlaintiffs')
 
     def getPlaintiffs(self):
         """

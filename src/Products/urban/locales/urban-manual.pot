@@ -195,6 +195,9 @@ msgstr ""
 msgid "Sort results by licence type first, then by delay time"
 msgstr ""
 
+msgid "Ticket"
+msgstr ""
+
 #. Default: "Certificat d'urbanisme 1"
 msgid "UrbanCertificateOne"
 msgstr ""
@@ -804,6 +807,9 @@ msgid "label_colname_street"
 msgstr ""
 
 msgid "label_colname_time_delay"
+msgstr ""
+
+msgid "label_colname_time_tenant"
 msgstr ""
 
 msgid "label_colname_transmitDate"

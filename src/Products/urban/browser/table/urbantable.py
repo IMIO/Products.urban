@@ -108,6 +108,14 @@ class ProprietaryTable(ContactTable):
     cssClasses = {'table': 'listing largetable'}
 
 
+class TenantTable(ContactTable):
+    """
+    """
+    implements(interfaces.ITenantTable)
+
+    cssClasses = {'table': 'listing largetable'}
+
+
 class PlaintiffTable(ContactTable):
     """
     """
