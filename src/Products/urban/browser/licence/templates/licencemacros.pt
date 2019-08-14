@@ -75,7 +75,7 @@
               tal:attributes="action python: context.absolute_url() + '/createObject'"
               i18n:domain="urban" name="quickAdd"  action="createObject" method="post" style="float: left">
             <input type="hidden" name="type_name" value="#" tal:attributes="value ctype/id" />
-            <input type="submit" class="context apButton contenttype-proprietar" id="add-proprietary" value="add_a_proprietary" i18n:attributes="value" />
+            <input type="submit" class="context apButton contenttype-proprietary" id="add-proprietary" value="add_a_proprietary" i18n:attributes="value" />
         </form>
         <form tal:define="ctype python: context.portal_types.getTypeInfo('CorporationProprietary');
                           member context/@@plone_portal_state/member;"
@@ -83,7 +83,25 @@
               tal:attributes="action python: context.absolute_url() + '/createObject'"
               i18n:domain="urban" name="quickAdd"  action="createObject" method="post" style="float: left">
             <input type="hidden" name="type_name" value="#" tal:attributes="value ctype/id" />
-            <input type="submit" class="context apButton contenttype-proprietar" id="add-corporationproprietary" value="add_a_corporationproprietary" i18n:attributes="value" />
+            <input type="submit" class="context apButton contenttype-proprietary" id="add-corporationproprietary" value="add_a_corporationproprietary" i18n:attributes="value" />
+        </form>
+    </div>
+</fieldset>
+
+
+<fieldset metal:define-macro="urbanTenantsMacro" i18n:domain="urban">
+    <legend i18n:translate="tenants">Tenant(s)</legend>
+    <div class="field" >
+        <div>
+            <tal:listing content="structure view/renderTenantListing" />
+        </div>
+        <form tal:define="ctype python: context.portal_types.getTypeInfo('Tenant');
+                          member context/@@plone_portal_state/member;"
+              tal:condition="python: member.has_permission('urban: Add Contact', context)"
+              tal:attributes="action python: context.absolute_url() + '/createObject'"
+              i18n:domain="urban" name="quickAdd"  action="createObject" method="post" style="float: left">
+            <input type="hidden" name="type_name" value="#" tal:attributes="value ctype/id" />
+            <input type="submit" class="context apButton contenttype-tenant" id="add-tenant" value="add_a_tenant" i18n:attributes="value" />
         </form>
     </div>
 </fieldset>

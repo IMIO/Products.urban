@@ -113,6 +113,7 @@ from Products.urban.content.licence import ParcelOutLicence  # noqa
 from Products.urban.content.licence import PatrimonyCertificate  # noqa
 from Products.urban.content.licence import PreliminaryNotice  # noqa
 from Products.urban.content.licence import ProjectMeeting  # noqa
+from Products.urban.content.licence import Ticket  # noqa
 from Products.urban.content.licence import UrbanCertificateBase  # noqa
 from Products.urban.content.licence import UrbanCertificateTwo  # noqa
 from Products.urban.content.licence import UniqueLicence  # noqa

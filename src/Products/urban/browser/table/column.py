@@ -148,6 +148,12 @@ class ProprietaryTitleColumnHeader(TitleColumnHeader):
         self.label = 'label_colname_proprietary_data'
 
 
+class TenantTitleColumnHeader(TitleColumnHeader):
+
+    def update(self):
+        self.label = 'label_colname_tenant_data'
+
+
 class PlaintiffTitleColumnHeader(TitleColumnHeader):
 
     def update(self):
@@ -402,6 +408,9 @@ class ActionsColumn(UrbanColumn):
     def renderCell(self, urbanlist_item):
         path = urbanlist_item.getPath()
         portal = api.portal.get()
+        context = type(self.context) is list and self.context[0] or self.context
+        if urbanlist_item.id not in context.objectIds():
+            return ''
         return portal.unrestrictedTraverse('{}/actions_panel'.format(path))(showActions=True)
 
 

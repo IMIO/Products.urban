@@ -61,5 +61,7 @@
   <type portal_type="ProjectMeeting"/>
   <type portal_type="PatrimonyCertificate"/>
   <type portal_type="RoadDecree"/>
+  <type portal_type="Inspection"/>
+  <type portal_type="Ticket"/>
  </factorytypes>
 </object>

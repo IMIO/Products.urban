@@ -11,7 +11,8 @@
                 <tal:show_disabled_applicants condition= "here/get_applicants_history">
                     <metal:disabled_applicants_and_corporations_macro use-macro="here/@@licencemacros/urbanApplicantsHistoricAndCorporationsMacro" />
                 </tal:show_disabled_applicants>
-                <metal:applicants_and_corporations_macro use-macro="here/@@licencemacros/urbanProprietariesMacro" />
+                <metal:proprietaries use-macro="here/@@licencemacros/urbanProprietariesMacro" />
+                <metal:tenants_macro use-macro="here/@@licencemacros/urbanTenantsMacro" />
             </metal:applicants>
 
 

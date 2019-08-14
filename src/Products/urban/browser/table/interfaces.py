@@ -82,6 +82,12 @@ class IProprietaryTable(IContactTable):
     """
 
 
+class ITenantTable(IContactTable):
+    """
+    Marker interface for a table displaying tenants
+    """
+
+
 class IPlaintiffTable(IContactTable):
     """
     Marker interface for a table displaying plaintiffs

@@ -125,6 +125,9 @@ msgstr "Cet événement n'est plus lié à une enquête publique !  Définissez 
 msgid "This field only accept numbers, indents or points !"
 msgstr "Ce champ n'accepte que des chiffres, des tirets et des points !"
 
+msgid "Ticket"
+msgstr "Procès-Verbal"
+
 msgid "UniqueLicence"
 msgstr "permis unique"
 

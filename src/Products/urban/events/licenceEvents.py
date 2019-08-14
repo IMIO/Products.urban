@@ -79,7 +79,7 @@ def _checkNumerotation(licence):
     portal_urban = config.aq_parent
     source_config = getattr(portal_urban, config.getNumerotationSource())
     #increment the numerotation in the tool only if its the one that has been generated
-    if config.generateReference(licence) == licence.getReference():
+    if config.generateReference(licence) in licence.getReference():
         value = source_config.getNumerotation()
         if not str(value).isdigit():
             value = '0'

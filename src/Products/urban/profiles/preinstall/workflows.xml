@@ -207,6 +207,9 @@
 <type type_id="Proprietary">
   <bound-workflow workflow_id="activation_workflow" />
 </type>
+<type type_id="Tenant">
+  <bound-workflow workflow_id="activation_workflow" />
+</type>
 <type type_id="Recipient">
   <bound-workflow workflow_id="" />
 </type>
@@ -214,6 +217,9 @@
   <bound-workflow workflow_id="activation_workflow" />
 </type>
 <type type_id="NotaryLetter">
+  <bound-workflow workflow_id="urban_licence_workflow" />
+</type>
+<type type_id="Ticket">
   <bound-workflow workflow_id="urban_licence_workflow" />
 </type>
 <type type_id="UniqueLicence">

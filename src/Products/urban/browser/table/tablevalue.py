@@ -165,6 +165,14 @@ class ValuesForProprietariesListing(ValuesForUrbanListing):
         return proprietaries
 
 
+class ValuesForTenantsListing(ValuesForUrbanListing):
+    """  return contact values from the context """
+
+    def getItems(self):
+        tenants = self.context.getTenants()
+        return tenants
+
+
 class ValuesForPlaintiffListing(ValuesForUrbanListing):
     """  return contact values from the context """
 

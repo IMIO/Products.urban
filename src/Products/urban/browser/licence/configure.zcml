@@ -446,4 +446,19 @@
      permission="zope2.View"
   />
 
+  <browser:page
+     for="Products.urban.interfaces.ITicket"
+     name="ticketview"
+     class=".ticketview.TicketView"
+     template="templates/ticketview.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     name="ticket-macros"
+     for="Products.urban.interfaces.ITicket"
+     template="templates/ticketmacros.pt"
+     permission="zope2.View"
+  />
+
 </configure>

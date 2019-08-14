@@ -43,6 +43,15 @@
   <adapter
      for="zope.interface.Interface
           zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.table.interfaces.ITenantTable
+          Products.urban.browser.table.interfaces.ITitleColumn"
+     factory=".column.TenantTitleColumnHeader"
+     provides="z3c.table.interfaces.IColumnHeader"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
           Products.urban.browser.table.interfaces.IPlaintiffTable
           Products.urban.browser.table.interfaces.ITitleColumn"
      factory=".column.PlaintiffTitleColumnHeader"
@@ -364,6 +373,14 @@
           zope.publisher.interfaces.browser.IBrowserRequest
           Products.urban.browser.table.interfaces.IProprietaryTable"
      factory=".tablevalue.ValuesForProprietariesListing"
+     provides="z3c.table.interfaces.IValues"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.table.interfaces.ITenantTable"
+     factory=".tablevalue.ValuesForTenantsListing"
      provides="z3c.table.interfaces.IValues"
   />
 

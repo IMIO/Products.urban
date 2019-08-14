@@ -380,6 +380,12 @@ class IInspection(IGenericLicence):
     """
 
 
+class ITicket(IGenericLicence):
+    """
+    Marker interface for inspection
+    """
+
+
 class IRoadDecree(Interface):
     """
     Marker interface for road degree

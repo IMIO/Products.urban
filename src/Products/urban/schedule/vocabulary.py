@@ -43,6 +43,7 @@ URBAN_TYPES_INTERFACES = {
     'PatrimonyCertificate': interfaces.IPatrimonyCertificate,
     'PreliminaryNotice': interfaces.IPreliminaryNotice,
     'ProjectMeeting': interfaces.IProjectMeeting,
+    'Ticket': interfaces.ITicket,
     'UniqueLicence': interfaces.IUniqueLicence,
     'UrbanCertificateOne': interfaces.IUrbanCertificateOne,
     'UrbanCertificateTwo': interfaces.IUrbanCertificateTwo,

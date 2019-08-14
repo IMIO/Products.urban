@@ -6,7 +6,7 @@
 
  <property name="title" i18n:translate="">Ticket</property>
  <property name="description" i18n:translate=""></property>
- <property name="icon_expr">string:${portal_url}/Ticket.png</property>
+ <property name="icon_expr">string:${portal_url}/BuildLicence.png</property>
  <property name="content_meta_type">Ticket</property>
  <property name="product">urban</property>
  <property name="factory">addTicket</property>
@@ -18,6 +18,7 @@
    <element value="Corporation"/>
    <element value="Proprietary"/>
    <element value="CorporationProprietary"/>
+   <element value="Tenant"/>
    <element value="Plaintiff"/>
    <element value="CorporationPlaintiff"/>
    <element value="UrbanEvent"/>
