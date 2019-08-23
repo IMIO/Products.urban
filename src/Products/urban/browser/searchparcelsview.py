@@ -203,6 +203,8 @@ class SearchParcelsView(BrowserView):
         """
          Addresses are the same if fuzzy match on street name and EXACT match on number
         """
+        if not address or not worklocations:
+            return False
         street_a, number_a = self._extractStreetAndNumber(address)
         catalog = api.portal.get_tool("uid_catalog")
         # wl is a dict with street as the street obj uid and number as the number in the street
