@@ -56,7 +56,7 @@ class ExternalConfig(object):
 
 MAP_VIEWER_CFG = ExternalConfig('mapviewer')
 URBANMAP_CFG = ExternalConfig('urbanmap')
-NIS = URBANMAP_CFG.urbanmap.get('NIS', '')
+NIS = URBANMAP_CFG.urbanmap.get('nis', '')
 
 # Permissions
 DEFAULT_ADD_CONTENT_PERMISSION = "Add portal content"
