@@ -216,6 +216,9 @@ def extraPostInstall(context):
     logger.info("addEventTypesAndTemplates : starting...")
     addEventTypesAndTemplates(context)
     logger.info("addEventTypesAndTemplates : Done")
+    logger.info('Setup default schedule configuration: starting...')
+    addScheduleConfigs(context)
+    logger.info('Setup default schedule configuration : Done')
 
 
 def addDefaultCronJobs(context):
