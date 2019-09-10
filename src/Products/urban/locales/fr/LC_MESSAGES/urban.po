@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2019-08-14 13:09+0000\n"
+"POT-Creation-Date: 2019-09-10 09:17+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -16,11 +16,11 @@ msgstr ""
 "X-is-fallback-for: fr-fr fr-be fr-ca\n"
 
 #. Default: "urban"
-#: ../setuphandlers.py:252
+#: ../setuphandlers.py:255
 msgid "%s_folder_title"
 msgstr ""
 
-#: ../setuphandlers.py:355
+#: ../setuphandlers.py:358
 msgid "%s_urbanconfig_title"
 msgstr ""
 
@@ -90,7 +90,7 @@ msgstr "Ajouter tous les avis"
 msgid "Add an event"
 msgstr "Ajouter un événement"
 
-#: ../browser/templates/urbaneventinquiryview.pt:195
+#: ../browser/templates/urbaneventinquiryview.pt:202
 msgid "Add recipientcadastre manually"
 msgstr "Ajouter un propriétaire"
 
@@ -98,7 +98,7 @@ msgid "Add this parcel"
 msgstr "Ajouter cette parcelle"
 
 #. Default: "urban"
-#: ../setuphandlers.py:913
+#: ../setuphandlers.py:916
 msgid "All"
 msgstr "Tous"
 
@@ -516,6 +516,10 @@ msgstr "Fin des travaux"
 msgid "ImpactStudy event type marker interface"
 msgstr "Étude d'incidence"
 
+#: ../browser/urbaneventviews.py:188
+msgid "Import"
+msgstr ""
+
 msgid "Inspection"
 msgstr "Inspection"
 
@@ -531,6 +535,10 @@ msgstr "Etat du permis"
 
 msgid "Licence types"
 msgstr "Type de permis"
+
+#: ../browser/urbaneventviews.py:179
+msgid "Listing file"
+msgstr ""
 
 #: ../profiles/default/actions.xml
 msgid "Map"
@@ -584,6 +592,10 @@ msgstr "Permis d'urbanisation"
 
 msgid "PatrimonyCertificate"
 msgstr "Certificat de patrimoine"
+
+#: ../interfaces.py:713
+msgid "Planned claimants imports"
+msgstr ""
 
 #: ../interfaces.py:703
 msgid "Planned inquiries"
@@ -639,7 +651,7 @@ msgid "RoadDecree"
 msgstr "Décret Voirie"
 
 #. Default: "imio.schedule"
-#: ../setuphandlers.py:280
+#: ../setuphandlers.py:283
 msgid "ScheduleConfig"
 msgstr "Configuration d'échéancier"
 
@@ -690,7 +702,7 @@ msgstr ""
 msgid "Submit"
 msgstr "Valider"
 
-#: ../browser/urbaneventviews.py:358
+#: ../browser/urbaneventviews.py:421
 msgid "Suspension period from to: please check the end date"
 msgstr "Période de suspension du ${from} au ${to}: CORRIGEZ LA DATE DE FIN DE PUBLICITE."
 
@@ -698,19 +710,23 @@ msgstr "Période de suspension du ${from} au ${to}: CORRIGEZ LA DATE DE FIN DE P
 msgid "Tests Extension profile for urban."
 msgstr ""
 
+#: ../browser/urbaneventviews.py:417
+msgid "The claimants import will be ready tomorrow!"
+msgstr "L'import des réclamants a bien été enregistré et sera éxécuté cette nuit"
+
 #: ../browser/longtextview.py:30
 msgid "The field does not exist !!!"
 msgstr ""
 
-#: ../browser/urbaneventviews.py:392
+#: ../browser/urbaneventviews.py:455
 msgid "The parcel radius search will be ready tomorrow!"
 msgstr "La recherche des propriétaires concernés par le rayon de cette enquête a bien été enregistrée et sera éxécutée cette nuit."
 
-#: ../browser/urbaneventviews.py:390
+#: ../browser/urbaneventviews.py:453
 msgid "There are parcel owners without any address found! Desactivate them!"
 msgstr ""
 
-#: ../browser/urbaneventviews.py:354
+#: ../browser/urbaneventviews.py:415
 msgid "This UrbanEventInquiry is not linked to an existing Inquiry !  Define a new inquiry on the licence !"
 msgstr ""
 
@@ -759,7 +775,7 @@ msgid "Update"
 msgstr "Mettre à jour"
 
 #. Default: "urban"
-#: ../setuphandlers.py:790
+#: ../setuphandlers.py:793
 msgid "Urban"
 msgstr ""
 
@@ -969,7 +985,7 @@ msgid "architect_residing"
 msgstr "${name}, dont les bureaux se situent ${address}"
 
 #. Default: "urban"
-#: ../setuphandlers.py:828
+#: ../setuphandlers.py:831
 msgid "architects_folder_title"
 msgstr "Architectes"
 
@@ -1172,7 +1188,7 @@ msgid "creation date"
 msgstr "Date de création"
 
 #. Default: "urban"
-#: ../setuphandlers.py:690
+#: ../setuphandlers.py:693
 msgid "dashboardtemplates_folder_title"
 msgstr "Modèles tableaux de bord"
 
@@ -1302,7 +1318,7 @@ msgid "envclasstwos"
 msgstr "Permis d'environnement classe 2"
 
 #. Default: "urban"
-#: ../setuphandlers.py:731
+#: ../setuphandlers.py:734
 msgid "environmenttemplates_folder_title"
 msgstr "modèles des procédures d'environnement"
 
@@ -1400,7 +1416,7 @@ msgid "event_inquiry_documents"
 msgstr "Récapitulatif"
 
 #. Default: "<span>Recipients</span>"
-#: ../browser/templates/urbaneventinquiryview.pt:164
+#: ../browser/templates/urbaneventinquiryview.pt:171
 msgid "event_inquiry_recipients"
 msgstr "Propriétaires concernés"
 
@@ -1577,19 +1593,19 @@ msgstr "${cityName}, le ${formattedDate}"
 
 # this is an HTML content for the front-page
 #. Default: "urban"
-#: ../setuphandlers.py:762
+#: ../setuphandlers.py:765
 msgid "front_page_descr"
 msgstr "Bienvenue sur le site vous permettant d'utiliser la gestion des permis d'urbanisme"
 
 # this is an HTML content for the front-page
 #. Default: "urban"
-#: ../setuphandlers.py:763
+#: ../setuphandlers.py:766
 msgid "front_page_text"
 msgstr "<p>L'application intègre la gestion des permis d'urbanisme, d'urbanisation, des déclarations, divisions notariales, CU1, CU2, lettres d'informations notariales, rendez-vous, avant-projets et déclarations environnementales :</p><ul><li>gestion de la demande</li><li>gestion des demandeurs, architectes, agents traitants, ...</li><li>production des documents</li><li>workflow de suivi de la demande</li><li>cartographie avec calcul du rayon de 50m, visualisation des parcelles, ...</li><li>échéancier</li><li>...</li></ul><p><a href='urban'>Cliquez ici pour accéder à l'application</a></p><p class='discreet'>Vous devez disposer d'un nom d'utilisateur et d'un mot de passe pour accéder à l'application</p>"
 
 # title of the front-page
 #. Default: "urban"
-#: ../setuphandlers.py:761
+#: ../setuphandlers.py:764
 msgid "front_page_title"
 msgstr "Gestion de l'Urbanisme"
 
@@ -1616,13 +1632,13 @@ msgid "generate_a_linked_doc"
 msgstr "Générer un document lié au dossier"
 
 #. Default: "urban"
-#: ../setuphandlers.py:842
+#: ../setuphandlers.py:845
 msgid "geometricians_folder_title"
 msgstr "Géomètres"
 
 #. Default: "Global templates"
 #: ../browser/templates/templatessummary.pt:19
-#: ../setuphandlers.py:702
+#: ../setuphandlers.py:705
 msgid "globaltemplates_folder_title"
 msgstr "Modèles généraux"
 
@@ -1648,6 +1664,10 @@ msgstr "Choisissez une des 3 recherches ci-dessous.  Si vous savez exactement ce
 
 msgid "inadmissibilityreasons_folder_title"
 msgstr "Motifs d'irrecevabilité"
+
+#: ../interfaces.py:714
+msgid "inquiries planned for claimants imports"
+msgstr ""
 
 #: ../interfaces.py:704
 msgid "inquiries planned for radius search"
@@ -2019,7 +2039,7 @@ msgid "not_permitted_to_add_urbanevent"
 msgstr "Vous ne pouvez pas générer de documents"
 
 #. Default: "urban"
-#: ../setuphandlers.py:856
+#: ../setuphandlers.py:859
 msgid "notaries_folder_title"
 msgstr "Notaires"
 
@@ -2052,12 +2072,12 @@ msgstr "Arbres et haies remarquables"
 
 #. Default: "Number of claimants"
 #: ../browser/templates/urbaneventannouncementview.pt:153
-#: ../browser/templates/urbaneventinquiryview.pt:152
+#: ../browser/templates/urbaneventinquiryview.pt:153
 msgid "number_of_claimants"
 msgstr "Nombre de réclamants"
 
 #. Default: "Number of recipients"
-#: ../browser/templates/urbaneventinquiryview.pt:180
+#: ../browser/templates/urbaneventinquiryview.pt:187
 msgid "number_of_recipients"
 msgstr "Nombre de destinataires"
 
@@ -2092,7 +2112,7 @@ msgid "parcelLinkedLicences"
 msgstr "Dossier(s) lié(s)"
 
 #. Default: "urban"
-#: ../setuphandlers.py:870
+#: ../setuphandlers.py:873
 msgid "parcellings_folder_title"
 msgstr "Lotissements"
 
@@ -5344,12 +5364,12 @@ msgid "urbancertificatetwos"
 msgstr "Certificats d'urbanisme 2"
 
 #. Default: "urban"
-#: ../setuphandlers.py:375
+#: ../setuphandlers.py:378
 msgid "urbaneventtypes_folder_title"
 msgstr "Types d'évènements"
 
 #. Default: "urban"
-#: ../setuphandlers.py:719
+#: ../setuphandlers.py:722
 msgid "urbantemplates_folder_title"
 msgstr "modèles des procédures d'urbanisme"
 

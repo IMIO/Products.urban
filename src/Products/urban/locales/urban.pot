@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-08-14 13:09+0000\n"
+"POT-Creation-Date: 2019-09-10 09:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,11 +15,11 @@ msgstr ""
 "Domain: urban\n"
 
 #. Default: "urban"
-#: ../setuphandlers.py:252
+#: ../setuphandlers.py:255
 msgid "%s_folder_title"
 msgstr ""
 
-#: ../setuphandlers.py:355
+#: ../setuphandlers.py:358
 msgid "%s_urbanconfig_title"
 msgstr ""
 
@@ -88,7 +88,7 @@ msgstr ""
 msgid "Add an event"
 msgstr ""
 
-#: ../browser/templates/urbaneventinquiryview.pt:195
+#: ../browser/templates/urbaneventinquiryview.pt:202
 msgid "Add recipientcadastre manually"
 msgstr ""
 
@@ -96,7 +96,7 @@ msgid "Add this parcel"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:913
+#: ../setuphandlers.py:916
 msgid "All"
 msgstr ""
 
@@ -499,6 +499,10 @@ msgstr ""
 msgid "ImpactStudy event type marker interface"
 msgstr ""
 
+#: ../browser/urbaneventviews.py:188
+msgid "Import"
+msgstr ""
+
 msgid "Inspection"
 msgstr ""
 
@@ -513,6 +517,10 @@ msgid "Licence state"
 msgstr ""
 
 msgid "Licence types"
+msgstr ""
+
+#: ../browser/urbaneventviews.py:179
+msgid "Listing file"
 msgstr ""
 
 #: ../profiles/default/actions.xml
@@ -566,6 +574,10 @@ msgid "ParcelOutLicence"
 msgstr ""
 
 msgid "PatrimonyCertificate"
+msgstr ""
+
+#: ../interfaces.py:713
+msgid "Planned claimants imports"
 msgstr ""
 
 #: ../interfaces.py:703
@@ -622,7 +634,7 @@ msgid "RoadDecree"
 msgstr ""
 
 #. Default: "imio.schedule"
-#: ../setuphandlers.py:280
+#: ../setuphandlers.py:283
 msgid "ScheduleConfig"
 msgstr ""
 
@@ -672,7 +684,7 @@ msgstr ""
 msgid "Submit"
 msgstr ""
 
-#: ../browser/urbaneventviews.py:358
+#: ../browser/urbaneventviews.py:421
 msgid "Suspension period from to: please check the end date"
 msgstr ""
 
@@ -680,19 +692,23 @@ msgstr ""
 msgid "Tests Extension profile for urban."
 msgstr ""
 
+#: ../browser/urbaneventviews.py:417
+msgid "The claimants import will be ready tomorrow!"
+msgstr ""
+
 #: ../browser/longtextview.py:30
 msgid "The field does not exist !!!"
 msgstr ""
 
-#: ../browser/urbaneventviews.py:392
+#: ../browser/urbaneventviews.py:455
 msgid "The parcel radius search will be ready tomorrow!"
 msgstr ""
 
-#: ../browser/urbaneventviews.py:390
+#: ../browser/urbaneventviews.py:453
 msgid "There are parcel owners without any address found! Desactivate them!"
 msgstr ""
 
-#: ../browser/urbaneventviews.py:354
+#: ../browser/urbaneventviews.py:415
 msgid "This UrbanEventInquiry is not linked to an existing Inquiry !  Define a new inquiry on the licence !"
 msgstr ""
 
@@ -741,7 +757,7 @@ msgid "Update"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:790
+#: ../setuphandlers.py:793
 msgid "Urban"
 msgstr ""
 
@@ -949,7 +965,7 @@ msgid "architect_residing"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:828
+#: ../setuphandlers.py:831
 msgid "architects_folder_title"
 msgstr ""
 
@@ -1149,7 +1165,7 @@ msgid "creation date"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:690
+#: ../setuphandlers.py:693
 msgid "dashboardtemplates_folder_title"
 msgstr ""
 
@@ -1279,7 +1295,7 @@ msgid "envclasstwos"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:731
+#: ../setuphandlers.py:734
 msgid "environmenttemplates_folder_title"
 msgstr ""
 
@@ -1377,7 +1393,7 @@ msgid "event_inquiry_documents"
 msgstr ""
 
 #. Default: "<span>Recipients</span>"
-#: ../browser/templates/urbaneventinquiryview.pt:164
+#: ../browser/templates/urbaneventinquiryview.pt:171
 msgid "event_inquiry_recipients"
 msgstr ""
 
@@ -1548,17 +1564,17 @@ msgid "formatted_date_with_cityname"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:762
+#: ../setuphandlers.py:765
 msgid "front_page_descr"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:763
+#: ../setuphandlers.py:766
 msgid "front_page_text"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:761
+#: ../setuphandlers.py:764
 msgid "front_page_title"
 msgstr ""
 
@@ -1584,13 +1600,13 @@ msgid "generate_a_linked_doc"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:842
+#: ../setuphandlers.py:845
 msgid "geometricians_folder_title"
 msgstr ""
 
 #. Default: "Global templates"
 #: ../browser/templates/templatessummary.pt:19
-#: ../setuphandlers.py:702
+#: ../setuphandlers.py:705
 msgid "globaltemplates_folder_title"
 msgstr ""
 
@@ -1615,6 +1631,10 @@ msgid "help_search_parcels"
 msgstr ""
 
 msgid "inadmissibilityreasons_folder_title"
+msgstr ""
+
+#: ../interfaces.py:714
+msgid "inquiries planned for claimants imports"
 msgstr ""
 
 #: ../interfaces.py:704
@@ -1987,7 +2007,7 @@ msgid "not_permitted_to_add_urbanevent"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:856
+#: ../setuphandlers.py:859
 msgid "notaries_folder_title"
 msgstr ""
 
@@ -2020,12 +2040,12 @@ msgstr ""
 
 #. Default: "Number of claimants"
 #: ../browser/templates/urbaneventannouncementview.pt:153
-#: ../browser/templates/urbaneventinquiryview.pt:152
+#: ../browser/templates/urbaneventinquiryview.pt:153
 msgid "number_of_claimants"
 msgstr ""
 
 #. Default: "Number of recipients"
-#: ../browser/templates/urbaneventinquiryview.pt:180
+#: ../browser/templates/urbaneventinquiryview.pt:187
 msgid "number_of_recipients"
 msgstr ""
 
@@ -2059,7 +2079,7 @@ msgid "parcelLinkedLicences"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:870
+#: ../setuphandlers.py:873
 msgid "parcellings_folder_title"
 msgstr ""
 
@@ -5308,12 +5328,12 @@ msgid "urbancertificatetwos"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:375
+#: ../setuphandlers.py:378
 msgid "urbaneventtypes_folder_title"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:719
+#: ../setuphandlers.py:722
 msgid "urbantemplates_folder_title"
 msgstr ""
 
