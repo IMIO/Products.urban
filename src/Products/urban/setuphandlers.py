@@ -226,6 +226,7 @@ def addDefaultCronJobs(context):
     cron_cfg.cronjobs = [
         u'0 0 * * portal/@@update_college_done_tasks',
         u'0 2 * * portal/@@inquiry_radius',
+        u'0 4 * * portal/@@claimants_import',
     ]
 
 def setFolderAllowedTypes(folder, portal_types):
