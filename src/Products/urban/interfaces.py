@@ -707,5 +707,14 @@ class IAsyncInquiryRadius(Interface):
     )
 
 
+class IAsyncClaimantsImports(Interface):
+    """ """
+    claimants_to_import = schema.List(
+        title=_(u"Planned claimants imports"),
+        description=_(u"inquiries planned for claimants imports"),
+        value_type=schema.ASCIILine()
+    )
+
+
 class IFacetedCollection(Interface):
     """ Adapts an object into a faceted collection """
