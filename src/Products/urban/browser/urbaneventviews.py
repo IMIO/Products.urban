@@ -12,8 +12,16 @@ from Products.urban.browser.table.urbantable import AttachmentsTable
 from Products.urban.browser.table.urbantable import ClaimantsTable
 from Products.urban.browser.table.urbantable import RecipientsCadastreTable
 from Products.urban import services
+from StringIO import StringIO
 
 from plone import api
+from plone.namedfile.field import NamedFile
+
+from z3c.form import button
+from z3c.form import form, field
+
+from zope.annotation import interfaces
+from zope.interface import Interface
 
 import csv
 
@@ -72,8 +80,8 @@ class UrbanEventView(BrowserView):
         """
         fields = self.getPmFields()
 
-        for field in fields:
-            text = field.get(self.context)
+        for field_ in fields:
+            text = field_.get(self.context)
             if text:
                 return False
 
@@ -166,6 +174,40 @@ class UrbanEventView(BrowserView):
         return api.content.get_state(self.context)
 
 
+class IImportClaimantListingForm(Interface):
+
+    listing_file = NamedFile(title=_(u'Listing file'))
+
+
+class ImportClaimantListingForm(form.Form):
+
+    method = 'post'
+    fields = field.Fields(IImportClaimantListingForm)
+    ignoreContext = True
+
+    @button.buttonAndHandler(_('Import'), name='import')
+    def handleImport(self, action):
+        data, errors = self.extractData()
+        if errors:
+            return False
+        self.store_claimants_csv(data['listing_file'])
+
+    def store_claimants_csv(self, csv_file):
+        interfaces.IAnnotations(self.context)['urban.claimants_to_import'] = csv_file.data
+        planned_claimants_import = api.portal.get_registry_record(
+            'Products.urban.interfaces.IAsyncClaimantsImports.claimants_to_import'
+        ) or []
+        inquiry_UID = self.context.UID()
+        if csv_file and inquiry_UID not in planned_claimants_import:
+            planned_claimants_import.append(inquiry_UID)
+        elif not csv_file and inquiry_UID in planned_claimants_import:
+            planned_claimants_import.remove(inquiry_UID)
+        api.portal.set_registry_record(
+            'Products.urban.interfaces.IAsyncClaimantsImports.claimants_to_import',
+            planned_claimants_import
+        )
+
+
 class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
     """
     This manage the base view of UrbanEventInquiry
@@ -177,6 +219,88 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
         self.request = request
         self.request.set('disable_plone.rightcolumn', 1)
         self.request.set('disable_plone.leftcolumn', 1)
+        self.import_claimants_listing_form = ImportClaimantListingForm(context, request)
+        self.import_claimants_listing_form.update()
+
+    @property
+    def has_planned_claimant_import(self):
+        planned_claimants_import = api.portal.get_registry_record(
+            'Products.urban.interfaces.IAsyncClaimantsImports.claimants_to_import'
+        ) or []
+        is_planned = self.context.UID() in planned_claimants_import
+        return is_planned
+
+    def import_claimants_from_csv(self):
+        portal_urban = api.portal.get_tool('portal_urban')
+        site = api.portal.get()
+        fieldnames = [
+            'personTitle',
+            'name1',
+            'name2',
+            'society',
+            'street',
+            'number',
+            'zipcode',
+            'city',
+            'country',
+            'email',
+            'phone',
+            'gsm',
+            'nationalRegister',
+            'claimType',
+            'hasPetition',
+            'outOfTime',
+            'claimDate',
+            'claimsText',
+        ]
+
+        titles_mapping = {'': ''}
+        titles_folder = portal_urban.persons_titles
+        for title_obj in titles_folder.objectValues():
+            titles_mapping[title_obj.Title()] = title_obj.id
+
+        country_mapping = {'': ''}
+        country_folder = portal_urban.country
+        for country_obj in country_folder.objectValues():
+            country_mapping[country_obj.Title()] = country_obj.id
+
+        claimants_file = interfaces.IAnnotations(self.context)['urban.claimants_to_import']
+        if claimants_file:
+            reader = csv.DictReader(
+                StringIO(claimants_file), fieldnames, delimiter=';', quotechar='"'
+            )
+        else:
+            reader = []
+        claimant_args = [row for row in reader if row['name1']][1:]
+        for claimant_arg in claimant_args:
+            claimant_arg.pop(None, None)
+            # default values
+            if not claimant_arg['claimType']:
+                claimant_arg['claimType'] = 'writedClaim'
+            if not claimant_arg['hasPetition']:
+                claimant_arg['hasPetition'] = False
+            if not claimant_arg['outOfTime']:
+                claimant_arg['outOfTime'] = False
+            # mappings
+            claimant_arg['personTitle'] = titles_mapping[claimant_arg['personTitle']]
+            claimant_arg['country'] = country_mapping[claimant_arg['country']]
+            claimant_arg['id'] = site.plone_utils.normalizeString(claimant_arg['name1'] + claimant_arg['name2'])
+            count = 0
+            if claimant_arg['id'] in self.context.objectIds():
+                count += 1
+                new_id = claimant_arg['id'] + '-' + str(count)
+                while new_id in self.context.objectIds():
+                    count += 1
+                    new_id = claimant_arg['id'] + '-' + str(count)
+                claimant_arg['id'] = new_id
+            # create claimant
+            with api.env.adopt_roles(['Manager']):
+                self.context.invokeFactory('Claimant', **claimant_arg)
+            print 'imported claimant {id}, {name} {surname}'.format(
+                id=claimant_arg['id'],
+                name=claimant_arg['name1'],
+                surname=claimant_arg['name2'],
+            )
 
     def getParcels(self):
         context = aq_inner(self.context)
@@ -251,69 +375,6 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
             else:
                 return linkedInquiry.Title()
 
-    def import_claimants_from_csv(self):
-        portal_urban = api.portal.get_tool('portal_urban')
-        site = api.portal.get()
-        fieldnames = [
-            'personTitle',
-            'name1',
-            'name2',
-            'society',
-            'street',
-            'number',
-            'zipcode',
-            'city',
-            'country',
-            'email',
-            'phone',
-            'gsm',
-            'nationalRegister',
-            'claimType',
-            'hasPetition',
-            'outOfTime',
-            'claimDate',
-            'claimsText',
-        ]
-
-        titles_mapping = {'': ''}
-        titles_folder = portal_urban.persons_titles
-        for title_obj in titles_folder.objectValues():
-            titles_mapping[title_obj.Title()] = title_obj.id
-
-        country_mapping = {'': ''}
-        country_folder = portal_urban.country
-        for country_obj in country_folder.objectValues():
-            country_mapping[country_obj.Title()] = country_obj.id
-
-        claimants_file = open('claimants.csv', 'r')
-        reader = csv.DictReader(claimants_file, fieldnames, delimiter=';', quotechar='"')
-        claimant_args = [row for row in reader if row['name1']][1:]
-        for claimant_arg in claimant_args:
-            claimant_arg.pop(None, None)
-            # default values
-            if not claimant_arg['claimType']:
-                claimant_arg['claimType'] = 'writedClaim'
-            if not claimant_arg['hasPetition']:
-                claimant_arg['hasPetition'] = False
-            if not claimant_arg['outOfTime']:
-                claimant_arg['outOfTime'] = False
-            # mappings
-            claimant_arg['personTitle'] = titles_mapping[claimant_arg['personTitle']]
-            claimant_arg['country'] = country_mapping[claimant_arg['country']]
-            claimant_arg['id'] = site.plone_utils.normalizeString(claimant_arg['name1'] + claimant_arg['name2'])
-            count = 0
-            while claimant_arg['id'] in self.context.objectIds():
-                count += 1
-            if count:
-                claimant_arg['id'] = claimant_arg['id'] + '-' + str(count)
-            # create claimant
-            self.context.invokeFactory('Claimant', **claimant_arg)
-            print 'imported claimant {id}, {name} {surname}'.format(
-                id=claimant_arg['id'],
-                name=claimant_arg['name1'],
-                surname=claimant_arg['name2'],
-            )
-
     def check_dates_for_suspension(self):
         inquiry_event = self.context
         start_date = inquiry_event.getInvestigationStart()
@@ -352,6 +413,8 @@ class UrbanEventAnnouncementView(UrbanEventInquiryBaseView):
         self.linkedInquiry = self.context.getLinkedInquiry()
         if not self.linkedInquiry:
             plone_utils.addPortalMessage(_('This UrbanEventInquiry is not linked to an existing Inquiry !  Define a new inquiry on the licence !'), type="error")
+        if self.has_planned_claimant_import:
+            plone_utils.addPortalMessage(_('The claimants import will be ready tomorrow!'), type="warning")
         suspension_check, suspension_start, suspension_end = self.check_dates_for_suspension()
         if not suspension_check:
             plone_utils.addPortalMessage(
@@ -390,6 +453,8 @@ class UrbanEventInquiryView(UrbanEventInquiryBaseView):
             plone_utils.addPortalMessage(_('There are parcel owners without any address found! Desactivate them!'), type="warning")
         if self.is_planned_inquiry:
             plone_utils.addPortalMessage(_('The parcel radius search will be ready tomorrow!'), type="warning")
+        if self.has_planned_claimant_import:
+            plone_utils.addPortalMessage(_('The claimants import will be ready tomorrow!'), type="warning")
         suspension_check, suspension_start, suspension_end = self.check_dates_for_suspension()
         if not suspension_check:
             plone_utils.addPortalMessage(

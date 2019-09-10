@@ -144,6 +144,7 @@
                                 <input type="submit" class="context" id="event" value="add_a_claimant" i18n:attributes="value" />
                                 <br /><br />
                             </form>
+
                             <div tal:define="claimants context/getClaimants;">
                                 <table width="100%" class="listing" style="margin-bottom: 0;">
                                     <thead>
@@ -159,6 +160,12 @@
                                     <tal:listing content="structure view/renderClaimantsListing" />
                                 </div>
                             </div>
+
+                            <tal:import_claimants_form define="form python: view.import_claimants_listing_form">
+                                <tal:with-form-as-view define="view nocall:form">
+                                        <metal:block use-macro="form/@@ploneform-macros/titlelessform" />
+                                </tal:with-form-as-view>
+                            </tal:import_claimants_form>
                         </dd>
 
                         <dt class="formTab" id="fieldsetlegend-urbaneventinquiry_recipients" i18n:translate="event_inquiry_recipients"><span>Recipients</span></dt>
