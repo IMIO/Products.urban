@@ -9,7 +9,6 @@ from plone import api
 
 class FixStreetsView(BrowserView):
     """
-      This manage the view of the popup showing the licences related to some parcels
     """
     def __init__(self, context, request):
         self.context = context
