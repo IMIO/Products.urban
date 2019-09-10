@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-09-10 09:17+0000\n"
+"POT-Creation-Date: 2019-09-10 10:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1017,6 +1017,9 @@ msgid "buildlicence_urbanconfig_title"
 msgstr ""
 
 msgid "buildlicences"
+msgstr ""
+
+msgid "can_not_delete_street_in_config"
 msgstr ""
 
 #: ../content/UrbanEventAnnouncement.py:77
