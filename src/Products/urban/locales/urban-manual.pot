@@ -2697,3 +2697,8 @@ msgstr ""
 
 msgid "urban_label_reportVisitDate"
 msgstr ""
+
+msgid "can_not_delete_street_in_config"
+msgstr ""
+
+

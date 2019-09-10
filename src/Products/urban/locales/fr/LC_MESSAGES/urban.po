@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2019-09-10 09:17+0000\n"
+"POT-Creation-Date: 2019-09-10 10:23+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -1038,6 +1038,9 @@ msgstr "Paramètres des Permis d'urbanisme"
 
 msgid "buildlicences"
 msgstr "Permis d'urbanisme"
+
+msgid "can_not_delete_street_in_config"
+msgstr "La suppression de cette rue est impossible car elle est utilisée dans au moins un dossier"
 
 #: ../content/UrbanEventAnnouncement.py:77
 msgid "cannot_remove_urbaneventannouncement_notthelast"
