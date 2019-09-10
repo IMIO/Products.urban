@@ -410,13 +410,21 @@
       factory=".table.column.GenerationColumn"
       provides="z3c.table.interfaces.IColumn"
       name="urban.generation"
-    />
+  />
 
   <browser:page
       for="*"
       name="json_export"
       class=".export_as_json.ExportFolderAsJSON"
       permission="cmf.ManagePortal"
-      />
+  />
+
+  <browser:page
+     for="*"
+     name="fixstreetsview"
+     class=".fixstreetsview.FixStreetsView"
+     permission="zope2.View"
+  />
+
 
 </configure>

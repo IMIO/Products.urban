@@ -68,6 +68,16 @@ def migrate_create_voc_tax(context):
     logger.info("migration step done!")
 
 
+def migrate_fix_streets(context):
+    """
+    """
+    logger = logging.getLogger('urban: migrate migrate_fix_streets')
+    logger.info("starting migration step")
+    view = context.unrestrictedTraverse("@@fixstreetsview")
+    view.__call__()
+    logger.info("migration step done!")
+
+
 def migrate(context):
     logger = logging.getLogger('urban: migrate to 2.4')
     logger.info("starting migration steps")
@@ -81,6 +91,7 @@ def migrate(context):
     setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'urban-postInstall')
     migrate_create_voc_classification_order_scope(context)
     migrate_create_voc_general_disposition(context)
+    migrate_fix_streets(context)
     catalog = api.portal.get_tool('portal_catalog')
     catalog.clearFindAndRebuild()
     logger.info("migration done!")
