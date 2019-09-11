@@ -187,25 +187,25 @@ class ImportClaimantListingForm(form.Form):
 
     @button.buttonAndHandler(_('Import'), name='import')
     def handleImport(self, action):
-        data, errors = self.extractData()
-        if errors:
-            return False
-        self.store_claimants_csv(data['listing_file'])
-
-    def store_claimants_csv(self, csv_file):
-        interfaces.IAnnotations(self.context)['urban.claimants_to_import'] = csv_file.data
+        inquiry_UID = self.context.UID()
         planned_claimants_import = api.portal.get_registry_record(
             'Products.urban.interfaces.IAsyncClaimantsImports.claimants_to_import'
         ) or []
-        inquiry_UID = self.context.UID()
-        if csv_file and inquiry_UID not in planned_claimants_import:
-            planned_claimants_import.append(inquiry_UID)
-        elif not csv_file and inquiry_UID in planned_claimants_import:
-            planned_claimants_import.remove(inquiry_UID)
+        data, errors = self.extractData()
+        if errors:
+            interfaces.IAnnotations(self.context)['urban.claimants_to_import'] = ''
+            if inquiry_UID in planned_claimants_import:
+                planned_claimants_import.remove(inquiry_UID)
+        else:
+            csv_file = data['listing_file']
+            interfaces.IAnnotations(self.context)['urban.claimants_to_import'] = csv_file.data
+            if csv_file and inquiry_UID not in planned_claimants_import:
+                planned_claimants_import.append(inquiry_UID)
         api.portal.set_registry_record(
             'Products.urban.interfaces.IAsyncClaimantsImports.claimants_to_import',
             planned_claimants_import
         )
+        return not bool(errors)
 
 
 class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
