@@ -408,8 +408,8 @@ class ActionsColumn(UrbanColumn):
     def renderCell(self, urbanlist_item):
         path = urbanlist_item.getPath()
         portal = api.portal.get()
-        context = type(self.context) is list and self.context[0] or self.context
-        if urbanlist_item.id not in context.objectIds():
+        context_ids = type(self.context) is list and self.context or self.context.objectIds()
+        if urbanlist_item.id not in context_ids:
             return ''
         return portal.unrestrictedTraverse('{}/actions_panel'.format(path))(showActions=True)
 
@@ -566,19 +566,6 @@ class GenerationColumn(LinkColumn):
         return super(GenerationColumn, self).renderCell(item)
 
 
-class InspectionReportText(UrbanColumn):
-
-    header = 'urban_label_report'
-    weight = 6
-
-    def renderCell(self, report):
-        url = report.absolute_url() + '/@@longtextview?field=report'
-        img = '<img  src="Report.png" "urban-report-icon"/>'
-        link = '<a class="link-overlay" href="{}">{}</a>'.format(url, img)
-        cell = '<span id="inspection_report_text">{}</span>'.format(link)
-        return cell
-
-
 class InspectionReportVisitDate(UrbanColumn):
 
     header = 'urban_label_reportVisitDate'
@@ -601,10 +588,20 @@ class InspectionReportDate(UrbanColumn):
         return date
 
 
+class InspectionReportText(UrbanColumn):
+
+    header = 'urban_label_report'
+    weight = 9
+
+    def renderCell(self, report):
+        cell = report.getReport().decode('utf-8')
+        return cell
+
+
 class InspectionReportFollowUp(UrbanColumn):
 
     header = 'urban_label_followup_proposition'
-    weight = 9
+    weight = 10
 
     def renderCell(self, report):
         voc = report.listFollowupPropositions().items()
