@@ -41,8 +41,9 @@ class UrbanTable(Table):
     batchProviderName = 'plonebatch'
     startBatchingAt = 20
 
-    def __init__(self, context, request):
+    def __init__(self, context, request, values=None):
         super(UrbanTable, self).__init__(context, request)
+        self.raw_values = values
         self.portal_url = portal.get().absolute_url()
 
     # override setUpRows: use a Lazymap rather than a comprehension list for

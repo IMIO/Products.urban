@@ -140,7 +140,7 @@ class ValuesForUrbanListing(ValuesMixin):
         return wrapped_items
 
     def getItems(self):
-        return self.context
+        return self.raw_values
 
 
 class ValuesForApplicantListing(ValuesForUrbanListing):

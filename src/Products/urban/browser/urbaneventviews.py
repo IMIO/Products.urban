@@ -116,7 +116,7 @@ class UrbanEventView(BrowserView):
         if not documents:
             return ''
 
-        documentlisting = DocumentsTable(documents, self.request)
+        documentlisting = DocumentsTable(self.context, self.request, values=documents)
         documentlisting.update()
         return documentlisting.render()
 
@@ -126,7 +126,7 @@ class UrbanEventView(BrowserView):
         if not attachments:
             return ''
 
-        table = AttachmentsTable(attachments, self.request)
+        table = AttachmentsTable(self.context, self.request, values=attachments)
         table.update()
         return table.render()
 
@@ -478,7 +478,7 @@ class UrbanEventInquiryView(UrbanEventInquiryBaseView):
         recipients = self.context.getRecipients()
         if not recipients:
             return ''
-        contactlisting = RecipientsCadastreTable(recipients, self.request)
+        contactlisting = RecipientsCadastreTable(self.context, self.request, values=recipients)
         contactlisting.update()
         return contactlisting.render()
 

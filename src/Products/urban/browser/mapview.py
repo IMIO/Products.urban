@@ -44,7 +44,7 @@ class MapView(BrowserView):
         parcels = self.context.getParcels()
         if not parcels:
             return ''
-        parceltable = ParcelsTable(parcels, self.request)
+        parceltable = ParcelsTable(self.context, self.request, values=parcels)
         parceltable.update()
         return parceltable.render()
 
