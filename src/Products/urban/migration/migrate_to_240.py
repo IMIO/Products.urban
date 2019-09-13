@@ -68,6 +68,25 @@ def migrate_create_voc_tax(context):
     logger.info("migration step done!")
 
 
+def migrate_update_empty_sols_pcas_title(context):
+    """
+    """
+    logger = logging.getLogger('urban: migrate migrate_update_empty_sols_pcas_title')
+    logger.info("starting migration step")
+    urban_tool = api.portal.get_tool('portal_urban')
+
+    pca_folder = urban_tool.pcas
+    for pca in pca_folder.objectValues():
+        if (not pca.Title()) and pca.getLabel():
+            pca.setTitle(pca.getLabel())
+    sol_folder = urban_tool.sols
+    for sol in sol_folder.objectValues():
+        if (not sol.Title()) and sol.getLabel():
+            sol.setTitle(sol.getLabel())
+
+    logger.info("migration step done!")
+
+
 def migrate(context):
     logger = logging.getLogger('urban: migrate to 2.4')
     logger.info("starting migration steps")
@@ -81,6 +100,7 @@ def migrate(context):
     setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'urban-postInstall')
     migrate_create_voc_classification_order_scope(context)
     migrate_create_voc_general_disposition(context)
+    migrate_update_empty_sols_pcas_title(context)
     catalog = api.portal.get_tool('portal_catalog')
     catalog.clearFindAndRebuild()
     logger.info("migration done!")
