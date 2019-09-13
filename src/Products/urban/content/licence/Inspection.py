@@ -210,6 +210,16 @@ class Inspection(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
                         if corp.portal_type == 'CorporationPlaintiff']
         return corporations
 
+    security.declarePublic('getLastReportEvent')
+
+    def getLastReportEvent(self):
+        return self.getLastEvent(interfaces.IUrbanEventInspectionReport)
+
+    security.declarePublic('getAllReportEvents')
+
+    def getAllReportEvents(self):
+        return self.getAllEvents(interfaces.IUrbanEventInspectionReport)
+
 
 registerType(Inspection, PROJECTNAME)
 
