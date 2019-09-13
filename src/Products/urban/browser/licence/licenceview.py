@@ -111,7 +111,7 @@ class LicenceView(BrowserView):
         if not attachments:
             return ''
         attachment_objects = [b.getObject() for b in attachments]
-        table = AttachmentsTable(attachment_objects, self.request)
+        table = AttachmentsTable(self.context, self.request, values=attachment_objects)
         return self.renderListing(table)
 
     def renderNestedAttachmentsListing(self):
@@ -138,7 +138,7 @@ class LicenceView(BrowserView):
 
         if not nested_attachments:
             return ''
-        table = NestedAttachmentsTable(nested_attachments, self.request)
+        table = NestedAttachmentsTable(self.context, self.request, values=nested_attachments)
         return self.renderListing(table)
 
     def getAdviceTitles(self):
@@ -174,14 +174,14 @@ class LicenceView(BrowserView):
         parcels = self.context.getParcels()
         if not parcels:
             return ''
-        parceltable = ParcelsTable(parcels, self.request)
+        parceltable = ParcelsTable(self.context, self.request, values=parcels)
         return self.renderListing(parceltable)
 
     def renderEventsListing(self):
         events = self.context.getAllEvents()
         if not events:
             return ''
-        eventtable = EventsTable(events, self.request)
+        eventtable = EventsTable(self.context, self.request, values=events)
         return self.renderListing(eventtable)
 
     def getLicenceConfig(self):
