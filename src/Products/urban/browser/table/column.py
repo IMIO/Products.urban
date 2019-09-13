@@ -408,8 +408,7 @@ class ActionsColumn(UrbanColumn):
     def renderCell(self, urbanlist_item):
         path = urbanlist_item.getPath()
         portal = api.portal.get()
-        context_ids = type(self.context) is list and [ob.id for ob in self.context] or self.context.objectIds()
-        if urbanlist_item.id not in context_ids:
+        if urbanlist_item.id not in self.context.objectIds():
             return ''
         return portal.unrestrictedTraverse('{}/actions_panel'.format(path))(showActions=True)
 
