@@ -35,7 +35,7 @@ URBAN_TYPES_INTERFACES = {
     'EnvClassThree': interfaces.IEnvClassThree,
     'EnvClassBordering': interfaces.IEnvClassBordering,
     'GenericLicence': interfaces.IGenericLicence,
-    'Inspection': interfaces.IInspection,
+#    'Inspection': interfaces.IInspection,
     'IntegratedLicence': interfaces.IIntegratedLicence,
     'MiscDemand': interfaces.IMiscDemand,
     'NotaryLetter': interfaces.INotaryLetter,
@@ -48,7 +48,7 @@ URBAN_TYPES_INTERFACES = {
     'UrbanCertificateTwo': interfaces.IUrbanCertificateTwo,
     'UrbanEventOpinionRequest': interfaces.IUrbanEventOpinionRequest,
     'ExplosivesPossession': interfaces.IExplosivesPossession,
-    'RoadDecree': interfaces.IRoadDecree,
+#    'RoadDecree': interfaces.IRoadDecree,
 }
 
 
