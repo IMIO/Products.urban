@@ -1245,7 +1245,7 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
         res = self.getField('pca').get(self)
         if type(res) is str and theObject:
             portal_urban = api.portal.get_tool('portal_urban')
-            res = getattr(portal_urban.pcas, res)
+            res = getattr(portal_urban.pcas, res, None)
         return res
 
     security.declarePublic('getOpinionRequests')
