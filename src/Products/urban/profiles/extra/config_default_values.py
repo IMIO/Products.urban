@@ -1496,9 +1496,9 @@ default_values = {
 
         'sols': [
             'PcaTerm',
-            {'id': "sol1", 'label': u"Schéma d'orientation local 1", 'number': '1', 'decreeDate': "2009/01/01", 'decreeType': "royal"},
-            {'id': "sol2", 'label': u"Schéma d'orientation local 2", 'number': '2', 'decreeDate': "2008/06/23", 'decreeType': "royal"},
-            {'id': "sol3", 'label': u"Schéma d'orientation local 3", 'number': '3', 'decreeDate': "2001/12/13", 'decreeType': "departmental"},
+            {'id': "sol1", "Title": "Schéma d'orientation local 1", 'label': u"Schéma d'orientation local 1", 'number': '1', 'decreeDate': "2009/01/01", 'decreeType': "royal"},
+            {'id': "sol2", "Title": "Schéma d'orientation local 2", 'label': u"Schéma d'orientation local 2", 'number': '2', 'decreeDate': "2008/06/23", 'decreeType': "royal"},
+            {'id': "sol3", "Title": "Schéma d'orientation local 3", 'label': u"Schéma d'orientation local 3", 'number': '3', 'decreeDate': "2001/12/13", 'decreeType': "departmental"},
         ],
 
         'solzones': [
