@@ -667,6 +667,11 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
         voc_terms = [t for t in all_voc_terms if getattr(t, 'id', getattr(t, 'value', None)) in selected_values]
         return voc_terms
 
+    def voc_terms_id(self, field_name='', with_coring_values=False):
+        voc_terms = self.voc_terms(field_name, with_coring_values)
+        voc_terms_id = [voc_term.id for voc_term in voc_terms]
+        return voc_terms_id
+
     def voc_term(self, field_name='', with_coring_values=False):
         all_voc_terms = self.all_voc_terms(field_name, with_coring_values)
         selected_value = self.context.getField(field_name).get(self.context)
