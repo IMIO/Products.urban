@@ -86,6 +86,12 @@ La recherche dans l'historique cadastral n'est plus présente, ces données n'é
 
 La recherche des propriétaires pour une enquête publique reprend maintenant les différents propriétaires possédant un bien à la même adresse de manière indépendante : une ligne par propriétaire.
 
+Gestion du cadastre 2019
+========================
+
+À partir des données cadastrales en version 2019, nous vous permettons de rechercher et ajouter des parcelles à jour pour l'année 2019.
+Le format de ces fichiers n'ayant pas évolué, il nous est possible de charger ces données plus à jour également. Merci d'entrer en `contact avec nous <support-urban@imio.be/>`_ si ce n'est pas encore chargé pour votre commune.
+
 
 Publipostage sans extension
 ===========================
@@ -150,13 +156,14 @@ Nouvelles couches carottables
    À venir
 
 
-Nouveau portail cartographique
-===============================
+Nouveau portail cartographique Imio Map
+=======================================
 
 .. image:: resources/images/new_map_portal_example.png
   :width: 700
   :alt: new_map_portal_example
+  :target: using_urban.html#portail-cartographique-imio-map
 
-.. todo::
-   Plus de détails à venir
+Cliquez sur la carte pour des informations détaillées.
+
 
