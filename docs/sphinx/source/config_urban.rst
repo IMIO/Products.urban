@@ -242,6 +242,7 @@ Similaire à l'exportation de la liste 220, cette fonctionalité permet d'obteni
 
 Le canevas du fichier de statistiques INS se trouve lui dans les modèles généraux de la configuration urban. Il ne faut normalement pas le modifier.
 
+
 ****************************************
 Utiliser l'édition externe avec ZopeEdit
 ****************************************
