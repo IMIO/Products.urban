@@ -151,6 +151,7 @@ Cette fonctionalité permet d'obtenir le fichier correspondant à la liste 220 �
 
 Si au moment d'enregistrer la liste, une page d'erreur apparait à la place, certains champs obligatoires pour la liste 220 n'ont pas été renseignés.
 Exemple, si une erreur :samp:`unknown worktype  on licence PU/2017/4161/DC` apparait: le type de travaux n'a pas été renseigné pour le permis qui a comme référence ``PU/2017/4161/DC``. Il faut alors rechercher ce permis par référence et modifier les champs nécessaires.
+Seuls les permis avec un statut "Accepté" sont repris.
 
 Exporter le fichier de statistiques INS
 =======================================
