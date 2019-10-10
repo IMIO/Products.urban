@@ -230,6 +230,8 @@ Au moment de générer la liste, plusieurs erreurs peuvent apparaitre, car certa
 * :samp:`unknown worktype` : le type de travaux n'a pas été renseigné pour le permis. Il faut renseigner le champ "Nature des travaux (liste 220)" dans le dossier concerné.
 * :samp:`no street (with code) found` : la rue renseignée dans le dossier n'a pas de code rue (INS). Il faut renseigner ce champ dans la page de la rue concernée.
 
+Seuls les permis avec un statut "Accepté" sont repris.
+
 ***************************************
 Exporter le fichier de statistiques INS
 ***************************************
