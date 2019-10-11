@@ -195,6 +195,9 @@ msgstr ""
 msgid "Sort results by licence type first, then by delay time"
 msgstr ""
 
+msgid "Ticket"
+msgstr ""
+
 #. Default: "Certificat d'urbanisme 1"
 msgid "UrbanCertificateOne"
 msgstr ""
@@ -776,6 +779,9 @@ msgstr ""
 msgid "label_colname_parcelrefs"
 msgstr ""
 
+msgid "label_colname_plaintiff_data"
+msgstr ""
+
 msgid "label_colname_proprietary_data"
 msgstr ""
 
@@ -801,6 +807,9 @@ msgid "label_colname_street"
 msgstr ""
 
 msgid "label_colname_time_delay"
+msgstr ""
+
+msgid "label_colname_time_tenant"
 msgstr ""
 
 msgid "label_colname_transmitDate"
@@ -2686,3 +2695,14 @@ msgstr ""
 msgid "urban_search_parcel_by_street_number"
 msgstr ""
 
+msgid "urban_label_reportVisitDate"
+msgstr ""
+
+msgid "urban_search_parcel_by_proprietary"
+msgstr ""
+
+msgid "urban_browse_old_parcels"
+msgstr ""
+
+msgid "urban_button_search"
+msgstr ""
