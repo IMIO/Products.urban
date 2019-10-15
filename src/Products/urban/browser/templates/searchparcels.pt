@@ -169,7 +169,7 @@ metal:use-macro="here/main_template/macros/master">
                                 <td>
                         </tr>
                         </table><br/>
-                        <input class="context" type="submit" value="Search" i18n:attributes="value" />
+                        <input class="context" type="submit" value="Search" i18n:attributes="value urban_button_search;" />
                         </form>
 
                         <!-- Display results -->

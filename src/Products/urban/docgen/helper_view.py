@@ -478,7 +478,29 @@ class UrbanDocGenerationEventHelperView(UrbanDocGenerationHelperView):
                 mailing_list = self.context.getClaimants()
             elif gen_context['publipostage'] == 'proprietaires':
                 mailing_list = self.context.getRecipients()
+            elif gen_context['publipostage'] == 'organismes':
+                mailing_list = self.getFolderMakersAddress()
         return mailing_list
+
+    def getFolderMakersAddress(self):
+        """  """
+        address = []
+        foldermakers = self.getFolderMakers()
+        for foldermaker in foldermakers:
+            html = foldermaker.Description()
+            address.append(self.portal.portal_transforms.convert('html_to_web_intelligent_plain_text', html).getData().strip('\n '))
+        return address
+
+    def getFolderMakers(self):
+        """  """
+        urban_tool = getToolByName(self, 'portal_urban')
+        foldermakers_config = urban_tool.getUrbanConfig(self.context).urbaneventtypes
+        foldermakers = [fm for fm in foldermakers_config.objectValues('OpinionRequestEventType') if fm.id in self.getSolicitOpinions()]
+        return foldermakers
+
+    def getSolicitOpinions(self):
+        """  """
+        return self.context.getSolicitOpinionsTo() + self.context.getSolicitOpinionsToOptional()
 
 
 class UrbanDocGenerationFacetedHelperView(ATDocumentGenerationHelperView):
