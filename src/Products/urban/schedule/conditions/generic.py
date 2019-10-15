@@ -7,6 +7,8 @@ from imio.schedule.content.condition import Condition
 
 from Products.urban.config import LICENCE_FINAL_STATES
 
+from DateTime import DateTime
+
 
 class DepositDoneCondition(Condition):
     """
@@ -353,6 +355,7 @@ class OpinionRequestsDone(Condition):
 
         return True
 
+
 class RubricsChoiceDone(Condition):
     """
     Rubrics field has values selected.
@@ -361,7 +364,6 @@ class RubricsChoiceDone(Condition):
     def evaluate(self):
         licence = self.task_container
         return bool(licence.getRubrics())
-
 
 
 class CollegeOpinionTransmitToSPWDoneCondition(Condition):
@@ -554,3 +556,12 @@ class LicenceEndedCondition(Condition):
         licence = self.task_container
         is_ended = api.content.get_state(licence) in LICENCE_FINAL_STATES
         return is_ended
+
+
+class AlwaysFalseCondition(Condition):
+    """
+    always return False
+    """
+
+    def evaluate(self):
+        return False
