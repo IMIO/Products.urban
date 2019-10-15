@@ -6,6 +6,5 @@
     <include file="start.zcml" />
     <include file="end.zcml" />
     <include file="freeze.zcml" />
-    <include file="thaw.zcml" />
 
 </configure>

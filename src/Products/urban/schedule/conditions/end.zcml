@@ -406,4 +406,12 @@
         name="urban.schedule.licence_ended"
     />
 
+    <adapter
+        for="Products.urban.interfaces.IGenericLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.LicenceThawedCondition"
+        name="urban.schedule.condition.LicenceThawed"
+    />
+
 </configure>
