@@ -558,6 +558,17 @@ class LicenceEndedCondition(Condition):
         return is_ended
 
 
+class LicenceithawedCondition(Condition):
+    """
+    Licence is not in frozen state
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+        thawed = api.content.get_state(licence) != 'frozen_suspension'
+        return thawed
+
+
 class AlwaysFalseCondition(Condition):
     """
     always return False
