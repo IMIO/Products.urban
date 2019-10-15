@@ -1,9 +1,18 @@
 # -*- coding: utf-8 -*-
 
+from imio.actionspanel.browser.views import ActionsPanelView
+from imio.actionspanel.browser.views import DEFAULT_CONFIRM_VIEW
+from imio.actionspanel import ActionsPanelMessageFactory as _actions
+
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone import api
+from Products.CMFPlone import PloneMessageFactory as _plone
+from Products.DCWorkflow.Transitions import TransitionDefinition
 
-from imio.actionspanel.browser.views import ActionsPanelView
+from zope.annotation import IAnnotations
+from zope.i18n import translate
+
+# from DateTime import DateTime
 
 
 class UrbanDefaultActionsPanelView(ActionsPanelView):
@@ -38,6 +47,55 @@ class LicenceActionsPanelView(ActionsPanelView):
         self.SECTIONS_TO_RENDER = ('renderEdit',)
         self.IGNORABLE_ACTIONS = ('cut', 'paste', 'rename', 'copy')
 
+    def triggerTransition(self, transition, comment, redirect=True):
+        freeze_transition = 'suspend_freeze'
+        thaw_transition = 'resume_thaw'
+        if transition not in [freeze_transition, thaw_transition]:
+            return super(TransitionsPanelView, self).triggerTransition(transition, comment, redirect)
+        else:
+            licence = self.context
+            annotations = IAnnotations(licence)
+            freeze_infos = annotations.get('imio.schedule.freeze_task', {'previous_state': api.content.get_state(licence)})
+            if transition == freeze_transition:
+                new_state = 'frozen_suspension'
+                title = 'Freeze suspend'
+                freeze_infos['freeze_state'] = api.content.get_state(licence)
+                annotations['imio.schedule.freeze_task'] = freeze_infos
+            else:
+                new_state = freeze_infos['freeze_state']
+                title = 'Freeze suspend'
+
+            # execute
+            plone_utils = api.portal.get_tool('plone_utils')
+            workflow_tool = api.portal.get_tool('portal_workflow')
+            workflow_def = workflow_tool.getWorkflowsFor(licence)[0]
+            transition = TransitionDefinition(transition)
+            transition.setProperties(title, new_state)
+            workflow_def._executeTransition(licence, transition)
+
+            transition_title = freeze_transition.capitalize()
+            # add a portal message, we try to translate a specific one or add 'Item state changed.' as default
+            msg = _actions('%s_done_descr' % transition_title, default=_plone("Item state changed."))
+            plone_utils.addPortalMessage(msg)
+
+            if not self.member.has_permission('View', self.context):
+                # After having triggered a wfchange, it the current user
+                # can not access the obj anymore, try to find a place viewable by the user
+                redirectToUrl = self._redirectToViewableUrl()
+                # add a specific portal_message before redirecting the user
+                msg = _actions(
+                    'redirected_after_transition_not_viewable',
+                    default="You have been redirected here because you do not have "
+                            "access anymore to the element you just changed the state for."
+                )
+                plone_utils.addPortalMessage(msg, 'warning')
+                return redirectToUrl
+            else:
+                # in some cases, redirection is managed at another level, by jQuery for example
+                if not redirect:
+                    return
+                return self.request.get('HTTP_REFERER')
+
 
 class TransitionsPanelView(ActionsPanelView):
     """
@@ -54,6 +112,44 @@ class TransitionsPanelView(ActionsPanelView):
             showHistory=True,
             **kwargs
         )
+
+    def getTransitions(self):
+        transitions = super(TransitionsPanelView, self).getTransitions()
+        workflow = self.request.get('imio.actionspanel_workflow_%s_cachekey' % self.context.portal_type, None)
+        if 'frozen_suspension' in workflow.states:
+            if api.content.get_state(self.context) == 'frozen_suspension':
+                # add 'resume_thaw' fake transition
+                transitions.append(
+                    {
+                        'id': 'resume_thaw',
+                        # if the transition.id is not translated, use translated transition.title...
+                        'title': translate('resume_thaw', domain="plone", context=self.request),
+                        'description': '',
+                        'name': 'Resume_thaw',
+                        'may_trigger': True,
+                        'confirm': True,
+                        'confirmation_view': DEFAULT_CONFIRM_VIEW,
+                        'url': '' % {'content_url': self.context.absolute_url(), 'portal_url': self.portal_url, 'folder_url': ''},
+                        'icon': '' % {'content_url': self.context.absolute_url(), 'portal_url': self.portal_url, 'folder_url': ''},
+                    }
+                )
+            else:
+                # add 'suspend_freeze' fake transition
+                transitions.append(
+                    {
+                        'id': 'suspend_freeze',
+                        # if the transition.id is not translated, use translated transition.title...
+                        'title': translate('suspend_freeze', domain="plone", context=self.request),
+                        'description': '',
+                        'name': 'Suspend_freeze',
+                        'may_trigger': True,
+                        'confirm': True,
+                        'confirmation_view': DEFAULT_CONFIRM_VIEW,
+                        'url': '' % {'content_url': self.context.absolute_url(), 'portal_url': self.portal_url, 'folder_url': ''},
+                        'icon': '' % {'content_url': self.context.absolute_url(), 'portal_url': self.portal_url, 'folder_url': ''},
+                    }
+                )
+        return transitions
 
     def sortTransitions(self, lst):
         """ Sort the list of transitions """

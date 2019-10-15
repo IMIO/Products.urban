@@ -25,6 +25,7 @@ class SuspensionWorkflowAdaptation(object):
         self.set_suspend_transition(workflow, **parameters)
         self.create_resume_transition(workflow, **parameters)
         self.create_suspension_state(workflow, **parameters)
+        self.create_frozen_suspension_state(workflow, **parameters)
 
         message = "patched '{}' workflow with suspension loop".format(workflow_name)
         return True, message
@@ -59,6 +60,20 @@ class SuspensionWorkflowAdaptation(object):
         suspension_state.group_roles = PersistentMapping()
         suspension_state.var_values = PersistentMapping()
         suspension_state.transitions = ('resume',)
+
+    def create_frozen_suspension_state(self, workflow, **parameters):
+        """
+        create a 'frozen_suspension' state
+        """
+        if 'frozen_suspension' not in workflow.states:
+            workflow.states.addState('frozen_suspension')
+
+        frozen_suspension_state = workflow.states['frozen_suspension']
+        default_mapping = workflow.states['suspension'].permission_roles.copy()
+        frozen_suspension_state.title = 'frozen_suspension'
+        frozen_suspension_state.permission_roles = default_mapping
+        frozen_suspension_state.group_roles = PersistentMapping()
+        frozen_suspension_state.var_values = PersistentMapping()
 
     def create_suspend_transition(self, workflow, **parameters):
         """

@@ -6,6 +6,7 @@
     <include package=".crons" />
 
     <include file="assign_principal.zcml" />
+    <include file="default_states.zcml" />
     <include file="delay.zcml" />
     <include file="events.zcml" />
     <include file="indexes.zcml" />
