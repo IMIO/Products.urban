@@ -558,7 +558,7 @@ class LicenceEndedCondition(Condition):
         return is_ended
 
 
-class LicenceithawedCondition(Condition):
+class LicenceThawedCondition(Condition):
     """
     Licence is not in frozen state
     """
