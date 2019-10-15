@@ -1,0 +1,17 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    i18n_domain="liege.urban">
+
+    <adapter
+        for="Products.urban.interfaces.IGenericLicence"
+        provides="imio.schedule.interfaces.IDefaultFreezeStates"
+        factory=".default_states.LicencesDefaultFreezeStates"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.IGenericLicence"
+        provides="imio.schedule.interfaces.IDefaultThawStates"
+        factory=".default_states.LicencesDefaultThawStates"
+    />
+
+</configure>

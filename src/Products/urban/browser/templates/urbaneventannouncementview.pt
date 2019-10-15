@@ -160,6 +160,13 @@
                                     <tal:listing content="structure view/renderClaimantsListing" />
                                 </div>
                             </div>
+
+                            <tal:import_claimants_form define="form python: view.import_claimants_listing_form">
+                                <tal:with-form-as-view define="view nocall:form">
+                                        <metal:block use-macro="form/@@ploneform-macros/titlelessform" />
+                                </tal:with-form-as-view>
+                            </tal:import_claimants_form>
+
                         </dd>
 
                     </div>

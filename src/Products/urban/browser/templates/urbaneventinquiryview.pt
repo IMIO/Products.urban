@@ -166,6 +166,7 @@
                                         <metal:block use-macro="form/@@ploneform-macros/titlelessform" />
                                 </tal:with-form-as-view>
                             </tal:import_claimants_form>
+
                         </dd>
 
                         <dt class="formTab" id="fieldsetlegend-urbaneventinquiry_recipients" i18n:translate="event_inquiry_recipients"><span>Recipients</span></dt>
