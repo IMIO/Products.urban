@@ -2697,3 +2697,12 @@ msgstr ""
 
 msgid "urban_label_reportVisitDate"
 msgstr ""
+
+msgid "urban_search_parcel_by_proprietary"
+msgstr ""
+
+msgid "urban_browse_old_parcels"
+msgstr ""
+
+msgid "urban_button_search"
+msgstr ""
