@@ -51,7 +51,7 @@ class LicenceActionsPanelView(ActionsPanelView):
         freeze_transition = 'suspend_freeze'
         thaw_transition = 'resume_thaw'
         if transition not in [freeze_transition, thaw_transition]:
-            return super(TransitionsPanelView, self).triggerTransition(transition, comment, redirect)
+            return super(LicenceActionsPanelView, self).triggerTransition(transition, comment, redirect)
         else:
             licence = self.context
             annotations = IAnnotations(licence)
