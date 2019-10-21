@@ -479,17 +479,20 @@ class UrbanDocGenerationEventHelperView(UrbanDocGenerationHelperView):
             elif gen_context['publipostage'] == 'proprietaires':
                 mailing_list = self.context.getRecipients()
             elif gen_context['publipostage'] == 'organismes':
-                mailing_list = self.getFolderMakersAddress()
+                mailing_list = self.getFolderMakersMailing()
         return mailing_list
 
-    def getFolderMakersAddress(self):
+    def getFolderMakersMailing(self):
         """  """
-        address = []
+        mailing_list = []
         foldermakers = self.getFolderMakers()
         for foldermaker in foldermakers:
+            mailing = {}
+            mailing['title'] = foldermaker.Title()
             html = foldermaker.Description()
-            address.append(self.portal.portal_transforms.convert('html_to_web_intelligent_plain_text', html).getData().strip('\n '))
-        return address
+            mailing['description'] = self.portal.portal_transforms.convert('html_to_web_intelligent_plain_text', html).getData().strip('\n ')
+            mailing_list.append(mailing)
+        return mailing_list
 
     def getFolderMakers(self):
         """  """
