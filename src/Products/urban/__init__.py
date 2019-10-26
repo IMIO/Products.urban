@@ -44,6 +44,7 @@ logger.debug('Installing Product')
 import os
 import os.path
 from App.Common import package_home
+from plone.app.upgrade.utils import alias_module
 import Products.CMFPlone.interfaces
 from Products.Archetypes import listTypes
 from Products.Archetypes.atapi import *
@@ -226,3 +227,9 @@ def initialize(context):
     ##code-section custom-init-bottom #fill in your manual code here
     ##/code-section custom-init-bottom
 
+
+for licence_type in URBAN_TYPES:
+    alias_module(
+        'Products.urban.{}'.format(licence_type),
+        getattr(content.licence, licence_type)
+    )

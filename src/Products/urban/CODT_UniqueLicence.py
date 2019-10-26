@@ -1,1 +1,0 @@
-from Products.urban.content.licence.CODT_UniqueLicence import CODT_UniqueLicence
