@@ -229,7 +229,9 @@ def initialize(context):
 
 
 for licence_type in URBAN_TYPES:
-    alias_module(
-        'Products.urban.{}'.format(licence_type),
-        getattr(content.licence, licence_type)
-    )
+    if hasattr(content.licence, licence_type):
+        alias_module(
+            'Products.urban.{}'.format(licence_type),
+            getattr(content.licence, licence_type)
+        )
+
