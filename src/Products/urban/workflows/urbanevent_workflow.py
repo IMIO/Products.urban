@@ -3,6 +3,7 @@
 from Products.urban.interfaces import ICODT_UniqueLicence
 from Products.urban.interfaces import IEnvironmentBase
 from Products.urban.interfaces import IEnvironmentOnlyEvent
+from Products.urban.interfaces import IIntegratedLicence
 from Products.urban.interfaces import IUniqueLicence
 from Products.urban.interfaces import IUrbanAndEnvironmentEvent
 from Products.urban.interfaces import IUrbanOrEnvironmentEvent
@@ -19,7 +20,8 @@ class StateRolesMapping(LocalRoleAdapter):
         self.licence = self.context.aq_parent
 
     def get_allowed_groups(self, licence, event):
-        if IEnvironmentBase.providedBy(licence):
+        integrated_licence = IIntegratedLicence.providedBy(licence)
+        if IEnvironmentBase.providedBy(licence) or integrated_licence:
             if IUniqueLicence.providedBy(licence) or ICODT_UniqueLicence.providedBy(licence):
                 if IEnvironmentOnlyEvent.providedBy(event):
                     return 'environment_only'
