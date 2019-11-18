@@ -374,8 +374,8 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
                 'habitation', 'peb', 'patrimony']
         env_advice_tabs_config = ['description', 'advices', 'analysis', 'environment', 'location', 'road']
         env_inquiry_tabs_config = ['description', 'advices', 'inquiry', 'analysis', 'environment', 'location', 'road']
-        inspection_tabs_config = ['description', 'advices', 'inspection']
-        ticket_tabs_config = ['description']
+        inspection_tabs_config = ['description', 'advices', 'inspection', 'location']
+        ticket_tabs_config = ['description', 'inspection', 'location']
 
         types = {
             'buildlicence': buildlicence_tabs_config,

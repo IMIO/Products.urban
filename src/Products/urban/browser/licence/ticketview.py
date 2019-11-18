@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from Products.urban.browser.licence.licenceview import LicenceView
+from Products.urban.browser.table.urbantable import InspectionReportsTable
 from Products.urban.browser.table.urbantable import PlaintiffTable
 from Products.urban.browser.table.urbantable import TenantTable
 from Products.CMFPlone import PloneMessageFactory as _
@@ -26,6 +27,9 @@ class TicketView(LicenceView):
     def getMacroViewName(self):
         return 'ticket-macros'
 
+    def getInspectionFields(self, exclude=[]):
+        return self.getSchemataFields('urban_inspection', exclude)
+
     def renderTenantListing(self):
         if not self.context.getTenants():
             return ''
@@ -37,3 +41,7 @@ class TicketView(LicenceView):
             return ''
         contacttable = PlaintiffTable(self.context, self.request)
         return self.renderListing(contacttable)
+
+    def renderRepportsListing(self):
+        reporttable = InspectionReportsTable(self.context, self.request)
+        return self.renderListing(reporttable)
