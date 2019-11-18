@@ -299,22 +299,26 @@ class LicenceView(BrowserView):
     def has_bound_inspections(self):
         annotations = IAnnotations(self.context)
         inspections = annotations.get('urban.bound_inspections', [])
-        return inspections
+        tickets = annotations.get('urban.bound_tickets', [])
+        return inspections or tickets
 
     def get_bound_inspections(self):
+        inspections_and_tickets = []
         annotations = IAnnotations(self.context)
-        inspection_UIDs = list(annotations['urban.bound_inspections'])
-        if inspection_UIDs:
+        inspection_UIDs = list(annotations.get('urban.bound_inspections', []))
+        ticket_UIDs = list(annotations.get('urban.bound_tickets', []))
+        inspections_and_tickets_UIDs = inspection_UIDs + ticket_UIDs
+        if inspections_and_tickets_UIDs:
             licence_folder = api.portal.get().urban
             catalog = api.portal.get_tool('portal_catalog')
-            inspection_brains = catalog(UID=inspection_UIDs)
-            inspections = [{
+            brains = catalog(UID=inspections_and_tickets_UIDs)
+            inspections_and_tickets = [{
                 'title': b.Title,
                 'url': '{}/{}s/{}'.format(licence_folder.absolute_url(), b.portal_type.lower(), b.id),
                 'state': b.review_state
-                }
-                for b in inspection_brains]
-            return inspections
+            }
+                for b in brains]
+            return inspections_and_tickets
 
 
 class CODTLicenceView(LicenceView):

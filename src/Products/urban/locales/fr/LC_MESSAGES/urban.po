@@ -2548,7 +2548,7 @@ msgstr "Nombre de jour restant à partir duquel une alerte doit être indiquée 
 #. Default: "Bound inspections"
 #: ../browser/licence/templates/licencetabsmacros.pt:64
 msgid "urban_bound_inspections"
-msgstr "Dossiers d'inspections liés"
+msgstr "Dossiers d'inspections ou PV liés"
 
 msgid "urban_browse_old_parcels"
 msgstr "Chercher dans les anciennes parcelles (Par référence cadastrale uniquement)"
