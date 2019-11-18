@@ -7222,6 +7222,7 @@ urbanEventTypes = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
+                {'id': "inspection_rapport1.odt", 'title': "Rapport d'inspection"},
             ),
             'eventTypeType': 'Products.urban.interfaces.IInspectionReportEvent',
             'eventPortalType': 'UrbanEventInspectionReport',
