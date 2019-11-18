@@ -12,7 +12,6 @@ from zope.component import queryMultiAdapter
 from zope.interface import implements
 from zope.i18n import translate
 
-from Products.CMFCore.utils import getToolByName
 from Products.urban.setuphandlers import _ as _t
 from Products.urban.browser.table.interfaces import ITitleColumn, \
     IActionsColumn, \
@@ -621,18 +620,15 @@ class InspectionFolderManager(UrbanColumn):
     weight = 9
 
     def renderCell(self, report):
-        folder_manager_column_value = ''
+        folder_manager_id = ''
         if 'inspectionreport_event_workflow' in report.value.workflow_history:
             wf_histories = report.value.workflow_history['inspectionreport_event_workflow']
             for wf_history in wf_histories:
                 if wf_history.get("action", "") == 'propose_report':
-                    folder_manager_column_value = wf_history.get("actor", "")
-            if not folder_manager_column_value:
-                for wf_history in wf_histories:
-                    if wf_history.get("review_state", "") == 'writing_report':
-                        folder_manager_column_value = wf_history.get("actor", "")
-        if folder_manager_column_value != 'admin':
-            members = getToolByName(self.context, 'portal_membership')
-            folder_manager_column_value = members.getMemberInfo(folder_manager_column_value)['fullname']
-        cell = folder_manager_column_value.decode('utf-8')
+                    folder_manager_id = wf_history.get("actor", "")
+        if not folder_manager_id:
+            folder_manager_id = str(report.getOwner())
+        members = api.portal.get_tool('portal_membership')
+        folder_manager_name = members.getMemberInfo(folder_manager_id)['fullname'] or folder_manager_id
+        cell = folder_manager_name.decode('utf-8')
         return cell
