@@ -21,6 +21,7 @@
 
 </metal:description>
 
-<metal:advices define-macro="advices_macro" i18n:domain="urban">
-    <metal:parent_call use-macro="here/@@licencetabs-macros/advices_macro" />
-</metal:advices>
+<metal:location define-macro="location_macro" i18n:domain="urban">
+    <metal:parent_call use-macro="here/@@licencetabs-macros/location_macro">
+    </metal:parent_call>
+</metal:location>
