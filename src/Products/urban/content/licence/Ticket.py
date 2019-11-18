@@ -243,6 +243,8 @@ def finalize_schema(schema, folderish=False, moveDiscussion=True):
     for field in schema.fields():
         allowed_schematas = [
             'urban_description',
+            'urban_inspection',
+            'urban_location',
             'metadata',
             'default'
         ]

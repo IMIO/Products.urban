@@ -128,9 +128,6 @@ class CODT_IntegratedLicence(BaseFolder, CODT_UniqueLicence, BrowserDefaultMixin
         else:
             delay = 90
 
-        if self.prorogation:
-            delay += 30
-
         return '{}j'.format(str(delay))
 
     security.declarePublic('listRegionalAuthorities')
