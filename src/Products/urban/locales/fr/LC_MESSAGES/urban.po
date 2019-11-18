@@ -3675,7 +3675,7 @@ msgstr "Pétition"
 #. Default: "Impactstudy"
 #: ../content/licence/BaseBuildLicence.py:185
 msgid "urban_label_impactStudy"
-msgstr "Etude d'incidence?"
+msgstr "Etude d'incidences?"
 
 #. Default: "Implantation"
 #: ../content/licence/BaseBuildLicence.py:193
