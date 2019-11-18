@@ -233,6 +233,7 @@ def finalize_schema(schema, folderish=False, moveDiscussion=True):
             'urban_description',
             'urban_advices',
             'urban_inspection',
+            'urban_location',
             'metadata',
             'default'
         ]
