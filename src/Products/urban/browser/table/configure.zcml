@@ -323,6 +323,15 @@
      for="zope.interface.Interface
           zope.publisher.interfaces.browser.IBrowserRequest
           Products.urban.browser.table.interfaces.IInspectionReportsTable"
+     factory=".column.InspectionFolderManager"
+     provides="z3c.table.interfaces.IColumn"
+     name="inspection_folder_manager_column"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.table.interfaces.IInspectionReportsTable"
      factory=".column.InspectionReportFollowUp"
      provides="z3c.table.interfaces.IColumn"
      name="inspection_report_followup_column"

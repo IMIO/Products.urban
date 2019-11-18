@@ -21,6 +21,7 @@ from Products.urban.browser.table.interfaces import ITitleColumn, \
     ITitleCell
 
 
+
 class UrbanColumn(Column):
     """ base class for a column that expect a ItemForUrbanTable item  """
     implements(IUrbanColumn)
@@ -610,4 +611,24 @@ class InspectionReportFollowUp(UrbanColumn):
             url = report.absolute_url() + '/@@longtextview?field=other_followup_proposition'
             link = '<a class="link-overlay" href="{}">autre</a>'.format(url)
             cell = u'<span>{}, </span><span id="inspection_other_followup">{}</span>'.format(cell, link)
+        return cell
+
+
+class InspectionFolderManager(UrbanColumn):
+
+    header = 'urban_label_folderManager'
+    weight = 9
+
+    def renderCell(self, report):
+        folder_manager_id = ''
+        if 'inspectionreport_event_workflow' in report.value.workflow_history:
+            wf_histories = report.value.workflow_history['inspectionreport_event_workflow']
+            for wf_history in wf_histories:
+                if wf_history.get("action", "") == 'propose_report':
+                    folder_manager_id = wf_history.get("actor", "")
+        if not folder_manager_id:
+            folder_manager_id = str(report.getOwner())
+        members = api.portal.get_tool('portal_membership')
+        folder_manager_name = members.getMemberInfo(folder_manager_id)['fullname'] or folder_manager_id
+        cell = folder_manager_name.decode('utf-8')
         return cell
