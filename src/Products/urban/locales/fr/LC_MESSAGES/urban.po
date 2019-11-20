@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2019-10-10 14:27+0000\n"
+"POT-Creation-Date: 2019-11-20 15:09+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -90,7 +90,7 @@ msgstr "Ajouter tous les avis"
 msgid "Add an event"
 msgstr "Ajouter un événement"
 
-#: ../browser/templates/urbaneventinquiryview.pt:202
+#: ../browser/templates/urbaneventinquiryview.pt:203
 msgid "Add recipientcadastre manually"
 msgstr "Ajouter un propriétaire"
 
@@ -264,9 +264,9 @@ msgstr "Détention d'explosifs"
 msgid "Extension profile for urban."
 msgstr ""
 
-#: ../content/UrbanEventInspectionReport.py:126
+#: ../content/UrbanEventInspectionReport.py:128
 msgid "FD_information_mail"
-msgstr "courrier d'information au FD"
+msgstr "Courrier d'information au FD"
 
 #: ../browser/templates/coring_update.pt:16
 msgid "Field"
@@ -917,9 +917,9 @@ msgstr "Ajouter un événement"
 msgid "add_every_advices_descr"
 msgstr "Ceci ajoutera automatiquement les avis suivants :"
 
-#: ../content/UrbanEventInspectionReport.py:125
+#: ../content/UrbanEventInspectionReport.py:127
 msgid "additional_information"
-msgstr "demande d'informations complémentaires"
+msgstr "Demande d'informations complémentaires"
 
 msgid "additional_layers_folder_title"
 msgstr "Configuration des couches supplémentaires"
@@ -961,9 +961,9 @@ msgstr "Données concernant l'annonce de projet"
 msgid "announcementarticles_folder_title"
 msgstr "Articles des annonces de projet"
 
-#: ../content/UrbanEventInspectionReport.py:124
+#: ../content/UrbanEventInspectionReport.py:126
 msgid "answer_to_plaintif"
-msgstr "réponse au plaignant"
+msgstr "Réponse au plaignant"
 
 # buildlicence_view
 #. Default: "Applicant(s)"
@@ -1090,9 +1090,9 @@ msgstr "Portée de l'arrêté de classement"
 msgid "click_to_view_or_add"
 msgstr "Cliquez ici pour voir ou ajouter des documents"
 
-#: ../content/UrbanEventInspectionReport.py:119
+#: ../content/UrbanEventInspectionReport.py:121
 msgid "close_inspection"
-msgstr "clôturer le dossier"
+msgstr "Clôturer le dossier"
 
 #. Default: "Close prevention area"
 #: ../content/licence/GenericLicence.py:1143
@@ -1125,6 +1125,10 @@ msgstr "Paramètres des certificats d'urbanisme 1 (CODT)"
 
 msgid "codt_urbancertificatetwo_urbanconfig_title"
 msgstr "Paramètres des certificats d'urbanisme 2 (CODT)"
+
+#: ../content/UrbanEventInspectionReport.py:135
+msgid "college_passage"
+msgstr "Passage au collège"
 
 # street_referencedatagridwidget
 #. Default: "Street"
@@ -1416,7 +1420,7 @@ msgid "event_inquiry_documents"
 msgstr "Récapitulatif"
 
 #. Default: "<span>Recipients</span>"
-#: ../browser/templates/urbaneventinquiryview.pt:171
+#: ../browser/templates/urbaneventinquiryview.pt:172
 msgid "event_inquiry_recipients"
 msgstr "Propriétaires concernés"
 
@@ -1569,17 +1573,17 @@ msgstr "Zones du plan de secteur"
 msgid "form_composition_folder_title"
 msgstr "Composition (formulaire(s) de demande)"
 
-#: ../content/UrbanEventInspectionReport.py:122
+#: ../content/UrbanEventInspectionReport.py:124
 msgid "formal_last_notice_reminder"
-msgstr "dernier rappel de mise en demeure"
+msgstr "Dernier rappel de mise en demeure"
 
-#: ../content/UrbanEventInspectionReport.py:120
+#: ../content/UrbanEventInspectionReport.py:122
 msgid "formal_notice"
-msgstr "mise en demeure"
+msgstr "Mise en demeure"
 
-#: ../content/UrbanEventInspectionReport.py:121
+#: ../content/UrbanEventInspectionReport.py:123
 msgid "formal_notice_reminder"
-msgstr "rappel de mise en demeure"
+msgstr "Rappel de mise en demeure"
 
 #. Default: "City issue on date"
 #: UrbanEvent.py
@@ -1979,7 +1983,7 @@ msgstr "Configuration des cartes"
 msgid "masculine_singular_residing"
 msgstr "${name}, domicilié ${address}"
 
-#: ../content/UrbanEventInspectionReport.py:123
+#: ../content/UrbanEventInspectionReport.py:125
 msgid "minutes"
 msgstr "PV"
 
@@ -2077,7 +2081,7 @@ msgid "number_of_claimants"
 msgstr "Nombre de réclamants"
 
 #. Default: "Number of recipients"
-#: ../browser/templates/urbaneventinquiryview.pt:187
+#: ../browser/templates/urbaneventinquiryview.pt:188
 msgid "number_of_recipients"
 msgstr "Nombre de destinataires"
 
@@ -2094,9 +2098,9 @@ msgstr "Port sur lequel tourne OpenOffice en mode serveur (2002 par défaut)"
 msgid "opinionstoaskifworks_folder_title"
 msgstr "Avis à demander en cas de travaux"
 
-#: ../content/UrbanEventInspectionReport.py:128
+#: ../content/UrbanEventInspectionReport.py:130
 msgid "other"
-msgstr "autre"
+msgstr "Autre"
 
 #. Default: "Outdated parcels used in licences in progress"
 #: ../browser/templates/parcelsconsistencyview.pt:22
@@ -2220,6 +2224,10 @@ msgstr "Canalisations"
 msgid "plaintiffs"
 msgstr "Plaignant(s)"
 
+#: ../content/UrbanEventInspectionReport.py:137
+msgid "plan_sollicitation"
+msgstr "Solliciter plan"
+
 #: ../dashboard/vocabularies.py:36
 msgid "plone"
 msgstr ""
@@ -2246,6 +2254,10 @@ msgstr "Périmètre de Revitalisation Urbaine"
 msgid "projectmeeting_urbanconfig_title"
 msgstr "Paramètres des réunions de projet"
 
+#: ../content/UrbanEventInspectionReport.py:136
+msgid "projusticia"
+msgstr "Pro justicia"
+
 #. Default: "Proprietary(ies)"
 #: ../browser/licence/templates/licencemacros.pt:63
 msgid "proprietaries"
@@ -2269,9 +2281,9 @@ msgstr "Décisions d'un recours"
 msgid "regional_guide_folder_title"
 msgstr "Guide régional d'urbanisme"
 
-#: ../content/UrbanEventInspectionReport.py:127
+#: ../content/UrbanEventInspectionReport.py:129
 msgid "repair_mail"
-msgstr "courrier de constat de remise en état"
+msgstr "Courrier de constat de remise en état"
 
 msgid "reparcelling_folder_title"
 msgstr "Périmètre de Remembrement"
