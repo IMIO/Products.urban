@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2019-11-20 15:09+0000\n"
+"POT-Creation-Date: 2019-11-20 15:46+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -264,7 +264,7 @@ msgstr "Détention d'explosifs"
 msgid "Extension profile for urban."
 msgstr ""
 
-#: ../content/UrbanEventInspectionReport.py:128
+#: ../content/UrbanEventInspectionReport.py:127
 msgid "FD_information_mail"
 msgstr "Courrier d'information au FD"
 
@@ -917,7 +917,7 @@ msgstr "Ajouter un événement"
 msgid "add_every_advices_descr"
 msgstr "Ceci ajoutera automatiquement les avis suivants :"
 
-#: ../content/UrbanEventInspectionReport.py:127
+#: ../content/UrbanEventInspectionReport.py:126
 msgid "additional_information"
 msgstr "Demande d'informations complémentaires"
 
@@ -961,7 +961,7 @@ msgstr "Données concernant l'annonce de projet"
 msgid "announcementarticles_folder_title"
 msgstr "Articles des annonces de projet"
 
-#: ../content/UrbanEventInspectionReport.py:126
+#: ../content/UrbanEventInspectionReport.py:125
 msgid "answer_to_plaintif"
 msgstr "Réponse au plaignant"
 
@@ -1090,7 +1090,7 @@ msgstr "Portée de l'arrêté de classement"
 msgid "click_to_view_or_add"
 msgstr "Cliquez ici pour voir ou ajouter des documents"
 
-#: ../content/UrbanEventInspectionReport.py:121
+#: ../content/UrbanEventInspectionReport.py:120
 msgid "close_inspection"
 msgstr "Clôturer le dossier"
 
@@ -1126,7 +1126,7 @@ msgstr "Paramètres des certificats d'urbanisme 1 (CODT)"
 msgid "codt_urbancertificatetwo_urbanconfig_title"
 msgstr "Paramètres des certificats d'urbanisme 2 (CODT)"
 
-#: ../content/UrbanEventInspectionReport.py:135
+#: ../content/UrbanEventInspectionReport.py:134
 msgid "college_passage"
 msgstr "Passage au collège"
 
@@ -1573,15 +1573,15 @@ msgstr "Zones du plan de secteur"
 msgid "form_composition_folder_title"
 msgstr "Composition (formulaire(s) de demande)"
 
-#: ../content/UrbanEventInspectionReport.py:124
+#: ../content/UrbanEventInspectionReport.py:123
 msgid "formal_last_notice_reminder"
 msgstr "Dernier rappel de mise en demeure"
 
-#: ../content/UrbanEventInspectionReport.py:122
+#: ../content/UrbanEventInspectionReport.py:121
 msgid "formal_notice"
 msgstr "Mise en demeure"
 
-#: ../content/UrbanEventInspectionReport.py:123
+#: ../content/UrbanEventInspectionReport.py:122
 msgid "formal_notice_reminder"
 msgstr "Rappel de mise en demeure"
 
@@ -1983,7 +1983,7 @@ msgstr "Configuration des cartes"
 msgid "masculine_singular_residing"
 msgstr "${name}, domicilié ${address}"
 
-#: ../content/UrbanEventInspectionReport.py:125
+#: ../content/UrbanEventInspectionReport.py:124
 msgid "minutes"
 msgstr "PV"
 
@@ -2098,7 +2098,7 @@ msgstr "Port sur lequel tourne OpenOffice en mode serveur (2002 par défaut)"
 msgid "opinionstoaskifworks_folder_title"
 msgstr "Avis à demander en cas de travaux"
 
-#: ../content/UrbanEventInspectionReport.py:130
+#: ../content/UrbanEventInspectionReport.py:129
 msgid "other"
 msgstr "Autre"
 
@@ -2224,7 +2224,7 @@ msgstr "Canalisations"
 msgid "plaintiffs"
 msgstr "Plaignant(s)"
 
-#: ../content/UrbanEventInspectionReport.py:137
+#: ../content/UrbanEventInspectionReport.py:136
 msgid "plan_sollicitation"
 msgstr "Solliciter plan"
 
@@ -2254,7 +2254,7 @@ msgstr "Périmètre de Revitalisation Urbaine"
 msgid "projectmeeting_urbanconfig_title"
 msgstr "Paramètres des réunions de projet"
 
-#: ../content/UrbanEventInspectionReport.py:136
+#: ../content/UrbanEventInspectionReport.py:135
 msgid "projusticia"
 msgstr "Pro justicia"
 
@@ -2281,7 +2281,7 @@ msgstr "Décisions d'un recours"
 msgid "regional_guide_folder_title"
 msgstr "Guide régional d'urbanisme"
 
-#: ../content/UrbanEventInspectionReport.py:129
+#: ../content/UrbanEventInspectionReport.py:128
 msgid "repair_mail"
 msgstr "Courrier de constat de remise en état"
 
@@ -2466,6 +2466,9 @@ msgstr "Liste des modèles définis dans la configuration"
 #: ../browser/licence/templates/licencemacros.pt:93
 msgid "tenants"
 msgstr "Locataires"
+
+msgid "ticket_urbanconfig_title"
+msgstr "Paramètres des procès verbaux"
 
 # topics
 msgid "topics"

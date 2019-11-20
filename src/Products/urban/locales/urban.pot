@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-11-20 15:09+0000\n"
+"POT-Creation-Date: 2019-11-20 15:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -262,7 +262,7 @@ msgstr ""
 msgid "Extension profile for urban."
 msgstr ""
 
-#: ../content/UrbanEventInspectionReport.py:128
+#: ../content/UrbanEventInspectionReport.py:127
 msgid "FD_information_mail"
 msgstr ""
 
@@ -898,7 +898,7 @@ msgstr ""
 msgid "add_every_advices_descr"
 msgstr ""
 
-#: ../content/UrbanEventInspectionReport.py:127
+#: ../content/UrbanEventInspectionReport.py:126
 msgid "additional_information"
 msgstr ""
 
@@ -942,7 +942,7 @@ msgstr ""
 msgid "announcementarticles_folder_title"
 msgstr ""
 
-#: ../content/UrbanEventInspectionReport.py:126
+#: ../content/UrbanEventInspectionReport.py:125
 msgid "answer_to_plaintif"
 msgstr ""
 
@@ -1070,7 +1070,7 @@ msgstr ""
 msgid "click_to_view_or_add"
 msgstr ""
 
-#: ../content/UrbanEventInspectionReport.py:121
+#: ../content/UrbanEventInspectionReport.py:120
 msgid "close_inspection"
 msgstr ""
 
@@ -1105,7 +1105,7 @@ msgstr ""
 msgid "codt_urbancertificatetwo_urbanconfig_title"
 msgstr ""
 
-#: ../content/UrbanEventInspectionReport.py:135
+#: ../content/UrbanEventInspectionReport.py:134
 msgid "college_passage"
 msgstr ""
 
@@ -1545,15 +1545,15 @@ msgstr ""
 msgid "form_composition_folder_title"
 msgstr ""
 
-#: ../content/UrbanEventInspectionReport.py:124
+#: ../content/UrbanEventInspectionReport.py:123
 msgid "formal_last_notice_reminder"
 msgstr ""
 
-#: ../content/UrbanEventInspectionReport.py:122
+#: ../content/UrbanEventInspectionReport.py:121
 msgid "formal_notice"
 msgstr ""
 
-#: ../content/UrbanEventInspectionReport.py:123
+#: ../content/UrbanEventInspectionReport.py:122
 msgid "formal_notice_reminder"
 msgstr ""
 
@@ -1951,7 +1951,7 @@ msgstr ""
 msgid "masculine_singular_residing"
 msgstr ""
 
-#: ../content/UrbanEventInspectionReport.py:125
+#: ../content/UrbanEventInspectionReport.py:124
 msgid "minutes"
 msgstr ""
 
@@ -2066,7 +2066,7 @@ msgstr ""
 msgid "opinionstoaskifworks_folder_title"
 msgstr ""
 
-#: ../content/UrbanEventInspectionReport.py:130
+#: ../content/UrbanEventInspectionReport.py:129
 msgid "other"
 msgstr ""
 
@@ -2191,7 +2191,7 @@ msgstr ""
 msgid "plaintiffs"
 msgstr ""
 
-#: ../content/UrbanEventInspectionReport.py:137
+#: ../content/UrbanEventInspectionReport.py:136
 msgid "plan_sollicitation"
 msgstr ""
 
@@ -2221,7 +2221,7 @@ msgstr ""
 msgid "projectmeeting_urbanconfig_title"
 msgstr ""
 
-#: ../content/UrbanEventInspectionReport.py:136
+#: ../content/UrbanEventInspectionReport.py:135
 msgid "projusticia"
 msgstr ""
 
@@ -2248,7 +2248,7 @@ msgstr ""
 msgid "regional_guide_folder_title"
 msgstr ""
 
-#: ../content/UrbanEventInspectionReport.py:129
+#: ../content/UrbanEventInspectionReport.py:128
 msgid "repair_mail"
 msgstr ""
 
@@ -2431,6 +2431,9 @@ msgstr ""
 #. Default: "Tenant(s)"
 #: ../browser/licence/templates/licencemacros.pt:93
 msgid "tenants"
+msgstr ""
+
+msgid "ticket_urbanconfig_title"
 msgstr ""
 
 # topics

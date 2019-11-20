@@ -672,6 +672,9 @@ msgstr ""
 msgid "inspection_urbanconfig_title"
 msgstr ""
 
+msgid "ticket_urbanconfig_title"
+msgstr ""
+
 msgid "inspectioncontexts_folder_title"
 msgstr ""
 
