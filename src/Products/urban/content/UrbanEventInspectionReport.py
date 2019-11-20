@@ -114,19 +114,28 @@ class UrbanEventInspectionReport(BaseFolder, UrbanEvent, BrowserDefaultMixin):
           This vocabulary for field floodingLevel returns a list of
           flooding levels : no risk, low risk, moderated risk, high risk
         """
-        vocab = (
-            #we add an empty vocab value of type "choose a value"
-            ('close', translate(_('close_inspection'), context=self.REQUEST)),
-            ('notice', translate(_('formal_notice'), context=self.REQUEST)),
-            ('notice_reminder', translate(_('formal_notice_reminder'), context=self.REQUEST)),
-            ('last_notice_reminder', translate(_('formal_last_notice_reminder'), context=self.REQUEST)),
-            ('minutes', translate(_('minutes'), context=self.REQUEST)),
-            ('answer', translate(_('answer_to_plaintif'), context=self.REQUEST)),
-            ('additional_information', translate(_('additional_information'), context=self.REQUEST)),
-            ('FD_mail', translate(_('FD_information_mail'), context=self.REQUEST)),
-            ('repair_mail', translate(_('repair_mail'), context=self.REQUEST)),
-            ('other', translate(_('other'), context=self.REQUEST)),
-        )
+        if self.aq_parent.getPortalTypeName() == 'Inspection':
+            vocab = (
+                #we add an empty vocab value of type "choose a value"
+                ('close', translate(_('close_inspection'), context=self.REQUEST)),
+                ('notice', translate(_('formal_notice'), context=self.REQUEST)),
+                ('notice_reminder', translate(_('formal_notice_reminder'), context=self.REQUEST)),
+                ('last_notice_reminder', translate(_('formal_last_notice_reminder'), context=self.REQUEST)),
+                ('minutes', translate(_('minutes'), context=self.REQUEST)),
+                ('answer', translate(_('answer_to_plaintif'), context=self.REQUEST)),
+                ('additional_information', translate(_('additional_information'), context=self.REQUEST)),
+                ('FD_mail', translate(_('FD_information_mail'), context=self.REQUEST)),
+                ('repair_mail', translate(_('repair_mail'), context=self.REQUEST)),
+                ('other', translate(_('other'), context=self.REQUEST)),
+            )
+        elif self.aq_parent.getPortalTypeName() == 'Ticket':
+            vocab = (
+                #we add an empty vocab value of type "choose a value"
+                ('college_passage', translate(_('college_passage'), context=self.REQUEST)),
+                ('projusticia', translate(_('projusticia'), context=self.REQUEST)),
+                ('plan_sollicitation', translate(_('plan_sollicitation'), context=self.REQUEST)),
+                ('other', translate(_('other'), context=self.REQUEST)),
+            )
         return DisplayList(vocab)
 
     def showOtherFollowUp(self, *values):
