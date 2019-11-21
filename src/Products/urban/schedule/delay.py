@@ -16,7 +16,7 @@ class AnnoncedDelay(BaseCalculationDelay):
         if delay.endswith('j'):
             delay = int(delay[:-1])
             delay += self.inquiry_suspension_delay()
-        return delay
+        return delay or 0
 
     def inquiry_suspension_delay(self):
         licence = self.task_container
