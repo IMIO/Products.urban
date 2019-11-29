@@ -5,6 +5,7 @@ Changes
 2.5 (unreleased)
 ----------------
 
+- provide management of external directions
 - provide the add company feature to the CU1 process
   [fngaha]
 
