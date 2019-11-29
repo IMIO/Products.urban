@@ -3,6 +3,7 @@
 from Products.CMFCore.utils import getToolByName
 
 from Products.urban.scripts.odtsearch import searchOneODT
+from Products.urban.config import NIS
 from Products.urban.utils import moveElementAfter
 from Products.urban.utils import getMd5Signature
 
@@ -233,12 +234,20 @@ def addUrbanEventTypes(context):
     attribute = 'urbanEventTypes'
     module = __import__(module_name, fromlist=[attribute])
     urbanEventTypes = getattr(module, attribute)
+    attribute = 'REFNIS_2019'
+    module = __import__(module_name, fromlist=[attribute])
+    refNIS_2019 = getattr(module, attribute)
 
     site = context.getSite()
 
     log = []
     gslogger = context.getLogger('addUrbanEventTypes')
     tool = getToolByName(site, 'portal_urban')
+    matched_outsideDirection = None
+    for refNIS in refNIS_2019:
+        if str(refNIS['Code INS']) == NIS:
+            matched_outsideDirection = refNIS["Directions extérieures"]
+            break
     #add the UrbanEventType
     for urbanConfigId in urbanEventTypes:
         try:
@@ -256,6 +265,14 @@ def addUrbanEventTypes(context):
                 newUet = folderEvent
             else:
                 portal_type = uet.get('portal_type', 'UrbanEventType')
+                if portal_type == 'OpinionRequestEventType':
+                    if not matched_outsideDirection:
+                        continue
+                    else:
+                        outsideDirections = uet.get('outsideDirection')
+                        if outsideDirections:
+                            if not matched_outsideDirection in outsideDirections:
+                                continue
                 newUetId = uetFolder.invokeFactory(portal_type, **uet)
                 newUet = getattr(uetFolder, newUetId)
                 if last_urbaneventype_id:
