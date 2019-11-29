@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2019-10-10 14:27+0000\n"
+"POT-Creation-Date: 2019-11-29 09:49+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -90,7 +90,7 @@ msgstr "Ajouter tous les avis"
 msgid "Add an event"
 msgstr "Ajouter un événement"
 
-#: ../browser/templates/urbaneventinquiryview.pt:202
+#: ../browser/templates/urbaneventinquiryview.pt:203
 msgid "Add recipientcadastre manually"
 msgstr "Ajouter un propriétaire"
 
@@ -795,7 +795,7 @@ msgstr ""
 msgid "View"
 msgstr "Voir le permis"
 
-#: ../UrbanEventType.py:275
+#: ../UrbanEventType.py:284
 msgid "You can not create this UrbanEvent !"
 msgstr "Vous ne pouvez pas créer cet événement"
 
@@ -1416,7 +1416,7 @@ msgid "event_inquiry_documents"
 msgstr "Récapitulatif"
 
 #. Default: "<span>Recipients</span>"
-#: ../browser/templates/urbaneventinquiryview.pt:171
+#: ../browser/templates/urbaneventinquiryview.pt:172
 msgid "event_inquiry_recipients"
 msgstr "Propriétaires concernés"
 
@@ -2077,7 +2077,7 @@ msgid "number_of_claimants"
 msgstr "Nombre de réclamants"
 
 #. Default: "Number of recipients"
-#: ../browser/templates/urbaneventinquiryview.pt:187
+#: ../browser/templates/urbaneventinquiryview.pt:188
 msgid "number_of_recipients"
 msgstr "Nombre de destinataires"
 
@@ -4210,6 +4210,11 @@ msgstr "Ancienne parcelle"
 #: Layer.py
 msgid "urban_label_outlineColor"
 msgstr "Outline color"
+
+#. Default: "outsideDirection"
+#: UrbanEventType.py
+msgid "urban_label_outsideDirection"
+msgstr ""
 
 # parcelsinfo.pt
 #. Default: "Propriétaire"
