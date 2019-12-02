@@ -777,7 +777,7 @@ msgstr ""
 msgid "View"
 msgstr ""
 
-#: ../UrbanEventType.py:275
+#: ../UrbanEventType.py:284
 msgid "You can not create this UrbanEvent !"
 msgstr ""
 
@@ -4189,6 +4189,11 @@ msgstr ""
 #. Default: "Outlinecolor"
 #: Layer.py
 msgid "urban_label_outlineColor"
+msgstr ""
+
+#. Default: "outsideDirection"
+#: UrbanEventType.py
+msgid "urban_label_outsideDirection"
 msgstr ""
 
 # parcelsinfo.pt
