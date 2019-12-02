@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-11-29 09:49+0000\n"
+"POT-Creation-Date: 2019-12-02 13:32+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1984,6 +1984,9 @@ msgstr ""
 msgid "no_applicant_defined"
 msgstr ""
 
+msgid "no_applicant_found_on_licence"
+msgstr ""
+
 #. Default: "No document to generate"
 #: ../browser/templates/urbaneventmacros.pt:81
 msgid "no_document_to_generate"
@@ -1992,10 +1995,19 @@ msgstr ""
 msgid "no_notary_defined"
 msgstr ""
 
+msgid "no_parcels_found_on_licence"
+msgstr ""
+
 msgid "no_proprietary_defined"
 msgstr ""
 
 msgid "no_result"
+msgstr ""
+
+msgid "no_street_name_found_on_licence"
+msgstr ""
+
+msgid "no_street_with_code_found_on_licence"
 msgstr ""
 
 #. Default: "You can not add an attachment"
@@ -2442,6 +2454,9 @@ msgstr ""
 
 #: ../content/licence/RoadDecree.py:82
 msgid "unknown"
+msgstr ""
+
+msgid "unknown_worktype_on_licence"
 msgstr ""
 
 #. Default: "UnoEnabledPython"
