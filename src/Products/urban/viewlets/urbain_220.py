@@ -21,6 +21,8 @@ from plone.app.layout.viewlets import ViewletBase
 
 from zope.component import getAdapter
 from zope.interface import implements
+from zope.i18n import translate
+from Products.urban import UrbanMessage as _
 
 import json
 import unidecode
@@ -141,9 +143,11 @@ class UrbainXMLExport(BrowserView):
             split.reverse()
             return '/'.join(split)
 
-        def check(condition, error_message):
+        def check(self, condition, error_message, mapping):
             if not condition:
-                error.append(error_message)
+                tr_error_message = translate(error_message, domain=u'urban', mapping=mapping,
+                        context=self.context.REQUEST)
+                error.append(tr_error_message)
             return condition
 
         xml = []
@@ -171,15 +175,16 @@ class UrbainXMLExport(BrowserView):
                 xml.append('  <Item220>')
                 xml.append('      <E_220_Ref_Toel>%s</E_220_Ref_Toel>' % str(licence.getReference()))
                 parcels = licence.getParcels()
-                if check(parcels, 'no parcels found on licence %s' % str(licence.getReference())):
+                if check(self, parcels, u'no_parcels_found_on_licence', {'reference': str(licence.getReference())}):
                     xml.append('      <Doc_Afd>%s</Doc_Afd>' % parcels[0].getDivisionCode())
                 street_info = getAdapter(licence, IToUrbain220Street)
                 number = street_info.street_number
                 street_name = street_info.street_name
                 street_code = street_info.street_code
-                if check(street_code, 'no street (with code) found on licence %s' % str(licence.getReference())):
+                if check(self, street_code, u'no_street_with_code_found_on_licence', {'reference':
+                    str(licence.getReference())}):
                     xml.append('      <E_220_straatcode>%s</E_220_straatcode>' % str(street_code))
-                    if check(street_name, 'no street name found on licence %s' % str(licence.getReference())):
+                    if check(self, street_name, u'no_street_name_found_on_licence', {'reference': str(licence.getReference())}):
                         xml.append('      <E_220_straatnaam>%s</E_220_straatnaam>' % str(street_name).decode('iso-8859-1').encode('iso-8859-1'))
                 if number:
                     xml.append('      <E_220_huisnr>%s</E_220_huisnr>' % str(number))
@@ -189,7 +194,8 @@ class UrbainXMLExport(BrowserView):
                 for k, v in work_types.iteritems():
                     worktype_map[k] = v.getExtraValue()
                 xml_worktype = ''
-                if check(worktype in worktype_map.keys(), 'unknown worktype %s on licence %s' % (worktype, str(licence.getReference()))):
+                if check(self, worktype in worktype_map.keys(), u'unknown_worktype_on_licence', {'worktype': worktype,
+                    'reference': str(licence.getReference())}):
                     xml_worktype = worktype_map[worktype]
                 xml.append('      <E_220_Typ>%s</E_220_Typ>' % xml_worktype)
                 xml.append('      <E_220_Werk>%s</E_220_Werk>' % licence.licenceSubject.encode('iso-8859-1'))
@@ -205,7 +211,7 @@ class UrbainXMLExport(BrowserView):
                     elif licence.getLastRecourse():
                         authority = 'MINISTRE'
                 xml.append('      <E_220_Instan>%s</E_220_Instan>' % authority)
-                if check(applicantObj, 'no applicant found on licence %s' % str(licence.getReference())):
+                if check(self, applicantObj, u'no_applicant_found_on_licence', {'reference': str(licence.getReference())}):
                     firstname = applicantObj.portal_type == 'Corporation' and applicantObj.getDenomination() or applicantObj.getName1()
                     lastname = applicantObj.portal_type == 'Corporation' and applicantObj.getLegalForm() or applicantObj.getName2()
                     xml.append('      <PERSOON>')
