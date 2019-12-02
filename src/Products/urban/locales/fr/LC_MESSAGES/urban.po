@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2019-10-10 14:27+0000\n"
+"POT-Creation-Date: 2019-12-02 13:32+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -90,7 +90,7 @@ msgstr "Ajouter tous les avis"
 msgid "Add an event"
 msgstr "Ajouter un événement"
 
-#: ../browser/templates/urbaneventinquiryview.pt:202
+#: ../browser/templates/urbaneventinquiryview.pt:203
 msgid "Add recipientcadastre manually"
 msgstr "Ajouter un propriétaire"
 
@@ -795,7 +795,7 @@ msgstr ""
 msgid "View"
 msgstr "Voir le permis"
 
-#: ../UrbanEventType.py:275
+#: ../UrbanEventType.py:284
 msgid "You can not create this UrbanEvent !"
 msgstr "Vous ne pouvez pas créer cet événement"
 
@@ -1416,7 +1416,7 @@ msgid "event_inquiry_documents"
 msgstr "Récapitulatif"
 
 #. Default: "<span>Recipients</span>"
-#: ../browser/templates/urbaneventinquiryview.pt:171
+#: ../browser/templates/urbaneventinquiryview.pt:172
 msgid "event_inquiry_recipients"
 msgstr "Propriétaires concernés"
 
@@ -2016,6 +2016,9 @@ msgstr "Périmètre Natura 2000"
 msgid "no_applicant_defined"
 msgstr "Aucun demandeur?"
 
+msgid "no_applicant_found_on_licence"
+msgstr "aucun demandeur trouvé sur le permis ${reference}"
+
 #. Default: "No document to generate"
 #: ../browser/templates/urbaneventmacros.pt:81
 msgid "no_document_to_generate"
@@ -2024,11 +2027,20 @@ msgstr "Aucun document à générer"
 msgid "no_notary_defined"
 msgstr "Aucun notaire?"
 
+msgid "no_parcels_found_on_licence"
+msgstr "aucune parcelle trouvée sur le permis ${reference}"
+
 msgid "no_proprietary_defined"
 msgstr "Aucun propriétaire?"
 
 msgid "no_result"
 msgstr "La recherche n'a pas fourni de résultat."
+
+msgid "no_street_name_found_on_licence"
+msgstr "aucun nom de rue trouvé sur le permis ${reference}"
+
+msgid "no_street_with_code_found_on_licence"
+msgstr "aucune rue (avec Code rue (INS)) trouvée sur le permis ${reference}"
 
 #. Default: "You can not add an attachment"
 #: ../browser/templates/urbaneventmacros.pt:92
@@ -2077,7 +2089,7 @@ msgid "number_of_claimants"
 msgstr "Nombre de réclamants"
 
 #. Default: "Number of recipients"
-#: ../browser/templates/urbaneventinquiryview.pt:187
+#: ../browser/templates/urbaneventinquiryview.pt:188
 msgid "number_of_recipients"
 msgstr "Nombre de destinataires"
 
@@ -2477,6 +2489,9 @@ msgstr "Paramètres des permis uniques"
 #: ../content/licence/RoadDecree.py:82
 msgid "unknown"
 msgstr "Non déterminé"
+
+msgid "unknown_worktype_on_licence"
+msgstr "nature des travaux ${worktype} inconnue sur le permis ${reference}"
 
 #. Default: "UnoEnabledPython"
 #: UrbanTool.py
@@ -4210,6 +4225,11 @@ msgstr "Ancienne parcelle"
 #: Layer.py
 msgid "urban_label_outlineColor"
 msgstr "Outline color"
+
+#. Default: "outsideDirection"
+#: UrbanEventType.py
+msgid "urban_label_outsideDirection"
+msgstr ""
 
 # parcelsinfo.pt
 #. Default: "Propriétaire"
