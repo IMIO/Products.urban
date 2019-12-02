@@ -411,12 +411,11 @@ class UrbanBase(object):
         """
         return not self.hasSingleApplicant()
 
-    security.declarePublic('getMultipleApplicantsCSV')
-    def getMultipleApplicantsCSV(self, only_foreign_country=True):
+    security.declarePublic('getMultipleContactsCSV')
+    def getMultipleContactsCSV(self, contacts=[], only_foreign_country=True):
         """
           Returns a formatted version of the applicants to be used in POD templates
         """
-        applicants = self.getApplicants()
         toreturn = '[CSV]Titre|TitreR|Nom|Prenom|AdresseLigne1|AdresseLigne2|Pays'
 
         portal_urban = api.portal.get_tool('portal_urban')
@@ -425,19 +424,35 @@ class UrbanBase(object):
         for country_obj in country_folder.objectValues():
             country_mapping[country_obj.id] = country_obj.Title()
 
-        for applicant in applicants:
-            if only_foreign_country and applicant.getCountry() and applicant.getCountry().lower() == 'belgium':
+        for contact in contacts:
+            if only_foreign_country and contact.getCountry() and contact.getCountry().lower() == 'belgium':
                 country = ''
             else:
-                country = country_mapping[applicant['country']]
-            toreturn = toreturn + '%' + applicant.getPersonTitleValue() + '|' + \
-                       applicant.getPersonTitleValue(reverse=True) + '|' + applicant.getName1().decode('utf8') + '|' + \
-                       applicant.getName2().decode('utf8') + '|' + applicant.getStreet().decode('utf8') + ', ' + \
-                       applicant.getNumber() + '|' + applicant.getZipcode() + ' ' + applicant.getCity().decode('utf8') \
+                country = country_mapping[contact['country']]
+            toreturn = toreturn + '%' + contact.getPersonTitleValue() + '|' + \
+                       contact.getPersonTitleValue(reverse=True) + '|' + contact.getName1().decode('utf8') + '|' + \
+                       contact.getName2().decode('utf8') + '|' + contact.getStreet().decode('utf8') + ', ' + \
+                       contact.getNumber() + '|' + contact.getZipcode() + ' ' + contact.getCity().decode('utf8') \
                        + '|' + country
         toreturn = toreturn + '[/CSV]'
         return toreturn
+
+    security.declarePublic('getMultipleApplicantsCSV')
+    def getMultipleApplicantsCSV(self, only_foreign_country=True):
+        """
+          Returns a formatted version of the applicants to be used in POD templates
+        """
+        applicants = self.getApplicants()
+        return self.getMultipleContactsCSV(applicants, only_foreign_country)
     getMultipleApplicants = getMultipleApplicantsCSV
+
+    security.declarePublic('getMultipleProprietariesCSV')
+    def getMultipleProprietariesCSV(self, only_foreign_country=True):
+        """
+          Returns a formatted version of the proprietaries to be used in POD templates
+        """
+        proprietaries = self.getProprietaries()
+        return self.getMultipleContactsCSV(proprietaries, only_foreign_country)
 
     security.declarePublic('getMultipleOrganizationCSV')
     def getMultipleOrganizationsCSV(self):
