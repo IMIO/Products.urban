@@ -266,13 +266,9 @@ def addUrbanEventTypes(context):
             else:
                 portal_type = uet.get('portal_type', 'UrbanEventType')
                 if portal_type == 'OpinionRequestEventType':
-                    if not matched_outsideDirection:
+                    outsideDirections = uet.get('outsideDirection')
+                    if not matched_outsideDirection in outsideDirections:
                         continue
-                    else:
-                        outsideDirections = uet.get('outsideDirection')
-                        if outsideDirections:
-                            if not matched_outsideDirection in outsideDirections:
-                                continue
                 newUetId = uetFolder.invokeFactory(portal_type, **uet)
                 newUet = getattr(uetFolder, newUetId)
                 if last_urbaneventype_id:
