@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-10-10 14:27+0000\n"
+"POT-Creation-Date: 2019-12-02 13:32+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -88,7 +88,7 @@ msgstr ""
 msgid "Add an event"
 msgstr ""
 
-#: ../browser/templates/urbaneventinquiryview.pt:202
+#: ../browser/templates/urbaneventinquiryview.pt:203
 msgid "Add recipientcadastre manually"
 msgstr ""
 
@@ -777,7 +777,7 @@ msgstr ""
 msgid "View"
 msgstr ""
 
-#: ../UrbanEventType.py:275
+#: ../UrbanEventType.py:284
 msgid "You can not create this UrbanEvent !"
 msgstr ""
 
@@ -1393,7 +1393,7 @@ msgid "event_inquiry_documents"
 msgstr ""
 
 #. Default: "<span>Recipients</span>"
-#: ../browser/templates/urbaneventinquiryview.pt:171
+#: ../browser/templates/urbaneventinquiryview.pt:172
 msgid "event_inquiry_recipients"
 msgstr ""
 
@@ -1984,6 +1984,9 @@ msgstr ""
 msgid "no_applicant_defined"
 msgstr ""
 
+msgid "no_applicant_found_on_licence"
+msgstr ""
+
 #. Default: "No document to generate"
 #: ../browser/templates/urbaneventmacros.pt:81
 msgid "no_document_to_generate"
@@ -1992,10 +1995,19 @@ msgstr ""
 msgid "no_notary_defined"
 msgstr ""
 
+msgid "no_parcels_found_on_licence"
+msgstr ""
+
 msgid "no_proprietary_defined"
 msgstr ""
 
 msgid "no_result"
+msgstr ""
+
+msgid "no_street_name_found_on_licence"
+msgstr ""
+
+msgid "no_street_with_code_found_on_licence"
 msgstr ""
 
 #. Default: "You can not add an attachment"
@@ -2045,7 +2057,7 @@ msgid "number_of_claimants"
 msgstr ""
 
 #. Default: "Number of recipients"
-#: ../browser/templates/urbaneventinquiryview.pt:187
+#: ../browser/templates/urbaneventinquiryview.pt:188
 msgid "number_of_recipients"
 msgstr ""
 
@@ -2442,6 +2454,9 @@ msgstr ""
 
 #: ../content/licence/RoadDecree.py:82
 msgid "unknown"
+msgstr ""
+
+msgid "unknown_worktype_on_licence"
 msgstr ""
 
 #. Default: "UnoEnabledPython"
@@ -4174,6 +4189,11 @@ msgstr ""
 #. Default: "Outlinecolor"
 #: Layer.py
 msgid "urban_label_outlineColor"
+msgstr ""
+
+#. Default: "outsideDirection"
+#: UrbanEventType.py
+msgid "urban_label_outsideDirection"
 msgstr ""
 
 # parcelsinfo.pt

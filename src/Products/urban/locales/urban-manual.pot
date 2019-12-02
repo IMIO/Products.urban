@@ -914,6 +914,9 @@ msgstr ""
 msgid "no_applicant_defined"
 msgstr ""
 
+msgid "no_applicant_found_on_licence"
+msgstr ""
+
 msgid "no_notary_defined"
 msgstr ""
 
@@ -921,6 +924,15 @@ msgid "no_proprietary_defined"
 msgstr ""
 
 msgid "no_result"
+msgstr ""
+
+msgid "no_parcels_found_on_licence"
+msgstr ""
+
+msgid "no_street_name_found_on_licence"
+msgstr ""
+
+msgid "no_street_with_code_found_on_licence"
 msgstr ""
 
 msgid "not_permitted_to_add_urbanevent"
@@ -1209,6 +1221,9 @@ msgid "township_guide_folder_title"
 msgstr ""
 
 msgid "townshipspecificfeatures_folder_title"
+msgstr ""
+
+msgid "unknown_worktype_on_licence"
 msgstr ""
 
 #. Default: "UnoEnabledPython"
@@ -2048,6 +2063,11 @@ msgstr ""
 #. Default: "Outlinecolor"
 #: Layer.py
 msgid "urban_label_outlineColor"
+msgstr ""
+
+#. Default: "outsideDirection"
+#: UrbanEventType.py
+msgid "urban_label_outsideDirection"
 msgstr ""
 
 # parcelsinfo.pt
