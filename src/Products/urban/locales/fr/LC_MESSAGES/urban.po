@@ -795,7 +795,7 @@ msgstr ""
 msgid "View"
 msgstr "Voir le permis"
 
-#: ../UrbanEventType.py:275
+#: ../UrbanEventType.py:284
 msgid "You can not create this UrbanEvent !"
 msgstr "Vous ne pouvez pas créer cet événement"
 
@@ -4225,6 +4225,11 @@ msgstr "Ancienne parcelle"
 #: Layer.py
 msgid "urban_label_outlineColor"
 msgstr "Outline color"
+
+#. Default: "outsideDirection"
+#: UrbanEventType.py
+msgid "urban_label_outsideDirection"
+msgstr ""
 
 # parcelsinfo.pt
 #. Default: "Propriétaire"
