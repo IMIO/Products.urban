@@ -2,13 +2,14 @@
 
 from plone import api
 
+from collective.eeafaceted.z3ctable.columns import BaseColumn
 from Products.urban.browser.table.column import FoldermanagerColumn
 from Products.urban.browser.table.interfaces import ITitleCell
 from Products.urban.browser.table.interfaces import ITitleColumn
 from Products.urban.interfaces import IGenericLicence
 from imio.dashboard.columns import ActionsColumn
-
-from collective.eeafaceted.z3ctable.columns import BaseColumn
+from imio.schedule.dashboard.columns import AssignedUserColumn
+from Products.urban import UrbanMessage as _
 
 from zope.component import queryMultiAdapter
 from zope.interface import implements
@@ -159,3 +160,9 @@ class TaskActionsColumn(ActionsColumn):
     params = {
         'showChangeOwner': True,
     }
+
+
+class AssignedUser(AssignedUserColumn):
+    """Set the index to assigned_user"""
+    header = _(u"header_assigned_user")
+    sort_index = 'assigned_user'
