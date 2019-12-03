@@ -2726,3 +2726,6 @@ msgstr ""
 
 msgid "urban_button_search"
 msgstr ""
+
+msgid "header_assigned_user"
+msgstr ""
