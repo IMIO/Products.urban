@@ -1,3 +1,5 @@
 *.py?
 *.mo
 *.egg-info
+**/docs/sphinx/build/
+**/docs/sphinx/_downloads/
