@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2019-12-02 13:32+0000\n"
+"POT-Creation-Date: 2019-12-05 09:40+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -764,7 +764,7 @@ msgid "Transitions:"
 msgstr ""
 
 #: ../browser/templates/urbanstatsmacros.pt:10
-msgid "Types de permis \ &Eacute;tats"
+msgid "Types de permis"
 msgstr ""
 
 msgid "UniqueLicence"
@@ -1260,6 +1260,14 @@ msgstr "Dérogations"
 
 msgid "divergences_folder_title"
 msgstr "Écarts de l'annonce de projet"
+
+#: ../content/UrbanEventInspectionReport.py:128
+msgid "divide_building"
+msgstr "division immeuble – courrier conformité simple"
+
+#: ../content/UrbanEventInspectionReport.py:129
+msgid "divide_building_with_college"
+msgstr "division immeuble – courrier conformité Collége"
 
 msgid "division_urbanconfig_title"
 msgstr "Paramètres des Divisions"
@@ -2106,7 +2114,7 @@ msgstr "Port sur lequel tourne OpenOffice en mode serveur (2002 par défaut)"
 msgid "opinionstoaskifworks_folder_title"
 msgstr "Avis à demander en cas de travaux"
 
-#: ../content/UrbanEventInspectionReport.py:128
+#: ../content/UrbanEventInspectionReport.py:130
 msgid "other"
 msgstr "autre"
 
