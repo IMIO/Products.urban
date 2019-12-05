@@ -22,41 +22,49 @@ Téléchargement cadastre
 .. image:: resources/images/cadastre/1.png
   :alt: application_urbain
   :width: 700
+
 3. S'identifier
 
 .. image:: resources/images/cadastre/2.png
   :alt: application_urbain
   :width: 700
+
 4. Cas d'un lecteur de carte eID
 
 .. image:: resources/images/cadastre/3.png
   :alt: application_urbain
   :width: 700
+
 5. Renseigner le code PIN de votre carte eID
 
 .. image:: resources/images/cadastre/4.png
   :alt: application_urbain
   :width: 700
+
 6. Cliquer sur "TÉLÉCHARGEMENT" à droite de l'écran d'accueil
 
 .. image:: resources/images/cadastre/5.png
   :alt: application_urbain
   :width: 700
+
 7. Cliquer sur choisir une valeur dans les critères de recherche
 
 .. image:: resources/images/cadastre/6.png
   :alt: application_urbain
   :width: 700
+
 8. Sélectionner "Données matrice cadastral"
 
 .. image:: resources/images/cadastre/7.png
   :alt: application_urbain
   :width: 700
+
 9. Cliquer sur "TÉLÉCHARGER"
 
 .. image:: resources/images/cadastre/8.png
   :alt: application_urbain
   :width: 700
+
 10. Recommencer L'étape 8 et 9 en sélectionnant cette fois "Historique"
 
 
