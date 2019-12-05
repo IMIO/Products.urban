@@ -125,6 +125,8 @@ class UrbanEventInspectionReport(BaseFolder, UrbanEvent, BrowserDefaultMixin):
             ('additional_information', translate(_('additional_information'), context=self.REQUEST)),
             ('FD_mail', translate(_('FD_information_mail'), context=self.REQUEST)),
             ('repair_mail', translate(_('repair_mail'), context=self.REQUEST)),
+            ('divide_building', translate(_('divide_building'), context=self.REQUEST)),
+            ('divide_building_with_college', translate(_('divide_building_with_college'), context=self.REQUEST)),
             ('other', translate(_('other'), context=self.REQUEST)),
         )
         return DisplayList(vocab)
