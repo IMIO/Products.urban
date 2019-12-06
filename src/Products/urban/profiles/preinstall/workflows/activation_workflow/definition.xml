@@ -120,6 +120,7 @@
              i18n:attributes="title">
   <action url="" icon="" category="workflow" i18n:translate="">disable</action>
   <guard>
+   <guard-permission>Modify portal content</guard-permission>
   </guard>
  </transition>
  <transition transition_id="enable"
@@ -131,6 +132,7 @@
              i18n:attributes="title">
   <action url="" icon="" category="workflow" i18n:translate="">enable</action>
   <guard>
+   <guard-permission>Modify portal content</guard-permission>
   </guard>
  </transition>
  <variable variable_id="action" for_catalog="False"
