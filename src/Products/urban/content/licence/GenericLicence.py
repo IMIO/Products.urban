@@ -119,6 +119,7 @@ schema = Schema((
         name='licenceSubject',
         widget=StringField._properties['widget'](
             size=120,
+            maxlength=500,
             label=_('urban_label_licenceSubject', default='Licencesubject'),
         ),
         schemata='urban_description',
