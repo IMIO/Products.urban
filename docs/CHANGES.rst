@@ -5,6 +5,7 @@ Changes
 2.5 (unreleased)
 ----------------
 
+- update documentation with cadastre downloading
 - provide management of external directions
 - translate liste_220 errors
 - provide the add company feature to the CU1 process
