@@ -76,10 +76,9 @@ create_epub:
 	@echo "Epub creation finished."
 
 .PHONY: html_and_deploy
-html_and_deploy: create_pdf create_epub html
+html_and_deploy: create_epub html
 	@echo
 	rsync -rv ./$(BUILDDIR)/html/* $(DEPLOYDEST)
-	scp ./$(DEPLOYRESDIR)/$(PDF_FILENAME) $(DEPLOYDEST)/$(DEPLOYRESDIR)/$(PDF_FILENAME)
 	scp ./$(DEPLOYRESDIR)/$(EPUB_FILENAME) $(DEPLOYDEST)/$(DEPLOYRESDIR)/$(EPUB_FILENAME)
 	@echo "Deploy finished on $(DEPLOYDEST)."
 
