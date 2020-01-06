@@ -10,11 +10,19 @@ Documentation iA.Urban Gestion de l'urbanisme
 Contents:
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 0
 
-   using_urban
-   config_urban
+   test
    versions
+   features
+   installation_reconditions
+   permissions_and_roles
+   using_the_application
+   configuration
+   document_templates
+   faq
+   templates_faq
+
 
 ##################
 Indices and tables
