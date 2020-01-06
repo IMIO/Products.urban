@@ -228,7 +228,7 @@ def initialize(context):
     ##/code-section custom-init-bottom
 
 
-for licence_type in URBAN_TYPES:
+for licence_type in URBAN_TYPES + ['UrbanCertificateBase']:
     if hasattr(content.licence, licence_type):
         alias_module(
             'Products.urban.{}'.format(licence_type),
