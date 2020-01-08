@@ -252,9 +252,9 @@
 <type type_id="ExplosivesPossession">
   <bound-workflow workflow_id="urban_licence_workflow" />
 </type>
-     <type type_id="RoadDecree">
-         <bound-workflow workflow_id="urban_licence_workflow" />
-     </type>
+<type type_id="RoadDecree">
+  <bound-workflow workflow_id="codt_buildlicence_workflow" />
+</type>
 
 <!-- ##/code-section workflowbindings -->
  </bindings>
