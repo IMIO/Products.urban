@@ -6,9 +6,9 @@
 
  <property name="title" i18n:translate="">CODT_NotaryLetter</property>
  <property name="description" i18n:translate=""></property>
- <property name="content_meta_type">UrbanCertificateBase</property>
+ <property name="content_meta_type">CODT_UrbanCertificateBase</property>
  <property name="product">urban</property>
- <property name="factory">addUrbanCertificateBase</property>
+ <property name="factory">addCODT_UrbanCertificateBase</property>
  <property name="immediate_view">folder_listing</property>
  <property name="global_allow">True</property>
  <property name="filter_content_types">True</property>

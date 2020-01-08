@@ -56,6 +56,11 @@ class ICODT_BaseBuildLicence (IBaseAllBuildLicence):
     """
 
 
+class ICODT_UrbanCertificateBase (IGenericLicence):
+    """Marker interface for all notaryletter/urbancertifcateone procedures (codt)
+    """
+
+
 class IContact(Interface):
     """Marker interface for .Contact.Contact
     """
