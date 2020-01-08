@@ -11,18 +11,17 @@
                            fieldName field/getName">
 
             <tal:comment replace="nothing">Display a fieldset around the 'isInPca' and 'Pca' fields</tal:comment>
-            <tal:pca condition="python: fieldName in ['isInPCA', 'pca', 'pcaDetails']">
+            <tal:pca condition="python: fieldName in ['isInPCA', 'pca', 'pcaDetails', 'pcaZone']">
                 <tal:comment replace="nothing">We do the entire job manually when the field is 'isInPca' and there is
                                                 nothing left to do when it is the 'Pca' field</tal:comment>
                 <tal:manage_pca condition="python: fieldName == 'isInPCA'">
-                    <div tal:attributes="hidden python: not visible or None">
-                        <fieldset class="urban-fieldset-masterbooleanwidget" style="border-style: solid !important;">
-                            <legend i18n:translate="pca_fieldset_legend">PCA</legend>
-                            <metal:fieldMacro use-macro="python:here.widget('isInPCA', mode='edit')" />
-                            <metal:fieldMacro use-macro="python:here.widget('pca', mode='edit')" />
-                            <metal:fieldMacro use-macro="python:here.widget('pcaDetails', mode='edit')" />
-                        </fieldset>
-                    </div>
+                    <fieldset class="urban-fieldset-masterbooleanwidget" style="border-style: solid !important;">
+                        <legend i18n:translate="" tal:content="python: context.getField('pca').widget.label">PCA</legend>
+                        <metal:fieldMacro use-macro="python:here.widget('isInPCA', mode='edit')" />
+                        <metal:fieldMacro use-macro="python:here.widget('pca', mode='edit')" />
+                        <metal:fieldMacro use-macro="python:here.widget('pcaDetails', mode='edit')" />
+                        <metal:fieldMacro use-macro="python:here.widget('pcaZone', mode='edit')" />
+                    </fieldset>
                 </tal:manage_pca>
             </tal:pca>
 
@@ -43,7 +42,7 @@
             </tal:subdivision>
 
             <tal:other condition="not: python: fieldName in [
-                                     'isInPCA', 'pca', 'pcaDetails', 'isInSubdivision',
+                                     'isInPCA', 'pca', 'pcaDetails', 'pcaZone', 'isInSubdivision',
                                      'parcellings', 'subdivisionDetails', 'minimumLegalConditions'
                                   ]">
                 <div tal:attributes="hidden python: not visible or None">

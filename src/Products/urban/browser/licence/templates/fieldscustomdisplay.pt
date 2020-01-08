@@ -35,7 +35,11 @@
 
 
 <metal:pca define-macro="isInPCA">
-    <td valign="top"><b><span i18n:translate="urban_label_isInPCA">In PCA?</span>:</b></td>
+    <td valign="top">
+        <b>
+            <span i18n:translate="" tal:content="python: context.getField('pca').widget.label">In PCA?</span>:
+        </b>
+    </td>
     <td width="10px"></td>
     <td valign="top" tal:define="isInPCA context/getIsInPCA">
         <metal:myfield use-macro="python:here.widget('isInPCA', mode='view')" />

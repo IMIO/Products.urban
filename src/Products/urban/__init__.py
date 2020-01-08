@@ -87,7 +87,6 @@ validation.register(isValidInquiryEndDate('isValidInvestigationEnd'))
 ##/code-section custom-init-head
 
 import Products
-from Products.urban.content.licence.BuildLicence import BuildLicence
 
 from Products.urban.content.licence import Article127  # noqa
 from Products.urban.content.licence import BuildLicence  # noqa
@@ -97,6 +96,7 @@ from Products.urban.content.licence import CODT_CommercialLicence  # noqa
 from Products.urban.content.licence import CODT_IntegratedLicence  # noqa
 from Products.urban.content.licence import CODT_ParcelOutLicence  # noqa
 from Products.urban.content.licence import CODT_UniqueLicence  # noqa
+from Products.urban.content.licence import CODT_UrbanCertificateBase  # noqa
 from Products.urban.content.licence import CODT_UrbanCertificateTwo  # noqa
 from Products.urban.content.licence import Declaration  # noqa
 from Products.urban.content.licence import Division  # noqa
