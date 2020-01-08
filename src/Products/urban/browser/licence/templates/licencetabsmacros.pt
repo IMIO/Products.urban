@@ -97,7 +97,7 @@
         </fieldset>
 
         <metal:applicants define-slot="applicant_slot">
-            <metal:applicants_macro use-macro="here/@@licencemacros/urbanApplicantsMacro" />
+            <metal:applicants_macro use-macro="here/@@licencemacros/urbanApplicantsAndCorporationsMacro" />
         </metal:applicants>
 
         <metal:representatives define-slot="representatives">
