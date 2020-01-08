@@ -45,6 +45,9 @@ class UrbanWithUsersLayer(IntegrationTesting):
     def setUp(self):
         super(UrbanWithUsersLayer, self).setUp()
         with helpers.ploneSite() as portal:
+            portal_urban = portal.portal_urban
+            cache_view = portal_urban.unrestrictedTraverse('urban_vocabulary_cache')
+            cache_view.reset_all_cache()
             portal.setupCurrentSkin(portal.REQUEST)
             from Products.urban.setuphandlers import addTestUsers
             addTestUsers(portal)
@@ -66,6 +69,7 @@ class UrbanConfigLayer(UrbanWithUsersLayer):
             portal.setupCurrentSkin(portal.REQUEST)
             helpers.applyProfile(portal, 'Products.urban:testsWithConfig')
 
+
 URBAN_TESTS_CONFIG = UrbanConfigLayer(
     bases=(URBAN_TESTS_PROFILE_DEFAULT, ), name="URBAN_TESTS_CONFIG")
 
@@ -82,6 +86,7 @@ class UrbanLicencesLayer(UrbanConfigLayer):
             portal.setupCurrentSkin(portal.REQUEST)
             helpers.applyProfile(portal, 'Products.urban:testsWithLicences')
 
+
 URBAN_TESTS_LICENCES = UrbanLicencesLayer(
     bases=(URBAN_TESTS_PROFILE_DEFAULT, ), name="URBAN_TESTS_LICENCES")
 
@@ -95,6 +100,7 @@ class UrbanImportsLayer(IntegrationTesting):
         with helpers.ploneSite() as portal:
             portal.setupCurrentSkin(portal.REQUEST)
             helpers.applyProfile(portal, 'Products.urban:tests-imports')
+
 
 URBAN_IMPORTS = UrbanImportsLayer(
     bases=(URBAN_TESTS_PROFILE_DEFAULT, ), name="URBAN_IMPORTS")
@@ -151,6 +157,7 @@ class UrbanLicencesFunctionalLayer(UrbanConfigFunctionalLayer):
         with helpers.ploneSite() as portal:
             portal.setupCurrentSkin(portal.REQUEST)
             helpers.applyProfile(portal, 'Products.urban:testsWithLicences')
+
 
 URBAN_TESTS_LICENCES_FUNCTIONAL = UrbanLicencesFunctionalLayer(
     bases=(URBAN_TESTS_PROFILE_DEFAULT, ), name="URBAN_TESTS_LICENCES_FUNCTIONAL")
