@@ -419,4 +419,11 @@
       permission="cmf.ManagePortal"
       />
 
+    <browser:page
+        for="*"
+        name="urban-mailing-loop-persistent-document-generation"
+        class="Products.urban.browser.generation_view.UrbanMailingLoopPersistentDocumentGenerationView"
+        permission="zope2.View"
+        />
+
 </configure>

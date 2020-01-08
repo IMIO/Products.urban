@@ -548,7 +548,7 @@ class GenerationColumn(LinkColumn):
         if doc_path.startswith('/'):
             doc_path = doc_path[1:]
         # must use new view with title given and reference to mailing template
-        return '%s/@@mailing-loop-persistent-document-generation?document_url_path=%s' % (doc_url, doc_path)
+        return '%s/@@urban-mailing-loop-persistent-document-generation?document_url_path=%s' % (doc_url, doc_path)
 
     def getLinkContent(self, item):
         return u"""<img title="%s" src="%s" />""" % (_t(u"Mailing"), '%s/%s' % (self.table.portal_url, self.iconName))
