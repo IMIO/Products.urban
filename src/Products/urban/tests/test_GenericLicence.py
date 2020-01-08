@@ -24,7 +24,10 @@ class TestGenericLicenceFields(SchemaFieldsTestCase):
         self.portal.acl_users.source_groups.addPrincipalToGroup(default_user, 'environment_editors')
         login(self.portal, default_user)
         self.licences = []
+        exceptions = ['ExplosivesPossession', 'Inspection', 'Ticket']
         for content_type in URBAN_TYPES:
+            if content_type in exceptions:
+                continue
             licence_folder = utils.getLicenceFolder(content_type)
             testlicence_id = 'test_{}'.format(content_type.lower())
             licence_folder.invokeFactory(content_type, id=testlicence_id)
