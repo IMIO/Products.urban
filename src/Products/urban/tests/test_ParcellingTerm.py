@@ -50,19 +50,21 @@ class TestParcellingTerm(unittest.TestCase):
         self.assertFalse(parcelling_brain.parcelInfosIndex)
 
         # add a parcel1, the index should now contain this parcel reference
-        parcelling.invokeFactory('PortionOut', 'parcel1', division='A', section='B', radical='C', exposant='D')
+        parcelling.invokeFactory('PortionOut', 'parcel1', division='A', section='B', radical='6', exposant='D')
+        parcel_1 = parcelling.parcel1
         parcelling_brain = catalog(id=parcelling_id)[0]
-        self.assertTrue(',B,C,,D,,0' in parcelling_brain.parcelInfosIndex)
+        self.assertTrue(parcel_1.get_capakey() in parcelling_brain.parcelInfosIndex)
 
         # add a parcel2, the index should now contain the two parcel references
-        parcelling.invokeFactory('PortionOut', 'parcel2', division='AA', section='B', radical='CC', exposant='E')
+        parcelling.invokeFactory('PortionOut', 'parcel2', division='AA', section='B', radical='69', exposant='E')
+        parcel_2 = parcelling.parcel2
         parcelling_brain = catalog(id=parcelling_id)[0]
-        self.assertTrue(',B,C,,D,,0' in parcelling_brain.parcelInfosIndex)
-        self.assertTrue(',B,CC,,E,,0' in parcelling_brain.parcelInfosIndex)
+        self.assertTrue(parcel_1.get_capakey() in parcelling_brain.parcelInfosIndex)
+        self.assertTrue(parcel_2.get_capakey() in parcelling_brain.parcelInfosIndex)
 
         # we remove parcel1, the ref of parcel2 should be the only remaining
         # one in the index
         parcelling.manage_delObjects(['parcel1'])
         parcelling_brain = catalog(id=parcelling_id)[0]
-        self.assertFalse(',B,C,,D,,0' in parcelling_brain.parcelInfosIndex)
-        self.assertTrue(',B,CC,,E,,0' in parcelling_brain.parcelInfosIndex)
+        self.assertFalse(parcel_1.get_capakey() in parcelling_brain.parcelInfosIndex)
+        self.assertTrue(parcel_2.get_capakey() in parcelling_brain.parcelInfosIndex)
