@@ -210,6 +210,9 @@ def extraPostInstall(context):
     logger.info("addUrbanVocabularies : starting...")
     addUrbanVocabularies(context)
     logger.info("addUrbanVocabularies : Done")
+    logger.info("addEnvironmentRubrics : starting...")
+    addEnvironmentRubrics(context)
+    logger.info("addEnvironmentRubrics : Done")
     logger.info("addDefaultObjects : starting...")
     addDefaultObjects(context)
     logger.info("addDefaultObjects : Done")
@@ -219,6 +222,12 @@ def extraPostInstall(context):
     logger.info('Setup default schedule configuration: starting...')
     addScheduleConfigs(context)
     logger.info('Setup default schedule configuration : Done')
+
+
+def updateEnvironmentRubrics(context):
+    logger.info("updateRubrics : starting...")
+    addEnvironmentRubrics(context)
+    logger.info("updateRubrics : Done")
 
 
 def addDefaultCronJobs(context):
@@ -428,14 +437,6 @@ def addUrbanVocabularies(context):
     global_vocabularies = default_values['global']
     createVocabularies(container=tool, vocabularies=global_vocabularies)
 
-    conditions = getattr(tool, "exploitationconditions")
-    #add the exploitation conditions subfolders
-    addExploitationConditions(context, conditions)
-
-    rubrics_folder = getattr(tool, "rubrics")
-    #add the rubrics subfolders
-    addRubricValues(context, rubrics_folder)
-
     for urban_type in URBAN_TYPES:
         licenceConfigId = urban_type.lower()
         config_folder = getattr(tool, licenceConfigId)
@@ -450,6 +451,21 @@ def addUrbanVocabularies(context):
             if voc_folder_id in vocabularies_with_HTML_description:
                 voc_folder = getattr(config_folder, voc_folder_id)
                 setHTMLContentType(voc_folder, 'description')
+
+
+def addEnvironmentRubrics(context):
+    """ Add the vocabularyTerm objects """
+    if context.readDataFile('urban_extra_marker.txt') is None:
+        return
+
+    tool = api.portal.get_tool('portal_urban')
+    conditions = getattr(tool, "exploitationconditions")
+    # add the exploitation conditions subfolders
+    addExploitationConditions(context, conditions)
+
+    rubrics_folder = getattr(tool, "rubrics")
+    # add the rubrics subfolders
+    addRubricValues(context, rubrics_folder)
 
 
 def addRubricValues(context, config_folder):
@@ -500,7 +516,7 @@ def addRubricValues(context, config_folder):
             new_rubric.processForm()
 
             conditions_uid = []
-            for bound_condition in mapping[rubric_id]:
+            for bound_condition in mapping[rubric_id] or []:
                 condition_type = bound_condition['type'].replace('/', '_').replace('-', '_')
                 condition_id = bound_condition['id']
                 conditions_folder = getattr(site.portal_urban.exploitationconditions, condition_type)
