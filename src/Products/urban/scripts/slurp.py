@@ -17,9 +17,28 @@ import bs4
 encoding = "iso-8859-1"
 
 
+class OpenURLMaxTriesReached(Exception):
+    """ raised when we try to reach a url X time  without success """
+
+
+def open_url(url, timeout=5, maxtry=5):
+    if not maxtry:
+        raise OpenURLMaxTriesReached(url)
+    try:
+        html = urllib2.urlopen(url, timeout=5).read()
+    except Exception:
+        html = open_url(url, timeout, maxtry - 1)
+    return html
+
+
 def getRubricsHTMLpages(rubric_ids):
     base_url = 'http://environnement.wallonie.be/cgi/dgrne/aerw/pe/rubri/chx_rub_liste.idc?d12='
-    rubrics_html = [urllib2.urlopen('%s%s' % (base_url, rubric_id)).read() for rubric_id in rubric_ids]
+    rubrics_html = []
+    for rubric_id in rubric_ids:
+        print "start to slurp rubric category: %s" % rubric_id
+        rubric_html = open_url('%s%s' % (base_url, rubric_id))
+        rubrics_html.append(rubric_html)
+        print "slurped rubric category: %s" % rubric_id
     return rubrics_html
 
 
@@ -40,6 +59,7 @@ def extractRubricsTerm(rubric_ids):
             if rubric:
                 if rubric['id'] not in rubrics:
                     rubrics[rubric['id']] = rubric
+                    print "extracted rubric: %s" % rubric['id']
                 elif rubric['conditions']:
                     new_condition = rubric['conditions'][0]
                     rubrics[rubric['id']]['conditions'].append(new_condition)
@@ -82,8 +102,7 @@ def extractRubricsFolders():
     print 'slurping main rubric categories...'
 
     rubriques_url = 'http://environnement.wallonie.be/cgi/dgrne/aerw/pe/rubri/chx_rub_intro.idc'
-    rubriques_html = urllib2.urlopen(rubriques_url)
-    rubriques_html = rubriques_html.read()
+    rubriques_html = open_url(rubriques_url)
 
     form = re.search('\<form.*\</form>', rubriques_html, re.IGNORECASE + re.DOTALL)
     form = form.group()
@@ -126,7 +145,7 @@ def extractConditionIntegraltext(condition_soup):
     table = condition_soup.find_all('table')[1]
     # sometimes the link to the full text is not available...
     fulltext_link = table.find_all('tr')[3].a.attrs['href']
-    fulltext_page = urllib2.urlopen(fulltext_link).read()
+    fulltext_page = open_url(fulltext_link)
     body = re.search('(\<body.*)\</html>', fulltext_page, re.IGNORECASE + re.DOTALL)
 
     fulltext = bs4.BeautifulSoup(body.group(), from_encoding=encoding)
@@ -136,8 +155,10 @@ def extractConditionIntegraltext(condition_soup):
 
 
 def getConditionSoup(condition_id):
+    print "slurping condition: %s" % condition_id
     base_url = 'http://environnement.wallonie.be/cgi/dgrne/aerw/pe/rubri/condex.idc?Condexpl_id='
-    condition_page = urllib2.urlopen('%s%s' % (base_url, condition_id)).read()
+    condition_page = open_url('%s%s' % (base_url, condition_id))
+    print "slurped condition: %s" % condition_id
     body = re.search('\<body.*\</body>', condition_page, re.IGNORECASE + re.DOTALL)
 
     condition_soup = bs4.BeautifulSoup(body.group(), from_encoding=encoding)
