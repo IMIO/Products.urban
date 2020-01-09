@@ -21,23 +21,23 @@ class TestParcellingTerm(unittest.TestCase):
         self.assertTrue(parcelling.Title() == 'Lotissement 1 (Andr\xc3\xa9 Ledieu - 01/01/2005 - 10)')
         # after adding a parcel1, title should be updated with the base
         # references  of this parcel (here:  A, B, C but not D)
-        parcelling.invokeFactory('PortionOut', 'parcel1', division='A', section='B', radical='C', exposant='D')
-        self.assertTrue(parcelling.Title() == 'Lotissement 1 (Andr\xc3\xa9 Ledieu - Jan 01, 2005 - "A B C")')
+        parcelling.invokeFactory('PortionOut', 'parcel1', division='A', section='B', radical='6', exposant='D')
+        self.assertTrue(parcelling.Title() == 'Lotissement 1 (Andr\xc3\xa9 Ledieu - Jan 01, 2005 - "A B 6")')
 
         # after adding a parcel2 with the same base refs, the title
         # should not change
-        parcelling.invokeFactory('PortionOut', 'parcel2', division='A', section='B', radical='C', exposant='E')
-        self.assertTrue(parcelling.Title() == 'Lotissement 1 (Andr\xc3\xa9 Ledieu - Jan 01, 2005 - "A B C")')
+        parcelling.invokeFactory('PortionOut', 'parcel2', division='A', section='B', radical='6', exposant='E')
+        self.assertTrue(parcelling.Title() == 'Lotissement 1 (Andr\xc3\xa9 Ledieu - Jan 01, 2005 - "A B 6")')
 
         # after adding a parcel3 with different base refs, the title
         # should be updated
-        parcelling.invokeFactory('PortionOut', 'parcel3', division='AA', section='BB', radical='CC', exposant='D')
-        self.assertTrue(parcelling.Title() == 'Lotissement 1 (Andr\xc3\xa9 Ledieu - Jan 01, 2005 - "AA BB CC", "A B C")')
+        parcelling.invokeFactory('PortionOut', 'parcel3', division='AA', section='BB', radical='69', exposant='D')
+        self.assertTrue(parcelling.Title() == 'Lotissement 1 (Andr\xc3\xa9 Ledieu - Jan 01, 2005 - "AA BB 69", "A B 6")')
 
         # we remove parcel1 and parcel2, title should change to only
         # keep the base refs of parcel3
         parcelling.manage_delObjects(['parcel1', 'parcel2'])
-        self.assertTrue(parcelling.Title() == 'Lotissement 1 (Andr\xc3\xa9 Ledieu - Jan 01, 2005 - "AA BB CC")')
+        self.assertTrue(parcelling.Title() == 'Lotissement 1 (Andr\xc3\xa9 Ledieu - Jan 01, 2005 - "AA BB 69")')
 
     def testParcellingIndexing(self):
         catalog = getToolByName(self.portal, 'portal_catalog')
