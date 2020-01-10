@@ -16,6 +16,7 @@ default_values = {
         'foldercategories': [
             'UrbanVocabularyTerm',
             {'id': "uap", 'title': u"UAP (permis d'urbanisme avec avis préalable du FD)"},
+            {'id': "udc", 'title': u"UDC (permis dans PCA, 'RCU, 'LOTISSEMENT, 'parfois avec demande de dérogation)"},
         ],
 
         'missingparts': [
