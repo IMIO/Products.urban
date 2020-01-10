@@ -114,8 +114,8 @@ def migrate(context):
     setup_tool = api.portal.get_tool('portal_setup')
     setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'typeinfo')
     setup_tool.runImportStepFromProfile('profile-Products.urban:extra', 'urban-update-rubrics')
-    migrate_CODT_NotaryLetter_to_CODT_UrbanCertificateBase()
-    migrate_CODT_UrbanCertificateOne_to_CODT_UrbanCertificateBase
+    migrate_CODT_NotaryLetter_to_CODT_UrbanCertificateBase(context)
+    migrate_CODT_UrbanCertificateOne_to_CODT_UrbanCertificateBase(context)
     catalog = api.portal.get_tool('portal_catalog')
     catalog.clearFindAndRebuild()
     logger.info("migration done!")
