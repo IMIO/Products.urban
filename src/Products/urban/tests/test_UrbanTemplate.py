@@ -1,42 +1,10 @@
 # -*- coding: utf-8 -*-
 
-from Products.urban.testing import URBAN_TESTS_LICENCES, URBAN_TESTS_CONFIG
-
-from plone import api
+from Products.urban.testing import URBAN_TESTS_LICENCES
 
 from plone.app.testing import login
 
 import unittest
-
-
-class TestUrbanTemplates(unittest.TestCase):
-
-    layer = URBAN_TESTS_CONFIG
-
-    def setUp(self):
-        self.portal = self.layer['portal']
-        self.portal_urban = self.portal.portal_urban
-        login(self.portal, 'urbanmanager')
-
-        self.catalog = api.portal.get_tool('portal_catalog')
-        event_type = self.catalog(portal_type='UrbanEventType', id='accuse-de-reception')[0].getObject()
-        self.urbandoc_model = getattr(event_type, 'urb-accuse.odt')
-        self.urbandoc_model.pod_portal_types = []
-
-    def testUrbanTemplateIsUnderActivationWF(self):
-        #Check that templates .odt files in urbanEventTypes are under activation wf policy
-        urban_event_type = getattr(self.portal_urban.buildlicence.urbaneventtypes, 'accuse-de-reception', None)
-        template = getattr(urban_event_type, 'urb-accuse.odt', None)
-        self.assertTrue(api.content.get_state(template) == 'enabled')
-
-    def test_generation_condition_with_disabled_state(self):
-        api.content.transition(self.urbandoc_model, 'disable')
-        may_generate_document = self.urbandoc_model.can_be_generated(self.portal)
-        self.assertTrue(not may_generate_document)
-
-    def test_generation_condition_with_enabled_state(self):
-        may_generate_document = self.urbandoc_model.can_be_generated(self.urbandoc_model)
-        self.assertTrue(may_generate_document)
 
 
 class TestTemplateMethods(unittest.TestCase):
