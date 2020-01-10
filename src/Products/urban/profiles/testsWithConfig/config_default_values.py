@@ -355,6 +355,7 @@ default_values = {
 
         'country': [
             'UrbanVocabularyTerm',
+            {'id': 'belgium', 'title': "Belgique"},
             {'id': 'germany', 'title': "Allemagne"},
         ],
 

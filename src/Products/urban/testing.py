@@ -48,6 +48,7 @@ class UrbanWithUsersLayer(IntegrationTesting):
             portal_urban = portal.portal_urban
             cache_view = portal_urban.unrestrictedTraverse('urban_vocabulary_cache')
             cache_view.reset_all_cache()
+            Products.urban.config.NIS = 92000  # mock NIS code
             portal.setupCurrentSkin(portal.REQUEST)
             from Products.urban.setuphandlers import addTestUsers
             addTestUsers(portal)
