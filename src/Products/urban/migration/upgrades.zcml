@@ -114,4 +114,12 @@
         destination="2.4.0"
         handler=".migrate_to_240.migrate"
         profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Upgrade urban 2.5.0"
+        description="urban upgrade step"
+        source="2.4.0"
+        destination="2.5.0"
+        handler=".migrate_to_250.migrate"
+        profile="Products.urban:default" />
 </configure>
