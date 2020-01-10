@@ -73,38 +73,7 @@ class UrbanDoc(ATBlob):
     ##code-section class-header #fill in your manual code here
     ##/code-section class-header
 
-    # Methods
 
-    # Manually created methods
-
-    def mayGenerateUrbanDoc(self, obj):
-        """
-        Creation condition
-
-        computed by evaluating the TAL expression stored in TALCondition field
-        """
-        res = True # At least for now
-        # Check condition
-        TALCondition = self.getTALCondition().strip()
-        if TALCondition:
-            portal = getToolByName(self, 'portal_url').getPortalObject()
-            licence = obj.aq_parent
-            data = {
-                'nothing':      None,
-                'portal':       portal,
-                'object':       licence,
-                'event':        obj,
-                'request':      getattr(portal, 'REQUEST', None),
-                'here':         obj,
-                'licence':      licence,
-            }
-            ctx = getEngine().getContext(data)
-            try:
-                res = Expression(TALCondition)(ctx)
-            except Exception, e:
-                logger.warn("The condition '%s' defined for element at '%s' is wrong!  Message is : %s" % (TALCondition, obj.absolute_url(), e))
-                res = False
-        return res
 
 
 
