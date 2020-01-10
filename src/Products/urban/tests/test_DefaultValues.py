@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 import unittest
+
 from plone.app.testing import login
+from plone import api
+
 from Products.urban.testing import URBAN_TESTS_CONFIG
 from Products.CMFCore.utils import getToolByName
 from Products.urban.config import URBAN_TYPES
@@ -22,6 +25,11 @@ class TestDefaultValues(unittest.TestCase):
         self.buildlicences = portal.urban.buildlicences
         login(portal, self.layer.default_user)
 
+    def update_voc_cache(self, licence_config):
+        with api.env.adopt_roles(['Manager']):
+            voc_cache = self.portal_urban.restrictedTraverse('urban_vocabulary_cache')
+            voc_cache.update_procedure_all_vocabulary_cache(licence_config)
+
     """
     Tests for the configurable listing default values
     """
@@ -40,21 +48,24 @@ class TestDefaultValues(unittest.TestCase):
         # any configurable selection field should be empty by default
         self.assertEqual(True, not newlicence.getWorkType())
         self.assertEqual((), newlicence.getMissingParts())
+        self.assertEqual([], newlicence.getFolderCategory())
         self.assertEqual(True, not newlicence.getMissingParts())
 
     def testSingleSelectionFieldWithOneDefaultValue(self):
         # configure a default value for the field 'folder category'
-        vocabulary_term = self.portal_urban.buildlicence.missingparts.objectValues()[0]
+        vocabulary_term = self.portal_urban.buildlicence.foldercategories.objectValues()[0]
         vocabulary_term.setIsDefaultValue(True)
+        self.update_voc_cache(self.portal_urban.buildlicence)
         # create a new buildlicence
         newlicence = self.createNewLicence()
         # the value of folderCategory should be the one marked as default value
-        self.assertEqual((vocabulary_term.id,), newlicence.getMissingParts())
+        self.assertEqual([vocabulary_term.id], newlicence.getFolderCategory())
 
     def testMultiSelectionFieldWithOneDefaultValue(self):
         # configure a default value for the field 'missing parts'
         vocabulary_term = self.portal_urban.buildlicence.missingparts.objectValues()[0]
         vocabulary_term.setIsDefaultValue(True)
+        self.update_voc_cache(self.portal_urban.buildlicence)
         # create a new buildlicence
         newlicence = self.createNewLicence()
         # the value of missing parts should be the one marked as default value
@@ -62,14 +73,15 @@ class TestDefaultValues(unittest.TestCase):
 
     def testSingleSelectionFieldWithMultipleDefaultValues(self):
         # configure a default value for the field 'folder category'
-        vocabulary_term_1 = self.portal_urban.buildlicence.missingparts.objectValues()[0]
+        vocabulary_term_1 = self.portal_urban.buildlicence.foldercategories.objectValues()[0]
         vocabulary_term_1.setIsDefaultValue(True)
-        vocabulary_term_2 = self.portal_urban.buildlicence.missingparts.objectValues()[2]
+        vocabulary_term_2 = self.portal_urban.buildlicence.foldercategories.objectValues()[1]
         vocabulary_term_2.setIsDefaultValue(True)
+        self.update_voc_cache(self.portal_urban.buildlicence)
         # create a new buildlicence
         newlicence = self.createNewLicence()
         # the value of folderCategory should be the one marked as default value
-        self.assertEqual((vocabulary_term_1.id, vocabulary_term_2.id), newlicence.getMissingParts())
+        self.assertEqual([vocabulary_term_1.id, vocabulary_term_2.id], newlicence.getFolderCategory())
 
     def testMultiSelectionFieldWithMultiplesDefaultValues(self):
         # configure a default value for the field 'missing parts'
@@ -77,6 +89,7 @@ class TestDefaultValues(unittest.TestCase):
         vocabulary_term_1.setIsDefaultValue(True)
         vocabulary_term_2 = self.portal_urban.buildlicence.missingparts.objectValues()[2]
         vocabulary_term_2.setIsDefaultValue(True)
+        self.update_voc_cache(self.portal_urban.buildlicence)
         # create a new buildlicence
         newlicence = self.createNewLicence()
         # the value of missing parts should be the one marked as default value
@@ -146,6 +159,11 @@ class TestEventDefaultValues(unittest.TestCase):
         buildlicence.setSolicitOpinionsTo('sncb')
         self.licence = buildlicence
 
+    def update_voc_cache(self):
+        with api.env.adopt_roles(['Manager']):
+            voc_cache = self.portal_urban.restrictedTraverse('urban_vocabulary_cache')
+            voc_cache.update_all_cache()
+
     def testNoDefaultValuesConfigured(self):
         # create a new buildlicence
         event = self.licence.createUrbanEvent('sncb')
@@ -157,6 +175,7 @@ class TestEventDefaultValues(unittest.TestCase):
         # configure a default value for the field 'externalDecision'
         vocabulary_term = self.portal_urban.externaldecisions.objectValues()[0]
         vocabulary_term.setIsDefaultValue(True)
+        self.update_voc_cache()
         # create a new urban event
         event = self.licence.createUrbanEvent('sncb')
         # the value of folderCategory should be the one marked as default value
@@ -168,10 +187,11 @@ class TestEventDefaultValues(unittest.TestCase):
         vocabulary_term_1.setIsDefaultValue(True)
         vocabulary_term_2 = self.portal_urban.externaldecisions.objectValues()[2]
         vocabulary_term_2.setIsDefaultValue(True)
+        self.update_voc_cache()
         # create a new urban event
         event = self.licence.createUrbanEvent('sncb')
         # the value of folderCategory should be the one marked as default value
-        self.assertEqual([vocabulary_term_2.id, vocabulary_term_1.id], event.getExternalDecision())
+        self.assertEqual([vocabulary_term_1.id, vocabulary_term_2.id], event.getExternalDecision())
 
     def testDefaultValueMethodIsDefinedForEachConfigurableListing(self):
         # each field with a configurable listing (<=> has a UrbanVocabulary defined as its vocabulary) should
