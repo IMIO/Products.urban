@@ -112,6 +112,7 @@ def migrate(context):
     logger = logging.getLogger('urban: migrate to 2.5')
     logger.info("starting migration steps")
     setup_tool = api.portal.get_tool('portal_setup')
+    setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'typeinfo')
     setup_tool.runImportStepFromProfile('profile-Products.urban:extra', 'urban-update-rubrics')
     migrate_CODT_NotaryLetter_to_CODT_UrbanCertificateBase()
     migrate_CODT_UrbanCertificateOne_to_CODT_UrbanCertificateBase
