@@ -1304,6 +1304,8 @@ def createLicence(site, licence_type, data):
             field_value = None
             if field_name == 'workLocations':
                 field_value = ({'number': '42', 'street': catalog(portal_type='Street')[0].UID},)
+            elif field_name == 'roadEquipments':
+                field_value = ({'road_equipment': 'eau', 'road_equipment_details': '[road_equipment_details XXX]'},)
             elif field_name != 'folderCategory' or field.vocabulary.getDisplayList(licence):
                 field_value = getDummyValueForField(field, licence)
             if field_value:
