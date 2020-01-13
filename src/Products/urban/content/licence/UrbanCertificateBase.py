@@ -564,7 +564,7 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
         else:
             proprietary = translate('no_proprietary_defined', 'urban', context=self.REQUEST).encode('utf8')
         if self.getNotaryContact():
-            notary = self.getNotaryContact()[0].Title()
+            notary = self.getNotaryContact()[0].Title().encode('utf8')
         else:
             notary = translate('no_notary_defined', 'urban', context=self.REQUEST).encode('utf8')
 

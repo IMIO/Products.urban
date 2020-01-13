@@ -233,9 +233,9 @@ class Contact(BaseContent, BrowserDefaultMixin):
            Generate the title...
         """
         if self.getSociety():
-            return "%s %s %s (%s)" % (self.getPersonTitle(short=True), self.getName1(), self.getName2(), self.getSociety())
+            return u"%s %s %s (%s)" % (self.getPersonTitle(short=True), self.getName1(), self.getName2(), self.getSociety())
         else:
-            return "%s %s %s" % (self.getPersonTitle(short=True), self.getName1(), self.getName2())
+            return u"%s %s %s" % (self.getPersonTitle(short=True), self.getName1(), self.getName2())
 
     security.declarePublic('getSignaletic')
     def getSignaletic(self, short=False, withaddress=False, linebyline=False, reverse=False, remove_comma=False, inverted_address=False):
@@ -249,12 +249,10 @@ class Contact(BaseContent, BrowserDefaultMixin):
             if not linebyline:
                 return nameSignaletic
             else:
-                return '<p>%s</p>' % nameSignaletic
+                return u'<p>%s</p>' % nameSignaletic
         else:
             #escape HTML special characters like HTML entities
             addressSignaletic = self.getAddress(linebyline=linebyline, remove_comma=remove_comma, inverted_address=inverted_address)
-            addressSignaletic = addressSignaletic.decode('utf8')
-            nameSignaletic = nameSignaletic.decode('utf8')
             if not linebyline:
                 mapping = dict(name=nameSignaletic,
                                address=addressSignaletic)
@@ -294,24 +292,25 @@ class Contact(BaseContent, BrowserDefaultMixin):
                                 domain=u'urban',
                                 mapping=mapping, context=self.REQUEST
                             )
-                return result.encode('utf8')
+                return result
             else:
                 #remove the <p></p> from adressSignaletic
                 addressSignaletic = addressSignaletic[3:-4]
-                address = '<p>%s<br />%s</p>' % (nameSignaletic, addressSignaletic)
+                address = u'<p>%s<br />%s</p>' % (nameSignaletic, addressSignaletic)
                 return address
 
     def _getNameSignaletic(self, short, linebyline, reverse=False, invertnames=False):
         title = self.getPersonTitleValue(short, False, reverse)
-        namedefined = self.getName1() or self.getName2()
-        names = '%s %s' % (self.getName1(), self.getName2())
+        name1 = self.getName1().decode('utf-8')
+        name2 = self.getName2().decode('utf-8')
+        namedefined = name1 or name2
+        names = u'%s %s' % (name1, name2)
         if invertnames:
-            names = '%s %s' % (self.getName2(), self.getName1())
+            names = u'%s %s' % (name2, name1)
         names = names.strip()
         namepart = namedefined and names or self.getSociety()
-        nameSignaletic = '%s %s' % (title, namepart.decode('utf8'))
+        nameSignaletic = u'%s %s' % (title, namepart)
         nameSignaletic = nameSignaletic.strip()
-        nameSignaletic = nameSignaletic.encode('utf8')
         if linebyline:
             #escape HTML special characters like HTML entities
             return cgi.escape(nameSignaletic)
@@ -343,11 +342,11 @@ class Contact(BaseContent, BrowserDefaultMixin):
         """
           Returns the contact address
         """
-        number = self.getNumber()
-        street = self.getStreet()
-        zip = self.getZipcode()
-        city = self.getCity()
-        country = self.getField('country').vocabulary.getAllVocTerms(self)[self.getCountry()].Title()
+        number = self.getNumber().decode('utf-8')
+        street = self.getStreet().decode('utf-8')
+        zip = self.getZipcode().decode('utf-8')
+        city = self.getCity().decode('utf-8')
+        country = self.getField('country').vocabulary.getAllVocTerms(self)[self.getCountry()].Title().decode('utf-8')
         if not linebyline:
             result = []
             if inverted_address:
@@ -365,27 +364,30 @@ class Contact(BaseContent, BrowserDefaultMixin):
                 if number:
                     result.append(number)
             if zip:
-                result.append("à %s" % zip)
+                result.append(u"à %s" % zip)
             if city:
                 result.append(city)
             if self.getCountry() != 'belgium':
                 result.append(country)
-            return ' '.join(result)
+            try:
+                return u' '.join(result)
+            except:
+                import ipdb; ipdb.set_trace()
         else:
             number = cgi.escape(number)
             street = cgi.escape(street)
             zip = cgi.escape(zip)
             city = cgi.escape(city)
             if remove_comma:
-                mask_address = "<p>%s %s<br />%s %s</p>"
+                mask_address = u"<p>%s %s<br />%s %s</p>"
             else:
-                mask_address = "<p>%s, %s<br />%s %s</p>"
+                mask_address = u"<p>%s, %s<br />%s %s</p>"
             if inverted_address:
                 address = mask_address % (number, street, zip, city)
             else:
                 address = mask_address % (street, number, zip, city)
             if self.getCountry() != 'belgium':
-                address = address.replace("</p>", "<br />{country}</p>".format(country=country))
+                address = address.replace(u"</p>", "<br />{country}</p>".format(country=country))
             return address
 
     security.declarePublic('getPersonTitle')
