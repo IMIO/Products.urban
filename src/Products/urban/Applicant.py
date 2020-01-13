@@ -277,12 +277,15 @@ class Applicant(BaseContent, Contact, BrowserDefaultMixin):
 
     def _getNameSignaletic(self, short, linebyline, reverse=False, invertnames=False):
         title = self.getPersonTitleValue(short, linebyline, reverse)
-        namedefined = self.getName1() or self.getName2()
-        names = '%s %s' % (self.getName1(), self.getName2())
+        name1 = self.getName1().decode('utf-8')
+        name2 = self.getName2().decode('utf-8')
+        namedefined = name1 or name2
+        names = u'%s %s' % (name1, name2)
         if invertnames:
-            names = '%s %s' % (self.getName2(), self.getName1())
+            names = u'%s %s' % (name2, name1)
+        names = names.strip()
         namepart = namedefined and names or self.getSociety()
-        nameSignaletic = '%s %s' % (title, namepart.decode('utf8'))
+        nameSignaletic = u'%s %s' % (title, namepart)
         if len(self.getRepresentedBy()) > 0 or self.getRepresentedBySociety():
             person_title = self.getPersonTitle(theObject=True)
             representatives = self.getRepresentedBySociety() and self.getSociety() or self.displayValue(self.Vocabulary('representedBy')[0], self.getRepresentedBy())
@@ -297,8 +300,7 @@ class Applicant(BaseContent, Contact, BrowserDefaultMixin):
                     represented = u'représentée'
                 elif gender == 'female' and multiplicity == 'plural':
                     represented = u'représentées'
-            nameSignaletic = '%s %s %s par %s' % (title, namepart.decode('utf8'), represented, representatives.decode('utf8'))
-        nameSignaletic = nameSignaletic.encode('utf8')
+            nameSignaletic = u'%s %s %s par %s' % (title, namepart, represented, representatives)
         if linebyline:
             #escape HTML special characters like HTML entities
             return cgi.escape(nameSignaletic)
