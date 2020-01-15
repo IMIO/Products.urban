@@ -392,8 +392,7 @@ class FoldermanagerColumn(Column):
     def renderCell(self, urbanlist_item):
         obj = urbanlist_item.getObject()
         foldermanagers = obj.getFoldermanagers()
-        foldermanager_names = ', '.join([fm.getSignaletic(short=True) for fm in foldermanagers])
-        foldermanager_names = foldermanager_names.decode('utf-8')
+        foldermanager_names = u', '.join([fm.getSignaletic(short=True) for fm in foldermanagers])
         return foldermanager_names
 
 
