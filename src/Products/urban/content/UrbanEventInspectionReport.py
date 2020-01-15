@@ -107,7 +107,7 @@ class UrbanEventInspectionReport(BaseFolder, UrbanEvent, BrowserDefaultMixin):
 
     # Manually created methods
 
-    security.declarePublic('listFloodingLevels')
+    security.declarePublic('listFollowupPropositions')
 
     def listFollowupPropositions(self):
         """
