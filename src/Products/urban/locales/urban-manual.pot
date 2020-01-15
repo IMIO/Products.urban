@@ -965,6 +965,9 @@ msgstr ""
 msgid "noteworthytrees_folder_title"
 msgstr ""
 
+msgid "offense_articles_folder_title"
+msgstr ""
+
 #. Default: "OpenOfficePort"
 #: UrbanTool.py
 msgid "open_office_port"
@@ -1205,6 +1208,9 @@ msgstr ""
 #. Default: "Enter a TAL condition that defines if the event type is applicable or not.  The parameters 'here' and 'member' are available"
 #: UrbanEventType.py
 msgid "tal_condition_descr"
+msgstr ""
+
+msgid "ticket_urbanconfig_title"
 msgstr ""
 
 # topics
