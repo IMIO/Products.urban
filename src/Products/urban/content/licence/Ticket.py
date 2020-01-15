@@ -87,6 +87,28 @@ schema = Schema((
         multiValued=True,
         relationship="bound_licences",
     ),
+    TextField(
+        name='conclusions',
+        widget=RichWidget(
+            label=_('urban_label_conclusions', default='Conclusions'),
+        ),
+        default_content_type='text/html',
+        allowable_content_types=('text/html',),
+        schemata='urban_inspection',
+        default_method='getDefaultText',
+        default_output_type='text/html',
+    ),
+    LinesField(
+        name='offense_articles',
+        widget=MultiSelectionWidget(
+            format='checkbox',
+            label=_('urban_label_offense_articles', default='Offense_articles'),
+        ),
+        schemata='urban_inspection',
+        multiValued=True,
+        vocabulary=UrbanVocabulary('offense_articles'),
+        default_method='getDefaultValue',
+    ),
 ),
 )
 Ticket_schema = BaseFolderSchema.copy() + \
