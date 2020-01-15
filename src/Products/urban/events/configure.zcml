@@ -143,6 +143,10 @@
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".rubricTermEvents.updateTitle" />
 
+  <subscriber for="..interfaces.IEnvironmentRubricTerm
+                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+              handler=".rubricTermEvents.updateIdAndSort" />
+
   <subscriber for="..interfaces.IEnvironmentBase
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".envclassEvents.update_history"/>
