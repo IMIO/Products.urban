@@ -232,8 +232,8 @@ class Contact(BaseContent, BrowserDefaultMixin):
         """
            Generate the title...
         """
-        name1 =  self.getName1().decode('utf-8')
-        name2 =  self.getName2().decode('utf-8')
+        name1 = self.getName1().decode('utf-8')
+        name2 = self.getName2().decode('utf-8')
         society = self.getSociety().decode('utf-8')
         if self.getSociety():
             return u"%s %s %s (%s)" % (self.getPersonTitle(short=True), name1, name2, society)
