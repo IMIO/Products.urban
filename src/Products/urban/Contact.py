@@ -232,10 +232,13 @@ class Contact(BaseContent, BrowserDefaultMixin):
         """
            Generate the title...
         """
+        name1 =  self.getName1().decode('utf-8')
+        name2 =  self.getName2().decode('utf-8')
+        society = self.getSociety().decode('utf-8')
         if self.getSociety():
-            return u"%s %s %s (%s)" % (self.getPersonTitle(short=True), self.getName1(), self.getName2(), self.getSociety())
+            return u"%s %s %s (%s)" % (self.getPersonTitle(short=True), name1, name2, society)
         else:
-            return u"%s %s %s" % (self.getPersonTitle(short=True), self.getName1(), self.getName2())
+            return u"%s %s %s" % (self.getPersonTitle(short=True), name1, name2)
 
     security.declarePublic('getSignaletic')
     def getSignaletic(self, short=False, withaddress=False, linebyline=False, reverse=False, remove_comma=False, inverted_address=False):
