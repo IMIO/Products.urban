@@ -33,7 +33,7 @@ def migrate_CODT_NotaryLetter_to_CODT_UrbanCertificateBase(context):
     """
     Base class of CODT_NotaryLetter is now CODT_UrbanCertificateBase
     """
-    logger = logging.getLogger('urban: migrate Generated UrbanDoc to ATFile type ->')
+    logger = logging.getLogger('urban: migrate CODT_NotaryLetter meta type to CODT_UrbanCertificateBase ->')
     logger.info("starting migration step")
 
     migrator = CODT_NotaryLetterMigrator
@@ -79,7 +79,7 @@ def migrate_CODT_UrbanCertificateOne_to_CODT_UrbanCertificateBase(context):
     """
     Base class of CODT_NotaryLetter is now CODT_UrbanCertificateBase
     """
-    logger = logging.getLogger('urban: migrate Generated UrbanDoc to ATFile type ->')
+    logger = logging.getLogger('urban: migrate CODT_UrbanCertificateOne meta type to CODT_UrbanCertificateBase ->')
     logger.info("starting migration step")
 
     migrator = CODT_UrbanCertificateOneMigrator
