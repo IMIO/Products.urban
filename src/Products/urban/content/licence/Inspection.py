@@ -228,18 +228,7 @@ def finalize_schema(schema, folderish=False, moveDiscussion=True):
     """
        Finalizes the type schema to alter some fields
     """
-    for field in schema.fields():
-        allowed_schematas = [
-            'urban_description',
-            'urban_advices',
-            'urban_inspection',
-            'urban_location',
-            'metadata',
-            'default'
-        ]
-        if field.schemata not in allowed_schematas:
-            schema.delField(field.__name__)
-    schema.delField('folderCategory')
+    schema['folderCategory'].widget.visible = {'edit': 'invisible', 'view': 'invisible'}
     schema.moveField('description', after='inspection_context')
     schema.moveField('bound_licence', before='workLocations')
     schema.moveField('use_bound_licence_infos', after='bound_licence')
