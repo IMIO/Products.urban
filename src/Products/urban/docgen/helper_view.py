@@ -480,6 +480,7 @@ class UrbanDocGenerationEventHelperView(UrbanDocGenerationHelperView):
                 mailing_list = self.context.getRecipients()
             elif gen_context['publipostage'] == 'organismes':
                 mailing_list = self.getFolderMakersMailing()
+        mailing_list = [obj.restrictedTraverse('@@document_generation_helper_view').context for obj in mailing_list]
         return mailing_list
 
     def getFolderMakersMailing(self):
