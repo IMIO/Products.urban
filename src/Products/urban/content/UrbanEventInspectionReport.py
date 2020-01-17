@@ -18,6 +18,7 @@ from Products.Archetypes.atapi import *
 from zope.interface import implements
 from Products.urban import interfaces
 from Products.urban.UrbanEvent import UrbanEvent
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.urban.config import *
@@ -56,6 +57,16 @@ schema = Schema((
         default_method='getDefaultText',
         default_content_type='text/html',
         default_output_type='text/html',
+    ),
+    LinesField(
+        name='offense_articles',
+        widget=MultiSelectionWidget(
+            format='checkbox',
+            label=_('urban_label_offense_articles', default='Offense_articles'),
+        ),
+        multiValued=True,
+        vocabulary=UrbanVocabulary('offense_articles'),
+        default_method='getDefaultValue',
     ),
     LinesField(
         name='followup_proposition',

@@ -224,6 +224,37 @@ def extraPostInstall(context):
     logger.info('Setup default schedule configuration : Done')
 
 
+def updateVocabularyConfig(context):
+    logger.info("updateVocabularyConfig : starting...")
+    if context.readDataFile('urban_extra_marker.txt') is None:
+        return
+
+    site = context.getSite()
+    tool = api.portal.get_tool('portal_urban')
+    profile_name = context._profile_path.split('/')[-1]
+    module_name = 'Products.urban.profiles.%s.config_default_values' % profile_name
+    attribute = 'default_values'
+    module = __import__(module_name, fromlist=[attribute])
+    default_values = getattr(module, attribute)
+
+    for urban_type in URBAN_TYPES:
+        licenceConfigId = urban_type.lower()
+        config_folder = getattr(tool, licenceConfigId)
+        config_folder.setTitle(_("%s_urbanconfig_title" % urban_type.lower(), 'urban'))
+        config_folder.licencePortalType = urban_type
+        config_folder.reindexObject()
+
+        licence_vocabularies = default_values.get(urban_type, {})
+        createVocabularyFolders(container=config_folder, vocabularies=licence_vocabularies, site=site)
+        createVocabularies(container=config_folder, vocabularies=licence_vocabularies)
+
+        shared_vocabularies = getSharedVocabularies(urban_type, default_values)
+        createVocabularyFolders(container=config_folder, vocabularies=shared_vocabularies, site=site)
+        createVocabularies(container=config_folder, vocabularies=shared_vocabularies)
+
+    logger.info("updateVocabularyConfig : Done")
+
+
 def updateEnvironmentRubrics(context):
     logger.info("updateRubrics : starting...")
     addEnvironmentRubrics(context)
