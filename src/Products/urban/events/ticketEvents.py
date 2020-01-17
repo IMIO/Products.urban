@@ -5,32 +5,63 @@ from plone import api
 from zope.annotation import IAnnotations
 
 
-def setTicketBoundLicence(licence, event):
-    annotations = IAnnotations(licence)
-    previous_bound_UIDs = annotations.get('urban.ticket_bound_licences', set([]))
-    new_bound_UIDs = licence.getField('bound_licences').getRaw(licence)
+def setTicketBoundInspection(ticket, event):
+    annotations = IAnnotations(ticket)
+    previous_bound_UIDs = annotations.get('urban.ticket_bound_inspections', set([]))
+    new_bound_UIDs = ticket.getField('bound_inspection').getRaw(ticket)
     if set(previous_bound_UIDs) == set(new_bound_UIDs):
         return
 
     catalog = api.portal.get_tool('portal_catalog')
-    # unrefer previous licence
+    # unrefer previous ticket
+    if previous_bound_UIDs:
+        for previous_inspection_brain in catalog(UID=previous_bound_UIDs):
+            previous_inspection = previous_inspection_brain.getObject()
+            previous_inspection_annotations = IAnnotations(previous_inspection)
+            values = previous_inspection_annotations.get('urban.bound_tickets', set([]))
+            if ticket.UID() in values:
+                values.remove(ticket.UID())
+                previous_inspection_annotations['urban.bound_tickets'] = values
+
+    # refer new ticket
+    if new_bound_UIDs:
+        for new_inspection_brain in catalog(UID=previous_bound_UIDs):
+            new_inspection = new_inspection_brain.getObject()
+            new_inspection_annotations = IAnnotations(new_inspection)
+            values = new_inspection_annotations.get('urban.bound_tickets', set([]))
+            if ticket.UID() not in values:
+                values.add(ticket.UID())
+                new_inspection_annotations['urban.bound_tickets'] = values
+
+    annotations['urban.ticket_bound_inspections'] = new_bound_UIDs
+
+
+def setTicketBoundLicence(ticket, event):
+    annotations = IAnnotations(ticket)
+    previous_bound_UIDs = annotations.get('urban.ticket_bound_licences', set([]))
+    new_bound_UIDs = ticket.getField('bound_licences').getRaw(ticket)
+    if set(previous_bound_UIDs) == set(new_bound_UIDs):
+        return
+
+    catalog = api.portal.get_tool('portal_catalog')
+    # unrefer previous ticket
     if previous_bound_UIDs:
         for previous_licence_brain in catalog(UID=previous_bound_UIDs):
             previous_licence = previous_licence_brain.getObject()
             previous_licence_annotations = IAnnotations(previous_licence)
             values = previous_licence_annotations.get('urban.bound_tickets', set([]))
-            if licence.UID() in values:
-                values.remove(licence.UID())
+            if ticket.UID() in values:
+                values.remove(ticket.UID())
                 previous_licence_annotations['urban.bound_tickets'] = values
 
-    # refer new licence
+    # refer new ticket
     if new_bound_UIDs:
         for new_licence_brain in catalog(UID=previous_bound_UIDs):
             new_licence = new_licence_brain.getObject()
             new_licence_annotations = IAnnotations(new_licence)
             values = new_licence_annotations.get('urban.bound_tickets', set([]))
-            if licence.UID() not in values:
-                values.add(licence.UID())
+            if ticket.UID() not in values:
+                values.add(ticket.UID())
                 new_licence_annotations['urban.bound_tickets'] = values
 
     annotations['urban.ticket_bound_licences'] = new_bound_UIDs
