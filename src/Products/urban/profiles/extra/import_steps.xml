@@ -36,6 +36,14 @@
  </import-step>
 
  <import-step
+    id="urban-update-vocabularies"
+    version="20200113-01"
+    handler="Products.urban.setuphandlers.updateVocabularyConfig"
+    title="urban : Update all the vocabularies from urban config">
+  USE THIS TO UPDATE LICENCE VOCABULARIES
+ </import-step>
+
+ <import-step
     id="urban-updateAllUrbanTemplates"
     handler="Products.urban.exportimport.updateAllUrbanTemplates"
     title="Update all the templates (generic templates and urbanEventTypes templates) and create urbanEventTypes"
