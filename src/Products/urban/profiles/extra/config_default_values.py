@@ -1432,7 +1432,7 @@ default_values = {
             'UrbanVocabularyTerm', ['Ticket', 'Inspection'],
             {'id': "art1", 'title': u"1° exécution sans permis préalable ou non conformément au permis Puisque non-respect de l’ (des)article(s) Art. DIV.4"},
             {'id': "art1.1", 'title': u"construire"},
-            {'id': "art1.2", 'title': u"ensignes / pub"},
+            {'id': "art1.2", 'title': u"enseignes / pub"},
             {'id': "art1.3", 'title': u"démolir"},
             {'id': "art1.4", 'title': u"reconstruire"},
             {'id': "art1.5", 'title': u"transformer"},
