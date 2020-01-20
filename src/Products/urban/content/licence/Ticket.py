@@ -15,6 +15,8 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 from plone import api
 
+from zope.i18n import translate
+
 slave_fields_bound_inspection = (
     {
         'name': 'workLocations',
