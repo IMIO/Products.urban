@@ -8,6 +8,7 @@ from Products.urban.schedule.vocabulary import URBAN_TYPES_INTERFACES
 
 from collective.faceted.task.events.task_events import activate_faceted_tasks_listing
 
+from zope.annotation import IAnnotations
 from zope.interface import alsoProvides
 
 
@@ -58,7 +59,29 @@ def postCreationActions(licence, event):
 
 def updateLicenceTitle(licence, event):
     licence.updateTitle()
-    licence.reindexObject()
+    licence.reindexObject(idxs=['Title', 'sortable_title'])
+
+
+def updateBoundLicences(licence, events):
+    """
+    If ticket or inspection refers to this licence, update their title and indexes
+    as the refered address and aplicants may have changed.
+    """
+    annotations = IAnnotations(licence)
+    uids = annotations.get('urban.bound_tickets', set([])) + annotations.get('urban.bound_inspections', set([]))
+    catalog = api.portal.get_tool('portal_catalog')
+    bound_licences_brains = catalog(UID=uids)
+    for bound_licences_brain in bound_licences_brains:
+        bound_licence = bound_licences_brain.getObject()
+        bound_licence.updateTitle()
+        bound_licence.reindexObject(ixds=[
+            'Title',
+            'sortable_title',
+            'applicantInfosIndex',
+            'address',
+            'StreetNumber',
+            'StreetsUID',
+        ])
 
 
 def updateEventsFoldermanager(licence, event):
