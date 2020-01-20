@@ -53,6 +53,10 @@
 
   <subscriber for="..interfaces.IGenericLicence
                    zope.lifecycleevent.IObjectModifiedEvent"
+              handler=".licenceEvents.updateBoundLicences"/>
+
+  <subscriber for="..interfaces.IGenericLicence
+                   zope.lifecycleevent.IObjectModifiedEvent"
               handler=".licenceEvents.updateEventsFoldermanager"/>
 
   <subscriber for="..interfaces.IGenericLicence
