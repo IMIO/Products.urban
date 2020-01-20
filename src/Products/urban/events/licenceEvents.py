@@ -74,7 +74,7 @@ def updateBoundLicences(licence, events):
     for bound_licences_brain in bound_licences_brains:
         bound_licence = bound_licences_brain.getObject()
         bound_licence.updateTitle()
-        bound_licence.reindexObject(ixds=[
+        bound_licence.reindexObject(idxs=[
             'Title',
             'sortable_title',
             'applicantInfosIndex',
