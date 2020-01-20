@@ -68,7 +68,7 @@ def updateBoundLicences(licence, events):
     as the refered address and aplicants may have changed.
     """
     annotations = IAnnotations(licence)
-    uids = annotations.get('urban.bound_tickets', set([])) + annotations.get('urban.bound_inspections', set([]))
+    uids = annotations.get('urban.bound_tickets', set([])).union(annotations.get('urban.bound_inspections', set([])))
     catalog = api.portal.get_tool('portal_catalog')
     bound_licences_brains = catalog(UID=uids)
     for bound_licences_brain in bound_licences_brains:
