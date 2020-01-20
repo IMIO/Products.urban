@@ -7,9 +7,9 @@ from zope.annotation import IAnnotations
 
 def setInspectionBoundLicence(licence, event):
     annotations = IAnnotations(licence)
-    previous_bound_UID = annotations.get('urban.inspection_bound_licence', set([]))
+    previous_bound_UID = list(annotations.get('urban.inspection_bound_licence', set([])))
     new_bound_UID = licence.getField('bound_licence').getRaw(licence)
-    if previous_bound_UID == new_bound_UID:
+    if set(previous_bound_UID) == set(new_bound_UID):
         return
 
     catalog = api.portal.get_tool('portal_catalog')
