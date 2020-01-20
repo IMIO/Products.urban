@@ -95,6 +95,14 @@
                    Products.Archetypes.interfaces.IObjectEditedEvent"
               handler=".portionOutEvents.setDivisionCode" />
 
+  <subscriber for="..interfaces.IPortionOut
+                   zope.container.interfaces.IObjectRemovedEvent"
+              handler=".licenceEvents.updateBoundLicences" />
+
+  <subscriber for="..interfaces.IPortionOut
+                   zope.lifecycleevent.interfaces.IObjectCreatedEvent"
+              handler=".licenceEvents.updateBoundLicences" />
+
   <subscriber for="..interfaces.IUrbanEvent
                    Products.Archetypes.interfaces.IObjectInitializedEvent"
               handler=".urbanEventEvents.setDefaultValuesEvent"/>

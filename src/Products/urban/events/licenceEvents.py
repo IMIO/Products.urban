@@ -81,6 +81,7 @@ def updateBoundLicences(licence, events):
             'address',
             'StreetNumber',
             'StreetsUID',
+            'parcelInfosIndex'
         ])
 
 
@@ -92,8 +93,8 @@ def updateEventsFoldermanager(licence, event):
 
 
 def _setManagerPermissionOnLicence(licence):
-    #there is no need for other users than Managers to List folder contents
-    #set this permission here if we use the simple_publication_workflow...
+    # there is no need for other users than Managers to List folder contents
+    # set this permission here if we use the simple_publication_workflow...
     licence.manage_permission('List folder contents', ['Manager', ], acquire=0)
 
 
@@ -101,7 +102,7 @@ def _checkNumerotation(licence):
     config = licence.getUrbanConfig()
     portal_urban = config.aq_parent
     source_config = getattr(portal_urban, config.getNumerotationSource())
-    #increment the numerotation in the tool only if its the one that has been generated
+    # increment the numerotation in the tool only if its the one that has been generated
     if config.generateReference(licence) in licence.getReference():
         value = source_config.getNumerotation()
         if not str(value).isdigit():
@@ -109,7 +110,7 @@ def _checkNumerotation(licence):
         else:
             value = int(value)
             value = value + 1
-        #set the new value
+        # set the new value
         source_config.setNumerotation(value)
         source_config.reindexObject()
 
