@@ -156,6 +156,20 @@ class Ticket(BaseFolder, GenericLicence, BrowserDefaultMixin):
 
         return super(Ticket, self).getOfficialParcels()
 
+    security.declarePublic('updateTitle')
+
+    def updateTitle(self):
+        """
+           Update the title to clearly identify the licence
+        """
+        if self.getWorkLocations():
+            worklocations = self.getWorkLocationSignaletic()
+        else:
+            worklocations = translate('no_address_defined', 'urban', context=self.REQUEST).encode('utf8')
+        title = "%s - %s - %s" % (self.getReference(), self.getLicenceSubject(), worklocations)
+        self.setTitle(title)
+        self.reindexObject(idxs=('Title', 'sortable_title', ))
+
     security.declarePublic('getApplicants')
 
     def getApplicants(self):
