@@ -100,7 +100,7 @@
               handler=".licenceEvents.updateBoundLicences" />
 
   <subscriber for="..interfaces.IPortionOut
-                   zope.lifecycleevent.interfaces.IObjectCreatedEvent"
+                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".licenceEvents.updateBoundLicences" />
 
   <subscriber for="..interfaces.IUrbanEvent
