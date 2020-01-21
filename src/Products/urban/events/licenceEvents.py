@@ -83,6 +83,8 @@ def updateBoundLicences(licence, events):
             'StreetsUID',
             'parcelInfosIndex'
         ])
+        # make sure to update  the whole reference chain licence <- inspection <- ticket
+        updateBoundLicences(bound_licence, events)
 
 
 def updateEventsFoldermanager(licence, event):
