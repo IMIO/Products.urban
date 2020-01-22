@@ -8,7 +8,7 @@ from zope.annotation import IAnnotations
 def setTicketBoundInspection(ticket, event):
     annotations = IAnnotations(ticket)
     previous_bound_UIDs = list(annotations.get('urban.ticket_bound_inspections') or set([]))
-    new_bound_UIDs = ticket.getField('bound_inspection').getRaw(ticket)
+    new_bound_UIDs = ticket.getField('bound_inspection').getRaw(ticket) or []
     if set(previous_bound_UIDs) == set(new_bound_UIDs):
         return
 
@@ -39,7 +39,7 @@ def setTicketBoundInspection(ticket, event):
 def setTicketBoundLicence(ticket, event):
     annotations = IAnnotations(ticket)
     previous_bound_UIDs = list(annotations.get('urban.ticket_bound_licences') or set([]))
-    new_bound_UIDs = ticket.getField('bound_licences').getRaw(ticket)
+    new_bound_UIDs = ticket.getField('bound_licences').getRaw(ticket) or []
     if set(previous_bound_UIDs) == set(new_bound_UIDs):
         return
 
