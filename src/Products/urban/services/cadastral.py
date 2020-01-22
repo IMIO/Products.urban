@@ -25,8 +25,8 @@ class CadastreService(SQLService):
     """
     """
 
-    def __init__(self, dialect='postgresql+psycopg2', user='urb_xxx', host='', db_name='urb_xxx', password='', timeout='120000'):
-        super(CadastreService, self).__init__(dialect, user, host, db_name, password, timeout)
+    def __init__(self, dialect='postgresql+psycopg2', user='urb_xxx', host='', port='', db_name='urb_xxx', password='', timeout='120000'):
+        super(CadastreService, self).__init__(dialect, user, host, port, db_name, password, timeout)
 
         if self.can_connect():
             self._init_table('divisions', column_names=['da', 'divname'])
