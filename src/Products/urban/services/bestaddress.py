@@ -7,10 +7,8 @@ from Products.urban.services.base import SQLSession
 class BestaddressService(SQLService):
     """
     """
-
-    def __init__(self, dialect='postgresql+psycopg2', user='bestaddressreader', host='devel.imio.be',
-                 db_name='bestaddress', password='ploneisthebest'):
-        super(BestaddressService, self).__init__(dialect, user, host, db_name, password)
+    def __init__(self, dialect='postgresql+psycopg2', user='', host='', port='', db_name='', password=''):
+        super(BestaddressService, self).__init__(dialect, user, host, port, db_name, password)
 
         if self.can_connect():
             self._init_table('urban_addresses')
