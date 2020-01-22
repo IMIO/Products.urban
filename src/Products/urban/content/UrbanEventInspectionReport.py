@@ -68,6 +68,16 @@ schema = Schema((
         vocabulary=UrbanVocabulary('offense_articles'),
         default_method='getDefaultValue',
     ),
+    TextField(
+        name='offense_articles_details',
+        widget=RichWidget(
+            label=_('urban_label_offense_articles_details', default='Offense_articles_details'),
+        ),
+        allowable_content_types=('text/html',),
+        default_method='getDefaultText',
+        default_content_type='text/html',
+        default_output_type='text/html',
+    ),
     LinesField(
         name='followup_proposition',
         widget=MasterMultiSelectWidget(
