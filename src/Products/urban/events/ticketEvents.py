@@ -7,7 +7,7 @@ from zope.annotation import IAnnotations
 
 def setTicketBoundInspection(ticket, event):
     annotations = IAnnotations(ticket)
-    previous_bound_UIDs = list(annotations.get('urban.ticket_bound_inspections', set([])))
+    previous_bound_UIDs = list(annotations.get('urban.ticket_bound_inspections') or set([]))
     new_bound_UIDs = ticket.getField('bound_inspection').getRaw(ticket)
     if set(previous_bound_UIDs) == set(new_bound_UIDs):
         return
@@ -18,7 +18,7 @@ def setTicketBoundInspection(ticket, event):
         for previous_inspection_brain in catalog(UID=previous_bound_UIDs):
             previous_inspection = previous_inspection_brain.getObject()
             previous_inspection_annotations = IAnnotations(previous_inspection)
-            values = previous_inspection_annotations.get('urban.bound_tickets', set([]))
+            values = previous_inspection_annotations.get('urban.bound_tickets') or set([])
             if ticket.UID() in values:
                 values.remove(ticket.UID())
                 previous_inspection_annotations['urban.bound_tickets'] = values
@@ -28,7 +28,7 @@ def setTicketBoundInspection(ticket, event):
         for new_inspection_brain in catalog(UID=previous_bound_UIDs):
             new_inspection = new_inspection_brain.getObject()
             new_inspection_annotations = IAnnotations(new_inspection)
-            values = new_inspection_annotations.get('urban.bound_tickets', set([]))
+            values = new_inspection_annotations.get('urban.bound_tickets') or set([])
             if ticket.UID() not in values:
                 values.add(ticket.UID())
                 new_inspection_annotations['urban.bound_tickets'] = values
@@ -38,7 +38,7 @@ def setTicketBoundInspection(ticket, event):
 
 def setTicketBoundLicence(ticket, event):
     annotations = IAnnotations(ticket)
-    previous_bound_UIDs = list(annotations.get('urban.ticket_bound_licences', set([])))
+    previous_bound_UIDs = list(annotations.get('urban.ticket_bound_licences') or set([]))
     new_bound_UIDs = ticket.getField('bound_licences').getRaw(ticket)
     if set(previous_bound_UIDs) == set(new_bound_UIDs):
         return
@@ -49,7 +49,7 @@ def setTicketBoundLicence(ticket, event):
         for previous_licence_brain in catalog(UID=previous_bound_UIDs):
             previous_licence = previous_licence_brain.getObject()
             previous_licence_annotations = IAnnotations(previous_licence)
-            values = previous_licence_annotations.get('urban.bound_tickets', set([]))
+            values = previous_licence_annotations.get('urban.bound_tickets') or set([])
             if ticket.UID() in values:
                 values.remove(ticket.UID())
                 previous_licence_annotations['urban.bound_tickets'] = values
@@ -59,7 +59,7 @@ def setTicketBoundLicence(ticket, event):
         for new_licence_brain in catalog(UID=previous_bound_UIDs):
             new_licence = new_licence_brain.getObject()
             new_licence_annotations = IAnnotations(new_licence)
-            values = new_licence_annotations.get('urban.bound_tickets', set([]))
+            values = new_licence_annotations.get('urban.bound_tickets') or set([])
             if ticket.UID() not in values:
                 values.add(ticket.UID())
                 new_licence_annotations['urban.bound_tickets'] = values
