@@ -8,6 +8,7 @@
  <object name="urbanevent_workflow" meta_type="Workflow"/>
  <object name="opinion_request_workflow" meta_type="Workflow"/>
  <object name="inspection_workflow" meta_type="Workflow"/>
+ <object name="ticket_workflow" meta_type="Workflow"/>
 <!-- ##code-section workflowobjects -->
 <!-- ##/code-section workflowobjects -->
  <bindings>
@@ -223,7 +224,7 @@
   <bound-workflow workflow_id="urban_licence_workflow" />
 </type>
 <type type_id="Ticket">
-  <bound-workflow workflow_id="urban_licence_workflow" />
+  <bound-workflow workflow_id="ticket_workflow" />
 </type>
 <type type_id="UniqueLicence">
   <bound-workflow workflow_id="urban_licence_workflow" />
