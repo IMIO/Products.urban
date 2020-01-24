@@ -67,7 +67,7 @@ class SQLService(object):
                 username=username,
                 password=password and ':{}'.format(password) or '',
                 host=host,
-                port=port,
+                port=port or '5432',
                 db_name=db_name,
             ),
             echo=True,
