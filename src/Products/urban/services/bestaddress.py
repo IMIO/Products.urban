@@ -7,7 +7,7 @@ from Products.urban.services.base import SQLSession
 class BestaddressService(SQLService):
     """
     """
-    def __init__(self, dialect='postgresql+psycopg2', user='', host='', port='', db_name='', password=''):
+    def __init__(self, dialect='postgresql+psycopg2', user='', host='', port='5432', db_name='', password=''):
         super(BestaddressService, self).__init__(dialect, user, host, port, db_name, password)
 
         if self.can_connect():
