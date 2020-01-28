@@ -204,9 +204,6 @@ def extraPostInstall(context):
     if context.readDataFile('urban_extra_marker.txt') is None:
         return
     site = context.getSite()
-    logger.info("set_file_system_configuration : starting...")
-    set_file_system_configuration(context)
-    logger.info("set_file_system_configuration : Done")
     logger.info("addUrbanVocabularies : starting...")
     addUrbanVocabularies(context)
     logger.info("addUrbanVocabularies : Done")
@@ -385,30 +382,6 @@ def addUrbanConfigFolders(context):
 
         shared_vocabularies = getSharedVocabularies(urban_type, default_values)
         createVocabularyFolders(container=config_folder, vocabularies=shared_vocabularies, site=site)
-
-
-def set_file_system_configuration(context):
-    if context.readDataFile('urban_extra_marker.txt') is None:
-        return
-
-    if 'urban' not in os.listdir('./var'):
-        os.mkdir(URBAN_CFG_DIR)
-
-    for config_filename in context.listDirectory('cfg'):
-        if config_filename not in os.listdir(URBAN_CFG_DIR):
-            cfg_file = open(
-                '{path}/{filename}'.format(
-                    path=URBAN_CFG_DIR,
-                    filename=config_filename
-                ),
-                'w'
-            )
-            cfg_file.write(
-                context.readDataFile(
-                    'cfg/{}'.format(config_filename)
-                )
-            )
-            cfg_file.close()
 
 
 def addUrbanVocabularies(context):
