@@ -371,7 +371,7 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
         limitDate = firstDepositDate + int(delay)
         return self.format_date(limitDate)
 
-    def get_parcels(self):
+    def get_parcels(self, with_commas=False):
         result = u""
         context = self.real_context
         parcels = context.getParcels()
@@ -396,20 +396,26 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
                     if elms[i].getSection() > elms[j].getSection():
                         elms[i], elms[j] = elms[j], elms[i]
         for gp in enumerate(list_grouped_parcels):
-            result += gp[1][0].getDivisionAlternativeName() + ' '
-            section = gp[1][0].getSection()
-            result += 'section {} '.format(section)
+            divisionAlternativeName = gp[1][0].getDivisionAlternativeName()
+            section = gp[1][0].getSection().decode('utf8')
+            if with_commas:
+                result += u"{}, section {}, ".format(divisionAlternativeName, section)
+            else:
+                result += u"{} section {} ".format(divisionAlternativeName, section)
             for p in enumerate(gp[1]):
                 if section != p[1].getSection():
                     section = p[1].getSection()
-                    result += 'section {} '.format(section)
+                    if with_commas:
+                        result += u"section {}, ".format(section)
+                    else:
+                        result += u"section {} ".format(section)
                 result += u"n° {}{}{}{}".format(
                     p[1].getRadical(), p[1].getBis(), p[1].getExposant(), p[1].getPuissance()
                 )
                 if p[0] + 1 != len(gp[1]):
-                    result += ', '
+                    result += u", "
             if gp[0] + 1 != len(list_grouped_parcels):
-                result += ', '
+                result += u", "
         return result
 
     def query_parcels_in_radius(self, radius='50'):
