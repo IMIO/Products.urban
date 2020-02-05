@@ -21,12 +21,18 @@ class AnnoncedDelay(BaseCalculationDelay):
     def inquiry_suspension_delay(self):
         licence = self.task_container
         delay = 0
+
         if IInquiry.providedBy(licence):
             for inquiry in licence.getAllInquiries():
-                delay += inquiry.get_suspension_delay()
+                event = inquiry.getLinkedUrbanEventInquiry()
+                if event and event.getInvestigationStart() > licence.getLastAcknowledgment().getEventDate():
+                    delay += inquiry.get_suspension_delay()
         if ICODT_Inquiry.providedBy(licence):
             for announcement in licence.getAllAnnouncements():
-                delay += announcement.get_suspension_delay()
+                event = announcement.getLinkedUrbanEventInquiry()
+                if event.getInvestigationStart() > licence.getLastAcknowledgment().getEventDate():
+                    delay += announcement.get_suspension_delay()
+
         return delay
 
 
