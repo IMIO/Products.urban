@@ -30,7 +30,7 @@ class AnnoncedDelay(BaseCalculationDelay):
         if ICODT_Inquiry.providedBy(licence):
             for announcement in licence.getAllAnnouncements():
                 event = announcement.getLinkedUrbanEventInquiry()
-                if event.getInvestigationStart() > licence.getLastAcknowledgment().getEventDate():
+                if event and event.getInvestigationStart() > licence.getLastAcknowledgment().getEventDate():
                     delay += announcement.get_suspension_delay()
 
         return delay
