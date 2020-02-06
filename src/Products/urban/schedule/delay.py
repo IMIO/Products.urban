@@ -24,13 +24,16 @@ class AnnoncedDelay(BaseCalculationDelay):
 
         if IInquiry.providedBy(licence):
             for inquiry in licence.getAllInquiries():
-                event = inquiry.getLinkedUrbanEventInquiry()
-                if event and event.getInvestigationStart() > licence.getLastAcknowledgment().getEventDate():
+                inquiry_event = inquiry.getLinkedUrbanEventInquiry()
+                ack_event = licence.getLastAcknowledgment()
+                if inquiry_event and ack_event and inquiry_event.getInvestigationStart() > ack_event.getEventDate():
                     delay += inquiry.get_suspension_delay()
+
         if ICODT_Inquiry.providedBy(licence):
             for announcement in licence.getAllAnnouncements():
-                event = announcement.getLinkedUrbanEventInquiry()
-                if event and event.getInvestigationStart() > licence.getLastAcknowledgment().getEventDate():
+                announcement_event = announcement.getLinkedUrbanEventInquiry()
+                ack_event = licence.getLastAcknowledgment()
+                if announcement_event and ack_event and announcement_event.getInvestigationStart() > ack_event.getEventDate():
                     delay += announcement.get_suspension_delay()
 
         return delay
