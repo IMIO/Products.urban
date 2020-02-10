@@ -21,7 +21,6 @@ from Products.urban.browser.table.interfaces import ITitleColumn, \
     ITitleCell
 
 
-
 class UrbanColumn(Column):
     """ base class for a column that expect a ItemForUrbanTable item  """
     implements(IUrbanColumn)
@@ -569,6 +568,9 @@ class InspectionReportVisitDate(UrbanColumn):
 
     header = 'urban_label_reportVisitDate'
     weight = 7
+
+    def getSortKey(self, item):
+        return item.getEventDate()
 
     def renderCell(self, report):
         raw_date = report.getEventDate()
