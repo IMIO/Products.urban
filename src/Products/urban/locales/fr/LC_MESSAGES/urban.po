@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2020-01-22 08:27+0000\n"
+"POT-Creation-Date: 2020-02-10 14:45+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -264,7 +264,7 @@ msgstr "Détention d'explosifs"
 msgid "Extension profile for urban."
 msgstr ""
 
-#: ../content/UrbanEventInspectionReport.py:147
+#: ../content/UrbanEventInspectionReport.py:156
 msgid "FD_information_mail"
 msgstr "courrier d'information au FD"
 
@@ -917,7 +917,7 @@ msgstr "Ajouter un événement"
 msgid "add_every_advices_descr"
 msgstr "Ceci ajoutera automatiquement les avis suivants :"
 
-#: ../content/UrbanEventInspectionReport.py:146
+#: ../content/UrbanEventInspectionReport.py:155
 msgid "additional_information"
 msgstr "demande d'informations complémentaires"
 
@@ -961,7 +961,7 @@ msgstr "Données concernant l'annonce de projet"
 msgid "announcementarticles_folder_title"
 msgstr "Articles des annonces de projet"
 
-#: ../content/UrbanEventInspectionReport.py:145
+#: ../content/UrbanEventInspectionReport.py:154
 msgid "answer_to_plaintif"
 msgstr "réponse au plaignant"
 
@@ -1090,7 +1090,7 @@ msgstr "Portée de l'arrêté de classement"
 msgid "click_to_view_or_add"
 msgstr "Cliquez ici pour voir ou ajouter des documents"
 
-#: ../content/UrbanEventInspectionReport.py:140
+#: ../content/UrbanEventInspectionReport.py:149
 msgid "close_inspection"
 msgstr "clôturer le dossier"
 
@@ -1195,11 +1195,11 @@ msgstr "Modèles tableaux de bord"
 msgid "date_day_01"
 msgstr "1er"
 
-#: ../services/base.py:129
+#: ../services/base.py:130
 msgid "db_connection_error"
 msgstr ""
 
-#: ../services/base.py:124
+#: ../services/base.py:125
 msgid "db_connection_successfull"
 msgstr ""
 
@@ -1261,11 +1261,11 @@ msgstr "Dérogations"
 msgid "divergences_folder_title"
 msgstr "Écarts de l'annonce de projet"
 
-#: ../content/UrbanEventInspectionReport.py:149
+#: ../content/UrbanEventInspectionReport.py:158
 msgid "divide_building"
 msgstr "division immeuble – courrier conformité simple"
 
-#: ../content/UrbanEventInspectionReport.py:150
+#: ../content/UrbanEventInspectionReport.py:159
 msgid "divide_building_with_college"
 msgstr "division immeuble – courrier conformité Collége"
 
@@ -1350,6 +1350,11 @@ msgstr "<b>Erreur dans l'expression ${expr} liée à ce terme de vocabulaire, co
 #: ../validators/validator.py:229
 msgid "error_inquiry_suspension"
 msgstr ""
+
+#. Default: "Delay should be an integer"
+#: ../validators/validator.py:248
+msgid "error_integer"
+msgstr "Le délai doit être un entier"
 
 #. Default: "Cannot select class 1 and class 2 toghether"
 #: ../validators/validator.py:122
@@ -1577,15 +1582,15 @@ msgstr "Zones du plan de secteur"
 msgid "form_composition_folder_title"
 msgstr "Composition (formulaire(s) de demande)"
 
-#: ../content/UrbanEventInspectionReport.py:143
+#: ../content/UrbanEventInspectionReport.py:152
 msgid "formal_last_notice_reminder"
 msgstr "dernier rappel de mise en demeure"
 
-#: ../content/UrbanEventInspectionReport.py:141
+#: ../content/UrbanEventInspectionReport.py:150
 msgid "formal_notice"
 msgstr "mise en demeure"
 
-#: ../content/UrbanEventInspectionReport.py:142
+#: ../content/UrbanEventInspectionReport.py:151
 msgid "formal_notice_reminder"
 msgstr "rappel de mise en demeure"
 
@@ -1987,7 +1992,7 @@ msgstr "Configuration des cartes"
 msgid "masculine_singular_residing"
 msgstr "${name}, domicilié ${address}"
 
-#: ../content/UrbanEventInspectionReport.py:144
+#: ../content/UrbanEventInspectionReport.py:153
 msgid "minutes"
 msgstr "PV"
 
@@ -2117,7 +2122,7 @@ msgstr "Port sur lequel tourne OpenOffice en mode serveur (2002 par défaut)"
 msgid "opinionstoaskifworks_folder_title"
 msgstr "Avis à demander en cas de travaux"
 
-#: ../content/UrbanEventInspectionReport.py:151
+#: ../content/UrbanEventInspectionReport.py:160
 msgid "other"
 msgstr "autre"
 
@@ -2287,7 +2292,7 @@ msgstr "Décisions d'un recours"
 msgid "regional_guide_folder_title"
 msgstr "Guide régional d'urbanisme"
 
-#: ../content/UrbanEventInspectionReport.py:148
+#: ../content/UrbanEventInspectionReport.py:157
 msgid "repair_mail"
 msgstr "courrier de constat de remise en état"
 
@@ -3292,6 +3297,11 @@ msgstr "Destinataire par défaut"
 #: ../LicenceConfig.py:184
 msgid "urban_label_default_foldermanagers"
 msgstr "Agent traitant par défaut"
+
+#. Default: "Delay"
+#: ../content/UrbanEventInspectionReport.py:105
+msgid "urban_label_delay"
+msgstr "Délai"
 
 #. Default: "Delayaftermodifiedblueprints"
 #: ../content/licence/BaseBuildLicence.py:431
@@ -5196,7 +5206,7 @@ msgstr "Chemin de Python avec UNO"
 #. Default: "Urbandelays"
 #: urbaneventtype_urbandelay.py
 msgid "urban_label_urbandelays"
-msgstr "Délais"
+msgstr "Délai"
 
 #. Default: "Urbaneventtypes"
 #: ../UrbanEvent.py:237
