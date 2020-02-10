@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2020-01-22 08:27+0000\n"
+"POT-Creation-Date: 2020-02-10 14:45+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -262,7 +262,7 @@ msgstr ""
 msgid "Extension profile for urban."
 msgstr ""
 
-#: ../content/UrbanEventInspectionReport.py:147
+#: ../content/UrbanEventInspectionReport.py:156
 msgid "FD_information_mail"
 msgstr ""
 
@@ -898,7 +898,7 @@ msgstr ""
 msgid "add_every_advices_descr"
 msgstr ""
 
-#: ../content/UrbanEventInspectionReport.py:146
+#: ../content/UrbanEventInspectionReport.py:155
 msgid "additional_information"
 msgstr ""
 
@@ -942,7 +942,7 @@ msgstr ""
 msgid "announcementarticles_folder_title"
 msgstr ""
 
-#: ../content/UrbanEventInspectionReport.py:145
+#: ../content/UrbanEventInspectionReport.py:154
 msgid "answer_to_plaintif"
 msgstr ""
 
@@ -1070,7 +1070,7 @@ msgstr ""
 msgid "click_to_view_or_add"
 msgstr ""
 
-#: ../content/UrbanEventInspectionReport.py:140
+#: ../content/UrbanEventInspectionReport.py:149
 msgid "close_inspection"
 msgstr ""
 
@@ -1172,11 +1172,11 @@ msgstr ""
 msgid "date_day_01"
 msgstr ""
 
-#: ../services/base.py:129
+#: ../services/base.py:130
 msgid "db_connection_error"
 msgstr ""
 
-#: ../services/base.py:124
+#: ../services/base.py:125
 msgid "db_connection_successfull"
 msgstr ""
 
@@ -1238,11 +1238,11 @@ msgstr ""
 msgid "divergences_folder_title"
 msgstr ""
 
-#: ../content/UrbanEventInspectionReport.py:149
+#: ../content/UrbanEventInspectionReport.py:158
 msgid "divide_building"
 msgstr ""
 
-#: ../content/UrbanEventInspectionReport.py:150
+#: ../content/UrbanEventInspectionReport.py:159
 msgid "divide_building_with_college"
 msgstr ""
 
@@ -1326,6 +1326,11 @@ msgstr ""
 #. Default: "The inquiry end date falls during suspension period from {} to {}from"
 #: ../validators/validator.py:229
 msgid "error_inquiry_suspension"
+msgstr ""
+
+#. Default: "Delay should be an integer"
+#: ../validators/validator.py:248
+msgid "error_integer"
 msgstr ""
 
 #. Default: "Cannot select class 1 and class 2 toghether"
@@ -1549,15 +1554,15 @@ msgstr ""
 msgid "form_composition_folder_title"
 msgstr ""
 
-#: ../content/UrbanEventInspectionReport.py:143
+#: ../content/UrbanEventInspectionReport.py:152
 msgid "formal_last_notice_reminder"
 msgstr ""
 
-#: ../content/UrbanEventInspectionReport.py:141
+#: ../content/UrbanEventInspectionReport.py:150
 msgid "formal_notice"
 msgstr ""
 
-#: ../content/UrbanEventInspectionReport.py:142
+#: ../content/UrbanEventInspectionReport.py:151
 msgid "formal_notice_reminder"
 msgstr ""
 
@@ -1955,7 +1960,7 @@ msgstr ""
 msgid "masculine_singular_residing"
 msgstr ""
 
-#: ../content/UrbanEventInspectionReport.py:144
+#: ../content/UrbanEventInspectionReport.py:153
 msgid "minutes"
 msgstr ""
 
@@ -2085,7 +2090,7 @@ msgstr ""
 msgid "opinionstoaskifworks_folder_title"
 msgstr ""
 
-#: ../content/UrbanEventInspectionReport.py:151
+#: ../content/UrbanEventInspectionReport.py:160
 msgid "other"
 msgstr ""
 
@@ -2254,7 +2259,7 @@ msgstr ""
 msgid "regional_guide_folder_title"
 msgstr ""
 
-#: ../content/UrbanEventInspectionReport.py:148
+#: ../content/UrbanEventInspectionReport.py:157
 msgid "repair_mail"
 msgstr ""
 
@@ -3258,6 +3263,11 @@ msgstr ""
 #. Default: "Foldermanagers"
 #: ../LicenceConfig.py:184
 msgid "urban_label_default_foldermanagers"
+msgstr ""
+
+#. Default: "Delay"
+#: ../content/UrbanEventInspectionReport.py:105
+msgid "urban_label_delay"
 msgstr ""
 
 #. Default: "Delayaftermodifiedblueprints"

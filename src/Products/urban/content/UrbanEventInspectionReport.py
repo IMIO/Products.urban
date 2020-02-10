@@ -98,6 +98,15 @@ schema = Schema((
         default_content_type='text/html',
         default_output_type='text/html',
     ),
+    StringField(
+        name='delay',
+        widget=StringField._properties['widget'](
+            size=15,
+            label=_('urban_label_delay', default='Delay'),
+        ),
+        default='30 – 90 – 120 – autre',
+        validators=('isInteger',),
+    ),
 ),
 )
 
