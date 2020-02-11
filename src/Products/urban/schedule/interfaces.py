@@ -20,7 +20,7 @@ class IReceiveOpinionRequestsTask(Interface):
 
 
 class ITaskToCheckDaily(Interface):
-    """ Marker interface for tasks that shold be revevaluated every night """
+    """ Marker interface for tasks that shold be re-evaluated every night """
 
 
 class ITaskCron(Interface):
