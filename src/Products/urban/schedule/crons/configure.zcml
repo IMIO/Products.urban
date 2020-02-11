@@ -4,11 +4,6 @@
     i18n_domain="Products.urban">
 
   <utility
-    factory=".delay.AutoAccepted20days"
-    name="codt_auto_accepted_20_days"
-    />
-
-  <utility
     factory=".tasks_daily_check.CheckTasks"
     name="tasks_daily_check"
     />
