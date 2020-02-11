@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from Products.urban.schedule.config import states_by_status
-from Products.urban.schedule.config import STARTED
+from imio.schedule.config import states_by_status
+from imio.schedule.config import STARTED
+
 from Products.urban.schedule.cron import TaskCron
 from plone import api
 
