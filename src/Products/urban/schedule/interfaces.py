@@ -19,6 +19,10 @@ class IReceiveOpinionRequestsTask(Interface):
     """ Marker interface for opinion requests reception task."""
 
 
+class ITaskToCheckDaily(Interface):
+    """ Marker interface for tasks that shold be revevaluated every night """
+
+
 class ITaskCron(Interface):
     """A cron task"""
 
