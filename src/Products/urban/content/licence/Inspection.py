@@ -220,6 +220,20 @@ class Inspection(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
     def getAllReportEvents(self):
         return self.getAllEvents(interfaces.IUrbanEventInspectionReport)
 
+    security.declarePublic('mayAddInspectionReportEvent')
+
+    def mayAddInspectionReportEvent(self):
+        """
+           This is used as TALExpression for the UrbanEventInspectionReport
+           We may add an InspectionReport only if the previous one is closed
+        """
+        report_events = self.getAllReportEvents()
+        for report_event in report_events:
+            if api.content.get_state(report_event) != 'closed':
+                return False
+
+        return True
+
 
 registerType(Inspection, PROJECTNAME)
 
