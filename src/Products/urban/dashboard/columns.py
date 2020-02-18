@@ -95,17 +95,6 @@ class AddressColumn(BaseColumn):
         return address_render
 
 
-class StreetNumberColumn(BaseColumn):
-    """ display licence street number in SearchResultTable """
-
-    def renderCell(self, item):
-        licence = item.getObject()
-        numbers = [location['number'] for location in licence.getWorkLocations()]
-        numbers_render = '<br />'.join(numbers)
-        numbers_render = numbers_render.decode('utf-8')
-        return numbers_render
-
-
 class ParcelReferencesColumn(BaseColumn):
     """ display licence parcel references in SearchResultTable """
 
