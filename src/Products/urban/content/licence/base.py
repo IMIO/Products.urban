@@ -115,7 +115,7 @@ class UrbanBase(object):
         return signaletic
 
     security.declarePublic('getFolderManagersSignaletic')
-    def getFolderManagersSignaletic(self, withGrade=False, withEmail=False, withTel=False):
+    def getFolderManagersSignaletic(self, withGrade=False, withParenthesis=True, withEmail=False, withTel=False):
         """
           Returns a string representing the signaletic of every folder managers
         """
@@ -128,7 +128,10 @@ class UrbanBase(object):
             else:
                 signaletic = '<p><strong>%s</strong>' % fm.getSignaletic(short=True)
             if withGrade:
-                signaletic += ' (%s)' % self.displayValue(fm.Vocabulary('grade')[0], fm.getGrade()).encode('utf8')
+                if withParenthesis:
+                    signaletic += ' (%s)' % self.displayValue(fm.Vocabulary('grade')[0], fm.getGrade()).encode('utf8')
+                else:
+                    signaletic += ' %s' % self.displayValue(fm.Vocabulary('grade')[0], fm.getGrade()).encode('utf8')
             if withEmail:
                 signaletic += '<br />%s' % fm.getEmail()
             if withTel:
