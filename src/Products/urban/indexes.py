@@ -154,7 +154,7 @@ def genericlicence_streetsuid(licence):
 
 @indexer(IGenericLicence)
 def genericlicence_streetnumber(licence):
-    numbers = [location['number'] or '-1' for location in licence.getWorkLocations()] or ['-1']
+    numbers = [location['number'] or '0' for location in licence.getWorkLocations()] or ['0']
     return numbers
 
 
