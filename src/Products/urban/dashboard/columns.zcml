@@ -26,6 +26,15 @@
      for="zope.interface.Interface
           zope.publisher.interfaces.browser.IBrowserRequest
           collective.eeafaceted.z3ctable.interfaces.IFacetedTable"
+     factory=".columns.StreetNumberColumn"
+     provides="collective.eeafaceted.z3ctable.interfaces.IFacetedColumn"
+     name="StreetNumber_column"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          collective.eeafaceted.z3ctable.interfaces.IFacetedTable"
      factory=".columns.ParcelReferencesColumn"
      provides="collective.eeafaceted.z3ctable.interfaces.IFacetedColumn"
      name="parcelreferences_column"
