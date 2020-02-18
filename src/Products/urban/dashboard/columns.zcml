@@ -28,7 +28,7 @@
           collective.eeafaceted.z3ctable.interfaces.IFacetedTable"
      factory=".columns.StreetNumberColumn"
      provides="collective.eeafaceted.z3ctable.interfaces.IFacetedColumn"
-     name="StreetNumber_column"
+     name="StreetNumber"
   />
 
   <adapter
