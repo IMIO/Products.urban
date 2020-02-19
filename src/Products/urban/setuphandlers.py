@@ -409,17 +409,20 @@ def addUrbanConfigFolders(context):
             config_folder.licencePortalType = urban_type
             config_folder.reindexObject()
 
-        #we just created the urbanConfig, proceed with other parameters...
-        #parameters for every LicenceConfigs
-        #add UrbanEventTypes folder
+        # we just created the urbanConfig, proceed with other parameters...
+        # parameters for every LicenceConfigs
+        # add UrbanEventTypes folder
         if not hasattr(aq_base(config_folder), 'urbaneventtypes'):
-            newFolderid = config_folder.invokeFactory(
+            config_folder.invokeFactory(
                 "Folder",
                 id="urbaneventtypes",
                 title=_("urbaneventtypes_folder_title", 'urban')
             )
-            newFolder = getattr(config_folder, newFolderid)
-            setFolderAllowedTypes(newFolder, ['UrbanEventType', 'OpinionRequestEventType'])
+        eventtypes_folder = getattr(config_folder, 'urbaneventtypes')
+        if urban_type in ['Inspection', 'Ticket']:
+            setFolderAllowedTypes(eventtypes_folder, ['UrbanEventType', 'FollowUpEventType'])
+        else:
+            setFolderAllowedTypes(eventtypes_folder, ['UrbanEventType', 'OpinionRequestEventType'])
 
         licence_vocabularies = default_values.get(urban_type, {})
         createVocabularyFolders(container=config_folder, vocabularies=licence_vocabularies, site=site)
