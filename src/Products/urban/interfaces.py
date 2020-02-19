@@ -236,6 +236,11 @@ class IUrbanEventOpinionRequest(Interface):
     """
 
 
+class IUrbanEventFollowUp(Interface):
+    """Marker interface for .UrbanEventFollowUp.UrbanEventFollowUp
+    """
+
+
 class IOrganisationTerm(Interface):
     """Marker interface for .OrganisationTerm.OrganisationTerm
     """
@@ -288,6 +293,11 @@ class ISpecificFeatureTerm(Interface):
 
 class IOpinionRequestEventType(Interface):
     """Marker interface for .OpinionRequestEventType.OpinionRequestEventType
+    """
+
+
+class IFollowUpEventType(Interface):
+    """Marker interface for .FollowUpEventType.FollowUpEventType
     """
 
 

@@ -7664,6 +7664,7 @@ urbanEventTypes = {
     ),
     'inspection': (
         {
+            'portal_type': 'FollowUpEventType',
             'id': "rapport",
             'title': "Rapport",
             'eventDateLabel': "Date de la visite",
@@ -7675,6 +7676,117 @@ urbanEventTypes = {
             ),
             'eventTypeType': 'Products.urban.interfaces.IInspectionReportEvent',
             'eventPortalType': 'UrbanEventInspectionReport',
+        },
+        {
+            'portal_type': 'FollowUpEventType',
+            'id': "mise-en-demeure",
+            'title': "Mise en demeure",
+            'activatedFields': [],
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+            ),
+            'eventPortalType': 'UrbanEventFollowUp',
+        },
+        {
+            'portal_type': 'FollowUpEventType',
+            'id': "rappel-mise-en-demeure",
+            'title': "Rappel de mise en demeure",
+            'activatedFields': [],
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+            ),
+            'eventPortalType': 'UrbanEventFollowUp',
+        },
+        {
+            'portal_type': 'FollowUpEventType',
+            'id': "dernier-rappel-mise-en-demeure",
+            'title': "Dernier rappel de mise en demeure",
+            'activatedFields': [],
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+            ),
+            'eventPortalType': 'UrbanEventFollowUp',
+        },
+        {
+            'portal_type': 'FollowUpEventType',
+            'id': "reponse-au-plaignant",
+            'title': "Réponse au plaignant",
+            'activatedFields': [],
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+            ),
+            'eventPortalType': 'UrbanEventFollowUp',
+        },
+        {
+            'portal_type': 'FollowUpEventType',
+            'id': "demande-informations-complementaires",
+            'title': "Demande d'informations complémentaires",
+            'activatedFields': [],
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+            ),
+            'eventPortalType': 'UrbanEventFollowUp',
+        },
+        {
+            'portal_type': 'FollowUpEventType',
+            'id': "courrier-au-FD",
+            'title': "Courrier d'information au FD",
+            'activatedFields': [],
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+            ),
+            'eventPortalType': 'UrbanEventFollowUp',
+        },
+        {
+            'portal_type': 'FollowUpEventType',
+            'id': "constat-de-remise-en-etat",
+            'title': "Courrier de constat de remise en état",
+            'activatedFields': [],
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+            ),
+            'eventPortalType': 'UrbanEventFollowUp',
+        },
+        {
+            'portal_type': 'FollowUpEventType',
+            'id': "division-immeuble-conformite-simple",
+            'title': "Division immeuble - courrier conformité simple",
+            'activatedFields': [],
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+            ),
+            'eventPortalType': 'UrbanEventFollowUp',
+        },
+        {
+            'portal_type': 'FollowUpEventType',
+            'id': "division-immeuble-conformite-college",
+            'title': "Division immeuble - courrier conformité Collège",
+            'activatedFields': [],
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+            ),
+            'eventPortalType': 'UrbanEventFollowUp',
+        },
+        {
+            'portal_type': 'FollowUpEventType',
+            'id': "other",
+            'title': "Autre",
+            'activatedFields': [],
+            'showTitle': True,
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+            ),
+            'eventPortalType': 'UrbanEventFollowUp',
         },
     ),
     'ticket': (
