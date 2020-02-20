@@ -178,7 +178,7 @@ class ScheduledLicencesRenderer(base.Renderer):
 
         for licence_cfg in licence_configs:
             schedule_cfg = getattr(licence_cfg, 'schedule', None)
-            if schedule_cfg and not schedule_cfg.is_empty():
+            if schedule_cfg and schedule_cfg.enabled and not schedule_cfg.is_empty():
                 portal_type = schedule_cfg.get_scheduled_portal_type()
                 licence_type = portal_type.lower()
                 href = '{}/urban/schedule/{}'.format(site_url, licence_type)
