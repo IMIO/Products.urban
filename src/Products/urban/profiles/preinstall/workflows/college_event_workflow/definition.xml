@@ -59,6 +59,8 @@
  <state state_id="decision_in_progress" title="decision_in_progress">
   <exit-transition transition_id="receive_college_decision"/>
   <permission-map name="ATContentTypes: Add File" acquired="False">
+   <permission-role>Editor</permission-role>
+   <permission-role>Contributor</permission-role>
    <permission-role>Manager</permission-role>
   </permission-map>
   <permission-map name="ATContentTypes: Add Image" acquired="False">
