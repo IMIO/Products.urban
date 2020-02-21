@@ -17,6 +17,8 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 from plone import api
 
+from zope.annotation import IAnnotations
+
 slave_fields_bound_licence = (
     {
         'name': 'workLocations',
@@ -233,6 +235,20 @@ class Inspection(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
                 return False
 
         return True
+
+    security.declarePublic('getBoundTickets')
+
+    def getBoundTickets(self):
+        """
+        Return tickets referring this inspection.
+        """
+        annotations = IAnnotations(self)
+        ticket_uids = annotations.get('urban.bound_tickets')
+        if ticket_uids:
+            ticket_uids = list(ticket_uids)
+            uid_catalog = api.portal.get_tool('uid_catalog')
+            tickets = [b.getObject() for b in uid_catalog(UID=ticket_uids)]
+            return tickets
 
 
 registerType(Inspection, PROJECTNAME)
