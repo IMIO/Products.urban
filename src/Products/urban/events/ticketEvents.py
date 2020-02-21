@@ -25,7 +25,7 @@ def setTicketBoundInspection(ticket, event):
 
     # refer new ticket
     if new_bound_UIDs:
-        for new_inspection_brain in catalog(UID=previous_bound_UIDs):
+        for new_inspection_brain in catalog(UID=new_bound_UIDs):
             new_inspection = new_inspection_brain.getObject()
             new_inspection_annotations = IAnnotations(new_inspection)
             values = new_inspection_annotations.get('urban.bound_tickets') or set([])
@@ -56,7 +56,7 @@ def setTicketBoundLicence(ticket, event):
 
     # refer new ticket
     if new_bound_UIDs:
-        for new_licence_brain in catalog(UID=previous_bound_UIDs):
+        for new_licence_brain in catalog(UID=new_bound_UIDs):
             new_licence = new_licence_brain.getObject()
             new_licence_annotations = IAnnotations(new_licence)
             values = new_licence_annotations.get('urban.bound_tickets') or set([])
