@@ -9,10 +9,9 @@ from zope.lifecycleevent import ObjectModifiedEvent
 
 def setTicketBoundInspection(ticket, event):
     annotations = IAnnotations(ticket)
-    previous_bound_UIDs = annotations.get('urban.ticket_bound_inspections') or set([])
-    previous_bound_UIDs = type(previous_bound_UIDs) is str and set([previous_bound_UIDs])
-    new_bound_UIDs = ticket.getField('bound_inspection').getRaw(ticket) or []
-    if set(previous_bound_UIDs) == set(new_bound_UIDs):
+    previous_bound_UIDs = annotations.get('urban.ticket_bound_inspections') or ''
+    new_bound_UIDs = ticket.getField('bound_inspection').getRaw(ticket) or ''
+    if previous_bound_UIDs == new_bound_UIDs:
         return
 
     catalog = api.portal.get_tool('portal_catalog')
