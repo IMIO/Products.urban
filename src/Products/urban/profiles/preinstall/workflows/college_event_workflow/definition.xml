@@ -11,6 +11,7 @@
  <permission>WebDAV Lock items</permission>
  <permission>WebDAV Unlock items</permission>
  <state state_id="closed" title="closed">
+  <exit-transition transition_id="reopen"/>
   <permission-map name="ATContentTypes: Add File" acquired="False">
    <permission-role>Manager</permission-role>
   </permission-map>
@@ -58,6 +59,8 @@
  <state state_id="decision_in_progress" title="decision_in_progress">
   <exit-transition transition_id="receive_college_decision"/>
   <permission-map name="ATContentTypes: Add File" acquired="False">
+   <permission-role>Editor</permission-role>
+   <permission-role>Contributor</permission-role>
    <permission-role>Manager</permission-role>
   </permission-map>
   <permission-map name="ATContentTypes: Add Image" acquired="False">
@@ -167,6 +170,11 @@
  </transition>
  <transition transition_id="receive_college_decision" title="receive_college_decision" new_state="closed" trigger="USER" before_script="" after_script="">
   <action url="" category="workflow" icon="">receive_college_decision</action>
+  <guard>
+  </guard>
+ </transition>
+ <transition transition_id="reopen" title="reopen" new_state="decision_in_progress" trigger="USER" before_script="" after_script="">
+  <action url="" category="workflow" icon="">reopen</action>
   <guard>
   </guard>
  </transition>
