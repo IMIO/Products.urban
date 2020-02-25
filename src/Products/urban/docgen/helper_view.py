@@ -497,10 +497,14 @@ class UrbanDocGenerationEventHelperView(UrbanDocGenerationHelperView):
         mailing_list = []
         foldermakers = self.getFolderMakers()
         for foldermaker in foldermakers:
-            mailing = {}
-            mailing['title'] = foldermaker.Title()
-            html = foldermaker.Description()
-            mailing['description'] = self.portal.portal_transforms.convert('html_to_web_intelligent_plain_text', html).getData().strip('\n ')
+            html_description = foldermaker['OpinionRequestEventType'].Description()
+            transformed_description = self.portal.portal_transforms.convert(
+                    'html_to_web_intelligent_plain_text', html_description).getData().strip('\n ')
+            mailing = {
+                    'OpinionRequestEventType':foldermaker['OpinionRequestEventType'],
+                    'UrbanEventOpinionRequest':foldermaker['UrbanEventOpinionRequest'],
+                    'converted_description':transformed_description
+            }
             mailing_list.append(mailing)
         return mailing_list
 
@@ -508,7 +512,17 @@ class UrbanDocGenerationEventHelperView(UrbanDocGenerationHelperView):
         """  """
         urban_tool = getToolByName(self, 'portal_urban')
         foldermakers_config = urban_tool.getUrbanConfig(self.context).urbaneventtypes
-        foldermakers = [fm for fm in foldermakers_config.objectValues('OpinionRequestEventType') if fm.id in self.getSolicitOpinions()]
+        all_opinion_request_events = self.context.getAllOpinionRequests()
+        foldermakers = []
+        for opinionRequestEventType in foldermakers_config.objectValues('OpinionRequestEventType'):
+            foldermaker = {}
+            if opinionRequestEventType.id in self.getSolicitOpinions():
+                foldermaker['OpinionRequestEventType'] = opinionRequestEventType
+                for urbanEventOpinionRequest in all_opinion_request_events:
+                    if urbanEventOpinionRequest.Title() == opinionRequestEventType.Title():
+                        foldermaker['UrbanEventOpinionRequest'] = urbanEventOpinionRequest
+                        foldermakers.append(foldermaker)
+                        break;
         return foldermakers
 
     def getSolicitOpinions(self):
