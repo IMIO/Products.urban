@@ -124,10 +124,12 @@ from Products.urban.content.licence import ExplosivesPossession  # noqa
 from Products.urban.content.licence import RoadDecree  # noqa
 from Products.urban.content import CODT_Inquiry  # noqa
 from Products.urban.content import CODT_UniqueLicenceInquiry  # noqa
+from Products.urban.content import FollowUpEventType  # noqa
 from Products.urban.content import Inquiry  # noqa
 from Products.urban.content import UrbanEventAnnouncement  # noqa
 from Products.urban.content import UrbanEventInquiry  # noqa
 from Products.urban.content import UrbanEventInspectionReport  # noqa
+from Products.urban.content import UrbanEventFollowUp  # noqa
 
 
 def initialize(context):
@@ -143,6 +145,7 @@ def initialize(context):
     import Corporation
     import EnvironmentRubricTerm
     import FolderManager
+    import content.FollowUpEventType
     import content.Inquiry
     import LicenceConfig
     import Locality
@@ -161,6 +164,8 @@ def initialize(context):
     import UrbanEvent
     import content.UrbanEventAnnouncement
     import content.UrbanEventInquiry
+    import content.UrbanEventInspectionReport
+    import content.UrbanEventFollowUp
     import UrbanEventOpinionRequest
     import UrbanEventType
     import UrbanTool
