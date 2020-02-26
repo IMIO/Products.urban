@@ -232,6 +232,25 @@ class Inspection(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
     def getAllFollowUpEvents(self):
         return self.getAllEvents(interfaces.IUrbanEventFollowUp)
 
+    security.declarePublic('getCurrentReportEvent')
+
+    def getCurrentReportEvent(self):
+        last_analysis_date = None
+        for action in self.workflow_history.values()[0][::-1]:
+            if action['review_state'] == 'analysis':
+                last_analysis_date = action['time']
+                break
+
+        if not last_analysis_date:
+            return
+
+        report_events = self.getAllReportEvents()
+        for report in report_events:
+            workflow_history = report.workflow_history.values()[0]
+            creation_date = workflow_history[0]['time']
+            if creation_date > last_analysis_date:
+                return report
+
     security.declarePublic('mayAddInspectionReportEvent')
 
     def mayAddInspectionReportEvent(self):
@@ -245,6 +264,19 @@ class Inspection(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
                 return False
 
         return True
+
+    security.declarePublic('mayAddFollowUpEvent')
+
+    def mayAddFollowUpEvent(self, followup_id):
+        """
+           This is used as TALExpression for the UrbanEventFollowUp
+           We may add an UrbanEventFollowUp only if the previous one is closed
+        """
+        report_event = self.getCurrentReportEvent()
+        if not report_event:
+            return False
+        can_add = followup_id in report_event.getFollowup_proposition()
+        return can_add
 
     security.declarePublic('getBoundTickets')
 

@@ -41,6 +41,17 @@ class FollowUpEventType(OrderedBaseFolder, UrbanEventType, UrbanVocabularyTerm, 
 
     schema = FollowUpEventType_schema
 
+    security.declarePublic('mayAddOpinionRequestEvent')
+
+    def mayAddFollowUpEvent(self, licence):
+        """
+           This is used as TALExpression for the UrbanEventOpinionRequest
+           We may add an OpinionRequest if we asked one in an inquiry on the licence
+           We may add another if another inquiry defined on the licence ask for it and so on
+        """
+        may_add = licence.mayAddFollowUpEvent(self.id)
+        return may_add
+
 
 
 registerType(FollowUpEventType, PROJECTNAME)

@@ -7671,6 +7671,7 @@ urbanEventTypes = {
             'activatedFields': [],
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
+            'TALCondition': "python: event.mayAddFollowUpEvent(here)",
             'podTemplates': (
                 {'id': "inspection_rapport1.odt", 'title': "Rapport d'inspection"},
             ),
@@ -7684,6 +7685,7 @@ urbanEventTypes = {
             'activatedFields': [],
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
+            'TALCondition': "python: event.mayAddFollowUpEvent(here)",
             'podTemplates': (
             ),
             'eventPortalType': 'UrbanEventFollowUp',
@@ -7695,6 +7697,7 @@ urbanEventTypes = {
             'activatedFields': [],
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
+            'TALCondition': "python: event.mayAddFollowUpEvent(here)",
             'podTemplates': (
             ),
             'eventPortalType': 'UrbanEventFollowUp',
@@ -7706,6 +7709,7 @@ urbanEventTypes = {
             'activatedFields': [],
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
+            'TALCondition': "python: event.mayAddFollowUpEvent(here)",
             'podTemplates': (
             ),
             'eventPortalType': 'UrbanEventFollowUp',
@@ -7717,6 +7721,7 @@ urbanEventTypes = {
             'activatedFields': [],
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
+            'TALCondition': "python: event.mayAddFollowUpEvent(here)",
             'podTemplates': (
             ),
             'eventPortalType': 'UrbanEventFollowUp',
@@ -7728,6 +7733,7 @@ urbanEventTypes = {
             'activatedFields': [],
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
+            'TALCondition': "python: event.mayAddFollowUpEvent(here)",
             'podTemplates': (
             ),
             'eventPortalType': 'UrbanEventFollowUp',
@@ -7739,6 +7745,7 @@ urbanEventTypes = {
             'activatedFields': [],
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
+            'TALCondition': "python: event.mayAddFollowUpEvent(here)",
             'podTemplates': (
             ),
             'eventPortalType': 'UrbanEventFollowUp',
@@ -7750,6 +7757,7 @@ urbanEventTypes = {
             'activatedFields': [],
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
+            'TALCondition': "python: event.mayAddFollowUpEvent(here)",
             'podTemplates': (
             ),
             'eventPortalType': 'UrbanEventFollowUp',
@@ -7761,6 +7769,7 @@ urbanEventTypes = {
             'activatedFields': [],
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
+            'TALCondition': "python: event.mayAddFollowUpEvent(here)",
             'podTemplates': (
             ),
             'eventPortalType': 'UrbanEventFollowUp',
@@ -7772,6 +7781,7 @@ urbanEventTypes = {
             'activatedFields': [],
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
+            'TALCondition': "python: event.mayAddFollowUpEvent(here)",
             'podTemplates': (
             ),
             'eventPortalType': 'UrbanEventFollowUp',
@@ -7784,6 +7794,7 @@ urbanEventTypes = {
             'showTitle': True,
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
+            'TALCondition': "python: event.mayAddFollowUpEvent(here)",
             'podTemplates': (
             ),
             'eventPortalType': 'UrbanEventFollowUp',
