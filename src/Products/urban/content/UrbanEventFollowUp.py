@@ -55,22 +55,6 @@ class UrbanEventFollowUp(UrbanEvent, BrowserDefaultMixin):
 
     schema = UrbanEventFollowUp_schema
 
-    security.declarePublic('getTemplates')
-
-    def getTemplates(self):
-        """
-          Returns contained templates (File)
-        """
-        if not self.getUrbaneventtypes():
-            return []
-        custom_templates = self.getUrbaneventtypes().getTemplates()
-        if custom_templates:
-            return custom_templates
-
-        licence_config = self.aq_parent.getUrbanConfig()
-        opinionrequest_config = getattr(licence_config.urbaneventtypes, "config-opinion-request")
-        return opinionrequest_config.getTemplates()
-
     security.declarePublic('getLinkedOrganisationTerm')
 
     def getLinkedOrganisationTerm(self):

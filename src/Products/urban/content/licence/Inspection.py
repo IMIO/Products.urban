@@ -222,6 +222,16 @@ class Inspection(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
     def getAllReportEvents(self):
         return self.getAllEvents(interfaces.IUrbanEventInspectionReport)
 
+    security.declarePublic('getLastFollowUpEvent')
+
+    def getLastFollowUpEvent(self):
+        return self.getLastEvent(interfaces.IUrbanEventFollowUp)
+
+    security.declarePublic('getAllFollowUpEvents')
+
+    def getAllFollowUpEvents(self):
+        return self.getAllEvents(interfaces.IUrbanEventFollowUp)
+
     security.declarePublic('mayAddInspectionReportEvent')
 
     def mayAddInspectionReportEvent(self):

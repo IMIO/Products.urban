@@ -19,6 +19,14 @@ class IReceiveOpinionRequestsTask(Interface):
     """ Marker interface for opinion requests reception task."""
 
 
+class ICreateFollowupTask(Interface):
+    """ Marker interface for inspection followup events creation task."""
+
+
+class IInspectionFollowUpTask(Interface):
+    """ Marker interface for inspection followup events task."""
+
+
 class ITaskToCheckDaily(Interface):
     """ Marker interface for tasks that shold be re-evaluated every night """
 

@@ -140,6 +140,9 @@ msgstr "Certificat d'urbanisme 2"
 msgid "UrbanEvent"
 msgstr "Evénement du dossier"
 
+msgid "UrbanEventFollowUp"
+msgstr "Evénement de proposion de suivi/réponse administrative"
+
 msgid "UrbanEventInquiry"
 msgstr "Evénement lié à une enquête publique"
 

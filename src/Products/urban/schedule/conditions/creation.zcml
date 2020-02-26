@@ -253,4 +253,36 @@
         name="urban.schedule.condition.is_not_temporary_licence"
     />
 
+    <!-- Inspection conditions -->
+    <adapter
+        for="Products.urban.interfaces.IInspection
+             imio.schedule.content.task_config.ITaskConfig"
+        provides="imio.schedule.interfaces.ICreationCondition"
+        factory=".creation.ShouldDoInspectionFollowups"
+        name="urban.schedule.condition.should_do_followups"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.IInspection
+             imio.schedule.content.task_config.ITaskConfig"
+        provides="imio.schedule.interfaces.ICreationCondition"
+        factory=".creation.ShouldWriteOneInspectionFollowUp"
+        name="urban.schedule.condition.should_write_one_followup"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.IInspection
+             imio.schedule.content.task_config.ITaskConfig"
+        provides="imio.schedule.interfaces.ICreationCondition"
+        factory=".creation.SomeInspectionFollowupsAreWritten"
+        name="urban.schedule.condition.followups_written"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.IInspection
+             imio.schedule.content.task_config.ITaskConfig"
+        provides="imio.schedule.interfaces.ICreationCondition"
+        factory=".creation.SomeInspectionFollowupsToSend"
+        name="urban.schedule.condition.followups_to_send"
+    />
 </configure>

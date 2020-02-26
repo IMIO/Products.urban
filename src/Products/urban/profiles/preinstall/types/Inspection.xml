@@ -23,6 +23,7 @@
    <element value="CorporationPlaintiff"/>
    <element value="UrbanEvent"/>
    <element value="UrbanEventInspectionReport"/>
+   <element value="UrbanEventFollowUp"/>
    <element value="File"/>
    <element value="PortionOut"/>
    <element value="task"/>

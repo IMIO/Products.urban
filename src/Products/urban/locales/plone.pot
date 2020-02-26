@@ -39,6 +39,9 @@ msgstr ""
 msgid "UrbanEventOpinionRequest"
 msgstr ""
 
+msgid "UrbanEventFollowUp"
+msgstr ""
+
 msgid "BuildLicence"
 msgstr ""
 

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2020-02-19 13:24+0000\n"
+"POT-Creation-Date: 2020-02-26 10:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1062,7 +1062,7 @@ msgstr ""
 msgid "click_to_view_or_add"
 msgstr ""
 
-#: ../content/UrbanEventInspectionReport.py:149
+#: ../content/UrbanEventInspectionReport.py:137
 msgid "close_inspection"
 msgstr ""
 
@@ -2404,7 +2404,7 @@ msgstr ""
 msgid "tenants"
 msgstr ""
 
-#: ../content/UrbanEventInspectionReport.py:150
+#: ../content/UrbanEventInspectionReport.py:138
 msgid "ticket"
 msgstr ""
 
@@ -2953,7 +2953,7 @@ msgid "urban_label_bound_inspection"
 msgstr ""
 
 #. Default: "Bound licence"
-#: ../content/licence/Inspection.py:39
+#: ../content/licence/Inspection.py:41
 msgid "urban_label_bound_licence"
 msgstr ""
 
@@ -3234,7 +3234,7 @@ msgid "urban_label_default_foldermanagers"
 msgstr ""
 
 #. Default: "Delay"
-#: ../content/UrbanEventInspectionReport.py:105
+#: ../content/UrbanEventInspectionReport.py:102
 msgid "urban_label_delay"
 msgstr ""
 
@@ -3540,7 +3540,7 @@ msgid "urban_label_foldermanagers"
 msgstr ""
 
 #. Default: "Followup_proposition"
-#: ../content/UrbanEventInspectionReport.py:86
+#: ../content/UrbanEventInspectionReport.py:83
 msgid "urban_label_followup_proposition"
 msgstr ""
 
@@ -3684,12 +3684,12 @@ msgid "urban_label_inquiry_type"
 msgstr ""
 
 #. Default: "Inspectiondescription"
-#: ../content/licence/Inspection.py:80
+#: ../content/licence/Inspection.py:82
 msgid "urban_label_inspectionDescription"
 msgstr ""
 
 #. Default: "Inspection_context"
-#: ../content/licence/Inspection.py:70
+#: ../content/licence/Inspection.py:72
 msgid "urban_label_inspection_context"
 msgstr ""
 
@@ -4130,12 +4130,12 @@ msgid "urban_label_numerotationTALExpression"
 msgstr ""
 
 #. Default: "Offense_articles"
-#: ../content/UrbanEventInspectionReport.py:65
+#: ../content/UrbanEventInspectionReport.py:62
 msgid "urban_label_offense_articles"
 msgstr ""
 
 #. Default: "Offense_articles_details"
-#: ../content/UrbanEventInspectionReport.py:74
+#: ../content/UrbanEventInspectionReport.py:71
 msgid "urban_label_offense_articles_details"
 msgstr ""
 
@@ -4171,7 +4171,7 @@ msgid "urban_label_organization"
 msgstr ""
 
 #. Default: "other_followup_proposition"
-#: ../content/UrbanEventInspectionReport.py:95
+#: ../content/UrbanEventInspectionReport.py:92
 msgid "urban_label_other_followup_proposition"
 msgstr ""
 
@@ -4608,7 +4608,7 @@ msgid "urban_label_reparcellingDetails"
 msgstr ""
 
 #. Default: "Report"
-#: ../content/UrbanEventInspectionReport.py:55
+#: ../content/UrbanEventInspectionReport.py:52
 msgid "urban_label_report"
 msgstr ""
 
@@ -4618,7 +4618,7 @@ msgid "urban_label_reportCreationDate"
 msgstr ""
 
 #. Default: "Reportdate"
-#: ../content/UrbanEventInspectionReport.py:47
+#: ../content/UrbanEventInspectionReport.py:44
 msgid "urban_label_reportDate"
 msgstr ""
 
@@ -5171,7 +5171,7 @@ msgid "urban_label_use_bound_inspection_infos"
 msgstr ""
 
 #. Default: "Use_bound_licence_infos"
-#: ../content/licence/Inspection.py:62
+#: ../content/licence/Inspection.py:64
 msgid "urban_label_use_bound_licence_infos"
 msgstr ""
 

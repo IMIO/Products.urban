@@ -57,7 +57,6 @@ def setTicketBoundLicence(ticket, event):
             if ticket.UID() in values:
                 values.remove(ticket.UID())
                 previous_licence_annotations['urban.bound_tickets'] = values
-            notify(ObjectModifiedEvent(previous_licence))
 
     # refer new ticket
     if new_bound_UIDs:
@@ -68,6 +67,5 @@ def setTicketBoundLicence(ticket, event):
             if ticket.UID() not in values:
                 values.add(ticket.UID())
                 new_licence_annotations['urban.bound_tickets'] = values
-            notify(ObjectModifiedEvent(new_licence))
 
     annotations['urban.ticket_bound_licences'] = new_bound_UIDs
