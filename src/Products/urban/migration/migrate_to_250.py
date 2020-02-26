@@ -108,6 +108,22 @@ def migrate_CODT_UrbanCertificateOne_to_CODT_UrbanCertificateBase(context):
     logger.info("migration step done!")
 
 
+def migrate_opinion_request_TAL_expression(context):
+    """
+    """
+    logger = logging.getLogger('urban: migrate opinion request TAL expression')
+    logger.info("starting migration step")
+
+    catalog = api.portal.get_tool('portal_catalog')
+    opinion_request_eventtypes = [b.getObject() for b in catalog(portal_type='OpinionRequestEventType')]
+    for opinion_request_eventtype in opinion_request_eventtypes:
+        if opinion_request_eventtype.getTALCondition().strip():
+            opinion_request_eventtype.setTALCondition("python: event.mayAddOpinionRequestEvent(here)")
+            logger.info("migrated TAL condition of {}".format(opinion_request_eventtype))
+
+    logger.info("migration step done!")
+
+
 def migrate(context):
     logger = logging.getLogger('urban: migrate to 2.5')
     logger.info("starting migration steps")
@@ -116,6 +132,7 @@ def migrate(context):
     setup_tool.runImportStepFromProfile('profile-Products.urban:extra', 'urban-update-rubrics')
     migrate_CODT_NotaryLetter_to_CODT_UrbanCertificateBase(context)
     migrate_CODT_UrbanCertificateOne_to_CODT_UrbanCertificateBase(context)
+    migrate_opinion_request_TAL_expression(context)
     catalog = api.portal.get_tool('portal_catalog')
     catalog.clearFindAndRebuild()
     logger.info("migration done!")
