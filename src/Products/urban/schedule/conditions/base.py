@@ -9,22 +9,8 @@ class BaseInspection:
 
     def get_current_inspection_report(self):
         licence = self.task_container
-
-        last_analysis_date = None
-        for action in licence.workflow_history.values()[0][::-1]:
-            if action['review_state'] == 'analysis':
-                last_analysis_date = action['time']
-                break
-
-        if not last_analysis_date:
-            return
-
-        report_events = licence.getAllReportEvents()
-        for report in report_events:
-            workflow_history = report.workflow_history.values()[0]
-            creation_date = workflow_history[0]['time']
-            if creation_date > last_analysis_date:
-                return report
+        report = licence.getCurrentReportEvent()
+        return report
 
     def get_followups(self):
         report = self.get_current_inspection_report()
