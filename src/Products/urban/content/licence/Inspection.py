@@ -222,16 +222,6 @@ class Inspection(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
     def getAllReportEvents(self):
         return self.getAllEvents(interfaces.IUrbanEventInspectionReport)
 
-    security.declarePublic('getLastFollowUpEvent')
-
-    def getLastFollowUpEvent(self):
-        return self.getLastEvent(interfaces.IUrbanEventFollowUp)
-
-    security.declarePublic('getAllFollowUpEvents')
-
-    def getAllFollowUpEvents(self):
-        return self.getAllEvents(interfaces.IUrbanEventFollowUp)
-
     security.declarePublic('getCurrentReportEvent')
 
     def getCurrentReportEvent(self):
@@ -250,6 +240,29 @@ class Inspection(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
             creation_date = workflow_history[0]['time']
             if creation_date > last_analysis_date:
                 return report
+
+    security.declarePublic('getFollowUpEventsById')
+
+    def getFollowUpEventsById(self, followup_id):
+        followup_events = self.objectValues('UrbanEventFollowUp')
+        if followup_id == '':
+            return followup_events
+        res = []
+        for followup_event in followup_events:
+            if followup_event.getFollowUpId() == followup_id:
+                res.append(followup_event)
+        return res
+
+
+    security.declarePublic('getLastFollowUpEvent')
+
+    def getLastFollowUpEvent(self):
+        return self.getLastEvent(interfaces.IUrbanEventFollowUp)
+
+    security.declarePublic('getAllFollowUpEvents')
+
+    def getAllFollowUpEvents(self):
+        return self.getAllEvents(interfaces.IUrbanEventFollowUp)
 
     security.declarePublic('mayAddInspectionReportEvent')
 
@@ -272,11 +285,16 @@ class Inspection(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
            This is used as TALExpression for the UrbanEventFollowUp
            We may add an UrbanEventFollowUp only if the previous one is closed
         """
-        report_event = self.getCurrentReportEvent()
-        if not report_event:
+        report_events = self.getAllReportEvents()
+        if not report_events:
             return False
-        can_add = followup_id in report_event.getFollowup_proposition()
-        return can_add
+
+        limit = 0
+        for report_event in report_events:
+            if followup_id in report_event.getFollowup_proposition():
+                limit += 1
+        limit = limit - len(self.getFollowUpEventsById(followup_id))
+        return limit > 0
 
     security.declarePublic('getBoundTickets')
 
