@@ -55,23 +55,16 @@ class UrbanEventFollowUp(UrbanEvent, BrowserDefaultMixin):
 
     schema = UrbanEventFollowUp_schema
 
-    security.declarePublic('getLinkedOrganisationTerm')
+    security.declarePublic('getFollowUpId')
 
-    def getLinkedOrganisationTerm(self):
-        """
-          Returns of the term that is linked to the linked UrbanEventType
-        """
-        return self.getUrbaneventtypes()
-
-    security.declarePublic('getLinkedOrganisationTermId')
-
-    def getLinkedOrganisationTermId(self):
+    def getFollowUpId(self):
         """
           Returns the id of the term that is linked to the linked UrbanEventType
         """
         event_type = self.getUrbaneventtypes()
         if event_type:
             return event_type.getId()
+        return ''
 
 
 registerType(UrbanEventFollowUp, PROJECTNAME)
