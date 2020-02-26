@@ -19,6 +19,14 @@
     type="imio.schedule.interfaces.ITaskMarkerInterface"/>
 
   <interface
+    interface=".interfaces.ICreateFollowupTask"
+    type="imio.schedule.interfaces.ITaskMarkerInterface"/>
+
+  <interface
+    interface=".interfaces.IInspectionFollowUpTask"
+    type="imio.schedule.interfaces.ITaskMarkerInterface"/>
+
+  <interface
     interface=".interfaces.ITaskToCheckDaily"
     type="imio.schedule.interfaces.ITaskMarkerInterface"/>
 

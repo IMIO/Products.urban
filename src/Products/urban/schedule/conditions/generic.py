@@ -6,6 +6,7 @@ from plone import api
 from imio.schedule.content.condition import Condition
 
 from Products.urban.config import LICENCE_FINAL_STATES
+from Products.urban.schedule.conditions.base import BaseInspection
 
 from DateTime import DateTime
 
@@ -576,3 +577,83 @@ class AlwaysFalseCondition(Condition):
 
     def evaluate(self):
         return False
+
+
+class InspectionCondition(Condition, BaseInspection):
+    """
+    Base class for inspection condition checking values on the last report event
+    Provides a method returning the last relevant inspection report event.
+    """
+
+
+class AllInspectionFollowupsAreDone(InspectionCondition):
+    """
+    All followup events are in the state 'closed'.
+    """
+
+    def evaluate(self):
+        follow_ups = self.get_followups()
+        follow_up_events = self.get_followup_events()
+        if len(follow_up_events) < len(follow_ups):
+            return False
+
+        for follow_up_event in follow_up_events:
+            if api.content.get_state(follow_up_event) != 'closed':
+                return False
+        return True
+
+
+class AllInspectionFollowupsAreWritten(InspectionCondition):
+    """
+    All followup events are at least in the state 'to_validate'.
+    """
+
+    def evaluate(self):
+        follow_ups = self.get_followups()
+        follow_up_events = self.get_followup_events()
+        if len(follow_up_events) < len(follow_ups):
+            return False
+
+        for follow_up_event in follow_up_events:
+            if api.content.get_state(follow_up_event) == 'draft':
+                return False
+        return True
+
+
+class SomeInspectionFollowupsAreWritten(InspectionCondition):
+    """
+    At least one followup event is in the state 'to_validate'.
+    """
+
+    def evaluate(self):
+        follow_up_events = self.get_followup_events()
+        for follow_up_event in follow_up_events:
+            if api.content.get_state(follow_up_event) == 'to_validate':
+                return True
+        return False
+
+
+class NoInspectionFollowupsToValidate(InspectionCondition):
+    """
+    No followup event is in the state 'to_validate'.
+    """
+
+    def evaluate(self):
+        follow_up_events = self.get_followup_events()
+        for follow_up_event in follow_up_events:
+            if api.content.get_state(follow_up_event) == 'to_validate':
+                return False
+        return True
+
+
+class NoInspectionFollowupsToSend(InspectionCondition):
+    """
+    No followup event is in the state 'to_send'.
+    """
+
+    def evaluate(self):
+        follow_up_events = self.get_followup_events()
+        for follow_up_event in follow_up_events:
+            if api.content.get_state(follow_up_event) == 'to_send':
+                return False
+        return True

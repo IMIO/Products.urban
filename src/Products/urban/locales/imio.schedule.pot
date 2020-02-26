@@ -20,6 +20,12 @@ msgstr ""
 msgid "urban.schedule.condition.acknowledgment_done"
 msgstr ""
 
+msgid "urban.schedule.condition.all_followups_done"
+msgstr ""
+
+msgid "urban.schedule.condition.all_followups_written"
+msgstr ""
+
 msgid "urban.schedule.condition.analysis_done"
 msgstr ""
 
@@ -39,6 +45,18 @@ msgid "urban.schedule.condition.deposit_done"
 msgstr ""
 
 msgid "urban.schedule.condition.folder_complete"
+msgstr ""
+
+msgid "urban.schedule.condition.followups_done"
+msgstr ""
+
+msgid "urban.schedule.condition.followups_to_send"
+msgstr ""
+
+msgid "urban.schedule.condition.followups_validated"
+msgstr ""
+
+msgid "urban.schedule.condition.followups_written"
 msgstr ""
 
 msgid "urban.schedule.condition.has_announcement"
@@ -168,6 +186,12 @@ msgid "urban.schedule.condition.procedure_choice_notified"
 msgstr ""
 
 msgid "urban.schedule.condition.procedure_choice_received_from_FD"
+msgstr ""
+
+msgid "urban.schedule.condition.should_do_followups"
+msgstr ""
+
+msgid "urban.schedule.condition.should_write_one_followup"
 msgstr ""
 
 msgid "urban.schedule.condition.spw_project_receipt_done"

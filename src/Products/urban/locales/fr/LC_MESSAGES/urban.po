@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2020-02-19 13:24+0000\n"
+"POT-Creation-Date: 2020-02-26 10:16+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -1082,7 +1082,7 @@ msgstr "Portée de l'arrêté de classement"
 msgid "click_to_view_or_add"
 msgstr "Cliquez ici pour voir ou ajouter des documents"
 
-#: ../content/UrbanEventInspectionReport.py:149
+#: ../content/UrbanEventInspectionReport.py:137
 msgid "close_inspection"
 msgstr "clôturer le dossier"
 
@@ -2438,7 +2438,7 @@ msgstr "Liste des modèles définis dans la configuration"
 msgid "tenants"
 msgstr "Locataires"
 
-#: ../content/UrbanEventInspectionReport.py:150
+#: ../content/UrbanEventInspectionReport.py:138
 msgid "ticket"
 msgstr "PV"
 
@@ -2986,7 +2986,7 @@ msgid "urban_label_bound_inspection"
 msgstr "Dossier d'inspection lié"
 
 #. Default: "Bound licence"
-#: ../content/licence/Inspection.py:39
+#: ../content/licence/Inspection.py:41
 msgid "urban_label_bound_licence"
 msgstr "Dossier lié"
 
@@ -3267,7 +3267,7 @@ msgid "urban_label_default_foldermanagers"
 msgstr "Agent traitant par défaut"
 
 #. Default: "Delay"
-#: ../content/UrbanEventInspectionReport.py:105
+#: ../content/UrbanEventInspectionReport.py:102
 msgid "urban_label_delay"
 msgstr "Délai"
 
@@ -3575,7 +3575,7 @@ msgid "urban_label_foldermanagers"
 msgstr "Agent(s) traitant(s)"
 
 #. Default: "Followup_proposition"
-#: ../content/UrbanEventInspectionReport.py:86
+#: ../content/UrbanEventInspectionReport.py:83
 msgid "urban_label_followup_proposition"
 msgstr "Proposition de suivi"
 
@@ -3719,12 +3719,12 @@ msgid "urban_label_inquiry_type"
 msgstr "Type de publicité"
 
 #. Default: "Inspectiondescription"
-#: ../content/licence/Inspection.py:80
+#: ../content/licence/Inspection.py:82
 msgid "urban_label_inspectionDescription"
 msgstr "Observations"
 
 #. Default: "Inspection_context"
-#: ../content/licence/Inspection.py:70
+#: ../content/licence/Inspection.py:72
 msgid "urban_label_inspection_context"
 msgstr "Contexte d'inspection"
 
@@ -4165,12 +4165,12 @@ msgid "urban_label_numerotationTALExpression"
 msgstr "Expression TAL gérant la référence des permis"
 
 #. Default: "Offense_articles"
-#: ../content/UrbanEventInspectionReport.py:65
+#: ../content/UrbanEventInspectionReport.py:62
 msgid "urban_label_offense_articles"
 msgstr "Articles du CoDT visés"
 
 #. Default: "Offense_articles_details"
-#: ../content/UrbanEventInspectionReport.py:74
+#: ../content/UrbanEventInspectionReport.py:71
 msgid "urban_label_offense_articles_details"
 msgstr "Détails sur les articles du CoDT visés"
 
@@ -4206,7 +4206,7 @@ msgid "urban_label_organization"
 msgstr "Organisation"
 
 #. Default: "other_followup_proposition"
-#: ../content/UrbanEventInspectionReport.py:95
+#: ../content/UrbanEventInspectionReport.py:92
 msgid "urban_label_other_followup_proposition"
 msgstr "Autre proposition de suivi"
 
@@ -4643,7 +4643,7 @@ msgid "urban_label_reparcellingDetails"
 msgstr "Détails concernant le Périmètre de Remembrement"
 
 #. Default: "Report"
-#: ../content/UrbanEventInspectionReport.py:55
+#: ../content/UrbanEventInspectionReport.py:52
 msgid "urban_label_report"
 msgstr "Rapport"
 
@@ -4653,7 +4653,7 @@ msgid "urban_label_reportCreationDate"
 msgstr "Date de création du PV"
 
 #. Default: "Reportdate"
-#: ../content/UrbanEventInspectionReport.py:47
+#: ../content/UrbanEventInspectionReport.py:44
 msgid "urban_label_reportDate"
 msgstr "Date du rapport"
 
@@ -5207,7 +5207,7 @@ msgid "urban_label_use_bound_inspection_infos"
 msgstr "Prendre les données de l'inspection liée"
 
 #. Default: "Use_bound_licence_infos"
-#: ../content/licence/Inspection.py:62
+#: ../content/licence/Inspection.py:64
 msgid "urban_label_use_bound_licence_infos"
 msgstr "Prendre les données du permis lié"
 
