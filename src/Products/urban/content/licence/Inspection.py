@@ -264,6 +264,36 @@ class Inspection(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
     def getAllFollowUpEvents(self):
         return self.getAllEvents(interfaces.IUrbanEventFollowUp)
 
+    security.declarePublic('getCurrentFollowUpEvents')
+
+    def getCurrentFollowUpEvents(self):
+        last_answer_date = None
+        for action in self.workflow_history.values()[0][::-1]:
+            if action['review_state'] == 'administrative_answer':
+                last_answer_date = action['time']
+                break
+        if not last_answer_date:
+            return []
+
+        report = self.getCurrentReportEvent()
+        if not report:
+            return []
+        ignore = ['ticket', 'close']
+        selected_follow_ups = [fw_up for fw_up in report.getFollowup_proposition() if fw_up not in ignore]
+        if not selected_follow_ups:
+            return []
+
+        followup_events = self.getAllFollowUpEvents()
+        to_return = []
+        for followup in followup_events:
+            workflow_history = followup.workflow_history.values()[0]
+            creation_date = workflow_history[0]['time']
+            if creation_date > last_answer_date:
+                uet = followup.getUrbaneventtypes()
+                if uet and uet.id in selected_follow_ups:
+                    to_return.append(followup)
+        return to_return
+
     security.declarePublic('mayAddInspectionReportEvent')
 
     def mayAddInspectionReportEvent(self):
