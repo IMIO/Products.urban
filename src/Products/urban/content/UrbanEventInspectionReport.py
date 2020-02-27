@@ -141,6 +141,13 @@ class UrbanEventInspectionReport(BaseFolder, UrbanEvent, BrowserDefaultMixin):
             full_voc.append((key, config_voc.getValue(key)))
         return DisplayList(full_voc)
 
+    def get_regular_followup_propositions(self):
+        """
+        """
+        ignore = ['ticket', 'close']
+        follow_ups = [fw_up for fw_up in self.getFollowup_proposition() if fw_up not in ignore]
+        return follow_ups
+
     def showOtherFollowUp(self, *values):
         selection = [v['val'] for v in values if v['selected']]
         show = 'other' in selection
