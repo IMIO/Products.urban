@@ -72,6 +72,7 @@ ADD_CONTENT_PERMISSIONS = {
     'CODT_ParcelOutLicence': 'urban: Add CODT_ParcelOutLicence',
     'CODT_UniqueLicence': 'urban: Add CODT_UniqueLicence',
     'CODT_UrbanCertificateTwo': 'urban: Add CODT_UrbanCertificateTwo',
+    'CODT_UrbanCertificateBase': 'urban: Add CODT_UrbanCertificateBase',
     'Contact': 'urban: Add Contact',
     'Corporation': 'urban: Add Corporation',
     'City': 'urban: Add City',
