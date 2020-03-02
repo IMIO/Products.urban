@@ -3,6 +3,9 @@
 from Products.contentmigration.walker import CustomQueryWalker
 from Products.contentmigration.archetypes import InplaceATFolderMigrator
 
+from Products.urban.config import URBAN_TYPES
+from Products.urban.utils import getLicenceFolderId
+
 from plone import api
 
 import logging
@@ -108,6 +111,22 @@ def migrate_CODT_UrbanCertificateOne_to_CODT_UrbanCertificateBase(context):
     logger.info("migration step done!")
 
 
+def migrate_CODT_UrbanCertificateBase_add_permissions(context):
+    """
+    """
+    logger = logging.getLogger('urban: migrate CODT_UrbanCertificateBase add permission')
+    logger.info("starting migration step")
+
+    portal = api.portal.get()
+    for urban_type in URBAN_TYPES:
+        licence_folder_id = getLicenceFolderId(urban_type)
+        licence_folder = getattr(portal.urban, licence_folder_id)
+        if urban_type in ['CODT_UrbanCertificateOne', 'CODT_NotaryLetter', ]:
+            licence_folder.manage_permission('urban: Add CODT_UrbanCertificateBase', ['Manager', 'Contributor', ], acquire=0)
+
+    logger.info("migration step done!")
+
+
 def migrate_opinion_request_TAL_expression(context):
     """
     """
@@ -132,6 +151,7 @@ def migrate(context):
     setup_tool.runImportStepFromProfile('profile-Products.urban:extra', 'urban-update-rubrics')
     migrate_CODT_NotaryLetter_to_CODT_UrbanCertificateBase(context)
     migrate_CODT_UrbanCertificateOne_to_CODT_UrbanCertificateBase(context)
+    migrate_CODT_UrbanCertificateBase_add_permissions(context)
     migrate_opinion_request_TAL_expression(context)
     catalog = api.portal.get_tool('portal_catalog')
     catalog.clearFindAndRebuild()
