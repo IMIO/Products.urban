@@ -868,6 +868,8 @@ def addApplicationFolders(context):
             #exception for some portal_types having a different meta_type
             if urban_type in ['UrbanCertificateOne', 'NotaryLetter', ]:
                 licence_folder.manage_permission('urban: Add UrbanCertificateBase', ['Manager', 'Contributor', ], acquire=0)
+            if urban_type in ['CODT_UrbanCertificateOne', 'CODT_NotaryLetter', ]:
+                licence_folder.manage_permission('urban: Add CODT_UrbanCertificateBase', ['Manager', 'Contributor', ], acquire=0)
             if urban_type in ['EnvClassThree', ]:
                 licence_folder.manage_permission('urban: Add EnvironmentBase', ['Manager', 'Contributor', ], acquire=0)
             if urban_type in ['EnvClassOne', 'EnvClassTwo', 'EnvClassBordering']:
