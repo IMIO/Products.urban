@@ -170,7 +170,7 @@ class UrbanEventView(BrowserView):
     @property
     def is_planned_mailing(self):
         planned_mailings = api.portal.get_registry_record(
-            'Products.urban.interfaces.IAsyncMailing.mailing_to_do'
+            'Products.urban.interfaces.IAsyncMailing.mailings_to_do'
         ) or {}
         is_planned = self.context.UID() in planned_mailings
         return is_planned
