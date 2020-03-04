@@ -18,7 +18,7 @@ class Mailings(BrowserView):
         """
         catalog = api.portal.get_tool('portal_catalog')
         planned_mailings = api.portal.get_registry_record(
-            'Products.urban.interfaces.IAsyncMailing.mailing_to_do'
+            'Products.urban.interfaces.IAsyncMailing.mailings_to_do'
         ) or {}
 
         for event_UID in planned_mailings.keys():
@@ -27,7 +27,7 @@ class Mailings(BrowserView):
             mailing_view = event.restrictedTraverse('@@mailing-loop-persistent-document-generation')
             mailing_view(document_uid=document_uid, force=True)
             api.portal.set_registry_record(
-                'Products.urban.interfaces.IAsyncMailing.mailing_to_do',
+                'Products.urban.interfaces.IAsyncMailing.mailings_to_do',
                 planned_mailings
             )
             transaction.commit()
