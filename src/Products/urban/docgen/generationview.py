@@ -3,6 +3,7 @@
 from Products.urban.interfaces import IUrbanDoc
 
 from collective.documentgenerator.browser.generation_view import PersistentDocumentGenerationView
+from collective.documentgenerator.browser.generation_view import MailingLoopPersistentDocumentGenerationView
 
 from plone import api
 
@@ -46,15 +47,15 @@ class UrbanDocGenerationView(PersistentDocumentGenerationView):
         applicantobj = applicants and applicants[0] or None
         proprietaries = licence.getProprietaries()
         proprietaryobj = proprietaries and proprietaries[0] or None
-        publicity = hasattr(licence, 'getLastInquiry') and licence.getLastInquiry() or hasattr(licence,
-                'getLastAnnouncement') and licence.getLastAnnouncement() or None
+        publicity = hasattr(licence, 'getLastInquiry') and licence.getLastInquiry() or \
+            hasattr(licence, 'getLastAnnouncement') and licence.getLastAnnouncement() or None
         claimants = (publicity and hasattr(publicity, 'getClaimants')) and publicity.getClaimants() or None
-        claimants_view = claimants and [claimant.restrictedTraverse('@@document_generation_helper_view') for claimant in
-                claimants] or None
+        claimants_view = claimants and \
+            [claimant.restrictedTraverse('@@document_generation_helper_view') for claimant in claimants] or None
         claimants_view = claimants_view and [(view.context, view) for view in claimants_view]
         proprietaries = (publicity and hasattr(publicity, 'getRecipients')) and publicity.getRecipients() or None
-        proprietaries_views = proprietaries and [proprietary.restrictedTraverse('@@document_generation_helper_view') for proprietary in
-                proprietaries] or None
+        proprietaries_views = proprietaries and \
+            [proprietary.restrictedTraverse('@@document_generation_helper_view') for proprietary in proprietaries] or None
         proprietaries_views = proprietaries_views and [(view.context, view) for view in proprietaries_views]
         licence_helper_view = licence.restrictedTraverse('@@document_generation_helper_view')
         event_helper_view = self.context.restrictedTraverse('@@document_generation_helper_view')
@@ -89,3 +90,31 @@ class UrbanDocGenerationView(PersistentDocumentGenerationView):
         if generation_context['inquiry_proprietaries']:
             views.extend([view for proxy, view in generation_context['inquiry_proprietaries']])
         return views
+
+
+class UrbanMailingLoopGenerationView(MailingLoopPersistentDocumentGenerationView):
+    """
+        Mailing persistent document generation view.
+        This view use a MailingLoopTemplate to loop on a document when replacing some variables in.
+    """
+
+    def __call__(self, document_uid='', force=False):
+        """ """
+        helper_view = self.get_generation_context_helper()
+        mailing_list = helper_view.mailing_list()
+        if not force and len(mailing_list) < 15:
+            # in case of big mailing => delay
+            planned_inquiries = api.portal.get_registry_record(
+                'Products.urban.interfaces.IAsyncMailing.mailing_to_do'
+            ) or {}
+            documents_to_mail = planned_inquiries.get(self.context.UID(), [])
+            if document_uid not in documents_to_mail:
+                documents_to_mail.append(document_uid)
+            planned_inquiries[self.context.UID()] = documents_to_mail
+            api.portal.set_registry_record(
+                'Products.urban.interfaces.IAsyncMailing.mailing_to_do',
+                planned_inquiries
+            )
+            return self.request.response.redirect(self.context.absolute_url())
+        else:
+            return super(UrbanMailingLoopGenerationView, self).__call__(document_uid)
