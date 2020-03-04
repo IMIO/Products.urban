@@ -13,6 +13,13 @@
         permission="zope2.View"
         />
 
+    <browser:page
+        for="Products.urban.interfaces.IUrbanEvent"
+        name="mailing-loop-persistent-document-generation"
+        class="Products.urban.docgen.generationview.UrbanMailingLoopGenerationView"
+        permission="zope2.View"
+        />
+
      <browser:page
          for="Products.urban.interfaces.IGenericLicence"
          class=".helper_view.UrbanDocGenerationLicenceHelperView"
