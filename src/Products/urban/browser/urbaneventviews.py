@@ -24,6 +24,9 @@ class UrbanEventView(BrowserView):
     def __init__(self, context, request):
         self.context = context
         self.request = request
+        plone_utils = api.portal.get_tool('plone_utils')
+        if self.is_planned_mailing:
+            plone_utils.addPortalMessage(_('The mailings will be ready tomorrow!'), type="warning")
         # disable portlets
         self.request.set('disable_plone.rightcolumn', 1)
         self.request.set('disable_plone.leftcolumn', 1)
@@ -163,6 +166,14 @@ class UrbanEventView(BrowserView):
 
     def get_state(self):
         return api.content.get_state(self.context)
+
+    @property
+    def is_planned_mailing(self):
+        planned_mailings = api.portal.get_registry_record(
+            'Products.urban.interfaces.IAsyncMailing.mailing_to_do'
+        ) or {}
+        is_planned = self.context.UID() in planned_mailings
+        return is_planned
 
 
 class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
@@ -325,6 +336,17 @@ class UrbanEventAnnouncementView(UrbanEventInquiryBaseView):
         self.linkedInquiry = self.context.getLinkedInquiry()
         if not self.linkedInquiry:
             plone_utils.addPortalMessage(_('This UrbanEventInquiry is not linked to an existing Inquiry !  Define a new inquiry on the licence !'), type="error")
+        if self.is_planned_mailing:
+            plone_utils.addPortalMessage(_('The mailings will be ready tomorrow!'), type="warning")
+        suspension_check, suspension_start, suspension_end = self.check_dates_for_suspension()
+        if not suspension_check:
+            plone_utils.addPortalMessage(
+                _(
+                    'Suspension period from to: please check the end date',
+                    mapping={"from": suspension_start, "to": suspension_end}
+                ),
+                type="warning"
+            )
         # disable portlets
         self.request.set('disable_plone.rightcolumn', 1)
         self.request.set('disable_plone.leftcolumn', 1)
@@ -354,6 +376,17 @@ class UrbanEventInquiryView(UrbanEventInquiryBaseView):
             plone_utils.addPortalMessage(_('There are parcel owners without any address found! Desactivate them!'), type="warning")
         if self.is_planned_inquiry:
             plone_utils.addPortalMessage(_('The parcel radius search will be ready tomorrow!'), type="warning")
+        if self.is_planned_mailing:
+            plone_utils.addPortalMessage(_('The mailings will be ready tomorrow!'), type="warning")
+        suspension_check, suspension_start, suspension_end = self.check_dates_for_suspension()
+        if not suspension_check:
+            plone_utils.addPortalMessage(
+                _(
+                    'Suspension period from to: please check the end date',
+                    mapping={"from": suspension_start, "to": suspension_end}
+                ),
+                type="warning"
+            )
         # disable portlets
         self.request.set('disable_plone.rightcolumn', 1)
         self.request.set('disable_plone.leftcolumn', 1)

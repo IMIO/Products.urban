@@ -516,7 +516,7 @@ msgstr "Fin des travaux"
 msgid "ImpactStudy event type marker interface"
 msgstr "Étude d'incidence"
 
-#: ../browser/urbaneventviews.py:188
+#: ../browser/urbaneventviews.py:199
 msgid "Import"
 msgstr ""
 
@@ -536,7 +536,7 @@ msgstr "Etat du permis"
 msgid "Licence types"
 msgstr "Type de permis"
 
-#: ../browser/urbaneventviews.py:179
+#: ../browser/urbaneventviews.py:190
 msgid "Listing file"
 msgstr ""
 
@@ -702,7 +702,7 @@ msgstr ""
 msgid "Submit"
 msgstr "Valider"
 
-#: ../browser/urbaneventviews.py:421
+#: ../browser/urbaneventviews.py:434
 msgid "Suspension period from to: please check the end date"
 msgstr "Période de suspension du ${from} au ${to}: CORRIGEZ LA DATE DE FIN DE PUBLICITE."
 
@@ -710,7 +710,7 @@ msgstr "Période de suspension du ${from} au ${to}: CORRIGEZ LA DATE DE FIN DE P
 msgid "Tests Extension profile for urban."
 msgstr ""
 
-#: ../browser/urbaneventviews.py:417
+#: ../browser/urbaneventviews.py:428
 msgid "The claimants import will be ready tomorrow!"
 msgstr "L'import des réclamants a bien été enregistré et sera éxécuté cette nuit"
 
@@ -718,15 +718,19 @@ msgstr "L'import des réclamants a bien été enregistré et sera éxécuté cet
 msgid "The field does not exist !!!"
 msgstr ""
 
-#: ../browser/urbaneventviews.py:455
+#: ../browser/urbaneventviews.py:38
+msgid "The mailings will be ready tomorrow!"
+msgstr "Le publipostage a bien été enregistré et sera éxécuté cette nuit"
+
+#: ../browser/urbaneventviews.py:468
 msgid "The parcel radius search will be ready tomorrow!"
 msgstr "La recherche des propriétaires concernés par le rayon de cette enquête a bien été enregistrée et sera éxécutée cette nuit."
 
-#: ../browser/urbaneventviews.py:453
+#: ../browser/urbaneventviews.py:466
 msgid "There are parcel owners without any address found! Desactivate them!"
 msgstr ""
 
-#: ../browser/urbaneventviews.py:415
+#: ../browser/urbaneventviews.py:426
 msgid "This UrbanEventInquiry is not linked to an existing Inquiry !  Define a new inquiry on the licence !"
 msgstr ""
 

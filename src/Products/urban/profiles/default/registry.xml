@@ -7,6 +7,8 @@
   </records>
   <records interface="Products.urban.interfaces.IAsyncInquiryRadius" field="inquiries_to_do">
   </records>
+  <records interface="Products.urban.interfaces.IAsyncMailing" field="mailings">
+  </records>
   <records interface="plone.app.referenceintegrity.interfaces.ISettings">
       <value key="reference_types">
           <element>licenceArchitects</element>
