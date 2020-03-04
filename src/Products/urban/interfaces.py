@@ -690,8 +690,18 @@ class IInternalOpinionServices(Interface):
 class IAsyncInquiryRadius(Interface):
     """ """
     inquiries_to_do = schema.Dict(
-        title=_(u"Planned inquiries"),
-        description=_(u"inquiries planned for radius search"),
+        title=_(u"Planned mailings"),
+        description=_(u"mailings planned"),
+        key_type=schema.ASCIILine(),
+        value_type=schema.Int()
+    )
+
+
+class IAsyncMailing(Interface):
+    """ """
+    mailings_to_do = schema.Dict(
+        title=_(u"Planned mailings"),
+        description=_(u"mailings planned for radius search"),
         key_type=schema.ASCIILine(),
         value_type=schema.Int()
     )

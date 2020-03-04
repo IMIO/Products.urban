@@ -102,17 +102,14 @@ class UrbanMailingLoopGenerationView(MailingLoopPersistentDocumentGenerationView
         """ """
         helper_view = self.get_generation_context_helper()
         mailing_list = helper_view.mailing_list()
-        if not force and len(mailing_list) < 15:
+        if not force and len(mailing_list) > 15:
             # in case of big mailing => delay
             planned_inquiries = api.portal.get_registry_record(
-                'Products.urban.interfaces.IAsyncMailing.mailing_to_do'
+                'Products.urban.interfaces.IAsyncMailing.mailings_to_do'
             ) or {}
-            documents_to_mail = planned_inquiries.get(self.context.UID(), [])
-            if document_uid not in documents_to_mail:
-                documents_to_mail.append(document_uid)
-            planned_inquiries[self.context.UID()] = documents_to_mail
+            planned_inquiries[self.context.UID()] = document_uid
             api.portal.set_registry_record(
-                'Products.urban.interfaces.IAsyncMailing.mailing_to_do',
+                'Products.urban.interfaces.IAsyncMailing.mailings_to_do',
                 planned_inquiries
             )
             return self.request.response.redirect(self.context.absolute_url())
