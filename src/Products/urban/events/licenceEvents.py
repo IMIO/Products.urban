@@ -150,6 +150,15 @@ def reindex_attachments_permissions(container, event):
         reindex_attachments_permissions(licence, event)
 
 
+def reindex_licence_permissions(container, event):
+    """
+    Reindex licence permissions when triggering internal opinion request events
+    """
+    if IUrbanEvent.providedBy(container):
+        licence = container.aq_parent
+        licence.reindexObject(idxs=['allowedRolesAndUsers'])
+
+
 def set_faceted_navigation(licence, event):
     """
     Activate faceted navigation licences.
