@@ -722,16 +722,13 @@ class IAsyncInquiryRadius(Interface):
     )
 
 
-class IAsyncMailingLimit(Interface):
+class IAsyncMailing(Interface):
     """ """
     mailing_items_limit = schema.Int(
         title=_(u"Mailing limit"),
         description=_(u"Max items allowed for immediate mailing"),
     )
 
-
-class IAsyncMailing(Interface):
-    """ """
     mailings_to_do = schema.Dict(
         title=_(u"Planned mailings"),
         description=_(u"mailings planned for radius search"),
