@@ -20,6 +20,20 @@
 
   <browser:page
     for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    name="mailings"
+    class=".mailing.Mailings"
+    permission="cmf.ManagePortal"
+  />
+
+  <browser:page
+    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    name="claimants_import"
+    class=".inquiry.InquiryClaimantsImport"
+    permission="cmf.ManagePortal"
+  />
+
+  <browser:page
+    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
     name="task-cron"
     class=".tasks.TaskCronView"
     permission="zope2.View"
