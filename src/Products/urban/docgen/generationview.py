@@ -92,26 +92,44 @@ class UrbanDocGenerationView(PersistentDocumentGenerationView):
         return views
 
 
+class MailingTooBigException(Exception):
+    """
+    Raised when there is more than 15 objects for mailing
+    """
+
+
 class UrbanMailingLoopGenerationView(MailingLoopPersistentDocumentGenerationView):
     """
         Mailing persistent document generation view.
         This view use a MailingLoopTemplate to loop on a document when replacing some variables in.
     """
+    force = False
 
-    def __call__(self, document_uid='', force=False):
+    def __call__(self, document_uid='', document_url_path='', force=False):
         """ """
-        helper_view = self.get_generation_context_helper()
-        mailing_list = helper_view.mailing_list()
-        if not force and len(mailing_list) > 15:
-            # in case of big mailing => delay
-            planned_inquiries = api.portal.get_registry_record(
-                'Products.urban.interfaces.IAsyncMailing.mailings_to_do'
-            ) or {}
-            planned_inquiries[self.context.UID()] = document_uid
-            api.portal.set_registry_record(
-                'Products.urban.interfaces.IAsyncMailing.mailings_to_do',
-                planned_inquiries
-            )
-            return self.request.response.redirect(self.context.absolute_url())
-        else:
+        if force:
+            self.force = True
             return super(UrbanMailingLoopGenerationView, self).__call__(document_uid)
+        else:
+            try:
+                return super(UrbanMailingLoopGenerationView, self).__call__(document_uid)
+            except MailingTooBigException:
+                # in case of big mailing => delay
+                planned_inquiries = api.portal.get_registry_record(
+                    'Products.urban.interfaces.IAsyncMailing.mailings_to_do'
+                ) or {}
+                planned_inquiries[self.context.UID()] = self.document.UID()
+                api.portal.set_registry_record(
+                    'Products.urban.interfaces.IAsyncMailing.mailings_to_do',
+                    planned_inquiries
+                )
+                return self.request.response.redirect(self.context.absolute_url())
+
+    def _get_generation_context(self, helper_view, pod_template):
+        gen_context = super(UrbanMailingLoopGenerationView, self)._get_generation_context(helper_view, pod_template)
+        mailing_limit = api.portal.get_registry_record(
+            'Products.urban.interfaces.IAsyncMailing.mailing_items_limit'
+        )
+        if not self.force and mailing_limit and len(gen_context['mailing_list']) > mailing_limit:
+            raise MailingTooBigException
+        return gen_context
