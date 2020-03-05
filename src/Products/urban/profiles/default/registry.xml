@@ -9,7 +9,7 @@
   </records>
   <records interface="Products.urban.interfaces.IAsyncClaimantsImports" field="claimants_to_import">
   </records>
-  <records interface="Products.urban.interfaces.IAsyncMailingLimit" field="mailing_items_limit">
+  <records interface="Products.urban.interfaces.IAsyncMailing" field="mailing_items_limit">
   </records>
   <records interface="Products.urban.interfaces.IAsyncMailing" field="mailings_to_do">
   </records>
