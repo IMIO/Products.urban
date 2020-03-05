@@ -733,7 +733,7 @@ class IAsyncMailing(Interface):
         title=_(u"Planned mailings"),
         description=_(u"mailings planned for radius search"),
         key_type=schema.ASCIILine(),
-        value_type=schema.Int()
+        value_type=schema.ASCIILine()
     )
 
 
