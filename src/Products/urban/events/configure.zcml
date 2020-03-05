@@ -71,6 +71,10 @@
                    Products.DCWorkflow.interfaces.IAfterTransitionEvent"
               handler=".licenceEvents.reindex_attachments_permissions" />
 
+  <subscriber for="..interfaces.IUrbanEventOpinionRequest
+                   Products.DCWorkflow.interfaces.IAfterTransitionEvent"
+              handler=".licenceEvents.reindex_licence_permissions" />
+
   <subscriber for="..interfaces.IPortionOut
                    zope.container.interfaces.IObjectRemovedEvent"
               handler=".portionOutEvents.onDelete" />
