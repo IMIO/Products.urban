@@ -7,7 +7,7 @@
   </records>
   <records interface="Products.urban.interfaces.IAsyncInquiryRadius" field="inquiries_to_do">
   </records>
-  <records interface="Products.urban.interfaces.IAsyncMailingLimit" field="mailing_items_limit">
+  <records interface="Products.urban.interfaces.IAsyncMailing" field="mailing_items_limit">
   </records>
   <records interface="Products.urban.interfaces.IAsyncMailing" field="mailings_to_do">
   </records>
