@@ -60,6 +60,11 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
             formatted_date = self.format_date(date, long_format=long_format, translatemonth=translatemonth)
         return formatted_date
 
+    def today(self):
+        """
+        """
+        return _date.today()
+
     def format_date(self, date=None, translatemonth=True, long_format=False):
         """
           Format the date for printing in pod templates
