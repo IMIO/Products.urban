@@ -37,13 +37,13 @@ class Urbain220Viewlet(ViewletBase):
         """
         allowed_contexts = [
             'urban',
-            'articles127s',
+            'article127s',
             'buildlicences',
             'declarations',
             'integratedlicences',
             'uniquelicences',
             'preliminarynotices',
-            'codt_articles127s',
+            'codt_article127s',
             'codt_buildlicences',
             'codt_integratedlicences',
             'codt_uniquelicences',
