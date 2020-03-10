@@ -6,6 +6,7 @@ from collective.documentgenerator.browser.generation_view import PersistentDocum
 from collective.documentgenerator.browser.generation_view import MailingLoopPersistentDocumentGenerationView
 
 from plone import api
+from plone.app.uuid.utils import uuidToObject
 
 from zope.interface import alsoProvides
 
@@ -109,16 +110,24 @@ class UrbanMailingLoopGenerationView(MailingLoopPersistentDocumentGenerationView
         """ """
         if force:
             self.force = True
-            return super(UrbanMailingLoopGenerationView, self).__call__(document_uid)
+            return super(UrbanMailingLoopGenerationView, self).__call__(document_uid, document_url_path)
         else:
             try:
-                return super(UrbanMailingLoopGenerationView, self).__call__(document_uid)
+                return super(UrbanMailingLoopGenerationView, self).__call__(document_uid, document_url_path)
             except MailingTooBigException:
+                document_uid = document_uid or self.request.get('document_uid', '')
+                document_url_path = document_url_path or self.request.get('document_url_path', '')
+                if document_url_path:
+                    site = api.portal.get()
+                    document = site.restrictedTraverse(document_url_path)
+                else:
+                    document = uuidToObject(document_uid)
+
                 # in case of big mailing => delay
                 planned_inquiries = api.portal.get_registry_record(
                     'Products.urban.interfaces.IAsyncMailing.mailings_to_do'
                 ) or {}
-                planned_inquiries[self.context.UID()] = self.document.UID()
+                planned_inquiries[self.context.UID()] =  '/'.join(document.getPhysicalPath())
                 api.portal.set_registry_record(
                     'Products.urban.interfaces.IAsyncMailing.mailings_to_do',
                     planned_inquiries

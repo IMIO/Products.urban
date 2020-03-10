@@ -22,10 +22,10 @@ class Mailings(BrowserView):
         ) or {}
 
         for event_UID in planned_mailings.keys():
-            document_uid = planned_mailings.pop(event_UID)
+            document_path = planned_mailings.pop(event_UID)
             event = catalog.unrestrictedSearchResults(UID=event_UID)[0].getObject()
             mailing_view = event.restrictedTraverse('@@mailing-loop-persistent-document-generation')
-            mailing_view(document_uid=document_uid, force=True)
+            mailing_view(document_url_path=document_path, force=True)
             api.portal.set_registry_record(
                 'Products.urban.interfaces.IAsyncMailing.mailings_to_do',
                 planned_mailings
