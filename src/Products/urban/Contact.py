@@ -372,10 +372,7 @@ class Contact(BaseContent, BrowserDefaultMixin):
                 result.append(city)
             if self.getCountry() != 'belgium':
                 result.append(country)
-            try:
-                return u' '.join(result)
-            except:
-                import ipdb; ipdb.set_trace()
+            return u' '.join(result)
         else:
             number = cgi.escape(number)
             street = cgi.escape(street)
