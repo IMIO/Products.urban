@@ -209,7 +209,7 @@ class ContacTitleDisplay(TitleDisplay):
 
     def render(self):
         contact = self.obj
-        title = self.column.renderTitleLink(self.urbanlist_item).encode('utf-8')
+        title = self.column.renderTitleLink(self.urbanlist_item)
 
         address = ''
         street = contact.getStreet()
