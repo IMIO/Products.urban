@@ -570,7 +570,7 @@ class InspectionReportVisitDate(UrbanColumn):
     weight = 7
 
     def getSortKey(self, item):
-        return item.getEventDate()
+        return item.getReportDate()
 
     def renderCell(self, report):
         raw_date = report.getEventDate()
@@ -582,6 +582,9 @@ class InspectionReportDate(UrbanColumn):
 
     header = 'urban_label_reportDate'
     weight = 8
+
+    def getSortKey(self, item):
+        return item.getReportDate()
 
     def renderCell(self, report):
         raw_date = report.getReportDate()
