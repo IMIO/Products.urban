@@ -54,7 +54,7 @@ schema = Schema((
         ],
         schemata='urban_description',
         multiValued=True,
-        relationship="bound_licence",
+        relationship="bound_licences",
     ),
     BooleanField(
         name='use_bound_licence_infos',
@@ -111,9 +111,9 @@ class Inspection(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
 
     def getWorkLocations(self):
         if self.getUse_bound_licence_infos():
-            bound_licence = self.getBound_licence()
-            if bound_licence:
-                return bound_licence.getWorkLocations()
+            bound_licences = self.getBound_licences()
+            if bound_licences:
+                return bound_licence[0].getWorkLocations()
 
         field = self.getField('workLocations')
         worklocations = field.get(self)
@@ -121,9 +121,9 @@ class Inspection(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
 
     def getParcels(self):
         if self.getUse_bound_licence_infos():
-            bound_licence = self.getBound_licence()
-            if bound_licence:
-                return bound_licence.getParcels()
+            bound_licences = self.getBound_licences()
+            if bound_licences:
+                return bound_licences[0].getParcels()
 
         return super(Inspection, self).getParcels()
 
@@ -131,9 +131,9 @@ class Inspection(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
 
     def getOfficialParcels(self):
         if self.getUse_bound_licence_infos():
-            bound_licence = self.getBound_licence()
-            if bound_licence:
-                return bound_licence.getOfficialParcels()
+            bound_licences = self.getBound_licences()
+            if bound_licences:
+                return bound_licences[0].getOfficialParcels()
 
         return super(Inspection, self).getOfficialParcels()
 
@@ -142,9 +142,9 @@ class Inspection(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
         """
         applicants = super(Inspection, self).getApplicants()
         if self.getUse_bound_licence_infos():
-            bound_licence = self.getBound_licence()
-            if bound_licence:
-                applicants.extend(bound_licence.getApplicants())
+            bound_licences = self.getBound_licences()
+            if bound_licences:
+                applicants.extend(bound_licences[0].getApplicants())
         return list(set(applicants))
 
     security.declarePublic('get_applicants_history')
@@ -152,9 +152,9 @@ class Inspection(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
     def get_applicants_history(self):
         applicants = super(Inspection, self).get_applicants_history()
         if self.getUse_bound_licence_infos():
-            bound_licence = self.getBound_licence()
-            if bound_licence:
-                applicants.extend(bound_licence.get_applicants_history())
+            bound_licences = self.getBound_licences()
+            if bound_licences:
+                applicants.extend(bound_licences[0].get_applicants_history())
         return list(set(applicants))
 
     security.declarePublic('getCorporations')
@@ -164,9 +164,9 @@ class Inspection(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
                         if corp.portal_type == 'Corporation' and
                         api.content.get_state(corp) == 'enabled']
         if self.getUse_bound_licence_infos():
-            bound_licence = self.getBound_licence()
-            if bound_licence:
-                corporations.extend(bound_licence.getCorporations())
+            bound_licences = self.getBound_licences()
+            if bound_licences:
+                corporations.extend(bound_licences[0].getCorporations())
         return list(set(corporations))
 
     security.declarePublic('get_corporations_history')
@@ -176,9 +176,9 @@ class Inspection(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
                         if corp.portal_type == 'Corporation' and
                         api.content.get_state(corp) == 'disabled']
         if self.getUse_bound_licence_infos():
-            bound_licence = self.getBound_licence()
-            if bound_licence:
-                corporations.extend(bound_licence.get_corporations_history())
+            bound_licences = self.getBound_licences()
+            if bound_licences:
+                corporations.extend(bound_licences[0].get_corporations_history())
         return list(set(corporations))
 
     security.declarePublic('getTenants')
@@ -350,8 +350,8 @@ def finalize_schema(schema, folderish=False, moveDiscussion=True):
     """
     schema['folderCategory'].widget.visible = {'edit': 'invisible', 'view': 'invisible'}
     schema.moveField('description', after='inspection_context')
-    schema.moveField('bound_licence', before='workLocations')
-    schema.moveField('use_bound_licence_infos', after='bound_licence')
+    schema.moveField('bound_licences', before='workLocations')
+    schema.moveField('use_bound_licence_infos', after='bound_licences')
     return schema
 
 

@@ -5,7 +5,7 @@
 
             <metal:applicants fill-slot="applicant_slot">
                 <metal:plaintiffs_macro use-macro="here/@@licencemacros/urbanPlaintiffsMacro" />
-                <tal:show_licence_applicants condition= "here/getBound_licence">
+                <tal:show_licence_applicants condition= "here/getBound_licences">
                     <metal:applicants_and_corporations_macro use-macro="here/@@licencemacros/urbanBoundLicenceApplicants" />
                 </tal:show_licence_applicants>
                 <tal:show_disabled_applicants condition= "here/get_applicants_history">
