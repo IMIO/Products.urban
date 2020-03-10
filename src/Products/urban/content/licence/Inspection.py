@@ -29,7 +29,7 @@ slave_fields_bound_licence = (
 
 schema = Schema((
     ReferenceField(
-        name='bound_licence',
+        name='bound_licences',
         widget=ReferenceBrowserWidget(
             allow_search=True,
             allow_browse=False,
@@ -38,7 +38,7 @@ schema = Schema((
             show_indexes=False,
             wild_card_search=True,
             restrict_browsing_to_startup_directory=True,
-            label=_('urban_label_bound_licence', default='Bound licence'),
+            label=_('urban_label_bound_licences', default='Bound licences'),
         ),
         allowed_types=[
             t for t in URBAN_TYPES
@@ -53,7 +53,7 @@ schema = Schema((
             ]
         ],
         schemata='urban_description',
-        multiValued=False,
+        multiValued=True,
         relationship="bound_licence",
     ),
     BooleanField(
