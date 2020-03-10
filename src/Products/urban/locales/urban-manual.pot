@@ -147,9 +147,6 @@ msgstr ""
 msgid "Ongoing events"
 msgstr ""
 
-msgid "OpinionRequestEventType"
-msgstr ""
-
 msgid "Parcel"
 msgstr ""
 
@@ -1646,6 +1643,10 @@ msgstr ""
 #. Default: "Eventdatelabel"
 #: UrbanEventType.py
 msgid "urban_label_eventDateLabel"
+msgstr ""
+
+#: UrbanEventType.py
+msgid "urban_label_eventPortalType"
 msgstr ""
 
 #. Default: "Eventtypetype"

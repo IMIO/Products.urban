@@ -81,6 +81,9 @@ msgstr ""
 msgid "Geometrician"
 msgstr ""
 
+msgid "OpinionRequestEventType"
+msgstr ""
+
 msgid "ParcelOutLicence"
 msgstr ""
 
