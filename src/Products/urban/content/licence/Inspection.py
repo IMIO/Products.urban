@@ -113,7 +113,7 @@ class Inspection(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
         if self.getUse_bound_licence_infos():
             bound_licences = self.getBound_licences()
             if bound_licences:
-                return bound_licence[0].getWorkLocations()
+                return bound_licences[0].getWorkLocations()
 
         field = self.getField('workLocations')
         worklocations = field.get(self)
