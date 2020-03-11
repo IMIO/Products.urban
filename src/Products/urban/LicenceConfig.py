@@ -70,7 +70,7 @@ schema = Schema((
     ),
     LinesField(
         name='usedAttributes',
-        widget=MultiSelectionWidget(
+        widget=InAndOutWidget(
             description="Select the optional fields you want to use. Multiple selection or deselection when clicking with CTRL",
             description_msgid="urban_descr_usedAttributes",
             size=10,
