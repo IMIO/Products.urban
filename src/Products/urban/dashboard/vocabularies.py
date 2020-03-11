@@ -4,14 +4,16 @@ from imio.dashboard.vocabulary import ConditionAwareCollectionVocabulary
 
 from plone import api
 
+from Products.urban import UrbanMessage as _
 from Products.urban.config import URBAN_TYPES
 from Products.urban.config import URBAN_CWATUPE_TYPES
 from Products.urban.config import URBAN_CODT_TYPES
 from Products.urban.config import URBAN_ENVIRONMENT_TYPES
 from Products.urban.dashboard import utils
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 
 from zope.globalrequest import getRequest
-from zope.i18n import translate as _
+from zope.i18n import translate
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
 
@@ -33,7 +35,7 @@ class WorkflowStatesVocabulary(object):
                 SimpleTerm(
                     state.id,
                     state.id,
-                    _(state.id, 'plone', context=context.REQUEST)
+                    translate(state.id, 'plone', context=context.REQUEST)
                 )
             )
 
@@ -47,6 +49,26 @@ class LicencesWorkflowStates(WorkflowStatesVocabulary):
     """
 
     workflow_name = 'urban_licence_workflow'
+
+
+class InspectionFollowupVocabulary(object):
+    """
+    Return all possible inspection report followup propositions
+    """
+    def __call__(self, context):
+        voc = UrbanVocabulary('urbaneventtypes', vocType="FollowUpEventType", value_to_use='title')
+        config_voc = voc.getDisplayList(licence_type='Inspection')
+        portal = api.portal.get()
+        full_voc = [
+            ('close', translate(_('close_inspection'), context=portal.REQUEST)),
+            ('ticket', translate(_('ticket'), context=portal.REQUEST)),
+        ]
+        for key in config_voc.keys():
+            full_voc.append((key, config_voc.getValue(key)))
+
+        vocabulary_terms = [SimpleTerm(k, k, v) for k, v in full_voc]
+        vocabulary = SimpleVocabulary(sorted(vocabulary_terms, key=lambda term: term.title))
+        return vocabulary
 
 
 class DashboardCollections(ConditionAwareCollectionVocabulary):

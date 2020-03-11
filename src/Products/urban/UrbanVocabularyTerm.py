@@ -179,11 +179,12 @@ class UrbanVocabulary(object):
         self.with_empty_value = with_empty_value
         self.datagridfield_key = datagridfield_key
 
-    def get_raw_voc(self, context):
+    def get_raw_voc(self, context, licence_type=''):
         portal_urban = api.portal.get_tool('portal_urban')
         raw_voc = portal_urban.get_vocabulary(
             in_urban_config=self.inUrbanConfig,
             context=context,
+            licence_type=licence_type,
             name=self.path
         )
         voc = [v for v in raw_voc if v['portal_type'] in self.vocType]
@@ -194,8 +195,8 @@ class UrbanVocabulary(object):
         default_values = [v['id'] for v in raw_voc if v['isDefaultValue']]
         return default_values
 
-    def getDisplayList(self, context):
-        raw_voc = self.get_raw_voc(context)
+    def getDisplayList(self, context=None, licence_type=''):
+        raw_voc = self.get_raw_voc(context, licence_type)
         if getRequest() and getRequest().getURL().endswith('edit'):
             result = DisplayList([(v['id'], u'{}{}'.format(v.get('numbering', ''), v['title'])) for v in raw_voc if v['enabled']])
         else:
