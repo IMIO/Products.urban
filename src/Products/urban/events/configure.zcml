@@ -211,6 +211,10 @@
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".ticketEvents.setTicketBoundLicence" />
 
+  <subscriber for="..interfaces.ITicket
+                   Products.DCWorkflow.interfaces.IAfterTransitionEvent"
+              handler=".ticketEvents.notifyBoundInspections" />
+
   <!-- do this to update schedule tasks when sending a college event to PM -->
   <subscriber for="..interfaces.IUrbanEvent
                    imio.pm.wsclient.interfaces.ISentToPMEvent"

@@ -447,4 +447,20 @@
         name="urban.schedule.condition.followups_done"
     />
 
+    <adapter
+        for="Products.urban.interfaces.IInspection
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.FollowUpTicketCreated"
+        name="urban.schedule.condition.followup_ticket_created"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.IInspection
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.FollowUpTicketClosed"
+        name="urban.schedule.condition.followup_ticket_is_closed"
+    />
+
 </configure>
