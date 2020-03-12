@@ -79,6 +79,9 @@ msgstr "Lettre de notaire"
 msgid "Nothing to show !!!"
 msgstr "Rien à afficher !!!"
 
+msgid "OpinionRequestEventType"
+msgstr "Type d'événement de demande d'avis"
+
 msgid "ParcelOutLicence"
 msgstr "Permis d'urbanisation"
 
@@ -151,6 +154,9 @@ msgstr "Evénement lié à une demande d'avis"
 
 msgid "UrbanEventType"
 msgstr "Type d'événement du dossier"
+
+msgid "UrbanTemplate"
+msgstr "Modèle de document Urban"
 
 # control panel
 msgid "UrbanTool"

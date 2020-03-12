@@ -84,6 +84,9 @@ msgstr ""
 msgid "Geometrician"
 msgstr ""
 
+msgid "OpinionRequestEventType"
+msgstr ""
+
 msgid "ParcelOutLicence"
 msgstr ""
 
@@ -127,6 +130,9 @@ msgid "MiscDemand"
 msgstr ""
 
 msgid "EnvironmentRubricTerm"
+msgstr ""
+
+msgid "UrbanTemplate"
 msgstr ""
 
 #status messages...

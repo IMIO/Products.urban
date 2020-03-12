@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2020-03-04 12:38+0000\n"
+"POT-Creation-Date: 2020-03-12 11:20+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "X-is-fallback-for: fr-fr fr-be fr-ca\n"
 
 #. Default: "urban"
-#: ../setuphandlers.py:296
+#: ../setuphandlers.py:297
 msgid "%s_folder_title"
 msgstr ""
 
@@ -98,7 +98,7 @@ msgid "Add this parcel"
 msgstr "Ajouter cette parcelle"
 
 #. Default: "urban"
-#: ../setuphandlers.py:969
+#: ../setuphandlers.py:970
 msgid "All"
 msgstr "Tous"
 
@@ -540,9 +540,17 @@ msgstr "Type de permis"
 msgid "Listing file"
 msgstr ""
 
+#: ../interfaces.py:728
+msgid "Mailing limit"
+msgstr ""
+
 #: ../profiles/default/actions.xml
 msgid "Map"
 msgstr "Carte"
+
+#: ../interfaces.py:729
+msgid "Max items allowed for immediate mailing"
+msgstr ""
 
 #: ../profiles.zcml:59
 msgid "Migrations profile for urban."
@@ -581,9 +589,6 @@ msgstr ""
 msgid "Ongoing events"
 msgstr "Événements en cours"
 
-msgid "OpinionRequestEventType"
-msgstr "Type d'événement de demande d'avis"
-
 msgid "Parcel"
 msgstr "Parcelle"
 
@@ -593,13 +598,13 @@ msgstr "Permis d'urbanisation"
 msgid "PatrimonyCertificate"
 msgstr "Certificat de patrimoine"
 
-#: ../interfaces.py:728
+#: ../interfaces.py:743
 msgid "Planned claimants imports"
 msgstr ""
 
 #: ../interfaces.py:718
-msgid "Planned inquiries"
-msgstr "Rayons d'enquête planifiés"
+msgid "Planned mailings"
+msgstr ""
 
 msgid "PreliminaryNotice"
 msgstr "Demande d'avis préalable"
@@ -651,7 +656,7 @@ msgid "RoadDecree"
 msgstr "Décret Voirie"
 
 #. Default: "imio.schedule"
-#: ../setuphandlers.py:324
+#: ../setuphandlers.py:325
 msgid "ScheduleConfig"
 msgstr "Configuration d'échéancier"
 
@@ -779,7 +784,7 @@ msgid "Update"
 msgstr "Mettre à jour"
 
 #. Default: "urban"
-#: ../setuphandlers.py:844
+#: ../setuphandlers.py:845
 msgid "Urban"
 msgstr ""
 
@@ -981,7 +986,7 @@ msgid "architect_residing"
 msgstr "${name}, dont les bureaux se situent ${address}"
 
 #. Default: "urban"
-#: ../setuphandlers.py:884
+#: ../setuphandlers.py:885
 msgid "architects_folder_title"
 msgstr "Architectes"
 
@@ -1087,6 +1092,7 @@ msgid "click_to_view_or_add"
 msgstr "Cliquez ici pour voir ou ajouter des documents"
 
 #: ../content/UrbanEventInspectionReport.py:137
+#: ../dashboard/vocabularies.py:63
 msgid "close_inspection"
 msgstr "clôturer le dossier"
 
@@ -1184,7 +1190,7 @@ msgid "creation date"
 msgstr "Date de création"
 
 #. Default: "urban"
-#: ../setuphandlers.py:744
+#: ../setuphandlers.py:745
 msgid "dashboardtemplates_folder_title"
 msgstr "Modèles tableaux de bord"
 
@@ -1314,7 +1320,7 @@ msgid "envclasstwos"
 msgstr "Permis d'environnement classe 2"
 
 #. Default: "urban"
-#: ../setuphandlers.py:785
+#: ../setuphandlers.py:786
 msgid "environmenttemplates_folder_title"
 msgstr "modèles des procédures d'environnement"
 
@@ -1582,19 +1588,19 @@ msgstr "${cityName}, le ${formattedDate}"
 
 # this is an HTML content for the front-page
 #. Default: "urban"
-#: ../setuphandlers.py:816
+#: ../setuphandlers.py:817
 msgid "front_page_descr"
 msgstr "Bienvenue sur le site vous permettant d'utiliser la gestion des permis d'urbanisme"
 
 # this is an HTML content for the front-page
 #. Default: "urban"
-#: ../setuphandlers.py:817
+#: ../setuphandlers.py:818
 msgid "front_page_text"
 msgstr "<p>L'application intègre la gestion des permis d'urbanisme, d'urbanisation, des déclarations, divisions notariales, CU1, CU2, lettres d'informations notariales, rendez-vous, avant-projets et déclarations environnementales :</p><ul><li>gestion de la demande</li><li>gestion des demandeurs, architectes, agents traitants, ...</li><li>production des documents</li><li>workflow de suivi de la demande</li><li>cartographie avec calcul du rayon de 50m, visualisation des parcelles, ...</li><li>échéancier</li><li>...</li></ul><p><a href='urban'>Cliquez ici pour accéder à l'application</a></p><p class='discreet'>Vous devez disposer d'un nom d'utilisateur et d'un mot de passe pour accéder à l'application</p>"
 
 # title of the front-page
 #. Default: "urban"
-#: ../setuphandlers.py:815
+#: ../setuphandlers.py:816
 msgid "front_page_title"
 msgstr "Gestion de l'Urbanisme"
 
@@ -1621,13 +1627,13 @@ msgid "generate_a_linked_doc"
 msgstr "Générer un document lié au dossier"
 
 #. Default: "urban"
-#: ../setuphandlers.py:898
+#: ../setuphandlers.py:899
 msgid "geometricians_folder_title"
 msgstr "Géomètres"
 
 #. Default: "Global templates"
 #: ../browser/templates/templatessummary.pt:19
-#: ../setuphandlers.py:756
+#: ../setuphandlers.py:757
 msgid "globaltemplates_folder_title"
 msgstr "Modèles généraux"
 
@@ -1654,12 +1660,8 @@ msgstr "Choisissez une des 3 recherches ci-dessous.  Si vous savez exactement ce
 msgid "inadmissibilityreasons_folder_title"
 msgstr "Motifs d'irrecevabilité"
 
-#: ../interfaces.py:729
+#: ../interfaces.py:744
 msgid "inquiries planned for claimants imports"
-msgstr ""
-
-#: ../interfaces.py:719
-msgid "inquiries planned for radius search"
 msgstr ""
 
 #. Default: "Inquiry data"
@@ -1932,6 +1934,14 @@ msgstr "Particularités du bien (urbanisme)"
 msgid "lotusages_folder_title"
 msgstr "Destination"
 
+#: ../interfaces.py:719
+msgid "mailings planned"
+msgstr ""
+
+#: ../interfaces.py:734
+msgid "mailings planned for radius search"
+msgstr ""
+
 msgid "mainsignatures_folder_title"
 msgstr "Signatures principales"
 
@@ -2036,7 +2046,7 @@ msgid "not_permitted_to_add_urbanevent"
 msgstr "Vous ne pouvez pas générer de documents"
 
 #. Default: "urban"
-#: ../setuphandlers.py:912
+#: ../setuphandlers.py:913
 msgid "notaries_folder_title"
 msgstr "Notaires"
 
@@ -2108,7 +2118,7 @@ msgid "parcelLinkedLicences"
 msgstr "Dossier(s) lié(s)"
 
 #. Default: "urban"
-#: ../setuphandlers.py:926
+#: ../setuphandlers.py:927
 msgid "parcellings_folder_title"
 msgstr "Lotissements"
 
@@ -2210,10 +2220,6 @@ msgstr "Canalisations"
 #: ../browser/licence/templates/licencemacros.pt:146
 msgid "plaintiffs"
 msgstr "Plaignant(s)"
-
-#: ../dashboard/vocabularies.py:36
-msgid "plone"
-msgstr ""
 
 #. Default: "Urban configuration"
 #: ../browser/templates/portlet_urbanconfig.pt:16
@@ -2443,6 +2449,7 @@ msgid "tenants"
 msgstr "Locataires"
 
 #: ../content/UrbanEventInspectionReport.py:138
+#: ../dashboard/vocabularies.py:64
 msgid "ticket"
 msgstr "PV"
 
@@ -2989,12 +2996,8 @@ msgstr "Bis"
 msgid "urban_label_bound_inspection"
 msgstr "Dossier d'inspection lié"
 
-#. Default: "Bound licence"
-#: ../content/licence/Inspection.py:41
-msgid "urban_label_bound_licence"
-msgstr "Dossier lié"
-
 #. Default: "Bound licences"
+#: ../content/licence/Inspection.py:41
 #: ../content/licence/Ticket.py:73
 msgid "urban_label_bound_licences"
 msgstr "Dossiers liés"
@@ -3106,7 +3109,7 @@ msgstr "Portée de l'arrêté de classement"
 #. Default: "College Holidays"
 #: ../UrbanTool.py:135
 msgid "urban_label_collegeHolidays"
-msgstr ""
+msgstr "Vacances du College"
 
 msgid "urban_label_collegeReportDecisionDate"
 msgstr "Date de décision du collège"
@@ -3438,6 +3441,10 @@ msgstr "Date"
 #: UrbanEventType.py
 msgid "urban_label_eventDateLabel"
 msgstr "Label de la date de l'événement"
+
+#: UrbanEventType.py
+msgid "urban_label_eventPortalType"
+msgstr "Type de l'événement"
 
 #. Default: "Destinataire"
 #: ../UrbanEvent.py:221
@@ -5405,12 +5412,12 @@ msgid "urbancertificatetwos"
 msgstr "Certificats d'urbanisme 2"
 
 #. Default: "urban"
-#: ../setuphandlers.py:419
+#: ../setuphandlers.py:420
 msgid "urbaneventtypes_folder_title"
 msgstr "Types d'évènements"
 
 #. Default: "urban"
-#: ../setuphandlers.py:773
+#: ../setuphandlers.py:774
 msgid "urbantemplates_folder_title"
 msgstr "modèles des procédures d'urbanisme"
 
