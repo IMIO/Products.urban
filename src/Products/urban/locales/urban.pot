@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2020-03-04 12:38+0000\n"
+"POT-Creation-Date: 2020-03-12 11:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Domain: urban\n"
 
 #. Default: "urban"
-#: ../setuphandlers.py:296
+#: ../setuphandlers.py:297
 msgid "%s_folder_title"
 msgstr ""
 
@@ -96,7 +96,7 @@ msgid "Add this parcel"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:969
+#: ../setuphandlers.py:970
 msgid "All"
 msgstr ""
 
@@ -523,8 +523,16 @@ msgstr ""
 msgid "Listing file"
 msgstr ""
 
+#: ../interfaces.py:728
+msgid "Mailing limit"
+msgstr ""
+
 #: ../profiles/default/actions.xml
 msgid "Map"
+msgstr ""
+
+#: ../interfaces.py:729
+msgid "Max items allowed for immediate mailing"
 msgstr ""
 
 #: ../profiles.zcml:59
@@ -564,9 +572,6 @@ msgstr ""
 msgid "Ongoing events"
 msgstr ""
 
-msgid "OpinionRequestEventType"
-msgstr ""
-
 msgid "Parcel"
 msgstr ""
 
@@ -576,12 +581,12 @@ msgstr ""
 msgid "PatrimonyCertificate"
 msgstr ""
 
-#: ../interfaces.py:728
+#: ../interfaces.py:743
 msgid "Planned claimants imports"
 msgstr ""
 
 #: ../interfaces.py:718
-msgid "Planned inquiries"
+msgid "Planned mailings"
 msgstr ""
 
 msgid "PreliminaryNotice"
@@ -634,7 +639,7 @@ msgid "RoadDecree"
 msgstr ""
 
 #. Default: "imio.schedule"
-#: ../setuphandlers.py:324
+#: ../setuphandlers.py:325
 msgid "ScheduleConfig"
 msgstr ""
 
@@ -761,7 +766,7 @@ msgid "Update"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:844
+#: ../setuphandlers.py:845
 msgid "Urban"
 msgstr ""
 
@@ -961,7 +966,7 @@ msgid "architect_residing"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:884
+#: ../setuphandlers.py:885
 msgid "architects_folder_title"
 msgstr ""
 
@@ -1067,6 +1072,7 @@ msgid "click_to_view_or_add"
 msgstr ""
 
 #: ../content/UrbanEventInspectionReport.py:137
+#: ../dashboard/vocabularies.py:63
 msgid "close_inspection"
 msgstr ""
 
@@ -1161,7 +1167,7 @@ msgid "creation date"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:744
+#: ../setuphandlers.py:745
 msgid "dashboardtemplates_folder_title"
 msgstr ""
 
@@ -1291,7 +1297,7 @@ msgid "envclasstwos"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:785
+#: ../setuphandlers.py:786
 msgid "environmenttemplates_folder_title"
 msgstr ""
 
@@ -1553,17 +1559,17 @@ msgid "formatted_date_with_cityname"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:816
+#: ../setuphandlers.py:817
 msgid "front_page_descr"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:817
+#: ../setuphandlers.py:818
 msgid "front_page_text"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:815
+#: ../setuphandlers.py:816
 msgid "front_page_title"
 msgstr ""
 
@@ -1589,13 +1595,13 @@ msgid "generate_a_linked_doc"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:898
+#: ../setuphandlers.py:899
 msgid "geometricians_folder_title"
 msgstr ""
 
 #. Default: "Global templates"
 #: ../browser/templates/templatessummary.pt:19
-#: ../setuphandlers.py:756
+#: ../setuphandlers.py:757
 msgid "globaltemplates_folder_title"
 msgstr ""
 
@@ -1622,12 +1628,8 @@ msgstr ""
 msgid "inadmissibilityreasons_folder_title"
 msgstr ""
 
-#: ../interfaces.py:729
+#: ../interfaces.py:744
 msgid "inquiries planned for claimants imports"
-msgstr ""
-
-#: ../interfaces.py:719
-msgid "inquiries planned for radius search"
 msgstr ""
 
 #. Default: "Inquiry data"
@@ -1900,6 +1902,14 @@ msgstr ""
 msgid "lotusages_folder_title"
 msgstr ""
 
+#: ../interfaces.py:719
+msgid "mailings planned"
+msgstr ""
+
+#: ../interfaces.py:734
+msgid "mailings planned for radius search"
+msgstr ""
+
 msgid "mainsignatures_folder_title"
 msgstr ""
 
@@ -2004,7 +2014,7 @@ msgid "not_permitted_to_add_urbanevent"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:912
+#: ../setuphandlers.py:913
 msgid "notaries_folder_title"
 msgstr ""
 
@@ -2075,7 +2085,7 @@ msgid "parcelLinkedLicences"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:926
+#: ../setuphandlers.py:927
 msgid "parcellings_folder_title"
 msgstr ""
 
@@ -2176,10 +2186,6 @@ msgstr ""
 #. Default: "Plaintiff(s)"
 #: ../browser/licence/templates/licencemacros.pt:146
 msgid "plaintiffs"
-msgstr ""
-
-#: ../dashboard/vocabularies.py:36
-msgid "plone"
 msgstr ""
 
 #. Default: "Urban configuration"
@@ -2409,6 +2415,7 @@ msgid "tenants"
 msgstr ""
 
 #: ../content/UrbanEventInspectionReport.py:138
+#: ../dashboard/vocabularies.py:64
 msgid "ticket"
 msgstr ""
 
@@ -2956,12 +2963,8 @@ msgstr ""
 msgid "urban_label_bound_inspection"
 msgstr ""
 
-#. Default: "Bound licence"
-#: ../content/licence/Inspection.py:41
-msgid "urban_label_bound_licence"
-msgstr ""
-
 #. Default: "Bound licences"
+#: ../content/licence/Inspection.py:41
 #: ../content/licence/Ticket.py:73
 msgid "urban_label_bound_licences"
 msgstr ""
@@ -3402,6 +3405,10 @@ msgstr ""
 #. Default: "Eventdatelabel"
 #: UrbanEventType.py
 msgid "urban_label_eventDateLabel"
+msgstr ""
+
+#: UrbanEventType.py
+msgid "urban_label_eventPortalType"
 msgstr ""
 
 #. Default: "Destinataire"
@@ -5369,12 +5376,12 @@ msgid "urbancertificatetwos"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:419
+#: ../setuphandlers.py:420
 msgid "urbaneventtypes_folder_title"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:773
+#: ../setuphandlers.py:774
 msgid "urbantemplates_folder_title"
 msgstr ""
 
