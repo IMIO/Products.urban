@@ -285,4 +285,36 @@
         factory=".creation.SomeInspectionFollowupsToSend"
         name="urban.schedule.condition.followups_to_send"
     />
+
+    <adapter
+        for="Products.urban.interfaces.IInspection
+             imio.schedule.content.task_config.ITaskConfig"
+        provides="imio.schedule.interfaces.ICreationCondition"
+        factory=".creation.ShouldEndInspection"
+        name="urban.schedule.condition.should_end_inspection"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.IInspection
+             imio.schedule.content.task_config.ITaskConfig"
+        provides="imio.schedule.interfaces.ICreationCondition"
+        factory=".creation.ShouldCreateTicket"
+        name="urban.schedule.condition.should_create_ticket"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.IInspection
+             imio.schedule.content.task_config.ITaskConfig"
+        provides="imio.schedule.interfaces.ICreationCondition"
+        factory=".creation.FollowUpTicketCreated"
+        name="urban.schedule.condition.followup_ticket_created"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.IInspection
+             imio.schedule.content.task_config.ITaskConfig"
+        provides="imio.schedule.interfaces.ICreationCondition"
+        factory=".creation.FollowUpTicketClosed"
+        name="urban.schedule.condition.followup_ticket_is_closed"
+    />
 </configure>

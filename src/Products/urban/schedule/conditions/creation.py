@@ -475,3 +475,51 @@ class SomeInspectionFollowupsToSend(InspectionCreationCondition):
             if api.content.get_state(follow_up_event) == 'to_send':
                 return True
         return False
+
+
+class ShouldEndInspection(InspectionCreationCondition):
+    """
+    Should end inspection when 'close' is selected in the followup proposition of the
+    last inspection report event.
+    """
+    def evaluate(self):
+        report = self.get_current_inspection_report()
+        if report and 'close' in report.getFollowup_proposition():
+            return True
+        return False
+
+
+class ShouldCreateTicket(InspectionCreationCondition):
+    """
+    Should create Ticket when 'ticket' is selected in the followup proposition of the
+    last inspection report event.
+    """
+    def evaluate(self):
+        report = self.get_current_inspection_report()
+        if report and 'ticket' in report.getFollowup_proposition():
+            return True
+        return False
+
+
+class FollowUpTicketCreated(InspectionCreationCondition):
+    """
+    A ticket has been created as an inspection followup result.
+    """
+    def evaluate(self):
+        followup_ticket = self.get_current_followup_ticket()
+        if not followup_ticket:
+            return False
+        created = api.content.get_state(followup_ticket) != 'ended'
+        return created
+
+
+class FollowUpTicketClosed(InspectionCreationCondition):
+    """
+    The ticket created as a followup action has been closed.
+    """
+    def evaluate(self):
+        followup_ticket = self.get_current_followup_ticket()
+        if not followup_ticket:
+            return False
+        is_closed = api.content.get_state(followup_ticket) == 'ended'
+        return is_closed

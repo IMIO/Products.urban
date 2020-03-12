@@ -80,6 +80,12 @@ msgstr "Avis du FD pas sélectionné dans le type de procédure"
 msgid "urban.schedule.condition.folder_complete"
 msgstr "Accusé de réception fait."
 
+msgid "urban.schedule.condition.followup_ticket_created"
+msgstr "Créer un nouveau PV référençant ce dossier"
+
+msgid "urban.schedule.condition.followup_ticket_is_closed"
+msgstr "Clôre le PV lié à ce dossier"
+
 msgid "urban.schedule.condition.followups_done"
 msgstr "Cloturer les événement de réponse administrative"
 
@@ -143,11 +149,23 @@ msgstr "Créer l'événement 'Réception du choix de la procédure par le FD' et
 msgid "urban.schedule.condition.refused"
 msgstr "Refuser le dossier"
 
+msgid "urban.schedule.condition.report_event_redacted"
+msgstr "Créer un nouveau rapport d'inspection et le proposer pour validation"
+
 msgid "urban.schedule.condition.rubrics_choice_done"
 msgstr "Sélectionner les rubriques du dossier"
 
+msgid "urban.schedule.condition.should_create_report_event"
+msgstr "Doit créer un événement de rapport d'inspection"
+
+msgid "urban.schedule.condition.should_create_ticket"
+msgstr "'Créer un PV' est sélectionné dans la proposition de suivi du dernier rapport"
+
 msgid "urban.schedule.condition.should_do_followups"
 msgstr "Des propositions de suivis 'réponse administrative' ont été décidées dans le dernier rapport d'inspection"
+
+msgid "urban.schedule.condition.should_end_inspection"
+msgstr "'Clore le dossier' est sélectionné dans la proposition de suivi du dernier rapport"
 
 msgid "urban.schedule.condition.should_write_one_followup"
 msgstr "Il reste au moins un événement de réponse administrative à créer et rédiger"

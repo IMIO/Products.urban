@@ -69,3 +69,15 @@ def setTicketBoundLicence(ticket, event):
                 new_licence_annotations['urban.bound_tickets'] = values
 
     annotations['urban.ticket_bound_licences'] = new_bound_UIDs
+
+
+def notifyBoundInspections(ticket, event):
+    """
+    When changing the ticket state -> notify the bound inspections
+    """
+    catalog = api.portal.get_tool('portal_catalog')
+    annotations = IAnnotations(ticket)
+    inspection_UIDs = annotations.get('urban.ticket_bound_inspections') or ''
+    for inspection_brain in catalog(UID=inspection_UIDs):
+        inspection = inspection_brain.getObject()
+        notify(ObjectModifiedEvent(inspection))
