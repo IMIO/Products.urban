@@ -129,6 +129,9 @@ msgstr ""
 msgid "EnvironmentRubricTerm"
 msgstr ""
 
+msgid "UrbanTemplate"
+msgstr ""
+
 #status messages...
 msgid "db_connection_successfull"
 msgstr ""

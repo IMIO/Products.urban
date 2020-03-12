@@ -149,6 +149,9 @@ msgstr "Evénement lié à une demande d'avis"
 msgid "UrbanEventType"
 msgstr "Type d'événement du dossier"
 
+msgid "UrbanTemplate"
+msgstr "Modèle de document Urban"
+
 # control panel
 msgid "UrbanTool"
 msgstr "Configuration de 'urban'"
