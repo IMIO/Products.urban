@@ -506,7 +506,7 @@ class FollowUpTicketCreated(InspectionCreationCondition):
     A ticket has been created as an inspection followup result.
     """
     def evaluate(self):
-        followup_ticket = self.get_current_followup_ticket()
+        followup_ticket = self.get_last_followup_ticket()
         if not followup_ticket:
             return False
         created = api.content.get_state(followup_ticket) != 'ended'
@@ -518,7 +518,7 @@ class FollowUpTicketClosed(InspectionCreationCondition):
     The ticket created as a followup action has been closed.
     """
     def evaluate(self):
-        followup_ticket = self.get_current_followup_ticket()
+        followup_ticket = self.get_last_followup_ticket()
         if not followup_ticket:
             return False
         is_closed = api.content.get_state(followup_ticket) == 'ended'
