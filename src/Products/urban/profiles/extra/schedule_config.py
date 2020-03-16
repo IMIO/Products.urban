@@ -44,6 +44,7 @@ schedule_config = {
                     'default_assigned_group': 'urban_editors',
                     'default_assigned_user': 'urban.assign_folder_manager',
                     'creation_state': ('incomplete', ),
+                    'ending_states': ('deposit',),
                     'start_conditions': (
                         StartConditionObject('urban.schedule.condition.complements_asked'),
                     ),
@@ -93,6 +94,7 @@ schedule_config = {
             'default_assigned_user': 'urban.assign_folder_manager',
             'creation_state': ('deposit',),
             'starting_states': ('deposit',),
+            'ending_states': ('complete', 'incomplete'),
             'start_date': 'urban.schedule.start_date.deposit_date',
             'calculation_delay': (
                 'schedule.calculation_default_delay',
@@ -116,7 +118,6 @@ schedule_config = {
                     'calculation_delay': (
                         'schedule.calculation_default_delay',
                     ),
-                    'recurrence_states': ('deposit', ),
                     'additional_delay': 5,
                 },
                 {
