@@ -26,15 +26,15 @@ def migrate_codt_buildlicences_schedule(context):
     schedule.incomplet2.notify_refused.ending_states = ()
     schedule.reception.deposit.recurrence_states = ()
     schedule.reception.deposit.activate_recurrency = False
-    if 'deposit' not in schedule.incomplet.attente_complements.ending_states:
+    if 'deposit' not in (schedule.incomplet.attente_complements.ending_states or()):
         old_states = schedule.incomplet.attente_complements.ending_states or ()
         new_states = tuple(old_states) + ('deposit',)
         schedule.incomplet.attente_complements.ending_states = new_states
-    if 'complete' not in schedule.reception.ending_states:
+    if 'complete' not in (schedule.reception.ending_states or ()):
         old_states = schedule.reception.ending_states or ()
         new_states = tuple(old_states) + ('deposit',)
         schedule.reception.ending_states = new_states
-    if 'incomplete' not in schedule.reception.ending_states:
+    if 'incomplete' not in (schedule.reception.ending_states or ()):
         old_states = schedule.reception.ending_states or ()
         new_states = tuple(old_states) + ('incomplete',)
         schedule.reception.ending_states = new_states
