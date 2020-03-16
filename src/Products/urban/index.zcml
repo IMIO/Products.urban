@@ -24,6 +24,7 @@
   <adapter name="licence_final_duedate" factory=".indexes.genericlicence_final_duedate" />
   <adapter name="investigationStart" factory=".indexes.investigation_start_date" />
   <adapter name="investigationEnd" factory=".indexes.investigation_end_date" />
+  <adapter name="Subject" factory=".indexes.inspection_task_followups" />
 
   <!-- Unindex UrbanEvent, UrbanDoc, Applicant and PortionOut -->
 

@@ -146,6 +146,7 @@ class OpinionRequestEventType(OrderedBaseFolder, UrbanEventType, UrbanVocabulary
 
 
     security.declarePublic('getAddressCSV')
+
     def getAddressCSV(self):
         name = self.Title()
         lines = self.Description()[3:-4].split('<br />')
@@ -153,6 +154,16 @@ class OpinionRequestEventType(OrderedBaseFolder, UrbanEventType, UrbanVocabulary
         address = lines[-2:]
         return '%s|%s|%s|%s' % (name, ' '.join(description), address[0], address[1])
 
+    security.declarePublic('mayAddOpinionRequestEvent')
+
+    def mayAddOpinionRequestEvent(self, inquiry):
+        """
+           This is used as TALExpression for the UrbanEventOpinionRequest
+           We may add an OpinionRequest if we asked one in an inquiry on the licence
+           We may add another if another inquiry defined on the licence ask for it and so on
+        """
+        may_add = inquiry.mayAddOpinionRequestEvent(self.id)
+        return may_add
 
 
 registerType(OpinionRequestEventType, PROJECTNAME)

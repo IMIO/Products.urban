@@ -72,6 +72,7 @@ ADD_CONTENT_PERMISSIONS = {
     'CODT_ParcelOutLicence': 'urban: Add CODT_ParcelOutLicence',
     'CODT_UniqueLicence': 'urban: Add CODT_UniqueLicence',
     'CODT_UrbanCertificateTwo': 'urban: Add CODT_UrbanCertificateTwo',
+    'CODT_UrbanCertificateBase': 'urban: Add CODT_UrbanCertificateBase',
     'Contact': 'urban: Add Contact',
     'Corporation': 'urban: Add Corporation',
     'City': 'urban: Add City',
@@ -139,6 +140,7 @@ setDefaultRoles('urban: Add CODT_ParcelOutLicence', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add CODT_UniqueLicence', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add CODT_UrbanCertificateOne', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add CODT_UrbanCertificateTwo', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add CODT_UrbanCertificateBase', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add Contact', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add Corporation', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add ConfigTest', ("Manager", ))

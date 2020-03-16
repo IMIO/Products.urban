@@ -89,28 +89,6 @@ schema = Schema((
         multiValued=True,
         relationship="bound_licences",
     ),
-    LinesField(
-        name='offense_articles',
-        widget=MultiSelectionWidget(
-            format='checkbox',
-            label=_('urban_label_offense_articles', default='Offense_articles'),
-        ),
-        schemata='urban_description',
-        multiValued=True,
-        vocabulary=UrbanVocabulary('offense_articles'),
-        default_method='getDefaultValue',
-    ),
-    TextField(
-        name='conclusions',
-        widget=RichWidget(
-            label=_('urban_label_conclusions', default='Conclusions'),
-        ),
-        default_content_type='text/html',
-        allowable_content_types=('text/html',),
-        schemata='urban_inspection',
-        default_method='getDefaultText',
-        default_output_type='text/html',
-    ),
 ),
 )
 Ticket_schema = BaseFolderSchema.copy() + \
@@ -279,7 +257,6 @@ def finalize_schema(schema, folderish=False, moveDiscussion=True):
        Finalizes the type schema to alter some fields
     """
     schema['folderCategory'].widget.visible = {'edit': 'invisible', 'view': 'invisible'}
-    schema.moveField('offense_articles', after='licenceSubject')
     schema.moveField('referenceProsecution', after='reference')
     schema.moveField('bound_inspection', before='workLocations')
     schema.moveField('use_bound_inspection_infos', after='bound_inspection')

@@ -9,6 +9,10 @@
   </records>
   <records interface="Products.urban.interfaces.IAsyncClaimantsImports" field="claimants_to_import">
   </records>
+  <records interface="Products.urban.interfaces.IAsyncMailing" field="mailing_items_limit">
+  </records>
+  <records interface="Products.urban.interfaces.IAsyncMailing" field="mailings_to_do">
+  </records>
   <records interface="plone.app.referenceintegrity.interfaces.ISettings">
       <value key="reference_types">
           <element>licenceArchitects</element>

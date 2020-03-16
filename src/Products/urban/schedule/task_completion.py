@@ -5,6 +5,8 @@ from imio.schedule.browser.task_completion import TaskEndStatusView
 
 from plone import api
 
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
+
 
 class MockTask(object):
     """
@@ -103,4 +105,111 @@ class OpinionRequestReceivedStatus(TaskEndStatusView):
         List all the opinion request status.
         """
         matched, not_matched = [], []
+        return matched, not_matched
+
+
+class FollowupEventsRedactedStatus(TaskEndSimpleStatusView):
+    """
+    """
+
+    def get_conditions_status(self):
+        """
+        List all the opinion request status.
+        """
+        matched, not_matched = [], []
+        licence = self.task.get_container()
+
+        report_event = licence.getCurrentReportEvent()
+        if not report_event:
+            return matched, not_matched
+
+        selected_followups = report_event.get_regular_followup_propositions()
+        followup_events = licence.getCurrentFollowUpEvents()
+        followup_events_by_id = dict([(event.getUrbaneventtypes().id, event) for event in followup_events])
+        voc = UrbanVocabulary('urbaneventtypes', vocType="FollowUpEventType", value_to_use='title')
+        all_followups_voc = voc.getDisplayList(self)
+        to_create = []
+        to_propose = []
+        for selected_followup in selected_followups:
+            if selected_followup in followup_events_by_id:
+                follow_up_event = followup_events_by_id[selected_followup]
+                if api.content.get_state(follow_up_event) == 'draft':
+                    to_propose.append(
+                        u'Proposer l\'événement <strong>"{}"</strong>'.format(
+                            follow_up_event.Title().decode('utf-8')
+                        )
+                    )
+                else:
+                    matched.append(
+                        u'Evénement <strong>"{}"</strong> proposé'.format(
+                            follow_up_event.Title().decode('utf-8')
+                        )
+                    )
+            else:
+                to_create.append(
+                    u'Créer et proposer l\'événement de réponse administrative <strong>"{}"</strong>'.format(
+                        all_followups_voc.getValue(selected_followup)
+                    )
+                )
+        not_matched.extend(to_create)
+        not_matched.extend(to_propose)
+
+        return matched, not_matched
+
+
+class FollowupEventsValidatedStatus(TaskEndSimpleStatusView):
+    """
+    """
+
+    def get_conditions_status(self):
+        """
+        List all the opinion request status.
+        """
+        matched, not_matched = [], []
+        licence = self.task.get_container()
+
+        followup_events = licence.getCurrentFollowUpEvents()
+        for followup_event in followup_events:
+            if api.content.get_state(followup_event) == 'to_validate':
+                not_matched.append(
+                    u'Valider l\'événement <strong>"{}"</strong>'.format(
+                        followup_event.Title().decode('utf-8')
+                    )
+                )
+            elif api.content.get_state(followup_event) == 'to_send':
+                matched.append(
+                    u'Evénement <strong>"{}"</strong> validé'.format(
+                        followup_event.Title().decode('utf-8')
+                    )
+                )
+
+        return matched, not_matched
+
+
+class FollowupEventsSentStatus(TaskEndSimpleStatusView):
+    """
+    """
+
+    def get_conditions_status(self):
+        """
+        List all the opinion request status.
+        """
+        matched, not_matched = [], []
+        licence = self.task.get_container()
+
+        followup_events = licence.getCurrentFollowUpEvents()
+        for followup_event in followup_events:
+            if api.content.get_state(followup_event) == 'to_send':
+                not_matched.append(
+                    u'Clôturer l\'événement <strong>"{}"</strong>'.format(
+                        followup_event.Title().decode('utf-8')
+                    )
+                )
+            elif api.content.get_state(followup_event) == 'closed':
+                matched.append(
+                    u'Evénement <strong>"{}"</strong> clôturé'.format(
+                        followup_event.Title().decode('utf-8')
+                    )
+                )
+
         return matched, not_matched

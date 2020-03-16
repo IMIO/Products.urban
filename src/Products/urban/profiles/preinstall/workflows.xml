@@ -8,6 +8,7 @@
  <object name="urbanevent_workflow" meta_type="Workflow"/>
  <object name="opinion_request_workflow" meta_type="Workflow"/>
  <object name="inspection_workflow" meta_type="Workflow"/>
+ <object name="ticket_workflow" meta_type="Workflow"/>
 <!-- ##code-section workflowobjects -->
 <!-- ##/code-section workflowobjects -->
  <bindings>
@@ -98,6 +99,9 @@
   <type type_id="OpinionRequestEventType">
      <bound-workflow workflow_id="activation_workflow" />
   </type>
+  <type type_id="FollowUpEventType">
+     <bound-workflow workflow_id="activation_workflow" />
+  </type>
   <type type_id="OrganisationTerm">
      <bound-workflow workflow_id="activation_workflow" />
   </type>
@@ -151,6 +155,9 @@
   </type>
   <type type_id="UrbanEventOpinionRequest">
      <bound-workflow workflow_id="opinion_request_workflow" />
+  </type>
+  <type type_id="UrbanEventFollowUp">
+     <bound-workflow workflow_id="urbanevent_workflow" />
   </type>
   <type type_id="UrbanEventType">
      <bound-workflow workflow_id="activation_workflow" />
@@ -223,7 +230,7 @@
   <bound-workflow workflow_id="urban_licence_workflow" />
 </type>
 <type type_id="Ticket">
-  <bound-workflow workflow_id="urban_licence_workflow" />
+  <bound-workflow workflow_id="ticket_workflow" />
 </type>
 <type type_id="UniqueLicence">
   <bound-workflow workflow_id="urban_licence_workflow" />

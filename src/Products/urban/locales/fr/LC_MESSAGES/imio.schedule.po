@@ -23,6 +23,12 @@ msgstr "Créer l'événement d'accusé de réception"
 msgid "urban.schedule.condition.acknowledgment_done"
 msgstr "Créer l'événement d'accusé de réception et le clôturer"
 
+msgid "urban.schedule.condition.all_followups_done"
+msgstr "Créer et clôturer tous les événements de réponse administrative"
+
+msgid "urban.schedule.condition.all_followups_written"
+msgstr "Créer et proposer tous les événements de réponse administrative"
+
 msgid "urban.schedule.condition.analysis_done"
 msgstr "Retour service urbanisme fait"
 
@@ -73,6 +79,24 @@ msgstr "Avis du FD pas sélectionné dans le type de procédure"
 
 msgid "urban.schedule.condition.folder_complete"
 msgstr "Accusé de réception fait."
+
+msgid "urban.schedule.condition.followup_ticket_created"
+msgstr "Créer un nouveau PV référençant ce dossier"
+
+msgid "urban.schedule.condition.followup_ticket_is_closed"
+msgstr "Clôre le PV lié à ce dossier"
+
+msgid "urban.schedule.condition.followups_done"
+msgstr "Cloturer les événement de réponse administrative"
+
+msgid "urban.schedule.condition.followups_to_send"
+msgstr "Des événement de réponse administrative sont dans l'état 'à envoyer'"
+
+msgid "urban.schedule.condition.followups_validated"
+msgstr "Valider les événements de réponse administrative"
+
+msgid "urban.schedule.condition.followups_written"
+msgstr "Rédiger les événements de réponse administrative"
 
 msgid "urban.schedule.condition.has_announcement"
 msgstr "Une annonce de projet est définie"
@@ -125,8 +149,26 @@ msgstr "Créer l'événement 'Réception du choix de la procédure par le FD' et
 msgid "urban.schedule.condition.refused"
 msgstr "Refuser le dossier"
 
+msgid "urban.schedule.condition.report_event_redacted"
+msgstr "Créer un nouveau rapport d'inspection et le proposer pour validation"
+
 msgid "urban.schedule.condition.rubrics_choice_done"
 msgstr "Sélectionner les rubriques du dossier"
+
+msgid "urban.schedule.condition.should_create_report_event"
+msgstr "Doit créer un événement de rapport d'inspection"
+
+msgid "urban.schedule.condition.should_create_ticket"
+msgstr "'Créer un PV' est sélectionné dans la proposition de suivi du dernier rapport"
+
+msgid "urban.schedule.condition.should_do_followups"
+msgstr "Des propositions de suivis 'réponse administrative' ont été décidées dans le dernier rapport d'inspection"
+
+msgid "urban.schedule.condition.should_end_inspection"
+msgstr "'Clore le dossier' est sélectionné dans la proposition de suivi du dernier rapport"
+
+msgid "urban.schedule.condition.should_write_one_followup"
+msgstr "Il reste au moins un événement de réponse administrative à créer et rédiger"
 
 msgid "urban.schedule.condition.spw_project_receipt_done"
 msgstr "Créer l'événement 'Réception du projet d'arrêté du SPW' et le clôturer"

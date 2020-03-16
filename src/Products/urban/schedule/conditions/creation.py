@@ -6,6 +6,8 @@ from plone import api
 
 from imio.schedule.content.condition import CreationCondition
 
+from Products.urban.schedule.conditions.base import BaseInspection
+
 
 class DepositDoneCondition(CreationCondition):
     """
@@ -410,3 +412,114 @@ class IsNotTemporaryLicence(CreationCondition):
         licence = self.task_container
         not_temporary = licence.getProcedureChoice() != 'temporary'
         return not_temporary
+
+
+class InspectionCreationCondition(CreationCondition, BaseInspection):
+    """
+    Base class for inspection condition checking values on the last report event
+    Provides a method returning the last relevant inspection report event.
+    """
+
+
+class ShouldDoInspectionFollowups(InspectionCreationCondition):
+    """
+    Return true if follow_ups differents of 'ticket' and 'close' are selected in
+    the current inspection report.
+    """
+
+    def evaluate(self):
+        follow_ups = self.get_followups()
+        return bool(follow_ups)
+
+
+class ShouldWriteOneInspectionFollowUp(InspectionCreationCondition):
+    """
+    Return True if:
+        - a followup proposition has no corresponding event created
+        - a followup proposition event is not at least in the state to_validate
+    """
+
+    def evaluate(self):
+        follow_ups = self.get_followups()
+        follow_up_events = self.get_followup_events()
+        if len(follow_up_events) < len(follow_ups):
+            return True
+
+        for follow_up_event in follow_up_events:
+            if api.content.get_state(follow_up_event) == 'draft':
+                return True
+        return False
+
+
+class SomeInspectionFollowupsAreWritten(InspectionCreationCondition):
+    """
+    At least one followup event is in the state 'to_validate'.
+    """
+
+    def evaluate(self):
+        follow_up_events = self.get_followup_events()
+        for follow_up_event in follow_up_events:
+            if api.content.get_state(follow_up_event) == 'to_validate':
+                return True
+        return False
+
+
+class SomeInspectionFollowupsToSend(InspectionCreationCondition):
+    """
+    At least one followup event is in the state 'to_send'.
+    """
+
+    def evaluate(self):
+        follow_up_events = self.get_followup_events()
+        for follow_up_event in follow_up_events:
+            if api.content.get_state(follow_up_event) == 'to_send':
+                return True
+        return False
+
+
+class ShouldEndInspection(InspectionCreationCondition):
+    """
+    Should end inspection when 'close' is selected in the followup proposition of the
+    last inspection report event.
+    """
+    def evaluate(self):
+        report = self.get_current_inspection_report()
+        if report and 'close' in report.getFollowup_proposition():
+            return True
+        return False
+
+
+class ShouldCreateTicket(InspectionCreationCondition):
+    """
+    Should create Ticket when 'ticket' is selected in the followup proposition of the
+    last inspection report event.
+    """
+    def evaluate(self):
+        report = self.get_current_inspection_report()
+        if report and 'ticket' in report.getFollowup_proposition():
+            return True
+        return False
+
+
+class FollowUpTicketCreated(InspectionCreationCondition):
+    """
+    A ticket has been created as an inspection followup result.
+    """
+    def evaluate(self):
+        followup_ticket = self.get_last_followup_ticket()
+        if not followup_ticket:
+            return False
+        created = api.content.get_state(followup_ticket) != 'ended'
+        return created
+
+
+class FollowUpTicketClosed(InspectionCreationCondition):
+    """
+    The ticket created as a followup action has been closed.
+    """
+    def evaluate(self):
+        followup_ticket = self.get_last_followup_ticket()
+        if not followup_ticket:
+            return False
+        is_closed = api.content.get_state(followup_ticket) == 'ended'
+        return is_closed

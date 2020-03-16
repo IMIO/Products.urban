@@ -51,22 +51,23 @@ class SQLService(object):
     Helper with sqlalchemy engine, metadata and session objects.
     """
 
-    def __init__(self, dialect='postgresql+psycopg2', user='', host='', db_name='', password='', timeout='120000'):
-        self.engine = self._init_engine(dialect, user, host, db_name, password, timeout)
+    def __init__(self, dialect='postgresql+psycopg2', user='', host='', port='', db_name='', password='', timeout='120000'):
+        self.engine = self._init_engine(dialect, user, host, port, db_name, password, timeout)
         self.metadata = MetaData(self.engine)
         self.tables = SQLTables()  # use _init_table to set sqlalchemy table objects on it
 
-    def _init_engine(self, dialect, username, host, db_name, password='', timeout=''):
+    def _init_engine(self, dialect='', username='', host='', port='', db_name='', password='', timeout=''):
         """
         Initialize the connection.
         """
         connect_args = timeout and {"options": "-c statement_timeout={t}".format(t=timeout)} or {}
         engine = create_engine(
-            '{dialect}://{username}{password}@{host}/{db_name}'.format(
+            '{dialect}://{username}{password}@{host}:{port}/{db_name}'.format(
                 dialect=dialect,
                 username=username,
                 password=password and ':{}'.format(password) or '',
                 host=host,
+                port=port or '5432',
                 db_name=db_name,
             ),
             echo=True,

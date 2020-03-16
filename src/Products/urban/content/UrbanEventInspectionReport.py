@@ -23,9 +23,7 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.urban.config import *
 from Products.urban import UrbanMessage as _
-from Products.urban.config import EMPTY_VOCAB_VALUE
 
-##code-section module-header #fill in your manual code here
 from Products.MasterSelectWidget.MasterMultiSelectWidget import MasterMultiSelectWidget
 from zope.i18n import translate
 
@@ -36,7 +34,6 @@ slave_fields_followup_proposition = (
         'toggle_method': 'showOtherFollowUp',
     },
 )
-##/code-section module-header
 
 schema = Schema((
     DateTimeField(
@@ -68,6 +65,16 @@ schema = Schema((
         vocabulary=UrbanVocabulary('offense_articles'),
         default_method='getDefaultValue',
     ),
+    TextField(
+        name='offense_articles_details',
+        widget=RichWidget(
+            label=_('urban_label_offense_articles_details', default='Offense_articles_details'),
+        ),
+        allowable_content_types=('text/html',),
+        default_method='getDefaultText',
+        default_content_type='text/html',
+        default_output_type='text/html',
+    ),
     LinesField(
         name='followup_proposition',
         widget=MasterMultiSelectWidget(
@@ -88,18 +95,22 @@ schema = Schema((
         default_content_type='text/html',
         default_output_type='text/html',
     ),
+    StringField(
+        name='delay',
+        widget=StringField._properties['widget'](
+            size=15,
+            label=_('urban_label_delay', default='Delay'),
+        ),
+        default='30 – 90 – 120 – autre',
+        validators=('isInteger',),
+    ),
 ),
 )
 
-##code-section after-local-schema #fill in your manual code here
-##/code-section after-local-schema
 
 UrbanEventInspectionReport_schema = BaseFolderSchema.copy() + \
     getattr(UrbanEvent, 'schema', Schema(())).copy() + \
     schema.copy()
-
-##code-section after-schema #fill in your manual code here
-##/code-section after-schema
 
 
 class UrbanEventInspectionReport(BaseFolder, UrbanEvent, BrowserDefaultMixin):
@@ -113,11 +124,6 @@ class UrbanEventInspectionReport(BaseFolder, UrbanEvent, BrowserDefaultMixin):
 
     schema = UrbanEventInspectionReport_schema
 
-    ##code-section class-header #fill in your manual code here
-    ##/code-section class-header
-
-    # Manually created methods
-
     security.declarePublic('listFollowupPropositions')
 
     def listFollowupPropositions(self):
@@ -125,22 +131,22 @@ class UrbanEventInspectionReport(BaseFolder, UrbanEvent, BrowserDefaultMixin):
           This vocabulary for field floodingLevel returns a list of
           flooding levels : no risk, low risk, moderated risk, high risk
         """
-        vocab = (
-            #we add an empty vocab value of type "choose a value"
+        voc = UrbanVocabulary('urbaneventtypes', vocType="FollowUpEventType", value_to_use='title')
+        config_voc = voc.getDisplayList(self)
+        full_voc = [
             ('close', translate(_('close_inspection'), context=self.REQUEST)),
-            ('notice', translate(_('formal_notice'), context=self.REQUEST)),
-            ('notice_reminder', translate(_('formal_notice_reminder'), context=self.REQUEST)),
-            ('last_notice_reminder', translate(_('formal_last_notice_reminder'), context=self.REQUEST)),
-            ('minutes', translate(_('minutes'), context=self.REQUEST)),
-            ('answer', translate(_('answer_to_plaintif'), context=self.REQUEST)),
-            ('additional_information', translate(_('additional_information'), context=self.REQUEST)),
-            ('FD_mail', translate(_('FD_information_mail'), context=self.REQUEST)),
-            ('repair_mail', translate(_('repair_mail'), context=self.REQUEST)),
-            ('divide_building', translate(_('divide_building'), context=self.REQUEST)),
-            ('divide_building_with_college', translate(_('divide_building_with_college'), context=self.REQUEST)),
-            ('other', translate(_('other'), context=self.REQUEST)),
-        )
-        return DisplayList(vocab)
+            ('ticket', translate(_('ticket'), context=self.REQUEST)),
+        ]
+        for key in config_voc.keys():
+            full_voc.append((key, config_voc.getValue(key)))
+        return DisplayList(full_voc)
+
+    def get_regular_followup_propositions(self):
+        """
+        """
+        ignore = ['ticket', 'close']
+        follow_ups = [fw_up for fw_up in self.getFollowup_proposition() if fw_up not in ignore]
+        return follow_ups
 
     def showOtherFollowUp(self, *values):
         selection = [v['val'] for v in values if v['selected']]
@@ -149,4 +155,3 @@ class UrbanEventInspectionReport(BaseFolder, UrbanEvent, BrowserDefaultMixin):
 
 
 registerType(UrbanEventInspectionReport, PROJECTNAME)
-# end of class UrbanEventInspectionReport

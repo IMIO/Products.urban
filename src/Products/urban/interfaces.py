@@ -236,6 +236,11 @@ class IUrbanEventOpinionRequest(Interface):
     """
 
 
+class IUrbanEventFollowUp(Interface):
+    """Marker interface for .UrbanEventFollowUp.UrbanEventFollowUp
+    """
+
+
 class IOrganisationTerm(Interface):
     """Marker interface for .OrganisationTerm.OrganisationTerm
     """
@@ -288,6 +293,11 @@ class ISpecificFeatureTerm(Interface):
 
 class IOpinionRequestEventType(Interface):
     """Marker interface for .OpinionRequestEventType.OpinionRequestEventType
+    """
+
+
+class IFollowUpEventType(Interface):
+    """Marker interface for .FollowUpEventType.FollowUpEventType
     """
 
 
@@ -705,10 +715,25 @@ class IInternalOpinionServices(Interface):
 class IAsyncInquiryRadius(Interface):
     """ """
     inquiries_to_do = schema.Dict(
-        title=_(u"Planned inquiries"),
-        description=_(u"inquiries planned for radius search"),
+        title=_(u"Planned mailings"),
+        description=_(u"mailings planned"),
         key_type=schema.ASCIILine(),
         value_type=schema.Int()
+    )
+
+
+class IAsyncMailing(Interface):
+    """ """
+    mailing_items_limit = schema.Int(
+        title=_(u"Mailing limit"),
+        description=_(u"Max items allowed for immediate mailing"),
+    )
+
+    mailings_to_do = schema.Dict(
+        title=_(u"Planned mailings"),
+        description=_(u"mailings planned for radius search"),
+        key_type=schema.ASCIILine(),
+        value_type=schema.ASCIILine()
     )
 
 

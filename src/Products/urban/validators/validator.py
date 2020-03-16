@@ -234,3 +234,15 @@ class isValidInquiryEndDate(object):
                     )
                 )
         return 1
+
+
+class isInteger:
+    implements(IValidator)
+
+    def __init__(self, name):
+        self.name = name
+
+    def __call__(self, value, *args, **kwargs):
+        if value == '' or value.isdigit():
+            return 1
+        return translate(_('error_integer', default=u"Delay should be an integer"))

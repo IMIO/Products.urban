@@ -60,6 +60,11 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
             formatted_date = self.format_date(date, long_format=long_format, translatemonth=translatemonth)
         return formatted_date
 
+    def today(self):
+        """
+        """
+        return _date.today()
+
     def format_date(self, date=None, translatemonth=True, long_format=False):
         """
           Format the date for printing in pod templates
@@ -371,7 +376,7 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
         limitDate = firstDepositDate + int(delay)
         return self.format_date(limitDate)
 
-    def get_parcels(self):
+    def get_parcels(self, with_commas=False):
         result = u""
         context = self.real_context
         parcels = context.getParcels()
@@ -396,20 +401,26 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
                     if elms[i].getSection() > elms[j].getSection():
                         elms[i], elms[j] = elms[j], elms[i]
         for gp in enumerate(list_grouped_parcels):
-            result += gp[1][0].getDivisionAlternativeName() + ' '
-            section = gp[1][0].getSection()
-            result += 'section {} '.format(section)
+            divisionAlternativeName = gp[1][0].getDivisionAlternativeName()
+            section = gp[1][0].getSection().decode('utf8')
+            if with_commas:
+                result += u"{}, section {}, ".format(divisionAlternativeName, section)
+            else:
+                result += u"{} section {} ".format(divisionAlternativeName, section)
             for p in enumerate(gp[1]):
                 if section != p[1].getSection():
                     section = p[1].getSection()
-                    result += 'section {} '.format(section)
+                    if with_commas:
+                        result += u"section {}, ".format(section)
+                    else:
+                        result += u"section {} ".format(section)
                 result += u"n° {}{}{}{}".format(
                     p[1].getRadical(), p[1].getBis(), p[1].getExposant(), p[1].getPuissance()
                 )
                 if p[0] + 1 != len(gp[1]):
-                    result += ', '
+                    result += u", "
             if gp[0] + 1 != len(list_grouped_parcels):
-                result += ', '
+                result += u", "
         return result
 
     def query_parcels_in_radius(self, radius='50'):
@@ -469,6 +480,7 @@ class UrbanDocGenerationEventHelperView(UrbanDocGenerationHelperView):
     """
     def mailing_list(self, gen_context=None):
         mailing_list = []
+        use_proxy = True
         if gen_context and 'publipostage' in gen_context:
             if gen_context['publipostage'] == 'demandeurs':
                 mailing_list = self.real_context.getParentNode().getApplicants()
@@ -480,7 +492,9 @@ class UrbanDocGenerationEventHelperView(UrbanDocGenerationHelperView):
                 mailing_list = self.context.getRecipients()
             elif gen_context['publipostage'] == 'organismes':
                 mailing_list = self.getFolderMakersMailing()
-        mailing_list = [obj.restrictedTraverse('@@document_generation_helper_view').context for obj in mailing_list]
+                use_proxy = False
+        if use_proxy:
+            mailing_list = [obj.restrictedTraverse('@@document_generation_helper_view').context for obj in mailing_list]
         return mailing_list
 
     def getFolderMakersMailing(self):
@@ -488,10 +502,14 @@ class UrbanDocGenerationEventHelperView(UrbanDocGenerationHelperView):
         mailing_list = []
         foldermakers = self.getFolderMakers()
         for foldermaker in foldermakers:
-            mailing = {}
-            mailing['title'] = foldermaker.Title()
-            html = foldermaker.Description()
-            mailing['description'] = self.portal.portal_transforms.convert('html_to_web_intelligent_plain_text', html).getData().strip('\n ')
+            html_description = foldermaker['OpinionRequestEventType'].Description()
+            transformed_description = self.portal.portal_transforms.convert(
+                    'html_to_web_intelligent_plain_text', html_description).getData().strip('\n ')
+            mailing = {
+                    'OpinionRequestEventType':foldermaker['OpinionRequestEventType'],
+                    'UrbanEventOpinionRequest':foldermaker['UrbanEventOpinionRequest'],
+                    'converted_description':transformed_description
+            }
             mailing_list.append(mailing)
         return mailing_list
 
@@ -499,7 +517,17 @@ class UrbanDocGenerationEventHelperView(UrbanDocGenerationHelperView):
         """  """
         urban_tool = getToolByName(self, 'portal_urban')
         foldermakers_config = urban_tool.getUrbanConfig(self.context).urbaneventtypes
-        foldermakers = [fm for fm in foldermakers_config.objectValues('OpinionRequestEventType') if fm.id in self.getSolicitOpinions()]
+        all_opinion_request_events = self.context.getAllOpinionRequests()
+        foldermakers = []
+        for opinionRequestEventType in foldermakers_config.objectValues('OpinionRequestEventType'):
+            foldermaker = {}
+            if opinionRequestEventType.id in self.getSolicitOpinions():
+                foldermaker['OpinionRequestEventType'] = opinionRequestEventType
+                for urbanEventOpinionRequest in all_opinion_request_events:
+                    if urbanEventOpinionRequest.Title() == opinionRequestEventType.Title():
+                        foldermaker['UrbanEventOpinionRequest'] = urbanEventOpinionRequest
+                        foldermakers.append(foldermaker)
+                        break;
         return foldermakers
 
     def getSolicitOpinions(self):
