@@ -10,6 +10,35 @@ import logging
 logger = logging.getLogger('urban: migrations')
 
 
+def migrate_codt_buildlicences_schedule(context):
+    """
+    Disbale recurrency for task 'deposit'
+    """
+    logger = logging.getLogger('urban: migrate codt buildlicences schedule')
+    logger.info("starting migration step")
+
+    portal_urban = api.portal.get_tool('portal_urban')
+    schedule = portal_urban.codt_buildlicence.schedule
+    schedule.reception.deposit.ending_states = ()
+    schedule.incomplet2.notify_refused.ending_states = ()
+    schedule.reception.deposit.recurrence_states = ()
+    schedule.reception.deposit.activate_recurrency = False
+    if 'deposit' not in schedule.incomplet.attente_complements.ending_states:
+        old_states = schedule.incomplet.attente_complements.ending_states or ()
+        new_states = tuple(old_states) + ('deposit',)
+        schedule.incomplet.attente_complements.ending_states = new_states
+    if 'complete' not in schedule.reception.ending_states:
+        old_states = schedule.reception.ending_states or ()
+        new_states = tuple(old_states) + ('deposit',)
+        schedule.reception.ending_states = new_states
+    if 'incomplete' not in schedule.reception.ending_states:
+        old_states = schedule.reception.ending_states or ()
+        new_states = tuple(old_states) + ('incomplete',)
+        schedule.reception.ending_states = new_states
+
+    logger.info("migration step done!")
+
+
 def contentmigrationLogger(oldObject, **kwargs):
     """ Generic logger method to be used with CustomQueryWalker """
     kwargs['logger'].info('/'.join(kwargs['purl'].getRelativeContentPath(oldObject)))
@@ -113,7 +142,8 @@ def migrate(context):
     logger.info("starting migration steps")
     setup_tool = api.portal.get_tool('portal_setup')
     setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'typeinfo')
-    setup_tool.runImportStepFromProfile('profile-Products.urban:extra', 'urban-update-rubrics')
+    # setup_tool.runImportStepFromProfile('profile-Products.urban:extra', 'urban-update-rubrics')
+    migrate_codt_buildlicences_schedule(context)
     migrate_CODT_NotaryLetter_to_CODT_UrbanCertificateBase(context)
     migrate_CODT_UrbanCertificateOne_to_CODT_UrbanCertificateBase(context)
     catalog = api.portal.get_tool('portal_catalog')
