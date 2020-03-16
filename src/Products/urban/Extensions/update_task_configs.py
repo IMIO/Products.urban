@@ -44,7 +44,7 @@ def add_licence_ended_condition():
                         display_status=False
                     )
                 task_cfg.end_conditions = (condition,) + tuple(end_conditions)
-            else:
+            elif ending_states:
                 old_ending_states = list(task_cfg.ending_states or [])
                 new_ending_states = list(set(old_ending_states + LICENCE_FINAL_STATES))
                 task_cfg.ending_states = new_ending_states
