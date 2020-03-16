@@ -108,7 +108,7 @@ metal:use-macro="here/main_template/macros/master">
                                                         <strong i18n:translate="urban_search_parcel_by_location">Location</strong>
                                                 </th>
                                                 <th>
-                                                        <strong i18n:translate="urban_search_parcel_by_street_number">n°</strong>
+                                                        <strong i18n:translate="urban_search_parcel_by_street_number">Number</strong>
                                                 </th>
                                                 </tr>
                                         </thead>

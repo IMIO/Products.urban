@@ -232,13 +232,13 @@ class Contact(BaseContent, BrowserDefaultMixin):
         """
            Generate the title...
         """
-        name1 = self.getName1().decode('utf-8')
-        name2 = self.getName2().decode('utf-8')
-        society = self.getSociety().decode('utf-8')
+        name1 = self.getName1()
+        name2 = self.getName2()
+        society = self.getSociety()
         if self.getSociety():
-            return u"%s %s %s (%s)" % (self.getPersonTitle(short=True), name1, name2, society)
+            return "%s %s %s (%s)" % (self.getPersonTitle(short=True), name1, name2, society)
         else:
-            return u"%s %s %s" % (self.getPersonTitle(short=True), name1, name2)
+            return "%s %s %s" % (self.getPersonTitle(short=True), name1, name2)
 
     security.declarePublic('getSignaletic')
     def getSignaletic(self, short=False, withaddress=False, linebyline=False, reverse=False, remove_comma=False, inverted_address=False):
@@ -372,10 +372,7 @@ class Contact(BaseContent, BrowserDefaultMixin):
                 result.append(city)
             if self.getCountry() != 'belgium':
                 result.append(country)
-            try:
-                return u' '.join(result)
-            except:
-                import ipdb; ipdb.set_trace()
+            return u' '.join(result)
         else:
             number = cgi.escape(number)
             street = cgi.escape(street)

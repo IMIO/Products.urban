@@ -339,13 +339,16 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         vocabularies = annotations['Products.urban.vocabulary_cache']
         return vocabularies
 
-    def get_vocabulary(self, in_urban_config=True, context=None, name=''):
+    def get_vocabulary(self, in_urban_config=True, context=None, licence_type='', name=''):
         folder = self
-        if in_urban_config:
-            portal = api.portal.get()
-            while not IGenericLicence.providedBy(context) or context == portal:
-                context = context.aq_parent
-            folder = getattr(self, context.portal_type.lower())
+        if in_urban_config and (context or licence_type):
+            if licence_type:
+                folder = getattr(self, licence_type.lower())
+            elif context:
+                portal = api.portal.get()
+                while not IGenericLicence.providedBy(context) or context == portal:
+                    context = context.aq_parent
+                folder = getattr(self, context.portal_type.lower())
         voc = self._get_procedure_vocabulary(folder)
         if name:
             if name in voc:

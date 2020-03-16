@@ -265,6 +265,7 @@ def addDefaultCronJobs(context):
     cron_cfg = queryUtility(ICronConfiguration, name='cron4plone_config', context=api.portal.get())
     cron_cfg.cronjobs = [
         u'0 0 * * portal/@@update_college_done_tasks',
+        u'0 1 * * portal/@@mailings',
         u'0 2 * * portal/@@inquiry_radius',
         u'0 4 * * portal/@@claimants_import',
     ]
@@ -409,17 +410,20 @@ def addUrbanConfigFolders(context):
             config_folder.licencePortalType = urban_type
             config_folder.reindexObject()
 
-        #we just created the urbanConfig, proceed with other parameters...
-        #parameters for every LicenceConfigs
-        #add UrbanEventTypes folder
+        # we just created the urbanConfig, proceed with other parameters...
+        # parameters for every LicenceConfigs
+        # add UrbanEventTypes folder
         if not hasattr(aq_base(config_folder), 'urbaneventtypes'):
-            newFolderid = config_folder.invokeFactory(
+            config_folder.invokeFactory(
                 "Folder",
                 id="urbaneventtypes",
                 title=_("urbaneventtypes_folder_title", 'urban')
             )
-            newFolder = getattr(config_folder, newFolderid)
-            setFolderAllowedTypes(newFolder, ['UrbanEventType', 'OpinionRequestEventType'])
+        eventtypes_folder = getattr(config_folder, 'urbaneventtypes')
+        if urban_type in ['Inspection', 'Ticket']:
+            setFolderAllowedTypes(eventtypes_folder, ['UrbanEventType', 'FollowUpEventType'])
+        else:
+            setFolderAllowedTypes(eventtypes_folder, ['UrbanEventType', 'OpinionRequestEventType'])
 
         licence_vocabularies = default_values.get(urban_type, {})
         createVocabularyFolders(container=config_folder, vocabularies=licence_vocabularies, site=site)
@@ -865,6 +869,8 @@ def addApplicationFolders(context):
             #exception for some portal_types having a different meta_type
             if urban_type in ['UrbanCertificateOne', 'NotaryLetter', ]:
                 licence_folder.manage_permission('urban: Add UrbanCertificateBase', ['Manager', 'Contributor', ], acquire=0)
+            if urban_type in ['CODT_UrbanCertificateOne', 'CODT_NotaryLetter', ]:
+                licence_folder.manage_permission('urban: Add CODT_UrbanCertificateBase', ['Manager', 'Contributor', ], acquire=0)
             if urban_type in ['EnvClassThree', ]:
                 licence_folder.manage_permission('urban: Add EnvironmentBase', ['Manager', 'Contributor', ], acquire=0)
             if urban_type in ['EnvClassOne', 'EnvClassTwo', 'EnvClassBordering']:

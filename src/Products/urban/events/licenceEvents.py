@@ -68,7 +68,9 @@ def updateBoundLicences(licence, events):
     as the refered address and aplicants may have changed.
     """
     annotations = IAnnotations(licence)
-    uids = list(annotations.get('urban.bound_tickets', set([])).union(annotations.get('urban.bound_inspections', set([]))))
+    ticket_uids = annotations.get('urban.bound_tickets') or set([])
+    inspection_uids = annotations.get('urban.bound_inspections') or set([])
+    uids = inspection_uids.union(ticket_uids)
     catalog = api.portal.get_tool('portal_catalog')
     bound_licences_brains = catalog(UID=uids)
     for bound_licences_brain in bound_licences_brains:
@@ -83,6 +85,8 @@ def updateBoundLicences(licence, events):
             'StreetsUID',
             'parcelInfosIndex'
         ])
+        # make sure to update  the whole reference chain licence <- inspection <- ticket
+        updateBoundLicences(bound_licence, events)
 
 
 def updateEventsFoldermanager(licence, event):
@@ -144,6 +148,15 @@ def reindex_attachments_permissions(container, event):
     if IUrbanEvent.providedBy(container):
         licence = container.aq_parent
         reindex_attachments_permissions(licence, event)
+
+
+def reindex_licence_permissions(container, event):
+    """
+    Reindex licence permissions when triggering internal opinion request events
+    """
+    if IUrbanEvent.providedBy(container):
+        licence = container.aq_parent
+        licence.reindexObject(idxs=['allowedRolesAndUsers'])
 
 
 def set_faceted_navigation(licence, event):

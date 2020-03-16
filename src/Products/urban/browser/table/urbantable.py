@@ -251,8 +251,9 @@ class InternalOpinionServicesTable(SequenceTable):
 
 class InspectionReportsTable(UrbanTable, SequenceTable):
     """
-    Render nested attachments from subfolders.
+    Render inspection report events.
     """
     implements(interfaces.IInspectionReportsTable)
 
     cssClasses = {'table': 'listing largetable'}
+    sortOn = 'table-inspection_report_date_column-1'

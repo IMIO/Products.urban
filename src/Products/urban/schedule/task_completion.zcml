@@ -38,6 +38,54 @@
          permission="zope2.View"
       />
 
+      <browser:page
+         for="Products.urban.schedule.interfaces.ICreateFollowupTask"
+         name="end_status"
+         class="Products.urban.schedule.task_completion.FollowupEventsRedactedStatus"
+         template="browser/templates/task_completion.pt"
+         permission="zope2.View"
+      />
+
+      <browser:page
+         for="Products.urban.schedule.interfaces.ICreateFollowupTask"
+         name="simple_end_status"
+         class="Products.urban.schedule.task_completion.FollowupEventsRedactedStatus"
+         template="browser/templates/task_completion.pt"
+         permission="zope2.View"
+      />
+
+      <browser:page
+         for="Products.urban.schedule.interfaces.IValidateFollowupTask"
+         name="end_status"
+         class="Products.urban.schedule.task_completion.FollowupEventsValidatedStatus"
+         template="browser/templates/task_completion.pt"
+         permission="zope2.View"
+      />
+
+      <browser:page
+         for="Products.urban.schedule.interfaces.IValidateFollowupTask"
+         name="simple_end_status"
+         class="Products.urban.schedule.task_completion.FollowupEventsValidatedStatus"
+         template="browser/templates/task_completion.pt"
+         permission="zope2.View"
+      />
+
+      <browser:page
+         for="Products.urban.schedule.interfaces.ISendFollowupTask"
+         name="end_status"
+         class="Products.urban.schedule.task_completion.FollowupEventsSentStatus"
+         template="browser/templates/task_completion.pt"
+         permission="zope2.View"
+      />
+
+      <browser:page
+         for="Products.urban.schedule.interfaces.ISendFollowupTask"
+         name="simple_end_status"
+         class="Products.urban.schedule.task_completion.FollowupEventsSentStatus"
+         template="browser/templates/task_completion.pt"
+         permission="zope2.View"
+      />
+
     </configure>
 
 </configure>

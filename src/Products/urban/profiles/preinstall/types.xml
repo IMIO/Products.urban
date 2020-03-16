@@ -75,6 +75,8 @@
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="UrbanEventOpinionRequest"
          meta_type="Factory-based Type Information with dynamic views"/>
+ <object name="UrbanEventFollowUp"
+         meta_type="Factory-based Type Information with dynamic views"/>
  <object name="OrganisationTerm"
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="MiscDemand"
@@ -88,6 +90,8 @@
  <object name="SpecificFeatureTerm"
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="OpinionRequestEventType"
+         meta_type="Factory-based Type Information with dynamic views"/>
+ <object name="FollowUpEventType"
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="EnvironmentLicence"
          meta_type="Factory-based Type Information with dynamic views"/>

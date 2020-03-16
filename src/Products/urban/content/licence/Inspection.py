@@ -17,6 +17,8 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 from plone import api
 
+from zope.annotation import IAnnotations
+
 slave_fields_bound_licence = (
     {
         'name': 'workLocations',
@@ -27,7 +29,7 @@ slave_fields_bound_licence = (
 
 schema = Schema((
     ReferenceField(
-        name='bound_licence',
+        name='bound_licences',
         widget=ReferenceBrowserWidget(
             allow_search=True,
             allow_browse=False,
@@ -36,7 +38,7 @@ schema = Schema((
             show_indexes=False,
             wild_card_search=True,
             restrict_browsing_to_startup_directory=True,
-            label=_('urban_label_bound_licence', default='Bound licence'),
+            label=_('urban_label_bound_licences', default='Bound licences'),
         ),
         allowed_types=[
             t for t in URBAN_TYPES
@@ -51,8 +53,8 @@ schema = Schema((
             ]
         ],
         schemata='urban_description',
-        multiValued=False,
-        relationship="bound_licence",
+        multiValued=True,
+        relationship="bound_licences",
     ),
     BooleanField(
         name='use_bound_licence_infos',
@@ -109,9 +111,9 @@ class Inspection(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
 
     def getWorkLocations(self):
         if self.getUse_bound_licence_infos():
-            bound_licence = self.getBound_licence()
-            if bound_licence:
-                return bound_licence.getWorkLocations()
+            bound_licences = self.getBound_licences()
+            if bound_licences:
+                return bound_licences[0].getWorkLocations()
 
         field = self.getField('workLocations')
         worklocations = field.get(self)
@@ -119,9 +121,9 @@ class Inspection(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
 
     def getParcels(self):
         if self.getUse_bound_licence_infos():
-            bound_licence = self.getBound_licence()
-            if bound_licence:
-                return bound_licence.getParcels()
+            bound_licences = self.getBound_licences()
+            if bound_licences:
+                return bound_licences[0].getParcels()
 
         return super(Inspection, self).getParcels()
 
@@ -129,9 +131,9 @@ class Inspection(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
 
     def getOfficialParcels(self):
         if self.getUse_bound_licence_infos():
-            bound_licence = self.getBound_licence()
-            if bound_licence:
-                return bound_licence.getOfficialParcels()
+            bound_licences = self.getBound_licences()
+            if bound_licences:
+                return bound_licences[0].getOfficialParcels()
 
         return super(Inspection, self).getOfficialParcels()
 
@@ -140,9 +142,9 @@ class Inspection(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
         """
         applicants = super(Inspection, self).getApplicants()
         if self.getUse_bound_licence_infos():
-            bound_licence = self.getBound_licence()
-            if bound_licence:
-                applicants.extend(bound_licence.getApplicants())
+            bound_licences = self.getBound_licences()
+            if bound_licences:
+                applicants.extend(bound_licences[0].getApplicants())
         return list(set(applicants))
 
     security.declarePublic('get_applicants_history')
@@ -150,9 +152,9 @@ class Inspection(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
     def get_applicants_history(self):
         applicants = super(Inspection, self).get_applicants_history()
         if self.getUse_bound_licence_infos():
-            bound_licence = self.getBound_licence()
-            if bound_licence:
-                applicants.extend(bound_licence.get_applicants_history())
+            bound_licences = self.getBound_licences()
+            if bound_licences:
+                applicants.extend(bound_licences[0].get_applicants_history())
         return list(set(applicants))
 
     security.declarePublic('getCorporations')
@@ -162,9 +164,9 @@ class Inspection(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
                         if corp.portal_type == 'Corporation' and
                         api.content.get_state(corp) == 'enabled']
         if self.getUse_bound_licence_infos():
-            bound_licence = self.getBound_licence()
-            if bound_licence:
-                corporations.extend(bound_licence.getCorporations())
+            bound_licences = self.getBound_licences()
+            if bound_licences:
+                corporations.extend(bound_licences[0].getCorporations())
         return list(set(corporations))
 
     security.declarePublic('get_corporations_history')
@@ -174,9 +176,9 @@ class Inspection(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
                         if corp.portal_type == 'Corporation' and
                         api.content.get_state(corp) == 'disabled']
         if self.getUse_bound_licence_infos():
-            bound_licence = self.getBound_licence()
-            if bound_licence:
-                corporations.extend(bound_licence.get_corporations_history())
+            bound_licences = self.getBound_licences()
+            if bound_licences:
+                corporations.extend(bound_licences[0].get_corporations_history())
         return list(set(corporations))
 
     security.declarePublic('getTenants')
@@ -220,6 +222,124 @@ class Inspection(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
     def getAllReportEvents(self):
         return self.getAllEvents(interfaces.IUrbanEventInspectionReport)
 
+    security.declarePublic('getCurrentReportEvent')
+
+    def getCurrentReportEvent(self):
+        last_analysis_date = None
+        for action in self.workflow_history.values()[0][::-1]:
+            if action['review_state'] == 'analysis':
+                last_analysis_date = action['time']
+                break
+
+        if not last_analysis_date:
+            return
+
+        report_events = self.getAllReportEvents()
+        for report in report_events:
+            workflow_history = report.workflow_history.values()[0]
+            creation_date = workflow_history[0]['time']
+            if creation_date > last_analysis_date:
+                return report
+
+    security.declarePublic('getFollowUpEventsById')
+
+    def getFollowUpEventsById(self, followup_id):
+        followup_events = self.objectValues('UrbanEventFollowUp')
+        if followup_id == '':
+            return followup_events
+        res = []
+        for followup_event in followup_events:
+            if followup_event.getFollowUpId() == followup_id:
+                res.append(followup_event)
+        return res
+
+
+    security.declarePublic('getLastFollowUpEvent')
+
+    def getLastFollowUpEvent(self):
+        return self.getLastEvent(interfaces.IUrbanEventFollowUp)
+
+    security.declarePublic('getAllFollowUpEvents')
+
+    def getAllFollowUpEvents(self):
+        return self.getAllEvents(interfaces.IUrbanEventFollowUp)
+
+    security.declarePublic('getCurrentFollowUpEvents')
+
+    def getCurrentFollowUpEvents(self):
+        last_answer_date = None
+        for action in self.workflow_history.values()[0][::-1]:
+            if action['review_state'] == 'administrative_answer':
+                last_answer_date = action['time']
+                break
+        if not last_answer_date:
+            return []
+
+        report = self.getCurrentReportEvent()
+        if not report:
+            return []
+        ignore = ['ticket', 'close']
+        selected_follow_ups = [fw_up for fw_up in report.getFollowup_proposition() if fw_up not in ignore]
+        if not selected_follow_ups:
+            return []
+
+        followup_events = self.getAllFollowUpEvents()
+        to_return = []
+        for followup in followup_events:
+            workflow_history = followup.workflow_history.values()[0]
+            creation_date = workflow_history[0]['time']
+            if creation_date > last_answer_date:
+                uet = followup.getUrbaneventtypes()
+                if uet and uet.id in selected_follow_ups:
+                    to_return.append(followup)
+        return to_return
+
+    security.declarePublic('mayAddInspectionReportEvent')
+
+    def mayAddInspectionReportEvent(self):
+        """
+           This is used as TALExpression for the UrbanEventInspectionReport
+           We may add an InspectionReport only if the previous one is closed
+        """
+        report_events = self.getAllReportEvents()
+        for report_event in report_events:
+            if api.content.get_state(report_event) != 'closed':
+                return False
+
+        return True
+
+    security.declarePublic('mayAddFollowUpEvent')
+
+    def mayAddFollowUpEvent(self, followup_id):
+        """
+           This is used as TALExpression for the UrbanEventFollowUp
+           We may add an UrbanEventFollowUp only if the previous one is closed
+        """
+        report_events = self.getAllReportEvents()
+        if not report_events:
+            return False
+
+        limit = 0
+        for report_event in report_events:
+            if followup_id in report_event.getFollowup_proposition():
+                limit += 1
+        limit = limit - len(self.getFollowUpEventsById(followup_id))
+        return limit > 0
+
+    security.declarePublic('getBoundTickets')
+
+    def getBoundTickets(self):
+        """
+        Return tickets referring this inspection.
+        """
+        annotations = IAnnotations(self)
+        ticket_uids = annotations.get('urban.bound_tickets')
+        if ticket_uids:
+            ticket_uids = list(ticket_uids)
+            uid_catalog = api.portal.get_tool('uid_catalog')
+            tickets = [b.getObject() for b in uid_catalog(UID=ticket_uids)]
+            return tickets
+
 
 registerType(Inspection, PROJECTNAME)
 
@@ -230,8 +350,8 @@ def finalize_schema(schema, folderish=False, moveDiscussion=True):
     """
     schema['folderCategory'].widget.visible = {'edit': 'invisible', 'view': 'invisible'}
     schema.moveField('description', after='inspection_context')
-    schema.moveField('bound_licence', before='workLocations')
-    schema.moveField('use_bound_licence_infos', after='bound_licence')
+    schema.moveField('bound_licences', before='workLocations')
+    schema.moveField('use_bound_licence_infos', after='bound_licences')
     return schema
 
 

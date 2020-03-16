@@ -3,16 +3,9 @@
     xmlns:browser="http://namespaces.zope.org/browser"
     i18n_domain="Products.urban">
 
-    <browser:page
-        name="update_uniquelicence_incompletion_tasks"
-        for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-        permission="cmf.ManagePortal"
-        class=".incomplete_licences.UpdateUniqueLicenceIncompletionTasks"
-    />
-
   <utility
-    factory=".delay.AutoAccepted20days"
-    name="codt_auto_accepted_20_days"
+    factory=".tasks_daily_check.CheckTasks"
+    name="tasks_daily_check"
     />
 
 </configure>

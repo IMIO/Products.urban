@@ -26,12 +26,14 @@ from Products.urban.interfaces import ICODT_BaseBuildLicence
 from Products.urban.interfaces import ICorporation
 from Products.urban.interfaces import IEnvironmentLicence
 from Products.urban.interfaces import IGenericLicence
+from Products.urban.interfaces import IInspection
 from Products.urban.interfaces import IIsArchive
 from Products.urban.interfaces import IMiscDemand
 from Products.urban.interfaces import IParcellingTerm
 from Products.urban.interfaces import IPatrimonyCertificate
 from Products.urban.interfaces import IPortionOut
 from Products.urban.interfaces import IProprietary
+from Products.urban.interfaces import ITicket
 from Products.urban.interfaces import IUrbanDoc
 from Products.urban.interfaces import IUrbanEvent
 from Products.urban.interfaces import IUrbanEventType
@@ -154,7 +156,7 @@ def genericlicence_streetsuid(licence):
 
 @indexer(IGenericLicence)
 def genericlicence_streetnumber(licence):
-    numbers = [location['number'] for location in licence.getWorkLocations()]
+    numbers = [location['number'] or '0' for location in licence.getWorkLocations()] or ['0']
     return numbers
 
 
@@ -297,3 +299,19 @@ def genericlicence_final_duedate(licence):
             tasks_to_check.extend(subtasks)
 
     return date(9999, 1, 1)
+
+
+@indexer(IAutomatedTask)
+def inspection_task_followups(task):
+    """
+    Index inspection tasks with all the followup actions
+    found in the last report event.
+    This will put in the unused index 'Subject'
+    """
+    licence = task.get_container()
+    # only index Inspection and Ticket licence
+    if not IInspection.providedBy(licence) and not ITicket.providedBy(licence):
+        return []
+    last_report = licence.getLastReportEvent()
+    follow_ups = last_report and last_report.getFollowup_proposition() or []
+    return follow_ups

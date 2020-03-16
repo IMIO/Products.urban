@@ -18,4 +18,20 @@
     interface=".interfaces.IReceiveOpinionRequestsTask"
     type="imio.schedule.interfaces.ITaskMarkerInterface"/>
 
+  <interface
+    interface=".interfaces.ICreateFollowupTask"
+    type="imio.schedule.interfaces.ITaskMarkerInterface"/>
+
+  <interface
+    interface=".interfaces.IValidateFollowupTask"
+    type="imio.schedule.interfaces.ITaskMarkerInterface"/>
+
+  <interface
+    interface=".interfaces.ISendFollowupTask"
+    type="imio.schedule.interfaces.ITaskMarkerInterface"/>
+
+  <interface
+    interface=".interfaces.ITaskToCheckDaily"
+    type="imio.schedule.interfaces.ITaskMarkerInterface"/>
+
 </configure>

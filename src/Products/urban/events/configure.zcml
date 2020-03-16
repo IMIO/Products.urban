@@ -71,6 +71,10 @@
                    Products.DCWorkflow.interfaces.IAfterTransitionEvent"
               handler=".licenceEvents.reindex_attachments_permissions" />
 
+  <subscriber for="..interfaces.IUrbanEventOpinionRequest
+                   Products.DCWorkflow.interfaces.IAfterTransitionEvent"
+              handler=".licenceEvents.reindex_licence_permissions" />
+
   <subscriber for="..interfaces.IPortionOut
                    zope.container.interfaces.IObjectRemovedEvent"
               handler=".portionOutEvents.onDelete" />
@@ -206,6 +210,10 @@
   <subscriber for="..interfaces.ITicket
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".ticketEvents.setTicketBoundLicence" />
+
+  <subscriber for="..interfaces.ITicket
+                   Products.DCWorkflow.interfaces.IAfterTransitionEvent"
+              handler=".ticketEvents.notifyBoundInspections" />
 
   <!-- do this to update schedule tasks when sending a college event to PM -->
   <subscriber for="..interfaces.IUrbanEvent
