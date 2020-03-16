@@ -32,7 +32,7 @@ def migrate_codt_buildlicences_schedule(context):
         old_states = schedule.reception.ending_states or ()
         new_states = tuple(old_states) + ('deposit',)
         schedule.reception.ending_states = new_states
-    if 'incomplete' not in (schedule.reception.ending_states ()):
+    if 'incomplete' not in (schedule.reception.ending_states or ()):
         old_states = schedule.reception.ending_states or ()
         new_states = tuple(old_states) + ('incomplete',)
         schedule.reception.ending_states = new_states
