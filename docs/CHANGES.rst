@@ -11,6 +11,9 @@ Changes
 - provide the add company feature to the CU1 process
   [fngaha]
 
+- Improve mailing. Add the possibility to delay mailing during the night [SUP-12289]
+  [sdelcourt]
+
 - Fix default schedule config for CODT Buildlicence [SUP-12344]
   [sdelcourt]
 
