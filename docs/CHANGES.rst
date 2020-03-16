@@ -11,6 +11,9 @@ Changes
 - provide the add company feature to the CU1 process
   [fngaha]
 
+- Fix default schedule config for CODT Buildlicence [SUP-12344]
+  [sdelcourt]
+
 
 2.4 (2019-03-25)
 ----------------
