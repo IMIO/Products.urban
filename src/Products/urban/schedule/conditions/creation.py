@@ -524,7 +524,7 @@ class FollowUpTicketClosed(InspectionCreationCondition):
         is_closed = api.content.get_state(followup_ticket) == 'ended'
         # do this task only once per ticket
         if is_closed:
-            same_closed_tasks = self.task_config.get_closed_task(self.task_container)
+            same_closed_tasks = self.task_config.get_closed_tasks(self.task_container)
             ticket_workflow_history = followup_ticket.workflow_history.values()[0]
             ticket_creation_date = ticket_workflow_history[0]['time']
             for task in same_closed_tasks:
