@@ -256,6 +256,7 @@ GLOBAL_TEMPLATES = {
     '.': [],
     'urbantemplates': [
         {'id': 'styles.odt', 'portal_type': 'StyleTemplate', 'title': 'Styles urbanisme'},
+        {'id': 'logo.odt', 'portal_type': 'SubTemplate', 'title': 'Logo urbanisme'},
         {'id': 'header.odt', 'portal_type': 'SubTemplate', 'title': 'En-tête urbanisme'},
         {'id': 'footer.odt', 'portal_type': 'SubTemplate', 'title': 'Pied de page urbanisme'},
         {'id': 'reference.odt', 'portal_type': 'SubTemplate', 'title': '\'Référence\' urbanisme'},
@@ -264,6 +265,7 @@ GLOBAL_TEMPLATES = {
     ],
     'environmenttemplates': [
         {'id': 'styles.odt', 'portal_type': 'StyleTemplate', 'title': 'Styles environnement'},
+        {'id': 'logo.odt', 'portal_type': 'SubTemplate', 'title': 'Logo environnement'},
         {'id': 'header.odt', 'portal_type': 'SubTemplate', 'title': 'En-tête environnement'},
         {'id': 'footer.odt', 'portal_type': 'SubTemplate', 'title': 'Pied de page environnement'},
         {'id': 'reference.odt', 'portal_type': 'SubTemplate', 'title': '\'Référence\' environnement'},
