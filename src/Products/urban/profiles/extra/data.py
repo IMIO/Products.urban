@@ -267,7 +267,14 @@ urbanEventTypes = {
             'podTemplates': (
                 {
                     'id': "codt_pu_prorogation_si_non_automatique_deliberation.odt",
-                    'title': "Délibération CODT - PROROGATION si non automatique"
+                    'title': "Délibération CODT - PROROGATION si non automatique",
+                    'pod_portal_types': (
+                        'UrbanEvent',
+                        'UrbanEventInquiry',
+                        'UrbanEventOpinionRequest',
+                        'UrbanEventAnnouncement',
+                        'UrbanEventCollege'
+                    )
                 },
                 {
                     'id': "codt_pu_prorogation_info_demandeur.odt",
@@ -277,7 +284,14 @@ urbanEventTypes = {
                             'name': 'publipostage',
                             'value': 'demandeurs'
                         }
-                    ]
+                    ],
+                    'pod_portal_types': (
+                        'UrbanEvent',
+                        'UrbanEventInquiry',
+                        'UrbanEventOpinionRequest',
+                        'UrbanEventAnnouncement',
+                        'UrbanEventCollege'
+                    )
                 },
                 {
                     'id': "codt_pu_prorogation_info_architecte.odt",
@@ -287,11 +301,25 @@ urbanEventTypes = {
                             'name': 'publipostage',
                             'value': 'architectes'
                         }
-                    ]
+                    ],
+                    'pod_portal_types': (
+                        'UrbanEvent',
+                        'UrbanEventInquiry',
+                        'UrbanEventOpinionRequest',
+                        'UrbanEventAnnouncement',
+                        'UrbanEventCollege'
+                    )
                 },
                 {
                     'id': "codt_pu_formulaire_envoi_prorogation_fd_grille.odt",
-                    'title': "Formulaire d'envoi de la prorogation au FD (GRILLE)"
+                    'title': "Formulaire d'envoi de la prorogation au FD (GRILLE)",
+                    'pod_portal_types': (
+                        'UrbanEvent',
+                        'UrbanEventInquiry',
+                        'UrbanEventOpinionRequest',
+                        'UrbanEventAnnouncement',
+                        'UrbanEventCollege'
+                    )
                 },
             ),
         },
