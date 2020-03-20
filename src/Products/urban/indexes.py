@@ -315,3 +315,20 @@ def inspection_task_followups(task):
     last_report = licence.getLastReportEvent()
     follow_ups = last_report and last_report.getFollowup_proposition() or []
     return follow_ups
+
+
+@indexer(IAutomatedTask)
+def task_covid(task):
+    """
+    """
+    licence = task.get_container()
+    covid = licence.getCovid() and 'COVID' or None
+    return covid
+
+
+@indexer(IGenericLicence)
+def licence_covid(licence):
+    """
+    """
+    covid = licence.getCovid() and 'COVID' or None
+    return covid
