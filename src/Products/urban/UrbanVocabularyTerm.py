@@ -196,8 +196,9 @@ class UrbanVocabulary(object):
 
     def getDisplayList(self, context):
         raw_voc = self.get_raw_voc(context)
-        if getRequest().getURL().endswith('edit'):
-            result = DisplayList([(v['id'], v['title']) for v in raw_voc if v['enabled']])
+        url = getRequest() and getRequest().getURL()
+        if url and (url.endswith('edit') or url.endswith('@@fieldeditoverlay')):
+            result = DisplayList([(v['id'], u'{}{}'.format(v.get('numbering', ''), v['title'])) for v in raw_voc if v['enabled']])
         else:
             result = DisplayList([(v['id'], v['title']) for v in raw_voc])
         return result
