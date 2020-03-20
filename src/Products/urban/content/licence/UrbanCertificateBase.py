@@ -37,92 +37,93 @@ from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.UrbanDataGridColumns.FormFocusColumn import FormFocusColumn
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
 from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
-from plone import api
 
 
-optional_fields = ['specificFeatures', 'roadSpecificFeatures', 'locationSpecificFeatures',
-                   'customSpecificFeatures', 'townshipSpecificFeatures', 'opinionsToAskIfWorks',
-                   'basement', 'ZIP', 'pollution', 'annoncedDelay', 'annoncedDelayDetails',
-                   'notaryContact']
-##/code-section module-header
+optional_fields = [
+    'specificFeatures', 'roadSpecificFeatures', 'locationSpecificFeatures',
+    'customSpecificFeatures', 'townshipSpecificFeatures', 'opinionsToAskIfWorks',
+    'basement', 'ZIP', 'pollution', 'annoncedDelay', 'annoncedDelayDetails',
+    'notaryContact', 'SCT', 'sctDetails', 'SDC', 'sdcDetails', 'regional_guide', 'regional_guide_details',
+    'township_guide', 'township_guide_details'
+]
 
 
 full_patrimony_slave_fields = (
-        {
-            'name': 'patrimony_site',
-            'action': 'hide',
-            'hide_values': ('none',),
-        },
-        {
-            'name': 'patrimony_architectural_complex',
-            'action': 'hide',
-            'hide_values': ('none',),
-        },
-        {
-            'name': 'archeological_site',
-            'action': 'hide',
-            'hide_values': ('none',),
-        },
-        {
-            'name': 'protection_zone',
-            'action': 'hide',
-            'hide_values': ('none',),
-        },
-        {
-            'name': 'regional_inventory_building',
-            'action': 'hide',
-            'hide_values': ('none',),
-        },
-        {
-            'name': 'small_popular_patrimony',
-            'action': 'hide',
-            'hide_values': ('none',),
-        },
-        {
-            'name': 'communal_inventory',
-            'action': 'hide',
-            'hide_values': ('none',),
-        },
-        {
-            'name': 'regional_inventory',
-            'action': 'hide',
-            'hide_values': ('none',),
-        },
-        {
-            'name': 'patrimony_archaeological_map',
-            'action': 'hide',
-            'hide_values': ('none',),
-        },
-        {
-            'name': 'patrimony_project_gtoret_1ha',
-            'action': 'hide',
-            'hide_values': ('none',),
-        },
-        {
-            'name': 'observation',
-            'action': 'hide',
-            'hide_values': ('none',),
-        },
-        {
-            'name': 'patrimony_monument',
-            'action': 'hide',
-            'hide_values': ('none', 'patrimonial'),
-        },
-        {
-            'name': 'classification_order_scope',
-            'action': 'hide',
-            'hide_values': ('none', 'patrimonial'),
-        },
-        {
-            'name': 'patrimony_analysis',
-            'action': 'hide',
-            'hide_values': ('none',),
-        },
-        {
-            'name': 'patrimony_observation',
-            'action': 'hide',
-            'hide_values': ('none',),
-        },
+    {
+        'name': 'patrimony_site',
+        'action': 'hide',
+        'hide_values': ('none',),
+    },
+    {
+        'name': 'patrimony_architectural_complex',
+        'action': 'hide',
+        'hide_values': ('none',),
+    },
+    {
+        'name': 'archeological_site',
+        'action': 'hide',
+        'hide_values': ('none',),
+    },
+    {
+        'name': 'protection_zone',
+        'action': 'hide',
+        'hide_values': ('none',),
+    },
+    {
+        'name': 'regional_inventory_building',
+        'action': 'hide',
+        'hide_values': ('none',),
+    },
+    {
+        'name': 'small_popular_patrimony',
+        'action': 'hide',
+        'hide_values': ('none',),
+    },
+    {
+        'name': 'communal_inventory',
+        'action': 'hide',
+        'hide_values': ('none',),
+    },
+    {
+        'name': 'regional_inventory',
+        'action': 'hide',
+        'hide_values': ('none',),
+    },
+    {
+        'name': 'patrimony_archaeological_map',
+        'action': 'hide',
+        'hide_values': ('none',),
+    },
+    {
+        'name': 'patrimony_project_gtoret_1ha',
+        'action': 'hide',
+        'hide_values': ('none',),
+    },
+    {
+        'name': 'observation',
+        'action': 'hide',
+        'hide_values': ('none',),
+    },
+    {
+        'name': 'patrimony_monument',
+        'action': 'hide',
+        'hide_values': ('none', 'patrimonial'),
+    },
+    {
+        'name': 'classification_order_scope',
+        'action': 'hide',
+        'hide_values': ('none', 'patrimonial'),
+    },
+    {
+        'name': 'patrimony_analysis',
+        'action': 'hide',
+        'hide_values': ('none',),
+    },
+    {
+        'name': 'patrimony_observation',
+        'action': 'hide',
+        'hide_values': ('none',),
+    },
 )
 
 schema = Schema((
@@ -143,49 +144,49 @@ schema = Schema((
         schemata='urban_description',
         multiValued=True,
         relationship="notary",
-        allowed_types= ('Notary',),
+        allowed_types=('Notary',),
     ),
     DataGridField(
         name='specificFeatures',
         widget=DataGridWidget(
-            columns= {'id': FormFocusColumn('id'), 'check': CheckboxColumn('Select'), 'value': FixedColumn('Value'), 'text': TextAreaColumn('Text', rows=1, cols=50)},
+            columns={'id': FormFocusColumn('id'), 'check': CheckboxColumn('Select'), 'value': FixedColumn('Value'), 'text': TextAreaColumn('Text', rows=1, cols=50)},
             label=_('urban_label_specificFeatures', default='Specificfeatures'),
         ),
         fixed_rows='getSpecificFeaturesRows',
-        allow_insert= False,
-        allow_reorder= False,
-        allow_oddeven= True,
-        allow_delete= False,
+        allow_insert=False,
+        allow_reorder=False,
+        allow_oddeven=True,
+        allow_delete=False,
         schemata='urban_description',
-        columns= ('id', 'check', 'value', 'text',),
+        columns=('id', 'check', 'value', 'text',),
     ),
     DataGridField(
         name='roadSpecificFeatures',
         widget=DataGridWidget(
-            columns= {'id': FormFocusColumn('id'), 'check': CheckboxColumn('Select'), 'value': FixedColumn('Value'), 'text': TextAreaColumn('Text', rows=1, cols=50)},
+            columns={'id': FormFocusColumn('id'), 'check': CheckboxColumn('Select'), 'value': FixedColumn('Value'), 'text': TextAreaColumn('Text', rows=1, cols=50)},
             label=_('urban_label_roadSpecificFeatures', default='Roadspecificfeatures'),
         ),
         fixed_rows='getRoadFeaturesRows',
-        allow_insert= False,
-        allow_reorder= False,
-        allow_oddeven= True,
-        allow_delete= False,
+        allow_insert=False,
+        allow_reorder=False,
+        allow_oddeven=True,
+        allow_delete=False,
         schemata='urban_road',
-        columns= ('id', 'check', 'value', 'text',),
+        columns=('id', 'check', 'value', 'text',),
     ),
     DataGridField(
         name='locationSpecificFeatures',
         widget=DataGridWidget(
-            columns= {'id': FormFocusColumn('id'), 'check': CheckboxColumn('Select'), 'value': FixedColumn('Value'), 'text': TextAreaColumn('Text', rows=1, cols=50)},
+            columns={'id': FormFocusColumn('id'), 'check': CheckboxColumn('Select'), 'value': FixedColumn('Value'), 'text': TextAreaColumn('Text', rows=1, cols=50)},
             label=_('urban_label_locationSpecificFeatures', default='Locationspecificfeatures'),
         ),
         fixed_rows='getLocationFeaturesRows',
-        allow_insert= False,
-        allow_reorder= False,
-        allow_oddeven= True,
-        allow_delete= False,
+        allow_insert=False,
+        allow_reorder=False,
+        allow_oddeven=True,
+        allow_delete=False,
         schemata='urban_location',
-        columns= ('id', 'check', 'value', 'text',),
+        columns=('id', 'check', 'value', 'text',),
     ),
     DataGridField(
         name='customSpecificFeatures',
@@ -199,16 +200,16 @@ schema = Schema((
     DataGridField(
         name='townshipSpecificFeatures',
         widget=DataGridWidget(
-            columns= {'id': FormFocusColumn('id'), 'check': CheckboxColumn('Select'), 'value': FixedColumn('Value'), 'text': TextAreaColumn('Text', rows=1, cols=50)},
+            columns={'id': FormFocusColumn('id'), 'check': CheckboxColumn('Select'), 'value': FixedColumn('Value'), 'text': TextAreaColumn('Text', rows=1, cols=50)},
             label=_('urban_label_townshipSpecificFeatures', default='Townshipspecificfeatures'),
         ),
         fixed_rows='getTownshipFeaturesRows',
-        allow_insert= False,
-        allow_reorder= False,
-        allow_oddeven= True,
-        allow_delete= False,
+        allow_insert=False,
+        allow_reorder=False,
+        allow_oddeven=True,
+        allow_delete=False,
         schemata='urban_description',
-        columns= ('id', 'check', 'value', 'text',),
+        columns=('id', 'check', 'value', 'text',),
     ),
     LinesField(
         name='opinionsToAskIfWorks',
@@ -270,6 +271,94 @@ schema = Schema((
         default_method='getDefaultText',
         default_content_type='text/plain',
         default_output_type='text/html',
+    ),
+    LinesField(
+        name='SCT',
+        widget=MultiSelectionWidget(
+            size=15,
+            label=_('urban_label_SCT', default='Sct'),
+        ),
+        schemata='urban_location',
+        multiValued=1,
+        vocabulary=UrbanVocabulary('sct', inUrbanConfig=False),
+        default_method='getDefaultValue',
+    ),
+    TextField(
+        name='sctDetails',
+        allowable_content_types=('text/plain',),
+        widget=TextAreaWidget(
+            label=_('urban_label_sctDetails', default='Sctdetails'),
+        ),
+        default_content_type='text/plain',
+        default_method='getDefaultText',
+        schemata='urban_location',
+        default_output_type='text/plain',
+    ),
+    LinesField(
+        name='SDC',
+        widget=MultiSelectionWidget(
+            size=15,
+            label=_('urban_label_SDC', default='Sdc'),
+        ),
+        schemata='urban_location',
+        multiValued=1,
+        vocabulary=UrbanVocabulary('sdc', inUrbanConfig=False),
+        default_method='getDefaultValue',
+    ),
+    TextField(
+        name='sdcDetails',
+        allowable_content_types=('text/plain',),
+        widget=TextAreaWidget(
+            label=_('urban_label_sdcDetails', default='Sdcdetails'),
+        ),
+        default_content_type='text/plain',
+        default_method='getDefaultText',
+        schemata='urban_location',
+        default_output_type='text/plain',
+    ),
+    LinesField(
+        name='township_guide',
+        widget=MultiSelectionWidget(
+            size=10,
+            label=_('urban_label_township_guide', default='Township_guide'),
+        ),
+        schemata='urban_location',
+        multiValued=1,
+        vocabulary=UrbanVocabulary('township_guide', inUrbanConfig=False),
+        default_method='getDefaultValue',
+    ),
+    TextField(
+        name='township_guide_details',
+        allowable_content_types=('text/plain',),
+        widget=TextAreaWidget(
+            label=_('urban_label_township_guide_details',
+                    default='Township_guide_details'),
+        ),
+        default_content_type='text/plain',
+        default_method='getDefaultText',
+        schemata='urban_location',
+        default_output_type='text/plain',
+    ),
+    LinesField(
+        name='regional_guide',
+        widget=MultiSelectionWidget(
+            label=_('urban_label_regional_guide', default='Regional_guide'),
+        ),
+        schemata='urban_location',
+        vocabulary=UrbanVocabulary('regional_guide', inUrbanConfig=False, with_empty_value=True),
+        default_method='getDefaultValue',
+    ),
+    TextField(
+        name='regional_guide_details',
+        allowable_content_types=('text/plain',),
+        widget=TextAreaWidget(
+            label=_('urban_label_regional_guide_details',
+                    default='Regional_guide_details'),
+        ),
+        default_content_type='text/plain',
+        default_method='getDefaultText',
+        schemata='urban_location',
+        default_output_type='text/plain',
     ),
     TextField(
         name='patrimony_analysis',
@@ -674,6 +763,12 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     schema.moveField('ZIP', after='basement')
     schema.moveField('pollution', after='ZIP')
     schema.moveField('folderCategoryTownship', after='pollution')
+    schema.moveField('SDC', after='protectedBuildingDetails')
+    schema.moveField('sdcDetails', after='SDC')
+    schema.moveField('regional_guide', after='reparcellingDetails')
+    schema.moveField('regional_guide_details', after='regional_guide')
+    schema.moveField('township_guide', after='sdcDetails')
+    schema.moveField('township_guide_details', after='township_guide')
     schema.moveField('patrimony', pos='top')
     schema.moveField('regional_inventory_building', after='patrimony')
     schema.moveField('patrimony_archaeological_map', after='regional_inventory_building')
