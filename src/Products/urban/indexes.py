@@ -322,7 +322,7 @@ def task_covid(task):
     """
     """
     licence = task.get_container()
-    covid = licence.getCovid() and 'COVID' or None
+    covid = licence.getCovid() and ['COVID'] or None
     return covid
 
 
@@ -330,5 +330,5 @@ def task_covid(task):
 def licence_covid(licence):
     """
     """
-    covid = licence.getCovid() and 'COVID' or None
+    covid = licence.getCovid() and ['COVID'] or None
     return covid
