@@ -76,7 +76,7 @@ class CovidVocabulary(object):
     """
     def __call__(self, context):
         portal = api.portal.get()
-        vocabulary = [SimpleTerm('COVID19', translate(_('covid'), context=portal.REQUEST))]
+        vocabulary = [SimpleTerm('COVID', 'COVID', translate(_('covid'), context=portal.REQUEST))]
         return vocabulary
 
 
