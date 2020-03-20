@@ -5,18 +5,22 @@ from imio.schedule.content.delay import BaseCalculationDelay
 from Products.urban.interfaces import ICODT_Inquiry
 from Products.urban.interfaces import IInquiry
 
+COVID_DELAY = 30
+
 
 class AnnoncedDelay(BaseCalculationDelay):
     """
-    Return the slected annonced delay of the procedure.
+    Return the selected annonced delay of the procedure.
     """
 
     def calculate_delay(self):
-        delay = self.task_container.getAnnoncedDelay()
+        delay = self.task_container.getAnnoncedDelay() or 0
         if delay.endswith('j'):
             delay = int(delay[:-1])
             delay += self.inquiry_suspension_delay()
-        return delay or 0
+        if self.task_container.getCovid():
+            delay += COVID_DELAY
+        return delay
 
     def inquiry_suspension_delay(self):
         licence = self.task_container
@@ -57,6 +61,8 @@ class UniqueLicenceAnnoncedDelay(AnnoncedDelay):
                 delay = delay - 20
 
         delay += self.inquiry_suspension_delay()
+        if self.task_container.getCovid():
+            delay += COVID_DELAY
         return delay
 
 
@@ -81,4 +87,6 @@ class UniqueLicenceNotificationDelay(AnnoncedDelay):
             else:
                 delay = 0
         delay += self.inquiry_suspension_delay()
+        if self.task_container.getCovid():
+            delay += COVID_DELAY
         return delay

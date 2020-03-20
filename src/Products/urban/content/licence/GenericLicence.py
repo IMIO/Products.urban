@@ -989,6 +989,14 @@ schema = Schema((
         vocabulary=UrbanVocabulary('noteworthytrees', inUrbanConfig=False),
         default_method='getDefaultValue',
     ),
+    BooleanField(
+        name='covid',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label=_('urban_label_covid', default='COVID19'),
+        ),
+        schemata='urban_description',
+    ),
 
 ),
 )
