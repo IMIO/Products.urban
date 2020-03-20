@@ -74,7 +74,7 @@ def updateTaskIndexes(task_container, event):
         for config in task_configs:
             tasks = config.get_task_instances(task_container)
             for task in tasks:
-                task.reindexObject(idxs=['Subject'])
+                task.reindexObject(idxs=['commentators'])
 
 
 def updateBoundLicences(licence, events):
