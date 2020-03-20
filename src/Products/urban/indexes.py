@@ -310,20 +310,12 @@ def inspection_task_followups(task):
     """
     licence = task.get_container()
     # only index Inspection and Ticket licence
+    covid = licence.getCovid() and ['COVID'] or []
     if not IInspection.providedBy(licence) and not ITicket.providedBy(licence):
-        return []
+        return covid
     last_report = licence.getLastReportEvent()
     follow_ups = last_report and last_report.getFollowup_proposition() or []
-    return follow_ups
-
-
-@indexer(IAutomatedTask)
-def task_covid(task):
-    """
-    """
-    licence = task.get_container()
-    covid = licence.getCovid() and ['COVID'] or None
-    return covid
+    return follow_ups + covid
 
 
 @indexer(IGenericLicence)
