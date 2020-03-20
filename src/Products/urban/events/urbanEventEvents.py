@@ -5,6 +5,8 @@ from Products.urban.events.licenceEvents import _setDefaultSelectValues
 from Products.urban.interfaces import IEventTypeType
 from Products.urban.interfaces import ITheLicenceEvent
 
+from imio.schedule.utils import get_task_configs
+
 from zope.component.interface import getInterface
 from zope.interface import alsoProvides
 from zope.event import notify
@@ -97,3 +99,14 @@ def notifyLicence(urban_event, event):
         notify(ObjectModifiedEvent(licence))
 
 
+def updateTaskIndexes(task_container, event):
+    task_configs = get_task_configs(task_container)
+
+    if not task_configs:
+        return
+
+    with api.env.adopt_roles(['Manager']):
+        for config in task_configs:
+            tasks = config.get_task_instances(task_container)
+            for task in tasks:
+                task.reindexObject(idxs=['Subject'])

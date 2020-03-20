@@ -53,6 +53,10 @@
 
   <subscriber for="..interfaces.IGenericLicence
                    zope.lifecycleevent.IObjectModifiedEvent"
+              handler=".licenceEvents.updateTaskIndexes"/>
+
+  <subscriber for="..interfaces.IGenericLicence
+                   zope.lifecycleevent.IObjectModifiedEvent"
               handler=".licenceEvents.updateBoundLicences"/>
 
   <subscriber for="..interfaces.IGenericLicence
@@ -186,6 +190,10 @@
   <subscriber for="..interfaces.IUrbanEvent
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".urbanEventEvents.notifyLicence" />
+
+  <subscriber for="..interfaces.IUrbanEvent
+                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+              handler=".urbanEventEvents.updateTaskIndexes" />
 
   <subscriber for="..interfaces.IUrbanEvent
                    Products.DCWorkflow.interfaces.IAfterTransitionEvent"

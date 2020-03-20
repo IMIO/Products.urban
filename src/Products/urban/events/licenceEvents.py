@@ -8,6 +8,8 @@ from Products.urban.schedule.vocabulary import URBAN_TYPES_INTERFACES
 
 from collective.faceted.task.events.task_events import activate_faceted_tasks_listing
 
+from imio.schedule.utils import get_task_configs
+
 from zope.annotation import IAnnotations
 from zope.interface import alsoProvides
 
@@ -60,6 +62,19 @@ def postCreationActions(licence, event):
 def updateLicenceTitle(licence, event):
     licence.updateTitle()
     licence.reindexObject(idxs=['Title', 'sortable_title'])
+
+
+def updateTaskIndexes(task_container, event):
+    task_configs = get_task_configs(task_container)
+
+    if not task_configs:
+        return
+
+    with api.env.adopt_roles(['Manager']):
+        for config in task_configs:
+            tasks = config.get_task_instances(task_container)
+            for task in tasks:
+                task.reindexObject(idxs=['Subject'])
 
 
 def updateBoundLicences(licence, events):
