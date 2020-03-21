@@ -2680,6 +2680,9 @@ msgstr ""
 msgid "urban_label_patrimony_observation"
 msgstr ""
 
+msgid "urban_label_paymentDeadline"
+msgstr ""
+
 msgid "urban_label_classification_order_scope"
 msgstr ""
 
