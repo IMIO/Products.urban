@@ -187,6 +187,8 @@ class RecipientCadastre(BaseFolder, BrowserDefaultMixin):
     def getRecipientAddress(self):
         return self.getAdr1()+' '+self.getAdr2()
 
+    def Title(self):
+        return '{} {}'.format(self.getName(), self.getFirstname())
 
 
 registerType(RecipientCadastre, PROJECTNAME)
