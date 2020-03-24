@@ -428,6 +428,16 @@ schema = Schema((
         ),
         optional=True,
     ),
+    DateTimeField(
+        name='paymentDeadline',
+        widget=DateTimeField._properties['widget'](
+            show_hm=False,
+            format="%d/%m/%Y",
+            starting_year=2010,
+            label=_('urban_label_paymentDeadline', default='PaymentDeadline'),
+        ),
+        optional=True,
+    ),
 
 ),
 )

@@ -65,6 +65,11 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
         """
         return _date.today()
 
+    def add_years(self, zope_DT, years):
+        """
+        """
+        return DateTime(zope_DT.asdatetime() + relativedelta(years=years))
+
     def format_date(self, date=None, translatemonth=True, long_format=False):
         """
           Format the date for printing in pod templates
