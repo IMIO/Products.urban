@@ -152,6 +152,20 @@
   />
 
   <browser:page
+     for="Products.urban.interfaces.IRecipientCadastre"
+     name="contactview"
+     class=".contactview.RecipientCadastreView"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="Products.urban.interfaces.IRecipientCadastre"
+     name="contactmacros"
+     template="templates/contactmacros.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
      for="Products.urban.interfaces.IUrbanEventInquiry"
      name="urbaneventinquiryview"
      class=".urbaneventviews.UrbanEventInquiryView"
