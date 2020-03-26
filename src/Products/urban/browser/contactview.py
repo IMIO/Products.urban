@@ -93,3 +93,16 @@ class ContactView(BrowserView):
         """
         context = aq_inner(self.context)
         return "%s data" % context.portal_type
+
+
+class RecipientCadastreView(BrowserView):
+    """
+      This manage the view of every RecipientCadastre
+    """
+
+    def __call__(self):
+        context = aq_inner(self.context)
+        parent = context.aq_inner.aq_parent
+        return self.request.RESPONSE.redirect(
+            parent.absolute_url() + '#fieldsetlegend-urbaneventinquiry_recipients'
+        )
