@@ -746,5 +746,16 @@ class IAsyncClaimantsImports(Interface):
     )
 
 
+class IGlobalSuspensionPeriod(Interface):
+    """ """
+    start_date = schema.Date(
+        title=_(u"Suspension period start date"),
+    )
+
+    end_date = schema.Date(
+        title=_(u"Suspension period end date"),
+    )
+
+
 class IFacetedCollection(Interface):
     """ Adapts an object into a faceted collection """

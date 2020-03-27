@@ -2,24 +2,59 @@
 
 from imio.schedule.content.delay import BaseCalculationDelay
 
+from plone import api
+
 from Products.urban.interfaces import ICODT_Inquiry
+from Products.urban.interfaces import IGenericLicence
 from Products.urban.interfaces import IInquiry
+from Products.urban.schedule.interfaces import ITaskWithSuspensionDelay
+from Products.urban.schedule.interfaces import ITaskWithWholeSuspensionDelay
 
-COVID_DELAY = 30
+
+class UrbanBaseDelay(BaseCalculationDelay):
+    """
+    """
+    def calculate_delay(self):
+        task = self.task
+        is_licence = IGenericLicence.providedBy(self.task_container)
+        if not is_licence:
+            return 0
+
+        licence = self.task_container
+        if not licence.getCovid() or not ITaskWithSuspensionDelay.providedBy(task):
+            return 0
+
+        suspension_start = api.portal.get_registry_record(
+            'Products.urban.interfaces.IGlobalSuspensionPeriod.start_date'
+        )
+        suspension_end = api.portal.get_registry_record(
+            'Products.urban.interfaces.IGlobalSuspensionPeriod.end_date'
+        )
+        suspension_period = suspension_end - suspension_start
+
+        import ipdb; ipdb.set_trace()
+        start_date = self.start_date
+        if start_date < suspension_start or ITaskWithWholeSuspensionDelay.providedBy(task):
+            return suspension_period.days
+
+        elif start_date < suspension_end:
+            suspension_prorata = suspension_end - start_date
+            return suspension_prorata.days
+
+        return 0
 
 
-class AnnoncedDelay(BaseCalculationDelay):
+class AnnoncedDelay(UrbanBaseDelay):
     """
     Return the selected annonced delay of the procedure.
     """
 
     def calculate_delay(self):
-        delay = self.task_container.getAnnoncedDelay() or 0
+        base_delay = super(AnnoncedDelay, self).calculate_delay()
+        delay = base_delay + self.task_container.getAnnoncedDelay() or 0
         if delay.endswith('j'):
             delay = int(delay[:-1])
             delay += self.inquiry_suspension_delay()
-        if self.task_container.getCovid():
-            delay += COVID_DELAY
         return delay
 
     def inquiry_suspension_delay(self):
@@ -43,7 +78,7 @@ class AnnoncedDelay(BaseCalculationDelay):
         return delay
 
 
-class UniqueLicenceAnnoncedDelay(AnnoncedDelay):
+class UniqueLicenceAnnoncedDelay(UrbanBaseDelay):
     """
     Return the selected annonced delay of the procedure -20 if class 2
     or -30 if class 1.
@@ -52,7 +87,7 @@ class UniqueLicenceAnnoncedDelay(AnnoncedDelay):
     def calculate_delay(self):
         licence = self.task_container
         raw_delay = licence.getAnnoncedDelay()
-        delay = 0
+        delay = super(AnnoncedDelay, self).calculate_delay()
         if raw_delay.endswith('j'):
             delay = int(raw_delay[:-1])
             if 'class_1' in licence.getProcedureChoice():
@@ -61,12 +96,10 @@ class UniqueLicenceAnnoncedDelay(AnnoncedDelay):
                 delay = delay - 20
 
         delay += self.inquiry_suspension_delay()
-        if self.task_container.getCovid():
-            delay += COVID_DELAY
         return delay
 
 
-class UniqueLicenceNotificationDelay(AnnoncedDelay):
+class UniqueLicenceNotificationDelay(UrbanBaseDelay):
     """
     Return 20 if class 2 or 30 if class 1 only if spw licence project
     has been received, else return licence annonced delay.
@@ -74,7 +107,7 @@ class UniqueLicenceNotificationDelay(AnnoncedDelay):
 
     def calculate_delay(self):
         licence = self.task_container
-        delay = 0
+        delay = super(AnnoncedDelay, self).calculate_delay()
         if licence.getLastDecisionProjectFromSPW():
             if 'class_1' in licence.getProcedureChoice():
                 delay = 30
@@ -87,6 +120,4 @@ class UniqueLicenceNotificationDelay(AnnoncedDelay):
             else:
                 delay = 0
         delay += self.inquiry_suspension_delay()
-        if self.task_container.getCovid():
-            delay += COVID_DELAY
         return delay

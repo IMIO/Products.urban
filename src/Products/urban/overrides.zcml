@@ -83,4 +83,16 @@
         </genericsetup:importStep>
     </configure>
 
+
+    <!--override schedule base delay to include suspension period for all licences -->
+    <configure package="imio.schedule">
+        <adapter
+            for="zope.interface.Interface
+                 imio.schedule.content.task.IAutomatedTask"
+            provides="imio.schedule.interfaces.ICalculationDelay"
+            factory="Products.urban.schedule.delay.UrbanBaseDelay"
+            name="schedule.calculation_default_delay"
+        />
+    </configure>
+
 </configure>
