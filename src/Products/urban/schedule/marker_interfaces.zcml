@@ -34,4 +34,12 @@
     interface=".interfaces.ITaskToCheckDaily"
     type="imio.schedule.interfaces.ITaskMarkerInterface"/>
 
+  <interface
+    interface=".interfaces.ITaskWithSuspensionDelay"
+    type="imio.schedule.interfaces.ITaskMarkerInterface"/>
+
+  <interface
+    interface=".interfaces.ITaskWithWholeSuspensionDelay"
+    type="imio.schedule.interfaces.ITaskMarkerInterface"/>
+
 </configure>
