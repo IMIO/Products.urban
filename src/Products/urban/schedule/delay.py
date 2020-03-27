@@ -32,7 +32,6 @@ class UrbanBaseDelay(BaseCalculationDelay):
         )
         suspension_period = suspension_end - suspension_start
 
-        import ipdb; ipdb.set_trace()
         start_date = self.start_date
         if start_date < suspension_start or ITaskWithWholeSuspensionDelay.providedBy(task):
             return suspension_period.days
@@ -51,11 +50,11 @@ class AnnoncedDelay(UrbanBaseDelay):
 
     def calculate_delay(self):
         base_delay = super(AnnoncedDelay, self).calculate_delay()
-        delay = base_delay + self.task_container.getAnnoncedDelay() or 0
+        delay = self.task_container.getAnnoncedDelay() or 0
         if delay.endswith('j'):
             delay = int(delay[:-1])
             delay += self.inquiry_suspension_delay()
-        return delay
+        return delay + base_delay
 
     def inquiry_suspension_delay(self):
         licence = self.task_container
