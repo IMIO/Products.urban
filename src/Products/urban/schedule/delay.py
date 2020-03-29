@@ -21,7 +21,9 @@ class UrbanBaseDelay(BaseCalculationDelay):
             return 0
 
         licence = self.task_container
-        if not licence.getCovid() or not ITaskWithSuspensionDelay.providedBy(task):
+        marked_suspension_1 = ITaskWithSuspensionDelay.providedBy(task)
+        marked_suspension_2 = ITaskWithWholeSuspensionDelay.providedBy(task)
+        if not licence.getCovid() or (not marked_suspension_1 and not marked_suspension_2):
             return 0
 
         suspension_start = api.portal.get_registry_record(
