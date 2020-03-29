@@ -53,5 +53,5 @@ class ITaskWithSuspensionDelay(Interface):
     """ Task where the delay should be prorogated by the suspension period prorata"""
 
 
-class ITaskWithWholeSuspensionDelay(ITaskWithSuspensionDelay):
+class ITaskWithWholeSuspensionDelay(Interface):
     """ Task where the delay should be prorogated by the whole suspension period """
