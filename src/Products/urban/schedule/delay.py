@@ -90,7 +90,7 @@ class UniqueLicenceAnnoncedDelay(UrbanBaseDelay):
     def calculate_delay(self):
         licence = self.task_container
         raw_delay = licence.getAnnoncedDelay()
-        delay = super(AnnoncedDelay, self).calculate_delay()
+        delay = super(UniqueLicenceAnnoncedDelay, self).calculate_delay()
         if raw_delay.endswith('j'):
             delay = int(raw_delay[:-1])
             if 'class_1' in licence.getProcedureChoice():
@@ -110,7 +110,7 @@ class UniqueLicenceNotificationDelay(UrbanBaseDelay):
 
     def calculate_delay(self):
         licence = self.task_container
-        delay = super(AnnoncedDelay, self).calculate_delay()
+        delay = super(UniqueLicenceNotificationDelay, self).calculate_delay()
         if licence.getLastDecisionProjectFromSPW():
             if 'class_1' in licence.getProcedureChoice():
                 delay = 30
