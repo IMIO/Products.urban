@@ -35,13 +35,15 @@ class UrbanBaseDelay(BaseCalculationDelay):
         suspension_period = suspension_end - suspension_start
 
         start_date = self.start_date
-        if start_date < suspension_start or ITaskWithWholeSuspensionDelay.providedBy(task):
+        if start_date < suspension_start:
             return suspension_period.days
 
         elif start_date < suspension_end:
-            suspension_prorata = suspension_end - start_date
-            return suspension_prorata.days
-
+            if ITaskWithWholeSuspensionDelay.providedBy(task):
+                return suspension_period.days
+            else:
+                suspension_prorata = suspension_end - start_date
+                return suspension_prorata.days
         return 0
 
 
