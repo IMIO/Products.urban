@@ -81,7 +81,7 @@ class AnnoncedDelay(UrbanBaseDelay):
         return delay
 
 
-class UniqueLicenceAnnoncedDelay(UrbanBaseDelay):
+class UniqueLicenceAnnoncedDelay(AnnoncedDelay):
     """
     Return the selected annonced delay of the procedure -20 if class 2
     or -30 if class 1.
@@ -90,7 +90,7 @@ class UniqueLicenceAnnoncedDelay(UrbanBaseDelay):
     def calculate_delay(self):
         licence = self.task_container
         raw_delay = licence.getAnnoncedDelay()
-        delay = super(UniqueLicenceAnnoncedDelay, self).calculate_delay()
+        delay = super(AnnoncedDelay, self).calculate_delay()
         if raw_delay.endswith('j'):
             delay = int(raw_delay[:-1])
             if 'class_1' in licence.getProcedureChoice():
@@ -102,7 +102,7 @@ class UniqueLicenceAnnoncedDelay(UrbanBaseDelay):
         return delay
 
 
-class UniqueLicenceNotificationDelay(UrbanBaseDelay):
+class UniqueLicenceNotificationDelay(AnnoncedDelay):
     """
     Return 20 if class 2 or 30 if class 1 only if spw licence project
     has been received, else return licence annonced delay.
@@ -110,7 +110,7 @@ class UniqueLicenceNotificationDelay(UrbanBaseDelay):
 
     def calculate_delay(self):
         licence = self.task_container
-        delay = super(UniqueLicenceNotificationDelay, self).calculate_delay()
+        delay = super(AnnoncedDelay, self).calculate_delay()
         if licence.getLastDecisionProjectFromSPW():
             if 'class_1' in licence.getProcedureChoice():
                 delay = 30
