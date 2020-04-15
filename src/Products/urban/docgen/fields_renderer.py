@@ -19,9 +19,9 @@ class ApplicantDefaultFieldRenderer(DefaultATFieldRenderer):
     Return the accessor to be sure we go through the 'same address as works' hooks
     """
 
-    def render_value(self):
+    def render(self, no_value=''):
         """
         Compute the rendering of the display value.
         To override for each different type of ATFieldRenderer.
         """
-        return self.field.getAccessor(self.context)()
+        return self.field.getAccessor(self.context)() or no_value
