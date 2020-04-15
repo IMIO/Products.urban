@@ -12,4 +12,13 @@
         permission="zope2.View"
      />
 
+    <adapter
+        for="Products.Archetypes.interfaces.field.IObjectField
+             Products.Archetypes.Widget.TypesWidget
+             Products.urban.interfaces.IApplicant"
+        provides="collective.documentgenerator.interfaces.IFieldRendererForDocument"
+        factory="Products.urban.docgen.fields_renderer.ApplicantDefaultFieldRenderer"
+        permission="zope2.View"
+     />
+
 </configure>
