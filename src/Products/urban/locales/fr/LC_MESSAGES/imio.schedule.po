@@ -188,10 +188,10 @@ msgstr "Délai annoncé des permis uniques"
 msgid "urban.schedule.delay.unique_licence_notification_delay"
 msgstr "Délai de notification des permis uniques"
 
-msgid "urban.schedule.start_date.acknowledgement_date"
+msgid "urban.schedule.start_date.acknowledgment_date"
 msgstr "Date d'accusé de réception du dossier"
 
-msgid "urban.schedule.start_date.acknowledgement_transmit_date"
+msgid "urban.schedule.start_date.acknowledgment_transmit_date"
 msgstr "Date de transmis de l'accusé de réception"
 
 msgid "urban.schedule.start_date.announcement_end_date"

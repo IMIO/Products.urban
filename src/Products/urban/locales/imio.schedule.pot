@@ -107,10 +107,10 @@ msgstr ""
 msgid "urban.assign_folder_manager"
 msgstr ""
 
-msgid "urban.schedule.start_date.acknowledgement_date"
+msgid "urban.schedule.start_date.acknowledgment_date"
 msgstr ""
 
-msgid "urban.schedule.start_date.acknowledgement_transmit_date"
+msgid "urban.schedule.start_date.acknowledgment_transmit_date"
 msgstr ""
 
 msgid "urban.schedule.start_date.ask_complements_date"
