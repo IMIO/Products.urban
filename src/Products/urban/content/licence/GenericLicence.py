@@ -963,6 +963,7 @@ schema = Schema((
         widget=ReferenceBrowserWidget(
             force_close_on_insert=True,
             allow_search=True,
+            only_for_review_states='enabled',
             allow_browse=True,
             show_indexes=True,
             available_indexes={'Title': 'Nom'},
