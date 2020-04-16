@@ -133,7 +133,10 @@ class WillHaveInquiry(CreationCondition):
 
     def evaluate(self):
         licence = self.task_container
-        return 'inquiry' in licence.getProcedureChoice()
+        initiative_inquiry = 'initiative_inquiry' in licence.getProcedureChoice()
+        inquiry = 'inquiry' in licence.getProcedureChoice()
+        have_inquiry = initiative_inquiry or inquiry
+        return have_inquiry
 
 
 class WillHaveAnnouncement(CreationCondition):
