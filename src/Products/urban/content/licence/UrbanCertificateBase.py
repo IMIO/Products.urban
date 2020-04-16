@@ -132,6 +132,7 @@ schema = Schema((
         name='notaryContact',
         widget=ReferenceBrowserWidget(
             allow_search=1,
+            only_for_review_states='enabled',
             allow_browse=1,
             force_close_on_insert=1,
             startup_directory='urban/notaries',

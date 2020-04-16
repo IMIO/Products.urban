@@ -37,6 +37,7 @@ schema = Schema((
         name='notaryContact',
         widget=ReferenceBrowserWidget(
             allow_search=True,
+            only_for_review_states='enabled',
             allow_browse=True,
             force_close_on_insert=True,
             startup_directory='urban/notaries',

@@ -369,6 +369,7 @@ schema = Schema((
         widget=ReferenceBrowserWidget(
             force_close_on_insert=1,
             allow_search=1,
+            only_for_review_states='enabled',
             allow_browse=1,
             show_indexes=1,
             show_index_selector=1,
