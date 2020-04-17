@@ -217,6 +217,8 @@ class AttachmentsTable(UrbanTable, SequenceTable):
 
     sortOn = 'table-creationdateColumn-1'
     cssClasses = {'table': 'listing nosort largetable'}
+    batchSize = 9999
+    startBatchingAt = 9999
 
 
 class NestedAttachmentsTable(UrbanTable, SequenceTable):
@@ -227,6 +229,8 @@ class NestedAttachmentsTable(UrbanTable, SequenceTable):
 
     sortOn = 'table-creationdateColumn-1'
     cssClasses = {'table': 'listing nosort largetable'}
+    batchSize = 9999
+    startBatchingAt = 9999
 
 
 class InternalOpinionServicesTable(SequenceTable):
