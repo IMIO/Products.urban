@@ -137,6 +137,9 @@ msgstr "Créer les événements de demande d'avis"
 msgid "urban.schedule.condition.opinion_requests_done"
 msgstr "Avis de service reçus"
 
+msgid "urban.schedule.condition.primo_done"
+msgstr "Cloturer l'événement de primo dossier"
+
 msgid "urban.schedule.condition.procedure_choice_done"
 msgstr "Sélectionner une valeur dans le champ 'choix de la procédure'"
 

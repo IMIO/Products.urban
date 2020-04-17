@@ -289,6 +289,14 @@
         name="urban.schedule.condition.announcement_done"
     />
 
+    <adapter
+        for="Products.urban.interfaces.IBaseAllBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.WalloonRegionPrimoEventDone"
+        name="urban.schedule.condition.primo_done"
+    />
+
     <!-- analysis conditions-->
     <adapter
         for="Products.urban.interfaces.IBaseBuildLicence

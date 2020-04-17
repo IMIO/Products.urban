@@ -451,6 +451,22 @@ class FDDecisionEventDoneCondition(Condition):
         return fd_decision_done
 
 
+class WalloonRegionPrimoEventDone(Condition):
+    """
+    Primo event is closed.
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+
+        primo_done = False
+        primo_event = licence.getLastWalloonRegionPrimo()
+        if primo_event:
+            primo_done = api.content.get_state(primo_event) == 'closed'
+
+        return primo_done
+
+
 class LicenceDecisionCollegeEventCreated(Condition):
     """
     TheLicence event is created.
