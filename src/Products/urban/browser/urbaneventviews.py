@@ -11,6 +11,7 @@ from Products.urban.browser.table.urbantable import DocumentsTable
 from Products.urban.browser.table.urbantable import AttachmentsTable
 from Products.urban.browser.table.urbantable import ClaimantsTable
 from Products.urban.browser.table.urbantable import RecipientsCadastreTable
+from Products.urban.interfaces import IGenericLicence
 from Products.urban import services
 from StringIO import StringIO
 
@@ -339,7 +340,8 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
             # this should not happen...
             return None
         displayed_fields = self.getUsedAttributes()
-        inquiry_fields = utils.getSchemataFields(linkedInquiry, displayed_fields, 'urban_inquiry')
+        schemata = IGenericLicence.providedBy(linkedInquiry) and 'urban_inquiry' or 'default'
+        inquiry_fields = utils.getSchemataFields(linkedInquiry, displayed_fields, schemata)
         for inquiry_field in inquiry_fields:
             if inquiry_field.__name__ == "claimsText":
                 # as this text can be very long, we do not want to show it with the other
