@@ -62,3 +62,27 @@ def close_old_tasks():
     for licence in licences:
         notify(ObjectModifiedEvent(licence))
         print "notified licence {}".format(licence)
+
+
+def update_covid_tasks_deadline():
+    catalog = api.portal.get_tool('portal_catalog')
+
+    licences_to_update = set()
+
+    for brain in catalog(portal_type=['TaskConfig', 'MacroTaskConfig']):
+        task_cfg = brain.getObject()
+        interface_1 = 'Products.urban.schedule.interfaces.ITaskWithSuspensionDelay'
+        interface_2 = 'Products.urban.schedule.interfaces.ITaskWithWholeSuspensionDelay'
+        if interface_1 in (task_cfg.marker_interfaces or []) or interface_2 in (task_cfg.marker_interfaces or []):
+            task_brains = catalog(
+                object_provides=IAutomatedTask.__identifier__,
+                task_config_UID=task_cfg.UID(),
+                review_state=states_by_status[STARTED] + states_by_status[CREATION]
+            )
+            for brain in task_brains:
+                task = brain.getObject()
+                licences_to_update.add(task.get_container())
+
+    for licence in licences_to_update:
+        notify(ObjectModifiedEvent(licence))
+        print "updated licence {}".format(licence.Title())
