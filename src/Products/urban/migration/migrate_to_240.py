@@ -141,6 +141,7 @@ def migrate(context):
     migrate_create_voc_general_disposition(context)
     migrate_update_empty_sols_pcas_title(context)
     migrate_codt_buildlicences_schedule(context)
+    migrate_enable_optional_tax_field_by_default(context)
     catalog = api.portal.get_tool('portal_catalog')
     catalog.clearFindAndRebuild()
     logger.info("migration done!")
