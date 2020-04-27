@@ -97,6 +97,16 @@ def migrate_create_voc_tax(context):
     logger.info("migration step done!")
 
 
+def migrate_enable_optional_tax_field_by_default(context):
+    """
+    """
+    logger = logging.getLogger('urban: migrate migrate_enable_optional_tax_field_by_default')
+    logger.info("starting migration step")
+    portal_urban = api.portal.get_tool('portal_urban')
+    portal_urban.manage_field_activation(fields_to_enable=['tax'])
+    logger.info("migration step done!")
+
+
 def migrate_update_empty_sols_pcas_title(context):
     """
     """
