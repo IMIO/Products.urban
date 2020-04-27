@@ -8,6 +8,7 @@ from Products.urban.schedule.vocabulary import URBAN_TYPES_INTERFACES
 
 from collective.faceted.task.events.task_events import activate_faceted_tasks_listing
 
+from imio.schedule.utils import end_all_open_tasks
 from imio.schedule.utils import get_task_configs
 
 from zope.annotation import IAnnotations
@@ -52,7 +53,6 @@ def _setDefaultReference(licence):
 
 def postCreationActions(licence, event):
     # set permissions on licence
-    _setManagerPermissionOnLicence(licence)
     # check the numerotation need to be incremented
     _checkNumerotation(licence)
     # update the licence title
@@ -179,3 +179,10 @@ def set_faceted_navigation(licence, event):
     Activate faceted navigation licences.
     """
     activate_faceted_tasks_listing(licence, event)
+
+
+def close_all_tasks(licence, event):
+    config = licence.getLicenceConfig()
+    licence_state = api.content.get_state(licence)
+    if licence_state in config.getStates_to_end_all_tasks() or []:
+        end_all_open_tasks(licence)
