@@ -818,7 +818,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         if not licence_configs:
             licence_configs = self.objectValues('LicenceConfig')
         else:
-            licence_configs = [b.getObject() for b in api.content.find(portal_type='LicenceConfig') if b.getObject().licencePortalType in licence_configs]
+            licence_configs = [b for b in self.objectValues('LicenceConfig') if b.licencePortalType in licence_configs]
 
         for licence_config in licence_configs:
             if set_fields_to_enable:
