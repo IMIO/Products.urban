@@ -789,5 +789,25 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         folders = [ob for ob in self.objectValues() if hasattr(ob, 'immediatelyAddableTypes') and voc_types.intersection(set(ob.immediatelyAddableTypes))]
         return folders
 
+    def manage_field_activation(self, fields_to_enable=[], fields_to_disable=[], licence_configs=[]):
+
+        if set(fields_to_enable).intersection(fields_to_disable):
+            raise ValueError("A field can't be enabled and disabled")
+
+        set_fields_to_enable = set(fields_to_enable)
+        set_fields_to_disable = set(fields_to_disable)
+
+        if not licence_configs:
+            licence_configs = self.objectValues('LicenceConfig')
+        else:
+            licence_configs = [b for b in self.objectValues('LicenceConfig') if b.licencePortalType in licence_configs]
+
+        for licence_config in licence_configs:
+            if set_fields_to_enable:
+                if set_fields_to_enable.issubset(set(licence_config.listUsedAttributes())):
+                    licence_config.usedAttributes = tuple(list(set_fields_to_enable.union(set(licence_config.usedAttributes))))
+            if set_fields_to_disable:
+                licence_config.usedAttributes = tuple(list(set(licence_config.usedAttributes).difference(set_fields_to_disable)))
+
 
 registerType(UrbanTool, PROJECTNAME)
