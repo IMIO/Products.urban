@@ -33,13 +33,13 @@ class EventTypeType(grok.GlobalUtility):
         gsm = getGlobalSiteManager()
         interfaces = gsm.getUtilitiesFor(IEventTypeType)
         items = []
-        #we add an empty vocab value of type "choose a value"
+        # we add an empty vocab value of type "choose a value"
         val = utranslate(domain='urban', msgid=EMPTY_VOCAB_VALUE, context=context, default=EMPTY_VOCAB_VALUE)
         items.append(SimpleTerm('', val, val))
         items = items + [SimpleTerm(interfaceName, interface.__doc__, utranslate(msgid=interface.__doc__, domain='urban', context=context, default=interface.__doc__))
                          for interfaceName, interface in interfaces]
 
-        #sort elements by title
+        # sort elements by title
         def sort_function(x, y):
             z = cmp(x.title, y.title)
             return z
@@ -103,6 +103,7 @@ class folderManagersVocabulary():
 
         return current_foldermanager, foldermanagers
 
+
 folderManagersVocabularyFactory = folderManagersVocabulary()
 
 
@@ -125,8 +126,7 @@ class LicenceStateVocabularyFactory(object):
             SimpleTerm(state_id, state_id, translate(state.title, 'plone', context=request))
             for state_id, state in workfow.states.items()
         ]
-
-        #sort elements by title
+        # sort elements by title
         voc_terms.sort(lambda a, b: cmp(a.title, b.title))
 
         vocabulary = SimpleVocabulary(voc_terms)
@@ -136,6 +136,8 @@ class LicenceStateVocabularyFactory(object):
     def get_portal_type(self, context):
         """
         """
+        if context.portal_type == 'LicenceConfig':
+            return context.licencePortalType
         return context.portal_type
 
 

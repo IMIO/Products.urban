@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2020-03-21 17:59+0000\n"
+"POT-Creation-Date: 2020-04-27 07:00+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -516,7 +516,7 @@ msgstr "Fin des travaux"
 msgid "ImpactStudy event type marker interface"
 msgstr "Étude d'incidence"
 
-#: ../browser/urbaneventviews.py:199
+#: ../browser/urbaneventviews.py:200
 msgid "Import"
 msgstr ""
 
@@ -536,7 +536,7 @@ msgstr "Etat du permis"
 msgid "Licence types"
 msgstr "Type de permis"
 
-#: ../browser/urbaneventviews.py:190
+#: ../browser/urbaneventviews.py:191
 msgid "Listing file"
 msgstr ""
 
@@ -702,7 +702,11 @@ msgstr ""
 msgid "Submit"
 msgstr "Valider"
 
-#: ../browser/urbaneventviews.py:434
+#: ../interfaces.py:756
+msgid "Suspension period end date"
+msgstr ""
+
+#: ../browser/urbaneventviews.py:436
 msgid "Suspension period from to: please check the end date"
 msgstr "Période de suspension du ${from} au ${to}: CORRIGEZ LA DATE DE FIN DE PUBLICITE."
 
@@ -710,7 +714,7 @@ msgstr "Période de suspension du ${from} au ${to}: CORRIGEZ LA DATE DE FIN DE P
 msgid "Tests Extension profile for urban."
 msgstr ""
 
-#: ../browser/urbaneventviews.py:428
+#: ../browser/urbaneventviews.py:430
 msgid "The claimants import will be ready tomorrow!"
 msgstr "L'import des réclamants a bien été enregistré et sera éxécuté cette nuit"
 
@@ -718,19 +722,19 @@ msgstr "L'import des réclamants a bien été enregistré et sera éxécuté cet
 msgid "The field does not exist !!!"
 msgstr ""
 
-#: ../browser/urbaneventviews.py:38
+#: ../browser/urbaneventviews.py:39
 msgid "The mailings will be ready tomorrow!"
 msgstr "Le publipostage a bien été enregistré et sera éxécuté cette nuit"
 
-#: ../browser/urbaneventviews.py:468
+#: ../browser/urbaneventviews.py:470
 msgid "The parcel radius search will be ready tomorrow!"
 msgstr "La recherche des propriétaires concernés par le rayon de cette enquête a bien été enregistrée et sera éxécutée cette nuit."
 
-#: ../browser/urbaneventviews.py:466
+#: ../browser/urbaneventviews.py:468
 msgid "There are parcel owners without any address found! Desactivate them!"
 msgstr ""
 
-#: ../browser/urbaneventviews.py:426
+#: ../browser/urbaneventviews.py:428
 msgid "This UrbanEventInquiry is not linked to an existing Inquiry !  Define a new inquiry on the licence !"
 msgstr ""
 
@@ -2570,6 +2574,9 @@ msgstr "Recherche"
 msgid "urban_context_help"
 msgstr ""
 
+msgid "urban_descr_states_to_end_all_tasks"
+msgstr "Sélectionnez les états pour lesquels toutes les tâches se terminent."
+
 #. Default: "Number of the lots, ..."
 #: ../content/licence/GenericLicence.py:610
 msgid "urban_descr_subdivisionDetails"
@@ -3280,7 +3287,7 @@ msgid "urban_label_defaultRecipient"
 msgstr "Destinataire par défaut"
 
 #. Default: "Foldermanagers"
-#: ../LicenceConfig.py:184
+#: ../LicenceConfig.py:172
 msgid "urban_label_default_foldermanagers"
 msgstr "Agent traitant par défaut"
 
@@ -4956,6 +4963,9 @@ msgstr "Détails concernant le SSC"
 #: Street.py
 msgid "urban_label_startDate"
 msgstr "Date de début d'utilisation"
+
+msgid "urban_label_states_to_end_all_tasks"
+msgstr "États terminant toutes les tâches du dossier"
 
 #. Default: "Street"
 #: Contact.py

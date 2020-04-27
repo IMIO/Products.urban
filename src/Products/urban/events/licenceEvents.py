@@ -8,6 +8,8 @@ from Products.urban.schedule.vocabulary import URBAN_TYPES_INTERFACES
 
 from collective.faceted.task.events.task_events import activate_faceted_tasks_listing
 
+from imio.schedule.utils import end_all_open_tasks
+
 from zope.interface import alsoProvides
 
 
@@ -49,7 +51,6 @@ def _setDefaultReference(licence):
 
 def postCreationActions(licence, event):
     # set permissions on licence
-    _setManagerPermissionOnLicence(licence)
     # check the numerotation need to be incremented
     _checkNumerotation(licence)
     # update the licence title
@@ -69,8 +70,8 @@ def updateEventsFoldermanager(licence, event):
 
 
 def _setManagerPermissionOnLicence(licence):
-    #there is no need for other users than Managers to List folder contents
-    #set this permission here if we use the simple_publication_workflow...
+    # there is no need for other users than Managers to List folder contents
+    # set this permission here if we use the simple_publication_workflow...
     licence.manage_permission('List folder contents', ['Manager', ], acquire=0)
 
 
@@ -78,7 +79,7 @@ def _checkNumerotation(licence):
     config = licence.getUrbanConfig()
     portal_urban = config.aq_parent
     source_config = getattr(portal_urban, config.getNumerotationSource())
-    #increment the numerotation in the tool only if its the one that has been generated
+    # increment the numerotation in the tool only if its the one that has been generated
     if config.generateReference(licence) in licence.getReference():
         value = source_config.getNumerotation()
         if not str(value).isdigit():
@@ -86,7 +87,7 @@ def _checkNumerotation(licence):
         else:
             value = int(value)
             value = value + 1
-        #set the new value
+        # set the new value
         source_config.setNumerotation(value)
         source_config.reindexObject()
 
@@ -127,3 +128,10 @@ def set_faceted_navigation(licence, event):
     Activate faceted navigation licences.
     """
     activate_faceted_tasks_listing(licence, event)
+
+
+def close_all_tasks(licence, event):
+    config = licence.getLicenceConfig()
+    licence_state = api.content.get_state(licence)
+    if licence_state in config.getStates_to_end_all_tasks() or []:
+        end_all_open_tasks(licence)
