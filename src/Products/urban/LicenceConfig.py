@@ -47,18 +47,6 @@ from DateTime import DateTime
 
 schema = Schema((
 
-    LinesField(
-        name='eventTypes',
-        widget=MultiSelectionWidget(
-            format='checkbox',
-            label='Eventtype',
-            label_msgid='urban_label_eventtype',
-            i18n_domain='urban',
-        ),
-        schemata='urban_test',
-        multiValued=1,
-        vocabulary="listEventTypes",
-    ),
     StringField(
         name='licencePortalType',
         widget=StringField._properties['widget'](
@@ -188,6 +176,20 @@ schema = Schema((
         schemata='public_settings',
         multiValued=True,
         allowed_types=('FolderManager',),
+    ),
+    LinesField(
+        name='states_to_end_all_tasks',
+        widget=InAndOutWidget(
+            description="Select the licence states who will close all schedule tasks",
+            description_msgid="urban_descr_states_to_end_all_tasks",
+            size=10,
+            label='States_to_end_all_taks',
+            label_msgid='urban_label_states_to_end_all_tasks',
+            i18n_domain='urban',
+        ),
+        schemata='schedule',
+        multiValued=True,
+        vocabulary_factory='urban.licence_state',
     ),
 
 ),

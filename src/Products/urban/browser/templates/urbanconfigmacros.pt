@@ -104,6 +104,18 @@
 
 <div metal:define-macro="schedule_macro" i18n:domain="urban">
 
+    <tal:fields tal:define="field_macro field_macro | context/widgets/field/macros/view" tal:repeat="field python:context.Schema().filterFields(schemata='schedule')">
+
+        <tal:if_visible define="purl nocall:context/portal_url;
+                               portal purl/getPortalObject;
+                               mode string:view;
+                               visState python:field.widget.isVisible(here, mode);
+                               visCondition python:field.widget.testCondition(None, portal, context);" condition="python:visState == 'visible' and visCondition">
+            <metal:use_field use-macro="field_macro"/>
+        </tal:if_visible>
+    </tal:fields>
+
+
     <tal:filter define="folderContents view/getScheduleConfigs">
 
         <metal:main_macro tal:define="
@@ -129,35 +141,4 @@
 
    <tal:listing content="structure view/renderInternalServicesListing" />
 
-</div>
-
-
-<div metal:define-macro="test_macro" i18n:domain="urban">
-    <tal:filter define="folderContents view/getTestConfigs">
-
-        <metal:main_macro tal:define="
-        base_macros context/base/macros;
-        folderlisting_macro base_macros/folderlisting;
-        errors python:request.get('errors', {})">
-
-
-            <form action="test/configtestprocessingview">
-                <div tal:repeat="event view/get_events">
-                    <tal:data tal:define="title event/title;
-                                  id event/id">
-                        <input type="checkbox" name="events_checked" tal:attributes="value id" checked>
-                        <span tal:content="title"></span>
-
-                    </tal:data>
-                </div>
-                <!--<metal:fieldMacro use-macro="python:here.widget('eventTypes', mode='edit')" />-->
-                <input type="submit" value="générer traitement">
-            </form>
-            <h2> Dernière(s) génération</h2>
-            <div tal:repeat="item view/get_generated_tests">
-                <a tal:attributes="href string:test/${item}" tal:content="item" target="_blank"></a>
-            </div>
-        </metal:main_macro>
-
-    </tal:filter>
 </div>

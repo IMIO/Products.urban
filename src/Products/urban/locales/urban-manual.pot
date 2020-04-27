@@ -1246,6 +1246,9 @@ msgstr ""
 msgid "urban_alertdelay_descr"
 msgstr ""
 
+msgid "urban_descr_states_to_end_all_tasks"
+msgstr ""
+
 #. Default: "Select the optional fields you want to use. Multiple selection or deselection when clicking with CTRL"
 #: LicenceConfig.py
 msgid "urban_descr_usedAttributes"
@@ -2306,6 +2309,9 @@ msgstr ""
 #. Default: "Specificfeaturesdetail"
 #: UrbanCertificateBase.py
 msgid "urban_label_specificFeaturesDetail"
+msgstr ""
+
+msgid "urban_label_states_to_end_all_tasks"
 msgstr ""
 
 #. Default: "Sqlhost"

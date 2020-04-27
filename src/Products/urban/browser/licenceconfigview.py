@@ -22,7 +22,7 @@ class LicenceConfigView(BrowserView):
         return macro
 
     def getTabs(self):
-        return ['public_settings', 'vocabulary_folders', 'events', 'schedule', 'test']
+        return ['public_settings', 'vocabulary_folders', 'events', 'schedule']
 
     def getVocabularyFolders(self):
         context = aq_inner(self.context)
@@ -57,11 +57,3 @@ class LicenceConfigView(BrowserView):
         eventtypes = portal_urban.listEventTypes(licence, urbanConfigId=config_id)
         events_objects = [event.getObject() for event in eventtypes]
         return events_objects
-
-    def get_generated_tests(self):
-        licence = aq_inner(self.context)
-        tool = api.portal.get_tool('portal_types')
-        portal_type = tool[licence.licencePortalType]
-        values = api.content.find(context=self.context, portal_type=portal_type.id, sort_on='getObjPositionInParent')
-        lasts_generated = [item.id for item in reversed(values)]
-        return lasts_generated
