@@ -41,6 +41,23 @@
 </fieldset>
 
 
+<fieldset metal:define-macro="urbanRepresentativeContactsMacro" i18n:domain="urban" tal:define="representativeContacts here/getRepresentativeContacts">
+    <legend i18n:translate="urban_label_representative_contacts">RepresentativeContacts(s)</legend>
+    <tal:loop repeat="representativeContact representativeContacts" tal:condition="representativeContacts">
+        <div class="#" tal:attributes="class python: 'clear'">
+            <a href="#" tal:attributes="href python: representativeContact.absolute_url() + '?came_from_licence_uid=' + context.UID()">
+                <span tal:replace="python: representativeContact.getPersonTitle(short=True)" />
+                <span tal:replace="representativeContact/getName1|nothing" />
+                <span tal:replace="representativeContact/getName2|nothing" />
+                <span tal:condition="representativeContact/getSociety" tal:replace="python: '(' + representativeContact.getSociety() + ')'" />
+            </a>
+            <span tal:content="python: representativeContact.getStreet()+' '+representativeContact.getNumber()" /><br />
+            <span tal:content="python: representativeContact.getZipcode()+' '+representativeContact.getCity()" /><br />
+        </div>
+    </tal:loop>
+</fieldset>
+
+
 <fieldset metal:define-macro="urbanNotariesMacro" i18n:domain="urban" tal:define="notaries here/getNotaryContact">
     <legend i18n:translate="urban_label_notaryContact">Notary(ies)</legend>
     <tal:loop repeat="notary notaries">
