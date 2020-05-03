@@ -5,7 +5,19 @@ Changes
 2.5 (unreleased)
 ----------------
 
-- provide the add company feature to the CU1 process
+- Add an Ultimate date field in the list of activatable fields
+  [fngaha]
+
+- Update documentation with cadastre downloading
+  [fngaha]
+
+- Provide management of external directions
+  [fngaha]
+
+- Translate liste_220 errors
+  [fngaha]
+
+- Provide the add company feature to the CU1 process
   [fngaha]
 
 
