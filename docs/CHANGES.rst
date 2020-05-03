@@ -5,10 +5,19 @@ Changes
 2.5 (unreleased)
 ----------------
 
-- update documentation with cadastre downloading
-- provide management of external directions
-- translate liste_220 errors
-- provide the add company feature to the CU1 process
+- Add an Ultimate date field in the list of activatable fields
+  [fngaha]
+
+- Update documentation with cadastre downloading
+  [fngaha]
+
+- Provide management of external directions
+  [fngaha]
+
+- Translate liste_220 errors
+  [fngaha]
+
+- Provide the add company feature to the CU1 process
   [fngaha]
 
 - Improve mailing. Add the possibility to delay mailing during the night [SUP-12289]
