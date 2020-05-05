@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2020-04-27 07:00+0000\n"
+"POT-Creation-Date: 2020-05-05 15:47+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2548,7 +2548,7 @@ msgstr ""
 msgid "urban_context_help"
 msgstr ""
 
-msgid "urban_descr_states_to_end_all_taks"
+msgid "urban_descr_states_to_end_all_tasks"
 msgstr ""
 
 #. Default: "Number of the lots, ..."
@@ -4964,7 +4964,7 @@ msgstr ""
 msgid "urban_label_startDate"
 msgstr ""
 
-msgid "urban_label_states_to_end_all_taks"
+msgid "urban_label_states_to_end_all_tasks"
 msgstr ""
 
 #. Default: "Street"
@@ -5175,6 +5175,11 @@ msgstr ""
 #. Default: "Typeandstreetname_number_box"
 #: ../OpinionRequestEventType.py:75
 msgid "urban_label_typeAndStreetName_number_box"
+msgstr ""
+
+#. Default: "UltimeDate"
+#: ../UrbanEvent.py:447
+msgid "urban_label_ultimeDate"
 msgstr ""
 
 #. Default: "Path of a UNO-enabled Python interpreter (ie /usr/bin/python)"
