@@ -2731,6 +2731,11 @@ msgstr ""
 msgid "urban_label_TALCondition"
 msgstr ""
 
+#. Default: "UltimeDate"
+#: ../UrbanEvent.py
+msgid "urban_label_ultimeDate"
+msgstr ""
+
 #. Default: "Urbancertificateonenumerotation"
 #: UrbanTool.py
 msgid "urban_label_UrbanCertificateOneNumerotation"

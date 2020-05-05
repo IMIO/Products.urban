@@ -2761,6 +2761,11 @@ msgstr "Schéma de Structure Communal (S.S.C.)"
 msgid "urban_label_TALCondition"
 msgstr "Condition TAL"
 
+#. Default: "UltimeDate"
+#: ../UrbanEvent.py
+msgid "urban_label_ultimeDate"
+msgstr "Date ultime"
+
 #. Default: "Urbancertificateonenumerotation"
 #: UrbanTool.py
 msgid "urban_label_UrbanCertificateOneNumerotation"
