@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2020-05-05 15:47+0000\n"
+"POT-Creation-Date: 2020-05-07 09:54+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -4078,6 +4078,11 @@ msgstr "Signatures principales"
 #: FolderManager.py
 msgid "urban_label_manageableLicences"
 msgstr "Type de permis gérés"
+
+#. Default: "Managed_by_prosecutor"
+#: ../content/licence/Ticket.py:96
+msgid "urban_label_managed_by_prosecutor"
+msgstr "Prise en charge procureur"
 
 #. Default: "Manualparcels"
 #: ../content/licence/EnvClassBordering.py:51

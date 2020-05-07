@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2020-05-05 15:47+0000\n"
+"POT-Creation-Date: 2020-05-07 09:54+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -4042,6 +4042,11 @@ msgstr ""
 #. Default: "Manageablelicences"
 #: FolderManager.py
 msgid "urban_label_manageableLicences"
+msgstr ""
+
+#. Default: "Managed_by_prosecutor"
+#: ../content/licence/Ticket.py:96
+msgid "urban_label_managed_by_prosecutor"
 msgstr ""
 
 #. Default: "Manualparcels"
