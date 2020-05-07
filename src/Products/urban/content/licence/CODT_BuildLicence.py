@@ -27,7 +27,7 @@ from Products.urban.widget.urbanreferencewidget import UrbanBackReferenceWidget
 
 
 ##code-section module-header #fill in your manual code here
-optional_fields = ['limitedImpact', 'SDC_divergence']
+optional_fields = ['limitedImpact', 'SDC_divergence', 'managed_by_prosecutor']
 ##/code-section module-header
 
 schema = Schema((

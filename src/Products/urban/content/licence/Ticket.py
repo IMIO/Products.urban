@@ -89,6 +89,14 @@ schema = Schema((
         multiValued=True,
         relationship="bound_licences",
     ),
+    BooleanField(
+        name='managed_by_prosecutor',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label=_('urban_label_managed_by_prosecutor', default='Managed_by_prosecutor'),
+        ),
+        schemata='urban_description',
+    ),
 ),
 )
 Ticket_schema = BaseFolderSchema.copy() + \
