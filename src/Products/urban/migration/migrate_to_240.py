@@ -116,7 +116,7 @@ def migrate_move_codt_parceloutlicence_geometricians_to_representative_contacts(
     licence_brains = catalog(portal_type='CODT_ParcelOutLicence')
     licences = [li.getObject() for li in licence_brains]
     for licence in licences:
-        for geometrician in  licence.getGeometricians():
+        for geometrician in licence.getGeometricians():
             rc_list = licence.getRepresentativeContacts()
             rc_list.append(geometrician)
             licence.setRepresentativeContacts(rc_list)
