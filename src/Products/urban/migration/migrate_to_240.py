@@ -191,6 +191,7 @@ def migrate(context):
     migrate_move_codt_parceloutlicence_geometricians_to_representative_contacts(context)
     migrate_add_foldermanagers_collection(context)
     migrate_update_foldermanagers_layout(context)
+    migrate_move_codt_parceloutlicence_geometricians_to_representative_contacts(context)
     catalog = api.portal.get_tool('portal_catalog')
     catalog.clearFindAndRebuild()
     logger.info("migration done!")
