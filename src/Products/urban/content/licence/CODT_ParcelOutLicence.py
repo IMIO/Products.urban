@@ -41,6 +41,26 @@ schema = Schema((
         schemata='urban_description',
     ),
     ReferenceField(
+        name='geometricians',
+        widget=ReferenceBrowserWidget(
+            force_close_on_insert=1,
+            allow_search=1,
+            only_for_review_states='enabled',
+            allow_browse=0,
+            show_indexes=1,
+            show_index_selector=1,
+            available_indexes={'Title': 'Nom'},
+            base_query='geometriciansBaseQuery',
+            wild_card_search=True,
+            show_results_without_query=True,
+            label=_('urban_label_geometricians', default='Geometricians'),
+        ),
+        required=False,
+        multiValued=1,
+        relationship='parcelOutGeometricians',
+        allowed_types=('Geometrician',),
+    ),
+    ReferenceField(
         name='representativeContacts',
         widget=ReferenceBrowserWidget(
             force_close_on_insert=1,
@@ -201,7 +221,6 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     schema.moveField('isModification', after='folderCategory')
     schema.moveField('description', after='impactStudy')
     schema.moveField('representativeContacts', after='workLocations')
-    schema.moveField('geometricians', after='representativeContacts')
     return schema
 
 finalizeSchema(CODT_ParcelOutLicence_schema)
