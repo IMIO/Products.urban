@@ -84,7 +84,7 @@
   />
 
   <browser:page
-     for="*"
+     for="Products.urban.interfaces.IUrbanEvent"
      name="pm.wsclient"
      class=".pm-wsclientview.PMWSClientView"
      permission="zope2.View"

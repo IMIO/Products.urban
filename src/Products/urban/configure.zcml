@@ -169,6 +169,10 @@
     type=".interfaces.IEventTypeType"/>
 
   <interface
+    interface=".interfaces.ITheTicketEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
     interface=".interfaces.ILicenceNotificationEvent"
     type=".interfaces.IEventTypeType"/>
 
