@@ -695,5 +695,31 @@ class FollowUpTicketClosed(InspectionCondition):
         followup_ticket = self.get_last_followup_ticket()
         if not followup_ticket:
             return False
-        created = api.content.get_state(followup_ticket) == 'ended'
-        return created
+        ended = api.content.get_state(followup_ticket) == 'ended'
+        return ended
+
+
+class TicketEventClosed(Condition):
+    """
+    The ticket event is closed.
+    """
+    def evaluate(self):
+        licence = self.task_container
+        ticket_event = licence.getLastTheticket()
+        if not ticket_event:
+            return False
+        closed = api.content.get_state(ticket_event) == 'closed'
+        return closed
+
+
+class TicketRedactionOverDeadline(Condition):
+    """
+    The ticket event has been closed under 90 days.
+    """
+    def evaluate(self):
+        licence = self.task_container
+        deposit_event = licence.getLastDeposit()
+        ticket_event = licence.getLastTheticket()
+        redacted = ticket_event and api.content.get_state(ticket_event) == 'closed' or False
+        over_delay = DateTime() - deposit_event.getEventDate() > 90
+        return not redacted and over_delay

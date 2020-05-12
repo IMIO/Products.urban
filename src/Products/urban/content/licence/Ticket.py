@@ -261,6 +261,12 @@ class Ticket(BaseFolder, GenericLicence, BrowserDefaultMixin):
                         if corp.portal_type == 'CorporationPlaintiff']
         return corporations
 
+    def getLastDeposit(self):
+        return self.getLastEvent(interfaces.IDepositEvent)
+
+    def getLastTheticket(self):
+        return self.getLastEvent(interfaces.ITheTicketEvent)
+
 
 registerType(Ticket, PROJECTNAME)
 
