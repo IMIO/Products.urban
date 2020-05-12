@@ -60,6 +60,14 @@
     />
 
     <adapter
+        for="Products.urban.interfaces.ITicket
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.SingleComplementAsked"
+        name="urban.schedule.condition.complements_asked"
+    />
+
+    <adapter
         for="Products.urban.interfaces.IBaseBuildLicence
              imio.schedule.content.task.IAutomatedTask"
         provides="imio.schedule.interfaces.IEndCondition"
@@ -69,6 +77,14 @@
 
     <adapter
         for="Products.urban.interfaces.ICODT_BaseBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.SingleComplementReceived"
+        name="urban.schedule.condition.complements_received"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.ITicket
              imio.schedule.content.task.IAutomatedTask"
         provides="imio.schedule.interfaces.IEndCondition"
         factory=".generic.SingleComplementReceived"

@@ -76,6 +76,11 @@ class SingleComplementAsked(CreationCondition):
         if missing_part_event:
             complements_asked = api.content.get_state(missing_part_event) == 'closed'
 
+        previous_tasks = self.task_config.get_closed_tasks(self.task_container)
+        last_task = previous_tasks and previous_tasks[-1] or None
+        if last_task and last_task.created() > missing_part_event.created():
+            return False
+
         return complements_asked
 
 

@@ -264,6 +264,12 @@ class Ticket(BaseFolder, GenericLicence, BrowserDefaultMixin):
     def getLastDeposit(self):
         return self.getLastEvent(interfaces.IDepositEvent)
 
+    def getLastMissingPart(self):
+        return self.getLastEvent(interfaces.IMissingPartEvent)
+
+    def getLastMissingPartDeposit(self):
+        return self.getLastEvent(interfaces.IMissingPartDepositEvent)
+
     def getLastTheticket(self):
         return self.getLastEvent(interfaces.ITheTicketEvent)
 
