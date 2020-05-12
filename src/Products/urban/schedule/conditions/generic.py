@@ -56,6 +56,9 @@ class SingleComplementReceived(Condition):
         if deposit_part_event:
             complements_received = api.content.get_state(deposit_part_event) == 'closed'
 
+        if self.task.created() > deposit_part_event.created():
+            return False
+
         return complements_received
 
 

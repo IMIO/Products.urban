@@ -10,7 +10,16 @@
         name="urban.schedule.condition.deposit_done"
     />
 
+    <adapter
+        for="Products.urban.interfaces.ITicket
+             imio.schedule.content.task_config.ITaskConfig"
+        provides="imio.schedule.interfaces.ICreationCondition"
+        factory=".creation.SingleComplementAsked"
+        name="urban.schedule.condition.complements_asked"
+    />
+
     <!-- unique licence incomplete conditions-->
+
     <adapter
         for="Products.urban.interfaces.IEnvironmentLicence
              imio.schedule.content.task_config.ITaskConfig"
@@ -325,4 +334,5 @@
         factory=".creation.TicketRedactionOverDeadline"
         name="urban.schedule.condition.ticket_redaction_over_deadline"
     />
+
 </configure>
