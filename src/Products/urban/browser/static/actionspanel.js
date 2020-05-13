@@ -2,7 +2,7 @@ var initialize_overlay = function() {
 
   jQuery(function($) {
 
-    var handle_change_owner_overlay = function(evt) {
+    var handle_task_action_overlay = function(evt) {
       var overlay = $(evt.target);
       var submit = overlay.find('form#form input[type="submit"]');
       submit.click(function() {
@@ -26,13 +26,13 @@ var initialize_overlay = function() {
     };
 
     // Change owner popup
-    $('input.overlay-change-owner').prepOverlay({
+    $('input.overlay-task-action').prepOverlay({
       subtype: 'ajax',
-      filter: '#change-owner',
-      cssclass: 'overlay-change-owner',
+      filter: '#task-action',
+      cssclass: 'overlay-task-action',
       closeselector: '[name="form.buttons.cancel"]',
       config: {
-        onLoad: handle_change_owner_overlay,
+        onLoad: handle_task_action_overlay,
       },
     });
 
