@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2020-04-28 12:50+0000\n"
+"POT-Creation-Date: 2020-05-13 09:58+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -835,22 +835,22 @@ msgstr ""
 msgid "add_a_claimant"
 msgstr ""
 
-#: ../browser/licence/templates/licencemacros.pt:126
+#: ../browser/licence/templates/licencemacros.pt:143
 msgid "add_a_corporation"
 msgstr ""
 
 msgid "add_a_lot"
 msgstr ""
 
-#: ../browser/licence/templates/licencemacros.pt:118
+#: ../browser/licence/templates/licencemacros.pt:135
 msgid "add_a_physical_applicant"
 msgstr ""
 
-#: ../browser/licence/templates/licencemacros.pt:99
+#: ../browser/licence/templates/licencemacros.pt:116
 msgid "add_a_proprietary"
 msgstr ""
 
-#: ../browser/licence/templates/licencemacros.pt:77
+#: ../browser/licence/templates/licencemacros.pt:94
 msgid "add_an_applicant"
 msgstr ""
 
@@ -923,12 +923,12 @@ msgid "answer_to_plaintif"
 msgstr ""
 
 #. Default: "Applicant(s)"
-#: ../browser/licence/templates/licencemacros.pt:63
+#: ../browser/licence/templates/licencemacros.pt:80
 msgid "applicants"
 msgstr ""
 
 #. Default: "Applicant(s) history"
-#: ../browser/licence/templates/licencemacros.pt:133
+#: ../browser/licence/templates/licencemacros.pt:150
 msgid "applicants_history"
 msgstr ""
 
@@ -1686,6 +1686,9 @@ msgstr ""
 msgid "label_colname_claimant_data"
 msgstr ""
 
+msgid "label_colname_copyrecipienttoclaimant"
+msgstr ""
+
 msgid "label_colname_corporation_data"
 msgstr ""
 
@@ -2170,7 +2173,7 @@ msgid "projectmeeting_urbanconfig_title"
 msgstr ""
 
 #. Default: "Proprietary(ies)"
-#: ../browser/licence/templates/licencemacros.pt:84
+#: ../browser/licence/templates/licencemacros.pt:101
 msgid "proprietaries"
 msgstr ""
 
@@ -2471,6 +2474,10 @@ msgid "urban_browse_old_parcels"
 msgstr ""
 
 msgid "urban_button_search"
+msgstr ""
+
+#: ../browser/urbaneventviews.py:516
+msgid "urban_claimant_already_exists"
 msgstr ""
 
 #. Default: "Here above are data defined for the inquiry. If you want to change these informations, click on the name of the linked inquiry here above."
@@ -4035,7 +4042,7 @@ msgid "urban_label_noApplication"
 msgstr ""
 
 #. Default: "Notary(ies)"
-#: ../browser/licence/templates/licencemacros.pt:45
+#: ../browser/licence/templates/licencemacros.pt:62
 #: ../content/licence/CODT_UrbanCertificateTwo.py:69
 #: ../content/licence/Division.py:45
 msgid "urban_label_notaryContact"
@@ -4558,8 +4565,9 @@ msgstr ""
 msgid "urban_label_reportVisitDate"
 msgstr ""
 
-#. Default: "RepresentativeContacts"
-#: ../content/licence/CODT_ParcelOutLicence.py:77
+#. Default: "RepresentativeContacts(s)"
+#: ../browser/licence/templates/licencemacros.pt:45
+#: ../content/licence/CODT_ParcelOutLicence.py:76
 msgid "urban_label_representative_contacts"
 msgstr ""
 
@@ -5184,6 +5192,10 @@ msgstr ""
 #. Default: "No event type is defined in the configuration for this element"
 #: ../browser/licence/templates/licencetabsmacros.pt:469
 msgid "urban_no_eventtype_defined"
+msgstr ""
+
+#: ../browser/urbaneventviews.py:521
+msgid "urban_recipient_copied_to_claimants"
 msgstr ""
 
 msgid "urban_search_descr"
