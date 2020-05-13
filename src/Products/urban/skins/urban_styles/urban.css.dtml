@@ -380,7 +380,7 @@ div.parcel-action{
     clear: both;
 }
 
-input.assign_user {
+input.assign_user input.close_task{
     background-color: transparent;
     background-image: url("http://localhost:8081/liege/liege/Contact.png");
     background-position: center;

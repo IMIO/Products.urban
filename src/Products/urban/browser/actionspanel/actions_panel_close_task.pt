@@ -1,0 +1,10 @@
+<td class="noPadding" i18n:domain="urban">
+  <input
+     tal:attributes="href string:${context/absolute_url}/@@close_task"
+     tal:condition="python: context.get_state() != 'closed'"
+     type="button"
+     class="overlay-task-action close_task"
+     value="End"
+     i18n:attributes="value"
+     />
+</td>
