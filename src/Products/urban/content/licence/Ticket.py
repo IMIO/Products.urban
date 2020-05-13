@@ -36,6 +36,14 @@ schema = Schema((
         ),
         schemata='urban_description',
     ),
+    StringField(
+        name='policeTicketReference',
+        widget=StringField._properties['widget'](
+            size=60,
+            label=_('urban_label_policeTicketReference', default='Policeticketreference'),
+        ),
+        schemata='urban_description',
+    ),
     ReferenceField(
         name='bound_inspection',
         widget=ReferenceBrowserWidget(
@@ -159,7 +167,12 @@ class Ticket(BaseFolder, GenericLicence, BrowserDefaultMixin):
             worklocations = self.getWorkLocationSignaletic()
         else:
             worklocations = translate('no_address_defined', 'urban', context=self.REQUEST).encode('utf8')
-        title = "%s - %s - %s" % (self.getReference(), self.getLicenceSubject(), worklocations)
+        title = "{}{} - {} - {}".format(
+            self.getReference(),
+            self.getPoliceTicketReference() and ' - ' + self.getPoliceTicketReference() or '',
+            self.getLicenceSubject(),
+            worklocations
+        )
         self.setTitle(title)
         self.reindexObject(idxs=('Title', 'sortable_title', ))
 
@@ -283,6 +296,7 @@ def finalize_schema(schema, folderish=False, moveDiscussion=True):
     """
     schema['folderCategory'].widget.visible = {'edit': 'invisible', 'view': 'invisible'}
     schema.moveField('referenceProsecution', after='reference')
+    schema.moveField('policeTicketReference', after='referenceProsecution')
     schema.moveField('bound_inspection', before='workLocations')
     schema.moveField('use_bound_inspection_infos', after='bound_inspection')
     schema.moveField('bound_licences', after='use_bound_inspection_infos')

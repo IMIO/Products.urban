@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2020-05-12 07:59+0000\n"
+"POT-Creation-Date: 2020-05-13 07:10+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -3013,13 +3013,13 @@ msgid "urban_label_bis"
 msgstr "Bis"
 
 #. Default: "Bound inspection"
-#: ../content/licence/Ticket.py:49
+#: ../content/licence/Ticket.py:57
 msgid "urban_label_bound_inspection"
 msgstr "Dossier d'inspection lié"
 
 #. Default: "Bound licences"
 #: ../content/licence/Inspection.py:41
-#: ../content/licence/Ticket.py:75
+#: ../content/licence/Ticket.py:83
 msgid "urban_label_bound_licences"
 msgstr "Dossiers liés"
 
@@ -4084,7 +4084,7 @@ msgid "urban_label_manageableLicences"
 msgstr "Type de permis gérés"
 
 #. Default: "Managed_by_prosecutor"
-#: ../content/licence/Ticket.py:98
+#: ../content/licence/Ticket.py:106
 msgid "urban_label_managed_by_prosecutor"
 msgstr "Prise en charge procureur"
 
@@ -4457,6 +4457,11 @@ msgstr "Motivation du point PloneMeeting"
 #: ../UrbanEvent.py:247
 msgid "urban_label_pmTitle"
 msgstr "Titre du point PloneMeeting"
+
+#. Default: "Policeticketreference"
+#: ../content/licence/Ticket.py:43
+msgid "urban_label_policeTicketReference"
+msgstr "N° PV police"
 
 #. Default: "Pollution"
 #: ../content/licence/UrbanCertificateBase.py:241
@@ -5263,7 +5268,7 @@ msgid "urban_label_useTabbingForEdit"
 msgstr "Utiliser les onglets supplémentaires pour l'édition"
 
 #. Default: "Use_bound_inspection_infos"
-#: ../content/licence/Ticket.py:61
+#: ../content/licence/Ticket.py:69
 msgid "urban_label_use_bound_inspection_infos"
 msgstr "Prendre les données de l'inspection liée"
 
