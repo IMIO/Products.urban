@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2020-05-12 07:59+0000\n"
+"POT-Creation-Date: 2020-05-13 07:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2980,13 +2980,13 @@ msgid "urban_label_bis"
 msgstr ""
 
 #. Default: "Bound inspection"
-#: ../content/licence/Ticket.py:49
+#: ../content/licence/Ticket.py:57
 msgid "urban_label_bound_inspection"
 msgstr ""
 
 #. Default: "Bound licences"
 #: ../content/licence/Inspection.py:41
-#: ../content/licence/Ticket.py:75
+#: ../content/licence/Ticket.py:83
 msgid "urban_label_bound_licences"
 msgstr ""
 
@@ -4049,7 +4049,7 @@ msgid "urban_label_manageableLicences"
 msgstr ""
 
 #. Default: "Managed_by_prosecutor"
-#: ../content/licence/Ticket.py:98
+#: ../content/licence/Ticket.py:106
 msgid "urban_label_managed_by_prosecutor"
 msgstr ""
 
@@ -4421,6 +4421,11 @@ msgstr ""
 #. Default: "Pmtitle"
 #: ../UrbanEvent.py:247
 msgid "urban_label_pmTitle"
+msgstr ""
+
+#. Default: "Policeticketreference"
+#: ../content/licence/Ticket.py:43
+msgid "urban_label_policeTicketReference"
 msgstr ""
 
 #. Default: "Pollution"
@@ -5227,7 +5232,7 @@ msgid "urban_label_useTabbingForEdit"
 msgstr ""
 
 #. Default: "Use_bound_inspection_infos"
-#: ../content/licence/Ticket.py:61
+#: ../content/licence/Ticket.py:69
 msgid "urban_label_use_bound_inspection_infos"
 msgstr ""
 
