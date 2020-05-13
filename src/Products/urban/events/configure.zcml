@@ -151,6 +151,10 @@
                    zope.lifecycleevent.interfaces.IObjectCreatedEvent"
               handler=".urbanEventInquiryEvents.setLinkedAnnouncement" />
 
+  <subscriber for="..interfaces.IUrbanEventFollowUp
+                   zope.lifecycleevent.interfaces.IObjectCreatedEvent"
+              handler=".followupEvents.setLinkedReport" />
+
   <subscriber for="..interfaces.IUrbanEventType
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".urbanEventTypesEvents.updateKeyEvent" />

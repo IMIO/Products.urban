@@ -546,6 +546,29 @@ class FollowUpTicketClosed(InspectionCreationCondition):
         return is_closed
 
 
+class FollowUpWithDelayClosed(InspectionCreationCondition):
+    """
+    The ticket created as a followup action has been closed.
+    """
+    def evaluate(self):
+        followup_event = self.task_container.getLastFollowUpEventWithDelay()
+        if not followup_event:
+            return False
+        is_closed = api.content.get_state(followup_event) == 'closed'
+        # do this task only once per followup event
+        if is_closed:
+            same_closed_tasks = self.task_config.get_closed_tasks(self.task_container)
+            event_workflow_history = followup_event.workflow_history.values()[0]
+            event_creation_date = event_workflow_history[0]['time']
+            for task in same_closed_tasks:
+                task_workflow_history = task.workflow_history.values()[0]
+                task_creation_date = task_workflow_history[0]['time']
+                if task_creation_date > event_creation_date:
+                    return False
+
+        return is_closed
+
+
 class ProsecutionAnswerOverDeadline(CreationCondition):
     """
     The ticket event has been closed under 90 days.

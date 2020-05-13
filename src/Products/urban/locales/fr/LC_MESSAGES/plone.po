@@ -55,6 +55,9 @@ msgstr "Rubrique environnement"
 msgid "FolderManager"
 msgstr "Gestionnaire de dossier"
 
+msgid "FollowUpEventType"
+msgstr "Type d'événement de proposition de suivi"
+
 msgid "Geometrician"
 msgstr "Géomètre"
 

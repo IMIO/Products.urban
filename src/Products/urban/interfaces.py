@@ -607,6 +607,10 @@ class IInspectionReportEvent(Interface):
     __doc__ = _("""IInspectionReportEvent type marker interface""")
 
 
+class IUrbanEventFollowUpWithDelay(Interface):
+    __doc__ = _("""IUrbanEventFollowUpWithDelay type marker interface""")
+
+
 class IProprietaryChangeEvent(Interface):
     __doc__ = _("""IProprietaryChangeEvent type marker interface""")
 

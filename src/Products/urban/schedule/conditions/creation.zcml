@@ -328,6 +328,14 @@
     />
 
     <adapter
+        for="Products.urban.interfaces.IInspection
+             imio.schedule.content.task_config.ITaskConfig"
+        provides="imio.schedule.interfaces.ICreationCondition"
+        factory=".creation.FollowUpWithDelayClosed"
+        name="urban.schedule.condition.followup_with_delay_written"
+    />
+
+    <adapter
         for="Products.urban.interfaces.ITicket
              imio.schedule.content.task_config.ITaskConfig"
         provides="imio.schedule.interfaces.ICreationCondition"

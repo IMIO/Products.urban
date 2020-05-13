@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2020-05-13 07:10+0000\n"
+"POT-Creation-Date: 2020-05-13 11:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -427,7 +427,7 @@ msgstr ""
 msgid "IPatrimonyMeetingEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:611
+#: ../interfaces.py:615
 msgid "IProprietaryChangeEvent type marker interface"
 msgstr ""
 
@@ -475,6 +475,10 @@ msgstr ""
 msgid "IUrbanAndEnvironment type marker interface"
 msgstr ""
 
+#: ../interfaces.py:611
+msgid "IUrbanEventFollowUpWithDelay type marker interface"
+msgstr ""
+
 #: ../interfaces.py:587
 msgid "IUrbanOrEnvironment type marker interface"
 msgstr ""
@@ -513,7 +517,7 @@ msgstr ""
 msgid "IntegratedLicence"
 msgstr ""
 
-#: ../interfaces.py:709
+#: ../interfaces.py:713
 msgid "Internal opinion services"
 msgstr ""
 
@@ -527,7 +531,7 @@ msgstr ""
 msgid "Listing file"
 msgstr ""
 
-#: ../interfaces.py:732
+#: ../interfaces.py:736
 msgid "Mailing limit"
 msgstr ""
 
@@ -535,7 +539,7 @@ msgstr ""
 msgid "Map"
 msgstr ""
 
-#: ../interfaces.py:733
+#: ../interfaces.py:737
 msgid "Max items allowed for immediate mailing"
 msgstr ""
 
@@ -585,11 +589,11 @@ msgstr ""
 msgid "PatrimonyCertificate"
 msgstr ""
 
-#: ../interfaces.py:747
+#: ../interfaces.py:751
 msgid "Planned claimants imports"
 msgstr ""
 
-#: ../interfaces.py:722
+#: ../interfaces.py:726
 msgid "Planned mailings"
 msgstr ""
 
@@ -671,7 +675,7 @@ msgstr ""
 msgid "Service id"
 msgstr ""
 
-#: ../interfaces.py:710
+#: ../interfaces.py:714
 msgid "Services that can give their opinion directly through urban"
 msgstr ""
 
@@ -693,7 +697,7 @@ msgstr ""
 msgid "Submit"
 msgstr ""
 
-#: ../interfaces.py:760
+#: ../interfaces.py:764
 msgid "Suspension period end date"
 msgstr ""
 
@@ -701,7 +705,7 @@ msgstr ""
 msgid "Suspension period from to: please check the end date"
 msgstr ""
 
-#: ../interfaces.py:756
+#: ../interfaces.py:760
 msgid "Suspension period start date"
 msgstr ""
 
@@ -1644,7 +1648,7 @@ msgstr ""
 msgid "inadmissibilityreasons_folder_title"
 msgstr ""
 
-#: ../interfaces.py:748
+#: ../interfaces.py:752
 msgid "inquiries planned for claimants imports"
 msgstr ""
 
@@ -1918,11 +1922,11 @@ msgstr ""
 msgid "lotusages_folder_title"
 msgstr ""
 
-#: ../interfaces.py:723
+#: ../interfaces.py:727
 msgid "mailings planned"
 msgstr ""
 
-#: ../interfaces.py:738
+#: ../interfaces.py:742
 msgid "mailings planned for radius search"
 msgstr ""
 
@@ -3958,6 +3962,11 @@ msgstr ""
 #. Default: "Linkedinquiry"
 #: ../content/UrbanEventInquiry.py:152
 msgid "urban_label_linkedInquiry"
+msgstr ""
+
+#. Default: "Linkedreport"
+#: ../content/UrbanEventFollowUp.py:28
+msgid "urban_label_linkedReport"
 msgstr ""
 
 #. Default: "Linked inquiry"
