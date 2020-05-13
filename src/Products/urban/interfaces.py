@@ -212,7 +212,7 @@ class ICODT_UniqueLicenceInquiry(IInquiry):
 
 
 class IUrbanEventBaseInquiry(Interface):
-    """base Marker interface for inquiry events
+    """base arker interface for inquiry events
     """
 
 

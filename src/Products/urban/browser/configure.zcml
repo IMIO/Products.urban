@@ -174,14 +174,6 @@
   />
 
   <browser:page
-      for="Products.urban.interfaces.IUrbanEventBaseInquiry"
-      name="copy_recipient_to_claimant"
-      class=".urbaneventviews.UrbanEventInquiryView"
-      attribute="copy_recipient_to_claimant"
-      permission="zope2.View"
-  />
-
-  <browser:page
      for="Products.urban.interfaces.IUrbanEventAnnouncement"
      name="urbaneventannouncementview"
      class=".urbaneventviews.UrbanEventAnnouncementView"

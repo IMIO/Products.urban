@@ -491,34 +491,3 @@ class UrbanEventInquiryView(UrbanEventInquiryBaseView):
             if licence.getInquiry_category() == 'B':
                 return 200
         return 50
-
-    def copy_recipient_to_claimant(self):
-
-        site = api.portal.get()
-        plone_utils = api.portal.get_tool('plone_utils')
-
-        recipient_id = self.request.form['proprietary']
-        recipient = getattr(self.context, recipient_id)
-        redirection = self.request.response.redirect(self.context.absolute_url() + '#fieldsetlegend-urbaneventinquiry_recipients')
-
-        claimant_arg = {}
-        claimant_arg['name1'] = recipient.name
-        claimant_arg['name2'] = recipient.firstname
-        claimant_arg['street'] = recipient.street
-        claimant_arg['number'] = recipient.number
-        claimant_arg['city'] = recipient.city
-        claimant_arg['zipcode'] = recipient.zipcode
-        claimant_arg['id'] = site.plone_utils.normalizeString("claimant_" + recipient_id)
-
-        catalog = api.portal.get_tool('portal_catalog')
-        result = catalog(id=claimant_arg['id'], portal_type='Claimant')
-        if result:
-            plone_utils.addPortalMessage(_('urban_claimant_already_exists'), type="error")
-            return redirection
-
-        new_claimant = self.context.invokeFactory('Claimant', **claimant_arg)
-        plone_utils.addPortalMessage(
-            _('urban_recipient_copied_to_claimants'),
-            type="info")
-
-        return redirection
