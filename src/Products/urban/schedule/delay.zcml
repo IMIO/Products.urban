@@ -34,4 +34,12 @@
         name="urban.schedule.delay.unique_licence_notification_delay"
     />
 
+    <adapter
+        for="Products.urban.interfaces.IInspection
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.ICalculationDelay"
+        factory=".delay.InspectionFollowUpDelay"
+        name="urban.schedule.delay.inspection_followup_delay"
+    />
+
 </configure>

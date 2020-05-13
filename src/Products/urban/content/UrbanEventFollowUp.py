@@ -12,6 +12,7 @@ from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 from Products.urban import interfaces
+from Products.urban import UrbanMessage as _
 from Products.urban.UrbanEvent import UrbanEvent
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
@@ -20,21 +21,17 @@ from Products.urban.config import PROJECTNAME
 
 
 schema = Schema((
-
     ReferenceField(
-        name='linkedInquiry',
+        name='linkedReport',
         widget=ReferenceBrowserWidget(
             visible={'edit': 'invisible', 'view': 'invisible'},
-            label='Linkedinquiry',
-            label_msgid='urban_label_linkedInquiry',
-            i18n_domain='urban',
+            label=_('urban_label_linkedReport',
+                    default='Linkedreport'),
         ),
+        allowed_types=('UrbanEventInspectionReport',),
         multiValued=0,
-        relationship='linkedInquiry',
-        allowed_types=('Inquiry', 'BuildLicence'),
-        write_permission="Manage portal",
+        relationship='linkedReport',
     ),
-
 ),
 )
 

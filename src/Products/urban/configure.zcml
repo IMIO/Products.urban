@@ -245,6 +245,10 @@
     type=".interfaces.IEventTypeType"/>
 
   <interface
+    interface=".interfaces.IUrbanEventFollowUpWithDelay"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
     interface=".interfaces.IEnvironmentOnlyEvent"
     type=".interfaces.IEventTypeType"/>
 

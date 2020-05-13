@@ -30,6 +30,9 @@ msgstr ""
 msgid "Inquiry"
 msgstr ""
 
+msgid "FollowUpEventType"
+msgstr ""
+
 msgid "UrbanEvent"
 msgstr ""
 
