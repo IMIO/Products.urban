@@ -185,6 +185,12 @@ class IStreetColumn(Interface):
     """
 
 
+class ICopyRecipientToClaimantColumn(Interface):
+    """
+    Marker interface for an Street Column
+    """
+
+
 class IAddressColumn(Interface):
     """
     Marker interface for a licence worklocation Column
