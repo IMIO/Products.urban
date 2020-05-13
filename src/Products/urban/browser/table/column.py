@@ -15,7 +15,6 @@ from zope.i18n import translate
 from Products.urban.setuphandlers import _ as _t
 from Products.urban.browser.table.interfaces import ITitleColumn, \
     IActionsColumn, \
-    ICopyRecipientToClaimantColumn, \
     ILocalityColumn, \
     IStreetColumn, \
     IUrbanColumn, \
@@ -434,31 +433,6 @@ class StreetColumn(Column):
         street = '%s<br />%s' % (street, secondary_street)
 
         return street.decode('utf-8')
-
-
-class CopyRecipientToClaimantColumn(Column):
-    """  """
-    implements(ICopyRecipientToClaimantColumn)
-
-    attrName = ''
-    header = 'label_colname_copyrecipienttoclaimant'
-    weight = 50
-
-    # we got to override the renderHeadCell method, because we got to give the right domain name for translation
-    def renderHeadCell(self):
-        """Header cell content."""
-        return translate(self.header, 'urban', context=self.request)
-
-    def renderCell(self, recipient):
-        portal = api.portal.get()
-        cell = ''
-        cell = '{cell}<div><a href="{url}/@@copy_recipient_to_claimant?proprietary={proprietary_id}">Copier comme réclamant</a></div>'.format(
-            cell=cell,
-            url=recipient.aq_parent.absolute_url(),
-            proprietary_id=recipient.id
-        )
-
-        return cell.decode('utf-8')
 
 
 class InternalServiceColumn(Column):
