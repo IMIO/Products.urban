@@ -55,6 +55,8 @@ class SingleComplementReceived(Condition):
         deposit_part_event = licence.getLastMissingPartDeposit()
         if deposit_part_event:
             complements_received = api.content.get_state(deposit_part_event) == 'closed'
+        else:
+            return False
 
         if self.task.created() > deposit_part_event.created():
             return False
@@ -713,16 +715,3 @@ class TicketEventClosed(Condition):
             return False
         closed = api.content.get_state(ticket_event) == 'closed'
         return closed
-
-
-class TicketRedactionOverDeadline(Condition):
-    """
-    The ticket event has been closed under 90 days.
-    """
-    def evaluate(self):
-        licence = self.task_container
-        deposit_event = licence.getLastDeposit()
-        ticket_event = licence.getLastTheticket()
-        redacted = ticket_event and api.content.get_state(ticket_event) == 'closed' or False
-        over_delay = DateTime() - deposit_event.getEventDate() > 90
-        return not redacted and over_delay
