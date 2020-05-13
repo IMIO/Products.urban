@@ -806,9 +806,6 @@ msgstr ""
 msgid "label_colname_street"
 msgstr ""
 
-msgid "label_colname_copyrecipienttoclaimant"
-msgstr ""
-
 msgid "label_colname_time_delay"
 msgstr ""
 
