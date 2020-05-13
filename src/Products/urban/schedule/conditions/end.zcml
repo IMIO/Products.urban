@@ -495,12 +495,4 @@
         name="urban.schedule.condition.ticket_redacted"
     />
 
-    <adapter
-        for="Products.urban.interfaces.ITicket
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.TicketRedactionOverDeadline"
-        name="urban.schedule.condition.ticket_redaction_over_deadline"
-    />
-
 </configure>

@@ -331,8 +331,8 @@
         for="Products.urban.interfaces.ITicket
              imio.schedule.content.task_config.ITaskConfig"
         provides="imio.schedule.interfaces.ICreationCondition"
-        factory=".creation.TicketRedactionOverDeadline"
-        name="urban.schedule.condition.ticket_redaction_over_deadline"
+        factory=".creation.ProsecutionAnswerOverDeadline"
+        name="urban.schedule.condition.prosecution_answer_over_deadline"
     />
 
 </configure>
