@@ -60,27 +60,6 @@ schema = Schema((
         relationship='parcelOutGeometricians',
         allowed_types=('Geometrician',),
     ),
-    ReferenceField(
-        name='representativeContacts',
-        widget=ReferenceBrowserWidget(
-            force_close_on_insert=1,
-            allow_search=1,
-            only_for_review_states='enabled',
-            allow_browse=0,
-            show_indexes=1,
-            available_indexes={'Title':'Nom'},
-            startup_directory='urban',
-            wild_card_search=True,
-            show_results_without_query=True,
-            restrict_browsing_to_startup_directory=False,
-            label=_('urban_label_representative_contacts', default='RepresentativeContacts'),
-        ),
-        required=True,
-        schemata='urban_description',
-        multiValued=1,
-        relationship='parcelOutRepresentativeContacts',
-        allowed_types=('Geometrician', 'Architect', ),
-    )
 
 ),
 )
@@ -126,13 +105,6 @@ class CODT_ParcelOutLicence(BaseFolder, CODT_BaseBuildLicence, BrowserDefaultMix
 
     security.declarePublic('getRepresentatives')
     def getRepresentatives(self):
-        """
-        """
-        return self.getRepresentativeContacts()
-
-    # Backward compatibility for pod template
-    security.declarePublic('getGeometricians')
-    def getGeometricians(self):
         """
         """
         return self.getRepresentativeContacts()
