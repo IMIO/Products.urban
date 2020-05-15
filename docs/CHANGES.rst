@@ -14,9 +14,6 @@ Changes
 - Update documentation with cadastre downloading
   [fngaha]
 
-- Provide management of external directions
-  [fngaha]
-
 - Translate liste_220 errors
   [fngaha]
 
