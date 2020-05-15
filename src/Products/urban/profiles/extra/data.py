@@ -422,7 +422,7 @@ urbanEventTypes = {
             'eventPortalType': 'UrbanEventOpinionRequest',
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
             'concernedOutsideDirections': ['hainaut_1',],
-            'extraValue': 'A.I.D.E.',
+            'extraValue': 'Agriculture',
             'podTemplates': (),
         },
         {
@@ -436,7 +436,7 @@ urbanEventTypes = {
             'eventPortalType': 'UrbanEventOpinionRequest',
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
             'concernedOutsideDirections': ['hainaut_1', 'hainaut_2',],
-            'extraValue': 'A.I.D.E.',
+            'extraValue': 'Air Liquide Industries Belgium S.A.',
             'podTemplates': (),
         },
 
