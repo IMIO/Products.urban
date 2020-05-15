@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2019-10-10 14:27+0000\n"
+"POT-Creation-Date: 2020-05-15 17:07+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -90,7 +90,7 @@ msgstr "Ajouter tous les avis"
 msgid "Add an event"
 msgstr "Ajouter un événement"
 
-#: ../browser/templates/urbaneventinquiryview.pt:202
+#: ../browser/templates/urbaneventinquiryview.pt:203
 msgid "Add recipientcadastre manually"
 msgstr "Ajouter un propriétaire"
 
@@ -235,6 +235,10 @@ msgstr ""
 #: ../profiles/default/actions.xml
 msgid "Emails"
 msgstr "Email"
+
+#: ../browser/actionspanel/actions_panel_close_task.pt:2
+msgid "End"
+msgstr ""
 
 msgid "EnvClassBordering"
 msgstr "Permis d'environnement limitrophes"
@@ -1443,7 +1447,7 @@ msgid "event_inquiry_documents"
 msgstr "Récapitulatif"
 
 #. Default: "<span>Recipients</span>"
-#: ../browser/templates/urbaneventinquiryview.pt:171
+#: ../browser/templates/urbaneventinquiryview.pt:172
 msgid "event_inquiry_recipients"
 msgstr "Propriétaires concernés"
 
@@ -2104,7 +2108,7 @@ msgid "number_of_claimants"
 msgstr "Nombre de réclamants"
 
 #. Default: "Number of recipients"
-#: ../browser/templates/urbaneventinquiryview.pt:187
+#: ../browser/templates/urbaneventinquiryview.pt:188
 msgid "number_of_recipients"
 msgstr "Nombre de destinataires"
 
@@ -3197,6 +3201,11 @@ msgstr "Risque de ruissellement concentré"
 #: ../content/licence/GenericLicence.py:393
 msgid "urban_label_concentratedRunoffSRiskDetails"
 msgstr "Détails concernant le risque de ruissellement concentré"
+
+#. Default: "ConcernedOutsideDirections"
+#: OpinionRequestEventType.py
+msgid "urban_label_concernedOutsideDirections"
+msgstr "Directions extérieures concernées"
 
 #. Default: "Concerned elements"
 #: parcelsinfo.py
