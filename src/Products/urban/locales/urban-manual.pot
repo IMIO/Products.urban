@@ -2075,11 +2075,6 @@ msgstr ""
 msgid "urban_label_outlineColor"
 msgstr ""
 
-#. Default: "outsideDirection"
-#: UrbanEventType.py
-msgid "urban_label_outsideDirection"
-msgstr ""
-
 # parcelsinfo.pt
 #. Default: "Propriétaire"
 msgid "urban_label_owner"
