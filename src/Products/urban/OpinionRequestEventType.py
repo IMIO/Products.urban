@@ -104,6 +104,16 @@ schema = Schema((
         enforceVocabulary=True,
         vocabulary='listInternalServices',
     ),
+    LinesField(
+        name='concernedOutsideDirections',
+        vocabulary="listConcernedOutsideDirections",
+        widget=MultiSelectionWidget(
+            label='ConcernedOutsideDirections',
+            label_msgid='urban_label_concernedOutsideDirections',
+            i18n_domain='urban',
+        ),
+        mode="r",
+    ),
 ),
 )
 
@@ -152,6 +162,21 @@ class OpinionRequestEventType(OrderedBaseFolder, UrbanEventType, UrbanVocabulary
         description = lines[:-2]
         address = lines[-2:]
         return '%s|%s|%s|%s' % (name, ' '.join(description), address[0], address[1])
+
+
+    security.declarePublic('listConcernedOutsideDirections')
+    def listConcernedOutsideDirections(self):
+        vocab = (
+            ('brabant_wallon', 'Brabant wallon'),
+            ('eupen', 'Eupen'),
+            ('hainaut_1', 'Hainaut 1'),
+            ('hainaut_2', 'Hainaut 2'),
+            ('liege_1', 'Liège 1'),
+            ('liege_2', 'Liège 2'),
+            ('luxembourg', 'Luxembourg'),
+            ('namur', 'Namur'),
+        )
+        return DisplayList(vocab)
 
 
 
