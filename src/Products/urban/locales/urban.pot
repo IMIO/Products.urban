@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2020-05-13 11:33+0000\n"
+"POT-Creation-Date: 2019-10-10 14:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -88,7 +88,7 @@ msgstr ""
 msgid "Add an event"
 msgstr ""
 
-#: ../browser/templates/urbaneventinquiryview.pt:203
+#: ../browser/templates/urbaneventinquiryview.pt:202
 msgid "Add recipientcadastre manually"
 msgstr ""
 
@@ -802,7 +802,7 @@ msgstr ""
 msgid "View"
 msgstr ""
 
-#: ../UrbanEventType.py:284
+#: ../UrbanEventType.py:275
 msgid "You can not create this UrbanEvent !"
 msgstr ""
 
@@ -1420,7 +1420,7 @@ msgid "event_inquiry_documents"
 msgstr ""
 
 #. Default: "<span>Recipients</span>"
-#: ../browser/templates/urbaneventinquiryview.pt:172
+#: ../browser/templates/urbaneventinquiryview.pt:171
 msgid "event_inquiry_recipients"
 msgstr ""
 
@@ -2072,7 +2072,7 @@ msgid "number_of_claimants"
 msgstr ""
 
 #. Default: "Number of recipients"
-#: ../browser/templates/urbaneventinquiryview.pt:188
+#: ../browser/templates/urbaneventinquiryview.pt:187
 msgid "number_of_recipients"
 msgstr ""
 
@@ -4239,11 +4239,6 @@ msgstr ""
 #. Default: "Outlinecolor"
 #: Layer.py
 msgid "urban_label_outlineColor"
-msgstr ""
-
-#. Default: "outsideDirection"
-#: UrbanEventType.py
-msgid "urban_label_outsideDirection"
 msgstr ""
 
 # parcelsinfo.pt
