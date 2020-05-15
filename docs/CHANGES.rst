@@ -8,10 +8,10 @@ Changes
 - Add an Ultimate date field in the list of activatable fields
   [fngaha]
 
-- Update documentation with cadastre downloading
+- provide the add company feature to the CU1 process
   [fngaha]
 
-- Provide management of external directions
+- Update documentation with cadastre downloading
   [fngaha]
 
 - Translate liste_220 errors
