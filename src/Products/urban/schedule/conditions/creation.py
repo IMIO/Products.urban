@@ -75,6 +75,13 @@ class SingleComplementAsked(CreationCondition):
         missing_part_event = licence.getLastMissingPart()
         if missing_part_event:
             complements_asked = api.content.get_state(missing_part_event) == 'closed'
+        else:
+            return False
+
+        previous_tasks = self.task_config.get_closed_tasks(self.task_container)
+        last_task = previous_tasks and previous_tasks[-1] or None
+        if last_task and last_task.created() > missing_part_event.created():
+            return False
 
         return complements_asked
 
@@ -537,3 +544,37 @@ class FollowUpTicketClosed(InspectionCreationCondition):
                     return False
 
         return is_closed
+
+
+class FollowUpWithDelayClosed(InspectionCreationCondition):
+    """
+    The ticket created as a followup action has been closed.
+    """
+    def evaluate(self):
+        followup_event = self.task_container.getLastFollowUpEventWithDelay()
+        if not followup_event:
+            return False
+        is_closed = api.content.get_state(followup_event) == 'closed'
+        # do this task only once per followup event
+        if is_closed:
+            same_closed_tasks = self.task_config.get_closed_tasks(self.task_container)
+            event_workflow_history = followup_event.workflow_history.values()[0]
+            event_creation_date = event_workflow_history[0]['time']
+            for task in same_closed_tasks:
+                task_workflow_history = task.workflow_history.values()[0]
+                task_creation_date = task_workflow_history[0]['time']
+                if task_creation_date > event_creation_date:
+                    return False
+
+        return is_closed
+
+
+class ProsecutionAnswerOverDeadline(CreationCondition):
+    """
+    The ticket event has been closed under 90 days.
+    """
+    def evaluate(self):
+        licence = self.task_container
+        ticket_event = licence.getLastTheticket()
+        over_delay = DateTime() - ticket_event.getEventDate() > 90
+        return over_delay

@@ -55,6 +55,11 @@ class SingleComplementReceived(Condition):
         deposit_part_event = licence.getLastMissingPartDeposit()
         if deposit_part_event:
             complements_received = api.content.get_state(deposit_part_event) == 'closed'
+        else:
+            return False
+
+        if self.task.created() > deposit_part_event.created():
+            return False
 
         return complements_received
 
@@ -695,5 +700,18 @@ class FollowUpTicketClosed(InspectionCondition):
         followup_ticket = self.get_last_followup_ticket()
         if not followup_ticket:
             return False
-        created = api.content.get_state(followup_ticket) == 'ended'
-        return created
+        ended = api.content.get_state(followup_ticket) == 'ended'
+        return ended
+
+
+class TicketEventClosed(Condition):
+    """
+    The ticket event is closed.
+    """
+    def evaluate(self):
+        licence = self.task_container
+        ticket_event = licence.getLastTheticket()
+        if not ticket_event:
+            return False
+        closed = api.content.get_state(ticket_event) == 'closed'
+        return closed

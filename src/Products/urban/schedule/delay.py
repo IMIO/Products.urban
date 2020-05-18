@@ -124,3 +124,16 @@ class UniqueLicenceNotificationDelay(AnnoncedDelay):
                 delay = 0
         delay += self.inquiry_suspension_delay()
         return delay
+
+
+class InspectionFollowUpDelay(AnnoncedDelay):
+    """
+    Return the delay on the linked report of the followup with delay
+    """
+
+    def calculate_delay(self):
+        licence = self.task_container
+        followup = licence.getLastFollowUpEventWithDelay()
+        report = followup.getLinkedReport()
+        delay = report.getDelay() and int(report.getDelay()) or 0
+        return delay

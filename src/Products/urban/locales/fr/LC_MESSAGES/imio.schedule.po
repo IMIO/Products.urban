@@ -179,6 +179,12 @@ msgstr "Créer l'événement 'Réception du projet d'arrêté du SPW' et le clô
 msgid "urban.schedule.condition.suspension"
 msgstr "Suspendre le dossier"
 
+msgid "urban.schedule.condition.ticket_redacted"
+msgstr "Rédaction du PV faite"
+
+msgid "urban.schedule.condition.ticket_redaction_over_deadline"
+msgstr "Rédaction du PV hors délai"
+
 msgid "urban.schedule.condition.transmit_to_spw_done"
 msgstr "Créer l'évenement de 'transmis du dossier au SPW' et le clôturer"
 

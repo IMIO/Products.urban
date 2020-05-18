@@ -114,4 +114,20 @@
         name="urban.schedule.start_date.asking_date"
     />
 
+    <adapter
+        for="Products.urban.interfaces.IInspection
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IStartDate"
+        factory=".start_date.FollowupEventDate"
+        name="urban.schedule.start_date.followup_date"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.ITicket
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IStartDate"
+        factory=".start_date.TicketSentToProsecutionDate"
+        name="urban.schedule.start_date.ticket_sent"
+    />
+
 </configure>

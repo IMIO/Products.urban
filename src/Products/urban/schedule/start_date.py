@@ -176,3 +176,27 @@ class DecisionProjectFromSPWReceiptDateOrAcknowledgmentDate(StartDate):
         ack = licence.getLastAcknowledgment()
         ack_date = ack and ack.getEventDate() or None
         return receipt_date or ack_date
+
+
+class TicketSentToProsecutionDate(StartDate):
+    """
+    Returns the date of the TheTicket event.
+    """
+
+    def start_date(self):
+        licence = self.task_container
+        deposit = licence.getLastTheTicket()
+        deposit_date = deposit and deposit.getEventDate() or None
+        return deposit_date
+
+
+class FollowupEventDate(StartDate):
+    """
+    Returns the date of the TheTicket event.
+    """
+
+    def start_date(self):
+        licence = self.task_container
+        followup = licence.getLastFollowUpEventWithDelay()
+        followup_date = followup and followup.getEventDate() or None
+        return followup_date
