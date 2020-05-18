@@ -294,6 +294,11 @@ class Inspection(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
                     to_return.append(followup)
         return to_return
 
+    security.declarePublic('getLastFollowUpEventWithDelay')
+
+    def getLastFollowUpEventWithDelay(self):
+        return self.getLastEvent(interfaces.IUrbanEventFollowUpWithDelay)
+
     security.declarePublic('mayAddInspectionReportEvent')
 
     def mayAddInspectionReportEvent(self):

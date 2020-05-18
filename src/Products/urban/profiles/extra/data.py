@@ -407,7 +407,7 @@ urbanEventTypes = {
             'activatedFields': ['transmitDate', 'receiptDate', 'receivedDocumentReference', 'externalDecision'],
             'eventPortalType': 'UrbanEventOpinionRequest',
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
-            'outsideDirection': ['liege_2'],
+            'concernedOutsideDirections': ['liege_2',],
             'extraValue': 'A.I.D.E.',
             'podTemplates': (),
         },
@@ -421,8 +421,8 @@ urbanEventTypes = {
             'activatedFields': ['transmitDate', 'receiptDate', 'receivedDocumentReference', 'externalDecision'],
             'eventPortalType': 'UrbanEventOpinionRequest',
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
-            'outsideDirection': ['hainaut_1'],
-            'extraValue': 'A.I.D.E.',
+            'concernedOutsideDirections': ['hainaut_1',],
+            'extraValue': 'Agriculture',
             'podTemplates': (),
         },
         {
@@ -435,8 +435,8 @@ urbanEventTypes = {
             'activatedFields': ['transmitDate', 'receiptDate', 'receivedDocumentReference', 'externalDecision'],
             'eventPortalType': 'UrbanEventOpinionRequest',
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
-            'outsideDirection': ['hainaut_1', 'hainaut_2'],
-            'extraValue': 'A.I.D.E.',
+            'concernedOutsideDirections': ['hainaut_1', 'hainaut_2',],
+            'extraValue': 'Air Liquide Industries Belgium S.A.',
             'podTemplates': (),
         },
 
@@ -1055,7 +1055,7 @@ urbanEventTypes = {
             ),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
             'eventPortalType': 'UrbanEventOpinionRequest',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
         },
         {
@@ -1394,7 +1394,7 @@ urbanEventTypes = {
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
             'eventPortalType': 'UrbanEventOpinionRequest',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
         },
         {
@@ -1410,7 +1410,7 @@ urbanEventTypes = {
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
             'eventPortalType': 'UrbanEventOpinionRequest',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
         },
         {
@@ -1426,7 +1426,7 @@ urbanEventTypes = {
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
             'eventPortalType': 'UrbanEventOpinionRequest',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
         },
         {
@@ -1442,7 +1442,7 @@ urbanEventTypes = {
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
             'eventPortalType': 'UrbanEventOpinionRequest',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
         },
         {
@@ -1458,7 +1458,7 @@ urbanEventTypes = {
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
             'eventPortalType': 'UrbanEventOpinionRequest',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
         },
         {
@@ -1474,7 +1474,7 @@ urbanEventTypes = {
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
             'eventPortalType': 'UrbanEventOpinionRequest',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
         },
         {
@@ -1490,7 +1490,7 @@ urbanEventTypes = {
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
             'eventPortalType': 'UrbanEventOpinionRequest',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
         },
         {
@@ -1506,7 +1506,7 @@ urbanEventTypes = {
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
             'eventPortalType': 'UrbanEventOpinionRequest',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
         },
         {
@@ -1522,7 +1522,7 @@ urbanEventTypes = {
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
             'eventPortalType': 'UrbanEventOpinionRequest',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
         },
         {
@@ -1538,7 +1538,7 @@ urbanEventTypes = {
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
             'eventPortalType': 'UrbanEventOpinionRequest',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
         },
         {
@@ -1554,7 +1554,7 @@ urbanEventTypes = {
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
             'eventPortalType': 'UrbanEventOpinionRequest',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
         },
         {
@@ -1570,7 +1570,7 @@ urbanEventTypes = {
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
             'eventPortalType': 'UrbanEventOpinionRequest',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
         },
         {
@@ -1586,7 +1586,7 @@ urbanEventTypes = {
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
             'eventPortalType': 'UrbanEventOpinionRequest',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
         },
         {
@@ -1602,7 +1602,7 @@ urbanEventTypes = {
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
             'eventPortalType': 'UrbanEventOpinionRequest',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
         },
         {
@@ -1618,7 +1618,7 @@ urbanEventTypes = {
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
             'eventPortalType': 'UrbanEventOpinionRequest',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
         },
         {
@@ -1634,7 +1634,7 @@ urbanEventTypes = {
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
             'eventPortalType': 'UrbanEventOpinionRequest',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
         },
         {
@@ -1650,7 +1650,7 @@ urbanEventTypes = {
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
             'eventPortalType': 'UrbanEventOpinionRequest',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
         },
         {
@@ -1666,7 +1666,7 @@ urbanEventTypes = {
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
             'eventPortalType': 'UrbanEventOpinionRequest',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
         },
         {
@@ -1682,7 +1682,7 @@ urbanEventTypes = {
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
             'eventPortalType': 'UrbanEventOpinionRequest',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
         },
         {
@@ -1698,7 +1698,7 @@ urbanEventTypes = {
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
             'eventPortalType': 'UrbanEventOpinionRequest',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
         },
         {
@@ -1968,7 +1968,7 @@ urbanEventTypes = {
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
             'eventPortalType': 'UrbanEventOpinionRequest',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
         },
         {
@@ -1983,7 +1983,7 @@ urbanEventTypes = {
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
             'eventPortalType': 'UrbanEventOpinionRequest',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
         },
         {
@@ -1998,7 +1998,7 @@ urbanEventTypes = {
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
             'eventPortalType': 'UrbanEventOpinionRequest',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
         },
         {
@@ -2013,7 +2013,7 @@ urbanEventTypes = {
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
             'eventPortalType': 'UrbanEventOpinionRequest',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
         },
         {
@@ -2028,7 +2028,7 @@ urbanEventTypes = {
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
             'eventPortalType': 'UrbanEventOpinionRequest',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
         },
         {
@@ -2043,7 +2043,7 @@ urbanEventTypes = {
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
             'eventPortalType': 'UrbanEventOpinionRequest',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
         },
         {
@@ -2058,7 +2058,7 @@ urbanEventTypes = {
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
             'eventPortalType': 'UrbanEventOpinionRequest',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
         },
         {
@@ -2073,7 +2073,7 @@ urbanEventTypes = {
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
             'eventPortalType': 'UrbanEventOpinionRequest',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
         },
         {
@@ -2088,7 +2088,7 @@ urbanEventTypes = {
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
             'eventPortalType': 'UrbanEventOpinionRequest',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
         },
         {
@@ -2103,7 +2103,7 @@ urbanEventTypes = {
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
             'eventPortalType': 'UrbanEventOpinionRequest',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
         },
         {
@@ -2118,7 +2118,7 @@ urbanEventTypes = {
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
             'eventPortalType': 'UrbanEventOpinionRequest',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
         },
         {
@@ -2133,7 +2133,7 @@ urbanEventTypes = {
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
             'eventPortalType': 'UrbanEventOpinionRequest',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
         },
         {
@@ -2148,7 +2148,7 @@ urbanEventTypes = {
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
             'eventPortalType': 'UrbanEventOpinionRequest',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
         },
         {
@@ -2163,7 +2163,7 @@ urbanEventTypes = {
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
             'eventPortalType': 'UrbanEventOpinionRequest',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
         },
         {
@@ -2178,7 +2178,7 @@ urbanEventTypes = {
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
             'eventPortalType': 'UrbanEventOpinionRequest',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
         },
         {
@@ -2193,7 +2193,7 @@ urbanEventTypes = {
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
             'eventPortalType': 'UrbanEventOpinionRequest',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
         },
         {
@@ -2208,7 +2208,7 @@ urbanEventTypes = {
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
             'eventPortalType': 'UrbanEventOpinionRequest',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
         },
         {
@@ -2223,7 +2223,7 @@ urbanEventTypes = {
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
             'eventPortalType': 'UrbanEventOpinionRequest',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
         },
         {
@@ -2238,7 +2238,7 @@ urbanEventTypes = {
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
             'eventPortalType': 'UrbanEventOpinionRequest',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
         },
         {
@@ -2253,7 +2253,7 @@ urbanEventTypes = {
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
             'eventPortalType': 'UrbanEventOpinionRequest',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
         },
         {
@@ -2588,7 +2588,7 @@ urbanEventTypes = {
             ),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
             'eventPortalType': 'UrbanEventOpinionRequest',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
         },
         {
@@ -2912,7 +2912,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': "service-pop",
             'title': "Demande d'avis (Service population)",
@@ -2927,7 +2927,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'spw-dgo1',
             'title': "Demande d'avis (SPW-DGO1)",
@@ -2942,7 +2942,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'dgrne',
             'title': "Demande d'avis (DGRNE)",
@@ -2957,7 +2957,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'dnf',
             'title': "Demande d'avis (DNF)",
@@ -2972,7 +2972,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'stp',
             'title': "Demande d'avis (Service Technique Provincial)",
@@ -2987,7 +2987,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'pi',
             'title': "Demande d'avis (Prévention Incendie)",
@@ -3002,7 +3002,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'bec',
             'title': "Demande d'avis (Bureau d'études communal)",
@@ -3017,7 +3017,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'svp',
             'title': "Demande d'avis (Service Voyer Principal)",
@@ -3032,7 +3032,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'agriculture',
             'title': "Demande d'avis (Agriculture)",
@@ -3047,7 +3047,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'pn',
             'title': "Demande d'avis (Parc Naturel)",
@@ -3062,7 +3062,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'crmsf',
             'title': "Demande d'avis (Commission Royale des Monuments, Sites et Fouilles)",
@@ -3077,7 +3077,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'swde',
             'title': "Demande d'avis (SWDE)",
@@ -3092,7 +3092,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'ccatm',
             'title': "Demande d'avis (CCATM)",
@@ -3107,7 +3107,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'inasep',
             'title': "Demande d'avis (INASEP)",
@@ -3122,7 +3122,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'belgacom',
             'title': "Demande d'avis (Belgacom)",
@@ -3137,7 +3137,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'spge',
             'title': "Demande d'avis (SPGE)",
@@ -3152,7 +3152,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'cibe',
             'title': "Demande d'avis (CIBE/Vivaqua)",
@@ -3167,7 +3167,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'sncb',
             'title': "Demande d'avis (SNCB)",
@@ -3182,7 +3182,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'infrabel',
             'title': "Demande d'avis (Infrabel)",
@@ -3197,7 +3197,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'voo',
             'title': "Demande d'avis (VOO)",
@@ -3597,7 +3597,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': "service-pop",
             'title': "Demande d'avis (Service population)",
@@ -3612,7 +3612,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'spw-dgo1',
             'title': "Demande d'avis (SPW-DGO1)",
@@ -3627,7 +3627,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'dgrne',
             'title': "Demande d'avis (DGRNE)",
@@ -3642,7 +3642,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'dnf',
             'title': "Demande d'avis (DNF)",
@@ -3657,7 +3657,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'stp',
             'title': "Demande d'avis (Service Technique Provincial)",
@@ -3672,7 +3672,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'pi',
             'title': "Demande d'avis (Prévention Incendie)",
@@ -3687,7 +3687,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'bec',
             'title': "Demande d'avis (Bureau d'études communal)",
@@ -3702,7 +3702,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'svp',
             'title': "Demande d'avis (Service Voyer Principal)",
@@ -3717,7 +3717,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'agriculture',
             'title': "Demande d'avis (Agriculture)",
@@ -3732,7 +3732,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'pn',
             'title': "Demande d'avis (Parc Naturel)",
@@ -3747,7 +3747,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'crmsf',
             'title': "Demande d'avis (Commission Royale des Monuments, Sites et Fouilles)",
@@ -3762,7 +3762,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'swde',
             'title': "Demande d'avis (SWDE)",
@@ -3777,7 +3777,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'ccatm',
             'title': "Demande d'avis (CCATM)",
@@ -3792,7 +3792,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'inasep',
             'title': "Demande d'avis (INASEP)",
@@ -3807,7 +3807,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'belgacom',
             'title': "Demande d'avis (Belgacom)",
@@ -3822,7 +3822,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'spge',
             'title': "Demande d'avis (SPGE)",
@@ -3837,7 +3837,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'cibe',
             'title': "Demande d'avis (CIBE/Vivaqua)",
@@ -3852,7 +3852,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'sncb',
             'title': "Demande d'avis (SNCB)",
@@ -3867,7 +3867,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'infrabel',
             'title': "Demande d'avis (Infrabel)",
@@ -3882,7 +3882,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'voo',
             'title': "Demande d'avis (VOO)",
@@ -4292,7 +4292,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': "service-pop",
             'title': "Demande d'avis (Service population)",
@@ -4307,7 +4307,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'spw-dgo1',
             'title': "Demande d'avis (SPW-DGO1)",
@@ -4322,7 +4322,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'dgrne',
             'title': "Demande d'avis (DGRNE)",
@@ -4337,7 +4337,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'dnf',
             'title': "Demande d'avis (DNF)",
@@ -4352,7 +4352,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'stp',
             'title': "Demande d'avis (Service Technique Provincial)",
@@ -4367,7 +4367,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'pi',
             'title': "Demande d'avis (Prévention Incendie)",
@@ -4382,7 +4382,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'bec',
             'title': "Demande d'avis (Bureau d'études communal)",
@@ -4397,7 +4397,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'svp',
             'title': "Demande d'avis (Service Voyer Principal)",
@@ -4412,7 +4412,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'agriculture',
             'title': "Demande d'avis (Agriculture)",
@@ -4427,7 +4427,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'pn',
             'title': "Demande d'avis (Parc Naturel)",
@@ -4442,7 +4442,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'crmsf',
             'title': "Demande d'avis (Commission Royale des Monuments, Sites et Fouilles)",
@@ -4457,7 +4457,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'swde',
             'title': "Demande d'avis (SWDE)",
@@ -4472,7 +4472,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'ccatm',
             'title': "Demande d'avis (CCATM)",
@@ -4487,7 +4487,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'inasep',
             'title': "Demande d'avis (INASEP)",
@@ -4502,7 +4502,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'belgacom',
             'title': "Demande d'avis (Belgacom)",
@@ -4517,7 +4517,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'spge',
             'title': "Demande d'avis (SPGE)",
@@ -4532,7 +4532,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'cibe',
             'title': "Demande d'avis (CIBE/Vivaqua)",
@@ -4547,7 +4547,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'sncb',
             'title': "Demande d'avis (SNCB)",
@@ -4562,7 +4562,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'infrabel',
             'title': "Demande d'avis (Infrabel)",
@@ -4577,7 +4577,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'voo',
             'title': "Demande d'avis (VOO)",
@@ -4980,7 +4980,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': "service-pop",
             'title': "Demande d'avis (Service population)",
@@ -4995,7 +4995,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'spw-dgo1',
             'title': "Demande d'avis (SPW-DGO1)",
@@ -5010,7 +5010,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'dgrne',
             'title': "Demande d'avis (DGRNE)",
@@ -5025,7 +5025,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'dnf',
             'title': "Demande d'avis (DNF)",
@@ -5040,7 +5040,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'stp',
             'title': "Demande d'avis (Service Technique Provincial)",
@@ -5055,7 +5055,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'pi',
             'title': "Demande d'avis (Prévention Incendie)",
@@ -5070,7 +5070,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'bec',
             'title': "Demande d'avis (Bureau d'études communal)",
@@ -5085,7 +5085,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'svp',
             'title': "Demande d'avis (Service Voyer Principal)",
@@ -5100,7 +5100,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'agriculture',
             'title': "Demande d'avis (Agriculture)",
@@ -5115,7 +5115,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'pn',
             'title': "Demande d'avis (Parc Naturel)",
@@ -5130,7 +5130,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'crmsf',
             'title': "Demande d'avis (Commission Royale des Monuments, Sites et Fouilles)",
@@ -5145,7 +5145,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'swde',
             'title': "Demande d'avis (SWDE)",
@@ -5160,7 +5160,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'ccatm',
             'title': "Demande d'avis (CCATM)",
@@ -5175,7 +5175,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'inasep',
             'title': "Demande d'avis (INASEP)",
@@ -5190,7 +5190,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'belgacom',
             'title': "Demande d'avis (Belgacom)",
@@ -5205,7 +5205,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'spge',
             'title': "Demande d'avis (SPGE)",
@@ -5220,7 +5220,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'cibe',
             'title': "Demande d'avis (CIBE/Vivaqua)",
@@ -5235,7 +5235,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'sncb',
             'title': "Demande d'avis (SNCB)",
@@ -5250,7 +5250,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'infrabel',
             'title': "Demande d'avis (Infrabel)",
@@ -5265,7 +5265,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'voo',
             'title': "Demande d'avis (VOO)",
@@ -5483,7 +5483,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': "service-pop",
             'title': "Demande d'avis (Service population)",
@@ -5498,7 +5498,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'spw-dgo1',
             'title': "Demande d'avis (SPW-DGO1)",
@@ -5513,7 +5513,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'dgrne',
             'title': "Demande d'avis (DGRNE)",
@@ -5528,7 +5528,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'dnf',
             'title': "Demande d'avis (DNF)",
@@ -5543,7 +5543,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'stp',
             'title': "Demande d'avis (Service Technique Provincial)",
@@ -5558,7 +5558,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'pi',
             'title': "Demande d'avis (Prévention Incendie)",
@@ -5573,7 +5573,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'bec',
             'title': "Demande d'avis (Bureau d'études communal)",
@@ -5588,7 +5588,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'svp',
             'title': "Demande d'avis (Service Voyer Principal)",
@@ -5603,7 +5603,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'agriculture',
             'title': "Demande d'avis (Agriculture)",
@@ -5618,7 +5618,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'pn',
             'title': "Demande d'avis (Parc Naturel)",
@@ -5633,7 +5633,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'crmsf',
             'title': "Demande d'avis (Commission Royale des Monuments, Sites et Fouilles)",
@@ -5648,7 +5648,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'swde',
             'title': "Demande d'avis (SWDE)",
@@ -5663,7 +5663,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'ccatm',
             'title': "Demande d'avis (CCATM)",
@@ -5678,7 +5678,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'inasep',
             'title': "Demande d'avis (INASEP)",
@@ -5693,7 +5693,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'belgacom',
             'title': "Demande d'avis (Belgacom)",
@@ -5708,7 +5708,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'spge',
             'title': "Demande d'avis (SPGE)",
@@ -5723,7 +5723,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'cibe',
             'title': "Demande d'avis (CIBE/Vivaqua)",
@@ -5738,7 +5738,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'sncb',
             'title': "Demande d'avis (SNCB)",
@@ -5753,7 +5753,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'infrabel',
             'title': "Demande d'avis (Infrabel)",
@@ -5768,7 +5768,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'voo',
             'title': "Demande d'avis (VOO)",
@@ -6013,7 +6013,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': "service-pop",
             'title': "Demande d'avis (Service population)",
@@ -6028,7 +6028,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'spw-dgo1',
             'title': "Demande d'avis (SPW-DGO1)",
@@ -6043,7 +6043,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'dgrne',
             'title': "Demande d'avis (DGRNE)",
@@ -6058,7 +6058,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'dnf',
             'title': "Demande d'avis (DNF)",
@@ -6073,7 +6073,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'stp',
             'title': "Demande d'avis (Service Technique Provincial)",
@@ -6088,7 +6088,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'pi',
             'title': "Demande d'avis (Prévention Incendie)",
@@ -6103,7 +6103,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'bec',
             'title': "Demande d'avis (Bureau d'études communal)",
@@ -6118,7 +6118,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'svp',
             'title': "Demande d'avis (Service Voyer Principal)",
@@ -6133,7 +6133,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'agriculture',
             'title': "Demande d'avis (Agriculture)",
@@ -6148,7 +6148,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'pn',
             'title': "Demande d'avis (Parc Naturel)",
@@ -6163,7 +6163,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'crmsf',
             'title': "Demande d'avis (Commission Royale des Monuments, Sites et Fouilles)",
@@ -6178,7 +6178,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'swde',
             'title': "Demande d'avis (SWDE)",
@@ -6193,7 +6193,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'ccatm',
             'title': "Demande d'avis (CCATM)",
@@ -6208,7 +6208,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'inasep',
             'title': "Demande d'avis (INASEP)",
@@ -6223,7 +6223,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'belgacom',
             'title': "Demande d'avis (Belgacom)",
@@ -6238,7 +6238,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'spge',
             'title': "Demande d'avis (SPGE)",
@@ -6253,7 +6253,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'cibe',
             'title': "Demande d'avis (CIBE/Vivaqua)",
@@ -6268,7 +6268,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'sncb',
             'title': "Demande d'avis (SNCB)",
@@ -6283,7 +6283,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'infrabel',
             'title': "Demande d'avis (Infrabel)",
@@ -6298,7 +6298,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'voo',
             'title': "Demande d'avis (VOO)",
@@ -6495,7 +6495,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': "service-pop",
             'title': "Demande d'avis (Service population)",
@@ -6510,7 +6510,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'spw-dgo1',
             'title': "Demande d'avis (SPW-DGO1)",
@@ -6525,7 +6525,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'dgrne',
             'title': "Demande d'avis (DGRNE)",
@@ -6540,7 +6540,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'dnf',
             'title': "Demande d'avis (DNF)",
@@ -6555,7 +6555,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'stp',
             'title': "Demande d'avis (Service Technique Provincial)",
@@ -6570,7 +6570,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'pi',
             'title': "Demande d'avis (Prévention Incendie)",
@@ -6585,7 +6585,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'bec',
             'title': "Demande d'avis (Bureau d'études communal)",
@@ -6600,7 +6600,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'svp',
             'title': "Demande d'avis (Service Voyer Principal)",
@@ -6615,7 +6615,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'agriculture',
             'title': "Demande d'avis (Agriculture)",
@@ -6630,7 +6630,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'pn',
             'title': "Demande d'avis (Parc Naturel)",
@@ -6645,7 +6645,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'crmsf',
             'title': "Demande d'avis (Commission Royale des Monuments, Sites et Fouilles)",
@@ -6660,7 +6660,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'swde',
             'title': "Demande d'avis (SWDE)",
@@ -6675,7 +6675,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'ccatm',
             'title': "Demande d'avis (CCATM)",
@@ -6690,7 +6690,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'inasep',
             'title': "Demande d'avis (INASEP)",
@@ -6705,7 +6705,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'belgacom',
             'title': "Demande d'avis (Belgacom)",
@@ -6720,7 +6720,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'spge',
             'title': "Demande d'avis (SPGE)",
@@ -6735,7 +6735,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'cibe',
             'title': "Demande d'avis (CIBE/Vivaqua)",
@@ -6750,7 +6750,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'sncb',
             'title': "Demande d'avis (SNCB)",
@@ -6765,7 +6765,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'infrabel',
             'title': "Demande d'avis (Infrabel)",
@@ -6780,7 +6780,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'voo',
             'title': "Demande d'avis (VOO)",
@@ -6879,7 +6879,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'belgacom',
             'title': "Demande d'avis (Service interne XXX)",
@@ -7124,7 +7124,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': "service-pop",
             'title': "Demande d'avis (Service population)",
@@ -7139,7 +7139,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'spw-dgo1',
             'title': "Demande d'avis (SPW-DGO1)",
@@ -7154,7 +7154,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'dgrne',
             'title': "Demande d'avis (DGRNE)",
@@ -7169,7 +7169,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'dnf',
             'title': "Demande d'avis (DNF)",
@@ -7184,7 +7184,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'stp',
             'title': "Demande d'avis (Service Technique Provincial)",
@@ -7199,7 +7199,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'pi',
             'title': "Demande d'avis (Prévention Incendie)",
@@ -7214,7 +7214,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'bec',
             'title': "Demande d'avis (Bureau d'études communal)",
@@ -7229,7 +7229,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'svp',
             'title': "Demande d'avis (Service Voyer Principal)",
@@ -7244,7 +7244,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'agriculture',
             'title': "Demande d'avis (Agriculture)",
@@ -7259,7 +7259,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'pn',
             'title': "Demande d'avis (Parc Naturel)",
@@ -7274,7 +7274,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'crmsf',
             'title': "Demande d'avis (Commission Royale des Monuments, Sites et Fouilles)",
@@ -7289,7 +7289,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'swde',
             'title': "Demande d'avis (SWDE)",
@@ -7304,7 +7304,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'ccatm',
             'title': "Demande d'avis (CCATM)",
@@ -7319,7 +7319,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'inasep',
             'title': "Demande d'avis (INASEP)",
@@ -7334,7 +7334,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'belgacom',
             'title': "Demande d'avis (Belgacom)",
@@ -7349,7 +7349,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'spge',
             'title': "Demande d'avis (SPGE)",
@@ -7364,7 +7364,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'cibe',
             'title': "Demande d'avis (CIBE/Vivaqua)",
@@ -7379,7 +7379,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'sncb',
             'title': "Demande d'avis (SNCB)",
@@ -7394,7 +7394,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'infrabel',
             'title': "Demande d'avis (Infrabel)",
@@ -7409,7 +7409,7 @@ urbanEventTypes = {
         },
         {
             'portal_type': 'OpinionRequestEventType',
-            'outsideDirection': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
             'id': 'voo',
             'title': "Demande d'avis (VOO)",

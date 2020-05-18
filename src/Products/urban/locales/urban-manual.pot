@@ -1571,6 +1571,11 @@ msgstr ""
 msgid "urban_label_concerned_elements"
 msgstr ""
 
+#. Default: "ConcernedOutsideDirections"
+#: OpinionRequestEventType.py
+msgid "urban_label_concernedOutsideDirections"
+msgstr ""
+
 #. Default: "Customspecificfeatures"
 #: UrbanCertificateBase.py
 msgid "urban_label_customSpecificFeatures"
@@ -2073,11 +2078,6 @@ msgstr ""
 #. Default: "Outlinecolor"
 #: Layer.py
 msgid "urban_label_outlineColor"
-msgstr ""
-
-#. Default: "outsideDirection"
-#: UrbanEventType.py
-msgid "urban_label_outsideDirection"
 msgstr ""
 
 # parcelsinfo.pt

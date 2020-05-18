@@ -188,7 +188,7 @@ class AutomatedTaskActionsPanelView(ActionsPanelView):
 
     def __init__(self, context, request):
         super(AutomatedTaskActionsPanelView, self).__init__(context, request)
-        self.SECTIONS_TO_RENDER = ('renderChangeOwner',)
+        self.SECTIONS_TO_RENDER = ('renderChangeOwner', 'renderCloseTask')
 
     def __call__(self,
                  useIcons=False,
@@ -201,9 +201,11 @@ class AutomatedTaskActionsPanelView(ActionsPanelView):
                  showHistory=False,
                  showHistoryLastEventHasComments=False,
                  showChangeOwner=True,
+                 showCloseTask=True,
                  **kwargs):
 
         self.showChangeOwner = showChangeOwner
+        self.showCloseTask = showCloseTask
 
         return super(AutomatedTaskActionsPanelView, self).__call__(
             useIcons=useIcons,
@@ -222,6 +224,11 @@ class AutomatedTaskActionsPanelView(ActionsPanelView):
         """Render a link for the change owner view"""
         if self.showChangeOwner:
             return ViewPageTemplateFile('actions_panel_change_owner.pt')(self)
+
+    def renderCloseTask(self):
+        """Render a link  to close the task manually"""
+        if self.showCloseTask:
+            return ViewPageTemplateFile('actions_panel_close_task.pt')(self)
 
 
 class SimpleTaskActionsPanelView(ActionsPanelView):

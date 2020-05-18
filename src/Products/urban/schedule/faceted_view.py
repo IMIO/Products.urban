@@ -16,7 +16,6 @@ class UrbanTaskTableView(FacetedTaskTableView):
             u'simple_status',
             u'path',
             u'assigned_user_column',
-            u'CreationDate',
             u'due_date',
             u'task_actions_column',
         ]

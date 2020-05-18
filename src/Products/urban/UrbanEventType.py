@@ -127,15 +127,6 @@ schema = Schema((
             i18n_domain='urban',
         ),
     ),
-    LinesField(
-        name='outsideDirection',
-        vocabulary="listOutsideDirection",
-        widget=MultiSelectionWidget(
-            label='OutsideDirection',
-            label_msgid='urban_label_outsideDirection',
-            i18n_domain='urban',
-        ),
-    ),
     BooleanField(
         name='isKeyEvent',
         default=False,
@@ -326,20 +317,6 @@ class UrbanEventType(OrderedBaseFolder, UrbanConfigurationValue, BrowserDefaultM
             [(k, _(k)) for k in portal_types.keys() if k.startswith('UrbanEvent') and not k.endswith('EventType')]
         )
         return event_types
-
-    security.declarePublic('listOutsideDirection')
-    def listOutsideDirection(self):
-        vocab = (
-            ('brabant_wallon', 'Brabant wallon'),
-            ('eupen', 'Eupen'),
-            ('hainaut_1', 'Hainaut 1'),
-            ('hainaut_2', 'Hainaut 2'),
-            ('liege_1', 'Liège 1'),
-            ('liege_2', 'Liège 2'),
-            ('luxembourg', 'Luxembourg'),
-            ('namur', 'Namur'),
-        )
-        return DisplayList(vocab)
 
     def getLinkedUrbanEvents(self):
         """

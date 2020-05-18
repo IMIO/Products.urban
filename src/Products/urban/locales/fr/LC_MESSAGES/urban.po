@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2020-04-27 07:00+0000\n"
+"POT-Creation-Date: 2020-05-15 17:07+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -236,6 +236,10 @@ msgstr ""
 msgid "Emails"
 msgstr "Email"
 
+#: ../browser/actionspanel/actions_panel_close_task.pt:2
+msgid "End"
+msgstr ""
+
 msgid "EnvClassBordering"
 msgstr "Permis d'environnement limitrophes"
 
@@ -310,7 +314,7 @@ msgstr "Historique sauvegardé"
 msgid "IAcknowledgment type marker interface"
 msgstr "Accusé de réception"
 
-#: ../interfaces.py:563
+#: ../interfaces.py:567
 msgid "IActivityEndedEvent type marker interface"
 msgstr "Cessastion d'activité"
 
@@ -353,11 +357,11 @@ msgstr "Accusé de réception par défaut"
 msgid "IDeposit type marker interface"
 msgstr "Dépôt de la demande"
 
-#: ../interfaces.py:531
+#: ../interfaces.py:535
 msgid "IDisplayingTheDecisionEvent type marker interface"
 msgstr "Affichage de la décision"
 
-#: ../interfaces.py:579
+#: ../interfaces.py:583
 msgid "IEnvironmentOnly type marker interface"
 msgstr "Événement exclusif à l'environnement (permis unique)"
 
@@ -365,11 +369,11 @@ msgstr "Événement exclusif à l'environnement (permis unique)"
 msgid "IEnvironmentSimpleCollegeEvent type marker interface"
 msgstr "Collège simple (environnement)"
 
-#: ../interfaces.py:567
+#: ../interfaces.py:571
 msgid "IForcedEndEvent type marker interface"
 msgstr "Fin forcée"
 
-#: ../interfaces.py:559
+#: ../interfaces.py:563
 msgid "IIILEPrescriptionEvent type marker interface"
 msgstr "Prescription IILE"
 
@@ -378,11 +382,11 @@ msgstr "Prescription IILE"
 msgid "IInquiry type marker interface"
 msgstr "Enquête publique"
 
-#: ../interfaces.py:603
+#: ../interfaces.py:607
 msgid "IInspectionReportEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:595
+#: ../interfaces.py:599
 msgid "IInternalPrelimaryAdvice type marker interface"
 msgstr "Avis préliminaire interne"
 
@@ -398,7 +402,7 @@ msgstr "Début du permis"
 msgid "ILicenceExpiration type marker interface"
 msgstr "Expiration du permis"
 
-#: ../interfaces.py:527
+#: ../interfaces.py:531
 msgid "ILicenceNotification type marker interface"
 msgstr "Notification du permis"
 
@@ -425,7 +429,7 @@ msgstr "Transmis des compléments au SPW"
 msgid "IModificationDeposit type marker interface"
 msgstr "Dépôt d'un modificatif de la demande"
 
-#: ../interfaces.py:571
+#: ../interfaces.py:575
 msgid "IModificationRegistryEvent type marker interface"
 msgstr "Registre de modification"
 
@@ -434,32 +438,32 @@ msgstr "Registre de modification"
 msgid "IOpinionRequest type marker interface"
 msgstr "Demande d'avis"
 
-#: ../interfaces.py:599
+#: ../interfaces.py:603
 msgid "IPatrimonyMeetingEvent type marker interface"
 msgstr "Réunion patrimoine"
 
-#: ../interfaces.py:607
+#: ../interfaces.py:615
 msgid "IProprietaryChangeEvent type marker interface"
 msgstr "Changement d'exploitant"
 
 #. Default: "Prorogation"
-#: ../interfaces.py:547
+#: ../interfaces.py:551
 msgid "IProrogation type marker interface"
 msgstr "Prorogation"
 
-#: ../interfaces.py:551
+#: ../interfaces.py:555
 msgid "IProvocationEvent type marker interface"
 msgstr "Provocation"
 
-#: ../interfaces.py:535
+#: ../interfaces.py:539
 msgid "IRecourseEvent type marker interface"
 msgstr "Recours"
 
-#: ../interfaces.py:555
+#: ../interfaces.py:559
 msgid "IRefusedIncompleteness type marker interface"
 msgstr "Refus pour incomplétude"
 
-#: ../interfaces.py:575
+#: ../interfaces.py:579
 msgid "ISentToArchivesEvent type marker interface"
 msgstr "Envoi aux archives"
 
@@ -477,15 +481,23 @@ msgstr "Demande d'avis du service technique"
 msgid "ITheLicence type marker interface"
 msgstr "Délivrance du permis/certificat/..."
 
+#: ../interfaces.py:523
+msgid "ITheTicket type marker interface"
+msgstr "Procès verbal"
+
 #: ../interfaces.py:447
 msgid "ITransmitToSPWEvent type marker interface"
 msgstr "Transmis du dossier au SPW"
 
-#: ../interfaces.py:587
+#: ../interfaces.py:591
 msgid "IUrbanAndEnvironment type marker interface"
 msgstr "Événement commun à l'urbanisme et l'environnement (permis unique)"
 
-#: ../interfaces.py:583
+#: ../interfaces.py:611
+msgid "IUrbanEventFollowUpWithDelay type marker interface"
+msgstr "Proposition de suivi avec délai"
+
+#: ../interfaces.py:587
 msgid "IUrbanOrEnvironment type marker interface"
 msgstr "Événement exclusif au service de la tendance du dossier (permis unique)"
 
@@ -504,15 +516,15 @@ msgid "IWalloonRegionPrimo type marker interface"
 msgstr "Envoi du primo dossier"
 
 #. Default: "Work beginning"
-#: ../interfaces.py:539
+#: ../interfaces.py:543
 msgid "IWorkBeginning type marker interface"
 msgstr "Début des travaux"
 
-#: ../interfaces.py:543
+#: ../interfaces.py:547
 msgid "IWorkEnd type marker interface"
 msgstr "Fin des travaux"
 
-#: ../interfaces.py:591
+#: ../interfaces.py:595
 msgid "ImpactStudy event type marker interface"
 msgstr "Étude d'incidence"
 
@@ -526,7 +538,7 @@ msgstr "Inspection"
 msgid "IntegratedLicence"
 msgstr "Permis intégré"
 
-#: ../interfaces.py:705
+#: ../interfaces.py:713
 msgid "Internal opinion services"
 msgstr "Avis de services internes à la ville"
 
@@ -540,7 +552,7 @@ msgstr "Type de permis"
 msgid "Listing file"
 msgstr ""
 
-#: ../interfaces.py:728
+#: ../interfaces.py:736
 msgid "Mailing limit"
 msgstr ""
 
@@ -548,7 +560,7 @@ msgstr ""
 msgid "Map"
 msgstr "Carte"
 
-#: ../interfaces.py:729
+#: ../interfaces.py:737
 msgid "Max items allowed for immediate mailing"
 msgstr ""
 
@@ -598,11 +610,11 @@ msgstr "Permis d'urbanisation"
 msgid "PatrimonyCertificate"
 msgstr "Certificat de patrimoine"
 
-#: ../interfaces.py:743
+#: ../interfaces.py:751
 msgid "Planned claimants imports"
 msgstr ""
 
-#: ../interfaces.py:718
+#: ../interfaces.py:726
 msgid "Planned mailings"
 msgstr ""
 
@@ -685,7 +697,7 @@ msgstr ""
 msgid "Service id"
 msgstr ""
 
-#: ../interfaces.py:706
+#: ../interfaces.py:714
 msgid "Services that can give their opinion directly through urban"
 msgstr ""
 
@@ -707,7 +719,7 @@ msgstr ""
 msgid "Submit"
 msgstr "Valider"
 
-#: ../interfaces.py:756
+#: ../interfaces.py:764
 msgid "Suspension period end date"
 msgstr ""
 
@@ -715,7 +727,7 @@ msgstr ""
 msgid "Suspension period from to: please check the end date"
 msgstr "Période de suspension du ${from} au ${to}: CORRIGEZ LA DATE DE FIN DE PUBLICITE."
 
-#: ../interfaces.py:752
+#: ../interfaces.py:760
 msgid "Suspension period start date"
 msgstr ""
 
@@ -812,7 +824,7 @@ msgstr ""
 msgid "View"
 msgstr "Voir le permis"
 
-#: ../UrbanEventType.py:284
+#: ../UrbanEventType.py:275
 msgid "You can not create this UrbanEvent !"
 msgstr "Vous ne pouvez pas créer cet événement"
 
@@ -1672,7 +1684,7 @@ msgstr "Choisissez une des 3 recherches ci-dessous.  Si vous savez exactement ce
 msgid "inadmissibilityreasons_folder_title"
 msgstr "Motifs d'irrecevabilité"
 
-#: ../interfaces.py:744
+#: ../interfaces.py:752
 msgid "inquiries planned for claimants imports"
 msgstr ""
 
@@ -1946,11 +1958,11 @@ msgstr "Particularités du bien (urbanisme)"
 msgid "lotusages_folder_title"
 msgstr "Destination"
 
-#: ../interfaces.py:719
+#: ../interfaces.py:727
 msgid "mailings planned"
 msgstr ""
 
-#: ../interfaces.py:734
+#: ../interfaces.py:742
 msgid "mailings planned for radius search"
 msgstr ""
 
@@ -3009,13 +3021,13 @@ msgid "urban_label_bis"
 msgstr "Bis"
 
 #. Default: "Bound inspection"
-#: ../content/licence/Ticket.py:47
+#: ../content/licence/Ticket.py:57
 msgid "urban_label_bound_inspection"
 msgstr "Dossier d'inspection lié"
 
 #. Default: "Bound licences"
 #: ../content/licence/Inspection.py:41
-#: ../content/licence/Ticket.py:73
+#: ../content/licence/Ticket.py:83
 msgid "urban_label_bound_licences"
 msgstr "Dossiers liés"
 
@@ -3189,6 +3201,11 @@ msgstr "Risque de ruissellement concentré"
 #: ../content/licence/GenericLicence.py:393
 msgid "urban_label_concentratedRunoffSRiskDetails"
 msgstr "Détails concernant le risque de ruissellement concentré"
+
+#. Default: "ConcernedOutsideDirections"
+#: OpinionRequestEventType.py
+msgid "urban_label_concernedOutsideDirections"
+msgstr "Directions extérieures concernées"
 
 #. Default: "Concerned elements"
 #: parcelsinfo.py
@@ -3991,6 +4008,11 @@ msgstr "CU2(s) lié(s) à la parcelle"
 msgid "urban_label_linkedInquiry"
 msgstr "Enquête liée"
 
+#. Default: "Linkedreport"
+#: ../content/UrbanEventFollowUp.py:28
+msgid "urban_label_linkedReport"
+msgstr "Rapport lié"
+
 #. Default: "Linked inquiry"
 #: urbaneventinquiryview.pt
 msgid "urban_label_linked_inquiry"
@@ -4078,6 +4100,11 @@ msgstr "Signatures principales"
 #: FolderManager.py
 msgid "urban_label_manageableLicences"
 msgstr "Type de permis gérés"
+
+#. Default: "Managed_by_prosecutor"
+#: ../content/licence/Ticket.py:106
+msgid "urban_label_managed_by_prosecutor"
+msgstr "Prise en charge procureur"
 
 #. Default: "Manualparcels"
 #: ../content/licence/EnvClassBordering.py:51
@@ -4257,11 +4284,6 @@ msgstr "Ancienne parcelle"
 #: Layer.py
 msgid "urban_label_outlineColor"
 msgstr "Outline color"
-
-#. Default: "outsideDirection"
-#: UrbanEventType.py
-msgid "urban_label_outsideDirection"
-msgstr ""
 
 # parcelsinfo.pt
 #. Default: "Propriétaire"
@@ -4449,6 +4471,11 @@ msgstr "Motivation du point PloneMeeting"
 msgid "urban_label_pmTitle"
 msgstr "Titre du point PloneMeeting"
 
+#. Default: "Policeticketreference"
+#: ../content/licence/Ticket.py:43
+msgid "urban_label_policeTicketReference"
+msgstr "N° PV police"
+
 #. Default: "Pollution"
 #: ../content/licence/UrbanCertificateBase.py:241
 msgid "urban_label_pollution"
@@ -4600,7 +4627,7 @@ msgid "urban_label_referenceFT"
 msgstr "Référence FT"
 
 #. Default: "Referenceprosecution"
-#: ../content/licence/Ticket.py:33
+#: ../content/licence/Ticket.py:35
 msgid "urban_label_referenceProsecution"
 msgstr "Référence Parquet"
 
@@ -5213,6 +5240,11 @@ msgstr "Type"
 msgid "urban_label_typeAndStreetName_number_box"
 msgstr "Type et nom de rue, numéro et boîte"
 
+#. Default: "UltimeDate"
+#: ../UrbanEvent.py:447
+msgid "urban_label_ultimeDate"
+msgstr "Date ultime"
+
 #. Default: "Path of a UNO-enabled Python interpreter (ie /usr/bin/python)"
 #: UrbanTool.py
 msgid "urban_label_unoEnabledPython"
@@ -5249,7 +5281,7 @@ msgid "urban_label_useTabbingForEdit"
 msgstr "Utiliser les onglets supplémentaires pour l'édition"
 
 #. Default: "Use_bound_inspection_infos"
-#: ../content/licence/Ticket.py:59
+#: ../content/licence/Ticket.py:69
 msgid "urban_label_use_bound_inspection_infos"
 msgstr "Prendre les données de l'inspection liée"
 

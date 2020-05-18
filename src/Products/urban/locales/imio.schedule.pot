@@ -218,6 +218,12 @@ msgstr ""
 msgid "urban.schedule.condition.spw_project_receipt_done"
 msgstr ""
 
+msgid "urban.schedule.condition.ticket_redacted"
+msgstr ""
+
+msgid "urban.schedule.condition.ticket_redaction_over_deadline"
+msgstr ""
+
 msgid "urban.schedule.delay.annonced_delay"
 msgstr ""
 

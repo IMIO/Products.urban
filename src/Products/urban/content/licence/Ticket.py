@@ -6,10 +6,10 @@ from zope.interface import implements
 
 from Products.urban import UrbanMessage as _
 from Products.urban import interfaces
-from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.config import PROJECTNAME
 from Products.urban.config import URBAN_TYPES
 from Products.urban.content.licence.GenericLicence import GenericLicence
+from Products.urban.utils import setOptionalAttributes
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
@@ -25,12 +25,22 @@ slave_fields_bound_inspection = (
     },
 )
 
+optional_fields = ['managed_by_prosecutor']
+
 schema = Schema((
     StringField(
         name='referenceProsecution',
         widget=StringField._properties['widget'](
             size=60,
             label=_('urban_label_referenceProsecution', default='Referenceprosecution'),
+        ),
+        schemata='urban_description',
+    ),
+    StringField(
+        name='policeTicketReference',
+        widget=StringField._properties['widget'](
+            size=60,
+            label=_('urban_label_policeTicketReference', default='Policeticketreference'),
         ),
         schemata='urban_description',
     ),
@@ -89,8 +99,19 @@ schema = Schema((
         multiValued=True,
         relationship="bound_licences",
     ),
+    BooleanField(
+        name='managed_by_prosecutor',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label=_('urban_label_managed_by_prosecutor', default='Managed_by_prosecutor'),
+        ),
+        schemata='urban_description',
+    ),
 ),
 )
+
+setOptionalAttributes(schema, optional_fields)
+
 Ticket_schema = BaseFolderSchema.copy() + \
     getattr(GenericLicence, 'schema', Schema(())).copy() + \
     schema.copy()
@@ -146,7 +167,12 @@ class Ticket(BaseFolder, GenericLicence, BrowserDefaultMixin):
             worklocations = self.getWorkLocationSignaletic()
         else:
             worklocations = translate('no_address_defined', 'urban', context=self.REQUEST).encode('utf8')
-        title = "%s - %s - %s" % (self.getReference(), self.getLicenceSubject(), worklocations)
+        title = "{}{} - {} - {}".format(
+            self.getReference(),
+            self.getPoliceTicketReference() and ' - ' + self.getPoliceTicketReference() or '',
+            self.getLicenceSubject(),
+            worklocations
+        )
         self.setTitle(title)
         self.reindexObject(idxs=('Title', 'sortable_title', ))
 
@@ -248,6 +274,18 @@ class Ticket(BaseFolder, GenericLicence, BrowserDefaultMixin):
                         if corp.portal_type == 'CorporationPlaintiff']
         return corporations
 
+    def getLastDeposit(self):
+        return self.getLastEvent(interfaces.IDepositEvent)
+
+    def getLastMissingPart(self):
+        return self.getLastEvent(interfaces.IMissingPartEvent)
+
+    def getLastMissingPartDeposit(self):
+        return self.getLastEvent(interfaces.IMissingPartDepositEvent)
+
+    def getLastTheticket(self):
+        return self.getLastEvent(interfaces.ITheTicketEvent)
+
 
 registerType(Ticket, PROJECTNAME)
 
@@ -258,10 +296,12 @@ def finalize_schema(schema, folderish=False, moveDiscussion=True):
     """
     schema['folderCategory'].widget.visible = {'edit': 'invisible', 'view': 'invisible'}
     schema.moveField('referenceProsecution', after='reference')
+    schema.moveField('policeTicketReference', after='referenceProsecution')
     schema.moveField('bound_inspection', before='workLocations')
     schema.moveField('use_bound_inspection_infos', after='bound_inspection')
     schema.moveField('bound_licences', after='use_bound_inspection_infos')
-    schema.moveField('description', after='foldermanagers')
+    schema.moveField('managed_by_prosecutor', after='foldermanagers')
+    schema.moveField('description', after='managed_by_prosecutor')
     return schema
 
 

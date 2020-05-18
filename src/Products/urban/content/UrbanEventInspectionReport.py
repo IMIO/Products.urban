@@ -101,7 +101,7 @@ schema = Schema((
             size=15,
             label=_('urban_label_delay', default='Delay'),
         ),
-        default='30 – 90 – 120 – autre',
+        default='0',
         validators=('isInteger',),
     ),
 ),
