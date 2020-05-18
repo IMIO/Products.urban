@@ -157,22 +157,22 @@ class Corporation(BaseContent, Applicant, BrowserDefaultMixin):
         return title
 
     def _getNameSignaletic(self, short, linebyline, reverse=False, invertnames=False):
-        title = self.getPersonTitleValue(short, False, reverse)
-        legalForm = self.getLegalForm()
-        denomination = self.getDenomination()
-        firstName = self.getName2()
-        lastName = self.getName1()
-        personRole = self.getPersonRole()
-        nameSignaletic = '{} {}'.format(self.getLegalForm(), self.getDenomination())
+        title = self.getPersonTitleValue(short, False, reverse).decode('utf8')
+        legalForm = self.getLegalForm().decode('utf8')
+        denomination = self.getDenomination().decode('utf8')
+        lastName = self.getName1().decode('utf-8')
+        firstName = self.getName2().decode('utf-8')
+        personRole = self.getPersonRole().decode('utf8')
+        nameSignaletic = u'{} {}'.format(self.getLegalForm(), self.getDenomination())
         if linebyline:
             #escape HTML special characters like HTML entities
-            title = cgi.escape(title).decode('utf8')
-            legalForm = cgi.escape(legalForm).decode('utf8')
-            denomination = cgi.escape(denomination).decode('utf8')
-            firstName = cgi.escape(firstName).decode('utf8')
-            lastName = cgi.escape(lastName).decode('utf8')
-            personRole = cgi.escape(personRole).decode('utf8')
-            nameSignaletic = "%s %s<br />%s %s %s" % (legalForm, denomination, title, firstName, lastName)
+            title = cgi.escape(title)
+            legalForm = cgi.escape(legalForm)
+            denomination = cgi.escape(denomination)
+            firstName = cgi.escape(firstName)
+            lastName = cgi.escape(lastName)
+            personRole = cgi.escape(personRole)
+            nameSignaletic = u"%s %s<br />%s %s %s" % (legalForm, denomination, title, firstName, lastName)
         return nameSignaletic
 
 
