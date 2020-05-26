@@ -71,6 +71,11 @@
     />
 
     <adapter
+      for="OFS.interfaces.IItem"
+      provides=".interfaces.IGenerablePODTemplates"
+      factory=".adapters.GenerableDashboardPODTemplatesAdapter"/>
+
+    <adapter
         for="Products.Archetypes.interfaces.field.IObjectField
              Products.Archetypes.Widget.CalendarWidget
              Products.urban.interfaces.IUrbanEvent"
