@@ -72,8 +72,8 @@
 
     <adapter
       for="OFS.interfaces.IItem"
-      provides=".interfaces.IGenerablePODTemplates"
-      factory=".adapters.GenerableDashboardPODTemplatesAdapter"/>
+      provides="collective.documentgenerator.interfaces.IGenerablePODTemplates"
+      factory=".adapter.GenerableDashboardPODTemplatesAdapter"/>
 
     <adapter
         for="Products.Archetypes.interfaces.field.IObjectField
