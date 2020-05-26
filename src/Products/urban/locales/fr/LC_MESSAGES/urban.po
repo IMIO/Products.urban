@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2020-04-28 12:50+0000\n"
+"POT-Creation-Date: 2020-05-14 20:10+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -853,22 +853,22 @@ msgstr "Ajouter une adresse"
 msgid "add_a_claimant"
 msgstr "Ajouter un réclamant"
 
-#: ../browser/licence/templates/licencemacros.pt:126
+#: ../browser/licence/templates/licencemacros.pt:143
 msgid "add_a_corporation"
 msgstr "Ajouter un demandeur (p. morale)"
 
 msgid "add_a_lot"
 msgstr "Ajouter un lot"
 
-#: ../browser/licence/templates/licencemacros.pt:118
+#: ../browser/licence/templates/licencemacros.pt:135
 msgid "add_a_physical_applicant"
 msgstr "Ajouter un demandeur"
 
-#: ../browser/licence/templates/licencemacros.pt:99
+#: ../browser/licence/templates/licencemacros.pt:116
 msgid "add_a_proprietary"
 msgstr "Ajouter un propriétaire"
 
-#: ../browser/licence/templates/licencemacros.pt:77
+#: ../browser/licence/templates/licencemacros.pt:94
 msgid "add_an_applicant"
 msgstr ""
 
@@ -943,12 +943,12 @@ msgstr "réponse au plaignant"
 
 # buildlicence_view
 #. Default: "Applicant(s)"
-#: ../browser/licence/templates/licencemacros.pt:63
+#: ../browser/licence/templates/licencemacros.pt:80
 msgid "applicants"
 msgstr "Demandeur(s)"
 
 #. Default: "Applicant(s) history"
-#: ../browser/licence/templates/licencemacros.pt:133
+#: ../browser/licence/templates/licencemacros.pt:150
 msgid "applicants_history"
 msgstr "Demandeurs inactifs"
 
@@ -2203,7 +2203,7 @@ msgid "projectmeeting_urbanconfig_title"
 msgstr "Paramètres des réunions de projet"
 
 #. Default: "Proprietary(ies)"
-#: ../browser/licence/templates/licencemacros.pt:84
+#: ../browser/licence/templates/licencemacros.pt:101
 msgid "proprietaries"
 msgstr "Propriétaire(s)"
 
@@ -2700,11 +2700,6 @@ msgstr "Schéma de Structure Communal (S.S.C.)"
 msgid "urban_label_TALCondition"
 msgstr "Condition TAL"
 
-#. Default: "UltimeDate"
-#: ../UrbanEvent.py
-msgid "urban_label_ultimeDate"
-msgstr "Date ultime"
-
 #. Default: "Urbancertificateonenumerotation"
 #: UrbanTool.py
 msgid "urban_label_UrbanCertificateOneNumerotation"
@@ -3119,6 +3114,11 @@ msgstr "Risque de ruissellement concentré"
 #: ../content/licence/GenericLicence.py:393
 msgid "urban_label_concentratedRunoffSRiskDetails"
 msgstr "Détails concernant le risque de ruissellement concentré"
+
+#. Default: "ConcernedOutsideDirections"
+#: OpinionRequestEventType.py
+msgid "urban_label_concernedOutsideDirections"
+msgstr "Directions extérieures concernées"
 
 #. Default: "Concerned elements"
 #: parcelsinfo.py
@@ -4070,7 +4070,7 @@ msgid "urban_label_noApplication"
 msgstr "Non applicable"
 
 #. Default: "Notary(ies)"
-#: ../browser/licence/templates/licencemacros.pt:45
+#: ../browser/licence/templates/licencemacros.pt:62
 #: ../content/licence/CODT_UrbanCertificateTwo.py:69
 #: ../content/licence/Division.py:45
 msgid "urban_label_notaryContact"
@@ -4593,8 +4593,9 @@ msgstr "Date de réception du PV"
 msgid "urban_label_reportVisitDate"
 msgstr "Date de la visite"
 
-#. Default: "RepresentativeContacts"
-#: ../content/licence/CODT_ParcelOutLicence.py:77
+#. Default: "RepresentativeContacts(s)"
+#: ../browser/licence/templates/licencemacros.pt:45
+#, fuzzy
 msgid "urban_label_representative_contacts"
 msgstr "Représentant(s)"
 
@@ -5102,6 +5103,11 @@ msgstr "Type"
 #: ../OpinionRequestEventType.py:75
 msgid "urban_label_typeAndStreetName_number_box"
 msgstr "Type et nom de rue, numéro et boîte"
+
+#. Default: "UltimeDate"
+#: ../UrbanEvent.py:447
+msgid "urban_label_ultimeDate"
+msgstr "Date ultime"
 
 #. Default: "Path of a UNO-enabled Python interpreter (ie /usr/bin/python)"
 #: UrbanTool.py

@@ -5,13 +5,13 @@ Changes
 2.5 (unreleased)
 ----------------
 
+- provides organizations to consult based on external directions
+  [fngaha]
+
 - Add an Ultimate date field in the list of activatable fields
   [fngaha]
 
 - Update documentation with cadastre downloading
-  [fngaha]
-
-- Provide management of external directions
   [fngaha]
 
 - Translate liste_220 errors
