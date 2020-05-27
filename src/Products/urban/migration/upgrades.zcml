@@ -124,10 +124,19 @@
         profile="Products.urban:default" />
 
     <gs:upgradeStep
+        title="Fix external edition"
+        description="urban upgrade step"
+        source="1001"
+        destination="1002"
+        handler=".update_240.fix_external_edition_settings"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
         title="Upgrade urban 2.5.0"
         description="urban upgrade step"
         source="2.4.0"
         destination="2.5.0"
         handler=".migrate_to_250.migrate"
         profile="Products.urban:default" />
+
 </configure>
