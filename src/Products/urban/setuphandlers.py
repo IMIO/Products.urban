@@ -127,17 +127,26 @@ def postInstall(context):
     site.portal_memberdata.manage_changeProperties(ext_editor=True)
     site.portal_properties.site_properties.manage_changeProperties(
         typesUseViewActionInListings=(
-            'Image', 'File', 'UrbanTemplate', 'SubTemplate', 'StyleTemplate'
+            'Image', 'File', 'UrbanDoc', 'UrbanTemplate', 'ConfigurablePODTemplate',
+            'SubTemplate', 'StyleTemplate', 'DashboardPODTemplate', 'MailingLoopTemplate',
         )
     )
     # for collective.externaleditor
     values = api.portal.get_registry_record('externaleditor.externaleditor_enabled_types')
+    if 'UrbanDoc' not in values:
+        values.append('UrbanDoc')
     if 'UrbanTemplate' not in values:
         values.append('UrbanTemplate')
+    if 'ConfigurablePODTemplate' not in values:
+        values.append('ConfigurablePODTemplate')
     if 'SubTemplate' not in values:
         values.append('SubTemplate')
     if 'StyleTemplate' not in values:
         values.append('StyleTemplate')
+    if 'DashboardPODTemplate' not in values:
+        values.append('DashboardPODTemplate')
+    if 'MailingLoopTemplate' not in values:
+        values.append('MailingLoopTemplate')
     api.portal.set_registry_record('externaleditor.externaleditor_enabled_types', values)
 
     # add our own portal_types to portal_factory
