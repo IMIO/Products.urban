@@ -123,4 +123,12 @@
         handler=".update_240.fix_licences_breadcrumb"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Fix external edition"
+        description="urban upgrade step"
+        source="1001"
+        destination="1002"
+        handler=".update_240.fix_external_edition_settings"
+        profile="Products.urban:default" />
+
 </configure>
