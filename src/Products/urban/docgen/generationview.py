@@ -63,7 +63,7 @@ class UrbanDocGenerationView(PersistentDocumentGenerationView):
         plaintiffobj = None
         if hasattr(licence, 'getPlaintiffs'):
             plaintiffs = licence.getPlaintiffs()
-            plaintiffobj = plaintiffs[0]
+            plaintiffobj = plaintiffs and plaintiffs[0] or None
 
         generation_context = {
             'this': licence,
@@ -132,7 +132,7 @@ class UrbanMailingLoopGenerationView(MailingLoopPersistentDocumentGenerationView
                 planned_inquiries = api.portal.get_registry_record(
                     'Products.urban.interfaces.IAsyncMailing.mailings_to_do'
                 ) or {}
-                planned_inquiries[self.context.UID()] =  '/'.join(document.getPhysicalPath())
+                planned_inquiries[self.context.UID()] = '/'.join(document.getPhysicalPath())
                 api.portal.set_registry_record(
                     'Products.urban.interfaces.IAsyncMailing.mailings_to_do',
                     planned_inquiries
