@@ -60,6 +60,10 @@ class UrbanDocGenerationView(PersistentDocumentGenerationView):
         proprietaries_views = proprietaries_views and [(view.context, view) for view in proprietaries_views]
         licence_helper_view = licence.restrictedTraverse('@@document_generation_helper_view')
         event_helper_view = self.context.restrictedTraverse('@@document_generation_helper_view')
+        plaintiffobj = None
+        if hasattr(licence, 'getPlaintiffs'):
+            plaintiffs = licence.getPlaintiffs()
+            plaintiffobj = plaintiffs[0]
 
         generation_context = {
             'this': licence,
@@ -68,6 +72,7 @@ class UrbanDocGenerationView(PersistentDocumentGenerationView):
             'event': self.context,
             'urbanEventObj': self.context,
             'applicantobj': applicantobj,
+            'plaintiffobj': plaintiffobj,
             'proprietaryobj': proprietaryobj,
             'tool': portal_urban,
             'licence_view': licence_helper_view,
