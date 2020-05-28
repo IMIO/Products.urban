@@ -191,8 +191,6 @@ class Inspection(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
                    if app.portal_type == 'Tenant']
         return tenants
 
-    security.declarePublic('getCorporationPlaintiffs')
-
     security.declarePublic('getPlaintiffs')
 
     def getPlaintiffs(self):
