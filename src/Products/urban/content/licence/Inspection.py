@@ -119,6 +119,14 @@ class Inspection(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
         worklocations = field.get(self)
         return worklocations
 
+    def updateTitle(self):
+        """
+           Update the title to clearly identify the licence
+        """
+        title = "%s - %s" % (self.getReference(), self.getLicenceSubject())
+        self.setTitle(title)
+        self.reindexObject(idxs=('Title', 'sortable_title',))
+
     def getParcels(self):
         if self.getUse_bound_licence_infos():
             bound_licences = self.getBound_licences()
