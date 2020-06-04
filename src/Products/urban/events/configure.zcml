@@ -7,6 +7,10 @@
                    zope.lifecycleevent.interfaces.IObjectCreatedEvent"
               handler=".opinionRequestEvents.setDefaultLinkedInquiry" />
 
+  <subscriber for="..interfaces.IRecipientCadastre
+                   zope.lifecycleevent.interfaces.IObjectRemovedEvent"
+              handler=".inquiryEvents.delete_recipient_cadastre" />
+
   <subscriber for="..interfaces.IContact
                    zope.lifecycleevent.interfaces.IObjectCreatedEvent"
               handler=".contactEvents.setInterface" />
