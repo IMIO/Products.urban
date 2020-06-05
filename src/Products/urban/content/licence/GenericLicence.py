@@ -441,14 +441,16 @@ schema = Schema((
         vocabulary_factory='urban.vocabulary.Natura2000',
         default_method='getDefaultValue',
     ),
-    StringField(
+    LinesField(
         name='floodingLevel',
-        widget=SelectionWidget(
+        widget=MultiSelectionWidget(
+            format='checkbox',
             label=_('urban_label_floodingLevel', default='Floodinglevel'),
         ),
-        enforceVocabulary=True,
+        multiValued=True,
         schemata='urban_road',
         vocabulary='listFloodingLevels',
+        default_method='getDefaultValue',
     ),
     TextField(
         name='floodingLevelDetails',
@@ -1166,8 +1168,6 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
           flooding levels : no risk, low risk, moderated risk, high risk
         """
         vocab = (
-            #we add an empty vocab value of type "choose a value"
-            ('',  translate(_(EMPTY_VOCAB_VALUE), context=self.REQUEST)),
             ('no', translate(_('flooding_level_no'), context=self.REQUEST)),
             ('very low', translate(_('flooding_level_verylow'), context=self.REQUEST)),
             ('low', translate(_('flooding_level_low'), context=self.REQUEST)),
