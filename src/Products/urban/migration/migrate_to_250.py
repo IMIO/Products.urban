@@ -4,6 +4,7 @@ from Products.contentmigration.walker import CustomQueryWalker
 from Products.contentmigration.archetypes import InplaceATFolderMigrator
 
 from Products.urban.config import URBAN_TYPES
+from Products.urban.migration.migration_dx_utils import purge_obsolete_content
 from Products.urban.utils import getLicenceFolderId
 
 from plone import api
@@ -172,17 +173,28 @@ def migrate_opinion_request_TAL_expression(context):
     logger.info("migration step done!")
 
 
+def migrate_report_or_remove_urbandelay_portal_type(context):
+    """
+    """
+    logger = logging.getLogger('urban: report_or_remove_urbandelay_portal_type')
+    logger.info("starting migration step")
+
+    purge_obsolete_content(portal_type='UrbanDelay')
+    logger.info("migration step done!")
+
+
 def migrate(context):
     logger = logging.getLogger('urban: migrate to 2.5')
     logger.info("starting migration steps")
-    setup_tool = api.portal.get_tool('portal_setup')
-    setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'typeinfo')
-    # setup_tool.runImportStepFromProfile('profile-Products.urban:extra', 'urban-update-rubrics')
-    migrate_codt_buildlicences_schedule(context)
-    migrate_CODT_NotaryLetter_to_CODT_UrbanCertificateBase(context)
-    migrate_CODT_UrbanCertificateOne_to_CODT_UrbanCertificateBase(context)
-    migrate_CODT_UrbanCertificateBase_add_permissions(context)
-    migrate_opinion_request_TAL_expression(context)
-    catalog = api.portal.get_tool('portal_catalog')
-    catalog.clearFindAndRebuild()
+    # setup_tool = api.portal.get_tool('portal_setup')
+    # setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'typeinfo')
+    # # setup_tool.runImportStepFromProfile('profile-Products.urban:extra', 'urban-update-rubrics')
+    # migrate_codt_buildlicences_schedule(context)
+    # migrate_CODT_NotaryLetter_to_CODT_UrbanCertificateBase(context)
+    # migrate_CODT_UrbanCertificateOne_to_CODT_UrbanCertificateBase(context)
+    # migrate_CODT_UrbanCertificateBase_add_permissions(context)
+    # migrate_opinion_request_TAL_expression(context)
+    migrate_report_or_remove_urbandelay_portal_type(context)
+    # catalog = api.portal.get_tool('portal_catalog')
+    # catalog.clearFindAndRebuild()
     logger.info("migration done!")

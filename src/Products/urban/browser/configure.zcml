@@ -411,10 +411,17 @@
   />
 
   <browser:page
-      for="Products.urban.interfaces.IUrbanTool"
+      for="*"
       name="urban_vocabulary_cache"
       class=".urban_vocabularies.UrbanVocabulariesCache"
       permission="cmf.ManagePortal"
+  />
+
+  <browser:page
+    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    name="portal_type_infos"
+    class=".utilsview.PortalTypesInfosView"
+    permission="zope2.View"
   />
 
   <adapter
