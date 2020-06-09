@@ -24,7 +24,7 @@ class PortalTypesInfosView(BrowserView):
                         print(portal_type.absolute_url())
                     print("Portal type found : {}".format(len(portal_types)))
                 if type == 'csv':
-                    with open("{}_{}.csv".format(datetime.today().strftime('%Y_%m_%d'),portal_type), "a") as file:
+                    with open("{}_{}.csv".format(datetime.today().strftime('%Y_%m_%d_%H_%M_%S'),portal_type), "a") as file:
                         for portal_type in portal_types:
                             file.write(portal_type.absolute_url() + "\n")
             else:
