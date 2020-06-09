@@ -173,10 +173,10 @@ def migrate_opinion_request_TAL_expression(context):
     logger.info("migration step done!")
 
 
-def migrate_report_or_remove_urbandelay_portal_type(context):
+def migrate_report_and_remove_urbandelay_portal_type(context):
     """
     """
-    logger = logging.getLogger('urban: report_or_remove_urbandelay_portal_type')
+    logger = logging.getLogger('urban: report_and_remove_urbandelay_portal_type')
     logger.info("starting migration step")
     clean_obsolete_portal_type(portal_type_to_remove='UrbanDelay')
     logger.info("migration step done!")
@@ -193,7 +193,7 @@ def migrate(context):
     migrate_CODT_UrbanCertificateOne_to_CODT_UrbanCertificateBase(context)
     migrate_CODT_UrbanCertificateBase_add_permissions(context)
     migrate_opinion_request_TAL_expression(context)
-    migrate_report_or_remove_urbandelay_portal_type(context)
+    migrate_report_and_remove_urbandelay_portal_type(context)
     catalog = api.portal.get_tool('portal_catalog')
     catalog.clearFindAndRebuild()
     logger.info("migration done!")

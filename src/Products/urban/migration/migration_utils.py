@@ -21,7 +21,7 @@ def clean_obsolete_portal_type(portal_type_to_remove=None, report='print'):
                     print(portal_type.absolute_url())
                 print("Portal type found : {}".format(len(portal_types_objects)))
             if report == 'csv':
-                with open("{}_{}.csv".format(datetime.today().strftime('%Y_%m_%d_%H_%M_%S'),portal_type), "a") as file:
+                with open("{}_{}.csv".format(portal_type_to_remove, datetime.today().strftime('%Y_%m_%d_%H_%M_%S')), "a") as file:
                     for portal_type in portal_types_objects:
                         file.write(portal_type.absolute_url() + "\n")
             print("Portal type object found : stop the process".format(portal_type_to_remove))
