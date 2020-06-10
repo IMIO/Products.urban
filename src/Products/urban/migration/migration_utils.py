@@ -51,7 +51,5 @@ def delete_plone_objects(portal_type_object_to_delete):
     catalog = api.portal.get_tool('portal_catalog')
     items = [brain.getObject() for brain in catalog(portal_type=portal_type_object_to_delete)]
     logger.info("Found {} items to be deleted".format(len(items)))
-    for obj in items:
-        api.content.delete(obj)
-        logger.info("Deleted: {} {}".format(obj.absolute_url(), str(obj.created())))
+    api.content.delete(objects=items)
     logger.info("***Done ***")
