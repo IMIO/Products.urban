@@ -9,7 +9,7 @@
    <property name="hidden">1</property>
    <property
       name="vocabulary">eea.faceted.vocabularies.SortingCatalogIndexes</property>
-   <property name="default">sortable_title</property>
+   <property name="default">created(reverse)</property>
   </criterion>
   <criterion name="c2">
    <property name="widget">collection-link</property>
