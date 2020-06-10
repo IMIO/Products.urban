@@ -7,8 +7,7 @@
  <property name="title" i18n:translate="">Parcel</property>
  <property name="description" i18n:translate=""></property>
  <property name="icon_expr">string:${portal_url}/Parcel.png</property>
- <property name="content_meta_type">Parcel</property>
- <property name="factory">addParcel</property>
+ <property name="factory">Parcel</property>
  <property
     name="add_view_expr">string:${folder_url}/++add++Parcel</property>
  <property name="link_target"></property>
@@ -24,8 +23,6 @@
  <property name="add_permission">cmf.AddPortalContent</property>
  <property name="klass">Products.urban.content.parcel.Parcel</property>
  <property name="behaviors">
-  <element value="plone.app.dexterity.behaviors.metadata.IBasic"/>
-  <element value="plone.app.content.interfaces.INameFromTitle"/>
   <element value="plone.app.lockingbehavior.behaviors.ILocking" />
  </property>
  <property name="schema">Products.urban.content.parcel.IParcel</property>
