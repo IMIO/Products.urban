@@ -32,7 +32,7 @@ def clean_obsolete_portal_type(portal_type_to_remove=None, report='print'):
         logger.info("Portal type not found in linked catalog : next step!".format(portal_type_to_remove))
         logger.info("***Step 2: Remove the possibility to add the {} portal type object to another portal type ***".format(portal_type_to_remove))
         for portal_type in portal_types_tool:
-            if 'allowed_content_types' in portal_types_tool.get(portal_type).__dict__:
+            if hasattr(portal_types_tool.get(portal_type), 'allowed_content_types'):
                 if portal_type_to_remove in portal_types_tool.get(portal_type).allowed_content_types:
                     allowed_content_types_list = list(portal_types_tool.get(portal_type).allowed_content_types)
                     allowed_content_types_list.remove(portal_type_to_remove)
