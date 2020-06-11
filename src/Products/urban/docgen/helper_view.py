@@ -511,11 +511,11 @@ class UrbanDocGenerationEventHelperView(UrbanDocGenerationHelperView):
         for foldermaker in foldermakers:
             html_description = foldermaker['OpinionRequestEventType'].Description()
             transformed_description = self.portal.portal_transforms.convert(
-                    'html_to_web_intelligent_plain_text', html_description).getData().strip('\n ')
+                'html_to_web_intelligent_plain_text', html_description).getData().strip('\n ')
             mailing = {
-                    'OpinionRequestEventType':foldermaker['OpinionRequestEventType'],
-                    'UrbanEventOpinionRequest':foldermaker['UrbanEventOpinionRequest'],
-                    'converted_description':transformed_description
+                'OpinionRequestEventType': foldermaker['OpinionRequestEventType'],
+                'UrbanEventOpinionRequest': foldermaker['UrbanEventOpinionRequest'],
+                'converted_description': transformed_description
             }
             mailing_list.append(mailing)
         return mailing_list
@@ -534,7 +534,7 @@ class UrbanDocGenerationEventHelperView(UrbanDocGenerationHelperView):
                     if urbanEventOpinionRequest.Title() == opinionRequestEventType.Title():
                         foldermaker['UrbanEventOpinionRequest'] = urbanEventOpinionRequest
                         foldermakers.append(foldermaker)
-                        break;
+                        break
         return foldermakers
 
     def getSolicitOpinions(self):
@@ -581,7 +581,7 @@ class UrbanDocGenerationFacetedHelperView(ATDocumentGenerationHelperView):
         return formated_date
 
 
-class LicenceDisplayProxyObject(ATDisplayProxyObject):
+class UrbanBaseProxyObject(ATDisplayProxyObject):
     """
     """
 
@@ -626,6 +626,53 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
         elif formatstring == 'time_format':
             formatstring = '%H:%M'
         return date.strftime(formatstring)
+
+    def all_voc_terms(self, field_name='', with_coring_values=False):
+        field = self.context.getField(field_name)
+        voc_terms = []
+        if field.vocabulary:
+            voc_terms = field.vocabulary.getAllVocTerms(self.context).values()
+        elif field.vocabulary_factory:
+            voc_utility = getUtility(IVocabularyFactory, field.vocabulary_factory)
+            if with_coring_values:
+                simple_voc = voc_utility(self.context)
+                return simple_voc.by_value.values()
+            else:
+                voc_terms = voc_utility._get_config_vocabulary_values(self.context)
+
+        voc_terms_proxy = []
+        for v in voc_terms:
+            voc_terms_view = v.restrictedTraverse('@@document_generation_helper_view')
+            voc_terms_view.appy_renderer = self.helper_view.appy_renderer
+            voc_terms_proxy.append(voc_terms_view.context)
+        return voc_terms_proxy
+
+    def voc_terms(self, field_name='', with_coring_values=False):
+        all_voc_terms = self.all_voc_terms(field_name, with_coring_values)
+        selected_values = self.context.getField(field_name).get(self.context)
+        voc_terms = [t for t in all_voc_terms if getattr(t, 'id', getattr(t, 'value', None)) in selected_values]
+        return voc_terms
+
+    def voc_terms_id(self, field_name='', with_coring_values=False):
+        voc_terms = self.voc_terms(field_name, with_coring_values)
+        voc_terms_id = [voc_term.id for voc_term in voc_terms]
+        return voc_terms_id
+
+    def voc_term(self, field_name='', with_coring_values=False):
+        all_voc_terms = self.all_voc_terms(field_name, with_coring_values)
+        selected_value = self.context.getField(field_name).get(self.context)
+        if type(selected_value) in [list, tuple]:
+            selected_value = selected_value[0]
+        for term in all_voc_terms:
+            term_value = hasattr(term, 'id') and term.id or term.value
+            if term_value == selected_value:
+                return term
+        return None
+
+
+class LicenceDisplayProxyObject(UrbanBaseProxyObject):
+    """
+    """
 
     def _get_street_dict(self, uid):
         street_dict = {}
@@ -701,48 +748,6 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
             opinions = licence.getValuesForTemplate(field_name, obj=last_inquiry)
             return opinions
         return []
-
-    def all_voc_terms(self, field_name='', with_coring_values=False):
-        field = self.context.getField(field_name)
-        voc_terms = []
-        if field.vocabulary:
-            voc_terms = field.vocabulary.getAllVocTerms(self.context).values()
-        elif field.vocabulary_factory:
-            voc_utility = getUtility(IVocabularyFactory, field.vocabulary_factory)
-            if with_coring_values:
-                simple_voc = voc_utility(self.context)
-                return simple_voc.by_value.values()
-            else:
-                voc_terms = voc_utility._get_config_vocabulary_values(self.context)
-
-        voc_terms_proxy = []
-        for v in voc_terms:
-            voc_terms_view = v.restrictedTraverse('@@document_generation_helper_view')
-            voc_terms_view.appy_renderer = self.helper_view.appy_renderer
-            voc_terms_proxy.append(voc_terms_view.context)
-        return voc_terms_proxy
-
-    def voc_terms(self, field_name='', with_coring_values=False):
-        all_voc_terms = self.all_voc_terms(field_name, with_coring_values)
-        selected_values = self.context.getField(field_name).get(self.context)
-        voc_terms = [t for t in all_voc_terms if getattr(t, 'id', getattr(t, 'value', None)) in selected_values]
-        return voc_terms
-
-    def voc_terms_id(self, field_name='', with_coring_values=False):
-        voc_terms = self.voc_terms(field_name, with_coring_values)
-        voc_terms_id = [voc_term.id for voc_term in voc_terms]
-        return voc_terms_id
-
-    def voc_term(self, field_name='', with_coring_values=False):
-        all_voc_terms = self.all_voc_terms(field_name, with_coring_values)
-        selected_value = self.context.getField(field_name).get(self.context)
-        if type(selected_value) in [list, tuple]:
-            selected_value = selected_value[0]
-        for term in all_voc_terms:
-            term_value = hasattr(term, 'id') and term.id or term.value
-            if term_value == selected_value:
-                return term
-        return None
 
     def get_related_licences_of_parcel(self, licence_types=[]):
         """
@@ -1157,7 +1162,7 @@ class LicenceDisplayProxyObject(ATDisplayProxyObject):
         return descriptions
 
 
-class EventDisplayProxyObject(ATDisplayProxyObject):
+class EventDisplayProxyObject(UrbanBaseProxyObject):
     """
     """
 
