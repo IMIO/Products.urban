@@ -587,31 +587,6 @@ class UrbanBaseProxyObject(ATDisplayProxyObject):
 
     helper_view = None
 
-    def __getattr__(self, attr_name):
-        """
-        Delegate field attribute access to display() method.
-        """
-        if attr_name.startswith('getLast') or attr_name.startswith('getFirst'):
-            def getUrbanEventProxy(*args, **kwargs):
-                urban_event = getattr(self.context, attr_name)(*args, **kwargs)
-                if urban_event:
-                    helper_view = urban_event.restrictedTraverse('document_generation_helper_view')
-                    proxy_event = helper_view.context
-                    return proxy_event
-                else:
-                    class EventNotFound(object):
-                        def __getattribute__(self, attr_name):
-                            return None
-
-                        def __nonzero__(self):
-                            return False
-
-                        def __call__(self):
-                            return None
-
-                    return EventNotFound()
-            return getUrbanEventProxy
-
         return super(LicenceDisplayProxyObject, self).__getattr__(attr_name)
 
     def format_date(self, field, formatstring='date_format_short'):
@@ -673,6 +648,31 @@ class UrbanBaseProxyObject(ATDisplayProxyObject):
 class LicenceDisplayProxyObject(UrbanBaseProxyObject):
     """
     """
+
+    def __getattr__(self, attr_name):
+        """
+        Delegate field attribute access to display() method.
+        """
+        if attr_name.startswith('getLast') or attr_name.startswith('getFirst'):
+            def getUrbanEventProxy(*args, **kwargs):
+                urban_event = getattr(self.context, attr_name)(*args, **kwargs)
+                if urban_event:
+                    helper_view = urban_event.restrictedTraverse('document_generation_helper_view')
+                    proxy_event = helper_view.context
+                    return proxy_event
+                else:
+                    class EventNotFound(object):
+                        def __getattribute__(self, attr_name):
+                            return None
+
+                        def __nonzero__(self):
+                            return False
+
+                        def __call__(self):
+                            return None
+
+                    return EventNotFound()
+            return getUrbanEventProxy
 
     def _get_street_dict(self, uid):
         street_dict = {}
