@@ -587,8 +587,6 @@ class UrbanBaseProxyObject(ATDisplayProxyObject):
 
     helper_view = None
 
-        return super(LicenceDisplayProxyObject, self).__getattr__(attr_name)
-
     def format_date(self, field, formatstring='date_format_short'):
         """
           Format the date for printing in pod templates
@@ -673,6 +671,7 @@ class LicenceDisplayProxyObject(UrbanBaseProxyObject):
 
                     return EventNotFound()
             return getUrbanEventProxy
+        return super(LicenceDisplayProxyObject, self).__getattr__(attr_name)
 
     def _get_street_dict(self, uid):
         street_dict = {}
