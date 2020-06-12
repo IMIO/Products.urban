@@ -215,8 +215,9 @@ DateIndexVocabularyFactory = DateIndexVocabulary()
 
 class DivisionNamesVocabulary(object):
     """
-    Vocabulary factory for 'pod_portal_types' field.
+    Vocabulary factory for division names.
     """
+    name = 'name'
 
     def __call__(self, context):
         urban_tool = api.portal.get_tool('portal_urban')
@@ -225,10 +226,20 @@ class DivisionNamesVocabulary(object):
             [SimpleTerm(
                 str(div['division']),
                 str(div['division']),
-                unicode(div['name'].decode('utf-8')))
+                unicode(div[self.name].decode('utf-8')))
                 for div in divisions]
         )
         return vocabulary
 
 
 DivisionNamesVocabularyFactory = DivisionNamesVocabulary()
+
+
+class DivisionAlternativesNamesVocabulary(DivisionNamesVocabulary):
+    """
+    Vocabulary factory for alternative division names.
+    """
+    name = 'alternative_name'
+
+
+DivisionAlternativeNamesVocabularyFactory = DivisionAlternativesNamesVocabulary()

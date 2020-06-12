@@ -354,6 +354,12 @@
   />
 
   <adapter
+     for="plone.dexterity.interfaces.IDexterityContent"
+     factory=".tablevalue.ObjectForUrbanTable"
+     provides="Products.urban.browser.table.interfaces.IItemForUrbanTable"
+  />
+
+  <adapter
      for="zope.interface.Interface
           zope.publisher.interfaces.browser.IBrowserRequest
           Products.urban.browser.table.interfaces.IUrbanTable"
