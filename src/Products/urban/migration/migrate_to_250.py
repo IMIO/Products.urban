@@ -4,7 +4,7 @@ from Products.contentmigration.walker import CustomQueryWalker
 from Products.contentmigration.archetypes import InplaceATFolderMigrator
 
 from Products.urban.config import URBAN_TYPES
-from Products.urban.migration.migration_utils import clean_obsolete_portal_type, delete_plone_objects
+from Products.urban.migration.to_DX.migration_utils import clean_obsolete_portal_type, delete_plone_objects
 from Products.urban.utils import getLicenceFolderId
 
 from plone import api
