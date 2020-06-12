@@ -18,7 +18,7 @@ class IParcel(model.Schema):
     Parcel dexterity schema.
     """
 
-    form.widget('divisionCode', TextWidget)
+    form.omitted('divisionCode')
     divisionCode = schema.TextLine(
         title=_(u'Divisioncode'),
         description=_(u'urban_label_divisionCode'),
@@ -76,7 +76,7 @@ class IParcel(model.Schema):
         required=False,
     )
 
-    form.widget('isOfficialParcel', SingleCheckBoxWidget)
+    form.omitted('isOfficialParcel')
     isOfficialParcel = schema.Bool(
         title=_(u'Isofficialparcel'),
         description=_(u'urban_label_isOfficialParcel'),
