@@ -51,5 +51,4 @@ def migrate_PortionOut_to_DX(context):
         src_type='PortionOut',
         dst_type='Parcel'
     )
-    import ipdb; ipdb.set_trace()
     return result

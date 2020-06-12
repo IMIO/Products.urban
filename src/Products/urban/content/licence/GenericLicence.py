@@ -1200,7 +1200,7 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
         """
            Return the list of parcels (portionOut) for the Licence
         """
-        return self.objectValues('PortionOut')
+        return [obj for obj in self.objectValues() if obj.portal_type == 'Parcel']
 
     security.declarePublic('getOfficialParcels')
 
@@ -1208,7 +1208,7 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
         """
            Return the list of parcels (portionOut) for the Licence
         """
-        parcels = [prc for prc in self.getParcels() if prc.getIsOfficialParcel()]
+        parcels = [prc for prc in self.getParcels() if prc.isOfficialParcel]
         return parcels
 
     security.declarePublic('updateTitle')
