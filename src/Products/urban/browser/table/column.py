@@ -118,10 +118,7 @@ class TitleColumn(UrbanColumn):
         return title.decode('utf-8')
 
     def getSortKey(self, urbanlist_item):
-        try:
-            return urbanlist_item.Title()
-        except:
-            import ipdb; ipdb.set_trace()
+        return urbanlist_item.Title()
 
 
 class TitleColumnHeader():
