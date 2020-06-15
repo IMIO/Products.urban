@@ -4,6 +4,7 @@ from Products.contentmigration.walker import CustomQueryWalker
 from Products.contentmigration.archetypes import InplaceATFolderMigrator
 
 from Products.urban.config import URBAN_TYPES
+from Products.urban.migration.to_DX.migration_utils import clean_obsolete_portal_type, delete_plone_objects
 from Products.urban.utils import getLicenceFolderId
 
 from plone import api
@@ -172,6 +173,15 @@ def migrate_opinion_request_TAL_expression(context):
     logger.info("migration step done!")
 
 
+def migrate_report_and_remove_urbandelay_portal_type(context):
+    """
+    """
+    logger = logging.getLogger('urban: report_and_remove_urbandelay_portal_type')
+    logger.info("starting migration step")
+    clean_obsolete_portal_type(portal_type_to_remove='UrbanDelay')
+    logger.info("migration step done!")
+
+
 def migrate(context):
     logger = logging.getLogger('urban: migrate to 2.5')
     logger.info("starting migration steps")
@@ -183,6 +193,7 @@ def migrate(context):
     migrate_CODT_UrbanCertificateOne_to_CODT_UrbanCertificateBase(context)
     migrate_CODT_UrbanCertificateBase_add_permissions(context)
     migrate_opinion_request_TAL_expression(context)
+    migrate_report_and_remove_urbandelay_portal_type(context)
     catalog = api.portal.get_tool('portal_catalog')
     catalog.clearFindAndRebuild()
     logger.info("migration done!")
