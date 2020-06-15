@@ -29,8 +29,8 @@ def setValidParcel(parcel, event):
      and set its "isvalidparcel" attribute accordingly.
     """
     parcel.setDivisionCode(parcel.getDivision())
-    parcel.bis = parcel.bis or '0'
-    parcel.puissance = parcel.puissance or '0'
+    parcel.bis = parcel.bis or ''
+    parcel.puissance = parcel.puissance or ''
     parcel.reindexObject()
 
     parcel_status = False
