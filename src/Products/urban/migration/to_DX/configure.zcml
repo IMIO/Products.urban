@@ -4,6 +4,13 @@
     xmlns:plone="http://namespaces.plone.org/plone"
     i18n_domain="urban">
 
-  <include file="upgrades.zcml" />
-  <include package=".to_DX" />
+    <browser:page
+        for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+        name="portal_type_infos"
+        class=".utilsview.PortalTypesInfosView"
+        permission="zope2.View"
+    />
+
 </configure>
+
+
