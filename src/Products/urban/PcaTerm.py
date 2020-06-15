@@ -124,6 +124,7 @@ class PcaTerm(BaseContent, UrbanConfigurationValue, BrowserDefaultMixin):
         lst=[
              ['royal', _('decree_type_royal', 'urban', context=self.REQUEST)],
              ['departmental', _('decree_type_departmental', 'urban', context=self.REQUEST)],
+             ['municipal', _('decree_type_municipal', 'urban', context=self.REQUEST)],
               ]
         vocab = []
         for elt in lst:
