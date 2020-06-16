@@ -13,7 +13,7 @@ def updateKeyEvent(urban_event_type, event):
     # make sure to not trigger the reindex when setting the annotation for
     # the first time
     previous_key_event_value = annotations.get('urban.is_key_event', is_key_event)
-    annotations['urban.eventtype'] = is_key_event
+    annotations['urban.is_key_event'] = is_key_event
     if previous_key_event_value == is_key_event:
         return
 
