@@ -24,18 +24,21 @@ class TestUrbanEventTypes(unittest.TestCase):
         catalog = self.catalog
         urban_event_type_a = getattr(self.portal_urban.buildlicence.urbaneventtypes, 'rapport-du-college', None)
         buildlicence_brain = catalog(UID=self.buildlicence.UID())[-1]
-        #by defaut, key events are enabled, and the index in the catalog should not be empty
+        # by defaut, key events are enabled, and the index in the catalog should not be empty
         self.assertEqual(urban_event_type_a.getIsKeyEvent(), True)
         self.failUnless(buildlicence_brain.last_key_event is not None)
 
     def testSetLastKeyEventPropertyWithEventAlreadyExisting(self):
         catalog = self.catalog
         for uet in self.portal_urban.buildlicence.urbaneventtypes.objectValues():
+            # reset urban event types twice to make sure to trigger the reindex
+            uet.setIsKeyEvent(True)
+            event.notify(ObjectEditedEvent(uet))
             uet.setIsKeyEvent(False)
             event.notify(ObjectEditedEvent(uet))
         urban_event_type_a = getattr(self.portal_urban.buildlicence.urbaneventtypes, 'rapport-du-college', None)
         buildlicence_brain = catalog(UID=self.buildlicence.UID())[-1]
-        #set 'rapport-du-college' as a key event, buildlicence index should be updated
+        # set 'rapport-du-college' as a key event, buildlicence index should be updated
         urban_event_type_a.setIsKeyEvent(True)
         event.notify(ObjectEditedEvent(urban_event_type_a))
         buildlicence_brain = catalog(UID=self.buildlicence.UID())[-1]
@@ -49,12 +52,15 @@ class TestUrbanEventTypes(unittest.TestCase):
         """
         catalog = self.catalog
         for uet in self.portal_urban.buildlicence.urbaneventtypes.objectValues():
+            # reset urban event types twice to make sure to trigger the reindex
+            uet.setIsKeyEvent(True)
+            event.notify(ObjectEditedEvent(uet))
             uet.setIsKeyEvent(False)
             event.notify(ObjectEditedEvent(uet))
         urban_event_type_b = getattr(self.portal_urban.buildlicence.urbaneventtypes, 'sncb', None)
         buildlicence_brain = catalog(UID=self.buildlicence.UID())[-1]
-        #set 'belgacom' as a key event, buildlicence last_key_event index should not change
-        #as the corresponding urbanEvent has never been created in this buildlicence
+        # set 'belgacom' as a key event, buildlicence last_key_event index should not change
+        # as the corresponding urbanEvent has never been created in this buildlicence
         urban_event_type_b.setIsKeyEvent(True)
         event.notify(ObjectEditedEvent(urban_event_type_b))
         buildlicence_brain = catalog(UID=self.buildlicence.UID())[-1]
@@ -68,22 +74,25 @@ class TestUrbanEventTypes(unittest.TestCase):
         """
         catalog = self.catalog
         for uet in self.portal_urban.buildlicence.urbaneventtypes.objectValues():
+            # reset urban event types twice to make sure to trigger the reindex
+            uet.setIsKeyEvent(True)
+            event.notify(ObjectEditedEvent(uet))
             uet.setIsKeyEvent(False)
             event.notify(ObjectEditedEvent(uet))
         urban_event_type_a = getattr(self.portal_urban.buildlicence.urbaneventtypes, 'rapport-du-college', None)
         urban_event_type_c = getattr(self.portal_urban.buildlicence.urbaneventtypes, 'depot-de-la-demande', None)
         buildlicence_brain = catalog(UID=self.buildlicence.UID())[-1]
-        #set 'rapport-du-college' as a key event, buildlicence index should be updated
+        # set 'rapport-du-college' as a key event, buildlicence index should be updated
         urban_event_type_a.setIsKeyEvent(True)
         event.notify(ObjectEditedEvent(urban_event_type_a))
-        #set 'depot-de-la-demande' as key event, buildlicence last_key_event index should not change as
-        #'rapport-du-college' is still the most recent keyEvent created
+        # set 'depot-de-la-demande' as key event, buildlicence last_key_event index should not change as
+        # 'rapport-du-college' is still the most recent keyEvent created
         urban_event_type_c.setIsKeyEvent(True)
         event.notify(ObjectEditedEvent(urban_event_type_c))
         buildlicence_brain = catalog(UID=self.buildlicence.UID())[-1]
         self.assertEqual(buildlicence_brain.last_key_event.split(',  ')[1], urban_event_type_a.Title())
-        #set 'rapport-du-college' back as a normal urbanEvenType, buildlicence last_key_event index should be
-        #updated as 'depot-de-la-demande' becomes now the most recent key urban event created
+        # set 'rapport-du-college' back as a normal urbanEvenType, buildlicence last_key_event index should be
+        #  updated as 'depot-de-la-demande' becomes now the most recent key urban event created
         urban_event_type_a.setIsKeyEvent(False)
         event.notify(ObjectEditedEvent(urban_event_type_a))
         buildlicence_brain = catalog(UID=self.buildlicence.UID())[-1]
@@ -91,7 +100,7 @@ class TestUrbanEventTypes(unittest.TestCase):
 
     def testUrbanTemplateIsUnderActivationWF(self):
         wf_tool = api.portal.get_tool('portal_workflow')
-        #Check that templates .odt files in urbanEventTypes are under activation wf policy
+        # Check that templates .odt files in urbanEventTypes are under activation wf policy
         urban_event_type = getattr(self.portal_urban.buildlicence.urbaneventtypes, 'accuse-de-reception', None)
         template = getattr(urban_event_type, 'urb-accuse.odt', None)
         state = wf_tool.getInfoFor(template, 'review_state')
@@ -100,7 +109,7 @@ class TestUrbanEventTypes(unittest.TestCase):
     def testGeneratedDocumentIsNotUnderActivationWF(self):
         wf_tool = api.portal.get_tool('portal_workflow')
 
-        #Check that generated .odt files in urbanEvents are NOT under any wf policy
+        # Check that generated .odt files in urbanEvents are NOT under any wf policy
         urban_event = self.buildlicence.getLastAcknowledgment()
         document = getattr(urban_event, 'urb-accuse.odt', None)
         exception_msg = ""
