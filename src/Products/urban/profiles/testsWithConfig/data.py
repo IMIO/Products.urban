@@ -103,6 +103,8 @@ urbanEventTypes = {
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
             'eventPortalType': 'UrbanEventOpinionRequest',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+                'luxembourg', 'namur'],
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -116,6 +118,8 @@ urbanEventTypes = {
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
             'eventPortalType': 'UrbanEventOpinionRequest',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+                'luxembourg', 'namur'],
         },
         {
             'id': "rapport-du-college",
@@ -190,6 +194,8 @@ urbanEventTypes = {
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
             'eventPortalType': 'UrbanEventOpinionRequest',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+                'luxembourg', 'namur'],
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -203,6 +209,8 @@ urbanEventTypes = {
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
             'eventPortalType': 'UrbanEventOpinionRequest',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+                'luxembourg', 'namur'],
         },
     ),
     'urbancertificatetwo':
@@ -215,6 +223,8 @@ urbanEventTypes = {
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
             'eventPortalType': 'UrbanEventOpinionRequest',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+                'luxembourg', 'namur'],
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -228,6 +238,8 @@ urbanEventTypes = {
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
             'eventPortalType': 'UrbanEventOpinionRequest',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+                'luxembourg', 'namur'],
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -241,6 +253,8 @@ urbanEventTypes = {
             'podTemplates': (),
             'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
             'eventPortalType': 'UrbanEventOpinionRequest',
+            'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
+                'luxembourg', 'namur'],
         },
     ),
     'envclassone':

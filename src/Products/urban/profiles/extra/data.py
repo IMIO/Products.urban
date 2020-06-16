@@ -13353,11 +13353,11 @@ REFNIS_2019 = [
   {
     "Code INS": 92000,
     "Entités administratives": "Arrondissement de Namur",
-    "Langue": "",
-    "Directions extérieures": "",
+    "Langue": "F",
+    "Directions extérieures": "namur",
     "Code NIS": 92000,
     "Administratieve eenheden": "Arrondissement Namen",
-    "Taal": ""
+    "Taal": "F"
   },
   {
     "Code INS": 92003,
