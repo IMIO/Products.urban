@@ -230,7 +230,7 @@ class TestBuildLicenceFields(SchemaFieldsTestCase):
     def test_impactStudy_is_visible(self):
         for licence in self.licences:
             msg = "field 'impactStudy' not visible on {}".format(licence.getPortalTypeName())
-            self._is_field_visible("<span>Etude d'incidence?</span>:", licence, msg)
+            self._is_field_visible("<span>Étude d'incidences?</span>:", licence, msg)
 
     def test_has_attribute_implantation(self):
         field_name = 'implantation'
