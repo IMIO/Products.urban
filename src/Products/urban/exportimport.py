@@ -3,7 +3,6 @@
 from Products.CMFCore.utils import getToolByName
 
 from Products.urban.scripts.odtsearch import searchOneODT
-from Products.urban.config import NIS
 from Products.urban.utils import moveElementAfter
 from Products.urban.utils import getMd5Signature
 
@@ -224,6 +223,8 @@ def addUrbanEventTypes(context):
     """
       Helper method for easily adding urbanEventTypes
     """
+    # do the import on call to be able to monkey patch it in tests
+    from Products.urban.config import NIS
     if context.readDataFile('urban_extra_marker.txt') is None:
         return
     #add some UrbanEventTypes...
