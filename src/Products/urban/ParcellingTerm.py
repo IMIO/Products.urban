@@ -180,7 +180,7 @@ class ParcellingTerm(BaseFolder, BrowserDefaultMixin):
         """
            Return the list of parcels (portionOut) for the Licence
         """
-        return self.objectValues('PortionOut')
+        return [obj for obj in self.objectValues() if obj.portal_type == 'Parcel']
 
 
 

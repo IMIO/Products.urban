@@ -173,7 +173,7 @@ class RecipientCadastre(BaseFolder, BrowserDefaultMixin):
         """
           Return contained Parcels...
         """
-        return self.objectValues("PortionOut")
+        return [obj for obj in self.objectValues() if obj.portal_type == 'Parcel']
 
     def getParcelsForDisplay(self):
         """
