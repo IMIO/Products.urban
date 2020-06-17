@@ -151,7 +151,6 @@ class ParcellingTerm(BaseFolder, BrowserDefaultMixin):
         """
            Update the title to set a clearly identify the buildlicence
         """
-        plone = self.restrictedTraverse('@@plone')
         parcel_baserefs = list(set(['"%s %s %s"' % (prc.getDivision(), prc.getSection(), prc.getRadical()) for prc in self.getParcels()]))
         refs = ''
         if parcel_baserefs:
@@ -162,11 +161,11 @@ class ParcellingTerm(BaseFolder, BrowserDefaultMixin):
 
         auth_date = self.getAuthorizationDate()
         if auth_date:
-            title = '%s - %s' % (title, plone.toLocalizedTime(auth_date).encode('utf8'))
+            title = '%s - %s' % (title, auth_date.strftime('%d/%m/%Y'))
 
         approval_date = self.getApprovalDate()
         if approval_date:
-            title = '%s - %s' % (title, plone.toLocalizedTime(approval_date).encode('utf8'))
+            title = '%s - %s' % (title, approval_date.strftime('%d/%m/%Y'))
 
         if refs:
             title = '%s - %s' % (title, refs)
@@ -178,7 +177,7 @@ class ParcellingTerm(BaseFolder, BrowserDefaultMixin):
     security.declarePublic('getParcels')
     def getParcels(self):
         """
-           Return the list of parcels (portionOut) for the Licence
+           Return the list of parcels for the Licence
         """
         return [obj for obj in self.objectValues() if obj.portal_type == 'Parcel']
 
