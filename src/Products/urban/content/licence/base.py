@@ -563,42 +563,6 @@ class UrbanBase(object):
         termFolderObj = getattr(urbanConfig, termFolder)
         return getattr(termFolderObj, termId)
 
-    security.declarePublic('getPortionOutsText')
-    def getPortionOutsText(self, linebyline=False):
-        """
-          Return a displayable version of the parcels
-        """
-        toreturn = ''
-        isFirst = True
-        first_div = None
-        first_section = None
-        for portionOutObj in self.getParcels():
-            #add a separator between every parcel
-            #either a '\n'
-            if not isFirst and linebyline:
-                toreturn += '\n'
-            #or an "and "
-            elif not isFirst:
-                toreturn += ', '
-            elif isFirst:
-                first_div = portionOutObj.getDivisionAlternativeName()
-                toreturn += '%s ' % portionOutObj.getDivisionAlternativeName()
-                first_section = portionOutObj.getSection()
-                toreturn += 'section %s' % portionOutObj.getSection()
-                toreturn += ' n° '.decode('utf8')
-            else:
-                if first_div != portionOutObj.getDivisionAlternativeName():
-                    toreturn += '%s ' % portionOutObj.getDivisionAlternativeName()
-                if first_section != portionOutObj.getSection():
-                    toreturn += 'section %s ' % portionOutObj.getSection()
-            toreturn += ' %s' % portionOutObj.getRadical()
-            if portionOutObj.getBis() != '':
-                toreturn += '/%s' % portionOutObj.getBis()
-            toreturn += portionOutObj.getExposant()
-            toreturn += portionOutObj.getPuissance()
-            isFirst = False
-        return toreturn
-
     security.declarePublic('getUrbanEvents')
     def getUrbanEvents(self):
         """
