@@ -19,26 +19,26 @@ class TestParcellingTerm(unittest.TestCase):
 
     def testParcellingTitleUpdate(self):
         parcelling = self.parcellingterm
-        self.assertTrue(parcelling.Title() == 'Lotissement 1 (Andr\xc3\xa9 Ledieu - 01/01/2005 - 10)')
+        self.assertTrue(parcelling.Title() == 'Lotissement 1 (Andr\xc3\xa9 Ledieu - 01/01/2005)')
         # after adding a parcel1, title should be updated with the base
         # references  of this parcel (here:  A, B, C but not D)
         api.content.create(container=parcelling, type='Parcel', id='parcel1', division='A', section='B', radical='6', exposant='D')
-        self.assertTrue(parcelling.Title() == 'Lotissement 1 (Andr\xc3\xa9 Ledieu - Jan 01, 2005 - "A B 6")')
+        self.assertEquals(parcelling.Title(), 'Lotissement 1 (Andr\xc3\xa9 Ledieu - 01/01/2005 - "A B 6")')
 
         # after adding a parcel2 with the same base refs, the title
         # should not change
         api.content.create(container=parcelling, type='Parcel', id='parcel2', division='A', section='B', radical='6', exposant='E')
-        self.assertTrue(parcelling.Title() == 'Lotissement 1 (Andr\xc3\xa9 Ledieu - Jan 01, 2005 - "A B 6")')
+        self.assertEquals(parcelling.Title(), 'Lotissement 1 (Andr\xc3\xa9 Ledieu - 01/01/2005 - "A B 6")')
 
         # after adding a parcel3 with different base refs, the title
         # should be updated
         api.content.create(container=parcelling, type='Parcel', id='parcel3', division='AA', section='BB', radical='69', exposant='D')
-        self.assertTrue(parcelling.Title() == 'Lotissement 1 (Andr\xc3\xa9 Ledieu - Jan 01, 2005 - "AA BB 69", "A B 6")')
+        self.assertEquals(parcelling.Title(), 'Lotissement 1 (Andr\xc3\xa9 Ledieu - 01/01/2005 - "AA BB 69", "A B 6")')
 
         # we remove parcel1 and parcel2, title should change to only
         # keep the base refs of parcel3
         parcelling.manage_delObjects(['parcel1', 'parcel2'])
-        self.assertTrue(parcelling.Title() == 'Lotissement 1 (Andr\xc3\xa9 Ledieu - Jan 01, 2005 - "AA BB 69")')
+        self.assertEquals(parcelling.Title(), 'Lotissement 1 (Andr\xc3\xa9 Ledieu - 01/01/2005 - "AA BB 69")')
 
     def testParcellingIndexing(self):
         catalog = getToolByName(self.portal, 'portal_catalog')
