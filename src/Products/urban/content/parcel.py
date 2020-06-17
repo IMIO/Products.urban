@@ -138,21 +138,54 @@ class Parcel(Item):
 
         return references
 
+    def getDivisionCode(self):
+        return self.divisionCode or ''
+
     def getDivisionName(self):
         division_names = getUtility(
             IVocabularyFactory,
             name='urban.vocabularies.division_names'
         )(self)
-        voc_term = division_names.getTerm(self.division)
-        return voc_term.title
+        if self.division in division_names.by_value:
+            voc_term = division_names.getTerm(self.division)
+            return voc_term.title
+        else:
+            return self.division
 
     def getDivisionAlternativeName(self):
         division_names = getUtility(
             IVocabularyFactory,
             name='urban.vocabularies.division_alternative_names'
         )(self)
-        voc_term = division_names.getTerm(self.division)
-        return voc_term
+        if self.division in division_names.by_value:
+            voc_term = division_names.getTerm(self.division)
+            return voc_term.title
+        else:
+            return self.division
+
+    def getSection(self):
+        return self.section or ''
+
+    def getRadical(self):
+        return self.radical or ''
+
+    def getBis(self):
+        return self.bis or ''
+
+    def getExposant(self):
+        return self.exposant or ''
+
+    def getPuissance(self):
+        return self.puissance or ''
+
+    def getPartie(self):
+        return self.partie or ''
+
+    def getIsOfficialParcel(self):
+        return self.isOfficialParcel
+
+    def getOutdated(self):
+        return self.outdated
 
     def getRelatedLicences(self, licence_type=''):
         catalog = api.portal.get_tool('portal_catalog')
