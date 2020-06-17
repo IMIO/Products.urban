@@ -298,7 +298,7 @@ def createFolderDefaultValues(folder, objects_list, portal_type=''):
     for obj in objects_list:
         if type(obj) is dict:
             if obj['id'] not in folder.objectIds():
-                folder.invokeFactory(portal_type, **obj)
+                api.content.create(container=folder, type=portal_type, **obj)
 
 
 def createVocabularyFolder(container, folder_id, site, allowedtypes='UrbanVocabularyTerm', foldertype='Folder'):
@@ -1374,17 +1374,21 @@ def createLicence(site, licence_type, data):
         session = services.cadastre.new_session()
         division_code = division = str(session.get_all_divisions()[0][0])
         session.close()
-    portionout_data = {
+    parcel_data = {
         'divisionCode': division_code, 'division': division, 'section': 'A', 'radical': '84',
         'exposant': 'C', 'partie': False
     }
-    if 'portionout_data' in data:
-        portionout_data = data['portionout_data']
-    portionout_id = licence.invokeFactory('PortionOut', id=site.generateUniqueId('parcelle'), **portionout_data)
-    portionout = getattr(licence, portionout_id)
-    #portionout._renameAfterCreation()
-    portionout.updateTitle()
-    portionout.reindexObject()
+    if 'parcel_data' in data:
+        parcel_data = data['parcel_data']
+    parcel = api.content.create(
+        container=licence,
+        type='Parcel',
+        id=site.generateUniqueId('parcelle'),
+        **parcel_data
+
+    )
+    parcel.updateTitle()
+    parcel.reindexObject()
     licence.reindexObject(idxs=['parcelInfosIndex'])
     #generate all the urban events
     logger.info('   test %s --> create all the events' % licence_type)
