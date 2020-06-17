@@ -56,13 +56,12 @@ class TestDivisionsRenaming(unittest.TestCase):
         self.failUnless(expected_division_name in self.document_proxy_licence.getPortionOutsText())
 
     def testDivisionRenaming(self):
-        licence = self.buildlicence
         division = self.division
         portal_urban = self.portal_urban
 
         alternative_name = 'bla'
         # so far we did not configure anything
-        self.failIf(alternative_name in licence.getPortionOutsText())
+        self.failIf(alternative_name in self.document_proxy_licence.getPortionOutsText())
 
         # configure an alternative name for the division
         new_config = list(portal_urban.getDivisionsRenaming())
@@ -71,7 +70,6 @@ class TestDivisionsRenaming(unittest.TestCase):
                 line['alternative_name'] = alternative_name
                 break
         portal_urban.setDivisionsRenaming(new_config)
-
         self.failUnless(alternative_name in self.document_proxy_licence.getPortionOutsText())
 
 
