@@ -46,7 +46,7 @@
   />
 
   <utility
-    component=".vocabularies.DivisionNamesVocabularyFactory"
+    component=".vocabularies.DivisionAlternativeNamesVocabularyFactory"
     name="urban.vocabularies.division_alternative_names"
     provides="zope.schema.interfaces.IVocabularyFactory"
   />
