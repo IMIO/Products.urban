@@ -141,6 +141,9 @@ class Parcel(Item):
     def getDivisionCode(self):
         return self.divisionCode or ''
 
+    def getDivision(self):
+        return self.division or ''
+
     def getDivisionName(self):
         division_names = getUtility(
             IVocabularyFactory,
@@ -207,12 +210,12 @@ class Parcel(Item):
 
     def get_capakey(self):
         capakey = "%s%s%04d/%02d%s%03d" % (
-            self.divisionCode,
-            self.section,
-            int(self.radical or 0),
-            int(self.bis or 0),
-            self.exposant or '_',
-            int(self.puissance or 0)
+            self.getDivisionCode(),
+            self.getSection(),
+            int(self.getRadical() or 0),
+            int(self.getBis() or 0),
+            self.getExposant() or '_',
+            int(self.getPuissance() or 0)
         )
         return capakey
 
