@@ -1048,6 +1048,10 @@ class LicenceDisplayProxyObject(UrbanBaseProxyObject):
             result += separator + self._get_foldermanager(foldermanager, resident, reversed_name, withaddress)
         return result
 
+    def get_foldermanagers_by_grade(self, grade_id=''):
+        foldermanagers = [fm for fm in self.context.getFoldermanagers() if fm.grade == grade_id]
+        return foldermanagers
+
     def get_roadEquipments(self):
         context = self.context
         roadEquipments = context.getRoadEquipments()
