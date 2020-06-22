@@ -114,8 +114,8 @@ class TestBuildLicence(unittest.TestCase):
         buildlicence = self.buildlicence
         opinions = ('sncb', 'belgacom')
         buildlicence.setSolicitOpinionsTo(opinions)
-        expected_advices = [ob for ob in buildlicence.objectValues() if ob.portal_type == 'UrbanEventOpinionRequest']
-        self.assertEqual(len(buildlicence.getAllAdvices()), len(expected_advices))
+        created_advices = [ob for ob in buildlicence.objectValues() if ob.portal_type == 'UrbanEventOpinionRequest']
+        self.assertEqual(len(buildlicence.getAllAdvices()), 2 - len(created_advices))
 
     def testCreateAllAdvicesWithoutOpinionRequest(self):
         buildlicences = self.portal.urban.buildlicences
