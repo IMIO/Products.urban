@@ -1,4 +1,5 @@
 #-*- coding: utf-8 -*-
+from Products.urban import interfaces
 from Products.urban.config import URBAN_TYPES
 from Products.urban.testing import URBAN_TESTS_INTEGRATION
 from Products.urban.tests.helpers import SchemaFieldsTestCase
@@ -374,7 +375,11 @@ class TestGenericLicenceFields(SchemaFieldsTestCase):
     def test_isInPCA(self):
         for licence in self.licences:
             msg = "field 'isInPCA' not visible on {}".format(licence.getPortalTypeName())
-            self._is_field_visible("<span>Plan communal d'aménagement</span>", licence, msg)
+            expected_field = "<span>Plan Communal d'Aménagement</span>"
+            if interfaces.ICODT_BaseBuildLicence.providedBy(licence) or \
+               interfaces.ICODT_UrbanCertificateBase.providedBy(licence):
+                expected_field = "<span>SOL</span>"
+            self._is_field_visible(expected_field, licence, msg)
 
     def test_has_attribute_pca(self):
         field_name = 'pca'
@@ -385,7 +390,11 @@ class TestGenericLicenceFields(SchemaFieldsTestCase):
     def test_pca(self):
         for licence in self.licences:
             msg = "field 'pca' not visible on {}".format(licence.getPortalTypeName())
-            self._is_field_visible("<span>Plan communal d'aménagement</span>", licence, msg)
+            expected_field = "<span>Plan Communal d'Aménagement</span>"
+            if interfaces.ICODT_BaseBuildLicence.providedBy(licence) or \
+               interfaces.ICODT_UrbanCertificateBase.providedBy(licence):
+                expected_field = "<span>SOL</span>"
+            self._is_field_visible(expected_field, licence, msg)
 
     def test_has_attribute_solicitRoadOpinionsTo(self):
         field_name = 'solicitRoadOpinionsTo'
