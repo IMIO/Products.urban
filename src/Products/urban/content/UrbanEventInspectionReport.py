@@ -55,6 +55,16 @@ schema = Schema((
         default_content_type='text/html',
         default_output_type='text/html',
     ),
+    TextField(
+        name='proofs',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            label=_('urban_label_proofs', default='Proofs'),
+        ),
+        default_method='getDefaultText',
+        default_content_type='text/html',
+        default_output_type='text/html',
+    ),
     LinesField(
         name='offense_articles',
         widget=MultiSelectionWidget(

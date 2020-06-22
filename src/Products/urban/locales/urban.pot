@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2020-06-05 10:11+0000\n"
+"POT-Creation-Date: 2020-05-15 17:07+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,11 +15,11 @@ msgstr ""
 "Domain: urban\n"
 
 #. Default: "urban"
-#: ../setuphandlers.py:306
+#: ../setuphandlers.py:297
 msgid "%s_folder_title"
 msgstr ""
 
-#: ../setuphandlers.py:252
+#: ../setuphandlers.py:243
 msgid "%s_urbanconfig_title"
 msgstr ""
 
@@ -96,7 +96,7 @@ msgid "Add this parcel"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:979
+#: ../setuphandlers.py:970
 msgid "All"
 msgstr ""
 
@@ -651,7 +651,7 @@ msgid "RoadDecree"
 msgstr ""
 
 #. Default: "imio.schedule"
-#: ../setuphandlers.py:334
+#: ../setuphandlers.py:325
 msgid "ScheduleConfig"
 msgstr ""
 
@@ -786,7 +786,7 @@ msgid "Update"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:854
+#: ../setuphandlers.py:845
 msgid "Urban"
 msgstr ""
 
@@ -876,34 +876,34 @@ msgstr ""
 msgid "add_a_claimant"
 msgstr ""
 
-#: ../browser/licence/templates/licencemacros.pt:146
+#: ../browser/licence/templates/licencemacros.pt:131
 msgid "add_a_corporation"
 msgstr ""
 
-#: ../browser/licence/templates/licencemacros.pt:182
+#: ../browser/licence/templates/licencemacros.pt:167
 msgid "add_a_corporation_plaintiff"
 msgstr ""
 
-#: ../browser/licence/templates/licencemacros.pt:101
+#: ../browser/licence/templates/licencemacros.pt:86
 msgid "add_a_corporationproprietary"
 msgstr ""
 
 msgid "add_a_lot"
 msgstr ""
 
-#: ../browser/licence/templates/licencemacros.pt:138
+#: ../browser/licence/templates/licencemacros.pt:123
 msgid "add_a_physical_applicant"
 msgstr ""
 
-#: ../browser/licence/templates/licencemacros.pt:174
+#: ../browser/licence/templates/licencemacros.pt:159
 msgid "add_a_physical_plaintiff"
 msgstr ""
 
-#: ../browser/licence/templates/licencemacros.pt:93
+#: ../browser/licence/templates/licencemacros.pt:78
 msgid "add_a_proprietary"
 msgstr ""
 
-#: ../browser/licence/templates/licencemacros.pt:119
+#: ../browser/licence/templates/licencemacros.pt:104
 msgid "add_a_tenant"
 msgstr ""
 
@@ -968,12 +968,12 @@ msgid "announcementarticles_folder_title"
 msgstr ""
 
 #. Default: "Applicant(s)"
-#: ../browser/licence/templates/licencemacros.pt:125
+#: ../browser/licence/templates/licencemacros.pt:110
 msgid "applicants"
 msgstr ""
 
 #. Default: "Applicant(s) history"
-#: ../browser/licence/templates/licencemacros.pt:153
+#: ../browser/licence/templates/licencemacros.pt:138
 msgid "applicants_history"
 msgstr ""
 
@@ -986,7 +986,7 @@ msgid "architect_residing"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:894
+#: ../setuphandlers.py:885
 msgid "architects_folder_title"
 msgstr ""
 
@@ -1009,7 +1009,7 @@ msgid "basement_folder_title"
 msgstr ""
 
 #. Default: "Bound licence applicant(s)"
-#: ../browser/licence/templates/licencemacros.pt:189
+#: ../browser/licence/templates/licencemacros.pt:174
 msgid "bound_licence_applicants"
 msgstr ""
 
@@ -1191,7 +1191,7 @@ msgid "creation date"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:754
+#: ../setuphandlers.py:745
 msgid "dashboardtemplates_folder_title"
 msgstr ""
 
@@ -1321,7 +1321,7 @@ msgid "envclasstwos"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:795
+#: ../setuphandlers.py:786
 msgid "environmenttemplates_folder_title"
 msgstr ""
 
@@ -1583,17 +1583,17 @@ msgid "formatted_date_with_cityname"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:826
+#: ../setuphandlers.py:817
 msgid "front_page_descr"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:827
+#: ../setuphandlers.py:818
 msgid "front_page_text"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:825
+#: ../setuphandlers.py:816
 msgid "front_page_title"
 msgstr ""
 
@@ -1619,13 +1619,13 @@ msgid "generate_a_linked_doc"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:908
+#: ../setuphandlers.py:899
 msgid "geometricians_folder_title"
 msgstr ""
 
 #. Default: "Global templates"
 #: ../browser/templates/templatessummary.pt:19
-#: ../setuphandlers.py:766
+#: ../setuphandlers.py:757
 msgid "globaltemplates_folder_title"
 msgstr ""
 
@@ -2038,7 +2038,7 @@ msgid "not_permitted_to_add_urbanevent"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:922
+#: ../setuphandlers.py:913
 msgid "notaries_folder_title"
 msgstr ""
 
@@ -2109,7 +2109,7 @@ msgid "parcelLinkedLicences"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:936
+#: ../setuphandlers.py:927
 msgid "parcellings_folder_title"
 msgstr ""
 
@@ -2208,7 +2208,7 @@ msgid "pipelines_folder_title"
 msgstr ""
 
 #. Default: "Plaintiff(s)"
-#: ../browser/licence/templates/licencemacros.pt:161
+#: ../browser/licence/templates/licencemacros.pt:146
 msgid "plaintiffs"
 msgstr ""
 
@@ -2235,7 +2235,7 @@ msgid "projectmeeting_urbanconfig_title"
 msgstr ""
 
 #. Default: "Proprietary(ies)"
-#: ../browser/licence/templates/licencemacros.pt:78
+#: ../browser/licence/templates/licencemacros.pt:63
 msgid "proprietaries"
 msgstr ""
 
@@ -2434,7 +2434,7 @@ msgid "templates_summary_title"
 msgstr ""
 
 #. Default: "Tenant(s)"
-#: ../browser/licence/templates/licencemacros.pt:108
+#: ../browser/licence/templates/licencemacros.pt:93
 msgid "tenants"
 msgstr ""
 
@@ -2479,7 +2479,7 @@ msgstr ""
 
 #: ../profiles.zcml:25
 #: ../profiles/default/actions.xml
-#: ../setuphandlers.py:206
+#: ../setuphandlers.py:197
 msgid "urban"
 msgstr ""
 
@@ -4153,7 +4153,7 @@ msgid "urban_label_noApplication"
 msgstr ""
 
 #. Default: "Notary(ies)"
-#: ../browser/licence/templates/licencemacros.pt:60
+#: ../browser/licence/templates/licencemacros.pt:45
 #: ../content/licence/CODT_UrbanCertificateTwo.py:69
 #: ../content/licence/Division.py:45
 msgid "urban_label_notaryContact"
@@ -4488,6 +4488,11 @@ msgstr ""
 #: ../content/licence/BaseBuildLicence.py:393
 #: ../content/licence/EnvironmentBase.py:178
 msgid "urban_label_procedureChoice"
+msgstr ""
+
+#. Default: "Proofs"
+#: ../content/UrbanEventInspectionReport.py:62
+msgid "urban_label_proofs"
 msgstr ""
 
 #. Default: "Prorogation"
@@ -5450,12 +5455,12 @@ msgid "urbancertificatetwos"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:429
+#: ../setuphandlers.py:420
 msgid "urbaneventtypes_folder_title"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:783
+#: ../setuphandlers.py:774
 msgid "urbantemplates_folder_title"
 msgstr ""
 
@@ -5496,7 +5501,7 @@ msgid "warning_add_an_applicant"
 msgstr ""
 
 #. Default: "You must encode plaintiff(s)"
-#: ../browser/licence/templates/licencemacros.pt:164
+#: ../browser/licence/templates/licencemacros.pt:149
 msgid "warning_add_an_plaintiff"
 msgstr ""
 
