@@ -66,6 +66,10 @@ class TestInstall(unittest.TestCase):
         # no need to create an opinion request event, its already existing in
         # the test licence
         urbanEvent = licence.getLastEvent(IOpinionRequestEvent)
+        if not urbanEvent:
+            licence.setSolicitOpinionsTo('belgacom')
+            licence.createAllAdvices()
+            urbanEvent = licence.getLastEvent(IOpinionRequestEvent)
         self.failUnless(IOpinionRequestEvent.providedBy(urbanEvent))
 
 
