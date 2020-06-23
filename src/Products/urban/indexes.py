@@ -20,6 +20,7 @@ from imio.schedule.content.task import IAutomatedTask
 
 from Products.Archetypes.interfaces import IBaseFolder
 
+from Products.urban.content.parcel import IParcel
 from Products.urban.interfaces import IApplicant
 from Products.urban.interfaces import IBaseBuildLicence
 from Products.urban.interfaces import ICODT_BaseBuildLicence
@@ -31,7 +32,6 @@ from Products.urban.interfaces import IIsArchive
 from Products.urban.interfaces import IMiscDemand
 from Products.urban.interfaces import IParcellingTerm
 from Products.urban.interfaces import IPatrimonyCertificate
-from Products.urban.interfaces import IPortionOut
 from Products.urban.interfaces import IProprietary
 from Products.urban.interfaces import ITicket
 from Products.urban.interfaces import IUrbanDoc
@@ -108,7 +108,7 @@ def licence_architectinfoindex(object):
     return list(set(architects_info))
 
 
-@indexer(IPortionOut)
+@indexer(IParcel)
 def parcelinfoindex(obj):
     """
     Indexes some informations about the parcels of 'self'
@@ -277,7 +277,7 @@ def contact_not_indexed(obj):
     raise AttributeError()
 
 
-@indexer(IPortionOut)
+@indexer(IParcel)
 def portion_not_indexed(obj):
     raise AttributeError()
 
