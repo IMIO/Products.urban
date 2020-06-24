@@ -75,3 +75,7 @@ class TestParcel(unittest.TestCase):
         self.assertEquals(parcel.divisionCode, parcel.division)
         # isOfficialParcel hould be Falseparcel.isOfficialParcel should be False
         self.assertEquals(parcel.isOfficialParcel, False)
+
+    def test_parcel_workflow(self):
+        wf_tool = api.portal.get_tool('portal_workflow')
+        self.assertEquals(wf_tool.getChainForPortalType('Parcel'), ('one_state_workflow',))
