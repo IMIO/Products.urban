@@ -29,6 +29,9 @@ Changes
 - Fix default schedule config for CODT Buildlicence [SUP-12344]
   [sdelcourt]
 
+- Allow shortcut transition to 'inacceptable' state for CODT licence wofklow. [SUP-6385]
+  [sdelcourt]
+
 
 2.4 (2019-03-25)
 ----------------
