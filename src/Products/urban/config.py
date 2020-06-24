@@ -32,7 +32,7 @@ import os
 import importlib
 
 PROJECTNAME = "urban"
-URBAN_CFG_DIR = '{}/../../var/urban'.format(os.environ['INSTANCE_HOME'])
+URBAN_CFG_DIR = '{}/var/urban'.format(os.environ['PWD'])
 
 
 class ExternalConfig(object):
