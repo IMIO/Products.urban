@@ -513,6 +513,9 @@ class CODT_BaseBuildLicence(BaseFolder, CODT_Inquiry,  BaseBuildLicence, Browser
     def getLastDefaultAcknowledgment(self):
         return self.getLastEvent(interfaces.IDefaultCODTAcknowledgmentEvent)
 
+    def getLastCollegeOpinionTransmitToSPW(self):
+        return self.getLastEvent(interfaces.ICollegeOpinionTransmitToSPWEvent)
+
     def list_patrimony_types(self):
         """
         """
