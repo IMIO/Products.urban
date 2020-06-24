@@ -66,3 +66,12 @@ class TestParcel(unittest.TestCase):
         licence_brain = catalog(id=licence_id)[0]
         self.assertNotIn(parcel_1.get_capakey(), licence_brain.parcelInfosIndex)
         self.assertIn(parcel_2.get_capakey(), licence_brain.parcelInfosIndex)
+
+    def test_parcel_events(self):
+        licence = self.licences[0]
+
+        parcel = api.content.create(container=licence, type='Parcel', id='parcel1', division='A', section='B', radical='6', exposant='D')
+        # divisionCode should be set as the same value as division
+        self.assertEquals(parcel.divisionCode, parcel.division)
+        # isOfficialParcel hould be Falseparcel.isOfficialParcel should be False
+        self.assertEquals(parcel.isOfficialParcel, False)
