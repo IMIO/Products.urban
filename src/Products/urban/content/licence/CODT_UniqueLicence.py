@@ -338,9 +338,6 @@ class CODT_UniqueLicence(BaseFolder, CODT_UniqueLicenceInquiry, CODT_BaseBuildLi
     def getLastTransmitToSPW(self):
         return self.getLastEvent(interfaces.ITransmitToSPWEvent)
 
-    def getLastCollegeOpinionTransmitToSPW(self):
-        return self.getLastEvent(interfaces.ICollegeOpinionTransmitToSPWEvent)
-
     def getLastDecisionProjectFromSPW(self):
         return self.getLastEvent(interfaces.IDecisionProjectFromSPWEvent)
 
