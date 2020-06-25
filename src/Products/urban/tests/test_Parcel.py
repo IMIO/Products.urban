@@ -71,11 +71,16 @@ class TestParcel(unittest.TestCase):
         licence = self.licences[0]
 
         parcel = api.content.create(container=licence, type='Parcel', id='parcel1', division='A', section='B', radical='6', exposant='D')
-        # divisionCode should be set as the same value as division
-        self.assertEquals(parcel.divisionCode, parcel.division)
-        # isOfficialParcel hould be Falseparcel.isOfficialParcel should be False
+        # isOfficialParcel should be False
         self.assertEquals(parcel.isOfficialParcel, False)
 
     def test_parcel_workflow(self):
         wf_tool = api.portal.get_tool('portal_workflow')
         self.assertEquals(wf_tool.getChainForPortalType('Parcel'), ('one_state_workflow',))
+
+    def test_divisionCode_field(self):
+        licence = self.licences[0]
+        parcel = api.content.create(container=licence, type='Parcel', id='parcel1', division='69696', section='B', radical='6', exposant='D')
+        # divisionCode should always return the value contained in the field division.
+        self.assertEquals(parcel.getDivisionCode(), parcel.getDivision())
+        self.assertEquals(parcel.divisionCode, parcel.getDivision())
