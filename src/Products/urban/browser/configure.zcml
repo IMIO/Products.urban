@@ -381,6 +381,13 @@
   />
 
   <browser:page
+     for="Products.urban.content.parcel.IParcel"
+     name="edit"
+     class=".parcel_view.ParcelEditForm"
+     permission="zope2.View"
+  />
+
+  <browser:page
      for="Products.urban.interfaces.IPortionOut"
      name="portionoutmacros"
      template="templates/contactmacros.pt"
