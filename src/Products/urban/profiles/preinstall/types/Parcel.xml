@@ -20,7 +20,7 @@
   <element value="portionoutview"/>
  </property>
  <property name="default_view_fallback">False</property>
- <property name="add_permission">cmf.AddPortalContent</property>
+ <property name="add_permission">imio.urban.add_parcel</property>
  <property name="klass">Products.urban.content.parcel.Parcel</property>
  <property name="behaviors">
   <element value="plone.app.lockingbehavior.behaviors.ILocking" />
