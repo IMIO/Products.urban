@@ -23,10 +23,10 @@ class IParcel(model.Schema):
     """
 
     form.widget('division', SelectWidget)
-    division = schema.List(
+    division = schema.Choice(
         title=_(u'Division'),
         description=_(u'urban_label_division'),
-        value_type=schema.Choice(source='urban.vocabularies.division_names'),
+        vocabulary='urban.vocabularies.division_names',
         required=True,
     )
 
