@@ -28,15 +28,15 @@
         <tal:listing content="structure view/renderParcelsListing" />
     </div>
     <div class="parcel-action">
-     <form tal:condition="python: not getattr(context, 'use_bound_licence_infos', False) and member.has_permission('urban: Add PortionOut', context)" name="quickAdd"
+     <form tal:condition="python: not getattr(context, 'use_bound_licence_infos', False) and member.has_permission('imio.urban: Add Parcel', context)" name="quickAdd"
            tal:attributes="action python: context.absolute_url() + '/searchparcels'" action="searchparcels" method="post">
-      <input type="submit" class="contenttype-portionout apButton" id="addPortionOut" value="" i18n:attributes="value search_parcels" />
+      <input type="submit" class="contenttype-portionout apButton" id="addParcel" value="" i18n:attributes="value search_parcels" />
      </form>
     </div>
     <div class="parcel-action">
-     <form tal:condition="python: not getattr(context, 'use_bound_licence_infos', False) and member.has_permission('urban: Add PortionOut', context)" name="manualQuickAdd"
-           tal:attributes="action python: context.absolute_url() + '/createObject?type_name=PortionOut'" action="searchparcels" method="post">
-      <input type="submit" class="context apButton contenttype-portionout" id="manualAddPortionOut" value="manual_parcel" i18n:attributes="value" />
+     <form tal:condition="python: not getattr(context, 'use_bound_licence_infos', False) and member.has_permission('imio.urban: Add Parcel', context)" name="manualQuickAdd"
+           tal:attributes="action python: context.absolute_url() + '/createObject?type_name=Parcel'" action="searchparcels" method="post">
+      <input type="submit" class="context apButton contenttype-portionout" id="manualAddParcel" value="manual_parcel" i18n:attributes="value" />
      </form>
     </div>
  </div>
