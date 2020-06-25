@@ -20,16 +20,11 @@ def onDelete(parcel, event):
     parcel.aq_inner.aq_parent.reindexObject(idxs=["parcelInfosIndex"])
 
 
-def setValidParcelAndDivisionCode(parcel, event):
+def setValidParcel(parcel, event):
     """
      Check if the manually added parcel exists in he cadastral DB
      and set its "isvalidparcel" attribute accordingly.
     """
-    parcel.divisionCode = parcel.getDivision()
-    parcel.bis = parcel.bis or '0'
-    parcel.puissance = parcel.puissance or '0'
-    parcel.reindexObject()
-
     parcel_status = False
     try:
         cadastre = services.cadastre.new_session()

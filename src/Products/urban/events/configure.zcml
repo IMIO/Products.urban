@@ -89,11 +89,11 @@
 
   <subscriber for="Products.urban.content.parcel.IParcel
                    zope.lifecycleevent.interfaces.IObjectCreatedEvent"
-               handler=".parcelEvents.setValidParcelAndDivisionCode" />
+               handler=".parcelEvents.setValidParcel" />
 
   <subscriber for="Products.urban.content.parcel.IParcel
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-              handler=".parcelEvents.setValidParcelAndDivisionCode" />
+              handler=".parcelEvents.setValidParcel" />
 
   <subscriber for="Products.urban.content.parcel.IParcel
                    zope.container.interfaces.IObjectRemovedEvent"
