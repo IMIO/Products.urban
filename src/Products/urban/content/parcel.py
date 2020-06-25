@@ -22,13 +22,6 @@ class IParcel(model.Schema):
     Parcel dexterity schema.
     """
 
-    form.omitted('divisionCode')
-    divisionCode = schema.TextLine(
-        title=_(u'Divisioncode'),
-        description=_(u'urban_label_divisionCode'),
-        required=False,
-    )
-
     form.widget('division', SelectWidget)
     division = schema.List(
         title=_(u'Division'),
@@ -138,11 +131,21 @@ class Parcel(Item):
 
         return references
 
+    @property
+    def divisionCode(self):
+        """
+        divisionCode should return the division number
+        """
+        return self.getDivisionCode()
+
     def getDivisionCode(self):
-        return self.divisionCode or ''
+        """
+        DivisionCode should return the division number
+        """
+        return self.getDivision()
 
     def getDivision(self):
-        return self.division or ''
+        return self.division or '00000'
 
     def getDivisionName(self):
         division_names = getUtility(
@@ -167,22 +170,22 @@ class Parcel(Item):
             return self.division
 
     def getSection(self):
-        return self.section or ''
+        return self.section or '_'
 
     def getRadical(self):
-        return self.radical or ''
+        return self.radical or '0'
 
     def getBis(self):
-        return self.bis or ''
+        return self.bis or '0'
 
     def getExposant(self):
-        return self.exposant or ''
+        return self.exposant or '_'
 
     def getPuissance(self):
-        return self.puissance or ''
+        return self.puissance or '0'
 
     def getPartie(self):
-        return self.partie or ''
+        return self.partie or False
 
     def getIsOfficialParcel(self):
         return self.isOfficialParcel
@@ -212,10 +215,10 @@ class Parcel(Item):
         capakey = "%s%s%04d/%02d%s%03d" % (
             self.getDivisionCode(),
             self.getSection(),
-            int(self.getRadical() or 0),
-            int(self.getBis() or 0),
-            self.getExposant() or '_',
-            int(self.getPuissance() or 0)
+            int(self.getRadical()),
+            int(self.getBis()),
+            self.getExposant(),
+            int(self.getPuissance())
         )
         return capakey
 
