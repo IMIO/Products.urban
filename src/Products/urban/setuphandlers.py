@@ -1369,13 +1369,13 @@ def createLicence(site, licence_type, data):
     # call post script
     licence.at_post_create_script()
     # add a dummy portion out
-    division_code = division = ''
+    division = ''
     if services.cadastre.can_connect():
         session = services.cadastre.new_session()
-        division_code = division = str(session.get_all_divisions()[0][0])
+        division = str(session.get_all_divisions()[0][0])
         session.close()
     parcel_data = {
-        'divisionCode': division_code, 'division': division, 'section': 'A', 'radical': '84',
+        'division': division, 'section': 'A', 'radical': '84',
         'exposant': 'C', 'partie': False
     }
     if 'parcel_data' in data:
