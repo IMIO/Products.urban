@@ -134,8 +134,7 @@ def migrate_add_foldermanagers_collection(context):
 
     urban_tool = api.portal.get_tool('portal_urban')
     folder = getattr(urban_tool, 'foldermanagers')
-    if 'collection_foldermanagers' not in folder:
-        create_collection_foldermanagers(folder)
+    create_collection_foldermanagers(folder)
 
     logger.info("migration step done!")
 

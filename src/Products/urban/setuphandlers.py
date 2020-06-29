@@ -1161,30 +1161,29 @@ def _addTestUser(site, username, groupname, external_editor=False):
 
 
 def create_collection_foldermanagers(foldermanagers_folder):
-
-    if 'Collection' not in foldermanagers_folder.locallyAllowedTypes:
-        allowed_content_types_list = (list(foldermanagers_folder.locallyAllowedTypes))
-        allowed_content_types_list.append('Collection')
-        foldermanagers_folder.locallyAllowedTypes = tuple(allowed_content_types_list)
-
     collection_foldermanagers_id = 'collection_foldermanagers'
+    if collection_foldermanagers_id not in foldermanagers_folder:
+        if 'Collection' not in foldermanagers_folder.locallyAllowedTypes:
+            allowed_content_types_list = (list(foldermanagers_folder.locallyAllowedTypes))
+            allowed_content_types_list.append('Collection')
+            foldermanagers_folder.locallyAllowedTypes = tuple(allowed_content_types_list)
 
-    collection_id = foldermanagers_folder.invokeFactory(
-        'Collection',
-        id=collection_foldermanagers_id,
-        title="Agents Traitants",
-        query=[{'i': 'portal_type', 'o': 'plone.app.querystring.operation.selection.is', 'v': "FolderManager"}],
-        sort_on=u'sortable_title',
-        sort_reversed=False,
-        b_size=20
-    )
-    foldermanagers_folder.moveObjectToPosition(collection_id, 0)
-    foldermanagers_folder.setDefaultPage('collection_foldermanagers')
+        collection_id = foldermanagers_folder.invokeFactory(
+            'Collection',
+            id=collection_foldermanagers_id,
+            title="Agents Traitants",
+            query=[{'i': 'portal_type', 'o': 'plone.app.querystring.operation.selection.is', 'v': "FolderManager"}],
+            sort_on=u'sortable_title',
+            sort_reversed=False,
+            b_size=20
+        )
+        foldermanagers_folder.moveObjectToPosition(collection_id, 0)
+        foldermanagers_folder.setDefaultPage('collection_foldermanagers')
 
-    if 'Collection' in foldermanagers_folder.locallyAllowedTypes:
-        allowed_content_types_list = (list(foldermanagers_folder.locallyAllowedTypes))
-        allowed_content_types_list.remove('Collection')
-        foldermanagers_folder.locallyAllowedTypes = tuple(allowed_content_types_list)
+        if 'Collection' in foldermanagers_folder.locallyAllowedTypes:
+            allowed_content_types_list = (list(foldermanagers_folder.locallyAllowedTypes))
+            allowed_content_types_list.remove('Collection')
+            foldermanagers_folder.locallyAllowedTypes = tuple(allowed_content_types_list)
 
 
 def addDefaultObjects(context):
