@@ -107,7 +107,7 @@
      for="zope.interface.Interface
           Products.urban.browser.table.interfaces.ITitleColumn
           Products.urban.browser.table.interfaces.IItemForUrbanTable
-          Products.urban.interfaces.IPortionOut"
+          Products.urban.content.parcel.IParcel"
      factory=".column.ParcelTitleDisplay"
      provides="Products.urban.browser.table.interfaces.ITitleCell"
   />

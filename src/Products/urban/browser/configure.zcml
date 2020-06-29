@@ -382,6 +382,13 @@
 
   <browser:page
      for="Products.urban.content.parcel.IParcel"
+     name="view"
+     class=".parcel_view.ParcelViewRedirects"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="Products.urban.content.parcel.IParcel"
      name="edit"
      class=".parcel_view.ParcelEditForm"
      permission="zope2.View"
