@@ -32,6 +32,8 @@ Changes
 - Allow shortcut transition to 'inacceptable' state for CODT licence wofklow. [SUP-6385]
   [sdelcourt]
 
+- Add default foldermanagers collection to sort the folder on title [URB-1151]
+  [jjaumotte]
 
 2.4 (2019-03-25)
 ----------------

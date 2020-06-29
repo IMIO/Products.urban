@@ -1181,6 +1181,11 @@ def create_collection_foldermanagers(foldermanagers_folder):
     foldermanagers_folder.moveObjectToPosition(collection_id, 0)
     foldermanagers_folder.setDefaultPage('collection_foldermanagers')
 
+    if 'Collection' in foldermanagers_folder.locallyAllowedTypes:
+        allowed_content_types_list = (list(foldermanagers_folder.locallyAllowedTypes))
+        allowed_content_types_list.remove('Collection')
+        foldermanagers_folder.locallyAllowedTypes = tuple(allowed_content_types_list)
+
 
 def addDefaultObjects(context):
     """
