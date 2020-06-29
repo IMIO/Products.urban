@@ -32,6 +32,9 @@ Changes
 - Allow shortcut transition to 'inacceptable' state for CODT licence wofklow. [SUP-6385]
   [sdelcourt]
 
+- Add default foldermanagers collection to sort the folder on title [URB-1151]
+  [jjaumotte]
+
 - Add some applicants infos on urban_description schemata. [URB-1171]
   [jjaumotte]
 
@@ -106,12 +109,8 @@ Changes
 - Add migration source code
   [fngaha]
 
-2.3.x (unreleased)
--------------------
-- Update MultipleContactCSV methods with an optional number_street_inverted (#17811)
-  [jjaumotte]
 
-1.11.1 (unknown release date)
+1.11.1 (unreleased)
 -------------------
 - add query_parcels_in_radius method to view
   [fngaha]
