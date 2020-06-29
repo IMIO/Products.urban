@@ -32,6 +32,8 @@ Changes
 - Allow shortcut transition to 'inacceptable' state for CODT licence wofklow. [SUP-6385]
   [sdelcourt]
 
+- Add some applicants infos on urban_description schemata. [URB-1171]
+  [jjaumotte]
 
 2.4 (2019-03-25)
 ----------------
