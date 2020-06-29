@@ -101,13 +101,13 @@ class Parcel(Item):
         """
         division = self.getDivisionName() or ''
         division = division.encode('utf-8')
-        section = self.section
-        radical = self.radical
-        bis = self.bis
-        exposant = self.exposant
-        puissance = self.puissance
+        section = self.getSection()
+        radical = self.getRadical()
+        bis = self.getBis()
+        exposant = self.getExposant()
+        puissance = self.getPuissance()
         generatedTitle = str(division) + ' ' + str(section) + ' ' + str(radical) + ' ' + str(bis) + ' ' + str(exposant) + ' ' + str(puissance)
-        generatedTitle = generatedTitle.strip()
+        generatedTitle = generatedTitle.strip().replace(' 0', '').replace(' _ ', ' ')
         if self.partie:
             generatedTitle = generatedTitle + ' (partie)'
         return generatedTitle

@@ -95,4 +95,14 @@
         />
     </configure>
 
+    <configure package="plone.dexterity">
+        <browser:page
+           for="Products.urban.content.parcel.IParcel"
+           name="parcelview"
+           class="Products.urban.browser.parcel_view.ParcelView"
+           permission="zope2.View"
+           template="browser/item.pt"
+        />
+    </configure>
+
 </configure>
