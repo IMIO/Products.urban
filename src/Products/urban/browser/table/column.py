@@ -229,10 +229,6 @@ class ContacTitleDisplay(TitleDisplay):
         if tel:
             address = '%s<br /><span>%s</span>' % (address, tel)
 
-        email = contact.getEmail()
-        if email:
-            address = '%s<br /><span>%s</span>' % (address, email)
-
         title = '%s%s' % (title, address)
         return title
 
