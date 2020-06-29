@@ -39,7 +39,7 @@ class IParcel(model.Schema):
 
     form.widget('radical', TextWidget)
     radical = schema.TextLine(
-        title=_(u''),
+        title=_(u'Radical'),
         description=_(u'urban_label_radical'),
         required=False,
     )
