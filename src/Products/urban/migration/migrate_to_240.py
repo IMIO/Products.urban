@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 from Products.urban.profiles.extra.config_default_values import default_values
-from Products.urban.setuphandlers import createVocabularyFolder
+from Products.urban.setuphandlers import createVocabularyFolder, create_collection_foldermanagers
 from Products.urban.setuphandlers import createFolderDefaultValues
 
 from plone import api
@@ -126,6 +126,20 @@ def migrate_update_empty_sols_pcas_title(context):
     logger.info("migration step done!")
 
 
+def migrate_add_foldermanagers_collection(context):
+    """
+    """
+    logger = logging.getLogger('urban: migrate migrate_add_foldermanagers_collection')
+    logger.info("starting migration step")
+
+    urban_tool = api.portal.get_tool('portal_urban')
+    folder = getattr(urban_tool, 'foldermanagers')
+    if 'collection_foldermanagers' not in folder:
+        create_collection_foldermanagers(folder)
+
+    logger.info("migration step done!")
+
+
 def migrate(context):
     logger = logging.getLogger('urban: migrate to 2.4')
     logger.info("starting migration steps")
@@ -142,6 +156,7 @@ def migrate(context):
     migrate_update_empty_sols_pcas_title(context)
     migrate_codt_buildlicences_schedule(context)
     migrate_enable_optional_tax_field_by_default(context)
+    migrate_add_foldermanagers_collection(context)
     catalog = api.portal.get_tool('portal_catalog')
     catalog.clearFindAndRebuild()
     logger.info("migration done!")

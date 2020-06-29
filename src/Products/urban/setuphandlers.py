@@ -1160,6 +1160,28 @@ def _addTestUser(site, username, groupname, external_editor=False):
         pass
 
 
+def create_collection_foldermanagers(foldermanagers_folder):
+
+    if 'Collection' not in foldermanagers_folder.locallyAllowedTypes:
+        allowed_content_types_list = (list(foldermanagers_folder.locallyAllowedTypes))
+        allowed_content_types_list.append('Collection')
+        foldermanagers_folder.locallyAllowedTypes = tuple(allowed_content_types_list)
+
+    collection_foldermanagers_id = 'collection_foldermanagers'
+
+    collection_id = foldermanagers_folder.invokeFactory(
+        'Collection',
+        id=collection_foldermanagers_id,
+        title="Agents Traitants",
+        query=[{'i': 'portal_type', 'o': 'plone.app.querystring.operation.selection.is', 'v': "FolderManager"}],
+        sort_on=u'sortable_title',
+        sort_reversed=False,
+        b_size=20
+    )
+    foldermanagers_folder.moveObjectToPosition(collection_id, 0)
+    foldermanagers_folder.setDefaultPage('collection_foldermanagers')
+
+
 def addDefaultObjects(context):
     """
        Add some users and objects for test purpose...
@@ -1217,6 +1239,9 @@ def addDefaultObjects(context):
         for obj in objects_list[1:]:
             obj.update({'manageableLicences': URBAN_TYPES})
         createFolderDefaultValues(fmFolder, objects_list)
+
+    # add folder managers collection for default title sort
+    create_collection_foldermanagers(fmFolder)
 
     #create some streets using the Extensions.imports script
     if not tool.streets.objectIds('City'):
