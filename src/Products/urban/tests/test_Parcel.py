@@ -78,6 +78,14 @@ class TestParcel(unittest.TestCase):
         wf_tool = api.portal.get_tool('portal_workflow')
         self.assertEquals(wf_tool.getChainForPortalType('Parcel'), ('one_state_workflow',))
 
+    def test_parcel_redirectsview(self):
+        licence = self.licences[0]
+        parcel = api.content.create(container=licence, type='Parcel', id='parcel1', division='A', section='B', radical='6', exposant='D')
+        parcel_view = parcel.restrictedTraverse('view')
+        view_result = parcel_view()
+        # default parcel view should redirects to the parent container
+        self.assertEquals(view_result, licence.absolute_url())
+
     def test_divisionCode_field(self):
         licence = self.licences[0]
         parcel = api.content.create(container=licence, type='Parcel', id='parcel1', division='69696', section='B', radical='6', exposant='D')
