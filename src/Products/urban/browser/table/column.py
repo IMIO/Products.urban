@@ -222,6 +222,17 @@ class ContacTitleDisplay(TitleDisplay):
         if zipcode or city:
             address = '%s<br /><span>%s %s</span>' % (address, zipcode, city)
 
+        phone = contact.getPhone()
+        gsm = contact.getGsm()
+
+        tel = gsm if gsm else phone
+        if tel:
+            address = '%s<br /><span>%s</span>' % (address, tel)
+
+        email = contact.getEmail()
+        if email:
+            address = '%s<br /><span>%s</span>' % (address, email)
+
         title = '%s%s' % (title, address)
         return title
 
