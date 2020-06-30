@@ -19,7 +19,7 @@ class TestParcellingTerm(unittest.TestCase):
 
     def testParcellingTitleUpdate(self):
         parcelling = self.parcellingterm
-        self.assertTrue(parcelling.Title() == 'Lotissement 1 (Andr\xc3\xa9 Ledieu - 01/01/2005)')
+        self.assertEquals(parcelling.Title(), 'Lotissement 1 (Andr\xc3\xa9 Ledieu - 01/01/2005)')
         # after adding a parcel1, title should be updated with the base
         # references  of this parcel (here:  A, B, C but not D)
         api.content.create(container=parcelling, type='Parcel', id='parcel1', division='A', section='B', radical='6', exposant='D')
