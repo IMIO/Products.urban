@@ -69,6 +69,7 @@ setup(name='Products.urban',
           'Products.MasterSelectWidget',
           'Products.PasswordStrength',
           'plone.api',  # to remove once we use a plone version including plone.api
+          'plone.app.contenttypes',
           'plone.app.referenceintegrity',
           'plone.namedfile',  # ugly fix because TinyMce needs it but didnt declared it in its setup dependencies
           'plone.z3ctable',
