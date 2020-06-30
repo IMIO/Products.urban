@@ -11,11 +11,11 @@
  <property
     name="add_view_expr">string:${folder_url}/++add++Parcel</property>
  <property name="link_target"></property>
- <property name="immediate_view">portionoutview</property>
+ <property name="immediate_view">view</property>
  <property name="global_allow">True</property>
  <property name="filter_content_types">False</property>
  <property name="allow_discussion">False</property>
- <property name="default_view">portionoutview</property>
+ <property name="default_view">view</property>
  <property name="view_methods">
   <element value="view"/>
  </property>
@@ -29,7 +29,6 @@
  <property name="schema_policy">dexterity</property>
  <alias from="(Default)" to="(dynamic view)"/>
  <alias from="index.html" to="(dynamic view)"/>
- <alias from="view" to="view"/>
  <alias from="edit" to="@@edit"/>
  <alias from="sharing" to="@@sharing"/>
  <action title="View"
