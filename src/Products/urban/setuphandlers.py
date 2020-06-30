@@ -298,7 +298,7 @@ def createFolderDefaultValues(folder, objects_list, portal_type=''):
     for obj in objects_list:
         if type(obj) is dict:
             if obj['id'] not in folder.objectIds():
-                api.content.create(container=folder, type=portal_type, **obj)
+                folder.invokeFactory(portal_type, **obj)
 
 
 def createVocabularyFolder(container, folder_id, site, allowedtypes='UrbanVocabularyTerm', foldertype='Folder'):
