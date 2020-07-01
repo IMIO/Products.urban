@@ -20,7 +20,7 @@ from imio.schedule.content.task import IAutomatedTask
 
 from Products.Archetypes.interfaces import IBaseFolder
 
-from Products.urban.content.parcel import IParcel
+from imio.urban.core.contents.parcel.interfaces import IParcel
 from Products.urban.interfaces import IApplicant
 from Products.urban.interfaces import IBaseBuildLicence
 from Products.urban.interfaces import ICODT_BaseBuildLicence
