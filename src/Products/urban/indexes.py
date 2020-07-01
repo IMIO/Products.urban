@@ -20,7 +20,6 @@ from imio.schedule.content.task import IAutomatedTask
 
 from Products.Archetypes.interfaces import IBaseFolder
 
-from imio.urban.core.contents.parcel.interfaces import IParcel
 from Products.urban.interfaces import IApplicant
 from Products.urban.interfaces import IBaseBuildLicence
 from Products.urban.interfaces import ICODT_BaseBuildLicence
@@ -106,27 +105,6 @@ def licence_architectinfoindex(object):
     for architect in architects:
         architects_info.extend(_get_applicantsinfoindex(architect))
     return list(set(architects_info))
-
-
-@indexer(IParcel)
-def parcelinfoindex(obj):
-    """
-    Indexes some informations about the parcels of 'self'
-    Index parcels of a licence
-    It builds a list of parcels infos.  Parcels infos are :
-    - code divison
-    - division
-    - section
-    - radical
-    - bis
-    - exposant
-    - puissance
-    Separated by a ','
-    What we need to do is to do an 'exact' search on it
-    This index is a ZCTextIndex based on the plone_lexicon so we
-    are sure that indexed values are lowercase
-    """
-    return [obj.get_capakey()]
 
 
 @indexer(IGenericLicence)
@@ -274,11 +252,6 @@ def doc_not_indexed(obj):
 @indexer(IProprietary)
 @indexer(ICorporation)
 def contact_not_indexed(obj):
-    raise AttributeError()
-
-
-@indexer(IParcel)
-def portion_not_indexed(obj):
     raise AttributeError()
 
 
