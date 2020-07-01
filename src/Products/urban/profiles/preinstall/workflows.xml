@@ -211,9 +211,6 @@
 <type type_id="Layer">
   <bound-workflow workflow_id="" />
 </type>
-<type type_id="Parcel">
-  <bound-workflow workflow_id="one_state_workflow" />
-</type>
 <type type_id="Proprietary">
   <bound-workflow workflow_id="activation_workflow" />
 </type>
