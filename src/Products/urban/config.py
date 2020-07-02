@@ -103,7 +103,6 @@ ADD_CONTENT_PERMISSIONS = {
     'PatrimonyCertificate': 'urban: Add PatrimonyCertificate',
     'PcaTerm': 'urban: Add PcaTerm',
     'PersonTitleTerm': 'urban: Add PersonTitleTerm',
-    'PortionOut': 'urban: Add PortionOut',
     'PreliminaryNotice': 'urban: Add PreliminaryNotice',
     'ProjectMeeting': 'urban: Add ProjectMeeting',
     'Recipient': 'urban: Add Recipient',
@@ -169,7 +168,6 @@ setDefaultRoles('urban: Add ParcelOutLicence', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add PatrimonyCertificate', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add PcaTerm', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add PersonTitleTerm', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add PortionOut', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add PreliminaryNotice', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add ProjectMeeting', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add Recipient', ("Manager", "Contributor"))
