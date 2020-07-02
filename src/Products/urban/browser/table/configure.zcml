@@ -430,6 +430,15 @@
      factory=".tablevalue.ValuesForInspectionReportsListing"
      provides="z3c.table.interfaces.IValues"
   />
-  <!-- table values adapters end -->
 
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.table.interfaces.ISortedTitleTable"
+     factory=".column.ObjectCreationDateColumn"
+     provides="z3c.table.interfaces.IColumn"
+     name="creationDateColumn"
+  />
+
+  <!-- table values adapters end -->
 </configure>
