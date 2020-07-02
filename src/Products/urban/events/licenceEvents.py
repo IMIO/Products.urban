@@ -106,11 +106,17 @@ def _updateBoundLicencesIndexes(licence, events, indexes=[]):
     inspection_uids = annotations.get('urban.bound_inspections') or set([])
     uids = inspection_uids.union(ticket_uids)
     catalog = api.portal.get_tool('portal_catalog')
-    bound_licences_brains = catalog(UID=uids)
+    bound_licences_brains = catalog(UID=list(uids))
     for bound_licences_brain in bound_licences_brains:
         bound_licence = bound_licences_brain.getObject()
-        bound_licence.updateTitle()
-        bound_licence.reindexObject(idxs=indexes)
+        to_reindex = False
+        if bound_licence.portal_type == 'Inspection' and bound_licence.getUse_bound_licence_infos():
+            to_reindex = True
+        if bound_licence.portal_type == 'Ticket' and bound_licence.getUse_bound_inspection_infos():
+            to_reindex = True
+        if to_reindex:
+            bound_licence.updateTitle()
+            bound_licence.reindexObject(idxs=indexes)
         # make sure to update  the whole reference chain licence <- inspection <- ticket
         _updateBoundLicencesIndexes(bound_licence, events)
 
