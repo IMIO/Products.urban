@@ -25,6 +25,13 @@
   />
 
   <adapter
+     for="Products.urban.interfaces.ITicket"
+     provides="borg.localrole.interfaces.ILocalRoleProvider"
+     factory=".ticket_workflow.StateRolesMapping"
+     name="ticket_local_roles"
+  />
+
+  <adapter
      for="Products.urban.interfaces.IUrbanEvent"
      provides="borg.localrole.interfaces.ILocalRoleProvider"
      factory=".urbanevent_workflow.StateRolesMapping"
