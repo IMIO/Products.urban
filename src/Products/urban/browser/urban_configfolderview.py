@@ -3,7 +3,8 @@
 from Acquisition import aq_inner
 
 from Products.Five import BrowserView
-from Products.urban.browser.table.urbantable import GeometriciansTable
+
+from Products.urban.browser.table.urbantable import GeometriciansTable, SortedTitleTable
 from Products.urban.browser.table.urbantable import NotariesTable
 from Products.urban.browser.table.urbantable import ArchitectsTable
 from Products.urban.browser.table.urbantable import ParcellingsTable
@@ -88,3 +89,24 @@ class NotariesFolderView(ContactsFolderView):
     def getCSSClass(self):
         base_css = super(NotariesFolderView, self).getCSSClass()
         return '{} contenttype-notary'.format(base_css)
+
+
+class SortedTitleFolderView(BrowserView):
+    """
+      This manage the sorted title folder view
+    """
+    def renderListing(self):
+        return self.renderObjectListing(SortedTitleTable)
+
+    def renderObjectListing(self, table):
+        if not self.context.objectIds():
+            return ''
+        listing = table(self.context, self.request, values=self.context.objectValues())
+        listing.update()
+        listing_render = listing.render()
+        batch_render = listing.renderBatch()
+        return '%s%s' % (listing_render, batch_render)
+
+    def getCSSClass(self):
+        base_css = super(SortedTitleFolderView, self).getCSSClass()
+        return '{} contenttype-sortedtitleobject'.format(base_css)
