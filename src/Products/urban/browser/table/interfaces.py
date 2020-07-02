@@ -229,3 +229,10 @@ class IInspectionReportsTable(Interface):
     """
     Marker interface for a table displaying inspection report events.
     """
+
+
+class ISortedTitleTable(IUrbanTable):
+    """
+    Marker interface for a table displaying sorted objects title.
+    """
+
