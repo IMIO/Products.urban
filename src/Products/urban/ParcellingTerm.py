@@ -151,27 +151,27 @@ class ParcellingTerm(BaseFolder, BrowserDefaultMixin):
         """
            Update the title to set a clearly identify the buildlicence
         """
-        parcel_baserefs = list(set(['"%s %s %s"' % (prc.getDivision(), prc.getSection(), prc.getRadical()) for prc in self.getParcels()]))
-        refs = ''
+        parcel_baserefs = list(set([u'"%s %s %s"' % (prc.getDivision(), prc.getSection(), prc.getRadical()) for prc in self.getParcels()]))
+        refs = u''
         if parcel_baserefs:
             refs = parcel_baserefs[0]
             for ref in parcel_baserefs[1:]:
-                refs = '%s, %s' % (refs, ref)
-        title = "%s (%s" % (self.getLabel(), self.getSubdividerName())
+                refs = u'%s, %s' % (refs, ref)
+        title = u"%s (%s" % (self.getLabel().decode('utf-8'), self.getSubdividerName().decode('utf-8'))
 
         auth_date = self.getAuthorizationDate()
         if auth_date:
-            title = '%s - %s' % (title, auth_date.strftime('%d/%m/%Y'))
+            title = u'%s - %s' % (title, auth_date.strftime('%d/%m/%Y'))
 
         approval_date = self.getApprovalDate()
         if approval_date:
-            title = '%s - %s' % (title, approval_date.strftime('%d/%m/%Y'))
+            title = u'%s - %s' % (title, approval_date.strftime('%d/%m/%Y'))
 
         if refs:
-            title = '%s - %s' % (title, refs)
+            title = u'%s - %s' % (title, refs)
 
-        title = '%s)' % title
-        self.setTitle(str(title))
+        title = u'%s)' % title
+        self.setTitle(title.encode('utf-8'))
         self.reindexObject()
 
     security.declarePublic('getParcels')
