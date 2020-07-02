@@ -82,6 +82,25 @@ def updateBoundLicences(licence, events):
     If ticket or inspection refers to this licence, update their title and indexes
     as the refered address and aplicants may have changed.
     """
+    return _updateBoundLicencesIndexes(licence, events)
+
+
+def _updateBoundLicencesIndexes(licence, events, indexes=[]):
+    """
+    If ticket or inspection refers to this licence, update their title and indexes
+    as the refered address and aplicants may have changed.
+    """
+    if indexes == []:
+        indexes = [
+            'Title',
+            'sortable_title',
+            'applicantInfosIndex',
+            'address',
+            'StreetNumber',
+            'StreetsUID',
+            'parcelInfosIndex'
+        ]
+
     annotations = IAnnotations(licence)
     ticket_uids = annotations.get('urban.bound_tickets') or set([])
     inspection_uids = annotations.get('urban.bound_inspections') or set([])
@@ -91,17 +110,9 @@ def updateBoundLicences(licence, events):
     for bound_licences_brain in bound_licences_brains:
         bound_licence = bound_licences_brain.getObject()
         bound_licence.updateTitle()
-        bound_licence.reindexObject(idxs=[
-            'Title',
-            'sortable_title',
-            'applicantInfosIndex',
-            'address',
-            'StreetNumber',
-            'StreetsUID',
-            'parcelInfosIndex'
-        ])
+        bound_licence.reindexObject(idxs=indexes)
         # make sure to update  the whole reference chain licence <- inspection <- ticket
-        updateBoundLicences(bound_licence, events)
+        _updateBoundLicencesIndexes(bound_licence, events)
 
 
 def updateEventsFoldermanager(licence, event):
