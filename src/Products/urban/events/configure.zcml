@@ -83,30 +83,6 @@
                    Products.DCWorkflow.interfaces.IAfterTransitionEvent"
               handler=".licenceEvents.reindex_licence_permissions" />
 
-  <subscriber for="imio.urban.core.contents.parcel.interfaces.IParcel
-                   zope.container.interfaces.IObjectRemovedEvent"
-              handler=".parcelEvents.onDelete" />
-
-  <subscriber for="imio.urban.core.contents.parcel.interfaces.IParcel
-                   zope.lifecycleevent.interfaces.IObjectCreatedEvent"
-               handler=".parcelEvents.setValidParcel" />
-
-  <subscriber for="imio.urban.core.contents.parcel.interfaces.IParcel
-                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-              handler=".parcelEvents.setValidParcel" />
-
-  <subscriber for="imio.urban.core.contents.parcel.interfaces.IParcel
-                   zope.container.interfaces.IObjectRemovedEvent"
-              handler=".licenceEvents.updateBoundLicences" />
-
-  <subscriber for="imio.urban.core.contents.parcel.interfaces.IParcel
-                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-              handler=".licenceEvents.updateBoundLicences" />
-
-  <subscriber for="imio.urban.core.contents.parcel.interfaces.IParcel
-                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-              handler=".parcelEvents.updateParcellingTitle" />
-
   <subscriber for="..interfaces.IUrbanEvent
                    Products.Archetypes.interfaces.IObjectInitializedEvent"
               handler=".urbanEventEvents.setDefaultValuesEvent"/>
