@@ -216,6 +216,40 @@ URBAN_TYPES = [
     'Inspection', 'Ticket'
 ]
 
+URBAN_TYPES_ACRONYM = {
+    'BuildLicence': 'P',
+    'CODT_BuildLicence': 'P',
+    'Article127': 'PA',
+    'CODT_Article127': 'PA',
+    'CODT_CommercialLicence': 'PIC',
+    'IntegratedLicence': 'PI',
+    'CODT_IntegratedLicence': 'PI',
+    'UniqueLicence': 'PU',
+    'CODT_UniqueLicence': 'PU',
+    'Declaration': 'D',
+    'UrbanCertificateOne': 'CU1',
+    'CODT_UrbanCertificateOne': 'CU1',
+    'UrbanCertificateTwo': 'CU2',
+    'CODT_UrbanCertificateTwo': 'CU2',
+    'PreliminaryNotice': 'AP',
+    'PatrimonyCertificate': 'CP',
+    'EnvClassOne': 'PE1',
+    'EnvClassTwo': 'PE2',
+    'EnvClassThree': 'DE',
+    'EnvClassBordering': 'PEL',
+    'ParcelOutLicence': 'PURB',
+    'CODT_ParcelOutLicence': 'PURB',
+    'MiscDemand': 'DD',
+    'Division': 'DIV',
+    'NotaryLetter': 'NOT',
+    'CODT_NotaryLetter': 'NOT',
+    'ProjectMeeting': 'R',
+    'ExplosivesPossession': 'EXP',
+    'RoadDecree': 'DV',
+    'Inspection': 'INSP',
+    'Ticket': 'PV',
+}
+
 URBAN_CWATUPE_TYPES = [
     'BuildLicence', 'Article127', 'IntegratedLicence', 'UniqueLicence', 'Declaration',
     'UrbanCertificateOne', 'UrbanCertificateTwo', 'PreliminaryNotice',

@@ -32,6 +32,9 @@ Changes
 - Allow shortcut transition to 'inacceptable' state for CODT licence wofklow. [SUP-6385]
   [sdelcourt]
 
+- Improve default reference expression for licence references. [URB-2046]
+  [sdelcourt]
+
 
 2.4 (2019-03-25)
 ----------------
