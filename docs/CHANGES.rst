@@ -1,7 +1,5 @@
 :orphan:
 
-Changes
-=======
 2.5 (unreleased)
 ----------------
 
@@ -20,6 +18,17 @@ Changes
 - Provide the add company feature to the CU1 process
   [fngaha]
 
+- Improve mailing. Add the possibility to delay mailing during the night [SUP-12289]
+  [sdelcourt]
+
+- Fix default schedule config for CODT Buildlicence [SUP-12344]
+  [sdelcourt]
+
+- Allow shortcut transition to 'inacceptable' state for CODT licence wofklow. [SUP-6385]
+  [sdelcourt]
+
+- Improve default reference expression for licence references. [URB-2046]
+  [sdelcourt]
 
 2.4 (2019-03-25)
 ----------------
