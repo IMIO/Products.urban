@@ -96,6 +96,21 @@ class TestUrbanConfigFunctional(BrowserTestCase):
             )
             transaction.commit()
         self.browser.open(fm_folder.absolute_url())
+
+        # check with regex the foldermanagers order in html page
         regex = "{}.*{}.*{}".format(foldermanager2.Title(), foldermanager1.Title(), foldermanager3.Title())
+        regex = regex.replace('(', '\(').replace(')', '\)')  # escape parenthesis
+        self.assertTrue(re.search(regex, self.browser.contents, flags=re.DOTALL))
+
+        self.assertLess(foldermanager2.Title(), foldermanager1.Title())
+        self.assertLess(foldermanager1.Title(), foldermanager3.Title())
+
+        # change the order by modify name1, the auto-update title begin is now modified too
+        fm_folder.foldermanager1.name1 = 'Zwymckow'
+        fm_folder.foldermanager2.name1 = 'Mertens'
+        fm_folder.foldermanager3.name1 = 'Aerts'
+
+        # check with regex the new order in html page
+        regex = "{}.*{}.*{}".format(foldermanager3.Title(), foldermanager2.Title(), foldermanager1.Title())
         regex = regex.replace('(', '\(').replace(')', '\)')  # escape parenthesis
         self.assertTrue(re.search(regex, self.browser.contents, flags=re.DOTALL))
