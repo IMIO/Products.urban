@@ -100,7 +100,7 @@ optional_fields = [
     'sewersDetails', 'roadAnalysis', 'futureRoadCoating', 'expropriation', 'expropriationDetails',
     'preemption', 'preemptionDetails', 'SAR', 'sarDetails', 'enoughRoadEquipment', 'enoughRoadEquipmentDetails',
     'reparcelling', 'reparcellingDetails', 'noteworthyTrees', 'pipelines', 'pipelinesDetails', 'tax',
-    'groundStateStatus', 'groundstatestatusDetails'
+    'groundStateStatus', 'groundstatestatusDetails', 'covid'
 ]
 ##/code-section module-header
 
