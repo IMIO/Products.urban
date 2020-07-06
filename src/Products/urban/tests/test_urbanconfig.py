@@ -1,10 +1,15 @@
 # -*- coding: utf-8 -*-
 
 from Products.urban.testing import URBAN_TESTS_CONFIG
+from Products.urban.testing import URBAN_TESTS_CONFIG_FUNCTIONAL
 from Products.urban.tests.helpers import BrowserTestCase
 
+from plone import api
 from plone.app.testing import login
 from plone.testing.z2 import Browser
+
+import re
+import transaction
 
 
 class TestUrbanConfig(BrowserTestCase):
@@ -52,3 +57,64 @@ class TestUrbanConfig(BrowserTestCase):
          Tests parcellings view is not broken for whatsoever reason
         """
         self.browser.open(self.portal.urban.parcellings.absolute_url())
+
+    def test_foldermanagers_view_layout(self):
+        """
+        foldermanagers layout should be sorted_title_folderview
+        """
+        fm_folder = self.portal.portal_urban.foldermanagers
+        self.assertEqual(fm_folder.getLayout(), 'sorted_title_folderview')
+
+
+class TestUrbanConfigFunctional(BrowserTestCase):
+
+    layer = URBAN_TESTS_CONFIG_FUNCTIONAL
+
+    def setUp(self):
+        portal = self.layer['portal']
+        self.portal = portal
+        self.config = portal.portal_urban
+
+        default_user = self.layer.default_user
+        default_password = self.layer.default_password
+        login(self.portal, default_user)
+        self.browser = Browser(self.portal)
+        self.browserLogin(default_user, default_password)
+        self.browser.handleErrors = False
+
+    def test_foldermanagers_view_sorting(self):
+        fm_folder = self.portal.portal_urban.foldermanagers
+        foldermanager1 = fm_folder.objectValues()[0]
+        with api.env.adopt_roles(['Manager']):
+            foldermanager2 = api.content.create(
+                type='FolderManager', container=fm_folder, id='foldermanager2',
+                name1='Bedot', name2='Alain', grade='agent-technique'
+            )
+            foldermanager3 = api.content.create(
+                type='FolderManager', container=fm_folder, id='foldermanager3',
+                name1='Madant', name2='Marc', grade='agent-technique'
+            )
+            transaction.commit()
+        self.browser.open(fm_folder.absolute_url())
+
+        # check with regex the foldermanagers order in html page
+        regex = "{}.*{}.*{}".format(foldermanager2.Title(), foldermanager1.Title(), foldermanager3.Title())
+        regex = regex.replace('(', '\(').replace(')', '\)')  # escape parenthesis
+        self.assertTrue(re.search(regex, self.browser.contents, flags=re.DOTALL))
+
+        self.assertLess(foldermanager2.Title(), foldermanager1.Title())
+        self.assertLess(foldermanager1.Title(), foldermanager3.Title())
+
+        # change the order by modify name1, the auto-update title begin is now modified too
+        fm_folder.foldermanager1.setName1('Zwymckow')
+        fm_folder.foldermanager2.setName1('Mertens')
+        fm_folder.foldermanager3.setName1('Aerts')
+        transaction.commit()
+
+        # update page with new titles
+        self.browser.open(fm_folder.absolute_url())
+
+        # check with regex the new order in html page
+        regex2 = "{}.*{}.*{}".format(foldermanager3.Title(), foldermanager2.Title(), foldermanager1.Title())
+        regex2 = regex2.replace('(', '\(').replace(')', '\)')  # escape parenthesis
+        self.assertTrue(re.search(regex2, self.browser.contents, flags=re.DOTALL))
