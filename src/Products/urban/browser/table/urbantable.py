@@ -39,6 +39,7 @@ class UrbanTable(Table):
     """
     implements(interfaces.IUrbanTable)
 
+    cssClasses = {'table': 'listing largetable'}
     batchProviderName = 'plonebatch'
     startBatchingAt = 20
 
@@ -262,16 +263,3 @@ class InspectionReportsTable(UrbanTable, SequenceTable):
 
     cssClasses = {'table': 'listing largetable'}
     sortOn = 'table-inspection_report_date_column-1'
-
-
-class SortedTitleTable(UrbanTable):
-    """
-    Render objects sorted on Title.
-    """
-    implements(interfaces.ISortedTitleTable)
-
-    cssClasses = {'table': 'listing largetable'}
-
-    # sortOn = 'table-title-1'
-    batchSize = 20
-    startBatchingAt = 20
