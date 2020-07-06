@@ -752,3 +752,6 @@ class UrbanBase(object):
                 folderManager = self.getFoldermanagers()[i]
             i = i + 1
         return folderManager
+
+    def get_state(self):
+        return api.content.get_state(self)
