@@ -190,6 +190,9 @@
 <type type_id="CorporationPlaintiff">
   <bound-workflow workflow_id="activation_workflow" />
 </type>
+<type type_id="CorporationTenant">
+  <bound-workflow workflow_id="activation_workflow" />
+</type>
 <type type_id="EnvClassOne">
   <bound-workflow workflow_id="urban_licence_workflow" />
 </type>
@@ -215,6 +218,9 @@
   <bound-workflow workflow_id="one_state_workflow" />
 </type>
 <type type_id="Proprietary">
+  <bound-workflow workflow_id="activation_workflow" />
+</type>
+<type type_id="ProprietaryCouple">
   <bound-workflow workflow_id="activation_workflow" />
 </type>
 <type type_id="Tenant">
@@ -261,6 +267,9 @@
 </type>
 <type type_id="RoadDecree">
   <bound-workflow workflow_id="codt_buildlicence_workflow" />
+</type>
+<type type_id="Couple">
+  <bound-workflow workflow_id="activation_workflow" />
 </type>
 
 <!-- ##/code-section workflowbindings -->

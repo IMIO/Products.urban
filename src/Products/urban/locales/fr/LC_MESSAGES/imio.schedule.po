@@ -23,6 +23,9 @@ msgstr "Créer l'événement d'accusé de réception"
 msgid "urban.schedule.condition.acknowledgment_done"
 msgstr "Créer l'événement d'accusé de réception et le clôturer"
 
+msgid "urban.schedule.condition.acknowledgment_or_incomplete"
+msgstr "Événement 'Accusé de réception' cloturé ou événement '1er dossier incomplet' cloturé"
+
 msgid "urban.schedule.condition.all_followups_done"
 msgstr "Créer et clôturer tous les événements de réponse administrative"
 
@@ -232,3 +235,39 @@ msgstr "Date de transmis du dossier au SPW"
 
 msgid "urban.schedule.start_date.walloonregion_decision_date"
 msgstr "Date de la décision de la région wallonne"
+
+msgid "urban.schedule.calculation_default_delay"
+msgstr "Délai par défaut"
+
+msgid "urban.schedule.start_date.task_starting_date"
+msgstr "Date de début de la macro-tâche"
+
+msgid "urban.schedule.start_date.infinite"
+msgstr "Date de début infinie"
+
+msgid "urban.schedule.condition.deposit_event_created"
+msgstr "Événement de dépôt créé"
+
+msgid "urban.schedule.condition.will_have_announcement"
+msgstr "Si il y a une annonce"
+
+msgid "urban.schedule.condition.will_have_inquiry"
+msgstr "Si il y a une enquête"
+
+msgid "urban.schedule.condition.has_opinion_requests"
+msgstr "Si il y a des avis"
+
+msgid "urban.schedule.condition.opinion_requests_in_progress"
+msgstr "Demandes d'avis en cours"
+
+msgid "urban.schedule.condition.no_inquiry"
+msgstr "Pas d'enquête"
+
+msgid "urban.schedule.condition.FD_opinion_overdue"
+msgstr "Demande d'avis du Fonctionnaire Délégué dépassée"
+
+msgid "urban.schedule.condition.authority_is_college"
+msgstr "Le Collège est l'autorité compétente"
+
+msgid "urban.schedule.start_date.ticket_sent"
+msgstr "Procès-verbal envoyé" 

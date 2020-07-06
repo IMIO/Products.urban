@@ -47,6 +47,8 @@ color: green !important;
 color: red !important;
 }
 
+.state-abandoned,
+.state-obsolete,
 .state-retired {
 color: grey !important;
 }

@@ -12,8 +12,12 @@ def UniqueLicencePostCreationActions(licence, event):
 
 
 def _checkNumerotationSPE(licence):
-    registry = api.portal.get_tool('portal_registry')
+    registry = api.portal.get_tool("portal_registry")
     if licence.getDefaultSPEReference() == licence.getReferenceSPE():
-        value = registry['Products.urban.interfaces.ICODT_UniqueLicence_spe_reference_config.numerotation']
+        value = registry[
+            "Products.urban.interfaces.ICODT_UniqueLicence_spe_reference_config.numerotation"
+        ]
         value = value + 1
-        registry['Products.urban.interfaces.ICODT_UniqueLicence_spe_reference_config.numerotation'] = value
+        registry[
+            "Products.urban.interfaces.ICODT_UniqueLicence_spe_reference_config.numerotation"
+        ] = value

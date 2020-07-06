@@ -12,7 +12,8 @@ from zope import schema
 from zope.interface import implements
 
 import logging
-logger = logging.getLogger('Products.urban: UrbanTemplate')
+
+logger = logging.getLogger("Products.urban: UrbanTemplate")
 
 
 class IUrbanTemplate(IConfigurablePODTemplate):
@@ -20,13 +21,20 @@ class IUrbanTemplate(IConfigurablePODTemplate):
     UrbanTemplate dexterity schema.
     """
 
-    form.widget('pod_portal_types', SelectWidget, multiple='multiple', size=15)
+    form.widget("pod_portal_types", SelectWidget, multiple="multiple", size=15)
     pod_portal_types = schema.List(
-        title=_(u'Allowed portal types'),
-        description=_(u'Select for which content types the template will be available.'),
-        value_type=schema.Choice(source='collective.documentgenerator.PortalTypes'),
+        title=_(u"Allowed portal types"),
+        description=_(
+            u"Select for which content types the template will be available."
+        ),
+        value_type=schema.Choice(source="collective.documentgenerator.PortalTypes"),
         required=False,
-        default=['UrbanEvent', 'UrbanEventInquiry', 'UrbanEventOpinionRequest', 'UrbanEventAnnouncement']
+        default=[
+            "UrbanEvent",
+            "UrbanEventInquiry",
+            "UrbanEventOpinionRequest",
+            "UrbanEventAnnouncement",
+        ],
     )
 
 

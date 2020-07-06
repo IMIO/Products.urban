@@ -13,8 +13,7 @@ from Products.urban.interfaces import IGenericLicence
 
 
 def get_task_licence(task):
-    """
-    """
+    """ """
     container = task.get_container()
     while not IGenericLicence.providedBy(container):
         container = container.aq_parent

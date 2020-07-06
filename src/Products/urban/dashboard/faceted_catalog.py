@@ -12,7 +12,6 @@ from zope.interface import implements
 
 
 class UrbanFacetedCatalog(FacetedCatalog):
-
     def __call__(self, context, **query):
         """ """
         faceted_context = queryAdapter(context, IFacetedCollection) or context
@@ -32,14 +31,14 @@ class LicenceToFacetedCollection(object):
         """ """
         query = [
             {
-                'i': 'object_provides',
-                'o': 'plone.app.querystring.operation.selection.is',
-                'v': ITask.__identifier__
+                "i": "object_provides",
+                "o": "plone.app.querystring.operation.selection.is",
+                "v": ITask.__identifier__,
             },
             {
-                'i': 'path',
-                'o': 'plone.app.querystring.operation.string.relativePath',
-                'v': '.'
+                "i": "path",
+                "o": "plone.app.querystring.operation.string.relativePath",
+                "v": ".",
             },
         ]
         return query

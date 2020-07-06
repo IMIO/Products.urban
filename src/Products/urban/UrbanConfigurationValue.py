@@ -11,7 +11,7 @@
 
 __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEULETTE
 <stephan.geulette@uvcw.be>, Jean-Michel Abe <jm.abe@la-bruyere.be>"""
-__docformat__ = 'plaintext'
+__docformat__ = "plaintext"
 
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
@@ -26,37 +26,36 @@ from Products.urban.config import *
 ##code-section module-header #fill in your manual code here
 ##/code-section module-header
 
-schema = Schema((
-
-    BooleanField(
-        name='isDefaultValue',
-        default= False,
-        widget=BooleanField._properties['widget'](
-            label='Isdefaultvalue',
-            label_msgid='urban_label_isDefaultValue',
-            i18n_domain='urban',
+schema = Schema(
+    (
+        BooleanField(
+            name="isDefaultValue",
+            default=False,
+            widget=BooleanField._properties["widget"](
+                label="Isdefaultvalue",
+                label_msgid="urban_label_isDefaultValue",
+                i18n_domain="urban",
+            ),
         ),
     ),
-
-),
 )
 
 ##code-section after-local-schema #fill in your manual code here
 ##/code-section after-local-schema
 
-UrbanConfigurationValue_schema = BaseSchema.copy() + \
-    schema.copy()
+UrbanConfigurationValue_schema = BaseSchema.copy() + schema.copy()
 
 ##code-section after-schema #fill in your manual code here
 ##/code-section after-schema
 
+
 class UrbanConfigurationValue(BaseContent, BrowserDefaultMixin):
-    """
-    """
+    """ """
+
     security = ClassSecurityInfo()
     implements(interfaces.IUrbanConfigurationValue)
 
-    meta_type = 'UrbanConfigurationValue'
+    meta_type = "UrbanConfigurationValue"
     _at_rename_after_creation = True
 
     schema = UrbanConfigurationValue_schema
@@ -68,15 +67,15 @@ class UrbanConfigurationValue(BaseContent, BrowserDefaultMixin):
 
     def to_dict(self):
         dict_ = {
-            'UID': self.UID(),
-            'enabled': api.content.get_state(self) == 'enabled',
-            'portal_type': self.portal_type,
+            "UID": self.UID(),
+            "enabled": api.content.get_state(self) == "enabled",
+            "portal_type": self.portal_type,
         }
         for f in self.schema.fields():
-            if f.schemata != 'metadata':
+            if f.schemata != "metadata":
                 val = f.getAccessor(self)()
                 if type(val) is str:
-                    val = val.decode('utf8')
+                    val = val.decode("utf8")
                 dict_[f.__name__] = val
         return dict_
 
@@ -86,4 +85,3 @@ registerType(UrbanConfigurationValue, PROJECTNAME)
 
 ##code-section module-footer #fill in your manual code here
 ##/code-section module-footer
-

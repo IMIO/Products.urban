@@ -9,7 +9,7 @@ from zope.interface import alsoProvides
 
 def onDelete(parcel, event):
     """
-      Reindex licence of this parcel after deletion.
+    Reindex licence of this parcel after deletion.
     """
     parcel.aq_inner.aq_parent.reindexObject(idxs=["parcelInfosIndex"])
 
@@ -25,12 +25,12 @@ def set_ILicencePortionOut_interface(parcel, event):
 
 def setValidParcel(parcel, event):
     """
-     Check if the manually added parcel exists in he cadastral DB
-     and set its "isvalidparcel" attribute accordingly.
+    Check if the manually added parcel exists in he cadastral DB
+    and set its "isvalidparcel" attribute accordingly.
     """
     parcel.setDivisionCode(parcel.getDivision())
-    parcel.bis = parcel.bis or '0'
-    parcel.puissance = parcel.puissance or '0'
+    parcel.bis = parcel.bis or "0"
+    parcel.puissance = parcel.puissance or "0"
     parcel.reindexObject()
 
     parcel_status = False
@@ -41,14 +41,14 @@ def setValidParcel(parcel, event):
     except services.cadastral.UnreferencedParcelError:
         pass
 
-    parcel.setIsOfficialParcel(parcel_status in ['old_parcel', 'actual_parcel'])
-    parcel.setOutdated(parcel_status in ['old_parcel'])
+    parcel.setIsOfficialParcel(parcel_status in ["old_parcel", "actual_parcel"])
+    parcel.setOutdated(parcel_status in ["old_parcel"])
     parcel.reindexObject()
 
 
 def setDivisionCode(parcel, event):
     """
-     Set the division code value of the parcel
+    Set the division code value of the parcel
     """
     parcel.setDivisionCode(parcel.getDivision())
     parcel.reindexObject()

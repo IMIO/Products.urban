@@ -28,6 +28,7 @@ if EXPORT_BINARY:
 else:
     EXPORT_BINARY = True
 
+
 class ExportFolderAsJSON(BrowserView):
     """
     Exports the current context folder Archetypes as JSON.
@@ -62,7 +63,7 @@ class ExportFolderAsJSON(BrowserView):
         Export Archetypes schemad data as dictionary object.
         Binary fields are encoded as BASE64.
         """
-        data = {'UID': obj.UID()}
+        data = {"UID": obj.UID()}
         for field in obj.Schema().fields():
             name = field.getName()
             value = field.getRaw(obj)
@@ -98,13 +99,13 @@ class ExportFolderAsJSON(BrowserView):
         return array
 
     def __call__(self):
-        """
-        """
+        """ """
         folder = self.context.aq_inner
         data = self.export(folder)
         pretty = json.dumps(data, sort_keys=True)
         self.request.response.setHeader("Content-type", "application/json")
         return pretty
+
 
 def spoof_request(app):
     """
@@ -112,14 +113,19 @@ def spoof_request(app):
     """
     from AccessControl.SecurityManagement import newSecurityManager
     from AccessControl.SecurityManager import setSecurityPolicy
-    from Products.CMFCore.tests.base.security import PermissiveSecurityPolicy, OmnipotentUser
+    from Products.CMFCore.tests.base.security import (
+        PermissiveSecurityPolicy,
+        OmnipotentUser,
+    )
+
     _policy = PermissiveSecurityPolicy()
     setSecurityPolicy(_policy)
     newSecurityManager(None, OmnipotentUser().__of__(app.acl_users))
     return app
 
+
 def run_export_as_script(path):
-    """ Command line helper function.
+    """Command line helper function.
     Using from the command line::
         bin/instance script export.py yoursiteid/path/to/folder
     If you have a lot of binary data (images) you probably want
@@ -136,8 +142,9 @@ def run_export_as_script(path):
     view = ExportFolderAsJSON(folder, None)
     data = view.export(folder, recursive=True)
     # Pretty pony is prettttyyyyy
-    pretty = json.dumps(data, sort_keys=True, indent='    ')
+    pretty = json.dumps(data, sort_keys=True, indent="    ")
     print pretty
+
 
 # Detect if run as a bin/instance run script
 if "app" in globals():

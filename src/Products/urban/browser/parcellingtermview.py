@@ -6,8 +6,9 @@ from Products.urban.browser.table.urbantable import ParcelsTable
 
 class ParcellingTermView(BrowserView):
     """
-      This manage methods of ParcellingTerm view
+    This manage methods of ParcellingTerm view
     """
+
     def __init__(self, context, request):
         super(BrowserView, self).__init__(context, request)
         self.context = context
@@ -16,7 +17,7 @@ class ParcellingTermView(BrowserView):
     def renderParcelsListing(self):
         parcels = self.context.getParcels()
         if not parcels:
-            return ''
+            return ""
         parceltable = ParcelsTable(self.context, self.request, values=parcels)
         parceltable.update()
         render = parceltable.render()

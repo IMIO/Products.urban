@@ -1,0 +1,3 @@
+setuptools==44.0.0
+wheel
+zc.buildout==2.13.4

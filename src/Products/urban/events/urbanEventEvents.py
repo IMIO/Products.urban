@@ -13,24 +13,29 @@ from zope.event import notify
 from zope.lifecycleevent import ObjectModifiedEvent
 
 from plone import api
+from plone.memoize.request import cache
 
 
 def setDefaultValuesEvent(urbanevent, event):
     """
-     set default values on urban event fields
+    set default values on urban event fields
     """
     _setDefaultTextValues(urbanevent)
     _setDefaultSelectValues(urbanevent)
+    setEventMarkerInterfaces(urbanevent, event)
 
 
 def _setDefaultTextValues(urbanevent):
-
-    select_fields = [field for field in urbanevent.schema.fields() if field.default_method == 'getDefaultText']
+    select_fields = [
+        field
+        for field in urbanevent.schema.fields()
+        if field.default_method == "getDefaultText"
+    ]
 
     text_renderer = DefaultTextRenderer(urbanevent)
 
     for field in select_fields:
-        is_html = 'html' in str(field.default_content_type)
+        is_html = "html" in str(field.default_content_type)
         default_text = urbanevent.getDefaultText(urbanevent, field, is_html)
 
         rendered_text = text_renderer(default_text)
@@ -39,14 +44,20 @@ def _setDefaultTextValues(urbanevent):
         field_mutator(rendered_text)
 
 
-def setEventTypeType(urban_event, event):
+def setEventMarkerInterfaces(urban_event, event):
+    """
+    Set the linked event_config, marker interfaces.
+    """
     urban_eventType = urban_event.getUrbaneventtypes()
+    if not urban_eventType:
+        return
+
     urban_eventTypeTypes = urban_eventType.getEventTypeType()
     if not urban_eventTypeTypes:
         return
 
     for urban_eventTypeType in urban_eventTypeTypes:
-        to_explore = set([getInterface('', urban_eventTypeType)])
+        to_explore = set([getInterface("", urban_eventTypeType)])
 
         while to_explore:
             type_interface = to_explore.pop()
@@ -55,16 +66,16 @@ def setEventTypeType(urban_event, event):
                 for base_interface in type_interface.getBases():
                     to_explore.add(base_interface)
 
-    urban_event.reindexObject(['object_provides'])
+    urban_event.reindexObject(["object_provides"])
 
 
 def setCreationDate(urban_event, event):
     urban_event.setCreationDate(urban_event.getEventDate())
-    urban_event.reindexObject(['created'])
+    urban_event.reindexObject(["created"])
 
 
 def generateSingletonDocument(urban_event, event):
-    urban_tool = api.portal.get_tool('portal_urban')
+    urban_tool = api.portal.get_tool("portal_urban")
     if not urban_tool.getGenerateSingletonDocuments():
         return
 
@@ -72,8 +83,10 @@ def generateSingletonDocument(urban_event, event):
     if len(templates) == 1:
         pod_template = templates[0]
         if pod_template.can_be_generated(urban_event):
-            output_format = 'odt'
-            generation_view = urban_event.restrictedTraverse('urban-document-generation')
+            output_format = "odt"
+            generation_view = urban_event.restrictedTraverse(
+                "urban-document-generation"
+            )
             generation_view(pod_template.UID(), output_format)
 
 
@@ -81,32 +94,48 @@ def updateKeyEvent(urban_event, event):
     event_type = urban_event.getUrbaneventtypes()
     if not event_type or event_type.getIsKeyEvent():
         licence = urban_event.aq_inner.aq_parent
-        licence.reindexObject(['last_key_event'])
+        licence.reindexObject(["last_key_event"])
 
 
 def updateDecisionDate(urban_event, event):
     if ITheLicenceEvent.providedBy(urban_event):
         licence = urban_event.aq_inner.aq_parent
-        licence.reindexObject(['getDecisionDate'])
+        licence.reindexObject(["getDecisionDate"])
 
 
+def updateValidityDate(urban_event, event):
+    licence = urban_event.aq_inner.aq_parent
+    licence.reindexObject(["getValidityDate"])
+
+
+@cache(
+    get_key=lambda method, urban_event, event: urban_event.UID(),
+    get_request="urban_event.REQUEST",
+)
 def notifyLicence(urban_event, event):
     """
     Notify the licence of changes so schedule events triggers.
     """
-    if not urban_event.checkCreationFlag():
-        licence = urban_event.aq_parent
-        notify(ObjectModifiedEvent(licence))
+    if (
+        "portal_factory" in urban_event.REQUEST.getURL()
+        or urban_event.checkCreationFlag()
+    ):
+        return
+    licence = urban_event.aq_parent
+    notify(ObjectModifiedEvent(licence))
 
 
 def updateTaskIndexes(task_container, event):
+    if "portal_factory" in task_container.REQUEST.getURL():
+        return
+
     task_configs = get_task_configs(task_container)
 
     if not task_configs:
         return
 
-    with api.env.adopt_roles(['Manager']):
+    with api.env.adopt_roles(["Manager"]):
         for config in task_configs:
             tasks = config.get_task_instances(task_container)
             for task in tasks:
-                task.reindexObject(idxs=['commentators'])
+                task.reindexObject(idxs=["commentators"])

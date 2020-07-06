@@ -248,6 +248,9 @@ msgstr "Activé"
 msgid "ended"
 msgstr "Terminé"
 
+msgid "frozen_suspension"
+msgstr "Gelé (délais suspendus)"
+
 msgid "genericlicence_investigationstart_valdiation_error"
 msgstr "Un événement de type 'Enquête publique' est lié à cette enquête, vous devez donc définir une date valide.  Si vous souhaitez supprimer cette enquête, supprimez d'abord l'événement lié.  <a href='${linkedurbaneventurl}'>Cliquez ici pour y accéder</a>"
 
@@ -331,18 +334,24 @@ msgstr "Refusé"
 msgid "reopen"
 msgstr "Réouvrir"
 
+msgid "resume_thaw"
+msgstr "Reprendre"
+
 # transitions
 msgid "retire"
-msgstr "Retirer"
+msgstr "Abandonner"
 
 msgid "retired"
-msgstr "Retiré"
+msgstr "Abandonné"
 
 msgid "rubrics_history"
 msgstr "Registre des modifications pour les rubriques"
 
 msgid "send_opinion"
 msgstr "Envoyer l'avis"
+
+msgid "suspend_freeze"
+msgstr "Suspendre (gel délais)"
 
 msgid "update_additionalLegalConditions"
 msgstr "Mise à jour des Registre des conditions intégrales et sectorielles supplémentaires"

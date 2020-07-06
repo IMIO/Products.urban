@@ -10,5 +10,5 @@ class AttachmentView(BrowserView):
 
     def __call__(self):
         return self.request.response.redirect(
-            self.context.aq_parent.absolute_url() + '#fieldsetlegend-attachments'
+            self.context.aq_parent.absolute_url() + "#fieldsetlegend-attachments"
         )

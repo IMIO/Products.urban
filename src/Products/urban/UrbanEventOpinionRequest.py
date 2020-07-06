@@ -11,7 +11,7 @@
 
 __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEULETTE
 <stephan.geulette@uvcw.be>, Jean-Michel Abe <jm.abe@la-bruyere.be>"""
-__docformat__ = 'plaintext'
+__docformat__ = "plaintext"
 
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
@@ -25,44 +25,45 @@ from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
 from plone import api
+
 ##/code-section module-header
 
-schema = Schema((
-
-    ReferenceField(
-        name='linkedInquiry',
-        widget=ReferenceBrowserWidget(
-            visible={'edit': 'invisible', 'view': 'invisible'},
-            label='Linkedinquiry',
-            label_msgid='urban_label_linkedInquiry',
-            i18n_domain='urban',
+schema = Schema(
+    (
+        ReferenceField(
+            name="linkedInquiry",
+            widget=ReferenceBrowserWidget(
+                visible={"edit": "invisible", "view": "invisible"},
+                label="Linkedinquiry",
+                label_msgid="urban_label_linkedInquiry",
+                i18n_domain="urban",
+            ),
+            multiValued=0,
+            relationship="linkedInquiry",
+            allowed_types=("Inquiry", "BuildLicence"),
+            write_permission="Manage portal",
         ),
-        multiValued=0,
-        relationship='linkedInquiry',
-        allowed_types=('Inquiry', 'BuildLicence'),
-        write_permission="Manage portal",
     ),
-
-),
 )
 
 ##code-section after-local-schema #fill in your manual code here
 ##/code-section after-local-schema
 
-UrbanEventOpinionRequest_schema = BaseSchema.copy() + \
-    getattr(UrbanEvent, 'schema', Schema(())).copy() + \
-    schema.copy()
+UrbanEventOpinionRequest_schema = (
+    BaseSchema.copy() + getattr(UrbanEvent, "schema", Schema(())).copy() + schema.copy()
+)
 
 ##code-section after-schema #fill in your manual code here
 ##/code-section after-schema
 
+
 class UrbanEventOpinionRequest(UrbanEvent, BrowserDefaultMixin):
-    """
-    """
+    """ """
+
     security = ClassSecurityInfo()
     implements(interfaces.IUrbanEventOpinionRequest)
 
-    meta_type = 'UrbanEventOpinionRequest'
+    meta_type = "UrbanEventOpinionRequest"
     _at_rename_after_creation = True
 
     schema = UrbanEventOpinionRequest_schema
@@ -74,11 +75,11 @@ class UrbanEventOpinionRequest(UrbanEvent, BrowserDefaultMixin):
 
     # Manually created methods
 
-    security.declarePublic('getTemplates')
+    security.declarePublic("getTemplates")
 
     def getTemplates(self):
         """
-          Returns contained templates (File)
+        Returns contained templates (File)
         """
         if not self.getUrbaneventtypes():
             return []
@@ -87,25 +88,28 @@ class UrbanEventOpinionRequest(UrbanEvent, BrowserDefaultMixin):
             return custom_templates
 
         licence_config = self.aq_parent.getUrbanConfig()
-        opinionrequest_config = getattr(licence_config.urbaneventtypes, "config-opinion-request")
+        opinionrequest_config = getattr(
+            licence_config.urbaneventtypes, "config-opinion-request"
+        )
         return opinionrequest_config.getTemplates()
 
-    security.declarePublic('getLinkedOrganisationTerm')
+    security.declarePublic("getLinkedOrganisationTerm")
+
     def getLinkedOrganisationTerm(self):
         """
-          Returns of the term that is linked to the linked UrbanEventType
+        Returns of the term that is linked to the linked UrbanEventType
         """
         return self.getUrbaneventtypes()
 
-    security.declarePublic('getLinkedOrganisationTermId')
+    security.declarePublic("getLinkedOrganisationTermId")
+
     def getLinkedOrganisationTermId(self):
         """
-          Returns the id of the term that is linked to the linked UrbanEventType
+        Returns the id of the term that is linked to the linked UrbanEventType
         """
         event_type = self.getUrbaneventtypes()
         if event_type:
             return event_type.getId()
-
 
 
 registerType(UrbanEventOpinionRequest, PROJECTNAME)
@@ -113,4 +117,3 @@ registerType(UrbanEventOpinionRequest, PROJECTNAME)
 
 ##code-section module-footer #fill in your manual code here
 ##/code-section module-footer
-

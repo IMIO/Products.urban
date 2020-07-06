@@ -1,9 +1,316 @@
-:orphan:
+Changelog
+=========
 
-Changes
-=======
-2.5 (unreleased)
-----------------
+.. You should *NOT* be adding new change log entries to this file.
+   You should create a file in the news directory instead.
+   For helpful instructions, please see:
+   https://github.com/plone/plone.releaser/blob/master/ADD-A-NEWS-ITEM.rst
+
+.. towncrier release notes start
+
+2.5.0.dev17 (2025-07-01)
+------------------------
+
+New features:
+
+
+- Give opinion editor roles on road decree's bound licence
+  [daggelpop] (SUP-29258)
+- Add way to easily hide licence type
+  [jchandelle] (SUP-33793)
+- Add centrality to every licence & make it a multiselect
+  [daggelpop]
+  Move centrality in first position in the fieldset
+  [daggelpop] (URB-3017)
+- Add bound licences field to patrimony certificates
+  [daggelpop] (URB-3046)
+- Add 3 surface fields to commercial licence
+  [daggelpop] (URB-3117)
+
+
+Bug fixes:
+
+
+- Fix history parcel view when missing capakey
+  [jchandelle] (SUP-36370)
+- Fix encoding in mail send notification
+  [jchandelle] (SUP-43917)
+
+
+2.5.0.dev16 (2025-06-05)
+------------------------
+
+New features:
+
+
+- Change limit year of date widget to current year + 25 (liege)
+  [jchandelle] (URB-3153)
+- Add stringinterp to get foldermanager email
+  [jchandelle] (URB-3283)
+
+
+Bug fixes:
+
+
+- Migrate patrimony certificates to their correct object class (instead of misc demand)
+  [daggelpop] (URB-3121)
+- Fixed `get_ws_meetingitem_infos` and `_get_wspm_text_field`.
+  [aduchene] (URB-3211)
+- Add missing method for schedule calculation
+  [daggelpop] (URBBDC-3192)
+
+
+2.5.0.dev15 (2025-02-14)
+------------------------
+
+Bug fixes:
+
+
+- Fix sort transition function logic
+  [jchandelle] (SUP-42697)
+
+
+2.5.0.dev14 (2025-02-13)
+------------------------
+
+New features:
+
+
+- Add external method to delete duplicate task
+  [jchandelle] (SUP-42085)
+
+
+2.5.0.dev13 (2025-02-07)
+------------------------
+
+New features:
+
+
+- Modify obsolete state display order
+  [jchandelle] (SUP-36697)
+
+
+Bug fixes:
+
+
+- Fix sending zem document by mail
+  [jchandelle] (SUP-40979)
+- Add missing translation in schedule config
+  [WBoudabous] (URB-3277)
+
+
+2.5.0.dev12 (2025-01-16)
+------------------------
+
+New features:
+
+
+- Add interval commit to update_licences_open_tasks cron
+  [jchandelle] (SUP-41904)
+- Add action for sending mail from event context with document in attachement
+  [jchandelle] (URB-3020)
+- Add a link field on CODT build licences
+  [mpeeters, daggelpop] (URB-3063)
+
+
+Bug fixes:
+
+
+- Allow corporate tenant in inspections
+  [daggelpop] (SUP-33621)
+
+
+2.5.0.dev11 (2024-10-16)
+------------------------
+
+New features:
+
+
+- Use imio.pm.wsclient 2.x version (REST).
+  [aduchene]
+  Add `get_last_plonemeeting_date`, `get_last_college_date` and `get_last_college_date` to CODT_BaseBuildLicence.
+  [aduchene] (URB-3148)
+
+
+2.5.0.dev10 (2024-10-01)
+------------------------
+
+New features:
+
+
+- Add validity date filter and index
+  [jchandelle] (URB-3090)
+- Add field `D.67 CoPat` to patrimony fieldset
+  daggelpop (URB-3167)
+
+
+2.5.0.dev9 (2024-06-27)
+-----------------------
+
+New features:
+
+
+- Add recipient import to inquiries
+  [daggelpop] (SUP-36417)
+
+
+Internal:
+
+
+- Test checking opnion FD delay
+  [jchandelle]
+  Test completion due dates after amending plans
+  [daggelpop] (URB-3005)
+
+
+2.5.0.dev8 (2024-04-21)
+-----------------------
+
+Bug fixes:
+
+
+- Avoid to display disabled vocabulary entries with no start or end validity date
+  [mpeeters] (SUP-36742)
+- Fix logic on some methods to exclude invalid vocabulary entries
+  [mpeeters] (URB-3002)
+
+
+2.5.0.dev7 (2024-04-07)
+-----------------------
+
+Bug fixes:
+
+
+- Avoid an error if an advice was not defined
+  [mpeeters] (SUP-36385)
+
+
+2.5.0.dev6 (2024-04-01)
+-----------------------
+
+Bug fixes:
+
+
+- Move method methods to be available for every events.
+  Change `is_CODT2024` to be true if there is no deposit but current date is greater than 2024-03-31.
+  [mpeeters] (URB-3008)
+
+
+Internal:
+
+
+- Update setup for tests
+  [mpeeters]
+  Test checking completion task
+  [daggelpop] (URB-3005)
+
+
+2.5.0.dev5 (2024-03-20)
+-----------------------
+
+New features:
+
+
+- Make caduc and abandoned workflow state grey
+  [jchandelle] (URB-3007)
+- Add `is_not_CODT2024` method that can be used in templates
+  [mpeeters] (URB-3008)
+
+
+Bug fixes:
+
+
+- Fix update of vocabularies
+  [mpeeters] (URB-3002)
+- Invert Refer FD delay 30 <-> 40 days
+  [mpeeters] (URB-3008)
+
+
+2.5.0.dev4 (2024-03-18)
+-----------------------
+
+New features:
+
+
+- Add `getCompletenessDelay`, `getReferFDDelay` and `getFDAdviceDelay` methods that can be used in templates
+  [mpeeters] (URB-3008)
+
+
+2.5.0.dev3 (2024-03-16)
+-----------------------
+
+New features:
+
+
+- Add `is_CODT2024` and `getProrogationDelay` methods that can be used in template
+  [mpeeters] (URB-2956)
+- Adapt vocabulary logic to include start and end validity dates
+  [mpeeters] (URB-3002)
+- Adapt vocabulary terms for 2024 CODT reform
+  [daggelpop] (URB-3003)
+- Add `urban.schedule` dependency
+  [mpeeters] (URB-3005)
+- Add event fields `videoConferenceDate`, `validityEndDate` & marker `IIntentionToSubmitAmendedPlans`
+  [daggelpop] (URB-3006)
+
+
+Bug fixes:
+
+
+- Fix delay vocabularies value order
+  [mpeeters] (URB-3003)
+- Fix an issue with zope users on urban homepage
+  [mpeeters] (URB-3004)
+- Remove broken Liege browser layer
+  [daggelpop] (URB-3006)
+
+
+Internal:
+
+
+- Provided prorogation field for environment license
+  [fngaha] (URB-2924)
+- Move some schedule logic into `urban.schedule`
+  [mpeeters] (URB-3005)
+
+
+2.5.0.dev2 (2024-01-11)
+-----------------------
+
+Bug fixes:
+
+
+- Validate CSV before claimant import
+  [daggelpop] (SUP-33538)
+- Fix a silent error with portlet on overlays
+  [mpeeters] (URB-2926)
+
+
+2.5.0.dev1 (2023-11-21)
+-----------------------
+
+Bug fixes:
+
+
+- Restore commented out URBAN_TYPES elements in config (most likely an error)
+  [daggelpop] (SUP-28903)
+- Fix url for exploitation conditions, `getRaw` is no longer accessible through urls
+  [mpeeters] (SUP-33698)
+
+
+Internal:
+
+
+- Reduce logging for sql queries
+  [mpeeters] (URB-2926)
+
+
+2.5.0.dev0 (2023-11-09)
+-----------------------
+
+- Fix extra profile setup causing too big transaction
+  Error was: "TypeError: Can't pickle objects in acquisition wrappers"
+  [laulaz]
 
 - provides organizations to consult based on external directions
   [fngaha]

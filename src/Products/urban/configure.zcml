@@ -11,6 +11,7 @@
   <include package="collective.documentgenerator"/>
   <include package="collective.externaleditor"/>
   <include package="collective.faceted.task"/>
+  <include package="collective.fontawesome"/>
   <include package="collective.iconifieddocumentactions"/>
   <include package="collective.js.jqueryui"/>
   <include package="collective.z3cform.datagridfield"/>
@@ -39,6 +40,9 @@
   <include package="plone.z3ctable"/>
   <include package="plonetheme.imioapps"/>
   <include package="urban.vocabulary"/>
+  <include package="urban.schedule"/>
+  <include package="urban.events"/>
+  <include package="urban.restapi"/>
 
   <include file="grok.zcml" />
   <include file="permissions.zcml" />
@@ -58,6 +62,8 @@
   <include package=".workflows" />
   <include package=".widget" />
   <include package=".history" />
+  <include package=".contentrules" />
+  <include package=".send_mail_action" />
 
   <!-- needed to migrate UrbanDoc type, to remove in next release -->
   <adapter name="plone.app.blob.subtypes.file"
@@ -173,6 +179,10 @@
     type=".interfaces.IEventTypeType"/>
 
   <interface
+    interface=".interfaces.ITechnicalAnalysis"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
     interface=".interfaces.ILicenceNotificationEvent"
     type=".interfaces.IEventTypeType"/>
 
@@ -245,6 +255,10 @@
     type=".interfaces.IEventTypeType"/>
 
   <interface
+    interface=".interfaces.IUrbanEventFollowUp"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
     interface=".interfaces.IUrbanEventFollowUpWithDelay"
     type=".interfaces.IEventTypeType"/>
 
@@ -266,6 +280,14 @@
 
   <interface
     interface=".interfaces.IProprietaryChangeEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.ISuspensionEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.IIntentionToSubmitAmendedPlans"
     type=".interfaces.IEventTypeType"/>
 
   <adapter
@@ -291,5 +313,12 @@
 
   <!-- ##code-section configure.zcml.core -->
   <!-- ##/code-section configure.zcml.core -->
+
+  <!-- subscribers -->
+  <subscriber
+    for=".interfaces.IUrbanVocabularyTerm
+           Products.DCWorkflow.interfaces.IAfterTransitionEvent"
+    handler=".subscribers.after_term_deactivate"
+    />
 
 </configure>
