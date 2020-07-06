@@ -32,6 +32,9 @@ Changes
 - Allow shortcut transition to 'inacceptable' state for CODT licence wofklow. [SUP-6385]
   [sdelcourt]
 
+- Set default foldermanagers view to sort the folder with z3c.table on title [URB-1151]
+  [jjaumotte]
+
 - Add some applicants infos on urban_description schemata. [URB-1171]
   [jjaumotte]
 

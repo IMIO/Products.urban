@@ -356,6 +356,14 @@
   />
 
   <browser:page
+     for="Products.ATContentTypes.interfaces.IATFolder"
+     name="sorted_title_folderview"
+     class=".urban_configfolderview.SortedTitleFolderView"
+     template="templates/sortedtitleview.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
      for="Products.ATContentTypes.interfaces.IATFile"
      name="attachment_view"
      class=".attachment_view.AttachmentView"
