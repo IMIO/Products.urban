@@ -424,6 +424,6 @@
      factory=".tablevalue.ValuesForInspectionReportsListing"
      provides="z3c.table.interfaces.IValues"
   />
-  <!-- table values adapters end -->
 
+  <!-- table values adapters end -->
 </configure>
