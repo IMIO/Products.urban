@@ -1222,6 +1222,9 @@ def addDefaultObjects(context):
             obj.update({'manageableLicences': URBAN_TYPES})
         createFolderDefaultValues(fmFolder, objects_list)
 
+    # set layout to sorted_title_view with z3ctable
+    fmFolder.setLayout('sorted_title_folderview')
+
     #create some streets using the Extensions.imports script
     if not tool.streets.objectIds('City'):
         from Products.urban.Extensions.imports import import_streets_fromfile, import_localities_fromfile
