@@ -35,6 +35,13 @@ Changes
 - Set default foldermanagers view to sort the folder with z3c.table on title [URB-1151]
   [jjaumotte]
 
+- Add some applicants infos on urban_description schemata. [URB-1171]
+  [jjaumotte]
+
+- Improve default reference expression for licence references. [URB-2046]
+  [sdelcourt]
+
+
 2.4 (2019-03-25)
 ----------------
 - add tax field in GenericLicence
