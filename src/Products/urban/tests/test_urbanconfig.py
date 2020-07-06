@@ -58,4 +58,4 @@ class TestUrbanConfig(BrowserTestCase):
         foldermanagers layout should be sorted_title_folderview
         """
         fm_folder = self.portal.portal_urban.foldermanagers
-        self.assertEqual()
+        self.assertEqual(fm_folder.getLayout(), 'sorted_title_folderview')
