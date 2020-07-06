@@ -8,6 +8,7 @@ from Products.urban.browser.table.urbantable import GeometriciansTable, SortedTi
 from Products.urban.browser.table.urbantable import NotariesTable
 from Products.urban.browser.table.urbantable import ArchitectsTable
 from Products.urban.browser.table.urbantable import ParcellingsTable
+from Products.urban.browser.table.urbantable import UrbanTable
 
 
 class UrbanConfigFolderView(BrowserView):
@@ -96,7 +97,7 @@ class SortedTitleFolderView(BrowserView):
       This manage the sorted title folder view
     """
     def renderListing(self):
-        return self.renderObjectListing(SortedTitleTable)
+        return self.renderObjectListing(UrbanTable)
 
     def renderObjectListing(self, table):
         if not self.context.objectIds():
