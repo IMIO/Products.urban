@@ -106,11 +106,15 @@ class TestUrbanConfigFunctional(BrowserTestCase):
         self.assertLess(foldermanager1.Title(), foldermanager3.Title())
 
         # change the order by modify name1, the auto-update title begin is now modified too
-        fm_folder.foldermanager1.name1 = 'Zwymckow'
-        fm_folder.foldermanager2.name1 = 'Mertens'
-        fm_folder.foldermanager3.name1 = 'Aerts'
+        fm_folder.foldermanager1.setName1('Zwymckow')
+        fm_folder.foldermanager2.setName1('Mertens')
+        fm_folder.foldermanager3.setName1('Aerts')
+        transaction.commit()
+
+        # update page with new titles
+        self.browser.open(fm_folder.absolute_url())
 
         # check with regex the new order in html page
-        regex = "{}.*{}.*{}".format(foldermanager3.Title(), foldermanager2.Title(), foldermanager1.Title())
-        regex = regex.replace('(', '\(').replace(')', '\)')  # escape parenthesis
-        self.assertTrue(re.search(regex, self.browser.contents, flags=re.DOTALL))
+        regex2 = "{}.*{}.*{}".format(foldermanager3.Title(), foldermanager2.Title(), foldermanager1.Title())
+        regex2 = regex2.replace('(', '\(').replace(')', '\)')  # escape parenthesis
+        self.assertTrue(re.search(regex2, self.browser.contents, flags=re.DOTALL))
