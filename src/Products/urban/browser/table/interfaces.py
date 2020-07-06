@@ -231,8 +231,3 @@ class IInspectionReportsTable(Interface):
     """
 
 
-class ISortedTitleTable(IUrbanTable):
-    """
-    Marker interface for a table displaying sorted objects title.
-    """
-
