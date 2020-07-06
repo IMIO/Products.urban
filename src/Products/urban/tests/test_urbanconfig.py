@@ -52,3 +52,10 @@ class TestUrbanConfig(BrowserTestCase):
          Tests parcellings view is not broken for whatsoever reason
         """
         self.browser.open(self.portal.urban.parcellings.absolute_url())
+
+    def test_foldermanagers_view_layout(self):
+        """
+        foldermanagers layout should be sorted_title_folderview
+        """
+        fm_folder = self.portal.portal_urban.foldermanagers
+        self.assertEqual()
