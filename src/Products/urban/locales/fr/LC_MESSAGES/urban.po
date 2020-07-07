@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2020-06-22 14:28+0000\n"
+"POT-Creation-Date: 2020-07-07 15:02+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -16,11 +16,11 @@ msgstr ""
 "X-is-fallback-for: fr-fr fr-be fr-ca\n"
 
 #. Default: "urban"
-#: ../setuphandlers.py:306
+#: ../setuphandlers.py:307
 msgid "%s_folder_title"
 msgstr ""
 
-#: ../setuphandlers.py:252
+#: ../setuphandlers.py:253
 msgid "%s_urbanconfig_title"
 msgstr ""
 
@@ -98,7 +98,7 @@ msgid "Add this parcel"
 msgstr "Ajouter cette parcelle"
 
 #. Default: "urban"
-#: ../setuphandlers.py:979
+#: ../setuphandlers.py:983
 msgid "All"
 msgstr "Tous"
 
@@ -571,6 +571,10 @@ msgstr ""
 msgid "MiscDemand"
 msgstr "Demandes diverses"
 
+#: ../browser/urban_configfolderview.py:26
+msgid "Name"
+msgstr "Nom"
+
 #: ../profiles.zcml:50
 msgid "New install profile for for urban."
 msgstr ""
@@ -668,7 +672,7 @@ msgid "RoadDecree"
 msgstr "Décret Voirie"
 
 #. Default: "imio.schedule"
-#: ../setuphandlers.py:334
+#: ../setuphandlers.py:335
 msgid "ScheduleConfig"
 msgstr "Configuration d'échéancier"
 
@@ -804,7 +808,7 @@ msgid "Update"
 msgstr "Mettre à jour"
 
 #. Default: "urban"
-#: ../setuphandlers.py:854
+#: ../setuphandlers.py:858
 msgid "Urban"
 msgstr ""
 
@@ -894,34 +898,34 @@ msgstr "Ajouter une adresse"
 msgid "add_a_claimant"
 msgstr "Ajouter un réclamant"
 
-#: ../browser/licence/templates/licencemacros.pt:131
+#: ../browser/licence/templates/licencemacros.pt:134
 msgid "add_a_corporation"
 msgstr "Ajouter un demandeur (p. morale)"
 
-#: ../browser/licence/templates/licencemacros.pt:167
+#: ../browser/licence/templates/licencemacros.pt:170
 msgid "add_a_corporation_plaintiff"
 msgstr "Ajouter un plaignant (p.morale)"
 
-#: ../browser/licence/templates/licencemacros.pt:86
+#: ../browser/licence/templates/licencemacros.pt:89
 msgid "add_a_corporationproprietary"
 msgstr "Ajouter un propriétaire (p. morale)"
 
 msgid "add_a_lot"
 msgstr "Ajouter un lot"
 
-#: ../browser/licence/templates/licencemacros.pt:123
+#: ../browser/licence/templates/licencemacros.pt:126
 msgid "add_a_physical_applicant"
 msgstr "Ajouter un demandeur"
 
-#: ../browser/licence/templates/licencemacros.pt:159
+#: ../browser/licence/templates/licencemacros.pt:162
 msgid "add_a_physical_plaintiff"
 msgstr "Ajouter un plaignant"
 
-#: ../browser/licence/templates/licencemacros.pt:78
+#: ../browser/licence/templates/licencemacros.pt:81
 msgid "add_a_proprietary"
 msgstr "Ajouter un propriétaire"
 
-#: ../browser/licence/templates/licencemacros.pt:104
+#: ../browser/licence/templates/licencemacros.pt:107
 msgid "add_a_tenant"
 msgstr "Ajouter un locataire"
 
@@ -988,12 +992,12 @@ msgstr "Articles des annonces de projet"
 
 # buildlicence_view
 #. Default: "Applicant(s)"
-#: ../browser/licence/templates/licencemacros.pt:110
+#: ../browser/licence/templates/licencemacros.pt:113
 msgid "applicants"
 msgstr "Demandeur(s)"
 
 #. Default: "Applicant(s) history"
-#: ../browser/licence/templates/licencemacros.pt:138
+#: ../browser/licence/templates/licencemacros.pt:141
 msgid "applicants_history"
 msgstr "Demandeurs inactifs"
 
@@ -1006,7 +1010,7 @@ msgid "architect_residing"
 msgstr "${name}, dont les bureaux se situent ${address}"
 
 #. Default: "urban"
-#: ../setuphandlers.py:894
+#: ../setuphandlers.py:898
 msgid "architects_folder_title"
 msgstr "Architectes"
 
@@ -1029,7 +1033,7 @@ msgid "basement_folder_title"
 msgstr "Sous-sol"
 
 #. Default: "Bound licence applicant(s)"
-#: ../browser/licence/templates/licencemacros.pt:174
+#: ../browser/licence/templates/licencemacros.pt:177
 msgid "bound_licence_applicants"
 msgstr "Demandeur(s) du permis"
 
@@ -1214,7 +1218,7 @@ msgid "creation date"
 msgstr "Date de création"
 
 #. Default: "urban"
-#: ../setuphandlers.py:754
+#: ../setuphandlers.py:758
 msgid "dashboardtemplates_folder_title"
 msgstr "Modèles tableaux de bord"
 
@@ -1344,7 +1348,7 @@ msgid "envclasstwos"
 msgstr "Permis d'environnement classe 2"
 
 #. Default: "urban"
-#: ../setuphandlers.py:795
+#: ../setuphandlers.py:799
 msgid "environmenttemplates_folder_title"
 msgstr "modèles des procédures d'environnement"
 
@@ -1612,19 +1616,19 @@ msgstr "${cityName}, le ${formattedDate}"
 
 # this is an HTML content for the front-page
 #. Default: "urban"
-#: ../setuphandlers.py:826
+#: ../setuphandlers.py:830
 msgid "front_page_descr"
 msgstr "Bienvenue sur le site vous permettant d'utiliser la gestion des permis d'urbanisme"
 
 # this is an HTML content for the front-page
 #. Default: "urban"
-#: ../setuphandlers.py:827
+#: ../setuphandlers.py:831
 msgid "front_page_text"
 msgstr "<p>L'application intègre la gestion des permis d'urbanisme, d'urbanisation, des déclarations, divisions notariales, CU1, CU2, lettres d'informations notariales, rendez-vous, avant-projets et déclarations environnementales :</p><ul><li>gestion de la demande</li><li>gestion des demandeurs, architectes, agents traitants, ...</li><li>production des documents</li><li>workflow de suivi de la demande</li><li>cartographie avec calcul du rayon de 50m, visualisation des parcelles, ...</li><li>échéancier</li><li>...</li></ul><p><a href='urban'>Cliquez ici pour accéder à l'application</a></p><p class='discreet'>Vous devez disposer d'un nom d'utilisateur et d'un mot de passe pour accéder à l'application</p>"
 
 # title of the front-page
 #. Default: "urban"
-#: ../setuphandlers.py:825
+#: ../setuphandlers.py:829
 msgid "front_page_title"
 msgstr "Gestion de l'Urbanisme"
 
@@ -1651,20 +1655,19 @@ msgid "generate_a_linked_doc"
 msgstr "Générer un document lié au dossier"
 
 #. Default: "urban"
-#: ../setuphandlers.py:908
+#: ../setuphandlers.py:912
 msgid "geometricians_folder_title"
 msgstr "Géomètres"
 
 #. Default: "Global templates"
 #: ../browser/templates/templatessummary.pt:19
-#: ../setuphandlers.py:766
+#: ../setuphandlers.py:770
 msgid "globaltemplates_folder_title"
 msgstr "Modèles généraux"
 
 #. Default: "Go back"
 #: ../browser/templates/contactview.pt:18
 #: ../browser/templates/globalmacros.pt:5
-#: ../browser/templates/portionoutview.pt:18
 msgid "go_back"
 msgstr "Retour"
 
@@ -2070,7 +2073,7 @@ msgid "not_permitted_to_add_urbanevent"
 msgstr "Vous ne pouvez pas générer de documents"
 
 #. Default: "urban"
-#: ../setuphandlers.py:922
+#: ../setuphandlers.py:926
 msgid "notaries_folder_title"
 msgstr "Notaires"
 
@@ -2142,7 +2145,7 @@ msgid "parcelLinkedLicences"
 msgstr "Dossier(s) lié(s)"
 
 #. Default: "urban"
-#: ../setuphandlers.py:936
+#: ../setuphandlers.py:940
 msgid "parcellings_folder_title"
 msgstr "Lotissements"
 
@@ -2241,7 +2244,7 @@ msgid "pipelines_folder_title"
 msgstr "Canalisations"
 
 #. Default: "Plaintiff(s)"
-#: ../browser/licence/templates/licencemacros.pt:146
+#: ../browser/licence/templates/licencemacros.pt:149
 msgid "plaintiffs"
 msgstr "Plaignant(s)"
 
@@ -2249,11 +2252,6 @@ msgstr "Plaignant(s)"
 #: ../browser/templates/portlet_urbanconfig.pt:16
 msgid "portal_urban"
 msgstr "Configuration de 'urban'"
-
-#. Default: "Portion out details"
-#: ../browser/templates/portionoutview.pt:23
-msgid "portionout_details"
-msgstr "Détails de la référence cadastrale"
 
 msgid "preliminarynotice_urbanconfig_title"
 msgstr "Paramètres des avis préalables"
@@ -2268,7 +2266,7 @@ msgid "projectmeeting_urbanconfig_title"
 msgstr "Paramètres des réunions de projet"
 
 #. Default: "Proprietary(ies)"
-#: ../browser/licence/templates/licencemacros.pt:63
+#: ../browser/licence/templates/licencemacros.pt:66
 msgid "proprietaries"
 msgstr "Propriétaire(s)"
 
@@ -2468,7 +2466,7 @@ msgid "templates_summary_title"
 msgstr "Liste des modèles définis dans la configuration"
 
 #. Default: "Tenant(s)"
-#: ../browser/licence/templates/licencemacros.pt:93
+#: ../browser/licence/templates/licencemacros.pt:96
 msgid "tenants"
 msgstr "Locataires"
 
@@ -2513,7 +2511,7 @@ msgstr "Si l'interpréteur Python qui tourne Zope et Plone ne dispose pas de la 
 
 #: ../profiles.zcml:25
 #: ../profiles/default/actions.xml
-#: ../setuphandlers.py:206
+#: ../setuphandlers.py:207
 msgid "urban"
 msgstr "Urbanisme"
 
@@ -3500,7 +3498,7 @@ msgstr "Catégorie du type d'événement"
 msgid "urban_label_exemptFDArticle"
 msgstr "Article 107"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:596
+#: ../content/licence/CODT_BaseBuildLicence.py:599
 msgid "urban_label_exemptFDArticleCODT"
 msgstr "Article D IV.15"
 
@@ -3668,7 +3666,7 @@ msgid "urban_label_generateSingletonDocuments"
 msgstr "Générer directement les documents uniques"
 
 #. Default: "Geometrician(s)"
-#: ../browser/licence/templates/licencemacros.pt:28
+#: ../browser/licence/templates/licencemacros.pt:29
 #: ../content/licence/CODT_ParcelOutLicence.py:56
 #: ../content/licence/CODT_UrbanCertificateTwo.py:50
 msgid "urban_label_geometricians"
@@ -3734,7 +3732,7 @@ msgstr "Étude d'incidences?"
 msgid "urban_label_implantation"
 msgstr "Implantation (art. 137)"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:597
+#: ../content/licence/CODT_BaseBuildLicence.py:600
 msgid "urban_label_implantationCODT"
 msgstr "Implantation (art D.IV.72)"
 
@@ -3918,12 +3916,12 @@ msgstr "Établissement SEVESO"
 msgid "urban_label_isSupplementary"
 msgstr "Supplémentaire?"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:588
+#: ../content/licence/CODT_BaseBuildLicence.py:591
 #: ../content/licence/CODT_UrbanCertificateBase.py:76
 msgid "urban_label_is_in_parceloutlicences"
 msgstr "Le bien se situe dans un permis d'urbanisation"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:594
+#: ../content/licence/CODT_BaseBuildLicence.py:597
 #: ../content/licence/CODT_UrbanCertificateBase.py:82
 msgid "urban_label_is_in_sol"
 msgstr "Le bien se situe dans un SOL"
@@ -4188,7 +4186,7 @@ msgid "urban_label_noApplication"
 msgstr "Non applicable"
 
 #. Default: "Notary(ies)"
-#: ../browser/licence/templates/licencemacros.pt:45
+#: ../browser/licence/templates/licencemacros.pt:47
 #: ../content/licence/CODT_UrbanCertificateTwo.py:69
 #: ../content/licence/Division.py:45
 msgid "urban_label_notaryContact"
@@ -4295,12 +4293,12 @@ msgstr "Propriétaire"
 msgid "urban_label_parcellings"
 msgstr "Lotissement"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:587
+#: ../content/licence/CODT_BaseBuildLicence.py:590
 #: ../content/licence/CODT_UrbanCertificateBase.py:75
 msgid "urban_label_parceloutlicences"
 msgstr "Permis d'urbanisation"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:589
+#: ../content/licence/CODT_BaseBuildLicence.py:592
 #: ../content/licence/CODT_UrbanCertificateBase.py:77
 msgid "urban_label_parceloutlicences_details"
 msgstr "Détails sur le permis d'urbanisation"
@@ -4951,17 +4949,17 @@ msgstr "Petit patrimoine populaire"
 msgid "urban_label_society"
 msgstr "Société"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:591
+#: ../content/licence/CODT_BaseBuildLicence.py:594
 #: ../content/licence/CODT_UrbanCertificateBase.py:79
 msgid "urban_label_sol"
 msgstr "SOL"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:593
+#: ../content/licence/CODT_BaseBuildLicence.py:596
 #: ../content/licence/CODT_UrbanCertificateBase.py:81
 msgid "urban_label_solZone"
 msgstr "Zone de SOL"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:595
+#: ../content/licence/CODT_BaseBuildLicence.py:598
 #: ../content/licence/CODT_UrbanCertificateBase.py:83
 msgid "urban_label_sol_details"
 msgstr "Détails concernant le SOL"
@@ -5491,12 +5489,12 @@ msgid "urbancertificatetwos"
 msgstr "Certificats d'urbanisme 2"
 
 #. Default: "urban"
-#: ../setuphandlers.py:429
+#: ../setuphandlers.py:433
 msgid "urbaneventtypes_folder_title"
 msgstr "Types d'évènements"
 
 #. Default: "urban"
-#: ../setuphandlers.py:783
+#: ../setuphandlers.py:787
 msgid "urbantemplates_folder_title"
 msgstr "modèles des procédures d'urbanisme"
 
@@ -5538,7 +5536,7 @@ msgid "warning_add_an_applicant"
 msgstr "Veuillez renseigner le ou les demandeur(s)"
 
 #. Default: "You must encode plaintiff(s)"
-#: ../browser/licence/templates/licencemacros.pt:149
+#: ../browser/licence/templates/licencemacros.pt:152
 msgid "warning_add_an_plaintiff"
 msgstr ""
 
