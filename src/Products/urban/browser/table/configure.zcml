@@ -418,14 +418,6 @@
   <adapter
      for="zope.interface.Interface
           zope.publisher.interfaces.browser.IBrowserRequest
-          Products.urban.browser.table.interfaces.IFolderContentTable"
-     factory=".tablevalue.ValuesForFolderListing"
-     provides="z3c.table.interfaces.IValues"
-  />
-
-  <adapter
-     for="zope.interface.Interface
-          zope.publisher.interfaces.browser.IBrowserRequest
           Products.urban.browser.table.interfaces.IInspectionReportsTable"
      factory=".tablevalue.ValuesForInspectionReportsListing"
      provides="z3c.table.interfaces.IValues"
