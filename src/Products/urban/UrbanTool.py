@@ -376,25 +376,6 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         found = bool(len(catalog(UID=object_uid, path={'query': path})))
         return found
 
-    security.declarePublic('createPortionOut')
-    def createPortionOut(self, container, division, section='', radical='', bis='', exposant='', puissance='', partie='', outdated=False):
-        """
-           Create the PortionOut with given parameters...
-        """
-        if bis == '0':
-            bis = ''
-        if len(bis) == 1:
-            bis = '0' + bis
-        if puissance == '0':
-            puissance = ''
-        newParcelId = container.invokeFactory("PortionOut", id=self.generateUniqueId('PortionOut'), divisionCode=division,
-                                              division=division, section=section, radical=radical, bis=bis, exposant=exposant,
-                                              puissance=puissance, partie=partie, outdated=outdated)
-        newParcel = getattr(container, newParcelId)
-        newParcel._renameAfterCreation()
-        newParcel.at_post_create_script()
-        self.REQUEST.RESPONSE.redirect(container.absolute_url() + '/view')
-
     security.declarePublic('getParcelsFromTopic')
     def getParcelsFromTopic(self, topicName):
         """

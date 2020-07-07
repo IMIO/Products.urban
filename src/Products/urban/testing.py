@@ -48,7 +48,7 @@ class UrbanWithUsersLayer(IntegrationTesting):
             portal_urban = portal.portal_urban
             cache_view = portal_urban.unrestrictedTraverse('urban_vocabulary_cache')
             cache_view.reset_all_cache()
-            Products.urban.config.NIS = 92000  # mock NIS code
+            Products.urban.config.NIS = '92000'  # mock NIS code
             portal.setupCurrentSkin(portal.REQUEST)
             from Products.urban.setuphandlers import addTestUsers
             addTestUsers(portal)
@@ -68,6 +68,7 @@ class UrbanConfigLayer(UrbanWithUsersLayer):
     def setUp(self):
         with helpers.ploneSite() as portal:
             portal.setupCurrentSkin(portal.REQUEST)
+            Products.urban.config.NIS = '92000'  # mock NIS code
             helpers.applyProfile(portal, 'Products.urban:testsWithConfig')
 
 
@@ -85,6 +86,7 @@ class UrbanLicencesLayer(UrbanConfigLayer):
     def setUp(self):
         with helpers.ploneSite() as portal:
             portal.setupCurrentSkin(portal.REQUEST)
+            Products.urban.config.NIS = '92000'  # mock NIS code
             helpers.applyProfile(portal, 'Products.urban:testsWithLicences')
 
 
@@ -100,6 +102,7 @@ class UrbanImportsLayer(IntegrationTesting):
     def setUp(self):
         with helpers.ploneSite() as portal:
             portal.setupCurrentSkin(portal.REQUEST)
+            Products.urban.config.NIS = '92000'  # mock NIS code
             helpers.applyProfile(portal, 'Products.urban:tests-imports')
 
 
@@ -140,6 +143,7 @@ class UrbanConfigFunctionalLayer(UrbanWithUsersFunctionalLayer):
     def setUp(self):
         with helpers.ploneSite() as portal:
             portal.setupCurrentSkin(portal.REQUEST)
+            Products.urban.config.NIS = '92000'  # mock NIS code
             helpers.applyProfile(portal, 'Products.urban:testsWithConfig')
 
 
@@ -157,6 +161,7 @@ class UrbanLicencesFunctionalLayer(UrbanConfigFunctionalLayer):
     def setUp(self):
         with helpers.ploneSite() as portal:
             portal.setupCurrentSkin(portal.REQUEST)
+            Products.urban.config.NIS = '92000'  # mock NIS code
             helpers.applyProfile(portal, 'Products.urban:testsWithLicences')
 
 

@@ -154,7 +154,9 @@ def initialize(context):
     import ParcellingTerm
     import PcaTerm
     import PersonTitleTerm
+    # [DX] TO DELETE > 2.5 [DX]
     import PortionOut
+    # [DX] TO DELETE > 2.5 [DX]
     import Recipient
     import RecipientCadastre
     import SpecificFeatureTerm

@@ -238,10 +238,12 @@ class ParcelTitleDisplay(TitleDisplay):
 
     def render(self):
         parcel = self.obj
-        css_class_span = parcel.getCSSClass()
-        title = self.column.renderTitleLink(self.urbanlist_item)
-        title = '<span class="%s">%s</span>' % (css_class_span, title)
-        return title
+        link = '<a class="link-overlay" href="{url}/@@parcelview">{title}</a>'.format(
+            url=parcel.absolute_url(),
+            title=parcel.Title()
+        )
+        cell = '<span id="urban-parcel-display">{}</span>'.format(link)
+        return cell
 
 
 class EventTitleDisplay(TitleDisplay):
