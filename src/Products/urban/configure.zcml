@@ -23,6 +23,7 @@
   <include package="imio.pm.wsclient"/>
   <include package="imio.pm.locales"/>
   <include package="imio.schedule"/>
+  <include package="imio.urban.core"/>
   <include package="Products.Archetypes"/>
   <include package="Products.CMFPlacefulWorkflow"/>
   <include package="Products.cron4plone"/>

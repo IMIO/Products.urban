@@ -107,7 +107,7 @@
      for="zope.interface.Interface
           Products.urban.browser.table.interfaces.ITitleColumn
           Products.urban.browser.table.interfaces.IItemForUrbanTable
-          Products.urban.interfaces.IPortionOut"
+          imio.urban.core.contents.parcel.IParcel"
      factory=".column.ParcelTitleDisplay"
      provides="Products.urban.browser.table.interfaces.ITitleCell"
   />
@@ -349,6 +349,12 @@
 
   <adapter
      for="Products.Archetypes.interfaces.IBaseObject"
+     factory=".tablevalue.ObjectForUrbanTable"
+     provides="Products.urban.browser.table.interfaces.IItemForUrbanTable"
+  />
+
+  <adapter
+     for="plone.dexterity.interfaces.IDexterityContent"
      factory=".tablevalue.ObjectForUrbanTable"
      provides="Products.urban.browser.table.interfaces.IItemForUrbanTable"
   />

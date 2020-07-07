@@ -211,3 +211,35 @@ class DateIndexVocabulary(object):
 
 
 DateIndexVocabularyFactory = DateIndexVocabulary()
+
+
+class DivisionNamesVocabulary(object):
+    """
+    Vocabulary factory for division names.
+    """
+    name = 'name'
+
+    def __call__(self, context):
+        urban_tool = api.portal.get_tool('portal_urban')
+        divisions = urban_tool.getDivisionsRenaming()
+        vocabulary = SimpleVocabulary(
+            [SimpleTerm(
+                str(div['division']),
+                str(div['division']),
+                unicode(div[self.name].decode('utf-8')))
+                for div in divisions]
+        )
+        return vocabulary
+
+
+DivisionNamesVocabularyFactory = DivisionNamesVocabulary()
+
+
+class DivisionAlternativesNamesVocabulary(DivisionNamesVocabulary):
+    """
+    Vocabulary factory for alternative division names.
+    """
+    name = 'alternative_name'
+
+
+DivisionAlternativeNamesVocabularyFactory = DivisionAlternativesNamesVocabulary()

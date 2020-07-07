@@ -139,4 +139,12 @@
         handler=".migrate_to_250.migrate"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Migrate AT PortionOut to DX Parcel"
+        description="urban upgrade step"
+        source="1002"
+        destination="1003"
+        handler=".migrate_to_DX.migrate_PortionOut_to_DX"
+        profile="Products.urban:default" />
+
 </configure>

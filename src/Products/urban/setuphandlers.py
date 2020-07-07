@@ -1376,22 +1376,26 @@ def createLicence(site, licence_type, data):
     # call post script
     licence.at_post_create_script()
     # add a dummy portion out
-    division_code = division = ''
+    division = ''
     if services.cadastre.can_connect():
         session = services.cadastre.new_session()
-        division_code = division = str(session.get_all_divisions()[0][0])
+        division = str(session.get_all_divisions()[0][0])
         session.close()
-    portionout_data = {
-        'divisionCode': division_code, 'division': division, 'section': 'A', 'radical': '84',
+    parcel_data = {
+        'division': division, 'section': 'A', 'radical': '84',
         'exposant': 'C', 'partie': False
     }
-    if 'portionout_data' in data:
-        portionout_data = data['portionout_data']
-    portionout_id = licence.invokeFactory('PortionOut', id=site.generateUniqueId('parcelle'), **portionout_data)
-    portionout = getattr(licence, portionout_id)
-    #portionout._renameAfterCreation()
-    portionout.updateTitle()
-    portionout.reindexObject()
+    if 'parcel_data' in data:
+        parcel_data = data['parcel_data']
+    parcel = api.content.create(
+        container=licence,
+        type='Parcel',
+        id=site.generateUniqueId('parcelle'),
+        **parcel_data
+
+    )
+    parcel.updateTitle()
+    parcel.reindexObject()
     licence.reindexObject(idxs=['parcelInfosIndex'])
     #generate all the urban events
     logger.info('   test %s --> create all the events' % licence_type)

@@ -31,7 +31,6 @@ from Products.urban.interfaces import IIsArchive
 from Products.urban.interfaces import IMiscDemand
 from Products.urban.interfaces import IParcellingTerm
 from Products.urban.interfaces import IPatrimonyCertificate
-from Products.urban.interfaces import IPortionOut
 from Products.urban.interfaces import IProprietary
 from Products.urban.interfaces import ITicket
 from Products.urban.interfaces import IUrbanDoc
@@ -106,27 +105,6 @@ def licence_architectinfoindex(object):
     for architect in architects:
         architects_info.extend(_get_applicantsinfoindex(architect))
     return list(set(architects_info))
-
-
-@indexer(IPortionOut)
-def parcelinfoindex(obj):
-    """
-    Indexes some informations about the parcels of 'self'
-    Index parcels of a licence
-    It builds a list of parcels infos.  Parcels infos are :
-    - code divison
-    - division
-    - section
-    - radical
-    - bis
-    - exposant
-    - puissance
-    Separated by a ','
-    What we need to do is to do an 'exact' search on it
-    This index is a ZCTextIndex based on the plone_lexicon so we
-    are sure that indexed values are lowercase
-    """
-    return [obj.get_capakey()]
 
 
 @indexer(IGenericLicence)
@@ -274,11 +252,6 @@ def doc_not_indexed(obj):
 @indexer(IProprietary)
 @indexer(ICorporation)
 def contact_not_indexed(obj):
-    raise AttributeError()
-
-
-@indexer(IPortionOut)
-def portion_not_indexed(obj):
     raise AttributeError()
 
 

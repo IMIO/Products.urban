@@ -162,8 +162,17 @@ class SearchParcelsView(BrowserView):
         self.createParcel(parcel_data)
 
     def createParcel(self, parcel_data):
-        portal_urban = api.portal.get_tool('portal_urban')
-        portal_urban.createPortionOut(container=self.context, **parcel_data)
+        parcel_id = "%05d%s%04d_%02d%s%03d_%s" % (
+            int(parcel_data['division']),
+            parcel_data['section'],
+            int(parcel_data['radical'] or 0),
+            int(parcel_data['bis'] or 0),
+            parcel_data['exposant'],
+            int(parcel_data['puissance'] or 0),
+            parcel_data['partie'] and '1' or '0'
+        )
+        api.content.create(container=self.context, type='Parcel', id=parcel_id, **parcel_data)
+        self.request.RESPONSE.redirect(self.context.absolute_url() + '/view')
 
     def createApplicantFromParcel(self, owners, worklocations):
         """
