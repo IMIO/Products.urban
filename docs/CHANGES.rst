@@ -47,6 +47,9 @@ Changes
 - Migrate PortionOut (Archetype) type to Parcel (dexterity) type. [URB-2009]
   [sdelcourt]
 
+- Fix add permissions for Inquiries. [SUP-13679]
+  [sdelcourt]
+
 
 2.4 (2019-03-25)
 ----------------
