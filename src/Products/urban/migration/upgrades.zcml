@@ -131,4 +131,12 @@
         handler=".update_240.fix_external_edition_settings"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Fix inquiry Add permission"
+        description="urban upgrade step"
+        source="1002"
+        destination="1003"
+        handler=".update_240.fix_add_inquiry_permissions"
+        profile="Products.urban:default" />
+
 </configure>
