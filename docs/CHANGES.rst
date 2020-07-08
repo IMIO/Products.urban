@@ -41,6 +41,12 @@ Changes
 - Improve default reference expression for licence references. [URB-2046]
   [sdelcourt]
 
+- Add search filter on public config folders (geometricians, notaries, architects, parcellings). [SUP-10537]
+  [sdelcourt]
+
+- Migrate PortionOut (Archetype) type to Parcel (dexterity) type. [URB-2009]
+  [sdelcourt]
+
 
 2.4 (2019-03-25)
 ----------------
