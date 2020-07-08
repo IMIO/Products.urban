@@ -132,18 +132,26 @@
         profile="Products.urban:default" />
 
     <gs:upgradeStep
+        title="Fix inquiry Add permission"
+        description="urban upgrade step"
+        source="1002"
+        destination="1003"
+        handler=".update_240.fix_add_inquiry_permissions"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
         title="Upgrade urban 2.5.0"
         description="urban upgrade step"
-        source="2.4.0"
-        destination="2.5.0"
+        source="1003"
+        destination="1004"
         handler=".migrate_to_250.migrate"
         profile="Products.urban:default" />
 
     <gs:upgradeStep
         title="Migrate AT PortionOut to DX Parcel"
         description="urban upgrade step"
-        source="1002"
-        destination="1003"
+        source="1004"
+        destination="1005"
         handler=".migrate_to_DX.migrate_PortionOut_to_DX"
         profile="Products.urban:default" />
 
