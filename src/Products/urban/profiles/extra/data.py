@@ -2545,7 +2545,7 @@ urbanEventTypes = {
             'id': "enquete-publique",
             'title': "Enquête publique",
             'eventDateLabel': "Date de notification",
-            'activatedFields': ['investigationStart', 'investigationEnd', 'claimsDate', 'claimsEndSDate',
+            'activatedFields': ['investigationStart', 'investigationEnd', 'claimsDate',
                                 'explanationStartSDate', 'explanationEndSDate ', 'claimsText', 'transmitDate'],
             'deadLineDelay': 15,
             'isKeyEvent': True,
