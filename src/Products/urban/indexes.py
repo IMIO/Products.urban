@@ -29,7 +29,6 @@ from Products.urban.interfaces import IGenericLicence
 from Products.urban.interfaces import IInspection
 from Products.urban.interfaces import IIsArchive
 from Products.urban.interfaces import IMiscDemand
-from Products.urban.interfaces import IParcellingTerm
 from Products.urban.interfaces import IPatrimonyCertificate
 from Products.urban.interfaces import IProprietary
 from Products.urban.interfaces import ITicket
@@ -109,17 +108,6 @@ def licence_architectinfoindex(object):
 
 @indexer(IGenericLicence)
 def genericlicence_parcelinfoindex(obj):
-    parcels_infos = []
-    if hasattr(obj, 'getParcels'):
-        parcels_infos = list(set([p.get_capakey() for p in obj.getParcels()]))
-    return parcels_infos
-
-
-@indexer(IParcellingTerm)
-def parcellingterm_parcelinfoindex(obj):
-    """
-    Index parcels of a parcelling term
-    """
     parcels_infos = []
     if hasattr(obj, 'getParcels'):
         parcels_infos = list(set([p.get_capakey() for p in obj.getParcels()]))
