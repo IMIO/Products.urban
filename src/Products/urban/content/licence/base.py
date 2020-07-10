@@ -661,7 +661,7 @@ class UrbanBase(object):
         obj = obj or self
         displaylist = self._getVocabularyDisplayList(field_name, obj)
         field_value = self._getFieldValue(field_name, obj)
-        if not field_value:
+        if not field_value or not displaylist:
             return ''
 
         if type(field_value) not in (list, tuple):

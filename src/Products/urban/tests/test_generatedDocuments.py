@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from plone.app.testing import login
-from Products.urban.profiles.testsWithLicences import licences_data
-from Products.urban.testing import URBAN_TESTS_PROFILE_FUNCTIONAL, URBAN_TESTS_LICENCES
+from Products.urban.profiles.testsWithLicences.licences_data import licences_data
+from Products.urban.testing import URBAN_TESTS_LICENCES
 from Products.urban.scripts.odtsearch import searchInTextElements
 
 import cgi
@@ -113,7 +113,7 @@ class TestInvertNamesOfMailAddress(unittest.TestCase):
 
 class TestDocuments(unittest.TestCase):
 
-    layer = URBAN_TESTS_PROFILE_FUNCTIONAL
+    layer = URBAN_TESTS_LICENCES
 
     def setUp(self):
         portal = self.layer['portal']
