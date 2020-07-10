@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from Products.urban.profiles.testsWithLicences import licences_data
 from Products.urban.testing import URBAN_TESTS_LICENCES
 
 from plone.app.testing import login
@@ -16,16 +17,7 @@ class TestTemplateMethods(unittest.TestCase):
         self.portal_urban = portal.portal_urban
         login(portal, 'urbaneditor')
 
-        licence_folders = [
-            'buildlicences',
-            'parceloutlicences',
-            'divisions',
-            'notaryletters',
-            'urbancertificateones',
-            'urbancertificatetwos',
-            'declarations',
-            'miscdemands',
-        ]
+        licence_folders = ['{}s'.format(ptype.lower()) for ptype in licences_data.keys()]
 
         urban_folder = portal.urban
         licences = [getattr(urban_folder, lf).objectValues()[-1] for lf in licence_folders]
