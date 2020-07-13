@@ -64,7 +64,7 @@ def update_automated_reference_expression(context):
         config = getattr(portal_urban, licence_type.lower(), None)
         if config:
             old_expr = config.getReferenceTALExpression()
-            new_expr = old_expr.replace("'/' + obj.getLicenceTypeAcronym()", '/{}'.format(acronym))
-            new_expr = new_expr.replace('obj.getLicenceTypeAcronym()', acronym)
+            new_expr = old_expr.replace("'/' + obj.getLicenceTypeAcronym()", "'/{}'".format(acronym))
+            new_expr = new_expr.replace('obj.getLicenceTypeAcronym()', "'{}'".format(acronym))
             config.setReferenceTALExpression(new_expr)
     logger.info("upgrade done!")
