@@ -3,6 +3,7 @@
 from imio.dashboard.utils import _updateDefaultCollectionFor
 from plone import api
 from Products.urban.config import URBAN_TYPES
+from Products.urban.config import URBAN_TYPES_ACRONYM
 import logging
 
 logger = logging.getLogger('urban: migrations')
@@ -52,4 +53,18 @@ def fix_add_inquiry_permissions(context):
     workflow_tool = api.portal.get_tool('portal_workflow')
     workflow_tool.updateRoleMappings()
     logger.info("starting upgrade steps")
+    logger.info("upgrade done!")
+
+
+def update_automated_reference_expression(context):
+    logger = logging.getLogger('urban: update expression used for automated references')
+    logger.info("starting upgrade steps")
+    portal_urban = api.portal.get_tool('portal_urban')
+    for licence_type, acronym in URBAN_TYPES_ACRONYM.iteritems():
+        config = getattr(portal_urban, licence_type.lower(), None)
+        if config:
+            old_expr = config.getReferenceTALExpression()
+            new_expr = old_expr.replace("'/' + obj.getLicenceTypeAcronym()", '/{}'.format(acronym))
+            new_expr = new_expr.replace('obj.getLicenceTypeAcronym()', acronym)
+            config.setReferenceTALExpression(new_expr)
     logger.info("upgrade done!")
