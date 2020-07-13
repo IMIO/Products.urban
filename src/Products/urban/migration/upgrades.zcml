@@ -140,18 +140,26 @@
         profile="Products.urban:default" />
 
     <gs:upgradeStep
-        title="Upgrade urban 2.5.0"
+        title="Update automated reference expressions"
         description="urban upgrade step"
         source="1003"
         destination="1004"
+        handler=".update_240.update_automated_reference_expression"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Upgrade urban 2.5.0"
+        description="urban upgrade step"
+        source="1004"
+        destination="1005"
         handler=".migrate_to_250.migrate"
         profile="Products.urban:default" />
 
     <gs:upgradeStep
         title="Migrate AT PortionOut to DX Parcel"
         description="urban upgrade step"
-        source="1004"
-        destination="1005"
+        source="1005"
+        destination="1006"
         handler=".migrate_to_DX.migrate_PortionOut_to_DX"
         profile="Products.urban:default" />
 
