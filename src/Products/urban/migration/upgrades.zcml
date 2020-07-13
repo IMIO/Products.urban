@@ -139,4 +139,12 @@
         handler=".update_240.fix_add_inquiry_permissions"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Fix inquiry Add permission"
+        description="urban upgrade step"
+        source="1003"
+        destination="1004"
+        handler=".update_240.update_automated_reference_expression"
+        profile="Products.urban:default" />
+
 </configure>
