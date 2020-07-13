@@ -140,7 +140,7 @@
         profile="Products.urban:default" />
 
     <gs:upgradeStep
-        title="Fix inquiry Add permission"
+        title="Update automated reference expressions"
         description="urban upgrade step"
         source="1003"
         destination="1004"
