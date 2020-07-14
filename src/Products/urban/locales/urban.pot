@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2020-06-22 14:28+0000\n"
+"POT-Creation-Date: 2020-07-14 14:07+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1632,7 +1632,6 @@ msgstr ""
 #. Default: "Go back"
 #: ../browser/templates/contactview.pt:18
 #: ../browser/templates/globalmacros.pt:5
-#: ../browser/templates/portionoutview.pt:18
 msgid "go_back"
 msgstr ""
 
@@ -2215,11 +2214,6 @@ msgstr ""
 #. Default: "Urban configuration"
 #: ../browser/templates/portlet_urbanconfig.pt:16
 msgid "portal_urban"
-msgstr ""
-
-#. Default: "Portion out details"
-#: ../browser/templates/portionoutview.pt:23
-msgid "portionout_details"
 msgstr ""
 
 msgid "preliminarynotice_urbanconfig_title"
@@ -3465,7 +3459,7 @@ msgstr ""
 msgid "urban_label_exemptFDArticle"
 msgstr ""
 
-#: ../content/licence/CODT_BaseBuildLicence.py:596
+#: ../content/licence/CODT_BaseBuildLicence.py:599
 msgid "urban_label_exemptFDArticleCODT"
 msgstr ""
 
@@ -3699,7 +3693,7 @@ msgstr ""
 msgid "urban_label_implantation"
 msgstr ""
 
-#: ../content/licence/CODT_BaseBuildLicence.py:597
+#: ../content/licence/CODT_BaseBuildLicence.py:600
 msgid "urban_label_implantationCODT"
 msgstr ""
 
@@ -3883,12 +3877,12 @@ msgstr ""
 msgid "urban_label_isSupplementary"
 msgstr ""
 
-#: ../content/licence/CODT_BaseBuildLicence.py:588
+#: ../content/licence/CODT_BaseBuildLicence.py:591
 #: ../content/licence/CODT_UrbanCertificateBase.py:76
 msgid "urban_label_is_in_parceloutlicences"
 msgstr ""
 
-#: ../content/licence/CODT_BaseBuildLicence.py:594
+#: ../content/licence/CODT_BaseBuildLicence.py:597
 #: ../content/licence/CODT_UrbanCertificateBase.py:82
 msgid "urban_label_is_in_sol"
 msgstr ""
@@ -4260,12 +4254,12 @@ msgstr ""
 msgid "urban_label_parcellings"
 msgstr ""
 
-#: ../content/licence/CODT_BaseBuildLicence.py:587
+#: ../content/licence/CODT_BaseBuildLicence.py:590
 #: ../content/licence/CODT_UrbanCertificateBase.py:75
 msgid "urban_label_parceloutlicences"
 msgstr ""
 
-#: ../content/licence/CODT_BaseBuildLicence.py:589
+#: ../content/licence/CODT_BaseBuildLicence.py:592
 #: ../content/licence/CODT_UrbanCertificateBase.py:77
 msgid "urban_label_parceloutlicences_details"
 msgstr ""
@@ -4910,17 +4904,17 @@ msgstr ""
 msgid "urban_label_society"
 msgstr ""
 
-#: ../content/licence/CODT_BaseBuildLicence.py:591
+#: ../content/licence/CODT_BaseBuildLicence.py:594
 #: ../content/licence/CODT_UrbanCertificateBase.py:79
 msgid "urban_label_sol"
 msgstr ""
 
-#: ../content/licence/CODT_BaseBuildLicence.py:593
+#: ../content/licence/CODT_BaseBuildLicence.py:596
 #: ../content/licence/CODT_UrbanCertificateBase.py:81
 msgid "urban_label_solZone"
 msgstr ""
 
-#: ../content/licence/CODT_BaseBuildLicence.py:595
+#: ../content/licence/CODT_BaseBuildLicence.py:598
 #: ../content/licence/CODT_UrbanCertificateBase.py:83
 msgid "urban_label_sol_details"
 msgstr ""
