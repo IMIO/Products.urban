@@ -232,6 +232,16 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             return rows
 
         cadastre = services.cadastre.new_session()
+        rows.append(
+            FixedRow(
+                keyColumn='division',
+                initialData={
+                    'division': '99999',
+                    'name': '99999',
+                    'alternative_name': 'non cadastré'
+                }
+            )
+        )
         for division in cadastre.get_all_divisions():
             division_id = str(division[0])
             name = division[1]
