@@ -123,7 +123,14 @@ class Inspection(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
         """
            Update the title to clearly identify the licence
         """
-        title = "%s - %s" % (self.getReference(), self.getLicenceSubject())
+        proprietary = ''
+        if self.getProprietaries():
+            proprietary = self.getProprietaries()[0].Title()
+        title = "{}{} - {}".format(
+            self.getReference(),
+            proprietary and ' - {} -'.format(proprietary) or '',
+            self.getLicenceSubject()
+        )
         self.setTitle(title)
         self.reindexObject(idxs=('Title', 'sortable_title',))
 
