@@ -50,6 +50,9 @@ Changes
 - Fix add permissions for Inquiries. [SUP-13679]
   [sdelcourt]
 
+- Add custom division 99999 for unreferenced parcels. [SUP-13835]
+  [sdelcourt]
+
 
 2.4 (2019-03-25)
 ----------------
