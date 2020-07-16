@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from Products.urban.interfaces import IEnvironmentBase
+from Products.urban.profiles.testsWithLicences.licences_data import licences_data
 from Products.urban.testing import URBAN_TESTS_LICENCES
 
 from plone.app.testing import login
@@ -13,19 +15,11 @@ class TestTemplateMethods(unittest.TestCase):
 
     def setUp(self):
         portal = self.layer['portal']
+        self.portal = portal
         self.portal_urban = portal.portal_urban
         login(portal, 'urbaneditor')
 
-        licence_folders = [
-            'buildlicences',
-            'parceloutlicences',
-            'divisions',
-            'notaryletters',
-            'urbancertificateones',
-            'urbancertificatetwos',
-            'declarations',
-            'miscdemands',
-        ]
+        licence_folders = ['{}s'.format(ptype.lower()) for ptype in licences_data.keys()]
 
         urban_folder = portal.urban
         licences = [getattr(urban_folder, lf).objectValues()[-1] for lf in licence_folders]
@@ -52,6 +46,10 @@ class TestTemplateMethods(unittest.TestCase):
             self._testGVFTforLicence(licence)
 
     def _testGVFTforLicence(self, licence):
+        if IEnvironmentBase.providedBy(licence):
+            login(self.portal, 'environmenteditor')
+        else:
+            login(self.portal, 'urbaneditor')
         fields = licence.schema.fields()
         field_names = [f.getName() for f in fields if f.schemata not in ['default', 'metadata']]
 
@@ -60,5 +58,6 @@ class TestTemplateMethods(unittest.TestCase):
                 licence.getValueForTemplate(fieldname)
             else:
                 method_name = self.field_exceptions[fieldname]
-                template_helpermethod = getattr(licence, method_name)
-                template_helpermethod()
+                template_helpermethod = getattr(licence, method_name, None)
+                if template_helpermethod:
+                    template_helpermethod()

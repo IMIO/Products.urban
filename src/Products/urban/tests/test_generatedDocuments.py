@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from plone.app.testing import login
-from Products.urban.testing import URBAN_TESTS_PROFILE_FUNCTIONAL, URBAN_TESTS_LICENCES
+from Products.urban.profiles.testsWithLicences.licences_data import licences_data
+from Products.urban.testing import URBAN_TESTS_LICENCES
 from Products.urban.scripts.odtsearch import searchInTextElements
 
 import cgi
@@ -112,7 +113,7 @@ class TestInvertNamesOfMailAddress(unittest.TestCase):
 
 class TestDocuments(unittest.TestCase):
 
-    layer = URBAN_TESTS_PROFILE_FUNCTIONAL
+    layer = URBAN_TESTS_LICENCES
 
     def setUp(self):
         portal = self.layer['portal']
@@ -122,15 +123,7 @@ class TestDocuments(unittest.TestCase):
     def testAppyErrorsInDocuments(self):
 
         site = self.layer['portal']
-        available_licence_types = [
-            'BuildLicence',
-            'Declaration',
-            'Division',
-            'UrbanCertificateOne',
-            'UrbanCertificateTwo',
-            'NotaryLetter',
-            'MiscDemand',
-        ]
+        available_licence_types = licences_data.keys()
         log = []
         #parcourir tous les dossiers de permis
         for licence_type in available_licence_types:

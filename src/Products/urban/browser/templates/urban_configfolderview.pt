@@ -26,14 +26,6 @@
             Title
             </metal:field>
         </h1>
-
-        <div tal:replace="structure provider:plone.belowcontenttitle" />
-
-        <p class="documentDescription">
-            <metal:field use-macro="python:here.widget('description', mode='view')">
-            Description
-            </metal:field>
-        </p>
         <div class="field">
         <tal:addable_types define="acts context/allowedContentTypes" repeat="act acts" i18n:domain="urban">
         <form tal:condition="python: not isAnon" name="quickAdd"
@@ -47,10 +39,19 @@
         </tal:addable_types>
         </div>
 
+        <div style="vertical-align:top; max-width: 45%; display:inline-block"
+            tal:define="form nocall:view/form">
+            <fieldset>
+            <legend i18n:translate="">Filter</legend>
+                <span tal:replace="structure view/contents" />
+            </fieldset>
+        </div>
+
         <div tal:replace="structure provider:plone.abovecontentbody" />
 
         <div>
-         <tal:listing content="structure view/renderListing" />
+            <tal:listing content="structure view/search_result/render" />
+            <tal:batch content="structure view/search_result/renderBatch" />
         </div>
 
     </metal:body>

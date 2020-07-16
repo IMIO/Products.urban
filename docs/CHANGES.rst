@@ -32,6 +32,27 @@ Changes
 - Allow shortcut transition to 'inacceptable' state for CODT licence wofklow. [SUP-6385]
   [sdelcourt]
 
+- Set default foldermanagers view to sort the folder with z3c.table on title [URB-1151]
+  [jjaumotte]
+
+- Add some applicants infos on urban_description schemata. [URB-1171]
+  [jjaumotte]
+
+- Improve default reference expression for licence references. [URB-2046]
+  [sdelcourt]
+
+- Add search filter on public config folders (geometricians, notaries, architects, parcellings). [SUP-10537]
+  [sdelcourt]
+
+- Migrate PortionOut (Archetype) type to Parcel (dexterity) type. [URB-2009]
+  [sdelcourt]
+
+- Fix add permissions for Inquiries. [SUP-13679]
+  [sdelcourt]
+
+- Add custom division 99999 for unreferenced parcels. [SUP-13835]
+  [sdelcourt]
+
 
 2.4 (2019-03-25)
 ----------------

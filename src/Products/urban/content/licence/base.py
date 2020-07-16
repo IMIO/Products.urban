@@ -311,36 +311,6 @@ class UrbanBase(object):
 
         return signaletic
 
-    security.declarePublic('getLicenceTypeAcronym')
-    def getLicenceTypeAcronym(self):
-        """
-          Returns a small string representing the licence type
-        """
-        licenceTypes = {
-            'BuildLicence': 'PU',
-            'Article127': 'PU',
-            'UniqueLicence': 'U',
-            'IntegratedLicence': 'PI',
-            'CODT_IntegratedLicence': 'PI',
-            'ParcelOutLicence': 'PL',
-            'UrbanCertificateOne': 'CU1',
-            'UrbanCertificateBase': 'CU1',
-            'UrbanCertificateTwo': 'CU2',
-            'EnvClassOne': 'PE1',
-            'EnvClassTwo': 'PE2',
-            'EnvClassThree': 'DE',
-            'Declaration': 'Decl',
-            'Division': 'Div',
-            'MiscDemand': 'DD',
-            'ExplosivesPossession': 'EXP',
-        }
-        if "notaryletter" in self.id:
-            return 'Not'
-        try:
-            return licenceTypes[self.portal_type]
-        except KeyError:
-            return 'PU'
-
     security.declarePublic('hasSingleApplicant')
     def hasSingleApplicant(self):
         """
@@ -680,7 +650,7 @@ class UrbanBase(object):
         obj = obj or self
         displaylist = self._getVocabularyDisplayList(field_name, obj)
         field_value = self._getFieldValue(field_name, obj)
-        if not field_value:
+        if not field_value or not displaylist:
             return ''
 
         if type(field_value) not in (list, tuple):
@@ -771,3 +741,6 @@ class UrbanBase(object):
                 folderManager = self.getFoldermanagers()[i]
             i = i + 1
         return folderManager
+
+    def get_state(self):
+        return api.content.get_state(self)
