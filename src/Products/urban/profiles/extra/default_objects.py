@@ -16,7 +16,7 @@ default_objects = {
     ],
 
     'parcellings': [
-        'ParcellingTerm',
+        'Parcelling',
         {'id': "p1", 'title': u"Lotissement 1 (André Ledieu - 01/01/2005)", 'label': "Lotissement 1", 'subdividerName': "André Ledieu", 'authorizationDate': "2005/01/01", 'approvaleDate': "2005/01/12", 'numberOfParcels': 10},
         {'id': "p2", 'title': u"Lotissement 2 (Ets Tralala - 01/06/2007)", 'label': "Lotissement 2", 'subdividerName': "Ets Tralala", 'authorizationDate': "2007/06/01", 'approvaleDate': "2007/06/12", 'numberOfParcels': 8},
         {'id': "p3", 'title': u"Lotissement 3 (SPRL Construction - 02/05/2001)", 'label': "Lotissement 3", 'subdividerName': "SPRL Construction", 'authorizationDate': "2001/05/02", 'approvaleDate': "2001/05/10", 'numberOfParcels': 15},
