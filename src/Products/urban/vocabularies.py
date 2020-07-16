@@ -97,6 +97,7 @@ class folderManagersVocabulary():
         current_foldermanager_uid = current_foldermanager and current_foldermanager.UID() or ''
         foldermanagers = catalog(
             object_provides=IFolderManager.__identifier__,
+            review_state='enabled',
             sort_on='sortable_title',
         )
         foldermanagers = [manager for manager in foldermanagers if manager.UID != current_foldermanager_uid]
