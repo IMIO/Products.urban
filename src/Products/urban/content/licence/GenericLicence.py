@@ -947,6 +947,7 @@ schema = Schema((
         widget=ReferenceBrowserWidget(
             allow_browse=False,
             base_query='foldermanagersBaseQuery',
+            only_for_review_states='enabled',
             show_results_without_query=True,
             wild_card_search=True,
             allow_search=False,
