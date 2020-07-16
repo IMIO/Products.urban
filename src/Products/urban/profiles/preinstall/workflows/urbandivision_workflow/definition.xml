@@ -10,7 +10,7 @@
  <permission>Modify portal content</permission>
  <permission>Review portal content</permission>
  <permission>Delete objects</permission>
- <permission>urban: Add PortionOut</permission>
+ <permission>imio.urban: Add Parcel</permission>
  <permission>urban: Add UrbanEvent</permission>
  <permission>Add portal content</permission>
  <permission>urban: Add Layer</permission>
@@ -67,7 +67,7 @@
                   acquired="False">
    <permission-role>Manager</permission-role>
   </permission-map>
-  <permission-map name="urban: Add PortionOut"
+  <permission-map name="imio.urban: Add Parcel"
                   acquired="False">
    <permission-role>Manager</permission-role>
   </permission-map>
@@ -138,7 +138,7 @@
    <permission-role>Contributor</permission-role>
    <permission-role>Manager</permission-role>
   </permission-map>
-  <permission-map name="urban: Add PortionOut"
+  <permission-map name="imio.urban: Add Parcel"
                   acquired="False">
    <permission-role>Editor</permission-role>
    <permission-role>Contributor</permission-role>
@@ -202,7 +202,7 @@
                   acquired="False">
    <permission-role>Manager</permission-role>
   </permission-map>
-  <permission-map name="urban: Add PortionOut"
+  <permission-map name="imio.urban: Add Parcel"
                   acquired="False">
    <permission-role>Manager</permission-role>
   </permission-map>

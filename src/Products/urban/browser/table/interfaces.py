@@ -229,3 +229,5 @@ class IInspectionReportsTable(Interface):
     """
     Marker interface for a table displaying inspection report events.
     """
+
+

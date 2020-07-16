@@ -28,6 +28,7 @@ from Products.urban.config import DefaultTexts
 from Products.urban.config import URBAN_CFG_DIR
 from Products.urban.config import URBANMAP_CFG
 from Products.urban.config import URBAN_TYPES
+from Products.urban.config import URBAN_TYPES_ACRONYM
 from Products.urban.exportimport import updateAllUrbanTemplates
 from Products.urban.Extensions.update_task_configs import add_licence_ended_condition
 from Products.urban.interfaces import IContactFolder
@@ -406,7 +407,10 @@ def addUrbanConfigFolders(context):
             config_folder_id = tool.invokeFactory(
                 "LicenceConfig",
                 id=licenceConfigId,
-                title=_("%s_urbanconfig_title" % urban_type.lower(), 'urban')
+                title=_("%s_urbanconfig_title" % urban_type.lower(), 'urban'),
+                referenceTALExpression="python: '{}/' + date.strftime('%Y') + '/' + numerotation".format(
+                    URBAN_TYPES_ACRONYM[urban_type]
+                )
             )
             config_folder = getattr(tool, config_folder_id)
             # no mutator available because the field is defined with 'read only' property
@@ -1217,6 +1221,9 @@ def addDefaultObjects(context):
         for obj in objects_list[1:]:
             obj.update({'manageableLicences': URBAN_TYPES})
         createFolderDefaultValues(fmFolder, objects_list)
+
+    # set layout to sorted_title_view with z3ctable
+    fmFolder.setLayout('sorted_title_folderview')
 
     #create some streets using the Extensions.imports script
     if not tool.streets.objectIds('City'):

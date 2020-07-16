@@ -6,6 +6,7 @@ from plone.app.testing import PloneWithPackageLayer
 from plone.app.testing import helpers
 
 from plone.testing import z2
+from Products.GenericSetup.tool import DEPENDENCY_STRATEGY_NEW
 from Products.urban.utils import run_entry_points
 
 import Products.urban
@@ -43,6 +44,8 @@ class UrbanWithUsersLayer(IntegrationTesting):
     default_admin_password = 'urbanmanager'
 
     def setUp(self):
+        # monkey patch to avoid running upgrade steps when reisntalling urban
+        Products.GenericSetup.tool.DEFAULT_DEPENDENCY_STRATEGY = DEPENDENCY_STRATEGY_NEW
         super(UrbanWithUsersLayer, self).setUp()
         with helpers.ploneSite() as portal:
             portal_urban = portal.portal_urban
@@ -66,9 +69,9 @@ class UrbanConfigLayer(UrbanWithUsersLayer):
     Useful for performances: Plone site is instanciated only once
     """
     def setUp(self):
+        super(UrbanConfigLayer, self).setUp()
         with helpers.ploneSite() as portal:
             portal.setupCurrentSkin(portal.REQUEST)
-            Products.urban.config.NIS = '92000'  # mock NIS code
             helpers.applyProfile(portal, 'Products.urban:testsWithConfig')
 
 
@@ -84,9 +87,9 @@ class UrbanLicencesLayer(UrbanConfigLayer):
     Useful for performances: Plone site is instanciated only once
     """
     def setUp(self):
+        super(UrbanLicencesLayer, self).setUp()
         with helpers.ploneSite() as portal:
             portal.setupCurrentSkin(portal.REQUEST)
-            Products.urban.config.NIS = '92000'  # mock NIS code
             helpers.applyProfile(portal, 'Products.urban:testsWithLicences')
 
 
@@ -123,6 +126,9 @@ class UrbanWithUsersFunctionalLayer(FunctionalTesting):
     environment_default_password = 'environmenteditor'
 
     def setUp(self):
+        Products.urban.config.NIS = '92000'  # mock NIS code
+        # monkey patch to avoid running upgrade steps when reisntalling urban
+        Products.GenericSetup.tool.DEFAULT_DEPENDENCY_STRATEGY = DEPENDENCY_STRATEGY_NEW
         with helpers.ploneSite() as portal:
             portal.setupCurrentSkin(portal.REQUEST)
             from Products.urban.setuphandlers import addTestUsers
@@ -141,9 +147,9 @@ class UrbanConfigFunctionalLayer(UrbanWithUsersFunctionalLayer):
     Useful for performances: Plone site is instanciated only once
     """
     def setUp(self):
+        super(UrbanConfigFunctionalLayer, self).setUp()
         with helpers.ploneSite() as portal:
             portal.setupCurrentSkin(portal.REQUEST)
-            Products.urban.config.NIS = '92000'  # mock NIS code
             helpers.applyProfile(portal, 'Products.urban:testsWithConfig')
 
 
@@ -159,9 +165,9 @@ class UrbanLicencesFunctionalLayer(UrbanConfigFunctionalLayer):
     Useful for performances: Plone site is instanciated only once
     """
     def setUp(self):
+        super(UrbanLicencesFunctionalLayer, self).setUp()
         with helpers.ploneSite() as portal:
             portal.setupCurrentSkin(portal.REQUEST)
-            Products.urban.config.NIS = '92000'  # mock NIS code
             helpers.applyProfile(portal, 'Products.urban:testsWithLicences')
 
 

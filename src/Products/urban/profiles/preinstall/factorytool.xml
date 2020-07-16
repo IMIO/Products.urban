@@ -20,7 +20,9 @@
   <type portal_type="ParcelOutLicence"/>
   <type portal_type="FolderManager"/>
   <type portal_type="UrbanVocabularyTerm"/>
+  <!-- [DX] TO DELETE > 2.5 [DX] -->
   <type portal_type="PortionOut"/>
+  <!-- [DX] TO DELETE > 2.5 [DX] -->
   <type portal_type="RecipientCadastre"/>
   <type portal_type="Layer"/>
   <type portal_type="Declaration"/>
