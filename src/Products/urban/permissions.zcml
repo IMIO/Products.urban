@@ -23,8 +23,8 @@
     />
 
   <permission
-    id="imio.urban.add_parcellingterm"
-    title="imio.urban: Add Parcelling Term"
+    id="imio.urban.add_parcelling"
+    title="imio.urban: Add Parcelling"
     />
 
 </configure>

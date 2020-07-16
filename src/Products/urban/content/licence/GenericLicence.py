@@ -975,7 +975,7 @@ schema = Schema((
             default_search_index='Title',
             label=_('urban_label_parcellings', default='Parcellings'),
         ),
-        allowed_types=('ParcellingTerm',),
+        allowed_types=('Parcelling',),
         schemata='urban_location',
         multiValued=False,
         relationship='licenceParcelling',
