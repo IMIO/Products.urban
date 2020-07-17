@@ -54,8 +54,6 @@ class UrbanConfigFolderView(FormWrapper):
     def __init__(self, context, request):
         super(UrbanConfigFolderView, self).__init__(context, request)
         # disable portlets on licences
-        self.request.set('disable_plone.rightcolumn', 1)
-        self.request.set('disable_plone.leftcolumn', 1)
 
     def search_submitted(self):
         """
