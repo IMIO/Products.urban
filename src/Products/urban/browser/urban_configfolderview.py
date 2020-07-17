@@ -77,7 +77,7 @@ class UrbanConfigFolderView(FormWrapper):
         if self.search_submitted():
             catalog = api.portal.get_tool('portal_catalog')
             brains = catalog(
-                Title='*{}*'.format(self.search_args['name']),
+                Title=u'*{}*'.format(self.search_args['name']),
                 path={'query': '/'.join(self.context.getPhysicalPath()), 'depth': 1}
             )
             values = [b.getObject() for b in brains]
