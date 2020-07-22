@@ -16,8 +16,7 @@ default_objects = {
     'parcellings': [
         'Parcelling',
         {
-            'id': "p1", 'title': u"Lotissement 1 (André Ledieu - 01/01/2005)",
-            'label': u"Lotissement 1", 'subdividerName': u"André Ledieu",
+            'id': "p1", 'label': u"Lotissement 1", 'subdividerName': u"André Ledieu",
             'authorizationDate': date(2005, 1, 1),
             'approvalDate': date(2005, 1, 12),
             'numberOfParcels': 10
