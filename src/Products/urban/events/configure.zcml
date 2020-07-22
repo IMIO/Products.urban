@@ -155,10 +155,6 @@
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".environmentLicenceEvents.setExploitationConditions"/>
 
-  <subscriber for="..interfaces.IParcellingTerm
-                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-              handler=".parcellingtermEvents.updateTitle" />
-
   <subscriber for="..interfaces.IPcaTerm
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".PcaTermEvents.updateTitle" />
