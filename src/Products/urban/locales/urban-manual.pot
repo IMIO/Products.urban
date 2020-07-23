@@ -203,6 +203,8 @@ msgstr ""
 msgid "UrbanCertificateTwo"
 msgstr ""
 
+
+
 msgid "UniqueLicence"
 msgstr ""
 
@@ -228,6 +230,16 @@ msgid "add_Division"
 msgstr ""
 
 msgid "add_EnvClassOne"
+msgstr ""
+
+msgstr ""
+
+msgstr ""
+
+msgstr ""
+
+msgstr ""
+
 msgstr ""
 
 msgid "add_EnvClassThree"
@@ -1591,6 +1603,10 @@ msgstr ""
 msgid "urban_label_deadLineDelay"
 msgstr ""
 
+#: UrbanEventType.py
+msgid "urban_label_eventPortalType"
+msgstr ""
+
 #. Default: "Decisionterm"
 #: Decision.py
 msgid "urban_label_decisionTerm"
@@ -2725,20 +2741,3 @@ msgstr ""
 msgid "urban_label_reportCreationDate"
 msgstr ""
 
-msgid "urban_label_reportReceptionDate"
-msgstr ""
-
-msgid "urban_search_parcel_by_street_number"
-msgstr ""
-
-msgid "urban_label_reportVisitDate"
-msgstr ""
-
-msgid "urban_search_parcel_by_proprietary"
-msgstr ""
-
-msgid "urban_browse_old_parcels"
-msgstr ""
-
-msgid "urban_button_search"
-msgstr ""

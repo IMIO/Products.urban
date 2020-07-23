@@ -3136,7 +3136,7 @@ msgstr "Portée de l'arrêté de classement"
 #. Default: "College Holidays"
 #: ../UrbanTool.py:135
 msgid "urban_label_collegeHolidays"
-msgstr "Vacances du College"
+msgstr "Vacances du collège"
 
 msgid "urban_label_collegeReportDecisionDate"
 msgstr "Date de décision du collège"
@@ -3492,6 +3492,10 @@ msgstr "Destinataire du document"
 #: UrbanEventType.py
 msgid "urban_label_eventTypeType"
 msgstr "Catégorie du type d'événement"
+
+#. Default : "UrbanEvent"
+msgid "urban_label_eventPortalType"
+msgstr "Type d'événement"
 
 #. Default: "Exemptfdarticle"
 #: ../content/licence/BaseBuildLicence.py:414
@@ -3860,7 +3864,7 @@ msgstr "Est un avis?"
 #. Default: "Isdecentralized"
 #: ../UrbanTool.py:99
 msgid "urban_label_isDecentralized"
-msgstr "Commune décentralisée?"
+msgstr "Commune décentralisée ?"
 
 #. Default: "Isdefaultvalue"
 #: UrbanVocabularyTerm.py
