@@ -878,7 +878,7 @@ msgstr "Ajouter une Lettre de notaire"
 msgid "add_ParcelOutLicence"
 msgstr "Ajouter un Permis d'urbanisation"
 
-msgid "add_ParcellingTerm"
+msgid "add_Parcelling"
 msgstr "Ajouter un lotissement"
 
 msgid "add_UniqueLicence"
