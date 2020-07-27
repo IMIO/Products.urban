@@ -56,6 +56,9 @@ Changes
 - Migrate ParcellingTerm (Archetype) type to Parcelling (dexterity) type.
   [sdelcourt]
 
+- Pre-check all manageable licences for foldermanager creation. [URB-1935]
+  [jjaumotte]
+
 
 2.4 (2019-03-25)
 ----------------
