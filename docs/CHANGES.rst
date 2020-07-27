@@ -53,6 +53,9 @@ Changes
 - Add custom division 99999 for unreferenced parcels. [SUP-13835]
   [sdelcourt]
 
+- Migrate ParcellingTerm (Archetype) type to Parcelling (dexterity) type.
+  [sdelcourt]
+
 
 2.4 (2019-03-25)
 ----------------

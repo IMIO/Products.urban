@@ -98,7 +98,6 @@ ADD_CONTENT_PERMISSIONS = {
     'MiscDemand': 'urban: Add MiscDemand',
     'OpinionRequestEventType': 'urban: Add OpinionRequestEventType',
     'OrganisationTerm': 'urban: Add OrganisationTerm',
-    'ParcellingTerm': 'urban: Add ParcellingTerm',
     'ParcelOutLicence': 'urban: Add ParcelOutLicence',
     'PatrimonyCertificate': 'urban: Add PatrimonyCertificate',
     'PcaTerm': 'urban: Add PcaTerm',
@@ -163,7 +162,6 @@ setDefaultRoles('urban: Add Locality', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add MiscDemand', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add OpinionRequestEventType', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add OrganisationTerm', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add ParcellingTerm', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add ParcelOutLicence', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add PatrimonyCertificate', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add PcaTerm', ("Manager", "Contributor"))

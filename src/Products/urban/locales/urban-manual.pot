@@ -256,7 +256,7 @@ msgstr ""
 msgid "add_ParcelOutLicence"
 msgstr ""
 
-msgid "add_ParcellingTerm"
+msgid "add_Parcelling"
 msgstr ""
 
 msgid "add_UniqueLicence"
