@@ -333,10 +333,10 @@ msgstr "Réouvrir"
 
 # transitions
 msgid "retire"
-msgstr "Retirer"
+msgstr "Abandonner"
 
 msgid "retired"
-msgstr "Retiré"
+msgstr "Abandonné"
 
 msgid "rubrics_history"
 msgstr "Registre des modifications pour les rubriques"

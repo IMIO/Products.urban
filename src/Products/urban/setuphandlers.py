@@ -940,10 +940,10 @@ def addApplicationFolders(context):
             title=_("parcellings_folder_title", 'urban')
         )
         newSubFolder = getattr(newFolder, newFolderid)
-        setFolderAllowedTypes(newSubFolder, 'ParcellingTerm')
+        setFolderAllowedTypes(newSubFolder, 'Parcelling')
         newSubFolder.setLayout('parcellings_folderview')
         #manage the 'Add' permissions...
-        newSubFolder.manage_permission('urban: Add ParcellingTerm', ['Manager', 'Editor', ], acquire=0)
+        newSubFolder.manage_permission('imio.urban: Add Parcelling', ['Manager', 'Editor', ], acquire=0)
     newFolder.moveObjectsToBottom(['parcellings'])
 
 
@@ -1211,7 +1211,7 @@ def addDefaultObjects(context):
     if not parcelFolder.objectIds():
         objects_list = default_objects['parcellings']
         createFolderDefaultValues(parcelFolder, objects_list)
-        logger.info("ParcellingTerms examples have been added")
+        logger.info("Parcelling examples have been added")
 
     #add some folder managers
     tool = site.portal_urban

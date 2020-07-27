@@ -4,7 +4,8 @@ from Products.contentmigration.walker import CustomQueryWalker
 from Products.contentmigration.archetypes import InplaceATFolderMigrator
 
 from Products.urban.config import URBAN_TYPES
-from Products.urban.migration.to_DX.migration_utils import clean_obsolete_portal_type, delete_plone_objects
+from Products.urban.migration.to_DX.migration_utils import clean_obsolete_portal_type
+from Products.urban.setuphandlers import setFolderAllowedTypes
 from Products.urban.utils import getLicenceFolderId
 
 from plone import api
@@ -182,18 +183,28 @@ def migrate_report_and_remove_urbandelay_portal_type(context):
     logger.info("migration step done!")
 
 
+def migrate_parcellings_folder_allowed_type(context):
+    portal = api.portal.get()
+    parcellings = portal.urban.parcellings
+    setFolderAllowedTypes(parcellings, 'Parcelling')
+    # manage the 'Add' permissions...
+    parcellings.manage_permission('imio.urban: Add Parcelling', ['Manager', 'Editor', ], acquire=0)
+
+
 def migrate(context):
     logger = logging.getLogger('urban: migrate to 2.5')
     logger.info("starting migration steps")
     setup_tool = api.portal.get_tool('portal_setup')
     setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'typeinfo')
-    # setup_tool.runImportStepFromProfile('profile-Products.urban:extra', 'urban-update-rubrics')
+    setup_tool.runAllImportStepsFromProfile('profile-Products.urban:default')
+    setup_tool.runImportStepFromProfile('profile-Products.urban:extra', 'urban-update-rubrics')
     migrate_codt_buildlicences_schedule(context)
     migrate_CODT_NotaryLetter_to_CODT_UrbanCertificateBase(context)
     migrate_CODT_UrbanCertificateOne_to_CODT_UrbanCertificateBase(context)
     migrate_CODT_UrbanCertificateBase_add_permissions(context)
     migrate_opinion_request_TAL_expression(context)
     migrate_report_and_remove_urbandelay_portal_type(context)
+    migrate_parcellings_folder_allowed_type(context)
     catalog = api.portal.get_tool('portal_catalog')
     catalog.clearFindAndRebuild()
     logger.info("migration done!")

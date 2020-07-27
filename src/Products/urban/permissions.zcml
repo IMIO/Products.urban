@@ -22,4 +22,9 @@
     title="imio.urban: Add Parcel"
     />
 
+  <permission
+    id="imio.urban.add_parcelling"
+    title="imio.urban: Add Parcelling"
+    />
+
 </configure>

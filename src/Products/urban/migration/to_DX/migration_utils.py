@@ -1,10 +1,19 @@
 # -*- coding: utf-8 -*-
+
+from datetime import date
 from datetime import datetime
 from plone import api
 
 import logging
 
 logger = logging.getLogger('urban: migrations utils')
+
+
+def migrate_date(src_obj, dst_obj, src_fieldname, dst_fieldname):
+    old_date = src_obj.getField(src_fieldname).getRaw(src_obj)
+    if old_date:
+        new_date = date(old_date.year(), old_date.month(), old_date.day())
+        setattr(dst_obj, dst_fieldname, new_date)
 
 
 def clean_obsolete_portal_type(portal_type_to_remove=None, report='print'):
