@@ -649,7 +649,6 @@ class LicenceDisplayProxyObject(UrbanBaseProxyObject):
 
     def __getattr__(self, attr_name):
         """
-        Delegate field attribute access to display() method.
         """
         if attr_name.startswith('getLast') or attr_name.startswith('getFirst'):
             def getUrbanEventProxy(*args, **kwargs):
@@ -671,6 +670,30 @@ class LicenceDisplayProxyObject(UrbanBaseProxyObject):
 
                     return EventNotFound()
             return getUrbanEventProxy
+        if attr_name.startswith('getBound'):
+            def getBoundLicenceProxy(*args, **kwargs):
+                licences = getattr(self.context, attr_name)(*args, **kwargs)
+                if licences:
+                    if type(licences) in [list, tuple]:
+                        proxy_licences = [bl.restrictedTraverse('document_generation_helper_view').context for bl in licences]
+                        return proxy_licences
+                    else:
+                        helper_view = licences.restrictedTraverse('document_generation_helper_view')
+                        proxy_licence = helper_view.context
+                        return proxy_licence
+                else:
+                    class BoundLicenceNotFound(object):
+                        def __getattribute__(self, attr_name):
+                            return None
+
+                        def __nonzero__(self):
+                            return False
+
+                        def __call__(self):
+                            return None
+
+                    return BoundLicenceNotFound()
+            return getBoundLicenceProxy
         return super(LicenceDisplayProxyObject, self).__getattr__(attr_name)
 
     def _get_street_dict(self, uid):
