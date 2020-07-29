@@ -1960,6 +1960,10 @@ msgstr ""
 msgid "manage_parcellings"
 msgstr ""
 
+#: ../browser/templates/globalmacros.pt:39
+msgid "manual_parcel"
+msgstr ""
+
 # config folders
 msgid "map_configs_folder_title"
 msgstr ""
@@ -5337,10 +5341,6 @@ msgstr ""
 #. Default: "No event type is defined in the configuration for this element"
 #: ../browser/licence/templates/licencetabsmacros.pt:472
 msgid "urban_no_eventtype_defined"
-msgstr ""
-
-#: ../browser/urbaneventviews.py:630
-msgid "urban_recipient_copied_to_claimants"
 msgstr ""
 
 #: ../browser/urbaneventviews.py:630
