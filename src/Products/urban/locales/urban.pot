@@ -2555,10 +2555,6 @@ msgstr ""
 msgid "urban_claimant_already_exists"
 msgstr ""
 
-#: ../browser/urbaneventviews.py:625
-msgid "urban_claimant_already_exists"
-msgstr ""
-
 #. Default: "Here above are data defined for the inquiry. If you want to change these informations, click on the name of the linked inquiry here above."
 #: ../browser/templates/urbaneventannouncementview.pt:57
 #: ../browser/templates/urbaneventinquiryview.pt:57
