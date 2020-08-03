@@ -113,6 +113,7 @@ schema = Schema((
         ),
         default='0',
         validators=('isInteger',),
+        optional=True,
     ),
 ),
 )
