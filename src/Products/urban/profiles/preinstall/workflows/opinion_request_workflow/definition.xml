@@ -269,7 +269,8 @@
  <transition transition_id="reopen" title="reopen" new_state="waiting_opinion" trigger="USER" before_script="" after_script="">
   <action url="" category="workflow" icon="%(portal_url)s/reopen.png">reopen</action>
   <guard>
-   <guard-permission>Modify portal content</guard-permission>
+   <guard-group>urban_editors</guard-group>
+   <guard-group>environment_editors</guard-group>
   </guard>
  </transition>
  <transition transition_id="send_opinion" title="send_opinion" new_state="opinion_given" trigger="USER" before_script="" after_script="">
