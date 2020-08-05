@@ -184,9 +184,6 @@ def postInstall(context):
     logger.info("setupOpinionsSchedule : starting...")
     setupOpinionsSchedule(context)
     logger.info("setupOpinionsSchedule : Done")
-    logger.info("setupTest : starting...")
-    setupTest(context.getSite())
-    logger.info("setupTest : Done")
     logger.info("setDefaultApplicationSecurity : starting...")
     setDefaultApplicationSecurity(context)
     logger.info("setDefaultApplicationSecurity : Done")
@@ -422,18 +419,18 @@ def addUrbanConfigFolders(context):
 
         # we just created the urbanConfig, proceed with other parameters...
         # parameters for every LicenceConfigs
-        # add UrbanEventTypes folder
-        if not hasattr(aq_base(config_folder), 'urbaneventtypes'):
+        # add EventConfigs folder
+        if not hasattr(aq_base(config_folder), 'eventconfigs'):
             config_folder.invokeFactory(
                 "Folder",
-                id="urbaneventtypes",
-                title=_("urbaneventtypes_folder_title", 'urban')
+                id="eventconfigs",
+                title=_("eventconfigs_folder_title", 'urban')
             )
-        eventtypes_folder = getattr(config_folder, 'urbaneventtypes')
+        eventconfigs_folder = getattr(config_folder, 'eventconfigs')
         if urban_type in ['Inspection', 'Ticket']:
-            setFolderAllowedTypes(eventtypes_folder, ['UrbanEventType', 'FollowUpEventType'])
+            setFolderAllowedTypes(eventconfigs_folder, ['EventConfig', 'FollowUpEventType'])
         else:
-            setFolderAllowedTypes(eventtypes_folder, ['UrbanEventType', 'OpinionRequestEventType'])
+            setFolderAllowedTypes(eventconfigs_folder, ['EventConfig', 'OpinionRequestEventType'])
 
         licence_vocabularies = default_values.get(urban_type, {})
         createVocabularyFolders(container=config_folder, vocabularies=licence_vocabularies, site=site)
@@ -697,7 +694,7 @@ def setDefaultApplicationSecurity(context):
     for folder_name in licencesfolder_names:
         if hasattr(app_folder, folder_name):
             folder = getattr(app_folder, folder_name)
-            # we add a property usefull for portal_urban.getUrbanConfig
+            # we add a property usefull for portal_urban.getLicenceConfig
             try:
                 # we try in case we apply the profile again...
                 folder.manage_addProperty('urbanConfigId', folder_name.strip('s'), 'string')
@@ -1114,23 +1111,6 @@ def setupOpinionsSchedule(context):
     set_schedule_view(schedule_folder, config_path, schedule_config)
 
 
-def setupTest(context):
-    """
-    Enable schedule faceted navigation on schedule folder.
-    """
-    portal_urban = api.portal.get_tool('portal_urban')
-    for urban_type in URBAN_TYPES:
-        config_folder = getattr(portal_urban, urban_type.lower())
-        if 'test' not in config_folder:
-            test_folder = api.content.create(
-                type='ConfigTest',
-                title='Test',
-                container=config_folder)
-        else:
-            test_folder = config_folder['test']
-        setFolderAllowedTypes(test_folder, [urban_type])
-
-
 def addTestUsers(site):
     users = [
         ('urbanmanager', 'urban_managers', True),
@@ -1231,7 +1211,7 @@ def addEventTypesAndTemplates(context):
     """
      Add default urban event types and their default document templates
     """
-    # add global templates, default UrbanEventTypes and their templates for documents generation
+    # add global templates, default EventConfigs and their templates for documents generation
     updateAllUrbanTemplates(context)
 
 
@@ -1273,7 +1253,6 @@ def addDemoLicences(context):
 def createLicence(site, licence_type, data):
     """
     """
-    urban_tool = site.portal_urban
     urban_folder = site.urban
     catalog = api.portal.get_tool('portal_catalog')
 
@@ -1394,9 +1373,10 @@ def createLicence(site, licence_type, data):
     licence.reindexObject(idxs=['parcelInfosIndex'])
     # generate all the urban events
     logger.info('   test %s --> create all the events' % licence_type)
-    eventtypes = [brain.getObject() for brain in urban_tool.listEventTypes(licence, urbanConfigId=licence_type.lower())]
-    for event_type in eventtypes:
-        licence.createUrbanEvent(event_type)
+    event_configs = licence.getLicenceConfig().getEventConfigs()
+    for event_config in event_configs:
+        if event_config.canBeCreatedInLicence(licence):
+            licence.createUrbanEvent(event_config)
     # fill each event with dummy data and generate all its documents
     logger.info('   test %s --> generate all the documents' % licence_type)
     for urban_event in licence.objectValues(['UrbanEvent', 'UrbanEventInquiry', 'UrbanEventOpinionRequest']):
