@@ -729,7 +729,7 @@ schema = Schema((
         ),
         schemata='urban_road',
         multiValued=1,
-        vocabulary=UrbanVocabulary('urbaneventtypes', vocType="OpinionRequestEventType", value_to_use='extraValue'),
+        vocabulary=UrbanVocabulary('eventconfigs', vocType="OpinionRequestEventType", value_to_use='extraValue'),
         default_method='getDefaultValue',
     ),
     LinesField(
@@ -919,7 +919,7 @@ schema = Schema((
         ),
         schemata='urban_location',
         multiValued=True,
-        vocabulary=UrbanVocabulary('urbaneventtypes', vocType="OpinionRequestEventType", value_to_use='extraValue'),
+        vocabulary=UrbanVocabulary('eventconfigs', vocType="OpinionRequestEventType", value_to_use='extraValue'),
         default_method='getDefaultValue',
     ),
     StringField(

@@ -57,7 +57,7 @@ class TestOpinionRequestOnLicence (unittest.TestCase):
         solicitOpinions_field = self.licence.getField('solicitOpinionsTo')
         field_voc = solicitOpinions_field.vocabulary.getDisplayList(self.licence)
 
-        self.failUnless(expected_voc_term in field_voc.items())
+        self.assertIn(expected_voc_term, field_voc.items())
 
     def testInquiryWithOpinionRequestIsLinkedToItsUrbanEventOpinionRequest(self):
         # if there is an inquiry with an opinion request and that its corresponding UrbanEventOpinionRequest
