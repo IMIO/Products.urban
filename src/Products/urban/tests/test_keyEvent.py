@@ -114,8 +114,8 @@ class TestKeyEvent(BrowserTestCase):
         self.assertTrue(date not in self.browser.contents)
 
         old_fields = self.event_type.getActivatedFields()
-        self.event_type.activatedFields = old_fields + ['decisionDate']
-        self.event_type.keyDates = ['decisionDate']
+        self.event_type.activatedFields = old_fields + ('decisionDate',)
+        self.event_type.keyDates = ('decisionDate',)
         self.urban_event.setDecisionDate(date)
         transaction.commit()
 
