@@ -49,7 +49,7 @@ EventConfigs = {
             'activatedFields': [],
             'deadLineDelay': 15,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {
                     'id': "codt_pu_depot_de_la_demande.odt",
@@ -62,16 +62,16 @@ EventConfigs = {
                     ]
                 },
             ),
-            'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
+            'eventType': ['Products.urban.interfaces.IDepositEvent'],
         },
         {
             'id': "dossier-incomplet-codt",
             'title': "1er dossier incomplet",
             'activatedFields': [],
             'deadLineDelay': 15,
-            'eventTypeType': 'Products.urban.interfaces.IMissingPartEvent',
+            'eventType': ['Products.urban.interfaces.IMissingPartEvent'],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {
                     'id': "codt_pu_annexe_17_dossier_incomplet_demandeur.odt",
@@ -116,16 +116,16 @@ EventConfigs = {
                     ]
                 },
             ),
-            'eventTypeType': 'Products.urban.interfaces.IMissingPartDepositEvent',
+            'eventType': ['Products.urban.interfaces.IMissingPartDepositEvent'],
         },
         {
             'id': "dossier-incomplet-irrecevable-codt",
             'title': "2ème dossier incomplet (irrecevable)",
             'activatedFields': [],
             'deadLineDelay': 15,
-            'eventTypeType': 'Products.urban.interfaces.IRefusedIncompletenessEvent',
+            'eventType': ['Products.urban.interfaces.IRefusedIncompletenessEvent'],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {
                     'id': "codt_pu_dossier_incomplet_2eme_fois_irrecevable.odt",
@@ -144,9 +144,9 @@ EventConfigs = {
             'title': "Accusé de réception (dossier complet)",
             'activatedFields': ['transmitDate'],
             'deadLineDelay': 15,
-            'eventTypeType': 'Products.urban.interfaces.IAcknowledgmentEvent',
+            'eventType': ['Products.urban.interfaces.IAcknowledgmentEvent'],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {
                     'id': "codt_pu_annexe_18_accuse_reception.odt",
@@ -164,9 +164,9 @@ EventConfigs = {
             'id': "dossier-recevable-par-defaut-codt",
             'title': "Dossier recevable par défaut",
             'deadLineDelay': 15,
-            'eventTypeType': 'Products.urban.interfaces.IDefaultCODTAcknowledgmentEvent',
+            'eventType': ['Products.urban.interfaces.IDefaultCODTAcknowledgmentEvent'],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
             ),
         },
@@ -174,9 +174,9 @@ EventConfigs = {
             'id': "notification-choix-procedure-codt",
             'title': "Notification du choix de la procédure",
             'deadLineDelay': 15,
-            'eventTypeType': 'Products.urban.interfaces.ICODTProcedureChoiceNotified',
+            'eventType': ['Products.urban.interfaces.ICODTProcedureChoiceNotified'],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
             ),
         },
@@ -184,9 +184,9 @@ EventConfigs = {
             'id': "reception-choix-procedure-FD-codt",
             'title': "Réception du choix de la procédure par le FD",
             'deadLineDelay': 15,
-            'eventTypeType': 'Products.urban.interfaces.ICODTProcedureChoiceNotified',
+            'eventType': ['Products.urban.interfaces.ICODTProcedureChoiceNotified'],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
             ),
         },
@@ -197,11 +197,11 @@ EventConfigs = {
             'deadLineDelay': 15,
             'eventDateLabel': "Date de transmis",
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "codt_pu_form_envoi_premier_dossier_rw.odt", 'title': "Formulaire d'envoi du premier dossier à la RW"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IWalloonRegionPrimoEvent',
+            'eventType': ['Products.urban.interfaces.IWalloonRegionPrimoEvent'],
         },
         {
             'id': "config-opinion-request",
@@ -209,7 +209,7 @@ EventConfigs = {
             'activatedFields': [],
             'TALCondition': "python: False",
             'podTemplates': ({'id': "codt_pu_courrier_demande_avis_gen.odt", 'title': "Courrier de demande d'avis"},),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -223,7 +223,7 @@ EventConfigs = {
             'podTemplates': (
                 {'id': "codt_pu_annexe_25_affiche_verte.odt", 'title': "Affiche verte (Annexe 25)"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IAnnouncementEvent',
+            'eventType': ['Products.urban.interfaces.IAnnouncementEvent'],
             'eventPortalType': 'UrbanEventAnnouncement',
         },
         {
@@ -247,7 +247,7 @@ EventConfigs = {
                 },
                 {'id': "codt_pu_annexe_26_affiche_jaune.odt", 'title': "Affiche jaune (annexe 26)"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IInquiryEvent',
+            'eventType': ['Products.urban.interfaces.IInquiryEvent'],
             'eventPortalType': 'UrbanEventInquiry',
             'textDefaultValues': (
                 {'text': '\n'.join(default_texts['claimsTextDefaultValue']), 'fieldname': 'claimsText'},
@@ -260,10 +260,10 @@ EventConfigs = {
             'deadLineDelay': 15,
             'eventDateLabel': "Date de notification",
             'TALCondition': "python: here.getProrogation()",
-            'eventTypeType': 'Products.urban.interfaces.ISimpleCollegeEvent',
+            'eventType': ['Products.urban.interfaces.ISimpleCollegeEvent'],
             'eventPortalType': 'UrbanEventCollege',
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {
                     'id': "codt_pu_prorogation_si_non_automatique_deliberation.odt",
@@ -330,10 +330,10 @@ EventConfigs = {
             'deadLineDelay': 15,
             'eventDateLabel': "Date de notification",
             'TALCondition': "python: here.getProrogation()",
-            'eventTypeType': 'Products.urban.interfaces.ISimpleCollegeEvent',
+            'eventType': ['Products.urban.interfaces.ISimpleCollegeEvent'],
             'eventPortalType': 'UrbanEventCollege',
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
             ),
         },
@@ -344,7 +344,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'eventDateLabel': "Date de notification",
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {
                     'id': "codt_pu_annexe_12_decision_octroi_refus.odt",
@@ -361,7 +361,7 @@ EventConfigs = {
                     ]
                 },
             ),
-            'eventTypeType': ('Products.urban.interfaces.ITheLicenceEvent', 'Products.urban.interfaces.ILicenceNotificationEvent'),
+            'eventType': ['Products.urban.interfaces.ITheLicenceEvent', 'Products.urban.interfaces.ILicenceNotificationEvent'],
         },
         {
             'id': "premiere-reunion-patrimoine",
@@ -369,10 +369,10 @@ EventConfigs = {
             'eventDateLabel': "Date de la réunion",
             'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
             ),
-            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
+            'eventType': ['Products.urban.interfaces.IPatrimonyMeetingEvent'],
         },
         {
             'id': "deuxieme-reunion-patrimoine",
@@ -380,10 +380,10 @@ EventConfigs = {
             'eventDateLabel': "Date de la réunion",
             'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
             ),
-            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
+            'eventType': ['Products.urban.interfaces.IPatrimonyMeetingEvent'],
         },
         {
             'id': "reunion-patrimoine-supplementaire",
@@ -392,10 +392,10 @@ EventConfigs = {
             'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
             'showTitle': True,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
             ),
-            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
+            'eventType': ['Products.urban.interfaces.IPatrimonyMeetingEvent'],
         },
         {
             'portal_type': 'OpinionRequestEventType',
@@ -406,7 +406,7 @@ EventConfigs = {
             'eventDateLabel': "Date",
             'activatedFields': ['transmitDate', 'receiptDate', 'receivedDocumentReference', 'externalDecision'],
             'eventPortalType': 'UrbanEventOpinionRequest',
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'concernedOutsideDirections': ['liege_2',],
             'extraValue': 'A.I.D.E.',
             'podTemplates': (),
@@ -420,7 +420,7 @@ EventConfigs = {
             'eventDateLabel': "Date",
             'activatedFields': ['transmitDate', 'receiptDate', 'receivedDocumentReference', 'externalDecision'],
             'eventPortalType': 'UrbanEventOpinionRequest',
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'concernedOutsideDirections': ['hainaut_1',],
             'extraValue': 'Agriculture',
             'podTemplates': (),
@@ -434,7 +434,7 @@ EventConfigs = {
             'eventDateLabel': "Date",
             'activatedFields': ['transmitDate', 'receiptDate', 'receivedDocumentReference', 'externalDecision'],
             'eventPortalType': 'UrbanEventOpinionRequest',
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'concernedOutsideDirections': ['hainaut_1', 'hainaut_2',],
             'extraValue': 'Air Liquide Industries Belgium S.A.',
             'podTemplates': (),
@@ -450,32 +450,32 @@ EventConfigs = {
             'activatedFields': [],
             'deadLineDelay': 15,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "codt_purb_recepisse_du_depot_de_demande.odt", 'title': "Récépissé du dépôt de la demande"},
                 {'id': "codt_purb_entete_farde_dossier.odt", 'title': "En-tête farde dossier"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
+            'eventType': ['Products.urban.interfaces.IDepositEvent'],
         },
         {
             'id': "fiche-analyse-urbanisme-codt",
             'title': "Fiche d'analyse urbanisme",
             'activatedFields': [],
             'deadLineDelay': 15,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "codt_purb_fiche_analyse.odt", 'title': "Fiche d'analyse"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ITechnicalServiceOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.ITechnicalServiceOpinionRequestEvent'],
         },
         {
             'id': "dossier-incomplet-codt",
             'title': "1er dossier incomplet",
             'activatedFields': [],
             'deadLineDelay': 15,
-            'eventTypeType': 'Products.urban.interfaces.IMissingPartEvent',
+            'eventType': ['Products.urban.interfaces.IMissingPartEvent'],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "codt_purb_annexe_17_dossier_incomplet_demandeur.odt", 'title': "Relevé des pièces manquantes (lettre au demandeur)"},
                 {'id': "codt_purb_dossier_incomplet_geometre.odt", 'title': "Relevé des pièces manquantes (géomètre)"},
@@ -490,16 +490,16 @@ EventConfigs = {
             'podTemplates': (
                 {'id': "codt_purb_recepisse_complement_demande.odt", 'title': "Récépissé de dépôt de compléments"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IMissingPartDepositEvent',
+            'eventType': ['Products.urban.interfaces.IMissingPartDepositEvent'],
         },
         {
             'id': "dossier-incomplet-irrecevable-codt",
             'title': "2ème dossier incomplet (irrecevable)",
             'activatedFields': [],
             'deadLineDelay': 15,
-            'eventTypeType': 'Products.urban.interfaces.IRefusedIncompletenessEvent',
+            'eventType': ['Products.urban.interfaces.IRefusedIncompletenessEvent'],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "codt_purb_dossier_irrecevable_courrier_geometre.odt", 'title': "Dossier irrecevable - courrier géomètre"},
                 {'id': "codt_purb_dossier_irrecevable_courrier_dgo4.odt", 'title': "Dossier irrecevable - courrier DGO4"},
@@ -511,9 +511,9 @@ EventConfigs = {
             'title': "Accusé de réception (dossier complet)",
             'activatedFields': ['transmitDate'],
             'deadLineDelay': 15,
-            'eventTypeType': 'Products.urban.interfaces.IAcknowledgmentEvent',
+            'eventType': ['Products.urban.interfaces.IAcknowledgmentEvent'],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "codt_purb_accuse_reception_dossier_complet.odt", 'title': "Accusé de réception dossier complet (annexe 18)"},
             ),
@@ -522,9 +522,9 @@ EventConfigs = {
             'id': "dossier-recevable-par-defaut-codt",
             'title': "Dossier recevable par défaut",
             'deadLineDelay': 15,
-            'eventTypeType': 'Products.urban.interfaces.IDefaultCODTAcknowledgmentEvent',
+            'eventType': ['Products.urban.interfaces.IDefaultCODTAcknowledgmentEvent'],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
             ),
         },
@@ -532,9 +532,9 @@ EventConfigs = {
             'id': "notification-choix-procedure-codt",
             'title': "Notification du choix de la procédure",
             'deadLineDelay': 15,
-            'eventTypeType': 'Products.urban.interfaces.ICODTProcedureChoiceNotified',
+            'eventType': ['Products.urban.interfaces.ICODTProcedureChoiceNotified'],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
             ),
         },
@@ -542,9 +542,9 @@ EventConfigs = {
             'id': "reception-choix-procedure-FD-codt",
             'title': "Réception du choix de la procédure par le FD",
             'deadLineDelay': 15,
-            'eventTypeType': 'Products.urban.interfaces.ICODTProcedureChoiceNotified',
+            'eventType': ['Products.urban.interfaces.ICODTProcedureChoiceNotified'],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
             ),
         },
@@ -555,12 +555,12 @@ EventConfigs = {
             'deadLineDelay': 15,
             'eventDateLabel': "Date de transmis",
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "codt_purb_envoi_premier_dossier_form_rw.odt", 'title': "Formulaire d'envoi du premier dossier à la RW"},
                 {'id': "codt_purb_envoi_premier_dossier_rw_alternative.odt", 'title': "Formulaire d'envoi du premier dossier à la RW (alternative)"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IWalloonRegionPrimoEvent',
+            'eventType': ['Products.urban.interfaces.IWalloonRegionPrimoEvent'],
         },
         {
             'id': "transmis-2er-dossier-rw-codt",
@@ -569,12 +569,12 @@ EventConfigs = {
             'deadLineDelay': 15,
             'eventDateLabel': "Date de transmis",
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "codt_purb_envoi_deuxieme_dossier_rw.odt", 'title': "Formulaire d'envoi du deuxième dossier à la RW"},
                 {'id': "codt_purb_envoi_deuxieme_dossier_rw_alternative.odt", 'title': "Formulaire d'envoi du deuxième dossier à la RW (alternative)"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IWalloonRegionPrimoEvent',
+            'eventType': ['Products.urban.interfaces.IWalloonRegionPrimoEvent'],
         },
         {
             'id': "config-opinion-request",
@@ -582,7 +582,7 @@ EventConfigs = {
             'activatedFields': [],
             'TALCondition': "python: False",
             'podTemplates': ({'id': "codt_purb_avis.odt", 'title': "Courrier de demande d'avis"},),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -596,7 +596,7 @@ EventConfigs = {
             'podTemplates': (
                 {'id': "codt_purb_annexe_25.odt", 'title': "Annexe 25 (affiche publique)"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IAnnouncementEvent',
+            'eventType': ['Products.urban.interfaces.IAnnouncementEvent'],
             'eventPortalType': 'UrbanEventAnnouncement',
         },
         {
@@ -615,7 +615,7 @@ EventConfigs = {
                 {'id': "codt_purb_reunion_cloture_enquete.odt", 'title': " Réunion de clôture d'enquête publique"},
                 {'id': "codt_purb_pv_observations.odt", 'title': "Procès-verbal d'observations"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IInquiryEvent',
+            'eventType': ['Products.urban.interfaces.IInquiryEvent'],
             'eventPortalType': 'UrbanEventInquiry',
             'textDefaultValues': (
                 {'text': '\n'.join(default_texts['claimsTextDefaultValue']), 'fieldname': 'claimsText'},
@@ -628,10 +628,10 @@ EventConfigs = {
             'deadLineDelay': 15,
             'eventDateLabel': "Date de notification",
             'TALCondition': "python: here.getProrogation()",
-            'eventTypeType': 'Products.urban.interfaces.ISimpleCollegeEvent',
+            'eventType': ['Products.urban.interfaces.ISimpleCollegeEvent'],
             'eventPortalType': 'UrbanEventCollege',
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "codt_purb_information_au_demandeur_de_la_prorogation.odt", 'title': "Information au demandeur de la prorogation"},
                 {'id': "codt_purb_information_au_geometre_de_la_prorogation.odt", 'title': "Information au géomètre de la prorogation"},
@@ -645,10 +645,10 @@ EventConfigs = {
             'deadLineDelay': 15,
             'eventDateLabel': "Date de notification",
             'TALCondition': "python: here.getProrogation()",
-            'eventTypeType': 'Products.urban.interfaces.ISimpleCollegeEvent',
+            'eventType': ['Products.urban.interfaces.ISimpleCollegeEvent'],
             'eventPortalType': 'UrbanEventCollege',
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
             ),
         },
@@ -658,11 +658,11 @@ EventConfigs = {
             'activatedFields': ['decisionDate', 'decision', 'decisionText'],
             'deadLineDelay': 15,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "codt_purb_rapport_college.odt", 'title': "Rapport du Service"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ICollegeReportEvent',
+            'eventType': ['Products.urban.interfaces.ICollegeReportEvent'],
         },
         {
             'id': "delivrance-du-permis-octroi-ou-refus-codt",
@@ -671,11 +671,11 @@ EventConfigs = {
             'deadLineDelay': 15,
             'eventDateLabel': "Date de notification",
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "codt_purb_annexe_12_decision_octroi_refus.odt", 'title': "Décision (Octroi - Refus)"},
             ),
-            'eventTypeType': ('Products.urban.interfaces.ITheLicenceEvent', 'Products.urban.interfaces.ILicenceNotificationEvent'),
+            'eventType': ['Products.urban.interfaces.ITheLicenceEvent', 'Products.urban.interfaces.ILicenceNotificationEvent'],
         },
         {
             'id': "premiere-reunion-patrimoine",
@@ -683,10 +683,10 @@ EventConfigs = {
             'eventDateLabel': "Date de la réunion",
             'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
             ),
-            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
+            'eventType': ['Products.urban.interfaces.IPatrimonyMeetingEvent'],
         },
         {
             'id': "deuxieme-reunion-patrimoine",
@@ -694,10 +694,10 @@ EventConfigs = {
             'eventDateLabel': "Date de la réunion",
             'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
             ),
-            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
+            'eventType': ['Products.urban.interfaces.IPatrimonyMeetingEvent'],
         },
         {
             'id': "reunion-patrimoine-supplementaire",
@@ -706,10 +706,10 @@ EventConfigs = {
             'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
             'showTitle': True,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
             ),
-            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
+            'eventType': ['Products.urban.interfaces.IPatrimonyMeetingEvent'],
         },
     ),
     'codt_article127': (
@@ -719,12 +719,12 @@ EventConfigs = {
             'eventDateLabel': "Date de la réception",
             'activatedFields': [],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "codt_pp_entete_farde_dossier_permis.odt", 'title': "Réception de la demande de la DGO4"},
                 {'id': "codt_pp_recepisse_directeur_technique.odt", 'title': "Récépissé Directeur technique"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
+            'eventType': ['Products.urban.interfaces.IDepositEvent'],
         },
         {
             'id': "annonce-de-projet-codt",
@@ -739,7 +739,7 @@ EventConfigs = {
                 {'id': "codt_pp_affiche_annonce_de_projet_annexe_25.odt", 'title': "Affiche annonce de projet (annexe 25)"},
                 {'id': "codt_pp_envoi_affiche_annonce_suite_dossier_fd_art_d_iv_22.odt", 'title': "Envoi affiche annonce suite à un dossier FD art D IV 22"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IAnnouncementEvent',
+            'eventType': ['Products.urban.interfaces.IAnnouncementEvent'],
             'eventPortalType': 'UrbanEventAnnouncement',
         },
         {
@@ -760,7 +760,7 @@ EventConfigs = {
                 {'id': "codt_pp_accuse_reception_reclamation.odt", 'title': "Accusé de réception d’une réclamation"},
                 {'id': "codt_pp_pv_reclamation_orale.odt", 'title': "Procès-verbal des réclamations orales"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IInquiryEvent',
+            'eventType': ['Products.urban.interfaces.IInquiryEvent'],
             'eventPortalType': 'UrbanEventInquiry',
             'textDefaultValues': (
                 {'text': '\n'.join(default_texts['claimsTextDefaultValue']), 'fieldname': 'claimsText'},
@@ -773,11 +773,11 @@ EventConfigs = {
             'deadLineDelay': 15,
             'eventDateLabel': "Date de notification",
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "codt_pp_deliberation_college_ecart_derogation.odt", 'title': "Délibération du collège communal"},
             ),
-            'eventTypeType': ('Products.urban.interfaces.ITheLicenceEvent', 'Products.urban.interfaces.ILicenceNotificationEvent'),
+            'eventType': ['Products.urban.interfaces.ITheLicenceEvent', 'Products.urban.interfaces.ILicenceNotificationEvent'],
         },
         {
             'id': "transmis-decision-fd-codt",
@@ -785,11 +785,11 @@ EventConfigs = {
             'activatedFields': ['decisionDate', 'decision'],
             'deadLineDelay': 15,
             'eventDateLabel': "Date de transmis",
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "codt_pp_transmis_fd.odt", 'title': "Transmis au fonctionnaire délégué"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IWalloonRegionPrimoEvent',
+            'eventType': ['Products.urban.interfaces.IWalloonRegionPrimoEvent'],
         },
         {
             'id': "permis-decision-fd-codt",
@@ -797,14 +797,14 @@ EventConfigs = {
             'activatedFields': [],
             'deadLineDelay': 15,
             'eventDateLabel': "Date de transmis",
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "codt_pp_affichage_octroi_permis.odt", 'title': "Affichage octroi du permis"},
                 {'id': "codt_pp_debut_fin_travaux.odt", 'title': "Début / fin des travaux"},
                 {'id': "codt_pp_talons_debut_fin_travaux.odt", 'title': "Talons à découper"},
                 {'id': "codt_pp_implantation_cautionnement_lettre_demandeur.odt", 'title': "Courrier au demandeur - suivi cautionnement et implantation"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IWalloonRegionDecisionEvent',
+            'eventType': ['Products.urban.interfaces.IWalloonRegionDecisionEvent'],
         },
         {
             'id': "config-opinion-request",
@@ -812,7 +812,7 @@ EventConfigs = {
             'activatedFields': [],
             'TALCondition': "python: False",
             'podTemplates': ({'id': "codt_pp_demande_avis.odt", 'title': "Courrier de demande d'avis"},),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -843,10 +843,10 @@ EventConfigs = {
             'eventDateLabel': "Date de la réunion",
             'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
             ),
-            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
+            'eventType': ['Products.urban.interfaces.IPatrimonyMeetingEvent'],
         },
         {
             'id': "deuxieme-reunion-patrimoine",
@@ -854,10 +854,10 @@ EventConfigs = {
             'eventDateLabel': "Date de la réunion",
             'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
             ),
-            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
+            'eventType': ['Products.urban.interfaces.IPatrimonyMeetingEvent'],
         },
         {
             'id': "reunion-patrimoine-supplementaire",
@@ -866,10 +866,10 @@ EventConfigs = {
             'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
             'showTitle': True,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
             ),
-            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
+            'eventType': ['Products.urban.interfaces.IPatrimonyMeetingEvent'],
         },
     ),
     'codt_notaryletter': (
@@ -879,11 +879,11 @@ EventConfigs = {
             'deadLineDelay': 15,
             'eventDateLabel': 'Date de notification',
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "codt_ln_annexe16.odt", 'title': "Lettre de notaire - Annexe 16"},
             ),
-            'eventTypeType': ('Products.urban.interfaces.ITheLicenceEvent',
+            'eventType': ('Products.urban.interfaces.ITheLicenceEvent',
                               'Products.urban.interfaces.ILicenceNotificationEvent'),
         },
         {
@@ -892,10 +892,10 @@ EventConfigs = {
             'eventDateLabel': "Date de la réunion",
             'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
             ),
-            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
+            'eventType': ['Products.urban.interfaces.IPatrimonyMeetingEvent'],
         },
         {
             'id': "deuxieme-reunion-patrimoine",
@@ -903,10 +903,10 @@ EventConfigs = {
             'eventDateLabel': "Date de la réunion",
             'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
             ),
-            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
+            'eventType': ['Products.urban.interfaces.IPatrimonyMeetingEvent'],
         },
         {
             'id': "reunion-patrimoine-supplementaire",
@@ -915,10 +915,10 @@ EventConfigs = {
             'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
             'showTitle': True,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
             ),
-            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
+            'eventType': ['Products.urban.interfaces.IPatrimonyMeetingEvent'],
         },
     ),
     'codt_integratedlicence': (
@@ -929,7 +929,7 @@ EventConfigs = {
             'activatedFields': ['transmitDate'],
             'deadLineDelay': 15,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "pi_recepisse_depot_demande.odt", 'title': "Récépissé du dépôt de la demande"},
                 {'id': "pi_entete_farde_dossier.odt", 'title': "Entête farde dossier"},
@@ -938,7 +938,7 @@ EventConfigs = {
                 {'id': "pi_transmis_demande_dgo6.odt", 'title': "Transmis à la DGO6"},
                 {'id': "pi_information_demandeur.odt", 'title': "Lettre d'informations au demandeur"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
+            'eventType': ['Products.urban.interfaces.IDepositEvent'],
         },
         {
             'id': "dossier-incomplet-codt",
@@ -947,9 +947,9 @@ EventConfigs = {
             'activatedFields': [],
             'deadLineDelay': 15,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IMissingPartEvent',
+            'eventType': ['Products.urban.interfaces.IMissingPartEvent'],
         },
         {
             'id': "recepisse-complement-codt",
@@ -958,7 +958,7 @@ EventConfigs = {
             'activatedFields': [],
             'deadLineDelay': 15,
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IMissingPartDepositEvent',
+            'eventType': ['Products.urban.interfaces.IMissingPartDepositEvent'],
         },
         {
             'id': "dossier-irrecevable-codt",
@@ -967,9 +967,9 @@ EventConfigs = {
             'activatedFields': [],
             'deadLineDelay': 15,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IRefusedIncompletenessEvent',
+            'eventType': ['Products.urban.interfaces.IRefusedIncompletenessEvent'],
         },
         {
             'id': "dossier-complet-recevable",
@@ -977,9 +977,9 @@ EventConfigs = {
             'activatedFields': [],
             'eventDateLabel': "Date de notification",
             'deadLineDelay': 15,
-            'eventTypeType': 'Products.urban.interfaces.IAcknowledgmentEvent',
+            'eventType': ['Products.urban.interfaces.IAcknowledgmentEvent'],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (),
         },
         {
@@ -987,9 +987,9 @@ EventConfigs = {
             'title': "Dossier recevable par défaut",
             'deadLineDelay': 15,
             'eventDateLabel': "Date de notification",
-            'eventTypeType': 'Products.urban.interfaces.IDefaultCODTAcknowledgmentEvent',
+            'eventType': ['Products.urban.interfaces.IDefaultCODTAcknowledgmentEvent'],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (),
         },
         {
@@ -1022,7 +1022,7 @@ EventConfigs = {
                 {'id': "pi_transmis_elements_enquete_dgo6.odt",
                  'title': "Transmis des éléments de l'enquête à la DGO6"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IInquiryEvent',
+            'eventType': ['Products.urban.interfaces.IInquiryEvent'],
             'eventPortalType': 'UrbanEventInquiry',
             'textDefaultValues': (
                 {'text': '\n'.join(default_texts['claimsTextDefaultValue']), 'fieldname': 'claimsText'},
@@ -1036,7 +1036,7 @@ EventConfigs = {
             'podTemplates': (
                 {'id': "codt-avis.odt", 'title': "Courrier de demande d'avis"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -1053,7 +1053,7 @@ EventConfigs = {
                 {'id': "pi_demande_avis_ccatm.odt",
                  'title': "Demande d'avis à la CCATM"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
             'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
@@ -1064,9 +1064,9 @@ EventConfigs = {
             'activatedFields': ['externalDecision'],
             'deadLineDelay': 15,
             'eventDateLabel': "Date de notification",
-            'eventTypeType': 'Products.urban.interfaces.ICollegeReportEvent',
+            'eventType': ['Products.urban.interfaces.ICollegeReportEvent'],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "pi_rapport_college.odt", 'title': "Rapport du Collège"},
                 {'id': "pi_transmis_rapport_college_dgo3.odt", 'title': "Transmis de l'avis préalable à la DGO3"},
@@ -1080,9 +1080,9 @@ EventConfigs = {
             'activatedFields': ['decision', 'decisionDate'],
             'deadLineDelay': 15,
             'eventDateLabel': "Date de réception du rapport",
-            'eventTypeType': 'Products.urban.interfaces.IDecisionProjectFromSPWEvent',
+            'eventType': ['Products.urban.interfaces.IDecisionProjectFromSPWEvent'],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (),
         },
         {
@@ -1091,9 +1091,9 @@ EventConfigs = {
             'activatedFields': ['transmitDate', 'decisionDate'],
             'deadLineDelay': 15,
             'eventDateLabel': "Date de notification",
-            'eventTypeType': 'Products.urban.interfaces.IAcknowledgmentEvent',
+            'eventType': ['Products.urban.interfaces.IAcknowledgmentEvent'],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "pi_demande_plans_modificatifs.odt",
                  'title': "Demande de plans modificatifs"},
@@ -1111,9 +1111,9 @@ EventConfigs = {
             'activatedFields': [],
             'deadLineDelay': 15,
             'eventDateLabel': "Date de réception des plans modificatifs",
-            'eventTypeType': 'Products.urban.interfaces.IModificationDepositEvent',
+            'eventType': ['Products.urban.interfaces.IModificationDepositEvent'],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (),
         },
         {
@@ -1123,9 +1123,9 @@ EventConfigs = {
             'deadLineDelay': 15,
             'eventDateLabel': "Date de notification",
             'TALCondition': "python: here.getProrogation()",
-            'eventTypeType': 'Products.urban.interfaces.IProrogationEvent',
+            'eventType': ['Products.urban.interfaces.IProrogationEvent'],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (),
         },
         {
@@ -1135,7 +1135,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'eventDateLabel': "Date de notification",
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "pi_transmis_decision_demandeur.odt",
                  'title': "Transmis de la décision du Collège au demandeur"},
@@ -1143,7 +1143,7 @@ EventConfigs = {
                 {'id': "pi_transmis_decision_dgo4.odt", 'title': "Transmis de la décision du Collège à la DGO4"},
                 {'id': "pi_transmis_decision_dgo6.odt", 'title': "Transmis de la décision du Collège à la DGO6"},
             ),
-            'eventTypeType': ('Products.urban.interfaces.ITheLicenceEvent'),
+            'eventType': ['Products.urban.interfaces.ITheLicenceEvent'],
             'eventPortalType': 'UrbanEventCollege',
         },
         {
@@ -1152,9 +1152,9 @@ EventConfigs = {
             'activatedFields': ['displayDate', 'displayDateEnd'],
             'deadLineDelay': 15,
             'eventDateLabel': "Date de notification",
-            'eventTypeType': 'Products.urban.interfaces.IDisplayingTheDecisionEvent',
+            'eventType': ['Products.urban.interfaces.IDisplayingTheDecisionEvent'],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "pi_affichage_decision.odt", 'title': "Affichage de la décision"},
                 {'id': "pi_certificat_affichage_decision.odt", 'title': "Certificat d'affichage de la décision"},
@@ -1167,9 +1167,9 @@ EventConfigs = {
                                 'recourseDecisionDisplayDate'],
             'deadLineDelay': 15,
             'eventDateLabel': "Date de notification",
-            'eventTypeType': 'Products.urban.interfaces.IRecourseEvent',
+            'eventType': ['Products.urban.interfaces.IRecourseEvent'],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "pi_attestation_affichage_recours.odt",
                  'title': "Attestation d'affichage du recours"},
@@ -1185,10 +1185,10 @@ EventConfigs = {
             'eventDateLabel': "Date de la réunion",
             'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
             ),
-            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
+            'eventType': ['Products.urban.interfaces.IPatrimonyMeetingEvent'],
         },
         {
             'id': "deuxieme-reunion-patrimoine",
@@ -1196,10 +1196,10 @@ EventConfigs = {
             'eventDateLabel': "Date de la réunion",
             'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
             ),
-            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
+            'eventType': ['Products.urban.interfaces.IPatrimonyMeetingEvent'],
         },
         {
             'id': "reunion-patrimoine-supplementaire",
@@ -1208,10 +1208,10 @@ EventConfigs = {
             'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
             'showTitle': True,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
             ),
-            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
+            'eventType': ['Products.urban.interfaces.IPatrimonyMeetingEvent'],
         },
     ),
     'codt_urbancertificateone': (
@@ -1221,11 +1221,11 @@ EventConfigs = {
             'deadLineDelay': 15,
             'eventDateLabel': 'Date de notification',
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "codt_cu1_annexe16.odt", 'title': "Annexe 16"},
             ),
-            'eventTypeType': ('Products.urban.interfaces.ITheLicenceEvent',
+            'eventType': ('Products.urban.interfaces.ITheLicenceEvent',
                               'Products.urban.interfaces.ILicenceNotificationEvent'),
         },
         {
@@ -1234,10 +1234,10 @@ EventConfigs = {
             'eventDateLabel': "Date de la réunion",
             'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
             ),
-            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
+            'eventType': ['Products.urban.interfaces.IPatrimonyMeetingEvent'],
         },
         {
             'id': "deuxieme-reunion-patrimoine",
@@ -1245,10 +1245,10 @@ EventConfigs = {
             'eventDateLabel': "Date de la réunion",
             'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
             ),
-            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
+            'eventType': ['Products.urban.interfaces.IPatrimonyMeetingEvent'],
         },
         {
             'id': "reunion-patrimoine-supplementaire",
@@ -1257,10 +1257,10 @@ EventConfigs = {
             'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
             'showTitle': True,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
             ),
-            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
+            'eventType': ['Products.urban.interfaces.IPatrimonyMeetingEvent'],
         },
     ),
     'codt_urbancertificatetwo': (
@@ -1270,11 +1270,11 @@ EventConfigs = {
             'deadLineDelay': 15,
             'eventDateLabel': 'Date de réception',
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "codt_cu2_depot_de_la_demande.odt", 'title': "Récépissé du dépôt de la demande"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
+            'eventType': ['Products.urban.interfaces.IDepositEvent'],
         },
         {
             'id': "dossier-incomplet",
@@ -1282,7 +1282,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'eventDateLabel': 'Date de notification',
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "codt_cu2_annexe_17_dossier_incomplet_demandeur.odt",
                  'title': "Dossier incomplet (lettre au demandeur, Annexe 17)"},
@@ -1291,7 +1291,7 @@ EventConfigs = {
                 {'id': "codt_cu2_dossier_incomplet_fd.odt",
                  'title': "Dossier incomplet (lettre au FD)"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IMissingPartEvent',
+            'eventType': ['Products.urban.interfaces.IMissingPartEvent'],
         },
         {
             'id': "depot-complements",
@@ -1299,12 +1299,12 @@ EventConfigs = {
             'deadLineDelay': 15,
             'eventDateLabel': 'Date de réception',
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "codt_cu2_recepisse_depot_complements.odt",
                  'title': "Récépissé de dépôt de compléments"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IMissingPartDepositEvent',
+            'eventType': ['Products.urban.interfaces.IMissingPartDepositEvent'],
         },
         {
             'id': "dossier-irrecevable",
@@ -1312,11 +1312,11 @@ EventConfigs = {
             'deadLineDelay': 15,
             'eventDateLabel': 'Date de notification',
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "codt_cu2_dossier_incomplet_2eme_fois_irrecevable.odt", 'title': "Dossier irrecevable"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IRefusedIncompletenessEvent',
+            'eventType': ['Products.urban.interfaces.IRefusedIncompletenessEvent'],
         },
         {
             'id': "dossier-complet",
@@ -1324,11 +1324,11 @@ EventConfigs = {
             'deadLineDelay': 15,
             'eventDateLabel': 'Date de notification',
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "codt_cu2_annexe_18_accuse_reception.odt", 'title': "Accusé de réception (annexe 18)"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IAcknowledgmentEvent',
+            'eventType': ['Products.urban.interfaces.IAcknowledgmentEvent'],
         },
         {
             'id': "dossier-recevable-par-defaut",
@@ -1336,9 +1336,9 @@ EventConfigs = {
             'deadLineDelay': 15,
             'eventDateLabel': 'Date de notification',
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IDefaultCODTAcknowledgmentEvent',
+            'eventType': ['Products.urban.interfaces.IDefaultCODTAcknowledgmentEvent'],
         },
         {
             'id': "notification-choix-procedure",
@@ -1346,9 +1346,9 @@ EventConfigs = {
             'deadLineDelay': 15,
             'eventDateLabel': 'Date de notification',
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.ICODTProcedureChoiceNotified',
+            'eventType': ['Products.urban.interfaces.ICODTProcedureChoiceNotified'],
         },
         {
             'id': "reception-choix-procedure",
@@ -1356,9 +1356,9 @@ EventConfigs = {
             'deadLineDelay': 15,
             'eventDateLabel': 'Date de notification',
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.ICODTProcedureChoiceNotified',
+            'eventType': ['Products.urban.interfaces.ICODTProcedureChoiceNotified'],
         },
         {
             'id': "transmis-primo-dossier",
@@ -1366,11 +1366,11 @@ EventConfigs = {
             'deadLineDelay': 15,
             'eventDateLabel': 'Date de notification',
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "codt_cu2_form_envoi_premier_dossier_rw.odt", 'title': "Formulaire d'envoi du premier dossier à la DGO4"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IWalloonRegionPrimoEvent',
+            'eventType': ['Products.urban.interfaces.IWalloonRegionPrimoEvent'],
         },
         {
             'id': "config-opinion-request",
@@ -1378,7 +1378,7 @@ EventConfigs = {
             'activatedFields': [],
             'TALCondition': "python: False",
             'podTemplates': ({'id': "codt_cu2_courrier_demande_avis_gen.odt", 'title': "Courrier de demande d'avis"},),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -1392,7 +1392,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
             'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
@@ -1408,7 +1408,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
             'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
@@ -1424,7 +1424,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
             'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
@@ -1440,7 +1440,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
             'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
@@ -1456,7 +1456,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
             'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
@@ -1472,7 +1472,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
             'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
@@ -1488,7 +1488,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
             'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
@@ -1504,7 +1504,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
             'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
@@ -1520,7 +1520,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
             'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
@@ -1536,7 +1536,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
             'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
@@ -1552,7 +1552,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
             'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
@@ -1568,7 +1568,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
             'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
@@ -1584,7 +1584,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
             'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
@@ -1600,7 +1600,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
             'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
@@ -1616,7 +1616,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
             'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
@@ -1632,7 +1632,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
             'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
@@ -1648,7 +1648,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
             'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
@@ -1664,7 +1664,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
             'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
@@ -1680,7 +1680,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
             'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
@@ -1696,7 +1696,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
             'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
@@ -1711,12 +1711,12 @@ EventConfigs = {
             'specialFunctionName': "Rechercher les propriétaires situés dans un rayon de 50m",
             'specialFunctionUrl': "addInvestigationPO",
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "codt_cu2_annexe_25_affiche_verte.odt",
                  'title': "Affiche verte (annexe 25)"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IAnnouncementEvent',
+            'eventType': ['Products.urban.interfaces.IAnnouncementEvent'],
             'eventPortalType': 'UrbanEventAnnouncement',
         },
         {
@@ -1731,7 +1731,7 @@ EventConfigs = {
             'podTemplates': (
                 {'id': "codt_cu2_annexe_26_affiche_jaune.odt", 'title': "Affiche jaune (annexe 26)"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IInquiryEvent',
+            'eventType': ['Products.urban.interfaces.IInquiryEvent'],
             'eventPortalType': 'UrbanEventInquiry',
             'textDefaultValues': (
                 {'text': '\n'.join(default_texts['claimsTextDefaultValue']), 'fieldname': 'claimsText'},
@@ -1744,14 +1744,14 @@ EventConfigs = {
             'deadLineDelay': 15,
             'eventDateLabel': "Date de notification",
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "codt_cu2_annexe_12_decision_octroi_refus.odt",
                  'title': "Décision (Octroi - Refus)"},
                 {'id': "codt_cu2_decision_octroi_refus_lettre_architecte.odt",
                  'title': "Décision (lettre à l'architecte)"},
             ),
-            'eventTypeType': ('Products.urban.interfaces.ITheLicenceEvent',
+            'eventType': ('Products.urban.interfaces.ITheLicenceEvent',
                               'Products.urban.interfaces.ILicenceNotificationEvent'),
         },
         {
@@ -1760,10 +1760,10 @@ EventConfigs = {
             'eventDateLabel': "Date de la réunion",
             'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
             ),
-            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
+            'eventType': ['Products.urban.interfaces.IPatrimonyMeetingEvent'],
         },
         {
             'id': "deuxieme-reunion-patrimoine",
@@ -1771,10 +1771,10 @@ EventConfigs = {
             'eventDateLabel': "Date de la réunion",
             'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
             ),
-            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
+            'eventType': ['Products.urban.interfaces.IPatrimonyMeetingEvent'],
         },
         {
             'id': "reunion-patrimoine-supplementaire",
@@ -1783,10 +1783,10 @@ EventConfigs = {
             'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
             'showTitle': True,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
             ),
-            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
+            'eventType': ['Products.urban.interfaces.IPatrimonyMeetingEvent'],
         },
     ),
     'buildlicence': (
@@ -1797,9 +1797,9 @@ EventConfigs = {
             'activatedFields': [],
             'deadLineDelay': 15,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': ({'id': "urb-recepisse.odt", 'title': "Récépissé de la demande (article 115)"},),
-            'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
+            'eventType': ['Products.urban.interfaces.IDepositEvent'],
         },
         {
             'id': "avis-etude-incidence",
@@ -1817,7 +1817,7 @@ EventConfigs = {
             'activatedFields': [],
             'deadLineDelay': 15,
             'podTemplates': ({'id': "urb-recepisse-art115-complement.odt", 'title': "Récépissé d'un complément à une demande de permis (article 115)"},),
-            'eventTypeType': 'Products.urban.interfaces.IMissingPartDepositEvent',
+            'eventType': ['Products.urban.interfaces.IMissingPartDepositEvent'],
         },
         {
             'id': "recepisse-article-116",
@@ -1825,7 +1825,7 @@ EventConfigs = {
             'activatedFields': [],
             'deadLineDelay': 15,
             'podTemplates': ({'id': "urb-recepisse-art116.odt", 'title': "Récépissé d'un modificatif à une demande de permis (article 116 - 6)"},),
-            'eventTypeType': 'Products.urban.interfaces.IModificationDepositEvent',
+            'eventType': ['Products.urban.interfaces.IModificationDepositEvent'],
         },
         {
             'id': "fiche-technique-voirie",
@@ -1836,7 +1836,7 @@ EventConfigs = {
             'podTemplates': (
                 {'id': "urb-avis-technique-voirie.odt", 'title': "Avis technique voirie"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ITechnicalServiceOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.ITechnicalServiceOpinionRequestEvent'],
         },
         {
             'id': "fiche-technique-energie",
@@ -1847,7 +1847,7 @@ EventConfigs = {
             'podTemplates': (
                 {'id': "urb-avis-technique-energie.odt", 'title': "Avis technique énergie"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ITechnicalServiceOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.ITechnicalServiceOpinionRequestEvent'],
         },
         {
             'id': "fiche-technique-urbanisme",
@@ -1858,16 +1858,16 @@ EventConfigs = {
             'podTemplates': (
                 {'id': "urb-avis-technique-urbanisme.odt", 'title': "Avis technique urbanisme"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ITechnicalServiceOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.ITechnicalServiceOpinionRequestEvent'],
         },
         {
             'id': "dossier-incomplet",
             'title': "Dossier incomplet (avec listing des pièces manquantes - article 116 § 1)",
             'activatedFields': [],
             'deadLineDelay': 15,
-            'eventTypeType': 'Products.urban.interfaces.IMissingPartEvent',
+            'eventType': ['Products.urban.interfaces.IMissingPartEvent'],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "urb-dossier-incomplet-demandeur.odt", 'title': "Dossier incomplet (lettre demandeur)"},
                 {'id': "urb-dossier-incomplet-archi.odt", 'title': "Dossier incomplet (lettre architecte)"},
@@ -1878,9 +1878,9 @@ EventConfigs = {
             'title': "Accusé de réception (dossier complet - article 116 § 1)",
             'activatedFields': ['transmitDate'],
             'deadLineDelay': 15,
-            'eventTypeType': 'Products.urban.interfaces.IAcknowledgmentEvent',
+            'eventType': ['Products.urban.interfaces.IAcknowledgmentEvent'],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "urb-accuse.odt", 'title': "Accusé de réception"},
                 {'id': "urb-accuse-demande-paiement.odt", 'title': "Demande de paiement"},
@@ -1911,12 +1911,12 @@ EventConfigs = {
             'deadLineDelay': 15,
             'eventDateLabel': "Date de transmis",
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "urb-envoi-premier-dossier-rw.odt", 'title': "Lettre d'envoi du premier dossier à la RW"},
                 {'id': "urb-envoi-premier-dossier-form-rw.odt", 'title': "Formulaire d'envoi d'un dossier à la RW"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IWalloonRegionPrimoEvent',
+            'eventType': ['Products.urban.interfaces.IWalloonRegionPrimoEvent'],
         },
         {
             'id': "enquete-publique",
@@ -1940,7 +1940,7 @@ EventConfigs = {
                 {'id': "urb-enq-recommandes.odt", 'title': "Recommandés aux riverains (étiquette Poste)"},
                 {'id': "urb-enq-art341-invit.odt", 'title': "Invitation séance de réclamation (article 341)"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IInquiryEvent',
+            'eventType': ['Products.urban.interfaces.IInquiryEvent'],
             'eventPortalType': 'UrbanEventInquiry',
             'textDefaultValues': (
                 {'text': '\n'.join(default_texts['investigationArticlesTextDefaultValue']), 'fieldname': 'investigationArticlesText'},
@@ -1953,7 +1953,7 @@ EventConfigs = {
             'activatedFields': [],
             'TALCondition': "python: False",
             'podTemplates': ({'id': "urb-avis.odt", 'title': "Courrier de demande d'avis"},),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -1966,7 +1966,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
             'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
@@ -1981,7 +1981,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
             'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
@@ -1996,7 +1996,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
             'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
@@ -2011,7 +2011,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
             'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
@@ -2026,7 +2026,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
             'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
@@ -2041,7 +2041,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
             'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
@@ -2056,7 +2056,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
             'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
@@ -2071,7 +2071,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
             'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
@@ -2086,7 +2086,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
             'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
@@ -2101,7 +2101,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
             'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
@@ -2116,7 +2116,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
             'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
@@ -2131,7 +2131,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
             'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
@@ -2146,7 +2146,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
             'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
@@ -2161,7 +2161,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
             'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
@@ -2176,7 +2176,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
             'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
@@ -2191,7 +2191,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
             'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
@@ -2206,7 +2206,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
             'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
@@ -2221,7 +2221,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
             'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
@@ -2236,7 +2236,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
             'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
@@ -2251,7 +2251,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
             'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
@@ -2262,12 +2262,12 @@ EventConfigs = {
             'activatedFields': ['decisionDate', 'decision', 'decisionText'],
             'deadLineDelay': 15,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "urb-rapp-service.odt", 'title': "Rapport du Service"},
                 {'id': "urb-rapp-college.odt", 'title': "Rapport du Collège"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ICollegeReportEvent',
+            'eventType': ['Products.urban.interfaces.ICollegeReportEvent'],
         },
         {
             'id': "transmis-2eme-dossier-rw",
@@ -2280,7 +2280,7 @@ EventConfigs = {
                 {'id': "urb-envoi-second-dossier-demandeur.odt", 'title': "Information au demandeur envoi second dossier"},
                 {'id': "urb-envoi-premier-dossier-form-rw.odt", 'title': "Formulaire d'envoi d'un dossier à la RW"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IWalloonRegionOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IWalloonRegionOpinionRequestEvent'],
         },
         {
             'id': "passage-conseil-communal",
@@ -2292,7 +2292,7 @@ EventConfigs = {
                 {'id': "urb-conseil-delib-communale-creation.odt", 'title': "Délibération du conseil communal (ouverture de voirie)"},
                 {'id': "urb-conseil-delib-communale-modif.odt", 'title': "Délibération du conseil communal (modification de voirie)"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ICommunalCouncilEvent',
+            'eventType': ['Products.urban.interfaces.ICommunalCouncilEvent'],
         },
         {
             'id': "delivrance-du-permis-octroi-ou-refus",
@@ -2301,7 +2301,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'eventDateLabel': "Date de notification",
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "urb-decision-octroi-dem.odt", 'title': "Octroi du permis (lettre au demandeur)"},
                 {'id': "urb-decision-octroi-rw.odt", 'title': "Octroi du permis (lettre à l'Urbanisme)"},
@@ -2318,7 +2318,7 @@ EventConfigs = {
                 {'id': "urb-debut-travaux.odt", 'title': "Début des travaux (formulaire à remplir par le demandeur)"},
                 {'id': "urb-decision-deliberation-college.odt", 'title': "Delibération du collège d'octroi du permis"},
             ),
-            'eventTypeType': ('Products.urban.interfaces.ITheLicenceEvent', 'Products.urban.interfaces.ILicenceNotificationEvent'),
+            'eventType': ['Products.urban.interfaces.ITheLicenceEvent', 'Products.urban.interfaces.ILicenceNotificationEvent'],
         },
         {
             'id': "fiche-recap",
@@ -2371,7 +2371,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'activatedFields': [],
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IWorkBeginningEvent',
+            'eventType': ['Products.urban.interfaces.IWorkBeginningEvent'],
         },
         {
             'id': "fin-des-travaux",
@@ -2379,7 +2379,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'activatedFields': [],
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IWorkEndEvent',
+            'eventType': ['Products.urban.interfaces.IWorkEndEvent'],
         },
         {
             'id': "peb-declaration-finale",
@@ -2402,7 +2402,7 @@ EventConfigs = {
                 {'id': "urb-prorogation-transmis-accept.odt", 'title': "Acceptation de prorogation (lettre au demandeur)"},
                 {'id': "urb-prorogation-transmis-accept-fd.odt", 'title': "Acceptation de prorogation (lettre au fonctionnaire délégué)"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IProrogationEvent',
+            'eventType': ['Products.urban.interfaces.IProrogationEvent'],
         },
         {
             'id': "suspension-du-permis",
@@ -2459,7 +2459,7 @@ EventConfigs = {
             'activatedFields': ['auditionDate', ],
             'deadLineDelay': 0,
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IRecourseEvent',
+            'eventType': ['Products.urban.interfaces.IRecourseEvent'],
         },
         {
             'id': "recours-decision-au-gouvernement",
@@ -2471,7 +2471,7 @@ EventConfigs = {
                 {'id': "urb-recours-GW-ville-vs-FD.odt", 'title': "Recours de la ville au GW contre décision du FD"},
                 {'id': "urb-recours-GW-transmis-decision-GW-PU.odt", 'title': "Transmis au réclamant de la décision du GW concernant recours au GW"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IRecourseEvent',
+            'eventType': ['Products.urban.interfaces.IRecourseEvent'],
         },
     ),
     'codt_uniquelicence': (
@@ -2482,7 +2482,7 @@ EventConfigs = {
             'activatedFields': ['transmitDate'],
             'deadLineDelay': 15,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "codt_punq_recepisse_depot_demande.odt", 'title': "Récépissé du dépôt de la demande"},
                 {'id': "codt_punq_entete_farde.odt", 'title': "Entête farde dossier"},
@@ -2490,7 +2490,7 @@ EventConfigs = {
                 {'id': "codt_punq_transmis_demande_dgo4.odt", 'title': "Transmis de la demande à la DGO4"},
                 {'id': "codt_punq_information_demandeur.odt", 'title': "Information au demandeur"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
+            'eventType': ['Products.urban.interfaces.IDepositEvent'],
         },
         {
             'id': "dossier-incomplet",
@@ -2499,9 +2499,9 @@ EventConfigs = {
             'activatedFields': [],
             'deadLineDelay': 15,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IMissingPartEvent',
+            'eventType': ['Products.urban.interfaces.IMissingPartEvent'],
         },
         {
             'id': "depot-complements-demande",
@@ -2510,14 +2510,14 @@ EventConfigs = {
             'activatedFields': ['transmitDate'],
             'deadLineDelay': 15,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "codt_punq_recepisse_complements_demande.odt", 'title': "Récépissé de compléments à la demande"},
                 {'id': "codt_punq_transmis_complements_demande_dgo3.odt", 'title': "Transmis des compléments à la DGO3"},
                 {'id': "codt_punq_transmis_complements_demande_dgo4.odt", 'title': "Transmis des compléments à la DGO4"},
                 {'id': "codt_punq_complements_information_demandeur.odt", 'title': "Information au demandeur"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IMissingPartDepositEvent',
+            'eventType': ['Products.urban.interfaces.IMissingPartDepositEvent'],
         },
         {
             'id': "dossier-irrecevable",
@@ -2526,9 +2526,9 @@ EventConfigs = {
             'activatedFields': [],
             'deadLineDelay': 15,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IRefusedIncompletenessEvent',
+            'eventType': ['Products.urban.interfaces.IRefusedIncompletenessEvent'],
         },
         {
             'id': "dossier-complet",
@@ -2537,9 +2537,9 @@ EventConfigs = {
             'activatedFields': [],
             'deadLineDelay': 15,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IAcknowledgmentEvent',
+            'eventType': ['Products.urban.interfaces.IAcknowledgmentEvent'],
         },
         {
             'id': "enquete-publique",
@@ -2549,7 +2549,7 @@ EventConfigs = {
                                 'explanationStartSDate', 'explanationEndSDate ', 'claimsText', 'transmitDate'],
             'deadLineDelay': 15,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "codt_punq_annexe_26.odt", 'title': "Affiche d'enquête"},
                 {'id': "codt_punq_transmis_affichage_dgo3.odt", 'title': "Transmis de l'affichage à la DGO3"},
@@ -2559,7 +2559,7 @@ EventConfigs = {
                 {'id': "codt_punq_transmis_elements_enquete_dgo3.odt", 'title': "Transmis des éléments d'enquête à la DGO3"},
                 {'id': "codt_punq_transmis_elements_enquete_dgo4.odt", 'title': "Transmis des éléments d'enquête à la DGO4"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IInquiryEvent',
+            'eventType': ['Products.urban.interfaces.IInquiryEvent'],
             'eventPortalType': 'UrbanEventInquiry',
         },
         {
@@ -2570,7 +2570,7 @@ EventConfigs = {
             'podTemplates': (
                 {'id': "codt-avis.odt", 'title': "Courrier de demande d'avis"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -2586,7 +2586,7 @@ EventConfigs = {
             'podTemplates': (
                 {'id': "codt_punq_demande_avis_ccatm.odt", 'title': "Demande d’avis à la CCATM"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
             'concernedOutsideDirections': ['brabant_wallon', 'eupen', 'hainaut_1', 'hainaut_2', 'liege_1', 'liege_2',
                 'luxembourg', 'namur'],
@@ -2598,13 +2598,13 @@ EventConfigs = {
             'activatedFields': ['externalDecision', 'decisionDate', 'transmitDate'],
             'deadLineDelay': 15,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "codt_punq_rapport_college.odt", 'title': "Avis préalable du Collège"},
                 {'id': "codt_punq_transmis_avis_college_dgo3.odt", 'title': "Transmis des éléments de l’enquête à la DGO3"},
                 {'id': "codt_punq_transmis_avis_college_dgo4.odt", 'title': "Transmis des éléments de l’enquête à la DGO4"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ICollegeReportEvent',
+            'eventType': ['Products.urban.interfaces.ICollegeReportEvent'],
         },
         {
             'id': "rapport-synthese",
@@ -2613,9 +2613,9 @@ EventConfigs = {
             'activatedFields': ['externalDecision'],
             'deadLineDelay': 15,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IDecisionProjectFromSPWEvent',
+            'eventType': ['Products.urban.interfaces.IDecisionProjectFromSPWEvent'],
         },
         {
             'id': "plans-modificatifs",
@@ -2624,13 +2624,13 @@ EventConfigs = {
             'activatedFields': ['decisionDate', 'transmitDate'],
             'deadLineDelay': 15,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "codt_punq_demande_plans_modificatifs.odt", 'title': "Demande de plan modificatifs"},
                 {'id': "codt_punq_transmis_demande_modificatifs_dgo3.odt", 'title': "Transmis de la demande de plans modificatifs à la DGO3"},
                 {'id': "codt_punq_transmis_demande_modificatifs_dgo4.odt", 'title': "Transmis de la demande de plans modificatifs à la DGO4"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IAcknowledgmentEvent',
+            'eventType': ['Products.urban.interfaces.IAcknowledgmentEvent'],
         },
         {
             'id': "reception-plans-modificatifs",
@@ -2639,13 +2639,13 @@ EventConfigs = {
             'activatedFields': ['transmitDate'],
             'deadLineDelay': 15,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "codt_punq_recepisse_plans_modificatifs_demandeur.odt", 'title': "Récépissé de plans modificatifs"},
                 {'id': "codt_punq_transmis_plans_modificatifs_dgo3.odt", 'title': "Transmis des plans modificatifs à la DGO3"},
                 {'id': "codt_punq_transmis_plans_modificatifs_dgo4.odt", 'title': "Transmis des plans modificatifs à la DGO4"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IModificationDepositEvent',
+            'eventType': ['Products.urban.interfaces.IModificationDepositEvent'],
         },
         {
             'id': "delivrance-permis",
@@ -2654,13 +2654,13 @@ EventConfigs = {
             'activatedFields': ['decisionDate', 'decision', 'transmitDate'],
             'deadLineDelay': 15,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "codt_punq_transmis_decision_demandeur.odt", 'title': "Transmis de la décision au demandeur"},
                 {'id': "codt_punq_transmis_decision_dgo3.odt", 'title': "Transmis de la décision à la DGO3"},
                 {'id': "codt_punq_transmis_decision_dgo4.odt", 'title': "Transmis de la décision à la DGO4"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ITheLicenceEvent',
+            'eventType': ['Products.urban.interfaces.ITheLicenceEvent'],
         },
         {
             'id': "affichage-decision",
@@ -2669,12 +2669,12 @@ EventConfigs = {
             'activatedFields': ['displayDate', 'displayDateEnd'],
             'deadLineDelay': 15,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "codt_punq_affichage_decision.odt", 'title': "Affichage de la décision"},
                 {'id': "codt_punq_attestation_affichage_decision.odt", 'title': "Attestation d'affichage de la décision"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IDisplayingTheDecisionEvent',
+            'eventType': ['Products.urban.interfaces.IDisplayingTheDecisionEvent'],
         },
         {
             'id': "recours-gouvernement",
@@ -2683,7 +2683,7 @@ EventConfigs = {
             'activatedFields': ['transmitDate', 'displayDate'],
             'deadLineDelay': 15,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "codt_punq_transmis_pieces_recours_dgo3.odt",
                  'title': "Transmis des pièces à la cellule recours - DGO3"},
@@ -2692,7 +2692,7 @@ EventConfigs = {
                 {'id': "codt_punq_attestation_affichage_recours.odt",
                  'title': "Attestation d’affichage du recours"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IRecourseEvent',
+            'eventType': ['Products.urban.interfaces.IRecourseEvent'],
         },
         {
             'id': "decision-recours",
@@ -2701,12 +2701,12 @@ EventConfigs = {
             'activatedFields': ['recourseDecision', 'recourseDecisionDisplayDate'],
             'deadLineDelay': 15,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "codt_punq_attestation_affichage_decision_recours.odt",
                  'title': "Affichage de la décision"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IRecourseEvent',
+            'eventType': ['Products.urban.interfaces.IRecourseEvent'],
         },
         {
             'id': "premiere-reunion-patrimoine",
@@ -2714,10 +2714,10 @@ EventConfigs = {
             'eventDateLabel': "Date de la réunion",
             'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
             ),
-            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
+            'eventType': ['Products.urban.interfaces.IPatrimonyMeetingEvent'],
         },
         {
             'id': "deuxieme-reunion-patrimoine",
@@ -2725,10 +2725,10 @@ EventConfigs = {
             'eventDateLabel': "Date de la réunion",
             'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
             ),
-            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
+            'eventType': ['Products.urban.interfaces.IPatrimonyMeetingEvent'],
         },
         {
             'id': "reunion-patrimoine-supplementaire",
@@ -2737,10 +2737,10 @@ EventConfigs = {
             'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
             'showTitle': True,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
             ),
-            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
+            'eventType': ['Products.urban.interfaces.IPatrimonyMeetingEvent'],
         },
     ),
     'uniquelicence': (
@@ -2751,9 +2751,9 @@ EventConfigs = {
             'activatedFields': [],
             'deadLineDelay': 15,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': ({'id': "urb-recepisse.odt", 'title': "Récépissé de la demande (article 115)"},),
-            'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
+            'eventType': ['Products.urban.interfaces.IDepositEvent'],
         },
         {
             'id': "avis-etude-incidence",
@@ -2771,7 +2771,7 @@ EventConfigs = {
             'activatedFields': [],
             'deadLineDelay': 15,
             'podTemplates': ({'id': "urb-recepisse-art115-complement.odt", 'title': "Récépissé d'un complément à une demande de permis (article 115)"},),
-            'eventTypeType': 'Products.urban.interfaces.IMissingPartDepositEvent',
+            'eventType': ['Products.urban.interfaces.IMissingPartDepositEvent'],
         },
         {
             'id': "recepisse-article-116",
@@ -2779,7 +2779,7 @@ EventConfigs = {
             'activatedFields': [],
             'deadLineDelay': 15,
             'podTemplates': ({'id': "urb-recepisse-art116.odt", 'title': "Récépissé d'un modificatif à une demande de permis (article 116 - 6)"},),
-            'eventTypeType': 'Products.urban.interfaces.IModificationDepositEvent',
+            'eventType': ['Products.urban.interfaces.IModificationDepositEvent'],
         },
         {
             'id': "fiche-technique-voirie",
@@ -2790,7 +2790,7 @@ EventConfigs = {
             'podTemplates': (
                 {'id': "urb-avis-technique-voirie.odt", 'title': "Avis technique voirie"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ITechnicalServiceOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.ITechnicalServiceOpinionRequestEvent'],
         },
         {
             'id': "fiche-technique-energie",
@@ -2801,7 +2801,7 @@ EventConfigs = {
             'podTemplates': (
                 {'id': "urb-avis-technique-energie.odt", 'title': "Avis technique énergie"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ITechnicalServiceOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.ITechnicalServiceOpinionRequestEvent'],
         },
         {
             'id': "fiche-technique-urbanisme",
@@ -2812,16 +2812,16 @@ EventConfigs = {
             'podTemplates': (
                 {'id': "urb-avis-technique-urbanisme.odt", 'title': "Avis technique urbanisme"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ITechnicalServiceOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.ITechnicalServiceOpinionRequestEvent'],
         },
         {
             'id': "dossier-incomplet",
             'title': "Dossier incomplet (avec listing des pièces manquantes - article 116 § 1)",
             'activatedFields': [],
             'deadLineDelay': 15,
-            'eventTypeType': 'Products.urban.interfaces.IMissingPartEvent',
+            'eventType': ['Products.urban.interfaces.IMissingPartEvent'],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "urb-dossier-incomplet-demandeur.odt", 'title': "Dossier incomplet (lettre demandeur)"},
                 {'id': "urb-dossier-incomplet-archi.odt", 'title': "Dossier incomplet (lettre architecte)"},
@@ -2832,9 +2832,9 @@ EventConfigs = {
             'title': "Accusé de réception (dossier complet - article 116 § 1)",
             'activatedFields': ['transmitDate'],
             'deadLineDelay': 15,
-            'eventTypeType': 'Products.urban.interfaces.IAcknowledgmentEvent',
+            'eventType': ['Products.urban.interfaces.IAcknowledgmentEvent'],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "urb-accuse.odt", 'title': "Accusé de réception"},
                 {'id': "urb-accuse-demande-paiement.odt", 'title': "Demande de paiement"},
@@ -2865,12 +2865,12 @@ EventConfigs = {
             'deadLineDelay': 15,
             'eventDateLabel': "Date de transmis",
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "urb-envoi-premier-dossier-rw.odt", 'title': "Lettre d'envoi du premier dossier à la RW"},
                 {'id': "urb-envoi-premier-dossier-form-rw.odt", 'title': "Formulaire d'envoi d'un dossier à la RW"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IWalloonRegionPrimoEvent',
+            'eventType': ['Products.urban.interfaces.IWalloonRegionPrimoEvent'],
         },
         {
             'id': "enquete-publique",
@@ -2894,7 +2894,7 @@ EventConfigs = {
                 {'id': "urb-enq-recommandes.odt", 'title': "Recommandés aux riverains (étiquette Poste)"},
                 {'id': "urb-enq-art341-invit.odt", 'title': "Invitation séance de réclamation (article 341)"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IInquiryEvent',
+            'eventType': ['Products.urban.interfaces.IInquiryEvent'],
             'eventPortalType': 'UrbanEventInquiry',
             'textDefaultValues': (
                 {'text': '\n'.join(default_texts['investigationArticlesTextDefaultValue']), 'fieldname': 'investigationArticlesText'},
@@ -2907,7 +2907,7 @@ EventConfigs = {
             'activatedFields': [],
             'TALCondition': "python: False",
             'podTemplates': ({'id': "urb-avis.odt", 'title': "Courrier de demande d'avis"},),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -2922,7 +2922,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -2937,7 +2937,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -2952,7 +2952,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -2967,7 +2967,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -2982,7 +2982,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -2997,7 +2997,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -3012,7 +3012,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -3027,7 +3027,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -3042,7 +3042,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -3057,7 +3057,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -3072,7 +3072,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -3087,7 +3087,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -3102,7 +3102,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -3117,7 +3117,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -3132,7 +3132,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -3147,7 +3147,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -3162,7 +3162,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -3177,7 +3177,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -3192,7 +3192,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -3207,7 +3207,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -3216,12 +3216,12 @@ EventConfigs = {
             'activatedFields': ['decisionDate', 'decision', 'decisionText'],
             'deadLineDelay': 15,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "urb-rapp-service.odt", 'title': "Rapport du Service"},
                 {'id': "urb-rapp-college.odt", 'title': "Rapport du Collège"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ICollegeReportEvent',
+            'eventType': ['Products.urban.interfaces.ICollegeReportEvent'],
         },
         {
             'id': "transmis-2eme-dossier-rw",
@@ -3234,7 +3234,7 @@ EventConfigs = {
                 {'id': "urb-envoi-second-dossier-demandeur.odt", 'title': "Information au demandeur envoi second dossier"},
                 {'id': "urb-envoi-premier-dossier-form-rw.odt", 'title': "Formulaire d'envoi d'un dossier à la RW"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IWalloonRegionOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IWalloonRegionOpinionRequestEvent'],
         },
         {
             'id': "passage-conseil-communal",
@@ -3246,7 +3246,7 @@ EventConfigs = {
                 {'id': "urb-conseil-delib-communale-creation.odt", 'title': "Délibération du conseil communal (ouverture de voirie)"},
                 {'id': "urb-conseil-delib-communale-modif.odt", 'title': "Délibération du conseil communal (modification de voirie)"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ICommunalCouncilEvent',
+            'eventType': ['Products.urban.interfaces.ICommunalCouncilEvent'],
         },
         {
             'id': "delivrance-du-permis-octroi-ou-refus",
@@ -3255,7 +3255,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'eventDateLabel': "Date de notification",
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "urb-decision-octroi-dem.odt", 'title': "Octroi du permis (lettre au demandeur)"},
                 {'id': "urb-decision-octroi-rw.odt", 'title': "Octroi du permis (lettre à l'Urbanisme)"},
@@ -3272,7 +3272,7 @@ EventConfigs = {
                 {'id': "urb-debut-travaux.odt", 'title': "Début des travaux (formulaire à remplir par le demandeur)"},
                 {'id': "urb-decision-deliberation-college.odt", 'title': "Delibération du collège d'octroi du permis"},
             ),
-            'eventTypeType': ('Products.urban.interfaces.ITheLicenceEvent', 'Products.urban.interfaces.ILicenceNotificationEvent'),
+            'eventType': ['Products.urban.interfaces.ITheLicenceEvent', 'Products.urban.interfaces.ILicenceNotificationEvent'],
         },
         {
             'id': "fiche-recap",
@@ -3325,7 +3325,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'activatedFields': [],
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IWorkBeginningEvent',
+            'eventType': ['Products.urban.interfaces.IWorkBeginningEvent'],
         },
         {
             'id': "fin-des-travaux",
@@ -3333,7 +3333,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'activatedFields': [],
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IWorkEndEvent',
+            'eventType': ['Products.urban.interfaces.IWorkEndEvent'],
         },
         {
             'id': "peb-declaration-finale",
@@ -3356,7 +3356,7 @@ EventConfigs = {
                 {'id': "urb-prorogation-transmis-accept.odt", 'title': "Acceptation de prorogation (lettre au demandeur)"},
                 {'id': "urb-prorogation-transmis-accept-fd.odt", 'title': "Acceptation de prorogation (lettre au fonctionnaire délégué)"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IProrogationEvent',
+            'eventType': ['Products.urban.interfaces.IProrogationEvent'],
         },
         {
             'id': "suspension-du-permis",
@@ -3413,7 +3413,7 @@ EventConfigs = {
             'activatedFields': ['auditionDate', ],
             'deadLineDelay': 0,
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IRecourseEvent',
+            'eventType': ['Products.urban.interfaces.IRecourseEvent'],
         },
         {
             'id': "recours-decision-au-gouvernement",
@@ -3425,7 +3425,7 @@ EventConfigs = {
                 {'id': "urb-recours-GW-ville-vs-FD.odt", 'title': "Recours de la ville au GW contre décision du FD"},
                 {'id': "urb-recours-GW-transmis-decision-GW-PU.odt", 'title': "Transmis au réclamant de la décision du GW concernant recours au GW"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IRecourseEvent',
+            'eventType': ['Products.urban.interfaces.IRecourseEvent'],
         },
     ),
     'integratedlicence': (
@@ -3436,9 +3436,9 @@ EventConfigs = {
             'activatedFields': [],
             'deadLineDelay': 15,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': ({'id': "urb-recepisse.odt", 'title': "Récépissé de la demande (article 115)"},),
-            'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
+            'eventType': ['Products.urban.interfaces.IDepositEvent'],
         },
         {
             'id': "avis-etude-incidence",
@@ -3456,7 +3456,7 @@ EventConfigs = {
             'activatedFields': [],
             'deadLineDelay': 15,
             'podTemplates': ({'id': "urb-recepisse-art115-complement.odt", 'title': "Récépissé d'un complément à une demande de permis (article 115)"},),
-            'eventTypeType': 'Products.urban.interfaces.IMissingPartDepositEvent',
+            'eventType': ['Products.urban.interfaces.IMissingPartDepositEvent'],
         },
         {
             'id': "recepisse-article-116",
@@ -3464,7 +3464,7 @@ EventConfigs = {
             'activatedFields': [],
             'deadLineDelay': 15,
             'podTemplates': ({'id': "urb-recepisse-art116.odt", 'title': "Récépissé d'un modificatif à une demande de permis (article 116 - 6)"},),
-            'eventTypeType': 'Products.urban.interfaces.IModificationDepositEvent',
+            'eventType': ['Products.urban.interfaces.IModificationDepositEvent'],
         },
         {
             'id': "fiche-technique-voirie",
@@ -3475,7 +3475,7 @@ EventConfigs = {
             'podTemplates': (
                 {'id': "urb-avis-technique-voirie.odt", 'title': "Avis technique voirie"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ITechnicalServiceOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.ITechnicalServiceOpinionRequestEvent'],
         },
         {
             'id': "fiche-technique-energie",
@@ -3486,7 +3486,7 @@ EventConfigs = {
             'podTemplates': (
                 {'id': "urb-avis-technique-energie.odt", 'title': "Avis technique énergie"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ITechnicalServiceOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.ITechnicalServiceOpinionRequestEvent'],
         },
         {
             'id': "fiche-technique-urbanisme",
@@ -3497,16 +3497,16 @@ EventConfigs = {
             'podTemplates': (
                 {'id': "urb-avis-technique-urbanisme.odt", 'title': "Avis technique urbanisme"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ITechnicalServiceOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.ITechnicalServiceOpinionRequestEvent'],
         },
         {
             'id': "dossier-incomplet",
             'title': "Dossier incomplet (avec listing des pièces manquantes - article 116 § 1)",
             'activatedFields': [],
             'deadLineDelay': 15,
-            'eventTypeType': 'Products.urban.interfaces.IMissingPartEvent',
+            'eventType': ['Products.urban.interfaces.IMissingPartEvent'],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "urb-dossier-incomplet-demandeur.odt", 'title': "Dossier incomplet (lettre demandeur)"},
                 {'id': "urb-dossier-incomplet-archi.odt", 'title': "Dossier incomplet (lettre architecte)"},
@@ -3517,9 +3517,9 @@ EventConfigs = {
             'title': "Accusé de réception (dossier complet - article 116 § 1)",
             'activatedFields': ['transmitDate'],
             'deadLineDelay': 15,
-            'eventTypeType': 'Products.urban.interfaces.IAcknowledgmentEvent',
+            'eventType': ['Products.urban.interfaces.IAcknowledgmentEvent'],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "urb-accuse.odt", 'title': "Accusé de réception"},
                 {'id': "urb-accuse-demande-paiement.odt", 'title': "Demande de paiement"},
@@ -3550,12 +3550,12 @@ EventConfigs = {
             'deadLineDelay': 15,
             'eventDateLabel': "Date de transmis",
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "urb-envoi-premier-dossier-rw.odt", 'title': "Lettre d'envoi du premier dossier à la RW"},
                 {'id': "urb-envoi-premier-dossier-form-rw.odt", 'title': "Formulaire d'envoi d'un dossier à la RW"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IWalloonRegionPrimoEvent',
+            'eventType': ['Products.urban.interfaces.IWalloonRegionPrimoEvent'],
         },
         {
             'id': "enquete-publique",
@@ -3579,7 +3579,7 @@ EventConfigs = {
                 {'id': "urb-enq-recommandes.odt", 'title': "Recommandés aux riverains (étiquette Poste)"},
                 {'id': "urb-enq-art341-invit.odt", 'title': "Invitation séance de réclamation (article 341)"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IInquiryEvent',
+            'eventType': ['Products.urban.interfaces.IInquiryEvent'],
             'eventPortalType': 'UrbanEventInquiry',
             'textDefaultValues': (
                 {'text': '\n'.join(default_texts['investigationArticlesTextDefaultValue']), 'fieldname': 'investigationArticlesText'},
@@ -3592,7 +3592,7 @@ EventConfigs = {
             'activatedFields': [],
             'TALCondition': "python: False",
             'podTemplates': ({'id': "urb-avis.odt", 'title': "Courrier de demande d'avis"},),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -3607,7 +3607,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -3622,7 +3622,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -3637,7 +3637,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -3652,7 +3652,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -3667,7 +3667,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -3682,7 +3682,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -3697,7 +3697,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -3712,7 +3712,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -3727,7 +3727,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -3742,7 +3742,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -3757,7 +3757,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -3772,7 +3772,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -3787,7 +3787,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -3802,7 +3802,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -3817,7 +3817,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -3832,7 +3832,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -3847,7 +3847,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -3862,7 +3862,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -3877,7 +3877,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -3892,7 +3892,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -3901,12 +3901,12 @@ EventConfigs = {
             'activatedFields': ['decisionDate', 'decision', 'decisionText'],
             'deadLineDelay': 15,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "urb-rapp-service.odt", 'title': "Rapport du Service"},
                 {'id': "urb-rapp-college.odt", 'title': "Rapport du Collège"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ICollegeReportEvent',
+            'eventType': ['Products.urban.interfaces.ICollegeReportEvent'],
         },
         {
             'id': "transmis-2eme-dossier-rw",
@@ -3919,7 +3919,7 @@ EventConfigs = {
                 {'id': "urb-envoi-second-dossier-demandeur.odt", 'title': "Information au demandeur envoi second dossier"},
                 {'id': "urb-envoi-premier-dossier-form-rw.odt", 'title': "Formulaire d'envoi d'un dossier à la RW"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IWalloonRegionOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IWalloonRegionOpinionRequestEvent'],
         },
         {
             'id': "passage-conseil-communal",
@@ -3931,7 +3931,7 @@ EventConfigs = {
                 {'id': "urb-conseil-delib-communale-creation.odt", 'title': "Délibération du conseil communal (ouverture de voirie)"},
                 {'id': "urb-conseil-delib-communale-modif.odt", 'title': "Délibération du conseil communal (modification de voirie)"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ICommunalCouncilEvent',
+            'eventType': ['Products.urban.interfaces.ICommunalCouncilEvent'],
         },
         {
             'id': "delivrance-du-permis-octroi-ou-refus",
@@ -3940,7 +3940,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'eventDateLabel': "Date de notification",
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "urb-decision-octroi-dem.odt", 'title': "Octroi du permis (lettre au demandeur)"},
                 {'id': "urb-decision-octroi-rw.odt", 'title': "Octroi du permis (lettre à l'Urbanisme)"},
@@ -3957,7 +3957,7 @@ EventConfigs = {
                 {'id': "urb-debut-travaux.odt", 'title': "Début des travaux (formulaire à remplir par le demandeur)"},
                 {'id': "urb-decision-deliberation-college.odt", 'title': "Delibération du collège d'octroi du permis"},
             ),
-            'eventTypeType': ('Products.urban.interfaces.ITheLicenceEvent', 'Products.urban.interfaces.ILicenceNotificationEvent'),
+            'eventType': ['Products.urban.interfaces.ITheLicenceEvent', 'Products.urban.interfaces.ILicenceNotificationEvent'],
         },
         {
             'id': "fiche-recap",
@@ -4010,7 +4010,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'activatedFields': [],
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IWorkBeginningEvent',
+            'eventType': ['Products.urban.interfaces.IWorkBeginningEvent'],
         },
         {
             'id': "fin-des-travaux",
@@ -4018,7 +4018,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'activatedFields': [],
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IWorkEndEvent',
+            'eventType': ['Products.urban.interfaces.IWorkEndEvent'],
         },
         {
             'id': "peb-declaration-finale",
@@ -4041,7 +4041,7 @@ EventConfigs = {
                 {'id': "urb-prorogation-transmis-accept.odt", 'title': "Acceptation de prorogation (lettre au demandeur)"},
                 {'id': "urb-prorogation-transmis-accept-fd.odt", 'title': "Acceptation de prorogation (lettre au fonctionnaire délégué)"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IProrogationEvent',
+            'eventType': ['Products.urban.interfaces.IProrogationEvent'],
         },
         {
             'id': "suspension-du-permis",
@@ -4098,7 +4098,7 @@ EventConfigs = {
             'activatedFields': ['auditionDate', ],
             'deadLineDelay': 0,
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IRecourseEvent',
+            'eventType': ['Products.urban.interfaces.IRecourseEvent'],
         },
         {
             'id': "recours-decision-au-gouvernement",
@@ -4110,7 +4110,7 @@ EventConfigs = {
                 {'id': "urb-recours-GW-ville-vs-FD.odt", 'title': "Recours de la ville au GW contre décision du FD"},
                 {'id': "urb-recours-GW-transmis-decision-GW-PU.odt", 'title': "Transmis au réclamant de la décision du GW concernant recours au GW"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IRecourseEvent',
+            'eventType': ['Products.urban.interfaces.IRecourseEvent'],
         },
     ),
     'article127': (
@@ -4131,9 +4131,9 @@ EventConfigs = {
             'activatedFields': [],
             'deadLineDelay': 15,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': ({'id': "urb-recepisse.odt", 'title': "Récépissé de la demande (article 115)"},),
-            'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
+            'eventType': ['Products.urban.interfaces.IDepositEvent'],
         },
         {
             'id': "avis-etude-incidence",
@@ -4151,7 +4151,7 @@ EventConfigs = {
             'activatedFields': [],
             'deadLineDelay': 15,
             'podTemplates': ({'id': "urb-recepisse-art115-complement.odt", 'title': "Récépissé d'un complément à une demande de permis (article 115)"},),
-            'eventTypeType': 'Products.urban.interfaces.IMissingPartDepositEvent',
+            'eventType': ['Products.urban.interfaces.IMissingPartDepositEvent'],
         },
         {
             'id': "recepisse-article-116",
@@ -4159,7 +4159,7 @@ EventConfigs = {
             'activatedFields': [],
             'deadLineDelay': 15,
             'podTemplates': ({'id': "urb-recepisse-art116.odt", 'title': "Récépissé d'un modificatif à une demande de permis (article 116 - 6)"},),
-            'eventTypeType': 'Products.urban.interfaces.IModificationDepositEvent',
+            'eventType': ['Products.urban.interfaces.IModificationDepositEvent'],
         },
         {
             'id': "fiche-technique-voirie",
@@ -4170,7 +4170,7 @@ EventConfigs = {
             'podTemplates': (
                 {'id': "urb-avis-technique-voirie.odt", 'title': "Avis technique voirie"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ITechnicalServiceOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.ITechnicalServiceOpinionRequestEvent'],
         },
         {
             'id': "fiche-technique-energie",
@@ -4181,7 +4181,7 @@ EventConfigs = {
             'podTemplates': (
                 {'id': "urb-avis-technique-energie.odt", 'title': "Avis technique énergie"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ITechnicalServiceOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.ITechnicalServiceOpinionRequestEvent'],
         },
         {
             'id': "fiche-technique-urbanisme",
@@ -4192,16 +4192,16 @@ EventConfigs = {
             'podTemplates': (
                 {'id': "urb-avis-technique-urbanisme.odt", 'title': "Avis technique urbanisme"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ITechnicalServiceOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.ITechnicalServiceOpinionRequestEvent'],
         },
         {
             'id': "dossier-incomplet",
             'title': "Dossier incomplet (avec listing des pièces manquantes - article 116 § 1)",
             'activatedFields': [],
             'deadLineDelay': 15,
-            'eventTypeType': 'Products.urban.interfaces.IMissingPartEvent',
+            'eventType': ['Products.urban.interfaces.IMissingPartEvent'],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "urb-dossier-incomplet-demandeur.odt", 'title': "Dossier incomplet (lettre demandeur)"},
                 {'id': "urb-dossier-incomplet-archi.odt", 'title': "Dossier incomplet (lettre architecte)"},
@@ -4212,9 +4212,9 @@ EventConfigs = {
             'title': "Accusé de réception (dossier complet - article 116 § 1)",
             'activatedFields': ['transmitDate'],
             'deadLineDelay': 15,
-            'eventTypeType': 'Products.urban.interfaces.IAcknowledgmentEvent',
+            'eventType': ['Products.urban.interfaces.IAcknowledgmentEvent'],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "urb-accuse.odt", 'title': "Accusé de réception"},
                 {'id': "urb-accuse-demande-paiement.odt", 'title': "Demande de paiement"},
@@ -4245,12 +4245,12 @@ EventConfigs = {
             'deadLineDelay': 15,
             'eventDateLabel': "Date de transmis",
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "urb-envoi-premier-dossier-art127-rw.odt", 'title': "Lettre d'envoi du dossier (article 127) à la RW"},
                 {'id': "urb-envoi-premier-dossier-form-rw.odt", 'title': "Formulaire d'envoi d'un dossier à la RW"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IWalloonRegionPrimoEvent',
+            'eventType': ['Products.urban.interfaces.IWalloonRegionPrimoEvent'],
         },
         {
             'id': "enquete-publique",
@@ -4274,7 +4274,7 @@ EventConfigs = {
                 {'id': "urb-enq-recommandes.odt", 'title': "Recommandés aux riverains (étiquette Poste)"},
                 {'id': "urb-enq-art341-invit.odt", 'title': "Invitation séance de réclamation (article 341)"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IInquiryEvent',
+            'eventType': ['Products.urban.interfaces.IInquiryEvent'],
             'eventPortalType': 'UrbanEventInquiry',
             'textDefaultValues': (
                 {'text': '\n'.join(default_texts['investigationArticlesTextDefaultValue']), 'fieldname': 'investigationArticlesText'},
@@ -4287,7 +4287,7 @@ EventConfigs = {
             'activatedFields': [],
             'TALCondition': "python: False",
             'podTemplates': ({'id': "urb-avis.odt", 'title': "Courrier de demande d'avis"},),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -4302,7 +4302,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -4317,7 +4317,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -4332,7 +4332,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -4347,7 +4347,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -4362,7 +4362,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -4377,7 +4377,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -4392,7 +4392,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -4407,7 +4407,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -4422,7 +4422,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -4437,7 +4437,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -4452,7 +4452,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -4467,7 +4467,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -4482,7 +4482,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -4497,7 +4497,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -4512,7 +4512,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -4527,7 +4527,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -4542,7 +4542,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -4557,7 +4557,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -4572,7 +4572,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -4587,7 +4587,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -4596,12 +4596,12 @@ EventConfigs = {
             'activatedFields': ['decisionDate', 'decision', 'decisionText'],
             'deadLineDelay': 15,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "urb-rapp-service.odt", 'title': "Rapport du Service"},
                 {'id': "urb-rapp-college.odt", 'title': "Rapport du Collège"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ICollegeReportEvent',
+            'eventType': ['Products.urban.interfaces.ICollegeReportEvent'],
         },
         {
             'id': "transmis-2eme-dossier-rw",
@@ -4614,7 +4614,7 @@ EventConfigs = {
                 {'id': "urb-envoi-second-dossier-demandeur.odt", 'title': "Information au demandeur envoi second dossier"},
                 {'id': "urb-envoi-premier-dossier-form-rw.odt", 'title': "Formulaire d'envoi d'un dossier à la RW"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IWalloonRegionOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IWalloonRegionOpinionRequestEvent'],
         },
         {
             'id': "passage-conseil-communal",
@@ -4626,7 +4626,7 @@ EventConfigs = {
                 {'id': "urb-conseil-delib-communale-creation.odt", 'title': "Délibération du conseil communal (ouverture de voirie)"},
                 {'id': "urb-conseil-delib-communale-modif.odt", 'title': "Délibération du conseil communal (modification de voirie)"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ICommunalCouncilEvent',
+            'eventType': ['Products.urban.interfaces.ICommunalCouncilEvent'],
         },
         {
             'id': "delivrance-du-permis-octroi-ou-refus",
@@ -4635,7 +4635,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'eventDateLabel': "Date de notification",
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "urb-decision-octroi-dem.odt", 'title': "Octroi du permis (lettre au demandeur)"},
                 {'id': "urb-decision-octroi-rw.odt", 'title': "Octroi du permis (lettre à l'Urbanisme)"},
@@ -4651,7 +4651,7 @@ EventConfigs = {
                 {'id': "urb-debut-travaux.odt", 'title': "Début des travaux (formulaire à remplir par le demandeur)"},
                 {'id': "urb-decision-deliberation-college.odt", 'title': "Delibération du collège d'octroi du permis"},
             ),
-            'eventTypeType': ('Products.urban.interfaces.ITheLicenceEvent', 'Products.urban.interfaces.ILicenceNotificationEvent'),
+            'eventType': ['Products.urban.interfaces.ITheLicenceEvent', 'Products.urban.interfaces.ILicenceNotificationEvent'],
         },
         {
             'id': "fiche-recap",
@@ -4704,7 +4704,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'activatedFields': [],
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IWorkBeginningEvent',
+            'eventType': ['Products.urban.interfaces.IWorkBeginningEvent'],
         },
         {
             'id': "fin-des-travaux",
@@ -4712,7 +4712,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'activatedFields': [],
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IWorkEndEvent',
+            'eventType': ['Products.urban.interfaces.IWorkEndEvent'],
         },
         {
             'id': "peb-declaration-finale",
@@ -4735,7 +4735,7 @@ EventConfigs = {
                 {'id': "urb-prorogation-transmis-accept.odt", 'title': "Acceptation de prorogation (lettre au demandeur)"},
                 {'id': "urb-prorogation-transmis-accept-fd.odt", 'title': "Acceptation de prorogation (lettre au fonctionnaire délégué)"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IProrogationEvent',
+            'eventType': ['Products.urban.interfaces.IProrogationEvent'],
         },
         {
             'id': "suspension-du-permis",
@@ -4792,7 +4792,7 @@ EventConfigs = {
             'activatedFields': ['auditionDate', ],
             'deadLineDelay': 0,
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IRecourseEvent',
+            'eventType': ['Products.urban.interfaces.IRecourseEvent'],
         },
         {
             'id': "recours-decision-au-gouvernement",
@@ -4804,7 +4804,7 @@ EventConfigs = {
                 {'id': "urb-recours-GW-ville-vs-FD.odt", 'title': "Recours de la ville au GW contre décision du FD"},
                 {'id': "urb-recours-GW-transmis-decision-FD-art127.odt", 'title': "Transmis au réclamant de la décision du FD concernant recours au GW contre art 127"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IRecourseEvent',
+            'eventType': ['Products.urban.interfaces.IRecourseEvent'],
         },
     ),
     'declaration': (
@@ -4814,11 +4814,11 @@ EventConfigs = {
             'activatedFields': [],
             'deadLineDelay': 15,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "decl-recepisse.odt", 'title': "Récepissé de la déclaration"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
+            'eventType': ['Products.urban.interfaces.IDepositEvent'],
         },
         {
             'id': 'avis-technique',
@@ -4837,11 +4837,11 @@ EventConfigs = {
             'deadLineDelay': 15,
             'eventDateLabel': "Date de la séance collège",
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "decl-delib-college.odt", 'title': "Délibération collège"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ICollegeReportEvent',
+            'eventType': ['Products.urban.interfaces.ICollegeReportEvent'],
         },
         {
             'id': "transmis-decision",
@@ -4850,12 +4850,12 @@ EventConfigs = {
             'deadLineDelay': 15,
             'eventDateLabel': "Date de transmis",
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "decl-transmis-decision-fd.odt", 'title': "Transmis décision au FD"},
                 {'id': "decl-transmis-decision-demandeur.odt", 'title': "Transmis décision au demandeur"},
             ),
-            'eventTypeType': ('Products.urban.interfaces.ITheLicenceEvent', 'Products.urban.interfaces.ILicenceNotificationEvent'),
+            'eventType': ['Products.urban.interfaces.ITheLicenceEvent', 'Products.urban.interfaces.ILicenceNotificationEvent'],
         },
     ),
     'urbancertificateone': (
@@ -4865,11 +4865,11 @@ EventConfigs = {
             'activatedFields': ['receivedDocumentReference'],
             'deadLineDelay': 15,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "cu1-recepisse.odt", 'title': "Récépissé de la demande"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
+            'eventType': ['Products.urban.interfaces.IDepositEvent'],
         },
         {
             'id': "fiche-technique-voirie",
@@ -4880,7 +4880,7 @@ EventConfigs = {
             'podTemplates': (
                 {'id': "cu1-avis-technique-voirie.odt", 'title': "Avis technique voirie"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ITechnicalServiceOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.ITechnicalServiceOpinionRequestEvent'],
         },
         {
             'id': "fiche-technique-urbanisme",
@@ -4891,7 +4891,7 @@ EventConfigs = {
             'podTemplates': (
                 {'id': "cu1-avis-technique-urbanisme.odt", 'title': "Avis technique urbanisme"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ITechnicalServiceOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.ITechnicalServiceOpinionRequestEvent'],
         },
         {
             'id': "transmis-dossier-rw",
@@ -4902,7 +4902,7 @@ EventConfigs = {
                 {'id': "cu1-envoi-dossier-rw.odt", 'title': "Lettre d'envoi du dossier à la RW"},
                 {'id': "cu1-envoi-dossier-form-rw.odt", 'title': "Formulaire d'envoi d'un dossier à la RW"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IWalloonRegionPrimoEvent',
+            'eventType': ['Products.urban.interfaces.IWalloonRegionPrimoEvent'],
         },
         {
             'id': "octroi-cu1",
@@ -4910,14 +4910,14 @@ EventConfigs = {
             'activatedFields': [],
             'deadLineDelay': 15,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "cu1-lettre-notaire.odt", 'title': "Lettre au notaire (ou demandeur) (octroi)"},
                 {'id': "cu1-certif.odt", 'title': "Certificat d'urbanisme 1 (annexe 35 formulaire I B)"},
                 {'id': "cu1-demande-paiement.odt", 'title': "Demande de paiement"},
                 {'id': "cu1-rappel-demande-paiement.odt", 'title': "Rappel paiement"},
             ),
-            'eventTypeType': ('Products.urban.interfaces.ITheLicenceEvent', 'Products.urban.interfaces.ILicenceNotificationEvent'),
+            'eventType': ['Products.urban.interfaces.ITheLicenceEvent', 'Products.urban.interfaces.ILicenceNotificationEvent'],
         },
     ),
     'urbancertificatetwo': (
@@ -4927,18 +4927,18 @@ EventConfigs = {
             'activatedFields': [],
             'deadLineDelay': 15,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "cu2-recepisse.odt", 'title': "Récépissé de la demande"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
+            'eventType': ['Products.urban.interfaces.IDepositEvent'],
         },
         {
             'id': "dossier-incomplet",
             'title': "Dossier incomplet (avec listing des pièces manquantes)",
             'activatedFields': [],
             'deadLineDelay': 15,
-            'eventTypeType': 'Products.urban.interfaces.IMissingPartEvent',
+            'eventType': ['Products.urban.interfaces.IMissingPartEvent'],
             'podTemplates': (
                 {'id': "cu2-dossier-incomplet-demandeur.odt", 'title': "Dossier incomplet (lettre demandeur)"},
             ),
@@ -4965,7 +4965,7 @@ EventConfigs = {
                 {'id': "cu2-enq-recommandes.odt", 'title': "Recommandés aux riverains (étiquette Poste)"},
                 {'id': "cu2-enq-art341-invit.odt", 'title': "Invitation séance de réclamation (article 341)"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IInquiryEvent',
+            'eventType': ['Products.urban.interfaces.IInquiryEvent'],
             'eventPortalType': 'UrbanEventInquiry',
             'textDefaultValues': [{'text': '\n'.join(default_texts['claimsTextDefaultValue']), 'fieldname': 'claimsText'}],
         },
@@ -4975,7 +4975,7 @@ EventConfigs = {
             'activatedFields': [],
             'TALCondition': "python: False",
             'podTemplates': ({'id': "cu2-avis.odt", 'title': "Courrier de demande d'avis"},),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -4990,7 +4990,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -5005,7 +5005,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -5020,7 +5020,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -5035,7 +5035,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -5050,7 +5050,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -5065,7 +5065,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -5080,7 +5080,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -5095,7 +5095,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -5110,7 +5110,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -5125,7 +5125,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -5140,7 +5140,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -5155,7 +5155,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -5170,7 +5170,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -5185,7 +5185,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -5200,7 +5200,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -5215,7 +5215,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -5230,7 +5230,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -5245,7 +5245,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -5260,7 +5260,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -5275,7 +5275,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -5287,7 +5287,7 @@ EventConfigs = {
                 {'id': "cu2-rapp-service.odt", 'title': "Rapport du Service"},
                 {'id': "cu2-rapp-college.odt", 'title': "Rapport du Collège"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ICollegeReportEvent',
+            'eventType': ['Products.urban.interfaces.ICollegeReportEvent'],
         },
         {
             'id': "transmis-dossier-rw",
@@ -5298,7 +5298,7 @@ EventConfigs = {
                 {'id': "cu2-envoi-dossier-rw.odt", 'title': "Lettre d'envoi du dossier à la RW"},
                 {'id': "cu2-envoi-dossier-form-rw.odt", 'title': "Formulaire d'envoi d'un dossier à la RW"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IWalloonRegionPrimoEvent',
+            'eventType': ['Products.urban.interfaces.IWalloonRegionPrimoEvent'],
         },
         {
             'id': "octroi-cu2",
@@ -5307,7 +5307,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'eventDateLabel': 'Date de notification',
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "cu2-decision-octroi-dem.odt", 'title': "Octroi du certificat (lettre au demandeur)"},
                 {'id': "cu2-decision-octroi-rw.odt", 'title': "Octroi du certificat (lettre à l'Urbanisme)"},
@@ -5320,7 +5320,7 @@ EventConfigs = {
                 },
                 {'id': "cu2-certif.odt", 'title': "Certificat d'urbanisme 2 (annexe 35 formulaire II B)"},
             ),
-            'eventTypeType': ('Products.urban.interfaces.ITheLicenceEvent', 'Products.urban.interfaces.ILicenceNotificationEvent'),
+            'eventType': ['Products.urban.interfaces.ITheLicenceEvent', 'Products.urban.interfaces.ILicenceNotificationEvent'],
         },
     ),
     'division': (
@@ -5330,9 +5330,9 @@ EventConfigs = {
             'activatedFields': [],
             'deadLineDelay': 15,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': ({'id': "div-recepisse.odt", 'title': "Récépissé de la demande"},),
-            'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
+            'eventType': ['Products.urban.interfaces.IDepositEvent'],
         },
         {
             'id': "decision-octroi-refus",
@@ -5340,7 +5340,7 @@ EventConfigs = {
             'activatedFields': ['decisionDate', 'decision'],
             'deadLineDelay': 15,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "div-decision.odt", 'title': "Octroi/refus de la division"},
                 {'id': "div-decision-incomplet.odt", 'title': "Dossier incomplet"},
@@ -5355,9 +5355,9 @@ EventConfigs = {
             'activatedFields': [],
             'deadLineDelay': 40,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
+            'eventType': ['Products.urban.interfaces.IDepositEvent'],
         },
         {
             'id': "octroi-lettre-notaire",
@@ -5365,11 +5365,11 @@ EventConfigs = {
             'deadLineDelay': 15,
             'eventDateLabel': 'Date de notification',
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "not-lettre-information-notariale.odt", 'title': "Lettre d'information notariale (annexe 49 formulaire III)"},
             ),
-            'eventTypeType': ('Products.urban.interfaces.ITheLicenceEvent', 'Products.urban.interfaces.ILicenceNotificationEvent'),
+            'eventType': ['Products.urban.interfaces.ITheLicenceEvent', 'Products.urban.interfaces.ILicenceNotificationEvent'],
         },
     ),
     'envclassone': (
@@ -5379,7 +5379,7 @@ EventConfigs = {
             'activatedFields': ['officeCoordinate'],
             'eventDateLabel': 'Date de la RIP',
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (),
         },
         {
@@ -5388,9 +5388,9 @@ EventConfigs = {
             'activatedFields': [],
             'deadLineDelay': 3,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': ({'id': "env1-recepisse.odt", 'title': "Récepissé du permis"},),
-            'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
+            'eventType': ['Products.urban.interfaces.IDepositEvent'],
         },
         {
             'id': "envoi-demande-FT",
@@ -5398,7 +5398,7 @@ EventConfigs = {
             'activatedFields': [],
             'deadLineDelay': 20,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': ({'id': "env1-transmis-demande-ft.odt", 'title': "Transmis de la demande au FT"},),
         },
         {
@@ -5407,9 +5407,9 @@ EventConfigs = {
             'activatedFields': [],
             'deadLineDelay': 0,
             'isKeyEvent': False,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IMissingPartEvent',
+            'eventType': ['Products.urban.interfaces.IMissingPartEvent'],
         },
         {
             'id': "recepisse-complement",
@@ -5420,7 +5420,7 @@ EventConfigs = {
             'podTemplates': (
                 {'id': "env1-recepisse-complement.odt", 'title': "Récépissé d'un complément"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IMissingPartDepositEvent',
+            'eventType': ['Products.urban.interfaces.IMissingPartDepositEvent'],
         },
         {
             'id': "envoi-complement-FT",
@@ -5438,7 +5438,7 @@ EventConfigs = {
             'activatedFields': [],
             'deadLineDelay': 0,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "env1-dossier-irrecevable-ft.odt", 'title': "Transmis de l'irrecevabilité au FT"},
             ),
@@ -5449,9 +5449,9 @@ EventConfigs = {
             'activatedFields': [],
             'deadLineDelay': 5,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IAcknowledgmentEvent',
+            'eventType': ['Products.urban.interfaces.IAcknowledgmentEvent'],
         },
         {
             'id': "enquete-publique",
@@ -5468,7 +5468,7 @@ EventConfigs = {
                 {'id': "env1-enq-transmis-college.odt", 'title': "Transmis de l'avis d'enquête aux propriétaires"},
                 {'id': "env1-enq-ordre-mission.odt", 'title': "Ordre de mission"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IInquiryEvent',
+            'eventType': ['Products.urban.interfaces.IInquiryEvent'],
             'eventPortalType': 'UrbanEventInquiry',
             'textDefaultValues': [{'text': '\n'.join(default_texts['claimsTextDefaultValue']), 'fieldname': 'claimsText'}],
         },
@@ -5478,7 +5478,7 @@ EventConfigs = {
             'activatedFields': [],
             'TALCondition': "python: False",
             'podTemplates': ({'id': "env3-avis.odt", 'title': "Courrier de demande d'avis"},),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -5493,7 +5493,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -5508,7 +5508,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -5523,7 +5523,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -5538,7 +5538,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -5553,7 +5553,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -5568,7 +5568,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -5583,7 +5583,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -5598,7 +5598,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -5613,7 +5613,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -5628,7 +5628,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -5643,7 +5643,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -5658,7 +5658,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -5673,7 +5673,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -5688,7 +5688,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -5703,7 +5703,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -5718,7 +5718,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -5733,7 +5733,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -5748,7 +5748,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -5763,7 +5763,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -5778,7 +5778,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -5786,7 +5786,7 @@ EventConfigs = {
             'title': "Envoi du procès verbal au FT",
             'deadLineDelay': 10,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
             ),
         },
@@ -5796,14 +5796,14 @@ EventConfigs = {
             'activatedFields': ['externalDecision'],
             'eventDateLabel': "Date de l'avis",
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (),
         },
         {
             'id': "township-council",
             'title': "Passage au conseil communal",
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'TALCondition': "python: here.getPublicRoadModifications()",
             'podTemplates': (),
         },
@@ -5812,7 +5812,7 @@ EventConfigs = {
             'title': "Plans modificatifs",
             'activatedFields': ['transmitDate'],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "env1-demande-plans-modificatifs.odt", 'title': "Demande de plans modificatifs"},
                 {'id': "env1-transmis-demande-plans-modificatifs-ft.odt", 'title': "Transmis de la demande de plans modificatifs au FT"},
@@ -5825,14 +5825,14 @@ EventConfigs = {
             'activatedFields': ['decisionDate', 'decision'],
             'eventDateLabel': "Date de notification",
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'TALCondition': "python: here.getAuthority() == 'college'",
             'podTemplates': (
                 {'id': "env1-transmis-decision.odt", 'title': "Transmis de la décision (demandeur)"},
                 {'id': "env1-transmis-decision-FT.odt", 'title': "Transmis de la décision (FT)"},
                 {'id': "env1-transmis-decision-impetrants-ft.odt", 'title': "Transmis de la décision (Instances)"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ILicenceDeliveryEvent',
+            'eventType': ['Products.urban.interfaces.ILicenceDeliveryEvent'],
         },
         {
             'id': "decision-transmit-FT",
@@ -5840,26 +5840,26 @@ EventConfigs = {
             'activatedFields': ['decisionDate', 'decision'],
             'eventDateLabel': "Date de notification",
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'TALCondition': "python: here.getAuthority() == 'ft'",
             'podTemplates': (
                 {'id': "env1-transmis-decision.odt", 'title': "Transmis de la décision (demandeur)"},
                 {'id': "env1-transmis-decision-impetrants-ft.odt", 'title': "Transmis de la décision (Instances)"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ILicenceDeliveryEvent',
+            'eventType': ['Products.urban.interfaces.ILicenceDeliveryEvent'],
         },
         {
             'id': "affichage-decision",
             'title': "Affichage de la décision",
             'eventDateLabel': "Date d'affichage",
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "env1-affiche-decision.odt", 'title': "Affiche"},
                 {'id': "env1-affichage-mission.odt", 'title': "Demande de mission"},
                 {'id': "env1-certificat-decision.odt", 'title': "Certificat d'affichage de la décision"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IDisplayingTheDecisionEvent',
+            'eventType': ['Products.urban.interfaces.IDisplayingTheDecisionEvent'],
         },
         {
             'id': "affichage-recours",
@@ -5867,9 +5867,9 @@ EventConfigs = {
             'eventDateLabel': "Date d'affichage du recours",
             'activatedFields': ['recourseDecisionDisplayDate', 'recourseDecision'],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IRecourseEvent',
+            'eventType': ['Products.urban.interfaces.IRecourseEvent'],
         },
         {
             'id': "premiere-reunion-patrimoine",
@@ -5877,10 +5877,10 @@ EventConfigs = {
             'eventDateLabel': "Date de la réunion",
             'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
             ),
-            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
+            'eventType': ['Products.urban.interfaces.IPatrimonyMeetingEvent'],
         },
         {
             'id': "deuxieme-reunion-patrimoine",
@@ -5888,10 +5888,10 @@ EventConfigs = {
             'eventDateLabel': "Date de la réunion",
             'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
             ),
-            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
+            'eventType': ['Products.urban.interfaces.IPatrimonyMeetingEvent'],
         },
         {
             'id': "reunion-patrimoine-supplementaire",
@@ -5900,10 +5900,10 @@ EventConfigs = {
             'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
             'showTitle': True,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
             ),
-            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
+            'eventType': ['Products.urban.interfaces.IPatrimonyMeetingEvent'],
         },
     ),
     'envclasstwo': (
@@ -5913,7 +5913,7 @@ EventConfigs = {
             'activatedFields': ['officeCoordinate'],
             'eventDateLabel': 'Date de la RIP',
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (),
         },
         {
@@ -5923,14 +5923,14 @@ EventConfigs = {
             'deadLineDelay': 3,
             'eventDateLabel': 'Date de dépôt',
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "pe_recepisse_depot_demande.odt", 'title': "Récépissé du dépôt de la demande"},
                 {'id': "pe_entete_farde_dossier.odt", 'title': "Entête farde dossier"},
                 {'id': "pe_transmis_demande_dgo3.odt", 'title': "Transmis de la demande à la DGO3"},
                 {'id': "pe_info_demandeur.odt", 'title': "Information au demandeur"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
+            'eventType': ['Products.urban.interfaces.IDepositEvent'],
         },
         {
             'id': "dossier-incomplet",
@@ -5938,9 +5938,9 @@ EventConfigs = {
             'activatedFields': [],
             'deadLineDelay': 0,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IMissingPartEvent',
+            'eventType': ['Products.urban.interfaces.IMissingPartEvent'],
         },
         {
             'id': "recepisse-complement",
@@ -5954,7 +5954,7 @@ EventConfigs = {
                 {'id': "pe_complements_transmis_demande_dgo3.odt", 'title': "Transmis à la DGO3"},
                 {'id': "pe_complements_info_demandeur.odt", 'title': "Information au demandeur"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IMissingPartDepositEvent',
+            'eventType': ['Products.urban.interfaces.IMissingPartDepositEvent'],
         },
         {
             'id': "dossier-irrecevable",
@@ -5962,11 +5962,11 @@ EventConfigs = {
             'activatedFields': ['transmitDate'],
             'deadLineDelay': 0,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "pe_irrecevabilite_hors_delai.odt", 'title': "Transmis de l'irrecevabilité à la DGO3"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IRefusedIncompletenessEvent',
+            'eventType': ['Products.urban.interfaces.IRefusedIncompletenessEvent'],
         },
         {
             'id': "dossier-complet-recevable",
@@ -5975,9 +5975,9 @@ EventConfigs = {
             'deadLineDelay': 5,
             'eventDateLabel': 'Date de notification',
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IAcknowledgmentEvent',
+            'eventType': ['Products.urban.interfaces.IAcknowledgmentEvent'],
         },
         {
             'id': "enquete-publique",
@@ -5986,7 +5986,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'eventDateLabel': 'Date de notification',
             'isKeyEvent': True,
-            'keyDates': ('investigationStart', 'investigationEnd'),
+            'keyDates': ['investigationStart', 'investigationEnd'],
             'specialFunctionName': "Rechercher les propriétaires situés dans un rayon de 50m",
             'specialFunctionUrl': "addInvestigationPO",
             'TALCondition': "here/mayAddInquiryEvent",
@@ -5998,7 +5998,7 @@ EventConfigs = {
                 {'id': "pe_transmis_avis_dgo3.odt", 'title': "Transmis de l'avis d'enquête à la DGO3"},
                 {'id': "pe_transmis_elements_dgo3.odt", 'title': "Transmis des éléments de l'enquête à la DGO3"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IInquiryEvent',
+            'eventType': ['Products.urban.interfaces.IInquiryEvent'],
             'eventPortalType': 'UrbanEventInquiry',
             'textDefaultValues': [{'text': '\n'.join(default_texts['claimsTextDefaultValue']), 'fieldname': 'claimsText'}],
         },
@@ -6008,7 +6008,7 @@ EventConfigs = {
             'activatedFields': [],
             'TALCondition': "python: False",
             'podTemplates': ({'id': "env3-avis.odt", 'title': "Courrier de demande d'avis"},),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -6023,7 +6023,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -6038,7 +6038,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -6053,7 +6053,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -6068,7 +6068,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -6083,7 +6083,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -6098,7 +6098,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -6113,7 +6113,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -6128,7 +6128,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -6143,7 +6143,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -6158,7 +6158,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -6173,7 +6173,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -6188,7 +6188,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -6203,7 +6203,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -6218,7 +6218,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -6233,7 +6233,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -6248,7 +6248,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -6263,7 +6263,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -6278,7 +6278,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -6293,7 +6293,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -6308,7 +6308,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -6317,30 +6317,30 @@ EventConfigs = {
             'activatedFields': ['externalDecision'],
             'eventDateLabel': "Date de l'avis",
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': ({'id': "pe_transmis_avis_prealable_dgo3.odt", 'title': "Transmis de l'avis Collège à la DGO3"},),
-            'eventTypeType': 'Products.urban.interfaces.IInternalPreliminaryAdviceEvent',
+            'eventType': ['Products.urban.interfaces.IInternalPreliminaryAdviceEvent'],
         },
         {
             'id': "rapport-synthese",
             'title': "Rapport de synthèse",
             'eventDateLabel': "Date de réception",
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IDecisionProjectFromSPWEvent',
+            'eventType': ['Products.urban.interfaces.IDecisionProjectFromSPWEvent'],
         },
         {
             'id': "modified-blueprints",
             'title': "Plans modificatifs",
             'activatedFields': ['transmitDate', 'decisionDate'],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "pe_demande_plans_modificatifs.odt", 'title': "Demande de plans modificatifs"},
                 {'id': "pe_transmis_plans_modificatifs_dgo3.odt", 'title': "Transmis de la demande de plans modificatifs à la DGO3"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IAcknowledgmentEvent',
+            'eventType': ['Products.urban.interfaces.IAcknowledgmentEvent'],
         },
         {
             'id': "reception-plans-modificatifs",
@@ -6348,9 +6348,9 @@ EventConfigs = {
             'activatedFields': [],
             'eventDateLabel': "Date de réception",
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IModificationDepositEvent',
+            'eventType': ['Products.urban.interfaces.IModificationDepositEvent'],
         },
         {
             'id': "decision",
@@ -6358,14 +6358,14 @@ EventConfigs = {
             'activatedFields': ['decisionDate', 'decision', 'transmitDate'],
             'eventDateLabel': "Date de notification",
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'TALCondition': "python: here.getAuthority() == 'college'",
             'podTemplates': (
                 {'id': "pe_notification_decision_demandeur.odt", 'title': "Transmis de la décision au demandeur"},
                 {'id': "pe_transmis_decision_dgo3.odt", 'title': "Transmis de la décision à la DGO3"},
                 {'id': "pe_transmis_decision_instances.odt", 'title': "Transmis de la décision aux instances"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ILicenceDeliveryEvent',
+            'eventType': ['Products.urban.interfaces.ILicenceDeliveryEvent'],
             'eventPortalType': 'UrbanEventCollege',
         },
         {
@@ -6374,10 +6374,10 @@ EventConfigs = {
             'activatedFields': ['decisionDate', 'decision'],
             'eventDateLabel': "Date de réception",
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'TALCondition': "python: here.getAuthority() == 'ft'",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IWalloonRegionDecisionEvent',
+            'eventType': ['Products.urban.interfaces.IWalloonRegionDecisionEvent'],
         },
         {
             'id': "affichage-decision",
@@ -6385,12 +6385,12 @@ EventConfigs = {
             'eventDateLabel': "Date de notification",
             'activatedFields': ['displayDate'],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "pe_affichage_decision.odt", 'title': "Affichage de la décision"},
                 {'id': "pe_attestation_affichage_decision.odt", 'title': "Attestation d’affichage de la décision"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IDisplayingTheDecisionEvent',
+            'eventType': ['Products.urban.interfaces.IDisplayingTheDecisionEvent'],
         },
         {
             'id': "recours-au-gouvernement",
@@ -6398,12 +6398,12 @@ EventConfigs = {
             'eventDateLabel': "Date de notification",
             'activatedFields': ['transmitDate', 'displayDate'],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "pe_transmis_pieces_recours.odt", 'title': "Transmis des pièces à la cellule recours de la DGO3"},
                 {'id': "pe_attestation_affichage_recours.odt", 'title': "Attestation d'affichage du recours"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IRecourseEvent',
+            'eventType': ['Products.urban.interfaces.IRecourseEvent'],
         },
         {
             'id': "decision-du-recours",
@@ -6411,11 +6411,11 @@ EventConfigs = {
             'eventDateLabel': "Date de notification",
             'activatedFields': ['recourseDecisionDisplayDate', 'recourseDecision'],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "pe_affichage_decision_recours.odt", 'title': "Attestation d'affichage de la décision du recours"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IRecourseEvent',
+            'eventType': ['Products.urban.interfaces.IRecourseEvent'],
         },
         {
             'id': "premiere-reunion-patrimoine",
@@ -6423,10 +6423,10 @@ EventConfigs = {
             'eventDateLabel': "Date de la réunion",
             'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
             ),
-            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
+            'eventType': ['Products.urban.interfaces.IPatrimonyMeetingEvent'],
         },
         {
             'id': "deuxieme-reunion-patrimoine",
@@ -6434,10 +6434,10 @@ EventConfigs = {
             'eventDateLabel': "Date de la réunion",
             'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
             ),
-            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
+            'eventType': ['Products.urban.interfaces.IPatrimonyMeetingEvent'],
         },
         {
             'id': "reunion-patrimoine-supplementaire",
@@ -6446,10 +6446,10 @@ EventConfigs = {
             'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
             'showTitle': True,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
             ),
-            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
+            'eventType': ['Products.urban.interfaces.IPatrimonyMeetingEvent'],
         },
     ),
     'envclassthree': (
@@ -6460,9 +6460,9 @@ EventConfigs = {
             'deadLineDelay': 15,
             'eventDateLabel': "Date de dépôt",
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': ({'id': "dec3_recepisse_depot_demande.odt", 'title': "Récépissé de la déclaration"},),
-            'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
+            'eventType': ['Products.urban.interfaces.IDepositEvent'],
         },
         {
             'id': "refus-de-la-demande",
@@ -6470,9 +6470,9 @@ EventConfigs = {
             'activatedFields': [],
             'eventDateLabel': "Date de notification",
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': ({'id': "dec3_demande_irrecevable.odt", 'title': "Demande irrecevable (lettre au demandeur)"},),
-            'eventTypeType': 'Products.urban.interfaces.IRefusedIncompletenessEvent',
+            'eventType': ['Products.urban.interfaces.IRefusedIncompletenessEvent'],
         },
         {
             'id': "demande-de-paiement",
@@ -6480,9 +6480,9 @@ EventConfigs = {
             'activatedFields': [],
             'isKeyEvent': True,
             'eventDateLabel': "Date de notification",
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': ({'id': "dec3_demande_paiement.odt", 'title': "Demande de paiement"},),
-            'eventTypeType': 'Products.urban.interfaces.IAcknowledgmentEvent',
+            'eventType': ['Products.urban.interfaces.IAcknowledgmentEvent'],
         },
         {
             'id': "config-opinion-request",
@@ -6490,7 +6490,7 @@ EventConfigs = {
             'activatedFields': [],
             'TALCondition': "python: False",
             'podTemplates': ({'id': "env3-avis.odt", 'title': "Courrier de demande d'avis"},),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -6505,7 +6505,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -6520,7 +6520,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -6535,7 +6535,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -6550,7 +6550,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -6565,7 +6565,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -6580,7 +6580,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -6595,7 +6595,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -6610,7 +6610,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -6625,7 +6625,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -6640,7 +6640,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -6655,7 +6655,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -6670,7 +6670,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -6685,7 +6685,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -6700,7 +6700,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -6715,7 +6715,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -6730,7 +6730,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -6745,7 +6745,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -6760,7 +6760,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -6775,7 +6775,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -6790,7 +6790,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -6799,12 +6799,12 @@ EventConfigs = {
             'activatedFields': [],
             'isKeyEvent': True,
             'eventDateLabel': "Date de prise d'acte",
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "dec3_recevable_conditions_demandeur.odt", 'title': "Déclaration recevable avec conditions complémentaires - Lettre au demandeur"},
                 {'id': "dec3_recevable_conditions_dgo3dgo4.odt", 'title': "Déclaration recevable avec conditions complémentaires - Lettres DGO3 et DGO4"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IAcknowledgmentEvent',
+            'eventType': ['Products.urban.interfaces.IAcknowledgmentEvent'],
         },
         {
             'id': "passage-college",
@@ -6812,7 +6812,7 @@ EventConfigs = {
             'activatedFields': ['decisionDate', 'decision'],
             'eventDateLabel': "Date de notification",
             'isKeyEvent': True,
-            'keyDates': ('decisionDate',),
+            'keyDates': ['decisionDate'],
             'podTemplates': (
                 {'id': "dec3_transmis_sans_conditions_demandeur.odt", 'title': "Transmis décision sans conditions complémentaires (lettre au demandeur)"},
                 {'id': "dec3_transmis_conditions_demandeur.odt", 'title': "Transmis décision avec conditions complémentaires (lettre au demandeur)"},
@@ -6826,10 +6826,10 @@ EventConfigs = {
             'eventDateLabel': "Date de la réunion",
             'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
             ),
-            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
+            'eventType': ['Products.urban.interfaces.IPatrimonyMeetingEvent'],
         },
         {
             'id': "deuxieme-reunion-patrimoine",
@@ -6837,10 +6837,10 @@ EventConfigs = {
             'eventDateLabel': "Date de la réunion",
             'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
             ),
-            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
+            'eventType': ['Products.urban.interfaces.IPatrimonyMeetingEvent'],
         },
         {
             'id': "reunion-patrimoine-supplementaire",
@@ -6849,10 +6849,10 @@ EventConfigs = {
             'activatedFields': ['reportCreationDate', 'reportReceptionDate', 'misc_description'],
             'showTitle': True,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
             ),
-            'eventTypeType': 'Products.urban.interfaces.IPatrimonyMeetingEvent',
+            'eventType': ['Products.urban.interfaces.IPatrimonyMeetingEvent'],
         },
     ),
     'miscdemand': (
@@ -6862,11 +6862,11 @@ EventConfigs = {
             'activatedFields': [],
             'deadLineDelay': 15,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "miscdemand-recepisse.odt", 'title': "Récepissé de la demande"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
+            'eventType': ['Products.urban.interfaces.IDepositEvent'],
         },
         {
             'id': "config-opinion-request",
@@ -6874,7 +6874,7 @@ EventConfigs = {
             'activatedFields': [],
             'TALCondition': "python: False",
             'podTemplates': ({'id': "lot-avis.odt", 'title': "Courrier de demande d'avis"},),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -6888,7 +6888,7 @@ EventConfigs = {
             'activatedFields': ['transmitDate', 'receiptDate', 'receivedDocumentReference', 'adviceAgreementLevel', 'isOptional', 'externalDecision', ],
             'deadLineDelay': 15,
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -6898,11 +6898,11 @@ EventConfigs = {
             'eventDateLabel': "Date de la séance collège",
             'deadLineDelay': 15,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "miscdemand-delib-college.odt", 'title': "Délibération collège"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ICollegeReportEvent',
+            'eventType': ['Products.urban.interfaces.ICollegeReportEvent'],
         },
         {
             'id': "transmis-decision",
@@ -6911,11 +6911,11 @@ EventConfigs = {
             'deadLineDelay': 15,
             'eventDateLabel': 'Date du transmis',
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "miscdemand-transmis-decision-demandeur.odt", 'title': "Transmis décision au demandeur"},
             ),
-            'eventTypeType': ('Products.urban.interfaces.ITheLicenceEvent', 'Products.urban.interfaces.ILicenceNotificationEvent'),
+            'eventType': ['Products.urban.interfaces.ITheLicenceEvent', 'Products.urban.interfaces.ILicenceNotificationEvent'],
         },
     ),
     'projectmeetings': (
@@ -6925,9 +6925,9 @@ EventConfigs = {
             'activatedFields': [],
             'isKeyEvent': True,
             'eventDateLabel': "Date de réception",
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
+            'eventType': ['Products.urban.interfaces.IDepositEvent'],
         },
         {
             'id': "convocation",
@@ -6935,14 +6935,14 @@ EventConfigs = {
             'activatedFields': [],
             'isKeyEvent': True,
             'eventDateLabel': "Date d'envoi des convocations",
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "codt_RP_convocation_demandeur.odt", 'title': "Convocation au demandeur"},
                 {'id': "codt_RP_convocation_FD.odt", 'title': "Convocation à la DGO4"},
                 {'id': "codt_RP_convocation_architecte.odt", 'title': "Convocation à l’architecte"},
                 {'id': "codt_RP_convocation_autre.odt", 'title': "Convocation autre"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IAcknowledgmentEvent',
+            'eventType': ['Products.urban.interfaces.IAcknowledgmentEvent'],
         },
     ),
     'preliminarynotice': (
@@ -6951,18 +6951,18 @@ EventConfigs = {
             'title': "Dépôt de la demande",
             'activatedFields': [],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "miscdemand-recepisse.odt", 'title': "Récepissé de la demande"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
+            'eventType': ['Products.urban.interfaces.IDepositEvent'],
         },
         {
             'id': "analyse-technicien",
             'title': "Analyse Technicien",
             'activatedFields': ['analysis'],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (),
         },
         {
@@ -6970,8 +6970,8 @@ EventConfigs = {
             'title': "passage-college",
             'activatedFields': [],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
-            'eventTypeType': ('Products.urban.interfaces.ITheLicenceEvent', 'Products.urban.interfaces.ILicenceNotificationEvent'),
+            'keyDates': ['eventDate'],
+            'eventType': ['Products.urban.interfaces.ITheLicenceEvent', 'Products.urban.interfaces.ILicenceNotificationEvent'],
             'podTemplates': (),
         },
         {
@@ -6980,7 +6980,7 @@ EventConfigs = {
             'activatedFields': [],
             'eventDateLabel': "Date de notification",
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (),
         },
         {
@@ -6988,7 +6988,7 @@ EventConfigs = {
             'title': "Courrier libre",
             'activatedFields': [],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (),
         },
     ),
@@ -6998,7 +6998,7 @@ EventConfigs = {
             'title': "Convocation",
             'activatedFields': [],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (),
         },
         {
@@ -7006,7 +7006,7 @@ EventConfigs = {
             'title': "Réunion",
             'activatedFields': [],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (),
         },
         {
@@ -7014,7 +7014,7 @@ EventConfigs = {
             'title': "Décision",
             'activatedFields': [],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (),
         },
     ),
@@ -7025,9 +7025,9 @@ EventConfigs = {
             'activatedFields': [],
             'deadLineDelay': 15,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': ({'id': "lot-recepisse.odt", 'title': "Récépissé de la demande (article 115)"},),
-            'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
+            'eventType': ['Products.urban.interfaces.IDepositEvent'],
         },
         {
             'id': "avis-etude-incidence",
@@ -7045,8 +7045,8 @@ EventConfigs = {
             'activatedFields': [],
             'deadLineDelay': 15,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
-            'eventTypeType': 'Products.urban.interfaces.IMissingPartEvent',
+            'keyDates': ['eventDate'],
+            'eventType': ['Products.urban.interfaces.IMissingPartEvent'],
             'podTemplates': (
                 {'id': "lot-dossier-incomplet-demandeur.odt", 'title': "Dossier incomplet (lettre demandeur)"},
             ),
@@ -7057,8 +7057,8 @@ EventConfigs = {
             'activatedFields': ['transmitDate'],
             'deadLineDelay': 15,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
-            'eventTypeType': 'Products.urban.interfaces.IAcknowledgmentEvent',
+            'keyDates': ['eventDate'],
+            'eventType': ['Products.urban.interfaces.IAcknowledgmentEvent'],
             'podTemplates': (
                 {'id': "lot-accuse.odt", 'title': "Accusé de réception"},
                 {'id': "lot-accuse-demande-paiement.odt", 'title': "Demande de paiement"},
@@ -7079,13 +7079,13 @@ EventConfigs = {
             'deadLineDelay': 15,
             'eventDateLabel': "Date de transmis",
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "lot-envoi-premier-dossier-rw.odt", 'title': "Lettre d'envoi du premier dossier à la RW"},
                 {'id': "lot-envoi-premier-dossier-art127-rw.odt", 'title': "Lettre d'envoi du dossier (article 127) à la RW"},
                 {'id': "lot-envoi-premier-dossier-form-rw.odt", 'title': "Formulaire d'envoi d'un dossier à la RW"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IWalloonRegionPrimoEvent',
+            'eventType': ['Products.urban.interfaces.IWalloonRegionPrimoEvent'],
         },
         {
             'id': "enquete-publique",
@@ -7109,7 +7109,7 @@ EventConfigs = {
                 {'id': "lot-enq-recommandes.odt", 'title': "Recommandés aux riverains (étiquette Poste)"},
                 {'id': "lot-enq-art341-invit.odt", 'title': "Invitation séance de réclamation (article 341)"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IInquiryEvent',
+            'eventType': ['Products.urban.interfaces.IInquiryEvent'],
             'eventPortalType': 'UrbanEventInquiry',
             'textDefaultValues': [{'text': '\n'.join(default_texts['claimsTextDefaultValue']), 'fieldname': 'claimsText'}],
         },
@@ -7119,7 +7119,7 @@ EventConfigs = {
             'activatedFields': [],
             'TALCondition': "python: False",
             'podTemplates': ({'id': "lot-avis.odt", 'title': "Courrier de demande d'avis"},),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -7134,7 +7134,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -7149,7 +7149,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -7164,7 +7164,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -7179,7 +7179,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -7194,7 +7194,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -7209,7 +7209,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -7224,7 +7224,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -7239,7 +7239,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -7254,7 +7254,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -7269,7 +7269,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -7284,7 +7284,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -7299,7 +7299,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -7314,7 +7314,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -7329,7 +7329,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -7344,7 +7344,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -7359,7 +7359,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -7374,7 +7374,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -7389,7 +7389,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -7404,7 +7404,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -7419,7 +7419,7 @@ EventConfigs = {
             'deadLineDelay': 15,
             'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
@@ -7428,12 +7428,12 @@ EventConfigs = {
             'activatedFields': ['decisionDate', 'decision', 'decisionText'],
             'deadLineDelay': 15,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "lot-rapp-service.odt", 'title': "Rapport du Service"},
                 {'id': "lot-rapp-college.odt", 'title': "Rapport du Collège"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ICollegeReportEvent',
+            'eventType': ['Products.urban.interfaces.ICollegeReportEvent'],
         },
         {
             'id': "transmis-2eme-dossier-rw",
@@ -7446,7 +7446,7 @@ EventConfigs = {
                 {'id': "lot-envoi-second-dossier-demandeur.odt", 'title': "Information au demandeur envoi second dossier"},
                 {'id': "lot-envoi-premier-dossier-form-rw.odt", 'title': "Formulaire d'envoi d'un dossier à la RW"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IWalloonRegionOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IWalloonRegionOpinionRequestEvent'],
         },
         {
             'id': "passage-conseil-communal",
@@ -7458,7 +7458,7 @@ EventConfigs = {
                 {'id': "lot-conseil-delib-communale-creation.odt", 'title': "Délibération du conseil communal (ouverture de voirie)"},
                 {'id': "lot-conseil-delib-communale-modif.odt", 'title': "Délibération du conseil communal (modification de voirie)"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.ICommunalCouncilEvent',
+            'eventType': ['Products.urban.interfaces.ICommunalCouncilEvent'],
         },
         {
             'id': "delivrance-du-permis-octroi-ou-refus",
@@ -7467,7 +7467,7 @@ EventConfigs = {
             'activatedFields': ['decisionDate', 'decision'],
             'deadLineDelay': 15,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
                 {'id': "lot-decision-octroi-dem.odt", 'title': "Octroi du permis (lettre au demandeur)"},
                 {'id': "lot-decision-octroi-rw.odt", 'title': "Octroi du permis (lettre à l'Urbanisme)"},
@@ -7480,7 +7480,7 @@ EventConfigs = {
                 {'id': "lot-decision-frais.odt", 'title': "Ventilation des frais"},
                 {'id': "lot-decision-deliberation-college.odt", 'title': "Delibération du collège d'octroi du permis"},
             ),
-            'eventTypeType': ('Products.urban.interfaces.ITheLicenceEvent', 'Products.urban.interfaces.ILicenceNotificationEvent'),
+            'eventType': ['Products.urban.interfaces.ITheLicenceEvent', 'Products.urban.interfaces.ILicenceNotificationEvent'],
         },
         {
             'id': "suspension-du-permis",
@@ -7516,7 +7516,7 @@ EventConfigs = {
             'activatedFields': ['auditionDate', ],
             'deadLineDelay': 0,
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.IRecourseEvent',
+            'eventType': ['Products.urban.interfaces.IRecourseEvent'],
         },
         {
             'id': "recours-decision-au-gouvernement",
@@ -7529,7 +7529,7 @@ EventConfigs = {
                 {'id': "lot-recours-GW-transmis-decision-FD-art127.odt", 'title': "Transmis au réclamant de la décision du FD concernant recours au GW contre art 127"},
                 {'id': "lot-recours-GW-transmis-decision-GW-PU.odt", 'title': "Transmis au réclamant de la décision du GW concernant recours au GW"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IRecourseEvent',
+            'eventType': ['Products.urban.interfaces.IRecourseEvent'],
         },
     ),
     'explosivespossession': (
@@ -7540,10 +7540,10 @@ EventConfigs = {
             'activatedFields': [],
             'deadLineDelay': 15,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
             ),
-            'eventTypeType': 'Products.urban.interfaces.IDepositEvent',
+            'eventType': ['Products.urban.interfaces.IDepositEvent'],
         },
         {
             'id': "enquete-publique-50",
@@ -7566,7 +7566,7 @@ EventConfigs = {
                 },
                 {'id': "codt_pu_annexe_26_affiche_jaune.odt", 'title': "Affiche jaune (annexe 26)"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IInquiryEvent',
+            'eventType': ['Products.urban.interfaces.IInquiryEvent'],
             'eventPortalType': 'UrbanEventInquiry',
             'textDefaultValues': (
                 {'text': '\n'.join(default_texts['claimsTextDefaultValue']), 'fieldname': 'claimsText'},
@@ -7593,7 +7593,7 @@ EventConfigs = {
                 },
                 {'id': "codt_pu_annexe_26_affiche_jaune.odt", 'title': "Affiche jaune (annexe 26)"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IInquiryEvent',
+            'eventType': ['Products.urban.interfaces.IInquiryEvent'],
             'eventPortalType': 'UrbanEventInquiry',
             'textDefaultValues': (
                 {'text': '\n'.join(default_texts['claimsTextDefaultValue']), 'fieldname': 'claimsText'},
@@ -7605,7 +7605,7 @@ EventConfigs = {
             'activatedFields': ['transmitDate', 'receiptDate', 'receivedDocumentReference', 'externalDecision'],
             'deadLineDelay': 15,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'TALCondition': "python: here.getClass == 'first'",
             'podTemplates': (
             ),
@@ -7616,18 +7616,18 @@ EventConfigs = {
             'activatedFields': ['transmitDate', 'receiptDate', 'receivedDocumentReference', 'externalDecision'],
             'deadLineDelay': 15,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'TALCondition': "python: here.getClass == 'second'",
             'podTemplates': (
             ),
-            'eventTypeType': 'Products.urban.interfaces.IOpinionRequestEvent',
+            'eventType': ['Products.urban.interfaces.IOpinionRequestEvent'],
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
             'id': "communal-college",
             'title': "Passage au collège communal",
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'TALCondition': "python: here.getClass == 'second'",
             'podTemplates': (),
         },
@@ -7637,57 +7637,57 @@ EventConfigs = {
             'activatedFields': ['decisionDate', 'decision'],
             'eventDateLabel': "Date de notification",
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'TALCondition': "",
             'podTemplates': (
             ),
-            'eventTypeType': 'Products.urban.interfaces.ILicenceDeliveryEvent',
+            'eventType': ['Products.urban.interfaces.ILicenceDeliveryEvent'],
         },
         {
             'id': "affichage-decision",
             'title': "Affichage de la décision",
             'eventDateLabel': "Date d'affichage",
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'podTemplates': (
             ),
-            'eventTypeType': 'Products.urban.interfaces.IDisplayingTheDecisionEvent',
+            'eventType': ['Products.urban.interfaces.IDisplayingTheDecisionEvent'],
         },
         {
             'id': "notification-decision",
             'title': "Notification décision à l'exploitant",
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'TALCondition': "",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.ILicenceNotificationEvent',
+            'eventType': ['Products.urban.interfaces.ILicenceNotificationEvent'],
         },
         {
             'id': "notification-governor",
             'title': "Notification décision au gouverneur de la province",
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'TALCondition': "python: here.getClass == 'second'",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.ILicenceNotificationEvent',
+            'eventType': ['Products.urban.interfaces.ILicenceNotificationEvent'],
         },
         {
             'id': "notification-royal-attorney",
             'title': "Notification décision au procureur du Roi",
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'TALCondition': "python: here.getClass == 'second'",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.ILicenceNotificationEvent',
+            'eventType': ['Products.urban.interfaces.ILicenceNotificationEvent'],
         },
         {
             'id': "notification-spf",
             'title': "Notification décision au SPF Economie",
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'TALCondition': "python: here.getClass == 'second'",
             'podTemplates': (),
-            'eventTypeType': 'Products.urban.interfaces.ILicenceNotificationEvent',
+            'eventType': ['Products.urban.interfaces.ILicenceNotificationEvent'],
         },
     ),
     'inspection': (
@@ -7698,12 +7698,12 @@ EventConfigs = {
             'eventDateLabel': "Date de la visite",
             'activatedFields': [],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'TALCondition': "python: event.mayAddFollowUpEvent(here)",
             'podTemplates': (
                 {'id': "inspection_rapport1.odt", 'title': "Rapport d'inspection"},
             ),
-            'eventTypeType': 'Products.urban.interfaces.IInspectionReportEvent',
+            'eventType': ['Products.urban.interfaces.IInspectionReportEvent'],
             'eventPortalType': 'UrbanEventInspectionReport',
         },
         {
@@ -7712,7 +7712,7 @@ EventConfigs = {
             'title': "Mise en demeure",
             'activatedFields': [],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'TALCondition': "python: event.mayAddFollowUpEvent(here)",
             'podTemplates': (
             ),
@@ -7724,7 +7724,7 @@ EventConfigs = {
             'title': "Rappel de mise en demeure",
             'activatedFields': [],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'TALCondition': "python: event.mayAddFollowUpEvent(here)",
             'podTemplates': (
             ),
@@ -7736,7 +7736,7 @@ EventConfigs = {
             'title': "Dernier rappel de mise en demeure",
             'activatedFields': [],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'TALCondition': "python: event.mayAddFollowUpEvent(here)",
             'podTemplates': (
             ),
@@ -7748,7 +7748,7 @@ EventConfigs = {
             'title': "Réponse au plaignant",
             'activatedFields': [],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'TALCondition': "python: event.mayAddFollowUpEvent(here)",
             'podTemplates': (
             ),
@@ -7760,7 +7760,7 @@ EventConfigs = {
             'title': "Demande d'informations complémentaires",
             'activatedFields': [],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'TALCondition': "python: event.mayAddFollowUpEvent(here)",
             'podTemplates': (
             ),
@@ -7772,7 +7772,7 @@ EventConfigs = {
             'title': "Courrier d'information au FD",
             'activatedFields': [],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'TALCondition': "python: event.mayAddFollowUpEvent(here)",
             'podTemplates': (
             ),
@@ -7784,7 +7784,7 @@ EventConfigs = {
             'title': "Courrier de constat de remise en état",
             'activatedFields': [],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'TALCondition': "python: event.mayAddFollowUpEvent(here)",
             'podTemplates': (
             ),
@@ -7796,7 +7796,7 @@ EventConfigs = {
             'title': "Division immeuble - courrier conformité simple",
             'activatedFields': [],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'TALCondition': "python: event.mayAddFollowUpEvent(here)",
             'podTemplates': (
             ),
@@ -7808,7 +7808,7 @@ EventConfigs = {
             'title': "Division immeuble - courrier conformité Collège",
             'activatedFields': [],
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'TALCondition': "python: event.mayAddFollowUpEvent(here)",
             'podTemplates': (
             ),
@@ -7821,7 +7821,7 @@ EventConfigs = {
             'activatedFields': [],
             'showTitle': True,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ['eventDate'],
             'TALCondition': "python: event.mayAddFollowUpEvent(here)",
             'podTemplates': (
             ),
