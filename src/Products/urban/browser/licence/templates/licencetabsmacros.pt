@@ -456,7 +456,7 @@
 
 
 <metal:events define-macro="urbanEventsMacro" i18n:domain="urban">
-    <tal:add_events define="event_configs view/getEventConfigs">
+    <tal:add_events define="event_configs view/getAllowedEventConfigs">
         <!--legend i18n:translate="urban_create_events">Create event</legend-->
         <form action="create_urbanevent" method="POST"
               tal:condition="view/canAddUrbanEvent">
