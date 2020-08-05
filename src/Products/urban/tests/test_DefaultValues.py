@@ -119,7 +119,7 @@ class TestDefaultValues(unittest.TestCase):
         licence_config = self.site.portal_urban.buildlicence
         # set the default text value fotr the fdescription field
         default_text = '<p>Bla bla</p>'
-        licence_config.setTextDefaultValues(({'text': default_text, 'fieldname': 'description'}, ))
+        licence_config.textDefaultValues = ({'text': default_text, 'fieldname': 'description'}, )
         # any new licence should have this text as value for the description field
         newlicence = self.createNewLicence()
         self.assertEquals(default_text, newlicence.Description())
@@ -217,7 +217,7 @@ class TestEventDefaultValues(unittest.TestCase):
         event_type = getattr(eventtypes, 'rapport-du-college')
         # set a a default text for the field 'decsionText'
         default_text = '<p>Kill bill!</p>'
-        event_type.setTextDefaultValues([{'text': default_text, 'fieldname': 'decisionText'}])
+        event_type.textDefaultValues = [{'text': default_text, 'fieldname': 'decisionText'}]
         # the created event should have this text in its field 'decisionText'
         event = self.licence.createUrbanEvent(event_type)
         decision_text = event.getDecisionText()
@@ -228,7 +228,7 @@ class TestEventDefaultValues(unittest.TestCase):
         event_type = getattr(eventtypes, 'rapport-du-college')
         # set a a default text for the field 'decsionText'
         default_text = '<p>Kill <b tal:replace="self/Title"></b> and <b tal:replace="event/getId"></b> </p>'
-        event_type.setTextDefaultValues([{'text': default_text, 'fieldname': 'decisionText'}])
+        event_type.textDefaultValues = [{'text': default_text, 'fieldname': 'decisionText'}]
         # the created event should have this text in its field 'decisionText'
         event = self.licence.createUrbanEvent(event_type)
         decision_text = event.getDecisionText()
