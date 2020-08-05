@@ -89,7 +89,7 @@
 
   <subscriber for="..interfaces.IUrbanEvent
                    Products.Archetypes.interfaces.IObjectInitializedEvent"
-              handler=".urbanEventEvents.setEventTypeType"/>
+              handler=".urbanEventEvents.setEventType"/>
 
   <subscriber for="..interfaces.IUrbanEvent
                    Products.Archetypes.interfaces.IObjectInitializedEvent"

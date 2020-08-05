@@ -46,18 +46,18 @@ class LicenceView(BrowserView):
         main_template_macro = context.unrestrictedTraverse('licencemainmacro/main')
         return main_template_macro
 
-    def getEventConfigs(self):
+    def getAllowedEventConfigs(self):
         licence = aq_inner(self.context)
         licence_config = licence.getLicenceConfig()
-        event_configs = licence_config.getEventConfigs()
+        event_configs = [cfg for cfg in licence_config.getEventConfigs() if cfg.canBeCreatedInLicence(self.context)]
         return event_configs
 
     def canAddUrbanEvent(self):
         licence = aq_inner(self.context)
         member = self.getMember()
-        event_configs = self.getEventConfigs()
         has_permission = member.has_permission('urban: Add UrbanEvent', licence)
-        return event_configs and has_permission
+        can_add = has_permission and self.getAllowedEventConfigs()
+        return can_add
 
     def canAddAllAdvices(self):
         licence = aq_inner(self.context)

@@ -1306,7 +1306,8 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
         event_configs = licence_config.getEventConfigs()
         res = []
         for event_config in event_configs:
-            if event_config.portal_type == 'OpinionRequestEventType':
+            if event_config.portal_type == 'OpinionRequestEventType' and \
+               event_config.canBeCreatedInLicence(self):
                 for type_interface_path in event_config.getEventType():
                     type_interface = get_interface_by_path(type_interface_path)
                     # an advice corresponding to IOpinionRequestEvent
