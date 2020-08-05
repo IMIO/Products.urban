@@ -24,11 +24,11 @@ class TestOpinionRequest (unittest.TestCase):
 
     def testCreateOpinionRequestEventType(self):
         tool = self.portal_urban
-        urbaneventtypes_folder = tool.buildlicence.urbaneventtypes
+        eventconfigs_folder = tool.buildlicence.eventconfigs
         with api.env.adopt_roles(['Manager']):
-            term_id = urbaneventtypes_folder.invokeFactory('OpinionRequestEventType', id='voodoo', title='Vood00', description='gni')
-        term = getattr(urbaneventtypes_folder, term_id, 'NOT FOUND RHAAAAAAAAAAAAAAAAAAAAAA!!!!')
-        self.failUnless(term in urbaneventtypes_folder.objectValues())
+            term_id = eventconfigs_folder.invokeFactory('OpinionRequestEventType', id='voodoo', title='Vood00', description='gni')
+        term = getattr(eventconfigs_folder, term_id, 'NOT FOUND RHAAAAAAAAAAAAAAAAAAAAAA!!!!')
+        self.failUnless(term in eventconfigs_folder.objectValues())
 
 
 class TestOpinionRequestOnLicence (unittest.TestCase):
@@ -45,13 +45,13 @@ class TestOpinionRequestOnLicence (unittest.TestCase):
         # used as the display value in the vocabulary of solicitOpinions field
         # of buildlicences
         tool = getToolByName(self.licence, 'portal_urban')
-        urbaneventtypes_folder = tool.buildlicence.urbaneventtypes
+        eventconfigs_folder = tool.buildlicence.eventconfigs
 
         with api.env.adopt_roles(['Manager']):
-            term_id = urbaneventtypes_folder.invokeFactory('OpinionRequestEventType', id='voodoo', title="Demande d'avis (Vood00)", extraValue='Vood00')
+            term_id = eventconfigs_folder.invokeFactory('OpinionRequestEventType', id='voodoo', title="Demande d'avis (Vood00)", extraValue='Vood00')
             voc_cache = tool.restrictedTraverse('urban_vocabulary_cache')
             voc_cache.update_procedure_all_vocabulary_cache(tool.buildlicence)
-        term = getattr(tool.buildlicence.urbaneventtypes, term_id)
+        term = getattr(tool.buildlicence.eventconfigs, term_id)
         expected_voc_term = (term_id, "Demande d'avis (%s)" % term.getExtraValue())
 
         solicitOpinions_field = self.licence.getField('solicitOpinionsTo')

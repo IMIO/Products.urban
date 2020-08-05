@@ -41,7 +41,7 @@ def _setDefaultTextValues(urbanevent):
 
 def setEventTypeType(urban_event, event):
     urban_eventType = urban_event.getUrbaneventtypes()
-    urban_eventTypeTypes = urban_eventType.getEventTypeType()
+    urban_eventTypeTypes = urban_eventType.getEventType()
     if not urban_eventTypeTypes:
         return
 

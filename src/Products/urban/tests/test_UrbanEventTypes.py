@@ -22,7 +22,7 @@ class TestUrbanEventTypes(unittest.TestCase):
 
     def testLastKeyEventPropertyDefaultCase(self):
         catalog = self.catalog
-        urban_event_type_a = getattr(self.portal_urban.buildlicence.urbaneventtypes, 'rapport-du-college', None)
+        urban_event_type_a = getattr(self.portal_urban.buildlicence.eventconfigs, 'rapport-du-college', None)
         buildlicence_brain = catalog(UID=self.buildlicence.UID())[-1]
         # by defaut, key events are enabled, and the index in the catalog should not be empty
         self.assertEqual(urban_event_type_a.getIsKeyEvent(), True)
@@ -30,13 +30,13 @@ class TestUrbanEventTypes(unittest.TestCase):
 
     def testSetLastKeyEventPropertyWithEventAlreadyExisting(self):
         catalog = self.catalog
-        for uet in self.portal_urban.buildlicence.urbaneventtypes.objectValues():
+        for uet in self.portal_urban.buildlicence.eventconfigs.objectValues():
             # reset urban event types twice to make sure to trigger the reindex
             uet.setIsKeyEvent(True)
             event.notify(ObjectEditedEvent(uet))
             uet.setIsKeyEvent(False)
             event.notify(ObjectEditedEvent(uet))
-        urban_event_type_a = getattr(self.portal_urban.buildlicence.urbaneventtypes, 'rapport-du-college', None)
+        urban_event_type_a = getattr(self.portal_urban.buildlicence.eventconfigs, 'rapport-du-college', None)
         buildlicence_brain = catalog(UID=self.buildlicence.UID())[-1]
         # set 'rapport-du-college' as a key event, buildlicence index should be updated
         urban_event_type_a.setIsKeyEvent(True)
@@ -51,13 +51,13 @@ class TestUrbanEventTypes(unittest.TestCase):
         urbanEvent UET and if that urbanEvent is the last keyEvent created in the licence.
         """
         catalog = self.catalog
-        for uet in self.portal_urban.buildlicence.urbaneventtypes.objectValues():
+        for uet in self.portal_urban.buildlicence.eventconfigs.objectValues():
             # reset urban event types twice to make sure to trigger the reindex
             uet.setIsKeyEvent(True)
             event.notify(ObjectEditedEvent(uet))
             uet.setIsKeyEvent(False)
             event.notify(ObjectEditedEvent(uet))
-        urban_event_type_b = getattr(self.portal_urban.buildlicence.urbaneventtypes, 'sncb', None)
+        urban_event_type_b = getattr(self.portal_urban.buildlicence.eventconfigs, 'sncb', None)
         buildlicence_brain = catalog(UID=self.buildlicence.UID())[-1]
         # set 'belgacom' as a key event, buildlicence last_key_event index should not change
         # as the corresponding urbanEvent has never been created in this buildlicence
@@ -73,14 +73,14 @@ class TestUrbanEventTypes(unittest.TestCase):
         urbanEvent UET and if that urbanEvent is the last keyEvent created in the licence.
         """
         catalog = self.catalog
-        for uet in self.portal_urban.buildlicence.urbaneventtypes.objectValues():
+        for uet in self.portal_urban.buildlicence.eventconfigs.objectValues():
             # reset urban event types twice to make sure to trigger the reindex
             uet.setIsKeyEvent(True)
             event.notify(ObjectEditedEvent(uet))
             uet.setIsKeyEvent(False)
             event.notify(ObjectEditedEvent(uet))
-        urban_event_type_a = getattr(self.portal_urban.buildlicence.urbaneventtypes, 'rapport-du-college', None)
-        urban_event_type_c = getattr(self.portal_urban.buildlicence.urbaneventtypes, 'depot-de-la-demande', None)
+        urban_event_type_a = getattr(self.portal_urban.buildlicence.eventconfigs, 'rapport-du-college', None)
+        urban_event_type_c = getattr(self.portal_urban.buildlicence.eventconfigs, 'depot-de-la-demande', None)
         buildlicence_brain = catalog(UID=self.buildlicence.UID())[-1]
         # set 'rapport-du-college' as a key event, buildlicence index should be updated
         urban_event_type_a.setIsKeyEvent(True)
@@ -101,7 +101,7 @@ class TestUrbanEventTypes(unittest.TestCase):
     def testUrbanTemplateIsUnderActivationWF(self):
         wf_tool = api.portal.get_tool('portal_workflow')
         # Check that templates .odt files in urbanEventTypes are under activation wf policy
-        urban_event_type = getattr(self.portal_urban.buildlicence.urbaneventtypes, 'accuse-de-reception', None)
+        urban_event_type = getattr(self.portal_urban.buildlicence.eventconfigs, 'accuse-de-reception', None)
         template = getattr(urban_event_type, 'urb-accuse.odt', None)
         state = wf_tool.getInfoFor(template, 'review_state')
         self.assertEqual(state, 'enabled')
