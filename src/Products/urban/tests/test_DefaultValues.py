@@ -213,7 +213,7 @@ class TestEventDefaultValues(unittest.TestCase):
         self.failUnless(decision_text == '<p></p>')
 
     def testTextValueConfigured(self):
-        eventtypes = self.portal_urban.buildlicence.urbaneventtypes
+        eventtypes = self.portal_urban.buildlicence.eventconfigs
         event_type = getattr(eventtypes, 'rapport-du-college')
         # set a a default text for the field 'decsionText'
         default_text = '<p>Kill bill!</p>'
@@ -224,7 +224,7 @@ class TestEventDefaultValues(unittest.TestCase):
         self.failUnless(decision_text == default_text)
 
     def testTextValueConfiguredWithPythonExpression(self):
-        eventtypes = self.portal_urban.buildlicence.urbaneventtypes
+        eventtypes = self.portal_urban.buildlicence.eventconfigs
         event_type = getattr(eventtypes, 'rapport-du-college')
         # set a a default text for the field 'decsionText'
         default_text = '<p>Kill <b tal:replace="self/Title"></b> and <b tal:replace="event/getId"></b> </p>'

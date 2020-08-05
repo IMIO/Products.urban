@@ -27,7 +27,7 @@ class UrbanCertificateBaseEditView(LicenceEditView):
         fields = []
         for field in schemata.fields():
             if field.writeable(self.context, debug=False):
-                licence_config = self.context.getUrbanConfig()
+                licence_config = self.context.getLicenceConfig()
                 visible = field.getName() in licence_config.getUsedAttributes() or not field.widget.condition
                 fields.append({'field': field, 'visible': visible})
         return fields

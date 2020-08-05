@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from Acquisition import aq_base
+
 from Products.contentmigration.walker import CustomQueryWalker
 from Products.contentmigration.archetypes import InplaceATFolderMigrator
 
@@ -191,6 +193,14 @@ def migrate_parcellings_folder_allowed_type(context):
     parcellings.manage_permission('imio.urban: Add Parcelling', ['Manager', 'Editor', ], acquire=0)
 
 
+def migrate_urbaneventtypes_folder(context):
+    urban_tool = api.portal.get_tool('portal_urban')
+    for config_folder in urban_tool.get_all_licence_configs():
+        if hasattr(aq_base(config_folder), 'urbaneventtypes'):
+            eventconfigs = getattr(config_folder, 'urbaneventtypes')
+            api.rename(obj=eventconfigs, new_id='eventconfigs', safe_id=False)
+
+
 def migrate(context):
     logger = logging.getLogger('urban: migrate to 2.5')
     logger.info("starting migration steps")
@@ -205,6 +215,7 @@ def migrate(context):
     migrate_opinion_request_TAL_expression(context)
     migrate_report_and_remove_urbandelay_portal_type(context)
     migrate_parcellings_folder_allowed_type(context)
+    migrate_urbaneventtypes_folder(context)
     catalog = api.portal.get_tool('portal_catalog')
     catalog.clearFindAndRebuild()
     logger.info("migration done!")

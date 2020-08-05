@@ -40,7 +40,7 @@ default_texts = {
 }
 
 
-urbanEventTypes = {
+EventConfigs = {
     'codt_buildlicence': (
         {
             'id': "depot-de-la-demande-codt",

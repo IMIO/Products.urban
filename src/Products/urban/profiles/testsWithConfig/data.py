@@ -17,7 +17,7 @@ default_texts = {
 }
 
 
-urbanEventTypes = {
+EventConfigs = {
     'buildlicence':
     (
         {

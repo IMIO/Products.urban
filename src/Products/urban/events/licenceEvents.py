@@ -135,7 +135,7 @@ def _setManagerPermissionOnLicence(licence):
 
 
 def _checkNumerotation(licence):
-    config = licence.getUrbanConfig()
+    config = licence.getLicenceConfig()
     portal_urban = config.aq_parent
     source_config = getattr(portal_urban, config.getNumerotationSource())
     # increment the numerotation in the tool only if its the one that has been generated
