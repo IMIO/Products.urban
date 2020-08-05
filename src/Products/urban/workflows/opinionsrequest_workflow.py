@@ -75,9 +75,9 @@ class StateRolesMapping(LocalRoleAdapter):
         ]),
 
         'opinion_given': OrderedDict([
-            (get_editors, (get_editors_roles,)),
             (get_opinion_editor, ('Reader',)),
             (get_opinion_validator, ('Reader',)),
+            (get_editors, (get_editors_roles,)),
             (LocalRoleAdapter.get_readers, ('Reader',)),
         ]),
 
