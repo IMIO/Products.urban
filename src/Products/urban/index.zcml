@@ -11,7 +11,6 @@
   <adapter name="StreetNumber" factory=".indexes.genericlicence_streetnumber" />
   <adapter name="address" factory=".indexes.genericlicence_address" />
   <adapter name="last_key_event" factory=".indexes.genericlicence_lastkeyevent" />
-  <adapter name="last_key_event" factory=".indexes.urbaneventtype_lastkeyevent" />
   <adapter name="folder_manager" factory=".indexes.genericlicence_foldermanager" />
   <adapter name="folder_manager" factory=".indexes.urbanevent_foldermanager" />
   <adapter name="extraValue" factory=".indexes.rubricsfolders_extravalue" />
