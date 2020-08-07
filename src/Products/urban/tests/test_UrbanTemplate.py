@@ -75,7 +75,8 @@ class TestTemplateMethods(unittest.TestCase):
         wf_tool = api.portal.get_tool('portal_workflow')
 
         # Check that generated .odt files in urbanEvents are NOT under any wf policy
-        urban_event = self.buildlicence.getLastAcknowledgment()
+        buildlicence = [l for l in self.licences if l.portal_type == 'BuildLicence'][0]
+        urban_event = buildlicence.getLastAcknowledgment()
         document = getattr(urban_event, 'urb-accuse.odt', None)
         exception_msg = ""
         try:
