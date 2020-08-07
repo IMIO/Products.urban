@@ -113,6 +113,7 @@ schema = Schema((
         ),
         default='0',
         validators=('isInteger',),
+        optional=True,
     ),
 ),
 )
@@ -141,7 +142,7 @@ class UrbanEventInspectionReport(BaseFolder, UrbanEvent, BrowserDefaultMixin):
           This vocabulary for field floodingLevel returns a list of
           flooding levels : no risk, low risk, moderated risk, high risk
         """
-        voc = UrbanVocabulary('urbaneventtypes', vocType="FollowUpEventType", value_to_use='title')
+        voc = UrbanVocabulary('eventconfigs', vocType="FollowUpEventType", value_to_use='title')
         config_voc = voc.getDisplayList(self)
         full_voc = [
             ('close', translate(_('close_inspection'), context=self.REQUEST)),

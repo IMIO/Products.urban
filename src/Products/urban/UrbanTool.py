@@ -279,7 +279,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
          Return the default text of the field (if it exists)
         """
         if not config:
-            config = getattr(self, self.getUrbanConfig(context).getId())
+            config = getattr(self, self.getLicenceConfig(context).getId())
         for prop in config.getTextDefaultValues():
             if 'fieldname' in prop and prop['fieldname'] == fieldname:
                 return prop['text']
@@ -327,7 +327,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         """
         #search in an urbanConfig or in the tool
         if inUrbanConfig:
-            vocPath = "%s/%s/%s" % ('/'.join(self.getPhysicalPath()), self.getUrbanConfig(context).getId(), vocToReturn)
+            vocPath = "%s/%s/%s" % ('/'.join(self.getPhysicalPath()), self.getLicenceConfig(context).getId(), vocToReturn)
         else:
             vocPath = "%s/%s" % ('/'.join(self.getPhysicalPath()), vocToReturn)
         brains = self.portal_catalog(path=vocPath, sort_on=sort_on, portal_type=vocType, review_state=allowedStates)
@@ -473,15 +473,15 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         """
           Return a list of topics to display in the portlet
         """
-        topics = self.getUrbanConfig(context).topics.objectValues('ATTopic')
+        topics = self.getLicenceConfig(context).topics.objectValues('ATTopic')
         res = []
         for topic in topics:
             res.append(topic)
 
         return res
 
-    security.declarePublic('getUrbanConfig')
-    def getUrbanConfig(self, context, urbanConfigId=None):
+    security.declarePublic('getLicenceConfig')
+    def getLicenceConfig(self, context, urbanConfigId=None):
         """
           Return the folder containing the necessary paramaters
         """
@@ -576,28 +576,6 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             return at_obj[fieldRealName]
         else:
             return at_obj.Schema()[fieldRealName]
-
-    security.declarePublic('listEventTypes')
-    def listEventTypes(self, context, urbanConfigId):
-        """
-          Returns the eventTypes of an urbanConfigProxy
-        """
-        urbanConfig = self.getUrbanConfig(context=None, urbanConfigId=urbanConfigId)
-        cat = getToolByName(self, 'portal_catalog')
-        path = '/'.join(urbanConfig.getPhysicalPath())
-        brains = cat(
-            path=path,
-            sort_on='getObjPositionInParent',
-            object_provides=IUrbanEventType.__identifier__,
-            review_state="enabled"
-        )
-        res = []
-        #now evaluate the TAL condition for every brain
-        for brain in brains:
-            event_type = brain.getObject()
-            if event_type.canBeCreatedInLicence(context):
-                res.append(brain)
-        return res
 
     security.declarePublic('decorateHTML')
     def decorateHTML(self, classname, htmlcode):
