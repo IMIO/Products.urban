@@ -540,7 +540,7 @@ class UrbanBase(object):
           Returns a term object for a given term folder
         """
         tool = api.portal.get_tool('portal_urban')
-        urbanConfig = tool.getUrbanConfig(self)
+        urbanConfig = tool.getLicenceConfig(self)
         termFolderObj = getattr(urbanConfig, termFolder)
         return getattr(termFolderObj, termId)
 
@@ -599,7 +599,7 @@ class UrbanBase(object):
         if self.unrestrictedTraverse(selfPhysPath + '/@@plone_lock_info/is_locked_for_current_user')():
             return False
         tool = api.portal.get_tool('portal_urban')
-        if tool.getUrbanConfig(self).getUseTabbingForDisplay():
+        if tool.getLicenceConfig(self).getUseTabbingForDisplay():
             return False
         return True
 

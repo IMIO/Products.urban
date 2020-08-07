@@ -221,18 +221,16 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
 
     schema = LicenceConfig_schema
 
-    ##code-section class-header #fill in your manual code here
-    ##/code-section class-header
+    security.declarePublic('getEventConfigs')
 
-    # Methods
+    def getEventConfigs(self):
+        event_configs = self.eventconfigs.objectValues()
+        return event_configs
 
-    # Manually created methods
-
-    security.declarePublic('listEventTypes')
-
-    def listEventTypes(self):
-        res = [(i.id, i.title) for i in self.urbaneventtypes.objectValues()]
-        return DisplayList(res)
+    def getEnabledEventConfigs(self):
+        event_configs = [cfg for cfg in self.getEventConfigs()
+                         if api.content.get_state(cfg) == 'enabled']
+        return event_configs
 
     security.declarePublic('getEventTypesByInterface')
 
@@ -244,8 +242,8 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
         if issubclass(interface, Interface):
             interface = interface.__identifier__
 
-        eventtypes = self.urbaneventtypes.objectValues()
-        to_return = [uet for uet in eventtypes if interface in uet.getEventTypeType()]
+        eventtypes = self.eventconfigs.objectValues()
+        to_return = [uet for uet in eventtypes if interface in uet.getEventType()]
         return to_return
 
     security.declarePrivate('listUsedAttributes')
