@@ -49,7 +49,6 @@ schema = Schema((
             label=_('urban_label_investigationStart',
                     default='Investigationstart'),
         ),
-        optional=True,
     ),
     DateTimeField(
         name='investigationEnd',
@@ -60,7 +59,6 @@ schema = Schema((
                     default='Investigationend'),
         ),
         validators=('isValidInvestigationEnd',),
-        optional=True,
     ),
     DateTimeField(
         name='explanationStartSDate',
