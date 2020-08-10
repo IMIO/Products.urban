@@ -220,7 +220,7 @@ def migrate(context):
     setup_tool = api.portal.get_tool('portal_setup')
     setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'typeinfo')
     setup_tool.runAllImportStepsFromProfile('profile-Products.urban:default')
-#    setup_tool.runImportStepFromProfile('profile-Products.urban:extra', 'urban-update-rubrics')
+    setup_tool.runImportStepFromProfile('profile-Products.urban:extra', 'urban-update-rubrics')
     migrate_codt_buildlicences_schedule(context)
     migrate_CODT_NotaryLetter_to_CODT_UrbanCertificateBase(context)
     migrate_CODT_UrbanCertificateOne_to_CODT_UrbanCertificateBase(context)
