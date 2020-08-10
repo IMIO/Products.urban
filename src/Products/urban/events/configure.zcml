@@ -75,6 +75,10 @@
                    Products.DCWorkflow.interfaces.IAfterTransitionEvent"
               handler=".licenceEvents.close_all_tasks" />
 
+  <subscriber for="..interfaces.IGenericLicence
+                   Products.DCWorkflow.interfaces.IAfterTransitionEvent"
+              handler=".licenceEvents.close_all_events" />
+
   <subscriber for="..interfaces.IUrbanEvent
                    Products.DCWorkflow.interfaces.IAfterTransitionEvent"
               handler=".licenceEvents.reindex_attachments_permissions" />
