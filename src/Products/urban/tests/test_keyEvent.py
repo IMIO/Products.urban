@@ -31,7 +31,7 @@ class TestKeyEvent(BrowserTestCase):
         self.licence = getattr(buildlicence_folder, testlicence_id)
         # create a test UrbanEvent in test_buildlicence
         self.catalog = api.portal.get_tool('portal_catalog')
-        event_type_brain = self.catalog(portal_type='UrbanEventType', id='accuse-de-reception')[0]
+        event_type_brain = self.catalog(portal_type='EventConfig', id='accuse-de-reception')[0]
         self.event_type = event_type_brain.getObject()
         self.urban_event = self.licence.createUrbanEvent(self.event_type)
         transaction.commit()
@@ -53,7 +53,7 @@ class TestKeyEvent(BrowserTestCase):
 
         # we delete the urban event from the buildlicence and set the urbanEventType UET as a key event
         buildlicence.manage_delObjects(urban_event.id)
-        urban_event_type.setIsKeyEvent(True)
+        urban_event_type.isKeyEvent = True
 
         # we add an urbanEvent of type UET, the index last_key_event of the licence should be updated
         buildlicence.createUrbanEvent(urban_event_type)
@@ -69,7 +69,7 @@ class TestKeyEvent(BrowserTestCase):
         catalog = self.catalog
 
         old_index_value = catalog(portal_type='BuildLicence')[0].last_key_event
-        event_type = self.catalog(portal_type='UrbanEventType', id='depot-de-la-demande')[0].getObject()
+        event_type = self.catalog(portal_type='EventConfig', id='depot-de-la-demande')[0].getObject()
         buildlicence.createUrbanEvent(event_type)
         urban_event = buildlicence.objectValues()[1]
         event = ObjectModifiedEvent(urban_event)
@@ -114,8 +114,8 @@ class TestKeyEvent(BrowserTestCase):
         self.assertTrue(date not in self.browser.contents)
 
         old_fields = self.event_type.getActivatedFields()
-        self.event_type.setActivatedFields(old_fields + ('decisionDate',))
-        self.event_type.setKeyDates(('decisionDate',))
+        self.event_type.activatedFields = old_fields + ('decisionDate',)
+        self.event_type.keyDates = ('decisionDate',)
         self.urban_event.setDecisionDate(date)
         transaction.commit()
 

@@ -89,7 +89,7 @@
 
   <subscriber for="..interfaces.IUrbanEvent
                    Products.Archetypes.interfaces.IObjectInitializedEvent"
-              handler=".urbanEventEvents.setEventTypeType"/>
+              handler=".urbanEventEvents.setEventType"/>
 
   <subscriber for="..interfaces.IUrbanEvent
                    Products.Archetypes.interfaces.IObjectInitializedEvent"
@@ -123,6 +123,7 @@
                    zope.lifecycleevent.interfaces.IObjectCreatedEvent"
               handler=".followupEvents.setLinkedReport" />
 
+  <!-- [DX] TO DELETE once all UrbanEventType subclasses are migrated to DX [DX] -->
   <subscriber for="..interfaces.IUrbanEventType
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".urbanEventTypesEvents.updateKeyEvent" />
@@ -132,6 +133,19 @@
               handler=".urbanEventTypesEvents.updateEventType" />
 
   <subscriber for="..interfaces.IUrbanEventType
+                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+              handler=".urbanEventTypesEvents.forceEventTypeCollege" />
+  <!-- [DX] TO DELETE once all UrbanEventType subclasses are migrated to DX [DX] -->
+
+  <subscriber for="imio.urban.core.contents.eventconfig.IEventConfig
+                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+              handler=".urbanEventTypesEvents.updateKeyEvent" />
+
+  <subscriber for="imio.urban.core.contents.eventconfig.IEventConfig
+                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+              handler=".urbanEventTypesEvents.updateEventType" />
+
+  <subscriber for="imio.urban.core.contents.eventconfig.IEventConfig
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".urbanEventTypesEvents.forceEventTypeCollege" />
 
@@ -154,10 +168,6 @@
   <subscriber for="..interfaces.IEnvironmentBase
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".environmentLicenceEvents.setExploitationConditions"/>
-
-  <subscriber for="..interfaces.IParcellingTerm
-                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-              handler=".parcellingtermEvents.updateTitle" />
 
   <subscriber for="..interfaces.IPcaTerm
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"

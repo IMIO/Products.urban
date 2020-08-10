@@ -54,8 +54,6 @@ class UrbanConfigFolderView(FormWrapper):
     def __init__(self, context, request):
         super(UrbanConfigFolderView, self).__init__(context, request)
         # disable portlets on licences
-        self.request.set('disable_plone.rightcolumn', 1)
-        self.request.set('disable_plone.leftcolumn', 1)
 
     def search_submitted(self):
         """
@@ -77,7 +75,7 @@ class UrbanConfigFolderView(FormWrapper):
         if self.search_submitted():
             catalog = api.portal.get_tool('portal_catalog')
             brains = catalog(
-                Title='*{}*'.format(self.search_args['name']),
+                Title=u'*{}*'.format(self.search_args['name']),
                 path={'query': '/'.join(self.context.getPhysicalPath()), 'depth': 1}
             )
             values = [b.getObject() for b in brains]

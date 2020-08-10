@@ -129,7 +129,7 @@ schema = Schema((
         ),
         schemata='urban_advices',
         multiValued=1,
-        vocabulary=UrbanVocabulary('urbaneventtypes', vocType="OpinionRequestEventType", value_to_use='extraValue'),
+        vocabulary=UrbanVocabulary('eventconfigs', vocType="OpinionRequestEventType", value_to_use='extraValue'),
         default_method='getDefaultValue',
     ),
     LinesField(
@@ -140,7 +140,7 @@ schema = Schema((
         ),
         schemata='urban_advices',
         multiValued=1,
-        vocabulary=UrbanVocabulary('urbaneventtypes', vocType="OpinionRequestEventType", value_to_use='extraValue'),
+        vocabulary=UrbanVocabulary('eventconfigs', vocType="OpinionRequestEventType", value_to_use='extraValue'),
         default_method='getDefaultValue',
     ),
 
@@ -403,7 +403,7 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
           Returns a formatted version of the folder maker address to be used in POD templates
         """
         urban_tool = getToolByName(self, 'portal_urban')
-        foldermakers_config = urban_tool.getUrbanConfig(self).urbaneventtypes
+        foldermakers_config = urban_tool.getLicenceConfig(self).eventconfigs
         foldermakers = [fm for fm in foldermakers_config.objectValues('OpinionRequestEventType') if fm.id in self.getSolicitOpinionsTo()]
         toreturn = '[CSV]Nom|Description|AdresseLigne1|AdresseLigne2'
         for foldermaker in foldermakers:

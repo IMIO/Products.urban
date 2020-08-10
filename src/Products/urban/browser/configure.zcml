@@ -113,22 +113,6 @@
      permission="zope2.View"
   />
 
-   <browser:page
-     for="Products.urban.interfaces.ITestConfig"
-     name="configtestview"
-     class=".configtestview.ConfigTestView"
-     template="templates/urbanconfigtestview.pt"
-     permission="zope2.View"
-  />
-
-  <browser:page
-     for="*"
-     name="configtestprocessingview"
-     class=".configtestview.ConfigTestProcessingView"
-     attribute="processing"
-     permission="zope2.View"/>
-  <!--/&ndash;&gt;-->
-
   <browser:page
      for="Products.urban.interfaces.ILicenceConfig"
      name="licenceconfigmacros"
@@ -248,23 +232,6 @@
      for="Products.urban.interfaces.IGenericLicence"
      name="create_urbanevent"
      class=".factory.CreateUrbanEvent"
-     permission="zope2.View"
-  />
-
-  <!-- register the parcel recordview for parcellingterms as well since they can now contains parcels object -->
-  <browser:page
-     for="Products.urban.interfaces.IParcellingTerm"
-     name="parcelrecordsview"
-     class=".parcelrecordsview.ParcelRecordsView"
-     template="templates/parcelrecordsview.pt"
-     permission="zope2.View"
-  />
-
-  <browser:page
-     for="Products.urban.interfaces.IParcellingTerm"
-     name="parcellingtermview"
-     class=".parcellingtermview.ParcellingTermView"
-     template="templates/parcellingtermview.pt"
      permission="zope2.View"
   />
 
