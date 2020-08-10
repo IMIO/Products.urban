@@ -5389,12 +5389,7 @@ msgid "urbancertificatetwos"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:430
-msgid "urbaneventtypes_folder_title"
-msgstr ""
-
-#. Default: "urban"
-#: ../setuphandlers.py:784
+#: ../setuphandlers.py:781
 msgid "urbantemplates_folder_title"
 msgstr ""
 
