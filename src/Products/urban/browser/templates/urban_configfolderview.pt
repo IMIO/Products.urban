@@ -29,7 +29,9 @@
         <div class="field">
         <tal:addable_types define="acts context/allowedContentTypes" repeat="act acts" i18n:domain="urban">
         <form tal:condition="python: not isAnon" name="quickAdd"
-              tal:attributes="action python: context.absolute_url() + '/createObject'" action="createObject" method="post">
+              tal:define="is_DX python: 'DexterityFTI' in str(act)"                                   
+              tal:attributes="action python: '{}/{}'.format(context.absolute_url(), is_DX and '++add++{}'.format(act.id) or 'createObject')"
+              action="" method="post">
           <input type="hidden" name="type_name" value="#" tal:attributes="value act/id" />
           <input type="submit" id="event" value="#"
                  tal:attributes="value python: 'add_' + act.id;

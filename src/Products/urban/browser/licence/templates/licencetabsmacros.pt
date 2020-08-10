@@ -456,20 +456,20 @@
 
 
 <metal:events define-macro="urbanEventsMacro" i18n:domain="urban">
-    <tal:add_events define="eventTypes view/getUrbanEventTypes">
+    <tal:add_events define="event_configs view/getAllowedEventConfigs">
         <!--legend i18n:translate="urban_create_events">Create event</legend-->
         <form action="create_urbanevent" method="POST"
               tal:condition="view/canAddUrbanEvent">
                 <input type='hidden' name="urban_folder_uid" tal:attributes="value here/UID" value=''>
                 <select name="urban_event_type_uid">
-                    <tal:loopEventType repeat="eventType eventTypes">
-                        <option tal:attributes="value eventType/UID" value='' tal:content="eventType/Title">
+                    <tal:loopEventType repeat="event_config event_configs">
+                        <option tal:attributes="value event_config/UID" value='' tal:content="event_config/Title">
                         </option>
                     </tal:loopEventType>
                 </select>
             <input class="context apButton contenttype-urbanevent" type="submit" i18n:attributes="value" value="Add an event">
         </form>
-        <p class="discreet" tal:condition="not: eventTypes" i18n:translate="urban_no_eventtype_defined">
+        <p class="discreet" tal:condition="not: event_configs" i18n:translate="urban_no_eventtype_defined">
             No event type is defined in the configuration for this element
         </p>
     </tal:add_events>

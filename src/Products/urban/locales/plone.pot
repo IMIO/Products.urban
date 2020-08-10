@@ -39,7 +39,13 @@ msgstr ""
 msgid "UrbanEventInquiry"
 msgstr ""
 
+msgid "UrbanEventAnnouncement"
+msgstr ""
+
 msgid "UrbanEventOpinionRequest"
+msgstr ""
+
+msgid "UrbanEventInspectionReport"
 msgstr ""
 
 msgid "UrbanEventFollowUp"
