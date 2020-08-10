@@ -6,6 +6,7 @@ from Products.contentmigration.walker import CustomQueryWalker
 from Products.contentmigration.archetypes import InplaceATFolderMigrator
 
 from Products.urban.config import URBAN_TYPES
+from Products.urban.config import LICENCE_FINAL_STATES
 from Products.urban.migration.to_DX.migration_utils import clean_obsolete_portal_type
 from Products.urban.setuphandlers import setFolderAllowedTypes
 from Products.urban.utils import getLicenceFolderId
@@ -185,6 +186,19 @@ def migrate_report_and_remove_urbandelay_portal_type(context):
     logger.info("migration step done!")
 
 
+def migrate_default_states_to_close_all_events(context):
+    urban_tool = api.portal.get_tool('portal_urban')
+    portal_workflow = api.portal.get_tool('portal_workflow')
+    for licence_config in urban_tool.get_all_licence_configs():
+        portal_type = licence_config.getLicencePortalType()
+        workflow_def = getattr(portal_workflow, portal_workflow.getChainFor(portal_type)[0])
+        to_set = []
+        for state in LICENCE_FINAL_STATES:
+            if state in workflow_def.states.objectIds():
+                to_set.append(state)
+        licence_config.setStates_to_end_all_events(to_set)
+
+
 def migrate_parcellings_folder_allowed_type(context):
     portal = api.portal.get()
     parcellings = portal.urban.parcellings
@@ -214,6 +228,7 @@ def migrate(context):
     migrate_opinion_request_TAL_expression(context)
     migrate_report_and_remove_urbandelay_portal_type(context)
     migrate_parcellings_folder_allowed_type(context)
+    migrate_default_states_to_close_all_events(context)
     catalog = api.portal.get_tool('portal_catalog')
     catalog.clearFindAndRebuild()
     logger.info("migration done!")
