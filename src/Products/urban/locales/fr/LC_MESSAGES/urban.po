@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2020-07-14 14:07+0000\n"
+"POT-Creation-Date: 2020-07-28 12:08+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -16,11 +16,11 @@ msgstr ""
 "X-is-fallback-for: fr-fr fr-be fr-ca\n"
 
 #. Default: "urban"
-#: ../setuphandlers.py:307
+#: ../setuphandlers.py:304
 msgid "%s_folder_title"
 msgstr ""
 
-#: ../setuphandlers.py:253
+#: ../setuphandlers.py:249
 msgid "%s_urbanconfig_title"
 msgstr ""
 
@@ -98,7 +98,7 @@ msgid "Add this parcel"
 msgstr "Ajouter cette parcelle"
 
 #. Default: "urban"
-#: ../setuphandlers.py:983
+#: ../setuphandlers.py:978
 msgid "All"
 msgstr "Tous"
 
@@ -668,7 +668,7 @@ msgid "RoadDecree"
 msgstr "Décret Voirie"
 
 #. Default: "imio.schedule"
-#: ../setuphandlers.py:335
+#: ../setuphandlers.py:332
 msgid "ScheduleConfig"
 msgstr "Configuration d'échéancier"
 
@@ -799,7 +799,7 @@ msgid "Update"
 msgstr "Mettre à jour"
 
 #. Default: "urban"
-#: ../setuphandlers.py:858
+#: ../setuphandlers.py:855
 msgid "Urban"
 msgstr ""
 
@@ -1001,7 +1001,7 @@ msgid "architect_residing"
 msgstr "${name}, dont les bureaux se situent ${address}"
 
 #. Default: "urban"
-#: ../setuphandlers.py:898
+#: ../setuphandlers.py:895
 msgid "architects_folder_title"
 msgstr "Architectes"
 
@@ -1112,7 +1112,7 @@ msgid "close_inspection"
 msgstr "clôturer le dossier"
 
 #. Default: "Close prevention area"
-#: ../content/licence/GenericLicence.py:1153
+#: ../content/licence/GenericLicence.py:1154
 msgid "close_prevention_area"
 msgstr "Zone de prévention rapprochée"
 
@@ -1209,7 +1209,7 @@ msgid "creation date"
 msgstr "Date de création"
 
 #. Default: "urban"
-#: ../setuphandlers.py:758
+#: ../setuphandlers.py:755
 msgid "dashboardtemplates_folder_title"
 msgstr "Modèles tableaux de bord"
 
@@ -1339,7 +1339,7 @@ msgid "envclasstwos"
 msgstr "Permis d'environnement classe 2"
 
 #. Default: "urban"
-#: ../setuphandlers.py:799
+#: ../setuphandlers.py:796
 msgid "environmenttemplates_folder_title"
 msgstr "modèles des procédures d'environnement"
 
@@ -1460,6 +1460,11 @@ msgstr "Pièces jointes de l'événement"
 msgid "event_linked_documents"
 msgstr "Documents liés à cet événement"
 
+#. Default: "urban"
+#: ../setuphandlers.py:427
+msgid "eventconfigs_folder_title"
+msgstr ""
+
 msgid "exemptfdarticle_folder_title"
 msgstr "Article 107"
 
@@ -1476,7 +1481,7 @@ msgid "externaldecisions_folder_title"
 msgstr "Décision des avis externes"
 
 #. Default: "Far prevention area"
-#: ../content/licence/GenericLicence.py:1154
+#: ../content/licence/GenericLicence.py:1155
 msgid "far_prevention_area"
 msgstr "Zone de prévention éloignée"
 
@@ -1525,26 +1530,26 @@ msgid "firefox_viewlet_title"
 msgstr "Cette application fonctionne mieux avec Firefox."
 
 #. Default: "High risk"
-#: ../content/licence/GenericLicence.py:1175
+#: ../content/licence/GenericLicence.py:1176
 msgid "flooding_level_high"
 msgstr "Risque élevé"
 
 #. Default: "Low risk"
-#: ../content/licence/GenericLicence.py:1173
+#: ../content/licence/GenericLicence.py:1174
 msgid "flooding_level_low"
 msgstr "Risque faible"
 
 #. Default: "Moderate risk"
-#: ../content/licence/GenericLicence.py:1174
+#: ../content/licence/GenericLicence.py:1175
 msgid "flooding_level_moderate"
 msgstr "Risque moyen"
 
 #. Default: "No"
-#: ../content/licence/GenericLicence.py:1171
+#: ../content/licence/GenericLicence.py:1172
 msgid "flooding_level_no"
 msgstr "Non"
 
-#: ../content/licence/GenericLicence.py:1172
+#: ../content/licence/GenericLicence.py:1173
 msgid "flooding_level_verylow"
 msgstr "Risque très faible"
 
@@ -1607,19 +1612,19 @@ msgstr "${cityName}, le ${formattedDate}"
 
 # this is an HTML content for the front-page
 #. Default: "urban"
-#: ../setuphandlers.py:830
+#: ../setuphandlers.py:827
 msgid "front_page_descr"
 msgstr "Bienvenue sur le site vous permettant d'utiliser la gestion des permis d'urbanisme"
 
 # this is an HTML content for the front-page
 #. Default: "urban"
-#: ../setuphandlers.py:831
+#: ../setuphandlers.py:828
 msgid "front_page_text"
 msgstr "<p>L'application intègre la gestion des permis d'urbanisme, d'urbanisation, des déclarations, divisions notariales, CU1, CU2, lettres d'informations notariales, rendez-vous, avant-projets et déclarations environnementales :</p><ul><li>gestion de la demande</li><li>gestion des demandeurs, architectes, agents traitants, ...</li><li>production des documents</li><li>workflow de suivi de la demande</li><li>cartographie avec calcul du rayon de 50m, visualisation des parcelles, ...</li><li>échéancier</li><li>...</li></ul><p><a href='urban'>Cliquez ici pour accéder à l'application</a></p><p class='discreet'>Vous devez disposer d'un nom d'utilisateur et d'un mot de passe pour accéder à l'application</p>"
 
 # title of the front-page
 #. Default: "urban"
-#: ../setuphandlers.py:829
+#: ../setuphandlers.py:826
 msgid "front_page_title"
 msgstr "Gestion de l'Urbanisme"
 
@@ -1646,13 +1651,13 @@ msgid "generate_a_linked_doc"
 msgstr "Générer un document lié au dossier"
 
 #. Default: "urban"
-#: ../setuphandlers.py:912
+#: ../setuphandlers.py:909
 msgid "geometricians_folder_title"
 msgstr "Géomètres"
 
 #. Default: "Global templates"
 #: ../browser/templates/templatessummary.pt:19
-#: ../setuphandlers.py:770
+#: ../setuphandlers.py:767
 msgid "globaltemplates_folder_title"
 msgstr "Modèles généraux"
 
@@ -2054,7 +2059,7 @@ msgid "not_permitted_to_add_urbanevent"
 msgstr "Vous ne pouvez pas générer de documents"
 
 #. Default: "urban"
-#: ../setuphandlers.py:926
+#: ../setuphandlers.py:923
 msgid "notaries_folder_title"
 msgstr "Notaires"
 
@@ -2118,7 +2123,7 @@ msgid "outdated_parcels_in_use"
 msgstr "Permis en cours contenant une parcelle à mettre jour"
 
 #. Default: "Outside catchment"
-#: ../content/licence/GenericLicence.py:1156
+#: ../content/licence/GenericLicence.py:1157
 msgid "outside_catchment"
 msgstr "Hors captage"
 
@@ -2126,7 +2131,7 @@ msgid "parcelLinkedLicences"
 msgstr "Dossier(s) lié(s)"
 
 #. Default: "urban"
-#: ../setuphandlers.py:940
+#: ../setuphandlers.py:937
 msgid "parcellings_folder_title"
 msgstr "Lotissements"
 
@@ -2347,8 +2352,6 @@ msgid "search-last-elements"
 msgstr "Derniers éléments"
 
 #: ../browser/templates/globalmacros.pt:33
-#: ../browser/templates/searchparcels.pt:30
-#: ../skins/urban_templates/lot_view.pt:26
 msgid "search_parcels"
 msgstr "Ajouter"
 
@@ -2416,7 +2419,7 @@ msgid "subdivision_fieldset_legend"
 msgstr "Lotissement"
 
 #. Default: "Supervision area"
-#: ../content/licence/GenericLicence.py:1155
+#: ../content/licence/GenericLicence.py:1156
 msgid "supervision_area"
 msgstr "Zone de surveillance"
 
@@ -2492,7 +2495,7 @@ msgstr "Si l'interpréteur Python qui tourne Zope et Plone ne dispose pas de la 
 
 #: ../profiles.zcml:25
 #: ../profiles/default/actions.xml
-#: ../setuphandlers.py:207
+#: ../setuphandlers.py:204
 msgid "urban"
 msgstr "Urbanisme"
 
@@ -2558,12 +2561,10 @@ msgid "urban_bound_inspections"
 msgstr "Dossiers d'inspections ou PV liés"
 
 #. Default: "Browse old parcels (Only works with the parcel reference)"
-#: ../browser/templates/searchparcels.pt:168
 msgid "urban_browse_old_parcels"
 msgstr "Chercher dans les anciennes parcelles (Par référence cadastrale uniquement)"
 
 #. Default: "Search"
-#: ../browser/templates/searchparcels.pt:172
 msgid "urban_button_search"
 msgstr "Recherche"
 
@@ -3214,7 +3215,7 @@ msgid "urban_label_country"
 msgstr "Pays"
 
 #. Default: "COVID19"
-#: ../content/licence/GenericLicence.py:997
+#: ../content/licence/GenericLicence.py:998
 msgid "urban_label_covid"
 msgstr ""
 
@@ -3584,7 +3585,7 @@ msgid "urban_label_folderZoneDetails"
 msgstr "Détails concernant le zonage"
 
 #. Default: "Foldermanagers"
-#: ../content/licence/GenericLicence.py:953
+#: ../content/licence/GenericLicence.py:954
 msgid "urban_label_foldermanagers"
 msgstr "Agent(s) traitant(s)"
 
@@ -4159,7 +4160,7 @@ msgid "urban_label_notaryContact"
 msgstr "Notaire(s)"
 
 #. Default: "Noteworthytrees"
-#: ../content/licence/GenericLicence.py:986
+#: ../content/licence/GenericLicence.py:987
 msgid "urban_label_noteworthyTrees"
 msgstr "Arbres et haies remarquables"
 
@@ -4255,7 +4256,7 @@ msgid "urban_label_owner"
 msgstr "Propriétaire"
 
 #. Default: "Parcellings"
-#: ../content/licence/GenericLicence.py:975
+#: ../content/licence/GenericLicence.py:976
 msgid "urban_label_parcellings"
 msgstr "Lotissement"
 
@@ -4981,6 +4982,9 @@ msgstr "Détails concernant le SSC"
 msgid "urban_label_startDate"
 msgstr "Date de début d'utilisation"
 
+msgid "urban_label_states_to_end_all_events"
+msgstr "États terminant toutes les événements du dossier"
+
 msgid "urban_label_states_to_end_all_tasks"
 msgstr "États terminant toutes les tâches du dossier"
 
@@ -5341,12 +5345,10 @@ msgid "urban_search_parcel_by_name"
 msgstr "Nom"
 
 #. Default: "Proprietary"
-#: ../browser/templates/searchparcels.pt:135
 msgid "urban_search_parcel_by_proprietary"
 msgstr "Propriétaires"
 
 #. Default: "Number"
-#: ../browser/templates/searchparcels.pt:111
 msgid "urban_search_parcel_by_street_number"
 msgstr "N° de police"
 

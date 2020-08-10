@@ -2311,6 +2311,9 @@ msgstr ""
 msgid "urban_label_specificFeaturesDetail"
 msgstr ""
 
+msgid "urban_label_states_to_end_all_events"
+msgstr ""
+
 msgid "urban_label_states_to_end_all_tasks"
 msgstr ""
 

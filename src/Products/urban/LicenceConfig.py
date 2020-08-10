@@ -178,12 +178,26 @@ schema = Schema((
         allowed_types=('FolderManager',),
     ),
     LinesField(
+        name='states_to_end_all_events',
+        widget=InAndOutWidget(
+            description="Select the licence states who will close all urban events",
+            description_msgid="urban_descr_states_to_end_all_events",
+            size=10,
+            label='States_to_end_all_events',
+            label_msgid='urban_label_states_to_end_all_events',
+            i18n_domain='urban',
+        ),
+        schemata='public_settings',
+        multiValued=True,
+        vocabulary_factory='urban.licence_state',
+    ),
+    LinesField(
         name='states_to_end_all_tasks',
         widget=InAndOutWidget(
             description="Select the licence states who will close all schedule tasks",
             description_msgid="urban_descr_states_to_end_all_tasks",
             size=10,
-            label='States_to_end_all_taks',
+            label='States_to_end_all_tasks',
             label_msgid='urban_label_states_to_end_all_tasks',
             i18n_domain='urban',
         ),
