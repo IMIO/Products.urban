@@ -228,7 +228,7 @@ class LicenceView(BrowserView):
                              translate("urban_label_" + date, 'urban', default=date, context=self.request), date)
                             for date in eventconfig.getKeyDates()]
                 linked_events = [event for event in all_events
-                                 if event.getUrbaneventtypes() is eventconfig]
+                                 if event.getUrbaneventtypes() == eventconfig]
                 if linked_events:
                     for event in linked_events:
                         ordered_dates.append({
