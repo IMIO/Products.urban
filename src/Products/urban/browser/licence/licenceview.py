@@ -218,9 +218,11 @@ class LicenceView(BrowserView):
         ordered_dates = []
 
         # search in the config for all the Key eventconfigs and their key dates
+        all_events = context.getAllEvents()
         for eventconfig in config.eventconfigs.objectValues():
             if eventconfig.getIsKeyEvent():
-                linked_events = eventconfig.getLinkedUrbanEvents()
+                linked_events = [event for event in all_events
+                                 if event.getUrbaneventtypes() == eventconfig]
                 keydates = [(date == 'eventDate' and eventconfig.getEventDateLabel() or
                              translate("urban_label_" + date, 'urban', default=date, context=self.request), date)
                             for date in eventconfig.getKeyDates()]
