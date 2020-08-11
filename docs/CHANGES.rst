@@ -30,6 +30,25 @@
 - Improve default reference expression for licence references. [URB-2046]
   [sdelcourt]
 
+- Add search filter on public config folders (geometricians, notaries, architects, parcellings). [SUP-10537]
+  [sdelcourt]
+
+- Migrate PortionOut (Archetype) type to Parcel (dexterity) type. [URB-2009]
+  [sdelcourt]
+
+- Fix add permissions for Inquiries. [SUP-13679]
+  [sdelcourt]
+
+- Add custom division 99999 for unreferenced parcels. [SUP-13835]
+  [sdelcourt]
+
+- Migrate ParcellingTerm (Archetype) type to Parcelling (dexterity) type.
+  [sdelcourt]
+
+- Add field to define final states closing all the urban events on a licence. [URB-2082]
+  [sdelcourt]
+
+
 2.4 (2019-03-25)
 ----------------
 - add tax field in GenericLicence
@@ -86,6 +105,9 @@
 
 - fix advanced searching Applicant field for all licences, and not just 'all'
   [jjaumotte]
+
+- Refactor key date display to include urban event custom titles. [SUP-13982]
+  [sdelcourt]
 
 2.3.0
 -----
