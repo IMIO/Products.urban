@@ -18,6 +18,7 @@ from Products.urban.interfaces import IUrbanDoc
 from plone import api
 from plone.memoize import view
 from zope.annotation import IAnnotations
+from zope.i18n import translate
 
 
 class LicenceView(BrowserView):
@@ -296,11 +297,11 @@ class LicenceView(BrowserView):
             catalog = api.portal.get_tool('portal_catalog')
             inspection_brains = catalog(UID=inspection_UIDs)
             inspections = [{
-                'title': b.Title,
-                'url': '{}/{}s/{}'.format(licence_folder.absolute_url(), b.portal_type.lower(), b.id),
-                'state': b.review_state
-                }
-                for b in inspection_brains]
+                           'title': b.Title,
+                           'url': '{}/{}s/{}'.format(licence_folder.absolute_url(), b.portal_type.lower(), b.id),
+                           'state': b.review_state
+                           }
+                           for b in inspection_brains]
             return inspections
 
 
@@ -328,6 +329,7 @@ class CODTLicenceView(LicenceView):
         liendoc = 'http://spw.wallonie.be/dgo4/index.php?thema=bc_pat&details=57081-CLT-0239-01'
         return liendoc
 
+
 class UrbanCertificateBaseView(LicenceView):
     """
       This manage the view of UrbanCertificate and NotaryLetter Classes
@@ -341,7 +343,7 @@ class UrbanCertificateBaseView(LicenceView):
         context = aq_inner(self.context)
         accessor = getattr(context, 'get%sSpecificFeatures' % subtype.capitalize())
         specific_features = accessor()
-        return [spf.get('value', spf['text']) for spf in specific_features if not 'check' in spf or spf['check']]
+        return [spf.get('value', spf['text']) for spf in specific_features if 'check' not in spf or spf['check']]
 
 
 class CODTUrbanCertificateBaseView(UrbanCertificateBaseView):
@@ -354,6 +356,7 @@ class CODTUrbanCertificateBaseView(UrbanCertificateBaseView):
 
     def getInquiryType(self):
         return 'CODT_Inquiry'
+
 
 class EnvironmentLicenceView(LicenceView):
     """
@@ -370,8 +373,8 @@ class EnvironmentLicenceView(LicenceView):
         context = aq_inner(self.context)
         inquiries = context.getInquiries()
         if not inquiries:
-            #we want to display at least the informations about the inquiry
-            #defined on the licence even if no data have been entered
+            # we want to display at least the informations about the inquiry
+            # defined on the licence even if no data have been entered
             inquiries.append(context)
         return inquiries
 
