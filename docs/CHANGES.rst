@@ -59,6 +59,9 @@ Changes
 - Add field to define final states closing all the urban events on a licence. [URB-2082]
   [sdelcourt]
 
+- Refactor key date display to include urban event custom titles. [SUP-13982]
+  [sdelcourt]
+
 
 2.4 (2019-03-25)
 ----------------
