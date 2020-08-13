@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2020-05-14 20:10+0000\n"
+"POT-Creation-Date: 2020-08-13 08:08+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -16,11 +16,11 @@ msgstr ""
 "X-is-fallback-for: fr-fr fr-be fr-ca\n"
 
 #. Default: "urban"
-#: ../setuphandlers.py:262
+#: ../setuphandlers.py:272
 msgid "%s_folder_title"
 msgstr ""
 
-#: ../setuphandlers.py:365
+#: ../setuphandlers.py:375
 msgid "%s_urbanconfig_title"
 msgstr ""
 
@@ -82,11 +82,11 @@ msgstr "Ajouter"
 msgid "Add a work location"
 msgstr "Ajouter une adresse"
 
-#: ../browser/licence/templates/licencetabsmacros.pt:491
+#: ../browser/licence/templates/licencetabsmacros.pt:493
 msgid "Add all advices"
 msgstr "Ajouter tous les avis"
 
-#: ../browser/licence/templates/licencetabsmacros.pt:467
+#: ../browser/licence/templates/licencetabsmacros.pt:469
 msgid "Add an event"
 msgstr "Ajouter un événement"
 
@@ -98,7 +98,7 @@ msgid "Add this parcel"
 msgstr "Ajouter cette parcelle"
 
 #. Default: "urban"
-#: ../setuphandlers.py:906
+#: ../setuphandlers.py:919
 msgid "All"
 msgstr "Tous"
 
@@ -121,7 +121,7 @@ msgstr "Coordonnées de l'architecte"
 msgid "Article127"
 msgstr "Article 127"
 
-#: ../browser/licence/templates/licencetabsmacros.pt:431
+#: ../browser/licence/templates/licencetabsmacros.pt:433
 #: ../browser/licence/templates/licenceview.pt:50
 msgid "Attachments"
 msgstr "Pièces jointes"
@@ -249,11 +249,11 @@ msgstr "Déclaration environnementale"
 msgid "EnvClassTwo"
 msgstr "Permis d'environnement classe 2"
 
-#: ../browser/licence/templates/licencetabsmacros.pt:475
+#: ../browser/licence/templates/licencetabsmacros.pt:477
 msgid "Events"
 msgstr "Événements"
 
-#: ../browser/licence/templates/licencetabsmacros.pt:446
+#: ../browser/licence/templates/licencetabsmacros.pt:448
 msgid "Events attachments"
 msgstr "Pièces jointes des événements"
 
@@ -643,7 +643,7 @@ msgid "RoadDecree"
 msgstr "Décret Voirie"
 
 #. Default: "imio.schedule"
-#: ../setuphandlers.py:290
+#: ../setuphandlers.py:300
 msgid "ScheduleConfig"
 msgstr "Configuration d'échéancier"
 
@@ -763,7 +763,7 @@ msgid "Update"
 msgstr "Mettre à jour"
 
 #. Default: "urban"
-#: ../setuphandlers.py:783
+#: ../setuphandlers.py:796
 msgid "Urban"
 msgstr ""
 
@@ -873,7 +873,7 @@ msgid "add_an_applicant"
 msgstr ""
 
 # urbanevent_view
-#: ../browser/licence/templates/licencetabsmacros.pt:440
+#: ../browser/licence/templates/licencetabsmacros.pt:442
 #: ../browser/templates/urbaneventmacros.pt:89
 msgid "add_an_attachment"
 msgstr "Ajouter une pièce jointe"
@@ -881,7 +881,7 @@ msgstr "Ajouter une pièce jointe"
 msgid "add_an_equipment"
 msgstr "Ajouter une charge imposée"
 
-#: ../browser/licence/templates/licencetabsmacros.pt:422
+#: ../browser/licence/templates/licencetabsmacros.pt:424
 msgid "add_an_inquiry"
 msgstr "Ajouter une enquête supplémentaire"
 
@@ -889,7 +889,7 @@ msgid "add_event"
 msgstr "Ajouter un événement"
 
 #. Default: "This will automatically generate following advices:"
-#: ../browser/licence/templates/licencetabsmacros.pt:495
+#: ../browser/licence/templates/licencetabsmacros.pt:497
 msgid "add_every_advices_descr"
 msgstr "Ceci ajoutera automatiquement les avis suivants :"
 
@@ -961,7 +961,7 @@ msgid "architect_residing"
 msgstr "${name}, dont les bureaux se situent ${address}"
 
 #. Default: "urban"
-#: ../setuphandlers.py:821
+#: ../setuphandlers.py:834
 msgid "architects_folder_title"
 msgstr "Architectes"
 
@@ -1066,7 +1066,7 @@ msgid "close_inspection"
 msgstr "clôturer le dossier"
 
 #. Default: "Close prevention area"
-#: ../content/licence/GenericLicence.py:1145
+#: ../content/licence/GenericLicence.py:1146
 msgid "close_prevention_area"
 msgstr "Zone de prévention rapprochée"
 
@@ -1128,14 +1128,14 @@ msgid "contact_recipients"
 msgstr "Destinataire(s) de contact"
 
 #. Default: "There is no UrbanEventInquiry linked to this inquiry"
-#: ../browser/licence/templates/licencetabsmacros.pt:408
+#: ../browser/licence/templates/licencetabsmacros.pt:410
 msgid "content_no_urbaneventinquiry"
 msgstr "Aucun événement n'est encore lié à cette enquête publique"
 
 #. Default: "None"
 #: ../browser/licence/templates/envclassborderingmacros.pt:40
 #: ../browser/licence/templates/licencemacros.pt:5
-#: ../browser/licence/templates/licencetabsmacros.pt:84
+#: ../browser/licence/templates/licencetabsmacros.pt:85
 msgid "content_none"
 msgstr "N.C."
 
@@ -1159,7 +1159,7 @@ msgid "creation date"
 msgstr "Date de création"
 
 #. Default: "urban"
-#: ../setuphandlers.py:683
+#: ../setuphandlers.py:696
 msgid "dashboardtemplates_folder_title"
 msgstr "Modèles tableaux de bord"
 
@@ -1289,7 +1289,7 @@ msgid "envclasstwos"
 msgstr "Permis d'environnement classe 2"
 
 #. Default: "urban"
-#: ../setuphandlers.py:724
+#: ../setuphandlers.py:737
 msgid "environmenttemplates_folder_title"
 msgstr "modèles des procédures d'environnement"
 
@@ -1411,7 +1411,7 @@ msgid "externaldecisions_folder_title"
 msgstr "Décision des avis externes"
 
 #. Default: "Far prevention area"
-#: ../content/licence/GenericLicence.py:1146
+#: ../content/licence/GenericLicence.py:1147
 msgid "far_prevention_area"
 msgstr "Zone de prévention éloignée"
 
@@ -1460,31 +1460,31 @@ msgid "firefox_viewlet_title"
 msgstr "Cette application fonctionne mieux avec Firefox."
 
 #. Default: "High risk"
-#: ../content/licence/GenericLicence.py:1167
+#: ../content/licence/GenericLicence.py:1168
 msgid "flooding_level_high"
 msgstr "Risque élevé"
 
 #. Default: "Low risk"
-#: ../content/licence/GenericLicence.py:1165
+#: ../content/licence/GenericLicence.py:1166
 msgid "flooding_level_low"
 msgstr "Risque faible"
 
 #. Default: "Moderate risk"
-#: ../content/licence/GenericLicence.py:1166
+#: ../content/licence/GenericLicence.py:1167
 msgid "flooding_level_moderate"
 msgstr "Risque moyen"
 
 #. Default: "No"
-#: ../content/licence/GenericLicence.py:1163
+#: ../content/licence/GenericLicence.py:1164
 msgid "flooding_level_no"
 msgstr "Non"
 
-#: ../content/licence/GenericLicence.py:1164
+#: ../content/licence/GenericLicence.py:1165
 msgid "flooding_level_verylow"
 msgstr "Risque très faible"
 
 #. Default: "Folder advices"
-#: ../browser/licence/templates/licencetabsmacros.pt:486
+#: ../browser/licence/templates/licencetabsmacros.pt:488
 msgid "folder_advice"
 msgstr "Avis du dossier"
 
@@ -1554,19 +1554,19 @@ msgstr "${cityName}, le ${formattedDate}"
 
 # this is an HTML content for the front-page
 #. Default: "urban"
-#: ../setuphandlers.py:755
+#: ../setuphandlers.py:768
 msgid "front_page_descr"
 msgstr "Bienvenue sur le site vous permettant d'utiliser la gestion des permis d'urbanisme"
 
 # this is an HTML content for the front-page
 #. Default: "urban"
-#: ../setuphandlers.py:756
+#: ../setuphandlers.py:769
 msgid "front_page_text"
 msgstr "<p>L'application intègre la gestion des permis d'urbanisme, d'urbanisation, des déclarations, divisions notariales, CU1, CU2, lettres d'informations notariales, rendez-vous, avant-projets et déclarations environnementales :</p><ul><li>gestion de la demande</li><li>gestion des demandeurs, architectes, agents traitants, ...</li><li>production des documents</li><li>workflow de suivi de la demande</li><li>cartographie avec calcul du rayon de 50m, visualisation des parcelles, ...</li><li>échéancier</li><li>...</li></ul><p><a href='urban'>Cliquez ici pour accéder à l'application</a></p><p class='discreet'>Vous devez disposer d'un nom d'utilisateur et d'un mot de passe pour accéder à l'application</p>"
 
 # title of the front-page
 #. Default: "urban"
-#: ../setuphandlers.py:754
+#: ../setuphandlers.py:767
 msgid "front_page_title"
 msgstr "Gestion de l'Urbanisme"
 
@@ -1593,13 +1593,13 @@ msgid "generate_a_linked_doc"
 msgstr "Générer un document lié au dossier"
 
 #. Default: "urban"
-#: ../setuphandlers.py:835
+#: ../setuphandlers.py:848
 msgid "geometricians_folder_title"
 msgstr "Géomètres"
 
 #. Default: "Global templates"
 #: ../browser/templates/templatessummary.pt:19
-#: ../setuphandlers.py:695
+#: ../setuphandlers.py:708
 msgid "globaltemplates_folder_title"
 msgstr "Modèles généraux"
 
@@ -1641,7 +1641,7 @@ msgid "inquiry_suspension_folder_title"
 msgstr "Périodes de suspension d'enquête"
 
 #. Default: "Inquiry ${number}"
-#: ../browser/licence/templates/licencetabsmacros.pt:356
+#: ../browser/licence/templates/licencetabsmacros.pt:358
 msgid "inquiry_title_and_number"
 msgstr "Enquête n°${number}"
 
@@ -1790,7 +1790,7 @@ msgstr "Locataire(s)"
 msgid "label_colname_transmitDate"
 msgstr "Date d'envoi"
 
-#: ../browser/licence/templates/licencetabsmacros.pt:372
+#: ../browser/licence/templates/licencetabsmacros.pt:374
 msgid "label_edit"
 msgstr "Modifier"
 
@@ -1816,7 +1816,7 @@ msgstr "Non"
 msgid "label_ok"
 msgstr ""
 
-#: ../browser/licence/templates/licencetabsmacros.pt:381
+#: ../browser/licence/templates/licencetabsmacros.pt:383
 msgid "label_remove"
 msgstr "Supprimer"
 
@@ -2000,7 +2000,7 @@ msgid "not_permitted_to_add_urbanevent"
 msgstr "Vous ne pouvez pas générer de documents"
 
 #. Default: "urban"
-#: ../setuphandlers.py:849
+#: ../setuphandlers.py:862
 msgid "notaries_folder_title"
 msgstr "Notaires"
 
@@ -2065,7 +2065,7 @@ msgid "outdated_parcels_in_use"
 msgstr "Permis en cours contenant une parcelle à mettre jour"
 
 #. Default: "Outside catchment"
-#: ../content/licence/GenericLicence.py:1148
+#: ../content/licence/GenericLicence.py:1149
 msgid "outside_catchment"
 msgstr "Hors captage"
 
@@ -2073,7 +2073,7 @@ msgid "parcelLinkedLicences"
 msgstr "Dossier(s) lié(s)"
 
 #. Default: "urban"
-#: ../setuphandlers.py:863
+#: ../setuphandlers.py:876
 msgid "parcellings_folder_title"
 msgstr "Lotissements"
 
@@ -2207,7 +2207,7 @@ msgstr "Paramètres des réunions de projet"
 msgid "proprietaries"
 msgstr "Propriétaire(s)"
 
-#: ../browser/licence/templates/licencetabsmacros.pt:231
+#: ../browser/licence/templates/licencetabsmacros.pt:233
 msgid "ranking_ordinance"
 msgstr "Arrêté de classement"
 
@@ -2376,7 +2376,7 @@ msgid "subdivision_fieldset_legend"
 msgstr "Lotissement"
 
 #. Default: "Supervision area"
-#: ../content/licence/GenericLicence.py:1147
+#: ../content/licence/GenericLicence.py:1148
 msgid "supervision_area"
 msgstr "Zone de surveillance"
 
@@ -2436,7 +2436,7 @@ msgstr "Si l'interpréteur Python qui tourne Zope et Plone ne dispose pas de la 
 
 #: ../profiles.zcml:25
 #: ../profiles/default/actions.xml
-#: ../setuphandlers.py:197
+#: ../setuphandlers.py:207
 msgid "urban"
 msgstr "Urbanisme"
 
@@ -2873,7 +2873,7 @@ msgid "urban_label_article"
 msgstr "Article"
 
 #. Default: "Asking Date"
-#: ../browser/licence/templates/licencetabsmacros.pt:291
+#: ../browser/licence/templates/licencetabsmacros.pt:293
 msgid "urban_label_askingDate"
 msgstr "Date de demande"
 
@@ -3399,7 +3399,7 @@ msgstr "Catégorie du type d'événement"
 msgid "urban_label_exemptFDArticle"
 msgstr "Article 107"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:596
+#: ../content/licence/CODT_BaseBuildLicence.py:599
 msgid "urban_label_exemptFDArticleCODT"
 msgstr "Article D IV.15"
 
@@ -3451,7 +3451,7 @@ msgstr "Détails concernant le plan d'expropriation"
 
 #. Default: "Advice"
 #: ../UrbanEvent.py:189
-#: ../browser/licence/templates/licencetabsmacros.pt:293
+#: ../browser/licence/templates/licencetabsmacros.pt:295
 msgid "urban_label_externalDecision"
 msgstr " Avis"
 
@@ -3519,7 +3519,7 @@ msgid "urban_label_folderZoneDetails"
 msgstr "Détails concernant le zonage"
 
 #. Default: "Foldermanagers"
-#: ../content/licence/GenericLicence.py:953
+#: ../content/licence/GenericLicence.py:954
 msgid "urban_label_foldermanagers"
 msgstr "Agent(s) traitant(s)"
 
@@ -3633,7 +3633,7 @@ msgstr "Etude d'incidences?"
 msgid "urban_label_implantation"
 msgstr "Implantation (art. 137)"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:597
+#: ../content/licence/CODT_BaseBuildLicence.py:600
 msgid "urban_label_implantationCODT"
 msgstr "Implantation (art D.IV.72)"
 
@@ -3812,11 +3812,11 @@ msgstr "Établissement SEVESO"
 msgid "urban_label_isSupplementary"
 msgstr "Supplémentaire?"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:588
+#: ../content/licence/CODT_BaseBuildLicence.py:591
 msgid "urban_label_is_in_parceloutlicences"
 msgstr "Le bien se situe dans un permis d'urbanisation"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:594
+#: ../content/licence/CODT_BaseBuildLicence.py:597
 msgid "urban_label_is_in_sol"
 msgstr "Le bien se situe dans un SOL"
 
@@ -4077,7 +4077,7 @@ msgid "urban_label_notaryContact"
 msgstr "Notaire(s)"
 
 #. Default: "Noteworthytrees"
-#: ../content/licence/GenericLicence.py:986
+#: ../content/licence/GenericLicence.py:987
 msgid "urban_label_noteworthyTrees"
 msgstr "Arbres et haies remarquables"
 
@@ -4163,15 +4163,15 @@ msgid "urban_label_owner"
 msgstr "Propriétaire"
 
 #. Default: "Parcellings"
-#: ../content/licence/GenericLicence.py:975
+#: ../content/licence/GenericLicence.py:976
 msgid "urban_label_parcellings"
 msgstr "Lotissement"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:587
+#: ../content/licence/CODT_BaseBuildLicence.py:590
 msgid "urban_label_parceloutlicences"
 msgstr "Permis d'urbanisation"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:589
+#: ../content/licence/CODT_BaseBuildLicence.py:592
 msgid "urban_label_parceloutlicences_details"
 msgstr "Détails sur le permis d'urbanisation"
 
@@ -4438,7 +4438,7 @@ msgstr "Détails concernant le RCU"
 
 #. Default: "Receipt date"
 #: ../UrbanEvent.py:94
-#: ../browser/licence/templates/licencetabsmacros.pt:292
+#: ../browser/licence/templates/licencetabsmacros.pt:294
 msgid "urban_label_receiptDate"
 msgstr "Date de réception"
 
@@ -4610,7 +4610,7 @@ msgid "urban_label_representedBySociety"
 msgstr "Représenté par la société"
 
 #. Default: "Organisation"
-#: ../browser/licence/templates/licencetabsmacros.pt:290
+#: ../browser/licence/templates/licencetabsmacros.pt:292
 msgid "urban_label_requestedOrganisation"
 msgstr "Organisme"
 
@@ -4807,15 +4807,15 @@ msgstr "Petit patrimoine populaire"
 msgid "urban_label_society"
 msgstr "Société"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:591
+#: ../content/licence/CODT_BaseBuildLicence.py:594
 msgid "urban_label_sol"
 msgstr "SOL"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:593
+#: ../content/licence/CODT_BaseBuildLicence.py:596
 msgid "urban_label_solZone"
 msgstr "Zone de SOL"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:595
+#: ../content/licence/CODT_BaseBuildLicence.py:598
 msgid "urban_label_sol_details"
 msgstr "Détails concernant le SOL"
 
@@ -4825,7 +4825,7 @@ msgid "urban_label_solicitLocationOpinionsTo"
 msgstr "Un avis sera sollicité par l'urbanisme à"
 
 #. Default: "Solicit opinion to"
-#: ../browser/licence/templates/licencetabsmacros.pt:268
+#: ../browser/licence/templates/licencetabsmacros.pt:270
 #: ../content/Inquiry.py:124
 msgid "urban_label_solicitOpinionsTo"
 msgstr "Avis sollicité(s) obligatoire(s)"
@@ -5206,7 +5206,7 @@ msgid "urban_label_zipcode"
 msgstr "Code Postal"
 
 #. Default: "Click here to access the linked urban event inquiry"
-#: ../browser/licence/templates/licencetabsmacros.pt:403
+#: ../browser/licence/templates/licencetabsmacros.pt:405
 msgid "urban_link_to_the_linked_urbaneventinquiry"
 msgstr "Cliquez ici pour accéder à l'événement lié"
 
@@ -5214,7 +5214,7 @@ msgid "urban_linked_inquiry_help"
 msgstr "Vous retrouvez ici les informations concernant l'enquête.  Si vous souhaitez modifier ces informations, cliquez sur le lien de l'enquête liée ci-dessous."
 
 #. Default: "Linked urban event inquiry"
-#: ../browser/licence/templates/licencetabsmacros.pt:399
+#: ../browser/licence/templates/licencetabsmacros.pt:401
 msgid "urban_linked_urbaneventinquiry"
 msgstr "Événement lié"
 
@@ -5224,7 +5224,7 @@ msgid "urban_no_event_added"
 msgstr "Aucun élément n'a encore été ajouté"
 
 #. Default: "No event type is defined in the configuration for this element"
-#: ../browser/licence/templates/licencetabsmacros.pt:469
+#: ../browser/licence/templates/licencetabsmacros.pt:471
 msgid "urban_no_eventtype_defined"
 msgstr "Aucun type d'événement n'est défini dans la configuration pour cet élément"
 
@@ -5335,12 +5335,12 @@ msgid "urbancertificatetwos"
 msgstr "Certificats d'urbanisme 2"
 
 #. Default: "urban"
-#: ../setuphandlers.py:385
+#: ../setuphandlers.py:398
 msgid "urbaneventtypes_folder_title"
 msgstr "Types d'évènements"
 
 #. Default: "urban"
-#: ../setuphandlers.py:712
+#: ../setuphandlers.py:725
 msgid "urbantemplates_folder_title"
 msgstr "modèles des procédures d'urbanisme"
 

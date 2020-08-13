@@ -87,6 +87,10 @@ msgstr ""
 msgid "Declaration"
 msgstr ""
 
+msgid "OpinionRequestEventType"
+msgstr ""
+
+
 msgid "PortionOut"
 msgstr ""
 

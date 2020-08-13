@@ -79,6 +79,9 @@ msgstr "Lettre de notaire"
 msgid "Nothing to show !!!"
 msgstr "Rien à afficher !!!"
 
+msgid "OpinionRequestEventType"
+msgstr "Type d'événement \"demande d'avis\""
+
 msgid "ParcelOutLicence"
 msgstr "Permis d'urbanisation"
 
