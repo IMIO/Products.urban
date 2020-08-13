@@ -79,9 +79,9 @@
                         <tr>
                             <td valign="top"><b><span tal:content="python: key_dates['label']">Receipt date</span>:</b></td>
                             <td width="10px"></td>
-                            <td valign="top"><b><span tal:content="python: first_date['date_label']">Receipt date</span>:</b></td>
-                            <td valign="top" tal:define="date_value python: first_date['date']">
-                                <a href="#" tal:condition="date_value" tal:attributes="href python: first_date['url']" tal:content="python: date_value">Content</a>
+                            <td valign="top"><b><span tal:content="python: first_date and first_date['date_label']">Receipt date</span>:</b></td>
+                            <td valign="top" tal:define="date_value python: first_date and first_date['date']">
+                                <a href="#" tal:condition="date_value" tal:attributes="href python: first_date and first_date['url']" tal:content="python: date_value">Content</a>
                                 <span class="discreet" tal:condition="not: date_value" i18n:translate="content_none">None</span>
                             </td>
                         </tr>
