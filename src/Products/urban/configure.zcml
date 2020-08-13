@@ -173,6 +173,10 @@
     type=".interfaces.IEventTypeType"/>
 
   <interface
+    interface=".interfaces.ITechnicalAnalysis"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
     interface=".interfaces.ILicenceNotificationEvent"
     type=".interfaces.IEventTypeType"/>
 

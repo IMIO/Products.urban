@@ -286,6 +286,9 @@ class Ticket(BaseFolder, GenericLicence, BrowserDefaultMixin):
     def getLastTheticket(self):
         return self.getLastEvent(interfaces.ITheTicketEvent)
 
+    def getLastTechnicalAnalysis(self):
+        return self.getLastEvent(interfaces.ITechnicalAnalysis)
+
 
 registerType(Ticket, PROJECTNAME)
 
