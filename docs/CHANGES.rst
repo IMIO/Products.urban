@@ -62,6 +62,8 @@ Changes
 - Refactor key date display to include urban event custom titles. [SUP-13982]
   [sdelcourt]
 
+- Add CODT ParlcelOutLicence reference field reprensentativeContacts + migration steps + tests [URB-2075]
+  [jjaumotte]
 
 2.4 (2019-03-25)
 ----------------
