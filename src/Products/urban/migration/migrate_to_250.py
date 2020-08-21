@@ -213,6 +213,26 @@ def migrate_urbaneventtypes_folder(context):
             api.content.rename(obj=eventconfigs, new_id='eventconfigs', safe_id=False)
 
 
+def migrate_move_codt_parceloutlicence_geometricians_to_representative_contacts(context):
+    """
+    """
+    logger = logging.getLogger('urban: migrate migrate_move_codt_parceloutlicence_geometricians_to_representative_contacts')
+    logger.info("starting migration step")
+    catalog = api.portal.get_tool('portal_catalog')
+    licence_brains = catalog(portal_type='CODT_ParcelOutLicence')
+    licences = [li.getObject() for li in licence_brains]
+    for licence in licences:
+        geometricians = licence.getField('geometricians')
+        if geometricians:
+            for geometrician in geometricians.get(licence):
+                rc_list = licence.getRepresentativeContacts()
+                rc_list.append(geometrician)
+                licence.setRepresentativeContacts(rc_list)
+                licence.setGeometricians([])
+
+    logger.info("migration step done!")
+
+
 def migrate(context):
     logger = logging.getLogger('urban: migrate to 2.5')
     logger.info("starting migration steps")
@@ -229,6 +249,7 @@ def migrate(context):
     migrate_report_and_remove_urbandelay_portal_type(context)
     migrate_parcellings_folder_allowed_type(context)
     migrate_default_states_to_close_all_events(context)
+    migrate_move_codt_parceloutlicence_geometricians_to_representative_contacts(context)
     catalog = api.portal.get_tool('portal_catalog')
     catalog.clearFindAndRebuild()
     logger.info("migration done!")

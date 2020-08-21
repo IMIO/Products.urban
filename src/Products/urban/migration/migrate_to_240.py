@@ -107,26 +107,6 @@ def migrate_enable_optional_tax_field_by_default(context):
     logger.info("migration step done!")
 
 
-def migrate_move_codt_parceloutlicence_geometricians_to_representative_contacts(context):
-    """
-    """
-    logger = logging.getLogger('urban: migrate migrate_move_codt_parceloutlicence_geometricians_to_representative_contacts')
-    logger.info("starting migration step")
-    catalog = api.portal.get_tool('portal_catalog')
-    licence_brains = catalog(portal_type='CODT_ParcelOutLicence')
-    licences = [li.getObject() for li in licence_brains]
-    for licence in licences:
-        geometricians = licence.getField('geometricians')
-        if geometricians:
-            for geometrician in geometricians.get(licence):
-                rc_list = licence.getRepresentativeContacts()
-                rc_list.append(geometrician)
-                licence.setRepresentativeContacts(rc_list)
-                licence.setGeometricians([])
-
-    logger.info("migration step done!")
-
-
 def migrate_update_empty_sols_pcas_title(context):
     """
     """
@@ -191,7 +171,6 @@ def migrate(context):
     migrate_move_codt_parceloutlicence_geometricians_to_representative_contacts(context)
     migrate_add_foldermanagers_collection(context)
     migrate_update_foldermanagers_layout(context)
-    migrate_move_codt_parceloutlicence_geometricians_to_representative_contacts(context)
     catalog = api.portal.get_tool('portal_catalog')
     catalog.clearFindAndRebuild()
     logger.info("migration done!")
