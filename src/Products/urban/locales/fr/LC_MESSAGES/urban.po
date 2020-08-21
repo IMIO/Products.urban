@@ -3639,6 +3639,9 @@ msgstr "Générer directement les documents uniques"
 msgid "urban_label_geometricians"
 msgstr "Géomètres"
 
+msgid "urban_label_representative_contacts"
+msgstr "Représentant(s)"
+
 #. Default: "Grade"
 #: FolderManager.py
 msgid "urban_label_grade"
