@@ -126,19 +126,6 @@ def migrate_update_empty_sols_pcas_title(context):
     logger.info("migration step done!")
 
 
-def migrate_add_foldermanagers_collection(context):
-    """
-    """
-    logger = logging.getLogger('urban: migrate migrate_add_foldermanagers_collection')
-    logger.info("starting migration step")
-
-    urban_tool = api.portal.get_tool('portal_urban')
-    folder = getattr(urban_tool, 'foldermanagers')
-    create_collection_foldermanagers(folder)
-
-    logger.info("migration step done!")
-
-
 def migrate_update_foldermanagers_layout(context):
     """
     """
@@ -168,8 +155,6 @@ def migrate(context):
     migrate_update_empty_sols_pcas_title(context)
     migrate_codt_buildlicences_schedule(context)
     migrate_enable_optional_tax_field_by_default(context)
-    migrate_move_codt_parceloutlicence_geometricians_to_representative_contacts(context)
-    migrate_add_foldermanagers_collection(context)
     migrate_update_foldermanagers_layout(context)
     catalog = api.portal.get_tool('portal_catalog')
     catalog.clearFindAndRebuild()
