@@ -260,3 +260,43 @@ class TestBuildLicenceFields(SchemaFieldsTestCase):
     def test_pebDetails_is_visible(self):
         msg = "field 'pebDetails' not visible on BuildLicence"
         self._is_field_visible("<span>Détails concernant le PEB</span>:", msg=msg)
+
+class TestCODTParcelOutLicenceFields(SchemaFieldsTestCase):
+
+    layer = URBAN_TESTS_INTEGRATION
+
+    def setUp(self):
+        self.portal = self.layer['portal']
+        self.urban = self.portal.urban
+
+        default_user = self.layer.default_user
+        default_password = self.layer.default_password
+        login(self.portal, default_user)
+        self.licences = []
+        for content_type in ['CODT_ParcelOutLicence']:
+            licence_folder = utils.getLicenceFolder(content_type)
+            testlicence_id = 'test_{}_fields'.format(content_type.lower())
+            licence_folder.invokeFactory(content_type, id=testlicence_id)
+            transaction.commit()
+            test_licence = getattr(licence_folder, testlicence_id)
+            self.licences.append(test_licence)
+        self.test_codtparceloutlicence = self.licences[0]
+        self.licence = self.test_codtparceloutlicence
+
+        self.browser = Browser(self.portal)
+        self.browserLogin(default_user, default_password)
+
+    def tearDown(self):
+        with api.env.adopt_roles(['Manager']):
+            for licence in self.licences:
+                api.content.delete(licence)
+        transaction.commit()
+
+    def test_has_attribute_representativeContacts(self):
+        field_name = 'representativeContacts'
+        msg = "field '{}' not on class CODT ParcelOutLicence".format(field_name)
+        self.assertTrue(self.test_codtparceloutlicence.getField('representativeContacts'), msg)
+
+    def test_representativeContacts_is_visible(self):
+        msg = "field 'representativeContacts' not visible on CODT ParcelOutLicence"
+        self._is_field_visible("<legend>Représentant(s)</legend>", msg=msg)
