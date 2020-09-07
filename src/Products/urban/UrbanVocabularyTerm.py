@@ -105,60 +105,6 @@ class UrbanVocabularyTerm(BaseContent, UrbanConfigurationValue, BrowserDefaultMi
 
     schema = UrbanVocabularyTerm_schema
 
-    ##code-section class-header #fill in your manual code here
-    ##/code-section class-header
-
-    # Methods
-
-    # Manually created methods
-
-    security.declarePublic('getFormattedDescription')
-    def getAddress(self):
-        """
-          get the address
-        """
-        address = ''
-        if self.getRecipientSName():
-            address += self.getRecipientSName()
-        if self.getFunction_department():
-            address += '\n' + self.getFunction_department()
-        if self.getOrganization():
-            address += '\n' + self.getOrganization()
-        if self.getDispatchSInformation():
-            address += '\n' + self.getDispatchSInformation()
-        if self.getTypeAndStreetName_number_box():
-            address += '\n' + self.getTypeAndStreetName_number_box()
-        if self.getPostcode_locality():
-            address += '\n' + self.getPostcode_locality()
-        if self.getCountry():
-            address += '\n' + self.getCountry()
-        return address
-
-    security.declarePublic('getFormattedDescription')
-    def getFormattedDescription(self, linebyline=True, prefix=''):
-        """
-          This method can get the description in different formats
-        """
-        descr = self.Description().strip()
-        #add prefix only if description isn't empty
-        #    or is different from code like "<p> </p>" ??
-        if descr and prefix:
-            descr = prefix + descr
-        if linebyline:
-            return descr
-        else:
-            #we need to make a single string with everything we have in the HTML description
-            return re.sub(r'<[^>]*?>', ' ', descr).replace('  ', ' ')
-
-    security.declarePublic('getRenderedDescription')
-    def getRenderedDescription(self, obj, renderToNull=False):
-        """
-          see renderText method of UrbanTool
-        """
-        portal_urban = api.portal.get_tool('portal_urban')
-        return portal_urban.renderText(text=self.Description(), context=obj, renderToNull=renderToNull)
-
-
 
 registerType(UrbanVocabularyTerm, PROJECTNAME)
 # end of class UrbanVocabularyTerm
