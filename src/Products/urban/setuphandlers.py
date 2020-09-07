@@ -430,7 +430,7 @@ def addUrbanConfigFolders(context):
         if urban_type in ['Inspection', 'Ticket']:
             setFolderAllowedTypes(eventconfigs_folder, ['EventConfig', 'FollowUpEventType'])
         else:
-            setFolderAllowedTypes(eventconfigs_folder, ['EventConfig', 'OpinionRequestEventType'])
+            setFolderAllowedTypes(eventconfigs_folder, ['EventConfig', 'OpinionEventConfig'])
 
         licence_vocabularies = default_values.get(urban_type, {})
         createVocabularyFolders(container=config_folder, vocabularies=licence_vocabularies, site=site)

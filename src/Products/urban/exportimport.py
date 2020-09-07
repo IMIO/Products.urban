@@ -244,10 +244,10 @@ def addEventConfigs(context):
     log = []
     gslogger = context.getLogger('addEventConfigs')
     tool = getToolByName(site, 'portal_urban')
-    matched_outsideDirection = None
+    matched_externalDirection = None
     for refNIS in refNIS_2019:
         if str(refNIS['Code INS']) == NIS:
-            matched_outsideDirection = refNIS["Directions extérieures"]
+            matched_externalDirection = refNIS["Directions extérieures"]
             break
     # add the EventConfig
     for urbanConfigId in urbanEventTypes:
@@ -267,12 +267,12 @@ def addEventConfigs(context):
             else:
                 portal_type = uet.get('portal_type', 'EventConfig')
                 if portal_type == 'OpinionRequestEventType':
-                    if not matched_outsideDirection:
+                    if not matched_externalDirection:
                         continue
                     else:
-                        concernedOutsideDirections = uet.get('outsideDirection')
-                        if concernedOutsideDirections:
-                            if matched_outsideDirection not in concernedOutsideDirections:
+                        externalDirections = uet.getExternalDirections()
+                        if externalDirections:
+                            if matched_externalDirection not in externalDirections:
                                 continue
                 newUetId = uetFolder.invokeFactory(portal_type, **uet)
                 newUet = getattr(uetFolder, newUetId)

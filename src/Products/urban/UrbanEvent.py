@@ -236,7 +236,7 @@ schema = Schema((
             visible=False,
             label=_('urban_label_urbaneventtypes', default='Urbaneventtypes'),
         ),
-        allowed_types=('EventConfig', 'OpinionRequestEventType', 'FollowUpEventType'),
+        allowed_types=('EventConfig', 'OpinionEventConfig', 'FollowUpEventType'),
         multiValued=0,
         relationship='UrbanEventType',
     ),
