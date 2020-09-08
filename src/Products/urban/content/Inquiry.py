@@ -129,7 +129,7 @@ schema = Schema((
         ),
         schemata='urban_advices',
         multiValued=1,
-        vocabulary=UrbanVocabulary('eventconfigs', vocType="OpinionRequestEventType", value_to_use='extraValue'),
+        vocabulary=UrbanVocabulary('eventconfigs', vocType="OpinionEventConfig", value_to_use='abbreviation'),
         default_method='getDefaultValue',
     ),
     LinesField(
