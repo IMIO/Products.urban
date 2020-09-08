@@ -274,7 +274,7 @@ LICENCE_FINAL_STATES = [
 
 VOCABULARY_TYPES = [
     'UrbanVocabularyTerm', 'PcaTerm', 'UrbanDelay',
-    'UrbanEventType', 'OpinionRequestEventType',
+    'EventConfig', 'OpinionEventConfig',
     'PersonTitleTerm', 'OrganisationTerm',
 ]
 
