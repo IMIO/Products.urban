@@ -729,7 +729,7 @@ schema = Schema((
         ),
         schemata='urban_road',
         multiValued=1,
-        vocabulary=UrbanVocabulary('eventconfigs', vocType="OpinionRequestEventType", value_to_use='extraValue'),
+        vocabulary=UrbanVocabulary('eventconfigs', vocType="OpinionEventConfig", value_to_use='abbreviation'),
         default_method='getDefaultValue',
     ),
     LinesField(
@@ -919,7 +919,7 @@ schema = Schema((
         ),
         schemata='urban_location',
         multiValued=True,
-        vocabulary=UrbanVocabulary('eventconfigs', vocType="OpinionRequestEventType", value_to_use='extraValue'),
+        vocabulary=UrbanVocabulary('eventconfigs', vocType="OpinionEventConfig", value_to_use='abbreviation'),
         default_method='getDefaultValue',
     ),
     StringField(
@@ -1306,7 +1306,7 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
         event_configs = licence_config.getEventConfigs()
         res = []
         for event_config in event_configs:
-            if event_config.portal_type == 'OpinionRequestEventType' and \
+            if event_config.portal_type == 'OpinionEventConfig' and \
                event_config.canBeCreatedInLicence(self):
                 for type_interface_path in event_config.getEventType():
                     type_interface = get_interface_by_path(type_interface_path)
