@@ -140,7 +140,7 @@ schema = Schema((
         ),
         schemata='urban_advices',
         multiValued=1,
-        vocabulary=UrbanVocabulary('eventconfigs', vocType="OpinionRequestEventType", value_to_use='extraValue'),
+        vocabulary=UrbanVocabulary('eventconfigs', vocType="OpinionEventConfig", value_to_use='abbreviation'),
         default_method='getDefaultValue',
     ),
 
@@ -404,7 +404,7 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
         """
         urban_tool = getToolByName(self, 'portal_urban')
         foldermakers_config = urban_tool.getLicenceConfig(self).eventconfigs
-        foldermakers = [fm for fm in foldermakers_config.objectValues('OpinionRequestEventType') if fm.id in self.getSolicitOpinionsTo()]
+        foldermakers = [fm for fm in foldermakers_config.objectValues('OpinionEventConfig') if fm.id in self.getSolicitOpinionsTo()]
         toreturn = '[CSV]Nom|Description|AdresseLigne1|AdresseLigne2'
         for foldermaker in foldermakers:
             toreturn = toreturn + '%' + foldermaker.getAddressCSV()
