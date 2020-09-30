@@ -543,6 +543,9 @@ msgstr ""
 msgid "envclasstwos"
 msgstr ""
 
+msgid "eventconfigs_folder_title"
+msgstr ""
+
 msgid "equipmenttypes_folder_title"
 msgstr ""
 

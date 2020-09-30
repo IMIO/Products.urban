@@ -428,7 +428,7 @@ def addUrbanConfigFolders(context):
             )
         eventconfigs_folder = getattr(config_folder, 'eventconfigs')
         if urban_type in ['Inspection', 'Ticket']:
-            setFolderAllowedTypes(eventconfigs_folder, ['EventConfig', 'FollowUpEventType'])
+            setFolderAllowedTypes(eventconfigs_folder, ['EventConfig', 'FollowUpEventConfig'])
         else:
             setFolderAllowedTypes(eventconfigs_folder, ['EventConfig', 'OpinionEventConfig'])
 
