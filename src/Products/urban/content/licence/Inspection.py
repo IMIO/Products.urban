@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#
+
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
@@ -12,7 +12,6 @@ from Products.urban.config import URBAN_TYPES
 from Products.urban.content.licence.GenericLicence import GenericLicence
 from Products.urban.content.Inquiry import Inquiry
 from Products.urban.utils import setSchemataForInquiry
-from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget

@@ -114,7 +114,7 @@ def migrate_ParcellingTerm_to_DX(context):
 
 
 def migrate_UrbanEventType_to_DX(context):
-    fields_mapping = (
+    fields_mapping = [
         {
             'AT_field_name': 'title',
             'DX_field_name': 'title',
@@ -158,11 +158,78 @@ def migrate_UrbanEventType_to_DX(context):
             'DX_field_name': 'keyDates',
             'field_migrator': migrate_to_tuple,
         },
-    )
+    ]
     result = migrateCustomAT(
         fields_mapping,
         src_type='UrbanEventType',
         dst_type='EventConfig'
+    )
+
+    fields_mapping.append(
+        {
+            'AT_field_name': 'linkedReport',
+            'DX_field_name': 'linkedreport',
+        },
+    )
+
+    result = migrateCustomAT(
+        fields_mapping,
+        src_type='FollowUpEventType',
+        dst_type='FollowUpEventConfig'
+    )
+
+    fields_mapping.pop()
+    fields_mapping.append(
+        {
+            'AT_field_name': '',
+            'DX_field_name': 'abbreviation',
+        },
+        {
+            'AT_field_name': 'recipientSName',
+            'DX_field_name': 'recipientName',
+        },
+        {
+            'AT_field_name': 'function_department',
+            'DX_field_name': 'function_department',
+        },
+        {
+            'AT_field_name': 'organization',
+            'DX_field_name': 'organization',
+        },
+        {
+            'AT_field_name': 'dispatchInformation',
+            'DX_field_name': 'dispatchInformation',
+        },
+        {
+            'AT_field_name': 'typeAndStreetName_number_box',
+            'DX_field_name': 'typeAndStreetName_number_box',
+        },
+        {
+            'AT_field_name': 'postcode_locality',
+            'DX_field_name': 'postcode_locality',
+        },
+        {
+            'AT_field_name': 'country',
+            'DX_field_name': 'country',
+        },
+        {
+            'AT_field_name': 'is_internal_service',
+            'DX_field_name': 'is_internal_service',
+        },
+        {
+            'AT_field_name': 'internal_service',
+            'DX_field_name': 'internal_service',
+        },
+        {
+            'AT_field_name': 'concernedOutsideDirections',
+            'DX_field_name': 'externalDirections',
+            'field_migrator': migrate_to_tuple,
+        },
+    )
+    result = migrateCustomAT(
+        fields_mapping,
+        src_type='OpinionRequestEventType',
+        dst_type='OpinionEventConfig'
     )
 
     # should at least recatalog them in the archetypes UID catalog

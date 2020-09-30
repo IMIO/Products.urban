@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2020-08-10 09:31+0000\n"
+"POT-Creation-Date: 2020-09-16 12:35+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -80,11 +80,11 @@ msgstr ""
 msgid "Add a work location"
 msgstr ""
 
-#: ../browser/licence/templates/licencetabsmacros.pt:494
+#: ../browser/licence/templates/licencetabsmacros.pt:496
 msgid "Add all advices"
 msgstr ""
 
-#: ../browser/licence/templates/licencetabsmacros.pt:470
+#: ../browser/licence/templates/licencetabsmacros.pt:472
 msgid "Add an event"
 msgstr ""
 
@@ -119,7 +119,7 @@ msgstr ""
 msgid "Article127"
 msgstr ""
 
-#: ../browser/licence/templates/licencetabsmacros.pt:434
+#: ../browser/licence/templates/licencetabsmacros.pt:436
 #: ../browser/licence/templates/licenceview.pt:50
 msgid "Attachments"
 msgstr ""
@@ -251,11 +251,11 @@ msgstr ""
 msgid "EnvClassTwo"
 msgstr ""
 
-#: ../browser/licence/templates/licencetabsmacros.pt:478
+#: ../browser/licence/templates/licencetabsmacros.pt:480
 msgid "Events"
 msgstr ""
 
-#: ../browser/licence/templates/licencetabsmacros.pt:449
+#: ../browser/licence/templates/licencetabsmacros.pt:451
 msgid "Events attachments"
 msgstr ""
 
@@ -903,7 +903,7 @@ msgstr ""
 msgid "add_a_tenant"
 msgstr ""
 
-#: ../browser/licence/templates/licencetabsmacros.pt:443
+#: ../browser/licence/templates/licencetabsmacros.pt:445
 #: ../browser/templates/urbaneventmacros.pt:89
 msgid "add_an_attachment"
 msgstr ""
@@ -911,7 +911,7 @@ msgstr ""
 msgid "add_an_equipment"
 msgstr ""
 
-#: ../browser/licence/templates/licencetabsmacros.pt:425
+#: ../browser/licence/templates/licencetabsmacros.pt:427
 msgid "add_an_inquiry"
 msgstr ""
 
@@ -919,7 +919,7 @@ msgid "add_event"
 msgstr ""
 
 #. Default: "This will automatically generate following advices:"
-#: ../browser/licence/templates/licencetabsmacros.pt:498
+#: ../browser/licence/templates/licencetabsmacros.pt:500
 msgid "add_every_advices_descr"
 msgstr ""
 
@@ -1152,14 +1152,14 @@ msgid "contact_recipients"
 msgstr ""
 
 #. Default: "There is no UrbanEventInquiry linked to this inquiry"
-#: ../browser/licence/templates/licencetabsmacros.pt:411
+#: ../browser/licence/templates/licencetabsmacros.pt:413
 msgid "content_no_urbaneventinquiry"
 msgstr ""
 
 #. Default: "None"
 #: ../browser/licence/templates/envclassborderingmacros.pt:40
 #: ../browser/licence/templates/licencemacros.pt:5
-#: ../browser/licence/templates/licencetabsmacros.pt:84
+#: ../browser/licence/templates/licencetabsmacros.pt:85
 msgid "content_none"
 msgstr ""
 
@@ -1527,7 +1527,7 @@ msgid "flooding_level_verylow"
 msgstr ""
 
 #. Default: "Folder advices"
-#: ../browser/licence/templates/licencetabsmacros.pt:489
+#: ../browser/licence/templates/licencetabsmacros.pt:491
 msgid "folder_advice"
 msgstr ""
 
@@ -1661,7 +1661,7 @@ msgid "inquiry_suspension_folder_title"
 msgstr ""
 
 #. Default: "Inquiry ${number}"
-#: ../browser/licence/templates/licencetabsmacros.pt:359
+#: ../browser/licence/templates/licencetabsmacros.pt:361
 msgid "inquiry_title_and_number"
 msgstr ""
 
@@ -1810,7 +1810,7 @@ msgstr ""
 msgid "label_colname_transmitDate"
 msgstr ""
 
-#: ../browser/licence/templates/licencetabsmacros.pt:375
+#: ../browser/licence/templates/licencetabsmacros.pt:377
 msgid "label_edit"
 msgstr ""
 
@@ -1836,7 +1836,7 @@ msgstr ""
 msgid "label_ok"
 msgstr ""
 
-#: ../browser/licence/templates/licencetabsmacros.pt:384
+#: ../browser/licence/templates/licencetabsmacros.pt:386
 msgid "label_remove"
 msgstr ""
 
@@ -2224,7 +2224,7 @@ msgstr ""
 msgid "proprietaries"
 msgstr ""
 
-#: ../browser/licence/templates/licencetabsmacros.pt:231
+#: ../browser/licence/templates/licencetabsmacros.pt:233
 msgid "ranking_ordinance"
 msgstr ""
 
@@ -2900,7 +2900,7 @@ msgid "urban_label_article"
 msgstr ""
 
 #. Default: "Asking Date"
-#: ../browser/licence/templates/licencetabsmacros.pt:294
+#: ../browser/licence/templates/licencetabsmacros.pt:296
 msgid "urban_label_askingDate"
 msgstr ""
 
@@ -2962,13 +2962,13 @@ msgid "urban_label_bestAddressKey"
 msgstr ""
 
 #. Default: "Bound inspection"
-#: ../content/licence/Ticket.py:57
+#: ../content/licence/Ticket.py:58
 msgid "urban_label_bound_inspection"
 msgstr ""
 
 #. Default: "Bound licences"
-#: ../content/licence/Inspection.py:41
-#: ../content/licence/Ticket.py:83
+#: ../content/licence/Inspection.py:42
+#: ../content/licence/Ticket.py:84
 msgid "urban_label_bound_licences"
 msgstr ""
 
@@ -3481,7 +3481,7 @@ msgstr ""
 
 #. Default: "Advice"
 #: ../UrbanEvent.py:189
-#: ../browser/licence/templates/licencetabsmacros.pt:296
+#: ../browser/licence/templates/licencetabsmacros.pt:298
 msgid "urban_label_externalDecision"
 msgstr ""
 
@@ -3698,12 +3698,12 @@ msgid "urban_label_inquiry_type"
 msgstr ""
 
 #. Default: "Inspectiondescription"
-#: ../content/licence/Inspection.py:82
+#: ../content/licence/Inspection.py:83
 msgid "urban_label_inspectionDescription"
 msgstr ""
 
 #. Default: "Inspection_context"
-#: ../content/licence/Inspection.py:72
+#: ../content/licence/Inspection.py:73
 msgid "urban_label_inspection_context"
 msgstr ""
 
@@ -3849,11 +3849,13 @@ msgstr ""
 
 #: ../content/licence/CODT_BaseBuildLicence.py:591
 #: ../content/licence/CODT_UrbanCertificateBase.py:76
+#: ../content/licence/Inspection.py:375
 msgid "urban_label_is_in_parceloutlicences"
 msgstr ""
 
 #: ../content/licence/CODT_BaseBuildLicence.py:597
 #: ../content/licence/CODT_UrbanCertificateBase.py:82
+#: ../content/licence/Inspection.py:381
 msgid "urban_label_is_in_sol"
 msgstr ""
 
@@ -4031,7 +4033,7 @@ msgid "urban_label_manageableLicences"
 msgstr ""
 
 #. Default: "Managed_by_prosecutor"
-#: ../content/licence/Ticket.py:106
+#: ../content/licence/Ticket.py:107
 msgid "urban_label_managed_by_prosecutor"
 msgstr ""
 
@@ -4226,11 +4228,13 @@ msgstr ""
 
 #: ../content/licence/CODT_BaseBuildLicence.py:590
 #: ../content/licence/CODT_UrbanCertificateBase.py:75
+#: ../content/licence/Inspection.py:374
 msgid "urban_label_parceloutlicences"
 msgstr ""
 
 #: ../content/licence/CODT_BaseBuildLicence.py:592
 #: ../content/licence/CODT_UrbanCertificateBase.py:77
+#: ../content/licence/Inspection.py:376
 msgid "urban_label_parceloutlicences_details"
 msgstr ""
 
@@ -4396,7 +4400,7 @@ msgid "urban_label_pmTitle"
 msgstr ""
 
 #. Default: "Policeticketreference"
-#: ../content/licence/Ticket.py:43
+#: ../content/licence/Ticket.py:44
 msgid "urban_label_policeTicketReference"
 msgstr ""
 
@@ -4492,7 +4496,7 @@ msgstr ""
 
 #. Default: "Receipt date"
 #: ../UrbanEvent.py:94
-#: ../browser/licence/templates/licencetabsmacros.pt:295
+#: ../browser/licence/templates/licencetabsmacros.pt:297
 msgid "urban_label_receiptDate"
 msgstr ""
 
@@ -4546,7 +4550,7 @@ msgid "urban_label_referenceFT"
 msgstr ""
 
 #. Default: "Referenceprosecution"
-#: ../content/licence/Ticket.py:35
+#: ../content/licence/Ticket.py:36
 msgid "urban_label_referenceProsecution"
 msgstr ""
 
@@ -4662,7 +4666,7 @@ msgid "urban_label_representedBySociety"
 msgstr ""
 
 #. Default: "Organisation"
-#: ../browser/licence/templates/licencetabsmacros.pt:293
+#: ../browser/licence/templates/licencetabsmacros.pt:295
 msgid "urban_label_requestedOrganisation"
 msgstr ""
 
@@ -4856,16 +4860,19 @@ msgstr ""
 
 #: ../content/licence/CODT_BaseBuildLicence.py:594
 #: ../content/licence/CODT_UrbanCertificateBase.py:79
+#: ../content/licence/Inspection.py:378
 msgid "urban_label_sol"
 msgstr ""
 
 #: ../content/licence/CODT_BaseBuildLicence.py:596
 #: ../content/licence/CODT_UrbanCertificateBase.py:81
+#: ../content/licence/Inspection.py:380
 msgid "urban_label_solZone"
 msgstr ""
 
 #: ../content/licence/CODT_BaseBuildLicence.py:598
 #: ../content/licence/CODT_UrbanCertificateBase.py:83
+#: ../content/licence/Inspection.py:382
 msgid "urban_label_sol_details"
 msgstr ""
 
@@ -4875,7 +4882,7 @@ msgid "urban_label_solicitLocationOpinionsTo"
 msgstr ""
 
 #. Default: "Solicit opinion to"
-#: ../browser/licence/templates/licencetabsmacros.pt:271
+#: ../browser/licence/templates/licencetabsmacros.pt:273
 #: ../content/Inquiry.py:127
 msgid "urban_label_solicitOpinionsTo"
 msgstr ""
@@ -5197,12 +5204,12 @@ msgid "urban_label_useTabbingForEdit"
 msgstr ""
 
 #. Default: "Use_bound_inspection_infos"
-#: ../content/licence/Ticket.py:69
+#: ../content/licence/Ticket.py:70
 msgid "urban_label_use_bound_inspection_infos"
 msgstr ""
 
 #. Default: "Use_bound_licence_infos"
-#: ../content/licence/Inspection.py:64
+#: ../content/licence/Inspection.py:65
 msgid "urban_label_use_bound_licence_infos"
 msgstr ""
 
@@ -5263,7 +5270,7 @@ msgid "urban_label_zipcode"
 msgstr ""
 
 #. Default: "Click here to access the linked urban event inquiry"
-#: ../browser/licence/templates/licencetabsmacros.pt:406
+#: ../browser/licence/templates/licencetabsmacros.pt:408
 msgid "urban_link_to_the_linked_urbaneventinquiry"
 msgstr ""
 
@@ -5271,7 +5278,7 @@ msgid "urban_linked_inquiry_help"
 msgstr ""
 
 #. Default: "Linked urban event inquiry"
-#: ../browser/licence/templates/licencetabsmacros.pt:402
+#: ../browser/licence/templates/licencetabsmacros.pt:404
 msgid "urban_linked_urbaneventinquiry"
 msgstr ""
 
@@ -5281,7 +5288,7 @@ msgid "urban_no_event_added"
 msgstr ""
 
 #. Default: "No event type is defined in the configuration for this element"
-#: ../browser/licence/templates/licencetabsmacros.pt:472
+#: ../browser/licence/templates/licencetabsmacros.pt:474
 msgid "urban_no_eventtype_defined"
 msgstr ""
 

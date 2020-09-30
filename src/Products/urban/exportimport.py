@@ -235,6 +235,7 @@ def addEventConfigs(context):
     attribute = 'EventConfigs'
     module = __import__(module_name, fromlist=[attribute])
     urbanEventTypes = getattr(module, attribute)
+    module_name = 'Products.urban.profiles.%s.refnis' % profile_name
     attribute = 'REFNIS_2019'
     module = __import__(module_name, fromlist=[attribute])
     refNIS_2019 = getattr(module, attribute)
