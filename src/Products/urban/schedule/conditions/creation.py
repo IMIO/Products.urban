@@ -506,7 +506,7 @@ class ShouldCreateTicket(InspectionCreationCondition):
     """
     def evaluate(self):
         report = self.get_current_inspection_report()
-        if report and 'ticket' in report.getFollowup_proposition():
+        if report and 'ticket' in report.getFollowup_proposition() and not self.get_last_followup_ticket():
             return True
         return False
 
