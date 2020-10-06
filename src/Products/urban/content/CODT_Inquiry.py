@@ -244,7 +244,7 @@ class CODT_Inquiry(BaseContent, Inquiry, BrowserDefaultMixin):
         inqs = [inq for inq in self._get_inquiry_objs(all_=True) if 'inquiry' in inq.getInquiry_type()]
         return inqs
 
-    def _get_inquiry_objs(self, all_=False, portal_type='CODT_Inquiry'):
+    def _get_inquiry_objs(self, all_=False, portal_type=['Inquiry', 'CODT_Inquiry']):
         """
         Returns the existing inquiries or announcements
         """
