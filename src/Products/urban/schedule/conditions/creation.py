@@ -576,5 +576,7 @@ class ProsecutionAnswerOverDeadline(CreationCondition):
     def evaluate(self):
         licence = self.task_container
         ticket_event = licence.getLastTheticket()
-        over_delay = DateTime() - ticket_event.getEventDate() > 90
-        return over_delay
+        if ticket_event and ticket_event.getEventDate():
+            over_delay = DateTime() - ticket_event.getEventDate() > 90
+            return over_delay
+        return False
