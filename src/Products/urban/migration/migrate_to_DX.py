@@ -179,7 +179,7 @@ def migrate_UrbanEventType_to_DX(context):
     )
 
     fields_mapping.pop()
-    fields_mapping.append(
+    fields_mapping.extend([
         {
             'AT_field_name': '',
             'DX_field_name': 'abbreviation',
@@ -225,7 +225,7 @@ def migrate_UrbanEventType_to_DX(context):
             'DX_field_name': 'externalDirections',
             'field_migrator': migrate_to_tuple,
         },
-    )
+    ])
     result = migrateCustomAT(
         fields_mapping,
         src_type='OpinionRequestEventType',
