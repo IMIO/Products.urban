@@ -2,11 +2,9 @@
 
 from Products.urban.config import DASHBOARD_TEMPLATES
 from Products.urban.config import GLOBAL_TEMPLATES
-from Products.urban.profiles.extra.data import REFNIS_2019 as refnis
 
 globalTemplates = GLOBAL_TEMPLATES
 dashboardTemplates = DASHBOARD_TEMPLATES
-REFNIS_2019 = refnis
 
 
 default_texts = {
