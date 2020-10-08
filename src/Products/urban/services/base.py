@@ -12,6 +12,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.exc import NoSuchTableError
 from sqlalchemy.orm import scoped_session
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy.pool import StaticPool
 
 from zope.component import getAdapter
 from zope.interface import implements
@@ -72,6 +73,7 @@ class SQLService(object):
             ),
             echo=True,
             connect_args=connect_args,
+            poolclass=StaticPool
         )
 
         return engine
@@ -153,6 +155,7 @@ class SQLSession(object):
     implements(ISQLSession)
 
     def __init__(self, service):
+        print 'ENGINE {}'.format(service.engine)
         self.service = service
         self.tables = service.tables
         self.session = scoped_session(sessionmaker(
