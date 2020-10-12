@@ -9,6 +9,7 @@ from Products.urban.config import URBAN_CODT_TYPES
 from Products.urban.config import URBAN_ENVIRONMENT_TYPES
 from Products.urban.config import URBAN_TYPES
 from Products.urban.interfaces import IFolderManager
+from Products.urban.interfaces import IGenericLicence
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.utils import getCurrentFolderManager
 
@@ -218,3 +219,17 @@ class DivisionAlternativesNamesVocabulary(DivisionNamesVocabulary):
 
 
 DivisionAlternativeNamesVocabularyFactory = DivisionAlternativesNamesVocabulary()
+
+
+class LicenceTabsVocabulary(object):
+
+    def __call__(self, context):
+        if IGenericLicence.providedBy(context):
+            licence_cfg = context.getLicenceConfig()
+            terms = [SimpleTerm(tab['value'], tab['value'], tab['display_name'].decode('utf-8'))
+                     for tab in licence_cfg.getTabsConfig() if tab['display'] == '1']
+            return SimpleVocabulary(terms)
+        return []
+
+
+LicenceTabsVocabularyFactory = LicenceTabsVocabulary()

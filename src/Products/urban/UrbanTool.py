@@ -15,8 +15,6 @@ __docformat__ = 'plaintext'
 
 from AccessControl import ClassSecurityInfo
 
-from persistent.mapping import PersistentMapping
-
 from Products.Archetypes.atapi import *
 
 from Products.CMFCore.utils import UniqueObject
@@ -26,11 +24,9 @@ from Products.DataGridField import DataGridField, DataGridWidget
 from Products.DataGridField.Column import Column
 from collective.datagridcolumns.DateColumn import DateColumn
 
-from Products.urban.config import NIS
-from Products.urban.config import URBANMAP_CFG
-from Products.urban.config import VOCABULARY_TYPES
 from Products.urban.config import *
-from Products.urban.interfaces import IUrbanEventType
+from Products.urban.interfaces import IContactFolder
+from Products.urban.interfaces import IUrbanVocabularyTerm
 from Products.urban.interfaces import IGenericLicence
 from Products.urban import UrbanMessage as _
 
@@ -42,15 +38,12 @@ from plone import api
 from plone.memoize.request import cache
 from zope.i18n import translate
 from Products.CMFCore import permissions
-from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.Expression import Expression
 from Products.CMFPlone.i18nl10n import ulocalized_time
 from Products.PageTemplates.Expressions import getEngine
 from Products.DataGridField.DataGridField import FixedRow
 from Products.DataGridField.FixedColumn import FixedColumn
 from Products.urban.utils import getCurrentFolderManager
-from Products.urban.config import GENERATED_DOCUMENT_FORMATS
-from Products.urban.interfaces import IUrbanVocabularyTerm, IContactFolder
 from Products.urban import services
 from datetime import date as _date
 
@@ -761,6 +754,9 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
 
     def isContactFolder(self, folder):
         return IContactFolder.providedBy(folder)
+
+    def isLicence(self, context):
+        return IGenericLicence.providedBy(context)
 
     def get_division_name(self, division_code, alternative_name=True):
         mapping = dict([(str(int(l['division'])), l['alternative_name']) for l in self.getDivisionsRenaming()])
