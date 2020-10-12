@@ -26,14 +26,14 @@ class TestBuildLicence(unittest.TestCase):
 
     def testLicenceTitleUpdate(self):
         # verify that the licence title update correctly when we add or remove applicants/proprietaries
-        #on the licence
+        # on the licence
         licence = self.buildlicence
         self.assertTrue(licence.Title().endswith('/1 - Exemple Permis Urbanisme - Mes Smith & Wesson'))
-        #remove the applicant
+        # remove the applicant
         applicant_id = licence.objectValues('Applicant')[0].id
         licence.manage_delObjects([applicant_id])
         self.assertTrue(licence.Title().endswith('/1 - Exemple Permis Urbanisme - no_applicant_defined'))
-        #add an applicant back
+        # add an applicant back
         licence.invokeFactory('Applicant', 'new_applicant', name1='Quentin', name2='Tinchimiloupète')
         self.assertTrue(licence.Title().endswith('/1 - Exemple Permis Urbanisme -  Quentin Tinchimiloupète'))
 
@@ -89,15 +89,15 @@ class TestBuildLicence(unittest.TestCase):
 
     def testGetCurrentFolderManager(self):
         buildlicences = self.portal.urban.buildlicences
-        #1 link login on treatment agent
+        # 1 link login on treatment agent
         at = getattr(self.portal_urban.buildlicence.foldermanagers, 'foldermanager1')
         at.setPloneUserId('urbaneditor')
-        #2 create an empty buildlicence
+        # 2 create an empty buildlicence
         LICENCE_ID = 'licence2'
         buildlicences.invokeFactory('BuildLicence', LICENCE_ID)
         buildLicence2 = getattr(buildlicences, LICENCE_ID)
         buildLicence2.setFoldermanagers(utils.getCurrentFolderManager())
-        #3 check if agent treatment exist
+        # 3 check if agent treatment exist
         self.assertEqual(buildLicence2.getFoldermanagers()[0].getPloneUserId(), 'urbaneditor')
         at.setPloneUserId('urbanreader')
         LICENCE_ID = 'licence3'
@@ -130,7 +130,7 @@ class TestBuildLicence(unittest.TestCase):
         LICENCE_ID = 'buildlicence1'
         buildlicences.invokeFactory('BuildLicence', LICENCE_ID)
         buildlicence = getattr(buildlicences, LICENCE_ID)
-        #set opinion request to 'belgacom' and 'sncb'
+        # set opinion request to 'belgacom' and 'sncb'
         opinions = ('sncb', 'belgacom')
         buildlicence.setSolicitOpinionsTo(opinions)
         buildlicence.createAllAdvices()
