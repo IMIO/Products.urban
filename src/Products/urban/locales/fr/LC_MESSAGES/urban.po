@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2020-09-16 12:35+0000\n"
+"POT-Creation-Date: 2020-10-13 09:10+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -207,11 +207,31 @@ msgstr "Supprimer le permis"
 msgid "Demo Extension profile for urban."
 msgstr "Profile de démo urban"
 
+#: ../browser/licence/duplicate_licence.py:31
+msgid "Destination type"
+msgstr "Type de destination"
+
 msgid "Display each licence only once"
 msgstr "N'afficher chaque dossier qu'une seule fois"
 
 msgid "Division"
 msgstr "Division"
+
+#: ../browser/licence/duplicate_licence.py:49
+msgid "Duplicate applicants"
+msgstr "Copier les demandeurs/propriétaires"
+
+#: ../profiles/default/actions.xml
+msgid "Duplicate licence"
+msgstr "Transposer le permis"
+
+#: ../browser/licence/duplicate_licence.py:43
+msgid "Duplicate parcels"
+msgstr "Copier les parcelles"
+
+#: ../browser/licence/templates/duplicate_licence.pt:18
+msgid "Duplicate to a new licence"
+msgstr "Créer un nouveau permis en copiant les données."
 
 msgid "Edit"
 msgstr "Modifier le permis"
@@ -575,6 +595,10 @@ msgstr "Nom"
 msgid "New install profile for for urban."
 msgstr ""
 
+#: ../browser/licence/duplicate_licence.py:38
+msgid "New licence subject"
+msgstr "Nouvel objet"
+
 #: ../browser/templates/coring_update.pt:37
 msgid "No data to update"
 msgstr "Aucune donnée à mettre à jour"
@@ -725,6 +749,10 @@ msgstr "Période de suspension du ${from} au ${to}: CORRIGEZ LA DATE DE FIN DE P
 #: ../interfaces.py:760
 msgid "Suspension period start date"
 msgstr ""
+
+#: ../browser/licence/duplicate_licence.py:56
+msgid "Tabs to duplicate"
+msgstr "Onglets à copier"
 
 #: ../testing.zcml:15
 msgid "Tests Extension profile for urban."
@@ -1216,11 +1244,11 @@ msgstr "Modèles tableaux de bord"
 msgid "date_day_01"
 msgstr "1er"
 
-#: ../services/base.py:130
+#: ../services/base.py:132
 msgid "db_connection_error"
 msgstr ""
 
-#: ../services/base.py:125
+#: ../services/base.py:127
 msgid "db_connection_successfull"
 msgstr ""
 
@@ -2939,7 +2967,7 @@ msgid "urban_label_askingDate"
 msgstr "Date de demande"
 
 #. Default: "Asyncinquiryradius"
-#: ../UrbanTool.py:185
+#: ../UrbanTool.py:178
 msgid "urban_label_asyncInquiryRadius"
 msgstr "Délayer les rayons d'enquêtes importants"
 
@@ -3001,7 +3029,7 @@ msgid "urban_label_bound_inspection"
 msgstr "Dossier d'inspection lié"
 
 #. Default: "Bound licences"
-#: ../content/licence/Inspection.py:42
+#: ../content/licence/Inspection.py:41
 #: ../content/licence/Ticket.py:84
 msgid "urban_label_bound_licences"
 msgstr "Dossiers liés"
@@ -3058,7 +3086,7 @@ msgid "urban_label_city"
 msgstr "Localité"
 
 #. Default: "Cityname"
-#: ../UrbanTool.py:77
+#: ../UrbanTool.py:70
 msgid "urban_label_cityName"
 msgstr "Nom de la commune"
 
@@ -3111,7 +3139,7 @@ msgid "urban_label_classification_order_scope"
 msgstr "Portée de l'arrêté de classement"
 
 #. Default: "College Holidays"
-#: ../UrbanTool.py:135
+#: ../UrbanTool.py:128
 msgid "urban_label_collegeHolidays"
 msgstr "Vacances du College"
 
@@ -3361,7 +3389,7 @@ msgid "urban_label_displayDateEnd"
 msgstr "Date de fin d'affichage"
 
 #. Default: "Displayemptykeydates"
-#: ../UrbanTool.py:107
+#: ../UrbanTool.py:100
 msgid "urban_label_displayEmptyKeyDates"
 msgstr "Afficher les dates clés vides"
 
@@ -3387,12 +3415,12 @@ msgid "urban_label_divisionSubject"
 msgstr "Objet"
 
 #. Default: "Divisionsrenaming"
-#: ../UrbanTool.py:85
+#: ../UrbanTool.py:78
 msgid "urban_label_divisionsRenaming"
 msgstr "Nom alternatif des divisions pour la génération des documents"
 
 #. Default: "Editionoutputformat"
-#: ../UrbanTool.py:156
+#: ../UrbanTool.py:149
 msgid "urban_label_editionOutputFormat"
 msgstr "Format de fichier des modèles générés"
 
@@ -3628,7 +3656,7 @@ msgid "urban_label_general_disposition"
 msgstr "Disposition générale"
 
 #. Default: "Generatesingletondocuments"
-#: ../UrbanTool.py:167
+#: ../UrbanTool.py:160
 msgid "urban_label_generateSingletonDocuments"
 msgstr "Générer directement les documents uniques"
 
@@ -3719,7 +3747,7 @@ msgid "urban_label_initials"
 msgstr "Initiales"
 
 #. Default: "Inquiry suspension periods"
-#: ../UrbanTool.py:120
+#: ../UrbanTool.py:113
 msgid "urban_label_inquirySuspensionPeriods"
 msgstr "Périodes de suspension d'enquêtes"
 
@@ -3734,12 +3762,12 @@ msgid "urban_label_inquiry_type"
 msgstr "Type de publicité"
 
 #. Default: "Inspectiondescription"
-#: ../content/licence/Inspection.py:83
+#: ../content/licence/Inspection.py:82
 msgid "urban_label_inspectionDescription"
 msgstr "Observations"
 
 #. Default: "Inspection_context"
-#: ../content/licence/Inspection.py:73
+#: ../content/licence/Inspection.py:72
 msgid "urban_label_inspection_context"
 msgstr "Contexte d'inspection"
 
@@ -3749,7 +3777,7 @@ msgid "urban_label_internal_service"
 msgstr "Service interne à la ville"
 
 #. Default: "Invertaddressnames"
-#: ../UrbanTool.py:176
+#: ../UrbanTool.py:169
 msgid "urban_label_invertAddressNames"
 msgstr "Inverser le nom et prénom des destinataires de courriers"
 
@@ -3825,7 +3853,7 @@ msgid "urban_label_isAnOpinion"
 msgstr "Est un avis?"
 
 #. Default: "Isdecentralized"
-#: ../UrbanTool.py:99
+#: ../UrbanTool.py:92
 msgid "urban_label_isDecentralized"
 msgstr "Commune décentralisée?"
 
@@ -3885,13 +3913,13 @@ msgstr "Supplémentaire?"
 
 #: ../content/licence/CODT_BaseBuildLicence.py:591
 #: ../content/licence/CODT_UrbanCertificateBase.py:76
-#: ../content/licence/Inspection.py:375
+#: ../content/licence/Inspection.py:374
 msgid "urban_label_is_in_parceloutlicences"
 msgstr "Le bien se situe dans un permis d'urbanisation"
 
 #: ../content/licence/CODT_BaseBuildLicence.py:597
 #: ../content/licence/CODT_UrbanCertificateBase.py:82
-#: ../content/licence/Inspection.py:381
+#: ../content/licence/Inspection.py:380
 msgid "urban_label_is_in_sol"
 msgstr "Le bien se situe dans un SOL"
 
@@ -4054,7 +4082,7 @@ msgid "urban_label_locationTechnicalRemarks"
 msgstr "Remarques techniques (Fiche Urbanisme)"
 
 #. Default: "Logmaprequests"
-#: ../UrbanTool.py:194
+#: ../UrbanTool.py:187
 msgid "urban_label_logMapRequests"
 msgstr "Logger les accès à la cartographie avec collective.fingerpointing"
 
@@ -4079,7 +4107,7 @@ msgid "urban_label_manualParcels"
 msgstr "Parcelles"
 
 #. Default: "Map Url"
-#: ../UrbanTool.py:147
+#: ../UrbanTool.py:140
 msgid "urban_label_mapUrl"
 msgstr ""
 
@@ -4264,13 +4292,13 @@ msgstr "Lotissement"
 
 #: ../content/licence/CODT_BaseBuildLicence.py:590
 #: ../content/licence/CODT_UrbanCertificateBase.py:75
-#: ../content/licence/Inspection.py:374
+#: ../content/licence/Inspection.py:373
 msgid "urban_label_parceloutlicences"
 msgstr "Permis d'urbanisation"
 
 #: ../content/licence/CODT_BaseBuildLicence.py:592
 #: ../content/licence/CODT_UrbanCertificateBase.py:77
-#: ../content/licence/Inspection.py:376
+#: ../content/licence/Inspection.py:375
 msgid "urban_label_parceloutlicences_details"
 msgstr "Détails sur le permis d'urbanisation"
 
@@ -4896,19 +4924,19 @@ msgstr "Société"
 
 #: ../content/licence/CODT_BaseBuildLicence.py:594
 #: ../content/licence/CODT_UrbanCertificateBase.py:79
-#: ../content/licence/Inspection.py:378
+#: ../content/licence/Inspection.py:377
 msgid "urban_label_sol"
 msgstr "SOL"
 
 #: ../content/licence/CODT_BaseBuildLicence.py:596
 #: ../content/licence/CODT_UrbanCertificateBase.py:81
-#: ../content/licence/Inspection.py:380
+#: ../content/licence/Inspection.py:379
 msgid "urban_label_solZone"
 msgstr "Zone de SOL"
 
 #: ../content/licence/CODT_BaseBuildLicence.py:598
 #: ../content/licence/CODT_UrbanCertificateBase.py:83
-#: ../content/licence/Inspection.py:382
+#: ../content/licence/Inspection.py:381
 msgid "urban_label_sol_details"
 msgstr "Détails concernant le SOL"
 
@@ -5134,7 +5162,7 @@ msgid "urban_label_theLicenceDate"
 msgstr "Date de notification"
 
 #. Default: "Title"
-#: ../UrbanTool.py:70
+#: ../UrbanTool.py:63
 #: ../content/licence/GenericLicence.py:112
 msgid "urban_label_title"
 msgstr "Titre"
@@ -5226,7 +5254,7 @@ msgid "urban_label_usage"
 msgstr "Statistiques INS"
 
 #. Default: "Useplonemeetingwsclient"
-#: ../UrbanTool.py:203
+#: ../UrbanTool.py:196
 msgid "urban_label_usePloneMeetingWSClient"
 msgstr "Utiliser le lien PloneMeeting plutôt que les documents de délibération du collège"
 
@@ -5246,7 +5274,7 @@ msgid "urban_label_use_bound_inspection_infos"
 msgstr "Prendre les données de l'inspection liée"
 
 #. Default: "Use_bound_licence_infos"
-#: ../content/licence/Inspection.py:65
+#: ../content/licence/Inspection.py:64
 msgid "urban_label_use_bound_licence_infos"
 msgstr "Prendre les données du permis lié"
 
