@@ -41,32 +41,8 @@ class RecipientCadastreActionsPanelView(UrbanDefaultActionsPanelView):
     """
     def __init__(self, context, request):
         super(RecipientCadastreActionsPanelView, self).__init__(context, request)
-        self.SECTIONS_TO_RENDER = ('renderCopyToClaimants', 'renderEdit', 'renderOwnDelete')
-
-    def __call__(self,
-                 showEdit=True,
-                 showOwnDelete=True,
-                 showCopyToClaimants=True,
-                 **kwargs):
-        self.showCopyToClaimants = showCopyToClaimants
-
-        return super(RecipientCadastreActionsPanelView, self).__call__(
-            showEdit=showEdit,
-            showOwnDelete=showOwnDelete,
-            **kwargs
-            )
-
-
-    def renderCopyToClaimants(self):
-        """Render a link for the change owner view"""
-        if self.showCopyToClaimants:
-            cell = '<a href="{url}/@@copy_recipient_to_claimant?proprietary={proprietary_id}"><img src="copytoclaymants.png"/ title="{tooltip}"></a>'.format(
-                url=self.context.aq_parent.absolute_url(),
-                proprietary_id=self.context.id,
-                tooltip=(translate("urban.actionspanel.urban_copy_to_claimants_tooltip", domain="imio.actionspanel", context=self.request)).encode("utf8")
-            )
-
-            return cell.decode('utf-8')
+        self.SECTIONS_TO_RENDER = ('renderActions', 'renderEdit', 'renderOwnDelete')
+        self.ACCEPTABLE_ACTIONS = ('copy_to_claimant',)
 
 
 class LicenceActionsPanelView(ActionsPanelView):
