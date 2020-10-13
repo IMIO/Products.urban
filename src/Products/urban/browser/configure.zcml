@@ -113,22 +113,6 @@
      permission="zope2.View"
   />
 
-   <browser:page
-     for="Products.urban.interfaces.ITestConfig"
-     name="configtestview"
-     class=".configtestview.ConfigTestView"
-     template="templates/urbanconfigtestview.pt"
-     permission="zope2.View"
-  />
-
-  <browser:page
-     for="*"
-     name="configtestprocessingview"
-     class=".configtestview.ConfigTestProcessingView"
-     attribute="processing"
-     permission="zope2.View"/>
-  <!--/&ndash;&gt;-->
-
   <browser:page
      for="Products.urban.interfaces.ILicenceConfig"
      name="licenceconfigmacros"

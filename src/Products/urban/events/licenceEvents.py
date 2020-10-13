@@ -135,7 +135,7 @@ def _setManagerPermissionOnLicence(licence):
 
 
 def _checkNumerotation(licence):
-    config = licence.getUrbanConfig()
+    config = licence.getLicenceConfig()
     portal_urban = config.aq_parent
     source_config = getattr(portal_urban, config.getNumerotationSource())
     # increment the numerotation in the tool only if its the one that has been generated
@@ -201,5 +201,22 @@ def set_faceted_navigation(licence, event):
 def close_all_tasks(licence, event):
     config = licence.getLicenceConfig()
     licence_state = api.content.get_state(licence)
-    if licence_state in config.getStates_to_end_all_tasks() or []:
+    if licence_state in (config.getStates_to_end_all_tasks() or []):
         end_all_open_tasks(licence)
+
+
+def close_all_events(licence, event):
+    """
+    close all UrbanEvents that have the state 'closed' in their workflow.
+    """
+    portal_workflow = api.portal.get_tool('portal_workflow')
+    config = licence.getLicenceConfig()
+    licence_state = api.content.get_state(licence)
+    if licence_state in (config.getStates_to_end_all_events() or []):
+        for urban_event in licence.getAllEvents():
+            workflow_def = portal_workflow.getWorkflowsFor(urban_event)[0]
+            if 'closed' in workflow_def.states.objectIds():
+                workflow_id = workflow_def.getId()
+                workflow_state = portal_workflow.getStatusOf(workflow_id, urban_event)
+                workflow_state['review_state'] = 'closed'
+                portal_workflow.setStatusOf(workflow_id, urban_event, workflow_state.copy())

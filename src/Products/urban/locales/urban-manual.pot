@@ -543,6 +543,9 @@ msgstr ""
 msgid "envclasstwos"
 msgstr ""
 
+msgid "eventconfigs_folder_title"
+msgstr ""
+
 msgid "equipmenttypes_folder_title"
 msgstr ""
 
@@ -2309,6 +2312,9 @@ msgstr ""
 #. Default: "Specificfeaturesdetail"
 #: UrbanCertificateBase.py
 msgid "urban_label_specificFeaturesDetail"
+msgstr ""
+
+msgid "urban_label_states_to_end_all_events"
 msgstr ""
 
 msgid "urban_label_states_to_end_all_tasks"

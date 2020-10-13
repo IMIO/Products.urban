@@ -5,7 +5,7 @@ for lang in "${languages[@]}"; do
 done
 
 declare -a domains=("urban")
-declare -a extra_domains=("plone" "datagridfield" "collective.eeafaceted.z3ctable" "imio.schedule" "imio.actionspanel" "imio.urban.core")
+declare -a extra_domains=("plone" "datagridfield" "collective.eeafaceted.z3ctable" "imio.schedule")
 
 for lang in $(find . -mindepth 1 -maxdepth 1 -type d); do
 		for domain in "${domains[@]}"; do
