@@ -434,12 +434,12 @@ class UrbanBase(object):
         """
         organizations = [self.getField('solicitOpinionsTo').vocabulary.getAllVocTerms(self).get(key, None) for key in
         self.getSolicitOpinionsTo()]
-        toreturn = '[CSV]recipientSName|function_department|organization|dispatchSInformation|typeAndStreetName_number_box|postcode_locality|country'
+        toreturn = '[CSV]recipientName|function_department|organization|dispatchInformation|typeAndStreetName_number_box|postcode_locality|country'
         for organization in organizations:
-            toreturn = toreturn + '%' + organization.getRecipientSName() +\
+            toreturn = toreturn + '%' + organization.getRecipientName() +\
                     '|' + organization.getFunction_department() +\
                     '|' + organization.getOrganization() +\
-                    '|' + organization.getDispatchSInformation() +\
+                    '|' + organization.getDispatchInformation() +\
                     '|' + organization.getTypeAndStreetName_number_box() +\
                     '|' + organization.getPostcode_locality() +\
                     '|' + organization.getCountry()
@@ -540,7 +540,7 @@ class UrbanBase(object):
           Returns a term object for a given term folder
         """
         tool = api.portal.get_tool('portal_urban')
-        urbanConfig = tool.getUrbanConfig(self)
+        urbanConfig = tool.getLicenceConfig(self)
         termFolderObj = getattr(urbanConfig, termFolder)
         return getattr(termFolderObj, termId)
 
@@ -599,7 +599,7 @@ class UrbanBase(object):
         if self.unrestrictedTraverse(selfPhysPath + '/@@plone_lock_info/is_locked_for_current_user')():
             return False
         tool = api.portal.get_tool('portal_urban')
-        if tool.getUrbanConfig(self).getUseTabbingForDisplay():
+        if tool.getLicenceConfig(self).getUseTabbingForDisplay():
             return False
         return True
 

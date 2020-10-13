@@ -506,7 +506,7 @@ class ShouldCreateTicket(InspectionCreationCondition):
     """
     def evaluate(self):
         report = self.get_current_inspection_report()
-        if report and 'ticket' in report.getFollowup_proposition():
+        if report and 'ticket' in report.getFollowup_proposition() and not self.get_last_followup_ticket():
             return True
         return False
 
@@ -576,5 +576,7 @@ class ProsecutionAnswerOverDeadline(CreationCondition):
     def evaluate(self):
         licence = self.task_container
         ticket_event = licence.getLastTheticket()
-        over_delay = DateTime() - ticket_event.getEventDate() > 90
-        return over_delay
+        if ticket_event and ticket_event.getEventDate():
+            over_delay = DateTime() - ticket_event.getEventDate() > 90
+            return over_delay
+        return False

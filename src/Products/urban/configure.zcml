@@ -283,14 +283,6 @@
 
   <include file="index.zcml" />
 
-  <!-- ##/code-section configure.zcml.header -->
-
   <i18n:registerTranslations directory="locales" />
-
-  <include file="generatedsubscribers.zcml"/>
-
-
-  <!-- ##code-section configure.zcml.core -->
-  <!-- ##/code-section configure.zcml.core -->
 
 </configure>

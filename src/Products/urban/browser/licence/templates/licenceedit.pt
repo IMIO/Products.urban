@@ -1,5 +1,5 @@
 <metal:editLicenceMacro define-macro="editLicenceMacro" i18n:domain="urban"
-                        tal:define="useTabbing python: context.getUrbanConfig().getUseTabbingForEdit();
+                        tal:define="useTabbing python: context.getLicenceConfig().getUseTabbingForEdit();
                                     default_name python: 'licenceedit';
                                     view_name view_name|default_name;
                                     view python: context.restrictedTraverse(view_name);">

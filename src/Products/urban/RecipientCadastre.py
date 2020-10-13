@@ -162,27 +162,7 @@ class RecipientCadastre(BaseFolder, BrowserDefaultMixin):
 
     schema = RecipientCadastre_schema
 
-    ##code-section class-header #fill in your manual code here
-    ##/code-section class-header
-
-    # Methods
-
     # Manually created methods
-
-    def getParcels(self):
-        """
-          Return contained Parcels...
-        """
-        return [obj for obj in self.objectValues() if obj.portal_type == 'Parcel']
-
-    def getParcelsForDisplay(self):
-        """
-          Return contained Parcels for being displayed...
-        """
-        res = []
-        for parcel in self.getParcels():
-            res.append(parcel.Title())
-        return '<br />'.join(res)
 
     def getRecipientAddress(self):
         return self.getAdr1()+' '+self.getAdr2()
