@@ -1,10 +1,31 @@
 # -*- coding: utf-8 -*-
 
 licences_data = {
+    'CODT_BuildLicence': {
+        'licenceSubject': "Exemple Permis Urbanisme",
+        'contact_type': 'Applicant',
+        'contact_data': {
+            'personTitle': 'masters', 'name1': 'Smith &', 'name2': 'Wesson',
+            'street': 'Rue du porc dans le yaourt', 'number': '42', 'zipcode': '5032',
+            'city': 'Couillet'
+        },
+    },
+    'CODT_ParcelOutLicence': {
+        'licenceSubject': "Exemple Permis d'urbanisation CODT",
+        'contact_type': 'Applicant',
+    },
+    'CODT_IntegratedLicence': {
+        'licenceSubject': "Exemple Permis Intégré CODT",
+        'contact_type': 'Applicant',
+    },
+    'CODT_UniqueLicence': {
+        'licenceSubject': "Exemple Permis unique CODT",
+        'contact_type': 'Applicant',
+    },
     'BuildLicence': {
         'licenceSubject': "Exemple Permis Urbanisme",
         'contact_type': 'Applicant',
-        'contact_data':  {
+        'contact_data': {
             'personTitle': 'masters', 'name1': 'Smith &', 'name2': 'Wesson',
             'street': 'Rue du porc dans le yaourt', 'number': '42', 'zipcode': '5032',
             'city': 'Couillet'
@@ -41,7 +62,7 @@ licences_data = {
     'EnvClassOne': {
         'licenceSubject': 'Exemple Permis d\'environnement classe 1',
         'contact_type': 'Corporation',
-        'contact_data':  {
+        'contact_data': {
             'denomination': 'Toha Heavy Industries',
             'name1': 'Smith &',
             'name2': 'Wesson',

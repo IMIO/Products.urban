@@ -55,6 +55,16 @@ schema = Schema((
         default_content_type='text/html',
         default_output_type='text/html',
     ),
+    TextField(
+        name='proofs',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            label=_('urban_label_proofs', default='Proofs'),
+        ),
+        default_method='getDefaultText',
+        default_content_type='text/html',
+        default_output_type='text/html',
+    ),
     LinesField(
         name='offense_articles',
         widget=MultiSelectionWidget(
@@ -103,6 +113,7 @@ schema = Schema((
         ),
         default='0',
         validators=('isInteger',),
+        optional=True,
     ),
 ),
 )
@@ -131,7 +142,7 @@ class UrbanEventInspectionReport(BaseFolder, UrbanEvent, BrowserDefaultMixin):
           This vocabulary for field floodingLevel returns a list of
           flooding levels : no risk, low risk, moderated risk, high risk
         """
-        voc = UrbanVocabulary('urbaneventtypes', vocType="FollowUpEventType", value_to_use='title')
+        voc = UrbanVocabulary('eventconfigs', vocType="FollowUpEventConfig", value_to_use='title')
         config_voc = voc.getDisplayList(self)
         full_voc = [
             ('close', translate(_('close_inspection'), context=self.REQUEST)),

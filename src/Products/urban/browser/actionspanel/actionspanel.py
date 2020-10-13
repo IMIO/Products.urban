@@ -44,8 +44,9 @@ class LicenceActionsPanelView(ActionsPanelView):
     def __init__(self, context, request):
         super(LicenceActionsPanelView, self).__init__(context, request)
 
-        self.SECTIONS_TO_RENDER = ('renderEdit',)
+        self.SECTIONS_TO_RENDER = ('renderEdit', 'renderActions')
         self.IGNORABLE_ACTIONS = ('cut', 'paste', 'rename', 'copy')
+        self.ACCEPTABLE_ACTIONS = ('urban_duplicate_licence',)
 
     def triggerTransition(self, transition, comment, redirect=True):
         freeze_transition = 'suspend_freeze'

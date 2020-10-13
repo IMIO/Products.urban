@@ -107,7 +107,7 @@
      for="zope.interface.Interface
           Products.urban.browser.table.interfaces.ITitleColumn
           Products.urban.browser.table.interfaces.IItemForUrbanTable
-          Products.urban.interfaces.IPortionOut"
+          imio.urban.core.contents.parcel.IParcel"
      factory=".column.ParcelTitleDisplay"
      provides="Products.urban.browser.table.interfaces.ITitleCell"
   />
@@ -354,6 +354,12 @@
   />
 
   <adapter
+     for="plone.dexterity.interfaces.IDexterityContent"
+     factory=".tablevalue.ObjectForUrbanTable"
+     provides="Products.urban.browser.table.interfaces.IItemForUrbanTable"
+  />
+
+  <adapter
      for="zope.interface.Interface
           zope.publisher.interfaces.browser.IBrowserRequest
           Products.urban.browser.table.interfaces.IUrbanTable"
@@ -412,18 +418,10 @@
   <adapter
      for="zope.interface.Interface
           zope.publisher.interfaces.browser.IBrowserRequest
-          Products.urban.browser.table.interfaces.IFolderContentTable"
-     factory=".tablevalue.ValuesForFolderListing"
-     provides="z3c.table.interfaces.IValues"
-  />
-
-  <adapter
-     for="zope.interface.Interface
-          zope.publisher.interfaces.browser.IBrowserRequest
           Products.urban.browser.table.interfaces.IInspectionReportsTable"
      factory=".tablevalue.ValuesForInspectionReportsListing"
      provides="z3c.table.interfaces.IValues"
   />
-  <!-- table values adapters end -->
 
+  <!-- table values adapters end -->
 </configure>

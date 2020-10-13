@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from plone.app.testing import login
-from Products.urban.testing import URBAN_TESTS_PROFILE_FUNCTIONAL, URBAN_TESTS_LICENCES
+from Products.urban.profiles.testsWithLicences.licences_data import licences_data
+from Products.urban.testing import URBAN_TESTS_LICENCES
 from Products.urban.scripts.odtsearch import searchInTextElements
 
 import cgi
@@ -22,6 +23,8 @@ class TestDivisionsRenaming(unittest.TestCase):
         portal = self.layer['portal']
         self.portal = portal
         self.buildlicence = portal.urban.buildlicences.objectValues()[-1]
+        self.helper_view = self.buildlicence.unrestrictedTraverse('document_generation_helper_view')
+        self.document_proxy_licence = self.helper_view.context
         self.portal_urban = portal.portal_urban
 
         # set dummy divisions
@@ -39,29 +42,27 @@ class TestDivisionsRenaming(unittest.TestCase):
         # set the test parcel division
         parcel = self.buildlicence.getParcels()[0]
         self.division = 'mydivision'
-        parcel.setDivision(self.division)
+        parcel.division = self.division
         self.parcel = parcel
 
         login(portal, 'urbaneditor')
 
     def testNoDivisionRenaming(self):
-        licence = self.buildlicence
         division = self.division
         portal_urban = self.portal_urban
 
         expected_division_name = [line['name'] for line in portal_urban.getDivisionsRenaming() if line['division'] == division]
         expected_division_name = expected_division_name[0]
 
-        self.failUnless(expected_division_name in licence.getPortionOutsText())
+        self.failUnless(expected_division_name in self.document_proxy_licence.getPortionOutsText())
 
     def testDivisionRenaming(self):
-        licence = self.buildlicence
         division = self.division
         portal_urban = self.portal_urban
 
         alternative_name = 'bla'
         # so far we did not configure anything
-        self.failIf(alternative_name in licence.getPortionOutsText())
+        self.failIf(alternative_name in self.document_proxy_licence.getPortionOutsText())
 
         # configure an alternative name for the division
         new_config = list(portal_urban.getDivisionsRenaming())
@@ -70,8 +71,7 @@ class TestDivisionsRenaming(unittest.TestCase):
                 line['alternative_name'] = alternative_name
                 break
         portal_urban.setDivisionsRenaming(new_config)
-
-        self.failUnless(alternative_name in licence.getPortionOutsText())
+        self.failUnless(alternative_name in self.document_proxy_licence.getPortionOutsText())
 
 
 class TestInvertNamesOfMailAddress(unittest.TestCase):
@@ -113,7 +113,7 @@ class TestInvertNamesOfMailAddress(unittest.TestCase):
 
 class TestDocuments(unittest.TestCase):
 
-    layer = URBAN_TESTS_PROFILE_FUNCTIONAL
+    layer = URBAN_TESTS_LICENCES
 
     def setUp(self):
         portal = self.layer['portal']
@@ -123,15 +123,7 @@ class TestDocuments(unittest.TestCase):
     def testAppyErrorsInDocuments(self):
 
         site = self.layer['portal']
-        available_licence_types = [
-            'BuildLicence',
-            'Declaration',
-            'Division',
-            'UrbanCertificateOne',
-            'UrbanCertificateTwo',
-            'NotaryLetter',
-            'MiscDemand',
-        ]
+        available_licence_types = licences_data.keys()
         log = []
         #parcourir tous les dossiers de permis
         for licence_type in available_licence_types:

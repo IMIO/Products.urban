@@ -1,11 +1,13 @@
-# -*- coding: utf-8 -*-
+#  -*- coding: utf-8 -*-
 from OFS.ObjectManager import BeforeDeleteException
 
+from Products.urban.testing import URBAN_TESTS_LICENCES
 from Products.urban.testing import URBAN_TESTS_CONFIG_FUNCTIONAL
+from Products.urban.tests.helpers import BrowserTestCase
 
 from plone import api
 from plone.app.testing import login
-from zope.component import createObject
+from plone.testing.z2 import Browser
 
 import transaction
 import unittest
@@ -19,7 +21,7 @@ class TestBuildLicenceInquiries(unittest.TestCase):
         portal = self.layer['portal']
         self.urban = portal.urban
 
-        # create a test BuildLicence
+        #  create a test BuildLicence
         default_user = self.layer.default_user
         login(portal, default_user)
         buildlicence_folder = self.urban.buildlicences
@@ -27,8 +29,8 @@ class TestBuildLicenceInquiries(unittest.TestCase):
         buildlicence_folder.invokeFactory('BuildLicence', id=testlicence_id)
         self.licence = getattr(buildlicence_folder, testlicence_id)
 
-        # create un inquiry event
-        createObject('UrbanEventInquiry', 'enquete-publique', self.licence)
+        #  create un inquiry event
+        self.licence.createUrbanEvent('enquete-publique')
         transaction.commit()
 
     def _addInquiry(self):
@@ -47,9 +49,9 @@ class TestBuildLicenceInquiries(unittest.TestCase):
           Test the GenericLicence.getInquiries method
         """
         licence = self.licence
-        # by default, an inquiry is already defined defined on the licence
+        #  by default, an inquiry is already defined defined on the licence
         self.assertEqual(licence.getInquiries(), [])
-        # we can add extra inquiries by adding "Inquiry" objects
+        #  we can add extra inquiries by adding "Inquiry" objects
         inquiry = self._addInquiry()
         self.assertEqual(licence.getInquiries(), [licence, inquiry])
 
@@ -58,15 +60,15 @@ class TestBuildLicenceInquiries(unittest.TestCase):
           Test the GenericLicence.getUrbanEventInquiries method
         """
         licence = self.licence
-        # by default, an inquiry is already defined defined on the licence
+        #  by default, an inquiry is already defined defined on the licence
         self.assertEquals(len(licence.getUrbanEventInquiries()), 1)
-        # we can not add a second urbanEventInquiry if only one inquiry
-        # is defined
-        self.assertRaises(ValueError, createObject, 'UrbanEventInquiry', 'enquete-publique', licence)
-        #after adding a second Inquiry...
+        #  we can not add a second urbanEventInquiry if only one inquiry
+        #  is defined
+        self.assertRaises(ValueError, licence.createUrbanEvent, 'enquete-publique')
+        # after adding a second Inquiry...
         self._addInquiry()
-        #... we can add a supplementary UrbanEventInquiry
-        createObject('UrbanEventInquiry', 'enquete-publique', licence)
+        # ... we can add a supplementary UrbanEventInquiry
+        licence.createUrbanEvent('enquete-publique')
         self.assertEquals(len(licence.getUrbanEventInquiries()), 2)
 
     def testUrbanEventInquiryGetLinkedInquiry(self):
@@ -78,17 +80,17 @@ class TestBuildLicenceInquiries(unittest.TestCase):
           an existing Inquiry
         """
         licence = self.licence
-        #the licence is the 'inquiry1'
+        # the licence is the 'inquiry1'
         inquiry1 = licence
-        #now we can create an UrbanEventInquiry
+        # now we can create an UrbanEventInquiry
         urbanEventInquiry1 = licence.objectValues('UrbanEventInquiry')[0]
         self.assertEquals(urbanEventInquiry1.getLinkedInquiry(), inquiry1)
-        # define a second Inquiry so we will be able to add a second
-        # UrbanEventInquiry
+        #  define a second Inquiry so we will be able to add a second
+        #  UrbanEventInquiry
         inquiry2 = self._addInquiry()
-        urbanEventInquiry2 = createObject('UrbanEventInquiry', 'enquete-publique', licence)
+        urbanEventInquiry2 = licence.createUrbanEvent('enquete-publique')
         self.assertEquals(urbanEventInquiry2.getLinkedInquiry(), inquiry2)
-        #and test that getting the first linked inqury still works
+        # and test that getting the first linked inqury still works
         self.assertEquals(urbanEventInquiry1.getLinkedInquiry(), inquiry1)
 
     def testInquiryGetUrbanEventLinkedInquiry(self):
@@ -100,22 +102,22 @@ class TestBuildLicenceInquiries(unittest.TestCase):
           an existing Inquiry
         """
         licence = self.licence
-        #delete default inquiry event
+        # delete default inquiry event
         oldinquiry_id = licence.objectValues('UrbanEventInquiry')[0].id
         licence.manage_delObjects(oldinquiry_id)
-        #the buildLicence is finally the 'inquiry1'
+        # the buildLicence is finally the 'inquiry1'
         inquiry1 = licence
-        #maybe no UrbanEventInquiry is linked
+        # maybe no UrbanEventInquiry is linked
         self.assertEquals(inquiry1.getLinkedUrbanEventInquiry(), None)
-        #now we can create an UrbanEventInquiry
-        urbanEventInquiry1 = createObject('UrbanEventInquiry', 'enquete-publique', licence)
+        # now we can create an UrbanEventInquiry
+        urbanEventInquiry1 = licence.createUrbanEvent('enquete-publique')
         self.assertEquals(inquiry1.getLinkedUrbanEventInquiry(), urbanEventInquiry1)
-        # define a second Inquiry so we will be able to add a second
-        # UrbanEventInquiry
+        #  define a second Inquiry so we will be able to add a second
+        #  UrbanEventInquiry
         inquiry2 = self._addInquiry()
-        urbanEventInquiry2 = createObject('UrbanEventInquiry', 'enquete-publique', licence)
+        urbanEventInquiry2 = licence.createUrbanEvent('enquete-publique')
         self.assertEquals(inquiry2.getLinkedUrbanEventInquiry(), urbanEventInquiry2)
-        #and test that getting the first linked inqury still works
+        # and test that getting the first linked inqury still works
         self.assertEquals(inquiry1.getLinkedUrbanEventInquiry(), urbanEventInquiry1)
 
     def testCanNotDeleteNextInquiriesIfLinked(self):
@@ -126,14 +128,14 @@ class TestBuildLicenceInquiries(unittest.TestCase):
           Here, for the next inquiries, we use a zope event 'onDelete'
         """
         licence = self.licence
-        #now test next inquiries
+        # now test next inquiries
         inquiry2 = self._addInquiry()
-        urbanEventInquiry2 = createObject('UrbanEventInquiry', 'enquete-publique', licence)
-        #we can not delete the inquiry2 as urbanEventInquiry2 exists
+        urbanEventInquiry2 = licence.createUrbanEvent('enquete-publique')
+        # we can not delete the inquiry2 as urbanEventInquiry2 exists
         self.assertRaises(BeforeDeleteException, licence.manage_delObjects, inquiry2.id)
-        #if we delete urbanEventInquiry2...
+        # if we delete urbanEventInquiry2...
         api.content.delete(urbanEventInquiry2)
-        #... then now we can remove the inquiry2
+        # ... then now we can remove the inquiry2
         api.content.delete(inquiry2)
 
     def testCanNotDeleteUrbanEventInquiryIfNotTheLast(self):
@@ -142,18 +144,38 @@ class TestBuildLicenceInquiries(unittest.TestCase):
           UrbanEventInquiry
         """
         licence = self.licence
-        #add 3 inquiries and 3 linked UrbanEventInquiries
+        # add 3 inquiries and 3 linked UrbanEventInquiries
         urbanEventInquiry1 = licence.objectValues('UrbanEventInquiry')[0]
         self._addInquiry()
-        urbanEventInquiry2 = createObject('UrbanEventInquiry', 'enquete-publique', licence)
+        urbanEventInquiry2 = licence.createUrbanEvent('enquete-publique')
         self._addInquiry()
-        urbanEventInquiry3 = createObject('UrbanEventInquiry', 'enquete-publique', licence)
-        #we cannot not remove an UrbanEventInquiry if it is not the last
+        urbanEventInquiry3 = licence.createUrbanEvent('enquete-publique')
+        # we cannot not remove an UrbanEventInquiry if it is not the last
         self.assertRaises(BeforeDeleteException,
                           licence.manage_delObjects, urbanEventInquiry2.id)
         self.assertRaises(BeforeDeleteException,
                           licence.manage_delObjects, urbanEventInquiry1.id)
-        #removing UrbanEventInquiries by the last works
+        # removing UrbanEventInquiries by the last works
         api.content.delete(urbanEventInquiry3)
         api.content.delete(urbanEventInquiry2)
         api.content.delete(urbanEventInquiry1)
+
+
+class TestCODTInquiries(BrowserTestCase):
+
+    layer = URBAN_TESTS_LICENCES
+
+    def setUp(self):
+        self.portal = self.layer['portal']
+        self.urban = self.portal.urban
+        default_user = self.layer.default_user
+        default_password = self.layer.default_password
+        self.browser = Browser(self.portal)
+        self.browserLogin(default_user, default_password)
+
+    def testInquiryAddButtonIsVisible(self):
+        licence_types = ['codt_integratedlicences', 'codt_uniquelicences', 'codt_buildlicences']
+        for licence_type in licence_types:
+            licence = getattr(self.urban, licence_type).objectValues()[1]
+            self.browser.open(licence.absolute_url())
+            self.assertIn("Ajouter une enquête supplémentaire", self.browser.contents)

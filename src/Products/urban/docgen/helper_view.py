@@ -523,7 +523,7 @@ class UrbanDocGenerationEventHelperView(UrbanDocGenerationHelperView):
     def getFolderMakers(self):
         """  """
         urban_tool = getToolByName(self, 'portal_urban')
-        foldermakers_config = urban_tool.getUrbanConfig(self.context).urbaneventtypes
+        foldermakers_config = urban_tool.getLicenceConfig(self.context).urbaneventtypes
         all_opinion_request_events = self.context.getAllOpinionRequests()
         foldermakers = []
         for opinionRequestEventType in foldermakers_config.objectValues('OpinionRequestEventType'):
@@ -730,6 +730,41 @@ class LicenceDisplayProxyObject(UrbanBaseProxyObject):
         for workLocation in workLocations[1:]:
             workLocation_signaletic += separator + self.get_work_location_signaletic(workLocation)
         return workLocation_signaletic
+
+    def getPortionOutsText(self, linebyline=False):
+        """
+          Return a displayable version of the parcels
+        """
+        toreturn = ''
+        isFirst = True
+        first_div = None
+        first_section = None
+        for portionOutObj in self.context.getParcels():
+            #add a separator between every parcel
+            #either a '\n'
+            if not isFirst and linebyline:
+                toreturn += '\n'
+            #or an "and "
+            elif not isFirst:
+                toreturn += ', '
+            elif isFirst:
+                first_div = portionOutObj.getDivisionAlternativeName()
+                toreturn += '%s ' % portionOutObj.getDivisionAlternativeName()
+                first_section = portionOutObj.getSection()
+                toreturn += 'section %s' % portionOutObj.getSection()
+                toreturn += ' n° '.decode('utf8')
+            else:
+                if first_div != portionOutObj.getDivisionAlternativeName():
+                    toreturn += '%s ' % portionOutObj.getDivisionAlternativeName()
+                if first_section != portionOutObj.getSection():
+                    toreturn += 'section %s ' % portionOutObj.getSection()
+            toreturn += ' %s' % portionOutObj.getRadical()
+            if portionOutObj.getBis() != '':
+                toreturn += '/%s' % portionOutObj.getBis()
+            toreturn += portionOutObj.getExposant()
+            toreturn += portionOutObj.getPuissance()
+            isFirst = False
+        return toreturn
 
     def get_last_opinions_round(self):
         opinions = self._get_last_opinions('solicitOpinionsTo')
@@ -1012,6 +1047,10 @@ class LicenceDisplayProxyObject(UrbanBaseProxyObject):
         for foldermanager in foldermanagers[1:]:
             result += separator + self._get_foldermanager(foldermanager, resident, reversed_name, withaddress)
         return result
+
+    def get_foldermanagers_by_grade(self, grade_id=''):
+        foldermanagers = [fm for fm in self.context.getFoldermanagers() if fm.grade == grade_id]
+        return foldermanagers
 
     def get_roadEquipments(self):
         context = self.context

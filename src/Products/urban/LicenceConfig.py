@@ -121,7 +121,7 @@ schema = Schema((
     ),
     StringField(
         name='referenceTALExpression',
-        default="python: obj.getLicenceTypeAcronym() + '/' + date.strftime('%Y') + '/' + numerotation",
+        default="python: 'XXX/' + date.strftime('%Y') + '/' + numerotation",
         widget=StringField._properties['widget'](
             size=100,
             label='Referencetalexpression',
@@ -178,12 +178,26 @@ schema = Schema((
         allowed_types=('FolderManager',),
     ),
     LinesField(
+        name='states_to_end_all_events',
+        widget=InAndOutWidget(
+            description="Select the licence states who will close all urban events",
+            description_msgid="urban_descr_states_to_end_all_events",
+            size=10,
+            label='States_to_end_all_events',
+            label_msgid='urban_label_states_to_end_all_events',
+            i18n_domain='urban',
+        ),
+        schemata='public_settings',
+        multiValued=True,
+        vocabulary_factory='urban.licence_state',
+    ),
+    LinesField(
         name='states_to_end_all_tasks',
         widget=InAndOutWidget(
             description="Select the licence states who will close all schedule tasks",
             description_msgid="urban_descr_states_to_end_all_tasks",
             size=10,
-            label='States_to_end_all_taks',
+            label='States_to_end_all_tasks',
             label_msgid='urban_label_states_to_end_all_tasks',
             i18n_domain='urban',
         ),
@@ -221,18 +235,16 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
 
     schema = LicenceConfig_schema
 
-    ##code-section class-header #fill in your manual code here
-    ##/code-section class-header
+    security.declarePublic('getEventConfigs')
 
-    # Methods
+    def getEventConfigs(self):
+        event_configs = self.eventconfigs.objectValues()
+        return event_configs
 
-    # Manually created methods
-
-    security.declarePublic('listEventTypes')
-
-    def listEventTypes(self):
-        res = [(i.id, i.title) for i in self.urbaneventtypes.objectValues()]
-        return DisplayList(res)
+    def getEnabledEventConfigs(self):
+        event_configs = [cfg for cfg in self.getEventConfigs()
+                         if api.content.get_state(cfg) == 'enabled']
+        return event_configs
 
     security.declarePublic('getEventTypesByInterface')
 
@@ -244,8 +256,8 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
         if issubclass(interface, Interface):
             interface = interface.__identifier__
 
-        eventtypes = self.urbaneventtypes.objectValues()
-        to_return = [uet for uet in eventtypes if interface in uet.getEventTypeType()]
+        eventtypes = self.eventconfigs.objectValues()
+        to_return = [uet for uet in eventtypes if interface in uet.getEventType()]
         return to_return
 
     security.declarePrivate('listUsedAttributes')

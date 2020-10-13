@@ -16,7 +16,6 @@
  <property name="allowed_content_types">
    <element value="Recipient"/>
    <element value="RecipientCadastre"/>
-   <element value="PortionOut"/>
    <element value="Claimant"/>
    <element value="File"/>
  </property>

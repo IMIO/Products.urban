@@ -1,8 +1,10 @@
 #  -*- coding: utf-8 -*-
 import unittest2 as unittest
 
+from imio.urban.core.contents.eventconfig import IEventConfig
+
 from Products.CMFCore.utils import getToolByName
-from Products.urban.interfaces import (IUrbanEventType, IAcknowledgmentEvent, IOpinionRequestEvent, IInquiryEvent)
+from Products.urban.interfaces import IAcknowledgmentEvent, IOpinionRequestEvent, IInquiryEvent
 from Products.urban.testing import URBAN_TESTS_CONFIG
 from Products.urban.testing import URBAN_TESTS_LICENCES
 
@@ -31,8 +33,8 @@ class TestInstall(unittest.TestCase):
 
     def testEventTypesCreated(self):
         catalog = getToolByName(self.portal, 'portal_catalog')
-        interfaceName = interfaceToName(self.portal, IUrbanEventType)
-        eventTypes = catalog(object_provides=interfaceName, sort_on='sortable_title')
+        interfaceName = interfaceToName(self.portal, IEventConfig)
+        eventTypes = catalog(object_provides=interfaceName)
         self.failUnless(len(eventTypes) > 0)
 
     def testEventWithoutEventTypeType(self):
@@ -66,6 +68,10 @@ class TestInstall(unittest.TestCase):
         # no need to create an opinion request event, its already existing in
         # the test licence
         urbanEvent = licence.getLastEvent(IOpinionRequestEvent)
+        if not urbanEvent:
+            licence.solicitOpinionsTo = ('belgacom',)
+            licence.createAllAdvices()
+            urbanEvent = licence.getLastEvent(IOpinionRequestEvent)
         self.failUnless(IOpinionRequestEvent.providedBy(urbanEvent))
 
 

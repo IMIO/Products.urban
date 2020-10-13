@@ -19,6 +19,7 @@
             <br />
             <span tal:content="python: architect.getStreet()+' '+architect.getNumber()" /><br />
             <span tal:content="python: architect.getZipcode()+' '+architect.getCity()" /><br />
+            <span tal:content="python: architect.getPhone()" /><br />
         </div>
     </tal:loop>
 </fieldset>
@@ -36,6 +37,7 @@
             </a>
             <span tal:content="python: geometrician.getStreet()+' '+geometrician.getNumber()" /><br />
             <span tal:content="python: geometrician.getZipcode()+' '+geometrician.getCity()" /><br />
+            <span tal:content="python: geometrician.getPhone()" /><br />
         </div>
     </tal:loop>
 </fieldset>
@@ -54,6 +56,7 @@
             <br />
             <span tal:content="python: notary.getStreet()+' '+notary.getNumber()" /><br />
             <span tal:content="python: notary.getZipcode()+' '+notary.getCity()" /><br />
+            <span tal:content="python: notary.getPhone()" /><br />
         </div>
     </tal:loop>
 </fieldset>

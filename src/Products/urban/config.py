@@ -32,7 +32,7 @@ import os
 import importlib
 
 PROJECTNAME = "urban"
-URBAN_CFG_DIR = '{}/../../var/urban'.format(os.environ['INSTANCE_HOME'])
+URBAN_CFG_DIR = '{}/var/urban'.format(os.environ['PWD'])
 
 
 class ExternalConfig(object):
@@ -98,12 +98,10 @@ ADD_CONTENT_PERMISSIONS = {
     'MiscDemand': 'urban: Add MiscDemand',
     'OpinionRequestEventType': 'urban: Add OpinionRequestEventType',
     'OrganisationTerm': 'urban: Add OrganisationTerm',
-    'ParcellingTerm': 'urban: Add ParcellingTerm',
     'ParcelOutLicence': 'urban: Add ParcelOutLicence',
     'PatrimonyCertificate': 'urban: Add PatrimonyCertificate',
     'PcaTerm': 'urban: Add PcaTerm',
     'PersonTitleTerm': 'urban: Add PersonTitleTerm',
-    'PortionOut': 'urban: Add PortionOut',
     'PreliminaryNotice': 'urban: Add PreliminaryNotice',
     'ProjectMeeting': 'urban: Add ProjectMeeting',
     'Recipient': 'urban: Add Recipient',
@@ -164,12 +162,10 @@ setDefaultRoles('urban: Add Locality', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add MiscDemand', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add OpinionRequestEventType', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add OrganisationTerm', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add ParcellingTerm', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add ParcelOutLicence', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add PatrimonyCertificate', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add PcaTerm', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add PersonTitleTerm', ("Manager", "Contributor"))
-setDefaultRoles('urban: Add PortionOut', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add PreliminaryNotice', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add ProjectMeeting', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add Recipient', ("Manager", "Contributor"))
@@ -216,6 +212,40 @@ URBAN_TYPES = [
     'Inspection', 'Ticket'
 ]
 
+URBAN_TYPES_ACRONYM = {
+    'BuildLicence': 'P',
+    'CODT_BuildLicence': 'P',
+    'Article127': 'PA',
+    'CODT_Article127': 'PA',
+    'CODT_CommercialLicence': 'PIC',
+    'IntegratedLicence': 'PI',
+    'CODT_IntegratedLicence': 'PI',
+    'UniqueLicence': 'PU',
+    'CODT_UniqueLicence': 'PU',
+    'Declaration': 'D',
+    'UrbanCertificateOne': 'CU1',
+    'CODT_UrbanCertificateOne': 'CU1',
+    'UrbanCertificateTwo': 'CU2',
+    'CODT_UrbanCertificateTwo': 'CU2',
+    'PreliminaryNotice': 'AP',
+    'PatrimonyCertificate': 'CP',
+    'EnvClassOne': 'PE1',
+    'EnvClassTwo': 'PE2',
+    'EnvClassThree': 'DE',
+    'EnvClassBordering': 'PEL',
+    'ParcelOutLicence': 'PURB',
+    'CODT_ParcelOutLicence': 'PURB',
+    'MiscDemand': 'DD',
+    'Division': 'DIV',
+    'NotaryLetter': 'NOT',
+    'CODT_NotaryLetter': 'NOT',
+    'ProjectMeeting': 'R',
+    'ExplosivesPossession': 'EXP',
+    'RoadDecree': 'DV',
+    'Inspection': 'INSP',
+    'Ticket': 'PV',
+}
+
 URBAN_CWATUPE_TYPES = [
     'BuildLicence', 'Article127', 'IntegratedLicence', 'UniqueLicence', 'Declaration',
     'UrbanCertificateOne', 'UrbanCertificateTwo', 'PreliminaryNotice',
@@ -244,7 +274,7 @@ LICENCE_FINAL_STATES = [
 
 VOCABULARY_TYPES = [
     'UrbanVocabularyTerm', 'PcaTerm', 'UrbanDelay',
-    'UrbanEventType', 'OpinionRequestEventType',
+    'EventConfig', 'OpinionEventConfig',
     'PersonTitleTerm', 'OrganisationTerm',
 ]
 

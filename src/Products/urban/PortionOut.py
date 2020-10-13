@@ -1,13 +1,5 @@
 # -*- coding: utf-8 -*-
-#
-# File: PortionOut.py
-#
-# Copyright (c) 2015 by CommunesPlone
-# Generator: ArchGenXML Version 2.7
-#            http://plone.org/products/archgenxml
-#
-# GNU General Public License (GPL)
-#
+# [DX] TO DELETE > 2.5 [DX]
 
 __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEULETTE
 <stephan.geulette@uvcw.be>, Jean-Michel Abe <jm.abe@la-bruyere.be>"""
@@ -28,7 +20,6 @@ from Products.Archetypes.utils import DisplayList
 from Products.urban.interfaces import IGenericLicence
 from Products.urban import services
 
-import ast
 ##/code-section module-header
 
 schema = Schema((
@@ -286,3 +277,4 @@ class PortionOut(BaseContent, BrowserDefaultMixin):
         return historic
 
 registerType(PortionOut, PROJECTNAME)
+# [DX] TO DELETE > 2.5 [DX]

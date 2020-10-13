@@ -37,7 +37,9 @@ def getSortMethod(idx):
 class UrbanTable(Table):
     """
     """
+    implements(interfaces.IUrbanTable)
 
+    cssClasses = {'table': 'listing largetable'}
     batchProviderName = 'plonebatch'
     startBatchingAt = 20
 

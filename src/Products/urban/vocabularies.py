@@ -2,20 +2,17 @@
 #
 # Copyright (c) 2011 by CommunesPlone
 # GNU General Public License (GPL)
-from Products.CMFPlone.i18nl10n import utranslate
 
 from plone import api
 from Products.urban.config import URBAN_CWATUPE_TYPES
 from Products.urban.config import URBAN_CODT_TYPES
 from Products.urban.config import URBAN_ENVIRONMENT_TYPES
 from Products.urban.config import URBAN_TYPES
-from Products.urban.config import EMPTY_VOCAB_VALUE
-from Products.urban.interfaces import IEventTypeType
 from Products.urban.interfaces import IFolderManager
+from Products.urban.interfaces import IGenericLicence
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.utils import getCurrentFolderManager
 
-from zope.component import getGlobalSiteManager
 from zope.interface import implements
 from zope.i18n import translate
 from zope.schema.vocabulary import SimpleTerm
@@ -23,28 +20,6 @@ from zope.schema.vocabulary import SimpleVocabulary
 from zope.schema.interfaces import IVocabularyFactory
 
 import grokcore.component as grok
-
-
-class EventTypeType(grok.GlobalUtility):
-    grok.provides(IVocabularyFactory)
-    grok.name('eventTypeType')
-
-    def __call__(self, context):
-        gsm = getGlobalSiteManager()
-        interfaces = gsm.getUtilitiesFor(IEventTypeType)
-        items = []
-        # we add an empty vocab value of type "choose a value"
-        val = utranslate(domain='urban', msgid=EMPTY_VOCAB_VALUE, context=context, default=EMPTY_VOCAB_VALUE)
-        items.append(SimpleTerm('', val, val))
-        items = items + [SimpleTerm(interfaceName, interface.__doc__, utranslate(msgid=interface.__doc__, domain='urban', context=context, default=interface.__doc__))
-                         for interfaceName, interface in interfaces]
-
-        # sort elements by title
-        def sort_function(x, y):
-            z = cmp(x.title, y.title)
-            return z
-        items.sort(sort_function)
-        return SimpleVocabulary(items)
 
 
 class AvailableStreets(grok.GlobalUtility):
@@ -97,6 +72,7 @@ class folderManagersVocabulary():
         current_foldermanager_uid = current_foldermanager and current_foldermanager.UID() or ''
         foldermanagers = catalog(
             object_provides=IFolderManager.__identifier__,
+            review_state='enabled',
             sort_on='sortable_title',
         )
         foldermanagers = [manager for manager in foldermanagers if manager.UID != current_foldermanager_uid]
@@ -211,3 +187,49 @@ class DateIndexVocabulary(object):
 
 
 DateIndexVocabularyFactory = DateIndexVocabulary()
+
+
+class DivisionNamesVocabulary(object):
+    """
+    Vocabulary factory for division names.
+    """
+    name = 'name'
+
+    def __call__(self, context):
+        urban_tool = api.portal.get_tool('portal_urban')
+        divisions = urban_tool.getDivisionsRenaming()
+        vocabulary = SimpleVocabulary(
+            [SimpleTerm(
+                str(div['division']),
+                str(div['division']),
+                unicode(div[self.name].decode('utf-8')))
+                for div in divisions]
+        )
+        return vocabulary
+
+
+DivisionNamesVocabularyFactory = DivisionNamesVocabulary()
+
+
+class DivisionAlternativesNamesVocabulary(DivisionNamesVocabulary):
+    """
+    Vocabulary factory for alternative division names.
+    """
+    name = 'alternative_name'
+
+
+DivisionAlternativeNamesVocabularyFactory = DivisionAlternativesNamesVocabulary()
+
+
+class LicenceTabsVocabulary(object):
+
+    def __call__(self, context):
+        if IGenericLicence.providedBy(context):
+            licence_cfg = context.getLicenceConfig()
+            terms = [SimpleTerm('urban_' + tab['value'], 'urban_' + tab['value'], tab['display_name'].decode('utf-8'))
+                     for tab in licence_cfg.getTabsConfig() if tab['display'] == '1']
+            return SimpleVocabulary(terms)
+        return []
+
+
+LicenceTabsVocabularyFactory = LicenceTabsVocabulary()

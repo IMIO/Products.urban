@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from datetime import date
+
 default_objects = {
     'notaries': [
         'Notary',
@@ -12,8 +14,13 @@ default_objects = {
     ],
 
     'parcellings': [
-        'ParcellingTerm',
-        {'id': "p1", 'title': u"Lotissement 1 (André Ledieu - 01/01/2005 - 10)", 'label': "Lotissement 1", 'subdividerName': "André Ledieu", 'authorizationDate': "2005/01/01", 'approvaleDate': "2005/01/12", 'numberOfParcels': 10},
+        'Parcelling',
+        {
+            'id': "p1", 'label': u"Lotissement 1", 'subdividerName': u"André Ledieu",
+            'authorizationDate': date(2005, 1, 1),
+            'approvalDate': date(2005, 1, 12),
+            'numberOfParcels': 10
+        },
     ],
 
     'foldermanagers': [
