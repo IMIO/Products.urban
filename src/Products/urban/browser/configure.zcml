@@ -150,19 +150,18 @@
   />
 
   <browser:page
+     for="Products.urban.interfaces.IRecipientCadastre"
+     name="copy_recipient_to_claimant"
+     class=".contactview.CopyRecipientCadastreToClaimantView"
+     permission="zope2.View"
+  />
+
+  <browser:page
      for="Products.urban.interfaces.IUrbanEventInquiry"
      name="urbaneventinquiryview"
      class=".urbaneventviews.UrbanEventInquiryView"
      template="templates/urbaneventinquiryview.pt"
      permission="zope2.View"
-  />
-
-  <browser:page
-      for="Products.urban.interfaces.IUrbanEventBaseInquiry"
-      name="copy_recipient_to_claimant"
-      class=".urbaneventviews.UrbanEventInquiryView"
-      attribute="copy_recipient_to_claimant"
-      permission="zope2.View"
   />
 
   <browser:page
