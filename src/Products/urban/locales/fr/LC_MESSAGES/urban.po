@@ -1285,6 +1285,11 @@ msgid "decree_type_departmental"
 msgstr "Arrêté Ministeriel"
 
 #. Default: "urban"
+#: ../PcaTerm.py:127
+msgid "decree_type_municipal"
+msgstr "Délibération conseil communal"
+
+#. Default: "urban"
 #: ../PcaTerm.py:125
 msgid "decree_type_royal"
 msgstr "Arrêté Royal"
@@ -1640,7 +1645,6 @@ msgstr "${cityName}, le ${formattedDate}"
 
 # this is an HTML content for the front-page
 #. Default: "urban"
-#: ../setuphandlers.py:824
 msgid "front_page_descr"
 msgstr "Bienvenue sur le site vous permettant d'utiliser la gestion des permis d'urbanisme"
 
@@ -5456,6 +5460,10 @@ msgid "urbancertificatetwos"
 msgstr "Certificats d'urbanisme 2"
 
 #. Default: "urban"
+#: ../setuphandlers.py:429
+msgid "urbaneventtypes_folder_title"
+msgstr "Types d'évènements"
+
 #: ../setuphandlers.py:781
 msgid "urbantemplates_folder_title"
 msgstr "modèles des procédures d'urbanisme"
