@@ -296,7 +296,7 @@ class CODT_UniqueLicence(BaseFolder, CODT_UniqueLicenceInquiry, CODT_BaseBuildLi
             applicantTitle = self.getApplicants()[0].Title()
         else:
             applicantTitle = translate('no_applicant_defined', 'urban', context=self.REQUEST).encode('utf8')
-        config = self.getUrbanConfig()
+        config = self.getLicenceConfig()
         with_SPE_ref = 'referenceSPE' in config.getUsedAttributes()
         title = "%s%s - %s - %s" % (
             with_SPE_ref and self.getReferenceSPE() + ' - ' or '',
@@ -337,9 +337,6 @@ class CODT_UniqueLicence(BaseFolder, CODT_UniqueLicenceInquiry, CODT_BaseBuildLi
 
     def getLastTransmitToSPW(self):
         return self.getLastEvent(interfaces.ITransmitToSPWEvent)
-
-    def getLastCollegeOpinionTransmitToSPW(self):
-        return self.getLastEvent(interfaces.ICollegeOpinionTransmitToSPWEvent)
 
     def getLastDecisionProjectFromSPW(self):
         return self.getLastEvent(interfaces.IDecisionProjectFromSPWEvent)

@@ -126,6 +126,19 @@ def migrate_update_empty_sols_pcas_title(context):
     logger.info("migration step done!")
 
 
+def migrate_update_foldermanagers_layout(context):
+    """
+    """
+    logger = logging.getLogger('urban: migrate migrate_update_foldermanagers_layout')
+    logger.info("starting migration step")
+
+    urban_tool = api.portal.get_tool('portal_urban')
+    folder = getattr(urban_tool, 'foldermanagers')
+    folder.setLayout('sorted_title_folderview')
+
+    logger.info("migration step done!")
+
+
 def migrate(context):
     logger = logging.getLogger('urban: migrate to 2.4')
     logger.info("starting migration steps")
@@ -142,6 +155,7 @@ def migrate(context):
     migrate_update_empty_sols_pcas_title(context)
     migrate_codt_buildlicences_schedule(context)
     migrate_enable_optional_tax_field_by_default(context)
+    migrate_update_foldermanagers_layout(context)
     catalog = api.portal.get_tool('portal_catalog')
     catalog.clearFindAndRebuild()
     logger.info("migration done!")

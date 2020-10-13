@@ -1,10 +1,15 @@
 # -*- coding: utf-8 -*-
 
+from Acquisition import aq_base
+
 from Products.contentmigration.walker import CustomQueryWalker
 from Products.contentmigration.archetypes import InplaceATFolderMigrator
 
+from Products.urban import services
 from Products.urban.config import URBAN_TYPES
-from Products.urban.migration.to_DX.migration_utils import clean_obsolete_portal_type, delete_plone_objects
+from Products.urban.config import LICENCE_FINAL_STATES
+from Products.urban.migration.to_DX.migration_utils import clean_obsolete_portal_type
+from Products.urban.setuphandlers import setFolderAllowedTypes
 from Products.urban.utils import getLicenceFolderId
 
 from plone import api
@@ -182,18 +187,79 @@ def migrate_report_and_remove_urbandelay_portal_type(context):
     logger.info("migration step done!")
 
 
+def migrate_default_states_to_close_all_events(context):
+    logger = logging.getLogger('urban: migrate default states to close all events')
+    logger.info("starting migration step")
+    urban_tool = api.portal.get_tool('portal_urban')
+    portal_workflow = api.portal.get_tool('portal_workflow')
+    for licence_config in urban_tool.get_all_licence_configs():
+        portal_type = licence_config.getLicencePortalType()
+        workflow_def = getattr(portal_workflow, portal_workflow.getChainFor(portal_type)[0])
+        to_set = []
+        for state in LICENCE_FINAL_STATES:
+            if state in workflow_def.states.objectIds():
+                to_set.append(state)
+        licence_config.setStates_to_end_all_events(to_set)
+    logger.info("migration step done!")
+
+
+def migrate_parcellings_folder_allowed_type(context):
+    logger = logging.getLogger('migrate parcellings folder allowed type')
+    logger.info("starting migration step")
+    portal = api.portal.get()
+    parcellings = portal.urban.parcellings
+    setFolderAllowedTypes(parcellings, 'Parcelling')
+
+
+def migrate_urbaneventtypes_folder(context):
+    logger = logging.getLogger('migrate urbaneventtypes folder')
+    logger.info("starting migration step")
+    urban_tool = api.portal.get_tool('portal_urban')
+    for config_folder in urban_tool.get_all_licence_configs():
+        if hasattr(aq_base(config_folder), 'urbaneventtypes'):
+            eventconfigs = getattr(config_folder, 'urbaneventtypes')
+            api.content.rename(obj=eventconfigs, new_id='eventconfigs', safe_id=False)
+    logger.info("migration step done!")
+
+
+def migrate_inquiry_parcels(context):
+    logger = logging.getLogger('migrate inquiry parcels')
+    logger.info("starting migration step")
+    catalog = api.portal.get_tool('portal_catalog')
+    cadastre = services.cadastre.new_session()
+    for rec_brain in catalog(portal_type='RecipientCadastre'):
+        recipient = rec_brain.getObject()
+        parcels = recipient.objectValues()
+        if parcels:
+            parcel_ob = parcels[0]
+            parcel = cadastre.query_parcel_by_capakey(parcel_ob.capakey)
+            if parcel:
+                recipient.setCapakey(parcel_ob.capakey)
+                recipient.setParcel_street(parcel.locations and parcel.locations.values()[0]['street_name'] or '')
+                recipient.setParcel_police_number(parcel.locations and parcel.locations.values()[0]['number'] or '')
+                recipient.setParcel_nature(', '.join(parcel.natures))
+            api.content.delete(objects=parcels)
+            logger.info("migrated recipient {}".format(recipient))
+    logger.info("migration step done!")
+
+
 def migrate(context):
     logger = logging.getLogger('urban: migrate to 2.5')
     logger.info("starting migration steps")
+    migrate_urbaneventtypes_folder(context)
     setup_tool = api.portal.get_tool('portal_setup')
     setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'typeinfo')
-    # setup_tool.runImportStepFromProfile('profile-Products.urban:extra', 'urban-update-rubrics')
+    setup_tool.runAllImportStepsFromProfile('profile-Products.urban:default')
+    setup_tool.runImportStepFromProfile('profile-Products.urban:extra', 'urban-update-rubrics')
     migrate_codt_buildlicences_schedule(context)
     migrate_CODT_NotaryLetter_to_CODT_UrbanCertificateBase(context)
     migrate_CODT_UrbanCertificateOne_to_CODT_UrbanCertificateBase(context)
     migrate_CODT_UrbanCertificateBase_add_permissions(context)
     migrate_opinion_request_TAL_expression(context)
     migrate_report_and_remove_urbandelay_portal_type(context)
+    migrate_parcellings_folder_allowed_type(context)
+    migrate_default_states_to_close_all_events(context)
+    migrate_inquiry_parcels(context)
     catalog = api.portal.get_tool('portal_catalog')
     catalog.clearFindAndRebuild()
     logger.info("migration done!")

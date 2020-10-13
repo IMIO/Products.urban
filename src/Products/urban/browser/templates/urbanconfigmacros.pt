@@ -87,7 +87,7 @@
 
 <div metal:define-macro="events_macro" i18n:domain="urban">
 
-    <tal:filter define="folderContents view/getEventTypes">
+    <tal:filter define="folderContents view/getEventConfigs">
 
         <metal:main_macro tal:define="
             base_macros context/base/macros;

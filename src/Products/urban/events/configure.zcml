@@ -75,6 +75,10 @@
                    Products.DCWorkflow.interfaces.IAfterTransitionEvent"
               handler=".licenceEvents.close_all_tasks" />
 
+  <subscriber for="..interfaces.IGenericLicence
+                   Products.DCWorkflow.interfaces.IAfterTransitionEvent"
+              handler=".licenceEvents.close_all_events" />
+
   <subscriber for="..interfaces.IUrbanEvent
                    Products.DCWorkflow.interfaces.IAfterTransitionEvent"
               handler=".licenceEvents.reindex_attachments_permissions" />
@@ -83,45 +87,13 @@
                    Products.DCWorkflow.interfaces.IAfterTransitionEvent"
               handler=".licenceEvents.reindex_licence_permissions" />
 
-  <subscriber for="..interfaces.IPortionOut
-                   zope.container.interfaces.IObjectRemovedEvent"
-              handler=".portionOutEvents.onDelete" />
-
-  <subscriber for="..interfaces.IPortionOut
-                   zope.lifecycleevent.interfaces.IObjectCreatedEvent"
-               handler=".portionOutEvents.set_ILicencePortionOut_interface" />
-
-  <subscriber for="..interfaces.IPortionOut
-                   Products.Archetypes.interfaces.IObjectInitializedEvent"
-               handler=".portionOutEvents.setValidParcel" />
-
-  <subscriber for="..interfaces.IPortionOut
-                   Products.Archetypes.interfaces.IObjectInitializedEvent"
-              handler=".portionOutEvents.setDivisionCode" />
-
-  <subscriber for="..interfaces.IPortionOut
-                   Products.Archetypes.interfaces.IObjectEditedEvent"
-              handler=".portionOutEvents.setValidParcel" />
-
-  <subscriber for="..interfaces.IPortionOut
-                   Products.Archetypes.interfaces.IObjectEditedEvent"
-              handler=".portionOutEvents.setDivisionCode" />
-
-  <subscriber for="..interfaces.IPortionOut
-                   zope.container.interfaces.IObjectRemovedEvent"
-              handler=".licenceEvents.updateBoundLicences" />
-
-  <subscriber for="..interfaces.IPortionOut
-                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-              handler=".licenceEvents.updateBoundLicences" />
-
   <subscriber for="..interfaces.IUrbanEvent
                    Products.Archetypes.interfaces.IObjectInitializedEvent"
               handler=".urbanEventEvents.setDefaultValuesEvent"/>
 
   <subscriber for="..interfaces.IUrbanEvent
                    Products.Archetypes.interfaces.IObjectInitializedEvent"
-              handler=".urbanEventEvents.setEventTypeType"/>
+              handler=".urbanEventEvents.setEventType"/>
 
   <subscriber for="..interfaces.IUrbanEvent
                    Products.Archetypes.interfaces.IObjectInitializedEvent"
@@ -155,6 +127,7 @@
                    zope.lifecycleevent.interfaces.IObjectCreatedEvent"
               handler=".followupEvents.setLinkedReport" />
 
+  <!-- [DX] TO DELETE once all UrbanEventType subclasses are migrated to DX [DX] -->
   <subscriber for="..interfaces.IUrbanEventType
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".urbanEventTypesEvents.updateKeyEvent" />
@@ -164,6 +137,19 @@
               handler=".urbanEventTypesEvents.updateEventType" />
 
   <subscriber for="..interfaces.IUrbanEventType
+                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+              handler=".urbanEventTypesEvents.forceEventTypeCollege" />
+  <!-- [DX] TO DELETE once all UrbanEventType subclasses are migrated to DX [DX] -->
+
+  <subscriber for="imio.urban.core.contents.eventconfig.IEventConfig
+                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+              handler=".urbanEventTypesEvents.updateKeyEvent" />
+
+  <subscriber for="imio.urban.core.contents.eventconfig.IEventConfig
+                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+              handler=".urbanEventTypesEvents.updateEventType" />
+
+  <subscriber for="imio.urban.core.contents.eventconfig.IEventConfig
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".urbanEventTypesEvents.forceEventTypeCollege" />
 
@@ -187,13 +173,9 @@
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".environmentLicenceEvents.setExploitationConditions"/>
 
-  <subscriber for="..interfaces.IPortionOut
+  <subscriber for="..interfaces.IPcaTerm
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-              handler=".parcelEvents.updateParcellingTitle" />
-
-  <subscriber for="..interfaces.IParcellingTerm
-                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-              handler=".parcellingtermEvents.updateTitle" />
+              handler=".PcaTermEvents.updateTitle" />
 
   <subscriber for="..interfaces.IUrbanEvent
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"

@@ -63,26 +63,3 @@ class TestUrbanVocabularyTerm(unittest.TestCase):
         expected = "<p>est situé en ... au plan de secteur de NAMUR adopté par Arrêté Ministériel du 14 mai 1986 et qui n'a pas cessé de produire ses effets pour le bien précité;</p>"
         #expressions are replaced by the null value, aka "..."
         self.assertEqual(uvt.getRenderedDescription(self.certificate, renderToNull=True), expected)
-
-    def testNumbering(self):
-        """
-         test that the custom numbering of a vocabulary term is displayed on the edit form but is not displayed when its called to
-         be rendered in a document
-        """
-        ssc_voc_folder = self.portal_urban.ssc
-        ssc_vocterm = ssc_voc_folder.objectValues()[0]
-
-        custom_numbering = 'A42X'
-        ssc_vocterm.setNumbering(custom_numbering)
-        ssc_vocterm.reindexObject()
-
-        licence = self.certificate
-        licence.setSSC([ssc_vocterm.id])
-
-        # numbering should appear when getting the field value through archetype
-        displaylist = licence.Vocabulary('SSC')[0]
-        displayvalue = licence.displayValue(displaylist, licence.getSSC())
-        self.failUnless(displayvalue == '%s - %s' % (custom_numbering, ssc_vocterm.Title()))
-
-        # ... but not when getting the value through helper method for template rendering
-        self.failUnless(licence.getValueForTemplate('SSC') == ssc_vocterm.Title())

@@ -79,7 +79,7 @@ class CODT_UniqueLicenceInquiry(BaseContent, CODT_Inquiry, BrowserDefaultMixin):
         )
         return DisplayList(vocabulary)
 
-    def _get_inquiry_objs(self, all_=False, portal_type='CODT_UniqueLicenceInquiry'):
+    def _get_inquiry_objs(self, all_=False, portal_type=['Inquiry', 'CODT_UniqueLicenceInquiry']):
         """
         Returns the existing inquiries or announcements
         """

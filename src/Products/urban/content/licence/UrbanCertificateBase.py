@@ -676,7 +676,7 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
         """
         res = self.getField('opinionsToAskIfWorks').get(self)
         if res and theObjects:
-            urbanConfig = self.getUrbanConfig()
+            urbanConfig = self.getLicenceConfig()
             opinionsToAskIfWorksConfigFolder = urbanConfig.opinionstoaskifworks
             elts = res
             res = []
