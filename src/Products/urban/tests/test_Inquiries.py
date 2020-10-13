@@ -98,7 +98,7 @@ class TestBuildLicenceInquiries(unittest.TestCase):
           Test the Inquiry.getUrbanEventLinkedInquiry method
           There is a "1 to 1" link between an Inquiry and an UrbanEventInquiry
           (if exists)
-          An Inquiry can exist alone but an UrbanEventInquiry must be linekd to
+          An Inquiry can exist alone but an UrbanEventInquiry must be linked to
           an existing Inquiry
         """
         licence = self.licence
@@ -159,6 +159,36 @@ class TestBuildLicenceInquiries(unittest.TestCase):
         api.content.delete(urbanEventInquiry3)
         api.content.delete(urbanEventInquiry2)
         api.content.delete(urbanEventInquiry1)
+
+    def test_copy_proprietary_to_claimant(self):
+
+        licence = self.licence
+        urbaneventiniquiry1 = licence.objectValues('UrbanEventInquiry')[0]
+        recipient_cadastre1 = {}
+        recipient_cadastre1['id'] = "recipient_cadastre1_id"
+        recipient_cadastre1['name'] = "Dujardin"
+        recipient_cadastre1['firstname'] = "Jan"
+        recipient_cadastre1['street'] = "Rue du Moulin"
+        recipient_cadastre1['number'] = "666"
+        recipient_cadastre1['city'] = "Bruxelles"
+        recipient_cadastre1['zipcode'] = "1000"
+        urbaneventiniquiry1.invokeFactory('RecipientCadastre', **recipient_cadastre1)
+        copy_r2c_view = urbaneventiniquiry1.restrictedTraverse("copy_recipient_to_claimant")
+
+        # view need recipient id to find and copy its contact attributes
+        copy_r2c_view.request.form['proprietary'] = 'recipient_cadastre1_id'
+        copy_r2c_view.copy_recipient_to_claimant()
+
+        # testing if claimant exists and is created from recipient attributes
+        self.assertTrue(hasattr(urbaneventiniquiry1, 'claimant_recipient_cadastre1_id'))
+        claimant = urbaneventiniquiry1.claimant_recipient_cadastre1_id
+        recipient = urbaneventiniquiry1.recipient_cadastre1_id
+        self.assertEquals(recipient.name, claimant.name1)
+        self.assertEquals(recipient.firstname, claimant.name2)
+        self.assertEquals(recipient.street, claimant.street)
+        self.assertEquals(recipient.number, claimant.number)
+        self.assertEquals(recipient.city, claimant.city)
+        self.assertEquals(recipient.zipcode, claimant.zipcode)
 
 
 class TestCODTInquiries(BrowserTestCase):
