@@ -20,6 +20,7 @@ from plone.app.layout.viewlets import ViewletBase
 
 from zope.component import getAdapter
 from zope.interface import implements
+from zope.i18n import translate
 
 import json
 import unidecode
@@ -159,8 +160,21 @@ class UrbainXMLExport(BrowserView):
         xml.append('    <E_220_ICT>COM</E_220_ICT>')
         xml.append('  </E_220_herkomst>')
         html_list.append('<HTML><TABLE>')
+
+        title_encoding_error_label = translate("title_encoding_error_label", "urban", context=self.request)
+        worktype_missing_label = translate("worktype_missing_label", "urban", context=self.request)
+        applicant_missing_label = translate("applicant_missing_label", "urban", context=self.request)
+        parcels_missing_label = translate("parcels_missing_label", "urban", context=self.request)
+        street_missing_label = translate("street_missing_label", "urban", context=self.request)
+        street_name_missing_label = translate("street_name_missing_label", "urban", context=self.request)
+
         for licence_brain in licence_brains:
             licence = licence_brain.getObject()
+            try:
+                licence.title.encode('iso-8859-1')
+            except UnicodeEncodeError:
+                check(False, "{} : {}".format(title_encoding_error_label, str(licence.getReference())))
+                continue
             applicantObj = licence.getApplicants() and licence.getApplicants()[0] or None
             architects = licence.getField('architects') and licence.getArchitects() or []
             if api.content.get_state(licence) in ['accepted', 'authorized']:
@@ -172,15 +186,15 @@ class UrbainXMLExport(BrowserView):
                 xml.append('  <Item220>')
                 xml.append('      <E_220_Ref_Toel>%s</E_220_Ref_Toel>' % str(licence.getReference()))
                 parcels = licence.getParcels()
-                if check(parcels, 'no parcels found on licence %s' % str(licence.getReference())):
+                if check(parcels, "{} : {}".format(parcels_missing_label, str(licence.getReference()))):
                     xml.append('      <Doc_Afd>%s</Doc_Afd>' % parcels[0].getDivisionCode())
                 street_info = getAdapter(licence, IToUrbain220Street)
                 number = street_info.street_number
                 street_name = street_info.street_name
                 street_code = street_info.street_code
-                if check(street_code, 'no street (with code) found on licence %s' % str(licence.getReference())):
+                if check(street_code, "{} : {}".format(street_missing_label, str(licence.getReference()))):
                     xml.append('      <E_220_straatcode>%s</E_220_straatcode>' % str(street_code))
-                    if check(street_name, 'no street name found on licence %s' % str(licence.getReference())):
+                    if check(street_name, "{} : {}".format(street_name_missing_label, str(licence.getReference()))):
                         xml.append('      <E_220_straatnaam>%s</E_220_straatnaam>' % str(street_name).decode('iso-8859-1').encode('iso-8859-1'))
                 if number:
                     xml.append('      <E_220_huisnr>%s</E_220_huisnr>' % str(number))
@@ -190,7 +204,7 @@ class UrbainXMLExport(BrowserView):
                 for k, v in work_types.iteritems():
                     worktype_map[k] = v.getExtraValue()
                 xml_worktype = ''
-                if check(worktype in worktype_map.keys(), 'unknown worktype %s on licence %s' % (worktype, str(licence.getReference()))):
+                if check(worktype in worktype_map.keys(), "{} : {} : {}".format(worktype_missing_label, worktype, str(licence.getReference()))):
                     xml_worktype = worktype_map[worktype]
                 xml.append('      <E_220_Typ>%s</E_220_Typ>' % xml_worktype)
                 xml.append('      <E_220_Werk>%s</E_220_Werk>' % licence.licenceSubject.encode('iso-8859-1'))
@@ -206,7 +220,7 @@ class UrbainXMLExport(BrowserView):
                     elif licence.getLastRecourse():
                         authority = 'MINISTRE'
                 xml.append('      <E_220_Instan>%s</E_220_Instan>' % authority)
-                if check(applicantObj, 'no applicant found on licence %s' % str(licence.getReference())):
+                if check(applicantObj, "{} : {}".format(applicant_missing_label, str(licence.getReference()))):
                     firstname = applicantObj.portal_type == 'Corporation' and applicantObj.getDenomination() or applicantObj.getName1()
                     lastname = applicantObj.portal_type == 'Corporation' and applicantObj.getLegalForm() or applicantObj.getName2()
                     xml.append('      <PERSOON>')

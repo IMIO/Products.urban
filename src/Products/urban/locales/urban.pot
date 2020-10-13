@@ -4389,3 +4389,21 @@ msgstr ""
 
 msgid "zip_folder_title"
 msgstr ""
+
+msgid "title_encoding_error_label"
+msgstr ""
+
+msgid "worktype_missing_label"
+msgstr ""
+
+msgid "applicant_missing_label"
+msgstr ""
+
+msgid "parcels_missing_label"
+msgstr ""
+
+msgid "street_missing_label"
+msgstr ""
+
+msgid "street_name_missing_label"
+msgstr ""
