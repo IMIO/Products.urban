@@ -2566,6 +2566,10 @@ msgstr ""
 msgid "urban_button_search"
 msgstr ""
 
+#: ../browser/urbaneventviews.py:625
+msgid "urban_claimant_already_exists"
+msgstr ""
+
 #. Default: "Here above are data defined for the inquiry. If you want to change these informations, click on the name of the linked inquiry here above."
 #: ../browser/templates/urbaneventannouncementview.pt:57
 #: ../browser/templates/urbaneventinquiryview.pt:57
@@ -5323,6 +5327,10 @@ msgstr ""
 #. Default: "No event type is defined in the configuration for this element"
 #: ../browser/licence/templates/licencetabsmacros.pt:474
 msgid "urban_no_eventtype_defined"
+msgstr ""
+
+#: ../browser/urbaneventviews.py:630
+msgid "urban_recipient_copied_to_claimants"
 msgstr ""
 
 msgid "urban_search_descr"

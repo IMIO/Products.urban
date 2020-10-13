@@ -64,6 +64,15 @@
         permission="zope2.View" />
 
     <browser:page
+        for="Products.urban.interfaces.IRecipientCadastre"
+        name="actions_panel"
+        class="Products.urban.browser.actionspanel.actionspanel.RecipientCadastreActionsPanelView"
+        layer="imio.actionspanel.interfaces.IActionsPanelLayer"
+        template="browser/actions_panel.pt"
+        allowed_attributes="render"
+        permission="zope2.View" />
+
+    <browser:page
         for="Products.urban.interfaces.IGenericLicence"
         name="transitions_panel"
         class="Products.urban.browser.actionspanel.TransitionsPanelView"

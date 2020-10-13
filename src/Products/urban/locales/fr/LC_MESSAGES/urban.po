@@ -826,8 +826,7 @@ msgstr "Permis unique"
 msgid "Update"
 msgstr "Mettre à jour"
 
-#. Default: "urban"
-#: ../setuphandlers.py:852
+#: ../setuphandlers.py:845
 msgid "Urban"
 msgstr ""
 
@@ -1237,7 +1236,7 @@ msgid "creation date"
 msgstr "Date de création"
 
 #. Default: "urban"
-#: ../setuphandlers.py:752
+#: ../setuphandlers.py:745
 msgid "dashboardtemplates_folder_title"
 msgstr "Modèles tableaux de bord"
 
@@ -2599,6 +2598,10 @@ msgstr "Chercher dans les anciennes parcelles (Par référence cadastrale unique
 #. Default: "Search"
 msgid "urban_button_search"
 msgstr "Recherche"
+
+#: ../browser/urbaneventviews.py:625
+msgid "urban_claimant_already_exists"
+msgstr "Ce réclamant existe déjà!"
 
 #. Default: "Here above are data defined for the inquiry. If you want to change these informations, click on the name of the linked inquiry here above."
 #: ../browser/templates/urbaneventannouncementview.pt:57
@@ -5360,6 +5363,10 @@ msgstr "Aucun élément n'a encore été ajouté"
 #: ../browser/licence/templates/licencetabsmacros.pt:474
 msgid "urban_no_eventtype_defined"
 msgstr "Aucun type d'événement n'est défini dans la configuration pour cet élément"
+
+#: ../browser/urbaneventviews.py:630
+msgid "urban_recipient_copied_to_claimants"
+msgstr "Propriétaire copié comme réclamant"
 
 msgid "urban_search_descr"
 msgstr "Recherche de dossiers"
