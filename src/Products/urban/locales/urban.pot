@@ -1263,6 +1263,11 @@ msgid "decree_type_departmental"
 msgstr ""
 
 #. Default: "urban"
+#: ../PcaTerm.py:127
+msgid "decree_type_municipal"
+msgstr ""
+
+#. Default: "urban"
 #: ../PcaTerm.py:125
 msgid "decree_type_royal"
 msgstr ""
@@ -5414,6 +5419,11 @@ msgid "urbancertificatetwo_urbanconfig_title"
 msgstr ""
 
 msgid "urbancertificatetwos"
+msgstr ""
+
+#. Default: "urban"
+#: ../setuphandlers.py:429
+msgid "urbaneventtypes_folder_title"
 msgstr ""
 
 #. Default: "urban"
