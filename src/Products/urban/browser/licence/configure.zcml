@@ -18,6 +18,17 @@
      permission="zope2.View"
   />
 
+  <adapter
+     for="Products.urban.interfaces.IGenericLicence
+          zope.publisher.interfaces.browser.IBrowserRequest
+          .duplicate_licence.DuplicateLicenceForm
+          .duplicate_licence.TabsToDuplicateField
+          z3c.form.interfaces.IFieldWidget"
+      provides="z3c.form.interfaces.IValue"
+      factory=".duplicate_licence.DefaultTabsToDuplicate"
+      name="default"
+  />
+
   <browser:page
      for="Products.urban.interfaces.IGenericLicence"
      name="licencemacros"

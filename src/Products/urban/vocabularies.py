@@ -226,7 +226,7 @@ class LicenceTabsVocabulary(object):
     def __call__(self, context):
         if IGenericLicence.providedBy(context):
             licence_cfg = context.getLicenceConfig()
-            terms = [SimpleTerm(tab['value'], tab['value'], tab['display_name'].decode('utf-8'))
+            terms = [SimpleTerm('urban_' + tab['value'], 'urban_' + tab['value'], tab['display_name'].decode('utf-8'))
                      for tab in licence_cfg.getTabsConfig() if tab['display'] == '1']
             return SimpleVocabulary(terms)
         return []

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2020-09-16 12:35+0000\n"
+"POT-Creation-Date: 2020-10-13 09:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -205,10 +205,30 @@ msgstr ""
 msgid "Demo Extension profile for urban."
 msgstr ""
 
+#: ../browser/licence/duplicate_licence.py:31
+msgid "Destination type"
+msgstr ""
+
 msgid "Display each licence only once"
 msgstr ""
 
 msgid "Division"
+msgstr ""
+
+#: ../browser/licence/duplicate_licence.py:49
+msgid "Duplicate applicants"
+msgstr ""
+
+#: ../profiles/default/actions.xml
+msgid "Duplicate licence"
+msgstr ""
+
+#: ../browser/licence/duplicate_licence.py:43
+msgid "Duplicate parcels"
+msgstr ""
+
+#: ../browser/licence/templates/duplicate_licence.pt:18
+msgid "Duplicate to a new licence"
 msgstr ""
 
 msgid "Edit"
@@ -558,6 +578,10 @@ msgstr ""
 msgid "New install profile for for urban."
 msgstr ""
 
+#: ../browser/licence/duplicate_licence.py:38
+msgid "New licence subject"
+msgstr ""
+
 #: ../browser/templates/coring_update.pt:37
 msgid "No data to update"
 msgstr ""
@@ -707,6 +731,10 @@ msgstr ""
 
 #: ../interfaces.py:760
 msgid "Suspension period start date"
+msgstr ""
+
+#: ../browser/licence/duplicate_licence.py:56
+msgid "Tabs to duplicate"
 msgstr ""
 
 #: ../testing.zcml:15
@@ -1194,11 +1222,11 @@ msgstr ""
 msgid "date_day_01"
 msgstr ""
 
-#: ../services/base.py:130
+#: ../services/base.py:132
 msgid "db_connection_error"
 msgstr ""
 
-#: ../services/base.py:125
+#: ../services/base.py:127
 msgid "db_connection_successfull"
 msgstr ""
 
@@ -2905,7 +2933,7 @@ msgid "urban_label_askingDate"
 msgstr ""
 
 #. Default: "Asyncinquiryradius"
-#: ../UrbanTool.py:185
+#: ../UrbanTool.py:178
 msgid "urban_label_asyncInquiryRadius"
 msgstr ""
 
@@ -2967,7 +2995,7 @@ msgid "urban_label_bound_inspection"
 msgstr ""
 
 #. Default: "Bound licences"
-#: ../content/licence/Inspection.py:42
+#: ../content/licence/Inspection.py:41
 #: ../content/licence/Ticket.py:84
 msgid "urban_label_bound_licences"
 msgstr ""
@@ -3024,7 +3052,7 @@ msgid "urban_label_city"
 msgstr ""
 
 #. Default: "Cityname"
-#: ../UrbanTool.py:77
+#: ../UrbanTool.py:70
 msgid "urban_label_cityName"
 msgstr ""
 
@@ -3077,7 +3105,7 @@ msgid "urban_label_classification_order_scope"
 msgstr ""
 
 #. Default: "College Holidays"
-#: ../UrbanTool.py:135
+#: ../UrbanTool.py:128
 msgid "urban_label_collegeHolidays"
 msgstr ""
 
@@ -3327,7 +3355,7 @@ msgid "urban_label_displayDateEnd"
 msgstr ""
 
 #. Default: "Displayemptykeydates"
-#: ../UrbanTool.py:107
+#: ../UrbanTool.py:100
 msgid "urban_label_displayEmptyKeyDates"
 msgstr ""
 
@@ -3352,12 +3380,12 @@ msgid "urban_label_divisionSubject"
 msgstr ""
 
 #. Default: "Divisionsrenaming"
-#: ../UrbanTool.py:85
+#: ../UrbanTool.py:78
 msgid "urban_label_divisionsRenaming"
 msgstr ""
 
 #. Default: "Editionoutputformat"
-#: ../UrbanTool.py:156
+#: ../UrbanTool.py:149
 msgid "urban_label_editionOutputFormat"
 msgstr ""
 
@@ -3592,7 +3620,7 @@ msgid "urban_label_general_disposition"
 msgstr ""
 
 #. Default: "Generatesingletondocuments"
-#: ../UrbanTool.py:167
+#: ../UrbanTool.py:160
 msgid "urban_label_generateSingletonDocuments"
 msgstr ""
 
@@ -3683,7 +3711,7 @@ msgid "urban_label_initials"
 msgstr ""
 
 #. Default: "Inquiry suspension periods"
-#: ../UrbanTool.py:120
+#: ../UrbanTool.py:113
 msgid "urban_label_inquirySuspensionPeriods"
 msgstr ""
 
@@ -3698,12 +3726,12 @@ msgid "urban_label_inquiry_type"
 msgstr ""
 
 #. Default: "Inspectiondescription"
-#: ../content/licence/Inspection.py:83
+#: ../content/licence/Inspection.py:82
 msgid "urban_label_inspectionDescription"
 msgstr ""
 
 #. Default: "Inspection_context"
-#: ../content/licence/Inspection.py:73
+#: ../content/licence/Inspection.py:72
 msgid "urban_label_inspection_context"
 msgstr ""
 
@@ -3713,7 +3741,7 @@ msgid "urban_label_internal_service"
 msgstr ""
 
 #. Default: "Invertaddressnames"
-#: ../UrbanTool.py:176
+#: ../UrbanTool.py:169
 msgid "urban_label_invertAddressNames"
 msgstr ""
 
@@ -3789,7 +3817,7 @@ msgid "urban_label_isAnOpinion"
 msgstr ""
 
 #. Default: "Isdecentralized"
-#: ../UrbanTool.py:99
+#: ../UrbanTool.py:92
 msgid "urban_label_isDecentralized"
 msgstr ""
 
@@ -3849,13 +3877,13 @@ msgstr ""
 
 #: ../content/licence/CODT_BaseBuildLicence.py:591
 #: ../content/licence/CODT_UrbanCertificateBase.py:76
-#: ../content/licence/Inspection.py:375
+#: ../content/licence/Inspection.py:374
 msgid "urban_label_is_in_parceloutlicences"
 msgstr ""
 
 #: ../content/licence/CODT_BaseBuildLicence.py:597
 #: ../content/licence/CODT_UrbanCertificateBase.py:82
-#: ../content/licence/Inspection.py:381
+#: ../content/licence/Inspection.py:380
 msgid "urban_label_is_in_sol"
 msgstr ""
 
@@ -4018,7 +4046,7 @@ msgid "urban_label_locationTechnicalRemarks"
 msgstr ""
 
 #. Default: "Logmaprequests"
-#: ../UrbanTool.py:194
+#: ../UrbanTool.py:187
 msgid "urban_label_logMapRequests"
 msgstr ""
 
@@ -4043,7 +4071,7 @@ msgid "urban_label_manualParcels"
 msgstr ""
 
 #. Default: "Map Url"
-#: ../UrbanTool.py:147
+#: ../UrbanTool.py:140
 msgid "urban_label_mapUrl"
 msgstr ""
 
@@ -4228,13 +4256,13 @@ msgstr ""
 
 #: ../content/licence/CODT_BaseBuildLicence.py:590
 #: ../content/licence/CODT_UrbanCertificateBase.py:75
-#: ../content/licence/Inspection.py:374
+#: ../content/licence/Inspection.py:373
 msgid "urban_label_parceloutlicences"
 msgstr ""
 
 #: ../content/licence/CODT_BaseBuildLicence.py:592
 #: ../content/licence/CODT_UrbanCertificateBase.py:77
-#: ../content/licence/Inspection.py:376
+#: ../content/licence/Inspection.py:375
 msgid "urban_label_parceloutlicences_details"
 msgstr ""
 
@@ -4860,19 +4888,19 @@ msgstr ""
 
 #: ../content/licence/CODT_BaseBuildLicence.py:594
 #: ../content/licence/CODT_UrbanCertificateBase.py:79
-#: ../content/licence/Inspection.py:378
+#: ../content/licence/Inspection.py:377
 msgid "urban_label_sol"
 msgstr ""
 
 #: ../content/licence/CODT_BaseBuildLicence.py:596
 #: ../content/licence/CODT_UrbanCertificateBase.py:81
-#: ../content/licence/Inspection.py:380
+#: ../content/licence/Inspection.py:379
 msgid "urban_label_solZone"
 msgstr ""
 
 #: ../content/licence/CODT_BaseBuildLicence.py:598
 #: ../content/licence/CODT_UrbanCertificateBase.py:83
-#: ../content/licence/Inspection.py:382
+#: ../content/licence/Inspection.py:381
 msgid "urban_label_sol_details"
 msgstr ""
 
@@ -5097,7 +5125,7 @@ msgid "urban_label_theLicenceDate"
 msgstr ""
 
 #. Default: "Title"
-#: ../UrbanTool.py:70
+#: ../UrbanTool.py:63
 #: ../content/licence/GenericLicence.py:112
 msgid "urban_label_title"
 msgstr ""
@@ -5189,7 +5217,7 @@ msgid "urban_label_usage"
 msgstr ""
 
 #. Default: "Useplonemeetingwsclient"
-#: ../UrbanTool.py:203
+#: ../UrbanTool.py:196
 msgid "urban_label_usePloneMeetingWSClient"
 msgstr ""
 
@@ -5209,7 +5237,7 @@ msgid "urban_label_use_bound_inspection_infos"
 msgstr ""
 
 #. Default: "Use_bound_licence_infos"
-#: ../content/licence/Inspection.py:65
+#: ../content/licence/Inspection.py:64
 msgid "urban_label_use_bound_licence_infos"
 msgstr ""
 
