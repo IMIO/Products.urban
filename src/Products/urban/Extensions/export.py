@@ -63,6 +63,11 @@ def _export_document_templates(licence_types=URBAN_TYPES, with_event_structure=T
                         path=licence_path,
                         event_name=urbanevent.Title().replace('/', ' ')
                     )
+                    if os.path.isdir(event_path):
+                        count = 1
+                        while(os.path.isdir(event_path + '-%d' % count)):
+                            count += 1
+                        event_path = event_path + '-%d' % count
                     os.mkdir(event_path)
                 for doc in urbanevent.objectValues():
                     if api.content.get_state(doc) == 'enabled':

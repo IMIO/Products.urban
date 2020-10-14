@@ -58,6 +58,15 @@ Changes
 
 - Pre-check all manageable licences for foldermanager creation. [URB-1935]
   [jjaumotte]
+  
+- Add field to define final states closing all the urban events on a licence. [URB-2082]
+  [sdelcourt]
+
+- Refactor key date display to include urban event custom titles. [SUP-13982]
+  [sdelcourt]
+
+- Licences can created as a copy of another licence (fields, applicants and parcels can be copied). [URB-1934]
+  [sdelcourt]
 
 
 2.4 (2019-03-25)

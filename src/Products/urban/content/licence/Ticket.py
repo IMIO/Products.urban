@@ -10,6 +10,7 @@ from Products.urban.config import PROJECTNAME
 from Products.urban.config import URBAN_TYPES
 from Products.urban.content.licence.GenericLicence import GenericLicence
 from Products.urban.utils import setOptionalAttributes
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
@@ -302,6 +303,15 @@ def finalize_schema(schema, folderish=False, moveDiscussion=True):
     schema.moveField('bound_licences', after='use_bound_inspection_infos')
     schema.moveField('managed_by_prosecutor', after='foldermanagers')
     schema.moveField('description', after='managed_by_prosecutor')
+    schema['parcellings'].widget.label = _('urban_label_parceloutlicences')
+    schema['isInSubdivision'].widget.label = _('urban_label_is_in_parceloutlicences')
+    schema['subdivisionDetails'].widget.label = _('urban_label_parceloutlicences_details')
+    schema['pca'].vocabulary = UrbanVocabulary('sols', vocType="PcaTerm", inUrbanConfig=False)
+    schema['pca'].widget.label = _('urban_label_sol')
+    schema['pcaZone'].vocabulary_factory = 'urban.vocabulary.SOLZones'
+    schema['pcaZone'].widget.label = _('urban_label_solZone')
+    schema['isInPCA'].widget.label = _('urban_label_is_in_sol')
+    schema['pcaDetails'].widget.label = _('urban_label_sol_details')
     return schema
 
 

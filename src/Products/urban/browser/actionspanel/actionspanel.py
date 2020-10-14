@@ -12,8 +12,6 @@ from Products.DCWorkflow.Transitions import TransitionDefinition
 from zope.annotation import IAnnotations
 from zope.i18n import translate
 
-# from DateTime import DateTime
-
 
 class UrbanDefaultActionsPanelView(ActionsPanelView):
     """
@@ -37,6 +35,16 @@ class EventActionsPanelView(ActionsPanelView):
         self.ACCEPTABLE_ACTIONS = ('plonemeeting_wsclient_action_1', 'plonemeeting_wsclient_action_2',)
 
 
+class RecipientCadastreActionsPanelView(UrbanDefaultActionsPanelView):
+    """
+    Actions panel view of Urban Inquiry Events.
+    """
+    def __init__(self, context, request):
+        super(RecipientCadastreActionsPanelView, self).__init__(context, request)
+        self.SECTIONS_TO_RENDER = ('renderActions', 'renderEdit', 'renderOwnDelete')
+        self.ACCEPTABLE_ACTIONS = ('copy_to_claimant',)
+
+
 class LicenceActionsPanelView(ActionsPanelView):
     """
     Actions panel view of Licences.
@@ -44,8 +52,9 @@ class LicenceActionsPanelView(ActionsPanelView):
     def __init__(self, context, request):
         super(LicenceActionsPanelView, self).__init__(context, request)
 
-        self.SECTIONS_TO_RENDER = ('renderEdit',)
+        self.SECTIONS_TO_RENDER = ('renderEdit', 'renderActions')
         self.IGNORABLE_ACTIONS = ('cut', 'paste', 'rename', 'copy')
+        self.ACCEPTABLE_ACTIONS = ('urban_duplicate_licence',)
 
     def triggerTransition(self, transition, comment, redirect=True):
         freeze_transition = 'suspend_freeze'
