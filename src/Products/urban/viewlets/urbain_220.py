@@ -173,7 +173,7 @@ class UrbainXMLExport(BrowserView):
             try:
                 licence.title.encode('iso-8859-1')
             except UnicodeEncodeError:
-                check(False, "{} : {}".format(title_encoding_error_label, str(licence.getReference())))
+                check(False, u"{} : {}".format(title_encoding_error_label, str(licence.getReference())))
                 continue
             applicantObj = licence.getApplicants() and licence.getApplicants()[0] or None
             architects = licence.getField('architects') and licence.getArchitects() or []
@@ -186,15 +186,15 @@ class UrbainXMLExport(BrowserView):
                 xml.append('  <Item220>')
                 xml.append('      <E_220_Ref_Toel>%s</E_220_Ref_Toel>' % str(licence.getReference()))
                 parcels = licence.getParcels()
-                if check(parcels, "{} : {}".format(parcels_missing_label, str(licence.getReference()))):
+                if check(parcels, u"{} : {}".format(parcels_missing_label, str(licence.getReference()))):
                     xml.append('      <Doc_Afd>%s</Doc_Afd>' % parcels[0].getDivisionCode())
                 street_info = getAdapter(licence, IToUrbain220Street)
                 number = street_info.street_number
                 street_name = street_info.street_name
                 street_code = street_info.street_code
-                if check(street_code, "{} : {}".format(street_missing_label, str(licence.getReference()))):
+                if check(street_code, u"{} : {}".format(street_missing_label, str(licence.getReference()))):
                     xml.append('      <E_220_straatcode>%s</E_220_straatcode>' % str(street_code))
-                    if check(street_name, "{} : {}".format(street_name_missing_label, str(licence.getReference()))):
+                    if check(street_name, u"{} : {}".format(street_name_missing_label, str(licence.getReference()))):
                         xml.append('      <E_220_straatnaam>%s</E_220_straatnaam>' % str(street_name).decode('iso-8859-1').encode('iso-8859-1'))
                 if number:
                     xml.append('      <E_220_huisnr>%s</E_220_huisnr>' % str(number))
@@ -204,7 +204,7 @@ class UrbainXMLExport(BrowserView):
                 for k, v in work_types.iteritems():
                     worktype_map[k] = v.getExtraValue()
                 xml_worktype = ''
-                if check(worktype in worktype_map.keys(), "{} : {} : {}".format(worktype_missing_label, worktype, str(licence.getReference()))):
+                if check(worktype in worktype_map.keys(), u"{} : {} : {}".format(worktype_missing_label, worktype, str(licence.getReference()))):
                     xml_worktype = worktype_map[worktype]
                 xml.append('      <E_220_Typ>%s</E_220_Typ>' % xml_worktype)
                 xml.append('      <E_220_Werk>%s</E_220_Werk>' % licence.licenceSubject.encode('iso-8859-1'))
@@ -220,7 +220,7 @@ class UrbainXMLExport(BrowserView):
                     elif licence.getLastRecourse():
                         authority = 'MINISTRE'
                 xml.append('      <E_220_Instan>%s</E_220_Instan>' % authority)
-                if check(applicantObj, "{} : {}".format(applicant_missing_label, str(licence.getReference()))):
+                if check(applicantObj, u"{} : {}".format(applicant_missing_label, str(licence.getReference()))):
                     firstname = applicantObj.portal_type == 'Corporation' and applicantObj.getDenomination() or applicantObj.getName1()
                     lastname = applicantObj.portal_type == 'Corporation' and applicantObj.getLegalForm() or applicantObj.getName2()
                     xml.append('      <PERSOON>')
