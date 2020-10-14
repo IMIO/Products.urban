@@ -172,12 +172,10 @@ class TestBuildLicenceInquiries(unittest.TestCase):
         recipient_cadastre1['number'] = "666"
         recipient_cadastre1['city'] = "Bruxelles"
         recipient_cadastre1['zipcode'] = "1000"
-        urbaneventiniquiry1.invokeFactory('RecipientCadastre', **recipient_cadastre1)
-        copy_r2c_view = urbaneventiniquiry1.restrictedTraverse("copy_recipient_to_claimant")
+        recipient_id = urbaneventiniquiry1.invokeFactory('RecipientCadastre', **recipient_cadastre1)
+        recipient = getattr(urbaneventiniquiry1, recipient_id)
 
-        # view need recipient id to find and copy its contact attributes
-        copy_r2c_view.request.form['proprietary'] = 'recipient_cadastre1_id'
-        copy_r2c_view.copy_recipient_to_claimant()
+        recipient.restrictedTraverse("copy_recipient_to_claimant")()
 
         # testing if claimant exists and is created from recipient attributes
         self.assertTrue(hasattr(urbaneventiniquiry1, 'claimant_recipient_cadastre1_id'))
