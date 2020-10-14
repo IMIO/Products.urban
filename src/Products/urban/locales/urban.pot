@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2017-08-01 06:41+0000\n"
+"POT-Creation-Date: 2020-10-14 11:48+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,11 +15,11 @@ msgstr ""
 "Domain: urban\n"
 
 #. Default: "urban"
-#: ../setuphandlers.py:241
+#: ../setuphandlers.py:242
 msgid "%s_folder_title"
 msgstr ""
 
-#: ../setuphandlers.py:340
+#: ../setuphandlers.py:341
 msgid "%s_urbanconfig_title"
 msgstr ""
 
@@ -52,11 +52,11 @@ msgstr ""
 msgid "Add a work location"
 msgstr ""
 
-#: ../browser/licence/templates/licencetabsmacros.pt:442
+#: ../browser/licence/templates/licencetabsmacros.pt:455
 msgid "Add all advices"
 msgstr ""
 
-#: ../browser/licence/templates/licencetabsmacros.pt:418
+#: ../browser/licence/templates/licencetabsmacros.pt:431
 msgid "Add an event"
 msgstr ""
 
@@ -68,7 +68,7 @@ msgid "Add this parcel"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:861
+#: ../setuphandlers.py:862
 msgid "All"
 msgstr ""
 
@@ -91,7 +91,7 @@ msgstr ""
 msgid "Article127"
 msgstr ""
 
-#: ../browser/licence/templates/licencetabsmacros.pt:382
+#: ../browser/licence/templates/licencetabsmacros.pt:395
 #: ../browser/licence/templates/licenceview.pt:50
 msgid "Attachments"
 msgstr ""
@@ -205,11 +205,11 @@ msgstr ""
 msgid "EnvClassTwo"
 msgstr ""
 
-#: ../browser/licence/templates/licencetabsmacros.pt:426
+#: ../browser/licence/templates/licencetabsmacros.pt:439
 msgid "Events"
 msgstr ""
 
-#: ../browser/licence/templates/licencetabsmacros.pt:397
+#: ../browser/licence/templates/licencetabsmacros.pt:410
 msgid "Events attachments"
 msgstr ""
 
@@ -447,7 +447,7 @@ msgid "Road type"
 msgstr ""
 
 #. Default: "imio.schedule"
-#: ../setuphandlers.py:267
+#: ../setuphandlers.py:268
 msgid "ScheduleConfig"
 msgstr ""
 
@@ -489,7 +489,7 @@ msgstr ""
 msgid "Statistics"
 msgstr ""
 
-#: ../testing.zcml:15
+#: ../testing.zcml:14
 msgid "Tests Extension profile for urban."
 msgstr ""
 
@@ -543,7 +543,7 @@ msgid "UniqueLicence"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:738
+#: ../setuphandlers.py:739
 msgid "Urban"
 msgstr ""
 
@@ -652,7 +652,7 @@ msgstr ""
 msgid "add_an_applicant"
 msgstr ""
 
-#: ../browser/licence/templates/licencetabsmacros.pt:391
+#: ../browser/licence/templates/licencetabsmacros.pt:404
 #: ../browser/templates/urbaneventmacros.pt:89
 msgid "add_an_attachment"
 msgstr ""
@@ -660,7 +660,7 @@ msgstr ""
 msgid "add_an_equipment"
 msgstr ""
 
-#: ../browser/licence/templates/licencetabsmacros.pt:373
+#: ../browser/licence/templates/licencetabsmacros.pt:386
 msgid "add_an_inquiry"
 msgstr ""
 
@@ -668,7 +668,7 @@ msgid "add_event"
 msgstr ""
 
 #. Default: "This will automatically generate following advices:"
-#: ../browser/licence/templates/licencetabsmacros.pt:446
+#: ../browser/licence/templates/licencetabsmacros.pt:459
 msgid "add_every_advices_descr"
 msgstr ""
 
@@ -676,7 +676,7 @@ msgid "additional_layers_folder_title"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:679
+#: ../setuphandlers.py:680
 msgid "additonal_layers_folder_title"
 msgstr ""
 
@@ -714,6 +714,9 @@ msgstr ""
 msgid "announcement_data"
 msgstr ""
 
+msgid "applicant_missing_label"
+msgstr ""
+
 #. Default: "Applicant(s)"
 #: ../browser/licence/templates/licencemacros.pt:63
 msgid "applicants"
@@ -723,7 +726,7 @@ msgid "applicationreasons_folder_title"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:776
+#: ../setuphandlers.py:777
 msgid "architects_folder_title"
 msgstr ""
 
@@ -776,7 +779,7 @@ msgstr ""
 msgid "cannot_remove_urbaneventannouncement_notthelast"
 msgstr ""
 
-#: ../content/UrbanEventInquiry.py:212
+#: ../content/UrbanEventInquiry.py:218
 msgid "cannot_remove_urbaneventinquiry_notthelast"
 msgstr ""
 
@@ -818,7 +821,7 @@ msgstr ""
 msgid "click_to_view_or_add"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1220
+#: ../content/licence/GenericLicence.py:1218
 msgid "close_prevention_area"
 msgstr ""
 
@@ -860,9 +863,9 @@ msgid "concentrated_runoff_s_risk_folder_title"
 msgstr ""
 
 #. Default: "Concerned parcel(s)"
+#: ../browser/licence/templates/licencetabsmacros.pt:178
 #: ../browser/licence/templates/parcels_macro.pt:3
 #: ../browser/templates/map.pt:32
-#: ../browser/templates/parcellingtermview.pt:23
 msgid "concerned_parcels"
 msgstr ""
 
@@ -875,7 +878,7 @@ msgid "contact_recipients"
 msgstr ""
 
 #. Default: "There is no UrbanEventInquiry linked to this inquiry"
-#: ../browser/licence/templates/licencetabsmacros.pt:359
+#: ../browser/licence/templates/licencetabsmacros.pt:372
 msgid "content_no_urbaneventinquiry"
 msgstr ""
 
@@ -901,18 +904,18 @@ msgid "creation date"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:634
+#: ../setuphandlers.py:635
 msgid "dashboardtemplates_folder_title"
 msgstr ""
 
 msgid "date_day_01"
 msgstr ""
 
-#: ../services/base.py:112
+#: ../services/base.py:128
 msgid "db_connection_error"
 msgstr ""
 
-#: ../services/base.py:107
+#: ../services/base.py:123
 msgid "db_connection_successfull"
 msgstr ""
 
@@ -1022,7 +1025,7 @@ msgid "envclasstwos"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:668
+#: ../setuphandlers.py:669
 msgid "environmenttemplates_folder_title"
 msgstr ""
 
@@ -1137,7 +1140,7 @@ msgstr ""
 msgid "externaldecisions_folder_title"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1221
+#: ../content/licence/GenericLicence.py:1219
 msgid "far_prevention_area"
 msgstr ""
 
@@ -1182,28 +1185,28 @@ msgstr ""
 msgid "firefox_viewlet_title"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1242
+#: ../content/licence/GenericLicence.py:1240
 msgid "flooding_level_high"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1240
+#: ../content/licence/GenericLicence.py:1238
 msgid "flooding_level_low"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1241
+#: ../content/licence/GenericLicence.py:1239
 msgid "flooding_level_moderate"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1238
+#: ../content/licence/GenericLicence.py:1236
 msgid "flooding_level_no"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1239
+#: ../content/licence/GenericLicence.py:1237
 msgid "flooding_level_verylow"
 msgstr ""
 
 #. Default: "Folder advices"
-#: ../browser/licence/templates/licencetabsmacros.pt:437
+#: ../browser/licence/templates/licencetabsmacros.pt:450
 msgid "folder_advice"
 msgstr ""
 
@@ -1257,17 +1260,17 @@ msgid "formatted_date_with_cityname"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:710
+#: ../setuphandlers.py:711
 msgid "front_page_descr"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:711
+#: ../setuphandlers.py:712
 msgid "front_page_text"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:709
+#: ../setuphandlers.py:710
 msgid "front_page_title"
 msgstr ""
 
@@ -1290,13 +1293,13 @@ msgid "generate_a_linked_doc"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:790
+#: ../setuphandlers.py:791
 msgid "geometricians_folder_title"
 msgstr ""
 
 #. Default: "Global templates"
 #: ../browser/templates/templatessummary.pt:19
-#: ../setuphandlers.py:645
+#: ../setuphandlers.py:646
 msgid "globaltemplates_folder_title"
 msgstr ""
 
@@ -1335,7 +1338,7 @@ msgid "inquiry_suspension_folder_title"
 msgstr ""
 
 #. Default: "Inquiry ${number}"
-#: ../browser/licence/templates/licencetabsmacros.pt:307
+#: ../browser/licence/templates/licencetabsmacros.pt:320
 msgid "inquiry_title_and_number"
 msgstr ""
 
@@ -1472,7 +1475,7 @@ msgstr ""
 msgid "label_colname_transmitDate"
 msgstr ""
 
-#: ../browser/licence/templates/licencetabsmacros.pt:323
+#: ../browser/licence/templates/licencetabsmacros.pt:336
 msgid "label_edit"
 msgstr ""
 
@@ -1493,7 +1496,7 @@ msgstr ""
 msgid "label_ok"
 msgstr ""
 
-#: ../browser/licence/templates/licencetabsmacros.pt:332
+#: ../browser/licence/templates/licencetabsmacros.pt:345
 msgid "label_remove"
 msgstr ""
 
@@ -1639,7 +1642,7 @@ msgid "not_permitted_to_add_urbanevent"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:804
+#: ../setuphandlers.py:805
 msgid "notaries_folder_title"
 msgstr ""
 
@@ -1699,7 +1702,7 @@ msgstr ""
 msgid "outdated_parcels_in_use"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1223
+#: ../content/licence/GenericLicence.py:1221
 msgid "outside_catchment"
 msgstr ""
 
@@ -1707,7 +1710,7 @@ msgid "parcelLinkedLicences"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:818
+#: ../setuphandlers.py:819
 msgid "parcellings_folder_title"
 msgstr ""
 
@@ -1736,6 +1739,9 @@ msgid "parceloutlicences"
 msgstr ""
 
 msgid "parcels_layer_title"
+msgstr ""
+
+msgid "parcels_missing_label"
 msgstr ""
 
 msgid "pashs_folder_title"
@@ -1950,6 +1956,12 @@ msgstr ""
 msgid "street_end_date_descr"
 msgstr ""
 
+msgid "street_missing_label"
+msgstr ""
+
+msgid "street_name_missing_label"
+msgstr ""
+
 #. Default: "Encoding date by default"
 #: Street.py
 msgid "street_start_date_descr"
@@ -1966,7 +1978,7 @@ msgstr ""
 msgid "subdivision_fieldset_legend"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1222
+#: ../content/licence/GenericLicence.py:1220
 msgid "supervision_area"
 msgstr ""
 
@@ -1996,6 +2008,9 @@ msgstr ""
 msgid "templates_summary_title"
 msgstr ""
 
+msgid "title_encoding_error_label"
+msgstr ""
+
 # topics
 msgid "topics"
 msgstr ""
@@ -2022,7 +2037,7 @@ msgstr ""
 
 #: ../profiles.zcml:17
 #: ../profiles/default/actions.xml
-#: ../setuphandlers.py:268
+#: ../setuphandlers.py:269
 msgid "urban"
 msgstr ""
 
@@ -2048,19 +2063,19 @@ msgstr ""
 msgid "urban-sambreville"
 msgstr ""
 
-#: ../testing.zcml:15
+#: ../testing.zcml:14
 msgid "urban-tests"
 msgstr ""
 
-#: ../testing.zcml:23
+#: ../testing.zcml:22
 msgid "urban-tests-imports"
 msgstr ""
 
-#: ../testing.zcml:31
+#: ../testing.zcml:30
 msgid "urban-testsWithConfig"
 msgstr ""
 
-#: ../testing.zcml:39
+#: ../testing.zcml:38
 msgid "urban-testsWithLicences"
 msgstr ""
 
@@ -2071,6 +2086,11 @@ msgstr ""
 #. Default: "Browse old parcels (Only works with the parcel reference)"
 #: ../browser/templates/searchparcels.pt:162
 msgid "urban_browse_old_parcels"
+msgstr ""
+
+#. Default: "Check parcels consistency"
+#: ../profiles/default/actions.xml
+msgid "urban_check_parcelsconsistency"
 msgstr ""
 
 #. Default: "Here above are data defined for the inquiry. If you want to change these informations, click on the name of the linked inquiry here above."
@@ -2397,7 +2417,7 @@ msgid "urban_label_article"
 msgstr ""
 
 #. Default: "Asking Date"
-#: ../browser/licence/templates/licencetabsmacros.pt:243
+#: ../browser/licence/templates/licencetabsmacros.pt:247
 msgid "urban_label_askingDate"
 msgstr ""
 
@@ -2814,7 +2834,7 @@ msgid "urban_label_expropriationDetails"
 msgstr ""
 
 #. Default: "Advice"
-#: ../browser/licence/templates/licencetabsmacros.pt:245
+#: ../browser/licence/templates/licencetabsmacros.pt:249
 msgid "urban_label_externalDecision"
 msgstr ""
 
@@ -3600,7 +3620,7 @@ msgid "urban_label_rcuDetails"
 msgstr ""
 
 #. Default: "Receipt date"
-#: ../browser/licence/templates/licencetabsmacros.pt:244
+#: ../browser/licence/templates/licencetabsmacros.pt:248
 msgid "urban_label_receiptDate"
 msgstr ""
 
@@ -3694,7 +3714,7 @@ msgid "urban_label_representedBySociety"
 msgstr ""
 
 #. Default: "Organisation"
-#: ../browser/licence/templates/licencetabsmacros.pt:242
+#: ../browser/licence/templates/licencetabsmacros.pt:245
 msgid "urban_label_requestedOrganisation"
 msgstr ""
 
@@ -3869,7 +3889,7 @@ msgid "urban_label_solicitLocationOpinionsTo"
 msgstr ""
 
 #. Default: "Solicit opinion to"
-#: ../browser/licence/templates/licencetabsmacros.pt:222
+#: ../browser/licence/templates/licencetabsmacros.pt:225
 msgid "urban_label_solicitOpinionsTo"
 msgstr ""
 
@@ -4200,7 +4220,7 @@ msgid "urban_label_zipcode"
 msgstr ""
 
 #. Default: "Click here to access the linked urban event inquiry"
-#: ../browser/licence/templates/licencetabsmacros.pt:354
+#: ../browser/licence/templates/licencetabsmacros.pt:367
 msgid "urban_link_to_the_linked_urbaneventinquiry"
 msgstr ""
 
@@ -4208,7 +4228,7 @@ msgid "urban_linked_inquiry_help"
 msgstr ""
 
 #. Default: "Linked urban event inquiry"
-#: ../browser/licence/templates/licencetabsmacros.pt:350
+#: ../browser/licence/templates/licencetabsmacros.pt:363
 msgid "urban_linked_urbaneventinquiry"
 msgstr ""
 
@@ -4218,7 +4238,7 @@ msgid "urban_no_event_added"
 msgstr ""
 
 #. Default: "No event type is defined in the configuration for this element"
-#: ../browser/licence/templates/licencetabsmacros.pt:420
+#: ../browser/licence/templates/licencetabsmacros.pt:433
 msgid "urban_no_eventtype_defined"
 msgstr ""
 
@@ -4328,12 +4348,12 @@ msgid "urbancertificatetwos"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:360
+#: ../setuphandlers.py:361
 msgid "urbaneventtypes_folder_title"
 msgstr ""
 
 #. Default: "urban"
-#: ../setuphandlers.py:657
+#: ../setuphandlers.py:658
 msgid "urbantemplates_folder_title"
 msgstr ""
 
@@ -4384,26 +4404,11 @@ msgstr ""
 msgid "work_location"
 msgstr ""
 
+msgid "worktype_missing_label"
+msgstr ""
+
 msgid "years"
 msgstr ""
 
 msgid "zip_folder_title"
-msgstr ""
-
-msgid "title_encoding_error_label"
-msgstr ""
-
-msgid "worktype_missing_label"
-msgstr ""
-
-msgid "applicant_missing_label"
-msgstr ""
-
-msgid "parcels_missing_label"
-msgstr ""
-
-msgid "street_missing_label"
-msgstr ""
-
-msgid "street_name_missing_label"
 msgstr ""
