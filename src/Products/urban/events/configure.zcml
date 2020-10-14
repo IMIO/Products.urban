@@ -7,6 +7,10 @@
                    zope.lifecycleevent.interfaces.IObjectCreatedEvent"
               handler=".opinionRequestEvents.setDefaultLinkedInquiry" />
 
+  <subscriber for="..interfaces.IRecipientCadastre
+                   zope.lifecycleevent.interfaces.IObjectRemovedEvent"
+              handler=".inquiryEvents.delete_recipient_cadastre" />
+
   <subscriber for="..interfaces.IContact
                    zope.lifecycleevent.interfaces.IObjectCreatedEvent"
               handler=".contactEvents.setInterface" />
@@ -75,6 +79,10 @@
                    Products.DCWorkflow.interfaces.IAfterTransitionEvent"
               handler=".licenceEvents.close_all_tasks" />
 
+  <subscriber for="..interfaces.IGenericLicence
+                   Products.DCWorkflow.interfaces.IAfterTransitionEvent"
+              handler=".licenceEvents.close_all_events" />
+
   <subscriber for="..interfaces.IUrbanEvent
                    Products.DCWorkflow.interfaces.IAfterTransitionEvent"
               handler=".licenceEvents.reindex_attachments_permissions" />
@@ -89,7 +97,7 @@
 
   <subscriber for="..interfaces.IUrbanEvent
                    Products.Archetypes.interfaces.IObjectInitializedEvent"
-              handler=".urbanEventEvents.setEventTypeType"/>
+              handler=".urbanEventEvents.setEventType"/>
 
   <subscriber for="..interfaces.IUrbanEvent
                    Products.Archetypes.interfaces.IObjectInitializedEvent"
@@ -123,6 +131,7 @@
                    zope.lifecycleevent.interfaces.IObjectCreatedEvent"
               handler=".followupEvents.setLinkedReport" />
 
+  <!-- [DX] TO DELETE once all UrbanEventType subclasses are migrated to DX [DX] -->
   <subscriber for="..interfaces.IUrbanEventType
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".urbanEventTypesEvents.updateKeyEvent" />
@@ -132,6 +141,19 @@
               handler=".urbanEventTypesEvents.updateEventType" />
 
   <subscriber for="..interfaces.IUrbanEventType
+                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+              handler=".urbanEventTypesEvents.forceEventTypeCollege" />
+  <!-- [DX] TO DELETE once all UrbanEventType subclasses are migrated to DX [DX] -->
+
+  <subscriber for="imio.urban.core.contents.eventconfig.IEventConfig
+                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+              handler=".urbanEventTypesEvents.updateKeyEvent" />
+
+  <subscriber for="imio.urban.core.contents.eventconfig.IEventConfig
+                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+              handler=".urbanEventTypesEvents.updateEventType" />
+
+  <subscriber for="imio.urban.core.contents.eventconfig.IEventConfig
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".urbanEventTypesEvents.forceEventTypeCollege" />
 

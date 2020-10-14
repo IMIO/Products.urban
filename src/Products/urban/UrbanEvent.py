@@ -236,7 +236,7 @@ schema = Schema((
             visible=False,
             label=_('urban_label_urbaneventtypes', default='Urbaneventtypes'),
         ),
-        allowed_types=('UrbanEventType', 'OpinionRequestEventType'),
+        allowed_types=('EventConfig', 'OpinionEventConfig', 'FollowUpEventConfig'),
         multiValued=0,
         relationship='UrbanEventType',
     ),
@@ -453,7 +453,7 @@ schema = Schema((
 )
 
 ##code-section after-local-schema #fill in your manual code here
-optional_fields = [field.getName() for field in schema.filterFields(isMetadata=False) if field.getName() != 'eventDate']
+optional_fields = [field.getName() for field in schema.filterFields(isMetadata=False) if field.getName() not in ['eventDate', 'urbaneventtypes']]
 setOptionalAttributes(schema, optional_fields)
 ##/code-section after-local-schema
 
