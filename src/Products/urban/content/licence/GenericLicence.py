@@ -35,6 +35,8 @@ from Products.DataGridField import DataGridField, DataGridWidget
 from Products.DataGridField.Column import Column
 from Products.DataGridField.SelectColumn import SelectColumn
 
+from collective.plonefinder.browser.interfaces import IFinderUploadCapable
+from collective.quickupload.interfaces import IQuickUploadCapable
 from Products.urban.config import *
 from Products.urban import UrbanMessage as _
 
@@ -1026,7 +1028,9 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
     implements(
         interfaces.IGenericLicence,
         IFacetedTaskContainer,
-        IPossibleFacetedNavigable
+        IPossibleFacetedNavigable,
+        IFinderUploadCapable,
+        IQuickUploadCapable
     )
 
     meta_type = 'GenericLicence'
