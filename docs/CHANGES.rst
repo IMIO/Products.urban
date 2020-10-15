@@ -56,6 +56,9 @@ Changes
 - Migrate ParcellingTerm (Archetype) type to Parcelling (dexterity) type.
   [sdelcourt]
 
+- Pre-check all manageable licences for foldermanager creation. [URB-1935]
+  [jjaumotte]
+  
 - Add field to define final states closing all the urban events on a licence. [URB-2082]
   [sdelcourt]
 

@@ -67,6 +67,7 @@ schema = Schema((
             i18n_domain='urban',
         ),
         multiValued=True,
+        default_method='listLicenceTypes',
         vocabulary='listLicenceTypes',
     ),
 
