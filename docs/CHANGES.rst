@@ -65,6 +65,8 @@ Changes
 - Licences can created as a copy of another licence (fields, applicants and parcels can be copied). [URB-1934]
   [sdelcourt]
 
+- Add collective.quickupload to do multiple file upload on licences and events.
+
 
 2.4 (2019-03-25)
 ----------------
