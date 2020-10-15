@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+from Products.urban import URBAN_TYPES
 from Products.urban.testing import URBAN_TESTS_CONFIG
 from Products.urban.testing import URBAN_TESTS_CONFIG_FUNCTIONAL
 from Products.urban.tests.helpers import BrowserTestCase
@@ -118,3 +118,12 @@ class TestUrbanConfigFunctional(BrowserTestCase):
         regex2 = "{}.*{}.*{}".format(foldermanager3.Title(), foldermanager2.Title(), foldermanager1.Title())
         regex2 = regex2.replace('(', '\(').replace(')', '\)')  # escape parenthesis
         self.assertTrue(re.search(regex2, self.browser.contents, flags=re.DOTALL))
+
+    def test_foldermanagers_default_manageablelicences(self):
+        fm_folder = self.portal.portal_urban.foldermanagers
+        with api.env.adopt_roles(['Manager']):
+            foldermanagertest = api.content.create(
+                type='FolderManager', container=fm_folder, id='foldermanagertest',
+                name1='Dujardin', name2='Jan', grade='agent-technique'
+            )
+            self.assertEqual(foldermanagertest.manageableLicences, tuple(URBAN_TYPES))
