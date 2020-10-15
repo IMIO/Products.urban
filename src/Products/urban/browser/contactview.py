@@ -115,10 +115,9 @@ class RecipientCadastreView(BrowserView):
 
 
 class CopyRecipientCadastreToClaimantView(BrowserView):
-
-    def __init__(self, context, request):
-        self.context = context
-        self.request = request
+    """
+    Copy to claimant view.
+    """
 
     def __call__(self):
         site = api.portal.get()

@@ -438,13 +438,9 @@
             <tal:listing content="structure view/renderAttachmentsListing" />
         </div>
 
-        <tal:add_attachment i18n:domain="urban"
-                            tal:define="mayAddAttachment view/mayAddAttachment">
-            <form tal:condition="mayAddAttachment" name="quickAdd" action="createObject" method="post">
-                <input name="type_name" value="File" type="hidden">
-                <input i18n:attributes="value" class="context apButton" id="event" value="add_an_attachment" type="submit">
-            </form>
-        </tal:add_attachment>
+        <a tal:condition="view/mayAddAttachment" href="@@quick_upload?typeupload=File" class="link-overlay-urban-annex link-overlay" style="cursor: pointer;">
+            <img title="Ajouter plusieurs annexes" src="icon_add_big.png">
+        </a>
     </fieldset>
 
     <fieldset>
