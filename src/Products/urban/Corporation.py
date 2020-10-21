@@ -173,6 +173,7 @@ class Corporation(BaseContent, Applicant, BrowserDefaultMixin):
             lastName = cgi.escape(lastName).decode('utf8')
             personRole = cgi.escape(personRole).decode('utf8')
             nameSignaletic = "%s %s<br />%s %s %s" % (legalForm, denomination, title, firstName, lastName)
+        nameSignaletic = nameSignaletic.encode('utf8')
         return nameSignaletic
 
 
