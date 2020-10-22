@@ -88,7 +88,7 @@ class CODT_Article127(BaseFolder, CODT_BaseBuildLicence, BrowserDefaultMixin):
         small = 'small' in values
         opinions = 'external_opinions' in selection
         inquiry = set(selection).intersection(
-            set('inquiry', 'light_inquiry', 'initiative_light_inquiry', 'inquiry')
+            set(['inquiry', 'light_inquiry', 'initiative_light_inquiry', 'initiative_inquiry'])
         )
 
         if unknown:
