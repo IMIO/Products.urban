@@ -446,7 +446,9 @@ class CODT_BaseBuildLicence(BaseFolder, CODT_Inquiry,  BaseBuildLicence, Browser
         selection = [v['val'] for v in values if v['selected']]
         unknown = 'ukn' in selection
         opinions = 'external_opinions' in selection
-        inquiry = 'inquiry' in selection or 'light_inquiry' in selection
+        inquiry = set(selection).intersection(
+            set('inquiry', 'light_inquiry', 'initiative_light_inquiry', 'inquiry')
+        )
         FD = 'FD' in selection
         delay = 75
 
