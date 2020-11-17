@@ -3,6 +3,8 @@
 from zope.pagetemplate.engine import TrustedAppPT
 from zope.pagetemplate.pagetemplate import PageTemplate
 
+from plone import api
+
 
 class DefaultTextRenderer(TrustedAppPT, PageTemplate):
     """
@@ -18,7 +20,8 @@ class DefaultTextRenderer(TrustedAppPT, PageTemplate):
         return rendered
 
     def pt_getContext(self, args=(), options={}, **ignored):
-        base_context = self.docgen_view.get_base_generation_context(None, None)
+        with api.env.adopt_roles(['Manager']):
+            base_context = self.docgen_view.get_base_generation_context(None, None)
         rval = {
             'template': self,
             'options': options,
