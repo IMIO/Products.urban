@@ -22,5 +22,6 @@
     <dependency>profile-Products.cron4plone:default</dependency>
     <dependency>profile-urban.vocabulary:default</dependency>
     <dependency>profile-imio.urban.core:default</dependency>
+    <dependency>profile-imio.pm.wsclient:default</dependency>
   </dependencies>
 </metadata>
