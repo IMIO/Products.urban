@@ -5,6 +5,12 @@ Changes
 2.5 (unreleased)
 ----------------
 
+- Add copy to claymant action for recipient_cadastre in inquiry event
+  [sdelcourt / jjaumotte]
+
+- Fix liste_220 title encoding error + translation [SUP-15084]
+  [jjaumotte]
+
 - provides organizations to consult based on external directions
   [fngaha]
 
