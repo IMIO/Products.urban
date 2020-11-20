@@ -929,6 +929,9 @@ msgstr ""
 msgid "no_parcels_found_on_licence"
 msgstr ""
 
+msgid "title_encoding_error_label"
+msgstr ""
+
 msgid "no_street_name_found_on_licence"
 msgstr ""
 
