@@ -164,6 +164,11 @@ class UrbainXMLExport(BrowserView):
         html_list.append('<HTML><TABLE>')
         for licence_brain in licence_brains:
             licence = licence_brain.getObject()
+            try:
+                licence.title.encode('iso-8859-1')
+            except UnicodeEncodeError:
+                check(self, False, u'title_encoding_error_label', {'reference': str(licence.getReference())})
+                continue
             applicantObj = licence.getApplicants() and licence.getApplicants()[0] or None
             architects = licence.getField('architects') and licence.getArchitects() or []
             if api.content.get_state(licence) in ['accepted', 'authorized']:
