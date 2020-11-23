@@ -149,6 +149,14 @@ def parcellingterm_parcelinfoindex(obj):
 
 
 @indexer(IGenericLicence)
+def genericlicence_modified(licence):
+    wf_modification = licence.workflow_history[licence.workflow_history.keys()[0]][-1]['time']
+    if wf_modification > licence.modified():
+        return wf_modification
+    return licence.modified()
+
+
+@indexer(IGenericLicence)
 def genericlicence_streetsuid(licence):
     streets = [location['street'] for location in licence.getWorkLocations()]
     return streets

@@ -27,6 +27,7 @@
   <adapter name="Subject" factory=".indexes.inspection_task_followups" />
   <adapter name="commentators" factory=".indexes.licence_covid" />
   <adapter name="commentators" factory=".indexes.task_covid" />
+  <adapter name="modified" factory=".indexes.genericlicence_modified" />
 
   <!-- Unindex UrbanEvent, UrbanDoc, Applicant and PortionOut -->
 
