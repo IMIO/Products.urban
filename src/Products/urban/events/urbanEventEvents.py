@@ -70,7 +70,7 @@ def generateSingletonDocument(urban_event, event):
     if len(templates) == 1:
         pod_template = templates[0]
         if pod_template.can_be_generated(urban_event):
-            output_format = 'odt'
+            output_format = pod_template.pod_formats[0] or 'odt'
             generation_view = urban_event.restrictedTraverse('urban-document-generation')
             generation_view(pod_template.UID(), output_format)
 
