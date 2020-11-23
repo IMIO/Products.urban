@@ -68,7 +68,7 @@ def generateSingletonDocument(urban_event, event):
     if not urban_tool.getGenerateSingletonDocuments():
         return
 
-    templates = urban_event.getTemplates()
+    templates = [t for t in urban_event.getTemplates() if api.content.get_state(t) == 'enabled']
     if len(templates) == 1:
         pod_template = templates[0]
         if pod_template.can_be_generated(urban_event):
