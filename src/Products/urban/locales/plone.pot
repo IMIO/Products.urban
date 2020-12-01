@@ -42,6 +42,39 @@ msgstr ""
 msgid "BuildLicence"
 msgstr ""
 
+msgid "CODT_Article127"
+msgstr ""
+
+msgid "CODT_BuildLicence"
+msgstr ""
+
+msgid "CODT_CommercialLicence"
+msgstr ""
+
+msgid "CODT_IntegratedLicence"
+msgstr ""
+
+msgid "CODT_NotaryLetter"
+msgstr ""
+
+msgid "CODT_ParcelOutLicence"
+msgstr ""
+
+msgid "CODT_UniqueLicence"
+msgstr ""
+
+msgid "CODT_UrbanCertificateOne"
+msgstr ""
+
+msgid "CODT_UrbanCertificateTwo"
+msgstr ""
+
+msgid "PatrimonyCertificate"
+msgstr ""
+
+msgid "ProjectMeeting"
+msgstr ""
+
 msgid "IntegratedLicence"
 msgstr ""
 
@@ -55,6 +88,12 @@ msgid "UrbanCertificateTwo"
 msgstr ""
 
 msgid "NotaryLetter"
+msgstr ""
+
+msgid "RoadDecree"
+msgstr ""
+
+msgid "Ticket"
 msgstr ""
 
 msgid "Notary"
@@ -75,6 +114,12 @@ msgstr ""
 msgid "EnvClassTwo"
 msgstr ""
 
+msgid "EnvClassBordering"
+msgstr ""
+
+msgid "ExplosivesPossession"
+msgstr ""
+
 msgid "FolderManager"
 msgstr ""
 
@@ -87,9 +132,11 @@ msgstr ""
 msgid "Declaration"
 msgstr ""
 
-msgid "OpinionRequestEventType"
+msgid "Inspection"
 msgstr ""
 
+msgid "OpinionRequestEventType"
+msgstr ""
 
 msgid "PortionOut"
 msgstr ""
