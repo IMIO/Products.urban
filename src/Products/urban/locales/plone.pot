@@ -51,10 +51,58 @@ msgstr ""
 msgid "UrbanEventFollowUp"
 msgstr ""
 
+msgid "CODT_Article127"
+msgstr ""
+
+msgid "CODT_BuildLicence"
+msgstr ""
+
+msgid "CODT_CommercialLicence"
+msgstr ""
+
+msgid "CODT_IntegratedLicence"
+msgstr ""
+
+msgid "CODT_NotaryLetter"
+msgstr ""
+
+msgid "CODT_ParcelOutLicence"
+msgstr ""
+
+msgid "CODT_UniqueLicence"
+msgstr ""
+
+msgid "CODT_UrbanCertificateOne"
+msgstr ""
+
+msgid "CODT_UrbanCertificateTwo"
+msgstr ""
+
+msgid "PatrimonyCertificate"
+msgstr ""
+
+msgid "PreliminaryNotice"
+msgstr ""
+
+msgid "ProjectMeeting"
+msgstr ""
+
 msgid "BuildLicence"
 msgstr ""
 
+msgid "ExplosivesPossession"
+msgstr ""
+
+msgid "Inspection"
+msgstr ""
+
 msgid "IntegratedLicence"
+msgstr ""
+
+msgid "RoadDecree"
+msgstr ""
+
+msgid "Ticket"
 msgstr ""
 
 msgid "UniqueLicence"
@@ -76,6 +124,9 @@ msgid "Locality"
 msgstr ""
 
 msgid "Contact"
+msgstr ""
+
+msgid "EnvClassBordering"
 msgstr ""
 
 msgid "EnvClassOne"
@@ -363,8 +414,5 @@ msgid "rubrics_history"
 msgstr ""
 
 msgid "additionalLegalConditions_history"
-msgstr ""
-
-msgid "Ticket"
 msgstr ""
 
