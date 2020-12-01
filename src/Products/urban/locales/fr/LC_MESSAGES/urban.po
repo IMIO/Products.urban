@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2020-11-18 11:04+0000\n"
+"POT-Creation-Date: 2020-12-01 11:47+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -2027,6 +2027,10 @@ msgstr "Gérer les notaires"
 msgid "manage_parcellings"
 msgstr "Gérer les lotissements"
 
+#: ../browser/templates/globalmacros.pt:39
+msgid "manual_parcel"
+msgstr ""
+
 # config folders
 msgid "map_configs_folder_title"
 msgstr "Configuration des cartes"
@@ -2396,6 +2400,7 @@ msgstr "SDC"
 msgid "search-last-elements"
 msgstr "Derniers éléments"
 
+#: ../browser/templates/globalmacros.pt:33
 #: ../browser/templates/searchparcels.pt:30
 #: ../skins/urban_templates/lot_view.pt:26
 msgid "search_parcels"
