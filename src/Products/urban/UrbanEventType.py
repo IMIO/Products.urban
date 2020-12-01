@@ -278,15 +278,30 @@ class UrbanEventType(OrderedBaseFolder, UrbanConfigurationValue, BrowserDefaultM
 
     def listActivatedDates(self):
         from Products.urban.content.UrbanEventInquiry import UrbanEventInquiry_schema
+        from Products.urban.content.UrbanEventInspectionReport import schema as report_schema
 
         activated_fields = self.getActivatedFields()
         activated_fields = type(activated_fields) == str and [activated_fields] or activated_fields
         activated_date_fields = []
-        for field in UrbanEventInquiry_schema.getSchemataFields('default'):
+        inquiry_schema = UrbanEventInquiry_schema.getSchemataFields('default')
+        report_schema = report_schema.getSchemataFields('default')
+        for field in inquiry_schema + report_schema:
             is_date_field = field.getType() == 'Products.Archetypes.Field.DateTimeField'
             if is_date_field:
                 fieldname = field.getName()
                 if getattr(field, 'optional', False) and fieldname in activated_fields:
+                    activated_date_fields.append(
+                        (
+                            fieldname,
+                            translate(
+                                "urban_label_" + fieldname,
+                                'urban',
+                                default=fieldname,
+                                context=self.REQUEST
+                            )
+                        )
+                    )
+                elif not getattr(field, 'optional', False) and fieldname != 'eventDate':
                     activated_date_fields.append(
                         (
                             fieldname,
