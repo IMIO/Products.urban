@@ -298,6 +298,18 @@ class UrbanEventType(OrderedBaseFolder, UrbanConfigurationValue, BrowserDefaultM
                             )
                         )
                     )
+                elif not getattr(field, 'optional', False):
+                    activated_date_fields.append(
+                        (
+                            fieldname,
+                            translate(
+                                "urban_label_" + fieldname,
+                                'urban',
+                                default=fieldname,
+                                context=self.REQUEST
+                            )
+                        )
+                    )
         to_return = DisplayList(
             [('eventDate', self.getEventDateLabel().decode('utf-8'))] + activated_date_fields
         )
