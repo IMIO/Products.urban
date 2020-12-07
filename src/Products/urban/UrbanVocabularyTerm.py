@@ -169,7 +169,7 @@ class UrbanVocabulary(object):
 
     implements(IVocabulary)
 
-    def __init__(self, path, vocType="UrbanVocabularyTerm", id_to_use="id", value_to_use="Title", sort_on="getObjPositionInParent", inUrbanConfig=True, allowedStates=['enabled'], with_empty_value=False, datagridfield_key='street'):
+    def __init__(self, path, vocType="UrbanVocabularyTerm", id_to_use="id", value_to_use="title", sort_on="getObjPositionInParent", inUrbanConfig=True, allowedStates=['enabled'], with_empty_value=False, datagridfield_key='street'):
         self.path = path
         self.vocType = vocType
         self.id_to_use = id_to_use
