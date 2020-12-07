@@ -23,6 +23,7 @@ from Products.Archetypes.interfaces import IVocabulary
 
 from Products.urban.config import *
 from zope.globalrequest import getRequest
+from zope.i18n import translate
 
 ##code-section module-header #fill in your manual code here
 from plone import api
@@ -198,10 +199,18 @@ class UrbanVocabulary(object):
         raw_voc = self.get_raw_voc(context)
         url = getRequest() and getRequest().getURL()
         if url and (url.endswith('edit') or url.endswith('@@fieldeditoverlay')):
-            result = DisplayList([(v['id'], u'{}{}'.format(v.get('numbering', ''), v['title'])) for v in raw_voc if v['enabled']])
+            result = [(v['id'], u'{}{}'.format(v.get('numbering', ''), v[self.value_to_use])) for v in raw_voc if v['enabled']]
         else:
-            result = DisplayList([(v['id'], v['title']) for v in raw_voc])
-        return result
+            result = [(v['id'], v[self.value_to_use]) for v in raw_voc]
+        if self.with_empty_value:
+            val = translate(
+                EMPTY_VOCAB_VALUE,
+                'urban',
+                context=context.REQUEST,
+                default=EMPTY_VOCAB_VALUE
+            )
+            result = [('', val)] + result
+        return DisplayList(result)
 
     def getDisplayListForTemplate(self, content_instance):
         portal_urban = api.portal.get_tool('portal_urban')
