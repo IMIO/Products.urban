@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2020-12-01 11:47+0000\n"
+"POT-Creation-Date: 2020-12-07 09:23+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -304,10 +304,6 @@ msgstr "Agent traitant"
 
 msgid "Found folder(s)"
 msgstr "Dossier(s) trouvé(s)"
-
-#: ../browser/templates/searchparcels.pt:183
-msgid "Found parcel(s)"
-msgstr ""
 
 #: ../profiles.zcml:42
 msgid "Full config profile for urban."
@@ -707,10 +703,6 @@ msgstr "Configuration d'échéancier"
 #: ../browser/templates/portlet_scheduled_licences.pt:5
 msgid "Scheduled licences"
 msgstr "Échéancier par procédure"
-
-#: ../browser/templates/searchparcels.pt:42
-msgid "Search parcel(s)"
-msgstr ""
 
 #: ../docgen/UrbanTemplate.py:26
 msgid "Select for which content types the template will be available."
@@ -1386,12 +1378,12 @@ msgid "equipmenttypes_folder_title"
 msgstr "Equipements de la voirie"
 
 #. Default: "Bis should be a number < 100"
-#: ../validators/validator.py:164
+#: ../validators/validator.py:169
 msgid "error_bis"
 msgstr "Bis doit être un nombre compris entre 0 et 100 (ex: 42)"
 
 #. Default: "Exposant should be uppercase letters or digits"
-#: ../validators/validator.py:176
+#: ../validators/validator.py:181
 msgid "error_exposant"
 msgstr "L'exposant doit être une lettre majuscule ou un nombre"
 
@@ -1399,23 +1391,28 @@ msgid "error_in_expr_contact_admin"
 msgstr "<b>Erreur dans l'expression ${expr} liée à ce terme de vocabulaire, contactez votre administrateur !!!</b>"
 
 #. Default: "The inquiry end date falls during suspension period from {} to {}from"
-#: ../validators/validator.py:229
+#: ../validators/validator.py:234
 msgid "error_inquiry_suspension"
 msgstr ""
 
 #. Default: "Delay should be an integer"
-#: ../validators/validator.py:248
+#: ../validators/validator.py:253
 msgid "error_integer"
 msgstr "Le délai doit être un entier"
 
 #. Default: "Cannot select class 1 and class 2 toghether"
-#: ../validators/validator.py:122
+#: ../validators/validator.py:127
 msgid "error_multiple_class_type"
 msgstr ""
 
 #. Default: "Please select only ONE of the inquiry types"
-#: ../validators/validator.py:117
+#: ../validators/validator.py:122
 msgid "error_multiple_inquiry_type"
+msgstr "Choisissez un seul type d'enquête"
+
+#. Default: "Cannot select 'simple' with another value"
+#: ../validators/validator.py:117
+msgid "error_procedure_choice_simple"
 msgstr ""
 
 #. Default: "Cannot select 'unknown' with another value"
@@ -1424,12 +1421,12 @@ msgid "error_procedure_choice_unknown"
 msgstr ""
 
 #. Default: "Puissance should be a number < 100"
-#: ../validators/validator.py:188
+#: ../validators/validator.py:193
 msgid "error_puissance"
 msgstr "La puissance doit être un nombre compris entre 0 et 100 (ex: 42)"
 
 #. Default: "Radical should be a number"
-#: ../validators/validator.py:152
+#: ../validators/validator.py:157
 msgid "error_radical"
 msgstr "Le radical doit être un nombre (ex:42) "
 
@@ -1439,7 +1436,7 @@ msgid "error_reference"
 msgstr "La référence existe déjà sur un autre permis"
 
 #. Default: "The reference does not exist"
-#: ../validators/validator.py:206
+#: ../validators/validator.py:211
 msgid "error_reference_does_not_exist"
 msgstr ""
 
@@ -1449,7 +1446,7 @@ msgid "error_reference_format"
 msgstr ""
 
 #. Default: "Section should be a single uppercase letter"
-#: ../validators/validator.py:140
+#: ../validators/validator.py:145
 msgid "error_section"
 msgstr "La section doit être une seule lettre majuscule (ex: C)"
 
@@ -1708,16 +1705,6 @@ msgstr "Retour"
 
 msgid "groundstatestatus_folder_title"
 msgstr "Repris à la banque de données d'état des sols"
-
-#. Default: "You can not search for parcels for now because there was a problem. Please contact your system administrator and give him the red error message here above"
-#: ../browser/templates/searchparcels.pt:43
-msgid "help_search_connection_problem"
-msgstr ""
-
-#. Default: "Choose one of the following forms to search for parcels. You can cumulate criteria if you exactly know what you are looking for"
-#: ../browser/templates/searchparcels.pt:48
-msgid "help_search_parcels"
-msgstr ""
 
 msgid "inadmissibilityreasons_folder_title"
 msgstr "Motifs d'irrecevabilité"
@@ -2401,8 +2388,6 @@ msgid "search-last-elements"
 msgstr "Derniers éléments"
 
 #: ../browser/templates/globalmacros.pt:33
-#: ../browser/templates/searchparcels.pt:30
-#: ../skins/urban_templates/lot_view.pt:26
 msgid "search_parcels"
 msgstr "Ajouter"
 
@@ -2615,12 +2600,10 @@ msgid "urban_bound_inspections"
 msgstr "Dossiers d'inspections ou PV liés"
 
 #. Default: "Browse old parcels (Only works with the parcel reference)"
-#: ../browser/templates/searchparcels.pt:168
 msgid "urban_browse_old_parcels"
 msgstr "Chercher dans les anciennes parcelles (Par référence cadastrale uniquement)"
 
 #. Default: "Search"
-#: ../browser/templates/searchparcels.pt:172
 msgid "urban_button_search"
 msgstr "Recherche"
 
@@ -3055,11 +3038,6 @@ msgstr "Code 'BestAddress'"
 msgid "urban_label_bestAddressKey"
 msgstr "Clé BestAddress"
 
-#. Default: "Bis"
-#: ../browser/templates/searchparcels.pt:82
-msgid "urban_label_bis"
-msgstr ""
-
 #. Default: "Bound inspection"
 #: ../content/licence/Ticket.py:58
 msgid "urban_label_bound_inspection"
@@ -3440,11 +3418,6 @@ msgstr "Écart"
 msgid "urban_label_divergenceDetails"
 msgstr "Détails concernant l'écart"
 
-#. Default: "Division"
-#: ../browser/templates/searchparcels.pt:63
-msgid "urban_label_division"
-msgstr ""
-
 # PortionOut
 #. Default: "Divisioncode"
 #: PortionOut.py
@@ -3540,7 +3513,7 @@ msgstr "Catégorie du type d'événement"
 msgid "urban_label_exemptFDArticle"
 msgstr "Article 107"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:601
+#: ../content/licence/CODT_BaseBuildLicence.py:602
 msgid "urban_label_exemptFDArticleCODT"
 msgstr "Article D IV.15"
 
@@ -3574,11 +3547,6 @@ msgstr "Référence à la procédure de détention d'explosifs"
 #: PortionsOut.py
 msgid "urban_label_exponent"
 msgstr "Exposant"
-
-#. Default: "Exposant"
-#: ../browser/templates/searchparcels.pt:86
-msgid "urban_label_exposant"
-msgstr ""
 
 #. Default: "expropriation"
 #: ../content/licence/GenericLicence.py:637
@@ -3774,7 +3742,7 @@ msgstr "Étude d'incidences?"
 msgid "urban_label_implantation"
 msgstr "Implantation (art. 137)"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:602
+#: ../content/licence/CODT_BaseBuildLicence.py:603
 msgid "urban_label_implantationCODT"
 msgstr "Implantation (art D.IV.72)"
 
@@ -3958,13 +3926,13 @@ msgstr "Établissement SEVESO"
 msgid "urban_label_isSupplementary"
 msgstr "Supplémentaire?"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:593
+#: ../content/licence/CODT_BaseBuildLicence.py:594
 #: ../content/licence/CODT_UrbanCertificateBase.py:76
 #: ../content/licence/Inspection.py:374
 msgid "urban_label_is_in_parceloutlicences"
 msgstr "Le bien se situe dans un permis d'urbanisation"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:599
+#: ../content/licence/CODT_BaseBuildLicence.py:600
 #: ../content/licence/CODT_UrbanCertificateBase.py:82
 #: ../content/licence/Inspection.py:380
 msgid "urban_label_is_in_sol"
@@ -4337,13 +4305,13 @@ msgstr "Propriétaire"
 msgid "urban_label_parcellings"
 msgstr "Lotissement"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:592
+#: ../content/licence/CODT_BaseBuildLicence.py:593
 #: ../content/licence/CODT_UrbanCertificateBase.py:75
 #: ../content/licence/Inspection.py:373
 msgid "urban_label_parceloutlicences"
 msgstr "Permis d'urbanisation"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:594
+#: ../content/licence/CODT_BaseBuildLicence.py:595
 #: ../content/licence/CODT_UrbanCertificateBase.py:77
 #: ../content/licence/Inspection.py:375
 msgid "urban_label_parceloutlicences_details"
@@ -4356,11 +4324,6 @@ msgstr "Parcelles"
 
 msgid "urban_label_parcelsLocations"
 msgstr "Adresse(s) du bien"
-
-#. Default: "Partie"
-#: ../browser/templates/searchparcels.pt:94
-msgid "urban_label_partie"
-msgstr ""
 
 #. Default: "Pash"
 #: ../content/licence/GenericLicence.py:316
@@ -4600,20 +4563,10 @@ msgstr "Zone de protection"
 msgid "urban_label_publicRoadModifications"
 msgstr "Modifications souhaitées au tracé et à l'équipement des voiries publiques"
 
-#. Default: "Puissance"
-#: ../browser/templates/searchparcels.pt:90
-msgid "urban_label_puissance"
-msgstr ""
-
 #. Default: "Queryable"
 #: Layer.py
 msgid "urban_label_queryable"
 msgstr "Questionnable"
-
-#. Default: "Radical"
-#: ../browser/templates/searchparcels.pt:78
-msgid "urban_label_radical"
-msgstr ""
 
 #. Default: "Rcudetails"
 #: ../content/licence/GenericLicence.py:798
@@ -4931,11 +4884,6 @@ msgstr "Entrez la référence du dossier. Vous pouvez utiliser le caractère '*'
 msgid "urban_label_searchbyname_descr"
 msgstr "Entrez le nom, le prénom ou le numéro de registre national.  Vous pouvez utiliser le caractère '*' pour spécifier que vous cherchez sur une partie de mot"
 
-#. Default: "Section"
-#: ../browser/templates/searchparcels.pt:73
-msgid "urban_label_section"
-msgstr ""
-
 #. Default: "Selectedfield"
 #: UrbanVocabularyTerm.py
 msgid "urban_label_selectedField"
@@ -4989,19 +4937,19 @@ msgstr "Petit patrimoine populaire"
 msgid "urban_label_society"
 msgstr "Société"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:596
+#: ../content/licence/CODT_BaseBuildLicence.py:597
 #: ../content/licence/CODT_UrbanCertificateBase.py:79
 #: ../content/licence/Inspection.py:377
 msgid "urban_label_sol"
 msgstr "SOL"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:598
+#: ../content/licence/CODT_BaseBuildLicence.py:599
 #: ../content/licence/CODT_UrbanCertificateBase.py:81
 #: ../content/licence/Inspection.py:379
 msgid "urban_label_solZone"
 msgstr "Zone de SOL"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:600
+#: ../content/licence/CODT_BaseBuildLicence.py:601
 #: ../content/licence/CODT_UrbanCertificateBase.py:83
 #: ../content/licence/Inspection.py:381
 msgid "urban_label_sol_details"
@@ -5436,31 +5384,19 @@ msgstr "Recherche de dossiers"
 msgid "urban_search_parameters"
 msgstr "Critères de la recherche"
 
-#. Default: "Cadastral reference"
-#: ../browser/templates/searchparcels.pt:57
-msgid "urban_search_parcel_by_cadastral_reference"
-msgstr ""
-
 #. Default: "Folder reference"
 msgid "urban_search_parcel_by_folder_reference"
 msgstr "Référence du dossier"
-
-#. Default: "Location"
-#: ../browser/templates/searchparcels.pt:108
-msgid "urban_search_parcel_by_location"
-msgstr ""
 
 #. Default: "Name"
 msgid "urban_search_parcel_by_name"
 msgstr "Nom"
 
 #. Default: "Proprietary"
-#: ../browser/templates/searchparcels.pt:135
 msgid "urban_search_parcel_by_proprietary"
 msgstr "Propriétaires"
 
 #. Default: "Number"
-#: ../browser/templates/searchparcels.pt:111
 msgid "urban_search_parcel_by_street_number"
 msgstr "N° de police"
 

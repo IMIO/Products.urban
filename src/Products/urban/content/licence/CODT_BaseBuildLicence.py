@@ -432,6 +432,7 @@ class CODT_BaseBuildLicence(BaseFolder, CODT_Inquiry,  BaseBuildLicence, Browser
     def listProcedureChoices(self):
         vocab = (
             ('ukn', 'Non determiné'),
+            ('simple', 'Procédure simple'),
             ('internal_opinions', 'Sollicitation d\'avis internes'),
             ('external_opinions', 'Sollicitation d\'avis externes'),
             ('light_inquiry', 'Annonce de projet'),
