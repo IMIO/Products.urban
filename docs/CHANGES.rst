@@ -75,6 +75,13 @@ Changes
   [sdelcourt]
 
 - Add collective.quickupload to do multiple file upload on licences and events.
+  [sdelcourt]
+
+- Fix empty value display on select fields. [URB-2073]
+  [sdelcourt]
+
+- Add new value 'simple procedure' for CODT BuildLicence procedure choice. [SUP-6566]
+  [sdelcourt]
 
 
 2.4 (2019-03-25)
