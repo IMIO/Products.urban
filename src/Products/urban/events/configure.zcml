@@ -201,6 +201,10 @@
               handler=".dashboard_collection.set_dashboard_columns" />
 
   <subscriber for="..interfaces.IUrbanConfigurationValue
+                   Products.DCWorkflow.interfaces.IAfterTransitionEvent"
+              handler=".configuration_events.update_vocabulary_term_cache" />
+
+  <subscriber for="..interfaces.IUrbanConfigurationValue
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".configuration_events.update_vocabulary_term_cache" />
 
