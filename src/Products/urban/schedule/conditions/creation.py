@@ -583,7 +583,7 @@ class FollowUpWithDelayOverdue(CreationCondition):
         for obj in inspection.objectValues():
             if IFollowupDeadLineTask.providedBy(obj):
                 task = obj
-                if task.get_state() in states_by_status[STARTED] and task.due_date > date.today():
+                if task.get_state() in states_by_status[STARTED] and task.due_date < date.today():
                     return True
         return False
 
