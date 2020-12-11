@@ -35,6 +35,10 @@ class ISendFollowupTask(Interface):
     """ Marker interface for inspection followup events send task."""
 
 
+class IFollowupDeadLineTask(Interface):
+    """ Marker interface for inspection followup deadline task."""
+
+
 class ITaskToCheckDaily(Interface):
     """ Marker interface for tasks that shold be re-evaluated every night """
 
