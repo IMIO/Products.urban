@@ -362,6 +362,7 @@ urbanEventTypes = {
                 },
             ),
             'eventTypeType': ('Products.urban.interfaces.ITheLicenceEvent', 'Products.urban.interfaces.ILicenceNotificationEvent'),
+            'eventPortalType': 'UrbanEventCollege',
         },
         {
             'id': "premiere-reunion-patrimoine",
@@ -676,6 +677,7 @@ urbanEventTypes = {
                 {'id': "codt_purb_annexe_12_decision_octroi_refus.odt", 'title': "Décision (Octroi - Refus)"},
             ),
             'eventTypeType': ('Products.urban.interfaces.ITheLicenceEvent', 'Products.urban.interfaces.ILicenceNotificationEvent'),
+            'eventPortalType': 'UrbanEventCollege',
         },
         {
             'id': "premiere-reunion-patrimoine",
@@ -1753,6 +1755,7 @@ urbanEventTypes = {
             ),
             'eventTypeType': ('Products.urban.interfaces.ITheLicenceEvent',
                               'Products.urban.interfaces.ILicenceNotificationEvent'),
+            'eventPortalType': 'UrbanEventCollege',
         },
         {
             'id': "premiere-reunion-patrimoine",
@@ -2319,6 +2322,7 @@ urbanEventTypes = {
                 {'id': "urb-decision-deliberation-college.odt", 'title': "Delibération du collège d'octroi du permis"},
             ),
             'eventTypeType': ('Products.urban.interfaces.ITheLicenceEvent', 'Products.urban.interfaces.ILicenceNotificationEvent'),
+            'eventPortalType': 'UrbanEventCollege',
         },
         {
             'id': "fiche-recap",
@@ -2661,6 +2665,7 @@ urbanEventTypes = {
                 {'id': "codt_punq_transmis_decision_dgo4.odt", 'title': "Transmis de la décision à la DGO4"},
             ),
             'eventTypeType': 'Products.urban.interfaces.ITheLicenceEvent',
+            'eventPortalType': 'UrbanEventCollege',
         },
         {
             'id': "affichage-decision",
@@ -3273,6 +3278,7 @@ urbanEventTypes = {
                 {'id': "urb-decision-deliberation-college.odt", 'title': "Delibération du collège d'octroi du permis"},
             ),
             'eventTypeType': ('Products.urban.interfaces.ITheLicenceEvent', 'Products.urban.interfaces.ILicenceNotificationEvent'),
+            'eventPortalType': 'UrbanEventCollege',
         },
         {
             'id': "fiche-recap",
@@ -3958,6 +3964,7 @@ urbanEventTypes = {
                 {'id': "urb-decision-deliberation-college.odt", 'title': "Delibération du collège d'octroi du permis"},
             ),
             'eventTypeType': ('Products.urban.interfaces.ITheLicenceEvent', 'Products.urban.interfaces.ILicenceNotificationEvent'),
+            'eventPortalType': 'UrbanEventCollege',
         },
         {
             'id': "fiche-recap",
@@ -4652,6 +4659,7 @@ urbanEventTypes = {
                 {'id': "urb-decision-deliberation-college.odt", 'title': "Delibération du collège d'octroi du permis"},
             ),
             'eventTypeType': ('Products.urban.interfaces.ITheLicenceEvent', 'Products.urban.interfaces.ILicenceNotificationEvent'),
+            'eventPortalType': 'UrbanEventCollege',
         },
         {
             'id': "fiche-recap",
@@ -7481,6 +7489,7 @@ urbanEventTypes = {
                 {'id': "lot-decision-deliberation-college.odt", 'title': "Delibération du collège d'octroi du permis"},
             ),
             'eventTypeType': ('Products.urban.interfaces.ITheLicenceEvent', 'Products.urban.interfaces.ILicenceNotificationEvent'),
+            'eventPortalType': 'UrbanEventCollege',
         },
         {
             'id': "suspension-du-permis",
