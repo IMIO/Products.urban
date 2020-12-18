@@ -5,6 +5,9 @@ Changes
 2.5 (unreleased)
 ----------------
 
+- add new 'other' tax vocabulary entry and new linked free text field taxDetails
+  [jjaumotte]
+
 - provides organizations to consult based on external directions
   [fngaha]
 
