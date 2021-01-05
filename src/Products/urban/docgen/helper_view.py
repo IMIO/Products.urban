@@ -533,7 +533,7 @@ class UrbanDocGenerationEventHelperView(UrbanDocGenerationHelperView):
             if opinionRequestEventType.id in self.getSolicitOpinions():
                 foldermaker['OpinionRequestEventType'] = opinionRequestEventType
                 for urbanEventOpinionRequest in all_opinion_request_events:
-                    if urbanEventOpinionRequest.Title() == opinionRequestEventType.Title():
+                    if urbanEventOpinionRequest.getUrbanEventtypes() == opinionRequestEventType:
                         foldermaker['UrbanEventOpinionRequest'] = urbanEventOpinionRequest
                         foldermakers.append(foldermaker)
                         break
