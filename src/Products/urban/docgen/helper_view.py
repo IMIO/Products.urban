@@ -509,13 +509,15 @@ class UrbanDocGenerationEventHelperView(UrbanDocGenerationHelperView):
         mailing_list = []
         foldermakers = self.getFolderMakers()
         for foldermaker in foldermakers:
-            html_description = foldermaker['OpinionRequestEventType'].Description()
+            event_config = foldermaker['OpinionRequestEventType']
+            html_description = event_config.Description()
             transformed_description = self.portal.portal_transforms.convert(
                 'html_to_web_intelligent_plain_text', html_description).getData().strip('\n ')
             mailing = {
-                'OpinionRequestEventType': foldermaker['OpinionRequestEventType'],
+                'OpinionRequestEventType': event_config,
                 'UrbanEventOpinionRequest': foldermaker['UrbanEventOpinionRequest'],
-                'converted_description': transformed_description
+                'title': event_config.Title(),
+                'description': transformed_description
             }
             mailing_list.append(mailing)
         return mailing_list
