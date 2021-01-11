@@ -27,6 +27,7 @@ from Products.urban import UrbanMessage as _
 from zope.i18n import translate
 from Products.urban.utils import setOptionalAttributes
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 
 optional_fields = []
 ##/code-section module-header
@@ -140,6 +141,15 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     """
     schema.moveField('description', after='notaryContact')
     schema.moveField('foldermanagers', after='workLocations')
+    schema['parcellings'].widget.label = _('urban_label_parceloutlicences')
+    schema['isInSubdivision'].widget.label = _('urban_label_is_in_parceloutlicences')
+    schema['subdivisionDetails'].widget.label = _('urban_label_parceloutlicences_details')
+    schema['pca'].vocabulary = UrbanVocabulary('sols', vocType="PcaTerm", inUrbanConfig=False)
+    schema['pca'].widget.label = _('urban_label_sol')
+    schema['pcaZone'].vocabulary_factory = 'urban.vocabulary.SOLZones'
+    schema['pcaZone'].widget.label = _('urban_label_solZone')
+    schema['isInPCA'].widget.label = _('urban_label_is_in_sol')
+    schema['pcaDetails'].widget.label = _('urban_label_sol_details')
     return schema
 
 finalizeSchema(Division_schema)
