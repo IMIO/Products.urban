@@ -5,6 +5,9 @@ Changes
 2.5 (unreleased)
 ----------------
 
+- Fix fields description msg translation domain [URB-1866]
+  [jjaumotte]
+
 - Add copy to claymant action for recipient_cadastre in inquiry event
   [sdelcourt / jjaumotte]
 
