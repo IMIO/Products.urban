@@ -6,7 +6,6 @@ from Products.urban.config import URBAN_TYPES
 from Products.urban.browser.table.interfaces import IItemForUrbanTable
 from Products.urban.browser.table.interfaces import IBrainForUrbanTable
 from Products.urban.browser.table.interfaces import IObjectForUrbanTable
-from Products.urban.interfaces import IUrbanDoc
 
 from Products.ZCatalog.Lazy import LazyMap
 
@@ -61,7 +60,7 @@ class ItemForUrbanTable():
         obj = self.getObject()
         portal_membership = self.getTool('portal_membership')
         member = portal_membership.getAuthenticatedMember()
-        can_edit = IUrbanDoc.providedBy(obj) and member.has_permission('Modify portal content', obj)
+        can_edit = member.has_permission('Modify portal content', obj)
         return can_edit
 
     @instance.memoize
