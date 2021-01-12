@@ -5,6 +5,9 @@ Changes
 2.5 (unreleased)
 ----------------
 
+- Remove 'provincial' in folderroadtypes vocabulary [URB-2129]
+  [jjaumotte]
+
 - Add copy to claymant action for recipient_cadastre in inquiry event
   [sdelcourt / jjaumotte]
 
