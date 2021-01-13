@@ -107,6 +107,9 @@ Changes
 - Complete codt buildlicence config with 'college repport' event. [URB-2074]
   [sdelcourt]
 
+- Allow multiple parcel add from the 'search parcel' view. [URB-2126]
+  [sdelcourt]
+
 
 2.4 (2019-03-25)
 ----------------
