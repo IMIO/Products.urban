@@ -733,6 +733,45 @@ class LicenceDisplayProxyObject(UrbanBaseProxyObject):
             workLocation_signaletic += separator + self.get_work_location_signaletic(workLocation)
         return workLocation_signaletic
 
+    def getPortionOutsText(self, linebyline=False):
+        """
+          Return a displayable version of the parcels
+        """
+        toreturn = ''
+        isFirst = True
+        first_div = None
+        first_section = None
+        for portionOutObj in self.context.getParcels():
+            #add a separator between every parcel
+            #either a '\n'
+            if not isFirst and linebyline:
+                toreturn += '\n'
+            #or an "and "
+            elif not isFirst:
+                toreturn += ', '
+            elif isFirst:
+                first_div = portionOutObj.getDivisionAlternativeName()
+                toreturn += '%s ' % portionOutObj.getDivisionAlternativeName()
+                first_section = portionOutObj.getSection()
+                toreturn += 'section %s' % portionOutObj.getSection()
+                toreturn += ' n° '.decode('utf8')
+            else:
+                if first_div != portionOutObj.getDivisionAlternativeName():
+                    toreturn += '%s ' % portionOutObj.getDivisionAlternativeName()
+                if first_section != portionOutObj.getSection():
+                    toreturn += 'section %s ' % portionOutObj.getSection()
+            toreturn += ' %s' % portionOutObj.getRadical()
+            if portionOutObj.getBis() != '':
+                if portionOutObj.getBis() != '0':
+                    toreturn += '/%s' % portionOutObj.getBis()
+                else:
+                    toreturn += ' '
+            toreturn += portionOutObj.getExposant()
+            if portionOutObj.getPuissance() != '' and portionOutObj.getPuissance() != '0':
+                    toreturn += ' %s' %portionOutObj.getPuissance()
+            isFirst = False
+        return toreturn
+
     def get_last_opinions_round(self):
         opinions = self._get_last_opinions('solicitOpinionsTo')
         return opinions
