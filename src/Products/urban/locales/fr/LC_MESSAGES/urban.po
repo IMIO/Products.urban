@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2020-12-01 10:31+0000\n"
+"POT-Creation-Date: 2021-01-13 13:16+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -1117,7 +1117,7 @@ msgstr "Risque de ruissellement concentré"
 #: ../browser/templates/map.pt:31
 #: ../browser/templates/map_spw.pt:34
 msgid "concerned_parcels"
-msgstr "Parcelle(s) concernée(s)"
+msgstr "Parcelle(s) du dossier"
 
 #. Default: "Warning, no address has been defined for the works location"
 #: ../browser/templates/contactmacros.pt:55
@@ -4072,7 +4072,7 @@ msgstr "Non applicable"
 #. Default: "Notary(ies)"
 #: ../browser/licence/templates/licencemacros.pt:62
 #: ../content/licence/CODT_UrbanCertificateTwo.py:69
-#: ../content/licence/Division.py:45
+#: ../content/licence/Division.py:46
 msgid "urban_label_notaryContact"
 msgstr "Notaire(s)"
 
@@ -5227,6 +5227,9 @@ msgstr "Aucun élément n'a encore été ajouté"
 #: ../browser/licence/templates/licencetabsmacros.pt:471
 msgid "urban_no_eventtype_defined"
 msgstr "Aucun type d'événement n'est défini dans la configuration pour cet élément"
+
+msgid "urban_search_by_cadastral_reference"
+msgstr "Référence"
 
 msgid "urban_search_descr"
 msgstr "Recherche de dossiers"
