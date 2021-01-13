@@ -202,7 +202,7 @@ class SearchParcelsView(BrowserView):
             parcel_data['partie'] and '1' or '0'
         )
         try:
-            api.content.create(container=self.context, type='Parcel', id=parcel_id, **parcel_data)
+            api.content.create(container=self.context, type='PortionOut', id=parcel_id, **parcel_data)
         except BadRequest as already_created:
             if 'is invalid - it is already in use.' in already_created.message:
                 return
