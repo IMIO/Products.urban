@@ -83,6 +83,9 @@ Changes
 - Add new value 'simple procedure' for CODT BuildLicence procedure choice. [SUP-6566]
   [sdelcourt]
 
+- Allow multiple parcel add from the 'search parcel' view. [URB-2126]
+  [sdelcourt]
+
 
 2.4 (2019-03-25)
 ----------------
