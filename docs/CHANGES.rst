@@ -5,6 +5,9 @@ Changes
 2.5 (unreleased)
 ----------------
 
+- Fix 0 values Bis & Puissance format for getPortionOutText
+  [jjaumotte]
+
 - Add copy to claymant action for recipient_cadastre in inquiry event
   [sdelcourt / jjaumotte]
 
