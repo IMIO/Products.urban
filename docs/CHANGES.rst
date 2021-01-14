@@ -5,6 +5,9 @@ Changes
 2.5 (unreleased)
 ----------------
 
+- Fix 0 values Bis & Puissance format for getPortionOutText
+  [jjaumotte]
+
 - Add notaries mailing [URB-2110]
   [jjaumotte]
 
