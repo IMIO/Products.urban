@@ -276,6 +276,8 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
            This return a list of elements that is used as a vocabulary
            by some fields of differents classes
         """
+        if value_to_use == 'title':
+            value_to_use = 'Title'
         brains = self.listVocabularyBrains(vocToReturn, context, vocType, sort_on, inUrbanConfig, allowedStates, with_empty_value)
         res = []
         if with_empty_value and brains and len(brains) > 1:
