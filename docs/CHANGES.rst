@@ -48,6 +48,9 @@
 - Add field to define final states closing all the urban events on a licence. [URB-2082]
   [sdelcourt]
 
+- Allow multiple parcel add from the 'search parcel' view. [URB-2126]
+  [sdelcourt]
+
 
 2.4 (2019-03-25)
 ----------------

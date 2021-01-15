@@ -195,6 +195,9 @@ msgstr ""
 msgid "Sort results by licence type first, then by delay time"
 msgstr ""
 
+msgid "Search parcel(s)"
+msgstr ""
+
 msgid "Ticket"
 msgstr ""
 
@@ -2704,6 +2707,9 @@ msgid "urban_label_reportCreationDate"
 msgstr ""
 
 msgid "urban_label_reportReceptionDate"
+msgstr ""
+
+msgid "urban_search_by_cadastral_reference"
 msgstr ""
 
 msgid "urban_search_parcel_by_street_number"

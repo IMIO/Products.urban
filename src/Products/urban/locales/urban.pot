@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2020-12-01 10:31+0000\n"
+"POT-Creation-Date: 2021-01-13 13:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -4037,7 +4037,7 @@ msgstr ""
 #. Default: "Notary(ies)"
 #: ../browser/licence/templates/licencemacros.pt:62
 #: ../content/licence/CODT_UrbanCertificateTwo.py:69
-#: ../content/licence/Division.py:45
+#: ../content/licence/Division.py:46
 msgid "urban_label_notaryContact"
 msgstr ""
 
@@ -5189,6 +5189,9 @@ msgstr ""
 #. Default: "No event type is defined in the configuration for this element"
 #: ../browser/licence/templates/licencetabsmacros.pt:471
 msgid "urban_no_eventtype_defined"
+msgstr ""
+
+msgid "urban_search_by_cadastral_reference"
 msgstr ""
 
 msgid "urban_search_descr"

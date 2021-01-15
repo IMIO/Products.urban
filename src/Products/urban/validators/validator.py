@@ -80,7 +80,7 @@ class isNotDuplicatedReferenceValidator:
                 _('error_reference_format', default=u"This reference does not match the expected format of {}".format(regex))
             )
 
-        ref_num = match.groups()
+        ref_num = match.groups() or match.group()
         if not ref_num:
             return 1
 
