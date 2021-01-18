@@ -5,6 +5,9 @@ Changes
 2.5 (unreleased)
 ----------------
 
+- Remove 'provincial' in folderroadtypes vocabulary [URB-2129]
+  [jjaumotte]
+
 - Remove locality name in default text [URB-2124]
   [jjaumotte]
 

@@ -1567,7 +1567,6 @@ default_values = {
             'UrbanVocabularyTerm',
             {'id': "com", 'title': u"Communale"},
             {'id': "priv", 'title': u"Privée"},
-            {'id': "prov", 'title': u"Provinciale"},
             {'id': "reg", 'title': u"Régionale"},
             {'id': "vic", 'title': u"Vicinale"},
         ],
