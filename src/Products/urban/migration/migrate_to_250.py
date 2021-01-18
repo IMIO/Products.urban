@@ -243,6 +243,15 @@ def migrate_inquiry_parcels(context):
     logger.info("migration step done!")
 
 
+def migrate_remove_prov_in_folderroadtypes(context):
+    logger = logging.getLogger('migrate remove prov in folderroadtypes voc')
+    logger.info("starting migration step")
+    urban_tool = api.portal.get_tool('portal_urban')
+    for folderroadtype in urban_tool.folderroadtypes.objectValues():
+        if folderroadtype.id == "prov":
+            api.content.transition(obj=folderroadtype, to_state='disabled')
+    logger.info("migration step done!")
+            
 def migrate_disable_natura2000_folderzone(context):
     logger = logging.getLogger('migrate disable natura2000 folderzone')
     logger.info("starting migration step")
@@ -270,6 +279,7 @@ def migrate(context):
     migrate_parcellings_folder_allowed_type(context)
     migrate_default_states_to_close_all_events(context)
     migrate_inquiry_parcels(context)
+    migrate_remove_prov_in_folderroadtypes(context)
     migrate_disable_natura2000_folderzone(context)
     catalog = api.portal.get_tool('portal_catalog')
     catalog.clearFindAndRebuild()
