@@ -5,6 +5,12 @@ Changes
 2.5 (unreleased)
 ----------------
 
+- Set eventPortalType to UrbanEventCollege by default for all "Délivrance du permis" event in extra profile
+  [jjaumotte]
+
+- add new 'other' tax vocabulary entry and new linked free text field taxDetails
+  [jjaumotte]
+
 - provides organizations to consult based on external directions
   [fngaha]
 

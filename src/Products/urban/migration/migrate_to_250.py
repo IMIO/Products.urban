@@ -191,6 +191,22 @@ def migrate_parcellings_folder_allowed_type(context):
     parcellings.manage_permission('imio.urban: Add Parcelling', ['Manager', 'Editor', ], acquire=0)
 
 
+def migrate_add_tax_other_option(context):
+    """
+    Add 'other' tax vocabulary value for all licence type config
+    Used for show taxDetails field in all licence edition form.
+    """
+    logger = logging.getLogger('urban: migrate_add_tax_other_option')
+    logger.info("starting migration step")
+    portal_urban = api.portal.get_tool('portal_urban')
+    licence_configs = portal_urban.objectValues('LicenceConfig')
+    for licence_config in licence_configs:
+        if "other" not in licence_config.tax:
+            licence_config.tax.invokeFactory('UrbanVocabularyTerm', id='other', title="Autre")
+
+    logger.info("migration step done!")
+
+
 def migrate(context):
     logger = logging.getLogger('urban: migrate to 2.5')
     logger.info("starting migration steps")
@@ -205,6 +221,7 @@ def migrate(context):
     migrate_opinion_request_TAL_expression(context)
     migrate_report_and_remove_urbandelay_portal_type(context)
     migrate_parcellings_folder_allowed_type(context)
+    migrate_add_tax_other_option(context)
     catalog = api.portal.get_tool('portal_catalog')
     catalog.clearFindAndRebuild()
     logger.info("migration done!")

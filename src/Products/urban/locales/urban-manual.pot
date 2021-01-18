@@ -2386,6 +2386,9 @@ msgstr ""
 msgid "urban_label_tax"
 msgstr ""
 
+msgid "urban_label_taxDetails"
+msgstr ""
+
 #. Default: "Templatefooter"
 #: UrbanTool.py
 msgid "urban_label_templateFooter"
