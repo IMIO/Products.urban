@@ -5,6 +5,12 @@ Changes
 2.5 (unreleased)
 ----------------
 
+- Remove locality name in default text [URB-2124]
+  [jjaumotte]
+
+- Remove/disable natura2000 folderzone [URB-2052]
+  [jjaumotte]
+
 - Add notaries mailing [URB-2110]
   [jjaumotte]
 
