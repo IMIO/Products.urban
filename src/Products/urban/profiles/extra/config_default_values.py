@@ -1616,7 +1616,6 @@ default_values = {
             {'id': "zev", 'title': u"zone d'espaces verts"},
             {'id': "zn", 'title': u"zone naturelle"},
             {'id': "zp", 'title': u"zone de parc"},
-            {'id': "znatura2000", 'title': u"zone Natura 2000"},
         ],
 
         'rcu': [
