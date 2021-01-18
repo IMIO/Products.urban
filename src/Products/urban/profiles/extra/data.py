@@ -880,7 +880,16 @@ EventConfigs = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "codt_ln_annexe16.odt", 'title': "Lettre de notaire - Annexe 16"},
+                {
+                    'id': "codt_ln_annexe16.odt",
+                    'title': "Lettre de notaire - Annexe 16",
+                    'context_variables': [
+                        {
+                            'name': 'publipostage',
+                            'value': 'notaires'
+                        }
+                    ]
+                },
             ),
             'eventType': ('Products.urban.interfaces.ITheLicenceEvent',
                           'Products.urban.interfaces.ILicenceNotificationEvent'),
