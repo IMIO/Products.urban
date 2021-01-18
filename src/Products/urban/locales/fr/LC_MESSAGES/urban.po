@@ -2790,7 +2790,7 @@ msgstr "Schéma de développement communal"
 #. Default: "SDC_divergence"
 #: ../content/licence/CODT_BuildLicence.py:47
 msgid "urban_label_SDC_divergence"
-msgstr "dossier en écart au Schéma de développement communal"
+msgstr "Dossier en écart au Schéma de développement communal"
 
 #. Default: "Srs"
 #: Layer.py
