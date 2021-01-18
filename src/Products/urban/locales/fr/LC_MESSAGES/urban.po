@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2020-12-07 09:23+0000\n"
+"POT-Creation-Date: 2021-01-13 13:16+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -704,6 +704,9 @@ msgstr "Configuration d'échéancier"
 msgid "Scheduled licences"
 msgstr "Échéancier par procédure"
 
+msgid "Search parcel(s)"
+msgstr "Chercher des références cadastrales."
+
 #: ../docgen/UrbanTemplate.py:26
 msgid "Select for which content types the template will be available."
 msgstr "Sélectionner les types de contenues autorisés pour ce modèle"
@@ -1189,7 +1192,7 @@ msgstr "Risque de ruissellement concentré"
 #: ../browser/templates/map.pt:31
 #: ../browser/templates/map_spw.pt:34
 msgid "concerned_parcels"
-msgstr "Parcelle(s) concernée(s)"
+msgstr "Parcelle(s) du dossier"
 
 #. Default: "Warning, no address has been defined for the works location"
 #: ../browser/templates/contactmacros.pt:55
@@ -2787,7 +2790,7 @@ msgstr "Schéma de développement communal"
 #. Default: "SDC_divergence"
 #: ../content/licence/CODT_BuildLicence.py:47
 msgid "urban_label_SDC_divergence"
-msgstr "dossier en écart au Schéma de développement communal"
+msgstr "Dossier en écart au Schéma de développement communal"
 
 #. Default: "Srs"
 #: Layer.py
@@ -2957,7 +2960,7 @@ msgstr "Site archéologique"
 #. Default: "Architect(s)"
 #: ../browser/licence/templates/licencemacros.pt:10
 #: ../content/licence/BaseBuildLicence.py:380
-#: ../content/licence/MiscDemand.py:47
+#: ../content/licence/MiscDemand.py:48
 msgid "urban_label_architects"
 msgstr "Architecte(s)"
 
@@ -3928,13 +3931,13 @@ msgstr "Supplémentaire?"
 
 #: ../content/licence/CODT_BaseBuildLicence.py:594
 #: ../content/licence/CODT_UrbanCertificateBase.py:76
-#: ../content/licence/Inspection.py:374
+#: ../content/licence/Division.py:145
 msgid "urban_label_is_in_parceloutlicences"
 msgstr "Le bien se situe dans un permis d'urbanisation"
 
 #: ../content/licence/CODT_BaseBuildLicence.py:600
 #: ../content/licence/CODT_UrbanCertificateBase.py:82
-#: ../content/licence/Inspection.py:380
+#: ../content/licence/Division.py:151
 msgid "urban_label_is_in_sol"
 msgstr "Le bien se situe dans un SOL"
 
@@ -4200,7 +4203,7 @@ msgstr "Non applicable"
 #. Default: "Notary(ies)"
 #: ../browser/licence/templates/licencemacros.pt:47
 #: ../content/licence/CODT_UrbanCertificateTwo.py:69
-#: ../content/licence/Division.py:45
+#: ../content/licence/Division.py:46
 msgid "urban_label_notaryContact"
 msgstr "Notaire(s)"
 
@@ -4307,13 +4310,13 @@ msgstr "Lotissement"
 
 #: ../content/licence/CODT_BaseBuildLicence.py:593
 #: ../content/licence/CODT_UrbanCertificateBase.py:75
-#: ../content/licence/Inspection.py:373
+#: ../content/licence/Division.py:144
 msgid "urban_label_parceloutlicences"
 msgstr "Permis d'urbanisation"
 
 #: ../content/licence/CODT_BaseBuildLicence.py:595
 #: ../content/licence/CODT_UrbanCertificateBase.py:77
-#: ../content/licence/Inspection.py:375
+#: ../content/licence/Division.py:146
 msgid "urban_label_parceloutlicences_details"
 msgstr "Détails sur le permis d'urbanisation"
 
@@ -4939,19 +4942,19 @@ msgstr "Société"
 
 #: ../content/licence/CODT_BaseBuildLicence.py:597
 #: ../content/licence/CODT_UrbanCertificateBase.py:79
-#: ../content/licence/Inspection.py:377
+#: ../content/licence/Division.py:148
 msgid "urban_label_sol"
 msgstr "SOL"
 
 #: ../content/licence/CODT_BaseBuildLicence.py:599
 #: ../content/licence/CODT_UrbanCertificateBase.py:81
-#: ../content/licence/Inspection.py:379
+#: ../content/licence/Division.py:150
 msgid "urban_label_solZone"
 msgstr "Zone de SOL"
 
 #: ../content/licence/CODT_BaseBuildLicence.py:601
 #: ../content/licence/CODT_UrbanCertificateBase.py:83
-#: ../content/licence/Inspection.py:381
+#: ../content/licence/Division.py:152
 msgid "urban_label_sol_details"
 msgstr "Détails concernant le SOL"
 
@@ -5375,6 +5378,9 @@ msgstr "Aucun type d'événement n'est défini dans la configuration pour cet é
 #: ../browser/contactview.py:147
 msgid "urban_recipient_copied_to_claimants"
 msgstr "Propriétaire copié comme réclamant"
+
+msgid "urban_search_by_cadastral_reference"
+msgstr "Référence"
 
 msgid "urban_search_descr"
 msgstr "Recherche de dossiers"
