@@ -11,6 +11,9 @@ Changes
 - Remove/disable natura2000 folderzone [URB-2052]
   [jjaumotte]
 
+- Add notaries mailing [URB-2110]
+  [jjaumotte]
+
 - Add copy to claymant action for recipient_cadastre in inquiry event
   [sdelcourt / jjaumotte]
 
@@ -87,6 +90,9 @@ Changes
   [sdelcourt]
 
 - Add new value 'simple procedure' for CODT BuildLicence procedure choice. [SUP-6566]
+  [sdelcourt]
+
+- Allow multiple parcel add from the 'search parcel' view. [URB-2126]
   [sdelcourt]
 
 
