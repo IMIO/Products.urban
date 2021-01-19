@@ -157,3 +157,59 @@ class TestDocuments(unittest.TestCase):
             for line in log:
                 print "%i error(s) in %s => event: %s => document: %s" % (len(line[0]), line[1], line[2], line[3])
         self.assertEquals(len(log), 0)
+
+
+class TestPortionOutTextFormat(unittest.TestCase):
+    """
+     Names inversion in contact signaletic should occurs only if the option is set and only
+     when we call the signaletic line by line (case where its used in the mail address)
+    """
+
+    layer = URBAN_TESTS_LICENCES
+
+    def setUp(self):
+        portal = self.layer['portal']
+        self.buildlicence = portal.urban.buildlicences.objectValues()[-1]
+        self.helper_view = self.buildlicence.unrestrictedTraverse('document_generation_helper_view')
+        self.document_proxy_licence = self.helper_view.context
+        login(portal, 'urbaneditor')
+
+    def testPortionOutsTextOutputFormat(self):
+        # test getPortionOutsText helper view method output format
+        # simple parcel
+        self.buildlicence.invokeFactory('Parcel', 'test_parcel',
+                                        division='62006',
+                                        section='A',
+                                        radical='86',
+                                        exposant='C'
+                                        )
+        # parcel = self.document_proxy_licence.getParcels()[-1]
+        self.failUnless(self.document_proxy_licence.getPortionOutsText().encode('utf-8').endswith("86 C"))
+        # parcel with bis
+        self.buildlicence.invokeFactory('Parcel', 'test_parcel2',
+                                        division='62006',
+                                        section='A',
+                                        radical='87',
+                                        bis='2',
+                                        exposant='D'
+                                        )
+        self.failUnless(self.document_proxy_licence.getPortionOutsText().encode('utf-8').endswith("86 C,  87/2 D"))
+        # parcel with bis and puissance
+        self.buildlicence.invokeFactory('Parcel', 'test_parcel3',
+                                        division='62006',
+                                        section='A',
+                                        radical='88',
+                                        bis='3',
+                                        exposant='E',
+                                        puissance='4'
+                                        )
+        self.failUnless(self.document_proxy_licence.getPortionOutsText().encode('utf-8').endswith("86 C,  87/2 D,  88/3 E 4"))
+        # parcel with puissance only
+        self.buildlicence.invokeFactory('Parcel', 'test_parcel4',
+                                        division='62006',
+                                        section='A',
+                                        radical='89',
+                                        exposant='F',
+                                        puissance='5'
+                                        )
+        self.failUnless(self.document_proxy_licence.getPortionOutsText().encode('utf-8').endswith("86 C,  87/2 D,  88/3 E 4,  89 F 5"))
