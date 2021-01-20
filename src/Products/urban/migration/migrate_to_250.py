@@ -267,8 +267,9 @@ def migrate_inquiry_investigationStart_date(context):
     """
     logger = logging.getLogger('migrate inquiry start/end date')
     logger.info("starting migration step")
+    catalog = api.portal.get_tool('portal_catalog')
     eventtypes = [b.getObject() for b in
-                          catalog(portal_type=['UrbanEventType', 'EventConfig'])]
+                  catalog(portal_type=['UrbanEventType', 'EventConfig'])]
     for eventtype in eventtypes:
         active_fields = eventtype.getActivatedFields()
         if 'investigationEnd' in active_fields or 'investigationStart' in active_fields:
