@@ -243,6 +243,42 @@ def migrate_inquiry_parcels(context):
     logger.info("migration step done!")
 
 
+def migrate_remove_prov_in_folderroadtypes(context):
+    logger = logging.getLogger('migrate remove prov in folderroadtypes voc')
+    logger.info("starting migration step")
+    urban_tool = api.portal.get_tool('portal_urban')
+    for folderroadtype in urban_tool.folderroadtypes.objectValues():
+        if folderroadtype.id == "prov":
+            api.content.transition(obj=folderroadtype, to_state='disabled')
+    logger.info("migration step done!")
+
+def migrate_disable_natura2000_folderzone(context):
+    logger = logging.getLogger('migrate disable natura2000 folderzone')
+    logger.info("starting migration step")
+    urban_tool = api.portal.get_tool('portal_urban')
+    for folderzone in urban_tool.folderzones.objectValues():
+        if folderzone.id == "znatura2000":
+            api.content.transition(obj=folderzone, to_state='disabled')
+    logger.info("migration step done!")
+
+def migrate_inquiry_investigationStart_date(context):
+    """
+    investigationStart and investigationEnd are no longer optional fields
+    """
+    logger = logging.getLogger('migrate inquiry start/end date')
+    logger.info("starting migration step")
+    catalog = api.portal.get_tool('portal_catalog')
+    eventtypes = [b.getObject() for b in
+                  catalog(portal_type=['UrbanEventType', 'EventConfig'])]
+    for eventtype in eventtypes:
+        active_fields = eventtype.getActivatedFields()
+        if 'investigationEnd' in active_fields or 'investigationStart' in active_fields:
+            new_value = [f for f in active_fields if f not in ['investigationStart', 'investigationEnd']]
+            eventtype.activatedFields = new_value
+            logger.info("migrated inquiry config {}".format(eventtype))
+    logger.info("migration step done!")
+
+
 def migrate(context):
     logger = logging.getLogger('urban: migrate to 2.5')
     logger.info("starting migration steps")
@@ -257,9 +293,12 @@ def migrate(context):
     migrate_CODT_UrbanCertificateBase_add_permissions(context)
     migrate_opinion_request_TAL_expression(context)
     migrate_report_and_remove_urbandelay_portal_type(context)
+    migrate_inquiry_investigationStart_date(context)
     migrate_parcellings_folder_allowed_type(context)
     migrate_default_states_to_close_all_events(context)
     migrate_inquiry_parcels(context)
+    migrate_remove_prov_in_folderroadtypes(context)
+    migrate_disable_natura2000_folderzone(context)
     catalog = api.portal.get_tool('portal_catalog')
     catalog.clearFindAndRebuild()
     logger.info("migration done!")
