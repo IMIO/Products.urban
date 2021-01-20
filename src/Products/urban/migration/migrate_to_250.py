@@ -243,6 +243,23 @@ def migrate_inquiry_parcels(context):
     logger.info("migration step done!")
 
 
+def migrate_inquiry_investigationStart_date(context):
+    """
+    investigationStart and investigationEnd are no longer optional fields
+    """
+    logger = logging.getLogger('migrate inquiry start/end date')
+    logger.info("starting migration step")
+    eventtypes = [b.getObject() for b in
+                          catalog(portal_type=['UrbanEventType', 'EventConfig'])]
+    for eventtype in eventtypes:
+        active_fields = eventtype.getActivatedFields()
+        if 'investigationEnd' in active_fields or 'investigationStart' in active_fields:
+            new_value = [f for f in active_fields if f not in ['investigationStart', 'investigationEnd']]
+            eventtype.setActivatedFields(new_value)
+            logger.info("migrated inquiry config {}".format(eventtype))
+    logger.info("migration step done!")
+
+
 def migrate(context):
     logger = logging.getLogger('urban: migrate to 2.5')
     logger.info("starting migration steps")
@@ -257,6 +274,7 @@ def migrate(context):
     migrate_CODT_UrbanCertificateBase_add_permissions(context)
     migrate_opinion_request_TAL_expression(context)
     migrate_report_and_remove_urbandelay_portal_type(context)
+    migrate_inquiry_investigationStart_date(context)
     migrate_parcellings_folder_allowed_type(context)
     migrate_default_states_to_close_all_events(context)
     migrate_inquiry_parcels(context)
