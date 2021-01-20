@@ -256,7 +256,7 @@ def migrate_inquiry_investigationStart_date(context):
         active_fields = eventtype.getActivatedFields()
         if 'investigationEnd' in active_fields or 'investigationStart' in active_fields:
             new_value = [f for f in active_fields if f not in ['investigationStart', 'investigationEnd']]
-            eventtype.setActivatedFields(new_value)
+            eventtype.activatedFields = new_value
             logger.info("migrated inquiry config {}".format(eventtype))
     logger.info("migration step done!")
 
