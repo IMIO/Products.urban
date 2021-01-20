@@ -251,7 +251,7 @@ def migrate_remove_prov_in_folderroadtypes(context):
         if folderroadtype.id == "prov":
             api.content.transition(obj=folderroadtype, to_state='disabled')
     logger.info("migration step done!")
-            
+
 def migrate_disable_natura2000_folderzone(context):
     logger = logging.getLogger('migrate disable natura2000 folderzone')
     logger.info("starting migration step")
@@ -259,6 +259,22 @@ def migrate_disable_natura2000_folderzone(context):
     for folderzone in urban_tool.folderzones.objectValues():
         if folderzone.id == "znatura2000":
             api.content.transition(obj=folderzone, to_state='disabled')
+    logger.info("migration step done!")
+
+def migrate_inquiry_investigationStart_date(context):
+    """
+    investigationStart and investigationEnd are no longer optional fields
+    """
+    logger = logging.getLogger('migrate inquiry start/end date')
+    logger.info("starting migration step")
+    eventtypes = [b.getObject() for b in
+                          catalog(portal_type=['UrbanEventType', 'EventConfig'])]
+    for eventtype in eventtypes:
+        active_fields = eventtype.getActivatedFields()
+        if 'investigationEnd' in active_fields or 'investigationStart' in active_fields:
+            new_value = [f for f in active_fields if f not in ['investigationStart', 'investigationEnd']]
+            eventtype.setActivatedFields(new_value)
+            logger.info("migrated inquiry config {}".format(eventtype))
     logger.info("migration step done!")
 
 
@@ -276,6 +292,7 @@ def migrate(context):
     migrate_CODT_UrbanCertificateBase_add_permissions(context)
     migrate_opinion_request_TAL_expression(context)
     migrate_report_and_remove_urbandelay_portal_type(context)
+    migrate_inquiry_investigationStart_date(context)
     migrate_parcellings_folder_allowed_type(context)
     migrate_default_states_to_close_all_events(context)
     migrate_inquiry_parcels(context)
