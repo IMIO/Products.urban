@@ -181,7 +181,7 @@ def migrate_UrbanEventType_to_DX(context):
     fields_mapping.pop()
     fields_mapping.extend([
         {
-            'AT_field_name': '',
+            'AT_field_name': 'extraValue',
             'DX_field_name': 'abbreviation',
         },
         {
