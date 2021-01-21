@@ -10,6 +10,11 @@ class AnnoncedDelay(BaseCalculationDelay):
 
     def calculate_delay(self):
         delay = self.task_container.getAnnoncedDelay()
+        base_delay = super(AnnoncedDelay, self).calculate_delay()
+        licence = self.task_container
+        delay = licence.getAnnoncedDelay() or 0
+        if licence.getHasModifiedBlueprints():
+            delay = licence.getDelayAfterModifiedBlueprints()
         if delay.endswith('j'):
             return int(delay[:-1])
         return 0
@@ -25,6 +30,8 @@ class UniqueLicenceAnnoncedDelay(BaseCalculationDelay):
         licence = self.task_container
         raw_delay = licence.getAnnoncedDelay()
         delay = 0
+        if licence.getHasModifiedBlueprints():
+            raw_delay = licence.getDelayAfterModifiedBlueprints()
         if raw_delay.endswith('j'):
             delay = int(raw_delay[:-1])
             if 'class_1' in licence.getProcedureChoice():
