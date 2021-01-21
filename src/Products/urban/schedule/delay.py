@@ -9,10 +9,8 @@ class AnnoncedDelay(BaseCalculationDelay):
     """
 
     def calculate_delay(self):
-        delay = self.task_container.getAnnoncedDelay()
-        base_delay = super(AnnoncedDelay, self).calculate_delay()
         licence = self.task_container
-        delay = licence.getAnnoncedDelay() or 0
+        delay = licence.getAnnoncedDelay()
         if licence.getHasModifiedBlueprints():
             delay = licence.getDelayAfterModifiedBlueprints()
         if delay.endswith('j'):
