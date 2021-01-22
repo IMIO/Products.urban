@@ -13,7 +13,7 @@ default_texts = {
         "<p>* ...</p>",
         "<p>* ...</p>",
         "<p>* ...</p>",
-        "<p>Attendu qu'une réunion de clôture d'enquête à été organisée le xxx dans les bureaux du service de l'urbanisme de la Commune de Mons, conformément aux dispositions de l'article 340 du Code modifié;</p>",
+        "<p>Attendu qu'une réunion de clôture d'enquête à été organisée le xxx dans les bureaux du service de l'urbanisme de la Commune, conformément aux dispositions de l'article 340 du Code modifié;</p>",
         "<p>Considérant qu'aucune personnes ne s'est présentée lors de cette réunion pour faire opposition;</p>",
         "<p>Considérant que xxx personnes se sont présentées à cette réunion et ont émis les réclamations suivantes :</p>",
         "<p>* ...</p>",
@@ -880,7 +880,16 @@ EventConfigs = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "codt_ln_annexe16.odt", 'title': "Lettre de notaire - Annexe 16"},
+                {
+                    'id': "codt_ln_annexe16.odt",
+                    'title': "Lettre de notaire - Annexe 16",
+                    'context_variables': [
+                        {
+                            'name': 'publipostage',
+                            'value': 'notaires'
+                        }
+                    ]
+                },
             ),
             'eventType': ('Products.urban.interfaces.ITheLicenceEvent',
                           'Products.urban.interfaces.ILicenceNotificationEvent'),
