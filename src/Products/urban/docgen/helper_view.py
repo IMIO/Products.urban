@@ -762,9 +762,13 @@ class LicenceDisplayProxyObject(UrbanBaseProxyObject):
                     toreturn += 'section %s ' % portionOutObj.getSection()
             toreturn += ' %s' % portionOutObj.getRadical()
             if portionOutObj.getBis() != '':
-                toreturn += '/%s' % portionOutObj.getBis()
+                if portionOutObj.getBis() != '0':
+                    toreturn += '/%s ' % portionOutObj.getBis()
+                else:
+                    toreturn += ' '
             toreturn += portionOutObj.getExposant()
-            toreturn += portionOutObj.getPuissance()
+            if portionOutObj.getPuissance() != '' and portionOutObj.getPuissance() != '0':
+                    toreturn += ' %s' %portionOutObj.getPuissance()
             isFirst = False
         return toreturn
 
