@@ -602,7 +602,7 @@ def setDefaultApplicationSecurity(context):
     site.portal_actions.user.undo.visible = True
     site.manage_permission('List undoable changes', ['Site Administrator', 'Manager'], acquire=1, REQUEST=None)
     #portal_urban local roles
-    site.portal_urban.manage_addLocalRoles("urban_managers", ("Editor", "Reader", ))
+    site.portal_urban.manage_addLocalRoles("urban_managers", ("Contributor", "Reviewer", "Editor", "Reader", ))
     site.portal_urban.manage_addLocalRoles("urban_readers", ("Reader", ))
     site.portal_urban.manage_addLocalRoles("urban_editors", ("Reader", ))
     site.portal_urban.manage_addLocalRoles("environment_readers", ("Reader", ))
