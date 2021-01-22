@@ -8,6 +8,18 @@ Changes
 - Fix 0 values Bis & Puissance format for getPortionOutText
   [jjaumotte]
 
+- Remove 'provincial' in folderroadtypes vocabulary [URB-2129]
+  [jjaumotte]
+
+- Remove locality name in default text [URB-2124]
+  [jjaumotte]
+
+- Remove/disable natura2000 folderzone [URB-2052]
+  [jjaumotte]
+
+- Add notaries mailing [URB-2110]
+  [jjaumotte]
+
 - Add copy to claymant action for recipient_cadastre in inquiry event
   [sdelcourt / jjaumotte]
 

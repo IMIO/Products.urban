@@ -491,6 +491,8 @@ class UrbanDocGenerationEventHelperView(UrbanDocGenerationHelperView):
                 mailing_list = self.real_context.getParentNode().getApplicants()
             elif gen_context['publipostage'] == 'architectes':
                 mailing_list = self.context.getArchitects()
+            elif gen_context['publipostage'] == 'notaires':
+                mailing_list = self.context.getNotaryContact()
             elif gen_context['publipostage'] == 'reclamants':
                 mailing_list = self.context.getClaimants()
             elif gen_context['publipostage'] == 'derniers_reclamants':
