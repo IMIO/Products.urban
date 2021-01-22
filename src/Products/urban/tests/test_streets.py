@@ -39,4 +39,3 @@ class TestUrbanStreets(unittest.TestCase):
 
         # delete this former street must not raise a BeforeDeleteException
         self.city.manage_delObjects([street_2.id])
-        print('end')
