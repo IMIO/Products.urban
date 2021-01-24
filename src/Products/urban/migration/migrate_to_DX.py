@@ -58,11 +58,6 @@ def migrate_PortionOut_to_DX(context):
 
 
 def migrate_ParcellingTerm_to_DX(context):
-    # delete parcels in parcellings first
-    portal = api.portal.get()
-    parcellings_folder = portal.urban.parcellings
-    for parcelling in parcellings_folder.objectValues():
-        api.content.delete(objects=parcelling.objectValues())
 
     fields_mapping = (
         {
