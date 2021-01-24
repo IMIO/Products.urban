@@ -1567,7 +1567,6 @@ default_values = {
             'UrbanVocabularyTerm',
             {'id': "com", 'title': u"Communale"},
             {'id': "priv", 'title': u"Privée"},
-            {'id': "prov", 'title': u"Provinciale"},
             {'id': "reg", 'title': u"Régionale"},
             {'id': "vic", 'title': u"Vicinale"},
         ],
@@ -1617,7 +1616,6 @@ default_values = {
             {'id': "zev", 'title': u"zone d'espaces verts"},
             {'id': "zn", 'title': u"zone naturelle"},
             {'id': "zp", 'title': u"zone de parc"},
-            {'id': "znatura2000", 'title': u"zone Natura 2000"},
         ],
 
         'rcu': [

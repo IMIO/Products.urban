@@ -1113,18 +1113,18 @@ def setupOpinionsSchedule(context):
 
 def addTestUsers(site):
     users = [
-        ('urbanmanager', 'urban_managers', True),
-        ('urbanreader', 'urban_readers'),
-        ('urbaneditor', 'urban_editors', True),
-        ('environmentreader', 'environment_readers'),
-        ('environmenteditor', 'environment_editors', True),
-        ('urbanmapreader', 'urban_map_readers')
+        ('urbanmanager', ('urban_managers', 'urban_editors', 'urban_readers'), True),
+        ('urbanreader', ('urban_readers',)),
+        ('urbaneditor', ('urban_editors',), True),
+        ('environmentreader', ('environment_readers',)),
+        ('environmenteditor', ('environment_editors',), True),
+        ('urbanmapreader', ('urban_map_readers',))
     ]
     for user_info in users:
         _addTestUser(site, *user_info)
 
 
-def _addTestUser(site, username, groupname, external_editor=False):
+def _addTestUser(site, username, groupnames, external_editor=False):
     is_mountpoint = len(site.absolute_url_path().split('/')) > 2
     try:
         password = username
@@ -1133,7 +1133,8 @@ def _addTestUser(site, username, groupname, external_editor=False):
         member = site.portal_registration.addMember(id=username, password=password)
         if external_editor:
             member.setMemberProperties({'ext_editor': True})
-        site.acl_users.source_groups.addPrincipalToGroup(username, groupname)
+        for groupname in groupnames:
+            site.acl_users.source_groups.addPrincipalToGroup(username, groupname)
     except Exception:
         # if something wrong happens (one object already exists), we pass...
         pass

@@ -1192,7 +1192,7 @@ msgstr "Risque de ruissellement concentré"
 #: ../browser/templates/map.pt:31
 #: ../browser/templates/map_spw.pt:34
 msgid "concerned_parcels"
-msgstr "Parcelle(s) du dossier"
+msgstr "Parcelle(s)"
 
 #. Default: "Warning, no address has been defined for the works location"
 #: ../browser/templates/contactmacros.pt:55
@@ -2790,7 +2790,7 @@ msgstr "Schéma de développement communal"
 #. Default: "SDC_divergence"
 #: ../content/licence/CODT_BuildLicence.py:47
 msgid "urban_label_SDC_divergence"
-msgstr "dossier en écart au Schéma de développement communal"
+msgstr "Dossier en écart au Schéma de développement communal"
 
 #. Default: "Srs"
 #: Layer.py

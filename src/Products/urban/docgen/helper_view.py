@@ -763,7 +763,7 @@ class LicenceDisplayProxyObject(UrbanBaseProxyObject):
             toreturn += ' %s' % portionOutObj.getRadical()
             if portionOutObj.getBis() != '':
                 if portionOutObj.getBis() != '0':
-                    toreturn += '/%s' % portionOutObj.getBis()
+                    toreturn += '/%s ' % portionOutObj.getBis()
                 else:
                     toreturn += ' '
             toreturn += portionOutObj.getExposant()

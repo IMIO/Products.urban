@@ -31,7 +31,8 @@ class UrbanEventEdit(Edit):
             if not activatedField:
                 continue  # in some case, there could be an empty value in activatedFields...
             field = self.context.getField(activatedField)
-            fields.append(field)
+            if field not in fields:
+                fields.append(field)
 
         if ws4pmSettings and ws4pmSettings.checkAlreadySentToPloneMeeting(self.context):
             return [f for f in fields if not getattr(f, 'pm_text_field', False)]

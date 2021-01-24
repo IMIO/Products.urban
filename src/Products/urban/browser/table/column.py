@@ -263,6 +263,7 @@ class EventTitleDisplay(TitleDisplay):
             documents.append(doc_link)
         documents = ''.join(documents)
 
+        suffix = ''
         annexes = []
         for annex in event.getAttachments():
             annex_title = annex.Title()
