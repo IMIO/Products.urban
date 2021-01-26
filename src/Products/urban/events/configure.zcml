@@ -238,5 +238,9 @@
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".configuration_events.update_vocabulary_folder_cache" />
 
+  <subscriber for="..interfaces.IStreet
+                   OFS.interfaces.IObjectWillBeRemovedEvent"
+              handler=".configuration_events.before_street_delete" />
+
 
 </configure>
