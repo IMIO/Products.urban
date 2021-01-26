@@ -203,6 +203,19 @@ EventConfigs = {
             'eventType': ('Products.urban.interfaces.IWalloonRegionPrimoEvent',),
         },
         {
+            'id': "rapport-du-college",
+            'title': "Rapport du Collège",
+            'activatedFields': ('decisionDate', 'decision', 'decisionText',),
+            'deadLineDelay': 15,
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+                {'id': "urb-rapp-service.odt", 'title': "Rapport du Service"},
+                {'id': "urb-rapp-college.odt", 'title': "Rapport du Collège"},
+            ),
+            'eventType': ('Products.urban.interfaces.ICollegeReportEvent',),
+        },
+        {
             'id': "config-opinion-request",
             'title': "*** Demande d'avis CONFIG ***",
             'activatedFields': (),
@@ -560,19 +573,6 @@ EventConfigs = {
                 {'id': "codt_purb_envoi_premier_dossier_rw_alternative.odt", 'title': "Formulaire d'envoi du premier dossier à la RW (alternative)"},
             ),
             'eventType': ('Products.urban.interfaces.IWalloonRegionPrimoEvent',),
-        },
-        {
-            'id': "rapport-du-college",
-            'title': "Rapport du Collège",
-            'activatedFields': ('decisionDate', 'decision', 'decisionText',),
-            'deadLineDelay': 15,
-            'isKeyEvent': True,
-            'keyDates': ('eventDate',),
-            'podTemplates': (
-                {'id': "urb-rapp-service.odt", 'title': "Rapport du Service"},
-                {'id': "urb-rapp-college.odt", 'title': "Rapport du Collège"},
-            ),
-            'eventType': ('Products.urban.interfaces.ICollegeReportEvent',),
         },
         {
             'id': "transmis-2er-dossier-rw-codt",
