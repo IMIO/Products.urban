@@ -20,6 +20,10 @@
               handler=".contactEvents.updateLicenceTitle" />
 
   <subscriber for="..interfaces.IContact
+                   zope.container.interfaces.IObjectRemovedEvent"
+              handler=".contactEvents.updateLicenceTitle" />
+
+  <subscriber for="..interfaces.IContact
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".contactEvents.sortByAlphabeticalOrder" />
 
