@@ -5,6 +5,9 @@ Changes
 2.5 (unreleased)
 ----------------
 
+- Fix 0 values Bis & Puissance format for getPortionOutText
+  [jjaumotte]
+
 - Remove 'provincial' in folderroadtypes vocabulary [URB-2129]
   [jjaumotte]
 
