@@ -5,6 +5,7 @@
   <adapter name="applicantInfosIndex" factory=".indexes.applicant_applicantinfoindex" />
   <adapter name="applicantInfosIndex" factory=".indexes.genericlicence_applicantinfoindex" />
   <adapter name="applicantInfosIndex" factory=".indexes.environmentlicence_applicantinfoindex" />
+  <adapter name="applicantInfosIndex" factory=".indexes.inspection_applicantinfoindex" />
   <adapter name="architectInfosIndex" factory=".indexes.licence_architectinfoindex" />
   <adapter name="parcelInfosIndex" factory=".indexes.genericlicence_parcelinfoindex" />
   <adapter name="parcelInfosIndex" factory=".indexes.parcelinfoindex" />
