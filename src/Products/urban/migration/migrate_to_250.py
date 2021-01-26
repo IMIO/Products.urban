@@ -45,6 +45,23 @@ def migrate_codt_buildlicences_schedule(context):
         new_states = tuple(old_states) + ('incomplete',)
         schedule.reception.ending_states = new_states
 
+    # do not display conditions waiting for delay to be over
+    task_cfgs = [
+        schedule.reception.check_completion,
+        schedule.reception.send_acknoledgment,
+        schedule.reception.procedure_choice_past_20days,
+        schedule.reception.procedure_choice_fd,
+    ]
+    to_hide = [
+        'urban.schedule.condition.deposit_past_20days',
+        'urban.schedule.condition.deposit_past_30days',
+    ]
+    for task_cfg in task_cfgs:
+        for cond in task_cfg.end_conditions:
+            if cond.condition in to_hide :
+                cond.display_status = False
+                logger.info("hide delay condition of {}".format(task_cfg))
+
     logger.info("migration step done!")
 
 

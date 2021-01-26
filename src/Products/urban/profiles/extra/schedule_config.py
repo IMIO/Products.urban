@@ -133,7 +133,7 @@ schedule_config = {
                         StartConditionObject('urban.schedule.condition.deposit_done'),
                     ),
                     'end_conditions': (
-                        EndConditionObject('urban.schedule.condition.deposit_past_20days', 'OR'),
+                        EndConditionObject('urban.schedule.condition.deposit_past_20days', 'OR', display_status=False),
                         EndConditionObject('urban.schedule.condition.procedure_choice_done', 'AND'),
                     ),
                     'start_date': 'urban.schedule.start_date.deposit_date',
@@ -156,7 +156,7 @@ schedule_config = {
                     ),
                     'end_conditions': (
                         EndConditionObject('urban.schedule.condition.acknowledgment_done', 'OR'),
-                        EndConditionObject('urban.schedule.condition.deposit_past_20days'),
+                        EndConditionObject('urban.schedule.condition.deposit_past_20days', display_status=False),
 
                     ),
                     'start_date': 'urban.schedule.start_date.deposit_date',
@@ -174,14 +174,14 @@ schedule_config = {
                     'creation_state': ('complete',),
                     'starting_states': ('complete',),
                     'creation_conditions': (
-                        CreationConditionObject('urban.schedule.condition.deposit_past_20days', 'AND'),
+                        CreationConditionObject('urban.schedule.condition.deposit_past_20days', 'AND', display_status=False),
                         CreationConditionObject('urban.schedule.condition.default_acknowledgement'),
                     ),
                     'start_conditions': (
                         StartConditionObject('urban.schedule.condition.deposit_done'),
                     ),
                     'end_conditions': (
-                        EndConditionObject('urban.schedule.condition.deposit_past_30days', 'OR'),
+                        EndConditionObject('urban.schedule.condition.deposit_past_30days', 'OR', display_status=False),
                         EndConditionObject('urban.schedule.condition.procedure_choice_done', 'AND'),
                         EndConditionObject('urban.schedule.condition.procedure_choice_notified'),
                     ),
@@ -200,7 +200,7 @@ schedule_config = {
                     'creation_state': ('complete',),
                     'starting_states': ('complete',),
                     'creation_conditions': (
-                        CreationConditionObject('urban.schedule.condition.deposit_past_30days', 'AND'),
+                        CreationConditionObject('urban.schedule.condition.deposit_past_30days', 'AND', display_status=False),
                         CreationConditionObject('urban.schedule.condition.default_acknowledgement'),
                     ),
                     'start_conditions': (
