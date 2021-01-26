@@ -7,6 +7,7 @@ from Products.urban.utils import moveElementAfter
 from Products.urban.utils import getMd5Signature
 
 from plone.namedfile.file import NamedBlobFile
+from plone import api
 
 import logging
 logger = logging.getLogger('urban: setuphandlers')
@@ -27,20 +28,20 @@ def loga(msg, type="info", gslog=None):
     return msg
 
 
-def updateTemplates(context, container, templates, starting_position=''):
+def updateTemplates(context, container, templates, starting_position='', new_install=True):
     log = []
     position_after = starting_position
     for template in templates:
         template_id = template['id']
         filePath = '%s/templates/%s' % (context._profile_path, template_id)
         new_content = file(filePath, 'rb').read()
-        log.append(updateTemplate(context, container, template, new_content, position_after))
+        log.append(updateTemplate(context, container, template, new_content, position_after, new_install))
         # log[-1][0] is the id of the last template added
         position_after = log[-1][0]
     return log
 
 
-def updateTemplate(context, container, template, new_content, position_after=''):
+def updateTemplate(context, container, template, new_content, position_after='', new_install=True):
     def setProperty(file, property_name, property_value):
         if property_name in file.propertyIds():
             file.manage_changeProperties({property_name: property_value})
@@ -93,6 +94,8 @@ def updateTemplate(context, container, template, new_content, position_after='')
             **template
         )
         new_template = getattr(container, template_id)
+        if not new_install:
+            api.content.transition(new_template, 'disable')
         status.append('created')
 
     new_template.setFilename(template_id)
@@ -259,6 +262,7 @@ def addEventConfigs(context):
             log.append(loga("AttributeError while trying to get the '%s' urbanConfig" % urbanConfigId, type="warning", gslog=gslogger))
             continue
         last_urbaneventype_id = None
+        new_install = len(uetFolder.objectIds()) == 0
         for uet in urbanEventTypes[urbanConfigId]:
             id = uet['id']
             # we pass every informations including the 'id' in the 'uet' dict
@@ -281,10 +285,12 @@ def addEventConfigs(context):
                     moveElementAfter(newUet, uetFolder, 'id', last_urbaneventype_id)
                 else:
                     uetFolder.moveObjectToPosition(newUet.getId(), 0)
+                if not new_install:
+                    api.content.transition(newUet, 'disable')
                 log.append(loga("%s: event='%s' => %s" % (urbanConfigId, id, 'created'), gslog=gslogger))
             last_urbaneventype_id = id
             # add the Files in the EventConfig
-            template_log = updateTemplates(context, newUet, uet['podTemplates'])
+            template_log = updateTemplates(context, newUet, uet['podTemplates'], new_install=new_install)
             for status in template_log:
                 if status[1] != 'no changes':
                     log.append(loga("%s: evt='%s', template='%s' => %s" % (urbanConfigId, last_urbaneventype_id, status[0], status[1]), gslog=gslogger))
