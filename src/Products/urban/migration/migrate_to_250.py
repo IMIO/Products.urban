@@ -252,6 +252,7 @@ def migrate_remove_prov_in_folderroadtypes(context):
             api.content.transition(obj=folderroadtype, to_state='disabled')
     logger.info("migration step done!")
 
+
 def migrate_disable_natura2000_folderzone(context):
     logger = logging.getLogger('migrate disable natura2000 folderzone')
     logger.info("starting migration step")
@@ -260,6 +261,7 @@ def migrate_disable_natura2000_folderzone(context):
         if folderzone.id == "znatura2000":
             api.content.transition(obj=folderzone, to_state='disabled')
     logger.info("migration step done!")
+
 
 def migrate_inquiry_investigationStart_date(context):
     """
