@@ -1810,7 +1810,7 @@ default_values = {
             {'id': "favorable", 'title': u"Favorable"},
             {'id': "favorable-conditionnel", 'title': u"Favorable conditionnel"},
             {'id': "defavorable", 'title': u"Défavorable"},
-            {'id': "favorable-defaut", 'title': u"Réputé favorable par défaut"},
+            {'id': "favorable-defaut", 'title': u"Réputé favorable par défaut", 'isDefaultValue':True},
         ],
 
         'rubrics': [
