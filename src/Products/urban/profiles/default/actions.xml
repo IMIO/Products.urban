@@ -60,4 +60,32 @@
    <property name="visible">True</property>
   </object>
  </object>
+ <object name="object_buttons" meta_type="CMF Action Category">
+  <property name="title"></property>
+  <object name="urban_duplicate_licence" meta_type="CMF Action" i18n:domain="urban">
+   <property name="title" i18n:translate="">Duplicate licence</property>
+   <property name="description" i18n:translate=""></property>
+   <property name="url_expr">string:$object_url/duplicate_licence</property>
+   <property name="icon_expr">string:$portal_url/duplicate_licence.png</property>
+   <property name="available_expr">python: context.portal_urban.isLicence(context)</property>
+   <property name="permissions">
+    <element value="View"/>
+   </property>
+   <property name="visible">True</property>
+  </object>
+ </object>
+ <object name="object_buttons" meta_type="CMF Action Category">
+  <property name="title"></property>
+  <object name="copy_to_claimant" meta_type="CMF Action" i18n:domain="urban">
+   <property name="title" i18n:translate="">Copy to claimant</property>
+   <property name="description" i18n:translate=""></property>
+   <property name="url_expr">string:$object_url/copy_recipient_to_claimant</property>
+   <property name="icon_expr">string:$portal_url/copytoclaymants.png</property>
+   <property name="available_expr">python: context.portal_type == 'RecipientCadastre'</property>
+   <property name="permissions">
+    <element value="View"/>
+   </property>
+   <property name="visible">True</property>
+  </object>
+ </object>
 </object>

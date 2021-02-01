@@ -192,6 +192,9 @@ msgstr ""
 msgid "Sort results by licence type first, then by delay time"
 msgstr ""
 
+msgid "Search parcel(s)"
+msgstr ""
+
 msgid "Ticket"
 msgstr ""
 
@@ -268,7 +271,7 @@ msgstr ""
 msgid "add_ParcelOutLicence"
 msgstr ""
 
-msgid "add_ParcellingTerm"
+msgid "add_Parcelling"
 msgstr ""
 
 msgid "add_UniqueLicence"
@@ -553,6 +556,9 @@ msgid "envclasstwo_urbanconfig_title"
 msgstr ""
 
 msgid "envclasstwos"
+msgstr ""
+
+msgid "eventconfigs_folder_title"
 msgstr ""
 
 msgid "equipmenttypes_folder_title"
@@ -936,6 +942,9 @@ msgid "no_result"
 msgstr ""
 
 msgid "no_parcels_found_on_licence"
+msgstr ""
+
+msgid "title_encoding_error_label"
 msgstr ""
 
 msgid "no_street_name_found_on_licence"
@@ -2327,6 +2336,9 @@ msgstr ""
 msgid "urban_label_specificFeaturesDetail"
 msgstr ""
 
+msgid "urban_label_states_to_end_all_events"
+msgstr ""
+
 msgid "urban_label_states_to_end_all_tasks"
 msgstr ""
 
@@ -2741,3 +2753,23 @@ msgstr ""
 msgid "urban_label_reportCreationDate"
 msgstr ""
 
+msgid "urban_label_reportReceptionDate"
+msgstr ""
+
+msgid "urban_search_by_cadastral_reference"
+msgstr ""
+
+msgid "urban_search_parcel_by_street_number"
+msgstr ""
+
+msgid "urban_label_reportVisitDate"
+msgstr ""
+
+msgid "urban_search_parcel_by_proprietary"
+msgstr ""
+
+msgid "urban_browse_old_parcels"
+msgstr ""
+
+msgid "urban_button_search"
+msgstr ""

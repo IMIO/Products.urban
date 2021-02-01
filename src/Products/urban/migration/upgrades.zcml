@@ -163,4 +163,20 @@
         handler=".migrate_to_DX.migrate_PortionOut_to_DX"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Migrate AT ParcellingTerm to DX Parcelling"
+        description="urban upgrade step"
+        source="1006"
+        destination="1007"
+        handler=".migrate_to_DX.migrate_ParcellingTerm_to_DX"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Migrate AT UrbanEventType to DX EventConfig"
+        description="urban upgrade step"
+        source="1007"
+        destination="1008"
+        handler=".migrate_to_DX.migrate_UrbanEventType_to_DX"
+        profile="Products.urban:default" />
+
 </configure>

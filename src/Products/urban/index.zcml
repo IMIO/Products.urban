@@ -5,14 +5,13 @@
   <adapter name="applicantInfosIndex" factory=".indexes.applicant_applicantinfoindex" />
   <adapter name="applicantInfosIndex" factory=".indexes.genericlicence_applicantinfoindex" />
   <adapter name="applicantInfosIndex" factory=".indexes.environmentlicence_applicantinfoindex" />
+  <adapter name="applicantInfosIndex" factory=".indexes.inspection_applicantinfoindex" />
   <adapter name="architectInfosIndex" factory=".indexes.licence_architectinfoindex" />
   <adapter name="parcelInfosIndex" factory=".indexes.genericlicence_parcelinfoindex" />
-  <adapter name="parcelInfosIndex" factory=".indexes.parcellingterm_parcelinfoindex" />
   <adapter name="StreetsUID" factory=".indexes.genericlicence_streetsuid" />
   <adapter name="StreetNumber" factory=".indexes.genericlicence_streetnumber" />
   <adapter name="address" factory=".indexes.genericlicence_address" />
   <adapter name="last_key_event" factory=".indexes.genericlicence_lastkeyevent" />
-  <adapter name="last_key_event" factory=".indexes.urbaneventtype_lastkeyevent" />
   <adapter name="folder_manager" factory=".indexes.genericlicence_foldermanager" />
   <adapter name="folder_manager" factory=".indexes.urbanevent_foldermanager" />
   <adapter name="extraValue" factory=".indexes.rubricsfolders_extravalue" />
@@ -26,6 +25,7 @@
   <adapter name="Subject" factory=".indexes.inspection_task_followups" />
   <adapter name="commentators" factory=".indexes.licence_covid" />
   <adapter name="commentators" factory=".indexes.task_covid" />
+  <adapter name="modified" factory=".indexes.genericlicence_modified" />
 
   <!-- Unindex UrbanEvent, UrbanDoc, Applicant and PortionOut -->
 

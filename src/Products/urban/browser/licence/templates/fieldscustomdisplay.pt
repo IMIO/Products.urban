@@ -20,7 +20,7 @@
 
 
 <metal:subdivision define-macro="isInSubdivision">
-    <td valign="top"><b><span i18n:translate="urban_label_isInSubdivision">In subdivision?</span>:</b></td>
+    <td valign="top"><b><span tal:content="python: context.getField('isInSubdivision').widget.label" i18n:translate="">In subdivision?</span>:</b></td>
     <td width="10px"></td>
     <td width="49%" valign="top" valign="top" tal:define="isInSubdivision context/getIsInSubdivision">
         <metal:myfield use-macro="python:here.widget('isInSubdivision', mode='view')" />

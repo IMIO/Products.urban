@@ -1,0 +1,24 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="urban">
+    <body>
+
+        <metal:block fill-slot="top_slot"
+               tal:define="dummy python:request.set('disable_border',1)" />
+
+        <metal:main fill-slot="main">
+
+            <tal:comment replace="nothing">Go back...</tal:comment>
+            <metal:listing use-macro="context/@@globalmacros/goBackToMacro" />
+
+            <div style="vertical-align:top; max-width: 45%; display:inline-block"
+                tal:define="form nocall:view/form">
+                <fieldset>
+                <legend i18n:translate="">Duplicate to a new licence</legend>
+                    <span tal:replace="structure view/contents" />
+                </fieldset>
+            </div>
+        </metal:main>
+    </body>
+</html>

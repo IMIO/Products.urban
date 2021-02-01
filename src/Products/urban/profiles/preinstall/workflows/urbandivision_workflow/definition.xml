@@ -53,8 +53,7 @@
   <permission-map name="Review portal content"
                   acquired="False">
    <permission-role>Manager</permission-role>
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
+   <permission-role>Reviewer</permission-role>
   </permission-map>
   <permission-map name="View"
                   acquired="False">
@@ -188,8 +187,7 @@
   <permission-map name="Review portal content"
                   acquired="False">
    <permission-role>Manager</permission-role>
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
+   <permission-role>Reviewer</permission-role>
   </permission-map>
   <permission-map name="View"
                   acquired="False">
