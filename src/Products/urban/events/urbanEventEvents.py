@@ -39,9 +39,9 @@ def _setDefaultTextValues(urbanevent):
         field_mutator(rendered_text)
 
 
-def setEventTypeType(urban_event, event):
+def setEventType(urban_event, event):
     urban_eventType = urban_event.getUrbaneventtypes()
-    urban_eventTypeTypes = urban_eventType.getEventTypeType()
+    urban_eventTypeTypes = urban_eventType.getEventType()
     if not urban_eventTypeTypes:
         return
 
@@ -68,11 +68,11 @@ def generateSingletonDocument(urban_event, event):
     if not urban_tool.getGenerateSingletonDocuments():
         return
 
-    templates = urban_event.getTemplates()
+    templates = [t for t in urban_event.getTemplates() if api.content.get_state(t) == 'enabled']
     if len(templates) == 1:
         pod_template = templates[0]
         if pod_template.can_be_generated(urban_event):
-            output_format = 'odt'
+            output_format = pod_template.pod_formats[0] or 'odt'
             generation_view = urban_event.restrictedTraverse('urban-document-generation')
             generation_view(pod_template.UID(), output_format)
 

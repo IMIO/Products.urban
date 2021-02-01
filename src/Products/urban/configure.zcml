@@ -16,6 +16,7 @@
   <include package="collective.z3cform.datagridfield"/>
   <include package="collective.archetypes.select2"/>
   <include package="collective.faceted.datewidget"/>
+  <include package="collective.quickupload"/>
   <include package="five.grok"/>
   <include package="imio.actionspanel"/>
   <include package="imio.dashboard"/>
@@ -283,14 +284,6 @@
 
   <include file="index.zcml" />
 
-  <!-- ##/code-section configure.zcml.header -->
-
   <i18n:registerTranslations directory="locales" />
-
-  <include file="generatedsubscribers.zcml"/>
-
-
-  <!-- ##code-section configure.zcml.core -->
-  <!-- ##/code-section configure.zcml.core -->
 
 </configure>

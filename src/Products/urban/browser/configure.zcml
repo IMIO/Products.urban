@@ -113,22 +113,6 @@
      permission="zope2.View"
   />
 
-   <browser:page
-     for="Products.urban.interfaces.ITestConfig"
-     name="configtestview"
-     class=".configtestview.ConfigTestView"
-     template="templates/urbanconfigtestview.pt"
-     permission="zope2.View"
-  />
-
-  <browser:page
-     for="*"
-     name="configtestprocessingview"
-     class=".configtestview.ConfigTestProcessingView"
-     attribute="processing"
-     permission="zope2.View"/>
-  <!--/&ndash;&gt;-->
-
   <browser:page
      for="Products.urban.interfaces.ILicenceConfig"
      name="licenceconfigmacros"
@@ -162,6 +146,13 @@
      for="Products.urban.interfaces.IRecipientCadastre"
      name="contactmacros"
      template="templates/contactmacros.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="Products.urban.interfaces.IRecipientCadastre"
+     name="copy_recipient_to_claimant"
+     class=".contactview.CopyRecipientCadastreToClaimantView"
      permission="zope2.View"
   />
 
@@ -238,14 +229,6 @@
 
   <browser:page
      for="Products.urban.interfaces.IGenericLicence"
-     name="parcelrecordsview"
-     class=".parcelrecordsview.ParcelRecordsView"
-     template="templates/parcelrecordsview.pt"
-     permission="zope2.View"
-  />
-
-  <browser:page
-     for="Products.urban.interfaces.IGenericLicence"
      name="create_urbanevent"
      class=".factory.CreateUrbanEvent"
      permission="zope2.View"
@@ -275,7 +258,31 @@
   />
 
   <browser:page
-     for="*"
+     for="Products.urban.interfaces.IGenericLicence"
+     name="parcelrecordsview"
+     class=".parcelrecordsview.ParcelRecordsView"
+     template="templates/parcelrecordsview.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="Products.urban.interfaces.IGenericLicence"
+     name="searchparcels"
+     class=".searchparcelsview.SearchParcelsView"
+     template="templates/searchparcels.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="imio.urban.core.contents.parcelling.content.IParcelling"
+     name="parcelrecordsview"
+     class=".parcelrecordsview.ParcelRecordsView"
+     template="templates/parcelrecordsview.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="imio.urban.core.contents.parcelling.content.IParcelling"
      name="searchparcels"
      class=".searchparcelsview.SearchParcelsView"
      template="templates/searchparcels.pt"

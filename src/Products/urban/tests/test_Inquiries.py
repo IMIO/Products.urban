@@ -9,8 +9,6 @@ from plone import api
 from plone.app.testing import login
 from plone.testing.z2 import Browser
 
-from zope.component import createObject
-
 import transaction
 import unittest
 
@@ -32,7 +30,7 @@ class TestBuildLicenceInquiries(unittest.TestCase):
         self.licence = getattr(buildlicence_folder, testlicence_id)
 
         #  create un inquiry event
-        createObject('UrbanEventInquiry', 'enquete-publique', self.licence)
+        self.licence.createUrbanEvent('enquete-publique')
         transaction.commit()
 
     def _addInquiry(self):
@@ -66,11 +64,11 @@ class TestBuildLicenceInquiries(unittest.TestCase):
         self.assertEquals(len(licence.getUrbanEventInquiries()), 1)
         #  we can not add a second urbanEventInquiry if only one inquiry
         #  is defined
-        self.assertRaises(ValueError, createObject, 'UrbanEventInquiry', 'enquete-publique', licence)
+        self.assertRaises(ValueError, licence.createUrbanEvent, 'enquete-publique')
         # after adding a second Inquiry...
         self._addInquiry()
         # ... we can add a supplementary UrbanEventInquiry
-        createObject('UrbanEventInquiry', 'enquete-publique', licence)
+        licence.createUrbanEvent('enquete-publique')
         self.assertEquals(len(licence.getUrbanEventInquiries()), 2)
 
     def testUrbanEventInquiryGetLinkedInquiry(self):
@@ -90,7 +88,7 @@ class TestBuildLicenceInquiries(unittest.TestCase):
         #  define a second Inquiry so we will be able to add a second
         #  UrbanEventInquiry
         inquiry2 = self._addInquiry()
-        urbanEventInquiry2 = createObject('UrbanEventInquiry', 'enquete-publique', licence)
+        urbanEventInquiry2 = licence.createUrbanEvent('enquete-publique')
         self.assertEquals(urbanEventInquiry2.getLinkedInquiry(), inquiry2)
         # and test that getting the first linked inqury still works
         self.assertEquals(urbanEventInquiry1.getLinkedInquiry(), inquiry1)
@@ -100,7 +98,7 @@ class TestBuildLicenceInquiries(unittest.TestCase):
           Test the Inquiry.getUrbanEventLinkedInquiry method
           There is a "1 to 1" link between an Inquiry and an UrbanEventInquiry
           (if exists)
-          An Inquiry can exist alone but an UrbanEventInquiry must be linekd to
+          An Inquiry can exist alone but an UrbanEventInquiry must be linked to
           an existing Inquiry
         """
         licence = self.licence
@@ -112,12 +110,12 @@ class TestBuildLicenceInquiries(unittest.TestCase):
         # maybe no UrbanEventInquiry is linked
         self.assertEquals(inquiry1.getLinkedUrbanEventInquiry(), None)
         # now we can create an UrbanEventInquiry
-        urbanEventInquiry1 = createObject('UrbanEventInquiry', 'enquete-publique', licence)
+        urbanEventInquiry1 = licence.createUrbanEvent('enquete-publique')
         self.assertEquals(inquiry1.getLinkedUrbanEventInquiry(), urbanEventInquiry1)
         #  define a second Inquiry so we will be able to add a second
         #  UrbanEventInquiry
         inquiry2 = self._addInquiry()
-        urbanEventInquiry2 = createObject('UrbanEventInquiry', 'enquete-publique', licence)
+        urbanEventInquiry2 = licence.createUrbanEvent('enquete-publique')
         self.assertEquals(inquiry2.getLinkedUrbanEventInquiry(), urbanEventInquiry2)
         # and test that getting the first linked inqury still works
         self.assertEquals(inquiry1.getLinkedUrbanEventInquiry(), urbanEventInquiry1)
@@ -132,7 +130,7 @@ class TestBuildLicenceInquiries(unittest.TestCase):
         licence = self.licence
         # now test next inquiries
         inquiry2 = self._addInquiry()
-        urbanEventInquiry2 = createObject('UrbanEventInquiry', 'enquete-publique', licence)
+        urbanEventInquiry2 = licence.createUrbanEvent('enquete-publique')
         # we can not delete the inquiry2 as urbanEventInquiry2 exists
         self.assertRaises(BeforeDeleteException, licence.manage_delObjects, inquiry2.id)
         # if we delete urbanEventInquiry2...
@@ -149,9 +147,9 @@ class TestBuildLicenceInquiries(unittest.TestCase):
         # add 3 inquiries and 3 linked UrbanEventInquiries
         urbanEventInquiry1 = licence.objectValues('UrbanEventInquiry')[0]
         self._addInquiry()
-        urbanEventInquiry2 = createObject('UrbanEventInquiry', 'enquete-publique', licence)
+        urbanEventInquiry2 = licence.createUrbanEvent('enquete-publique')
         self._addInquiry()
-        urbanEventInquiry3 = createObject('UrbanEventInquiry', 'enquete-publique', licence)
+        urbanEventInquiry3 = licence.createUrbanEvent('enquete-publique')
         # we cannot not remove an UrbanEventInquiry if it is not the last
         self.assertRaises(BeforeDeleteException,
                           licence.manage_delObjects, urbanEventInquiry2.id)
@@ -161,6 +159,34 @@ class TestBuildLicenceInquiries(unittest.TestCase):
         api.content.delete(urbanEventInquiry3)
         api.content.delete(urbanEventInquiry2)
         api.content.delete(urbanEventInquiry1)
+
+    def test_copy_proprietary_to_claimant(self):
+
+        licence = self.licence
+        urbaneventiniquiry1 = licence.objectValues('UrbanEventInquiry')[0]
+        recipient_cadastre1 = {}
+        recipient_cadastre1['id'] = "recipient_cadastre1_id"
+        recipient_cadastre1['name'] = "Dujardin"
+        recipient_cadastre1['firstname'] = "Jan"
+        recipient_cadastre1['street'] = "Rue du Moulin"
+        recipient_cadastre1['number'] = "666"
+        recipient_cadastre1['city'] = "Bruxelles"
+        recipient_cadastre1['zipcode'] = "1000"
+        recipient_id = urbaneventiniquiry1.invokeFactory('RecipientCadastre', **recipient_cadastre1)
+        recipient = getattr(urbaneventiniquiry1, recipient_id)
+
+        recipient.restrictedTraverse("copy_recipient_to_claimant")()
+
+        # testing if claimant exists and is created from recipient attributes
+        self.assertTrue(hasattr(urbaneventiniquiry1, 'claimant_recipient_cadastre1_id'))
+        claimant = urbaneventiniquiry1.claimant_recipient_cadastre1_id
+        recipient = urbaneventiniquiry1.recipient_cadastre1_id
+        self.assertEquals(recipient.name, claimant.name1)
+        self.assertEquals(recipient.firstname, claimant.name2)
+        self.assertEquals(recipient.street, claimant.street)
+        self.assertEquals(recipient.number, claimant.number)
+        self.assertEquals(recipient.city, claimant.city)
+        self.assertEquals(recipient.zipcode, claimant.zipcode)
 
 
 class TestCODTInquiries(BrowserTestCase):

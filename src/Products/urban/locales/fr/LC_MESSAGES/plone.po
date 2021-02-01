@@ -28,6 +28,33 @@ msgstr "Architecte"
 msgid "BuildLicence"
 msgstr "Permis d'urbanisme"
 
+msgid "CODT_Article127"
+msgstr "Permis Public (CODT)"
+
+msgid "CODT_BuildLicence"
+msgstr "Permis d'urbanisme (CODT)"
+
+msgid "CODT_CommercialLicence"
+msgstr "Permis d'implantation commerciale (CODT)"
+
+msgid "CODT_IntegratedLicence"
+msgstr "Permis intégrés (CODT)"
+
+msgid "CODT_NotaryLetter"
+msgstr "Lettre de notaire (CODT)"
+
+msgid "CODT_ParcelOutLicence"
+msgstr "Permis d'urbanisation (CODT)"
+
+msgid "CODT_UniqueLicence"
+msgstr "Permis Unique (CODT)"
+
+msgid "CODT_UrbanCertificateOne"
+msgstr "Certificat d'urbanisme 1 (CODT)"
+
+msgid "CODT_UrbanCertificateTwo"
+msgstr "Certificats d'urbanisme 2 (CODT)"
+
 msgid "City"
 msgstr "Localité"
 
@@ -39,6 +66,9 @@ msgstr "Contact"
 
 msgid "Declaration"
 msgstr "Déclaration"
+
+msgid "EnvClassBordering"
+msgstr "Permis d'environnement limitrophes"
 
 msgid "EnvClassOne"
 msgstr "Permis d'environnement classe 1"
@@ -52,6 +82,9 @@ msgstr "Permis d'environnement classe 2"
 msgid "EnvironmentRubricTerm"
 msgstr "Rubrique environnement"
 
+msgid "ExplosivesPossession"
+msgstr "Détention d'explosifs"
+
 msgid "FolderManager"
 msgstr "Gestionnaire de dossier"
 
@@ -63,6 +96,9 @@ msgstr "Géomètre"
 
 msgid "Inquiry"
 msgstr "Enquête publique"
+
+msgid "Inspection"
+msgstr "Inspection"
 
 msgid "IntegratedLicence"
 msgstr "Permis intégré"
@@ -91,6 +127,9 @@ msgstr "Permis d'urbanisation"
 msgid "ParcellingTerm"
 msgstr "Lotissement"
 
+msgid "PatrimonyCertificate"
+msgstr "Certificat de patrimoine"
+
 msgid "PcaTerm"
 msgstr "Plan Communal d'Aménagement"
 
@@ -103,6 +142,12 @@ msgstr "Sélectionnez au moins un type de permis!"
 msgid "PortionOut"
 msgstr "Parcelle"
 
+msgid "PreliminaryNotice"
+msgstr "Demande d'avis préalable"
+
+msgid "ProjectMeeting"
+msgstr "Réunion de projet"
+
 msgid "Proprietary"
 msgstr "Propriétaire"
 
@@ -111,6 +156,9 @@ msgstr "Destinataire"
 
 msgid "RecipientCadastre"
 msgstr "Destinataire cadastre"
+
+msgid "RoadDecree"
+msgstr "Décret Voirie"
 
 msgid "Street"
 msgstr "Rue"
@@ -146,11 +194,17 @@ msgstr "Certificat d'urbanisme 2"
 msgid "UrbanEvent"
 msgstr "Evénement du dossier"
 
+msgid "UrbanEventAnnouncement"
+msgstr "Evénement d'annonce de projet"
+
 msgid "UrbanEventFollowUp"
 msgstr "Evénement de proposion de suivi/réponse administrative"
 
 msgid "UrbanEventInquiry"
 msgstr "Evénement lié à une enquête publique"
+
+msgid "UrbanEventInspectionReport"
+msgstr "Evénement de rapport d'inspection"
 
 msgid "UrbanEventOpinionRequest"
 msgstr "Evénement lié à une demande d'avis"

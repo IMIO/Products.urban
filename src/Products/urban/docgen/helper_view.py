@@ -491,6 +491,8 @@ class UrbanDocGenerationEventHelperView(UrbanDocGenerationHelperView):
                 mailing_list = self.real_context.getParentNode().getApplicants()
             elif gen_context['publipostage'] == 'architectes':
                 mailing_list = self.context.getArchitects()
+            elif gen_context['publipostage'] == 'notaires':
+                mailing_list = self.context.getNotaryContact()
             elif gen_context['publipostage'] == 'reclamants':
                 mailing_list = self.context.getClaimants()
             elif gen_context['publipostage'] == 'derniers_reclamants':
@@ -523,7 +525,7 @@ class UrbanDocGenerationEventHelperView(UrbanDocGenerationHelperView):
     def getFolderMakers(self):
         """  """
         urban_tool = getToolByName(self, 'portal_urban')
-        foldermakers_config = urban_tool.getUrbanConfig(self.context).urbaneventtypes
+        foldermakers_config = urban_tool.getLicenceConfig(self.context).urbaneventtypes
         all_opinion_request_events = self.context.getAllOpinionRequests()
         foldermakers = []
         for opinionRequestEventType in foldermakers_config.objectValues('OpinionRequestEventType'):
@@ -760,9 +762,13 @@ class LicenceDisplayProxyObject(UrbanBaseProxyObject):
                     toreturn += 'section %s ' % portionOutObj.getSection()
             toreturn += ' %s' % portionOutObj.getRadical()
             if portionOutObj.getBis() != '':
-                toreturn += '/%s' % portionOutObj.getBis()
+                if portionOutObj.getBis() != '0':
+                    toreturn += '/%s ' % portionOutObj.getBis()
+                else:
+                    toreturn += ' '
             toreturn += portionOutObj.getExposant()
-            toreturn += portionOutObj.getPuissance()
+            if portionOutObj.getPuissance() != '' and portionOutObj.getPuissance() != '0':
+                    toreturn += ' %s' %portionOutObj.getPuissance()
             isFirst = False
         return toreturn
 

@@ -15,18 +15,14 @@ __docformat__ = 'plaintext'
 
 
 import logging
-logger = logging.getLogger('urban: setuphandlers')
 import os
 from Products.CMFCore.utils import getToolByName
-##code-section HEAD
 from Acquisition import aq_base
 from Products.Archetypes.event import ObjectInitializedEvent
 from Products.Archetypes.event import EditBegunEvent
-from Products.CMFPlone.utils import base_hasattr
 from Products.cron4plone.browser.configlets.cron_configuration import ICronConfiguration
 from Products.urban.config import DefaultTexts
 from Products.urban.config import URBAN_CFG_DIR
-from Products.urban.config import URBANMAP_CFG
 from Products.urban.config import URBAN_TYPES
 from Products.urban.config import URBAN_TYPES_ACRONYM
 from Products.urban.exportimport import updateAllUrbanTemplates
@@ -67,10 +63,13 @@ from zope.lifecycleevent import ObjectModifiedEvent
 from zope import event
 
 import pickle
-##/code-section HEAD
+
+logger = logging.getLogger('urban: setuphandlers')
+
 
 def isNoturbanProfile(context):
     return context.readDataFile("urban_marker.txt") is None
+
 
 def setupHideToolsFromNavigation(context):
     """hide tools"""
@@ -85,14 +84,13 @@ def setupHideToolsFromNavigation(context):
         for toolname in toolnames:
             try:
                 site[toolname].unindexObject()
-            except:
+            except Exception:
                 pass
             current = list(navtreeProperties.getProperty('idsNotToList') or [])
             if toolname not in current:
                 current.append(toolname)
                 kwargs = {'idsNotToList': current}
                 navtreeProperties.manage_changeProperties(**kwargs)
-
 
 
 def updateRoleMappings(context):
@@ -186,9 +184,6 @@ def postInstall(context):
     logger.info("setupOpinionsSchedule : starting...")
     setupOpinionsSchedule(context)
     logger.info("setupOpinionsSchedule : Done")
-    logger.info("setupTest : starting...")
-    setupTest(context.getSite())
-    logger.info("setupTest : Done")
     logger.info("setDefaultApplicationSecurity : starting...")
     setDefaultApplicationSecurity(context)
     logger.info("setDefaultApplicationSecurity : Done")
@@ -203,7 +198,6 @@ def postInstall(context):
     logger.info("addDefaultCronJobs : Done")
 
 
-##code-section FOOT
 def _(msgid, default='', domain='urban'):
     translation_domain = queryUtility(ITranslationDomain, domain)
     return translation_domain.translate(msgid, target_language='fr', default=default)
@@ -213,7 +207,6 @@ def extraPostInstall(context):
     # all installation custom code not required for tests
     if context.readDataFile('urban_extra_marker.txt') is None:
         return
-    site = context.getSite()
     logger.info("set_file_system_configuration : starting...")
     set_file_system_configuration(context)
     logger.info("set_file_system_configuration : Done")
@@ -279,6 +272,7 @@ def addDefaultCronJobs(context):
         u'0 2 * * portal/@@inquiry_radius',
         u'0 4 * * portal/@@claimants_import',
     ]
+
 
 def setFolderAllowedTypes(folder, portal_types):
     """
@@ -425,18 +419,18 @@ def addUrbanConfigFolders(context):
 
         # we just created the urbanConfig, proceed with other parameters...
         # parameters for every LicenceConfigs
-        # add UrbanEventTypes folder
-        if not hasattr(aq_base(config_folder), 'urbaneventtypes'):
+        # add EventConfigs folder
+        if not hasattr(aq_base(config_folder), 'eventconfigs'):
             config_folder.invokeFactory(
                 "Folder",
-                id="urbaneventtypes",
-                title=_("urbaneventtypes_folder_title", 'urban')
+                id="eventconfigs",
+                title=_("eventconfigs_folder_title", 'urban')
             )
-        eventtypes_folder = getattr(config_folder, 'urbaneventtypes')
+        eventconfigs_folder = getattr(config_folder, 'eventconfigs')
         if urban_type in ['Inspection', 'Ticket']:
-            setFolderAllowedTypes(eventtypes_folder, ['UrbanEventType', 'FollowUpEventType'])
+            setFolderAllowedTypes(eventconfigs_folder, ['EventConfig', 'FollowUpEventConfig'])
         else:
-            setFolderAllowedTypes(eventtypes_folder, ['UrbanEventType', 'OpinionRequestEventType'])
+            setFolderAllowedTypes(eventconfigs_folder, ['EventConfig', 'OpinionEventConfig'])
 
         licence_vocabularies = default_values.get(urban_type, {})
         createVocabularyFolders(container=config_folder, vocabularies=licence_vocabularies, site=site)
@@ -620,25 +614,25 @@ def addUrbanGroups(context):
        Add a group of 'urban' application users...
     """
     site = context.getSite()
-    #add 3 groups
-    #one with urban Managers
+    # add 3 groups
+    # one with urban Managers
     site.portal_groups.addGroup("urban_managers", title="Urban Managers")
     site.portal_groups.setRolesForGroup('urban_managers', ('UrbanMapReader', ))
-    #one with urban Readers
+    # one with urban Readers
     site.portal_groups.addGroup("urban_readers", title="Urban Readers")
     site.portal_groups.setRolesForGroup('urban_readers', ('UrbanMapReader', ))
-    #one with urban Editors
+    # one with urban Editors
     site.portal_groups.addGroup("urban_editors", title="Urban Editors")
     site.portal_groups.setRolesForGroup('urban_editors', ('UrbanMapReader', ))
     site.portal_groups.addPrincipalToGroup("urban_editors", 'urban_readers')
-    #one with environment Readers
+    # one with environment Readers
     site.portal_groups.addGroup("environment_readers", title="Environment Readers")
     site.portal_groups.setRolesForGroup('environment_readers', ('UrbanMapReader', ))
-    #one with environment Editors
+    # one with environment Editors
     site.portal_groups.addGroup("environment_editors", title="Environment Editors")
     site.portal_groups.setRolesForGroup('environment_editors', ('UrbanMapReader', ))
     site.portal_groups.addPrincipalToGroup("environment_editors", 'environment_readers')
-    #one with map Readers
+    # one with map Readers
     site.portal_groups.addGroup("urban_map_readers", title="Urban Map Readers")
     site.portal_groups.setRolesForGroup('urban_map_readers', ('UrbanMapReader', ))
     # add opinion editors group
@@ -655,24 +649,24 @@ def setDefaultApplicationSecurity(context):
     """
        Set sharing on differents folders to access the application
     """
-    #we have to :
-    #give the Reader role to the urban_readers and urban_editors groups on
-    #portal_urban and application folders
-    #give the Editor role on urban application folders
+    # we have to :
+    # give the Reader role to the urban_readers and urban_editors groups on
+    # portal_urban and application folders
+    # give the Editor role on urban application folders
     site = context.getSite()
-    #make the undo action visible for the site manager
+    # make the undo action visible for the site manager
     site.portal_actions.user.undo.visible = True
     site.manage_permission('List undoable changes', ['Site Administrator', 'Manager'], acquire=1, REQUEST=None)
-    #portal_urban local roles
-    site.portal_urban.manage_addLocalRoles("urban_managers", ("Editor", "Reader", ))
+    # portal_urban local roles
+    site.portal_urban.manage_addLocalRoles("urban_managers", ("Contributor", "Reviewer", "Editor", "Reader", ))
     site.portal_urban.manage_addLocalRoles("urban_readers", ("Reader", ))
     site.portal_urban.manage_addLocalRoles("urban_editors", ("Reader", ))
     site.portal_urban.manage_addLocalRoles("environment_readers", ("Reader", ))
     site.portal_urban.manage_addLocalRoles("environment_editors", ("Reader", ))
     site.portal_urban.manage_addLocalRoles("urban_map_readers", ("Reader", ))
 
-    #application folders local roles
-    #global application folder : "urban_readers" and "urban_editors" can read...
+    # application folders local roles
+    # global application folder : "urban_readers" and "urban_editors" can read...
     if hasattr(site, "urban"):
         app_folder = getattr(site, "urban")
         app_folder.manage_delLocalRoles(["urban_managers"])
@@ -681,10 +675,10 @@ def setDefaultApplicationSecurity(context):
         app_folder.manage_addLocalRoles("urban_editors", ("Reader", ))
         app_folder.manage_addLocalRoles("environment_readers", ("Reader", ))
         app_folder.manage_addLocalRoles("environment_editors", ("Reader", ))
-        #set some hardcoded permissions
-        #sharing is only managed by the 'Managers'
+        # set some hardcoded permissions
+        # sharing is only managed by the 'Managers'
         app_folder.manage_permission('Sharing page: Delegate roles', ['Manager', ], acquire=0)
-        #hide the 'Properties' tab to other roles than 'Manager'
+        # hide the 'Properties' tab to other roles than 'Manager'
         app_folder.manage_permission('Manage properties', ['Manager', ], acquire=0)
 
     licencesfolder_names = getAllLicenceFolderIds()
@@ -696,13 +690,13 @@ def setDefaultApplicationSecurity(context):
         getLicenceFolderId('CODT_IntegratedLicence'),
     ]
     environment_folder_names = getEnvironmentLicenceFolderIds() + uniquelicences_names
-    #licence folder : "urban_readers" can read and "urban_editors" can edit...
+    # licence folder : "urban_readers" can read and "urban_editors" can edit...
     for folder_name in licencesfolder_names:
         if hasattr(app_folder, folder_name):
             folder = getattr(app_folder, folder_name)
-            #we add a property usefull for portal_urban.getUrbanConfig
+            # we add a property usefull for portal_urban.getLicenceConfig
             try:
-                #we try in case we apply the profile again...
+                # we try in case we apply the profile again...
                 folder.manage_addProperty('urbanConfigId', folder_name.strip('s'), 'string')
             except BadRequest:
                 pass
@@ -717,7 +711,7 @@ def setDefaultApplicationSecurity(context):
             if folder_name == getLicenceFolderId('Inspection'):
                 folder.manage_addLocalRoles("inspection_editors", ("Contributor", ))
 
-    #objects application folder : "urban_readers" can read and "urban_editors" can edit...
+    # objects application folder : "urban_readers" can read and "urban_editors" can edit...
     objectsfolder_names = ['architects', 'geometricians', 'notaries', 'parcellings']
     for folder_name in objectsfolder_names:
         if hasattr(app_folder, folder_name):
@@ -808,40 +802,40 @@ def adaptDefaultPortal(context):
     """
        Adapt some properties of the portal
     """
-    #deactivate tabs auto generation in navtree_properties
+    # deactivate tabs auto generation in navtree_properties
     site = context.getSite()
     site.portal_properties.site_properties.disable_folder_sections = True
-    #remove default created objects like events, news, ...
+    # remove default created objects like events, news, ...
     try:
         site.manage_delObjects(ids=['events', ])
     except AttributeError:
-        #the 'events' object does not exist...
+        # the 'events' object does not exist...
         pass
     try:
         site.manage_delObjects(ids=['news', ])
     except AttributeError:
-        #the 'news' object does not exist...
+        # the 'news' object does not exist...
         pass
 
-    #change the content of the front-page
+    # change the content of the front-page
     try:
         frontpage = getattr(site, 'front-page')
         frontpage.setTitle(_("front_page_title", 'urban'))
         frontpage.setDescription(_("front_page_descr", 'urban'))
         frontpage.setText(_("front_page_text", 'urban'), mimetype='text/html')
-        #remove the presentation mode
+        # remove the presentation mode
         frontpage.setPresentation(False)
         frontpage.reindexObject()
     except AttributeError:
-        #the 'front-page' object does not exist...
+        # the 'front-page' object does not exist...
         pass
 
-    #hide de sendto action
-    #set visible = 0
+    # hide de sendto action
+    # set visible = 0
     try:
         site.portal_actions.document_actions.sendto.manage_changeProperties(visible=False)
     except AttributeError:
-        #the 'front-page' object does not exist...
+        # the 'front-page' object does not exist...
         pass
 
 
@@ -851,7 +845,7 @@ def addApplicationFolders(context):
     """
     site = context.getSite()
 
-    #change the layout of the Plone site
+    # change the layout of the Plone site
     site.setLayout('redirectto_urban_root_view')
 
     if not hasattr(aq_base(site), "urban"):
@@ -875,11 +869,11 @@ def addApplicationFolders(context):
         licence_folder = getattr(newFolder, licence_folder_id)
         alsoProvides(licence_folder, ILicenceContainer)
         setFolderAllowedTypes(licence_folder, urban_type)
-        #manage the 'Add' permissions...
+        # manage the 'Add' permissions...
         try:
             licence_folder.manage_permission('urban: Add %s' % urban_type, ['Manager', 'Contributor', ], acquire=0)
         except ValueError:
-            #exception for some portal_types having a different meta_type
+            # exception for some portal_types having a different meta_type
             if urban_type in ['UrbanCertificateOne', 'NotaryLetter', ]:
                 licence_folder.manage_permission('urban: Add UrbanCertificateBase', ['Manager', 'Contributor', ], acquire=0)
             if urban_type in ['CODT_UrbanCertificateOne', 'CODT_NotaryLetter', ]:
@@ -890,7 +884,7 @@ def addApplicationFolders(context):
                 licence_folder.manage_permission('urban: Add EnvironmentLicence', ['Manager', 'Contributor', ], acquire=0)
         newFolder.moveObjectsToBottom([licence_folder_id])
 
-    #add a folder that will contains architects
+    # add a folder that will contains architects
     if not hasattr(newFolder, "architects"):
         newFolderid = newFolder.invokeFactory(
             "Folder",
@@ -900,11 +894,11 @@ def addApplicationFolders(context):
         newSubFolder = getattr(newFolder, newFolderid)
         setFolderAllowedTypes(newSubFolder, 'Architect')
         newSubFolder.setLayout('architects_folderview')
-        #manage the 'Add' permissions...
+        # manage the 'Add' permissions...
         newSubFolder.manage_permission('urban: Add Contact', ['Manager', 'Editor', ], acquire=0)
     newFolder.moveObjectsToBottom(['architects'])
 
-    #add a folder that will contains geometricians
+    # add a folder that will contains geometricians
     if not hasattr(newFolder, "geometricians"):
         newFolderid = newFolder.invokeFactory(
             "Folder",
@@ -914,11 +908,11 @@ def addApplicationFolders(context):
         newSubFolder = getattr(newFolder, newFolderid)
         setFolderAllowedTypes(newSubFolder, 'Geometrician')
         newSubFolder.setLayout('geometricians_folderview')
-        #manage the 'Add' permissions...
+        # manage the 'Add' permissions...
         newSubFolder.manage_permission('urban: Add Contact', ['Manager', 'Editor', ], acquire=0)
     newFolder.moveObjectsToBottom(['geometricians'])
 
-    #add a folder that will contains notaries
+    # add a folder that will contains notaries
     if not hasattr(newFolder, "notaries"):
         newFolderid = newFolder.invokeFactory(
             "Folder",
@@ -928,11 +922,11 @@ def addApplicationFolders(context):
         newSubFolder = getattr(newFolder, newFolderid)
         setFolderAllowedTypes(newSubFolder, 'Notary')
         newSubFolder.setLayout('notaries_folderview')
-        #manage the 'Add' permissions...
+        # manage the 'Add' permissions...
         newSubFolder.manage_permission('urban: Add Contact', ['Manager', 'Editor', ], acquire=0)
     newFolder.moveObjectsToBottom(['notaries'])
 
-    #add a folder that will contains parcellings
+    # add a folder that will contains parcellings
     if not hasattr(newFolder, "parcellings"):
         newFolderid = newFolder.invokeFactory(
             "Folder",
@@ -942,8 +936,6 @@ def addApplicationFolders(context):
         newSubFolder = getattr(newFolder, newFolderid)
         setFolderAllowedTypes(newSubFolder, 'Parcelling')
         newSubFolder.setLayout('parcellings_folderview')
-        #manage the 'Add' permissions...
-        newSubFolder.manage_permission('imio.urban: Add Parcelling', ['Manager', 'Editor', ], acquire=0)
     newFolder.moveObjectsToBottom(['parcellings'])
 
 
@@ -1119,37 +1111,20 @@ def setupOpinionsSchedule(context):
     set_schedule_view(schedule_folder, config_path, schedule_config)
 
 
-def setupTest(context):
-    """
-    Enable schedule faceted navigation on schedule folder.
-    """
-    portal_urban = api.portal.get_tool('portal_urban')
-    for urban_type in URBAN_TYPES:
-        config_folder = getattr(portal_urban, urban_type.lower())
-        if 'test' not in config_folder:
-            test_folder = api.content.create(
-                type='ConfigTest',
-                title='Test',
-                container=config_folder)
-        else:
-            test_folder = config_folder['test']
-        setFolderAllowedTypes(test_folder, [urban_type])
-
-
 def addTestUsers(site):
     users = [
-        ('urbanmanager', 'urban_managers', True),
-        ('urbanreader', 'urban_readers'),
-        ('urbaneditor', 'urban_editors', True),
-        ('environmentreader', 'environment_readers'),
-        ('environmenteditor', 'environment_editors', True),
-        ('urbanmapreader', 'urban_map_readers')
+        ('urbanmanager', ('urban_managers', 'urban_editors', 'urban_readers'), True),
+        ('urbanreader', ('urban_readers',)),
+        ('urbaneditor', ('urban_editors',), True),
+        ('environmentreader', ('environment_readers',)),
+        ('environmenteditor', ('environment_editors',), True),
+        ('urbanmapreader', ('urban_map_readers',))
     ]
     for user_info in users:
         _addTestUser(site, *user_info)
 
 
-def _addTestUser(site, username, groupname, external_editor=False):
+def _addTestUser(site, username, groupnames, external_editor=False):
     is_mountpoint = len(site.absolute_url_path().split('/')) > 2
     try:
         password = username
@@ -1158,9 +1133,10 @@ def _addTestUser(site, username, groupname, external_editor=False):
         member = site.portal_registration.addMember(id=username, password=password)
         if external_editor:
             member.setMemberProperties({'ext_editor': True})
-        site.acl_users.source_groups.addPrincipalToGroup(username, groupname)
-    except:
-        #if something wrong happens (one object already exists), we pass...
+        for groupname in groupnames:
+            site.acl_users.source_groups.addPrincipalToGroup(username, groupname)
+    except Exception:
+        # if something wrong happens (one object already exists), we pass...
         pass
 
 
@@ -1177,19 +1153,19 @@ def addDefaultObjects(context):
     module = __import__(module_name, fromlist=[attribute])
     default_objects = getattr(module, attribute)
 
-    #add some users, some architects and some foldermanagers...
-    #add 3 users, one as manager, one as reader and one as editor...
+    # add some users, some architects and some foldermanagers...
+    # add 3 users, one as manager, one as reader and one as editor...
     site = context.getSite()
     addTestUsers(site)
-        #add some architects...
+    # add some architects...
     urbanFolder = getattr(site, "urban")
     notFolder = getattr(urbanFolder, "architects")
     if not notFolder.objectIds():
-        #create some architects using the Extensions.imports script
+        # create some architects using the Extensions.imports script
         from Products.urban.Extensions.imports import import_architects
         import_architects(context.getSite().portal_urban)
 
-    #add some notaries...
+    # add some notaries...
     urbanFolder = getattr(site, "urban")
     notFolder = getattr(urbanFolder, "notaries")
     if not notFolder.objectIds():
@@ -1197,7 +1173,7 @@ def addDefaultObjects(context):
         createFolderDefaultValues(notFolder, objects_list)
         logger.info("Notaries examples have been added")
 
-    #add some geometricians...
+    # add some geometricians...
     urbanFolder = getattr(site, "urban")
     geoFolder = getattr(urbanFolder, "geometricians")
     if not geoFolder.objectIds():
@@ -1205,7 +1181,7 @@ def addDefaultObjects(context):
         createFolderDefaultValues(geoFolder, objects_list)
         logger.info("Geometricians examples have been added")
 
-    #add some parcellings...
+    # add some parcellings...
     urbanFolder = getattr(site, "urban")
     parcelFolder = getattr(urbanFolder, "parcellings")
     if not parcelFolder.objectIds():
@@ -1213,7 +1189,7 @@ def addDefaultObjects(context):
         createFolderDefaultValues(parcelFolder, objects_list)
         logger.info("Parcelling examples have been added")
 
-    #add some folder managers
+    # add some folder managers
     tool = site.portal_urban
     fmFolder = getattr(tool, "foldermanagers")
     if not fmFolder.objectIds():
@@ -1225,7 +1201,7 @@ def addDefaultObjects(context):
     # set layout to sorted_title_view with z3ctable
     fmFolder.setLayout('sorted_title_folderview')
 
-    #create some streets using the Extensions.imports script
+    # create some streets using the Extensions.imports script
     if not tool.streets.objectIds('City'):
         from Products.urban.Extensions.imports import import_streets_fromfile, import_localities_fromfile
         import_streets_fromfile(tool)
@@ -1236,7 +1212,7 @@ def addEventTypesAndTemplates(context):
     """
      Add default urban event types and their default document templates
     """
-    # add global templates, default UrbanEventTypes and their templates for documents generation
+    # add global templates, default EventConfigs and their templates for documents generation
     updateAllUrbanTemplates(context)
 
 
@@ -1250,7 +1226,7 @@ def setDefaultValues(context):
     site = context.getSite()
     urban_tool = site.portal_urban
 
-    #set default values for text fields
+    # set default values for text fields
     for licencetype, defaulttexts in DefaultTexts.iteritems():
         licence_config = getattr(urban_tool, licencetype.lower())
         licence_config.setTextDefaultValues([{'text': text, 'fieldname': field} for field, text in defaulttexts.iteritems()])
@@ -1278,7 +1254,6 @@ def addDemoLicences(context):
 def createLicence(site, licence_type, data):
     """
     """
-    urban_tool = site.portal_urban
     urban_folder = site.urban
     catalog = api.portal.get_tool('portal_catalog')
 
@@ -1335,7 +1310,7 @@ def createLicence(site, licence_type, data):
         return None
 
     licence_folder = getattr(urban_folder, "%ss" % licence_type.lower())
-    #create the licence
+    # create the licence
     licence_id = site.generateUniqueId('test_%s' % licence_type.lower())
     licence_folder.invokeFactory(licence_type, id=licence_id)
     logger.info('creating test %s' % licence_type)
@@ -1344,7 +1319,7 @@ def createLicence(site, licence_type, data):
     event.notify(EditBegunEvent(licence))
     licence.processForm()
 
-    #fill each licence field with a dummy value
+    # fill each licence field with a dummy value
     logger.info('   test %s --> fill fields with dummy data' % licence_type)
     if type(data) is tuple:
         data = data[0]
@@ -1397,18 +1372,19 @@ def createLicence(site, licence_type, data):
     parcel.updateTitle()
     parcel.reindexObject()
     licence.reindexObject(idxs=['parcelInfosIndex'])
-    #generate all the urban events
+    # generate all the urban events
     logger.info('   test %s --> create all the events' % licence_type)
-    eventtypes = [brain.getObject() for brain in urban_tool.listEventTypes(licence, urbanConfigId=licence_type.lower())]
-    for event_type in eventtypes:
-        licence.createUrbanEvent(event_type)
-    #fill each event with dummy data and generate all its documents
+    event_configs = licence.getLicenceConfig().getEventConfigs()
+    for event_config in event_configs:
+        if event_config.canBeCreatedInLicence(licence):
+            licence.createUrbanEvent(event_config)
+    # fill each event with dummy data and generate all its documents
     logger.info('   test %s --> generate all the documents' % licence_type)
     for urban_event in licence.objectValues(['UrbanEvent', 'UrbanEventInquiry', 'UrbanEventOpinionRequest']):
         event.notify(ObjectInitializedEvent(urban_event))
         if urban_event.getPortalTypeName() == 'UrbanEventOpinionRequest':
             event.notify(EditBegunEvent(urban_event))
-        #fill with dummy values
+        # fill with dummy values
         for field in urban_event.schema.getSchemataFields('default'):
             field_name = field.getName()
             mutator = field.getMutator(urban_event)
@@ -1416,7 +1392,7 @@ def createLicence(site, licence_type, data):
                 field_value = getDummyValueForField(field, urban_event)
                 if field_value:
                     mutator(field_value)
-        #generate the documents
+        # generate the documents
         if not urban_event.objectValues():
             for template in urban_event.getTemplates():
                 generation_view = urban_event.restrictedTraverse('urban-document-generation')
@@ -1442,7 +1418,7 @@ def configurePMWSClientForUrban(context):
         pm_url = u'http://%s-pm.imio.be/ws4pm.wsdl' % locality_name
         registry['imio.pm.wsclient.browser.settings.IWS4PMClientSettings.pm_url'] = pm_url
 
-    #we need to be connected to plonemeeting, else it will cause issues to display the config form
+    # we need to be connected to plonemeeting, else it will cause issues to display the config form
     if not connected:
         return 'you must set the plonemeeting user first'
 
@@ -1480,8 +1456,9 @@ def configurePMWSClientForUrban(context):
         }
     ]
     registry['imio.pm.wsclient.browser.settings.IWS4PMClientSettings.generated_actions'] = action_condition
-    #restore validation
+    # restore validation
     AbstractCollection._validate = old_validate
+
 
 def setupExtra(context):
     if context.readDataFile('urban_extra_marker.txt') is None:
@@ -1489,21 +1466,21 @@ def setupExtra(context):
 
     portal = context.getSite()
 
-    #Setting the user password policy
+    # Setting the user password policy
     if portal.validate_email:
         portal.validate_email = False
         logger.info('user password policy, aka validate_email, set to False')
     else:
         logger.info('user password policy unchanged')
 
-    #we apply a method of CPUtils to configure CKeditor
+    # we apply a method of CPUtils to configure CKeditor
     logger.info("Configuring CKeditor")
     try:
         from Products.CPUtils.Extensions.utils import configure_ckeditor
         if not hasattr(portal.portal_properties, 'ckeditor_properties') or portal.portal_properties.site_properties.default_editor != 'CKeditor':
             configure_ckeditor(portal, custom='urban')
             properties_tool = api.portal.get_tool('portal_properties')
-            custom_menu_style = u"[\n/* Styles Urban */\n{ name : 'Urban Body'\t\t, element : 'p', attributes : { 'class' : 'UrbanBody' } }, \n{ name : 'Urban title'\t       , element : 'p', attributes : { 'class' : 'UrbanTitle' } }, \n{ name : 'Urabn title 2'\t, element : 'p', attributes : { 'class' : 'UrbanTitle2' } }, \n{ name : 'Urban title 3'\t, element : 'p', attributes : { 'class' : 'UrbanTitle3' } }, \n{ name : 'Urban address'\t, element : 'p', attributes : { 'class' : 'UrbanAddress' } }, \n{ name : 'Urban table'\t       , element : 'p', attributes : { 'class' : 'UrbanTable' } }, \n/* Block Styles */\n{ name : 'Grey Title'\t\t, element : 'h2', styles : { 'color' : '#888' } }, \n{ name : 'Grey Sub Title'\t, element : 'h3', styles : { 'color' : '#888' } }, \n{ name : 'Discreet bloc'\t, element : 'p', attributes : { 'class' : 'discreet' } }, \n/* Inline styles */\n{ name : 'Discreet text'\t, element : 'span', attributes : { 'class' : 'discreet' } }, \n{ name : 'Marker: Yellow'\t, element : 'span', styles : { 'background-color' : 'Yellow' } }, \n{ name : 'Typewriter'\t\t, element : 'tt' }, \n{ name : 'Computer Code'\t, element : 'code' }, \n{ name : 'Keyboard Phrase'\t, element : 'kbd' }, \n{ name : 'Sample Text'\t\t, element : 'samp' }, \n{ name : 'Variable'\t\t, element : 'var' }, \n{ name : 'Deleted Text'\t\t, element : 'del' }, \n{ name : 'Inserted Text'\t, element : 'ins' }, \n{ name : 'Cited Work'\t\t, element : 'cite' }, \n{ name : 'Inline Quotation'\t, element : 'q' }, \n{ name : 'Language: RTL'\t, element : 'span', attributes : { 'dir' : 'rtl' } }, \n{ name : 'Language: LTR'\t, element : 'span', attributes : { 'dir' : 'ltr' } }, \n/* Objects styles */\n{ name : 'Image on right'\t, element : 'img', attributes : { 'class' : 'image-right' } }, \n{ name : 'Image on left'\t, element : 'img', attributes : { 'class' : 'image-left' } }, \n{ name : 'Image centered'\t, element : 'img', attributes : { 'class' : 'image-inline' } }, \n{ name : 'Borderless Table'    , element : 'table', styles: { 'border-style': 'hidden', 'background-color' : '#E6E6FA' } }, \n{ name : 'Square Bulleted List', element : 'ul', styles : { 'list-style-type' : 'square' } }\n\n]\n"
+            custom_menu_style = u"[\n/* Styles Urban */\n{ name : 'Urban Body'\t\t, element : 'p', attributes : { 'class' : 'UrbanBody' } }, \n{ name : 'Urban title'\t       , element : 'p', attributes : { 'class' : 'UrbanTitle' } }, \n{ name : 'Urabn title 2'\t, element : 'p', attributes : { 'class' : 'UrbanTitle2' } }, \n{ name : 'Urban title 3'\t, element : 'p', attributes : { 'class' : 'UrbanTitle3' } }, \n{ name : 'Urban address'\t, element : 'p', attributes : { 'class' : 'UrbanAddress' } }, \n{ name : 'Urban table'\t       , element : 'p', attributes : { 'class' : 'UrbanTable' } }, \n/* Block Styles */\n{ name : 'Grey Title'\t\t, element : 'h2', styles : { 'color' : '# 888' } }, \n{ name : 'Grey Sub Title'\t, element : 'h3', styles : { 'color' : '# 888' } }, \n{ name : 'Discreet bloc'\t, element : 'p', attributes : { 'class' : 'discreet' } }, \n/* Inline styles */\n{ name : 'Discreet text'\t, element : 'span', attributes : { 'class' : 'discreet' } }, \n{ name : 'Marker: Yellow'\t, element : 'span', styles : { 'background-color' : 'Yellow' } }, \n{ name : 'Typewriter'\t\t, element : 'tt' }, \n{ name : 'Computer Code'\t, element : 'code' }, \n{ name : 'Keyboard Phrase'\t, element : 'kbd' }, \n{ name : 'Sample Text'\t\t, element : 'samp' }, \n{ name : 'Variable'\t\t, element : 'var' }, \n{ name : 'Deleted Text'\t\t, element : 'del' }, \n{ name : 'Inserted Text'\t, element : 'ins' }, \n{ name : 'Cited Work'\t\t, element : 'cite' }, \n{ name : 'Inline Quotation'\t, element : 'q' }, \n{ name : 'Language: RTL'\t, element : 'span', attributes : { 'dir' : 'rtl' } }, \n{ name : 'Language: LTR'\t, element : 'span', attributes : { 'dir' : 'ltr' } }, \n/* Objects styles */\n{ name : 'Image on right'\t, element : 'img', attributes : { 'class' : 'image-right' } }, \n{ name : 'Image on left'\t, element : 'img', attributes : { 'class' : 'image-left' } }, \n{ name : 'Image centered'\t, element : 'img', attributes : { 'class' : 'image-inline' } }, \n{ name : 'Borderless Table'    , element : 'table', styles: { 'border-style': 'hidden', 'background-color' : '# E6E6FA' } }, \n{ name : 'Square Bulleted List', element : 'ul', styles : { 'list-style-type' : 'square' } }\n\n]\n"
             ckprops = properties_tool.ckeditor_properties
             ckprops.manage_changeProperties(menuStyles=custom_menu_style)
 
@@ -1520,7 +1497,7 @@ def setHTMLContentType(folder, fieldName):
         if hasattr(aq_base(obj), fieldName):
             obj.setContentType('text/html', fieldName)
 
-##/code-section FOOT
+# #/code-section FOOT
 
 
 def _create_task_configs(container, taskconfigs):

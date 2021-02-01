@@ -86,8 +86,8 @@ class UrbanEventOpinionRequest(UrbanEvent, BrowserDefaultMixin):
         if custom_templates:
             return custom_templates
 
-        licence_config = self.aq_parent.getUrbanConfig()
-        opinionrequest_config = getattr(licence_config.urbaneventtypes, "config-opinion-request")
+        licence_config = self.aq_parent.getLicenceConfig()
+        opinionrequest_config = getattr(licence_config.eventconfigs, "config-opinion-request")
         return opinionrequest_config.getTemplates()
 
     security.declarePublic('getLinkedOrganisationTerm')

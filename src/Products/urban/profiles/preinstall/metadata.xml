@@ -15,6 +15,7 @@
     <dependency>profile-collective.externaleditor:default</dependency>
     <dependency>profile-collective.iconifieddocumentactions:default</dependency>
     <dependency>profile-collective.js.jqueryui:default</dependency>
+    <dependency>profile-collective.quickupload:default</dependency>
     <dependency>profile-collective.z3cform.datagridfield:default</dependency>
     <dependency>profile-eea.jquery:23-select2</dependency>
     <dependency>profile-collective.archetypes.select2:default</dependency>
@@ -22,5 +23,6 @@
     <dependency>profile-Products.cron4plone:default</dependency>
     <dependency>profile-urban.vocabulary:default</dependency>
     <dependency>profile-imio.urban.core:default</dependency>
+    <dependency>profile-imio.pm.wsclient:default</dependency>
   </dependencies>
 </metadata>

@@ -82,7 +82,7 @@ class isNotDuplicatedReferenceValidator:
                 _('error_reference_format', default=u"This reference does not match the expected format of {}".format(regex))
             )
 
-        ref_num = match.groups()
+        ref_num = match.groups() or match.group()
         if not ref_num:
             return 1
 
@@ -111,6 +111,11 @@ class procedureChoiceValidator:
             return translate(
                 _('error_procedure_choice_unknown',
                   default=u"Cannot select 'unknown' with another value")
+            )
+        if 'simple' in value and len(value) > 2:
+            return translate(
+                _('error_procedure_choice_simple',
+                  default=u"Cannot select 'simple' with another value")
             )
         if ('light_inquiry' in value) + ('inquiry' in value) + ('initiative_light_inquiry' in value) > 1:
             return translate(
