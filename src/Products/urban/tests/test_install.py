@@ -1,7 +1,7 @@
 #  -*- coding: utf-8 -*-
 import unittest2 as unittest
 
-from imio.urban.core.contents.eventconfig import IEventConfig
+from imio.urban.core.contents import IEventConfig
 
 from Products.CMFCore.utils import getToolByName
 from Products.urban.interfaces import IAcknowledgmentEvent, IOpinionRequestEvent, IInquiryEvent

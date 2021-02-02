@@ -149,15 +149,15 @@
               handler=".urbanEventTypesEvents.forceEventTypeCollege" />
   <!-- [DX] TO DELETE once all UrbanEventType subclasses are migrated to DX [DX] -->
 
-  <subscriber for="imio.urban.core.contents.eventconfig.IEventConfig
+  <subscriber for="imio.urban.core.contents.IEventConfig
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".urbanEventTypesEvents.updateKeyEvent" />
 
-  <subscriber for="imio.urban.core.contents.eventconfig.IEventConfig
+  <subscriber for="imio.urban.core.contents.IEventConfig
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".urbanEventTypesEvents.updateEventType" />
 
-  <subscriber for="imio.urban.core.contents.eventconfig.IEventConfig
+  <subscriber for="imio.urban.core.contents.IEventConfig
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".urbanEventTypesEvents.forceEventTypeCollege" />
 

@@ -274,7 +274,7 @@
   />
 
   <browser:page
-     for="imio.urban.core.contents.parcelling.content.IParcelling"
+     for="imio.urban.core.contents.IParcelling"
      name="parcelrecordsview"
      class=".parcelrecordsview.ParcelRecordsView"
      template="templates/parcelrecordsview.pt"
@@ -282,7 +282,7 @@
   />
 
   <browser:page
-     for="imio.urban.core.contents.parcelling.content.IParcelling"
+     for="imio.urban.core.contents.IParcelling"
      name="searchparcels"
      class=".searchparcelsview.SearchParcelsView"
      template="templates/searchparcels.pt"

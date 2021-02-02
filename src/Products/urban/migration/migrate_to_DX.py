@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-from imio.urban.core.contents.eventconfig import IEventConfig
+from imio.urban.core.contents import IEventConfig
 
 from plone import api
 from plone.app.contenttypes.migration.migration import migrateCustomAT
