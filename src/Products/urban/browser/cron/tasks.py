@@ -44,3 +44,20 @@ class UpdateCollegeEventDoneTasks(BrowserView):
             if college_done:
                 # udpate tasks by simulating an ObjectModifiedEvent on the college urban event
                 notify(ObjectModifiedEvent(college_event))
+
+
+class UpdateOpenTasksLicences(BrowserView):
+    """
+    Update all licences with at least an open tasks.
+    """
+    def __call__(self):
+        """ """
+        catalog = api.portal.get_tool('portal_catalog')
+
+        open_tasks_brains = catalog(
+            object_provides=IAutomatedTask.__identifier__,
+            review_state=states_by_status[STARTED]
+        )
+        licences = [t.getObject().get_container() for t in open_tasks_brains]
+        for licence in licences:
+            notify(ObjectModifiedEvent(licence))
