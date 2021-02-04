@@ -8,6 +8,9 @@ Changes
 - Update MailingPersistentDocumentGenerationView call with generated_doc_title param. [URB-1862]
   [jjaumotte]
 
+- Fix 0 values Bis & Puissance format for get_parcels [SUP-16626]
+  [jjaumotte]
+
 - Fix 0 values Bis & Puissance format for getPortionOutText
   [jjaumotte]
 
