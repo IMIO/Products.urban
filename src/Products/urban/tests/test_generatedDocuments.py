@@ -213,3 +213,28 @@ class TestPortionOutTextFormat(unittest.TestCase):
                                         puissance='5'
                                         )
         self.failUnless(self.document_proxy_licence.getPortionOutsText().encode('utf-8').endswith("86 C,  87/2 D,  88/3 E 4,  89 F 5"))
+
+
+class TestGetParcels(unittest.TestCase):
+    """
+     Test get_parcels output text
+    """
+
+    layer = URBAN_TESTS_LICENCES
+
+    def setUp(self):
+        portal = self.layer['portal']
+        login(portal, 'urbaneditor')
+        portal.urban.buildlicences.invokeFactory('BuildLicence', 'buildlicence1')
+        self.buildlicence = portal.urban.buildlicences.objectValues()[-1]
+        self.helper_view = self.buildlicence.unrestrictedTraverse('document_generation_helper_view')
+
+    def testGetParcelsEmptyBisPuissanceValues(self):
+        # test get_parcels output text with no bis & puissance
+        self.buildlicence.invokeFactory('Parcel', 'test_parcel5',
+                                        division='62006',
+                                        section='A',
+                                        radical='86',
+                                        exposant='C'
+                                        )
+        self.failUnless(self.helper_view.get_parcels().endswith(u"section A n\xb0 86C"))
