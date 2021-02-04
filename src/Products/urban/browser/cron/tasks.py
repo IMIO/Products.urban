@@ -1,10 +1,19 @@
 # -*- coding: utf-8 -*-
 
+from imio.schedule.config import STARTED
+from imio.schedule.config import states_by_status
+from imio.schedule.content.task import IAutomatedTask
+from plone import api
+
 from Products.Five import BrowserView
 
+from Products.urban.interfaces import ICollegeEvent
 from Products.urban.schedule.interfaces import ITaskCron
 
+from zope.component import getMultiAdapter
 from zope.component import getUtilitiesFor
+from zope.event import notify
+from zope.lifecycleevent import ObjectModifiedEvent
 
 
 class TaskCronView(BrowserView):
