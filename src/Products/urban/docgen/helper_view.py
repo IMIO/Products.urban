@@ -419,8 +419,10 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
                         result += u"section {}, ".format(section)
                     else:
                         result += u"section {} ".format(section)
+                bis = p[1].getBis() if p[1].getBis() != '0' else ''
+                puissance = p[1].getPuissance() if p[1].getPuissance() != '0' else ''
                 result += u"n° {}{}{}{}".format(
-                    p[1].getRadical(), p[1].getBis(), p[1].getExposant(), p[1].getPuissance()
+                    p[1].getRadical(), bis, p[1].getExposant(), puissance
                 )
                 if p[0] + 1 != len(gp[1]):
                     result += u", "
