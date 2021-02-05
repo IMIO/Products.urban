@@ -229,4 +229,4 @@ class TestGetParcels(unittest.TestCase):
                                         radical='86',
                                         exposant='C'
                                         )
-        self.failUnless(self.helper_view.get_parcels().endswith(u"section A n\xb0 86C"))
+        self.assertTrue(self.helper_view.get_parcels().endswith(u"section A n\xb0 86C"))
