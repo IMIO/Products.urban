@@ -31,6 +31,7 @@ setup(name='Products.urban',
               'plone.app.testing',
               'plone.app.robotframework[debug, test]',
               'ipdb',
+              'ftw.testbrowser',
           ],
           templates=[
               'Genshi',
