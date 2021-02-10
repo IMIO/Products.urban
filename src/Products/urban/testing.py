@@ -1,18 +1,31 @@
 # -*- coding: utf-8 -*-
 from plone.app.robotframework.testing import REMOTE_LIBRARY_BUNDLE_FIXTURE
-from plone.app.testing import IntegrationTesting
 from plone.app.testing import FunctionalTesting
+from plone.app.testing import IntegrationTesting
 from plone.app.testing import PloneWithPackageLayer
+from plone.app.testing import TEST_USER_ID
 from plone.app.testing import helpers
-
+from plone.app.testing import setRoles
 from plone.testing import z2
-from Products.GenericSetup.tool import DEPENDENCY_STRATEGY_NEW
-from Products.urban.utils import run_entry_points
 
 import Products.urban
+from Products.GenericSetup.tool import DEPENDENCY_STRATEGY_NEW
+from Products.urban.utils import run_entry_points
+from zope.globalrequest import setLocal
 
 
-URBAN_TESTS_PROFILE_DEFAULT = PloneWithPackageLayer(
+class UrbanLayer(PloneWithPackageLayer):
+
+    def setUpPloneSite(self, portal):
+        setLocal('request', portal.REQUEST)
+        # configure default workflows so Folder has a workflow
+        # make sure we have a default workflow
+        portal.portal_workflow.setDefaultChain('simple_publication_workflow')
+        super(UrbanLayer, self).setUpPloneSite(portal)
+        setRoles(portal, TEST_USER_ID, ['Manager'])
+
+
+URBAN_TESTS_PROFILE_DEFAULT = UrbanLayer(
     zcml_filename="testing.zcml",
     zcml_package=Products.urban,
     additional_z2_products=(
