@@ -15,12 +15,13 @@ def preconditions(browser, actor):
 class TestLicenceCreation(FunctionalTestCase):
     """Use case tests.
     Name: Create licence
-    Actor(s): Urban manager
+    Actor(s): Site admin, Urban manager
     Goal: allows actors to create an an xml export to Ecompte
     Author: Julien Jaumotte, Franck Ngaha
     Created: 08/02/2021
     Updated: 09/02/2021
     Preconditions: The actor must be authenticated in a given specific context :
+    - a site admin in the context of an urban folder in private following state (private)
     - an urban manager in the context of an urban folder in private following state (private)
     """
 
@@ -28,7 +29,8 @@ class TestLicenceCreation(FunctionalTestCase):
 
     def setUp(self):
         # Actors
-        self.urban_manager = {'username': 'urbanmanager', 'password': 'urbanmanager'}
+        self.siteadmin = {'username': 'siteadmin', 'password': 'siteadmin'}
+        self.urbanmanager = {'username': 'urbanmanager', 'password': 'urbanmanager'}
         # Contexts
         self.portal = self.layer['portal']
         self.urban_folder = self.portal['urban']
