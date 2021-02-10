@@ -1113,6 +1113,7 @@ def setupOpinionsSchedule(context):
 
 def addTestUsers(site):
     users = [
+        ('urbanadmin', ('Administrators',), True),
         ('siteadmin', ('Site Administrators',), True),
         ('urbanmanager', ('urban_managers', 'urban_editors', 'urban_readers'), True),
         ('urbanreader', ('urban_readers',)),
