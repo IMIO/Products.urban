@@ -68,10 +68,6 @@ class UrbanWithUsersLayer(IntegrationTesting):
             portal.setupCurrentSkin(portal.REQUEST)
             from Products.urban.setuphandlers import addTestUsers
             addTestUsers(portal)
-            # TODO : Fix index error
-            # Catalog rebuild
-            # portal_catalog = portal.portal_catalog
-            # portal_catalog.clearFindAndRebuild()
 
 
 URBAN_TESTS_INTEGRATION = UrbanWithUsersLayer(
@@ -150,6 +146,9 @@ class UrbanWithUsersFunctionalLayer(FunctionalTesting):
             portal.setupCurrentSkin(portal.REQUEST)
             from Products.urban.setuphandlers import addTestUsers
             addTestUsers(portal)
+            # Catalog rebuild
+            portal_catalog = portal.portal_catalog
+            portal_catalog.clearFindAndRebuild()
 
 
 URBAN_TESTS_FUNCTIONAL = UrbanWithUsersFunctionalLayer(
