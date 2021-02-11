@@ -52,6 +52,13 @@ class TestLicenceCreation(FunctionalTestCase):
         state = api.content.get_state(obj=self.app_folder)
         self.assertEqual(state, 'private')
         self.call_scenarios(browser, self.urbanadmin, self.app_folder)
+
+    @browsing
+    def test_scenarios_as_urbanmanager_in_portal_private(self, browser):
+        state = api.content.get_state(obj=self.app_folder)
+        self.assertEqual(state, 'private')
+        self.call_scenarios(browser, self.urbanmanager, self.app_folder)
+
     def call_scenarios(self, browser, actor, context):
         for scenario in self.scenarios:
             self.__getattribute__(scenario)(browser, actor, context)
