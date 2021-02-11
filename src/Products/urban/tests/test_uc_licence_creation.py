@@ -27,7 +27,7 @@ class TestLicenceCreation(FunctionalTestCase):
     Goal: allows actors to create an an xml export to Ecompte
     Author: Julien Jaumotte, Franck Ngaha
     Created: 08/02/2021
-    Updated: 09/02/2021
+    Updated: 11/02/2021
     Preconditions: The actor must be authenticated in a given specific context :
     - an admin in the context of an urban folder in private following state (private)
     - an urban manager in the context of an urban folder in private following state (private)
