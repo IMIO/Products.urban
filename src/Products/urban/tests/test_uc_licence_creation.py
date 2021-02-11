@@ -60,9 +60,16 @@ class TestLicenceCreation(FunctionalTestCase):
         preconditions(browser, actor)  # Login as actor
         self.start_up(browser, context)  # Open context
         step_1(browser, context)  # The actor adds build licence
+        self.step_2(browser, context)  # The system calculates default values and displays the form
 
     def start_up(self, browser, context):
         """Open context."""
         browser.open(context)
         heading = browser.css('.documentFirstHeading').first
         self.assertEqual(context.Title().decode('utf8'), heading.text)
+
+    def step_2(self, browser, context):
+        """The system calculates default values and displays the form."""
+        heading = browser.css('.documentFirstHeading').first
+        self.assertEqual(u"Ajouter Permis d'urbanisme (CODT)", heading.text)
+
