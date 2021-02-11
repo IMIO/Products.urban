@@ -2,7 +2,7 @@
 
 from ftw.testbrowser import browsing
 
-from Products.urban.testing import URBAN_TESTS_FUNCTIONAL
+from Products.urban.testing import URBAN_TESTS_LICENCES_FUNCTIONAL
 from imio.urban.core.testing import FunctionalTestCase
 from plone import api
 
@@ -33,7 +33,7 @@ class TestLicenceCreation(FunctionalTestCase):
     - an urban manager in the context of an urban folder in private following state (private)
     """
 
-    layer = URBAN_TESTS_FUNCTIONAL
+    layer = URBAN_TESTS_LICENCES_FUNCTIONAL
 
     def setUp(self):
         # Actors
