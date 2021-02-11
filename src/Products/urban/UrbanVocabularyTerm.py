@@ -144,7 +144,11 @@ class UrbanVocabulary(object):
 
     def getDisplayList(self, context=None, licence_type=''):
         raw_voc = self.get_raw_voc(context, licence_type)
-        url = getRequest() and getRequest().getURL()
+        url = None
+        try:
+            url = getRequest() and getRequest().getURL()
+        except AttributeError:
+            pass # pass test case where URL is None
         if url and (url.endswith('edit') or url.endswith('@@fieldeditoverlay')):
             result = [(v['id'], u'{}{}'.format(v.get('numbering', ''), v[self.value_to_use])) for v in raw_voc if v['enabled']]
         else:
