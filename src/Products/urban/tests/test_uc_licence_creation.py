@@ -52,20 +52,17 @@ class TestLicenceCreation(FunctionalTestCase):
         state = api.content.get_state(obj=self.app_folder)
         self.assertEqual(state, 'private')
         self.call_scenarios(browser, self.urbanadmin, self.app_folder)
-
     def call_scenarios(self, browser, actor, context):
         for scenario in self.scenarios:
             self.__getattribute__(scenario)(browser, actor, context)
 
     def main_scenario(self, browser, actor, context):
-        import ipdb;
-        ipdb.set_trace()
         preconditions(browser, actor)  # Login as actor
         self.start_up(browser, context)  # Open context
+        step_1(browser, context)  # The actor adds build licence
 
     def start_up(self, browser, context):
         """Open context."""
         browser.open(context)
         heading = browser.css('.documentFirstHeading').first
         self.assertEqual(context.Title().decode('utf8'), heading.text)
-        step_1(browser, context)  # The actor adds build licence
