@@ -2,6 +2,9 @@
 
 from Acquisition import aq_base
 
+from imio.schedule.content.object_factories import CreationConditionObject
+from imio.schedule.content.object_factories import EndConditionObject
+
 from Products.contentmigration.walker import CustomQueryWalker
 from Products.contentmigration.archetypes import InplaceATFolderMigrator
 
@@ -281,26 +284,46 @@ def migrate_inquiry_investigationStart_date(context):
     logger.info("migration step done!")
 
 
+def migrate_announcement_schedule_config(context):
+    """
+    """
+    logger = logging.getLogger('migrate announcement schedule config')
+    logger.info("starting migration step")
+    logger.info("migration step done!")
+    portal_urban = api.portal.get_tool('portal_urban')
+    for licence_config in portal_urban.objectValues('LicenceConfig'):
+        schedule_cfg = getattr(licence_config, 'schedule', None)
+        if schedule_cfg and hasattr(schedule_cfg, 'announcement-preparation'):
+            announcement_prep_task= getattr(schedule_cfg, 'announcement-preparation')
+            announcement_prep_task.end_conditions = (EndConditionObject('urban.schedule.condition.announcement_dates_defined', 'AND'),)
+            announcement_done_task= getattr(schedule_cfg, 'announcement')
+            announcement_done_task.creation_conditions = (CreationConditionObject('urban.schedule.condition.announcement_dates_defined', 'AND'),)
+            announcement_done_task.end_conditions = (EndConditionObject('urban.schedule.condition.announcement_done', 'AND'),)
+    logger.info("migration step done!")
+
+
+
 def migrate(context):
     logger = logging.getLogger('urban: migrate to 2.5')
     logger.info("starting migration steps")
-    migrate_urbaneventtypes_folder(context)
-    setup_tool = api.portal.get_tool('portal_setup')
-    setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'typeinfo')
-    setup_tool.runAllImportStepsFromProfile('profile-Products.urban:default')
-    setup_tool.runImportStepFromProfile('profile-Products.urban:extra', 'urban-update-rubrics')
-    migrate_codt_buildlicences_schedule(context)
-    migrate_CODT_NotaryLetter_to_CODT_UrbanCertificateBase(context)
-    migrate_CODT_UrbanCertificateOne_to_CODT_UrbanCertificateBase(context)
-    migrate_CODT_UrbanCertificateBase_add_permissions(context)
-    migrate_opinion_request_TAL_expression(context)
-    migrate_report_and_remove_urbandelay_portal_type(context)
-    migrate_inquiry_investigationStart_date(context)
-    migrate_parcellings_folder_allowed_type(context)
-    migrate_default_states_to_close_all_events(context)
-    migrate_inquiry_parcels(context)
-    migrate_remove_prov_in_folderroadtypes(context)
-    migrate_disable_natura2000_folderzone(context)
-    catalog = api.portal.get_tool('portal_catalog')
-    catalog.clearFindAndRebuild()
+#    migrate_urbaneventtypes_folder(context)
+#    setup_tool = api.portal.get_tool('portal_setup')
+#    setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'typeinfo')
+#    setup_tool.runAllImportStepsFromProfile('profile-Products.urban:default')
+#    setup_tool.runImportStepFromProfile('profile-Products.urban:extra', 'urban-update-rubrics')
+#    migrate_codt_buildlicences_schedule(context)
+#    migrate_CODT_NotaryLetter_to_CODT_UrbanCertificateBase(context)
+#    migrate_CODT_UrbanCertificateOne_to_CODT_UrbanCertificateBase(context)
+#    migrate_CODT_UrbanCertificateBase_add_permissions(context)
+#    migrate_opinion_request_TAL_expression(context)
+#    migrate_report_and_remove_urbandelay_portal_type(context)
+#    migrate_inquiry_investigationStart_date(context)
+#    migrate_parcellings_folder_allowed_type(context)
+#    migrate_default_states_to_close_all_events(context)
+#    migrate_inquiry_parcels(context)
+#    migrate_remove_prov_in_folderroadtypes(context)
+#    migrate_disable_natura2000_folderzone(context)
+    migrate_announcement_schedule_config(context)
+#    catalog = api.portal.get_tool('portal_catalog')
+#    catalog.clearFindAndRebuild()
     logger.info("migration done!")

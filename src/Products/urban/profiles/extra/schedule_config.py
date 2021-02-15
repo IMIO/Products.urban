@@ -232,7 +232,6 @@ schedule_config = {
             ),
             'end_conditions': (
                 EndConditionObject('urban.schedule.condition.announcement_dates_defined', 'AND'),
-                EndConditionObject('urban.schedule.condition.announcement_done', 'AND'),
             ),
             'calculation_delay': (
                 'schedule.calculation_default_delay',
@@ -248,10 +247,10 @@ schedule_config = {
             'creation_state': ('complete',),
             'starting_states': ('complete',),
             'creation_conditions': (
-                CreationConditionObject('urban.schedule.condition.announcement_done', 'AND'),
+                CreationConditionObject('urban.schedule.condition.announcement_dates_defined', 'AND'),
             ),
             'end_conditions': (
-                EndConditionObject('schedule.end_when_due_date_reached', 'AND'),
+                EndConditionObject('urban.schedule.condition.announcement_done', 'AND'),
             ),
             'start_date': 'urban.schedule.start_date.announcement_end_date',
             'calculation_delay': (
