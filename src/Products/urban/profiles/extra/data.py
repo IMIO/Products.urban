@@ -203,6 +203,19 @@ EventConfigs = {
             'eventType': ('Products.urban.interfaces.IWalloonRegionPrimoEvent',),
         },
         {
+            'id': "rapport-du-college",
+            'title': "Rapport du Collège",
+            'activatedFields': ('decisionDate', 'decision', 'decisionText',),
+            'deadLineDelay': 15,
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+                {'id': "urb-rapp-service.odt", 'title': "Rapport du Service"},
+                {'id': "urb-rapp-college.odt", 'title': "Rapport du Collège"},
+            ),
+            'eventType': ('Products.urban.interfaces.ICollegeReportEvent',),
+        },
+        {
             'id': "config-opinion-request",
             'title': "*** Demande d'avis CONFIG ***",
             'activatedFields': (),

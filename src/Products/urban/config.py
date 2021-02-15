@@ -279,7 +279,7 @@ VOCABULARY_TYPES = [
 ]
 
 # all types that can be used as a licence applicant
-APPLICANTS_TYPES = ['Applicant', 'Proprietary', 'Corporation']
+APPLICANTS_TYPES = ['Applicant', 'Proprietary', 'Corporation', 'Tenant', 'Plaintiff']
 
 #the different templates used to structure a document
 GLOBAL_TEMPLATES = {
