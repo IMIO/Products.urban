@@ -82,16 +82,16 @@ def updateBoundLicences(licence, events):
     If ticket or inspection refers to this licence, update their title and indexes
     as the refered address and aplicants may have changed.
     """
-    annotations = IAnnotations(licence)
-    ticket_uids = annotations.get('urban.bound_tickets') or set([])
-    inspection_uids = annotations.get('urban.bound_inspections') or set([])
-    uids = inspection_uids.union(ticket_uids)
-    catalog = api.portal.get_tool('portal_catalog')
-    bound_licences_brains = catalog(UID=uids)
-    for bound_licences_brain in bound_licences_brains:
-        bound_licence = bound_licences_brain.getObject()
-        bound_licence.updateTitle()
-        bound_licence.reindexObject(idxs=[
+    return _updateBoundLicencesIndexes(licence, events)
+
+
+def _updateBoundLicencesIndexes(licence, events, indexes=[]):
+    """
+    If ticket or inspection refers to this licence, update their title and indexes
+    as the refered address and aplicants may have changed.
+    """
+    if indexes == []:
+        indexes = [
             'Title',
             'sortable_title',
             'applicantInfosIndex',
@@ -99,9 +99,26 @@ def updateBoundLicences(licence, events):
             'StreetNumber',
             'StreetsUID',
             'parcelInfosIndex'
-        ])
+        ]
+
+    annotations = IAnnotations(licence)
+    ticket_uids = annotations.get('urban.bound_tickets') or set([])
+    inspection_uids = annotations.get('urban.bound_inspections') or set([])
+    uids = inspection_uids.union(ticket_uids)
+    catalog = api.portal.get_tool('portal_catalog')
+    bound_licences_brains = catalog(UID=list(uids))
+    for bound_licences_brain in bound_licences_brains:
+        bound_licence = bound_licences_brain.getObject()
+        to_reindex = False
+        if bound_licence.portal_type == 'Inspection' and bound_licence.getUse_bound_licence_infos():
+            to_reindex = True
+        if bound_licence.portal_type == 'Ticket' and bound_licence.getUse_bound_inspection_infos():
+            to_reindex = True
+        if to_reindex:
+            bound_licence.updateTitle()
+            bound_licence.reindexObject(idxs=indexes)
         # make sure to update  the whole reference chain licence <- inspection <- ticket
-        updateBoundLicences(bound_licence, events)
+        _updateBoundLicencesIndexes(bound_licence, events)
 
 
 def updateEventsFoldermanager(licence, event):
@@ -118,7 +135,7 @@ def _setManagerPermissionOnLicence(licence):
 
 
 def _checkNumerotation(licence):
-    config = licence.getUrbanConfig()
+    config = licence.getLicenceConfig()
     portal_urban = config.aq_parent
     source_config = getattr(portal_urban, config.getNumerotationSource())
     # increment the numerotation in the tool only if its the one that has been generated
@@ -184,5 +201,22 @@ def set_faceted_navigation(licence, event):
 def close_all_tasks(licence, event):
     config = licence.getLicenceConfig()
     licence_state = api.content.get_state(licence)
-    if licence_state in config.getStates_to_end_all_tasks() or []:
+    if licence_state in (config.getStates_to_end_all_tasks() or []):
         end_all_open_tasks(licence)
+
+
+def close_all_events(licence, event):
+    """
+    close all UrbanEvents that have the state 'closed' in their workflow.
+    """
+    portal_workflow = api.portal.get_tool('portal_workflow')
+    config = licence.getLicenceConfig()
+    licence_state = api.content.get_state(licence)
+    if licence_state in (config.getStates_to_end_all_events() or []):
+        for urban_event in licence.getAllEvents():
+            workflow_def = portal_workflow.getWorkflowsFor(urban_event)[0]
+            if 'closed' in workflow_def.states.objectIds():
+                workflow_id = workflow_def.getId()
+                workflow_state = portal_workflow.getStatusOf(workflow_id, urban_event)
+                workflow_state['review_state'] = 'closed'
+                portal_workflow.setStatusOf(workflow_id, urban_event, workflow_state.copy())

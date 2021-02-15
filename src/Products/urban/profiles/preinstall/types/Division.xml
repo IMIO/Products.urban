@@ -19,7 +19,7 @@
    <element value="UrbanEvent"/>
    <element value="UrbanEventCollege"/>
    <element value="File"/>
-   <element value="PortionOut"/>
+   <element value="Parcel"/>
    <element value="task"/>
  </property>
  <property name="allow_discussion">False</property>

@@ -658,7 +658,7 @@ class IUrbanDoc(Interface):
     """Marker interface for generated document.
     """
 
-
+# [DX] TO DELETE > 2.5 [DX]
 class ILicencePortionOut(Interface):
     """Marker interface for portionOut in a licence.
     """

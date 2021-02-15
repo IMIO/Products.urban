@@ -29,6 +29,8 @@ from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import Reference
 from Products.ATContentTypes.interfaces.file import IATFile
 from Products.CMFCore.utils import getToolByName
 
+from collective.plonefinder.browser.interfaces import IFinderUploadCapable
+from collective.quickupload.interfaces import IQuickUploadCapable
 from Products.urban.interfaces import IUrbanDoc
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.utils import is_attachment
@@ -236,7 +238,7 @@ schema = Schema((
             visible=False,
             label=_('urban_label_urbaneventtypes', default='Urbaneventtypes'),
         ),
-        allowed_types=('UrbanEventType', 'OpinionRequestEventType'),
+        allowed_types=('EventConfig', 'OpinionEventConfig', 'FollowUpEventConfig'),
         multiValued=0,
         relationship='UrbanEventType',
     ),
@@ -453,7 +455,7 @@ schema = Schema((
 )
 
 ##code-section after-local-schema #fill in your manual code here
-optional_fields = [field.getName() for field in schema.filterFields(isMetadata=False) if field.getName() != 'eventDate']
+optional_fields = [field.getName() for field in schema.filterFields(isMetadata=False) if field.getName() not in ['eventDate', 'urbaneventtypes']]
 setOptionalAttributes(schema, optional_fields)
 ##/code-section after-local-schema
 
@@ -469,7 +471,11 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()
-    implements(interfaces.IUrbanEvent)
+    implements(
+        interfaces.IUrbanEvent,
+        IFinderUploadCapable,
+        IQuickUploadCapable
+    )
 
     meta_type = 'UrbanEvent'
     _at_rename_after_creation = True

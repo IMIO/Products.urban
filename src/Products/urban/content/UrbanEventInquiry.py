@@ -49,7 +49,6 @@ schema = Schema((
             label=_('urban_label_investigationStart',
                     default='Investigationstart'),
         ),
-        optional=True,
     ),
     DateTimeField(
         name='investigationEnd',
@@ -60,7 +59,6 @@ schema = Schema((
                     default='Investigationend'),
         ),
         validators=('isValidInvestigationEnd',),
-        optional=True,
     ),
     DateTimeField(
         name='explanationStartSDate',
@@ -236,7 +234,7 @@ class UrbanEventInquiry(BaseFolder, UrbanEvent, BrowserDefaultMixin):
         catalog = api.portal.get_tool('portal_catalog')
         urban_tool = api.portal.get_tool('portal_urban')
         queryString = {
-            'portal_type': 'PortionOut',
+            'portal_type': 'Parcel',
             'path': {'query': '/'.join(urban_tool.getPhysicalPath()), 'depth': 2},
             'sort_on': 'getObjPositionInParent'
         }

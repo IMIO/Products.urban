@@ -34,6 +34,8 @@ from Products.DataGridField import DataGridField, DataGridWidget
 from Products.DataGridField.Column import Column
 from Products.DataGridField.SelectColumn import SelectColumn
 
+from collective.plonefinder.browser.interfaces import IFinderUploadCapable
+from collective.quickupload.interfaces import IQuickUploadCapable
 from Products.urban.config import *
 from Products.urban import UrbanMessage as _
 
@@ -729,7 +731,7 @@ schema = Schema((
         ),
         schemata='urban_road',
         multiValued=1,
-        vocabulary=UrbanVocabulary('urbaneventtypes', vocType="OpinionRequestEventType", value_to_use='extraValue'),
+        vocabulary=UrbanVocabulary('eventconfigs', vocType="OpinionEventConfig", value_to_use='abbreviation'),
         default_method='getDefaultValue',
     ),
     LinesField(
@@ -919,7 +921,7 @@ schema = Schema((
         ),
         schemata='urban_location',
         multiValued=True,
-        vocabulary=UrbanVocabulary('urbaneventtypes', vocType="OpinionRequestEventType", value_to_use='extraValue'),
+        vocabulary=UrbanVocabulary('eventconfigs', vocType="OpinionEventConfig", value_to_use='abbreviation'),
         default_method='getDefaultValue',
     ),
     StringField(
@@ -975,7 +977,7 @@ schema = Schema((
             default_search_index='Title',
             label=_('urban_label_parcellings', default='Parcellings'),
         ),
-        allowed_types=('ParcellingTerm',),
+        allowed_types=('Parcelling',),
         schemata='urban_location',
         multiValued=False,
         relationship='licenceParcelling',
@@ -1023,7 +1025,9 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
     implements(
         interfaces.IGenericLicence,
         IFacetedTaskContainer,
-        IPossibleFacetedNavigable
+        IPossibleFacetedNavigable,
+        IFinderUploadCapable,
+        IQuickUploadCapable
     )
 
     meta_type = 'GenericLicence'
@@ -1044,7 +1048,7 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
         """
           Returns the reference for the new element
         """
-        return self.getUrbanConfig().generateReference(self)
+        return self.getLicenceConfig().generateReference(self)
 
     # Manually created methods
 
@@ -1075,12 +1079,12 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
         urban_tool = api.portal.get_tool('portal_urban')
         return urban_tool.getTextDefaultValue(field.getName(), context, html)
 
-    security.declarePublic('getUrbanConfig')
+    security.declarePublic('getLicenceConfig')
 
-    def getUrbanConfig(self):
+    def getLicenceConfig(self):
         portal_urban = api.portal.get_tool('portal_urban')
 
-        config_folder = portal_urban.getUrbanConfig(self)
+        config_folder = portal_urban.getLicenceConfig(self)
 
         return config_folder
 
@@ -1090,7 +1094,7 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
         """
           Is the attribute named as param name used in this LicenceConfig ?
         """
-        licenceConfig = self.getUrbanConfig()
+        licenceConfig = self.getLicenceConfig()
         return (name in licenceConfig.getUsedAttributes())
 
     security.declarePublic('createUrbanEvent')
@@ -1201,7 +1205,7 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
         """
            Return the list of parcels (portionOut) for the Licence
         """
-        return self.objectValues('PortionOut')
+        return [obj for obj in self.objectValues() if obj.portal_type == 'Parcel']
 
     security.declarePublic('getOfficialParcels')
 
@@ -1209,7 +1213,7 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
         """
            Return the list of parcels (portionOut) for the Licence
         """
-        parcels = [prc for prc in self.getParcels() if prc.getIsOfficialParcel()]
+        parcels = [prc for prc in self.getParcels() if prc.isOfficialParcel]
         return parcels
 
     security.declarePublic('updateTitle')
@@ -1281,17 +1285,17 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
           Create all urbanEvent corresponding to advice on a licence
         """
         urban_tool = api.portal.get_tool('portal_urban')
-        listEventTypes = self.getAllAdvices()
-        for eventType in listEventTypes:
-            eventType.checkCreationInLicence(self)
-            portal_type = eventType.getEventPortalType() or 'UrbanEvent'
+        opinionevent_configs = self.getAllAdvices()
+        for opinionevent_config in opinionevent_configs:
+            opinionevent_config.checkCreationInLicence(self)
+            portal_type = opinionevent_config.getEventPortalType() or 'UrbanEvent'
 
             newUrbanEventId = self.invokeFactory(
                 portal_type, id=urban_tool.generateUniqueId(portal_type),
-                title=eventType.Title(), urbaneventtypes=(eventType,)
+                title=opinionevent_config.Title(), urbaneventtypes=(opinionevent_config,)
             )
             newUrbanEventObj = getattr(self, newUrbanEventId)
-            if eventType.id in self.solicitOpinionsToOptional:
+            if opinionevent_config.id in self.solicitOpinionsToOptional:
                 newUrbanEventObj.isOptional = True
             newUrbanEventObj.processForm()
         return self.REQUEST.RESPONSE.redirect(self.absolute_url() + '/view?#fieldsetlegend-urban_events')
@@ -1300,21 +1304,15 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
 
     def getAllAdvices(self):
         """
-          XXX need to be refactor (do not work)
           Returns all UrbanEvents corresponding to advice on a licence
         """
-        tool = api.portal.get_tool('portal_urban')
-        urbanConfig = self.getLicenceConfig()
-        listEventTypes = tool.listEventTypes(self, urbanConfig.id)
+        licence_config = self.getLicenceConfig()
+        event_configs = licence_config.getEventConfigs()
         res = []
-        for eventType in listEventTypes:
-            obj = eventType.getObject()
-            if obj.eventTypeType and obj.eventTypeType != 'UrbanEvent':
-                for type_interface_path in obj.getEventTypeType():
-                    type_interface = get_interface_by_path(type_interface_path)
-                    #an advice corresponding to IOpinionRequestEvent
-                    if type_interface.isOrExtends(IOpinionRequestEvent):
-                        res.append(obj)
+        for event_config in event_configs:
+            if event_config.portal_type == 'OpinionEventConfig' and \
+               event_config.canBeCreatedInLicence(self):
+                res.append(event_config)
         return res
 
     security.declarePublic('hasEventNamed')

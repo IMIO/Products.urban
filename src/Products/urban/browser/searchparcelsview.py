@@ -7,6 +7,7 @@ from Products.urban.interfaces import IGenericLicence
 from Products.urban.interfaces import IUrbanCertificateBase
 from Products.urban import services
 from Products.urban.services.cadastral import IGNORE
+from zExceptions import BadRequest
 
 from plone import api
 
@@ -38,6 +39,20 @@ class SearchParcelsView(BrowserView):
             plone_utils.addPortalMessage(translate('warning_enter_search_criteria'), type="warning")
 
     def __call__(self):
+
+        # save all the param of the previous search
+        new_url = '/searchparcels?division={}&section={}&radical={}&bis={}&exposant={}&puissance={}&location={}&street_number={}&parcel_owner={}'.format(
+            self.request.get('division', ''),
+            self.request.get('section', ''),
+            self.request.get('radical', ''),
+            self.request.get('bis', ''),
+            self.request.get('exposant', ''),
+            self.request.get('puissance', ''),
+            self.request.get('location', ''),
+            self.request.get('street_number', ''),
+            self.request.get('parcel_owner', ''),
+        )
+
         if 'add_parcel.x' in self.request.form:
             parcel_data = {
                 'division': self.request.get('division', None),
@@ -56,7 +71,20 @@ class SearchParcelsView(BrowserView):
             else:
                 self.createParcel(parcel_data)
 
-            return self.request.response.redirect(self.context.absolute_url())
+            # save all the param of the previous search
+            new_url = '/searchparcels?division={}&section={}&radical={}&bis={}&exposant={}&puissance={}&location={}&street_number={}&parcel_owner={}'.format(
+                self.request.get('s_division', ''),
+                self.request.get('s_section', ''),
+                self.request.get('s_radical', ''),
+                self.request.get('s_bis', ''),
+                self.request.get('s_exposant', ''),
+                self.request.get('s_puissance', ''),
+                self.request.get('s_location', ''),
+                self.request.get('s_street_number', ''),
+                self.request.get('s_parcel_owner', ''),
+            )
+
+            return self.request.response.redirect(self.context.absolute_url() + new_url)
 
         return self.index()
 
@@ -158,12 +186,28 @@ class SearchParcelsView(BrowserView):
 
     def createParcelAndProprietary(self, parcel_data, owners):
         worklocations = parcel_data.pop('worklocations')
-        self.createApplicantFromParcel(owners, worklocations)
+        # create pacrels first to be sure it fails in case of duplicate
+        # parcels.
         self.createParcel(parcel_data)
+        self.createApplicantFromParcel(owners, worklocations)
 
     def createParcel(self, parcel_data):
-        portal_urban = api.portal.get_tool('portal_urban')
-        portal_urban.createPortionOut(container=self.context, **parcel_data)
+        parcel_id = "%05d%s%04d_%02d%s%03d_%s" % (
+            int(parcel_data['division']),
+            parcel_data['section'],
+            int(parcel_data['radical'] or 0),
+            int(parcel_data['bis'] or 0),
+            parcel_data['exposant'],
+            int(parcel_data['puissance'] or 0),
+            parcel_data['partie'] and '1' or '0'
+        )
+        try:
+            api.content.create(container=self.context, type='Parcel', id=parcel_id, **parcel_data)
+        except BadRequest as already_created:
+            if 'is invalid - it is already in use.' in already_created.message:
+                return
+            raise already_created
+
 
     def createApplicantFromParcel(self, owners, worklocations):
         """

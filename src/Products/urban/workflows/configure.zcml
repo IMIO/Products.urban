@@ -18,10 +18,24 @@
   />
 
   <adapter
+     for="Products.urban.interfaces.IDivision"
+     provides="borg.localrole.interfaces.ILocalRoleProvider"
+     factory=".division_workflow.StateRolesMapping"
+     name="division_local_roles"
+  />
+
+  <adapter
      for="Products.urban.interfaces.IInspection"
      provides="borg.localrole.interfaces.ILocalRoleProvider"
      factory=".inspection_workflow.StateRolesMapping"
      name="inspection_local_roles"
+  />
+
+  <adapter
+     for="Products.urban.interfaces.ITicket"
+     provides="borg.localrole.interfaces.ILocalRoleProvider"
+     factory=".ticket_workflow.StateRolesMapping"
+     name="ticket_local_roles"
   />
 
   <adapter

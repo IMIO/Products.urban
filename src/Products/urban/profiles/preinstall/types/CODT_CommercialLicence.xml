@@ -24,7 +24,7 @@
    <element value="CODT_Inquiry"/>
    <element value="UrbanEvent"/>
    <element value="File"/>
-   <element value="PortionOut"/>
+   <element value="Parcel"/>
    <element value="task"/>
    <element value="ConfigTest"/>
  </property>

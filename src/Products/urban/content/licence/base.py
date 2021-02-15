@@ -434,12 +434,12 @@ class UrbanBase(object):
         """
         organizations = [self.getField('solicitOpinionsTo').vocabulary.getAllVocTerms(self).get(key, None) for key in
         self.getSolicitOpinionsTo()]
-        toreturn = '[CSV]recipientSName|function_department|organization|dispatchSInformation|typeAndStreetName_number_box|postcode_locality|country'
+        toreturn = '[CSV]recipientName|function_department|organization|dispatchInformation|typeAndStreetName_number_box|postcode_locality|country'
         for organization in organizations:
-            toreturn = toreturn + '%' + organization.getRecipientSName() +\
+            toreturn = toreturn + '%' + organization.getRecipientName() +\
                     '|' + organization.getFunction_department() +\
                     '|' + organization.getOrganization() +\
-                    '|' + organization.getDispatchSInformation() +\
+                    '|' + organization.getDispatchInformation() +\
                     '|' + organization.getTypeAndStreetName_number_box() +\
                     '|' + organization.getPostcode_locality() +\
                     '|' + organization.getCountry()
@@ -448,7 +448,7 @@ class UrbanBase(object):
     getMultipleOrganizations = getMultipleOrganizationsCSV
 
     security.declarePublic('getMultipleClaimantsCSV')
-    def getMultipleClaimantsCSV(self):
+    def getMultipleClaimantsCSV(self, number_street_inverted=False):
         """
           Returns a formatted version of claimants to be used in POD templates
         """
@@ -456,12 +456,14 @@ class UrbanBase(object):
         claimants = self.getLastEvent(interfaces.IUrbanEventInquiry).getClaimants()
         toreturn = '[CSV]Titre|TitreR|Nom|Prenom|AdresseLigne1|AdresseLigne2|DateReclamation'
         for claimant in claimants:
+            street_num = number_street_inverted and (claimant.getNumber().decode('utf8') + ',' +
+                                                     claimant.getStreet.decode('utf8')) \
+                         or (claimant.getStreet().decode('utf8') + ',' + claimant.getNumber.decode('utf8'))
             toreturn = toreturn + '%' + claimant.getPersonTitleValue().decode('utf8') +\
                     '|' + claimant.getPersonTitleValue(reverse=True).decode('utf8') +\
                     '|' + claimant.getName1().decode('utf8') +\
                     '|' + claimant.getName2().decode('utf8') +\
-                    '|' + claimant.getNumber().decode('utf8') +\
-                    ', ' + claimant.getStreet().decode('utf8') +\
+                    '|' + street_num +\
                     '|' + claimant.getZipcode().decode('utf8') +\
                     ' ' + claimant.getCity().decode('utf8') +\
                     '|' + tool.formatDate(claimant.getClaimDate()).decode('utf8')
@@ -469,43 +471,52 @@ class UrbanBase(object):
         return toreturn
 
     security.declarePublic('getMultipleArchitectsCSV')
-    def getMultipleArchitectsCSV(self):
+    def getMultipleArchitectsCSV(self, number_street_inverted=False):
         """
           Returns a formatted version of the architects to be used in POD templates
         """
         architects = self.getArchitects()
         toreturn = '[CSV]Titre|Nom|Prenom|AdresseLigne1|AdresseLigne2'
         for architect in architects:
+            street_num = number_street_inverted and (architect.getNumber().decode('utf8') + ',' +
+                                                     architect.getStreet.decode('utf8')) \
+                         or (architect.getStreet().decode('utf8') + ',' + architect.getNumber.decode('utf8'))
             toreturn = toreturn + '%' + architect.getPersonTitleValue() + '|' + architect.getName1() + '|' +\
-                    architect.getName2() + '|' + architect.getNumber() + ', ' + architect.getStreet() + '|' + \
+                    architect.getName2() + '|' + street_num + '|' + \
                     architect.getZipcode() + ' ' + architect.getCity()
         toreturn = toreturn + '[/CSV]'
         return toreturn
 
     security.declarePublic('getMultipleArchitectsCSV')
-    def getMultipleGeometriciansCSV(self):
+    def getMultipleGeometriciansCSV(self, number_street_inverted=False):
         """
           Returns a formatted version of the geometricians to be used in POD templates
         """
         geometricians = self.getGeometricians()
         toreturn = '[CSV]Titre|Nom|Prenom|AdresseLigne1|AdresseLigne2'
         for geometrician in geometricians:
+            street_num = number_street_inverted and (geometrician.getNumber().decode('utf8') + ',' +
+                                                     geometrician.getStreet.decode('utf8')) \
+                         or (geometrician.getStreet().decode('utf8') + ',' + geometrician.getNumber.decode('utf8'))
             toreturn = toreturn + '%' + geometrician.getPersonTitleValue() + '|' + geometrician.getName1() + '|' +\
-                    geometrician.getName2() + '|' + geometrician.getNumber() + ', ' + geometrician.getStreet() + '|' + \
+                    geometrician.getName2() + '|' + street_num + '|' + \
                     geometrician.getZipcode() + ' ' + geometrician.getCity()
         toreturn = toreturn + '[/CSV]'
         return toreturn
 
     security.declarePublic('getMultipleNotariesCSV')
-    def getMultipleNotariesCSV(self):
+    def getMultipleNotariesCSV(self, number_street_inverted=False):
         """
           Returns a formatted version of the notaries to be used in POD templates
         """
         notaries = self.getNotaryContact()
         toreturn = '[CSV]Titre|Nom|Prenom|AdresseLigne1|AdresseLigne2'
         for notary in notaries:
+            street_num = number_street_inverted and (notary.getNumber().decode('utf8') + ',' +
+                                                     notary.getStreet.decode('utf8')) \
+                         or (notary.getStreet().decode('utf8') + ',' + notary.getNumber.decode('utf8'))
             toreturn = toreturn + '%' + notary.getPersonTitleValue() + '|' + notary.getName1() + '|' +\
-                    notary.getName2() + '|' + notary.getNumber() + ', ' + notary.getStreet() + '|' +\
+                    notary.getName2() + '|' + street_num + '|' +\
                     notary.getZipcode() + ' ' + notary.getCity()
         toreturn = toreturn + '[/CSV]'
         return toreturn
@@ -529,45 +540,9 @@ class UrbanBase(object):
           Returns a term object for a given term folder
         """
         tool = api.portal.get_tool('portal_urban')
-        urbanConfig = tool.getUrbanConfig(self)
+        urbanConfig = tool.getLicenceConfig(self)
         termFolderObj = getattr(urbanConfig, termFolder)
         return getattr(termFolderObj, termId)
-
-    security.declarePublic('getPortionOutsText')
-    def getPortionOutsText(self, linebyline=False):
-        """
-          Return a displayable version of the parcels
-        """
-        toreturn = ''
-        isFirst = True
-        first_div = None
-        first_section = None
-        for portionOutObj in self.getParcels():
-            #add a separator between every parcel
-            #either a '\n'
-            if not isFirst and linebyline:
-                toreturn += '\n'
-            #or an "and "
-            elif not isFirst:
-                toreturn += ', '
-            elif isFirst:
-                first_div = portionOutObj.getDivisionAlternativeName()
-                toreturn += '%s ' % portionOutObj.getDivisionAlternativeName()
-                first_section = portionOutObj.getSection()
-                toreturn += 'section %s' % portionOutObj.getSection()
-                toreturn += ' n° '.decode('utf8')
-            else:
-                if first_div != portionOutObj.getDivisionAlternativeName():
-                    toreturn += '%s ' % portionOutObj.getDivisionAlternativeName()
-                if first_section != portionOutObj.getSection():
-                    toreturn += 'section %s ' % portionOutObj.getSection()
-            toreturn += ' %s' % portionOutObj.getRadical()
-            if portionOutObj.getBis() != '':
-                toreturn += '/%s' % portionOutObj.getBis()
-            toreturn += portionOutObj.getExposant()
-            toreturn += portionOutObj.getPuissance()
-            isFirst = False
-        return toreturn
 
     security.declarePublic('getUrbanEvents')
     def getUrbanEvents(self):
@@ -624,7 +599,7 @@ class UrbanBase(object):
         if self.unrestrictedTraverse(selfPhysPath + '/@@plone_lock_info/is_locked_for_current_user')():
             return False
         tool = api.portal.get_tool('portal_urban')
-        if tool.getUrbanConfig(self).getUseTabbingForDisplay():
+        if tool.getLicenceConfig(self).getUseTabbingForDisplay():
             return False
         return True
 
@@ -686,7 +661,7 @@ class UrbanBase(object):
         obj = obj or self
         displaylist = self._getVocabularyDisplayList(field_name, obj)
         field_value = self._getFieldValue(field_name, obj)
-        if not field_value:
+        if not field_value or not displaylist:
             return ''
 
         if type(field_value) not in (list, tuple):
