@@ -19,6 +19,7 @@ def updateLicenceTitle(contact, event):
         return
     parent = contact.aq_inner.aq_parent
     if parent.portal_type in URBAN_TYPES:
+        parent.reindexObject(idxs=['applicantInfosIndex',])
         event = ObjectModifiedEvent(parent)
         notify(event)
 

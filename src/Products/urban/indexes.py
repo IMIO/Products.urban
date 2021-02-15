@@ -76,6 +76,20 @@ def environmentlicence_applicantinfoindex(object):
     return list(set(applicants_info))
 
 
+@indexer(IInspection)
+@indexer(ITicket)
+def inspection_applicantinfoindex(object):
+    """
+    Return the informations to index about the applicants
+    """
+    applicants_info = []
+    contacts = object.getApplicants() + object.getProprietaries() \
+               + object.getPlaintiffs() + object.getTenants()
+    for applicant in contacts:
+        applicants_info.extend(_get_applicantsinfoindex(applicant))
+    return list(set(applicants_info))
+
+
 def _get_applicantsinfoindex(applicant):
     applicants_info = [
         applicant.getName1(),
