@@ -104,6 +104,14 @@
     />
 
     <adapter
+        for="Products.urban.interfaces.ICODT_BaseBuildLicence
+             imio.schedule.content.task_config.ITaskConfig"
+        provides="imio.schedule.interfaces.ICreationCondition"
+        factory=".creation.AnnouncementDatesDefinedCondition"
+        name="urban.schedule.condition.announcement_dates_defined"
+    />
+
+    <adapter
         for="Products.urban.interfaces.IBaseAllBuildLicence
              imio.schedule.content.task_config.ITaskConfig"
         provides="imio.schedule.interfaces.ICreationCondition"
