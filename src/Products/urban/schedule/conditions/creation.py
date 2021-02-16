@@ -160,6 +160,23 @@ class WillHaveAnnouncement(CreationCondition):
         return announcement
 
 
+class InquiryDatesDefinedCondition(CreationCondition):
+    """
+    Licence inquiry start and end dates are defined.
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+        inquiry = licence.getLastInquiry()
+        if not inquiry:
+            return False
+
+        start_date = inquiry.getInvestigationStart()
+        end_date = inquiry.getInvestigationEnd()
+        dates_defined = start_date and end_date
+        return dates_defined
+
+
 class AnnouncementDatesDefinedCondition(CreationCondition):
     """
     Licence announcement start and end dates are defined.
