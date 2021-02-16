@@ -37,6 +37,7 @@ from Products.urban.utils import getAllLicenceFolderIds
 from Products.urban.utils import getEnvironmentLicenceFolderIds
 from Products.urban.utils import getLicenceFolderId
 from Products.urban.utils import getUrbanOnlyLicenceFolderIds
+from Products.urban.utils import moveElementAfter
 
 from datetime import date
 from eea.facetednavigation.layout.interfaces import IFacetedLayout
@@ -1503,6 +1504,7 @@ def setHTMLContentType(folder, fieldName):
 def _create_task_configs(container, taskconfigs):
     """
     """
+    last_id = None
     for taskconfig_kwargs in taskconfigs:
         subtasks = taskconfig_kwargs.pop('subtasks', [])
         task_config_id = taskconfig_kwargs['id']
@@ -1512,6 +1514,8 @@ def _create_task_configs(container, taskconfigs):
 
             task_config_id = container.invokeFactory(**taskconfig_kwargs)
             task_config = getattr(container, task_config_id)
+            if last_id:
+                moveElementAfter(task_config, container, 'id', last_id)
 
             # set custom view fields
             task_config.dashboard_collection.customViewFields = (
@@ -1526,6 +1530,7 @@ def _create_task_configs(container, taskconfigs):
             # set marker_interface
             if marker_interface:
                 alsoProvides(task_config, marker_interface)
+        last_id = task_config_id
 
         task_config = getattr(container, task_config_id)
         for subtasks_kwargs in subtasks:
