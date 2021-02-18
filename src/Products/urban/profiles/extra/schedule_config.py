@@ -5,6 +5,7 @@ from imio.schedule.content.object_factories import StartConditionObject
 from imio.schedule.content.object_factories import CreationConditionObject
 from imio.schedule.content.object_factories import MacroCreationConditionObject
 from imio.schedule.content.object_factories import MacroEndConditionObject
+from imio.schedule.content.object_factories import RecurrenceConditionObject
 
 
 schedule_config = {
@@ -310,7 +311,7 @@ schedule_config = {
             'activate_recurrency': True,
             'recurrence_states': ('complete', ),
             'recurrence_conditions': (
-                RecurrenceConditionObject('urban.schedule.condition.will_have_inquiry', 'AND'),
+                RecurrenceConditionObject('urban.schedule.condition.inquiry_dates_defined', 'AND'),
             ),
             'start_date': 'urban.schedule.start_date.inquiry_end_date',
             'calculation_delay': (
@@ -326,15 +327,19 @@ schedule_config = {
             'default_assigned_user': 'urban.assign_folder_manager',
             'creation_state': ('complete',),
             'creation_conditions': (
-                CreationConditionObject('urban.schedule.condition.has_opinion_requests'),
+                CreationConditionObject('urban.schedule.condition.has_opinion_requests', 'AND'),
             ),
             'starting_states': ('complete',),
             'end_conditions': (
-                EndConditionObject('urban.schedule.condition.opinion_requests_created'),
+                EndConditionObject('urban.schedule.condition.opinion_requests_created', 'AND'),
+            ),
+            'activate_recurrency': True,
+            'recurrence_states': ('complete', ),
+            'recurrence_conditions': (
+                RecurrenceConditionObject('urban.schedule.condition.has_opinion_requests', 'AND'),
             ),
             'start_date': 'urban.schedule.start_date.acknowledgment_date',
             'additional_delay': 0,
-            'activate_recurrency': True,
         },
         {
             'type_name': 'TaskConfig',
@@ -348,7 +353,12 @@ schedule_config = {
             ),
             'starting_states': ('complete',),
             'end_conditions': (
-                EndConditionObject('urban.schedule.condition.opinion_requests_done'),
+                EndConditionObject('urban.schedule.condition.opinion_requests_done', 'AND'),
+            ),
+            'activate_recurrency': True,
+            'recurrence_states': ('complete', ),
+            'recurrence_conditions': (
+                RecurrenceConditionObject('urban.schedule.condition.opinion_requests_in_progress', 'AND'),
             ),
             'start_date': 'urban.schedule.start_date.acknowledgment_date',
             'additional_delay': 30,

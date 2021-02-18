@@ -257,7 +257,6 @@ class InquiryEventCreatedCondition(Condition):
         return False
 
 
-
 class InquiryDoneCondition(Condition):
     """
     Licence inquiry event is closed.
@@ -333,7 +332,12 @@ class HasOpinionRequests(Condition):
 
     def evaluate(self):
         licence = self.task_container
-        return licence.getSolicitOpinionsTo()
+        inquiry_obj = licence.getAllInquiriesAndAnnouncements()[-1]
+        or_events = inquiry_obj.getAllLinkedOpinionRequests()
+
+        if len(or_events) != len(inquiry_obj.getSolicitOpinionsTo()):
+            return True
+        return False
 
 
 class OpinionRequestsEventsCreated(Condition):
@@ -343,10 +347,12 @@ class OpinionRequestsEventsCreated(Condition):
 
     def evaluate(self):
         licence = self.task_container
-        for opinion in licence.getSolicitOpinionsTo():
-            if not licence.getOpinionRequests(organisation=opinion):
-                return False
-        return True
+        inquiry_obj = licence.getAllInquiriesAndAnnouncements()[-1]
+        or_events = inquiry_obj.getAllLinkedOpinionRequests()
+
+        if len(or_events) == len(inquiry_obj.getSolicitOpinionsTo()):
+            return True
+        return False
 
 
 class OpinionRequestsDone(Condition):
@@ -357,10 +363,8 @@ class OpinionRequestsDone(Condition):
 
     def evaluate(self):
         licence = self.task_container
-        or_events = licence.getOpinionRequests()
-
-        if len(or_events) != len(licence.getSolicitOpinionsTo()):
-            return False
+        inquiry_obj = licence.getAllInquiriesAndAnnouncements()[-1]
+        or_events = inquiry_obj.getAllLinkedOpinionRequests()
 
         for opinion in or_events:
             if api.content.get_state(opinion) != 'opinion_given':
