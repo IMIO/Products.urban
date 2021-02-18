@@ -24,6 +24,7 @@ class TestUrbanEvent(unittest.TestCase):
 
     def setUp(self):
         portal = self.layer['portal']
+        self.portal = portal
         self.portal_urban = portal.portal_urban
         self.licence = portal.urban.buildlicences.objectValues('BuildLicence')[0]
         login(portal, 'urbaneditor')
@@ -46,6 +47,18 @@ class TestUrbanEvent(unittest.TestCase):
         notify(ObjectCreatedEvent(createdEvent))
         #if the urbanEvent can generate more than one document, no document should be generated at all
         self.failUnless(len(createdEvent.objectValues()) == 0)
+
+    def test_disable_EventConfig(self):
+        login(self.portal, 'urbanmanager')
+        cfg = self.licence.getLicenceConfig()
+        licenceview = self.licence.restrictedTraverse('buildlicenceview')
+        allowed_events = licenceview.getAllowedEventConfigs()
+        event_config = allowed_events[0]
+        self.assertIn(event_config, licenceview.getAllowedEventConfigs())
+        api.content.transition(event_config, 'disable')
+        self.assertNotIn(event_config, licenceview.getAllowedEventConfigs())
+        api.content.transition(event_config, 'enable')
+        self.assertIn(event_config, licenceview.getAllowedEventConfigs())
 
 
 class TestUrbanEventInstance(SchemaFieldsTestCase):

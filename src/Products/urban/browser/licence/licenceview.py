@@ -48,7 +48,7 @@ class LicenceView(BrowserView):
     def getAllowedEventConfigs(self):
         licence = aq_inner(self.context)
         licence_config = licence.getLicenceConfig()
-        event_configs = [cfg for cfg in licence_config.getEventConfigs() if cfg.canBeCreatedInLicence(self.context)]
+        event_configs = [cfg for cfg in licence_config.getEnabledEventConfigs() if cfg.canBeCreatedInLicence(self.context)]
         return event_configs
 
     def canAddUrbanEvent(self):
