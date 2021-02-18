@@ -228,14 +228,18 @@ class InquiryDatesDefinedCondition(Condition):
 
     def evaluate(self):
         licence = self.task_container
-        inquiry = licence.getLastInquiry()
-        if not inquiry:
-            return False
+        inquiry_objs = licence.getAllInquiries()
+        if inquiry_objs:
+            inquiry_obj = inquiry_objs[-1]
+            inquiry_event = inquiry_obj.getLinkedUrbanEventInquiry()
+            if not inquiry_event or api.content.get_state(inquiry_event) == 'closed':
+                return False
 
-        start_date = inquiry.getInvestigationStart()
-        end_date = inquiry.getInvestigationEnd()
-        dates_defined = start_date and end_date
-        return dates_defined
+            start_date = inquiry_event.getInvestigationStart()
+            end_date = inquiry_event.getInvestigationEnd()
+            dates_defined = start_date and end_date
+            return dates_defined
+        return False
 
 
 class InquiryEventCreatedCondition(Condition):
@@ -245,13 +249,13 @@ class InquiryEventCreatedCondition(Condition):
 
     def evaluate(self):
         licence = self.task_container
+        inquiry_objs = licence.getAllInquiries()
+        if inquiry_objs:
+            inquiry_obj = inquiry_objs[-1]
+            inquiry_event = inquiry_obj.getLinkedUrbanEventInquiry()
+            return bool(inquiry_event)
+        return False
 
-        created = False
-        inquiry_event = licence.getLastInquiry()
-        if inquiry_event:
-            created = api.content.get_state(inquiry_event) != 'closed'
-
-        return created
 
 
 class InquiryDoneCondition(Condition):
@@ -261,13 +265,13 @@ class InquiryDoneCondition(Condition):
 
     def evaluate(self):
         licence = self.task_container
-
-        inquiry_done = False
-        inquiry_event = licence.getLastInquiry()
-        if inquiry_event:
-            inquiry_done = api.content.get_state(inquiry_event) == 'closed'
-
-        return inquiry_done
+        inquiry_objs = licence.getAllInquiries()
+        if inquiry_objs:
+            inquiry_obj = inquiry_objs[-1]
+            inquiry_event = inquiry_obj.getLinkedUrbanEventInquiry()
+            if inquiry_event and api.content.get_state(inquiry_event) == 'closed':
+                return True
+        return False
 
 
 class AnnouncementDatesDefinedCondition(Condition):
@@ -277,14 +281,18 @@ class AnnouncementDatesDefinedCondition(Condition):
 
     def evaluate(self):
         licence = self.task_container
-        announcement = licence.getLastAnnouncement()
-        if not announcement:
-            return False
+        announcement_objs = licence.getAllAnnouncements()
+        if announcement_objs:
+            announcement_obj = announcement_objs[-1]
+            announcement_event = announcement_obj.getLinkedUrbanEventInquiry()
+            if not announcement_obj or api.content.get_state(announcement_event) == 'closed':
+                return False
 
-        start_date = announcement.getInvestigationStart()
-        end_date = announcement.getInvestigationEnd()
-        dates_defined = start_date and end_date
-        return dates_defined
+            start_date = announcement_event.getInvestigationStart()
+            end_date = announcement_event.getInvestigationEnd()
+            dates_defined = start_date and end_date
+            return dates_defined
+        return False
 
 
 class AnnouncementEventCreatedCondition(Condition):
@@ -294,13 +302,12 @@ class AnnouncementEventCreatedCondition(Condition):
 
     def evaluate(self):
         licence = self.task_container
-
-        created = False
-        announcement_event = licence.getLastAnnouncement()
-        if announcement_event:
-            created = api.content.get_state(announcement_event) != 'closed'
-
-        return created
+        announcement_objs = licence.getAllAnnouncements()
+        if announcement_objs:
+            announcement_obj = announcement_objs[-1]
+            announcement_event = announcement_obj.getLinkedUrbanEventInquiry()
+            return bool(announcement_event)
+        return False
 
 
 class AnnouncementDoneCondition(Condition):
@@ -310,13 +317,13 @@ class AnnouncementDoneCondition(Condition):
 
     def evaluate(self):
         licence = self.task_container
-
-        announcement_done = False
-        announcement_event = licence.getLastAnnouncement()
-        if announcement_event:
-            announcement_done = api.content.get_state(announcement_event) == 'closed'
-
-        return announcement_done
+        announcement_objs = licence.getAllAnnouncements()
+        if announcement_objs:
+            announcement_obj = announcement_objs[-1]
+            announcement_event = announcement_obj.getLinkedUrbanEventInquiry()
+            if announcement_obj and api.content.get_state(announcement_event) == 'closed':
+                return True
+        return False
 
 
 class HasOpinionRequests(Condition):

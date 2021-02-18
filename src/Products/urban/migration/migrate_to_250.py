@@ -296,9 +296,11 @@ def migrate_announcement_schedule_config(context):
         if schedule_cfg and hasattr(schedule_cfg, 'announcement-preparation'):
             announcement_prep_task= getattr(schedule_cfg, 'announcement-preparation')
             announcement_prep_task.end_conditions = (EndConditionObject('urban.schedule.condition.announcement_dates_defined', 'AND'),)
+            announcement_prep_task.activate_recurrency = True
             announcement_done_task= getattr(schedule_cfg, 'announcement')
             announcement_done_task.creation_conditions = (CreationConditionObject('urban.schedule.condition.announcement_dates_defined', 'AND'),)
             announcement_done_task.end_conditions = (EndConditionObject('urban.schedule.condition.announcement_done', 'AND'),)
+            announcement_done_task.activate_recurrency = True
     logger.info("migration step done!")
 
 

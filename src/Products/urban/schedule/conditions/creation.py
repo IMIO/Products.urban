@@ -143,7 +143,14 @@ class WillHaveInquiry(CreationCondition):
         initiative_inquiry = 'initiative_inquiry' in licence.getProcedureChoice()
         inquiry = 'inquiry' in licence.getProcedureChoice()
         have_inquiry = initiative_inquiry or inquiry
-        return have_inquiry
+
+        inquiry_objs = licence.getAllInquiries()
+        # if no inquiry object, return True
+        should_be_created = not bool(inquiry_objs)
+        if inquiry_objs and not inquiry_objs[-1].getLinkedUrbanEventInquiry():
+            should_be_created = True
+
+        return have_inquiry and should_be_created
 
 
 class WillHaveAnnouncement(CreationCondition):
@@ -157,7 +164,14 @@ class WillHaveAnnouncement(CreationCondition):
         light_inquiry = 'light_inquiry' in licence.getProcedureChoice()
         initiative_light_inquiry = 'initiative_light_inquiry' in licence.getProcedureChoice()
         announcement = light_inquiry or initiative_light_inquiry
-        return announcement
+
+        announcement_objs = licence.getAllAnnouncements()
+        # if no announcement object, return True
+        should_be_created =  not bool(announcement_objs)
+        if announcement_objs and not announcement_objs[-1].getLinkedUrbanEventInquiry():
+            should_be_created = True
+
+        return announcement and should_be_created
 
 
 class InquiryDatesDefinedCondition(CreationCondition):
@@ -167,14 +181,19 @@ class InquiryDatesDefinedCondition(CreationCondition):
 
     def evaluate(self):
         licence = self.task_container
-        inquiry = licence.getLastInquiry()
-        if not inquiry:
-            return False
+        inquiry_objs = licence.getAllInquiries()
 
-        start_date = inquiry.getInvestigationStart()
-        end_date = inquiry.getInvestigationEnd()
-        dates_defined = start_date and end_date
-        return dates_defined
+        if inquiry_objs:
+            inquiry_obj = inquiry_objs[-1]
+            inquiry_event = inquiry_obj.getLinkedUrbanEventInquiry()
+            if not inquiry_event or api.content.get_state(inquiry_event) == 'closed':
+                return False
+
+            start_date = inquiry_event.getInvestigationStart()
+            end_date = inquiry_event.getInvestigationEnd()
+            dates_defined = start_date and end_date
+            return dates_defined
+        return False
 
 
 class AnnouncementDatesDefinedCondition(CreationCondition):
@@ -184,14 +203,19 @@ class AnnouncementDatesDefinedCondition(CreationCondition):
 
     def evaluate(self):
         licence = self.task_container
-        announcement = licence.getLastAnnouncement()
-        if not announcement:
-            return False
+        announcement_objs = licence.getAllAnnouncements()
 
-        start_date = announcement.getInvestigationStart()
-        end_date = announcement.getInvestigationEnd()
-        dates_defined = start_date and end_date
-        return dates_defined
+        if announcement_objs:
+            announcement_obj = announcement_objs[-1]
+            announcement_event = announcement_obj.getLinkedUrbanEventInquiry()
+            if not announcement_event or api.content.get_state(announcement_event) == 'closed':
+                return False
+
+            start_date = announcement_event.getInvestigationStart()
+            end_date = announcement_event.getInvestigationEnd()
+            dates_defined = start_date and end_date
+            return dates_defined
+        return False
 
 
 class HasNewInquiryCondition(CreationCondition):
@@ -278,7 +302,29 @@ class HasOpinionRequests(CreationCondition):
 
     def evaluate(self):
         licence = self.task_container
-        return licence.getSolicitOpinionsTo()
+        inquiry_obj = licence.getAllInquiries()[-1]
+        or_events = licence.getOpinionRequests()
+
+        if len(or_events) != len(inquiry_obj.getSolicitOpinionsTo()):
+            return True
+
+        return False
+
+
+class OpinionRequestsInprogress(CreationCondition):
+    """
+    At least an opinion request event exists and is not closed.
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+        or_events = licence.getOpinionRequests()
+
+        for opinion in or_events:
+            if api.content.get_state(opinion) != 'opinion_given':
+                return True
+
+        return False
 
 
 class OpinionRequestsDone(CreationCondition):

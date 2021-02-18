@@ -233,6 +233,11 @@ schedule_config = {
             'end_conditions': (
                 EndConditionObject('urban.schedule.condition.announcement_dates_defined', 'AND'),
             ),
+            'activate_recurrency': True,
+            'recurrence_states': ('complete', ),
+            'recurrence_conditions': (
+                RecurrenceConditionObject('urban.schedule.condition.will_have_announcement', 'AND'),
+            ),
             'calculation_delay': (
                 'schedule.calculation_default_delay',
             ),
@@ -251,6 +256,11 @@ schedule_config = {
             ),
             'end_conditions': (
                 EndConditionObject('urban.schedule.condition.announcement_done', 'AND'),
+            ),
+            'activate_recurrency': True,
+            'recurrence_states': ('complete', ),
+            'recurrence_conditions': (
+                RecurrenceConditionObject('urban.schedule.condition.announcement_dates_defined', 'AND'),
             ),
             'start_date': 'urban.schedule.start_date.announcement_end_date',
             'calculation_delay': (
@@ -273,6 +283,11 @@ schedule_config = {
             'end_conditions': (
                 EndConditionObject('urban.schedule.condition.inquiry_dates_defined', 'AND'),
             ),
+            'activate_recurrency': True,
+            'recurrence_states': ('complete', ),
+            'recurrence_conditions': (
+                RecurrenceConditionObject('urban.schedule.condition.will_have_inquiry', 'AND'),
+            ),
             'calculation_delay': (
                 'schedule.calculation_default_delay',
             ),
@@ -292,11 +307,52 @@ schedule_config = {
             'end_conditions': (
                 EndConditionObject('urban.schedule.condition.inquiry_done', 'AND'),
             ),
+            'activate_recurrency': True,
+            'recurrence_states': ('complete', ),
+            'recurrence_conditions': (
+                RecurrenceConditionObject('urban.schedule.condition.will_have_inquiry', 'AND'),
+            ),
             'start_date': 'urban.schedule.start_date.inquiry_end_date',
             'calculation_delay': (
                 'schedule.calculation_default_delay',
             ),
             'additional_delay': 0,
+        },
+        {
+            'type_name': 'TaskConfig',
+            'id': 'creer-demande-avis',
+            'title': 'Avis de services',
+            'default_assigned_group': 'urban_editors',
+            'default_assigned_user': 'urban.assign_folder_manager',
+            'creation_state': ('complete',),
+            'creation_conditions': (
+                CreationConditionObject('urban.schedule.condition.has_opinion_requests'),
+            ),
+            'starting_states': ('complete',),
+            'end_conditions': (
+                EndConditionObject('urban.schedule.condition.opinion_requests_created'),
+            ),
+            'start_date': 'urban.schedule.start_date.acknowledgment_date',
+            'additional_delay': 0,
+            'activate_recurrency': True,
+        },
+        {
+            'type_name': 'TaskConfig',
+            'id': 'demande-avis-en-cours',
+            'title': 'Avis en cours',
+            'default_assigned_group': 'urban_editors',
+            'default_assigned_user': 'urban.assign_folder_manager',
+            'creation_state': ('complete',),
+            'creation_conditions': (
+                CreationConditionObject('urban.schedule.condition.opinion_requests_in_progress'),
+            ),
+            'starting_states': ('complete',),
+            'end_conditions': (
+                EndConditionObject('urban.schedule.condition.opinion_requests_done'),
+            ),
+            'start_date': 'urban.schedule.start_date.acknowledgment_date',
+            'additional_delay': 30,
+            'activate_recurrency': True,
         },
         {
             'type_name': 'MacroTaskConfig',
