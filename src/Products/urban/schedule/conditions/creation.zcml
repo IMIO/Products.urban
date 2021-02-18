@@ -172,6 +172,22 @@
         for="Products.urban.interfaces.IBaseAllBuildLicence
              imio.schedule.content.task_config.ITaskConfig"
         provides="imio.schedule.interfaces.ICreationCondition"
+        factory=".creation.OpinionRequestsInprogress"
+        name="urban.schedule.condition.opinion_requests_in_progress"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.IEnvironmentLicence
+             imio.schedule.content.task_config.ITaskConfig"
+        provides="imio.schedule.interfaces.ICreationCondition"
+        factory=".creation.OpinionRequestsInprogress"
+        name="urban.schedule.condition.opinion_requests_in_progress"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.IBaseAllBuildLicence
+             imio.schedule.content.task_config.ITaskConfig"
+        provides="imio.schedule.interfaces.ICreationCondition"
         factory=".creation.OpinionRequestsDone"
         name="urban.schedule.condition.opinion_requests_done"
     />

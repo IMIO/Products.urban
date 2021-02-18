@@ -375,7 +375,13 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
     def getAllOpinionRequests(self, organisation=""):
         if not organisation:
             return self.getAllEvents(interfaces.IOpinionRequestEvent)
-        opinion_requests = [op for op in self.getAllEvents(interfaces.IOpinionRequestEvent) if organisation in op.id]
+        opinion_requests = [op for op in self.getAllEvents(interfaces.IOpinionRequestEvent)
+                            if organisation in op.id]
+        return opinion_requests
+
+    def getAllLinkedOpinionRequests(self):
+        opinion_requests = [op for op in self.getAllEvents(interfaces.IOpinionRequestEvent)
+                            if op.getLinkedInquiry() == self]
         return opinion_requests
 
     def getAllOpinionRequestsNoDup(self):
