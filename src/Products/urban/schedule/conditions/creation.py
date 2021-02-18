@@ -302,12 +302,11 @@ class HasOpinionRequests(CreationCondition):
 
     def evaluate(self):
         licence = self.task_container
-        inquiry_obj = licence.getAllInquiries()[-1]
-        or_events = licence.getOpinionRequests()
+        inquiry_obj = licence.getAllInquiriesAndAnnouncements()[-1]
+        or_events = inquiry_obj.getAllLinkedOpinionRequests()
 
         if len(or_events) != len(inquiry_obj.getSolicitOpinionsTo()):
             return True
-
         return False
 
 
@@ -318,7 +317,8 @@ class OpinionRequestsInprogress(CreationCondition):
 
     def evaluate(self):
         licence = self.task_container
-        or_events = licence.getOpinionRequests()
+        inquiry_obj = licence.getAllInquiriesAndAnnouncements()[-1]
+        or_events = inquiry_obj.getAllLinkedOpinionRequests()
 
         for opinion in or_events:
             if api.content.get_state(opinion) != 'opinion_given':
@@ -335,10 +335,8 @@ class OpinionRequestsDone(CreationCondition):
 
     def evaluate(self):
         licence = self.task_container
-        or_events = licence.getOpinionRequests()
-
-        if len(or_events) != len(licence.getSolicitOpinionsTo()):
-            return False
+        inquiry_obj = licence.getAllInquiriesAndAnnouncements()[-1]
+        or_events = inquiry_obj.getAllLinkedOpinionRequests()
 
         for opinion in or_events:
             if api.content.get_state(opinion) != 'opinion_given':
