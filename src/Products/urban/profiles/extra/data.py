@@ -4933,7 +4933,16 @@ EventConfigs = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "cu1-lettre-notaire.odt", 'title': "Lettre au notaire (ou demandeur) (octroi)"},
+                {
+                    'id': "cu1-lettre-notaire.odt",
+                    'title': "Lettre au notaire (ou demandeur) (octroi)",
+                    'context_variables':[
+                         {
+                            'name': 'publipostage',
+                            'value': 'notaires'
+                         }
+                    ]
+                },
                 {'id': "cu1-certif.odt", 'title': "Certificat d'urbanisme 1 (annexe 35 formulaire I B)"},
                 {'id': "cu1-demande-paiement.odt", 'title': "Demande de paiement"},
                 {'id': "cu1-rappel-demande-paiement.odt", 'title': "Rappel paiement"},
@@ -5365,7 +5374,16 @@ EventConfigs = {
             'podTemplates': (
                 {'id': "div-decision.odt", 'title': "Octroi/refus de la division"},
                 {'id': "div-decision-incomplet.odt", 'title': "Dossier incomplet"},
-                {'id': "div-transmis-decision.odt", 'title': "Octroi/refus de la division (transmis au notaire)"},
+                {
+                    'id': "div-transmis-decision.odt",
+                    'title': "Octroi/refus de la division (transmis au notaire)",
+                    'context_variables': [
+                        {
+                            'name': 'publipostage',
+                            'value': 'notaires'
+                        }
+                    ]
+                },
             ),
         },
     ),
@@ -5388,7 +5406,16 @@ EventConfigs = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "not-lettre-information-notariale.odt", 'title': "Lettre d'information notariale (annexe 49 formulaire III)"},
+                {
+                    'id': "not-lettre-information-notariale.odt",
+                    'title': "Lettre d'information notariale (annexe 49 formulaire III)",
+                    'context_variables': [
+                        {
+                            'name': 'publipostage',
+                            'value': 'notaires'
+                        }
+                    ]
+                },
             ),
             'eventType': ('Products.urban.interfaces.ITheLicenceEvent', 'Products.urban.interfaces.ILicenceNotificationEvent',),
         },
@@ -7492,7 +7519,16 @@ EventConfigs = {
             'podTemplates': (
                 {'id': "lot-decision-octroi-dem.odt", 'title': "Octroi du permis (lettre au demandeur)"},
                 {'id': "lot-decision-octroi-rw.odt", 'title': "Octroi du permis (lettre à l'Urbanisme)"},
-                {'id': "lot-decision-transmis-reclamants.odt", 'title': "Décision du permis (transmis aux réclamants)"},
+                {
+                    'id': "lot-decision-transmis-reclamants.odt",
+                    'title': "Décision du permis (transmis aux réclamants)",
+                    'context_variables': [
+                        {
+                            'name': 'publipostage',
+                            'value': 'derniers_reclamants'
+                        }
+                    ]
+                },
                 {
                     'id': "lot-decision-formulaire-b.odt",
                     'title': "Annexe 31 - Formulaire B",
@@ -7586,6 +7622,16 @@ EventConfigs = {
                     ]
                 },
                 {'id': "codt_pu_annexe_26_affiche_jaune.odt", 'title': "Affiche jaune (annexe 26)"},
+                {
+                    'id': "codt_pu_etiquettes_adresses_proprietaires.odt",
+                    'title': "Etiquettes adresses propriétaires",
+                    'context_variables': [
+                        {
+                            'name': 'publipostage',
+                            'value': 'proprietaires'
+                        }
+                    ]
+                },
             ),
             'eventType': ('Products.urban.interfaces.IInquiryEvent',),
             'eventPortalType': 'UrbanEventInquiry',
