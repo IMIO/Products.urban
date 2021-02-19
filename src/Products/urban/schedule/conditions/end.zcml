@@ -175,7 +175,7 @@
 
     <!-- opinion requests conditions-->
     <adapter
-        for="Products.urban.interfaces.IBaseBuildLicence
+        for="Products.urban.interfaces.ICODT_BaseBuildLicence
              imio.schedule.content.task.IAutomatedTask"
         provides="imio.schedule.interfaces.IEndCondition"
         factory=".generic.OpinionRequestsEventsCreated"
@@ -183,7 +183,7 @@
     />
 
     <adapter
-        for="Products.urban.interfaces.IBaseBuildLicence
+        for="Products.urban.interfaces.ICODT_BaseBuildLicence
              imio.schedule.content.task.IAutomatedTask"
         provides="imio.schedule.interfaces.IEndCondition"
         factory=".generic.OpinionRequestsDone"

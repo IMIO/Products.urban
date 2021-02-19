@@ -38,7 +38,9 @@ class OpinionRequestSentStatus(TaskEndSimpleStatusView):
         matched, not_matched = [], []
         licence = self.task.get_container()
 
-        opinion_events = licence.getOpinionRequests()
+        inquiry_objs = licence.getAllInquiriesAndAnnouncements()
+        inquiry_obj = inquiry_objs[-1]
+        opinion_events = inquiry_obj.getAllLinkedOpinionRequests()
         if not opinion_events:
             not_matched.append('Créer les événements de demande d\'avis')
 
@@ -47,6 +49,12 @@ class OpinionRequestSentStatus(TaskEndSimpleStatusView):
                 msg = 'Passer l\'événement <strong>"{}"</strong> dans l\'état <strong>"{}"</strong>'.format(
                     ask_opinion_event.Title(),
                     'en attente d\'avis'
+                )
+                not_matched.append(msg)
+            elif api.content.get_state(ask_opinion_event) in ['waiting_opinion', 'opinion_validation']:
+                msg = 'En attente d\'avis <strong>"{}"</strong>. Date limite: <strong>{}</strong>'.format(
+                    ask_opinion_event.Title(),
+                    self.task.due_date.strftime('%d/%m/%Y')
                 )
                 not_matched.append(msg)
             else:

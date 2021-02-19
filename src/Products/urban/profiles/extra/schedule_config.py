@@ -247,7 +247,7 @@ schedule_config = {
         {
             'type_name': 'TaskConfig',
             'id': 'announcement',
-            'title': 'Annonce de projet',
+            'title': 'Annonce de projet en cours',
             'default_assigned_group': 'urban_editors',
             'default_assigned_user': 'urban.assign_folder_manager',
             'creation_state': ('complete',),
@@ -297,7 +297,7 @@ schedule_config = {
         {
             'type_name': 'TaskConfig',
             'id': 'inquiry',
-            'title': 'Enquête publique',
+            'title': 'Enquête publique en cours',
             'default_assigned_group': 'urban_editors',
             'default_assigned_user': 'urban.assign_folder_manager',
             'creation_state': ('complete',),
@@ -322,7 +322,7 @@ schedule_config = {
         {
             'type_name': 'TaskConfig',
             'id': 'creer-demande-avis',
-            'title': 'Avis de services',
+            'title': 'Préparer demandes d\'avis',
             'default_assigned_group': 'urban_editors',
             'default_assigned_user': 'urban.assign_folder_manager',
             'creation_state': ('complete',),
@@ -363,6 +363,7 @@ schedule_config = {
             'start_date': 'urban.schedule.start_date.acknowledgment_date',
             'additional_delay': 30,
             'activate_recurrency': True,
+            'marker_interfaces': [u'Products.urban.schedule.interfaces.ISendOpinionRequestsTask'],
         },
         {
             'type_name': 'MacroTaskConfig',

@@ -305,7 +305,9 @@ class HasOpinionRequests(CreationCondition):
         inquiry_obj = licence.getAllInquiriesAndAnnouncements()[-1]
         or_events = inquiry_obj.getAllLinkedOpinionRequests()
 
-        if len(or_events) != len(inquiry_obj.getSolicitOpinionsTo()):
+        asked_opinions = inquiry_obj.getSolicitOpinionsTo()
+        asked_optional_opinions = inquiry_obj.getSolicitOpinionsToOptional()
+        if len(or_events) != len(asked_opinions) + len(asked_optional_opinions):
             return True
         return False
 

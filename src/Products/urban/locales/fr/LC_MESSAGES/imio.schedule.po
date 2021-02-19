@@ -33,7 +33,7 @@ msgid "urban.schedule.condition.analysis_done"
 msgstr "Retour service urbanisme fait"
 
 msgid "urban.schedule.condition.announcement_dates_defined"
-msgstr "Définir les dates de début et fin de l'annonce de projet"
+msgstr "Créer l'événement d'annonce de projet et définir les dates de début/fin d'annonce"
 
 msgid "urban.schedule.condition.announcement_done"
 msgstr "Cloturer l'événement d'annonce de projet"
@@ -114,7 +114,7 @@ msgid "urban.schedule.condition.incomplete_second_time"
 msgstr "Incomplet pour le seconde fois"
 
 msgid "urban.schedule.condition.inquiry_dates_defined"
-msgstr "Définir les dates d'enquêtes"
+msgstr "Créer l'événement d'enquête publique et définir les dates de début/fin d'enquête"
 
 msgid "urban.schedule.condition.inquiry_done"
 msgstr "Enquête terminée"

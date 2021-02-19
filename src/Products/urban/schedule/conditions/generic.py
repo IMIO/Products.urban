@@ -284,7 +284,7 @@ class AnnouncementDatesDefinedCondition(Condition):
         if announcement_objs:
             announcement_obj = announcement_objs[-1]
             announcement_event = announcement_obj.getLinkedUrbanEventInquiry()
-            if not announcement_obj or api.content.get_state(announcement_event) == 'closed':
+            if not announcement_event or api.content.get_state(announcement_event) == 'closed':
                 return False
 
             start_date = announcement_event.getInvestigationStart()
@@ -335,7 +335,9 @@ class HasOpinionRequests(Condition):
         inquiry_obj = licence.getAllInquiriesAndAnnouncements()[-1]
         or_events = inquiry_obj.getAllLinkedOpinionRequests()
 
-        if len(or_events) != len(inquiry_obj.getSolicitOpinionsTo()):
+        asked_opinions = inquiry_obj.getSolicitOpinionsTo()
+        asked_optional_opinions = inquiry_obj.getSolicitOpinionsToOptional()
+        if len(or_events) != len(asked_opinions) + len(asked_optional_opinions):
             return True
         return False
 
@@ -350,7 +352,9 @@ class OpinionRequestsEventsCreated(Condition):
         inquiry_obj = licence.getAllInquiriesAndAnnouncements()[-1]
         or_events = inquiry_obj.getAllLinkedOpinionRequests()
 
-        if len(or_events) == len(inquiry_obj.getSolicitOpinionsTo()):
+        asked_opinions = inquiry_obj.getSolicitOpinionsTo()
+        asked_optional_opinions = inquiry_obj.getSolicitOpinionsToOptional()
+        if len(or_events) == len(asked_opinions) + len(asked_optional_opinions):
             return True
         return False
 

@@ -51,6 +51,8 @@ from Products.urban.utils import get_interface_by_path
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 
 from zope.component import createObject
+from zope.event import notify
+from zope.lifecycleevent import ObjectModifiedEvent
 
 from plone import api
 
@@ -1298,6 +1300,8 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
             if opinionevent_config.id in self.solicitOpinionsToOptional:
                 newUrbanEventObj.isOptional = True
             newUrbanEventObj.processForm()
+
+        notify(ObjectModifiedEvent(self))
         return self.REQUEST.RESPONSE.redirect(self.absolute_url() + '/view?#fieldsetlegend-urban_events')
 
     security.declarePublic('getAllAdvices')
