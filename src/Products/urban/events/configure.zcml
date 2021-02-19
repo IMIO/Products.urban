@@ -28,6 +28,10 @@
               handler=".contactEvents.sortByAlphabeticalOrder" />
 
   <subscriber for="..interfaces.IInquiry
+                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+              handler=".inquiryEvents.notifyLicence"/>
+
+  <subscriber for="..interfaces.IInquiry
                    Products.Archetypes.interfaces.IEditBegunEvent"
               handler=".inquiryEvents.setDefaultValuesEvent"/>
 

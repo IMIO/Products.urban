@@ -153,7 +153,7 @@
 
     <!-- opinion requests conditions-->
     <adapter
-        for="Products.urban.interfaces.IBaseAllBuildLicence
+        for="Products.urban.interfaces.ICODT_BaseBuildLicence
              imio.schedule.content.task_config.ITaskConfig"
         provides="imio.schedule.interfaces.ICreationCondition"
         factory=".creation.HasOpinionRequests"
@@ -169,7 +169,7 @@
     />
 
     <adapter
-        for="Products.urban.interfaces.IBaseAllBuildLicence
+        for="Products.urban.interfaces.ICODT_BaseBuildLicence
              imio.schedule.content.task_config.ITaskConfig"
         provides="imio.schedule.interfaces.ICreationCondition"
         factory=".creation.OpinionRequestsInprogress"
@@ -185,7 +185,7 @@
     />
 
     <adapter
-        for="Products.urban.interfaces.IBaseAllBuildLicence
+        for="Products.urban.interfaces.ICODT_BaseBuildLicence
              imio.schedule.content.task_config.ITaskConfig"
         provides="imio.schedule.interfaces.ICreationCondition"
         factory=".creation.OpinionRequestsDone"

@@ -1,5 +1,19 @@
 # -*- coding: utf-8 -*-
 
+from Products.urban.interfaces import IGenericLicence
+
+from zope.event import notify
+from zope.lifecycleevent import ObjectModifiedEvent
+
+
+def notifyLicence(inquiry, event):
+    """
+    Notify the licence of changes so schedule events triggers.
+    """
+    if not inquiry.checkCreationFlag() and not IGenericLicence.providedBy(inquiry):
+        licence = inquiry.aq_parent
+        notify(ObjectModifiedEvent(licence))
+
 
 def beforeDelete(ob, event):
     """
