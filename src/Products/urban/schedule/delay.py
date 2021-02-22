@@ -58,7 +58,7 @@ class AnnoncedDelay(UrbanBaseDelay):
         delay = licence.getAnnoncedDelay() or 0
         if licence.getHasModifiedBlueprints():
             delay = licence.getDelayAfterModifiedBlueprints()
-        if delay.endswith('j'):
+        if delay and delay.endswith('j'):
             delay = int(delay[:-1])
             delay += self.inquiry_suspension_delay()
         return delay + base_delay
