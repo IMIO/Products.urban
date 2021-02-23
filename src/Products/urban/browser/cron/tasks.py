@@ -7,7 +7,7 @@ from Products.Five import BrowserView
 from Products.urban.interfaces import ICollegeEvent
 from Products.urban.schedule.interfaces import ITaskCron
 
-from zope.component import getMultiAdapter
+from zope.component import queryMultiAdapter
 from zope.component import getUtilitiesFor
 from zope.event import notify
 from zope.lifecycleevent import ObjectModifiedEvent
@@ -28,7 +28,7 @@ class UpdateCollegeEventDoneTasks(BrowserView):
 
     def __call__(self):
         """ """
-        ws4pm = getMultiAdapter((api.portal.get(), self.request), name='ws4pmclient-settings')
+        ws4pm = queryMultiAdapter((api.portal.get(), self.request), name='ws4pmclient-settings')
         if not ws4pm:
             return
 
