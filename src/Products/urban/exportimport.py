@@ -2,7 +2,7 @@
 
 from Products.CMFCore.utils import getToolByName
 
-from Products.urban.scripts.odtsearch import searchOneODT
+from Products.urban.scripts.odtsearch import SearchPODTemplates
 from Products.urban.utils import moveElementAfter
 from Products.urban.utils import getMd5Signature
 
@@ -130,7 +130,8 @@ def getDefaultStyleTemplate(context, template_id):
 
 def getDefaultSubTemplates(context, template_id):
     file_path = '%s/templates/%s' % (context._profile_path, template_id)
-    tree, search_results = searchOneODT(file_path, ["from document\(at=(.*),"], silent=True)
+    search = SearchPODTemplates("from document\(at=(.*),", file_path, silent=True)
+    search_result = search.run()
     category = template_id.startswith('env') and 'env' or 'urb'
     available_subtemplates = availableSubTemplates(context)
 
