@@ -18,8 +18,6 @@ from AccessControl import ClassSecurityInfo
 from collective.archetypes.select2.select2widget import MultiSelect2Widget
 from collective.faceted.task.interfaces import IFacetedTaskContainer
 
-from DateTime import DateTime
-
 from eea.facetednavigation.subtypes.interfaces import IPossibleFacetedNavigable
 
 from Products.Archetypes.atapi import *

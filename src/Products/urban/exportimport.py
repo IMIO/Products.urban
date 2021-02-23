@@ -130,19 +130,21 @@ def getDefaultStyleTemplate(context, template_id):
 
 def getDefaultSubTemplates(context, template_id):
     file_path = '%s/templates/%s' % (context._profile_path, template_id)
-    search = SearchPODTemplates("from document\(at=(.*),", file_path, silent=True)
-    search_result = search.run()
+    search = SearchPODTemplates("from document\(at=(.*),", [file_path], silent=True)
+    search_results = search.run()
     category = template_id.startswith('env') and 'env' or 'urb'
     available_subtemplates = availableSubTemplates(context)
 
     footer_template = available_subtemplates[category].get('footer', None)
     subtemplates = footer_template and [{'pod_context_name': 'footer', 'template': footer_template, 'do_rendering': True}] or []
-    for result in search_results:
-        subtemplate_name = result['match'][0].groups()[0]
-        subtemplate = available_subtemplates[category].get(subtemplate_name, None)
-        if subtemplate:
-            line = {'pod_context_name': subtemplate_name, 'template': subtemplate, 'do_rendering': True}
-            subtemplates.append(line)
+    if search_results:
+        search_result = search_results.values()[0]
+        for match in search_result[1][0]['matches']:
+            subtemplate_name = match.groups()[0]
+            subtemplate = available_subtemplates[category].get(subtemplate_name, None)
+            if subtemplate:
+                line = {'pod_context_name': subtemplate_name, 'template': subtemplate, 'do_rendering': True}
+                subtemplates.append(line)
 
     return subtemplates
 
