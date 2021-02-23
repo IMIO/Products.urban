@@ -188,7 +188,7 @@ class isValidPuissanceValidator:
         self.name = name
 
     def __call__(self, value, *args, **kwargs):
-        if value == '' or (len(value) < 3 and value.isdigit()):
+        if value == '' or (len(value) < 4 and value.isdigit()):
             return 1
         return translate(_('error_puissance', default=u"Puissance should be a number < 100"))
 
