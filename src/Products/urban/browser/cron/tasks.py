@@ -29,6 +29,8 @@ class UpdateCollegeEventDoneTasks(BrowserView):
     def __call__(self):
         """ """
         ws4pm = getMultiAdapter((api.portal.get(), self.request), name='ws4pmclient-settings')
+        if not ws4pm:
+            return
 
         catalog = api.portal.get_tool('portal_catalog')
 
