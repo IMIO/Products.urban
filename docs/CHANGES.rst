@@ -5,27 +5,6 @@ Changes
 2.5 (unreleased)
 ----------------
 
-- Fix 0 values Bis & Puissance format for getPortionOutText
-  [jjaumotte]
-
-- Remove 'provincial' in folderroadtypes vocabulary [URB-2129]
-  [jjaumotte]
-
-- Remove locality name in default text [URB-2124]
-  [jjaumotte]
-
-- Remove/disable natura2000 folderzone [URB-2052]
-  [jjaumotte]
-
-- Add notaries mailing [URB-2110]
-  [jjaumotte]
-
-- Add copy to claymant action for recipient_cadastre in inquiry event
-  [sdelcourt / jjaumotte]
-
-- Fix liste_220 title encoding error + translation [SUP-15084]
-  [jjaumotte]
-
 - provides organizations to consult based on external directions
   [fngaha]
 
@@ -60,48 +39,6 @@ Changes
   [jjaumotte]
 
 - Improve default reference expression for licence references. [URB-2046]
-  [sdelcourt]
-
-- Add search filter on public config folders (geometricians, notaries, architects, parcellings). [SUP-10537]
-  [sdelcourt]
-
-- Migrate PortionOut (Archetype) type to Parcel (dexterity) type. [URB-2009]
-  [sdelcourt]
-
-- Fix add permissions for Inquiries. [SUP-13679]
-  [sdelcourt]
-
-- Add custom division 99999 for unreferenced parcels. [SUP-13835]
-  [sdelcourt]
-
-- Migrate ParcellingTerm (Archetype) type to Parcelling (dexterity) type.
-  [sdelcourt]
-
-- Pre-check all manageable licences for foldermanager creation. [URB-1935]
-  [jjaumotte]
-  
-- Add field to define final states closing all the urban events on a licence. [URB-2082]
-  [sdelcourt]
-
-- Refactor key date display to include urban event custom titles. [SUP-13982]
-  [sdelcourt]
-
-- Licences can created as a copy of another licence (fields, applicants and parcels can be copied). [URB-1934]
-  [sdelcourt]
-
-- Add collective.quickupload to do multiple file upload on licences and events.
-  [sdelcourt]
-
-- Fix empty value display on select fields. [URB-2073]
-  [sdelcourt]
-
-- Add new value 'simple procedure' for CODT BuildLicence procedure choice. [SUP-6566]
-  [sdelcourt]
-
-- Allow multiple parcel add from the 'search parcel' view. [URB-2126]
-  [sdelcourt]
-
-- Complete codt buildlicence config with 'college repport' event. [URB-2074]
   [sdelcourt]
 
 
@@ -176,12 +113,8 @@ Changes
 - Add migration source code
   [fngaha]
 
-2.3.x (unreleased)
--------------------
-- Update MultipleContactCSV methods with an optional number_street_inverted (#17811)
-  [jjaumotte]
 
-1.11.1 (unknown release date)
+1.11.1 (unreleased)
 -------------------
 - add query_parcels_in_radius method to view
   [fngaha]

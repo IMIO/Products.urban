@@ -17,9 +17,4 @@
     title="Products.urban: SendToPM"
     />
 
-  <permission
-    id="imio.urban.add_parcel"
-    title="imio.urban: Add Parcel"
-    />
-
 </configure>

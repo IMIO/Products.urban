@@ -13,24 +13,6 @@
 
   <browser:page
      for="Products.urban.interfaces.IGenericLicence"
-     name="duplicate_licence"
-     class=".duplicate_licence.DuplicateLicenceFormView"
-     permission="zope2.View"
-  />
-
-  <adapter
-     for="Products.urban.interfaces.IGenericLicence
-          zope.publisher.interfaces.browser.IBrowserRequest
-          .duplicate_licence.DuplicateLicenceForm
-          .duplicate_licence.TabsToDuplicateField
-          z3c.form.interfaces.IFieldWidget"
-      provides="z3c.form.interfaces.IValue"
-      factory=".duplicate_licence.DefaultTabsToDuplicate"
-      name="default"
-  />
-
-  <browser:page
-     for="Products.urban.interfaces.IGenericLicence"
      name="licencemacros"
      template="templates/licencemacros.pt"
      permission="zope2.View"

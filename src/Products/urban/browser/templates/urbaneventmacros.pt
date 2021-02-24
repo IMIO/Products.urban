@@ -83,10 +83,11 @@
 </fieldset>
 
 <metal:add_attachment define-macro="urbanEventAddAttachmentMacro" i18n:domain="urban"
-                      tal:define="mayAddAttachment view/mayAddAttachment">
-    <a tal:condition="mayAddAttachment" href="@@quick_upload?typeupload=File" class="link-overlay-urban-annex link-overlay" style="cursor: pointer;">
-        <img title="Ajouter plusieurs annexes" src="icon_add_big.png">
-    </a>
+                 tal:define="mayAddAttachment view/mayAddAttachment">
+    <form tal:condition="mayAddAttachment" name="quickAdd" action="createObject" method="post">
+        <input name="type_name" value="File" type="hidden">
+        <input i18n:attributes="value" class="context apButton" id="event" value="add_an_attachment" type="submit">
+    </form>
     <tal:not_may_add_attachment condition="not: mayAddAttachment">
         <p class="discreet" i18n:translate="not_permitted_to_add_attachment">You can not add an attachment</p>
     </tal:not_may_add_attachment>

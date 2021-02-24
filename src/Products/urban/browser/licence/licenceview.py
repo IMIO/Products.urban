@@ -5,6 +5,7 @@ from Acquisition import aq_inner
 from Products.Five import BrowserView
 
 from Products.urban import utils
+from Products.urban.content.UrbanEventInquiry import UrbanEventInquiry_schema
 from Products.urban.browser.table.urbantable import ApplicantTable
 from Products.urban.browser.table.urbantable import ApplicantHistoryTable
 from Products.urban.browser.table.urbantable import AttachmentsTable
@@ -18,7 +19,6 @@ from Products.urban.interfaces import IUrbanDoc
 from plone import api
 from plone.memoize import view
 from zope.annotation import IAnnotations
-from zope.i18n import translate
 
 
 class LicenceView(BrowserView):
@@ -45,18 +45,21 @@ class LicenceView(BrowserView):
         main_template_macro = context.unrestrictedTraverse('licencemainmacro/main')
         return main_template_macro
 
-    def getAllowedEventConfigs(self):
+    def getUrbanEventTypes(self):
         licence = aq_inner(self.context)
-        licence_config = licence.getLicenceConfig()
-        event_configs = [cfg for cfg in licence_config.getEventConfigs() if cfg.canBeCreatedInLicence(self.context)]
-        return event_configs
+        config_id = licence.portal_type.lower()
+        portal_urban = api.portal.get_tool('portal_urban')
+
+        eventtypes = portal_urban.listEventTypes(licence, urbanConfigId=config_id)
+        return eventtypes
 
     def canAddUrbanEvent(self):
         licence = aq_inner(self.context)
         member = self.getMember()
+
+        eventtypes = self.getUrbanEventTypes()
         has_permission = member.has_permission('urban: Add UrbanEvent', licence)
-        can_add = has_permission and self.getAllowedEventConfigs()
-        return can_add
+        return eventtypes and has_permission
 
     def canAddAllAdvices(self):
         licence = aq_inner(self.context)
@@ -216,34 +219,44 @@ class LicenceView(BrowserView):
         with_empty_dates = urban_tool.getDisplayEmptyKeyDates()
         config = context.getLicenceConfig()
         ordered_dates = []
+        key_dates = {}
+        dates = {}
 
-        # search in the config for all the Key eventconfigs and their key dates
-        all_events = context.getAllEvents()
-        for eventconfig in config.eventconfigs.objectValues():
-            if eventconfig.getIsKeyEvent():
-                linked_events = [event for event in all_events
-                                 if event.getUrbaneventtypes() == eventconfig]
-                keydates = [(date == 'eventDate' and eventconfig.getEventDateLabel() or
-                             translate("urban_label_" + date, 'urban', default=date, context=self.request), date)
-                            for date in eventconfig.getKeyDates()]
-                if linked_events:
-                    for event in linked_events:
-                        ordered_dates.append({
-                            'label': event.Title(),
-                            'dates': [{
-                                      'date_label': date[0],
-                                      'date': urban_tool.formatDate(getattr(event, date[1]), translatemonth=False),
-                                      'url': event.absolute_url()
-                                      }
-                                      for date in keydates]
-                        })
-                elif with_empty_dates:
-                        ordered_dates.append({
-                            'label': eventconfig.Title(),
-                            'dates': [{'date_label': date[0], 'date': None, 'url': None} for date in keydates]
+        # search in the config for all the Key urbaneventtypes and their key dates
+        for eventtype in config.urbaneventtypes.objectValues():
+            if eventtype.getIsKeyEvent():
+                displaylist = eventtype.listActivatedDates()
+                keydates = [(date, displaylist.getValue(date)) for date in eventtype.getKeyDates()]
+                ordered_dates.append((eventtype.UID(), eventtype.getKeyDates()))
+                key_dates[eventtype.UID()] = keydates
+                dates[eventtype.UID()] = dict([(date[0], {
+                    'dates': [],
+                    'label': date[0] == 'eventDate' and eventtype.Title() or '%s (%s)' % (eventtype.Title().decode('utf8'), date[1])
+                }) for date in keydates])
+
+        # now check each event to see if its a key Event, if yes, we gather the key date values found on this event
+        linked_eventtype_field = UrbanEventInquiry_schema.get('urbaneventtypes')
+
+        for event in self.context.getAllEvents():
+            eventtype_uid = linked_eventtype_field.getRaw(event)
+            if eventtype_uid in dates.keys() and not dates[eventtype_uid].get('url', ''):
+                for date in key_dates[eventtype_uid]:
+                    date_value = getattr(event, date[0])
+                    if with_empty_dates or date_value:
+                        dates[eventtype_uid][date[0]]['dates'].append({
+                            'url': event.absolute_url(),
+                            'date':  date_value and urban_tool.formatDate(date_value, translatemonth=False) or None,
                         })
 
-        return ordered_dates
+        # flatten the result to a list before returning it
+        dates_list = []
+        for uid, date_names in ordered_dates:
+            for date in date_names:
+                date_value = dates[uid].get(date, None)
+                if date_value['dates'] or with_empty_dates:
+                    dates_list.append(date_value)
+
+        return dates_list
 
     def getSchemataFields(self, schemata='', exclude=[], context=None):
         displayed_fields = self.getUsedAttributes()
@@ -332,7 +345,6 @@ class CODTLicenceView(LicenceView):
         liendoc = 'http://spw.wallonie.be/dgo4/index.php?thema=bc_pat&details=57081-CLT-0239-01'
         return liendoc
 
-
 class UrbanCertificateBaseView(LicenceView):
     """
       This manage the view of UrbanCertificate and NotaryLetter Classes
@@ -346,7 +358,7 @@ class UrbanCertificateBaseView(LicenceView):
         context = aq_inner(self.context)
         accessor = getattr(context, 'get%sSpecificFeatures' % subtype.capitalize())
         specific_features = accessor()
-        return [spf.get('value', spf['text']) for spf in specific_features if 'check' not in spf or spf['check']]
+        return [spf.get('value', spf['text']) for spf in specific_features if not 'check' in spf or spf['check']]
 
 
 class CODTUrbanCertificateBaseView(UrbanCertificateBaseView):
@@ -359,7 +371,6 @@ class CODTUrbanCertificateBaseView(UrbanCertificateBaseView):
 
     def getInquiryType(self):
         return 'CODT_Inquiry'
-
 
 class EnvironmentLicenceView(LicenceView):
     """
@@ -376,8 +387,8 @@ class EnvironmentLicenceView(LicenceView):
         context = aq_inner(self.context)
         inquiries = context.getInquiries()
         if not inquiries:
-            # we want to display at least the informations about the inquiry
-            # defined on the licence even if no data have been entered
+            #we want to display at least the informations about the inquiry
+            #defined on the licence even if no data have been entered
             inquiries.append(context)
         return inquiries
 

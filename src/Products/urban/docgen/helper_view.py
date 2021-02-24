@@ -491,8 +491,6 @@ class UrbanDocGenerationEventHelperView(UrbanDocGenerationHelperView):
                 mailing_list = self.real_context.getParentNode().getApplicants()
             elif gen_context['publipostage'] == 'architectes':
                 mailing_list = self.context.getArchitects()
-            elif gen_context['publipostage'] == 'notaires':
-                mailing_list = self.context.getNotaryContact()
             elif gen_context['publipostage'] == 'reclamants':
                 mailing_list = self.context.getClaimants()
             elif gen_context['publipostage'] == 'derniers_reclamants':
@@ -525,7 +523,7 @@ class UrbanDocGenerationEventHelperView(UrbanDocGenerationHelperView):
     def getFolderMakers(self):
         """  """
         urban_tool = getToolByName(self, 'portal_urban')
-        foldermakers_config = urban_tool.getLicenceConfig(self.context).urbaneventtypes
+        foldermakers_config = urban_tool.getUrbanConfig(self.context).urbaneventtypes
         all_opinion_request_events = self.context.getAllOpinionRequests()
         foldermakers = []
         for opinionRequestEventType in foldermakers_config.objectValues('OpinionRequestEventType'):
@@ -755,45 +753,6 @@ class LicenceDisplayProxyObject(UrbanBaseProxyObject):
         for workLocation in workLocations[1:]:
             workLocation_signaletic += separator + self.get_work_location_signaletic(workLocation)
         return workLocation_signaletic
-
-    def getPortionOutsText(self, linebyline=False):
-        """
-          Return a displayable version of the parcels
-        """
-        toreturn = ''
-        isFirst = True
-        first_div = None
-        first_section = None
-        for portionOutObj in self.context.getParcels():
-            #add a separator between every parcel
-            #either a '\n'
-            if not isFirst and linebyline:
-                toreturn += '\n'
-            #or an "and "
-            elif not isFirst:
-                toreturn += ', '
-            elif isFirst:
-                first_div = portionOutObj.getDivisionAlternativeName()
-                toreturn += '%s ' % portionOutObj.getDivisionAlternativeName()
-                first_section = portionOutObj.getSection()
-                toreturn += 'section %s' % portionOutObj.getSection()
-                toreturn += ' n° '.decode('utf8')
-            else:
-                if first_div != portionOutObj.getDivisionAlternativeName():
-                    toreturn += '%s ' % portionOutObj.getDivisionAlternativeName()
-                if first_section != portionOutObj.getSection():
-                    toreturn += 'section %s ' % portionOutObj.getSection()
-            toreturn += ' %s' % portionOutObj.getRadical()
-            if portionOutObj.getBis() != '':
-                if portionOutObj.getBis() != '0':
-                    toreturn += '/%s ' % portionOutObj.getBis()
-                else:
-                    toreturn += ' '
-            toreturn += portionOutObj.getExposant()
-            if portionOutObj.getPuissance() != '' and portionOutObj.getPuissance() != '0':
-                    toreturn += ' %s' %portionOutObj.getPuissance()
-            isFirst = False
-        return toreturn
 
     def get_last_opinions_round(self):
         opinions = self._get_last_opinions('solicitOpinionsTo')

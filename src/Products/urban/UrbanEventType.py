@@ -179,9 +179,6 @@ class UrbanEventType(OrderedBaseFolder, UrbanConfigurationValue, BrowserDefaultM
 
     # Methods
 
-    def getEventType(self):
-        return self.getEventTypeType()
-
     security.declarePublic('listOptionalFields')
 
     def listOptionalFields(self):
@@ -257,13 +254,13 @@ class UrbanEventType(OrderedBaseFolder, UrbanConfigurationValue, BrowserDefaultM
         if TALCondition:
             portal = getToolByName(self, 'portal_url').getPortalObject()
             data = {
-                'nothing': None,
-                'portal': portal,
-                'object': obj,
-                'event': self,
-                'request': getattr(portal, 'REQUEST', None),
-                'here': obj,
-                'licence': obj,
+                'nothing':      None,
+                'portal':       portal,
+                'object':       obj,
+                'event':        self,
+                'request':      getattr(portal, 'REQUEST', None),
+                'here':         obj,
+                'licence':      obj,
             }
             ctx = getEngine().getContext(data)
             try:

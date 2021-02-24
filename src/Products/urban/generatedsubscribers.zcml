@@ -1,0 +1,22 @@
+<configure xmlns="http://namespaces.zope.org/zope">
+  <subscriber
+      for=".interfaces.IGenericLicence
+           Products.DCWorkflow.interfaces.IAfterTransitionEvent"
+      handler=".wfsubscribers.afterAccept"
+  />
+  <subscriber
+      for=".interfaces.IGenericLicence
+           Products.DCWorkflow.interfaces.IAfterTransitionEvent"
+      handler=".wfsubscribers.afterRetire"
+  />
+  <subscriber
+      for=".interfaces.IGenericLicence
+           Products.DCWorkflow.interfaces.IAfterTransitionEvent"
+      handler=".wfsubscribers.afterIncomplete"
+  />
+  <subscriber
+      for=".interfaces.IGenericLicence
+           Products.DCWorkflow.interfaces.IAfterTransitionEvent"
+      handler=".wfsubscribers.afterRefuse"
+  />
+</configure>

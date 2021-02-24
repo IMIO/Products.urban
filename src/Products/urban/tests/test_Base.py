@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 import unittest2 as unittest
 from Products.urban.testing import URBAN_TESTS_CONFIG
 from Products.urban import utils
@@ -21,7 +20,7 @@ class TestBase(unittest.TestCase):
         default_user = self.layer.default_user
         login(self.portal, default_user)
 
-        # create a test BuildLicence licence
+        # create a test EnvClassOne licence
         self.licences = []
         content_type = 'BuildLicence'
         licence_folder = utils.getLicenceFolder(content_type)

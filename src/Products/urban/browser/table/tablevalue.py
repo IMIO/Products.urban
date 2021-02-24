@@ -188,6 +188,14 @@ class ValuesForClaimantsListing(ValuesForUrbanListing):
         return claimants
 
 
+class ValuesForFolderListing(ValuesForUrbanListing):
+    """  return values from the context """
+
+    def getItems(self):
+        items = self.context.objectValues()
+        return items
+
+
 class ValuesForLicenceListing(ValuesForUrbanListing):
     """ return licence values from the context  """
 

@@ -67,7 +67,7 @@ class TestUrbanEventInstance(SchemaFieldsTestCase):
 
         # create a test UrbanEvent in test_buildlicence
         catalog = api.portal.get_tool('portal_catalog')
-        event_type_brain = catalog(portal_type='EventConfig', id='prorogation')[0]
+        event_type_brain = catalog(portal_type='UrbanEventType', id='prorogation')[0]
         self.event_type = event_type_brain.getObject()
         self.urban_event = self.licence.createUrbanEvent(self.event_type)
         transaction.commit()

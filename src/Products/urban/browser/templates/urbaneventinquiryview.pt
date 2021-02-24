@@ -172,7 +172,7 @@
                         <dt class="formTab" id="fieldsetlegend-urbaneventinquiry_recipients" i18n:translate="event_inquiry_recipients"><span>Recipients</span></dt>
                         <dd id="fieldset-urbaneventinquiry_recipients">
                             <tal:block condition="python: member.has_permission('Modify portal content', context)
-                                                          and 'Products.urban.interfaces.IInquiryEvent' in linkedUrbanEventType.getEventType()">
+                                                          and 'Products.urban.interfaces.IInquiryEvent' in linkedUrbanEventType.getEventTypeType()">
                                 <form tal:attributes="action context/absolute_url" method="post">
                                     <input type="submit" class="context" name="find_recipients_cadastre"
                                     tal:attributes="value python:'Rechercher les propriétaires situés dans un rayon de {radius}m'.format(
@@ -196,7 +196,7 @@
                                 </div>
                             </tal:recipients>
                             <tal:block condition="python: member.has_permission('Modify portal content', context)
-                                                          and 'Products.urban.interfaces.IInquiryEvent' in linkedUrbanEventType.getEventType()">
+                                                          and 'Products.urban.interfaces.IInquiryEvent' in linkedUrbanEventType.getEventTypeType()">
                                 <form name="quickAdd" method="post"
                                       tal:condition="python: member.has_permission('urban: Add RecipientCadastre', context)"
                                       tal:attributes="action python: context.absolute_url() + '/createObject?type_name=RecipientCadastre'">

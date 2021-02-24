@@ -44,8 +44,6 @@ class UrbanDocGenerationView(PersistentDocumentGenerationView):
         """
         portal_urban = api.portal.get_tool('portal_urban')
         licence = self.context.getParentNode()
-        foldermanagers = [fm.restrictedTraverse('@@document_generation_helper_view').context
-                          for fm in licence.getFoldermanagers()]
         applicants = licence.getApplicants()
         applicantobj = applicants and applicants[0] or None
         proprietaries = licence.getProprietaries()
@@ -71,7 +69,6 @@ class UrbanDocGenerationView(PersistentDocumentGenerationView):
             'this': licence,
             'self': licence_helper_view.context,
             'licence': licence_helper_view.context,
-            'foldermanagers': foldermanagers,
             'event': self.context,
             'urbanEventObj': self.context,
             'applicantobj': applicantobj,

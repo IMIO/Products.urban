@@ -67,11 +67,15 @@ default_values = {
         ],
         'missingparts': [
             'UrbanVocabularyTerm',
+            {'id': "form_demande", 'title': u"Formulaire de demande (annexe 20) en 2 exemplaires"},
             {'id': "plan_travaux", 'title': u"Plan des travaux en 4 exemplaires"},
-            {'id': "photos", 'title': u"3 photos numérotées de la parcelle ou immeuble en 4 exemplaires"},
-            {'id': "notice_environnement", 'title': u"Notice d'évaluation préalable d'incidences environnement en 4 exemplaires"},
+            {'id': "attestation_archi", 'title': u"Attestation de l'architecte (annexe 21) en 2 exemplaires"},
+            {'id': "attestation_ordre_archi", 'title': u"Attestation de l'architecte soumis au visa du conseil de l'ordre (annexe 22) en 2 exemplaires"},
+            {'id': "photos", 'title': u"3 photos numérotées de la parcelle ou immeuble en 2 exemplaires"},
+            {'id': "notice_environnement", 'title': u"Notice d'évaluation préalable d'incidences environnement (annexe 1C) en 2 exemplaires"},
             {'id': "plan_secteur", 'title': u"Une copie du plan de secteur"},
-            {'id': "peb", 'title': u"Formulaire d'engagement PEB en 4 exemplaires"},
+            {'id': "isolation", 'title': u"Notice relative aux exigences d'isolation thermique et de ventilation (formulaire K) en 2 exemplaires"},
+            {'id': "peb", 'title': u"Formulaire d'engagement PEB (ou formulaire 1 ou formulaire 2) en 3 exemplaires"},
         ],
         'exemptfdarticle': [
             'UrbanVocabularyTerm',
@@ -138,11 +142,15 @@ default_values = {
         ],
         'missingparts': [
             'UrbanVocabularyTerm',
+            {'id': "form_demande", 'title': u"Formulaire de demande (annexe 20) en 2 exemplaires"},
             {'id': "plan_travaux", 'title': u"Plan des travaux en 4 exemplaires"},
-            {'id': "photos", 'title': u"3 photos numérotées de la parcelle ou immeuble en 4 exemplaires"},
-            {'id': "notice_environnement", 'title': u"Notice d'évaluation préalable d'incidences environnement en 4 exemplaires"},
+            {'id': "attestation_archi", 'title': u"Attestation de l'architecte (annexe 21) en 2 exemplaires"},
+            {'id': "attestation_ordre_archi", 'title': u"Attestation de l'architecte soumis au visa du conseil de l'ordre (annexe 22) en 2 exemplaires"},
+            {'id': "photos", 'title': u"3 photos numérotées de la parcelle ou immeuble en 2 exemplaires"},
+            {'id': "notice_environnement", 'title': u"Notice d'évaluation préalable d'incidences environnement (annexe 1C) en 2 exemplaires"},
             {'id': "plan_secteur", 'title': u"Une copie du plan de secteur"},
-            {'id': "peb", 'title': u"Formulaire d'engagement PEB en 4 exemplaires"},
+            {'id': "isolation", 'title': u"Notice relative aux exigences d'isolation thermique et de ventilation (formulaire K) en 2 exemplaires"},
+            {'id': "peb", 'title': u"Formulaire d'engagement PEB (ou formulaire 1 ou formulaire 2) en 3 exemplaires"},
         ],
         'exemptfdarticle': [
             'UrbanVocabularyTerm',
@@ -205,11 +213,15 @@ default_values = {
         ],
         'missingparts': [
             'UrbanVocabularyTerm',
+            {'id': "form_demande", 'title': u"Formulaire de demande (annexe 20) en 2 exemplaires"},
             {'id': "plan_travaux", 'title': u"Plan des travaux en 4 exemplaires"},
-            {'id': "photos", 'title': u"3 photos numérotées de la parcelle ou immeuble en 4 exemplaires"},
-            {'id': "notice_environnement", 'title': u"Notice d'évaluation préalable d'incidences environnement en 4 exemplaires"},
+            {'id': "attestation_archi", 'title': u"Attestation de l'architecte (annexe 21) en 2 exemplaires"},
+            {'id': "attestation_ordre_archi", 'title': u"Attestation de l'architecte soumis au visa du conseil de l'ordre (annexe 22) en 2 exemplaires"},
+            {'id': "photos", 'title': u"3 photos numérotées de la parcelle ou immeuble en 2 exemplaires"},
+            {'id': "notice_environnement", 'title': u"Notice d'évaluation préalable d'incidences environnement (annexe 1C) en 2 exemplaires"},
             {'id': "plan_secteur", 'title': u"Une copie du plan de secteur"},
-            {'id': "peb", 'title': u"Formulaire d'engagement PEB en 4 exemplaires"},
+            {'id': "isolation", 'title': u"Notice relative aux exigences d'isolation thermique et de ventilation (formulaire K) en 2 exemplaires"},
+            {'id': "peb", 'title': u"Formulaire d'engagement PEB (ou formulaire 1 ou formulaire 2) en 3 exemplaires"},
         ],
         'exemptfdarticle': [
             'UrbanVocabularyTerm',
@@ -358,11 +370,15 @@ default_values = {
         ],
         'missingparts': [
             'UrbanVocabularyTerm',
+            {'id': "form_demande", 'title': u"Formulaire de demande (annexe 20) en 2 exemplaires"},
             {'id': "plan_travaux", 'title': u"Plan des travaux en 4 exemplaires"},
-            {'id': "photos", 'title': u"3 photos numérotées de la parcelle ou immeuble en 4 exemplaires"},
-            {'id': "notice_environnement", 'title': u"Notice d'évaluation préalable d'incidences environnement en 4 exemplaires"},
+            {'id': "attestation_archi", 'title': u"Attestation de l'architecte (annexe 21) en 2 exemplaires"},
+            {'id': "attestation_ordre_archi", 'title': u"Attestation de l'architecte soumis au visa du conseil de l'ordre (annexe 22) en 2 exemplaires"},
+            {'id': "photos", 'title': u"3 photos numérotées de la parcelle ou immeuble en 2 exemplaires"},
+            {'id': "notice_environnement", 'title': u"Notice d'évaluation préalable d'incidences environnement (annexe 1C) en 2 exemplaires"},
             {'id': "plan_secteur", 'title': u"Une copie du plan de secteur"},
-            {'id': "peb", 'title': u"Formulaire d'engagement PEB en 4 exemplaires"},
+            {'id': "isolation", 'title': u"Notice relative aux exigences d'isolation thermique et de ventilation (formulaire K) en 2 exemplaires"},
+            {'id': "peb", 'title': u"Formulaire d'engagement PEB (ou formulaire 1 ou formulaire 2) en 3 exemplaires"},
         ],
         'exemptfdarticle': [
             'UrbanVocabularyTerm',
@@ -420,11 +436,15 @@ default_values = {
         ],
         'missingparts': [
             'UrbanVocabularyTerm',
+            {'id': "form_demande", 'title': u"Formulaire de demande (annexe 20) en 2 exemplaires"},
             {'id': "plan_travaux", 'title': u"Plan des travaux en 4 exemplaires"},
-            {'id': "photos", 'title': u"3 photos numérotées de la parcelle ou immeuble en 4 exemplaires"},
-            {'id': "notice_environnement", 'title': u"Notice d'évaluation préalable d'incidences environnement en 4 exemplaires"},
+            {'id': "attestation_archi", 'title': u"Attestation de l'architecte (annexe 21) en 2 exemplaires"},
+            {'id': "attestation_ordre_archi", 'title': u"Attestation de l'architecte soumis au visa du conseil de l'ordre (annexe 22) en 2 exemplaires"},
+            {'id': "photos", 'title': u"3 photos numérotées de la parcelle ou immeuble en 2 exemplaires"},
+            {'id': "notice_environnement", 'title': u"Notice d'évaluation préalable d'incidences environnement (annexe 1C) en 2 exemplaires"},
             {'id': "plan_secteur", 'title': u"Une copie du plan de secteur"},
-            {'id': "peb", 'title': u"Formulaire d'engagement PEB en 4 exemplaires"},
+            {'id': "isolation", 'title': u"Notice relative aux exigences d'isolation thermique et de ventilation (formulaire K) en 2 exemplaires"},
+            {'id': "peb", 'title': u"Formulaire d'engagement PEB (ou formulaire 1 ou formulaire 2) en 3 exemplaires"},
         ],
         'exemptfdarticle': [
             'UrbanVocabularyTerm',
@@ -448,11 +468,15 @@ default_values = {
 
         'missingparts': [
             'UrbanVocabularyTerm',
+            {'id': "form_demande", 'title': u"Formulaire de demande (annexe 20) en 2 exemplaires"},
             {'id': "plan_travaux", 'title': u"Plan des travaux en 4 exemplaires"},
-            {'id': "photos", 'title': u"3 photos numérotées de la parcelle ou immeuble en 4 exemplaires"},
-            {'id': "notice_environnement", 'title': u"Notice d'évaluation préalable d'incidences environnement en 4 exemplaires"},
+            {'id': "attestation_archi", 'title': u"Attestation de l'architecte (annexe 21) en 2 exemplaires"},
+            {'id': "attestation_ordre_archi", 'title': u"Attestation de l'architecte soumis au visa du conseil de l'ordre (annexe 22) en 2 exemplaires"},
+            {'id': "photos", 'title': u"3 photos numérotées de la parcelle ou immeuble en 2 exemplaires"},
+            {'id': "notice_environnement", 'title': u"Notice d'évaluation préalable d'incidences environnement (annexe 1C) en 2 exemplaires"},
             {'id': "plan_secteur", 'title': u"Une copie du plan de secteur"},
-            {'id': "peb", 'title': u"Formulaire d'engagement PEB en 4 exemplaires"},
+            {'id': "isolation", 'title': u"Notice relative aux exigences d'isolation thermique et de ventilation (formulaire K) en 2 exemplaires"},
+            {'id': "peb", 'title': u"Formulaire d'engagement PEB (ou formulaire 1 ou formulaire 2) en 3 exemplaires"},
         ],
 
         'roadmissingparts': [
@@ -1567,6 +1591,7 @@ default_values = {
             'UrbanVocabularyTerm',
             {'id': "com", 'title': u"Communale"},
             {'id': "priv", 'title': u"Privée"},
+            {'id': "prov", 'title': u"Provinciale"},
             {'id': "reg", 'title': u"Régionale"},
             {'id': "vic", 'title': u"Vicinale"},
         ],
@@ -1616,6 +1641,7 @@ default_values = {
             {'id': "zev", 'title': u"zone d'espaces verts"},
             {'id': "zn", 'title': u"zone naturelle"},
             {'id': "zp", 'title': u"zone de parc"},
+            {'id': "znatura2000", 'title': u"zone Natura 2000"},
         ],
 
         'rcu': [
@@ -1765,6 +1791,8 @@ default_values = {
                 'multiplicity': "single", 'reverseTitle': "Monsieur, Madame"},
             {'id': "madam", 'title': u"Madame", 'extraValue': "Madame", 'abbreviation': "Mme", 'gender': "female",
                 'multiplicity': "single", 'reverseTitle': "Madame"},
+            {'id': "miss", 'title': u"Mademoiselle", 'extraValue': "Mademoiselle", 'abbreviation': "Mlle", 'gender':
+                "female", 'multiplicity': "single", 'reverseTitle': "Mademoiselle"},
             {'id': "mister", 'title': u"Monsieur", 'extraValue': "Monsieur", 'abbreviation': "M", 'gender': "male",
                 'multiplicity': "single", 'reverseTitle': "Monsieur"},
             {'id': "madam_and_mister", 'title': u"Monsieur et Madame", 'extraValue': "Madame, Monsieur", 'abbreviation':
@@ -1810,7 +1838,7 @@ default_values = {
             {'id': "favorable", 'title': u"Favorable"},
             {'id': "favorable-conditionnel", 'title': u"Favorable conditionnel"},
             {'id': "defavorable", 'title': u"Défavorable"},
-            {'id': "favorable-defaut", 'title': u"Réputé favorable par défaut", 'isDefaultValue':True},
+            {'id': "favorable-defaut", 'title': u"Réputé favorable par défaut"},
         ],
 
         'rubrics': [

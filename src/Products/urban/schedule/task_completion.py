@@ -126,7 +126,7 @@ class FollowupEventsRedactedStatus(TaskEndSimpleStatusView):
         selected_followups = report_event.get_regular_followup_propositions()
         followup_events = licence.getCurrentFollowUpEvents()
         followup_events_by_id = dict([(event.getUrbaneventtypes().id, event) for event in followup_events])
-        voc = UrbanVocabulary('urbaneventtypes', vocType="FollowUpEventConfig", value_to_use='title')
+        voc = UrbanVocabulary('urbaneventtypes', vocType="FollowUpEventType", value_to_use='title')
         all_followups_voc = voc.getDisplayList(self)
         to_create = []
         to_propose = []

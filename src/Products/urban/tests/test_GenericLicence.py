@@ -1,7 +1,5 @@
 #-*- coding: utf-8 -*-
-from Products.urban import interfaces
 from Products.urban.config import URBAN_TYPES
-from Products.urban.config import URBAN_CODT_TYPES
 from Products.urban.testing import URBAN_TESTS_INTEGRATION
 from Products.urban.tests.helpers import SchemaFieldsTestCase
 from Products.urban import utils
@@ -84,9 +82,7 @@ class TestGenericLicenceFields(SchemaFieldsTestCase):
             reference_is_visible = \
                 "<span>Référence DGO4</span>:" in contents \
                 or \
-                "<span>Référence DGO3</span>:" in contents \
-                or \
-                "<span>Référence DGO6</span>:" in contents
+                "<span>Référence DGO3</span>:" in contents
             self.assertTrue(reference_is_visible, msg)
 
     def test_has_attribute_workLocations(self):
@@ -376,10 +372,7 @@ class TestGenericLicenceFields(SchemaFieldsTestCase):
     def test_isInPCA(self):
         for licence in self.licences:
             msg = "field 'isInPCA' not visible on {}".format(licence.getPortalTypeName())
-            expected_field = "<span>Plan Communal d'Aménagement</span>"
-            if licence.portal_type in URBAN_CODT_TYPES:
-                expected_field = "<span>SOL</span>"
-            self._is_field_visible(expected_field, licence, msg)
+            self._is_field_visible("<span>Le bien se situe dans un PCA</span>:", licence, msg)
 
     def test_has_attribute_pca(self):
         field_name = 'pca'
@@ -390,10 +383,7 @@ class TestGenericLicenceFields(SchemaFieldsTestCase):
     def test_pca(self):
         for licence in self.licences:
             msg = "field 'pca' not visible on {}".format(licence.getPortalTypeName())
-            expected_field = "<span>Plan Communal d'Aménagement</span>"
-            if licence.portal_type in URBAN_CODT_TYPES:
-                expected_field = "<span>SOL</span>"
-            self._is_field_visible(expected_field, licence, msg)
+            self._is_field_visible("<span>Le bien se situe dans un PCA</span>:", licence, msg)
 
     def test_has_attribute_solicitRoadOpinionsTo(self):
         field_name = 'solicitRoadOpinionsTo'
@@ -415,10 +405,7 @@ class TestGenericLicenceFields(SchemaFieldsTestCase):
     def test_isInSubdivision(self):
         for licence in self.licences:
             msg = "field 'isInSubdivision' not visible on {}".format(licence.getPortalTypeName())
-            if licence.portal_type in URBAN_CODT_TYPES:
-                self._is_field_visible("<span>Le bien se situe dans un permis d'urbanisation</span>:", licence, msg)
-            else:
-                self._is_field_visible("<span>Le bien se situe dans un lotissement</span>:", licence, msg)
+            self._is_field_visible("<span>Le bien se situe dans un lotissement</span>:", licence, msg)
 
     def test_has_attribute_subdivisionDetails(self):
         field_name = 'subdivisionDetails'
@@ -429,40 +416,29 @@ class TestGenericLicenceFields(SchemaFieldsTestCase):
     def test_subdivisionDetails(self):
         for licence in self.licences:
             msg = "field 'subdivisionDetails' not visible on {}".format(licence.getPortalTypeName())
-            if licence.portal_type in URBAN_CODT_TYPES:
-                self._is_field_visible("<span>Le bien se situe dans un permis d'urbanisation</span>:", licence, msg)
-            else:
-                self._is_field_visible("<span>Le bien se situe dans un lotissement</span>:", licence, msg)
+            self._is_field_visible("<span>Le bien se situe dans un lotissement</span>:", licence, msg)
 
     def test_has_attribute_protectedBuilding(self):
         field_name = 'protectedBuilding'
         for licence in self.licences:
-            config = licence.getLicenceConfig()
-            if 'patrimony' in [line['value'] for line in config.getActiveTabs()]:
-                msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
-                self.assertTrue(licence.getField(field_name), msg)
+            msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
+            self.assertTrue(licence.getField(field_name), msg)
 
     def test_protectedBuilding(self):
         for licence in self.licences:
-            config = licence.getLicenceConfig()
-            if 'patrimony' in [line['value'] for line in config.getActiveTabs()]:
-                msg = "field 'protectedBuilding' not visible on {}".format(licence.getPortalTypeName())
-                self._is_field_visible("<span>Bien classé ou assimilé</span>:", licence, msg)
+            msg = "field 'protectedBuilding' not visible on {}".format(licence.getPortalTypeName())
+            self._is_field_visible("<span>Bien classé ou assimilé</span>:", licence, msg)
 
     def test_has_attribute_protectedBuildingDetails(self):
         field_name = 'protectedBuildingDetails'
         for licence in self.licences:
-            config = licence.getLicenceConfig()
-            if 'patrimony' in [line['value'] for line in config.getActiveTabs()]:
-                msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
-                self.assertTrue(licence.getField(field_name), msg)
+            msg = "field '{}' not on class {}".format(field_name, licence.getPortalTypeName())
+            self.assertTrue(licence.getField(field_name), msg)
 
     def test_protectedBuildingDetails(self):
         for licence in self.licences:
-            config = licence.getLicenceConfig()
-            if 'patrimony' in [line['value'] for line in config.getActiveTabs()]:
-                msg = "field 'protectedBuildingDetails' not visible on {}".format(licence.getPortalTypeName())
-                self._is_field_visible("<span>Détails concernant le bien (classé ou assimilé)</span>:", licence, msg)
+            msg = "field 'protectedBuildingDetails' not visible on {}".format(licence.getPortalTypeName())
+            self._is_field_visible("<span>Détails concernant le bien (classé ou assimilé)</span>:", licence, msg)
 
     def test_has_attribute_solicitLocationOpinionsTo(self):
         field_name = 'solicitLocationOpinionsTo'
@@ -517,7 +493,4 @@ class TestGenericLicenceFields(SchemaFieldsTestCase):
     def test_parcellings(self):
         for licence in self.licences:
             msg = "field 'parcellings' not visible on {}".format(licence.getPortalTypeName())
-            if licence.portal_type in URBAN_CODT_TYPES:
-                self._is_field_visible("<span>Le bien se situe dans un permis d'urbanisation</span>:", licence, msg)
-            else:
-                self._is_field_visible("<span>Le bien se situe dans un lotissement</span>:", licence, msg)
+            self._is_field_visible("<span>Le bien se situe dans un lotissement</span>:", licence, msg)

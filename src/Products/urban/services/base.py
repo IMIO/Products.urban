@@ -155,7 +155,6 @@ class SQLSession(object):
     implements(ISQLSession)
 
     def __init__(self, service):
-        print 'ENGINE {}'.format(service.engine)
         self.service = service
         self.tables = service.tables
         self.session = scoped_session(sessionmaker(

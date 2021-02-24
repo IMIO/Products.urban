@@ -8,9 +8,5 @@
       <permission name="Products.urban: ViewUrbanMap" acquire="True">
         <role name="UrbanMapReader"/>
       </permission>
-      <permission name="imio.urban: Add Parcel" acquire="True">
-        <role name="Manager"/>
-        <role name="Contributor"/>
-      </permission>
   </permissions>
 </rolemap>

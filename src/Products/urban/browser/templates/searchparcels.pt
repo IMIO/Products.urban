@@ -32,18 +32,29 @@ metal:use-macro="here/main_template/macros/master">
         <tal:comment replace="nothing">Go back...</tal:comment>
         <metal:listing use-macro="here/@@globalmacros/goBackToMacro" />
 
-        <fieldset style="float: left"><legend i18n:translate="">Search parcel(s)</legend>
+        <!-- Display the list of already added parcels -->
+        <fieldset><legend i18n:translate="concerned_parcels">Concerned parcel(s)</legend>
+                <div style="width: 800px">
+                <tal:listing content="structure view/renderParcelsListing" />
+                </div>
+        </fieldset>
+
+        <fieldset><legend i18n:translate="">Search parcel(s)</legend>
                 <p tal:condition="not: divisions" i18n:translate="help_search_connection_problem">
                         You can not search for parcels for now because there was a problem.
                         Please contact your system administrator and give him the red error message here above
                 </p>
                 <tal:searchIsEnabled condition="divisions">
+                <p class="discreet" i18n:translate="help_search_parcels">
+                        Choose one of the following forms to search for parcels.
+                        You can cumulate criteria if you exactly know what you are looking for
+                </p>
                 <p>&nbsp;</p>
                 <form action="" method="GET">
                         <table class="listing" width=800>
                                 <thead>
                                 <tr>
-                                        <th colspan="7"><strong i18n:translate="urban_search_by_cadastral_reference">Cadastral reference</strong></th>
+                                        <th colspan="7"><strong i18n:translate="urban_search_parcel_by_cadastral_reference">Cadastral reference</strong></th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -202,15 +213,6 @@ metal:use-macro="here/main_template/macros/master">
                                                 <input type="hidden" name="puissance" value="#" tal:attributes="value python: parcel.puissance" />
                                                 <input type="hidden" name="partie" value="#" tal:attributes="value partie" />
                                                 <input type="hidden" name="old" value="#" tal:attributes="value python: getattr(parcel, 'old', False)"/>
-                                                <input type="hidden" name="s_division" value="#" tal:attributes="value python: request.get('division', '')" />
-                                                <input type="hidden" name="s_section" value="#" tal:attributes="value python: request.get('section', '')" />
-                                                <input type="hidden" name="s_radical" value="#" tal:attributes="value python: request.get('radical', '')" />
-                                                <input type="hidden" name="s_bis" value="#" tal:attributes="value python: request.get('bis', '')" />
-                                                <input type="hidden" name="s_exposant" value="#" tal:attributes="value python: request.get('exposant', '')" />
-                                                <input type="hidden" name="s_puissance" value="#" tal:attributes="value python: request.get('puissance', '')" />
-                                                <input type="hidden" name="s_location" value="#" tal:attributes="value python: request.get('location', '')" />
-                                                <input type="hidden" name="s_street_number" value="#" tal:attributes="value python: request.get('street_number', '')" />
-                                                <input type="hidden" name="s_parcel_owner" value="#" tal:attributes="value python: request.get('parcel_owner', '')" />
                                                 <input type="image" src="icon_add.gif" name="add_parcel" alt="Add this parcel"/>
                                             </form>
                                         </td>
@@ -222,15 +224,6 @@ metal:use-macro="here/main_template/macros/master">
                </fieldset>
 
            </div>
-
-        <!-- Display the list of already added parcels -->
-        <fieldset style="float: left"><legend i18n:translate="concerned_parcels">Concerned parcel(s)</legend>
-                <div>
-                <tal:listing content="structure view/renderParcelsListing" />
-                </div>
-        </fieldset>
-
        </div>
-
    </body>
 </html>

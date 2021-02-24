@@ -52,8 +52,7 @@ class UrbanEventView(BrowserView):
             if not activatedField:
                 continue  # in some case, there could be an empty value in activatedFields...
             field = context.getField(activatedField)
-            if field not in fields:
-                fields.append(field)
+            fields.append(field)
         return fields
 
     def getFieldsToShow(self):

@@ -16,7 +16,7 @@
    <element value="Applicant"/>
    <element value="Proprietary"/>
    <element value="CorporationProprietary"/>
-   <element value="Parcel"/>
+   <element value="PortionOut"/>
    <element value="UrbanEvent"/>
    <element value="UrbanEventCollege"/>
    <element value="WorkLocation"/>

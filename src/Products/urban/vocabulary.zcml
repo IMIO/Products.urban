@@ -34,26 +34,8 @@
   />
 
   <utility
-    component=".vocabularies.LicenceTabsVocabularyFactory"
-    name="urban.vocabularies.licence_tabs"
-    provides="zope.schema.interfaces.IVocabularyFactory"
-  />
-
-  <utility
     component=".vocabularies.DateIndexVocabularyFactory"
     name="urban.vocabularies.licence_date_indexes"
-    provides="zope.schema.interfaces.IVocabularyFactory"
-  />
-
-  <utility
-    component=".vocabularies.DivisionNamesVocabularyFactory"
-    name="urban.vocabularies.division_names"
-    provides="zope.schema.interfaces.IVocabularyFactory"
-  />
-
-  <utility
-    component=".vocabularies.DivisionAlternativeNamesVocabularyFactory"
-    name="urban.vocabularies.division_alternative_names"
     provides="zope.schema.interfaces.IVocabularyFactory"
   />
 

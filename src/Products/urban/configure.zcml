@@ -16,7 +16,6 @@
   <include package="collective.z3cform.datagridfield"/>
   <include package="collective.archetypes.select2"/>
   <include package="collective.faceted.datewidget"/>
-  <include package="collective.quickupload"/>
   <include package="five.grok"/>
   <include package="imio.actionspanel"/>
   <include package="imio.dashboard"/>
@@ -24,7 +23,6 @@
   <include package="imio.pm.wsclient"/>
   <include package="imio.pm.locales"/>
   <include package="imio.schedule"/>
-  <include package="imio.urban.core"/>
   <include package="Products.Archetypes"/>
   <include package="Products.CMFPlacefulWorkflow"/>
   <include package="Products.cron4plone"/>
@@ -288,6 +286,14 @@
 
   <include file="index.zcml" />
 
+  <!-- ##/code-section configure.zcml.header -->
+
   <i18n:registerTranslations directory="locales" />
+
+  <include file="generatedsubscribers.zcml"/>
+
+
+  <!-- ##code-section configure.zcml.core -->
+  <!-- ##/code-section configure.zcml.core -->
 
 </configure>

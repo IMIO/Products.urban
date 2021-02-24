@@ -38,7 +38,7 @@ class MapView(BrowserView):
     def isUsingTabbing(self):
         context = aq_inner(self.context)
         portal_urban = api.portal.get_tool('portal_urban')
-        return portal_urban.getLicenceConfig(context).getUseTabbingForDisplay()
+        return portal_urban.getUrbanConfig(context).getUseTabbingForDisplay()
 
     def renderParcelsListing(self):
         parcels = self.context.getParcels()

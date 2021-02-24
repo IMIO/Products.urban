@@ -1,0 +1,21 @@
+<h1 xmlns:tal="http://www.w3.org/1999/html">ICI LE TITRE</h1>
+
+<span tal:content="view/get_generated_tests"></span>
+<div tal:repeat="item view/get_generated_tests">
+
+    <a tal:attributes="href string:test/:${item}" tal:content="item" target="_blank"></a>
+
+
+    </div>
+<form action="test/configtestprocessingview">
+    <div tal:repeat="event view/get_events">
+        <tal:data tal:define="title event/title;
+                          id event/id">
+
+            <input type="checkbox" name="events_checked" tal:attributes="value id" checked>
+            <span tal:content="title"></span>
+
+        </tal:data>
+    </div>
+    <input type="submit" value="générer traitement">
+</form>

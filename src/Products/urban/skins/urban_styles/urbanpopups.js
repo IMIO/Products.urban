@@ -25,8 +25,8 @@ jQuery(function($){
     $('#urban-parcel-related-licences a').prepOverlay({
        subtype: 'ajax',
    });
-    // parcel history popup
-    $('#urban-parcel-display a').prepOverlay({
+    // parcel history on old parcels popup
+    $('#urban-parcel-historic-related-licences a').prepOverlay({
        subtype: 'ajax',
    });
     // CU1/CU2/NotaryLetter specific features popup
@@ -39,10 +39,6 @@ jQuery(function($){
     });
     // Inspection report other followup
     $('#inspection_other_followup a').prepOverlay({
-       subtype: 'ajax',
-    });
-    // Inspection report other followup
-    $('.link-overlay-urban-annex').prepOverlay({
        subtype: 'ajax',
     });
 });

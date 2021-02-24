@@ -15,7 +15,7 @@
  <property name="allowed_content_types">
    <element value="Proprietary"/>
    <element value="CorporationProprietary"/>
-   <element value="Parcel"/>
+   <element value="PortionOut"/>
    <element value="UrbanEvent"/>
    <element value="UrbanEventCollege"/>
    <element value="WorkLocation"/>

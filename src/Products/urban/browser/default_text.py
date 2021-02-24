@@ -11,7 +11,12 @@ class DefaultTextRenderer(TrustedAppPT, PageTemplate):
     """
 
     def __init__(self, urban_event):
-        self.docgen_view = urban_event.unrestrictedTraverse('urban-document-generation')
+        self.event_helper = urban_event.unrestrictedTraverse('document_generation_helper_view')
+        self.real_event = urban_event
+        self.event = self.event_helper.context
+        self.licence_helper = urban_event.aq_parent.unrestrictedTraverse('document_generation_helper_view')
+        self.real_licence = urban_event.aq_parent
+        self.licence = self.licence_helper.context
 
     def __call__(self, text, *args, **keywords):
         self.pt_edit(text, 'text/html')
@@ -20,16 +25,18 @@ class DefaultTextRenderer(TrustedAppPT, PageTemplate):
         return rendered
 
     def pt_getContext(self, args=(), options={}, **ignored):
-        with api.env.adopt_roles(['Manager']):
-            base_context = self.docgen_view.get_base_generation_context(None, None)
         rval = {
             'template': self,
             'options': options,
             'args': args,
             'nothing': None,
-            'helper': base_context['licence_view'],
-            'context': base_context['licence'],
+            'self': self.licence,
+            'helper': self.licence_helper,
+            'context': self.real_licence,
+            'event': self.event,
+            'event_helper': self.event_helper,
+            'real_event': self.real_event,
+            'tool': api.portal.get_tool('portal_urban'),
         }
-        rval.update(base_context)
         rval.update(self.pt_getEngine().getBaseNames())
         return rval

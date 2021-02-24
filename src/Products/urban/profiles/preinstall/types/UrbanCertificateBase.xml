@@ -14,7 +14,7 @@
  <property name="global_allow">False</property>
  <property name="filter_content_types">True</property>
  <property name="allowed_content_types">
-   <element value="Parcel"/>
+   <element value="PortionOut"/>
    <element value="UrbanEvent"/>
    <element value="UrbanEventInquiry"/>
    <element value="UrbanEventOpinionRequest"/>
@@ -23,7 +23,7 @@
    <element value="Applicant"/>
    <element value="UrbanEvent"/>
    <element value="File"/>
-   <element value="Parcel"/>
+   <element value="PortionOut"/>
  </property>
  <property name="allow_discussion">False</property>
  <property name="default_view">folder_listing</property>
