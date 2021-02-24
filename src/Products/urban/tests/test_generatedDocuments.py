@@ -125,25 +125,25 @@ class TestDocuments(unittest.TestCase):
         site = self.layer['portal']
         available_licence_types = licences_data.keys()
         log = []
-        #parcourir tous les dossiers de permis
+        # parcourir tous les dossiers de permis
         for licence_type in available_licence_types:
-            #trouver chaque permis d'exemple
+            # trouver chaque permis d'exemple
             licence_folder = getattr(site.urban, "%ss" % licence_type.lower())
             test_licence = licence_folder.listFolderContents()[0]
-            #parcourir chaque event
+            # parcourir chaque event
             for event in test_licence.listFolderContents({'portal_type': 'UrbanEvent'}):
-                #parcourir chaque doc généré de chaque event
+                # parcourir chaque doc généré de chaque event
                 for document in event.listFolderContents({'portal_type': 'UrbanDoc'}):
                     odt_file = document.getFile().blob.open()
                     raw_xml = zipfile.ZipFile(odt_file, 'r').open('content.xml')
                     xml_tree = xml.dom.minidom.parseString(raw_xml.read())
-                    #on ouvre le document et cherche pour des annotations contenant les messages d'erreurs
+                    # on ouvre le document et cherche pour des annotations contenant les messages d'erreurs
                     annotations = [node.getElementsByTagName('text:p') for node in xml_tree.getElementsByTagName('office:annotation')]
                     if annotations:
-                        #stocker les logs d'erreurs trouvées
+                        # stocker les logs d'erreurs trouvées
                         result = searchInTextElements(annotations, document.getFilename(), 'commentaire', ["^(Error|Action).*$"])
                         log.append([result, test_licence.Title(), event.Title(), document.Title()])
-        #afficher toutes les erreurs trouvées (type de procédure->event->nom du doc->erreurs)
+        # afficher toutes les erreurs trouvées (type de procédure->event->nom du doc->erreurs)
         if log:
             print '\n'
             for line in log:
@@ -169,41 +169,49 @@ class TestPortionOutTextFormat(unittest.TestCase):
     def testPortionOutsTextOutputFormat(self):
         # test getPortionOutsText helper view method output format
         # simple parcel
-        self.buildlicence.invokeFactory('Parcel', 'test_parcel',
-                                        division='62006',
-                                        section='A',
-                                        radical='86',
-                                        exposant='C'
-                                        )
+        self.buildlicence.invokeFactory(
+            'Parcel',
+            'test_parcel',
+            division='62006',
+            section='A',
+            radical='86',
+            exposant='C'
+        )
         # parcel = self.document_proxy_licence.getParcels()[-1]
         self.failUnless(self.document_proxy_licence.getPortionOutsText().encode('utf-8').endswith("86 C"))
         # parcel with bis
-        self.buildlicence.invokeFactory('Parcel', 'test_parcel2',
-                                        division='62006',
-                                        section='A',
-                                        radical='87',
-                                        bis='2',
-                                        exposant='D'
-                                        )
+        self.buildlicence.invokeFactory(
+            'Parcel',
+            'test_parcel2',
+            division='62006',
+            section='A',
+            radical='87',
+            bis='2',
+            exposant='D'
+        )
         self.failUnless(self.document_proxy_licence.getPortionOutsText().encode('utf-8').endswith("86 C,  87/2 D"))
         # parcel with bis and puissance
-        self.buildlicence.invokeFactory('Parcel', 'test_parcel3',
-                                        division='62006',
-                                        section='A',
-                                        radical='88',
-                                        bis='3',
-                                        exposant='E',
-                                        puissance='4'
-                                        )
+        self.buildlicence.invokeFactory(
+            'Parcel',
+            'test_parcel3',
+            division='62006',
+            section='A',
+            radical='88',
+            bis='3',
+            exposant='E',
+            puissance='4'
+        )
         self.failUnless(self.document_proxy_licence.getPortionOutsText().encode('utf-8').endswith("86 C,  87/2 D,  88/3 E 4"))
         # parcel with puissance only
-        self.buildlicence.invokeFactory('Parcel', 'test_parcel4',
-                                        division='62006',
-                                        section='A',
-                                        radical='89',
-                                        exposant='F',
-                                        puissance='5'
-                                        )
+        self.buildlicence.invokeFactory(
+            'Parcel',
+            'test_parcel4',
+            division='62006',
+            section='A',
+            radical='89',
+            exposant='F',
+            puissance='5'
+        )
         self.failUnless(self.document_proxy_licence.getPortionOutsText().encode('utf-8').endswith("86 C,  87/2 D,  88/3 E 4,  89 F 5"))
 
 
@@ -223,10 +231,11 @@ class TestGetParcels(unittest.TestCase):
 
     def testGetParcelsEmptyBisPuissanceValues(self):
         # test get_parcels output text with no bis & puissance
-        self.buildlicence.invokeFactory('Parcel', 'test_parcel5',
-                                        division='62006',
-                                        section='A',
-                                        radical='86',
-                                        exposant='C'
-                                        )
+        self.buildlicence.invokeFactory(
+            'Parcel',            'test_parcel5',
+            division='62006',
+            section='A',
+            radical='86',
+            exposant='C'
+        )
         self.assertTrue(self.helper_view.get_parcels().endswith(u"section A n\xb0 86C"))
