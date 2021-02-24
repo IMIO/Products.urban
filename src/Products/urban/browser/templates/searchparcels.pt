@@ -77,7 +77,7 @@ metal:use-macro="here/main_template/macros/master">
                                         </td>
                                         <td>
                                         <label class="discreet" i18n:translate="urban_label_puissance">Puissance</label><br />
-                                        <input size="5" type="text" name="puissance" maxlength="2" tal:attributes="value puissance">
+                                        <input size="5" type="text" name="puissance" maxlength="3" tal:attributes="value puissance">
                                         </td>
                                         <td>
                                         <label class="discreet" i18n:translate="urban_label_partie">Partie</label><br />
