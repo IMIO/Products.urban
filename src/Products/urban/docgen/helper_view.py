@@ -1212,9 +1212,13 @@ class EventDisplayProxyObject(UrbanBaseProxyObject):
 
     def _get_wspm_field(self, field_name):
         field = 'NO FIELD {} FOUND'.format(field_name)
-        linked_pm_items = get_ws_meetingitem_infos(self.context)
-        if linked_pm_items and field_name in linked_pm_items[0]:
-            field = linked_pm_items[0][field_name]
+        linked_pm_items = get_ws_meetingitem_infos(self.context, extra_attributes=True)
+        if linked_pm_items:
+            linked_item = linked_pm_items[0]
+            if field_name in linked_item:
+                field = linked_item[field_name]
+            elif field_name in linked_item.extraInfos:
+                field = linked_item.extraInfos[field_name]
         return field
 
     def get_wspm_decision_date(self, translatemonth=True, long_format=False):
