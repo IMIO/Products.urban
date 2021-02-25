@@ -240,7 +240,8 @@ class TestGetParcels(unittest.TestCase):
     def testGetParcelsEmptyBisPuissanceValues(self):
         # test get_parcels output text with no bis & puissance
         self.buildlicence.invokeFactory(
-            'Parcel',            'test_parcel5',
+            'Parcel',
+            'test_parcel5',
             division='62006',
             section='A',
             radical='86',
