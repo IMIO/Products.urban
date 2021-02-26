@@ -72,7 +72,7 @@ class UrbanDocGenerationView(PersistentDocumentGenerationView):
             'self': licence_helper_view.context,
             'licence': licence_helper_view.context,
             'foldermanagers': foldermanagers,
-            'event': self.context,
+            'event': event_helper_view.context,
             'urbanEventObj': self.context,
             'applicantobj': applicantobj,
             'plaintiffobj': plaintiffobj,
