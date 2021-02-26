@@ -2773,7 +2773,7 @@ msgstr "Règlement Communal d'Urbanisme (R.C.U.)"
 #. Default: "sar"
 #: ../content/licence/GenericLicence.py:677
 msgid "urban_label_SAR"
-msgstr "Périmètre d'un site d'activité économique désaffecté"
+msgstr "Périmètre d'un site à réaménager "
 
 #. Default: "Sct"
 #: ../content/licence/CODT_BaseBuildLicence.py:165
@@ -4865,7 +4865,7 @@ msgstr "Explications sur les rubriques"
 #. Default: "Sardetails"
 #: ../content/licence/GenericLicence.py:685
 msgid "urban_label_sarDetails"
-msgstr "Détails concernant le périmètre du site d'activité économique désaffecté"
+msgstr "Détails concernant le périmètre du site à réaménager"
 
 #. Default: "Sctdetails"
 #: ../content/licence/CODT_BaseBuildLicence.py:176
