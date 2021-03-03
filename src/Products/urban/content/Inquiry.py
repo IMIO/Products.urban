@@ -245,7 +245,7 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
           Return the position of the self between every Inquiry objects
         """
         container = self
-        if not IGenericLicence.providedBy(self):
+        if not interfaces.IGenericLicence.providedBy(self):
             container = self.aq_parent
         inquiries = [container]
         for obj in container.objectValues():
