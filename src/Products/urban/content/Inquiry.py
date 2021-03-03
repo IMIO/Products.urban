@@ -244,15 +244,16 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
         """
           Return the position of the self between every Inquiry objects
         """
-        #get the existing Inquiries
-        #getInquiries is a method of GenericLicence
-        #so by acquisition, we get it on the parent or we get it on self
-        #as GenericLicence heritates from Inquiry
-        inquiries = self.getAllInquiries()
-        selfUID = self.UID()
+        container = self
+        if not IGenericLicence.providedBy(self):
+            container = self.aq_parent
+        inquiries = [container]
+        for obj in container.objectValues():
+            if IInquiry.providedBy(obj):
+                inquiries.append(obj)
         i = 0
         for inquiry in inquiries:
-            if inquiry.UID() == selfUID:
+            if inquiry.UID() == self.UID():
                 break
             i = i + 1
         return i
