@@ -20,10 +20,10 @@ def beforeDelete(ob, event):
       Check that we can delete this inquiry...
       We can not delete an Inquiry if an UrbanEventInquiry is linked
     """
-    #XXX too late???
-    #XXX the code here above is useless as every references have already
-    #XXX been removed here...  We use manage_beforeDelete...
-    #if ob.getLinkedUrbanEventInquiry():
+    # XXX too late???
+    # XXX the code here above is useless as every references have already
+    # XXX been removed here...  We use manage_beforeDelete...
+    # if ob.getLinkedUrbanEventInquiry():
     #    raise BeforeDeleteException, "You can not..."
 
 
@@ -33,8 +33,8 @@ def afterDelete(ob, event):
       the title of the others so we have something coherent as
       the number of the inquiry is in the title
     """
-    #be sure we are on a real Inquiry as some other types heritate from
-    #Inquiry and so implements the IInquiry interface
+    # be sure we are on a real Inquiry as some other types heritate from
+    # Inquiry and so implements the IInquiry interface
     if IGenericLicence.providedBy(ob):
         return
     for inquiry in ob.getInquiries():
@@ -48,8 +48,8 @@ def setGeneratedTitle(ob, event):
     """
       Set my title
     """
-    #be sure we are on a real Inquiry as some other types heritate from
-    #Inquiry and so implements the IInquiry interface
+    # be sure we are on a real Inquiry as some other types heritate from
+    # Inquiry and so implements the IInquiry interface
     if IGenericLicence.providedBy(ob):
         return
     ob.setTitle(ob.generateInquiryTitle())
@@ -60,9 +60,9 @@ def setDefaultValuesEvent(inquiry, event):
     """
      set default values on inquiry fields
     """
-    #be sure we are on a real Inquiry as some other types heritate from
-    #Inquiry and so implements the IInquiry interface
-    if IGenericLicence.providedBy(ob):
+    # be sure we are on a real Inquiry as some other types heritate from
+    # Inquiry and so implements the IInquiry interface
+    if IGenericLicence.providedBy(inquiry):
         return
     if inquiry.checkCreationFlag():
         _setDefaultSelectValues(inquiry)
