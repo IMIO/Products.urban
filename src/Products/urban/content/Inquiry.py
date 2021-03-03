@@ -252,7 +252,7 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
             container = self.aq_parent
         inquiries = [container]
         for obj in container.objectValues():
-            if IInquiry.providedBy(obj):
+            if interfaces.IInquiry.providedBy(obj):
                 inquiries.append(obj)
         i = 0
         for inquiry in inquiries:
