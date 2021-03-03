@@ -35,7 +35,7 @@ def afterDelete(ob, event):
     """
     #be sure we are on a real Inquiry as some other types heritate from
     #Inquiry and so implements the IInquiry interface
-    if not ob.portal_type == 'Inquiry':
+    if IGenericLicence.providedBy(ob):
         return
     for inquiry in ob.getInquiries():
         if not inquiry.portal_type == 'Inquiry':
@@ -50,7 +50,7 @@ def setGeneratedTitle(ob, event):
     """
     #be sure we are on a real Inquiry as some other types heritate from
     #Inquiry and so implements the IInquiry interface
-    if not ob.portal_type == 'Inquiry':
+    if IGenericLicence.providedBy(ob):
         return
     ob.setTitle(ob.generateInquiryTitle())
     ob.reindexObject(idxs=('title',))
@@ -62,7 +62,7 @@ def setDefaultValuesEvent(inquiry, event):
     """
     #be sure we are on a real Inquiry as some other types heritate from
     #Inquiry and so implements the IInquiry interface
-    if not inquiry.portal_type == 'Inquiry':
+    if IGenericLicence.providedBy(ob):
         return
     if inquiry.checkCreationFlag():
         _setDefaultSelectValues(inquiry)
