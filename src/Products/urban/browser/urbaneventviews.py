@@ -383,7 +383,7 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
         context = aq_inner(self.context)
         linkedInquiry = context.getLinkedInquiry()
         if linkedInquiry:
-            if not linkedInquiry.portal_type == 'Inquiry':
+            if IGenericLicence.providedBy(linkedInquiry):
                 # we do not use Title as this inquiry is the licence
                 return linkedInquiry.generateInquiryTitle()
             else:
@@ -443,15 +443,6 @@ class UrbanEventAnnouncementView(UrbanEventInquiryBaseView):
         # disable portlets
         self.request.set('disable_plone.rightcolumn', 1)
         self.request.set('disable_plone.leftcolumn', 1)
-
-    def getInquiryFields(self):
-        """
-        This will return fields to display about the Inquiry
-        """
-        context = aq_inner(self.context)
-        linked_inquiry = context.getLinkedInquiry()
-        fields_to_display = linked_inquiry.get_inquiry_fields_to_display()
-        return fields_to_display
 
 
 class UrbanEventInquiryView(UrbanEventInquiryBaseView):
