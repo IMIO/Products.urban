@@ -248,7 +248,7 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
         #getInquiries is a method of GenericLicence
         #so by acquisition, we get it on the parent or we get it on self
         #as GenericLicence heritates from Inquiry
-        inquiries = self.getInquiries()
+        inquiries = self.getAllInquiries()
         selfUID = self.UID()
         i = 0
         for inquiry in inquiries:
