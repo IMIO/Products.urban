@@ -55,7 +55,7 @@ class AnnoncedDelay(UrbanBaseDelay):
     def calculate_delay(self):
         base_delay = super(AnnoncedDelay, self).calculate_delay()
         delay = self.task_container.getAnnoncedDelay() or 0
-        if delay.endswith('j'):
+        if delay and delay.endswith('j'):
             delay = int(delay[:-1])
             delay += self.inquiry_suspension_delay()
         return delay + base_delay
