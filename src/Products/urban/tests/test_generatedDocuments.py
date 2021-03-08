@@ -3,7 +3,7 @@
 from plone.app.testing import login
 from Products.urban.profiles.testsWithLicences.licences_data import licences_data
 from Products.urban.testing import URBAN_TESTS_LICENCES
-from Products.urban.scripts.odtsearch import searchInTextElements
+from Products.urban.scripts.odtsearch import SearchPODTemplates
 
 import cgi
 import unittest
@@ -141,7 +141,8 @@ class TestDocuments(unittest.TestCase):
                     annotations = [node.getElementsByTagName('text:p') for node in xml_tree.getElementsByTagName('office:annotation')]
                     if annotations:
                         #stocker les logs d'erreurs trouvées
-                        result = searchInTextElements(annotations, document.getFilename(), 'commentaire', ["^(Error|Action).*$"])
+                        search = SearchPODTemplates('', '')
+                        result = search.search_XML_pod_zone(annotations, document.getFilename(), 'commentaire', ["^(Error|Action).*$"])
                         log.append([result, test_licence.Title(), event.Title(), document.Title()])
         #afficher toutes les erreurs trouvées (type de procédure->event->nom du doc->erreurs)
         if log:
