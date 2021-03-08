@@ -22,10 +22,11 @@ class SearchPODTemplates(object):
         self.flags = ignorecase and re.I or 0
         find_expr = type(find_expr) in (list, tuple) and find_expr[0] or find_expr
         self.find_expr = re.compile(find_expr, self.flags)
-        self.filenames_expr = filenames_expr
+        self.filenames_expr = type(filenames_expr) not in (list, tuple) and [filenames_expr] or filenames_expr
         self.ignorecase = ignorecase
         self.recursive = recursive
         self.silent = silent
+        self.last_result = None
 
     def run(self, find_expr=None):
         """
@@ -35,6 +36,7 @@ class SearchPODTemplates(object):
 
         files = self.find_files(self.filenames_expr, self.recursive)
         search_result = self.search(self.find_expr, files)
+        self.last_result = search_result
         return search_result
 
     def find_files(self, filenames_expr, recursive=False):
@@ -42,7 +44,7 @@ class SearchPODTemplates(object):
         """
         result = []
         base_paths = list(set([os.path.dirname(path) or '.' for path in filenames_expr]))
-        files_exprs = [os.path.split(n)[1] for n in filenames_expr]
+        files_exprs = [os.path.split(name)[1] for name in filenames_expr]
         regexs = [re.compile(expr) for expr in files_exprs]
 
         for base_path in base_paths:
@@ -83,7 +85,7 @@ class SearchPODTemplates(object):
                 if search_result:
                     result[filename] = (xml_tree, search_result)
                     if not self.silent:
-                        display = self.get_result_display(search_result)
+                        display = self.get_one_result_display(search_result)
                         print filename
                         print '\n'.join(display)
         return result
@@ -157,7 +159,21 @@ class SearchPODTemplates(object):
             return result
         return recursive_reach_text_node(node, [])
 
-    def get_result_display(self, searchresult):
+    def get_result_display(self, search_result=None):
+        search_result = search_result or self.last_result
+        count = 0
+        to_display = []
+
+        for filename, file_result in search_result.iteritems():
+            to_display.append(filename)
+            file_result_display =self.get_one_result_display(file_result[1])
+            to_display.extend(file_result_display)
+            count += len(file_result_display)
+
+        to_display.append('{} matches'.format(count))
+        return to_display
+
+    def get_one_result_display(self, searchresult):
         to_display = []
         for result in searchresult:
             text = result['XMLnode'].data
@@ -213,6 +229,7 @@ class SearchAndReplacePODTemplates(SearchPODTemplates):
 
         search_result = super(SearchAndReplacePODTemplates, self).run()
         new_files = self.replace(self.find_expr, self.replace_expr, search_result, self.target_dir)
+        self.last_result = search_result
         return search_result, new_files
 
     def replace(self, find_expr, replace_expr, search_results, target_dir):
