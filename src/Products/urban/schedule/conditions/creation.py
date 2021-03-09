@@ -25,6 +25,19 @@ class DepositDoneCondition(CreationCondition):
         return deposit_done
 
 
+class DepositEventCreated(CreationCondition):
+    """
+    Licence deposit event is created.
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+
+        deposit_done = False
+        deposit_event = licence.getLastDeposit()
+        return deposit_event
+
+
 class AcknowledgmentDoneCondition(CreationCondition):
     """
     Licence folderComplete event is created.
