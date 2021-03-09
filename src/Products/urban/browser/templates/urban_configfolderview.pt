@@ -26,12 +26,18 @@
             Title
             </metal:field>
         </h1>
+
+        <div tal:replace="structure provider:plone.belowcontenttitle" />
+
+        <p class="documentDescription">
+            <metal:field use-macro="python:here.widget('description', mode='view')">
+            Description
+            </metal:field>
+        </p>
         <div class="field">
         <tal:addable_types define="acts context/allowedContentTypes" repeat="act acts" i18n:domain="urban">
         <form tal:condition="python: not isAnon" name="quickAdd"
-              tal:define="is_DX python: 'DexterityFTI' in str(act)"                                   
-              tal:attributes="action python: '{}/{}'.format(context.absolute_url(), is_DX and '++add++{}'.format(act.id) or 'createObject')"
-              action="" method="post">
+              tal:attributes="action python: context.absolute_url() + '/createObject'" action="createObject" method="post">
           <input type="hidden" name="type_name" value="#" tal:attributes="value act/id" />
           <input type="submit" id="event" value="#"
                  tal:attributes="value python: 'add_' + act.id;
@@ -41,19 +47,10 @@
         </tal:addable_types>
         </div>
 
-        <div style="vertical-align:top; max-width: 45%; display:inline-block"
-            tal:define="form nocall:view/form">
-            <fieldset>
-            <legend i18n:translate="">Filter</legend>
-                <span tal:replace="structure view/contents" />
-            </fieldset>
-        </div>
-
         <div tal:replace="structure provider:plone.abovecontentbody" />
 
         <div>
-            <tal:listing content="structure view/search_result/render" />
-            <tal:batch content="structure view/search_result/renderBatch" />
+         <tal:listing content="structure view/renderListing" />
         </div>
 
     </metal:body>

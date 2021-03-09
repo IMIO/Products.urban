@@ -72,7 +72,3 @@ def _setDefaultTextValues(inquiry):
         default_value = inquiry.getDefaultText(licence, field, is_html)
         field_mutator = getattr(inquiry, field.mutator)
         field_mutator(default_value)
-
-
-def delete_recipient_cadastre(ob, event):
-    return event.object.REQUEST.response.redirect(ob.aq_parent.absolute_url() + '#fieldsetlegend-urbaneventinquiry_recipients')

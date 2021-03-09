@@ -491,8 +491,6 @@ class UrbanDocGenerationEventHelperView(UrbanDocGenerationHelperView):
                 mailing_list = self.real_context.getParentNode().getApplicants()
             elif gen_context['publipostage'] == 'architectes':
                 mailing_list = self.context.getArchitects()
-            elif gen_context['publipostage'] == 'notaires':
-                mailing_list = self.context.getNotaryContact()
             elif gen_context['publipostage'] == 'reclamants':
                 mailing_list = self.context.getClaimants()
             elif gen_context['publipostage'] == 'derniers_reclamants':
@@ -525,7 +523,7 @@ class UrbanDocGenerationEventHelperView(UrbanDocGenerationHelperView):
     def getFolderMakers(self):
         """  """
         urban_tool = getToolByName(self, 'portal_urban')
-        foldermakers_config = urban_tool.getLicenceConfig(self.context).urbaneventtypes
+        foldermakers_config = urban_tool.getUrbanConfig(self.context).urbaneventtypes
         all_opinion_request_events = self.context.getAllOpinionRequests()
         foldermakers = []
         for opinionRequestEventType in foldermakers_config.objectValues('OpinionRequestEventType'):
@@ -651,7 +649,6 @@ class LicenceDisplayProxyObject(UrbanBaseProxyObject):
 
     def __getattr__(self, attr_name):
         """
-        Delegate field attribute access to display() method.
         """
         if attr_name.startswith('getLast') or attr_name.startswith('getFirst'):
             def getUrbanEventProxy(*args, **kwargs):
@@ -673,6 +670,30 @@ class LicenceDisplayProxyObject(UrbanBaseProxyObject):
 
                     return EventNotFound()
             return getUrbanEventProxy
+        if attr_name.startswith('getBound'):
+            def getBoundLicenceProxy(*args, **kwargs):
+                licences = getattr(self.context, attr_name)(*args, **kwargs)
+                if licences:
+                    if type(licences) in [list, tuple]:
+                        proxy_licences = [bl.restrictedTraverse('document_generation_helper_view').context for bl in licences]
+                        return proxy_licences
+                    else:
+                        helper_view = licences.restrictedTraverse('document_generation_helper_view')
+                        proxy_licence = helper_view.context
+                        return proxy_licence
+                else:
+                    class BoundLicenceNotFound(object):
+                        def __getattribute__(self, attr_name):
+                            return None
+
+                        def __nonzero__(self):
+                            return False
+
+                        def __call__(self):
+                            return None
+
+                    return BoundLicenceNotFound()
+            return getBoundLicenceProxy
         return super(LicenceDisplayProxyObject, self).__getattr__(attr_name)
 
     def _get_street_dict(self, uid):
@@ -732,45 +753,6 @@ class LicenceDisplayProxyObject(UrbanBaseProxyObject):
         for workLocation in workLocations[1:]:
             workLocation_signaletic += separator + self.get_work_location_signaletic(workLocation)
         return workLocation_signaletic
-
-    def getPortionOutsText(self, linebyline=False):
-        """
-          Return a displayable version of the parcels
-        """
-        toreturn = ''
-        isFirst = True
-        first_div = None
-        first_section = None
-        for portionOutObj in self.context.getParcels():
-            #add a separator between every parcel
-            #either a '\n'
-            if not isFirst and linebyline:
-                toreturn += '\n'
-            #or an "and "
-            elif not isFirst:
-                toreturn += ', '
-            elif isFirst:
-                first_div = portionOutObj.getDivisionAlternativeName()
-                toreturn += '%s ' % portionOutObj.getDivisionAlternativeName()
-                first_section = portionOutObj.getSection()
-                toreturn += 'section %s' % portionOutObj.getSection()
-                toreturn += ' n° '.decode('utf8')
-            else:
-                if first_div != portionOutObj.getDivisionAlternativeName():
-                    toreturn += '%s ' % portionOutObj.getDivisionAlternativeName()
-                if first_section != portionOutObj.getSection():
-                    toreturn += 'section %s ' % portionOutObj.getSection()
-            toreturn += ' %s' % portionOutObj.getRadical()
-            if portionOutObj.getBis() != '':
-                if portionOutObj.getBis() != '0':
-                    toreturn += '/%s ' % portionOutObj.getBis()
-                else:
-                    toreturn += ' '
-            toreturn += portionOutObj.getExposant()
-            if portionOutObj.getPuissance() != '' and portionOutObj.getPuissance() != '0':
-                    toreturn += ' %s' %portionOutObj.getPuissance()
-            isFirst = False
-        return toreturn
 
     def get_last_opinions_round(self):
         opinions = self._get_last_opinions('solicitOpinionsTo')
@@ -1212,9 +1194,13 @@ class EventDisplayProxyObject(UrbanBaseProxyObject):
 
     def _get_wspm_field(self, field_name):
         field = 'NO FIELD {} FOUND'.format(field_name)
-        linked_pm_items = get_ws_meetingitem_infos(self.context)
-        if linked_pm_items and field_name in linked_pm_items[0]:
-            field = linked_pm_items[0][field_name]
+        linked_pm_items = get_ws_meetingitem_infos(self.context, extra_attributes=True)
+        if linked_pm_items:
+            linked_item = linked_pm_items[0]
+            if field_name in linked_item:
+                field = linked_item[field_name]
+            elif field_name in linked_item.extraInfos:
+                field = linked_item.extraInfos[field_name]
         return field
 
     def get_wspm_decision_date(self, translatemonth=True, long_format=False):

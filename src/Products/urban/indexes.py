@@ -29,11 +29,14 @@ from Products.urban.interfaces import IGenericLicence
 from Products.urban.interfaces import IInspection
 from Products.urban.interfaces import IIsArchive
 from Products.urban.interfaces import IMiscDemand
+from Products.urban.interfaces import IParcellingTerm
 from Products.urban.interfaces import IPatrimonyCertificate
+from Products.urban.interfaces import IPortionOut
 from Products.urban.interfaces import IProprietary
 from Products.urban.interfaces import ITicket
 from Products.urban.interfaces import IUrbanDoc
 from Products.urban.interfaces import IUrbanEvent
+from Products.urban.interfaces import IUrbanEventType
 from Products.urban.schedule.interfaces import ILicenceDeliveryTask
 from Products.urban.utils import get_ws_meetingitem_infos
 
@@ -119,8 +122,40 @@ def licence_architectinfoindex(object):
     return list(set(architects_info))
 
 
+@indexer(IPortionOut)
+def parcelinfoindex(obj):
+    """
+    Indexes some informations about the parcels of 'self'
+    Index parcels of a licence
+    It builds a list of parcels infos.  Parcels infos are :
+    - code divison
+    - division
+    - section
+    - radical
+    - bis
+    - exposant
+    - puissance
+    Separated by a ','
+    What we need to do is to do an 'exact' search on it
+    This index is a ZCTextIndex based on the plone_lexicon so we
+    are sure that indexed values are lowercase
+    """
+    return [obj.get_capakey()]
+
+
 @indexer(IGenericLicence)
 def genericlicence_parcelinfoindex(obj):
+    parcels_infos = []
+    if hasattr(obj, 'getParcels'):
+        parcels_infos = list(set([p.get_capakey() for p in obj.getParcels()]))
+    return parcels_infos
+
+
+@indexer(IParcellingTerm)
+def parcellingterm_parcelinfoindex(obj):
+    """
+    Index parcels of a parcelling term
+    """
     parcels_infos = []
     if hasattr(obj, 'getParcels'):
         parcels_infos = list(set([p.get_capakey() for p in obj.getParcels()]))
@@ -158,6 +193,18 @@ def genericlicence_lastkeyevent(object):
         event_type = event.getUrbaneventtypes()
         if event_type.getIsKeyEvent() and event.getEventDate().year() >= 1900:
             return "%s,  %s" % (event.getEventDate().strftime("%d/%m/%y"), event_type.Title())
+
+
+# !!!!
+# We use this index to know if an event is schedulable or not.
+# Since it's not used for UrbanEventType, we use this one rather
+# than define a new index
+# !!!!
+@indexer(IUrbanEventType)
+def urbaneventtype_lastkeyevent(object):
+    if object.getDeadLineDelay() > 0:
+        return 'schedulable'
+    return ''
 
 
 @indexer(IGenericLicence)
@@ -249,6 +296,11 @@ def doc_not_indexed(obj):
 @indexer(IProprietary)
 @indexer(ICorporation)
 def contact_not_indexed(obj):
+    raise AttributeError()
+
+
+@indexer(IPortionOut)
+def portion_not_indexed(obj):
     raise AttributeError()
 
 

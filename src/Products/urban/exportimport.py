@@ -3,11 +3,11 @@
 from Products.CMFCore.utils import getToolByName
 
 from Products.urban.scripts.odtsearch import searchOneODT
+from Products.urban.config import NIS
 from Products.urban.utils import moveElementAfter
 from Products.urban.utils import getMd5Signature
 
 from plone.namedfile.file import NamedBlobFile
-from plone import api
 
 import logging
 logger = logging.getLogger('urban: setuphandlers')
@@ -28,20 +28,20 @@ def loga(msg, type="info", gslog=None):
     return msg
 
 
-def updateTemplates(context, container, templates, starting_position='', new_install=True):
+def updateTemplates(context, container, templates, starting_position=''):
     log = []
     position_after = starting_position
     for template in templates:
         template_id = template['id']
         filePath = '%s/templates/%s' % (context._profile_path, template_id)
         new_content = file(filePath, 'rb').read()
-        log.append(updateTemplate(context, container, template, new_content, position_after, new_install))
-        # log[-1][0] is the id of the last template added
+        log.append(updateTemplate(context, container, template, new_content, position_after))
+        #log[-1][0] is the id of the last template added
         position_after = log[-1][0]
     return log
 
 
-def updateTemplate(context, container, template, new_content, position_after='', new_install=True):
+def updateTemplate(context, container, template, new_content, position_after=''):
     def setProperty(file, property_name, property_value):
         if property_name in file.propertyIds():
             file.manage_changeProperties({property_name: property_value})
@@ -53,12 +53,12 @@ def updateTemplate(context, container, template, new_content, position_after='',
     status = [template_id]
     new_md5_signature = getMd5Signature(new_content)
     old_template = getattr(container, template_id, None)
-    # if theres an existing template with the same id
+    #if theres an existing template with the same id
     if old_template:
-        # if not in the correct profile -> no changes
+        #if not in the correct profile -> no changes
         if profile_name != old_template.getProperty("profileName") != 'extra':
             status.append('no changes')
-        # if in the correct profile but old template has been customised or has the same content than the new one -> no changes
+        #if in the correct profile but old template has been customised or has the same content than the new one -> no changes
         elif profile_name == old_template.getProperty("profileName"):
             # Is the template different on the file system
             data = type(old_template.odt_file) in [list, tuple] and old_template.odt_file[0].data or old_template.odt_file.data
@@ -77,7 +77,7 @@ def updateTemplate(context, container, template, new_content, position_after='',
         ),
         new_template = old_template
         status.append('updated')
-    # else create a new template
+    #else create a new template
     else:
         portal_type = template.pop('portal_type', 'UrbanTemplate')
         if portal_type == 'UrbanTemplate':
@@ -94,14 +94,12 @@ def updateTemplate(context, container, template, new_content, position_after='',
             **template
         )
         new_template = getattr(container, template_id)
-        if not new_install:
-            api.content.transition(new_template, 'disable')
         status.append('created')
 
     new_template.setFilename(template_id)
     new_template.setFormat("application/vnd.oasis.opendocument.text")
 
-    # to do to if we added/updated a new template: the position in the folder and set some properties
+    #to do to if we added/updated a new template: the position in the folder and set some properties
     if position_after:
         moveElementAfter(new_template, container, 'id', position_after)
     else:
@@ -162,7 +160,7 @@ def updateAllUrbanTemplates(context):
         return
     addGlobalTemplates(context)
     addDashboardTemplates(context)
-    addEventConfigs(context)
+    addUrbanEventTypes(context)
 
 
 def addGlobalTemplates(context):
@@ -222,23 +220,20 @@ def addDashboardTemplates(context):
     return '\n'.join(log)
 
 
-def addEventConfigs(context):
+def addUrbanEventTypes(context):
     """
       Helper method for easily adding urbanEventTypes
     """
-    # do the import on call to be able to monkey patch it in tests
-    from Products.urban.config import NIS
     if context.readDataFile('urban_extra_marker.txt') is None:
         return
-    # add some EventConfigs...
-    # get the urbanEventTypes dict from the profile
-    # get the name of the profile by taking the last part of the _profile_path
+    #add some UrbanEventTypes...
+    #get the urbanEventTypes dict from the profile
+    #get the name of the profile by taking the last part of the _profile_path
     profile_name = context._profile_path.split('/')[-1]
     module_name = 'Products.urban.profiles.%s.data' % profile_name
-    attribute = 'EventConfigs'
+    attribute = 'urbanEventTypes'
     module = __import__(module_name, fromlist=[attribute])
     urbanEventTypes = getattr(module, attribute)
-    module_name = 'Products.urban.profiles.%s.refnis' % profile_name
     attribute = 'REFNIS_2019'
     module = __import__(module_name, fromlist=[attribute])
     refNIS_2019 = getattr(module, attribute)
@@ -246,38 +241,37 @@ def addEventConfigs(context):
     site = context.getSite()
 
     log = []
-    gslogger = context.getLogger('addEventConfigs')
+    gslogger = context.getLogger('addUrbanEventTypes')
     tool = getToolByName(site, 'portal_urban')
-    matched_externalDirection = None
+    matched_outsideDirection = None
     for refNIS in refNIS_2019:
         if str(refNIS['Code INS']) == NIS:
-            matched_externalDirection = refNIS["Directions extérieures"]
+            matched_outsideDirection = refNIS["Directions extérieures"]
             break
-    # add the EventConfig
+    #add the UrbanEventType
     for urbanConfigId in urbanEventTypes:
         try:
-            uetFolder = getattr(tool.getLicenceConfig(None, urbanConfigId=urbanConfigId), "eventconfigs")
+            uetFolder = getattr(tool.getUrbanConfig(None, urbanConfigId=urbanConfigId), "urbaneventtypes")
         except AttributeError:
-            # if we can not get the urbanConfig, we pass this one...
+            #if we can not get the urbanConfig, we pass this one...
             log.append(loga("AttributeError while trying to get the '%s' urbanConfig" % urbanConfigId, type="warning", gslog=gslogger))
             continue
         last_urbaneventype_id = None
-        new_install = len(uetFolder.objectIds()) == 0
         for uet in urbanEventTypes[urbanConfigId]:
             id = uet['id']
-            # we pass every informations including the 'id' in the 'uet' dict
+            #we pass every informations including the 'id' in the 'uet' dict
             folderEvent = getattr(uetFolder, id, None)
             if folderEvent:
                 newUet = folderEvent
             else:
-                portal_type = uet.get('portal_type', 'EventConfig')
+                portal_type = uet.get('portal_type', 'UrbanEventType')
                 if portal_type == 'OpinionRequestEventType':
-                    if not matched_externalDirection:
+                    if not matched_outsideDirection:
                         continue
                     else:
-                        externalDirections = uet.getExternalDirections()
-                        if externalDirections:
-                            if matched_externalDirection not in externalDirections:
+                        concernedOutsideDirections = uet.get('outsideDirection')
+                        if concernedOutsideDirections:
+                            if not matched_outsideDirection in concernedOutsideDirections:
                                 continue
                 newUetId = uetFolder.invokeFactory(portal_type, **uet)
                 newUet = getattr(uetFolder, newUetId)
@@ -285,12 +279,10 @@ def addEventConfigs(context):
                     moveElementAfter(newUet, uetFolder, 'id', last_urbaneventype_id)
                 else:
                     uetFolder.moveObjectToPosition(newUet.getId(), 0)
-                if not new_install:
-                    api.content.transition(newUet, 'disable')
                 log.append(loga("%s: event='%s' => %s" % (urbanConfigId, id, 'created'), gslog=gslogger))
             last_urbaneventype_id = id
-            # add the Files in the EventConfig
-            template_log = updateTemplates(context, newUet, uet['podTemplates'], new_install=new_install)
+            #add the Files in the UrbanEventType
+            template_log = updateTemplates(context, newUet, uet['podTemplates'])
             for status in template_log:
                 if status[1] != 'no changes':
                     log.append(loga("%s: evt='%s', template='%s' => %s" % (urbanConfigId, last_urbaneventype_id, status[0], status[1]), gslog=gslogger))

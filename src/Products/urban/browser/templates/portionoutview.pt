@@ -1,0 +1,42 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="urban">
+
+    <body>
+        <metal:main fill-slot="main">
+            <metal:main_macro define-macro="main">
+                <metal:body define-macro="body_macro">
+
+                <metal:titleWithIcon use-macro="here/@@globalmacros/titleWithIcon" />
+
+                <div tal:replace="structure provider:plone.belowcontenttitle" />
+                <!-- Back to the build licence... -->
+                <br />
+                <tal:block condition="view/showLinkToLinkedLicence">
+                    <a class="no_underline" href="#" tal:attributes="href view/getLinkToLinkedLicence">
+                        <img src="goback.png" />&nbsp;<span i18n:translate="go_back">Go back</span>...
+                    </a>
+                </tal:block>
+
+                <fieldset>
+                <legend i18n:translate="portionout_details">Portion out details</legend>
+                    <table metal:define-slot="detail_slot" class="no-style-table" cellspacing=0 cellpadding=0 width=100%
+                           tal:define="default_custom python: [];
+                                       default_exclude python: ['id'];
+                                       custom custom | python: []; custom python: custom + default_custom;
+                                       exclude exclude | default_exclude">
+
+                        <tal:loop repeat="field python: view.getFields(exclude)">
+                            <!-- YES WE SEARCH THE 'FIELD DISPLAY' MACRO IN CONTACT MACROS
+                                 REFACTOR THIS ONE DAY !!! -->
+                            <metal:field_display use-macro="here/@@portionoutmacros/field_display" />
+                        </tal:loop>
+                    </table>
+                </fieldset>
+
+                </metal:body>
+            </metal:main_macro>
+        </metal:main>
+    </body>
+</html>

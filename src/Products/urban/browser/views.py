@@ -195,9 +195,10 @@ class TemplatesSummary(BrowserView):
             if not safe_hasattr(self.tool, licenceConfigId):
                 continue
             configFolder = getattr(self.tool, licenceConfigId)
-            if not safe_hasattr(configFolder, 'eventconfigs'):
+            if not safe_hasattr(configFolder, 'urbaneventtypes'):
                 continue
-            for obj in configFolder.getEventConfigs():
+            uetfolder = getattr(configFolder, 'urbaneventtypes')
+            for obj in uetfolder.objectValues('UrbanEventType'):
                 templ_by_event = [obj.Title()]
                 for templ in self.getUrbanTemplate(obj):
                     self.tot_count += 1

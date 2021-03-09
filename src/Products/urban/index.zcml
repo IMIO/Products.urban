@@ -8,10 +8,13 @@
   <adapter name="applicantInfosIndex" factory=".indexes.inspection_applicantinfoindex" />
   <adapter name="architectInfosIndex" factory=".indexes.licence_architectinfoindex" />
   <adapter name="parcelInfosIndex" factory=".indexes.genericlicence_parcelinfoindex" />
+  <adapter name="parcelInfosIndex" factory=".indexes.parcelinfoindex" />
+  <adapter name="parcelInfosIndex" factory=".indexes.parcellingterm_parcelinfoindex" />
   <adapter name="StreetsUID" factory=".indexes.genericlicence_streetsuid" />
   <adapter name="StreetNumber" factory=".indexes.genericlicence_streetnumber" />
   <adapter name="address" factory=".indexes.genericlicence_address" />
   <adapter name="last_key_event" factory=".indexes.genericlicence_lastkeyevent" />
+  <adapter name="last_key_event" factory=".indexes.urbaneventtype_lastkeyevent" />
   <adapter name="folder_manager" factory=".indexes.genericlicence_foldermanager" />
   <adapter name="folder_manager" factory=".indexes.urbanevent_foldermanager" />
   <adapter name="extraValue" factory=".indexes.rubricsfolders_extravalue" />
@@ -85,5 +88,24 @@
   <adapter name="getReference" factory=".indexes.contact_not_indexed" />
   <adapter name="extraValue" factory=".indexes.contact_not_indexed" />
   <adapter name="allowedRolesAndUsers" factory=".indexes.contact_not_indexed" />
+
+  <adapter name="sortable_title" factory=".indexes.portion_not_indexed" />
+  <adapter name="SearchableText" factory=".indexes.portion_not_indexed" />
+  <adapter name="Description" factory=".indexes.portion_not_indexed" />
+  <adapter name="Title" factory=".indexes.portion_not_indexed" />
+  <adapter name="Type" factory=".indexes.portion_not_indexed" />
+  <adapter name="portal_type" factory=".indexes.portion_not_indexed" />
+  <adapter name="meta_type" factory=".indexes.portion_not_indexed" />
+  <adapter name="created" factory=".indexes.portion_not_indexed" />
+  <adapter name="modified" factory=".indexes.portion_not_indexed" />
+  <adapter name="Date" factory=".indexes.portion_not_indexed" />
+  <adapter name="Creator" factory=".indexes.portion_not_indexed" />
+  <adapter name="object_provides" factory=".indexes.portion_not_indexed" />
+  <adapter name="review_state" factory=".indexes.portion_not_indexed" />
+  <adapter name="effectiveRange" factory=".indexes.portion_not_indexed" />
+  <adapter name="effective" factory=".indexes.portion_not_indexed" />
+  <adapter name="getReference" factory=".indexes.portion_not_indexed" />
+  <adapter name="extraValue" factory=".indexes.portion_not_indexed" />
+  <adapter name="allowedRolesAndUsers" factory=".indexes.portion_not_indexed" />
 
 </configure>

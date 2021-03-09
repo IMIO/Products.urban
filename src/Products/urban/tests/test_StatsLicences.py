@@ -39,7 +39,8 @@ class TestLicenceStatsView(BrowserTestCase):
         compare(S("(?s).*0 dossiers.*"), self.browser.contents)
 
     def testStatsViewsResult(self):
-        licences_number = 8
+        catalog = api.portal.get_tool('portal_catalog')
+        licences_number = len(catalog(object_provides=IGenericLicence.__identifier__))
         #check the normal case display result
         self.browser.open(self.urban.absolute_url() + '/urbanstatsview')
         self.browser.getControl(name="licence_states").getControl(value='in_progress').click()

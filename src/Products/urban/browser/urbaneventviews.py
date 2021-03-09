@@ -52,8 +52,7 @@ class UrbanEventView(BrowserView):
             if not activatedField:
                 continue  # in some case, there could be an empty value in activatedFields...
             field = context.getField(activatedField)
-            if field not in fields:
-                fields.append(field)
+            fields.append(field)
         return fields
 
     def getFieldsToShow(self):
@@ -280,11 +279,11 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
         claimants_file = interfaces.IAnnotations(self.context)['urban.claimants_to_import']
         if claimants_file:
             reader = csv.DictReader(
-                StringIO(claimants_file), fieldnames, delimiter=';', quotechar='"'
+                StringIO(claimants_file), fieldnames, delimiter=',', quotechar='"'
             )
         else:
             reader = []
-        claimant_args = [row for row in reader if row['name1']][1:]
+        claimant_args = [row for row in reader if row['name1'] or row['name2'] or row['society']][1:]
         for claimant_arg in claimant_args:
             claimant_arg.pop(None, None)
             # default values
@@ -297,7 +296,9 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
             # mappings
             claimant_arg['personTitle'] = titles_mapping[claimant_arg['personTitle']]
             claimant_arg['country'] = country_mapping[claimant_arg['country']]
-            claimant_arg['id'] = site.plone_utils.normalizeString(claimant_arg['name1'] + claimant_arg['name2'])
+            claimant_arg['id'] = site.plone_utils.normalizeString(
+                claimant_arg['name1'] + claimant_arg['name2'] + claimant_arg['society']
+            )
             count = 0
             if claimant_arg['id'] in self.context.objectIds():
                 count += 1

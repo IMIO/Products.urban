@@ -523,6 +523,10 @@ class ITheTicketEvent(Interface):
     __doc__ = _("""ITheTicket type marker interface""")
 
 
+class ITechnicalAnalysis(Interface):
+    __doc__ = _("""ITechnicalAnalysis type marker interface""")
+
+
 class ITheLicenceCollegeEvent(Interface):
     __doc__ = _("""ITheLicence type marker interface""")
 
@@ -654,7 +658,7 @@ class IUrbanDoc(Interface):
     """Marker interface for generated document.
     """
 
-# [DX] TO DELETE > 2.5 [DX]
+
 class ILicencePortionOut(Interface):
     """Marker interface for portionOut in a licence.
     """

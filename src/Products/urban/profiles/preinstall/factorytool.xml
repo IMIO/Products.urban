@@ -14,14 +14,17 @@
   <type portal_type="Contact"/>
   <type portal_type="Street"/>
   <type portal_type="UrbanEvent"/>
+  <type portal_type="UrbanEventType"/>
   <type portal_type="Recipient"/>
   <type portal_type="BuildLicence"/>
   <type portal_type="ParcelOutLicence"/>
   <type portal_type="FolderManager"/>
   <type portal_type="UrbanVocabularyTerm"/>
+  <type portal_type="PortionOut"/>
   <type portal_type="RecipientCadastre"/>
   <type portal_type="Layer"/>
   <type portal_type="Declaration"/>
+  <type portal_type="ParcellingTerm"/>
   <type portal_type="PcaTerm"/>
   <type portal_type="City"/>
   <type portal_type="UrbanCertificateBase"/>
@@ -46,6 +49,8 @@
   <type portal_type="EnvironmentBase"/>
   <type portal_type="EnvironmentRubricTerm"/>
   <type portal_type="SpecificFeatureTerm"/>
+  <type portal_type="OpinionRequestEventType"/>
+  <type portal_type="FollowUpEventType"/>
   <type portal_type="EnvironmentLicence"/>
   <type portal_type="EnvClassThree"/>
   <type portal_type="Corporation"/>

@@ -42,4 +42,4 @@ def get_value_history_by_index(obj, history_attr, index, action=None):
 
 
 def has_changes(current_values, last_history_values):
-    return str(current_values) != str(last_history_values)
+    return set(current_values) != set(last_history_values)

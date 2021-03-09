@@ -54,11 +54,8 @@ class AnnoncedDelay(UrbanBaseDelay):
 
     def calculate_delay(self):
         base_delay = super(AnnoncedDelay, self).calculate_delay()
-        licence = self.task_container
-        delay = licence.getAnnoncedDelay() or 0
-        if licence.getHasModifiedBlueprints():
-            delay = licence.getDelayAfterModifiedBlueprints()
-        if delay.endswith('j'):
+        delay = self.task_container.getAnnoncedDelay() or 0
+        if delay and delay.endswith('j'):
             delay = int(delay[:-1])
             delay += self.inquiry_suspension_delay()
         return delay + base_delay
@@ -93,8 +90,6 @@ class UniqueLicenceAnnoncedDelay(AnnoncedDelay):
     def calculate_delay(self):
         licence = self.task_container
         raw_delay = licence.getAnnoncedDelay()
-        if licence.getHasModifiedBlueprints():
-            delay = licence.getDelayAfterModifiedBlueprints()
         delay = super(AnnoncedDelay, self).calculate_delay()
         if raw_delay.endswith('j'):
             delay = int(raw_delay[:-1])

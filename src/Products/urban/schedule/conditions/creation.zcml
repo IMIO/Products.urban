@@ -336,6 +336,14 @@
     />
 
     <adapter
+        for="Products.urban.interfaces.IInspection
+             imio.schedule.content.task_config.ITaskConfig"
+        provides="imio.schedule.interfaces.ICreationCondition"
+        factory=".creation.FollowUpWithDelayOverdue"
+        name="urban.schedule.condition.followup_with_delay_overdue"
+    />
+
+    <adapter
         for="Products.urban.interfaces.ITicket
              imio.schedule.content.task_config.ITaskConfig"
         provides="imio.schedule.interfaces.ICreationCondition"

@@ -14,16 +14,19 @@ __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEUL
 __docformat__ = 'plaintext'
 
 from AccessControl import ClassSecurityInfo
-from plone import api
 from Products.Archetypes.atapi import *
 from zope.interface import implements
+import interfaces
 from Products.urban.UrbanVocabularyTerm import UrbanVocabularyTerm
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
+
 from Products.urban.config import *
+
+##code-section module-header #fill in your manual code here
 from Products.urban.utils import getLicenceSchema
 from zope.i18n import translate
+##/code-section module-header
 
-import interfaces
 schema = Schema((
 
     LinesField(
@@ -101,15 +104,6 @@ class SpecificFeatureTerm(BaseContent, UrbanVocabularyTerm, BrowserDefaultMixin)
         ]
         #return a vocabulary containing the names of all the text fields of the schema
         return DisplayList(sorted(vocabulary_fields, key=lambda name: name[1]))
-
-    security.declarePublic('getRenderedDescription')
-
-    def getRenderedDescription(self, obj, renderToNull=False):
-        """
-        see renderText method of UrbanTool
-        """
-        portal_urban = api.portal.get_tool('portal_urban')
-        return portal_urban.renderText(text=self.Description(), context=obj, renderToNull=renderToNull)
 
 
 

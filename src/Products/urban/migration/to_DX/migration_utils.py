@@ -1,29 +1,10 @@
 # -*- coding: utf-8 -*-
-
-from datetime import date
 from datetime import datetime
 from plone import api
 
 import logging
 
 logger = logging.getLogger('urban: migrations utils')
-
-
-def migrate_date(src_obj, dst_obj, src_fieldname, dst_fieldname):
-    old_date = src_obj.getField(src_fieldname).getRaw(src_obj)
-    if old_date:
-        new_date = date(old_date.year(), old_date.month(), old_date.day())
-        setattr(dst_obj, dst_fieldname, new_date)
-
-
-def migrate_to_tuple(src_obj, dst_obj, src_fieldname, dst_fieldname):
-    old_value = src_obj.getField(src_fieldname).getRaw(src_obj)
-    new_value = old_value
-    if type(old_value) in [str, unicode]:
-        new_value = (old_value,)
-    elif type(old_value) is list:
-        new_value = tuple(old_value)
-    setattr(dst_obj, dst_fieldname, new_value)
 
 
 def clean_obsolete_portal_type(portal_type_to_remove=None, report='print'):
@@ -72,12 +53,3 @@ def delete_plone_objects(portal_type_object_to_delete):
     logger.info("Found {} items to be deleted".format(len(items)))
     api.content.delete(objects=items)
     logger.info("***Done ***")
-
-
-def uid_catalog_reindex_objects(objects=[]):
-    """
-    Reindex the given objects the the UID catalog.
-    """
-    uid_catalog = api.portal.get_tool('uid_catalog')
-    for obj in objects:
-        uid_catalog.catalog_object(obj, '/'.join(obj.getPhysicalPath()))

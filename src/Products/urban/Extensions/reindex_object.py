@@ -19,4 +19,4 @@ def disable_opinion_field():
         if 'adviceAgreementLevel' in active_fields:
             index = active_fields.index('adviceAgreementLevel')
             new_active_fields = active_fields[:index] + active_fields[index + 1:]
-            event_type.activatedFields = new_active_fields
+            event_type.setActivatedFields(new_active_fields)

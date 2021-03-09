@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<object name="ConfigTest" meta_type="Factory-based Type Information"
+   xmlns:i18n="http://xml.zope.org/namespaces/i18n">
+ <property name="title">Config Test</property>
+ <property name="description">Type for test config</property>
+ <property name="content_icon">string:${portal_url}/LicenceConfig.png</property>
+ <property name="content_meta_type">ConfigTest</property>
+ <property name="product">urban</property>
+ <property name="factory">addConfigTest</property>
+ <property name="immediate_view">configtestview</property>
+ <property name="global_allow">True</property>
+ <property name="filter_content_types">True</property>
+ <property name="allowed_content_types">
+  <element value="BuildLicence"/>
+  <element value="Article127"/>
+  <element value="IntegratedLicence"/>
+  <element value="UniqueLicence"/>
+  <element value="Declaration"/>
+  <element value="UrbanCertificateOne"/>
+  <element value="UrbanCertificateTwo"/>
+  <element value="PreliminaryNotice"/>
+  <element value="PatrimonyCertificate"/>
+  <element value="EnvClassOne"/>
+  <element value="EnvClassBordering"/>
+  <element value="EnvClassThree"/>
+  <element value="EnvClassTwo"/>
+  <element value="ParcelOutLicence"/>
+  <element value="MiscDemand"/>
+  <element value="Division"/>
+  <element value="ProjectMeeting"/>
+  <element value="NotaryLetter"/>
+  <element value="CODT_Article127"/>
+  <element value="CODT_BuildLicence"/>
+  <element value="CODT_Inquiry"/>
+  <element value="CODT_NotaryLetter"/>
+  <element value="CODT_ParcelOutLicence"/>
+  <element value="CODT_UniqueLicence"/>
+  <element value="CODT_UrbanCertificateOne"/>
+  <element value="CODT_UrbanCertificateTwo"/>
+  <element value="CODT_IntegratedLicence"/>
+
+
+ </property>
+ <property name="allow_discussion">False</property>
+
+ <property name="default_view">configtestview</property>
+ <property name="view_methods">
+  <element value="folder_summary_view"/>
+  <element value="folder_tabular_view"/>
+  <element value="atct_album_view"/>
+  <element value="folder_listing"/>
+  <element value="licenceconfigview"/>
+ </property>
+ <property name="default_view_fallback">False</property>
+
+ <alias from="(Default)" to="(dynamic view)"/>
+ <alias from="view" to="configtestview"/>
+
+ <alias from="edit" to="base_edit"/>
+ <action title="View" action_id="view" category="object" condition_expr=""
+    url_expr="string:${object_url}/base_view" visible="True">
+  <permission value="View"/>
+ </action>
+ <action title="Edit" action_id="edit" category="object" condition_expr=""
+    url_expr="string:${object_url}/base_edit" visible="True">
+  <permission value="Modify portal content"/>
+ </action>
+ <action title="Properties" action_id="metadata" category="object"
+    condition_expr="" url_expr="string:${object_url}/base_metadata"
+    visible="True">
+  <permission value="Modify portal content"/>
+ </action>
+ <action title="Folder Listing" action_id="folderlisting" category="folder"
+    condition_expr="object/isPrincipiaFolderish"
+    url_expr="string:${folder_url}/view" visible="False">
+  <permission value="View"/>
+ </action>
+</object>

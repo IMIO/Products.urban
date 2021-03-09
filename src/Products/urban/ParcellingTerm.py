@@ -1,6 +1,17 @@
 # -*- coding: utf-8 -*-
+#
+# File: ParcellingTerm.py
+#
+# Copyright (c) 2015 by CommunesPlone
+# Generator: ArchGenXML Version 2.7
+#            http://plone.org/products/archgenxml
+#
+# GNU General Public License (GPL)
+#
 
-# [DX] TO DELETE > 2.5 [DX]
+__author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEULETTE
+<stephan.geulette@uvcw.be>, Jean-Michel Abe <jm.abe@la-bruyere.be>"""
+__docformat__ = 'plaintext'
 
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
@@ -140,35 +151,36 @@ class ParcellingTerm(BaseFolder, BrowserDefaultMixin):
         """
            Update the title to set a clearly identify the buildlicence
         """
-        parcel_baserefs = list(set([u'"%s %s %s"' % (prc.getDivision(), prc.getSection(), prc.getRadical()) for prc in self.getParcels()]))
-        refs = u''
+        plone = self.restrictedTraverse('@@plone')
+        parcel_baserefs = list(set(['"%s %s %s"' % (prc.getDivision(), prc.getSection(), prc.getRadical()) for prc in self.getParcels()]))
+        refs = ''
         if parcel_baserefs:
             refs = parcel_baserefs[0]
             for ref in parcel_baserefs[1:]:
-                refs = u'%s, %s' % (refs, ref)
-        title = u"%s (%s" % (self.getLabel().decode('utf-8'), self.getSubdividerName().decode('utf-8'))
+                refs = '%s, %s' % (refs, ref)
+        title = "%s (%s" % (self.getLabel(), self.getSubdividerName())
 
         auth_date = self.getAuthorizationDate()
         if auth_date:
-            title = u'%s - %s' % (title, auth_date.strftime('%d/%m/%Y'))
+            title = '%s - %s' % (title, plone.toLocalizedTime(auth_date).encode('utf8'))
 
         approval_date = self.getApprovalDate()
         if approval_date:
-            title = u'%s - %s' % (title, approval_date.strftime('%d/%m/%Y'))
+            title = '%s - %s' % (title, plone.toLocalizedTime(approval_date).encode('utf8'))
 
         if refs:
-            title = u'%s - %s' % (title, refs)
+            title = '%s - %s' % (title, refs)
 
-        title = u'%s)' % title
-        self.setTitle(title.encode('utf-8'))
+        title = '%s)' % title
+        self.setTitle(str(title))
         self.reindexObject()
 
     security.declarePublic('getParcels')
     def getParcels(self):
         """
-           Return the list of parcels for the Licence
+           Return the list of parcels (portionOut) for the Licence
         """
-        return [obj for obj in self.objectValues() if obj.portal_type == 'Parcel']
+        return self.objectValues('PortionOut')
 
 
 

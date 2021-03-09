@@ -300,57 +300,6 @@ schedule_config = {
             ]
         },
     ],
-    'codt_article127': [
-        {
-            'type_name': 'TaskConfig',
-            'id': 'fin-de-delai',
-            'title': 'Fin de délai',
-            'default_assigned_group': 'urban_editors',
-            'default_assigned_user': 'urban.assign_folder_manager',
-            'creation_state': ('deposit',),
-            'creation_conditions': (
-                CreationConditionObject('urban.schedule.condition.deposit_done'),
-            ),
-            'end_conditions': (
-                EndConditionObject('urban.schedule.condition.licence_decision_college_event_created'),
-            ),
-            'start_date': 'urban.schedule.start_date.deposit_date',
-            'additional_delay': 60,
-        },
-        {
-            'type_name': 'TaskConfig',
-            'id': 'passage-college-pour-envoi-fd',
-            'title': 'Passage collège pour envoi FD',
-            'default_assigned_group': 'urban_editors',
-            'default_assigned_user': 'urban.assign_folder_manager',
-            'creation_state': ('deposit',),
-            'creation_conditions': (
-                CreationConditionObject('urban.schedule.condition.deposit_done'),
-            ),
-            'end_conditions': (
-                EndConditionObject('urban.schedule.condition.college_opinion_transmit_done'),
-            ),
-            'start_date': 'urban.schedule.start_date.deposit_date',
-            'calculation_delay': (
-                'urban.schedule.delay.annonced_delay',
-            ),
-            'additional_delay': -60,
-        },
-        {
-            'type_name': 'TaskConfig',
-            'id': 'octroi-du-permis-par-le-fd',
-            'title': 'Octroi du permis par le FD',
-            'default_assigned_group': 'urban_editors',
-            'default_assigned_user': 'urban.assign_folder_manager',
-            'creation_state': ('deposit',),
-            'ending_states': ('inacceptable', 'accepted', 'retired', 'refused'),
-            'creation_conditions': (
-                CreationConditionObject('urban.schedule.condition.deposit_done'),
-            ),
-            'start_date': 'urban.schedule.start_date.deposit_date',
-            'additional_delay': 130,
-        },
-    ],
     'codt_parceloutlicence': [
         {
             'type_name': 'MacroTaskConfig',

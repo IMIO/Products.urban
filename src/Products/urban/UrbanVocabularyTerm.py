@@ -23,7 +23,6 @@ from Products.Archetypes.interfaces import IVocabulary
 
 from Products.urban.config import *
 from zope.globalrequest import getRequest
-from zope.i18n import translate
 
 ##code-section module-header #fill in your manual code here
 from plone import api
@@ -106,6 +105,60 @@ class UrbanVocabularyTerm(BaseContent, UrbanConfigurationValue, BrowserDefaultMi
 
     schema = UrbanVocabularyTerm_schema
 
+    ##code-section class-header #fill in your manual code here
+    ##/code-section class-header
+
+    # Methods
+
+    # Manually created methods
+
+    security.declarePublic('getFormattedDescription')
+    def getAddress(self):
+        """
+          get the address
+        """
+        address = ''
+        if self.getRecipientSName():
+            address += self.getRecipientSName()
+        if self.getFunction_department():
+            address += '\n' + self.getFunction_department()
+        if self.getOrganization():
+            address += '\n' + self.getOrganization()
+        if self.getDispatchSInformation():
+            address += '\n' + self.getDispatchSInformation()
+        if self.getTypeAndStreetName_number_box():
+            address += '\n' + self.getTypeAndStreetName_number_box()
+        if self.getPostcode_locality():
+            address += '\n' + self.getPostcode_locality()
+        if self.getCountry():
+            address += '\n' + self.getCountry()
+        return address
+
+    security.declarePublic('getFormattedDescription')
+    def getFormattedDescription(self, linebyline=True, prefix=''):
+        """
+          This method can get the description in different formats
+        """
+        descr = self.Description().strip()
+        #add prefix only if description isn't empty
+        #    or is different from code like "<p> </p>" ??
+        if descr and prefix:
+            descr = prefix + descr
+        if linebyline:
+            return descr
+        else:
+            #we need to make a single string with everything we have in the HTML description
+            return re.sub(r'<[^>]*?>', ' ', descr).replace('  ', ' ')
+
+    security.declarePublic('getRenderedDescription')
+    def getRenderedDescription(self, obj, renderToNull=False):
+        """
+          see renderText method of UrbanTool
+        """
+        portal_urban = api.portal.get_tool('portal_urban')
+        return portal_urban.renderText(text=self.Description(), context=obj, renderToNull=renderToNull)
+
+
 
 registerType(UrbanVocabularyTerm, PROJECTNAME)
 # end of class UrbanVocabularyTerm
@@ -115,7 +168,7 @@ class UrbanVocabulary(object):
 
     implements(IVocabulary)
 
-    def __init__(self, path, vocType="UrbanVocabularyTerm", id_to_use="id", value_to_use="title", sort_on="getObjPositionInParent", inUrbanConfig=True, allowedStates=['enabled'], with_empty_value=False, datagridfield_key='street'):
+    def __init__(self, path, vocType="UrbanVocabularyTerm", id_to_use="id", value_to_use="Title", sort_on="getObjPositionInParent", inUrbanConfig=True, allowedStates=['enabled'], with_empty_value=False, datagridfield_key='street'):
         self.path = path
         self.vocType = vocType
         self.id_to_use = id_to_use
@@ -146,18 +199,10 @@ class UrbanVocabulary(object):
         raw_voc = self.get_raw_voc(context, licence_type)
         url = getRequest() and getRequest().getURL()
         if url and (url.endswith('edit') or url.endswith('@@fieldeditoverlay')):
-            result = [(v['id'], u'{}{}'.format(v.get('numbering', ''), v[self.value_to_use])) for v in raw_voc if v['enabled']]
+            result = DisplayList([(v['id'], u'{}{}'.format(v.get('numbering', ''), v['title'])) for v in raw_voc if v['enabled']])
         else:
-            result = [(v['id'], v[self.value_to_use]) for v in raw_voc]
-        if self.with_empty_value:
-            val = translate(
-                EMPTY_VOCAB_VALUE,
-                'urban',
-                context=context.REQUEST,
-                default=EMPTY_VOCAB_VALUE
-            )
-            result = [('', val)] + result
-        return DisplayList(result)
+            result = DisplayList([(v['id'], v['title']) for v in raw_voc])
+        return result
 
     def getDisplayListForTemplate(self, content_instance):
         portal_urban = api.portal.get_tool('portal_urban')

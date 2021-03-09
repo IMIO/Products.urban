@@ -56,7 +56,7 @@ class InspectionFollowupVocabulary(object):
     Return all possible inspection report followup propositions
     """
     def __call__(self, context):
-        voc = UrbanVocabulary('urbaneventtypes', vocType="FollowUpEventConfig", value_to_use='title')
+        voc = UrbanVocabulary('urbaneventtypes', vocType="FollowUpEventType", value_to_use='title')
         config_voc = voc.getDisplayList(licence_type='Inspection')
         portal = api.portal.get()
         full_voc = [

@@ -35,7 +35,7 @@ schema = Schema((
             label_msgid='urban_label_LinkedOpinionRequestEvent',
             i18n_domain='urban',
         ),
-        allowed_types=('EventConfig', 'OpinionRequestEventType'),
+        allowed_types=('UrbanEventType', 'OpinionRequestEventType'),
         multiValued=0,
         relationship='LinkedOpinionRequestEvent',
         write_permission="Manage portal",

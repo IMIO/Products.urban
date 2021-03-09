@@ -4,9 +4,14 @@ from DateTime import DateTime
 from datetime import datetime
 from plone import api
 
+from imio.schedule.config import states_by_status
+from imio.schedule.config import STARTED
 from imio.schedule.content.condition import CreationCondition
 
 from Products.urban.schedule.conditions.base import BaseInspection
+from Products.urban.schedule.interfaces import IFollowupDeadLineTask
+
+from datetime import date
 
 
 class DepositDoneCondition(CreationCondition):
@@ -569,13 +574,27 @@ class FollowUpWithDelayClosed(InspectionCreationCondition):
         return is_closed
 
 
+class FollowUpWithDelayOverdue(CreationCondition):
+    """
+    The ticket created as a followup action has been closed.
+    """
+    def evaluate(self):
+        inspection = self.task_container
+        for obj in inspection.objectValues():
+            if IFollowupDeadLineTask.providedBy(obj):
+                task = obj
+                if task.get_state() in states_by_status[STARTED] and task.due_date < date.today():
+                    return True
+        return False
+
+
 class ProsecutionAnswerOverDeadline(CreationCondition):
     """
     The ticket event has been closed under 90 days.
     """
     def evaluate(self):
         licence = self.task_container
-        ticket_event = licence.getLastTheticket()
+        ticket_event = licence.getLastTheTicket()
         if ticket_event and ticket_event.getEventDate():
             over_delay = DateTime() - ticket_event.getEventDate() > 90
             return over_delay

@@ -21,7 +21,7 @@
    <element value="Corporation"/>
    <element value="UrbanEvent"/>
    <element value="File"/>
-   <element value="Parcel"/>
+   <element value="PortionOut"/>
    <element value="task"/>
  </property>
  <property name="allow_discussion">False</property>

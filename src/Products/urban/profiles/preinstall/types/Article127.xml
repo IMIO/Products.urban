@@ -17,7 +17,7 @@
  <property name="allowed_content_types">
    <element value="Applicant"/>
    <element value="Corporation"/>
-   <element value="Parcel"/>
+   <element value="PortionOut"/>
    <element value="UrbanEvent"/>
    <element value="UrbanEventInquiry"/>
    <element value="UrbanEventCollege"/>
