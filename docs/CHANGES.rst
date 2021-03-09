@@ -104,6 +104,12 @@ Changes
 - Complete codt buildlicence config with 'college repport' event. [URB-2074]
   [sdelcourt]
 
+- Complete codt buildlicence schedule.
+  [sdelcourt]
+
+- Add default codt notary letters schedule.
+  [sdelcourt]
+
 
 2.4 (2019-03-25)
 ----------------
