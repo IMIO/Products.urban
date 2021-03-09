@@ -30,7 +30,7 @@ class DepositDate(StartDate):
     def start_date(self):
         licence = self.task_container
         deposit = licence.getLastDeposit()
-        deposit_date = deposit and deposit.getEventDate() or None
+        deposit_date = deposit and deposit.getEventDate() or deposit.getReceiptDate() or None
         return deposit_date
 
 

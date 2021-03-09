@@ -890,8 +890,9 @@ EventConfigs = {
             'title': "Lettre de notaire",
             'deadLineDelay': 15,
             'eventDateLabel': 'Date de notification',
+            'activatedFields': ('receiptDate',),
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ('receiptDate', 'eventDate',),
             'podTemplates': (
                 {
                     'id': "codt_ln_annexe16.odt",
@@ -904,7 +905,8 @@ EventConfigs = {
                     ]
                 },
             ),
-            'eventType': ('Products.urban.interfaces.ITheLicenceEvent',
+            'eventType': ('Products.urban.interfaces.IDepositEvent',
+                          'Products.urban.interfaces.ITheLicenceEvent',
                           'Products.urban.interfaces.ILicenceNotificationEvent'),
         },
         {

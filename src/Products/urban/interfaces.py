@@ -630,12 +630,12 @@ class ICODT_UrbanCertificateOne(IGenericLicence):
     """
 
 
-class INotaryLetter(Interface):
+class INotaryLetter(IGenericLicence):
     """Marker interface for NotaryLetter
     """
 
 
-class ICODT_NotaryLetter(Interface):
+class ICODT_NotaryLetter(IGenericLicence):
     """Marker interface for CODT_ NotaryLetter
     """
 

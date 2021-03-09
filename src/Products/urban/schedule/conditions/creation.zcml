@@ -6,6 +6,14 @@
         for="Products.urban.interfaces.IGenericLicence
              imio.schedule.content.task_config.ITaskConfig"
         provides="imio.schedule.interfaces.ICreationCondition"
+        factory=".creation.DepositEventCreated"
+        name="urban.schedule.condition.deposit_event_created"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.IGenericLicence
+             imio.schedule.content.task_config.ITaskConfig"
+        provides="imio.schedule.interfaces.ICreationCondition"
         factory=".creation.DepositDoneCondition"
         name="urban.schedule.condition.deposit_done"
     />

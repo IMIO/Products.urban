@@ -11,6 +11,22 @@
     />
 
     <adapter
+        for="Products.urban.interfaces.IGenericLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.DepositEventCreated"
+        name="urban.schedule.condition.deposit_event_created"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.IGenericLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.DecisionEventClosed"
+        name="urban.schedule.condition.decision_event_closed"
+    />
+
+    <adapter
         for="Products.urban.interfaces.IBaseBuildLicence
              imio.schedule.content.task.IAutomatedTask"
         provides="imio.schedule.interfaces.IEndCondition"

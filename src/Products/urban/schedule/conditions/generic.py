@@ -27,6 +27,19 @@ class DepositDoneCondition(Condition):
         return deposit_done
 
 
+class DepositEventCreated(Condition):
+    """
+    Licence deposit event is created.
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+
+        deposit_done = False
+        deposit_event = licence.getLastDeposit()
+        return deposit_event
+
+
 class SingleComplementAsked(Condition):
     """
     Licence MissingPart event is created and closed.
@@ -497,6 +510,19 @@ class LicenceDecisionCollegeEventCreated(Condition):
         event_created = licence.getLastTheLicence()
 
         return event_created
+
+
+class DecisionEventClosed(Condition):
+    """
+    TheLicence event is closed.
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+        decision_event = licence.getLastTheLicence()
+        if decision_event:
+            return api.content.get_state(decision_event) == 'closed'
+        return False
 
 
 class DepositDateIsPast20Days(Condition):
