@@ -404,6 +404,9 @@ msgstr ""
 msgid "ended"
 msgstr ""
 
+msgid "need_parceloutlicence"
+msgstr ""
+
 msgid "update_rubrics"
 msgstr ""
 

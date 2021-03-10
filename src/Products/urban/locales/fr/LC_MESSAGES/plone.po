@@ -364,6 +364,9 @@ msgstr "PEB"
 msgid "label_schema_urban_road"
 msgstr "Voirie"
 
+msgid "need_parceloutlicence"
+msgstr "Refusé"
+
 msgid "opinion_given"
 msgstr "Avis rendu"
 

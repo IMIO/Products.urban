@@ -270,6 +270,7 @@ LICENCE_FINAL_STATES = [
     'retired',
     'abandoned',
     'inacceptable',
+    'need_parceloutlicence',
 ]
 
 VOCABULARY_TYPES = [
