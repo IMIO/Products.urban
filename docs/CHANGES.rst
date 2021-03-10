@@ -5,6 +5,9 @@ Changes
 2.5 (unreleased)
 ----------------
 
+- Fix 0 values Bis & Puissance format for get_parcels [SUP-16626]
+  [jjaumotte]
+
 - Fix 0 values Bis & Puissance format for getPortionOutText
   [jjaumotte]
 
