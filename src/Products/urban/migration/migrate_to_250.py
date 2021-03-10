@@ -15,6 +15,9 @@ from Products.urban.migration.to_DX.migration_utils import clean_obsolete_portal
 from Products.urban.setuphandlers import setFolderAllowedTypes
 from Products.urban.utils import getLicenceFolderId
 
+from zope.component import getUtility
+from zope.schema.interfaces import IVocabularyFactory
+
 from plone import api
 
 import logging
@@ -35,7 +38,7 @@ def migrate_codt_buildlicences_schedule(context):
     schedule.incomplet2.notify_refused.ending_states = ()
     schedule.reception.deposit.recurrence_states = ()
     schedule.reception.deposit.activate_recurrency = False
-    if 'deposit' not in (schedule.incomplet.attente_complements.ending_states or()):
+    if 'deposit' not in (schedule.incomplet.attente_complements.ending_states or ()):
         old_states = schedule.incomplet.attente_complements.ending_states or ()
         new_states = tuple(old_states) + ('deposit',)
         schedule.incomplet.attente_complements.ending_states = new_states
@@ -190,19 +193,24 @@ def migrate_report_and_remove_urbandelay_portal_type(context):
     logger.info("migration step done!")
 
 
-def migrate_default_states_to_close_all_events(context):
-    logger = logging.getLogger('urban: migrate default states to close all events')
+def migrate_default_states_to_close_tasks(context):
+    logger = logging.getLogger('urban: migrate default states to close all tasks')
     logger.info("starting migration step")
     urban_tool = api.portal.get_tool('portal_urban')
-    portal_workflow = api.portal.get_tool('portal_workflow')
     for licence_config in urban_tool.get_all_licence_configs():
-        portal_type = licence_config.getLicencePortalType()
-        workflow_def = getattr(portal_workflow, portal_workflow.getChainFor(portal_type)[0])
-        to_set = []
-        for state in LICENCE_FINAL_STATES:
-            if state in workflow_def.states.objectIds():
-                to_set.append(state)
-        licence_config.setStates_to_end_all_events(to_set)
+        states_voc = getUtility(IVocabularyFactory, 'urban.licence_state')(licence_config)
+        default_end_states = [st for st in states_voc.by_value.keys() if st in LICENCE_FINAL_STATES]
+        licence_config.setStates_to_end_all_tasks(default_end_states)
+        schedule_cfg = getattr(licence_config, 'schedule', None)
+        for task_cfg in schedule_cfg.get_all_task_configs():
+            # remove 'licence_ended' from  the end conditions
+            end_conditions = task_cfg.end_conditions or []
+            end_condition_ids = end_conditions and [c.condition for c in end_conditions]
+            condition_id = 'urban.schedule.licence_ended'
+            if end_condition_ids and condition_id in end_condition_ids:
+                old_end_conditions = task_cfg.end_conditions
+                new_end_conditions = [c for c in old_end_conditions if c.condition != condition_id]
+                task_cfg.end_conditions = tuple(new_end_conditions)
     logger.info("migration step done!")
 
 
@@ -294,15 +302,14 @@ def migrate_announcement_schedule_config(context):
     for licence_config in portal_urban.objectValues('LicenceConfig'):
         schedule_cfg = getattr(licence_config, 'schedule', None)
         if schedule_cfg and hasattr(schedule_cfg, 'announcement-preparation'):
-            announcement_prep_task= getattr(schedule_cfg, 'announcement-preparation')
+            announcement_prep_task = getattr(schedule_cfg, 'announcement-preparation')
             announcement_prep_task.end_conditions = (EndConditionObject('urban.schedule.condition.announcement_dates_defined', 'AND'),)
             announcement_prep_task.activate_recurrency = True
-            announcement_done_task= getattr(schedule_cfg, 'announcement')
+            announcement_done_task = getattr(schedule_cfg, 'announcement')
             announcement_done_task.creation_conditions = (CreationConditionObject('urban.schedule.condition.announcement_dates_defined', 'AND'),)
             announcement_done_task.end_conditions = (EndConditionObject('urban.schedule.condition.announcement_done', 'AND'),)
             announcement_done_task.activate_recurrency = True
     logger.info("migration step done!")
-
 
 
 def migrate(context):
@@ -314,6 +321,7 @@ def migrate(context):
     setup_tool.runAllImportStepsFromProfile('profile-Products.urban:default')
     setup_tool.runImportStepFromProfile('profile-Products.urban:extra', 'urban-update-rubrics')
     migrate_codt_buildlicences_schedule(context)
+    setup_tool.runImportStepFromProfile('profile-Products.urban:extra', 'urban-update-schedule')
     migrate_CODT_NotaryLetter_to_CODT_UrbanCertificateBase(context)
     migrate_CODT_UrbanCertificateOne_to_CODT_UrbanCertificateBase(context)
     migrate_CODT_UrbanCertificateBase_add_permissions(context)
@@ -321,7 +329,7 @@ def migrate(context):
     migrate_report_and_remove_urbandelay_portal_type(context)
     migrate_inquiry_investigationStart_date(context)
     migrate_parcellings_folder_allowed_type(context)
-    migrate_default_states_to_close_all_events(context)
+    migrate_default_states_to_close_tasks(context)
     migrate_inquiry_parcels(context)
     migrate_remove_prov_in_folderroadtypes(context)
     migrate_disable_natura2000_folderzone(context)

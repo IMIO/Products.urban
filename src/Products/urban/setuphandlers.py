@@ -22,11 +22,11 @@ from Products.Archetypes.event import ObjectInitializedEvent
 from Products.Archetypes.event import EditBegunEvent
 from Products.cron4plone.browser.configlets.cron_configuration import ICronConfiguration
 from Products.urban.config import DefaultTexts
+from Products.urban.config import LICENCE_FINAL_STATES
 from Products.urban.config import URBAN_CFG_DIR
 from Products.urban.config import URBAN_TYPES
 from Products.urban.config import URBAN_TYPES_ACRONYM
 from Products.urban.exportimport import updateAllUrbanTemplates
-from Products.urban.Extensions.update_task_configs import add_licence_ended_condition
 from Products.urban.interfaces import IContactFolder
 from Products.urban.interfaces import ILicenceContainer
 from Products.urban.interfaces import IUrbanConfigurationFolder
@@ -61,6 +61,7 @@ from zope.component import queryUtility
 from zope.component.interface import getInterface
 from zope.i18n.interfaces import ITranslationDomain
 from zope.lifecycleevent import ObjectModifiedEvent
+from zope.schema.interfaces import IVocabularyFactory
 from zope import event
 
 import pickle
@@ -359,8 +360,6 @@ def addScheduleConfigs(context):
             taskconfigs = schedule_config[licence_config_id]
             _create_task_configs(schedule_folder, taskconfigs)
 
-    add_licence_ended_condition()
-
 
 def getSharedVocabularies(urban_type, licence_vocabularies):
     shared_vocs = licence_vocabularies.get('shared_vocabularies')
@@ -411,6 +410,9 @@ def addUrbanConfigFolders(context):
             # no mutator available because the field is defined with 'read only' property
             config_folder.licencePortalType = urban_type
             config_folder.setUsedAttributes(config_folder.listUsedAttributes().keys())
+            states_voc = queryUtility(IVocabularyFactory, 'urban.licence_state')(config_folder)
+            default_end_states = [st for st in states_voc.by_value.keys() if st in LICENCE_FINAL_STATES]
+            config_folder.setStates_to_end_all_tasks(default_end_states)
             config_folder.reindexObject()
         else:
             config_folder = getattr(tool, licenceConfigId)
