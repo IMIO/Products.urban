@@ -2,8 +2,8 @@
 
 from Acquisition import aq_base
 
-from imio.schedule.content.object_factories import CreationConditionObject
-from imio.schedule.content.object_factories import EndConditionObject
+from imio.schedule.content.object_factories import MacroCreationConditionObject
+from imio.schedule.content.object_factories import MacroEndConditionObject
 
 from Products.contentmigration.walker import CustomQueryWalker
 from Products.contentmigration.archetypes import InplaceATFolderMigrator
@@ -303,11 +303,11 @@ def migrate_announcement_schedule_config(context):
         schedule_cfg = getattr(licence_config, 'schedule', None)
         if schedule_cfg and hasattr(schedule_cfg, 'announcement-preparation'):
             announcement_prep_task = getattr(schedule_cfg, 'announcement-preparation')
-            announcement_prep_task.end_conditions = (EndConditionObject('urban.schedule.condition.announcement_dates_defined', 'AND'),)
+            announcement_prep_task.end_conditions = (MacroEndConditionObject('urban.schedule.condition.announcement_dates_defined', 'AND'),)
             announcement_prep_task.activate_recurrency = True
             announcement_done_task = getattr(schedule_cfg, 'announcement')
-            announcement_done_task.creation_conditions = (CreationConditionObject('urban.schedule.condition.announcement_dates_defined', 'AND'),)
-            announcement_done_task.end_conditions = (EndConditionObject('urban.schedule.condition.announcement_done', 'AND'),)
+            announcement_done_task.creation_conditions = (MacroCreationConditionObject('urban.schedule.condition.announcement_dates_defined', 'AND'),)
+            announcement_done_task.end_conditions = (MacroEndConditionObject('urban.schedule.condition.announcement_done', 'AND'),)
             announcement_done_task.activate_recurrency = True
     logger.info("migration step done!")
 
