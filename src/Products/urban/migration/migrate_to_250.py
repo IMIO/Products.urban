@@ -4,6 +4,7 @@ from Acquisition import aq_base
 
 from imio.schedule.content.object_factories import MacroCreationConditionObject
 from imio.schedule.content.object_factories import MacroEndConditionObject
+from imio.schedule.content.object_factories import MacroRecurrenceConditionObject
 
 from Products.contentmigration.walker import CustomQueryWalker
 from Products.contentmigration.archetypes import InplaceATFolderMigrator
@@ -306,10 +307,12 @@ def migrate_announcement_schedule_config(context):
             announcement_prep_task.creation_conditions = (MacroCreationConditionObject('urban.schedule.condition.will_have_announcement', 'AND'),)
             announcement_prep_task.end_conditions = (MacroEndConditionObject('urban.schedule.condition.announcement_dates_defined', 'AND'),)
             announcement_prep_task.activate_recurrency = True
+            announcement_prep_task.recurrence_conditions = (MacroRecurrenceConditionObject('urban.schedule.condition.will_have_announcement', 'AND'),)
             announcement_done_task = getattr(schedule_cfg, 'announcement')
             announcement_done_task.creation_conditions = (MacroCreationConditionObject('urban.schedule.condition.announcement_dates_defined', 'AND'),)
             announcement_done_task.end_conditions = (MacroEndConditionObject('urban.schedule.condition.announcement_done', 'AND'),)
             announcement_done_task.activate_recurrency = True
+            announcement_done_task.recurrence_conditions = (MacroRecurrenceConditionObject('urban.schedule.condition.announcement_dates_defined', 'AND'),)
     logger.info("migration step done!")
 
 
