@@ -303,6 +303,7 @@ def migrate_announcement_schedule_config(context):
         schedule_cfg = getattr(licence_config, 'schedule', None)
         if schedule_cfg and hasattr(schedule_cfg, 'announcement-preparation'):
             announcement_prep_task = getattr(schedule_cfg, 'announcement-preparation')
+            announcement_prep.creation_conditions = (MacroCreationConditionObject('urban.schedule.condition.will_have_announcement', 'AND'),)
             announcement_prep_task.end_conditions = (MacroEndConditionObject('urban.schedule.condition.announcement_dates_defined', 'AND'),)
             announcement_prep_task.activate_recurrency = True
             announcement_done_task = getattr(schedule_cfg, 'announcement')
