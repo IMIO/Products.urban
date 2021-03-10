@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2021-03-10 05:09+0000\n"
+"POT-Creation-Date: 2021-03-10 07:48+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2304,15 +2304,15 @@ msgstr ""
 msgid "rgbsr_folder_title"
 msgstr ""
 
-#: ../content/licence/BaseBuildLicence.py:523
+#: ../content/licence/BaseBuildLicence.py:539
 msgid "road_adaptation_create"
 msgstr ""
 
-#: ../content/licence/BaseBuildLicence.py:522
+#: ../content/licence/BaseBuildLicence.py:538
 msgid "road_adaptation_modify"
 msgstr ""
 
-#: ../content/licence/BaseBuildLicence.py:524
+#: ../content/licence/BaseBuildLicence.py:540
 msgid "road_adaptation_supress"
 msgstr ""
 
@@ -2930,7 +2930,7 @@ msgstr ""
 
 #. Default: "Architect(s)"
 #: ../browser/licence/templates/licencemacros.pt:10
-#: ../content/licence/BaseBuildLicence.py:380
+#: ../content/licence/BaseBuildLicence.py:396
 #: ../content/licence/MiscDemand.py:48
 msgid "urban_label_architects"
 msgstr ""
@@ -2975,6 +2975,11 @@ msgstr ""
 #. Default: "Authorizationdate"
 #: ParcellingTerm.py
 msgid "urban_label_authorizationDate"
+msgstr ""
+
+#. Default: "Availableparkings"
+#: ../content/licence/BaseBuildLicence.py:296
+msgid "urban_label_availableParkings"
 msgstr ""
 
 #. Default: "Bank_account"
@@ -3180,7 +3185,7 @@ msgid "urban_label_complete_parcel"
 msgstr ""
 
 #. Default: "Composition"
-#: ../content/licence/BaseBuildLicence.py:475
+#: ../content/licence/BaseBuildLicence.py:491
 msgid "urban_label_composition"
 msgstr ""
 
@@ -3310,12 +3315,12 @@ msgid "urban_label_delay"
 msgstr ""
 
 #. Default: "Delayaftermodifiedblueprints"
-#: ../content/licence/BaseBuildLicence.py:432
+#: ../content/licence/BaseBuildLicence.py:448
 msgid "urban_label_delayAfterModifiedBlueprints"
 msgstr ""
 
 #. Default: "Delayaftermodifiedblueprintsdetails"
-#: ../content/licence/BaseBuildLicence.py:445
+#: ../content/licence/BaseBuildLicence.py:461
 msgid "urban_label_delayAfterModifiedBlueprintsDetails"
 msgstr ""
 
@@ -3413,7 +3418,7 @@ msgid "urban_label_editionOutputFormat"
 msgstr ""
 
 #. Default: "Electricity"
-#: ../content/licence/BaseBuildLicence.py:467
+#: ../content/licence/BaseBuildLicence.py:483
 msgid "urban_label_electricity"
 msgstr ""
 
@@ -3481,7 +3486,7 @@ msgid "urban_label_eventTypeType"
 msgstr ""
 
 #. Default: "Exemptfdarticle"
-#: ../content/licence/BaseBuildLicence.py:414
+#: ../content/licence/BaseBuildLicence.py:430
 msgid "urban_label_exemptFDArticle"
 msgstr ""
 
@@ -3695,7 +3700,7 @@ msgid "urban_label_hasEnvironmentImpactStudy"
 msgstr ""
 
 #. Default: "Hasmodifiedblueprints"
-#: ../content/licence/BaseBuildLicence.py:425
+#: ../content/licence/BaseBuildLicence.py:441
 msgid "urban_label_hasModifiedBlueprints"
 msgstr ""
 
@@ -4017,7 +4022,7 @@ msgid "urban_label_location"
 msgstr ""
 
 #. Default: "Locationdgrneunderground"
-#: ../content/licence/BaseBuildLicence.py:329
+#: ../content/licence/BaseBuildLicence.py:345
 msgid "urban_label_locationDgrneUnderground"
 msgstr ""
 
@@ -4047,7 +4052,7 @@ msgid "urban_label_locationSpecificFeaturesDetail"
 msgstr ""
 
 #. Default: "Locationtechnicaladvice"
-#: ../content/licence/BaseBuildLicence.py:338
+#: ../content/licence/BaseBuildLicence.py:354
 #: ../content/licence/EnvironmentBase.py:257
 msgid "urban_label_locationTechnicalAdvice"
 msgstr ""
@@ -4059,7 +4064,7 @@ msgid "urban_label_locationTechnicalAdviceAfterInquiry"
 msgstr ""
 
 #. Default: "Locationtechnicalconditions"
-#: ../content/licence/BaseBuildLicence.py:349
+#: ../content/licence/BaseBuildLicence.py:365
 msgid "urban_label_locationTechnicalConditions"
 msgstr ""
 
@@ -4108,6 +4113,11 @@ msgstr ""
 #: ../content/licence/EnvironmentBase.py:116
 #: ../content/licence/UniqueLicence.py:117
 msgid "urban_label_minimumLegalConditions"
+msgstr ""
+
+#. Default: "Missingparkings"
+#: ../content/licence/BaseBuildLicence.py:304
+msgid "urban_label_missingParkings"
 msgstr ""
 
 msgid "urban_label_missingPartDate"
@@ -4391,7 +4401,7 @@ msgid "urban_label_pebStudy"
 msgstr ""
 
 #. Default: "Pebtechnicaladvice"
-#: ../content/licence/BaseBuildLicence.py:360
+#: ../content/licence/BaseBuildLicence.py:376
 msgid "urban_label_pebTechnicalAdvice"
 msgstr ""
 
@@ -4499,7 +4509,7 @@ msgid "urban_label_prevuDetails"
 msgstr ""
 
 #. Default: "Procedurechoice"
-#: ../content/licence/BaseBuildLicence.py:393
+#: ../content/licence/BaseBuildLicence.py:409
 #: ../content/licence/EnvironmentBase.py:178
 msgid "urban_label_procedureChoice"
 msgstr ""
@@ -4722,7 +4732,7 @@ msgid "urban_label_requestedOrganisation"
 msgstr ""
 
 #. Default: "Requirementfromfd"
-#: ../content/licence/BaseBuildLicence.py:404
+#: ../content/licence/BaseBuildLicence.py:420
 msgid "urban_label_requirementFromFD"
 msgstr ""
 
@@ -4757,7 +4767,7 @@ msgid "urban_label_roadCoating"
 msgstr ""
 
 #. Default: "Roaddgrneunderground"
-#: ../content/licence/BaseBuildLicence.py:308
+#: ../content/licence/BaseBuildLicence.py:324
 msgid "urban_label_roadDgrneUnderground"
 msgstr ""
 
@@ -4767,7 +4777,7 @@ msgid "urban_label_roadEquipments"
 msgstr ""
 
 #. Default: "Roadmiscdescription"
-#: ../content/licence/BaseBuildLicence.py:296
+#: ../content/licence/BaseBuildLicence.py:312
 msgid "urban_label_roadMiscDescription"
 msgstr ""
 
@@ -4802,7 +4812,7 @@ msgid "urban_label_roadSpecificFeaturesDetail"
 msgstr ""
 
 #. Default: "Roadtechnicaladvice"
-#: ../content/licence/BaseBuildLicence.py:317
+#: ../content/licence/BaseBuildLicence.py:333
 #: ../content/licence/EnvironmentBase.py:246
 msgid "urban_label_roadTechnicalAdvice"
 msgstr ""
@@ -5283,7 +5293,7 @@ msgid "urban_label_walloonRegionPrimoDate"
 msgstr ""
 
 #. Default: "Water"
-#: ../content/licence/BaseBuildLicence.py:459
+#: ../content/licence/BaseBuildLicence.py:475
 msgid "urban_label_water"
 msgstr ""
 
@@ -5451,15 +5461,15 @@ msgstr ""
 msgid "urbantemplates_folder_title"
 msgstr ""
 
-#: ../content/licence/BaseBuildLicence.py:536
+#: ../content/licence/BaseBuildLicence.py:552
 msgid "usage_for_habitation"
 msgstr ""
 
-#: ../content/licence/BaseBuildLicence.py:538
+#: ../content/licence/BaseBuildLicence.py:554
 msgid "usage_not_applicable"
 msgstr ""
 
-#: ../content/licence/BaseBuildLicence.py:537
+#: ../content/licence/BaseBuildLicence.py:553
 msgid "usage_not_for_habitation"
 msgstr ""
 
