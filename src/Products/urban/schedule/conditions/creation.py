@@ -200,7 +200,12 @@ class InquiryDatesDefinedCondition(CreationCondition):
             inquiry_obj = inquiry_objs[-1]
             inquiry_event = inquiry_obj.getLinkedUrbanEventInquiry()
             if not inquiry_event or api.content.get_state(inquiry_event) == 'closed':
-                return False
+                inquiry_event = self.getLastInquiry()
+                # special case: the event has been created but not yet linked
+                # to the inquiry object (because zope events triggre order cannot be
+                # guaranteed)
+                if not inquiry_event or inquiry_event.getLinkedInquiry():
+                    return False
 
             start_date = inquiry_event.getInvestigationStart()
             end_date = inquiry_event.getInvestigationEnd()
@@ -222,6 +227,12 @@ class AnnouncementDatesDefinedCondition(CreationCondition):
             announcement_obj = announcement_objs[-1]
             announcement_event = announcement_obj.getLinkedUrbanEventInquiry()
             if not announcement_event or api.content.get_state(announcement_event) == 'closed':
+                # special case: the event has been created but not yet linked
+                # to the inquiry object (because zope events triggre order cannot be
+                # guaranteed)
+                announcement_event = self.getLastAnnouncement()
+                if not announcement_event or announcement_event.getLinkedInquiry():
+                    return False
                 return False
 
             start_date = announcement_event.getInvestigationStart()
