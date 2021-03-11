@@ -227,6 +227,9 @@ def extraPostInstall(context):
     logger.info('Setup default schedule configuration: starting...')
     addScheduleConfigs(context)
     logger.info('Setup default schedule configuration : Done')
+    logger.info('Configure CKEditor: starting...')
+    configureCKEditor(context)
+    logger.info('Configure CKEditor: Done')
 
 
 def updateVocabularyConfig(context):
@@ -1476,15 +1479,18 @@ def setupExtra(context):
     else:
         logger.info('user password policy unchanged')
 
+
+def configureCKEditor(context):
     # we apply a method of CPUtils to configure CKeditor
-    logger.info("Configuring CKeditor")
+    properties_tool = api.portal.get_tool('portal_properties')
+    ckprops = properties_tool.ckeditor_properties
+    ckprops.manage_changeProperties(enableScaytOnStartup=True)
     try:
         from Products.CPUtils.Extensions.utils import configure_ckeditor
+        portal = api.portal.get()
         if not hasattr(portal.portal_properties, 'ckeditor_properties') or portal.portal_properties.site_properties.default_editor != 'CKeditor':
             configure_ckeditor(portal, custom='urban')
-            properties_tool = api.portal.get_tool('portal_properties')
             custom_menu_style = u"[\n/* Styles Urban */\n{ name : 'Urban Body'\t\t, element : 'p', attributes : { 'class' : 'UrbanBody' } }, \n{ name : 'Urban title'\t       , element : 'p', attributes : { 'class' : 'UrbanTitle' } }, \n{ name : 'Urabn title 2'\t, element : 'p', attributes : { 'class' : 'UrbanTitle2' } }, \n{ name : 'Urban title 3'\t, element : 'p', attributes : { 'class' : 'UrbanTitle3' } }, \n{ name : 'Urban address'\t, element : 'p', attributes : { 'class' : 'UrbanAddress' } }, \n{ name : 'Urban table'\t       , element : 'p', attributes : { 'class' : 'UrbanTable' } }, \n/* Block Styles */\n{ name : 'Grey Title'\t\t, element : 'h2', styles : { 'color' : '# 888' } }, \n{ name : 'Grey Sub Title'\t, element : 'h3', styles : { 'color' : '# 888' } }, \n{ name : 'Discreet bloc'\t, element : 'p', attributes : { 'class' : 'discreet' } }, \n/* Inline styles */\n{ name : 'Discreet text'\t, element : 'span', attributes : { 'class' : 'discreet' } }, \n{ name : 'Marker: Yellow'\t, element : 'span', styles : { 'background-color' : 'Yellow' } }, \n{ name : 'Typewriter'\t\t, element : 'tt' }, \n{ name : 'Computer Code'\t, element : 'code' }, \n{ name : 'Keyboard Phrase'\t, element : 'kbd' }, \n{ name : 'Sample Text'\t\t, element : 'samp' }, \n{ name : 'Variable'\t\t, element : 'var' }, \n{ name : 'Deleted Text'\t\t, element : 'del' }, \n{ name : 'Inserted Text'\t, element : 'ins' }, \n{ name : 'Cited Work'\t\t, element : 'cite' }, \n{ name : 'Inline Quotation'\t, element : 'q' }, \n{ name : 'Language: RTL'\t, element : 'span', attributes : { 'dir' : 'rtl' } }, \n{ name : 'Language: LTR'\t, element : 'span', attributes : { 'dir' : 'ltr' } }, \n/* Objects styles */\n{ name : 'Image on right'\t, element : 'img', attributes : { 'class' : 'image-right' } }, \n{ name : 'Image on left'\t, element : 'img', attributes : { 'class' : 'image-left' } }, \n{ name : 'Image centered'\t, element : 'img', attributes : { 'class' : 'image-inline' } }, \n{ name : 'Borderless Table'    , element : 'table', styles: { 'border-style': 'hidden', 'background-color' : '# E6E6FA' } }, \n{ name : 'Square Bulleted List', element : 'ul', styles : { 'list-style-type' : 'square' } }\n\n]\n"
-            ckprops = properties_tool.ckeditor_properties
             ckprops.manage_changeProperties(menuStyles=custom_menu_style)
 
     except ImportError:
