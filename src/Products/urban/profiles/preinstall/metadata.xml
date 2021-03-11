@@ -6,6 +6,7 @@
     <dependency>profile-Products.DataGridField:default</dependency>
     <dependency>profile-imio.dashboard:default</dependency>
     <dependency>profile-imio.schedule:default</dependency>
+    <dependency>profile-collective.ckeditor:default</dependency>
     <dependency>profile-collective.faceted.task:base</dependency>
     <dependency>profile-collective.faceted.task:default</dependency>
     <dependency>profile-Products.MasterSelectWidget:default</dependency>
