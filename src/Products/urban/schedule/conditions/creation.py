@@ -33,7 +33,6 @@ class DepositEventCreated(CreationCondition):
     def evaluate(self):
         licence = self.task_container
 
-        deposit_done = False
         deposit_event = licence.getLastDeposit()
         return deposit_event
 
@@ -180,7 +179,7 @@ class WillHaveAnnouncement(CreationCondition):
 
         announcement_objs = licence.getAllAnnouncements()
         # if no announcement object, return True
-        should_be_created =  not bool(announcement_objs)
+        should_be_created = not bool(announcement_objs)
         if announcement_objs and not announcement_objs[-1].getLinkedUrbanEventInquiry():
             should_be_created = True
 
@@ -200,7 +199,7 @@ class InquiryDatesDefinedCondition(CreationCondition):
             inquiry_obj = inquiry_objs[-1]
             inquiry_event = inquiry_obj.getLinkedUrbanEventInquiry()
             if not inquiry_event or api.content.get_state(inquiry_event) == 'closed':
-                inquiry_event = self.getLastInquiry()
+                inquiry_event = licence.getLastInquiry()
                 # special case: the event has been created but not yet linked
                 # to the inquiry object (because zope events triggre order cannot be
                 # guaranteed)
@@ -230,7 +229,7 @@ class AnnouncementDatesDefinedCondition(CreationCondition):
                 # special case: the event has been created but not yet linked
                 # to the inquiry object (because zope events triggre order cannot be
                 # guaranteed)
-                announcement_event = self.getLastAnnouncement()
+                announcement_event = licence.getLastAnnouncement()
                 if not announcement_event or announcement_event.getLinkedInquiry():
                     return False
                 return False
