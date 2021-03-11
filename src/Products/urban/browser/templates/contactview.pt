@@ -13,11 +13,9 @@
                 <div tal:replace="structure provider:plone.belowcontenttitle" />
                 <!-- Back to the build licence... -->
                 <br />
-                <tal:block>
-                    <a class="no_underline" href="#" tal:attributes="href view/getLinkToLinkedLicence">
-                        <img src="goback.png" />&nbsp;<span i18n:translate="go_back">Go back</span>...
-                    </a>
-                </tal:block>
+                <a class="no_underline" href="#" tal:attributes="href view/getLinkToLinkedLicence">
+                    <img src="goback.png" />&nbsp;<span i18n:translate="go_back">Go back</span>...
+                </a>
 
                 <fieldset>
                 <legend tal:content="view/getContactLegendValue" i18n:translate="">Contact Data</legend>
