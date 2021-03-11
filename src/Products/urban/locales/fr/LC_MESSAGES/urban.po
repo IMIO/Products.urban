@@ -570,7 +570,7 @@ msgstr "Type de permis"
 
 #: ../browser/urbaneventviews.py:192
 msgid "Listing file"
-msgstr ""
+msgstr "Importer un fichier de réclamants (csv)"
 
 #: ../interfaces.py:736
 msgid "Mailing limit"
