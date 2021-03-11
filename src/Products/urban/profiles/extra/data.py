@@ -5387,6 +5387,7 @@ EventConfigs = {
                     ]
                 },
             ),
+            'eventType': ('Products.urban.interfaces.ITheLicenceEvent',),
         },
     ),
     'notaryletter': (

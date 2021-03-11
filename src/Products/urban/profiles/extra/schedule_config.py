@@ -1457,6 +1457,45 @@ schedule_config = {
             ]
         },
     ],
+    'division': [
+        {
+            'type_name': 'TaskConfig',
+            'id': 'deposit',
+            'title': 'Réception',
+            'default_assigned_group': 'urban_editors',
+            'default_assigned_user': 'urban.assign_folder_manager',
+            'creation_state': ('in_progress',),
+            'starting_states': ('in_progress',),
+            'start_date': 'schedule.start_date.task_starting_date',
+            'end_conditions': (
+                EndConditionObject('urban.schedule.condition.deposit_event_created', 'AND'),
+            ),
+            'calculation_delay': (
+                'schedule.calculation_default_delay',
+            ),
+            'additional_delay': 0,
+        },
+        {
+            'type_name': 'TaskConfig',
+            'id': 'deliverance',
+            'title': 'Octroi',
+            'default_assigned_group': 'urban_editors',
+            'default_assigned_user': 'urban.assign_folder_manager',
+            'creation_state': ('in_progress',),
+            'starting_states': ('in_progress',),
+            'start_date': 'urban.schedule.start_date.deposit_date',
+            'creation_conditions': (
+                CreationConditionObject('urban.schedule.condition.deposit_event_created', 'AND'),
+            ),
+            'end_conditions': (
+                EndConditionObject('urban.schedule.condition.decision_event_closed', 'AND'),
+            ),
+            'calculation_delay': (
+                'schedule.calculation_default_delay',
+            ),
+            'additional_delay': 30,
+        },
+    ],
     'codt_notaryletter': [
         {
             'type_name': 'TaskConfig',
