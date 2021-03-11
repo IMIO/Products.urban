@@ -13,7 +13,7 @@
                 <div tal:replace="structure provider:plone.belowcontenttitle" />
                 <!-- Back to the build licence... -->
                 <br />
-                <tal:block condition="view/showLinkToLinkedLicence">
+                <tal:block>
                     <a class="no_underline" href="#" tal:attributes="href view/getLinkToLinkedLicence">
                         <img src="goback.png" />&nbsp;<span i18n:translate="go_back">Go back</span>...
                     </a>

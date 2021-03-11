@@ -50,8 +50,7 @@ class ContactView(BrowserView):
 
     def getLinkToLinkedLicence(self):
         """
-          Return a link to the licence if available
-          (protected by showLinkToLinkedLicence below)
+          Return a link to the licence or parent folder.
         """
         context = aq_inner(self.context)
         # either the parent is in URBAN_TYPES
@@ -68,29 +67,6 @@ class ContactView(BrowserView):
             return linkedLicence.absolute_url()
         else:
             return parent.absolute_url()
-
-    def showLinkToLinkedLicence(self):
-        """
-          Check if we have what necessary to show a link to the linked licence :
-          either the parent is a licence, or we have a "came_from_licence_uid" in
-          the REQUEST
-        """
-        context = aq_inner(self.context)
-        res = False
-        # we can show the link back to the reference if we are on an URBAN_TYPES
-        # or on an UrbanEventInquiry (Claimants)
-        allowed_parent_types = URBAN_TYPES + ['UrbanEventInquiry']
-        if context.aq_inner.aq_parent.portal_type in allowed_parent_types:
-            res = True
-        elif 'came_from_licence_uid' in context.REQUEST:
-            came_from_licence_uid = context.REQUEST.get('came_from_licence_uid', None)
-            # check if we really have a 'came_from_licence_uid'
-            if came_from_licence_uid:
-                uid_catalog = getToolByName(context, 'uid_catalog')
-                linkedLicenceBrains = uid_catalog(UID=came_from_licence_uid)
-                if linkedLicenceBrains:
-                    res = True
-        return res
 
     def getContactLegendValue(self):
         """
