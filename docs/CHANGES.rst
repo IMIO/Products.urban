@@ -110,6 +110,9 @@ Changes
 - Add default codt notary letters schedule.
   [sdelcourt]
 
+- Add parking infos fields on road tab.
+  [sdelcourt]
+
 
 2.4 (2019-03-25)
 ----------------

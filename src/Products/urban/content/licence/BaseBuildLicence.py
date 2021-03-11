@@ -42,7 +42,7 @@ optional_fields = [
     'townshipCouncilFolder', 'roadMiscDescription', 'procedureChoice', 'water', 'electricity',
     'shouldNumerotateBuildings', 'habitationsAfterLicence', 'habitationsBeforeLicence',
     'additionalHabitationsAsked', 'additionalHabitationsGiven', 'mayNeedLocationLicence',
-    'impactStudy', 'exemptFDArticle', 'availableParkings', 'missingParkings'
+    'impactStudy', 'exemptFDArticle', 'availableParkings', 'missingParkings', 'parkingDetails'
 ]
 
 slave_fields_habitation = (
@@ -304,6 +304,17 @@ schema = Schema((
             label=_('urban_label_missingParkings', default='Missingparkings'),
         ),
         schemata='urban_road',
+    ),
+    TextField(
+        name='parkingDetails',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            label=_('urban_label_parkingDetails', default='Parkingdetails'),
+        ),
+        default_content_type='text/html',
+        default_method='getDefaultText',
+        schemata='urban_road',
+        default_output_type='text/html',
     ),
     TextField(
         name='roadMiscDescription',
@@ -759,6 +770,7 @@ def finalizeSchema(schema):
     schema.moveField('composition', before='missingParts')
     schema.moveField('availableParkings', after='roadType')
     schema.moveField('missingParkings', after='availableParkings')
+    schema.moveField('parkingDetails', after='missingParkings')
     schema['missingParts'].widget.format = None
     return schema
 

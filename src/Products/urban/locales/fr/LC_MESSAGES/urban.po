@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2021-03-10 07:48+0000\n"
+"POT-Creation-Date: 2021-03-11 13:53+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -16,11 +16,11 @@ msgstr ""
 "X-is-fallback-for: fr-fr fr-be fr-ca\n"
 
 #. Default: "urban"
-#: ../setuphandlers.py:303
+#: ../setuphandlers.py:306
 msgid "%s_folder_title"
 msgstr ""
 
-#: ../setuphandlers.py:248
+#: ../setuphandlers.py:251
 msgid "%s_urbanconfig_title"
 msgstr ""
 
@@ -98,7 +98,7 @@ msgid "Add this parcel"
 msgstr "Ajouter cette parcelle"
 
 #. Default: "urban"
-#: ../setuphandlers.py:978
+#: ../setuphandlers.py:981
 msgid "All"
 msgstr "Tous"
 
@@ -696,7 +696,7 @@ msgid "RoadDecree"
 msgstr "Décret Voirie"
 
 #. Default: "imio.schedule"
-#: ../setuphandlers.py:331
+#: ../setuphandlers.py:334
 msgid "ScheduleConfig"
 msgstr "Configuration d'échéancier"
 
@@ -834,7 +834,7 @@ msgid "Update"
 msgstr "Mettre à jour"
 
 #. Default: "urban"
-#: ../setuphandlers.py:855
+#: ../setuphandlers.py:858
 msgid "Urban"
 msgstr ""
 
@@ -1030,7 +1030,7 @@ msgid "architect_residing"
 msgstr "${name}, dont les bureaux se situent ${address}"
 
 #. Default: "urban"
-#: ../setuphandlers.py:895
+#: ../setuphandlers.py:898
 msgid "architects_folder_title"
 msgstr "Architectes"
 
@@ -1242,7 +1242,7 @@ msgid "creation date"
 msgstr "Date de création"
 
 #. Default: "urban"
-#: ../setuphandlers.py:755
+#: ../setuphandlers.py:758
 msgid "dashboardtemplates_folder_title"
 msgstr "Modèles tableaux de bord"
 
@@ -1377,7 +1377,7 @@ msgid "envclasstwos"
 msgstr "Permis d'environnement classe 2"
 
 #. Default: "urban"
-#: ../setuphandlers.py:796
+#: ../setuphandlers.py:799
 msgid "environmenttemplates_folder_title"
 msgstr "modèles des procédures d'environnement"
 
@@ -1504,7 +1504,7 @@ msgid "event_linked_documents"
 msgstr "Documents liés à cet événement"
 
 #. Default: "urban"
-#: ../setuphandlers.py:430
+#: ../setuphandlers.py:433
 msgid "eventconfigs_folder_title"
 msgstr "Types d'évènements"
 
@@ -1655,19 +1655,19 @@ msgstr "${cityName}, le ${formattedDate}"
 
 # this is an HTML content for the front-page
 #. Default: "urban"
-#: ../setuphandlers.py:827
+#: ../setuphandlers.py:830
 msgid "front_page_descr"
 msgstr "Bienvenue sur le site vous permettant d'utiliser la gestion des permis d'urbanisme"
 
 # this is an HTML content for the front-page
 #. Default: "urban"
-#: ../setuphandlers.py:828
+#: ../setuphandlers.py:831
 msgid "front_page_text"
 msgstr "<p>L'application intègre la gestion des permis d'urbanisme, d'urbanisation, des déclarations, divisions notariales, CU1, CU2, lettres d'informations notariales, rendez-vous, avant-projets et déclarations environnementales :</p><ul><li>gestion de la demande</li><li>gestion des demandeurs, architectes, agents traitants, ...</li><li>production des documents</li><li>workflow de suivi de la demande</li><li>cartographie avec calcul du rayon de 50m, visualisation des parcelles, ...</li><li>échéancier</li><li>...</li></ul><p><a href='urban'>Cliquez ici pour accéder à l'application</a></p><p class='discreet'>Vous devez disposer d'un nom d'utilisateur et d'un mot de passe pour accéder à l'application</p>"
 
 # title of the front-page
 #. Default: "urban"
-#: ../setuphandlers.py:826
+#: ../setuphandlers.py:829
 msgid "front_page_title"
 msgstr "Gestion de l'Urbanisme"
 
@@ -1694,13 +1694,13 @@ msgid "generate_a_linked_doc"
 msgstr "Générer un document lié au dossier"
 
 #. Default: "urban"
-#: ../setuphandlers.py:909
+#: ../setuphandlers.py:912
 msgid "geometricians_folder_title"
 msgstr "Géomètres"
 
 #. Default: "Global templates"
 #: ../browser/templates/templatessummary.pt:19
-#: ../setuphandlers.py:767
+#: ../setuphandlers.py:770
 msgid "globaltemplates_folder_title"
 msgstr "Modèles généraux"
 
@@ -2102,7 +2102,7 @@ msgid "not_permitted_to_add_urbanevent"
 msgstr "Vous ne pouvez pas générer de documents"
 
 #. Default: "urban"
-#: ../setuphandlers.py:923
+#: ../setuphandlers.py:926
 msgid "notaries_folder_title"
 msgstr "Notaires"
 
@@ -2174,7 +2174,7 @@ msgid "parcelLinkedLicences"
 msgstr "Dossier(s) lié(s)"
 
 #. Default: "urban"
-#: ../setuphandlers.py:937
+#: ../setuphandlers.py:940
 msgid "parcellings_folder_title"
 msgstr "Lotissements"
 
@@ -2335,15 +2335,15 @@ msgstr "Inverser l'ordre"
 msgid "rgbsr_folder_title"
 msgstr "Réglement général sur les bâtisses en site rural"
 
-#: ../content/licence/BaseBuildLicence.py:539
+#: ../content/licence/BaseBuildLicence.py:550
 msgid "road_adaptation_create"
 msgstr "Ouverture (création)"
 
-#: ../content/licence/BaseBuildLicence.py:538
+#: ../content/licence/BaseBuildLicence.py:549
 msgid "road_adaptation_modify"
 msgstr "Modification"
 
-#: ../content/licence/BaseBuildLicence.py:540
+#: ../content/licence/BaseBuildLicence.py:551
 msgid "road_adaptation_supress"
 msgstr "Suppression"
 
@@ -2963,7 +2963,7 @@ msgstr "Site archéologique"
 
 #. Default: "Architect(s)"
 #: ../browser/licence/templates/licencemacros.pt:10
-#: ../content/licence/BaseBuildLicence.py:396
+#: ../content/licence/BaseBuildLicence.py:407
 #: ../content/licence/MiscDemand.py:48
 msgid "urban_label_architects"
 msgstr "Architecte(s)"
@@ -3218,7 +3218,7 @@ msgid "urban_label_complete_parcel"
 msgstr "Merci de renseigner le numéro complet de la parcelle recherchée"
 
 #. Default: "Composition"
-#: ../content/licence/BaseBuildLicence.py:491
+#: ../content/licence/BaseBuildLicence.py:502
 msgid "urban_label_composition"
 msgstr ""
 
@@ -3348,12 +3348,12 @@ msgid "urban_label_delay"
 msgstr "Délai"
 
 #. Default: "Delayaftermodifiedblueprints"
-#: ../content/licence/BaseBuildLicence.py:448
+#: ../content/licence/BaseBuildLicence.py:459
 msgid "urban_label_delayAfterModifiedBlueprints"
 msgstr "Nouveau délai suite aux plans modificatifs"
 
 #. Default: "Delayaftermodifiedblueprintsdetails"
-#: ../content/licence/BaseBuildLicence.py:461
+#: ../content/licence/BaseBuildLicence.py:472
 msgid "urban_label_delayAfterModifiedBlueprintsDetails"
 msgstr "Détails concernant le nouveau délai suite aux plans modificatifs"
 
@@ -3452,7 +3452,7 @@ msgid "urban_label_editionOutputFormat"
 msgstr "Format de fichier des modèles générés"
 
 #. Default: "Electricity"
-#: ../content/licence/BaseBuildLicence.py:483
+#: ../content/licence/BaseBuildLicence.py:494
 msgid "urban_label_electricity"
 msgstr "Electricité"
 
@@ -3521,7 +3521,7 @@ msgid "urban_label_eventTypeType"
 msgstr "Catégorie du type d'événement"
 
 #. Default: "Exemptfdarticle"
-#: ../content/licence/BaseBuildLicence.py:430
+#: ../content/licence/BaseBuildLicence.py:441
 msgid "urban_label_exemptFDArticle"
 msgstr "Article 107"
 
@@ -3735,7 +3735,7 @@ msgid "urban_label_hasEnvironmentImpactStudy"
 msgstr "Étude d'incidences sur l'environnement"
 
 #. Default: "Hasmodifiedblueprints"
-#: ../content/licence/BaseBuildLicence.py:441
+#: ../content/licence/BaseBuildLicence.py:452
 msgid "urban_label_hasModifiedBlueprints"
 msgstr "Plans modificatifs"
 
@@ -4057,7 +4057,7 @@ msgid "urban_label_location"
 msgstr "Emplacement"
 
 #. Default: "Locationdgrneunderground"
-#: ../content/licence/BaseBuildLicence.py:345
+#: ../content/licence/BaseBuildLicence.py:356
 msgid "urban_label_locationDgrneUnderground"
 msgstr "DGRNE Sous-sol (joindre annexe 2 et 3) (Fiche Urbanisme)"
 
@@ -4087,7 +4087,7 @@ msgid "urban_label_locationSpecificFeaturesDetail"
 msgstr "Détails"
 
 #. Default: "Locationtechnicaladvice"
-#: ../content/licence/BaseBuildLicence.py:354
+#: ../content/licence/BaseBuildLicence.py:365
 #: ../content/licence/EnvironmentBase.py:257
 msgid "urban_label_locationTechnicalAdvice"
 msgstr "Avis technique urbanisme"
@@ -4099,7 +4099,7 @@ msgid "urban_label_locationTechnicalAdviceAfterInquiry"
 msgstr "Avis technique après enquête (urbanisme)"
 
 #. Default: "Locationtechnicalconditions"
-#: ../content/licence/BaseBuildLicence.py:365
+#: ../content/licence/BaseBuildLicence.py:376
 msgid "urban_label_locationTechnicalConditions"
 msgstr "Conditions d'octroi du permis"
 
@@ -4342,6 +4342,11 @@ msgstr "Parcelles"
 msgid "urban_label_parcelsLocations"
 msgstr "Adresse(s) du bien"
 
+#. Default: "Parkingdetails"
+#: ../content/licence/BaseBuildLicence.py:312
+msgid "urban_label_parkingDetails"
+msgstr "Détails concernant les places de parking"
+
 #. Default: "Pash"
 #: ../content/licence/GenericLicence.py:316
 msgid "urban_label_pash"
@@ -4436,7 +4441,7 @@ msgid "urban_label_pebStudy"
 msgstr "Etude de faisabilité technique, environnementale et économique"
 
 #. Default: "Pebtechnicaladvice"
-#: ../content/licence/BaseBuildLicence.py:376
+#: ../content/licence/BaseBuildLicence.py:387
 msgid "urban_label_pebTechnicalAdvice"
 msgstr "Avis technique PEB"
 
@@ -4544,7 +4549,7 @@ msgid "urban_label_prevuDetails"
 msgstr "Détails concernant le Périmètre de Revitalisation Urbaine"
 
 #. Default: "Procedurechoice"
-#: ../content/licence/BaseBuildLicence.py:409
+#: ../content/licence/BaseBuildLicence.py:420
 #: ../content/licence/EnvironmentBase.py:178
 msgid "urban_label_procedureChoice"
 msgstr "Choix de la procédure"
@@ -4767,7 +4772,7 @@ msgid "urban_label_requestedOrganisation"
 msgstr "Organisme"
 
 #. Default: "Requirementfromfd"
-#: ../content/licence/BaseBuildLicence.py:420
+#: ../content/licence/BaseBuildLicence.py:431
 msgid "urban_label_requirementFromFD"
 msgstr "Fonctionnaire délégué"
 
@@ -4802,7 +4807,7 @@ msgid "urban_label_roadCoating"
 msgstr "Revêtement"
 
 #. Default: "Roaddgrneunderground"
-#: ../content/licence/BaseBuildLicence.py:324
+#: ../content/licence/BaseBuildLicence.py:335
 msgid "urban_label_roadDgrneUnderground"
 msgstr "SPW DGO 3 Mines (joindre annexe 2 et 3)"
 
@@ -4812,7 +4817,7 @@ msgid "urban_label_roadEquipments"
 msgstr "Equipement de la voirie au droit du bien"
 
 #. Default: "Roadmiscdescription"
-#: ../content/licence/BaseBuildLicence.py:312
+#: ../content/licence/BaseBuildLicence.py:323
 msgid "urban_label_roadMiscDescription"
 msgstr "Descriptions diverses"
 
@@ -4847,7 +4852,7 @@ msgid "urban_label_roadSpecificFeaturesDetail"
 msgstr "Détails"
 
 #. Default: "Roadtechnicaladvice"
-#: ../content/licence/BaseBuildLicence.py:333
+#: ../content/licence/BaseBuildLicence.py:344
 #: ../content/licence/EnvironmentBase.py:246
 msgid "urban_label_roadTechnicalAdvice"
 msgstr "Avis technique voirie"
@@ -5329,7 +5334,7 @@ msgid "urban_label_walloonRegionPrimoDate"
 msgstr "Date primo dossier"
 
 #. Default: "Water"
-#: ../content/licence/BaseBuildLicence.py:475
+#: ../content/licence/BaseBuildLicence.py:486
 msgid "urban_label_water"
 msgstr "Eau"
 
@@ -5495,19 +5500,19 @@ msgid "urbancertificatetwos"
 msgstr "Certificats d'urbanisme 2"
 
 #. Default: "urban"
-#: ../setuphandlers.py:784
+#: ../setuphandlers.py:787
 msgid "urbantemplates_folder_title"
 msgstr "modèles des procédures d'urbanisme"
 
-#: ../content/licence/BaseBuildLicence.py:552
+#: ../content/licence/BaseBuildLicence.py:563
 msgid "usage_for_habitation"
 msgstr "Modèle I: Bâtiment(s) destiné(s) exclusivement ou principalement à l'habitation"
 
-#: ../content/licence/BaseBuildLicence.py:554
+#: ../content/licence/BaseBuildLicence.py:565
 msgid "usage_not_applicable"
 msgstr "Pas d'application"
 
-#: ../content/licence/BaseBuildLicence.py:553
+#: ../content/licence/BaseBuildLicence.py:564
 msgid "usage_not_for_habitation"
 msgstr "Modèle II: Bâtiment(s) destiné(s) exclusivement ou principalement à un autre usage que l'habitation"
 
