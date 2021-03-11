@@ -66,7 +66,10 @@ class ContactView(BrowserView):
             linkedLicence = linkedLicenceBrains[0].getObject()
             return linkedLicence.absolute_url()
         else:
-            return parent.absolute_url()
+            url = parent.absolute_url()
+            if self.context.portal_type == 'Claimant':
+                url += '#fieldsetlegend-event_inquiry_claimants'
+            return url
 
     def getContactLegendValue(self):
         """
