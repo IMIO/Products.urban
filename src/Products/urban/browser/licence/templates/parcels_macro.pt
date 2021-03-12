@@ -2,7 +2,7 @@
     <fieldset>
         <legend i18n:translate="concerned_parcels">Concerned parcel(s)</legend>
         <div metal:use-macro="here/@@globalmacros/urbanParcelsMacro" />
-        <div id="urban-coring" class="parcel-action"
+        <!--div id="urban-coring" class="parcel-action"
              tal:condition="context/getOfficialParcels">
             <a class="coring link-overlay"
                tal:attributes="href python:context.absolute_url() + '/@@parcelcoring'">
@@ -10,6 +10,6 @@
                     <img src="coring.png"/>
                 </button>
             </a>
-        </div>
+        </div-->
     </fieldset>
 </div>
