@@ -322,6 +322,7 @@ def migrate(context):
     migrate_urbaneventtypes_folder(context)
     setup_tool = api.portal.get_tool('portal_setup')
     setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'typeinfo')
+    setup_tool.runAllImportStepFromProfile('profile-plonetheme.imioapps:urbanskin')
     setup_tool.runAllImportStepsFromProfile('profile-Products.urban:default')
     setup_tool.runImportStepFromProfile('profile-Products.urban:extra', 'urban-update-rubrics')
     migrate_codt_buildlicences_schedule(context)
