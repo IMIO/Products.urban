@@ -194,13 +194,13 @@ schema = Schema((
     ),
     TextField(
         name='annoncedDelayDetails',
-        allowable_content_types=('text/plain',),
-        widget=TextAreaWidget(
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
             label=_('urban_label_annoncedDelayDetails', default='Annonceddelaydetails'),
         ),
         schemata='urban_analysis',
         default_method='getDefaultText',
-        default_content_type='text/plain',
+        default_content_type='text/html',
         default_output_type='text/html',
     ),
     BooleanField(

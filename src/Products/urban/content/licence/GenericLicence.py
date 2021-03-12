@@ -197,7 +197,7 @@ schema = Schema((
         ),
         schemata='urban_analysis',
         default_method='getDefaultText',
-        default_content_type='text/plain',
+        default_content_type='text/html',
         default_output_type='text/html',
     ),
     TextField(
@@ -232,7 +232,7 @@ schema = Schema((
         ),
         schemata='urban_road',
         default_method='getDefaultText',
-        default_content_type='text/plain',
+        default_content_type='text/html',
         default_output_type='text/html',
     ),
     LinesField(
@@ -343,15 +343,15 @@ schema = Schema((
     ),
     TextField(
         name='catchmentAreaDetails',
-        allowable_content_types=('text/plain',),
-        widget=TextAreaWidget(
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
             label=_('urban_label_catchmentAreaDetails',
                     default='Catchmentareadetails'),
         ),
         schemata='urban_road',
         default_method='getDefaultText',
-        default_content_type='text/plain',
-        default_output_type='text/plain',
+        default_content_type='text/html',
+        default_output_type='text/html',
     ),
     LinesField(
         name='karstConstraints',
@@ -366,15 +366,15 @@ schema = Schema((
     ),
     TextField(
         name='karstConstraintsDetails',
-        allowable_content_types=('text/plain',),
-        widget=TextAreaWidget(
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
             label=_('urban_label_karstConstraintsDetails',
                     default='Karstconstraintsdetails'),
         ),
-        default_content_type='text/plain',
+        default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_road',
-        default_output_type='text/plain',
+        default_output_type='text/html',
     ),
     LinesField(
         name='concentratedRunoffSRisk',
@@ -390,14 +390,14 @@ schema = Schema((
     ),
     TextField(
         name='concentratedRunoffSRiskDetails',
-        allowable_content_types=('text/plain',),
-        widget=TextAreaWidget(
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
             label=_('urban_label_concentratedRunoffSRiskDetails', default='concentratedrunoffsriskdetails'),
         ),
-        default_content_type='text/plain',
+        default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_road',
-        default_output_type='text/plain',
+        default_output_type='text/html',
     ),
     LinesField(
         name='sevesoSite',
@@ -423,14 +423,14 @@ schema = Schema((
     ),
     TextField(
         name='pipelinesDetails',
-        allowable_content_types=('text/plain',),
-        widget=TextAreaWidget(
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
             label=_('urban_label_pipelinesDetails', default='Pipelinesdetails'),
         ),
-        default_content_type='text/plain',
+        default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_road',
-        default_output_type='text/plain',
+        default_output_type='text/html',
     ),
     LinesField(
         name='natura_2000',
@@ -454,15 +454,15 @@ schema = Schema((
     ),
     TextField(
         name='floodingLevelDetails',
-        allowable_content_types=('text/plain',),
-        widget=TextAreaWidget(
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
             label=_('urban_label_floodingLevelDetails',
                     default='Floodingleveldetails'),
         ),
-        default_content_type='text/plain',
+        default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_road',
-        default_output_type='text/plain',
+        default_output_type='text/html',
     ),
     TextField(
         name='equipmentAndRoadRequirements',
@@ -507,7 +507,7 @@ schema = Schema((
         ),
         schemata='urban_road',
         default_method='getDefaultText',
-        default_content_type='text/plain',
+        default_content_type='text/html',
         default_output_type='text/html',
     ),
     LinesField(
@@ -531,7 +531,7 @@ schema = Schema((
         ),
         schemata='urban_location',
         default_method='getDefaultText',
-        default_content_type='text/plain',
+        default_content_type='text/html',
         default_output_type='text/html',
     ),
     LinesField(
@@ -547,12 +547,12 @@ schema = Schema((
     ),
     TextField(
         name='folderZoneDetails',
-        allowable_content_types=('text/plain',),
-        widget=TextAreaWidget(
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
             label=_('urban_label_folderZoneDetails',
                     default='Folderzonedetails'),
         ),
-        default_content_type='text/plain',
+        default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_location',
         default_output_type='text/html',
@@ -608,14 +608,14 @@ schema = Schema((
     ),
     TextField(
         name='subdivisionDetails',
-        allowable_content_types="('text/plain',)",
-        widget=TextAreaWidget(
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
             description=_('urban_descr_subdivisionDetails',
                           default='Number of the lots, ...'),
             label=_('urban_label_subdivisionDetails',
                     default='Subdivisiondetails'),
         ),
-        default_content_type='text/plain',
+        default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_location',
         default_output_type='text/html',
@@ -748,12 +748,12 @@ schema = Schema((
     ),
     TextField(
         name='protectedBuildingDetails',
-        allowable_content_types=('text/plain',),
-        widget=TextAreaWidget(
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
             label=_('urban_label_protectedBuildingDetails',
                     default='Protectedbuildingdetails'),
         ),
-        default_content_type='text/plain',
+        default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_patrimony',
         default_output_type='text/html',
@@ -771,14 +771,14 @@ schema = Schema((
     ),
     TextField(
         name='sscDetails',
-        allowable_content_types=('text/plain',),
-        widget=TextAreaWidget(
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
             label=_('urban_label_sscDetails', default='Sscdetails'),
         ),
-        default_content_type='text/plain',
+        default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_location',
-        default_output_type='text/plain',
+        default_output_type='text/html',
     ),
     LinesField(
         name='RCU',
@@ -793,14 +793,14 @@ schema = Schema((
     ),
     TextField(
         name='rcuDetails',
-        allowable_content_types=('text/plain',),
-        widget=TextAreaWidget(
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
             label=_('urban_label_rcuDetails', default='Rcudetails'),
         ),
-        default_content_type='text/plain',
+        default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_location',
-        default_output_type='text/plain',
+        default_output_type='text/html',
     ),
     LinesField(
         name='PRenU',
@@ -815,14 +815,14 @@ schema = Schema((
     ),
     TextField(
         name='prenuDetails',
-        allowable_content_types=('text/plain',),
-        widget=TextAreaWidget(
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
             label=_('urban_label_prenuDetails', default='Prenudetails'),
         ),
-        default_content_type='text/plain',
+        default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_location',
-        default_output_type='text/plain',
+        default_output_type='text/html',
     ),
     LinesField(
         name='PRevU',
@@ -837,14 +837,14 @@ schema = Schema((
     ),
     TextField(
         name='prevuDetails',
-        allowable_content_types=('text/plain',),
-        widget=TextAreaWidget(
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
             label=_('urban_label_prevuDetails', default='Prevudetails'),
         ),
-        default_content_type='text/plain',
+        default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_location',
-        default_output_type='text/plain',
+        default_output_type='text/html',
     ),
     LinesField(
         name='reparcelling',
@@ -859,15 +859,15 @@ schema = Schema((
     ),
     TextField(
         name='reparcellingDetails',
-        allowable_content_types=('text/plain',),
-        widget=TextAreaWidget(
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
             label=_('urban_label_reparcellingDetails',
                     default='Reparcellingdetails'),
         ),
-        default_content_type='text/plain',
+        default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_location',
-        default_output_type='text/plain',
+        default_output_type='text/html',
     ),
     StringField(
         name='rgbsr',
@@ -880,14 +880,14 @@ schema = Schema((
     ),
     TextField(
         name='rgbsrDetails',
-        allowable_content_types=('text/plain',),
-        widget=TextAreaWidget(
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
             label=_('urban_label_rgbsrDetails', default='Rgbsrdetails'),
         ),
-        default_content_type='text/plain',
+        default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_location',
-        default_output_type='text/plain',
+        default_output_type='text/html',
     ),
     LinesField(
         name='airportNoiseZone',
@@ -902,15 +902,15 @@ schema = Schema((
     ),
     TextField(
         name='airportNoiseZoneDetails',
-        allowable_content_types=('text/plain',),
-        widget=TextAreaWidget(
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
             label=_('urban_label_airportNoiseZoneDetails',
                     default='Airportnoisezonedetails'),
         ),
-        default_content_type='text/plain',
+        default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_location',
-        default_output_type='text/plain',
+        default_output_type='text/html',
     ),
     LinesField(
         name='solicitLocationOpinionsTo',

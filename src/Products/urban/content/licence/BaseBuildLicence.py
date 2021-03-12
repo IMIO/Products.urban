@@ -159,13 +159,13 @@ schema = Schema((
     ),
     TextField(
         name='annoncedDelayDetails',
-        allowable_content_types=('text/plain',),
-        widget=TextAreaWidget(
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
             label=_('urban_label_annoncedDelayDetails', default='Annonceddelaydetails'),
         ),
         schemata='urban_analysis',
         default_method='getDefaultText',
-        default_content_type='text/plain',
+        default_content_type='text/html',
         default_output_type='text/html',
     ),
     BooleanField(
@@ -206,13 +206,13 @@ schema = Schema((
     ),
     TextField(
         name='pebDetails',
-        allowable_content_types=('text/plain',),
-        widget=TextAreaWidget(
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
             label=_('urban_label_pebDetails', default='Pebdetails'),
         ),
         schemata='urban_peb',
         default_method='getDefaultText',
-        default_content_type='text/plain',
+        default_content_type='text/html',
         default_output_type='text/html',
     ),
     BooleanField(
@@ -311,9 +311,9 @@ schema = Schema((
         widget=RichWidget(
             label=_('urban_label_parkingDetails', default='Parkingdetails'),
         ),
-        default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_road',
+        default_content_type='text/html',
         default_output_type='text/html',
     ),
     TextField(
@@ -322,9 +322,9 @@ schema = Schema((
         widget=RichWidget(
             label=_('urban_label_roadMiscDescription', default='Roadmiscdescription'),
         ),
-        default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_road',
+        default_content_type='text/html',
         default_output_type='text/html',
     ),
     BooleanField(
@@ -343,9 +343,9 @@ schema = Schema((
         widget=RichWidget(
             label=_('urban_label_roadTechnicalAdvice', default='Roadtechnicaladvice'),
         ),
-        default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_road',
+        default_content_type='text/html',
         default_output_type='text/html',
     ),
     BooleanField(
@@ -364,9 +364,9 @@ schema = Schema((
         widget=RichWidget(
             label=_('urban_label_locationTechnicalAdvice', default='Locationtechnicaladvice'),
         ),
-        default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_analysis',
+        default_content_type='text/html',
         default_output_type='text/html',
     ),
     TextField(
@@ -375,9 +375,9 @@ schema = Schema((
         widget=RichWidget(
             label=_('urban_label_locationTechnicalConditions', default='Locationtechnicalconditions'),
         ),
-        default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_analysis',
+        default_content_type='text/html',
         default_output_type='text/html',
     ),
     TextField(
@@ -386,9 +386,9 @@ schema = Schema((
         widget=RichWidget(
             label=_('urban_label_pebTechnicalAdvice', default='Pebtechnicaladvice'),
         ),
-        default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_peb',
+        default_content_type='text/html',
         default_output_type='text/html',
     ),
     ReferenceField(
@@ -467,8 +467,8 @@ schema = Schema((
     ),
     TextField(
         name='delayAfterModifiedBlueprintsDetails',
-        allowable_content_types=('text/plain',),
-        widget=TextAreaWidget(
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
             label=_(
                 'urban_label_delayAfterModifiedBlueprintsDetails',
                 default='Delayaftermodifiedblueprintsdetails'
@@ -476,7 +476,7 @@ schema = Schema((
         ),
         schemata='urban_analysis',
         default_method='getDefaultText',
-        default_content_type='text/plain',
+        default_content_type='text/html',
         default_output_type='text/html',
     ),
     BooleanField(
