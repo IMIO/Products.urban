@@ -171,14 +171,14 @@ schema = Schema((
     ),
     TextField(
         name='sctDetails',
-        allowable_content_types=('text/plain',),
-        widget=TextAreaWidget(
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
             label=_('urban_label_sctDetails', default='Sctdetails'),
         ),
-        default_content_type='text/plain',
+        default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_location',
-        default_output_type='text/plain',
+        default_output_type='text/html',
     ),
     LinesField(
         name='SDC',
@@ -193,14 +193,14 @@ schema = Schema((
     ),
     TextField(
         name='sdcDetails',
-        allowable_content_types=('text/plain',),
-        widget=TextAreaWidget(
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
             label=_('urban_label_sdcDetails', default='Sdcdetails'),
         ),
-        default_content_type='text/plain',
+        default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_location',
-        default_output_type='text/plain',
+        default_output_type='text/html',
     ),
     LinesField(
         name='township_guide',
@@ -215,15 +215,15 @@ schema = Schema((
     ),
     TextField(
         name='township_guide_details',
-        allowable_content_types=('text/plain',),
-        widget=TextAreaWidget(
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
             label=_('urban_label_township_guide_details',
                     default='Township_guide_details'),
         ),
-        default_content_type='text/plain',
+        default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_location',
-        default_output_type='text/plain',
+        default_output_type='text/html',
     ),
     LinesField(
         name='regional_guide',
@@ -236,15 +236,15 @@ schema = Schema((
     ),
     TextField(
         name='regional_guide_details',
-        allowable_content_types=('text/plain',),
-        widget=TextAreaWidget(
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
             label=_('urban_label_regional_guide_details',
                     default='Regional_guide_details'),
         ),
-        default_content_type='text/plain',
+        default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_location',
-        default_output_type='text/plain',
+        default_output_type='text/html',
     ),
     StringField(
         name='patrimony',
