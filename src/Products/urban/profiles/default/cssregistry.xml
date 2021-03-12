@@ -14,16 +14,6 @@
  -->
 
  <!-- ##code-section cssregistry.xml -->
- <stylesheet title="urban CSS"
-             cacheable="True"
-             compression="safe"
-             cookable="True"
-             enabled="1"
-             expression=""
-             id="urban.css"
-             media="all"
-             rel="stylesheet"
-             rendering="import"/>
 
  <stylesheet title="urban licences CSS"
              cacheable="True"

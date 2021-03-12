@@ -52,7 +52,7 @@
                 <tal:comment replace="nothing">We do the entire job manually when the field is 'isInPca' and there is
                                                 nothing left to do when it is the 'Pca' field</tal:comment>
                 <tal:manage_pca condition="python: fieldName == 'isInPCA'">
-                    <fieldset class="urban-fieldset-masterbooleanwidget" style="border-style: solid !important;">
+                    <fieldset class="urban-fieldset-masterbooleanwidget">
                         <legend i18n:translate="" tal:content="python: context.getField('pca').widget.label">PCA</legend>
                         <metal:fieldMacro use-macro="python:here.widget('isInPCA', mode='edit')" />
                         <metal:fieldMacro use-macro="python:here.widget('pca', mode='edit')" />
@@ -67,7 +67,7 @@
                 <tal:comment replace="nothing">We do the entire job manually when the field is 'isInSubdivision' and there
                                         is nothing left to do when it is the 'subdivisionDetails' field</tal:comment>
                 <tal:manage_subdivision condition="python: fieldName == 'isInSubdivision'">
-                    <fieldset class="urban-fieldset-masterbooleanwidget" style="border-style: solid !important;">
+                    <fieldset class="urban-fieldset-masterbooleanwidget">
                         <legend i18n:translate="" tal:content="python: context.getField('parcellings').widget.label">Subdivision</legend>
                         <metal:fieldMacro use-macro="python:here.widget('isInSubdivision', mode='edit')" />
                         <metal:fieldMacro use-macro="python:here.widget('parcellings', mode='edit')" />

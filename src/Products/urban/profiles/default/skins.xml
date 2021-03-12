@@ -6,9 +6,6 @@
         cookie_persistence="False"
         request_varname="plone_skin">
 
- <object name="urban_images"
-         meta_type="Filesystem Directory View"
-         directory="urban/skins/urban_images"/>
  <object name="urban_plone"
          meta_type="Filesystem Directory View"
          directory="urban/skins/urban_plone"/>
@@ -20,8 +17,6 @@
          directory="urban/skins/urban_templates"/>
  
  <skin-path name="*">
-  <layer insert-after="custom" 
-         name="urban_images"/>
   <layer insert-after="custom" 
          name="urban_plone"/>
   <layer insert-after="custom" 
