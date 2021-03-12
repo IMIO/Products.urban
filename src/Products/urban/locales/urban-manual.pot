@@ -2574,6 +2574,9 @@ msgstr ""
 msgid "urban_search_parcel_by_folder_reference"
 msgstr ""
 
+msgid "urban_search_parcel_by_location"
+msgstr ""
+
 #. Default: "Name"
 msgid "urban_search_parcel_by_name"
 msgstr ""
