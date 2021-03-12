@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2021-03-11 13:53+0000\n"
+"POT-Creation-Date: 2021-03-12 06:53+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -1705,7 +1705,7 @@ msgid "globaltemplates_folder_title"
 msgstr "Modèles généraux"
 
 #. Default: "Go back"
-#: ../browser/templates/contactview.pt:18
+#: ../browser/templates/contactview.pt:17
 #: ../browser/templates/globalmacros.pt:5
 msgid "go_back"
 msgstr "Retour"
@@ -2614,7 +2614,7 @@ msgstr "Chercher dans les anciennes parcelles (Par référence cadastrale unique
 msgid "urban_button_search"
 msgstr "Recherche"
 
-#: ../browser/contactview.py:142
+#: ../browser/contactview.py:121
 msgid "urban_claimant_already_exists"
 msgstr "Ce réclamant existe déjà!"
 
@@ -5394,7 +5394,7 @@ msgstr "Aucun élément n'a encore été ajouté"
 msgid "urban_no_eventtype_defined"
 msgstr "Aucun type d'événement n'est défini dans la configuration pour cet élément"
 
-#: ../browser/contactview.py:147
+#: ../browser/contactview.py:126
 msgid "urban_recipient_copied_to_claimants"
 msgstr "Propriétaire copié comme réclamant"
 
@@ -5412,6 +5412,9 @@ msgstr "Critères de la recherche"
 #. Default: "Folder reference"
 msgid "urban_search_parcel_by_folder_reference"
 msgstr "Référence du dossier"
+
+msgid "urban_search_parcel_by_location"
+msgstr "Rue"
 
 #. Default: "Name"
 msgid "urban_search_parcel_by_name"
