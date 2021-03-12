@@ -1,4 +1,4 @@
-<div metal:define-macro="worklocations_macro" i18n:domain="urban">
+<metal:address define-macro="worklocations_macro" i18n:domain="urban">
     <legend i18n:translate="urban_label_workLocations">Work locations</legend>
     <tal:vars define="workLocations context/getWorkLocations">
         <div tal:condition="workLocations">
@@ -6,9 +6,9 @@
         </div>
         <div tal:condition="not: workLocations" class="discreet clear" i18n:translate="content_none">None</div>
     </tal:vars>
-</div>
+</metal:address>
 
-<div metal:define-macro="env_worklocations_macro" i18n:domain="urban">
+<metal:env_address define-macro="env_worklocations_macro" i18n:domain="urban">
     <fieldset tal:define="workLocations context/getWorkLocations">
         <legend i18n:translate="urban_label_situation">Situation</legend>
         <div tal:condition="workLocations">
@@ -25,4 +25,4 @@
         </div>
         <span tal:condition="not: workLocations" class="discreet" i18n:translate="content_none">None</span>
     </fieldset>
-</div>
+</metal:env_address>

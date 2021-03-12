@@ -146,7 +146,7 @@ msgid "CODT_BuildLicence"
 msgstr "Permis d'urbanisme (CODT)"
 
 msgid "CODT_CommercialLicence"
-msgstr "Permis d'implantation commerciale (CODT)"
+msgstr "Permis d'implantation commerciale"
 
 msgid "CODT_IntegratedLicence"
 msgstr "Permis intégrés (CODT)"
