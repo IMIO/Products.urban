@@ -10,7 +10,6 @@
     <dependency>profile-collective.faceted.task:base</dependency>
     <dependency>profile-collective.faceted.task:default</dependency>
     <dependency>profile-Products.MasterSelectWidget:default</dependency>
-    <dependency>profile-plonetheme.imioapps:default</dependency>
     <dependency>profile-plonetheme.imioapps:urbanskin</dependency>
     <dependency>profile-collective.datagridcolumns:default</dependency>
     <dependency>profile-collective.documentgenerator:default</dependency>
