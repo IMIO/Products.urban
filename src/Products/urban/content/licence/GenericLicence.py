@@ -1176,7 +1176,10 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
             ('no', translate(_('flooding_level_no'), context=self.REQUEST)),
             ('very low', translate(_('flooding_level_verylow'), context=self.REQUEST)),
             ('low', translate(_('flooding_level_low'), context=self.REQUEST)),
+            ('low_to_moderate', translate(_('flooding_level_low_to_moderate'), context=self.REQUEST)),
+            ('low_to_high', translate(_('flooding_level_low_to_high'), context=self.REQUEST)),
             ('moderate', translate(_('flooding_level_moderate'), context=self.REQUEST)),
+            ('moderate_to_high', translate(_('flooding_level_moderate_to_high'), context=self.REQUEST)),
             ('high', translate(_('flooding_level_high'), context=self.REQUEST)),
         )
 
