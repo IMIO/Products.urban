@@ -291,7 +291,7 @@ def migrate_flooding_level(context):
     licence_brains = cat(object_provides=IGenericLicence.__identifier__)
     licences = [lic.getObject() for lic in licence_brains]
     for licence in licences:
-        if licence.floodingLevel and not (type(licence.floodingLevel) == tuple):
+        if licence.floodingLevel and isinstance(licence.floodingLevel, basestring):
             licence.setFloodingLevel((licence.floodingLevel,))
         if licence.locationFloodingLevel and isinstance(licence.locationFloodingLevel, basestring):
             licence.setLocationFloodingLevel((licence.locationFloodingLevel,))
