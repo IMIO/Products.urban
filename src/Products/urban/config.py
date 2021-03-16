@@ -286,7 +286,6 @@ APPLICANTS_TYPES = ['Applicant', 'Proprietary', 'Corporation', 'Tenant', 'Plaint
 GLOBAL_TEMPLATES = {
     '.': [],
     'urbantemplates': [
-        {'id': 'styles.odt', 'portal_type': 'StyleTemplate', 'title': 'Styles urbanisme'},
         {'id': 'logo.odt', 'portal_type': 'SubTemplate', 'title': 'Logo urbanisme'},
         {'id': 'header.odt', 'portal_type': 'SubTemplate', 'title': 'En-tête urbanisme'},
         {'id': 'footer.odt', 'portal_type': 'SubTemplate', 'title': 'Pied de page urbanisme'},
@@ -295,7 +294,6 @@ GLOBAL_TEMPLATES = {
         {'id': 'publipostage.odt', 'portal_type': 'MailingLoopTemplate', 'title': 'Publipostage urbanisme'},
     ],
     'environmenttemplates': [
-        {'id': 'styles.odt', 'portal_type': 'StyleTemplate', 'title': 'Styles environnement'},
         {'id': 'logo.odt', 'portal_type': 'SubTemplate', 'title': 'Logo environnement'},
         {'id': 'header.odt', 'portal_type': 'SubTemplate', 'title': 'En-tête environnement'},
         {'id': 'footer.odt', 'portal_type': 'SubTemplate', 'title': 'Pied de page environnement'},

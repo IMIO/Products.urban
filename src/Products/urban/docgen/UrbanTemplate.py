@@ -26,8 +26,17 @@ class IUrbanTemplate(IConfigurablePODTemplate):
         description=_(u'Select for which content types the template will be available.'),
         value_type=schema.Choice(source='collective.documentgenerator.PortalTypes'),
         required=False,
-        default=['UrbanEvent', 'UrbanEventInquiry', 'UrbanEventOpinionRequest', 'UrbanEventAnnouncement']
+        default=[
+            'UrbanEvent',
+            'UrbanEventInquiry',
+            'UrbanEventOpinionRequest',
+            'UrbanEventAnnouncement'
+            'UrbanEventCollege',
+        ]
     )
+
+    # remove global styles from urban
+    form.omitted('style_template')
 
 
 class UrbanTemplate(ConfigurablePODTemplate):

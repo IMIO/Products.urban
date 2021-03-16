@@ -113,6 +113,9 @@ Changes
 - Add parking infos fields on road tab.
   [sdelcourt]
 
+- Remove pod templates styles form urban. [URB-2080]
+  [sdelcourt]
+
 
 2.4 (2019-03-25)
 ----------------

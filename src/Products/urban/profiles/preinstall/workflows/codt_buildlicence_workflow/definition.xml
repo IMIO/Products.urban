@@ -498,7 +498,7 @@
              before_script=""
              after_script=""
              i18n:attributes="title">
-  <action url="" icon="%(portal_url)s/refuse.png" category="workflow" i18n:translate="">iscomplete</action>
+  <action url="" icon="%(portal_url)s/inacceptable.png" category="workflow" i18n:translate="">iscomplete</action>
   <guard>
     <guard-permission>Review portal content</guard-permission>
   </guard>

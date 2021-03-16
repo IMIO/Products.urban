@@ -36,8 +36,6 @@ def fix_external_edition_settings(context):
         values.append('ConfigurablePODTemplate')
     if 'SubTemplate' not in values:
         values.append('SubTemplate')
-    if 'StyleTemplate' not in values:
-        values.append('StyleTemplate')
     if 'DashboardPODTemplate' not in values:
         values.append('DashboardPODTemplate')
     if 'MailingLoopTemplate' not in values:
