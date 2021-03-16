@@ -129,7 +129,7 @@ def postInstall(context):
     site.portal_properties.site_properties.manage_changeProperties(
         typesUseViewActionInListings=(
             'Image', 'File', 'UrbanDoc', 'UrbanTemplate', 'ConfigurablePODTemplate',
-            'SubTemplate', 'StyleTemplate', 'DashboardPODTemplate', 'MailingLoopTemplate',
+            'SubTemplate', 'DashboardPODTemplate', 'MailingLoopTemplate',
         )
     )
     # for collective.externaleditor
@@ -142,8 +142,6 @@ def postInstall(context):
         values.append('ConfigurablePODTemplate')
     if 'SubTemplate' not in values:
         values.append('SubTemplate')
-    if 'StyleTemplate' not in values:
-        values.append('StyleTemplate')
     if 'DashboardPODTemplate' not in values:
         values.append('DashboardPODTemplate')
     if 'MailingLoopTemplate' not in values:
@@ -775,8 +773,8 @@ def addGlobalFolders(context):
         )
     templates = getattr(tool, templates_id)
     templates.setConstrainTypesMode(1)
-    templates.setLocallyAllowedTypes(['UrbanTemplate', 'StyleTemplate', 'Folder'])
-    templates.setImmediatelyAddableTypes(['UrbanTemplate', 'StyleTemplate', 'Folder'])
+    templates.setLocallyAllowedTypes(['UrbanTemplate', 'Folder'])
+    templates.setImmediatelyAddableTypes(['UrbanTemplate', 'Folder'])
 
     folder = tool.globaltemplates
     templates_id = "urbantemplates"
@@ -788,8 +786,8 @@ def addGlobalFolders(context):
         )
     templates = getattr(folder, templates_id)
     templates.setConstrainTypesMode(1)
-    templates.setLocallyAllowedTypes(['SubTemplate', 'StyleTemplate', 'MailingLoopTemplate'])
-    templates.setImmediatelyAddableTypes(['SubTemplate', 'StyleTemplate', 'MailingLoopTemplate'])
+    templates.setLocallyAllowedTypes(['SubTemplate', 'MailingLoopTemplate'])
+    templates.setImmediatelyAddableTypes(['SubTemplate', 'MailingLoopTemplate'])
 
     templates_id = "environmenttemplates"
     if not hasattr(folder, templates_id):
@@ -800,8 +798,8 @@ def addGlobalFolders(context):
         )
     templates = getattr(folder, templates_id)
     templates.setConstrainTypesMode(1)
-    templates.setLocallyAllowedTypes(['SubTemplate', 'StyleTemplate', 'MailingLoopTemplate'])
-    templates.setImmediatelyAddableTypes(['SubTemplate', 'StyleTemplate', 'MailingLoopTemplate'])
+    templates.setLocallyAllowedTypes(['SubTemplate', 'MailingLoopTemplate'])
+    templates.setImmediatelyAddableTypes(['SubTemplate', 'MailingLoopTemplate'])
 
 
 def adaptDefaultPortal(context):

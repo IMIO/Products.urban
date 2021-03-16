@@ -2,6 +2,8 @@
 
 from Acquisition import aq_base
 
+from collective.documentgenerator.content.pod_template import IConfigurablePODTemplate
+
 from imio.schedule.content.object_factories import MacroCreationConditionObject
 from imio.schedule.content.object_factories import MacroEndConditionObject
 from imio.schedule.content.object_factories import MacroRecurrenceConditionObject
@@ -298,7 +300,6 @@ def migrate_announcement_schedule_config(context):
     """
     logger = logging.getLogger('migrate announcement schedule config')
     logger.info("starting migration step")
-    logger.info("migration step done!")
     portal_urban = api.portal.get_tool('portal_urban')
     for licence_config in portal_urban.objectValues('LicenceConfig'):
         schedule_cfg = getattr(licence_config, 'schedule', None)
@@ -316,13 +317,31 @@ def migrate_announcement_schedule_config(context):
     logger.info("migration step done!")
 
 
+def migrate_styles_pod_templates(context):
+    """
+    """
+    logger = logging.getLogger('migrate pod templates styles')
+    logger.info("starting migration step")
+    catalog = api.portal.get_tool('portal_catalog')
+    podt_template_brains = catalog(object_provides=IConfigurablePODTemplate.__identifier__)
+    # set style template to None on all POD templates
+    for brain in podt_template_brains:
+        pod_template = brain.getObject()
+        pod_template.style_template = None
+    portal_urban = api.portal.get_tool('portal_urban')
+    # then delete all style templates
+    style_templates = [b.getObject() for b in catalog(portal_type='StyleTemplate')]
+    api.content.delete(objects=style_templates)
+    logger.info("migration step done!")
+
+
 def migrate(context):
     logger = logging.getLogger('urban: migrate to 2.5')
     logger.info("starting migration steps")
     migrate_urbaneventtypes_folder(context)
     setup_tool = api.portal.get_tool('portal_setup')
     setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'typeinfo')
-    setup_tool.runAllImportStepFromProfile('profile-plonetheme.imioapps:urbanskin')
+    setup_tool.runAllImportStepsFromProfile('profile-plonetheme.imioapps:urbanskin')
     setup_tool.runAllImportStepsFromProfile('profile-Products.urban:default')
     setup_tool.runImportStepFromProfile('profile-Products.urban:extra', 'urban-update-rubrics')
     migrate_codt_buildlicences_schedule(context)
@@ -339,6 +358,7 @@ def migrate(context):
     migrate_remove_prov_in_folderroadtypes(context)
     migrate_disable_natura2000_folderzone(context)
     migrate_announcement_schedule_config(context)
+    migrate_styles_pod_templates(context)
     catalog = api.portal.get_tool('portal_catalog')
     catalog.clearFindAndRebuild()
     logger.info("migration done!")
