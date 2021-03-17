@@ -5,6 +5,7 @@ Changes
 2.5 (unreleased)
 ----------------
 
+
 - Update MailingPersistentDocumentGenerationView call with generated_doc_title param. [URB-1862]
   [jjaumotte]
 

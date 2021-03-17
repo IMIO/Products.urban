@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2021-01-13 13:16+0000\n"
+"POT-Creation-Date: 2021-03-12 15:22+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -304,6 +304,10 @@ msgstr "Agent traitant"
 
 msgid "Found folder(s)"
 msgstr "Dossier(s) trouvé(s)"
+
+#: ../browser/templates/searchparcels.pt:172
+msgid "Found parcel(s)"
+msgstr ""
 
 #: ../profiles.zcml:42
 msgid "Full config profile for urban."
@@ -704,6 +708,7 @@ msgstr "Configuration d'échéancier"
 msgid "Scheduled licences"
 msgstr "Échéancier par procédure"
 
+#: ../browser/templates/searchparcels.pt:35
 msgid "Search parcel(s)"
 msgstr "Chercher des références cadastrales."
 
@@ -2621,10 +2626,12 @@ msgid "urban_bound_inspections"
 msgstr "Dossiers d'inspections ou PV liés"
 
 #. Default: "Browse old parcels (Only works with the parcel reference)"
+#: ../browser/templates/searchparcels.pt:157
 msgid "urban_browse_old_parcels"
 msgstr "Chercher dans les anciennes parcelles (Par référence cadastrale uniquement)"
 
 #. Default: "Search"
+#: ../browser/templates/searchparcels.pt:161
 msgid "urban_button_search"
 msgstr "Recherche"
 
