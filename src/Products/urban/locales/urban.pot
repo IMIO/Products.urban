@@ -3692,6 +3692,9 @@ msgstr ""
 msgid "urban_label_floodingLevelDetails"
 msgstr ""
 
+msgid "urban_label_representative_contacts"
+msgstr ""
+
 #. Default: "Foldercategory"
 #: ../content/licence/GenericLicence.py:173
 msgid "urban_label_folderCategory"
