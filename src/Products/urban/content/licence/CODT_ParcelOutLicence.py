@@ -49,19 +49,38 @@ schema = Schema((
             allow_browse=0,
             show_indexes=1,
             show_index_selector=1,
-            available_indexes={'Title':'Nom'},
+            available_indexes={'Title': 'Nom'},
             base_query='geometriciansBaseQuery',
             wild_card_search=True,
             show_results_without_query=True,
             label=_('urban_label_geometricians', default='Geometricians'),
         ),
-        required=True,
-        schemata='urban_description',
+        required=False,
         multiValued=1,
         relationship='parcelOutGeometricians',
         allowed_types=('Geometrician',),
     ),
-
+    ReferenceField(
+        name='representativeContacts',
+        widget=ReferenceBrowserWidget(
+            force_close_on_insert=1,
+            allow_search=1,
+            only_for_review_states='enabled',
+            allow_browse=0,
+            show_indexes=1,
+            available_indexes={'Title': 'Nom'},
+            startup_directory='urban',
+            wild_card_search=True,
+            show_results_without_query=True,
+            restrict_browsing_to_startup_directory=False,
+            label=_('urban_label_representative_contacts', default='RepresentativeContacts'),
+        ),
+        required=True,
+        schemata='urban_description',
+        multiValued=1,
+        relationship='parcelOutRepresentativeContacts',
+        allowed_types=('Geometrician', 'Architect',),
+    )
 ),
 )
 
@@ -108,7 +127,14 @@ class CODT_ParcelOutLicence(BaseFolder, CODT_BaseBuildLicence, BrowserDefaultMix
     def getRepresentatives(self):
         """
         """
-        return self.getGeometricians()
+        return self.getRepresentativeContacts()
+
+    # Backward compatibility for pod template
+    security.declarePublic('getGeometricians')
+    def getGeometricians(self):
+        """
+        """
+        return self.getRepresentativeContacts()
 
     security.declarePublic('generateReference')
     def generateReference(self):
@@ -192,7 +218,7 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     """
     schema.moveField('isModification', after='folderCategory')
     schema.moveField('description', after='impactStudy')
-    schema.moveField('geometricians', after='workLocations')
+    schema.moveField('representativeContacts', after='workLocations')
     return schema
 
 finalizeSchema(CODT_ParcelOutLicence_schema)

@@ -149,6 +149,7 @@ class TestBuildLicenceFields(SchemaFieldsTestCase):
         default_password = self.layer.default_password
         login(self.portal, default_user)
         self.licences = []
+        self.codtparceloutlicences = []
         for content_type in ['BuildLicence', 'ParcelOutLicence']:
             licence_folder = utils.getLicenceFolder(content_type)
             testlicence_id = 'test_{}'.format(content_type.lower())
@@ -156,6 +157,14 @@ class TestBuildLicenceFields(SchemaFieldsTestCase):
             transaction.commit()
             test_licence = getattr(licence_folder, testlicence_id)
             self.licences.append(test_licence)
+        for content_type in ['CODT_ParcelOutLicence']:
+            licence_folder = utils.getLicenceFolder(content_type)
+            testlicence_id = 'test_{}'.format(content_type.lower())
+            licence_folder.invokeFactory(content_type, id=testlicence_id)
+            transaction.commit()
+            test_licence = getattr(licence_folder, testlicence_id)
+            self.codtparceloutlicences.append(test_licence)
+        self.test_codtparceloutlicence = self.codtparceloutlicences[0]
         self.test_buildlicence = self.licences[0]
         self.licence = self.test_buildlicence
 
@@ -166,6 +175,8 @@ class TestBuildLicenceFields(SchemaFieldsTestCase):
         with api.env.adopt_roles(['Manager']):
             for licence in self.licences:
                 api.content.delete(licence)
+            for codtparceloutlicences in self.codtparceloutlicences:
+                api.content.delete(codtparceloutlicences)
         transaction.commit()
 
     def test_has_attribute_workType(self):
@@ -260,3 +271,12 @@ class TestBuildLicenceFields(SchemaFieldsTestCase):
     def test_pebDetails_is_visible(self):
         msg = "field 'pebDetails' not visible on BuildLicence"
         self._is_field_visible("<span>Détails concernant le PEB</span>:", msg=msg)
+
+    def test_has_attribute_representativeContacts(self):
+        field_name = 'representativeContacts'
+        msg = "field '{}' not on class CODT ParcelOutLicence".format(field_name)
+        self.assertTrue(self.test_codtparceloutlicence.getField('representativeContacts'), msg)
+
+    def test_representativeContacts_is_visible(self):
+        msg = "field 'representativeContacts' not visible on CODT ParcelOutLicence"
+        self._is_field_visible("<legend>Représentant(s)</legend>", obj= self.test_codtparceloutlicence, msg=msg)
