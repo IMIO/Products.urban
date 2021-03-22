@@ -89,7 +89,8 @@ class UrbanBase(object):
            Return the list of proprietaries for the Licence
         """
         proprietaries = [pro for pro in self.objectValues('Applicant')
-                         if pro.portal_type == 'Proprietary']
+                         if pro.portal_type == 'Proprietary'
+                         and api.content.get_state(pro) == 'enabled']
         corporations = self.getCorporationsProprietary()
         proprietaries.extend(corporations)
         return proprietaries
