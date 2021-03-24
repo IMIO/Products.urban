@@ -15,12 +15,13 @@ class UrbanDocGenerationView(PersistentDocumentGenerationView):
     """
     """
 
-    def __call__(self, template_uid='', output_format=''):
+    def __call__(self, template_uid='', output_format='', generated_doc_title=''):
         """
         Override the call to:
          - mark the document with IUrbanDoc interface
          - return the url of the generated doc (to open it in external edit)
         """
+        self.generated_doc_title = generated_doc_title
         self.pod_template, self.output_format = self._get_base_args(template_uid, output_format)
 
         persisted_doc = self.generate_persistent_doc(self.pod_template, self.output_format)
@@ -121,7 +122,9 @@ class UrbanMailingLoopGenerationView(MailingLoopPersistentDocumentGenerationView
             return super(UrbanMailingLoopGenerationView, self).__call__(document_uid, document_url_path)
         else:
             try:
-                return super(UrbanMailingLoopGenerationView, self).__call__(document_uid, document_url_path)
+                template = api.content.get(path='/{}'.format(document_url_path))
+                generated_doc_title = template.Title()
+                return super(UrbanMailingLoopGenerationView, self).__call__(document_uid, document_url_path, generated_doc_title)
             except MailingTooBigException:
                 document_uid = document_uid or self.request.get('document_uid', '')
                 document_url_path = document_url_path or self.request.get('document_url_path', '')

@@ -5,6 +5,10 @@ Changes
 2.5 (unreleased)
 ----------------
 
+
+- Update MailingPersistentDocumentGenerationView call with generated_doc_title param. [URB-1862]
+  [jjaumotte]
+
 - Fix 0 values Bis & Puissance format for get_parcels [SUP-16626]
   [jjaumotte]
 
@@ -106,7 +110,6 @@ Changes
 
 - Complete codt buildlicence config with 'college repport' event. [URB-2074]
   [sdelcourt]
-
 
 2.4 (2019-03-25)
 ----------------
