@@ -190,13 +190,9 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
                     toreturn += 'section %s ' % portionOutObj.getSection()
             toreturn += ' %s' % portionOutObj.getRadical()
             if portionOutObj.getBis() != '':
-                if portionOutObj.getBis() != '0':
-                    toreturn += '/%s' % portionOutObj.getBis()
-                else:
-                    toreturn += ' '
+                toreturn += '/%s' % portionOutObj.getBis()
             toreturn += portionOutObj.getExposant()
-            if portionOutObj.getPuissance() != '' and portionOutObj.getPuissance() != '0':
-                    toreturn += ' %s' %portionOutObj.getPuissance()
+            toreturn += portionOutObj.getPuissance()
             isFirst = False
         return toreturn
 
