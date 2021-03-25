@@ -443,12 +443,13 @@ schema = Schema((
         vocabulary_factory='urban.vocabulary.Natura2000',
         default_method='getDefaultValue',
     ),
-    StringField(
+    LinesField(
         name='floodingLevel',
-        widget=SelectionWidget(
+        widget=MultiSelectionWidget(
+            format='checkbox',
             label=_('urban_label_floodingLevel', default='Floodinglevel'),
         ),
-        enforceVocabulary=True,
+        multiValued=True,
         schemata='urban_road',
         vocabulary='listFloodingLevels',
     ),
@@ -620,13 +621,14 @@ schema = Schema((
         schemata='urban_location',
         default_output_type='text/html',
     ),
-    StringField(
+    LinesField(
         name='locationFloodingLevel',
-        widget=SelectionWidget(
+        widget=MultiSelectionWidget(
+            format='checkbox',
             label=_('urban_label_locationFloodingLevel',
                     default='Locationfloodinglevel'),
         ),
-        enforceVocabulary=True,
+        multiValued=True,
         schemata='urban_location',
         vocabulary='listFloodingLevels',
     ),
@@ -1171,12 +1173,13 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
           flooding levels : no risk, low risk, moderated risk, high risk
         """
         vocab = (
-            #we add an empty vocab value of type "choose a value"
-            ('',  translate(_(EMPTY_VOCAB_VALUE), context=self.REQUEST)),
             ('no', translate(_('flooding_level_no'), context=self.REQUEST)),
             ('very low', translate(_('flooding_level_verylow'), context=self.REQUEST)),
             ('low', translate(_('flooding_level_low'), context=self.REQUEST)),
+            ('low_to_moderate', translate(_('flooding_level_low_to_moderate'), context=self.REQUEST)),
+            ('low_to_high', translate(_('flooding_level_low_to_high'), context=self.REQUEST)),
             ('moderate', translate(_('flooding_level_moderate'), context=self.REQUEST)),
+            ('moderate_to_high', translate(_('flooding_level_moderate_to_high'), context=self.REQUEST)),
             ('high', translate(_('flooding_level_high'), context=self.REQUEST)),
         )
 

@@ -14,6 +14,7 @@ from Products.contentmigration.archetypes import InplaceATFolderMigrator
 from Products.urban import services
 from Products.urban.config import URBAN_TYPES
 from Products.urban.config import LICENCE_FINAL_STATES
+from Products.urban.interfaces import IGenericLicence
 from Products.urban.migration.to_DX.migration_utils import clean_obsolete_portal_type
 from Products.urban.setuphandlers import setFolderAllowedTypes
 from Products.urban.utils import getLicenceFolderId
@@ -294,6 +295,23 @@ def migrate_inquiry_investigationStart_date(context):
             logger.info("migrated inquiry config {}".format(eventtype))
     logger.info("migration step done!")
 
+def migrate_flooding_level(context):
+    """
+    Migrate old text single value to tuple for multiselection for floodingLevel and locationFloodingLevel
+    """
+    logger = logging.getLogger('migrate flooding level to tuple type')
+    logger.info("starting migration step")
+    cat = api.portal.get_tool('portal_catalog')
+    licence_brains = cat(object_provides=IGenericLicence.__identifier__)
+    licences = [lic.getObject() for lic in licence_brains]
+    for licence in licences:
+        if licence.floodingLevel and isinstance(licence.floodingLevel, basestring):
+            licence.setFloodingLevel((licence.floodingLevel,))
+        if licence.locationFloodingLevel and isinstance(licence.locationFloodingLevel, basestring):
+            licence.setLocationFloodingLevel((licence.locationFloodingLevel,))
+
+    logger.info("migration step done!")
+
 
 def migrate_announcement_schedule_config(context):
     """
@@ -359,6 +377,7 @@ def migrate(context):
     migrate_disable_natura2000_folderzone(context)
     migrate_announcement_schedule_config(context)
     migrate_styles_pod_templates(context)
+    migrate_flooding_level(context)
     catalog = api.portal.get_tool('portal_catalog')
     catalog.clearFindAndRebuild()
     logger.info("migration done!")
