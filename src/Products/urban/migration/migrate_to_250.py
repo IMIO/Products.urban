@@ -281,6 +281,7 @@ def migrate_inquiry_investigationStart_date(context):
             logger.info("migrated inquiry config {}".format(eventtype))
     logger.info("migration step done!")
 
+
 def migrate_flooding_level(context):
     """
     Migrate old text single value to tuple for multiselection for floodingLevel and locationFloodingLevel
@@ -295,6 +296,26 @@ def migrate_flooding_level(context):
             licence.setFloodingLevel((licence.floodingLevel,))
         if licence.locationFloodingLevel and isinstance(licence.locationFloodingLevel, basestring):
             licence.setLocationFloodingLevel((licence.locationFloodingLevel,))
+
+    logger.info("migration step done!")
+
+
+def migrate_move_codt_parceloutlicence_geometricians_to_representative_contacts(context):
+    """
+    """
+    logger = logging.getLogger('urban: migrate migrate_move_codt_parceloutlicence_geometricians_to_representative_contacts')
+    logger.info("starting migration step")
+    catalog = api.portal.get_tool('portal_catalog')
+    licence_brains = catalog(portal_type='CODT_ParcelOutLicence')
+    licences = [li.getObject() for li in licence_brains]
+    for licence in licences:
+        geometricians = licence.getField('geometricians')
+        if geometricians:
+            for geometrician in geometricians.get(licence):
+                rc_list = licence.getRepresentativeContacts()
+                rc_list.append(geometrician)
+                licence.setRepresentativeContacts(rc_list)
+                licence.setGeometricians([])
 
     logger.info("migration step done!")
 
@@ -320,6 +341,7 @@ def migrate(context):
     migrate_remove_prov_in_folderroadtypes(context)
     migrate_disable_natura2000_folderzone(context)
     migrate_flooding_level(context)
+    migrate_move_codt_parceloutlicence_geometricians_to_representative_contacts(context)
     catalog = api.portal.get_tool('portal_catalog')
     catalog.clearFindAndRebuild()
     logger.info("migration done!")

@@ -93,6 +93,9 @@ Changes
 - Refactor key date display to include urban event custom titles. [SUP-13982]
   [sdelcourt]
 
+- Add CODT ParlcelOutLicence reference field reprensentativeContacts + tests [URB-2075]
+  [jjaumotte]
+
 - Licences can created as a copy of another licence (fields, applicants and parcels can be copied). [URB-1934]
   [sdelcourt]
 
