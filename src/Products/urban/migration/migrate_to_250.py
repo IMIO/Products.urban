@@ -527,6 +527,26 @@ def fix_missing_streets(context):
                 logger.info('fixed street licence {}'.format(licence))
 
 
+def migrate_move_codt_parceloutlicence_geometricians_to_representative_contacts(context):
+    """
+    """
+    logger = logging.getLogger('urban: migrate migrate_move_codt_parceloutlicence_geometricians_to_representative_contacts')
+    logger.info("starting migration step")
+    catalog = api.portal.get_tool('portal_catalog')
+    licence_brains = catalog(portal_type='CODT_ParcelOutLicence')
+    licences = [li.getObject() for li in licence_brains]
+    for licence in licences:
+        geometricians = licence.getField('geometricians')
+        if geometricians:
+            for geometrician in geometricians.get(licence):
+                rc_list = licence.getRepresentativeContacts()
+                rc_list.append(geometrician)
+                licence.setRepresentativeContacts(rc_list)
+                licence.setGeometricians([])
+
+    logger.info("migration step done!")
+
+
 def migrate(context):
     logger = logging.getLogger('urban: migrate to 2.5')
     logger.info("starting migration steps")
@@ -562,6 +582,7 @@ def migrate(context):
     migrate_rich_texts(context)
     # Clearing iconified actions MUST be juste before the catalog reindex!!!
     clear_communesplone_iconifiedactions_layer(context)
+    migrate_move_codt_parceloutlicence_geometricians_to_representative_contacts(context)
     catalog = api.portal.get_tool('portal_catalog')
     catalog.clearFindAndRebuild()
     logger.info("catalog rebuilt!")
