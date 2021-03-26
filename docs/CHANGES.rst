@@ -124,8 +124,6 @@ Changes
   [sdelcourt]
 
 
-=======
->>>>>>> master
 2.4 (2019-03-25)
 ----------------
 - add tax field in GenericLicence
