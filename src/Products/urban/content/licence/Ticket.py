@@ -165,7 +165,7 @@ class Ticket(BaseFolder, GenericLicence, BrowserDefaultMixin):
            Update the title to clearly identify the licence
         """
         if self.getWorkLocations():
-            worklocations = self.getWorkLocationSignaletic()
+            worklocations = self.getWorkLocationSignaletic().split('  et ')[0]
         else:
             worklocations = translate('no_address_defined', 'urban', context=self.REQUEST).encode('utf8')
         title = "{}{} - {} - {}".format(
