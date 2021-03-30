@@ -12,6 +12,7 @@ from plone.memoize.request import cache
 
 from Products.CMFCore.WorkflowCore import WorkflowException
 
+from Products.urban.interfaces import ICODT_IntegratedLicence
 from Products.urban.interfaces import ICODT_UniqueLicence
 from Products.urban.interfaces import IEnvironmentBase
 from Products.urban.interfaces import IIntegratedLicence
@@ -45,7 +46,10 @@ class LocalRoleAdapter(object):
         self.licence = self.context
 
     def get_allowed_groups(self, licence):
-        if IUniqueLicence.providedBy(licence) or ICODT_UniqueLicence.providedBy(licence) or IIntegratedLicence.providedBy(licence):
+        if IUniqueLicence.providedBy(licence) or\
+           ICODT_UniqueLicence.providedBy(licence) or \
+           IIntegratedLicence.providedBy(licence) or \
+           ICODT_IntegratedLicence.providedBy(licence):
             return 'urban_and_environment'
         elif IEnvironmentBase.providedBy(licence):
             return 'environment_only'
