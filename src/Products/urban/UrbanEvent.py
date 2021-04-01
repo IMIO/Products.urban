@@ -747,6 +747,10 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
             res = getattr(tool.externaldecisions, res)
         return res
 
+    def get_state(self):
+        state = api.content.get_state(self)
+        return state
+
 
 registerType(UrbanEvent, PROJECTNAME)
 # end of class UrbanEvent
