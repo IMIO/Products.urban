@@ -340,7 +340,7 @@ def inspection_task_followups(task):
                                    in licence.getCurrentFollowUpEvents()
                                    if evt.get_state() == 'closed']
     active_follow_ups = [fol for fol in follow_ups if fol not in closed_follow_up_events_ids]
-    return follow_ups
+    return active_follow_ups
 
 
 @indexer(IAutomatedTask)
