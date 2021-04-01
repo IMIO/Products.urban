@@ -2,7 +2,7 @@
     i18n:domain="urban"
     tal:condition="view/available">
     <dt class="portletHeader"
-        tal:define="category view/category">
+        tal:define="category view/category;collection_link_UID view/collection_link_UID">
         <span class="portletTopLeft"></span>
         <tal:if condition="python: category == 'CWATUPE'">
         <a href="#"
@@ -14,7 +14,7 @@
         <tal:if condition="not: python: category == 'CWATUPE'">
         <a href="#"
            class="tile"
-           tal:attributes="href string: ${view/url}/urban?category=CWATUPE"
+           tal:attributes="href string: ${view/url}/urban?category=CWATUPE#c11=cwatupe&amp;c2=${collection_link_UID}"
            i18n:translate="">
            To CWATUPE procedures</a>
         </tal:if>
