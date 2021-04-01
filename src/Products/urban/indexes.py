@@ -86,8 +86,8 @@ def inspection_applicantinfoindex(object):
     Return the informations to index about the applicants
     """
     applicants_info = []
-    contacts = object.getApplicants() + object.getProprietaries() \
-               + object.getPlaintiffs() + object.getTenants()
+    contacts = object.getApplicants() + object.getProprietaries() +\
+               object.getPlaintiffs() + object.getTenants()
     for applicant in contacts:
         applicants_info.extend(_get_applicantsinfoindex(applicant))
     return list(set(applicants_info))
@@ -336,6 +336,10 @@ def inspection_task_followups(task):
         return []
     last_report = licence.getLastReportEvent()
     follow_ups = last_report and last_report.getFollowup_proposition() or []
+    closed_follow_up_events_ids = [evt.getUrbaneventtypes().id for evt
+                                   in licence.getCurrentFollowUpEvents()
+                                   if evt.get_state() == 'closed']
+    active_follow_ups = [fol for fol in follow_ups if fol not in closed_follow_up_events_ids]
     return follow_ups
 
 
