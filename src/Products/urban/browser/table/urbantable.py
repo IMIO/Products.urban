@@ -168,6 +168,7 @@ class ClaimantsTable(ContactTable):
     """
     implements(interfaces.IClaimantsTable)
 
+    cssClasses = {'table': 'listing largetable'}
     batchSize = 9999
 
 
@@ -175,7 +176,7 @@ class RecipientsCadastreTable(UrbanTable, SequenceTable):
     """  """
     implements(interfaces.IRecipientsCadastreTable)
 
-    cssClasses = {'table': 'listing nosort largetable'}
+    cssClasses = {'table': 'listing largetable'}
     batchStart = 0
     batchSize = 9999
     startBatchingAt = 9999
