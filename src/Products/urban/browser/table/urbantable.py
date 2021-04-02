@@ -74,7 +74,7 @@ class ParcellingsTable(FolderContentTable):
     """ Table used to display parcellings"""
     implements(interfaces.IParcellingsTable)
 
-    cssClasses = {'table': 'listing nosort largetable'}
+    cssClasses = {'table': 'listing largetable'}
     batchSize = 20
 
 
@@ -84,7 +84,7 @@ class ContactTable(UrbanTable):
     implements(interfaces.IContactTable)
 
     sortOn = None
-    cssClasses = {'table': 'listing nosort largetable'}
+    cssClasses = {'table': 'listing largetable'}
 
 
 class ApplicantTable(ContactTable):
@@ -92,7 +92,7 @@ class ApplicantTable(ContactTable):
     """
     implements(interfaces.IApplicantTable)
 
-    cssClasses = {'table': 'listing nosort largetable'}
+    cssClasses = {'table': 'listing largetable'}
 
 
 class ApplicantHistoryTable(ContactTable):
@@ -108,7 +108,7 @@ class ProprietaryTable(ContactTable):
     """
     implements(interfaces.IProprietaryTable)
 
-    cssClasses = {'table': 'listing nosort largetable'}
+    cssClasses = {'table': 'listing largetable'}
 
 
 class TenantTable(ContactTable):
@@ -187,7 +187,7 @@ class ParcelsTable(UrbanTable, SequenceTable):
     """
     implements(interfaces.IParcelsTable)
 
-    cssClasses = {'table': 'listing nosort largetable'}
+    cssClasses = {'table': 'listing largetable'}
     batchStart = 0
     batchSize = 999
     startBatchingAt = 999
@@ -199,7 +199,7 @@ class EventsTable(UrbanTable, SequenceTable):
     implements(interfaces.IEventsTable)
 
     sortOn = 'table-eventdateColumn-1'
-    cssClasses = {'table': 'listing nosort largetable'}
+    cssClasses = {'table': 'listing largetable'}
     batchSize = 999
 
 
@@ -219,7 +219,7 @@ class AttachmentsTable(UrbanTable, SequenceTable):
     implements(interfaces.IAttachmentsTable)
 
     sortOn = 'table-creationdateColumn-1'
-    cssClasses = {'table': 'listing nosort largetable'}
+    cssClasses = {'table': 'listing largetable'}
     batchSize = 9999
     startBatchingAt = 9999
 
@@ -231,7 +231,7 @@ class NestedAttachmentsTable(UrbanTable, SequenceTable):
     implements(interfaces.INestedAttachmentsTable)
 
     sortOn = 'table-creationdateColumn-1'
-    cssClasses = {'table': 'listing nosort largetable'}
+    cssClasses = {'table': 'listing largetable'}
     batchSize = 9999
     startBatchingAt = 9999
 
