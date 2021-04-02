@@ -5,6 +5,8 @@ Changes
 2.5 (unreleased)
 ----------------
 
+- Fix RecipientCadastre and Claimants table sort. [URB-1224] [SUP-6535]
+  [jjaumotte]
 
 - Update MailingPersistentDocumentGenerationView call with generated_doc_title param. [URB-1862]
   [jjaumotte]
