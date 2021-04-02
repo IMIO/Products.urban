@@ -277,6 +277,11 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
         for country_obj in country_folder.objectValues():
             country_mapping[country_obj.Title()] = country_obj.id
 
+        claim_type_mapping = {
+            'Écrite': 'writedClaim',
+            'Orale': 'oralClaim',
+        }
+
         claimants_file = interfaces.IAnnotations(self.context)['urban.claimants_to_import']
         if claimants_file:
             reader = csv.DictReader(
@@ -289,7 +294,7 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
             claimant_arg.pop(None, None)
             # default values
             if not claimant_arg['claimType']:
-                claimant_arg['claimType'] = 'writedClaim'
+                claimant_arg['claimType'] = 'Écrite'
             if not claimant_arg['hasPetition']:
                 claimant_arg['hasPetition'] = False
             if not claimant_arg['outOfTime']:
@@ -300,6 +305,7 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
             claimant_arg['id'] = site.plone_utils.normalizeString(
                 claimant_arg['name1'] + claimant_arg['name2'] + claimant_arg['society']
             )
+            claimant_arg['claimType'] = claim_type_mapping[claimant_arg['claimType']]
             count = 0
             if claimant_arg['id'] in self.context.objectIds():
                 count += 1
