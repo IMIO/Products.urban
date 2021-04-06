@@ -237,8 +237,7 @@ class IUrbanEventOpinionRequest(Interface):
 
 
 class IUrbanEventFollowUp(Interface):
-    """Marker interface for .UrbanEventFollowUp.UrbanEventFollowUp
-    """
+    __doc__ = _("""IUrbanEventFollowUp type marker interface""")
 
 
 class IOrganisationTerm(Interface):
