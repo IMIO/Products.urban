@@ -53,7 +53,7 @@
    <permission-role>Owner</permission-role>
   </permission-map>
   <permission-map name="View"
-                  acquired="False">
+                  acquired="True">
    <permission-role>Reader</permission-role>
    <permission-role>Manager</permission-role>
    <permission-role>Contributor</permission-role>
@@ -103,7 +103,7 @@
    <permission-role>Owner</permission-role>
   </permission-map>
   <permission-map name="View"
-                  acquired="False">
+                  acquired="True">
    <permission-role>Manager</permission-role>
    <permission-role>Contributor</permission-role>
    <permission-role>Reader</permission-role>
