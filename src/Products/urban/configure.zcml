@@ -249,6 +249,10 @@
     type=".interfaces.IEventTypeType"/>
 
   <interface
+    interface=".interfaces.IUrbanEventFollowUp"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
     interface=".interfaces.IUrbanEventFollowUpWithDelay"
     type=".interfaces.IEventTypeType"/>
 
