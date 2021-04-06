@@ -38,7 +38,10 @@ def updateEventType(event_config, event):
             # clean previous event type interface
             for provided_interface in providedBy(urban_event).flattened():
                 if interfaces.IEventTypeType.providedBy(provided_interface):
-                    noLongerProvides(urban_event, provided_interface)
+                    try:
+                        noLongerProvides(urban_event, provided_interface)
+                    except:
+                        pass
             # add new provided interface
             setEventType(urban_event, event)
 
