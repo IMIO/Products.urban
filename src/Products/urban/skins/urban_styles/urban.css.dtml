@@ -15,7 +15,12 @@ line-height: 1.5em;
 }
 
 /* Colors on states */
-.state-in_progress {
+.state-in_progress,
+.state-draft,
+.state-decision_in_progress,
+.state-creation,
+.state-waiting_opinion,
+.state-opinion_validation {
 color: #EA6619 !important;
 }
 
