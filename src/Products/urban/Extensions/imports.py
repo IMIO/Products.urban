@@ -4,7 +4,8 @@ from AccessControl import Unauthorized
 from Acquisition import aq_base
 from DateTime import DateTime
 
-from Products.urban.services import bestaddress
+from Products.urban.config import ExternalConfig
+from Products.urban.services.bestaddress import BestaddressService
 
 from zExceptions import BadRequest
 
@@ -218,7 +219,10 @@ def import_streets_fromdb(self, cityName=''):
     ret = load_existing_streets(self, ex_streets)
     out += ret
 
+    config_bestaddress = ExternalConfig('bestaddress')
+    bestaddress = BestaddressService(**(config_bestaddress.bestaddress))
     results = bestaddress.query_streets(cityName)
+    bestaddress.engine.dispose()
     if not results:
         return "No record found for city name '%s', maybe mispelled ?" % cityName
     numberOfRecords = len(results)
