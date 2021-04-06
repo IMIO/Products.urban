@@ -6,7 +6,6 @@ from Products.urban.services.parcel_coring import ParcelCoringService
 
 try:
     config_cadastre = ExternalConfig('cadastre')
-    config_bestaddress = ExternalConfig('bestaddress')
     config_parcel_coring = ExternalConfig('parcel_coring')
 except:
     config = {}
