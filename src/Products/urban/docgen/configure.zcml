@@ -49,14 +49,6 @@
         />
 
     <adapter
-        for="Products.urban.interfaces.IGenericLicence
-            zope.interface.Interface"
-        provides="collective.documentgenerator.interfaces.IDisplayProxyObject"
-        factory=".helper_view.LicenceDisplayProxyObject"
-        permission="zope2.View"
-    />
-
-    <adapter
         for="Products.urban.interfaces.IUrbanEvent
            zope.interface.Interface"
         provides="collective.documentgenerator.interfaces.IDisplayProxyObject"

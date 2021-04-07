@@ -6,6 +6,9 @@ from collective.documentgenerator.helper.archetypes import ATDocumentGenerationH
 from datetime import date as _date
 from dateutil.relativedelta import relativedelta
 
+from plone.dexterity.interfaces import IDexterityContent
+
+from Products.Archetypes.interfaces import IBaseObject
 from Products.CMFPlone.i18nl10n import ulocalized_time
 from Products.CMFCore.utils import getToolByName
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
@@ -24,6 +27,32 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
     """
     Urban implementation of document generation helper methods.
     """
+
+    def __getattr__(self, attr_name):
+        """
+        Delegate field attribute access to display() method.
+        """
+        attr = self.context.__getattr__(attr_name)
+        if callable(attr):
+            def proxy_method(*args, **kwargs):
+                result = getattr(self.context, attr_name)(*args, **kwargs)
+                if IBaseObject.providedBy(result) or IDexterityContent.providedBy(result):
+                    result_helper = result.restrictedTraverse('document_generation_helper_view')
+                    result_helper.appy_renderer = self.appy_renderer
+                    return result_helper
+                elif type(result) in [list, set]:
+                    new_result = []
+                    for element in result:
+                        if IBaseObject.providedBy(element) or IDexterityContent.providedBy(element):
+                            element_helper = element.restrictedTraverse('document_generation_helper_view')
+                            new_result.append(element_helper)
+                        else:
+                            new_result.append(element)
+                    return new_result
+                return result
+            return proxy_method
+        return attr
+
 
     def __init__(self, context, request):
         super(UrbanDocGenerationHelperView, self).__init__(context, request)
@@ -118,6 +147,22 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
         else:
             return "%s %s %s" % (translatedDay, translatedMonth, year)
         return ''
+
+    def listVocTerms(self, field):
+        """
+        Deprecated/backward compatibility only
+        See voc_terms
+        """
+        context = self.real_context
+        field = context.getField(field)
+        keys = type(field.getRaw(context)) in (list, tuple) and field.getRaw(context) or [field.getRaw(context)]
+        objs = [field.vocabulary.getAllVocTerms(context).get(key, None) for key in keys]
+        return objs
+
+
+class UrbanDocGenerationLicenceHelperView(UrbanDocGenerationHelperView):
+    """
+    """
 
     def get_checked_specific_features_id_list(self):
         """
@@ -284,47 +329,6 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
                 proprietary['city']
         return proprietary_names_and_address
 
-    def get_related_licences_of_parcel(self):
-        """
-          Returns the licences related to a parcel
-        """
-        context = self.context
-        parcels = context.getParcels()
-        relatedLicences = []
-        for parcel in parcels:
-            parcelRecordsView = context.restrictedTraverse('parcelrecordsview')
-            parcelRecordsView.parcel_id = parcel.id
-            relatedLicences += parcelRecordsView.get_related_licences_of_parcel()
-        return relatedLicences
-
-    def get_related_licences_titles_of_parcel(self):
-        """
-          Returns the titles of licences related to a parcel
-        """
-        relatedLicencesTitles = []
-        for relatedLicence in self.get_related_licences_of_parcel():
-            relatedLicencesTitles.append(relatedLicence['title'].decode('utf8'))
-        return relatedLicencesTitles
-
-    def get_specific_features_text(self):
-        """
-        # Particularité(s) du bien
-        """
-        context = self.real_context.aq_parent
-        specificFeatures = context.getSpecificFeatures()
-        specific_features_text = []
-        tool = getToolByName(self, 'portal_urban')
-        for specificFeature in specificFeatures:
-            if specificFeature['check']:
-                if specificFeature['text']:
-                    specific_feature_text = tool.renderText(text=specificFeature['text'], context=context)
-                    specific_features_text.append(specific_feature_text)
-            else:
-                if specificFeature['defaultText']:
-                    specific_feature_text = tool.renderText(text=specificFeature['defaultText'], context=context)
-                    specific_features_text.append(specific_feature_text)
-        return specific_features_text
-
     def get_subdivisionDetails(self):
         context = self.real_context
         subdivisionDetails = context.getSubdivisionDetails()
@@ -352,6 +356,186 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
         work_location_dict = self._get_street_dict(workLocation['street'])
         work_location_dict.update({'number': workLocation['number']})
         return work_location_dict
+
+    def get_work_locations_list_dict(self):
+        """
+        # Adresse(s) des travaux
+        return a list of work locations informations
+        """
+        context = self.context
+        workLocations = context.getWorkLocations()
+        work_locations_list_dict = []
+        for i in range(len(workLocations)):
+            work_locations_list_dict.append(self.get_work_location_dict(i))
+        return work_locations_list_dict
+
+    def get_work_locations_signaletic(self, separator=', '):
+        """
+        # Adresse(s) des travaux
+        return all street name and number
+        """
+        context = self.context
+        workLocations = context.getWorkLocations()
+        workLocation_signaletic = self.get_work_location_signaletic(workLocations[0])
+        for workLocation in workLocations[1:]:
+            workLocation_signaletic += separator + self.get_work_location_signaletic(workLocation)
+        return workLocation_signaletic
+
+    def get_work_location_signaletic(self, workLocation):
+        """
+        # Adresse(s) des travaux
+        return a street name and number from a specific workLocation
+        """
+        catalog = api.portal.get_tool("uid_catalog")
+        street = catalog(UID=workLocation['street'])[0].getObject()
+        number = workLocation['number']
+        zipCode = street.aq_parent.zipCode
+        locality = street.aq_parent.Title()
+        return "{} {}, {} {}".format(street.getStreetName(), number, zipCode, locality)
+
+    def getPortionOutsText(self, linebyline=False):
+        """
+          Return a displayable version of the parcels
+        """
+        toreturn = ''
+        isFirst = True
+        first_div = None
+        first_section = None
+        for portionOutObj in self.context.getParcels():
+            # add a separator between every parcel
+            # either a '\n'
+            if not isFirst and linebyline:
+                toreturn += '\n'
+            # or an "and "
+            elif not isFirst:
+                toreturn += ', '
+            elif isFirst:
+                first_div = portionOutObj.getDivisionAlternativeName()
+                toreturn += '%s ' % portionOutObj.getDivisionAlternativeName()
+                first_section = portionOutObj.getSection()
+                toreturn += 'section %s' % portionOutObj.getSection()
+                toreturn += ' n° '.decode('utf8')
+            else:
+                if first_div != portionOutObj.getDivisionAlternativeName():
+                    toreturn += '%s ' % portionOutObj.getDivisionAlternativeName()
+                if first_section != portionOutObj.getSection():
+                    toreturn += 'section %s ' % portionOutObj.getSection()
+            toreturn += ' %s' % portionOutObj.getRadical()
+            if portionOutObj.getBis() != '':
+                if portionOutObj.getBis() != '0':
+                    toreturn += '/%s ' % portionOutObj.getBis()
+                else:
+                    toreturn += ' '
+            toreturn += portionOutObj.getExposant()
+            if portionOutObj.getPuissance() != '' and portionOutObj.getPuissance() != '0':
+                toreturn += ' %s' % portionOutObj.getPuissance()
+            isFirst = False
+        return toreturn
+
+    def get_last_opinions_round(self):
+        opinions = self._get_last_opinions('solicitOpinionsTo')
+        return opinions
+
+    def get_last_optional_opinions_round(self):
+        opinions = self._get_last_opinions('solicitOpinionsToOptional')
+        return opinions
+
+    def _get_last_opinions(self, field_name):
+        licence = self.context
+        inquiries = licence._get_inquiry_objs(all_=True)
+        if inquiries:
+            last_inquiry = inquiries[-1]
+            opinions = licence.getValuesForTemplate(field_name, obj=last_inquiry)
+            return opinions
+        return []
+
+    def get_related_licences_of_parcel(self, licence_types=[]):
+        """
+          Returns the licences related to a parcel
+        """
+        context = self.context
+        parcels = context.getParcels()
+        relatedLicences = []
+        licence_uids = set([])
+        for parcel in parcels:
+            for brain in parcel.getRelatedLicences(licence_type=licence_types):
+                if brain.UID not in licence_uids:
+                    relatedLicences.append(brain)
+                    licence_uids.add(brain.UID)
+        return relatedLicences
+
+    def get_related_licences_titles_of_parcel(self):
+        """
+          Returns the titles of licences related to a parcel
+        """
+        relatedLicencesTitles = []
+        for relatedLicence in self.get_related_licences_of_parcel():
+            relatedLicencesTitles.append(relatedLicence.Title.decode('utf8'))
+        return relatedLicencesTitles
+
+    def get_delivered_related_licences(self, limit_date, licence_types=[]):
+        licences = []
+        for brain in self.get_related_licences_of_parcel(licence_types):
+            licence = brain.getObject()
+            delivered = licence.getLastTheLicence()
+            if delivered and (delivered.getDecisionDate() or delivered.getEventDate()) > limit_date:
+                if delivered.getDecision() == 'favorable':
+                    licences.append(licence)
+        return licences
+
+    def get_related_Buildlicences(self):
+        limit_date = DateTime('1977/01/01')
+        return self.get_delivered_related_licences(
+            limit_date,
+            ['BuildLicence', 'CODT_BuildLicence']
+        )
+
+    def get_related_UrbanCertificateOne(self):
+        # cu1 cannot be older than 2 years
+        limit_date = self.getLastTheLicence().getEventDate() - 731
+        return self.get_delivered_related_licences(
+            limit_date,
+            ['UrbanCertificateOne', 'CODT_UrbanCertificateOne'],
+        )
+
+    def get_related_Parceloutlicence(self):
+        limit_date = DateTime('1977/01/01')
+        return self.get_delivered_related_licences(
+            limit_date,
+            ['ParcelOutLicence', 'CODT_ParcelOutLicence'],
+        )
+
+    def get_related_UrbanCertificateTwo(self, date=None):
+        # cu2 cannot be older than 2 years
+        if self.getLastTheLicence():
+            limit_date = self.getLastTheLicence().getEventDate() - 731
+        elif date:
+            limit_date = date - 731
+        else:
+            limit_date = self.getLastDeposit().getEventDate() - 731
+        return self.get_delivered_related_licences(
+            limit_date,
+            ['UrbanCertificateTwo', 'CODT_UrbanCertificateTwo'],
+        )
+
+    def get_specific_features_text(self):
+        """
+        # Particularité(s) du bien
+        """
+        context = self.context
+        specificFeatures = context.getSpecificFeatures()
+        specific_features_text = []
+        tool = getToolByName(self, 'portal_urban')
+        for specificFeature in specificFeatures:
+            if specificFeature['check']:
+                if specificFeature['text']:
+                    specific_feature_text = tool.renderText(text=specificFeature['text'], context=context)
+                    specific_features_text.append(specific_feature_text)
+            else:
+                if specificFeature['defaultText']:
+                    specific_feature_text = tool.renderText(text=specificFeature['defaultText'], context=context)
+                    specific_features_text.append(specific_feature_text)
+        return specific_features_text
 
     def getEvent(self, title=''):
         """
@@ -443,27 +627,6 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
         locations.sort()
         return locations
 
-    def listVocTerms(self, field):
-        """
-        Deprecated/backward compatibility only
-        See voc_terms
-        """
-        context = self.real_context
-        field = context.getField(field)
-        keys = type(field.getRaw(context)) in (list, tuple) and field.getRaw(context) or [field.getRaw(context)]
-        objs = [field.vocabulary.getAllVocTerms(context).get(key, None) for key in keys]
-        return objs
-
-
-class UrbanDocGenerationLicenceHelperView(UrbanDocGenerationHelperView):
-    def get_parcellings(self):
-        """
-        # Lotissement
-        """
-        context = self.real_context
-        parcellings = context.getParcellings()
-        return parcellings.Title()
-
     def get_parcellings_dict(self):
         """
         # Lotissement
@@ -480,6 +643,329 @@ class UrbanDocGenerationLicenceHelperView(UrbanDocGenerationHelperView):
             parcellings_dict['numberOfParcels'] = parcellings.getNumberOfParcels()
             parcellings_dict['changesDescription'] = parcellings.getChangesDescription()
         return parcellings_dict
+
+    def _get_personTitle_dict(self, id):
+        """
+        # Titre
+        """
+        context = self.context
+        urbanConfig = context.getLicenceConfig()
+        personTitle_config = urbanConfig.persons_titles
+        personTitle_dict = {}
+        personTitleTerm = getattr(personTitle_config, id, '')
+        personTitle_dict['title'] = personTitleTerm.Title()
+        personTitle_dict['abbreviation'] = personTitleTerm.getAbbreviation()
+        personTitle_dict['gender'] = personTitleTerm.listGender().getValue(personTitleTerm.getGender())
+        personTitle_dict['multiplicity'] = personTitleTerm.listMultiplicity().getValue(
+            personTitleTerm.getMultiplicity()
+        )
+        personTitle_dict['reverseTitle'] = personTitleTerm.getReverseTitle()
+        return personTitle_dict
+
+    def _get_contact_dict(self, contact):
+        """
+        """
+        contact_dict = {}
+        if contact.getPersonTitle():
+            contact_dict['personTitle'] = self._get_personTitle_dict(contact.getPersonTitle())['title']
+            contact_dict['abbreviation'] = self._get_personTitle_dict(contact.getPersonTitle())['abbreviation']
+            contact_dict['gender'] = self._get_personTitle_dict(contact.getPersonTitle())['gender']
+            contact_dict['multiplicity'] = self._get_personTitle_dict(contact.getPersonTitle())['multiplicity']
+            contact_dict['reverseTitle'] = self._get_personTitle_dict(contact.getPersonTitle())['reverseTitle']
+        contact_dict['name1'] = contact.getName1()
+        contact_dict['name2'] = contact.getName2()
+        contact_dict['society'] = contact.getSociety()
+        contact_dict['street'] = contact.getStreet()
+        contact_dict['number'] = contact.getNumber()
+        contact_dict['zipcode'] = contact.getZipcode()
+        contact_dict['city'] = contact.getCity()
+        contact_dict['country'] = contact.getCountry()
+        contact_dict['email'] = contact.getEmail()
+        contact_dict['phone'] = contact.getPhone()
+        contact_dict['gsm'] = contact.getGsm()
+        contact_dict['fax'] = hasattr(contact, 'fax') and contact.getFax() or ''
+        contact_dict['registrationNumber'] = contact.getRegistrationNumber()
+        contact_dict['nationalRegister'] = contact.getNationalRegister()
+        return contact_dict
+
+    def _get_contact(
+            self,
+            contact,
+            resident={
+                'Masculin-Singulier': ' domicilié ',
+                'Masculin-Pluriel': ' domiciliés ',
+                'Féminin-Singulier': ' domiciliée ',
+                'Féminin-Pluriel': ' domiciliées '
+            },
+            reversed_name=False,
+            withaddress=True):
+        """
+        """
+        contact = self._get_contact_dict(contact)
+        contact_names = \
+            contact.get('personTitle', '') + ' ' +\
+            contact['name2'] + ' ' +\
+            contact['name1']
+        reversed_contact_names = \
+            contact.get('personTitle', '') + ' ' +\
+            contact['name1'] + ' ' +\
+            contact['name2']
+        if reversed_name:
+            contact_names = reversed_contact_names
+        if withaddress:
+            gender_multiplicity = contact['gender'] + '-' + contact['multiplicity']
+            gender_multiplicity = gender_multiplicity.encode('utf8')
+            contact_address = \
+                resident[gender_multiplicity] +\
+                contact['street'] + ' ' +\
+                contact['number'] + ' ' +\
+                contact['zipcode'] + ' ' +\
+                contact['city']
+            contact_names += contact_address
+        return contact_names
+
+    def get_architect_dict(self, index):
+        """
+        """
+        context = self.context
+        architects = context.get_architects()
+        result = {}
+        if index < len(architects):
+            architect = architects[index]
+            result = self.get_contact_dict(architect)
+        return result
+
+    def _get_architect(
+            self,
+            architect,
+            resident={
+                'Masculin-Singulier': ' domicilié ',
+                'Masculin-Pluriel': ' domiciliés ',
+                'Féminin-Singulier': ' domiciliée ',
+                'Féminin-Pluriel': ' domiciliées '
+            },
+            reversed_name=False,
+            withaddress=True):
+        result = self._get_contact(architect, resident, reversed_name, withaddress)
+        return result
+
+    def get_architects(
+            self,
+            resident={
+                'Masculin-Singulier': ' domicilié ',
+                'Masculin-Pluriel': ' domiciliés ',
+                'Féminin-Singulier': ' domiciliée ',
+                'Féminin-Pluriel': ' domiciliées '
+            },
+            reversed_name=False,
+            withaddress=True,
+            separator=', '):
+        context = self.context
+        architects = context.getArchitects()
+        result = self._get_architect(architects[0], resident, reversed_name, withaddress)
+        for architect in architects[1:]:
+            result += separator + self._get_architect(architect, resident, reversed_name, withaddress)
+        return result
+
+    def get_current_foldermanager(self):
+        return getCurrentFolderManager()
+
+    def get_foldermanager_dict(self, index):
+        """
+        """
+        context = self.context
+        foldermanagers = context.getFoldermanagers()
+        result = {}
+        if index < len(foldermanagers):
+            foldermanager = foldermanagers[index]
+            result = self.get_contact_dict(foldermanager)
+            result['initials'] = foldermanager.getInitials()
+            result['grade'] = foldermanager.getGrade()
+            result['ploneUserId'] = foldermanager.getPloneUserId()
+            result['manageableLicences'] = foldermanager.getManageableLicences()
+        return result
+
+    def _get_foldermanager(
+            self,
+            foldermanager,
+            resident={
+                'Masculin-Singulier': ' domicilié ',
+                'Masculin-Pluriel': ' domiciliés ',
+                'Féminin-Singulier': ' domiciliée ',
+                'Féminin-Pluriel': ' domiciliées '
+            },
+            reversed_name=False,
+            withaddress=False):
+        result = self._get_contact(foldermanager, resident, reversed_name, withaddress)
+        return result
+
+    def get_foldermanagers(
+            self,
+            resident={
+                'Masculin-Singulier': ' domicilié ',
+                'Masculin-Pluriel': ' domiciliés ',
+                'Féminin-Singulier': ' domiciliée ',
+                'Féminin-Pluriel': ' domiciliées '
+            },
+            reversed_name=False,
+            withaddress=False,
+            separator=', '):
+        context = self.context
+        foldermanagers = context.getFoldermanagers()
+        result = self._get_foldermanager(foldermanagers[0], resident, reversed_name, withaddress)
+        for foldermanager in foldermanagers[1:]:
+            result += separator + self._get_foldermanager(foldermanager, resident, reversed_name, withaddress)
+        return result
+
+    def get_foldermanagers_by_grade(self, grade_id=''):
+        foldermanagers = [fm for fm in self.context.getFoldermanagers() if fm.grade == grade_id]
+        return foldermanagers
+
+    def get_roadEquipments(self):
+        context = self.context
+        roadEquipments = context.getRoadEquipments()
+        result = []
+        folderroadequipments = UrbanVocabulary('folderroadequipments', inUrbanConfig=False)
+        allVocTerms = folderroadequipments.getAllVocTerms(context)
+        for roadEquipment in roadEquipments:
+            road_equipment = allVocTerms[roadEquipment['road_equipment']]
+            road_equipment_details = roadEquipment['road_equipment_details']
+            result.append({'road_equipment': road_equipment.Title(), 'road_equipment_details': road_equipment_details})
+        return result
+
+    def get_parcellings(self):
+        context = self.context
+        parcellings = context.getParcellings()
+        result = parcellings.Title()
+        return result
+
+    def get_applicants_names_and_address(
+            self,
+            applicant_separator=', ',
+            representedBy_separator=' et ',
+            resident={
+                'Masculin-Singulier': ' domicilié ',
+                'Masculin-Pluriel': ' domiciliés ',
+                'Féminin-Singulier': ' domiciliée',
+                'Féminin-Pluriel': ' domiciliées'
+            },
+            represented={
+                'Masculin-Singulier': ' représenté par ',
+                'Masculin-Pluriel': ' représentés par ',
+                'Féminin-Singulier': ' représentée par',
+                'Féminin-Pluriel': ' représentées par'
+            },
+            reversed_name=True):
+        applicants = self.getApplicants()
+        applicants_names_and_address = ""
+        if applicants:
+            applicants_names_and_address = self._get_applicant_names_and_address(
+                applicants[0],
+                resident,
+                represented,
+                reversed_name,
+                representedBy_separator
+            )
+            for applicant in applicants[1:]:
+                applicants_names_and_address += applicant_separator + self._get_applicant_names_and_address(
+                    applicant,
+                    resident,
+                    represented,
+                    reversed_name,
+                    representedBy_separator
+                )
+        return applicants_names_and_address
+
+    def _get_applicant_names_and_address(self, applicant, resident, represented,
+                                         reversed_name, representedBy_separator):
+        applicant_names_and_address = self._get_contact(applicant, resident, reversed_name)
+        if applicant['representedBySociety']:
+            gender_multiplicity = applicant['gender'] + '-' + applicant['multiplicity']
+            applicant_names_and_address += represented[gender_multiplicity] +\
+                self._get_representedBy_names_and_address(applicant, resident, reversed_name, representedBy_separator)
+        return applicant_names_and_address
+
+    def get_applicants_list_dict(self):
+        context = self.context
+        applicants = context.getApplicants()
+        applicants_list_dict = []
+        for i in range(len(applicants)):
+            applicants_list_dict.append(self.get_applicant_dict(i))
+        return applicants_list_dict
+
+    def get_applicant_dict(self, index):
+        context = self.context
+        applicant = context.getApplicants()[index]
+        applicant_dict = self._get_contact_dict(applicant)
+        applicant_dict['representedBySociety'] = applicant.getRepresentedBySociety()
+        applicant_dict['isSameAddressAsWorks'] = applicant.getIsSameAddressAsWorks()
+        applicant_dict['representedBy'] = applicant.getRepresentedBy()
+        return applicant_dict
+
+    def _get_representedBy_names_and_address(self, applicant, resident, reversed_name, representedBy_separator):
+        representedBy_list = self._get_representedBy_list(applicant)
+        representedBy_names_and_address = ""
+        if representedBy_list:
+            representedBy_names_and_address = self._get_contact(
+                representedBy_list[0],
+                resident,
+                reversed_name
+            )
+            for representedBy in representedBy_list[1:]:
+                representedBy_names_and_address += representedBy_separator + self._get_contact(
+                    representedBy,
+                    resident,
+                    reversed_name
+                )
+        return representedBy_names_and_address
+
+    def _get_representedBy_list(self, applicant):
+        representedBy_UIDs = applicant['representedBy']
+        representedBy_list = []
+        for representedBy_UID in representedBy_UIDs:
+            catalog = self.portal.portal_catalog
+            brains = catalog.searchResults(UID=representedBy_UID)
+            representedBy = brains[0].getObject()
+            contact_dict = self._get_contact_dict(representedBy)
+            representedBy_list.append(contact_dict)
+        return representedBy_list
+
+    def get_applicants_names(self, separator=', ', reversed_name=True):
+        context = self.context
+        applicants = context.getApplicants()
+        applicants_names = ""
+        if applicants:
+            applicants_names = self._get_contact(applicants[0], reversed_name=reversed_name, withaddress=False)
+            for applicant in applicants[1:]:
+                applicants_names += separator + self._get_contact(
+                    applicant, reversed_name=reversed_name, withaddress=False
+                )
+        return applicants_names
+
+    def _get_date(self, event, date_name='eventDate', translatemonth=True, long_format=False):
+        if not event:
+            return
+
+        date_field = event.getField(date_name)
+        raw_date = date_field.get(event)
+        if not raw_date:
+            return
+
+        formatted_date = self.helper_view.format_date(raw_date, translatemonth, long_format)
+        return formatted_date
+
+    def get_notification_date(self, date_name='eventDate', translatemonth=True, long_format=False):
+        event = self.context.getLastTheLicence()
+        date = self._get_date(event, date_name, translatemonth, long_format)
+        return date
+
+    def get_solicitOpinions_descriptions(self):
+        context = self.context
+        opinions = context.getUrbanEventOpinionRequests()
+        descriptions = []
+        for opinion in opinions:
+            descriptions.append(opinion.getLinkedOrganisationTerm().Description())
+        return descriptions
 
 
 class UrbanDocGenerationEventHelperView(UrbanDocGenerationHelperView):
@@ -645,567 +1131,6 @@ class UrbanBaseProxyObject(ATDisplayProxyObject):
             if term_value == selected_value:
                 return term
         return None
-
-
-class LicenceDisplayProxyObject(UrbanBaseProxyObject):
-    """
-    """
-
-    def __getattr__(self, attr_name):
-        """
-        Delegate field attribute access to display() method.
-        """
-        if attr_name.startswith('getLast') or attr_name.startswith('getFirst'):
-            def getUrbanEventProxy(*args, **kwargs):
-                urban_event = getattr(self.context, attr_name)(*args, **kwargs)
-                if urban_event:
-                    helper_view = urban_event.restrictedTraverse('document_generation_helper_view')
-                    proxy_event = helper_view.context
-                    return proxy_event
-                else:
-                    class EventNotFound(object):
-                        def __getattribute__(self, attr_name):
-                            return None
-
-                        def __nonzero__(self):
-                            return False
-
-                        def __call__(self):
-                            return None
-
-                    return EventNotFound()
-            return getUrbanEventProxy
-        return super(LicenceDisplayProxyObject, self).__getattr__(attr_name)
-
-    def _get_street_dict(self, uid):
-        street_dict = {}
-        catalog = api.portal.get_tool("uid_catalog")
-        street = catalog(UID=uid)[0].getObject()
-        street_dict['bestAddressKey'] = street.getBestAddressKey()
-        street_dict['streetCode'] = street.getStreetCode()
-        street_dict['streetName'] = street.getStreetName()
-        street_dict['startDate'] = street.getStartDate()
-        street_dict['endDate'] = street.getEndDate()
-        street_dict['regionalRoad'] = street.getRegionalRoad()
-        return street_dict
-
-    def get_work_location_dict(self, index):
-        """
-        # Adresse(s) des travaux
-        return a dictionary containing specific work locations informations
-        """
-        context = self.context
-        view = context.restrictedTraverse('document_generation_helper_view')
-        work_location_dict = view.get_work_location_dict(index)
-        return work_location_dict
-
-    def get_work_location_signaletic(self, workLocation):
-        """
-        # Adresse(s) des travaux
-        return a street name and number from a specific workLocation
-        """
-        catalog = api.portal.get_tool("uid_catalog")
-        street = catalog(UID=workLocation['street'])[0].getObject()
-        number = workLocation['number']
-        zipCode = street.aq_parent.zipCode
-        locality = street.aq_parent.Title()
-        return "{} {}, {} {}".format(street.getStreetName(), number, zipCode, locality)
-
-    def get_work_locations_list_dict(self):
-        """
-        # Adresse(s) des travaux
-        return a list of work locations informations
-        """
-        context = self.context
-        workLocations = context.getWorkLocations()
-        work_locations_list_dict = []
-        for i in range(len(workLocations)):
-            work_locations_list_dict.append(self.get_work_location_dict(i))
-        return work_locations_list_dict
-
-    def get_work_locations_signaletic(self, separator=', '):
-        """
-        # Adresse(s) des travaux
-        return all street name and number
-        """
-        context = self.context
-        workLocations = context.getWorkLocations()
-        workLocation_signaletic = self.get_work_location_signaletic(workLocations[0])
-        for workLocation in workLocations[1:]:
-            workLocation_signaletic += separator + self.get_work_location_signaletic(workLocation)
-        return workLocation_signaletic
-
-    def getPortionOutsText(self, linebyline=False):
-        """
-          Return a displayable version of the parcels
-        """
-        toreturn = ''
-        isFirst = True
-        first_div = None
-        first_section = None
-        for portionOutObj in self.context.getParcels():
-            #add a separator between every parcel
-            #either a '\n'
-            if not isFirst and linebyline:
-                toreturn += '\n'
-            #or an "and "
-            elif not isFirst:
-                toreturn += ', '
-            elif isFirst:
-                first_div = portionOutObj.getDivisionAlternativeName()
-                toreturn += '%s ' % portionOutObj.getDivisionAlternativeName()
-                first_section = portionOutObj.getSection()
-                toreturn += 'section %s' % portionOutObj.getSection()
-                toreturn += ' n° '.decode('utf8')
-            else:
-                if first_div != portionOutObj.getDivisionAlternativeName():
-                    toreturn += '%s ' % portionOutObj.getDivisionAlternativeName()
-                if first_section != portionOutObj.getSection():
-                    toreturn += 'section %s ' % portionOutObj.getSection()
-            toreturn += ' %s' % portionOutObj.getRadical()
-            if portionOutObj.getBis() != '':
-                if portionOutObj.getBis() != '0':
-                    toreturn += '/%s ' % portionOutObj.getBis()
-                else:
-                    toreturn += ' '
-            toreturn += portionOutObj.getExposant()
-            if portionOutObj.getPuissance() != '' and portionOutObj.getPuissance() != '0':
-                    toreturn += ' %s' %portionOutObj.getPuissance()
-            isFirst = False
-        return toreturn
-
-    def get_last_opinions_round(self):
-        opinions = self._get_last_opinions('solicitOpinionsTo')
-        return opinions
-
-    def get_last_optional_opinions_round(self):
-        opinions = self._get_last_opinions('solicitOpinionsToOptional')
-        return opinions
-
-    def _get_last_opinions(self, field_name):
-        licence = self.context
-        inquiries = licence._get_inquiry_objs(all_=True)
-        if inquiries:
-            last_inquiry = inquiries[-1]
-            opinions = licence.getValuesForTemplate(field_name, obj=last_inquiry)
-            return opinions
-        return []
-
-    def get_related_licences_of_parcel(self, licence_types=[]):
-        """
-          Returns the licences related to a parcel
-        """
-        context = self.context
-        parcels = context.getParcels()
-        relatedLicences = []
-        licence_uids = set([])
-        for parcel in parcels:
-            for brain in parcel.getRelatedLicences(licence_type=licence_types):
-                if brain.UID not in licence_uids:
-                    relatedLicences.append(brain)
-                    licence_uids.add(brain.UID)
-        return relatedLicences
-
-    def get_related_licences_titles_of_parcel(self):
-        """
-          Returns the titles of licences related to a parcel
-        """
-        relatedLicencesTitles = []
-        for relatedLicence in self.get_related_licences_of_parcel():
-            relatedLicencesTitles.append(relatedLicence.Title.decode('utf8'))
-        return relatedLicencesTitles
-
-    def get_delivered_related_licences(self, limit_date, licence_types=[]):
-        licences = []
-        for brain in self.get_related_licences_of_parcel(licence_types):
-            licence = brain.getObject()
-            delivered = licence.getLastTheLicence()
-            if delivered and (delivered.getDecisionDate() or delivered.getEventDate()) > limit_date:
-                if delivered.getDecision() == 'favorable':
-                    licences.append(licence)
-        return licences
-
-    def get_related_Buildlicences(self):
-        limit_date = DateTime('1977/01/01')
-        return self.get_delivered_related_licences(
-            limit_date,
-            ['BuildLicence', 'CODT_BuildLicence']
-        )
-
-    def get_related_UrbanCertificateOne(self):
-        # cu1 cannot be older than 2 years
-        limit_date = self.getLastTheLicence().getEventDate() - 731
-        return self.get_delivered_related_licences(
-            limit_date,
-            ['UrbanCertificateOne', 'CODT_UrbanCertificateOne'],
-        )
-
-    def get_related_Parceloutlicence(self):
-        limit_date = DateTime('1977/01/01')
-        return self.get_delivered_related_licences(
-            limit_date,
-            ['ParcelOutLicence', 'CODT_ParcelOutLicence'],
-        )
-
-    def get_related_UrbanCertificateTwo(self, date=None):
-        # cu2 cannot be older than 2 years
-        if self.getLastTheLicence():
-            limit_date = self.getLastTheLicence().getEventDate() - 731
-        elif date:
-            limit_date = date - 731
-        else:
-            limit_date = self.getLastDeposit().getEventDate() - 731
-        return self.get_delivered_related_licences(
-            limit_date,
-            ['UrbanCertificateTwo', 'CODT_UrbanCertificateTwo'],
-        )
-
-    def get_specific_features_text(self):
-        """
-        # Particularité(s) du bien
-        """
-        context = self.context
-        specificFeatures = context.getSpecificFeatures()
-        specific_features_text = []
-        tool = getToolByName(self, 'portal_urban')
-        for specificFeature in specificFeatures:
-            if specificFeature['check']:
-                if specificFeature['text']:
-                    specific_feature_text = tool.renderText(text=specificFeature['text'], context=context)
-                    specific_features_text.append(specific_feature_text)
-            else:
-                if specificFeature['defaultText']:
-                    specific_feature_text = tool.renderText(text=specificFeature['defaultText'], context=context)
-                    specific_features_text.append(specific_feature_text)
-        return specific_features_text
-
-# Contact(s)
-# ------------------------------------------------------------------------------
-    def _get_personTitle_dict(self, id):
-        """
-        # Titre
-        """
-        context = self.context
-        urbanConfig = context.getLicenceConfig()
-        personTitle_config = urbanConfig.persons_titles
-        personTitle_dict = {}
-        personTitleTerm = getattr(personTitle_config, id, '')
-        personTitle_dict['title'] = personTitleTerm.Title()
-        personTitle_dict['abbreviation'] = personTitleTerm.getAbbreviation()
-        personTitle_dict['gender'] = personTitleTerm.listGender().getValue(personTitleTerm.getGender())
-        personTitle_dict['multiplicity'] = personTitleTerm.listMultiplicity().getValue(personTitleTerm.getMultiplicity())
-        personTitle_dict['reverseTitle'] = personTitleTerm.getReverseTitle()
-        return personTitle_dict
-
-    def _get_contact_dict(self, contact):
-        """
-        """
-        contact_dict = {}
-        if contact.getPersonTitle():
-            contact_dict['personTitle'] = self._get_personTitle_dict(contact.getPersonTitle())['title']
-            contact_dict['abbreviation'] = self._get_personTitle_dict(contact.getPersonTitle())['abbreviation']
-            contact_dict['gender'] = self._get_personTitle_dict(contact.getPersonTitle())['gender']
-            contact_dict['multiplicity'] = self._get_personTitle_dict(contact.getPersonTitle())['multiplicity']
-            contact_dict['reverseTitle'] = self._get_personTitle_dict(contact.getPersonTitle())['reverseTitle']
-        contact_dict['name1'] = contact.getName1()
-        contact_dict['name2'] = contact.getName2()
-        contact_dict['society'] = contact.getSociety()
-        contact_dict['street'] = contact.getStreet()
-        contact_dict['number'] = contact.getNumber()
-        contact_dict['zipcode'] = contact.getZipcode()
-        contact_dict['city'] = contact.getCity()
-        contact_dict['country'] = contact.getCountry()
-        contact_dict['email'] = contact.getEmail()
-        contact_dict['phone'] = contact.getPhone()
-        contact_dict['gsm'] = contact.getGsm()
-        contact_dict['fax'] = hasattr(contact, 'fax') and contact.getFax() or ''
-        contact_dict['registrationNumber'] = contact.getRegistrationNumber()
-        contact_dict['nationalRegister'] = contact.getNationalRegister()
-        return contact_dict
-
-    def _get_contact(
-            self,
-            contact,
-            resident={
-                'Masculin-Singulier': ' domicilié ',
-                'Masculin-Pluriel': ' domiciliés ',
-                'Féminin-Singulier': ' domiciliée ',
-                'Féminin-Pluriel': ' domiciliées '
-            },
-            reversed_name=False,
-            withaddress=True):
-        """
-        """
-        contact = self._get_contact_dict(contact)
-        contact_names = \
-            contact.get('personTitle', '') + ' ' +\
-            contact['name2'] + ' ' +\
-            contact['name1']
-        reversed_contact_names = \
-            contact.get('personTitle', '') + ' ' +\
-            contact['name1'] + ' ' +\
-            contact['name2']
-        if reversed_name:
-            contact_names = reversed_contact_names
-        if withaddress:
-            gender_multiplicity = contact['gender'] + '-' + contact['multiplicity']
-            gender_multiplicity = gender_multiplicity.encode('utf8')
-            contact_address = \
-                resident[gender_multiplicity] +\
-                contact['street'] + ' ' +\
-                contact['number'] + ' ' +\
-                contact['zipcode'] + ' ' +\
-                contact['city']
-            contact_names += contact_address
-        return contact_names
-
-# Architecte(s)
-# ------------------------------------------------------------------------------
-    def get_architect_dict(self, index):
-        """
-        """
-        context = self.context
-        architects = context.get_architects()
-        result = {}
-        if index < len(architects):
-            architect = architects[index]
-            result = self.get_contact_dict(architect)
-        return result
-
-    def _get_architect(
-            self,
-            architect,
-            resident={
-                'Masculin-Singulier': ' domicilié ',
-                'Masculin-Pluriel': ' domiciliés ',
-                'Féminin-Singulier': ' domiciliée ',
-                'Féminin-Pluriel': ' domiciliées '
-            },
-            reversed_name=False,
-            withaddress=True):
-        result = self._get_contact(architect, resident, reversed_name, withaddress)
-        return result
-
-    def get_architects(
-            self,
-            resident={
-                'Masculin-Singulier': ' domicilié ',
-                'Masculin-Pluriel': ' domiciliés ',
-                'Féminin-Singulier': ' domiciliée ',
-                'Féminin-Pluriel': ' domiciliées '
-            },
-            reversed_name=False,
-            withaddress=True,
-            separator=', '):
-        context = self.context
-        architects = context.getArchitects()
-        result = self._get_architect(architects[0], resident, reversed_name, withaddress)
-        for architect in architects[1:]:
-            result += separator + self._get_architect(architect, resident, reversed_name, withaddress)
-        return result
-
-# Agent(s) traitant(s)
-# ------------------------------------------------------------------------------
-    def get_current_foldermanager(self):
-        return getCurrentFolderManager()
-
-    def get_foldermanager_dict(self, index):
-        """
-        """
-        context = self.context
-        foldermanagers = context.getFoldermanagers()
-        result = {}
-        if index < len(foldermanagers):
-            foldermanager = foldermanagers[index]
-            result = self.get_contact_dict(foldermanager)
-            result['initials'] = foldermanager.getInitials()
-            result['grade'] = foldermanager.getGrade()
-            result['ploneUserId'] = foldermanager.getPloneUserId()
-            result['manageableLicences'] = foldermanager.getManageableLicences()
-        return result
-
-    def _get_foldermanager(
-            self,
-            foldermanager,
-            resident={
-                'Masculin-Singulier': ' domicilié ',
-                'Masculin-Pluriel': ' domiciliés ',
-                'Féminin-Singulier': ' domiciliée ',
-                'Féminin-Pluriel': ' domiciliées '
-            },
-            reversed_name=False,
-            withaddress=False):
-        result = self._get_contact(foldermanager, resident, reversed_name, withaddress)
-        return result
-
-    def get_foldermanagers(
-            self,
-            resident={
-                'Masculin-Singulier': ' domicilié ',
-                'Masculin-Pluriel': ' domiciliés ',
-                'Féminin-Singulier': ' domiciliée ',
-                'Féminin-Pluriel': ' domiciliées '
-            },
-            reversed_name=False,
-            withaddress=False,
-            separator=', '):
-        context = self.context
-        foldermanagers = context.getFoldermanagers()
-        result = self._get_foldermanager(foldermanagers[0], resident, reversed_name, withaddress)
-        for foldermanager in foldermanagers[1:]:
-            result += separator + self._get_foldermanager(foldermanager, resident, reversed_name, withaddress)
-        return result
-
-    def get_foldermanagers_by_grade(self, grade_id=''):
-        foldermanagers = [fm for fm in self.context.getFoldermanagers() if fm.grade == grade_id]
-        return foldermanagers
-
-    def get_roadEquipments(self):
-        context = self.context
-        roadEquipments = context.getRoadEquipments()
-        result = []
-        folderroadequipments = UrbanVocabulary('folderroadequipments', inUrbanConfig=False)
-        allVocTerms = folderroadequipments.getAllVocTerms(context)
-        for roadEquipment in roadEquipments:
-            road_equipment = allVocTerms[roadEquipment['road_equipment']]
-            road_equipment_details = roadEquipment['road_equipment_details']
-            result.append({'road_equipment': road_equipment.Title(), 'road_equipment_details': road_equipment_details})
-        return result
-
-    def get_parcellings(self):
-        context = self.context
-        parcellings = context.getParcellings()
-        result = parcellings.Title()
-        return result
-
-# Demandeur(s)
-# ------------------------------------------------------------------------------
-    def get_applicants_names_and_address(
-            self,
-            applicant_separator=', ',
-            representedBy_separator=' et ',
-            resident={
-                'Masculin-Singulier': ' domicilié ',
-                'Masculin-Pluriel': ' domiciliés ',
-                'Féminin-Singulier': ' domiciliée',
-                'Féminin-Pluriel': ' domiciliées'
-            },
-            represented={
-                'Masculin-Singulier': ' représenté par ',
-                'Masculin-Pluriel': ' représentés par ',
-                'Féminin-Singulier': ' représentée par',
-                'Féminin-Pluriel': ' représentées par'
-            },
-            reversed_name=True):
-        applicants = self.getApplicants()
-        applicants_names_and_address = ""
-        if applicants:
-            applicants_names_and_address = self._get_applicant_names_and_address(
-                applicants[0],
-                resident,
-                represented,
-                reversed_name,
-                representedBy_separator
-            )
-            for applicant in applicants[1:]:
-                applicants_names_and_address += applicant_separator + self._get_applicant_names_and_address(
-                    applicant,
-                    resident,
-                    represented,
-                    reversed_name,
-                    representedBy_separator
-                )
-        return applicants_names_and_address
-
-    def _get_applicant_names_and_address(self, applicant, resident, represented, reversed_name, representedBy_separator):
-        applicant_names_and_address = self._get_contact(applicant, resident, reversed_name)
-        if applicant['representedBySociety']:
-            gender_multiplicity = applicant['gender'] + '-' + applicant['multiplicity']
-            applicant_names_and_address += represented[gender_multiplicity] +\
-                self._get_representedBy_names_and_address(applicant, resident, reversed_name, representedBy_separator)
-        return applicant_names_and_address
-
-    def get_applicants_list_dict(self):
-        context = self.context
-        applicants = context.getApplicants()
-        applicants_list_dict = []
-        for i in range(len(applicants)):
-            applicants_list_dict.append(self.get_applicant_dict(i))
-        return applicants_list_dict
-
-    def get_applicant_dict(self, index):
-        context = self.context
-        applicant = context.getApplicants()[index]
-        applicant_dict = self._get_contact_dict(applicant)
-        applicant_dict['representedBySociety'] = applicant.getRepresentedBySociety()
-        applicant_dict['isSameAddressAsWorks'] = applicant.getIsSameAddressAsWorks()
-        applicant_dict['representedBy'] = applicant.getRepresentedBy()
-        return applicant_dict
-
-    def _get_representedBy_names_and_address(self, applicant, resident, reversed_name, representedBy_separator):
-        representedBy_list = self._get_representedBy_list(applicant)
-        representedBy_names_and_address = ""
-        if representedBy_list:
-            representedBy_names_and_address = self._get_contact(
-                representedBy_list[0],
-                resident,
-                reversed_name
-            )
-            for representedBy in representedBy_list[1:]:
-                representedBy_names_and_address += representedBy_separator + self._get_contact(
-                    representedBy,
-                    resident,
-                    reversed_name
-                )
-        return representedBy_names_and_address
-
-    def _get_representedBy_list(self, applicant):
-        representedBy_UIDs = applicant['representedBy']
-        representedBy_list = []
-        for representedBy_UID in representedBy_UIDs:
-            catalog = self.portal.portal_catalog
-            brains = catalog.searchResults(UID=representedBy_UID)
-            representedBy = brains[0].getObject()
-            contact_dict = self._get_contact_dict(representedBy)
-            representedBy_list.append(contact_dict)
-        return representedBy_list
-
-    def get_applicants_names(self, separator=', ', reversed_name=True):
-        context = self.context
-        applicants = context.getApplicants()
-        applicants_names = ""
-        if applicants:
-            applicants_names = self._get_contact(applicants[0], reversed_name=reversed_name, withaddress=False)
-            for applicant in applicants[1:]:
-                applicants_names += separator + self._get_contact(
-                    applicant, reversed_name=reversed_name, withaddress=False
-                )
-        return applicants_names
-
-    def _get_date(self, event, date_name='eventDate', translatemonth=True, long_format=False):
-        if not event:
-            return
-
-        date_field = event.getField(date_name)
-        raw_date = date_field.get(event)
-        if not raw_date:
-            return
-
-        formatted_date = self.helper_view.format_date(raw_date, translatemonth, long_format)
-        return formatted_date
-
-    def get_notification_date(self, date_name='eventDate', translatemonth=True, long_format=False):
-        event = self.context.getLastTheLicence()
-        date = self._get_date(event, date_name, translatemonth, long_format)
-        return date
-
-    def get_solicitOpinions_descriptions(self):
-        context = self.context
-        opinions = context.getUrbanEventOpinionRequests()
-        descriptions = []
-        for opinion in opinions:
-            descriptions.append(opinion.getLinkedOrganisationTerm().Description())
-        return descriptions
 
 
 class EventDisplayProxyObject(UrbanBaseProxyObject):
