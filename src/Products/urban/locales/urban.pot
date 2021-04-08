@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2021-04-06 13:46+0000\n"
+"POT-Creation-Date: 2021-04-08 13:04+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1268,13 +1268,18 @@ msgid "declarations"
 msgstr ""
 
 #. Default: "urban"
-#: ../PcaTerm.py:126
+#: ../PcaTerm.py:127
 msgid "decree_type_departmental"
 msgstr ""
 
 #. Default: "urban"
-#: ../PcaTerm.py:127
+#: ../PcaTerm.py:128
 msgid "decree_type_municipal"
+msgstr ""
+
+#. Default: "urban"
+#: ../PcaTerm.py:126
+msgid "decree_type_regent"
 msgstr ""
 
 #. Default: "urban"
