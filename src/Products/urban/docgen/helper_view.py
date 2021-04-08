@@ -30,7 +30,6 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
 
     def __getattr__(self, attr_name):
         """
-        Delegate field attribute access to display() method.
         """
         attr = self.context.__getattr__(attr_name)
         if callable(attr) and not attr_name.startswith('_'):
@@ -52,7 +51,6 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
                 return result
             return proxy_method
         return attr
-
 
     def __init__(self, context, request):
         super(UrbanDocGenerationHelperView, self).__init__(context, request)
@@ -1031,6 +1029,48 @@ class UrbanDocGenerationEventHelperView(UrbanDocGenerationHelperView):
         """  """
         return self.context.getSolicitOpinionsTo() + self.context.getSolicitOpinionsToOptional()
 
+    def _get_wspm_field(self, field_name):
+        field = 'NO FIELD {} FOUND'.format(field_name)
+        linked_pm_items = get_ws_meetingitem_infos(self.real_context, extra_attributes=True)
+        if linked_pm_items:
+            linked_item = linked_pm_items[0]
+            if field_name in linked_item:
+                field = linked_item[field_name]
+            elif field_name in linked_item.extraInfos:
+                field = linked_item.extraInfos[field_name]
+        return field
+
+    def get_wspm_decision_date(self, translatemonth=True, long_format=False):
+        field_name = 'meeting_date'
+        decision_date = 'NO FIELD {} FOUND'.format(field_name)
+        raw_date = self._get_wspm_field(field_name)
+        if raw_date != decision_date:
+            decision_date = self.helper_view.format_date(
+                date=raw_date,
+                translatemonth=translatemonth,
+                long_format=long_format
+            )
+        return decision_date
+
+    def get_wspm_description_text(self, style='UrbanBody'):
+        field_name = 'description'
+        description_text = self._get_wspm_field(field_name)
+        if description_text != 'NO FIELD {} FOUND'.format(field_name):
+            description_text = self.helper_view.xhtml(description_text, style)
+        return description_text
+
+    def get_wspm_decision_text(self, style='UrbanBody'):
+        field_name = 'decision'
+        decision_text = self._get_wspm_field(field_name)
+        if decision_text != 'NO FIELD {} FOUND'.format(field_name):
+            decision_text = self.helper_view.xhtml(decision_text, style)
+        return decision_text
+
+    def get_wspm_meeting_state(self):
+        field_name = 'review_state'
+        state = self._get_wspm_field(field_name)
+        return state
+
 
 class UrbanDocGenerationFacetedHelperView(ATDocumentGenerationHelperView):
     def get_work_location_dict(self, index, folder):
@@ -1131,50 +1171,3 @@ class UrbanBaseProxyObject(ATDisplayProxyObject):
             if term_value == selected_value:
                 return term
         return None
-
-
-class EventDisplayProxyObject(UrbanBaseProxyObject):
-    """
-    """
-
-    def _get_wspm_field(self, field_name):
-        field = 'NO FIELD {} FOUND'.format(field_name)
-        linked_pm_items = get_ws_meetingitem_infos(self.context, extra_attributes=True)
-        if linked_pm_items:
-            linked_item = linked_pm_items[0]
-            if field_name in linked_item:
-                field = linked_item[field_name]
-            elif field_name in linked_item.extraInfos:
-                field = linked_item.extraInfos[field_name]
-        return field
-
-    def get_wspm_decision_date(self, translatemonth=True, long_format=False):
-        field_name = 'meeting_date'
-        decision_date = 'NO FIELD {} FOUND'.format(field_name)
-        raw_date = self._get_wspm_field(field_name)
-        if raw_date != decision_date:
-            decision_date = self.helper_view.format_date(
-                date=raw_date,
-                translatemonth=translatemonth,
-                long_format=long_format
-            )
-        return decision_date
-
-    def get_wspm_description_text(self, style='UrbanBody'):
-        field_name = 'description'
-        description_text = self._get_wspm_field(field_name)
-        if description_text != 'NO FIELD {} FOUND'.format(field_name):
-            description_text = self.helper_view.xhtml(description_text, style)
-        return description_text
-
-    def get_wspm_decision_text(self, style='UrbanBody'):
-        field_name = 'decision'
-        decision_text = self._get_wspm_field(field_name)
-        if decision_text != 'NO FIELD {} FOUND'.format(field_name):
-            decision_text = self.helper_view.xhtml(decision_text, style)
-        return decision_text
-
-    def get_wspm_meeting_state(self):
-        field_name = 'review_state'
-        state = self._get_wspm_field(field_name)
-        return state
