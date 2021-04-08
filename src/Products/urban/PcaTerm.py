@@ -121,10 +121,12 @@ class PcaTerm(BaseContent, UrbanConfigurationValue, BrowserDefaultMixin):
         """
           Return a list of decree types
         """
-        lst=[
-             ['royal', _('decree_type_royal', 'urban', context=self.REQUEST)],
-             ['departmental', _('decree_type_departmental', 'urban', context=self.REQUEST)],
-              ]
+        lst = [
+            ['royal', _('decree_type_royal', 'urban', context=self.REQUEST)],
+            ['regent', _('decree_type_regent', 'urban', context=self.REQUEST)],
+            ['departmental', _('decree_type_departmental', 'urban', context=self.REQUEST)],
+            ['municipal', _('decree_type_municipal', 'urban', context=self.REQUEST)],
+        ]
         vocab = []
         for elt in lst:
             vocab.append((elt[0], elt[1]))
