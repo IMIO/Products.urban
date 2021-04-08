@@ -33,9 +33,9 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
         Delegate field attribute access to display() method.
         """
         attr = self.context.__getattr__(attr_name)
-        if callable(attr):
+        if callable(attr) and not attr_name.startswith('_'):
             def proxy_method(*args, **kwargs):
-                result = getattr(self.context, attr_name)(*args, **kwargs)
+                result = getattr(self.real_context, attr_name)(*args, **kwargs)
                 if IBaseObject.providedBy(result) or IDexterityContent.providedBy(result):
                     result_helper = result.restrictedTraverse('document_generation_helper_view')
                     result_helper.appy_renderer = self.appy_renderer
