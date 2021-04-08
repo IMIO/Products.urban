@@ -54,13 +54,11 @@ class UrbanDocGenerationView(PersistentDocumentGenerationView):
         publicity = hasattr(licence, 'getLastInquiry') and licence.getLastInquiry() or \
             hasattr(licence, 'getLastAnnouncement') and licence.getLastAnnouncement() or None
         claimants = (publicity and hasattr(publicity, 'getClaimants')) and publicity.getClaimants() or None
-        claimants_view = claimants and \
-            [claimant.restrictedTraverse('@@document_generation_helper_view') for claimant in claimants] or None
-        claimants_view = claimants_view and [(view.context, view) for view in claimants_view]
-        proprietaries = (publicity and hasattr(publicity, 'getRecipients')) and publicity.getRecipients() or None
-        proprietaries_views = proprietaries and \
-            [proprietary.restrictedTraverse('@@document_generation_helper_view') for proprietary in proprietaries] or None
-        proprietaries_views = proprietaries_views and [(view.context, view) for view in proprietaries_views]
+        claimants_view = [claimant.restrictedTraverse('@@document_generation_helper_view')
+                          for claimant in claimants or []]
+        proprietaries = hasattr(publicity, 'getRecipients') and publicity.getRecipients() or None
+        proprietaries_views = [prop.restrictedTraverse('@@document_generation_helper_view') for prop
+                               in proprietaries or []]
         licence_helper_view = licence.restrictedTraverse('@@document_generation_helper_view')
         event_helper_view = self.context.restrictedTraverse('@@document_generation_helper_view')
         plaintiffobj = None
@@ -70,8 +68,8 @@ class UrbanDocGenerationView(PersistentDocumentGenerationView):
 
         generation_context = {
             'this': licence,
-            'self': licence_helper_view.context,
-            'licence': licence_helper_view.context,
+            'self': licence_helper_view,
+            'licence': licence_helper_view,
             'foldermanagers': foldermanagers,
             'event': event_helper_view.context,
             'urbanEventObj': self.context,
@@ -80,7 +78,7 @@ class UrbanDocGenerationView(PersistentDocumentGenerationView):
             'proprietaryobj': proprietaryobj,
             'tool': portal_urban,
             'licence_view': licence_helper_view,
-            'licence_helper': licence_helper_view.context,
+            'licence_helper': licence_helper_view,
             'event_view': event_helper_view,
             'event_helper': event_helper_view.context,
             'claimants': claimants_view,
@@ -124,7 +122,11 @@ class UrbanMailingLoopGenerationView(MailingLoopPersistentDocumentGenerationView
             try:
                 template = api.content.get(path='/{}'.format(document_url_path))
                 generated_doc_title = template.Title()
-                return super(UrbanMailingLoopGenerationView, self).__call__(document_uid, document_url_path, generated_doc_title)
+                return super(UrbanMailingLoopGenerationView, self).__call__(
+                    document_uid,
+                    document_url_path,
+                    generated_doc_title
+                )
             except MailingTooBigException:
                 document_uid = document_uid or self.request.get('document_uid', '')
                 document_url_path = document_url_path or self.request.get('document_url_path', '')
