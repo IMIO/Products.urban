@@ -49,14 +49,6 @@
         />
 
     <adapter
-        for="Products.urban.interfaces.IUrbanEvent
-           zope.interface.Interface"
-        provides="collective.documentgenerator.interfaces.IDisplayProxyObject"
-        factory=".helper_view.EventDisplayProxyObject"
-        permission="zope2.View"
-    />
-
-    <adapter
       for="Products.urban.docgen.UrbanTemplate.IUrbanTemplate
            zope.interface.Interface"
       factory=".condition.UrbanTemplateCondition"
