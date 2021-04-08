@@ -24,7 +24,6 @@ class TestDivisionsRenaming(unittest.TestCase):
         self.portal = portal
         self.buildlicence = portal.urban.buildlicences.objectValues()[-1]
         self.helper_view = self.buildlicence.unrestrictedTraverse('document_generation_helper_view')
-        self.document_proxy_licence = self.helper_view.context
         self.portal_urban = portal.portal_urban
 
         # set dummy divisions
@@ -54,7 +53,7 @@ class TestDivisionsRenaming(unittest.TestCase):
         expected_division_name = [line['name'] for line in portal_urban.getDivisionsRenaming() if line['division'] == division]
         expected_division_name = expected_division_name[0]
 
-        self.failUnless(expected_division_name in self.document_proxy_licence.getPortionOutsText())
+        self.failUnless(expected_division_name in self.helper_view.getPortionOutsText())
 
     def testDivisionRenaming(self):
         division = self.division
@@ -62,7 +61,7 @@ class TestDivisionsRenaming(unittest.TestCase):
 
         alternative_name = 'bla'
         # so far we did not configure anything
-        self.failIf(alternative_name in self.document_proxy_licence.getPortionOutsText())
+        self.failIf(alternative_name in self.helper_view.getPortionOutsText())
 
         # configure an alternative name for the division
         new_config = list(portal_urban.getDivisionsRenaming())
@@ -71,7 +70,7 @@ class TestDivisionsRenaming(unittest.TestCase):
                 line['alternative_name'] = alternative_name
                 break
         portal_urban.setDivisionsRenaming(new_config)
-        self.failUnless(alternative_name in self.document_proxy_licence.getPortionOutsText())
+        self.failUnless(alternative_name in self.helper_view.getPortionOutsText())
 
 
 class TestInvertNamesOfMailAddress(unittest.TestCase):
@@ -164,7 +163,6 @@ class TestPortionOutTextFormat(unittest.TestCase):
         portal = self.layer['portal']
         self.buildlicence = portal.urban.buildlicences.objectValues()[-1]
         self.helper_view = self.buildlicence.unrestrictedTraverse('document_generation_helper_view')
-        self.document_proxy_licence = self.helper_view.context
         login(portal, 'urbaneditor')
 
     def testPortionOutsTextOutputFormat(self):
@@ -178,8 +176,8 @@ class TestPortionOutTextFormat(unittest.TestCase):
             radical='86',
             exposant='C'
         )
-        # parcel = self.document_proxy_licence.getParcels()[-1]
-        self.failUnless(self.document_proxy_licence.getPortionOutsText().encode('utf-8').endswith("86 C"))
+        # parcel = self.helper_view.getParcels()[-1]
+        self.failUnless(self.helper_view.getPortionOutsText().encode('utf-8').endswith("86 C"))
         # parcel with bis
         self.buildlicence.invokeFactory(
             'Parcel',
@@ -190,7 +188,7 @@ class TestPortionOutTextFormat(unittest.TestCase):
             bis='2',
             exposant='D'
         )
-        self.failUnless(self.document_proxy_licence.getPortionOutsText().encode('utf-8').endswith("86 C,  87/2 D"))
+        self.failUnless(self.helper_view.getPortionOutsText().encode('utf-8').endswith("86 C,  87/2 D"))
         # parcel with bis and puissance
         self.buildlicence.invokeFactory(
             'Parcel',
@@ -202,7 +200,7 @@ class TestPortionOutTextFormat(unittest.TestCase):
             exposant='E',
             puissance='4'
         )
-        self.failUnless(self.document_proxy_licence.getPortionOutsText().encode('utf-8').endswith("86 C,  87/2 D,  88/3 E 4"))
+        self.failUnless(self.helper_view.getPortionOutsText().encode('utf-8').endswith("86 C,  87/2 D,  88/3 E 4"))
         # parcel with puissance only
         self.buildlicence.invokeFactory(
             'Parcel',
@@ -213,7 +211,7 @@ class TestPortionOutTextFormat(unittest.TestCase):
             exposant='F',
             puissance='5'
         )
-        self.failUnless(self.document_proxy_licence.getPortionOutsText().encode('utf-8').endswith("86 C,  87/2 D,  88/3 E 4,  89 F 5"))
+        self.failUnless(self.helper_view.getPortionOutsText().encode('utf-8').endswith("86 C,  87/2 D,  88/3 E 4,  89 F 5"))
 
 
 class TestGetParcels(unittest.TestCase):
