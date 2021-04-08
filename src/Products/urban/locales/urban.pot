@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2021-01-13 13:16+0000\n"
+"POT-Creation-Date: 2021-04-08 13:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -277,6 +277,10 @@ msgid "FolderManager"
 msgstr ""
 
 msgid "Found folder(s)"
+msgstr ""
+
+#: ../browser/templates/searchparcels.pt:172
+msgid "Found parcel(s)"
 msgstr ""
 
 #: ../profiles.zcml:42
@@ -634,7 +638,7 @@ msgstr ""
 msgid "Scheduled licences"
 msgstr ""
 
-#: ../browser/templates/searchparcels.pt:42
+#: ../browser/templates/searchparcels.pt:35
 msgid "Search parcel(s)"
 msgstr ""
 
@@ -688,11 +692,11 @@ msgstr ""
 msgid "The mailings will be ready tomorrow!"
 msgstr ""
 
-#: ../browser/urbaneventviews.py:371
+#: ../browser/urbaneventviews.py:362
 msgid "The parcel radius search will be ready tomorrow!"
 msgstr ""
 
-#: ../browser/urbaneventviews.py:369
+#: ../browser/urbaneventviews.py:360
 msgid "There are parcel owners without any address found! Desactivate them!"
 msgstr ""
 
@@ -1179,8 +1183,18 @@ msgid "declarations"
 msgstr ""
 
 #. Default: "urban"
-#: ../PcaTerm.py:126
+#: ../PcaTerm.py:127
 msgid "decree_type_departmental"
+msgstr ""
+
+#. Default: "urban"
+#: ../PcaTerm.py:128
+msgid "decree_type_municipal"
+msgstr ""
+
+#. Default: "urban"
+#: ../PcaTerm.py:126
+msgid "decree_type_regent"
 msgstr ""
 
 #. Default: "urban"
@@ -1582,13 +1596,8 @@ msgid "groundstatestatus_folder_title"
 msgstr ""
 
 #. Default: "You can not search for parcels for now because there was a problem. Please contact your system administrator and give him the red error message here above"
-#: ../browser/templates/searchparcels.pt:43
+#: ../browser/templates/searchparcels.pt:36
 msgid "help_search_connection_problem"
-msgstr ""
-
-#. Default: "Choose one of the following forms to search for parcels. You can cumulate criteria if you exactly know what you are looking for"
-#: ../browser/templates/searchparcels.pt:48
-msgid "help_search_parcels"
 msgstr ""
 
 msgid "inadmissibilityreasons_folder_title"
@@ -2467,9 +2476,13 @@ msgstr ""
 msgid "urban_bound_inspections"
 msgstr ""
 
+#. Default: "Browse old parcels (Only works with the parcel reference)"
+#: ../browser/templates/searchparcels.pt:157
 msgid "urban_browse_old_parcels"
 msgstr ""
 
+#. Default: "Search"
+#: ../browser/templates/searchparcels.pt:161
 msgid "urban_button_search"
 msgstr ""
 
@@ -2902,7 +2915,7 @@ msgid "urban_label_bestAddressKey"
 msgstr ""
 
 #. Default: "Bis"
-#: ../browser/templates/searchparcels.pt:82
+#: ../browser/templates/searchparcels.pt:71
 msgid "urban_label_bis"
 msgstr ""
 
@@ -3271,7 +3284,7 @@ msgid "urban_label_divergenceDetails"
 msgstr ""
 
 #. Default: "Division"
-#: ../browser/templates/searchparcels.pt:63
+#: ../browser/templates/searchparcels.pt:52
 msgid "urban_label_division"
 msgstr ""
 
@@ -3400,7 +3413,7 @@ msgid "urban_label_exponent"
 msgstr ""
 
 #. Default: "Exposant"
-#: ../browser/templates/searchparcels.pt:86
+#: ../browser/templates/searchparcels.pt:75
 msgid "urban_label_exposant"
 msgstr ""
 
@@ -4037,7 +4050,7 @@ msgstr ""
 #. Default: "Notary(ies)"
 #: ../browser/licence/templates/licencemacros.pt:62
 #: ../content/licence/CODT_UrbanCertificateTwo.py:69
-#: ../content/licence/Division.py:46
+#: ../content/licence/Division.py:45
 msgid "urban_label_notaryContact"
 msgstr ""
 
@@ -4149,7 +4162,7 @@ msgid "urban_label_parcelsLocations"
 msgstr ""
 
 #. Default: "Partie"
-#: ../browser/templates/searchparcels.pt:94
+#: ../browser/templates/searchparcels.pt:83
 msgid "urban_label_partie"
 msgstr ""
 
@@ -4382,7 +4395,7 @@ msgid "urban_label_publicRoadModifications"
 msgstr ""
 
 #. Default: "Puissance"
-#: ../browser/templates/searchparcels.pt:90
+#: ../browser/templates/searchparcels.pt:79
 msgid "urban_label_puissance"
 msgstr ""
 
@@ -4392,7 +4405,7 @@ msgid "urban_label_queryable"
 msgstr ""
 
 #. Default: "Radical"
-#: ../browser/templates/searchparcels.pt:78
+#: ../browser/templates/searchparcels.pt:67
 msgid "urban_label_radical"
 msgstr ""
 
@@ -4714,7 +4727,7 @@ msgid "urban_label_searchbyname_descr"
 msgstr ""
 
 #. Default: "Section"
-#: ../browser/templates/searchparcels.pt:73
+#: ../browser/templates/searchparcels.pt:62
 msgid "urban_label_section"
 msgstr ""
 
@@ -5191,6 +5204,8 @@ msgstr ""
 msgid "urban_no_eventtype_defined"
 msgstr ""
 
+#. Default: "Cadastral reference"
+#: ../browser/templates/searchparcels.pt:46
 msgid "urban_search_by_cadastral_reference"
 msgstr ""
 
@@ -5202,17 +5217,12 @@ msgstr ""
 msgid "urban_search_parameters"
 msgstr ""
 
-#. Default: "Cadastral reference"
-#: ../browser/templates/searchparcels.pt:57
-msgid "urban_search_parcel_by_cadastral_reference"
-msgstr ""
-
 #. Default: "Folder reference"
 msgid "urban_search_parcel_by_folder_reference"
 msgstr ""
 
 #. Default: "Location"
-#: ../browser/templates/searchparcels.pt:108
+#: ../browser/templates/searchparcels.pt:97
 msgid "urban_search_parcel_by_location"
 msgstr ""
 
@@ -5220,9 +5230,13 @@ msgstr ""
 msgid "urban_search_parcel_by_name"
 msgstr ""
 
+#. Default: "Proprietary"
+#: ../browser/templates/searchparcels.pt:124
 msgid "urban_search_parcel_by_proprietary"
 msgstr ""
 
+#. Default: "n°"
+#: ../browser/templates/searchparcels.pt:100
 msgid "urban_search_parcel_by_street_number"
 msgstr ""
 
