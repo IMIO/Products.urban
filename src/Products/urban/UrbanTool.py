@@ -726,9 +726,9 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                 helper_view = context.restrictedTraverse('document_generation_helper_view')
                 data = {
                     'self': helper_view.context,
-                    'object': helper_view.real_context,
+                    'object': helper_view,
                     'event': context,
-                    'context': helper_view.real_context,
+                    'context': helper_view,
                     'tool': self,
                     'portal': api.portal.getSite(),
                     'view': helper_view,
