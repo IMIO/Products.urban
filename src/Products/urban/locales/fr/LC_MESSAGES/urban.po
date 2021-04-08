@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2021-04-06 13:46+0000\n"
+"POT-Creation-Date: 2021-04-08 13:04+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -1289,14 +1289,19 @@ msgid "declarations"
 msgstr "Déclarations"
 
 #. Default: "urban"
-#: ../PcaTerm.py:126
+#: ../PcaTerm.py:127
 msgid "decree_type_departmental"
-msgstr "Arrêté Ministeriel"
+msgstr "Arrêté Ministériel"
 
 #. Default: "urban"
-#: ../PcaTerm.py:127
+#: ../PcaTerm.py:128
 msgid "decree_type_municipal"
 msgstr "Délibération conseil communal"
+
+#. Default: "urban"
+#: ../PcaTerm.py:126
+msgid "decree_type_regent"
+msgstr "Arrêté du Régent"
 
 #. Default: "urban"
 #: ../PcaTerm.py:125
