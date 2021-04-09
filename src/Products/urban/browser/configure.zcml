@@ -165,6 +165,28 @@
   />
 
   <browser:page
+     for="Products.urban.interfaces.IUrbanEventInquiry"
+     name="urbaneventinquiry_edit"
+     template="templates/urbaneventinquiryedit.pt"
+     permission="cmf.ModifyPortalContent"
+  />
+
+  <browser:page
+     for="Products.urban.interfaces.IUrbanEventInquiry"
+     name="at_base_edit_view"
+     class=".urbaneventedit.UrbanEventInquiryEdit"
+     permission="cmf.ModifyPortalContent"
+     allowed_interface="Products.Archetypes.interfaces.IEditForm"
+  />
+
+  <browser:page
+     for="Products.urban.interfaces.IUrbanEventInquiry"
+     name="inquiry_dates_delay"
+     class=".urbaneventedit.ComputeInquiryDelay"
+     permission="cmf.ModifyPortalContent"
+  />
+
+  <browser:page
      for="Products.urban.interfaces.IUrbanEventAnnouncement"
      name="urbaneventannouncementview"
      class=".urbaneventviews.UrbanEventAnnouncementView"

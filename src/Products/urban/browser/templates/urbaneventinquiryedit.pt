@@ -1,0 +1,34 @@
+<metal:edit define-macro="editUrbanEventInquiry"
+               tal:define="member context/@@plone_portal_state/member;
+                       border python: member.has_role('Manager') and 'enable_border' or 'disable_border';
+                       dummy python:request.set(border, 1);
+                       putils context/plone_utils;">
+
+      <tal:fieldsets repeat="fieldset python: ['default',]">
+        <fieldset class="urbanEditWithTabbing" tal:define="fieldsetid python:putils.normalizeString(fieldset)"
+                tal:attributes="id string:fieldset-${fieldsetid}">
+          <legend id="#"
+                  tal:content="python: view.getTranslatedSchemaLabel(fieldset)"
+                  tal:attributes="id string:fieldsetlegend-${fieldsetid}"
+                  i18n:translate="" />
+
+          <script type="text/javascript"
+                  charset="iso-8859-1"
+                  tal:attributes="src string:$portal_url/inquiry_dates.js">
+          </script>
+
+          <metal:fieldMacro use-macro="python:here.widget('investigationStart', mode='edit')" />
+
+          <input type="button" value="Calculer la date de fin"
+                 tal:define="inquiry_url context/absolute_url"
+                 tal:attributes="onclick python: 'javascript:get_end_date(\'%s\')' % inquiry_url"
+                 i18n:attributes="value label_ok;" />
+
+          <metal:fieldMacro use-macro="python:here.widget('investigationEnd', mode='edit')" />
+
+          <tal:fields repeat="field python:view.get_editable_fields(schematas[fieldset])">
+           <metal:fieldMacro use-macro="python:here.widget(field.getName(), mode='edit')" />
+          </tal:fields>
+        </fieldset>
+      </tal:fieldsets>
+</metal:edit>
