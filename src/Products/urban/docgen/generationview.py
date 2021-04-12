@@ -94,9 +94,9 @@ class UrbanDocGenerationView(PersistentDocumentGenerationView):
             generation_context['event_view'],
         ]
         if generation_context['claimants']:
-            views.extend([view for proxy, view in generation_context['claimants']])
+            views.extend([view for view in generation_context['claimants']])
         if generation_context['inquiry_proprietaries']:
-            views.extend([view for proxy, view in generation_context['inquiry_proprietaries']])
+            views.extend([view for view in generation_context['inquiry_proprietaries']])
         return views
 
 
