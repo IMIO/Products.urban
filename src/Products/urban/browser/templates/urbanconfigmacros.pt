@@ -103,6 +103,7 @@
 
 
 <div metal:define-macro="schedule_macro" i18n:domain="urban">
+     <br/>
 
     <tal:fields tal:define="field_macro field_macro | context/widgets/field/macros/view" tal:repeat="field python:context.Schema().filterFields(schemata='schedule')">
 
@@ -128,6 +129,13 @@
         </metal:main_macro>
 
     </tal:filter>
+
+   <tal:form define="form python: getattr(view, 'offdays_form', None)"
+             condition="form">
+       <tal:with-form-as-view define="view nocall:form">
+           <metal:block use-macro="form/@@ploneform-macros/titlelessform" />
+       </tal:with-form-as-view>
+   </tal:form>
 </div>
 
 

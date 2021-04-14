@@ -57,4 +57,22 @@
     provides="zope.schema.interfaces.IVocabularyFactory"
   />
 
+  <utility
+    component=".vocabularies.OffDaysTypeVocabularyFactory"
+    name="urban.vocabularies.offdays_types"
+    provides="zope.schema.interfaces.IVocabularyFactory"
+  />
+
+  <utility
+    component=".vocabularies.OffDaysPeriodTypeVocabularyFactory"
+    name="urban.vocabularies.offdays_period_types"
+    provides="zope.schema.interfaces.IVocabularyFactory"
+  />
+
+  <utility
+    component=".vocabularies.WeekDaysVocabularyFactory"
+    name="urban.vocabularies.weekdays"
+    provides="zope.schema.interfaces.IVocabularyFactory"
+  />
+
 </configure>

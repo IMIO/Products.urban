@@ -20,7 +20,6 @@ from zope.interface import Interface
 from zope import schema
 
 
-
 class IOffDayPeriod(Interface):
     """ """
 
@@ -105,6 +104,7 @@ class OffDaysEditForm(RegistryEditForm):
     description = _(u"""""")
 
     fields = field.Fields(IOffDays)
+    fields['offdays'].widgetFactory = DataGridFieldFactory
     fields['periods'].widgetFactory = DataGridFieldFactory
 
     def updateWidgets(self):

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2021-04-08 13:04+0000\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -172,9 +172,17 @@ msgstr "Conditions sectorielles Eau"
 msgid "CS_folder_title"
 msgstr "Conditions sectorielles"
 
+#: ../browser/offdays_settings.py:124
+msgid "Cancel"
+msgstr "Annuler"
+
 #: ../browser/actionspanel/actions_panel_change_owner.pt:2
 msgid "Change Owner"
 msgstr "réassigner"
+
+#: ../browser/offdays_settings.py:121
+msgid "Changes saved"
+msgstr "Changements enregistrés"
 
 #: ../browser/templates/parcelsconsistencyview.pt:15
 msgid "Check parcels"
@@ -200,6 +208,14 @@ msgstr "Carottage"
 
 msgid "Create proprietary/applicant"
 msgstr "Créer le(s) demandeur(s)/propriétaire(s)"
+
+#: ../browser/offdays_settings.py:54
+msgid "Date"
+msgstr "Date"
+
+#: ../browser/offdays_settings.py:89
+msgid "Day"
+msgstr "Jour"
 
 msgid "Declaration"
 msgstr "Déclaration"
@@ -254,6 +270,10 @@ msgstr ""
 
 #: ../browser/portlets.py:75
 msgid "Edit Urban tools Portlet"
+msgstr ""
+
+#: ../browser/offdays_settings.py:127
+msgid "Edit cancelled"
 msgstr ""
 
 #: ../profiles/default/actions.xml
@@ -562,7 +582,7 @@ msgstr "Inspection"
 msgid "IntegratedLicence"
 msgstr "Permis intégré"
 
-#: ../interfaces.py:712
+#: ../interfaces.py:713
 msgid "Internal opinion services"
 msgstr "Avis de services internes à la ville"
 
@@ -576,7 +596,7 @@ msgstr "Type de permis"
 msgid "Listing file"
 msgstr "Importer un fichier de réclamants (csv)"
 
-#: ../interfaces.py:735
+#: ../interfaces.py:736
 msgid "Mailing limit"
 msgstr ""
 
@@ -584,7 +604,7 @@ msgstr ""
 msgid "Map"
 msgstr "Carte"
 
-#: ../interfaces.py:736
+#: ../interfaces.py:737
 msgid "Max items allowed for immediate mailing"
 msgstr ""
 
@@ -630,6 +650,14 @@ msgstr "Lettre de notaire"
 msgid "Nothing to show !!!"
 msgstr ""
 
+#: ../browser/offdays_settings.py:86
+msgid "Off days"
+msgstr "Jours de suspension"
+
+#: ../browser/offdays_settings.py:74
+msgid "Off days period"
+msgstr "Périodes de suspension"
+
 msgid "Ongoing events"
 msgstr "Événements en cours"
 
@@ -642,11 +670,15 @@ msgstr "Permis d'urbanisation"
 msgid "PatrimonyCertificate"
 msgstr "Certificat de patrimoine"
 
-#: ../interfaces.py:750
+#: ../browser/offdays_settings.py:77
+msgid "Period"
+msgstr "Période"
+
+#: ../interfaces.py:751
 msgid "Planned claimants imports"
 msgstr ""
 
-#: ../interfaces.py:725
+#: ../interfaces.py:726
 msgid "Planned mailings"
 msgstr ""
 
@@ -699,6 +731,10 @@ msgstr "Type de voirie"
 msgid "RoadDecree"
 msgstr "Décret Voirie"
 
+#: ../browser/offdays_settings.py:113
+msgid "Save"
+msgstr "Enregistrer"
+
 #. Default: "imio.schedule"
 #: ../setuphandlers.py:332
 msgid "ScheduleConfig"
@@ -719,17 +755,17 @@ msgstr "Sélectionner les types de contenues autorisés pour ce modèle"
 msgid "Select to list"
 msgstr ""
 
-#: ../browser/urbanconfigview.py:77
+#: ../browser/urbanconfigview.py:80
 msgid "Service full name"
-msgstr ""
+msgstr "Nom du service"
 
-#: ../browser/urbanconfigview.py:82
+#: ../browser/urbanconfigview.py:85
 msgid "Service id"
-msgstr ""
+msgstr "Identifiant du service"
 
-#: ../interfaces.py:713
+#: ../interfaces.py:714
 msgid "Services that can give their opinion directly through urban"
-msgstr ""
+msgstr "Services internes à la ville rendant des avis"
 
 #: ../browser/templates/map_spw.pt:78
 msgid "Show this parcel on map"
@@ -749,17 +785,19 @@ msgstr ""
 msgid "Submit"
 msgstr "Valider"
 
-#: ../interfaces.py:763
+#: ../browser/offdays_settings.py:39
+#: ../interfaces.py:764
 msgid "Suspension period end date"
-msgstr ""
+msgstr "Date de fin"
 
 #: ../browser/urbaneventviews.py:445
 msgid "Suspension period from to: please check the end date"
 msgstr "Période de suspension du ${from} au ${to}: CORRIGEZ LA DATE DE FIN DE PUBLICITE."
 
-#: ../interfaces.py:759
+#: ../browser/offdays_settings.py:33
+#: ../interfaces.py:760
 msgid "Suspension period start date"
-msgstr ""
+msgstr "Date de début"
 
 #: ../browser/licence/duplicate_licence.py:56
 msgid "Tabs to duplicate"
@@ -826,6 +864,10 @@ msgstr "Vers les Procédures CWATUP"
 msgid "Transitions:"
 msgstr ""
 
+#: ../browser/offdays_settings.py:27
+msgid "Type"
+msgstr ""
+
 #: ../browser/templates/urbanstatsmacros.pt:10
 msgid "Types de permis \ &Eacute;tats"
 msgstr ""
@@ -857,6 +899,10 @@ msgstr ""
 # urban_actions
 msgid "View"
 msgstr "Voir le permis"
+
+#: ../browser/offdays_settings.py:65
+msgid "Week off days"
+msgstr "Jours de fermeture en semaine"
 
 #: ../UrbanEventType.py:278
 msgid "You can not create this UrbanEvent !"
@@ -1179,6 +1225,9 @@ msgstr "Paramètres des certificats d'urbanisme 1 (CODT)"
 
 msgid "codt_urbancertificatetwo_urbanconfig_title"
 msgstr "Paramètres des certificats d'urbanisme 2 (CODT)"
+
+msgid "college_holydays"
+msgstr "Vacances du collège"
 
 # street_referencedatagridwidget
 #. Default: "Street"
@@ -1734,10 +1783,13 @@ msgstr "Retour"
 msgid "groundstatestatus_folder_title"
 msgstr "Repris à la banque de données d'état des sols"
 
+msgid "holydays"
+msgstr "Férié"
+
 msgid "inadmissibilityreasons_folder_title"
 msgstr "Motifs d'irrecevabilité"
 
-#: ../interfaces.py:751
+#: ../interfaces.py:752
 msgid "inquiries planned for claimants imports"
 msgstr ""
 
@@ -1752,6 +1804,9 @@ msgstr "du"
 msgid "inquiry_item"
 msgstr "Point"
 
+msgid "inquiry_suspension"
+msgstr "Suspension d'enquête"
+
 msgid "inquiry_suspension_folder_title"
 msgstr "Périodes de suspension d'enquête"
 
@@ -1761,7 +1816,7 @@ msgid "inquiry_title_and_number"
 msgstr "Enquête n°${number}"
 
 msgid "inquiry_to"
-msgstr "au"
+msgstr "Date de fin"
 
 msgid "inspection_urbanconfig_title"
 msgstr "Paramètres de l'inspection"
@@ -2011,11 +2066,11 @@ msgstr "Particularités du bien (urbanisme)"
 msgid "lotusages_folder_title"
 msgstr "Destination"
 
-#: ../interfaces.py:726
+#: ../interfaces.py:727
 msgid "mailings planned"
 msgstr ""
 
-#: ../interfaces.py:741
+#: ../interfaces.py:742
 msgid "mailings planned for radius search"
 msgstr ""
 
@@ -2180,6 +2235,9 @@ msgstr "Port sur lequel tourne OpenOffice en mode serveur (2002 par défaut)"
 
 msgid "opinionstoaskifworks_folder_title"
 msgstr "Avis à demander en cas de travaux"
+
+msgid "other"
+msgstr "Autre"
 
 #. Default: "Outdated parcels used in licences in progress"
 #: ../browser/templates/parcelsconsistencyview.pt:22
@@ -3852,7 +3910,7 @@ msgstr "Observations"
 #. Default: "Investigationend"
 #: ../content/UrbanEventInquiry.py:58
 msgid "urban_label_investigationEnd"
-msgstr "au"
+msgstr "Date de fin"
 
 #. Default: "Investigationoralreclamationnumber"
 #: UrbanCertificateTwo.py
@@ -3872,7 +3930,7 @@ msgstr "Caractéristique du projet (annexe 25)"
 #. Default: "Investigationstart"
 #: ../content/UrbanEventInquiry.py:49
 msgid "urban_label_investigationStart"
-msgstr "Enquête du"
+msgstr "Date de début"
 
 msgid "urban_label_investigationSubject"
 msgstr "Objet de l'enquête publique"
@@ -5582,6 +5640,10 @@ msgstr "!!!Attention, aucune date de dépôt n'a été trouvée!!!"
 #: ../browser/licence/codt_buildlicenceview.py:26
 msgid "warning_outdated_parcel"
 msgstr "Attention, la référence cadastrale n'est plus à jour!"
+
+#: ../browser/offdays_settings.py:68
+msgid "weekdays"
+msgstr ""
 
 msgid "work_location"
 msgstr "Lieu des travaux"

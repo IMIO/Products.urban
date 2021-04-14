@@ -60,9 +60,10 @@
       <value key="effects_shake">False</value>
       <value key="effects_slide">False</value>
       <value key="effects_transfer">False</value>
-    </records>
-    <records interface="collective.js.jqueryui.controlpanel.IJQueryUICSS">
+  </records>
+  <records interface="collective.js.jqueryui.controlpanel.IJQueryUICSS">
       <value key="css">True</value>
       <value key="patch">True</value>
-    </records>
+  </records>
+  <records interface="Products.urban.browser.offdays_settings.IOffDays" />
 </registry>

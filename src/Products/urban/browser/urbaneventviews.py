@@ -406,21 +406,13 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
 
         licence = inquiry_event.aq_parent
         portal_urban = api.portal.get_tool('portal_urban')
-        suspension_periods = portal_urban.getInquirySuspensionPeriods()
-        suspension_delay = 0
-        inquiry_duration = 15
-        if hasattr(licence, 'getRoadAdaptation'):
-            if licence.getRoadAdaptation() and licence.getRoadAdaptation() not in [[''], 'no']:
-                inquiry_duration = 30
-        theorical_end_date = start_date + inquiry_duration
+        suspension_periods = portal_urban.get_offday_periods('inquiry_suspension')
 
         for suspension_period in suspension_periods:
-            suspension_start = DateTime(suspension_period['from'])
-            suspension_end = DateTime(suspension_period['to'])
-            if start_date >= suspension_start and start_date < suspension_end + 1:
-                suspension_delay = suspension_end - start_date
-                if end_date < theorical_end_date + suspension_delay:
-                    return False, suspension_period['from'], suspension_period['to']
+            suspension_start = DateTime(str(suspension_period['start_date']))
+            suspension_end = DateTime(str(suspension_period['end_date']))
+            if end_date >= suspension_start and end_date < suspension_end + 1:
+                return False, suspension_start.strftime('%d/%m/%Y'), suspension_end.strftime('%d/%m/%Y')
         return True, '', ''
 
 

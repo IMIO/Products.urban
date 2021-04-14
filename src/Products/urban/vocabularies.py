@@ -27,7 +27,14 @@ class AvailableStreets(grok.GlobalUtility):
     grok.name('availableStreets')
 
     def __call__(self, context):
-        voc = UrbanVocabulary('streets', vocType=("Street", "Locality", ), id_to_use="UID", sort_on="sortable_title", inUrbanConfig=False, allowedStates=['enabled', 'disabled'])
+        voc = UrbanVocabulary(
+            'streets',
+            vocType=("Street", "Locality", ),
+            id_to_use="UID",
+            sort_on="sortable_title",
+            inUrbanConfig=False,
+            allowedStates=['enabled', 'disabled']
+        )
         vocDisplayList = voc.getDisplayList(context)
         items = vocDisplayList.sortedByValue().items()
         terms = [SimpleTerm(value, value, token)
@@ -219,6 +226,53 @@ class DivisionAlternativesNamesVocabulary(DivisionNamesVocabulary):
 
 
 DivisionAlternativeNamesVocabularyFactory = DivisionAlternativesNamesVocabulary()
+
+
+class OffDaysTypeVocabulary(object):
+    implements(IVocabularyFactory)
+
+    def __call__(self, context):
+        request = api.portal.get().REQUEST
+        term_ids = ['holydays', 'other']
+        terms = [SimpleTerm(t_id, t_id, translate(t_id, 'urban', context=request)) for t_id in term_ids]
+        return SimpleVocabulary(terms)
+
+
+OffDaysTypeVocabularyFactory = OffDaysTypeVocabulary()
+
+
+class OffDaysPeriodTypeVocabulary(object):
+    implements(IVocabularyFactory)
+
+    def __call__(self, context):
+        request = api.portal.get().REQUEST
+        term_ids = ['inquiry_suspension', 'college_holydays', 'other']
+        terms = [SimpleTerm(t_id, t_id, translate(t_id, 'urban', context=request)) for t_id in term_ids]
+        return SimpleVocabulary(terms)
+
+
+OffDaysPeriodTypeVocabularyFactory = OffDaysPeriodTypeVocabulary()
+
+
+class WeekDaysVocabulary(object):
+    implements(IVocabularyFactory)
+
+    def __call__(self, context):
+        request = api.portal.get().REQUEST
+        term_ids = [
+            'weekday_mon',
+            'weekday_tue',
+            'weekday_wed',
+            'weekday_thu',
+            'weekday_fri',
+            'weekday_sat',
+            'weekday_sun',
+        ]
+        terms = [SimpleTerm(i, i, translate(t_id, 'plonelocales', context=request)) for i, t_id in enumerate(term_ids)]
+        return SimpleVocabulary(terms)
+
+
+WeekDaysVocabularyFactory = WeekDaysVocabulary()
 
 
 class LicenceTabsVocabulary(object):
