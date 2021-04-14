@@ -436,4 +436,12 @@
       permission="cmf.ManagePortal"
       />
 
+  <!-- Control panel -->
+  <browser:page
+      name="offdays-settings"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      class=".offdays_settings.OffDaysControlPanel"
+      permission="cmf.ManagePortal"
+  />
+
 </configure>

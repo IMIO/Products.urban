@@ -14,7 +14,7 @@
 
 <metal:widgets fill-slot="widgets">
 
- <metal:edit use-macro="here/@@globalmacros/editUrbanevent" />
+ <metal:edit use-macro="here/@@urbaneventinquiry_edit/editUrbanEventInquiry" />
 
 </metal:widgets>
 </metal:base_body>

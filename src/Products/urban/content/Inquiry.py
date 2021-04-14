@@ -427,20 +427,19 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
         if not start_date:
             return 0
 
+        end_date = inquiry_event.getInvestigationEnd()
+        if not end_date:
+            return 0
+
         portal_urban = api.portal.get_tool('portal_urban')
         licence = IGenericLicence.providedBy(self) and self or self.aq_parent
-        suspension_periods = portal_urban.getInquirySuspensionPeriods()
+        suspension_periods = portal_urban.get_offday_periods('inquiry_suspension')
         suspension_delay = 0
-        inquiry_duration = 15
-        if hasattr(licence, 'getRoadAdaptation'):
-            if self.getRoadAdaptation() and self.getRoadAdaptation() != ['']:
-                inquiry_duration = 30
-        theorical_end_date = start_date + inquiry_duration
 
         for suspension_period in suspension_periods:
-            suspension_start = DateTime(suspension_period['from'])
-            suspension_end = DateTime(suspension_period['to'])
-            if start_date < suspension_start and theorical_end_date >= suspension_start:
+            suspension_start = DateTime(str(suspension_period['start_date']))
+            suspension_end = DateTime(str(suspension_period['end_date']))
+            if start_date < suspension_start and end_date >= suspension_start:
                 suspension_delay = suspension_end - suspension_start
                 return int(suspension_delay)
             elif start_date >= suspension_start and start_date < suspension_end + 1:

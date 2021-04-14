@@ -1,6 +1,12 @@
 # -*- coding: utf-8 -*-
 
-from DateTime import DateTime
+from datetime import datetime
+from datetime import timedelta
+
+from numpy import busdaycalendar
+from numpy import busday_offset
+
+from plone import api
 
 from Products.Archetypes.browser.edit import Edit
 
@@ -62,6 +68,28 @@ class ComputeInquiryDelay(object):
     def __call__(self):
         """
         """
-        start_date = DateTime(self.request.start)
-        end_date = start_date + 20
-        return end_date.strftime('%Y-%m-%d')
+        urban_tool = api.portal.get_tool('portal_urban')
+        try:
+            start_date = datetime.strptime(self.request.start, '%Y-%m-%d 00:00').date()
+        except ValueError:
+            start_date = datetime.strptime(self.request.start, '%Y/%m/%d').date()
+
+        inquiry_delay = 15
+        licence = self.context.aq_parent
+        if hasattr(licence, 'getRoadAdaptation'):
+            if licence.getRoadAdaptation() and licence.getRoadAdaptation() != ['']:
+                inquiry_delay = 30
+
+        weekmask = urban_tool.get_week_offdays(as_mask=True)
+        offday_periods = urban_tool.get_offday_periods(types='inquiry_suspension')
+        holidays = urban_tool.get_offdays(types='holydays')
+
+        for period in offday_periods:
+            start = period['start_date']
+            end = period['end_date']
+            date_range = [start + timedelta(days=d) for d in range((end - start).days + 1)]
+            holidays.extend(date_range)
+
+        calendar = busdaycalendar(weekmask=weekmask, holidays=holidays)
+        end_date = busday_offset(start_date, inquiry_delay, roll='forward', busdaycal=calendar)
+        return str(end_date)

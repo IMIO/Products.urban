@@ -2760,3 +2760,15 @@ msgstr ""
 
 msgid "urban_button_search"
 msgstr ""
+
+msgid "holydays"
+msgstr ""
+
+msgid "college_holydays"
+msgstr ""
+
+msgid "inquiry_suspension"
+msgstr ""
+
+msgid "other"
+msgstr ""

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2021-04-08 13:04+0000\n"
+"POT-Creation-Date: 2021-04-14 10:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -13,6 +13,10 @@ msgstr ""
 "Language-Name: English\n"
 "Preferred-Encodings: utf-8\n"
 "Domain: urban\n"
+
+#: ../browser/offdays_settings.py:75
+msgid ""
+msgstr ""
 
 #. Default: "urban"
 #: ../setuphandlers.py:304
@@ -170,8 +174,16 @@ msgstr ""
 msgid "CS_folder_title"
 msgstr ""
 
+#: ../browser/offdays_settings.py:124
+msgid "Cancel"
+msgstr ""
+
 #: ../browser/actionspanel/actions_panel_change_owner.pt:2
 msgid "Change Owner"
+msgstr ""
+
+#: ../browser/offdays_settings.py:121
+msgid "Changes saved"
 msgstr ""
 
 #: ../browser/templates/parcelsconsistencyview.pt:15
@@ -197,6 +209,14 @@ msgid "Coring"
 msgstr ""
 
 msgid "Create proprietary/applicant"
+msgstr ""
+
+#: ../browser/offdays_settings.py:54
+msgid "Date"
+msgstr ""
+
+#: ../browser/offdays_settings.py:89
+msgid "Day"
 msgstr ""
 
 msgid "Declaration"
@@ -252,6 +272,10 @@ msgstr ""
 
 #: ../browser/portlets.py:75
 msgid "Edit Urban tools Portlet"
+msgstr ""
+
+#: ../browser/offdays_settings.py:127
+msgid "Edit cancelled"
 msgstr ""
 
 #: ../profiles/default/actions.xml
@@ -545,7 +569,7 @@ msgstr ""
 msgid "IntegratedLicence"
 msgstr ""
 
-#: ../interfaces.py:712
+#: ../interfaces.py:713
 msgid "Internal opinion services"
 msgstr ""
 
@@ -559,7 +583,7 @@ msgstr ""
 msgid "Listing file"
 msgstr ""
 
-#: ../interfaces.py:735
+#: ../interfaces.py:736
 msgid "Mailing limit"
 msgstr ""
 
@@ -567,7 +591,7 @@ msgstr ""
 msgid "Map"
 msgstr ""
 
-#: ../interfaces.py:736
+#: ../interfaces.py:737
 msgid "Max items allowed for immediate mailing"
 msgstr ""
 
@@ -613,6 +637,14 @@ msgstr ""
 msgid "Nothing to show !!!"
 msgstr ""
 
+#: ../browser/offdays_settings.py:86
+msgid "Off days"
+msgstr ""
+
+#: ../browser/offdays_settings.py:74
+msgid "Off days period"
+msgstr ""
+
 msgid "Ongoing events"
 msgstr ""
 
@@ -625,11 +657,15 @@ msgstr ""
 msgid "PatrimonyCertificate"
 msgstr ""
 
-#: ../interfaces.py:750
+#: ../browser/offdays_settings.py:77
+msgid "Period"
+msgstr ""
+
+#: ../interfaces.py:751
 msgid "Planned claimants imports"
 msgstr ""
 
-#: ../interfaces.py:725
+#: ../interfaces.py:726
 msgid "Planned mailings"
 msgstr ""
 
@@ -682,6 +718,10 @@ msgstr ""
 msgid "RoadDecree"
 msgstr ""
 
+#: ../browser/offdays_settings.py:113
+msgid "Save"
+msgstr ""
+
 #. Default: "imio.schedule"
 #: ../setuphandlers.py:332
 msgid "ScheduleConfig"
@@ -702,15 +742,15 @@ msgstr ""
 msgid "Select to list"
 msgstr ""
 
-#: ../browser/urbanconfigview.py:77
+#: ../browser/urbanconfigview.py:80
 msgid "Service full name"
 msgstr ""
 
-#: ../browser/urbanconfigview.py:82
+#: ../browser/urbanconfigview.py:85
 msgid "Service id"
 msgstr ""
 
-#: ../interfaces.py:713
+#: ../interfaces.py:714
 msgid "Services that can give their opinion directly through urban"
 msgstr ""
 
@@ -732,7 +772,8 @@ msgstr ""
 msgid "Submit"
 msgstr ""
 
-#: ../interfaces.py:763
+#: ../browser/offdays_settings.py:39
+#: ../interfaces.py:764
 msgid "Suspension period end date"
 msgstr ""
 
@@ -740,7 +781,8 @@ msgstr ""
 msgid "Suspension period from to: please check the end date"
 msgstr ""
 
-#: ../interfaces.py:759
+#: ../browser/offdays_settings.py:33
+#: ../interfaces.py:760
 msgid "Suspension period start date"
 msgstr ""
 
@@ -809,6 +851,10 @@ msgstr ""
 msgid "Transitions:"
 msgstr ""
 
+#: ../browser/offdays_settings.py:27
+msgid "Type"
+msgstr ""
+
 #: ../browser/templates/urbanstatsmacros.pt:10
 msgid "Types de permis \ &Eacute;tats"
 msgstr ""
@@ -839,6 +885,10 @@ msgstr ""
 
 # urban_actions
 msgid "View"
+msgstr ""
+
+#: ../browser/offdays_settings.py:65
+msgid "Week off days"
 msgstr ""
 
 #: ../UrbanEventType.py:278
@@ -1159,6 +1209,9 @@ msgid "codt_urbancertificateone_urbanconfig_title"
 msgstr ""
 
 msgid "codt_urbancertificatetwo_urbanconfig_title"
+msgstr ""
+
+msgid "college_holydays"
 msgstr ""
 
 #. Default: "Street"
@@ -1704,10 +1757,13 @@ msgstr ""
 msgid "groundstatestatus_folder_title"
 msgstr ""
 
+msgid "holydays"
+msgstr ""
+
 msgid "inadmissibilityreasons_folder_title"
 msgstr ""
 
-#: ../interfaces.py:751
+#: ../interfaces.py:752
 msgid "inquiries planned for claimants imports"
 msgstr ""
 
@@ -1720,6 +1776,9 @@ msgid "inquiry_from"
 msgstr ""
 
 msgid "inquiry_item"
+msgstr ""
+
+msgid "inquiry_suspension"
 msgstr ""
 
 msgid "inquiry_suspension_folder_title"
@@ -1981,11 +2040,11 @@ msgstr ""
 msgid "lotusages_folder_title"
 msgstr ""
 
-#: ../interfaces.py:726
+#: ../interfaces.py:727
 msgid "mailings planned"
 msgstr ""
 
-#: ../interfaces.py:741
+#: ../interfaces.py:742
 msgid "mailings planned for radius search"
 msgstr ""
 
@@ -2149,6 +2208,9 @@ msgid "open_office_port"
 msgstr ""
 
 msgid "opinionstoaskifworks_folder_title"
+msgstr ""
+
+msgid "other"
 msgstr ""
 
 #. Default: "Outdated parcels used in licences in progress"
@@ -5540,6 +5602,10 @@ msgstr ""
 #: ../browser/licence/buildlicenceview.py:26
 #: ../browser/licence/codt_buildlicenceview.py:26
 msgid "warning_outdated_parcel"
+msgstr ""
+
+#: ../browser/offdays_settings.py:68
+msgid "weekdays"
 msgstr ""
 
 msgid "work_location"
