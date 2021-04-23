@@ -32,7 +32,7 @@ import os
 import importlib
 
 PROJECTNAME = "urban"
-URBAN_CFG_DIR = '{}/var/urban'.format(os.environ['PWD'])
+URBAN_CFG_DIR = '{}/var/urban'.format(os.getcwd())
 
 
 class ExternalConfig(object):
@@ -208,7 +208,7 @@ URBAN_TYPES = [
     'MiscDemand', 'Division',
     'NotaryLetter', 'CODT_NotaryLetter',
     'ProjectMeeting', 'ExplosivesPossession',
-    'RoadDecree',
+    # 'RoadDecree',
     'Inspection', 'Ticket'
 ]
 
