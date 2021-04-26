@@ -171,7 +171,7 @@ class DXUrbanDocGenerationHelperView(DXDocumentGenerationHelperView, BaseHelperV
     """
 
     def __init__(self, context, request):
-        super(UrbanDocGenerationHelperView, self).__init__(context, request)
+        super(DXUrbanDocGenerationHelperView, self).__init__(context, request)
         self.context.helper_view = self
 
 
