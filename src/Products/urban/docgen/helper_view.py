@@ -24,26 +24,6 @@ from plone import api
 from DateTime import DateTime
 
 
-class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView, BaseHelperView):
-    """
-    Urban implementation of document generation helper methods.
-    """
-
-    def __init__(self, context, request):
-        super(UrbanDocGenerationHelperView, self).__init__(context, request)
-        self.context.helper_view = self
-
-
-class DXUrbanDocGenerationHelperView(DXDocumentGenerationHelperView, BaseHelperView):
-    """
-    Urban implementation of document generation helper methods.
-    """
-
-    def __init__(self, context, request):
-        super(UrbanDocGenerationHelperView, self).__init__(context, request)
-        self.context.helper_view = self
-
-
 class BaseHelperView(object):
     """
     Urban implementation of document generation helper methods.
@@ -177,6 +157,26 @@ class BaseHelperView(object):
         keys = type(field.getRaw(context)) in (list, tuple) and field.getRaw(context) or [field.getRaw(context)]
         objs = [field.vocabulary.getAllVocTerms(context).get(key, None) for key in keys]
         return objs
+
+
+class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView, BaseHelperView):
+    """
+    Urban implementation of document generation helper methods.
+    """
+
+    def __init__(self, context, request):
+        super(UrbanDocGenerationHelperView, self).__init__(context, request)
+        self.context.helper_view = self
+
+
+class DXUrbanDocGenerationHelperView(DXDocumentGenerationHelperView, BaseHelperView):
+    """
+    Urban implementation of document generation helper methods.
+    """
+
+    def __init__(self, context, request):
+        super(UrbanDocGenerationHelperView, self).__init__(context, request)
+        self.context.helper_view = self
 
 
 class UrbanDocGenerationLicenceHelperView(UrbanDocGenerationHelperView):
