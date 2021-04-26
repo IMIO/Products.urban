@@ -2,6 +2,7 @@
 
 from collective.documentgenerator.helper.archetypes import ATDisplayProxyObject
 from collective.documentgenerator.helper.archetypes import ATDocumentGenerationHelperView
+from collective.documentgenerator.helper.dexterity import DXDocumentGenerationHelperView
 
 from datetime import date as _date
 from dateutil.relativedelta import relativedelta
@@ -23,7 +24,27 @@ from plone import api
 from DateTime import DateTime
 
 
-class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
+class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView, BaseHelperView):
+    """
+    Urban implementation of document generation helper methods.
+    """
+
+    def __init__(self, context, request):
+        super(UrbanDocGenerationHelperView, self).__init__(context, request)
+        self.context.helper_view = self
+
+
+class DXUrbanDocGenerationHelperView(DXDocumentGenerationHelperView, BaseHelperView):
+    """
+    Urban implementation of document generation helper methods.
+    """
+
+    def __init__(self, context, request):
+        super(UrbanDocGenerationHelperView, self).__init__(context, request)
+        self.context.helper_view = self
+
+
+class BaseHelperView(object):
     """
     Urban implementation of document generation helper methods.
     """

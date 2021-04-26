@@ -95,4 +95,13 @@
         />
     </configure>
 
+    <configure package="collective.documentgenerator">
+        <browser:page
+            for="plone.dexterity.interfaces.IDexterityContent"
+            class="Products.urban.docgen.helper_view.DXUrbanDocGenerationHelperView"
+            permission="zope2.View"
+            name="document_generation_helper_view"
+        />
+    </configure>
+
 </configure>
