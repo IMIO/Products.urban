@@ -55,12 +55,12 @@ schema = Schema((
     ),
     TextField(
         name='derogationDetails',
-        allowable_content_types=('text/plain',),
-        widget=TextAreaWidget(
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
             label=_('urban_label_derogationDetails', default='Derogationdetails'),
         ),
-        default_output_type='text/plain',
-        default_content_type='text/plain',
+        default_output_type='text/html',
+        default_content_type='text/html',
         default_method='getDefaultText',
     ),
     LinesField(
