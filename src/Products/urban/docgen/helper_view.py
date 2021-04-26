@@ -53,10 +53,6 @@ class BaseHelperView(object):
             return proxy_method
         return attr
 
-    def __init__(self, context, request):
-        super(UrbanDocGenerationHelperView, self).__init__(context, request)
-        self.context.helper_view = self
-
     def xhtml(self, html_code, style='UrbanBody'):
         urban_tool = api.portal.get_tool('portal_urban')
         decorated_html = urban_tool.decorateHTML(style, html_code)
