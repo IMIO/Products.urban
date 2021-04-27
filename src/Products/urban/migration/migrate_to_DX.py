@@ -234,4 +234,8 @@ def migrate_UrbanEventType_to_DX(context):
     # should at least reindex the Title
     for event_config in event_configs:
         event_config.reindexObject(idxs=['Title', 'sortable_title'])
+    # update voc cache for opinion request vocabulary.
+    portal_urban = api.portal.get_tool('portal_urban')
+    cache_view = portal_urban.unrestrictedTraverse('urban_vocabulary_cache')
+    cache_view.update_all_cache()
     return result
