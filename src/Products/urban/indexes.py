@@ -137,6 +137,8 @@ def genericlicence_modified(licence):
 
 @indexer(IGenericLicence)
 def genericlicence_streetsuid(licence):
+    if licence.portal_type in ['EnvClassBordering']:
+        return []
     streets = [location['street'] for location in licence.getWorkLocations()]
     return streets
 
