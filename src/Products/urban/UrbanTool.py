@@ -801,6 +801,8 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         week_offdays = api.portal.get_registry_record(
             'Products.urban.browser.offdays_settings.IOffDays.week_offdays'
         )
+        if week_offdays is None:
+            week_offdays = [6, 7]
         if as_mask:
             weekmask = ''.join([str(int(i not in week_offdays)) for i in range(7)])
             return weekmask
