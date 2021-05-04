@@ -96,4 +96,4 @@ class ComputeInquiryDelay(object):
         # then round the end date to not fall during a weekend
         calendar = busdaycalendar(weekmask=weekmask, holidays=holidays)
         rounded_end_date = busday_offset(end_date, 0, roll='forward', busdaycal=calendar)
-        return str(end_date)
+        return str(rounded_end_date)
