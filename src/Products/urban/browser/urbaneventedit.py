@@ -90,6 +90,10 @@ class ComputeInquiryDelay(object):
             date_range = [start + timedelta(days=d) for d in range((end - start).days + 1)]
             holidays.extend(date_range)
 
-        calendar = busdaycalendar(weekmask=weekmask, holidays=holidays)
+        # first calculate end date without weekends
+        calendar = busdaycalendar(weekmask='1111111', holidays=holidays)
         end_date = busday_offset(start_date, inquiry_delay, roll='forward', busdaycal=calendar)
+        # then round the end date to not fall during a weekend
+        calendar = busdaycalendar(weekmask=weekmask, holidays=holidays)
+        rounded_end_date = busday_offset(end_date, 0, roll='forward', busdaycal=calendar)
         return str(end_date)

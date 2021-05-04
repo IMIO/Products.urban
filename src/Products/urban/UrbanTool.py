@@ -802,7 +802,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             'Products.urban.browser.offdays_settings.IOffDays.week_offdays'
         )
         if week_offdays is None:
-            week_offdays = [6, 7]
+            week_offdays = [5, 6]
         if as_mask:
             weekmask = ''.join([str(int(i not in week_offdays)) for i in range(7)])
             return weekmask
