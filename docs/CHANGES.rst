@@ -5,6 +5,8 @@ Changes
 2.5 (unreleased)
 ----------------
 
+- Fix "Vers les procédures CODT/CWATUPE" left portlet links [SUP-6264]
+  [jjaumotte]
 
 - Update MailingPersistentDocumentGenerationView call with generated_doc_title param. [URB-1862]
   [jjaumotte]
