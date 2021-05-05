@@ -75,7 +75,8 @@ class UrbanBase(object):
     security.declarePublic('getCorporations')
     def getCorporations(self):
         corporations = [corp for corp in self.objectValues('Corporation')
-                        if api.content.get_state(corp) == 'enabled']
+                        if corp.portal_type == 'Corporation'
+                        and api.content.get_state(corp) == 'enabled']
         return corporations
 
     security.declarePublic('get_corporations_history')
