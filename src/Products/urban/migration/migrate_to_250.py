@@ -380,4 +380,6 @@ def migrate(context):
     migrate_styles_pod_templates(context)
     catalog = api.portal.get_tool('portal_catalog')
     catalog.clearFindAndRebuild()
+    ref_catalog = api.portal.get_tool('reference_catalog')
+    ref_catalog.manage_catalogReindex()
     logger.info("migration done!")
