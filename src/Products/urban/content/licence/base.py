@@ -651,7 +651,7 @@ class UrbanBase(object):
             else:
                 catalog = api.portal.get_tool('portal_catalog')
                 objs = []
-                if field.getRaw(obj)):
+                if field.getRaw(obj):
                     objs = [obj_.getObject() for obj_ in catalog(UID=field.getRaw(obj))]
             field_name = subfield_name
             return [self.getValueForTemplate(field_name, obj_) for obj_ in objs]
