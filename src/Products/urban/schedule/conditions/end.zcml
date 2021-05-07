@@ -222,6 +222,23 @@
         name="urban.schedule.condition.opinion_requests_done"
     />
 
+    <!-- FD opinion -->
+    <adapter
+        for="Products.urban.interfaces.IBaseAllBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.FDOpinionAsked"
+        name="urban.schedule.condition.FD_opinion_asked"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.IBaseAllBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.FDOpinionReceived"
+        name="urban.schedule.condition.FD_opinion_received"
+    />
+
     <!-- College opinion transmit for unique licences -->
     <adapter
         for="Products.urban.interfaces.IBaseAllBuildLicence

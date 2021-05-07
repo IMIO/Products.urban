@@ -266,6 +266,16 @@ EventConfigs = {
             ),
         },
         {
+            'id': "avis-FD",
+            'title': "Demande d'avis au FD",
+            'eventDateLabel': "Date d'envoi",
+            'activatedFields': ('receiptDate', 'adviceAgreementLevel', 'externalDecision',  'opinionText'),
+            'eventType': ('Products.urban.interfaces.IWalloonRegionOpinionRequestEvent',),
+            'eventPortalType': 'UrbanEventOpinionRequest',
+            'keyDates': ('eventDate',),
+            'podTemplates': (),
+        },
+        {
             'id': "prorogation-codt",
             'title': "Prorogation du permis",
             'activatedFields': ('decisionDate', 'decision', 'decisionText',),

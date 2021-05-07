@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2021-04-14 10:17+0000\n"
+"POT-Creation-Date: 2021-05-07 10:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -777,7 +777,7 @@ msgstr ""
 msgid "Suspension period end date"
 msgstr ""
 
-#: ../browser/urbaneventviews.py:445
+#: ../browser/urbaneventviews.py:437
 msgid "Suspension period from to: please check the end date"
 msgstr ""
 
@@ -794,7 +794,7 @@ msgstr ""
 msgid "Tests Extension profile for urban."
 msgstr ""
 
-#: ../browser/urbaneventviews.py:439
+#: ../browser/urbaneventviews.py:431
 msgid "The claimants import will be ready tomorrow!"
 msgstr ""
 
@@ -806,15 +806,15 @@ msgstr ""
 msgid "The mailings will be ready tomorrow!"
 msgstr ""
 
-#: ../browser/urbaneventviews.py:470
+#: ../browser/urbaneventviews.py:462
 msgid "The parcel radius search will be ready tomorrow!"
 msgstr ""
 
-#: ../browser/urbaneventviews.py:468
+#: ../browser/urbaneventviews.py:460
 msgid "There are parcel owners without any address found! Desactivate them!"
 msgstr ""
 
-#: ../browser/urbaneventviews.py:437
+#: ../browser/urbaneventviews.py:429
 msgid "This UrbanEventInquiry is not linked to an existing Inquiry !  Define a new inquiry on the licence !"
 msgstr ""
 
@@ -1438,13 +1438,8 @@ msgstr ""
 msgid "error_in_expr_contact_admin"
 msgstr ""
 
-#. Default: "The inquiry end date falls during suspension period from {} to {}from"
-#: ../validators/validator.py:234
-msgid "error_inquiry_suspension"
-msgstr ""
-
 #. Default: "Delay should be an integer"
-#: ../validators/validator.py:253
+#: ../validators/validator.py:223
 msgid "error_integer"
 msgstr ""
 
@@ -3039,7 +3034,7 @@ msgid "urban_label_askingDate"
 msgstr ""
 
 #. Default: "Asyncinquiryradius"
-#: ../UrbanTool.py:178
+#: ../UrbanTool.py:163
 msgid "urban_label_asyncInquiryRadius"
 msgstr ""
 
@@ -3216,7 +3211,7 @@ msgid "urban_label_classification_order_scope"
 msgstr ""
 
 #. Default: "College Holidays"
-#: ../UrbanTool.py:128
+#: ../UrbanTool.py:113
 msgid "urban_label_collegeHolidays"
 msgstr ""
 
@@ -3496,7 +3491,7 @@ msgid "urban_label_divisionsRenaming"
 msgstr ""
 
 #. Default: "Editionoutputformat"
-#: ../UrbanTool.py:149
+#: ../UrbanTool.py:134
 msgid "urban_label_editionOutputFormat"
 msgstr ""
 
@@ -3731,7 +3726,7 @@ msgid "urban_label_general_disposition"
 msgstr ""
 
 #. Default: "Generatesingletondocuments"
-#: ../UrbanTool.py:160
+#: ../UrbanTool.py:145
 msgid "urban_label_generateSingletonDocuments"
 msgstr ""
 
@@ -3821,11 +3816,6 @@ msgstr ""
 msgid "urban_label_initials"
 msgstr ""
 
-#. Default: "Inquiry suspension periods"
-#: ../UrbanTool.py:113
-msgid "urban_label_inquirySuspensionPeriods"
-msgstr ""
-
 #. Default: "Inquiry_category"
 #: ../content/CODT_UniqueLicenceInquiry.py:35
 msgid "urban_label_inquiry_category"
@@ -3852,7 +3842,7 @@ msgid "urban_label_internal_service"
 msgstr ""
 
 #. Default: "Invertaddressnames"
-#: ../UrbanTool.py:169
+#: ../UrbanTool.py:154
 msgid "urban_label_invertAddressNames"
 msgstr ""
 
@@ -4157,7 +4147,7 @@ msgid "urban_label_locationTechnicalRemarks"
 msgstr ""
 
 #. Default: "Logmaprequests"
-#: ../UrbanTool.py:187
+#: ../UrbanTool.py:172
 msgid "urban_label_logMapRequests"
 msgstr ""
 
@@ -4182,7 +4172,7 @@ msgid "urban_label_manualParcels"
 msgstr ""
 
 #. Default: "Map Url"
-#: ../UrbanTool.py:140
+#: ../UrbanTool.py:125
 msgid "urban_label_mapUrl"
 msgstr ""
 
@@ -5338,7 +5328,7 @@ msgid "urban_label_usage"
 msgstr ""
 
 #. Default: "Useplonemeetingwsclient"
-#: ../UrbanTool.py:196
+#: ../UrbanTool.py:181
 msgid "urban_label_usePloneMeetingWSClient"
 msgstr ""
 

@@ -233,6 +233,14 @@
         name="urban.schedule.condition.dont_need_FD_opinion"
     />
 
+    <adapter
+        for="Products.urban.interfaces.IBaseAllBuildLicence
+             imio.schedule.content.task_config.ITaskConfig"
+        provides="imio.schedule.interfaces.ICreationCondition"
+        factory=".creation.FDOpinionIsLate"
+        name="urban.schedule.condition.FD_opinion_overdue"
+    />
+
     <!-- deposit date is past by x days -->
     <adapter
         for="Products.urban.interfaces.IBaseAllBuildLicence

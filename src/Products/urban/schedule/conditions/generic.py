@@ -34,8 +34,6 @@ class DepositEventCreated(Condition):
 
     def evaluate(self):
         licence = self.task_container
-
-        deposit_done = False
         deposit_event = licence.getLastDeposit()
         return deposit_event
 
@@ -498,6 +496,37 @@ class WalloonRegionPrimoEventDone(Condition):
             primo_done = api.content.get_state(primo_event) == 'closed'
 
         return primo_done
+
+
+class FDCondition(Condition):
+    """
+    Base class for FD opinion request condition
+    """
+
+    def __init__(self, licence, task):
+        super(FDCondition, self).__init__(licence, task)
+        self.FD_event = licence.getLastWalloonRegionOpinionRequest()
+
+
+class FDOpinionAsked(FDCondition):
+    """
+    Opinion request is sent to FD
+    """
+
+    def evaluate(self):
+        if not self.FD_event:
+            return False
+        return api.content.get_state(self.FD_event) == 'waiting_opinion'
+
+
+class FDOpinionReceived(FDCondition):
+    """
+    """
+
+    def evaluate(self):
+        if not self.FD_event:
+            return False
+        return api.content.get_state(self.FD_event) == 'opinion_given'
 
 
 class LicenceDecisionCollegeEventCreated(Condition):

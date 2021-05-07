@@ -366,6 +366,43 @@ schedule_config = {
             'marker_interfaces': [u'Products.urban.schedule.interfaces.ISendOpinionRequestsTask'],
         },
         {
+            'type_name': 'TaskConfig',
+            'id': 'ask_FD_opinion',
+            'title': 'Demander l\'avis du FD',
+            'default_assigned_group': 'urban_editors',
+            'default_assigned_user': 'urban.assign_folder_manager',
+            'creation_state': ('complete',),
+            'starting_states': ('complete',),
+            'creation_conditions': (
+                CreationConditionObject('urban.schedule.condition.need_FD_opinion', 'AND'),
+            ),
+            'end_conditions': (
+                EndConditionObject('urban.schedule.condition.FD_opinion_asked', 'AND'),
+            ),
+            'start_date': 'urban.schedule.start_date.acknowledgment_date',
+            'calculation_delay': (
+                'urban.schedule.delay.annonced_delay',
+            ),
+            'additional_delay': -55,
+        },
+        {
+            'type_name': 'TaskConfig',
+            'id': 'FD_opinion_overdue',
+            'title': 'Avis du FD hors délai',
+            'default_assigned_group': 'urban_editors',
+            'default_assigned_user': 'urban.assign_folder_manager',
+            'creation_state': ('complete',),
+            'starting_states': ('complete',),
+            'creation_conditions': (
+                CreationConditionObject('urban.schedule.condition.FD_opinion_overdue', 'AND'),
+            ),
+            'end_conditions': (
+                EndConditionObject('urban.schedule.condition.FD_opinion_received', 'AND'),
+            ),
+            'start_date': 'urban.schedule.start_date.task_starting_date',
+            'additional_delay': 0,
+        },
+        {
             'type_name': 'MacroTaskConfig',
             'id': 'decision-finale',
             'title': 'Décision finale à notifier',
