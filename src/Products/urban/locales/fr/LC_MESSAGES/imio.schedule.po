@@ -17,6 +17,12 @@ msgstr ""
 msgid "urban.assign_folder_manager"
 msgstr "Gestionnaire du dossier"
 
+msgid "urban.schedule.condition.FD_opinion_asked"
+msgstr "Créer l'événement de demande d'avis au FD et le passer dans l'état 'avis demandé'"
+
+msgid "urban.schedule.condition.FD_opinion_received"
+msgstr "Clôre l'événement de demande d'avis au FD"
+
 msgid "urban.schedule.condition.acknowledgment_created"
 msgstr "Créer l'événement d'accusé de réception"
 

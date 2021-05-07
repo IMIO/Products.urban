@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
 
 from DateTime import DateTime
+from datetime import date
 from datetime import datetime
 from plone import api
 
 from imio.schedule.content.condition import CreationCondition
+
+from numpy import busday_offset
 
 from Products.urban.schedule.conditions.base import BaseInspection
 
@@ -411,6 +414,38 @@ class HasNoFDOpinionRequest(CreationCondition):
         return 'FD' not in licence.getProcedureChoice()
 
 
+class FDCreationCondition(CreationCondition):
+    """
+    Base class for FD opinion request condition
+    """
+
+    def __init__(self, licence, task):
+        super(FDCreationCondition, self).__init__(licence, task)
+        self.FD_event = licence.getLastWalloonRegionOpinionRequest()
+
+
+class FDOpinionIsLate(FDCreationCondition):
+    """
+    FD opinion request is overdue.
+    """
+
+    def evaluate(self):
+        if not self.FD_event:
+            return False
+        if not api.content.get_state(self.FD_event) == 'waiting_opinion':
+            return False
+        sd = self.FD_event.getEventDate()
+        start_date = date(sd.year(), sd.month(), sd.day())
+        FD_delay = 35
+
+        end_date = busday_offset(start_date, FD_delay, roll='forward', weekmask='1111111')
+        # report end date to the nex mondy if it ends on saturday or sunday
+        rounded_end_date = busday_offset(end_date, 0, roll='forward', weekmask='1111100')
+
+        is_late = rounded_end_date < date.today()
+        return is_late
+
+
 class DepositDateIsPast20Days(CreationCondition):
     """
     The deposit date is past by 20 days
@@ -483,7 +518,8 @@ class IncompleteForTheSecondTime(CreationCondition):
         if not first_incomplete_done:
             return False
         wf_history = licence.workflow_history
-        two_incomplete_transitions = 2 <= len([tr for tr in wf_history[wf_history.keys()[0]] if tr['action'] == 'isincomplete'])
+        two_incomplete_transitions = 2 <= len([tr for tr in wf_history[wf_history.keys()[0]]
+                                               if tr['action'] == 'isincomplete'])
         if not two_incomplete_transitions:
             return False
         return True
