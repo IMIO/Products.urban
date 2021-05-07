@@ -203,7 +203,7 @@ class SearchParcelsView(BrowserView):
         )
         try:
             api.content.create(container=self.context, type='Parcel', id=parcel_id, **parcel_data)
-            container.reindexObject(idxs=["parcelInfosIndex"])
+            self.context.reindexObject(idxs=["parcelInfosIndex"])
         except BadRequest as already_created:
             if 'is invalid - it is already in use.' in already_created.message:
                 return
