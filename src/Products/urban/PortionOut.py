@@ -290,14 +290,19 @@ class PortionOut(BaseContent, BrowserDefaultMixin):
         return historic
 
     def get_capakey(self):
-        capakey = "%s%s%04d/%02d%s%03d" % (
-            self.getDivisionCode(),
-            self.getSection(),
-            int(self.getRadical() or 0),
-            int(self.getBis() or 0),
-            self.getExposant() or '_',
-            int(self.getPuissance() or 0)
-        )
+        try:
+            capakey = "%s%s%04d/%02d%s%03d" % (
+                self.getDivisionCode(),
+                self.getSection(),
+                int(self.getRadical() or 0),
+                int(self.getBis() or 0),
+                self.getExposant() or '_',
+                int(self.getPuissance() or 0)
+            )
+        except ValueError as e:
+            print(self.absolute_url_path())
+            import ipdb; ipdb.set_trace() # TODO REMOVE BREAKPOINT
+            print("debug")
         return capakey
 
 

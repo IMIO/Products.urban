@@ -27,7 +27,7 @@
   <adapter name="investigationStart" factory=".indexes.investigation_start_date" />
   <adapter name="investigationEnd" factory=".indexes.investigation_end_date" />
 
-  <!-- Unindex UrbanEvent, UrbanDoc, Applicant and PortionOut -->
+  <!-- Unindex UrbanEvent, UrbanDoc, Applicant and PortionOut>
 
   <adapter name="sortable_title" factory=".indexes.event_not_indexed" />
   <adapter name="SearchableText" factory=".indexes.event_not_indexed" />
@@ -103,6 +103,7 @@
   <adapter name="effective" factory=".indexes.portion_not_indexed" />
   <adapter name="getReference" factory=".indexes.portion_not_indexed" />
   <adapter name="extraValue" factory=".indexes.portion_not_indexed" />
-  <adapter name="allowedRolesAndUsers" factory=".indexes.portion_not_indexed" />
+  <adapter name="allowedRolesAndUsers" factory=".indexes.portion_not_indexed" /-->
+
 
 </configure>

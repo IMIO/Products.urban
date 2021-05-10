@@ -26,6 +26,7 @@ class MayAccessUrban(BrowserView):
 
     def __call__(self):
         """ Test if the current user can acess urban view."""
+        #import ipdb; ipdb.set_trace() # TODO REMOVE BREAKPOINT
         portal = api.portal.get()
         sm = getSecurityManager()
         may_access = sm.checkPermission('View', getattr(portal, 'urban'))

@@ -25,13 +25,13 @@ def migrateToUrban170(context):
     logger = logging.getLogger('urban: migrate to 1.7.0')
     logger.info("starting migration steps")
     # migrate Applicant type has now Applicant meta type
-    migrateApplicantMetaType(context)
+    #migrateApplicantMetaType(context)
     # migrate Proprietary type has now Applicant meta type
-    migrateProprietaryMetaType(context)
+    #migrateProprietaryMetaType(context)
     # update EnvClassOne events
-    migrateEnvClassOneEventTypes(context)
+    #migrateEnvClassOneEventTypes(context)
     # migrate decisions vocabulary
-    migrateDecisionsVocabulary(context)
+    #migrateDecisionsVocabulary(context) => already loaded!
 
     logger.info("starting to reinstall urban...")  # finish with reinstalling urban and adding the templates
     setup_tool = api.portal.get_tool('portal_setup')

@@ -34,18 +34,21 @@ def migrate(context):
     logger = logging.getLogger('urban: migrate to 1.11.0')
     logger.info("starting migration steps")
     #  migrate UrbanDoc to File type with an IUrbanDoc marker interface on it.
+    import collective.noindexing
+    collective.noindexing.patches.apply()
     migrate_generated_UrbanDoc_to_ATFile(context)
-    migrate_UrbanDoc_to_SubTemplate(context)
-    migrate_UrbanDoc_to_StyleTemplate(context)
-    migrate_UrbanDoc_to_Urbantemplate(context)
-    migrate_statsINS_template(context)
-    migrate_PersonTitleTerm(context)
-    migrate_PortionOut(context)
-    migrate_worktypes(context)
+    collective.noindexing.patches.unapply()
+    # migrate_UrbanDoc_to_SubTemplate(context)
+    # migrate_UrbanDoc_to_StyleTemplate(context)
+    # migrate_UrbanDoc_to_Urbantemplate(context)
+    # migrate_statsINS_template(context)
+    # migrate_PersonTitleTerm(context)
+    # migrate_PortionOut(context)
+    # migrate_worktypes(context)
 
     logger.info("starting to reinstall urban...")  # finish with reinstalling urban and adding the templates
-    setup_tool = api.portal.get_tool('portal_setup')
-    setup_tool.runAllImportStepsFromProfile('profile-Products.urban:default')
+    # setup_tool = api.portal.get_tool('portal_setup')
+    # setup_tool.runAllImportStepsFromProfile('profile-Products.urban:default')
     logger.info("reinstalling urban done!")
     logger.info("migration done!")
 
@@ -87,7 +90,8 @@ def migrate_generated_UrbanDoc_to_ATFile(context):
         query={'path': folder_path},
         callBefore=contentmigrationLogger,
         logger=logger,
-        purl=portal.portal_url
+        purl=portal.portal_url,
+        transaction_size = 100000,
     )
     walker.go()
 

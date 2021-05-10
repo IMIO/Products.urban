@@ -40,6 +40,9 @@ def getLicenceSchema(licencetype):
         return None
     types_tool = api.portal.get_tool('portal_types')
     type_info = types_tool.getTypeInfo(licencetype)
+    if not type_info:
+        # le type n'existe pas encore
+        return
     metatype = type_info.getProperty('content_meta_type')
     module_name = 'Products.urban.content.licence.%s' % metatype
     attribute = "%s_schema" % metatype

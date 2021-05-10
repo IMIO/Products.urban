@@ -3,7 +3,7 @@
            xmlns:i18n="http://namespaces.zope.org/i18n"
            i18n_domain="urban">
 
-  <subscriber for="..interfaces.IUrbanEventOpinionRequest
+  <!--subscriber for="..interfaces.IUrbanEventOpinionRequest
                    zope.lifecycleevent.interfaces.IObjectCreatedEvent"
               handler=".opinionRequestEvents.setDefaultLinkedInquiry" />
 
@@ -185,7 +185,7 @@
 
   <subscriber for="..interfaces.IRoadDecree
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-              handler=".road_decree.update_reference" />
+              handler=".road_decree.update_reference" /-->
 
   <!-- do this to update schedule tasks when sending a college event to PM -->
   <subscriber for="..interfaces.IUrbanEvent

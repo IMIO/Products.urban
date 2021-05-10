@@ -8,6 +8,7 @@ from zope.interface import providedBy
 
 
 def updateKeyEvent(urban_event_type, event):
+    return
     annotations = IAnnotations(urban_event_type)
     previous_key_event_value = annotations.get('urban.is_key_event', [])
     is_key_event = urban_event_type.getIsKeyEvent()
@@ -24,6 +25,7 @@ def updateKeyEvent(urban_event_type, event):
 def updateEventType(urban_event_type, event):
     """
     """
+    return
     annotations = IAnnotations(urban_event_type)
     previous_eventtype_interface = annotations.get('urban.eventtype', set([]))
     new_eventtype_interface = set(urban_event_type.getEventTypeType())
