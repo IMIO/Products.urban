@@ -11,7 +11,6 @@ from plone.dexterity.interfaces import IDexterityContent
 
 from Products.Archetypes.interfaces import IBaseObject
 from Products.CMFPlone.i18nl10n import ulocalized_time
-from Products.CMFCore.utils import getToolByName
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.utils import getCurrentFolderManager
 from Products.urban.utils import get_ws_meetingitem_infos
@@ -540,7 +539,7 @@ class UrbanDocGenerationLicenceHelperView(UrbanDocGenerationHelperView):
         context = self.context
         specificFeatures = context.getSpecificFeatures()
         specific_features_text = []
-        tool = getToolByName(self, 'portal_urban')
+        tool = api.portal.get_tool('portal_urban')
         for specificFeature in specificFeatures:
             if specificFeature['check']:
                 if specificFeature['text']:
@@ -1027,7 +1026,7 @@ class UrbanDocGenerationEventHelperView(UrbanDocGenerationHelperView):
 
     def getFolderMakers(self):
         """  """
-        urban_tool = getToolByName(self, 'portal_urban')
+        urban_tool = api.portal.get_tool('portal_urban')
         foldermakers_config = urban_tool.getLicenceConfig(self.context).urbaneventtypes
         all_opinion_request_events = self.context.getAllOpinionRequests()
         foldermakers = []
