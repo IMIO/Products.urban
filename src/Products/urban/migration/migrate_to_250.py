@@ -364,9 +364,11 @@ def migrate_rich_texts(context):
     )
     for brain in to_migrate_brains:
         licence = brain.getObject()
-        if not licence.getSdcDetails().startswith('<p>'):
-            licence.setSdcDetails('<p>{}</p>'.format(licence.getSdcDetails()))
-            logger.info("migratedrich text of licence: {}".format(licence))
+        field = licence.getField('sdcDetails')
+        raw_value = field.getRaw(licence)
+        if not raw_value.startswith('<p>'):
+            licence.setSdcDetails('<p>{}</p>'.format(raw_value))
+            logger.info("migrated rich text of licence: {}".format(licence))
 
     logger.info("migration step done!")
 
