@@ -14,6 +14,8 @@ from Products.contentmigration.archetypes import InplaceATFolderMigrator
 from Products.urban import services
 from Products.urban.config import URBAN_TYPES
 from Products.urban.config import LICENCE_FINAL_STATES
+from Products.urban.interfaces import ICODT_BaseBuildLicence
+from Products.urban.interfaces import ICODT_UrbanCertificateBase
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.migration.to_DX.migration_utils import clean_obsolete_portal_type
 from Products.urban.setuphandlers import setFolderAllowedTypes
@@ -353,6 +355,23 @@ def migrate_styles_pod_templates(context):
     logger.info("migration step done!")
 
 
+def migrate_rich_texts(context):
+    logger = logging.getLogger('migrate rich text fields')
+    logger.info("starting migration step")
+    catalog = api.portal.get_tool('portal_catalog')
+    to_migrate_brains = catalog(
+        object_provides=[ICODT_BaseBuildLicence.__identifier__, ICODT_UrbanCertificateBase.__identifier__]
+    )
+    for brain in to_migrate_brains:
+        licence = brain.getObject()
+        if not licence.getSdcDetails().startswith('<p>'):
+            licence.setSdcDetails('<p>{}</p>'.format(licence.getSdcDetails()))
+            logger.info("migratedrich text of licence: {}".format(licence))
+
+    logger.info("migration step done!")
+
+
+
 def migrate(context):
     logger = logging.getLogger('urban: migrate to 2.5')
     logger.info("starting migration steps")
@@ -378,6 +397,7 @@ def migrate(context):
     migrate_disable_natura2000_folderzone(context)
     migrate_announcement_schedule_config(context)
     migrate_styles_pod_templates(context)
+    migrate_rich_texts(context)
     catalog = api.portal.get_tool('portal_catalog')
     catalog.clearFindAndRebuild()
     ref_catalog = api.portal.get_tool('reference_catalog')
