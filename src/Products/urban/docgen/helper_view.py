@@ -1027,7 +1027,7 @@ class UrbanDocGenerationEventHelperView(UrbanDocGenerationHelperView):
     def getFolderMakers(self):
         """  """
         urban_tool = api.portal.get_tool('portal_urban')
-        foldermakers_config = urban_tool.getLicenceConfig(self.context).urbaneventtypes
+        foldermakers_config = urban_tool.getLicenceConfig(self.context).eventconfigs
         all_opinion_request_events = self.context.getAllOpinionRequests()
         foldermakers = []
         for opinionRequestEventType in foldermakers_config.objectValues('OpinionRequestEventType'):
