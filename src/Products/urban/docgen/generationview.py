@@ -71,7 +71,7 @@ class UrbanDocGenerationView(PersistentDocumentGenerationView):
             'self': licence_helper_view,
             'licence': licence_helper_view,
             'foldermanagers': foldermanagers,
-            'event': event_helper_view.context,
+            'event': event_helper_view,
             'urbanEventObj': self.context,
             'applicantobj': applicantobj,
             'plaintiffobj': plaintiffobj,
@@ -80,7 +80,7 @@ class UrbanDocGenerationView(PersistentDocumentGenerationView):
             'licence_view': licence_helper_view,
             'licence_helper': licence_helper_view,
             'event_view': event_helper_view,
-            'event_helper': event_helper_view.context,
+            'event_helper': event_helper_view,
             'claimants': claimants_view,
             'inquiry_proprietaries': proprietaries_views,
         }
