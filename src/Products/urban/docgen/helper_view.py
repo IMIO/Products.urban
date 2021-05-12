@@ -1072,14 +1072,14 @@ class UrbanDocGenerationEventHelperView(UrbanDocGenerationHelperView):
         field_name = 'description'
         description_text = self._get_wspm_field(field_name)
         if description_text != 'NO FIELD {} FOUND'.format(field_name):
-            description_text = self.helper_view.xhtml(description_text, style)
+            description_text = self.xhtml(description_text, style)
         return description_text
 
     def get_wspm_decision_text(self, style='UrbanBody'):
         field_name = 'decision'
         decision_text = self._get_wspm_field(field_name)
         if decision_text != 'NO FIELD {} FOUND'.format(field_name):
-            decision_text = self.helper_view.xhtml(decision_text, style)
+            decision_text = self.xhtml(decision_text, style)
         return decision_text
 
     def get_wspm_meeting_state(self):
