@@ -20,7 +20,7 @@ def migrate_inquiry_date_fields():
         start_date = getattr(licence, 'investigationStart', None)
         if not start_date:
             continue
-        event_inquiries = [o for o in licence.objectValues() if o.portal_type == 'UrbanEventInquiry']
+        event_inquiries = [o for o in licence.objectValues() if hasattr(o, 'portal_type') and o.portal_type == 'UrbanEventInquiry']
         if not event_inquiries:
             event_inquiries = [createObject('UrbanEventInquiry', 'enquete-publique', licence)]
         for event_inquiry in event_inquiries:
