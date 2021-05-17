@@ -34,21 +34,21 @@ def migrate(context):
     logger = logging.getLogger('urban: migrate to 1.11.0')
     logger.info("starting migration steps")
     #  migrate UrbanDoc to File type with an IUrbanDoc marker interface on it.
-    import collective.noindexing
-    collective.noindexing.patches.apply()
-    migrate_generated_UrbanDoc_to_ATFile(context)
-    collective.noindexing.patches.unapply()
-    # migrate_UrbanDoc_to_SubTemplate(context)
-    # migrate_UrbanDoc_to_StyleTemplate(context)
-    # migrate_UrbanDoc_to_Urbantemplate(context)
-    # migrate_statsINS_template(context)
-    # migrate_PersonTitleTerm(context)
-    # migrate_PortionOut(context)
-    # migrate_worktypes(context)
+    #import collective.noindexing
+    #collective.noindexing.patches.apply()
+    #migrate_generated_UrbanDoc_to_ATFile(context)
+    #collective.noindexing.patches.unapply()
+    migrate_UrbanDoc_to_SubTemplate(context)
+    migrate_UrbanDoc_to_StyleTemplate(context)
+    migrate_UrbanDoc_to_Urbantemplate(context)
+    migrate_statsINS_template(context)
+    migrate_PersonTitleTerm(context)
+    migrate_PortionOut(context)
+    migrate_worktypes(context)
 
     logger.info("starting to reinstall urban...")  # finish with reinstalling urban and adding the templates
-    # setup_tool = api.portal.get_tool('portal_setup')
-    # setup_tool.runAllImportStepsFromProfile('profile-Products.urban:default')
+    setup_tool = api.portal.get_tool('portal_setup')
+    setup_tool.runAllImportStepsFromProfile('profile-Products.urban:default')
     logger.info("reinstalling urban done!")
     logger.info("migration done!")
 
@@ -209,7 +209,7 @@ def migrate_UrbanDoc_to_Urbantemplate(context):
         globaltemplates_id = config.id in environment_config and 'environmenttemplates' or 'urbantemplates'
         globaltemplates = getattr(portal_urban.globaltemplates, globaltemplates_id)
 
-        style_template = getattr(globaltemplates, 'styles.odt').UID()
+        #style_template = getattr(globaltemplates, 'styles.odt').UID()
         subtemplates = []
         for subtemplate in globaltemplates.listFolderContents({'portal_type': 'SubTemplate'}):
             subtemplate_name = subtemplate.id.split('.')[0]
@@ -231,7 +231,6 @@ def migrate_UrbanDoc_to_Urbantemplate(context):
                     ),
                     'title': urbandoc.Title(),
                     'pod_portal_type': 'UrbanEvent',
-                    'style_template': style_template,
                     'merge_templates': subtemplates,
                     'container': eventtype,
                 }
