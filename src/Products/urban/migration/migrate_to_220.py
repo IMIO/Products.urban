@@ -1,5 +1,9 @@
 # encoding: utf-8
 
+from eea.facetednavigation.interfaces import IFacetedNavigable
+from eea.facetednavigation.interfaces import IPossibleFacetedNavigable
+from eea.facetednavigation.interfaces import IFacetedLayout
+
 from plone import api
 from plone.portlets.constants import CONTEXT_CATEGORY, GROUP_CATEGORY, CONTENT_TYPE_CATEGORY
 from plone.portlets.interfaces import IPortletManager
@@ -59,7 +63,7 @@ def migrate_inquiry_explanationsdate_field():
     licence_brains = cat(object_provides=IInquiry.__identifier__)
     licences = [l.getObject() for l in licence_brains if IGenericLicence.providedBy(l.getObject())]
     for licence in licences:
-        event_inquiries = [o for o in licence.objectValues() if o.portal_type == 'UrbanEventInquiry']
+        event_inquiries = [o for o in licence.objectValues() if hasattr(o, 'portal_type') and o.portal_type == 'UrbanEventInquiry']
         for inquiry in event_inquiries:
             if hasattr(inquiry, 'explanationsDate'):
                 inquiry.explanationStartSDate = inquiry.explanationsDate
