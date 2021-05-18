@@ -3,6 +3,7 @@
 from collective.wfadaptations.interfaces import IWorkflowAdaptation
 
 from Persistence import PersistentMapping
+from Products.DCWorkflow.Guard import Guard
 
 from plone import api
 
@@ -45,6 +46,9 @@ class SuspensionWorkflowAdaptation(object):
             actbox_name=resume_transition.id,
             props=props,
         )
+        guard = Guard()
+        guard.groups = ('urban_editors',)
+        resume_transition.guard = guard
 
     def create_suspension_state(self, workflow, **parameters):
         """
@@ -91,6 +95,9 @@ class SuspensionWorkflowAdaptation(object):
             actbox_name=suspend_transition.id,
             props=props
         )
+        guard = Guard()
+        guard.permissions = ('Modify portal content',)
+        suspend_transition.guard = guard
 
     def set_suspend_transition(self, workflow, **parameters):
         """

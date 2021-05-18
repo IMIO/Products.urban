@@ -7,7 +7,11 @@ from imio.actionspanel import ActionsPanelMessageFactory as _actions
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone import api
 from Products.CMFPlone import PloneMessageFactory as _plone
+from Products.DCWorkflow.Guard import Guard
 from Products.DCWorkflow.Transitions import TransitionDefinition
+
+from Products.urban.interfaces import ICODT_UniqueLicence
+from Products.urban.interfaces import IEnvironmentLicence
 
 from zope.annotation import IAnnotations
 from zope.i18n import translate
@@ -55,7 +59,9 @@ class LicenceActionsPanelView(ActionsPanelView):
         else:
             licence = self.context
             annotations = IAnnotations(licence)
-            freeze_infos = annotations.get('imio.schedule.freeze_task', {'previous_state': api.content.get_state(licence)})
+            freeze_infos = annotations.get(
+                'imio.schedule.freeze_task', {'previous_state': api.content.get_state(licence)}
+            )
             if transition == freeze_transition:
                 new_state = 'frozen_suspension'
                 title = 'Freeze suspend'
@@ -118,37 +124,50 @@ class TransitionsPanelView(ActionsPanelView):
         workflow = self.request.get('imio.actionspanel_workflow_%s_cachekey' % self.context.portal_type, None)
         if 'frozen_suspension' in workflow.states:
             if api.content.get_state(self.context) == 'frozen_suspension':
+                guard = Guard()
+                if ICODT_UniqueLicence.providedBy(self.context):
+                    guard.groups = ('urban_editors', 'environment_editors')
+                elif IEnvironmentLicence.providedBy(self.context):
+                    guard.groups = ('environment_editors',)
+                else:
+                    guard.groups = ('urban_editors',)
+                may_trigger = self._checkTransitionGuard(guard, self.member, workflow, self.context)
                 # add 'resume_thaw' fake transition
-                transitions.append(
-                    {
-                        'id': 'resume_thaw',
-                        # if the transition.id is not translated, use translated transition.title...
-                        'title': translate('resume_thaw', domain="plone", context=self.request),
-                        'description': '',
-                        'name': 'Resume_thaw',
-                        'may_trigger': True,
-                        'confirm': True,
-                        'confirmation_view': DEFAULT_CONFIRM_VIEW,
-                        'url': '' % {'content_url': self.context.absolute_url(), 'portal_url': self.portal_url, 'folder_url': ''},
-                        'icon': '' % {'content_url': self.context.absolute_url(), 'portal_url': self.portal_url, 'folder_url': ''},
-                    }
-                )
+                if may_trigger:
+                    transitions.append(
+                        {
+                            'id': 'resume_thaw',
+                            # if the transition.id is not translated, use translated transition.title...
+                            'title': translate('resume_thaw', domain="plone", context=self.request),
+                            'description': '',
+                            'name': 'Resume_thaw',
+                            'may_trigger': True,
+                            'confirm': True,
+                            'confirmation_view': DEFAULT_CONFIRM_VIEW,
+                            'url': '',
+                            'icon': '',
+                        }
+                    )
             else:
+                guard = Guard()
+                guard.permissions = ('Modify portal content',)
+                may_trigger = self._checkTransitionGuard(guard, self.member, workflow, self.context)
                 # add 'suspend_freeze' fake transition
-                transitions.append(
-                    {
-                        'id': 'suspend_freeze',
-                        # if the transition.id is not translated, use translated transition.title...
-                        'title': translate('suspend_freeze', domain="plone", context=self.request),
-                        'description': '',
-                        'name': 'Suspend_freeze',
-                        'may_trigger': True,
-                        'confirm': True,
-                        'confirmation_view': DEFAULT_CONFIRM_VIEW,
-                        'url': '' % {'content_url': self.context.absolute_url(), 'portal_url': self.portal_url, 'folder_url': ''},
-                        'icon': '' % {'content_url': self.context.absolute_url(), 'portal_url': self.portal_url, 'folder_url': ''},
-                    }
-                )
+                if may_trigger:
+                    transitions.append(
+                        {
+                            'id': 'suspend_freeze',
+                            # if the transition.id is not translated, use translated transition.title...
+                            'title': translate('suspend_freeze', domain="plone", context=self.request),
+                            'description': '',
+                            'name': 'Suspend_freeze',
+                            'may_trigger': True,
+                            'confirm': True,
+                            'confirmation_view': DEFAULT_CONFIRM_VIEW,
+                            'url': '',
+                            'icon': '',
+                        }
+                    )
         return transitions
 
     def sortTransitions(self, lst):
