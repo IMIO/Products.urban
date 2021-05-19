@@ -24,6 +24,10 @@ def migrateToUrban170(context):
     """
     logger = logging.getLogger('urban: migrate to 1.7.0')
     logger.info("starting migration steps")
+
+    # update EnvClassOne events
+    migrateEnvClassOneEventTypes(context)
+
     import collective.noindexing
     collective.noindexing.patches.apply()
     # migrate Applicant type has now Applicant meta type
@@ -31,9 +35,6 @@ def migrateToUrban170(context):
     # migrate Proprietary type has now Applicant meta type
     migrateProprietaryMetaType(context)
     collective.noindexing.patches.unapply()
-
-    # update EnvClassOne events
-    migrateEnvClassOneEventTypes(context)
 
     # les vocs de decisions sont déjà présents dans chaque procédure
     # problème à la suppression : à faire plus tard
