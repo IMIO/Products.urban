@@ -108,10 +108,10 @@
         profile="Products.urban:default" />
 
     <gs:upgradeStep
-        title="Upgrade urban 1.2 to 1.6.0"
+        title="Upgrade urban 1.2 to 1.7.0"
         description="urban upgrade step"
         source="1.2.0"
-        destination="1.6.0"
-        handler=".migrate_from_120_to_160.migrate"
+        destination="1.7.0"
+        handler=".migrate_from_120_to_170.migrate"
         profile="Products.urban:default" />
 </configure>
