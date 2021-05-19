@@ -66,24 +66,24 @@ def migrateUrbanGlobalTemplates(context):
     urbantemplates_folder = getattr(globaltemplates, 'urbantemplates', None)
     environmenttemplates_folder = getattr(globaltemplates, 'environmenttemplates', None)
 
-    if not urbantemplates_folder and not environmenttemplates_folder:
-        globaltemplates.setConstrainTypesMode(1)
-        globaltemplates.setLocallyAllowedTypes(['UrbanDoc', 'Folder'])
-        globaltemplates.setImmediatelyAddableTypes(['UrbanDoc', 'Folder'])
+    #if not urbantemplates_folder and not environmenttemplates_folder:
+    globaltemplates.setConstrainTypesMode(1)
+    globaltemplates.setLocallyAllowedTypes(['UrbanDoc', 'Folder'])
+    globaltemplates.setImmediatelyAddableTypes(['UrbanDoc', 'Folder'])
 
-        portal_setup = api.portal.get_tool('portal_setup')
-        portal_setup.runImportStepFromProfile('profile-Products.urban:default', 'urban-postInstall')
+    portal_setup = api.portal.get_tool('portal_setup')
+    portal_setup.runImportStepFromProfile('profile-Products.urban:default', 'urban-postInstall')
 
-        urbantemplates_folder = getattr(globaltemplates, 'urbantemplates')
-        environmenttemplates_folder = getattr(globaltemplates, 'environmenttemplates')
+    urbantemplates_folder = getattr(globaltemplates, 'urbantemplates')
+    environmenttemplates_folder = getattr(globaltemplates, 'environmenttemplates')
 
-        template_ids = ['header.odt', 'footer.odt', 'reference.odt', 'signatures.odt']
+    template_ids = ['header.odt', 'footer.odt', 'reference.odt', 'signatures.odt']
 
-        for each in template_ids:
-            logger.info("migrate template '{}' ...".format(each))
-            template = getattr(globaltemplates, each)
-            api.content.move(template, urbantemplates_folder)
+    for each in template_ids:
+        logger.info("migrate template '{}' ...".format(each))
+        template = getattr(globaltemplates, each)
+        api.content.move(template, urbantemplates_folder)
 
-        portal_setup.runImportStepFromProfile('profile-Products.urban:extra', 'urban-extraPostInstall')
+    portal_setup.runImportStepFromProfile('profile-Products.urban:extra', 'urban-extraPostInstall')
 
     logger.info("migration step done!")
