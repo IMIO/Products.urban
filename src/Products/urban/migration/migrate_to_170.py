@@ -24,14 +24,21 @@ def migrateToUrban170(context):
     """
     logger = logging.getLogger('urban: migrate to 1.7.0')
     logger.info("starting migration steps")
+    import collective.noindexing
+    collective.noindexing.patches.apply()
     # migrate Applicant type has now Applicant meta type
     migrateApplicantMetaType(context)
     # migrate Proprietary type has now Applicant meta type
     migrateProprietaryMetaType(context)
+    collective.noindexing.patches.unapply()
+
     # update EnvClassOne events
     migrateEnvClassOneEventTypes(context)
+
+    # les vocs de decisions sont déjà présents dans chaque procédure
+    # problème à la suppression : à faire plus tard
     # migrate decisions vocabulary
-    migrateDecisionsVocabulary(context)
+    #migrateDecisionsVocabulary(context)
 
     logger.info("starting to reinstall urban...")  # finish with reinstalling urban and adding the templates
     setup_tool = api.portal.get_tool('portal_setup')
@@ -141,10 +148,11 @@ def migrateEnvClassOneEventTypes(context):
 
     portal_urban = api.portal.get_tool('portal_urban')
 
-    globaltemplates = portal_urban.globaltemplates
-    ins_id = 'statsins.odt'
-    if ins_id in globaltemplates.objectIds():
-        api.content.delete(getattr(globaltemplates, ins_id))
+    # issue with deleting statsins.odt : to do manually
+    # globaltemplates = portal_urban.globaltemplates
+    # ins_id = 'statsins.odt'
+    # if ins_id in globaltemplates.objectIds():
+    #     api.content.delete(getattr(globaltemplates, ins_id))
 
     eventtypes_folder = portal_urban.envclassone.urbaneventtypes
     for obj in eventtypes_folder.objectValues():
