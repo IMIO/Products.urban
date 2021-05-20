@@ -40,11 +40,11 @@ def migrate(context):
     collective.noindexing.patches.unapply()
     migrate_UrbanDoc_to_SubTemplate(context)
     migrate_UrbanDoc_to_StyleTemplate(context)
-    # migrate_UrbanDoc_to_Urbantemplate(context)
-    # migrate_statsINS_template(context)
-    # migrate_PersonTitleTerm(context)
-    # migrate_PortionOut(context)
-    # migrate_worktypes(context)
+    migrate_UrbanDoc_to_Urbantemplate(context)
+    migrate_statsINS_template(context)
+    migrate_PersonTitleTerm(context)
+    migrate_PortionOut(context)
+    migrate_worktypes(context)
 
     logger.info("starting to reinstall urban...")  # finish with reinstalling urban and adding the templates
     setup_tool = api.portal.get_tool('portal_setup')
@@ -165,6 +165,10 @@ def migrate_UrbanDoc_to_StyleTemplate(context):
     portal_urban = api.portal.get_tool('portal_urban')
     globaltemplates = portal_urban.globaltemplates
 
+    portal = api.portal.get()
+    #to avoid link integrity problems, disable checks
+    portal.portal_properties.site_properties.enable_link_integrity_checks = False
+
     styles_id = 'styles.odt'
     if styles_id in globaltemplates.objectIds():
         old_styles = globaltemplates.get(styles_id)
@@ -197,6 +201,8 @@ def migrate_UrbanDoc_to_StyleTemplate(context):
 
         api.content.delete(old_styles)
 
+    # enable linkintegrity checks
+    portal.portal_properties.site_properties.enable_link_integrity_checks = True
     logger.info("migration step done!")
 
 
@@ -206,6 +212,10 @@ def migrate_UrbanDoc_to_Urbantemplate(context):
     """
     logger = logging.getLogger('urban: migrate UrbanDoc templates to UrbanTemplate type ->')
     logger.info("starting migration step")
+
+    portal = api.portal.get()
+    #to avoid link integrity problems, disable checks
+    portal.portal_properties.site_properties.enable_link_integrity_checks = False
 
     portal_urban = api.portal.get_tool('portal_urban')
     catalog = api.portal.get_tool('portal_catalog')
@@ -251,6 +261,9 @@ def migrate_UrbanDoc_to_Urbantemplate(context):
                         template=template_id
                     )
                 )
+
+    # enable linkintegrity checks
+    portal.portal_properties.site_properties.enable_link_integrity_checks = True
 
     logger.info("migration step done!")
 
