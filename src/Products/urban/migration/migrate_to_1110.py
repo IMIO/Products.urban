@@ -34,10 +34,10 @@ def migrate(context):
     logger = logging.getLogger('urban: migrate to 1.11.0')
     logger.info("starting migration steps")
     #  migrate UrbanDoc to File type with an IUrbanDoc marker interface on it.
-    #import collective.noindexing
-    #collective.noindexing.patches.apply()
-    #migrate_generated_UrbanDoc_to_ATFile(context)
-    #collective.noindexing.patches.unapply()
+    import collective.noindexing
+    collective.noindexing.patches.apply()
+    migrate_generated_UrbanDoc_to_ATFile(context)
+    collective.noindexing.patches.unapply()
     migrate_UrbanDoc_to_SubTemplate(context)
     migrate_UrbanDoc_to_StyleTemplate(context)
     migrate_UrbanDoc_to_Urbantemplate(context)
