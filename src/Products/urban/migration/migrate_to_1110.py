@@ -40,11 +40,11 @@ def migrate(context):
     collective.noindexing.patches.unapply()
     migrate_UrbanDoc_to_SubTemplate(context)
     migrate_UrbanDoc_to_StyleTemplate(context)
-    migrate_UrbanDoc_to_Urbantemplate(context)
-    migrate_statsINS_template(context)
-    migrate_PersonTitleTerm(context)
-    migrate_PortionOut(context)
-    migrate_worktypes(context)
+    # migrate_UrbanDoc_to_Urbantemplate(context)
+    # migrate_statsINS_template(context)
+    # migrate_PersonTitleTerm(context)
+    # migrate_PortionOut(context)
+    # migrate_worktypes(context)
 
     logger.info("starting to reinstall urban...")  # finish with reinstalling urban and adding the templates
     setup_tool = api.portal.get_tool('portal_setup')
@@ -114,6 +114,10 @@ def migrate_UrbanDoc_to_SubTemplate(context):
     portal_urban = api.portal.get_tool('portal_urban')
     globaltemplates = portal_urban.globaltemplates
 
+    portal = api.portal.get()
+    #to avoid link integrity problems, disable checks
+    portal.portal_properties.site_properties.enable_link_integrity_checks = False
+
     for folder in globaltemplates.objectValues('ATFolder'):
         folder.setConstrainTypesMode(1)
         folder.setLocallyAllowedTypes(['SubTemplate', 'StyleTemplate'])
@@ -124,6 +128,8 @@ def migrate_UrbanDoc_to_SubTemplate(context):
             template_id = urbandoc.id
             template_title = [t.get('title') for t in GLOBAL_TEMPLATES[folder.id] if t.get('id') == template_id]
             template_title = template_title and template_title[0] or urbandoc.Title()
+            if not template_blob.getFilename():
+                template_blob.setFilename(template_id)
             urban_template_args = {
                 'type': 'SubTemplate',
                 'id': template_id,
@@ -144,6 +150,8 @@ def migrate_UrbanDoc_to_SubTemplate(context):
                 )
             )
 
+    # enable linkintegrity checks
+    portal.portal_properties.site_properties.enable_link_integrity_checks = True
     logger.info("migration step done!")
 
 
