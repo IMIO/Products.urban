@@ -31,7 +31,7 @@ class BaseHelperView(object):
     def __getattr__(self, attr_name):
         """
         """
-        attr = self.context.getattr(attr_name)
+        attr = getattr(self.context, attr_name)
         if callable(attr) and not attr_name.startswith('_'):
             def proxy_method(*args, **kwargs):
                 result = getattr(self.real_context, attr_name)(*args, **kwargs)
