@@ -31,7 +31,7 @@ class BaseHelperView(object):
     def __getattr__(self, attr_name):
         """
         """
-        attr = self.context.__getattr__(attr_name)
+        attr = self.context.getattr(attr_name)
         if callable(attr) and not attr_name.startswith('_'):
             def proxy_method(*args, **kwargs):
                 result = getattr(self.real_context, attr_name)(*args, **kwargs)
@@ -152,6 +152,51 @@ class BaseHelperView(object):
         keys = type(field.getRaw(context)) in (list, tuple) and field.getRaw(context) or [field.getRaw(context)]
         objs = [field.vocabulary.getAllVocTerms(context).get(key, None) for key in keys]
         return objs
+
+    def all_voc_terms(self, field_name='', with_coring_values=False):
+        context = self.real_context
+        field = context.getField(field_name)
+        voc_terms = []
+        if field.vocabulary:
+            voc_terms = field.vocabulary.getAllVocTerms(context).values()
+        elif field.vocabulary_factory:
+            voc_utility = getUtility(IVocabularyFactory, field.vocabulary_factory)
+            if with_coring_values:
+                simple_voc = voc_utility(context)
+                return simple_voc.by_value.values()
+            else:
+                voc_terms = voc_utility._get_config_vocabulary_values(context)
+
+        voc_terms_proxy = []
+        for v in voc_terms:
+            voc_terms_view = v.restrictedTraverse('@@document_generation_helper_view')
+            voc_terms_view.appy_renderer = self.appy_renderer
+            voc_terms_proxy.append(voc_terms_view.context)
+        return voc_terms_proxy
+
+    def voc_terms(self, field_name='', with_coring_values=False):
+        context = self.real_context
+        all_voc_terms = self.all_voc_terms(field_name, with_coring_values)
+        selected_values = context.getField(field_name).get(context)
+        voc_terms = [t for t in all_voc_terms if getattr(t, 'id', getattr(t, 'value', None)) in selected_values]
+        return voc_terms
+
+    def voc_terms_id(self, field_name='', with_coring_values=False):
+        voc_terms = self.voc_terms(field_name, with_coring_values)
+        voc_terms_id = [voc_term.id for voc_term in voc_terms]
+        return voc_terms_id
+
+    def voc_term(self, field_name='', with_coring_values=False):
+        context = self.real_context
+        all_voc_terms = self.all_voc_terms(field_name, with_coring_values)
+        selected_value = context.getField(field_name).get(context)
+        if type(selected_value) in [list, tuple]:
+            selected_value = selected_value[0]
+        for term in all_voc_terms:
+            term_value = hasattr(term, 'id') and term.id or term.value
+            if term_value == selected_value:
+                return term
+        return None
 
 
 class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView, BaseHelperView):
@@ -1132,58 +1177,3 @@ class UrbanBaseProxyObject(ATDisplayProxyObject):
     """
 
     helper_view = None
-
-    def format_date(self, field, formatstring='date_format_short'):
-        """
-          Format the date for printing in pod templates
-        """
-        date = getattr(self.context, field)
-        if formatstring == 'date_format_long':
-            formatstring = '%d/%m/%Y %H:%M'
-        elif formatstring == 'date_format_short':
-            formatstring = '%d/%m/%Y'
-        elif formatstring == 'time_format':
-            formatstring = '%H:%M'
-        return date.strftime(formatstring)
-
-    def all_voc_terms(self, field_name='', with_coring_values=False):
-        field = self.context.getField(field_name)
-        voc_terms = []
-        if field.vocabulary:
-            voc_terms = field.vocabulary.getAllVocTerms(self.context).values()
-        elif field.vocabulary_factory:
-            voc_utility = getUtility(IVocabularyFactory, field.vocabulary_factory)
-            if with_coring_values:
-                simple_voc = voc_utility(self.context)
-                return simple_voc.by_value.values()
-            else:
-                voc_terms = voc_utility._get_config_vocabulary_values(self.context)
-
-        voc_terms_proxy = []
-        for v in voc_terms:
-            voc_terms_view = v.restrictedTraverse('@@document_generation_helper_view')
-            voc_terms_view.appy_renderer = self.helper_view.appy_renderer
-            voc_terms_proxy.append(voc_terms_view.context)
-        return voc_terms_proxy
-
-    def voc_terms(self, field_name='', with_coring_values=False):
-        all_voc_terms = self.all_voc_terms(field_name, with_coring_values)
-        selected_values = self.context.getField(field_name).get(self.context)
-        voc_terms = [t for t in all_voc_terms if getattr(t, 'id', getattr(t, 'value', None)) in selected_values]
-        return voc_terms
-
-    def voc_terms_id(self, field_name='', with_coring_values=False):
-        voc_terms = self.voc_terms(field_name, with_coring_values)
-        voc_terms_id = [voc_term.id for voc_term in voc_terms]
-        return voc_terms_id
-
-    def voc_term(self, field_name='', with_coring_values=False):
-        all_voc_terms = self.all_voc_terms(field_name, with_coring_values)
-        selected_value = self.context.getField(field_name).get(self.context)
-        if type(selected_value) in [list, tuple]:
-            selected_value = selected_value[0]
-        for term in all_voc_terms:
-            term_value = hasattr(term, 'id') and term.id or term.value
-            if term_value == selected_value:
-                return term
-        return None
