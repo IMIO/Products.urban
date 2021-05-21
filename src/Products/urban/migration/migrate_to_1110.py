@@ -279,7 +279,7 @@ def migrate_statsINS_template(context):
     globaltemplates = portal_urban.globaltemplates
     ins_id = 'statsins.odt'
     if ins_id in globaltemplates.objectIds():
-        api.content.delete(getattr(globaltemplates, ins_id))
+        api.content.delete(getattr(globaltemplates, ins_id), check_linkintegrity=False)
         portal_setup = api.portal.get_tool('portal_setup')
         portal_setup.runImportStepFromProfile('profile-Products.urban:extra', 'urban-updateAllUrbanTemplates')
 
