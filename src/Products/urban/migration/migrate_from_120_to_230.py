@@ -4,7 +4,8 @@ import logging
 
 from plone import api
 
-from Products.urban.migration import migrate_to_1110
+from Products.urban.migration import migrate_to_1110, migrate_to_1111, migrate_to_200, migrate_to_210, migrate_to_220, \
+    migrate_to_230
 from Products.urban.migration.migrate_to_130 import migrateToUrban130
 from Products.urban.migration.migrate_to_160 import migrateToUrban160
 from Products.urban.migration.migrate_to_170 import migrateToUrban170
@@ -20,14 +21,22 @@ def contentmigrationLogger(oldObject, **kwargs):
 
 def migrate(context):
     """
-     Launch every migration steps for the version 1.11.0 from 1.2.0
+     Launch every migration steps for the version 2.3 from 1.2.0
     """
-    logger = logging.getLogger('urban: migrate to 1.6.0')
+    logger = logging.getLogger('urban: migrate to 2.3.0')
     logger.info("starting global migration steps")
-    migrateToUrban130(context)
+    catalog = api.portal.get_tool('portal_catalog')
+    migrateToUrban130(context) # 18m 130+160
     migrateToUrban160(context)
     migrateToUrban170(context)  # 1h
-    # migrate_to_1110.migrate(context)  # 1h 50m
-    catalog = api.portal.get_tool('portal_catalog')
     catalog.refreshCatalog(clear=True)  # 20m
+    migrate_to_1110.migrate(context)  # 1h 50m
+    catalog.refreshCatalog(clear=True)  # 20m
+    migrate_to_1111.migrate(context)  # 1m
+    migrate_to_200.migrate(context)  # 1m
+    migrate_to_210.migrate(context)  # 5m
+    migrate_to_220.migrate(context)  # 5m
+    migrate_to_230.migrate(context)  # 5m
+    catalog.refreshCatalog(clear=True)  # 20m
+
     logger.info("global migration done!")
