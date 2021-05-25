@@ -22,7 +22,7 @@ class LicenceConfigView(BrowserView):
         return macro
 
     def getTabs(self):
-        return ['public_settings', 'vocabulary_folders', 'events', 'schedule', 'test']
+        return ['public_settings', 'vocabulary_folders', 'events', 'schedule']
 
     def getVocabularyFolders(self):
         context = aq_inner(self.context)
