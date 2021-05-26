@@ -28,6 +28,12 @@ class BaseHelperView(object):
     Urban implementation of document generation helper methods.
     """
 
+    @property
+    def portal_urban(self):
+        urban_tool = api.portal.get_tool('portal_urban')
+        return urban_tool
+
+
     def __getattr__(self, attr_name):
         """
         """
