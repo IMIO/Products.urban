@@ -41,7 +41,7 @@ class FollowUpEventType(OrderedBaseFolder, UrbanEventType, UrbanVocabularyTerm, 
 
     schema = FollowUpEventType_schema
 
-    security.declarePublic('mayAddOpinionRequestEvent')
+    security.declarePublic('mayAddFollowUpEvent')
 
     def mayAddFollowUpEvent(self, licence):
         """

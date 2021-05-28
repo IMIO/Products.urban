@@ -150,7 +150,7 @@ class TransitionsPanelView(ActionsPanelView):
                     )
             else:
                 guard = Guard()
-                guard.permissions = ('Modify portal content',)
+                guard.groups = ('urban_editors',)
                 may_trigger = self._checkTransitionGuard(guard, self.member, workflow, self.context)
                 # add 'suspend_freeze' fake transition
                 if may_trigger:
