@@ -284,7 +284,7 @@ class Applicant(BaseContent, Contact, BrowserDefaultMixin):
         if invertnames:
             names = u'%s %s' % (name2, name1)
         names = names.strip()
-        namepart = namedefined and names or self.getSociety()
+        namepart = namedefined and names or self.getSociety().decode('utf-8')
         nameSignaletic = u'%s %s' % (title, namepart)
         if len(self.getRepresentedBy()) > 0 or self.getRepresentedBySociety():
             person_title = self.getPersonTitle(theObject=True)
