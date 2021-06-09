@@ -3,6 +3,9 @@
            xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
            i18n_domain="urban">
 
+    <!-- !!! Also includes overrides from imio.urban.core so they can be tested !!! -->
+    <include package="imio.urban.core" file="overrides.zcml" />
+
     <browser:viewlet
         name="plone.contentactions"
         for="*"
