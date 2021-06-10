@@ -73,7 +73,7 @@ schema = Schema((
     StringField(
         name='referenceFT',
         widget=StringField._properties['widget'](
-            size=30,
+            size=120,
             label=_('urban_label_referenceFT', default='Referenceft'),
         ),
         schemata='urban_description',
@@ -390,7 +390,7 @@ def finalizeSchema(schema):
        Finalizes the type schema to alter some fields
     """
     schema.moveField('referenceSPE', after='reference')
-    schema.moveField('referenceFT', after='referenceDGATLP')
+    schema.moveField('referenceFT', before='referenceDGATLP')
     schema.moveField('authority', before='folderCategory')
     schema.moveField('folderTendency', after='folderCategory')
     schema.moveField('rubrics', after='folderTendency')
