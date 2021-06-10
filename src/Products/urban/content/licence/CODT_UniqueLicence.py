@@ -390,7 +390,7 @@ def finalizeSchema(schema):
        Finalizes the type schema to alter some fields
     """
     schema.moveField('referenceSPE', after='reference')
-    schema.moveField('referenceFT', before='referenceDGATLP')
+    schema.moveField('referenceFT', after='referenceDGATLP')
     schema.moveField('authority', before='folderCategory')
     schema.moveField('folderTendency', after='folderCategory')
     schema.moveField('rubrics', after='folderTendency')
