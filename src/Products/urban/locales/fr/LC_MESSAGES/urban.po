@@ -4488,7 +4488,7 @@ msgstr "Référence"
 #. Default: "Referencedgatlp"
 #: ../content/licence/GenericLicence.py:140
 msgid "urban_label_referenceDGATLP"
-msgstr "Référence DGO4"
+msgstr "Référence FD (DGO4)"
 
 #: ../content/licence/EnvironmentBase.py:312
 msgid "urban_label_referenceDGO3"
@@ -4502,7 +4502,7 @@ msgstr "Référence DGO6"
 #: ../content/licence/CODT_UniqueLicence.py:77
 #: ../content/licence/EnvironmentBase.py:80
 msgid "urban_label_referenceFT"
-msgstr "Référence FT"
+msgstr "Référence FT (DGO3)"
 
 #. Default: "Referencespe"
 #: ../content/licence/CODT_UniqueLicence.py:68

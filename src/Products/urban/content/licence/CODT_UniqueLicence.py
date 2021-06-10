@@ -73,7 +73,7 @@ schema = Schema((
     StringField(
         name='referenceFT',
         widget=StringField._properties['widget'](
-            size=30,
+            size=120,
             label=_('urban_label_referenceFT', default='Referenceft'),
         ),
         schemata='urban_description',
