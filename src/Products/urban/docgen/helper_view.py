@@ -1235,12 +1235,12 @@ class EventDisplayProxyObject(UrbanBaseProxyObject):
             )
         return decision_date
 
-    def get_wspm_description_text(self, style='UrbanBody'):
+    def get_wspm_description_text(self):
         field_name = 'description'
         description_text = self._get_wspm_field(field_name)
         return description_text
 
-    def get_wspm_decision_text(self, style='UrbanBody'):
+    def get_wspm_decision_text(self):
         field_name = 'decision'
         decision_text = self._get_wspm_field(field_name)
         return decision_text
