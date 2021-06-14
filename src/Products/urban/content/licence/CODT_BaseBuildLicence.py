@@ -36,7 +36,7 @@ from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
 
 optional_fields = [
     'SCT', 'sctDetails', 'SDC', 'sdcDetails', 'regional_guide', 'regional_guide_details',
-    'township_guide', 'township_guide_details', 'prorogation',
+    'township_guide', 'township_guide_details', 'prorogation', 'financial_caution',
 ]
 
 slave_fields_prorogation = (
@@ -387,6 +387,14 @@ schema = Schema((
         schemata='urban_patrimony',
         vocabulary=UrbanVocabulary('general_disposition', inUrbanConfig=False, with_empty_value=True),
     ),
+    BooleanField(
+        name='financial_caution',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label=_('urban_label_financial_caution', default='Financial_caution'),
+        ),
+        schemata='urban_description',
+    ),
 ),
 )
 
@@ -544,6 +552,7 @@ def finalizeSchema(schema):
     schema.moveField('architects', after='workLocations')
     schema.moveField('foldermanagers', after='architects')
     schema.moveField('workType', after='folderCategory')
+    schema.moveField('financial_caution', after='workType')
     schema.moveField('parcellings', after='isInSubdivision')
     schema.moveField('description', after='usage')
     schema.moveField('roadMiscDescription', after='roadEquipments')
