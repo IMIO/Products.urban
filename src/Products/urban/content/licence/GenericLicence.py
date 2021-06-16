@@ -1359,19 +1359,22 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
     def getAllMayorColleges(self):
         return self.getAllEvents(interfaces.IMayorCollegeEvent)
 
-    def getAllEvents(self, eventInterface=IUrbanEvent):
-        return self.getAllEventsByObjectValues(eventInterface)
+    def getAllEvents(self, eventInterface=IUrbanEvent, state=None):
+        return self.getAllEventsByObjectValues(eventInterface, state)
 
-    def getAllEventsByObjectValues(self, eventInterface):
-        return [evt for evt in self.objectValues() if not eventInterface or eventInterface.providedBy(evt)]
+    def getAllEventsByObjectValues(self, eventInterface, state=None):
+        events = [evt for evt in self.objectValues() if not eventInterface or eventInterface.providedBy(evt)]
+        if state:
+            events = [evt for evt in events if api.content.get_state(e) == state]
+        return events
 
-    def getLastEvent(self, eventInterface=None):
-        events = self.getAllEvents(eventInterface)
+    def getLastEvent(self, eventInterface=None, state=None):
+        events = self.getAllEvents(eventInterface, state)
         if events:
             return events[-1]
 
-    def getFirstEvent(self, eventInterface=None):
-        events = self.getAllEvents(eventInterface)
+    def getFirstEvent(self, eventInterface=None, state=None):
+        events = self.getAllEvents(eventInterface, state)
         if events:
             return events[0]
 

@@ -49,7 +49,7 @@ class AcknowledgmentLimitDate(StartDate):
             deposit = licence.getLastDeposit()
             limit_date = deposit and deposit.getEventDate() + 20 or None
         else:
-            ack = licence.getLastAcknowledgment()
+            ack = licence.getLastAcknowledgment(state='closed')
             annonced_delay = queryMultiAdapter(
                 (licence, self.task),
                 ICalculationDelay,
