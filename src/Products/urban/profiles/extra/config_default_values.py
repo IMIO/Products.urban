@@ -897,6 +897,11 @@ default_values = {
             ],
             {'id': "college", 'title': u"Collège"},
             {'id': "ft", 'title': u"Fonctionnaire technique"},
+            {'id': 'fd', 'title': u"Fonctionnaire delegue"},
+            {'id': 'fc', 'title': u"Fonctionnaire des implantations commerciales"},
+            {'id': 'fc_fd_ft', 'title': u"Fonctionnaire des implantations commerciales, le Fonctionnaire technique et le Fonctionnaire délégué"},
+            {'id': 'fc_fd', 'title': u"Fonctionnaire des implantations commerciales et le Fonctionnaire délégué"},
+            {'id': 'fc_fT', 'title': u"Fonctionnaire des implantations commerciales et le Fonctionnaire technique"},
         ],
 
         'inadmissibilityreasons': [
