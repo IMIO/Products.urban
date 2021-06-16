@@ -50,7 +50,11 @@ class AcknowledgmentLimitDate(StartDate):
             limit_date = deposit and deposit.getEventDate() + 20 or None
         else:
             ack = licence.getLastAcknowledgment()
-            annonced_delay = queryMultiAdapter((licence, self.task), ICalculationDelay, 'annonced_delay')
+            annonced_delay = queryMultiAdapter(
+                (licence, self.task),
+                ICalculationDelay,
+                'urban.schedule.delay.annonced_delay'
+            )
             limit_date = ack and ack.getEventDate() + annonced_delay.calculate_delay()
         return limit_date
 
