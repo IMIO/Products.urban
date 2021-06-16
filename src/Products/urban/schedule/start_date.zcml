@@ -30,6 +30,14 @@
         for="Products.urban.interfaces.IGenericLicence
              imio.schedule.content.task.IAutomatedTask"
         provides="imio.schedule.interfaces.IStartDate"
+        factory=".start_date.AcknowledgmentLimitDate"
+        name="urban.schedule.start_date.acknowledgment_limit_date"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.IGenericLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IStartDate"
         factory=".start_date.AskComplementsDate"
         name="urban.schedule.start_date.ask_complements_date"
     />

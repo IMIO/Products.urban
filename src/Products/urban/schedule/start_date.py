@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 
 from imio.schedule.content.logic import StartDate
+from imio.schedule.interfaces import ICalculationDelay
+
+from zope.component import queryMultiAdapter
 
 
 class InfiniteDate(StartDate):
@@ -32,6 +35,24 @@ class DepositDate(StartDate):
         deposit = licence.getLastDeposit()
         deposit_date = deposit and deposit.getEventDate() or None
         return deposit_date
+
+
+class AcknowledgmentLimitDate(StartDate):
+    """
+    Acknowledgment limit date is the deposit date + 20.
+    If there is modified blueprints, the limit date is the old licence notification limit date.
+    """
+
+    def start_date(self):
+        licence = self.task_container
+        if not licence.getHasModifiedBlueprints():
+            deposit = licence.getLastDeposit()
+            limit_date = deposit and deposit.getEventDate() + 20 or None
+        else:
+            ack = licence.getLastAcknowledgment()
+            annonced_delay = queryMultiAdapter((licence, self.task), ICalculationDelay, 'annonced_delay')
+            limit_date = ack and ack.getEventDate() + annonced_delay.calculate_delay()
+        return limit_date
 
 
 class AskComplementsDate(StartDate):
