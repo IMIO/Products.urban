@@ -1769,6 +1769,8 @@ default_values = {
                 'multiplicity': "single", 'reverseTitle': "Monsieur"},
             {'id': "madam_and_mister", 'title': u"Monsieur et Madame", 'extraValue': "Madame, Monsieur", 'abbreviation':
                 "M et Mme", 'gender': "male", 'multiplicity': "plural", 'reverseTitle': "Monsieur, Madame"},
+            {'id': "madam_or_mister", 'title': u"Madame/Monsieur", 'extraValue': "Madame, Monsieur", 'abbreviation': "Mme, Mr", 'gender': "male",
+                'multiplicity': "plural", 'reverseTitle': "Monsieur, Madame"},
             {'id': "master", 'title': u"Maître", 'extraValue': "Maître", 'abbreviation': "Me", 'gender': "male",
                 'multiplicity': "single", 'reverseTitle': "Maître"},
             {'id': "masters", 'title': u"Maîtres", 'extraValue': "Maitres", 'abbreviation': "Mes", 'gender': "male",
