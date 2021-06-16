@@ -52,11 +52,11 @@ class AnnoncedDelay(UrbanBaseDelay):
     Return the selected annonced delay of the procedure.
     """
 
-    def calculate_delay(self):
+    def calculate_delay(self, with_modified_blueprints=True):
         base_delay = super(AnnoncedDelay, self).calculate_delay()
         licence = self.task_container
         delay = licence.getAnnoncedDelay() or 0
-        if licence.getHasModifiedBlueprints():
+        if with_modified_blueprints and licence.getHasModifiedBlueprints():
             delay = licence.getDelayAfterModifiedBlueprints()
         if delay and delay.endswith('j'):
             delay = int(delay[:-1])
@@ -91,9 +91,9 @@ class UniqueLicenceAnnoncedDelay(AnnoncedDelay):
     or -30 if class 1.
     """
 
-    def calculate_delay(self):
+    def calculate_delay(self, with_modified_blueprints=True):
         licence = self.task_container
-        delay = super(AnnoncedDelay, self).calculate_delay()
+        delay = super(AnnoncedDelay, self, with_modified_blueprints).calculate_delay()
         if delay.endswith('j'):
             delay = int(delay[:-1])
         if 'class_1' in licence.getProcedureChoice():
@@ -111,9 +111,9 @@ class UniqueLicenceNotificationDelay(AnnoncedDelay):
     has been received, else return licence annonced delay.
     """
 
-    def calculate_delay(self):
+    def calculate_delay(self, with_modified_blueprints=True):
         licence = self.task_container
-        delay = super(AnnoncedDelay, self).calculate_delay()
+        delay = super(AnnoncedDelay, self, with_modified_blueprints).calculate_delay()
         if licence.getLastDecisionProjectFromSPW():
             if 'class_1' in licence.getProcedureChoice():
                 delay = 30
