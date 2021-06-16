@@ -1365,7 +1365,7 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
     def getAllEventsByObjectValues(self, eventInterface, state=None):
         events = [evt for evt in self.objectValues() if not eventInterface or eventInterface.providedBy(evt)]
         if state:
-            events = [evt for evt in events if api.content.get_state(e) == state]
+            events = [evt for evt in events if api.content.get_state(evt) == state]
         return events
 
     def getLastEvent(self, eventInterface=None, state=None):
