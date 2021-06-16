@@ -227,7 +227,9 @@ class SearchParcelsView(BrowserView):
                 'city': owner['city'],
                 'street': owner['street'],
                 'number': owner['number'],
+                'personTitle': 'madam_or_mister',
             }
+            
             applicantId = container.invokeFactory(
                 contact_type,
                 id=container.generateUniqueId(contact_type),
