@@ -586,7 +586,7 @@ class BaseBuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin)
         return self.getLastEvent(interfaces.IWalloonRegionOpinionRequestEvent)
 
     def getLastAcknowledgment(self, state=None):
-        return self.getLastEvent(interfaces.IAcknowledgmentEvent)
+        return self.getLastEvent(interfaces.IAcknowledgmentEvent, state)
 
     def getLastAnnouncement(self):
         return self.getLastEvent(interfaces.IAnnouncementEvent)
