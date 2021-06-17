@@ -209,7 +209,6 @@ class SearchParcelsView(BrowserView):
                 return
             raise already_created
 
-
     def createApplicantFromParcel(self, owners, worklocations):
         """
            Create the PortionOut with given parameters...
@@ -221,15 +220,15 @@ class SearchParcelsView(BrowserView):
         container = self.context
         for owner in owners.values():
             contact_info = {
+                'personTitle': 'madam_or_mister',
                 'name1': owner['name'],
                 'name2': owner['firstname'],
                 'zipcode': owner['zipcode'],
                 'city': owner['city'],
                 'street': owner['street'],
                 'number': owner['number'],
-                'personTitle': 'madam_or_mister',
             }
-            
+
             applicantId = container.invokeFactory(
                 contact_type,
                 id=container.generateUniqueId(contact_type),
