@@ -123,6 +123,10 @@ Changes
 - Remove pod templates styles form urban. [URB-2080]
   [sdelcourt]
 
+- Add default person title when creating applicant from a parcel search. [URB-2227]
+  [MagDhyIm]
+  [sdelcourt]
+
 
 2.4 (2019-03-25)
 ----------------
