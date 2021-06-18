@@ -130,8 +130,27 @@
        permission="zope2.View"
      />
 
+    <browser:viewlet
+       for="imio.urban.core.contents.eventconfig.content.IEventConfig"
+       name="imio.actionspanel"
+       manager="plone.app.layout.viewlets.interfaces.IBelowContentBody"
+       layer="imio.actionspanel.interfaces.IActionsPanelLayer"
+       class=".browser.viewlets.ActionsPanelViewlet"
+       template="browser/actions_panel_viewlet.pt"
+       permission="zope2.View"
+     />
+
     <browser:page
         for="Products.urban.interfaces.IUrbanEventType"
+        name="actions_panel"
+        class="Products.urban.browser.actionspanel.FolderActionsPanelView"
+        layer="imio.actionspanel.interfaces.IActionsPanelLayer"
+        template="browser/actions_panel.pt"
+        allowed_attributes="render"
+        permission="zope2.View" />
+
+    <browser:page
+       for="imio.urban.core.contents.eventconfig.content.IEventConfig"
         name="actions_panel"
         class="Products.urban.browser.actionspanel.FolderActionsPanelView"
         layer="imio.actionspanel.interfaces.IActionsPanelLayer"
