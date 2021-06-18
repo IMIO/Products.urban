@@ -123,6 +123,8 @@ Changes
 - Remove pod templates styles form urban. [URB-2080]
   [sdelcourt]
 
+- Add authority default values to CODT_integrated_licence, CODT_unique_licence, EnvClassBordering. [URB-2269]
+  [mdhyne]
 
 2.4 (2019-03-25)
 ----------------
