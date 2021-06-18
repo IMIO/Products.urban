@@ -268,6 +268,8 @@ default_values = {
             {'id': 'fc_fd_ft', 'title': u"Fonctionnaire des implantations commerciales, le Fonctionnaire technique et le Fonctionnaire délégué"},
             {'id': 'fc_fd', 'title': u"Fonctionnaire des implantations commerciales et le Fonctionnaire délégué "},
             {'id': 'fc_fT', 'title': u"Fonctionnaire des implantations commerciales et le Fonctionnaire technique"},
+            {'id': "college", 'title': u"Collège"},
+            {'id': "ft", 'title': u"Fonctionnaire technique"},
         ],
     },
     'CODT_CommercialLicence': {
@@ -382,6 +384,8 @@ default_values = {
         'authority': [
             'UrbanVocabularyTerm',
             {'id': 'fd_ft', 'title': u"Fonctionnaire délégué et le Fonctionnaire technique"},
+            {'id': "college", 'title': u"Collège"},
+            {'id': "ft", 'title': u"Fonctionnaire technique"},
         ],
     },
     'CODT_UrbanCertificateTwo': {
@@ -685,6 +689,8 @@ default_values = {
         'authority': [
             'UrbanVocabularyTerm',
             {'id': 'fd', 'title': u"Fonctionnaire délégué"},
+            {'id': "college", 'title': u"Collège"},
+            {'id': "ft", 'title': u"Fonctionnaire technique"},
             {'id': 'fc', 'title': u"Fonctionnaire des implantations commerciales"},
             {'id': 'fc_fd_ft', 'title': u"Fonctionnaire des implantations commerciales, le Fonctionnaire technique et le Fonctionnaire délégué"},
             {'id': 'fc_fd', 'title': u"Fonctionnaire des implantations commerciales et le Fonctionnaire délégué "},
@@ -911,8 +917,7 @@ default_values = {
 
         'authority': [
             'UrbanVocabularyTerm', [
-                'EnvClassOne', 'EnvClassTwo', 'EnvClassBordering', 'UniqueLicence',
-                'CODT_UniqueLicence', 'CODT_IntegratedLicence',
+                'EnvClassOne', 'EnvClassTwo', 'UniqueLicence',
             ],
             {'id': "college", 'title': u"Collège"},
             {'id': "ft", 'title': u"Fonctionnaire technique"},
