@@ -347,6 +347,8 @@ default_values = {
             {'id': "madam", 'title': u"Madam", 'extraValue': "Madam", 'abbreviation': "Mme", 'gender': "female", 'multiplicity': "single"},
             {'id': "mister_and_madam", 'title': u"Mister and Madam", 'extraValue': "Mister and Madam", 'abbreviation':
                 "Mr and Mme", 'gender': "male", 'multiplicity': "plural"},
+            {'id': "madam_or_mister", 'title': u"Madame/Monsieur", 'extraValue': "Madame, Monsieur", 'abbreviation': "Mme, Mr", 'gender': "male",
+                'multiplicity': "plural", 'reverseTitle': "Monsieur, Madame"},
         ],
 
         'persons_grades': [
