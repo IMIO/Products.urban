@@ -841,6 +841,15 @@ def adaptDefaultPortal(context):
     except AttributeError:
         # the 'front-page' object does not exist...
         pass
+    # ignore acquisition for external edit action
+    # set visible = 0
+    try:
+        site.portal_actions.document_actions.extedit.manage_changeProperties(
+            available_expr="python: object.externalEditorEnabled()"
+        )
+    except AttributeError:
+        # the 'front-page' object does not exist...
+        pass
 
 
 def addApplicationFolders(context):
