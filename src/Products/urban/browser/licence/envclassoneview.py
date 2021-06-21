@@ -28,3 +28,4 @@ class EnvClassOneView(EnvironmentLicenceView):
 
     def getExpirationDate(self):
         return None
+
