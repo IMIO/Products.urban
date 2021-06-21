@@ -126,6 +126,11 @@ Changes
 - Add authority default values to CODT_integrated_licence, CODT_unique_licence, EnvClassBordering. [URB-2269]
   [mdhyne]
 
+- Add default person title when creating applicant from a parcel search. [URB-2227]
+  [mdhyne]
+  [sdelcourt]
+
+
 2.4 (2019-03-25)
 ----------------
 - add tax field in GenericLicence

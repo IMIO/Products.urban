@@ -179,4 +179,12 @@
         handler=".migrate_to_DX.migrate_UrbanEventType_to_DX"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Add new default person title"
+        description="urban upgrade step"
+        source="1008"
+        destination="1100"
+        handler=".update_250.add_new_default_personTitle"
+        profile="Products.urban:default" />
+
 </configure>
