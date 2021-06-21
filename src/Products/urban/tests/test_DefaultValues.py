@@ -242,3 +242,57 @@ class TestEventDefaultValues(unittest.TestCase):
         for field in UrbanEventInquiry.UrbanEventInquiry_schema.fields():
             if hasattr(field, 'defaut_content_type') and field.default_content_type.startswith('text'):
                 self.assertEquals(field.default_method, 'getDefaultText')
+
+
+class TestParcelApplicantDefaultValue(unittest.TestCase):
+    """
+    Tests for the text default values
+    """
+
+    layer = URBAN_TESTS_CONFIG
+
+    def setUp(self):
+        portal = self.layer['portal']
+        self.portal_urban = portal.portal_urban
+        self.site = portal
+        login(portal, self.layer.default_user)
+        # create a licence
+        buildlicences = portal.urban.buildlicences
+        buildlicences.invokeFactory(
+            'BuildLicence',
+            id='newlicence',
+            title='blabla',
+        )
+        buildlicence = buildlicences.newlicence
+        self.licence = buildlicence
+
+    def test_parcel_applicant_default_personTitle(self):
+        searchparcelview = self.licence.restrictedTraverse('searchparcels')
+        parcel_data = {
+            'puissance': '',
+            'division': '62006',
+            'worklocations': (),
+            'partie': '',
+            'radical': '552',
+            'section': 'A',
+            'outdated': 'False',
+            'bis': '',
+            'exposant': 'V'
+        }
+        owners = {
+            u'64122514647': {
+                'city': u'AWANS',
+                'name': u'Macours',
+                'firstname': u'Jo\xeblle',
+                'country': u'BE',
+                'zipcode': u'4340',
+                'number': u'61',
+                'street': u'Rue de Bruxelles'
+            }
+        }
+        searchparcelview.createParcelAndProprietary(parcel_data, owners)
+        applicants = self.licence.getApplicants()
+        applicant = applicants[0]
+        self.assertEquals('madam_or_mister', applicant.getPersonTitle())
+        display_view = applicant.restrictedTraverse('document_generation_helper_view')
+        self.assertEquals(u'Madame/Monsieur', display_view.personTitle)
