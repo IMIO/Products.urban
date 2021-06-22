@@ -200,7 +200,7 @@ class Inspection(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
 
     def getTenants(self):
         """
-           Return the list of plaintiffs for the Licence
+           Return the list of tenants for the Licence
         """
         tenants = [app for app in self.objectValues('Applicant')
                    if app.portal_type == 'Tenant']
