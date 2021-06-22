@@ -406,14 +406,6 @@
   />
 
   <browser:page
-      for="Products.urban.interfaces.IUrbanEvent"
-      name="link2pm"
-      class=".urbandoc2pm.UrbanDoc2PloneMeeting"
-      attribute="getAnnexes"
-      permission="zope2.View"
-  />
-
-  <browser:page
       for="Products.urban.interfaces.IUrbanTool"
       name="urban_vocabulary_cache"
       class=".urban_vocabularies.UrbanVocabulariesCache"
