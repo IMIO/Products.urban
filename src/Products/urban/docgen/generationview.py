@@ -48,23 +48,32 @@ class UrbanDocGenerationView(PersistentDocumentGenerationView):
         foldermanagers = [fm.restrictedTraverse('@@document_generation_helper_view').context
                           for fm in licence.getFoldermanagers()]
         applicants = licence.getApplicants()
-        applicantobj = applicants and applicants[0] or None
+        applicants_views = [applicant.restrictedTraverse('@@document_generation_helper_view')
+                            for applicant in applicants or []]
+        applicantobj = applicants_views and applicants_views[0] or None
         proprietaries = licence.getProprietaries()
-        proprietaryobj = proprietaries and proprietaries[0] or None
+        proprietaries_views = [prop.restrictedTraverse('@@document_generation_helper_view') for prop
+                                in proprietaries or []]
+        proprietaryobj = proprietaries_views and proprietaries_views[0] or None
         publicity = hasattr(licence, 'getLastInquiry') and licence.getLastInquiry() or \
             hasattr(licence, 'getLastAnnouncement') and licence.getLastAnnouncement() or None
         claimants = (publicity and hasattr(publicity, 'getClaimants')) and publicity.getClaimants() or None
         claimants_view = [claimant.restrictedTraverse('@@document_generation_helper_view')
                           for claimant in claimants or []]
         proprietaries = hasattr(publicity, 'getRecipients') and publicity.getRecipients() or None
-        proprietaries_views = [prop.restrictedTraverse('@@document_generation_helper_view') for prop
-                               in proprietaries or []]
         licence_helper_view = licence.restrictedTraverse('@@document_generation_helper_view')
         event_helper_view = self.context.restrictedTraverse('@@document_generation_helper_view')
         plaintiffobj = None
         if hasattr(licence, 'getPlaintiffs'):
             plaintiffs = licence.getPlaintiffs()
-            plaintiffobj = plaintiffs and plaintiffs[0] or None
+            plaintiffs_views = [plaintiff.restrictedTraverse('@@document_generation_helper_view')
+                                for plaintiff in plaintiffs or []]
+            plaintiffobj = plaintiffs_views and plaintiffs_views[0] or None
+        if hasattr(licence, 'getTenants'):
+            tenants = licence.getTenants()
+            tenants_views = [tenant.restrictedTraverse('@@document_generation_helper_view')
+                            for tenant in tenants or []]
+            tenantobj = tenants_views and tenants_views[0] or None
 
         generation_context = {
             'this': licence,
@@ -76,6 +85,7 @@ class UrbanDocGenerationView(PersistentDocumentGenerationView):
             'applicantobj': applicantobj,
             'plaintiffobj': plaintiffobj,
             'proprietaryobj': proprietaryobj,
+            'tenantobj': tenantobj,
             'tool': portal_urban,
             'licence_view': licence_helper_view,
             'licence_helper': licence_helper_view,
