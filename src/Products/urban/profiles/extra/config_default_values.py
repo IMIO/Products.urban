@@ -263,6 +263,14 @@ default_values = {
             {'id': "ecart-gru", 'title': u"au Règlement Régional d'Urbanisme"},
             {'id': "ecart-sol", 'title': u"au Schéma d'Orientation Local"},
         ],
+        'authority': [
+            'UrbanVocabularyTerm',
+            {'id': 'fc_fd_ft', 'title': u"Fonctionnaire des implantations commerciales, le Fonctionnaire technique et le Fonctionnaire délégué"},
+            {'id': 'fc_fd', 'title': u"Fonctionnaire des implantations commerciales et le Fonctionnaire délégué "},
+            {'id': 'fc_fT', 'title': u"Fonctionnaire des implantations commerciales et le Fonctionnaire technique"},
+            {'id': "college", 'title': u"Collège"},
+            {'id': "ft", 'title': u"Fonctionnaire technique"},
+        ],
     },
     'CODT_CommercialLicence': {
         'folderdelays': [
@@ -372,7 +380,13 @@ default_values = {
             {'id': "annexe7", 'title': u"Annexe 7 - Boisement - déboisement - abattage - culture de sapins de Noël - modification de l'aspect d'un ou plusieurs arbres ou haies remarquables - défrichement - modification de la végétation"},
             {'id': "annexe8", 'title': u"Annexe 8 - Travaux techniques"},
             {'id': "annexe9", 'title': u"Annexe 9 - Permis d'urbanisme dispensé d'un architecte ou autre que les demandes visées aux annexes 5 à 8"},
-        ]
+        ],
+        'authority': [
+            'UrbanVocabularyTerm',
+            {'id': 'fd_ft', 'title': u"Fonctionnaire délégué et le Fonctionnaire technique"},
+            {'id': "college", 'title': u"Collège"},
+            {'id': "ft", 'title': u"Fonctionnaire technique"},
+        ],
     },
     'CODT_UrbanCertificateTwo': {
         'folderdelays': [
@@ -672,6 +686,17 @@ default_values = {
             {'id': "140j", 'title': u"140 jours", 'deadLineDelay': 140, 'alertDelay': 20},
             {'id': "inconnu", 'title': u"Inconnu", 'deadLineDelay': 0, 'alertDelay': 20},
         ],
+        'authority': [
+            'UrbanVocabularyTerm',
+            {'id': 'fd', 'title': u"Fonctionnaire délégué"},
+            {'id': "college", 'title': u"Collège"},
+            {'id': "ft", 'title': u"Fonctionnaire technique"},
+            {'id': 'fc', 'title': u"Fonctionnaire des implantations commerciales"},
+            {'id': 'fc_fd_ft', 'title': u"Fonctionnaire des implantations commerciales, le Fonctionnaire technique et le Fonctionnaire délégué"},
+            {'id': 'fc_fd', 'title': u"Fonctionnaire des implantations commerciales et le Fonctionnaire délégué "},
+            {'id': 'fc_fT', 'title': u"Fonctionnaire des implantations commerciales et le Fonctionnaire technique"},
+            {'id': 'fd_ft', 'title': u"Fonctionnaire délégué et le Fonctionnaire technique"},
+        ],
     },
     'Division': {
         'foldercategories': [
@@ -892,8 +917,7 @@ default_values = {
 
         'authority': [
             'UrbanVocabularyTerm', [
-                'EnvClassOne', 'EnvClassTwo', 'EnvClassBordering', 'UniqueLicence',
-                'CODT_UniqueLicence', 'CODT_IntegratedLicence',
+                'EnvClassOne', 'EnvClassTwo', 'UniqueLicence',
             ],
             {'id': "college", 'title': u"Collège"},
             {'id': "ft", 'title': u"Fonctionnaire technique"},
@@ -1769,6 +1793,8 @@ default_values = {
                 'multiplicity': "single", 'reverseTitle': "Monsieur"},
             {'id': "madam_and_mister", 'title': u"Monsieur et Madame", 'extraValue': "Madame, Monsieur", 'abbreviation':
                 "M et Mme", 'gender': "male", 'multiplicity': "plural", 'reverseTitle': "Monsieur, Madame"},
+            {'id': "madam_or_mister", 'title': u"Madame/Monsieur", 'extraValue': "Madame, Monsieur", 'abbreviation': "Mme, Mr", 'gender': "male",
+                'multiplicity': "plural", 'reverseTitle': "Monsieur, Madame"},
             {'id': "master", 'title': u"Maître", 'extraValue': "Maître", 'abbreviation': "Me", 'gender': "male",
                 'multiplicity': "single", 'reverseTitle': "Maître"},
             {'id': "masters", 'title': u"Maîtres", 'extraValue': "Maitres", 'abbreviation': "Mes", 'gender': "male",
