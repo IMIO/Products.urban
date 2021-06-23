@@ -307,4 +307,21 @@ EventConfigs = {
             'eventType': ('Products.urban.interfaces.ILicenceDeliveryEvent',),
         },
     ),
+    'inspection': (
+        {
+            'portal_type': 'EventConfig',
+            'id': "rapport",
+            'title': "Rapport",
+            'eventDateLabel': "Date de la visite",
+            'activatedFields': (),
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'TALCondition': "python: event.mayAddInspectionReportEvent(here)",
+            'podTemplates': (
+                {'id': "inspection_rapport1.odt", 'title': "Rapport d'inspection"},
+            ),
+            'eventType': ('Products.urban.interfaces.IInspectionReportEvent',),
+            'eventPortalType': 'UrbanEventInspectionReport',
+        },
+    ),
 }
