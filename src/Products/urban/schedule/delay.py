@@ -93,7 +93,7 @@ class UniqueLicenceAnnoncedDelay(AnnoncedDelay):
 
     def calculate_delay(self, with_modified_blueprints=True):
         licence = self.task_container
-        delay = super(UniqueLicenceAnnoncedDelay, self, with_modified_blueprints).calculate_delay()
+        delay = super(UniqueLicenceAnnoncedDelay, self).calculate_delay(with_modified_blueprints)
         if delay.endswith('j'):
             delay = int(delay[:-1])
         if 'class_1' in licence.getProcedureChoice():
@@ -113,7 +113,7 @@ class UniqueLicenceNotificationDelay(AnnoncedDelay):
 
     def calculate_delay(self, with_modified_blueprints=True):
         licence = self.task_container
-        delay = super(UniqueLicenceNotificationDelay, self, with_modified_blueprints).calculate_delay()
+        delay = super(UniqueLicenceNotificationDelay, self).calculate_delay(with_modified_blueprints)
         if licence.getLastDecisionProjectFromSPW():
             if 'class_1' in licence.getProcedureChoice():
                 delay = 30
