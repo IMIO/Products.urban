@@ -94,7 +94,7 @@ class UniqueLicenceAnnoncedDelay(AnnoncedDelay):
     def calculate_delay(self, with_modified_blueprints=True):
         licence = self.task_container
         delay = super(UniqueLicenceAnnoncedDelay, self).calculate_delay(with_modified_blueprints)
-        if delay.endswith('j'):
+        if type(delay) in [str, unicode] and delay.endswith('j'):
             delay = int(delay[:-1])
         if 'class_1' in licence.getProcedureChoice():
             delay = delay - 30
@@ -121,9 +121,9 @@ class UniqueLicenceNotificationDelay(AnnoncedDelay):
                 delay = 20
         else:
             delay = self.task_container.getAnnoncedDelay()
-            if delay.endswith('j'):
+            if type(delay) in [str, unicode] and delay.endswith('j'):
                 delay = int(delay[:-1])
-            else:
+            elif not delay:
                 delay = 0
         delay += self.inquiry_suspension_delay()
         return delay
