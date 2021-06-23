@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from DateTime import DateTime
+from datetime import date
 from datetime import datetime
-from plone import api
 
 from imio.schedule.config import states_by_status
 from imio.schedule.config import STARTED
@@ -11,7 +11,7 @@ from imio.schedule.content.condition import CreationCondition
 from Products.urban.schedule.conditions.base import BaseInspection
 from Products.urban.schedule.interfaces import IFollowupDeadLineTask
 
-from datetime import date
+from plone import api
 
 
 class DepositDoneCondition(CreationCondition):

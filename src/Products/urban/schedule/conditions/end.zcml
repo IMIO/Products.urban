@@ -496,6 +496,14 @@
     />
 
     <adapter
+        for="Products.urban.interfaces.IInspection
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.FollowUpWithDelayOverdue"
+        name="urban.schedule.condition.followup_with_delay_overdue"
+    />
+
+    <adapter
         for="Products.urban.interfaces.ITicket
              imio.schedule.content.task.IAutomatedTask"
         provides="imio.schedule.interfaces.IEndCondition"

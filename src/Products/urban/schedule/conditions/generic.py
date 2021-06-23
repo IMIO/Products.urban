@@ -1,12 +1,18 @@
 # -*- coding: utf-8 -*-
 
+from datetime import date
 from datetime import datetime
-from plone import api
 
 from imio.schedule.content.condition import Condition
 
 from Products.urban.config import LICENCE_FINAL_STATES
+from imio.schedule.config import states_by_status
+from imio.schedule.config import STARTED
+
 from Products.urban.schedule.conditions.base import BaseInspection
+from Products.urban.schedule.interfaces import IFollowupDeadLineTask
+
+from plone import api
 
 from DateTime import DateTime
 
@@ -702,6 +708,20 @@ class FollowUpTicketClosed(InspectionCondition):
             return False
         ended = api.content.get_state(followup_ticket) == 'ended'
         return ended
+
+
+class FollowUpWithDelayOverdue(Condition):
+    """
+    The ticket created as a followup action has been closed.
+    """
+    def evaluate(self):
+        inspection = self.task_container
+        for obj in inspection.objectValues():
+            if IFollowupDeadLineTask.providedBy(obj):
+                task = obj
+                if task.get_state() in states_by_status[STARTED] and task.due_date < date.today():
+                    return True
+        return False
 
 
 class TicketEventClosed(Condition):
