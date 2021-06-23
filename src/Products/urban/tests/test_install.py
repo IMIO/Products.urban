@@ -27,10 +27,6 @@ class TestInstall(unittest.TestCase):
         login(portal, 'urbaneditor')
         self.licence = portal.urban.buildlicences.objectValues()[-1]
 
-    def testReinstall(self):
-        quickInstallProduct(self.portal, 'Products.urban')
-        quickInstallProduct(self.portal, 'Products.urban')
-
     def testEventTypesCreated(self):
         catalog = getToolByName(self.portal, 'portal_catalog')
         interfaceName = interfaceToName(self.portal, IEventConfig)
