@@ -22,6 +22,10 @@ class TestUrbanGenerationView(unittest.TestCase):
         inspections = self.portal.urban.inspections
         new_inspection_id = inspections.invokeFactory('Inspection', id='inspection1')
         new_inspection = inspections.inspection1
-        # populate inspection with tenants and plaintiffs
+        # mdhyne, to do -> populate inspection with tenants and plaintiffs
         inspection_cfg = new_inspection.getLicenceConfig()
-        import ipdb; ipdb.set_trace()
+        new_event = new_inspection.createUrbanEvent(urban_event_type=event_cfg.UID())
+        docgen_view = new_event.restrictedTraverse('urban-document-generation')
+        # mdhyne, to do -> call the method we want to test
+        # mdhyne, to do -> evaluate that the result is the one we want ;-)
+
