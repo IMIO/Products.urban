@@ -39,7 +39,7 @@ class UrbanDocGenerationView(PersistentDocumentGenerationView):
             output_format = output_formats[0]
         return output_format
 
-    def get_base_generation_context(self, helper_view, pod_template):
+    def get_base_generation_context(self, helper_view=None, pod_template=None):
         """
         Backward compatibility with code used in old urban templates.
         """
@@ -69,6 +69,7 @@ class UrbanDocGenerationView(PersistentDocumentGenerationView):
             plaintiffs_views = [plaintiff.restrictedTraverse('@@document_generation_helper_view')
                                 for plaintiff in plaintiffs or []]
             plaintiffobj = plaintiffs_views and plaintiffs_views[0] or None
+        tenantobj = None
         if hasattr(licence, 'getTenants'):
             tenants = licence.getTenants()
             tenants_views = [tenant.restrictedTraverse('@@document_generation_helper_view')
