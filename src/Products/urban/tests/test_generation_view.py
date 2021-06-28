@@ -3,7 +3,6 @@ from Products.urban.testing import URBAN_TESTS_LICENCES_FUNCTIONAL
 
 from plone.app.testing import login
 
-import transaction
 import unittest
 from Products.urban.docgen.helper_view import UrbanDocGenerationEventHelperView
 
@@ -21,13 +20,12 @@ class TestUrbanGenerationView(unittest.TestCase):
 
     def test_get_base_generation_context(self):
         inspections = self.portal.urban.inspections
-        new_inspection_id = inspections.invokeFactory('Inspection', id='inspection1')
+        inspections.invokeFactory('Inspection', id='inspection1')
         new_inspection = inspections.inspection1
-        
-        inspection_cfg = new_inspection.getLicenceConfig()
-        new_plaintiff = new_inspection.invokeFactory('Plaintiff', id = 'plaintiff1', name1='Renée', name2='Black')
-        new_proprietary = new_inspection.invokeFactory('Proprietary', id='proprietary1', name1='Ursula', name2='Frei')
-        new_tenant = new_inspection.invokeFactory('Tenant', id='tenant1', name1='Aeron', name2='Lorelei')
+
+        new_inspection.invokeFactory('Plaintiff', id='plaintiff1', name1='Renée', name2='Black')
+        new_inspection.invokeFactory('Proprietary', id='proprietary1', name1='Ursula', name2='Frei')
+        new_inspection.invokeFactory('Tenant', id='tenant1', name1='Aeron', name2='Lorelei')
         new_event = new_inspection.createUrbanEvent('rapport')
         docgen_view = new_event.restrictedTraverse('urban-document-generation')
         gener_ctx = docgen_view.get_base_generation_context()
