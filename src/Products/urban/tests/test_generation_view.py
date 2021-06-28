@@ -5,6 +5,7 @@ from plone.app.testing import login
 
 import transaction
 import unittest
+from Products.urban.docgen.helper_view import UrbanDocGenerationEventHelperView
 
 
 class TestUrbanGenerationView(unittest.TestCase):
@@ -22,10 +23,15 @@ class TestUrbanGenerationView(unittest.TestCase):
         inspections = self.portal.urban.inspections
         new_inspection_id = inspections.invokeFactory('Inspection', id='inspection1')
         new_inspection = inspections.inspection1
-        # mdhyne, to do -> populate inspection with tenants and plaintiffs
+        
         inspection_cfg = new_inspection.getLicenceConfig()
-        new_event = new_inspection.createUrbanEvent(urban_event_type=event_cfg.UID())
+        new_plaintiff = new_inspection.invokeFactory('Plaintiff', id = 'plaintiff1', name1='Renée', name2='Black')
+        new_proprietary = new_inspection.invokeFactory('Proprietary', id='proprietary1', name1='Ursula', name2='Frei')
+        new_tenant = new_inspection.invokeFactory('Tenant', id='tenant1', name1='Aeron', name2='Lorelei')
+        new_event = new_inspection.createUrbanEvent('rapport')
         docgen_view = new_event.restrictedTraverse('urban-document-generation')
-        # mdhyne, to do -> call the method we want to test
-        # mdhyne, to do -> evaluate that the result is the one we want ;-)
+        gener_ctx = docgen_view.get_base_generation_context()
 
+        self.assertIsInstance(gener_ctx['plaintiffobj'], UrbanDocGenerationEventHelperView)
+        self.assertIsInstance(gener_ctx['proprietaryobj'], UrbanDocGenerationEventHelperView)
+        self.assertIsInstance(gener_ctx['tenantobj'], UrbanDocGenerationEventHelperView)
