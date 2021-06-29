@@ -42,4 +42,19 @@
       permission="zope2.View"
       />
 
+  <browser:page
+     for="eea.facetednavigation.subtypes.interfaces.IFacetedNavigable"
+     name="copy_to_inspections"
+     class=".licences_migration.MigrateToInspection"
+     permission="zope2.View"
+  />
+
+  <browser:viewlet
+      for="zope.interface.Interface"
+      name="move_to_inspections-link"
+      manager="collective.eeafaceted.z3ctable.interfaces.ITopAboveNavManager"
+      class="Products.urban.viewlets.licences_migration.ToInspectionViewlet"
+      permission="zope2.View"
+  />
+
 </configure>
