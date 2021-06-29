@@ -1,0 +1,27 @@
+<div id="urbain220-generation-view"
+     tal:condition="view/available"
+     i18n:domain="urban">
+    <form name="CopyToInspectionsForm"
+	  method="POST"
+	  target='_blank'
+	  tal:attributes="action string:${context/absolute_url}/copy_to_inspections;">
+	<input type="hidden" name="template_uid"/>
+	<input type="hidden" name="output_format"/>
+	<input type="hidden" name="uids" value="">
+	<input type="hidden" name="facetedQuery" value="">
+
+	<ul class="pod-template">
+	    <li tal:repeat="infos view/get_links_info">
+		<a href="#"
+		   tal:attributes="onclick string:event.preventDefault();;javascript:generatePodDocument('','', this)"
+		   style="cursor: pointer">
+		    <img src="#" class="svg-icon"
+			 tal:attributes="src string:${view/portal_url}/Ticket.png" />
+		    <span tal:replace="infos/title">Template title</span>
+		</a>
+	    </li>
+	</ul>
+
+
+    </form>
+</div>
