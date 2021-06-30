@@ -115,6 +115,11 @@ slave_fields_modified_blueprints = (
         'action': 'show',
         'hide_values': (True, ),
     },
+    {
+        'name': 'procedureChoiceModifiedBlueprints',
+        'action': 'show',
+        'hide_values': (True,),
+    },
 )
 
 slave_fields_composition = (
