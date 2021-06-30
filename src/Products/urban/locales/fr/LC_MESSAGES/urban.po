@@ -3599,9 +3599,14 @@ msgstr "Catégorie du type d'événement"
 msgid "urban_label_exemptFDArticle"
 msgstr "Article 107"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:611
+#: ../content/licence/CODT_BaseBuildLicence.py:624
 msgid "urban_label_exemptFDArticleCODT"
 msgstr "Article D IV.15"
+
+#. Default: "Exemptfdarticlemodifiedbp"
+#: ../content/licence/CODT_BaseBuildLicence.py:440
+msgid "urban_label_exemptFDArticleModifiedBp"
+msgstr "Article D IV.15 avec plans modificatifs"
 
 #. Default: "Explanationendsdate"
 #: ../content/UrbanEventInquiry.py:78
@@ -3833,7 +3838,7 @@ msgstr "Étude d'incidences?"
 msgid "urban_label_implantation"
 msgstr "Implantation (art. 137)"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:612
+#: ../content/licence/CODT_BaseBuildLicence.py:625
 msgid "urban_label_implantationCODT"
 msgstr "Implantation (art D.IV.72)"
 
@@ -4012,13 +4017,13 @@ msgstr "Établissement SEVESO"
 msgid "urban_label_isSupplementary"
 msgstr "Supplémentaire?"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:603
+#: ../content/licence/CODT_BaseBuildLicence.py:616
 #: ../content/licence/CODT_UrbanCertificateBase.py:76
 #: ../content/licence/Division.py:145
 msgid "urban_label_is_in_parceloutlicences"
 msgstr "Le bien se situe dans un permis d'urbanisation"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:609
+#: ../content/licence/CODT_BaseBuildLicence.py:622
 #: ../content/licence/CODT_UrbanCertificateBase.py:82
 #: ../content/licence/Division.py:151
 msgid "urban_label_is_in_sol"
@@ -4396,13 +4401,13 @@ msgstr "Propriétaire"
 msgid "urban_label_parcellings"
 msgstr "Lotissement"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:602
+#: ../content/licence/CODT_BaseBuildLicence.py:615
 #: ../content/licence/CODT_UrbanCertificateBase.py:75
 #: ../content/licence/Division.py:144
 msgid "urban_label_parceloutlicences"
 msgstr "Permis d'urbanisation"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:604
+#: ../content/licence/CODT_BaseBuildLicence.py:617
 #: ../content/licence/CODT_UrbanCertificateBase.py:77
 #: ../content/licence/Division.py:146
 msgid "urban_label_parceloutlicences_details"
@@ -4628,6 +4633,11 @@ msgstr "Détails concernant le Périmètre de Revitalisation Urbaine"
 msgid "urban_label_procedureChoice"
 msgstr "Choix de la procédure"
 
+#. Default: "Procedurechoicemodifiedblueprints"
+#: ../content/licence/CODT_BaseBuildLicence.py:403
+msgid "urban_label_procedureChoiceModifiedBlueprints"
+msgstr "Choix de la procédure avec plans modificatifs"
+
 #. Default: "Proofs"
 #: ../content/UrbanEventInspectionReport.py:62
 msgid "urban_label_proofs"
@@ -4850,6 +4860,11 @@ msgstr "Organisme"
 msgid "urban_label_requirementFromFD"
 msgstr "Fonctionnaire délégué"
 
+#. Default: "Requirementfromfdmodifiedbp"
+#: ../content/licence/CODT_BaseBuildLicence.py:424
+msgid "urban_label_requirementFromFDModifiedBp"
+msgstr "Fonctionnaire délégué avec plans modificatifs"
+
 #. Default: "Reversetitle"
 #: PersonTitleTerm.py
 msgid "urban_label_reverseTitle"
@@ -5033,19 +5048,19 @@ msgstr "Petit patrimoine populaire"
 msgid "urban_label_society"
 msgstr "Société"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:606
+#: ../content/licence/CODT_BaseBuildLicence.py:619
 #: ../content/licence/CODT_UrbanCertificateBase.py:79
 #: ../content/licence/Division.py:148
 msgid "urban_label_sol"
 msgstr "SOL"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:608
+#: ../content/licence/CODT_BaseBuildLicence.py:621
 #: ../content/licence/CODT_UrbanCertificateBase.py:81
 #: ../content/licence/Division.py:150
 msgid "urban_label_solZone"
 msgstr "Zone de SOL"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:610
+#: ../content/licence/CODT_BaseBuildLicence.py:623
 #: ../content/licence/CODT_UrbanCertificateBase.py:83
 #: ../content/licence/Division.py:152
 msgid "urban_label_sol_details"
