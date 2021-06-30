@@ -69,6 +69,14 @@ slave_fields_prorogation = (
     },
 )
 
+slave_fields_prorogationmodifiedbp = (
+    {
+        'name': 'delayAfterModifiedBlueprints',
+        'action': 'value',
+        'vocab_method': 'getProrogationDelays',
+#        'control_param': 'values',
+    },
+)
 
 slave_fields_form_composition = (
     {
@@ -449,6 +457,15 @@ schema = Schema((
         vocabulary=UrbanVocabulary('exemptfdarticle', with_empty_value=True),
         default_method='getDefaultValue',
     ),
+    BooleanField(
+        name='prorogationModifiedBp',
+        default=False,
+        widget=MasterBooleanWidget(
+            slave_fields=slave_fields_prorogationmodifiedbp,
+            label=_('urban_label_prorogationModifiedBp', default='Prorogationmodifiedbp'),
+        ),
+        schemata='urban_analysis',
+    ),
 ),
 )
 
@@ -619,6 +636,7 @@ def finalizeSchema(schema):
     schema.moveField('procedureChoiceModifiedBlueprints', after='hasModifiedBlueprints')
     schema.moveField('requirementFromFDModifiedBp', before='delayAfterModifiedBlueprints')
     schema.moveField('exemptFDArticleModifiedBp', after='procedureChoiceModifiedBlueprints')
+    schema.moveField('prorogationModifiedBp', after='delayAfterModifiedBlueprintsDetails')
     schema.moveField('water', after='futureRoadCoating')
     schema.moveField('electricity', before='water')
     schema.moveField('derogationDetails', after='derogation')
