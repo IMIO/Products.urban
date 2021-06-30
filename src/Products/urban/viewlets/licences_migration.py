@@ -98,8 +98,22 @@ class MigrateToInspection(BrowserView):
         return migrated
 
     def migrate_to_inspections(self, brains):
+        # migrate cfg
+        portal_urban = api.portal.get_tool('portal_urban')
+        for eventconfig in portal_urban.miscdemand.eventconfigs.objectValues():
+            inspection_cfg = portal_urban.inspection.eventconfigs
+            if eventconfig.id not in inspection_cfg.objectIds():
+                copied_cfg = api.content.copy(eventconfig, inspection_cfg)
+                api.content.transition(copied_cfg, 'disable')
+
+        # migrate licences
+        states_mapping = {
+            'accepted': 'ended',
+            'refused': 'ended',
+            'retired': 'ended',
+        }
         for brain in brains:
-            self.copy_one_licence(brain.getObject(), 'Inspection')
+            self.copy_one_licence(brain.getObject(), 'Inspection', states_mapping)
 
         # migrate applicants to proprietaries
         portal = api.portal.get()
@@ -118,17 +132,17 @@ class MigrateToInspection(BrowserView):
             # next use of CustomQueryWalker
             walker.__class__.additionalQuery = {}
 
-    def copy_one_licence(self, original_licence, destination_type):
+    def copy_one_licence(self, original_licence, destination_type, states_mapping={}):
         site = api.portal.get()
         destination_folder = getLicenceFolder(destination_type)
-        duplicated_licence_id = destination_folder.invokeFactory(
+        copied_licence_id = destination_folder.invokeFactory(
             destination_type,
-            id=site.generateUniqueId(destination_type),
+            id=original_licence.id,
         )
-        duplicated_licence = getattr(destination_folder, duplicated_licence_id)
+        copied_licence = getattr(destination_folder, copied_licence_id)
 
         for content in original_licence.objectValues():
-            copied_content = api.content.copy(source=content, target=duplicated_licence)
+            copied_content = api.content.copy(source=content, target=copied_licence)
             if IUrbanEvent.providedBy(content):
                 eventconfigs = getattr(site.portal_urban, destination_type.lower()).eventconfigs
                 copied_content.setUrbaneventtypes(getattr(eventconfigs, content.getUrbaneventtypes().id))
@@ -139,13 +153,23 @@ class MigrateToInspection(BrowserView):
                 continue
             fields = original_licence.schema.getSchemataFields(tab)
             for original_field in fields:
-                destination_field = duplicated_licence.getField(original_field.getName())
+                destination_field = copied_licence.getField(original_field.getName())
                 if destination_field:
-                    destination_mutator = destination_field.getMutator(duplicated_licence)
+                    destination_mutator = destination_field.getMutator(copied_licence)
                     value = original_field.getAccessor(original_licence)()
                     destination_mutator(value)
 
-        postCreationActions(duplicated_licence, None)
+        original_state = api.content.get_state(original_licence)
+        if original_state in states_mapping:
+            new_state = states_mapping[original_state]
+            workflow_tool = api.portal.get_tool('portal_workflow')
+            workflow_def = workflow_tool.getWorkflowsFor(copied_licence)[0]
+            workflow_id = workflow_def.getId()
+            workflow_state = workflow_tool.getStatusOf(workflow_id, copied_licence)
+            workflow_state['review_state'] = new_state
+            workflow_tool.setStatusOf(workflow_id, copied_licence, workflow_state.copy())
 
-        duplicated_licence.reindexObject()
-        return duplicated_licence
+        postCreationActions(copied_licence, None)
+
+        copied_licence.reindexObject()
+        return copied_licence

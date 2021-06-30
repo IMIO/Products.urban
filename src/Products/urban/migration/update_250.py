@@ -14,13 +14,12 @@ def add_new_default_personTitle(context):
     logger.info("upgrade done!")
 
 
-def copy_MiscLicence_cfg_to_Inspection(context):
+def delete_migrated_miscdemands(context):
     """
     """
-    logger = logging.getLogger('urban: add new default personTitle')
+    logger = logging.getLogger('urban: delete migrated miscdemands')
     logger.info("starting upgrade steps")
-    portal_urban = api.portal.get_tool('portal_urban')
-    logger.info("duplicate event configs")
-    for eventconfig in portal_urban.miscdemand.eventconfigs.objectValues():
-        api.content.copy(eventconfig, portal_urban.inspection.eventconfigs)
+    urban = api.portal.get().urban
+    to_delete = [misc for misc in urban.miscdemands.objectValues() if misc.id in urban.inspections.objectIds()]
+    api.content.delete(objects=to_delete)
     logger.info("upgrade done!")

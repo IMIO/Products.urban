@@ -188,11 +188,11 @@
         profile="Products.urban:default" />
 
     <gs:upgradeStep
-        title="Copy misclicence event config to Inspection"
+        title="Delete migrated miscdemands to Inspection"
         description="urban upgrade step"
         source="1009"
         destination="1100"
-        handler=".update_250.copy_MiscLicence_cfg_to_Inspection"
+        handler=".update_250.delete_migrated_miscdemands"
         profile="Products.urban:default" />
 
 </configure>
