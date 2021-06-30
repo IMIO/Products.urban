@@ -4562,6 +4562,11 @@ msgstr "Infraction(s)/preuve(s)"
 msgid "urban_label_prorogation"
 msgstr "Prorogation"
 
+#. Default: "Prorogationmodifiedbp"
+#: ../content/licence/CODT_BaseBuildLicence.py:457
+msgid "urban_label_prorogationModifiedBp"
+msgstr "Prorogation avec plans modificatifs"
+
 #. Default: "Protectedbuilding"
 #: ../content/licence/GenericLicence.py:739
 msgid "urban_label_protectedBuilding"
