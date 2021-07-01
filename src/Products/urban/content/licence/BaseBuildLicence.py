@@ -120,6 +120,11 @@ slave_fields_modified_blueprints = (
         'action': 'show',
         'hide_values': (True,),
     },
+    {
+        'name': 'prorogationModifiedBp',
+        'action': 'show',
+        'hide_values': (True,),
+    },
 )
 
 slave_fields_composition = (
