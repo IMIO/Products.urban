@@ -33,8 +33,9 @@ class ToInspectionViewlet(ViewletBase):
             'miscdemands',
         ]
         allowed = self.context.id in allowed_contexts
+        is_admin = api.user.has_permission("cmf.AddPortalMember", user=api.user.get_current())
         faceted_context = bool(IFacetedNavigable.providedBy(self.context))
-        return faceted_context and allowed
+        return faceted_context and allowed and is_admin
 
     def get_links_info(self):
         base_url = self.context.absolute_url()
