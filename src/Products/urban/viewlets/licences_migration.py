@@ -119,6 +119,8 @@ class MigrateToInspection(BrowserView):
         portal = api.portal.get()
         root = portal.urban.inspections
         logger = logging.getLogger('urban: migrate miscdemands to inspection')
+        # to avoid link integrity problems, disable checks
+        portal.portal_properties.site_properties.enable_link_integrity_checks = False
         for migrator in [ApplicantMigrator, CorporationMigrator]:
             walker = migrator.walker(
                 portal,
@@ -131,6 +133,8 @@ class MigrateToInspection(BrowserView):
             # we need to reset the class variable to avoid using current query in
             # next use of CustomQueryWalker
             walker.__class__.additionalQuery = {}
+        # re-enable linkintegrity checks
+        portal.portal_properties.site_properties.enable_link_integrity_checks = True
 
     def copy_one_licence(self, original_licence, destination_type, states_mapping={}):
         site = api.portal.get()
