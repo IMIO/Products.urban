@@ -991,6 +991,14 @@ def setupImioDashboard(context):
 
     urban_folder.moveObjectToPosition(all_licences_collection_id, 0)
     all_licences_collection = getattr(urban_folder, all_licences_collection_id)
+    # always reupdate the listed types to URBAN_TYPES
+    all_licences_collection.query = [
+        {
+            'i': 'portal_type',
+            'o': 'plone.app.querystring.operation.selection.is',
+            'v': [type for type in URBAN_TYPES]
+        }
+    ],
     _updateDefaultCollectionFor(urban_folder, all_licences_collection.UID())
 
     for urban_type in URBAN_TYPES:
@@ -1008,6 +1016,7 @@ def setupImioDashboard(context):
             setFolderAllowedTypes(folder, urban_type)
         folder.moveObjectToPosition(collection_id, 0)
         collection = getattr(folder, collection_id)
+
         _updateDefaultCollectionFor(folder, collection.UID())
 
 
