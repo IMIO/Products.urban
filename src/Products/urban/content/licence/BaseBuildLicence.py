@@ -415,6 +415,7 @@ schema = Schema((
             wild_card_search=True,
             restrict_browsing_to_startup_directory=1,
             label=_('urban_label_architects', default='Architects'),
+            popup_name='architect_reference_popup',
         ),
         allowed_types=('Architect',),
         schemata='urban_description',
