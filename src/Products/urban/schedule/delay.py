@@ -78,7 +78,8 @@ class AnnoncedDelay(UrbanBaseDelay):
             for announcement in licence.getAllAnnouncements():
                 announcement_event = announcement.getLinkedUrbanEventInquiry()
                 ack_event = licence.getLastAcknowledgment()
-                if announcement_event and ack_event and announcement_event.getInvestigationStart() > ack_event.getEventDate():
+                if announcement_event and ack_event and \
+                   announcement_event.getInvestigationStart() > ack_event.getEventDate():
                     delay += announcement.get_suspension_delay()
 
         return delay
@@ -92,16 +93,13 @@ class UniqueLicenceAnnoncedDelay(AnnoncedDelay):
 
     def calculate_delay(self):
         licence = self.task_container
-        raw_delay = licence.getAnnoncedDelay()
-        if licence.getHasModifiedBlueprints():
-            delay = licence.getDelayAfterModifiedBlueprints()
         delay = super(AnnoncedDelay, self).calculate_delay()
-        if raw_delay.endswith('j'):
-            delay = int(raw_delay[:-1])
-            if 'class_1' in licence.getProcedureChoice():
-                delay = delay - 30
-            if 'class_2' in licence.getProcedureChoice():
-                delay = delay - 20
+        if type(delay) is str and delay.endswith('j'):
+            delay = int(delay[:-1])
+        if 'class_1' in licence.getProcedureChoice():
+            delay = delay - 30
+        if 'class_2' in licence.getProcedureChoice():
+            delay = delay - 20
 
         delay += self.inquiry_suspension_delay()
         return delay
