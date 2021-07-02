@@ -39,6 +39,27 @@ optional_fields = [
     'township_guide', 'township_guide_details', 'prorogation', 'financial_caution',
 ]
 
+slave_fields_procedurechoicemodifiedbp = (
+    {
+        'name': 'delayAfterModifiedBlueprints',
+        'action': 'value',
+        'vocab_method': 'getProcedureDelays',
+#        'control_param': 'values',
+    },
+    {
+        'name': 'requirementFromFDModifiedBp',
+        'action': 'show',
+        'toggle_method': 'showRequirementFromFD',
+#        'control_param': 'values'
+    },
+    {
+        'name': 'exemptFDArticleModifiedBp',
+        'action': 'show',
+        'toggle_method': 'showExemptFDArticle',
+#        'control_param': 'values',
+    },
+)
+
 slave_fields_prorogation = (
     {
         'name': 'annoncedDelay',
@@ -48,6 +69,14 @@ slave_fields_prorogation = (
     },
 )
 
+slave_fields_prorogationmodifiedbp = (
+    {
+        'name': 'delayAfterModifiedBlueprints',
+        'action': 'value',
+        'vocab_method': 'getProrogationDelays',
+#        'control_param': 'values',
+    },
+)
 
 slave_fields_form_composition = (
     {
@@ -395,6 +424,48 @@ schema = Schema((
         ),
         schemata='urban_description',
     ),
+    LinesField(
+        name='procedureChoiceModifiedBlueprints',
+        default='ukn',
+        widget=MasterMultiSelectWidget(
+            format='checkbox',
+            slave_fields=slave_fields_procedurechoicemodifiedbp,
+            label=_('urban_label_procedureChoiceModifiedBlueprints', default='Procedurechoicemodifiedblueprints'),
+        ),
+        schemata='urban_analysis',
+        validators=('isValidProcedureChoice',),
+        multiValued=1,
+        vocabulary='listProcedureChoices',
+    ),
+    LinesField(
+        name='requirementFromFDModifiedBp',
+        widget=MultiSelectionWidget(
+            format='checkbox',
+            label=_('urban_label_requirementFromFDModifiedBp', default='Requirementfromfdmodifiedbp'),
+        ),
+        schemata='urban_analysis',
+        multiValued=1,
+        vocabulary='listRequirementsFromFD',
+    ),
+    StringField(
+        name='exemptFDArticleModifiedBp',
+        widget=SelectionWidget(
+            format='select',
+            label=_('urban_label_exemptFDArticleModifiedBp', default='Exemptfdarticlemodifiedbp'),
+        ),
+        schemata='urban_analysis',
+        vocabulary=UrbanVocabulary('exemptfdarticle', with_empty_value=True),
+        default_method='getDefaultValue',
+    ),
+    BooleanField(
+        name='prorogationModifiedBp',
+        default=False,
+        widget=MasterBooleanWidget(
+            slave_fields=slave_fields_prorogationmodifiedbp,
+            label=_('urban_label_prorogationModifiedBp', default='Prorogationmodifiedbp'),
+        ),
+        schemata='urban_analysis',
+    ),
 ),
 )
 
@@ -565,6 +636,10 @@ def finalizeSchema(schema):
     schema.moveField('impactStudy', after='prorogation')
     schema.moveField('procedureChoice', before='description')
     schema.moveField('exemptFDArticle', after='procedureChoice')
+    schema.moveField('procedureChoiceModifiedBlueprints', after='hasModifiedBlueprints')
+    schema.moveField('requirementFromFDModifiedBp', before='delayAfterModifiedBlueprints')
+    schema.moveField('exemptFDArticleModifiedBp', after='procedureChoiceModifiedBlueprints')
+    schema.moveField('prorogationModifiedBp', after='delayAfterModifiedBlueprintsDetails')
     schema.moveField('water', after='futureRoadCoating')
     schema.moveField('electricity', before='water')
     schema.moveField('derogationDetails', after='derogation')

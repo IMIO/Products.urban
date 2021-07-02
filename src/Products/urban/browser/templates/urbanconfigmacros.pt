@@ -132,6 +132,10 @@
 
    <tal:form define="form python: getattr(view, 'offdays_form', None)"
              condition="form">
+       <!-- disable popup asking if you are ok to leave the form -->
+       <script>
+           window.onbeforeunload = null;
+       </script>
        <tal:with-form-as-view define="view nocall:form">
            <metal:block use-macro="form/@@ploneform-macros/titlelessform" />
        </tal:with-form-as-view>
