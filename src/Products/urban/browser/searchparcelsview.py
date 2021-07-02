@@ -3,6 +3,7 @@ from Products.Five import BrowserView
 
 from Products.urban.browser.table.urbantable import ParcelsTable
 from Products.urban.interfaces import IDivision
+from Products.urban.interfaces import IInspection
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.interfaces import IUrbanCertificateBase
 from Products.urban import services
@@ -214,7 +215,7 @@ class SearchParcelsView(BrowserView):
            Create the PortionOut with given parameters...
         """
         contact_type = 'Applicant'
-        if IUrbanCertificateBase.providedBy(self.context) or IDivision.providedBy(self.context):
+        if IUrbanCertificateBase.providedBy(self.context) or IDivision.providedBy(self.context) or IInspection.providedBy(self.context):
             contact_type = 'Proprietary'
 
         container = self.context
