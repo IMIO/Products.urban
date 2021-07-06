@@ -347,8 +347,8 @@ class Contact(BaseContent, BrowserDefaultMixin):
         """
         number = self.getNumber().decode('utf-8')
         street = self.getStreet().decode('utf-8')
-        zip = self.getZipcode().decode('utf-8')
-        city = self.getCity().decode('utf-8')
+        zip = (self.getZipcode() or '').decode('utf-8')
+        city = (self.getCity() or '').decode('utf-8')
         country = self.getField('country').vocabulary.getAllVocTerms(self)[self.getCountry()].Title().decode('utf-8')
         if not linebyline:
             result = []
