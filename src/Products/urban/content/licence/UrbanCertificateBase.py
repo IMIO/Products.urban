@@ -137,7 +137,7 @@ schema = Schema((
             force_close_on_insert=1,
             startup_directory='urban/notaries',
             restrict_browsing_to_startup_directory=1,
-            popup_name='popup',
+            popup_name='notary_reference_popup',
             wild_card_search=True,
             label=_('urban_label_notaryContact', default='Notarycontact'),
         ),
