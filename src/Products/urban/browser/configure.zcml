@@ -443,4 +443,18 @@
       provides="zope.formlib.namedtemplate.INamedTemplate"
   />
 
+  <adapter
+      for="Products.Five.BrowserView"
+      factory=".referencebrowser_popup.notary_popup_template"
+      name="notary_reference_popup"
+      provides="zope.formlib.namedtemplate.INamedTemplate"
+  />
+
+  <browser:page
+      name="refbrowser_popup"
+      permission="zope2.Public"
+      for="Products.urban.interfaces.IContactFolder"
+      class=".referencebrowser_popup.UrbanReferenceBrowserPopup"
+  />
+
 </configure>
