@@ -125,7 +125,13 @@
     </form>
     <!-- actual list of objects, either searchresults or folder contents -->
     <div id="atrbResults" tal:define="batch view/getResult;">
-
+      <div class="field">
+          <form name="quickAdd" action="" method="post" target="_blank"
+            tal:attributes="action python: view.get_creation_url()">
+            <input type="hidden" name="type_name" value="" tal:attributes="value python: view.get_type_name_value()">
+            <input type="submit" id="event" value="Encoder un nouvel Architecte" class="context contenttype-architect">
+         </form>
+      </div>
       <!-- history -->
       <div tal:condition="python:widget.history_length > 0" style="float: right; clear: right;">
         <form action="referencebrowser_popup" name="history" id="history">
