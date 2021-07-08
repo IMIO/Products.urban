@@ -435,18 +435,10 @@
       class=".offdays_settings.OffDaysControlPanel"
       permission="cmf.ManagePortal"
   />
-
   <adapter
       for="Products.Five.BrowserView"
-      factory=".referencebrowser_popup.architect_popup_template"
-      name="architect_reference_popup"
-      provides="zope.formlib.namedtemplate.INamedTemplate"
-  />
-
-  <adapter
-      for="Products.Five.BrowserView"
-      factory=".referencebrowser_popup.notary_popup_template"
-      name="notary_reference_popup"
+      factory=".referencebrowser_popup.contact_popup_template"
+      name="contact_reference_popup"
       provides="zope.formlib.namedtemplate.INamedTemplate"
   />
 
