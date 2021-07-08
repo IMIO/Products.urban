@@ -1063,13 +1063,13 @@ class UrbanDocGenerationEventHelperView(UrbanDocGenerationHelperView):
         mailing_list = []
         foldermakers = self.getFolderMakers()
         for foldermaker in foldermakers:
-            html_description = foldermaker['OpinionRequestEventType'].Description()
+            html_description = foldermaker['OpinionEventConfig'].Description()
             transformed_description = self.portal.portal_transforms.convert(
                 'html_to_web_intelligent_plain_text', html_description).getData().strip('\n ')
             mailing = {
-                'OpinionRequestEventType': foldermaker['OpinionRequestEventType'],
+                'OpinionEventConfig': foldermaker['OpinionEventConfig'],
                 'UrbanEventOpinionRequest': foldermaker['UrbanEventOpinionRequest'],
-                'converted_description': transformed_description
+                'description': transformed_description
             }
             mailing_list.append(mailing)
         return mailing_list
@@ -1080,10 +1080,11 @@ class UrbanDocGenerationEventHelperView(UrbanDocGenerationHelperView):
         foldermakers_config = urban_tool.getLicenceConfig(self.context).eventconfigs
         all_opinion_request_events = self.context.getAllOpinionRequests()
         foldermakers = []
-        for opinionRequestEventType in foldermakers_config.objectValues('OpinionRequestEventType'):
+        opinion_cfgs = [fm for fm in foldermakers_config.objectValues() if fm.portal_type == 'OpinionEventConfig']
+        for opinionRequestEventType in opinion_cfgs:
             foldermaker = {}
             if opinionRequestEventType.id in self.getSolicitOpinions():
-                foldermaker['OpinionRequestEventType'] = opinionRequestEventType
+                foldermaker['OpinionEventConfig'] = opinionRequestEventType
                 for urbanEventOpinionRequest in all_opinion_request_events:
                     if urbanEventOpinionRequest.Title() == opinionRequestEventType.Title():
                         foldermaker['UrbanEventOpinionRequest'] = urbanEventOpinionRequest
