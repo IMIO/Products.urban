@@ -14,7 +14,7 @@ class UrbanReferenceBrowserPopup(ReferenceBrowserPopup):
     """
     """
     def get_creation_url(self):
-        url = 'http://localhost:8081/Plone/urban/{}/createObject'.format(self.context.id)
+        url = '{}/createObject'.format(self.context.absolute_url())
         return url
 
     def get_type_name_value(self):
