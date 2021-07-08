@@ -129,7 +129,7 @@
           <form name="quickAdd" action="" method="post" target="_blank"
             tal:attributes="action python: view.get_creation_url()">
             <input type="hidden" name="type_name" value="" tal:attributes="value python: view.get_type_name_value()">
-            <input type="submit" id="event" value="Encoder un nouvel Architecte" class="context contenttype-architect">
+            <input type="submit" id="event" value="" class="" tal:attributes="value python: view.get_submit_value(); class python: view.get_submit_class()">
          </form>
       </div>
       <!-- history -->
