@@ -21,5 +21,20 @@ class UrbanReferenceBrowserPopup(ReferenceBrowserPopup):
         return url
 
     def get_type_name_value(self):
-        val = '{}'.format(''.join(self.context.immediatelyAddableTypes).encode('utf-8'))
+        val = '{}'.format(self.context.immediatelyAddableTypes[0].encode('utf-8'))
         return val
+
+    def get_submit_value(self):
+        if self.context.id == 'architects':
+            valeur = 'Encoder un nouvel Architecte'
+            return valeur
+        elif self.context.id == 'notaries':
+            valeur = 'Encoder un nouveau Notaire'
+            return valeur
+        else:
+            valeur = 'Encoder nouveau'
+            return valeur
+
+    def get_submit_class(self):
+        classe = 'context contenttype-{}'.format(self.context.immediatelyAddableTypes[0].encode('utf-8').lower())
+        return classe
