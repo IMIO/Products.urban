@@ -6,11 +6,8 @@ from archetypes.referencebrowserwidget.browser.view import ReferenceBrowserPopup
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 
-architect_popup_template = utils.named_template_adapter(
-    ViewPageTemplateFile('templates/architect_popup.pt'))
-
-notary_popup_template = utils.named_template_adapter(
-    ViewPageTemplateFile('templates/notary_popup.pt'))
+contact_popup_template = utils.named_template_adapter(
+    ViewPageTemplateFile('templates/contact_popup.pt'))
 
 
 class UrbanReferenceBrowserPopup(ReferenceBrowserPopup):
@@ -30,6 +27,9 @@ class UrbanReferenceBrowserPopup(ReferenceBrowserPopup):
             return valeur
         elif self.context.id == 'notaries':
             valeur = 'Encoder un nouveau Notaire'
+            return valeur
+        elif self.context.id == 'geometricians':
+            valeur = 'Encoder un nouveau Géomètre'
             return valeur
         else:
             valeur = 'Encoder nouveau'
