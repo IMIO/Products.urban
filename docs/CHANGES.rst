@@ -129,6 +129,8 @@ Changes
 - Add default person title when creating applicant from a parcel search. [URB-2227]
   [mdhyne]
   [sdelcourt]
+  
+- Update vocabularies CODT Build Licence (folder categories, missing parts) [lmertens]
 
 
 2.4 (2019-03-25)
