@@ -129,7 +129,14 @@ Changes
 - Add default person title when creating applicant from a parcel search. [URB-2227]
   [mdhyne]
   [sdelcourt]
+  
+- Add modified delai with modified blueprints, procedure choice with modified blueprints, ... . [URBLIE-402]
+  [mdhyne]
+  [sdelcourt]
 
+- Add link(button) to create an architect (or a notary or a geometrician) in licence(or ...) recap edit. [URB-2168]
+  [mdhyne]
+  [sdelcourt]
 
 2.4 (2019-03-25)
 ----------------
