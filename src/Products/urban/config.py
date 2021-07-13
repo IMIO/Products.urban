@@ -310,6 +310,12 @@ DASHBOARD_TEMPLATES = {
             'portal_type': 'DashboardPODTemplate',
             'title': 'Statistiques INS',
         },
+        {
+            'id': 'listing-general.ods',
+            'portal_type': 'DashboardPODTemplate',
+            'title': 'Listing des permis',
+            'use_objects': True,
+        },
         # {
             # 'id': 'folderlisting.odt',
             # 'portal_type': 'DashboardPODTemplate',
