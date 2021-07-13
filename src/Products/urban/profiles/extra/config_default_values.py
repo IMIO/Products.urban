@@ -1518,7 +1518,7 @@ default_values = {
             },
             {
                 'id': "zone-agricole-indiferenciee",
-                'title': u"Zone agricole indiférenciée"
+                'title': u"Zone agricole indifférenciée"
             },
         ],
 
