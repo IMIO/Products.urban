@@ -435,5 +435,18 @@
       class=".offdays_settings.OffDaysControlPanel"
       permission="cmf.ManagePortal"
   />
+  <adapter
+      for="Products.Five.BrowserView"
+      factory=".referencebrowser_popup.contact_popup_template"
+      name="contact_reference_popup"
+      provides="zope.formlib.namedtemplate.INamedTemplate"
+  />
+
+  <browser:page
+      name="refbrowser_popup"
+      permission="zope2.Public"
+      for="Products.urban.interfaces.IContactFolder"
+      class=".referencebrowser_popup.UrbanReferenceBrowserPopup"
+  />
 
 </configure>

@@ -25,11 +25,11 @@ default_values = {
         ],
         'foldercategories': [
             'UrbanVocabularyTerm',
-            {'id': "uco", 'title': u"Hors SDC/SOL/GCU - UCO: permis d’urbanisme du Collège avec AVIS du FD (sans «écart»)"},
-            {'id': "uco-d", 'title': u"Hors SDC/SOL/GCU – UCO/D: permis d'urbanisme avec dérogation du FD pour Plan Secteur / norme GRU "},
-            {'id': "uco-a", 'title': u"Dans SDC/SOL/GCU - UCO/A: permis d’urbanisme du Collège avec avis FACULTATIF du FD"},
-            {'id': "uco-pd", 'title': u"Dans SDC/SOL/GCU – UCO/PD : permis d’urbanisme direct du Collège"},
-            {'id': "uco-fd", 'title': u"Dans SDC/SOL/GCU – UCO/ED : permis avec écart et/ou dérogation Plan Secteur / norme GRU"},
+            {'id': "uco", 'title': u"UCO: permis d’urbanisme du Collège avec AVIS du FD (sans «écart»)"},
+            {'id': "uco-d", 'title': u"UCO/D: permis d'urbanisme avec dérogation du FD pour Plan Secteur / norme GRU "},
+            {'id': "uco-a", 'title': u"UCO/A: permis d’urbanisme du Collège avec avis FACULTATIF du FD"},
+            {'id': "uco-pd", 'title': u"UCO/PD : permis d’urbanisme direct du Collège"},
+            {'id': "uco-fd", 'title': u"UCO/ED : permis avec écart et/ou dérogation Plan Secteur / norme GRU"},
             {'id': "inconnu", 'title': u"Inconnu"},
         ],
         'investigationarticles': [
@@ -62,7 +62,7 @@ default_values = {
             'UrbanVocabularyTerm',
             {'id': "ecart-purba", 'title': u"au permis d'urbanisation"},
             {'id': "ecart-gcu", 'title': u"au Guide Communal d'Urbanisme"},
-            {'id': "ecart-gru", 'title': u"au Règlement Régional d'Urbanisme"},
+            {'id': "ecart-gru", 'title': u"au Guide Régional d'Urbanisme"},
             {'id': "ecart-sol", 'title': u"au Schéma d'Orientation Local"},
         ],
         'missingparts': [
@@ -133,7 +133,7 @@ default_values = {
             'UrbanVocabularyTerm',
             {'id': "ecart-purba", 'title': u"au permis d'urbanisation"},
             {'id': "ecart-gcu", 'title': u"au Guide Communal d'Urbanisme"},
-            {'id': "ecart-gru", 'title': u"au Règlement Régional d'Urbanisme"},
+            {'id': "ecart-gru", 'title': u"au Guide Régional d'Urbanisme"},
             {'id': "ecart-sol", 'title': u"au Schéma d'Orientation Local"},
         ],
         'missingparts': [
@@ -200,7 +200,7 @@ default_values = {
             'UrbanVocabularyTerm',
             {'id': "ecart-purba", 'title': u"au permis d'urbanisation"},
             {'id': "ecart-gcu", 'title': u"au Guide Communal d'Urbanisme"},
-            {'id': "ecart-gru", 'title': u"au Règlement Régional d'Urbanisme"},
+            {'id': "ecart-gru", 'title': u"au Guide Régional d'Urbanisme"},
             {'id': "ecart-sol", 'title': u"au Schéma d'Orientation Local"},
         ],
         'missingparts': [
@@ -260,7 +260,7 @@ default_values = {
             'UrbanVocabularyTerm',
             {'id': "ecart-purba", 'title': u"au permis d'urbanisation"},
             {'id': "ecart-gcu", 'title': u"au Guide Communal d'Urbanisme"},
-            {'id': "ecart-gru", 'title': u"au Règlement Régional d'Urbanisme"},
+            {'id': "ecart-gru", 'title': u"au Guide Régional d'Urbanisme"},
             {'id': "ecart-sol", 'title': u"au Schéma d'Orientation Local"},
         ],
         'authority': [
@@ -311,7 +311,7 @@ default_values = {
             'UrbanVocabularyTerm',
             {'id': "ecart-purba", 'title': u"au permis d'urbanisation"},
             {'id': "ecart-gcu", 'title': u"au Guide Communal d'Urbanisme"},
-            {'id': "ecart-gru", 'title': u"au Règlement Régional d'Urbanisme"},
+            {'id': "ecart-gru", 'title': u"au Guide Régional d'Urbanisme"},
             {'id': "ecart-sol", 'title': u"au Schéma d'Orientation Local"},
         ],
         'missingparts': [
@@ -361,7 +361,7 @@ default_values = {
             'UrbanVocabularyTerm',
             {'id': "ecart-purba", 'title': u"au permis d'urbanisation"},
             {'id': "ecart-gcu", 'title': u"au Guide Communal d'Urbanisme"},
-            {'id': "ecart-gru", 'title': u"au Règlement Régional d'Urbanisme"},
+            {'id': "ecart-gru", 'title': u"au Guide Régional d'Urbanisme"},
             {'id': "ecart-sol", 'title': u"au Schéma d'Orientation Local"},
         ],
         'missingparts': [
@@ -429,7 +429,7 @@ default_values = {
             'UrbanVocabularyTerm',
             {'id': "ecart-purba", 'title': u"au permis d'urbanisation"},
             {'id': "ecart-gcu", 'title': u"au Guide Communal d'Urbanisme"},
-            {'id': "ecart-gru", 'title': u"au Règlement Régional d'Urbanisme"},
+            {'id': "ecart-gru", 'title': u"au Guide Régional d'Urbanisme"},
             {'id': "ecart-sol", 'title': u"au Schéma d'Orientation Local"},
         ],
         'missingparts': [
