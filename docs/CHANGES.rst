@@ -130,7 +130,11 @@ Changes
   [mdhyne]
   [sdelcourt]
   
-- Update vocabularies CODT Build Licence (folder categories, missing parts) [lmertens]
+- Update vocabularies CODT Build Licence (folder categories, missing parts) 
+  [lmertens]
+
+- Add dashboard template 'listing permis' 
+  [lmertens]
 
 
 2.4 (2019-03-25)
