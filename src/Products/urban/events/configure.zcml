@@ -24,6 +24,10 @@
               handler=".contactEvents.updateLicenceTitle" />
 
   <subscriber for="..interfaces.IContact
+                   Products.DCWorkflow.interfaces.IAfterTransitionEvent"
+              handler=".licenceEvents.updateLicenceTitle" />
+
+  <subscriber for="..interfaces.IContact
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".contactEvents.sortByAlphabeticalOrder" />
 
