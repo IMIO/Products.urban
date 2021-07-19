@@ -17,7 +17,7 @@
 
   <subscriber for="..interfaces.IContact
                    Products.DCWorkflow.interfaces.IAfterTransitionEvent"
-              handler=".licenceEvents.updateLicenceTitle" />
+              handler=".contactEvents.updateLicenceTitle" />
 
   <subscriber for="..interfaces.IContact
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
