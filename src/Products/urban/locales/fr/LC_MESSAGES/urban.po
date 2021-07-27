@@ -282,7 +282,7 @@ msgstr "Email"
 
 #: ../browser/actionspanel/actions_panel_close_task.pt:2
 msgid "End"
-msgstr ""
+msgstr "Fermer la tâche"
 
 msgid "EnvClassBordering"
 msgstr "Permis d'environnement limitrophes"
