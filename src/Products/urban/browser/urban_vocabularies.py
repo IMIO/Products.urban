@@ -1,8 +1,12 @@
 # -*- coding: utf-8 -*-
 
+from Acquisition import aq_parent
+
 from collections import OrderedDict
 
 from Products.Five import BrowserView
+
+from Products.CMFPlone.FactoryTool import FactoryTool
 
 from Products.urban.interfaces import IUrbanConfigurationValue
 
@@ -32,6 +36,9 @@ class UrbanVocabulariesCache(BrowserView):
         self._update_procedure_vocabulary_cache(config_folder, voc_folders)
 
     def _update_procedure_vocabulary_cache(self, config_folder, voc_folders=[]):
+        # handle the case where the context returned is the portal factory (no idea why..)
+        if isinstance(config_folder, FactoryTool):
+            config_folder = aq_parent(config_folder)
         annotations = IAnnotations(config_folder)
         vocabularies = annotations.get('Products.urban.vocabulary_cache', {})
         for voc_folder in voc_folders:

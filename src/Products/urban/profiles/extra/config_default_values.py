@@ -1337,9 +1337,9 @@ default_values = {
             {'id': "aide-opinion", 'title': u"Avis AIDE sollicité"},
         ],
 
-        'townroaddecree': [
+        'townships': [
             'UrbanVocabularyTerm', ['RoadDecree'],
-            {'id': "commune", 'title': u"Commune"},
+            {'id': "township", 'title': u"Ma commune"},
         ],
 
         'folderdelays': [

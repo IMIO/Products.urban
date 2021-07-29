@@ -1207,6 +1207,9 @@ msgstr ""
 msgid "tal_condition_descr"
 msgstr ""
 
+msgid "tax_folder_title"
+msgstr ""
+
 msgid "ticket_urbanconfig_title"
 msgstr ""
 
@@ -1215,6 +1218,9 @@ msgid "topics"
 msgstr ""
 
 msgid "topics_folder_title"
+msgstr ""
+
+msgid "townships_folder_title"
 msgstr ""
 
 msgid "townshipfoldercategories_folder_title"

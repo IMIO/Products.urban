@@ -71,14 +71,14 @@ schema = Schema((
         schemata='urban_analysis',
     ),
     StringField(
-        name='commune_choices',
+        name='townships',
         default='ukn',
         widget=MasterSelectWidget(
-            label=_('urban_label_commune_choices', default='urban_commune'),
+            label=_('urban_label_townships', default='Townships'),
         ),
         schemata='urban_analysis',
         multiValued=1,
-        vocabulary=UrbanVocabulary('townroaddecree', with_empty_value=True),
+        vocabulary=UrbanVocabulary('townships', with_empty_value=True),
     ),
     StringField(
         name='decisional_delay',
