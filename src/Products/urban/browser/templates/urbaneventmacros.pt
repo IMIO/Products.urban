@@ -1,5 +1,5 @@
 <fieldset metal:define-macro="urbanEventDataMacro"  height="100%">
-    <legend i18n:translate="event_data">Event data</legend>
+    <legend i18n:domain="urban" i18n:translate="event_data">Event data</legend>
     <table class="no-style-table; clear">
         <tal:evtfield repeat="field fields" define="fields view/getFieldsToShow;">
             <tr valign="top" tal:define="field_name python: field.__name__;
