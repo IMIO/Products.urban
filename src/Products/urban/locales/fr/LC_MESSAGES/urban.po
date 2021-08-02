@@ -1556,6 +1556,11 @@ msgstr "Pièces jointes de l'événement"
 msgid "event_linked_documents"
 msgstr "Documents liés à cet événement"
 
+#. Default "Event data"
+#: ../browser/templates/urbaneventmacros.pt:2
+msgid "event_data"
+msgstr "Données de l'événement"
+
 #. Default: "urban"
 #: ../setuphandlers.py:431
 msgid "eventconfigs_folder_title"
@@ -2697,6 +2702,9 @@ msgstr "Ce réclamant existe déjà!"
 #: ../browser/templates/urbaneventinquiryview.pt:57
 msgid "urban_context_help"
 msgstr ""
+
+msgid "urban_descr_states_to_end_all_events"
+msgstr "Sélectionnez les états pour lesquels tous les événements se terminent"
 
 msgid "urban_descr_states_to_end_all_tasks"
 msgstr "Sélectionnez les états pour lesquels toutes les tâches se terminent."
@@ -5143,7 +5151,7 @@ msgid "urban_label_startDate"
 msgstr "Date de début d'utilisation"
 
 msgid "urban_label_states_to_end_all_events"
-msgstr "États terminant toutes les événements du dossier"
+msgstr "États terminant tous les événements du dossier"
 
 msgid "urban_label_states_to_end_all_tasks"
 msgstr "États terminant toutes les tâches du dossier"
