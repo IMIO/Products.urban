@@ -320,6 +320,27 @@ class LicenceView(BrowserView):
                 for b in brains]
             return inspections_and_tickets
 
+    def has_bound_roaddecrees(self):
+        annotations = IAnnotations(self.context)
+        roaddecrees = annotations.get('urban.bound_roaddecrees', [])
+        return roaddecrees
+
+    def get_bound_roaddecrees(self):
+        roaddecrees = []
+        annotations = IAnnotations(self.context)
+        roaddecree_UIDs = list(annotations.get('urban.bound_roaddecrees', []))
+        if roaddecree_UIDs:
+            licence_folder = api.portal.get().urban
+            catalog = api.portal.get_tool('portal_catalog')
+            brains = catalog(UID=roaddecree_UIDs)
+            roaddecrees = [{
+                'title': b.Title,
+                'url': '{}/{}s/{}'.format(licence_folder.absolute_url(), b.portal_type.lower(), b.id),
+                'state': b.review_state
+            }
+                for b in brains]
+            return roaddecrees
+
 
 class CODTLicenceView(LicenceView):
     """

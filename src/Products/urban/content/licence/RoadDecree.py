@@ -23,7 +23,7 @@ slave_fields_bound_licence = (
 
 schema = Schema((
     ReferenceField(
-        name='bound_licences',
+        name='bound_licence',
         widget=ReferenceBrowserWidget(
             allow_search=True,
             allow_browse=False,
@@ -32,7 +32,7 @@ schema = Schema((
             show_indexes=False,
             wild_card_search=True,
             restrict_browsing_to_startup_directory=True,
-            label=_('urban_label_bound_licences', default='Bound licences'),
+            label=_('urban_label_bound_licence', default='Bound licence'),
         ),
         allowed_types=[
             t for t in URBAN_TYPES
@@ -46,11 +46,12 @@ schema = Schema((
                 'NotaryLetter',
                 'UrbanCertificateOne',
                 'EnvClassThree',
+                'RoadDecree',
             ]
         ],
         schemata='urban_description',
-        multiValued=True,
-        relationship="bound_licences",
+        multiValued=False,
+        relationship="bound_licence",
     ),
     BooleanField(
         name='use_bound_licence_infos',
@@ -115,9 +116,9 @@ class RoadDecree(CODT_BuildLicence):
 
     def getWorkLocations(self):
         if self.getUse_bound_licence_infos():
-            bound_licences = self.getBound_licences()
-            if bound_licences:
-                return bound_licences[0].getWorkLocations()
+            bound_licence = self.getBound_licence()
+            if bound_licence:
+                return bound_licence.getWorkLocations()
 
         field = self.getField('workLocations')
         worklocations = field.get(self)
@@ -127,9 +128,9 @@ class RoadDecree(CODT_BuildLicence):
 
     def getParcels(self):
         if self.getUse_bound_licence_infos():
-            bound_licences = self.getBound_licences()
-            if bound_licences:
-                return bound_licences[0].getParcels()
+            bound_licence = self.getBound_licence()
+            if bound_licence:
+                return bound_licence.getParcels()
 
         return super(RoadDecree, self).getParcels()
 
@@ -137,9 +138,9 @@ class RoadDecree(CODT_BuildLicence):
 
     def getOfficialParcels(self):
         if self.getUse_bound_licence_infos():
-            bound_licences = self.getBound_licences()
-            if bound_licences:
-                return bound_licences[0].getOfficialParcels()
+            bound_licence = self.getBound_licence()
+            if bound_licence:
+                return bound_licence.getOfficialParcels()
 
         return super(RoadDecree, self).getOfficialParcels()
 
@@ -150,9 +151,9 @@ class RoadDecree(CODT_BuildLicence):
         """
         applicants = super(RoadDecree, self).getApplicants()
         if self.getUse_bound_licence_infos():
-            bound_licences = self.getBound_licences()
-            if bound_licences:
-                applicants.extend(bound_licences[0].getApplicants())
+            bound_licence = self.getBound_licence()
+            if bound_licence:
+                applicants.extend(bound_licence.getApplicants())
         return list(set(applicants))
 
     security.declarePublic('get_applicants_history')
@@ -160,9 +161,9 @@ class RoadDecree(CODT_BuildLicence):
     def get_applicants_history(self):
         applicants = super(RoadDecree, self).get_applicants_history()
         if self.getUse_bound_licence_infos():
-            bound_licences = self.getBound_licences()
-            if bound_licences:
-                applicants.extend(bound_licences[0].get_applicants_history())
+            bound_licence = self.getBound_licence()
+            if bound_licence:
+                applicants.extend(bound_licence.get_applicants_history())
         return list(set(applicants))
 
     security.declarePublic('getCorporations')
@@ -172,9 +173,9 @@ class RoadDecree(CODT_BuildLicence):
                         if corp.portal_type == 'Corporation' and
                         api.content.get_state(corp) == 'enabled']
         if self.getUse_bound_licence_infos():
-            bound_licences = self.getBound_licences()
-            if bound_licences:
-                corporations.extend(bound_licences[0].getCorporations())
+            bound_licence = self.getBound_licence()
+            if bound_licence:
+                corporations.extend(bound_licence.getCorporations())
         return list(set(corporations))
 
     security.declarePublic('get_corporations_history')
@@ -184,9 +185,9 @@ class RoadDecree(CODT_BuildLicence):
                         if corp.portal_type == 'Corporation' and
                         api.content.get_state(corp) == 'disabled']
         if self.getUse_bound_licence_infos():
-            bound_licences = self.getBound_licences()
-            if bound_licences:
-                corporations.extend(bound_licences[0].get_corporations_history())
+            bound_licence = self.getBound_licence()
+            if bound_licence:
+                corporations.extend(bound_licence.get_corporations_history())
         return list(set(corporations))
 
     security.declarePublic('list_decisional_delay')
@@ -222,8 +223,8 @@ def finalize_schema(schema, folderish=False, moveDiscussion=True):
     """
        Finalizes the type schema to alter some fields
     """
-    schema.moveField('bound_licences', before='workLocations')
-    schema.moveField('use_bound_licence_infos', after='bound_licences')
+    schema.moveField('bound_licence', before='workLocations')
+    schema.moveField('use_bound_licence_infos', after='bound_licence')
     schema['locationTechnicalAdvice'].widget.label = _(
         'urban_label_technicalAdvice',
         default='technicaladvice',

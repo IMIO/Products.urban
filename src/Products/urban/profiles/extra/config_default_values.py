@@ -757,6 +757,41 @@ default_values = {
             'description': "« article 263 §1er 10° dans la zone contiguë à la zone forestière, les miradors en bois visés à l’article 1er, § 1er, 9°, de la loi du 28 février 1882 sur la chasse; »"},
         ],
     },
+    'RoadDecree': {
+        'investigationarticles': [
+            'UrbanVocabularyTerm',
+            {'id': "enquete-derogation", 'title': u"Article D.IV.40 - Dérogation à un plan ou aux normes d'un guide régional", 'description': u"<p>Application de l'article D.IV.40 : Les demandes impliquant une ou plusieurs dérogations au plan de secteur ou aux normes du guide régional sont soumises à enquête publique.</p> "},
+            {'id': "enquete-derogation-facultative", 'title': u"Article D.VIII.13 - Procédure d'enquête publique \"facultative\"", 'description': u"<p>Application de l'article D.VIII.13. L’autorité compétente pour adopter le plan, périmètre, schéma ou le guide et pour délivrer les<br /> permis et certificats d’urbanisme no 2, ainsi que les collèges communaux des communes organisant l’annonce de projet<br /> ou l’enquête publique, peuvent procéder à toute forme supplémentaire de publicité et d’information dans le respect des<br /> délais de décision qui sont impartis à l’autorité compétente.</p>"},
+            {'id': "R.IV.40-1.1.1", 'title': u"R.IV.40-1.§1-1° - Hauteur des constructions", 'description': u"<p>Article R.IV.40-1.§1-2° du CoDT : «&nbsp;la construction, la reconstruction d'un magasin ou la modification de la destination d'un bâtiment en magasin dont la surface commerciale nette est supérieure à quatre cents mètres carrés ; la transformation de bâtiments ayant pour effet de placer ceux-ci dans les mêmes conditions&nbsp;»</p> "},
+            {'id': "R.IV.40-1.1.2", 'title': u"R.IV.40-1.§1-2°- Magasin de plus de 400m2", 'description': u"<p>Article R.IV.40-1.§1.3° du CoDT: «&nbsp;la construction, la reconstruction de bureaux ou la modification de la destination d'un bâtiment en bureaux dont la superficie des planchers est supérieure à sixccent cinquante mètres carrés, la transformation de bâtiments ayant pour effet de placer ceux-ci dans les mêmes conditions&nbsp;»</p>"},
+            {'id': "R.IV.40-1.1.3", 'title': u"R.IV.40-1.§1.3° - Usage destiné aux bureaux de plus de 650m2", 'description': u"<p>Article R.IV.40-1.§1.4° du CoDT : «&nbsp;la construction, la reconstruction ou la modification de la destination d'un bâtiment en atelier, entrepôt ou hall de stockage à caractère non agricole dont la superficie des planchers est supérieure à quatre cents mètres carrés, la transformation de bâtiments ayant pour effet de placer ceux-ci dans les mêmes conditions&nbsp;»</p>"},
+            {'id': "R.IV.40-1.1.4", 'title': u"R.IV.40-1.§1.4° - Destination à usage de stockage supérieur à 400m2", 'description': u"<p>Article R.IV.40-1.§1.5° du CoDT : «&nbsp;l'utilisation habituelle d'un terrain pour le dépôt d'un ou plusieurs véhicules usagés, de mitrailles, de matériaux ou de déchets&nbsp;»</p> "},
+            {'id': "R.IV.40-1.1.5", 'title': u"R.IV.40-1.§1.5° - Utilisation habituelle d'un terrain pour le dépôt d'un ou plusieurs véhicules usagés, de mitrailles, de matériaux ou de déchets", 'description': u"<p>Article R.IV.40-1.§1.6° du CoDT : «&nbsp;la construction, la reconstruction ou la transformation d'un bâtiment qui se rapporte à des biens immobiliers inscrits sur la liste de sauvegarde, classés, situés dans une zone de protectioon visée à l'article 209 du Code wallon du Patrimoine ou localisés dans un site repris à l'inventaire du patrimoine archéologique visé à l'article 233 du Code wallon du Patrimoine »</p> "},
+            {'id': "R.IV.40-1.1.6", 'title': u"R.IV.40-1.§1.6° - Les demandes de permis d'urbanisation et les demandes de permis d'urbanisme relatives à la construction, la reconstruction ou la transformation d'un bâtiment inscrit sur la liste de sauvegarde ou classés", 'description': u""},
+            {'id': "R.IV.40-1.1.7", 'title': u"R.IV.40-1.§1.7° - Ouverture ou modification de la voirie communale", 'description': u"i<p>Article R.IV.40-1.§1.7° du CoDT« les demande de permis d'urbanisation, de permis d'urbanisme ou de certificats d'urbanisme n°2 visées à l'article D.IV.41 »</p> "},
+            {'id': "R.IV.40-1.1.8", 'title': u"R.IV.40-1.§1.8° - Voiries régionales", 'description': u"<p>Article R.IV.40-1.§1.8° du CoD - \" les voiries visées à l'article R.II.21-1,1° pour autant que les actes et travaux impliquent une modification de leur gabarit\"</p>"},
+        ],
+        'announcementarticles': [
+            'UrbanVocabularyTerm',
+            {'id': "ecarts", 'title': u"Article D.IV.40 - Écarts à un schéma, à un guide ou à un permis d'urbanisation", 'description': u"<p>Application de l'article D.IV.40. : Les demandes impliquant un ou plusieurs écarts aux plans communaux d’aménagement adoptés avant l’entrée en vigueur du Code et devenus schémas d’orientation locaux, aux règlements adoptés avant l’entrée en vigueur du Code et devenus guides et aux permis d’urbanisation sont soumises à annonce de projet, et ce, jusqu’à la révision ou à l’abrogation du schéma ou du guide.</p> "},
+            {'id': "ecarts-facultatifs", 'title': u"Article D.VIII.13 - Procédure d'annonce de projet \"facultative\"", 'description': u"<p>Art. D.VIII.13. L’autorité compétente pour adopter le plan, périmètre, schéma ou le guide et pour délivrer les<br /> permis et certificats d’urbanisme no 2, ainsi que les collèges communaux des communes organisant l’annonce de projet<br /> ou l’enquête publique, peuvent procéder à toute forme supplémentaire de publicité et d’information dans le respect des<br /> délais de décision qui sont impartis à l’autorité compétente.</p> "},
+            {'id': "R.IV.40-2-1-1", 'title': u"R.IV.40-2.§1.1° - Hauteur des constructions", 'description': u"<p>Article R.IV.40-2.§1-1°du CoDT : «&nbsp;la construction ou la reconstruction de bâtiments dont la hauteur est d’au moins trois niveaux ou neuf mètres sous corniche et dépasse de trois mètres ou plus la moyenne des hauteurs sous corniche des bâtiments situés dans la même rue jusqu’à cinquante mètres de part et d’autre de la construction projetée; la transformation de bâtiments ayant pour effet de placer ceux-ci dans les mêmes conditions;»</p> "},
+            {'id': "R.IV.40-2-1-2", 'title': u"R.IV.40-2 § 2° - Profondeur de bâtisse", 'description': u"<p>Article R.IV.40-2.§1-2°: «&nbsp;la construction ou la reconstruction de bâtiments dont la profondeur, mesurée à partir de l'alignement ou du front de bâtisse lorsque les constructions voisines ne sont pas implantées sur l'alignement, est supérieure à 15 mètres et dépasse de plus de 4 mètres les bâtiments situés sur les parcelles contiguës, la transformation de bâtiments ayant pour effet de placer ceux-ci dans les mêmes conditions&nbsp;»</p>"},
+            {'id': "R.IV.40-2-1-3", 'title': u"R.IV.40-2.§1-3° - Magasin de moins de 400m2", 'description': u"<p>Article R.IV.40-2.§1-3 : «&nbsp;la construction, la reconstruction d'un magasin ou la modification de la destination d'un bâtiment en magasin dont la surface commerciale nette est inférieure à quatre cent mètres carrés ; la transformation de bâtiments ayant pour effet de placer ceux-ci dans les mêmes conditions&nbsp;»</p>"},
+        ],
+        'derogations': [
+            'UrbanVocabularyTerm',
+            {'id': "dero-ps", 'title': u"au plan de secteur"},
+            {'id': "dero-gru", 'title': u"à une ou des norme(s) du Guide Régional d'Urbanisme "},
+        ],
+        'divergences': [
+            'UrbanVocabularyTerm',
+            {'id': "ecart-purba", 'title': u"au permis d'urbanisation"},
+            {'id': "ecart-gcu", 'title': u"au Guide Communal d'Urbanisme"},
+            {'id': "ecart-gru", 'title': u"au Règlement Régional d'Urbanisme"},
+            {'id': "ecart-sol", 'title': u"au Schéma d'Orientation Local"},
+        ],
+    },
     'shared_vocabularies': {
 
         'decisions': [

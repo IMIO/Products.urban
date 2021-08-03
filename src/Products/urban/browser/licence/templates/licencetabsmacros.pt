@@ -67,6 +67,13 @@
                 </div>
             </tal:inspections>
         </fieldset>
+        <fieldset tal:condition="view/has_bound_roaddecrees">
+                <legend i18n:translate="urban_bound_roaddecrees">Bound roaddecrees</legend><br/><br/>
+            <tal:roaddecrees repeat='roaddecree view/get_bound_roaddecrees'>
+                <div> <a tal:attributes="href python:roaddecree['url']" tal:content="python: roaddecree['title']"/>
+                </div>
+            </tal:roaddecrees>
+        </fieldset>
         <fieldset>
             <legend i18n:translate="urban_description_key_dates_legend">Key dates</legend>
             <table tal:define="keyDates view/getKeyDates"

@@ -221,7 +221,7 @@
 
   <subscriber for="..interfaces.IRoadDecree
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-              handler=".road_decree.update_reference" />
+              handler=".roaddecreeEvents.setRoadDecreeBoundLicence" />
 
   <subscriber for="..interfaces.IInspection
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"

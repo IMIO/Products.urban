@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2021-07-29 11:39+0000\n"
+"POT-Creation-Date: 2021-08-03 13:22+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -24,11 +24,11 @@ msgstr ""
 msgid "%s_urbanconfig_title"
 msgstr ""
 
-#: ../content/licence/RoadDecree.py:193
+#: ../content/licence/RoadDecree.py:198
 msgid "105 days"
 msgstr "105 jours"
 
-#: ../content/licence/RoadDecree.py:194
+#: ../content/licence/RoadDecree.py:199
 msgid "150 days"
 msgstr "150 jours"
 
@@ -36,7 +36,7 @@ msgstr "150 jours"
 msgid "1st class"
 msgstr "1ère classe : Collège provincial"
 
-#: ../content/licence/RoadDecree.py:195
+#: ../content/licence/RoadDecree.py:200
 msgid "210 days"
 msgstr "210 jours"
 
@@ -44,7 +44,7 @@ msgstr "210 jours"
 msgid "2nd class"
 msgstr "2ème classe : Collège communal"
 
-#: ../content/licence/RoadDecree.py:192
+#: ../content/licence/RoadDecree.py:197
 msgid "75 days"
 msgstr "75 jours"
 
@@ -82,11 +82,11 @@ msgstr "Ajouter"
 msgid "Add a work location"
 msgstr "Ajouter une adresse"
 
-#: ../browser/licence/templates/licencetabsmacros.pt:494
+#: ../browser/licence/templates/licencetabsmacros.pt:501
 msgid "Add all advices"
 msgstr "Ajouter tous les avis"
 
-#: ../browser/licence/templates/licencetabsmacros.pt:470
+#: ../browser/licence/templates/licencetabsmacros.pt:477
 msgid "Add an event"
 msgstr "Ajouter un événement"
 
@@ -121,7 +121,7 @@ msgstr "Coordonnées de l'architecte"
 msgid "Article127"
 msgstr "Article 127"
 
-#: ../browser/licence/templates/licencetabsmacros.pt:434
+#: ../browser/licence/templates/licencetabsmacros.pt:441
 #: ../browser/licence/templates/licenceview.pt:50
 msgid "Attachments"
 msgstr "Pièces jointes"
@@ -253,11 +253,11 @@ msgstr "Déclaration environnementale"
 msgid "EnvClassTwo"
 msgstr "Permis d'environnement classe 2"
 
-#: ../browser/licence/templates/licencetabsmacros.pt:478
+#: ../browser/licence/templates/licencetabsmacros.pt:485
 msgid "Events"
 msgstr "Événements"
 
-#: ../browser/licence/templates/licencetabsmacros.pt:449
+#: ../browser/licence/templates/licencetabsmacros.pt:456
 msgid "Events attachments"
 msgstr "Pièces jointes des événements"
 
@@ -934,7 +934,7 @@ msgid "add_a_tenant"
 msgstr "Ajouter un locataire"
 
 # urbanevent_view
-#: ../browser/licence/templates/licencetabsmacros.pt:443
+#: ../browser/licence/templates/licencetabsmacros.pt:450
 #: ../browser/templates/urbaneventmacros.pt:89
 msgid "add_an_attachment"
 msgstr "Ajouter une pièce jointe"
@@ -942,7 +942,7 @@ msgstr "Ajouter une pièce jointe"
 msgid "add_an_equipment"
 msgstr "Ajouter une charge imposée"
 
-#: ../browser/licence/templates/licencetabsmacros.pt:425
+#: ../browser/licence/templates/licencetabsmacros.pt:432
 msgid "add_an_inquiry"
 msgstr "Ajouter une enquête supplémentaire"
 
@@ -950,7 +950,7 @@ msgid "add_event"
 msgstr "Ajouter un événement"
 
 #. Default: "This will automatically generate following advices:"
-#: ../browser/licence/templates/licencetabsmacros.pt:498
+#: ../browser/licence/templates/licencetabsmacros.pt:505
 msgid "add_every_advices_descr"
 msgstr "Ceci ajoutera automatiquement les avis suivants :"
 
@@ -1187,14 +1187,14 @@ msgid "contact_recipients"
 msgstr "Destinataire(s) de contact"
 
 #. Default: "There is no UrbanEventInquiry linked to this inquiry"
-#: ../browser/licence/templates/licencetabsmacros.pt:411
+#: ../browser/licence/templates/licencetabsmacros.pt:418
 msgid "content_no_urbaneventinquiry"
 msgstr "Aucun événement n'est encore lié à cette enquête publique"
 
 #. Default: "None"
 #: ../browser/licence/templates/envclassborderingmacros.pt:40
 #: ../browser/licence/templates/licencemacros.pt:5
-#: ../browser/licence/templates/licencetabsmacros.pt:84
+#: ../browser/licence/templates/licencetabsmacros.pt:91
 msgid "content_none"
 msgstr "N.C."
 
@@ -1562,7 +1562,7 @@ msgid "flooding_level_verylow"
 msgstr "Risque très faible"
 
 #. Default: "Folder advices"
-#: ../browser/licence/templates/licencetabsmacros.pt:489
+#: ../browser/licence/templates/licencetabsmacros.pt:496
 msgid "folder_advice"
 msgstr "Avis du dossier"
 
@@ -1711,7 +1711,7 @@ msgid "inquiry_suspension_folder_title"
 msgstr "Périodes de suspension d'enquête"
 
 #. Default: "Inquiry ${number}"
-#: ../browser/licence/templates/licencetabsmacros.pt:359
+#: ../browser/licence/templates/licencetabsmacros.pt:366
 msgid "inquiry_title_and_number"
 msgstr "Enquête n°${number}"
 
@@ -1860,7 +1860,7 @@ msgstr "Locataire(s)"
 msgid "label_colname_transmitDate"
 msgstr "Date d'envoi"
 
-#: ../browser/licence/templates/licencetabsmacros.pt:375
+#: ../browser/licence/templates/licencetabsmacros.pt:382
 msgid "label_edit"
 msgstr "Modifier"
 
@@ -1886,7 +1886,7 @@ msgstr "Non"
 msgid "label_ok"
 msgstr ""
 
-#: ../browser/licence/templates/licencetabsmacros.pt:384
+#: ../browser/licence/templates/licencetabsmacros.pt:391
 msgid "label_remove"
 msgstr "Supprimer"
 
@@ -2280,7 +2280,7 @@ msgstr "Paramètres des réunions de projet"
 msgid "proprietaries"
 msgstr "Propriétaire(s)"
 
-#: ../browser/licence/templates/licencetabsmacros.pt:231
+#: ../browser/licence/templates/licencetabsmacros.pt:238
 msgid "ranking_ordinance"
 msgstr "Arrêté de classement"
 
@@ -2513,7 +2513,7 @@ msgstr "Particularités du bien communales"
 msgid "uniquelicence_urbanconfig_title"
 msgstr "Paramètres des permis uniques"
 
-#: ../content/licence/RoadDecree.py:191
+#: ../content/licence/RoadDecree.py:196
 msgid "unknown"
 msgstr "Non déterminé"
 
@@ -2590,7 +2590,12 @@ msgstr "Nombre de jour restant à partir duquel une alerte doit être indiquée 
 #. Default: "Bound inspections"
 #: ../browser/licence/templates/licencetabsmacros.pt:64
 msgid "urban_bound_inspections"
-msgstr "Dossiers d'inspections ou PV liés"
+msgstr "Dossier(s) d'inspections ou PV lié(s)"
+
+#. Default: "Bound roaddecrees"
+#: ../browser/licence/templates/licencetabsmacros.pt:71
+msgid "urban_bound_roaddecrees"
+msgstr "Dossier(s) \"décret voirie\" lié(s)"
 
 #. Default: "Browse old parcels (Only works with the parcel reference)"
 #: ../browser/templates/searchparcels.pt:168
@@ -2622,7 +2627,7 @@ msgid "urban_descr_usedAttributes"
 msgstr "Sélectionner les champs optionnels à utiliser. Utiliser la touche CTRL pour une sélection multiple ou pour désélectionner"
 
 #. Default: "Key dates"
-#: ../browser/licence/templates/licencetabsmacros.pt:71
+#: ../browser/licence/templates/licencetabsmacros.pt:78
 msgid "urban_description_key_dates_legend"
 msgstr "Dates clés"
 
@@ -2968,7 +2973,7 @@ msgid "urban_label_article"
 msgstr "Article"
 
 #. Default: "Asking Date"
-#: ../browser/licence/templates/licencetabsmacros.pt:294
+#: ../browser/licence/templates/licencetabsmacros.pt:301
 msgid "urban_label_askingDate"
 msgstr "Date de demande"
 
@@ -3039,9 +3044,13 @@ msgstr "Bis"
 msgid "urban_label_bound_inspection"
 msgstr "Dossier d'inspection lié"
 
+#. Default: "Bound licence"
+#: ../content/licence/RoadDecree.py:35
+msgid "urban_label_bound_licence"
+msgstr ""
+
 #. Default: "Bound licences"
 #: ../content/licence/Inspection.py:42
-#: ../content/licence/RoadDecree.py:35
 #: ../content/licence/Ticket.py:84
 msgid "urban_label_bound_licences"
 msgstr "Dossiers liés"
@@ -3567,7 +3576,7 @@ msgstr "Détails concernant le plan d'expropriation"
 
 #. Default: "Advice"
 #: ../UrbanEvent.py:189
-#: ../browser/licence/templates/licencetabsmacros.pt:296
+#: ../browser/licence/templates/licencetabsmacros.pt:303
 msgid "urban_label_externalDecision"
 msgstr " Avis"
 
@@ -4612,7 +4621,7 @@ msgstr "Détails concernant le RCU"
 
 #. Default: "Receipt date"
 #: ../UrbanEvent.py:94
-#: ../browser/licence/templates/licencetabsmacros.pt:295
+#: ../browser/licence/templates/licencetabsmacros.pt:302
 msgid "urban_label_receiptDate"
 msgstr "Date de réception"
 
@@ -4782,7 +4791,7 @@ msgid "urban_label_representedBySociety"
 msgstr "Représenté par la société"
 
 #. Default: "Organisation"
-#: ../browser/licence/templates/licencetabsmacros.pt:293
+#: ../browser/licence/templates/licencetabsmacros.pt:300
 msgid "urban_label_requestedOrganisation"
 msgstr "Organisme"
 
@@ -5003,7 +5012,7 @@ msgid "urban_label_solicitLocationOpinionsTo"
 msgstr "Un avis sera sollicité par l'urbanisme à"
 
 #. Default: "Solicit opinion to"
-#: ../browser/licence/templates/licencetabsmacros.pt:271
+#: ../browser/licence/templates/licencetabsmacros.pt:278
 #: ../content/Inquiry.py:127
 msgid "urban_label_solicitOpinionsTo"
 msgstr "Avis sollicité(s) obligatoire(s)"
@@ -5149,7 +5158,7 @@ msgid "urban_label_tax"
 msgstr "Redevance"
 
 #. Default: "technicaladvice"
-#: ../content/licence/RoadDecree.py:222
+#: ../content/licence/RoadDecree.py:227
 msgid "urban_label_technicalAdvice"
 msgstr "Avis technique"
 
@@ -5395,7 +5404,7 @@ msgid "urban_label_zipcode"
 msgstr "Code Postal"
 
 #. Default: "Click here to access the linked urban event inquiry"
-#: ../browser/licence/templates/licencetabsmacros.pt:406
+#: ../browser/licence/templates/licencetabsmacros.pt:413
 msgid "urban_link_to_the_linked_urbaneventinquiry"
 msgstr "Cliquez ici pour accéder à l'événement lié"
 
@@ -5403,7 +5412,7 @@ msgid "urban_linked_inquiry_help"
 msgstr "Vous retrouvez ici les informations concernant l'enquête.  Si vous souhaitez modifier ces informations, cliquez sur le lien de l'enquête liée ci-dessous."
 
 #. Default: "Linked urban event inquiry"
-#: ../browser/licence/templates/licencetabsmacros.pt:402
+#: ../browser/licence/templates/licencetabsmacros.pt:409
 msgid "urban_linked_urbaneventinquiry"
 msgstr "Événement lié"
 
@@ -5413,7 +5422,7 @@ msgid "urban_no_event_added"
 msgstr "Aucun élément n'a encore été ajouté"
 
 #. Default: "No event type is defined in the configuration for this element"
-#: ../browser/licence/templates/licencetabsmacros.pt:472
+#: ../browser/licence/templates/licencetabsmacros.pt:479
 msgid "urban_no_eventtype_defined"
 msgstr "Aucun type d'événement n'est défini dans la configuration pour cet élément"
 
