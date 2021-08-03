@@ -94,6 +94,11 @@ schema = Schema((
 )
 RoadDecree_schema = CODT_BuildLicence.schema.copy() + schema.copy()
 del RoadDecree_schema['usage']
+del RoadDecree_schema['form_composition']
+del RoadDecree_schema['annoncedDelay']
+del RoadDecree_schema['annoncedDelayDetails']
+del RoadDecree_schema['delayAfterModifiedBlueprints']
+del RoadDecree_schema['delayAfterModifiedBlueprintsDetails']
 
 
 class RoadDecree(CODT_BuildLicence):
