@@ -253,7 +253,7 @@ EventConfigs = {
                     'context_variables': [
                         {
                             'name': 'publipostage',
-                            'value': 'proprietaires'
+                            'value': 'proprietaires_voisinage_enquete'
                         }
                     ]
                 },
@@ -7634,7 +7634,7 @@ EventConfigs = {
                     'context_variables': [
                         {
                             'name': 'publipostage',
-                            'value': 'proprietaires'
+                            'value': 'proprietaires_voisinage_enquete'
                         }
                     ]
                 },
@@ -7645,7 +7645,7 @@ EventConfigs = {
                     'context_variables': [
                         {
                             'name': 'publipostage',
-                            'value': 'proprietaires'
+                            'value': 'proprietaires_voisinage_enquete'
                         }
                     ]
                 },
@@ -7671,7 +7671,7 @@ EventConfigs = {
                     'context_variables': [
                         {
                             'name': 'publipostage',
-                            'value': 'proprietaires'
+                            'value': 'proprietaires_voisinage_enquete'
                         }
                     ]
                 },
