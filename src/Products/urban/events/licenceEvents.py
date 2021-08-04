@@ -85,7 +85,8 @@ def updateBoundLicences(licence, events):
     annotations = IAnnotations(licence)
     ticket_uids = annotations.get('urban.bound_tickets') or set([])
     inspection_uids = annotations.get('urban.bound_inspections') or set([])
-    uids = inspection_uids.union(ticket_uids)
+    roaddecree_uids = annotations.get('urban.bound_roaddecrees') or set([])
+    uids = inspection_uids.union(ticket_uids).union(roaddecree_uids)
     catalog = api.portal.get_tool('portal_catalog')
     bound_licences_brains = catalog(UID=uids)
     for bound_licences_brain in bound_licences_brains:

@@ -358,6 +358,7 @@
 <div class="licence-column" metal:define-macro="inquiry_macro" i18n:domain="urban"
      tal:define="inquiry_type view/getInquiryType;
                  inquiries view/getInquiriesForDisplay;
+                 bound_roaddecrees_inquiries view/getRoadDecreesInquiriesForDisplay;
                  member context/@@plone_portal_state/member;">
     <fieldset tal:repeat="inquiry inquiries">
         <legend>
@@ -432,6 +433,45 @@
             <input type="submit" class="context apButton contenttype-inquiry" id="event" value="add_an_inquiry" i18n:attributes="value" />
         </form>
     </metal:custom_add_inquiry>
+    <tal:roaddecrees_inquiry repeat="rd_inquiries bound_roaddecrees_inquiries">
+    <fieldset tal:define="roaddecree python: rd_inquiries[0];
+                          inquiries python: rd_inquiries[1]">
+        <legend>
+            <span i18n:translate="urban_bound_roaddecrees"/> :
+            <a tal:attributes="href python: roaddecree.absolute_url()" tal:content="python: roaddecree.getReference()"/>
+        </legend>
+        <fieldset tal:repeat="inquiry inquiries">
+            <legend>
+                <span class="contenttype-inquiry" i18n:translate="inquiry_title_and_number">
+                    Inquiry
+                    <span i18n:name="number" tal:content="repeat/inquiry/number"></span>
+                </span>
+            </legend>
+            <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%
+                   tal:define="custom python: ['investigationArticles'];
+                               default_exclude python: [];
+                               context python: inquiry;
+                               exclude exclude | default_exclude">
+
+                <tal:loop repeat="field python: view.getBoundInquiryFields(exclude, inquiry)">
+                    <metal:field_display use-macro="here/@@licencetabs-macros/field_display" />
+                </tal:loop>
+               <tr>
+                   <td valign="top"><b><span i18n:translate="urban_linked_urbaneventinquiry">Linked urban event inquiry</span>:</b></td>
+                   <td width="10px"></td>
+                   <td valign="top"
+                       tal:define="linkedUrbanEventInquiry python: inquiry.getLinkedUrbanEventInquiry();">
+                       <a tal:condition="python: linkedUrbanEventInquiry"
+                          href="#" tal:attributes="href python:linkedUrbanEventInquiry.absolute_url()"
+                          i18n:translate="urban_link_to_the_linked_urbaneventinquiry">
+                              Click here to access the linked urban event inquiry
+                       </a>
+                   </td>
+               </tr>
+            </table>
+        </fieldset>
+    </fieldset>
+    </tal:roaddecrees_inquiry>
 </div>
 
 

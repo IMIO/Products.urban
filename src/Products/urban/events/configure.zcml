@@ -223,9 +223,17 @@
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".roaddecreeEvents.setRoadDecreeBoundLicence" />
 
+  <subscriber for="..interfaces.IRoadDecree
+                   zope.container.interfaces.IObjectRemovedEvent"
+              handler=".roaddecreeEvents.clearBoundLicences" />
+
   <subscriber for="..interfaces.IInspection
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".inspectionEvents.setInspectionBoundLicence" />
+
+  <subscriber for="..interfaces.IInspection
+                   zope.container.interfaces.IObjectRemovedEvent"
+              handler=".inspectionEvents.clearBoundLicences" />
 
   <subscriber for="..interfaces.ITicket
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
@@ -234,6 +242,10 @@
   <subscriber for="..interfaces.ITicket
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".ticketEvents.setTicketBoundLicence" />
+
+  <subscriber for="..interfaces.ITicket
+                   zope.container.interfaces.IObjectRemovedEvent"
+              handler=".ticketEvents.clearBoundLicences" />
 
   <subscriber for="..interfaces.ITicket
                    Products.DCWorkflow.interfaces.IAfterTransitionEvent"

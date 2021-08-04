@@ -2595,7 +2595,7 @@ msgstr "Dossier(s) d'inspections ou PV lié(s)"
 #. Default: "Bound roaddecrees"
 #: ../browser/licence/templates/licencetabsmacros.pt:71
 msgid "urban_bound_roaddecrees"
-msgstr "Dossier(s) \"décret voirie\" lié(s)"
+msgstr "Dossier \"décret voirie\" lié"
 
 #. Default: "Browse old parcels (Only works with the parcel reference)"
 #: ../browser/templates/searchparcels.pt:168

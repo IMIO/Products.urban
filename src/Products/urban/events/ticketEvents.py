@@ -10,7 +10,7 @@ from zope.lifecycleevent import ObjectModifiedEvent
 def setTicketBoundInspection(ticket, event):
     annotations = IAnnotations(ticket)
     previous_bound_UIDs = annotations.get('urban.ticket_bound_inspections') or ''
-    new_bound_UIDs = ticket.getField('bound_inspection').getRaw(ticket) or ''
+    new_bound_UIDs = [ticket.getField('bound_inspection').getRaw(ticket)] or []
     if previous_bound_UIDs == new_bound_UIDs:
         return
 
@@ -77,7 +77,24 @@ def notifyBoundInspections(ticket, event):
     """
     catalog = api.portal.get_tool('portal_catalog')
     annotations = IAnnotations(ticket)
-    inspection_UIDs = annotations.get('urban.ticket_bound_inspections') or ''
+    inspection_UIDs = annotations.get('urban.ticket_bound_inspections') or []
     for inspection_brain in catalog(UID=inspection_UIDs):
         inspection = inspection_brain.getObject()
         notify(ObjectModifiedEvent(inspection))
+
+
+def clearBoundLicences(ticket, event):
+    annotations = IAnnotations(ticket)
+    previous_bound_UIDs = list(annotations.get('urban.ticket_bound_inspections') or set([]))
+    previous_bound_UIDs += list(annotations.get('urban.ticket_bound_licence') or set([]))
+    catalog = api.portal.get_tool('portal_catalog')
+    # unrefer previous licence
+    if previous_bound_UIDs:
+        previous_licence = catalog(UID=previous_bound_UIDs)
+        previous_licence = previous_licence and previous_licence[0].getObject()
+        if previous_licence:
+            previous_licence_annotations = IAnnotations(previous_licence)
+            values = previous_licence_annotations.get('urban.bound_tickets') or set([])
+            if ticket.UID() in values:
+                values.remove(ticket.UID())
+                previous_licence_annotations['urban.bound_tickets'] = values
