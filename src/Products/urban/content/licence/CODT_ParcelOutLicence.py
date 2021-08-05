@@ -40,6 +40,14 @@ schema = Schema((
         ),
         schemata='urban_description',
     ),
+    BooleanField(
+        name='isModificationParceloutLicence',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label=_('urban_label_isModificationParceloutLicence', default='IsModificationParceloutLicence'),
+        ),
+        schemata='urban_description',
+    ),
     ReferenceField(
         name='geometricians',
         widget=ReferenceBrowserWidget(
@@ -194,6 +202,7 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     schema.moveField('isModification', after='folderCategory')
     schema.moveField('description', after='impactStudy')
     schema.moveField('geometricians', after='workLocations')
+    schema.moveField('isModificationParceloutLicence', after='description')
     return schema
 
 finalizeSchema(CODT_ParcelOutLicence_schema)
