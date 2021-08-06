@@ -22,6 +22,7 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.urban.config import *
 from Products.urban import UrbanMessage as _
+from Products.urban.utils import setOptionalAttributes
 
 ##code-section module-header #fill in your manual code here
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
