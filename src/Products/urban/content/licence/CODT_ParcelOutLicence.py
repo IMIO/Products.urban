@@ -30,6 +30,8 @@ from dateutil.relativedelta import relativedelta
 from plone import api
 ##/code-section module-header
 
+optional_fields = ['isModificationParceloutLicence',]
+
 schema = Schema((
 
     BooleanField(
@@ -75,6 +77,7 @@ schema = Schema((
 )
 
 ##code-section after-local-schema #fill in your manual code here
+setOptionalAttributes(schema, optional_fields)
 ##/code-section after-local-schema
 
 CODT_ParcelOutLicence_schema = BaseFolderSchema.copy() + \
