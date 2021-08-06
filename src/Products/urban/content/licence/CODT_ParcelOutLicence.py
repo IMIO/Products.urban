@@ -206,7 +206,7 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     schema.moveField('isModification', after='folderCategory')
     schema.moveField('description', after='impactStudy')
     schema.moveField('geometricians', after='workLocations')
-    schema.moveField('isModificationParceloutLicence', after='description')
+    schema.moveField('isModificationParceloutLicence', before='description')
     return schema
 
 finalizeSchema(CODT_ParcelOutLicence_schema)
