@@ -50,8 +50,18 @@ def replace_mailing_loop_owners(context):
     logger.info("starting upgrade steps")
     catalog = api.portal.get_tool('portal_catalog')
     template_brains = catalog(object_provides=IConfigurablePODTemplate.__identifier__)
-    brains_context_var = [ elt for elt in template_brains if elt.getObject().context_variables != None]
-    doc_proprietaires = [elm for elm in brains_context_var if len(elm.getObject().context_variables) > 0 and elm.getObject().context_variables[0]['value'] == 'proprietaires']
-    for j in range(0, len(doc_proprietaires)) : doc_proprietaires[j].getObject().context_variables[0]['value'] = 'proprietaires_voisinage_enquete'
+    # get brains instead of all templates because brains are small
+    for brain in template_brains:
+        template = brain.getObject()
+        # get the template we need
+        if template.context_variables:
+            # false if template.context_variables is None or empty
+            new_value = []
+            for line in template.context_variables:
+                if line['value'] == 'proprietaires':
+                    logger.info("migrated template : {} ".format(template))
+                    line['value'] = 'proprietaires_voisinage_enquete'
+                new_value.append(line)
+            template.context_variables = new_value
     logger.info("upgrade done!")
 
