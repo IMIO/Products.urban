@@ -39,6 +39,7 @@ from Products.urban.utils import getLicenceFolderId
 from Products.urban.utils import getUrbanOnlyLicenceFolderIds
 from Products.urban.utils import moveElementAfter
 
+
 from datetime import date
 from eea.facetednavigation.layout.interfaces import IFacetedLayout
 from imio.dashboard.utils import _updateDefaultCollectionFor
@@ -60,6 +61,7 @@ from zope.component import getUtilitiesFor
 from zope.component import queryUtility
 from zope.component.interface import getInterface
 from zope.i18n.interfaces import ITranslationDomain
+from zope.i18n import translate
 from zope.lifecycleevent import ObjectModifiedEvent
 from zope.schema.interfaces import IVocabularyFactory
 from zope import event
@@ -1058,6 +1060,7 @@ def setupSchedule(context):
     if not hasattr(urban_folder, 'schedule'):
         urban_folder.invokeFactory('Folder', id='schedule')
     schedule_folder = getattr(urban_folder, 'schedule')
+    schedule_folder.setTitle('Échéancier')
     # block parents portlet
     manager = queryUtility(IPortletManager, name='plone.leftcolumn')
     blacklist = getMultiAdapter((schedule_folder, manager), ILocalPortletAssignmentManager)
