@@ -136,6 +136,12 @@ Changes
 - Add dashboard template 'listing permis' 
   [lmertens]
 
+- Add translations [URB-1997]
+  [mdhyne]
+  
+-add boolean field 'isModificationParceloutLicence'. [URB-2250]
+  [mdhyne]
+
 
 2.4 (2019-03-25)
 ----------------
