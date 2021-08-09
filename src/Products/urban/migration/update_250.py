@@ -42,6 +42,7 @@ def fix_POD_templates_odt_file(context):
             logger.info("fixed template {}".format(template))
     logger.info("upgrade done!")
 
+
 def replace_mailing_loop_owners(context):
     """
     For the mailing loop, owners are those in a zone of inquiry, and not the owners of the parcels like for inspections
@@ -54,4 +55,6 @@ def replace_mailing_loop_owners(context):
     doc_proprietaires = [elm for elm in brains_context_var if len(elm.getObject().context_variables) > 0 and elm.getObject().context_variables[0]['value'] == 'proprietaires']
     for j in range(0, len(doc_proprietaires)) : doc_proprietaires[j].getObject().context_variables[0]['value'] = 'proprietaires_voisinage_enquete'
     logger.info("upgrade done!")
+
+
 
