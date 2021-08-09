@@ -40,4 +40,3 @@ def fix_POD_templates_odt_file(context):
             template.odt_file = template.odt_file[0]
             logger.info("fixed template {}".format(template))
     logger.info("upgrade done!")
-
