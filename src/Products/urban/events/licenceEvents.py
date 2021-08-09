@@ -212,11 +212,13 @@ def close_all_events(licence, event):
     portal_workflow = api.portal.get_tool('portal_workflow')
     config = licence.getLicenceConfig()
     licence_state = api.content.get_state(licence)
+    closing_states = ['closed', 'opinion_given']
     if licence_state in (config.getStates_to_end_all_events() or []):
         for urban_event in licence.getAllEvents():
             workflow_def = portal_workflow.getWorkflowsFor(urban_event)[0]
-            if 'closed' in workflow_def.states.objectIds():
-                workflow_id = workflow_def.getId()
-                workflow_state = portal_workflow.getStatusOf(workflow_id, urban_event)
-                workflow_state['review_state'] = 'closed'
-                portal_workflow.setStatusOf(workflow_id, urban_event, workflow_state.copy())
+            for closing_state in closing_states:
+                if closing_state in workflow_def.states.objectIds():
+                    workflow_id = workflow_def.getId()
+                    workflow_state = portal_workflow.getStatusOf(workflow_id, urban_event)
+                    workflow_state['review_state'] = closing_state
+                    portal_workflow.setStatusOf(workflow_id, urban_event, workflow_state.copy())
