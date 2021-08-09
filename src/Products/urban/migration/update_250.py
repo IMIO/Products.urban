@@ -36,7 +36,7 @@ def fix_POD_templates_odt_file(context):
     catalog = api.portal.get_tool('portal_catalog')
     all_templates = [b.getObject() for b in catalog(object_provides=IPODTemplate.__identifier__)]
     for template in all_templates:
-        if type(template.od_file) in [list, tuple]:
+        if type(template.odt_file) in [list, tuple]:
             template.odt_file = template.odt_file[0]
             logger.info("fixed template {}".format(template))
     logger.info("upgrade done!")
