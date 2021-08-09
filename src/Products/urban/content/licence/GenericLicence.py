@@ -1312,7 +1312,7 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
           Returns all UrbanEvents corresponding to advice on a licence
         """
         licence_config = self.getLicenceConfig()
-        event_configs = licence_config.getEventConfigs()
+        event_configs = licence_config.getEnabledEventConfigs()
         res = []
         for event_config in event_configs:
             if event_config.portal_type == 'OpinionEventConfig' and \
