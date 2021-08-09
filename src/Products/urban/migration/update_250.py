@@ -37,7 +37,7 @@ def fix_POD_templates_odt_file(context):
     all_templates = [b.getObject() for b in catalog(object_provides=IPODTemplate.__identifier__)]
     for template in all_templates:
         if type(template.od_file) in [list, tuple]:
-            template.od_file = template.od_file[0]
+            template.odt_file = template.odt_file[0]
             logger.info("fixed template {}".format(template))
     logger.info("upgrade done!")
 
