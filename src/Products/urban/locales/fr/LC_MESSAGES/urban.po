@@ -4000,6 +4000,11 @@ msgstr "Événement clé"
 msgid "urban_label_isModification"
 msgstr "Modification d'un permis existant?"
 
+#. Default: "IsModificationParceloutLicence"
+#: ../content/licence/CODT_ParcelOutLicence.py:43
+msgid "urban_label_isModificationParceloutLicence"
+msgstr "Modification d'un permis d'urbanisation"
+
 #. Default: "Isofficialparcel"
 #: PortionOut.py
 msgid "urban_label_isOfficialParcel"
