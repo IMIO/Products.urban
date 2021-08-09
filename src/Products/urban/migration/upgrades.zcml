@@ -191,8 +191,16 @@
         title="Delete migrated miscdemands to Inspection"
         description="urban upgrade step"
         source="1009"
-        destination="1100"
+        destination="1010"
         handler=".update_250.delete_migrated_miscdemands"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Fix PODTemplate odt_file"
+        description="urban upgrade step"
+        source="1010"
+        destination="1100"
+        handler=".update_250.fix_POD_templates_odt_file"
         profile="Products.urban:default" />
 
 </configure>
