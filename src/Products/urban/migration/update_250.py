@@ -42,6 +42,7 @@ def fix_POD_templates_odt_file(context):
             logger.info("fixed template {}".format(template))
     logger.info("upgrade done!")
 
+
 def replace_mailing_loop_owners(context):
     """
     For the mailing loop, owners are those in a zone of inquiry, and not the owners of the parcels like for inspections
@@ -64,4 +65,6 @@ def replace_mailing_loop_owners(context):
                 new_value.append(line)
             template.context_variables = new_value
     logger.info("upgrade done!")
+
+
 
