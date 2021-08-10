@@ -204,8 +204,8 @@ class RoadDecree(CODT_BuildLicence):
 
     def getDecisional_delay(self, *values):
         alignment = getattr(self, 'IsAlignment_plan', False)
-        municipality = getattr(self, 'commune_choices', 'ukn')
-        external_municipality = municipality != 'commune'
+        municipality = getattr(self, 'townships', 'ukn')
+        external_municipality = municipality != 'township'
 
         if external_municipality and alignment:
             return '210j'
@@ -225,6 +225,9 @@ def finalize_schema(schema, folderish=False, moveDiscussion=True):
     """
     schema.moveField('bound_licence', before='workLocations')
     schema.moveField('use_bound_licence_infos', after='bound_licence')
+    schema.moveField('IsAlignment_plan', after='missingPartsDetails')
+    schema.moveField('townships', after='IsAlignment_plan')
+    schema.moveField('decisional_delay', after='townships')
     schema['locationTechnicalAdvice'].widget.label = _(
         'urban_label_technicalAdvice',
         default='technicaladvice',
