@@ -57,4 +57,11 @@
       permission="zope2.View"
   />
 
+  <browser:viewlet
+      name="urbanfavicon"
+      manager="plone.app.layout.viewlets.interfaces.IHtmlHeadLinks"
+      class=".urbanfavicon.UrbanFaviconViewlet"
+      permission="zope2.View"
+  />
+
 </configure>
