@@ -142,6 +142,8 @@ Changes
 -add boolean field 'isModificationParceloutLicence'. [URB-2250]
   [mdhyne]
 
+- Add logo urban to the tab, overriding the favicon.ico viewlet. [URB-2209]
+  [mdhyne]
 
 2.4 (2019-03-25)
 ----------------
