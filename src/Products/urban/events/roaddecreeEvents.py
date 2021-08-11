@@ -16,11 +16,11 @@ def copy_bound_licence_inquiry_fields(roaddecree, event):
         bound_licence = brains[0].getObject()
         inquiry = bound_licence.getAllInquiries()[-1]
         fields = roaddecree.schema.getSchemataFields('urban_inquiry')
-        for original_field in fields:
-            destination_field = inquiry.getField(original_field.getName())
-            if destination_field:
-                destination_mutator = destination_field.getMutator(roaddecree)
-                value = original_field.getAccessor(inquiry)()
+        for field in fields:
+            source_field = inquiry.getField(field.getName())
+            if source_field:
+                destination_mutator = source_field.getMutator(roaddecree)
+                value = source_field.getAccessor(inquiry)()
                 destination_mutator(value)
 
 

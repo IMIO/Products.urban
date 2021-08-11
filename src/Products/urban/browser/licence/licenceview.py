@@ -211,7 +211,8 @@ class LicenceView(BrowserView):
         context = aq_inner(self.context)
         if api.content.get_state(self.context) in ['accepted', 'refused']:
             return False
-        return any([not parcel.getIsOfficialParcel for parcel in context.listFolderContents(contentFilter={"portal_type": "PortionOut"})])
+        parcels = context.listFolderContents(contentFilter={"portal_type": "PortionOut"})
+        return any([not parcel.getIsOfficialParcel() for parcel in parcels])
 
     def getKeyDates(self):
         context = aq_inner(self.context)
@@ -231,7 +232,9 @@ class LicenceView(BrowserView):
                 key_dates[eventtype.UID()] = keydates
                 dates[eventtype.UID()] = dict([(date[0], {
                     'dates': [],
-                    'label': date[0] == 'eventDate' and eventtype.Title() or '%s (%s)' % (eventtype.Title().decode('utf8'), date[1])
+                    'label':
+                        date[0] == 'eventDate' and eventtype.Title() or
+                        '%s (%s)' % (eventtype.Title().decode('utf8'), date[1])
                 }) for date in keydates])
 
         # now check each event to see if its a key Event, if yes, we gather the key date values found on this event
@@ -349,7 +352,6 @@ class LicenceView(BrowserView):
         annotations = IAnnotations(self.context)
         roaddecree_UIDs = list(annotations.get('urban.bound_roaddecrees', []))
         if roaddecree_UIDs:
-            licence_folder = api.portal.get().urban
             catalog = api.portal.get_tool('portal_catalog')
             brains = catalog(UID=roaddecree_UIDs)
             roaddecrees = [b.getObject() for b in brains]
@@ -407,7 +409,7 @@ class UrbanCertificateBaseView(LicenceView):
         context = aq_inner(self.context)
         accessor = getattr(context, 'get%sSpecificFeatures' % subtype.capitalize())
         specific_features = accessor()
-        return [spf.get('value', spf['text']) for spf in specific_features if not 'check' in spf or spf['check']]
+        return [spf.get('value', spf['text']) for spf in specific_features if 'check' not in spf or spf['check']]
 
 
 class CODTUrbanCertificateBaseView(UrbanCertificateBaseView):
@@ -420,6 +422,7 @@ class CODTUrbanCertificateBaseView(UrbanCertificateBaseView):
 
     def getInquiryType(self):
         return 'CODT_Inquiry'
+
 
 class EnvironmentLicenceView(LicenceView):
     """
@@ -436,8 +439,8 @@ class EnvironmentLicenceView(LicenceView):
         context = aq_inner(self.context)
         inquiries = context.getInquiries()
         if not inquiries:
-            #we want to display at least the informations about the inquiry
-            #defined on the licence even if no data have been entered
+            # we want to display at least the informations about the inquiry
+            # defined on the licence even if no data have been entered
             inquiries.append(context)
         return inquiries
 
@@ -450,7 +453,8 @@ class EnvironmentLicenceView(LicenceView):
         rubric_uids = context.getField('rubrics').getRaw(context)
         rubric_brains = catalog(UID=rubric_uids)
         rubrics = [brain.getObject() for brain in rubric_brains]
-        rubrics_display = ['<p>classe %s, %s</p>%s' % (rub.getExtraValue(), rub.getNumber(), rub.Description()) for rub in rubrics]
+        rubrics_display = ['<p>classe %s, %s</p>%s' % (rub.getExtraValue(), rub.getNumber(), rub.Description())
+                           for rub in rubrics]
         return rubrics_display
 
     def _sortConditions(self, conditions):

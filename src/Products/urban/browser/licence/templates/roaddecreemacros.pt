@@ -25,23 +25,70 @@
 </metal:analysis>
 
 <metal:road define-macro="road_macro" i18n:domain="urban">
-    <metal:parent_call use-macro="here/@@licencetabs-macros/road_macro">
-    </metal:parent_call>
+    <metal:parent_call use-macro="here/@@licencetabs-macros/road_macro" />
+    <div class="licence-column" i18n:domain="urban"
+         tal:define="bound_licence python: context.getUse_bound_licence_infos() and context.getBound_licence();
+                     context python: bound_licence or context;
+                     member context/@@plone_portal_state/member;"
+         tal:condition="python: bound_licence">
+        <fieldset>
+            <legend>
+                <a tal:attributes="href python: context.absolute_url()">
+                    <span i18n:translate="urban_bound_licence"/> :
+                    <tal:title replace="context/Title"/>
+                </a>
+            </legend>
+            <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%
+                   tal:define="default_custom python: [];
+                               custom custom | python: []; custom python: custom + default_custom">
+
+                <tal:loop repeat="field view/getRoadFields">
+                    <metal:field_display use-macro="here/@@licencetabs-macros/field_display" />
+                </tal:loop>
+
+            </table>
+        </fieldset>
+    </div>
 </metal:road>
 
 <metal:location define-macro="location_macro" i18n:domain="urban">
-    <metal:parent_call use-macro="here/@@licencetabs-macros/location_macro">
-    </metal:parent_call>
+    <metal:parent_call use-macro="here/@@licencetabs-macros/location_macro" />
 </metal:location>
 
 <metal:peb define-macro="habitation_macro" i18n:domain="urban">
-    <metal:parent_call use-macro="here/@@licencetabs-macros/habitation_macro">
-    </metal:parent_call>
+    <metal:parent_call use-macro="here/@@licencetabs-macros/habitation_macro" />
+    <div class="licence-column" i18n:domain="urban"
+         tal:define="bound_licence python: context.getUse_bound_licence_infos() and context.getBound_licence();
+                     context python: bound_licence or context;
+                     member context/@@plone_portal_state/member;"
+         tal:condition="python: bound_licence">
+        <fieldset>
+            <legend>
+                <a tal:attributes="href python: context.absolute_url()">
+                    <span i18n:translate="urban_bound_licence"/> :
+                    <tal:title replace="context/Title"/>
+                </a>
+            </legend>
+            <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%
+               tal:define="default_custom python: ['noApplication',];
+                           default_exclude python: [
+                               'shouldNumerotateBuildings', 'habitationsBeforeLicence', 'habitationsAfterLicence',
+                               'additionalHabitationsAsked', 'additionalHabitationsGiven', 'mayNeedLocationLicence'
+                           ];
+                           custom custom | python: []; custom python: custom + default_custom;
+                           exclude exclude | default_exclude">
+
+                <tal:loop repeat="field python: view.getHabitationFields(exclude)">
+                    <metal:field_display use-macro="here/@@licencetabs-macros/field_display" />
+                </tal:loop>
+
+            </table>
+        </fieldset>
+    </div>
 </metal:peb>
 
 <metal:peb define-macro="peb_macro" i18n:domain="urban">
-    <metal:parent_call use-macro="here/@@licencetabs-macros/peb_macro">
-    </metal:parent_call>
+    <metal:parent_call use-macro="here/@@licencetabs-macros/peb_macro" />
 </metal:peb>
 
 <metal:inquiry define-macro="inquiry_macro" i18n:domain="urban">
@@ -50,6 +97,22 @@
 
 <metal:advices define-macro="advices_macro" i18n:domain="urban">
     <metal:parent_call use-macro="here/@@licencetabs-macros/advices_macro" />
+    <div class="licence-column" i18n:domain="urban"
+         tal:define="bound_licence python: context.getUse_bound_licence_infos() and context.getBound_licence();
+                     context python: bound_licence or context;
+                     inquiries python: bound_licence and bound_licence.getAllInquiries() or view.getInquiriesForDisplay();
+                     member context/@@plone_portal_state/member;">
+        <fieldset tal:repeat="inquiry inquiries">
+            <legend tal:condition="python: bound_licence">
+                <a tal:attributes="href python: context.absolute_url()">
+                    <span i18n:translate="urban_bound_licence"/> :
+                    <tal:title replace="context/Title"/>
+                </a>
+            </legend>
+            <metal:parent_call use-macro="here/@@licencetabs-macros/advices_table-macro" />
+        </fieldset>
+        <br />
+    </div>
 </metal:advices>
 
 
