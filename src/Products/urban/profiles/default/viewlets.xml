@@ -8,4 +8,9 @@
     <hidden manager="plone.belowcontentbody" skinname="imioapps">
         <viewlet name="collective.task.list_tasks"/>
     </hidden>
+    <order manager="plone.htmlhead.links" skinname="imioapps"
+           based-on="Plone Default">
+        <viewlet name="urban.viewlets.urbanfavicon"
+                 insert-before="*" />
+    </order>
 </object>
