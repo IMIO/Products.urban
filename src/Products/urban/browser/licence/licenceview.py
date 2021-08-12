@@ -14,6 +14,8 @@ from Products.urban.browser.table.urbantable import ParcelsTable
 from Products.urban.browser.table.urbantable import ProprietaryTable
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.interfaces import IUrbanDoc
+from Products.urban.interfaces import IUrbanEventAnnouncement
+from Products.urban.interfaces import IUrbanEventInquiry
 
 from plone import api
 from plone.memoize import view
@@ -48,7 +50,8 @@ class LicenceView(BrowserView):
     def getAllowedEventConfigs(self):
         licence = aq_inner(self.context)
         licence_config = licence.getLicenceConfig()
-        event_configs = [cfg for cfg in licence_config.getEnabledEventConfigs() if cfg.canBeCreatedInLicence(self.context)]
+        event_configs = [cfg for cfg in licence_config.getEnabledEventConfigs()
+                         if cfg.canBeCreatedInLicence(self.context)]
         return event_configs
 
     def canAddUrbanEvent(self):
@@ -208,7 +211,8 @@ class LicenceView(BrowserView):
         context = aq_inner(self.context)
         if api.content.get_state(self.context) in ['accepted', 'refused']:
             return False
-        return any([not parcel.getIsOfficialParcel for parcel in context.listFolderContents(contentFilter={"portal_type": "PortionOut"})])
+        return any([not parcel.getIsOfficialParcel for parcel
+                    in context.listFolderContents(contentFilter={"portal_type": "PortionOut"})])
 
     def getKeyDates(self):
         context = aq_inner(self.context)
@@ -238,7 +242,7 @@ class LicenceView(BrowserView):
                                       for date in keydates]
                         })
                 elif with_empty_dates:
-                        ordered_dates.append({
+                    ordered_dates.append({
                             'label': eventconfig.Title(),
                             'dates': [{'date_label': date[0], 'date': None, 'url': None} for date in keydates]
                         })
@@ -390,7 +394,9 @@ class EnvironmentLicenceView(LicenceView):
         rubric_uids = context.getField('rubrics').getRaw(context)
         rubric_brains = catalog(UID=rubric_uids)
         rubrics = [brain.getObject() for brain in rubric_brains]
-        rubrics_display = ['<p>classe %s, %s</p>%s' % (rub.getExtraValue(), rub.getNumber(), rub.Description()) for rub in rubrics]
+        rubrics_display = ['<p>classe %s, %s</p>%s' %
+                           (rub.getExtraValue(), rub.getNumber(), rub.Description())
+                           for rub in rubrics]
         return rubrics_display
 
     def _sortConditions(self, conditions):
@@ -428,7 +434,13 @@ class ShowEditTabbing(BrowserView):
     def __call__(self):
 
         # this view is registered for any kind of content (because fuck you thats why)
-        # we do the check if we are a licence inside the call
+        # we do the check if we are a licence or an events with tabs inside the call
+        # allow custom tab for events because teh default tab do not allow
+        # to redirect correctly.
+        if IUrbanEventAnnouncement.providedBy(self.context):
+            return True
+        if IUrbanEventInquiry.providedBy(self.context):
+            return True
         if not IGenericLicence.providedBy(self.context):
             return
 

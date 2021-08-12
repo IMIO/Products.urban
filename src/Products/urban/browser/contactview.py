@@ -89,7 +89,7 @@ class RecipientCadastreView(BrowserView):
         context = aq_inner(self.context)
         parent = context.aq_inner.aq_parent
         return self.request.RESPONSE.redirect(
-            parent.absolute_url() + '#fieldsetlegend-urbaneventinquiry_recipients'
+            parent.absolute_url() + '/#fieldsetlegend-urbaneventinquiry_recipients'
         )
 
 
@@ -116,7 +116,7 @@ class CopyRecipientCadastreToClaimantView(BrowserView):
 
         catalog = api.portal.get_tool('portal_catalog')
         result = catalog(id=claimant_arg['id'], portal_type='Claimant')
-        redirection = self.request.response.redirect(inquiry_event.absolute_url() + '#fieldsetlegend-urbaneventinquiry_recipients')
+        redirection = self.request.response.redirect(inquiry_event.absolute_url() + '/#fieldsetlegend-urbaneventinquiry_recipients')
         if result:
             plone_utils.addPortalMessage(_('urban_claimant_already_exists'), type="error")
             return redirection

@@ -17,6 +17,7 @@ function parseTab(tab, lid, legend){
     tab += $(legend).text()+'</span>';
     if ((window.location.href.search("/edit") == -1) &&
        (lid != 'fieldsetlegend-urban_events') &&
+       (lid.startsWith('fieldsetlegend-urban_')) &&
        (lid != 'fieldsetlegend-attachments')){
         gni = window.location.pathname;
         gni = gni.replace('/view', '');
