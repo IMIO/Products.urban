@@ -19,15 +19,15 @@ class StateRolesMapping(LocalRoleAdapter):
         opinion_request = self.context
         opinion_config = opinion_request.getUrbaneventtypes()
 
-        if opinion_config.getIs_internal_service():
+        if hasattr(opinion_config, 'is_internal_service') and opinion_config.getIs_internal_service():
             registry = api.portal.get_tool('portal_registry')
             registry_field = registry['Products.urban.interfaces.IInternalOpinionServices.services']
 
             record = registry_field.get(opinion_config.getInternal_service(), None)
             if record:
-                if groupe_type is 'editors':
+                if groupe_type == 'editors':
                     return (record['editor_group_id'],)
-                elif groupe_type is 'validators':
+                elif groupe_type == 'validators':
                     return (record['validator_group_id'],)
 
         return ('urban_editors', 'environment_editors')
