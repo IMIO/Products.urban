@@ -199,8 +199,16 @@
         title="Fix PODTemplate odt_file"
         description="urban upgrade step"
         source="1010"
-        destination="1100"
+        destination="1011"
         handler=".update_250.fix_POD_templates_odt_file"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="replace mailing loop owners"
+        description="urban upgrade step"
+        source="1011"
+        destination="1100"
+        handler=".update_250.replace_mailing_loop_owners"
         profile="Products.urban:default" />
 
 </configure>
