@@ -65,6 +65,3 @@ def replace_mailing_loop_owners(context):
                 new_value.append(line)
             template.context_variables = new_value
     logger.info("upgrade done!")
-
-
-
