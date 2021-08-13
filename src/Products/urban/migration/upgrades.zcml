@@ -207,8 +207,16 @@
         title="replace mailing loop owners"
         description="urban upgrade step"
         source="1011"
-        destination="1100"
+        destination="1012"
         handler=".update_250.replace_mailing_loop_owners"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="fix type of eventtype in config"
+        description="urban upgrade step"
+        source="1012"
+        destination="1100"
+        handler=".update_250.fix_type_eventtype_in_config"
         profile="Products.urban:default" />
 
 </configure>
