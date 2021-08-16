@@ -1,5 +1,4 @@
 # encoding: utf-8
-
 from collective.documentgenerator.content.pod_template import IPODTemplate
 from collective.documentgenerator.content.pod_template import IConfigurablePODTemplate
 
@@ -67,4 +66,19 @@ def replace_mailing_loop_owners(context):
     logger.info("upgrade done!")
 
 
-
+def fix_type_eventtype_in_config(context):
+    """
+    Sometimes the type of the eventtype in the config is a string instead of what is expected.
+    """
+    logger = logging.getLogger('urban: fix type of eventtype in config')
+    logger.info("starting upgrade steps")
+    config = api.portal.get_tool('portal_urban')
+    all_eventconfigs = []
+    for licenceconf in config.get_all_licence_configs():
+        all_eventconfigs.extend(licenceconf.getEventConfigs())
+    for eventc in all_eventconfigs:
+        eventtype = eventc.getEventType()
+        if isinstance(eventtype, basestring):
+            eventc.eventType = [eventtype]
+            logger.info("modification on : {} ").format(eventc)
+    logger.info("upgrade done!")
