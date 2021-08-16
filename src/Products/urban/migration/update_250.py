@@ -75,3 +75,11 @@ def fix_type_eventtype_in_config(context):
     logger.info("starting upgrade steps")
     config = api.portal.get_tool('portal_urban')
     all_eventconfigs = []
+    for licenceconf in config.get_all_licence_configs():
+        all_eventconfigs.extend(licenceconf.getEventConfigs())
+    for eventc in all_eventconfigs:
+        eventtype = eventc.getEventType()
+        if isinstance(eventtype, basestring):
+            eventc.eventType = [eventtype]
+            logger.info("type modification test: is eventType a string: {} ").format(isinstance(eventc.eventType, basestring))
+    logger.info("upgrade done!")
