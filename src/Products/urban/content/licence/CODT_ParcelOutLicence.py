@@ -31,8 +31,6 @@ from dateutil.relativedelta import relativedelta
 from plone import api
 ##/code-section module-header
 
-optional_fields = ['isModificationParceloutLicence',]
-
 schema = Schema((
 
     BooleanField(
@@ -40,14 +38,6 @@ schema = Schema((
         default=False,
         widget=BooleanField._properties['widget'](
             label=_('urban_label_isModification', default='Ismodification'),
-        ),
-        schemata='urban_description',
-    ),
-    BooleanField(
-        name='isModificationParceloutLicence',
-        default=False,
-        widget=BooleanField._properties['widget'](
-            label=_('urban_label_isModificationParceloutLicence', default='IsModificationParceloutLicence'),
         ),
         schemata='urban_description',
     ),
@@ -206,7 +196,6 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     schema.moveField('isModification', after='folderCategory')
     schema.moveField('description', after='impactStudy')
     schema.moveField('geometricians', after='workLocations')
-    schema.moveField('isModificationParceloutLicence', before='description')
     return schema
 
 finalizeSchema(CODT_ParcelOutLicence_schema)
