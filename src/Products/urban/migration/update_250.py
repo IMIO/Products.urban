@@ -1,5 +1,4 @@
 # encoding: utf-8
-import unidecode
 from collective.documentgenerator.content.pod_template import IPODTemplate
 from collective.documentgenerator.content.pod_template import IConfigurablePODTemplate
 
@@ -71,7 +70,7 @@ def fix_type_eventtype_in_config(context):
     """
     Sometimes the type of the eventtype in the config is a string instead of what is expected.
     """
-    logger= logging.getLogger('urban: fix type of eventtype in config')
+    logger = logging.getLogger('urban: fix type of eventtype in config')
     logger.info("starting upgrade steps")
     config = api.portal.get_tool('portal_urban')
     all_eventconfigs = []
@@ -81,5 +80,5 @@ def fix_type_eventtype_in_config(context):
         eventtype = eventc.getEventType()
         if isinstance(eventtype, basestring):
             eventc.eventType = [eventtype]
-            logger.info("type modification test: is eventType a string: {} ").format(isinstance(eventc.eventType, basestring))
+            logger.info("modification on : {} ").format(eventc)
     logger.info("upgrade done!")
