@@ -145,7 +145,7 @@ class WillHaveInquiry(CreationCondition):
 
     def evaluate(self):
         licence = self.task_container
-        if hasattr('getHasModifiedBlueprints', licence) and licence.getHasModifiedBlueprints():
+        if hasattr(licence, 'getHasModifiedBlueprints') and licence.getHasModifiedBlueprints():
             initiative_inquiry = 'initiative_inquiry' in licence.getProcedureChoiceModifiedBlueprints()
             inquiry = 'inquiry' in licence.getProcedureChoiceModifiedBlueprints()
         else:
@@ -163,7 +163,7 @@ class WillHaveAnnouncement(CreationCondition):
 
     def evaluate(self):
         licence = self.task_container
-        if hasattr('getHasModifiedBlueprints', licence) and licence.getHasModifiedBlueprints():
+        if hasattr(licence, 'getHasModifiedBlueprints') and licence.getHasModifiedBlueprints():
             light_inquiry = 'light_inquiry' in licence.getProcedureChoiceModifiedBlueprints()
             initiative_light_inquiry = 'initiative_light_inquiry' in licence.getProcedureChoiceModifiedBlueprints()
         else:
@@ -202,7 +202,7 @@ class NoInquiryCondition(CreationCondition):
 
     def evaluate(self):
         licence = self.task_container
-        if hasattr('getHasModifiedBlueprints', licence) and licence.getHasModifiedBlueprints():
+        if hasattr(licence, 'getHasModifiedBlueprints') and licence.getHasModifiedBlueprints():
             no_inquiry = 'inquiry' not in licence.getProcedureChoiceModifiedBlueprints()
         else:
             no_inquiry = 'inquiry' not in licence.getProcedureChoice()
@@ -311,7 +311,7 @@ class HasFDOpinionRequest(CreationCondition):
 
     def evaluate(self):
         licence = self.task_container
-        if hasattr('getHasModifiedBlueprints', licence) and licence.getHasModifiedBlueprints():
+        if hasattr(licence, 'getHasModifiedBlueprints') and licence.getHasModifiedBlueprints():
             FD = 'FD' in licence.getProcedureChoiceModifiedBlueprints()
         else:
             FD = 'FD' in licence.getProcedureChoice()
@@ -325,7 +325,7 @@ class HasNoFDOpinionRequest(CreationCondition):
 
     def evaluate(self):
         licence = self.task_container
-        if hasattr('getHasModifiedBlueprints', licence) and licence.getHasModifiedBlueprints():
+        if hasattr(licence, 'getHasModifiedBlueprints') and licence.getHasModifiedBlueprints():
             no_FD = 'FD' not in licence.getProcedureChoice()
         else:
             no_FD = 'FD' not in licence.getProcedureChoiceModifiedBlueprints()

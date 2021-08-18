@@ -144,7 +144,11 @@ class ProcedureChoiceDone(Condition):
 
     def evaluate(self):
         licence = self.task_container
-        return 'ukn' not in licence.getProcedureChoice()
+        if hasattr(licence, 'getHasModifiedBlueprints') and licence.getHasModifiedBlueprints():
+            ukn = 'ukn' not in licence.getProcedureChoiceModifiedBlueprints()
+        else:
+            ukn = 'ukn' not in licence.getProcedureChoice()
+        return ukn
 
 
 class UrbanAnalysisDone(Condition):
@@ -223,7 +227,10 @@ class NoInquiryCondition(Condition):
 
     def evaluate(self):
         licence = self.task_container
-        no_inquiry = 'inquiry' not in licence.getProcedureChoice()
+        if hasattr(licence, 'getHasModifiedBlueprints') and licence.getHasModifiedBlueprints():
+            no_inquiry = 'inquiry' not in licence.getProcedureChoiceModifiedBlueprints()
+        else:
+            no_inquiry = 'inquiry' not in licence.getProcedureChoice()
         return no_inquiry
 
 
