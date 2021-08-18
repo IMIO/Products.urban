@@ -402,6 +402,7 @@ def migrate(context):
     migrate_rich_texts(context)
     catalog = api.portal.get_tool('portal_catalog')
     catalog.clearFindAndRebuild()
+    REQUEST = context.REQUEST
     ref_catalog = api.portal.get_tool('reference_catalog')
-    ref_catalog.manage_catalogReindex()
+    ref_catalog.manage_catalogReindex(REQUEST, REQUEST.RESPONSE, RESPONSE.URL)
     logger.info("migration done!")
