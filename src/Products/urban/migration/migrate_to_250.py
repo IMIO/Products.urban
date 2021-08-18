@@ -404,5 +404,5 @@ def migrate(context):
     catalog.clearFindAndRebuild()
     REQUEST = context.REQUEST
     ref_catalog = api.portal.get_tool('reference_catalog')
-    ref_catalog.manage_catalogReindex(REQUEST, REQUEST.RESPONSE, RESPONSE.URL)
+    ref_catalog.manage_catalogReindex(REQUEST, REQUEST.RESPONSE, REQUEST.URL)
     logger.info("migration done!")
