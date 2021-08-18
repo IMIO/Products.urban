@@ -295,10 +295,10 @@ class OpinionsToAskVocabulary(object):
         portal_type = self.get_licence_type(context)
         vocabulary = UrbanVocabulary('eventconfigs', vocType="OpinionEventConfig", value_to_use='abbreviation')
         terms = vocabulary.get_raw_voc(context, licence_type=portal_type)
-        voc_terms = [
-            SimpleTerm(t['abbreviation'], t['abbreviation'], t['abbreviation'])
-            for t in terms if t['enabled']
-        ]
+        terms = list(set([t['abbreviation'].encode('utf-8') for t in terms if t['enabled']]))
+        voc_terms = [SimpleTerm(t, t, t) for t in terms]
+        # sort elements by title
+        voc_terms.sort(lambda a, b: cmp(a.title, b.title))
         return SimpleVocabulary(voc_terms)
 
     def get_licence_type(self, context):
@@ -324,6 +324,8 @@ class WorkTypesVocabulary(object):
             SimpleTerm(t['id'], t['id'], t['title'])
             for t in terms if t['enabled']
         ]
+        # sort elements by title
+        voc_terms.sort(lambda a, b: cmp(a.title, b.title))
         return SimpleVocabulary(voc_terms)
 
     def get_licence_type(self, context):
