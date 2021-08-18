@@ -287,3 +287,53 @@ class LicenceTabsVocabulary(object):
 
 
 LicenceTabsVocabularyFactory = LicenceTabsVocabulary()
+
+
+class OpinionsToAskVocabulary(object):
+
+    def __call__(self, context):
+        portal_type = self.get_licence_type(context)
+        vocabulary = UrbanVocabulary('eventconfigs', vocType="OpinionEventConfig", value_to_use='abbreviation')
+        terms = vocabulary.get_raw_voc(context, licence_type=portal_type)
+        voc_terms = [
+            SimpleTerm(t['abbreviation'], t['abbreviation'], t['abbreviation'])
+            for t in terms if t['enabled']
+        ]
+        return SimpleVocabulary(voc_terms)
+
+    def get_licence_type(self, context):
+        """
+        Return workflow states vocabulary of a licence.
+        """
+        portal_urban = api.portal.get_tool('portal_urban')
+        config = getattr(portal_urban, context.getProperty('urbanConfigId', ''), None)
+        portal_type = config and config.getLicencePortalType() or None
+        return portal_type
+
+
+OpinionsToAskVocabularyFactory = OpinionsToAskVocabulary()
+
+
+class WorkTypesVocabulary(object):
+
+    def __call__(self, context):
+        portal_type = self.get_licence_type(context)
+        vocabulary = UrbanVocabulary('folderbuildworktypes')
+        terms = vocabulary.get_raw_voc(context, licence_type=portal_type)
+        voc_terms = [
+            SimpleTerm(t['id'], t['id'], t['title'])
+            for t in terms if t['enabled']
+        ]
+        return SimpleVocabulary(voc_terms)
+
+    def get_licence_type(self, context):
+        """
+        Return workflow states vocabulary of a licence.
+        """
+        portal_urban = api.portal.get_tool('portal_urban')
+        config = getattr(portal_urban, context.getProperty('urbanConfigId', ''), None)
+        portal_type = config and config.getLicencePortalType() or 'CODT_Buildlicence'
+        return portal_type
+
+
+WorkTypesVocabularyFactory = WorkTypesVocabulary()
