@@ -3,10 +3,13 @@
 from Acquisition import aq_base
 
 from collective.documentgenerator.content.pod_template import IConfigurablePODTemplate
+from collective.iconifieddocumentactions.upgrades import move_to_collective_iconifieddocumentactions
 
 from imio.schedule.content.object_factories import MacroCreationConditionObject
 from imio.schedule.content.object_factories import MacroEndConditionObject
 from imio.schedule.content.object_factories import MacroRecurrenceConditionObject
+
+from plone.browserlayer.interfaces import ILocalBrowserLayerType
 
 from Products.contentmigration.walker import CustomQueryWalker
 from Products.contentmigration.archetypes import InplaceATFolderMigrator
@@ -22,6 +25,7 @@ from Products.urban.setuphandlers import setFolderAllowedTypes
 from Products.urban.utils import getLicenceFolderId
 
 from zope.component import getUtility
+from zope.component import queryUtility
 from zope.schema.interfaces import IVocabularyFactory
 
 from plone import api
@@ -29,6 +33,18 @@ from plone import api
 import logging
 
 logger = logging.getLogger('urban: migrations')
+
+
+def clear_communesplone_iconifiedactions_layer(context):
+    logger = logging.getLogger('urban: clear communesplone.iconifieddocumentactions layer')
+    logger.info("starting migration step")
+    if queryUtility(ILocalBrowserLayerType, name='communesplone.iconified_document_actions.layer'):
+        move_to_collective_iconifieddocumentactions(context)
+        logger.info("cleared communesplone.iconifieddocumentactions layer")
+        logger.info("rebuilding catalog...")
+        catalog = api.portal.get_tool('portal_catalog')
+        catalog.clearFindAndRebuild()
+    logger.info("starting step done")
 
 
 def migrate_codt_buildlicences_schedule(context):
@@ -169,7 +185,11 @@ def migrate_CODT_UrbanCertificateBase_add_permissions(context):
         licence_folder_id = getLicenceFolderId(urban_type)
         licence_folder = getattr(portal.urban, licence_folder_id)
         if urban_type in ['CODT_UrbanCertificateOne', 'CODT_NotaryLetter', ]:
-            licence_folder.manage_permission('urban: Add CODT_UrbanCertificateBase', ['Manager', 'Contributor', ], acquire=0)
+            licence_folder.manage_permission(
+                'urban: Add CODT_UrbanCertificateBase',
+                ['Manager', 'Contributor', ],
+                acquire=0
+            )
 
     logger.info("migration step done!")
 
@@ -297,6 +317,7 @@ def migrate_inquiry_investigationStart_date(context):
             logger.info("migrated inquiry config {}".format(eventtype))
     logger.info("migration step done!")
 
+
 def migrate_flooding_level(context):
     """
     Migrate old text single value to tuple for multiselection for floodingLevel and locationFloodingLevel
@@ -325,15 +346,27 @@ def migrate_announcement_schedule_config(context):
         schedule_cfg = getattr(licence_config, 'schedule', None)
         if schedule_cfg and hasattr(schedule_cfg, 'announcement-preparation'):
             announcement_prep_task = getattr(schedule_cfg, 'announcement-preparation')
-            announcement_prep_task.creation_conditions = (MacroCreationConditionObject('urban.schedule.condition.will_have_announcement', 'AND'),)
-            announcement_prep_task.end_conditions = (MacroEndConditionObject('urban.schedule.condition.announcement_dates_defined', 'AND'),)
+            announcement_prep_task.creation_conditions = (
+                MacroCreationConditionObject('urban.schedule.condition.will_have_announcement', 'AND'),
+            )
+            announcement_prep_task.end_conditions = (
+                MacroEndConditionObject('urban.schedule.condition.announcement_dates_defined', 'AND'),
+            )
             announcement_prep_task.activate_recurrency = True
-            announcement_prep_task.recurrence_conditions = (MacroRecurrenceConditionObject('urban.schedule.condition.will_have_announcement', 'AND'),)
+            announcement_prep_task.recurrence_conditions = (
+                MacroRecurrenceConditionObject('urban.schedule.condition.will_have_announcement', 'AND'),
+            )
             announcement_done_task = getattr(schedule_cfg, 'announcement')
-            announcement_done_task.creation_conditions = (MacroCreationConditionObject('urban.schedule.condition.announcement_dates_defined', 'AND'),)
-            announcement_done_task.end_conditions = (MacroEndConditionObject('urban.schedule.condition.announcement_done', 'AND'),)
+            announcement_done_task.creation_conditions = (
+                MacroCreationConditionObject('urban.schedule.condition.announcement_dates_defined', 'AND'),
+            )
+            announcement_done_task.end_conditions = (
+                MacroEndConditionObject('urban.schedule.condition.announcement_done', 'AND'),
+            )
             announcement_done_task.activate_recurrency = True
-            announcement_done_task.recurrence_conditions = (MacroRecurrenceConditionObject('urban.schedule.condition.announcement_dates_defined', 'AND'),)
+            announcement_done_task.recurrence_conditions = (
+                MacroRecurrenceConditionObject('urban.schedule.condition.announcement_dates_defined', 'AND'),
+            )
     logger.info("migration step done!")
 
 
@@ -348,7 +381,6 @@ def migrate_styles_pod_templates(context):
     for brain in podt_template_brains:
         pod_template = brain.getObject()
         pod_template.style_template = None
-    portal_urban = api.portal.get_tool('portal_urban')
     # then delete all style templates
     style_templates = [b.getObject() for b in catalog(portal_type='StyleTemplate')]
     api.content.delete(objects=style_templates)
@@ -373,10 +405,10 @@ def migrate_rich_texts(context):
     logger.info("migration step done!")
 
 
-
 def migrate(context):
     logger = logging.getLogger('urban: migrate to 2.5')
     logger.info("starting migration steps")
+    clear_communesplone_iconifiedactions_layer(context)
     migrate_urbaneventtypes_folder(context)
     setup_tool = api.portal.get_tool('portal_setup')
     setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'typeinfo')
