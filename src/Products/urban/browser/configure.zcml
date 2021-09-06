@@ -449,4 +449,11 @@
       class=".referencebrowser_popup.UrbanReferenceBrowserPopup"
   />
 
+  <browser:view
+      for="Products.ATContentTypes.interfaces.folder.IATBTreeFolder"
+      name="faceted-table-view"
+      class="imio.dashboard.browser.overrides.IDFacetedTableView"
+      permission="zope2.View"
+  />
+
 </configure>
