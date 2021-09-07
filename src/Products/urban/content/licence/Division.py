@@ -67,6 +67,7 @@ Division_schema = BaseFolderSchema.copy() + \
 Division_schema['title'].required = False
 ##/code-section after-schema
 
+
 class Division(BaseFolder, GenericLicence, BrowserDefaultMixin):
     """
     """
@@ -87,34 +88,35 @@ class Division(BaseFolder, GenericLicence, BrowserDefaultMixin):
     # Manually created methods
 
     security.declarePublic('getRepresentatives')
+
     def getRepresentatives(self):
         """
         """
         return self.getNotaryContact()
 
     security.declarePublic('updateTitle')
+
     def updateTitle(self):
         """
            Update the title to set a clearly identify the buildlicence
         """
-        notary = ''
-        proprietary = ''
-        proprietaries = self.getProprietaries()
-        if proprietaries:
-            proprietary = proprietaries[0].Title()
+        notaries = ''
+        proprietaries = ''
+        if self.getProprietaries:
+            proprietaries = ', '.join([prop.Title() for prop in self.getProprietaries()])
         else:
-            proprietary = translate('no_proprietary_defined', 'urban', context=self.REQUEST).encode('utf8')
+            proprietaries = translate('no_proprietary_defined', 'urban', context=self.REQUEST).encode('utf8')
         if self.getNotaryContact():
-            notary = self.getNotaryContact()[0].Title()
+            notaries = ', '.join([notar.Title() for notar in self.getNotaryContact()])
         else:
-            notary = translate('no_notary_defined', 'urban', context=self.REQUEST).encode('utf8')
+            notaries = translate('no_notary_defined', 'urban', context=self.REQUEST).encode('utf8')
 
-        if proprietary and notary:
-            title = "%s - %s - %s" % (self.getReference(), proprietary, notary)
-        elif proprietary:
-            title = "%s - %s" % (self.getReference(), proprietary)
-        elif notary:
-            title = "%s - %s" % (self.getReference(), notary)
+        if proprietaries and notaries:
+            title = "%s - %s - %s" % (self.getReference(), proprietaries, notaries)
+        elif proprietaries:
+            title = "%s - %s" % (self.getReference(), proprietaries)
+        elif notaries:
+            title = "%s - %s" % (self.getReference(), notaries)
         else:
             title = self.getReference()
         self.setTitle(title)
@@ -130,9 +132,9 @@ class Division(BaseFolder, GenericLicence, BrowserDefaultMixin):
         return self.getLastEvent(interfaces.ITheLicenceEvent)
 
 
-
 registerType(Division, PROJECTNAME)
 # end of class Division
+
 
 ##code-section module-footer #fill in your manual code here
 def finalizeSchema(schema, folderish=False, moveDiscussion=True):
@@ -152,6 +154,6 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     schema['pcaDetails'].widget.label = _('urban_label_sol_details')
     return schema
 
+
 finalizeSchema(Division_schema)
 ##/code-section module-footer
-
