@@ -4,6 +4,7 @@ from Acquisition import aq_base
 
 from collective.documentgenerator.content.pod_template import IConfigurablePODTemplate
 from collective.iconifieddocumentactions.upgrades import move_to_collective_iconifieddocumentactions
+from collective.noindexing import patches
 
 from imio.schedule.content.object_factories import MacroCreationConditionObject
 from imio.schedule.content.object_factories import MacroEndConditionObject
@@ -21,6 +22,10 @@ from Products.urban.interfaces import ICODT_BaseBuildLicence
 from Products.urban.interfaces import ICODT_UrbanCertificateBase
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.migration.to_DX.migration_utils import clean_obsolete_portal_type
+from Products.urban.migration.utils import disable_licence_default_values
+from Products.urban.migration.utils import disable_schedule
+from Products.urban.migration.utils import restore_licence_default_values
+from Products.urban.migration.utils import restore_schedule
 from Products.urban.setuphandlers import setFolderAllowedTypes
 from Products.urban.utils import getLicenceFolderId
 
@@ -106,6 +111,9 @@ def migrate_CODT_NotaryLetter_to_CODT_UrbanCertificateBase(context):
     portal = api.portal.get()
     # to avoid link integrity problems, disable checks
     portal.portal_properties.site_properties.enable_link_integrity_checks = False
+    # disable catalog and default values
+    disable_licence_default_values()
+    patches.apply()
 
     # Run the migrations
     folder_path = '/'.join(portal.urban.codt_notaryletters.getPhysicalPath())
@@ -124,6 +132,9 @@ def migrate_CODT_NotaryLetter_to_CODT_UrbanCertificateBase(context):
     walker.__class__.additionalQuery = {}
     # enable linkintegrity checks
     portal.portal_properties.site_properties.enable_link_integrity_checks = True
+    # restore catalog and default values
+    restore_licence_default_values()
+    patches.unapply()
 
     logger.info("migration step done!")
 
@@ -152,6 +163,9 @@ def migrate_CODT_UrbanCertificateOne_to_CODT_UrbanCertificateBase(context):
     portal = api.portal.get()
     # to avoid link integrity problems, disable checks
     portal.portal_properties.site_properties.enable_link_integrity_checks = False
+    # disable catalog and default values
+    disable_licence_default_values()
+    patches.apply()
 
     # Run the migrations
     folder_path = '/'.join(portal.urban.codt_urbancertificateones.getPhysicalPath())
@@ -170,6 +184,9 @@ def migrate_CODT_UrbanCertificateOne_to_CODT_UrbanCertificateBase(context):
     walker.__class__.additionalQuery = {}
     # enable linkintegrity checks
     portal.portal_properties.site_properties.enable_link_integrity_checks = True
+    # restore catalog and default values
+    restore_licence_default_values()
+    patches.unapply()
 
     logger.info("migration step done!")
 
@@ -262,6 +279,8 @@ def migrate_urbaneventtypes_folder(context):
 def migrate_inquiry_parcels(context):
     logger = logging.getLogger('migrate inquiry parcels')
     logger.info("starting migration step")
+    # disable catalog
+    patches.apply()
     catalog = api.portal.get_tool('portal_catalog')
     cadastre = services.cadastre.new_session()
     for rec_brain in catalog(portal_type='RecipientCadastre'):
@@ -277,6 +296,8 @@ def migrate_inquiry_parcels(context):
                 recipient.setParcel_nature(', '.join(parcel.natures))
             api.content.delete(objects=parcels)
             logger.info("migrated recipient {}".format(recipient))
+    # restore catalog
+    patches.unapply()
     logger.info("migration step done!")
 
 
@@ -408,6 +429,8 @@ def migrate_rich_texts(context):
 def migrate(context):
     logger = logging.getLogger('urban: migrate to 2.5')
     logger.info("starting migration steps")
+    # disable task creation/update
+    disable_schedule()
     clear_communesplone_iconifiedactions_layer(context)
     migrate_urbaneventtypes_folder(context)
     setup_tool = api.portal.get_tool('portal_setup')
@@ -439,4 +462,6 @@ def migrate(context):
     REQUEST = context.REQUEST
     ref_catalog = api.portal.get_tool('reference_catalog')
     ref_catalog.manage_catalogReindex(REQUEST, REQUEST.RESPONSE, REQUEST.URL)
+    # restore task creation/update
+    restore_schedule()
     logger.info("migration done!")
