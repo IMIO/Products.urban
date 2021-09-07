@@ -1000,7 +1000,7 @@ def setupImioDashboard(context):
             'o': 'plone.app.querystring.operation.selection.is',
             'v': [type for type in URBAN_TYPES]
         }
-    ],
+    ]
     _updateDefaultCollectionFor(urban_folder, all_licences_collection.UID())
 
     for urban_type in URBAN_TYPES:

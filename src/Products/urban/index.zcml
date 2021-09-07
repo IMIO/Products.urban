@@ -23,9 +23,10 @@
   <adapter name="investigationStart" factory=".indexes.investigation_start_date" />
   <adapter name="investigationEnd" factory=".indexes.investigation_end_date" />
   <adapter name="Subject" factory=".indexes.inspection_task_followups" />
-  <adapter name="commentators" factory=".indexes.licence_covid" />
+  <adapter name="commentators" factory=".indexes.licence_covid_and_opinion_requests" />
   <adapter name="commentators" factory=".indexes.task_covid" />
   <adapter name="modified" factory=".indexes.genericlicence_modified" />
+  <adapter name="Subject" factory=".indexes.licence_worktype" />
 
   <!-- Unindex UrbanEvent, UrbanDoc, Applicant and PortionOut -->
 

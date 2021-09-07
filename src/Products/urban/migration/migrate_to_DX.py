@@ -1,5 +1,7 @@
 # encoding: utf-8
 
+from collective.noindexing import patches
+
 from imio.urban.core.contents.eventconfig import IEventConfig
 
 from plone import api
@@ -49,11 +51,15 @@ def migrate_PortionOut_to_DX(context):
             'DX_field_name': 'outdated',
         },
     )
+    # disable catalog
+    patches.apply()
     result = migrateCustomAT(
         fields_mapping,
         src_type='PortionOut',
         dst_type='Parcel'
     )
+    # restore catalog
+    patches.unapply()
     return result
 
 

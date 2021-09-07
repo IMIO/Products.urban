@@ -57,4 +57,4 @@ class TestODTSearchScript(unittest.TestCase):
         odtsearch = SearchPODTemplates(to_find, self.odt_files, silent=True)
         result = odtsearch.run()
         result_display = odtsearch.get_result_display(result)
-        self.assertTrue('160 matches' in result_display)
+        self.assertTrue('170 matches' in result_display)
