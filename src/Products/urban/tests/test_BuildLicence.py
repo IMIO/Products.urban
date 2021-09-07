@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import ipdb
 from Products.urban import utils
 from Products.urban.testing import URBAN_TESTS_INTEGRATION
 from Products.urban.testing import URBAN_TESTS_LICENCES_FUNCTIONAL
@@ -36,6 +37,23 @@ class TestBuildLicence(unittest.TestCase):
         # add an applicant back
         licence.invokeFactory('Applicant', 'new_applicant', name1='Quentin', name2='Tinchimiloupète')
         self.assertTrue(licence.Title().endswith('/1 - Exemple Permis Urbanisme -  Quentin Tinchimiloupète'))
+
+    def test_LicenceUpdateTitleForCodt_buildlicence(self):
+        # check that the licence updateTitle method add all applicants or proprietaries or notaries to the Licence Title
+        licence = self.buildlicence
+        self.assertTrue(licence.Title().endswith('/1 - Exemple Permis Urbanisme - Mes Smith & Wesson'))
+        # add another applicant
+        licence.invokeFactory('Applicant', 'new_applicant', name1='Chuck', name2='Norris')
+        # call updateTitle()
+        licence.updateTitle()
+        self.assertTrue(licence.Title().endswith('/1 - Exemple Permis Urbanisme - Mes Smith & Wesson; Chuck Norris'))
+
+    def test_LicenceUpdateTitleForInspection(self):
+        # check that the licence updateTitle method add all applicants, proprietaries, notaries on inspections titles
+        inspection = self.portal.urban.inspections
+        ipdb.set_trace()
+        self.assertTrue(inspection.Title().endswith('/1 - Exemple Inspecion - Mes Smith & Wesson'))
+
 
     def testGetLastEventWithoutEvent(self):
         buildlicences = self.portal.urban.buildlicences
