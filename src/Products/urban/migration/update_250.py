@@ -1,6 +1,7 @@
 # encoding: utf-8
 from collective.documentgenerator.content.pod_template import IPODTemplate
 from collective.documentgenerator.content.pod_template import IConfigurablePODTemplate
+from Products.urban.interfaces import IGenericLicence
 
 from plone import api
 import logging
@@ -81,4 +82,18 @@ def fix_type_eventtype_in_config(context):
         if isinstance(eventtype, basestring):
             eventc.eventType = [eventtype]
             logger.info("modification on : {} ").format(eventc)
+    logger.info("upgrade done!")
+
+
+def add_all_applicants_in_title(context):
+    """
+    Adding all applicants or proprietaries or notaries in title
+    """
+    logger = logging.getLogger('urban: add all applicants in title')
+    logger.info("starting upgrade steps")
+    catalog = api.portal.get_tool('portal_catalog')
+    licence_brains = catalog(object_provides=IGenericLicence.__identifier__)
+    licences = [l.getObject() for l in licence_brains if IGenericLicence.providedBy(l.getObject())]
+    for licence in licences:
+        licence.updateTitle()
     logger.info("upgrade done!")
