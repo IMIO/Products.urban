@@ -3041,7 +3041,7 @@ msgstr "Dossier d'inspection lié"
 #. Default: "Bound licence"
 #: ../content/licence/RoadDecree.py:35
 msgid "urban_label_bound_licence"
-msgstr ""
+msgstr "Dossier lié"
 
 #. Default: "Bound licences"
 #: ../content/licence/Inspection.py:42
