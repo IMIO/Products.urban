@@ -123,7 +123,7 @@
     <div class="licence-column" i18n:domain="urban"
          tal:define="bound_licence python: context.getUse_bound_licence_infos() and context.getBound_licence();
                      context python: bound_licence or context;
-                     inquiries python: bound_licence and bound_licence.getAllInquiries() or view.getInquiriesForDisplay();
+                     inquiries python: bound_licence and bound_licence.getAllInquiries() or context.getInquiries() or [context];
                      member context/@@plone_portal_state/member;">
         <fieldset tal:repeat="inquiry inquiries">
             <legend tal:condition="python: bound_licence">
