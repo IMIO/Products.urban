@@ -19,6 +19,11 @@ slave_fields_bound_licence = (
         'action': 'hide',
         'hide_values': (True, ),
     },
+    {
+        'name': 'architects',
+        'action': 'hide',
+        'hide_values': (True, ),
+    },
 )
 
 schema = Schema((
@@ -190,6 +195,17 @@ class RoadDecree(CODT_BuildLicence):
                 corporations.extend(bound_licence.get_corporations_history())
         return list(set(corporations))
 
+    security.declarePublic('getArchitects')
+
+    def getArchitects(self):
+        if self.getUse_bound_licence_infos():
+            bound_licence = self.getBound_licence()
+            if bound_licence:
+                architects =  bound_licence.getArchitects()
+        else:
+            architects = RoadDecree_schema['architects'].getAccessor(self)()
+        return architects
+
     security.declarePublic('list_decisional_delay')
 
     def list_decisional_delay(self):
@@ -233,10 +249,6 @@ def finalize_schema(schema, folderish=False, moveDiscussion=True):
         default='technicaladvice',
     )
     schema['roadAdaptation'].schemata = 'urban_analysis'
-    schema['decisional_delay'].widget.visible = {
-        'view': 'visible',
-        'edit': 'invisible',
-    }
     return schema
 
 
