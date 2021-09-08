@@ -10,6 +10,8 @@ from plone.app.contenttypes.migration.migration import migrateCustomAT
 from Products.urban.migration.to_DX.migration_utils import migrate_date
 from Products.urban.migration.to_DX.migration_utils import migrate_to_tuple
 from Products.urban.migration.to_DX.migration_utils import uid_catalog_reindex_objects
+from Products.urban.migration.utils import disable_schedule
+from Products.urban.migration.utils import restore_schedule
 
 
 def migrate_PortionOut_to_DX(context):
@@ -51,15 +53,17 @@ def migrate_PortionOut_to_DX(context):
             'DX_field_name': 'outdated',
         },
     )
-    # disable catalog
+    # disable catalog and schedule
     patches.apply()
+    disable_schedule()
     result = migrateCustomAT(
         fields_mapping,
         src_type='PortionOut',
         dst_type='Parcel'
     )
-    # restore catalog
+    # restore catalog and schedule
     patches.unapply()
+    restore_schedule()
     return result
 
 
