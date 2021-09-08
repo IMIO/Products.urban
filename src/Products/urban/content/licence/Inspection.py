@@ -266,7 +266,6 @@ class Inspection(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
                 res.append(followup_event)
         return res
 
-
     security.declarePublic('getLastFollowUpEvent')
 
     def getLastFollowUpEvent(self):
