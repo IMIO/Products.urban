@@ -125,7 +125,7 @@ class Inspection(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
         """
         proprietary = ''
         if self.getProprietaries():
-            proprietary = ', '.join([app.Title() for app in self.getProprietaries()])
+            proprietary = '; '.join([app.Title() for app in self.getProprietaries()])
         title = "{}{} - {}".format(
             self.getReference(),
             proprietary and ' - {} -'.format(proprietary) or '',
