@@ -53,6 +53,29 @@
 
 <metal:location define-macro="location_macro" i18n:domain="urban">
     <metal:parent_call use-macro="here/@@licencetabs-macros/location_macro" />
+    <div class="licence-column" i18n:domain="urban"
+         tal:define="bound_licence python: context.getUse_bound_licence_infos() and context.getBound_licence();
+                     context python: bound_licence or context;
+                     member context/@@plone_portal_state/member;"
+         tal:condition="python: bound_licence">
+        <fieldset>
+            <legend>
+                <a tal:attributes="href python: context.absolute_url()">
+                    <span i18n:translate="urban_bound_licence"/> :
+                    <tal:title replace="context/Title"/>
+                </a>
+            </legend>
+            <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%
+                   tal:define="default_custom python: [];
+                               custom custom | python: []; custom python: custom + default_custom">
+
+                <tal:loop repeat="field view/getLocationFields">
+                    <metal:field_display use-macro="here/@@licencetabs-macros/field_display" />
+                </tal:loop>
+
+            </table>
+        </fieldset>
+    </div>
 </metal:location>
 
 <metal:peb define-macro="habitation_macro" i18n:domain="urban">
