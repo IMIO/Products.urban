@@ -5,13 +5,12 @@ from collective.noindexing import patches
 from imio.urban.core.contents.eventconfig import IEventConfig
 
 from plone import api
-from plone.app.contenttypes.migration.migration import migrateCustomAT
 
 from Products.urban.migration.to_DX.migration_utils import migrate_date
 from Products.urban.migration.to_DX.migration_utils import migrate_to_tuple
+from Products.urban.migration.to_DX.migration_utils import migrateCustomAT
 from Products.urban.migration.to_DX.migration_utils import uid_catalog_reindex_objects
 from Products.urban.migration.utils import disable_schedule
-from Products.urban.migration.utils import restore_schedule
 
 
 def migrate_PortionOut_to_DX(context):
@@ -59,11 +58,11 @@ def migrate_PortionOut_to_DX(context):
     result = migrateCustomAT(
         fields_mapping,
         src_type='PortionOut',
-        dst_type='Parcel'
+        dst_type='Parcel',
+        transaction_size='100000'
     )
-    # restore catalog and schedule
+    # restore catalog
     patches.unapply()
-    restore_schedule()
     return result
 
 
@@ -108,7 +107,8 @@ def migrate_ParcellingTerm_to_DX(context):
     result = migrateCustomAT(
         fields_mapping,
         src_type='ParcellingTerm',
-        dst_type='Parcelling'
+        dst_type='Parcelling',
+        transaction_size='100000'
     )
 
     # should at least recatalog them in the archetypes UID catalog
@@ -167,7 +167,8 @@ def migrate_UrbanEventType_to_DX(context):
     result = migrateCustomAT(
         fields_mapping,
         src_type='UrbanEventType',
-        dst_type='EventConfig'
+        dst_type='EventConfig',
+        transaction_size='100000'
     )
 
     fields_mapping.append(
@@ -180,7 +181,8 @@ def migrate_UrbanEventType_to_DX(context):
     result = migrateCustomAT(
         fields_mapping,
         src_type='FollowUpEventType',
-        dst_type='FollowUpEventConfig'
+        dst_type='FollowUpEventConfig',
+        transaction_size='100000',
     )
 
     fields_mapping.pop()
@@ -234,7 +236,8 @@ def migrate_UrbanEventType_to_DX(context):
     result = migrateCustomAT(
         fields_mapping,
         src_type='OpinionRequestEventType',
-        dst_type='OpinionEventConfig'
+        dst_type='OpinionEventConfig',
+        transaction_size='100000'
     )
 
     # should at least recatalog them in the archetypes UID catalog
@@ -248,4 +251,7 @@ def migrate_UrbanEventType_to_DX(context):
     portal_urban = api.portal.get_tool('portal_urban')
     cache_view = portal_urban.unrestrictedTraverse('urban_vocabulary_cache')
     cache_view.update_all_cache()
+    # as its he last DX migration step -> recatalog evrything
+    catalog = api.portal.get_tool('portal_catalog')
+    catalog.clearFindAndRebuild()
     return result
