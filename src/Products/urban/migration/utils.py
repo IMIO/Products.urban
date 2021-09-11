@@ -2,6 +2,7 @@
 
 from Products.urban.events import licenceEvents
 from imio.schedule import utils
+from imio.schedule.events.zope_registration import unsubscribe_task_configs_for_content_type
 
 import logging
 
@@ -52,14 +53,6 @@ def restore_licence_default_values():
 
 
 def disable_schedule():
-    to_patch = [
-        'get_task_configs',
-    ]
-    _disable(utils, to_patch)
-
-
-def restore_schedule():
-    to_patch = [
-        'get_task_configs',
-    ]
-    _restore(utils, to_patch)
+    for schedule_cfg in utils.get_all_schedule_configs():
+        for task_cfg in schedule_cfg.get_all_task_configs():
+            unsubscribe_task_configs_for_content_type(task_cfg, None)

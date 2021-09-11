@@ -25,7 +25,6 @@ from Products.urban.migration.to_DX.migration_utils import clean_obsolete_portal
 from Products.urban.migration.utils import disable_licence_default_values
 from Products.urban.migration.utils import disable_schedule
 from Products.urban.migration.utils import restore_licence_default_values
-from Products.urban.migration.utils import restore_schedule
 from Products.urban.setuphandlers import setFolderAllowedTypes
 from Products.urban.utils import getLicenceFolderId
 
@@ -462,6 +461,4 @@ def migrate(context):
     REQUEST = context.REQUEST
     ref_catalog = api.portal.get_tool('reference_catalog')
     ref_catalog.manage_catalogReindex(REQUEST, REQUEST.RESPONSE, REQUEST.URL)
-    # restore task creation/update
-    restore_schedule()
     logger.info("migration done!")
