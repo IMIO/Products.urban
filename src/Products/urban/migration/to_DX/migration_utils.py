@@ -155,6 +155,7 @@ def migrateCustomAT(fields_mapping, src_type, dst_type, transaction_size=20, dry
                            'dst_portal_type': dst_type,
                            'src_meta_type': src_meta_type,
                            'dst_meta_type': '',
+                           'transaction_size': transaction_size,
                            'use_savepoint': True}
         if dry_run:
             walker_settings['limit'] = 1
