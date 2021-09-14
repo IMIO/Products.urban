@@ -54,6 +54,11 @@ licences_data = {
     'NotaryLetter': {
         'licenceSubject': 'Exemple Lettre de notaire',
         'contact_type': 'Proprietary',
+        'contact_data': {
+            'personTitle': 'masters', 'name1': 'Smith &', 'name2': 'Wesson',
+            'street': 'Rue du porc dans le yaourt', 'number': '42', 'zipcode': '5032',
+            'city': 'Couillet'
+        },
     },
     'MiscDemand': {
         'licenceSubject': 'Exemple Demande diverse',
@@ -66,6 +71,15 @@ licences_data = {
             'denomination': 'Toha Heavy Industries',
             'name1': 'Smith &',
             'name2': 'Wesson',
+        },
+    },
+    'Inspection': {
+        'licenceSubject': 'Exemple Inspection',
+        'contact_type': 'Proprietary',
+        'contact_data': {
+            'personTitle': 'masters', 'name1': 'Smith &', 'name2': 'Wesson',
+            'street': 'Rue du porc dans le yaourt', 'number': '42', 'zipcode': '5032',
+            'city': 'Couillet'
         },
     },
 }
