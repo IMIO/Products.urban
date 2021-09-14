@@ -46,14 +46,46 @@ class TestBuildLicence(unittest.TestCase):
         licence.invokeFactory('Applicant', 'new_applicant', name1='Chuck', name2='Norris')
         # call updateTitle()
         licence.updateTitle()
-        self.assertTrue(licence.Title().endswith('/1 - Exemple Permis Urbanisme - Mes Smith & Wesson; Chuck Norris'))
+        # add applicant with invokeFactory add a space before the name of the applicant => 2spaces
+        self.assertTrue(licence.Title().endswith('/1 - Exemple Permis Urbanisme - Mes Smith & Wesson;  Chuck Norris'))
 
     def test_LicenceUpdateTitleForInspection(self):
-        # check that the licence updateTitle method add all applicants, proprietaries, notaries on inspections titles
-        inspection = self.portal.urban.inspections
-        ipdb.set_trace()
-        self.assertTrue(inspection.Title().endswith('/1 - Exemple Inspecion - Mes Smith & Wesson'))
+        # check that the licence updateTitle method add all proprietaries on inspections titles
+        inspection_expl = self.portal.urban.inspections.objectValues('Inspection')[0]
+        # for the inspection the proprietary is before inspection name
+        self.assertTrue(inspection_expl.Title().endswith('/1 - Mes Smith & Wesson - - Exemple Inspection'))
+        # add proprietary
+        inspection_expl.invokeFactory('Proprietary', 'new_proprietary', name1='Chuck', name2='Norris')
+        # call updateTitle()
+        inspection_expl.updateTitle()
+        self.assertTrue(inspection_expl.Title().endswith(
+            '/1 - Mes Smith & Wesson;  Chuck Norris - - Exemple Inspection'))
 
+    def test_LicenceUpdateTitleForNotaryLetter(self):
+        # check that the licence updateTitle method add all proprietaries and notaries on notary letters titles
+        licence = self.portal.urban.notaryletters.objectValues()[1]
+        self.assertTrue(licence.Title().endswith('/1 - Mes Smith & Wesson -  NotaryName1 NotarySurname1'))
+        notaries = self.portal.urban.notaries.objectValues()
+        notaries = list(notaries)
+        # add all notaries to the licence
+        licence.setNotaryContact(notaries)
+        licence.updateTitle()
+        # test if all notaries are in the title, but test the order of the notaries
+        if licence.getNotaryContact()[0].id == 'notary2':
+            self.assertTrue(licence.Title().endswith(
+                '/1 - Mes Smith & Wesson -  Andre Sanfrapper;  NotaryName1 NotarySurname1'))
+        if licence.getNotaryContact()[0].id == 'notary1':
+            self.assertTrue(licence.Title().endswith(
+                '/1 - Mes Smith & Wesson -  NotaryName1 NotarySurname1;  Andre Sanfrapper'))
+        licence.invokeFactory('Proprietary', id='proprietary2', name1='Aeron', name2='Lorelei')
+        licence.updateTitle()
+        # test if all proprietaries are in the title
+        if licence.getNotaryContact()[0].id == 'notary2':
+            self.assertTrue(licence.Title().endswith(
+                '/1 - Mes Smith & Wesson;  Aeron Lorelei -  Andre Sanfrapper;  NotaryName1 NotarySurname1'))
+        if licence.getNotaryContact()[0].id == 'notary1':
+            self.assertTrue(licence.Title().endswith(
+                '/1 - Mes Smith & Wesson;  Aeron Lorelei -  NotaryName1 NotarySurname1;  Andre Sanfrapper'))
 
     def testGetLastEventWithoutEvent(self):
         buildlicences = self.portal.urban.buildlicences
