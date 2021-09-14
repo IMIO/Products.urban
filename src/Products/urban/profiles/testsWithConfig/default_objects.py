@@ -6,6 +6,7 @@ default_objects = {
     'notaries': [
         'Notary',
         {'id': "notary1", 'name1': "NotaryName1", 'name2': "NotarySurname1", 'email': 'maitre.duchnoque@notaire.be'},
+        {'id': "notary2", 'name1': "Andre", 'name2': "Sanfrapper", 'email': 'maitre.andre@notaire.be'},
     ],
 
     'geometricians': [
