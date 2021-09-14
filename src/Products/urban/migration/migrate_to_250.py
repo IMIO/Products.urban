@@ -122,7 +122,8 @@ def migrate_CODT_NotaryLetter_to_CODT_UrbanCertificateBase(context):
         query={'path': folder_path},
         callBefore=contentmigrationLogger,
         logger=logger,
-        purl=portal.portal_url
+        purl=portal.portal_url,
+        transaction_size=100000,
     )
     walker.go()
 
@@ -174,7 +175,8 @@ def migrate_CODT_UrbanCertificateOne_to_CODT_UrbanCertificateBase(context):
         query={'path': folder_path},
         callBefore=contentmigrationLogger,
         logger=logger,
-        purl=portal.portal_url
+        purl=portal.portal_url,
+        transaction_size=100000,
     )
     walker.go()
 

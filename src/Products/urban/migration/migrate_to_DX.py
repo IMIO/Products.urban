@@ -59,7 +59,7 @@ def migrate_PortionOut_to_DX(context):
         fields_mapping,
         src_type='PortionOut',
         dst_type='Parcel',
-        transaction_size='100000'
+        transaction_size=100000
     )
     # restore catalog
     patches.unapply()
@@ -108,7 +108,7 @@ def migrate_ParcellingTerm_to_DX(context):
         fields_mapping,
         src_type='ParcellingTerm',
         dst_type='Parcelling',
-        transaction_size='100000'
+        transaction_size=100000
     )
 
     # should at least recatalog them in the archetypes UID catalog
@@ -168,7 +168,7 @@ def migrate_UrbanEventType_to_DX(context):
         fields_mapping,
         src_type='UrbanEventType',
         dst_type='EventConfig',
-        transaction_size='100000'
+        transaction_size=100000
     )
 
     fields_mapping.append(
@@ -182,7 +182,7 @@ def migrate_UrbanEventType_to_DX(context):
         fields_mapping,
         src_type='FollowUpEventType',
         dst_type='FollowUpEventConfig',
-        transaction_size='100000',
+        transaction_size=100000
     )
 
     fields_mapping.pop()
@@ -237,7 +237,7 @@ def migrate_UrbanEventType_to_DX(context):
         fields_mapping,
         src_type='OpinionRequestEventType',
         dst_type='OpinionEventConfig',
-        transaction_size='100000'
+        transaction_size=100000
     )
 
     # should at least recatalog them in the archetypes UID catalog
