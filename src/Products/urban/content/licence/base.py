@@ -90,7 +90,8 @@ class UrbanBase(object):
            Return the list of proprietaries for the Licence
         """
         proprietaries = [pro for pro in self.objectValues('Applicant')
-                         if pro.portal_type == 'Proprietary']
+                         if pro.portal_type == 'Proprietary'
+                         and api.content.get_state(pro) == 'enabled']
         corporations = self.getCorporationsProprietary()
         proprietaries.extend(corporations)
         return proprietaries
@@ -98,7 +99,8 @@ class UrbanBase(object):
     security.declarePublic('getCorporationsProprietary')
     def getCorporationsProprietary(self):
         corporations = [corp for corp in self.objectValues('Corporation')
-                        if corp.portal_type == 'CorporationProprietary']
+                        if corp.portal_type == 'CorporationProprietary'
+                        and api.content.get_state(corp) == 'enabled']
         return corporations
 
     security.declarePublic('getApplicantsSignaletic')
