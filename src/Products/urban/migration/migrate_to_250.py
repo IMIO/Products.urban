@@ -436,6 +436,8 @@ def migrate(context):
     migrate_urbaneventtypes_folder(context)
     setup_tool = api.portal.get_tool('portal_setup')
     setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'typeinfo')
+    setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'workflow')
+    setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'update-workflow-rolemap')
     setup_tool.runAllImportStepsFromProfile('profile-plonetheme.imioapps:urbanskin')
     setup_tool.runAllImportStepsFromProfile('profile-Products.urban:default')
     setup_tool.runImportStepFromProfile('profile-Products.urban:extra', 'urban-update-rubrics')
