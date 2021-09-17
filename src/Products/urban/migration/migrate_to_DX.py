@@ -52,17 +52,20 @@ def migrate_PortionOut_to_DX(context):
             'DX_field_name': 'outdated',
         },
     )
-    # disable catalog and schedule
+    # disable linkintegrity, catalog and schedule
     patches.apply()
     disable_schedule()
+    portal = api.portal.get()
+    portal.portal_properties.site_properties.enable_link_integrity_checks = False
     result = migrateCustomAT(
         fields_mapping,
         src_type='PortionOut',
         dst_type='Parcel',
         transaction_size=100000
     )
-    # restore catalog
+    # restore catalog and linkintegrity
     patches.unapply()
+    portal.portal_properties.site_properties.enable_link_integrity_checks = True
     return result
 
 
@@ -104,12 +107,15 @@ def migrate_ParcellingTerm_to_DX(context):
             'DX_field_name': 'changesDescription',
         },
     )
+    portal = api.portal.get()
+    portal.portal_properties.site_properties.enable_link_integrity_checks = False
     result = migrateCustomAT(
         fields_mapping,
         src_type='ParcellingTerm',
         dst_type='Parcelling',
         transaction_size=100000
     )
+    portal.portal_properties.site_properties.enable_link_integrity_checks = True
 
     # should at least recatalog them in the archetypes UID catalog
     portal = api.portal.get()
@@ -164,6 +170,8 @@ def migrate_UrbanEventType_to_DX(context):
             'field_migrator': migrate_to_tuple,
         },
     ]
+    portal = api.portal.get()
+    portal.portal_properties.site_properties.enable_link_integrity_checks = False
     result = migrateCustomAT(
         fields_mapping,
         src_type='UrbanEventType',
@@ -240,6 +248,8 @@ def migrate_UrbanEventType_to_DX(context):
         transaction_size=100000
     )
 
+    # restore linkintegrity
+    portal.portal_properties.site_properties.enable_link_integrity_checks = True
     # should at least recatalog them in the archetypes UID catalog
     catalog = api.portal.get_tool('portal_catalog')
     event_configs = [b.getObject() for b in catalog(object_provides=IEventConfig.__identifier__)]
