@@ -100,32 +100,32 @@ def update_POD_expressions(context):
     replacements = [
         {
             "search": "self.getValuesForTemplate\('(\w*)'\)",
-            "replace": "self.\1",
+            "replace": "self.\\1",
             "is_regex": True,
         },
         {
             "search": "self.getValueForTemplate\('(\w*)'\)",
-            "replace": "self.\1",
+            "replace": "self.\\1",
             "is_regex": True
         },
         {
             "search": "from xhtml\(tool.decorateHTML\('UrbanAddress',(.*)\)\)",
-            "replace": "from self.xhtml(\1, style='UrbanAddress')",
+            "replace": "from self.xhtml(\\1, style='UrbanAddress')",
             "is_regex": True
         },
         {
             "search": "self.getValuesForTemplate\('(\w*)',\s*subfield='description'\)",
-            "replace": "self.voc_terms('\1')",
+            "replace": "self.voc_terms('\\1')",
             "is_regex": True
         },
         {
             "search": "self.getValueForTemplate\('(\w*)',\s*subfield='description'\)",
-            "replace": "self.voc_terms('\1')",
+            "replace": "self.voc_terms('\\1')",
             "is_regex": True
         },
         {
             "search": "from\s*xhtml\((\w*)\)",
-            "replace": "from xhtml(\1.Description())",
+            "replace": "from xhtml(\\1.Description())",
             "is_regex": True
         },
     ]
