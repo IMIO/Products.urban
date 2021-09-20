@@ -1,8 +1,11 @@
-# encoding: utf-8
+# -*- coding: utf-8 -*-
 from collective.documentgenerator.content.pod_template import IPODTemplate
 from collective.documentgenerator.content.pod_template import IConfigurablePODTemplate
+from collective.documentgenerator.content.vocabulary import AllPODTemplateWithFileVocabularyFactory
+from collective.documentgenerator.search_replace.pod_template import SearchAndReplacePODTemplates
 
 from plone import api
+from plone.app.uuid.utils import uuidToObject
 import logging
 
 logger = logging.getLogger('urban: migrations')
@@ -81,4 +84,57 @@ def fix_type_eventtype_in_config(context):
         if isinstance(eventtype, basestring):
             eventc.eventType = [eventtype]
             logger.info("modification on : {} ").format(eventc)
+    logger.info("upgrade done!")
+
+
+def update_POD_expressions(context):
+    """
+    Execute automatic search and replace for POD template code.
+    """
+    logger = logging.getLogger('urban: search and replace POD expressions')
+    logger.info("starting upgrade steps")
+    voc = AllPODTemplateWithFileVocabularyFactory()
+    uids = [brain.UID for brain in voc._get_all_pod_templates_with_file()]
+    templates = [uuidToObject(template_uuid) for template_uuid in uids]
+
+    replacements = {
+        {
+            "search": "self.getValuesForTemplate\('(\w*)'\)",
+            "replace": "self.\1",
+            "is_regex": True,
+        },
+        {
+            "search": "self.getValueForTemplate\('(\w*)'\)",
+            "replace": "self.\1",
+            "is_regex": True
+        },
+        {
+            "search": "from xhtml\(tool.decorateHTML\('UrbanAddress',(.*)\)\)",
+            "replace": "from self.xhtml(\1, style='UrbanAddress')",
+            "is_regex": True
+        },
+        {
+            "search": "self.getValuesForTemplate\('(\w*)',\s*subfield='description'\)",
+            "replace": "self.voc_terms('\1')",
+            "is_regex": True
+        },
+        {
+            "search": "self.getValueForTemplate\('(\w*)',\s*subfield='description'\)",
+            "replace": "self.voc_terms('\1')",
+            "is_regex": True
+        },
+        {
+            "search": "from\s*xhtml\((\w*)\)",
+            "replace": "from xhtml(\1.Description())",
+            "is_regex": True
+        },
+    }
+
+    with SearchAndReplacePODTemplates(templates) as replace:
+        for row in replacements:
+            row["replace"] = row["replace"] or ""
+            search_expr = row["search"]
+            replace_expr = row["replace"]
+            logger.info("Replacing POD expression {} by {}".format(search_expr, replace_expr))
+            replace.replace(search_expr, replace_expr, is_regex=row["is_regex"])
     logger.info("upgrade done!")

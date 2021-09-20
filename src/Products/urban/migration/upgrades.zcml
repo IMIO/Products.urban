@@ -215,8 +215,16 @@
         title="fix type of eventtype in config"
         description="urban upgrade step"
         source="1012"
-        destination="1100"
+        destination="1013"
         handler=".update_250.fix_type_eventtype_in_config"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="migrate POD expressions"
+        description="urban upgrade step"
+        source="1013"
+        destination="1100"
+        handler=".update_250.update_POD_expressions"
         profile="Products.urban:default" />
 
 </configure>
