@@ -97,7 +97,7 @@ def update_POD_expressions(context):
     uids = [brain.UID for brain in voc._get_all_pod_templates_with_file()]
     templates = [uuidToObject(template_uuid) for template_uuid in uids]
 
-    replacements = {
+    replacements = [
         {
             "search": "self.getValuesForTemplate\('(\w*)'\)",
             "replace": "self.\1",
@@ -128,7 +128,7 @@ def update_POD_expressions(context):
             "replace": "from xhtml(\1.Description())",
             "is_regex": True
         },
-    }
+    ]
 
     with SearchAndReplacePODTemplates(templates) as replace:
         for row in replacements:
