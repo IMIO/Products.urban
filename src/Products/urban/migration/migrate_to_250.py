@@ -60,10 +60,12 @@ def migrate_codt_buildlicences_schedule(context):
 
     portal_urban = api.portal.get_tool('portal_urban')
     schedule = portal_urban.codt_buildlicence.schedule
-    schedule.reception.deposit.ending_states = ()
-    schedule.incomplet2.notify_refused.ending_states = ()
-    schedule.reception.deposit.recurrence_states = ()
-    schedule.reception.deposit.activate_recurrency = False
+    if hasattr(schedule.incomplet2, 'notify_refused'):
+        schedule.incomplet2.notify_refused.ending_states = ()
+    if hasattr(schedule.reception, 'deposit'):
+        schedule.reception.deposit.ending_states = ()
+        schedule.reception.deposit.recurrence_states = ()
+        schedule.reception.deposit.activate_recurrency = False
     if 'deposit' not in (schedule.incomplet.attente_complements.ending_states or ()):
         old_states = schedule.incomplet.attente_complements.ending_states or ()
         new_states = tuple(old_states) + ('deposit',)
