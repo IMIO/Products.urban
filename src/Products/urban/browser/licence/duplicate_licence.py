@@ -120,6 +120,9 @@ class DuplicateLicenceForm(form.Form):
                 if destination_field:
                     destination_mutator = destination_field.getMutator(duplicated_licence)
                     value = original_field.getAccessor(original_licence)()
+                    if destination_field.enforceVocabulary:
+                        if destination_field.validate(value, duplicated_licence) is not None:
+                            continue
                     destination_mutator(value)
 
         new_subject = data['new_licence_subject']
