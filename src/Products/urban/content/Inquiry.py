@@ -382,7 +382,7 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
 
     def getAllLinkedOpinionRequests(self):
         opinion_requests = [op for op in self.getAllEvents(interfaces.IOpinionRequestEvent)
-                            if op.getLinkedInquiry() == self]
+                            if op.portal_type == 'UrbanEventOpinionRequest' and op.getLinkedInquiry() == self]
         return opinion_requests
 
     def getAllOpinionRequestsNoDup(self):
