@@ -233,6 +233,7 @@ class AddInternalServiceForm(form.Form):
             'validator_group_id': validator_group,
             'editor_group_id': editor_group,
             'full_name': service_name.encode('utf-8'),
+            'id': service_id.encode('utf-8'),
             'task_answer_id': task_answer_id,
             'task_validate_id': task_validate_id,
         }
