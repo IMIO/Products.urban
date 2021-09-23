@@ -17,6 +17,7 @@
   <include package="collective.z3cform.datagridfield"/>
   <include package="collective.archetypes.select2"/>
   <include package="collective.faceted.datewidget"/>
+  <include package="collective.fontawesome"/>
   <include package="collective.quickupload"/>
   <include package="five.grok"/>
   <include package="imio.actionspanel"/>
@@ -40,6 +41,7 @@
   <include package="plone.app.portlets" file="meta.zcml" />
   <include package="plone.app.referenceintegrity"/>
   <include package="plone.z3ctable"/>
+  <include package="plonetheme.imioapps"/>
   <include package="plonetheme.imioapps"/>
   <include package="urban.vocabulary"/>
 
