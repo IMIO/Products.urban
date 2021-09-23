@@ -106,6 +106,9 @@ class UrbanVocabularyTerm(BaseContent, UrbanConfigurationValue, BrowserDefaultMi
 
     schema = UrbanVocabularyTerm_schema
 
+    def __str__(self):
+        return self.Title()
+
 
 registerType(UrbanVocabularyTerm, PROJECTNAME)
 # end of class UrbanVocabularyTerm
