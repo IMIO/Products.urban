@@ -109,6 +109,9 @@ class UrbanVocabularyTerm(BaseContent, UrbanConfigurationValue, BrowserDefaultMi
     def __str__(self):
         return self.Title()
 
+    def __unicode__(self):
+        return self.__str__().decode('utf-8')
+
 
 registerType(UrbanVocabularyTerm, PROJECTNAME)
 # end of class UrbanVocabularyTerm
