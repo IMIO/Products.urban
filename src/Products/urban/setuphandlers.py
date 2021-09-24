@@ -1459,6 +1459,10 @@ def configurePMWSClientForUrban(context):
         {
             'expression': u'context/getDecisionText',
             'field_name': u'decision'
+        },
+        {
+            'expression': u'context/getMotivationText',
+            'field_name': u'motivation'
         }
     ]
 
