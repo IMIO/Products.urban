@@ -35,6 +35,7 @@ schema = Schema((
             label=_('urban_label_inquiry_category',
                     default='Inquiry_category'),
         ),
+        schemata='urban_inquiry',
         vocabulary='list_inquiry_category',
     ),
 ),

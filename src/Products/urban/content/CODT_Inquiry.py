@@ -101,6 +101,7 @@ schema = Schema((
             slave_fields=full_inquiry_slave_fields,
             label=_('urban_label_inquiry_type', default='Inquiry_type'),
         ),
+        schemata='urban_inquiry',
         vocabulary='list_inquiry_types',
     ),
     LinesField(
@@ -109,6 +110,7 @@ schema = Schema((
             format='checkbox',
             label=_('urban_label_divergence', default='Divergence'),
         ),
+        schemata='urban_inquiry',
         multiValued=1,
         vocabulary=UrbanVocabulary('divergences'),
         default_method='getDefaultValue',
@@ -119,6 +121,7 @@ schema = Schema((
         widget=TextAreaWidget(
             label=_('urban_label_divergenceDetails', default='Divergencedetails'),
         ),
+        schemata='urban_inquiry',
         default_output_type='text/plain',
         default_content_type='text/plain',
         default_method='getDefaultText',
@@ -129,6 +132,7 @@ schema = Schema((
             size=10,
             label=_('urban_label_announcementArticles', default='Announcementarticles'),
         ),
+        schemata='urban_inquiry',
         multiValued=True,
         vocabulary=UrbanVocabulary('announcementarticles'),
         default_method='getDefaultValue',
@@ -139,6 +143,7 @@ schema = Schema((
         widget=RichWidget(
             label=_('urban_label_announcementArticlesText', default='Announcementarticlestext'),
         ),
+        schemata='urban_inquiry',
         default_content_type='text/html',
         default_method='getDefaultText',
         default_output_type='text/html',

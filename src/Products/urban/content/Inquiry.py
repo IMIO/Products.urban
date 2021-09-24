@@ -49,6 +49,7 @@ schema = Schema((
             format='checkbox',
             label=_('urban_label_derogation', default='Derogation'),
         ),
+        schemata='urban_inquiry',
         multiValued=1,
         vocabulary=UrbanVocabulary('derogations'),
         default_method='getDefaultValue',
@@ -59,6 +60,7 @@ schema = Schema((
         widget=RichWidget(
             label=_('urban_label_derogationDetails', default='Derogationdetails'),
         ),
+        schemata='urban_inquiry',
         default_output_type='text/html',
         default_content_type='text/html',
         default_method='getDefaultText',
@@ -69,6 +71,7 @@ schema = Schema((
             size=10,
             label=_('urban_label_investigationArticles', default='Investigationarticles'),
         ),
+        schemata='urban_inquiry',
         multiValued=True,
         vocabulary=UrbanVocabulary('investigationarticles'),
         default_method='getDefaultValue',
@@ -79,6 +82,7 @@ schema = Schema((
         widget=RichWidget(
             label=_('urban_label_investigationArticlesText', default='Investigationarticlestext'),
         ),
+        schemata='urban_inquiry',
         default_content_type='text/html',
         default_method='getDefaultText',
         default_output_type='text/html',
@@ -97,6 +101,7 @@ schema = Schema((
         widget=RichWidget(
             label=_('urban_label_investigationDetails', default='Investigationdetails'),
         ),
+        schemata='urban_inquiry',
         default_content_type='text/html',
         default_method='getDefaultText',
         default_output_type='text/html',
@@ -107,6 +112,7 @@ schema = Schema((
         widget=RichWidget(
             label=_('urban_label_investigationReasons', default='Investigationreasons'),
         ),
+        schemata='urban_inquiry',
         default_content_type='text/html',
         default_method='getDefaultText',
         default_output_type='text/html',
@@ -117,6 +123,7 @@ schema = Schema((
         widget=RichWidget(
             label=_('urban_label_roadModificationSubject', default='Roadmodificationsubject'),
         ),
+        schemata='urban_inquiry',
         default_content_type='text/html',
         default_method='getDefaultText',
         default_output_type='text/html',

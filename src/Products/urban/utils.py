@@ -108,14 +108,14 @@ def _setSchemataForInquiry(schema, inquiry_class):
       Put the the fields coming from Inquiry in a specific schemata
     """
     inquiryFields = inquiry_class.schema.filterFields(isMetadata=False)
-    #do not take the 2 first fields into account, this is 'id' and 'title'
-    inquiryFields = inquiryFields[2:]
     for inquiryField in inquiryFields:
+        if inquiryField.__name__ in ['id', 'title']:
+            continue
         if schema[inquiryField.getName()].schemata == 'default':
             schema[inquiryField.getName()].schemata = 'urban_inquiry'
 
 
-#class and function to strip a text from all its HTML tags
+# class and function to strip a text from all its HTML tags
 class MLStripper(HTMLParser):
 
     def __init__(self):
@@ -144,7 +144,8 @@ def getAllLicenceFolderIds():
 
 
 def getUrbanOnlyLicenceFolderIds():
-    return [getLicenceFolderId(licencetype) for licencetype in URBAN_TYPES if licencetype not in URBAN_ENVIRONMENT_TYPES]
+    return [getLicenceFolderId(licencetype) for licencetype in URBAN_TYPES
+            if licencetype not in URBAN_ENVIRONMENT_TYPES]
 
 
 def getEnvironmentLicenceFolderIds():
