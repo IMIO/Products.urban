@@ -1131,6 +1131,11 @@ class UrbanDocGenerationEventHelperView(UrbanDocGenerationHelperView):
         decision_text = self._get_wspm_field(field_name)
         return decision_text
 
+    def get_wspm_motivation_text(self, style='UrbanBody'):
+        field_name = 'motivation'
+        motivation_text = self._get_wspm_field(field_name)
+        return motivation_text
+
     def get_wspm_meeting_state(self):
         field_name = 'review_state'
         state = self._get_wspm_field(field_name)
