@@ -625,7 +625,7 @@ class UrbanDocGenerationLicenceHelperView(UrbanDocGenerationHelperView):
     def getLimitDate(self, firstDepositDate, delay=20):
         context = self.real_context
         if context.annoncedDelay:
-            delay = context.getValueForTemplate('annoncedDelay', context, subfield='deadLineDelay')
+            delay = self.voc_term('annoncedDelay').getDeadLineDelay()
         limitDate = firstDepositDate + int(delay)
         return self.format_date(limitDate)
 
