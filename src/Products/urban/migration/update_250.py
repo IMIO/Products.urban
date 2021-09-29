@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 from collective.documentgenerator.content.pod_template import IPODTemplate
 from collective.documentgenerator.content.pod_template import IConfigurablePODTemplate
 from collective.documentgenerator.content.vocabulary import AllPODTemplateWithFileVocabularyFactory
@@ -99,18 +100,38 @@ def update_POD_expressions(context):
 
     replacements = [
         {
-            "search": "self.getValuesForTemplate\('(\w*)'\)",
+            "search": "for\s+(\w+)\s+in\s+self.getValuesForTemplate\('(\w+)'\)$",
+            "replace": "for \\1 in self.voc_terms('\\2')",
+            "is_regex": True,
+        },
+        {
+            "search": "self.getValuesForTemplate\('(\w+)'\)",
             "replace": "self.\\1",
             "is_regex": True,
         },
         {
-            "search": "self.getValueForTemplate\('(\w*)'\)",
+            "search": "self.getValueForTemplate\('(\w+)'\)",
             "replace": "self.\\1",
             "is_regex": True
         },
         {
+            "search": "self.getValueForTemplate\('(\w+)',\s*obj=(\S+)\s*\)",
+            "replace": "\\2.\\1",
+            "is_regex": True
+        },
+        {
+            "search": "self.getValueForTemplate\('(\w+)',\s*([^= ]+)\)",
+            "replace": "\\2.\\1",
+            "is_regex": True
+        },
+        {
+            "search": "self.getValueForTemplate\('(\w+)',\s*subfield='(\w+)'\)",
+            "replace": "self.voc_term('\\1').\\2",
+            "is_regex": True
+        },
+        {
             "search": "from xhtml\(tool.decorateHTML\('UrbanAddress',(.*)\)\)",
-            "replace": "from self.xhtml(\\1, style='UrbanAddress')",
+            "replace": "from self.xhtml(\\1,\s*style='UrbanAddress')",
             "is_regex": True
         },
         {
@@ -124,8 +145,23 @@ def update_POD_expressions(context):
             "is_regex": True
         },
         {
-            "search": "from\s*xhtml\((\w*)\)",
+            "search": "from\s+xhtml\((\w*)\)",
             "replace": "from xhtml(\\1.Description())",
+            "is_regex": True
+        },
+        {
+            "search": "parcel['title']",
+            "replace": "parcel.Title",
+            "is_regex": False
+        },
+        {
+            "search": "getFormattedDescription()",
+            "replace": "Description()",
+            "is_regex": False
+        },
+        {
+            "search": "do\s*section(-?)\s*for\s*(\w*)\s*in\s*self.getInvestigationArticles\(\)",
+            "replace": "do section\\1 for \\2 in self.voc_terms('investigationArticles')",
             "is_regex": True
         },
     ]
