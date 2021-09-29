@@ -164,6 +164,16 @@ def update_POD_expressions(context):
             "replace": "do section\\1 for \\2 in self.voc_terms('investigationArticles')",
             "is_regex": True
         },
+        {
+            "search": "self.getValuesForTemplate\('(\w*)Articles'.*",
+            "replace": "self.voc_terms('\\1Articles')",
+            "is_regex": True
+        },
+        {
+            "search": "^\s*subfield='description'\)",
+            "replace": "",
+            "is_regex": True
+        },
     ]
 
     with SearchAndReplacePODTemplates(templates) as replace:
