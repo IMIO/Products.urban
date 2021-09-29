@@ -174,6 +174,11 @@ def update_POD_expressions(context):
             "replace": "",
             "is_regex": True
         },
+        {
+            "search": "for\s+(\w+)\s+in\s+self.(\w+)$",
+            "replace": "for \\1 in self.voc_terms('\\2')",
+            "is_regex": True
+        },
     ]
 
     with SearchAndReplacePODTemplates(templates) as replace:
