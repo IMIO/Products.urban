@@ -429,11 +429,38 @@ def migrate_rich_texts(context):
     logger.info("migration step done!")
 
 
+def fix_missing_streets(context):
+    logger = logging.getLogger('urban: migrate to 2.5')
+    logger.info("starting migration steps")
+    catalog = api.portal.get_tool('portal_catalog')
+    licence_brains = catalog(object_provides=IGenericLicence.__identifier__)
+    portal_urban = api.portal.get_tool('portal_urban')
+    streets = portal_urban.streets
+    missing_street = api.content.create(type='Street', id='manquant', container=streets.objectValues()[0])
+    api.content.transition(missing_street, 'disable')
+    for brain in licence_brains:
+        licence = brain.getObject()
+        address = licence.getWorkLocations()
+        do_fix = False
+        new_address = []
+        for wl in address:
+            street_brains = catalog(UID=wl['street'])
+            if not street_brains:
+                do_fix = True
+                wl['street'] = missing_street.UID()
+                new_address.append(wl)
+            if do_fix:
+                licence.setWorkLocations(new_address)
+                licence.reindexObject(idxs=['StreetsUID'])
+                logger.info('fixed street licence {}'.format(licence))
+
+
 def migrate(context):
     logger = logging.getLogger('urban: migrate to 2.5')
     logger.info("starting migration steps")
     # disable task creation/update
     disable_schedule()
+    fix_missing_streets(context)
     clear_communesplone_iconifiedactions_layer(context)
     migrate_urbaneventtypes_folder(context)
     setup_tool = api.portal.get_tool('portal_setup')
