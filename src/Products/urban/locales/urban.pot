@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2021-08-16 12:18+0000\n"
+"POT-Creation-Date: 2021-09-30 11:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -961,11 +961,11 @@ msgstr ""
 msgid "add_a_claimant"
 msgstr ""
 
-#: ../browser/licence/templates/licencemacros.pt:134
+#: ../browser/licence/templates/licencemacros.pt:143
 msgid "add_a_corporation"
 msgstr ""
 
-#: ../browser/licence/templates/licencemacros.pt:170
+#: ../browser/licence/templates/licencemacros.pt:179
 msgid "add_a_corporation_plaintiff"
 msgstr ""
 
@@ -976,11 +976,11 @@ msgstr ""
 msgid "add_a_lot"
 msgstr ""
 
-#: ../browser/licence/templates/licencemacros.pt:126
+#: ../browser/licence/templates/licencemacros.pt:135
 msgid "add_a_physical_applicant"
 msgstr ""
 
-#: ../browser/licence/templates/licencemacros.pt:162
+#: ../browser/licence/templates/licencemacros.pt:171
 msgid "add_a_physical_plaintiff"
 msgstr ""
 
@@ -988,7 +988,7 @@ msgstr ""
 msgid "add_a_proprietary"
 msgstr ""
 
-#: ../browser/licence/templates/licencemacros.pt:107
+#: ../browser/licence/templates/licencemacros.pt:116
 msgid "add_a_tenant"
 msgstr ""
 
@@ -1048,12 +1048,12 @@ msgid "announcementarticles_folder_title"
 msgstr ""
 
 #. Default: "Applicant(s)"
-#: ../browser/licence/templates/licencemacros.pt:113
+#: ../browser/licence/templates/licencemacros.pt:122
 msgid "applicants"
 msgstr ""
 
 #. Default: "Applicant(s) history"
-#: ../browser/licence/templates/licencemacros.pt:141
+#: ../browser/licence/templates/licencemacros.pt:150
 msgid "applicants_history"
 msgstr ""
 
@@ -1089,7 +1089,7 @@ msgid "basement_folder_title"
 msgstr ""
 
 #. Default: "Bound licence applicant(s)"
-#: ../browser/licence/templates/licencemacros.pt:177
+#: ../browser/licence/templates/licencemacros.pt:186
 msgid "bound_licence_applicants"
 msgstr ""
 
@@ -2325,7 +2325,7 @@ msgid "pipelines_folder_title"
 msgstr ""
 
 #. Default: "Plaintiff(s)"
-#: ../browser/licence/templates/licencemacros.pt:149
+#: ../browser/licence/templates/licencemacros.pt:158
 msgid "plaintiffs"
 msgstr ""
 
@@ -2349,6 +2349,11 @@ msgstr ""
 #. Default: "Proprietary(ies)"
 #: ../browser/licence/templates/licencemacros.pt:66
 msgid "proprietaries"
+msgstr ""
+
+#. Default: "Proprietaries history"
+#: ../browser/licence/templates/licencemacros.pt:96
+msgid "proprietaries_history"
 msgstr ""
 
 #: ../browser/licence/templates/licencetabsmacros.pt:233
@@ -2544,7 +2549,7 @@ msgid "templates_summary_title"
 msgstr ""
 
 #. Default: "Tenant(s)"
-#: ../browser/licence/templates/licencemacros.pt:96
+#: ../browser/licence/templates/licencemacros.pt:105
 msgid "tenants"
 msgstr ""
 
@@ -3747,7 +3752,7 @@ msgstr ""
 
 #. Default: "Geometrician(s)"
 #: ../browser/licence/templates/licencemacros.pt:29
-#: ../content/licence/CODT_ParcelOutLicence.py:57
+#: ../content/licence/CODT_ParcelOutLicence.py:56
 #: ../content/licence/CODT_UrbanCertificateTwo.py:50
 msgid "urban_label_geometricians"
 msgstr ""
@@ -3961,7 +3966,7 @@ msgid "urban_label_isKeyEvent"
 msgstr ""
 
 #. Default: "Ismodification"
-#: ../content/licence/CODT_ParcelOutLicence.py:40
+#: ../content/licence/CODT_ParcelOutLicence.py:39
 #: ../content/licence/ParcelOutLicence.py:40
 msgid "urban_label_isModification"
 msgstr ""
@@ -5609,7 +5614,7 @@ msgid "warning_add_an_applicant"
 msgstr ""
 
 #. Default: "You must encode plaintiff(s)"
-#: ../browser/licence/templates/licencemacros.pt:152
+#: ../browser/licence/templates/licencemacros.pt:161
 msgid "warning_add_an_plaintiff"
 msgstr ""
 
