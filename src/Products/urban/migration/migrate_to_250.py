@@ -460,11 +460,11 @@ def migrate(context):
     logger.info("starting migration steps")
     # disable task creation/update
     disable_schedule()
+    setup_tool = api.portal.get_tool('portal_setup')
     setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'workflow')
     fix_missing_streets(context)
     clear_communesplone_iconifiedactions_layer(context)
     migrate_urbaneventtypes_folder(context)
-    setup_tool = api.portal.get_tool('portal_setup')
     # reinstall pm.wsclient registry to add new registry record.
     setup_tool.runImportStepFromProfile('profile-imio.pm.wsclient:default', 'content_type_registry')
     setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'typeinfo')
