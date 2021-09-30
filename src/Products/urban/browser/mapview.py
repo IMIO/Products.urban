@@ -109,6 +109,8 @@ class MapView(BrowserView):
                     capaKey = "%s%s%04d/%02d%s%03d" % (divisioncode, section, int(radical), int(bis), exposant, int(puissance))
                 except ValueError:
                     capaKey = ""
+                if isinstance(capaKey, unicode):
+                    capaKey = capaKey.encode('utf-8')
                 listCapaKey.append(capaKey)
 
         return listCapaKey
