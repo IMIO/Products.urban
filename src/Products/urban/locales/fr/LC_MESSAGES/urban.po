@@ -974,11 +974,11 @@ msgstr "Ajouter une adresse"
 msgid "add_a_claimant"
 msgstr "Ajouter un réclamant"
 
-#: ../browser/licence/templates/licencemacros.pt:134
+#: ../browser/licence/templates/licencemacros.pt:143
 msgid "add_a_corporation"
 msgstr "Ajouter un demandeur (p. morale)"
 
-#: ../browser/licence/templates/licencemacros.pt:170
+#: ../browser/licence/templates/licencemacros.pt:179
 msgid "add_a_corporation_plaintiff"
 msgstr "Ajouter un plaignant (p.morale)"
 
@@ -989,11 +989,11 @@ msgstr "Ajouter un propriétaire (p. morale)"
 msgid "add_a_lot"
 msgstr "Ajouter un lot"
 
-#: ../browser/licence/templates/licencemacros.pt:126
+#: ../browser/licence/templates/licencemacros.pt:135
 msgid "add_a_physical_applicant"
 msgstr "Ajouter un demandeur"
 
-#: ../browser/licence/templates/licencemacros.pt:162
+#: ../browser/licence/templates/licencemacros.pt:171
 msgid "add_a_physical_plaintiff"
 msgstr "Ajouter un plaignant"
 
@@ -1001,7 +1001,7 @@ msgstr "Ajouter un plaignant"
 msgid "add_a_proprietary"
 msgstr "Ajouter un propriétaire"
 
-#: ../browser/licence/templates/licencemacros.pt:107
+#: ../browser/licence/templates/licencemacros.pt:116
 msgid "add_a_tenant"
 msgstr "Ajouter un locataire"
 
@@ -1062,12 +1062,12 @@ msgstr "Articles des annonces de projet"
 
 # buildlicence_view
 #. Default: "Applicant(s)"
-#: ../browser/licence/templates/licencemacros.pt:113
+#: ../browser/licence/templates/licencemacros.pt:122
 msgid "applicants"
 msgstr "Demandeur(s)"
 
 #. Default: "Applicant(s) history"
-#: ../browser/licence/templates/licencemacros.pt:141
+#: ../browser/licence/templates/licencemacros.pt:150
 msgid "applicants_history"
 msgstr "Demandeurs inactifs"
 
@@ -1103,7 +1103,7 @@ msgid "basement_folder_title"
 msgstr "Sous-sol"
 
 #. Default: "Bound licence applicant(s)"
-#: ../browser/licence/templates/licencemacros.pt:177
+#: ../browser/licence/templates/licencemacros.pt:186
 msgid "bound_licence_applicants"
 msgstr "Demandeur(s) du permis"
 
@@ -2353,7 +2353,7 @@ msgid "pipelines_folder_title"
 msgstr "Canalisations"
 
 #. Default: "Plaintiff(s)"
-#: ../browser/licence/templates/licencemacros.pt:149
+#: ../browser/licence/templates/licencemacros.pt:158
 msgid "plaintiffs"
 msgstr "Plaignant(s)"
 
@@ -2378,6 +2378,11 @@ msgstr "Paramètres des réunions de projet"
 #: ../browser/licence/templates/licencemacros.pt:66
 msgid "proprietaries"
 msgstr "Propriétaire(s)"
+
+#. Default: "Proprietaries history"
+#: ../browser/licence/templates/licencemacros.pt:96
+msgid "proprietaries_history"
+msgstr "Propriétaires inactifs"
 
 #: ../browser/licence/templates/licencetabsmacros.pt:233
 msgid "ranking_ordinance"
@@ -2573,7 +2578,7 @@ msgid "templates_summary_title"
 msgstr "Liste des modèles définis dans la configuration"
 
 #. Default: "Tenant(s)"
-#: ../browser/licence/templates/licencemacros.pt:96
+#: ../browser/licence/templates/licencemacros.pt:105
 msgid "tenants"
 msgstr "Locataires"
 
@@ -3779,7 +3784,7 @@ msgstr "Générer directement les documents uniques"
 
 #. Default: "Geometrician(s)"
 #: ../browser/licence/templates/licencemacros.pt:29
-#: ../content/licence/CODT_ParcelOutLicence.py:57
+#: ../content/licence/CODT_ParcelOutLicence.py:56
 #: ../content/licence/CODT_UrbanCertificateTwo.py:50
 msgid "urban_label_geometricians"
 msgstr "Géomètres"
@@ -3993,7 +3998,7 @@ msgid "urban_label_isKeyEvent"
 msgstr "Événement clé"
 
 #. Default: "Ismodification"
-#: ../content/licence/CODT_ParcelOutLicence.py:40
+#: ../content/licence/CODT_ParcelOutLicence.py:39
 #: ../content/licence/ParcelOutLicence.py:40
 msgid "urban_label_isModification"
 msgstr "Modification d'un permis d'urbanisation existant"
@@ -5646,7 +5651,7 @@ msgid "warning_add_an_applicant"
 msgstr "Veuillez renseigner le ou les demandeur(s)"
 
 #. Default: "You must encode plaintiff(s)"
-#: ../browser/licence/templates/licencemacros.pt:152
+#: ../browser/licence/templates/licencemacros.pt:161
 msgid "warning_add_an_plaintiff"
 msgstr ""
 
