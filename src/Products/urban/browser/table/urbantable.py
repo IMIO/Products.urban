@@ -111,6 +111,14 @@ class ProprietaryTable(ContactTable):
     cssClasses = {'table': 'listing nosort largetable'}
 
 
+class ProprietaryHistoryTable(ContactTable):
+    """
+    """
+    implements(interfaces.IProprietaryHistoryTable)
+
+    cssClasses = {'table': 'listing nosort largetable'}
+
+
 class TenantTable(ContactTable):
     """
     """

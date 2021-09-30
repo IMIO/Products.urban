@@ -96,11 +96,30 @@ class UrbanBase(object):
         proprietaries.extend(corporations)
         return proprietaries
 
+    security.declarePublic('get_proprietaries_history')
+    def get_proprietaries_history(self):
+        """
+        Return the history of proprietaries for the Licence
+        """
+        proprietaries = [app for app in self.objectValues('Applicant')
+                if app.portal_type == 'Proprietary'
+                and api.content.get_state(app) == 'disabled']
+        corporations = self.get_corporation_proprietaries_history()
+        proprietaries.extend(corporations)
+        return proprietaries
+
     security.declarePublic('getCorporationsProprietary')
     def getCorporationsProprietary(self):
         corporations = [corp for corp in self.objectValues('Corporation')
                         if corp.portal_type == 'CorporationProprietary'
                         and api.content.get_state(corp) == 'enabled']
+        return corporations
+
+    security.declarePublic('get_corporation_proprietaries_history')
+    def get_corporation_proprietaries_history(self):
+        corporations = [corp for corp in self.objectValues('Corporation')
+                        if corp.portal_type == 'CorporationProprietary'
+                        and api.content.get_state(corp) == 'disabled']
         return corporations
 
     security.declarePublic('getApplicantsSignaletic')
