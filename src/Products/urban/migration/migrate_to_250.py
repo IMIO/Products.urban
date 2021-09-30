@@ -460,6 +460,7 @@ def migrate(context):
     logger.info("starting migration steps")
     # disable task creation/update
     disable_schedule()
+    setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'workflow')
     fix_missing_streets(context)
     clear_communesplone_iconifiedactions_layer(context)
     migrate_urbaneventtypes_folder(context)
@@ -467,8 +468,6 @@ def migrate(context):
     # reinstall pm.wsclient registry to add new registry record.
     setup_tool.runImportStepFromProfile('profile-imio.pm.wsclient:default', 'content_type_registry')
     setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'typeinfo')
-    setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'workflow')
-    setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'update-workflow-rolemap')
     setup_tool.runAllImportStepsFromProfile('profile-plonetheme.imioapps:urbanskin')
     setup_tool.runAllImportStepsFromProfile('profile-Products.urban:default')
     setup_tool.runImportStepFromProfile('profile-Products.urban:extra', 'urban-update-rubrics')
