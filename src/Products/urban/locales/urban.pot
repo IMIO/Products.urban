@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2021-08-11 10:08+0000\n"
+"POT-Creation-Date: 2021-09-30 11:28+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,11 +23,11 @@ msgstr ""
 msgid "%s_urbanconfig_title"
 msgstr ""
 
-#: ../content/licence/RoadDecree.py:199
+#: ../content/licence/RoadDecree.py:215
 msgid "105 days"
 msgstr ""
 
-#: ../content/licence/RoadDecree.py:200
+#: ../content/licence/RoadDecree.py:216
 msgid "150 days"
 msgstr ""
 
@@ -35,7 +35,7 @@ msgstr ""
 msgid "1st class"
 msgstr ""
 
-#: ../content/licence/RoadDecree.py:201
+#: ../content/licence/RoadDecree.py:217
 msgid "210 days"
 msgstr ""
 
@@ -43,7 +43,7 @@ msgstr ""
 msgid "2nd class"
 msgstr ""
 
-#: ../content/licence/RoadDecree.py:198
+#: ../content/licence/RoadDecree.py:214
 msgid "75 days"
 msgstr ""
 
@@ -884,11 +884,11 @@ msgstr ""
 msgid "add_a_claimant"
 msgstr ""
 
-#: ../browser/licence/templates/licencemacros.pt:134
+#: ../browser/licence/templates/licencemacros.pt:143
 msgid "add_a_corporation"
 msgstr ""
 
-#: ../browser/licence/templates/licencemacros.pt:170
+#: ../browser/licence/templates/licencemacros.pt:179
 msgid "add_a_corporation_plaintiff"
 msgstr ""
 
@@ -899,11 +899,11 @@ msgstr ""
 msgid "add_a_lot"
 msgstr ""
 
-#: ../browser/licence/templates/licencemacros.pt:126
+#: ../browser/licence/templates/licencemacros.pt:135
 msgid "add_a_physical_applicant"
 msgstr ""
 
-#: ../browser/licence/templates/licencemacros.pt:162
+#: ../browser/licence/templates/licencemacros.pt:171
 msgid "add_a_physical_plaintiff"
 msgstr ""
 
@@ -911,7 +911,7 @@ msgstr ""
 msgid "add_a_proprietary"
 msgstr ""
 
-#: ../browser/licence/templates/licencemacros.pt:107
+#: ../browser/licence/templates/licencemacros.pt:116
 msgid "add_a_tenant"
 msgstr ""
 
@@ -976,12 +976,12 @@ msgid "announcementarticles_folder_title"
 msgstr ""
 
 #. Default: "Applicant(s)"
-#: ../browser/licence/templates/licencemacros.pt:113
+#: ../browser/licence/templates/licencemacros.pt:122
 msgid "applicants"
 msgstr ""
 
 #. Default: "Applicant(s) history"
-#: ../browser/licence/templates/licencemacros.pt:141
+#: ../browser/licence/templates/licencemacros.pt:150
 msgid "applicants_history"
 msgstr ""
 
@@ -1017,7 +1017,7 @@ msgid "basement_folder_title"
 msgstr ""
 
 #. Default: "Bound licence applicant(s)"
-#: ../browser/licence/templates/licencemacros.pt:177
+#: ../browser/licence/templates/licencemacros.pt:186
 msgid "bound_licence_applicants"
 msgstr ""
 
@@ -2211,7 +2211,7 @@ msgid "pipelines_folder_title"
 msgstr ""
 
 #. Default: "Plaintiff(s)"
-#: ../browser/licence/templates/licencemacros.pt:149
+#: ../browser/licence/templates/licencemacros.pt:158
 msgid "plaintiffs"
 msgstr ""
 
@@ -2240,6 +2240,11 @@ msgstr ""
 #. Default: "Proprietary(ies)"
 #: ../browser/licence/templates/licencemacros.pt:66
 msgid "proprietaries"
+msgstr ""
+
+#. Default: "Proprietaries history"
+#: ../browser/licence/templates/licencemacros.pt:96
+msgid "proprietaries_history"
 msgstr ""
 
 #: ../browser/licence/templates/licencetabsmacros.pt:238
@@ -2440,7 +2445,7 @@ msgid "templates_summary_title"
 msgstr ""
 
 #. Default: "Tenant(s)"
-#: ../browser/licence/templates/licencemacros.pt:96
+#: ../browser/licence/templates/licencemacros.pt:105
 msgid "tenants"
 msgstr ""
 
@@ -2474,7 +2479,7 @@ msgstr ""
 msgid "uniquelicence_urbanconfig_title"
 msgstr ""
 
-#: ../content/licence/RoadDecree.py:197
+#: ../content/licence/RoadDecree.py:213
 msgid "unknown"
 msgstr ""
 
@@ -2553,7 +2558,7 @@ msgstr ""
 msgid "urban_bound_inspections"
 msgstr ""
 
-#: ../browser/licence/templates/roaddecreemacros.pt:58
+#: ../browser/licence/templates/roaddecreemacros.pt:37
 msgid "urban_bound_licence"
 msgstr ""
 
@@ -2689,7 +2694,7 @@ msgid "urban_label_EnvClassThreeNumerotation"
 msgstr ""
 
 #. Default: "IsAlignment_plan"
-#: ../content/licence/RoadDecree.py:69
+#: ../content/licence/RoadDecree.py:74
 msgid "urban_label_IsAlignment_plan"
 msgstr ""
 
@@ -2886,12 +2891,12 @@ msgid "urban_label_annoncedDelayDetails"
 msgstr ""
 
 #. Default: "Announcementarticles"
-#: ../content/CODT_Inquiry.py:130
+#: ../content/CODT_Inquiry.py:133
 msgid "urban_label_announcementArticles"
 msgstr ""
 
 #. Default: "Announcementarticlestext"
-#: ../content/CODT_Inquiry.py:140
+#: ../content/CODT_Inquiry.py:144
 msgid "urban_label_announcementArticlesText"
 msgstr ""
 
@@ -3006,7 +3011,7 @@ msgid "urban_label_bound_inspection"
 msgstr ""
 
 #. Default: "Bound licence"
-#: ../content/licence/RoadDecree.py:35
+#: ../content/licence/RoadDecree.py:40
 msgid "urban_label_bound_licence"
 msgstr ""
 
@@ -3265,7 +3270,7 @@ msgid "urban_label_decisionText"
 msgstr ""
 
 #. Default: "DecisionalDelay"
-#: ../content/licence/RoadDecree.py:87
+#: ../content/licence/RoadDecree.py:92
 msgid "urban_label_decisional_delay"
 msgstr ""
 
@@ -3318,7 +3323,7 @@ msgid "urban_label_delegateSignatures"
 msgstr ""
 
 #. Default: "Demanddisplay"
-#: ../content/Inquiry.py:91
+#: ../content/Inquiry.py:95
 msgid "urban_label_demandDisplay"
 msgstr ""
 
@@ -3339,7 +3344,7 @@ msgid "urban_label_derogation"
 msgstr ""
 
 #. Default: "Derogationdetails"
-#: ../content/Inquiry.py:60
+#: ../content/Inquiry.py:61
 msgid "urban_label_derogationDetails"
 msgstr ""
 
@@ -3371,12 +3376,12 @@ msgid "urban_label_displayEmptyKeyDates"
 msgstr ""
 
 #. Default: "Divergence"
-#: ../content/CODT_Inquiry.py:110
+#: ../content/CODT_Inquiry.py:111
 msgid "urban_label_divergence"
 msgstr ""
 
 #. Default: "Divergencedetails"
-#: ../content/CODT_Inquiry.py:120
+#: ../content/CODT_Inquiry.py:122
 msgid "urban_label_divergenceDetails"
 msgstr ""
 
@@ -3781,17 +3786,17 @@ msgid "urban_label_investigationArticle"
 msgstr ""
 
 #. Default: "Investigationarticles"
-#: ../content/Inquiry.py:70
+#: ../content/Inquiry.py:72
 msgid "urban_label_investigationArticles"
 msgstr ""
 
 #. Default: "Investigationarticlestext"
-#: ../content/Inquiry.py:80
+#: ../content/Inquiry.py:83
 msgid "urban_label_investigationArticlesText"
 msgstr ""
 
 #. Default: "Investigationdetails"
-#: ../content/Inquiry.py:98
+#: ../content/Inquiry.py:102
 msgid "urban_label_investigationDetails"
 msgstr ""
 
@@ -3811,7 +3816,7 @@ msgid "urban_label_investigationPoint"
 msgstr ""
 
 #. Default: "Investigationreasons"
-#: ../content/Inquiry.py:108
+#: ../content/Inquiry.py:113
 msgid "urban_label_investigationReasons"
 msgstr ""
 
@@ -4818,7 +4823,7 @@ msgid "urban_label_roadModification"
 msgstr ""
 
 #. Default: "Roadmodificationsubject"
-#: ../content/Inquiry.py:118
+#: ../content/Inquiry.py:124
 msgid "urban_label_roadModificationSubject"
 msgstr ""
 
@@ -4965,12 +4970,12 @@ msgstr ""
 
 #. Default: "Solicit opinion to"
 #: ../browser/licence/templates/licencetabsmacros.pt:279
-#: ../content/Inquiry.py:127
+#: ../content/Inquiry.py:134
 msgid "urban_label_solicitOpinionsTo"
 msgstr ""
 
 #. Default: "Solicitopinionstooptional"
-#: ../content/Inquiry.py:138
+#: ../content/Inquiry.py:145
 msgid "urban_label_solicitOpinionsToOptional"
 msgstr ""
 
@@ -5110,7 +5115,7 @@ msgid "urban_label_tax"
 msgstr ""
 
 #. Default: "technicaladvice"
-#: ../content/licence/RoadDecree.py:231
+#: ../content/licence/RoadDecree.py:247
 msgid "urban_label_technicalAdvice"
 msgstr ""
 
@@ -5209,7 +5214,7 @@ msgid "urban_label_township_guide_details"
 msgstr ""
 
 #. Default: "Townships"
-#: ../content/licence/RoadDecree.py:78
+#: ../content/licence/RoadDecree.py:83
 msgid "urban_label_townships"
 msgstr ""
 
@@ -5294,7 +5299,7 @@ msgstr ""
 
 #. Default: "Use_bound_licence_infos"
 #: ../content/licence/Inspection.py:65
-#: ../content/licence/RoadDecree.py:61
+#: ../content/licence/RoadDecree.py:66
 msgid "urban_label_use_bound_licence_infos"
 msgstr ""
 
@@ -5524,7 +5529,7 @@ msgid "warning_add_an_applicant"
 msgstr ""
 
 #. Default: "You must encode plaintiff(s)"
-#: ../browser/licence/templates/licencemacros.pt:152
+#: ../browser/licence/templates/licencemacros.pt:161
 msgid "warning_add_an_plaintiff"
 msgstr ""
 

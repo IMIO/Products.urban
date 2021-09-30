@@ -93,7 +93,7 @@
 
 
 <fieldset metal:define-macro="urbanProprietariesHistoricAndCorporationsMacro" i18n:domain="urban">
-    <legend i18n:translate="applicants_history">Applicant(s) history</legend>
+    <legend i18n:translate="proprietaries_history">Proprietaries history</legend>
     <div class="field">
         <tal:listing content="structure view/renderProprietaryHistoryListing" />
     </div>
