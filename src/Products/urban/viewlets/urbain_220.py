@@ -285,6 +285,8 @@ class UrbainXMLExport(BrowserView):
             response = site.REQUEST.RESPONSE
             response.setHeader('Content-type', 'text/plain;;charset=iso-8859-1')
             output = StringIO()
+            for line in xml:
+                str(line)
             output.write(unicode('\n'.join(xml).replace("&", "&amp;"), 'iso-8859-1').encode('iso-8859-1'))
             self._set_header_response()
             return output.getvalue()
