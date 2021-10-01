@@ -131,7 +131,7 @@ def update_POD_expressions(context):
         },
         {
             "search": "from xhtml\(.*decorateHTML\('(\w+)',\s*(.*)\s*\)\)",
-            "replace": r"from self.xhtml(\2,\s*style='\1')",
+            "replace": r"from self.xhtml(\2, style='\1')",
             "is_regex": True
         },
         {
