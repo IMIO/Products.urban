@@ -135,6 +135,11 @@ def update_POD_expressions(context):
             "is_regex": True
         },
         {
+            "search": "from xhtml\(.*decorateHTML\('(\w+)',\s*(.*)\s*\)\)",
+            "replace": r"from self.xhtml(\2,\s*style='\1')",
+            "is_regex": True
+        },
+        {
             "search": "self.getValuesForTemplate\('(\w*)',\s*subfield='description'\)",
             "replace": "self.voc_terms('\\1')",
             "is_regex": True
