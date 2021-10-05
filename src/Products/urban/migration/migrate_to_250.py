@@ -194,6 +194,75 @@ def migrate_CODT_UrbanCertificateOne_to_CODT_UrbanCertificateBase(context):
     logger.info("migration step done!")
 
 
+class CODT_UniqueLicenceInquiryMigrator(InplaceATFolderMigrator):
+    """
+    """
+    walker = CustomQueryWalker
+    src_meta_type = "Inquiry"
+    src_portal_type = "Inquiry"
+    dst_meta_type = "CODT_UniqueLicenceInquiry"
+    dst_portal_type = "CODT_UniqueLicenceInquiry"
+
+    def __init__(self, *args, **kwargs):
+        InplaceATFolderMigrator.__init__(self, *args, **kwargs)
+
+
+def migrate_Env_Inquiry_to_CODT_UniquelicenceInquiry(context):
+    """
+    Migrate env licences Inquiry to CODT_UniquelicenceInquiry.
+    """
+    logger = logging.getLogger('urban: migrate Inquiry meta type to CODT_UniquelicenceInquiry ->')
+    logger.info("starting migration step")
+
+    migrator = CODT_UniqueLicenceInquiryMigrator
+    portal = api.portal.get()
+    # to avoid link integrity problems, disable checks
+    portal.portal_properties.site_properties.enable_link_integrity_checks = False
+    # disable catalog and default values
+    disable_licence_default_values()
+    patches.apply()
+
+    # Run the migrations
+    folder_path = '/'.join(portal.urban.envclassones.getPhysicalPath())
+    walker = migrator.walker(
+        portal,
+        migrator,
+        query={'path': folder_path},
+        callBefore=contentmigrationLogger,
+        logger=logger,
+        purl=portal.portal_url,
+        transaction_size=100000,
+    )
+    walker.go()
+
+    # we need to reset the class variable to avoid using current query in
+    # next use of CustomQueryWalker
+    walker.__class__.additionalQuery = {}
+
+    folder_path = '/'.join(portal.urban.envclasstwos.getPhysicalPath())
+    walker = migrator.walker(
+        portal,
+        migrator,
+        query={'path': folder_path},
+        callBefore=contentmigrationLogger,
+        logger=logger,
+        purl=portal.portal_url,
+        transaction_size=100000,
+    )
+    walker.go()
+
+    # we need to reset the class variable to avoid using current query in
+    # next use of CustomQueryWalker
+    walker.__class__.additionalQuery = {}
+    # enable linkintegrity checks
+    portal.portal_properties.site_properties.enable_link_integrity_checks = True
+    # restore catalog and default values
+    restore_licence_default_values()
+    patches.unapply()
+
+    logger.info("migration step done!")
+
+
 def migrate_CODT_UrbanCertificateBase_add_permissions(context):
     """
     """
@@ -474,6 +543,7 @@ def migrate(context):
     migrate_codt_buildlicences_schedule(context)
     setup_tool.runImportStepFromProfile('profile-Products.urban:extra', 'urban-update-schedule')
     migrate_flooding_level(context)
+    migrate_Env_Inquiry_to_CODT_UniquelicenceInquiry(context)
     migrate_CODT_NotaryLetter_to_CODT_UrbanCertificateBase(context)
     migrate_CODT_UrbanCertificateOne_to_CODT_UrbanCertificateBase(context)
     migrate_CODT_UrbanCertificateBase_add_permissions(context)
