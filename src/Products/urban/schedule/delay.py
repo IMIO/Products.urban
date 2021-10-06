@@ -56,6 +56,7 @@ class AnnoncedDelay(UrbanBaseDelay):
         base_delay = super(AnnoncedDelay, self).calculate_delay()
         licence = self.task_container
         delay = licence.getAnnoncedDelay() or 0
+        delay = delay == 'inconnu' and 0 or delay
         if licence.getHasModifiedBlueprints():
             delay = licence.getDelayAfterModifiedBlueprints() or 0
         if delay and delay.endswith('j'):
@@ -121,6 +122,7 @@ class UniqueLicenceNotificationDelay(AnnoncedDelay):
                 delay = 20
         else:
             delay = self.task_container.getAnnoncedDelay()
+            delay = delay == 'inconnu' and 0 or delay
             if delay.endswith('j'):
                 delay = int(delay[:-1])
             else:
