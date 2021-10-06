@@ -132,6 +132,7 @@ class DuplicateLicenceForm(form.Form):
         postCreationActions(duplicated_licence, None)
 
         duplicated_licence.reindexObject()
+        duplicated_licence.processForm()
 
         return self.request.RESPONSE.redirect(duplicated_licence.absolute_url())
 
