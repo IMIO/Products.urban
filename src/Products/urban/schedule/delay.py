@@ -57,7 +57,7 @@ class AnnoncedDelay(UrbanBaseDelay):
         licence = self.task_container
         delay = licence.getAnnoncedDelay() or 0
         if licence.getHasModifiedBlueprints():
-            delay = licence.getDelayAfterModifiedBlueprints()
+            delay = licence.getDelayAfterModifiedBlueprints() or 0
         if delay and delay.endswith('j'):
             delay = int(delay[:-1])
             delay += self.inquiry_suspension_delay()
