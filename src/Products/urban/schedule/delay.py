@@ -62,6 +62,8 @@ class AnnoncedDelay(UrbanBaseDelay):
         if delay and delay.endswith('j'):
             delay = int(delay[:-1])
             delay += self.inquiry_suspension_delay()
+        if type(delay) in [str, unicode]:
+            delay = 0
         return delay + base_delay
 
     def inquiry_suspension_delay(self):
@@ -127,6 +129,8 @@ class UniqueLicenceNotificationDelay(AnnoncedDelay):
                 delay = int(delay[:-1])
             else:
                 delay = 0
+        if type(delay) in [str, unicode]:
+            delay = 0
         delay += self.inquiry_suspension_delay()
         return delay
 
