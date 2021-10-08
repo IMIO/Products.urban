@@ -2,13 +2,9 @@
 
 from collective.documentgenerator.content.pod_template import IPODTemplate
 from collective.documentgenerator.content.pod_template import IConfigurablePODTemplate
-<<<<<<< HEAD
-from Products.urban.interfaces import IGenericLicence
-=======
 from collective.documentgenerator.content.vocabulary import AllPODTemplateWithFileVocabularyFactory
 from collective.documentgenerator.search_replace.pod_template import SearchAndReplacePODTemplates
->>>>>>> e7177abb97e60ea2e0bddbd9e10954f84304bae9
-
+from Products.urban.interfaces import IGenericLicence
 from plone import api
 from plone.app.uuid.utils import uuidToObject
 import logging
