@@ -61,7 +61,7 @@ class UpdateOpenTasksLicences(BrowserView):
             object_provides=IAutomatedTask.__identifier__,
             review_state=states_by_status[STARTED]
         )
-        licences = [t.getObject().get_container() for t in open_tasks_brains]
+        licences = list(set([t.getObject().get_container() for t in open_tasks_brains]))
         for licence in licences:
             notify(ObjectModifiedEvent(licence))
             licence.reindexObject()
