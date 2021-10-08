@@ -41,14 +41,14 @@ class BaseHelperView(object):
             def proxy_method(*args, **kwargs):
                 result = getattr(self.real_context, attr_name)(*args, **kwargs)
                 if IBaseObject.providedBy(result) or IDexterityContent.providedBy(result):
-                    result_helper = result.restrictedTraverse('document_generation_helper_view')
+                    result_helper = result.unrestrictedTraverse('document_generation_helper_view')
                     result_helper.appy_renderer = self.appy_renderer
                     return result_helper
                 elif type(result) in [list, set]:
                     new_result = []
                     for element in result:
                         if IBaseObject.providedBy(element) or IDexterityContent.providedBy(element):
-                            element_helper = element.restrictedTraverse('document_generation_helper_view')
+                            element_helper = element.unrestrictedTraverse('document_generation_helper_view')
                             new_result.append(element_helper)
                         else:
                             new_result.append(element)
@@ -174,7 +174,7 @@ class BaseHelperView(object):
 
         voc_terms_proxy = []
         for v in voc_terms:
-            voc_terms_view = v.restrictedTraverse('@@document_generation_helper_view')
+            voc_terms_view = v.unrestrictedTraverse('@@document_generation_helper_view')
             voc_terms_view.appy_renderer = self.appy_renderer
             voc_terms_proxy.append(voc_terms_view.context)
         return voc_terms_proxy
@@ -245,7 +245,7 @@ class UrbanDocGenerationLicenceHelperView(UrbanDocGenerationHelperView):
 
     def get_division(self):
         parcels = self.context.getParcels()
-        parcel_view = parcels and parcels[0].restrictedTraverse('document_generation_helper_view')
+        parcel_view = parcels and parcels[0].unrestrictedTraverse('document_generation_helper_view')
         raw_div = parcel_view.context.division
         division = raw_div and raw_div[raw_div.find('(') + 1:-1] or 'DIVISION INCONNUE'
         return division
@@ -625,7 +625,7 @@ class UrbanDocGenerationLicenceHelperView(UrbanDocGenerationHelperView):
     def getLimitDate(self, firstDepositDate, delay=20):
         context = self.real_context
         if context.annoncedDelay:
-            delay = context.getValueForTemplate('annoncedDelay', context, subfield='deadLineDelay')
+            delay = self.voc_term('annoncedDelay').getDeadLineDelay()
         limitDate = firstDepositDate + int(delay)
         return self.format_date(limitDate)
 
@@ -1057,7 +1057,7 @@ class UrbanDocGenerationEventHelperView(UrbanDocGenerationHelperView):
                 mailing_list = self.getFolderMakersMailing()
                 use_proxy = False
         if use_proxy:
-            mailing_list = [obj.restrictedTraverse('@@document_generation_helper_view').context for obj in mailing_list]
+            mailing_list = [obj.unrestrictedTraverse('@@document_generation_helper_view').context for obj in mailing_list]
         return mailing_list
 
     def getFolderMakersMailing(self):
@@ -1131,6 +1131,11 @@ class UrbanDocGenerationEventHelperView(UrbanDocGenerationHelperView):
         decision_text = self._get_wspm_field(field_name)
         return decision_text
 
+    def get_wspm_motivation_text(self, style='UrbanBody'):
+        field_name = 'motivation'
+        motivation_text = self._get_wspm_field(field_name)
+        return motivation_text
+
     def get_wspm_meeting_state(self):
         field_name = 'review_state'
         state = self._get_wspm_field(field_name)
@@ -1143,7 +1148,7 @@ class UrbanDocGenerationFacetedHelperView(ATDocumentGenerationHelperView):
         # Adresse(s) des travaux
         return a dictionary containing specific work locations informations
         """
-        view = folder.restrictedTraverse('document_generation_helper_view')
+        view = folder.unrestrictedTraverse('document_generation_helper_view')
         work_location_dict = view.get_work_location_dict(index)
         return work_location_dict
 
@@ -1151,7 +1156,7 @@ class UrbanDocGenerationFacetedHelperView(ATDocumentGenerationHelperView):
         """
           Returns the licences related to a parcel
         """
-        view = folder.restrictedTraverse('document_generation_helper_view')
+        view = folder.unrestrictedTraverse('document_generation_helper_view')
         relatedLicences = view.get_related_licences_of_parcel()
         return relatedLicences
 
@@ -1159,19 +1164,19 @@ class UrbanDocGenerationFacetedHelperView(ATDocumentGenerationHelperView):
         """
           Returns the licences related to a parcel
         """
-        view = folder.restrictedTraverse('document_generation_helper_view')
+        view = folder.unrestrictedTraverse('document_generation_helper_view')
         relatedLicences = view.get_related_licences_titles_of_parcel()
         return relatedLicences
 
     def getEvent(self, folder, title=''):
-        view = folder.restrictedTraverse('document_generation_helper_view')
+        view = folder.unrestrictedTraverse('document_generation_helper_view')
         event = view.getEvent(title)
         return event
 
     def format_date(self, folder, date=None, translatemonth=True, long_format=False):
         if not date:
             date = _date.today()
-        view = folder.restrictedTraverse('document_generation_helper_view')
+        view = folder.unrestrictedTraverse('document_generation_helper_view')
         formated_date = view.format_date(date, translatemonth, long_format)
         return formated_date
 

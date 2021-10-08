@@ -25,7 +25,6 @@ from Products.urban.migration.to_DX.migration_utils import clean_obsolete_portal
 from Products.urban.migration.utils import disable_licence_default_values
 from Products.urban.migration.utils import disable_schedule
 from Products.urban.migration.utils import restore_licence_default_values
-from Products.urban.migration.utils import restore_schedule
 from Products.urban.setuphandlers import setFolderAllowedTypes
 from Products.urban.utils import getLicenceFolderId
 
@@ -61,10 +60,12 @@ def migrate_codt_buildlicences_schedule(context):
 
     portal_urban = api.portal.get_tool('portal_urban')
     schedule = portal_urban.codt_buildlicence.schedule
-    schedule.reception.deposit.ending_states = ()
-    schedule.incomplet2.notify_refused.ending_states = ()
-    schedule.reception.deposit.recurrence_states = ()
-    schedule.reception.deposit.activate_recurrency = False
+    if hasattr(schedule.incomplet2, 'notify_refused'):
+        schedule.incomplet2.notify_refused.ending_states = ()
+    if hasattr(schedule.reception, 'deposit'):
+        schedule.reception.deposit.ending_states = ()
+        schedule.reception.deposit.recurrence_states = ()
+        schedule.reception.deposit.activate_recurrency = False
     if 'deposit' not in (schedule.incomplet.attente_complements.ending_states or ()):
         old_states = schedule.incomplet.attente_complements.ending_states or ()
         new_states = tuple(old_states) + ('deposit',)
@@ -123,7 +124,8 @@ def migrate_CODT_NotaryLetter_to_CODT_UrbanCertificateBase(context):
         query={'path': folder_path},
         callBefore=contentmigrationLogger,
         logger=logger,
-        purl=portal.portal_url
+        purl=portal.portal_url,
+        transaction_size=100000,
     )
     walker.go()
 
@@ -175,7 +177,77 @@ def migrate_CODT_UrbanCertificateOne_to_CODT_UrbanCertificateBase(context):
         query={'path': folder_path},
         callBefore=contentmigrationLogger,
         logger=logger,
-        purl=portal.portal_url
+        purl=portal.portal_url,
+        transaction_size=100000,
+    )
+    walker.go()
+
+    # we need to reset the class variable to avoid using current query in
+    # next use of CustomQueryWalker
+    walker.__class__.additionalQuery = {}
+    # enable linkintegrity checks
+    portal.portal_properties.site_properties.enable_link_integrity_checks = True
+    # restore catalog and default values
+    restore_licence_default_values()
+    patches.unapply()
+
+    logger.info("migration step done!")
+
+
+class CODT_UniqueLicenceInquiryMigrator(InplaceATFolderMigrator):
+    """
+    """
+    walker = CustomQueryWalker
+    src_meta_type = "Inquiry"
+    src_portal_type = "Inquiry"
+    dst_meta_type = "CODT_UniqueLicenceInquiry"
+    dst_portal_type = "CODT_UniqueLicenceInquiry"
+
+    def __init__(self, *args, **kwargs):
+        InplaceATFolderMigrator.__init__(self, *args, **kwargs)
+
+
+def migrate_Env_Inquiry_to_CODT_UniquelicenceInquiry(context):
+    """
+    Migrate env licences Inquiry to CODT_UniquelicenceInquiry.
+    """
+    logger = logging.getLogger('urban: migrate Inquiry meta type to CODT_UniquelicenceInquiry ->')
+    logger.info("starting migration step")
+
+    migrator = CODT_UniqueLicenceInquiryMigrator
+    portal = api.portal.get()
+    # to avoid link integrity problems, disable checks
+    portal.portal_properties.site_properties.enable_link_integrity_checks = False
+    # disable catalog and default values
+    disable_licence_default_values()
+    patches.apply()
+
+    # Run the migrations
+    folder_path = '/'.join(portal.urban.envclassones.getPhysicalPath())
+    walker = migrator.walker(
+        portal,
+        migrator,
+        query={'path': folder_path},
+        callBefore=contentmigrationLogger,
+        logger=logger,
+        purl=portal.portal_url,
+        transaction_size=100000,
+    )
+    walker.go()
+
+    # we need to reset the class variable to avoid using current query in
+    # next use of CustomQueryWalker
+    walker.__class__.additionalQuery = {}
+
+    folder_path = '/'.join(portal.urban.envclasstwos.getPhysicalPath())
+    walker = migrator.walker(
+        portal,
+        migrator,
+        query={'path': folder_path},
+        callBefore=contentmigrationLogger,
+        logger=logger,
+        purl=portal.portal_url,
+        transaction_size=100000,
     )
     walker.go()
 
@@ -426,14 +498,44 @@ def migrate_rich_texts(context):
     logger.info("migration step done!")
 
 
+def fix_missing_streets(context):
+    logger = logging.getLogger('urban: migrate to 2.5')
+    logger.info("starting migration steps")
+    catalog = api.portal.get_tool('portal_catalog')
+    licence_brains = catalog(object_provides=IGenericLicence.__identifier__)
+    portal_urban = api.portal.get_tool('portal_urban')
+    streets = portal_urban.streets
+    missing_street = api.content.create(type='Street', id='manquant', container=streets.objectValues()[0])
+    api.content.transition(missing_street, 'disable')
+    for brain in licence_brains:
+        licence = brain.getObject()
+        address = licence.getWorkLocations()
+        do_fix = False
+        new_address = []
+        for wl in address:
+            street_brains = catalog(UID=wl['street'])
+            if not street_brains:
+                do_fix = True
+                wl['street'] = missing_street.UID()
+                new_address.append(wl)
+            if do_fix:
+                licence.setWorkLocations(new_address)
+                licence.reindexObject(idxs=['StreetsUID'])
+                logger.info('fixed street licence {}'.format(licence))
+
+
 def migrate(context):
     logger = logging.getLogger('urban: migrate to 2.5')
     logger.info("starting migration steps")
     # disable task creation/update
     disable_schedule()
+    setup_tool = api.portal.get_tool('portal_setup')
+    setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'workflow')
+    fix_missing_streets(context)
     clear_communesplone_iconifiedactions_layer(context)
     migrate_urbaneventtypes_folder(context)
-    setup_tool = api.portal.get_tool('portal_setup')
+    # reinstall pm.wsclient registry to add new registry record.
+    setup_tool.runImportStepFromProfile('profile-imio.pm.wsclient:default', 'content_type_registry')
     setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'typeinfo')
     setup_tool.runAllImportStepsFromProfile('profile-plonetheme.imioapps:urbanskin')
     setup_tool.runAllImportStepsFromProfile('profile-Products.urban:default')
@@ -441,6 +543,7 @@ def migrate(context):
     migrate_codt_buildlicences_schedule(context)
     setup_tool.runImportStepFromProfile('profile-Products.urban:extra', 'urban-update-schedule')
     migrate_flooding_level(context)
+    migrate_Env_Inquiry_to_CODT_UniquelicenceInquiry(context)
     migrate_CODT_NotaryLetter_to_CODT_UrbanCertificateBase(context)
     migrate_CODT_UrbanCertificateOne_to_CODT_UrbanCertificateBase(context)
     migrate_CODT_UrbanCertificateBase_add_permissions(context)
@@ -462,6 +565,4 @@ def migrate(context):
     REQUEST = context.REQUEST
     ref_catalog = api.portal.get_tool('reference_catalog')
     ref_catalog.manage_catalogReindex(REQUEST, REQUEST.RESPONSE, REQUEST.URL)
-    # restore task creation/update
-    restore_schedule()
     logger.info("migration done!")

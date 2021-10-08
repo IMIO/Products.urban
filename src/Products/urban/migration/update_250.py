@@ -1,9 +1,16 @@
-# encoding: utf-8
+# -*- coding: utf-8 -*-
+
 from collective.documentgenerator.content.pod_template import IPODTemplate
 from collective.documentgenerator.content.pod_template import IConfigurablePODTemplate
+<<<<<<< HEAD
 from Products.urban.interfaces import IGenericLicence
+=======
+from collective.documentgenerator.content.vocabulary import AllPODTemplateWithFileVocabularyFactory
+from collective.documentgenerator.search_replace.pod_template import SearchAndReplacePODTemplates
+>>>>>>> e7177abb97e60ea2e0bddbd9e10954f84304bae9
 
 from plone import api
+from plone.app.uuid.utils import uuidToObject
 import logging
 
 logger = logging.getLogger('urban: migrations')
@@ -84,6 +91,108 @@ def fix_type_eventtype_in_config(context):
             logger.info("modification on : {} ").format(eventc)
     logger.info("upgrade done!")
 
+
+def update_POD_expressions(context):
+    """
+    Execute automatic search and replace for POD template code.
+    """
+    logger = logging.getLogger('urban: search and replace POD expressions')
+    logger.info("starting upgrade steps")
+    voc = AllPODTemplateWithFileVocabularyFactory()
+    uids = [brain.UID for brain in voc._get_all_pod_templates_with_file()]
+    templates = [uuidToObject(template_uuid) for template_uuid in uids]
+
+    replacements = [
+        {
+            "search": "for\s+(\w+)\s+in\s+self.getValuesForTemplate\('(\w+)'\)$",
+            "replace": "for \\1 in self.voc_terms('\\2')",
+            "is_regex": True,
+        },
+        {
+            "search": "self.getValuesForTemplate\('(\w+)'\)",
+            "replace": "self.\\1",
+            "is_regex": True,
+        },
+        {
+            "search": "self.getValueForTemplate\('(\w+)'\)",
+            "replace": "self.\\1",
+            "is_regex": True
+        },
+        {
+            "search": "self.getValueForTemplate\('(\w+)',\s*obj=(\S+)\s*\)",
+            "replace": "\\2.\\1",
+            "is_regex": True
+        },
+        {
+            "search": "self.getValueForTemplate\('(\w+)',\s*([^= ]+)\)",
+            "replace": "\\2.\\1",
+            "is_regex": True
+        },
+        {
+            "search": "self.getValueForTemplate\('(\w+)',\s*subfield='(\w+)'\)",
+            "replace": "self.voc_term('\\1').\\2",
+            "is_regex": True
+        },
+        {
+            "search": "from xhtml\(.*decorateHTML\('(\w+)',\s*(.*)\s*\)\)",
+            "replace": r"from self.xhtml(\2, style='\1')",
+            "is_regex": True
+        },
+        {
+            "search": "self.getValuesForTemplate\('(\w*)',\s*subfield='description'\)",
+            "replace": "self.voc_terms('\\1')",
+            "is_regex": True
+        },
+        {
+            "search": "self.getValueForTemplate\('(\w*)',\s*subfield='description'\)",
+            "replace": "self.voc_terms('\\1')",
+            "is_regex": True
+        },
+        {
+            "search": "from\s+xhtml\((\w*)\)",
+            "replace": "from xhtml(\\1.Description())",
+            "is_regex": True
+        },
+        {
+            "search": "parcel['title']",
+            "replace": "parcel.Title",
+            "is_regex": False
+        },
+        {
+            "search": "getFormattedDescription()",
+            "replace": "Description()",
+            "is_regex": False
+        },
+        {
+            "search": "do\s*section(-?)\s*for\s*(\w*)\s*in\s*self.getInvestigationArticles\(\)",
+            "replace": "do section\\1 for \\2 in self.voc_terms('investigationArticles')",
+            "is_regex": True
+        },
+        {
+            "search": "self.getValuesForTemplate\('(\w*)Articles'.*",
+            "replace": "self.voc_terms('\\1Articles')",
+            "is_regex": True
+        },
+        {
+            "search": "^\s*subfield='description'\)",
+            "replace": "",
+            "is_regex": True
+        },
+        {
+            "search": "for\s+(\w+)\s+in\s+self.(\w+)$",
+            "replace": "for \\1 in self.voc_terms('\\2')",
+            "is_regex": True
+        },
+    ]
+
+    with SearchAndReplacePODTemplates(templates) as replace:
+        for row in replacements:
+            row["replace"] = row["replace"] or ""
+            search_expr = row["search"]
+            replace_expr = row["replace"]
+            logger.info("Replacing POD expression {} by {}".format(search_expr, replace_expr))
+            replace.replace(search_expr, replace_expr, is_regex=row["is_regex"])
+    logger.info("upgrade done!")
 
 def add_all_applicants_in_title(context):
     """

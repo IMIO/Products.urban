@@ -82,7 +82,7 @@ class TestGenericLicenceFields(SchemaFieldsTestCase):
             self.browser.open(licence.absolute_url())
             contents = self.browser.contents
             reference_is_visible = \
-                "<span>Référence DGO4</span>:" in contents \
+                "<span>Référence FD (DGO4)</span>:" in contents \
                 or \
                 "<span>Référence DGO3</span>:" in contents \
                 or \

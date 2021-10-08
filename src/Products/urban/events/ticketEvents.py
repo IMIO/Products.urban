@@ -27,7 +27,7 @@ def setTicketBoundInspection(ticket, event):
             notify(ObjectModifiedEvent(previous_inspection))
 
     # refer new ticket
-    if new_bound_UIDs:
+    if any(new_bound_UIDs):
         for new_inspection_brain in catalog(UID=new_bound_UIDs):
             new_inspection = new_inspection_brain.getObject()
             new_inspection_annotations = IAnnotations(new_inspection)
