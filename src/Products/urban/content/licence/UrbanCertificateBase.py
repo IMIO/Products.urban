@@ -650,11 +650,11 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
         proprietary = ''
         proprietaries = self.getProprietaries() or self.getApplicants()
         if proprietaries:
-            proprietary = '; '.join([prop.Title() for prop in proprietaries])
+            proprietary = ', '.join([prop.Title() for prop in proprietaries])
         else:
             proprietary = translate('no_proprietary_defined', 'urban', context=self.REQUEST).encode('utf8')
         if self.getNotaryContact():
-            notary = '; '.join([notar.Title() for notar in self.getNotaryContact()])
+            notary = ', '.join([notar.Title() for notar in self.getNotaryContact()])
         else:
             notary = translate('no_notary_defined', 'urban', context=self.REQUEST).encode('utf8')
 
