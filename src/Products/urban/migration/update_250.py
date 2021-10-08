@@ -146,7 +146,7 @@ def update_POD_expressions(context):
         },
         {
             "search": "from\s+xhtml\((\w*)\)",
-            "replace": "from xhtml(\\1.Description())",
+            "replace": "from self.xhtml(\\1.Description())",
             "is_regex": True
         },
         {
