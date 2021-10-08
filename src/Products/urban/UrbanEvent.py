@@ -503,6 +503,7 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
         return empty_value
 
     security.declarePublic('getDefaultText')
+
     def getDefaultText(self, context=None, field=None, html=False):
         if not context or not field:
             return ""
@@ -519,11 +520,11 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
 
         return keydate
 
-
     def getDefaultTime(self):
         return DateTime()
 
     security.declarePublic('getTemplates')
+
     def getTemplates(self):
         """
           Returns contained templates (File)
@@ -533,6 +534,7 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
         return self.getUrbaneventtypes().getTemplates()
 
     security.declarePublic('eventDateLabel')
+
     def eventDateLabel(self):
         """
          Returns the variable label
@@ -540,11 +542,12 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
         return self.getUrbaneventtypes().getEventDateLabel()
 
     security.declarePublic('listAdviceAgreementLevels')
+
     def listAdviceAgreementLevels(self):
         """
           Vocabulary for field 'adviceAgreementLevels'
         """
-        lst=[
+        lst = [
              ['agreementlevel_read_advice', translate('agreementlevel_read_advice', 'urban', context=self.REQUEST, default="Read advice")],
              ['agreementlevel_respect_charges', translate('agreementlevel_respect_charges', 'urban', context=self.REQUEST, default="Respect charges")],
             ]
@@ -558,6 +561,7 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
         return DisplayList(tuple(vocab))
 
     security.declarePublic('isInt')
+
     def isInt(self, s):
         """
           Check if 's' is an integer, return True or False...
@@ -569,85 +573,88 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
             return False
 
     security.declarePublic('parseCadastreStreet')
+
     def parseCadastreStreet(self, street):
         """
            Return a parsed version of data from Cadastre so we obtain something
            more beautiful to display
         """
-        if street == None:
+        if street is None:
             return 'NO ADDRESS FOUND'
         print '\n\n Street: '+street
-        i=0
-        toreturn=''
-        while (i < len(street)) and (street[i] !=','):
-            toreturn=toreturn+street[i]
-            i=i+1
+        i = 0
+        toreturn = ''
+        while (i < len(street)) and (street[i] != ','):
+            toreturn = toreturn+street[i]
+            i = i+1
         if i < len(street):
-            while (i<len(street)) and (not self.isInt(street[i])):
-                i=i+1
-            toreturn=toreturn+' '
+            while (i < len(street)) and (not self.isInt(street[i])):
+                i = i+1
+            toreturn = toreturn+' '
         while i < len(street):
-            toreturn=toreturn+street[i]
-            i=i+1
+            toreturn = toreturn+street[i]
+            i = i+1
         return toreturn
 
     security.declarePublic('parseCadastreName')
+
     def parseCadastreName(self, name):
         """
         """
         print '\n\nName: '+name
-        i=0
-        nom1=''
-        prenom1=''
-        nom2=''
-        prenom2=''
-        toreturn=''
+        i = 0
+        nom1 = ''
+        prenom1 = ''
+        nom2 = ''
+        prenom2 = ''
+        toreturn = ''
         if name.rfind(',') > 0:
-            while (i<len(name)) and (name[i] != ','):
-                nom1=nom1+name[i]
-                i=i+1
-            if i<len(name):
-                i=i+1
-            while (i<len(name)) and (name[i] != ' '):
-                i=i+1
-            if i<len(name):
-                i=i+1
-            while (i<len(name)) and (name[i] not in ['&', ' ']):
-                prenom1=prenom1+name[i]
-                i=i+1
-            if i<len(name) and name[i] != '&':
-                i=i+1
-            toreturn=prenom1
-            if prenom1!='':
-                toreturn=toreturn+' '
-            toreturn=toreturn+nom1
+            while (i < len(name)) and (name[i] != ','):
+                nom1 = nom1+name[i]
+                i = i+1
+            if i < len(name):
+                i = i+1
+            while (i < len(name)) and (name[i] != ' '):
+                i = i+1
+            if i < len(name):
+                i = i+1
+            while (i < len(name)) and (name[i] not in ['&', ' ']):
+                prenom1 = prenom1+name[i]
+                i = i+1
+            if i < len(name) and name[i] != '&':
+                i = i+1
+            toreturn = prenom1
+            if prenom1 != '':
+                toreturn = toreturn+' '
+            toreturn = toreturn+nom1
             if name.rfind('&') > 0 and i < name.rfind('&'):
-                while (i<len(name)) and (name[i] != '&'):
-                    i=i+1
-                if name[i]=='&':
-                    toreturn=toreturn+' - M. '
-                    i=i+1
-                while (i<len(name)) and (name[i] != ','):
-                    nom2=nom2+name[i]
-                    i=i+1
-                if i<len(name):
-                    i=i+1
-                while (i<len(name)) and (name[i] != ' '):
-                    i=i+1
-                if i<len(name):
-                    i=i+1
-                while (i<len(name)) and (name[i] != ' '):
-                    prenom2=prenom2+name[i]
-                    i=i+1
-                toreturn=toreturn+prenom2
+                while (i < len(name)) and (name[i] != '&'):
+                    i = i+1
+                if name[i] == '&':
+                    toreturn = toreturn+' - M. '
+                    i = i+1
+                while (i < len(name)) and (name[i] != ','):
+                    nom2 = nom2+name[i]
+                    i = i+1
+                if i < len(name):
+                    i = i+1
+                while (i < len(name)) and (name[i] != ' '):
+                    i = i+1
+                if i < len(name):
+                    i = i+1
+                while (i < len(name)) and (name[i] != ' '):
+                    prenom2 = prenom2+name[i]
+                    i = i+1
+                toreturn = toreturn+prenom2
                 if prenom2 != '':
-                    toreturn=toreturn+' '
-                toreturn=toreturn+nom2
+                    toreturn = toreturn+' '
+                toreturn = toreturn+nom2
         else:
-            toreturn=name
+            toreturn = name
         return 'M. %s' % toreturn
 
     security.declarePublic('getDocuments')
+
     def getDocuments(self):
         """
           Return the documents (File) of the UrbanEvent
@@ -656,6 +663,7 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
         return documents
 
     security.declarePublic('getAttachments')
+
     def getAttachments(self):
         """
           Return the attachments (File) of the UrbanEvent
@@ -670,12 +678,13 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
         return self.objectValues('RecipientCadastre')
 
     security.declarePublic('RecipientsCadastreCSV')
+
     def RecipientsCadastreCSV(self):
         """
           Generates a fake CSV file used in POD templates
         """
-        recipients=self.objectValues('RecipientCadastre')
-        toreturn='[CSV]TitreNomPrenom|AdresseLigne1|AdresseLigne2'
+        recipients = self.objectValues('RecipientCadastre')
+        toreturn = '[CSV]TitreNomPrenom|AdresseLigne1|AdresseLigne2'
         wft = getToolByName(self, 'portal_workflow')
         for recipient in recipients:
             #do not take "disabled" recipients into account
@@ -684,11 +693,12 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
             street = recipient.getStreet() and recipient.getStreet() or ''
             number = recipient.getNumber() and recipient.getNumber() or ''
             address = recipient.getAdr1() and recipient.getAdr1() or ''
-            toreturn=toreturn+'%'+recipient.getName()+'|'+street+', '+number+'|'+address
-        toreturn=toreturn+'[/CSV]'
+            toreturn = toreturn+'%'+recipient.getName()+'|'+street+', '+number+'|'+address
+        toreturn = toreturn+'[/CSV]'
         return toreturn
 
     security.declarePublic('getFormattedDate')
+
     def getFormattedDate(self, date=None, withCityNamePrefix=False, forDelivery=False, translatemonth=True):
         """
           Return the date
@@ -726,6 +736,7 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
             return False
 
     security.declarePublic('getDecision')
+
     def getDecision(self, theObject=False):
         """
           Returns the decision value or the UrbanVocabularyTerm if theObject=True
@@ -737,6 +748,7 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
         return res
 
     security.declarePublic('getDecision')
+
     def getExternalDecision(self, theObject=False):
         """
           Returns the external decision value or the UrbanVocabularyTerm if theObject=True
@@ -757,4 +769,3 @@ registerType(UrbanEvent, PROJECTNAME)
 
 ##code-section module-footer #fill in your manual code here
 ##/code-section module-footer
-

@@ -82,6 +82,12 @@ class IProprietaryTable(IContactTable):
     """
 
 
+class IProprietaryHistoryTable(IContactTable):
+    """
+    Marker interface for a table displaying proprietaries
+    """
+
+
 class ITenantTable(IContactTable):
     """
     Marker interface for a table displaying tenants
@@ -229,5 +235,3 @@ class IInspectionReportsTable(Interface):
     """
     Marker interface for a table displaying inspection report events.
     """
-
-

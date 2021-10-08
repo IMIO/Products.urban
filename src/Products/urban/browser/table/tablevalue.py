@@ -165,6 +165,13 @@ class ValuesForProprietariesListing(ValuesForUrbanListing):
         return proprietaries
 
 
+class ValuesForProprietariesHistoryListing(ValuesForUrbanListing):
+    """  return contact values from the context """
+
+    def getItems(self):
+        return self.context.get_proprietaries_history()
+
+
 class ValuesForTenantsListing(ValuesForUrbanListing):
     """  return contact values from the context """
 

@@ -12,6 +12,7 @@ from Products.urban.browser.table.urbantable import EventsTable
 from Products.urban.browser.table.urbantable import NestedAttachmentsTable
 from Products.urban.browser.table.urbantable import ParcelsTable
 from Products.urban.browser.table.urbantable import ProprietaryTable
+from Products.urban.browser.table.urbantable import ProprietaryHistoryTable
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.interfaces import IUrbanDoc
 from Products.urban.interfaces import IUrbanEventAnnouncement
@@ -168,6 +169,12 @@ class LicenceView(BrowserView):
         if not self.context.getProprietaries():
             return ''
         contacttable = ProprietaryTable(self.context, self.request)
+        return self.renderListing(contacttable)
+
+    def renderProprietaryHistoryListing(self):
+        if not self.context.get_proprietaries_history():
+            return ''
+        contacttable = ProprietaryHistoryTable(self.context, self.request)
         return self.renderListing(contacttable)
 
     def renderParcelsListing(self):

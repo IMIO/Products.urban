@@ -904,15 +904,15 @@ default_values = {
             },
         ],
         'missingparts': [
-            'UrbanVocabularyTerm', ['NotaryLetter', 'MiscDemand', 'Division', 'Declaration', 'RoadDecree'],
+            'UrbanVocabularyTerm', ['NotaryLetter', 'CODT_NotaryLetter', 'MiscDemand', 'Division', 'Declaration', 'RoadDecree'],
         ],
 
         'roadmissingparts': [
-            'UrbanVocabularyTerm', ['NotaryLetter', 'MiscDemand', 'Division', 'Declaration'],
+            'UrbanVocabularyTerm', ['NotaryLetter', 'CODT_NotaryLetter', 'MiscDemand', 'Division', 'Declaration'],
         ],
 
         'locationmissingparts': [
-            'UrbanVocabularyTerm', ['NotaryLetter', 'MiscDemand', 'Division', 'Declaration', 'RoadDecree'],
+            'UrbanVocabularyTerm', ['NotaryLetter', 'CODT_NotaryLetter', 'MiscDemand', 'Division', 'Declaration', 'RoadDecree'],
         ],
 
         'authority': [
@@ -941,7 +941,7 @@ default_values = {
             {'id': "regularisation", 'title': u"Régularisation"},
         ],
         'specificfeatures': [
-            'SpecificFeatureTerm', ['UrbanCertificateOne', 'UrbanCertificateTwo', 'NotaryLetter'],
+            'SpecificFeatureTerm', ['UrbanCertificateOne', 'UrbanCertificateTwo', 'NotaryLetter', 'CODT_NotaryLetter'],
             {
                 'id': "schema-developpement-espace-regional",
                 'title': u"Option particulière du schéma de développement de l'espace régional",
@@ -1085,7 +1085,7 @@ default_values = {
         ],
 
         'roadspecificfeatures': [
-            'SpecificFeatureTerm', ['UrbanCertificateOne', 'UrbanCertificateTwo', 'NotaryLetter'],
+            'SpecificFeatureTerm', ['UrbanCertificateOne', 'UrbanCertificateTwo', 'NotaryLetter', 'CODT_NotaryLetter'],
             {
                 'id': "raccordable-egout",
                 'title': u"Raccordable à l'égout",
@@ -1109,7 +1109,7 @@ default_values = {
         ],
 
         'locationspecificfeatures': [
-            'SpecificFeatureTerm', ['UrbanCertificateOne', 'UrbanCertificateTwo', 'NotaryLetter'],
+            'SpecificFeatureTerm', ['UrbanCertificateOne', 'UrbanCertificateTwo', 'NotaryLetter', 'CODT_NotaryLetter'],
             {
                 'id': "schema-developpement-espace-regional",
                 'title': u"Option particulière du schéma de développement de l'espace régional",
@@ -1228,7 +1228,7 @@ default_values = {
         ],
 
         'townshipspecificfeatures': [
-            'SpecificFeatureTerm', ['UrbanCertificateOne', 'UrbanCertificateTwo', 'NotaryLetter'],
+            'SpecificFeatureTerm', ['UrbanCertificateOne', 'UrbanCertificateTwo', 'NotaryLetter', 'CODT_NotaryLetter'],
             {
                 'id': "zone-a-risque",
                 'title': u"Se trouve dans une zone à risque",
@@ -1278,7 +1278,7 @@ default_values = {
         ],
 
         'opinionstoaskifworks': [
-            'UrbanVocabularyTerm', ['UrbanCertificateOne', 'UrbanCertificateTwo', 'NotaryLetter'],
+            'UrbanVocabularyTerm', ['UrbanCertificateOne', 'UrbanCertificateTwo', 'NotaryLetter', 'CODT_NotaryLetter'],
             {'id': "ores-gaz-electricite", 'title': u"ORES - Gaz-Electricité", 'description': u"<p>Adresse</p>"},
             {'id': "ores-eclairage-public", 'title': u"ORES - Service Eclairage public", 'description': u"<p>Adresse</p>"},
             {'id': "belgacom", 'title': u"Belgacom", 'description': u"<p>Adresse</p>"},
@@ -1290,7 +1290,7 @@ default_values = {
         ],
 
         'basement': [
-            'UrbanVocabularyTerm', ['UrbanCertificateOne', 'UrbanCertificateTwo', 'NotaryLetter'],
+            'UrbanVocabularyTerm', ['UrbanCertificateOne', 'UrbanCertificateTwo', 'NotaryLetter', 'CODT_NotaryLetter'],
             {'id': "zone-carriere", 'title': u"Le bien est situé à environ 50 m d'une zone de consultation en liaison avec les carrières souterraines"},
             {'id': "zone-karstique", 'title': u"Le bien est situé à environ 50 m d'une zone de consultation en liaison avec les phénomènes karstiques"},
             {'id': "zone-gisement-et-puit", 'title': u"Le bien est situé à environ 50 m d'une zone de consultation en liaison avec les gisements et puits de mine"},
@@ -1298,7 +1298,7 @@ default_values = {
         ],
 
         'zip': [
-            'UrbanVocabularyTerm', ['UrbanCertificateOne', 'UrbanCertificateTwo', 'NotaryLetter'],
+            'UrbanVocabularyTerm', ['UrbanCertificateOne', 'UrbanCertificateTwo', 'NotaryLetter', 'CODT_NotaryLetter'],
             {'id': "type-1", 'title': u"Type 1: zone à forte pression foncière"},
             {'id': "type-2", 'title': u"Type 2: zone de requalification des noyaux d'habitat"},
             {'id': "type-3", 'title': u"Type 3: zons de développement global de quartier"},

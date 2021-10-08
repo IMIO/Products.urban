@@ -5,11 +5,12 @@ from collective.noindexing import patches
 from imio.urban.core.contents.eventconfig import IEventConfig
 
 from plone import api
-from plone.app.contenttypes.migration.migration import migrateCustomAT
 
 from Products.urban.migration.to_DX.migration_utils import migrate_date
 from Products.urban.migration.to_DX.migration_utils import migrate_to_tuple
+from Products.urban.migration.to_DX.migration_utils import migrateCustomAT
 from Products.urban.migration.to_DX.migration_utils import uid_catalog_reindex_objects
+from Products.urban.migration.utils import disable_schedule
 
 
 def migrate_PortionOut_to_DX(context):
@@ -51,15 +52,20 @@ def migrate_PortionOut_to_DX(context):
             'DX_field_name': 'outdated',
         },
     )
-    # disable catalog
+    # disable linkintegrity, catalog and schedule
     patches.apply()
+    disable_schedule()
+    portal = api.portal.get()
+    portal.portal_properties.site_properties.enable_link_integrity_checks = False
     result = migrateCustomAT(
         fields_mapping,
         src_type='PortionOut',
-        dst_type='Parcel'
+        dst_type='Parcel',
+        transaction_size=100000
     )
-    # restore catalog
+    # restore catalog and linkintegrity
     patches.unapply()
+    portal.portal_properties.site_properties.enable_link_integrity_checks = True
     return result
 
 
@@ -101,11 +107,15 @@ def migrate_ParcellingTerm_to_DX(context):
             'DX_field_name': 'changesDescription',
         },
     )
+    portal = api.portal.get()
+    portal.portal_properties.site_properties.enable_link_integrity_checks = False
     result = migrateCustomAT(
         fields_mapping,
         src_type='ParcellingTerm',
-        dst_type='Parcelling'
+        dst_type='Parcelling',
+        transaction_size=100000
     )
+    portal.portal_properties.site_properties.enable_link_integrity_checks = True
 
     # should at least recatalog them in the archetypes UID catalog
     portal = api.portal.get()
@@ -160,10 +170,13 @@ def migrate_UrbanEventType_to_DX(context):
             'field_migrator': migrate_to_tuple,
         },
     ]
+    portal = api.portal.get()
+    portal.portal_properties.site_properties.enable_link_integrity_checks = False
     result = migrateCustomAT(
         fields_mapping,
         src_type='UrbanEventType',
-        dst_type='EventConfig'
+        dst_type='EventConfig',
+        transaction_size=100000
     )
 
     fields_mapping.append(
@@ -176,7 +189,8 @@ def migrate_UrbanEventType_to_DX(context):
     result = migrateCustomAT(
         fields_mapping,
         src_type='FollowUpEventType',
-        dst_type='FollowUpEventConfig'
+        dst_type='FollowUpEventConfig',
+        transaction_size=100000
     )
 
     fields_mapping.pop()
@@ -230,9 +244,12 @@ def migrate_UrbanEventType_to_DX(context):
     result = migrateCustomAT(
         fields_mapping,
         src_type='OpinionRequestEventType',
-        dst_type='OpinionEventConfig'
+        dst_type='OpinionEventConfig',
+        transaction_size=100000
     )
 
+    # restore linkintegrity
+    portal.portal_properties.site_properties.enable_link_integrity_checks = True
     # should at least recatalog them in the archetypes UID catalog
     catalog = api.portal.get_tool('portal_catalog')
     event_configs = [b.getObject() for b in catalog(object_provides=IEventConfig.__identifier__)]
@@ -244,4 +261,7 @@ def migrate_UrbanEventType_to_DX(context):
     portal_urban = api.portal.get_tool('portal_urban')
     cache_view = portal_urban.unrestrictedTraverse('urban_vocabulary_cache')
     cache_view.update_all_cache()
+    # as its he last DX migration step -> recatalog evrything
+    catalog = api.portal.get_tool('portal_catalog')
+    catalog.clearFindAndRebuild()
     return result
