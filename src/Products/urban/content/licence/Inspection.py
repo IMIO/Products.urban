@@ -125,7 +125,7 @@ class Inspection(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
         """
         proprietary = ''
         if self.getProprietaries():
-            proprietary = self.getProprietaries()[0].Title()
+            proprietary = ', '.join([app.Title() for app in self.getProprietaries()])
         title = "{}{} - {}".format(
             self.getReference(),
             proprietary and ' - {} -'.format(proprietary) or '',
@@ -265,7 +265,6 @@ class Inspection(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
             if followup_event.getFollowUpId() == followup_id:
                 res.append(followup_event)
         return res
-
 
     security.declarePublic('getLastFollowUpEvent')
 
