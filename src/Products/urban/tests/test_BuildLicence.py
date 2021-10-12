@@ -66,25 +66,18 @@ class TestBuildLicence(unittest.TestCase):
         self.assertTrue(licence.Title().endswith('/1 - Mes Smith & Wesson -  NotaryName1 NotarySurname1'))
         notaries = self.portal.urban.notaries.objectValues()
         notaries = list(notaries)
-        # add all notaries to the licence
+        # add all notaries to the licence and add a proprietary
         licence.setNotaryContact(notaries)
-        licence.updateTitle()
-        # test if all notaries are in the title, but test the order of the notaries
-        if licence.getNotaryContact()[0].id == 'notary2':
-            self.assertTrue(licence.Title().endswith(
-                '/1 - Mes Smith & Wesson -  Andre Sanfrapper,  NotaryName1 NotarySurname1'))
-        if licence.getNotaryContact()[0].id == 'notary1':
-            self.assertTrue(licence.Title().endswith(
-                '/1 - Mes Smith & Wesson -  NotaryName1 NotarySurname1,  Andre Sanfrapper'))
         licence.invokeFactory('Proprietary', id='proprietary2', name1='Aeron', name2='Lorelei')
         licence.updateTitle()
-        # test if all proprietaries are in the title
-        if licence.getNotaryContact()[0].id == 'notary2':
-            self.assertTrue(licence.Title().endswith(
-                '/1 - Mes Smith & Wesson,  Aeron Lorelei -  Andre Sanfrapper,  NotaryName1 NotarySurname1'))
-        if licence.getNotaryContact()[0].id == 'notary1':
-            self.assertTrue(licence.Title().endswith(
-                '/1 - Mes Smith & Wesson,  Aeron Lorelei -  NotaryName1 NotarySurname1,  Andre Sanfrapper'))
+
+        titleparts = licence.Title().split(" - ")
+        notarieslist = titleparts[2].split(", ")
+        notariesset = set(notarieslist)
+        testnotariesset = set([' André Sanfrapper', ' NotaryName1 NotarySurname1'])
+        self.assertEqual(notariesset, testnotariesset)
+        testproprietaries = 'Mes Smith & Wesson,  Aeron Lorelei'
+        self.assertEqual(titleparts[1], testproprietaries)
 
     def testGetLastEventWithoutEvent(self):
         buildlicences = self.portal.urban.buildlicences
