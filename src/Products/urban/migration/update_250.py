@@ -4,7 +4,7 @@ from collective.documentgenerator.content.pod_template import IPODTemplate
 from collective.documentgenerator.content.pod_template import IConfigurablePODTemplate
 from collective.documentgenerator.content.vocabulary import AllPODTemplateWithFileVocabularyFactory
 from collective.documentgenerator.search_replace.pod_template import SearchAndReplacePODTemplates
-
+from Products.urban.interfaces import IGenericLicence
 from plone import api
 from plone.app.uuid.utils import uuidToObject
 import logging
@@ -188,4 +188,17 @@ def update_POD_expressions(context):
             replace_expr = row["replace"]
             logger.info("Replacing POD expression {} by {}".format(search_expr, replace_expr))
             replace.replace(search_expr, replace_expr, is_regex=row["is_regex"])
+    logger.info("upgrade done!")
+
+def add_all_applicants_in_title(context):
+    """
+    Adding all applicants or proprietaries or notaries in title
+    """
+    logger = logging.getLogger('urban: add all applicants in title')
+    logger.info("starting upgrade steps")
+    catalog = api.portal.get_tool('portal_catalog')
+    licence_brains = catalog(object_provides=IGenericLicence.__identifier__)
+    licences = [l.getObject() for l in licence_brains if IGenericLicence.providedBy(l.getObject())]
+    for licence in licences:
+        licence.updateTitle()
     logger.info("upgrade done!")
