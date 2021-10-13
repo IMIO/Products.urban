@@ -331,7 +331,7 @@ class AnnouncementDoneCondition(Condition):
         if announcement_objs:
             announcement_obj = announcement_objs[-1]
             announcement_event = announcement_obj.getLinkedUrbanEventInquiry()
-            if announcement_obj and api.content.get_state(announcement_event) == 'closed':
+            if announcement_event and api.content.get_state(announcement_event) == 'closed':
                 return True
         return False
 
