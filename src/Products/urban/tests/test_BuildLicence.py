@@ -37,6 +37,48 @@ class TestBuildLicence(unittest.TestCase):
         licence.invokeFactory('Applicant', 'new_applicant', name1='Quentin', name2='Tinchimiloupète')
         self.assertTrue(licence.Title().endswith('/1 - Exemple Permis Urbanisme -  Quentin Tinchimiloupète'))
 
+    def test_LicenceUpdateTitleForCodt_buildlicence(self):
+        # check that the licence updateTitle method add all applicants or proprietaries or notaries to the Licence Title
+        licence = self.buildlicence
+        self.assertTrue(licence.Title().endswith('/1 - Exemple Permis Urbanisme - Mes Smith & Wesson'))
+        # add another applicant
+        licence.invokeFactory('Applicant', 'new_applicant', name1='Chuck', name2='Norris')
+        # call updateTitle()
+        licence.updateTitle()
+        # add applicant with invokeFactory add a space before the name of the applicant => 2spaces
+        self.assertTrue(licence.Title().endswith('/1 - Exemple Permis Urbanisme - Mes Smith & Wesson,  Chuck Norris'))
+
+    def test_LicenceUpdateTitleForInspection(self):
+        # check that the licence updateTitle method add all proprietaries on inspections titles
+        inspection_expl = self.portal.urban.inspections.objectValues('Inspection')[0]
+        # for the inspection the proprietary is before inspection name
+        self.assertTrue(inspection_expl.Title().endswith('/1 - Mes Smith & Wesson - - Exemple Inspection'))
+        # add proprietary
+        inspection_expl.invokeFactory('Proprietary', 'new_proprietary', name1='Chuck', name2='Norris')
+        # call updateTitle()
+        inspection_expl.updateTitle()
+        self.assertTrue(inspection_expl.Title().endswith(
+            '/1 - Mes Smith & Wesson,  Chuck Norris - - Exemple Inspection'))
+
+    def test_LicenceUpdateTitleForNotaryLetter(self):
+        # check that the licence updateTitle method add all proprietaries and notaries on notary letters titles
+        licence = self.portal.urban.notaryletters.objectValues()[1]
+        self.assertTrue(licence.Title().endswith('/1 - Mes Smith & Wesson -  NotaryName1 NotarySurname1'))
+        notaries = self.portal.urban.notaries.objectValues()
+        notaries = list(notaries)
+        # add all notaries to the licence and add a proprietary
+        licence.setNotaryContact(notaries)
+        licence.invokeFactory('Proprietary', id='proprietary2', name1='Aeron', name2='Lorelei')
+        licence.updateTitle()
+
+        titleparts = licence.Title().split(" - ")
+        notarieslist = titleparts[2].split(", ")
+        notariesset = set(notarieslist)
+        testnotariesset = set([' André Sanfrapper', ' NotaryName1 NotarySurname1'])
+        self.assertEqual(notariesset, testnotariesset)
+        testproprietaries = 'Mes Smith & Wesson,  Aeron Lorelei'
+        self.assertEqual(titleparts[1], testproprietaries)
+
     def testGetLastEventWithoutEvent(self):
         buildlicences = self.portal.urban.buildlicences
         LICENCE_ID = 'buildlicence1'

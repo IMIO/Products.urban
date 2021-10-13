@@ -234,6 +234,7 @@ EventConfigs = {
             'specialFunctionUrl': "addInvestigationPO",
             'podTemplates': (
                 {'id': "codt_pu_annexe_25_affiche_verte.odt", 'title': "Affiche verte (Annexe 25)"},
+                {'id': "codt_pu_reclamations_reimport.ods", 'title': "Fichier réclamants pour réimport"}
             ),
             'eventType': ('Products.urban.interfaces.IAnnouncementEvent',),
             'eventPortalType': 'UrbanEventAnnouncement',
@@ -258,6 +259,7 @@ EventConfigs = {
                     ]
                 },
                 {'id': "codt_pu_annexe_26_affiche_jaune.odt", 'title': "Affiche jaune (annexe 26)"},
+                {'id': "codt_pu_reclamations_reimport.ods", 'title': "Fichier réclamants pour réimport"}
             ),
             'eventType': ('Products.urban.interfaces.IInquiryEvent',),
             'eventPortalType': 'UrbanEventInquiry',
@@ -621,6 +623,7 @@ EventConfigs = {
             'specialFunctionUrl': "addInvestigationPO",
             'podTemplates': (
                 {'id': "codt_purb_annexe_25.odt", 'title': "Annexe 25 (affiche publique)"},
+                {'id': "codt_pu_reclamations_reimport.ods", 'title': "Fichier réclamants pour réimport"}
             ),
             'eventType': ('Products.urban.interfaces.IAnnouncementEvent',),
             'eventPortalType': 'UrbanEventAnnouncement',
@@ -640,6 +643,7 @@ EventConfigs = {
                 {'id': "codt_purb_pv_cloture_enquete.odt", 'title': " Procès-verbal de clôture d'enquête publique"},
                 {'id': "codt_purb_reunion_cloture_enquete.odt", 'title': " Réunion de clôture d'enquête publique"},
                 {'id': "codt_purb_pv_observations.odt", 'title': "Procès-verbal d'observations"},
+                {'id': "codt_pu_reclamations_reimport.ods", 'title': "Fichier réclamants pour réimport"}
             ),
             'eventType': ('Products.urban.interfaces.IInquiryEvent',),
             'eventPortalType': 'UrbanEventInquiry',
@@ -764,6 +768,7 @@ EventConfigs = {
                 {'id': "codt_pp_entete_farde_annonce.odt", 'title': "Entête farde annonce"},
                 {'id': "codt_pp_affiche_annonce_de_projet_annexe_25.odt", 'title': "Affiche annonce de projet (annexe 25)"},
                 {'id': "codt_pp_envoi_affiche_annonce_suite_dossier_fd_art_d_iv_22.odt", 'title': "Envoi affiche annonce suite à un dossier FD art D IV 22"},
+                {'id': "codt_pu_reclamations_reimport.ods", 'title': "Fichier réclamants pour réimport"}
             ),
             'eventType': ('Products.urban.interfaces.IAnnouncementEvent',),
             'eventPortalType': 'UrbanEventAnnouncement',
@@ -785,6 +790,7 @@ EventConfigs = {
                 {'id': "codt_pp_proces_verbal_cloture_enquete_publique.odt", 'title': "Procès-verbal de clôture d’enquête publique"},
                 {'id': "codt_pp_accuse_reception_reclamation.odt", 'title': "Accusé de réception d’une réclamation"},
                 {'id': "codt_pp_pv_reclamation_orale.odt", 'title': "Procès-verbal des réclamations orales"},
+                {'id': "codt_pu_reclamations_reimport.ods", 'title': "Fichier réclamants pour réimport"}
             ),
             'eventType': ('Products.urban.interfaces.IInquiryEvent',),
             'eventPortalType': 'UrbanEventInquiry',
@@ -1058,6 +1064,7 @@ EventConfigs = {
                  'title': "Transmis des éléments de l'enquête à la DGO4"},
                 {'id': "pi_transmis_elements_enquete_dgo6.odt",
                  'title': "Transmis des éléments de l'enquête à la DGO6"},
+                {'id': "codt_pu_reclamations_reimport.ods", 'title': "Fichier réclamants pour réimport"}
             ),
             'eventType': ('Products.urban.interfaces.IInquiryEvent',),
             'eventPortalType': 'UrbanEventInquiry',
@@ -1752,6 +1759,7 @@ EventConfigs = {
             'podTemplates': (
                 {'id': "codt_cu2_annexe_25_affiche_verte.odt",
                  'title': "Affiche verte (annexe 25)"},
+                {'id': "codt_pu_reclamations_reimport.ods", 'title': "Fichier réclamants pour réimport"}
             ),
             'eventType': ('Products.urban.interfaces.IAnnouncementEvent',),
             'eventPortalType': 'UrbanEventAnnouncement',
@@ -1767,6 +1775,7 @@ EventConfigs = {
             'specialFunctionUrl': "addInvestigationPO",
             'podTemplates': (
                 {'id': "codt_cu2_annexe_26_affiche_jaune.odt", 'title': "Affiche jaune (annexe 26)"},
+                {'id': "codt_pu_reclamations_reimport.ods", 'title': "Fichier réclamants pour réimport"}
             ),
             'eventType': ('Products.urban.interfaces.IInquiryEvent',),
             'eventPortalType': 'UrbanEventInquiry',
@@ -1976,6 +1985,7 @@ EventConfigs = {
                 {'id': "urb-enq-frais.odt", 'title': "Frais d'enquête"},
                 {'id': "urb-enq-recommandes.odt", 'title': "Recommandés aux riverains (étiquette Poste)"},
                 {'id': "urb-enq-art341-invit.odt", 'title': "Invitation séance de réclamation (article 341)"},
+                {'id': "codt_pu_reclamations_reimport.ods", 'title': "Fichier réclamants pour réimport"}
             ),
             'eventType': ('Products.urban.interfaces.IInquiryEvent',),
             'eventPortalType': 'UrbanEventInquiry',
@@ -2595,6 +2605,7 @@ EventConfigs = {
                 {'id': "codt_punq_pv_cloture_enquete.odt", 'title': "Procès-verbal de clôture d’enquête"},
                 {'id': "codt_punq_transmis_elements_enquete_dgo3.odt", 'title': "Transmis des éléments d'enquête à la DGO3"},
                 {'id': "codt_punq_transmis_elements_enquete_dgo4.odt", 'title': "Transmis des éléments d'enquête à la DGO4"},
+                {'id': "codt_pu_reclamations_reimport.ods", 'title': "Fichier réclamants pour réimport"}
             ),
             'eventType': ('Products.urban.interfaces.IInquiryEvent',),
             'eventPortalType': 'UrbanEventInquiry',
@@ -2930,6 +2941,7 @@ EventConfigs = {
                 {'id': "urb-enq-frais.odt", 'title': "Frais d'enquête"},
                 {'id': "urb-enq-recommandes.odt", 'title': "Recommandés aux riverains (étiquette Poste)"},
                 {'id': "urb-enq-art341-invit.odt", 'title': "Invitation séance de réclamation (article 341)"},
+                {'id': "codt_pu_reclamations_reimport.ods", 'title': "Fichier réclamants pour réimport"}
             ),
             'eventType': ('Products.urban.interfaces.IInquiryEvent',),
             'eventPortalType': 'UrbanEventInquiry',
@@ -3615,6 +3627,7 @@ EventConfigs = {
                 {'id': "urb-enq-frais.odt", 'title': "Frais d'enquête"},
                 {'id': "urb-enq-recommandes.odt", 'title': "Recommandés aux riverains (étiquette Poste)"},
                 {'id': "urb-enq-art341-invit.odt", 'title': "Invitation séance de réclamation (article 341)"},
+                {'id': "codt_pu_reclamations_reimport.ods", 'title': "Fichier réclamants pour réimport"}
             ),
             'eventType': ('Products.urban.interfaces.IInquiryEvent',),
             'eventPortalType': 'UrbanEventInquiry',
@@ -4310,6 +4323,7 @@ EventConfigs = {
                 {'id': "urb-enq-frais.odt", 'title': "Frais d'enquête"},
                 {'id': "urb-enq-recommandes.odt", 'title': "Recommandés aux riverains (étiquette Poste)"},
                 {'id': "urb-enq-art341-invit.odt", 'title': "Invitation séance de réclamation (article 341)"},
+                {'id': "codt_pu_reclamations_reimport.ods", 'title': "Fichier réclamants pour réimport"}
             ),
             'eventType': ('Products.urban.interfaces.IInquiryEvent',),
             'eventPortalType': 'UrbanEventInquiry',
@@ -5010,6 +5024,7 @@ EventConfigs = {
                 {'id': "cu2-enq-frais.odt", 'title': "Frais d'enquête"},
                 {'id': "cu2-enq-recommandes.odt", 'title': "Recommandés aux riverains (étiquette Poste)"},
                 {'id': "cu2-enq-art341-invit.odt", 'title': "Invitation séance de réclamation (article 341)"},
+                {'id': "codt_pu_reclamations_reimport.ods", 'title': "Fichier réclamants pour réimport"}
             ),
             'eventType': ('Products.urban.interfaces.IInquiryEvent',),
             'eventPortalType': 'UrbanEventInquiry',
@@ -5532,6 +5547,7 @@ EventConfigs = {
                 {'id': "env1-enq-transmis-FT.odt", 'title': "Transmis de l'avis d'enquête au FT"},
                 {'id': "env1-enq-transmis-college.odt", 'title': "Transmis de l'avis d'enquête aux propriétaires"},
                 {'id': "env1-enq-ordre-mission.odt", 'title': "Ordre de mission"},
+                {'id': "codt_pu_reclamations_reimport.ods", 'title': "Fichier réclamants pour réimport"}
             ),
             'eventType': ('Products.urban.interfaces.IInquiryEvent',),
             'eventPortalType': 'UrbanEventInquiry',
@@ -6062,6 +6078,7 @@ EventConfigs = {
                 {'id': "pe_pv_cloture_enquete.odt", 'title': "Procès-verbal de clôture d'enquête publique"},
                 {'id': "pe_transmis_avis_dgo3.odt", 'title': "Transmis de l'avis d'enquête à la DGO3"},
                 {'id': "pe_transmis_elements_dgo3.odt", 'title': "Transmis des éléments de l'enquête à la DGO3"},
+                {'id': "codt_pu_reclamations_reimport.ods", 'title': "Fichier réclamants pour réimport"}
             ),
             'eventType': ('Products.urban.interfaces.IInquiryEvent',),
             'eventPortalType': 'UrbanEventInquiry',
@@ -7173,6 +7190,7 @@ EventConfigs = {
                 {'id': "lot-enq-frais.odt", 'title': "Frais d'enquête"},
                 {'id': "lot-enq-recommandes.odt", 'title': "Recommandés aux riverains (étiquette Poste)"},
                 {'id': "lot-enq-art341-invit.odt", 'title': "Invitation séance de réclamation (article 341)"},
+                {'id': "codt_pu_reclamations_reimport.ods", 'title': "Fichier réclamants pour réimport"}
             ),
             'eventType': ('Products.urban.interfaces.IInquiryEvent',),
             'eventPortalType': 'UrbanEventInquiry',
@@ -7639,6 +7657,7 @@ EventConfigs = {
                     ]
                 },
                 {'id': "codt_pu_annexe_26_affiche_jaune.odt", 'title': "Affiche jaune (annexe 26)"},
+                {'id': "codt_pu_reclamations_reimport.ods", 'title': "Fichier réclamants pour réimport"},
                 {
                     'id': "codt_pu_etiquettes_adresses_proprietaires.odt",
                     'title': "Etiquettes adresses propriétaires",
@@ -7676,6 +7695,7 @@ EventConfigs = {
                     ]
                 },
                 {'id': "codt_pu_annexe_26_affiche_jaune.odt", 'title': "Affiche jaune (annexe 26)"},
+                {'id': "codt_pu_reclamations_reimport.ods", 'title': "Fichier réclamants pour réimport"}
             ),
             'eventType': ('Products.urban.interfaces.IInquiryEvent',),
             'eventPortalType': 'UrbanEventInquiry',
