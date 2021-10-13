@@ -147,6 +147,8 @@ Changes
 
 - Add all applicants to licence title. [URB-2298]
 
+- Add mailing loop for geometricians. [URB-2327]
+
 2.4 (2019-03-25)
 ----------------
 - add tax field in GenericLicence
