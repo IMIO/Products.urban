@@ -46,8 +46,6 @@ def clear_communesplone_iconifiedactions_layer(context):
         move_to_collective_iconifieddocumentactions(context)
         logger.info("cleared communesplone.iconifieddocumentactions layer")
         logger.info("rebuilding catalog...")
-        catalog = api.portal.get_tool('portal_catalog')
-        catalog.clearFindAndRebuild()
     logger.info("starting step done")
 
 
@@ -532,7 +530,6 @@ def migrate(context):
     setup_tool = api.portal.get_tool('portal_setup')
     setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'workflow')
     fix_missing_streets(context)
-    clear_communesplone_iconifiedactions_layer(context)
     migrate_urbaneventtypes_folder(context)
     # reinstall pm.wsclient registry to add new registry record.
     setup_tool.runImportStepFromProfile('profile-imio.pm.wsclient:default', 'content_type_registry')
@@ -558,6 +555,8 @@ def migrate(context):
     migrate_announcement_schedule_config(context)
     migrate_styles_pod_templates(context)
     migrate_rich_texts(context)
+    # Clearing iconified actions MUST be juste before the catalog reindex!!!
+    clear_communesplone_iconifiedactions_layer(context)
     catalog = api.portal.get_tool('portal_catalog')
     catalog.clearFindAndRebuild()
     logger.info("catalog rebuilt!")
