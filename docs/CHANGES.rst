@@ -145,6 +145,8 @@ Changes
 - Add logo urban to the tab, overriding the favicon.ico viewlet. [URB-2209]
   [mdhyne]
 
+- Add all applicants to licence title. [URB-2298]
+
 2.4 (2019-03-25)
 ----------------
 - add tax field in GenericLicence
