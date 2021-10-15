@@ -146,6 +146,10 @@ Changes
   [mdhyne]
 
 - Add all applicants to licence title. [URB-2298]
+  [mdhyne]
+
+- Add mailing loop for geometricians. [URB-2327]
+  [mdhyne]
 
 2.4 (2019-03-25)
 ----------------
