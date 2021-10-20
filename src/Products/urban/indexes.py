@@ -210,7 +210,7 @@ def genericlicence_decisiondate(licence):
         except WebFault:
             catalog = api.portal.get_tool('portal_catalog')
             brain = catalog(UID=licence.UID())
-            if brain.getDecisionDate:
+            if brain and brain[0].getDecisionDate:
                 return brain.getDecisionDate
         if linked_pm_items:
             meeting_date = linked_pm_items[0]['meeting_date']
