@@ -220,19 +220,19 @@
         profile="Products.urban:default" />
 
     <gs:upgradeStep
-        title="migrate POD expressions"
+        title="add all applicants in title"
         description="urban upgrade step"
         source="1013"
         destination="1014"
-        handler=".update_250.update_POD_expressions"
+        handler=".update_250.add_all_applicants_in_title"
         profile="Products.urban:default" />
 
     <gs:upgradeStep
-        title="add all applicants in title"
+        title="migrate POD expressions"
         description="urban upgrade step"
         source="1014"
         destination="1100"
-        handler=".update_250.add_all_applicants_in_title"
+        handler=".update_250.update_POD_expressions"
         profile="Products.urban:default" />
 
 </configure>
