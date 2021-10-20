@@ -415,7 +415,7 @@ class CadastreSession(SQLSession):
                 parcel.add_location(
                     record.street_uid,
                     record.street_name or '',
-                    record.number and record.number.replace(' ', '') or ''
+                    record.number and record.number.replace(' ', '').encode('utf-8') or ''
                 )
             if record.owner_id:
                 parcel.add_owner(
