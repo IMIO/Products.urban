@@ -289,7 +289,13 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
             )
         else:
             reader = []
-        claimant_args = [row for row in reader if row['name1'] or row['name2'] or row['society']][1:]
+        try:
+            claimant_args = [row for row in reader if row['name2'] or row['name2'] or row['society']][1:]
+        except csv.Error, error:
+            # remove invalid files
+            del interfaces.IAnnotations(self.context)['urban.claimants_to_import']
+            return
+
         for claimant_arg in claimant_args:
             claimant_arg.pop(None, None)
             # default values
