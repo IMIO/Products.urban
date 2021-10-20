@@ -151,6 +151,9 @@ Changes
 - Add mailing loop for geometricians. [URB-2327]
   [mdhyne]
 
+- Add parcel address to parcel's identity card.[SUP-20438]
+  [mdhyne]
+
 2.4 (2019-03-25)
 ----------------
 - add tax field in GenericLicence
