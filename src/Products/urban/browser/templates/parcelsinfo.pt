@@ -10,6 +10,15 @@
         <dd class="collapsibleContent">
         <table border=0>
             <tr>
+                <td><b><u >address:</u></b> </td>
+            </tr>
+            <tr tal:repeat="location python: parcel.locations.values()">
+                <td>
+                    <span tal:content="python:location['street_name']"/><br>
+                    <span tal:content="python:location['number']"/><br>
+                </td>
+            </tr>
+            <tr>
                 <td><b><u i18n:translate="urban_label_owner">owner:</u></b> </td>
             </tr>
             <tr tal:repeat="owner python: parcel.owners.values()">
