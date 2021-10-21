@@ -105,10 +105,12 @@ def migrate_eventconfigs_description_field(context):
         all_eventconfigs.extend(licenceconf.getEventConfigs())
     for eventc in all_eventconfigs:
         description = eventc.description
+        if type(description) is unicode:
+            description = description.encode('utf-8')
         if isinstance(description, basestring):
             eventc.description = RichTextValue(description)
-            logger.info("migrated : {} ".format(eventc))
             eventc.reindexObject()
+            logger.info("migrated : {} ".format(eventc))
     logger.info("upgrade done!")
 
 
