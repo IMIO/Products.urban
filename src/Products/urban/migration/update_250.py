@@ -4,9 +4,12 @@ from collective.documentgenerator.content.pod_template import IPODTemplate
 from collective.documentgenerator.content.pod_template import IConfigurablePODTemplate
 from collective.documentgenerator.content.vocabulary import AllPODTemplateWithFileVocabularyFactory
 from collective.documentgenerator.search_replace.pod_template import SearchAndReplacePODTemplates
-from Products.urban.interfaces import IGenericLicence
+
 from plone import api
+from plone.app.textfield import RichTextValue
 from plone.app.uuid.utils import uuidToObject
+
+from Products.urban.interfaces import IGenericLicence
 import logging
 
 logger = logging.getLogger('urban: migrations')
@@ -85,6 +88,27 @@ def fix_type_eventtype_in_config(context):
         if isinstance(eventtype, basestring):
             eventc.eventType = [eventtype]
             logger.info("modification on : {} ").format(eventc)
+    logger.info("upgrade done!")
+
+
+def migrate_eventconfigs_description_field(context):
+    """
+    Description field should store RichTextValue objects.
+    """
+    logger = logging.getLogger('urban: migrate eventconfigs description field')
+    logger.info("starting upgrade steps")
+    config = api.portal.get_tool('portal_urban')
+    setup_tool = api.portal.get_tool('portal_urban')
+    setup_tool.runImportStepFromProfile('profile-imio.urban.core:default', 'typeinfo')
+    all_eventconfigs = []
+    for licenceconf in config.get_all_licence_configs():
+        all_eventconfigs.extend(licenceconf.getEventConfigs())
+    for eventc in all_eventconfigs:
+        description = eventc.description
+        if isinstance(description, basestring):
+            eventc.description = RichTextValue(description)
+            logger.info("migrated : {} ".format(eventc))
+            eventc.reindexObject()
     logger.info("upgrade done!")
 
 

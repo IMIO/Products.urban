@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from plone.app.textfield import RichTextValue
+
 from Products.urban.config import DASHBOARD_TEMPLATES
 from Products.urban.config import GLOBAL_TEMPLATES
 
@@ -94,7 +96,7 @@ EventConfigs = {
             'id': 'sncb',
             'title': "Demande d'avis (SNCB)",
             'abbreviation': "SNCB",
-            'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
+            'description': RichTextValue('<p>1, Rue xxx<br />xxxx Commune</p>'),
             'activatedFields': ('transmitDate', 'receiptDate', 'receivedDocumentReference', 'adviceAgreementLevel', 'externalDecision',),
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('sncb')",
@@ -109,7 +111,7 @@ EventConfigs = {
             'id': 'belgacom',
             'title': "Demande d'avis (Belgacom)",
             'abbreviation': "Belgacom",
-            'description': '<p>60, Rue Marie Henriette<br />5000 Namur</p>',
+            'description': RichTextValue('<p>60, Rue Marie Henriette<br />5000 Namur</p>'),
             'activatedFields': ('transmitDate', 'receiptDate', 'receivedDocumentReference', 'adviceAgreementLevel', 'externalDecision',),
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('belgacom')",
@@ -185,7 +187,7 @@ EventConfigs = {
             'id': 'sncb',
             'title': "Demande d'avis (SNCB)",
             'abbreviation': "SNCB",
-            'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
+            'description': RichTextValue('<p>1, Rue xxx<br />xxxx Commune</p>'),
             'activatedFields': ('transmitDate', 'receiptDate', 'receivedDocumentReference', 'adviceAgreementLevel', 'externalDecision',),
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('sncb')",
@@ -200,7 +202,7 @@ EventConfigs = {
             'id': 'belgacom',
             'title': "Demande d'avis (Belgacom)",
             'abbreviation': "Belgacom",
-            'description': '<p>60, Rue Marie Henriette<br />5000 Namur</p>',
+            'description': RichTextValue('<p>60, Rue Marie Henriette<br />5000 Namur</p>'),
             'activatedFields': ('transmitDate', 'receiptDate', 'receivedDocumentReference', 'adviceAgreementLevel', 'externalDecision',),
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('belgacom')",
@@ -229,7 +231,7 @@ EventConfigs = {
             'id': 'sncb',
             'title': "Demande d'avis (SNCB)",
             'abbreviation': "SNCB",
-            'description': '<p>1, Rue xxx<br />xxxx Commune</p>',
+            'description': RichTextValue('<p>1, Rue xxx<br />xxxx Commune</p>'),
             'activatedFields': ('transmitDate', 'receiptDate', 'receivedDocumentReference', 'adviceAgreementLevel', 'externalDecision',),
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('sncb')",
@@ -244,7 +246,7 @@ EventConfigs = {
             'id': 'belgacom',
             'title': "Demande d'avis (Belgacom)",
             'abbreviation': "Belgacom",
-            'description': '<p>60, Rue Marie Henriette<br />5000 Namur</p>',
+            'description': RichTextValue('<p>60, Rue Marie Henriette<br />5000 Namur</p>'),
             'activatedFields': ('transmitDate', 'receiptDate', 'receivedDocumentReference', 'adviceAgreementLevel', 'externalDecision',),
             'deadLineDelay': 15,
             'TALCondition': "python: here.mayAddOpinionRequestEvent('belgacom')",
