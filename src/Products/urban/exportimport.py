@@ -6,6 +6,7 @@ from Products.urban.scripts.odtsearch import SearchPODTemplates
 from Products.urban.utils import moveElementAfter
 from Products.urban.utils import getMd5Signature
 
+from plone.app.textfield import RichTextValue
 from plone.namedfile.file import NamedBlobFile
 from plone import api
 
@@ -276,6 +277,8 @@ def addEventConfigs(context):
                                 continue
                 newUetId = uetFolder.invokeFactory(portal_type, **uet)
                 newUet = getattr(uetFolder, newUetId)
+                if newUet.description == '':
+                    newUet.description = RichTextValue('')
                 if last_urbaneventype_id:
                     moveElementAfter(newUet, uetFolder, 'id', last_urbaneventype_id)
                 else:

@@ -228,9 +228,17 @@
         profile="Products.urban:default" />
 
     <gs:upgradeStep
-        title="migrate POD expressions"
+        title="migrate event configs Description field"
         description="urban upgrade step"
         source="1014"
+        destination="1015"
+        handler=".update_250.migrate_eventconfigs_description_field"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="migrate POD expressions"
+        description="urban upgrade step"
+        source="1015"
         destination="1100"
         handler=".update_250.update_POD_expressions"
         profile="Products.urban:default" />
