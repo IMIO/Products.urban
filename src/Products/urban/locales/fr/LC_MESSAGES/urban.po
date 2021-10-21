@@ -4407,6 +4407,11 @@ msgstr "Outline color"
 msgid "urban_label_owner"
 msgstr "Propriétaire"
 
+# parcelsinfo.pt
+#. Default: "Adresse"
+msgid "urban_label_address"
+msgstr "Adresse"
+
 #. Default: "Parcellings"
 #: ../content/licence/GenericLicence.py:980
 msgid "urban_label_parcellings"
