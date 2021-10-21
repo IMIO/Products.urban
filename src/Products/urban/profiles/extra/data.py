@@ -467,6 +467,30 @@ EventConfigs = {
             'abbreviation': 'Air Liquide Industries Belgium S.A.',
             'podTemplates': (),
         },
+        {
+            'id': "debut-des-travaux-codt",
+            'title': "Début des travaux",
+            'deadLineDelay': 15,
+            'activatedFields': (),
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'eventType': ('Products.urban.interfaces.IWorkBeginningEvent',),
+            'podTemplates': (
+                {'id': "codt_pp_debut_fin_travaux.odt", 'title': "Début / fin des travaux"},
+            ),
+        },
+        {
+            'id': "fin-des-travaux-codt",
+            'title': "Fin des travaux",
+            'deadLineDelay': 15,
+            'activatedFields': (),
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+                {'id': "codt_pp_debut_fin_travaux.odt", 'title': "Début / fin des travaux"},
+                ),
+            'eventType': ('Products.urban.interfaces.IWorkEndEvent',),
+        },
 
 
     ),
