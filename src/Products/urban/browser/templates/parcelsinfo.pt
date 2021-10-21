@@ -8,9 +8,9 @@
       <dl class="collapsible expandedOnLoad" tal:condition="parcel">
         <dt class="collapsibleHeader" tal:content="python:parcel.display()">name</dt>
         <dd class="collapsibleContent">
-        <table border=0>
+        <table i18n:domain="urban" border=0>
             <tr>
-                <td><b><u >address:</u></b> </td>
+                <td><b><u i18n:translate="urban_label_address">address:</u></b> </td>
             </tr>
             <tr tal:repeat="location python: parcel.locations.values()">
                 <td>
