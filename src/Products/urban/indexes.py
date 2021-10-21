@@ -198,6 +198,7 @@ def genericlicence_representative(licence):
 @indexer(interfaces.IGenericLicence)
 def genericlicence_decisiondate(licence):
     decision_event = licence.getLastTheLicence()
+    linked_pm_items = None
     if decision_event:
         try:
             linked_pm_items = get_ws_meetingitem_infos(decision_event)
