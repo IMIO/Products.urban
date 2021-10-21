@@ -98,7 +98,7 @@ def migrate_eventconfigs_description_field(context):
     logger = logging.getLogger('urban: migrate eventconfigs description field')
     logger.info("starting upgrade steps")
     config = api.portal.get_tool('portal_urban')
-    setup_tool = api.portal.get_tool('portal_urban')
+    setup_tool = api.portal.get_tool('portal_setup')
     setup_tool.runImportStepFromProfile('profile-imio.urban.core:default', 'typeinfo')
     all_eventconfigs = []
     for licenceconf in config.get_all_licence_configs():
