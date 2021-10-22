@@ -470,8 +470,6 @@ EventConfigs = {
         {
             'id': "debut-des-travaux-codt",
             'title': "Début des travaux",
-            'deadLineDelay': 15,
-            'activatedFields': (),
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'eventType': ('Products.urban.interfaces.IWorkBeginningEvent',),
@@ -482,8 +480,6 @@ EventConfigs = {
         {
             'id': "fin-des-travaux-codt",
             'title': "Fin des travaux",
-            'deadLineDelay': 15,
-            'activatedFields': (),
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
