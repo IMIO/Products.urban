@@ -231,7 +231,7 @@
         title="migrate POD expressions"
         description="urban upgrade step"
         source="1014"
-        destination="1015
+        destination="1015"
         handler=".update_250.update_POD_expressions"
         profile="Products.urban:default" />
 
