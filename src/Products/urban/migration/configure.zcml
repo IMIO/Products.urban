@@ -6,4 +6,11 @@
 
   <include file="upgrades.zcml" />
   <include package=".to_DX" />
+
+  <browser:page
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      permission="cmf.ManagePortal"
+      class=".fix_csv_replicata.CleanCSVReplicata"
+      name="clean-csvreplicata"
+  />
 </configure>
