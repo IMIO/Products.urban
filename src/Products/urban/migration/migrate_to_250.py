@@ -461,6 +461,22 @@ def migrate_announcement_schedule_config(context):
     logger.info("migration step done!")
 
 
+def migrate_add_tax_other_option(context):
+    """
+    Add 'other' tax vocabulary value for all licence type config
+    Used for show taxDetails field in all licence edition form.
+    """
+    logger = logging.getLogger('urban: migrate_add_tax_other_option')
+    logger.info("starting migration step")
+    portal_urban = api.portal.get_tool('portal_urban')
+    licence_configs = portal_urban.objectValues('LicenceConfig')
+    for licence_config in licence_configs:
+        if "other" not in licence_config.tax:
+            licence_config.tax.invokeFactory('UrbanVocabularyTerm', id='other', title="Autre")
+
+    logger.info("migration step done!")
+
+
 def migrate_styles_pod_templates(context):
     """
     """
@@ -553,6 +569,7 @@ def migrate(context):
     migrate_remove_prov_in_folderroadtypes(context)
     migrate_disable_natura2000_folderzone(context)
     migrate_announcement_schedule_config(context)
+    migrate_add_tax_other_option(context)
     migrate_styles_pod_templates(context)
     migrate_rich_texts(context)
     # Clearing iconified actions MUST be juste before the catalog reindex!!!
