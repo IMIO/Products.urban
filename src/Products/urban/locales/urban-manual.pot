@@ -872,6 +872,9 @@ msgstr ""
 msgid "locationmissingparts_folder_title"
 msgstr ""
 
+msgid "tax_folder_title"
+msgstr ""
+
 msgid "locationspecificfeatures_folder_title"
 msgstr ""
 
@@ -2400,7 +2403,6 @@ msgstr ""
 
 msgid "urban_label_taxDetails"
 msgstr ""
-
 
 #. Default: "Templatefooter"
 #: UrbanTool.py
