@@ -1524,6 +1524,7 @@ default_values = {
             'UrbanVocabularyTerm', URBAN_TYPES,
             {'id': "150", 'title': u"150"},
             {'id': "180", 'title': u"180"},
+            {'id': "other", 'title': u"Autres"},
         ],
 
         'offense_articles': [
