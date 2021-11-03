@@ -4,7 +4,7 @@
                        dummy python:request.set(border, 1);
                        putils context/plone_utils;">
 
-      <tal:fieldsets repeat="fieldset python: ['default', 'urban_advices']">
+      <tal:fieldsets repeat="fieldset python: ['urban_inquiry', 'urban_advices']">
         <fieldset class="urbanEditWithTabbing" tal:define="fieldsetid python:putils.normalizeString(fieldset)"
                 tal:attributes="id string:fieldset-${fieldsetid}">
           <legend id="#"
