@@ -3,6 +3,7 @@
 from datetime import date
 from datetime import datetime
 from plone import api
+from plone.app import textfield
 from plone.app.contenttypes.migration.migration import makeCustomATMigrator
 from Products.CMFCore.utils import getToolByName
 from Products.contentmigration.walker import CustomQueryWalker
