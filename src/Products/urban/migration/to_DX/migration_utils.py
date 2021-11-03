@@ -34,6 +34,14 @@ def migrate_to_tuple(src_obj, dst_obj, src_fieldname, dst_fieldname):
     setattr(dst_obj, dst_fieldname, new_value)
 
 
+def migrate_to_richtext(src_obj, dst_obj, src_fieldname, dst_fieldname):
+    old_value = src_obj.getField(src_fieldname).getRaw(src_obj)
+    new_value = old_value
+    if type(old_value) in [str, unicode]:
+        new_value = textfield.RichTextValue(old_value)
+    setattr(dst_obj, dst_fieldname, new_value)
+
+
 def clean_obsolete_portal_type(portal_type_to_remove=None, report='print'):
 
     if not portal_type_to_remove:

@@ -7,6 +7,7 @@ from imio.urban.core.contents.eventconfig import IEventConfig
 from plone import api
 
 from Products.urban.migration.to_DX.migration_utils import migrate_date
+from Products.urban.migration.to_DX.migration_utils import migrate_to_richtext
 from Products.urban.migration.to_DX.migration_utils import migrate_to_tuple
 from Products.urban.migration.to_DX.migration_utils import migrateCustomAT
 from Products.urban.migration.to_DX.migration_utils import uid_catalog_reindex_objects
@@ -129,6 +130,11 @@ def migrate_UrbanEventType_to_DX(context):
         {
             'AT_field_name': 'title',
             'DX_field_name': 'title',
+        },
+        {
+            'AT_field_name': 'description',
+            'DX_field_name': 'description',
+            'field_migrator': migrate_to_richtext,
         },
         {
             'AT_field_name': 'TALCondition',
