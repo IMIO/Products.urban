@@ -157,6 +157,9 @@ Changes
 - Adapt ComputeInquiryDelay for EnvClassOne licences and Announcements events.[SUP20443]
   [mdhyne]
 
+- Include parcels owners partner in cadastral queries.[SUP-20092]
+  [sdelcourt]
+
 2.4 (2019-03-25)
 ----------------
 - add tax field in GenericLicence
