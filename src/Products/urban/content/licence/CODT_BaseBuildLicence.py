@@ -43,20 +43,18 @@ slave_fields_procedurechoicemodifiedbp = (
     {
         'name': 'delayAfterModifiedBlueprints',
         'action': 'value',
-        'vocab_method': 'getProcedureDelays',
-#        'control_param': 'values',
+        'vocab_method': 'getProcedureDelaysModifiedBlueprints',
+        'control_param': 'values',
     },
     {
         'name': 'requirementFromFDModifiedBp',
         'action': 'show',
         'toggle_method': 'showRequirementFromFD',
-#        'control_param': 'values'
     },
     {
         'name': 'exemptFDArticleModifiedBp',
         'action': 'show',
         'toggle_method': 'showExemptFDArticle',
-#        'control_param': 'values',
     },
 )
 
@@ -73,8 +71,8 @@ slave_fields_prorogationmodifiedbp = (
     {
         'name': 'delayAfterModifiedBlueprints',
         'action': 'value',
-        'vocab_method': 'getProrogationDelays',
-#        'control_param': 'values',
+        'vocab_method': 'getProrogationDelaysModifiedBlueprints',
+        'control_param': 'values',
     },
 )
 
@@ -521,7 +519,7 @@ class CODT_BaseBuildLicence(BaseFolder, CODT_Inquiry,  BaseBuildLicence, Browser
         )
         return DisplayList(vocab)
 
-    def getProcedureDelays(self, *values):
+    def _getProcedureDelays(self, values):
         selection = [v['val'] for v in values if v['selected']]
         unknown = 'ukn' in selection
         opinions = 'external_opinions' in selection
@@ -535,18 +533,23 @@ class CODT_BaseBuildLicence(BaseFolder, CODT_Inquiry,  BaseBuildLicence, Browser
             delay = 115
         elif not opinions and not inquiry and not FD:
             delay = 30
+        return delay
 
-        if self.prorogation:
+    def getProcedureDelays(self, *values):
+        delay = self._getProcedureDelays(values)
+        if self.getProrogation():
             delay += 30
 
         return '{}j'.format(str(delay))
 
-    def getProrogationDelays(self, *values):
-        procedure_choice = [{'val': v, 'selected': True} for v in self.getProcedureChoice()]
-        base_delay = self.getProcedureDelays(*procedure_choice)
-        if self.prorogation:
-            base_delay = '{}j'.format(str(int(base_delay[:-1]) - 30))
+    def getProcedureDelaysModifiedBlueprints(self, *values):
+        delay = self._getProcedureDelays(values)
+        if self.getProrogationModifiedBp():
+            delay += 30
 
+        return '{}j'.format(str(delay))
+
+    def _getProrogationDelays(self, base_delay, values):
         if False in values:
             return base_delay
 
@@ -555,6 +558,22 @@ class CODT_BaseBuildLicence(BaseFolder, CODT_Inquiry,  BaseBuildLicence, Browser
             prorogated_delay = '{}j'.format(str(int(base_delay[:-1]) + 30))
 
         return prorogated_delay
+
+    def getProrogationDelays(self, *values):
+        procedure_choice = [{'val': v, 'selected': True} for v in self.getProcedureChoice()]
+        base_delay = self.getProcedureDelays(*procedure_choice)
+        if self.prorogation:
+            base_delay = '{}j'.format(str(int(base_delay[:-1]) - 30))
+
+        return self._getProrogationDelays(base_delay, values)
+
+    def getProrogationDelaysModifiedBlueprints(self, *values):
+        procedure_choice = [{'val': v, 'selected': True} for v in self.getProcedureChoiceModifiedBlueprints()]
+        base_delay = self.getProcedureDelaysModifiedBlueprints(*procedure_choice)
+        if self.getProrogationModifiedBp():
+            base_delay = '{}j'.format(str(int(base_delay[:-1]) - 30))
+
+        return self._getProrogationDelays(base_delay, values)
 
     security.declarePublic('listRequirementsFromFD')
 
