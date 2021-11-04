@@ -80,7 +80,11 @@ class CadastreService(SQLService):
                     'owner_officialid',
                     'owner_name', 'owner_firstname',
                     'owner_country', 'owner_zipcode', 'owner_municipality_fr',
-                    'owner_street_fr', 'owner_number', 'owner_boxnumber'
+                    'owner_street_fr', 'owner_number', 'owner_boxnumber',
+                    'partner_officialid',
+                    'partner_name', 'partner_firstname',
+                    'partner_country', 'partner_zipcode', 'partner_municipality_fr',
+                    'partner_street_fr', 'partner_number', 'partner_boxnumber'
                 ]
             )
 
@@ -129,6 +133,8 @@ class CadastreSession(SQLSession):
                 or_(
                     parcel_owners.owner_name.ilike('%{}%'.format(parcel_owner)),
                     parcel_owners.owner_firstname.ilike('%{}%'.format(parcel_owner)),
+                    parcel_owners.partner_name.ilike('%{}%'.format(parcel_owner)),
+                    parcel_owners.partner_firstname.ilike('%{}%'.format(parcel_owner)),
                 )
             )
         if location is not IGNORE:
@@ -358,6 +364,15 @@ class CadastreSession(SQLSession):
             owners_imp.owner_street_fr.label('owner_street'),
             owners_imp.owner_number,
             owners_imp.owner_boxnumber,
+            owners_imp.partner_officialid.label('partner_id'),
+            owners_imp.partner_name,
+            owners_imp.partner_firstname,
+            owners_imp.partner_country,
+            owners_imp.partner_zipcode,
+            owners_imp.partner_municipality_fr.label('partner_city'),
+            owners_imp.partner_street_fr.label('partner_street'),
+            owners_imp.partner_number,
+            owners_imp.partner_boxnumber,
             natures.nature_fr,
         )
         # table joins
@@ -394,6 +409,15 @@ class CadastreSession(SQLSession):
             owners_imp.owner_street_fr.label('owner_street'),
             owners_imp.owner_number,
             owners_imp.owner_boxnumber,
+            owners_imp.partner_officialid.label('partner_id'),
+            owners_imp.partner_name,
+            owners_imp.partner_firstname,
+            owners_imp.partner_country,
+            owners_imp.partner_zipcode,
+            owners_imp.partner_municipality_fr.label('partner_city'),
+            owners_imp.partner_street_fr.label('partner_street'),
+            owners_imp.partner_number,
+            owners_imp.partner_boxnumber,
         )
         # table joins
         query = query.filter(divisions.da == parcels.divcad)
@@ -415,7 +439,7 @@ class CadastreSession(SQLSession):
                 parcel.add_location(
                     record.street_uid,
                     record.street_name or '',
-                    record.number and record.number.replace(' ', '') or ''
+                    record.number and record.number.replace(' ', '').encode('utf-8') or ''
                 )
             if record.owner_id:
                 parcel.add_owner(
@@ -428,6 +452,18 @@ class CadastreSession(SQLSession):
                     record.owner_street or '',
                     record.owner_number or '',
                     record.owner_boxnumber or '',
+                )
+            if record.partner_id:
+                parcel.add_owner(
+                    record.partner_id,
+                    record.partner_name or '',
+                    record.partner_firstname or '',
+                    record.partner_country or '',
+                    record.partner_zipcode or '',
+                    record.partner_city or '',
+                    record.partner_street or '',
+                    record.partner_number or '',
+                    record.partner_boxnumber or '',
                 )
 
         return parcels.values()
