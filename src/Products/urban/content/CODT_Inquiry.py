@@ -102,6 +102,7 @@ schema = Schema((
             label=_('urban_label_inquiry_type', default='Inquiry_type'),
         ),
         vocabulary='list_inquiry_types',
+        schemata='urban_inquiry'
     ),
     LinesField(
         name='divergence',
@@ -112,6 +113,7 @@ schema = Schema((
         multiValued=1,
         vocabulary=UrbanVocabulary('divergences'),
         default_method='getDefaultValue',
+        schemata='urban_inquiry'
     ),
     TextField(
         name='divergenceDetails',
@@ -122,6 +124,7 @@ schema = Schema((
         default_output_type='text/plain',
         default_content_type='text/plain',
         default_method='getDefaultText',
+        schemata='urban_inquiry'
     ),
     LinesField(
         name='announcementArticles',
@@ -132,6 +135,7 @@ schema = Schema((
         multiValued=True,
         vocabulary=UrbanVocabulary('announcementarticles'),
         default_method='getDefaultValue',
+        schemata='urban_inquiry'
     ),
     TextField(
         name='announcementArticlesText',
@@ -142,6 +146,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         default_output_type='text/html',
+        schemata='urban_inquiry'
     ),
 ),
 )
