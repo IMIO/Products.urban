@@ -52,6 +52,7 @@ schema = Schema((
         multiValued=1,
         vocabulary=UrbanVocabulary('derogations'),
         default_method='getDefaultValue',
+        schemata='urban_inquiry'
     ),
     TextField(
         name='derogationDetails',
@@ -62,6 +63,7 @@ schema = Schema((
         default_output_type='text/plain',
         default_content_type='text/plain',
         default_method='getDefaultText',
+        schemata='urban_inquiry'
     ),
     LinesField(
         name='investigationArticles',
@@ -72,6 +74,7 @@ schema = Schema((
         multiValued=True,
         vocabulary=UrbanVocabulary('investigationarticles'),
         default_method='getDefaultValue',
+        schemata='urban_inquiry'
     ),
     TextField(
         name='investigationArticlesText',
@@ -82,6 +85,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         default_output_type='text/html',
+        schemata='urban_inquiry'
     ),
     DateTimeField(
         name='demandDisplay',
@@ -90,6 +94,7 @@ schema = Schema((
             format="%d/%m/%Y",
             label=_('urban_label_demandDisplay', default='Demanddisplay'),
         ),
+        schemata='urban_inquiry'
     ),
     TextField(
         name='investigationDetails',
@@ -100,6 +105,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         default_output_type='text/html',
+        schemata='urban_inquiry'
     ),
     TextField(
         name='investigationReasons',
@@ -110,6 +116,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         default_output_type='text/html',
+        schemata='urban_inquiry'
     ),
     TextField(
         name='roadModificationSubject',
@@ -120,6 +127,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         default_output_type='text/html',
+        schemata='urban_inquiry'
     ),
     LinesField(
         name='solicitOpinionsTo',
