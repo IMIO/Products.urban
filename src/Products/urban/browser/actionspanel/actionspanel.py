@@ -41,7 +41,7 @@ class RecipientCadastreActionsPanelView(UrbanDefaultActionsPanelView):
     """
     def __init__(self, context, request):
         super(RecipientCadastreActionsPanelView, self).__init__(context, request)
-        self.SECTIONS_TO_RENDER = ('renderActions', 'renderEdit', 'renderOwnDelete')
+        self.SECTIONS_TO_RENDER = ('renderTransitions', 'renderActions', 'renderEdit', 'renderOwnDelete')
         self.ACCEPTABLE_ACTIONS = ('copy_to_claimant',)
 
 
