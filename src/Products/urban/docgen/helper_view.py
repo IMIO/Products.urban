@@ -19,6 +19,8 @@ from zope.schema.interfaces import IVocabularyFactory
 from plone import api
 from DateTime import DateTime
 
+import re
+
 
 class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
     """
@@ -1203,6 +1205,11 @@ class EventDisplayProxyObject(UrbanBaseProxyObject):
                 field = linked_item.extraInfos[field_name]
         return field
 
+    def _get_wspm_text_field(self, field_name):
+        text = self._get_wspm_field(field_name)
+        corrected_text = re.sub('\n\s*\n', '\n<p>&nbsp;</p>\n', text)
+        return corrected_text
+
     def get_wspm_decision_date(self, translatemonth=True, long_format=False):
         field_name = 'meeting_date'
         decision_date = 'NO FIELD {} FOUND'.format(field_name)
@@ -1215,17 +1222,22 @@ class EventDisplayProxyObject(UrbanBaseProxyObject):
             )
         return decision_date
 
-    def get_wspm_description_text(self, style='UrbanBody'):
+    def get_wspm_description_text(self):
         field_name = 'description'
-        description_text = self._get_wspm_field(field_name)
+        description_text = self._get_wspm_text_field(field_name)
         return description_text
 
-    def get_wspm_decision_text(self, style='UrbanBody'):
+    def get_wspm_decision_text(self):
         field_name = 'decision'
-        decision_text = self._get_wspm_field(field_name)
+        decision_text = self._get_wspm_text_field(field_name)
         return decision_text
+
+    def get_wspm_motivation_text(self):
+        field_name = 'motivation'
+        motivation_text = self._get_wspm_text_field(field_name)
+        return motivation_text
 
     def get_wspm_meeting_state(self):
         field_name = 'review_state'
-        state = self._get_wspm_field(field_name)
+        state = self._get_wspm_text_field(field_name)
         return state
