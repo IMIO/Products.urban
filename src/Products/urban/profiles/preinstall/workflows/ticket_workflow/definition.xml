@@ -110,7 +110,7 @@
    <permission-role>Manager</permission-role>
   </permission-map>
   <permission-map name="imio.urban: Add Parcel" acquired="False">
-   <permission-role>AddressEditor</permission-role>
+   <permission-role>Editor</permission-role>
    <permission-role>Manager</permission-role>
   </permission-map>
   <permission-map name="urban: Add UrbanEvent" acquired="False">
@@ -221,7 +221,7 @@
    <permission-role>Manager</permission-role>
   </permission-map>
   <permission-map name="imio.urban: Add Parcel" acquired="False">
-   <permission-role>AddressEditor</permission-role>
+   <permission-role>Editor</permission-role>
    <permission-role>Manager</permission-role>
   </permission-map>
   <permission-map name="urban: Add UrbanEvent" acquired="False">
@@ -331,7 +331,7 @@
    <permission-role>Manager</permission-role>
   </permission-map>
   <permission-map name="imio.urban: Add Parcel" acquired="False">
-   <permission-role>AddressEditor</permission-role>
+   <permission-role>Editor</permission-role>
    <permission-role>Manager</permission-role>
   </permission-map>
   <permission-map name="urban: Add UrbanEvent" acquired="False">
@@ -441,7 +441,7 @@
    <permission-role>Manager</permission-role>
   </permission-map>
   <permission-map name="imio.urban: Add Parcel" acquired="False">
-   <permission-role>AddressEditor</permission-role>
+   <permission-role>Editor</permission-role>
    <permission-role>Manager</permission-role>
   </permission-map>
   <permission-map name="urban: Add UrbanEvent" acquired="False">
@@ -552,7 +552,7 @@
    <permission-role>Manager</permission-role>
   </permission-map>
   <permission-map name="imio.urban: Add Parcel" acquired="False">
-   <permission-role>AddressEditor</permission-role>
+   <permission-role>Editor</permission-role>
    <permission-role>Manager</permission-role>
   </permission-map>
   <permission-map name="urban: Add UrbanEvent" acquired="False">
