@@ -114,6 +114,22 @@ def migrate_eventconfigs_description_field(context):
     logger.info("upgrade done!")
 
 
+def reinstall_ticket_workflow(context):
+    """
+    """
+    logger = logging.getLogger('urban: migrate eventconfigs description field')
+    logger.info("starting upgrade steps")
+    wf_tool = api.portal.get_tool('portal_setup')
+    wf_tool.manage_delObjects(ids=['ticket_workflow'])
+    portal = api.portal.get():
+    for ticket in portal.urban.tickets.objectValues()[1:]:
+        ticket.licence.manage_permission('urban: Add Parcel', roles=[], acquire=1)
+
+    setup_tool = api.portal.get_tool('portal_setup')
+    setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'update-workflow-rolemap')
+    logger.info("upgrade done!")
+
+
 def update_POD_expressions(context):
     """
     Execute automatic search and replace for POD template code.
