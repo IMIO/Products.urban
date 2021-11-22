@@ -625,7 +625,14 @@ EventConfigs = {
             'specialFunctionName': "Rechercher les propriétaires situés dans un rayon de 50m",
             'specialFunctionUrl': "addInvestigationPO",
             'podTemplates': (
-                {'id': "codt_purb_annexe_25.odt", 'title': "Annexe 25 (affiche publique)"},
+                {'id': "codt_purb_annexe_25.odt",
+                 'title': "Annexe 25 (affiche publique)",
+                 'pod_portal_types': (
+                     'UrbanEvent',
+                     'UrbanEventInquiry',
+                     'UrbanEventOpinionRequest',
+                     'UrbanEventAnnouncement',
+                 )},
                 {'id': "codt_pu_reclamations_reimport.ods", 'title': "Fichier réclamants pour réimport"}
             ),
             'eventType': ('Products.urban.interfaces.IAnnouncementEvent',),
