@@ -239,8 +239,16 @@
         title="migrate event configs Description field"
         description="urban upgrade step"
         source="1015"
-        destination="1100"
+        destination="1016"
         handler=".update_250.migrate_eventconfigs_description_field"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="migrate event configs Description field"
+        description="urban upgrade step"
+        source="1016"
+        destination="1100"
+        handler=".update_250.reinstall_ticket_workflow"
         profile="Products.urban:default" />
 
 </configure>
