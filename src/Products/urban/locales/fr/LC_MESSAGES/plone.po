@@ -332,7 +332,7 @@ msgid "iscomplete"
 msgstr "Complet"
 
 msgid "isinacceptable"
-msgstr "Déclarer irrecevable"
+msgstr "Irrecevable"
 
 msgid "isincomplete"
 msgstr "Incomplet"
