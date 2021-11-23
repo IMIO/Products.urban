@@ -244,7 +244,7 @@
         profile="Products.urban:default" />
 
     <gs:upgradeStep
-        title="migrate event configs Description field"
+        title="Reinstall ticket workflow"
         description="urban upgrade step"
         source="1016"
         destination="1100"
