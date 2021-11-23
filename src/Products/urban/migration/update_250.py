@@ -119,7 +119,7 @@ def reinstall_ticket_workflow(context):
     """
     logger = logging.getLogger('urban: migrate eventconfigs description field')
     logger.info("starting upgrade steps")
-    wf_tool = api.portal.get_tool('portal_setup')
+    wf_tool = api.portal.get_tool('portal_workflow')
     wf_tool.manage_delObjects(ids=['ticket_workflow'])
     portal = api.portal.get()
     for ticket in portal.urban.tickets.objectValues()[1:]:
