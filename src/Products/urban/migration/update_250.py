@@ -121,7 +121,7 @@ def reinstall_ticket_workflow(context):
     logger.info("starting upgrade steps")
     wf_tool = api.portal.get_tool('portal_setup')
     wf_tool.manage_delObjects(ids=['ticket_workflow'])
-    portal = api.portal.get():
+    portal = api.portal.get()
     for ticket in portal.urban.tickets.objectValues()[1:]:
         ticket.licence.manage_permission('urban: Add Parcel', roles=[], acquire=1)
 
