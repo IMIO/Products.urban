@@ -117,7 +117,7 @@ def migrate_eventconfigs_description_field(context):
 def reinstall_ticket_workflow(context):
     """
     """
-    logger = logging.getLogger('urban: migrate eventconfigs description field')
+    logger = logging.getLogger('urban: reinstall ticket workflow')
     logger.info("starting upgrade steps")
     wf_tool = api.portal.get_tool('portal_workflow')
     wf_tool.manage_delObjects(ids=['ticket_workflow'])
