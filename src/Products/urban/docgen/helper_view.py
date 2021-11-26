@@ -517,33 +517,33 @@ class UrbanDocGenerationLicenceHelperView(UrbanDocGenerationHelperView):
             return opinions
         return []
 
-    def get_related_licences(self, licence_types=[], decision_limit_date=None, decision_event_status='', licence_status=None):
-        related_licences = [licence.getObject() for licence in self.get_related_licences_of_parcel(licence_types)]
-        if decision_limit_date:
+    def get_related_licences(self, licence_types=[], decision_limit_date=None, decision_event_state='', licence_state=None, with_historic=False):
+        related_licences = [licence.getObject() for licence in self.get_related_licences_of_parcel(licence_types, with_historic)]
+
+        if decision_limit_date and decision_event_state:
             licences_limit_date = []
             if not isinstance(decision_limit_date, DateTime):
                 decision_limit_date = DateTime(decision_limit_date)
             for licence in related_licences:
                 delivered = licence.getLastTheLicence()
                 if delivered and (delivered.getDecisionDate() or delivered.getEventDate()) >= decision_limit_date:
-                    if not decision_event_status:
+                    if not decision_event_state:
                         licences_limit_date.append(licence)
-                    elif delivered.getDecision() == decision_event_status:
+                    elif delivered.getDecision() == decision_event_state:
                         licences_limit_date.append(licence)
             related_licences = licences_limit_date
 
-        if licence_status:
-            licences_status = []
+        if licence_state:
+            licences = []
             for licence in related_licences:
-                workflow = getToolByName(licence, 'portal_workflow')
-                licence_review_state = workflow.getInfoFor(licence, 'review_state')
-                if licence_review_state == licence_status:
-                    licences_status.append(licence)
-            related_licences = licences_status
+                licence_review_state = api.content.get_state(obj=licence)
+                if licence_review_state == licence_state:
+                    licences.append(licence)
+            related_licences = licences
 
         return related_licences
 
-    def get_related_licences_of_parcel(self, licence_types=[]):
+    def get_related_licences_of_parcel(self, licence_types=[], with_historic=False):
         """
           Returns the licences related to a parcel
         """
@@ -552,7 +552,7 @@ class UrbanDocGenerationLicenceHelperView(UrbanDocGenerationHelperView):
         relatedLicences = []
         licence_uids = set([])
         for parcel in parcels:
-            for brain in parcel.getRelatedLicences(licence_type=licence_types):
+            for brain in parcel.getRelatedLicences(licence_type=licence_types, with_historic=with_historic):
                 if brain.UID not in licence_uids:
                     relatedLicences.append(brain)
                     licence_uids.add(brain.UID)
