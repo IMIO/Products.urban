@@ -10,6 +10,7 @@ from dateutil.relativedelta import relativedelta
 from plone.dexterity.interfaces import IDexterityContent
 
 from Products.Archetypes.interfaces import IBaseObject
+from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.i18nl10n import ulocalized_time
 from Products.urban.interfaces import IUrbanEventInquiry
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
@@ -516,6 +517,30 @@ class UrbanDocGenerationLicenceHelperView(UrbanDocGenerationHelperView):
             return opinions
         return []
 
+    def get_related_licences(self, licence_types=[], decision_limit_date=None, decision_event_status='favorable', licence_status=None):
+        related_licences = [licence.getObject() for licence in self.get_related_licences_of_parcel(licence_types)]
+        if decision_limit_date:
+            licences_limit_date = []
+            if not isinstance(decision_limit_date, DateTime):
+                decision_limit_date = DateTime(decision_limit_date)
+            for licence in related_licences:
+                delivered = licence.getLastTheLicence()
+                if delivered and (delivered.getDecisionDate() or delivered.getEventDate()) > decision_limit_date:
+                    if delivered.getDecision() == decision_event_status:
+                        licences_limit_date.append(licence)
+            related_licences = licences_limit_date
+
+        if licence_status:
+            licences_status = []
+            for licence in related_licences:
+                workflow = getToolByName(licence, 'portal_workflow')
+                licence_review_state = workflow.getInfoFor(licence, 'review_state')
+                if licence_review_state == licence_status:
+                    licences_status.append(licence)
+            related_licences = licences_status
+
+        return related_licences
+
     def get_related_licences_of_parcel(self, licence_types=[]):
         """
           Returns the licences related to a parcel
@@ -531,12 +556,12 @@ class UrbanDocGenerationLicenceHelperView(UrbanDocGenerationHelperView):
                     licence_uids.add(brain.UID)
         return relatedLicences
 
-    def get_related_licences_titles_of_parcel(self):
+    def get_related_licences_titles_of_parcel(self, licence_types=[]):
         """
           Returns the titles of licences related to a parcel
         """
         relatedLicencesTitles = []
-        for relatedLicence in self.get_related_licences_of_parcel():
+        for relatedLicence in self.get_related_licences_of_parcel(licence_types):
             relatedLicencesTitles.append(relatedLicence.Title.decode('utf8'))
         return relatedLicencesTitles
 
