@@ -525,7 +525,7 @@ class UrbanDocGenerationLicenceHelperView(UrbanDocGenerationHelperView):
                 decision_limit_date = DateTime(decision_limit_date)
             for licence in related_licences:
                 delivered = licence.getLastTheLicence()
-                if delivered and (delivered.getDecisionDate() or delivered.getEventDate()) > decision_limit_date:
+                if delivered and (delivered.getDecisionDate() or delivered.getEventDate()) >= decision_limit_date:
                     if delivered.getDecision() == decision_event_status:
                         licences_limit_date.append(licence)
             related_licences = licences_limit_date
