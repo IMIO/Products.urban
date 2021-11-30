@@ -38,7 +38,9 @@ def migrate_to_tuple(src_obj, dst_obj, src_fieldname, dst_fieldname):
 def migrate_to_richtext(src_obj, dst_obj, src_fieldname, dst_fieldname):
     old_value = src_obj.getField(src_fieldname).getRaw(src_obj)
     new_value = old_value
-    if type(old_value) in [str, unicode]:
+    if type(old_value) is unicode:
+        new_value = textfield.RichTextValue(old_value.encode('utf-8'))
+    if type(old_value) is str:
         new_value = textfield.RichTextValue(old_value)
     setattr(dst_obj, dst_fieldname, new_value)
 

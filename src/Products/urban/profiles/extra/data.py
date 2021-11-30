@@ -385,10 +385,6 @@ EventConfigs = {
                             'name': 'publipostage',
                             'value': 'architectes'
                         },
-                        {
-                            'id': "codt_pu_annexe_12_lien_delib.odt",
-                            'title': "Décision (Annexe 12) - Lien iA.Delib"
-                        },
                     ]
                 },
             ),

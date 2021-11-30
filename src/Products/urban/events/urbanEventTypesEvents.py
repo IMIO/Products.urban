@@ -60,6 +60,5 @@ def forceEventTypeCollege(event_config, event):
         selected_interfaces = event_config.getEventType()
         if not college_event_interfaces.intersection(set(selected_interfaces)):
             new_marker_interfaces = [default_college_interface]
-            for old_interface in selected_interfaces:
-                new_marker_interfaces += old_interface
+            new_marker_interfaces += selected_interfaces or []
             event_config.eventType = new_marker_interfaces
