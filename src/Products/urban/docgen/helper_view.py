@@ -517,7 +517,7 @@ class UrbanDocGenerationLicenceHelperView(UrbanDocGenerationHelperView):
             return opinions
         return []
 
-    def get_related_licences(self, licence_types=[], decision_limit_date=None, decision_event_status='favorable', licence_status=None):
+    def get_related_licences(self, licence_types=[], decision_limit_date=None, decision_event_status='', licence_status=None):
         related_licences = [licence.getObject() for licence in self.get_related_licences_of_parcel(licence_types)]
         if decision_limit_date:
             licences_limit_date = []
@@ -526,7 +526,9 @@ class UrbanDocGenerationLicenceHelperView(UrbanDocGenerationHelperView):
             for licence in related_licences:
                 delivered = licence.getLastTheLicence()
                 if delivered and (delivered.getDecisionDate() or delivered.getEventDate()) >= decision_limit_date:
-                    if delivered.getDecision() == decision_event_status:
+                    if not decision_event_status:
+                        licences_limit_date.append(licence)
+                    elif delivered.getDecision() == decision_event_status:
                         licences_limit_date.append(licence)
             related_licences = licences_limit_date
 
