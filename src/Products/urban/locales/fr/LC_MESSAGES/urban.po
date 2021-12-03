@@ -5684,3 +5684,15 @@ msgstr "ans"
 
 msgid "zip_folder_title"
 msgstr "Zone d'initiative privilégiée"
+
+msgid "urban_label_watercourse"
+msgstr "Cours d'eau"
+
+msgid "urban_label_watercourseCategories"
+msgstr "Catégories de cours d'eau"
+
+msgid "urban_label_trail"
+msgstr "Sentiers et chemins vicinaux"
+
+msgid "urban_label_trailDetails"
+msgstr "Détails concernant sentiers et chemins vicinaux"
