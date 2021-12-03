@@ -310,7 +310,7 @@ URBAN_EVENT_TYPES = [
     'UrbanEvent',
     'UrbanEventInquiry',
     'UrbanEventOpinionRequest',
-    'UrbanEventAnnouncement'
+    'UrbanEventAnnouncement',
     'UrbanEventCollege',
     'UrbanEventFollowUp',
     'UrbanEventMayor',
