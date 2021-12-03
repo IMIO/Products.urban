@@ -11,6 +11,8 @@ from z3c.form.browser.select import SelectWidget
 from zope import schema
 from zope.interface import implements
 
+from Products.urban.config import URBAN_EVENT_TYPES
+
 import logging
 logger = logging.getLogger('Products.urban: UrbanTemplate')
 
@@ -26,17 +28,12 @@ class IUrbanTemplate(IConfigurablePODTemplate):
         description=_(u'Select for which content types the template will be available.'),
         value_type=schema.Choice(source='collective.documentgenerator.PortalTypes'),
         required=False,
-        default=[
-            'UrbanEvent',
-            'UrbanEventInquiry',
-            'UrbanEventOpinionRequest',
-            'UrbanEventAnnouncement'
-            'UrbanEventCollege',
-        ]
+        default=URBAN_EVENT_TYPES,
     )
 
     # remove global styles from urban
     form.omitted('style_template')
+    form.omitted('pod_portal_types')
 
 
 class UrbanTemplate(ConfigurablePODTemplate):
@@ -45,3 +42,7 @@ class UrbanTemplate(ConfigurablePODTemplate):
     """
 
     implements(IUrbanTemplate)
+
+    @property
+    def pod_portal_types(self):
+        return URBAN_EVENT_TYPES

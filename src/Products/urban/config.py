@@ -306,6 +306,18 @@ GLOBAL_TEMPLATES = {
     ],
 }
 
+URBAN_EVENT_TYPES = [
+    'UrbanEvent',
+    'UrbanEventInquiry',
+    'UrbanEventOpinionRequest',
+    'UrbanEventAnnouncement'
+    'UrbanEventCollege',
+    'UrbanEventFollowUp',
+    'UrbanEventMayor',
+    'UrbanEventInspectionReport',
+    'UrbanEventNotificationCollege',
+]
+
 DASHBOARD_TEMPLATES = {
     '.': [
         {
