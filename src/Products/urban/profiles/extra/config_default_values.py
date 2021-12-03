@@ -2033,6 +2033,16 @@ default_values = {
             {'id': "d_4_25", 'title': u"Permis D.IV.25"},
         ],
 
+        'watercourses': [
+            'UrbanVocabularyTerm',
+            {'id': "watercourses_expl", 'title': u"cours d'eau de la commune"},
+        ],
+
+        'trails': [
+            'UrbanVocabularyTerm',
+            {'id': "trail_expl", 'title': u"sentier ou chemin vicinal de la commune"},
+        ],
+
     },
     'Inspection': {
         'inspectioncontexts': [
