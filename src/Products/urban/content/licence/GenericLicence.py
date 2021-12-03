@@ -16,6 +16,7 @@ __docformat__ = 'plaintext'
 from AccessControl import ClassSecurityInfo
 
 from collective.archetypes.select2.select2widget import MultiSelect2Widget
+from Products.MasterSelectWidget.MasterMultiSelectWidget import MasterMultiSelectWidget
 from collective.faceted.task.interfaces import IFacetedTaskContainer
 
 from eea.facetednavigation.subtypes.interfaces import IPossibleFacetedNavigable
@@ -68,6 +69,14 @@ slave_fields_subdivision = (
     },
 )
 
+slave_fields_watercourse = (
+    # if a watercourse is select , display a select field with watercourse categories
+    {
+        'name': 'watercourseCategories',
+        'action': 'show',
+        'hide_values': (True, ),
+    },
+)
 slave_fields_pca = (
     # if in a pca, display a selectbox
     {
@@ -102,7 +111,7 @@ optional_fields = [
     'sewersDetails', 'roadAnalysis', 'futureRoadCoating', 'expropriation', 'expropriationDetails',
     'preemption', 'preemptionDetails', 'SAR', 'sarDetails', 'enoughRoadEquipment', 'enoughRoadEquipmentDetails',
     'reparcelling', 'reparcellingDetails', 'noteworthyTrees', 'pipelines', 'pipelinesDetails', 'tax',
-    'groundStateStatus', 'groundstatestatusDetails', 'covid'
+    'groundStateStatus', 'groundstatestatusDetails', 'covid', 'watercourse', 'watercourseCategories', 'trail'
 ]
 ##/code-section module-header
 
@@ -1003,7 +1012,59 @@ schema = Schema((
         ),
         schemata='urban_description',
     ),
+    LinesField(
+        name='watercourse',
+        default='ukn',
+        widget=MasterMultiSelectWidget(
+            format='checkbox',
+            slave_fields=slave_fields_watercourse,
+            label=_('urban_label_watercourse', default='Watercourse'),
+        ),
+        enforceVocabulary=True,
+        schemata='urban_location',
+        multiValued=1,
+        vocabulary=UrbanVocabulary('watercourses', with_empty_value=True, inUrbanConfig=False),
+        default_method='getDefaultValue',
+    ),
 
+    LinesField(
+        name='watercourseCategories',
+        default='ukn',
+        widget=MasterMultiSelectWidget(
+            format='checkbox',
+            label=_('urban_label_watercourseCategories', default='WatercourseCategories'),
+        ),
+        schemata='urban_location',
+        multiValued=1,
+        vocabulary='listWatercourseCategories',
+    ),
+
+    LinesField(
+        name='trail',
+        default='ukn',
+        widget=MasterMultiSelectWidget(
+            format='checkbox',
+            label=_('urban_label_trail', default='Trail'),
+        ),
+        enforceVocabulary=True,
+        schemata='urban_road',
+        multiValued=1,
+        vocabulary=UrbanVocabulary('trails', with_empty_value=True, inUrbanConfig=False),
+        default_method='getDefaultValue',
+    ),
+
+    TextField(
+        name='trailDetails',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            label=_('urban_label_trailDetails',
+                    default='TrailDetails'),
+        ),
+        schemata='urban_road',
+        default_method='getDefaultText',
+        default_content_type='text/html',
+        default_output_type='text/html',
+    ),
 ),
 )
 
@@ -1338,6 +1399,19 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
         Tells if the licence does not contain any urbanEvent named 'title'
         """
         return not self.hasEventNamed(title)
+
+    security.declarePublic('listWatercourseCategories')
+
+    def listWatercourseCategories(self):
+        """
+        list of watercourse categories
+        """
+        vocab = (
+            ('cat1', translate(_('category1'), context=self.REQUEST)),
+            ('cat2', translate(_('category2'), context=self.REQUEST)),
+            ('cat3', translate(_('category3'), context=self.REQUEST)),
+        )
+        return DisplayList(vocab)
 
     security.declarePublic('getLicencesOfTheParcels')
 
