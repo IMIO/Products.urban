@@ -38,7 +38,7 @@ from collective.quickupload.interfaces import IQuickUploadCapable
 from Products.urban.config import *
 from Products.urban import UrbanMessage as _
 
-##code-section module-header #fill in your manual code here
+# code-section module-header #fill in your manual code here
 from zope.i18n import translate
 from collective.datagridcolumns.ReferenceColumn import ReferenceColumn
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
@@ -74,7 +74,8 @@ slave_fields_watercourse = (
     {
         'name': 'watercourseCategories',
         'action': 'show',
-        'hide_values': (True, ),
+        'toggle_method': 'showWatercourseCategories',
+        'control_param': 'values',
     },
 )
 slave_fields_pca = (
@@ -111,9 +112,10 @@ optional_fields = [
     'sewersDetails', 'roadAnalysis', 'futureRoadCoating', 'expropriation', 'expropriationDetails',
     'preemption', 'preemptionDetails', 'SAR', 'sarDetails', 'enoughRoadEquipment', 'enoughRoadEquipmentDetails',
     'reparcelling', 'reparcellingDetails', 'noteworthyTrees', 'pipelines', 'pipelinesDetails', 'tax',
-    'groundStateStatus', 'groundstatestatusDetails', 'covid', 'watercourse', 'watercourseCategories', 'trail'
+    'groundStateStatus', 'groundstatestatusDetails', 'covid', 'watercourse', 'watercourseCategories', 'trail',
+    'trailDetails'
 ]
-##/code-section module-header
+# /code-section module-header
 
 schema = Schema((
 
@@ -1014,7 +1016,6 @@ schema = Schema((
     ),
     LinesField(
         name='watercourse',
-        default='ukn',
         widget=MasterMultiSelectWidget(
             format='checkbox',
             slave_fields=slave_fields_watercourse,
@@ -1029,9 +1030,8 @@ schema = Schema((
 
     LinesField(
         name='watercourseCategories',
-        default='ukn',
-        widget=MasterMultiSelectWidget(
-            format='checkbox',
+        widget=MultiSelectionWidget(
+            size=3,
             label=_('urban_label_watercourseCategories', default='WatercourseCategories'),
         ),
         schemata='urban_location',
@@ -1068,17 +1068,17 @@ schema = Schema((
 ),
 )
 
-##code-section after-local-schema #fill in your manual code here
+# code-section after-local-schema #fill in your manual code here
 setOptionalAttributes(schema, optional_fields)
-##/code-section after-local-schema
+# /code-section after-local-schema
 
 GenericLicence_schema = BaseFolderSchema.copy() + \
     schema.copy()
 
-##code-section after-schema #fill in your manual code here
+# code-section after-schema #fill in your manual code here
 GenericLicence_schema['title'].searchable = True
 GenericLicence_schema['title'].widget.visible = False
-##/code-section after-schema
+# /code-section after-schema
 
 
 class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
@@ -1100,8 +1100,8 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
 
     schema = GenericLicence_schema
 
-    ##code-section class-header #fill in your manual code here
-    ##/code-section class-header
+    # code-section class-header #fill in your manual code here
+    # /code-section class-header
 
     # Methods
 
@@ -1407,11 +1407,18 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
         list of watercourse categories
         """
         vocab = (
-            ('cat1', translate(_('category1'), context=self.REQUEST)),
-            ('cat2', translate(_('category2'), context=self.REQUEST)),
-            ('cat3', translate(_('category3'), context=self.REQUEST)),
+            ('watercourse_cat1', translate(_('category1'), context=self.REQUEST)),
+            ('watercourse_cat2', translate(_('category2'), context=self.REQUEST)),
+            ('watercourse_cat3', translate(_('category3'), context=self.REQUEST)),
         )
         return DisplayList(vocab)
+
+    security.declarePublic('showWatercourseCategories')
+
+    def showWatercourseCategories(self, *values):
+        selection = [v['val'] for v in values if v['selected']]
+        show = 'watercourses_expl' in selection and 'ukn' not in selection
+        return show
 
     security.declarePublic('getLicencesOfTheParcels')
 
@@ -1455,5 +1462,5 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
 registerType(GenericLicence, PROJECTNAME)
 # end of class GenericLicence
 
-##code-section module-footer #fill in your manual code here
-##/code-section module-footer
+# code-section module-footer #fill in your manual code here
+# /code-section module-footer
