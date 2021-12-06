@@ -295,13 +295,6 @@ EventConfigs = {
                 {
                     'id': "codt_pu_prorogation_si_non_automatique_deliberation.odt",
                     'title': "Délibération CODT - PROROGATION si non automatique",
-                    'pod_portal_types': (
-                        'UrbanEvent',
-                        'UrbanEventInquiry',
-                        'UrbanEventOpinionRequest',
-                        'UrbanEventAnnouncement',
-                        'UrbanEventCollege'
-                    )
                 },
                 {
                     'id': "codt_pu_prorogation_info_demandeur.odt",
@@ -312,13 +305,6 @@ EventConfigs = {
                             'value': 'demandeurs'
                         }
                     ],
-                    'pod_portal_types': (
-                        'UrbanEvent',
-                        'UrbanEventInquiry',
-                        'UrbanEventOpinionRequest',
-                        'UrbanEventAnnouncement',
-                        'UrbanEventCollege'
-                    )
                 },
                 {
                     'id': "codt_pu_prorogation_info_architecte.odt",
@@ -329,24 +315,10 @@ EventConfigs = {
                             'value': 'architectes'
                         }
                     ],
-                    'pod_portal_types': (
-                        'UrbanEvent',
-                        'UrbanEventInquiry',
-                        'UrbanEventOpinionRequest',
-                        'UrbanEventAnnouncement',
-                        'UrbanEventCollege'
-                    )
                 },
                 {
                     'id': "codt_pu_formulaire_envoi_prorogation_fd_grille.odt",
                     'title': "Formulaire d'envoi de la prorogation au FD (GRILLE)",
-                    'pod_portal_types': (
-                        'UrbanEvent',
-                        'UrbanEventInquiry',
-                        'UrbanEventOpinionRequest',
-                        'UrbanEventAnnouncement',
-                        'UrbanEventCollege'
-                    )
                 },
             ),
         },
@@ -623,12 +595,7 @@ EventConfigs = {
             'podTemplates': (
                 {'id': "codt_purb_annexe_25.odt",
                  'title': "Annexe 25 (affiche publique)",
-                 'pod_portal_types': (
-                     'UrbanEvent',
-                     'UrbanEventInquiry',
-                     'UrbanEventOpinionRequest',
-                     'UrbanEventAnnouncement',
-                 )},
+                },
                 {'id': "codt_pu_reclamations_reimport.ods", 'title': "Fichier réclamants pour réimport"}
             ),
             'eventType': ('Products.urban.interfaces.IAnnouncementEvent',),
