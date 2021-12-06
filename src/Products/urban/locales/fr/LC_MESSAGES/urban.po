@@ -5691,6 +5691,15 @@ msgstr "Cours d'eau"
 msgid "urban_label_watercourseCategories"
 msgstr "Catégories de cours d'eau"
 
+msgid "category1"
+msgstr "catégorie 1"
+
+msgid "category2"
+msgstr "catégorie 2"
+
+msgid "category3"
+msgstr "catégorie 3"
+
 msgid "urban_label_trail"
 msgstr "Sentiers et chemins vicinaux"
 
