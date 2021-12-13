@@ -239,3 +239,28 @@ class TestGetParcels(unittest.TestCase):
             exposant='C'
         )
         self.assertTrue(self.helper_view.get_parcels().endswith(u"section A n\xb0 86C"))
+
+
+class TestGetRelatedLicences(unittest.TestCase):
+        """
+             Test get_related_licences helperview method
+            """
+
+        layer = URBAN_TESTS_LICENCES
+
+        def setUp(self):
+            portal = self.layer['portal']
+            self.buildlicence = portal.urban.buildlicences.objectValues()[-1]
+            self.helper_view = self.buildlicence.unrestrictedTraverse('document_generation_helper_view')
+            login(portal, 'urbaneditor')
+
+        def testRelatedLicencesLicenceState(self):
+            self.assertTrue(len(self.helper_view.get_related_licences())==12)
+            self.assertTrue(len(self.helper_view.get_related_licences(licence_state='in_progress'))==7)
+            self.assertTrue(len(self.helper_view.get_related_licences(licence_state='deposit'))==4)
+
+        def testRelatedLicencesLicenceTypes(self):
+            self.assertTrue(len(self.helper_view.get_related_licences(licence_types=['CODT_ParcelOutLicence', 'ParcelOutLicence']))==2)
+            self.assertTrue(self.helper_view.get_related_licences(licence_types=['CODT_ParcelOutLicence'])[0].portal_type=='CODT_ParcelOutLicence')
+            self.assertTrue(self.helper_view.get_related_licences(licence_types=['CODT_BuildLicence'])[0].portal_type=='CODT_BuildLicence')
+            self.assertTrue(self.helper_view.get_related_licences(licence_types=['ParcelOutLicence'])[0].portal_type=='ParcelOutLicence')
