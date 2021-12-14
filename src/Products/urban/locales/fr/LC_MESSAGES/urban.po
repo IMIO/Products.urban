@@ -5706,8 +5706,8 @@ msgstr "Sentiers et chemins vicinaux"
 msgid "urban_label_trailDetails"
 msgstr "Détails concernant sentiers et chemins vicinaux"
 
-msgid "trails"
+msgid "trails_folder_title"
 msgstr "Liste des sentiers et chemins vicinaux de la communne"
 
-msgid "watercourses"
+msgid "watercourses_folder_title"
 msgstr "Liste des cours d'eau de la commune"
