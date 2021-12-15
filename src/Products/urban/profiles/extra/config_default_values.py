@@ -2036,6 +2036,7 @@ default_values = {
         'watercourses': [
             'UrbanVocabularyTerm',
             {'id': "watercourses_expl", 'title': u"cours d'eau de la commune"},
+            {'id': "watercourses_expl2", 'title': u"autre cours d'eau de la commune"},
         ],
 
         'trails': [
