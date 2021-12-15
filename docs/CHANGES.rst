@@ -160,6 +160,9 @@ Changes
 - Include parcels owners partner in cadastral queries.[SUP-20092]
   [sdelcourt]
 
+- Add fields trail, watercourse, trailDetails, watercourseCategory and add vocabulary in global config for the fields.[MURBECAA-51]
+  [mdhyne]
+
 2.4 (2019-03-25)
 ----------------
 - add tax field in GenericLicence
