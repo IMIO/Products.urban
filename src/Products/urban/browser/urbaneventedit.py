@@ -80,7 +80,7 @@ class ComputeInquiryDelay(object):
             if licence.getRoadAdaptation() and licence.getRoadAdaptation() != ['']:
                 inquiry_delay = 30
 
-        if licence.portal_type == 'EnvClassOne' or licence.portal_type == 'CODT_UniqueLicence':
+        if licence.portal_type in ['EnvClassOne', 'CODT_UniqueLicence']:
             inquiry_delay = 30
         if self.context.getLinkedInquiry().getInquiry_type() == 'announcement':
             inquiry_delay = 15
