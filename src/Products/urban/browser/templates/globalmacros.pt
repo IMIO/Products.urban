@@ -39,6 +39,11 @@
       <input type="submit" class="context apButton contenttype-portionout" id="manualAddParcel" value="manual_parcel" i18n:attributes="value" />
      </form>
     </div>
+    <div class="parcel-action">
+     <form name="gig_connexion" action="https://carto.luxembourg.be/" method="get" target="_blank" >
+      <input type="submit" class="context apButton" id="gig_connexion_link" value="carottage" />
+     </form>
+    </div>
  </div>
 </div>
 
