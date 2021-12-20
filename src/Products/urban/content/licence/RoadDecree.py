@@ -203,7 +203,7 @@ class RoadDecree(CODT_BuildLicence):
             if bound_licence:
                 architects =  bound_licence.getArchitects()
         else:
-            architects = RoadDecree_schema['architects'].getAccessor(self)()
+            architects = RoadDecree_schema['architects'].get(self)
         return architects
 
     security.declarePublic('list_decisional_delay')
