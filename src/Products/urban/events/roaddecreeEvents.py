@@ -14,7 +14,8 @@ def copy_bound_licence_inquiry_fields(roaddecree, event):
     brains = catalog(UID=bound_UIDs)
     if brains:
         bound_licence = brains[0].getObject()
-        inquiry = bound_licence.getAllInquiries()[-1]
+        inquiries = bound_licence.getAllInquiries()
+        inquiry = inquiries and inquiries[-1] or bound_licence
         fields = roaddecree.schema.getSchemataFields('urban_inquiry')
         for field in fields:
             source_field = inquiry.getField(field.getName())
