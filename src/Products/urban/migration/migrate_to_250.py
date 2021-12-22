@@ -349,6 +349,9 @@ def migrate_urbaneventtypes_folder(context):
 def migrate_inquiry_parcels(context):
     logger = logging.getLogger('migrate inquiry parcels')
     logger.info("starting migration step")
+    portal = api.portal.get()
+    # to avoid link integrity problems, disable checks
+    portal.portal_properties.site_properties.enable_link_integrity_checks = False
     # disable catalog
     patches.apply()
     catalog = api.portal.get_tool('portal_catalog')
@@ -368,6 +371,8 @@ def migrate_inquiry_parcels(context):
             logger.info("migrated recipient {}".format(recipient))
     # restore catalog
     patches.unapply()
+    # enable linkintegrity checks
+    portal.portal_properties.site_properties.enable_link_integrity_checks = True
     logger.info("migration step done!")
 
 
