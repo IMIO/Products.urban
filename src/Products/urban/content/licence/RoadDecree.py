@@ -198,12 +198,11 @@ class RoadDecree(CODT_BuildLicence):
     security.declarePublic('getArchitects')
 
     def getArchitects(self):
+        architects = RoadDecree_schema['architects'].get(self)
         if self.getUse_bound_licence_infos():
             bound_licence = self.getBound_licence()
             if bound_licence:
-                architects =  bound_licence.getArchitects()
-        else:
-            architects = RoadDecree_schema['architects'].get(self)
+                architects = bound_licence.getArchitects()
         return architects
 
     security.declarePublic('list_decisional_delay')
