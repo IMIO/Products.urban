@@ -400,7 +400,7 @@ class ITicket(IGenericLicence):
     """
 
 
-class IRoadDecree(Interface):
+class IRoadDecree(ICODT_BaseBuildLicence):
     """
     Marker interface for road degree
     """
