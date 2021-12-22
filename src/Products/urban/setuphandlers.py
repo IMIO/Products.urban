@@ -337,7 +337,7 @@ def createScheduleConfig(container, portal_type, id='schedule', title=''):
             ),
             scheduled_contenttype=(
                 portal_type,
-                interface_to_tuple(URBAN_TYPES_INTERFACES[portal_type])
+                (interface_to_tuple(URBAN_TYPES_INTERFACES[portal_type]),)
             ),
         )
     schedule_config = getattr(container, id)
