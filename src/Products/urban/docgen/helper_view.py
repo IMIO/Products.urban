@@ -865,10 +865,8 @@ class LicenceDisplayProxyObject(UrbanBaseProxyObject):
         """
         """
         context = self.context
-        advices = context.getBound_licence().getAllAdvices()
-        advices_liste = u''
-        for adv in advices:
-            advices_liste += u''.join(adv.extraValue) + u'\n'
+        advices = [ad.extraValue for ad in context.getBound_licence().getAllAdvices()]
+        advices_liste = u',\n'.join(advices)
         return advices_liste
 
 # Contact(s)
