@@ -861,6 +861,16 @@ class LicenceDisplayProxyObject(UrbanBaseProxyObject):
                     specific_features_text.append(specific_feature_text)
         return specific_features_text
 
+    def get_bound_licence_advices(self):
+        """
+        """
+        context = self.context
+        advices = context.getBound_licence().getAllAdvices()
+        advices_liste = u''
+        for adv in advices:
+            advices_liste += u''.join(adv.extraValue) + u'\n'
+        return advices_liste
+
 # Contact(s)
 # ------------------------------------------------------------------------------
     def _get_personTitle_dict(self, id):
