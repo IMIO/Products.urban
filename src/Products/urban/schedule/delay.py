@@ -179,4 +179,4 @@ class UrbanFreezeDuration(DefaultFreezeDuration):
                 new_freeze_duration = end - start
                 return new_freeze_duration
 
-    return super(UrbanFreezeDuration, self).freeze_duration
+        return super(UrbanFreezeDuration, self).freeze_duration
