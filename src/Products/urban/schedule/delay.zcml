@@ -42,4 +42,12 @@
         name="urban.schedule.delay.inspection_followup_delay"
     />
 
+    <adapter
+        for="Products.urban.interfaces.IRoadDecree
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.ICalculationDelay"
+        factory=".delay.CouncildecisionDelay"
+        name="urban.schedule.delay.council_decision_delay"
+    />
+
 </configure>

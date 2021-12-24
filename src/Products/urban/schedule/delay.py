@@ -140,3 +140,17 @@ class InspectionFollowUpDelay(AnnoncedDelay):
         report = followup.getLinkedReport()
         delay = report.getDelay() and int(report.getDelay()) or 0
         return delay
+
+
+class CouncildecisionDelay(UrbanBaseDelay):
+    """
+    Return the selected council decision delay of the RoadDecree.
+    """
+
+    def calculate_delay(self, with_modified_blueprints=True):
+        base_delay = super(AnnoncedDelay, self).calculate_delay()
+        licence = self.task_container
+        delay = licence.getDecisional_delay() or 0
+        if delay and delay.endswith('j'):
+            delay = int(delay[:-1])
+        return delay + base_delay

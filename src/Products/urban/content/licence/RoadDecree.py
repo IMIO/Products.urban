@@ -230,6 +230,9 @@ class RoadDecree(CODT_BuildLicence):
             return '105j'
         return '75j'
 
+    def getLastDisplayingTheDecision(self):
+        return self.getLastEvent(interfaces.IDisplayingTheDecisionEvent)
+
 
 registerType(RoadDecree, PROJECTNAME)
 
