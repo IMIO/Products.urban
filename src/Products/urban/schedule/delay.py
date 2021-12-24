@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 
 from imio.schedule.content.delay import BaseCalculationDelay
+from imio.schedule.content.delay import DefaultFreezeDuration
 
 from plone import api
 
 from Products.urban.interfaces import ICODT_Inquiry
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.interfaces import IInquiry
-from Products.urban.schedule.content.delay import DefaultFreezeDuration
 from Products.urban.schedule.interfaces import ITaskWithSuspensionDelay
 from Products.urban.schedule.interfaces import ITaskWithWholeSuspensionDelay
 
