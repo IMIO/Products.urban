@@ -362,3 +362,6 @@ msgstr ""
 msgid "Ticket"
 msgstr ""
 
+msgid "suspend_freeze"
+msgstr ""
+
