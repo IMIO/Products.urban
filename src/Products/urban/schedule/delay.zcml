@@ -50,4 +50,12 @@
         name="urban.schedule.delay.council_decision_delay"
     />
 
+  <adapter
+    for="zope.interface.IGenericLicence
+         imio.schedule.content.task.IAutomatedTask"
+    provides="imio.schedule.interfaces.IFreezeDuration"
+    factory=".delay.DefaultFreezeDuration"
+    name="schedule.freeze_duration"
+    />
+
 </configure>

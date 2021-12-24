@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2021-12-24 06:19+0000\n"
+"POT-Creation-Date: 2021-12-24 09:19+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -471,6 +471,10 @@ msgstr "Envoi aux archives"
 msgid "ISimpleCollegeEvent type marker interface"
 msgstr "Collège simple"
 
+#: ../interfaces.py:622
+msgid "ISuspensionEvent type marker interface"
+msgstr "Suspension"
+
 #: ../interfaces.py:526
 msgid "ITechnicalAnalysis type marker interface"
 msgstr "Analyse technique"
@@ -546,7 +550,7 @@ msgstr "Inspection"
 msgid "IntegratedLicence"
 msgstr "Permis intégré"
 
-#: ../interfaces.py:716
+#: ../interfaces.py:720
 msgid "Internal opinion services"
 msgstr "Avis de services internes à la ville"
 
@@ -560,7 +564,7 @@ msgstr "Type de permis"
 msgid "Listing file"
 msgstr ""
 
-#: ../interfaces.py:739
+#: ../interfaces.py:743
 msgid "Mailing limit"
 msgstr ""
 
@@ -568,7 +572,7 @@ msgstr ""
 msgid "Map"
 msgstr "Carte"
 
-#: ../interfaces.py:740
+#: ../interfaces.py:744
 msgid "Max items allowed for immediate mailing"
 msgstr ""
 
@@ -618,11 +622,11 @@ msgstr "Permis d'urbanisation"
 msgid "PatrimonyCertificate"
 msgstr "Certificat de patrimoine"
 
-#: ../interfaces.py:754
+#: ../interfaces.py:758
 msgid "Planned claimants imports"
 msgstr ""
 
-#: ../interfaces.py:729
+#: ../interfaces.py:733
 msgid "Planned mailings"
 msgstr ""
 
@@ -705,7 +709,7 @@ msgstr ""
 msgid "Service id"
 msgstr ""
 
-#: ../interfaces.py:717
+#: ../interfaces.py:721
 msgid "Services that can give their opinion directly through urban"
 msgstr ""
 
@@ -727,7 +731,7 @@ msgstr ""
 msgid "Submit"
 msgstr "Valider"
 
-#: ../interfaces.py:767
+#: ../interfaces.py:771
 msgid "Suspension period end date"
 msgstr ""
 
@@ -735,7 +739,7 @@ msgstr ""
 msgid "Suspension period from to: please check the end date"
 msgstr "Période de suspension du ${from} au ${to}: CORRIGEZ LA DATE DE FIN DE PUBLICITE."
 
-#: ../interfaces.py:763
+#: ../interfaces.py:767
 msgid "Suspension period start date"
 msgstr ""
 
@@ -1687,7 +1691,7 @@ msgstr "Choisissez une des 3 recherches ci-dessous.  Si vous savez exactement ce
 msgid "inadmissibilityreasons_folder_title"
 msgstr "Motifs d'irrecevabilité"
 
-#: ../interfaces.py:755
+#: ../interfaces.py:759
 msgid "inquiries planned for claimants imports"
 msgstr ""
 
@@ -1961,11 +1965,11 @@ msgstr "Particularités du bien (urbanisme)"
 msgid "lotusages_folder_title"
 msgstr "Destination"
 
-#: ../interfaces.py:730
+#: ../interfaces.py:734
 msgid "mailings planned"
 msgstr ""
 
-#: ../interfaces.py:745
+#: ../interfaces.py:749
 msgid "mailings planned for radius search"
 msgstr ""
 

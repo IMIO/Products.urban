@@ -276,6 +276,10 @@
     interface=".interfaces.IProprietaryChangeEvent"
     type=".interfaces.IEventTypeType"/>
 
+  <interface
+    interface=".interfaces.ISuspensionEvent"
+    type=".interfaces.IEventTypeType"/>
+
   <adapter
     for="Products.CMFCore.interfaces.ICatalogAware
         Products.Archetypes.interfaces.IUIDCatalog"

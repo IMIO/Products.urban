@@ -331,6 +331,9 @@ msgstr "Refusé"
 msgid "reopen"
 msgstr "Réouvrir"
 
+msgid "resume_thaw"
+msgstr "Reprendre"
+
 # transitions
 msgid "retire"
 msgstr "Abandonner"

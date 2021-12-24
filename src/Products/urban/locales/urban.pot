@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2021-12-24 06:19+0000\n"
+"POT-Creation-Date: 2021-12-24 09:19+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -459,6 +459,10 @@ msgstr ""
 msgid "ISimpleCollegeEvent type marker interface"
 msgstr ""
 
+#: ../interfaces.py:622
+msgid "ISuspensionEvent type marker interface"
+msgstr ""
+
 #: ../interfaces.py:526
 msgid "ITechnicalAnalysis type marker interface"
 msgstr ""
@@ -529,7 +533,7 @@ msgstr ""
 msgid "IntegratedLicence"
 msgstr ""
 
-#: ../interfaces.py:716
+#: ../interfaces.py:720
 msgid "Internal opinion services"
 msgstr ""
 
@@ -543,7 +547,7 @@ msgstr ""
 msgid "Listing file"
 msgstr ""
 
-#: ../interfaces.py:739
+#: ../interfaces.py:743
 msgid "Mailing limit"
 msgstr ""
 
@@ -551,7 +555,7 @@ msgstr ""
 msgid "Map"
 msgstr ""
 
-#: ../interfaces.py:740
+#: ../interfaces.py:744
 msgid "Max items allowed for immediate mailing"
 msgstr ""
 
@@ -601,11 +605,11 @@ msgstr ""
 msgid "PatrimonyCertificate"
 msgstr ""
 
-#: ../interfaces.py:754
+#: ../interfaces.py:758
 msgid "Planned claimants imports"
 msgstr ""
 
-#: ../interfaces.py:729
+#: ../interfaces.py:733
 msgid "Planned mailings"
 msgstr ""
 
@@ -687,7 +691,7 @@ msgstr ""
 msgid "Service id"
 msgstr ""
 
-#: ../interfaces.py:717
+#: ../interfaces.py:721
 msgid "Services that can give their opinion directly through urban"
 msgstr ""
 
@@ -709,7 +713,7 @@ msgstr ""
 msgid "Submit"
 msgstr ""
 
-#: ../interfaces.py:767
+#: ../interfaces.py:771
 msgid "Suspension period end date"
 msgstr ""
 
@@ -717,7 +721,7 @@ msgstr ""
 msgid "Suspension period from to: please check the end date"
 msgstr ""
 
-#: ../interfaces.py:763
+#: ../interfaces.py:767
 msgid "Suspension period start date"
 msgstr ""
 
@@ -1655,7 +1659,7 @@ msgstr ""
 msgid "inadmissibilityreasons_folder_title"
 msgstr ""
 
-#: ../interfaces.py:755
+#: ../interfaces.py:759
 msgid "inquiries planned for claimants imports"
 msgstr ""
 
@@ -1929,11 +1933,11 @@ msgstr ""
 msgid "lotusages_folder_title"
 msgstr ""
 
-#: ../interfaces.py:730
+#: ../interfaces.py:734
 msgid "mailings planned"
 msgstr ""
 
-#: ../interfaces.py:745
+#: ../interfaces.py:749
 msgid "mailings planned for radius search"
 msgstr ""
 

@@ -365,3 +365,5 @@ msgstr ""
 msgid "suspend_freeze"
 msgstr ""
 
+msgid "resume_thaw"
+msgstr ""

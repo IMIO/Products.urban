@@ -7,6 +7,7 @@ from plone import api
 from Products.urban.interfaces import ICODT_Inquiry
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.interfaces import IInquiry
+from Products.urban.schedule.content.delay import DefaultFreezeDuration
 from Products.urban.schedule.interfaces import ITaskWithSuspensionDelay
 from Products.urban.schedule.interfaces import ITaskWithWholeSuspensionDelay
 
@@ -154,3 +155,28 @@ class CouncildecisionDelay(UrbanBaseDelay):
         if delay and delay.endswith('j'):
             delay = int(delay[:-1])
         return delay + base_delay
+
+
+class UrbanFreezeDuration(DefaultFreezeDuration):
+    """
+    """
+
+    def __init__(self, task_container, task):
+        self.container = task_container
+        self.task = task
+
+    @property
+    def freeze_duration(self):
+        annotations = IAnnotations(self.task)
+        freeze_infos = annotations['imio.schedule.freeze_task']
+        licence = self.task
+
+        suspension_event = licence.getLastSuspension()
+        if suspension_event:
+            start = suspension_event.getEventDate()
+            end =suspension_event.getSuspensionEndDate()
+            if start and end:
+                new_freeze_duration = end - start
+                return new_freeze_duration
+
+    return super(UrbanFreezeDuration, self).freeze_duration

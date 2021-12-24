@@ -618,6 +618,10 @@ class IProprietaryChangeEvent(Interface):
     __doc__ = _("""IProprietaryChangeEvent type marker interface""")
 
 
+class ISuspensionEvent(Interface):
+    __doc__ = _("""ISuspensionEvent type marker interface""")
+
+
 class IUrbanBase(Interface):
     """Marker interface for .Base.UrbanBase
     """
