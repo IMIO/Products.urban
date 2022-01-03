@@ -247,8 +247,16 @@
         title="Reinstall ticket workflow"
         description="urban upgrade step"
         source="1016"
-        destination="1100"
+        destination="1017"
         handler=".update_250.reinstall_ticket_workflow"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Add trails and watercourses to global vocabularies"
+        description="urban upgrade step"
+        source="1017"
+        destination="1100"
+        handler=".update_250.add_trails_and_watercourses_to_global_vocabularies"
         profile="Products.urban:default" />
 
 </configure>
