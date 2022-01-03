@@ -5684,3 +5684,30 @@ msgstr "ans"
 
 msgid "zip_folder_title"
 msgstr "Zone d'initiative privilégiée"
+
+msgid "urban_label_watercourse"
+msgstr "Cours d'eau"
+
+msgid "urban_label_watercourseCategories"
+msgstr "Catégories de cours d'eau"
+
+msgid "category1"
+msgstr "catégorie 1"
+
+msgid "category2"
+msgstr "catégorie 2"
+
+msgid "category3"
+msgstr "catégorie 3"
+
+msgid "urban_label_trail"
+msgstr "Sentiers et chemins vicinaux"
+
+msgid "urban_label_trailDetails"
+msgstr "Détails concernant sentiers et chemins vicinaux"
+
+msgid "trails_folder_title"
+msgstr "Liste des sentiers et chemins vicinaux de la communne"
+
+msgid "watercourses_folder_title"
+msgstr "Liste des cours d'eau de la commune"
