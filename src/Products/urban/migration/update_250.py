@@ -246,8 +246,28 @@ def add_all_applicants_in_title(context):
     logger.info("upgrade done!")
 
 def add_trails_and_watercourses_to_global_vocabularies(context):
+    """
+    """
     logger = logging.getLogger('urban: add trails and watercourses to global vocabularies')
     logger.info("starting upgrade steps")
     portal_setup = api.portal.get_tool('portal_setup')
     portal_setup.runImportStepFromProfile('profile-Products.urban:extra', 'urban-update-vocabularies')
+    logger.info("upgrade done!")
+
+def fix_PODTemplates_empty_filename(context):
+    """
+    """
+    logger = logging.getLogger('urban: fix PODTemplates empty filename')
+    logger.info("starting upgrade steps")
+    catalog = api.portal.get_tool('portal_catalog')
+    all_templates = [b.getObject() for b in catalog(object_provides=IPODTemplate.__identifier__)]
+    for template in all_templates:
+        if not template.odt_file.filename:
+            template_id = template.id
+            if type(template_id) is str:
+                template_id = template_id.decode('utf-8')
+            template.odt_file.filename = template_id
+            logger.info("fixed template {}".format(template))
+        if template.odt_file.contentType == 'applications/odt':
+            template.odt_file.contentType = 'applications/vnd.oasis.opendocument.text'
     logger.info("upgrade done!")

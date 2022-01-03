@@ -50,6 +50,8 @@ def updateTemplate(context, container, template, new_content, position_after='',
             file.manage_addProperty(property_name, property_value, "string")
 
     template_id = template['id']
+    if type(template_id) is str:
+        template_id = template_id.decode('utf-8')
     profile_name = context._profile_path.split('/')[-1]
     status = [template_id]
     new_md5_signature = getMd5Signature(new_content)
@@ -74,7 +76,8 @@ def updateTemplate(context, container, template, new_content, position_after='',
         # we can update the template
         old_template.odt_file = NamedBlobFile(
             data=new_content,
-            contentType='applications/odt',
+            filename=template_id,
+            contentType='applications/vnd.oasis.opendocument.text',
         ),
         new_template = old_template
         status.append('updated')
@@ -89,7 +92,8 @@ def updateTemplate(context, container, template, new_content, position_after='',
             portal_type,
             odt_file=NamedBlobFile(
                 data=new_content,
-                contentType='applications/odt',
+                filename=template_id,
+                contentType='applications/vnd.oasis.opendocument.text',
             ),
             **template
         )

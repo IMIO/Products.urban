@@ -255,8 +255,16 @@
         title="Add trails and watercourses to global vocabularies"
         description="urban upgrade step"
         source="1017"
-        destination="1100"
+        destination="1018"
         handler=".update_250.add_trails_and_watercourses_to_global_vocabularies"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Fix PODTemplates empty filename"
+        description="urban upgrade step"
+        source="1018"
+        destination="1100"
+        handler=".update_250.fix_PODTemplates_empty_filename"
         profile="Products.urban:default" />
 
 </configure>
