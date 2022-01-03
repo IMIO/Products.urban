@@ -123,7 +123,7 @@ def reinstall_ticket_workflow(context):
     wf_tool.manage_delObjects(ids=['ticket_workflow'])
     portal = api.portal.get()
     for ticket in portal.urban.tickets.objectValues()[1:]:
-        ticket.licence.manage_permission('urban: Add Parcel', roles=[], acquire=1)
+        ticket.manage_permission('imio.urban: Add Parcel', roles=[], acquire=1)
 
     setup_tool = api.portal.get_tool('portal_setup')
     setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'update-workflow-rolemap')
@@ -243,4 +243,11 @@ def add_all_applicants_in_title(context):
     licences = [l.getObject() for l in licence_brains if IGenericLicence.providedBy(l.getObject())]
     for licence in licences:
         licence.updateTitle()
+    logger.info("upgrade done!")
+
+def add_trails_and_watercourses_to_global_vocabularies(context):
+    logger = logging.getLogger('urban: add trails and watercourses to global vocabularies')
+    logger.info("starting upgrade steps")
+    portal_setup = api.portal.get_tool('portal_setup')
+    portal_setup.runImportStepFromProfile('profile-Products.urban:extra', 'urban-update-vocabularies')
     logger.info("upgrade done!")
