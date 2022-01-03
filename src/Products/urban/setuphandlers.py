@@ -246,6 +246,7 @@ def updateVocabularyConfig(context):
     default_values = getattr(module, attribute)
 
     global_vocabularies = default_values['global']
+    createVocabularyFolders(container=tool, vocabularies=global_vocabularies, site=site)
     createVocabularies(container=tool, vocabularies=global_vocabularies)
 
     for urban_type in URBAN_TYPES:
