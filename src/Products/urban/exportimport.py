@@ -77,7 +77,7 @@ def updateTemplate(context, container, template, new_content, position_after='',
         old_template.odt_file = NamedBlobFile(
             data=new_content,
             filename=template_id,
-            contentType='applications/vnd.oasis.opendocument.text',
+            contentType='application/vnd.oasis.opendocument.text',
         ),
         new_template = old_template
         status.append('updated')
@@ -93,7 +93,7 @@ def updateTemplate(context, container, template, new_content, position_after='',
             odt_file=NamedBlobFile(
                 data=new_content,
                 filename=template_id,
-                contentType='applications/vnd.oasis.opendocument.text',
+                contentType='application/vnd.oasis.opendocument.text',
             ),
             **template
         )

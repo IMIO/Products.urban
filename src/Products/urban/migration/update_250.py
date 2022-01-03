@@ -269,5 +269,5 @@ def fix_PODTemplates_empty_filename(context):
             template.odt_file.filename = template_id
             logger.info("fixed template {}".format(template))
         if template.odt_file.contentType == 'applications/odt':
-            template.odt_file.contentType = 'applications/vnd.oasis.opendocument.text'
+            template.odt_file.contentType = 'application/vnd.oasis.opendocument.text'
     logger.info("upgrade done!")
