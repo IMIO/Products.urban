@@ -456,4 +456,12 @@
       permission="zope2.View"
   />
 
+  <browser:page
+     for="*"
+     name="connexion_gig_view"
+     class=".connexion_gig_view.ConnexionGigView"
+     attribute="connexionGig"
+     permission="zope2.View"
+  />
+
 </configure>
