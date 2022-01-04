@@ -248,6 +248,9 @@ msgstr "Activé"
 msgid "ended"
 msgstr "Terminé"
 
+msgid "frozen_suspension"
+msgstr "Gelé (délais suspendus)"
+
 msgid "genericlicence_investigationstart_valdiation_error"
 msgstr "Un événement de type 'Enquête publique' est lié à cette enquête, vous devez donc définir une date valide.  Si vous souhaitez supprimer cette enquête, supprimez d'abord l'événement lié.  <a href='${linkedurbaneventurl}'>Cliquez ici pour y accéder</a>"
 

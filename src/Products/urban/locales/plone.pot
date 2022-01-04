@@ -367,3 +367,6 @@ msgstr ""
 
 msgid "resume_thaw"
 msgstr ""
+
+msgid "frozen_suspension"
+msgstr ""
