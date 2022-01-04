@@ -177,7 +177,7 @@ class UrbanFreezeDuration(DefaultFreezeDuration):
             start = suspension_event.getEventDate()
             end = suspension_event.getSuspensionEndDate()
             if start and end:
-                new_freeze_duration = int(freeze_infos['previous_freeze_duration'] or 0 + (end - start))
+                new_freeze_duration = int((freeze_infos['previous_freeze_duration'] or 0) + (end - start))
                 return new_freeze_duration
 
         return super(UrbanFreezeDuration, self).freeze_duration
