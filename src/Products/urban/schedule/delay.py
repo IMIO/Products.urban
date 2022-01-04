@@ -167,14 +167,11 @@ class UrbanFreezeDuration(DefaultFreezeDuration):
 
     @property
     def freeze_duration(self):
-        annotations = IAnnotations(self.task)
-        freeze_infos = annotations['imio.schedule.freeze_task']
         licence = self.task
-
         suspension_event = licence.getLastSuspension()
         if suspension_event:
             start = suspension_event.getEventDate()
-            end =suspension_event.getSuspensionEndDate()
+            end = suspension_event.getSuspensionEndDate()
             if start and end:
                 new_freeze_duration = end - start
                 return new_freeze_duration
