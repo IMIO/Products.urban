@@ -54,7 +54,7 @@
         for="Products.urban.interfaces.IGenericLicence
              imio.schedule.content.task.IAutomatedTask"
         provides="imio.schedule.interfaces.IFreezeDuration"
-        factory=".delay.DefaultFreezeDuration"
+        factory=".delay.UrbanFreezeDuration"
         name="schedule.freeze_duration"
     />
 
