@@ -11,6 +11,8 @@ from Products.urban.interfaces import IInquiry
 from Products.urban.schedule.interfaces import ITaskWithSuspensionDelay
 from Products.urban.schedule.interfaces import ITaskWithWholeSuspensionDelay
 
+from zope.annotation import IAnnotations
+
 
 class UrbanBaseDelay(BaseCalculationDelay):
     """
@@ -167,13 +169,15 @@ class UrbanFreezeDuration(DefaultFreezeDuration):
 
     @property
     def freeze_duration(self):
-        licence = self.task
+        annotations = IAnnotations(self.task)
+        freeze_infos = annotations['imio.schedule.freeze_task']
+        licence = self.container
         suspension_event = licence.getLastSuspension()
         if suspension_event:
             start = suspension_event.getEventDate()
             end = suspension_event.getSuspensionEndDate()
             if start and end:
-                new_freeze_duration = end - start
+                new_freeze_duration = int(freeze_infos['previous_freeze_duration'] or 0 + (end - start))
                 return new_freeze_duration
 
         return super(UrbanFreezeDuration, self).freeze_duration
