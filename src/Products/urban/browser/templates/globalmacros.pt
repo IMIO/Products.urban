@@ -40,7 +40,7 @@
      </form>
     </div>
     <div class="parcel-action">
-     <form name="gig_connexion" action="https://carto.luxembourg.be/" method="get" target="_blank" >
+     <form  tal:attributes="action python: context.absolute_url() + '/connexion_gig_view'" name="gig_connexion" action="connexion_gig_view" method="post" target="_blank" >
       <input type="submit" class="context apButton" id="gig_connexion_link" value="carottage" />
      </form>
     </div>
