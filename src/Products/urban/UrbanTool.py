@@ -708,7 +708,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         renderedDescription = text
         for expr in re.finditer('\[\[(.*?)\]\]', text):
             if not renderToNull:
-                helper_view = context.restrictedTraverse('document_generation_helper_view')
+                helper_view = context.unrestrictedTraverse('document_generation_helper_view')
                 data = {
                     'self': helper_view.context,
                     'object': helper_view,
