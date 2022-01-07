@@ -57,6 +57,8 @@ class AnnoncedDelay(UrbanBaseDelay):
         base_delay = super(AnnoncedDelay, self).calculate_delay()
         licence = self.task_container
         delay = licence.getAnnoncedDelay() or 0
+        if hasattr(licence, 'decisional_delay'):
+            delay = licence.getDecisional_delay()
         if with_modified_blueprints and licence.getHasModifiedBlueprints():
             delay = licence.getDelayAfterModifiedBlueprints() or 0
         if delay and delay.endswith('j'):
