@@ -1362,6 +1362,9 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
     def getLastSuspension(self):
         return self.getLastEvent(interfaces.ISuspensionEvent)
 
+    def getAllSuspensionEvents(self):
+        return self.getAllEvents(interfaces.ISuspensionEvent)
+
     def getAllEvents(self, eventInterface=IUrbanEvent, state=None):
         return self.getAllEventsByObjectValues(eventInterface, state)
 
