@@ -262,6 +262,9 @@ def fix_PODTemplates_empty_filename(context):
     catalog = api.portal.get_tool('portal_catalog')
     all_templates = [b.getObject() for b in catalog(object_provides=IPODTemplate.__identifier__)]
     for template in all_templates:
+        # odt_file can be stored in tuples
+        if template.odt_file and hasattr(template.odt_file, '__iter__'):
+            template.odt_file = template.odt_file[0]
         if not template.odt_file.filename:
             template_id = template.id
             if type(template_id) is str:
