@@ -105,8 +105,8 @@ def migrate_eventconfigs_description_field(context):
         all_eventconfigs.extend(licenceconf.getEventConfigs())
     for eventc in all_eventconfigs:
         description = type(eventc.description) is RichTextValue and eventc.description.raw or eventc.description
-        if type(description) is unicode:
-            description = description.encode('utf-8')
+        if type(description) is str:
+            description = description.decode('utf-8')
         if isinstance(description, basestring):
             eventc.description = RichTextValue(description)
             eventc.reindexObject()
