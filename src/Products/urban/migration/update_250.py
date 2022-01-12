@@ -265,7 +265,9 @@ def fix_PODTemplates_empty_filename(context):
         # odt_file can be stored in tuples
         if template.odt_file and hasattr(template.odt_file, '__iter__'):
             template.odt_file = template.odt_file[0]
-        if template.odt_file and not template.odt_file.filename:
+        if not template.odt_file:
+            continue
+        if not template.odt_file.filename:
             template_id = template.id
             if type(template_id) is str:
                 template_id = template_id.decode('utf-8')
