@@ -64,7 +64,7 @@
          collective.eeafaceted.z3ctable.interfaces.IFacetedTable"
     factory=".columns.LicenceDepositDateColumn"
     provides="collective.eeafaceted.z3ctable.interfaces.IFacetedColumn"
-    name="licence_deposit_date"
+    name="getDepositDate"
     />
 
   <adapter
