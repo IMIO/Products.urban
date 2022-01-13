@@ -158,7 +158,7 @@ class LicenceDepositDateColumn(BaseColumn):
     """ Licence final due date column for schedule listings."""
 
     def renderCell(self, item):
-        date = item.deposit_date
+        date = item.getDepositDate
         if date:
             return date.strftime('%d/%m/%Y')
         return '-'
