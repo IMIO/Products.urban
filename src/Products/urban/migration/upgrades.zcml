@@ -267,4 +267,12 @@
         handler=".update_250.fix_PODTemplates_empty_filename"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Fix notary specificfeatures code"
+        description="urban upgrade step"
+        source="1104"
+        destination="1105"
+        handler=".update_250.migrate_notaryletter_specificfeatures_texts"
+        profile="Products.urban:default" />
+
 </configure>

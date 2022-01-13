@@ -11,6 +11,7 @@ from plone.app.uuid.utils import uuidToObject
 
 from Products.urban.interfaces import IGenericLicence
 import logging
+import re
 
 logger = logging.getLogger('urban: migrations')
 
@@ -275,4 +276,25 @@ def fix_PODTemplates_empty_filename(context):
             logger.info("fixed template {}".format(template))
         if template.odt_file.contentType == 'applications/odt':
             template.odt_file.contentType = 'application/vnd.oasis.opendocument.text'
+    logger.info("upgrade done!")
+
+def migrate_notaryletter_specificfeatures_texts(context):
+    """
+    """
+    logger = logging.getLogger('urban: migrate specificfeatures text codes')
+    logger.info("starting upgrade steps")
+    portal_urban = api.portal.get_tool('portal_urban')
+    config = portal_urban.codt_notaryletter
+    voc_folder_ids = ['specificfeatures', 'locationspecificfeatures', 'roadspecificfeatures']
+    for voc_folder_id in  voc_folder_ids:
+        voc_folder = getattr(config, voc_folder_id)
+        for value in voc_folder.objectValues():
+            if '[[' in value.Description():
+                new_text = re.sub("\[\[object.getValueForTemplate\('parcellings'\s*,\s*subfield='(\w*)'\),?\s*\]\]", r"[[object.getParcellings().\1]]", value.Description())
+                new_text = re.sub("\[\['/'.join\(object.getValueForTemplate\('parcellings'\s*,\s*subfield='authorizationDate'\).split\(\)\[0\].split\('/'\)\[::-1\]\),?\s*\]\]", r"[[format_date(object.getParcellings().getAuthorizationDate())]]", new_text)
+                new_text = re.sub("\[\[object.getValueForTemplate\('(\w*)'\),?\s*\]\]", r'[[object.\1]]', new_text)
+                new_text = re.sub("\[\[object.getValueForTemplate\('(\w*)'\s*,\s*subfield='(\w*)'\),?\s*\]\]", r"[[voc_term('\1').\2]]", new_text)
+                new_text = re.sub("\[\['/'.join\(object.getValueForTemplate\('(\w*)'\s*,\s*subfield='decreeDate'\).split\(\)\[0\].split\('/'\)\[::-1\]\),?\s*\]\]", r"[[format_date(voc_term('\1').getDecreeDate())]]", new_text)
+                value.setDescription(new_text)
+                value.reindexObject()
     logger.info("upgrade done!")
