@@ -295,6 +295,8 @@ def migrate_notaryletter_specificfeatures_texts(context):
                 new_text = re.sub("\[\[object.getValueForTemplate\('(\w*)'\),?\s*\]\]", r'[[object.\1]]', new_text)
                 new_text = re.sub("\[\[object.getValueForTemplate\('(\w*)'\s*,\s*subfield='(\w*)'\),?\s*\]\]", r"[[voc_term('\1').\2]]", new_text)
                 new_text = re.sub("\[\['/'.join\(object.getValueForTemplate\('(\w*)'\s*,\s*subfield='decreeDate'\).split\(\)\[0\].split\('/'\)\[::-1\]\),?\s*\]\]", r"[[format_date(voc_term('\1').getDecreeDate())]]", new_text)
+                new_text = re.sub("\[\[', '.join\(object.getValuesForTemplate\('(\w*)'\s*,\s*subfield='(\w*)'\)\),?\s*\]\]", r"[[', '.join([t.\2 for t in voc_terms('\1')])]]", new_text)
+                new_text = re.sub("\[\[', '.join\(object.getValuesForTemplate\('(\w*)'\s*,\s*subfield='(\w*)'},?\),?\s*\]\]", r"[[', '.join([t.\2 for t in voc_terms('\1')])]]", new_text)
                 value.setDescription(new_text)
                 value.reindexObject()
     logger.info("upgrade done!")

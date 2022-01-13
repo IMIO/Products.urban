@@ -1107,7 +1107,7 @@ default_values = {
             {
                 'id': "rcu-approuve-provisoirement",
                 'title': u"Règlement communal d'urbanisme (approuvé provisoirement),",
-                'description': "<p>est situé sur le territoire ou la partie du territoire communal où le règlement communal d'urbanisme approuvé provisoirement par [[', '.join(object.getValuesForTemplate('RCU', subfield='extraValue'},) ]] est applicable;</p>",
+                'description': "<p>est situé sur le territoire ou la partie du territoire communal où le règlement communal d'urbanisme approuvé provisoirement par [[', '.join(object.getValuesForTemplate('RCU', subfield='extraValue')) ]] est applicable;</p>",
                 'relatedFields': ['RCU', '']
             },
             {
@@ -1275,7 +1275,7 @@ default_values = {
             {
                 'id': "rcu-approuve-provisoirement",
                 'title': u"Règlement communal d'urbanisme (approuvé provisoirement),",
-                'description': "<p>est situé sur le territoire ou la partie du territoire communal où le règlement communal d'urbanisme approuvé provisoirement par [[', '.join(object.getValuesForTemplate('RCU', subfield='extraValue'},) ]] est applicable;</p>",
+                'description': "<p>est situé sur le territoire ou la partie du territoire communal où le règlement communal d'urbanisme approuvé provisoirement par [[', '.join(object.getValuesForTemplate('RCU', subfield='extraValue')) ]] est applicable;</p>",
                 'relatedFields': ['RCU', '']
             },
             {
