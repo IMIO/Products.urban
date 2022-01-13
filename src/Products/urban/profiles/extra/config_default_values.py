@@ -1048,60 +1048,60 @@ default_values = {
             {
                 'id': "situe-en-zone",
                 'title': u"Situé en Zone [...]",
-                'description': "<p>est situé en [[object.getValueForTemplate('folderZone'),]] au plan de secteur de NAMUR adopté par Arrêté Ministériel du 14 mai 1986 et qui n'a pas cessé de produire ses effets pour le bien précité;</p>",
+                'description': "<p>est situé en [[object.folderZone]] au plan de secteur de NAMUR adopté par Arrêté Ministériel du 14 mai 1986 et qui n'a pas cessé de produire ses effets pour le bien précité;</p>",
                 'relatedFields': ['folderZone', '']
             },
             {
                 'id': "plan-de-secteur",
                 'title': u"Plan de secteur",
-                'description': "<p>est situé - dans un périmètre ... - en [[object.getValueForTemplate('folderZone'),]] au projet - de révision du - de - plan de secteur de ... adopté par ... du ...;</p>",
+                'description': "<p>est situé - dans un périmètre ... - en [[object.folderZone]] au projet - de révision du - de - plan de secteur de ... adopté par ... du ...;</p>",
                 'relatedFields': ['folderZone', '']
             },
             {
                 'id': "plan-communal-ammenagement",
                 'title': u"En Plan Communal d'Aménagement",
-                'description': "<p>est situé en [[object.getValueForTemplate('folderZone'),]] dans le périmètre du plan communal d'aménagement [[object.getValueForTemplate('pca', subfield='label')]] approuvé par [[object.getValueForTemplate('pca', subfield='decreeType')]] du [['/'.join(object.getValueForTemplate('pca', subfield='decreeDate').split()[0].split('/')[::-1]) ]] et qui n'a pas cessé de produire ses effets pour le bien précité;</p>",
+                'description': "<p>est situé en [[object.folderZone]] dans le périmètre du plan communal d'aménagement [[voc_term('pca').label]] approuvé par [[voc_term('pca').decreeType]] du [[format_date(voc_term('pca').decreeDate)]] et qui n'a pas cessé de produire ses effets pour le bien précité;</p>",
                 'relatedFields': ['folderZone', 'isInPCA', 'pca', '']
             },
             {
                 'id': "plan-communal-ammenagement-revision",
                 'title': u"En Plan Communal d'Aménagement (révision),",
-                'description': "<p>est situé en [[object.getValueForTemplate('folderZone'),]] dans le périmètre du projet - de révision du - de - plan communal d'aménagement [[object.getValueForTemplate('pca', subfield='label')]] approuvé par [[object.getValueForTemplate('pca', subfield='decreeType')]] du [['/'.join(object.getValueForTemplate('pca', subfield='decreeDate').split()[0].split('/')[::-1]) ]];</p>",
+                'description': "<p>est situé en [[object.folderZone]] dans le périmètre du projet - de révision du - de - plan communal d'aménagement [[voc_term('pca').label]] approuvé par [[voc_term('pca').decreeType]] du [[format_date(voc_term('pca').decreeDate)]];</p>",
                 'relatedFields': ['folderZone', 'isInPCA', 'pca', '']
             },
             {
                 'id': "perimetre-lotissement",
                 'title': u"Dans un lot dans le périmètre d'un lotissement",
-                'description': "<p>est situé sur le(s}, lot(s) n° [[object.getValueForTemplate('subdivisionDetails')]] dans le périmètre du lotissement [[object.getValueForTemplate('parcellings', subfield='label')]]non périmé autorisé du [['/'.join(object.getValueForTemplate('parcellings', subfield='authorizationDate').split()[0].split('/')[::-1]) ]];</p>",
+                'description': "<p>est situé sur le(s), lot(s) n° [[object.subdivisionDetails]] dans le périmètre du lotissement [[object.getParcellings().label]]non périmé autorisé du [[format_date(object.getParcellings().getAuthorizationDate()) ]];</p>",
             },
             {
                 'id': "ssc",
                 'title': u"Schéma de structure communal",
-                'description': "<p> est situé en [[object.getValueForTemplate('SSC'),]] au schéma de structure communal adopté par [[object.getValueForTemplate('SSC', subfield='extraValue') ]];</p>",
+                'description': "<p> est situé en [[object.SSC]] au schéma de structure communal adopté par [[voc_term('SSC').extraValue ]];</p>",
                 'relatedFields': ['SSC', '']
             },
             {
                 'id': "ssc-revision",
                 'title': u"Schéma de structure communal (révision),",
-                'description': "<p> est situé en [[object.getValueForTemplate('SSC'),]] au projet de - révision du - de - schéma de structure communal adopté par [[object.getValueForTemplate('SSC', subfield='extraValue') ]];</p>",
+                'description': "<p> est situé en [[object.SSC]] au projet de - révision du - de - schéma de structure communal adopté par [[voc_term('SSC').extraValue ]];</p>",
                 'relatedFields': ['SSC', '']
             },
             {
                 'id': "rcu",
                 'title': u"Règlement communal d'urbanisme",
-                'description': "<p>est situé sur le territoire ou la partie du territoire communal où le règlement régional d'urbanisme [[object.getValueForTemplate('folderZone'}, ]] est applicable;</p>",
+                'description': "<p>est situé sur le territoire ou la partie du territoire communal où le règlement régional d'urbanisme [[object.folderZone]] est applicable;</p>",
                 'relatedFields': ['RCU', '']
             },
             {
                 'id': "rcu-approuve",
                 'title': u"Règlement communal d'urbanisme (approuvé),",
-                'description': "<p>est situé sur le territoire ou la partie du territoire communal où le règlement communal d'urbanisme approuvé par [[object.getValueForTemplate('RCU', subfield='extraValue'),]] est applicable;</p>",
+                'description': "<p>est situé sur le territoire ou la partie du territoire communal où le règlement communal d'urbanisme approuvé par [[voc_term('RCU').extraValue,]] est applicable;</p>",
                 'relatedFields': ['RCU', '']
             },
             {
                 'id': "rcu-revision",
                 'title': u"Règlement communal d'urbanisme (révision),",
-                'description': "<p>est situé sur le territoire ou la partie du territoire communal visé(e}, par le projet - de révision du - de - règlement communal d'urbanisme approuvé par [[object.getValueForTemplate('RCU', subfield='extraValue')]] est applicable;</p>",
+                'description': "<p>est situé sur le territoire ou la partie du territoire communal visé(e), par le projet - de révision du - de - règlement communal d'urbanisme approuvé par [[voc_term('RCU').extraValue]] est applicable;</p>",
                 'relatedFields': ['RCU', '']
             },
             {
@@ -1216,60 +1216,60 @@ default_values = {
             {
                 'id': "situe-en-zone",
                 'title': u"Situé en Zone [...]",
-                'description': "<p>est situé en [[object.getValueForTemplate('folderZone'),]] au plan de secteur de ... adopté par ... du ... et qui n'a pas cessé de produire ses effets pour le bien précité;</p>",
+                'description': "<p>est situé en [[object.folderZone]] au plan de secteur de ... adopté par ... du ... et qui n'a pas cessé de produire ses effets pour le bien précité;</p>",
                 'relatedFields': ['folderZone', '']
             },
             {
                 'id': "plan-de-secteur",
                 'title': u"Plan de secteur",
-                'description': "<p>est situé - dans un périmètre ... - en [[object.getValueForTemplate('folderZone'),]] au projet - de révision du - de - plan de secteur de ... adopté par ... du ...;</p>",
+                'description': "<p>est situé - dans un périmètre ... - en [[object.folderZone]] au projet - de révision du - de - plan de secteur de ... adopté par ... du ...;</p>",
                 'relatedFields': ['folderZone', '']
             },
             {
                 'id': "plan-communal-ammenagement",
                 'title': u"En Plan Communal d'Aménagement",
-                'description': "<p>est situé en [[object.getValueForTemplate('folderZone'),]] dans le périmètre du plan communal d'aménagement [[object.getValueForTemplate('pca', subfield='label')]] approuvé par [[object.getValueForTemplate('pca', subfield='decreeType')]] du [['/'.join(object.getValueForTemplate('pca', subfield='decreeDate').split()[0].split('/')[::-1]) ]] et qui n'a pas cessé de produire ses effets pour le bien précité;</p>",
+                'description': "<p>est situé en [[object.folderZone]] dans le périmètre du plan communal d'aménagement [[voc_term('pca').label]] approuvé par [[voc_term('pca').decreeType]] du [[format_date(voc_term('pca').decreeDate)]] et qui n'a pas cessé de produire ses effets pour le bien précité;</p>",
                 'relatedFields': ['folderZone', 'isInPCA', 'pca', '']
             },
             {
                 'id': "plan-communal-ammenagement-revision",
                 'title': u"En Plan Communal d'Aménagement (révision),",
-                'description': "<p>est situé en [[object.getValueForTemplate('folderZone'),]] dans le périmètre du projet - de révision du - de - plan communal d'aménagement [[object.getValueForTemplate('pca', subfield='label')]] approuvé par [[object.getValueForTemplate('pca', subfield='decreeType')]] du [['/'.join(object.getValueForTemplate('pca', subfield='decreeDate').split()[0].split('/')[::-1]) ]];</p>",
+                'description': "<p>est situé en [[object.folderZone]] dans le périmètre du projet - de révision du - de - plan communal d'aménagement [[voc_term('pca').label]] approuvé par [[voc_term('pca').decreeType]] du [[format_date(voc_term('pca').decreeDate)]];</p>",
                 'relatedFields': ['folderZone', 'isInPCA', 'pca', '']
             },
             {
                 'id': "perimetre-lotissement",
                 'title': u"Dans un lot dans le périmètre d'un lotissement",
-                'description': "<p>est situé sur le(s}, lot(s) n° [[object.getValueForTemplate('subdivisionDetails')]] dans le périmètre du lotissement [[object.getValueForTemplate('parcellings', subfield='label')]]non périmé autorisé du [['/'.join(object.getValueForTemplate('parcellings', subfield='authorizationDate').split()[0].split('/')[::-1]) ]];</p>",
+                'description': "<p>est situé sur le(s}, lot(s) n° [[object.subdivisionDetails]] dans le périmètre du lotissement [[object.getParcellings().label]] non périmé autorisé du [[format_date(object.getParcellings().getAuthorizationDate()) ]];</p>",
             },
             {
                 'id': "ssc",
                 'title': u"Schéma de structure communal",
-                'description': "<p> est situé en [[object.getValueForTemplate('SSC'),]] au schéma de structure communal adopté par [[object.getValueForTemplate('SSC', subfield='extraValue') ]];</p>",
+                'description': "<p> est situé en [[object.SSC]] au schéma de structure communal adopté par [[voc_term('SSC').extraValue ]];</p>",
                 'relatedFields': ['SSC', '']
             },
             {
                 'id': "ssc-revision",
                 'title': u"Schéma de structure communal (révision),",
-                'description': "<p> est situé en [[object.getValueForTemplate('SSC'),]] au projet de - révision du - de - schéma de structure communal adopté par [[object.getValueForTemplate('SSC', subfield='extraValue') ]];</p>",
+                'description': "<p> est situé en [[object.SSC]] au projet de - révision du - de - schéma de structure communal adopté par [[voc_term('SSC').extraValue ]];</p>",
                 'relatedFields': ['SSC', '']
             },
             {
                 'id': "rcu",
                 'title': u"Règlement communal d'urbanisme",
-                'description': "<p>est situé sur le territoire ou la partie du territoire communal où le règlement régional d'urbanisme [[object.getValueForTemplate('folderZone'}, ]] est applicable;</p>",
+                'description': "<p>est situé sur le territoire ou la partie du territoire communal où le règlement régional d'urbanisme [[object.folderZone]] est applicable;</p>",
                 'relatedFields': ['RCU', '']
             },
             {
                 'id': "rcu-approuve",
                 'title': u"Règlement communal d'urbanisme (approuvé),",
-                'description': "<p>est situé sur le territoire ou la partie du territoire communal où le règlement communal d'urbanisme approuvé par [[object.getValueForTemplate('RCU', subfield='extraValue'),]] est applicable;</p>",
+                'description': "<p>est situé sur le territoire ou la partie du territoire communal où le règlement communal d'urbanisme approuvé par [[voc_term('RCU').extraValue,]] est applicable;</p>",
                 'relatedFields': ['RCU', '']
             },
             {
                 'id': "rcu-revision",
                 'title': u"Règlement communal d'urbanisme (révision),",
-                'description': "<p>est situé sur le territoire ou la partie du territoire communal visé(e}, par le projet - de révision du - de - règlement communal d'urbanisme approuvé par [[object.getValueForTemplate('RCU', subfield='extraValue')]] est applicable;</p>",
+                'description': "<p>est situé sur le territoire ou la partie du territoire communal visé(e), par le projet - de révision du - de - règlement communal d'urbanisme approuvé par [[voc_term('RCU').extraValue]] est applicable;</p>",
                 'relatedFields': ['RCU', '']
             },
             {
