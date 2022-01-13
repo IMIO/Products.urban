@@ -154,6 +154,16 @@ class LicenceFinalDueDateColumn(BaseColumn):
         return due_date.strftime('%d/%m/%Y')
 
 
+class LicenceDepositDateColumn(BaseColumn):
+    """ Licence final due date column for schedule listings."""
+
+    def renderCell(self, item):
+        date = item.deposit_date
+        if date:
+            return date.strftime('%d/%m/%Y')
+        return '-'
+
+
 class TaskActionsColumn(ActionsColumn):
     """Display actions for the task"""
     params = {
