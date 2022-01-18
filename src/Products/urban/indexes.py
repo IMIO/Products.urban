@@ -15,6 +15,7 @@ Jean-Michel Abe <jm.abe@la-bruyere.be>"""
 __docformat__ = 'plaintext'
 
 from datetime import date
+from DateTime import DateTime
 
 from imio.schedule.content.task import IAutomatedTask
 
@@ -206,7 +207,12 @@ def genericlicence_decisiondate(licence):
             catalog = api.portal.get_tool('portal_catalog')
             brain = catalog(UID=licence.UID())
             if brain and brain[0].getDecisionDate:
-                return brain.getDecisionDate
+                old_decision_date = brain[0].getDecisionDate
+                if type(old_decision_date) is DateTime:
+                    decision_date = date(old_decision_date.year(), old_decision_date.month(), old_decision_date.day())
+                else:
+                    decision_date = date(old_decision_date.year, old_decision_date.month, old_decision_date.day)
+                return decision_date
         if linked_pm_items:
             meeting_date = linked_pm_items[0]['meeting_date']
             if not (meeting_date.day == meeting_date.month == 1 and meeting_date.year == 1950):
