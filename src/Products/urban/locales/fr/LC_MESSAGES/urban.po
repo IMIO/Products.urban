@@ -2568,6 +2568,9 @@ msgstr "Zone de surveillance"
 msgid "tal_condition_descr"
 msgstr "Entrez une condition TAL.  Les variables 'here' et 'member' sont disponibles"
 
+msgid "tax_folder_title"
+msgstr "Redevances"
+
 #. Default: "Events templates"
 #: ../browser/templates/templatessummary.pt:28
 msgid "templates_events_title"
@@ -5712,6 +5715,9 @@ msgstr "!!!Attention, aucune date de dépôt n'a été trouvée!!!"
 #: ../browser/licence/codt_buildlicenceview.py:26
 msgid "warning_outdated_parcel"
 msgstr "Attention, la référence cadastrale n'est plus à jour!"
+
+msgid "watercourses_folder_title"
+msgstr "Liste des cours d'eau de la commune"
 
 #: ../browser/offdays_settings.py:68
 msgid "weekdays"
