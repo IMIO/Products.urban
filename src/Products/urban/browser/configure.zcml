@@ -458,9 +458,9 @@
 
   <browser:page
      for="*"
-     name="connexion_gig_view"
-     class=".connexion_gig_view.ConnexionGigView"
-     attribute="connexionGig"
+     name="gig_coring_view"
+     class=".gig_coring_view.GigCoringView"
+     attribute="open_gig_and_load_parcels"
      permission="zope2.View"
   />
 
