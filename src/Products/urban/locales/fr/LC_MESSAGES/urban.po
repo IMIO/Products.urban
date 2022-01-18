@@ -2621,6 +2621,9 @@ msgstr "Catégories de dossiers communales"
 msgid "townshipspecificfeatures_folder_title"
 msgstr "Particularités du bien communales"
 
+msgid "trails_folder_title"
+msgstr "Liste des sentiers et chemins vicinaux de la commune"
+
 msgid "uniquelicence_urbanconfig_title"
 msgstr "Paramètres des permis uniques"
 
