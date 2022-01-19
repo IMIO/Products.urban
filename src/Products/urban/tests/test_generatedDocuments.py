@@ -251,8 +251,10 @@ class TestGetRelatedLicences(unittest.TestCase):
         def setUp(self):
             portal = self.layer['portal']
             self.buildlicence = portal.urban.buildlicences.objectValues()[-1]
-            self.helper_view = self.buildlicence.unrestrictedTraverse('document_generation_helper_view')
             login(portal, 'urbaneditor')
+            portal.urban.codt_urbancertificateones.invokeFactory("CODT_UrbanCertificateOne", id="cu1historic")
+            self.codt_urbancertificateone = portal.urban.codt_urbancertificateones.objectValues()[-1]
+            self.helper_view = self.buildlicence.unrestrictedTraverse('document_generation_helper_view')
 
         def testRelatedLicencesLicenceState(self):
             self.assertTrue(len(self.helper_view.get_related_licences())==12)
@@ -264,3 +266,42 @@ class TestGetRelatedLicences(unittest.TestCase):
             self.assertTrue(self.helper_view.get_related_licences(licence_types=['CODT_ParcelOutLicence'])[0].portal_type=='CODT_ParcelOutLicence')
             self.assertTrue(self.helper_view.get_related_licences(licence_types=['CODT_BuildLicence'])[0].portal_type=='CODT_BuildLicence')
             self.assertTrue(self.helper_view.get_related_licences(licence_types=['ParcelOutLicence'])[0].portal_type=='ParcelOutLicence')
+
+        def testRelatedLicencesWithHistoric(self):
+            # add a parcel in the history of self.buildlicence
+            self.buildlicence.invokeFactory(
+                'Parcel',
+                'test_parcel6',
+                division='62006',
+                section='A',
+                radical='552',
+                exposant='V'
+            )
+            # no more licence with historic
+            self.assertTrue(
+                len(self.helper_view.get_related_licences(with_historic=True)) == 12)
+            self.assertTrue(self.helper_view.get_related_licences(licence_types=['CODT_ParcelOutLicence'])[
+                                0].portal_type == 'CODT_ParcelOutLicence')
+            self.assertTrue(self.helper_view.get_related_licences(licence_types=['CODT_BuildLicence'])[
+                                0].portal_type == 'CODT_BuildLicence')
+            self.assertTrue(
+                self.helper_view.get_related_licences(licence_types=['ParcelOutLicence'])[0].portal_type == 'ParcelOutLicence')
+            # no CODT_UrbanCertificateOne related licence at all
+            self.assertTrue(len(self.helper_view.get_related_licences(licence_types=['CODT_UrbanCertificateOne'],
+                                                                      with_historic=True)) == 0)
+            # add a test_parcel6 historic parcel
+            self.codt_urbancertificateone.invokeFactory(
+                'Parcel',
+                'test_parcel7',
+                division='62006',
+                section='A',
+                radical='552',
+                exposant='I'
+            )
+            self.codt_urbancertificateone.reindexObject()
+            # now we have one related licence
+            self.assertTrue(len(self.helper_view.get_related_licences(licence_types=['CODT_UrbanCertificateOne'],
+                                                                      with_historic=True)) == 1)
+            # and this is the cu1historic id licence
+            self.assertTrue(self.helper_view.get_related_licences(licence_types=['CODT_UrbanCertificateOne'],
+                                                                  with_historic=True)[0].id == 'cu1historic')
