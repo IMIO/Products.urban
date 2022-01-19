@@ -2767,18 +2767,6 @@ msgstr ""
 msgid "urban_button_search"
 msgstr ""
 
-msgid "urban_label_trail"
-msgstr ""
-
-msgid "urban_label_trailDetails"
-msgstr ""
-
-msgid "urban_label_watercourse"
-msgstr ""
-
-msgid "urban_label_watercourseCategories"
-msgstr ""
-
 msgid "watercourses_folder_title"
 msgstr ""
 
@@ -2787,16 +2775,6 @@ msgstr ""
 
 msgid "college_holydays"
 msgstr ""
-
-msgid "category1"
-msgstr ""
-
-msgid "category2"
-msgstr ""
-
-msgid "category3"
-msgstr ""
-
 
 msgid "inquiry_suspension"
 msgstr ""
