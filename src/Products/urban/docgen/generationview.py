@@ -65,6 +65,8 @@ class UrbanDocGenerationView(PersistentDocumentGenerationView):
         if hasattr(licence, 'getPlaintiffs'):
             plaintiffs = licence.getPlaintiffs()
             plaintiffobj = plaintiffs and plaintiffs[0] or None
+        bound_roaddecrees = [dec.restrictedTraverse('@@document_generation_helper_view')
+                             for dec in licence.get_bound_roaddecrees()] or None
 
         generation_context = {
             'this': licence,
@@ -82,6 +84,8 @@ class UrbanDocGenerationView(PersistentDocumentGenerationView):
             'event_helper': event_helper_view.context,
             'claimants': claimants_view,
             'inquiry_proprietaries': proprietaries_views,
+            'roaddecrees': bound_roaddecrees,
+            'roaddecree': bound_roaddecrees and bound_roaddecrees[-1],
         }
 
         return generation_context

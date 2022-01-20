@@ -354,22 +354,11 @@ class LicenceView(BrowserView):
                 for b in brains]
             return roaddecrees
 
-    def _get_bound_roaddecrees(self):
-        roaddecrees = []
-        annotations = IAnnotations(self.context)
-        roaddecree_UIDs = list(annotations.get('urban.bound_roaddecrees', []))
-        if roaddecree_UIDs:
-            catalog = api.portal.get_tool('portal_catalog')
-            brains = catalog(UID=roaddecree_UIDs)
-            roaddecrees = [b.getObject() for b in brains]
-            return roaddecrees
-        return []
-
     def getRoadDecreesInquiriesForDisplay(self):
         """
           Returns the bound road decrees inquiries to display on the buildlicence_view
         """
-        roaddecrees = self._get_bound_roaddecrees()
+        roaddecrees = self.context.get_bound_roaddecrees()
         all_inquiries = []
         for roaddecree in roaddecrees:
             context = aq_inner(roaddecree)

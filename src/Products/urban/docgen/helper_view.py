@@ -2,12 +2,15 @@
 
 from collective.documentgenerator.helper.archetypes import ATDisplayProxyObject
 from collective.documentgenerator.helper.archetypes import ATDocumentGenerationHelperView
+from collective.documentgenerator.helper.dexterity import DXDocumentGenerationHelperView
 
 from datetime import date as _date
 from dateutil.relativedelta import relativedelta
 
+from plone.dexterity.interfaces import IDexterityContent
+
+from Products.Archetypes.interfaces import IBaseObject
 from Products.CMFPlone.i18nl10n import ulocalized_time
-from Products.CMFCore.utils import getToolByName
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.utils import getCurrentFolderManager
 from Products.urban.utils import get_ws_meetingitem_infos
@@ -22,14 +25,39 @@ from DateTime import DateTime
 import re
 
 
-class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
+class BaseHelperView(object):
     """
     Urban implementation of document generation helper methods.
     """
 
-    def __init__(self, context, request):
-        super(UrbanDocGenerationHelperView, self).__init__(context, request)
-        self.context.helper_view = self
+    @property
+    def portal_urban(self):
+        urban_tool = api.portal.get_tool('portal_urban')
+        return urban_tool
+
+    def __getattr__(self, attr_name):
+        """
+        """
+        attr = getattr(self.context, attr_name)
+        if callable(attr) and not attr_name.startswith('_'):
+            def proxy_method(*args, **kwargs):
+                result = getattr(self.real_context, attr_name)(*args, **kwargs)
+                if IBaseObject.providedBy(result) or IDexterityContent.providedBy(result):
+                    result_helper = result.unrestrictedTraverse('document_generation_helper_view')
+                    result_helper.appy_renderer = self.appy_renderer
+                    return result_helper
+                elif type(result) in [list, set]:
+                    new_result = []
+                    for element in result:
+                        if IBaseObject.providedBy(element) or IDexterityContent.providedBy(element):
+                            element_helper = element.unrestrictedTraverse('document_generation_helper_view')
+                            new_result.append(element_helper)
+                        else:
+                            new_result.append(element)
+                    return new_result
+                return result
+            return proxy_method
+        return attr
 
     def xhtml(self, html_code, style='UrbanBody'):
         urban_tool = api.portal.get_tool('portal_urban')
@@ -121,6 +149,87 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
             return "%s %s %s" % (translatedDay, translatedMonth, year)
         return ''
 
+    def listVocTerms(self, field):
+        """
+        Deprecated/backward compatibility only
+        See voc_terms
+        """
+        context = self.real_context
+        field = context.getField(field)
+        keys = type(field.getRaw(context)) in (list, tuple) and field.getRaw(context) or [field.getRaw(context)]
+        objs = [field.vocabulary.getAllVocTerms(context).get(key, None) for key in keys]
+        return objs
+
+    def all_voc_terms(self, field_name='', with_coring_values=False):
+        context = self.real_context
+        field = context.getField(field_name)
+        voc_terms = []
+        if field.vocabulary:
+            voc_terms = field.vocabulary.getAllVocTerms(context).values()
+        elif field.vocabulary_factory:
+            voc_utility = getUtility(IVocabularyFactory, field.vocabulary_factory)
+            if with_coring_values:
+                simple_voc = voc_utility(context)
+                return simple_voc.by_value.values()
+            else:
+                voc_terms = voc_utility._get_config_vocabulary_values(context)
+
+        voc_terms_proxy = []
+        for v in voc_terms:
+            voc_terms_view = v.unrestrictedTraverse('@@document_generation_helper_view')
+            voc_terms_view.appy_renderer = self.appy_renderer
+            voc_terms_proxy.append(voc_terms_view.context)
+        return voc_terms_proxy
+
+    def voc_terms(self, field_name='', with_coring_values=False):
+        context = self.real_context
+        all_voc_terms = self.all_voc_terms(field_name, with_coring_values)
+        selected_values = context.getField(field_name).get(context)
+        voc_terms = [t for t in all_voc_terms if getattr(t, 'id', getattr(t, 'value', None)) in selected_values]
+        return voc_terms
+
+    def voc_terms_id(self, field_name='', with_coring_values=False):
+        voc_terms = self.voc_terms(field_name, with_coring_values)
+        voc_terms_id = [voc_term.id for voc_term in voc_terms]
+        return voc_terms_id
+
+    def voc_term(self, field_name='', with_coring_values=False):
+        context = self.real_context
+        all_voc_terms = self.all_voc_terms(field_name, with_coring_values)
+        selected_value = context.getField(field_name).get(context)
+        if type(selected_value) in [list, tuple]:
+            selected_value = selected_value[0]
+        for term in all_voc_terms:
+            term_value = hasattr(term, 'id') and term.id or term.value
+            if term_value == selected_value:
+                return term
+        return None
+
+
+class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView, BaseHelperView):
+    """
+    Urban implementation of document generation helper methods.
+    """
+
+    def __init__(self, context, request):
+        super(UrbanDocGenerationHelperView, self).__init__(context, request)
+        self.context.helper_view = self
+
+
+class DXUrbanDocGenerationHelperView(DXDocumentGenerationHelperView, BaseHelperView):
+    """
+    Urban implementation of document generation helper methods.
+    """
+
+    def __init__(self, context, request):
+        super(DXUrbanDocGenerationHelperView, self).__init__(context, request)
+        self.context.helper_view = self
+
+
+class UrbanDocGenerationLicenceHelperView(UrbanDocGenerationHelperView):
+    """
+    """
+
     def get_checked_specific_features_id_list(self):
         """
         # Particularité(s) du bien
@@ -138,7 +247,7 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
 
     def get_division(self):
         parcels = self.context.getParcels()
-        parcel_view = parcels and parcels[0].restrictedTraverse('document_generation_helper_view')
+        parcel_view = parcels and parcels[0].unrestrictedTraverse('document_generation_helper_view')
         raw_div = parcel_view.context.division
         division = raw_div and raw_div[raw_div.find('(') + 1:-1] or 'DIVISION INCONNUE'
         return division
@@ -286,47 +395,6 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
                 proprietary['city']
         return proprietary_names_and_address
 
-    def get_related_licences_of_parcel(self):
-        """
-          Returns the licences related to a parcel
-        """
-        context = self.context
-        parcels = context.getParcels()
-        relatedLicences = []
-        for parcel in parcels:
-            parcelRecordsView = context.restrictedTraverse('parcelrecordsview')
-            parcelRecordsView.parcel_id = parcel.id
-            relatedLicences += parcelRecordsView.get_related_licences_of_parcel()
-        return relatedLicences
-
-    def get_related_licences_titles_of_parcel(self):
-        """
-          Returns the titles of licences related to a parcel
-        """
-        relatedLicencesTitles = []
-        for relatedLicence in self.get_related_licences_of_parcel():
-            relatedLicencesTitles.append(relatedLicence['title'].decode('utf8'))
-        return relatedLicencesTitles
-
-    def get_specific_features_text(self):
-        """
-        # Particularité(s) du bien
-        """
-        context = self.real_context.aq_parent
-        specificFeatures = context.getSpecificFeatures()
-        specific_features_text = []
-        tool = getToolByName(self, 'portal_urban')
-        for specificFeature in specificFeatures:
-            if specificFeature['check']:
-                if specificFeature['text']:
-                    specific_feature_text = tool.renderText(text=specificFeature['text'], context=context)
-                    specific_features_text.append(specific_feature_text)
-            else:
-                if specificFeature['defaultText']:
-                    specific_feature_text = tool.renderText(text=specificFeature['defaultText'], context=context)
-                    specific_features_text.append(specific_feature_text)
-        return specific_features_text
-
     def get_subdivisionDetails(self):
         context = self.real_context
         subdivisionDetails = context.getSubdivisionDetails()
@@ -355,383 +423,6 @@ class UrbanDocGenerationHelperView(ATDocumentGenerationHelperView):
         work_location_dict.update({'number': workLocation['number']})
         return work_location_dict
 
-    def getEvent(self, title=''):
-        """
-          Return a specific title's UrbanEvent
-        """
-        i = 0
-        found = False
-        events = self.context.getAllEvents()
-        event = None
-        while i < len(events) and not found:
-            if events[i].Title() == title:
-                found = True
-                event = events[i]
-            i = i + 1
-        return event
-
-    def getExpirationDate(self, date=None, year=5):
-        if not date:
-            date = _date.today()
-        expirationDate = _date(date.year(), date.month(), date.day())
-        return self.format_date(expirationDate + relativedelta(years=year))
-
-    def getLimitDate(self, firstDepositDate, delay=20):
-        context = self.real_context
-        if context.annoncedDelay:
-            delay = context.getValueForTemplate('annoncedDelay', context, subfield='deadLineDelay')
-        limitDate = firstDepositDate + int(delay)
-        return self.format_date(limitDate)
-
-    def get_parcels(self, with_commas=False):
-        result = u""
-        context = self.real_context
-        parcels = context.getParcels()
-        for i in range(len(parcels)):
-            for j in range(len(parcels)):
-                if parcels[i].Title() > parcels[j].Title():
-                    parcels[i], parcels[j] = parcels[j], parcels[i]
-        list_grouped_parcels = []
-        grouped_parcels = []
-        division = ''
-        for parcel in parcels:
-            if parcel.getDivisionAlternativeName() != division:
-                division = parcel.getDivisionAlternativeName()
-                grouped_parcels = []
-                grouped_parcels.append(parcel)
-                list_grouped_parcels.append(grouped_parcels)
-            else:
-                grouped_parcels.append(parcel)
-        for elms in list_grouped_parcels:
-            for i in range(len(elms)):
-                for j in range(len(elms)):
-                    if elms[i].getSection() > elms[j].getSection():
-                        elms[i], elms[j] = elms[j], elms[i]
-        for gp in enumerate(list_grouped_parcels):
-            divisionAlternativeName = gp[1][0].getDivisionAlternativeName()
-            section = gp[1][0].getSection().decode('utf8')
-            if with_commas:
-                result += u"{}, section {}, ".format(divisionAlternativeName, section)
-            else:
-                result += u"{} section {} ".format(divisionAlternativeName, section)
-            for p in enumerate(gp[1]):
-                if section != p[1].getSection():
-                    section = p[1].getSection()
-                    if with_commas:
-                        result += u"section {}, ".format(section)
-                    else:
-                        result += u"section {} ".format(section)
-                result += u"n° {}{}{}{}".format(
-                    p[1].getRadical(), p[1].getBis(), p[1].getExposant(), p[1].getPuissance()
-                )
-                if p[0] + 1 != len(gp[1]):
-                    result += u", "
-            if gp[0] + 1 != len(list_grouped_parcels):
-                result += u", "
-        return result
-
-    def query_parcels_in_radius(self, radius='50'):
-        parcels = self.context.getOfficialParcels()
-        session = cadastre.new_session()
-        return session.query_parcels_in_radius(parcels, radius)
-
-    def query_parcels_locations_in_radius(self, radius='50'):
-        parcels = self.context.getOfficialParcels()
-        session = cadastre.new_session()
-        parcels = session.query_parcels_in_radius(parcels, radius)
-        locations = [parcel.location for parcel in parcels]
-        locations.sort()
-        return locations
-
-    def listVocTerms(self, field):
-        """
-        Deprecated/backward compatibility only
-        See voc_terms
-        """
-        context = self.real_context
-        field = context.getField(field)
-        keys = type(field.getRaw(context)) in (list, tuple) and field.getRaw(context) or [field.getRaw(context)]
-        objs = [field.vocabulary.getAllVocTerms(context).get(key, None) for key in keys]
-        return objs
-
-
-class UrbanDocGenerationLicenceHelperView(UrbanDocGenerationHelperView):
-    def get_parcellings(self):
-        """
-        # Lotissement
-        """
-        context = self.real_context
-        parcellings = context.getParcellings()
-        return parcellings.Title()
-
-    def get_parcellings_dict(self):
-        """
-        # Lotissement
-        """
-        context = self.real_context
-        parcellings = context.getParcellings()
-        parcellings_dict = {}
-        if parcellings:
-            parcellings_dict['label'] = parcellings.getLabel()
-            parcellings_dict['subdividerName'] = parcellings.getSubdividerName()
-            parcellings_dict['authorizationDate'] = parcellings.getAuthorizationDate()
-            parcellings_dict['approvalDate'] = parcellings.getApprovalDate()
-            parcellings_dict['DGO4Reference'] = parcellings.getDGO4Reference()
-            parcellings_dict['numberOfParcels'] = parcellings.getNumberOfParcels()
-            parcellings_dict['changesDescription'] = parcellings.getChangesDescription()
-        return parcellings_dict
-
-
-class UrbanDocGenerationEventHelperView(UrbanDocGenerationHelperView):
-    """
-    """
-    def mailing_list(self, gen_context=None):
-        mailing_list = []
-        use_proxy = True
-        if gen_context and 'publipostage' in gen_context:
-            if gen_context['publipostage'] == 'demandeurs':
-                mailing_list = self.real_context.getParentNode().getApplicants()
-            elif gen_context['publipostage'] == 'architectes':
-                mailing_list = self.context.getArchitects()
-            elif gen_context['publipostage'] == 'reclamants':
-                mailing_list = self.context.getClaimants()
-            elif gen_context['publipostage'] == 'derniers_reclamants':
-                mailing_list = self.context.getLinkedUrbanEventInquiry().getClaimants()
-            elif gen_context['publipostage'] == 'proprietaires':
-                mailing_list = self.context.getRecipients(onlyActive=True)
-            elif gen_context['publipostage'] == 'organismes':
-                mailing_list = self.getFolderMakersMailing()
-                use_proxy = False
-        if use_proxy:
-            mailing_list = [obj.restrictedTraverse('@@document_generation_helper_view').context for obj in mailing_list]
-        return mailing_list
-
-    def getFolderMakersMailing(self):
-        """  """
-        mailing_list = []
-        foldermakers = self.getFolderMakers()
-        for foldermaker in foldermakers:
-            html_description = foldermaker['OpinionRequestEventType'].Description()
-            transformed_description = self.portal.portal_transforms.convert(
-                'html_to_web_intelligent_plain_text', html_description).getData().strip('\n ')
-            mailing = {
-                'OpinionRequestEventType': foldermaker['OpinionRequestEventType'],
-                'UrbanEventOpinionRequest': foldermaker['UrbanEventOpinionRequest'],
-                'converted_description': transformed_description
-            }
-            mailing_list.append(mailing)
-        return mailing_list
-
-    def getFolderMakers(self):
-        """  """
-        urban_tool = getToolByName(self, 'portal_urban')
-        foldermakers_config = urban_tool.getUrbanConfig(self.context).urbaneventtypes
-        all_opinion_request_events = self.context.getAllOpinionRequests()
-        foldermakers = []
-        for opinionRequestEventType in foldermakers_config.objectValues('OpinionRequestEventType'):
-            foldermaker = {}
-            if opinionRequestEventType.id in self.getSolicitOpinions():
-                foldermaker['OpinionRequestEventType'] = opinionRequestEventType
-                for urbanEventOpinionRequest in all_opinion_request_events:
-                    if urbanEventOpinionRequest.Title() == opinionRequestEventType.Title():
-                        foldermaker['UrbanEventOpinionRequest'] = urbanEventOpinionRequest
-                        foldermakers.append(foldermaker)
-                        break
-        return foldermakers
-
-    def getSolicitOpinions(self):
-        """  """
-        return self.context.getSolicitOpinionsTo() + self.context.getSolicitOpinionsToOptional()
-
-
-class UrbanDocGenerationFacetedHelperView(ATDocumentGenerationHelperView):
-    def get_work_location_dict(self, index, folder):
-        """
-        # Adresse(s) des travaux
-        return a dictionary containing specific work locations informations
-        """
-        view = folder.restrictedTraverse('document_generation_helper_view')
-        work_location_dict = view.get_work_location_dict(index)
-        return work_location_dict
-
-    def get_related_licences_of_parcel(self, folder):
-        """
-          Returns the licences related to a parcel
-        """
-        view = folder.restrictedTraverse('document_generation_helper_view')
-        relatedLicences = view.get_related_licences_of_parcel()
-        return relatedLicences
-
-    def get_related_licences_titles_of_parcel(self, folder):
-        """
-          Returns the licences related to a parcel
-        """
-        view = folder.restrictedTraverse('document_generation_helper_view')
-        relatedLicences = view.get_related_licences_titles_of_parcel()
-        return relatedLicences
-
-    def getEvent(self, folder, title=''):
-        view = folder.restrictedTraverse('document_generation_helper_view')
-        event = view.getEvent(title)
-        return event
-
-    def format_date(self, folder, date=None, translatemonth=True, long_format=False):
-        if not date:
-            date = _date.today()
-        view = folder.restrictedTraverse('document_generation_helper_view')
-        formated_date = view.format_date(date, translatemonth, long_format)
-        return formated_date
-
-
-class UrbanBaseProxyObject(ATDisplayProxyObject):
-    """
-    """
-
-    helper_view = None
-
-    def format_date(self, field, formatstring='date_format_short'):
-        """
-          Format the date for printing in pod templates
-        """
-        date = getattr(self.context, field)
-        if formatstring == 'date_format_long':
-            formatstring = '%d/%m/%Y %H:%M'
-        elif formatstring == 'date_format_short':
-            formatstring = '%d/%m/%Y'
-        elif formatstring == 'time_format':
-            formatstring = '%H:%M'
-        return date.strftime(formatstring)
-
-    def all_voc_terms(self, field_name='', with_coring_values=False):
-        field = self.context.getField(field_name)
-        voc_terms = []
-        if field.vocabulary:
-            voc_terms = field.vocabulary.getAllVocTerms(self.context).values()
-        elif field.vocabulary_factory:
-            voc_utility = getUtility(IVocabularyFactory, field.vocabulary_factory)
-            if with_coring_values:
-                simple_voc = voc_utility(self.context)
-                return simple_voc.by_value.values()
-            else:
-                voc_terms = voc_utility._get_config_vocabulary_values(self.context)
-
-        voc_terms_proxy = []
-        for v in voc_terms:
-            voc_terms_view = v.restrictedTraverse('@@document_generation_helper_view')
-            voc_terms_view.appy_renderer = self.helper_view.appy_renderer
-            voc_terms_proxy.append(voc_terms_view.context)
-        return voc_terms_proxy
-
-    def voc_terms(self, field_name='', with_coring_values=False):
-        all_voc_terms = self.all_voc_terms(field_name, with_coring_values)
-        selected_values = self.context.getField(field_name).get(self.context)
-        voc_terms = [t for t in all_voc_terms if getattr(t, 'id', getattr(t, 'value', None)) in selected_values]
-        return voc_terms
-
-    def voc_terms_id(self, field_name='', with_coring_values=False):
-        voc_terms = self.voc_terms(field_name, with_coring_values)
-        voc_terms_id = [voc_term.id for voc_term in voc_terms]
-        return voc_terms_id
-
-    def voc_term(self, field_name='', with_coring_values=False):
-        all_voc_terms = self.all_voc_terms(field_name, with_coring_values)
-        selected_value = self.context.getField(field_name).get(self.context)
-        if type(selected_value) in [list, tuple]:
-            selected_value = selected_value[0]
-        for term in all_voc_terms:
-            term_value = hasattr(term, 'id') and term.id or term.value
-            if term_value == selected_value:
-                return term
-        return None
-
-
-class LicenceDisplayProxyObject(UrbanBaseProxyObject):
-    """
-    """
-
-    def __getattr__(self, attr_name):
-        """
-        """
-        if attr_name.startswith('getLast') or attr_name.startswith('getFirst'):
-            def getUrbanEventProxy(*args, **kwargs):
-                urban_event = getattr(self.context, attr_name)(*args, **kwargs)
-                if urban_event:
-                    helper_view = urban_event.restrictedTraverse('document_generation_helper_view')
-                    proxy_event = helper_view.context
-                    return proxy_event
-                else:
-                    class EventNotFound(object):
-                        def __getattribute__(self, attr_name):
-                            return None
-
-                        def __nonzero__(self):
-                            return False
-
-                        def __call__(self):
-                            return None
-
-                    return EventNotFound()
-            return getUrbanEventProxy
-        if attr_name.startswith('getBound'):
-            def getBoundLicenceProxy(*args, **kwargs):
-                licences = getattr(self.context, attr_name)(*args, **kwargs)
-                if licences:
-                    if type(licences) in [list, tuple]:
-                        proxy_licences = [bl.restrictedTraverse('document_generation_helper_view').context for bl in licences]
-                        return proxy_licences
-                    else:
-                        helper_view = licences.restrictedTraverse('document_generation_helper_view')
-                        proxy_licence = helper_view.context
-                        return proxy_licence
-                else:
-                    class BoundLicenceNotFound(object):
-                        def __getattribute__(self, attr_name):
-                            return None
-
-                        def __nonzero__(self):
-                            return False
-
-                        def __call__(self):
-                            return None
-
-                    return BoundLicenceNotFound()
-            return getBoundLicenceProxy
-        return super(LicenceDisplayProxyObject, self).__getattr__(attr_name)
-
-    def _get_street_dict(self, uid):
-        street_dict = {}
-        catalog = api.portal.get_tool("uid_catalog")
-        street = catalog(UID=uid)[0].getObject()
-        street_dict['bestAddressKey'] = street.getBestAddressKey()
-        street_dict['streetCode'] = street.getStreetCode()
-        street_dict['streetName'] = street.getStreetName()
-        street_dict['startDate'] = street.getStartDate()
-        street_dict['endDate'] = street.getEndDate()
-        street_dict['regionalRoad'] = street.getRegionalRoad()
-        return street_dict
-
-    def get_work_location_dict(self, index):
-        """
-        # Adresse(s) des travaux
-        return a dictionary containing specific work locations informations
-        """
-        context = self.context
-        view = context.restrictedTraverse('document_generation_helper_view')
-        work_location_dict = view.get_work_location_dict(index)
-        return work_location_dict
-
-    def get_work_location_signaletic(self, workLocation):
-        """
-        # Adresse(s) des travaux
-        return a street name and number from a specific workLocation
-        """
-        catalog = api.portal.get_tool("uid_catalog")
-        street = catalog(UID=workLocation['street'])[0].getObject()
-        number = workLocation['number']
-        zipCode = street.aq_parent.zipCode
-        locality = street.aq_parent.Title()
-        return "{} {}, {} {}".format(street.getStreetName(), number, zipCode, locality)
-
     def get_work_locations_list_dict(self):
         """
         # Adresse(s) des travaux
@@ -755,6 +446,57 @@ class LicenceDisplayProxyObject(UrbanBaseProxyObject):
         for workLocation in workLocations[1:]:
             workLocation_signaletic += separator + self.get_work_location_signaletic(workLocation)
         return workLocation_signaletic
+
+    def get_work_location_signaletic(self, workLocation):
+        """
+        # Adresse(s) des travaux
+        return a street name and number from a specific workLocation
+        """
+        catalog = api.portal.get_tool("uid_catalog")
+        street = catalog(UID=workLocation['street'])[0].getObject()
+        number = workLocation['number']
+        zipCode = street.aq_parent.zipCode
+        locality = street.aq_parent.Title()
+        return "{} {}, {} {}".format(street.getStreetName(), number, zipCode, locality)
+
+    def getPortionOutsText(self, linebyline=False):
+        """
+          Return a displayable version of the parcels
+        """
+        toreturn = ''
+        isFirst = True
+        first_div = None
+        first_section = None
+        for portionOutObj in self.context.getParcels():
+            # add a separator between every parcel
+            # either a '\n'
+            if not isFirst and linebyline:
+                toreturn += '\n'
+            # or an "and "
+            elif not isFirst:
+                toreturn += ', '
+            elif isFirst:
+                first_div = portionOutObj.getDivisionAlternativeName()
+                toreturn += '%s ' % portionOutObj.getDivisionAlternativeName()
+                first_section = portionOutObj.getSection()
+                toreturn += 'section %s' % portionOutObj.getSection()
+                toreturn += ' n° '.decode('utf8')
+            else:
+                if first_div != portionOutObj.getDivisionAlternativeName():
+                    toreturn += '%s ' % portionOutObj.getDivisionAlternativeName()
+                if first_section != portionOutObj.getSection():
+                    toreturn += 'section %s ' % portionOutObj.getSection()
+            toreturn += ' %s' % portionOutObj.getRadical()
+            if portionOutObj.getBis() != '':
+                if portionOutObj.getBis() != '0':
+                    toreturn += '/%s ' % portionOutObj.getBis()
+                else:
+                    toreturn += ' '
+            toreturn += portionOutObj.getExposant()
+            if portionOutObj.getPuissance() != '' and portionOutObj.getPuissance() != '0':
+                toreturn += ' %s' % portionOutObj.getPuissance()
+            isFirst = False
+        return toreturn
 
     def get_last_opinions_round(self):
         opinions = self._get_last_opinions('solicitOpinionsTo')
@@ -849,7 +591,7 @@ class LicenceDisplayProxyObject(UrbanBaseProxyObject):
         context = self.context
         specificFeatures = context.getSpecificFeatures()
         specific_features_text = []
-        tool = getToolByName(self, 'portal_urban')
+        tool = api.portal.get_tool('portal_urban')
         for specificFeature in specificFeatures:
             if specificFeature['check']:
                 if specificFeature['text']:
@@ -863,14 +605,120 @@ class LicenceDisplayProxyObject(UrbanBaseProxyObject):
 
     def get_bound_licence_advices(self):
         """
+        Adivces asked on bound licence.
         """
         context = self.context
         advices = [ad.extraValue for ad in context.getBound_licence().getAllAdvices()]
         advices_liste = u',\n'.join(advices)
         return advices_liste
 
-# Contact(s)
-# ------------------------------------------------------------------------------
+    def getEvent(self, title=''):
+        """
+          Return a specific title's UrbanEvent
+        """
+        i = 0
+        found = False
+        events = self.context.getAllEvents()
+        event = None
+        while i < len(events) and not found:
+            if events[i].Title() == title:
+                found = True
+                event = events[i]
+            i = i + 1
+        return event
+
+    def getExpirationDate(self, date=None, year=5):
+        if not date:
+            date = _date.today()
+        expirationDate = _date(date.year(), date.month(), date.day())
+        return self.format_date(expirationDate + relativedelta(years=year))
+
+    def getLimitDate(self, firstDepositDate, delay=20):
+        context = self.real_context
+        if context.annoncedDelay:
+            delay = self.voc_term('annoncedDelay').getDeadLineDelay()
+        limitDate = firstDepositDate + int(delay)
+        return self.format_date(limitDate)
+
+    def get_parcels(self, with_commas=False):
+        result = u""
+        context = self.real_context
+        parcels = context.getParcels()
+        for i in range(len(parcels)):
+            for j in range(len(parcels)):
+                if parcels[i].Title() > parcels[j].Title():
+                    parcels[i], parcels[j] = parcels[j], parcels[i]
+        list_grouped_parcels = []
+        grouped_parcels = []
+        division = ''
+        for parcel in parcels:
+            if parcel.getDivisionAlternativeName() != division:
+                division = parcel.getDivisionAlternativeName()
+                grouped_parcels = []
+                grouped_parcels.append(parcel)
+                list_grouped_parcels.append(grouped_parcels)
+            else:
+                grouped_parcels.append(parcel)
+        for elms in list_grouped_parcels:
+            for i in range(len(elms)):
+                for j in range(len(elms)):
+                    if elms[i].getSection() > elms[j].getSection():
+                        elms[i], elms[j] = elms[j], elms[i]
+        for gp in enumerate(list_grouped_parcels):
+            divisionAlternativeName = gp[1][0].getDivisionAlternativeName()
+            section = gp[1][0].getSection().decode('utf8')
+            if with_commas:
+                result += u"{}, section {}, ".format(divisionAlternativeName, section)
+            else:
+                result += u"{} section {} ".format(divisionAlternativeName, section)
+            for p in enumerate(gp[1]):
+                if section != p[1].getSection():
+                    section = p[1].getSection()
+                    if with_commas:
+                        result += u"section {}, ".format(section)
+                    else:
+                        result += u"section {} ".format(section)
+                bis = p[1].getBis() if p[1].getBis() != '0' else ''
+                puissance = p[1].getPuissance() if p[1].getPuissance() != '0' else ''
+                result += u"n° {}{}{}{}".format(
+                    p[1].getRadical(), bis, p[1].getExposant(), puissance
+                )
+                if p[0] + 1 != len(gp[1]):
+                    result += u", "
+            if gp[0] + 1 != len(list_grouped_parcels):
+                result += u", "
+        return result
+
+    def query_parcels_in_radius(self, radius='50'):
+        parcels = self.context.getOfficialParcels()
+        session = cadastre.new_session()
+        return session.query_parcels_in_radius(parcels, radius)
+
+    def query_parcels_locations_in_radius(self, radius='50'):
+        parcels = self.context.getOfficialParcels()
+        session = cadastre.new_session()
+        parcels = session.query_parcels_in_radius(parcels, radius)
+        locations = [parcel.location for parcel in parcels]
+        locations.sort()
+        return locations
+
+    def get_parcellings_dict(self):
+        """
+        # Lotissement
+        """
+        context = self.real_context
+        parcellings = context.getParcellings()
+        parcellings_dict = {}
+        if parcellings:
+            parcellings_dict['label'] = parcellings.getLabel()
+            parcellings_dict['subdividerName'] = parcellings.getSubdividerName()
+            parcellings_dict['authorizationDate'] = parcellings.getAuthorizationDate()
+            parcellings_dict['approvalDate'] = parcellings.getApprovalDate()
+            parcellings_dict['DGO4Reference'] = parcellings.getDGO4Reference()
+            parcellings_dict['numberOfParcels'] = parcellings.getNumberOfParcels()
+            parcellings_dict['changesDescription'] = parcellings.getChangesDescription()
+        return parcellings_dict
+
     def _get_personTitle_dict(self, id):
         """
         # Titre
@@ -883,7 +731,9 @@ class LicenceDisplayProxyObject(UrbanBaseProxyObject):
         personTitle_dict['title'] = personTitleTerm.Title()
         personTitle_dict['abbreviation'] = personTitleTerm.getAbbreviation()
         personTitle_dict['gender'] = personTitleTerm.listGender().getValue(personTitleTerm.getGender())
-        personTitle_dict['multiplicity'] = personTitleTerm.listMultiplicity().getValue(personTitleTerm.getMultiplicity())
+        personTitle_dict['multiplicity'] = personTitleTerm.listMultiplicity().getValue(
+            personTitleTerm.getMultiplicity()
+        )
         personTitle_dict['reverseTitle'] = personTitleTerm.getReverseTitle()
         return personTitle_dict
 
@@ -949,8 +799,6 @@ class LicenceDisplayProxyObject(UrbanBaseProxyObject):
             contact_names += contact_address
         return contact_names
 
-# Architecte(s)
-# ------------------------------------------------------------------------------
     def get_architect_dict(self, index):
         """
         """
@@ -994,8 +842,6 @@ class LicenceDisplayProxyObject(UrbanBaseProxyObject):
             result += separator + self._get_architect(architect, resident, reversed_name, withaddress)
         return result
 
-# Agent(s) traitant(s)
-# ------------------------------------------------------------------------------
     def get_current_foldermanager(self):
         return getCurrentFolderManager()
 
@@ -1068,8 +914,6 @@ class LicenceDisplayProxyObject(UrbanBaseProxyObject):
         result = parcellings.Title()
         return result
 
-# Demandeur(s)
-# ------------------------------------------------------------------------------
     def get_applicants_names_and_address(
             self,
             applicant_separator=', ',
@@ -1107,7 +951,8 @@ class LicenceDisplayProxyObject(UrbanBaseProxyObject):
                 )
         return applicants_names_and_address
 
-    def _get_applicant_names_and_address(self, applicant, resident, represented, reversed_name, representedBy_separator):
+    def _get_applicant_names_and_address(self, applicant, resident, represented,
+                                         reversed_name, representedBy_separator):
         applicant_names_and_address = self._get_contact(applicant, resident, reversed_name)
         if applicant['representedBySociety']:
             gender_multiplicity = applicant['gender'] + '-' + applicant['multiplicity']
@@ -1198,13 +1043,77 @@ class LicenceDisplayProxyObject(UrbanBaseProxyObject):
         return descriptions
 
 
-class EventDisplayProxyObject(UrbanBaseProxyObject):
+class UrbanDocGenerationEventHelperView(UrbanDocGenerationHelperView):
     """
     """
+    def mailing_list(self, gen_context=None):
+        mailing_list = []
+        use_proxy = True
+        if gen_context and 'publipostage' in gen_context:
+            if gen_context['publipostage'] == 'demandeurs':
+                mailing_list = self.real_context.getParentNode().getApplicants()
+            elif gen_context['publipostage'] == 'architectes':
+                mailing_list = self.context.getArchitects()
+            elif gen_context['publipostage'] == 'geometres':
+                mailing_list = self.context.getGeometricians()
+            elif gen_context['publipostage'] == 'notaires':
+                mailing_list = self.context.getNotaryContact()
+            elif gen_context['publipostage'] == 'reclamants':
+                mailing_list = self.context.getClaimants()
+            elif gen_context['publipostage'] == 'derniers_reclamants':
+                mailing_list = self.context.getLinkedUrbanEventInquiry().getClaimants()
+            elif gen_context['publipostage'] == 'proprietaire':
+                mailing_list = self.real_context.getParentNode().getProprietaries()
+            elif gen_context['publipostage'] == 'proprietaires_voisinage_enquete':
+                mailing_list = self.context.getRecipients(onlyActive=True)
+            elif gen_context['publipostage'] == 'organismes':
+                mailing_list = self.getFolderMakersMailing()
+                use_proxy = False
+        if use_proxy:
+            mailing_list = [obj.unrestrictedTraverse('@@document_generation_helper_view').context for obj in mailing_list]
+        return mailing_list
+
+    def getFolderMakersMailing(self):
+        """  """
+        mailing_list = []
+        foldermakers = self.getFolderMakers()
+        for foldermaker in foldermakers:
+            html_description = foldermaker['OpinionEventConfig'].Description()
+            transformed_description = self.portal.portal_transforms.convert(
+                'html_to_web_intelligent_plain_text', html_description).getData().strip('\n ')
+            mailing = {
+                'OpinionEventConfig': foldermaker['OpinionEventConfig'],
+                'UrbanEventOpinionRequest': foldermaker['UrbanEventOpinionRequest'],
+                'description': transformed_description
+            }
+            mailing_list.append(mailing)
+        return mailing_list
+
+    def getFolderMakers(self):
+        """  """
+        urban_tool = api.portal.get_tool('portal_urban')
+        foldermakers_config = urban_tool.getLicenceConfig(self.context).eventconfigs
+        all_opinion_request_events = self.context.getAllOpinionRequests()
+        foldermakers = []
+        opinion_cfgs = [fm for fm in foldermakers_config.objectValues() if fm.portal_type == 'OpinionEventConfig']
+        for opinionRequestEventType in opinion_cfgs:
+            foldermaker = {}
+            if opinionRequestEventType.id in self.getSolicitOpinions():
+                foldermaker['OpinionEventConfig'] = opinionRequestEventType
+                for urbanEventOpinionRequest in all_opinion_request_events:
+                    if urbanEventOpinionRequest.Title() == opinionRequestEventType.Title():
+                        foldermaker['UrbanEventOpinionRequest'] = urbanEventOpinionRequest
+                        foldermakers.append(foldermaker)
+                        break
+        return foldermakers
+
+    def getSolicitOpinions(self):
+        """  """
+        return self.context.getSolicitOpinionsTo() + self.context.getSolicitOpinionsToOptional()
 
     def _get_wspm_field(self, field_name):
         field = 'NO FIELD {} FOUND'.format(field_name)
-        linked_pm_items = get_ws_meetingitem_infos(self.context, extra_attributes=True)
+        linked_pm_items = get_ws_meetingitem_infos(self.real_context, extra_attributes=True)
         if linked_pm_items:
             linked_item = linked_pm_items[0]
             if field_name in linked_item:
@@ -1249,3 +1158,49 @@ class EventDisplayProxyObject(UrbanBaseProxyObject):
         field_name = 'review_state'
         state = self._get_wspm_text_field(field_name)
         return state
+
+
+class UrbanDocGenerationFacetedHelperView(ATDocumentGenerationHelperView):
+    def get_work_location_dict(self, index, folder):
+        """
+        # Adresse(s) des travaux
+        return a dictionary containing specific work locations informations
+        """
+        view = folder.unrestrictedTraverse('document_generation_helper_view')
+        work_location_dict = view.get_work_location_dict(index)
+        return work_location_dict
+
+    def get_related_licences_of_parcel(self, folder):
+        """
+          Returns the licences related to a parcel
+        """
+        view = folder.unrestrictedTraverse('document_generation_helper_view')
+        relatedLicences = view.get_related_licences_of_parcel()
+        return relatedLicences
+
+    def get_related_licences_titles_of_parcel(self, folder):
+        """
+          Returns the licences related to a parcel
+        """
+        view = folder.unrestrictedTraverse('document_generation_helper_view')
+        relatedLicences = view.get_related_licences_titles_of_parcel()
+        return relatedLicences
+
+    def getEvent(self, folder, title=''):
+        view = folder.unrestrictedTraverse('document_generation_helper_view')
+        event = view.getEvent(title)
+        return event
+
+    def format_date(self, folder, date=None, translatemonth=True, long_format=False):
+        if not date:
+            date = _date.today()
+        view = folder.unrestrictedTraverse('document_generation_helper_view')
+        formated_date = view.format_date(date, translatemonth, long_format)
+        return formated_date
+
+
+class UrbanBaseProxyObject(ATDisplayProxyObject):
+    """
+    """
+
+    helper_view = None
