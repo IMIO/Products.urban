@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2022-01-04 08:38+0000\n"
+"POT-Creation-Date: 2022-01-20 10:45+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,11 +23,11 @@ msgstr ""
 msgid "%s_urbanconfig_title"
 msgstr ""
 
-#: ../content/licence/RoadDecree.py:214
+#: ../content/licence/RoadDecree.py:227
 msgid "105 days"
 msgstr ""
 
-#: ../content/licence/RoadDecree.py:215
+#: ../content/licence/RoadDecree.py:228
 msgid "150 days"
 msgstr ""
 
@@ -35,7 +35,7 @@ msgstr ""
 msgid "1st class"
 msgstr ""
 
-#: ../content/licence/RoadDecree.py:216
+#: ../content/licence/RoadDecree.py:229
 msgid "210 days"
 msgstr ""
 
@@ -43,7 +43,7 @@ msgstr ""
 msgid "2nd class"
 msgstr ""
 
-#: ../content/licence/RoadDecree.py:213
+#: ../content/licence/RoadDecree.py:226
 msgid "75 days"
 msgstr ""
 
@@ -2483,7 +2483,7 @@ msgstr ""
 msgid "uniquelicence_urbanconfig_title"
 msgstr ""
 
-#: ../content/licence/RoadDecree.py:212
+#: ../content/licence/RoadDecree.py:225
 msgid "unknown"
 msgstr ""
 
@@ -2695,11 +2695,6 @@ msgstr ""
 #. Default: "Environmentaldeclarationnumerotation"
 #: UrbanTool.py
 msgid "urban_label_EnvClassThreeNumerotation"
-msgstr ""
-
-#. Default: "IsAlignment_plan"
-#: ../content/licence/RoadDecree.py:74
-msgid "urban_label_IsAlignment_plan"
 msgstr ""
 
 #. Default: "Linkedopinionrequestevent"
@@ -3015,7 +3010,7 @@ msgid "urban_label_bound_inspection"
 msgstr ""
 
 #. Default: "Bound licence"
-#: ../content/licence/RoadDecree.py:40
+#: ../content/licence/RoadDecree.py:61
 msgid "urban_label_bound_licence"
 msgstr ""
 
@@ -3274,7 +3269,7 @@ msgid "urban_label_decisionText"
 msgstr ""
 
 #. Default: "DecisionalDelay"
-#: ../content/licence/RoadDecree.py:92
+#: ../content/licence/RoadDecree.py:105
 msgid "urban_label_decisional_delay"
 msgstr ""
 
@@ -5119,7 +5114,7 @@ msgid "urban_label_tax"
 msgstr ""
 
 #. Default: "technicaladvice"
-#: ../content/licence/RoadDecree.py:249
+#: ../content/licence/RoadDecree.py:262
 msgid "urban_label_technicalAdvice"
 msgstr ""
 
@@ -5217,9 +5212,9 @@ msgstr ""
 msgid "urban_label_township_guide_details"
 msgstr ""
 
-#. Default: "Townships"
-#: ../content/licence/RoadDecree.py:83
-msgid "urban_label_townships"
+#. Default: "Townships_and_alignment"
+#: ../content/licence/RoadDecree.py:96
+msgid "urban_label_townships_and_alignment"
 msgstr ""
 
 #. Default: "Transmitdate"
@@ -5303,7 +5298,7 @@ msgstr ""
 
 #. Default: "Use_bound_licence_infos"
 #: ../content/licence/Inspection.py:65
-#: ../content/licence/RoadDecree.py:66
+#: ../content/licence/RoadDecree.py:87
 msgid "urban_label_use_bound_licence_infos"
 msgstr ""
 

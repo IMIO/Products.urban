@@ -13,6 +13,8 @@ from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.config import *
 from Products.urban.content.licence.CODT_BuildLicence import CODT_BuildLicence
 
+import copy
+
 slave_fields_bound_licence = (
     {
         'name': 'workLocations',
@@ -25,6 +27,25 @@ slave_fields_bound_licence = (
         'hide_values': (True, ),
     },
 )
+slave_fields_townships = (
+    {
+        'name': 'decisional_delay',
+        'action': 'value',
+        'vocab_method': 'get_decisional_delays',
+        'control_param': 'values',
+    },
+)
+
+class TownshipVocabulary(UrbanVocabulary):
+
+    def get_raw_voc(self, context, licence_type):
+        voc = super(TownshipVocabulary, self).get_raw_voc(context, licence_type)
+        new_terms = copy.deepcopy(voc)
+        for term in new_terms:
+            term['id'] = term['id'] + '_alignement'
+            term['title'] = term['title'] + " (Modification plan d'alignement)"
+        new_voc = voc + new_terms
+        return new_voc
 
 schema = Schema((
     ReferenceField(
@@ -67,24 +88,16 @@ schema = Schema((
         ),
         schemata='urban_description',
     ),
-    BooleanField(
-        name='IsAlignment_plan',
-        default=False,
-        widget=BooleanField._properties['widget'](
-            label=_('urban_label_IsAlignment_plan',
-                    default='IsAlignment_plan'),
-        ),
-        schemata='urban_analysis',
-    ),
     StringField(
-        name='townships',
+        name='townships_and_alignment',
         default='ukn',
         widget=MasterSelectWidget(
-            label=_('urban_label_townships', default='Townships'),
+            slave_fields=slave_fields_townships,
+            label=_('urban_label_townships_and_alignment', default='Townships_and_alignment'),
         ),
         schemata='urban_analysis',
         multiValued=1,
-        vocabulary=UrbanVocabulary('townships', with_empty_value=True),
+        vocabulary=TownshipVocabulary('townships', with_empty_value=True),
     ),
     StringField(
         name='decisional_delay',
@@ -217,10 +230,11 @@ class RoadDecree(CODT_BuildLicence):
         )
         return DisplayList(vocabulary)
 
-    def getDecisional_delay(self, *values):
-        alignment = getattr(self, 'IsAlignment_plan', False)
-        municipality = getattr(self, 'townships', 'ukn')
-        external_municipality = municipality != 'township'
+    def get_decisional_delays(self, *values):
+        selection = [v['val'] for v in values if v['selected']]
+        municipality = selection and selection[0] or 'ukn'
+        external_municipality = not municipality.startswith('township')
+        alignment = municipality.endswith('_alignement')
 
         if external_municipality and alignment:
             return '210j'
@@ -243,9 +257,8 @@ def finalize_schema(schema, folderish=False, moveDiscussion=True):
     """
     schema.moveField('bound_licence', before='workLocations')
     schema.moveField('use_bound_licence_infos', after='bound_licence')
-    schema.moveField('IsAlignment_plan', after='missingPartsDetails')
-    schema.moveField('townships', after='IsAlignment_plan')
-    schema.moveField('decisional_delay', after='townships')
+    schema.moveField('townships_and_alignment', after='missingPartsDetails')
+    schema.moveField('decisional_delay', after='townships_and_alignment')
     schema['locationTechnicalAdvice'].widget.label = _(
         'urban_label_technicalAdvice',
         default='technicaladvice',
