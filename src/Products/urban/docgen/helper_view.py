@@ -11,6 +11,7 @@ from plone.dexterity.interfaces import IDexterityContent
 
 from Products.Archetypes.interfaces import IBaseObject
 from Products.CMFPlone.i18nl10n import ulocalized_time
+from Products.urban.interfaces import IUrbanEventInquiry
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.utils import getCurrentFolderManager
 from Products.urban.utils import get_ws_meetingitem_infos
@@ -1056,7 +1057,12 @@ class UrbanDocGenerationEventHelperView(UrbanDocGenerationHelperView):
             elif gen_context['publipostage'] == 'proprietaire':
                 mailing_list = self.real_context.getParentNode().getProprietaries()
             elif gen_context['publipostage'] == 'proprietaires_voisinage_enquete':
-                mailing_list = self.context.getRecipients(onlyActive=True)
+                if IUrbanEventInquiry.providedBy(context):
+                    inquiry_event = context
+                else:
+                    # for docs outside inquiry events
+                    inquiry_event = self.real_context.getParentNode().getLastInquiry()
+                mailing_list = inquiry_event.getRecipients(onlyActive=True)
             elif gen_context['publipostage'] == 'organismes':
                 mailing_list = self.getFolderMakersMailing()
                 use_proxy = False
