@@ -1057,8 +1057,8 @@ class UrbanDocGenerationEventHelperView(UrbanDocGenerationHelperView):
             elif gen_context['publipostage'] == 'proprietaire':
                 mailing_list = self.real_context.getParentNode().getProprietaries()
             elif gen_context['publipostage'] == 'proprietaires_voisinage_enquete':
-                if IUrbanEventInquiry.providedBy(context):
-                    inquiry_event = context
+                if IUrbanEventInquiry.providedBy(self.real_context):
+                    inquiry_event = self.real_context
                 else:
                     # for docs outside inquiry events
                     inquiry_event = self.real_context.getParentNode().getLastInquiry()
