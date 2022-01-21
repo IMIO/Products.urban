@@ -21,12 +21,17 @@ class GigSession(MySQLSession):
         """
         Do the insert query of the parcel capakeys into gig db.
         """
-        import ipdb; ipdb.set_trace()
         parcels_keys = [c.replace('/', '') for c in capakeys]
         filenis = '/srv/instances/server_urban25/var/urban/urbanmap.cfg'
         with open(filenis, 'r') as f:
             lines = f.readlines()
         nis = lines[1][4:]
+        rec_test = "SELECT * FROM customers WHERE id = 29;"
+        query = session.execute(rec_test)
+        session.commit()
+        result = query.fetchall()
+#        rec_i = "INSERT INTO customers ('company', 'last_name', 'first_name', 'email_address', 'job_title', 'business_phone', 'home_phone', 'mobile_phone', 'fax_number', 'address', 'city', 'state_province', 'zip_postal_code', 'country_region', 'web_page', 'notes', 'attachements') VALUES ('Company DD', 'Cornick', 'Anna', None, 'Owner', '(123)555-0100', None, None, '(123)555-0101', '123 1st Street', 'Seattle', 'WA', '99999', 'USA', None, None, '');"
+
 #        new_rec = "INSERT INTO GIG_TRANSIT (NUM_SIG, user_id, copy_time, work_id, INS) VALUES ('25090A013100E000', 'simon.delcourt@imio.be', NOW(), 1, '25123');"
 #        rec2 = "SELECT * FROM GIG_TRANSIT WHERE NUM_SIG = '25090A013100E000';"
 #        resinsert = session.execute(new_rec)
@@ -36,3 +41,4 @@ class GigSession(MySQLSession):
 #        session.close()
 #        engine.dispose()
 #        gig_engine = services.gig.new_session()
+        import ipdb; ipdb.set_trace()
