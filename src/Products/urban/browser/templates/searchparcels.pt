@@ -178,42 +178,42 @@ metal:use-macro="here/main_template/macros/master">
                                 <tal:block tal:repeat="parcel results">
                                     <tr>
                                         <td>
-                                            <img src="old.png" tal:condition="python: getattr(parcel, 'old', None)" style="padding-right:0.5em"/>
-                                            <span tal:content="python: parcel.display()"/><br>
-                                            <span tal:condition="python: hasattr(parcel, 'locations')" tal:define="locations python: parcel.locations.values()">
-                                                <div tal:repeat="location locations" tal:content="python: location['street_name'] + ' ' + location['number'].decode('utf-8')"/>
-                                            </span>
-                                            <span tal:condition="python: hasattr(parcel, 'owners')" tal:define="owners python: parcel.owners.values()">
-                                                <div tal:repeat="owner owners" tal:content="python: owner['name'] + ' ' + owner['firstname'] + ' ' + owner['street'] + ' ' + owner['number'] + ' ' + owner['zipcode'] + ' ' + owner['city']"/>
-                                            </span>
-                                        </td>
-                                        <td>
                                             <form i18n:domain="urban" name="quickAddParcel" action="#" method="post"
-                                                  tal:attributes="action string: ${context/absolute_url}/searchparcels">
-                                                <tal:create_owner condition="python: view.contextIsLicence() and hasattr(parcel, 'owners')">
-                                                    <input type="checkbox" name="owners" value="#" tal:attributes="value python: parcel.owners"/>
-                                                    <img src="Proprietary.png"/>
-                                                </tal:create_owner>
-                                                <input type="hidden" name="division" value="#" tal:attributes="value python: parcel.division" />
-                                                <input type="hidden" name="section" value="#" tal:attributes="value python: parcel.section" />
-                                                <input type="hidden" name="radical" value="#" tal:attributes="value python: parcel.radical" />
-                                                <input type="hidden" name="bis" value="#" tal:attributes="value python: parcel.bis" />
-                                                <input type="hidden" name="exposant" value="#" tal:attributes="value python: parcel.exposant" />
-                                                <input type="hidden" name="puissance" value="#" tal:attributes="value python: parcel.puissance" />
-                                                <input type="hidden" name="partie" value="#" tal:attributes="value partie" />
-                                                <input type="hidden" name="old" value="#" tal:attributes="value python: getattr(parcel, 'old', False)"/>
-                                                <input type="hidden" name="s_division" value="#" tal:attributes="value python: request.get('division', '')" />
-                                                <input type="hidden" name="s_section" value="#" tal:attributes="value python: request.get('section', '')" />
-                                                <input type="hidden" name="s_radical" value="#" tal:attributes="value python: request.get('radical', '')" />
-                                                <input type="hidden" name="s_bis" value="#" tal:attributes="value python: request.get('bis', '')" />
-                                                <input type="hidden" name="s_exposant" value="#" tal:attributes="value python: request.get('exposant', '')" />
-                                                <input type="hidden" name="s_puissance" value="#" tal:attributes="value python: request.get('puissance', '')" />
-                                                <input type="hidden" name="s_location" value="#" tal:attributes="value python: request.get('location', '')" />
-                                                <input type="hidden" name="s_street_number" value="#" tal:attributes="value python: request.get('street_number', '')" />
-                                                <input type="hidden" name="s_parcel_owner" value="#" tal:attributes="value python: request.get('parcel_owner', '')" />
-                                                <input type="image" src="icon_add.gif" name="add_parcel" alt="Add this parcel"/>
+                                                          tal:attributes="action string: ${context/absolute_url}/searchparcels">
+                                                    <input type="image" src="icon_add.gif" name="add_parcel" alt="Add this parcel" style="float: right;"/>
+                                                    <img src="old.png" tal:condition="python: getattr(parcel, 'old', None)" style="padding-right:0.5em"/>
+                                                    <span tal:content="python: parcel.display()"/><br>
+                                                    <span tal:condition="python: hasattr(parcel, 'locations')" tal:define="locations python: parcel.locations.values()">
+                                                        <div tal:repeat="location locations" tal:content="python: location['street_name'] + ' ' + location['number'].decode('utf-8')"/>
+                                                    </span>
+                                                    <span tal:condition="python: hasattr(parcel, 'owners')" tal:define="owners python: parcel.owners.values()">
+                                                        <div tal:repeat="owner owners" tal:content="python: owner['name'] + ' ' + owner['firstname'] + ' ' + owner['street'] + ' ' + owner['number'] + ' ' + owner['zipcode'] + ' ' + owner['city']"/>
+                                                    </span>
+
+                                                        <tal:create_owner condition="python: view.contextIsLicence() and hasattr(parcel, 'owners')">
+                                                            <input type="checkbox" name="owners" value="#" tal:attributes="value python: parcel.owners"/>
+                                                            <img src="Proprietary.png"/>
+                                                        </tal:create_owner>
+                                                        <input type="hidden" name="division" value="#" tal:attributes="value python: parcel.division" />
+                                                        <input type="hidden" name="section" value="#" tal:attributes="value python: parcel.section" />
+                                                        <input type="hidden" name="radical" value="#" tal:attributes="value python: parcel.radical" />
+                                                        <input type="hidden" name="bis" value="#" tal:attributes="value python: parcel.bis" />
+                                                        <input type="hidden" name="exposant" value="#" tal:attributes="value python: parcel.exposant" />
+                                                        <input type="hidden" name="puissance" value="#" tal:attributes="value python: parcel.puissance" />
+                                                        <input type="hidden" name="partie" value="#" tal:attributes="value partie" />
+                                                        <input type="hidden" name="old" value="#" tal:attributes="value python: getattr(parcel, 'old', False)"/>
+                                                        <input type="hidden" name="s_division" value="#" tal:attributes="value python: request.get('division', '')" />
+                                                        <input type="hidden" name="s_section" value="#" tal:attributes="value python: request.get('section', '')" />
+                                                        <input type="hidden" name="s_radical" value="#" tal:attributes="value python: request.get('radical', '')" />
+                                                        <input type="hidden" name="s_bis" value="#" tal:attributes="value python: request.get('bis', '')" />
+                                                        <input type="hidden" name="s_exposant" value="#" tal:attributes="value python: request.get('exposant', '')" />
+                                                        <input type="hidden" name="s_puissance" value="#" tal:attributes="value python: request.get('puissance', '')" />
+                                                        <input type="hidden" name="s_location" value="#" tal:attributes="value python: request.get('location', '')" />
+                                                        <input type="hidden" name="s_street_number" value="#" tal:attributes="value python: request.get('street_number', '')" />
+                                                        <input type="hidden" name="s_parcel_owner" value="#" tal:attributes="value python: request.get('parcel_owner', '')" />
                                             </form>
                                         </td>
+
                                     </tr>
                                 </tal:block>
                             </table>
