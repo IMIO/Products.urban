@@ -27,9 +27,6 @@ class GigSession(MySQLSession):
         with open(filenis, 'r') as f:
             lines = f.readlines()
         nis = lines[1][4:9]
-# variables de test nis_test et parcels_keys car la bdo du gig attend une capakey et un nis de la communne de rebecq or l'instance de test utilise les données de fléron
-        nis_test = 25123
-        parcels_keys = ['25090A013100E000']
         today = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         fileportail = '/srv/instances/testcarottage_urb25/var/urban/gig.cfg'
         with open(fileportail, 'r') as f:
@@ -40,7 +37,7 @@ class GigSession(MySQLSession):
         for key in parcels_keys:
 #           rec_i = "INSERT INTO customers (company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES ('Company DD', 'Cornick', 'Anna', '{user}', 'Owner', '(123)555-0100', '{today}', NULL, '(123)555-0101', '123 1st Street', 'Seattle', 'WA', '99999', 'USA', '{cap}', '{nis}', '');".format(user=user, today=today, cap=key, nis=nis)
 #                query = self.session.execute(rec_i)
-            new_rec = "INSERT INTO GIG_TRANSIT (NUM_SIG, user_id, copy_time, work_id, INS) VALUES ('{cap}', '{user}', '{today}', 1, '{nis}');".format(cap=key, user=user, today=today, nis=nis_test)
+            new_rec = "INSERT INTO GIG_TRANSIT (NUM_SIG, user_id, copy_time, work_id, INS) VALUES ('{cap}', '{user}', '{today}', 1, '{nis}');".format(cap=key, user=user, today=today, nis=nis)
             query = self.session.execute(new_rec)
 #        query = self.session.execute(rec_test)
         self.session.commit()
