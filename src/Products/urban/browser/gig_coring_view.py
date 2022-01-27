@@ -20,7 +20,6 @@ class GigCoringView(BrowserView):
         gig_session = services.gig.new_session()
         gig_session.insert_parcels(capakeys)
         gig_session.close()
-
         #
         # To Do: open gig application in another tab of the browser
         #
