@@ -21,8 +21,8 @@ class UrbanDocGenerationView(PersistentDocumentGenerationView):
          - mark the document with IUrbanDoc interface
          - return the url of the generated doc (to open it in external edit)
         """
-        self.pod_template, self.output_format = self._get_base_args(template_uid, output_format)
         self.generated_doc_title = generated_doc_title
+        self.pod_template, self.output_format = self._get_base_args(template_uid, output_format)
 
         persisted_doc = self.generate_persistent_doc(self.pod_template, self.output_format)
         alsoProvides(persisted_doc, IUrbanDoc)
@@ -39,53 +39,68 @@ class UrbanDocGenerationView(PersistentDocumentGenerationView):
             output_format = output_formats[0]
         return output_format
 
-    def get_base_generation_context(self, helper_view, pod_template):
+    def get_base_generation_context(self, helper_view=None, pod_template=None):
         """
         Backward compatibility with code used in old urban templates.
         """
         portal_urban = api.portal.get_tool('portal_urban')
         licence = self.context.getParentNode()
+        foldermanagers = [fm.unrestrictedTraverse('@@document_generation_helper_view').context
+                          for fm in licence.getFoldermanagers()]
         applicants = licence.getApplicants()
-        applicantobj = applicants and applicants[0] or None
+        applicants_views = [applicant.unrestrictedTraverse('@@document_generation_helper_view')
+                            for applicant in applicants or []]
+        applicantobj = applicants_views and applicants_views[0] or None
         proprietaries = licence.getProprietaries()
-        proprietaryobj = proprietaries and proprietaries[0] or None
+        proprietaries_views = [prop.unrestrictedTraverse('@@document_generation_helper_view') for prop
+                                in proprietaries or []]
+        proprietaryobj = proprietaries_views and proprietaries_views[0] or None
         publicity = hasattr(licence, 'getLastInquiry') and licence.getLastInquiry() or \
             hasattr(licence, 'getLastAnnouncement') and licence.getLastAnnouncement() or None
         claimants = (publicity and hasattr(publicity, 'getClaimants')) and publicity.getClaimants() or None
-        claimants_view = claimants and \
-            [claimant.restrictedTraverse('@@document_generation_helper_view') for claimant in claimants] or None
-        claimants_view = claimants_view and [(view.context, view) for view in claimants_view]
-        proprietaries = (publicity and hasattr(publicity, 'getRecipients')) and publicity.getRecipients() or None
-        proprietaries_views = proprietaries and \
-            [proprietary.restrictedTraverse('@@document_generation_helper_view') for proprietary in proprietaries] or None
-        proprietaries_views = proprietaries_views and [(view.context, view) for view in proprietaries_views]
-        licence_helper_view = licence.restrictedTraverse('@@document_generation_helper_view')
-        event_helper_view = self.context.restrictedTraverse('@@document_generation_helper_view')
+        claimants_view = [claimant.unrestrictedTraverse('@@document_generation_helper_view')
+                          for claimant in claimants or []]
+        proprietaries = hasattr(publicity, 'getRecipients') and publicity.getRecipients() or None
+        licence_helper_view = licence.unrestrictedTraverse('@@document_generation_helper_view')
+        event_helper_view = self.context.unrestrictedTraverse('@@document_generation_helper_view')
         plaintiffobj = None
         if hasattr(licence, 'getPlaintiffs'):
             plaintiffs = licence.getPlaintiffs()
-            plaintiffobj = plaintiffs and plaintiffs[0] or None
+            plaintiffs_views = [plaintiff.unrestrictedTraverse('@@document_generation_helper_view')
+                                for plaintiff in plaintiffs or []]
+            plaintiffobj = plaintiffs_views and plaintiffs_views[0] or None
+        tenantobj = None
+        if hasattr(licence, 'getTenants'):
+            tenants = licence.getTenants()
+            tenants_views = [tenant.unrestrictedTraverse('@@document_generation_helper_view')
+                            for tenant in tenants or []]
+            tenantobj = tenants_views and tenants_views[0] or None
+
         bound_roaddecrees = [dec.restrictedTraverse('@@document_generation_helper_view')
                              for dec in licence.get_bound_roaddecrees()] or None
 
+
         generation_context = {
             'this': licence,
-            'self': licence_helper_view.context,
-            'licence': licence_helper_view.context,
-            'event': event_helper_view.context,
-            'urbanEventObj': event_helper_view.context,
+            'self': licence_helper_view,
+            'licence': licence_helper_view,
+            'foldermanagers': foldermanagers,
+            'event': event_helper_view,
+            'urbanEventObj': self.context,
             'applicantobj': applicantobj,
             'plaintiffobj': plaintiffobj,
             'proprietaryobj': proprietaryobj,
+            'tenantobj': tenantobj,
             'tool': portal_urban,
             'licence_view': licence_helper_view,
-            'licence_helper': licence_helper_view.context,
+            'licence_helper': licence_helper_view,
             'event_view': event_helper_view,
-            'event_helper': event_helper_view.context,
+            'event_helper': event_helper_view,
             'claimants': claimants_view,
             'inquiry_proprietaries': proprietaries_views,
             'roaddecrees': bound_roaddecrees,
             'roaddecree': bound_roaddecrees and bound_roaddecrees[-1],
+
         }
 
         return generation_context
@@ -97,9 +112,9 @@ class UrbanDocGenerationView(PersistentDocumentGenerationView):
             generation_context['event_view'],
         ]
         if generation_context['claimants']:
-            views.extend([view for proxy, view in generation_context['claimants']])
+            views.extend([view for view in generation_context['claimants']])
         if generation_context['inquiry_proprietaries']:
-            views.extend([view for proxy, view in generation_context['inquiry_proprietaries']])
+            views.extend([view for view in generation_context['inquiry_proprietaries']])
         return views
 
 
