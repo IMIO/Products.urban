@@ -31,7 +31,7 @@ class GigSession(MySQLSession):
         nis_test = 25123
         parcels_keys = ['25090A013100E000']
         today = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        fileportail = '/srv/instances/server_urban25/var/urban/northwind.cfg'
+        fileportail = '/srv/instances/server_urban25/var/urban/gig.cfg'
         with open(fileportail, 'r') as f:
             l = f.readlines()
         user = l[8][5:27]
