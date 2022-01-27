@@ -38,13 +38,10 @@ class GigSession(MySQLSession):
 
 #        rec_test = "SELECT * FROM customers WHERE id >= 42;"
         for key in parcels_keys:
-            try:
-#                rec_i = "INSERT INTO customers (company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES ('Company DD', 'Cornick', 'Anna', '{user}', 'Owner', '(123)555-0100', '{today}', NULL, '(123)555-0101', '123 1st Street', 'Seattle', 'WA', '99999', 'USA', '{cap}', '{nis}', '');".format(user=user, today=today, cap=key, nis=nis)
+#           rec_i = "INSERT INTO customers (company, last_name, first_name, email_address, job_title, business_phone, home_phone, mobile_phone, fax_number, address, city, state_province, zip_postal_code, country_region, web_page, notes, attachments) VALUES ('Company DD', 'Cornick', 'Anna', '{user}', 'Owner', '(123)555-0100', '{today}', NULL, '(123)555-0101', '123 1st Street', 'Seattle', 'WA', '99999', 'USA', '{cap}', '{nis}', '');".format(user=user, today=today, cap=key, nis=nis)
 #                query = self.session.execute(rec_i)
-                new_rec = "INSERT INTO GIG_TRANSIT (NUM_SIG, user_id, copy_time, work_id, INS) VALUES ('{cap}', '{user}', '{today}', 1, '{nis}');".format(cap=key, user=user, today=today, nis=nis_test)
-                query = self.session.execute(new_rec)
-            except pymysql.Error, e:
-                print("fail to insert: " + str(e))
+            new_rec = "INSERT INTO GIG_TRANSIT (NUM_SIG, user_id, copy_time, work_id, INS) VALUES ('{cap}', '{user}', '{today}', 1, '{nis}');".format(cap=key, user=user, today=today, nis=nis_test)
+            query = self.session.execute(new_rec)
 #        query = self.session.execute(rec_test)
         self.session.commit()
 #        result = query.fetchall()
