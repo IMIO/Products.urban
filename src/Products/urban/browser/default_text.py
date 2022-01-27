@@ -11,9 +11,7 @@ class DefaultTextRenderer(TrustedAppPT, PageTemplate):
     """
 
     def __init__(self, urban_event):
-        self.event_helper = urban_event.unrestrictedTraverse('document_generation_helper_view')
-        self.real_event = urban_event
-        self.licence_helper = urban_event.aq_parent.unrestrictedTraverse('document_generation_helper_view')
+        self.docgen_view = urban_event.unrestrictedTraverse('urban-document-generation')
 
     def __call__(self, text, *args, **keywords):
         self.pt_edit(text, 'text/html')
