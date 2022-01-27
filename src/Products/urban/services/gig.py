@@ -23,7 +23,7 @@ class GigSession(MySQLSession):
         Do the insert query of the parcel capakeys into gig db.
         """
         parcels_keys = [c.replace('/', '') for c in capakeys]
-        filenis = '/srv/instances/server_urban25/var/urban/urbanmap.cfg'
+        filenis = '/srv/instances/testcarottage_urb25/var/urban/urbanmap.cfg'
         with open(filenis, 'r') as f:
             lines = f.readlines()
         nis = lines[1][4:9]
@@ -31,7 +31,7 @@ class GigSession(MySQLSession):
         nis_test = 25123
         parcels_keys = ['25090A013100E000']
         today = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        fileportail = '/srv/instances/server_urban25/var/urban/gig.cfg'
+        fileportail = '/srv/instances/testcarottage_urb25/var/urban/gig.cfg'
         with open(fileportail, 'r') as f:
             l = f.readlines()
         user = l[8][5:27]
