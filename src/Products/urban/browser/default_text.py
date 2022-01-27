@@ -22,18 +22,16 @@ class DefaultTextRenderer(TrustedAppPT, PageTemplate):
         return rendered
 
     def pt_getContext(self, args=(), options={}, **ignored):
+        with api.env.adopt_roles(['Manager']):
+            base_context = self.docgen_view.get_base_generation_context(None, None)
         rval = {
             'template': self,
             'options': options,
             'args': args,
             'nothing': None,
-            'self': self.licence_helper,
-            'helper': self.licence_helper,
-            'context': self.licence_helper,
-            'event': self.event_helper,
-            'event_helper': self.event_helper,
-            'real_event': self.real_event,
-            'tool': api.portal.get_tool('portal_urban'),
+            'helper': base_context['licence_view'],
+            'context': base_context['licence'],
         }
+        rval.update(base_context)
         rval.update(self.pt_getEngine().getBaseNames())
         return rval
