@@ -12,6 +12,7 @@ class DefaultTextRenderer(TrustedAppPT, PageTemplate):
 
     def __init__(self, urban_event):
         self.docgen_view = urban_event.unrestrictedTraverse('urban-document-generation')
+        self.licence = urban_event.aq_parent
 
     def __call__(self, text, *args, **keywords):
         self.pt_edit(text, 'text/html')
@@ -28,7 +29,7 @@ class DefaultTextRenderer(TrustedAppPT, PageTemplate):
             'args': args,
             'nothing': None,
             'helper': base_context['licence_view'],
-            'context': base_context['licence'],
+            'context': self.licence,
         }
         rval.update(base_context)
         rval.update(self.pt_getEngine().getBaseNames())
