@@ -130,6 +130,31 @@ class RoadDecree(CODT_BuildLicence):
     RoadDecree_schema['roadAdaptation'].schemata = 'urban_road'
     schema = RoadDecree_schema
 
+
+    security.declarePublic('getReferenceDGATLP')
+
+    def getReferenceDGATLP(self):
+        if self.getUse_bound_licence_infos():
+            bound_licence = self.getBound_licence()
+            if bound_licence:
+                return bound_licence.getReferenceDGATLP()
+
+        field = self.getField('referenceDGATLP')
+        reference = field.get(self)
+        return reference
+
+    security.declarePublic('getImpactStudy')
+
+    def getImpactStudy(self):
+        if self.getUse_bound_licence_infos():
+            bound_licence = self.getBound_licence()
+            if bound_licence:
+                return bound_licence.getImpactStudy()
+
+        field = self.getField('impactStudy')
+        impact_study = field.get(self)
+        return impact_study
+
     security.declarePublic('getWorkLocations')
 
     def getWorkLocations(self):
