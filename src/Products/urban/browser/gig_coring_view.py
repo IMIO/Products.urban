@@ -4,7 +4,6 @@
 
 from Products.Five import BrowserView
 from Products.urban import services
-import requests
 
 
 class GigCoringView(BrowserView):
@@ -24,5 +23,6 @@ class GigCoringView(BrowserView):
         #
         # To Do: open gig application in another tab of the browser
         #
-        gig_coring = requests.get('https://carto.luxembourg.be/', verify='/etc/ssl/certs/ca-certificates.crt')
+        gig_coring = self.request.RESPONSE.redirect('https://carto.luxembourg.be/')
+        import ipdb; ipdb.set_trace()
         return gig_coring
