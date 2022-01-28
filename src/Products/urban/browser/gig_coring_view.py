@@ -23,4 +23,4 @@ class GigCoringView(BrowserView):
         #
         # To Do: open gig application in another tab of the browser
         #
-        return request.get('https://carto.luxembourg.be/')
+        return self.request.get('https://carto.luxembourg.be/')
