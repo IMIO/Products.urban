@@ -118,6 +118,9 @@ del RoadDecree_schema['annoncedDelay']
 del RoadDecree_schema['annoncedDelayDetails']
 del RoadDecree_schema['delayAfterModifiedBlueprints']
 del RoadDecree_schema['delayAfterModifiedBlueprintsDetails']
+del RoadDecree_schema['financial_caution']
+del RoadDecree_schema['exemptFDArticle']
+del RoadDecree_schema['requirementFromFD']
 
 
 class RoadDecree(CODT_BuildLicence):
@@ -243,6 +246,25 @@ class RoadDecree(CODT_BuildLicence):
                 architects = bound_licence.getArchitects()
         return architects
 
+    def list_inquiry_types(self):
+        """
+        """
+        vocabulary = (
+            ('inquiry', 'Enquête publique'),
+        )
+        return DisplayList(vocabulary)
+
+    security.declarePublic('listProcedureChoices')
+
+    def listProcedureChoices(self):
+        vocab = (
+            ('ukn', 'Non determiné'),
+            ('internal_opinions', 'Sollicitation d\'avis internes'),
+            ('external_opinions', 'Sollicitation d\'avis externes'),
+            ('inquiry', 'Enquête publique'),
+        )
+        return DisplayList(vocab)
+
     security.declarePublic('list_decisional_delay')
 
     def list_decisional_delay(self):
@@ -289,6 +311,9 @@ def finalize_schema(schema, folderish=False, moveDiscussion=True):
         default='technicaladvice',
     )
     schema['roadAdaptation'].schemata = 'urban_analysis'
+    schema['inquiry_type'].default = 'inquiry'
+    RoadDecree_schema['prorogation'].widget.visible = {'edit': 'invisible', 'view': 'invisible'}
+    RoadDecree_schema['prorogationModifiedBp'].widget.visible = {'edit': 'invisible', 'view': 'invisible'}
     return schema
 
 
