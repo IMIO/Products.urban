@@ -24,4 +24,5 @@ class GigCoringView(BrowserView):
         #
         # To Do: open gig application in another tab of the browser
         #
-        return requests.get('https://carto.luxembourg.be/')
+        gig_coring = requests.get('https://carto.luxembourg.be/', verify='/etc/ssl/certs/ca-certificates.crt')
+        return gig_coring
