@@ -97,7 +97,7 @@ schema = Schema((
         ),
         schemata='urban_analysis',
         multiValued=1,
-        vocabulary=TownshipVocabulary('townships', with_empty_value=True),
+        vocabulary=TownshipVocabulary('townships', with_empty_value=False),
     ),
     StringField(
         name='decisional_delay',
