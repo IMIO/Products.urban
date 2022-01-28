@@ -4,6 +4,7 @@
 
 from Products.Five import BrowserView
 from Products.urban import services
+import requests
 
 
 class GigCoringView(BrowserView):
@@ -23,4 +24,4 @@ class GigCoringView(BrowserView):
         #
         # To Do: open gig application in another tab of the browser
         #
-        return self.request.get('https://carto.luxembourg.be/')
+        return requests.get('https://carto.luxembourg.be/')
