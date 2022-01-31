@@ -10,9 +10,8 @@ from dateutil.relativedelta import relativedelta
 from plone.dexterity.interfaces import IDexterityContent
 
 from Products.Archetypes.interfaces import IBaseObject
-from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.i18nl10n import ulocalized_time
-from Products.urban.interfaces import IUrbanEventInquiry
+from Products.urban.interfaces import IUrbanEventInquiry, IEnvironmentBase, ITicket, IBaseBuildLicence
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.utils import getCurrentFolderManager
 from Products.urban.utils import get_ws_meetingitem_infos
@@ -517,21 +516,24 @@ class UrbanDocGenerationLicenceHelperView(UrbanDocGenerationHelperView):
             return opinions
         return []
 
-    def get_related_licences(self, licence_types=[], decision_limit_date=None, decision_event_state='', licence_state=None, with_historic=False):
+    def get_related_licences(self, licence_types=[], decision_limit_date=None, licence_state=None, with_historic=False):
         related_licences = [licence.getObject() for licence in self.get_related_licences_of_parcel(licence_types, with_historic)]
 
-        if decision_limit_date and decision_event_state:
-            licences_limit_date = []
+        if decision_limit_date:
+            related_licences_decision_limit_date = []
             if not isinstance(decision_limit_date, DateTime):
                 decision_limit_date = DateTime(decision_limit_date)
             for licence in related_licences:
-                delivered = licence.getLastTheLicence()
-                if delivered and (delivered.getDecisionDate() or delivered.getEventDate()) >= decision_limit_date:
-                    if not decision_event_state:
-                        licences_limit_date.append(licence)
-                    elif delivered.getDecision() == decision_event_state:
-                        licences_limit_date.append(licence)
-            related_licences = licences_limit_date
+                delivered = ''
+                if IBaseBuildLicence.providedBy(licence):
+                    delivered = licence.getLastTheLicence()
+                elif IEnvironmentBase.providedBy(licence):
+                    delivered = licence.getLastLicenceDelivery()
+                elif ITicket.providedBy(licence):
+                    delivered = licence.getLastTheticket()
+                if delivered and ((delivered.getDecisionDate() or delivered.getEventDate()) >= decision_limit_date):
+                    related_licences_decision_limit_date.append(licence)
+            related_licences = related_licences_decision_limit_date
 
         if licence_state:
             licences = []
