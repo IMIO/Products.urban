@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
+from plone import api
 from plone.app.testing import login
+from DateTime import DateTime
 from Products.urban.profiles.testsWithLicences.licences_data import licences_data
 from Products.urban.testing import URBAN_TESTS_LICENCES
 from Products.urban.scripts.odtsearch import SearchPODTemplates
@@ -252,22 +254,6 @@ class TestGetRelatedLicences(unittest.TestCase):
             portal = self.layer['portal']
             self.buildlicence = portal.urban.buildlicences.objectValues()[-1]
             login(portal, 'urbaneditor')
-            portal.urban.codt_urbancertificateones.invokeFactory("CODT_UrbanCertificateOne", id="cu1historic")
-            self.codt_urbancertificateone = portal.urban.codt_urbancertificateones.objectValues()[-1]
-            self.helper_view = self.buildlicence.unrestrictedTraverse('document_generation_helper_view')
-
-        def testRelatedLicencesLicenceState(self):
-            self.assertTrue(len(self.helper_view.get_related_licences())==12)
-            self.assertTrue(len(self.helper_view.get_related_licences(licence_state='in_progress'))==7)
-            self.assertTrue(len(self.helper_view.get_related_licences(licence_state='deposit'))==4)
-
-        def testRelatedLicencesLicenceTypes(self):
-            self.assertTrue(len(self.helper_view.get_related_licences(licence_types=['CODT_ParcelOutLicence', 'ParcelOutLicence']))==2)
-            self.assertTrue(self.helper_view.get_related_licences(licence_types=['CODT_ParcelOutLicence'])[0].portal_type=='CODT_ParcelOutLicence')
-            self.assertTrue(self.helper_view.get_related_licences(licence_types=['CODT_BuildLicence'])[0].portal_type=='CODT_BuildLicence')
-            self.assertTrue(self.helper_view.get_related_licences(licence_types=['ParcelOutLicence'])[0].portal_type=='ParcelOutLicence')
-
-        def testRelatedLicencesWithHistoric(self):
             # add a parcel in the history of self.buildlicence
             self.buildlicence.invokeFactory(
                 'Parcel',
@@ -277,9 +263,53 @@ class TestGetRelatedLicences(unittest.TestCase):
                 radical='552',
                 exposant='V'
             )
+
+            portal.urban.codt_urbancertificateones.invokeFactory("CODT_UrbanCertificateOne", id="cu1historic")
+            self.codt_urbancertificateone = portal.urban.codt_urbancertificateones.objectValues()[-1]
+
+            portal.urban.codt_buildlicences.invokeFactory("CODT_BuildLicence", id="buildlicence2")
+            self.codt_buildlicence2 = portal.urban.codt_buildlicences.objectValues()[-1]
+            self.codt_buildlicence2.invokeFactory(
+                'Parcel',
+                'test_parcel16',
+                division='62006',
+                section='A',
+                radical='552',
+                exposant='V'
+            )
+            self.codt_buildlicence2.reindexObject()
+            catalog = api.portal.get_tool('portal_catalog')
+            event_type_brain = catalog(portal_type='EventConfig', id='delivrance-du-permis-octroi-ou-refus')[0]
+            self.event_type = event_type_brain.getObject()
+            self.urban_event = self.codt_buildlicence2.createUrbanEvent(self.event_type)
+            self.codt_buildlicence2.getLastEvent().decisionDate = DateTime("2018-05-22")
+            self.codt_buildlicence2.getLastEvent().decisionDate = DateTime("2018-05-22")
+
+            self.helper_view = self.buildlicence.unrestrictedTraverse('document_generation_helper_view')
+
+        def testRelatedLicencesLicenceState(self):
+            self.assertTrue(len(self.helper_view.get_related_licences()) == 13)
+            self.assertTrue(len(self.helper_view.get_related_licences(licence_state='in_progress')) == 7)
+            self.assertTrue(len(self.helper_view.get_related_licences(licence_state='deposit')) == 5)
+
+        def testRelatedLicencesLicenceTypes(self):
+            self.assertTrue(len(self.helper_view.get_related_licences(licence_types=['CODT_ParcelOutLicence', 'ParcelOutLicence'])) == 2)
+            self.assertTrue(self.helper_view.get_related_licences(licence_types=['CODT_ParcelOutLicence'])[0].portal_type == 'CODT_ParcelOutLicence')
+            self.assertTrue(self.helper_view.get_related_licences(licence_types=['CODT_BuildLicence'])[0].portal_type == 'CODT_BuildLicence')
+            self.assertTrue(self.helper_view.get_related_licences(licence_types=['ParcelOutLicence'])[0].portal_type == 'ParcelOutLicence')
+
+        def testRelatedLicencesDecisionLimitDate(self):
+            # today : return nothing
+            self.assertTrue(len(self.helper_view.get_related_licences(decision_limit_date=DateTime().Date())) == 0)
+            # the same day : it's ok
+            self.assertTrue(len(self.helper_view.get_related_licences(decision_limit_date="2018-05-22")) == 1)
+            # 2018-05-22 is older and not returned
+            self.assertTrue(len(self.helper_view.get_related_licences(decision_limit_date="2018-05-23")) == 0)
+
+        def testRelatedLicencesWithHistoric(self):
             # no more licence with historic
             self.assertTrue(
-                len(self.helper_view.get_related_licences(with_historic=True)) == 12)
+                len(self.helper_view.get_related_licences(with_historic=True)) == 13)
             self.assertTrue(self.helper_view.get_related_licences(licence_types=['CODT_ParcelOutLicence'])[
                                 0].portal_type == 'CODT_ParcelOutLicence')
             self.assertTrue(self.helper_view.get_related_licences(licence_types=['CODT_BuildLicence'])[
