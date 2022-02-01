@@ -1024,7 +1024,7 @@ schema = Schema((
         enforceVocabulary=True,
         schemata='urban_location',
         multiValued=1,
-        vocabulary=UrbanVocabulary('watercourses', with_empty_value=True, inUrbanConfig=False),
+        vocabulary=UrbanVocabulary('watercourses', with_empty_value=False, inUrbanConfig=False),
         default_method='getDefaultValue',
     ),
 
@@ -1041,7 +1041,6 @@ schema = Schema((
 
     LinesField(
         name='trail',
-        default='ukn',
         widget=MasterMultiSelectWidget(
             format='checkbox',
             label=_('urban_label_trail', default='Trail'),
@@ -1049,7 +1048,7 @@ schema = Schema((
         enforceVocabulary=True,
         schemata='urban_road',
         multiValued=1,
-        vocabulary=UrbanVocabulary('trails', with_empty_value=True, inUrbanConfig=False),
+        vocabulary=UrbanVocabulary('trails', with_empty_value=False, inUrbanConfig=False),
         default_method='getDefaultValue',
     ),
 
@@ -1417,7 +1416,7 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
 
     def showWatercourseCategories(self, *values):
         selection = [v['val'] for v in values if v['selected']]
-        show = 'watercourses_expl' in selection and 'ukn' not in selection
+        show = len(selection) > 0
         return show
 
     security.declarePublic('getLicencesOfTheParcels')
