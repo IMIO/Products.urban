@@ -39,6 +39,9 @@ class BaseHelperView(object):
     def __str__(self):
         return str(self.context)
 
+    def __unicode__(self):
+        return unicode(self.context)
+
     def __getattr__(self, attr_name):
         """
         """
