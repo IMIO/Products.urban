@@ -40,7 +40,7 @@ class BaseHelperView(object):
         return self.context.__str__()
 
     def __unicode__(self):
-        return self.context__unicode__()
+        return self.context.__unicode__()
 
     def __getattr__(self, attr_name):
         """
