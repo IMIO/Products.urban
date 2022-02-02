@@ -11,7 +11,7 @@ from plone.dexterity.interfaces import IDexterityContent
 
 from Products.Archetypes.interfaces import IBaseObject
 from Products.CMFPlone.i18nl10n import ulocalized_time
-from Products.urban.interfaces import IUrbanEventInquiry
+from Products.urban.interfaces import IUrbanEventInquiry, IEnvironmentBase, ITicket, IBaseBuildLicence
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.utils import getCurrentFolderManager
 from Products.urban.utils import get_ws_meetingitem_infos
@@ -522,7 +522,36 @@ class UrbanDocGenerationLicenceHelperView(UrbanDocGenerationHelperView):
             return opinions
         return []
 
-    def get_related_licences_of_parcel(self, licence_types=[]):
+    def get_related_licences(self, licence_types=[], decision_limit_date=None, licence_state=None, with_historic=False):
+        related_licences = [licence.getObject() for licence in self.get_related_licences_of_parcel(licence_types, with_historic)]
+
+        if decision_limit_date:
+            related_licences_decision_limit_date = []
+            if not isinstance(decision_limit_date, DateTime):
+                decision_limit_date = DateTime(decision_limit_date)
+            for licence in related_licences:
+                delivered = ''
+                if IBaseBuildLicence.providedBy(licence):
+                    delivered = licence.getLastTheLicence()
+                elif IEnvironmentBase.providedBy(licence):
+                    delivered = licence.getLastLicenceDelivery()
+                elif ITicket.providedBy(licence):
+                    delivered = licence.getLastTheticket()
+                if delivered and ((delivered.getDecisionDate() or delivered.getEventDate()) >= decision_limit_date):
+                    related_licences_decision_limit_date.append(licence)
+            related_licences = related_licences_decision_limit_date
+
+        if licence_state:
+            licences = []
+            for licence in related_licences:
+                licence_review_state = api.content.get_state(obj=licence)
+                if licence_review_state == licence_state:
+                    licences.append(licence)
+            related_licences = licences
+
+        return related_licences
+
+    def get_related_licences_of_parcel(self, licence_types=[], with_historic=False):
         """
           Returns the licences related to a parcel
         """
@@ -531,18 +560,18 @@ class UrbanDocGenerationLicenceHelperView(UrbanDocGenerationHelperView):
         relatedLicences = []
         licence_uids = set([])
         for parcel in parcels:
-            for brain in parcel.getRelatedLicences(licence_type=licence_types):
+            for brain in parcel.getRelatedLicences(licence_type=licence_types, with_historic=with_historic):
                 if brain.UID not in licence_uids:
                     relatedLicences.append(brain)
                     licence_uids.add(brain.UID)
         return relatedLicences
 
-    def get_related_licences_titles_of_parcel(self):
+    def get_related_licences_titles_of_parcel(self, licence_types=[]):
         """
           Returns the titles of licences related to a parcel
         """
         relatedLicencesTitles = []
-        for relatedLicence in self.get_related_licences_of_parcel():
+        for relatedLicence in self.get_related_licences_of_parcel(licence_types):
             relatedLicencesTitles.append(relatedLicence.Title.decode('utf8'))
         return relatedLicencesTitles
 
