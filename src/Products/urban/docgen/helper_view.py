@@ -37,10 +37,10 @@ class BaseHelperView(object):
         return urban_tool
 
     def __str__(self):
-        return str(self.context)
+        return self.context.__str__()
 
     def __unicode__(self):
-        return unicode(self.context)
+        return self.context__unicode__()
 
     def __getattr__(self, attr_name):
         """
