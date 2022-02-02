@@ -36,6 +36,9 @@ class BaseHelperView(object):
         urban_tool = api.portal.get_tool('portal_urban')
         return urban_tool
 
+    def __str__(self):
+        return str(self.context)
+
     def __getattr__(self, attr_name):
         """
         """
