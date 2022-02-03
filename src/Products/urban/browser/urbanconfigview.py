@@ -6,6 +6,7 @@ from Products.urban import UrbanMessage as _
 from Products.urban.setuphandlers import _create_task_configs
 from Products.urban.browser.table.urbantable import InternalOpinionServicesTable
 from Products.urban.browser.offdays_settings import OffDaysEditForm
+from Products.urban.browser.gig_coring_settings import GigCoringLinkEditForm
 
 from imio.schedule.content.object_factories import CreationConditionObject
 from imio.schedule.content.object_factories import RecurrenceConditionObject
@@ -32,6 +33,9 @@ class UrbanConfigView(BrowserView):
         self.internal_services_form.update()
         self.offdays_form = OffDaysEditForm(context, request)
         self.offdays_form.update()
+        self.gig_coring_form = GigCoringLinkEditForm(context, request)
+        self.gig_coring_form.update()
+
 
     def getTabMacro(self, tab):
         context = aq_inner(self.context)
@@ -46,7 +50,8 @@ class UrbanConfigView(BrowserView):
             'vocabulary_folders',
             'schedule',
             'internal_services',
-            'admin_settings'
+            'admin_settings',
+            'gig_coring'
         ]
 
     def getMiscConfigFolders(self):
