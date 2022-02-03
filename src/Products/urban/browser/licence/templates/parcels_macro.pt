@@ -11,5 +11,12 @@
                 </button>
             </a>
         </div-->
+    <div class="parcel-action">
+     <form tal:condition="python: view.isGigCoringActive() "
+           tal:attributes="action python: context.absolute_url() + '/gig_coring_view'" name="gig_coring" action="gig_coring_view" method="post" target="_blank" >
+      <input type="submit" class="context apButton" id="gig_coring_link" value="carottage" />
+     </form>
+    </div>
+
     </fieldset>
 </div>
