@@ -24,11 +24,12 @@ class GigSession(MySQLSession):
         Do the insert query of the parcel capakeys into gig db.
         """
         parcels_keys = [c.replace('/', '') for c in capakeys]
-        user_mail = api.user.get_current().getProperty('email')
-        if not user_mail or user_mail == '':
-            mail_record = api.portal.get_registry_record(
+        mail_record = api.portal.get_registry_record(
                 'Products.urban.browser.gig_coring_settings.IGigCoringLink.mail_mapping')
-            user_mail = mail_record[0].get('mail_gig')
+        user_mail = mail_record[0].get('mail_gig')
+#        user_mail = api.user.get_current().getProperty('email')
+        if not user_mail or user_mail == '':
+            user_mail = api.user.get_current().getProperty('email')
         filenis = '/srv/instances/testcarottage_urb25/var/urban/urbanmap.cfg'
         with open(filenis, 'r') as f:
             lines = f.readlines()
