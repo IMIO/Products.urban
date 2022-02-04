@@ -32,19 +32,16 @@ class MySQLService(object):
         """
         Initialize the connection.
         """
-#        connect_args = timeout and {"options": "-c statement_timeout={t}".format(t=timeout)} or {}
         engine = create_engine(
                 '{dialect}://{username}{password}@{host}/{db_name}'.format(
                  dialect=dialect,
                  username=username,
                  password=password and ':{}'.format(password) or '',
                  host=host,
-#                 port=port or '3306', port ne semble pas nécessaire pour mysql
                  db_name=db_name,
                  ),
                 echo=True,
-#            connect_args=connect_args,
-            poolclass=StaticPool
+                poolclass=StaticPool
         )
 
         return engine
@@ -110,13 +107,8 @@ class MySQLSession(object):
     def __init__(self, service):
         print 'ENGINE {}'.format(service.engine)
         self.service = service
-#        self.tables = service.tables
         factory = sessionmaker(bind=service.engine)
         self.session = factory()
-#        self.session = scoped_session(sessionmaker(
-#            bind=service.engine,
-#            extension=ZopeTransactionExtension(),
-#        ))
 
     def execute(self, str_query):
         """
