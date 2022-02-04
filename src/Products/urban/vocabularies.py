@@ -346,10 +346,6 @@ class GigCoringUserIdVocabulary(object):
 
     def __call__(self, context):
         request = api.portal.get().REQUEST
-#        user_id_value = api.user.get('admin')
-#        user_mail_value = ''
-#        if api.user.get_current().getProperty('email'):
-#            user_mail_value = api.user.get_current().getProperty('email')
         term_ids = [u for u in api.user.get_users()]
         terms = [SimpleTerm(t_id.id, t_id.id, t_id.id + ' ' + t_id.getProperty('email')) for t_id in term_ids]
 
