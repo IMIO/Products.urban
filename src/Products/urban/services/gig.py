@@ -27,7 +27,6 @@ class GigSession(MySQLSession):
         mail_record = api.portal.get_registry_record(
                 'Products.urban.browser.gig_coring_settings.IGigCoringLink.mail_mapping')
         user_mail = mail_record[0].get('mail_gig')
-#        user_mail = api.user.get_current().getProperty('email')
         if not user_mail or user_mail == '':
             user_mail = api.user.get_current().getProperty('email')
         filenis = '/srv/instances/testcarottage_urb25/var/urban/urbanmap.cfg'
