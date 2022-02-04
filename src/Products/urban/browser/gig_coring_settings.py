@@ -21,16 +21,9 @@ from zope import schema
 class IGigMapping(Interface):
     """
     """
-#    user_id = schema.TextLine(
-#        title=_(u'user_id'),
-#        required=False,
-#    )
-#    user_id_value = api.user.get_current().id
-#    user_mail_value = api.user.get_current().getProperty('email')
     user_id = schema.Choice(
         title=_(u"user_id"),
         required=False,
-#        vocabulary=u'urban.vocabularies.offdays_period_types'
         vocabulary='urban.vocabularies.gig_coring_user_id'
     )
 
