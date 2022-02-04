@@ -6,6 +6,7 @@ from plone.app.registry.browser.controlpanel import RegistryEditForm
 from plone.app.registry.browser.controlpanel import ControlPanelFormWrapper
 
 from plone.autoform import directives as form
+# from plone import api
 
 from z3c.form import button
 from z3c.form import field
@@ -20,9 +21,17 @@ from zope import schema
 class IGigMapping(Interface):
     """
     """
-    user_id = schema.TextLine(
-        title=_(u'user_id'),
+#    user_id = schema.TextLine(
+#        title=_(u'user_id'),
+#        required=False,
+#    )
+#    user_id_value = api.user.get_current().id
+#    user_mail_value = api.user.get_current().getProperty('email')
+    user_id = schema.Choice(
+        title=_(u"user_id"),
         required=False,
+#        vocabulary=u'urban.vocabularies.offdays_period_types'
+        vocabulary='urban.vocabularies.gig_coring_user_id'
     )
 
     mail_gig = schema.TextLine(
