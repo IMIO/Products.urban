@@ -4,14 +4,15 @@ from collective.documentgenerator.helper.archetypes import ATDisplayProxyObject
 from collective.documentgenerator.helper.archetypes import ATDocumentGenerationHelperView
 from collective.documentgenerator.helper.dexterity import DXDocumentGenerationHelperView
 
-from datetime import date as _date
+from datetime import date as _date, datetime
 from dateutil.relativedelta import relativedelta
 
 from plone.dexterity.interfaces import IDexterityContent
 
 from Products.Archetypes.interfaces import IBaseObject
 from Products.CMFPlone.i18nl10n import ulocalized_time
-from Products.urban.interfaces import IUrbanEventInquiry, IEnvironmentBase, ITicket, IBaseBuildLicence
+from Products.urban.interfaces import IUrbanEventInquiry, IEnvironmentBase, ITicket, IBaseBuildLicence, \
+    IUrbanCertificateBase
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.utils import getCurrentFolderManager
 from Products.urban.utils import get_ws_meetingitem_infos
@@ -105,6 +106,8 @@ class BaseHelperView(object):
     def add_years(self, zope_DT, years):
         """
         """
+        if isinstance(zope_DT, _date):
+            zope_DT = DateTime(datetime(zope_DT.year, zope_DT.month, zope_DT.day))
         return DateTime(zope_DT.asdatetime() + relativedelta(years=years))
 
     def format_date(self, date=None, translatemonth=True, long_format=False):
@@ -531,7 +534,7 @@ class UrbanDocGenerationLicenceHelperView(UrbanDocGenerationHelperView):
                 decision_limit_date = DateTime(decision_limit_date)
             for licence in related_licences:
                 delivered = ''
-                if IBaseBuildLicence.providedBy(licence):
+                if IBaseBuildLicence.providedBy(licence) or IUrbanCertificateBase.providedBy(licence):
                     delivered = licence.getLastTheLicence()
                 elif IEnvironmentBase.providedBy(licence):
                     delivered = licence.getLastLicenceDelivery()
