@@ -539,7 +539,7 @@ class UrbanDocGenerationLicenceHelperView(UrbanDocGenerationHelperView):
                 elif IEnvironmentBase.providedBy(licence):
                     delivered = licence.getLastLicenceDelivery()
                 elif ITicket.providedBy(licence):
-                    delivered = licence.getLastTheticket()
+                    delivered = licence.getLastTheTicket()
                 if delivered and ((delivered.getDecisionDate() or delivered.getEventDate()) >= decision_limit_date):
                     related_licences_decision_limit_date.append(licence)
             related_licences = related_licences_decision_limit_date
