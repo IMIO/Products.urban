@@ -56,34 +56,59 @@ class NOTICeService(object):
                 "timestampSent": datetime.datetime.now(),
             },
             privacyLog={
-                "context": "ENVIRONMENTAL_OR_SINGLE_PERMIT",
+                "context": self.licence_context,
                 "treatmentManagerNumber": "71062731718",  # ou "civilServantIdentifier": "71062731718",
             },
             request="Bonjour tout le monde !!!",
         )
         return result
 
+    @property
+    def customer_informations(self):
+        """
+        """
+        request_uuid = str(uuid.uuid4())
+        customer_informations = {
+            "ticket": request_uuid,
+            "timestampSent": datetime.datetime.now(),
+            "customerIdentification": {
+                "organisationId": "IMIO",
+            },
+        }
+        return customer_informations
+
+    @property
+    def privacy_log(self):
+        privacy_log = {
+            "context": self.licence_context,
+            "treatmentManagerIdentifier": {"identityManager": "RN/RBis"},
+            # il FAUT cette ligne mais la valeurs n'a pas d'importance
+            "dossier": {"dossierId": {"source": "valeur sans importance"}},
+        }
+        return privacy_log
+
     def search_notification(self, notif_type=[]):
         """ """
         self.client = Client(self.notification_wsdl, transport=self.transport, wsse=self.spw_signature)
 
-        request_uuid = str(uuid.uuid4())
         result = self.client.service.searchNotification(
-            customerInformations={
-                "ticket": request_uuid,
-                "timestampSent": datetime.datetime.now(),
-                "customerIdentification": {
-                    "organisationId": "IMIO",
-                },
-            },
-            privacyLog={
-                "context": "ENVIRONMENTAL_OR_SINGLE_PERMIT",
-                "treatmentManagerIdentifier": {"identityManager": "RN/RBis"},
-                # il FAUT cette ligne mais la valeurs n'a pas d'importance
-                "dossier": {"dossierId": {"source": "valeur sans importance"}},
-            },
+            customerInformations=self.customer_informations,
+            privacyLog=self.privacy_log,
             request={
                 "noticeInstanceId": "0216.693.545",  # code BCED de la commune
+            },
+        )
+        return result
+
+    def get_notification(self, notice_id):
+        """ """
+        self.client = Client(self.notification_wsdl, transport=self.transport, wsse=self.spw_signature)
+
+        result = self.client.service.getNotification(
+            customerInformations=self.customer_informations,
+            privacyLog=self.privacy_log,
+            request={
+                "noticeId": notice_id,  # id de la notification
             },
         )
         return result
