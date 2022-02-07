@@ -2,7 +2,6 @@
 
 from Products.urban.config import ExternalConfig
 from Products.urban.services.cadastral import CadastreService
-from Products.urban.services.NOTICe import NOTICeService
 from Products.urban.services.parcel_coring import ParcelCoringService
 
 try:
