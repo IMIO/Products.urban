@@ -5,9 +5,6 @@ from collective.z3cform.datagridfield.registry import DictRow
 from plone.app.registry.browser.controlpanel import RegistryEditForm
 from plone.app.registry.browser.controlpanel import ControlPanelFormWrapper
 
-from plone.autoform import directives as form
-# from plone import api
-
 from z3c.form import button
 from z3c.form import field
 
