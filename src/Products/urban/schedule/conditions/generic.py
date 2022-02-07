@@ -780,7 +780,7 @@ class TicketEventClosed(Condition):
     """
     def evaluate(self):
         licence = self.task_container
-        ticket_event = licence.getLastTheticket()
+        ticket_event = licence.getLastTheTicket()
         if not ticket_event:
             return False
         closed = api.content.get_state(ticket_event) == 'closed'
