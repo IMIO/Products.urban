@@ -11,6 +11,7 @@ try:
     config_bestaddress = ExternalConfig('bestaddress')
     config_parcel_coring = ExternalConfig('parcel_coring')
     config_gig = ExternalConfig('gig')
+    config_urbanmap = ExternalConfig('urbanmap')
 except:
     config = {}
 
