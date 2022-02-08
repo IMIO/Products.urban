@@ -314,6 +314,8 @@ def finalize_schema(schema, folderish=False, moveDiscussion=True):
     schema['inquiry_type'].default = 'inquiry'
     RoadDecree_schema['prorogation'].widget.visible = {'edit': 'invisible', 'view': 'invisible'}
     RoadDecree_schema['prorogationModifiedBp'].widget.visible = {'edit': 'invisible', 'view': 'invisible'}
+    RoadDecree_schema['announcementArticles'].widget.visible = {'edit': 'invisible', 'view': 'invisible'}
+    RoadDecree_schema['announcementArticlesText'].widget.visible = {'edit': 'invisible', 'view': 'invisible'}
     return schema
 
 
