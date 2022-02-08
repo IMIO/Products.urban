@@ -35,27 +35,6 @@ optional_fields = ['geometricians', 'notaryContact']
 
 schema = Schema((
     ReferenceField(
-        name='geometricians',
-        widget=ReferenceBrowserWidget(
-            force_close_on_insert=1,
-            allow_search=1,
-            only_for_review_states='enabled',
-            allow_browse=0,
-            show_indexes=1,
-            show_index_selector=1,
-            available_indexes={'Title': 'Nom'},
-            base_query='geometriciansBaseQuery',
-            wild_card_search=True,
-            show_results_without_query=True,
-            label=_('urban_label_geometricians', default='Geometricians'),
-        ),
-        required=False,
-        schemata='urban_description',
-        multiValued=1,
-        relationship='parcelOutGeometricians',
-        allowed_types=('Geometrician',),
-    ),
-    ReferenceField(
         name='notaryContact',
         widget=ReferenceBrowserWidget(
             allow_search=1,
@@ -133,8 +112,8 @@ def cu2FinalizeSchema(schema):
     """
        Finalizes the type schema to alter some fields
     """
-    schema.moveField('geometricians', after='workLocations')
-    schema.moveField('notaryContact', after='geometricians')
+    schema.moveField('representativeContacts', after='workLocations')
+    schema.moveField('notaryContact', after='representativeContacts')
 
 cu2FinalizeSchema(CODT_UrbanCertificateTwo_schema)
 ##/code-section module-footer
