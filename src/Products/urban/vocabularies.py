@@ -345,8 +345,7 @@ class GigCoringUserIdVocabulary(object):
     implements(IVocabularyFactory)
 
     def __call__(self, context):
-        request = api.portal.get().REQUEST
-        term_ids = [u for u in api.user.get_users()]
+        term_ids = [u for u in context.portal_membership.searchForMembers()]
         terms = [SimpleTerm(t_id.id, t_id.id, t_id.id + ' ' + t_id.getProperty('email')) for t_id in term_ids]
 
         return SimpleVocabulary(terms)
