@@ -96,6 +96,9 @@ Changes
 - Add CODT ParlcelOutLicence reference field reprensentativeContacts + tests [URB-2075]
   [jjaumotte]
 
+- Add Basebuildlicence reference field reprensentativeContacts + tests [URB-2335]
+  [jjaumotte]
+
 - Licences can created as a copy of another licence (fields, applicants and parcels can be copied). [URB-1934]
   [sdelcourt]
 
