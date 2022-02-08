@@ -666,6 +666,7 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
             title = "%s - %s" % (self.getReference(), notary)
         else:
             title = self.getReference()
+        title = "{}{}".format(title, self.getLicenceSubject() and " - "  +self.getLicenceSubject() or "")
         self.setTitle(title)
         self.reindexObject(idxs=('Title', 'applicantInfosIndex', 'sortable_title', ))
 
