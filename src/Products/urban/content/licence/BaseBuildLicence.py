@@ -402,25 +402,24 @@ schema = Schema((
         default_output_type='text/html',
     ),
     ReferenceField(
-        name='architects',
+        name='representativeContacts',
         widget=ReferenceBrowserWidget(
             force_close_on_insert=1,
             allow_search=1,
             only_for_review_states='enabled',
-            allow_browse=1,
+            allow_browse=0,
             show_indexes=1,
-            show_index_selector=1,
             available_indexes={'Title': 'Nom'},
-            startup_directory="urban/architects",
+            startup_directory='urban',
             wild_card_search=True,
-            restrict_browsing_to_startup_directory=1,
-            label=_('urban_label_architects', default='Architects'),
-            popup_name='contact_reference_popup',
+            show_results_without_query=True,
+            restrict_browsing_to_startup_directory=False,
+            label=_('urban_label_representative_contacts', default='RepresentativeContacts'),
         ),
-        allowed_types=('Architect',),
         schemata='urban_description',
         multiValued=1,
-        relationship='licenceArchitects',
+        relationship='basebuildlicenceRepresentativeContacts',
+        allowed_types=('Geometrician', 'Architect',),
     ),
     LinesField(
         name='procedureChoice',
@@ -584,7 +583,7 @@ class BaseBuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin)
     def getRepresentatives(self):
         """
         """
-        return self.getArchitects()
+        return self.getRepresentativeContacts()
 
     security.declarePublic('listRequirementsFromFD')
 
@@ -759,8 +758,8 @@ def finalizeSchema(schema):
        Finalizes the type schema to alter some fields
     """
     schema.moveField('roadAdaptation', before='roadTechnicalAdvice')
-    schema.moveField('architects', after='workLocations')
-    schema.moveField('foldermanagers', after='architects')
+    schema.moveField('representativeContacts', after='workLocations')
+    schema.moveField('foldermanagers', after='representativeContacts')
     schema.moveField('workType', after='folderCategory')
     schema.moveField('parcellings', after='isInSubdivision')
     schema.moveField('description', after='usage')
