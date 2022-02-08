@@ -12,7 +12,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.exc import NoSuchTableError
 from sqlalchemy.orm import scoped_session
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy.pool import StaticPool
+from sqlalchemy.pool import NullPool
 
 from zope.component import getAdapter
 from zope.interface import implements
@@ -41,7 +41,7 @@ class MySQLService(object):
                  db_name=db_name,
                  ),
                 echo=True,
-                poolclass=StaticPool
+                poolclass=NullPool
         )
 
         return engine
