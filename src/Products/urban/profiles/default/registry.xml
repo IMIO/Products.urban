@@ -24,7 +24,7 @@
           <element>licenceParcelling</element>
           <element>notary</element>
           <element>parcelOutGeometricians</element>
-          <element>parcelOutRepresentativeContacts</element>
+          <element>basebuildlicenceRepresentativeContacts</element>
           <element>recipients</element>
           <element>referenceableVocabularyTerm</element>
       </value>
