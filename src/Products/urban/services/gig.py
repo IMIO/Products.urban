@@ -2,6 +2,7 @@
 
 from Products.urban.services.mysqlbase import MySQLService
 from Products.urban.services.mysqlbase import MySQLSession
+from Products.urban.config import ExternalConfig
 from datetime import datetime
 from plone import api
 
@@ -10,7 +11,7 @@ class GigService(MySQLService):
     """
     Service specific to gig database, contain queries
     """
-    def __init__(self, dialect='mysql+pymysql', user='urb_xxx', host='', db_name='urb_xxx', password='', timeout='120000'):
+    def __init__(self, dialect='mysql+pymysql', user='urb_xxx', host='', db_name='urb_xxx', password='', timeout=''):
         super(GigService, self).__init__(dialect, user, host, db_name, password, timeout)
 
 
@@ -26,13 +27,15 @@ class GigSession(MySQLSession):
         parcels_keys = [c.replace('/', '') for c in capakeys]
         mail_record = api.portal.get_registry_record(
                 'Products.urban.browser.gig_coring_settings.IGigCoringLink.mail_mapping')
-        user_mail = mail_record[0].get('mail_gig')
-        if not user_mail or user_mail == '':
+        user_current = api.user.get_current().id
+        user_mail = ''
+        for the_user in mail_record:
+            if the_user.get('user_id') == user_current:
+                user_mail = the_user.get('mail_gig')
+        if not user_mail:
             user_mail = api.user.get_current().getProperty('email')
-        filenis = '/srv/instances/testcarottage_urb25/var/urban/urbanmap.cfg'
-        with open(filenis, 'r') as f:
-            lines = f.readlines()
-        nis = lines[1][4:9]
+        map_cfg = ExternalConfig('urbanmap')
+        nis = map_cfg.urbanmap['nis']
         today = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
         for key in parcels_keys:
