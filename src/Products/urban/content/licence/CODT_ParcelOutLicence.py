@@ -40,48 +40,6 @@ schema = Schema((
         ),
         schemata='urban_description',
     ),
-    ReferenceField(
-        name='geometricians',
-        widget=ReferenceBrowserWidget(
-            force_close_on_insert=1,
-            allow_search=1,
-            only_for_review_states='enabled',
-            allow_browse=1,
-            show_indexes=1,
-            show_index_selector=1,
-            available_indexes={'Title': 'Nom'},
-            startup_directory="urban/geometricians",
-            wild_card_search=True,
-            restrict_browsing_to_startup_directory=1,
-            label=_('urban_label_geometricians', default='Geometricians'),
-            popup_name='contact_reference_popup',
-        ),
-        required=False,
-        multiValued=1,
-        relationship='parcelOutGeometricians',
-        allowed_types=('Geometrician',),
-    ),
-    ReferenceField(
-        name='representativeContacts',
-        widget=ReferenceBrowserWidget(
-            force_close_on_insert=1,
-            allow_search=1,
-            only_for_review_states='enabled',
-            allow_browse=0,
-            show_indexes=1,
-            available_indexes={'Title': 'Nom'},
-            startup_directory='urban',
-            wild_card_search=True,
-            show_results_without_query=True,
-            restrict_browsing_to_startup_directory=False,
-            label=_('urban_label_representative_contacts', default='RepresentativeContacts'),
-        ),
-        required=True,
-        schemata='urban_description',
-        multiValued=1,
-        relationship='parcelOutRepresentativeContacts',
-        allowed_types=('Geometrician', 'Architect',),
-    )
 ),
 )
 
@@ -99,7 +57,6 @@ del CODT_ParcelOutLicence_schema['pebType']
 del CODT_ParcelOutLicence_schema['pebDetails']
 del CODT_ParcelOutLicence_schema['pebStudy']
 del CODT_ParcelOutLicence_schema['pebTechnicalAdvice']
-del CODT_ParcelOutLicence_schema['architects']
 del CODT_ParcelOutLicence_schema['usage']
 ##/code-section after-schema
 
@@ -123,12 +80,6 @@ class CODT_ParcelOutLicence(BaseFolder, CODT_BaseBuildLicence, BrowserDefaultMix
     # Methods
 
     # Manually created methods
-
-    security.declarePublic('getRepresentatives')
-    def getRepresentatives(self):
-        """
-        """
-        return self.getRepresentativeContacts()
 
     # Backward compatibility for pod template
     security.declarePublic('getGeometricians')

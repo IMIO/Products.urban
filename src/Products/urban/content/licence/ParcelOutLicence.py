@@ -41,27 +41,6 @@ schema = Schema((
         ),
         schemata='urban_description',
     ),
-    ReferenceField(
-        name='geometricians',
-        widget=ReferenceBrowserWidget(
-            force_close_on_insert=1,
-            allow_search=1,
-            only_for_review_states='enabled',
-            allow_browse=0,
-            show_indexes=1,
-            show_index_selector=1,
-            available_indexes={'Title':'Nom'},
-            base_query='geometriciansBaseQuery',
-            wild_card_search=True,
-            show_results_without_query=True,
-            label=_('urban_label_geometricians', default='Geometricians'),
-        ),
-        required=True,
-        schemata='urban_description',
-        multiValued=1,
-        relationship='parcelOutGeometricians',
-        allowed_types=('Geometrician',),
-    ),
 
 ),
 )
@@ -82,7 +61,6 @@ del ParcelOutLicence_schema['pebType']
 del ParcelOutLicence_schema['pebDetails']
 del ParcelOutLicence_schema['pebStudy']
 del ParcelOutLicence_schema['pebTechnicalAdvice']
-del ParcelOutLicence_schema['architects']
 del ParcelOutLicence_schema['usage']
 ##/code-section after-schema
 
@@ -196,7 +174,7 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     """
     schema.moveField('isModification', after='folderCategory')
     schema.moveField('description', after='impactStudy')
-    schema.moveField('geometricians', after='workLocations')
+    schema.moveField('representativeContacts', after='workLocations')
     return schema
 
 finalizeSchema(ParcelOutLicence_schema)
