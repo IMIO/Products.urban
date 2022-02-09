@@ -72,7 +72,6 @@ class GigCoringLinkEditForm(RegistryEditForm):
 
         self.applyChanges(data)
         IStatusMessage(self.request).addStatusMessage(_(u"Changes saved"), "info")
-        self.context.REQUEST.RESPONSE.redirect("#fieldsetlegend-urban_gig_coring")
 
     @button.buttonAndHandler(_('Cancel'), name='cancel')
     def handleCancel(self, action):
