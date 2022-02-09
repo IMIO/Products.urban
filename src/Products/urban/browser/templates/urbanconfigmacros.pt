@@ -154,3 +154,12 @@
    <tal:listing content="structure view/renderInternalServicesListing" />
 
 </div>
+<div metal:define-macro="gig_coring_macro" i18n:domain="urban">
+
+   <tal:form define="form python: getattr(view, 'gig_coring_form', None)">
+       <tal:with-form-as-view define="view nocall:form">
+           <metal:block use-macro="form/@@ploneform-macros/titlelessform" />
+       </tal:with-form-as-view>
+   </tal:form>
+
+</div>
