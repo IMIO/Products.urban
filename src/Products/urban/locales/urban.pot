@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2022-01-19 15:34+0000\n"
+"POT-Creation-Date: 2022-02-10 08:58+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,6 +14,7 @@ msgstr ""
 "Preferred-Encodings: utf-8\n"
 "Domain: urban\n"
 
+#: ../browser/gig_coring_settings.py:58
 #: ../browser/offdays_settings.py:75
 msgid ""
 msgstr ""
@@ -174,7 +175,8 @@ msgstr ""
 msgid "CS_folder_title"
 msgstr ""
 
-#: ../browser/offdays_settings.py:124
+#: ../browser/gig_coring_settings.py:76
+#: ../browser/offdays_settings.py:123
 msgid "Cancel"
 msgstr ""
 
@@ -182,6 +184,7 @@ msgstr ""
 msgid "Change Owner"
 msgstr ""
 
+#: ../browser/gig_coring_settings.py:74
 #: ../browser/offdays_settings.py:121
 msgid "Changes saved"
 msgstr ""
@@ -274,7 +277,8 @@ msgstr ""
 msgid "Edit Urban tools Portlet"
 msgstr ""
 
-#: ../browser/offdays_settings.py:127
+#: ../browser/gig_coring_settings.py:79
+#: ../browser/offdays_settings.py:126
 msgid "Edit cancelled"
 msgstr ""
 
@@ -718,6 +722,7 @@ msgstr ""
 msgid "RoadDecree"
 msgstr ""
 
+#: ../browser/gig_coring_settings.py:66
 #: ../browser/offdays_settings.py:113
 msgid "Save"
 msgstr ""
@@ -742,11 +747,11 @@ msgstr ""
 msgid "Select to list"
 msgstr ""
 
-#: ../browser/urbanconfigview.py:80
+#: ../browser/urbanconfigview.py:85
 msgid "Service full name"
 msgstr ""
 
-#: ../browser/urbanconfigview.py:85
+#: ../browser/urbanconfigview.py:90
 msgid "Service id"
 msgstr ""
 
@@ -1298,10 +1303,12 @@ msgid "date_day_01"
 msgstr ""
 
 #: ../services/base.py:132
+#: ../services/mysqlbase.py:76
 msgid "db_connection_error"
 msgstr ""
 
 #: ../services/base.py:127
+#: ../services/mysqlbase.py:71
 msgid "db_connection_successfull"
 msgstr ""
 
@@ -1599,6 +1606,9 @@ msgstr ""
 msgid "fieldsetlegend-urban_events"
 msgstr ""
 
+msgid "fieldsetlegend-urban_gig_coring"
+msgstr ""
+
 msgid "fieldsetlegend-urban_internal_services"
 msgstr ""
 
@@ -1752,6 +1762,14 @@ msgstr ""
 #. Default: "urban"
 #: ../setuphandlers.py:926
 msgid "geometricians_folder_title"
+msgstr ""
+
+#: ../browser/gig_coring_settings.py:57
+msgid "gig coring link"
+msgstr ""
+
+#: ../browser/gig_coring_settings.py:37
+msgid "gig_coring_activation"
 msgstr ""
 
 #. Default: "Global templates"
@@ -2052,6 +2070,18 @@ msgstr ""
 msgid "lotusages_folder_title"
 msgstr ""
 
+#: ../browser/gig_coring_settings.py:43
+msgid "mail gig user id mapping"
+msgstr ""
+
+#: ../browser/gig_coring_settings.py:45
+msgid "mail mapping"
+msgstr ""
+
+#: ../browser/gig_coring_settings.py:28
+msgid "mail_gig"
+msgstr ""
+
 #: ../interfaces.py:727
 msgid "mailings planned"
 msgstr ""
@@ -2085,6 +2115,10 @@ msgstr ""
 
 #: ../browser/templates/globalmacros.pt:39
 msgid "manual_parcel"
+msgstr ""
+
+#: ../browser/gig_coring_settings.py:44
+msgid "map the plone user id to the gig mail address"
 msgstr ""
 
 # config folders
@@ -5631,6 +5665,10 @@ msgstr ""
 
 #: ../content/licence/BaseBuildLicence.py:575
 msgid "usage_not_for_habitation"
+msgstr ""
+
+#: ../browser/gig_coring_settings.py:22
+msgid "user_id"
 msgstr ""
 
 msgid "viewmap"

@@ -172,7 +172,8 @@ msgstr "Conditions sectorielles Eau"
 msgid "CS_folder_title"
 msgstr "Conditions sectorielles"
 
-#: ../browser/offdays_settings.py:124
+#: ../browser/gig_coring_settings.py:76
+#: ../browser/offdays_settings.py:123
 msgid "Cancel"
 msgstr "Annuler"
 
@@ -180,6 +181,7 @@ msgstr "Annuler"
 msgid "Change Owner"
 msgstr "réassigner"
 
+#: ../browser/gig_coring_settings.py:74
 #: ../browser/offdays_settings.py:121
 msgid "Changes saved"
 msgstr "Changements enregistrés"
@@ -272,7 +274,8 @@ msgstr ""
 msgid "Edit Urban tools Portlet"
 msgstr ""
 
-#: ../browser/offdays_settings.py:127
+#: ../browser/gig_coring_settings.py:79
+#: ../browser/offdays_settings.py:126
 msgid "Edit cancelled"
 msgstr ""
 
@@ -731,6 +734,7 @@ msgstr "Type de voirie"
 msgid "RoadDecree"
 msgstr "Décret Voirie"
 
+#: ../browser/gig_coring_settings.py:66
 #: ../browser/offdays_settings.py:113
 msgid "Save"
 msgstr "Enregistrer"
@@ -755,11 +759,11 @@ msgstr "Sélectionner les types de contenues autorisés pour ce modèle"
 msgid "Select to list"
 msgstr ""
 
-#: ../browser/urbanconfigview.py:80
+#: ../browser/urbanconfigview.py:85
 msgid "Service full name"
 msgstr "Nom du service"
 
-#: ../browser/urbanconfigview.py:85
+#: ../browser/urbanconfigview.py:90
 msgid "Service id"
 msgstr "Identifiant du service"
 
@@ -1315,10 +1319,12 @@ msgid "date_day_01"
 msgstr "1er"
 
 #: ../services/base.py:132
+#: ../services/mysqlbase.py:76
 msgid "db_connection_error"
 msgstr ""
 
 #: ../services/base.py:127
+#: ../services/mysqlbase.py:71
 msgid "db_connection_successfull"
 msgstr ""
 
@@ -1618,6 +1624,9 @@ msgstr "Paramètres avancés"
 msgid "fieldsetlegend-urban_events"
 msgstr "Événements"
 
+msgid "fieldsetlegend-urban_gig_coring"
+msgstr "Paramètres carottage"
+
 msgid "fieldsetlegend-urban_internal_services"
 msgstr "Services internes à la ville"
 
@@ -1780,6 +1789,14 @@ msgstr "Générer un document lié au dossier"
 #: ../setuphandlers.py:926
 msgid "geometricians_folder_title"
 msgstr "Géomètres"
+
+#: ../browser/gig_coring_settings.py:57
+msgid "gig coring link"
+msgstr "Lien carottage"
+
+#: ../browser/gig_coring_settings.py:37
+msgid "gig_coring_activation"
+msgstr "Activer le carottage"
 
 #. Default: "Global templates"
 #: ../browser/templates/templatessummary.pt:19
@@ -2079,6 +2096,18 @@ msgstr "Particularités du bien (urbanisme)"
 msgid "lotusages_folder_title"
 msgstr "Destination"
 
+#: ../browser/gig_coring_settings.py:43
+msgid "mail gig user id mapping"
+msgstr "Lier l'adresse mail du gig à l'utilisateur"
+
+#: ../browser/gig_coring_settings.py:45
+msgid "mail mapping"
+msgstr "Lien avec l'adresse du gig"
+
+#: ../browser/gig_coring_settings.py:28
+msgid "mail_gig"
+msgstr "Adresse mail du compte gig"
+
 #: ../interfaces.py:727
 msgid "mailings planned"
 msgstr ""
@@ -2113,6 +2142,10 @@ msgstr "Gérer les lotissements"
 #: ../browser/templates/globalmacros.pt:39
 msgid "manual_parcel"
 msgstr ""
+
+#: ../browser/gig_coring_settings.py:44
+msgid "map the plone user id to the gig mail address"
+msgstr "Fait la correspondance entre l'adresse mail utilisée pour le compte du gig et l'utilisateur urban"
 
 # config folders
 msgid "map_configs_folder_title"
@@ -2977,7 +3010,6 @@ msgstr "Permissions, enregistrements et déclarations existantes supplémentaire
 # parcelsinfo.pt
 #. Default: "address:"
 #: ../browser/templates/parcelsinfo.pt:13
-#, fuzzy
 msgid "urban_label_address"
 msgstr "Adresse"
 
@@ -5673,6 +5705,10 @@ msgstr "Pas d'application"
 #: ../content/licence/BaseBuildLicence.py:575
 msgid "usage_not_for_habitation"
 msgstr "Modèle II: Bâtiment(s) destiné(s) exclusivement ou principalement à un autre usage que l'habitation"
+
+#: ../browser/gig_coring_settings.py:22
+msgid "user_id"
+msgstr "Identifiant de l'utilisateur"
 
 msgid "viewmap"
 msgstr "Représentation cartographique"
