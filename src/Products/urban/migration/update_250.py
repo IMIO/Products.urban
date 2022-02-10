@@ -301,3 +301,18 @@ def migrate_notaryletter_specificfeatures_texts(context):
                 value.setDescription(new_text)
                 value.reindexObject()
     logger.info("upgrade done!")
+
+def migrate_add_tax_other_option(context):
+    """
+    Add 'other' tax vocabulary value for all licence type config
+    Used for show taxDetails field in all licence edition form.
+    """
+    logger = logging.getLogger('urban: migrate_add_tax_other_option')
+    logger.info("starting migration step")
+    portal_urban = api.portal.get_tool('portal_urban')
+    licence_configs = portal_urban.objectValues('LicenceConfig')
+    for licence_config in licence_configs:
+        if "other" not in licence_config.tax:
+            licence_config.tax.invokeFactory('UrbanVocabularyTerm', id='other', title="Autre")
+
+    logger.info("migration step done!")
