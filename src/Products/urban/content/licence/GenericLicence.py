@@ -41,7 +41,9 @@ from Products.urban import UrbanMessage as _
 # code-section module-header #fill in your manual code here
 from zope.i18n import translate
 from collective.datagridcolumns.ReferenceColumn import ReferenceColumn
+from Products.Archetypes.Widget import RichWidget
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
+from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
 from Products.urban.content.licence.base import UrbanBase
 from Products.urban.interfaces import IOpinionRequestEvent
 from Products.urban.interfaces import IUrbanEvent
@@ -97,6 +99,15 @@ slave_fields_pca = (
     },
 )
 
+slave_fields_tax = (
+    # if other selected, show taxdetails field.
+    {
+       'name': 'taxDetails',
+       'action': 'show',
+       'hide_values': ('none', 'other'),
+    },
+)
+
 optional_fields = [
     'subdivisionDetails', 'missingParts', 'missingPartsDetails', 'folderZoneDetails', 'folderZone',
     'isInPCA', 'roadType', 'roadCoating', 'roadEquipments', 'pcaZone',
@@ -113,7 +124,7 @@ optional_fields = [
     'preemption', 'preemptionDetails', 'SAR', 'sarDetails', 'enoughRoadEquipment', 'enoughRoadEquipmentDetails',
     'reparcelling', 'reparcellingDetails', 'noteworthyTrees', 'pipelines', 'pipelinesDetails', 'tax',
     'groundStateStatus', 'groundstatestatusDetails', 'covid', 'watercourse', 'watercourseCategories', 'trail',
-    'trailDetails'
+    'trailDetails', 'tax', 'taxDetails'
 ]
 # /code-section module-header
 
@@ -179,14 +190,26 @@ schema = Schema((
     ),
     StringField(
         name='tax',
-        widget=SelectionWidget(
-            label=_('urban_label_tax',
-                    default='Tax'),
+        widget=MasterSelectWidget(
+            slave_fields=slave_fields_tax,
+            label=_('urban_label_tax', default='Tax'),
         ),
         enforceVocabulary=True,
         schemata='urban_description',
         vocabulary=UrbanVocabulary('tax', with_empty_value=True, sort_on='sortable_title'),
         default_method='getDefaultValue',
+    ),
+    TextField(
+        name='taxDetails',
+        default_content_type='text/plain',
+        allowable_content_types=('text/plain',),
+        schemata='urban_description',
+        default_method='getDefaultText',
+        default_output_type='text/plain',
+        accessor="Taxdetails",
+        widget=TextAreaWidget(
+            label=_('urban_label_taxDetails', default='Taxdetails'),
+        ),
     ),
     LinesField(
         name='missingParts',
