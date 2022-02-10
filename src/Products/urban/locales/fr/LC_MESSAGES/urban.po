@@ -5295,6 +5295,11 @@ msgstr "Onglets"
 msgid "urban_label_tax"
 msgstr "Redevance"
 
+#. Default: "Taxdetails"
+#: ../content/licence/GenericLicence.py:211
+msgid "urban_label_taxDetails"
+msgstr "Détails redevance"
+
 #. Default: "technicaladvice"
 #: ../content/licence/RoadDecree.py:111
 msgid "urban_label_technicalAdvice"
