@@ -233,6 +233,7 @@ def update_POD_expressions(context):
             replace.replace(search_expr, replace_expr, is_regex=row["is_regex"])
     logger.info("upgrade done!")
 
+
 def add_all_applicants_in_title(context):
     """
     Adding all applicants or proprietaries or notaries in title
@@ -246,6 +247,7 @@ def add_all_applicants_in_title(context):
         licence.updateTitle()
     logger.info("upgrade done!")
 
+
 def add_trails_and_watercourses_to_global_vocabularies(context):
     """
     """
@@ -254,6 +256,7 @@ def add_trails_and_watercourses_to_global_vocabularies(context):
     portal_setup = api.portal.get_tool('portal_setup')
     portal_setup.runImportStepFromProfile('profile-Products.urban:extra', 'urban-update-vocabularies')
     logger.info("upgrade done!")
+
 
 def fix_PODTemplates_empty_filename(context):
     """
@@ -316,6 +319,8 @@ def migrate_add_tax_other_option(context):
             licence_config.tax.invokeFactory('UrbanVocabularyTerm', id='other', title="Autre")
 
     logger.info("migration step done!")
+
+
 def migrate_move_basebuildlicence_architects_and_geometricians_to_representative_contacts(context):
     """
     """
