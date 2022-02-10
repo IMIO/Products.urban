@@ -85,12 +85,6 @@ class ParcelOutLicence(BaseFolder, BaseBuildLicence, BrowserDefaultMixin):
 
     # Manually created methods
 
-    security.declarePublic('getRepresentatives')
-    def getRepresentatives(self):
-        """
-        """
-        return self.getGeometricians()
-
     security.declarePublic('generateReference')
     def generateReference(self):
         """
