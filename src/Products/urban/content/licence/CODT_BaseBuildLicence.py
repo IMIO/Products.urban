@@ -692,6 +692,10 @@ def finalizeSchema(schema):
     schema.moveField('protectedBuildingDetails', after='protectedBuilding')
     schema.moveField('patrimony_analysis', after='protectedBuildingDetails')
     schema.moveField('patrimony_observation', after='patrimony_analysis')
+    schema.moveField('watercourse', after='locationFloodingLevel')
+    schema.moveField('watercourseCategories', after='watercourse')
+    schema.moveField('trail', after='roadEquipments')
+    schema.moveField('trailDetails', after='trail')
     schema['missingParts'].widget.format = None
     schema['parcellings'].widget.label = _('urban_label_parceloutlicences')
     schema['isInSubdivision'].widget.label = _('urban_label_is_in_parceloutlicences')

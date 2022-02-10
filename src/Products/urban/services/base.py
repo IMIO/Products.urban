@@ -12,7 +12,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.exc import NoSuchTableError
 from sqlalchemy.orm import scoped_session
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy.pool import StaticPool
+from sqlalchemy.pool import NullPool
 
 from zope.component import getAdapter
 from zope.interface import implements
@@ -52,7 +52,7 @@ class SQLService(object):
     Helper with sqlalchemy engine, metadata and session objects.
     """
 
-    def __init__(self, dialect='postgresql+psycopg2', user='', host='', port='', db_name='', password='', timeout='120000'):
+    def __init__(self, dialect='postgresql+psycopg2', user='', host='', port='', db_name='', password='', timeout='0'):
         self.engine = self._init_engine(dialect, user, host, port, db_name, password, timeout)
         self.metadata = MetaData(self.engine)
         self.tables = SQLTables()  # use _init_table to set sqlalchemy table objects on it
@@ -73,7 +73,7 @@ class SQLService(object):
             ),
             echo=True,
             connect_args=connect_args,
-            poolclass=StaticPool
+            poolclass=NullPool,
         )
 
         return engine
@@ -91,16 +91,6 @@ class SQLService(object):
         except NoSuchTableError:
             table = UnknownSQLTable(table_name)
         setattr(self.tables, table_name, table)
-
-    def __getattr__(self, attr_name):
-        """
-        Try to delegate any query method to an implicetely created
-        session.
-        """
-        session = self.new_session()
-        if hasattr(session, attr_name):
-            return getattr(session, attr_name)
-        raise AttributeError
 
     def connect(self):
         return self.engine.connect()
@@ -155,7 +145,6 @@ class SQLSession(object):
     implements(ISQLSession)
 
     def __init__(self, service):
-        print 'ENGINE {}'.format(service.engine)
         self.service = service
         self.tables = service.tables
         self.session = scoped_session(sessionmaker(
@@ -171,3 +160,4 @@ class SQLSession(object):
 
     def close(self):
         self.session.close()
+

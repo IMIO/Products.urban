@@ -238,17 +238,41 @@
     <gs:upgradeStep
         title="migrate event configs Description field"
         description="urban upgrade step"
-        source="1015"
-        destination="1016"
+        source="1100"
+        destination="1101"
         handler=".update_250.migrate_eventconfigs_description_field"
         profile="Products.urban:default" />
 
     <gs:upgradeStep
         title="Reinstall ticket workflow"
         description="urban upgrade step"
-        source="1016"
-        destination="1100"
+        source="1101"
+        destination="1102"
         handler=".update_250.reinstall_ticket_workflow"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Add trails and watercourses to global vocabularies"
+        description="urban upgrade step"
+        source="1102"
+        destination="1103"
+        handler=".update_250.add_trails_and_watercourses_to_global_vocabularies"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Fix PODTemplates empty filename"
+        description="urban upgrade step"
+        source="1103"
+        destination="1104"
+        handler=".update_250.fix_PODTemplates_empty_filename"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Fix notary specificfeatures code"
+        description="urban upgrade step"
+        source="1104"
+        destination="1105"
+        handler=".update_250.migrate_notaryletter_specificfeatures_texts"
         profile="Products.urban:default" />
 
 </configure>

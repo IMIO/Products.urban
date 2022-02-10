@@ -11,6 +11,7 @@ from plone.app.uuid.utils import uuidToObject
 
 from Products.urban.interfaces import IGenericLicence
 import logging
+import re
 
 logger = logging.getLogger('urban: migrations')
 
@@ -105,8 +106,8 @@ def migrate_eventconfigs_description_field(context):
         all_eventconfigs.extend(licenceconf.getEventConfigs())
     for eventc in all_eventconfigs:
         description = type(eventc.description) is RichTextValue and eventc.description.raw or eventc.description
-        if type(description) is unicode:
-            description = description.encode('utf-8')
+        if type(description) is str:
+            description = description.decode('utf-8')
         if isinstance(description, basestring):
             eventc.description = RichTextValue(description)
             eventc.reindexObject()
@@ -123,7 +124,7 @@ def reinstall_ticket_workflow(context):
     wf_tool.manage_delObjects(ids=['ticket_workflow'])
     portal = api.portal.get()
     for ticket in portal.urban.tickets.objectValues()[1:]:
-        ticket.licence.manage_permission('urban: Add Parcel', roles=[], acquire=1)
+        ticket.manage_permission('imio.urban: Add Parcel', roles=[], acquire=1)
 
     setup_tool = api.portal.get_tool('portal_setup')
     setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'update-workflow-rolemap')
@@ -243,4 +244,60 @@ def add_all_applicants_in_title(context):
     licences = [l.getObject() for l in licence_brains if IGenericLicence.providedBy(l.getObject())]
     for licence in licences:
         licence.updateTitle()
+    logger.info("upgrade done!")
+
+def add_trails_and_watercourses_to_global_vocabularies(context):
+    """
+    """
+    logger = logging.getLogger('urban: add trails and watercourses to global vocabularies')
+    logger.info("starting upgrade steps")
+    portal_setup = api.portal.get_tool('portal_setup')
+    portal_setup.runImportStepFromProfile('profile-Products.urban:extra', 'urban-update-vocabularies')
+    logger.info("upgrade done!")
+
+def fix_PODTemplates_empty_filename(context):
+    """
+    """
+    logger = logging.getLogger('urban: fix PODTemplates empty filename')
+    logger.info("starting upgrade steps")
+    catalog = api.portal.get_tool('portal_catalog')
+    all_templates = [b.getObject() for b in catalog(object_provides=IPODTemplate.__identifier__)]
+    for template in all_templates:
+        # odt_file can be stored in tuples
+        if template.odt_file and hasattr(template.odt_file, '__iter__'):
+            template.odt_file = template.odt_file[0]
+        if not template.odt_file:
+            continue
+        if not template.odt_file.filename:
+            template_id = template.id
+            if type(template_id) is str:
+                template_id = template_id.decode('utf-8')
+            template.odt_file.filename = template_id
+            logger.info("fixed template {}".format(template))
+        if template.odt_file.contentType == 'applications/odt':
+            template.odt_file.contentType = 'application/vnd.oasis.opendocument.text'
+    logger.info("upgrade done!")
+
+def migrate_notaryletter_specificfeatures_texts(context):
+    """
+    """
+    logger = logging.getLogger('urban: migrate specificfeatures text codes')
+    logger.info("starting upgrade steps")
+    portal_urban = api.portal.get_tool('portal_urban')
+    config = portal_urban.codt_notaryletter
+    voc_folder_ids = ['specificfeatures', 'locationspecificfeatures', 'roadspecificfeatures']
+    for voc_folder_id in  voc_folder_ids:
+        voc_folder = getattr(config, voc_folder_id)
+        for value in voc_folder.objectValues():
+            if '[[' in value.Description():
+                new_text = re.sub("\[\[object.getValueForTemplate\('parcellings'\s*,\s*subfield='(\w*)'\),?\s*\]\]", r"[[object.getParcellings().\1]]", value.Description())
+                new_text = re.sub("\[\['/'.join\(object.getValueForTemplate\('parcellings'\s*,\s*subfield='authorizationDate'\).split\(\)\[0\].split\('/'\)\[::-1\]\),?\s*\]\]", r"[[format_date(object.getParcellings().getAuthorizationDate())]]", new_text)
+                new_text = re.sub("\[\[object.getValueForTemplate\('(\w*)'\),?\s*\]\]", r'[[object.\1]]', new_text)
+                new_text = re.sub("\[\[object.getValueForTemplate\('(\w*)'},?\s*\]\]", r'[[object.\1]]', new_text)
+                new_text = re.sub("\[\[object.getValueForTemplate\('(\w*)'\s*,\s*subfield='(\w*)'\),?\s*\]\]", r"[[voc_term('\1').\2]]", new_text)
+                new_text = re.sub("\[\['/'.join\(object.getValueForTemplate\('(\w*)'\s*,\s*subfield='decreeDate'\).split\(\)\[0\].split\('/'\)\[::-1\]\),?\s*\]\]", r"[[format_date(voc_term('\1').getDecreeDate())]]", new_text)
+                new_text = re.sub("\[\[', '.join\(object.getValuesForTemplate\('(\w*)'\s*,\s*subfield='(\w*)'\)\),?\s*\]\]", r"[[', '.join([t.\2 for t in voc_terms('\1')])]]", new_text)
+                new_text = re.sub("\[\[', '.join\(object.getValuesForTemplate\('(\w*)'\s*,\s*subfield='(\w*)'},?\),?\s*\]\]", r"[[', '.join([t.\2 for t in voc_terms('\1')])]]", new_text)
+                value.setDescription(new_text)
+                value.reindexObject()
     logger.info("upgrade done!")

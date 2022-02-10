@@ -2710,6 +2710,12 @@ msgstr ""
 msgid "roaddecrees"
 msgstr ""
 
+msgid "tax_folder_title"
+msgstr ""
+
+msgid "trails_folder_title"
+msgstr ""
+
 msgid "urban_label_patrimony_analysis"
 msgstr ""
 
@@ -2762,6 +2768,9 @@ msgid "urban_browse_old_parcels"
 msgstr ""
 
 msgid "urban_button_search"
+msgstr ""
+
+msgid "watercourses_folder_title"
 msgstr ""
 
 msgid "holydays"

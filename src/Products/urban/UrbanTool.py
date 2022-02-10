@@ -708,7 +708,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         renderedDescription = text
         for expr in re.finditer('\[\[(.*?)\]\]', text):
             if not renderToNull:
-                helper_view = context.restrictedTraverse('document_generation_helper_view')
+                helper_view = context.unrestrictedTraverse('document_generation_helper_view')
                 data = {
                     'self': helper_view.context,
                     'object': helper_view,
@@ -718,6 +718,9 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                     'portal': api.portal.getSite(),
                     'view': helper_view,
                 }
+                helper_methods = dict([(attr, getattr(helper_view, attr)) for attr in dir(helper_view)
+                                       if callable(getattr(helper_view, attr)) and not attr.startswith('_')])
+                data.update(helper_methods)
                 ctx = getEngine().getContext(data)
                 try:
                     #expr.groups()[0] is the expr without the [[]]

@@ -245,6 +245,10 @@ def updateVocabularyConfig(context):
     module = __import__(module_name, fromlist=[attribute])
     default_values = getattr(module, attribute)
 
+    global_vocabularies = default_values['global']
+    createVocabularyFolders(container=tool, vocabularies=global_vocabularies, site=site)
+    createVocabularies(container=tool, vocabularies=global_vocabularies)
+
     for urban_type in URBAN_TYPES:
         licenceConfigId = urban_type.lower()
         config_folder = getattr(tool, licenceConfigId)
@@ -728,6 +732,7 @@ def setDefaultApplicationSecurity(context):
             folder.manage_addLocalRoles("urban_editors", ("Editor", "Contributor"))
             folder.manage_addLocalRoles("environment_readers", ("Reader", ))
             folder.manage_addLocalRoles("environment_editors", ("Contributor",))
+            folder.manage_addLocalRoles("opinions_editors", ("Reader", ))
             # mark them with IContactFolder interface use some view methods, like 'getemails', on it
             alsoProvides(folder, IContactFolder)
 

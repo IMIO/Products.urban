@@ -23,6 +23,9 @@ msgstr ""
 msgid "header_folder_manager"
 msgstr ""
 
+msgid "header_getDepositDate"
+msgstr ""
+
 msgid "header_licence_final_duedate"
 msgstr ""
 

@@ -4,13 +4,15 @@ from collective.documentgenerator.helper.archetypes import ATDisplayProxyObject
 from collective.documentgenerator.helper.archetypes import ATDocumentGenerationHelperView
 from collective.documentgenerator.helper.dexterity import DXDocumentGenerationHelperView
 
-from datetime import date as _date
+from datetime import date as _date, datetime
 from dateutil.relativedelta import relativedelta
 
 from plone.dexterity.interfaces import IDexterityContent
 
 from Products.Archetypes.interfaces import IBaseObject
 from Products.CMFPlone.i18nl10n import ulocalized_time
+from Products.urban.interfaces import IUrbanEventInquiry, IEnvironmentBase, ITicket, IBaseBuildLicence, \
+    IUrbanCertificateBase
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.utils import getCurrentFolderManager
 from Products.urban.utils import get_ws_meetingitem_infos
@@ -34,6 +36,12 @@ class BaseHelperView(object):
     def portal_urban(self):
         urban_tool = api.portal.get_tool('portal_urban')
         return urban_tool
+
+    def __str__(self):
+        return self.context.__str__()
+
+    def __unicode__(self):
+        return self.context.__unicode__()
 
     def __getattr__(self, attr_name):
         """
@@ -98,6 +106,8 @@ class BaseHelperView(object):
     def add_years(self, zope_DT, years):
         """
         """
+        if isinstance(zope_DT, _date):
+            zope_DT = DateTime(datetime(zope_DT.year, zope_DT.month, zope_DT.day))
         return DateTime(zope_DT.asdatetime() + relativedelta(years=years))
 
     def format_date(self, date=None, translatemonth=True, long_format=False):
@@ -515,7 +525,36 @@ class UrbanDocGenerationLicenceHelperView(UrbanDocGenerationHelperView):
             return opinions
         return []
 
-    def get_related_licences_of_parcel(self, licence_types=[]):
+    def get_related_licences(self, licence_types=[], decision_limit_date=None, licence_state=None, with_historic=False):
+        related_licences = [licence.getObject() for licence in self.get_related_licences_of_parcel(licence_types, with_historic)]
+
+        if decision_limit_date:
+            related_licences_decision_limit_date = []
+            if not isinstance(decision_limit_date, DateTime):
+                decision_limit_date = DateTime(decision_limit_date)
+            for licence in related_licences:
+                delivered = ''
+                if IBaseBuildLicence.providedBy(licence) or IUrbanCertificateBase.providedBy(licence):
+                    delivered = licence.getLastTheLicence()
+                elif IEnvironmentBase.providedBy(licence):
+                    delivered = licence.getLastLicenceDelivery()
+                elif ITicket.providedBy(licence):
+                    delivered = licence.getLastTheTicket()
+                if delivered and ((delivered.getDecisionDate() or delivered.getEventDate()) >= decision_limit_date):
+                    related_licences_decision_limit_date.append(licence)
+            related_licences = related_licences_decision_limit_date
+
+        if licence_state:
+            licences = []
+            for licence in related_licences:
+                licence_review_state = api.content.get_state(obj=licence)
+                if licence_review_state == licence_state:
+                    licences.append(licence)
+            related_licences = licences
+
+        return related_licences
+
+    def get_related_licences_of_parcel(self, licence_types=[], with_historic=False):
         """
           Returns the licences related to a parcel
         """
@@ -524,18 +563,18 @@ class UrbanDocGenerationLicenceHelperView(UrbanDocGenerationHelperView):
         relatedLicences = []
         licence_uids = set([])
         for parcel in parcels:
-            for brain in parcel.getRelatedLicences(licence_type=licence_types):
+            for brain in parcel.getRelatedLicences(licence_type=licence_types, with_historic=with_historic):
                 if brain.UID not in licence_uids:
                     relatedLicences.append(brain)
                     licence_uids.add(brain.UID)
         return relatedLicences
 
-    def get_related_licences_titles_of_parcel(self):
+    def get_related_licences_titles_of_parcel(self, licence_types=[]):
         """
           Returns the titles of licences related to a parcel
         """
         relatedLicencesTitles = []
-        for relatedLicence in self.get_related_licences_of_parcel():
+        for relatedLicence in self.get_related_licences_of_parcel(licence_types):
             relatedLicencesTitles.append(relatedLicence.Title.decode('utf8'))
         return relatedLicencesTitles
 
@@ -1056,7 +1095,12 @@ class UrbanDocGenerationEventHelperView(UrbanDocGenerationHelperView):
             elif gen_context['publipostage'] == 'proprietaire':
                 mailing_list = self.real_context.getParentNode().getProprietaries()
             elif gen_context['publipostage'] == 'proprietaires_voisinage_enquete':
-                mailing_list = self.context.getRecipients(onlyActive=True)
+                if IUrbanEventInquiry.providedBy(self.real_context):
+                    inquiry_event = self.real_context
+                else:
+                    # for docs outside inquiry events
+                    inquiry_event = self.real_context.getParentNode().getLastInquiry()
+                mailing_list = inquiry_event.getRecipients(onlyActive=True)
             elif gen_context['publipostage'] == 'organismes':
                 mailing_list = self.getFolderMakersMailing()
                 use_proxy = False
