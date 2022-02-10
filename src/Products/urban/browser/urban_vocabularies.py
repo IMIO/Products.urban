@@ -38,8 +38,9 @@ class UrbanVocabulariesCache(BrowserView):
             stored_value = self._to_dict(vocabularies.get(voc_folder.id, []))
             updated_values = self._to_dict(self.voc_folder_to_vocabulary_list(voc_folder))
             # disable deleted voc terms but still keep them in the cache
+            updated_values_UIDS = set([v['UID'] for v in updated_values.values()])
             for k, v in stored_value.iteritems():
-                if k not in updated_values:
+                if k not in updated_values and v['UID'] not in updated_values_UIDS:
                     v['enabled'] = False
                     # use updated_values as the base for the result to ensures
                     # we also keep track of the values reordering

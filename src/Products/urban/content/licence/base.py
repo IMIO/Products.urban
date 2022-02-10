@@ -580,6 +580,15 @@ class UrbanBase(object):
         """
         return self.listFolderContents({'portal_type': ('UrbanEventOpinionRequest')})
 
+    security.declarePublic('getLastUrbanEventOpinionRequests')
+    def getLastUrbanEventOpinionRequests(self):
+        """
+          Return all UrbanEventOpinionRequests events selected in the last inquiry.
+        """
+        all_events = self.getUrbanEventOpinionRequests()
+        events = [evt for evt in all_events if evt.getLinkedInquiry() == self._get_inquiry_objs(all_=True)[-1]]
+        return events
+
     security.declarePublic('getUrbanEvent')
     def getUrbanEvent(self, title=''):
         """

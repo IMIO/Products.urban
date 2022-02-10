@@ -62,6 +62,15 @@
     for="zope.interface.Interface
          zope.publisher.interfaces.browser.IBrowserRequest
          collective.eeafaceted.z3ctable.interfaces.IFacetedTable"
+    factory=".columns.LicenceDepositDateColumn"
+    provides="collective.eeafaceted.z3ctable.interfaces.IFacetedColumn"
+    name="getDepositDate"
+    />
+
+  <adapter
+    for="zope.interface.Interface
+         zope.publisher.interfaces.browser.IBrowserRequest
+         collective.eeafaceted.z3ctable.interfaces.IFacetedTable"
     factory=".columns.LicenceFinalDueDateColumn"
     provides="collective.eeafaceted.z3ctable.interfaces.IFacetedColumn"
     name="licence_final_duedate"
