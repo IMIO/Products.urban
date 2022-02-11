@@ -601,11 +601,23 @@ class BaseBuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin)
     # Manually created methods
 
     security.declarePublic('getRepresentatives')
-
     def getRepresentatives(self):
         """
         """
         return self.getRepresentativeContacts()
+
+    security.declarePublic('getArchitects')
+    def getArchitects(self):
+        """
+        """
+        return [contact for contact in self.getRepresentativeContacts() if contact.portal_type == 'Architect']
+
+    security.declarePublic('getGeometricians')
+    def getGeometricians(self):
+        """
+        """
+        return [contact for contact in self.getRepresentativeContacts() if contact.portal_type == 'Geometrician']
+
 
     security.declarePublic('listRequirementsFromFD')
 
