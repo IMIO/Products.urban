@@ -15,7 +15,6 @@
                 <metal:body define-macro="body_macro" tal:define="useTabbing python: True;
                                                                   member context/@@plone_portal_state/member;
                                                                   recipients context/getRecipients;
-                                                                  linkedUrbanEventType context/getUrbaneventtypes;
                                                                   global parcels view/getParcels;">
 
                     <div class="action-bar">
@@ -171,8 +170,7 @@
 
                         <dt class="formTab" id="fieldsetlegend-urbaneventinquiry_recipients" i18n:translate="event_inquiry_recipients"><span>Recipients</span></dt>
                         <dd id="fieldset-urbaneventinquiry_recipients">
-                            <tal:block condition="python: member.has_permission('Modify portal content', context)
-                                                          and 'Products.urban.interfaces.IInquiryEvent' in linkedUrbanEventType.getEventType()">
+                            <tal:block condition="python: member.has_permission('Modify portal content', context)">
                                 <form tal:attributes="action context/absolute_url" method="post">
                                     <input type="submit" class="context" name="find_recipients_cadastre"
                                     tal:attributes="value python:'Rechercher les propriétaires situés dans un rayon de {radius}m'.format(
@@ -195,8 +193,7 @@
                                     <tal:listing content="structure view/renderRecipientsCadastreListing" />
                                 </div>
                             </tal:recipients>
-                            <tal:block condition="python: member.has_permission('Modify portal content', context)
-                                                          and 'Products.urban.interfaces.IInquiryEvent' in linkedUrbanEventType.getEventType()">
+                            <tal:block condition="python: member.has_permission('Modify portal content', context)">
                                 <form name="quickAdd" method="post"
                                       tal:condition="python: member.has_permission('urban: Add RecipientCadastre', context)"
                                       tal:attributes="action python: context.absolute_url() + '/createObject?type_name=RecipientCadastre'">
