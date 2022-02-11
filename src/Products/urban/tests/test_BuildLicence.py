@@ -206,16 +206,16 @@ class TestBuildLicenceFields(SchemaFieldsTestCase):
         codtbuildlicence_testlicence_id = 'test_{}'.format('CODT_BuildLicence'.lower())
         licence_folder_codtbuildlicences.invokeFactory('CODT_BuildLicence', id=codtbuildlicence_testlicence_id)
         transaction.commit()
-        test_licence = getattr(licence_folder_codtbuildlicences, codtbuildlicence_testlicence_id)
-        self.codtbuildlicences.append(test_licence)
+        codtbuildlicence_test_licence = getattr(licence_folder_codtbuildlicences, codtbuildlicence_testlicence_id)
+        self.codtbuildlicences.append(codtbuildlicence_test_licence)
 
         # create a CODT_ParcelOutLicence
         licence_folder_codtparceloutlicences = utils.getLicenceFolder('CODT_ParcelOutLicence')
         codtparceloutlicence_testlicence_id = 'test_{}'.format('CODT_ParcelOutLicence'.lower())
         licence_folder_codtparceloutlicences.invokeFactory('CODT_ParcelOutLicence', id=codtparceloutlicence_testlicence_id)
         transaction.commit()
-        test_licence = getattr(licence_folder_codtparceloutlicences, codtparceloutlicence_testlicence_id)
-        self.codtparceloutlicences.append(test_licence)
+        codtparceloutlicence_test_licence = getattr(licence_folder_codtparceloutlicences, codtparceloutlicence_testlicence_id)
+        self.codtparceloutlicences.append(codtparceloutlicence_test_licence)
 
         self.test_codtparceloutlicence = self.codtparceloutlicences[0]
         self.test_codtbuildlicence = self.codtbuildlicences[0]
