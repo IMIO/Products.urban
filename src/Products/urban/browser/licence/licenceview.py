@@ -77,6 +77,11 @@ class LicenceView(BrowserView):
             return True
         return False
 
+    def isGigCoringActive(self):
+        activation = api.portal.get_registry_record(
+                'Products.urban.browser.gig_coring_settings.IGigCoringLink.gig_coring_activation')
+        return activation
+
     def getInquiryType(self):
         return 'Inquiry'
 
