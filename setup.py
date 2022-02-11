@@ -90,6 +90,7 @@ setup(name='Products.urban',
           'urban.restapi',
           'urban.vocabulary',
           'python-dateutil',
+          'PyMySQL',
       ],
       entry_points={
           'console_scripts': ['templates = Products.urban.templates:all',
