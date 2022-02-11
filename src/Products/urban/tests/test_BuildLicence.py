@@ -200,20 +200,23 @@ class TestBuildLicenceFields(SchemaFieldsTestCase):
             transaction.commit()
             test_licence = getattr(licence_folder, testlicence_id)
             self.licences.append(test_licence)
-        for content_type in ['CODT_BuildLicence']:
-            licence_folder = utils.getLicenceFolder(content_type)
-            testlicence_id = 'test_{}'.format(content_type.lower())
-            licence_folder.invokeFactory(content_type, id=testlicence_id)
-            transaction.commit()
-            test_licence = getattr(licence_folder, testlicence_id)
-            self.codtbuildlicences.append(test_licence)
-        for content_type in ['CODT_ParcelOutLicence']:
-            licence_folder = utils.getLicenceFolder(content_type)
-            testlicence_id = 'test_{}'.format(content_type.lower())
-            licence_folder.invokeFactory(content_type, id=testlicence_id)
-            transaction.commit()
-            test_licence = getattr(licence_folder, testlicence_id)
-            self.codtparceloutlicences.append(test_licence)
+
+        # create a CODT_BuildLicence
+        licence_folder_codtbuildlicences = utils.getLicenceFolder('CODT_BuildLicence')
+        codtbuildlicence_testlicence_id = 'test_{}'.format('CODT_BuildLicence'.lower())
+        licence_folder_codtbuildlicences.invokeFactory('CODT_BuildLicence', id=codtbuildlicence_testlicence_id)
+        transaction.commit()
+        test_licence = getattr(licence_folder_codtbuildlicences, codtbuildlicence_testlicence_id)
+        self.codtbuildlicences.append(test_licence)
+
+        # create a CODT_ParcelOutLicence
+        licence_folder_codtparceloutlicences = utils.getLicenceFolder('CODT_ParcelOutLicence')
+        codtparceloutlicence_testlicence_id = 'test_{}'.format('CODT_ParcelOutLicence'.lower())
+        licence_folder_codtparceloutlicences.invokeFactory('CODT_ParcelOutLicence', id=codtparceloutlicence_testlicence_id)
+        transaction.commit()
+        test_licence = getattr(licence_folder_codtparceloutlicences, codtparceloutlicence_testlicence_id)
+        self.codtparceloutlicences.append(test_licence)
+
         self.test_codtparceloutlicence = self.codtparceloutlicences[0]
         self.test_codtbuildlicence = self.codtbuildlicences[0]
         self.test_buildlicence = self.licences[0]
