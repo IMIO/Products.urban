@@ -28,7 +28,6 @@ class DefaultTextRenderer(TrustedAppPT, PageTemplate):
             'args': args,
             'nothing': None,
             'helper': base_context['licence_view'],
-            'object': base_context['licence_view'],
             'context': base_context['licence'],
         }
         rval.update(base_context)

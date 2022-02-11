@@ -8,10 +8,8 @@ from Products.urban.services.gig import GigService
 
 try:
     config_cadastre = ExternalConfig('cadastre')
-    config_bestaddress = ExternalConfig('bestaddress')
     config_parcel_coring = ExternalConfig('parcel_coring')
     config_gig = ExternalConfig('gig')
-    config_urbanmap = ExternalConfig('urbanmap')
 except:
     config = {}
 
