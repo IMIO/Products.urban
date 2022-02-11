@@ -402,6 +402,28 @@ schema = Schema((
         default_output_type='text/html',
     ),
     ReferenceField(
+        name='architects',
+        widget=ReferenceBrowserWidget(
+            force_close_on_insert=1,
+            allow_search=1,
+            only_for_review_states='enabled',
+            allow_browse=1,
+            show_indexes=1,
+            show_index_selector=1,
+            available_indexes={'Title': 'Nom'},
+            startup_directory="urban/architects",
+            wild_card_search=True,
+            restrict_browsing_to_startup_directory=1,
+            label=_('urban_label_architects', default='Architects'),
+            popup_name='contact_reference_popup',
+            visible=False
+        ),
+        allowed_types=('Architect',),
+        schemata='urban_description',
+        multiValued=1,
+        relationship='licenceArchitects',
+    ),
+    ReferenceField(
         name='representativeContacts',
         widget=ReferenceBrowserWidget(
             force_close_on_insert=1,

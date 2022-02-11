@@ -333,6 +333,7 @@ def migrate_move_basebuildlicence_architects_and_geometricians_to_representative
         architects = licence.getField('architects')
         if architects:
             for architect in architects.get(licence):
+                print("{} : move architect {} in representativeContacts".format(licence.getReference(), architect.name1.encode("utf-8")))
                 rc_list = licence.getRepresentativeContacts()
                 rc_list.append(architect)
                 licence.setRepresentativeContacts(rc_list)
@@ -340,6 +341,7 @@ def migrate_move_basebuildlicence_architects_and_geometricians_to_representative
         geometricians = licence.getField('geometricians')
         if geometricians:
             for geometrician in geometricians.get(licence):
+                print("{} : move geometrician {} in representativeContacts".format(licence.getReference(), geometrician.name1.encode("utf-8")))
                 rc_list = licence.getRepresentativeContacts()
                 rc_list.append(geometrician)
                 licence.setRepresentativeContacts(rc_list)
