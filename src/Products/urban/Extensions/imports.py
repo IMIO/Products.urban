@@ -221,7 +221,9 @@ def import_streets_fromdb(self, cityName=''):
 
     config_bestaddress = ExternalConfig('bestaddress')
     bestaddress = BestaddressService(**(config_bestaddress.bestaddress))
-    results = bestaddress.query_streets(cityName)
+    session = bestaddress.new_session()
+    results = session.query_streets(cityName)
+    session.close()
     bestaddress.engine.dispose()
     if not results:
         return "No record found for city name '%s', maybe mispelled ?" % cityName
