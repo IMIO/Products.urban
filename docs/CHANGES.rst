@@ -166,6 +166,9 @@ Changes
 - To use 50m radius in announcement : changes setLinkedInquiry getAllInquiries() call by getAllInquiriesAndAnnouncements() and changes condition in templatei urbaneventinquiryview.pt. [MURBWANAA-23]
   [mdhyne]
 
+- add new 'other' tax vocabulary entry and new linked TextField taxDetails
+  [jjaumotte]
+
 2.4 (2019-03-25)
 ----------------
 - add tax field in GenericLicence

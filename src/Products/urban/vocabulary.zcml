@@ -87,4 +87,10 @@
     provides="zope.schema.interfaces.IVocabularyFactory"
   />
 
+  <utility
+    component=".vocabularies.GigCoringUserIdVocabularyFactory"
+    name="urban.vocabularies.gig_coring_user_id"
+    provides="zope.schema.interfaces.IVocabularyFactory"
+  />
+
 </configure>
