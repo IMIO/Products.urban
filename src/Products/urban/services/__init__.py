@@ -15,4 +15,5 @@ except:
 
 cadastre = CadastreService(**(config_cadastre and config_cadastre.cadastre))
 parcel_coring = ParcelCoringService(**(config_parcel_coring and config_parcel_coring.parcel_coring))
+# NOTICe = NOTICeService(**(config_NOTICe and config_NOTICe.NOTICe))
 gig = GigService(**(config_gig and config_gig.gig))
