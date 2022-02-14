@@ -185,7 +185,7 @@ schema = Schema((
         ),
         enforceVocabulary=True,
         schemata='urban_description',
-        vocabulary=UrbanVocabulary('foldercategories', with_empty_value=True),
+        vocabulary=UrbanVocabulary('foldercategories', with_empty_value=False),
         default_method='getDefaultValue',
     ),
     StringField(
@@ -196,7 +196,7 @@ schema = Schema((
         ),
         enforceVocabulary=True,
         schemata='urban_description',
-        vocabulary=UrbanVocabulary('tax', with_empty_value=True, sort_on='sortable_title'),
+        vocabulary=UrbanVocabulary('tax', with_empty_value=False, sort_on='sortable_title'),
         default_method='getDefaultValue',
     ),
     TextField(
@@ -298,7 +298,7 @@ schema = Schema((
             label=_('urban_label_roadCoating', default='Roadcoating'),
         ),
         schemata='urban_road',
-        vocabulary=UrbanVocabulary('folderroadcoatings', inUrbanConfig=False, with_empty_value=True),
+        vocabulary=UrbanVocabulary('folderroadcoatings', inUrbanConfig=False, with_empty_value=False),
         default_method='getDefaultValue',
     ),
     StringField(
@@ -309,7 +309,7 @@ schema = Schema((
                     default='Futureroadcoating'),
         ),
         schemata='urban_road',
-        vocabulary=UrbanVocabulary('folderroadcoatings', inUrbanConfig=False, with_empty_value=True),
+        vocabulary=UrbanVocabulary('folderroadcoatings', inUrbanConfig=False, with_empty_value=False),
         default_method='getDefaultValue',
     ),
     DataGridField(
@@ -329,7 +329,7 @@ schema = Schema((
             label=_('urban_label_sewers', default='Sewers'),
         ),
         schemata='urban_road',
-        vocabulary=UrbanVocabulary('sewers', inUrbanConfig=False, with_empty_value=True),
+        vocabulary=UrbanVocabulary('sewers', inUrbanConfig=False, with_empty_value=False),
         default_method='getDefaultValue',
     ),
     TextField(
@@ -911,7 +911,7 @@ schema = Schema((
             label=_('urban_label_rgbsr', default='Rgbsr'),
         ),
         schemata='urban_location',
-        vocabulary=UrbanVocabulary('rgbsr', inUrbanConfig=False, with_empty_value=True),
+        vocabulary=UrbanVocabulary('rgbsr', inUrbanConfig=False, with_empty_value=False),
         default_method='getDefaultValue',
     ),
     TextField(
@@ -968,7 +968,7 @@ schema = Schema((
         ),
         enforceVocabulary=True,
         schemata='urban_location',
-        vocabulary=UrbanVocabulary('townshipfoldercategories', with_empty_value=True, sort_on='sortable_title'),
+        vocabulary=UrbanVocabulary('townshipfoldercategories', with_empty_value=False, sort_on='sortable_title'),
         default_method='getDefaultValue',
     ),
     BooleanField(
