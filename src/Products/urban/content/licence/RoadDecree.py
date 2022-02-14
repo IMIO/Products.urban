@@ -48,7 +48,7 @@ schema = Schema((
         ),
         schemata='urban_analysis',
         multiValued=1,
-        vocabulary=UrbanVocabulary('townroaddecree', with_empty_value=True),
+        vocabulary=UrbanVocabulary('townroaddecree', with_empty_value=False),
     ),
     StringField(
         name='decisional_delay',
