@@ -164,7 +164,7 @@ schema = Schema((
             label=_('urban_label_annoncedDelay', default='Annonceddelay'),
         ),
         schemata='urban_analysis',
-        vocabulary=UrbanVocabulary('folderdelays', vocType='UrbanDelay', with_empty_value=True),
+        vocabulary=UrbanVocabulary('folderdelays', vocType='UrbanDelay', with_empty_value=False),
         default_method='getDefaultValue',
     ),
     TextField(
@@ -449,7 +449,7 @@ schema = Schema((
             label=_('urban_label_exemptFDArticle', default='Exemptfdarticle'),
         ),
         schemata='urban_analysis',
-        vocabulary=UrbanVocabulary('exemptfdarticle', with_empty_value=True),
+        vocabulary=UrbanVocabulary('exemptfdarticle', with_empty_value=False),
         default_method='getDefaultValue',
     ),
     BooleanField(
@@ -470,7 +470,7 @@ schema = Schema((
             ),
         ),
         schemata='urban_analysis',
-        vocabulary=UrbanVocabulary('folderdelays', vocType='UrbanDelay', with_empty_value=True),
+        vocabulary=UrbanVocabulary('folderdelays', vocType='UrbanDelay', with_empty_value=False),
         default_method='getDefaultValue',
     ),
     TextField(
