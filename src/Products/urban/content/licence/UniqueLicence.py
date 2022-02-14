@@ -68,7 +68,7 @@ schema = Schema((
             label=_('urban_label_authority', default='Authority'),
         ),
         schemata='urban_description',
-        vocabulary=UrbanVocabulary('authority', inUrbanConfig=True, with_empty_value=True),
+        vocabulary=UrbanVocabulary('authority', inUrbanConfig=True, with_empty_value=False),
         default_method='getDefaultValue',
     ),
     LinesField(
