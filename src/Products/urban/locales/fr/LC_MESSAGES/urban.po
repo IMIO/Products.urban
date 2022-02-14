@@ -50,7 +50,7 @@ msgstr "75 jours"
 
 #: ../browser/licence/templates/licenceview.pt:31
 #: ../browser/templates/urbaneventannouncementview.pt:35
-#: ../browser/templates/urbaneventinquiryview.pt:35
+#: ../browser/templates/urbaneventinquiryview.pt:34
 msgid "Actions:"
 msgstr ""
 
@@ -90,7 +90,7 @@ msgstr "Ajouter tous les avis"
 msgid "Add an event"
 msgstr "Ajouter un événement"
 
-#: ../browser/templates/urbaneventinquiryview.pt:203
+#: ../browser/templates/urbaneventinquiryview.pt:200
 msgid "Add recipientcadastre manually"
 msgstr "Ajouter un propriétaire"
 
@@ -327,10 +327,6 @@ msgstr "Agent traitant"
 
 msgid "Found folder(s)"
 msgstr "Dossier(s) trouvé(s)"
-
-#: ../browser/templates/searchparcels.pt:172
-msgid "Found parcel(s)"
-msgstr ""
 
 #: ../profiles.zcml:42
 msgid "Full config profile for urban."
@@ -752,7 +748,6 @@ msgstr "Configuration d'échéancier"
 msgid "Scheduled licences"
 msgstr "Échéancier par procédure"
 
-#: ../browser/templates/searchparcels.pt:35
 msgid "Search parcel(s)"
 msgstr "Chercher des références cadastrales."
 
@@ -869,7 +864,7 @@ msgstr "Vers les Procédures CWATUP"
 
 #: ../browser/licence/templates/licenceview.pt:27
 #: ../browser/templates/urbaneventannouncementview.pt:31
-#: ../browser/templates/urbaneventinquiryview.pt:31
+#: ../browser/templates/urbaneventinquiryview.pt:30
 msgid "Transitions:"
 msgstr ""
 
@@ -979,7 +974,7 @@ msgid "add_WorkLocation"
 msgstr "Ajouter une adresse"
 
 #: ../browser/templates/urbaneventannouncementview.pt:145
-#: ../browser/templates/urbaneventinquiryview.pt:144
+#: ../browser/templates/urbaneventinquiryview.pt:143
 msgid "add_a_claimant"
 msgstr "Ajouter un réclamant"
 
@@ -1556,31 +1551,31 @@ msgstr "Données de l'événement"
 
 #. Default: "<span>Claimants</span>"
 #: ../browser/templates/urbaneventannouncementview.pt:132
-#: ../browser/templates/urbaneventinquiryview.pt:131
+#: ../browser/templates/urbaneventinquiryview.pt:130
 msgid "event_inquiry_claimants"
 msgstr "Réclamants"
 
 #. Default: "<span>Description</span>"
 #: ../browser/templates/urbaneventannouncementview.pt:43
-#: ../browser/templates/urbaneventinquiryview.pt:43
+#: ../browser/templates/urbaneventinquiryview.pt:42
 msgid "event_inquiry_documents"
 msgstr "Récapitulatif"
 
 #. Default: "<span>Recipients</span>"
-#: ../browser/templates/urbaneventinquiryview.pt:172
+#: ../browser/templates/urbaneventinquiryview.pt:171
 msgid "event_inquiry_recipients"
 msgstr "Propriétaires concernés"
 
 #. Default: "Event linked attachments"
 #: ../browser/templates/urbaneventannouncementview.pt:121
-#: ../browser/templates/urbaneventinquiryview.pt:120
+#: ../browser/templates/urbaneventinquiryview.pt:119
 #: ../browser/templates/urbaneventview.pt:60
 msgid "event_linked_attachments"
 msgstr "Pièces jointes de l'événement"
 
 #. Default: "Event linked documents"
 #: ../browser/templates/urbaneventannouncementview.pt:115
-#: ../browser/templates/urbaneventinquiryview.pt:114
+#: ../browser/templates/urbaneventinquiryview.pt:113
 #: ../browser/templates/urbaneventview.pt:53
 msgid "event_linked_documents"
 msgstr "Documents liés à cet événement"
@@ -1818,11 +1813,6 @@ msgstr "Retour"
 msgid "groundstatestatus_folder_title"
 msgstr "Repris à la banque de données d'état des sols"
 
-#. Default: "You can not search for parcels for now because there was a problem. Please contact your system administrator and give him the red error message here above"
-#: ../browser/templates/searchparcels.pt:36
-msgid "help_search_connection_problem"
-msgstr ""
-
 msgid "holydays"
 msgstr "Férié"
 
@@ -1834,7 +1824,7 @@ msgid "inquiries planned for claimants imports"
 msgstr ""
 
 #. Default: "Inquiry data"
-#: ../browser/templates/urbaneventinquiryview.pt:56
+#: ../browser/templates/urbaneventinquiryview.pt:55
 msgid "inquiry_data"
 msgstr "Données concernant l'enquête"
 
@@ -2149,6 +2139,10 @@ msgstr "Gérer les notaires"
 msgid "manage_parcellings"
 msgstr "Gérer les lotissements"
 
+#: ../browser/templates/globalmacros.pt:39
+msgid "manual_parcel"
+msgstr "Ajouter manuellement"
+
 #: ../browser/gig_coring_settings.py:44
 msgid "map the plone user id to the gig mail address"
 msgstr "Fait la correspondance entre l'adresse mail utilisée pour le compte du gig et l'utilisateur urban"
@@ -2263,12 +2257,12 @@ msgstr "Arbres et haies remarquables"
 
 #. Default: "Number of claimants"
 #: ../browser/templates/urbaneventannouncementview.pt:153
-#: ../browser/templates/urbaneventinquiryview.pt:153
+#: ../browser/templates/urbaneventinquiryview.pt:152
 msgid "number_of_claimants"
 msgstr "Nombre de réclamants"
 
 #. Default: "Number of recipients"
-#: ../browser/templates/urbaneventinquiryview.pt:188
+#: ../browser/templates/urbaneventinquiryview.pt:186
 msgid "number_of_recipients"
 msgstr "Nombre de destinataires"
 
@@ -2530,8 +2524,7 @@ msgstr "SDC"
 msgid "search-last-elements"
 msgstr "Derniers éléments"
 
-#: ../browser/templates/searchparcels.pt:30
-#: ../skins/urban_templates/lot_view.pt:26
+#: ../browser/templates/globalmacros.pt:33
 msgid "search_parcels"
 msgstr "Ajouter"
 
@@ -2750,12 +2743,10 @@ msgid "urban_bound_inspections"
 msgstr "Dossiers d'inspections ou PV liés"
 
 #. Default: "Browse old parcels (Only works with the parcel reference)"
-#: ../browser/templates/searchparcels.pt:157
 msgid "urban_browse_old_parcels"
 msgstr "Chercher dans les anciennes parcelles (Par référence cadastrale uniquement)"
 
 #. Default: "Search"
-#: ../browser/templates/searchparcels.pt:161
 msgid "urban_button_search"
 msgstr "Recherche"
 
@@ -2765,7 +2756,7 @@ msgstr "Ce réclamant existe déjà!"
 
 #. Default: "Here above are data defined for the inquiry. If you want to change these informations, click on the name of the linked inquiry here above."
 #: ../browser/templates/urbaneventannouncementview.pt:57
-#: ../browser/templates/urbaneventinquiryview.pt:57
+#: ../browser/templates/urbaneventinquiryview.pt:56
 msgid "urban_context_help"
 msgstr ""
 
@@ -2917,7 +2908,7 @@ msgstr "Numérotation des permis d'urbanisation"
 #. Default: "Rcu"
 #: ../content/licence/GenericLicence.py:823
 msgid "urban_label_RCU"
-msgstr "Règlement Communal d'Urbanisme (R.C.U.)"
+msgstr "Guide Communal d'Urbanisme"
 
 #. Default: "sar"
 #: ../content/licence/GenericLicence.py:713
@@ -2949,7 +2940,7 @@ msgstr "SRS"
 #. Default: "Ssc"
 #: ../content/licence/GenericLicence.py:801
 msgid "urban_label_SSC"
-msgstr "Schéma de Structure Communal (S.S.C.)"
+msgstr "Schéma de Développement Communal (SDC)"
 
 #. Default: "Talcondition"
 #: UrbanEventType.py
@@ -3201,11 +3192,6 @@ msgstr "Code 'BestAddress'"
 msgid "urban_label_bestAddressKey"
 msgstr "Clé BestAddress"
 
-#. Default: "Bis"
-#: ../browser/templates/searchparcels.pt:71
-msgid "urban_label_bis"
-msgstr ""
-
 #. Default: "Bound inspection"
 #: ../content/licence/Ticket.py:58
 msgid "urban_label_bound_inspection"
@@ -3412,7 +3398,7 @@ msgstr "Conclusions"
 
 #. Default: "Linked inquiry"
 #: ../browser/templates/urbaneventannouncementview.pt:66
-#: ../browser/templates/urbaneventinquiryview.pt:65
+#: ../browser/templates/urbaneventinquiryview.pt:64
 msgid "urban_label_context"
 msgstr ""
 
@@ -3586,11 +3572,6 @@ msgstr "Écart"
 msgid "urban_label_divergenceDetails"
 msgstr "Détails concernant l'écart"
 
-#. Default: "Division"
-#: ../browser/templates/searchparcels.pt:52
-msgid "urban_label_division"
-msgstr ""
-
 # PortionOut
 #. Default: "Divisioncode"
 #: PortionOut.py
@@ -3725,11 +3706,6 @@ msgstr "Référence à la procédure de détention d'explosifs"
 #: PortionsOut.py
 msgid "urban_label_exponent"
 msgstr "Exposant"
-
-#. Default: "Exposant"
-#: ../browser/templates/searchparcels.pt:75
-msgid "urban_label_exposant"
-msgstr ""
 
 #. Default: "expropriation"
 #: ../content/licence/GenericLicence.py:673
@@ -3923,7 +3899,7 @@ msgstr "Pétition"
 #. Default: "Impactstudy"
 #: ../content/licence/BaseBuildLicence.py:195
 msgid "urban_label_impactStudy"
-msgstr "Étude d'incidences?"
+msgstr "Étude d'incidences ?"
 
 #. Default: "Implantation"
 #: ../content/licence/BaseBuildLicence.py:203
@@ -4066,12 +4042,12 @@ msgstr "Le projet est d'essai"
 #. Default: "Isinpca"
 #: ../content/licence/GenericLicence.py:600
 msgid "urban_label_isInPCA"
-msgstr "Le bien se situe dans un PCA"
+msgstr "Le bien se situe dans un SOL"
 
 #. Default: "Isinsubdivision"
 #: ../content/licence/GenericLicence.py:640
 msgid "urban_label_isInSubdivision"
-msgstr "Le bien se situe dans un lotissement"
+msgstr "Le bien se situe dans un permis d'urbanisation"
 
 #. Default: "Iskeyevent"
 #: UrbanEventType.py
@@ -4493,7 +4469,7 @@ msgstr "Propriétaire"
 #. Default: "Parcellings"
 #: ../content/licence/GenericLicence.py:1014
 msgid "urban_label_parcellings"
-msgstr "Lotissement"
+msgstr "Permis d'urbanisation"
 
 #: ../content/licence/CODT_BaseBuildLicence.py:700
 #: ../content/licence/CODT_UrbanCertificateBase.py:75
@@ -4519,11 +4495,6 @@ msgstr "Adresse(s) du bien"
 #: ../content/licence/BaseBuildLicence.py:322
 msgid "urban_label_parkingDetails"
 msgstr "Détails concernant les places de parking"
-
-#. Default: "Partie"
-#: ../browser/templates/searchparcels.pt:83
-msgid "urban_label_partie"
-msgstr ""
 
 #. Default: "Pash"
 #: ../content/licence/GenericLicence.py:350
@@ -4591,17 +4562,17 @@ msgstr "Date limite de paiement"
 #. Default: "Pca"
 #: ../content/licence/GenericLicence.py:607
 msgid "urban_label_pca"
-msgstr "Plan Communal d'Aménagement"
+msgstr "Schéma d'Orientation Local"
 
 #. Default: "Pcadetails"
 #: ../content/licence/GenericLicence.py:617
 msgid "urban_label_pcaDetails"
-msgstr "Détails concernant le Plan Communal d'Aménagement"
+msgstr "Détails concernant le Schéma d'Orientation Local"
 
 #. Default: "Pcazone"
 #: ../content/licence/GenericLicence.py:628
 msgid "urban_label_pcaZone"
-msgstr "Zone de pca"
+msgstr "Zone de sol"
 
 #. Default: "PE Reference"
 #: ../content/licence/ExplosivesPossession.py:36
@@ -4773,25 +4744,15 @@ msgstr "Zone de protection"
 msgid "urban_label_publicRoadModifications"
 msgstr "Modifications souhaitées au tracé et à l'équipement des voiries publiques"
 
-#. Default: "Puissance"
-#: ../browser/templates/searchparcels.pt:79
-msgid "urban_label_puissance"
-msgstr ""
-
 #. Default: "Queryable"
 #: Layer.py
 msgid "urban_label_queryable"
 msgstr "Questionnable"
 
-#. Default: "Radical"
-#: ../browser/templates/searchparcels.pt:67
-msgid "urban_label_radical"
-msgstr ""
-
 #. Default: "Rcudetails"
 #: ../content/licence/GenericLicence.py:834
 msgid "urban_label_rcuDetails"
-msgstr "Détails concernant le RCU"
+msgstr "Détails concernant le GCU"
 
 #. Default: "Receipt date"
 #: ../UrbanEvent.py:96
@@ -5109,11 +5070,6 @@ msgstr "Entrez la référence du dossier. Vous pouvez utiliser le caractère '*'
 msgid "urban_label_searchbyname_descr"
 msgstr "Entrez le nom, le prénom ou le numéro de registre national.  Vous pouvez utiliser le caractère '*' pour spécifier que vous cherchez sur une partie de mot"
 
-#. Default: "Section"
-#: ../browser/templates/searchparcels.pt:62
-msgid "urban_label_section"
-msgstr ""
-
 #. Default: "Selectedfield"
 #: UrbanVocabularyTerm.py
 msgid "urban_label_selectedField"
@@ -5249,7 +5205,7 @@ msgstr "Nom d'utilisateur de la connexion au serveur PostgreSQL"
 #. Default: "Sscdetails"
 #: ../content/licence/GenericLicence.py:812
 msgid "urban_label_sscDetails"
-msgstr "Détails concernant le SSC"
+msgstr "Détails concernant le SDC"
 
 #. Default: "Startdate"
 #: Street.py
@@ -5297,7 +5253,7 @@ msgstr "Nom du lotisseur"
 #. Default: "Subdivisiondetails"
 #: ../content/licence/GenericLicence.py:650
 msgid "urban_label_subdivisionDetails"
-msgstr "Détails sur le lotissement"
+msgstr "Détails sur le permis d'urbanisation"
 
 #. Default: "Subjects"
 #: EnvClassThree.py
@@ -5634,7 +5590,6 @@ msgid "urban_recipient_copied_to_claimants"
 msgstr "Propriétaire copié comme réclamant"
 
 #. Default: "Cadastral reference"
-#: ../browser/templates/searchparcels.pt:46
 msgid "urban_search_by_cadastral_reference"
 msgstr "Référence"
 
@@ -5651,7 +5606,6 @@ msgid "urban_search_parcel_by_folder_reference"
 msgstr "Référence du dossier"
 
 #. Default: "Location"
-#: ../browser/templates/searchparcels.pt:97
 msgid "urban_search_parcel_by_location"
 msgstr "Rue"
 
@@ -5660,12 +5614,10 @@ msgid "urban_search_parcel_by_name"
 msgstr "Nom"
 
 #. Default: "Proprietary"
-#: ../browser/templates/searchparcels.pt:124
 msgid "urban_search_parcel_by_proprietary"
 msgstr "Propriétaires"
 
 #. Default: "Number"
-#: ../browser/templates/searchparcels.pt:100
 msgid "urban_search_parcel_by_street_number"
 msgstr "N° de police"
 
@@ -5792,7 +5744,7 @@ msgstr "Veuillez renseigner le ou les demandeur(s)"
 #. Default: "You must encode plaintiff(s)"
 #: ../browser/licence/templates/licencemacros.pt:161
 msgid "warning_add_an_plaintiff"
-msgstr ""
+msgstr "Veuillez renseigner un plaignant "
 
 #. Default: "!!!Warning, no deposit date found!!!"
 #: base.py

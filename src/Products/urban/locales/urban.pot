@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2022-02-10 12:52+0000\n"
+"POT-Creation-Date: 2022-02-14 12:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -54,7 +54,7 @@ msgstr ""
 
 #: ../browser/licence/templates/licenceview.pt:31
 #: ../browser/templates/urbaneventannouncementview.pt:35
-#: ../browser/templates/urbaneventinquiryview.pt:35
+#: ../browser/templates/urbaneventinquiryview.pt:34
 msgid "Actions:"
 msgstr ""
 
@@ -93,7 +93,7 @@ msgstr ""
 msgid "Add an event"
 msgstr ""
 
-#: ../browser/templates/urbaneventinquiryview.pt:203
+#: ../browser/templates/urbaneventinquiryview.pt:200
 msgid "Add recipientcadastre manually"
 msgstr ""
 
@@ -329,10 +329,6 @@ msgid "FolderManager"
 msgstr ""
 
 msgid "Found folder(s)"
-msgstr ""
-
-#: ../browser/templates/searchparcels.pt:172
-msgid "Found parcel(s)"
 msgstr ""
 
 #: ../profiles.zcml:42
@@ -740,7 +736,6 @@ msgstr ""
 msgid "Scheduled licences"
 msgstr ""
 
-#: ../browser/templates/searchparcels.pt:35
 msgid "Search parcel(s)"
 msgstr ""
 
@@ -857,7 +852,7 @@ msgstr ""
 
 #: ../browser/licence/templates/licenceview.pt:27
 #: ../browser/templates/urbaneventannouncementview.pt:31
-#: ../browser/templates/urbaneventinquiryview.pt:31
+#: ../browser/templates/urbaneventinquiryview.pt:30
 msgid "Transitions:"
 msgstr ""
 
@@ -967,7 +962,7 @@ msgid "add_WorkLocation"
 msgstr ""
 
 #: ../browser/templates/urbaneventannouncementview.pt:145
-#: ../browser/templates/urbaneventinquiryview.pt:144
+#: ../browser/templates/urbaneventinquiryview.pt:143
 msgid "add_a_claimant"
 msgstr ""
 
@@ -1539,31 +1534,31 @@ msgstr ""
 
 #. Default: "<span>Claimants</span>"
 #: ../browser/templates/urbaneventannouncementview.pt:132
-#: ../browser/templates/urbaneventinquiryview.pt:131
+#: ../browser/templates/urbaneventinquiryview.pt:130
 msgid "event_inquiry_claimants"
 msgstr ""
 
 #. Default: "<span>Description</span>"
 #: ../browser/templates/urbaneventannouncementview.pt:43
-#: ../browser/templates/urbaneventinquiryview.pt:43
+#: ../browser/templates/urbaneventinquiryview.pt:42
 msgid "event_inquiry_documents"
 msgstr ""
 
 #. Default: "<span>Recipients</span>"
-#: ../browser/templates/urbaneventinquiryview.pt:172
+#: ../browser/templates/urbaneventinquiryview.pt:171
 msgid "event_inquiry_recipients"
 msgstr ""
 
 #. Default: "Event linked attachments"
 #: ../browser/templates/urbaneventannouncementview.pt:121
-#: ../browser/templates/urbaneventinquiryview.pt:120
+#: ../browser/templates/urbaneventinquiryview.pt:119
 #: ../browser/templates/urbaneventview.pt:60
 msgid "event_linked_attachments"
 msgstr ""
 
 #. Default: "Event linked documents"
 #: ../browser/templates/urbaneventannouncementview.pt:115
-#: ../browser/templates/urbaneventinquiryview.pt:114
+#: ../browser/templates/urbaneventinquiryview.pt:113
 #: ../browser/templates/urbaneventview.pt:53
 msgid "event_linked_documents"
 msgstr ""
@@ -1792,11 +1787,6 @@ msgstr ""
 msgid "groundstatestatus_folder_title"
 msgstr ""
 
-#. Default: "You can not search for parcels for now because there was a problem. Please contact your system administrator and give him the red error message here above"
-#: ../browser/templates/searchparcels.pt:36
-msgid "help_search_connection_problem"
-msgstr ""
-
 msgid "holydays"
 msgstr ""
 
@@ -1808,7 +1798,7 @@ msgid "inquiries planned for claimants imports"
 msgstr ""
 
 #. Default: "Inquiry data"
-#: ../browser/templates/urbaneventinquiryview.pt:56
+#: ../browser/templates/urbaneventinquiryview.pt:55
 msgid "inquiry_data"
 msgstr ""
 
@@ -2123,6 +2113,10 @@ msgstr ""
 msgid "manage_parcellings"
 msgstr ""
 
+#: ../browser/templates/globalmacros.pt:39
+msgid "manual_parcel"
+msgstr ""
+
 #: ../browser/gig_coring_settings.py:44
 msgid "map the plone user id to the gig mail address"
 msgstr ""
@@ -2237,12 +2231,12 @@ msgstr ""
 
 #. Default: "Number of claimants"
 #: ../browser/templates/urbaneventannouncementview.pt:153
-#: ../browser/templates/urbaneventinquiryview.pt:153
+#: ../browser/templates/urbaneventinquiryview.pt:152
 msgid "number_of_claimants"
 msgstr ""
 
 #. Default: "Number of recipients"
-#: ../browser/templates/urbaneventinquiryview.pt:188
+#: ../browser/templates/urbaneventinquiryview.pt:186
 msgid "number_of_recipients"
 msgstr ""
 
@@ -2503,8 +2497,7 @@ msgstr ""
 msgid "search-last-elements"
 msgstr ""
 
-#: ../browser/templates/searchparcels.pt:30
-#: ../skins/urban_templates/lot_view.pt:26
+#: ../browser/templates/globalmacros.pt:33
 msgid "search_parcels"
 msgstr ""
 
@@ -2721,13 +2714,9 @@ msgstr ""
 msgid "urban_bound_inspections"
 msgstr ""
 
-#. Default: "Browse old parcels (Only works with the parcel reference)"
-#: ../browser/templates/searchparcels.pt:157
 msgid "urban_browse_old_parcels"
 msgstr ""
 
-#. Default: "Search"
-#: ../browser/templates/searchparcels.pt:161
 msgid "urban_button_search"
 msgstr ""
 
@@ -2737,7 +2726,7 @@ msgstr ""
 
 #. Default: "Here above are data defined for the inquiry. If you want to change these informations, click on the name of the linked inquiry here above."
 #: ../browser/templates/urbaneventannouncementview.pt:57
-#: ../browser/templates/urbaneventinquiryview.pt:57
+#: ../browser/templates/urbaneventinquiryview.pt:56
 msgid "urban_context_help"
 msgstr ""
 
@@ -3173,11 +3162,6 @@ msgstr ""
 msgid "urban_label_bestAddressKey"
 msgstr ""
 
-#. Default: "Bis"
-#: ../browser/templates/searchparcels.pt:71
-msgid "urban_label_bis"
-msgstr ""
-
 #. Default: "Bound inspection"
 #: ../content/licence/Ticket.py:58
 msgid "urban_label_bound_inspection"
@@ -3384,7 +3368,7 @@ msgstr ""
 
 #. Default: "Linked inquiry"
 #: ../browser/templates/urbaneventannouncementview.pt:66
-#: ../browser/templates/urbaneventinquiryview.pt:65
+#: ../browser/templates/urbaneventinquiryview.pt:64
 msgid "urban_label_context"
 msgstr ""
 
@@ -3558,11 +3542,6 @@ msgstr ""
 msgid "urban_label_divergenceDetails"
 msgstr ""
 
-#. Default: "Division"
-#: ../browser/templates/searchparcels.pt:52
-msgid "urban_label_division"
-msgstr ""
-
 #. Default: "Divisioncode"
 #: PortionOut.py
 msgid "urban_label_divisionCode"
@@ -3694,11 +3673,6 @@ msgstr ""
 #. Default: "Exponent"
 #: PortionsOut.py
 msgid "urban_label_exponent"
-msgstr ""
-
-#. Default: "Exposant"
-#: ../browser/templates/searchparcels.pt:75
-msgid "urban_label_exposant"
 msgstr ""
 
 #. Default: "expropriation"
@@ -4488,11 +4462,6 @@ msgstr ""
 msgid "urban_label_parkingDetails"
 msgstr ""
 
-#. Default: "Partie"
-#: ../browser/templates/searchparcels.pt:83
-msgid "urban_label_partie"
-msgstr ""
-
 #. Default: "Pash"
 #: ../content/licence/GenericLicence.py:350
 msgid "urban_label_pash"
@@ -4741,19 +4710,9 @@ msgstr ""
 msgid "urban_label_publicRoadModifications"
 msgstr ""
 
-#. Default: "Puissance"
-#: ../browser/templates/searchparcels.pt:79
-msgid "urban_label_puissance"
-msgstr ""
-
 #. Default: "Queryable"
 #: Layer.py
 msgid "urban_label_queryable"
-msgstr ""
-
-#. Default: "Radical"
-#: ../browser/templates/searchparcels.pt:67
-msgid "urban_label_radical"
 msgstr ""
 
 #. Default: "Rcudetails"
@@ -5075,11 +5034,6 @@ msgstr ""
 
 #. Default: "Enter the name, the surname and/or the national register number.  You can use '*' to define if you search on a partial word"
 msgid "urban_label_searchbyname_descr"
-msgstr ""
-
-#. Default: "Section"
-#: ../browser/templates/searchparcels.pt:62
-msgid "urban_label_section"
 msgstr ""
 
 #. Default: "Selectedfield"
@@ -5599,8 +5553,6 @@ msgstr ""
 msgid "urban_recipient_copied_to_claimants"
 msgstr ""
 
-#. Default: "Cadastral reference"
-#: ../browser/templates/searchparcels.pt:46
 msgid "urban_search_by_cadastral_reference"
 msgstr ""
 
@@ -5616,8 +5568,6 @@ msgstr ""
 msgid "urban_search_parcel_by_folder_reference"
 msgstr ""
 
-#. Default: "Location"
-#: ../browser/templates/searchparcels.pt:97
 msgid "urban_search_parcel_by_location"
 msgstr ""
 
@@ -5625,13 +5575,9 @@ msgstr ""
 msgid "urban_search_parcel_by_name"
 msgstr ""
 
-#. Default: "Proprietary"
-#: ../browser/templates/searchparcels.pt:124
 msgid "urban_search_parcel_by_proprietary"
 msgstr ""
 
-#. Default: "Number"
-#: ../browser/templates/searchparcels.pt:100
 msgid "urban_search_parcel_by_street_number"
 msgstr ""
 

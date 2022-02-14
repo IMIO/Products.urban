@@ -2789,3 +2789,6 @@ msgstr ""
 
 msgid "other"
 msgstr ""
+
+msgid "manual_parcel"
+msgstr ""
