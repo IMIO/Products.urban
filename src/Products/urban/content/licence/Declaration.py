@@ -41,7 +41,7 @@ schema = Schema((
         ),
         schemata='urban_description',
         multiValued=1,
-        vocabulary=UrbanVocabulary('articles', with_empty_value=True),
+        vocabulary=UrbanVocabulary('articles', with_empty_value=False),
         default_method='getDefaultValue',
     ),
     ReferenceField(
