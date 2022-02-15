@@ -1331,7 +1331,10 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
         """
           Returns the annonced delay value or the UrbanDelay if theObject=True
         """
-        res = self.getField('annoncedDelay').get(self)
+        res = self.getField('annoncedDelay')
+        if not field:
+            return None
+        res = field.get(self)
         if res and theObject:
             urbanConfig = self.getLicenceConfig()
             res = getattr(urbanConfig.folderdelays, res)
@@ -1464,6 +1467,12 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
 
     def getAllMayorColleges(self):
         return self.getAllEvents(interfaces.IMayorCollegeEvent)
+
+    def getLastSuspension(self):
+        return self.getLastEvent(interfaces.ISuspensionEvent)
+
+    def getAllSuspensionEvents(self):
+        return self.getAllEvents(interfaces.ISuspensionEvent)
 
     def getAllEvents(self, eventInterface=IUrbanEvent):
         return self.getAllEventsByObjectValues(eventInterface)
