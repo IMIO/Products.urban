@@ -76,6 +76,10 @@ class UrbanDocGenerationView(PersistentDocumentGenerationView):
                             for tenant in tenants or []]
             tenantobj = tenants_views and tenants_views[0] or None
 
+        bound_roaddecrees = [dec.restrictedTraverse('@@document_generation_helper_view')
+                             for dec in licence.get_bound_roaddecrees()] or None
+
+
         generation_context = {
             'this': licence,
             'self': licence_helper_view,
@@ -94,6 +98,9 @@ class UrbanDocGenerationView(PersistentDocumentGenerationView):
             'event_helper': event_helper_view,
             'claimants': claimants_view,
             'inquiry_proprietaries': proprietaries_views,
+            'roaddecrees': bound_roaddecrees,
+            'roaddecree': bound_roaddecrees and bound_roaddecrees[-1],
+
         }
 
         return generation_context
