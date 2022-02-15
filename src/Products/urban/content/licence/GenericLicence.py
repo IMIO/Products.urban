@@ -1331,7 +1331,7 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
         """
           Returns the annonced delay value or the UrbanDelay if theObject=True
         """
-        res = self.getField('annoncedDelay')
+        field = self.getField('annoncedDelay')
         if not field:
             return None
         res = field.get(self)
