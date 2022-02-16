@@ -77,6 +77,11 @@ class LicenceView(BrowserView):
             return True
         return False
 
+    def isGigCoringActive(self):
+        activation = api.portal.get_registry_record(
+                'Products.urban.browser.gig_coring_settings.IGigCoringLink.gig_coring_activation')
+        return activation
+
     def getInquiryType(self):
         return 'Inquiry'
 
@@ -281,6 +286,9 @@ class LicenceView(BrowserView):
     def getInquiryFields(self, exclude=[]):
         return self.getSchemataFields('urban_inquiry', exclude)
 
+    def getBoundInquiryFields(self, exclude=[], bound_context=None):
+        return self.getSchemataFields('urban_inquiry', exclude, bound_context)
+
     def getDefaultFields(self, exclude=[], context=None):
         base_exclude = ['id', 'title']
         return self.getSchemataFields('default', base_exclude + exclude, context=context)
@@ -317,6 +325,39 @@ class LicenceView(BrowserView):
             }
                 for b in brains]
             return inspections_and_tickets
+
+    def has_bound_roaddecrees(self):
+        annotations = IAnnotations(self.context)
+        roaddecrees = annotations.get('urban.bound_roaddecrees', [])
+        return roaddecrees
+
+    def get_bound_roaddecrees(self):
+        roaddecrees = []
+        annotations = IAnnotations(self.context)
+        roaddecree_UIDs = list(annotations.get('urban.bound_roaddecrees', []))
+        if roaddecree_UIDs:
+            licence_folder = api.portal.get().urban
+            catalog = api.portal.get_tool('portal_catalog')
+            brains = catalog(UID=roaddecree_UIDs)
+            roaddecrees = [{
+                'title': b.Title,
+                'url': '{}/{}s/{}'.format(licence_folder.absolute_url(), b.portal_type.lower(), b.id),
+                'state': b.review_state
+            }
+                for b in brains]
+            return roaddecrees
+
+    def getRoadDecreesInquiriesForDisplay(self):
+        """
+          Returns the bound road decrees inquiries to display on the buildlicence_view
+        """
+        roaddecrees = self.context.get_bound_roaddecrees()
+        all_inquiries = []
+        for roaddecree in roaddecrees:
+            context = aq_inner(roaddecree)
+            inquiries = [roaddecree, context.getAllInquiries()]
+            all_inquiries.append(inquiries)
+        return all_inquiries
 
 
 class CODTLicenceView(LicenceView):

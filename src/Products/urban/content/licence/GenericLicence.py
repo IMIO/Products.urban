@@ -14,6 +14,7 @@ __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEUL
 __docformat__ = 'plaintext'
 
 from AccessControl import ClassSecurityInfo
+from zope.annotation import IAnnotations
 
 from collective.archetypes.select2.select2widget import MultiSelect2Widget
 from Products.MasterSelectWidget.MasterMultiSelectWidget import MasterMultiSelectWidget
@@ -41,7 +42,9 @@ from Products.urban import UrbanMessage as _
 # code-section module-header #fill in your manual code here
 from zope.i18n import translate
 from collective.datagridcolumns.ReferenceColumn import ReferenceColumn
+from Products.Archetypes.Widget import RichWidget
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
+from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
 from Products.urban.content.licence.base import UrbanBase
 from Products.urban.interfaces import IOpinionRequestEvent
 from Products.urban.interfaces import IUrbanEvent
@@ -97,6 +100,15 @@ slave_fields_pca = (
     },
 )
 
+slave_fields_tax = (
+    # if other selected, show taxdetails field.
+    {
+       'name': 'taxDetails',
+       'action': 'show',
+       'hide_values': ('none', 'other'),
+    },
+)
+
 optional_fields = [
     'subdivisionDetails', 'missingParts', 'missingPartsDetails', 'folderZoneDetails', 'folderZone',
     'isInPCA', 'roadType', 'roadCoating', 'roadEquipments', 'pcaZone',
@@ -113,7 +125,7 @@ optional_fields = [
     'preemption', 'preemptionDetails', 'SAR', 'sarDetails', 'enoughRoadEquipment', 'enoughRoadEquipmentDetails',
     'reparcelling', 'reparcellingDetails', 'noteworthyTrees', 'pipelines', 'pipelinesDetails', 'tax',
     'groundStateStatus', 'groundstatestatusDetails', 'covid', 'watercourse', 'watercourseCategories', 'trail',
-    'trailDetails'
+    'trailDetails', 'tax', 'taxDetails'
 ]
 # /code-section module-header
 
@@ -174,19 +186,31 @@ schema = Schema((
         ),
         enforceVocabulary=True,
         schemata='urban_description',
-        vocabulary=UrbanVocabulary('foldercategories', with_empty_value=True),
+        vocabulary=UrbanVocabulary('foldercategories', with_empty_value=False),
         default_method='getDefaultValue',
     ),
     StringField(
         name='tax',
-        widget=SelectionWidget(
-            label=_('urban_label_tax',
-                    default='Tax'),
+        widget=MasterSelectWidget(
+            slave_fields=slave_fields_tax,
+            label=_('urban_label_tax', default='Tax'),
         ),
         enforceVocabulary=True,
         schemata='urban_description',
-        vocabulary=UrbanVocabulary('tax', with_empty_value=True, sort_on='sortable_title'),
+        vocabulary=UrbanVocabulary('tax', with_empty_value=False, sort_on='sortable_title'),
         default_method='getDefaultValue',
+    ),
+    TextField(
+        name='taxDetails',
+        default_content_type='text/plain',
+        allowable_content_types=('text/plain',),
+        schemata='urban_description',
+        default_method='getDefaultText',
+        default_output_type='text/plain',
+        accessor="Taxdetails",
+        widget=TextAreaWidget(
+            label=_('urban_label_taxDetails', default='Taxdetails'),
+        ),
     ),
     LinesField(
         name='missingParts',
@@ -275,7 +299,7 @@ schema = Schema((
             label=_('urban_label_roadCoating', default='Roadcoating'),
         ),
         schemata='urban_road',
-        vocabulary=UrbanVocabulary('folderroadcoatings', inUrbanConfig=False, with_empty_value=True),
+        vocabulary=UrbanVocabulary('folderroadcoatings', inUrbanConfig=False, with_empty_value=False),
         default_method='getDefaultValue',
     ),
     StringField(
@@ -286,7 +310,7 @@ schema = Schema((
                     default='Futureroadcoating'),
         ),
         schemata='urban_road',
-        vocabulary=UrbanVocabulary('folderroadcoatings', inUrbanConfig=False, with_empty_value=True),
+        vocabulary=UrbanVocabulary('folderroadcoatings', inUrbanConfig=False, with_empty_value=False),
         default_method='getDefaultValue',
     ),
     DataGridField(
@@ -306,7 +330,7 @@ schema = Schema((
             label=_('urban_label_sewers', default='Sewers'),
         ),
         schemata='urban_road',
-        vocabulary=UrbanVocabulary('sewers', inUrbanConfig=False, with_empty_value=True),
+        vocabulary=UrbanVocabulary('sewers', inUrbanConfig=False, with_empty_value=False),
         default_method='getDefaultValue',
     ),
     TextField(
@@ -888,7 +912,7 @@ schema = Schema((
             label=_('urban_label_rgbsr', default='Rgbsr'),
         ),
         schemata='urban_location',
-        vocabulary=UrbanVocabulary('rgbsr', inUrbanConfig=False, with_empty_value=True),
+        vocabulary=UrbanVocabulary('rgbsr', inUrbanConfig=False, with_empty_value=False),
         default_method='getDefaultValue',
     ),
     TextField(
@@ -945,7 +969,7 @@ schema = Schema((
         ),
         enforceVocabulary=True,
         schemata='urban_location',
-        vocabulary=UrbanVocabulary('townshipfoldercategories', with_empty_value=True, sort_on='sortable_title'),
+        vocabulary=UrbanVocabulary('townshipfoldercategories', with_empty_value=False, sort_on='sortable_title'),
         default_method='getDefaultValue',
     ),
     BooleanField(
@@ -1308,7 +1332,10 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
         """
           Returns the annonced delay value or the UrbanDelay if theObject=True
         """
-        res = self.getField('annoncedDelay').get(self)
+        field = self.getField('annoncedDelay')
+        if not field:
+            return None
+        res = field.get(self)
         if res and theObject:
             urbanConfig = self.getLicenceConfig()
             res = getattr(urbanConfig.folderdelays, res)
@@ -1442,6 +1469,12 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
     def getAllMayorColleges(self):
         return self.getAllEvents(interfaces.IMayorCollegeEvent)
 
+    def getLastSuspension(self):
+        return self.getLastEvent(interfaces.ISuspensionEvent)
+
+    def getAllSuspensionEvents(self):
+        return self.getAllEvents(interfaces.ISuspensionEvent)
+
     def getAllEvents(self, eventInterface=IUrbanEvent):
         return self.getAllEventsByObjectValues(eventInterface)
 
@@ -1457,6 +1490,17 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
         events = self.getAllEvents(eventInterface)
         if events:
             return events[0]
+
+    def get_bound_roaddecrees(self):
+        roaddecrees = []
+        annotations = IAnnotations(self)
+        roaddecree_UIDs = list(annotations.get('urban.bound_roaddecrees', []))
+        if roaddecree_UIDs:
+            catalog = api.portal.get_tool('portal_catalog')
+            brains = catalog(UID=roaddecree_UIDs)
+            roaddecrees = [b.getObject() for b in brains]
+            return roaddecrees
+        return []
 
 registerType(GenericLicence, PROJECTNAME)
 # end of class GenericLicence

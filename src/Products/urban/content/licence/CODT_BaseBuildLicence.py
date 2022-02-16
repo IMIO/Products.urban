@@ -258,7 +258,7 @@ schema = Schema((
             label=_('urban_label_regional_guide', default='Regional_guide'),
         ),
         schemata='urban_location',
-        vocabulary=UrbanVocabulary('regional_guide', inUrbanConfig=False, with_empty_value=True),
+        vocabulary=UrbanVocabulary('regional_guide', inUrbanConfig=False, with_empty_value=False),
         default_method='getDefaultValue',
     ),
     TextField(
@@ -412,7 +412,7 @@ schema = Schema((
             label=_('urban_label_general_disposition', default='General_disposition'),
         ),
         schemata='urban_patrimony',
-        vocabulary=UrbanVocabulary('general_disposition', inUrbanConfig=False, with_empty_value=True),
+        vocabulary=UrbanVocabulary('general_disposition', inUrbanConfig=False, with_empty_value=False),
     ),
     BooleanField(
         name='financial_caution',
@@ -452,7 +452,7 @@ schema = Schema((
             label=_('urban_label_exemptFDArticleModifiedBp', default='Exemptfdarticlemodifiedbp'),
         ),
         schemata='urban_analysis',
-        vocabulary=UrbanVocabulary('exemptfdarticle', with_empty_value=True),
+        vocabulary=UrbanVocabulary('exemptfdarticle', with_empty_value=False),
         default_method='getDefaultValue',
     ),
     BooleanField(

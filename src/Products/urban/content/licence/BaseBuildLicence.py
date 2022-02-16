@@ -164,7 +164,7 @@ schema = Schema((
             label=_('urban_label_annoncedDelay', default='Annonceddelay'),
         ),
         schemata='urban_analysis',
-        vocabulary=UrbanVocabulary('folderdelays', vocType='UrbanDelay', with_empty_value=True),
+        vocabulary=UrbanVocabulary('folderdelays', vocType='UrbanDelay', with_empty_value=False),
         default_method='getDefaultValue',
     ),
     TextField(
@@ -182,7 +182,6 @@ schema = Schema((
         name='townshipCouncilFolder',
         default=False,
         widget=BooleanField._properties['widget'](
-            description="If checked, an additional paragraph will be added in the licence document",
             label=_('urban_label_townshipCouncilFolder', default='Townshipcouncilfolder'),
             description_msgid='urban_help_townshipCouncilFolder',
         ),
@@ -341,7 +340,6 @@ schema = Schema((
         name='roadDgrneUnderground',
         default=False,
         widget=BooleanField._properties['widget'](
-            description="If checked, an additional paragraph will be added in the licence document",
             label=_('urban_label_roadDgrneUnderground', default='Roaddgrneunderground'),
             description_msgid='urban_help_roadDgrneUnderground',
         ),
@@ -362,7 +360,6 @@ schema = Schema((
         name='locationDgrneUnderground',
         default=False,
         widget=BooleanField._properties['widget'](
-            description="If checked, an additional paragraph will be added in the licence document",
             label=_('urban_label_locationDgrneUnderground', default='Locationdgrneunderground'),
             description_msgid='urban_help_locationDgrneUnderground',
         ),
@@ -452,7 +449,7 @@ schema = Schema((
             label=_('urban_label_exemptFDArticle', default='Exemptfdarticle'),
         ),
         schemata='urban_analysis',
-        vocabulary=UrbanVocabulary('exemptfdarticle', with_empty_value=True),
+        vocabulary=UrbanVocabulary('exemptfdarticle', with_empty_value=False),
         default_method='getDefaultValue',
     ),
     BooleanField(
@@ -473,7 +470,7 @@ schema = Schema((
             ),
         ),
         schemata='urban_analysis',
-        vocabulary=UrbanVocabulary('folderdelays', vocType='UrbanDelay', with_empty_value=True),
+        vocabulary=UrbanVocabulary('folderdelays', vocType='UrbanDelay', with_empty_value=False),
         default_method='getDefaultValue',
     ),
     TextField(

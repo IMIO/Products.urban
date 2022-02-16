@@ -189,7 +189,7 @@ schema = Schema((
             label=_('urban_label_annoncedDelay', default='Annonceddelay'),
         ),
         schemata='urban_description',
-        vocabulary=UrbanVocabulary('folderdelays', vocType='UrbanDelay', with_empty_value=True),
+        vocabulary=UrbanVocabulary('folderdelays', vocType='UrbanDelay', with_empty_value=False),
         default_method='getDefaultValue',
     ),
     TextField(

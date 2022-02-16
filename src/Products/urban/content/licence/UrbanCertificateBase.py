@@ -259,7 +259,7 @@ schema = Schema((
             label=_('urban_label_annoncedDelay', default='Annonceddelay'),
         ),
         schemata='urban_description',
-        vocabulary=UrbanVocabulary('folderdelays', vocType='UrbanDelay', with_empty_value=True),
+        vocabulary=UrbanVocabulary('folderdelays', vocType='UrbanDelay', with_empty_value=False),
         default_method='getDefaultValue',
     ),
     TextField(
@@ -346,7 +346,7 @@ schema = Schema((
             label=_('urban_label_regional_guide', default='Regional_guide'),
         ),
         schemata='urban_location',
-        vocabulary=UrbanVocabulary('regional_guide', inUrbanConfig=False, with_empty_value=True),
+        vocabulary=UrbanVocabulary('regional_guide', inUrbanConfig=False, with_empty_value=False),
         default_method='getDefaultValue',
     ),
     TextField(
@@ -442,7 +442,7 @@ schema = Schema((
             label=_('urban_label_general_disposition', default='General_disposition'),
         ),
         schemata='urban_patrimony',
-        vocabulary=UrbanVocabulary('general_disposition', inUrbanConfig=False, with_empty_value=True),
+        vocabulary=UrbanVocabulary('general_disposition', inUrbanConfig=False, with_empty_value=False),
     ),
     StringField(
         name='patrimony',

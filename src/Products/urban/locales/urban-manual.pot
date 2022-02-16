@@ -583,6 +583,9 @@ msgstr ""
 msgid "fieldsetlegend-urban_events"
 msgstr ""
 
+msgid "fieldsetlegend-urban_gig_coring"
+msgstr ""
+
 msgid "fieldsetlegend-urban_internal_services"
 msgstr ""
 
@@ -2398,6 +2401,11 @@ msgstr ""
 msgid "urban_label_tax"
 msgstr ""
 
+#. Default: "Taxdetails"
+msgid "urban_label_taxDetails"
+msgstr ""
+
+
 #. Default: "Templatefooter"
 #: UrbanTool.py
 msgid "urban_label_templateFooter"
@@ -2780,4 +2788,7 @@ msgid "inquiry_suspension"
 msgstr ""
 
 msgid "other"
+msgstr ""
+
+msgid "manual_parcel"
 msgstr ""

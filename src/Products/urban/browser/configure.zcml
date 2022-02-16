@@ -435,6 +435,14 @@
       class=".offdays_settings.OffDaysControlPanel"
       permission="cmf.ManagePortal"
   />
+
+  <browser:page
+      name="gig_coring_settings"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      class=".gig_coring_settings.GigCoringLinkControlPanel"
+      permission="cmf.ManagePortal"
+  />
+
   <adapter
       for="Products.Five.BrowserView"
       factory=".referencebrowser_popup.contact_popup_template"
@@ -454,6 +462,14 @@
       name="faceted-table-view"
       class="imio.dashboard.browser.overrides.IDFacetedTableView"
       permission="zope2.View"
+  />
+
+  <browser:page
+     for="*"
+     name="gig_coring_view"
+     class=".gig_coring_view.GigCoringView"
+     attribute="open_gig_and_load_parcels"
+     permission="zope2.View"
   />
 
 </configure>
