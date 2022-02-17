@@ -55,6 +55,7 @@
   <include package=".events" />
   <include package=".browser" />
   <include package=".migration" />
+  <include package=".NOTICe" />
   <include package=".pm_wsclient" />
   <include package=".schedule" />
   <include package=".services" />

@@ -7,6 +7,7 @@ from Products.urban.setuphandlers import _create_task_configs
 from Products.urban.browser.table.urbantable import InternalOpinionServicesTable
 from Products.urban.browser.offdays_settings import OffDaysEditForm
 from Products.urban.browser.gig_coring_settings import GigCoringLinkEditForm
+from Products.urban.NOTICe.api import update_open_notifications
 
 from imio.schedule.content.object_factories import CreationConditionObject
 from imio.schedule.content.object_factories import RecurrenceConditionObject
@@ -35,7 +36,8 @@ class UrbanConfigView(BrowserView):
         self.offdays_form.update()
         self.gig_coring_form = GigCoringLinkEditForm(context, request)
         self.gig_coring_form.update()
-
+        self.update_NOTICe_notifications_form = UpdateNOTICeNotificationsForm(context, request)
+        self.update_NOTICe_notifications_form.update()
 
     def getTabMacro(self, tab):
         context = aq_inner(self.context)
@@ -50,8 +52,9 @@ class UrbanConfigView(BrowserView):
             'vocabulary_folders',
             'schedule',
             'internal_services',
+            'gig_coring',
+            'NOTICe',
             'admin_settings',
-            'gig_coring'
         ]
 
     def getMiscConfigFolders(self):
@@ -267,3 +270,17 @@ class UpdateDefaultValuesForm(form.Form):
         portal_urban = api.portal.get_tool('portal_urban')
         cache_view = portal_urban.unrestrictedTraverse('urban_vocabulary_cache')
         cache_view.reset_all_cache()
+
+
+class UpdateNOTICeNotificationsForm(form.Form):
+
+    method = 'get'
+    ignoreContext = False
+
+    @button.buttonAndHandler(u'Update NOTICe notifications')
+    def handleUpdate(self, action):
+        """
+        """
+        portal_urban = api.portal.get_tool('portal_urban')
+        NOTICe_view = portal_urban.unrestrictedTraverse('NOTICe_view')
+        NOTICe_view.update_open_notifications()

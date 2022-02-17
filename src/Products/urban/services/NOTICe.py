@@ -19,6 +19,7 @@ class NOTICeService(object):
                  organisation_id,
                  key_file,
                  cert_file,
+                 bced_commune
                  ):
         """
         """
@@ -30,6 +31,7 @@ class NOTICeService(object):
         self.organisation_id = organisation_id
         self.key_file = key_file
         self.cert_file = cert_file
+        self.BCED_commune = bced_commune
 
         self.session = Session()
         self.session.proxies["https"] = proxy_server
@@ -87,7 +89,7 @@ class NOTICeService(object):
         }
         return privacy_log
 
-    def search_notification(self, notif_type=[]):
+    def search_notifications(self, notif_type=[], status=''):
         """ """
         self.client = Client(self.notification_wsdl, transport=self.transport, wsse=self.spw_signature)
 
@@ -95,7 +97,8 @@ class NOTICeService(object):
             customerInformations=self.customer_informations,
             privacyLog=self.privacy_log,
             request={
-                "noticeInstanceId": "0216.693.545",  # code BCED de la commune
+                "noticeInstanceId": self.BCED_commune,  # code BCED de la commune
+                "status": 'EN_ATTENTE_REPONSE',
             },
         )
         return result
@@ -103,6 +106,7 @@ class NOTICeService(object):
     def get_notification(self, notice_id):
         """ """
         self.client = Client(self.notification_wsdl, transport=self.transport, wsse=self.spw_signature)
+        self.client.settings.strict = False
 
         result = self.client.service.getNotification(
             customerInformations=self.customer_informations,
