@@ -593,8 +593,9 @@ EventConfigs = {
             'specialFunctionName': "Rechercher les propriétaires situés dans un rayon de 50m",
             'specialFunctionUrl': "addInvestigationPO",
             'podTemplates': (
-                {'id': "codt_purb_annexe_25.odt",
-                 'title': "Annexe 25 (affiche publique)",
+                {
+                    'id': "codt_purb_annexe_25.odt",
+                    'title': "Annexe 25 (affiche publique)",
                 },
                 {'id': "codt_pu_reclamations_reimport.ods", 'title': "Fichier réclamants pour réimport"}
             ),
@@ -7922,4 +7923,403 @@ EventConfigs = {
             'eventPortalType': 'UrbanEventInspectionReport',
         },
     ),
+    'roaddecree': (
+        {
+            'id': "depot-de-la-demande-codt",
+            'title': "Dépôt de la demande",
+            'eventDateLabel': "Date de dépôt",
+            'activatedFields': (),
+            'deadLineDelay': 15,
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+                {
+                    'id': "codt_pu_depot_de_la_demande.odt",
+                    'title': "Dépôt de la demande",
+                    'context_variables': [
+                        {
+                            'name': 'publipostage',
+                            'value': 'demandeurs'
+                        }
+                    ]
+                },
+            ),
+            'eventType': ('Products.urban.interfaces.IDepositEvent',),
+        },
+        {
+            'id': "dossier-incomplet-codt",
+            'title': "1er dossier incomplet",
+            'activatedFields': (),
+            'deadLineDelay': 15,
+            'eventType': ('Products.urban.interfaces.IMissingPartEvent',),
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+                {
+                    'id': "codt_pu_annexe_17_dossier_incomplet_demandeur.odt",
+                    'title': "Dossier incomplet (lettre au demandeur, Annexe 17)",
+                    'context_variables': [
+                        {
+                            'name': 'publipostage',
+                            'value': 'demandeurs'
+                        }
+                    ]
+                },
+                {
+                    'id': "codt_pu_dossier_incomplet_architecte.odt",
+                    'title': "Dossier incomplet (lettre à l'architecte)",
+                    'context_variables': [
+                        {
+                            'name': 'publipostage',
+                            'value': 'architectes'
+                        }
+                    ]
+                },
+                {
+                    'id': "codt_pu_dossier_incomplet_fd.odt",
+                    'title': "Dossier incomplet (lettre au FD)"
+                },
+            ),
+        },
+        {
+            'id': "recepisse-complement-codt",
+            'title': "Récépissé d'un complément à une demande de permis",
+            'activatedFields': (),
+            'deadLineDelay': 15,
+            'podTemplates': (
+                {
+                    'id': "codt_pu_recepisse_depot_complements.odt",
+                    'title': "Récépissé de dépôt de compléments",
+                    'context_variables': [
+                        {
+                            'name': 'publipostage',
+                            'value': 'demandeurs'
+                        }
+                    ]
+                },
+            ),
+            'eventType': ('Products.urban.interfaces.IMissingPartDepositEvent',),
+        },
+        {
+            'id': "dossier-incomplet-irrecevable-codt",
+            'title': "2ème dossier incomplet (irrecevable)",
+            'activatedFields': (),
+            'deadLineDelay': 15,
+            'eventType': ('Products.urban.interfaces.IRefusedIncompletenessEvent',),
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+                {
+                    'id': "codt_pu_dossier_incomplet_2eme_fois_irrecevable.odt",
+                    'title': "Deuxième dossier incomplet (irrecevable)",
+                    'context_variables': [
+                        {
+                            'name': 'publipostage',
+                            'value': 'demandeurs'
+                        }
+                    ]
+                },
+            ),
+        },
+        {
+            'id': "accuse-de-reception-codt",
+            'title': "Accusé de réception (dossier complet)",
+            'activatedFields': ('transmitDate',),
+            'deadLineDelay': 15,
+            'eventType': ('Products.urban.interfaces.IAcknowledgmentEvent',),
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+                {
+                    'id': "codt_pu_annexe_18_accuse_reception.odt",
+                    'title': "Accusé de réception (Annexe 18)",
+                    'context_variables': [
+                        {
+                            'name': 'publipostage',
+                            'value': 'demandeurs'
+                        }
+                    ]
+                },
+            ),
+        },
+        {
+            'id': "dossier-recevable-par-defaut-codt",
+            'title': "Dossier recevable par défaut",
+            'deadLineDelay': 15,
+            'eventType': ('Products.urban.interfaces.IDefaultCODTAcknowledgmentEvent',),
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+            ),
+        },
+        {
+            'id': "notification-choix-procedure-codt",
+            'title': "Notification du choix de la procédure",
+            'deadLineDelay': 15,
+            'eventType': ('Products.urban.interfaces.ICODTProcedureChoiceNotified',),
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+            ),
+        },
+        {
+            'id': "reception-choix-procedure-FD-codt",
+            'title': "Réception du choix de la procédure par le FD",
+            'deadLineDelay': 15,
+            'eventType': ('Products.urban.interfaces.ICODTProcedureChoiceNotified',),
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+            ),
+        },
+        {
+            'id': "transmis-1er-dossier-rw-codt",
+            'title': "Transmis 1er dossier RW",
+            'activatedFields': ('decisionDate', 'decision',),
+            'deadLineDelay': 15,
+            'eventDateLabel': "Date de transmis",
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+                {'id': "codt_pu_form_envoi_premier_dossier_rw.odt", 'title': "Formulaire d'envoi du premier dossier à la RW"},
+            ),
+            'eventType': ('Products.urban.interfaces.IWalloonRegionPrimoEvent',),
+        },
+        {
+            'id': "rapport-du-college",
+            'title': "Rapport du Collège",
+            'activatedFields': ('decisionDate', 'decision', 'decisionText',),
+            'deadLineDelay': 15,
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+                {'id': "urb-rapp-service.odt", 'title': "Rapport du Service"},
+                {'id': "urb-rapp-college.odt", 'title': "Rapport du Collège"},
+            ),
+            'eventType': ('Products.urban.interfaces.ICollegeReportEvent',),
+        },
+        {
+            'id': "config-opinion-request",
+            'title': "*** Demande d'avis CONFIG ***",
+            'activatedFields': (),
+            'TALCondition': "python: False",
+            'podTemplates': ({'id': "codt_pu_courrier_demande_avis_gen.odt", 'title': "Courrier de demande d'avis"},),
+            'eventType': ('Products.urban.interfaces.IOpinionRequestEvent',),
+            'eventPortalType': 'UrbanEventOpinionRequest',
+        },
+        {
+            'id': "annonce-de-projet-codt",
+            'title': "Annonce de projet",
+            'activatedFields': ('investigationStart', 'investigationEnd',),
+            'deadLineDelay': 15,
+            'TALCondition': "here/mayAddAnnouncementEvent",
+            'specialFunctionName': "Rechercher les propriétaires situés dans un rayon de 50m",
+            'specialFunctionUrl': "addInvestigationPO",
+            'podTemplates': (
+                {'id': "codt_pu_annexe_25_affiche_verte.odt", 'title': "Affiche verte (Annexe 25)"},
+                {'id': "codt_pu_reclamations_reimport.ods", 'title': "Fichier réclamants pour réimport"}
+            ),
+            'eventType': ('Products.urban.interfaces.IAnnouncementEvent',),
+            'eventPortalType': 'UrbanEventAnnouncement',
+        },
+        {
+            'id': "enquete-publique-codt",
+            'title': "Enquête publique",
+            'activatedFields': ('investigationStart', 'investigationEnd', 'claimsDate', 'explanationStartSDate', 'explanationEndSDate', 'claimsText',),
+            'deadLineDelay': 15,
+            'TALCondition': "here/mayAddInquiryEvent",
+            'specialFunctionName': "Rechercher les propriétaires situés dans un rayon de 50m",
+            'specialFunctionUrl': "addInvestigationPO",
+            'podTemplates': (
+                {
+                    'id': "codt_pu_annexe_26_enq_pub_avis_riverains_mailing.odt",
+                    'title': "Avis enquête (Lettre riverains publipostable, Annexe 26)",
+                    'context_variables': [
+                        {
+                            'name': 'publipostage',
+                            'value': 'proprietaires_voisinage_enquete'
+                        }
+                    ]
+                },
+                {'id': "codt_pu_annexe_26_affiche_jaune.odt", 'title': "Affiche jaune (annexe 26)"},
+                {'id': "codt_pu_reclamations_reimport.ods", 'title': "Fichier réclamants pour réimport"}
+            ),
+            'eventType': ('Products.urban.interfaces.IInquiryEvent',),
+            'eventPortalType': 'UrbanEventInquiry',
+            'textDefaultValues': (
+                {'text': '\n'.join(default_texts['claimsTextDefaultValue']), 'fieldname': 'claimsText'},
+            ),
+        },
+        {
+            'id': "avis-FD",
+            'title': "Demande d'avis au FD",
+            'eventDateLabel': "Date d'envoi",
+            'activatedFields': ('receiptDate', 'adviceAgreementLevel', 'externalDecision',  'opinionText'),
+            'eventType': ('Products.urban.interfaces.IWalloonRegionOpinionRequestEvent',),
+            'eventPortalType': 'UrbanEventOpinionRequest',
+            'keyDates': ('eventDate',),
+            'podTemplates': (),
+        },
+        {
+            'id': "prorogation-codt",
+            'title': "Prorogation du permis",
+            'activatedFields': ('decisionDate', 'decision', 'decisionText',),
+            'deadLineDelay': 15,
+            'eventDateLabel': "Date de notification",
+            'TALCondition': "python: here.getProrogation()",
+            'eventType': ('Products.urban.interfaces.ISimpleCollegeEvent',),
+            'eventPortalType': 'UrbanEventCollege',
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+                {
+                    'id': "codt_pu_prorogation_si_non_automatique_deliberation.odt",
+                    'title': "Délibération CODT - PROROGATION si non automatique",
+                },
+                {
+                    'id': "codt_pu_prorogation_info_demandeur.odt",
+                    'title': "Information au demandeur de la prorogation",
+                    'context_variables': [
+                        {
+                            'name': 'publipostage',
+                            'value': 'demandeurs'
+                        }
+                    ],
+                },
+                {
+                    'id': "codt_pu_prorogation_info_architecte.odt",
+                    'title': "Information à l'architecte de la prorogation",
+                    'context_variables': [
+                        {
+                            'name': 'publipostage',
+                            'value': 'architectes'
+                        }
+                    ],
+                },
+                {
+                    'id': "codt_pu_formulaire_envoi_prorogation_fd_grille.odt",
+                    'title': "Formulaire d'envoi de la prorogation au FD (GRILLE)",
+                },
+            ),
+        },
+        {
+            'id': "procedure-voirie-codt",
+            'title': "Procédure voirie",
+            'activatedFields': ('decisionDate', 'decision', 'decisionText',),
+            'deadLineDelay': 15,
+            'eventDateLabel': "Date de notification",
+            'TALCondition': "python: here.getProrogation()",
+            'eventType': ('Products.urban.interfaces.ISimpleCollegeEvent',),
+            'eventPortalType': 'UrbanEventCollege',
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+            ),
+        },
+        {
+            'id': "delivrance-du-permis-octroi-ou-refus-codt",
+            'title': "Délivrance du permis (octroi ou refus)",
+            'activatedFields': ('decisionDate', 'decision',),
+            'deadLineDelay': 15,
+            'eventDateLabel': "Date de notification",
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+                {
+                    'id': "codt_pu_annexe_12_decision_octroi_refus.odt",
+                    'title': "Décision (Annexe 12)"
+                },
+                {
+                    'id': "codt_pu_decision_octroi_refus_lettre_architecte.odt",
+                    'title': "Décision lettre à l'architecte",
+                    'context_variables': [
+                        {
+                            'name': 'publipostage',
+                            'value': 'architectes'
+                        },
+                    ]
+                },
+            ),
+            'eventType': ('Products.urban.interfaces.ITheLicenceEvent', 'Products.urban.interfaces.ILicenceNotificationEvent',),
+        },
+        {
+            'id': "premiere-reunion-patrimoine",
+            'title': "Première réunion patrimoine",
+            'eventDateLabel': "Date de la réunion",
+            'activatedFields': ('reportCreationDate', 'reportReceptionDate', 'misc_description',),
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+            ),
+            'eventType': ('Products.urban.interfaces.IPatrimonyMeetingEvent',),
+        },
+        {
+            'id': "deuxieme-reunion-patrimoine",
+            'title': "Deuxième réunion patrimoine",
+            'eventDateLabel': "Date de la réunion",
+            'activatedFields': ('reportCreationDate', 'reportReceptionDate', 'misc_description',),
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+            ),
+            'eventType': ('Products.urban.interfaces.IPatrimonyMeetingEvent',),
+        },
+        {
+            'id': "reunion-patrimoine-supplementaire",
+            'title': "Réunion patrimoine supplémentaire",
+            'eventDateLabel': "Date de la réunion",
+            'activatedFields': ('reportCreationDate', 'reportReceptionDate', 'misc_description',),
+            'showTitle': True,
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+            ),
+            'eventType': ('Products.urban.interfaces.IPatrimonyMeetingEvent',),
+        },
+        {
+            'portal_type': 'OpinionEventConfig',
+            'id': "a-i-d-e",
+            'title': "Demande d'avis A.I.D.E.",
+            'description': RichTextValue("<p>A.I.D.E.<br />Rue de la Digue 25<br />Bâtiment 56<br />4420 Tilleur</p>"),
+            'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
+            'eventDateLabel': "Date",
+            'activatedFields': ('transmitDate', 'receiptDate', 'receivedDocumentReference', 'externalDecision',),
+            'eventPortalType': 'UrbanEventOpinionRequest',
+            'eventType': ('Products.urban.interfaces.IOpinionRequestEvent',),
+            'externalDirections': ['liege_2'],
+            'abbreviation': 'A.I.D.E.',
+            'podTemplates': (),
+        },
+        {
+            'portal_type': 'OpinionEventConfig',
+            'id': "agriculture",
+            'title': "Demande d'avis Agriculture",
+            'description': RichTextValue("<p>Service Public de Wallonie<br />Direction générale de l’Agriculture, des Ressources Naturelles et de l’Environnement<br />Direction du Développement rural<br />Service extérieur d’Ath<br />Chemin du Vieux Ath 2C<br />7800 Ath</p>"),
+            'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
+            'eventDateLabel': "Date",
+            'activatedFields': ('transmitDate', 'receiptDate', 'receivedDocumentReference', 'externalDecision',),
+            'eventPortalType': 'UrbanEventOpinionRequest',
+            'eventType': ('Products.urban.interfaces.IOpinionRequestEvent',),
+            'externalDirections': ['hainaut_1'],
+            'abbreviation': 'Agriculture',
+            'podTemplates': (),
+        },
+        {
+            'portal_type': 'OpinionEventConfig',
+            'id': "air-liquide-industries-belgium-s-a",
+            'title': "Air Liquide Industries Belgium S.A.",
+            'description': RichTextValue("<p>Air Liquide Industries Belgium S.A.<br />Rue Adolphe Quételet 1 bis<br />7180 Seneffe</p>"),
+            'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
+            'eventDateLabel': "Date",
+            'activatedFields': ('transmitDate', 'receiptDate', 'receivedDocumentReference', 'externalDecision',),
+            'eventPortalType': 'UrbanEventOpinionRequest',
+            'eventType': ('Products.urban.interfaces.IOpinionRequestEvent',),
+            'externalDirections': ['hainaut_1', 'hainaut_2'],
+            'abbreviation': 'Air Liquide Industries Belgium S.A.',
+            'podTemplates': (),
+        },
+
+
+    ),
+
 }
