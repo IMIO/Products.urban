@@ -2721,6 +2721,9 @@ msgstr ""
 msgid "trails_folder_title"
 msgstr ""
 
+msgid "townships_folder_title"
+msgstr ""
+
 msgid "urban_label_patrimony_analysis"
 msgstr ""
 
