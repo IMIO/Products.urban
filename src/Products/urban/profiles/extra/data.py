@@ -7925,17 +7925,17 @@ EventConfigs = {
     ),
     'roaddecree': (
         {
-            'id': "depot-de-la-demande-codt",
-            'title': "Dépôt de la demande",
-            'eventDateLabel': "Date de dépôt",
-            'activatedFields': (),
+            'id': "reception-du-dossier",
+            'title': "Réception du dossier",
+            'eventDateLabel': "Date",
+            'activatedFields': ('receiptDate', 'misc_description',),
             'deadLineDelay': 15,
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+            'keyDates': ('receiptDate',),
             'podTemplates': (
                 {
                     'id': "codt_pu_depot_de_la_demande.odt",
-                    'title': "Dépôt de la demande",
+                    'title': "Récépissé",
                     'context_variables': [
                         {
                             'name': 'publipostage',
@@ -7947,27 +7947,23 @@ EventConfigs = {
             'eventType': ('Products.urban.interfaces.IDepositEvent',),
         },
         {
-            'id': "dossier-incomplet-codt",
-            'title': "1er dossier incomplet",
-            'activatedFields': (),
+            'id': "dossier-incomplet",
+            'title': "Dossier incomplet",
+            'activatedFields': ('transmitDate', 'misc_description',),
+            'eventDateLabel': "Date postale",
             'deadLineDelay': 15,
             'eventType': ('Products.urban.interfaces.IMissingPartEvent',),
+            'eventPortalType': 'UrbanEventAcknowledgment',
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
                 {
                     'id': "codt_pu_annexe_17_dossier_incomplet_demandeur.odt",
-                    'title': "Dossier incomplet (lettre au demandeur, Annexe 17)",
-                    'context_variables': [
-                        {
-                            'name': 'publipostage',
-                            'value': 'demandeurs'
-                        }
-                    ]
+                    'title': "Relevé des pièces manquantes"
                 },
                 {
                     'id': "codt_pu_dossier_incomplet_architecte.odt",
-                    'title': "Dossier incomplet (lettre à l'architecte)",
+                    'title': "Transmis 1er incomplet à l'architecte",
                     'context_variables': [
                         {
                             'name': 'publipostage',
@@ -7977,7 +7973,7 @@ EventConfigs = {
                 },
                 {
                     'id': "codt_pu_dossier_incomplet_fd.odt",
-                    'title': "Dossier incomplet (lettre au FD)"
+                    'title': "Transmis 1er incomplet au FD"
                 },
             ),
         },
@@ -8022,17 +8018,19 @@ EventConfigs = {
             ),
         },
         {
-            'id': "accuse-de-reception-codt",
+            'id': "accuse-de-reception",
             'title': "Accusé de réception (dossier complet)",
-            'activatedFields': ('transmitDate',),
+            'activatedFields': ('transmitDate', 'misc_description',),
+            'eventDateLabel': "Date postale",
             'deadLineDelay': 15,
             'eventType': ('Products.urban.interfaces.IAcknowledgmentEvent',),
+            'eventPortalType': 'UrbanEventAcknowledgment',
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
                 {
                     'id': "codt_pu_annexe_18_accuse_reception.odt",
-                    'title': "Accusé de réception (Annexe 18)",
+                    'title': "Accusé de réception",
                     'context_variables': [
                         {
                             'name': 'publipostage',
