@@ -208,7 +208,7 @@ URBAN_TYPES = [
     'MiscDemand', 'Division',
     'NotaryLetter', 'CODT_NotaryLetter',
     'ProjectMeeting', 'ExplosivesPossession',
-    'RoadDecree',
+    # 'RoadDecree',
     'Inspection', 'Ticket'
 ]
 
