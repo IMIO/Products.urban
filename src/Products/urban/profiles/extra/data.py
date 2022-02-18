@@ -7995,6 +7995,7 @@ EventConfigs = {
             'title': "Décision conseil - voirie (et alignement)",
             'activatedFields': ('pmTitle', 'pmObject', 'motivation', 'device', 'deviceEnd',),
             'deadLineDelay': 15,
+            'eventDateLabel': "Date",
             'eventType': ('Products.urban.interfaces.ISimpleCollegeEvent',),
             'eventPortalType': 'UrbanEventCollege',
             'isKeyEvent': True,
@@ -8030,6 +8031,7 @@ EventConfigs = {
             'title': "Décision conseil - alignement (et voirie)",
             'activatedFields': ('pmTitle', 'pmObject', 'motivation', 'device', 'deviceEnd',),
             'deadLineDelay': 15,
+            'eventDateLabel': "Date",
             'eventType': ('Products.urban.interfaces.ISimpleCollegeEvent',),
             'eventPortalType': 'UrbanEventCollege',
             'isKeyEvent': True,
@@ -8038,50 +8040,67 @@ EventConfigs = {
             ),
         },
         {
-            'id': "notification-choix-procedure-codt",
-            'title': "Notification du choix de la procédure",
+            'id': "notification-decision",
+            'title': "Notification de la décision",
             'deadLineDelay': 15,
-            'eventType': ('Products.urban.interfaces.ICODTProcedureChoiceNotified',),
+            'eventDateLabel': "Date",
+#            'eventType': ('Products.urban.interfaces.ICODTProcedureChoiceNotified',),  pas dans liege erreur ?
             'isKeyEvent': True,
-            'keyDates': ('eventDate',),
+#            'keyDates': ('eventDate',), pas dans liege erreur ?
             'podTemplates': (
             ),
         },
         {
-            'id': "reception-choix-procedure-FD-codt",
-            'title': "Réception du choix de la procédure par le FD",
+            'id': "affichage-decision-voirie-seule-e-bgm",
+            'title': "Affichage décision - voirie seule (E-Bgm)",
+            'activatedFields': ('pmObject', 'motivation', 'device', 'deviceEnd', 'deviceContinuation',),
             'deadLineDelay': 15,
-            'eventType': ('Products.urban.interfaces.ICODTProcedureChoiceNotified',),
+            'eventDateLabel': "Date",
+            'eventType': ('Products.urban.interfaces.IMayorCollegeEvent',),
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
+            'eventPortalType': 'UrbanEventMayor',
             'podTemplates': (
             ),
         },
         {
-            'id': "transmis-1er-dossier-rw-codt",
-            'title': "Transmis 1er dossier RW",
-            'activatedFields': ('decisionDate', 'decision',),
+            'id': "affichage-decision-alignement-e-bgm",
+            'title': "Affichage décision - alignement (E-Bgm)",
+            'activatedFields': ('pmObject', 'motivation', 'device', 'deviceEnd', 'deviceContinuation',),
             'deadLineDelay': 15,
-            'eventDateLabel': "Date de transmis",
+            'eventDateLabel': "Date",
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
+            'eventPortalType': 'UrbanEventMayor',
             'podTemplates': (
-                {'id': "codt_pu_form_envoi_premier_dossier_rw.odt", 'title': "Formulaire d'envoi du premier dossier à la RW"},
             ),
-            'eventType': ('Products.urban.interfaces.IWalloonRegionPrimoEvent',),
+            'eventType': ('Products.urban.interfaces.IMayorCollegeEvent',),
         },
         {
-            'id': "rapport-du-college",
-            'title': "Rapport du Collège",
-            'activatedFields': ('decisionDate', 'decision', 'decisionText',),
+            'id': "certificat-affichage-decision-voirie-e-bgm",
+            'title': "Certificat affichage décision - voirie seule (E-Bgm)",
+            'activatedFields': ('pmObject', 'motivation', 'device',),
             'deadLineDelay': 15,
+            'eventDateLabel': "Date",
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
+            'eventPortalType': 'UrbanEventMayor',
             'podTemplates': (
-                {'id': "urb-rapp-service.odt", 'title': "Rapport du Service"},
-                {'id': "urb-rapp-college.odt", 'title': "Rapport du Collège"},
             ),
-            'eventType': ('Products.urban.interfaces.ICollegeReportEvent',),
+            'eventType': ('Products.urban.interfaces.IMayorCollegeEvent',),
+        },
+        {
+            'id': "certificat-affichage-decision-alignement-e-bgm",
+            'title': "Certificat affichage décision - alignement (E-Bgm)",
+            'activatedFields': ('pmObject', 'motivation', 'device',),
+            'deadLineDelay': 15,
+            'eventDateLabel': "Date",
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'eventPortalType': 'UrbanEventMayor',
+            'podTemplates': (
+            ),
+            'eventType': ('Products.urban.interfaces.IMayorCollegeEvent',),
         },
         {
             'id': "config-opinion-request",
@@ -8093,19 +8112,27 @@ EventConfigs = {
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
-            'id': "annonce-de-projet-codt",
-            'title': "Annonce de projet",
-            'activatedFields': ('investigationStart', 'investigationEnd',),
+            'id': "recours",
+            'title': "Recours",
+            'activatedFields': ('recourseDecision', 'decisionDate',),
             'deadLineDelay': 15,
-            'TALCondition': "here/mayAddAnnouncementEvent",
-            'specialFunctionName': "Rechercher les propriétaires situés dans un rayon de 50m",
-            'specialFunctionUrl': "addInvestigationPO",
+            'eventDateLabel': "Info sur le recours",
             'podTemplates': (
-                {'id': "codt_pu_annexe_25_affiche_verte.odt", 'title': "Affiche verte (Annexe 25)"},
-                {'id': "codt_pu_reclamations_reimport.ods", 'title': "Fichier réclamants pour réimport"}
             ),
-            'eventType': ('Products.urban.interfaces.IAnnouncementEvent',),
-            'eventPortalType': 'UrbanEventAnnouncement',
+            'eventType': ('Products.urban.interfaces.IRecourseEvent',),
+        },
+        {
+            'id': "affichage-decision-recours-e-bgm",
+            'title': "Affichage décision de recours (E-Bgm)",
+            'activatedFields': ('pmObject', 'motivation', 'device', 'deviceEnd', 'deviceContinuation',),
+            'deadLineDelay': 15,
+            'eventDateLabel': "Date",
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'eventPortalType': 'UrbanEventMayor',
+            'podTemplates': (
+            ),
+            'eventType': ('Products.urban.interfaces.IMayorCollegeEvent',),
         },
         {
             'id': "enquete-publique-codt",
@@ -8144,122 +8171,6 @@ EventConfigs = {
             'eventPortalType': 'UrbanEventOpinionRequest',
             'keyDates': ('eventDate',),
             'podTemplates': (),
-        },
-        {
-            'id': "prorogation-codt",
-            'title': "Prorogation du permis",
-            'activatedFields': ('decisionDate', 'decision', 'decisionText',),
-            'deadLineDelay': 15,
-            'eventDateLabel': "Date de notification",
-            'TALCondition': "python: here.getProrogation()",
-            'eventType': ('Products.urban.interfaces.ISimpleCollegeEvent',),
-            'eventPortalType': 'UrbanEventCollege',
-            'isKeyEvent': True,
-            'keyDates': ('eventDate',),
-            'podTemplates': (
-                {
-                    'id': "codt_pu_prorogation_si_non_automatique_deliberation.odt",
-                    'title': "Délibération CODT - PROROGATION si non automatique",
-                },
-                {
-                    'id': "codt_pu_prorogation_info_demandeur.odt",
-                    'title': "Information au demandeur de la prorogation",
-                    'context_variables': [
-                        {
-                            'name': 'publipostage',
-                            'value': 'demandeurs'
-                        }
-                    ],
-                },
-                {
-                    'id': "codt_pu_prorogation_info_architecte.odt",
-                    'title': "Information à l'architecte de la prorogation",
-                    'context_variables': [
-                        {
-                            'name': 'publipostage',
-                            'value': 'architectes'
-                        }
-                    ],
-                },
-                {
-                    'id': "codt_pu_formulaire_envoi_prorogation_fd_grille.odt",
-                    'title': "Formulaire d'envoi de la prorogation au FD (GRILLE)",
-                },
-            ),
-        },
-        {
-            'id': "procedure-voirie-codt",
-            'title': "Procédure voirie",
-            'activatedFields': ('decisionDate', 'decision', 'decisionText',),
-            'deadLineDelay': 15,
-            'eventDateLabel': "Date de notification",
-            'TALCondition': "python: here.getProrogation()",
-            'eventType': ('Products.urban.interfaces.ISimpleCollegeEvent',),
-            'eventPortalType': 'UrbanEventCollege',
-            'isKeyEvent': True,
-            'keyDates': ('eventDate',),
-            'podTemplates': (
-            ),
-        },
-        {
-            'id': "delivrance-du-permis-octroi-ou-refus-codt",
-            'title': "Délivrance du permis (octroi ou refus)",
-            'activatedFields': ('decisionDate', 'decision',),
-            'deadLineDelay': 15,
-            'eventDateLabel': "Date de notification",
-            'isKeyEvent': True,
-            'keyDates': ('eventDate',),
-            'podTemplates': (
-                {
-                    'id': "codt_pu_annexe_12_decision_octroi_refus.odt",
-                    'title': "Décision (Annexe 12)"
-                },
-                {
-                    'id': "codt_pu_decision_octroi_refus_lettre_architecte.odt",
-                    'title': "Décision lettre à l'architecte",
-                    'context_variables': [
-                        {
-                            'name': 'publipostage',
-                            'value': 'architectes'
-                        },
-                    ]
-                },
-            ),
-            'eventType': ('Products.urban.interfaces.ITheLicenceEvent', 'Products.urban.interfaces.ILicenceNotificationEvent',),
-        },
-        {
-            'id': "premiere-reunion-patrimoine",
-            'title': "Première réunion patrimoine",
-            'eventDateLabel': "Date de la réunion",
-            'activatedFields': ('reportCreationDate', 'reportReceptionDate', 'misc_description',),
-            'isKeyEvent': True,
-            'keyDates': ('eventDate',),
-            'podTemplates': (
-            ),
-            'eventType': ('Products.urban.interfaces.IPatrimonyMeetingEvent',),
-        },
-        {
-            'id': "deuxieme-reunion-patrimoine",
-            'title': "Deuxième réunion patrimoine",
-            'eventDateLabel': "Date de la réunion",
-            'activatedFields': ('reportCreationDate', 'reportReceptionDate', 'misc_description',),
-            'isKeyEvent': True,
-            'keyDates': ('eventDate',),
-            'podTemplates': (
-            ),
-            'eventType': ('Products.urban.interfaces.IPatrimonyMeetingEvent',),
-        },
-        {
-            'id': "reunion-patrimoine-supplementaire",
-            'title': "Réunion patrimoine supplémentaire",
-            'eventDateLabel': "Date de la réunion",
-            'activatedFields': ('reportCreationDate', 'reportReceptionDate', 'misc_description',),
-            'showTitle': True,
-            'isKeyEvent': True,
-            'keyDates': ('eventDate',),
-            'podTemplates': (
-            ),
-            'eventType': ('Products.urban.interfaces.IPatrimonyMeetingEvent',),
         },
         {
             'portal_type': 'OpinionEventConfig',
