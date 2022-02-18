@@ -7978,43 +7978,28 @@ EventConfigs = {
             ),
         },
         {
-            'id': "recepisse-complement-codt",
-            'title': "Récépissé d'un complément à une demande de permis",
-            'activatedFields': (),
+            'id': "decision-conseil-voirie-uniquement",
+            'title': "Décision conseil (voirie uniquement)",
+            'activatedFields': ('pmTitle', 'pmObject', 'motivation', 'device', 'deviceEnd',),
+            'eventDateLabel': "Date",
             'deadLineDelay': 15,
+            'eventPortalType': 'UrbanEventCollege',
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'eventType': ('Products.urban.interfaces.ISimpleCollegeEvent',),
             'podTemplates': (
-                {
-                    'id': "codt_pu_recepisse_depot_complements.odt",
-                    'title': "Récépissé de dépôt de compléments",
-                    'context_variables': [
-                        {
-                            'name': 'publipostage',
-                            'value': 'demandeurs'
-                        }
-                    ]
-                },
             ),
-            'eventType': ('Products.urban.interfaces.IMissingPartDepositEvent',),
         },
         {
-            'id': "dossier-incomplet-irrecevable-codt",
-            'title': "2ème dossier incomplet (irrecevable)",
-            'activatedFields': (),
+            'id': "decision-conseil-voirie-et-alignement",
+            'title': "Décision conseil - voirie (et alignement)",
+            'activatedFields': ('pmTitle', 'pmObject', 'motivation', 'device', 'deviceEnd',),
             'deadLineDelay': 15,
-            'eventType': ('Products.urban.interfaces.IRefusedIncompletenessEvent',),
+            'eventType': ('Products.urban.interfaces.ISimpleCollegeEvent',),
+            'eventPortalType': 'UrbanEventCollege',
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {
-                    'id': "codt_pu_dossier_incomplet_2eme_fois_irrecevable.odt",
-                    'title': "Deuxième dossier incomplet (irrecevable)",
-                    'context_variables': [
-                        {
-                            'name': 'publipostage',
-                            'value': 'demandeurs'
-                        }
-                    ]
-                },
             ),
         },
         {
@@ -8041,10 +8026,12 @@ EventConfigs = {
             ),
         },
         {
-            'id': "dossier-recevable-par-defaut-codt",
-            'title': "Dossier recevable par défaut",
+            'id': "decision-conseil-alignement-et-voirie",
+            'title': "Décision conseil - alignement (et voirie)",
+            'activatedFields': ('pmTitle', 'pmObject', 'motivation', 'device', 'deviceEnd',),
             'deadLineDelay': 15,
-            'eventType': ('Products.urban.interfaces.IDefaultCODTAcknowledgmentEvent',),
+            'eventType': ('Products.urban.interfaces.ISimpleCollegeEvent',),
+            'eventPortalType': 'UrbanEventCollege',
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
