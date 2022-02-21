@@ -857,11 +857,10 @@ default_values = {
         ],
     },
     'shared_vocabularies': {
-
         'decisions': [
             'UrbanVocabularyTerm', URBAN_TYPES,
-            {'id': "favorable", 'title': u"Favorable", 'extraValue': "Recevable"},
-            {'id': "defavorable", 'title': u"Défavorable", 'extraValue': "Irrecevable"},
+            {'id': "favorable", 'title': u"Octroi", 'extraValue': "Recevable"},
+            {'id': "defavorable", 'title': u"Refus", 'extraValue': "Irrecevable"},
         ],
         'collegeopinions': [
             'UrbanVocabularyTerm', URBAN_TYPES,

@@ -2808,12 +2808,12 @@ msgstr "Portée de l'arrêté de classement"
 #. Default: "College Holidays"
 #: ../UrbanTool.py:113
 msgid "urban_label_collegeHolidays"
-msgstr "Vacances du College"
+msgstr "Vacances du Collège"
 
 #. Default: "Collegeopinion"
 #: ../UrbanEvent.py:141
 msgid "urban_label_collegeOpinion"
-msgstr ""
+msgstr "Avis du collège"
 
 msgid "urban_label_collegeReportDecisionDate"
 msgstr "Date de décision du collège"
