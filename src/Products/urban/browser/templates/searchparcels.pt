@@ -13,7 +13,8 @@ metal:use-macro="here/main_template/macros/master">
 <body>
 <div metal:fill-slot="main">
 <!-- définition des variables -->
-        <div tal:define="division request/division | nothing;
+        <div i18n:domain="urban"
+             tal:define="division request/division | nothing;
                         section python: request.get('section', '').upper();
                         radical python: request.get('radical', '').upper();
                         bis python: request.get('bis', '').upper();
@@ -27,12 +28,10 @@ metal:use-macro="here/main_template/macros/master">
                         prca request/prca | nothing;
                         divname request/divname | nothing;">
 
-        <h1 class="documentFirstHeading" i18n:translate="search_parcels"></h1>
-
         <tal:comment replace="nothing">Go back...</tal:comment>
         <metal:listing use-macro="here/@@globalmacros/goBackToMacro" />
 
-        <fieldset style="float: left"><legend i18n:translate="">Search parcel(s)</legend>
+        <fieldset style="float:left"><legend i18n:translate="">Search parcel(s)</legend>
                 <p tal:condition="not: divisions" i18n:translate="help_search_connection_problem">
                         You can not search for parcels for now because there was a problem.
                         Please contact your system administrator and give him the red error message here above
@@ -169,9 +168,7 @@ metal:use-macro="here/main_template/macros/master">
                                    tal:condition="python: results">
                                 <thead>
                                     <tr>
-                                        <th colspan=3 i18n:translate="">
-                                            Found parcel(s)
-                                        </th>
+                                        <th colspan=3><span i18n:translate="">Found parcel(s)</span></th>
                                     </tr>
                                 </thead>
                                 <!-- Display the results body -->
@@ -224,10 +221,10 @@ metal:use-macro="here/main_template/macros/master">
            </div>
 
         <!-- Display the list of already added parcels -->
-        <fieldset style="float: left"><legend i18n:translate="concerned_parcels">Concerned parcel(s)</legend>
-                <div>
+        <fieldset style="float:left"><legend i18n:translate="concerned_parcels">Concerned parcel(s)</legend>
+            <div>
                 <tal:listing content="structure view/renderParcelsListing" />
-                </div>
+            </div>
         </fieldset>
 
        </div>

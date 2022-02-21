@@ -67,7 +67,6 @@
     <div class="#" tal:define="proprietaries context/getProprietaries"
                    tal:attributes="class python: proprietaries and 'field' or 'field warning'">
         <p tal:condition="not: proprietaries" i18n:translate="warning_add_a_proprietary">
-            You must encode proprietary(ies)
         </p>
         <div>
             <tal:listing content="structure view/renderProprietaryListing" />
@@ -123,7 +122,6 @@
     <div class="#" tal:define="applicants context/getApplicants"
                    tal:attributes="class python: applicants and 'field' or 'field warning'">
         <p tal:condition="python: not applicants" i18n:translate="warning_add_an_applicant">
-            You must encode applicant(s)
         </p>
         <tal:listing content="structure view/renderApplicantListing" />
         <form tal:define="ctype python: context.portal_types.getTypeInfo('Applicant');
@@ -187,7 +185,6 @@
     <div class="#" tal:define="applicants context/getApplicants"
                    tal:attributes="class python: applicants and 'field' or 'field warning'">
         <p tal:condition="python: not applicants" i18n:translate="warning_add_an_applicant">
-            You must encode applicant(s)
         </p>
         <tal:listing content="structure view/renderApplicantListing" />
         <form tal:define="ctype python: context.portal_types.getTypeInfo('Applicant');

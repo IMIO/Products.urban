@@ -863,6 +863,12 @@ default_values = {
             {'id': "favorable", 'title': u"Favorable", 'extraValue': "Recevable"},
             {'id': "defavorable", 'title': u"Défavorable", 'extraValue': "Irrecevable"},
         ],
+        'collegeopinions': [
+            'UrbanVocabularyTerm', URBAN_TYPES,
+            {'id': "favorable", 'title': u"Favorable", 'extraValue': "Recevable"},
+            {'id': "defavorable", 'title': u"Défavorable", 'extraValue': "Irrecevable"},
+            {'id': "favorable-cond", 'title': u"Favorable conditionné à", 'extraValue': "Recevable sous conditions"},
+        ],
 
         'foldertendencies': [
             'UrbanVocabularyTerm', [

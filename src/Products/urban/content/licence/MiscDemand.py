@@ -45,7 +45,7 @@ schema = Schema((
             restrict_browsing_to_startup_directory=True,
             wild_card_search=True,
             show_index_selector=True,
-            label=_('urban_label_architects', default='Architects'),
+            label=_('urban_label_architects', default='Architect(s)'),
         ),
         required=False,
         schemata='urban_description',
