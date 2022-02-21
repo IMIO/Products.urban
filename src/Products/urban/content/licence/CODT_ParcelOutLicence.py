@@ -53,7 +53,7 @@ schema = Schema((
             startup_directory="urban/geometricians",
             wild_card_search=True,
             restrict_browsing_to_startup_directory=1,
-            label=_('urban_label_geometricians', default='Geometricians'),
+            label=_('urban_label_geometricians', default='Geometrician(s)'),
             popup_name='contact_reference_popup',
         ),
         required=True,

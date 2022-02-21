@@ -411,7 +411,7 @@ schema = Schema((
             startup_directory="urban/architects",
             wild_card_search=True,
             restrict_browsing_to_startup_directory=1,
-            label=_('urban_label_architects', default='Architects'),
+            label=_('urban_label_architects', default='Architect(s)'),
             popup_name='contact_reference_popup',
         ),
         allowed_types=('Architect',),

@@ -135,6 +135,16 @@ schema = Schema((
         vocabulary=UrbanVocabulary('decisions', inUrbanConfig=True),
         default_method='getDefaultValue',
     ),
+    StringField(
+        name='collegeOpinion',
+        widget=SelectionWidget(
+            label=_('urban_label_collegeOpinion', default='Collegeopinion'),
+        ),
+        enforceVocabulary=True,
+        optional=True,
+        vocabulary=UrbanVocabulary('collegeopinions', inUrbanConfig=True),
+        default_method='getDefaultValue',
+    ),
     TextField(
         name='decisionText',
         allowable_content_types=('text/html',),

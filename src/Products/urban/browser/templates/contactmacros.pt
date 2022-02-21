@@ -1,5 +1,5 @@
 
-<metal:field_display define-macro="field_display">
+<metal:field_display define-macro="field_display" i18n:domain="urban">
     <tr tal:define="fieldname field/getName;
                     field_label field/widget/label_msgid | field/widget/label;
                     value python: field.getAccessor(context)();

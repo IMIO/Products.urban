@@ -285,6 +285,7 @@
 </div>
 
 <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%
+       i18n:domain="urban"
        metal:define-macro="advices_table-macro"
        tal:define="exclude python: ['solicitOpinionsTo', 'solicitOpinionsToOptional']" >
     <tr tal:repeat="field view/getAdviceFields">
@@ -307,6 +308,7 @@
                     <thead>
                         <tr>
                             <th i18n:translate="urban_label_requestedOrganisation">Organisation</th>
+
                             <th i18n:translate="urban_label_askingDate">Asking Date</th>
                             <th i18n:translate="urban_label_receiptDate">Receipt date</th>
                             <th i18n:translate="urban_label_externalDecision">Advice</th>
@@ -419,7 +421,7 @@
                           inquiries python: roaddecree_inquiries[1]">
         <legend>
             <a tal:attributes="href python: roaddecree.absolute_url()">
-                <span i18n:translate="urban_bound_roaddecrees"/> :
+                <span i18n:translate="urban_bound_roaddecrees">Bound roaddecrees</span> :
                 <tal:title replace="roaddecree/Title"/>
             </a>
         </legend>
@@ -437,6 +439,7 @@
 </div>
 
 <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%
+       i18n:domain="urban"
        metal:define-macro="inquiry_table-macro"
        tal:define="custom python: ['investigationArticles'];
                    default_exclude python: [];
