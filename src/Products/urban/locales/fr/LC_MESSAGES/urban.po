@@ -960,6 +960,9 @@ msgstr "Sous-sol"
 msgid "bound_licence_applicants"
 msgstr "Demandeur(s) du permis"
 
+msgid "buildlicence_urbanconfig_title"
+msgstr "Paramètres des Permis d'urbanisme"
+
 msgid "buildlicences"
 msgstr "Permis d'urbanisme"
 
@@ -4859,6 +4862,9 @@ msgstr "et le:"
 #: ../browser/templates/urbanstatsview.pt:43
 msgid "urban_stats_type"
 msgstr "Type de dossier"
+
+msgid "urbancertificateone_urbanconfig_title"
+msgstr "Paramètres des certificats d'urbanisme 1"
 
 msgid "urbancertificateones"
 msgstr "Certificats d'urbanisme 1"
