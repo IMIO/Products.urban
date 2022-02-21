@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2022-02-21 13:21+0000\n"
+"POT-Creation-Date: 2022-02-21 13:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1054,6 +1054,9 @@ msgid "codt_urbancertificatetwo_urbanconfig_title"
 msgstr ""
 
 msgid "college_holydays"
+msgstr ""
+
+msgid "collegeopinions_folder_title"
 msgstr ""
 
 #. Default: "Street"

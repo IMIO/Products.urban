@@ -1070,6 +1070,9 @@ msgstr "Paramètres des certificats d'urbanisme 2 (CODT)"
 msgid "college_holydays"
 msgstr "Vacances du collège"
 
+msgid "collegeopinions_folder_title"
+msgstr "Avis du collège"
+
 # street_referencedatagridwidget
 #. Default: "Street"
 #: ../skins/urban_templates/street_referencedatagridwidget.pt:23
