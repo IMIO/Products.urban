@@ -166,6 +166,9 @@ msgstr ""
 msgid "basement_folder_title"
 msgstr ""
 
+msgid "buildlicence_urbanconfig_title"
+msgstr ""
+
 msgid "buildlicences"
 msgstr ""
 
@@ -1332,6 +1335,9 @@ msgid "urban_label_zipCode"
 msgstr ""
 
 msgid "urbancertificateones"
+msgstr ""
+
+msgid "urbancertificateone_urbanconfig_title"
 msgstr ""
 
 msgid "urbancertificatetwos"
