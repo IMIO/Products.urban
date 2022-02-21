@@ -412,7 +412,7 @@ schema = Schema((
             label=_('urban_label_general_disposition', default='General_disposition'),
         ),
         schemata='urban_patrimony',
-        vocabulary=UrbanVocabulary('general_disposition', inUrbanConfig=False, with_empty_value=False),
+        vocabulary=UrbanVocabulary('general_disposition', inUrbanConfig=False, with_empty_value=True),
     ),
     BooleanField(
         name='financial_caution',
@@ -452,7 +452,7 @@ schema = Schema((
             label=_('urban_label_exemptFDArticleModifiedBp', default='Exemptfdarticlemodifiedbp'),
         ),
         schemata='urban_analysis',
-        vocabulary=UrbanVocabulary('exemptfdarticle', with_empty_value=False),
+        vocabulary=UrbanVocabulary('exemptfdarticle', with_empty_value=True),
         default_method='getDefaultValue',
     ),
     BooleanField(
