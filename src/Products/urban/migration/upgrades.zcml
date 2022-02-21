@@ -275,13 +275,20 @@
         handler=".update_250.migrate_notaryletter_specificfeatures_texts"
         profile="Products.urban:default" />
 
-
     <gs:upgradeStep
         title="Add Tax vocabulary 'Other' option"
         description="urban upgrade step"
         source="1105"
         destination="1106"
         handler=".update_250.migrate_add_tax_other_option"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Install GIG coring registry settings"
+        description="urban upgrade step"
+        source="1106"
+        destination="1107"
+        handler=".update_250.reinstall_registry_and_vocabularies"
         profile="Products.urban:default" />
 
 </configure>
