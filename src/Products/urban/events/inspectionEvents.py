@@ -15,9 +15,9 @@ def setInspectionBoundLicence(inspection, event):
     catalog = api.portal.get_tool('portal_catalog')
     # unrefer previous licence
     if previous_bound_UIDs:
-        previous_licence = catalog(UID=previous_bound_UIDs)
-        previous_licence = previous_licence and previous_licence[0].getObject()
-        if previous_licence:
+        previous_licences = catalog(UID=previous_bound_UIDs)
+        for previous_licence in previous_licences:
+            previous_licence = previous_licence.getObject()
             previous_licence_annotations = IAnnotations(previous_licence)
             values = previous_licence_annotations.get('urban.bound_inspections') or set([])
             if inspection.UID() in values:
@@ -26,9 +26,9 @@ def setInspectionBoundLicence(inspection, event):
 
     # refer new licence
     if new_bound_UIDs:
-        new_licence = catalog(UID=new_bound_UIDs)
-        new_licence = new_licence and new_licence[0].getObject()
-        if new_licence:
+        new_licences = catalog(UID=new_bound_UIDs)
+        for new_licence in new_licences:
+            new_licence = new_licence.getObject()
             new_licence_annotations = IAnnotations(new_licence)
             values = new_licence_annotations.get('urban.bound_inspections') or set([])
             if inspection.UID() not in values:
@@ -44,9 +44,9 @@ def clearBoundLicences(inspection, event):
     catalog = api.portal.get_tool('portal_catalog')
     # unrefer previous licence
     if previous_bound_UIDs:
-        previous_licence = catalog(UID=previous_bound_UIDs)
-        previous_licence = previous_licence and previous_licence[0].getObject()
-        if previous_licence:
+        previous_licences = catalog(UID=previous_bound_UIDs)
+        for previous_licence in previous_licences:
+            previous_licence = previous_licence.getObject()
             previous_licence_annotations = IAnnotations(previous_licence)
             values = previous_licence_annotations.get('urban.bound_inspections') or set([])
             if inspection.UID() in values:
