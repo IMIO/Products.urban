@@ -1159,6 +1159,22 @@ class UrbanDocGenerationEventHelperView(UrbanDocGenerationHelperView):
         state = self._get_wspm_text_field(field_name)
         return state
 
+    def getEvent(self, title=''):
+        """
+          Return a specific title's UrbanEvent
+        """
+        i = 0
+        found = False
+        licence = self.context.aq_parent
+        events = licence.getAllEvents()
+        event = None
+        while i < len(events) and not found:
+            if events[i].Title() == title:
+                found = True
+                event = events[i]
+            i = i + 1
+        return event
+
 
 class UrbanDocGenerationFacetedHelperView(ATDocumentGenerationHelperView):
     def get_work_location_dict(self, index, folder):
