@@ -36,8 +36,6 @@ def setInspectionBoundLicence(inspection, event):
                 new_licence_annotations['urban.bound_inspections'] = values
 
     annotations['urban.inspection_bound_licence'] = new_bound_UIDs
-<<<<<<< HEAD
-=======
 
 
 def clearBoundLicences(inspection, event):
@@ -54,4 +52,3 @@ def clearBoundLicences(inspection, event):
             if inspection.UID() in values:
                 values.remove(inspection.UID())
                 previous_licence_annotations['urban.bound_inspections'] = values
->>>>>>> 01c30e5a5... SUP-22209. Fix references bewteen IB and multiple licences.
