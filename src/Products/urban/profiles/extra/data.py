@@ -4940,7 +4940,7 @@ EventConfigs = {
                 {
                     'id': "cu1-lettre-notaire.odt",
                     'title': "Lettre au notaire (ou demandeur) (octroi)",
-                    'context_variables':[
+                    'context_variables': [
                          {
                             'name': 'publipostage',
                             'value': 'notaires'
@@ -7953,7 +7953,6 @@ EventConfigs = {
             'eventDateLabel': "Date postale",
             'deadLineDelay': 15,
             'eventType': ('Products.urban.interfaces.IMissingPartEvent',),
-            'eventPortalType': 'UrbanEventAcknowledgment',
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
@@ -7980,7 +7979,7 @@ EventConfigs = {
         {
             'id': "decision-conseil-voirie-uniquement",
             'title': "Décision conseil (voirie uniquement)",
-            'activatedFields': ('pmTitle', 'pmObject', 'motivation', 'device', 'deviceEnd',),
+            'activatedFields': ('pmTitle', 'pmDecision', 'pmMotivation',),
             'eventDateLabel': "Date",
             'deadLineDelay': 15,
             'eventPortalType': 'UrbanEventCollege',
@@ -7993,7 +7992,7 @@ EventConfigs = {
         {
             'id': "decision-conseil-voirie-et-alignement",
             'title': "Décision conseil - voirie (et alignement)",
-            'activatedFields': ('pmTitle', 'pmObject', 'motivation', 'device', 'deviceEnd',),
+            'activatedFields': ('pmTitle', 'pmDecision', 'pmMotivation',),
             'deadLineDelay': 15,
             'eventDateLabel': "Date",
             'eventType': ('Products.urban.interfaces.ISimpleCollegeEvent',),
@@ -8010,7 +8009,6 @@ EventConfigs = {
             'eventDateLabel': "Date postale",
             'deadLineDelay': 15,
             'eventType': ('Products.urban.interfaces.IAcknowledgmentEvent',),
-            'eventPortalType': 'UrbanEventAcknowledgment',
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
@@ -8029,7 +8027,7 @@ EventConfigs = {
         {
             'id': "decision-conseil-alignement-et-voirie",
             'title': "Décision conseil - alignement (et voirie)",
-            'activatedFields': ('pmTitle', 'pmObject', 'motivation', 'device', 'deviceEnd',),
+            'activatedFields': ('pmTitle', 'pmDecision', 'pmMotivation',),
             'deadLineDelay': 15,
             'eventDateLabel': "Date",
             'eventType': ('Products.urban.interfaces.ISimpleCollegeEvent',),
@@ -8053,7 +8051,7 @@ EventConfigs = {
         {
             'id': "affichage-decision-voirie-seule-e-bgm",
             'title': "Affichage décision - voirie seule (E-Bgm)",
-            'activatedFields': ('pmObject', 'motivation', 'device', 'deviceEnd', 'deviceContinuation',),
+            'activatedFields': ('pmTitle', 'pmDecision', 'pmMotivation',),
             'deadLineDelay': 15,
             'eventDateLabel': "Date",
             'eventType': ('Products.urban.interfaces.IMayorCollegeEvent',),
@@ -8066,7 +8064,7 @@ EventConfigs = {
         {
             'id': "affichage-decision-alignement-e-bgm",
             'title': "Affichage décision - alignement (E-Bgm)",
-            'activatedFields': ('pmObject', 'motivation', 'device', 'deviceEnd', 'deviceContinuation',),
+            'activatedFields': ('pmTitle', 'pmDecision', 'pmMotivation',),
             'deadLineDelay': 15,
             'eventDateLabel': "Date",
             'isKeyEvent': True,
@@ -8079,7 +8077,7 @@ EventConfigs = {
         {
             'id': "certificat-affichage-decision-voirie-e-bgm",
             'title': "Certificat affichage décision - voirie seule (E-Bgm)",
-            'activatedFields': ('pmObject', 'motivation', 'device',),
+            'activatedFields': ('pmTitle', 'pmDecision', 'pmMotivation',),
             'deadLineDelay': 15,
             'eventDateLabel': "Date",
             'isKeyEvent': True,
@@ -8092,7 +8090,7 @@ EventConfigs = {
         {
             'id': "certificat-affichage-decision-alignement-e-bgm",
             'title': "Certificat affichage décision - alignement (E-Bgm)",
-            'activatedFields': ('pmObject', 'motivation', 'device',),
+            'activatedFields': ('pmTitle', 'pmDecision', 'pmMotivation',),
             'deadLineDelay': 15,
             'eventDateLabel': "Date",
             'isKeyEvent': True,
@@ -8124,7 +8122,7 @@ EventConfigs = {
         {
             'id': "affichage-decision-recours-e-bgm",
             'title': "Affichage décision de recours (E-Bgm)",
-            'activatedFields': ('pmObject', 'motivation', 'device', 'deviceEnd', 'deviceContinuation',),
+            'activatedFields': ('pmTitle', 'recourseDecision', 'pmMotivation',),
             'deadLineDelay': 15,
             'eventDateLabel': "Date",
             'isKeyEvent': True,
