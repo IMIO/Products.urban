@@ -40,6 +40,9 @@ class Renderer(base.Renderer):
     def url(self):
         return api.portal.get().absolute_url()
 
+    @property
+    def collection_link_UID(self):
+        return self.context.collection_all_licences.UID()
 
 class AddForm(base.AddForm):
     form_fields = form.Fields(ICategorySwitchPortlet)
