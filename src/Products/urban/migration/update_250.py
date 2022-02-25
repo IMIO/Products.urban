@@ -331,3 +331,17 @@ def reinstall_registry_and_vocabularies(context):
     portal_setup.runImportStepFromProfile('profile-Products.urban:extra', 'urban-update-vocabularies')
     portal_setup.runImportStepFromProfile('profile-Products.urban:default', 'plone.app.registry')
     logger.info("migration step done!")
+
+def activate_divergence_field(context):
+    """
+    Enable divergence and divergenceDetails as they are now optionnals.
+    """
+    logger = logging.getLogger('urban: activate divergence')
+    logger.info("starting migration step")
+    portal_urban = api.portal.get_tool('portal_urban')
+    for config in portal_urban.objectValues('LicenceConfig'):
+        if 'divergence' in config.listUsedAttributes():
+            to_set = ('divergence', 'divergenceDetails')
+            config.setUsedAttributes(config.getUsedAttributes() + to_set)
+    import ipdb; ipdb.set_trace()
+    logger.info("migration step done!")
