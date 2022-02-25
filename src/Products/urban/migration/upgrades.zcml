@@ -291,4 +291,12 @@
         handler=".update_250.reinstall_registry_and_vocabularies"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Activate divergences field"
+        description="urban upgrade step"
+        source="1107"
+        destination="1108"
+        handler=".update_250.activate_divergence_field"
+        profile="Products.urban:default" />
+
 </configure>
