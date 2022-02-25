@@ -45,6 +45,7 @@ optional_fields = [
     'roadTechnicalAdvice', 'locationTechnicalAdvice', 'additionalLegalConditions',
     'businessOldLocation', 'applicationReasons', 'validityDelay',
     'environmentTechnicalRemarks', 'rubricsDetails', 'referenceFT'
+    'divergences', 'divergenceDetails'
 ]
 
 slave_fields_natura2000 = (
