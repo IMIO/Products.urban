@@ -343,5 +343,4 @@ def activate_divergence_field(context):
         if 'divergence' in config.listUsedAttributes():
             to_set = ('divergence', 'divergenceDetails')
             config.setUsedAttributes(config.getUsedAttributes() + to_set)
-    import ipdb; ipdb.set_trace()
     logger.info("migration step done!")
