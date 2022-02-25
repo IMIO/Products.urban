@@ -350,6 +350,10 @@ EventConfigs = {
                     'title': "Décision (Annexe 12)"
                 },
                 {
+                    'id': "codt_pu_annexe_12_lien_delib.odt",
+                    'title': "Décision lien Delib (Annexe 12)"
+                },
+                {
                     'id': "codt_pu_decision_octroi_refus_lettre_architecte.odt",
                     'title': "Décision lettre à l'architecte",
                     'context_variables': [
@@ -888,8 +892,8 @@ EventConfigs = {
             'keyDates': ('receiptDate', 'eventDate',),
             'podTemplates': (
                 {
-                    'id': "codt_ln_annexe16.odt",
-                    'title': "Lettre de notaire - Annexe 16",
+                    'id': "codt_ln_infos-notariales.odt",
+                    'title': "Lettre de notaire",
                     'context_variables': [
                         {
                             'name': 'publipostage',
