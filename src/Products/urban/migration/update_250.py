@@ -340,7 +340,8 @@ def activate_divergence_field(context):
     logger.info("starting migration step")
     portal_urban = api.portal.get_tool('portal_urban')
     for config in portal_urban.objectValues('LicenceConfig'):
-        if 'divergence' in config.listUsedAttributes():
+        if 'divergence' in config.listUsedAttributes() and
+           'divergence' not in config.getUsedAttributes():
             to_set = ('divergence', 'divergenceDetails')
             config.setUsedAttributes(config.getUsedAttributes() + to_set)
     logger.info("migration step done!")
