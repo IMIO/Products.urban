@@ -25,13 +25,13 @@ class StateRolesMapping(LocalRoleAdapter):
             if IUniqueLicence.providedBy(licence) or ICODT_UniqueLicence.providedBy(licence):
                 if IEnvironmentOnlyEvent.providedBy(event):
                     return 'environment_only'
+                elif IUrbanAndEnvironmentEvent.providedBy(event):
+                    return 'urban_and_environment'
                 elif IUrbanOrEnvironmentEvent.providedBy(event):
                     if 'urb' in licence.getFolderTendency():
                         return 'urban_only'
                     elif 'env' in licence.getFolderTendency():
                         return 'environment_only'
-                elif IUrbanAndEnvironmentEvent.providedBy(event):
-                    return 'urban_and_environment'
                 else:
                     return 'urban_only'
             else:
