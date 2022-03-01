@@ -299,4 +299,12 @@
         handler=".update_250.activate_divergence_field"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Check corrupted models"
+        description="urban upgrade step"
+        source="1108"
+        destination="1109"
+        handler=".check_corrupted_templates.check_corrupted_templates"
+        profile="Products.urban:default" />
+
 </configure>
