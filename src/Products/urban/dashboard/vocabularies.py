@@ -78,7 +78,7 @@ class TicketFollowupVocabulary(object):
     def __call__(self, context):
         voc = UrbanVocabulary('urbaneventtypes', vocType="FollowUpEventType", value_to_use='title')
         config_voc = voc.getDisplayList(licence_type='Ticket')
-        vocabulary_terms = [SimpleTerm(k, k, config_voc.getValue(k)) for k, v in config_voc.keys()]
+        vocabulary_terms = [SimpleTerm(k, k, config_voc.getValue(k)) for k in config_voc.keys()]
         vocabulary = SimpleVocabulary(sorted(vocabulary_terms, key=lambda term: term.title))
         return vocabulary
 
