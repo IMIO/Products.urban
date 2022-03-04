@@ -13,7 +13,7 @@ class GigService(MySQLService):
     """
     def __init__(self, dialect='mysql+pymysql', user='GIG_TRANS', host='', db_name='sigped', password='', timeout=''):
         password = password or user
-        super(GigService, self).__init__(dialect, user, host, db_name, password=password, timeout)
+        super(GigService, self).__init__(dialect, user, host, db_name, password, timeout)
 
 
 class GigSession(MySQLSession):
