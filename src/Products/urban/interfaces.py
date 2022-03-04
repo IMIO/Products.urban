@@ -80,12 +80,6 @@ class IUrbanEvent(Interface):
     """Marker interface for .UrbanEvent.UrbanEvent
     """
 
-
-class IUrbanEventInspectionReport(Interface):
-    """Marker interface for UrbanEventInspectionReport
-    """
-
-
 class IUrbanEventType(Interface):
     """Marker interface for .UrbanEventType.UrbanEventType
     """
@@ -606,7 +600,7 @@ class IPatrimonyMeetingEvent(Interface):
     __doc__ = _("""IPatrimonyMeetingEvent type marker interface""")
 
 
-class IInspectionReportEvent(IUrbanEventInspectionReport):
+class IInspectionReportEvent(Interface):
     __doc__ = _("""IInspectionReportEvent type marker interface""")
 
 

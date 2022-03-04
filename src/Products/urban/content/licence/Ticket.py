@@ -314,12 +314,12 @@ class Ticket(BaseFolder, GenericLicence, BrowserDefaultMixin):
     security.declarePublic('getLastReportEvent')
 
     def getLastReportEvent(self):
-        return self.getLastEvent(interfaces.IUrbanEventInspectionReport)
+        return self.getLastEvent(interfaces.IInspectionReportEvent)
 
     security.declarePublic('getAllReportEvents')
 
     def getAllReportEvents(self):
-        return self.getAllEvents(interfaces.IUrbanEventInspectionReport)
+        return self.getAllEvents(interfaces.IInspectionReportEvent)
 
     security.declarePublic('getCurrentReportEvent')
 
