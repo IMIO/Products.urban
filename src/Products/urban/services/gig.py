@@ -11,8 +11,9 @@ class GigService(MySQLService):
     """
     Service specific to gig database, contain queries
     """
-    def __init__(self, dialect='mysql+pymysql', user='urb_xxx', host='', db_name='urb_xxx', password='', timeout=''):
-        super(GigService, self).__init__(dialect, user, host, db_name, password, timeout)
+    def __init__(self, dialect='mysql+pymysql', user='GIG_TRANS', host='', db_name='sigped', password='', timeout=''):
+        password = password or user
+        super(GigService, self).__init__(dialect, user, host, db_name, password=password, timeout)
 
 
 class GigSession(MySQLSession):
