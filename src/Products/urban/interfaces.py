@@ -606,7 +606,7 @@ class IPatrimonyMeetingEvent(Interface):
     __doc__ = _("""IPatrimonyMeetingEvent type marker interface""")
 
 
-class IInspectionReportEvent(Interface):
+class IInspectionReportEvent(IUrbanEventInspectionReport):
     __doc__ = _("""IInspectionReportEvent type marker interface""")
 
 
