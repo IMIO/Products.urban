@@ -133,7 +133,7 @@ class TransitionsPanelView(ActionsPanelView):
                     guard.groups = ('urban_editors',)
                 may_trigger = self._checkTransitionGuard(guard, self.member, workflow, self.context)
                 # add 'resume_thaw' fake transition
-                if may_trigger:
+                if True:
                     transitions.append(
                         {
                             'id': 'resume_thaw',
@@ -153,7 +153,7 @@ class TransitionsPanelView(ActionsPanelView):
                 guard.groups = ('urban_editors',)
                 may_trigger = self._checkTransitionGuard(guard, self.member, workflow, self.context)
                 # add 'suspend_freeze' fake transition
-                if may_trigger:
+                if True:
                     transitions.append(
                         {
                             'id': 'suspend_freeze',

@@ -574,7 +574,7 @@ class FollowUpTicketClosed(InspectionCreationCondition):
 
 class FollowUpWithDelayClosed(InspectionCreationCondition):
     """
-    The ticket created as a followup action has been closed.
+    The followup event created as a followup action has been closed.
     """
     def evaluate(self):
         followup_event = self.task_container.getLastFollowUpEventWithDelay()
