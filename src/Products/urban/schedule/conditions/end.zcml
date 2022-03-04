@@ -511,4 +511,37 @@
         name="urban.schedule.condition.ticket_redacted"
     />
 
+    <!-- Ticket conditions -->
+    <adapter
+        for="Products.urban.interfaces.ITicket
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.AllInspectionFollowupsAreDone"
+        name="urban.schedule.condition.all_followups_done"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.ITicket
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.AllInspectionFollowupsAreWritten"
+        name="urban.schedule.condition.all_followups_written"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.ITicket
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.NoInspectionFollowupsToValidate"
+        name="urban.schedule.condition.followups_validated"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.ITicket
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.NoInspectionFollowupsToSend"
+        name="urban.schedule.condition.followups_done"
+    />
+
 </configure>
