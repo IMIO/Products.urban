@@ -797,7 +797,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         offday_periods = api.portal.get_registry_record(
             'Products.urban.browser.offdays_settings.IOffDays.periods'
         )
-        periods = [period for period in offday_periods if period['period_type'] in types]
+        periods = [period for period in offday_periods or [] if period['period_type'] in types]
         return periods
 
     def get_week_offdays(self, as_mask=False):
