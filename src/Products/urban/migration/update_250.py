@@ -345,3 +345,15 @@ def activate_divergence_field(context):
             to_set = ('divergence', 'divergenceDetails')
             config.setUsedAttributes(config.getUsedAttributes() + to_set)
     logger.info("migration step done!")
+
+def remove_icons_from_transitions(context):
+    """
+    launch import step to remove transitions icons and show them in letters
+    """
+    logger = logging.getLogger('urban: remove icons from transitions')
+    logger.info("starting upgrade steps")
+    setup_tool = api.portal.get_tool('portal_setup')
+    setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'update-workflow-rolemap')
+    workflow_tool = api.portal.get_tool('portal_workflow')
+    workflow_tool.updateRoleMappings()
+    logger.info("upgrade done!")
