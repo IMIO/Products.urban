@@ -307,4 +307,14 @@
         handler=".check_corrupted_templates.check_corrupted_templates"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="remove icons from transitions"
+        description="urban upgrade step"
+        source="1109"
+        destination="1110"
+        handler=".update_250.remove_icons_from_transitions"
+        profile="Products.urban:default" />
+
+
+
 </configure>
