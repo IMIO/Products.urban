@@ -101,6 +101,8 @@
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="CorporationPlaintiff"
          meta_type="Factory-based Type Information with dynamic views"/>
+ <object name="CorporationTenant"
+         meta_type="Factory-based Type Information with dynamic views"/>
  <object name="Claimant"
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="Plaintiff"
