@@ -1,0 +1,46 @@
+  1 <?xml version="1.0"?>
+  2 <object name="CorporationTenant"
+  3         meta_type="Factory-based Type Information with dynamic views"
+  4         xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+  5         i18n:domain="plone">
+  6  
+  7  <property name="title" i18n:translate="">CorporationTenant</property>
+  8  <property name="description" i18n:translate=""></property>
+  9  <property name="icon_expr">string:${portal_url}/Contact.png</property>
+ 10  <property name="content_meta_type">Corporation</property>
+ 11  <property name="product">urban</property>
+ 12  <property name="factory">addCorporation</property>
+ 13  <property name="immediate_view">contactview</property>
+ 14  <property name="global_allow">True</property>
+ 15  <property name="filter_content_types">False</property>
+ 16  <property name="allowed_content_types">
+ 17  </property>
+ 18  <property name="allow_discussion">False</property>
+ 19  <property name="default_view">contactview</property>
+ 20  <property name="view_methods">
+ 21   <element value="contactview"/>
+ 22  </property>
+ 23  <property name="default_view_fallback">False</property>
+ 24  <alias from="(Default)" to="(dynamic view)"/>
+ 25  <alias from="index.html" to="(dynamic view)"/>
+ 26  <alias from="view" to="contactview"/>
+ 27  <alias from="edit" to="base_edit"/>
+ 28  <action title="View"
+ 29          action_id="view"
+ 30          category="object"
+ 31          condition_expr=""
+ 32          url_expr="string:${object_url}/view"
+ 33          visible="True">
+ 34   <permission value="View"/>
+ 35  </action>
+ 36  <action title="Edit"
+ 37          action_id="edit"
+ 38          category="object"
+ 39          condition_expr="not:object/@@plone_lock_info/is_locked_for_current_user"
+ 40          url_expr="string:${object_url}/edit"
+ 41          visible="True">
+ 42   <permission value="Modify portal content"/>
+ 43  </action>
+ 44 <!-- ##code-section FOOT -->
+ 45 <!-- ##/code-section FOOT -->
+ 46 </object>
