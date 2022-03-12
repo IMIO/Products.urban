@@ -17,8 +17,9 @@ from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 from Products.urban import interfaces
-from Products.urban.content.licence.CODT_BaseBuildLicence import CODT_BaseBuildLicence
+from Products.urban.content.licence.CODT_BuildLicence import CODT_BuildLicence
 from Products.urban.content.licence.CODT_BuildLicence import finalizeSchema
+from Products.urban.content.licence.CODT_BuildLicence import finalizeSpecificSchema
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.urban import UrbanMessage as _
@@ -82,7 +83,7 @@ setOptionalAttributes(schema, optional_fields)
 ##/code-section after-local-schema
 
 CODT_UrbanCertificateTwo_schema = BaseFolderSchema.copy() + \
-    getattr(CODT_BaseBuildLicence, 'schema', Schema(())).copy() + \
+    getattr(CODT_BuildLicence, 'schema', Schema(())).copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
@@ -90,7 +91,7 @@ CODT_UrbanCertificateTwo_schema = BaseFolderSchema.copy() + \
 ##/code-section after-schema
 
 
-class CODT_UrbanCertificateTwo(BaseFolder, CODT_BaseBuildLicence, BrowserDefaultMixin):
+class CODT_UrbanCertificateTwo(BaseFolder, CODT_BuildLicence, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()
@@ -127,6 +128,7 @@ registerType(CODT_UrbanCertificateTwo, PROJECTNAME)
 
 #finalizeSchema comes from BuildLicence to be sure to have the same changes reflected
 finalizeSchema(CODT_UrbanCertificateTwo_schema)
+finalizeSpecificSchema(CODT_UrbanCertificateTwo_schema)
 
 
 def cu2FinalizeSchema(schema):
