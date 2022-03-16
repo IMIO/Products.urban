@@ -307,4 +307,13 @@
         handler=".check_corrupted_templates.check_corrupted_templates"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Add and activate corporation tenant"
+        description="urban upgrade step"
+        source="1110"
+        destination="1111"
+        handler=".update_250.add_and_active_corporation_tenant"
+        profile="Products.urban:default" />
+
+
 </configure>
