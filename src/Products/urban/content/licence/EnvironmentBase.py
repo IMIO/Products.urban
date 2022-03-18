@@ -45,6 +45,7 @@ optional_fields = [
     'roadTechnicalAdvice', 'locationTechnicalAdvice', 'additionalLegalConditions',
     'businessOldLocation', 'applicationReasons', 'validityDelay',
     'environmentTechnicalRemarks', 'rubricsDetails', 'referenceFT'
+    'divergences', 'divergenceDetails'
 ]
 
 slave_fields_natura2000 = (
@@ -153,7 +154,7 @@ schema = Schema((
         widget=DataGridWidget(
             columns={'number': Column("Number"), 'street': ReferenceColumn("Street", surf_site=False, object_provides=('Products.urban.interfaces.IStreet', 'Products.urban.interfaces.ILocality',))},
             helper_js=('datagridwidget.js', 'datagridautocomplete.js'),
-            label=_('urban_label_businessOldLocation', default='Businessoldlocation'),
+            label=_('urban_label_businessOldLocation', default='Old business location'),
         ),
         allow_oddeven=True,
         columns=('number', 'street'),
@@ -310,7 +311,7 @@ for field in EnvironmentBase_schema.filterFields(isMetadata=False):
 
 # change translation of some fields
 EnvironmentBase_schema['referenceDGATLP'].widget.label = _('urban_label_referenceDGO3')
-EnvironmentBase_schema['workLocations'].widget.label = _('urban_label_situation')
+EnvironmentBase_schema['workLocations'].widget.label = _('urban_label_situation', default='Situation')
 
 ##/code-section after-schema
 

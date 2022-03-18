@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from imio.schedule.content.delay import BaseCalculationDelay
+from imio.schedule.content.delay import DefaultFreezeDuration
 
 from plone import api
 
@@ -52,18 +53,17 @@ class AnnoncedDelay(UrbanBaseDelay):
     Return the selected annonced delay of the procedure.
     """
 
-    def calculate_delay(self):
+    def calculate_delay(self, with_modified_blueprints=True):
         base_delay = super(AnnoncedDelay, self).calculate_delay()
         licence = self.task_container
         delay = licence.getAnnoncedDelay() or 0
-        delay = delay == 'inconnu' and 0 or delay
-        if licence.getHasModifiedBlueprints():
+        if hasattr(licence, 'decisional_delay'):
+            delay = licence.getDecisional_delay()
+        if with_modified_blueprints and licence.getHasModifiedBlueprints():
             delay = licence.getDelayAfterModifiedBlueprints() or 0
         if delay and delay.endswith('j'):
             delay = int(delay[:-1])
             delay += self.inquiry_suspension_delay()
-        if type(delay) in [str, unicode]:
-            delay = 0
         return delay + base_delay
 
     def inquiry_suspension_delay(self):
@@ -94,10 +94,10 @@ class UniqueLicenceAnnoncedDelay(AnnoncedDelay):
     or -30 if class 1.
     """
 
-    def calculate_delay(self):
+    def calculate_delay(self, with_modified_blueprints=True):
         licence = self.task_container
-        delay = super(AnnoncedDelay, self).calculate_delay()
-        if type(delay) is str and delay.endswith('j'):
+        delay = super(UniqueLicenceAnnoncedDelay, self).calculate_delay(with_modified_blueprints)
+        if type(delay) in [str, unicode] and delay.endswith('j'):
             delay = int(delay[:-1])
         if 'class_1' in licence.getProcedureChoice():
             delay = delay - 30
@@ -114,9 +114,9 @@ class UniqueLicenceNotificationDelay(AnnoncedDelay):
     has been received, else return licence annonced delay.
     """
 
-    def calculate_delay(self):
+    def calculate_delay(self, with_modified_blueprints=True):
         licence = self.task_container
-        delay = super(AnnoncedDelay, self).calculate_delay()
+        delay = super(UniqueLicenceNotificationDelay, self).calculate_delay(with_modified_blueprints)
         if licence.getLastDecisionProjectFromSPW():
             if 'class_1' in licence.getProcedureChoice():
                 delay = 30
@@ -124,13 +124,10 @@ class UniqueLicenceNotificationDelay(AnnoncedDelay):
                 delay = 20
         else:
             delay = self.task_container.getAnnoncedDelay()
-            delay = delay == 'inconnu' and 0 or delay
-            if delay.endswith('j'):
+            if type(delay) in [str, unicode] and delay.endswith('j'):
                 delay = int(delay[:-1])
-            else:
+            elif not delay:
                 delay = 0
-        if type(delay) in [str, unicode]:
-            delay = 0
         delay += self.inquiry_suspension_delay()
         return delay
 
@@ -146,3 +143,40 @@ class InspectionFollowUpDelay(AnnoncedDelay):
         report = followup.getLinkedReport()
         delay = report.getDelay() and int(report.getDelay()) or 0
         return delay
+
+
+class CouncildecisionDelay(UrbanBaseDelay):
+    """
+    Return the selected council decision delay of the RoadDecree.
+    """
+
+    def calculate_delay(self, with_modified_blueprints=True):
+        base_delay = super(AnnoncedDelay, self).calculate_delay()
+        licence = self.task_container
+        delay = licence.getDecisional_delay() or 0
+        if delay and delay.endswith('j'):
+            delay = int(delay[:-1])
+        return delay + base_delay
+
+
+class UrbanFreezeDuration(DefaultFreezeDuration):
+    """
+    """
+
+    def __init__(self, task_container, task):
+        self.container = task_container
+        self.task = task
+
+    @property
+    def freeze_duration(self):
+        licence = self.container
+        new_freeze_duration = 0
+        for suspension_event in licence.getAllSuspensionEvents():
+            start = suspension_event.getEventDate()
+            end = suspension_event.getSuspensionEndDate()
+            if start and end:
+                new_freeze_duration += int(end - start)
+
+        if new_freeze_duration:
+            return new_freeze_duration
+        return super(UrbanFreezeDuration, self).freeze_duration

@@ -210,8 +210,16 @@
               handler=".explosive_possessions.update_reference" />
 
   <subscriber for="..interfaces.IRoadDecree
+                   Products.Archetypes.interfaces.IObjectInitializedEvent"
+              handler=".roaddecreeEvents.copy_bound_licence_inquiry_fields" />
+
+  <subscriber for="..interfaces.IRoadDecree
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-              handler=".road_decree.update_reference" />
+              handler=".roaddecreeEvents.setRoadDecreeBoundLicence" />
+
+  <subscriber for="..interfaces.IRoadDecree
+                   zope.container.interfaces.IObjectRemovedEvent"
+              handler=".roaddecreeEvents.clearBoundLicences" />
 
   <subscriber for="..interfaces.IInspection
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"

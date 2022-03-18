@@ -17,7 +17,9 @@
                                                                   member context/@@plone_portal_state/member;">
 
                     <div class="action-bar">
-                    <metal:listing use-macro="here/@@globalmacros/goBackToMacro" />
+                    <span class=".action-bar-text">        
+                        <metal:listing use-macro="here/@@globalmacros/goBackToMacro" />
+                    </span>        
                         <div class="action-bar-text" i18n:domain="plone"
                           tal:define="state view/get_state">
                              <span i18n:translate="">State</span>:

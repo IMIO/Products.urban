@@ -195,6 +195,12 @@ msgstr ""
 msgid "UrbanTemplate"
 msgstr ""
 
+msgid "suspend_freeze"
+msgstr ""
+
+msgid "resume_thaw"
+msgstr ""
+
 #status messages...
 msgid "db_connection_successfull"
 msgstr ""
