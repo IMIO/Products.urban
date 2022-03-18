@@ -278,6 +278,7 @@ def fix_PODTemplates_empty_filename(context):
             template.odt_file.contentType = 'application/vnd.oasis.opendocument.text'
     logger.info("upgrade done!")
 
+
 def migrate_notaryletter_specificfeatures_texts(context):
     """
     """
@@ -302,6 +303,7 @@ def migrate_notaryletter_specificfeatures_texts(context):
                 value.reindexObject()
     logger.info("upgrade done!")
 
+
 def migrate_add_tax_other_option(context):
     """
     Add 'other' tax vocabulary value for all licence type config
@@ -315,4 +317,31 @@ def migrate_add_tax_other_option(context):
         if "other" not in licence_config.tax:
             licence_config.tax.invokeFactory('UrbanVocabularyTerm', id='other', title="Autre")
 
+    logger.info("migration step done!")
+
+
+def reinstall_registry_and_vocabularies(context):
+    """
+    Add collegeopinions vocabulary for all licence type config
+    Reinstall plone registry with GIG coring settings.
+    """
+    logger = logging.getLogger('urban: reinstall_registry_and_vocabularies')
+    logger.info("starting migration step")
+    portal_setup = api.portal.get_tool('portal_setup')
+    portal_setup.runImportStepFromProfile('profile-Products.urban:extra', 'urban-update-vocabularies')
+    portal_setup.runImportStepFromProfile('profile-Products.urban:default', 'plone.app.registry')
+    logger.info("migration step done!")
+
+def activate_divergence_field(context):
+    """
+    Enable divergence and divergenceDetails as they are now optionnals.
+    """
+    logger = logging.getLogger('urban: activate divergence')
+    logger.info("starting migration step")
+    portal_urban = api.portal.get_tool('portal_urban')
+    for config in portal_urban.objectValues('LicenceConfig'):
+        if 'divergence' in config.listUsedAttributes() and \
+           'divergence' not in config.getUsedAttributes():
+            to_set = ('divergence', 'divergenceDetails')
+            config.setUsedAttributes(config.getUsedAttributes() + to_set)
     logger.info("migration step done!")

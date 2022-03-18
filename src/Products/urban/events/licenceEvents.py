@@ -44,7 +44,10 @@ def _setDefaultTextValues(licence):
 
 
 def _setDefaultFolderManagers(licence):
-    licence.setFoldermanagers(getCurrentFolderManager())
+    if licence.getLicenceConfig().getDefault_foldermanager():
+        licence.setFoldermanagers(licence.getLicenceConfig().getDefault_foldermanager())
+    else:
+        licence.setFoldermanagers(getCurrentFolderManager())
 
 
 def _setDefaultReference(licence):

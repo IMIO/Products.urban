@@ -258,7 +258,7 @@ schema = Schema((
             label=_('urban_label_regional_guide', default='Regional_guide'),
         ),
         schemata='urban_location',
-        vocabulary=UrbanVocabulary('regional_guide', inUrbanConfig=False, with_empty_value=True),
+        vocabulary=UrbanVocabulary('regional_guide', inUrbanConfig=False, with_empty_value=False),
         default_method='getDefaultValue',
     ),
     TextField(

@@ -400,7 +400,7 @@ class ITicket(IGenericLicence):
     """
 
 
-class IRoadDecree(Interface):
+class IRoadDecree(ICODT_BaseBuildLicence):
     """
     Marker interface for road degree
     """
@@ -522,6 +522,10 @@ class ITheTicketEvent(Interface):
     __doc__ = _("""ITheTicket type marker interface""")
 
 
+class ITechnicalAnalysis(Interface):
+    __doc__ = _("""ITechnicalAnalysis type marker interface""")
+
+
 class ITheLicenceCollegeEvent(Interface):
     __doc__ = _("""ITheLicence type marker interface""")
 
@@ -614,6 +618,10 @@ class IProprietaryChangeEvent(Interface):
     __doc__ = _("""IProprietaryChangeEvent type marker interface""")
 
 
+class ISuspensionEvent(Interface):
+    __doc__ = _("""ISuspensionEvent type marker interface""")
+
+
 class IUrbanBase(Interface):
     """Marker interface for .Base.UrbanBase
     """
@@ -652,7 +660,6 @@ class IContactFolder(Interface):
 class IUrbanDoc(Interface):
     """Marker interface for generated document.
     """
-
 
 # [DX] TO DELETE > 2.5 [DX]
 class ILicencePortionOut(Interface):

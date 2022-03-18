@@ -275,13 +275,36 @@
         handler=".update_250.migrate_notaryletter_specificfeatures_texts"
         profile="Products.urban:default" />
 
-
     <gs:upgradeStep
         title="Add Tax vocabulary 'Other' option"
         description="urban upgrade step"
         source="1105"
         destination="1106"
         handler=".update_250.migrate_add_tax_other_option"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Install GIG coring registry settings"
+        description="urban upgrade step"
+        source="1106"
+        destination="1107"
+        handler=".update_250.reinstall_registry_and_vocabularies"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Activate divergences field"
+        description="urban upgrade step"
+        source="1107"
+        destination="1108"
+        handler=".update_250.activate_divergence_field"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Check corrupted models"
+        description="urban upgrade step"
+        source="1108"
+        destination="1109"
+        handler=".check_corrupted_templates.check_corrupted_templates"
         profile="Products.urban:default" />
 
 </configure>

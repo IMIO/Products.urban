@@ -43,7 +43,7 @@ schema = Schema((
             force_close_on_insert=True,
             startup_directory='urban/notaries',
             restrict_browsing_to_startup_directory=True,
-            label=_('urban_label_notaryContact', default='Notarycontact'),
+            label=_('urban_label_notaryContact', default='Notary(ies)'),
         ),
         required=False,
         schemata='urban_description',

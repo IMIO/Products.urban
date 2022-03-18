@@ -25,7 +25,7 @@
 
 <body>
 
-<div metal:fill-slot="main"
+<div metal:fill-slot="main" i18n:domain="urban"
      tal:define="licence_types python: request.get('licence_types', view.getLicenceTypes());
                  licence_states python: request.get('licence_states', ['accepted']);
                  stats_arg request/stats_arg|nothing;

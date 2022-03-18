@@ -54,7 +54,7 @@ schema = Schema((
             base_query='geometriciansBaseQuery',
             wild_card_search=True,
             show_results_without_query=True,
-            label=_('urban_label_geometricians', default='Geometricians'),
+            label=_('urban_label_geometricians', default='Geometrician(s)'),
         ),
         required=True,
         schemata='urban_description',
