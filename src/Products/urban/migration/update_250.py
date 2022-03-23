@@ -345,3 +345,14 @@ def activate_divergence_field(context):
             to_set = ('divergence', 'divergenceDetails')
             config.setUsedAttributes(config.getUsedAttributes() + to_set)
     logger.info("migration step done!")
+
+def add_and_active_corporation_tenant(context):
+    """
+    add corporation tenant content type and activate it
+    """
+    logger = logging.getLogger('urban: add and activate corporation tenant')
+    logger.info("starting upgrade step")
+    setup_tool = api.portal.get_tool('portal_setup')
+    setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'typeinfo')
+    setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'workflow')
+    logger.info("upgrade step done!")
