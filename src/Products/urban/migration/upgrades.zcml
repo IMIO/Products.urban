@@ -307,4 +307,14 @@
         handler=".check_corrupted_templates.check_corrupted_templates"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="add documentation link to user portal_actions"
+        description="urban upgrade step"
+        source="1112"
+        destination="1113"
+        handler=".update_250.addDocumentationLinkToUserPortalAction"
+        profile="Products.urban:default" />
+
+
+
 </configure>
