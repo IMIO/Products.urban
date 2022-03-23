@@ -346,6 +346,16 @@ def activate_divergence_field(context):
             config.setUsedAttributes(config.getUsedAttributes() + to_set)
     logger.info("migration step done!")
 
+def remove_icons_from_transitions(context):
+    """
+    launch import step to remove transitions icons and show them in letters
+    """
+    logger = logging.getLogger('urban: remove icons from transitions')
+    logger.info("starting upgrade steps")
+    setup_tool = api.portal.get_tool('portal_setup')
+    setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'update-workflow-rolemap')
+    logger.info("upgrade done!")
+
 def add_and_active_corporation_tenant(context):
     """
     add corporation tenant content type and activate it
