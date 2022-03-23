@@ -345,13 +345,3 @@ def activate_divergence_field(context):
             to_set = ('divergence', 'divergenceDetails')
             config.setUsedAttributes(config.getUsedAttributes() + to_set)
     logger.info("migration step done!")
-
-def add_ITheLicenceEvent_eventType_to_transmis_decision_fd_codt(context):
-    """
-    add ITheLicenceEvent eventType to transmis-decision-fd-codt event and remove the eventtype from transmis-decision-college
-    """
-    logger = logging.getLogger('urban: add ITheLicenceEvent eventType to transmis-decision-fd-codt event')
-    logger.info("starting upgrade step")
-    setup_tool = api.portal.get_tool('portal_setup')
-    setup_tool.runImportStepFromProfile('profile-Products.urban:extra', 'urban-updateAllUrbanTemplates')
-    logger.info("upgrade step done!")
