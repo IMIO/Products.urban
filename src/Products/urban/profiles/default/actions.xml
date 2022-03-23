@@ -17,6 +17,20 @@
    <property name="visible">True</property>
   </object>
  </object>
+ <object name="Documentation" meta_type="CMF Action" insert-before="logout">
+   <property name="title">Documentation</property>
+   <property name="description"></property>
+   <property
+      name="url_expr">string:https://docs.imio.be/imio-doc/ia.urban/</property>
+   <property
+      name="link_target">https://docs.imio.be/imio-doc/ia.urban/</property>
+   <property name="icon_expr"></property>
+   <property name="available_expr"></property>
+   <property name="permissions">
+    <element value="View"/>
+   </property>
+   <property name="visible">True</property>
+ </object>
  <object name="object" meta_type="CMF Action Category">
   <property name="title"></property>
   <object name="urbanmap" meta_type="CMF Action" i18n:domain="urban">
