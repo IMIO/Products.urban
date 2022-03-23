@@ -353,5 +353,5 @@ def addDocumentationLinkToUserPortalAction(context):
     logger = logging.getLogger('urban: add documentation link to user portal_actions')
     logger.info("starting upgrade steps")
     setup_tool = api.portal.get_tool('portal_setup')
-    setup_tool.runImportStepFromProfile('profile-Products.urban:default', 'Products.CMFCore.exportimport.actions.importActionProviders')
+    setup_tool.runImportStepFromProfile('profile-Products.urban:default', 'actions')
     logger.info("upgrade step done!")
