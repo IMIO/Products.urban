@@ -346,12 +346,13 @@ def activate_divergence_field(context):
             config.setUsedAttributes(config.getUsedAttributes() + to_set)
     logger.info("migration step done!")
 
-def addDocumentationLinkToUserPortalAction(context):
+def addDocumentationLinkToUserPortalActionAndHideViewlet(context):
     """
-    add documentation link to useractions
+    add documentation link to useractions and hide contact viewlet in footer
     """
-    logger = logging.getLogger('urban: add documentation link to user portal_actions')
+    logger = logging.getLogger('urban: add documentation link to user portal_actions and hide contact viewlet in footer')
     logger.info("starting upgrade steps")
     setup_tool = api.portal.get_tool('portal_setup')
     setup_tool.runImportStepFromProfile('profile-Products.urban:default', 'actions')
+    setup_tool.runImportStepFromProfile('profile-Products.urban:default', 'viewlets')
     logger.info("upgrade step done!")
