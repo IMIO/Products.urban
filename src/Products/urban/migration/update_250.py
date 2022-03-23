@@ -345,3 +345,13 @@ def activate_divergence_field(context):
             to_set = ('divergence', 'divergenceDetails')
             config.setUsedAttributes(config.getUsedAttributes() + to_set)
     logger.info("migration step done!")
+
+def addDocumentationLinkToUserPortalAction(context):
+    """
+    add documentation link to useractions
+    """
+    logger = logging.getLogger('urban: add documentation link to user portal_actions')
+    logger.info("starting upgrade steps")
+    setup_tool = api.portal.get_tool('portal_setup')
+    setup_tool.runImportStepFromProfile('profile-Products.urban:default', 'Products.CMFCore.exportimport.actions.importActionProviders')
+    logger.info("upgrade step done!")
