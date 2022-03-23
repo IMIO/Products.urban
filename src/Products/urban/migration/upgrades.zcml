@@ -307,12 +307,4 @@
         handler=".check_corrupted_templates.check_corrupted_templates"
         profile="Products.urban:default" />
 
-    <gs:upgradeStep
-        title="add ITheLicenceEvent eventType to transmis-decision-fd-codt event"
-        description="urban upgrade step"
-        source="1111"
-        destination="1112"
-        handler=".update_250.add_ITheLicenceEvent_eventType_to_transmis_decision_fd_codt"
-        profile="Products.urban:default" />
-
 </configure>
