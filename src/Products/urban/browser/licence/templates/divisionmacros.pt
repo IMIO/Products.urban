@@ -5,6 +5,9 @@
 
             <metal:proprietaries fill-slot="applicant_slot">
                 <metal:proprietaries_macro use-macro="here/@@licencemacros/urbanProprietariesMacro" />
+                <tal:show_disabled_proprietaries condition= "here/get_proprietaries_history">
+                    <metal:disabled_proprietaries_and_corporations_macro use-macro="here/@@licencemacros/urbanProprietariesHistoricAndCorporationsMacro" />
+                </tal:show_disabled_proprietaries>
             </metal:proprietaries>
 
             <metal:representatives fill-slot="representatives">

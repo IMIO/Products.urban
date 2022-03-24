@@ -786,7 +786,7 @@ EventConfigs = {
             'podTemplates': (
                 {'id': "codt_pp_deliberation_college_ecart_derogation.odt", 'title': "Délibération du collège communal"},
             ),
-            'eventType': ('Products.urban.interfaces.ITheLicenceEvent', 'Products.urban.interfaces.ILicenceNotificationEvent',),
+            'eventType': ('Products.urban.interfaces.ILicenceNotificationEvent',),
         },
         {
             'id': "transmis-decision-fd-codt",
@@ -813,7 +813,7 @@ EventConfigs = {
                 {'id': "codt_pp_talons_debut_fin_travaux.odt", 'title': "Talons à découper"},
                 {'id': "codt_pp_implantation_cautionnement_lettre_demandeur.odt", 'title': "Courrier au demandeur - suivi cautionnement et implantation"},
             ),
-            'eventType': ('Products.urban.interfaces.IWalloonRegionDecisionEvent',),
+            'eventType': ('Products.urban.interfaces.IWalloonRegionDecisionEvent', 'Products.urban.interfaces.ITheLicenceEvent',),
         },
         {
             'id': "config-opinion-request",
