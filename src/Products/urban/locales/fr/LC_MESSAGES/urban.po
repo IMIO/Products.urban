@@ -185,7 +185,7 @@ msgstr ""
 
 #: ../browser/templates/coring_update.pt:7
 msgid "Coring"
-msgstr "Carottage"
+msgstr "Lien GIG"
 
 #: ../browser/offdays_settings.py:54
 msgid "Date"
