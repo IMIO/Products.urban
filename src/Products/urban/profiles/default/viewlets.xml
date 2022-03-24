@@ -13,4 +13,7 @@
         <viewlet name="urban.viewlets.urbanfavicon"
                  insert-before="*" />
     </order>
+    <hidden manager="plone.portalfooter" skinname="urbanskin">
+        <viewlet name="plone.site_actions"/>
+    </hidden>
 </object>
