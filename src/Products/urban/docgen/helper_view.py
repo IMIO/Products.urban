@@ -586,6 +586,8 @@ class UrbanDocGenerationLicenceHelperView(UrbanDocGenerationHelperView):
             if delivered and (delivered.getDecisionDate() or delivered.getEventDate()) > limit_date:
                 if delivered.getDecision() == 'favorable':
                     licences.append(licence)
+                elif api.content.get_state(licence) in ['accepted', 'ended']:
+                    licences.append(licence)
             elif not delivered and api.content.get_state(licence) in ['accepted', 'ended']:
                 licences.append(licence)
         return licences
