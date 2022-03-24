@@ -839,23 +839,27 @@ msgstr "Vous ne pouvez pas créer cet événement"
 msgid "add_a_claimant"
 msgstr "Ajouter un réclamant"
 
-#: ../browser/licence/templates/licencemacros.pt:141
+#: ../browser/licence/templates/licencemacros.pt:149
 msgid "add_a_corporation"
 msgstr "Ajouter un demandeur (p. morale)"
 
-#: ../browser/licence/templates/licencemacros.pt:177
+#: ../browser/licence/templates/licencemacros.pt:185
 msgid "add_a_corporation_plaintiff"
 msgstr "Ajouter un plaignant (p.morale)"
+
+#: ../browser/licence/templates/licencemacros.pt:123
+msgid "add_a_corporation_tenant"
+msgstr "Ajouter un locataire (p.morale)"
 
 #: ../browser/licence/templates/licencemacros.pt:88
 msgid "add_a_corporationproprietary"
 msgstr "Ajouter un propriétaire (p. morale)"
 
-#: ../browser/licence/templates/licencemacros.pt:133
+#: ../browser/licence/templates/licencemacros.pt:141
 msgid "add_a_physical_applicant"
 msgstr "Ajouter un demandeur"
 
-#: ../browser/licence/templates/licencemacros.pt:169
+#: ../browser/licence/templates/licencemacros.pt:177
 msgid "add_a_physical_plaintiff"
 msgstr "Ajouter un plaignant"
 
@@ -915,12 +919,12 @@ msgstr "Articles des annonces de projet"
 
 # buildlicence_view
 #. Default: "Applicant(s)"
-#: ../browser/licence/templates/licencemacros.pt:121
+#: ../browser/licence/templates/licencemacros.pt:129
 msgid "applicants"
 msgstr "Demandeur(s)"
 
 #. Default: "Applicant(s) history"
-#: ../browser/licence/templates/licencemacros.pt:148
+#: ../browser/licence/templates/licencemacros.pt:156
 msgid "applicants_history"
 msgstr "Demandeurs inactifs"
 
@@ -956,7 +960,7 @@ msgid "basement_folder_title"
 msgstr "Sous-sol"
 
 #. Default: "Bound licence applicant(s)"
-#: ../browser/licence/templates/licencemacros.pt:184
+#: ../browser/licence/templates/licencemacros.pt:192
 msgid "bound_licence_applicants"
 msgstr "Demandeur(s) du permis"
 
@@ -2018,7 +2022,7 @@ msgid "pipelines_folder_title"
 msgstr "Canalisations"
 
 #. Default: "Plaintiff(s)"
-#: ../browser/licence/templates/licencemacros.pt:156
+#: ../browser/licence/templates/licencemacros.pt:164
 msgid "plaintiffs"
 msgstr "Plaignant(s)"
 
@@ -2501,7 +2505,7 @@ msgstr "Nombre de logements octroyés"
 
 #. Default: "Additionallegalconditions"
 #: ../content/licence/CODT_UniqueLicence.py:161
-#: ../content/licence/EnvironmentBase.py:132
+#: ../content/licence/EnvironmentBase.py:133
 #: ../content/licence/UniqueLicence.py:133
 msgid "urban_label_additionalLegalConditions"
 msgstr "Conditions intégrales et sectorielles supplémentaires"
@@ -2559,25 +2563,25 @@ msgstr ""
 
 #. Default: "Annonceddelay"
 #: ../content/licence/BaseBuildLicence.py:164
-#: ../content/licence/EnvironmentBase.py:189
+#: ../content/licence/EnvironmentBase.py:190
 #: ../content/licence/UrbanCertificateBase.py:259
 msgid "urban_label_annoncedDelay"
 msgstr "Délai annoncé"
 
 #. Default: "Annonceddelaydetails"
 #: ../content/licence/BaseBuildLicence.py:174
-#: ../content/licence/EnvironmentBase.py:199
+#: ../content/licence/EnvironmentBase.py:200
 #: ../content/licence/UrbanCertificateBase.py:269
 msgid "urban_label_annoncedDelayDetails"
 msgstr "Détails concernant le délai annoncé"
 
 #. Default: "Announcementarticles"
-#: ../content/CODT_Inquiry.py:133
+#: ../content/CODT_Inquiry.py:136
 msgid "urban_label_announcementArticles"
 msgstr "Article(s) de l'annonce de projet"
 
 #. Default: "Announcementarticlestext"
-#: ../content/CODT_Inquiry.py:144
+#: ../content/CODT_Inquiry.py:147
 msgid "urban_label_announcementArticlesText"
 msgstr "Article(s) de l'annonce de projet (texte)"
 
@@ -2587,7 +2591,7 @@ msgid "urban_label_applicants"
 msgstr "Demandeur"
 
 #. Default: "Applicationreasons"
-#: ../content/licence/EnvironmentBase.py:143
+#: ../content/licence/EnvironmentBase.py:144
 msgid "urban_label_applicationReasons"
 msgstr "Motif de la demande"
 
@@ -2714,7 +2718,7 @@ msgid "urban_label_box"
 msgstr "Boîte"
 
 #. Default: "Businessdescription"
-#: ../content/licence/EnvironmentBase.py:166
+#: ../content/licence/EnvironmentBase.py:167
 msgid "urban_label_businessDescription"
 msgstr "Description de l'exploitation"
 
@@ -2724,7 +2728,7 @@ msgstr "Adresse de l'exploitation"
 
 #. Default: "Old business location"
 #: ../browser/licence/templates/worklocation_macro.pt:22
-#: ../content/licence/EnvironmentBase.py:156
+#: ../content/licence/EnvironmentBase.py:157
 msgid "urban_label_businessOldLocation"
 msgstr "Ancienne adresse de l'exploitation"
 
@@ -3018,7 +3022,7 @@ msgstr "Détails concernant les dérogations"
 
 #. Default: "Description"
 #: ../UrbanEvent.py:416
-#: ../content/licence/EnvironmentBase.py:267
+#: ../content/licence/EnvironmentBase.py:268
 #: ../content/licence/GenericLicence.py:241
 msgid "urban_label_description"
 msgstr "Observations"
@@ -3044,12 +3048,12 @@ msgid "urban_label_displayEmptyKeyDates"
 msgstr "Afficher les dates clés vides"
 
 #. Default: "Divergence"
-#: ../content/CODT_Inquiry.py:111
+#: ../content/CODT_Inquiry.py:114
 msgid "urban_label_divergence"
 msgstr "Écart"
 
 #. Default: "Divergencedetails"
-#: ../content/CODT_Inquiry.py:122
+#: ../content/CODT_Inquiry.py:125
 msgid "urban_label_divergenceDetails"
 msgstr "Détails concernant l'écart"
 
@@ -3107,7 +3111,7 @@ msgstr "Avis technique après enquête (environnement)"
 
 #. Default: "Environmenttechnicalremarks"
 #: ../content/licence/CODT_UniqueLicence.py:230
-#: ../content/licence/EnvironmentBase.py:280
+#: ../content/licence/EnvironmentBase.py:281
 #: ../content/licence/UniqueLicence.py:202
 msgid "urban_label_environmentTechnicalRemarks"
 msgstr "Observations"
@@ -3392,7 +3396,7 @@ msgid "urban_label_inquiry_category"
 msgstr "Type d'enquête"
 
 #. Default: "Inquiry_type"
-#: ../content/CODT_Inquiry.py:102
+#: ../content/CODT_Inquiry.py:105
 msgid "urban_label_inquiry_type"
 msgstr "Type de publicité"
 
@@ -3596,7 +3600,7 @@ msgid "urban_label_localityName"
 msgstr "Nom généralement constaté pour le lieu-dit"
 
 #. Default: "Natura2000location"
-#: ../content/licence/EnvironmentBase.py:218
+#: ../content/licence/EnvironmentBase.py:219
 msgid "urban_label_location"
 msgstr "Emplacement"
 
@@ -3632,7 +3636,7 @@ msgstr "Détails"
 
 #. Default: "Locationtechnicaladvice"
 #: ../content/licence/BaseBuildLicence.py:372
-#: ../content/licence/EnvironmentBase.py:257
+#: ../content/licence/EnvironmentBase.py:258
 msgid "urban_label_locationTechnicalAdvice"
 msgstr "Avis technique urbanisme"
 
@@ -3689,7 +3693,7 @@ msgstr "Possibilité de permis de location"
 
 #. Default: "Minimumlegalconditions"
 #: ../content/licence/CODT_UniqueLicence.py:145
-#: ../content/licence/EnvironmentBase.py:116
+#: ../content/licence/EnvironmentBase.py:117
 #: ../content/licence/UniqueLicence.py:117
 msgid "urban_label_minimumLegalConditions"
 msgstr "Conditions intégrales et sectorielles"
@@ -3739,12 +3743,12 @@ msgid "urban_label_nationalRegister"
 msgstr "N° de registre national"
 
 #. Default: "Natura2000"
-#: ../content/licence/EnvironmentBase.py:211
+#: ../content/licence/EnvironmentBase.py:212
 msgid "urban_label_natura2000"
 msgstr "Situé en Zone Natura 2000"
 
 #. Default: "Natura2000details"
-#: ../content/licence/EnvironmentBase.py:227
+#: ../content/licence/EnvironmentBase.py:228
 msgid "urban_label_natura2000Details"
 msgstr "Détails concernant la zone Natura 2000"
 
@@ -4059,7 +4063,7 @@ msgstr "Détails concernant le Périmètre de Revitalisation Urbaine"
 
 #. Default: "Procedurechoice"
 #: ../content/licence/BaseBuildLicence.py:428
-#: ../content/licence/EnvironmentBase.py:178
+#: ../content/licence/EnvironmentBase.py:179
 msgid "urban_label_procedureChoice"
 msgstr "Choix de la procédure"
 
@@ -4160,7 +4164,7 @@ msgstr "Référence"
 msgid "urban_label_referenceDGATLP"
 msgstr "Référence FD (DGO4)"
 
-#: ../content/licence/EnvironmentBase.py:312
+#: ../content/licence/EnvironmentBase.py:313
 msgid "urban_label_referenceDGO3"
 msgstr "Référence DGO3"
 
@@ -4170,7 +4174,7 @@ msgstr "Référence DGO6"
 
 #. Default: "Referenceft"
 #: ../content/licence/CODT_UniqueLicence.py:77
-#: ../content/licence/EnvironmentBase.py:80
+#: ../content/licence/EnvironmentBase.py:81
 msgid "urban_label_referenceFT"
 msgstr "Référence FT (DGO3)"
 
@@ -4372,7 +4376,7 @@ msgstr "Particularités du bien (Fiche Voirie)"
 
 #. Default: "Roadtechnicaladvice"
 #: ../content/licence/BaseBuildLicence.py:352
-#: ../content/licence/EnvironmentBase.py:246
+#: ../content/licence/EnvironmentBase.py:247
 msgid "urban_label_roadTechnicalAdvice"
 msgstr "Avis technique voirie"
 
@@ -4383,14 +4387,14 @@ msgstr "Type de voirie"
 
 #. Default: "Rubrics"
 #: ../content/licence/CODT_UniqueLicence.py:124
-#: ../content/licence/EnvironmentBase.py:95
+#: ../content/licence/EnvironmentBase.py:96
 #: ../content/licence/UniqueLicence.py:96
 msgid "urban_label_rubrics"
 msgstr "Rubrique(s)"
 
 #. Default: "Rubricsdetails"
 #: ../content/licence/CODT_UniqueLicence.py:134
-#: ../content/licence/EnvironmentBase.py:105
+#: ../content/licence/EnvironmentBase.py:106
 #: ../content/licence/UniqueLicence.py:106
 msgid "urban_label_rubricsDetails"
 msgstr "Explications sur les rubriques"
@@ -4445,7 +4449,7 @@ msgstr "Nombre de signature"
 #. Default: "Situation"
 #: ../browser/licence/templates/envclassborderingmacros.pt:25
 #: ../browser/licence/templates/worklocation_macro.pt:13
-#: ../content/licence/EnvironmentBase.py:313
+#: ../content/licence/EnvironmentBase.py:314
 msgid "urban_label_situation"
 msgstr "Situation"
 
@@ -4747,7 +4751,7 @@ msgid "urban_label_usedAttributes"
 msgstr "Champs optionnels utilisés"
 
 #. Default: "Validitydelay"
-#: ../content/licence/EnvironmentBase.py:238
+#: ../content/licence/EnvironmentBase.py:239
 msgid "urban_label_validityDelay"
 msgstr "Durée de validité du permis"
 
@@ -4922,7 +4926,7 @@ msgid "warning_add_an_applicant"
 msgstr "Veuillez renseigner le ou les demandeur(s)"
 
 #. Default: "You must encode plaintiff(s)"
-#: ../browser/licence/templates/licencemacros.pt:159
+#: ../browser/licence/templates/licencemacros.pt:167
 msgid "warning_add_an_plaintiff"
 msgstr "Veuillez renseigner un plaignant "
 
