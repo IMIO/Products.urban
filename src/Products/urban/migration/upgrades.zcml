@@ -307,4 +307,28 @@
         handler=".check_corrupted_templates.check_corrupted_templates"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="remove icons from transitions"
+        description="urban upgrade step"
+        source="1109"
+        destination="1110"
+        handler=".update_250.remove_icons_from_transitions"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Add and activate corporation tenant"
+        description="urban upgrade step"
+        source="1110"
+        destination="1111"
+        handler=".update_250.add_and_active_corporation_tenant"
+        profile="Products.urban:default" />
+  
+    <gs:upgradeStep
+        title="add documentation link to user portal_actions and hide contact viewlet in footer"
+        description="urban upgrade step"
+        source="1112"
+        destination="1113"
+        handler=".update_250.addDocumentationLinkToUserPortalActionAndHideViewlet"
+        profile="Products.urban:default" />
+  
 </configure>

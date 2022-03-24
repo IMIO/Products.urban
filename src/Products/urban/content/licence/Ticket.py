@@ -246,11 +246,20 @@ class Ticket(BaseFolder, GenericLicence, BrowserDefaultMixin):
         """
         tenants = [app for app in self.objectValues('Applicant')
                    if app.portal_type == 'Tenant']
+        corporations = self.getCorporationTenants()
+        tenants.extend(corporations)
         if self.getUse_bound_inspection_infos():
             bound_inspection = self.getBound_inspection()
             if bound_inspection:
                 tenants.extend(bound_inspection.getTenants())
         return list(set(tenants))
+
+    security.declarePublic('getCorporationTenants')
+
+    def getCorporationTenants(self):
+        corporations = [corp for corp in self.objectValues('Corporation')
+                        if corp.portal_type == 'CorporationTenant']
+        return corporations
 
     security.declarePublic('getPlaintiffs')
 

@@ -345,3 +345,35 @@ def activate_divergence_field(context):
             to_set = ('divergence', 'divergenceDetails')
             config.setUsedAttributes(config.getUsedAttributes() + to_set)
     logger.info("migration step done!")
+
+def remove_icons_from_transitions(context):
+    """
+    launch import step to remove transitions icons and show them in letters
+    """
+    logger = logging.getLogger('urban: remove icons from transitions')
+    logger.info("starting upgrade steps")
+    setup_tool = api.portal.get_tool('portal_setup')
+    setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'update-workflow-rolemap')
+    logger.info("upgrade done!")
+
+def add_and_active_corporation_tenant(context):
+    """
+    add corporation tenant content type and activate it
+    """
+    logger = logging.getLogger('urban: add and activate corporation tenant')
+    logger.info("starting upgrade step")
+    setup_tool = api.portal.get_tool('portal_setup')
+    setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'typeinfo')
+    setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'workflow')
+    logger.info("upgrade step done!")
+    
+def addDocumentationLinkToUserPortalActionAndHideViewlet(context):
+    """
+    add documentation link to useractions and hide contact viewlet in footer
+    """
+    logger = logging.getLogger('urban: add documentation link to user portal_actions and hide contact viewlet in footer')
+    logger.info("starting upgrade steps")
+    setup_tool = api.portal.get_tool('portal_setup')
+    setup_tool.runImportStepFromProfile('profile-Products.urban:default', 'actions')
+    setup_tool.runImportStepFromProfile('profile-Products.urban:default', 'viewlets')
+    logger.info("upgrade step done!")
