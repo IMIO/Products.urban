@@ -911,6 +911,26 @@ msgstr ""
 msgid "urban_label_bceNumber"
 msgstr ""
 
+#. Default: "HeadOfficeStreet"
+#: Corporation.py
+msgid "urban_label_headofficestreet"
+msgstr ""
+
+#. Default: "HeadOfficeNumber"
+#: Corporation.py
+msgid "urban_label_headofficenumber"
+msgstr ""
+
+#. Default: "HeadOfficeZipcode"
+#: Corporation.py
+msgid "urban_label_headofficezipcode"
+msgstr ""
+
+#. Default: "HeadOfficeCity"
+#: Corporation.py
+msgid "urban_label_headofficecity"
+msgstr ""
+
 #. Default: "Bestaddresscode"
 #: Street.py
 msgid "urban_label_bestAddressCode"
