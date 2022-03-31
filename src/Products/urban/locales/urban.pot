@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2022-03-16 14:52+0000\n"
+"POT-Creation-Date: 2022-03-31 13:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1096,12 +1096,12 @@ msgid "content_none"
 msgstr ""
 
 #. Default: "Contact person"
-#: ../browser/templates/contactmacros.pt:125
+#: ../browser/templates/contactmacros.pt:126
 msgid "corporation_contactPerson_fieldset_legend"
 msgstr ""
 
 #. Default: "Represented by"
-#: ../browser/templates/contactmacros.pt:116
+#: ../browser/templates/contactmacros.pt:117
 msgid "corporation_representative_fieldset_legend"
 msgstr ""
 
@@ -1754,8 +1754,8 @@ msgid "legend_details"
 msgstr ""
 
 #. Default: "Specific features"
-#: ../browser/licence/templates/notarylettermacros.pt:17
-#: ../browser/licence/templates/urbancertificateonemacros.pt:21
+#: ../browser/licence/templates/notarylettermacros.pt:20
+#: ../browser/licence/templates/urbancertificateonemacros.pt:24
 msgid "legend_specific_features"
 msgstr ""
 
@@ -2069,13 +2069,6 @@ msgstr ""
 
 #: ../content/licence/BaseBuildLicence.py:559
 msgid "road_adaptation_supress"
-msgstr ""
-
-#. Default: "road_decree_reference"
-#: ../content/licence/CODT_Article127.py:36
-#: ../content/licence/CODT_BuildLicence.py:54
-#: ../content/licence/CODT_IntegratedLicence.py:68
-msgid "road_decree_reference"
 msgstr ""
 
 msgid "roadanalysis_folder_title"
@@ -2441,7 +2434,7 @@ msgid "urban_label_SDC"
 msgstr ""
 
 #. Default: "SDC_divergence"
-#: ../content/licence/CODT_BuildLicence.py:47
+#: ../content/licence/CODT_BuildLicence.py:46
 msgid "urban_label_SDC_divergence"
 msgstr ""
 
@@ -3277,7 +3270,7 @@ msgstr ""
 #. Default: "Geometrician(s)"
 #: ../browser/licence/templates/licencemacros.pt:29
 #: ../content/licence/CODT_ParcelOutLicence.py:56
-#: ../content/licence/CODT_UrbanCertificateTwo.py:50
+#: ../content/licence/CODT_UrbanCertificateTwo.py:51
 msgid "urban_label_geometricians"
 msgstr ""
 
@@ -3329,6 +3322,26 @@ msgstr ""
 #. Default: "HasPetition"
 #: ../Claimant.py:57
 msgid "urban_label_hasPetition"
+msgstr ""
+
+#. Default: "HeadOfficeCity"
+#: Corporation.py
+msgid "urban_label_headofficecity"
+msgstr ""
+
+#. Default: "HeadOfficeNumber"
+#: Corporation.py
+msgid "urban_label_headofficenumber"
+msgstr ""
+
+#. Default: "HeadOfficeStreet"
+#: Corporation.py
+msgid "urban_label_headofficestreet"
+msgstr ""
+
+#. Default: "HeadOfficeZipcode"
+#: Corporation.py
+msgid "urban_label_headofficezipcode"
 msgstr ""
 
 #. Default: "Impactstudy"
@@ -3534,7 +3547,7 @@ msgid "urban_label_licenceeventtypes"
 msgstr ""
 
 #. Default: "Limitedimpact"
-#: ../content/licence/CODT_BuildLicence.py:39
+#: ../content/licence/CODT_BuildLicence.py:38
 msgid "urban_label_limitedImpact"
 msgstr ""
 
@@ -3734,7 +3747,7 @@ msgstr ""
 
 #. Default: "Notary(ies)"
 #: ../browser/licence/templates/licencemacros.pt:47
-#: ../content/licence/CODT_UrbanCertificateTwo.py:69
+#: ../content/licence/CODT_UrbanCertificateTwo.py:70
 #: ../content/licence/Division.py:46
 msgid "urban_label_notaryContact"
 msgstr ""
@@ -4163,12 +4176,12 @@ msgid "urban_label_referenceTALExpression"
 msgstr ""
 
 #. Default: "Reference_bic"
-#: ../content/licence/CODT_IntegratedLicence.py:53
+#: ../content/licence/CODT_IntegratedLicence.py:52
 msgid "urban_label_reference_bic"
 msgstr ""
 
 #. Default: "Reference_dgo6"
-#: ../content/licence/CODT_IntegratedLicence.py:61
+#: ../content/licence/CODT_IntegratedLicence.py:60
 msgid "urban_label_reference_dgo6"
 msgstr ""
 
@@ -4181,7 +4194,7 @@ msgid "urban_label_regionalRoad"
 msgstr ""
 
 #. Default: "Regional_authority"
-#: ../content/licence/CODT_IntegratedLicence.py:43
+#: ../content/licence/CODT_IntegratedLicence.py:42
 msgid "urban_label_regional_authority"
 msgstr ""
 
