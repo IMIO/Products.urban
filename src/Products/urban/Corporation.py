@@ -111,6 +111,38 @@ schema = Schema((
             i18n_domain='urban',
         ),
     ),
+    StringField(
+        name='headOfficeStreet',
+        widget=StringField._properties['widget'](
+            label='HeadOfficeStreet',
+            label_msgid='urban_label_headofficestreet',
+            i18n_domain='urban',
+        ),
+    ),
+    StringField(
+        name='headOfficeNumber',
+        widget=StringField._properties['widget'](
+            label='HeadOfficeNumber',
+            label_msgid='urban_label_headofficenumber',
+            i18n_domain='urban',
+        ),
+    ),
+    StringField(
+        name='headOfficeZipcode',
+        widget=StringField._properties['widget'](
+            label='HeadOfficeZipcode',
+            label_msgid='urban_label_headofficezipcode',
+            i18n_domain='urban',
+        ),
+    ),
+    StringField(
+        name='headOfficeCity',
+        widget=StringField._properties['widget'](
+            label='HeadOfficeCity',
+            label_msgid='urban_label_headofficecity',
+            i18n_domain='urban',
+        ),
+    ),
 
 ),
 )
@@ -129,6 +161,7 @@ Corporation_schema['representedBy'].widget.visible = False
 Corporation_schema['nationalRegister'].widget.visible = False
 #Corporation_schema['personTitle'].widget.visible = False
 ##/code-section after-schema
+
 
 class Corporation(BaseContent, Applicant, BrowserDefaultMixin):
     """
@@ -149,6 +182,7 @@ class Corporation(BaseContent, Applicant, BrowserDefaultMixin):
     # Manually created methods
 
     security.declarePublic('Title')
+
     def Title(self):
         """
         Generate the title...
@@ -176,7 +210,6 @@ class Corporation(BaseContent, Applicant, BrowserDefaultMixin):
         return nameSignaletic
 
 
-
 registerType(Corporation, PROJECTNAME)
 # end of class Corporation
 
@@ -195,7 +228,11 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     schema.moveField('personRole', after='personTitle')
     schema.moveField('name1', after='personRole')
     schema.moveField('name2', after='name1')
+    schema.moveField('headOfficeStreet', after='contactPersonPhone')
+    schema.moveField('headOfficeNumber', after='headOfficeStreet')
+    schema.moveField('headOfficeZipcode', after='headOfficeNumber')
+    schema.moveField('headOfficeCity', after='headOfficeZipcode')
+
 
 finalizeSchema(Corporation_schema)
 ##/code-section module-footer
-
