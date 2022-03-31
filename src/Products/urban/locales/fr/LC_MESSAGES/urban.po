@@ -1112,12 +1112,12 @@ msgid "content_none"
 msgstr "N.C."
 
 #. Default: "Contact person"
-#: ../browser/templates/contactmacros.pt:125
+#: ../browser/templates/contactmacros.pt:126
 msgid "corporation_contactPerson_fieldset_legend"
 msgstr "Personne de contact"
 
 #. Default: "Represented by"
-#: ../browser/templates/contactmacros.pt:116
+#: ../browser/templates/contactmacros.pt:117
 msgid "corporation_representative_fieldset_legend"
 msgstr "Personne dûment habilitée à représenter la personne morale"
 
@@ -1780,8 +1780,8 @@ msgid "legend_details"
 msgstr "Détails"
 
 #. Default: "Specific features"
-#: ../browser/licence/templates/notarylettermacros.pt:17
-#: ../browser/licence/templates/urbancertificateonemacros.pt:21
+#: ../browser/licence/templates/notarylettermacros.pt:20
+#: ../browser/licence/templates/urbancertificateonemacros.pt:24
 msgid "legend_specific_features"
 msgstr "Particularité(s)"
 
@@ -2097,13 +2097,6 @@ msgstr "Modification"
 #: ../content/licence/BaseBuildLicence.py:559
 msgid "road_adaptation_supress"
 msgstr "Suppression"
-
-#. Default: "road_decree_reference"
-#: ../content/licence/CODT_Article127.py:36
-#: ../content/licence/CODT_BuildLicence.py:54
-#: ../content/licence/CODT_IntegratedLicence.py:68
-msgid "road_decree_reference"
-msgstr "Référence à la procédure de décret voirie"
 
 msgid "roadanalysis_folder_title"
 msgstr "Analyse technique voirie"
@@ -2469,7 +2462,7 @@ msgid "urban_label_SDC"
 msgstr "Schéma de développement communal"
 
 #. Default: "SDC_divergence"
-#: ../content/licence/CODT_BuildLicence.py:47
+#: ../content/licence/CODT_BuildLicence.py:46
 msgid "urban_label_SDC_divergence"
 msgstr "dossier en écart au Schéma de développement communal"
 
@@ -3307,7 +3300,7 @@ msgstr "Générer directement les documents uniques"
 #. Default: "Geometrician(s)"
 #: ../browser/licence/templates/licencemacros.pt:29
 #: ../content/licence/CODT_ParcelOutLicence.py:56
-#: ../content/licence/CODT_UrbanCertificateTwo.py:50
+#: ../content/licence/CODT_UrbanCertificateTwo.py:51
 msgid "urban_label_geometricians"
 msgstr "Géomètres"
 
@@ -3360,6 +3353,26 @@ msgstr "Plans modificatifs"
 #: ../Claimant.py:57
 msgid "urban_label_hasPetition"
 msgstr "Pétition"
+
+#. Default: "HeadOfficeCity"
+#: Corporation.py
+msgid "urban_label_headofficecity"
+msgstr "Localité"
+
+#. Default: "HeadOfficeNumber"
+#: Corporation.py
+msgid "urban_label_headofficenumber"
+msgstr "Numéro"
+
+#. Default: "HeadOfficeStreet"
+#: Corporation.py
+msgid "urban_label_headofficestreet"
+msgstr "Rue"
+
+#. Default: "HeadOfficeZipcode"
+#: Corporation.py
+msgid "urban_label_headofficezipcode"
+msgstr "Code postal"
 
 #. Default: "Impactstudy"
 #: ../content/licence/BaseBuildLicence.py:194
@@ -3564,7 +3577,7 @@ msgid "urban_label_licenceeventtypes"
 msgstr "Type d'événement"
 
 #. Default: "Limitedimpact"
-#: ../content/licence/CODT_BuildLicence.py:39
+#: ../content/licence/CODT_BuildLicence.py:38
 msgid "urban_label_limitedImpact"
 msgstr "Dossier d'impact limité"
 
@@ -3764,7 +3777,7 @@ msgstr "Non applicable"
 
 #. Default: "Notary(ies)"
 #: ../browser/licence/templates/licencemacros.pt:47
-#: ../content/licence/CODT_UrbanCertificateTwo.py:69
+#: ../content/licence/CODT_UrbanCertificateTwo.py:70
 #: ../content/licence/Division.py:46
 msgid "urban_label_notaryContact"
 msgstr "Notaire(s)"
@@ -4195,12 +4208,12 @@ msgid "urban_label_referenceTALExpression"
 msgstr "Expression TAL générant la référence"
 
 #. Default: "Reference_bic"
-#: ../content/licence/CODT_IntegratedLicence.py:53
+#: ../content/licence/CODT_IntegratedLicence.py:52
 msgid "urban_label_reference_bic"
 msgstr "Référence BIC"
 
 #. Default: "Reference_dgo6"
-#: ../content/licence/CODT_IntegratedLicence.py:61
+#: ../content/licence/CODT_IntegratedLicence.py:60
 msgid "urban_label_reference_dgo6"
 msgstr "Référence DGO6"
 
@@ -4213,7 +4226,7 @@ msgid "urban_label_regionalRoad"
 msgstr "Code de route régionale"
 
 #. Default: "Regional_authority"
-#: ../content/licence/CODT_IntegratedLicence.py:43
+#: ../content/licence/CODT_IntegratedLicence.py:42
 msgid "urban_label_regional_authority"
 msgstr "Direction(s) générale(s) concernée(s)"
 
