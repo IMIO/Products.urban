@@ -51,6 +51,10 @@ class UrbanDocGenerationView(PersistentDocumentGenerationView):
         applicants_views = [applicant.unrestrictedTraverse('@@document_generation_helper_view')
                             for applicant in applicants or []]
         applicantobj = applicants_views and applicants_views[0] or None
+        corp_applicants = licence.getCorporations()
+        corp_applicants_views = [corp_applicant.unrestrictedTraverse('@@document_generation_helper_view')
+                            for corp_applicant in corp_applicants or []]
+        corp_applicantobj = corp_applicants_views and corp_applicants_views[0] or None
         proprietaries = licence.getProprietaries()
         proprietaries_views = [prop.unrestrictedTraverse('@@document_generation_helper_view') for prop
                                 in proprietaries or []]
@@ -79,7 +83,6 @@ class UrbanDocGenerationView(PersistentDocumentGenerationView):
         bound_roaddecrees = [dec.restrictedTraverse('@@document_generation_helper_view')
                              for dec in licence.get_bound_roaddecrees()] or None
 
-
         generation_context = {
             'this': licence,
             'self': licence_helper_view,
@@ -91,6 +94,7 @@ class UrbanDocGenerationView(PersistentDocumentGenerationView):
             'plaintiffobj': plaintiffobj,
             'proprietaryobj': proprietaryobj,
             'tenantobj': tenantobj,
+            'corp_applicantobj': corp_applicantobj,
             'tool': portal_urban,
             'licence_view': licence_helper_view,
             'licence_helper': licence_helper_view,
