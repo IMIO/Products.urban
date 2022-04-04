@@ -44,6 +44,7 @@ schema = Schema((
             startup_directory='urban/notaries',
             restrict_browsing_to_startup_directory=True,
             label=_('urban_label_notaryContact', default='Notary(ies)'),
+            popup_name='contact_reference_popup'
         ),
         required=False,
         schemata='urban_description',
