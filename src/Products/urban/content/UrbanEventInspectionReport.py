@@ -122,6 +122,16 @@ UrbanEventInspectionReport_schema = BaseFolderSchema.copy() + \
     getattr(UrbanEvent, 'schema', Schema(())).copy() + \
     schema.copy()
 
+def finalizeSchema(schema):
+    """
+       Finalizes the type schema to alter some fields
+    """
+    schema.moveField('followup_proposition', after='offense_articles_details')
+    schema.moveField('other_followup_proposition', after='followup_proposition')
+    schema.moveField('delay', after='other_followup_proposition')
+
+finalizeSchema(UrbanEventInspectionReport_schema)
+
 
 class UrbanEventInspectionReport(BaseFolder, UrbanEvent, BrowserDefaultMixin):
     """
