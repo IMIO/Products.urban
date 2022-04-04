@@ -22,7 +22,7 @@ class SuggestView(BrowserView):
 
         suggestions = [{'label': '', 'value': ''}]
         try:
-            suggestions.extend(self.compute_suggestions())
+            suggestions.extend(self.compute_suggestions() or [])
             return json.dumps(suggestions)
         except ParseError:
             pass
