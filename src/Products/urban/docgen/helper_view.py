@@ -674,7 +674,7 @@ class UrbanDocGenerationLicenceHelperView(UrbanDocGenerationHelperView):
         limitDate = firstDepositDate + int(delay)
         return self.format_date(limitDate)
 
-    def get_parcels(self, with_commas=False):
+    def get_parcels(self, with_commas=False, with_division=True):
         result = u""
         context = self.real_context
         parcels = context.getParcels()
@@ -701,10 +701,13 @@ class UrbanDocGenerationLicenceHelperView(UrbanDocGenerationHelperView):
         for gp in enumerate(list_grouped_parcels):
             divisionAlternativeName = gp[1][0].getDivisionAlternativeName()
             section = gp[1][0].getSection().decode('utf8')
-            if with_commas:
-                result += u"{}, section {}, ".format(divisionAlternativeName, section)
+            if with_division:
+                if with_commas:
+                    result += u"{}, section {}, ".format(divisionAlternativeName, section)
+                else:
+                    result += u"{} section {} ".format(divisionAlternativeName, section)
             else:
-                result += u"{} section {} ".format(divisionAlternativeName, section)
+                result += u"section {} ".format(section)
             for p in enumerate(gp[1]):
                 if section != p[1].getSection():
                     section = p[1].getSection()
