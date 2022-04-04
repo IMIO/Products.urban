@@ -7,6 +7,8 @@ from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 from zope.interface import implements
 
+from plone import api
+
 from Products.urban import UrbanMessage as _
 from Products.urban import interfaces
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
