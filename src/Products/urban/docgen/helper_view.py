@@ -1094,11 +1094,15 @@ class UrbanDocGenerationEventHelperView(UrbanDocGenerationHelperView):
 
     def mailing_list(self, gen_context=None):
         mailing_list = []
+        licencenv = ['EnvClassOne', 'EnvClassTwo', 'EnvClassThree', 'EnvClassBordering', 'ExplosivesPossession']
         use_proxy = True
         if gen_context and 'publipostage' in gen_context:
             if gen_context['publipostage'] == 'demandeurs':
                 mailing_list = self.real_context.getParentNode().getApplicants()
-                self.correction_corporation_contact(mailing_list)
+                if self.real_context.getParentNode().portal_type in licencenv:
+                    self.correction_corporation_contact(mailing_list)
+            elif gen_context['publipostage'] == 'corporation_demandeurs':
+                mailing_list = self.real_context.getParentNode().getCorporations()
             elif gen_context['publipostage'] == 'architectes':
                 mailing_list = self.context.getArchitects()
             elif gen_context['publipostage'] == 'geometres':
@@ -1111,7 +1115,8 @@ class UrbanDocGenerationEventHelperView(UrbanDocGenerationHelperView):
                 mailing_list = self.context.getLinkedUrbanEventInquiry().getClaimants()
             elif gen_context['publipostage'] == 'proprietaire':
                 mailing_list = self.real_context.getParentNode().getProprietaries()
-                self.correction_corporation_contact(mailing_list)
+                if self.real_context.getParentNode().portal_type in licencenv:
+                    self.correction_corporation_contact(mailing_list)
             elif gen_context['publipostage'] == 'proprietaires_voisinage_enquete':
                 if IUrbanEventInquiry.providedBy(self.real_context):
                     inquiry_event = self.real_context
