@@ -152,7 +152,15 @@ class CadastralReferenceSuggest(SuggestView):
 
     def _all_parcels_values(self):
         cat = api.portal.get_tool('portal_catalog')
-        values = [v for v in cat.Indexes['parcelInfosIndex'].uniqueValues()]
+        values = []
+        for val in cat.Indexes['parcelInfosIndex'].uniqueValues():
+            try:
+                val.encode('ascii')
+            except Exception:
+                continue
+            if val:
+                values.append(val)
+
         session = cadastre.new_session()
         all_divisions = dict(session.get_all_divisions())
         session.close()
