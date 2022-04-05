@@ -116,7 +116,10 @@ class BaseHelperView(object):
         """
         if not string:
             return ''
-        return u'{}{}'.format(string.strip()[0].lower(), string.strip()[1:])
+        if type(string) is unicode:
+            return u'{}{}'.format(string.strip()[0].lower(), string.strip()[1:])
+        elif type(string) is str:
+            return '{}{}'.format(string.strip()[0].lower(), string.strip()[1:])
 
     def format_date(self, date=None, translatemonth=True, long_format=False):
         """
