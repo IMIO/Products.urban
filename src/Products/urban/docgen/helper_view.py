@@ -110,6 +110,13 @@ class BaseHelperView(object):
             zope_DT = DateTime(datetime(zope_DT.year, zope_DT.month, zope_DT.day))
         return DateTime(zope_DT.asdatetime() + relativedelta(years=years))
 
+    def uncapitalize(self, string):
+        """
+        """
+        if not string:
+            return ''
+        return '{}{}'.format(string[0].lower(), string[1:])
+
     def format_date(self, date=None, translatemonth=True, long_format=False):
         """
           Format the date for printing in pod templates
