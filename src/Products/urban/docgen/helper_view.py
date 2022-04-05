@@ -115,7 +115,7 @@ class BaseHelperView(object):
         """
         if not string:
             return ''
-        return '{}{}'.format(string[0].lower(), string[1:])
+        return u'{}{}'.format(string[0].lower(), string[1:])
 
     def format_date(self, date=None, translatemonth=True, long_format=False):
         """
