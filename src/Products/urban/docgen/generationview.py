@@ -100,6 +100,7 @@ class UrbanDocGenerationView(PersistentDocumentGenerationView):
             'inquiry_proprietaries': proprietaries_views,
             'roaddecrees': bound_roaddecrees,
             'roaddecree': bound_roaddecrees and bound_roaddecrees[-1],
+            'uncapitalize': licence_helper_view.uncapitalize,
 
         }
 
