@@ -110,7 +110,8 @@ class BaseHelperView(object):
             zope_DT = DateTime(datetime(zope_DT.year, zope_DT.month, zope_DT.day))
         return DateTime(zope_DT.asdatetime() + relativedelta(years=years))
 
-    def uncapitalize(self, string):
+    @staticmethod
+    def uncapitalize(string):
         """
         """
         if not string:
