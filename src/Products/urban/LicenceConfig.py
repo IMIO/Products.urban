@@ -420,6 +420,7 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
             'inspection': inspection_tabs_config,
             'ticket': ticket_tabs_config,
             'roaddecree': buildlicence_tabs_config,
+            'division': certificatebase_tabs_config,
         }
         licence_type = self.id
 
