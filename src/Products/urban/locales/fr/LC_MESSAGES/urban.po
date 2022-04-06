@@ -24,11 +24,11 @@ msgstr ""
 msgid "%s_urbanconfig_title"
 msgstr ""
 
-#: ../content/licence/RoadDecree.py:274
+#: ../content/licence/RoadDecree.py:276
 msgid "105 days"
 msgstr "105 jours"
 
-#: ../content/licence/RoadDecree.py:275
+#: ../content/licence/RoadDecree.py:277
 msgid "150 days"
 msgstr "150 jours"
 
@@ -36,7 +36,7 @@ msgstr "150 jours"
 msgid "1st class"
 msgstr "1ère classe : Collège provincial"
 
-#: ../content/licence/RoadDecree.py:276
+#: ../content/licence/RoadDecree.py:278
 msgid "210 days"
 msgstr "210 jours"
 
@@ -44,7 +44,7 @@ msgstr "210 jours"
 msgid "2nd class"
 msgstr "2ème classe : Collège communal"
 
-#: ../content/licence/RoadDecree.py:273
+#: ../content/licence/RoadDecree.py:275
 msgid "75 days"
 msgstr "75 jours"
 
@@ -1302,7 +1302,7 @@ msgid "error_section"
 msgstr "La section doit être une seule lettre majuscule (ex: C)"
 
 #. Default: "Nombre de signature obligatoire"
-#: ../Claimant.py:120
+#: ../Claimant.py:126
 msgid "error_signatureNumber"
 msgstr "Nombre de signature obligatoire"
 
@@ -1780,8 +1780,8 @@ msgid "legend_details"
 msgstr "Détails"
 
 #. Default: "Specific features"
-#: ../browser/licence/templates/notarylettermacros.pt:17
-#: ../browser/licence/templates/urbancertificateonemacros.pt:21
+#: ../browser/licence/templates/notarylettermacros.pt:20
+#: ../browser/licence/templates/urbancertificateonemacros.pt:24
 msgid "legend_specific_features"
 msgstr "Particularité(s)"
 
@@ -2098,13 +2098,6 @@ msgstr "Modification"
 msgid "road_adaptation_supress"
 msgstr "Suppression"
 
-#. Default: "road_decree_reference"
-#: ../content/licence/CODT_Article127.py:36
-#: ../content/licence/CODT_BuildLicence.py:54
-#: ../content/licence/CODT_IntegratedLicence.py:68
-msgid "road_decree_reference"
-msgstr "Référence à la procédure de décret voirie"
-
 msgid "roadanalysis_folder_title"
 msgstr "Analyse technique voirie"
 
@@ -2251,7 +2244,7 @@ msgstr "Liste des sentiers et chemins vicinaux de la commune"
 msgid "uniquelicence_urbanconfig_title"
 msgstr "Paramètres des permis uniques"
 
-#: ../content/licence/RoadDecree.py:272
+#: ../content/licence/RoadDecree.py:274
 msgid "unknown"
 msgstr "Non déterminé"
 
@@ -2469,7 +2462,7 @@ msgid "urban_label_SDC"
 msgstr "Schéma de développement communal"
 
 #. Default: "SDC_divergence"
-#: ../content/licence/CODT_BuildLicence.py:47
+#: ../content/licence/CODT_BuildLicence.py:46
 msgid "urban_label_SDC_divergence"
 msgstr "dossier en écart au Schéma de développement communal"
 
@@ -2477,6 +2470,11 @@ msgstr "dossier en écart au Schéma de développement communal"
 #: ../content/licence/GenericLicence.py:802
 msgid "urban_label_SSC"
 msgstr "Schéma de Développement Communal (SDC)"
+
+#. Default: "Wantdecisioncopy"
+#: ../Claimant.py:92
+msgid "urban_label_Wantdecisioncopy"
+msgstr "Souhaite une copie de la décision"
 
 #. Default: "Zip"
 #: ../content/licence/UrbanCertificateBase.py:249
@@ -2701,7 +2699,7 @@ msgid "urban_label_bound_inspection"
 msgstr "Dossier d'inspection lié"
 
 #. Default: "Bound licence"
-#: ../content/licence/RoadDecree.py:61
+#: ../content/licence/RoadDecree.py:63
 msgid "urban_label_bound_licence"
 msgstr "Dossier lié"
 
@@ -2942,7 +2940,7 @@ msgid "urban_label_decisionText"
 msgstr "Détails de la décision"
 
 #. Default: "DecisionalDelay"
-#: ../content/licence/RoadDecree.py:105
+#: ../content/licence/RoadDecree.py:107
 msgid "urban_label_decisional_delay"
 msgstr "Délai de décision du conseil"
 
@@ -3307,7 +3305,7 @@ msgstr "Générer directement les documents uniques"
 #. Default: "Geometrician(s)"
 #: ../browser/licence/templates/licencemacros.pt:29
 #: ../content/licence/CODT_ParcelOutLicence.py:56
-#: ../content/licence/CODT_UrbanCertificateTwo.py:50
+#: ../content/licence/CODT_UrbanCertificateTwo.py:53
 msgid "urban_label_geometricians"
 msgstr "Géomètres"
 
@@ -3503,13 +3501,13 @@ msgstr "Établissement SEVESO"
 
 #: ../content/licence/CODT_BaseBuildLicence.py:701
 #: ../content/licence/CODT_UrbanCertificateBase.py:76
-#: ../content/licence/Division.py:147
+#: ../content/licence/Division.py:148
 msgid "urban_label_is_in_parceloutlicences"
 msgstr "Le bien se situe dans un permis d'urbanisation"
 
 #: ../content/licence/CODT_BaseBuildLicence.py:707
 #: ../content/licence/CODT_UrbanCertificateBase.py:82
-#: ../content/licence/Division.py:153
+#: ../content/licence/Division.py:154
 msgid "urban_label_is_in_sol"
 msgstr "Le bien se situe dans un SOL"
 
@@ -3564,7 +3562,7 @@ msgid "urban_label_licenceeventtypes"
 msgstr "Type d'événement"
 
 #. Default: "Limitedimpact"
-#: ../content/licence/CODT_BuildLicence.py:39
+#: ../content/licence/CODT_BuildLicence.py:38
 msgid "urban_label_limitedImpact"
 msgstr "Dossier d'impact limité"
 
@@ -3764,7 +3762,7 @@ msgstr "Non applicable"
 
 #. Default: "Notary(ies)"
 #: ../browser/licence/templates/licencemacros.pt:47
-#: ../content/licence/CODT_UrbanCertificateTwo.py:69
+#: ../content/licence/CODT_UrbanCertificateTwo.py:73
 #: ../content/licence/Division.py:46
 msgid "urban_label_notaryContact"
 msgstr "Notaire(s)"
@@ -3848,13 +3846,13 @@ msgstr "Permis d'urbanisation"
 
 #: ../content/licence/CODT_BaseBuildLicence.py:700
 #: ../content/licence/CODT_UrbanCertificateBase.py:75
-#: ../content/licence/Division.py:146
+#: ../content/licence/Division.py:147
 msgid "urban_label_parceloutlicences"
 msgstr "Permis d'urbanisation"
 
 #: ../content/licence/CODT_BaseBuildLicence.py:702
 #: ../content/licence/CODT_UrbanCertificateBase.py:77
-#: ../content/licence/Division.py:148
+#: ../content/licence/Division.py:149
 msgid "urban_label_parceloutlicences_details"
 msgstr "Détails sur le permis d'urbanisation"
 
@@ -4195,12 +4193,12 @@ msgid "urban_label_referenceTALExpression"
 msgstr "Expression TAL générant la référence"
 
 #. Default: "Reference_bic"
-#: ../content/licence/CODT_IntegratedLicence.py:53
+#: ../content/licence/CODT_IntegratedLicence.py:52
 msgid "urban_label_reference_bic"
 msgstr "Référence BIC"
 
 #. Default: "Reference_dgo6"
-#: ../content/licence/CODT_IntegratedLicence.py:61
+#: ../content/licence/CODT_IntegratedLicence.py:60
 msgid "urban_label_reference_dgo6"
 msgstr "Référence DGO6"
 
@@ -4213,7 +4211,7 @@ msgid "urban_label_regionalRoad"
 msgstr "Code de route régionale"
 
 #. Default: "Regional_authority"
-#: ../content/licence/CODT_IntegratedLicence.py:43
+#: ../content/licence/CODT_IntegratedLicence.py:42
 msgid "urban_label_regional_authority"
 msgstr "Direction(s) générale(s) concernée(s)"
 
@@ -4466,19 +4464,19 @@ msgstr "Société"
 
 #: ../content/licence/CODT_BaseBuildLicence.py:704
 #: ../content/licence/CODT_UrbanCertificateBase.py:79
-#: ../content/licence/Division.py:150
+#: ../content/licence/Division.py:151
 msgid "urban_label_sol"
 msgstr "SOL"
 
 #: ../content/licence/CODT_BaseBuildLicence.py:706
 #: ../content/licence/CODT_UrbanCertificateBase.py:81
-#: ../content/licence/Division.py:152
+#: ../content/licence/Division.py:153
 msgid "urban_label_solZone"
 msgstr "Zone de SOL"
 
 #: ../content/licence/CODT_BaseBuildLicence.py:708
 #: ../content/licence/CODT_UrbanCertificateBase.py:83
-#: ../content/licence/Division.py:154
+#: ../content/licence/Division.py:155
 msgid "urban_label_sol_details"
 msgstr "Détails concernant le SOL"
 
@@ -4602,7 +4600,7 @@ msgid "urban_label_taxDetails"
 msgstr "Détails redevance"
 
 #. Default: "technicaladvice"
-#: ../content/licence/RoadDecree.py:309
+#: ../content/licence/RoadDecree.py:311
 msgid "urban_label_technicalAdvice"
 msgstr "Avis technique"
 
@@ -4664,7 +4662,7 @@ msgid "urban_label_township_guide_details"
 msgstr "Détails concernant le guide communal d'urbanisme"
 
 #. Default: "Townships_and_alignment"
-#: ../content/licence/RoadDecree.py:96
+#: ../content/licence/RoadDecree.py:98
 msgid "urban_label_townships_and_alignment"
 msgstr "Commune(s) concernée(s) et modification du plan d'alignement"
 
@@ -4741,7 +4739,7 @@ msgstr "Prendre les données de l'inspection liée"
 
 #. Default: "Use_bound_licence_infos"
 #: ../content/licence/Inspection.py:64
-#: ../content/licence/RoadDecree.py:87
+#: ../content/licence/RoadDecree.py:89
 msgid "urban_label_use_bound_licence_infos"
 msgstr "Prendre les données du permis lié"
 
