@@ -86,6 +86,12 @@ schema = Schema((
         ),
         default_output_type='text/html',
     ),
+    BooleanField(
+        name='wantDecisionCopy',
+        widget=BooleanWidget(
+            label=_('urban_label_Wantdecisioncopy', default='Wantdecisioncopy'),
+        ),
+    ),
 ),
 )
 
