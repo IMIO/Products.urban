@@ -8,6 +8,17 @@ from Products.urban.interfaces import IGenericLicence
 from Products.urban import UrbanMessage as _
 
 
+def activate_optional_fields(portal_urban, event):
+    if portal_urban.getUsedAttributes():
+        for cfg in portal_urban.get_all_licence_configs():
+            for field_name in portal_urban.getUsedAttributes():
+                to_activate = []
+                if field_name in cfg.listUsedAttributes():
+                    if field_name not in cfg.getUsedAttributes():
+                        to_activate.append(field_name)
+            cfg.setUsedAttributes(cfg.getUsedAttributes() + tuple(to_activate))
+    portal_urban.setUsedAttributes([])
+
 def update_vocabulary_term_cache(config_obj, event):
     portal_urban = api.portal.get_tool('portal_urban')
     voc_folder = config_obj.aq_parent
