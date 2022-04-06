@@ -174,6 +174,20 @@ schema = Schema((
         ),
         schemata='admin_settings',
     ),
+    LinesField(
+        name='usedAttributes',
+        widget=InAndOutWidget(
+            description="Select the optional fields you want to use. Multiple selection or deselection when clicking with CTRL",
+            description_msgid="urban_descr_usedAttributes",
+            size=170,
+            label='Usedattributes',
+            label_msgid='urban_label_usedAttributes',
+            i18n_domain='urban',
+        ),
+        schemata='admin_settings',
+        multiValued=True,
+        vocabulary='listAllUsedAttributes',
+    ),
     BooleanField(
         name='usePloneMeetingWSClient',
         default=False,
@@ -262,6 +276,16 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             if 'fieldname' in prop and prop['fieldname'] == fieldname:
                 return prop['text']
         return html and '<p></p>' or ''
+
+    def listAllUsedAttributes(self):
+        """
+        """
+        all_fields  = {}
+        licences_configs = self.get_all_licence_configs()
+        for cfg in licences_configs:
+            all_fields.update(cfg.listUsedAttributes()._keys)
+        voc = DisplayList([(k, v[1]) for k, v in all_fields.iteritems()])
+        return voc.sortedByValue()
 
     security.declarePublic('listVocabulary')
     def listVocabulary(self, vocToReturn, context, vocType=["UrbanVocabularyTerm", "OrganisationTerm"], id_to_use="id", value_to_use="Title", sort_on="getObjPositionInParent", inUrbanConfig=True, allowedStates=['enabled'], with_empty_value=False, with_numbering=True):
