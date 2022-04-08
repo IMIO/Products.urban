@@ -79,12 +79,20 @@ def inspection_applicantinfoindex(object):
 
 
 def _get_applicantsinfoindex(applicant):
-    applicants_info = [
-        applicant.getName1(),
-        applicant.getName2(),
-        applicant.getSociety(),
-        applicant.getNationalRegister(),
-    ]
+    if applicant.portal_type == 'Couple':
+        applicants_info = [
+            applicant.getCouplePerson1Name(),
+            applicant.getCouplePerson1Firstname(),
+            applicant.getCouplePerson2Name(),
+            applicant.getCouplePerson2Firstname(),
+        ]
+    else:
+        applicants_info = [
+            applicant.getName1(),
+            applicant.getName2(),
+            applicant.getSociety(),
+            applicant.getNationalRegister(),
+        ]
     if hasattr(applicant, 'getDenomination'):
         applicants_info.append(applicant.getDenomination())
     if hasattr(applicant, 'getBceNumber'):
