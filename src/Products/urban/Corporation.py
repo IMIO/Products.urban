@@ -130,6 +130,7 @@ Corporation_schema['nationalRegister'].widget.visible = False
 #Corporation_schema['personTitle'].widget.visible = False
 ##/code-section after-schema
 
+
 class Corporation(BaseContent, Applicant, BrowserDefaultMixin):
     """
     """
@@ -149,6 +150,7 @@ class Corporation(BaseContent, Applicant, BrowserDefaultMixin):
     # Manually created methods
 
     security.declarePublic('Title')
+
     def Title(self):
         """
         Generate the title...
@@ -176,7 +178,6 @@ class Corporation(BaseContent, Applicant, BrowserDefaultMixin):
         return nameSignaletic
 
 
-
 registerType(Corporation, PROJECTNAME)
 # end of class Corporation
 
@@ -196,6 +197,6 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     schema.moveField('name1', after='personRole')
     schema.moveField('name2', after='name1')
 
+
 finalizeSchema(Corporation_schema)
 ##/code-section module-footer
-
