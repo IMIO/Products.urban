@@ -366,7 +366,7 @@ def add_and_active_corporation_tenant(context):
     setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'typeinfo')
     setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'workflow')
     logger.info("upgrade step done!")
-    
+
 def addDocumentationLinkToUserPortalActionAndHideViewlet(context):
     """
     add documentation link to useractions and hide contact viewlet in footer
@@ -376,4 +376,28 @@ def addDocumentationLinkToUserPortalActionAndHideViewlet(context):
     setup_tool = api.portal.get_tool('portal_setup')
     setup_tool.runImportStepFromProfile('profile-Products.urban:default', 'actions')
     setup_tool.runImportStepFromProfile('profile-Products.urban:default', 'viewlets')
+    logger.info("upgrade step done!")
+
+def add_deposit_date_column_to_dashboards(context):
+    """
+    Activate deposit date column on all licence dashboards.
+    """
+    logger = logging.getLogger('urban: add deposit date to dashboards')
+    logger.info("starting upgrade steps")
+    site = api.portal.get()
+
+    old_fields = (u'sortable_title', u'CreationDate', u'folder_manager', 'actions', 'select_row')
+    new_fields = ('sortable_title', 'CreationDate', 'getDepositDate', 'folder_manager', 'actions', 'select_row')
+
+    collection = site.urban.collection_all_licences
+    if collection.customViewFields == old_fields:
+        collection.setCustomViewFields(new_fields)
+
+    for folder in site.urban.objectValues('ATFolder'):
+        collection = folder.objectIds() and folder.objectValues()[0]
+        if not collection or folder.id in ['patrimonycertificates', 'inspections']:
+            continue
+        if collection.portal_type == 'DashboardCollection':
+            if collection.customViewFields == old_fields:
+                collection.setCustomViewFields(new_fields)
     logger.info("upgrade step done!")
