@@ -49,6 +49,7 @@
   <type portal_type="EnvironmentLicence"/>
   <type portal_type="EnvClassThree"/>
   <type portal_type="Corporation"/>
+  <type portal_type="Couple"/>
   <type portal_type="Claimant"/>
   <type portal_type="Applicant"/>
   <type portal_type="EnvClassTwo"/>
