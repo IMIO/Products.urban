@@ -315,6 +315,11 @@ class ICorporation(Interface):
     """
 
 
+class ICouple(Interface):
+    """Marker interface for .Couple.Couple
+    """
+
+
 class IClaimant(Interface):
     """Marker interface for .Claimant.Claimant
     """
@@ -660,6 +665,7 @@ class IContactFolder(Interface):
 class IUrbanDoc(Interface):
     """Marker interface for generated document.
     """
+
 
 # [DX] TO DELETE > 2.5 [DX]
 class ILicencePortionOut(Interface):
