@@ -1012,6 +1012,8 @@ def setupImioDashboard(context):
         folder = getattr(urban_folder, urban_type.lower() + 's')
         _activate_dashboard_navigation(folder, '/dashboard/config/%ss.xml' % urban_type.lower())
         collection_id = 'collection_%s' % urban_type.lower()
+        no_deposit = ['PatrimonyCertificate', 'Inspection']
+        with_deposit_date = urban_type not in no_deposit
         if collection_id not in folder.objectIds():
             setFolderAllowedTypes(folder, 'DashboardCollection')
             _create_dashboard_collection(
@@ -1019,6 +1021,7 @@ def setupImioDashboard(context):
                 id=collection_id,
                 title=_(urban_type, 'urban'),
                 filter_type=[urban_type],
+                with_deposit_date=with_deposit_date,
             )
             setFolderAllowedTypes(folder, urban_type)
         folder.moveObjectToPosition(collection_id, 0)
@@ -1027,13 +1030,17 @@ def setupImioDashboard(context):
         _updateDefaultCollectionFor(folder, collection.UID())
 
 
-def _create_dashboard_collection(container, id, title, filter_type):
+def _create_dashboard_collection(container, id, title, filter_type, with_deposit_date=True):
+    if with_deposit_date:
+        fields = ('sortable_title', 'CreationDate', 'getDepositDate', 'folder_manager', 'actions', 'select_row')
+    else:
+        fields = ('sortable_title', 'CreationDate', 'folder_manager', 'actions', 'select_row')
     collection_id = container.invokeFactory(
         'DashboardCollection',
         id=id,
         title=title,
         query=[{'i': 'portal_type', 'o': 'plone.app.querystring.operation.selection.is', 'v': filter_type}],
-        customViewFields=('sortable_title', 'CreationDate', 'folder_manager', 'actions', 'select_row'),
+        customViewFields=fields,
         sort_on=u'created',
         sort_reversed=True,
         b_size=30

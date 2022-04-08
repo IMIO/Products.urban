@@ -330,5 +330,13 @@
         destination="1113"
         handler=".update_250.addDocumentationLinkToUserPortalActionAndHideViewlet"
         profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Activate deposit date column on all licence dashboards."
+        description="urban upgrade step"
+        source="1113"
+        destination="1114"
+        handler=".update_250.add_deposit_date_column_to_dashboards"
+        profile="Products.urban:default" />
   
 </configure>
