@@ -190,6 +190,9 @@
 <type type_id="CorporationTenant">
   <bound-workflow workflow_id="activation_workflow" />
 </type>
+<type type_id="Couple">
+  <bound-workflow workflow_id="activation_workflow" />
+</type>
 <type type_id="EnvClassOne">
   <bound-workflow workflow_id="urban_licence_workflow" />
 </type>
