@@ -386,7 +386,7 @@ def add_deposit_date_column_to_dashboards(context):
     logger.info("starting upgrade steps")
     site = api.portal.get()
 
-    old_fields = (u'sortable_title', u'CreationDate', u'folder_manager', 'actions', 'select_row')
+    old_fields = ('sortable_title', 'CreationDate', 'folder_manager', 'actions', 'select_row')
     new_fields = ('sortable_title', 'CreationDate', 'getDepositDate', 'folder_manager', 'actions', 'select_row')
 
     collection = site.urban.collection_all_licences
