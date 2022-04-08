@@ -21,6 +21,7 @@
    <element value="UrbanEventNotificationCollege"/>
    <element value="Applicant"/>
    <element value="Corporation"/>
+   <element value="Couple"/>
    <element value="CODT_Inquiry"/>
    <element value="UrbanEvent"/>
    <element value="File"/>
