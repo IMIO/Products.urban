@@ -1080,27 +1080,12 @@ class UrbanDocGenerationLicenceHelperView(UrbanDocGenerationHelperView):
 class UrbanDocGenerationEventHelperView(UrbanDocGenerationHelperView):
     """
     """
-    def correction_corporation_contact(self, mailing_l):
-        """
-        Set title, name, firstname to contactPerson informations
-        """
-        liste_corporation_portal_type = ['Corporation', 'CorporationProprietary', 'CorporationPlaintiff', 'CorporationTenant']
-        for elmt in mailing_l:
-            if elmt.portal_type in liste_corporation_portal_type:
-                elmt.setPersonTitle(elmt.getContactPersonTitle())
-                elmt.setName1(elmt.getContactPersonName())
-                elmt.setName2(elmt.getContactPersonFirstname())
-        return mailing_l
-
     def mailing_list(self, gen_context=None):
         mailing_list = []
-        licencenv = ['EnvClassOne', 'EnvClassTwo', 'EnvClassThree', 'EnvClassBordering', 'ExplosivesPossession']
         use_proxy = True
         if gen_context and 'publipostage' in gen_context:
             if gen_context['publipostage'] == 'demandeurs':
                 mailing_list = self.real_context.getParentNode().getApplicants()
-                if self.real_context.getParentNode().portal_type in licencenv:
-                    self.correction_corporation_contact(mailing_list)
             elif gen_context['publipostage'] == 'corporation_demandeurs':
                 mailing_list = self.real_context.getParentNode().getCorporations()
             elif gen_context['publipostage'] == 'architectes':
@@ -1115,8 +1100,6 @@ class UrbanDocGenerationEventHelperView(UrbanDocGenerationHelperView):
                 mailing_list = self.context.getLinkedUrbanEventInquiry().getClaimants()
             elif gen_context['publipostage'] == 'proprietaire':
                 mailing_list = self.real_context.getParentNode().getProprietaries()
-                if self.real_context.getParentNode().portal_type in licencenv:
-                    self.correction_corporation_contact(mailing_list)
             elif gen_context['publipostage'] == 'proprietaires_voisinage_enquete':
                 if IUrbanEventInquiry.providedBy(self.real_context):
                     inquiry_event = self.real_context
