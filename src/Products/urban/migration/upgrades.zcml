@@ -338,5 +338,13 @@
         destination="1114"
         handler=".update_250.add_deposit_date_column_to_dashboards"
         profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Add a final 's' to mailing var 'proprietaire'"
+        description="urban upgrade step"
+        source="1114"
+        destination="1115"
+        handler=".update_250.replace_mailing_loop_proprietaries"
+        profile="Products.urban:default" />
   
 </configure>

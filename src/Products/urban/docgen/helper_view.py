@@ -1110,7 +1110,7 @@ class UrbanDocGenerationEventHelperView(UrbanDocGenerationHelperView):
                 mailing_list = self.context.getClaimants()
             elif gen_context['publipostage'] == 'derniers_reclamants':
                 mailing_list = self.context.getLinkedUrbanEventInquiry().getClaimants()
-            elif gen_context['publipostage'] == 'proprietaire':
+            elif gen_context['publipostage'] == 'proprietaires':
                 mailing_list = self.real_context.getParentNode().getProprietaries()
             elif gen_context['publipostage'] == 'proprietaires_voisinage_enquete':
                 if IUrbanEventInquiry.providedBy(self.real_context):
