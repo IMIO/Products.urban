@@ -401,3 +401,27 @@ def add_deposit_date_column_to_dashboards(context):
             if collection.customViewFields == old_fields:
                 collection.setCustomViewFields(new_fields)
     logger.info("upgrade step done!")
+
+
+def replace_mailing_loop_proprietaries(context):
+    """
+    Mailing typo: replace proprietaire by proprietaires (with 's')
+    """
+    logger = logging.getLogger('urban: replace mailing loop proprietaries')
+    logger.info("starting upgrade steps")
+    catalog = api.portal.get_tool('portal_catalog')
+    template_brains = catalog(object_provides=IConfigurablePODTemplate.__identifier__)
+    # get brains instead of all templates because brains are small
+    for brain in template_brains:
+        template = brain.getObject()
+        # get the template we need
+        if template.context_variables:
+            # false if template.context_variables is None or empty
+            new_value = []
+            for line in template.context_variables:
+                if line['value'] == 'proprietaire':
+                    logger.info("migrated template : {} ".format(template))
+                    line['value'] = 'proprietaires'
+                new_value.append(line)
+            template.context_variables = new_value
+    logger.info("upgrade done!")
