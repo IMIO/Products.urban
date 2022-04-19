@@ -88,6 +88,29 @@ class ComplementsAsked(Condition):
         return complements_asked
 
 
+class AcknowledgmentDoneOrComplementsAskedCondition(Condition):
+    """
+    Licence acknowlegdment event is closed or we have asked recent complements.
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+
+        acknowledgment_done = False
+        acknowledgment_event = licence.getLastAcknowledgment()
+        if acknowledgment_event:
+            acknowledgment_done = api.content.get_state(acknowledgment_event) == 'closed'
+
+        complements_asked = False
+        missing_part_event = licence.getLastMissingPart()
+        if missing_part_event:
+            complements_asked = api.content.get_state(missing_part_event) == 'closed'
+            recent = self.task.creation_date < missing_part_event.creation_date
+            complements_asked = complements_asked and recent
+
+        return acknowledgment_done or complements_asked
+
+
 class ComplementsReceived(Condition):
     """
     Licence MissingPartDeposit event is created and closed.
