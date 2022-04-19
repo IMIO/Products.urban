@@ -23,6 +23,9 @@ msgstr "Créer l'événement d'accusé de réception"
 msgid "urban.schedule.condition.acknowledgment_done"
 msgstr "Créer l'événement d'accusé de réception et le clôturer"
 
+msgid "urban.schedule.condition.acknowledgment_or_incomplete"
+msgstr "Événement 'Accusé de réception' cloturé ou événement '1er dossier incomplet' cloturé"
+
 msgid "urban.schedule.condition.all_followups_done"
 msgstr "Créer et clôturer tous les événements de réponse administrative"
 

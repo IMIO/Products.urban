@@ -44,7 +44,9 @@ class SingleComplementAsked(Condition):
         complements_asked = False
         missing_part_event = licence.getLastMissingPart()
         if missing_part_event:
+            recent = self.task.creation_date < missing_part_event.creation_date
             complements_asked = api.content.get_state(missing_part_event) == 'closed'
+            complements_asked = complements_asked and recent
 
         return complements_asked
 
@@ -82,8 +84,6 @@ class ComplementsAsked(Condition):
         missing_part_event = licence.getLastMissingPart()
         if missing_part_event:
             complements_asked = api.content.get_state(missing_part_event) == 'closed'
-            recent = self.task.creation_date < missing_part_event.creation_date
-            complements_asked = complements_asked and recent
 
         return complements_asked
 

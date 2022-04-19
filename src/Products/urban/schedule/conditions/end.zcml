@@ -158,6 +158,14 @@
     />
 
     <adapter
+        for="Products.urban.interfaces.IBaseAllBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.AcknowledgmentDoneOrComplementsAskedCondition"
+        name="urban.schedule.condition.acknowledgment_or_incomplete"
+    />
+
+    <adapter
         for="Products.urban.interfaces.IEnvironmentBase
              imio.schedule.content.task.IAutomatedTask"
         provides="imio.schedule.interfaces.IEndCondition"
