@@ -33,6 +33,10 @@ class BoundTicketSettlementEventDone(WarningCondition):
 
     def evaluate(self):
         bound_tickets = self.licence.get_bound_tickets()
+        bound_inspections = self.licence.get_bound_inspections()
+        if bound_inspections:
+            for inspection in bound_inspections:
+                bound_tickets.extend(inspection.get_bound_tickets())
         if bound_tickets:
             for ticket in bound_tickets:
                 settlement_event = ticket.getLastSettlement()
