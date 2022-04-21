@@ -622,6 +622,10 @@ class ISuspensionEvent(Interface):
     __doc__ = _("""ISuspensionEvent type marker interface""")
 
 
+class ISettlementEvent(Interface):
+    __doc__ = _("""ISettlementEvent type marker interface""")
+
+
 class IUrbanBase(Interface):
     """Marker interface for .Base.UrbanBase
     """
@@ -660,6 +664,7 @@ class IContactFolder(Interface):
 class IUrbanDoc(Interface):
     """Marker interface for generated document.
     """
+
 
 # [DX] TO DELETE > 2.5 [DX]
 class ILicencePortionOut(Interface):
@@ -774,3 +779,7 @@ class IGlobalSuspensionPeriod(Interface):
 
 class IFacetedCollection(Interface):
     """ Adapts an object into a faceted collection """
+
+
+class IUrbanWarningCondition(Interface):
+    """ Adapts a licence into a warning message """

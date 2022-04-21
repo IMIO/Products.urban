@@ -425,3 +425,20 @@ def replace_mailing_loop_proprietaries(context):
                 new_value.append(line)
             template.context_variables = new_value
     logger.info("upgrade done!")
+
+
+def set_default_warnings(context):
+    """
+    Set parcels warning on portal_urban warnings field.
+    """
+    logger = logging.getLogger('urban: replace mailing loop proprietaries')
+    logger.info("starting upgrade steps")
+    portal_urban = api.portal.get_tool('portal_urban')
+    portal_urban.setWarnings(
+        ({
+            'condition': 'urban.warnings.define_parcels',
+            'level': 'warning',
+            'message': 'Veuillez renseigner la ou les parcelle(s) concern\xc3\xa9e(s).'
+        },)
+    )
+    logger.info("upgrade done!")

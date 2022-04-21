@@ -42,6 +42,8 @@ from Products.PageTemplates.Expressions import getEngine
 from Products.CMFCore.Expression import Expression
 from plone import api
 from DateTime import DateTime
+from zope.interface import implementedBy
+from zope.component import getGlobalSiteManager
 
 ##/code-section module-header
 
@@ -118,6 +120,23 @@ schema = Schema((
         schemata='public_settings',
         columns=('fieldname', 'text'),
         validators=('isTextFieldConfigured',),
+    ),
+    DataGridField(
+        name='warnings',
+        allow_oddeven=True,
+        widget=DataGridWidget(
+            columns={
+                'condition': SelectColumn('Condition', 'listWarningConditions'),
+                'message': TextAreaColumn('Message', rows=6, cols=60),
+                'level': SelectColumn('Level', 'listWarningLevels'),
+            },
+            label='Warnings',
+            label_msgid='urban_label_warnings',
+            i18n_domain='urban',
+        ),
+        schemata='public_settings',
+        columns=('condition', 'message', 'level'),
+        default=[],
     ),
     StringField(
         name='referenceTALExpression',
@@ -479,6 +498,37 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
         ]
         #return a vocabulary containing the names of all the text fields of the schema
         return DisplayList(sorted(vocabulary_fields, key=lambda name: name[1]))
+
+    security.declarePublic('listWarningConditions')
+
+    def listWarningConditions(self):
+        licence_type = self.getLicencePortalType()
+        archetype_tool = api.portal.get_tool('archetype_tool')
+        klass = None
+        for type_info in archetype_tool.listRegisteredTypes():
+            if type_info['name'] == licence_type:
+                klass = type_info.get('klass', None)
+                break
+        gsm = getGlobalSiteManager()
+
+        terms = set([])
+        for scheduled_interface in implementedBy(klass):
+            for adapter in gsm.registeredAdapters():
+                implements = issubclass(adapter.provided, interfaces.IUrbanWarningCondition)
+                specific_enough = issubclass(scheduled_interface, adapter.required[0])
+                if implements and specific_enough:
+                    terms.add((adapter.name, _(adapter.name)))
+        return DisplayList(sorted(list(terms), key=lambda name: name[1]))
+
+    security.declarePublic('listWarningLevels')
+
+    def listWarningLevels(self):
+        terms = [
+            ('info', translate('Info', 'plone', context=self.REQUEST)),
+            ('warning', translate('Warning', 'plone', context=self.REQUEST)),
+            ('error', translate('Error', 'plone', context=self.REQUEST)),
+        ]
+        return DisplayList(terms)
 
     def default_numerotation_source(self):
         return self.id
