@@ -1502,6 +1502,28 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
             return roaddecrees
         return []
 
+    def get_bound_inspections(self):
+        inspections = []
+        annotations = IAnnotations(self)
+        roaddecree_UIDs = list(annotations.get('urban.bound_inspections', []))
+        if roaddecree_UIDs:
+            catalog = api.portal.get_tool('portal_catalog')
+            brains = catalog(UID=roaddecree_UIDs)
+            inspections = [b.getObject() for b in brains]
+            return inspections
+        return []
+
+    def get_bound_tickets(self):
+        tickets = []
+        annotations = IAnnotations(self)
+        roaddecree_UIDs = list(annotations.get('urban.bound_tickets', []))
+        if roaddecree_UIDs:
+            catalog = api.portal.get_tool('portal_catalog')
+            brains = catalog(UID=roaddecree_UIDs)
+            tickets = [b.getObject() for b in brains]
+            return tickets
+        return []
+
 registerType(GenericLicence, PROJECTNAME)
 # end of class GenericLicence
 
