@@ -322,7 +322,7 @@
         destination="1111"
         handler=".update_250.add_and_active_corporation_tenant"
         profile="Products.urban:default" />
-  
+
     <gs:upgradeStep
         title="add documentation link to user portal_actions and hide contact viewlet in footer"
         description="urban upgrade step"
@@ -354,5 +354,13 @@
         destination="1116"
         handler=".update_250.set_default_warnings"
         profile="Products.urban:default" />
-  
+
+    <gs:upgradeStep
+        title="Update tickets title"
+        description="urban upgrade step"
+        source="1116"
+        destination="1117"
+        handler=".update_250.update_tickets_title"
+        profile="Products.urban:default" />
+
 </configure>

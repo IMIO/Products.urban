@@ -442,3 +442,17 @@ def set_default_warnings(context):
         },)
     )
     logger.info("upgrade done!")
+
+
+def update_tickets_title(context):
+    """
+    Recompute ticket title.
+    """
+    logger = logging.getLogger('urban: replace mailing loop proprietaries')
+    logger.info("starting upgrade steps")
+    catalog = api.portal.get_tool('portal_catalog')
+    brains = catalog(portal_type='Ticket')
+    for brain in brains:
+        ticket = brain.getObject()
+        ticket.updateTitle()
+    logger.info("upgrade done!")
