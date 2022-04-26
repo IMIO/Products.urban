@@ -26,7 +26,7 @@ slave_fields_bound_inspection = (
     },
 )
 
-optional_fields = ['managed_by_prosecutor']
+optional_fields = ['managed_by_prosecutor', 'inspectionDescription']
 
 schema = Schema((
     StringField(
@@ -107,6 +107,17 @@ schema = Schema((
             label=_('urban_label_managed_by_prosecutor', default='Managed_by_prosecutor'),
         ),
         schemata='urban_description',
+    ),
+    TextField(
+        name='inspectionDescription',
+        widget=RichWidget(
+            label=_('urban_label_inspectionDescription', default='Inspectiondescription'),
+        ),
+        default_content_type='text/html',
+        allowable_content_types=('text/html',),
+        schemata='urban_inspection',
+        default_method='getDefaultText',
+        default_output_type='text/html',
     ),
 ),
 )
