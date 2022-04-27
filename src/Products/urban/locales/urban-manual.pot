@@ -1315,6 +1315,19 @@ msgstr ""
 msgid "urban_label_tvaNumber"
 msgstr ""
 
+#: skins/urban_templates/referencebrowser_popup.pt
+msgid "add_Architect"
+msgstr ""
+
+msgid "add_Geometrician"
+msgstr ""
+
+msgid "add_Notary"
+msgstr ""
+
+msgid "add_Parcelling"
+msgstr ""
+
 #. Default: "Usetabbingfordisplay"
 #: LicenceConfig.py
 msgid "urban_label_useTabbingForDisplay"
