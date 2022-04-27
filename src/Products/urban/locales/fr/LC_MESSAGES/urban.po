@@ -838,6 +838,19 @@ msgstr "Jours de fermeture en semaine"
 msgid "You can not create this UrbanEvent !"
 msgstr "Vous ne pouvez pas créer cet événement"
 
+#: skins/urban_templates/referencebrowser_popup.pt
+msgid "add_Architect"
+msgstr "Ajouter un architecte"
+
+msgid "add_Geometrician"
+msgstr "Ajouter un géomètre"
+
+msgid "add_Notary"
+msgstr "Ajouter un notaire"
+
+msgid "add_Parcelling"
+msgstr "Ajouter un lotissement"
+
 #: ../browser/templates/urbaneventannouncementview.pt:145
 #: ../browser/templates/urbaneventinquiryview.pt:143
 msgid "add_a_claimant"
@@ -2643,7 +2656,7 @@ msgid "urban_label_askingDate"
 msgstr "Date de demande"
 
 #. Default: "Asyncinquiryradius"
-#: ../UrbanTool.py:182
+#: ../UrbanTool.py:183
 msgid "urban_label_asyncInquiryRadius"
 msgstr "Délayer les rayons d'enquêtes importants"
 
@@ -2826,7 +2839,7 @@ msgid "urban_label_classification_order_scope"
 msgstr "Portée de l'arrêté de classement"
 
 #. Default: "College Holidays"
-#: ../UrbanTool.py:132
+#: ../UrbanTool.py:133
 msgid "urban_label_collegeHolidays"
 msgstr "Vacances du Collège"
 
@@ -3084,7 +3097,7 @@ msgid "urban_label_divisionsRenaming"
 msgstr "Nom alternatif des divisions pour la génération des documents"
 
 #. Default: "Editionoutputformat"
-#: ../UrbanTool.py:153
+#: ../UrbanTool.py:154
 msgid "urban_label_editionOutputFormat"
 msgstr "Format de fichier des modèles générés"
 
@@ -3312,7 +3325,7 @@ msgid "urban_label_general_disposition"
 msgstr "Disposition générale"
 
 #. Default: "Generatesingletondocuments"
-#: ../UrbanTool.py:164
+#: ../UrbanTool.py:165
 msgid "urban_label_generateSingletonDocuments"
 msgstr "Générer directement les documents uniques"
 
@@ -3414,6 +3427,7 @@ msgstr "Type de publicité"
 
 #. Default: "Inspectiondescription"
 #: ../content/licence/Inspection.py:82
+#: ../content/licence/Ticket.py:114
 msgid "urban_label_inspectionDescription"
 msgstr "Observations"
 
@@ -3428,7 +3442,7 @@ msgid "urban_label_internal_service"
 msgstr "Service interne à la ville"
 
 #. Default: "Invertaddressnames"
-#: ../UrbanTool.py:173
+#: ../UrbanTool.py:174
 msgid "urban_label_invertAddressNames"
 msgstr "Inverser le nom et prénom des destinataires de courriers"
 
@@ -3669,7 +3683,7 @@ msgid "urban_label_locationTechnicalRemarks"
 msgstr "Remarques techniques (Fiche Urbanisme)"
 
 #. Default: "Logmaprequests"
-#: ../UrbanTool.py:191
+#: ../UrbanTool.py:192
 msgid "urban_label_logMapRequests"
 msgstr "Logger les accès à la cartographie avec collective.fingerpointing"
 
@@ -3694,7 +3708,7 @@ msgid "urban_label_manualParcels"
 msgstr "Parcelles"
 
 #. Default: "Map Url"
-#: ../UrbanTool.py:144
+#: ../UrbanTool.py:145
 msgid "urban_label_mapUrl"
 msgstr ""
 
@@ -4744,7 +4758,7 @@ msgid "urban_label_usage"
 msgstr "Statistiques INS"
 
 #. Default: "Useplonemeetingwsclient"
-#: ../UrbanTool.py:214
+#: ../UrbanTool.py:215
 msgid "urban_label_usePloneMeetingWSClient"
 msgstr "Utiliser le lien PloneMeeting plutôt que les documents de délibération du collège"
 
