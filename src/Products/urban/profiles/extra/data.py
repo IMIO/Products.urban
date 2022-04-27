@@ -69,7 +69,7 @@ EventConfigs = {
                     'context_variables': [
                         {
                             'name': 'publipostage',
-                            'value': 'corporation_demandeurs'
+                            'value': 'demandeurs'
                         }
                     ]
                 },
