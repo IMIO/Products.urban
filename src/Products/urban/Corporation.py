@@ -112,34 +112,34 @@ schema = Schema((
         ),
     ),
     StringField(
-        name='headOfficeStreet',
+        name='contactPersonStreet',
         widget=StringField._properties['widget'](
-            label='HeadOfficeStreet',
-            label_msgid='urban_label_headofficestreet',
+            label='ContactPersonStreet',
+            label_msgid='urban_label_contactpersonstreet',
             i18n_domain='urban',
         ),
     ),
     StringField(
-        name='headOfficeNumber',
+        name='contactPersonNumber',
         widget=StringField._properties['widget'](
-            label='HeadOfficeNumber',
-            label_msgid='urban_label_headofficenumber',
+            label='ContactPersonNumber',
+            label_msgid='urban_label_contactpersonnumber',
             i18n_domain='urban',
         ),
     ),
     StringField(
-        name='headOfficeZipcode',
+        name='contactPersonZipcode',
         widget=StringField._properties['widget'](
-            label='HeadOfficeZipcode',
-            label_msgid='urban_label_headofficezipcode',
+            label='ContactPersonZipcode',
+            label_msgid='urban_label_contactpersonzipcode',
             i18n_domain='urban',
         ),
     ),
     StringField(
-        name='headOfficeCity',
+        name='contactPersonCity',
         widget=StringField._properties['widget'](
-            label='HeadOfficeCity',
-            label_msgid='urban_label_headofficecity',
+            label='ContactPersonCity',
+            label_msgid='urban_label_contactpersoncity',
             i18n_domain='urban',
         ),
     ),
@@ -228,10 +228,10 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     schema.moveField('personRole', after='personTitle')
     schema.moveField('name1', after='personRole')
     schema.moveField('name2', after='name1')
-    schema.moveField('headOfficeStreet', after='contactPersonPhone')
-    schema.moveField('headOfficeNumber', after='headOfficeStreet')
-    schema.moveField('headOfficeZipcode', after='headOfficeNumber')
-    schema.moveField('headOfficeCity', after='headOfficeZipcode')
+    schema.moveField('contactPersonStreet', after='contactPersonPhone')
+    schema.moveField('contactPersonNumber', after='contactPersonStreet')
+    schema.moveField('contactPersonZipcode', after='contactPersonNumber')
+    schema.moveField('contactPersonCity', after='contactPersonZipcode')
 
 
 finalizeSchema(Corporation_schema)
