@@ -1100,14 +1100,16 @@ class UrbanDocGenerationEventHelperView(UrbanDocGenerationHelperView):
         if gen_context and 'publipostage' in gen_context:
             if gen_context['publipostage'] == 'demandeurs':
                 mailing_list = self.real_context.getParentNode().getApplicants()
-            elif gen_context['publipostage'] == 'corporation_demandeurs':
-                mailing_list = self.real_context.getParentNode().getCorporations()
             elif gen_context['publipostage'] == 'architectes':
                 mailing_list = self.context.getArchitects()
             elif gen_context['publipostage'] == 'geometres':
                 mailing_list = self.context.getGeometricians()
             elif gen_context['publipostage'] == 'notaires':
                 mailing_list = self.context.getNotaryContact()
+            elif gen_context['publipostage'] == 'plaignants':
+                mailing_list = self.real_context.getParentNode().getPlaintiffs()
+            elif gen_context['publipostage'] == 'locataires':
+                mailing_list = self.real_context.getParentNode().getTenants()
             elif gen_context['publipostage'] == 'reclamants':
                 mailing_list = self.context.getClaimants()
             elif gen_context['publipostage'] == 'derniers_reclamants':
