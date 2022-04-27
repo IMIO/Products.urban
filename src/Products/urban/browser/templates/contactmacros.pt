@@ -80,8 +80,8 @@
                            addressFields python: ['isSameAddressAsWorks', 'street', 'number', 'zipcode', 'city', 'country'];
                            representativeFields python: ['personTitle', 'personRole', 'name1', 'name2'];
                            contactPersonFields python: ['contactPersonTitle', 'contactPersonName', 'contactPersonFirstname',
-                                                        'contactPersonPhone', 'contactPersonEmail', 'contactPersonStreet',
-                                                        'contactPersonNumber', 'contactPersonZipcode', 'contactPersonCity']">
+                                                        'contactPersonPhone', 'contactPersonEmail'];
+                           contactPersonAddressFields python: ['contactPersonStreet', 'contactPersonNumber', 'contactPersonZipcode', 'contactPersonCity'];">
 
             <tal:address condition="python: fieldName in addressFields">
                 <tal:manage_address condition="python: fieldName == 'isSameAddressAsWorks'">
@@ -127,11 +127,19 @@
                     <tal:cp_fields repeat="field_name contactPersonFields">
                         <metal:fieldMacro use-macro="python:here.widget(field_name, mode='edit')" />
                     </tal:cp_fields>
-                    <span> (adresse siege social)</span>
                 </fieldset>
             </tal:contactPerson>
 
-            <tal:other condition="not: python: fieldName in addressFields or fieldName in representativeFields or fieldName in contactPersonFields">
+            <tal:contactPersonAddress condition="python: fieldName == contactPersonAddressFields[0]">
+                <fieldset class="urban-fieldset-masterbooleanwidget" style="border-style: solid !important;">
+                    <legend i18n:translate="corporation_contactPersonAddress_fieldset_legend">Contact person address / headoffice</legend>
+                    <tal:cp_fields repeat="field_name contactPersonAddressFields">
+                        <metal:fieldMacro use-macro="python:here.widget(field_name, mode='edit')" />
+                    </tal:cp_fields>
+                </fieldset>
+            </tal:contactPersonAddress>
+
+            <tal:other condition="not: python: fieldName in addressFields or fieldName in representativeFields or fieldName in contactPersonFields or fieldName in contactPersonAddressFields">
                 <metal:widget define-slot="widget">
                     <metal:fieldMacro use-macro="python:here.widget(field.getName(), mode='edit')" />
                 </metal:widget>
