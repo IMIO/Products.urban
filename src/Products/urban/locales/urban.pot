@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2022-04-26 12:55+0000\n"
+"POT-Creation-Date: 2022-04-27 09:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1097,6 +1097,11 @@ msgstr ""
 #: ../browser/licence/templates/licencemacros.pt:5
 #: ../browser/licence/templates/licencetabsmacros.pt:92
 msgid "content_none"
+msgstr ""
+
+#. Default: "Contact person address / headoffice"
+#: ../browser/templates/contactmacros.pt:135
+msgid "corporation_contactPersonAddress_fieldset_legend"
 msgstr ""
 
 #. Default: "Contact person"
