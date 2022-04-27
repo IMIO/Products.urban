@@ -80,8 +80,8 @@
                            addressFields python: ['isSameAddressAsWorks', 'street', 'number', 'zipcode', 'city', 'country'];
                            representativeFields python: ['personTitle', 'personRole', 'name1', 'name2'];
                            contactPersonFields python: ['contactPersonTitle', 'contactPersonName', 'contactPersonFirstname',
-                                                        'contactPersonPhone', 'contactPersonEmail', 'headOfficeStreet',
-                                                        'headOfficeNumber', 'headOfficeZipcode', 'headOfficeCity']">
+                                                        'contactPersonPhone', 'contactPersonEmail', 'contactPersonStreet',
+                                                        'contactPersonNumber', 'contactPersonZipcode', 'contactPersonCity']">
 
             <tal:address condition="python: fieldName in addressFields">
                 <tal:manage_address condition="python: fieldName == 'isSameAddressAsWorks'">
