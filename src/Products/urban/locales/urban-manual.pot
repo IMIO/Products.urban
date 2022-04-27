@@ -1354,6 +1354,9 @@ msgstr ""
 msgid "urban_label_zipCode"
 msgstr ""
 
+msgid "urban_label_warnings"
+msgstr ""
+
 msgid "urbancertificateones"
 msgstr ""
 
@@ -1453,4 +1456,10 @@ msgid "inquiry_suspension"
 msgstr ""
 
 msgid "other"
+msgstr ""
+
+msgid "urban.warnings.define_parcels"
+msgstr ""
+
+msgid "urban.warnings.bound_ticket_settlement"
 msgstr ""

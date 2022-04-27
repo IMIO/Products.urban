@@ -246,6 +246,10 @@
                    zope.lifecycleevent.interfaces.IObjectCreatedEvent"
               handler=".dashboard_collection.set_dashboard_columns" />
 
+  <subscriber for="..interfaces.IUrbanTool
+                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+              handler=".configuration_events.activate_optional_fields" />
+
   <subscriber for="..interfaces.IUrbanConfigurationValue
                    Products.DCWorkflow.interfaces.IAfterTransitionEvent"
               handler=".configuration_events.update_vocabulary_term_cache" />

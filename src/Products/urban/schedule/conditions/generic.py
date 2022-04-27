@@ -516,7 +516,8 @@ class FDOpinionAsked(FDCondition):
     def evaluate(self):
         if not self.FD_event:
             return False
-        return api.content.get_state(self.FD_event) == 'waiting_opinion'
+        # 'closed' => case where the FD event is a college event
+        return api.content.get_state(self.FD_event) in ['waiting_opinion', 'closed']
 
 
 class FDOpinionReceived(FDCondition):
@@ -526,7 +527,8 @@ class FDOpinionReceived(FDCondition):
     def evaluate(self):
         if not self.FD_event:
             return False
-        return api.content.get_state(self.FD_event) == 'opinion_given'
+        # 'closed' => case where the FD event is a college event
+        return api.content.get_state(self.FD_event) in ['opinion_given', 'closed']
 
 
 class LicenceDecisionCollegeEventCreated(Condition):

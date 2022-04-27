@@ -80,8 +80,13 @@ class ComputeInquiryDelay(object):
             if licence.getRoadAdaptation() and licence.getRoadAdaptation() != ['']:
                 inquiry_delay = 30
 
-        if licence.portal_type in ['EnvClassOne', 'CODT_UniqueLicence']:
+        if licence.portal_type in ['EnvClassOne']:
             inquiry_delay = 30
+        if licence.portal_type == 'CODT_UniqueLicence':
+            if licence.getInquiry_category() == 'B':
+                inquiry_delay = 30
+            if licence.getInquiry_category() == 'C':
+                inquiry_delay = 15
         if self.context.getLinkedInquiry().getInquiry_type() == 'announcement':
             inquiry_delay = 15
         weekmask = urban_tool.get_week_offdays(as_mask=True)

@@ -8,6 +8,7 @@
   <include package=".cron" />
   <include package=".licence" />
   <include package=".table" />
+  <include package=".warnings" />
   <include file="portlets.zcml" />
 
   <browser:resourceDirectory

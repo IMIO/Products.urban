@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2022-03-31 13:51+0000\n"
+"POT-Creation-Date: 2022-04-26 12:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,11 +28,11 @@ msgstr ""
 msgid "%s_urbanconfig_title"
 msgstr ""
 
-#: ../content/licence/RoadDecree.py:274
+#: ../content/licence/RoadDecree.py:276
 msgid "105 days"
 msgstr ""
 
-#: ../content/licence/RoadDecree.py:275
+#: ../content/licence/RoadDecree.py:277
 msgid "150 days"
 msgstr ""
 
@@ -40,7 +40,7 @@ msgstr ""
 msgid "1st class"
 msgstr ""
 
-#: ../content/licence/RoadDecree.py:276
+#: ../content/licence/RoadDecree.py:278
 msgid "210 days"
 msgstr ""
 
@@ -48,7 +48,7 @@ msgstr ""
 msgid "2nd class"
 msgstr ""
 
-#: ../content/licence/RoadDecree.py:273
+#: ../content/licence/RoadDecree.py:275
 msgid "75 days"
 msgstr ""
 
@@ -463,6 +463,10 @@ msgstr ""
 msgid "ISentToArchivesEvent type marker interface"
 msgstr ""
 
+#: ../interfaces.py:626
+msgid "ISettlementEvent type marker interface"
+msgstr ""
+
 #: ../interfaces.py:434
 msgid "ISimpleCollegeEvent type marker interface"
 msgstr ""
@@ -541,7 +545,7 @@ msgstr ""
 msgid "IntegratedLicence"
 msgstr ""
 
-#: ../interfaces.py:720
+#: ../interfaces.py:725
 msgid "Internal opinion services"
 msgstr ""
 
@@ -549,7 +553,7 @@ msgstr ""
 msgid "Listing file"
 msgstr ""
 
-#: ../interfaces.py:743
+#: ../interfaces.py:748
 msgid "Mailing limit"
 msgstr ""
 
@@ -557,7 +561,7 @@ msgstr ""
 msgid "Map"
 msgstr ""
 
-#: ../interfaces.py:744
+#: ../interfaces.py:749
 msgid "Max items allowed for immediate mailing"
 msgstr ""
 
@@ -619,11 +623,11 @@ msgstr ""
 msgid "Period"
 msgstr ""
 
-#: ../interfaces.py:758
+#: ../interfaces.py:763
 msgid "Planned claimants imports"
 msgstr ""
 
-#: ../interfaces.py:733
+#: ../interfaces.py:738
 msgid "Planned mailings"
 msgstr ""
 
@@ -687,7 +691,7 @@ msgstr ""
 msgid "Service id"
 msgstr ""
 
-#: ../interfaces.py:721
+#: ../interfaces.py:726
 msgid "Services that can give their opinion directly through urban"
 msgstr ""
 
@@ -704,7 +708,7 @@ msgid "Submit"
 msgstr ""
 
 #: ../browser/offdays_settings.py:39
-#: ../interfaces.py:771
+#: ../interfaces.py:776
 msgid "Suspension period end date"
 msgstr ""
 
@@ -713,7 +717,7 @@ msgid "Suspension period from to: please check the end date"
 msgstr ""
 
 #: ../browser/offdays_settings.py:33
-#: ../interfaces.py:767
+#: ../interfaces.py:772
 msgid "Suspension period start date"
 msgstr ""
 
@@ -957,7 +961,7 @@ msgstr ""
 msgid "buildlicences"
 msgstr ""
 
-#: ../events/configuration_events.py:48
+#: ../events/configuration_events.py:59
 msgid "can_not_delete_street_in_config"
 msgstr ""
 
@@ -1286,7 +1290,7 @@ msgid "error_section"
 msgstr ""
 
 #. Default: "Nombre de signature obligatoire"
-#: ../Claimant.py:120
+#: ../Claimant.py:126
 msgid "error_signatureNumber"
 msgstr ""
 
@@ -1568,7 +1572,7 @@ msgstr ""
 msgid "inadmissibilityreasons_folder_title"
 msgstr ""
 
-#: ../interfaces.py:759
+#: ../interfaces.py:764
 msgid "inquiries planned for claimants imports"
 msgstr ""
 
@@ -1789,11 +1793,11 @@ msgstr ""
 msgid "mail_gig"
 msgstr ""
 
-#: ../interfaces.py:734
+#: ../interfaces.py:739
 msgid "mailings planned"
 msgstr ""
 
-#: ../interfaces.py:749
+#: ../interfaces.py:754
 msgid "mailings planned for radius search"
 msgstr ""
 
@@ -2216,7 +2220,7 @@ msgstr ""
 msgid "uniquelicence_urbanconfig_title"
 msgstr ""
 
-#: ../content/licence/RoadDecree.py:272
+#: ../content/licence/RoadDecree.py:274
 msgid "unknown"
 msgstr ""
 
@@ -2271,6 +2275,12 @@ msgstr ""
 
 #: ../testing.zcml:39
 msgid "urban-testsWithLicences"
+msgstr ""
+
+msgid "urban.warnings.bound_ticket_settlement"
+msgstr ""
+
+msgid "urban.warnings.define_parcels"
 msgstr ""
 
 #. Default: Set the number of days the alert will be shown before the deadline delay
@@ -2443,6 +2453,11 @@ msgstr ""
 msgid "urban_label_SSC"
 msgstr ""
 
+#. Default: "Wantdecisioncopy"
+#: ../Claimant.py:92
+msgid "urban_label_Wantdecisioncopy"
+msgstr ""
+
 #. Default: "Zip"
 #: ../content/licence/UrbanCertificateBase.py:249
 msgid "urban_label_ZIP"
@@ -2566,6 +2581,7 @@ msgstr ""
 
 #. Default: "Archeological_site"
 #: ../content/licence/CODT_BaseBuildLicence.py:290
+#: ../content/licence/Division.py:149
 #: ../content/licence/UrbanCertificateBase.py:460
 msgid "urban_label_archeological_site"
 msgstr ""
@@ -2598,7 +2614,7 @@ msgid "urban_label_askingDate"
 msgstr ""
 
 #. Default: "Asyncinquiryradius"
-#: ../UrbanTool.py:163
+#: ../UrbanTool.py:183
 msgid "urban_label_asyncInquiryRadius"
 msgstr ""
 
@@ -2665,7 +2681,7 @@ msgid "urban_label_bound_inspection"
 msgstr ""
 
 #. Default: "Bound licence"
-#: ../content/licence/RoadDecree.py:61
+#: ../content/licence/RoadDecree.py:63
 msgid "urban_label_bound_licence"
 msgstr ""
 
@@ -2727,7 +2743,7 @@ msgid "urban_label_city"
 msgstr ""
 
 #. Default: "Cityname"
-#: ../UrbanTool.py:70
+#: ../UrbanTool.py:73
 msgid "urban_label_cityName"
 msgstr ""
 
@@ -2775,12 +2791,13 @@ msgstr ""
 
 #. Default: "Classification_order_scope"
 #: ../content/licence/CODT_BaseBuildLicence.py:402
+#: ../content/licence/Division.py:261
 #: ../content/licence/UrbanCertificateBase.py:432
 msgid "urban_label_classification_order_scope"
 msgstr ""
 
 #. Default: "College Holidays"
-#: ../UrbanTool.py:113
+#: ../UrbanTool.py:133
 msgid "urban_label_collegeHolidays"
 msgstr ""
 
@@ -2815,6 +2832,7 @@ msgstr ""
 
 #. Default: "Communal_inventory"
 #: ../content/licence/CODT_BaseBuildLicence.py:322
+#: ../content/licence/Division.py:181
 #: ../content/licence/UrbanCertificateBase.py:492
 msgid "urban_label_communal_inventory"
 msgstr ""
@@ -2853,6 +2871,26 @@ msgstr ""
 #: ../content/licence/EnvironmentLicence.py:148
 #: ../content/licence/UniqueLicence.py:191
 msgid "urban_label_conclusions"
+msgstr ""
+
+#. Default: "ContactPersonCity"
+#: Corporation.py
+msgid "urban_label_contactpersoncity"
+msgstr ""
+
+#. Default: "ContactPersonNumber"
+#: Corporation.py
+msgid "urban_label_contactpersonnumber"
+msgstr ""
+
+#. Default: "ContactPersonStreet"
+#: Corporation.py
+msgid "urban_label_contactpersonstreet"
+msgstr ""
+
+#. Default: "ContactPersonZipcode"
+#: Corporation.py
+msgid "urban_label_contactpersonzipcode"
 msgstr ""
 
 #. Default: "Linked inquiry"
@@ -2906,7 +2944,7 @@ msgid "urban_label_decisionText"
 msgstr ""
 
 #. Default: "DecisionalDelay"
-#: ../content/licence/RoadDecree.py:105
+#: ../content/licence/RoadDecree.py:107
 msgid "urban_label_decisional_delay"
 msgstr ""
 
@@ -2929,7 +2967,7 @@ msgid "urban_label_defaultRecipient"
 msgstr ""
 
 #. Default: "Foldermanagers"
-#: ../LicenceConfig.py:172
+#: ../LicenceConfig.py:191
 msgid "urban_label_default_foldermanagers"
 msgstr ""
 
@@ -3007,7 +3045,7 @@ msgid "urban_label_displayDateEnd"
 msgstr ""
 
 #. Default: "Displayemptykeydates"
-#: ../UrbanTool.py:100
+#: ../UrbanTool.py:103
 msgid "urban_label_displayEmptyKeyDates"
 msgstr ""
 
@@ -3032,12 +3070,12 @@ msgid "urban_label_divisionSubject"
 msgstr ""
 
 #. Default: "Divisionsrenaming"
-#: ../UrbanTool.py:78
+#: ../UrbanTool.py:81
 msgid "urban_label_divisionsRenaming"
 msgstr ""
 
 #. Default: "Editionoutputformat"
-#: ../UrbanTool.py:134
+#: ../UrbanTool.py:154
 msgid "urban_label_editionOutputFormat"
 msgstr ""
 
@@ -3258,19 +3296,20 @@ msgstr ""
 
 #. Default: "General_disposition"
 #: ../content/licence/CODT_BaseBuildLicence.py:412
+#: ../content/licence/Division.py:271
 #: ../content/licence/UrbanCertificateBase.py:442
 msgid "urban_label_general_disposition"
 msgstr ""
 
 #. Default: "Generatesingletondocuments"
-#: ../UrbanTool.py:145
+#: ../UrbanTool.py:165
 msgid "urban_label_generateSingletonDocuments"
 msgstr ""
 
 #. Default: "Geometrician(s)"
 #: ../browser/licence/templates/licencemacros.pt:29
 #: ../content/licence/CODT_ParcelOutLicence.py:56
-#: ../content/licence/CODT_UrbanCertificateTwo.py:51
+#: ../content/licence/CODT_UrbanCertificateTwo.py:53
 msgid "urban_label_geometricians"
 msgstr ""
 
@@ -3322,26 +3361,6 @@ msgstr ""
 #. Default: "HasPetition"
 #: ../Claimant.py:57
 msgid "urban_label_hasPetition"
-msgstr ""
-
-#. Default: "HeadOfficeCity"
-#: Corporation.py
-msgid "urban_label_headofficecity"
-msgstr ""
-
-#. Default: "HeadOfficeNumber"
-#: Corporation.py
-msgid "urban_label_headofficenumber"
-msgstr ""
-
-#. Default: "HeadOfficeStreet"
-#: Corporation.py
-msgid "urban_label_headofficestreet"
-msgstr ""
-
-#. Default: "HeadOfficeZipcode"
-#: Corporation.py
-msgid "urban_label_headofficezipcode"
 msgstr ""
 
 #. Default: "Impactstudy"
@@ -3399,7 +3418,7 @@ msgid "urban_label_internal_service"
 msgstr ""
 
 #. Default: "Invertaddressnames"
-#: ../UrbanTool.py:154
+#: ../UrbanTool.py:174
 msgid "urban_label_invertAddressNames"
 msgstr ""
 
@@ -3444,7 +3463,7 @@ msgid "urban_label_investigationWriteReclamationNumber"
 msgstr ""
 
 #. Default: "Isdecentralized"
-#: ../UrbanTool.py:92
+#: ../UrbanTool.py:95
 msgid "urban_label_isDecentralized"
 msgstr ""
 
@@ -3486,13 +3505,13 @@ msgstr ""
 
 #: ../content/licence/CODT_BaseBuildLicence.py:701
 #: ../content/licence/CODT_UrbanCertificateBase.py:76
-#: ../content/licence/Division.py:147
+#: ../content/licence/Division.py:369
 msgid "urban_label_is_in_parceloutlicences"
 msgstr ""
 
 #: ../content/licence/CODT_BaseBuildLicence.py:707
 #: ../content/licence/CODT_UrbanCertificateBase.py:82
-#: ../content/licence/Division.py:153
+#: ../content/licence/Division.py:375
 msgid "urban_label_is_in_sol"
 msgstr ""
 
@@ -3640,7 +3659,7 @@ msgid "urban_label_locationTechnicalRemarks"
 msgstr ""
 
 #. Default: "Logmaprequests"
-#: ../UrbanTool.py:172
+#: ../UrbanTool.py:192
 msgid "urban_label_logMapRequests"
 msgstr ""
 
@@ -3665,7 +3684,7 @@ msgid "urban_label_manualParcels"
 msgstr ""
 
 #. Default: "Map Url"
-#: ../UrbanTool.py:125
+#: ../UrbanTool.py:145
 msgid "urban_label_mapUrl"
 msgstr ""
 
@@ -3747,8 +3766,8 @@ msgstr ""
 
 #. Default: "Notary(ies)"
 #: ../browser/licence/templates/licencemacros.pt:47
-#: ../content/licence/CODT_UrbanCertificateTwo.py:70
-#: ../content/licence/Division.py:46
+#: ../content/licence/CODT_UrbanCertificateTwo.py:73
+#: ../content/licence/Division.py:126
 msgid "urban_label_notaryContact"
 msgstr ""
 
@@ -3829,13 +3848,13 @@ msgstr ""
 
 #: ../content/licence/CODT_BaseBuildLicence.py:700
 #: ../content/licence/CODT_UrbanCertificateBase.py:75
-#: ../content/licence/Division.py:146
+#: ../content/licence/Division.py:368
 msgid "urban_label_parceloutlicences"
 msgstr ""
 
 #: ../content/licence/CODT_BaseBuildLicence.py:702
 #: ../content/licence/CODT_UrbanCertificateBase.py:77
-#: ../content/licence/Division.py:148
+#: ../content/licence/Division.py:370
 msgid "urban_label_parceloutlicences_details"
 msgstr ""
 
@@ -3861,48 +3880,56 @@ msgstr ""
 
 #. Default: "Patrimony"
 #: ../content/licence/CODT_BaseBuildLicence.py:281
+#: ../content/licence/Division.py:140
 #: ../content/licence/UrbanCertificateBase.py:451
 msgid "urban_label_patrimony"
 msgstr ""
 
 #. Default: "Patrimony_analysis"
 #: ../content/licence/CODT_BaseBuildLicence.py:337
+#: ../content/licence/Division.py:196
 #: ../content/licence/UrbanCertificateBase.py:367
 msgid "urban_label_patrimony_analysis"
 msgstr ""
 
 #. Default: "Patrimony_archaeological_map"
 #: ../content/licence/CODT_BaseBuildLicence.py:366
+#: ../content/licence/Division.py:225
 #: ../content/licence/UrbanCertificateBase.py:396
 msgid "urban_label_patrimony_archaeological_map"
 msgstr ""
 
 #. Default: "Patrimony_architectural_complex"
 #: ../content/licence/CODT_BaseBuildLicence.py:350
+#: ../content/licence/Division.py:209
 #: ../content/licence/UrbanCertificateBase.py:380
 msgid "urban_label_patrimony_architectural_complex"
 msgstr ""
 
 #. Default: "Patrimony_monument"
 #: ../content/licence/CODT_BaseBuildLicence.py:382
+#: ../content/licence/Division.py:241
 #: ../content/licence/UrbanCertificateBase.py:412
 msgid "urban_label_patrimony_monument"
 msgstr ""
 
 #. Default: "Patrimony_observation"
 #: ../content/licence/CODT_BaseBuildLicence.py:389
+#: ../content/licence/Division.py:248
 #: ../content/licence/UrbanCertificateBase.py:419
 msgid "urban_label_patrimony_observation"
 msgstr ""
 
 #. Default: "Patrimony_project_gtoret_1ha"
 #: ../content/licence/CODT_BaseBuildLicence.py:374
+#: ../content/licence/Division.py:233
 #: ../content/licence/UrbanCertificateBase.py:404
 msgid "urban_label_patrimony_project_gtoret_1ha"
 msgstr ""
 
 #. Default: "Patrimony_site"
 #: ../content/licence/CODT_BaseBuildLicence.py:358
+#: ../content/licence/Division.py:217
 #: ../content/licence/UrbanCertificateBase.py:388
 msgid "urban_label_patrimony_site"
 msgstr ""
@@ -4080,6 +4107,7 @@ msgstr ""
 
 #. Default: "Protection_zone"
 #: ../content/licence/CODT_BaseBuildLicence.py:298
+#: ../content/licence/Division.py:157
 #: ../content/licence/UrbanCertificateBase.py:468
 msgid "urban_label_protection_zone"
 msgstr ""
@@ -4212,12 +4240,14 @@ msgstr ""
 
 #. Default: "Regional_inventory"
 #: ../content/licence/CODT_BaseBuildLicence.py:330
+#: ../content/licence/Division.py:189
 #: ../content/licence/UrbanCertificateBase.py:500
 msgid "urban_label_regional_inventory"
 msgstr ""
 
 #. Default: "Regional_inventory_building"
 #: ../content/licence/CODT_BaseBuildLicence.py:306
+#: ../content/licence/Division.py:165
 #: ../content/licence/UrbanCertificateBase.py:476
 msgid "urban_label_regional_inventory_building"
 msgstr ""
@@ -4436,6 +4466,7 @@ msgstr ""
 
 #. Default: "Small_popular_patrimony"
 #: ../content/licence/CODT_BaseBuildLicence.py:314
+#: ../content/licence/Division.py:173
 #: ../content/licence/UrbanCertificateBase.py:484
 msgid "urban_label_small_popular_patrimony"
 msgstr ""
@@ -4447,19 +4478,19 @@ msgstr ""
 
 #: ../content/licence/CODT_BaseBuildLicence.py:704
 #: ../content/licence/CODT_UrbanCertificateBase.py:79
-#: ../content/licence/Division.py:150
+#: ../content/licence/Division.py:372
 msgid "urban_label_sol"
 msgstr ""
 
 #: ../content/licence/CODT_BaseBuildLicence.py:706
 #: ../content/licence/CODT_UrbanCertificateBase.py:81
-#: ../content/licence/Division.py:152
+#: ../content/licence/Division.py:374
 msgid "urban_label_solZone"
 msgstr ""
 
 #: ../content/licence/CODT_BaseBuildLicence.py:708
 #: ../content/licence/CODT_UrbanCertificateBase.py:83
-#: ../content/licence/Division.py:154
+#: ../content/licence/Division.py:376
 msgid "urban_label_sol_details"
 msgstr ""
 
@@ -4583,7 +4614,7 @@ msgid "urban_label_taxDetails"
 msgstr ""
 
 #. Default: "technicaladvice"
-#: ../content/licence/RoadDecree.py:309
+#: ../content/licence/RoadDecree.py:311
 msgid "urban_label_technicalAdvice"
 msgstr ""
 
@@ -4616,7 +4647,7 @@ msgid "urban_label_textDefaultValues"
 msgstr ""
 
 #. Default: "Title"
-#: ../UrbanTool.py:63
+#: ../UrbanTool.py:66
 #: ../content/licence/GenericLicence.py:137
 msgid "urban_label_title"
 msgstr ""
@@ -4644,7 +4675,7 @@ msgid "urban_label_township_guide_details"
 msgstr ""
 
 #. Default: "Townships_and_alignment"
-#: ../content/licence/RoadDecree.py:96
+#: ../content/licence/RoadDecree.py:98
 msgid "urban_label_townships_and_alignment"
 msgstr ""
 
@@ -4699,7 +4730,7 @@ msgid "urban_label_usage"
 msgstr ""
 
 #. Default: "Useplonemeetingwsclient"
-#: ../UrbanTool.py:181
+#: ../UrbanTool.py:215
 msgid "urban_label_usePloneMeetingWSClient"
 msgstr ""
 
@@ -4720,7 +4751,7 @@ msgstr ""
 
 #. Default: "Use_bound_licence_infos"
 #: ../content/licence/Inspection.py:64
-#: ../content/licence/RoadDecree.py:87
+#: ../content/licence/RoadDecree.py:89
 msgid "urban_label_use_bound_licence_infos"
 msgstr ""
 
@@ -4732,6 +4763,9 @@ msgstr ""
 #. Default: "Validitydelay"
 #: ../content/licence/EnvironmentBase.py:239
 msgid "urban_label_validityDelay"
+msgstr ""
+
+msgid "urban_label_warnings"
 msgstr ""
 
 #. Default: "Water"
@@ -4882,33 +4916,26 @@ msgstr ""
 msgid "user_id"
 msgstr ""
 
-#: ../browser/licence/article127view.py:22
-#: ../browser/licence/buildlicenceview.py:22
-#: ../browser/licence/codt_buildlicenceview.py:22
+#: ../browser/mapview.py:29
+#: ../browser/templates/globalmacros.pt:23
 msgid "warning_add_a_parcel"
 msgstr ""
 
-#: ../browser/licence/divisionview.py:21
-#: ../browser/licence/envclassborderingview.py:23
-#: ../browser/licence/envclassoneview.py:22
+#: ../browser/licence/divisionview.py:19
+#: ../browser/licence/envclassborderingview.py:21
+#: ../browser/licence/envclassoneview.py:20
 msgid "warning_add_a_proprietary"
 msgstr ""
 
-#: ../browser/licence/article127view.py:24
-#: ../browser/licence/buildlicenceview.py:24
-#: ../browser/licence/codt_buildlicenceview.py:24
+#: ../browser/licence/article127view.py:22
+#: ../browser/licence/buildlicenceview.py:22
+#: ../browser/licence/codt_buildlicenceview.py:22
 msgid "warning_add_an_applicant"
 msgstr ""
 
 #. Default: "You must encode plaintiff(s)"
 #: ../browser/licence/templates/licencemacros.pt:167
 msgid "warning_add_an_plaintiff"
-msgstr ""
-
-#: ../browser/licence/article127view.py:26
-#: ../browser/licence/buildlicenceview.py:26
-#: ../browser/licence/codt_buildlicenceview.py:26
-msgid "warning_outdated_parcel"
 msgstr ""
 
 msgid "watercourses_folder_title"
