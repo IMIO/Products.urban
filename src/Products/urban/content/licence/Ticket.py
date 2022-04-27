@@ -164,15 +164,22 @@ class Ticket(BaseFolder, GenericLicence, BrowserDefaultMixin):
         """
            Update the title to clearly identify the licence
         """
+        proprietary = ''
+        proprietaries = self.getProprietaries() or self.getApplicants()
+        if proprietaries:
+            proprietary = ', '.join([prop.Title() for prop in proprietaries])
+        else:
+            proprietary = translate('no_proprietary_defined', 'urban', context=self.REQUEST).encode('utf8')
         if self.getWorkLocations():
             worklocations = self.getWorkLocationSignaletic().split('  et ')[0]
         else:
             worklocations = translate('no_address_defined', 'urban', context=self.REQUEST).encode('utf8')
-        title = "{}{} - {} - {}".format(
+        title = "{}{} - {} - {} - {}".format(
             self.getReference(),
             self.getPoliceTicketReference() and ' - ' + self.getPoliceTicketReference() or '',
             self.getLicenceSubject(),
-            worklocations
+            worklocations,
+            proprietary
         )
         self.setTitle(title)
         self.reindexObject(idxs=('Title', 'sortable_title', ))
@@ -295,6 +302,9 @@ class Ticket(BaseFolder, GenericLicence, BrowserDefaultMixin):
 
     def getLastTheTicket(self):
         return self.getLastEvent(interfaces.ITheTicketEvent)
+
+    def getLastSettlement(self):
+        return self.getLastEvent(interfaces.ISettlementEvent)
 
 
 registerType(Ticket, PROJECTNAME)

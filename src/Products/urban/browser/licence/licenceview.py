@@ -17,11 +17,13 @@ from Products.urban.interfaces import IGenericLicence
 from Products.urban.interfaces import IUrbanDoc
 from Products.urban.interfaces import IUrbanEventAnnouncement
 from Products.urban.interfaces import IUrbanEventInquiry
+from Products.urban.interfaces import IUrbanWarningCondition
 
 from plone import api
 from plone.memoize import view
 from zope.annotation import IAnnotations
 from zope.i18n import translate
+from zope.component import queryAdapter
 
 
 class LicenceView(BrowserView):
@@ -35,6 +37,31 @@ class LicenceView(BrowserView):
         # disable portlets on licences
         self.request.set('disable_plone.rightcolumn', 1)
         self.request.set('disable_plone.leftcolumn', 1)
+        self.display_warnings()
+
+    def display_warnings(self):
+        """
+        """
+        plone_utils = api.portal.get_tool('plone_utils')
+
+        warned = set([])
+        config = self.getLicenceConfig()
+        for warning in config.getWarnings():
+            name = warning['condition']
+            condition = queryAdapter(self.context, IUrbanWarningCondition, name)
+            if condition.evaluate():
+                level = warning['level']
+                plone_utils.addPortalMessage(warning['message'].decode('utf-8'), type=level)
+                warned.add(name)
+
+        # only display global warnings if they are not overriden locally in the licence config
+        urban_tool = api.portal.get_tool('portal_urban')
+        for warning in urban_tool.getWarnings():
+            name = warning['condition']
+            condition = queryAdapter(self.context, IUrbanWarningCondition, name)
+            if name not in warned and condition.evaluate():
+                level = warning['level']
+                plone_utils.addPortalMessage(warning['message'].decode('utf-8'), type=level)
 
     @view.memoize
     def getMember(self):

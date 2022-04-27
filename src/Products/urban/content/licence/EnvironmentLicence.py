@@ -264,6 +264,9 @@ class EnvironmentLicence(BaseFolder, EnvironmentBase, BrowserDefaultMixin):
     def getLastDecisionProjectFromSPW(self):
         return self.getLastEvent(interfaces.IDecisionProjectFromSPWEvent)
 
+    def getLastModificationDeposit(self):
+        return self.getLastEvent(interfaces.IModificationDepositEvent)
+
     security.declarePublic('getFTOpinionRequestAddresses')
     def getFTOpinionRequestAddresses(self):
         """

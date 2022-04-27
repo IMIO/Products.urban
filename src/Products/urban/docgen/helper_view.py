@@ -110,6 +110,17 @@ class BaseHelperView(object):
             zope_DT = DateTime(datetime(zope_DT.year, zope_DT.month, zope_DT.day))
         return DateTime(zope_DT.asdatetime() + relativedelta(years=years))
 
+    @staticmethod
+    def uncapitalize(string):
+        """
+        """
+        if not string:
+            return ''
+        if type(string) is unicode:
+            return u'{}{}'.format(string.strip()[0].lower(), string.strip()[1:])
+        elif type(string) is str:
+            return '{}{}'.format(string.strip()[0].lower(), string.strip()[1:])
+
     def format_date(self, date=None, translatemonth=True, long_format=False):
         """
           Format the date for printing in pod templates
@@ -674,7 +685,7 @@ class UrbanDocGenerationLicenceHelperView(UrbanDocGenerationHelperView):
         limitDate = firstDepositDate + int(delay)
         return self.format_date(limitDate)
 
-    def get_parcels(self, with_commas=False):
+    def get_parcels(self, with_commas=False, with_division=True):
         result = u""
         context = self.real_context
         parcels = context.getParcels()
@@ -701,10 +712,13 @@ class UrbanDocGenerationLicenceHelperView(UrbanDocGenerationHelperView):
         for gp in enumerate(list_grouped_parcels):
             divisionAlternativeName = gp[1][0].getDivisionAlternativeName()
             section = gp[1][0].getSection().decode('utf8')
-            if with_commas:
-                result += u"{}, section {}, ".format(divisionAlternativeName, section)
+            if with_division:
+                if with_commas:
+                    result += u"{}, section {}, ".format(divisionAlternativeName, section)
+                else:
+                    result += u"{} section {} ".format(divisionAlternativeName, section)
             else:
-                result += u"{} section {} ".format(divisionAlternativeName, section)
+                result += u"section {} ".format(section)
             for p in enumerate(gp[1]):
                 if section != p[1].getSection():
                     section = p[1].getSection()
@@ -1098,7 +1112,7 @@ class UrbanDocGenerationEventHelperView(UrbanDocGenerationHelperView):
                 mailing_list = self.context.getClaimants()
             elif gen_context['publipostage'] == 'derniers_reclamants':
                 mailing_list = self.context.getLinkedUrbanEventInquiry().getClaimants()
-            elif gen_context['publipostage'] == 'proprietaire':
+            elif gen_context['publipostage'] == 'proprietaires':
                 mailing_list = self.real_context.getParentNode().getProprietaries()
             elif gen_context['publipostage'] == 'proprietaires_voisinage_enquete':
                 if IUrbanEventInquiry.providedBy(self.real_context):

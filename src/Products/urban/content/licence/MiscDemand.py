@@ -46,6 +46,7 @@ schema = Schema((
             wild_card_search=True,
             show_index_selector=True,
             label=_('urban_label_architects', default='Architect(s)'),
+            popup_name='contact_reference_popup',
         ),
         required=False,
         schemata='urban_description',
