@@ -1115,6 +1115,11 @@ msgstr "Attention, aucune adresse de travaux définie"
 msgid "content_none"
 msgstr "N.C."
 
+#. Default: "Contact person address / headoffice"
+#: ../browser/templates/contactmacros.pt:135
+msgid "corporation_contactPersonAddress_fieldset_legend"
+msgstr "Adresse personne de contact / Siège social"
+
 #. Default: "Contact person"
 #: ../browser/templates/contactmacros.pt:126
 msgid "corporation_contactPerson_fieldset_legend"
