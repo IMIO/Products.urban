@@ -911,24 +911,24 @@ msgstr ""
 msgid "urban_label_bceNumber"
 msgstr ""
 
-#. Default: "HeadOfficeStreet"
+#. Default: "ContactPersonStreet"
 #: Corporation.py
-msgid "urban_label_headofficestreet"
+msgid "urban_label_contactpersonstreet"
 msgstr ""
 
-#. Default: "HeadOfficeNumber"
+#. Default: "ContactPersonNumber"
 #: Corporation.py
-msgid "urban_label_headofficenumber"
+msgid "urban_label_contactpersonnumber"
 msgstr ""
 
-#. Default: "HeadOfficeZipcode"
+#. Default: "ContactPersonZipcode"
 #: Corporation.py
-msgid "urban_label_headofficezipcode"
+msgid "urban_label_contactpersonzipcode"
 msgstr ""
 
-#. Default: "HeadOfficeCity"
+#. Default: "ContactPersonCity"
 #: Corporation.py
-msgid "urban_label_headofficecity"
+msgid "urban_label_contactpersoncity"
 msgstr ""
 
 #. Default: "Bestaddresscode"
