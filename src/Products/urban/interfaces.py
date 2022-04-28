@@ -627,6 +627,10 @@ class ISuspensionEvent(Interface):
     __doc__ = _("""ISuspensionEvent type marker interface""")
 
 
+class ISettlementEvent(Interface):
+    __doc__ = _("""ISettlementEvent type marker interface""")
+
+
 class IUrbanBase(Interface):
     """Marker interface for .Base.UrbanBase
     """
@@ -780,3 +784,7 @@ class IGlobalSuspensionPeriod(Interface):
 
 class IFacetedCollection(Interface):
     """ Adapts an object into a faceted collection """
+
+
+class IUrbanWarningCondition(Interface):
+    """ Adapts a licence into a warning message """

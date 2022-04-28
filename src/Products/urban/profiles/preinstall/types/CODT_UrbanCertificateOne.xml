@@ -19,8 +19,6 @@
    <element value="UrbanEvent"/>
    <element value="UrbanEventCollege"/>
    <element value="WorkLocation"/>
-   <element value="Applicant"/>
-   <element value="Corporation"/>
    <element value="File"/>
    <element value="task"/>
    <element value="ConfigTest"/>
