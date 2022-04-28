@@ -15,12 +15,8 @@ class CODTParcelOutLicenceView(CODTBuildLicenceView):
         self.request.set('disable_plone.rightcolumn', 1)
         self.request.set('disable_plone.leftcolumn', 1)
         plone_utils = getToolByName(context, 'plone_utils')
-        if not self.context.getParcels():
-            plone_utils.addPortalMessage(_('warning_add_a_parcel'), type="warning")
         if not self.context.getApplicants():
             plone_utils.addPortalMessage(_('warning_add_an_applicant'), type="warning")
-        if self.hasOutdatedParcels():
-            plone_utils.addPortalMessage(_('warning_outdated_parcel'), type="warning")
 
     def getMacroViewName(self):
         return 'parceloutlicence-macros'
