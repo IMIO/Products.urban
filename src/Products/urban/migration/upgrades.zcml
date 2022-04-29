@@ -362,5 +362,13 @@
         destination="1117"
         handler=".update_250.update_tickets_title"
         profile="Products.urban:default" />
+      
+    <gs:upgradeStep
+        title="Move architects and geometricians to representative contacts for base buildlicence"
+        description="urban upgrade step"
+        source="1117"
+        destination="1118"
+        handler=".update_250.migrate_move_basebuildlicence_architects_and_geometricians_to_representative_contacts"
+        profile="Products.urban:default" />
 
 </configure>
