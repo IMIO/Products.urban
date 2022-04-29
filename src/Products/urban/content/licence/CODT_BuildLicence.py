@@ -86,8 +86,8 @@ def finalizeSchema(schema):
        Finalizes the type schema to alter some fields
     """
     schema.moveField('roadAdaptation', before='roadTechnicalAdvice')
-    schema.moveField('architects', after='workLocations')
-    schema.moveField('foldermanagers', after='architects')
+    schema.moveField('representativeContacts', after='workLocations')
+    schema.moveField('foldermanagers', after='representativeContacts')
     schema.moveField('workType', after='folderCategory')
     schema.moveField('parcellings', after='isInSubdivision')
     schema.moveField('description', after='usage')

@@ -3252,6 +3252,9 @@ msgstr "Détails concernant la zone inondable"
 msgid "urban_label_folderCategory"
 msgstr "Type de dossier"
 
+msgid "urban_label_representative_contacts"
+msgstr "Représentant(s)"
+
 #. Default: "Foldercategorytownship"
 #: ../content/licence/GenericLicence.py:967
 msgid "urban_label_folderCategoryTownship"

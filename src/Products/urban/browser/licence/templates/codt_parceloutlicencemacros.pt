@@ -11,7 +11,7 @@
             </metal:applicants>
 
             <metal:representatives fill-slot="representatives">
-                <metal:representatives_macro use-macro="here/@@licencemacros/urbanGeometriciansMacro" />
+                <metal:representatives_macro use-macro="here/@@licencemacros/urbanRepresentativeContactsMacro" />
             </metal:representatives>
 
         </metal:parent_call>

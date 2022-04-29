@@ -9,7 +9,7 @@ from plone import api
 from plone.app.textfield import RichTextValue
 from plone.app.uuid.utils import uuidToObject
 
-from Products.urban.interfaces import IGenericLicence
+from Products.urban.interfaces import IGenericLicence, IBaseBuildLicence
 import logging
 import re
 
@@ -233,6 +233,7 @@ def update_POD_expressions(context):
             replace.replace(search_expr, replace_expr, is_regex=row["is_regex"])
     logger.info("upgrade done!")
 
+
 def add_all_applicants_in_title(context):
     """
     Adding all applicants or proprietaries or notaries in title
@@ -246,6 +247,7 @@ def add_all_applicants_in_title(context):
         licence.updateTitle()
     logger.info("upgrade done!")
 
+
 def add_trails_and_watercourses_to_global_vocabularies(context):
     """
     """
@@ -254,6 +256,7 @@ def add_trails_and_watercourses_to_global_vocabularies(context):
     portal_setup = api.portal.get_tool('portal_setup')
     portal_setup.runImportStepFromProfile('profile-Products.urban:extra', 'urban-update-vocabularies')
     logger.info("upgrade done!")
+
 
 def fix_PODTemplates_empty_filename(context):
     """
@@ -320,6 +323,35 @@ def migrate_add_tax_other_option(context):
     logger.info("migration step done!")
 
 
+def migrate_move_basebuildlicence_architects_and_geometricians_to_representative_contacts(context):
+    """
+    """
+    logger = logging.getLogger('urban: migrate migrate_move_basebuildlicence_architects_and_geometricians_to_representative_contacts')
+    logger.info("starting migration step")
+    catalog = api.portal.get_tool('portal_catalog')
+    licence_brains = catalog(object_provides=IBaseBuildLicence.__identifier__)
+    licences = [li.getObject() for li in licence_brains]
+    for licence in licences:
+        architects = licence.getField('architects')
+        if architects:
+            for architect in architects.get(licence):
+                print("{} : move architect {} in representativeContacts".format(licence.getReference(), architect.name1.encode("utf-8")))
+                rc_list = licence.getRepresentativeContacts()
+                rc_list.append(architect)
+                licence.setRepresentativeContacts(rc_list)
+                licence.setArchitects([])
+        geometricians = licence.getField('geometricians')
+        if geometricians:
+            for geometrician in geometricians.get(licence):
+                print("{} : move geometrician {} in representativeContacts".format(licence.getReference(), geometrician.name1.encode("utf-8")))
+                rc_list = licence.getRepresentativeContacts()
+                rc_list.append(geometrician)
+                licence.setRepresentativeContacts(rc_list)
+                licence.setGeometricians([])
+
+    logger.info("migration step done!")
+
+    
 def reinstall_registry_and_vocabularies(context):
     """
     Add collegeopinions vocabulary for all licence type config

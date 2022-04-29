@@ -138,8 +138,8 @@ def cu2FinalizeSchema(schema):
     """
        Finalizes the type schema to alter some fields
     """
-    schema.moveField('geometricians', after='workLocations')
-    schema.moveField('notaryContact', after='geometricians')
+    schema.moveField('representativeContacts', after='workLocations')
+    schema.moveField('notaryContact', after='representativeContacts')
 
 cu2FinalizeSchema(CODT_UrbanCertificateTwo_schema)
 ##/code-section module-footer
