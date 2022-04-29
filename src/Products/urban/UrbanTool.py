@@ -834,7 +834,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             types = [types]
         raw_offdays = api.portal.get_registry_record(
             'Products.urban.browser.offdays_settings.IOffDays.offdays'
-        )
+        ) or []
         offdays = [day['date'] for day in raw_offdays if day['day_type'] in types]
         return offdays
 
