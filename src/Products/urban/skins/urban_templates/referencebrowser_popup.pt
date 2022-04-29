@@ -186,7 +186,7 @@
 
         </form>
         <div id="message" class="portalMessage" style="display:none;margin-top:0px;">
-           <span i18n:translate="referencebrowser_text_added_reference">Added reference to:</span>&nbsp;<span id="messageTitle"></span>
+           <span i18n:translate="referencebrowser_text_added_reference">Added</span>&nbsp;<span id="messageTitle"></span>
         </div>
         <!-- actual list of objects, either searchresults or folder contents -->
         <tal:block define="query_results python:test(not show_indexes, ((always_show or search_text) and [brain.getObject() for brain in here.referencebrowser_queryCatalog(search_catalog=search_catalog)]),([brain.getObject() for brain in here.referencebrowser_queryCatalog(search_catalog=search_catalog)]))">

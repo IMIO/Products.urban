@@ -291,7 +291,7 @@
              before_script=""
              after_script=""
              i18n:attributes="title">
-  <action url="" icon="%(portal_url)s/accept.png" category="workflow" i18n:translate="">accept</action>
+  <action url="" icon="" category="workflow" i18n:translate="">accept</action>
   <guard>
     <guard-permission>Review portal content</guard-permission>
   </guard>
@@ -303,7 +303,7 @@
              before_script=""
              after_script=""
              i18n:attributes="title">
-  <action url="" icon="%(portal_url)s/isincomplete.png" category="workflow" i18n:translate="">isincomplete</action>
+  <action url="" icon="" category="workflow" i18n:translate="">isincomplete</action>
   <guard>
     <guard-permission>Review portal content</guard-permission>
   </guard>
@@ -315,7 +315,7 @@
              before_script=""
              after_script=""
              i18n:attributes="title">
-  <action url="" icon="%(portal_url)s/refuse.png" category="workflow" i18n:translate="">refuse</action>
+  <action url="" icon="" category="workflow" i18n:translate="">refuse</action>
   <guard>
     <guard-permission>Review portal content</guard-permission>
   </guard>
@@ -327,7 +327,7 @@
              before_script=""
              after_script=""
              i18n:attributes="title">
-  <action url="" icon="%(portal_url)s/reopen.png" category="workflow" i18n:translate="">reopen</action>
+  <action url="" icon="" category="workflow" i18n:translate="">reopen</action>
   <guard>
     <guard-permission>Review portal content</guard-permission>
   </guard>
@@ -339,7 +339,7 @@
              before_script=""
              after_script=""
              i18n:attributes="title">
-  <action url="" icon="%(portal_url)s/retire.png" category="workflow" i18n:translate="">retire</action>
+  <action url="" icon="" category="workflow" i18n:translate="">retire</action>
   <guard>
     <guard-permission>Review portal content</guard-permission>
   </guard>

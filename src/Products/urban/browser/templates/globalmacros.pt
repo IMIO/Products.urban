@@ -22,7 +22,6 @@
       cellspacing=0 cellpadding=0 width=100%>
     <div tal:condition="not: parcels" i18n:translate="warning_add_a_parcel"
          tal:attributes="class python: parcels and 'field' or 'field warning'">
-         You must encode concerned parcel(s)
     </div>
     <div class="clear">
         <tal:listing content="structure view/renderParcelsListing" />
@@ -30,7 +29,7 @@
     <div class="parcel-action">
      <form tal:condition="python: not getattr(context, 'use_bound_licence_infos', False) and member.has_permission('imio.urban: Add Parcel', context)" name="quickAdd"
            tal:attributes="action python: context.absolute_url() + '/searchparcels'" action="searchparcels" method="post">
-      <input type="submit" class="contenttype-portionout apButton" id="addParcel" value="search_parcels" i18n:attributes="value" />
+      <input type="submit" class="contenttype-portionout apButton" id="addParcel" value="search_parcels" i18n:attributes="value"/>
      </form>
     </div>
     <div class="parcel-action">
@@ -43,7 +42,7 @@
 </div>
 
 
-<metal:edit define-macro="editDefaultMacro"
+<metal:edit define-macro="editDefaultMacro" i18n:domain="urban"
                tal:define="member context/@@plone_portal_state/member;
                        border python: member.has_role('Manager') and 'enable_border' or 'disable_border';
                        dummy python:request.set(border, 1);
@@ -64,7 +63,7 @@
 </metal:edit>
 
 
-<metal:edit define-macro="editUrbanevent"
+<metal:edit define-macro="editUrbanevent" i18n:domain="urban"
                tal:define="member context/@@plone_portal_state/member;
                        border python: member.has_role('Manager') and 'enable_border' or 'disable_border';
                        dummy python:request.set(border, 1);
@@ -85,7 +84,7 @@
 </metal:edit>
 
 
-<metal:edit define-macro="editUrbaneventtypeMacro"
+<metal:edit define-macro="editUrbaneventtypeMacro" i18n:domain="urban"
                tal:define="member context/@@plone_portal_state/member;
                        border python: member.has_role('Manager') or 'enable_border' and 'disable_border';
                        dummy python:request.set(border, 1);

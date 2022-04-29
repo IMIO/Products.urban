@@ -182,7 +182,6 @@ schema = Schema((
         name='townshipCouncilFolder',
         default=False,
         widget=BooleanField._properties['widget'](
-            description="If checked, an additional paragraph will be added in the licence document",
             label=_('urban_label_townshipCouncilFolder', default='Townshipcouncilfolder'),
             description_msgid='urban_help_townshipCouncilFolder',
         ),
@@ -341,7 +340,6 @@ schema = Schema((
         name='roadDgrneUnderground',
         default=False,
         widget=BooleanField._properties['widget'](
-            description="If checked, an additional paragraph will be added in the licence document",
             label=_('urban_label_roadDgrneUnderground', default='Roaddgrneunderground'),
             description_msgid='urban_help_roadDgrneUnderground',
         ),
@@ -362,7 +360,6 @@ schema = Schema((
         name='locationDgrneUnderground',
         default=False,
         widget=BooleanField._properties['widget'](
-            description="If checked, an additional paragraph will be added in the licence document",
             label=_('urban_label_locationDgrneUnderground', default='Locationdgrneunderground'),
             description_msgid='urban_help_locationDgrneUnderground',
         ),
@@ -414,7 +411,7 @@ schema = Schema((
             startup_directory="urban/architects",
             wild_card_search=True,
             restrict_browsing_to_startup_directory=1,
-            label=_('urban_label_architects', default='Architects'),
+            label=_('urban_label_architects', default='Architect(s)'),
             popup_name='contact_reference_popup',
             visible=False
         ),

@@ -350,6 +350,10 @@ EventConfigs = {
                     'title': "Décision (Annexe 12)"
                 },
                 {
+                    'id': "codt_pu_annexe_12_lien_delib.odt",
+                    'title': "Décision lien Delib (Annexe 12)"
+                },
+                {
                     'id': "codt_pu_decision_octroi_refus_lettre_architecte.odt",
                     'title': "Décision lettre à l'architecte",
                     'context_variables': [
@@ -782,7 +786,7 @@ EventConfigs = {
             'podTemplates': (
                 {'id': "codt_pp_deliberation_college_ecart_derogation.odt", 'title': "Délibération du collège communal"},
             ),
-            'eventType': ('Products.urban.interfaces.ITheLicenceEvent', 'Products.urban.interfaces.ILicenceNotificationEvent',),
+            'eventType': ('Products.urban.interfaces.ILicenceNotificationEvent',),
         },
         {
             'id': "transmis-decision-fd-codt",
@@ -809,7 +813,7 @@ EventConfigs = {
                 {'id': "codt_pp_talons_debut_fin_travaux.odt", 'title': "Talons à découper"},
                 {'id': "codt_pp_implantation_cautionnement_lettre_demandeur.odt", 'title': "Courrier au demandeur - suivi cautionnement et implantation"},
             ),
-            'eventType': ('Products.urban.interfaces.IWalloonRegionDecisionEvent',),
+            'eventType': ('Products.urban.interfaces.IWalloonRegionDecisionEvent', 'Products.urban.interfaces.ITheLicenceEvent',),
         },
         {
             'id': "config-opinion-request",
@@ -888,8 +892,8 @@ EventConfigs = {
             'keyDates': ('receiptDate', 'eventDate',),
             'podTemplates': (
                 {
-                    'id': "codt_ln_annexe16.odt",
-                    'title': "Lettre de notaire - Annexe 16",
+                    'id': "codt_ln_infos-notariales.odt",
+                    'title': "Lettre de notaire",
                     'context_variables': [
                         {
                             'name': 'publipostage',
@@ -2566,7 +2570,7 @@ EventConfigs = {
             'title': "Enquête publique",
             'eventDateLabel': "Date de notification",
             'activatedFields': ['investigationStart', 'investigationEnd', 'claimsDate',
-                                'explanationStartSDate', 'explanationEndSDate ', 'claimsText', 'transmitDate'],
+                                'explanationStartSDate', 'explanationEndSDate ', 'claimsText'],
             'deadLineDelay': 15,
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
@@ -6036,7 +6040,7 @@ EventConfigs = {
         {
             'id': "enquete-publique",
             'title': "Enquête publique",
-            'activatedFields': ('investigationStart', 'investigationEnd', 'claimsDate', 'claimEndSDate', 'explanationStartSDate', 'explanationEndSDate', 'claimsText', 'transmitDate',),
+            'activatedFields': ('investigationStart', 'investigationEnd', 'claimsDate', 'claimEndSDate', 'explanationStartSDate', 'explanationEndSDate', 'claimsText',),
             'deadLineDelay': 15,
             'eventDateLabel': 'Date de notification',
             'isKeyEvent': True,

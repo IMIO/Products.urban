@@ -42,7 +42,6 @@
   <include package="plone.app.referenceintegrity"/>
   <include package="plone.z3ctable"/>
   <include package="plonetheme.imioapps"/>
-  <include package="plonetheme.imioapps"/>
   <include package="urban.vocabulary"/>
 
   <include file="grok.zcml" />
@@ -178,6 +177,10 @@
     type=".interfaces.IEventTypeType"/>
 
   <interface
+    interface=".interfaces.ITechnicalAnalysis"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
     interface=".interfaces.ILicenceNotificationEvent"
     type=".interfaces.IEventTypeType"/>
 
@@ -275,6 +278,14 @@
 
   <interface
     interface=".interfaces.IProprietaryChangeEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.ISuspensionEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.ISettlementEvent"
     type=".interfaces.IEventTypeType"/>
 
   <adapter

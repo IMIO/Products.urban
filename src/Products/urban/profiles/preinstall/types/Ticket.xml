@@ -19,9 +19,11 @@
    <element value="Proprietary"/>
    <element value="CorporationProprietary"/>
    <element value="Tenant"/>
+   <element value="CorporationTenant"/>
    <element value="Plaintiff"/>
    <element value="CorporationPlaintiff"/>
    <element value="UrbanEvent"/>
+   <element value="UrbanEventCollege"/>
    <element value="UrbanEventInspectionReport"/>
    <element value="UrbanEventFollowUp"/>
    <element value="File"/>

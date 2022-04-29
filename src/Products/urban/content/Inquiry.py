@@ -132,7 +132,7 @@ schema = Schema((
     LinesField(
         name='solicitOpinionsTo',
         widget=Select2Widget(
-            label=_('urban_label_solicitOpinionsTo', default='Solicitopinionsto'),
+            label=_('urban_label_solicitOpinionsTo', default='Solicit opinion to'),
             multiple=True,
         ),
         schemata='urban_advices',

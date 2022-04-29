@@ -55,7 +55,7 @@ def _export_document_templates(licence_types=URBAN_TYPES, with_event_structure=T
         )
         os.mkdir(licence_path)
 
-        urbanevents = config.urbaneventtypes
+        urbanevents = config.eventconfigs
         for urbanevent in urbanevents.objectValues():
             if api.content.get_state(urbanevent) == 'enabled':
                 if with_event_structure:

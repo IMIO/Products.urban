@@ -31,7 +31,7 @@ def fix_missing_event_types():
     mapping = {}
     for licence_type, events_to_fix in all_broken_events.iteritems():
         urban_config = api.portal.get_tool('portal_urban')
-        licence_cfg = getattr(urban_config, licence_type.lower()).urbaneventtypes
+        licence_cfg = getattr(urban_config, licence_type.lower()).eventconfigs
         all_event_types = licence_cfg.objectValues()
         for event_name in events_to_fix:
             event_types = [evt for evt in all_event_types if evt.Title() in event_name or mapping[licence_type].get(event_name, None) == evt.id]

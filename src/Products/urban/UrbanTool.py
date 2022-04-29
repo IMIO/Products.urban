@@ -22,7 +22,9 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.DataGridField import DataGridField, DataGridWidget
 from Products.DataGridField.Column import Column
+from Products.DataGridField.SelectColumn import SelectColumn
 from collective.datagridcolumns.DateColumn import DateColumn
+from collective.datagridcolumns.TextAreaColumn import TextAreaColumn
 
 from Products.urban.config import *
 from Products.urban.interfaces import IContactFolder
@@ -31,6 +33,7 @@ from Products.urban.interfaces import IGenericLicence
 from Products.urban import UrbanMessage as _
 
 from zope.annotation import IAnnotations
+from zope.component import getGlobalSiteManager
 from zope.interface import implements
 
 from AccessControl import getSecurityManager
@@ -103,9 +106,26 @@ schema = Schema((
         schemata='public_settings',
     ),
     DataGridField(
+        name='warnings',
+        allow_oddeven=True,
+        widget=DataGridWidget(
+            columns={
+                'condition': SelectColumn('Condition', 'listWarningConditions'),
+                'message': TextAreaColumn('Message', rows=6, cols=60),
+                'level': SelectColumn('Level', 'listWarningLevels'),
+            },
+            label='Warnings',
+            label_msgid='urban_label_warnings',
+            i18n_domain='urban',
+        ),
+        schemata='public_settings',
+        columns=('condition', 'message', 'level'),
+        default=[],
+    ),
+    DataGridField(
         name='collegeHolidays',
         widget=DataGridWidget(
-            helper_js= ('datagridwidget.js', 'datagriddatepicker.js'),
+            helper_js=('datagridwidget.js', 'datagriddatepicker.js'),
             columns={
                 'from': DateColumn('From', date_format='dd/mm/yy'),
                 'to': DateColumn('To', date_format='dd/mm/yy'),
@@ -174,6 +194,20 @@ schema = Schema((
         ),
         schemata='admin_settings',
     ),
+    LinesField(
+        name='usedAttributes',
+        widget=InAndOutWidget(
+            description="Select the optional fields you want to use. Multiple selection or deselection when clicking with CTRL",
+            description_msgid="urban_descr_usedAttributes",
+            size=170,
+            label='Usedattributes',
+            label_msgid='urban_label_usedAttributes',
+            i18n_domain='urban',
+        ),
+        schemata='admin_settings',
+        multiValued=True,
+        vocabulary='listAllUsedAttributes',
+    ),
     BooleanField(
         name='usePloneMeetingWSClient',
         default=False,
@@ -217,6 +251,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         self.unindexObject()
 
     security.declarePublic('getDivisionsConfigRows')
+
     def getDivisionsConfigRows(self):
         """
         """
@@ -250,8 +285,8 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         cadastre.close()
         return rows
 
-
     security.declarePublic('getTextDefaultValue')
+
     def getTextDefaultValue(self, fieldname, context, html=False, config=None):
         """
          Return the default text of the field (if it exists)
@@ -263,7 +298,18 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                 return prop['text']
         return html and '<p></p>' or ''
 
+    def listAllUsedAttributes(self):
+        """
+        """
+        all_fields = {}
+        licences_configs = self.get_all_licence_configs()
+        for cfg in licences_configs:
+            all_fields.update(cfg.listUsedAttributes()._keys)
+        voc = DisplayList([(k, v[1]) for k, v in all_fields.iteritems()])
+        return voc.sortedByValue()
+
     security.declarePublic('listVocabulary')
+
     def listVocabulary(self, vocToReturn, context, vocType=["UrbanVocabularyTerm", "OrganisationTerm"], id_to_use="id", value_to_use="Title", sort_on="getObjPositionInParent", inUrbanConfig=True, allowedStates=['enabled'], with_empty_value=False, with_numbering=True):
         """
            This return a list of elements that is used as a vocabulary
@@ -300,6 +346,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         return tuple(res)
 
     security.declarePrivate('listVocabularyBrains')
+
     def listVocabularyBrains(self, vocToReturn, context, vocType=["UrbanVocabularyTerm", "OrganisationTerm"], sort_on="getObjPositionInParent", inUrbanConfig=True, allowedStates=['enabled'], with_empty_value=False):
         """
            This return a list of elements that is used as a vocabulary
@@ -787,7 +834,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             types = [types]
         raw_offdays = api.portal.get_registry_record(
             'Products.urban.browser.offdays_settings.IOffDays.offdays'
-        )
+        ) or []
         offdays = [day['date'] for day in raw_offdays if day['day_type'] in types]
         return offdays
 
@@ -797,7 +844,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         offday_periods = api.portal.get_registry_record(
             'Products.urban.browser.offdays_settings.IOffDays.periods'
         )
-        periods = [period for period in offday_periods if period['period_type'] in types]
+        periods = [period for period in offday_periods or [] if period['period_type'] in types]
         return periods
 
     def get_week_offdays(self, as_mask=False):
@@ -811,6 +858,27 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             return weekmask
         return week_offdays
 
+    security.declarePublic('listWarningConditions')
+
+    def listWarningConditions(self):
+        gsm = getGlobalSiteManager()
+        terms = set([])
+        for adapter in gsm.registeredAdapters():
+            implements = issubclass(adapter.provided, interfaces.IUrbanWarningCondition)
+            specific_enough = issubclass(IGenericLicence, adapter.required[0])
+            if implements and specific_enough:
+                terms.add((adapter.name, _(adapter.name)))
+        return DisplayList(sorted(list(terms), key=lambda name: name[1]))
+
+    security.declarePublic('listWarningLevels')
+
+    def listWarningLevels(self):
+        terms = [
+            ('info', translate('Info', 'plone', context=self.REQUEST)),
+            ('warning', translate('Warning', 'plone', context=self.REQUEST)),
+            ('error', translate('Error', 'plone', context=self.REQUEST)),
+        ]
+        return DisplayList(terms)
 
 
 registerType(UrbanTool, PROJECTNAME)

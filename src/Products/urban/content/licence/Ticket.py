@@ -26,7 +26,7 @@ slave_fields_bound_inspection = (
     },
 )
 
-optional_fields = ['managed_by_prosecutor']
+optional_fields = ['managed_by_prosecutor', 'inspectionDescription']
 
 schema = Schema((
     StringField(
@@ -108,6 +108,17 @@ schema = Schema((
         ),
         schemata='urban_description',
     ),
+    TextField(
+        name='inspectionDescription',
+        widget=RichWidget(
+            label=_('urban_label_inspectionDescription', default='Inspectiondescription'),
+        ),
+        default_content_type='text/html',
+        allowable_content_types=('text/html',),
+        schemata='urban_inspection',
+        default_method='getDefaultText',
+        default_output_type='text/html',
+    ),
 ),
 )
 
@@ -164,15 +175,22 @@ class Ticket(BaseFolder, GenericLicence, BrowserDefaultMixin):
         """
            Update the title to clearly identify the licence
         """
+        proprietary = ''
+        proprietaries = self.getProprietaries() or self.getApplicants()
+        if proprietaries:
+            proprietary = ', '.join([prop.Title() for prop in proprietaries])
+        else:
+            proprietary = translate('no_proprietary_defined', 'urban', context=self.REQUEST).encode('utf8')
         if self.getWorkLocations():
             worklocations = self.getWorkLocationSignaletic().split('  et ')[0]
         else:
             worklocations = translate('no_address_defined', 'urban', context=self.REQUEST).encode('utf8')
-        title = "{}{} - {} - {}".format(
+        title = "{}{} - {} - {} - {}".format(
             self.getReference(),
             self.getPoliceTicketReference() and ' - ' + self.getPoliceTicketReference() or '',
             self.getLicenceSubject(),
-            worklocations
+            worklocations,
+            proprietary
         )
         self.setTitle(title)
         self.reindexObject(idxs=('Title', 'sortable_title', ))
@@ -246,11 +264,20 @@ class Ticket(BaseFolder, GenericLicence, BrowserDefaultMixin):
         """
         tenants = [app for app in self.objectValues('Applicant')
                    if app.portal_type == 'Tenant']
+        corporations = self.getCorporationTenants()
+        tenants.extend(corporations)
         if self.getUse_bound_inspection_infos():
             bound_inspection = self.getBound_inspection()
             if bound_inspection:
                 tenants.extend(bound_inspection.getTenants())
         return list(set(tenants))
+
+    security.declarePublic('getCorporationTenants')
+
+    def getCorporationTenants(self):
+        corporations = [corp for corp in self.objectValues('Corporation')
+                        if corp.portal_type == 'CorporationTenant']
+        return corporations
 
     security.declarePublic('getPlaintiffs')
 
@@ -286,6 +313,9 @@ class Ticket(BaseFolder, GenericLicence, BrowserDefaultMixin):
 
     def getLastTheTicket(self):
         return self.getLastEvent(interfaces.ITheTicketEvent)
+
+    def getLastSettlement(self):
+        return self.getLastEvent(interfaces.ISettlementEvent)
 
 
 registerType(Ticket, PROJECTNAME)
