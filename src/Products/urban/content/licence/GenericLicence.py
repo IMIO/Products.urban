@@ -14,6 +14,7 @@ __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEUL
 __docformat__ = 'plaintext'
 
 from AccessControl import ClassSecurityInfo
+from zope.annotation import IAnnotations
 
 from collective.archetypes.select2.select2widget import MultiSelect2Widget
 from Products.MasterSelectWidget.MasterMultiSelectWidget import MasterMultiSelectWidget
@@ -1331,7 +1332,10 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
         """
           Returns the annonced delay value or the UrbanDelay if theObject=True
         """
-        res = self.getField('annoncedDelay').get(self)
+        field = self.getField('annoncedDelay')
+        if not field:
+            return None
+        res = field.get(self)
         if res and theObject:
             urbanConfig = self.getLicenceConfig()
             res = getattr(urbanConfig.folderdelays, res)
@@ -1465,6 +1469,12 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
     def getAllMayorColleges(self):
         return self.getAllEvents(interfaces.IMayorCollegeEvent)
 
+    def getLastSuspension(self):
+        return self.getLastEvent(interfaces.ISuspensionEvent)
+
+    def getAllSuspensionEvents(self):
+        return self.getAllEvents(interfaces.ISuspensionEvent)
+
     def getAllEvents(self, eventInterface=IUrbanEvent):
         return self.getAllEventsByObjectValues(eventInterface)
 
@@ -1480,6 +1490,39 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
         events = self.getAllEvents(eventInterface)
         if events:
             return events[0]
+
+    def get_bound_roaddecrees(self):
+        roaddecrees = []
+        annotations = IAnnotations(self)
+        roaddecree_UIDs = list(annotations.get('urban.bound_roaddecrees', []))
+        if roaddecree_UIDs:
+            catalog = api.portal.get_tool('portal_catalog')
+            brains = catalog(UID=roaddecree_UIDs)
+            roaddecrees = [b.getObject() for b in brains]
+            return roaddecrees
+        return []
+
+    def get_bound_inspections(self):
+        inspections = []
+        annotations = IAnnotations(self)
+        roaddecree_UIDs = list(annotations.get('urban.bound_inspections', []))
+        if roaddecree_UIDs:
+            catalog = api.portal.get_tool('portal_catalog')
+            brains = catalog(UID=roaddecree_UIDs)
+            inspections = [b.getObject() for b in brains]
+            return inspections
+        return []
+
+    def get_bound_tickets(self):
+        tickets = []
+        annotations = IAnnotations(self)
+        roaddecree_UIDs = list(annotations.get('urban.bound_tickets', []))
+        if roaddecree_UIDs:
+            catalog = api.portal.get_tool('portal_catalog')
+            brains = catalog(UID=roaddecree_UIDs)
+            tickets = [b.getObject() for b in brains]
+            return tickets
+        return []
 
 registerType(GenericLicence, PROJECTNAME)
 # end of class GenericLicence

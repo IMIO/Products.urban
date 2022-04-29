@@ -388,6 +388,9 @@ msgstr "Refusé"
 msgid "reopen"
 msgstr "Réouvrir"
 
+msgid "resume_thaw"
+msgstr "Reprendre"
+
 # transitions
 msgid "retire"
 msgstr "Abandonner"
@@ -400,6 +403,9 @@ msgstr "Registre des modifications pour les rubriques"
 
 msgid "send_opinion"
 msgstr "Envoyer l'avis"
+
+msgid "suspend_freeze"
+msgstr "Suspendre (gel délais)"
 
 msgid "update_additionalLegalConditions"
 msgstr "Mise à jour des Registre des conditions intégrales et sectorielles supplémentaires"

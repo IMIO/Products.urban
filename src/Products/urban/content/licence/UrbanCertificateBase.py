@@ -139,7 +139,7 @@ schema = Schema((
             restrict_browsing_to_startup_directory=1,
             popup_name='contact_reference_popup',
             wild_card_search=True,
-            label=_('urban_label_notaryContact', default='Notarycontact'),
+            label=_('urban_label_notaryContact', default='Notary(ies)'),
         ),
         required=False,
         schemata='urban_description',
@@ -346,7 +346,7 @@ schema = Schema((
             label=_('urban_label_regional_guide', default='Regional_guide'),
         ),
         schemata='urban_location',
-        vocabulary=UrbanVocabulary('regional_guide', inUrbanConfig=False, with_empty_value=True),
+        vocabulary=UrbanVocabulary('regional_guide', inUrbanConfig=False, with_empty_value=False),
         default_method='getDefaultValue',
     ),
     TextField(

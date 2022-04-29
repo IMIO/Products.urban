@@ -281,6 +281,7 @@ def fix_PODTemplates_empty_filename(context):
             template.odt_file.contentType = 'application/vnd.oasis.opendocument.text'
     logger.info("upgrade done!")
 
+
 def migrate_notaryletter_specificfeatures_texts(context):
     """
     """
@@ -304,6 +305,7 @@ def migrate_notaryletter_specificfeatures_texts(context):
                 value.setDescription(new_text)
                 value.reindexObject()
     logger.info("upgrade done!")
+
 
 def migrate_add_tax_other_option(context):
     """
@@ -348,3 +350,141 @@ def migrate_move_basebuildlicence_architects_and_geometricians_to_representative
                 licence.setGeometricians([])
 
     logger.info("migration step done!")
+
+    
+def reinstall_registry_and_vocabularies(context):
+    """
+    Add collegeopinions vocabulary for all licence type config
+    Reinstall plone registry with GIG coring settings.
+    """
+    logger = logging.getLogger('urban: reinstall_registry_and_vocabularies')
+    logger.info("starting migration step")
+    portal_setup = api.portal.get_tool('portal_setup')
+    portal_setup.runImportStepFromProfile('profile-Products.urban:extra', 'urban-update-vocabularies')
+    portal_setup.runImportStepFromProfile('profile-Products.urban:default', 'plone.app.registry')
+    logger.info("migration step done!")
+
+def activate_divergence_field(context):
+    """
+    Enable divergence and divergenceDetails as they are now optionnals.
+    """
+    logger = logging.getLogger('urban: activate divergence')
+    logger.info("starting migration step")
+    portal_urban = api.portal.get_tool('portal_urban')
+    for config in portal_urban.objectValues('LicenceConfig'):
+        if 'divergence' in config.listUsedAttributes() and \
+           'divergence' not in config.getUsedAttributes():
+            to_set = ('divergence', 'divergenceDetails')
+            config.setUsedAttributes(config.getUsedAttributes() + to_set)
+    logger.info("migration step done!")
+
+def remove_icons_from_transitions(context):
+    """
+    launch import step to remove transitions icons and show them in letters
+    """
+    logger = logging.getLogger('urban: remove icons from transitions')
+    logger.info("starting upgrade steps")
+    setup_tool = api.portal.get_tool('portal_setup')
+    setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'update-workflow-rolemap')
+    logger.info("upgrade done!")
+
+def add_and_active_corporation_tenant(context):
+    """
+    add corporation tenant content type and activate it
+    """
+    logger = logging.getLogger('urban: add and activate corporation tenant')
+    logger.info("starting upgrade step")
+    setup_tool = api.portal.get_tool('portal_setup')
+    setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'typeinfo')
+    setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'workflow')
+    logger.info("upgrade step done!")
+
+def addDocumentationLinkToUserPortalActionAndHideViewlet(context):
+    """
+    add documentation link to useractions and hide contact viewlet in footer
+    """
+    logger = logging.getLogger('urban: add documentation link to user portal_actions and hide contact viewlet in footer')
+    logger.info("starting upgrade steps")
+    setup_tool = api.portal.get_tool('portal_setup')
+    setup_tool.runImportStepFromProfile('profile-Products.urban:default', 'actions')
+    setup_tool.runImportStepFromProfile('profile-Products.urban:default', 'viewlets')
+    logger.info("upgrade step done!")
+
+def add_deposit_date_column_to_dashboards(context):
+    """
+    Activate deposit date column on all licence dashboards.
+    """
+    logger = logging.getLogger('urban: add deposit date to dashboards')
+    logger.info("starting upgrade steps")
+    site = api.portal.get()
+
+    old_fields = ('sortable_title', 'CreationDate', 'folder_manager', 'actions', 'select_row')
+    new_fields = ('sortable_title', 'CreationDate', 'getDepositDate', 'folder_manager', 'actions', 'select_row')
+
+    collection = site.urban.collection_all_licences
+    if collection.customViewFields == old_fields:
+        collection.setCustomViewFields(new_fields)
+
+    for folder in site.urban.objectValues('ATFolder'):
+        collection = folder.objectIds() and folder.objectValues()[0]
+        if not collection or folder.id in ['patrimonycertificates', 'inspections']:
+            continue
+        if collection.portal_type == 'DashboardCollection':
+            if collection.customViewFields == old_fields:
+                collection.setCustomViewFields(new_fields)
+    logger.info("upgrade step done!")
+
+
+def replace_mailing_loop_proprietaries(context):
+    """
+    Mailing typo: replace proprietaire by proprietaires (with 's')
+    """
+    logger = logging.getLogger('urban: replace mailing loop proprietaries')
+    logger.info("starting upgrade steps")
+    catalog = api.portal.get_tool('portal_catalog')
+    template_brains = catalog(object_provides=IConfigurablePODTemplate.__identifier__)
+    # get brains instead of all templates because brains are small
+    for brain in template_brains:
+        template = brain.getObject()
+        # get the template we need
+        if template.context_variables:
+            # false if template.context_variables is None or empty
+            new_value = []
+            for line in template.context_variables:
+                if line['value'] == 'proprietaire':
+                    logger.info("migrated template : {} ".format(template))
+                    line['value'] = 'proprietaires'
+                new_value.append(line)
+            template.context_variables = new_value
+    logger.info("upgrade done!")
+
+
+def set_default_warnings(context):
+    """
+    Set parcels warning on portal_urban warnings field.
+    """
+    logger = logging.getLogger('urban: replace mailing loop proprietaries')
+    logger.info("starting upgrade steps")
+    portal_urban = api.portal.get_tool('portal_urban')
+    portal_urban.setWarnings(
+        ({
+            'condition': 'urban.warnings.define_parcels',
+            'level': 'warning',
+            'message': 'Veuillez renseigner la ou les parcelle(s) concern\xc3\xa9e(s).'
+        },)
+    )
+    logger.info("upgrade done!")
+
+
+def update_tickets_title(context):
+    """
+    Recompute ticket title.
+    """
+    logger = logging.getLogger('urban: replace mailing loop proprietaries')
+    logger.info("starting upgrade steps")
+    catalog = api.portal.get_tool('portal_catalog')
+    brains = catalog(portal_type='Ticket')
+    for brain in brains:
+        ticket = brain.getObject()
+        ticket.updateTitle()
+    logger.info("upgrade done!")

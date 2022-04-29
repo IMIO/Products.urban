@@ -19,6 +19,7 @@
         <element value="File"/>
         <element value="Parcel"/>
         <element value="UrbanEvent"/>
+        <element value="UrbanEventInquiry"/>
         <element value="UrbanEventCollege"/>
         <element value="UrbanEventOpinionRequest"/>
         <element value="task"/>

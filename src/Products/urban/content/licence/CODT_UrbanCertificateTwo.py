@@ -17,8 +17,9 @@ from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 from Products.urban import interfaces
-from Products.urban.content.licence.CODT_BaseBuildLicence import CODT_BaseBuildLicence
+from Products.urban.content.licence.CODT_BuildLicence import CODT_BuildLicence
 from Products.urban.content.licence.CODT_BuildLicence import finalizeSchema
+from Products.urban.content.licence.CODT_BuildLicence import finalizeSpecificSchema
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.urban import UrbanMessage as _
@@ -40,15 +41,17 @@ schema = Schema((
             force_close_on_insert=1,
             allow_search=1,
             only_for_review_states='enabled',
-            allow_browse=0,
+            allow_browse=1,
             show_indexes=1,
             show_index_selector=1,
+            startup_directory='urban/geometricians',
             available_indexes={'Title': 'Nom'},
             base_query='geometriciansBaseQuery',
             wild_card_search=True,
             show_results_without_query=True,
-            label=_('urban_label_geometricians', default='Geometricians'),
-            visible=False,
+            restrict_browsing_to_startup_directory=1,
+            label=_('urban_label_geometricians', default='Geometrician(s)'),
+            popup_name='contact_reference_popup',
         ),
         required=False,
         schemata='urban_description',
@@ -65,9 +68,9 @@ schema = Schema((
             force_close_on_insert=1,
             startup_directory='urban/notaries',
             restrict_browsing_to_startup_directory=1,
-            popup_name='popup',
+            popup_name='contact_reference_popup',
             wild_card_search=True,
-            label=_('urban_label_notaryContact', default='Notarycontact'),
+            label=_('urban_label_notaryContact', default='Notary(ies)'),
         ),
         required=False,
         schemata='urban_description',
@@ -83,7 +86,7 @@ setOptionalAttributes(schema, optional_fields)
 ##/code-section after-local-schema
 
 CODT_UrbanCertificateTwo_schema = BaseFolderSchema.copy() + \
-    getattr(CODT_BaseBuildLicence, 'schema', Schema(())).copy() + \
+    getattr(CODT_BuildLicence, 'schema', Schema(())).copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
@@ -91,7 +94,7 @@ CODT_UrbanCertificateTwo_schema = BaseFolderSchema.copy() + \
 ##/code-section after-schema
 
 
-class CODT_UrbanCertificateTwo(BaseFolder, CODT_BaseBuildLicence, BrowserDefaultMixin):
+class CODT_UrbanCertificateTwo(BaseFolder, CODT_BuildLicence, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()
@@ -128,6 +131,7 @@ registerType(CODT_UrbanCertificateTwo, PROJECTNAME)
 
 #finalizeSchema comes from BuildLicence to be sure to have the same changes reflected
 finalizeSchema(CODT_UrbanCertificateTwo_schema)
+finalizeSpecificSchema(CODT_UrbanCertificateTwo_schema)
 
 
 def cu2FinalizeSchema(schema):

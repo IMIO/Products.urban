@@ -400,7 +400,7 @@ class ITicket(IGenericLicence):
     """
 
 
-class IRoadDecree(Interface):
+class IRoadDecree(ICODT_BaseBuildLicence):
     """
     Marker interface for road degree
     """
@@ -522,6 +522,10 @@ class ITheTicketEvent(Interface):
     __doc__ = _("""ITheTicket type marker interface""")
 
 
+class ITechnicalAnalysis(Interface):
+    __doc__ = _("""ITechnicalAnalysis type marker interface""")
+
+
 class ITheLicenceCollegeEvent(Interface):
     __doc__ = _("""ITheLicence type marker interface""")
 
@@ -612,6 +616,14 @@ class IUrbanEventFollowUpWithDelay(Interface):
 
 class IProprietaryChangeEvent(Interface):
     __doc__ = _("""IProprietaryChangeEvent type marker interface""")
+
+
+class ISuspensionEvent(Interface):
+    __doc__ = _("""ISuspensionEvent type marker interface""")
+
+
+class ISettlementEvent(Interface):
+    __doc__ = _("""ISettlementEvent type marker interface""")
 
 
 class IUrbanBase(Interface):
@@ -767,3 +779,7 @@ class IGlobalSuspensionPeriod(Interface):
 
 class IFacetedCollection(Interface):
     """ Adapts an object into a faceted collection """
+
+
+class IUrbanWarningCondition(Interface):
+    """ Adapts a licence into a warning message """

@@ -284,10 +284,90 @@
         profile="Products.urban:default" />
 
     <gs:upgradeStep
-        title="Move architects and geometricians to representative contacts for base buildlicence"
+        title="Install GIG coring registry settings"
         description="urban upgrade step"
         source="1106"
         destination="1107"
+        handler=".update_250.reinstall_registry_and_vocabularies"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Activate divergences field"
+        description="urban upgrade step"
+        source="1107"
+        destination="1108"
+        handler=".update_250.activate_divergence_field"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Check corrupted models"
+        description="urban upgrade step"
+        source="1108"
+        destination="1109"
+        handler=".check_corrupted_templates.check_corrupted_templates"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="remove icons from transitions"
+        description="urban upgrade step"
+        source="1109"
+        destination="1110"
+        handler=".update_250.remove_icons_from_transitions"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Add and activate corporation tenant"
+        description="urban upgrade step"
+        source="1110"
+        destination="1111"
+        handler=".update_250.add_and_active_corporation_tenant"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="add documentation link to user portal_actions and hide contact viewlet in footer"
+        description="urban upgrade step"
+        source="1112"
+        destination="1113"
+        handler=".update_250.addDocumentationLinkToUserPortalActionAndHideViewlet"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Activate deposit date column on all licence dashboards."
+        description="urban upgrade step"
+        source="1113"
+        destination="1114"
+        handler=".update_250.add_deposit_date_column_to_dashboards"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Add a final 's' to mailing var 'proprietaire'"
+        description="urban upgrade step"
+        source="1114"
+        destination="1115"
+        handler=".update_250.replace_mailing_loop_proprietaries"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Set default warnings"
+        description="urban upgrade step"
+        source="1115"
+        destination="1116"
+        handler=".update_250.set_default_warnings"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Update tickets title"
+        description="urban upgrade step"
+        source="1116"
+        destination="1117"
+        handler=".update_250.update_tickets_title"
+        profile="Products.urban:default" />
+      
+    <gs:upgradeStep
+        title="Move architects and geometricians to representative contacts for base buildlicence"
+        description="urban upgrade step"
+        source="1117"
+        destination="1118"
         handler=".update_250.migrate_move_basebuildlicence_architects_and_geometricians_to_representative_contacts"
         profile="Products.urban:default" />
 

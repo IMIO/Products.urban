@@ -6,7 +6,7 @@
 
 
 <metal:subdivision define-macro="impactStudy">
-    <td valign="top"><b><span i18n:translate="urban_label_impactStudy">In subdivision?</span>:</b></td>
+    <td valign="top"><b><span i18n:translate="urban_label_impactStudy">impact study</span>:</b></td>
     <td width="10px"></td>
     <td width="49%" valign="top" valign="top" tal:define="has_impact_study context/getImpactStudy; info view/getImpactStudyInfos">
         <tal:has_impact_study condition="python: not info or not info['date']">
