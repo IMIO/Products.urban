@@ -74,21 +74,21 @@ class ComputeInquiryDelay(object):
         except ValueError:
             start_date = datetime.strptime(self.request.start, '%Y/%m/%d').date()
 
-        inquiry_delay = 15
+        inquiry_delay = 14
         licence = self.context.aq_parent
         if hasattr(licence, 'getRoadAdaptation'):
             if licence.getRoadAdaptation() and licence.getRoadAdaptation() != ['']:
-                inquiry_delay = 30
+                inquiry_delay = 29
 
         if licence.portal_type in ['EnvClassOne']:
-            inquiry_delay = 30
+            inquiry_delay = 29
         if licence.portal_type == 'CODT_UniqueLicence':
             if licence.getInquiry_category() == 'B':
-                inquiry_delay = 30
+                inquiry_delay = 29
             if licence.getInquiry_category() == 'C':
-                inquiry_delay = 15
+                inquiry_delay = 14
         if self.context.getLinkedInquiry().getInquiry_type() == 'announcement':
-            inquiry_delay = 15
+            inquiry_delay = 14
         weekmask = urban_tool.get_week_offdays(as_mask=True)
         offday_periods = urban_tool.get_offday_periods(types='inquiry_suspension')
         holidays = urban_tool.get_offdays(types='holydays')
