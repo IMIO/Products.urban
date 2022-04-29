@@ -1868,9 +1868,9 @@ default_values = {
 
         'airportnoisezone': [
             'UrbanVocabularyTerm',
-            {'id': "zone-expo-a", 'title': u"Zone A au plan d'Exposition au bruit"},
+            {'id': "zone-expo-a", 'title': u"Zone A' au plan d'Exposition au bruit"},
             {'id': "zone-devel-a", 'title': u"Zone A au plan de Développement à Long Terme"},
-            {'id': "zone-expo-b", 'title': u"Zone B au plan d'Exposition au bruit"},
+            {'id': "zone-expo-b", 'title': u"Zone B' au plan d'Exposition au bruit"},
             {'id': "zone-devel-b", 'title': u"Zone B au plan de Développement à Long Terme"},
         ],
 
