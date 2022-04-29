@@ -2570,7 +2570,7 @@ EventConfigs = {
             'title': "Enquête publique",
             'eventDateLabel': "Date de notification",
             'activatedFields': ['investigationStart', 'investigationEnd', 'claimsDate',
-                                'explanationStartSDate', 'explanationEndSDate ', 'claimsText', 'transmitDate'],
+                                'explanationStartSDate', 'explanationEndSDate ', 'claimsText'],
             'deadLineDelay': 15,
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
@@ -6040,7 +6040,7 @@ EventConfigs = {
         {
             'id': "enquete-publique",
             'title': "Enquête publique",
-            'activatedFields': ('investigationStart', 'investigationEnd', 'claimsDate', 'claimEndSDate', 'explanationStartSDate', 'explanationEndSDate', 'claimsText', 'transmitDate',),
+            'activatedFields': ('investigationStart', 'investigationEnd', 'claimsDate', 'claimEndSDate', 'explanationStartSDate', 'explanationEndSDate', 'claimsText',),
             'deadLineDelay': 15,
             'eventDateLabel': 'Date de notification',
             'isKeyEvent': True,
