@@ -2638,7 +2638,7 @@ msgstr "Architecte(s)"
 #. Default: "Areparcelsverified"
 #: ../content/licence/GenericLicence.py:979
 msgid "urban_label_areParcelsVerified"
-msgstr "Les parcelles ont été vérifiées?"
+msgstr "Les parcelles ont été vérifiées ?"
 
 #. Default: "Businessdescription"
 #: EnvironmentBase.py
@@ -4200,21 +4200,21 @@ msgstr "Référence"
 #. Default: "Referencedgatlp"
 #: ../content/licence/GenericLicence.py:165
 msgid "urban_label_referenceDGATLP"
-msgstr "Référence FD (DGO4)"
+msgstr "Référence FD (TLPE)"
 
 #: ../content/licence/EnvironmentBase.py:313
 msgid "urban_label_referenceDGO3"
-msgstr "Référence DGO3"
+msgstr "Référence ARNE"
 
 #: ../content/licence/CODT_CommercialLicence.py:95
 msgid "urban_label_referenceDGO6"
-msgstr "Référence DGO6"
+msgstr "Référence SPW Economie, Emploi, Recherche"
 
 #. Default: "Referenceft"
 #: ../content/licence/CODT_UniqueLicence.py:77
 #: ../content/licence/EnvironmentBase.py:81
 msgid "urban_label_referenceFT"
-msgstr "Référence FT (DGO3)"
+msgstr "Référence FT (ARNE)"
 
 #. Default: "Referenceprosecution"
 #: ../content/licence/Ticket.py:36
@@ -4240,7 +4240,7 @@ msgstr "Référence BIC"
 #. Default: "Reference_dgo6"
 #: ../content/licence/CODT_IntegratedLicence.py:60
 msgid "urban_label_reference_dgo6"
-msgstr "Référence DGO6"
+msgstr "Référence SPW Economie, Emploi, Recherche"
 
 msgid "urban_label_reference_regex"
 msgstr "Regex d'identification de la référence"

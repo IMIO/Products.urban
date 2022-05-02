@@ -254,6 +254,19 @@ msgstr ""
 msgid "opinion_given"
 msgstr ""
 
+msgid "analysis"
+msgstr ""
+
+msgid "in_progress_with_prosecutor"
+msgstr ""
+
+msgid "prosecution_analysis"
+msgstr ""
+
+msgid "in_progress_without_prosecutor"
+msgstr ""
+
+
 #transitions
 msgid "retire"
 msgstr ""
@@ -302,6 +315,7 @@ msgstr ""
 
 msgid "administrative_answer"
 msgstr ""
+
 
 #control panel
 msgid "UrbanTool"
