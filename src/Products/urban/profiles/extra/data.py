@@ -6510,6 +6510,17 @@ EventConfigs = {
             ),
             'eventType': ('Products.urban.interfaces.IPatrimonyMeetingEvent',),
         },
+        {
+            'id': "envoi-demande-FT",
+            'title': "Transmis du dossier au SPW",
+            'activatedFields': (),
+            'deadLineDelay': 0,
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (),
+            'eventType': ('Products.urban.interfaces.ITransmitToSPWEvent',),
+        },
+
     ),
     'envclassthree': (
         {
