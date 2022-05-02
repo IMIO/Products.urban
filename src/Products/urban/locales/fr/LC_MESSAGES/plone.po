@@ -246,6 +246,9 @@ msgstr "Registre des modifications pour les conditions intégrales et sectoriell
 msgid "administrative_answer"
 msgstr "Réponse administrative"
 
+msgid "analysis"
+msgstr "Analyse"
+
 msgid "ask_opinion"
 msgstr "Demander l'avis"
 
@@ -319,6 +322,12 @@ msgstr "Répondre"
 msgid "in_progress"
 msgstr "En cours"
 
+msgid "in_progress_with_prosecutor"
+msgstr "Suite avec PR"
+
+msgid "in_progress_without_prosecutor"
+msgstr "Suite sans PR"
+
 msgid "inacceptable"
 msgstr "Irrecevable"
 
@@ -375,6 +384,9 @@ msgstr "Validation"
 
 msgid "please_enter_more_letters"
 msgstr "Il est nécessaire que vous entriez plusieurs lettres pour effectuer la recherche"
+
+msgid "prosecution_analysis"
+msgstr "En analyse au parquet"
 
 msgid "receive_opinion"
 msgstr "Recevoir l'avis"
