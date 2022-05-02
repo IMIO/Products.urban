@@ -215,6 +215,11 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     """
     Finalizes the type schema to alter some fields
     """
+    schema.moveField('couplePersonTitle', after='representedBySociety')
+    schema.moveField('couplePerson1Name', after='couplePersonTitle')
+    schema.moveField('couplePerson1Firstname', after='couplePerson1Name')
+    schema.moveField('couplePerson2Name', after='couplePerson1Firstname')
+    schema.moveField('couplePerson2Firstname', after='couplePerson2Name')
 #    schema.moveField('name1', after='personRole')
 #    schema.moveField('name2', after='name1')
 
