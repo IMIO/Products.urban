@@ -1572,4 +1572,43 @@ schedule_config = {
             'additional_delay': 30,
         },
     ],
+    'envclasstwo': [
+        {
+            'type_name': 'TaskConfig',
+            'id': 'deposit',
+            'title': 'Dépot du dossier',
+            'default_assigned_group': 'environment_editors',
+            'default_assigned_user': 'urban.assign_folder_manager',
+            'creation_state': ('deposit',),
+            'start_date': 'schedule.start_date.task_starting_date',
+            'end_conditions': (
+                EndConditionObject('urban.schedule.condition.deposit_done'),
+            ),
+            'calculation_delay': (
+                'schedule.calculation_default_delay',
+            ),
+            'additional_delay': 0,
+        },
+        {
+            'type_name': 'TaskConfig',
+            'id': 'transmit_to_spw',
+            'title': 'Transmis au SPW',
+            'default_assigned_group': 'environment_editors',
+            'default_assigned_user': 'urban.assign_folder_manager',
+            'creation_state': ('deposit',),
+            'start_date': 'schedule.start_date.task_starting_date',
+            'creation_conditions': (
+                CreationConditionObject('urban.schedule.condition.deposit_done'),
+            ),
+            'end_conditions': (
+                EndConditionObject('urban.schedule.condition.transmit_to_spw_done'),
+            ),
+            'calculation_delay': (
+                'schedule.calculation_default_delay',
+            ),
+            'additional_delay': 3,
+        },
+
+
+    ],
 }
