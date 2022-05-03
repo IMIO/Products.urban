@@ -1790,6 +1790,23 @@ schedule_config = {
             'activate_recurrency': True,
             'marker_interfaces': [u'Products.urban.schedule.interfaces.ISendOpinionRequestsTask'],
         },
+        {
+            'type_name': 'TaskConfig',
+            'id': 'inquiry-preparation',
+            'title': 'Préparer l\'enquête publique',
+            'default_assigned_group': 'environment_editors',
+            'default_assigned_user': 'urban.assign_folder_manager',
+            'creation_state': ('complete',),
+            'starting_states': ('complete',),
+            'start_date': 'urban.schedule.start_date.acknowledgement_date',
+            'end_conditions': (
+                EndConditionObject('urban.schedule.condition.inquiry_dates_defined', 'AND'),
+            ),
+            'calculation_delay': (
+                'schedule.calculation_default_delay',
+            ),
+            'additional_delay': 20,
+        },
 
     ],
 }

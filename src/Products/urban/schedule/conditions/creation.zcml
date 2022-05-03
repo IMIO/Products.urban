@@ -104,6 +104,14 @@
     />
 
     <adapter
+        for="Products.urban.interfaces.IEnvironmentLicence
+             imio.schedule.content.task_config.ITaskConfig"
+        provides="imio.schedule.interfaces.ICreationCondition"
+        factory=".creation.WillHaveInquiry"
+        name="urban.schedule.condition.will_have_inquiry"
+    />
+
+    <adapter
         for="Products.urban.interfaces.ICODT_BaseBuildLicence
              imio.schedule.content.task_config.ITaskConfig"
         provides="imio.schedule.interfaces.ICreationCondition"
