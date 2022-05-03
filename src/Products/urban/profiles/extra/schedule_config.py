@@ -1717,5 +1717,22 @@ schedule_config = {
                 },
             ]
         },
+        {
+            'type_name': 'TaskConfig',
+            'id': 'transmit_complete',
+            'title': 'Transmis complet',
+            'default_assigned_group': 'environment_editors',
+            'default_assigned_user': 'urban.assign_folder_manager',
+            'creation_state': ('complete',),
+            'start_date': 'schedule.start_date.task_starting_date',
+            'end_conditions': (
+                EndConditionObject('urban.schedule.condition.acknowledgment_done'),
+            ),
+            'calculation_delay': (
+                'schedule.calculation_default_delay',
+            ),
+            'additional_delay': 0,
+        },
+
     ],
 }
