@@ -518,4 +518,7 @@ def update_env_licences_schedule(context):
         if new_marker not in event_cfg.getEventType():
             event_cfg.eventType = tuple(list(event_cfg.getEventType()) + [new_marker])
 
+    # reindex everything
+    catalog.clearFindAndRebuild()
+
     logger.info("upgrade done!")
