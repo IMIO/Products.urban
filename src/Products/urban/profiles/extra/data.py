@@ -5472,12 +5472,15 @@ EventConfigs = {
             'id': "recepisse-complement",
             'title': "Récépissé d'un complément",
             'activatedFields': (),
-            'deadLineDelay': 3,
             'isKeyEvent': False,
             'podTemplates': (
                 {'id': "env1-recepisse-complement.odt", 'title': "Récépissé d'un complément"},
+                {'id': "env1-transmis-complement-ft.odt", 'title': "Transmis d'un complément au FT"},
             ),
-            'eventType': ('Products.urban.interfaces.IMissingPartDepositEvent',),
+            'eventType': (
+                'Products.urban.interfaces.IMissingPartDepositEvent',
+                'Products.urban.interfaces.IMissingPartTransmitToSPWEvent',
+            ),
         },
         {
             'id': "envoi-complement-FT",
@@ -5486,9 +5489,7 @@ EventConfigs = {
             'deadLineDelay': 20,
             'isKeyEvent': False,
             'podTemplates': (
-                {'id': "env1-transmis-complement-ft.odt", 'title': "Transmis d'un complément au FT"},
             ),
-            'eventType': ('Products.urban.interfaces.IMissingPartTransmitToSPWEvent',),
         },
         {
             'id': "dossier-irrecevable",
@@ -6021,10 +6022,12 @@ EventConfigs = {
             'podTemplates': (
                 {'id': "pe_complements_recepisse_depot_demande.odt", 'title': "Récépissé d'un dépôt de compléments"},
                 {'id': "pe_complements_info_demandeur.odt", 'title': "Information au demandeur"},
-                {'id': "pe_complements_transmis_demande_dgo3.odt", 'title': "Transmis à l'ARNE"},
+                {'id': "pe_complements_transmis_demande_dgo3.odt", 'title': "Transmis d'un complément au FT"},
             ),
-            'eventType': ('Products.urban.interfaces.IMissingPartDepositEvent',),
-            'eventType': ('Products.urban.interfaces.IMissingPartTransmitToSPWEvent',),
+            'eventType': (
+                'Products.urban.interfaces.IMissingPartDepositEvent',
+                'Products.urban.interfaces.IMissingPartTransmitToSPWEvent',
+            ),
         },
         {
             'id': "dossier-irrecevable",
