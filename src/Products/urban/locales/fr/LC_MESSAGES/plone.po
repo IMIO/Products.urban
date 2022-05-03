@@ -240,9 +240,6 @@ msgstr "Accepter"
 msgid "accepted"
 msgstr "Accepté"
 
-msgid "draft"
-msgstr "Brouillon"
-
 msgid "additionalLegalConditions_history"
 msgstr "Registre des modifications pour les conditions intégrales et sectorielles supplémentaires"
 
@@ -294,6 +291,9 @@ msgstr "Désactiver"
 
 msgid "disabled"
 msgstr "Désactivé"
+
+msgid "draft"
+msgstr "Brouillon"
 
 # actions
 msgid "edit"
