@@ -1724,7 +1724,7 @@ schedule_config = {
             'default_assigned_group': 'environment_editors',
             'default_assigned_user': 'urban.assign_folder_manager',
             'creation_state': ('complete',),
-            'start_date': 'schedule.start_date.task_starting_date',
+            'start_date': 'schedule.start_date.acknowledgement_date',
             'end_conditions': (
                 EndConditionObject('urban.schedule.condition.acknowledgment_done'),
             ),
@@ -1732,6 +1732,22 @@ schedule_config = {
                 'schedule.calculation_default_delay',
             ),
             'additional_delay': 0,
+        },
+        {
+            'type_name': 'TaskConfig',
+            'id': 'identification-rubriques',
+            'title': 'Identification des rubriques',
+            'default_assigned_group': 'environment_editors',
+            'default_assigned_user': 'urban.assign_folder_manager',
+            'creation_state': ('complete',),
+            'start_date': 'schedule.start_date.acknowledgement_date',
+            'end_conditions': (
+                EndConditionObject('urban.schedule.condition.rubrics_choice_done'),
+            ),
+            'calculation_delay': (
+                'schedule.calculation_default_delay',
+            ),
+            'additional_delay': 3,
         },
 
     ],
