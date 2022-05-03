@@ -1606,9 +1606,116 @@ schedule_config = {
             'calculation_delay': (
                 'schedule.calculation_default_delay',
             ),
-            'additional_delay': 3,
+            'additional_delay': 0,
         },
-
-
+        {
+            'type_name': 'TaskConfig',
+            'id': 'spw_check_completion',
+            'title': 'Vérification complétude par le SPW',
+            'default_assigned_group': 'environment_editors',
+            'default_assigned_user': 'urban.assign_folder_manager',
+            'creation_state': ('deposit',),
+            'start_date': 'urban.schedule.start_date.spw_receipt_date',
+            'start_conditions': (
+                StartConditionObject('urban.schedule.condition.transmit_to_spw_done'),
+            ),
+            'ending_states': ('complete', 'incomplete', 'inacceptable'),
+            'calculation_delay': (
+                'schedule.calculation_default_delay',
+            ),
+            'additional_delay': 20,
+        },
+        {
+            'type_name': 'MacroTaskConfig',
+            'id': 'incomplet',
+            'title': 'Incomplet',
+            'default_assigned_group': 'environment_editors',
+            'default_assigned_user': 'liege.urban.schedule.assign_task_owner',
+            'creation_state': ('incomplete',),
+            'starting_states': ('incomplete',),
+            'ending_states': ('complete', 'inacceptable', 'abandoned'),
+            'start_date': 'schedule.start_date.subtask_highest_due_date',
+            'additional_delay': 0,
+            'subtasks': [
+                {
+                    'type_name': 'TaskConfig',
+                    'id': 'demande_complements',
+                    'title': 'Demander des compléments',
+                    'default_assigned_group': 'environment_editors',
+                    'default_assigned_user': 'liege.urban.schedule.assign_task_owner',
+                    'creation_state': ('incomplete',),
+                    'starting_states': ('incomplete',),
+                    'end_conditions': (
+                        EndConditionObject('urban.schedule.condition.complements_asked'),
+                    ),
+                    'start_date': 'urban.schedule.start_date.ask_complements_date',
+                    'additional_delay': 1,
+                },
+                {
+                    'type_name': 'TaskConfig',
+                    'id': 'attente_complements',
+                    'title': 'En attente de compléments',
+                    'default_assigned_group': 'environment_editors',
+                    'default_assigned_user': 'liege.urban.schedule.assign_task_owner',
+                    'creation_state': ('incomplete',),
+                    'creation_conditions': (
+                        CreationConditionObject('urban.schedule.condition.complements_asked'),
+                    ),
+                    'end_conditions': (
+                        EndConditionObject('urban.schedule.condition.incomplete_for_6_months', 'OR'),
+                        EndConditionObject('urban.schedule.condition.complements_received'),
+                    ),
+                    'start_date': 'urban.schedule.start_date.ask_complements_date',
+                    'additional_delay': 183,
+                },
+                {
+                    'type_name': 'TaskConfig',
+                    'id': 'transmis_complements_au_spw',
+                    'title': 'Transmis des compléments au SPW',
+                    'default_assigned_group': 'environment_editors',
+                    'default_assigned_user': 'liege.urban.schedule.assign_task_owner',
+                    'creation_state': ('incomplete',),
+                    'creation_conditions': (
+                        CreationConditionObject('urban.schedule.condition.complements_received'),
+                    ),
+                    'end_conditions': (
+                        EndConditionObject('urban.schedule.condition.complements_transmit_to_spw'),
+                    ),
+                    'start_date': 'urban.schedule.start_date.complements_deposit_date',
+                    'additional_delay': 3,
+                },
+                {
+                    'type_name': 'TaskConfig',
+                    'id': 'verif_complements',
+                    'title': 'Vérification compléments par le SPW',
+                    'default_assigned_group': 'environment_editors',
+                    'default_assigned_user': 'liege.urban.schedule.assign_task_owner',
+                    'creation_state': ('incomplete',),
+                    'ending_states': ('complete', 'inacceptable', 'abandoned'),
+                    'creation_conditions': (
+                        CreationConditionObject('urban.schedule.condition.complements_transmit_to_spw'),
+                    ),
+                    'start_date': 'urban.schedule.start_date.complements_deposit_date',
+                    'additional_delay': 20,
+                },
+                {
+                    'type_name': 'TaskConfig',
+                    'id': 'irrecevable-apres-6-mois',
+                    'title': 'Irrecevable après 6 mois',
+                    'default_assigned_group': 'environment_editors',
+                    'default_assigned_user': 'liege.urban.schedule.assign_task_owner',
+                    'creation_state': ('incomplete',),
+                    'ending_states': ('complete', 'inacceptable', 'abandoned'),
+                    'creation_conditions': (
+                        CreationConditionObject('urban.schedule.condition.incomplete_for_6_months'),
+                    ),
+                    'start_conditions': (
+                        StartConditionObject('urban.schedule.condition.complements_asked'),
+                    ),
+                    'start_date': 'urban.schedule.start_date.creation_date',
+                    'additional_delay': 0,
+                },
+            ]
+        },
     ],
 }
