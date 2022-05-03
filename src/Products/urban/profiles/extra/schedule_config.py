@@ -1749,6 +1749,47 @@ schedule_config = {
             ),
             'additional_delay': 3,
         },
+        {
+            'type_name': 'TaskConfig',
+            'id': 'creer-demande-avis',
+            'title': 'Préparer demandes d\'avis',
+            'default_assigned_group': 'urban_editors',
+            'default_assigned_user': 'urban.assign_folder_manager',
+            'creation_state': ('complete',),
+            'creation_conditions': (
+                CreationConditionObject('urban.schedule.condition.has_opinion_requests', 'AND'),
+            ),
+            'starting_states': ('complete',),
+            'end_conditions': (
+                EndConditionObject('urban.schedule.condition.opinion_requests_created', 'AND'),
+            ),
+            'start_date': 'urban.schedule.start_date.acknowledgment_date',
+            'additional_delay': 0,
+        },
+        {
+            'type_name': 'TaskConfig',
+            'id': 'demande-avis-en-cours',
+            'title': 'Avis en cours',
+            'default_assigned_group': 'urban_editors',
+            'default_assigned_user': 'urban.assign_folder_manager',
+            'creation_state': ('complete',),
+            'creation_conditions': (
+                CreationConditionObject('urban.schedule.condition.opinion_requests_in_progress'),
+            ),
+            'starting_states': ('complete',),
+            'end_conditions': (
+                EndConditionObject('urban.schedule.condition.opinion_requests_done', 'AND'),
+            ),
+            'activate_recurrency': True,
+            'recurrence_states': ('complete', ),
+            'recurrence_conditions': (
+                RecurrenceConditionObject('urban.schedule.condition.opinion_requests_in_progress', 'AND'),
+            ),
+            'start_date': 'urban.schedule.start_date.acknowledgment_date',
+            'additional_delay': 30,
+            'activate_recurrency': True,
+            'marker_interfaces': [u'Products.urban.schedule.interfaces.ISendOpinionRequestsTask'],
+        },
 
     ],
 }
