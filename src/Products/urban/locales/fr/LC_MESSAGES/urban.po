@@ -856,35 +856,35 @@ msgstr "Ajouter un lotissement"
 msgid "add_a_claimant"
 msgstr "Ajouter un réclamant"
 
-#: ../browser/licence/templates/licencemacros.pt:149
+#: ../browser/licence/templates/licencemacros.pt:166
 msgid "add_a_corporation"
 msgstr "Ajouter un demandeur (p. morale)"
 
-#: ../browser/licence/templates/licencemacros.pt:185
+#: ../browser/licence/templates/licencemacros.pt:202
 msgid "add_a_corporation_plaintiff"
 msgstr "Ajouter un plaignant (p.morale)"
 
-#: ../browser/licence/templates/licencemacros.pt:123
+#: ../browser/licence/templates/licencemacros.pt:140
 msgid "add_a_corporation_tenant"
 msgstr "Ajouter un locataire (p.morale)"
 
-#: ../browser/licence/templates/licencemacros.pt:88
+#: ../browser/licence/templates/licencemacros.pt:105
 msgid "add_a_corporationproprietary"
 msgstr "Ajouter un propriétaire (p. morale)"
 
-#: ../browser/licence/templates/licencemacros.pt:141
+#: ../browser/licence/templates/licencemacros.pt:158
 msgid "add_a_physical_applicant"
 msgstr "Ajouter un demandeur"
 
-#: ../browser/licence/templates/licencemacros.pt:177
+#: ../browser/licence/templates/licencemacros.pt:194
 msgid "add_a_physical_plaintiff"
 msgstr "Ajouter un plaignant"
 
-#: ../browser/licence/templates/licencemacros.pt:80
+#: ../browser/licence/templates/licencemacros.pt:97
 msgid "add_a_proprietary"
 msgstr "Ajouter un propriétaire"
 
-#: ../browser/licence/templates/licencemacros.pt:115
+#: ../browser/licence/templates/licencemacros.pt:132
 msgid "add_a_tenant"
 msgstr "Ajouter un locataire"
 
@@ -936,12 +936,12 @@ msgstr "Articles des annonces de projet"
 
 # buildlicence_view
 #. Default: "Applicant(s)"
-#: ../browser/licence/templates/licencemacros.pt:129
+#: ../browser/licence/templates/licencemacros.pt:146
 msgid "applicants"
 msgstr "Demandeur(s)"
 
 #. Default: "Applicant(s) history"
-#: ../browser/licence/templates/licencemacros.pt:156
+#: ../browser/licence/templates/licencemacros.pt:173
 msgid "applicants_history"
 msgstr "Demandeurs inactifs"
 
@@ -977,7 +977,7 @@ msgid "basement_folder_title"
 msgstr "Sous-sol"
 
 #. Default: "Bound licence applicant(s)"
-#: ../browser/licence/templates/licencemacros.pt:192
+#: ../browser/licence/templates/licencemacros.pt:209
 msgid "bound_licence_applicants"
 msgstr "Demandeur(s) du permis"
 
@@ -2039,7 +2039,7 @@ msgid "pipelines_folder_title"
 msgstr "Canalisations"
 
 #. Default: "Plaintiff(s)"
-#: ../browser/licence/templates/licencemacros.pt:164
+#: ../browser/licence/templates/licencemacros.pt:181
 msgid "plaintiffs"
 msgstr "Plaignant(s)"
 
@@ -2061,12 +2061,12 @@ msgid "projectmeeting_urbanconfig_title"
 msgstr "Paramètres des réunions de projet"
 
 #. Default: "Proprietary(ies)"
-#: ../browser/licence/templates/licencemacros.pt:66
+#: ../browser/licence/templates/licencemacros.pt:83
 msgid "proprietaries"
 msgstr "Propriétaire(s)"
 
 #. Default: "Proprietaries history"
-#: ../browser/licence/templates/licencemacros.pt:95
+#: ../browser/licence/templates/licencemacros.pt:112
 msgid "proprietaries_history"
 msgstr "Propriétaires inactifs"
 
@@ -2103,15 +2103,15 @@ msgstr "Dossier introduit par ${notary}"
 msgid "rgbsr_folder_title"
 msgstr "Réglement général sur les bâtisses en site rural"
 
-#: ../content/licence/BaseBuildLicence.py:558
+#: ../content/licence/BaseBuildLicence.py:579
 msgid "road_adaptation_create"
 msgstr "Ouverture (création)"
 
-#: ../content/licence/BaseBuildLicence.py:557
+#: ../content/licence/BaseBuildLicence.py:578
 msgid "road_adaptation_modify"
 msgstr "Modification"
 
-#: ../content/licence/BaseBuildLicence.py:559
+#: ../content/licence/BaseBuildLicence.py:580
 msgid "road_adaptation_supress"
 msgstr "Suppression"
 
@@ -2228,7 +2228,7 @@ msgid "templates_summary_title"
 msgstr "Liste des modèles définis dans la configuration"
 
 #. Default: "Tenant(s)"
-#: ../browser/licence/templates/licencemacros.pt:104
+#: ../browser/licence/templates/licencemacros.pt:121
 msgid "tenants"
 msgstr "Locataires"
 
@@ -2884,7 +2884,7 @@ msgid "urban_label_complement"
 msgstr "Compléments"
 
 #. Default: "Composition"
-#: ../content/licence/BaseBuildLicence.py:510
+#: ../content/licence/BaseBuildLicence.py:531
 msgid "urban_label_composition"
 msgstr ""
 
@@ -2999,12 +2999,12 @@ msgid "urban_label_delay"
 msgstr "Délai"
 
 #. Default: "Delayaftermodifiedblueprints"
-#: ../content/licence/BaseBuildLicence.py:467
+#: ../content/licence/BaseBuildLicence.py:488
 msgid "urban_label_delayAfterModifiedBlueprints"
 msgstr "Nouveau délai suite aux plans modificatifs"
 
 #. Default: "Delayaftermodifiedblueprintsdetails"
-#: ../content/licence/BaseBuildLicence.py:480
+#: ../content/licence/BaseBuildLicence.py:501
 msgid "urban_label_delayAfterModifiedBlueprintsDetails"
 msgstr "Détails concernant le nouveau délai suite aux plans modificatifs"
 
@@ -3102,7 +3102,7 @@ msgid "urban_label_editionOutputFormat"
 msgstr "Format de fichier des modèles générés"
 
 #. Default: "Electricity"
-#: ../content/licence/BaseBuildLicence.py:502
+#: ../content/licence/BaseBuildLicence.py:523
 msgid "urban_label_electricity"
 msgstr "Electricité"
 
@@ -3157,7 +3157,7 @@ msgid "urban_label_eventRecipient"
 msgstr "Destinataire du document"
 
 #. Default: "Exemptfdarticle"
-#: ../content/licence/BaseBuildLicence.py:449
+#: ../content/licence/BaseBuildLicence.py:470
 msgid "urban_label_exemptFDArticle"
 msgstr "Article 107"
 
@@ -3251,9 +3251,6 @@ msgstr "Détails concernant la zone inondable"
 #: ../content/licence/GenericLicence.py:185
 msgid "urban_label_folderCategory"
 msgstr "Type de dossier"
-
-msgid "urban_label_representative_contacts"
-msgstr "Représentant(s)"
 
 #. Default: "Foldercategorytownship"
 #: ../content/licence/GenericLicence.py:967
@@ -3380,7 +3377,7 @@ msgid "urban_label_hasEnvironmentImpactStudy"
 msgstr "Étude d'incidences sur l'environnement"
 
 #. Default: "Hasmodifiedblueprints"
-#: ../content/licence/BaseBuildLicence.py:460
+#: ../content/licence/BaseBuildLicence.py:481
 msgid "urban_label_hasModifiedBlueprints"
 msgstr "Plans modificatifs"
 
@@ -3792,7 +3789,7 @@ msgid "urban_label_noApplication"
 msgstr "Non applicable"
 
 #. Default: "Notary(ies)"
-#: ../browser/licence/templates/licencemacros.pt:47
+#: ../browser/licence/templates/licencemacros.pt:64
 #: ../content/licence/CODT_UrbanCertificateTwo.py:73
 #: ../content/licence/Division.py:126
 msgid "urban_label_notaryContact"
@@ -4099,7 +4096,7 @@ msgid "urban_label_prevuDetails"
 msgstr "Détails concernant le Périmètre de Revitalisation Urbaine"
 
 #. Default: "Procedurechoice"
-#: ../content/licence/BaseBuildLicence.py:428
+#: ../content/licence/BaseBuildLicence.py:449
 #: ../content/licence/EnvironmentBase.py:179
 msgid "urban_label_procedureChoice"
 msgstr "Choix de la procédure"
@@ -4324,6 +4321,12 @@ msgstr "Date de réception du PV"
 msgid "urban_label_reportVisitDate"
 msgstr "Date de la visite"
 
+#. Default: "RepresentativeContacts(s)"
+#: ../browser/licence/templates/licencemacros.pt:47
+#: ../content/licence/BaseBuildLicence.py:436
+msgid "urban_label_representative_contacts"
+msgstr "Représentant(s)"
+
 #. Default: "Representedby"
 #: Contact.py
 msgid "urban_label_representedBy"
@@ -4340,7 +4343,7 @@ msgid "urban_label_requestedOrganisation"
 msgstr "Organisme"
 
 #. Default: "Requirementfromfd"
-#: ../content/licence/BaseBuildLicence.py:439
+#: ../content/licence/BaseBuildLicence.py:460
 msgid "urban_label_requirementFromFD"
 msgstr "Fonctionnaire délégué"
 
@@ -4800,7 +4803,7 @@ msgid "urban_label_warnings"
 msgstr "Avertissements"
 
 #. Default: "Water"
-#: ../content/licence/BaseBuildLicence.py:494
+#: ../content/licence/BaseBuildLicence.py:515
 msgid "urban_label_water"
 msgstr "Eau"
 
@@ -4931,15 +4934,15 @@ msgstr "Certificats d'urbanisme 2"
 msgid "urbantemplates_folder_title"
 msgstr "modèles des procédures d'urbanisme"
 
-#: ../content/licence/BaseBuildLicence.py:571
+#: ../content/licence/BaseBuildLicence.py:592
 msgid "usage_for_habitation"
 msgstr "Modèle I: Bâtiment(s) destiné(s) exclusivement ou principalement à l'habitation"
 
-#: ../content/licence/BaseBuildLicence.py:573
+#: ../content/licence/BaseBuildLicence.py:594
 msgid "usage_not_applicable"
 msgstr "Pas d'application"
 
-#: ../content/licence/BaseBuildLicence.py:572
+#: ../content/licence/BaseBuildLicence.py:593
 msgid "usage_not_for_habitation"
 msgstr "Modèle II: Bâtiment(s) destiné(s) exclusivement ou principalement à un autre usage que l'habitation"
 
@@ -4969,7 +4972,7 @@ msgid "warning_add_an_applicant"
 msgstr "Veuillez renseigner le ou les demandeur(s)"
 
 #. Default: "You must encode plaintiff(s)"
-#: ../browser/licence/templates/licencemacros.pt:167
+#: ../browser/licence/templates/licencemacros.pt:184
 msgid "warning_add_an_plaintiff"
 msgstr "Veuillez renseigner un plaignant "
 

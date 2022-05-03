@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2022-05-02 11:54+0000\n"
+"POT-Creation-Date: 2022-05-03 07:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -844,35 +844,35 @@ msgstr ""
 msgid "add_a_claimant"
 msgstr ""
 
-#: ../browser/licence/templates/licencemacros.pt:149
+#: ../browser/licence/templates/licencemacros.pt:166
 msgid "add_a_corporation"
 msgstr ""
 
-#: ../browser/licence/templates/licencemacros.pt:185
+#: ../browser/licence/templates/licencemacros.pt:202
 msgid "add_a_corporation_plaintiff"
 msgstr ""
 
-#: ../browser/licence/templates/licencemacros.pt:123
+#: ../browser/licence/templates/licencemacros.pt:140
 msgid "add_a_corporation_tenant"
 msgstr ""
 
-#: ../browser/licence/templates/licencemacros.pt:88
+#: ../browser/licence/templates/licencemacros.pt:105
 msgid "add_a_corporationproprietary"
 msgstr ""
 
-#: ../browser/licence/templates/licencemacros.pt:141
+#: ../browser/licence/templates/licencemacros.pt:158
 msgid "add_a_physical_applicant"
 msgstr ""
 
-#: ../browser/licence/templates/licencemacros.pt:177
+#: ../browser/licence/templates/licencemacros.pt:194
 msgid "add_a_physical_plaintiff"
 msgstr ""
 
-#: ../browser/licence/templates/licencemacros.pt:80
+#: ../browser/licence/templates/licencemacros.pt:97
 msgid "add_a_proprietary"
 msgstr ""
 
-#: ../browser/licence/templates/licencemacros.pt:115
+#: ../browser/licence/templates/licencemacros.pt:132
 msgid "add_a_tenant"
 msgstr ""
 
@@ -923,12 +923,12 @@ msgid "announcementarticles_folder_title"
 msgstr ""
 
 #. Default: "Applicant(s)"
-#: ../browser/licence/templates/licencemacros.pt:129
+#: ../browser/licence/templates/licencemacros.pt:146
 msgid "applicants"
 msgstr ""
 
 #. Default: "Applicant(s) history"
-#: ../browser/licence/templates/licencemacros.pt:156
+#: ../browser/licence/templates/licencemacros.pt:173
 msgid "applicants_history"
 msgstr ""
 
@@ -964,7 +964,7 @@ msgid "basement_folder_title"
 msgstr ""
 
 #. Default: "Bound licence applicant(s)"
-#: ../browser/licence/templates/licencemacros.pt:192
+#: ../browser/licence/templates/licencemacros.pt:209
 msgid "bound_licence_applicants"
 msgstr ""
 
@@ -2012,7 +2012,7 @@ msgid "pipelines_folder_title"
 msgstr ""
 
 #. Default: "Plaintiff(s)"
-#: ../browser/licence/templates/licencemacros.pt:164
+#: ../browser/licence/templates/licencemacros.pt:181
 msgid "plaintiffs"
 msgstr ""
 
@@ -2034,12 +2034,12 @@ msgid "projectmeeting_urbanconfig_title"
 msgstr ""
 
 #. Default: "Proprietary(ies)"
-#: ../browser/licence/templates/licencemacros.pt:66
+#: ../browser/licence/templates/licencemacros.pt:83
 msgid "proprietaries"
 msgstr ""
 
 #. Default: "Proprietaries history"
-#: ../browser/licence/templates/licencemacros.pt:95
+#: ../browser/licence/templates/licencemacros.pt:112
 msgid "proprietaries_history"
 msgstr ""
 
@@ -2076,15 +2076,15 @@ msgstr ""
 msgid "rgbsr_folder_title"
 msgstr ""
 
-#: ../content/licence/BaseBuildLicence.py:558
+#: ../content/licence/BaseBuildLicence.py:579
 msgid "road_adaptation_create"
 msgstr ""
 
-#: ../content/licence/BaseBuildLicence.py:557
+#: ../content/licence/BaseBuildLicence.py:578
 msgid "road_adaptation_modify"
 msgstr ""
 
-#: ../content/licence/BaseBuildLicence.py:559
+#: ../content/licence/BaseBuildLicence.py:580
 msgid "road_adaptation_supress"
 msgstr ""
 
@@ -2200,7 +2200,7 @@ msgid "templates_summary_title"
 msgstr ""
 
 #. Default: "Tenant(s)"
-#: ../browser/licence/templates/licencemacros.pt:104
+#: ../browser/licence/templates/licencemacros.pt:121
 msgid "tenants"
 msgstr ""
 
@@ -2855,7 +2855,7 @@ msgid "urban_label_complement"
 msgstr ""
 
 #. Default: "Composition"
-#: ../content/licence/BaseBuildLicence.py:510
+#: ../content/licence/BaseBuildLicence.py:531
 msgid "urban_label_composition"
 msgstr ""
 
@@ -2970,12 +2970,12 @@ msgid "urban_label_delay"
 msgstr ""
 
 #. Default: "Delayaftermodifiedblueprints"
-#: ../content/licence/BaseBuildLicence.py:467
+#: ../content/licence/BaseBuildLicence.py:488
 msgid "urban_label_delayAfterModifiedBlueprints"
 msgstr ""
 
 #. Default: "Delayaftermodifiedblueprintsdetails"
-#: ../content/licence/BaseBuildLicence.py:480
+#: ../content/licence/BaseBuildLicence.py:501
 msgid "urban_label_delayAfterModifiedBlueprintsDetails"
 msgstr ""
 
@@ -3073,7 +3073,7 @@ msgid "urban_label_editionOutputFormat"
 msgstr ""
 
 #. Default: "Electricity"
-#: ../content/licence/BaseBuildLicence.py:502
+#: ../content/licence/BaseBuildLicence.py:523
 msgid "urban_label_electricity"
 msgstr ""
 
@@ -3127,7 +3127,7 @@ msgid "urban_label_eventRecipient"
 msgstr ""
 
 #. Default: "Exemptfdarticle"
-#: ../content/licence/BaseBuildLicence.py:449
+#: ../content/licence/BaseBuildLicence.py:470
 msgid "urban_label_exemptFDArticle"
 msgstr ""
 
@@ -3215,9 +3215,6 @@ msgstr ""
 #. Default: "Floodingleveldetails"
 #: ../content/licence/GenericLicence.py:495
 msgid "urban_label_floodingLevelDetails"
-msgstr ""
-
-msgid "urban_label_representative_contacts"
 msgstr ""
 
 #. Default: "Foldercategory"
@@ -3350,7 +3347,7 @@ msgid "urban_label_hasEnvironmentImpactStudy"
 msgstr ""
 
 #. Default: "Hasmodifiedblueprints"
-#: ../content/licence/BaseBuildLicence.py:460
+#: ../content/licence/BaseBuildLicence.py:481
 msgid "urban_label_hasModifiedBlueprints"
 msgstr ""
 
@@ -3762,7 +3759,7 @@ msgid "urban_label_noApplication"
 msgstr ""
 
 #. Default: "Notary(ies)"
-#: ../browser/licence/templates/licencemacros.pt:47
+#: ../browser/licence/templates/licencemacros.pt:64
 #: ../content/licence/CODT_UrbanCertificateTwo.py:73
 #: ../content/licence/Division.py:126
 msgid "urban_label_notaryContact"
@@ -4067,7 +4064,7 @@ msgid "urban_label_prevuDetails"
 msgstr ""
 
 #. Default: "Procedurechoice"
-#: ../content/licence/BaseBuildLicence.py:428
+#: ../content/licence/BaseBuildLicence.py:449
 #: ../content/licence/EnvironmentBase.py:179
 msgid "urban_label_procedureChoice"
 msgstr ""
@@ -4292,6 +4289,12 @@ msgstr ""
 msgid "urban_label_reportVisitDate"
 msgstr ""
 
+#. Default: "RepresentativeContacts(s)"
+#: ../browser/licence/templates/licencemacros.pt:47
+#: ../content/licence/BaseBuildLicence.py:436
+msgid "urban_label_representative_contacts"
+msgstr ""
+
 #. Default: "Representedby"
 #: Contact.py
 msgid "urban_label_representedBy"
@@ -4308,7 +4311,7 @@ msgid "urban_label_requestedOrganisation"
 msgstr ""
 
 #. Default: "Requirementfromfd"
-#: ../content/licence/BaseBuildLicence.py:439
+#: ../content/licence/BaseBuildLicence.py:460
 msgid "urban_label_requirementFromFD"
 msgstr ""
 
@@ -4766,7 +4769,7 @@ msgid "urban_label_warnings"
 msgstr ""
 
 #. Default: "Water"
-#: ../content/licence/BaseBuildLicence.py:494
+#: ../content/licence/BaseBuildLicence.py:515
 msgid "urban_label_water"
 msgstr ""
 
@@ -4897,15 +4900,15 @@ msgstr ""
 msgid "urbantemplates_folder_title"
 msgstr ""
 
-#: ../content/licence/BaseBuildLicence.py:571
+#: ../content/licence/BaseBuildLicence.py:592
 msgid "usage_for_habitation"
 msgstr ""
 
-#: ../content/licence/BaseBuildLicence.py:573
+#: ../content/licence/BaseBuildLicence.py:594
 msgid "usage_not_applicable"
 msgstr ""
 
-#: ../content/licence/BaseBuildLicence.py:572
+#: ../content/licence/BaseBuildLicence.py:593
 msgid "usage_not_for_habitation"
 msgstr ""
 
@@ -4931,7 +4934,7 @@ msgid "warning_add_an_applicant"
 msgstr ""
 
 #. Default: "You must encode plaintiff(s)"
-#: ../browser/licence/templates/licencemacros.pt:167
+#: ../browser/licence/templates/licencemacros.pt:184
 msgid "warning_add_an_plaintiff"
 msgstr ""
 
