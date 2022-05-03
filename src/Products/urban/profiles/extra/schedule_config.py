@@ -1757,6 +1757,9 @@ schedule_config = {
             'default_assigned_user': 'urban.assign_folder_manager',
             'creation_state': ('complete',),
             'starting_states': ('complete',),
+            'creation_conditions': (
+                CreationConditionObject('urban.schedule.condition.is_not_temporary_licence', 'AND'),
+            ),
             'start_date': 'urban.schedule.start_date.acknowledgement_date',
             'end_conditions': (
                 EndConditionObject('urban.schedule.condition.inquiry_dates_defined', 'AND'),
@@ -1765,6 +1768,26 @@ schedule_config = {
                 'schedule.calculation_default_delay',
             ),
             'additional_delay': 20,
+        },
+        {
+            'type_name': 'TaskConfig',
+            'id': 'inquiry',
+            'title': 'Enquête publique en cours',
+            'default_assigned_group': 'environment_editors',
+            'default_assigned_user': 'urban.assign_folder_manager',
+            'creation_state': ('complete',),
+            'starting_states': ('complete',),
+            'creation_conditions': (
+                CreationConditionObject('urban.schedule.condition.inquiry_dates_defined', 'AND'),
+            ),
+            'end_conditions': (
+                EndConditionObject('urban.schedule.condition.inquiry_done', 'AND'),
+            ),
+            'start_date': 'urban.schedule.start_date.inquiry_end_date',
+            'calculation_delay': (
+                'schedule.calculation_default_delay',
+            ),
+            'additional_delay': 0,
         },
 
     ],
