@@ -5488,6 +5488,7 @@ EventConfigs = {
             'podTemplates': (
                 {'id': "env1-transmis-complement-ft.odt", 'title': "Transmis d'un complément au FT"},
             ),
+            'eventType': ('Products.urban.interfaces.IMissingPartTransmitToSPWEvent',),
         },
         {
             'id': "dossier-irrecevable",
@@ -5991,6 +5992,16 @@ EventConfigs = {
             'eventType': ('Products.urban.interfaces.IDepositEvent',),
         },
         {
+            'id': "envoi-demande-FT",
+            'title': "Transmis du dossier au SPW",
+            'activatedFields': (),
+            'deadLineDelay': 0,
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (),
+            'eventType': ('Products.urban.interfaces.ITransmitToSPWEvent',),
+        },
+        {
             'id': "dossier-incomplet",
             'title': "Dossier incomplet",
             'activatedFields': (),
@@ -6009,10 +6020,11 @@ EventConfigs = {
             'isKeyEvent': True,
             'podTemplates': (
                 {'id': "pe_complements_recepisse_depot_demande.odt", 'title': "Récépissé d'un dépôt de compléments"},
-                {'id': "pe_complements_transmis_demande_dgo3.odt", 'title': "Transmis à la DGO3"},
                 {'id': "pe_complements_info_demandeur.odt", 'title': "Information au demandeur"},
+                {'id': "pe_complements_transmis_demande_dgo3.odt", 'title': "Transmis à l'ARNE"},
             ),
             'eventType': ('Products.urban.interfaces.IMissingPartDepositEvent',),
+            'eventType': ('Products.urban.interfaces.IMissingPartTransmitToSPWEvent',),
         },
         {
             'id': "dossier-irrecevable",
@@ -6509,16 +6521,6 @@ EventConfigs = {
             'podTemplates': (
             ),
             'eventType': ('Products.urban.interfaces.IPatrimonyMeetingEvent',),
-        },
-        {
-            'id': "envoi-demande-FT",
-            'title': "Transmis du dossier au SPW",
-            'activatedFields': (),
-            'deadLineDelay': 0,
-            'isKeyEvent': True,
-            'keyDates': ('eventDate',),
-            'podTemplates': (),
-            'eventType': ('Products.urban.interfaces.ITransmitToSPWEvent',),
         },
 
     ),
