@@ -217,7 +217,7 @@ msgstr "Modèle de document Urban"
 
 # control panel
 msgid "UrbanTool"
-msgstr "Configuration de 'urban'"
+msgstr "Configuration d'Urban"
 
 msgid "UrbanVocabularyTerm"
 msgstr "Terme de vocabulaire urban"
@@ -239,6 +239,9 @@ msgstr "Accepter"
 
 msgid "accepted"
 msgstr "Accepté"
+
+msgid "draft"
+msgstr "Brouillon"
 
 msgid "additionalLegalConditions_history"
 msgstr "Registre des modifications pour les conditions intégrales et sectorielles supplémentaires"

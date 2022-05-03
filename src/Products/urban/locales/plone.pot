@@ -266,6 +266,9 @@ msgstr ""
 msgid "in_progress_without_prosecutor"
 msgstr ""
 
+msgid "draft"
+msgstr ""
+
 
 #transitions
 msgid "retire"
