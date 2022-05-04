@@ -425,3 +425,21 @@ msgstr ""
 msgid "additionalLegalConditions_history"
 msgstr ""
 
+msgid "college_opinion"
+msgstr ""
+
+msgid "FT_opinion"
+msgstr ""
+
+msgid "final_decision_in_progress"
+msgstr ""
+
+msgid "prepare_college_opinion"
+msgstr ""
+
+msgid "prepare_final_decision"
+msgstr ""
+
+msgid "wait_FT_opinion"
+msgstr ""
+

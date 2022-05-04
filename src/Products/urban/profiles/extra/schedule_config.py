@@ -1807,6 +1807,24 @@ schedule_config = {
             ),
             'additional_delay': 20,
         },
-
+        {
+            'type_name': 'TaskConfig',
+            'id': 'rapport-analyse',
+            'title': 'Rapport d\'analyse',
+            'default_assigned_group': 'environment_editors',
+            'default_assigned_user': 'liege.urban.schedule.assign_task_owner',
+            'creation_state': ('complete',),
+            'creation_conditions': (
+                CreationConditionObject('urban.schedule.condition.is_not_temporary_licence', 'AND'),
+            ),
+            'start_conditions': (
+                StartConditionObject('urban.schedule.condition.inquiry_done'),
+            ),
+            'ending_states': (
+                'send_college_opinion',
+            ),
+            'start_date': 'urban.schedule.start_date.inquiry_end_date',
+            'additional_delay': 2,
+        },
     ],
 }
