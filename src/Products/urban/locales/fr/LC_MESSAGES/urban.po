@@ -3252,9 +3252,6 @@ msgstr "Détails concernant la zone inondable"
 msgid "urban_label_folderCategory"
 msgstr "Type de dossier"
 
-msgid "urban_label_representative_contacts"
-msgstr "Représentant(s)"
-
 #. Default: "Foldercategorytownship"
 #: ../content/licence/GenericLicence.py:967
 msgid "urban_label_folderCategoryTownship"
@@ -4323,6 +4320,9 @@ msgstr "Date de réception du PV"
 
 msgid "urban_label_reportVisitDate"
 msgstr "Date de la visite"
+
+msgid "urban_label_representative_contacts"
+msgstr "Représentant(s)"
 
 #. Default: "Representedby"
 #: Contact.py
