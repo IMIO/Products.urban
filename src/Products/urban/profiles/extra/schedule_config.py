@@ -5,6 +5,7 @@ from imio.schedule.content.object_factories import StartConditionObject
 from imio.schedule.content.object_factories import CreationConditionObject
 from imio.schedule.content.object_factories import MacroCreationConditionObject
 from imio.schedule.content.object_factories import MacroEndConditionObject
+from imio.schedule.content.object_factories import MacroStartConditionObject
 from imio.schedule.content.object_factories import RecurrenceConditionObject
 
 
@@ -1630,7 +1631,7 @@ schedule_config = {
             'id': 'incomplet',
             'title': 'Incomplet',
             'default_assigned_group': 'environment_editors',
-            'default_assigned_user': 'liege.urban.schedule.assign_task_owner',
+            'default_assigned_user': 'urban.assign_folder_manager',
             'creation_state': ('incomplete',),
             'starting_states': ('incomplete',),
             'ending_states': ('complete', 'inacceptable', 'abandoned'),
@@ -1642,7 +1643,7 @@ schedule_config = {
                     'id': 'demande_complements',
                     'title': 'Demander des compléments',
                     'default_assigned_group': 'environment_editors',
-                    'default_assigned_user': 'liege.urban.schedule.assign_task_owner',
+                    'default_assigned_user': 'urban.assign_folder_manager',
                     'creation_state': ('incomplete',),
                     'starting_states': ('incomplete',),
                     'end_conditions': (
@@ -1656,7 +1657,7 @@ schedule_config = {
                     'id': 'attente_complements',
                     'title': 'En attente de compléments',
                     'default_assigned_group': 'environment_editors',
-                    'default_assigned_user': 'liege.urban.schedule.assign_task_owner',
+                    'default_assigned_user': 'urban.assign_folder_manager',
                     'creation_state': ('incomplete',),
                     'creation_conditions': (
                         CreationConditionObject('urban.schedule.condition.complements_asked'),
@@ -1673,7 +1674,7 @@ schedule_config = {
                     'id': 'transmis_complements_au_spw',
                     'title': 'Transmis des compléments au SPW',
                     'default_assigned_group': 'environment_editors',
-                    'default_assigned_user': 'liege.urban.schedule.assign_task_owner',
+                    'default_assigned_user': 'urban.assign_folder_manager',
                     'creation_state': ('incomplete',),
                     'creation_conditions': (
                         CreationConditionObject('urban.schedule.condition.complements_received'),
@@ -1689,7 +1690,7 @@ schedule_config = {
                     'id': 'verif_complements',
                     'title': 'Vérification compléments par le SPW',
                     'default_assigned_group': 'environment_editors',
-                    'default_assigned_user': 'liege.urban.schedule.assign_task_owner',
+                    'default_assigned_user': 'urban.assign_folder_manager',
                     'creation_state': ('incomplete',),
                     'ending_states': ('complete', 'inacceptable', 'abandoned'),
                     'creation_conditions': (
@@ -1703,7 +1704,7 @@ schedule_config = {
                     'id': 'irrecevable-apres-6-mois',
                     'title': 'Irrecevable après 6 mois',
                     'default_assigned_group': 'environment_editors',
-                    'default_assigned_user': 'liege.urban.schedule.assign_task_owner',
+                    'default_assigned_user': 'urban.assign_folder_manager',
                     'creation_state': ('incomplete',),
                     'ending_states': ('complete', 'inacceptable', 'abandoned'),
                     'creation_conditions': (
@@ -1835,7 +1836,7 @@ schedule_config = {
             'id': 'rapport-analyse',
             'title': 'Rapport d\'analyse',
             'default_assigned_group': 'environment_editors',
-            'default_assigned_user': 'liege.urban.schedule.assign_task_owner',
+            'default_assigned_user': 'urban.assign_folder_manager',
             'creation_state': ('complete',),
             'creation_conditions': (
                 CreationConditionObject('urban.schedule.condition.is_not_temporary_licence', 'AND'),
@@ -1849,5 +1850,25 @@ schedule_config = {
             'start_date': 'urban.schedule.start_date.inquiry_end_date',
             'additional_delay': 2,
         },
+        {
+            'type_name': 'MacroTaskConfig',
+            'id': 'envoi-avis-college-au-spw',
+            'title': 'Envoi de l\'avis collège au SPW',
+            'default_assigned_group': 'environment_editors',
+            'default_assigned_user': 'urban.assign_folder_manager',
+            'creation_state': ('college_opinion',),
+            'starting_states': ('college_opinion',),
+            'start_conditions': (
+                MacroStartConditionObject('urban.schedule.condition.inquiry_done'),
+            ),
+
+            'end_conditions': (
+                MacroEndConditionObject('urban.schedule.condition.college_opinion_transmit_done'),
+            ),
+            'start_date': 'urban.schedule.start_date.inquiry_end_date',
+            'additional_delay': 10,
+            'subtasks': []
+        },
+
     ],
 }
