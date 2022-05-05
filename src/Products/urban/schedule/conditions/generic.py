@@ -414,6 +414,22 @@ class CollegeOpinionTransmitToSPWDoneCondition(Condition):
         return college_opinion_transmit_done
 
 
+class CollegeOpinionDoneCondition(Condition):
+    """
+    Licence 'college opinion (pre-decision)' event is closed.
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+
+        college_opinion_done = False
+        college_opinion_event = licence.getLastCollegeOpinion()
+        if college_opinion_event:
+            college_opinion_done = api.content.get_state(college_opinion_event) == 'closed'
+
+        return college_opinion_done
+
+
 class SPWProjectReceivedCondition(Condition):
     """
     Licence SPW projetc receipt event is closed.
