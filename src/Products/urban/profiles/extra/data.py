@@ -443,7 +443,6 @@ EventConfigs = {
             'podTemplates': (),
         },
 
-
     ),
     'codt_parceloutlicence': (
         {
@@ -597,8 +596,9 @@ EventConfigs = {
             'specialFunctionName': "Rechercher les propriétaires situés dans un rayon de 50m",
             'specialFunctionUrl': "addInvestigationPO",
             'podTemplates': (
-                {'id': "codt_purb_annexe_25.odt",
-                 'title': "Annexe 25 (affiche publique)",
+                {
+                    'id': "codt_purb_annexe_25.odt",
+                    'title': "Annexe 25 (affiche publique)",
                 },
                 {'id': "codt_pu_reclamations_reimport.ods", 'title': "Fichier réclamants pour réimport"}
             ),
@@ -4943,7 +4943,7 @@ EventConfigs = {
                 {
                     'id': "cu1-lettre-notaire.odt",
                     'title': "Lettre au notaire (ou demandeur) (octroi)",
-                    'context_variables':[
+                    'context_variables': [
                          {
                             'name': 'publipostage',
                             'value': 'notaires'
@@ -6084,6 +6084,8 @@ EventConfigs = {
             'keyDates': ('eventDate',),
             'podTemplates': (
             ),
+            'eventType': ('Products.urban.interfaces.ICollegeOpinionTransmitToSPWEvent',),
+
         },
         {
             'id': "config-opinion-request",
