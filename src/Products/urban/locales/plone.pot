@@ -269,7 +269,6 @@ msgstr ""
 msgid "draft"
 msgstr ""
 
-
 #transitions
 msgid "retire"
 msgstr ""
@@ -460,3 +459,8 @@ msgstr ""
 msgid "wait_FT_opinion"
 msgstr ""
 
+msgid "decision_in_progress"
+msgstr ""
+
+msgid "receive_college_decision"
+msgstr ""
