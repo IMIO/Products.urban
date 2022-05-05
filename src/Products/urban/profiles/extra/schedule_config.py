@@ -1861,7 +1861,6 @@ schedule_config = {
             'start_conditions': (
                 MacroStartConditionObject('urban.schedule.condition.inquiry_done'),
             ),
-
             'end_conditions': (
                 MacroEndConditionObject('urban.schedule.condition.college_opinion_transmit_done'),
             ),
@@ -1910,9 +1909,7 @@ schedule_config = {
                     'start_conditions': (
                         StartConditionObject('urban.schedule.condition.college_opinion_done'),
                     ),
-                    'end_conditions': (
-                        EndConditionObject('urban.schedule.condition.college_opinion_transmit_done'),
-                    ),
+                    'ending_states': ('FT_opinion',),
                     'start_date': 'schedule.start_date.subtask_highest_due_date',
                     'additional_delay': 2,
                 },
