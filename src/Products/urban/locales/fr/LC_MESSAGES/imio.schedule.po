@@ -50,6 +50,12 @@ msgstr "Créer l'événement d'annonce de projet"
 msgid "urban.schedule.condition.college_authority"
 msgstr "Le collège est autorité compétente."
 
+msgid "urban.schedule.condition.college_opinion_done"
+msgstr "Cloturer l'événément avis préalable du collége"
+
+msgid "urban.schedule.condition.college_opinion_in_progress"
+msgstr "Créer l'événement avis préalable du collège et rédiger l'avis"
+
 msgid "urban.schedule.condition.college_opinion_transmit_done"
 msgstr "Créer l'événement 'Transmis de l'avis du collège après enquête'"
 
