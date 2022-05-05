@@ -23,7 +23,7 @@
                                     <br />
                                     <a class="link-overlay" href="@@longtextview"
                                        tal:attributes="href python: context.absolute_url() + '/@@longtextview?field=' + field_name"
-                                       i18n:translate="">See more...
+                                       i18n:translate="">Voir...
                                     </a>
                                 </span>
                                 <tal:block condition="not: isTooLong">
@@ -42,7 +42,7 @@
             tal:condition="view/show_pm_summary"
             tal:define="empty_pm_summary view/empty_pm_summary">
             <td>
-                <strong >PM summary</strong>:&nbsp;&nbsp;&nbsp;&nbsp;
+                <strong >Textes du point Délib</strong>:&nbsp;&nbsp;&nbsp;&nbsp;
             </td>
             <td tal:condition="not: empty_pm_summary" id="pm-summary">
                 <a class="link-overlay" href="@@pmsummarytextview"
