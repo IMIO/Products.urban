@@ -4325,7 +4325,7 @@ msgstr "Date de la visite"
 #: ../browser/licence/templates/licencemacros.pt:47
 #: ../content/licence/BaseBuildLicence.py:436
 msgid "urban_label_representative_contacts"
-msgstr "Représentant(s)"
+msgstr "Architecte(s) ou géomètre(s)"
 
 #. Default: "Representedby"
 #: Contact.py
