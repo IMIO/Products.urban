@@ -47,6 +47,9 @@ msgstr "Cloturer l'événement d'annonce de projet"
 msgid "urban.schedule.condition.announcement_event_created"
 msgstr "Créer l'événement d'annonce de projet"
 
+msgid "urban.schedule.condition.college_authority"
+msgstr "Le collège est autorité compétente."
+
 msgid "urban.schedule.condition.college_opinion_transmit_done"
 msgstr "Créer l'événement 'Transmis de l'avis du collège après enquête'"
 
@@ -64,6 +67,9 @@ msgstr "Créer l'événement de notification de la décision du permis d'environ
 
 msgid "urban.schedule.condition.decision_notified"
 msgstr "Créer l'événement de notification du permis et le clôturer"
+
+msgid "urban.schedule.condition.decision_written"
+msgstr "Rédiger le point collège"
 
 msgid "urban.schedule.condition.default_acknowledgement"
 msgstr "Le dossier est recevable par défaut"
