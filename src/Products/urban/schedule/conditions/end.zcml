@@ -475,6 +475,14 @@
         for="Products.urban.interfaces.IEnvironmentBase
              imio.schedule.content.task.IAutomatedTask"
         provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.DecisionWritten"
+        name="urban.schedule.condition.decision_written"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.IEnvironmentBase
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
         factory=".generic.DecisionDelivered"
         name="urban.schedule.condition.decision_delivered"
     />
