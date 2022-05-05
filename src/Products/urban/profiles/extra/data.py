@@ -6397,12 +6397,13 @@ EventConfigs = {
         {
             'id': "pre-decision",
             'title': "Avis préalable du Collège",
-            'activatedFields': ('externalDecision',),
+            'activatedFields': (),
             'eventDateLabel': "Date de l'avis",
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
-            'podTemplates': ({'id': "pe_transmis_avis_prealable_dgo3.odt", 'title': "Transmis de l'avis Collège à la DGO3"},),
-            'eventType': ('Products.urban.interfaces.IInternalPreliminaryAdviceEvent',),
+            'podTemplates': (),
+            'eventType': ('Products.urban.interfaces.ICollegeOpinionEvent',),
+            'eventPortalType': 'UrbanEventCollege',
         },
         {
             'id': "rapport-synthese",
