@@ -289,6 +289,9 @@ msgstr "Connexion à la base de donnée réussie."
 msgid "db_not_connected_error"
 msgstr "Une erreur est survenue avec la base de données.  Contactez votre administrateur système.  La base de données ne semble pas connectée."
 
+msgid "decision_in_progress"
+msgstr "Collège en cours"
+
 msgid "deposit"
 msgstr "Dépot du dossier"
 
@@ -405,6 +408,9 @@ msgstr "Préparer la décision finale"
 
 msgid "prosecution_analysis"
 msgstr "En analyse au parquet"
+
+msgid "receive_college_decision"
+msgstr "Recevoir la décision collège"
 
 msgid "receive_opinion"
 msgstr "Recevoir l'avis"
