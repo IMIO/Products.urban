@@ -1867,7 +1867,23 @@ schedule_config = {
             ),
             'start_date': 'urban.schedule.start_date.inquiry_end_date',
             'additional_delay': 10,
-            'subtasks': []
+            'subtasks': [
+                {
+                    'type_name': 'MacroTaskConfig',
+                    'id': 'premier-passage',
+                    'title': 'Premier passage collège',
+                    'default_assigned_group': 'environment_editors',
+                    'default_assigned_user': 'urban.assign_folder_manager',
+                    'creation_state': ('college_opinion',),
+                    'starting_states': ('college_opinion',),
+                    'start_date': 'schedule.start_date.subtask_highest_due_date',
+                    'end_conditions': (
+                        MacroEndConditionObject('urban.schedule.condition.college_opinion_done'),
+                    ),
+                    'additional_delay': 2,
+                    'subtasks': []
+                },
+            ]
         },
 
     ],
