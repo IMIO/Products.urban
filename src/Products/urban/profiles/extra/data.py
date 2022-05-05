@@ -6077,17 +6077,6 @@ EventConfigs = {
             'textDefaultValues': [{'text': '\n'.join(default_texts['claimsTextDefaultValue']), 'fieldname': 'claimsText'}],
         },
         {
-            'id': "envoi-enquete-ft",
-            'title': "Envoi du procès verbal au FT",
-            'deadLineDelay': 10,
-            'isKeyEvent': True,
-            'keyDates': ('eventDate',),
-            'podTemplates': (
-            ),
-            'eventType': ('Products.urban.interfaces.ICollegeOpinionTransmitToSPWEvent',),
-
-        },
-        {
             'id': "config-opinion-request",
             'title': "*** Demande d'avis CONFIG ***",
             'activatedFields': (),
