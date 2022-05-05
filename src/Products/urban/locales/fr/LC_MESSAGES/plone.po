@@ -86,7 +86,7 @@ msgid "ExplosivesPossession"
 msgstr "Détention d'explosifs"
 
 msgid "FT_opinion"
-msgstr "En attente de l'avis du FT"
+msgstr "En attente du rapport de synthèse"
 
 msgid "FolderManager"
 msgstr "Gestionnaire de dossier"
