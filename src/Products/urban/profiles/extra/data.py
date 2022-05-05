@@ -6461,7 +6461,10 @@ EventConfigs = {
             'keyDates': ('eventDate',),
             'TALCondition': "python: here.getAuthority() == 'ft'",
             'podTemplates': (),
-            'eventType': ('Products.urban.interfaces.IWalloonRegionDecisionEvent',),
+            'eventType': (
+                'Products.urban.interfaces.IWalloonRegionDecisionEvent',
+                'Products.urban.interfaces.ILicenceDeliveryEvent',
+            ),
         },
         {
             'id': "affichage-decision",

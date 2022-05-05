@@ -68,6 +68,14 @@
         name="urban.schedule.condition.incomplete_for_6_months"
     />
 
+    <adapter
+        for="Products.urban.interfaces.IEnvironmentLicence
+             imio.schedule.content.task_config.ITaskConfig"
+        provides="imio.schedule.interfaces.ICreationCondition"
+        factory=".creation.CollegeAuthority"
+        name="urban.schedule.condition.college_authority"
+    />
+
 
     <!-- acknowlegdment conditions-->
     <adapter

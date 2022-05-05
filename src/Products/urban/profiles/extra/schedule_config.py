@@ -1754,7 +1754,7 @@ schedule_config = {
             'type_name': 'TaskConfig',
             'id': 'creer-demande-avis',
             'title': 'Préparer demandes d\'avis',
-            'default_assigned_group': 'urban_editors',
+            'default_assigned_group': 'environment_editors',
             'default_assigned_user': 'urban.assign_folder_manager',
             'creation_state': ('complete',),
             'creation_conditions': (
@@ -1818,7 +1818,6 @@ schedule_config = {
             'default_assigned_group': 'environment_editors',
             'default_assigned_user': 'urban.assign_folder_manager',
             'creation_state': ('complete',),
-            'starting_states': ('complete',),
             'creation_conditions': (
                 CreationConditionObject('urban.schedule.condition.inquiry_dates_defined', 'AND'),
             ),
@@ -1901,6 +1900,51 @@ schedule_config = {
                 },
             ]
         },
-
+        {
+            'type_name': 'TaskConfig',
+            'id': 'rapport-synthese',
+            'title': 'Rapport de synthèse',
+            'default_assigned_group': 'environment_editors',
+            'default_assigned_user': 'urban.assign_folder_manager',
+            'creation_state': ('FT_opinion',),
+            'ending_states': ('final_decision_in_progress',),
+            'end_conditions': (
+                EndConditionObject('urban.schedule.condition.spw_project_receipt_done'),
+            ),
+            'start_date': 'urban.schedule.start_date.acknowledgment_date.',
+            'additional_delay': 110,
+        },
+        {
+            'type_name': 'MacroTaskConfig',
+            'id': 'decision-finale',
+            'title': 'Décision finale à notifier',
+            'default_assigned_group': 'urban_editors',
+            'default_assigned_user': 'urban.assign_folder_manager',
+            'creation_state': ('final_decision_in_progress',),
+            'ending_states': ('accepted', 'refused', 'inacceptable'),
+            'end_conditions': (
+                MacroEndConditionObject('urban.schedule.condition.decision_delivered'),
+            ),
+            'start_date': 'urban.schedule.start_date.spw_decision_project_receipt_date',
+            'additional_delay': 30,
+            'subtasks': [
+                {
+                    'type_name': 'TaskConfig',
+                    'id': 'rediger-proposition-decision',
+                    'title': 'Rédiger la décision',
+                    'default_assigned_group': 'urban_editors',
+                    'default_assigned_user': 'urban.assign_folder_manager',
+                    'creation_state': ('final_decision_in_progress',),
+                    'creation_conditions': (
+                        CreationConditionObject('urban.schedule.condition.college_authority'),
+                    ),
+                    'end_conditions': (
+                        EndConditionObject('urban.schedule.condition.decision_written'),
+                    ),
+                    'start_date': 'urban.schedule.start_date.spw_decision_project_receipt_date',
+                    'additional_delay': 2,
+                },
+            ]
+        },
     ],
 }

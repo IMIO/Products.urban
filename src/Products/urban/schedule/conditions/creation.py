@@ -148,6 +148,16 @@ class IncompleteForSixMonths(CreationCondition):
         return days_delta >= 183
 
 
+class CollegeAuthority(CreationCondition):
+    """
+    Check if env licence authority is college or FT
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+        return licence.getAuthority() == 'college'
+
+
 class WillHaveInquiry(CreationCondition):
     """
     'inquiry' is selected on the field 'procedureChoice'.
