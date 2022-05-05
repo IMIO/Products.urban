@@ -1894,11 +1894,29 @@ schedule_config = {
                                 EndConditionObject('urban.schedule.condition.college_opinion_in_progress'),
                             ),
                             'additional_delay': 2,
-                            'start_date': 'schedule.start_date.task_starting_date',
+                            'start_date': 'schedule.start_date.subtask_highest_due_date',
                         },
 
                     ]
                 },
+                {
+                    'type_name': 'TaskConfig',
+                    'id': 'envoyer-avis-FT',
+                    'title': 'Envoyer la demande d\'avis',
+                    'default_assigned_group': 'environment_editors',
+                    'default_assigned_user': 'urban.assign_folder_manager',
+                    'creation_state': ('college_opinion',),
+                    'starting_states': ('college_opinion',),
+                    'start_conditions': (
+                        StartConditionObject('urban.schedule.condition.college_opinion_done'),
+                    ),
+                    'end_conditions': (
+                        EndConditionObject('urban.schedule.condition.college_opinion_transmit_done'),
+                    ),
+                    'start_date': 'schedule.start_date.subtask_highest_due_date',
+                    'additional_delay': 2,
+                },
+
             ]
         },
 
