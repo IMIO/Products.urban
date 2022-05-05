@@ -264,6 +264,14 @@
         name="urban.schedule.condition.college_opinion_transmit_done"
     />
 
+    <adapter
+        for="Products.urban.interfaces.IEnvironmentBase
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.CollegeOpinionDoneCondition"
+        name="urban.schedule.condition.college_opinion_done"
+    />
+
     <!-- SPW project receipt for unique licences -->
     <adapter
         for="Products.urban.interfaces.IBaseAllBuildLicence
