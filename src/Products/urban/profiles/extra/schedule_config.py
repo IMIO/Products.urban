@@ -1725,7 +1725,7 @@ schedule_config = {
             'default_assigned_group': 'environment_editors',
             'default_assigned_user': 'urban.assign_folder_manager',
             'creation_state': ('complete',),
-            'start_date': 'schedule.start_date.acknowledgement_date',
+            'start_date': 'schedule.start_date.task_starting_date',
             'end_conditions': (
                 EndConditionObject('urban.schedule.condition.acknowledgment_done'),
             ),
@@ -1741,14 +1741,14 @@ schedule_config = {
             'default_assigned_group': 'environment_editors',
             'default_assigned_user': 'urban.assign_folder_manager',
             'creation_state': ('complete',),
-            'start_date': 'schedule.start_date.acknowledgement_date',
+            'start_date': 'schedule.start_date.task_starting_date',
             'end_conditions': (
                 EndConditionObject('urban.schedule.condition.rubrics_choice_done'),
             ),
             'calculation_delay': (
                 'schedule.calculation_default_delay',
             ),
-            'additional_delay': 3,
+            'additional_delay': 1,
         },
         {
             'type_name': 'TaskConfig',
@@ -1872,7 +1872,7 @@ schedule_config = {
                     'default_assigned_user': 'urban.assign_folder_manager',
                     'creation_state': ('college_opinion',),
                     'starting_states': ('college_opinion',),
-                    'start_date': 'schedule.start_date.subtask_highest_due_date',
+                    'start_date': 'urban.schedule.start_date.inquiry_end_date',
                     'end_conditions': (
                         MacroEndConditionObject('urban.schedule.condition.college_opinion_done'),
                     ),
@@ -1889,8 +1889,8 @@ schedule_config = {
                             'end_conditions': (
                                 EndConditionObject('urban.schedule.condition.college_opinion_in_progress'),
                             ),
-                            'additional_delay': 2,
-                            'start_date': 'schedule.start_date.subtask_highest_due_date',
+                            'start_date': 'urban.schedule.start_date.inquiry_end_date',
+                            'additional_delay': 1,
                         },
 
                     ]
@@ -1909,7 +1909,7 @@ schedule_config = {
                 EndConditionObject('urban.schedule.condition.spw_project_receipt_done'),
             ),
             'start_date': 'urban.schedule.start_date.acknowledgment_date.',
-            'additional_delay': 110,
+            'additional_delay': 70,
         },
         {
             'type_name': 'MacroTaskConfig',

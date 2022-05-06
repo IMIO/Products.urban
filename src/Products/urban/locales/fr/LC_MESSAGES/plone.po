@@ -450,7 +450,7 @@ msgid "update_rubrics"
 msgstr "Mise à jour des rubriques"
 
 msgid "wait_FT_opinion"
-msgstr "Attendre le rapport du FT"
+msgstr "Attendre le rapport de synthèse"
 
 msgid "waiting_opinion"
 msgstr "En attente de l'avis"
