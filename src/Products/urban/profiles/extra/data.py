@@ -443,7 +443,6 @@ EventConfigs = {
             'podTemplates': (),
         },
 
-
     ),
     'codt_parceloutlicence': (
         {
@@ -597,8 +596,9 @@ EventConfigs = {
             'specialFunctionName': "Rechercher les propriétaires situés dans un rayon de 50m",
             'specialFunctionUrl': "addInvestigationPO",
             'podTemplates': (
-                {'id': "codt_purb_annexe_25.odt",
-                 'title': "Annexe 25 (affiche publique)",
+                {
+                    'id': "codt_purb_annexe_25.odt",
+                    'title': "Annexe 25 (affiche publique)",
                 },
                 {'id': "codt_pu_reclamations_reimport.ods", 'title': "Fichier réclamants pour réimport"}
             ),
@@ -4943,7 +4943,7 @@ EventConfigs = {
                 {
                     'id': "cu1-lettre-notaire.odt",
                     'title': "Lettre au notaire (ou demandeur) (octroi)",
-                    'context_variables':[
+                    'context_variables': [
                          {
                             'name': 'publipostage',
                             'value': 'notaires'
@@ -5457,6 +5457,7 @@ EventConfigs = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': ({'id': "env1-transmis-demande-ft.odt", 'title': "Transmis de la demande au FT"},),
+            'eventType': ('Products.urban.interfaces.ITransmitToSPWEvent',),
         },
         {
             'id': "dossier-incomplet",
@@ -5472,21 +5473,14 @@ EventConfigs = {
             'id': "recepisse-complement",
             'title': "Récépissé d'un complément",
             'activatedFields': (),
-            'deadLineDelay': 3,
             'isKeyEvent': False,
             'podTemplates': (
                 {'id': "env1-recepisse-complement.odt", 'title': "Récépissé d'un complément"},
-            ),
-            'eventType': ('Products.urban.interfaces.IMissingPartDepositEvent',),
-        },
-        {
-            'id': "envoi-complement-FT",
-            'title': "Envoi d'un complément au FT",
-            'activatedFields': (),
-            'deadLineDelay': 20,
-            'isKeyEvent': False,
-            'podTemplates': (
                 {'id': "env1-transmis-complement-ft.odt", 'title': "Transmis d'un complément au FT"},
+            ),
+            'eventType': (
+                'Products.urban.interfaces.IMissingPartDepositEvent',
+                'Products.urban.interfaces.IMissingPartTransmitToSPWEvent',
             ),
         },
         {
@@ -5840,15 +5834,6 @@ EventConfigs = {
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
-            'id': "envoi-enquete-ft",
-            'title': "Envoi du procès verbal au FT",
-            'deadLineDelay': 10,
-            'isKeyEvent': True,
-            'keyDates': ('eventDate',),
-            'podTemplates': (
-            ),
-        },
-        {
             'id': "pre-decision",
             'title': "Avis préalable du collège",
             'activatedFields': ('externalDecision',),
@@ -5856,6 +5841,8 @@ EventConfigs = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (),
+            'eventPortalType': 'UrbanEventCollege',
+            'eventType': ('Products.urban.interfaces.ICollegeOpinionEvent',),
         },
         {
             'id': "township-council",
@@ -5864,6 +5851,15 @@ EventConfigs = {
             'keyDates': ('eventDate',),
             'TALCondition': "python: here.getPublicRoadModifications()",
             'podTemplates': (),
+        },
+        {
+            'id': "rapport-synthese",
+            'title': "Rapport de synthèse",
+            'eventDateLabel': "Date de réception",
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (),
+            'eventType': ('Products.urban.interfaces.IDecisionProjectFromSPWEvent',),
         },
         {
             'id': "modified-blueprints",
@@ -5891,10 +5887,11 @@ EventConfigs = {
                 {'id': "env1-transmis-decision-impetrants-ft.odt", 'title': "Transmis de la décision (Instances)"},
             ),
             'eventType': ('Products.urban.interfaces.ILicenceDeliveryEvent',),
+            'eventPortalType': 'UrbanEventCollege',
         },
         {
             'id': "decision-transmit-FT",
-            'title': "Information de la décision du FT",
+            'title': "Réception de la décision de l'ARNE",
             'activatedFields': ('decisionDate', 'decision',),
             'eventDateLabel': "Date de notification",
             'isKeyEvent': True,
@@ -5904,7 +5901,10 @@ EventConfigs = {
                 {'id': "env1-transmis-decision.odt", 'title': "Transmis de la décision (demandeur)"},
                 {'id': "env1-transmis-decision-impetrants-ft.odt", 'title': "Transmis de la décision (Instances)"},
             ),
-            'eventType': ('Products.urban.interfaces.ILicenceDeliveryEvent',),
+            'eventType': (
+                'Products.urban.interfaces.IWalloonRegionDecisionEvent',
+                'Products.urban.interfaces.ILicenceDeliveryEvent',
+            ),
         },
         {
             'id': "affichage-decision",
@@ -5991,6 +5991,16 @@ EventConfigs = {
             'eventType': ('Products.urban.interfaces.IDepositEvent',),
         },
         {
+            'id': "envoi-demande-FT",
+            'title': "Transmis du dossier au SPW",
+            'activatedFields': (),
+            'deadLineDelay': 0,
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (),
+            'eventType': ('Products.urban.interfaces.ITransmitToSPWEvent',),
+        },
+        {
             'id': "dossier-incomplet",
             'title': "Dossier incomplet",
             'activatedFields': (),
@@ -6011,8 +6021,12 @@ EventConfigs = {
                 {'id': "pe_complements_recepisse_depot_demande.odt", 'title': "Récépissé d'un dépôt de compléments"},
                 {'id': "pe_complements_transmis_demande_dgo3.odt", 'title': "Transmis à l'ARNE"},
                 {'id': "pe_complements_info_demandeur.odt", 'title': "Information au demandeur"},
+                {'id': "pe_complements_transmis_demande_dgo3.odt", 'title': "Transmis d'un complément au FT"},
             ),
-            'eventType': ('Products.urban.interfaces.IMissingPartDepositEvent',),
+            'eventType': (
+                'Products.urban.interfaces.IMissingPartDepositEvent',
+                'Products.urban.interfaces.IMissingPartTransmitToSPWEvent',
+            ),
         },
         {
             'id': "dossier-irrecevable",
@@ -6373,12 +6387,13 @@ EventConfigs = {
         {
             'id': "pre-decision",
             'title': "Avis préalable du Collège",
-            'activatedFields': ('externalDecision',),
+            'activatedFields': (),
             'eventDateLabel': "Date de l'avis",
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
+            'eventPortalType': 'UrbanEventCollege',
             'podTemplates': ({'id': "pe_transmis_avis_prealable_dgo3.odt", 'title': "Transmis de l'avis Collège à l'ARNE"},),
-            'eventType': ('Products.urban.interfaces.IInternalPreliminaryAdviceEvent',),
+            'eventType': ('Products.urban.interfaces.ICollegeOpinionEvent',),
         },
         {
             'id': "rapport-synthese",
@@ -6436,7 +6451,10 @@ EventConfigs = {
             'keyDates': ('eventDate',),
             'TALCondition': "python: here.getAuthority() == 'ft'",
             'podTemplates': (),
-            'eventType': ('Products.urban.interfaces.IWalloonRegionDecisionEvent',),
+            'eventType': (
+                'Products.urban.interfaces.IWalloonRegionDecisionEvent',
+                'Products.urban.interfaces.ILicenceDeliveryEvent',
+            ),
         },
         {
             'id': "affichage-decision",
@@ -6510,6 +6528,7 @@ EventConfigs = {
             ),
             'eventType': ('Products.urban.interfaces.IPatrimonyMeetingEvent',),
         },
+
     ),
     'envclassthree': (
         {

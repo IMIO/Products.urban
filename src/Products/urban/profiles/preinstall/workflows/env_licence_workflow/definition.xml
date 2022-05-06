@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<dc-workflow workflow_id="urban_licence_workflow"
-             title="urban_licence_workflow"
+<dc-workflow workflow_id="env_licence_workflow"
+             title="env_licence_workflow"
              state_variable="review_state"
              initial_state="deposit"
              xmlns:i18n="http://xml.zope.org/namespaces/i18n"
@@ -12,7 +12,6 @@
  <permission>Delete objects</permission>
  <permission>Add portal content</permission>
  <permission>urban: Add CODT_Inquiry</permission>
- <permission>urban: Add CODT_UniqueLicenceInquiry</permission>
  <permission>Modify view template</permission>
  <permission>Access contents information</permission>
  <state state_id="accepted"
@@ -40,12 +39,6 @@
    <permission-role>Manager</permission-role>
   </permission-map>
   <permission-map name="urban: Add CODT_Inquiry"
-                  acquired="False">
-   <permission-role>Editor</permission-role>
-   <permission-role>Contributor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add CODT_UniqueLicenceInquiry"
                   acquired="False">
    <permission-role>Editor</permission-role>
    <permission-role>Contributor</permission-role>
@@ -112,12 +105,6 @@
    <permission-role>Contributor</permission-role>
    <permission-role>Manager</permission-role>
   </permission-map>
-  <permission-map name="urban: Add CODT_UniqueLicenceInquiry"
-                  acquired="False">
-   <permission-role>Editor</permission-role>
-   <permission-role>Contributor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
   <permission-map name="Delete objects"
                   acquired="False">
    <permission-role>Editor</permission-role>
@@ -173,12 +160,6 @@
    <permission-role>Manager</permission-role>
   </permission-map>
   <permission-map name="urban: Add CODT_Inquiry"
-                  acquired="False">
-   <permission-role>Editor</permission-role>
-   <permission-role>Contributor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add CODT_UniqueLicenceInquiry"
                   acquired="False">
    <permission-role>Editor</permission-role>
    <permission-role>Contributor</permission-role>
@@ -245,7 +226,63 @@
    <permission-role>Contributor</permission-role>
    <permission-role>Manager</permission-role>
   </permission-map>
-  <permission-map name="urban: Add CODT_UniqueLicenceInquiry"
+  <permission-map name="Delete objects"
+                  acquired="False">
+   <permission-role>Editor</permission-role>
+   <permission-role>Contributor</permission-role>
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content"
+                  acquired="False">
+   <permission-role>Editor</permission-role>
+   <permission-role>Contributor</permission-role>
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Modify view template"
+                  acquired="False">
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Review portal content"
+                  acquired="False">
+   <permission-role>Reviewer</permission-role>
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="View"
+                  acquired="False">
+   <permission-role>Reader</permission-role>
+   <permission-role>Editor</permission-role>
+   <permission-role>Contributor</permission-role>
+   <permission-role>Manager</permission-role>
+  </permission-map>
+ </state>
+ <state state_id="complete"
+        title="complete"
+        i18n:attributes="title">
+  <exit-transition transition_id="reopen_incomplete"/>
+  <exit-transition transition_id="retire"/>
+  <exit-transition transition_id="isinacceptable"/>
+  <exit-transition transition_id="prepare_college_opinion"/>
+  <permission-map name="Acces contents information"
+                  acquired="False">
+   <permission-role>Reader</permission-role>
+   <permission-role>Editor</permission-role>
+   <permission-role>Contributor</permission-role>
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Access contents information"
+                  acquired="False">
+   <permission-role>Reader</permission-role>
+   <permission-role>Editor</permission-role>
+   <permission-role>Contributor</permission-role>
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Add portal content"
+                  acquired="False">
+   <permission-role>Editor</permission-role>
+   <permission-role>Contributor</permission-role>
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="urban: Add CODT_Inquiry"
                   acquired="False">
    <permission-role>Editor</permission-role>
    <permission-role>Contributor</permission-role>
@@ -280,14 +317,11 @@
    <permission-role>Manager</permission-role>
   </permission-map>
  </state>
- <state state_id="complete"
-        title="complete"
+ <state state_id="college_opinion"
+        title="college_opinion"
         i18n:attributes="title">
-  <exit-transition transition_id="reopen_incomplete"/>
-  <exit-transition transition_id="refuse"/>
-  <exit-transition transition_id="accept"/>
+  <exit-transition transition_id="wait_FT_opinion"/>
   <exit-transition transition_id="retire"/>
-  <exit-transition transition_id="isinacceptable"/>
   <permission-map name="Acces contents information"
                   acquired="False">
    <permission-role>Reader</permission-role>
@@ -314,7 +348,122 @@
    <permission-role>Contributor</permission-role>
    <permission-role>Manager</permission-role>
   </permission-map>
-  <permission-map name="urban: Add CODT_UniqueLicenceInquiry"
+  <permission-map name="Delete objects"
+                  acquired="False">
+   <permission-role>Editor</permission-role>
+   <permission-role>Contributor</permission-role>
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content"
+                  acquired="False">
+   <permission-role>Editor</permission-role>
+   <permission-role>Contributor</permission-role>
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Modify view template"
+                  acquired="False">
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Review portal content"
+                  acquired="False">
+   <permission-role>Reviewer</permission-role>
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="View"
+                  acquired="False">
+   <permission-role>Reader</permission-role>
+   <permission-role>Editor</permission-role>
+   <permission-role>Contributor</permission-role>
+   <permission-role>Manager</permission-role>
+  </permission-map>
+ </state>
+ <state state_id="FT_opinion"
+        title="FT_opinion"
+        i18n:attributes="title">
+  <exit-transition transition_id="prepare_final_decision"/>
+  <exit-transition transition_id="retire"/>
+  <permission-map name="Acces contents information"
+                  acquired="False">
+   <permission-role>Reader</permission-role>
+   <permission-role>Editor</permission-role>
+   <permission-role>Contributor</permission-role>
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Access contents information"
+                  acquired="False">
+   <permission-role>Reader</permission-role>
+   <permission-role>Editor</permission-role>
+   <permission-role>Contributor</permission-role>
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Add portal content"
+                  acquired="False">
+   <permission-role>Editor</permission-role>
+   <permission-role>Contributor</permission-role>
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="urban: Add CODT_Inquiry"
+                  acquired="False">
+   <permission-role>Editor</permission-role>
+   <permission-role>Contributor</permission-role>
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Delete objects"
+                  acquired="False">
+   <permission-role>Editor</permission-role>
+   <permission-role>Contributor</permission-role>
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content"
+                  acquired="False">
+   <permission-role>Editor</permission-role>
+   <permission-role>Contributor</permission-role>
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Modify view template"
+                  acquired="False">
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Review portal content"
+                  acquired="False">
+   <permission-role>Reviewer</permission-role>
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="View"
+                  acquired="False">
+   <permission-role>Reader</permission-role>
+   <permission-role>Editor</permission-role>
+   <permission-role>Contributor</permission-role>
+   <permission-role>Manager</permission-role>
+  </permission-map>
+ </state>
+ <state state_id="final_decision_in_progress"
+        title="final_decision_in_progress"
+        i18n:attributes="title">
+  <exit-transition transition_id="accept"/>
+  <exit-transition transition_id="refuse"/>
+  <exit-transition transition_id="retire"/>
+  <permission-map name="Acces contents information"
+                  acquired="False">
+   <permission-role>Reader</permission-role>
+   <permission-role>Editor</permission-role>
+   <permission-role>Contributor</permission-role>
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Access contents information"
+                  acquired="False">
+   <permission-role>Reader</permission-role>
+   <permission-role>Editor</permission-role>
+   <permission-role>Contributor</permission-role>
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Add portal content"
+                  acquired="False">
+   <permission-role>Editor</permission-role>
+   <permission-role>Contributor</permission-role>
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="urban: Add CODT_Inquiry"
                   acquired="False">
    <permission-role>Editor</permission-role>
    <permission-role>Contributor</permission-role>
@@ -379,12 +528,6 @@
    <permission-role>Contributor</permission-role>
    <permission-role>Manager</permission-role>
   </permission-map>
-  <permission-map name="urban: Add CODT_UniqueLicenceInquiry"
-                  acquired="False">
-   <permission-role>Editor</permission-role>
-   <permission-role>Contributor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
   <permission-map name="Delete objects"
                   acquired="False">
    <permission-role>Editor</permission-role>
@@ -440,12 +583,6 @@
    <permission-role>Manager</permission-role>
   </permission-map>
   <permission-map name="urban: Add CODT_Inquiry"
-                  acquired="False">
-   <permission-role>Editor</permission-role>
-   <permission-role>Contributor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add CODT_UniqueLicenceInquiry"
                   acquired="False">
    <permission-role>Editor</permission-role>
    <permission-role>Contributor</permission-role>
@@ -528,6 +665,30 @@
     <guard-permission>Review portal content</guard-permission>
   </guard>
  </transition>
+ <transition transition_id="prepare_college_opinion"
+             title="prepare_college_opinion"
+             new_state="college_opinion"
+             trigger="USER"
+             before_script=""
+             after_script=""
+             i18n:attributes="title">
+  <action url="" icon="" category="workflow" i18n:translate="">prepare_college_opinion</action>
+  <guard>
+    <guard-permission>Review portal content</guard-permission>
+  </guard>
+ </transition>
+ <transition transition_id="prepare_final_decision"
+             title="prepare_final_decision"
+             new_state="final_decision_in_progress"
+             trigger="USER"
+             before_script=""
+             after_script=""
+             i18n:attributes="title">
+  <action url="" icon="" category="workflow" i18n:translate="">prepare_final_decision</action>
+  <guard>
+    <guard-permission>Review portal content</guard-permission>
+  </guard>
+ </transition>
  <transition transition_id="refuse"
              title="refuse"
              new_state="refused"
@@ -572,6 +733,18 @@
              after_script=""
              i18n:attributes="title">
   <action url="" icon="" category="workflow" i18n:translate="">retire</action>
+  <guard>
+    <guard-permission>Review portal content</guard-permission>
+  </guard>
+ </transition>
+ <transition transition_id="wait_FT_opinion"
+             title="wait_FT_opinion"
+             new_state="FT_opinion"
+             trigger="USER"
+             before_script=""
+             after_script=""
+             i18n:attributes="title">
+  <action url="" icon="" category="workflow" i18n:translate="">wait_FT_opinion</action>
   <guard>
     <guard-permission>Review portal content</guard-permission>
   </guard>

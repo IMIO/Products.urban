@@ -351,7 +351,7 @@ def migrate_move_basebuildlicence_architects_and_geometricians_to_representative
 
     logger.info("migration step done!")
 
-    
+
 def reinstall_registry_and_vocabularies(context):
     """
     Add collegeopinions vocabulary for all licence type config
@@ -487,4 +487,38 @@ def update_tickets_title(context):
     for brain in brains:
         ticket = brain.getObject()
         ticket.updateTitle()
+    logger.info("upgrade done!")
+
+
+def update_env_licences_schedule(context):
+    """
+    Install default schedule config for env licences and adapts default events.
+    """
+    logger = logging.getLogger('urban: Add schedule for env licences 1 & 2')
+    logger.info("starting upgrade steps")
+    portal_urban = api.portal.get_tool('portal_urban')
+
+    # reinstall env licences workflows
+    portal_setup = api.portal.get_tool('portal_setup')
+    portal_setup.runImportStepFromProfile('profile-Products.urban:preinstall', 'workflow')
+    portal_setup.runImportStepFromProfile('profile-Products.urban:preinstall', 'update-workflow-rolemap')
+
+    # install schedule configs
+    portal_setup.runImportStepFromProfile('profile-Products.urban:extra', 'urban-update-schedule')
+    # reinstall event configs
+    portal_setup.runImportStepFromProfile('profile-Products.urban:extra', 'urban-updateAllUrbanTemplates')
+    catalog = api.portal.get_tool('portal_catalog')
+
+    # tag complement deposit event config with IMissingPartTransmitToSPWEvent
+    # marker interface
+    for licence_type in ['envclasstwo', 'envclassone']:
+        config = getattr(portal_urban, licence_type).eventconfigs
+        event_cfg = getattr(config, 'recepisse-complement')
+        new_marker = 'Products.urban.interfaces.IMissingPartTransmitToSPWEvent'
+        if new_marker not in event_cfg.getEventType():
+            event_cfg.eventType = tuple(list(event_cfg.getEventType()) + [new_marker])
+
+    # reindex everything
+    catalog.clearFindAndRebuild()
+
     logger.info("upgrade done!")
