@@ -116,7 +116,9 @@ class SPWReceiptDate(StartDate):
     def start_date(self):
         licence = self.task_container
         transmit = licence.getLastTransmitToSPW()
-        receipt_date = transmit and transmit.getReceiptDate() or transmit.getEventDate() or None
+        receipt_date = None
+        if transmit:
+            receipt_date = transmit.getReceiptDate() or transmit.getEventDate()
         return receipt_date
 
 
