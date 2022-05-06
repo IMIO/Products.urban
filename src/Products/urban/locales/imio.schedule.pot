@@ -238,3 +238,15 @@ msgstr ""
 
 msgid "urban.schedule.delay.unique_licence_notification_delay"
 msgstr ""
+
+msgid "urban.schedule.condition.college_authority"
+msgstr ""
+
+msgid "urban.schedule.condition.decision_written"
+msgstr ""
+
+msgid "urban.schedule.condition.college_opinion_done"
+msgstr ""
+
+msgid "urban.schedule.condition.college_opinion_in_progress"
+msgstr ""

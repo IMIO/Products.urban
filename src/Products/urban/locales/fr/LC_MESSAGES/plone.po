@@ -85,6 +85,9 @@ msgstr "Rubrique environnement"
 msgid "ExplosivesPossession"
 msgstr "Détention d'explosifs"
 
+msgid "FT_opinion"
+msgstr "En attente du rapport de synthèse"
+
 msgid "FolderManager"
 msgstr "Gestionnaire de dossier"
 
@@ -267,6 +270,9 @@ msgstr "Clôturer"
 msgid "closed"
 msgstr "Clôturé"
 
+msgid "college_opinion"
+msgstr "Avis du collège"
+
 msgid "complete"
 msgstr "Complet"
 
@@ -282,6 +288,9 @@ msgstr "Connexion à la base de donnée réussie."
 
 msgid "db_not_connected_error"
 msgstr "Une erreur est survenue avec la base de données.  Contactez votre administrateur système.  La base de données ne semble pas connectée."
+
+msgid "decision_in_progress"
+msgstr "Collège en cours"
 
 msgid "deposit"
 msgstr "Dépot du dossier"
@@ -307,6 +316,9 @@ msgstr "Activé"
 
 msgid "ended"
 msgstr "Terminé"
+
+msgid "final_decision_in_progress"
+msgstr "Décision finale"
 
 msgid "genericlicence_investigationstart_valdiation_error"
 msgstr "Un événement de type 'Enquête publique' est lié à cette enquête, vous devez donc définir une date valide.  Si vous souhaitez supprimer cette enquête, supprimez d'abord l'événement lié.  <a href='${linkedurbaneventurl}'>Cliquez ici pour y accéder</a>"
@@ -388,8 +400,17 @@ msgstr "Validation"
 msgid "please_enter_more_letters"
 msgstr "Il est nécessaire que vous entriez plusieurs lettres pour effectuer la recherche"
 
+msgid "prepare_college_opinion"
+msgstr "Préparer l'avis du collège"
+
+msgid "prepare_final_decision"
+msgstr "Préparer la décision finale"
+
 msgid "prosecution_analysis"
 msgstr "En analyse au parquet"
+
+msgid "receive_college_decision"
+msgstr "Recevoir la décision collège"
 
 msgid "receive_opinion"
 msgstr "Recevoir l'avis"
@@ -427,6 +448,9 @@ msgstr "Mise à jour des Registre des conditions intégrales et sectorielles sup
 
 msgid "update_rubrics"
 msgstr "Mise à jour des rubriques"
+
+msgid "wait_FT_opinion"
+msgstr "Attendre le rapport de synthèse"
 
 msgid "waiting_opinion"
 msgstr "En attente de l'avis"
