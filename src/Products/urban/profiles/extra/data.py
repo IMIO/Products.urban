@@ -5457,6 +5457,7 @@ EventConfigs = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': ({'id': "env1-transmis-demande-ft.odt", 'title': "Transmis de la demande au FT"},),
+            'eventType': ('Products.urban.interfaces.ITransmitToSPWEvent',),
         },
         {
             'id': "dossier-incomplet",
@@ -5480,15 +5481,6 @@ EventConfigs = {
             'eventType': (
                 'Products.urban.interfaces.IMissingPartDepositEvent',
                 'Products.urban.interfaces.IMissingPartTransmitToSPWEvent',
-            ),
-        },
-        {
-            'id': "envoi-complement-FT",
-            'title': "Envoi d'un complément au FT",
-            'activatedFields': (),
-            'deadLineDelay': 20,
-            'isKeyEvent': False,
-            'podTemplates': (
             ),
         },
         {
@@ -5842,15 +5834,6 @@ EventConfigs = {
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
-            'id': "envoi-enquete-ft",
-            'title': "Envoi du procès verbal au FT",
-            'deadLineDelay': 10,
-            'isKeyEvent': True,
-            'keyDates': ('eventDate',),
-            'podTemplates': (
-            ),
-        },
-        {
             'id': "pre-decision",
             'title': "Avis préalable du collège",
             'activatedFields': ('externalDecision',),
@@ -5858,6 +5841,8 @@ EventConfigs = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (),
+            'eventPortalType': 'UrbanEventCollege',
+            'eventType': ('Products.urban.interfaces.ICollegeOpinionEvent',),
         },
         {
             'id': "township-council",
@@ -5866,6 +5851,15 @@ EventConfigs = {
             'keyDates': ('eventDate',),
             'TALCondition': "python: here.getPublicRoadModifications()",
             'podTemplates': (),
+        },
+        {
+            'id': "rapport-synthese",
+            'title': "Rapport de synthèse",
+            'eventDateLabel': "Date de réception",
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (),
+            'eventType': ('Products.urban.interfaces.IDecisionProjectFromSPWEvent',),
         },
         {
             'id': "modified-blueprints",
@@ -5893,10 +5887,11 @@ EventConfigs = {
                 {'id': "env1-transmis-decision-impetrants-ft.odt", 'title': "Transmis de la décision (Instances)"},
             ),
             'eventType': ('Products.urban.interfaces.ILicenceDeliveryEvent',),
+            'eventPortalType': 'UrbanEventCollege',
         },
         {
             'id': "decision-transmit-FT",
-            'title': "Information de la décision du FT",
+            'title': "Réception de la décision de l'ARNE",
             'activatedFields': ('decisionDate', 'decision',),
             'eventDateLabel': "Date de notification",
             'isKeyEvent': True,
@@ -5906,7 +5901,10 @@ EventConfigs = {
                 {'id': "env1-transmis-decision.odt", 'title': "Transmis de la décision (demandeur)"},
                 {'id': "env1-transmis-decision-impetrants-ft.odt", 'title': "Transmis de la décision (Instances)"},
             ),
-            'eventType': ('Products.urban.interfaces.ILicenceDeliveryEvent',),
+            'eventType': (
+                'Products.urban.interfaces.IWalloonRegionDecisionEvent',
+                'Products.urban.interfaces.ILicenceDeliveryEvent',
+            ),
         },
         {
             'id': "affichage-decision",
