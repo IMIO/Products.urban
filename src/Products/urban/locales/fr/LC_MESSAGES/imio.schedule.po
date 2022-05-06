@@ -192,7 +192,7 @@ msgid "urban.schedule.condition.should_write_one_followup"
 msgstr "Il reste au moins un événement de réponse administrative à créer et rédiger"
 
 msgid "urban.schedule.condition.spw_project_receipt_done"
-msgstr "Créer l'événement 'Réception du projet d'arrêté du SPW' et le clôturer"
+msgstr "Créer l'événement 'Rapport de synthèse' et le clôturer"
 
 msgid "urban.schedule.condition.suspension"
 msgstr "Suspendre le dossier"
