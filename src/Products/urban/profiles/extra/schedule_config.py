@@ -1771,7 +1771,7 @@ schedule_config = {
             'type_name': 'TaskConfig',
             'id': 'demande-avis-en-cours',
             'title': 'Avis en cours',
-            'default_assigned_group': 'urban_editors',
+            'default_assigned_group': 'environment_editors',
             'default_assigned_user': 'urban.assign_folder_manager',
             'creation_state': ('complete',),
             'creation_conditions': (
@@ -1802,7 +1802,7 @@ schedule_config = {
             'creation_conditions': (
                 CreationConditionObject('urban.schedule.condition.is_not_temporary_licence', 'AND'),
             ),
-            'start_date': 'urban.schedule.start_date.acknowledgement_date',
+            'start_date': 'urban.schedule.start_date.acknowledgment_date',
             'end_conditions': (
                 EndConditionObject('urban.schedule.condition.inquiry_dates_defined', 'AND'),
             ),
@@ -1915,7 +1915,7 @@ schedule_config = {
             'type_name': 'MacroTaskConfig',
             'id': 'decision-finale',
             'title': 'Décision finale à notifier',
-            'default_assigned_group': 'urban_editors',
+            'default_assigned_group': 'environment_editors',
             'default_assigned_user': 'urban.assign_folder_manager',
             'creation_state': ('final_decision_in_progress',),
             'ending_states': ('accepted', 'refused', 'inacceptable'),
@@ -1929,7 +1929,7 @@ schedule_config = {
                     'type_name': 'TaskConfig',
                     'id': 'rediger-proposition-decision',
                     'title': 'Rédiger la décision',
-                    'default_assigned_group': 'urban_editors',
+                    'default_assigned_group': 'environment_editors',
                     'default_assigned_user': 'urban.assign_folder_manager',
                     'creation_state': ('final_decision_in_progress',),
                     'creation_conditions': (
