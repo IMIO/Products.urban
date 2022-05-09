@@ -144,6 +144,15 @@
         name="urban.schedule.condition.opinion_requests_done"
     />
 
+    <!-- college opinion event conditions-->
+    <adapter
+        for="Products.urban.interfaces.IEnvironmentBase
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IStartCondition"
+        factory=".generic.CollegeOpinionDoneCondition"
+        name="urban.schedule.condition.college_opinion_done"
+    />
+
     <!-- decision college event conditions-->
     <adapter
         for="Products.urban.interfaces.IBaseAllBuildLicence

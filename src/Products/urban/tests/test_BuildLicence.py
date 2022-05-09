@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from Products.urban import utils
+from Products.urban.interfaces import ICODT_BaseBuildLicence
 from Products.urban.testing import URBAN_TESTS_INTEGRATION
 from Products.urban.testing import URBAN_TESTS_LICENCES_FUNCTIONAL
 from Products.urban.tests.helpers import SchemaFieldsTestCase
@@ -191,6 +192,7 @@ class TestBuildLicenceFields(SchemaFieldsTestCase):
         default_password = self.layer.default_password
         login(self.portal, default_user)
         self.licences = []
+        # create 'BuildLicence' and 'ParcelOutLicence'
         for content_type in ['BuildLicence', 'ParcelOutLicence']:
             licence_folder = utils.getLicenceFolder(content_type)
             testlicence_id = 'test_{}'.format(content_type.lower())
@@ -198,8 +200,20 @@ class TestBuildLicenceFields(SchemaFieldsTestCase):
             transaction.commit()
             test_licence = getattr(licence_folder, testlicence_id)
             self.licences.append(test_licence)
-        self.test_buildlicence = self.licences[0]
-        self.licence = self.test_buildlicence
+        self.licence = self.licences[0]
+        # create a CODT_BuildLicence
+        licence_folder_codtbuildlicences = utils.getLicenceFolder('CODT_BuildLicence')
+        codtbuildlicence_testlicence_id = 'test_{}'.format('CODT_BuildLicence'.lower())
+        licence_folder_codtbuildlicences.invokeFactory('CODT_BuildLicence', id=codtbuildlicence_testlicence_id)
+        transaction.commit()
+        self.licences.append(getattr(licence_folder_codtbuildlicences, codtbuildlicence_testlicence_id))
+
+        # create a CODT_ParcelOutLicence
+        licence_folder_codtparceloutlicences = utils.getLicenceFolder('CODT_ParcelOutLicence')
+        codtparceloutlicence_testlicence_id = 'test_{}'.format('CODT_ParcelOutLicence'.lower())
+        licence_folder_codtparceloutlicences.invokeFactory('CODT_ParcelOutLicence', id=codtparceloutlicence_testlicence_id)
+        transaction.commit()
+        self.licences.append(getattr(licence_folder_codtparceloutlicences, codtparceloutlicence_testlicence_id))
 
         self.browser = Browser(self.portal)
         self.browserLogin(default_user, default_password)
@@ -224,7 +238,7 @@ class TestBuildLicenceFields(SchemaFieldsTestCase):
     def test_has_attribute_usage(self):
         field_name = 'usage'
         msg = "field '{}' not on class BuildLicence".format(field_name)
-        self.assertTrue(hasattr(self.test_buildlicence, field_name), msg)
+        self.assertTrue(hasattr(self.licences[0], field_name), msg)
 
     def test_usage_is_visible(self):
         msg = "field 'usage' not visible on BuildLicence"
@@ -283,12 +297,15 @@ class TestBuildLicenceFields(SchemaFieldsTestCase):
     def test_implantation_is_visible(self):
         for licence in self.licences:
             msg = "field 'implantation' not visible on {}".format(licence.getPortalTypeName())
-            self._is_field_visible("<span>Implantation (art. 137)</span>:", licence, msg)
+            if ICODT_BaseBuildLicence.providedBy(licence):
+                self._is_field_visible("<span>Implantation (art D.IV.72)</span>:", licence, msg)
+            else:
+                self._is_field_visible("<span>Implantation (art. 137)</span>:", licence, msg)
 
     def test_has_attribute_pebType(self):
         field_name = 'pebType'
         msg = "field '{}' not on class BuildLicence".format(field_name)
-        self.assertTrue(hasattr(self.test_buildlicence, field_name), msg)
+        self.assertTrue(hasattr(self.licences[0], field_name), msg)
 
     def test_pebType_is_visible(self):
         msg = "field 'pebType' not visible on BuildLicence"
@@ -297,8 +314,21 @@ class TestBuildLicenceFields(SchemaFieldsTestCase):
     def test_has_attribute_pebDetails(self):
         field_name = 'pebDetails'
         msg = "field '{}' not on class BuildLicence".format(field_name)
-        self.assertTrue(hasattr(self.test_buildlicence, field_name), msg)
+        self.assertTrue(hasattr(self.licences[0], field_name), msg)
 
     def test_pebDetails_is_visible(self):
         msg = "field 'pebDetails' not visible on BuildLicence"
         self._is_field_visible("<span>Détails concernant le PEB</span>:", msg=msg)
+
+    def test_has_attribute_representativeContacts(self):
+        field_name = 'representativeContacts'
+        msg = "field '{}' not on class ParcelOutLicence".format(field_name)
+        self.assertTrue(self.licences[1].getField('representativeContacts'), msg)
+        msg = "field '{}' not on class CODT ParcelOutLicence".format(field_name)
+        self.assertTrue(self.licences[3].getField('representativeContacts'), msg)
+
+    def test_representativeContacts_is_visible(self):
+        msg = "field 'representativeContacts' not visible on CODT ParcelOutLicence"
+        self._is_field_visible("<legend>Représentant(s)</legend>", obj= self.licences[3], msg=msg)
+        msg = "field 'representativeContacts' not visible on CODT BuildLicence"
+        self._is_field_visible("<legend>Représentant(s)</legend>", obj= self.licences[2], msg=msg)

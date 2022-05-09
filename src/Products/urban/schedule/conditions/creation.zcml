@@ -68,6 +68,14 @@
         name="urban.schedule.condition.incomplete_for_6_months"
     />
 
+    <adapter
+        for="Products.urban.interfaces.IEnvironmentLicence
+             imio.schedule.content.task_config.ITaskConfig"
+        provides="imio.schedule.interfaces.ICreationCondition"
+        factory=".creation.CollegeAuthority"
+        name="urban.schedule.condition.college_authority"
+    />
+
 
     <!-- acknowlegdment conditions-->
     <adapter
@@ -104,7 +112,23 @@
     />
 
     <adapter
+        for="Products.urban.interfaces.IEnvironmentLicence
+             imio.schedule.content.task_config.ITaskConfig"
+        provides="imio.schedule.interfaces.ICreationCondition"
+        factory=".creation.WillHaveInquiry"
+        name="urban.schedule.condition.will_have_inquiry"
+    />
+
+    <adapter
         for="Products.urban.interfaces.ICODT_BaseBuildLicence
+             imio.schedule.content.task_config.ITaskConfig"
+        provides="imio.schedule.interfaces.ICreationCondition"
+        factory=".creation.InquiryDatesDefinedCondition"
+        name="urban.schedule.condition.inquiry_dates_defined"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.IEnvironmentLicence
              imio.schedule.content.task_config.ITaskConfig"
         provides="imio.schedule.interfaces.ICreationCondition"
         factory=".creation.InquiryDatesDefinedCondition"

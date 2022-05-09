@@ -254,6 +254,21 @@ msgstr ""
 msgid "opinion_given"
 msgstr ""
 
+msgid "analysis"
+msgstr ""
+
+msgid "in_progress_with_prosecutor"
+msgstr ""
+
+msgid "prosecution_analysis"
+msgstr ""
+
+msgid "in_progress_without_prosecutor"
+msgstr ""
+
+msgid "draft"
+msgstr ""
+
 #transitions
 msgid "retire"
 msgstr ""
@@ -302,6 +317,7 @@ msgstr ""
 
 msgid "administrative_answer"
 msgstr ""
+
 
 #control panel
 msgid "UrbanTool"
@@ -425,3 +441,26 @@ msgstr ""
 msgid "additionalLegalConditions_history"
 msgstr ""
 
+msgid "college_opinion"
+msgstr ""
+
+msgid "FT_opinion"
+msgstr ""
+
+msgid "final_decision_in_progress"
+msgstr ""
+
+msgid "prepare_college_opinion"
+msgstr ""
+
+msgid "prepare_final_decision"
+msgstr ""
+
+msgid "wait_FT_opinion"
+msgstr ""
+
+msgid "decision_in_progress"
+msgstr ""
+
+msgid "receive_college_decision"
+msgstr ""

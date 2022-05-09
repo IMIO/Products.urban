@@ -63,6 +63,17 @@ EventConfigs = {
                         }
                     ]
                 },
+                {
+                    'id': "codt_pu_depot_de_la_demande_corporation.odt",
+                    'title': "depot_demande_corporation",
+                    'context_variables': [
+                        {
+                            'name': 'publipostage',
+                            'value': 'demandeurs'
+                        }
+                    ]
+                },
+
             ),
             'eventType': ('Products.urban.interfaces.IDepositEvent',),
         },
@@ -443,7 +454,6 @@ EventConfigs = {
             'podTemplates': (),
         },
 
-
     ),
     'codt_parceloutlicence': (
         {
@@ -482,7 +492,7 @@ EventConfigs = {
             'podTemplates': (
                 {'id': "codt_purb_annexe_17_dossier_incomplet_demandeur.odt", 'title': "Relevé des pièces manquantes (lettre au demandeur)"},
                 {'id': "codt_purb_dossier_incomplet_geometre.odt", 'title': "Relevé des pièces manquantes (géomètre)"},
-                {'id': "codt_purb_dossier_incomplet_dgo4.odt", 'title': "Relevé des pièces manquantes (DGO4)"},
+                {'id': "codt_purb_dossier_incomplet_dgo4.odt", 'title': "Relevé des pièces manquantes (TLPE)"},
             ),
         },
         {
@@ -505,7 +515,7 @@ EventConfigs = {
             'keyDates': ('eventDate',),
             'podTemplates': (
                 {'id': "codt_purb_dossier_irrecevable_courrier_geometre.odt", 'title': "Dossier irrecevable - courrier géomètre"},
-                {'id': "codt_purb_dossier_irrecevable_courrier_dgo4.odt", 'title': "Dossier irrecevable - courrier DGO4"},
+                {'id': "codt_purb_dossier_irrecevable_courrier_dgo4.odt", 'title': "Dossier irrecevable - courrier TLPE"},
                 {'id': "codt_purb_dossier_irrecevable_courrier_demandeur.odt", 'title': "Dossier irrecevable - courrier demandeur"},
             ),
         },
@@ -597,8 +607,9 @@ EventConfigs = {
             'specialFunctionName': "Rechercher les propriétaires situés dans un rayon de 50m",
             'specialFunctionUrl': "addInvestigationPO",
             'podTemplates': (
-                {'id': "codt_purb_annexe_25.odt",
-                 'title': "Annexe 25 (affiche publique)",
+                {
+                    'id': "codt_purb_annexe_25.odt",
+                    'title': "Annexe 25 (affiche publique)",
                 },
                 {'id': "codt_pu_reclamations_reimport.ods", 'title': "Fichier réclamants pour réimport"}
             ),
@@ -722,13 +733,13 @@ EventConfigs = {
     'codt_article127': (
         {
             'id': "reception-demande-dgo4-codt",
-            'title': "Réception de la demande de la DGO4",
+            'title': "Réception de la demande du SPW TLPE",
             'eventDateLabel': "Date de la réception",
             'activatedFields': (),
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "codt_pp_entete_farde_dossier_permis.odt", 'title': "Réception de la demande de la DGO4"},
+                {'id': "codt_pp_entete_farde_dossier_permis.odt", 'title': "Réception de la demande du SPW TLPE"},
                 {'id': "codt_pp_recepisse_directeur_technique.odt", 'title': "Récépissé Directeur technique"},
             ),
             'eventType': ('Products.urban.interfaces.IDepositEvent',),
@@ -953,9 +964,9 @@ EventConfigs = {
             'podTemplates': (
                 {'id': "pi_recepisse_depot_demande.odt", 'title': "Récépissé du dépôt de la demande"},
                 {'id': "pi_entete_farde_dossier.odt", 'title': "Entête farde dossier"},
-                {'id': "pi_transmis_demande_dgo3.odt", 'title': "Transmis à la DGO3"},
-                {'id': "pi_transmis_demande_dgo4.odt", 'title': "Transmis à la DGO4"},
-                {'id': "pi_transmis_demande_dgo6.odt", 'title': "Transmis à la DGO6"},
+                {'id': "pi_transmis_demande_dgo3.odt", 'title': "Transmis à l'ARNE"},
+                {'id': "pi_transmis_demande_dgo4.odt", 'title': "Transmis au TLPE"},
+                {'id': "pi_transmis_demande_dgo6.odt", 'title': "Transmis au SPW Économie, Emploi, Recherche"},
                 {'id': "pi_information_demandeur.odt", 'title': "Lettre d'informations au demandeur"},
             ),
             'eventType': ('Products.urban.interfaces.IDepositEvent',),
@@ -1026,21 +1037,21 @@ EventConfigs = {
                 {'id': "pi_annexe_26.odt",
                  'title': "Affiche (annexe 26)"},
                 {'id': "pi_transmis_affichage_dgo3.odt",
-                 'title': "Transmis de l'affichage de l'enquête publique à la DGO3"},
+                 'title': "Transmis de l'affichage de l'enquête publique à l'ARNE"},
                 {'id': "pi_transmis_affichage_dgo4.odt",
-                 'title': "Transmis de l'affichage de l'enquête publique à la DGO4"},
+                 'title': "Transmis de l'affichage de l'enquête publique au SPW TLPE"},
                 {'id': "pi_transmis_affichage_dgo6.odt",
-                 'title': "Transmis de l'affichage de l'enquête publique à la DGO6"},
+                 'title': "Transmis de l'affichage de l'enquête publique au SPW Économie, Emploi, Recherche"},
                 {'id': "pi_pv_cloture_enquete.odt",
                  'title': "Procès-verbal de clôture de l'enquête publique"},
                 {'id': "pi_attestation_affichage.odt",
                  'title': "Attestation d'affichage après enquête publique"},
                 {'id': "pi_transmis_elements_enquete_dgo3.odt",
-                 'title': "Transmis des éléments de l'enquête à la DGO3"},
+                 'title': "Transmis des éléments de l'enquête à l'ARNE"},
                 {'id': "pi_transmis_elements_enquete_dgo4.odt",
-                 'title': "Transmis des éléments de l'enquête à la DGO4"},
+                 'title': "Transmis des éléments de l'enquête au SPW TLPE"},
                 {'id': "pi_transmis_elements_enquete_dgo6.odt",
-                 'title': "Transmis des éléments de l'enquête à la DGO6"},
+                 'title': "Transmis des éléments de l'enquête au SPW Économie, Emploi, Recherche"},
                 {'id': "codt_pu_reclamations_reimport.ods", 'title': "Fichier réclamants pour réimport"}
             ),
             'eventType': ('Products.urban.interfaces.IInquiryEvent',),
@@ -1090,9 +1101,9 @@ EventConfigs = {
             'keyDates': ('eventDate',),
             'podTemplates': (
                 {'id': "pi_rapport_college.odt", 'title': "Rapport du Collège"},
-                {'id': "pi_transmis_rapport_college_dgo3.odt", 'title': "Transmis de l'avis préalable à la DGO3"},
-                {'id': "pi_transmis_rapport_college_dgo4.odt", 'title': "Transmis de l'avis préalable à la DGO4"},
-                {'id': "pi_transmis_rapport_college_dgo6.odt", 'title': "Transmis de l'avis préalable à la DGO6"},
+                {'id': "pi_transmis_rapport_college_dgo3.odt", 'title': "Transmis de l'avis préalable à l'ARNE"},
+                {'id': "pi_transmis_rapport_college_dgo4.odt", 'title': "Transmis de l'avis préalable au SPW TLPE"},
+                {'id': "pi_transmis_rapport_college_dgo6.odt", 'title': "Transmis de l'avis préalable au SPW Économie, Emploi, Recherche"},
             ),
         },
         {
@@ -1119,11 +1130,11 @@ EventConfigs = {
                 {'id': "pi_demande_plans_modificatifs.odt",
                  'title': "Demande de plans modificatifs"},
                 {'id': "pi_transmis_plans_modificatifs_dgo3.odt",
-                 'title': "Transmis de la demande de plans modificatifs à la DGO3"},
+                 'title': "Transmis de la demande de plans modificatifs à l'ARNE"},
                 {'id': "pi_transmis_plans_modificatifs_dgo4.odt",
-                 'title': "Transmis de la demande de plans modificatifs à la DGO4"},
+                 'title': "Transmis de la demande de plans modificatifs au SPW TLPE"},
                 {'id': "pi_transmis_plans_modificatifs_dgo6.odt",
-                 'title': "Transmis de la demande de plans modificatifs à la DGO6"},
+                 'title': "Transmis de la demande de plans modificatifs au SPW Économie, Emploi, Recherche"},
             ),
         },
         {
@@ -1160,9 +1171,9 @@ EventConfigs = {
             'podTemplates': (
                 {'id': "pi_transmis_decision_demandeur.odt",
                  'title': "Transmis de la décision du Collège au demandeur"},
-                {'id': "pi_transmis_decision_dgo3.odt", 'title': "Transmis de la décision du Collège à la DGO3"},
-                {'id': "pi_transmis_decision_dgo4.odt", 'title': "Transmis de la décision du Collège à la DGO4"},
-                {'id': "pi_transmis_decision_dgo6.odt", 'title': "Transmis de la décision du Collège à la DGO6"},
+                {'id': "pi_transmis_decision_dgo3.odt", 'title': "Transmis de la décision du Collège à l'ARNE"},
+                {'id': "pi_transmis_decision_dgo4.odt", 'title': "Transmis de la décision du Collège au SPW TLPE"},
+                {'id': "pi_transmis_decision_dgo6.odt", 'title': "Transmis de la décision du Collège au SPW Économie, Emploi, Recherche"},
             ),
             'eventType': ('Products.urban.interfaces.ITheLicenceEvent',),
             'eventPortalType': 'UrbanEventCollege',
@@ -1383,13 +1394,13 @@ EventConfigs = {
         },
         {
             'id': "transmis-primo-dossier",
-            'title': "Transmis 1er dossier à la DGO4",
+            'title': "Transmis 1er dossier au SPW Territoire, Logement, Patrimoine, Energie",
             'deadLineDelay': 15,
             'eventDateLabel': 'Date de notification',
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "codt_cu2_form_envoi_premier_dossier_rw.odt", 'title': "Formulaire d'envoi du premier dossier à la DGO4"},
+                {'id': "codt_cu2_form_envoi_premier_dossier_rw.odt", 'title': "Formulaire d'envoi du premier dossier au SPW TLPE"},
             ),
             'eventType': ('Products.urban.interfaces.IWalloonRegionPrimoEvent',),
         },
@@ -2510,8 +2521,8 @@ EventConfigs = {
             'podTemplates': (
                 {'id': "codt_punq_recepisse_depot_demande.odt", 'title': "Récépissé du dépôt de la demande"},
                 {'id': "codt_punq_entete_farde.odt", 'title': "Entête farde dossier"},
-                {'id': "codt_punq_transmis_demande_dgo3.odt", 'title': "Transmis de la demande à la DGO3"},
-                {'id': "codt_punq_transmis_demande_dgo4.odt", 'title': "Transmis de la demande à la DGO4"},
+                {'id': "codt_punq_transmis_demande_dgo3.odt", 'title': "Transmis de la demande à l'ARNE"},
+                {'id': "codt_punq_transmis_demande_dgo4.odt", 'title': "Transmis de la demande au SPW TLPE"},
                 {'id': "codt_punq_information_demandeur.odt", 'title': "Information au demandeur"},
             ),
             'eventType': ('Products.urban.interfaces.IDepositEvent',),
@@ -2537,8 +2548,8 @@ EventConfigs = {
             'keyDates': ('eventDate',),
             'podTemplates': (
                 {'id': "codt_punq_recepisse_complements_demande.odt", 'title': "Récépissé de compléments à la demande"},
-                {'id': "codt_punq_transmis_complements_demande_dgo3.odt", 'title': "Transmis des compléments à la DGO3"},
-                {'id': "codt_punq_transmis_complements_demande_dgo4.odt", 'title': "Transmis des compléments à la DGO4"},
+                {'id': "codt_punq_transmis_complements_demande_dgo3.odt", 'title': "Transmis des compléments à l'ARNE"},
+                {'id': "codt_punq_transmis_complements_demande_dgo4.odt", 'title': "Transmis des compléments au SPW TLPE"},
                 {'id': "codt_punq_complements_information_demandeur.odt", 'title': "Information au demandeur"},
             ),
             'eventType': ('Products.urban.interfaces.IMissingPartDepositEvent',),
@@ -2576,12 +2587,12 @@ EventConfigs = {
             'keyDates': ('eventDate',),
             'podTemplates': (
                 {'id': "codt_punq_annexe_26.odt", 'title': "Affiche d'enquête"},
-                {'id': "codt_punq_transmis_affichage_dgo3.odt", 'title': "Transmis de l'affichage à la DGO3"},
-                {'id': "codt_punq_transmis_affichage_dgo4.odt", 'title': "Transmis de l'affichage à la DGO4"},
+                {'id': "codt_punq_transmis_affichage_dgo3.odt", 'title': "Transmis de l'affichage à l'ARNE"},
+                {'id': "codt_punq_transmis_affichage_dgo4.odt", 'title': "Transmis de l'affichage au SPW TLPE"},
                 {'id': "codt_punq_attestation_affichage_apres_enquete.odt", 'title': "Attestation d'affichage après enquête"},
                 {'id': "codt_punq_pv_cloture_enquete.odt", 'title': "Procès-verbal de clôture d’enquête"},
-                {'id': "codt_punq_transmis_elements_enquete_dgo3.odt", 'title': "Transmis des éléments d'enquête à la DGO3"},
-                {'id': "codt_punq_transmis_elements_enquete_dgo4.odt", 'title': "Transmis des éléments d'enquête à la DGO4"},
+                {'id': "codt_punq_transmis_elements_enquete_dgo3.odt", 'title': "Transmis des éléments d'enquête à l'ARNE"},
+                {'id': "codt_punq_transmis_elements_enquete_dgo4.odt", 'title': "Transmis des éléments d'enquête au SPW TLPE"},
                 {'id': "codt_pu_reclamations_reimport.ods", 'title': "Fichier réclamants pour réimport"}
             ),
             'eventType': ('Products.urban.interfaces.IInquiryEvent',),
@@ -2626,8 +2637,8 @@ EventConfigs = {
             'keyDates': ('eventDate',),
             'podTemplates': (
                 {'id': "codt_punq_rapport_college.odt", 'title': "Avis préalable du Collège"},
-                {'id': "codt_punq_transmis_avis_college_dgo3.odt", 'title': "Transmis des éléments de l’enquête à la DGO3"},
-                {'id': "codt_punq_transmis_avis_college_dgo4.odt", 'title': "Transmis des éléments de l’enquête à la DGO4"},
+                {'id': "codt_punq_transmis_avis_college_dgo3.odt", 'title': "Transmis des éléments de l’enquête à l'ARNE"},
+                {'id': "codt_punq_transmis_avis_college_dgo4.odt", 'title': "Transmis des éléments de l’enquête au SPW TLPE"},
             ),
             'eventType': ('Products.urban.interfaces.ICollegeReportEvent',),
         },
@@ -2652,8 +2663,8 @@ EventConfigs = {
             'keyDates': ('eventDate',),
             'podTemplates': (
                 {'id': "codt_punq_demande_plans_modificatifs.odt", 'title': "Demande de plan modificatifs"},
-                {'id': "codt_punq_transmis_demande_modificatifs_dgo3.odt", 'title': "Transmis de la demande de plans modificatifs à la DGO3"},
-                {'id': "codt_punq_transmis_demande_modificatifs_dgo4.odt", 'title': "Transmis de la demande de plans modificatifs à la DGO4"},
+                {'id': "codt_punq_transmis_demande_modificatifs_dgo3.odt", 'title': "Transmis de la demande de plans modificatifs à l'ARNE"},
+                {'id': "codt_punq_transmis_demande_modificatifs_dgo4.odt", 'title': "Transmis de la demande de plans modificatifs au SPW TLPE"},
             ),
             'eventType': ('Products.urban.interfaces.IAcknowledgmentEvent',),
         },
@@ -2667,8 +2678,8 @@ EventConfigs = {
             'keyDates': ('eventDate',),
             'podTemplates': (
                 {'id': "codt_punq_recepisse_plans_modificatifs_demandeur.odt", 'title': "Récépissé de plans modificatifs"},
-                {'id': "codt_punq_transmis_plans_modificatifs_dgo3.odt", 'title': "Transmis des plans modificatifs à la DGO3"},
-                {'id': "codt_punq_transmis_plans_modificatifs_dgo4.odt", 'title': "Transmis des plans modificatifs à la DGO4"},
+                {'id': "codt_punq_transmis_plans_modificatifs_dgo3.odt", 'title': "Transmis des plans modificatifs à l'ARNE"},
+                {'id': "codt_punq_transmis_plans_modificatifs_dgo4.odt", 'title': "Transmis des plans modificatifs au SPW TLPE"},
             ),
             'eventType': ('Products.urban.interfaces.IModificationDepositEvent',),
         },
@@ -2682,8 +2693,8 @@ EventConfigs = {
             'keyDates': ('eventDate',),
             'podTemplates': (
                 {'id': "codt_punq_transmis_decision_demandeur.odt", 'title': "Transmis de la décision au demandeur"},
-                {'id': "codt_punq_transmis_decision_dgo3.odt", 'title': "Transmis de la décision à la DGO3"},
-                {'id': "codt_punq_transmis_decision_dgo4.odt", 'title': "Transmis de la décision à la DGO4"},
+                {'id': "codt_punq_transmis_decision_dgo3.odt", 'title': "Transmis de la décision à l'ARNE"},
+                {'id': "codt_punq_transmis_decision_dgo4.odt", 'title': "Transmis de la décision au SPW TLPE"},
             ),
             'eventType': ('Products.urban.interfaces.ITheLicenceEvent',),
         },
@@ -2711,9 +2722,9 @@ EventConfigs = {
             'keyDates': ('eventDate',),
             'podTemplates': (
                 {'id': "codt_punq_transmis_pieces_recours_dgo3.odt",
-                    'title': "Transmis des pièces à la cellule recours - DGO3"},
+                    'title': "Transmis des pièces à la cellule recours - ARNE"},
                 {'id': "codt_punq_transmis_pieces_recours_dgo4.odt",
-                    'title': "Transmis des pièces à la cellule recours - DGO4"},
+                    'title': "Transmis des pièces à la cellule recours - TLPE"},
                 {'id': "codt_punq_attestation_affichage_recours.odt",
                     'title': "Attestation d’affichage du recours"},
             ),
@@ -4943,7 +4954,7 @@ EventConfigs = {
                 {
                     'id': "cu1-lettre-notaire.odt",
                     'title': "Lettre au notaire (ou demandeur) (octroi)",
-                    'context_variables':[
+                    'context_variables': [
                          {
                             'name': 'publipostage',
                             'value': 'notaires'
@@ -5457,6 +5468,7 @@ EventConfigs = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': ({'id': "env1-transmis-demande-ft.odt", 'title': "Transmis de la demande au FT"},),
+            'eventType': ('Products.urban.interfaces.ITransmitToSPWEvent',),
         },
         {
             'id': "dossier-incomplet",
@@ -5472,21 +5484,14 @@ EventConfigs = {
             'id': "recepisse-complement",
             'title': "Récépissé d'un complément",
             'activatedFields': (),
-            'deadLineDelay': 3,
             'isKeyEvent': False,
             'podTemplates': (
                 {'id': "env1-recepisse-complement.odt", 'title': "Récépissé d'un complément"},
-            ),
-            'eventType': ('Products.urban.interfaces.IMissingPartDepositEvent',),
-        },
-        {
-            'id': "envoi-complement-FT",
-            'title': "Envoi d'un complément au FT",
-            'activatedFields': (),
-            'deadLineDelay': 20,
-            'isKeyEvent': False,
-            'podTemplates': (
                 {'id': "env1-transmis-complement-ft.odt", 'title': "Transmis d'un complément au FT"},
+            ),
+            'eventType': (
+                'Products.urban.interfaces.IMissingPartDepositEvent',
+                'Products.urban.interfaces.IMissingPartTransmitToSPWEvent',
             ),
         },
         {
@@ -5840,15 +5845,6 @@ EventConfigs = {
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
-            'id': "envoi-enquete-ft",
-            'title': "Envoi du procès verbal au FT",
-            'deadLineDelay': 10,
-            'isKeyEvent': True,
-            'keyDates': ('eventDate',),
-            'podTemplates': (
-            ),
-        },
-        {
             'id': "pre-decision",
             'title': "Avis préalable du collège",
             'activatedFields': ('externalDecision',),
@@ -5856,6 +5852,8 @@ EventConfigs = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (),
+            'eventPortalType': 'UrbanEventCollege',
+            'eventType': ('Products.urban.interfaces.ICollegeOpinionEvent',),
         },
         {
             'id': "township-council",
@@ -5864,6 +5862,15 @@ EventConfigs = {
             'keyDates': ('eventDate',),
             'TALCondition': "python: here.getPublicRoadModifications()",
             'podTemplates': (),
+        },
+        {
+            'id': "rapport-synthese",
+            'title': "Rapport de synthèse",
+            'eventDateLabel': "Date de réception",
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (),
+            'eventType': ('Products.urban.interfaces.IDecisionProjectFromSPWEvent',),
         },
         {
             'id': "modified-blueprints",
@@ -5891,10 +5898,11 @@ EventConfigs = {
                 {'id': "env1-transmis-decision-impetrants-ft.odt", 'title': "Transmis de la décision (Instances)"},
             ),
             'eventType': ('Products.urban.interfaces.ILicenceDeliveryEvent',),
+            'eventPortalType': 'UrbanEventCollege',
         },
         {
             'id': "decision-transmit-FT",
-            'title': "Information de la décision du FT",
+            'title': "Réception de la décision de l'ARNE",
             'activatedFields': ('decisionDate', 'decision',),
             'eventDateLabel': "Date de notification",
             'isKeyEvent': True,
@@ -5904,7 +5912,10 @@ EventConfigs = {
                 {'id': "env1-transmis-decision.odt", 'title': "Transmis de la décision (demandeur)"},
                 {'id': "env1-transmis-decision-impetrants-ft.odt", 'title': "Transmis de la décision (Instances)"},
             ),
-            'eventType': ('Products.urban.interfaces.ILicenceDeliveryEvent',),
+            'eventType': (
+                'Products.urban.interfaces.IWalloonRegionDecisionEvent',
+                'Products.urban.interfaces.ILicenceDeliveryEvent',
+            ),
         },
         {
             'id': "affichage-decision",
@@ -5985,10 +5996,20 @@ EventConfigs = {
             'podTemplates': (
                 {'id': "pe_recepisse_depot_demande.odt", 'title': "Récépissé du dépôt de la demande"},
                 {'id': "pe_entete_farde_dossier.odt", 'title': "Entête farde dossier"},
-                {'id': "pe_transmis_demande_dgo3.odt", 'title': "Transmis de la demande à la DGO3"},
+                {'id': "pe_transmis_demande_dgo3.odt", 'title': "Transmis de la demande à l'ARNE"},
                 {'id': "pe_info_demandeur.odt", 'title': "Information au demandeur"},
             ),
             'eventType': ('Products.urban.interfaces.IDepositEvent',),
+        },
+        {
+            'id': "envoi-demande-FT",
+            'title': "Transmis du dossier au SPW",
+            'activatedFields': (),
+            'deadLineDelay': 0,
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (),
+            'eventType': ('Products.urban.interfaces.ITransmitToSPWEvent',),
         },
         {
             'id': "dossier-incomplet",
@@ -6009,10 +6030,14 @@ EventConfigs = {
             'isKeyEvent': True,
             'podTemplates': (
                 {'id': "pe_complements_recepisse_depot_demande.odt", 'title': "Récépissé d'un dépôt de compléments"},
-                {'id': "pe_complements_transmis_demande_dgo3.odt", 'title': "Transmis à la DGO3"},
+                {'id': "pe_complements_transmis_demande_dgo3.odt", 'title': "Transmis à l'ARNE"},
                 {'id': "pe_complements_info_demandeur.odt", 'title': "Information au demandeur"},
+                {'id': "pe_complements_transmis_demande_dgo3.odt", 'title': "Transmis d'un complément au FT"},
             ),
-            'eventType': ('Products.urban.interfaces.IMissingPartDepositEvent',),
+            'eventType': (
+                'Products.urban.interfaces.IMissingPartDepositEvent',
+                'Products.urban.interfaces.IMissingPartTransmitToSPWEvent',
+            ),
         },
         {
             'id': "dossier-irrecevable",
@@ -6022,7 +6047,7 @@ EventConfigs = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "pe_irrecevabilite_hors_delai.odt", 'title': "Transmis de l'irrecevabilité à la DGO3"},
+                {'id': "pe_irrecevabilite_hors_delai.odt", 'title': "Transmis de l'irrecevabilité à l'ARNE"},
             ),
             'eventType': ('Products.urban.interfaces.IRefusedIncompletenessEvent',),
         },
@@ -6053,8 +6078,8 @@ EventConfigs = {
                 {'id': "pe_avis_enquete_riverains.odt", 'title': "Avis d'enquête aux riverains"},
                 {'id': "pe_attestation_affichage.odt", 'title': "Attestation d'affichage après enquête"},
                 {'id': "pe_pv_cloture_enquete.odt", 'title': "Procès-verbal de clôture d'enquête publique"},
-                {'id': "pe_transmis_avis_dgo3.odt", 'title': "Transmis de l'avis d'enquête à la DGO3"},
-                {'id': "pe_transmis_elements_dgo3.odt", 'title': "Transmis des éléments de l'enquête à la DGO3"},
+                {'id': "pe_transmis_avis_dgo3.odt", 'title': "Transmis de l'avis d'enquête à l'ARNE"},
+                {'id': "pe_transmis_elements_dgo3.odt", 'title': "Transmis des éléments de l'enquête à l'ARNE"},
                 {'id': "codt_pu_reclamations_reimport.ods", 'title': "Fichier réclamants pour réimport"}
             ),
             'eventType': ('Products.urban.interfaces.IInquiryEvent',),
@@ -6373,12 +6398,13 @@ EventConfigs = {
         {
             'id': "pre-decision",
             'title': "Avis préalable du Collège",
-            'activatedFields': ('externalDecision',),
+            'activatedFields': (),
             'eventDateLabel': "Date de l'avis",
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
-            'podTemplates': ({'id': "pe_transmis_avis_prealable_dgo3.odt", 'title': "Transmis de l'avis Collège à la DGO3"},),
-            'eventType': ('Products.urban.interfaces.IInternalPreliminaryAdviceEvent',),
+            'eventPortalType': 'UrbanEventCollege',
+            'podTemplates': ({'id': "pe_transmis_avis_prealable_dgo3.odt", 'title': "Transmis de l'avis Collège à l'ARNE"},),
+            'eventType': ('Products.urban.interfaces.ICollegeOpinionEvent',),
         },
         {
             'id': "rapport-synthese",
@@ -6397,7 +6423,7 @@ EventConfigs = {
             'keyDates': ('eventDate',),
             'podTemplates': (
                 {'id': "pe_demande_plans_modificatifs.odt", 'title': "Demande de plans modificatifs"},
-                {'id': "pe_transmis_plans_modificatifs_dgo3.odt", 'title': "Transmis de la demande de plans modificatifs à la DGO3"},
+                {'id': "pe_transmis_plans_modificatifs_dgo3.odt", 'title': "Transmis de la demande de plans modificatifs à l'ARNE"},
             ),
             'eventType': ('Products.urban.interfaces.IAcknowledgmentEvent',),
         },
@@ -6421,7 +6447,7 @@ EventConfigs = {
             'TALCondition': "python: here.getAuthority() == 'college'",
             'podTemplates': (
                 {'id': "pe_notification_decision_demandeur.odt", 'title': "Transmis de la décision au demandeur"},
-                {'id': "pe_transmis_decision_dgo3.odt", 'title': "Transmis de la décision à la DGO3"},
+                {'id': "pe_transmis_decision_dgo3.odt", 'title': "Transmis de la décision à l'ARNE"},
                 {'id': "pe_transmis_decision_instances.odt", 'title': "Transmis de la décision aux instances"},
             ),
             'eventType': ('Products.urban.interfaces.ILicenceDeliveryEvent',),
@@ -6429,14 +6455,17 @@ EventConfigs = {
         },
         {
             'id': "reception-decision-dgo3",
-            'title': "Réception de la décision de la DGO3",
+            'title': "Réception de la décision de l'ARNE",
             'activatedFields': ('decisionDate', 'decision',),
             'eventDateLabel': "Date de réception",
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'TALCondition': "python: here.getAuthority() == 'ft'",
             'podTemplates': (),
-            'eventType': ('Products.urban.interfaces.IWalloonRegionDecisionEvent',),
+            'eventType': (
+                'Products.urban.interfaces.IWalloonRegionDecisionEvent',
+                'Products.urban.interfaces.ILicenceDeliveryEvent',
+            ),
         },
         {
             'id': "affichage-decision",
@@ -6459,7 +6488,7 @@ EventConfigs = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "pe_transmis_pieces_recours.odt", 'title': "Transmis des pièces à la cellule recours de la DGO3"},
+                {'id': "pe_transmis_pieces_recours.odt", 'title': "Transmis des pièces à la cellule recours de l'ARNE"},
                 {'id': "pe_attestation_affichage_recours.odt", 'title': "Attestation d'affichage du recours"},
             ),
             'eventType': ('Products.urban.interfaces.IRecourseEvent',),
@@ -6510,6 +6539,7 @@ EventConfigs = {
             ),
             'eventType': ('Products.urban.interfaces.IPatrimonyMeetingEvent',),
         },
+
     ),
     'envclassthree': (
         {
@@ -6861,7 +6891,7 @@ EventConfigs = {
             'keyDates': ('eventDate',),
             'podTemplates': (
                 {'id': "dec3_recevable_conditions_demandeur.odt", 'title': "Déclaration recevable avec conditions complémentaires - Lettre au demandeur"},
-                {'id': "dec3_recevable_conditions_dgo3dgo4.odt", 'title': "Déclaration recevable avec conditions complémentaires - Lettres DGO3 et DGO4"},
+                {'id': "dec3_recevable_conditions_dgo3dgo4.odt", 'title': "Déclaration recevable avec conditions complémentaires - Lettres ARNE et TLPE"},
             ),
             'eventType': ('Products.urban.interfaces.IAcknowledgmentEvent',),
         },
@@ -6997,7 +7027,7 @@ EventConfigs = {
             'keyDates': ('eventDate',),
             'podTemplates': (
                 {'id': "codt_RP_convocation_demandeur.odt", 'title': "Convocation au demandeur"},
-                {'id': "codt_RP_convocation_FD.odt", 'title': "Convocation à la DGO4"},
+                {'id': "codt_RP_convocation_FD.odt", 'title': "Convocation au SPW TLPE"},
                 {'id': "codt_RP_convocation_architecte.odt", 'title': "Convocation à l’architecte"},
                 {'id': "codt_RP_convocation_autre.odt", 'title': "Convocation autre"},
             ),

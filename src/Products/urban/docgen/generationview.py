@@ -79,7 +79,6 @@ class UrbanDocGenerationView(PersistentDocumentGenerationView):
         bound_roaddecrees = [dec.restrictedTraverse('@@document_generation_helper_view')
                              for dec in licence.get_bound_roaddecrees()] or None
 
-
         generation_context = {
             'this': licence,
             'self': licence_helper_view,

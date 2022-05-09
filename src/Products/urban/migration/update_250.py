@@ -9,7 +9,7 @@ from plone import api
 from plone.app.textfield import RichTextValue
 from plone.app.uuid.utils import uuidToObject
 
-from Products.urban.interfaces import IGenericLicence
+from Products.urban.interfaces import IGenericLicence, IBaseBuildLicence
 import logging
 import re
 
@@ -233,6 +233,7 @@ def update_POD_expressions(context):
             replace.replace(search_expr, replace_expr, is_regex=row["is_regex"])
     logger.info("upgrade done!")
 
+
 def add_all_applicants_in_title(context):
     """
     Adding all applicants or proprietaries or notaries in title
@@ -246,6 +247,7 @@ def add_all_applicants_in_title(context):
         licence.updateTitle()
     logger.info("upgrade done!")
 
+
 def add_trails_and_watercourses_to_global_vocabularies(context):
     """
     """
@@ -254,6 +256,7 @@ def add_trails_and_watercourses_to_global_vocabularies(context):
     portal_setup = api.portal.get_tool('portal_setup')
     portal_setup.runImportStepFromProfile('profile-Products.urban:extra', 'urban-update-vocabularies')
     logger.info("upgrade done!")
+
 
 def fix_PODTemplates_empty_filename(context):
     """
@@ -316,6 +319,35 @@ def migrate_add_tax_other_option(context):
     for licence_config in licence_configs:
         if "other" not in licence_config.tax:
             licence_config.tax.invokeFactory('UrbanVocabularyTerm', id='other', title="Autre")
+
+    logger.info("migration step done!")
+
+
+def migrate_move_basebuildlicence_architects_and_geometricians_to_representative_contacts(context):
+    """
+    """
+    logger = logging.getLogger('urban: migrate migrate_move_basebuildlicence_architects_and_geometricians_to_representative_contacts')
+    logger.info("starting migration step")
+    catalog = api.portal.get_tool('portal_catalog')
+    licence_brains = catalog(object_provides=IBaseBuildLicence.__identifier__)
+    licences = [li.getObject() for li in licence_brains]
+    for licence in licences:
+        architects = licence.getField('architects')
+        if architects:
+            for architect in architects.get(licence):
+                print("{} : move architect {} in representativeContacts".format(licence.getReference(), architect.name1.encode("utf-8")))
+                rc_list = licence.getRepresentativeContacts()
+                rc_list.append(architect)
+                licence.setRepresentativeContacts(rc_list)
+                licence.setArchitects([])
+        geometricians = licence.getField('geometricians')
+        if geometricians:
+            for geometrician in geometricians.get(licence):
+                print("{} : move geometrician {} in representativeContacts".format(licence.getReference(), geometrician.name1.encode("utf-8")))
+                rc_list = licence.getRepresentativeContacts()
+                rc_list.append(geometrician)
+                licence.setRepresentativeContacts(rc_list)
+                licence.setGeometricians([])
 
     logger.info("migration step done!")
 
@@ -455,4 +487,38 @@ def update_tickets_title(context):
     for brain in brains:
         ticket = brain.getObject()
         ticket.updateTitle()
+    logger.info("upgrade done!")
+
+
+def update_env_licences_schedule(context):
+    """
+    Install default schedule config for env licences and adapts default events.
+    """
+    logger = logging.getLogger('urban: Add schedule for env licences 1 & 2')
+    logger.info("starting upgrade steps")
+    portal_urban = api.portal.get_tool('portal_urban')
+
+    # reinstall env licences workflows
+    portal_setup = api.portal.get_tool('portal_setup')
+    portal_setup.runImportStepFromProfile('profile-Products.urban:preinstall', 'workflow')
+    portal_setup.runImportStepFromProfile('profile-Products.urban:preinstall', 'update-workflow-rolemap')
+
+    # install schedule configs
+    portal_setup.runImportStepFromProfile('profile-Products.urban:extra', 'urban-update-schedule')
+    # reinstall event configs
+    portal_setup.runImportStepFromProfile('profile-Products.urban:extra', 'urban-updateAllUrbanTemplates')
+    catalog = api.portal.get_tool('portal_catalog')
+
+    # tag complement deposit event config with IMissingPartTransmitToSPWEvent
+    # marker interface
+    for licence_type in ['envclasstwo', 'envclassone']:
+        config = getattr(portal_urban, licence_type).eventconfigs
+        event_cfg = getattr(config, 'recepisse-complement')
+        new_marker = 'Products.urban.interfaces.IMissingPartTransmitToSPWEvent'
+        if new_marker not in event_cfg.getEventType():
+            event_cfg.eventType = tuple(list(event_cfg.getEventType()) + [new_marker])
+
+    # reindex everything
+    catalog.clearFindAndRebuild()
+
     logger.info("upgrade done!")

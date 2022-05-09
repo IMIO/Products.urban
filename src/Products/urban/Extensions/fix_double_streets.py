@@ -18,24 +18,10 @@ def fix_streets():
                 enabled_streets = [street for street in doubles if api.content.get_state(street) == 'enabled']
                 disabled_streets = [street for street in doubles if api.content.get_state(street) == 'disabled']
                 active_doubles = len(enabled_streets)
-                for enabled_street in enabled_streets:
-                    api.content.transition(obj=enabled_street, to_state='disabled')
-                double_street = doubles[0]
-                new_street_id = '{}{}'.format(
-                    double_street.id[-1] in [str(i) for i in range(len(doubles))] and double_street.id[0:-1] or double_street.id,
-                    str(len(doubles))
-                )
-                new_street = api.content.create(
-                    container=double_street.aq_parent,
-                    type=double_street.portal_type,
-                    id=new_street_id,
-                    title=double_street.Title(),
-                    streetName=double_street.getStreetName(),
-                    startDate=double_street.getStartDate(),
-                    regionalRoad=double_street.getRegionalRoad()
-                )
-                new_street.reindexObject()
-                print "created new street %s" % new_street.Title()
+                if active_doubles > 1:
+                    for enabled_street in enabled_streets[1:]:
+                        api.content.transition(obj=enabled_street, to_state='disabled')
+                        print 'disable double street {}'.format(enabled_street)
                 for double in doubles:
                     already_checked.add(double)
 

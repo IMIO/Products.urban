@@ -363,4 +363,20 @@
         handler=".update_250.update_tickets_title"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Move architects and geometricians to representative contacts for base buildlicence"
+        description="urban upgrade step"
+        source="1117"
+        destination="1118"
+        handler=".update_250.migrate_move_basebuildlicence_architects_and_geometricians_to_representative_contacts"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Add schedule config for env licences 1 and 2"
+        description="urban upgrade step"
+        source="1118"
+        destination="1119"
+        handler=".update_250.update_env_licences_schedule"
+        profile="Products.urban:default" />
+
 </configure>
