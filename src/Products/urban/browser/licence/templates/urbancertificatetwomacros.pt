@@ -12,8 +12,7 @@
 
 
             <metal:representatives fill-slot="representatives">
-                <metal:representatives_macro use-macro="here/@@licencemacros/urbanGeometriciansMacro" />
-                <metal:representatives_macro use-macro="here/@@licencemacros/urbanArchitectsMacro" />
+                <metal:representatives_macro use-macro="here/@@licencemacros/urbanRepresentativeContactsMacro" />
                 <metal:representatives_macro use-macro="here/@@licencemacros/urbanNotariesMacro" />
             </metal:representatives>
 
