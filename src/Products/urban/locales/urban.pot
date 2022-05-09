@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2022-05-05 13:42+0000\n"
+"POT-Creation-Date: 2022-05-09 11:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -319,7 +319,7 @@ msgstr ""
 msgid "IAcknowledgment type marker interface"
 msgstr ""
 
-#: ../interfaces.py:574
+#: ../interfaces.py:579
 msgid "IActivityEndedEvent type marker interface"
 msgstr ""
 
@@ -335,15 +335,15 @@ msgstr ""
 msgid "ICollege type marker interface"
 msgstr ""
 
-#: ../interfaces.py:498
+#: ../interfaces.py:503
 msgid "ICollegeOpinionEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:494
+#: ../interfaces.py:499
 msgid "ICollegeOpinionTransmitToSPWEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:518
+#: ../interfaces.py:523
 msgid "ICollegeReport type marker interface"
 msgstr ""
 
@@ -351,7 +351,7 @@ msgstr ""
 msgid "ICommunalCouncil type marker interface"
 msgstr ""
 
-#: ../interfaces.py:502
+#: ../interfaces.py:507
 msgid "IDecisionProjectFromSPWEvent type marker interface"
 msgstr ""
 
@@ -363,11 +363,11 @@ msgstr ""
 msgid "IDeposit type marker interface"
 msgstr ""
 
-#: ../interfaces.py:542
+#: ../interfaces.py:547
 msgid "IDisplayingTheDecisionEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:590
+#: ../interfaces.py:595
 msgid "IEnvironmentOnly type marker interface"
 msgstr ""
 
@@ -375,11 +375,11 @@ msgstr ""
 msgid "IEnvironmentSimpleCollegeEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:578
+#: ../interfaces.py:583
 msgid "IForcedEndEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:570
+#: ../interfaces.py:575
 msgid "IIILEPrescriptionEvent type marker interface"
 msgstr ""
 
@@ -387,27 +387,27 @@ msgstr ""
 msgid "IInquiry type marker interface"
 msgstr ""
 
-#: ../interfaces.py:614
+#: ../interfaces.py:619
 msgid "IInspectionReportEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:606
+#: ../interfaces.py:611
 msgid "IInternalPrelimaryAdvice type marker interface"
 msgstr ""
 
-#: ../interfaces.py:506
+#: ../interfaces.py:511
 msgid "ILicenceDelivery type marker interface"
 msgstr ""
 
-#: ../interfaces.py:510
+#: ../interfaces.py:515
 msgid "ILicenceEffectiveStart type marker interface"
 msgstr ""
 
-#: ../interfaces.py:514
+#: ../interfaces.py:519
 msgid "ILicenceExpiration type marker interface"
 msgstr ""
 
-#: ../interfaces.py:538
+#: ../interfaces.py:543
 msgid "ILicenceNotification type marker interface"
 msgstr ""
 
@@ -431,7 +431,7 @@ msgstr ""
 msgid "IModificationDeposit type marker interface"
 msgstr ""
 
-#: ../interfaces.py:582
+#: ../interfaces.py:587
 msgid "IModificationRegistryEvent type marker interface"
 msgstr ""
 
@@ -439,35 +439,35 @@ msgstr ""
 msgid "IOpinionRequest type marker interface"
 msgstr ""
 
-#: ../interfaces.py:610
+#: ../interfaces.py:615
 msgid "IPatrimonyMeetingEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:622
+#: ../interfaces.py:627
 msgid "IProprietaryChangeEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:558
+#: ../interfaces.py:563
 msgid "IProrogation type marker interface"
 msgstr ""
 
-#: ../interfaces.py:562
+#: ../interfaces.py:567
 msgid "IProvocationEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:546
+#: ../interfaces.py:551
 msgid "IRecourseEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:566
+#: ../interfaces.py:571
 msgid "IRefusedIncompleteness type marker interface"
 msgstr ""
 
-#: ../interfaces.py:586
+#: ../interfaces.py:591
 msgid "ISentToArchivesEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:630
+#: ../interfaces.py:635
 msgid "ISettlementEvent type marker interface"
 msgstr ""
 
@@ -475,11 +475,11 @@ msgstr ""
 msgid "ISimpleCollegeEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:626
+#: ../interfaces.py:631
 msgid "ISuspensionEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:530
+#: ../interfaces.py:535
 msgid "ITechnicalAnalysis type marker interface"
 msgstr ""
 
@@ -487,11 +487,11 @@ msgstr ""
 msgid "ITechnicalServiceOpinionRequest type marker interface"
 msgstr ""
 
-#: ../interfaces.py:522
+#: ../interfaces.py:527
 msgid "ITheLicence type marker interface"
 msgstr ""
 
-#: ../interfaces.py:526
+#: ../interfaces.py:531
 msgid "ITheTicket type marker interface"
 msgstr ""
 
@@ -499,7 +499,7 @@ msgstr ""
 msgid "ITransmitToSPWEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:598
+#: ../interfaces.py:603
 msgid "IUrbanAndEnvironment type marker interface"
 msgstr ""
 
@@ -507,11 +507,11 @@ msgstr ""
 msgid "IUrbanEventFollowUp type marker interface"
 msgstr ""
 
-#: ../interfaces.py:618
+#: ../interfaces.py:623
 msgid "IUrbanEventFollowUpWithDelay type marker interface"
 msgstr ""
 
-#: ../interfaces.py:594
+#: ../interfaces.py:599
 msgid "IUrbanOrEnvironment type marker interface"
 msgstr ""
 
@@ -527,15 +527,15 @@ msgstr ""
 msgid "IWalloonRegionPrimo type marker interface"
 msgstr ""
 
-#: ../interfaces.py:550
+#: ../interfaces.py:555
 msgid "IWorkBeginning type marker interface"
 msgstr ""
 
-#: ../interfaces.py:554
+#: ../interfaces.py:559
 msgid "IWorkEnd type marker interface"
 msgstr ""
 
-#: ../interfaces.py:602
+#: ../interfaces.py:607
 msgid "ImpactStudy event type marker interface"
 msgstr ""
 
@@ -549,7 +549,7 @@ msgstr ""
 msgid "IntegratedLicence"
 msgstr ""
 
-#: ../interfaces.py:729
+#: ../interfaces.py:734
 msgid "Internal opinion services"
 msgstr ""
 
@@ -557,7 +557,7 @@ msgstr ""
 msgid "Listing file"
 msgstr ""
 
-#: ../interfaces.py:752
+#: ../interfaces.py:757
 msgid "Mailing limit"
 msgstr ""
 
@@ -565,7 +565,7 @@ msgstr ""
 msgid "Map"
 msgstr ""
 
-#: ../interfaces.py:753
+#: ../interfaces.py:758
 msgid "Max items allowed for immediate mailing"
 msgstr ""
 
@@ -627,11 +627,11 @@ msgstr ""
 msgid "Period"
 msgstr ""
 
-#: ../interfaces.py:767
+#: ../interfaces.py:772
 msgid "Planned claimants imports"
 msgstr ""
 
-#: ../interfaces.py:742
+#: ../interfaces.py:747
 msgid "Planned mailings"
 msgstr ""
 
@@ -695,7 +695,7 @@ msgstr ""
 msgid "Service id"
 msgstr ""
 
-#: ../interfaces.py:730
+#: ../interfaces.py:735
 msgid "Services that can give their opinion directly through urban"
 msgstr ""
 
@@ -712,7 +712,7 @@ msgid "Submit"
 msgstr ""
 
 #: ../browser/offdays_settings.py:39
-#: ../interfaces.py:780
+#: ../interfaces.py:785
 msgid "Suspension period end date"
 msgstr ""
 
@@ -721,7 +721,7 @@ msgid "Suspension period from to: please check the end date"
 msgstr ""
 
 #: ../browser/offdays_settings.py:33
-#: ../interfaces.py:776
+#: ../interfaces.py:781
 msgid "Suspension period start date"
 msgstr ""
 
@@ -852,7 +852,7 @@ msgstr ""
 msgid "add_a_corporation"
 msgstr ""
 
-#: ../browser/licence/templates/licencemacros.pt:202
+#: ../browser/licence/templates/licencemacros.pt:210
 msgid "add_a_corporation_plaintiff"
 msgstr ""
 
@@ -864,7 +864,7 @@ msgstr ""
 msgid "add_a_corporationproprietary"
 msgstr ""
 
-#: ../browser/licence/templates/licencemacros.pt:157
+#: ../browser/licence/templates/licencemacros.pt:174
 msgid "add_a_couple"
 msgstr ""
 
@@ -872,7 +872,7 @@ msgstr ""
 msgid "add_a_physical_applicant"
 msgstr ""
 
-#: ../browser/licence/templates/licencemacros.pt:194
+#: ../browser/licence/templates/licencemacros.pt:202
 msgid "add_a_physical_plaintiff"
 msgstr ""
 
@@ -936,7 +936,7 @@ msgid "applicants"
 msgstr ""
 
 #. Default: "Applicant(s) history"
-#: ../browser/licence/templates/licencemacros.pt:173
+#: ../browser/licence/templates/licencemacros.pt:181
 msgid "applicants_history"
 msgstr ""
 
@@ -972,7 +972,7 @@ msgid "basement_folder_title"
 msgstr ""
 
 #. Default: "Bound licence applicant(s)"
-#: ../browser/licence/templates/licencemacros.pt:209
+#: ../browser/licence/templates/licencemacros.pt:217
 msgid "bound_licence_applicants"
 msgstr ""
 
@@ -1139,7 +1139,7 @@ msgid "country_folder_title"
 msgstr ""
 
 #. Default: "Couple"
-#: ../browser/templates/contactmacros.pt:191
+#: ../browser/templates/contactmacros.pt:201
 msgid "couple_persons_fieldset_legend"
 msgstr ""
 
@@ -1603,7 +1603,7 @@ msgstr ""
 msgid "inadmissibilityreasons_folder_title"
 msgstr ""
 
-#: ../interfaces.py:768
+#: ../interfaces.py:773
 msgid "inquiries planned for claimants imports"
 msgstr ""
 
@@ -1824,11 +1824,11 @@ msgstr ""
 msgid "mail_gig"
 msgstr ""
 
-#: ../interfaces.py:743
+#: ../interfaces.py:748
 msgid "mailings planned"
 msgstr ""
 
-#: ../interfaces.py:758
+#: ../interfaces.py:763
 msgid "mailings planned for radius search"
 msgstr ""
 
@@ -2030,7 +2030,7 @@ msgid "pipelines_folder_title"
 msgstr ""
 
 #. Default: "Plaintiff(s)"
-#: ../browser/licence/templates/licencemacros.pt:181
+#: ../browser/licence/templates/licencemacros.pt:189
 msgid "plaintiffs"
 msgstr ""
 
@@ -4357,7 +4357,7 @@ msgstr ""
 msgid "urban_label_reportVisitDate"
 msgstr ""
 
-#. Default: "RepresentativeContacts(s)"
+#. Default: "RepresentativeContacts"
 #: ../browser/licence/templates/licencemacros.pt:47
 #: ../content/licence/BaseBuildLicence.py:436
 msgid "urban_label_representative_contacts"
@@ -5002,7 +5002,7 @@ msgid "warning_add_an_applicant"
 msgstr ""
 
 #. Default: "You must encode plaintiff(s)"
-#: ../browser/licence/templates/licencemacros.pt:184
+#: ../browser/licence/templates/licencemacros.pt:192
 msgid "warning_add_an_plaintiff"
 msgstr ""
 
