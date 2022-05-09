@@ -31,15 +31,6 @@ from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 schema = Schema((
 
     StringField(
-        name='couplePersonTitle',
-        widget=SelectionWidget(
-            label='Persontitle',
-            label_msgid='urban_label_personTitle',
-            i18n_domain='urban',
-        ),
-        vocabulary=UrbanVocabulary('persons_titles', vocType='PersonTitleTerm', inUrbanConfig=False),
-    ),
-    StringField(
         name='couplePerson1Name',
         widget=StringField._properties['widget'](
             label='couplePerson1Name',
@@ -133,7 +124,7 @@ class Couple(BaseContent, Applicant, BrowserDefaultMixin):
            Generate the title...
         """
         if self.getRepresentedBySociety():
-            return "%s %s-%s %s et %s repr. par %s" % (self.getCouplePersonTitle(short=True), self.getCouplePerson1Name(), self.getCouplePerson2Name(), self.getCouplePerson1Firstname(), self.getCouplePerson2Firstname(), self.getSociety())
+            return "%s %s-%s %s et %s repr. par %s" % (self.getPersonTitle(short=True), self.getCouplePerson1Name(), self.getCouplePerson2Name(), self.getCouplePerson1Firstname(), self.getCouplePerson2Firstname(), self.getSociety())
         else:
             return "%s %s-%s %s et %s" % (self.getPersonTitle(short=True), self.getCouplePerson1Name(), self.getCouplePerson2Name(), self.getCouplePerson1Firstname(), self.getCouplePerson2Firstname())
 
@@ -215,13 +206,10 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     """
     Finalizes the type schema to alter some fields
     """
-    schema.moveField('couplePersonTitle', after='representedBySociety')
-    schema.moveField('couplePerson1Name', after='couplePersonTitle')
+    schema.moveField('couplePerson1Name', after='representedBySociety')
     schema.moveField('couplePerson1Firstname', after='couplePerson1Name')
     schema.moveField('couplePerson2Name', after='couplePerson1Firstname')
     schema.moveField('couplePerson2Firstname', after='couplePerson2Name')
-#    schema.moveField('name1', after='personRole')
-#    schema.moveField('name2', after='name1')
 
 
 finalizeSchema(Couple_schema)
