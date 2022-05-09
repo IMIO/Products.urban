@@ -1116,13 +1116,18 @@ msgstr ""
 msgid "content_none"
 msgstr ""
 
+#. Default: "Contact person address / headoffice"
+#: ../browser/templates/contactmacros.pt:135
+msgid "corporation_contactPersonAddress_fieldset_legend"
+msgstr ""
+
 #. Default: "Contact person"
-#: ../browser/templates/contactmacros.pt:125
+#: ../browser/templates/contactmacros.pt:126
 msgid "corporation_contactPerson_fieldset_legend"
 msgstr ""
 
 #. Default: "Represented by"
-#: ../browser/templates/contactmacros.pt:116
+#: ../browser/templates/contactmacros.pt:117
 msgid "corporation_representative_fieldset_legend"
 msgstr ""
 
@@ -2888,6 +2893,26 @@ msgstr ""
 #: ../content/licence/EnvironmentLicence.py:148
 #: ../content/licence/UniqueLicence.py:191
 msgid "urban_label_conclusions"
+msgstr ""
+
+#. Default: "ContactPersonCity"
+#: Corporation.py
+msgid "urban_label_contactpersoncity"
+msgstr ""
+
+#. Default: "ContactPersonNumber"
+#: Corporation.py
+msgid "urban_label_contactpersonnumber"
+msgstr ""
+
+#. Default: "ContactPersonStreet"
+#: Corporation.py
+msgid "urban_label_contactpersonstreet"
+msgstr ""
+
+#. Default: "ContactPersonZipcode"
+#: Corporation.py
+msgid "urban_label_contactpersonzipcode"
 msgstr ""
 
 #. Default: "Linked inquiry"
