@@ -47,6 +47,7 @@ schema = Schema((
             base_query='geometriciansBaseQuery',
             wild_card_search=True,
             show_results_without_query=True,
+            visible=False,
             label=_('urban_label_geometricians', default='Geometrician(s)'),
         ),
         required=False,
@@ -133,8 +134,8 @@ def cu2FinalizeSchema(schema):
     """
        Finalizes the type schema to alter some fields
     """
-    schema.moveField('geometricians', after='workLocations')
-    schema.moveField('notaryContact', after='geometricians')
+    schema.moveField('representativeContacts', after='workLocations')
+    schema.moveField('notaryContact', after='representativeContacts')
 
 cu2FinalizeSchema(UrbanCertificateTwo_schema)
 ##/code-section module-footer

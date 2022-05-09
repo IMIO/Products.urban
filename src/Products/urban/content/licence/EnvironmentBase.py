@@ -374,6 +374,9 @@ class EnvironmentBase(BaseFolder, GenericLicence, CODT_UniqueLicenceInquiry, Bro
     def getLastCollegeReport(self):
         return self.getLastEvent(interfaces.ICollegeReportEvent)
 
+    def getLastCollegeOpinion(self):
+        return self.getLastEvent(interfaces.ICollegeOpinionEvent)
+
     def getLastLicenceNotification(self):
         return self.getLastEvent(interfaces.ILicenceNotificationEvent)
 
