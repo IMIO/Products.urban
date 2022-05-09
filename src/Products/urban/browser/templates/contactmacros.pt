@@ -163,10 +163,8 @@
     <tal:fields repeat="field python:schematas[fieldset].editableFields(here, visible_only=False)">
         <tal:block define="fieldName field/getName;
                            addressFields python: ['isSameAddressAsWorks', 'street', 'number', 'zipcode', 'city', 'country'];
-                           persons python: ['couplePersonTitle', 'couplePerson1Name', 'couplePerson1Firstname', 'nationalRegisterPerson1', 'couplePerson2Name', 'couplePerson2Firstname', 'nationalRegisterPerson2'];">
+                           persons python: ['couplePerson1Name', 'couplePerson1Firstname', 'nationalRegisterPerson1', 'couplePerson2Name', 'couplePerson2Firstname', 'nationalRegisterPerson2'];">
 
-<!-- contactPersonFields python: ['contactPersonTitle', 'contactPersonName', 'contactPersonFirstname',
-        'contactPersonPhone', 'contactPersonEmail'] -->
             <tal:address condition="python: fieldName in addressFields">
                 <tal:manage_address condition="python: fieldName == 'isSameAddressAsWorks'">
                     <fieldset class="urban-fieldset-masterbooleanwidget" style="border-style: solid !important;">
@@ -205,15 +203,6 @@
                 </fieldset>
             </tal:representative>
 
-<!--            <tal:contactPerson condition="python: fieldName == contactPersonFields[0]">
-                <fieldset class="urban-fieldset-masterbooleanwidget" style="border-style: solid !important;">
-                    <legend i18n:translate="corporation_contactPerson_fieldset_legend">Contact person</legend>
-                    <tal:cp_fields repeat="field_name contactPersonFields">
-                        <metal:fieldMacro use-macro="python:here.widget(field_name, mode='edit')" />
-                    </tal:cp_fields>
-                </fieldset>
-</tal:contactPerson> -->
-
             <tal:other condition="not: python: fieldName in addressFields or fieldName in representativeFields or fieldName in contactPersonFields">
                 <metal:widget define-slot="widget">
                     <metal:fieldMacro use-macro="python:here.widget(field.getName(), mode='edit')" />
@@ -222,5 +211,3 @@
         </tal:block>
     </tal:fields>
 </div>
-
-
