@@ -1132,13 +1132,18 @@ msgstr "Attention, aucune adresse de travaux définie"
 msgid "content_none"
 msgstr "N.C."
 
+#. Default: "Contact person address / headoffice"
+#: ../browser/templates/contactmacros.pt:135
+msgid "corporation_contactPersonAddress_fieldset_legend"
+msgstr "Adresse personne de contact / Siège social"
+
 #. Default: "Contact person"
-#: ../browser/templates/contactmacros.pt:125
+#: ../browser/templates/contactmacros.pt:126
 msgid "corporation_contactPerson_fieldset_legend"
 msgstr "Personne de contact"
 
 #. Default: "Represented by"
-#: ../browser/templates/contactmacros.pt:116
+#: ../browser/templates/contactmacros.pt:117
 msgid "corporation_representative_fieldset_legend"
 msgstr "Personne dûment habilitée à représenter la personne morale"
 
@@ -2918,6 +2923,26 @@ msgstr "Date de réunion de concertation"
 #: ../content/licence/UniqueLicence.py:191
 msgid "urban_label_conclusions"
 msgstr "Conclusions"
+
+#. Default: "ContactPersonCity"
+#: Corporation.py
+msgid "urban_label_contactpersoncity"
+msgstr "Localité"
+
+#. Default: "ContactPersonNumber"
+#: Corporation.py
+msgid "urban_label_contactpersonnumber"
+msgstr "Numéro"
+
+#. Default: "ContactPersonStreet"
+#: Corporation.py
+msgid "urban_label_contactpersonstreet"
+msgstr "Rue"
+
+#. Default: "ContactPersonZipcode"
+#: Corporation.py
+msgid "urban_label_contactpersonzipcode"
+msgstr "Code postal"
 
 #. Default: "Linked inquiry"
 #: ../browser/templates/urbaneventannouncementview.pt:66
