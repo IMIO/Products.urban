@@ -197,6 +197,10 @@
     type=".interfaces.IEventTypeType"/>
 
   <interface
+    interface=".interfaces.ICollegeOpinionEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
     interface=".interfaces.ISimpleCollegeEvent"
     type=".interfaces.IEventTypeType"/>
 

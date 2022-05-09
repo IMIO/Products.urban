@@ -18,6 +18,13 @@
   />
 
   <adapter
+     for="Products.urban.interfaces.IEnvironmentLicence"
+     provides="borg.localrole.interfaces.ILocalRoleProvider"
+     factory=".env_licence_workflow.StateRolesMapping"
+     name="env_licence_local_roles"
+  />
+
+  <adapter
      for="Products.urban.interfaces.IDivision"
      provides="borg.localrole.interfaces.ILocalRoleProvider"
      factory=".division_workflow.StateRolesMapping"

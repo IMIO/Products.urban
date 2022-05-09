@@ -1549,7 +1549,7 @@ def _create_task_configs(container, taskconfigs):
     """
     last_id = None
     for taskconfig_kwargs in taskconfigs:
-        subtasks = taskconfig_kwargs.pop('subtasks', [])
+        subtasks = taskconfig_kwargs.get('subtasks', [])
         task_config_id = taskconfig_kwargs['id']
 
         if task_config_id not in container.objectIds():

@@ -317,7 +317,7 @@ msgstr "Historique sauvegardé"
 msgid "IAcknowledgment type marker interface"
 msgstr "Accusé de réception"
 
-#: ../interfaces.py:570
+#: ../interfaces.py:574
 msgid "IActivityEndedEvent type marker interface"
 msgstr "Cessastion d'activité"
 
@@ -333,12 +333,16 @@ msgstr "Notification du choix de la procédure"
 msgid "ICollege type marker interface"
 msgstr "College"
 
+#: ../interfaces.py:498
+msgid "ICollegeOpinionEvent type marker interface"
+msgstr "Avis collège"
+
 #: ../interfaces.py:494
 msgid "ICollegeOpinionTransmitToSPWEvent type marker interface"
 msgstr "Transmis de l'avis collège au SPW"
 
 #. Default: "College report"
-#: ../interfaces.py:514
+#: ../interfaces.py:518
 msgid "ICollegeReport type marker interface"
 msgstr "Rapport du collège"
 
@@ -347,7 +351,7 @@ msgstr "Rapport du collège"
 msgid "ICommunalCouncil type marker interface"
 msgstr "Conseil communal"
 
-#: ../interfaces.py:498
+#: ../interfaces.py:502
 msgid "IDecisionProjectFromSPWEvent type marker interface"
 msgstr "Projet de décision du SPW"
 
@@ -360,11 +364,11 @@ msgstr "Accusé de réception par défaut"
 msgid "IDeposit type marker interface"
 msgstr "Dépôt de la demande"
 
-#: ../interfaces.py:538
+#: ../interfaces.py:542
 msgid "IDisplayingTheDecisionEvent type marker interface"
 msgstr "Affichage de la décision"
 
-#: ../interfaces.py:586
+#: ../interfaces.py:590
 msgid "IEnvironmentOnly type marker interface"
 msgstr "Événement exclusif à l'environnement (permis unique)"
 
@@ -372,11 +376,11 @@ msgstr "Événement exclusif à l'environnement (permis unique)"
 msgid "IEnvironmentSimpleCollegeEvent type marker interface"
 msgstr "Collège simple (environnement)"
 
-#: ../interfaces.py:574
+#: ../interfaces.py:578
 msgid "IForcedEndEvent type marker interface"
 msgstr "Fin forcée"
 
-#: ../interfaces.py:566
+#: ../interfaces.py:570
 msgid "IIILEPrescriptionEvent type marker interface"
 msgstr "Prescription IILE"
 
@@ -385,27 +389,27 @@ msgstr "Prescription IILE"
 msgid "IInquiry type marker interface"
 msgstr "Enquête publique"
 
-#: ../interfaces.py:610
+#: ../interfaces.py:614
 msgid "IInspectionReportEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:602
+#: ../interfaces.py:606
 msgid "IInternalPrelimaryAdvice type marker interface"
 msgstr "Avis préliminaire interne"
 
-#: ../interfaces.py:502
+#: ../interfaces.py:506
 msgid "ILicenceDelivery type marker interface"
 msgstr "Délivrance du permis (environnement)"
 
-#: ../interfaces.py:506
+#: ../interfaces.py:510
 msgid "ILicenceEffectiveStart type marker interface"
 msgstr "Début du permis"
 
-#: ../interfaces.py:510
+#: ../interfaces.py:514
 msgid "ILicenceExpiration type marker interface"
 msgstr "Expiration du permis"
 
-#: ../interfaces.py:534
+#: ../interfaces.py:538
 msgid "ILicenceNotification type marker interface"
 msgstr "Notification du permis"
 
@@ -432,7 +436,7 @@ msgstr "Transmis des compléments au SPW"
 msgid "IModificationDeposit type marker interface"
 msgstr "Dépôt d'un modificatif de la demande"
 
-#: ../interfaces.py:578
+#: ../interfaces.py:582
 msgid "IModificationRegistryEvent type marker interface"
 msgstr "Registre de modification"
 
@@ -441,36 +445,36 @@ msgstr "Registre de modification"
 msgid "IOpinionRequest type marker interface"
 msgstr "Demande d'avis"
 
-#: ../interfaces.py:606
+#: ../interfaces.py:610
 msgid "IPatrimonyMeetingEvent type marker interface"
 msgstr "Réunion patrimoine"
 
-#: ../interfaces.py:618
+#: ../interfaces.py:622
 msgid "IProprietaryChangeEvent type marker interface"
 msgstr "Changement d'exploitant"
 
 #. Default: "Prorogation"
-#: ../interfaces.py:554
+#: ../interfaces.py:558
 msgid "IProrogation type marker interface"
 msgstr "Prorogation"
 
-#: ../interfaces.py:558
+#: ../interfaces.py:562
 msgid "IProvocationEvent type marker interface"
 msgstr "Provocation"
 
-#: ../interfaces.py:542
+#: ../interfaces.py:546
 msgid "IRecourseEvent type marker interface"
 msgstr "Recours"
 
-#: ../interfaces.py:562
+#: ../interfaces.py:566
 msgid "IRefusedIncompleteness type marker interface"
 msgstr "Refus pour incomplétude"
 
-#: ../interfaces.py:582
+#: ../interfaces.py:586
 msgid "ISentToArchivesEvent type marker interface"
 msgstr "Envoi aux archives"
 
-#: ../interfaces.py:626
+#: ../interfaces.py:630
 msgid "ISettlementEvent type marker interface"
 msgstr "Règlement transactionnel"
 
@@ -478,11 +482,11 @@ msgstr "Règlement transactionnel"
 msgid "ISimpleCollegeEvent type marker interface"
 msgstr "Collège simple"
 
-#: ../interfaces.py:622
+#: ../interfaces.py:626
 msgid "ISuspensionEvent type marker interface"
 msgstr "Suspension"
 
-#: ../interfaces.py:526
+#: ../interfaces.py:530
 msgid "ITechnicalAnalysis type marker interface"
 msgstr "Analyse technique"
 
@@ -492,11 +496,11 @@ msgid "ITechnicalServiceOpinionRequest type marker interface"
 msgstr "Demande d'avis du service technique"
 
 #. Default: "Licence delivery"
-#: ../interfaces.py:518
+#: ../interfaces.py:522
 msgid "ITheLicence type marker interface"
 msgstr "Délivrance du permis/certificat/..."
 
-#: ../interfaces.py:522
+#: ../interfaces.py:526
 msgid "ITheTicket type marker interface"
 msgstr "Procès verbal"
 
@@ -504,7 +508,7 @@ msgstr "Procès verbal"
 msgid "ITransmitToSPWEvent type marker interface"
 msgstr "Transmis du dossier au SPW"
 
-#: ../interfaces.py:594
+#: ../interfaces.py:598
 msgid "IUrbanAndEnvironment type marker interface"
 msgstr "Événement commun à l'urbanisme et l'environnement (permis unique)"
 
@@ -512,11 +516,11 @@ msgstr "Événement commun à l'urbanisme et l'environnement (permis unique)"
 msgid "IUrbanEventFollowUp type marker interface"
 msgstr "Proposition de suivi (!uniquement pour Inspection!)"
 
-#: ../interfaces.py:614
+#: ../interfaces.py:618
 msgid "IUrbanEventFollowUpWithDelay type marker interface"
 msgstr "Proposition de suivi avec délai"
 
-#: ../interfaces.py:590
+#: ../interfaces.py:594
 msgid "IUrbanOrEnvironment type marker interface"
 msgstr "Événement exclusif au service de la tendance du dossier (permis unique)"
 
@@ -535,15 +539,15 @@ msgid "IWalloonRegionPrimo type marker interface"
 msgstr "Envoi du primo dossier"
 
 #. Default: "Work beginning"
-#: ../interfaces.py:546
+#: ../interfaces.py:550
 msgid "IWorkBeginning type marker interface"
 msgstr "Début des travaux"
 
-#: ../interfaces.py:550
+#: ../interfaces.py:554
 msgid "IWorkEnd type marker interface"
 msgstr "Fin des travaux"
 
-#: ../interfaces.py:598
+#: ../interfaces.py:602
 msgid "ImpactStudy event type marker interface"
 msgstr "Étude d'incidence"
 
@@ -557,7 +561,7 @@ msgstr "Inspection"
 msgid "IntegratedLicence"
 msgstr "Permis intégré"
 
-#: ../interfaces.py:725
+#: ../interfaces.py:729
 msgid "Internal opinion services"
 msgstr "Avis de services internes à la ville"
 
@@ -565,7 +569,7 @@ msgstr "Avis de services internes à la ville"
 msgid "Listing file"
 msgstr "Importer un fichier de réclamants (csv)"
 
-#: ../interfaces.py:748
+#: ../interfaces.py:752
 msgid "Mailing limit"
 msgstr ""
 
@@ -573,7 +577,7 @@ msgstr ""
 msgid "Map"
 msgstr "Carte"
 
-#: ../interfaces.py:749
+#: ../interfaces.py:753
 msgid "Max items allowed for immediate mailing"
 msgstr ""
 
@@ -635,11 +639,11 @@ msgstr "Certificat de patrimoine"
 msgid "Period"
 msgstr "Période"
 
-#: ../interfaces.py:763
+#: ../interfaces.py:767
 msgid "Planned claimants imports"
 msgstr ""
 
-#: ../interfaces.py:738
+#: ../interfaces.py:742
 msgid "Planned mailings"
 msgstr ""
 
@@ -703,7 +707,7 @@ msgstr "Nom du service"
 msgid "Service id"
 msgstr "Identifiant du service"
 
-#: ../interfaces.py:726
+#: ../interfaces.py:730
 msgid "Services that can give their opinion directly through urban"
 msgstr "Services internes à la ville rendant des avis"
 
@@ -720,7 +724,7 @@ msgid "Submit"
 msgstr "Valider"
 
 #: ../browser/offdays_settings.py:39
-#: ../interfaces.py:776
+#: ../interfaces.py:780
 msgid "Suspension period end date"
 msgstr "Date de fin"
 
@@ -729,7 +733,7 @@ msgid "Suspension period from to: please check the end date"
 msgstr "Période de suspension du ${from} au ${to}: CORRIGEZ LA DATE DE FIN DE PUBLICITE."
 
 #: ../browser/offdays_settings.py:33
-#: ../interfaces.py:772
+#: ../interfaces.py:776
 msgid "Suspension period start date"
 msgstr "Date de début"
 
@@ -838,40 +842,53 @@ msgstr "Jours de fermeture en semaine"
 msgid "You can not create this UrbanEvent !"
 msgstr "Vous ne pouvez pas créer cet événement"
 
+#: skins/urban_templates/referencebrowser_popup.pt
+msgid "add_Architect"
+msgstr "Ajouter un architecte"
+
+msgid "add_Geometrician"
+msgstr "Ajouter un géomètre"
+
+msgid "add_Notary"
+msgstr "Ajouter un notaire"
+
+msgid "add_Parcelling"
+msgstr "Ajouter un lotissement"
+
 #: ../browser/templates/urbaneventannouncementview.pt:145
 #: ../browser/templates/urbaneventinquiryview.pt:143
 msgid "add_a_claimant"
 msgstr "Ajouter un réclamant"
 
-#: ../browser/licence/templates/licencemacros.pt:149
+#: ../browser/licence/templates/licencemacros.pt:166
 msgid "add_a_corporation"
 msgstr "Ajouter un demandeur (p. morale)"
 
-#: ../browser/licence/templates/licencemacros.pt:185
+#: ../browser/licence/templates/licencemacros.pt:202
 msgid "add_a_corporation_plaintiff"
 msgstr "Ajouter un plaignant (p.morale)"
 
-#: ../browser/licence/templates/licencemacros.pt:123
+#: ../browser/licence/templates/licencemacros.pt:140
 msgid "add_a_corporation_tenant"
 msgstr "Ajouter un locataire (p.morale)"
 
-#: ../browser/licence/templates/licencemacros.pt:88
+#: ../browser/licence/templates/licencemacros.pt:105
 msgid "add_a_corporationproprietary"
 msgstr "Ajouter un propriétaire (p. morale)"
 
-#: ../browser/licence/templates/licencemacros.pt:141
+#: ../browser/licence/templates/licencemacros.pt:158
 msgid "add_a_physical_applicant"
 msgstr "Ajouter un demandeur"
 
-#: ../browser/licence/templates/licencemacros.pt:177
+#: ../browser/licence/templates/licencemacros.pt:194
 msgid "add_a_physical_plaintiff"
 msgstr "Ajouter un plaignant"
 
-#: ../browser/licence/templates/licencemacros.pt:80
+#: ../browser/licence/templates/licencemacros.pt:97
 msgid "add_a_proprietary"
 msgstr "Ajouter un propriétaire"
 
-#: ../browser/licence/templates/licencemacros.pt:115
+#: ../browser/licence/templates/licencemacros.pt:132
 msgid "add_a_tenant"
 msgstr "Ajouter un locataire"
 
@@ -923,12 +940,12 @@ msgstr "Articles des annonces de projet"
 
 # buildlicence_view
 #. Default: "Applicant(s)"
-#: ../browser/licence/templates/licencemacros.pt:129
+#: ../browser/licence/templates/licencemacros.pt:146
 msgid "applicants"
 msgstr "Demandeur(s)"
 
 #. Default: "Applicant(s) history"
-#: ../browser/licence/templates/licencemacros.pt:156
+#: ../browser/licence/templates/licencemacros.pt:173
 msgid "applicants_history"
 msgstr "Demandeurs inactifs"
 
@@ -964,7 +981,7 @@ msgid "basement_folder_title"
 msgstr "Sous-sol"
 
 #. Default: "Bound licence applicant(s)"
-#: ../browser/licence/templates/licencemacros.pt:192
+#: ../browser/licence/templates/licencemacros.pt:209
 msgid "bound_licence_applicants"
 msgstr "Demandeur(s) du permis"
 
@@ -1603,7 +1620,7 @@ msgstr "Férié"
 msgid "inadmissibilityreasons_folder_title"
 msgstr "Motifs d'irrecevabilité"
 
-#: ../interfaces.py:764
+#: ../interfaces.py:768
 msgid "inquiries planned for claimants imports"
 msgstr ""
 
@@ -1824,11 +1841,11 @@ msgstr "Lien avec l'adresse du gig"
 msgid "mail_gig"
 msgstr "Adresse mail du compte gig"
 
-#: ../interfaces.py:739
+#: ../interfaces.py:743
 msgid "mailings planned"
 msgstr ""
 
-#: ../interfaces.py:754
+#: ../interfaces.py:758
 msgid "mailings planned for radius search"
 msgstr ""
 
@@ -2031,7 +2048,7 @@ msgid "pipelines_folder_title"
 msgstr "Canalisations"
 
 #. Default: "Plaintiff(s)"
-#: ../browser/licence/templates/licencemacros.pt:164
+#: ../browser/licence/templates/licencemacros.pt:181
 msgid "plaintiffs"
 msgstr "Plaignant(s)"
 
@@ -2053,12 +2070,12 @@ msgid "projectmeeting_urbanconfig_title"
 msgstr "Paramètres des réunions de projet"
 
 #. Default: "Proprietary(ies)"
-#: ../browser/licence/templates/licencemacros.pt:66
+#: ../browser/licence/templates/licencemacros.pt:83
 msgid "proprietaries"
 msgstr "Propriétaire(s)"
 
 #. Default: "Proprietaries history"
-#: ../browser/licence/templates/licencemacros.pt:95
+#: ../browser/licence/templates/licencemacros.pt:112
 msgid "proprietaries_history"
 msgstr "Propriétaires inactifs"
 
@@ -2095,15 +2112,15 @@ msgstr "Dossier introduit par ${notary}"
 msgid "rgbsr_folder_title"
 msgstr "Réglement général sur les bâtisses en site rural"
 
-#: ../content/licence/BaseBuildLicence.py:558
+#: ../content/licence/BaseBuildLicence.py:579
 msgid "road_adaptation_create"
 msgstr "Ouverture (création)"
 
-#: ../content/licence/BaseBuildLicence.py:557
+#: ../content/licence/BaseBuildLicence.py:578
 msgid "road_adaptation_modify"
 msgstr "Modification"
 
-#: ../content/licence/BaseBuildLicence.py:559
+#: ../content/licence/BaseBuildLicence.py:580
 msgid "road_adaptation_supress"
 msgstr "Suppression"
 
@@ -2220,7 +2237,7 @@ msgid "templates_summary_title"
 msgstr "Liste des modèles définis dans la configuration"
 
 #. Default: "Tenant(s)"
-#: ../browser/licence/templates/licencemacros.pt:104
+#: ../browser/licence/templates/licencemacros.pt:121
 msgid "tenants"
 msgstr "Locataires"
 
@@ -2630,7 +2647,7 @@ msgstr "Architecte(s)"
 #. Default: "Areparcelsverified"
 #: ../content/licence/GenericLicence.py:979
 msgid "urban_label_areParcelsVerified"
-msgstr "Les parcelles ont été vérifiées?"
+msgstr "Les parcelles ont été vérifiées ?"
 
 #. Default: "Businessdescription"
 #: EnvironmentBase.py
@@ -2876,7 +2893,7 @@ msgid "urban_label_complement"
 msgstr "Compléments"
 
 #. Default: "Composition"
-#: ../content/licence/BaseBuildLicence.py:510
+#: ../content/licence/BaseBuildLicence.py:531
 msgid "urban_label_composition"
 msgstr ""
 
@@ -3011,12 +3028,12 @@ msgid "urban_label_delay"
 msgstr "Délai"
 
 #. Default: "Delayaftermodifiedblueprints"
-#: ../content/licence/BaseBuildLicence.py:467
+#: ../content/licence/BaseBuildLicence.py:488
 msgid "urban_label_delayAfterModifiedBlueprints"
 msgstr "Nouveau délai suite aux plans modificatifs"
 
 #. Default: "Delayaftermodifiedblueprintsdetails"
-#: ../content/licence/BaseBuildLicence.py:480
+#: ../content/licence/BaseBuildLicence.py:501
 msgid "urban_label_delayAfterModifiedBlueprintsDetails"
 msgstr "Détails concernant le nouveau délai suite aux plans modificatifs"
 
@@ -3114,7 +3131,7 @@ msgid "urban_label_editionOutputFormat"
 msgstr "Format de fichier des modèles générés"
 
 #. Default: "Electricity"
-#: ../content/licence/BaseBuildLicence.py:502
+#: ../content/licence/BaseBuildLicence.py:523
 msgid "urban_label_electricity"
 msgstr "Electricité"
 
@@ -3169,7 +3186,7 @@ msgid "urban_label_eventRecipient"
 msgstr "Destinataire du document"
 
 #. Default: "Exemptfdarticle"
-#: ../content/licence/BaseBuildLicence.py:449
+#: ../content/licence/BaseBuildLicence.py:470
 msgid "urban_label_exemptFDArticle"
 msgstr "Article 107"
 
@@ -3389,7 +3406,7 @@ msgid "urban_label_hasEnvironmentImpactStudy"
 msgstr "Étude d'incidences sur l'environnement"
 
 #. Default: "Hasmodifiedblueprints"
-#: ../content/licence/BaseBuildLicence.py:460
+#: ../content/licence/BaseBuildLicence.py:481
 msgid "urban_label_hasModifiedBlueprints"
 msgstr "Plans modificatifs"
 
@@ -3439,6 +3456,7 @@ msgstr "Type de publicité"
 
 #. Default: "Inspectiondescription"
 #: ../content/licence/Inspection.py:82
+#: ../content/licence/Ticket.py:114
 msgid "urban_label_inspectionDescription"
 msgstr "Observations"
 
@@ -3800,7 +3818,7 @@ msgid "urban_label_noApplication"
 msgstr "Non applicable"
 
 #. Default: "Notary(ies)"
-#: ../browser/licence/templates/licencemacros.pt:47
+#: ../browser/licence/templates/licencemacros.pt:64
 #: ../content/licence/CODT_UrbanCertificateTwo.py:73
 #: ../content/licence/Division.py:126
 msgid "urban_label_notaryContact"
@@ -4107,7 +4125,7 @@ msgid "urban_label_prevuDetails"
 msgstr "Détails concernant le Périmètre de Revitalisation Urbaine"
 
 #. Default: "Procedurechoice"
-#: ../content/licence/BaseBuildLicence.py:428
+#: ../content/licence/BaseBuildLicence.py:449
 #: ../content/licence/EnvironmentBase.py:179
 msgid "urban_label_procedureChoice"
 msgstr "Choix de la procédure"
@@ -4208,21 +4226,21 @@ msgstr "Référence"
 #. Default: "Referencedgatlp"
 #: ../content/licence/GenericLicence.py:165
 msgid "urban_label_referenceDGATLP"
-msgstr "Référence FD (DGO4)"
+msgstr "Référence FD (TLPE)"
 
 #: ../content/licence/EnvironmentBase.py:313
 msgid "urban_label_referenceDGO3"
-msgstr "Référence DGO3"
+msgstr "Référence ARNE"
 
 #: ../content/licence/CODT_CommercialLicence.py:95
 msgid "urban_label_referenceDGO6"
-msgstr "Référence DGO6"
+msgstr "Référence SPW Economie, Emploi, Recherche"
 
 #. Default: "Referenceft"
 #: ../content/licence/CODT_UniqueLicence.py:77
 #: ../content/licence/EnvironmentBase.py:81
 msgid "urban_label_referenceFT"
-msgstr "Référence FT (DGO3)"
+msgstr "Référence FT (ARNE)"
 
 #. Default: "Referenceprosecution"
 #: ../content/licence/Ticket.py:36
@@ -4248,7 +4266,7 @@ msgstr "Référence BIC"
 #. Default: "Reference_dgo6"
 #: ../content/licence/CODT_IntegratedLicence.py:60
 msgid "urban_label_reference_dgo6"
-msgstr "Référence DGO6"
+msgstr "Référence SPW Economie, Emploi, Recherche"
 
 msgid "urban_label_reference_regex"
 msgstr "Regex d'identification de la référence"
@@ -4332,6 +4350,12 @@ msgstr "Date de réception du PV"
 msgid "urban_label_reportVisitDate"
 msgstr "Date de la visite"
 
+#. Default: "RepresentativeContacts(s)"
+#: ../browser/licence/templates/licencemacros.pt:47
+#: ../content/licence/BaseBuildLicence.py:436
+msgid "urban_label_representative_contacts"
+msgstr "Architecte(s) ou géomètre(s)"
+
 #. Default: "Representedby"
 #: Contact.py
 msgid "urban_label_representedBy"
@@ -4348,7 +4372,7 @@ msgid "urban_label_requestedOrganisation"
 msgstr "Organisme"
 
 #. Default: "Requirementfromfd"
-#: ../content/licence/BaseBuildLicence.py:439
+#: ../content/licence/BaseBuildLicence.py:460
 msgid "urban_label_requirementFromFD"
 msgstr "Fonctionnaire délégué"
 
@@ -4808,7 +4832,7 @@ msgid "urban_label_warnings"
 msgstr "Avertissements"
 
 #. Default: "Water"
-#: ../content/licence/BaseBuildLicence.py:494
+#: ../content/licence/BaseBuildLicence.py:515
 msgid "urban_label_water"
 msgstr "Eau"
 
@@ -4939,15 +4963,15 @@ msgstr "Certificats d'urbanisme 2"
 msgid "urbantemplates_folder_title"
 msgstr "modèles des procédures d'urbanisme"
 
-#: ../content/licence/BaseBuildLicence.py:571
+#: ../content/licence/BaseBuildLicence.py:592
 msgid "usage_for_habitation"
 msgstr "Modèle I: Bâtiment(s) destiné(s) exclusivement ou principalement à l'habitation"
 
-#: ../content/licence/BaseBuildLicence.py:573
+#: ../content/licence/BaseBuildLicence.py:594
 msgid "usage_not_applicable"
 msgstr "Pas d'application"
 
-#: ../content/licence/BaseBuildLicence.py:572
+#: ../content/licence/BaseBuildLicence.py:593
 msgid "usage_not_for_habitation"
 msgstr "Modèle II: Bâtiment(s) destiné(s) exclusivement ou principalement à un autre usage que l'habitation"
 
@@ -4977,7 +5001,7 @@ msgid "warning_add_an_applicant"
 msgstr "Veuillez renseigner le ou les demandeur(s)"
 
 #. Default: "You must encode plaintiff(s)"
-#: ../browser/licence/templates/licencemacros.pt:167
+#: ../browser/licence/templates/licencemacros.pt:184
 msgid "warning_add_an_plaintiff"
 msgstr "Veuillez renseigner un plaignant "
 

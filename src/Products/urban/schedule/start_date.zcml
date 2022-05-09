@@ -91,6 +91,22 @@
     />
 
     <adapter
+        for="Products.urban.interfaces.IEnvironmentLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IStartDate"
+        factory=".start_date.SPWReceiptDate"
+        name="urban.schedule.start_date.spw_receipt_date"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.IEnvironmentLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IStartDate"
+        factory=".start_date.DecisionProjectFromSPWReceiptDate"
+        name="urban.schedule.start_date.spw_decision_project_receipt_date"
+    />
+
+    <adapter
         for="Products.urban.interfaces.IBaseAllBuildLicence
              imio.schedule.content.task.IAutomatedTask"
         provides="imio.schedule.interfaces.IStartDate"
