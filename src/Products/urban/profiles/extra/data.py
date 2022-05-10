@@ -63,16 +63,6 @@ EventConfigs = {
                         }
                     ]
                 },
-                {
-                    'id': "codt_pu_depot_de_la_demande_corporation.odt",
-                    'title': "depot_demande_corporation",
-                    'context_variables': [
-                        {
-                            'name': 'publipostage',
-                            'value': 'demandeurs'
-                        }
-                    ]
-                },
 
             ),
             'eventType': ('Products.urban.interfaces.IDepositEvent',),
