@@ -5,6 +5,10 @@ from archetypes.referencebrowserwidget.browser.view import ReferenceBrowserPopup
 
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
+from zope.i18n import translate
+from zope.i18nmessageid import MessageFactory
+_ = MessageFactory('plone')
+
 
 contact_popup_template = utils.named_template_adapter(
     ViewPageTemplateFile('templates/contact_popup.pt'))
@@ -13,28 +17,17 @@ contact_popup_template = utils.named_template_adapter(
 class UrbanReferenceBrowserPopup(ReferenceBrowserPopup):
     """
     """
-    def get_creation_url(self):
-        url = '{}/createObject'.format(self.context.absolute_url())
+    def get_creation_url(self, portal_type):
+        if self.context.id == 'urban':
+            url = u'{}/{}s/createObject'.format(self.context.absolute_url(), portal_type.lower())
+        else:
+            url = u'{}/createObject'.format(self.context.absolute_url())
         return url
 
-    def get_type_name_value(self):
-        val = '{}'.format(self.context.immediatelyAddableTypes[0].encode('utf-8'))
-        return val
+    def get_submit_value(self, portal_type):
+        translated_type = translate(_(portal_type), 'plone', context=self.request)
+        return u'Encoder un {}'.format(translated_type)
 
-    def get_submit_value(self):
-        if self.context.id == 'architects':
-            valeur = 'Encoder un nouvel Architecte'
-            return valeur
-        elif self.context.id == 'notaries':
-            valeur = 'Encoder un nouveau Notaire'
-            return valeur
-        elif self.context.id == 'geometricians':
-            valeur = 'Encoder un nouveau Géomètre'
-            return valeur
-        else:
-            valeur = 'Encoder nouveau'
-            return valeur
-
-    def get_submit_class(self):
-        classe = 'context contenttype-{}'.format(self.context.immediatelyAddableTypes[0].encode('utf-8').lower())
+    def get_submit_class(self, portal_type):
+        classe = 'context contenttype-{}'.format(portal_type.lower())
         return classe
