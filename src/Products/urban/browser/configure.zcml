@@ -454,7 +454,7 @@
   <browser:page
       name="refbrowser_popup"
       permission="zope2.Public"
-      for="Products.urban.interfaces.IContactFolder"
+      for="Products.ATContentTypes.interfaces.folder.IATBTreeFolder"
       class=".referencebrowser_popup.UrbanReferenceBrowserPopup"
   />
 
