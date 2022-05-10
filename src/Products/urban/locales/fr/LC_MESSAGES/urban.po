@@ -1155,7 +1155,7 @@ msgid "country_folder_title"
 msgstr "Pays des personnes"
 
 #. Default: "Couple"
-#: ../browser/templates/contactmacros.pt:201
+#: ../browser/templates/contactmacros.pt:199
 msgid "couple_persons_fieldset_legend"
 msgstr "Couple"
 
