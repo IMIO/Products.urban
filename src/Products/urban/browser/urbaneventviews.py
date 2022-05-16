@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from collective.noindexing import patches
+
 from Acquisition import aq_inner
 from DateTime import DateTime
 from Products.urban import utils
@@ -200,52 +202,17 @@ class ImportClaimantListingForm(form.Form):
     @button.buttonAndHandler(_('Import'), name='import')
     def handleImport(self, action):
         inquiry_UID = self.context.UID()
-        planned_claimants_import = api.portal.get_registry_record(
-            'Products.urban.interfaces.IAsyncClaimantsImports.claimants_to_import'
-        ) or []
         data, errors = self.extractData()
-        if errors:
-            interfaces.IAnnotations(self.context)['urban.claimants_to_import'] = ''
-            if inquiry_UID in planned_claimants_import:
-                planned_claimants_import.remove(inquiry_UID)
-        else:
+        if not errors:
             csv_file = data['listing_file']
-            interfaces.IAnnotations(self.context)['urban.claimants_to_import'] = csv_file.data
-            if csv_file and inquiry_UID not in planned_claimants_import:
-                planned_claimants_import.append(inquiry_UID)
-        api.portal.set_registry_record(
-            'Products.urban.interfaces.IAsyncClaimantsImports.claimants_to_import',
-            planned_claimants_import
-        )
+            self.import_claimants_from_csv(csv_file)
         return not bool(errors)
 
-
-class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
-    """
-    This manage the base view of UrbanEventInquiry
-    """
-
-    def __init__(self, context, request):
-        super(BrowserView, self).__init__(context, request)
-        self.context = context
-        self.request = request
-        self.request.set('disable_plone.rightcolumn', 1)
-        self.request.set('disable_plone.leftcolumn', 1)
-        self.import_claimants_listing_form = ImportClaimantListingForm(context, request)
-        self.import_claimants_listing_form.update()
-
-    @property
-    def has_planned_claimant_import(self):
-        planned_claimants_import = api.portal.get_registry_record(
-            'Products.urban.interfaces.IAsyncClaimantsImports.claimants_to_import'
-        ) or []
-        is_planned = self.context.UID() in planned_claimants_import
-        return is_planned
-
-    def import_claimants_from_csv(self):
+    def import_claimants_from_csv(self, claimants_file):
         portal_urban = api.portal.get_tool('portal_urban')
         site = api.portal.get()
         fieldnames = [
+            'numerotation',
             'personTitle',
             'name1',
             'name2',
@@ -282,14 +249,16 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
             'Orale': 'oralClaim',
         }
 
-        claimants_file = interfaces.IAnnotations(self.context)['urban.claimants_to_import']
         if claimants_file:
             reader = csv.DictReader(
-                StringIO(claimants_file), fieldnames, delimiter=',', quotechar='"'
+                StringIO(claimants_file.data), fieldnames, delimiter=',', quotechar='"'
             )
         else:
             reader = []
         claimant_args = [row for row in reader if row['name1'] or row['name2'] or row['society']][1:]
+        claimants = []
+        # disable indexing
+        patches.apply()
         for claimant_arg in claimant_args:
             claimant_arg.pop(None, None)
             # default values
@@ -302,25 +271,49 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
             claimant_arg['personTitle'] = titles_mapping[claimant_arg['personTitle']]
             claimant_arg['country'] = country_mapping[claimant_arg['country']]
             claimant_arg['id'] = site.plone_utils.normalizeString(
-                claimant_arg['name1'] + claimant_arg['name2'] + claimant_arg['society']
+                claimant_arg['name1'] + claimant_arg['name2'] + claimant_arg['society'] + claimant_arg['number']
             )
             claimant_arg['claimType'] = claim_type_mapping[claimant_arg['claimType']]
             count = 0
             if claimant_arg['id'] in self.context.objectIds():
-                count += 1
-                new_id = claimant_arg['id'] + '-' + str(count)
-                while new_id in self.context.objectIds():
-                    count += 1
-                    new_id = claimant_arg['id'] + '-' + str(count)
-                claimant_arg['id'] = new_id
+                return
             # create claimant
             with api.env.adopt_roles(['Manager']):
-                self.context.invokeFactory('Claimant', **claimant_arg)
+                claimant_id = self.context.invokeFactory('Claimant', **claimant_arg)
+                claimants.append(getattr(self.context, claimant_id))
             print 'imported claimant {id}, {name} {surname}'.format(
                 id=claimant_arg['id'],
                 name=claimant_arg['name1'],
                 surname=claimant_arg['name2'],
             )
+        # restore indexing
+        patches.unapply()
+        for claimant in claimants:
+            claimant.reindexObject()
+        self.context.reindexObject()
+
+
+class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
+    """
+    This manage the base view of UrbanEventInquiry
+    """
+
+    def __init__(self, context, request):
+        super(BrowserView, self).__init__(context, request)
+        self.context = context
+        self.request = request
+        self.request.set('disable_plone.rightcolumn', 1)
+        self.request.set('disable_plone.leftcolumn', 1)
+        self.import_claimants_listing_form = ImportClaimantListingForm(context, request)
+        self.import_claimants_listing_form.update()
+
+    @property
+    def has_planned_claimant_import(self):
+        planned_claimants_import = api.portal.get_registry_record(
+            'Products.urban.interfaces.IAsyncClaimantsImports.claimants_to_import'
+        ) or []
+        is_planned = self.context.UID() in planned_claimants_import
+        return is_planned
 
     def getParcels(self):
         context = aq_inner(self.context)
