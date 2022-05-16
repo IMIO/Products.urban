@@ -60,4 +60,12 @@
   USE THIS TO UPDATE ALL TEMPLATES
  </import-step>
 
+ <import-step
+    id="urban-importCustomOpinionEventConfigs"
+    handler="Products.urban.exportimport.addCustomOpinionEventConfigs"
+    title="Add custom opinion event configs"
+    version="2008-10-15T15:00:00.00000">
+  USE THIS TO ADD CUSTOM OPINION EVENT CONFIGS
+ </import-step>
+
 </import-steps>
