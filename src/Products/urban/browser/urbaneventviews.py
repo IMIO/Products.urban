@@ -246,6 +246,7 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
         portal_urban = api.portal.get_tool('portal_urban')
         site = api.portal.get()
         fieldnames = [
+            'numerotation',
             'personTitle',
             'name1',
             'name2',
