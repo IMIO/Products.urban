@@ -233,6 +233,8 @@ def addEventConfigs(context):
     from Products.urban.config import NIS
     if context.readDataFile('urban_extra_marker.txt') is None:
         return
+
+    site = context.getSite()
     opinions_cfg = getattr(site, 'opinions_config', None)
     if opinions_cfg:
         return
@@ -248,8 +250,6 @@ def addEventConfigs(context):
     attribute = 'REFNIS_2019'
     module = __import__(module_name, fromlist=[attribute])
     refNIS_2019 = getattr(module, attribute)
-
-    site = context.getSite()
 
     log = []
     gslogger = context.getLogger('addEventConfigs')
