@@ -2112,15 +2112,15 @@ msgstr "Dossier introduit par ${notary}"
 msgid "rgbsr_folder_title"
 msgstr "Réglement général sur les bâtisses en site rural"
 
-#: ../content/licence/BaseBuildLicence.py:579
+#: ../content/licence/BaseBuildLicence.py:580
 msgid "road_adaptation_create"
 msgstr "Ouverture (création)"
 
-#: ../content/licence/BaseBuildLicence.py:578
+#: ../content/licence/BaseBuildLicence.py:579
 msgid "road_adaptation_modify"
 msgstr "Modification"
 
-#: ../content/licence/BaseBuildLicence.py:580
+#: ../content/licence/BaseBuildLicence.py:581
 msgid "road_adaptation_supress"
 msgstr "Suppression"
 
@@ -2534,7 +2534,7 @@ msgid "urban_label_additionalHabitationsGiven"
 msgstr "Nombre de logements octroyés"
 
 #. Default: "Additionallegalconditions"
-#: ../content/licence/CODT_UniqueLicence.py:161
+#: ../content/licence/CODT_UniqueLicence.py:170
 #: ../content/licence/EnvironmentBase.py:133
 #: ../content/licence/UniqueLicence.py:133
 msgid "urban_label_additionalLegalConditions"
@@ -2675,8 +2675,8 @@ msgid "urban_label_auditionDate"
 msgstr "Date de la séance d'audition"
 
 #. Default: "Authority"
-#: ../content/licence/CODT_UniqueLicence.py:85
-#: ../content/licence/EnvironmentLicence.py:56
+#: ../content/licence/CODT_UniqueLicence.py:94
+#: ../content/licence/EnvironmentLicence.py:65
 #: ../content/licence/UniqueLicence.py:68
 msgid "urban_label_authority"
 msgstr "Autorité compétente"
@@ -2737,8 +2737,9 @@ msgid "urban_label_bound_licence"
 msgstr "Dossier lié"
 
 #. Default: "Bound licences"
+#: ../content/licence/CODT_UniqueLicence.py:266
+#: ../content/licence/EnvironmentLicence.py:183
 #: ../content/licence/Inspection.py:41
-#: ../content/licence/Ticket.py:84
 msgid "urban_label_bound_licences"
 msgstr "Dossiers liés"
 
@@ -2824,8 +2825,8 @@ msgid "urban_label_claimsDate"
 msgstr "Date de début de la séance de réclamations"
 
 #. Default: "Claimssynthesis"
-#: ../content/licence/CODT_UniqueLicence.py:184
-#: ../content/licence/EnvironmentLicence.py:113
+#: ../content/licence/CODT_UniqueLicence.py:193
+#: ../content/licence/EnvironmentLicence.py:122
 #: ../content/licence/UniqueLicence.py:156
 msgid "urban_label_claimsSynthesis"
 msgstr "Synthèse des réclamations"
@@ -2871,8 +2872,8 @@ msgid "urban_label_comments"
 msgstr "Commentaires"
 
 #. Default: "Commentsonspwopinion"
-#: ../content/licence/CODT_UniqueLicence.py:207
-#: ../content/licence/EnvironmentLicence.py:136
+#: ../content/licence/CODT_UniqueLicence.py:216
+#: ../content/licence/EnvironmentLicence.py:145
 #: ../content/licence/UniqueLicence.py:179
 msgid "urban_label_commentsOnSPWOpinion"
 msgstr "Commentaires sur la décision du SPW"
@@ -2888,12 +2889,12 @@ msgstr "Commentaires sur le projet de décision"
 msgid "urban_label_communal_inventory"
 msgstr "Inventaire communal"
 
-#: ../content/licence/EnvironmentLicence.py:168
+#: ../content/licence/EnvironmentLicence.py:228
 msgid "urban_label_complement"
 msgstr "Compléments"
 
 #. Default: "Composition"
-#: ../content/licence/BaseBuildLicence.py:531
+#: ../content/licence/BaseBuildLicence.py:532
 msgid "urban_label_composition"
 msgstr ""
 
@@ -2918,8 +2919,8 @@ msgid "urban_label_concertationDate"
 msgstr "Date de réunion de concertation"
 
 #. Default: "Conclusions"
-#: ../content/licence/CODT_UniqueLicence.py:219
-#: ../content/licence/EnvironmentLicence.py:148
+#: ../content/licence/CODT_UniqueLicence.py:228
+#: ../content/licence/EnvironmentLicence.py:157
 #: ../content/licence/UniqueLicence.py:191
 msgid "urban_label_conclusions"
 msgstr "Conclusions"
@@ -3028,12 +3029,12 @@ msgid "urban_label_delay"
 msgstr "Délai"
 
 #. Default: "Delayaftermodifiedblueprints"
-#: ../content/licence/BaseBuildLicence.py:488
+#: ../content/licence/BaseBuildLicence.py:489
 msgid "urban_label_delayAfterModifiedBlueprints"
 msgstr "Nouveau délai suite aux plans modificatifs"
 
 #. Default: "Delayaftermodifiedblueprintsdetails"
-#: ../content/licence/BaseBuildLicence.py:501
+#: ../content/licence/BaseBuildLicence.py:502
 msgid "urban_label_delayAfterModifiedBlueprintsDetails"
 msgstr "Détails concernant le nouveau délai suite aux plans modificatifs"
 
@@ -3131,7 +3132,7 @@ msgid "urban_label_editionOutputFormat"
 msgstr "Format de fichier des modèles générés"
 
 #. Default: "Electricity"
-#: ../content/licence/BaseBuildLicence.py:523
+#: ../content/licence/BaseBuildLicence.py:524
 msgid "urban_label_electricity"
 msgstr "Electricité"
 
@@ -3156,14 +3157,14 @@ msgid "urban_label_enoughRoadEquipmentDetails"
 msgstr "Détails concernant l'équipement suffisant de la voirie"
 
 #. Default: "Environmenttechnicaladviceafterinquiry"
-#: ../content/licence/CODT_UniqueLicence.py:195
-#: ../content/licence/EnvironmentLicence.py:124
+#: ../content/licence/CODT_UniqueLicence.py:204
+#: ../content/licence/EnvironmentLicence.py:133
 #: ../content/licence/UniqueLicence.py:167
 msgid "urban_label_environmentTechnicalAdviceAfterInquiry"
 msgstr "Avis technique après enquête (environnement)"
 
 #. Default: "Environmenttechnicalremarks"
-#: ../content/licence/CODT_UniqueLicence.py:230
+#: ../content/licence/CODT_UniqueLicence.py:239
 #: ../content/licence/EnvironmentBase.py:281
 #: ../content/licence/UniqueLicence.py:202
 msgid "urban_label_environmentTechnicalRemarks"
@@ -3186,7 +3187,7 @@ msgid "urban_label_eventRecipient"
 msgstr "Destinataire du document"
 
 #. Default: "Exemptfdarticle"
-#: ../content/licence/BaseBuildLicence.py:470
+#: ../content/licence/BaseBuildLicence.py:471
 msgid "urban_label_exemptFDArticle"
 msgstr "Article 107"
 
@@ -3295,7 +3296,7 @@ msgid "urban_label_folderReference"
 msgstr "Numéro de dossier"
 
 #. Default: "Foldertendency"
-#: ../content/licence/CODT_UniqueLicence.py:95
+#: ../content/licence/CODT_UniqueLicence.py:104
 msgid "urban_label_folderTendency"
 msgstr "Tendance du dossier"
 
@@ -3325,8 +3326,8 @@ msgid "urban_label_form_composition"
 msgstr "Composition (formulaire(s) de demande)"
 
 #. Default: "Ftsolicitopinionsto"
-#: ../content/licence/CODT_UniqueLicence.py:106
-#: ../content/licence/EnvironmentLicence.py:102
+#: ../content/licence/CODT_UniqueLicence.py:115
+#: ../content/licence/EnvironmentLicence.py:111
 #: ../content/licence/UniqueLicence.py:78
 msgid "urban_label_ftSolicitOpinionsTo"
 msgstr "Instances sollicitées par le FT"
@@ -3401,12 +3402,12 @@ msgid "urban_label_hasAdditionalConditions"
 msgstr "Des conditions complémentaires sont requises"
 
 #. Default: "Hasenvironmentimpactstudy"
-#: ../content/licence/EnvironmentLicence.py:86
+#: ../content/licence/EnvironmentLicence.py:95
 msgid "urban_label_hasEnvironmentImpactStudy"
 msgstr "Étude d'incidences sur l'environnement"
 
 #. Default: "Hasmodifiedblueprints"
-#: ../content/licence/BaseBuildLicence.py:481
+#: ../content/licence/BaseBuildLicence.py:482
 msgid "urban_label_hasModifiedBlueprints"
 msgstr "Plans modificatifs"
 
@@ -3552,7 +3553,7 @@ msgid "urban_label_isSameAddressAsWorks"
 msgstr "Adresse identique à l'adresse du bien?"
 
 #. Default: "Isseveso"
-#: ../content/licence/EnvironmentLicence.py:94
+#: ../content/licence/EnvironmentLicence.py:103
 msgid "urban_label_isSeveso"
 msgstr "Établissement SEVESO"
 
@@ -3572,6 +3573,12 @@ msgstr "Le bien se situe dans un SOL"
 #: ../OpinionRequestEventType.py:95
 msgid "urban_label_is_internal_service"
 msgstr "Réponse via service interne à la ville"
+
+#. Default: "IsArticle65"
+#: ../content/licence/CODT_UniqueLicence.py:252
+#: ../content/licence/EnvironmentLicence.py:169
+msgid "urban_label_isarticle65"
+msgstr "Article 65"
 
 #. Default: "Karstconstraints"
 #: ../content/licence/GenericLicence.py:395
@@ -3696,7 +3703,7 @@ msgid "urban_label_locationTechnicalAdvice"
 msgstr "Avis technique urbanisme"
 
 #. Default: "Environmenttechnicaladviceafterinquiry"
-#: ../content/licence/CODT_UniqueLicence.py:172
+#: ../content/licence/CODT_UniqueLicence.py:181
 #: ../content/licence/UniqueLicence.py:144
 msgid "urban_label_locationTechnicalAdviceAfterInquiry"
 msgstr "Avis technique après enquête (urbanisme)"
@@ -3747,7 +3754,7 @@ msgid "urban_label_mayNeedLocationLicence"
 msgstr "Possibilité de permis de location"
 
 #. Default: "Minimumlegalconditions"
-#: ../content/licence/CODT_UniqueLicence.py:145
+#: ../content/licence/CODT_UniqueLicence.py:154
 #: ../content/licence/EnvironmentBase.py:117
 #: ../content/licence/UniqueLicence.py:117
 msgid "urban_label_minimumLegalConditions"
@@ -4115,7 +4122,7 @@ msgid "urban_label_prenuDetails"
 msgstr "Détails concernant le Périmètre de Rénovation Urbaine"
 
 #. Default: "Previouslicences"
-#: ../content/licence/EnvironmentLicence.py:65
+#: ../content/licence/EnvironmentLicence.py:74
 msgid "urban_label_previousLicences"
 msgstr "Permissions, enregistrements et déclarations existantes"
 
@@ -4125,7 +4132,7 @@ msgid "urban_label_prevuDetails"
 msgstr "Détails concernant le Périmètre de Revitalisation Urbaine"
 
 #. Default: "Procedurechoice"
-#: ../content/licence/BaseBuildLicence.py:449
+#: ../content/licence/BaseBuildLicence.py:450
 #: ../content/licence/EnvironmentBase.py:179
 msgid "urban_label_procedureChoice"
 msgstr "Choix de la procédure"
@@ -4168,7 +4175,7 @@ msgid "urban_label_protection_zone"
 msgstr "Zone de protection"
 
 #. Default: "Publicroadmodifications"
-#: ../content/licence/EnvironmentLicence.py:77
+#: ../content/licence/EnvironmentLicence.py:86
 msgid "urban_label_publicRoadModifications"
 msgstr "Modifications souhaitées au tracé et à l'équipement des voiries publiques"
 
@@ -4237,7 +4244,7 @@ msgid "urban_label_referenceDGO6"
 msgstr "Référence SPW Economie, Emploi, Recherche"
 
 #. Default: "Referenceft"
-#: ../content/licence/CODT_UniqueLicence.py:77
+#: ../content/licence/CODT_UniqueLicence.py:86
 #: ../content/licence/EnvironmentBase.py:81
 msgid "urban_label_referenceFT"
 msgstr "Référence FT (ARNE)"
@@ -4248,7 +4255,7 @@ msgid "urban_label_referenceProsecution"
 msgstr "Référence Parquet"
 
 #. Default: "Referencespe"
-#: ../content/licence/CODT_UniqueLicence.py:68
+#: ../content/licence/CODT_UniqueLicence.py:77
 #: ../content/licence/UniqueLicence.py:59
 msgid "urban_label_referenceSPE"
 msgstr "Référence SPE"
@@ -4372,7 +4379,7 @@ msgid "urban_label_requestedOrganisation"
 msgstr "Organisme"
 
 #. Default: "Requirementfromfd"
-#: ../content/licence/BaseBuildLicence.py:460
+#: ../content/licence/BaseBuildLicence.py:461
 msgid "urban_label_requirementFromFD"
 msgstr "Fonctionnaire délégué"
 
@@ -4458,14 +4465,14 @@ msgid "urban_label_roadType"
 msgstr "Type de voirie"
 
 #. Default: "Rubrics"
-#: ../content/licence/CODT_UniqueLicence.py:124
+#: ../content/licence/CODT_UniqueLicence.py:133
 #: ../content/licence/EnvironmentBase.py:96
 #: ../content/licence/UniqueLicence.py:96
 msgid "urban_label_rubrics"
 msgstr "Rubrique(s)"
 
 #. Default: "Rubricsdetails"
-#: ../content/licence/CODT_UniqueLicence.py:134
+#: ../content/licence/CODT_UniqueLicence.py:143
 #: ../content/licence/EnvironmentBase.py:106
 #: ../content/licence/UniqueLicence.py:106
 msgid "urban_label_rubricsDetails"
@@ -4832,7 +4839,7 @@ msgid "urban_label_warnings"
 msgstr "Avertissements"
 
 #. Default: "Water"
-#: ../content/licence/BaseBuildLicence.py:515
+#: ../content/licence/BaseBuildLicence.py:516
 msgid "urban_label_water"
 msgstr "Eau"
 
@@ -4963,15 +4970,15 @@ msgstr "Certificats d'urbanisme 2"
 msgid "urbantemplates_folder_title"
 msgstr "modèles des procédures d'urbanisme"
 
-#: ../content/licence/BaseBuildLicence.py:592
+#: ../content/licence/BaseBuildLicence.py:593
 msgid "usage_for_habitation"
 msgstr "Modèle I: Bâtiment(s) destiné(s) exclusivement ou principalement à l'habitation"
 
-#: ../content/licence/BaseBuildLicence.py:594
+#: ../content/licence/BaseBuildLicence.py:595
 msgid "usage_not_applicable"
 msgstr "Pas d'application"
 
-#: ../content/licence/BaseBuildLicence.py:593
+#: ../content/licence/BaseBuildLicence.py:594
 msgid "usage_not_for_habitation"
 msgstr "Modèle II: Bâtiment(s) destiné(s) exclusivement ou principalement à un autre usage que l'habitation"
 
