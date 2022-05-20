@@ -32,6 +32,7 @@ from Products.urban.utils import setSchemataForCODT_UniqueLicenceInquiry
 from Products.urban.widget.historizereferencewidget import HistorizeReferenceBrowserWidget
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.urban.widget.urbanreferencewidget import UrbanBackReferenceWidget
+from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 
 from Products.urban.config import *
 from Products.urban import UrbanMessage as _
@@ -55,6 +56,14 @@ slave_fields_ = (
         'action': 'value',
         'vocab_method': 'getProrogationDelays',
         'control_param': 'values',
+    },
+)
+
+slave_fields_article65 = (
+    {
+        'name': 'bound_licences',
+        'action': 'show',
+        'hide_values': (True, ),
     },
 )
 ##/code-section module-header
@@ -235,6 +244,58 @@ schema = Schema((
         schemata='urban_environment',
         default_output_type='text/html',
     ),
+    BooleanField(
+        name='isArticle65',
+        default=False,
+        widget=MasterBooleanWidget(
+            slave_fields=slave_fields_article65,
+            label=_('urban_label_isarticle65', default='IsArticle65'),
+        ),
+        schemata='urban_description',
+    ),
+    ReferenceField(
+        name='bound_licences',
+        widget=ReferenceBrowserWidget(
+            allow_search=True,
+            allow_browse=False,
+            force_close_on_insert=True,
+            startup_directory='urban',
+            show_indexes=False,
+            wild_card_search=True,
+            restrict_browsing_to_startup_directory=True,
+            label=_('urban_label_bound_licences', default='Bound licences'),
+        ),
+        allowed_types=[
+            t for t in URBAN_TYPES
+            if t not in [
+                'Inspection',
+                'ProjectMeeting',
+                'PatrimonyCertificate',
+                'CODT_NotaryLetter',
+                'CODT_UrbanCertificateOne'
+                'NotaryLetter',
+                'UrbanCertificateOne',
+                'BuildLicence',
+                'CODT_BuildLicence',
+                'Article127',
+                'CODT_Article127',
+                'CODT_CommercialLicence',
+                'IntegratedLicence',
+                'CODT_IntegratedLicence',
+                'UrbanCertificateTwo',
+                'CODT_UrbanCertificateTwo',
+                'PreliminaryNotice',
+                'PatrimonyCertificate',
+                'Ticket',
+                'ParcelOutLicence',
+                'CODT_ParcelOutLicence',
+            ]
+        ],
+        schemata='urban_description',
+        multiValued=True,
+        relationship="bound_licences",
+    ),
+
 ),
 )
 
@@ -382,7 +443,9 @@ def finalizeSchema(schema):
     schema.moveField('referenceFT', after='referenceDGATLP')
     schema.moveField('authority', before='folderCategory')
     schema.moveField('folderTendency', after='folderCategory')
-    schema.moveField('rubrics', after='folderTendency')
+    schema.moveField('isArticle65', after='folderTendency')
+    schema.moveField('bound_licences', after='isArticle65')
+    schema.moveField('rubrics', after='bound_licences')
     schema.moveField('rubricsDetails', after='rubrics')
     schema.moveField('minimumLegalConditions', after='rubricsDetails')
     schema.moveField('additionalLegalConditions', after='minimumLegalConditions')
