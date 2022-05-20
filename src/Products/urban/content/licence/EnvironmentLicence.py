@@ -34,6 +34,7 @@ from Products.urban.utils import setOptionalAttributes
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 
 from archetypes.referencebrowserwidget.widget import ReferenceBrowserWidget
+from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 
 from collective.datagridcolumns.ReferenceColumn import ReferenceColumn
 from collective.datagridcolumns.TextAreaColumn import TextAreaColumn
@@ -45,6 +46,14 @@ optional_fields = [
     'referenceSPE', 'referenceFT', 'claimsSynthesis',
     'conclusions', 'commentsOnSPWOpinion',
 ]
+
+slave_fields_article65 = (
+    {
+        'name': 'bound_licences',
+        'action': 'show',
+        'hide_values': (True, ),
+    },
+)
 ##/code-section module-header
 
 schema = Schema((
@@ -151,6 +160,57 @@ schema = Schema((
         default_method='getDefaultText',
         schemata='urban_environment',
         default_output_type='text/html',
+    ),
+    BooleanField(
+        name='isArticle65',
+        default=False,
+        widget=MasterBooleanWidget(
+            slave_fields=slave_fields_article65,
+            label=_('urban_label_isarticle65', default='IsArticle65'),
+        ),
+        schemata='urban_description',
+    ),
+    ReferenceField(
+        name='bound_licences',
+        widget=ReferenceBrowserWidget(
+            allow_search=True,
+            allow_browse=False,
+            force_close_on_insert=True,
+            startup_directory='urban',
+            show_indexes=False,
+            wild_card_search=True,
+            restrict_browsing_to_startup_directory=True,
+            label=_('urban_label_bound_licences', default='Bound licences'),
+        ),
+        allowed_types=[
+            t for t in URBAN_TYPES
+            if t not in [
+                'Inspection',
+                'ProjectMeeting',
+                'PatrimonyCertificate',
+                'CODT_NotaryLetter',
+                'CODT_UrbanCertificateOne'
+                'NotaryLetter',
+                'UrbanCertificateOne',
+                'BuildLicence',
+                'CODT_BuildLicence',
+                'Article127',
+                'CODT_Article127',
+                'CODT_CommercialLicence',
+                'IntegratedLicence',
+                'CODT_IntegratedLicence',
+                'UrbanCertificateTwo',
+                'CODT_UrbanCertificateTwo',
+                'PreliminaryNotice',
+                'PatrimonyCertificate',
+                'Ticket',
+                'ParcelOutLicence',
+                'CODT_ParcelOutLicence',
+            ]
+        ],
+        schemata='urban_description',
+        multiValued=True,
+        relationship="bound_licences",
     ),
 
 ),
@@ -310,6 +370,9 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     schema.moveField('natura2000Details', after='natura2000location')
     schema.moveField('description', after='validityDelay')
     schema.moveField('environmentTechnicalRemarks', after='conclusions')
+    schema.moveField('isArticle65', after='rubrics')
+    schema.moveField('bound_licences', after='isArticle65')
+
 
 finalizeSchema(EnvironmentLicence_schema)
 ##/code-section module-footer
