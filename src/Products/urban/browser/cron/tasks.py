@@ -65,5 +65,8 @@ class UpdateOpenTasksLicences(BrowserView):
         )
         licences = list(set([t.getObject().get_container() for t in open_tasks_brains]))
         for licence in licences:
-            notify(ObjectModifiedEvent(licence))
+            try:
+                notify(ObjectModifiedEvent(licence))
+            except:
+                continue
             licence.reindexObject()
