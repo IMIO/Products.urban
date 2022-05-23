@@ -97,6 +97,8 @@ Couple_schema = BaseSchema.copy() + \
 Couple_schema.delField('name1')
 Couple_schema.delField('name2')
 Couple_schema.delField('nationalRegister')
+Couple_schema.delField('representedBySociety')
+Couple_schema.delField('society')
 ##/code-section after-schema
 
 
@@ -123,10 +125,7 @@ class Couple(BaseContent, Applicant, BrowserDefaultMixin):
         """
            Generate the title...
         """
-        if self.getRepresentedBySociety():
-            return "%s %s-%s %s et %s repr. par %s" % (self.getPersonTitle(short=True), self.getCouplePerson1Name(), self.getCouplePerson2Name(), self.getCouplePerson1Firstname(), self.getCouplePerson2Firstname(), self.getSociety())
-        else:
-            return "%s %s-%s %s et %s" % (self.getPersonTitle(short=True), self.getCouplePerson1Name(), self.getCouplePerson2Name(), self.getCouplePerson1Firstname(), self.getCouplePerson2Firstname())
+        return "%s %s-%s %s et %s" % (self.getPersonTitle(short=True), self.getCouplePerson1Name(), self.getCouplePerson2Name(), self.getCouplePerson1Firstname(), self.getCouplePerson2Firstname())
 
     def _getNameSignaletic(self, short, linebyline, reverse=False, invertnames=False):
         title = self.getPersonTitleValue(short, False, reverse).decode('utf8')
@@ -141,12 +140,12 @@ class Couple(BaseContent, Applicant, BrowserDefaultMixin):
         if invertnames:
             names = u'%s et %s %s-%s' % (firstNamePerson1, firstNamePerson2, lastNamePerson1, lastNamePerson2)
         names = names.strip()
-        namepart = namedefined and names or self.getSociety()
+        if namedefined: namepart = names
         nameSignaletic = u'%s %s' % (title, namepart)
         nameSignaletic = nameSignaletic.strip()
-        if len(self.getRepresentedBy()) > 0 or self.getRepresentedBySociety():
+        if len(self.getRepresentedBy()) > 0:
             person_title = self.getPersonTitle(theObject=True)
-            representatives = self.getRepresentedBySociety() and self.getSociety() or self.displayValue(self.Vocabulary('representedBy')[0], self.getRepresentedBy())
+            representatives = self.displayValue(self.Vocabulary('representedBy')[0], self.getRepresentedBy())
             gender = multiplicity = ''
             represented = u'représenté'
             if person_title:
@@ -206,7 +205,7 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     """
     Finalizes the type schema to alter some fields
     """
-    schema.moveField('couplePerson1Name', after='representedBySociety')
+    schema.moveField('couplePerson1Name', after='personTitle')
     schema.moveField('couplePerson1Firstname', after='couplePerson1Name')
     schema.moveField('couplePerson2Name', after='couplePerson1Firstname')
     schema.moveField('couplePerson2Firstname', after='couplePerson2Name')
