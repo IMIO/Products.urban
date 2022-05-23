@@ -41,6 +41,7 @@ class ParcelRecordsView(BrowserView):
                 title = (short and brain.getReference) or (len(brain.Title) < 40 and brain.Title or '{}...'.format(brain.Title[:40]))
                 item_infos = {
                     'title': title,
+                    'description': brain.Description,
                     'url': brain.getURL(),
                     'class': 'state-{} contenttype-{}'.format(brain.review_state, brain.portal_type.lower())
                 }
