@@ -157,14 +157,6 @@
             <input type="hidden" name="type_name" value="#" tal:attributes="value ctype/id" />
             <input type="submit" class="context apButton contenttype-applicant" id="add-applicant" value="add_a_physical_applicant" i18n:attributes="value" />
         </form>
-        <form tal:define="ctype python: context.portal_types.getTypeInfo('Corporation');
-                         member context/@@plone_portal_state/member;"
-              tal:condition="python: member.has_permission('urban: Add Corporation', context)"
-              tal:attributes="action python: context.absolute_url() + '/createObject'"
-              i18n:domain="urban" name="quickAdd"  action="createObject" method="post" style="float: left">
-            <input type="hidden" name="type_name" value="#" tal:attributes="value ctype/id" />
-            <input type="submit" class="context apButton contenttype-applicant" id="add-corporation" value="add_a_corporation" i18n:attributes="value" />
-        </form>
         <form tal:define="ctype python: context.portal_types.getTypeInfo('Couple');
                          member context/@@plone_portal_state/member;"
               tal:condition="python: member.has_permission('urban: Add Couple', context)"
@@ -172,6 +164,14 @@
               i18n:domain="urban" name="quickAdd"  action="createObject" method="post" style="float: left">
             <input type="hidden" name="type_name" value="#" tal:attributes="value ctype/id" />
             <input type="submit" class="context apButton contenttype-applicant" id="add-couple" value="add_a_couple" i18n:attributes="value" />
+        </form>
+        <form tal:define="ctype python: context.portal_types.getTypeInfo('Corporation');
+                         member context/@@plone_portal_state/member;"
+              tal:condition="python: member.has_permission('urban: Add Corporation', context)"
+              tal:attributes="action python: context.absolute_url() + '/createObject'"
+              i18n:domain="urban" name="quickAdd"  action="createObject" method="post" style="float: left">
+            <input type="hidden" name="type_name" value="#" tal:attributes="value ctype/id" />
+            <input type="submit" class="context apButton contenttype-applicant" id="add-corporation" value="add_a_corporation" i18n:attributes="value" />
         </form>
     </div>
 </fieldset>
