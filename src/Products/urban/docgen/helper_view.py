@@ -638,7 +638,7 @@ class UrbanDocGenerationLicenceHelperView(UrbanDocGenerationHelperView):
             ['UrbanCertificateTwo', 'CODT_UrbanCertificateTwo'],
         )
 
-    def get_specific_features_text(self):
+    def get_specific_features_text(self, only_selected=False):
         """
         # Particularité(s) du bien
         """
@@ -651,7 +651,7 @@ class UrbanDocGenerationLicenceHelperView(UrbanDocGenerationHelperView):
                 if specificFeature['text']:
                     specific_feature_text = tool.renderText(text=specificFeature['text'], context=context)
                     specific_features_text.append(specific_feature_text)
-            else:
+            elif not only_selected:
                 if specificFeature['defaultText']:
                     specific_feature_text = tool.renderText(text=specificFeature['defaultText'], context=context)
                     specific_features_text.append(specific_feature_text)
