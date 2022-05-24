@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2022-05-05 13:42+0000\n"
+"POT-Creation-Date: 2022-05-24 12:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2085,15 +2085,15 @@ msgstr ""
 msgid "rgbsr_folder_title"
 msgstr ""
 
-#: ../content/licence/BaseBuildLicence.py:579
+#: ../content/licence/BaseBuildLicence.py:580
 msgid "road_adaptation_create"
 msgstr ""
 
-#: ../content/licence/BaseBuildLicence.py:578
+#: ../content/licence/BaseBuildLicence.py:579
 msgid "road_adaptation_modify"
 msgstr ""
 
-#: ../content/licence/BaseBuildLicence.py:580
+#: ../content/licence/BaseBuildLicence.py:581
 msgid "road_adaptation_supress"
 msgstr ""
 
@@ -2864,7 +2864,7 @@ msgid "urban_label_complement"
 msgstr ""
 
 #. Default: "Composition"
-#: ../content/licence/BaseBuildLicence.py:531
+#: ../content/licence/BaseBuildLicence.py:532
 msgid "urban_label_composition"
 msgstr ""
 
@@ -2999,12 +2999,12 @@ msgid "urban_label_delay"
 msgstr ""
 
 #. Default: "Delayaftermodifiedblueprints"
-#: ../content/licence/BaseBuildLicence.py:488
+#: ../content/licence/BaseBuildLicence.py:489
 msgid "urban_label_delayAfterModifiedBlueprints"
 msgstr ""
 
 #. Default: "Delayaftermodifiedblueprintsdetails"
-#: ../content/licence/BaseBuildLicence.py:501
+#: ../content/licence/BaseBuildLicence.py:502
 msgid "urban_label_delayAfterModifiedBlueprintsDetails"
 msgstr ""
 
@@ -3102,7 +3102,7 @@ msgid "urban_label_editionOutputFormat"
 msgstr ""
 
 #. Default: "Electricity"
-#: ../content/licence/BaseBuildLicence.py:523
+#: ../content/licence/BaseBuildLicence.py:524
 msgid "urban_label_electricity"
 msgstr ""
 
@@ -3156,7 +3156,7 @@ msgid "urban_label_eventRecipient"
 msgstr ""
 
 #. Default: "Exemptfdarticle"
-#: ../content/licence/BaseBuildLicence.py:470
+#: ../content/licence/BaseBuildLicence.py:471
 msgid "urban_label_exemptFDArticle"
 msgstr ""
 
@@ -3376,7 +3376,7 @@ msgid "urban_label_hasEnvironmentImpactStudy"
 msgstr ""
 
 #. Default: "Hasmodifiedblueprints"
-#: ../content/licence/BaseBuildLicence.py:481
+#: ../content/licence/BaseBuildLicence.py:482
 msgid "urban_label_hasModifiedBlueprints"
 msgstr ""
 
@@ -3794,6 +3794,9 @@ msgstr ""
 msgid "urban_label_notaryContact"
 msgstr ""
 
+msgid "urban_label_notaryReference"
+msgstr ""
+
 #. Default: "Noteworthytrees"
 #: ../content/licence/GenericLicence.py:1026
 msgid "urban_label_noteworthyTrees"
@@ -4093,7 +4096,7 @@ msgid "urban_label_prevuDetails"
 msgstr ""
 
 #. Default: "Procedurechoice"
-#: ../content/licence/BaseBuildLicence.py:449
+#: ../content/licence/BaseBuildLicence.py:450
 #: ../content/licence/EnvironmentBase.py:179
 msgid "urban_label_procedureChoice"
 msgstr ""
@@ -4340,7 +4343,7 @@ msgid "urban_label_requestedOrganisation"
 msgstr ""
 
 #. Default: "Requirementfromfd"
-#: ../content/licence/BaseBuildLicence.py:460
+#: ../content/licence/BaseBuildLicence.py:461
 msgid "urban_label_requirementFromFD"
 msgstr ""
 
@@ -4798,7 +4801,7 @@ msgid "urban_label_warnings"
 msgstr ""
 
 #. Default: "Water"
-#: ../content/licence/BaseBuildLicence.py:515
+#: ../content/licence/BaseBuildLicence.py:516
 msgid "urban_label_water"
 msgstr ""
 
@@ -4929,15 +4932,15 @@ msgstr ""
 msgid "urbantemplates_folder_title"
 msgstr ""
 
-#: ../content/licence/BaseBuildLicence.py:592
+#: ../content/licence/BaseBuildLicence.py:593
 msgid "usage_for_habitation"
 msgstr ""
 
-#: ../content/licence/BaseBuildLicence.py:594
+#: ../content/licence/BaseBuildLicence.py:595
 msgid "usage_not_applicable"
 msgstr ""
 
-#: ../content/licence/BaseBuildLicence.py:593
+#: ../content/licence/BaseBuildLicence.py:594
 msgid "usage_not_for_habitation"
 msgstr ""
 

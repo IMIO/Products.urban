@@ -1476,3 +1476,6 @@ msgstr ""
 
 msgid "urban.warnings.bound_ticket_settlement"
 msgstr ""
+
+msgid "urban_label_notaryReference"
+msgstr ""
