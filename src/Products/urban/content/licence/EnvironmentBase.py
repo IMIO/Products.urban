@@ -70,13 +70,13 @@ slave_fields_procedurechoice = (
     },
 )
 
-slave_fields_istransferoflicence = (
-    {
-        'name': 'bound_licences',
-        'action': 'show',
-        'hide_values': (True, ),
-    },
-)
+#slave_fields_istransferoflicence = (
+#    {
+#        'name': 'bound_licences',
+#        'action': 'show',
+#        'hide_values': (True, ),
+#    },
+#)
 ##/code-section module-header
 
 schema = Schema((
@@ -297,53 +297,10 @@ schema = Schema((
         name='isTransferOfLicence',
         default=False,
         widget=MasterBooleanWidget(
-            slave_fields=slave_fields_istransferoflicence,
+#            slave_fields=slave_fields_istransferoflicence,
             label=_('urban_label_istransferoflicence', default='IsTransferOfLicence'),
         ),
         schemata='urban_description',
-    ),
-    ReferenceField(
-        name='bound_licences',
-        widget=ReferenceBrowserWidget(
-            allow_search=True,
-            allow_browse=False,
-            force_close_on_insert=True,
-            startup_directory='urban',
-            show_indexes=False,
-            wild_card_search=True,
-            restrict_browsing_to_startup_directory=True,
-            label=_('urban_label_bound_licences', default='Bound licences'),
-        ),
-        allowed_types=[
-            t for t in URBAN_TYPES
-            if t not in [
-                'Inspection',
-                'ProjectMeeting',
-                'PatrimonyCertificate',
-                'CODT_NotaryLetter',
-                'CODT_UrbanCertificateOne'
-                'NotaryLetter',
-                'UrbanCertificateOne',
-                'BuildLicence',
-                'CODT_BuildLicence',
-                'Article127',
-                'CODT_Article127',
-                'CODT_CommercialLicence',
-                'IntegratedLicence',
-                'CODT_IntegratedLicence',
-                'UrbanCertificateTwo',
-                'CODT_UrbanCertificateTwo',
-                'PreliminaryNotice',
-                'PatrimonyCertificate',
-                'Ticket',
-                'ParcelOutLicence',
-                'CODT_ParcelOutLicence',
-
-            ]
-        ],
-        schemata='urban_description',
-        multiValued=True,
-        relationship="bound_licences",
     ),
 
 ),
