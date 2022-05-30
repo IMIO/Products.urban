@@ -262,8 +262,9 @@ CODT_UniqueLicence_schema.delField('composition')
 CODT_UniqueLicence_schema.delField('businessDescription')
 CODT_UniqueLicence_schema.delField('natura2000')
 CODT_UniqueLicence_schema.delField('natura2000Details')
-CODT_UniqueLicence_schema.delField('procedureChoice')
-CODT_UniqueLicence_schema.delField('annoncedDelay')
+CODT_UniqueLicence_schema.delField('natura2000location')
+#CODT_UniqueLicence_schema.delField('procedureChoice')
+#CODT_UniqueLicence_schema.delField('annoncedDelay')
 setSchemataForCODT_UniqueLicenceInquiry(CODT_UniqueLicence_schema)
 ##/code-section after-schema
 
