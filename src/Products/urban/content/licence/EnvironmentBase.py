@@ -516,8 +516,8 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     schema.moveField('businessOldLocation', after='workLocations')
     schema.moveField('foldermanagers', after='businessOldLocation')
     schema.moveField('isTransferOfLicence', after='folderCategory')
-    schema.moveField('bound_licences', after='isTransferOfLicence')
-    schema.moveField('rubrics', after='bound_licences')
+#    schema.moveField('bound_licences', after='isTransferOfLicence')
+    schema.moveField('rubrics', after='isTransferOfLicence')
     schema.moveField('description', after='additionalLegalConditions')
     schema.moveField('referenceFT', after='referenceDGATLP')
     return schema
