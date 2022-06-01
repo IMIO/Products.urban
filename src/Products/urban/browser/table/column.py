@@ -2,6 +2,8 @@
 
 from DateTime import DateTime
 
+from html import escape
+
 from plone import api
 
 from z3c.table.column import Column, GetAttrColumn, LinkColumn
@@ -103,7 +105,7 @@ class TitleColumn(UrbanColumn):
         title_words = title.split()
         for split in range(len(title_words) / 15):
             title_words.insert(15 * (split + 1), '<br />')
-        title = ' '.join(title_words)
+        title = escape(' '.join(title_words))
 
         title = '<a href="%s" class="%s">%s</a>' % (url, css_class, title)
         return title
@@ -212,13 +214,13 @@ class ContacTitleDisplay(TitleDisplay):
         title = self.column.renderTitleLink(self.urbanlist_item)
 
         address = ''
-        street = contact.getStreet()
-        number = contact.getNumber()
+        street = escape(contact.getStreet())
+        number = escape(contact.getNumber())
         if street or number:
             address = '<br /><span>%s %s</span>' % (street, number)
 
-        zipcode = contact.getZipcode()
-        city = contact.getCity()
+        zipcode = escape(contact.getZipcode())
+        city = escape(contact.getCity())
         if zipcode or city:
             address = '%s<br /><span>%s %s</span>' % (address, zipcode, city)
 
@@ -226,6 +228,7 @@ class ContacTitleDisplay(TitleDisplay):
         gsm = contact.getGsm()
 
         tel = gsm if gsm else phone
+        tel = escape(tel)
         if tel:
             address = '%s<br /><span>%s</span>' % (address, tel)
 
@@ -240,7 +243,7 @@ class ParcelTitleDisplay(TitleDisplay):
         parcel = self.obj
         link = '<a class="link-overlay" href="{url}/@@parcelview">{title}</a>'.format(
             url=parcel.absolute_url(),
-            title=parcel.Title()
+            title=escape(parcel.Title())
         )
         cell = '<span id="urban-parcel-display">{}</span>'.format(link)
         return cell
@@ -257,7 +260,7 @@ class EventTitleDisplay(TitleDisplay):
 
         documents = []
         for doc in event.getDocuments():
-            doc_title = doc.Title()
+            doc_title = escape(doc.Title())
             doc_link = '%s%s' % (doc.absolute_url(), suffix)
             doc_link = '<br /><a href="%s" class="discreet" style="margin-left:20px">%s</a>' % (doc_link, doc_title)
             documents.append(doc_link)
@@ -266,7 +269,7 @@ class EventTitleDisplay(TitleDisplay):
         suffix = ''
         annexes = []
         for annex in event.getAttachments():
-            annex_title = annex.Title()
+            annex_title = escape(annex.Title())
             annex_link = '%s%s' % (annex.absolute_url(), suffix)
             annex_link = '<br /><a href="%s" class="discreet" style="margin-left:20px">%s</a>' % (annex_link, annex_title)
             annexes.append(annex_link)
@@ -280,7 +283,7 @@ class DocumentTitleDisplay(TitleDisplay):
 
     def render(self):
         doc = self.obj
-        title = doc.Title()
+        title = escape(doc.Title())
         suffix = self.urbanlist_item.canBeEdited() and '/external_edit' or ''
         url = '%s%s' % (doc.absolute_url(), suffix)
         css_class = 'contenttype-%s' % doc.portal_type.lower()
@@ -298,7 +301,7 @@ class RecipientCadastreTitleDisplay(TitleDisplay):
         portal_type = recipient.portal_type.lower()
         state = urbanlist_item.getState()
         css_class = 'contenttype-%s state-%s' % (portal_type, state)
-        title = recipient.Title()
+        title = escape(recipient.Title())
         title = '<span class="%s">%s</span>' % (css_class, title)
         parcels_info = '<span class="discreet">%s %s</span>' % (recipient.getCapakey(), recipient.getParcel_nature())
         title = '%s<br />%s' % (title, parcels_info)
