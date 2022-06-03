@@ -250,6 +250,7 @@ CODT_UniqueLicence_schema = BaseFolderSchema.copy() + \
     getattr(CODT_BaseBuildLicence, 'schema', Schema(())).copy() + \
     getattr(CODT_UniqueLicenceInquiry, 'schema', Schema(())).copy() + \
     getattr(GenericLicence, 'schema', Schema(())).copy() + \
+    getattr(EnvironmentBase, 'schema', Schema(())).copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
@@ -261,6 +262,10 @@ CODT_UniqueLicence_schema.delField('sscDetails')
 CODT_UniqueLicence_schema.delField('RCU')
 CODT_UniqueLicence_schema.delField('rcuDetails')
 CODT_UniqueLicence_schema.delField('composition')
+CODT_UniqueLicence_schema.delField('businessDescription')
+CODT_UniqueLicence_schema.delField('natura2000')
+CODT_UniqueLicence_schema.delField('natura2000Details')
+CODT_UniqueLicence_schema.delField('natura2000location')
 setSchemataForCODT_UniqueLicenceInquiry(CODT_UniqueLicence_schema)
 ##/code-section after-schema
 
