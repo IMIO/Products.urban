@@ -332,6 +332,12 @@ def addCustomOpinionEventConfigs(context):
             opinion_cfg_id = line['id']
             line['description'] = RichTextValue(line['description'])
             line['title'] = "Demande d'avis {}".format(line['title'])
+            line['eventPortalType'] = 'UrbanEventOpinionRequest'
+            line['eventType'] = ('Products.urban.interfaces.IOpinionRequestEvent',)
+            line['activatedFields'] = ('transmitDate', 'receiptDate', 'receivedDocumentReference', 'externalDecision',)
+            line['TALCondition'] = "python: event.mayAddOpinionRequestEvent(here)"
+            line['eventDateLabel'] = "Date"
+
             opinion_cfg = getattr(events_cfg, opinion_cfg_id, None)
             if not opinion_cfg:
                 opinion_cfg_id = events_cfg.invokeFactory('OpinionEventConfig', **line)
