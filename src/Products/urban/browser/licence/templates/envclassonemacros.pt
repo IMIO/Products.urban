@@ -7,7 +7,7 @@
                       ];
                       custom python:[
                           'rubrics', 'minimumLegalConditions', 'hasAdditionalConditions',
-                          'previousLicences', 'validityDelay',
+                          'previousLicences', 'validityDelay', 'bound_licences'
                       ];">
         <metal:parent_call use-macro="here/@@licencetabs-macros/description_macro">
             <metal:applicants fill-slot="applicant_slot">
