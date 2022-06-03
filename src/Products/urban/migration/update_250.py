@@ -522,3 +522,13 @@ def update_env_licences_schedule(context):
     catalog.clearFindAndRebuild()
 
     logger.info("upgrade done!")
+
+
+def hide_folder_contents_action(context):
+    """
+    """
+    logger = logging.getLogger('urban: hide folder_contents action')
+    logger.info("starting upgrade steps")
+    setup_tool = api.portal.get_tool('portal_setup')
+    setup_tool.runImportStepFromProfile('profile-Products.urban:default', 'actions')
+    logger.info("upgrade step done!")
