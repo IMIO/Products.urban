@@ -219,7 +219,7 @@ class ContacTitleDisplay(TitleDisplay):
         if street or number:
             address = '<br /><span>%s %s</span>' % (street, number)
 
-        zipcode = escape(contact.getZipcode())
+        zipcode = escape(str(contact.getZipcode()))
         city = escape(contact.getCity())
         if zipcode or city:
             address = '%s<br /><span>%s %s</span>' % (address, zipcode, city)
