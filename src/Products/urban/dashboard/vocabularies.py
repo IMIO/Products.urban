@@ -96,27 +96,12 @@ class DashboardCollections(ConditionAwareCollectionVocabulary):
 
     def _brains(self, context):
         """ """
-        portal = api.portal.get()
-        urban_folder = portal.urban
-        brains = self.get_collection_brains(urban_folder)
-
-        for licence_type in URBAN_TYPES:
-            licence_folder = getattr(urban_folder, licence_type.lower() + 's')
-            brains.extend(self.get_collection_brains(licence_folder))
-
-        return brains
-
-    def get_collection_brains(self, folder):
         catalog = api.portal.get_tool('portal_catalog')
-        brains = catalog(
-            path={
-                'query': '/'.join(folder.getPhysicalPath()),
-                'depth': 1
-            },
-            object_provides='imio.dashboard.interfaces.IDashboardCollection',
-            sort_on='getObjPositionInParent'
-        )
-        return list(brains)
+        ids = ['collection_all_licences'] + ['collection_{}'.format(l_type.lower()) for l_type in URBAN_TYPES]
+        brains = catalog(id=ids)
+        brains = list(brains)
+        brains.sort(key=lambda x: ids.index(x.id))
+        return brains
 
     def __call__(self, context, query=None):
         self.category = utils.get_procedure_category(
