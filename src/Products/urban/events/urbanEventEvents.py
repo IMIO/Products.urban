@@ -35,7 +35,8 @@ def _setDefaultTextValues(urbanevent):
 
         if default_text:
             # only load the text renderer if theres text to generate.
-            text_renderer = text_renderer is None and DefaultTextRenderer(urbanevent)
+            if not text_renderer:
+                text_renderer = DefaultTextRenderer(urbanevent)
             rendered_text = text_renderer(default_text)
             field_mutator = getattr(urbanevent, field.mutator)
             field_mutator(rendered_text)
