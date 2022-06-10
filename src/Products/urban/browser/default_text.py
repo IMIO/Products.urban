@@ -3,6 +3,8 @@
 from zope.pagetemplate.engine import TrustedAppPT
 from zope.pagetemplate.pagetemplate import PageTemplate
 
+from plone.memoize.request import cache
+
 from plone import api
 
 
@@ -20,6 +22,7 @@ class DefaultTextRenderer(TrustedAppPT, PageTemplate):
         rendered = self.pt_render(namespace)
         return rendered
 
+    @cache(get_key=lambda f, self, x, y, z: self.licence.id, get_request='self.licence.REQUEST')
     def pt_getContext(self, args=(), options={}, **ignored):
         with api.env.adopt_roles(['Manager']):
             base_context = self.docgen_view.get_base_generation_context(None, None)
