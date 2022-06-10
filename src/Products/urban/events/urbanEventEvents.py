@@ -27,19 +27,16 @@ def _setDefaultTextValues(urbanevent):
 
     select_fields = [field for field in urbanevent.schema.fields() if field.default_method == 'getDefaultText']
 
-    text_renderer = None
+    text_renderer = DefaultTextRenderer(urbanevent)
 
     for field in select_fields:
         is_html = 'html' in str(field.default_content_type)
         default_text = urbanevent.getDefaultText(urbanevent, field, is_html)
 
-        if default_text:
-            # only load the text renderer if theres text to generate.
-            if not default_text:
-                text_renderer = DefaultTextRenderer(urbanevent)
-            rendered_text = text_renderer(default_text)
-            field_mutator = getattr(urbanevent, field.mutator)
-            field_mutator(rendered_text)
+        rendered_text = text_renderer(default_text)
+
+        field_mutator = getattr(urbanevent, field.mutator)
+        field_mutator(rendered_text)
 
 
 def setEventType(urban_event, event):
