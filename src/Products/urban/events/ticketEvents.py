@@ -10,8 +10,12 @@ from zope.lifecycleevent import ObjectModifiedEvent
 def setTicketBoundInspection(ticket, event):
     annotations = IAnnotations(ticket)
     previous_bound_UIDs = annotations.get('urban.ticket_bound_inspections') or ''
-    new_bound_UIDs = [ticket.getField('bound_inspection').getRaw(ticket)] or []
+    bound_inspection = ticket.getField('bound_inspection').getRaw(ticket)
+    new_bound_UIDs = bound_inspection and [bound_inspection] or []
     if previous_bound_UIDs == new_bound_UIDs:
+        return
+    if previous_bound_UIDs == [None]:
+        annotations['urban.ticket_bound_inspections'] = []
         return
 
     catalog = api.portal.get_tool('portal_catalog')
@@ -78,6 +82,7 @@ def notifyBoundInspections(ticket, event):
     catalog = api.portal.get_tool('portal_catalog')
     annotations = IAnnotations(ticket)
     inspection_UIDs = annotations.get('urban.ticket_bound_inspections') or []
+    inspection_UIDs = [uid for uid in inspection_UIDs if uid is not None]
     for inspection_brain in catalog(UID=inspection_UIDs):
         inspection = inspection_brain.getObject()
         notify(ObjectModifiedEvent(inspection))
