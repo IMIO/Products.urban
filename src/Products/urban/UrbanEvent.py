@@ -26,6 +26,7 @@ from Products.urban.config import *
 from DateTime import DateTime
 
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
+from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
 from Products.ATContentTypes.interfaces.file import IATFile
 from Products.CMFCore.utils import getToolByName
 
@@ -460,6 +461,16 @@ schema = Schema((
         ),
         optional=True,
     ),
+    LinesField(
+        name='transferType',
+        widget=MasterSelectWidget(
+            format='radio',
+#            slave_fields=slave_fields_transfertype,
+            label=_('urban_label_transfertype', default='TransferType'),
+        ),
+        vocabulary='listTransferType',
+        optional=True,
+    ),
 
 ),
 )
@@ -772,6 +783,45 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
     def get_state(self):
         state = api.content.get_state(self)
         return state
+
+    security.declarePublic('listTransferType')
+
+    def listTransferType(self):
+        """
+          This vocabulary for field transferType returns the types of transfer (full, partial)
+        """
+        vocab = (
+            ('full', 'full_transfer'),
+            ('partial', 'partial_transfer'),
+        )
+        return DisplayList(vocab)
+
+#    security.declarePublic('getApplicants')
+#
+#    def getApplicants(self):
+#        """
+#        """
+#        # if event de type ITransferOfLicenceEvent
+#        # applicants = self.context.aq_parents
+#        applicants = super(Ticket, self).getApplicants()
+#        if self.getUse_bound_inspection_infos():
+#            bound_inspection = self.getBound_inspection()
+#            if bound_inspection:
+#                applicants.extend(bound_inspection.getApplicants())
+#
+#        return list(set(applicants))
+#
+#    security.declarePublic('get_applicants_history')
+#
+#    def get_applicants_history(self):
+#        applicants = super(Ticket, self).get_applicants_history()
+#        if self.getUse_bound_inspection_infos():
+#            bound_inspection = self.getBound_inspection()
+#            if bound_inspection:
+#                applicants.extend(bound_inspection.get_applicants_history())
+#
+#        return list(set(applicants))
+
 
 
 registerType(UrbanEvent, PROJECTNAME)
