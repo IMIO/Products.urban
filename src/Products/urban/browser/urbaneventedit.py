@@ -30,7 +30,7 @@ class UrbanEventEdit(Edit):
 
         fields = []
         for field in self.context.schema.fields():
-            if field.schemata == 'default' and not hasattr(field, 'optional') \
+            if field.schemata == 'default' and not hasattr(field, 'optional')\
                and field.widget.visible and field.widget.visible['view']:
                 fields.append(field)
 
@@ -48,6 +48,8 @@ class UrbanEventEdit(Edit):
         else:
             return fields
 
+    def get_event_config_uid(self):
+        return self.context.getUrbaneventtypes().UID()
 
 class UrbanEventInquiryEdit(UrbanEventEdit):
     """
