@@ -3831,6 +3831,9 @@ msgstr "Non applicable"
 msgid "urban_label_notaryContact"
 msgstr "Notaire(s)"
 
+msgid "urban_label_notaryReference"
+msgstr "Référence notaire"
+
 #. Default: "Noteworthytrees"
 #: ../content/licence/GenericLicence.py:1026
 msgid "urban_label_noteworthyTrees"

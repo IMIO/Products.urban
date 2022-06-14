@@ -144,6 +144,7 @@ class LicenceView(BrowserView):
         if not attachments:
             return ''
         attachment_objects = [b.getObject() for b in attachments]
+        attachment_objects.sort(lambda a, b: cmp(a.Title(), b.Title()))
         table = AttachmentsTable(self.context, self.request, values=attachment_objects)
         return self.renderListing(table)
 
@@ -171,6 +172,7 @@ class LicenceView(BrowserView):
 
         if not nested_attachments:
             return ''
+        nested_attachments.sort(lambda a, b: cmp(a.Title(), b.Title()))
         table = NestedAttachmentsTable(self.context, self.request, values=nested_attachments)
         return self.renderListing(table)
 

@@ -638,23 +638,25 @@ class UrbanDocGenerationLicenceHelperView(UrbanDocGenerationHelperView):
             ['UrbanCertificateTwo', 'CODT_UrbanCertificateTwo'],
         )
 
-    def get_specific_features_text(self):
+    def get_specific_features_text(self, where=[''], only_selected=False):
         """
         # Particularité(s) du bien
         """
         context = self.context
-        specificFeatures = context.getSpecificFeatures()
         specific_features_text = []
         tool = api.portal.get_tool('portal_urban')
-        for specificFeature in specificFeatures:
-            if specificFeature['check']:
-                if specificFeature['text']:
-                    specific_feature_text = tool.renderText(text=specificFeature['text'], context=context)
-                    specific_features_text.append(specific_feature_text)
-            else:
-                if specificFeature['defaultText']:
-                    specific_feature_text = tool.renderText(text=specificFeature['defaultText'], context=context)
-                    specific_features_text.append(specific_feature_text)
+        for location in where:
+            specificfeature_accessor = "get%sSpecificFeatures" % location.capitalize()
+            specificFeatures = getattr(context, specificfeature_accessor)()
+            for specificFeature in specificFeatures:
+                if specificFeature['check']:
+                    if specificFeature['text']:
+                        specific_feature_text = tool.renderText(text=specificFeature['text'], context=context)
+                        specific_features_text.append(specific_feature_text)
+                elif not only_selected:
+                    if specificFeature['defaultText']:
+                        specific_feature_text = tool.renderText(text=specificFeature['defaultText'], context=context)
+                        specific_features_text.append(specific_feature_text)
         return specific_features_text
 
     def getEvent(self, title=''):
