@@ -1,5 +1,7 @@
 # encoding: utf-8
 
+from html import escape
+
 from plone import api
 
 from Products.urban.browser.table.column import FoldermanagerColumn
@@ -27,7 +29,7 @@ class FacetedTitleColumn(BaseColumn):
         state = item.review_state
         css_class = 'contenttype-%s state-%s' % (portal_type, state)
         url = item.getURL()
-        title = item.Title
+        title = escape(item.Title)
 
         title_words = title.split()
         for split in range(len(title_words) / 15):
@@ -67,7 +69,7 @@ class LicenceTitleDisplay(TitleDisplay):
     def render(self):
         title = self.column.renderTitleLink(self.brain)
 
-        lastkeyevent = self.brain.last_key_event
+        lastkeyevent = escape(self.brain.last_key_event or '')
         if lastkeyevent:
             title = '%s<br/><span class="discreet">%s</span>' % (title, lastkeyevent)
 
