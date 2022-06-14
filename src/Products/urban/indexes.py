@@ -330,3 +330,12 @@ def licence_covid_and_opinion_requests(licence):
         indexes.extend(opinions)
 
     return indexes or None
+
+
+@indexer(interfaces.IUrbanEventType)
+def eventconfig_urbaneventtype(event_config):
+    """
+    Index the portal_type of urban event created by this config.
+    """
+    event_portal_type = event_config.getEventPortalType()
+    return event_portal_type
