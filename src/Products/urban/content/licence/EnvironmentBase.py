@@ -70,13 +70,6 @@ slave_fields_procedurechoice = (
     },
 )
 
-#slave_fields_istransferoflicence = (
-#    {
-#        'name': 'bound_licences',
-#        'action': 'show',
-#        'hide_values': (True, ),
-#    },
-#)
 ##/code-section module-header
 
 schema = Schema((
@@ -297,7 +290,6 @@ schema = Schema((
         name='isTransferOfLicence',
         default=False,
         widget=MasterBooleanWidget(
-#            slave_fields=slave_fields_istransferoflicence,
             label=_('urban_label_istransferoflicence', default='IsTransferOfLicence'),
         ),
         schemata='urban_description',
@@ -438,7 +430,28 @@ class EnvironmentBase(BaseFolder, GenericLicence, CODT_UniqueLicenceInquiry, Bro
     def getLastProprietaryChangeEvent(self):
         return self.getLastEvent(interfaces.IProprietaryChangeEvent)
 
+    security.declarePublic('getLastTransferOfLicence')
+
+    def getLastTransferOfLicence(self):
+        return self.getLastEvent(interfaces.ITransferOfLicenceEvent)
+
+    security.declarePublic('getAllTransferOfLicence')
+
+    def getAllTransfersOfLicence(self):
+        return self.getAllEvents(interfaces.ITransferOfLicenceEvent)
+
+    security.declarePublic('mayAddTransferOfLicenceEvent')
+
+    def mayAddTransferOfLicenceEvent(self):
+        """
+        May add TransferOfLicenceEvent if isTransferOfLicence is true
+        """
+        if not self.getIsTransferOfLicence():
+            return False
+        return True
+
     security.declarePublic('getAdditionalLayers')
+
     def getAdditionalLayers(self):
         """
           Return a list of additional layers that will be used
