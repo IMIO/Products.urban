@@ -22,7 +22,8 @@ class UrbanEventEdit(Edit):
 
         fields = []
         for field in self.context.schema.fields():
-            if field.schemata == 'default' and not hasattr(field, 'optional') and field.widget.visible and field.widget.visible['view']:
+            if field.schemata == 'default' and not hasattr(field, 'optional')\
+               and field.widget.visible and field.widget.visible['view']:
                 fields.append(field)
 
         linkedUrbanEventType = self.context.getUrbaneventtypes()
@@ -37,3 +38,6 @@ class UrbanEventEdit(Edit):
             return [f for f in fields if not getattr(f, 'pm_text_field', False)]
         else:
             return fields
+
+    def get_event_config_uid(self):
+        return self.context.getUrbaneventtypes().UID()

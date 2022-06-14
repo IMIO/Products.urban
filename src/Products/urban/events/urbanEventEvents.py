@@ -39,8 +39,12 @@ def _setDefaultTextValues(urbanevent):
         field_mutator(rendered_text)
 
 
-def setEventTypeType(urban_event, event):
+def setEventMarkerInterfaces(urban_event, event):
+    """
+    Set the linked event_config, marker interfaces.
+    """
     urban_eventType = urban_event.getUrbaneventtypes()
+
     urban_eventTypeTypes = urban_eventType.getEventTypeType()
     if not urban_eventTypeTypes:
         return

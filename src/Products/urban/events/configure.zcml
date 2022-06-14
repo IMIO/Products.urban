@@ -129,14 +129,14 @@
 
   <subscriber for="..interfaces.IUrbanEvent
                    Products.Archetypes.interfaces.IObjectInitializedEvent"
-              handler=".urbanEventEvents.setEventTypeType"/>
+              handler=".urbanEventEvents.setEventMarkerInterfaces"/>
 
   <subscriber for="..interfaces.IUrbanEvent
                    Products.Archetypes.interfaces.IObjectInitializedEvent"
               handler=".urbanEventEvents.setCreationDate"/>
 
   <subscriber for="..interfaces.IUrbanEvent
-                   zope.lifecycleevent.interfaces.IObjectCreatedEvent"
+                   Products.Archetypes.interfaces.IObjectInitializedEvent"
               handler=".urbanEventEvents.generateSingletonDocument"/>
 
   <subscriber for="..interfaces.IUrbanEvent

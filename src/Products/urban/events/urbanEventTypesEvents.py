@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from Products.urban.events.urbanEventEvents import setEventTypeType
+from Products.urban.events.urbanEventEvents import setEventMarkerInterfaces
 from Products.urban import interfaces
 
 from zope.annotation import IAnnotations
@@ -43,7 +43,7 @@ def updateEventType(urban_event_type, event):
                     except:
                         pass
             # add new provided interface
-            setEventTypeType(urban_event, event)
+            setEventMarkerInterfaces(urban_event, event)
 
 
 def forceEventTypeCollege(urban_event_type, event):

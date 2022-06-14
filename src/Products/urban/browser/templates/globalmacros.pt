@@ -82,6 +82,8 @@
           </tal:fields>
         </fieldset>
       </tal:fieldsets>
+      <!-- Next hidden input is to be able to retrieve its event config by UID when the event is first created in a temp folder from portal_factory -->
+      <input type='hidden' name="urbaneventtypes" id=ref_browser_urbaneventtypes" tal:attributes="value view/get_event_config_uid" value=''>
 </metal:edit>
 
 

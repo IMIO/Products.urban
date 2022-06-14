@@ -500,6 +500,8 @@ UrbanEvent_schema = BaseFolderSchema.copy() + \
 
 ##code-section after-schema #fill in your manual code here
 UrbanEvent_schema['title'].widget.condition = "python:here.showTitle()"
+UrbanEvent_schema['title'].default_method = 'defaultTitle'
+UrbanEvent_schema['title'].required = False
 ##/code-section after-schema
 
 
@@ -756,6 +758,25 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
             return urbanEventType.getShowTitle()
         else:
             return False
+
+    def defaultTitle(self):
+        """
+        """
+        urbanEventType = self.getUrbaneventtypes()
+        if urbanEventType:
+            return urbanEventType.Title()
+        else:
+            return ''
+
+    security.declarePublic('getUrbaneventtypes')
+    def getUrbaneventtypes(self):
+        """
+        """
+        event_config = self.getField('urbaneventtypes').get(self)
+        if not event_config and self.REQUEST.form.get('urbaneventtypes'):
+            uid_catalog = api.portal.get_tool('uid_catalog')
+            event_config = uid_catalog(UID=self.REQUEST.form['urbaneventtypes'])[0].getObject()
+        return event_config
 
     security.declarePublic('getDecision')
     def getDecision(self, theObject=False):
