@@ -29,6 +29,7 @@
   <adapter name="commentators" factory=".indexes.licence_covid" />
   <adapter name="commentators" factory=".indexes.task_covid" />
   <adapter name="modified" factory=".indexes.genericlicence_modified" />
+  <adapter name="cmf_uid" factory=".indexes.eventconfig_urbaneventtype" />
 
   <!-- Unindex UrbanEvent, UrbanDoc, Applicant and PortionOut -->
 

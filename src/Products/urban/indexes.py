@@ -358,3 +358,12 @@ def licence_covid(licence):
     """
     covid = licence.getCovid() and ['COVID'] or None
     return covid
+
+
+@indexer(IUrbanEventType)
+def eventconfig_urbaneventtype(event_config):
+    """
+    Index the portal_type of urban event created by this config.
+    """
+    event_portal_type = event_config.getEventPortalType()
+    return event_portal_type
