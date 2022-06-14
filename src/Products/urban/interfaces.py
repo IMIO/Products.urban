@@ -630,6 +630,10 @@ class ISettlementEvent(Interface):
     __doc__ = _("""ISettlementEvent type marker interface""")
 
 
+class ITransferOfLicenceEvent(Interface):
+    __doc__ = _("""ITransferOfLicence type marker interface""")
+
+
 class IUrbanBase(Interface):
     """Marker interface for .Base.UrbanBase
     """
