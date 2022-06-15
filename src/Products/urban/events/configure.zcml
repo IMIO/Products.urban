@@ -103,6 +103,38 @@
                    Products.DCWorkflow.interfaces.IAfterTransitionEvent"
               handler=".licenceEvents.reindex_licence_permissions" />
 
+  <subscriber for="..interfaces.IPortionOut
+                   zope.container.interfaces.IObjectRemovedEvent"
+              handler=".portionOutEvents.onDelete" />
+
+  <subscriber for="..interfaces.IPortionOut
+                   zope.lifecycleevent.interfaces.IObjectCreatedEvent"
+               handler=".portionOutEvents.set_ILicencePortionOut_interface" />
+
+  <subscriber for="..interfaces.IPortionOut
+                   Products.Archetypes.interfaces.IObjectInitializedEvent"
+               handler=".portionOutEvents.setValidParcel" />
+
+  <subscriber for="..interfaces.IPortionOut
+                   Products.Archetypes.interfaces.IObjectInitializedEvent"
+              handler=".portionOutEvents.setDivisionCode" />
+
+  <subscriber for="..interfaces.IPortionOut
+                   Products.Archetypes.interfaces.IObjectEditedEvent"
+              handler=".portionOutEvents.setValidParcel" />
+
+  <subscriber for="..interfaces.IPortionOut
+                   Products.Archetypes.interfaces.IObjectEditedEvent"
+              handler=".portionOutEvents.setDivisionCode" />
+
+  <subscriber for="..interfaces.IPortionOut
+                   zope.container.interfaces.IObjectRemovedEvent"
+              handler=".licenceEvents.updateBoundLicences" />
+
+  <subscriber for="..interfaces.IPortionOut
+                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+              handler=".licenceEvents.updateBoundLicences" />
+
   <subscriber for="..interfaces.IUrbanEvent
                    Products.Archetypes.interfaces.IObjectInitializedEvent"
               handler=".urbanEventEvents.setDefaultValuesEvent"/>

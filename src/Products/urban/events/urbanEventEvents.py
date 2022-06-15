@@ -24,7 +24,6 @@ def setDefaultValuesEvent(urbanevent, event):
 
 
 def _setDefaultTextValues(urbanevent):
-
     select_fields = [field for field in urbanevent.schema.fields() if field.default_method == 'getDefaultText']
 
     text_renderer = DefaultTextRenderer(urbanevent)
