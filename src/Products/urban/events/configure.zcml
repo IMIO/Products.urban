@@ -123,8 +123,8 @@
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".licenceEvents.updateBoundLicences" />
 
-  <subscriber for="..interfaces.IUrbanEvent
-                   Products.Archetypes.interfaces.IObjectInitializedEvent"
+              <subscriber for="..interfaces.IUrbanEvent
+              Products.Archetypes.interfaces.IEditBegunEvent"
               handler=".urbanEventEvents.setDefaultValuesEvent"/>
 
   <subscriber for="..interfaces.IUrbanEvent
