@@ -147,6 +147,8 @@ def setMarkerInterface(licence, event):
 def reindex_attachments_permissions(container, event):
     """
     """
+    if 'portal_factory' in container.REQUEST.getURL():
+        return
     query = {
         'portal_type': 'File',
         'path': {
