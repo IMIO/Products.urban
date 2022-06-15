@@ -97,12 +97,17 @@ def notifyLicence(urban_event, event):
     """
     Notify the licence of changes so schedule events triggers.
     """
-    if not urban_event.checkCreationFlag():
-        licence = urban_event.aq_parent
-        notify(ObjectModifiedEvent(licence))
+    if 'portal_factory' in container.REQUEST.getURL() or\
+       urban_event.checkCreationFlag():
+        return
+    licence = urban_event.aq_parent
+    notify(ObjectModifiedEvent(licence))
 
 
 def updateTaskIndexes(task_container, event):
+    if 'portal_factory' in container.REQUEST.getURL():
+        return
+
     task_configs = get_task_configs(task_container)
 
     if not task_configs:
