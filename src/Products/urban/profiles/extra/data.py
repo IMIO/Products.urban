@@ -5443,12 +5443,12 @@ EventConfigs = {
         {
             'id': "cession-permis",
             'title': "Cession de permis",
-            'activatedFields': ('transferType',),
+            'activatedFields': ('transferType', 'transferDescription',),
             'eventDateLabel': 'Date de la cession',
             'isKeyEvent': False,
             'keyDates': ('eventDate',),
             'podTemplates': (),
-            'eventType': ('Products.urban.interfaces.ITransferOfLicenceEvent',),
+            'eventType': ('Products.urban.interfaces.ITransferOfLicenceEvent', 'Products.urban.interfaces.ICollegeEvent',),
             'TALCondition': "here/mayAddTransferOfLicenceEvent",
         },
         {
