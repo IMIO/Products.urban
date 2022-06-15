@@ -45,6 +45,15 @@ class RecipientCadastreActionsPanelView(UrbanDefaultActionsPanelView):
         self.ACCEPTABLE_ACTIONS = ('copy_to_claimant',)
 
 
+class TransferOfLicenceActionsPanelView(UrbanDefaultActionsPanelView):
+    """
+    Actions panel view of Urban Transfer of licence event.
+    """
+    def __init__(self, context, request):
+        super(TransferOfLicenceActionsPanelView, self).__init__(context, request)
+        self.SECTIONS_TO_RENDER = ('renderTransitions', 'renderActions', 'renderEdit', 'renderOwnDelete')
+
+
 class LicenceActionsPanelView(ActionsPanelView):
     """
     Actions panel view of Licences.
