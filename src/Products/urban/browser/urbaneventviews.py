@@ -7,6 +7,8 @@ from Products.Five import BrowserView
 from Products.urban import UrbanMessage as _
 from Products.urban.browser.mapview import MapView
 from Products.urban.browser.licence.licenceview import LicenceView
+from Products.urban.browser.table.urbantable import ApplicantTable
+from Products.urban.browser.table.urbantable import ApplicantHistoryTable
 from Products.urban.browser.table.urbantable import DocumentsTable
 from Products.urban.browser.table.urbantable import AttachmentsTable
 from Products.urban.browser.table.urbantable import ClaimantsTable
@@ -177,6 +179,30 @@ class UrbanEventView(BrowserView):
 
     def get_state(self):
         return api.content.get_state(self.context)
+
+    def getApplicants(self):
+        """
+        """
+        applicants = self.context.aq_parent.getApplicants()
+        return list(set(applicants))
+
+    def get_applicants_history(self):
+        applicants = self.context.aq_parent.get_applicants_history()
+        return list(set(applicants))
+
+    def renderApplicantListing(self):
+        if not self.context.getApplicants():
+            return ''
+        contacttable = ApplicantTable(self.context, self.request)
+        contacttable.update()
+        return contacttable.render()
+
+    def renderApplicantHistoryListing(self):
+        if not self.context.getApplicants():
+            return ''
+        table = ApplicantHistoryTable(self.context, self.request)
+        table.update()
+        return table.render()
 
     @property
     def is_planned_mailing(self):
