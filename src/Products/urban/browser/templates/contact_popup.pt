@@ -125,13 +125,17 @@
     </form>
     <!-- actual list of objects, either searchresults or folder contents -->
     <div id="atrbResults" tal:define="batch view/getResult;">
-      <div class="field">
-          <form name="quickAdd" action="" method="post" target="_blank"
-            tal:attributes="action python: view.get_creation_url()">
-            <input type="hidden" name="type_name" value="" tal:attributes="value python: view.get_type_name_value()">
-            <input type="submit" id="event" value="" class="" tal:attributes="value python: view.get_submit_value(); class python: view.get_submit_class()">
-         </form>
-      </div>
+      <tal:quick-add repeat="portal_type view/allowed_types">
+          <span style="display: inline-block" class="field">
+              <form name="quickAdd" action="" method="post" target="_blank"
+                tal:attributes="action python: view.get_creation_url(portal_type)">
+                <input type="hidden" name="type_name" value="" tal:attributes="value python: portal_type">
+                <input type="submit" id="event" value="" class=""
+                       tal:attributes="value python: view.get_submit_value(portal_type);
+                                       class python: view.get_submit_class(portal_type) ">
+             </form>
+          </span>
+      </tal:quick-add>
       <!-- history -->
       <div tal:condition="python:widget.history_length > 0" style="float: right; clear: right;">
         <form action="referencebrowser_popup" name="history" id="history">

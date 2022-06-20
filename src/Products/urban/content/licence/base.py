@@ -199,6 +199,13 @@ class UrbanBase(object):
     def getCurrentFolderManager(self):
         return currentFolderManager()
 
+    security.declarePublic('getRepresentantsSignaletic')
+    def getRepresentantsSignaletic(self, withaddress=False, remove_comma=False, inverted_address=False):
+        """
+          Returns a string reprensenting the signaletic of every representant
+        """
+        return self.getContactsSignaletic(self.getRepresentativeContacts(), withaddress=withaddress, remove_comma=remove_comma, inverted_address=inverted_address)
+
     security.declarePublic('getArchitectsSignaletic')
     def getArchitectsSignaletic(self, withaddress=False, remove_comma=False, inverted_address=False):
         """

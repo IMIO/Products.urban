@@ -63,6 +63,7 @@ EventConfigs = {
                         }
                     ]
                 },
+
             ),
             'eventType': ('Products.urban.interfaces.IDepositEvent',),
         },

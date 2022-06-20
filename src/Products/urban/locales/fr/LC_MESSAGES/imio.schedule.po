@@ -141,7 +141,7 @@ msgid "urban.schedule.condition.inquiry_event_created"
 msgstr "Créer l'événement d'enquête publique"
 
 msgid "urban.schedule.condition.is_not_temporary_licence"
-msgstr "Le dossier n'est pas temporarire"
+msgstr "Le dossier n'est pas temporaire"
 
 msgid "urban.schedule.condition.licence_decision_college_event_created"
 msgstr "Créer l'événement de décision collège"

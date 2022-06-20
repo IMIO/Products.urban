@@ -10,6 +10,9 @@ from plone.app.textfield import RichTextValue
 from plone.namedfile.file import NamedBlobFile
 from plone import api
 
+
+import StringIO
+import csv
 import logging
 logger = logging.getLogger('urban: setuphandlers')
 
@@ -230,6 +233,11 @@ def addEventConfigs(context):
     from Products.urban.config import NIS
     if context.readDataFile('urban_extra_marker.txt') is None:
         return
+
+    site = context.getSite()
+    opinions_cfg = getattr(site, 'opinions_config', None)
+    if opinions_cfg:
+        return
     # add some EventConfigs...
     # get the urbanEventTypes dict from the profile
     # get the name of the profile by taking the last part of the _profile_path
@@ -242,8 +250,6 @@ def addEventConfigs(context):
     attribute = 'REFNIS_2019'
     module = __import__(module_name, fromlist=[attribute])
     refNIS_2019 = getattr(module, attribute)
-
-    site = context.getSite()
 
     log = []
     gslogger = context.getLogger('addEventConfigs')
@@ -271,7 +277,7 @@ def addEventConfigs(context):
                 newUet = folderEvent
             else:
                 portal_type = uet.get('portal_type', 'EventConfig')
-                if portal_type == 'OpinionRequestEventType':
+                if portal_type == 'OpinionEventConfig':
                     if not matched_externalDirection:
                         continue
                     else:
@@ -296,4 +302,52 @@ def addEventConfigs(context):
             for status in template_log:
                 if status[1] != 'no changes':
                     log.append(loga("%s: evt='%s', template='%s' => %s" % (urbanConfigId, last_urbaneventype_id, status[0], status[1]), gslog=gslogger))
+    return '\n'.join(log)
+
+
+def addCustomOpinionEventConfigs(context):
+    """
+      Helper method for easily adding urbanEventTypes
+    """
+    if context.readDataFile('urban_extra_marker.txt') is None:
+        return
+    # add some EventConfigs...
+    site = context.getSite()
+    opinions_cfg = getattr(site, 'opinions_config', None)
+    if not opinions_cfg:
+        return
+
+    log = []
+    gslogger = context.getLogger('addEventConfigs')
+    portal_urban = getToolByName(site, 'portal_urban')
+    header = ['id', 'title', 'abbreviation', 'description']
+
+    # add the EventConfig
+    for licence_cfg in portal_urban.objectValues('LicenceConfig'):
+        events_cfg = licence_cfg.eventconfigs
+        last_eventcfg_id = 'config-opinion-request'
+        if not hasattr(events_cfg, last_eventcfg_id):
+            continue
+        for line in csv.DictReader(StringIO.StringIO(opinions_cfg()), fieldnames=header, delimiter=';'):
+            opinion_cfg_id = line['id']
+            line['description'] = RichTextValue(line['description'])
+            line['title'] = "Demande d'avis {}".format(line['title'])
+            line['eventPortalType'] = 'UrbanEventOpinionRequest'
+            line['eventType'] = ('Products.urban.interfaces.IOpinionRequestEvent',)
+            line['activatedFields'] = ('transmitDate', 'receiptDate', 'receivedDocumentReference', 'externalDecision',)
+            line['TALCondition'] = "python: event.mayAddOpinionRequestEvent(here)"
+            line['eventDateLabel'] = "Date"
+
+            opinion_cfg = getattr(events_cfg, opinion_cfg_id, None)
+            if not opinion_cfg:
+                opinion_cfg_id = events_cfg.invokeFactory('OpinionEventConfig', **line)
+                opinion_cfg = getattr(events_cfg, opinion_cfg_id)
+                if last_eventcfg_id:
+                    moveElementAfter(opinion_cfg, events_cfg, 'id', last_eventcfg_id)
+                else:
+                    events_cfg.moveObjectToPosition(opinion_cfg.getId(), 0)
+                opinion_cfg.reindexObject()
+                log.append(loga("%s: event='%s' => %s" % (opinion_cfg_id, id, 'created'), gslog=gslogger))
+            last_eventcfg_id = opinion_cfg_id
+            # add the Files in the EventConfig
     return '\n'.join(log)
