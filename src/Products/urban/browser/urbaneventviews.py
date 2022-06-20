@@ -183,12 +183,16 @@ class UrbanEventView(BrowserView):
     def getApplicants(self):
         """
         """
-        applicants = self.context.aq_parent.getApplicants()
-        return list(set(applicants))
+        applicants = [appl for appl in self.context.ap_parent.objectValues('Applicant')
+                        if appl.portal_type == 'Applicant'
+                        and api.content.get_state(appl) == 'enabled']
+        corporations = self.getCorporations()
+        applicants.extend(corporations)
+        return applicants
 
     def get_applicants_history(self):
-        applicants = self.context.aq_parent.get_applicants_history()
-        return list(set(applicants))
+        return [appl for appl in self.context.ap_parent.objectValues('Applicant')
+                if api.content.get_state(appl) == 'disabled']
 
     def renderApplicantListing(self):
         if not self.context.getApplicants():
