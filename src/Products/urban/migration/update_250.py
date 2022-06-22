@@ -539,9 +539,12 @@ def add_default_LO_server_port(context):
     logger = logging.getLogger('urban: add second default LO port')
     logger.info("starting upgrade steps")
     old_port = api.portal.get_registry_record(
+        'collective.documentgenerator.browser.controlpanel.IDocumentGeneratorControlPanelSchema.oo_port'
+    )
+    new_port = api.portal.get_registry_record(
         'collective.documentgenerator.browser.controlpanel.IDocumentGeneratorControlPanelSchema.oo_port_list'
     )
-    if "2002" not in old_port:
+    if "2002" not in new_port or unicode(old_port) not in new_port:
         new_port = u"{};2002".format(old_port)
         api.portal.set_registry_record(
             'collective.documentgenerator.browser.controlpanel.IDocumentGeneratorControlPanelSchema.oo_port_list',
