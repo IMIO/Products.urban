@@ -532,3 +532,19 @@ def hide_folder_contents_action(context):
     setup_tool = api.portal.get_tool('portal_setup')
     setup_tool.runImportStepFromProfile('profile-Products.urban:default', 'actions')
     logger.info("upgrade step done!")
+
+def add_default_LO_server_port(context):
+    """
+    """
+    logger = logging.getLogger('urban: add second default LO port')
+    logger.info("starting upgrade steps")
+    old_port = api.portal.get_registry_record(
+        'collective.documentgenerator.browser.controlpanel.IDocumentGeneratorControlPanelSchema.oo_port_list'
+    )
+    if "2002" not in old_port:
+        new_port = u"{};2002".format(old_port)
+        api.portal.set_registry_record(
+            'collective.documentgenerator.browser.controlpanel.IDocumentGeneratorControlPanelSchema.oo_port_list',
+            new_port
+        )
+    logger.info("upgrade step done!")
