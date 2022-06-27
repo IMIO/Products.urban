@@ -36,7 +36,7 @@
               handler=".inquiryEvents.notifyLicence"/>
 
   <subscriber for="..interfaces.IInquiry
-                   Products.Archetypes.interfaces.IEditBegunEvent"
+                   zope.lifecycleevent.interfaces.IObjectCreatedEvent"
               handler=".inquiryEvents.setDefaultValuesEvent"/>
 
   <subscriber for="..interfaces.IInquiry
@@ -135,8 +135,8 @@
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".licenceEvents.updateBoundLicences" />
 
-  <subscriber for="..interfaces.IUrbanEvent
-                   Products.Archetypes.interfaces.IObjectInitializedEvent"
+ <subscriber for="..interfaces.IUrbanEvent
+                  zope.lifecycleevent.interfaces.IObjectCreatedEvent"
               handler=".urbanEventEvents.setDefaultValuesEvent"/>
 
   <subscriber for="..interfaces.IUrbanEvent
