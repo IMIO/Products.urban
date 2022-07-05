@@ -205,7 +205,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_location',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     LinesField(
         name='SDC',
@@ -227,7 +227,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_location',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     LinesField(
         name='township_guide',
@@ -250,7 +250,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_location',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     LinesField(
         name='regional_guide',
@@ -271,7 +271,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_location',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     StringField(
         name='patrimony',
@@ -340,7 +340,7 @@ schema = Schema((
         allowable_content_types=('text/html',),
         schemata='urban_patrimony',
         default_method='getDefaultText',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
         accessor="PatrimonyAnalysis",
     ),
     BooleanField(
@@ -392,7 +392,7 @@ schema = Schema((
         allowable_content_types=('text/html',),
         schemata='urban_patrimony',
         default_method='getDefaultText',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
         accessor="PatrimonyObservation",
     ),
     LinesField(

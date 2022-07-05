@@ -137,7 +137,7 @@ schema = Schema((
         allowable_content_types=('text/html',),
         schemata='urban_environment',
         default_method='getDefaultText',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     ReferenceField(
         name='minimumLegalConditions',
@@ -175,7 +175,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_analysis',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     TextField(
         name='claimsSynthesis',
@@ -186,7 +186,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_environment',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     TextField(
         name='environmentTechnicalAdviceAfterInquiry',
@@ -198,7 +198,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_environment',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     TextField(
         name='commentsOnSPWOpinion',
@@ -210,7 +210,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_environment',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     TextField(
         name='conclusions',
@@ -221,7 +221,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_environment',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     TextField(
         name='environmentTechnicalRemarks',
@@ -233,7 +233,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_environment',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
 ),
 )
