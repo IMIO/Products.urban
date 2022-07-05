@@ -103,7 +103,7 @@ schema = Schema((
         allowable_content_types=('text/html',),
         schemata='urban_description',
         default_method='getDefaultText',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
 
 ),

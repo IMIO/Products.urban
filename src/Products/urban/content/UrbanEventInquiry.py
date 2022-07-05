@@ -105,7 +105,7 @@ schema = Schema((
             label=_('urban_label_claimsText', default='Claimstext'),
         ),
         default_method='getDefaultText',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
         optional=True,
     ),
     DateTimeField(

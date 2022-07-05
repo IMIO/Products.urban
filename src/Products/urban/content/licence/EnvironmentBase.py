@@ -109,7 +109,7 @@ schema = Schema((
         allowable_content_types=('text/html',),
         schemata='urban_environment',
         default_method='getDefaultText',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     ReferenceField(
         name='minimumLegalConditions',
@@ -169,7 +169,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_description',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     StringField(
         name='procedureChoice',
@@ -202,7 +202,7 @@ schema = Schema((
         schemata='urban_analysis',
         default_method='getDefaultText',
         default_content_type='text/html',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     BooleanField(
         name='natura2000',
@@ -230,7 +230,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_description',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     IntegerField(
         name='validityDelay',
@@ -249,7 +249,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_road',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     TextField(
         name='locationTechnicalAdvice',
@@ -260,7 +260,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_location',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     TextField(
         name='description',
@@ -271,7 +271,7 @@ schema = Schema((
         allowable_content_types=('text/html',),
         schemata='urban_description',
         default_method='getDefaultText',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
         accessor="Description",
     ),
     TextField(
@@ -284,7 +284,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_environment',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
 
 ),

@@ -46,7 +46,7 @@ schema = Schema((
             description_msgid='urban_help_description',
             i18n_domain='urban',
         ),
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
         accessor="Description",
     ),
     StringField(
