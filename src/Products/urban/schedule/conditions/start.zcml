@@ -196,4 +196,12 @@
         name="urban.schedule.condition.decision_notified"
     />
 
+    <adapter
+        for="Products.urban.interfaces.IEnvironmentBase
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IStartCondition"
+        factory=".generic.DecisionNotified"
+        name="urban.schedule.condition.decision_notified"
+    />
+
 </configure>
