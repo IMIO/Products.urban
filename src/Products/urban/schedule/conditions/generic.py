@@ -687,6 +687,22 @@ class DecisionDelivered(Condition):
         return False
 
 
+class DisplayingTheDecisionDoneCondition(Condition):
+    """
+    Licence displaying the decision event is created.
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+
+        display_decision_done = False
+        display_decision_event = licence.getLastDisplayingTheDecision()
+        if display_decision_event:
+            display_decision_done = api.content.get_state(display_decision_event) == 'closed'
+
+        return display_decision_done
+
+
 class LicenceEndedCondition(Condition):
     """
     Licence is in a final state
