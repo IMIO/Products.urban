@@ -1640,33 +1640,15 @@ schedule_config = {
             'subtasks': [
                 {
                     'type_name': 'TaskConfig',
-                    'id': 'demande_complements',
-                    'title': 'Demander des compléments',
-                    'default_assigned_group': 'environment_editors',
-                    'default_assigned_user': 'urban.assign_folder_manager',
-                    'creation_state': ('incomplete',),
-                    'starting_states': ('incomplete',),
-                    'end_conditions': (
-                        EndConditionObject('urban.schedule.condition.complements_asked'),
-                    ),
-                    'start_date': 'urban.schedule.start_date.ask_complements_date',
-                    'additional_delay': 1,
-                },
-                {
-                    'type_name': 'TaskConfig',
                     'id': 'attente_complements',
                     'title': 'En attente de compléments',
                     'default_assigned_group': 'environment_editors',
                     'default_assigned_user': 'urban.assign_folder_manager',
                     'creation_state': ('incomplete',),
-                    'creation_conditions': (
-                        CreationConditionObject('urban.schedule.condition.complements_asked'),
-                    ),
                     'end_conditions': (
                         EndConditionObject('urban.schedule.condition.incomplete_for_6_months', 'OR'),
                         EndConditionObject('urban.schedule.condition.complements_received'),
                     ),
-                    'start_date': 'urban.schedule.start_date.ask_complements_date',
                     'additional_delay': 183,
                 },
                 {
@@ -1696,6 +1678,9 @@ schedule_config = {
                     'creation_conditions': (
                         CreationConditionObject('urban.schedule.condition.complements_transmit_to_spw'),
                     ),
+                    'end_conditions': (
+                        EndConditionObject('urban.schedule.condition.acknowledgment_done'),
+                    ),
                     'start_date': 'urban.schedule.start_date.complements_deposit_date',
                     'additional_delay': 20,
                 },
@@ -1710,29 +1695,10 @@ schedule_config = {
                     'creation_conditions': (
                         CreationConditionObject('urban.schedule.condition.incomplete_for_6_months'),
                     ),
-                    'start_conditions': (
-                        StartConditionObject('urban.schedule.condition.complements_asked'),
-                    ),
                     'start_date': 'urban.schedule.start_date.creation_date',
                     'additional_delay': 0,
                 },
             ]
-        },
-        {
-            'type_name': 'TaskConfig',
-            'id': 'transmit_complete',
-            'title': 'Transmis complet',
-            'default_assigned_group': 'environment_editors',
-            'default_assigned_user': 'urban.assign_folder_manager',
-            'creation_state': ('complete',),
-            'start_date': 'schedule.start_date.task_starting_date',
-            'end_conditions': (
-                EndConditionObject('urban.schedule.condition.acknowledgment_done'),
-            ),
-            'calculation_delay': (
-                'schedule.calculation_default_delay',
-            ),
-            'additional_delay': 0,
         },
         {
             'type_name': 'TaskConfig',
@@ -1943,6 +1909,20 @@ schedule_config = {
                 },
             ]
         },
+        {
+            'type_name': 'TaskConfig',
+            'id': 'affichage-decision',
+            'title': 'Afficher la décision',
+            'default_assigned_group': 'environment_editors',
+            'default_assigned_user': 'urban.assign_folder_manager',
+            'creation_state': ('accepted', 'refused', 'inacceptable',),
+            'end_conditions': (
+                EndConditionObject('urban.schedule.condition.display_decision_done'),
+            ),
+            'start_date': 'urban.schedule.start_date.spw_decision_project_receipt_date',
+            'additional_delay': 0,
+        },
+
     ],
     'envclassone': [
         {
@@ -2011,33 +1991,15 @@ schedule_config = {
             'subtasks': [
                 {
                     'type_name': 'TaskConfig',
-                    'id': 'demande_complements',
-                    'title': 'Demander des compléments',
-                    'default_assigned_group': 'environment_editors',
-                    'default_assigned_user': 'urban.assign_folder_manager',
-                    'creation_state': ('incomplete',),
-                    'starting_states': ('incomplete',),
-                    'end_conditions': (
-                        EndConditionObject('urban.schedule.condition.complements_asked'),
-                    ),
-                    'start_date': 'urban.schedule.start_date.ask_complements_date',
-                    'additional_delay': 1,
-                },
-                {
-                    'type_name': 'TaskConfig',
                     'id': 'attente_complements',
                     'title': 'En attente de compléments',
                     'default_assigned_group': 'environment_editors',
                     'default_assigned_user': 'urban.assign_folder_manager',
                     'creation_state': ('incomplete',),
-                    'creation_conditions': (
-                        CreationConditionObject('urban.schedule.condition.complements_asked'),
-                    ),
                     'end_conditions': (
                         EndConditionObject('urban.schedule.condition.incomplete_for_6_months', 'OR'),
                         EndConditionObject('urban.schedule.condition.complements_received'),
                     ),
-                    'start_date': 'urban.schedule.start_date.ask_complements_date',
                     'additional_delay': 183,
                 },
                 {
@@ -2067,6 +2029,9 @@ schedule_config = {
                     'creation_conditions': (
                         CreationConditionObject('urban.schedule.condition.complements_transmit_to_spw'),
                     ),
+                    'end_conditions': (
+                        EndConditionObject('urban.schedule.condition.acknowledgment_done'),
+                    ),
                     'start_date': 'urban.schedule.start_date.complements_deposit_date',
                     'additional_delay': 20,
                 },
@@ -2081,29 +2046,10 @@ schedule_config = {
                     'creation_conditions': (
                         CreationConditionObject('urban.schedule.condition.incomplete_for_6_months'),
                     ),
-                    'start_conditions': (
-                        StartConditionObject('urban.schedule.condition.complements_asked'),
-                    ),
                     'start_date': 'urban.schedule.start_date.creation_date',
                     'additional_delay': 0,
                 },
             ]
-        },
-        {
-            'type_name': 'TaskConfig',
-            'id': 'transmit_complete',
-            'title': 'Transmis complet',
-            'default_assigned_group': 'environment_editors',
-            'default_assigned_user': 'urban.assign_folder_manager',
-            'creation_state': ('complete',),
-            'start_date': 'schedule.start_date.task_starting_date',
-            'end_conditions': (
-                EndConditionObject('urban.schedule.condition.acknowledgment_done'),
-            ),
-            'calculation_delay': (
-                'schedule.calculation_default_delay',
-            ),
-            'additional_delay': 0,
         },
         {
             'type_name': 'TaskConfig',
