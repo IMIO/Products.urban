@@ -503,6 +503,14 @@
         name="urban.schedule.condition.LicenceThawed"
     />
 
+    <adapter
+        for="Products.urban.interfaces.IEnvironmentBase
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.DisplayingTheDecisionDoneCondition"
+        name="urban.schedule.condition.display_decision_done"
+    />
+
     <!-- Inspection conditions -->
     <adapter
         for="Products.urban.interfaces.IInspection
