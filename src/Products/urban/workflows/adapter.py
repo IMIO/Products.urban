@@ -61,7 +61,6 @@ class LocalRoleAdapter(object):
         portal_urban = api.portal.get_tool('portal_urban')
         schedule_config = portal_urban.opinions_schedule
 
-        exceptions = ['Voirie_editors', 'Voirie_Validators']
         opinion_editors = []
         all_opinion_request = self.context.getOpinionRequests()
 
@@ -73,8 +72,7 @@ class LocalRoleAdapter(object):
                         task = obj
                         if task and status_by_state[api.content.get_state(task)] in [STARTED, DONE]:
                             group = task.assigned_group
-                            if group not in exceptions:
-                                opinion_editors.append(group)
+                            opinion_editors.append(group)
 
         return opinion_editors
 
