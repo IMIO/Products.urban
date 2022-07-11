@@ -54,31 +54,32 @@ class StateRolesMapping(LocalRoleAdapter):
             return ('Reader', 'Contributor',)
         return ('Reader', 'Editor',)
 
+    # put reader groups first and then let get_opinion_xxx give more permissions if necessary
     mapping = {
         'creation': OrderedDict([
+            (LocalRoleAdapter.get_readers, ('Reader',)),
             (get_editors, ('Editor',)),
             ('opinions_editors', ('Reader',)),
-            (LocalRoleAdapter.get_readers, ('Reader',)),
         ]),
 
         'waiting_opinion': OrderedDict([
+            (LocalRoleAdapter.get_readers, ('Reader',)),
             (get_editors, (get_editors_roles,)),
             (get_opinion_editor, (get_opinion_editor_role,)),
             (get_opinion_validator, (get_opinion_editor_role,)),
-            (LocalRoleAdapter.get_readers, ('Reader',)),
         ]),
 
         'opinion_validation': OrderedDict([
+            (LocalRoleAdapter.get_readers, ('Reader',)),
             (get_opinion_editor, ('Reader',)),
             (get_opinion_validator, ('Reader', 'Contributor',)),
-            (LocalRoleAdapter.get_readers, ('Reader',)),
         ]),
 
         'opinion_given': OrderedDict([
+            (LocalRoleAdapter.get_readers, ('Reader',)),
             (get_opinion_editor, ('Reader',)),
             (get_opinion_validator, ('Reader',)),
             (get_editors, (get_editors_roles,)),
-            (LocalRoleAdapter.get_readers, ('Reader',)),
         ]),
 
     }
