@@ -140,7 +140,7 @@ class UrbanEventInspectionReport(BaseFolder, UrbanEvent, BrowserDefaultMixin):
     implements(interfaces.IInspectionReportEvent)
 
     meta_type = 'UrbanEventInspectionReport'
-    _at_rename_after_creation = True
+    _at_rename_after_creation = False
 
     schema = UrbanEventInspectionReport_schema
 

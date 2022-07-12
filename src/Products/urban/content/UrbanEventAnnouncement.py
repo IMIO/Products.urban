@@ -52,7 +52,7 @@ class UrbanEventAnnouncement(BaseFolder, UrbanEventInquiry, BrowserDefaultMixin)
     implements(interfaces.IUrbanEventAnnouncement)
 
     meta_type = 'UrbanEventAnnouncement'
-    _at_rename_after_creation = True
+    _at_rename_after_creation = False
 
     schema = UrbanEventAnnouncement_schema
 
