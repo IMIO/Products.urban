@@ -44,7 +44,7 @@
 
 
 <fieldset metal:define-macro="urbanRepresentativeContactsMacro" i18n:domain="urban" tal:define="representativeContacts here/getRepresentativeContacts">
-    <legend i18n:translate="urban_label_representative_contacts">RepresentativeContacts(s)</legend>
+    <legend i18n:translate="urban_label_representative_contacts">RepresentativeContacts</legend>
     <tal:loop repeat="representativeContact representativeContacts" tal:condition="representativeContacts">
         <div class="#" tal:attributes="class python: 'clear'">
             <a href="#" tal:attributes="href python: representativeContact.absolute_url() + '?came_from_licence_uid=' + context.UID()">
@@ -156,6 +156,14 @@
               i18n:domain="urban" name="quickAdd"  action="createObject" method="post" style="float: left">
             <input type="hidden" name="type_name" value="#" tal:attributes="value ctype/id" />
             <input type="submit" class="context apButton contenttype-applicant" id="add-applicant" value="add_a_physical_applicant" i18n:attributes="value" />
+        </form>
+        <form tal:define="ctype python: context.portal_types.getTypeInfo('Couple');
+                         member context/@@plone_portal_state/member;"
+              tal:condition="python: member.has_permission('urban: Add Couple', context)"
+              tal:attributes="action python: context.absolute_url() + '/createObject'"
+              i18n:domain="urban" name="quickAdd"  action="createObject" method="post" style="float: left">
+            <input type="hidden" name="type_name" value="#" tal:attributes="value ctype/id" />
+            <input type="submit" class="context apButton contenttype-applicant" id="add-couple" value="add_a_couple" i18n:attributes="value" />
         </form>
         <form tal:define="ctype python: context.portal_types.getTypeInfo('Corporation');
                          member context/@@plone_portal_state/member;"
