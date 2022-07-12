@@ -231,7 +231,7 @@ EventConfigs = {
         {
             'id': "annonce-de-projet-codt",
             'title': "Annonce de projet",
-            'activatedFields': ('investigationStart', 'investigationEnd',),
+            'activatedFields': ('investigationStart', 'investigationEnd','displayDate'),
             'deadLineDelay': 15,
             'TALCondition': "here/mayAddAnnouncementEvent",
             'specialFunctionName': "Rechercher les propriétaires situés dans un rayon de 50m",
@@ -246,7 +246,7 @@ EventConfigs = {
         {
             'id': "enquete-publique-codt",
             'title': "Enquête publique",
-            'activatedFields': ('investigationStart', 'investigationEnd', 'claimsDate', 'explanationStartSDate', 'explanationEndSDate', 'claimsText',),
+            'activatedFields': ('investigationStart', 'investigationEnd', 'displayDate', 'claimsDate', 'claimsText',),
             'deadLineDelay': 15,
             'TALCondition': "here/mayAddInquiryEvent",
             'specialFunctionName': "Rechercher les propriétaires situés dans un rayon de 50m",
@@ -263,7 +263,8 @@ EventConfigs = {
                     ]
                 },
                 {'id': "codt_pu_annexe_26_affiche_jaune.odt", 'title': "Affiche jaune (annexe 26)"},
-                {'id': "codt_pu_reclamations_reimport.ods", 'title': "Fichier réclamants pour réimport"}
+                {'id': "codt_pu_reclamations_reimport.ods", 'title': "Fichier réclamants pour réimport"},
+                {'id': "codt_pu_PV_cloture_enquete.odt", 'title':"PV clôture d'enquête"}
             ),
             'eventType': ('Products.urban.interfaces.IInquiryEvent',),
             'eventPortalType': 'UrbanEventInquiry',
