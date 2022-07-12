@@ -788,6 +788,7 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     schema.moveField('protectedBuildingDetails', after='protectedBuilding')
     schema.moveField('patrimony_analysis', after='protectedBuildingDetails')
     schema.moveField('patrimony_observation', after='patrimony_analysis')
+    schema['referenceDGATLP'].widget.label = _('urban_label_notaryReference')
     return schema
 
 finalizeSchema(UrbanCertificateBase_schema)

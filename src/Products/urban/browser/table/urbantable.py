@@ -225,7 +225,7 @@ class AttachmentsTable(UrbanTable, SequenceTable):
     """
     implements(interfaces.IAttachmentsTable)
 
-    sortOn = 'table-creationdateColumn-1'
+    sortOn = None
     cssClasses = {'table': 'listing nosort largetable'}
     batchSize = 9999
     startBatchingAt = 9999
