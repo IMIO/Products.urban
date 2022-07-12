@@ -2121,15 +2121,15 @@ msgstr "Dossier introduit par ${notary}"
 msgid "rgbsr_folder_title"
 msgstr "Réglement général sur les bâtisses en site rural"
 
-#: ../content/licence/BaseBuildLicence.py:579
+#: ../content/licence/BaseBuildLicence.py:580
 msgid "road_adaptation_create"
 msgstr "Ouverture (création)"
 
-#: ../content/licence/BaseBuildLicence.py:578
+#: ../content/licence/BaseBuildLicence.py:579
 msgid "road_adaptation_modify"
 msgstr "Modification"
 
-#: ../content/licence/BaseBuildLicence.py:580
+#: ../content/licence/BaseBuildLicence.py:581
 msgid "road_adaptation_supress"
 msgstr "Suppression"
 
@@ -2902,7 +2902,7 @@ msgid "urban_label_complement"
 msgstr "Compléments"
 
 #. Default: "Composition"
-#: ../content/licence/BaseBuildLicence.py:531
+#: ../content/licence/BaseBuildLicence.py:532
 msgid "urban_label_composition"
 msgstr "Composition"
 
@@ -3057,12 +3057,12 @@ msgid "urban_label_delay"
 msgstr "Délai"
 
 #. Default: "Delayaftermodifiedblueprints"
-#: ../content/licence/BaseBuildLicence.py:488
+#: ../content/licence/BaseBuildLicence.py:489
 msgid "urban_label_delayAfterModifiedBlueprints"
 msgstr "Nouveau délai suite aux plans modificatifs"
 
 #. Default: "Delayaftermodifiedblueprintsdetails"
-#: ../content/licence/BaseBuildLicence.py:501
+#: ../content/licence/BaseBuildLicence.py:502
 msgid "urban_label_delayAfterModifiedBlueprintsDetails"
 msgstr "Détails concernant le nouveau délai suite aux plans modificatifs"
 
@@ -3160,7 +3160,7 @@ msgid "urban_label_editionOutputFormat"
 msgstr "Format de fichier des modèles générés"
 
 #. Default: "Electricity"
-#: ../content/licence/BaseBuildLicence.py:523
+#: ../content/licence/BaseBuildLicence.py:524
 msgid "urban_label_electricity"
 msgstr "Electricité"
 
@@ -3215,7 +3215,7 @@ msgid "urban_label_eventRecipient"
 msgstr "Destinataire du document"
 
 #. Default: "Exemptfdarticle"
-#: ../content/licence/BaseBuildLicence.py:470
+#: ../content/licence/BaseBuildLicence.py:471
 msgid "urban_label_exemptFDArticle"
 msgstr "Article 107"
 
@@ -3435,7 +3435,7 @@ msgid "urban_label_hasEnvironmentImpactStudy"
 msgstr "Étude d'incidences sur l'environnement"
 
 #. Default: "Hasmodifiedblueprints"
-#: ../content/licence/BaseBuildLicence.py:481
+#: ../content/licence/BaseBuildLicence.py:482
 msgid "urban_label_hasModifiedBlueprints"
 msgstr "Plans modificatifs"
 
@@ -3863,6 +3863,9 @@ msgstr "Non applicable"
 msgid "urban_label_notaryContact"
 msgstr "Notaire(s)"
 
+msgid "urban_label_notaryReference"
+msgstr "Référence notaire"
+
 #. Default: "Noteworthytrees"
 #: ../content/licence/GenericLicence.py:1026
 msgid "urban_label_noteworthyTrees"
@@ -4164,7 +4167,7 @@ msgid "urban_label_prevuDetails"
 msgstr "Détails concernant le Périmètre de Revitalisation Urbaine"
 
 #. Default: "Procedurechoice"
-#: ../content/licence/BaseBuildLicence.py:449
+#: ../content/licence/BaseBuildLicence.py:450
 #: ../content/licence/EnvironmentBase.py:179
 msgid "urban_label_procedureChoice"
 msgstr "Choix de la procédure"
@@ -4412,7 +4415,7 @@ msgid "urban_label_requestedOrganisation"
 msgstr "Organisme"
 
 #. Default: "Requirementfromfd"
-#: ../content/licence/BaseBuildLicence.py:460
+#: ../content/licence/BaseBuildLicence.py:461
 msgid "urban_label_requirementFromFD"
 msgstr "Fonctionnaire délégué"
 
@@ -4872,7 +4875,7 @@ msgid "urban_label_warnings"
 msgstr "Avertissements"
 
 #. Default: "Water"
-#: ../content/licence/BaseBuildLicence.py:515
+#: ../content/licence/BaseBuildLicence.py:516
 msgid "urban_label_water"
 msgstr "Eau"
 
@@ -5003,15 +5006,15 @@ msgstr "Certificats d'urbanisme 2"
 msgid "urbantemplates_folder_title"
 msgstr "modèles des procédures d'urbanisme"
 
-#: ../content/licence/BaseBuildLicence.py:592
+#: ../content/licence/BaseBuildLicence.py:593
 msgid "usage_for_habitation"
 msgstr "Modèle I: Bâtiment(s) destiné(s) exclusivement ou principalement à l'habitation"
 
-#: ../content/licence/BaseBuildLicence.py:594
+#: ../content/licence/BaseBuildLicence.py:595
 msgid "usage_not_applicable"
 msgstr "Pas d'application"
 
-#: ../content/licence/BaseBuildLicence.py:593
+#: ../content/licence/BaseBuildLicence.py:594
 msgid "usage_not_for_habitation"
 msgstr "Modèle II: Bâtiment(s) destiné(s) exclusivement ou principalement à un autre usage que l'habitation"
 
