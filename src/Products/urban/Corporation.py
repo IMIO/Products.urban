@@ -234,5 +234,6 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     schema.moveField('contactPersonCity', after='contactPersonZipcode')
 
 
+
 finalizeSchema(Corporation_schema)
 ##/code-section module-footer

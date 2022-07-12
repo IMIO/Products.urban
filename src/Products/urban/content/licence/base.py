@@ -57,7 +57,9 @@ class UrbanBase(object):
                       if app.portal_type == 'Applicant'
                       and api.content.get_state(app) == 'enabled']
         corporations = self.getCorporations()
+        couples = self.getCouples()
         applicants.extend(corporations)
+        applicants.extend(couples)
         return applicants
 
     security.declarePublic('get_applicants_history')
@@ -83,6 +85,18 @@ class UrbanBase(object):
     def get_corporations_history(self):
         return [corp for corp in self.objectValues('Corporation')
                 if api.content.get_state(corp) == 'disabled']
+
+    security.declarePublic('getCouples')
+    def getCouples(self):
+        couples = [coup for coup in self.objectValues('Couple')
+                        if coup.portal_type == 'Couple'
+                        and api.content.get_state(coup) == 'enabled']
+        return couples
+
+    security.declarePublic('get_couples_history')
+    def get_couples_history(self):
+        return [coup for coup in self.objectValues('Couple')
+                if api.content.get_state(coup) == 'disabled']
 
     security.declarePublic('getProprietaries')
     def getProprietaries(self):
