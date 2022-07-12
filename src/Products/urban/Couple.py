@@ -209,6 +209,9 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     schema.moveField('couplePerson1Firstname', after='couplePerson1Name')
     schema.moveField('couplePerson2Name', after='couplePerson1Firstname')
     schema.moveField('couplePerson2Firstname', after='couplePerson2Name')
+    schema['personTitle'].vocabulary = UrbanVocabulary(
+        'persons_titles', vocType='PersonTitleTerm', inUrbanConfig=False, _filter=lambda title: title['multiplicity'] == 'plural'
+    )
 
 
 finalizeSchema(Couple_schema)
