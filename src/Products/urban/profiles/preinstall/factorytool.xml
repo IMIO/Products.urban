@@ -40,6 +40,7 @@
   <type portal_type="UrbanEventMayor"/>
   <type portal_type="UrbanEventNotificationCollege"/>
   <type portal_type="UrbanEventOpinionRequest"/>
+  <type portal_type="UrbanEventInspectionReport"/>
   <type portal_type="OrganisationTerm"/>
   <type portal_type="MiscDemand"/>
   <type portal_type="UrbanConfigurationValue"/>

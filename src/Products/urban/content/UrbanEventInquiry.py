@@ -177,7 +177,7 @@ class UrbanEventInquiry(BaseFolder, UrbanEvent, BrowserDefaultMixin):
     implements(interfaces.IUrbanEventInquiry)
 
     meta_type = 'UrbanEventInquiry'
-    _at_rename_after_creation = True
+    _at_rename_after_creation = False
 
     schema = UrbanEventInquiry_schema
 
