@@ -387,6 +387,14 @@
         handler=".update_250.add_default_LO_server_port"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Install applicant couple type"
+        description="Install applicant couple type"
+        source="1120"
+        destination="1121"
+        handler=".update_250.add_applicant_couple_type"
+        profile="Products.urban:default" />
+
     <!--gs:upgradeStep
         title="Add schedule config for env licences 1 and 2"
         description="urban upgrade step"

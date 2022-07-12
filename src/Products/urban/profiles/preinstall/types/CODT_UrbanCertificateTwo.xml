@@ -26,6 +26,7 @@
    <element value="Corporation"/>
    <element value="CODT_Inquiry"/>
    <element value="Applicant"/>
+   <element value="Couple"/>
    <element value="File"/>
    <element value="task"/>
    <element value="ConfigTest"/>
