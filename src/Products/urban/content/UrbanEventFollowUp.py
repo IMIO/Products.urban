@@ -48,7 +48,7 @@ class UrbanEventFollowUp(UrbanEvent, BrowserDefaultMixin):
     implements(interfaces.IUrbanEventFollowUp)
 
     meta_type = 'UrbanEventFollowUp'
-    _at_rename_after_creation = True
+    _at_rename_after_creation = False
 
     schema = UrbanEventFollowUp_schema
 
