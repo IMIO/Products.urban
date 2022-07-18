@@ -127,6 +127,7 @@
         title="incomplete"
         i18n:attributes="title">
   <exit-transition transition_id="reopen"/>
+  <exit-transition transition_id="retire"/>
   <exit-transition transition_id="refuse"/>
   <permission-map name="Acces contents information"
                   acquired="False">

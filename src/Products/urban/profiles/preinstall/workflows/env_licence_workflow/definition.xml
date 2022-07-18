@@ -78,6 +78,7 @@
         i18n:attributes="title">
   <exit-transition transition_id="isincomplete"/>
   <exit-transition transition_id="iscomplete"/>
+  <exit-transition transition_id="retire"/>
   <exit-transition transition_id="isinacceptable"/>
   <permission-map name="Acces contents information"
                   acquired="False">
