@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2022-05-05 13:27+0000\n"
+"POT-Creation-Date: 2022-07-27 11:38+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -716,7 +716,7 @@ msgstr ""
 msgid "Suspension period end date"
 msgstr ""
 
-#: ../browser/urbaneventviews.py:443
+#: ../browser/urbaneventviews.py:441
 msgid "Suspension period from to: please check the end date"
 msgstr ""
 
@@ -733,7 +733,7 @@ msgstr ""
 msgid "Tests Extension profile for urban."
 msgstr ""
 
-#: ../browser/urbaneventviews.py:437
+#: ../browser/urbaneventviews.py:435
 msgid "The claimants import will be ready tomorrow!"
 msgstr ""
 
@@ -745,15 +745,15 @@ msgstr ""
 msgid "The mailings will be ready tomorrow!"
 msgstr ""
 
-#: ../browser/urbaneventviews.py:468
+#: ../browser/urbaneventviews.py:466
 msgid "The parcel radius search will be ready tomorrow!"
 msgstr ""
 
-#: ../browser/urbaneventviews.py:466
+#: ../browser/urbaneventviews.py:464
 msgid "There are parcel owners without any address found! Desactivate them!"
 msgstr ""
 
-#: ../browser/urbaneventviews.py:435
+#: ../browser/urbaneventviews.py:433
 msgid "This UrbanEventInquiry is not linked to an existing Inquiry !  Define a new inquiry on the licence !"
 msgstr ""
 
@@ -848,19 +848,19 @@ msgstr ""
 msgid "add_a_claimant"
 msgstr ""
 
-#: ../browser/licence/templates/licencemacros.pt:166
+#: ../browser/licence/templates/licencemacros.pt:182
 msgid "add_a_corporation"
 msgstr ""
 
-#: ../browser/licence/templates/licencemacros.pt:210
+#: ../browser/licence/templates/licencemacros.pt:218
 msgid "add_a_corporation_plaintiff"
 msgstr ""
 
-#: ../browser/licence/templates/licencemacros.pt:140
+#: ../browser/licence/templates/licencemacros.pt:148
 msgid "add_a_corporation_tenant"
 msgstr ""
 
-#: ../browser/licence/templates/licencemacros.pt:105
+#: ../browser/licence/templates/licencemacros.pt:113
 msgid "add_a_corporationproprietary"
 msgstr ""
 
@@ -868,11 +868,11 @@ msgstr ""
 msgid "add_a_couple"
 msgstr ""
 
-#: ../browser/licence/templates/licencemacros.pt:158
+#: ../browser/licence/templates/licencemacros.pt:166
 msgid "add_a_physical_applicant"
 msgstr ""
 
-#: ../browser/licence/templates/licencemacros.pt:202
+#: ../browser/licence/templates/licencemacros.pt:210
 msgid "add_a_physical_plaintiff"
 msgstr ""
 
@@ -880,7 +880,11 @@ msgstr ""
 msgid "add_a_proprietary"
 msgstr ""
 
-#: ../browser/licence/templates/licencemacros.pt:132
+#: ../browser/licence/templates/licencemacros.pt:105
+msgid "add_a_proprietary_couple"
+msgstr ""
+
+#: ../browser/licence/templates/licencemacros.pt:140
 msgid "add_a_tenant"
 msgstr ""
 
@@ -931,12 +935,12 @@ msgid "announcementarticles_folder_title"
 msgstr ""
 
 #. Default: "Applicant(s)"
-#: ../browser/licence/templates/licencemacros.pt:146
+#: ../browser/licence/templates/licencemacros.pt:154
 msgid "applicants"
 msgstr ""
 
 #. Default: "Applicant(s) history"
-#: ../browser/licence/templates/licencemacros.pt:181
+#: ../browser/licence/templates/licencemacros.pt:189
 msgid "applicants_history"
 msgstr ""
 
@@ -972,7 +976,7 @@ msgid "basement_folder_title"
 msgstr ""
 
 #. Default: "Bound licence applicant(s)"
-#: ../browser/licence/templates/licencemacros.pt:217
+#: ../browser/licence/templates/licencemacros.pt:225
 msgid "bound_licence_applicants"
 msgstr ""
 
@@ -2030,7 +2034,7 @@ msgid "pipelines_folder_title"
 msgstr ""
 
 #. Default: "Plaintiff(s)"
-#: ../browser/licence/templates/licencemacros.pt:189
+#: ../browser/licence/templates/licencemacros.pt:197
 msgid "plaintiffs"
 msgstr ""
 
@@ -2057,7 +2061,7 @@ msgid "proprietaries"
 msgstr ""
 
 #. Default: "Proprietaries history"
-#: ../browser/licence/templates/licencemacros.pt:112
+#: ../browser/licence/templates/licencemacros.pt:120
 msgid "proprietaries_history"
 msgstr ""
 
@@ -2218,7 +2222,7 @@ msgid "templates_summary_title"
 msgstr ""
 
 #. Default: "Tenant(s)"
-#: ../browser/licence/templates/licencemacros.pt:121
+#: ../browser/licence/templates/licencemacros.pt:129
 msgid "tenants"
 msgstr ""
 
@@ -3833,6 +3837,7 @@ msgstr ""
 msgid "urban_label_notaryContact"
 msgstr ""
 
+#: ../content/licence/UrbanCertificateBase.py:791
 msgid "urban_label_notaryReference"
 msgstr ""
 
@@ -5005,7 +5010,7 @@ msgid "warning_add_an_applicant"
 msgstr ""
 
 #. Default: "You must encode plaintiff(s)"
-#: ../browser/licence/templates/licencemacros.pt:192
+#: ../browser/licence/templates/licencemacros.pt:200
 msgid "warning_add_an_plaintiff"
 msgstr ""
 

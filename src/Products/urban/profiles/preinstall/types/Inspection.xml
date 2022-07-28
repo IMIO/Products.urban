@@ -18,6 +18,7 @@
    <element value="Couple"/>
    <element value="Corporation"/>
    <element value="Proprietary"/>
+   <element value="ProprietaryCouple"/>
    <element value="CorporationProprietary"/>
    <element value="Tenant"/>
    <element value="Plaintiff"/>

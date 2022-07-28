@@ -79,12 +79,14 @@ def inspection_applicantinfoindex(object):
 
 
 def _get_applicantsinfoindex(applicant):
-    if applicant.portal_type == 'Couple':
+    if applicant.meta_type == 'Couple':
         applicants_info = [
             applicant.getCouplePerson1Name(),
             applicant.getCouplePerson1Firstname(),
             applicant.getCouplePerson2Name(),
             applicant.getCouplePerson2Firstname(),
+            applicant.getNationalRegisterPerson1(),
+            applicant.getNationalRegisterPerson2(),
         ]
     else:
         applicants_info = [

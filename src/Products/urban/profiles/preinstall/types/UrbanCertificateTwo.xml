@@ -21,6 +21,7 @@
    <element value="UrbanEventCollege"/>
    <element value="UrbanEventNotificationCollege"/>
    <element value="Proprietary"/>
+   <element value="ProprietaryCouple"/>
    <element value="CorporationProprietary"/>
    <element value="Corporation"/>
    <element value="Applicant"/>
