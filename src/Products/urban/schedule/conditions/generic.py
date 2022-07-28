@@ -84,6 +84,8 @@ class ComplementsAsked(Condition):
         missing_part_event = licence.getLastMissingPart()
         if missing_part_event:
             complements_asked = api.content.get_state(missing_part_event) == 'closed'
+            recent = self.task.creation_date < missing_part_event.creation_date
+            complements_asked = complements_asked and recent
 
         return complements_asked
 
@@ -100,6 +102,8 @@ class AcknowledgmentDoneOrComplementsAskedCondition(Condition):
         acknowledgment_event = licence.getLastAcknowledgment()
         if acknowledgment_event:
             acknowledgment_done = api.content.get_state(acknowledgment_event) == 'closed'
+            recent = self.task.creation_date < acknowledgment_event.creation_date
+            acknowledgment_done = acknowledgment_done and recent
 
         complements_asked = False
         missing_part_event = licence.getLastMissingPart()
