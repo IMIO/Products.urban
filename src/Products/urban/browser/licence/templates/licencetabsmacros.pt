@@ -493,7 +493,7 @@
               tal:condition="view/canAddUrbanEvent">
                 <select name="urban_event_infos">
                     <tal:loopEventType repeat="event_config event_configs">
-                        <option tal:attributes="value python: event_config.UID+'|'+event_config.cmf_uid"
+                        <option tal:attributes="value python: event_config.UID()+'|'+event_config.getEventPortalType()"
                                 value='' tal:content="event_config/Title">
                         </option>
                     </tal:loopEventType>

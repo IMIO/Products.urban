@@ -47,7 +47,7 @@ def setEventMarkerInterfaces(urban_event, event):
     if not urban_eventType:
         return
 
-    urban_eventTypeTypes = urban_eventType.getEventTypeType()
+    urban_eventTypeTypes = urban_eventType.getEventType()
     if not urban_eventTypeTypes:
         return
 
