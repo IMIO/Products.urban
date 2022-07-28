@@ -58,8 +58,8 @@ class UrbanBase(object):
                       and api.content.get_state(app) == 'enabled']
         corporations = self.getCorporations()
         couples = self.getCouples()
-        applicants.extend(corporations)
         applicants.extend(couples)
+        applicants.extend(corporations)
         return applicants
 
     security.declarePublic('get_applicants_history')
@@ -71,6 +71,8 @@ class UrbanBase(object):
                 if app.portal_type == 'Applicant'
                 and api.content.get_state(app) == 'disabled']
         corporations = self.get_corporations_history()
+        couples = self.get_couples_history()
+        applicants.extend(couples)
         applicants.extend(corporations)
         return applicants
 
@@ -83,20 +85,24 @@ class UrbanBase(object):
 
     security.declarePublic('get_corporations_history')
     def get_corporations_history(self):
-        return [corp for corp in self.objectValues('Corporation')
-                if api.content.get_state(corp) == 'disabled']
+        corporations = [corp for corp in self.objectValues('Corporation')
+                        if corp.portal_type == 'Corporation'
+                        and api.content.get_state(corp) == 'disabled']
+        return corporations
 
     security.declarePublic('getCouples')
     def getCouples(self):
-        couples = [coup for coup in self.objectValues('Couple')
-                        if coup.portal_type == 'Couple'
-                        and api.content.get_state(coup) == 'enabled']
+        couples = [couple for couple in self.objectValues('Couple')
+                   if couple.portal_type == 'Couple'
+                   and api.content.get_state(couple) == 'enabled']
         return couples
 
     security.declarePublic('get_couples_history')
     def get_couples_history(self):
-        return [coup for coup in self.objectValues('Couple')
-                if api.content.get_state(coup) == 'disabled']
+        couples = [couple for couple in self.objectValues('Couple')
+                   if couple.portal_type == 'Couple'
+                   and api.content.get_state(couple) == 'disabled']
+        return couples
 
     security.declarePublic('getProprietaries')
     def getProprietaries(self):
@@ -107,6 +113,8 @@ class UrbanBase(object):
                          if pro.portal_type == 'Proprietary'
                          and api.content.get_state(pro) == 'enabled']
         corporations = self.getCorporationsProprietary()
+        couples = self.getProprietaryCouples()
+        proprietaries.extend(couples)
         proprietaries.extend(corporations)
         return proprietaries
 
@@ -116,9 +124,11 @@ class UrbanBase(object):
         Return the history of proprietaries for the Licence
         """
         proprietaries = [app for app in self.objectValues('Applicant')
-                if app.portal_type == 'Proprietary'
-                and api.content.get_state(app) == 'disabled']
+                         if app.portal_type == 'Proprietary'
+                         and api.content.get_state(app) == 'disabled']
         corporations = self.get_corporation_proprietaries_history()
+        couples = self.get_proprietary_couples_history()
+        proprietaries.extend(couples)
         proprietaries.extend(corporations)
         return proprietaries
 
@@ -135,6 +145,20 @@ class UrbanBase(object):
                         if corp.portal_type == 'CorporationProprietary'
                         and api.content.get_state(corp) == 'disabled']
         return corporations
+
+    security.declarePublic('getProprietaryCouples')
+    def getProprietaryCouples(self):
+        couples = [couple for couple in self.objectValues('Couple')
+                   if couple.portal_type == 'ProprietaryCouple'
+                   and api.content.get_state(couple) == 'enabled']
+        return couples
+
+    security.declarePublic('get_proprietary_couples_history')
+    def get_proprietary_couples_history(self):
+        couples = [couple for couple in self.objectValues('Couple')
+                   if couple.portal_type == 'ProprietaryCouple'
+                   and api.content.get_state(couple) == 'disabled']
+        return couples
 
     security.declarePublic('getApplicantsSignaletic')
     def getApplicantsSignaletic(self, withaddress=False, linebyline=False, remove_comma=False):

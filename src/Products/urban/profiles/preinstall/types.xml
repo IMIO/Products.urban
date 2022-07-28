@@ -111,6 +111,8 @@
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="Couple"
          meta_type="Factory-based Type Information with dynamic views"/>
+ <object name="ProprietaryCouple"
+         meta_type="Factory-based Type Information with dynamic views"/>
  <object name="EnvClassTwo"
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="EnvClassOne"

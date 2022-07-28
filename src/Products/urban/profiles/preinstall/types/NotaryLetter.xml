@@ -16,6 +16,7 @@
    <element value="Applicant"/>
    <element value="Couple"/>
    <element value="Proprietary"/>
+   <element value="ProprietaryCouple"/>
    <element value="CorporationProprietary"/>
    <element value="Parcel"/>
    <element value="UrbanEvent"/>

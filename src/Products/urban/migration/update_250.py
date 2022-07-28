@@ -559,6 +559,7 @@ def add_applicant_couple_type(context):
     logger = logging.getLogger('urban: add second default LO port')
     logger.info("starting upgrade steps")
     setup_tool = api.portal.get_tool('portal_setup')
+    setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'factorytool')
     setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'typeinfo')
     setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'workflow')
     logger.info("upgrade step done!")
