@@ -562,4 +562,5 @@ def add_applicant_couple_type(context):
     setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'factorytool')
     setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'typeinfo')
     setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'workflow')
+    setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'update-workflow-rolemap')
     logger.info("upgrade step done!")
