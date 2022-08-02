@@ -46,7 +46,7 @@ schema = Schema((
             description_msgid='urban_help_description',
             i18n_domain='urban',
         ),
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
         accessor="Description",
     ),
     StringField(
@@ -121,7 +121,7 @@ class UrbanVocabulary(object):
 
     implements(IVocabulary)
 
-    def __init__(self, path, vocType="UrbanVocabularyTerm", id_to_use="id", value_to_use="title", sort_on="getObjPositionInParent", inUrbanConfig=True, allowedStates=['enabled'], with_empty_value=False, datagridfield_key='street'):
+    def __init__(self, path, vocType="UrbanVocabularyTerm", id_to_use="id", value_to_use="title", sort_on="getObjPositionInParent", inUrbanConfig=True, allowedStates=['enabled'], with_empty_value=False, datagridfield_key='street', _filter=None):
         self.path = path
         self.vocType = vocType
         self.id_to_use = id_to_use
@@ -131,8 +131,9 @@ class UrbanVocabulary(object):
         self.allowedStates = allowedStates
         self.with_empty_value = with_empty_value
         self.datagridfield_key = datagridfield_key
+        self._filter = _filter
 
-    def get_raw_voc(self, context, licence_type=''):
+    def get_raw_voc(self, context, licence_type='', _filter=None):
         portal_urban = api.portal.get_tool('portal_urban')
         raw_voc = portal_urban.get_vocabulary(
             in_urban_config=self.inUrbanConfig,
@@ -141,6 +142,8 @@ class UrbanVocabulary(object):
             name=self.path
         )
         voc = [v for v in raw_voc if v['portal_type'] in self.vocType]
+        if self._filter:
+            voc = [v for v in voc if self._filter(v)]
         return voc
 
     def get_default_values(self, context):

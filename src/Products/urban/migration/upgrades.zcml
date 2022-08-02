@@ -379,6 +379,22 @@
         handler=".update_250.hide_folder_contents_action"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Add second default OO port"
+        description="Hide content folder action from users"
+        source="1119"
+        destination="1120"
+        handler=".update_250.add_default_LO_server_port"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Install applicant couple type"
+        description="Install applicant couple type"
+        source="1120"
+        destination="1121"
+        handler=".update_250.add_applicant_couple_type"
+        profile="Products.urban:default" />
+
     <!--gs:upgradeStep
         title="Add schedule config for env licences 1 and 2"
         description="urban upgrade step"

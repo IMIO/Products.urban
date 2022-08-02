@@ -148,7 +148,7 @@ schema = Schema((
         ),
         default_content_type='text/html',
         default_method='getDefaultText',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
         schemata='urban_inquiry'
     ),
 ),

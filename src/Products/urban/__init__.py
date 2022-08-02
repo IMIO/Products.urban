@@ -141,6 +141,7 @@ def initialize(context):
     import content.CODT_Inquiry
     import Contact
     import Corporation
+    import Couple
     import EnvironmentRubricTerm
     import FolderManager
     import content.FollowUpEventType
@@ -243,4 +244,3 @@ for licence_type in URBAN_TYPES + ['UrbanCertificateBase']:
             'Products.urban.{}'.format(licence_type),
             getattr(content.licence, licence_type)
         )
-

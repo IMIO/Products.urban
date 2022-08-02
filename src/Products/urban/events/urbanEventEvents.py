@@ -21,10 +21,10 @@ def setDefaultValuesEvent(urbanevent, event):
     """
     _setDefaultTextValues(urbanevent)
     _setDefaultSelectValues(urbanevent)
+    setEventMarkerInterfaces(urbanevent, event)
 
 
 def _setDefaultTextValues(urbanevent):
-
     select_fields = [field for field in urbanevent.schema.fields() if field.default_method == 'getDefaultText']
 
     text_renderer = DefaultTextRenderer(urbanevent)
@@ -39,8 +39,14 @@ def _setDefaultTextValues(urbanevent):
         field_mutator(rendered_text)
 
 
-def setEventType(urban_event, event):
+def setEventMarkerInterfaces(urban_event, event):
+    """
+    Set the linked event_config, marker interfaces.
+    """
     urban_eventType = urban_event.getUrbaneventtypes()
+    if not urban_eventType:
+        return
+
     urban_eventTypeTypes = urban_eventType.getEventType()
     if not urban_eventTypeTypes:
         return
@@ -94,12 +100,17 @@ def notifyLicence(urban_event, event):
     """
     Notify the licence of changes so schedule events triggers.
     """
-    if not urban_event.checkCreationFlag():
-        licence = urban_event.aq_parent
-        notify(ObjectModifiedEvent(licence))
+    if 'portal_factory' in urban_event.REQUEST.getURL() or\
+       urban_event.checkCreationFlag():
+        return
+    licence = urban_event.aq_parent
+    notify(ObjectModifiedEvent(licence))
 
 
 def updateTaskIndexes(task_container, event):
+    if 'portal_factory' in task_container.REQUEST.getURL():
+        return
+
     task_configs = get_task_configs(task_container)
 
     if not task_configs:

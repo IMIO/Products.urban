@@ -153,7 +153,7 @@ schema = Schema((
         ),
         default_method='getDefaultText',
         default_content_type='text/html',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
         optional=True,
     ),
     DateTimeField(
@@ -213,7 +213,7 @@ schema = Schema((
         ),
         default_method='getDefaultText',
         default_content_type='text/html',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
         optional=True,
     ),
     TextField(
@@ -224,7 +224,7 @@ schema = Schema((
         ),
         default_method='getDefaultText',
         default_content_type='text/html',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
         optional=True,
     ),
     ReferenceField(
@@ -272,7 +272,7 @@ schema = Schema((
         ),
         default_method='getDefaultText',
         default_content_type='text/html',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
         optional=True,
         pm_text_field=True,
     ),
@@ -285,7 +285,7 @@ schema = Schema((
         ),
         default_method='getDefaultText',
         default_content_type='text/html',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
         optional=True,
         pm_text_field=True,
     ),
@@ -297,7 +297,7 @@ schema = Schema((
         ),
         default_method='getDefaultText',
         default_content_type='text/html',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
         optional=True,
         pm_text_field=True,
     ),
@@ -309,7 +309,7 @@ schema = Schema((
         ),
         default_method='getDefaultText',
         default_content_type='text/html',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
         optional= True,
     ),
     TextField(
@@ -320,7 +320,7 @@ schema = Schema((
         ),
         default_method='getDefaultText',
         default_content_type='text/html',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
         optional=True,
     ),
     DateTimeField(
@@ -406,7 +406,7 @@ schema = Schema((
         ),
         default_method='getDefaultText',
         default_content_type='text/html',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
         optional=True,
     ),
     TextField(
@@ -417,7 +417,7 @@ schema = Schema((
         ),
         default_method='getDefaultText',
         default_content_type='text/html',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
         optional=True,
     ),
     DateTimeField(
@@ -474,6 +474,8 @@ UrbanEvent_schema = BaseFolderSchema.copy() + \
 
 ##code-section after-schema #fill in your manual code here
 UrbanEvent_schema['title'].widget.condition = "python:here.showTitle()"
+UrbanEvent_schema['title'].default_method = 'defaultTitle'
+UrbanEvent_schema['title'].required = False
 ##/code-section after-schema
 
 
@@ -488,7 +490,7 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
     )
 
     meta_type = 'UrbanEvent'
-    _at_rename_after_creation = True
+    _at_rename_after_creation = False
     __ac_local_roles_block__ = True
 
     schema = UrbanEvent_schema
@@ -744,6 +746,25 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
             return urbanEventType.getShowTitle()
         else:
             return False
+
+    def defaultTitle(self):
+        """
+        """
+        urbanEventType = self.getUrbaneventtypes()
+        if urbanEventType:
+            return urbanEventType.Title()
+        else:
+            return ''
+
+    security.declarePublic('getUrbaneventtypes')
+    def getUrbaneventtypes(self):
+        """
+        """
+        event_config = self.getField('urbaneventtypes').get(self)
+        if not event_config and self.REQUEST.form.get('urbaneventtypes'):
+            uid_catalog = api.portal.get_tool('uid_catalog')
+            event_config = uid_catalog(UID=self.REQUEST.form['urbaneventtypes'])[0].getObject()
+        return event_config
 
     security.declarePublic('getDecision')
 
