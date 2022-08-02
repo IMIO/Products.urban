@@ -18,6 +18,7 @@
    <element value="UrbanEventCollege"/>
    <element value="UrbanEventMayor"/>
    <element value="Applicant"/>
+   <element value="Couple"/>
    <element value="Corporation"/>
    <element value="UrbanEvent"/>
    <element value="File"/>

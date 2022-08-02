@@ -36,7 +36,7 @@
               handler=".inquiryEvents.notifyLicence"/>
 
   <subscriber for="..interfaces.IInquiry
-                   Products.Archetypes.interfaces.IEditBegunEvent"
+                   zope.lifecycleevent.interfaces.IObjectCreatedEvent"
               handler=".inquiryEvents.setDefaultValuesEvent"/>
 
   <subscriber for="..interfaces.IInquiry
@@ -104,19 +104,19 @@
               handler=".licenceEvents.reindex_licence_permissions" />
 
   <subscriber for="..interfaces.IUrbanEvent
-                   Products.Archetypes.interfaces.IObjectInitializedEvent"
+                  zope.lifecycleevent.interfaces.IObjectCreatedEvent"
               handler=".urbanEventEvents.setDefaultValuesEvent"/>
 
   <subscriber for="..interfaces.IUrbanEvent
                    Products.Archetypes.interfaces.IObjectInitializedEvent"
-              handler=".urbanEventEvents.setEventType"/>
+              handler=".urbanEventEvents.setEventMarkerInterfaces"/>
 
   <subscriber for="..interfaces.IUrbanEvent
                    Products.Archetypes.interfaces.IObjectInitializedEvent"
               handler=".urbanEventEvents.setCreationDate"/>
 
   <subscriber for="..interfaces.IUrbanEvent
-                   zope.lifecycleevent.interfaces.IObjectCreatedEvent"
+                   Products.Archetypes.interfaces.IObjectInitializedEvent"
               handler=".urbanEventEvents.generateSingletonDocument"/>
 
   <subscriber for="..interfaces.IUrbanEvent

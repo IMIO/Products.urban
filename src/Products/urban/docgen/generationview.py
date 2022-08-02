@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from Products.urban.interfaces import IGenericLicence
 from Products.urban.interfaces import IUrbanDoc
 
 from collective.documentgenerator.browser.generation_view import PersistentDocumentGenerationView
@@ -45,6 +46,9 @@ class UrbanDocGenerationView(PersistentDocumentGenerationView):
         """
         portal_urban = api.portal.get_tool('portal_urban')
         licence = self.context.getParentNode()
+        while not IGenericLicence.providedBy(licence):
+            licence = licence.getParentNode()
+
         foldermanagers = [fm.unrestrictedTraverse('@@document_generation_helper_view').context
                           for fm in licence.getFoldermanagers()]
         applicants = licence.getApplicants()

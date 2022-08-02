@@ -105,7 +105,7 @@ schema = Schema((
             label=_('urban_label_claimsText', default='Claimstext'),
         ),
         default_method='getDefaultText',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
         optional=True,
     ),
     DateTimeField(
@@ -177,7 +177,7 @@ class UrbanEventInquiry(BaseFolder, UrbanEvent, BrowserDefaultMixin):
     implements(interfaces.IUrbanEventInquiry)
 
     meta_type = 'UrbanEventInquiry'
-    _at_rename_after_creation = True
+    _at_rename_after_creation = False
 
     schema = UrbanEventInquiry_schema
 

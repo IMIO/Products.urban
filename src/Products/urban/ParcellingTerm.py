@@ -102,7 +102,7 @@ schema = Schema((
             label_msgid='urban_label_changesDescription',
             i18n_domain='urban',
         ),
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
 
 ),

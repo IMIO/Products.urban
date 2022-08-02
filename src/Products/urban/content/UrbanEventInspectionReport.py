@@ -53,7 +53,7 @@ schema = Schema((
         ),
         default_method='getDefaultText',
         default_content_type='text/html',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     TextField(
         name='proofs',
@@ -63,7 +63,7 @@ schema = Schema((
         ),
         default_method='getDefaultText',
         default_content_type='text/html',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     LinesField(
         name='offense_articles',
@@ -83,7 +83,7 @@ schema = Schema((
         allowable_content_types=('text/html',),
         default_method='getDefaultText',
         default_content_type='text/html',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     LinesField(
         name='followup_proposition',
@@ -103,7 +103,7 @@ schema = Schema((
         ),
         default_method='getDefaultText',
         default_content_type='text/html',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     StringField(
         name='delay',
@@ -131,7 +131,7 @@ class UrbanEventInspectionReport(BaseFolder, UrbanEvent, BrowserDefaultMixin):
     implements(interfaces.IUrbanEventInspectionReport)
 
     meta_type = 'UrbanEventInspectionReport'
-    _at_rename_after_creation = True
+    _at_rename_after_creation = False
 
     schema = UrbanEventInspectionReport_schema
 
