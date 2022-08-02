@@ -433,7 +433,7 @@ schema = Schema((
             wild_card_search=True,
             show_results_without_query=True,
             restrict_browsing_to_startup_directory=False,
-            label=_('urban_label_representative_contacts', default='RepresentativeContacts'),
+            label=_('urban_label_representative_contacts', default='RepresentativeContacts(s)'),
             popup_name='contact_reference_popup',
         ),
         schemata='urban_description',

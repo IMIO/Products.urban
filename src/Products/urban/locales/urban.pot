@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2022-07-27 11:38+0000\n"
+"POT-Creation-Date: 2022-08-02 12:15+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,10 @@ msgstr ""
 #: ../browser/gig_coring_settings.py:58
 #: ../browser/offdays_settings.py:75
 msgid ""
+msgstr ""
+
+#: ../skins/urban_plone/create_UrbanEvent.cpy:56
+msgid "${tname} has been created."
 msgstr ""
 
 #. Default: "urban"
@@ -2008,7 +2012,7 @@ msgid "patrimonycertificate_urbanconfig_title"
 msgstr ""
 
 #. Default: "Is key event"
-#: ../browser/templates/globalmacros.pt:107
+#: ../browser/templates/globalmacros.pt:109
 msgid "pca_fieldset_legend"
 msgstr ""
 
@@ -4365,7 +4369,7 @@ msgstr ""
 msgid "urban_label_reportVisitDate"
 msgstr ""
 
-#. Default: "RepresentativeContacts"
+#. Default: "RepresentativeContact(s)"
 #: ../browser/licence/templates/licencemacros.pt:47
 #: ../content/licence/BaseBuildLicence.py:436
 msgid "urban_label_representative_contacts"
