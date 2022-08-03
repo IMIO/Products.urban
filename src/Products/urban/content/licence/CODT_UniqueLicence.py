@@ -32,6 +32,7 @@ from Products.urban.utils import setSchemataForCODT_UniqueLicenceInquiry
 from Products.urban.widget.historizereferencewidget import HistorizeReferenceBrowserWidget
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.urban.widget.urbanreferencewidget import UrbanBackReferenceWidget
+from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 
 from Products.urban.config import *
 from Products.urban import UrbanMessage as _
@@ -57,6 +58,7 @@ slave_fields_ = (
         'control_param': 'values',
     },
 )
+
 ##/code-section module-header
 
 schema = Schema((
@@ -235,6 +237,7 @@ schema = Schema((
         schemata='urban_environment',
         default_output_type='text/x-html-safe',
     ),
+
 ),
 )
 
@@ -247,6 +250,7 @@ CODT_UniqueLicence_schema = BaseFolderSchema.copy() + \
     getattr(CODT_BaseBuildLicence, 'schema', Schema(())).copy() + \
     getattr(CODT_UniqueLicenceInquiry, 'schema', Schema(())).copy() + \
     getattr(GenericLicence, 'schema', Schema(())).copy() + \
+    getattr(EnvironmentBase, 'schema', Schema(())).copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
@@ -258,6 +262,10 @@ CODT_UniqueLicence_schema.delField('sscDetails')
 CODT_UniqueLicence_schema.delField('RCU')
 CODT_UniqueLicence_schema.delField('rcuDetails')
 CODT_UniqueLicence_schema.delField('composition')
+CODT_UniqueLicence_schema.delField('businessDescription')
+CODT_UniqueLicence_schema.delField('natura2000')
+CODT_UniqueLicence_schema.delField('natura2000Details')
+CODT_UniqueLicence_schema.delField('natura2000location')
 setSchemataForCODT_UniqueLicenceInquiry(CODT_UniqueLicence_schema)
 ##/code-section after-schema
 
@@ -301,6 +309,7 @@ class CODT_UniqueLicence(BaseFolder, CODT_UniqueLicenceInquiry, CODT_BaseBuildLi
             ('ukn', 'Non determiné'),
             ('class_1', 'Classe 1'),
             ('class_2', 'Classe 2'),
+            ('article65', 'Article 65'),
         )
         return DisplayList(vocab)
 
@@ -315,6 +324,8 @@ class CODT_UniqueLicence(BaseFolder, CODT_UniqueLicenceInquiry, CODT_BaseBuildLi
             delay = 90
         elif 'class_1' in selection:
             delay = 140
+        elif 'article65' in selection:
+            delay = 50
 
         if self.prorogation:
             delay += 30
