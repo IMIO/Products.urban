@@ -35,6 +35,22 @@
             <metal:worklocation use-macro="here/@@worklocation-macro/worklocations_macro" />
         </fieldset>
 
+
+        <fieldset tal:condition="view/has_bound_inspections">
+                <legend i18n:translate="urban_bound_inspections">Bound inspections</legend><br/><br/>
+            <tal:inspections repeat='inspection view/get_bound_inspections'>
+                <div><a tal:attributes="href python:inspection['url']" tal:content="python: inspection['title']"/>
+                </div>
+            </tal:inspections>
+        </fieldset>
+        <fieldset tal:condition="view/has_bound_roaddecrees">
+                <legend i18n:translate="urban_bound_roaddecrees">Bound roaddecrees</legend><br/><br/>
+            <tal:roaddecrees repeat='roaddecree view/get_bound_roaddecrees'>
+                <div><a tal:attributes="href python:roaddecree['url']" tal:content="python: roaddecree['title']"/>
+                </div>
+            </tal:roaddecrees>
+        </fieldset>
+
         <fieldset>
             <legend i18n:translate="legend_details">Details</legend>
             <table metal:define-slot="detail_slot" class="no-style-table" cellspacing=0 cellpadding=0 width=100%
@@ -59,21 +75,6 @@
     </div>
 
     <div class="licence-column">
-
-        <fieldset tal:condition="view/has_bound_inspections">
-                <legend i18n:translate="urban_bound_inspections">Bound inspections</legend><br/><br/>
-            <tal:inspections repeat='inspection view/get_bound_inspections'>
-                <div> <a tal:attributes="href python:inspection['url']" tal:content="python: inspection['title']"/>
-                </div>
-            </tal:inspections>
-        </fieldset>
-        <fieldset tal:condition="view/has_bound_roaddecrees">
-                <legend i18n:translate="urban_bound_roaddecrees">Bound roaddecrees</legend><br/><br/>
-            <tal:roaddecrees repeat='roaddecree view/get_bound_roaddecrees'>
-                <div> <a tal:attributes="href python:roaddecree['url']" tal:content="python: roaddecree['title']"/>
-                </div>
-            </tal:roaddecrees>
-        </fieldset>
         <fieldset>
             <legend i18n:translate="urban_description_key_dates_legend">Key dates</legend>
             <table tal:define="keyDates view/getKeyDates"
