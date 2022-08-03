@@ -255,3 +255,18 @@
         </td>
     </tal:vars>
 </metal:validity_duration>
+
+<metal:procedureChoiceIsArticle65 define-macro="bound_licences">
+    <tal:vars define="procedureChoice context/getProcedureChoice">
+        <tal:procedureChoice condition="python:procedureChoice == 'article65'">
+            <td valign="top"><b><span tal:content="python: context.getField('bound_licences').widget.label" i18n:translate="">Bound licences</span>:</b></td>
+            <td width="10px"></td>
+            <td width="49%" valign="top" valign="top">
+                <br />
+                <metal:myfield use-macro="python:here.widget('bound_licences', mode='view')" />
+                <br />
+            </td>
+        </tal:procedureChoice>
+    </tal:vars>
+</metal:procedureChoiceIsArticle65>
+
