@@ -399,8 +399,8 @@ default_values = {
             {'id': "120j", 'title': u"120 jours", 'deadLineDelay': 120, 'alertDelay': 20},
             {'id': "140j", 'title': u"140 jours", 'deadLineDelay': 140, 'alertDelay': 20},
             {'id': "170j", 'title': u"170 jours", 'deadLineDelay': 170, 'alertDelay': 20},
-            {'id': "inconnu", 'title': u"Inconnu", 'deadLineDelay': 0, 'alertDelay': 20},
             {'id': "50j", 'title': u"50 jours", 'deadLineDelay': 50, 'alertDelay': 20},
+            {'id': "inconnu", 'title': u"Inconnu", 'deadLineDelay': 0, 'alertDelay': 20},
 
         ],
         'investigationarticles': [
@@ -728,9 +728,9 @@ default_values = {
         'folderdelays': [
             'UrbanDelay',
             {'id': "40j", 'title': u"40 jours", 'deadLineDelay': 40, 'alertDelay': 20},
+            {'id': "50j", 'title': u"50 jours", 'deadLineDelay': 50, 'alertDelay': 20},
             {'id': "140j", 'title': u"140 jours", 'deadLineDelay': 140, 'alertDelay': 20},
             {'id': "inconnu", 'title': u"Inconnu", 'deadLineDelay': 0, 'alertDelay': 20},
-            {'id': "50j", 'title': u"50 jours", 'deadLineDelay': 50, 'alertDelay': 20},
         ],
     },
     'EnvClassTwo': {
@@ -742,9 +742,9 @@ default_values = {
         'folderdelays': [
             'UrbanDelay',
             {'id': "40j", 'title': u"40 jours", 'deadLineDelay': 40, 'alertDelay': 20},
+            {'id': "50j", 'title': u"50 jours", 'deadLineDelay': 50, 'alertDelay': 20},
             {'id': "90j", 'title': u"90 jours", 'deadLineDelay': 90, 'alertDelay': 20},
             {'id': "inconnu", 'title': u"Inconnu", 'deadLineDelay': 0, 'alertDelay': 20},
-            {'id': "50j", 'title': u"50 jours", 'deadLineDelay': 50, 'alertDelay': 20},
 
         ],
     },
