@@ -132,6 +132,7 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
         'folderCategory',
         'applicationReasons',
         'procedureChoice',
+        'bound_licences',
         'annoncedDelay',
         'validityDelay',
         'publicRoadModifications',

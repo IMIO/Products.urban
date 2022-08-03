@@ -47,6 +47,21 @@ optional_fields = [
     'conclusions', 'commentsOnSPWOpinion',
 ]
 
+slave_fields_procedurechoice = [
+    {
+        'name': 'annoncedDelay',
+        'action': 'value',
+        'vocab_method': 'getProcedureDelays',
+        'control_param': 'values',
+    },
+    {
+        'name': 'bound_licences',
+        'action': 'show',
+        'toggle_method': 'showBoundLicenceIfArticle65',
+        'control_param': 'values',
+    },
+]
+
 ##/code-section module-header
 
 schema = Schema((
@@ -107,6 +122,23 @@ schema = Schema((
         multiValued=1,
         vocabulary=UrbanVocabulary('ftSolicitOpinionsTo', inUrbanConfig=True),
         default_method='getDefaultValue',
+    ),
+    ReferenceField(
+        name='bound_licences',
+        widget=ReferenceBrowserWidget(
+            allow_search=True,
+            allow_browse=False,
+            force_close_on_insert=True,
+            startup_directory='urban',
+            show_indexes=False,
+            wild_card_search=True,
+            restrict_browsing_to_startup_directory=True,
+            label=_('urban_label_bound_licences', default='Bound licences'),
+        ),
+        allowed_types=URBAN_ENVIRONMENT_TYPES,
+        schemata='urban_description',
+        multiValued=True,
+        relationship="bound_licences",
     ),
     TextField(
         name='claimsSynthesis',
@@ -234,11 +266,14 @@ class EnvironmentLicence(BaseFolder, EnvironmentBase, BrowserDefaultMixin):
         self.setTitle(title)
         self.reindexObject(idxs=('Title', 'applicantInfosIndex', 'sortable_title', ))
 
-    security.declarePublic('listLicenceParcels')
-    def listLicenceParcels(self):
-        parcels = self.objectValues('PortionOut')
-        vocabulary = [(parcel.UID(), parcel.Title()) for parcel in parcels]
-        return DisplayList(sorted(vocabulary, key=lambda name: name[1]))
+    def listProcedureChoices(self):
+        vocabulary = (
+            ('ukn', 'Non determiné'),
+            ('simple', 'Classique'),
+            ('temporary', 'Temporaire'),
+            ('article65', 'Article65'),
+        )
+        return DisplayList(vocabulary)
 
     security.declarePublic('previouslicencesBaseQuery')
     def previouslicencesBaseQuery(self):
@@ -309,6 +344,9 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     schema.moveField('natura2000Details', after='natura2000location')
     schema.moveField('description', after='validityDelay')
     schema.moveField('environmentTechnicalRemarks', after='conclusions')
+    schema.moveField('bound_licences', after='annoncedDelayDetails')
+    schema.moveField('natura2000', after='bound_licences')
+    schema['procedureChoice'].widget.slave_fields=slave_fields_procedurechoice
 
 
 finalizeSchema(EnvironmentLicence_schema)
