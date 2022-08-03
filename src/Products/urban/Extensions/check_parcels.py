@@ -2,6 +2,17 @@ from plone import api
 from Products.urban.interfaces import IGenericLicence
 
 
+def check_licences_with_no_parcels():
+    catalog = api.portal.get_tool('portal_catalog')
+    licence_brains = catalog(object_provides=IGenericLicence.__identifier__)
+    licences = [l.getObject() for l in licence_brains]
+    licences = [l for l in licences if not l.getParcels()]
+    log = open('no_parcels.txt', 'w')
+    for licence in licences:
+        log.write(licence.Title() + '\n')
+    log.close()
+
+
 def remove_invalid_parcels():
     catalog = api.portal.get_tool('portal_catalog')
     licence_brains = catalog(object_provides=IGenericLicence.__identifier__)
