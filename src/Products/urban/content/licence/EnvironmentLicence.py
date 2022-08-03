@@ -34,6 +34,7 @@ from Products.urban.utils import setOptionalAttributes
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 
 from archetypes.referencebrowserwidget.widget import ReferenceBrowserWidget
+from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 
 from collective.datagridcolumns.ReferenceColumn import ReferenceColumn
 from collective.datagridcolumns.TextAreaColumn import TextAreaColumn
@@ -45,6 +46,7 @@ optional_fields = [
     'referenceSPE', 'referenceFT', 'claimsSynthesis',
     'conclusions', 'commentsOnSPWOpinion',
 ]
+
 ##/code-section module-header
 
 schema = Schema((
@@ -152,7 +154,6 @@ schema = Schema((
         schemata='urban_environment',
         default_output_type='text/x-html-safe',
     ),
-
 ),
 )
 
@@ -294,8 +295,6 @@ class EnvironmentLicence(BaseFolder, EnvironmentBase, BrowserDefaultMixin):
         )
         return csv_adresses
 
-
-
 registerType(EnvironmentLicence, PROJECTNAME)
 # end of class EnvironmentLicence
 
@@ -310,6 +309,7 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     schema.moveField('natura2000Details', after='natura2000location')
     schema.moveField('description', after='validityDelay')
     schema.moveField('environmentTechnicalRemarks', after='conclusions')
+
 
 finalizeSchema(EnvironmentLicence_schema)
 ##/code-section module-footer

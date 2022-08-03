@@ -1,6 +1,6 @@
 <metal:description define-macro="description_macro" i18n:domain="urban">
 
-    <tal:vars define="custom python:['impactStudy',];">
+    <tal:vars define="custom python:['impactStudy', 'bound_licences',];">
         <metal:parent_call use-macro="here/@@licencetabs-macros/description_macro">
 
             <metal:applicants fill-slot="applicant_slot">

@@ -68,6 +68,13 @@ slave_fields_procedurechoice = (
         'vocab_method': 'getProcedureDelays',
         'control_param': 'values',
     },
+    {
+        'name': 'bound_licences',
+        'action': 'show',
+        'toggle_method': 'showBoundLicenceIfArticle65',
+        'control_param': 'values',
+    },
+
 )
 
 ##/code-section module-header
@@ -192,6 +199,48 @@ schema = Schema((
         schemata='urban_description',
         vocabulary=UrbanVocabulary('folderdelays', vocType='UrbanDelay', with_empty_value=True),
         default_method='getDefaultValue',
+    ),
+    ReferenceField(
+        name='bound_licences',
+        widget=ReferenceBrowserWidget(
+            allow_search=True,
+            allow_browse=False,
+            force_close_on_insert=True,
+            startup_directory='urban',
+            show_indexes=False,
+            wild_card_search=True,
+            restrict_browsing_to_startup_directory=True,
+            label=_('urban_label_bound_licences', default='Bound licences'),
+        ),
+        allowed_types=[
+            t for t in URBAN_TYPES
+            if t not in [
+                'Inspection',
+                'ProjectMeeting',
+                'PatrimonyCertificate',
+                'CODT_NotaryLetter',
+                'CODT_UrbanCertificateOne'
+                'NotaryLetter',
+                'UrbanCertificateOne',
+                'BuildLicence',
+                'CODT_BuildLicence',
+                'Article127',
+                'CODT_Article127',
+                'CODT_CommercialLicence',
+                'IntegratedLicence',
+                'CODT_IntegratedLicence',
+                'UrbanCertificateTwo',
+                'CODT_UrbanCertificateTwo',
+                'PreliminaryNotice',
+                'PatrimonyCertificate',
+                'Ticket',
+                'ParcelOutLicence',
+                'CODT_ParcelOutLicence',
+            ]
+        ],
+        schemata='urban_description',
+        multiValued=True,
+        relationship="bound_licences",
     ),
     TextField(
         name='annoncedDelayDetails',
@@ -360,6 +409,7 @@ class EnvironmentBase(BaseFolder, GenericLicence, CODT_UniqueLicenceInquiry, Bro
             ('ukn', 'Non determiné'),
             ('simple', 'Classique'),
             ('temporary', 'Temporaire'),
+            ('article65', 'Article65'),
         )
         return DisplayList(vocabulary)
 
@@ -485,6 +535,13 @@ class EnvironmentBase(BaseFolder, GenericLicence, CODT_UniqueLicenceInquiry, Bro
 
     def getLicenceSEnforceableDate(self, displayDay, periodForAppeal):
         return workday(date(displayDay.year(), displayDay.month(), displayDay.day()), periodForAppeal)
+
+    security.declarePublic('showBoundLicenceIfArticle65')
+
+    def showBoundLicenceIfArticle65(self, *values):
+        selection = [v['val'] for v in values if v['selected']]
+        show = 'article65' in selection
+        return show
 
 
 registerType(EnvironmentBase, PROJECTNAME)

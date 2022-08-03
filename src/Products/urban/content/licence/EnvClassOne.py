@@ -81,6 +81,8 @@ class EnvClassOne(BaseFolder, EnvironmentLicence, BrowserDefaultMixin):
             return '140j'
         elif 'temporary' in selection:
             return '40j'
+        elif 'article65' in selection:
+            return '50j'
         return ''
 
 
