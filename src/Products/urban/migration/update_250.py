@@ -564,3 +564,20 @@ def add_applicant_couple_type(context):
     setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'workflow')
     setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'update-workflow-rolemap')
     logger.info("upgrade step done!")
+
+
+def install_environment_article65(context):
+    """
+    """
+    logger = logging.getLogger('urban: configure environment configs for article 65')
+    logger.info("starting upgrade steps")
+    setup_tool = api.portal.get_tool('portal_setup')
+    setup_tool.runImportStepFromProfile('profile-Products.urban:extra', 'urban-update-vocabularies')
+    portal_urban = api.portal.get_tool('portal_urban')
+    for config_id in ['codt_uniquelicence', 'envclassone', 'envclasstwo']:
+        config = getattr(portal_urban, config_id)
+        for event_config in config.eventconfigs.objectValues():
+            if not event_config.getTALCondition():
+                event_config.TALCondition = "python: licence.getProcedureChoice() != 'article65'"
+                logger.info("migrated eventconfig: {}".format(event_config))
+    logger.info("upgrade step done!")

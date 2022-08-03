@@ -395,6 +395,15 @@
         handler=".update_250.add_applicant_couple_type"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Install environment article 65"
+        description="Install environment article 65"
+        source="1121"
+        destination="1122"
+        handler=".update_250.install_environment_article65"
+        profile="Products.urban:default" />
+
+
     <!--gs:upgradeStep
         title="Add schedule config for env licences 1 and 2"
         description="urban upgrade step"
