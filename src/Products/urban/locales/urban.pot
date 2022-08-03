@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2022-08-02 11:50+0000\n"
+"POT-Creation-Date: 2022-08-02 12:15+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -4370,7 +4370,7 @@ msgstr ""
 msgid "urban_label_reportVisitDate"
 msgstr ""
 
-#. Default: "RepresentativeContacts(s)"
+#. Default: "RepresentativeContact(s)"
 #: ../browser/licence/templates/licencemacros.pt:47
 #: ../content/licence/BaseBuildLicence.py:436
 msgid "urban_label_representative_contacts"
