@@ -235,9 +235,6 @@ def addEventConfigs(context):
         return
 
     site = context.getSite()
-    opinions_cfg = getattr(site, 'opinions_config', None)
-    if opinions_cfg:
-        return
     # add some EventConfigs...
     # get the urbanEventTypes dict from the profile
     # get the name of the profile by taking the last part of the _profile_path

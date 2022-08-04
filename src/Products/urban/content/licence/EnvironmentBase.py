@@ -287,6 +287,14 @@ schema = Schema((
         schemata='urban_environment',
         default_output_type='text/x-html-safe',
     ),
+    BooleanField(
+        name='isTransferOfLicence',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label=_('urban_label_istransferoflicence', default='IsTransferOfLicence'),
+        ),
+        schemata='urban_description',
+    ),
 
 ),
 )
@@ -423,7 +431,28 @@ class EnvironmentBase(BaseFolder, GenericLicence, CODT_UniqueLicenceInquiry, Bro
     def getLastProprietaryChangeEvent(self):
         return self.getLastEvent(interfaces.IProprietaryChangeEvent)
 
+    security.declarePublic('getLastTransferOfLicence')
+
+    def getLastTransferOfLicence(self):
+        return self.getLastEvent(interfaces.ITransferOfLicenceEvent)
+
+    security.declarePublic('getAllTransferOfLicence')
+
+    def getAllTransfersOfLicence(self):
+        return self.getAllEvents(interfaces.ITransferOfLicenceEvent)
+
+    security.declarePublic('mayAddTransferOfLicenceEvent')
+
+    def mayAddTransferOfLicenceEvent(self):
+        """
+        May add TransferOfLicenceEvent if isTransferOfLicence is true
+        """
+        if not self.getIsTransferOfLicence():
+            return False
+        return True
+
     security.declarePublic('getAdditionalLayers')
+
     def getAdditionalLayers(self):
         """
           Return a list of additional layers that will be used
@@ -507,9 +536,12 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     """
     schema.moveField('businessOldLocation', after='workLocations')
     schema.moveField('foldermanagers', after='businessOldLocation')
+#    schema.moveField('bound_licences', after='isTransferOfLicence')
     schema.moveField('rubrics', after='folderCategory')
     schema.moveField('description', after='additionalLegalConditions')
     schema.moveField('referenceFT', after='referenceDGATLP')
+    schema.moveField('isTransferOfLicence', after='referenceFT')
+
     return schema
 
 

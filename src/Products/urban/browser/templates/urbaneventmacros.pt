@@ -38,6 +38,14 @@
                 </tal:manage_show_nc_if_needed>
             </tr>
         </tal:evtfield>
+        <tr tal:condition="python: context.getUrbaneventtypes().eventType[0] == 'Products.urban.interfaces.ITransferOfLicenceEvent'">
+                <td>    
+                    <metal:applicants_and_corporations_macro use-macro="here/../@@licencemacros/urbanApplicantsAndCorporationsMacro" />
+                    <tal:show_disabled_applicants condition= "here/get_applicants_history">
+                        <metal:disabled_applicants_and_corporations_macro use-macro="here/../@@licencemacros/urbanApplicantsHistoricAndCorporationsMacro" />
+                    </tal:show_disabled_applicants>
+                </td>
+        </tr> 
         <tr valign="top"
             tal:condition="view/show_pm_summary"
             tal:define="empty_pm_summary view/empty_pm_summary">

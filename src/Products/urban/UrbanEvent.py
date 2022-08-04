@@ -26,6 +26,7 @@ from Products.urban.config import *
 from DateTime import DateTime
 
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
+from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
 from Products.ATContentTypes.interfaces.file import IATFile
 from Products.CMFCore.utils import getToolByName
 
@@ -40,6 +41,15 @@ from Products.urban import UrbanMessage as _
 from plone import api
 
 from zope.i18n import translate
+
+
+slave_fields_transfertype = (
+    {
+        'name': 'transferDescription',
+        'action': 'hide',
+        'hide_values': ('full',),
+    },
+)
 ##/code-section module-header
 
 schema = Schema((
@@ -460,7 +470,26 @@ schema = Schema((
         ),
         optional=True,
     ),
-
+    LinesField(
+        name='transferType',
+        widget=SelectionWidget(
+            format='select',
+            label=_('urban_label_transfertype', default='TransferType'),
+        ),
+        vocabulary='listTransferType',
+        optional=True,
+    ),
+    TextField(
+        name='transferDescription',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            label=_('urban_label_transferdescription', default='TransferDescription'),
+        ),
+        default_method='getDefaultText',
+        default_content_type='text/html',
+        default_output_type='text/html',
+        optional=True,
+    ),
 ),
 )
 
@@ -793,6 +822,18 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
     def get_state(self):
         state = api.content.get_state(self)
         return state
+
+    security.declarePublic('listTransferType')
+
+    def listTransferType(self):
+        """
+          This vocabulary for field transferType returns the types of transfer (full, partial)
+        """
+        vocab = (
+            ('full', translate(_('full_transfer'), context=self.REQUEST)),
+            ('partial', translate(_('partial_transfer'), context=self.REQUEST)),
+        )
+        return DisplayList(vocab)
 
 
 registerType(UrbanEvent, PROJECTNAME)

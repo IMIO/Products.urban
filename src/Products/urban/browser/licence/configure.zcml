@@ -37,6 +37,14 @@
   />
 
   <browser:page
+     for="Products.urban.interfaces.IUrbanEvent"
+     name="licencemacros"
+     template="templates/licencemacros.pt"
+     permission="zope2.View"
+  />
+
+
+  <browser:page
      for="Products.urban.interfaces.IGenericLicence"
      name="licenceedit"
      class=".licenceedit.LicenceEditView"
