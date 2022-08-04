@@ -278,7 +278,7 @@ def addEventConfigs(context):
                     if not matched_externalDirection:
                         continue
                     else:
-                        externalDirections = uet.getExternalDirections()
+                        externalDirections = uet.get('externalDirections', None)
                         if externalDirections:
                             if matched_externalDirection not in externalDirections:
                                 continue
