@@ -233,7 +233,7 @@ schema = Schema((
         schemata='urban_analysis',
         default_method='getDefaultText',
         default_content_type='text/html',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     TextField(
         name='description',
@@ -244,7 +244,7 @@ schema = Schema((
         allowable_content_types=('text/html',),
         schemata='urban_description',
         default_method='getDefaultText',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
         accessor="Description",
     ),
     LinesField(
@@ -268,7 +268,7 @@ schema = Schema((
         schemata='urban_road',
         default_method='getDefaultText',
         default_content_type='text/html',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     LinesField(
         name='roadType',
@@ -342,7 +342,7 @@ schema = Schema((
         allowable_content_types=('text/html',),
         schemata='urban_road',
         default_method='getDefaultText',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     LinesField(
         name='pash',
@@ -364,7 +364,7 @@ schema = Schema((
         allowable_content_types=('text/html',),
         schemata='urban_road',
         default_method='getDefaultText',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     LinesField(
         name='catchmentArea',
@@ -386,7 +386,7 @@ schema = Schema((
         schemata='urban_road',
         default_method='getDefaultText',
         default_content_type='text/html',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     LinesField(
         name='karstConstraints',
@@ -409,7 +409,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_road',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     LinesField(
         name='concentratedRunoffSRisk',
@@ -432,7 +432,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_road',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     LinesField(
         name='sevesoSite',
@@ -465,7 +465,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_road',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     LinesField(
         name='natura_2000',
@@ -498,7 +498,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_road',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     TextField(
         name='equipmentAndRoadRequirements',
@@ -510,7 +510,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_road',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     TextField(
         name='technicalRemarks',
@@ -521,7 +521,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_road',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     LinesField(
         name='groundStateStatus',
@@ -544,7 +544,7 @@ schema = Schema((
         schemata='urban_road',
         default_method='getDefaultText',
         default_content_type='text/html',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     LinesField(
         name='locationMissingParts',
@@ -568,7 +568,7 @@ schema = Schema((
         schemata='urban_location',
         default_method='getDefaultText',
         default_content_type='text/html',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     LinesField(
         name='folderZone',
@@ -591,7 +591,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_location',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     BooleanField(
         name='isInPCA',
@@ -620,7 +620,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_location',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     LinesField(
         name='pcaZone',
@@ -654,7 +654,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_location',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     LinesField(
         name='locationFloodingLevel',
@@ -685,7 +685,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_location',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     BooleanField(
         name='preemption',
@@ -705,7 +705,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_location',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     BooleanField(
         name='SAR',
@@ -724,7 +724,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_location',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     BooleanField(
         name='enoughRoadEquipment',
@@ -745,7 +745,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_location',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     TextField(
         name='locationTechnicalRemarks',
@@ -757,7 +757,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_analysis',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     LinesField(
         name='solicitRoadOpinionsTo',
@@ -793,7 +793,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_patrimony',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     LinesField(
         name='SSC',
@@ -815,7 +815,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_location',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     LinesField(
         name='RCU',
@@ -837,7 +837,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_location',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     LinesField(
         name='PRenU',
@@ -859,7 +859,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_location',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     LinesField(
         name='PRevU',
@@ -881,7 +881,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_location',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     LinesField(
         name='reparcelling',
@@ -904,7 +904,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_location',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     StringField(
         name='rgbsr',
@@ -924,7 +924,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_location',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     LinesField(
         name='airportNoiseZone',
@@ -947,7 +947,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_location',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     LinesField(
         name='solicitLocationOpinionsTo',
@@ -1086,7 +1086,7 @@ schema = Schema((
         schemata='urban_road',
         default_method='getDefaultText',
         default_content_type='text/html',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
 ),
 )

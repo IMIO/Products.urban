@@ -172,6 +172,9 @@ Changes
 - add new 'other' tax vocabulary entry and new linked TextField taxDetails
   [jjaumotte]
 
+- Add contact couples.
+  [sdelcourt]
+
 2.4 (2019-03-25)
 ----------------
 - add tax field in GenericLicence

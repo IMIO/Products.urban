@@ -32,6 +32,7 @@ from Products.urban.utils import setSchemataForCODT_UniqueLicenceInquiry
 from Products.urban.widget.historizereferencewidget import HistorizeReferenceBrowserWidget
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.urban.widget.urbanreferencewidget import UrbanBackReferenceWidget
+from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 
 from Products.urban.config import *
 from Products.urban import UrbanMessage as _
@@ -57,6 +58,7 @@ slave_fields_ = (
         'control_param': 'values',
     },
 )
+
 ##/code-section module-header
 
 schema = Schema((
@@ -137,7 +139,7 @@ schema = Schema((
         allowable_content_types=('text/html',),
         schemata='urban_environment',
         default_method='getDefaultText',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     ReferenceField(
         name='minimumLegalConditions',
@@ -175,7 +177,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_analysis',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     TextField(
         name='claimsSynthesis',
@@ -186,7 +188,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_environment',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     TextField(
         name='environmentTechnicalAdviceAfterInquiry',
@@ -198,7 +200,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_environment',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     TextField(
         name='commentsOnSPWOpinion',
@@ -210,7 +212,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_environment',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     TextField(
         name='conclusions',
@@ -221,7 +223,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_environment',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     TextField(
         name='environmentTechnicalRemarks',
@@ -233,8 +235,9 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_environment',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
+
 ),
 )
 
@@ -263,8 +266,6 @@ CODT_UniqueLicence_schema.delField('businessDescription')
 CODT_UniqueLicence_schema.delField('natura2000')
 CODT_UniqueLicence_schema.delField('natura2000Details')
 CODT_UniqueLicence_schema.delField('natura2000location')
-#CODT_UniqueLicence_schema.delField('procedureChoice')
-#CODT_UniqueLicence_schema.delField('annoncedDelay')
 setSchemataForCODT_UniqueLicenceInquiry(CODT_UniqueLicence_schema)
 ##/code-section after-schema
 
@@ -308,6 +309,7 @@ class CODT_UniqueLicence(BaseFolder, CODT_UniqueLicenceInquiry, CODT_BaseBuildLi
             ('ukn', 'Non determiné'),
             ('class_1', 'Classe 1'),
             ('class_2', 'Classe 2'),
+            ('article65', 'Article 65'),
         )
         return DisplayList(vocab)
 
@@ -322,6 +324,8 @@ class CODT_UniqueLicence(BaseFolder, CODT_UniqueLicenceInquiry, CODT_BaseBuildLi
             delay = 90
         elif 'class_1' in selection:
             delay = 140
+        elif 'article65' in selection:
+            delay = 50
 
         if self.prorogation:
             delay += 30

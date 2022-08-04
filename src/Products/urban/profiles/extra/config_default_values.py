@@ -399,7 +399,9 @@ default_values = {
             {'id': "120j", 'title': u"120 jours", 'deadLineDelay': 120, 'alertDelay': 20},
             {'id': "140j", 'title': u"140 jours", 'deadLineDelay': 140, 'alertDelay': 20},
             {'id': "170j", 'title': u"170 jours", 'deadLineDelay': 170, 'alertDelay': 20},
+            {'id': "50j", 'title': u"50 jours", 'deadLineDelay': 50, 'alertDelay': 20},
             {'id': "inconnu", 'title': u"Inconnu", 'deadLineDelay': 0, 'alertDelay': 20},
+
         ],
         'investigationarticles': [
             'UrbanVocabularyTerm',
@@ -726,6 +728,7 @@ default_values = {
         'folderdelays': [
             'UrbanDelay',
             {'id': "40j", 'title': u"40 jours", 'deadLineDelay': 40, 'alertDelay': 20},
+            {'id': "50j", 'title': u"50 jours", 'deadLineDelay': 50, 'alertDelay': 20},
             {'id': "140j", 'title': u"140 jours", 'deadLineDelay': 140, 'alertDelay': 20},
             {'id': "inconnu", 'title': u"Inconnu", 'deadLineDelay': 0, 'alertDelay': 20},
         ],
@@ -739,8 +742,10 @@ default_values = {
         'folderdelays': [
             'UrbanDelay',
             {'id': "40j", 'title': u"40 jours", 'deadLineDelay': 40, 'alertDelay': 20},
+            {'id': "50j", 'title': u"50 jours", 'deadLineDelay': 50, 'alertDelay': 20},
             {'id': "90j", 'title': u"90 jours", 'deadLineDelay': 90, 'alertDelay': 20},
             {'id': "inconnu", 'title': u"Inconnu", 'deadLineDelay': 0, 'alertDelay': 20},
+
         ],
     },
     'EnvClassThree': {
@@ -1899,7 +1904,9 @@ default_values = {
                 "M et Mme", 'gender': "male", 'multiplicity': "plural", 'reverseTitle': "Monsieur, Madame"},
             {'id': "madam_or_mister", 'title': u"Madame/Monsieur", 'extraValue': "Madame, Monsieur", 'abbreviation': "Mme, Mr", 'gender': "male",
                 'multiplicity': "plural", 'reverseTitle': "Monsieur, Madame"},
-            {'id': "master", 'title': u"Maître", 'extraValue': "Maître", 'abbreviation': "Me", 'gender': "male",
+           {'id': "madam_or_mister_couple", 'title': u"Madame ou Monsieur", 'extraValue': "Madame, Monsieur", 'abbreviation': "Mme ou Mr", 'gender': "male",
+                'multiplicity': "plural", 'reverseTitle': "Monsieur ou Madame"},
+           {'id': "master", 'title': u"Maître", 'extraValue': "Maître", 'abbreviation': "Me", 'gender': "male",
                 'multiplicity': "single", 'reverseTitle': "Maître"},
             {'id': "masters", 'title': u"Maîtres", 'extraValue': "Maitres", 'abbreviation': "Mes", 'gender': "male",
                 'multiplicity': "plural", 'reverseTitle': "Maitres"},

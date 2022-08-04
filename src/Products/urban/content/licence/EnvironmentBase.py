@@ -68,6 +68,7 @@ slave_fields_procedurechoice = (
         'vocab_method': 'getProcedureDelays',
         'control_param': 'values',
     },
+
 )
 
 ##/code-section module-header
@@ -109,7 +110,7 @@ schema = Schema((
         allowable_content_types=('text/html',),
         schemata='urban_environment',
         default_method='getDefaultText',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     ReferenceField(
         name='minimumLegalConditions',
@@ -169,7 +170,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_description',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     StringField(
         name='procedureChoice',
@@ -202,7 +203,7 @@ schema = Schema((
         schemata='urban_analysis',
         default_method='getDefaultText',
         default_content_type='text/html',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     BooleanField(
         name='natura2000',
@@ -230,7 +231,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_description',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     IntegerField(
         name='validityDelay',
@@ -249,7 +250,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_road',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     TextField(
         name='locationTechnicalAdvice',
@@ -260,7 +261,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_location',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     TextField(
         name='description',
@@ -271,7 +272,7 @@ schema = Schema((
         allowable_content_types=('text/html',),
         schemata='urban_description',
         default_method='getDefaultText',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
         accessor="Description",
     ),
     TextField(
@@ -284,12 +285,12 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_environment',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     BooleanField(
         name='isTransferOfLicence',
         default=False,
-        widget=MasterBooleanWidget(
+        widget=BooleanField._properties['widget'](
             label=_('urban_label_istransferoflicence', default='IsTransferOfLicence'),
         ),
         schemata='urban_description',
@@ -514,6 +515,13 @@ class EnvironmentBase(BaseFolder, GenericLicence, CODT_UniqueLicenceInquiry, Bro
 
     def getLicenceSEnforceableDate(self, displayDay, periodForAppeal):
         return workday(date(displayDay.year(), displayDay.month(), displayDay.day()), periodForAppeal)
+
+    security.declarePublic('showBoundLicenceIfArticle65')
+
+    def showBoundLicenceIfArticle65(self, *values):
+        selection = [v['val'] for v in values if v['selected']]
+        show = 'article65' in selection
+        return show
 
 
 registerType(EnvironmentBase, PROJECTNAME)

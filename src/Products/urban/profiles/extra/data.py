@@ -231,7 +231,7 @@ EventConfigs = {
         {
             'id': "annonce-de-projet-codt",
             'title': "Annonce de projet",
-            'activatedFields': ('investigationStart', 'investigationEnd',),
+            'activatedFields': ('investigationStart', 'investigationEnd','displayDate'),
             'deadLineDelay': 15,
             'TALCondition': "here/mayAddAnnouncementEvent",
             'specialFunctionName': "Rechercher les propriétaires situés dans un rayon de 50m",
@@ -246,7 +246,7 @@ EventConfigs = {
         {
             'id': "enquete-publique-codt",
             'title': "Enquête publique",
-            'activatedFields': ('investigationStart', 'investigationEnd', 'claimsDate', 'explanationStartSDate', 'explanationEndSDate', 'claimsText',),
+            'activatedFields': ('investigationStart', 'investigationEnd', 'displayDate', 'claimsDate', 'claimsText',),
             'deadLineDelay': 15,
             'TALCondition': "here/mayAddInquiryEvent",
             'specialFunctionName': "Rechercher les propriétaires situés dans un rayon de 50m",
@@ -263,7 +263,8 @@ EventConfigs = {
                     ]
                 },
                 {'id': "codt_pu_annexe_26_affiche_jaune.odt", 'title': "Affiche jaune (annexe 26)"},
-                {'id': "codt_pu_reclamations_reimport.ods", 'title': "Fichier réclamants pour réimport"}
+                {'id': "codt_pu_reclamations_reimport.ods", 'title': "Fichier réclamants pour réimport"},
+                {'id': "codt_pu_PV_cloture_enquete.odt", 'title':"PV clôture d'enquête"}
             ),
             'eventType': ('Products.urban.interfaces.IInquiryEvent',),
             'eventPortalType': 'UrbanEventInquiry',
@@ -2516,6 +2517,7 @@ EventConfigs = {
                 {'id': "codt_punq_information_demandeur.odt", 'title': "Information au demandeur"},
             ),
             'eventType': ('Products.urban.interfaces.IDepositEvent',),
+            'TALCondition': "python: licence.getProcedureChoice() != 'article65'",
         },
         {
             'id': "dossier-incomplet",
@@ -2527,6 +2529,7 @@ EventConfigs = {
             'keyDates': ('eventDate',),
             'podTemplates': (),
             'eventType': ('Products.urban.interfaces.IMissingPartEvent',),
+            'TALCondition': "python: licence.getProcedureChoice() != 'article65'",
         },
         {
             'id': "depot-complements-demande",
@@ -2543,6 +2546,7 @@ EventConfigs = {
                 {'id': "codt_punq_complements_information_demandeur.odt", 'title': "Information au demandeur"},
             ),
             'eventType': ('Products.urban.interfaces.IMissingPartDepositEvent',),
+            'TALCondition': "python: licence.getProcedureChoice() != 'article65'",
         },
         {
             'id': "dossier-irrecevable",
@@ -2554,6 +2558,7 @@ EventConfigs = {
             'keyDates': ('eventDate',),
             'podTemplates': (),
             'eventType': ('Products.urban.interfaces.IRefusedIncompletenessEvent',),
+            'TALCondition': "python: licence.getProcedureChoice() != 'article65'",
         },
         {
             'id': "dossier-complet",
@@ -2565,6 +2570,7 @@ EventConfigs = {
             'keyDates': ('eventDate',),
             'podTemplates': (),
             'eventType': ('Products.urban.interfaces.IAcknowledgmentEvent',),
+            'TALCondition': "python: licence.getProcedureChoice() != 'article65'",
         },
         {
             'id': "enquete-publique",
@@ -2587,6 +2593,7 @@ EventConfigs = {
             ),
             'eventType': ('Products.urban.interfaces.IInquiryEvent',),
             'eventPortalType': 'UrbanEventInquiry',
+            'TALCondition': "python: licence.getProcedureChoice() != 'article65'",
         },
         {
             'id': "config-opinion-request",
@@ -2631,6 +2638,7 @@ EventConfigs = {
                 {'id': "codt_punq_transmis_avis_college_dgo4.odt", 'title': "Transmis des éléments de l’enquête au SPW TLPE"},
             ),
             'eventType': ('Products.urban.interfaces.ICollegeReportEvent',),
+            'TALCondition': "python: licence.getProcedureChoice() != 'article65'",
         },
         {
             'id': "rapport-synthese",
@@ -2642,6 +2650,7 @@ EventConfigs = {
             'keyDates': ('eventDate',),
             'podTemplates': (),
             'eventType': ('Products.urban.interfaces.IDecisionProjectFromSPWEvent',),
+            'TALCondition': "python: licence.getProcedureChoice() != 'article65'",
         },
         {
             'id': "plans-modificatifs",
@@ -2657,6 +2666,7 @@ EventConfigs = {
                 {'id': "codt_punq_transmis_demande_modificatifs_dgo4.odt", 'title': "Transmis de la demande de plans modificatifs au SPW TLPE"},
             ),
             'eventType': ('Products.urban.interfaces.IAcknowledgmentEvent',),
+            'TALCondition': "python: licence.getProcedureChoice() != 'article65'",
         },
         {
             'id': "reception-plans-modificatifs",
@@ -2672,6 +2682,7 @@ EventConfigs = {
                 {'id': "codt_punq_transmis_plans_modificatifs_dgo4.odt", 'title': "Transmis des plans modificatifs au SPW TLPE"},
             ),
             'eventType': ('Products.urban.interfaces.IModificationDepositEvent',),
+            'TALCondition': "python: licence.getProcedureChoice() != 'article65'",
         },
         {
             'id': "delivrance-permis",
@@ -2687,6 +2698,7 @@ EventConfigs = {
                 {'id': "codt_punq_transmis_decision_dgo4.odt", 'title': "Transmis de la décision au SPW TLPE"},
             ),
             'eventType': ('Products.urban.interfaces.ITheLicenceEvent',),
+            'TALCondition': "python: licence.getProcedureChoice() != 'article65'",
         },
         {
             'id': "affichage-decision",
@@ -2701,6 +2713,7 @@ EventConfigs = {
                 {'id': "codt_punq_attestation_affichage_decision.odt", 'title': "Attestation d'affichage de la décision"},
             ),
             'eventType': ('Products.urban.interfaces.IDisplayingTheDecisionEvent',),
+            'TALCondition': "python: licence.getProcedureChoice() != 'article65'",
         },
         {
             'id': "recours-gouvernement",
@@ -2719,6 +2732,7 @@ EventConfigs = {
                     'title': "Attestation d’affichage du recours"},
             ),
             'eventType': ('Products.urban.interfaces.IRecourseEvent',),
+            'TALCondition': "python: licence.getProcedureChoice() != 'article65'",
         },
         {
             'id': "decision-recours",
@@ -2733,6 +2747,7 @@ EventConfigs = {
                     'title': "Affichage de la décision"},
             ),
             'eventType': ('Products.urban.interfaces.IRecourseEvent',),
+            'TALCondition': "python: licence.getProcedureChoice() != 'article65'",
         },
         {
             'id': "premiere-reunion-patrimoine",
@@ -2744,6 +2759,7 @@ EventConfigs = {
             'podTemplates': (
             ),
             'eventType': ('Products.urban.interfaces.IPatrimonyMeetingEvent',),
+            'TALCondition': "python: licence.getProcedureChoice() != 'article65'",
         },
         {
             'id': "deuxieme-reunion-patrimoine",
@@ -2755,6 +2771,7 @@ EventConfigs = {
             'podTemplates': (
             ),
             'eventType': ('Products.urban.interfaces.IPatrimonyMeetingEvent',),
+            'TALCondition': "python: licence.getProcedureChoice() != 'article65'",
         },
         {
             'id': "reunion-patrimoine-supplementaire",
@@ -2767,6 +2784,7 @@ EventConfigs = {
             'podTemplates': (
             ),
             'eventType': ('Products.urban.interfaces.IPatrimonyMeetingEvent',),
+            'TALCondition': "python: licence.getProcedureChoice() != 'article65'",
         },
     ),
     'uniquelicence': (
@@ -5439,13 +5457,14 @@ EventConfigs = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (),
+            'TALCondition': "python: licence.getProcedureChoice() != 'article65'",
         },
         {
             'id': "cession-permis",
             'title': "Cession de permis",
             'activatedFields': ('transferType', 'transferDescription',),
             'eventDateLabel': 'Date de la cession',
-            'isKeyEvent': False,
+            'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (),
             'eventType': ('Products.urban.interfaces.ITransferOfLicenceEvent', 'Products.urban.interfaces.ICollegeEvent',),
@@ -5460,6 +5479,7 @@ EventConfigs = {
             'keyDates': ('eventDate',),
             'podTemplates': ({'id': "env1-recepisse.odt", 'title': "Récepissé du permis"},),
             'eventType': ('Products.urban.interfaces.IDepositEvent',),
+            'TALCondition': "python: licence.getProcedureChoice() != 'article65'",
         },
         {
             'id': "envoi-demande-FT",
@@ -5470,6 +5490,7 @@ EventConfigs = {
             'keyDates': ('eventDate',),
             'podTemplates': ({'id': "env1-transmis-demande-ft.odt", 'title': "Transmis de la demande au FT"},),
             'eventType': ('Products.urban.interfaces.ITransmitToSPWEvent',),
+            'TALCondition': "python: licence.getProcedureChoice() != 'article65'",
         },
         {
             'id': "dossier-incomplet",
@@ -5480,6 +5501,7 @@ EventConfigs = {
             'keyDates': ('eventDate',),
             'podTemplates': (),
             'eventType': ('Products.urban.interfaces.IMissingPartEvent',),
+            'TALCondition': "python: licence.getProcedureChoice() != 'article65'",
         },
         {
             'id': "recepisse-complement",
@@ -5494,6 +5516,7 @@ EventConfigs = {
                 'Products.urban.interfaces.IMissingPartDepositEvent',
                 'Products.urban.interfaces.IMissingPartTransmitToSPWEvent',
             ),
+            'TALCondition': "python: licence.getProcedureChoice() != 'article65'",
         },
         {
             'id': "dossier-irrecevable",
@@ -5515,6 +5538,7 @@ EventConfigs = {
             'keyDates': ('eventDate',),
             'podTemplates': (),
             'eventType': ('Products.urban.interfaces.IAcknowledgmentEvent',),
+            'TALCondition': "python: licence.getProcedureChoice() != 'article65'",
         },
         {
             'id': "enquete-publique",
@@ -5855,6 +5879,7 @@ EventConfigs = {
             'podTemplates': (),
             'eventPortalType': 'UrbanEventCollege',
             'eventType': ('Products.urban.interfaces.ICollegeOpinionEvent',),
+            'TALCondition': "python: licence.getProcedureChoice() != 'article65'",
         },
         {
             'id': "township-council",
@@ -5872,6 +5897,7 @@ EventConfigs = {
             'keyDates': ('eventDate',),
             'podTemplates': (),
             'eventType': ('Products.urban.interfaces.IDecisionProjectFromSPWEvent',),
+            'TALCondition': "python: licence.getProcedureChoice() != 'article65'",
         },
         {
             'id': "modified-blueprints",
@@ -5930,6 +5956,7 @@ EventConfigs = {
                 {'id': "env1-certificat-decision.odt", 'title': "Certificat d'affichage de la décision"},
             ),
             'eventType': ('Products.urban.interfaces.IDisplayingTheDecisionEvent',),
+            'TALCondition': "python: licence.getProcedureChoice() != 'article65'",
         },
         {
             'id': "affichage-recours",
@@ -5940,6 +5967,7 @@ EventConfigs = {
             'keyDates': ('eventDate',),
             'podTemplates': (),
             'eventType': ('Products.urban.interfaces.IRecourseEvent',),
+            'TALCondition': "python: licence.getProcedureChoice() != 'article65'",
         },
         {
             'id': "premiere-reunion-patrimoine",
@@ -5951,6 +5979,7 @@ EventConfigs = {
             'podTemplates': (
             ),
             'eventType': ('Products.urban.interfaces.IPatrimonyMeetingEvent',),
+            'TALCondition': "python: licence.getProcedureChoice() != 'article65'",
         },
         {
             'id': "deuxieme-reunion-patrimoine",
@@ -5962,6 +5991,7 @@ EventConfigs = {
             'podTemplates': (
             ),
             'eventType': ('Products.urban.interfaces.IPatrimonyMeetingEvent',),
+            'TALCondition': "python: licence.getProcedureChoice() != 'article65'",
         },
         {
             'id': "reunion-patrimoine-supplementaire",
@@ -5974,6 +6004,7 @@ EventConfigs = {
             'podTemplates': (
             ),
             'eventType': ('Products.urban.interfaces.IPatrimonyMeetingEvent',),
+            'TALCondition': "python: licence.getProcedureChoice() != 'article65'",
         },
     ),
     'envclasstwo': (
@@ -5985,6 +6016,18 @@ EventConfigs = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (),
+            'TALCondition': "python: licence.getProcedureChoice() != 'article65'",
+        },
+        {
+            'id': "cession-permis",
+            'title': "Cession de permis",
+            'activatedFields': ('transferType', 'transferDescription',),
+            'eventDateLabel': 'Date de la cession',
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (),
+            'eventType': ('Products.urban.interfaces.ITransferOfLicenceEvent', 'Products.urban.interfaces.ICollegeEvent',),
+            'TALCondition': "here/mayAddTransferOfLicenceEvent",
         },
         {
             'id': "depot-de-la-demande",
@@ -6001,6 +6044,7 @@ EventConfigs = {
                 {'id': "pe_info_demandeur.odt", 'title': "Information au demandeur"},
             ),
             'eventType': ('Products.urban.interfaces.IDepositEvent',),
+            'TALCondition': "python: licence.getProcedureChoice() != 'article65'",
         },
         {
             'id': "envoi-demande-FT",
@@ -6011,6 +6055,7 @@ EventConfigs = {
             'keyDates': ('eventDate',),
             'podTemplates': (),
             'eventType': ('Products.urban.interfaces.ITransmitToSPWEvent',),
+            'TALCondition': "python: licence.getProcedureChoice() != 'article65'",
         },
         {
             'id': "dossier-incomplet",
@@ -6021,6 +6066,7 @@ EventConfigs = {
             'keyDates': ('eventDate',),
             'podTemplates': (),
             'eventType': ('Products.urban.interfaces.IMissingPartEvent',),
+            'TALCondition': "python: licence.getProcedureChoice() != 'article65'",
         },
         {
             'id': "recepisse-complement",
@@ -6039,6 +6085,7 @@ EventConfigs = {
                 'Products.urban.interfaces.IMissingPartDepositEvent',
                 'Products.urban.interfaces.IMissingPartTransmitToSPWEvent',
             ),
+            'TALCondition': "python: licence.getProcedureChoice() != 'article65'",
         },
         {
             'id': "dossier-irrecevable",
@@ -6051,6 +6098,7 @@ EventConfigs = {
                 {'id': "pe_irrecevabilite_hors_delai.odt", 'title': "Transmis de l'irrecevabilité à l'ARNE"},
             ),
             'eventType': ('Products.urban.interfaces.IRefusedIncompletenessEvent',),
+            'TALCondition': "python: licence.getProcedureChoice() != 'article65'",
         },
         {
             'id': "dossier-complet-recevable",
@@ -6062,6 +6110,7 @@ EventConfigs = {
             'keyDates': ('eventDate',),
             'podTemplates': (),
             'eventType': ('Products.urban.interfaces.IAcknowledgmentEvent',),
+            'TALCondition': "python: licence.getProcedureChoice() != 'article65'",
         },
         {
             'id': "enquete-publique",
@@ -6406,6 +6455,7 @@ EventConfigs = {
             'eventPortalType': 'UrbanEventCollege',
             'podTemplates': ({'id': "pe_transmis_avis_prealable_dgo3.odt", 'title': "Transmis de l'avis Collège à l'ARNE"},),
             'eventType': ('Products.urban.interfaces.ICollegeOpinionEvent',),
+            'TALCondition': "python: licence.getProcedureChoice() != 'article65'",
         },
         {
             'id': "rapport-synthese",
@@ -6415,6 +6465,7 @@ EventConfigs = {
             'keyDates': ('eventDate',),
             'podTemplates': (),
             'eventType': ('Products.urban.interfaces.IDecisionProjectFromSPWEvent',),
+            'TALCondition': "python: licence.getProcedureChoice() != 'article65'",
         },
         {
             'id': "modified-blueprints",
@@ -6427,6 +6478,7 @@ EventConfigs = {
                 {'id': "pe_transmis_plans_modificatifs_dgo3.odt", 'title': "Transmis de la demande de plans modificatifs à l'ARNE"},
             ),
             'eventType': ('Products.urban.interfaces.IAcknowledgmentEvent',),
+            'TALCondition': "python: licence.getProcedureChoice() != 'article65'",
         },
         {
             'id': "reception-plans-modificatifs",
@@ -6437,6 +6489,7 @@ EventConfigs = {
             'keyDates': ('eventDate',),
             'podTemplates': (),
             'eventType': ('Products.urban.interfaces.IModificationDepositEvent',),
+            'TALCondition': "python: licence.getProcedureChoice() != 'article65'",
         },
         {
             'id': "decision",
@@ -6480,6 +6533,7 @@ EventConfigs = {
                 {'id': "pe_attestation_affichage_decision.odt", 'title': "Attestation d’affichage de la décision"},
             ),
             'eventType': ('Products.urban.interfaces.IDisplayingTheDecisionEvent',),
+            'TALCondition': "python: licence.getProcedureChoice() != 'article65'",
         },
         {
             'id': "recours-au-gouvernement",
@@ -6493,6 +6547,7 @@ EventConfigs = {
                 {'id': "pe_attestation_affichage_recours.odt", 'title': "Attestation d'affichage du recours"},
             ),
             'eventType': ('Products.urban.interfaces.IRecourseEvent',),
+            'TALCondition': "python: licence.getProcedureChoice() != 'article65'",
         },
         {
             'id': "decision-du-recours",
@@ -6505,6 +6560,7 @@ EventConfigs = {
                 {'id': "pe_affichage_decision_recours.odt", 'title': "Attestation d'affichage de la décision du recours"},
             ),
             'eventType': ('Products.urban.interfaces.IRecourseEvent',),
+            'TALCondition': "python: licence.getProcedureChoice() != 'article65'",
         },
         {
             'id': "premiere-reunion-patrimoine",
@@ -6516,6 +6572,7 @@ EventConfigs = {
             'podTemplates': (
             ),
             'eventType': ('Products.urban.interfaces.IPatrimonyMeetingEvent',),
+            'TALCondition': "python: licence.getProcedureChoice() != 'article65'",
         },
         {
             'id': "deuxieme-reunion-patrimoine",
@@ -6527,6 +6584,7 @@ EventConfigs = {
             'podTemplates': (
             ),
             'eventType': ('Products.urban.interfaces.IPatrimonyMeetingEvent',),
+            'TALCondition': "python: licence.getProcedureChoice() != 'article65'",
         },
         {
             'id': "reunion-patrimoine-supplementaire",
@@ -6539,6 +6597,7 @@ EventConfigs = {
             'podTemplates': (
             ),
             'eventType': ('Products.urban.interfaces.IPatrimonyMeetingEvent',),
+            'TALCondition': "python: licence.getProcedureChoice() != 'article65'",
         },
 
     ),
@@ -6553,6 +6612,17 @@ EventConfigs = {
             'keyDates': ('eventDate',),
             'podTemplates': ({'id': "dec3_recepisse_depot_demande.odt", 'title': "Récépissé de la déclaration"},),
             'eventType': ('Products.urban.interfaces.IDepositEvent',),
+        },
+        {
+            'id': "cession-permis",
+            'title': "Cession de permis",
+            'activatedFields': ('transferType', 'transferDescription',),
+            'eventDateLabel': 'Date de la cession',
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (),
+            'eventType': ('Products.urban.interfaces.ITransferOfLicenceEvent', 'Products.urban.interfaces.ICollegeEvent',),
+            'TALCondition': "here/mayAddTransferOfLicenceEvent",
         },
         {
             'id': "refus-de-la-demande",

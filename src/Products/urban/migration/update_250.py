@@ -522,3 +522,62 @@ def update_env_licences_schedule(context):
     catalog.clearFindAndRebuild()
 
     logger.info("upgrade done!")
+
+
+def hide_folder_contents_action(context):
+    """
+    """
+    logger = logging.getLogger('urban: hide folder_contents action')
+    logger.info("starting upgrade steps")
+    setup_tool = api.portal.get_tool('portal_setup')
+    setup_tool.runImportStepFromProfile('profile-Products.urban:default', 'actions')
+    logger.info("upgrade step done!")
+
+def add_default_LO_server_port(context):
+    """
+    """
+    logger = logging.getLogger('urban: add second default LO port')
+    logger.info("starting upgrade steps")
+    old_port = api.portal.get_registry_record(
+        'collective.documentgenerator.browser.controlpanel.IDocumentGeneratorControlPanelSchema.oo_port'
+    )
+    new_port = api.portal.get_registry_record(
+        'collective.documentgenerator.browser.controlpanel.IDocumentGeneratorControlPanelSchema.oo_port_list'
+    )
+    if "2002" not in new_port or unicode(old_port) not in new_port:
+        new_port = u"{};2002".format(old_port)
+        api.portal.set_registry_record(
+            'collective.documentgenerator.browser.controlpanel.IDocumentGeneratorControlPanelSchema.oo_port_list',
+            new_port
+        )
+    logger.info("upgrade step done!")
+
+
+def add_applicant_couple_type(context):
+    """
+    """
+    logger = logging.getLogger('urban: add second default LO port')
+    logger.info("starting upgrade steps")
+    setup_tool = api.portal.get_tool('portal_setup')
+    setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'factorytool')
+    setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'typeinfo')
+    setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'workflow')
+    setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'update-workflow-rolemap')
+    logger.info("upgrade step done!")
+
+
+def install_environment_article65(context):
+    """
+    """
+    logger = logging.getLogger('urban: configure environment configs for article 65')
+    logger.info("starting upgrade steps")
+    setup_tool = api.portal.get_tool('portal_setup')
+    setup_tool.runImportStepFromProfile('profile-Products.urban:extra', 'urban-update-vocabularies')
+    portal_urban = api.portal.get_tool('portal_urban')
+    for config_id in ['codt_uniquelicence', 'envclassone', 'envclasstwo']:
+        config = getattr(portal_urban, config_id)
+        for event_config in config.eventconfigs.objectValues():
+            if not event_config.getTALCondition():
+                event_config.TALCondition = "python: licence.getProcedureChoice() != 'article65'"
+                logger.info("migrated eventconfig: {}".format(event_config))
+    logger.info("upgrade step done!")
