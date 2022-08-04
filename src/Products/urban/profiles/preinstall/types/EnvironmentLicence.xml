@@ -19,6 +19,7 @@
    <element value="UrbanEventInquiry"/>
    <element value="UrbanEventOpinionRequest"/>
    <element value="Applicant"/>
+   <element value="Couple"/>
    <element value="UrbanEvent"/>
    <element value="File"/>
    <element value="Parcel"/>

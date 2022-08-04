@@ -72,7 +72,7 @@ schema = Schema((
             label_msgid='urban_label_changes',
             i18n_domain='urban',
         ),
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
         default_content_type='text/plain',
     ),
     TextField(
@@ -83,7 +83,7 @@ schema = Schema((
             label_msgid='urban_label_comment',
             i18n_domain='urban',
         ),
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
         default_content_type='text/plain',
     ),
 

@@ -315,6 +315,11 @@ class ICorporation(Interface):
     """
 
 
+class ICouple(Interface):
+    """Marker interface for .Couple.Couple
+    """
+
+
 class IClaimant(Interface):
     """Marker interface for .Claimant.Claimant
     """

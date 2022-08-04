@@ -49,7 +49,7 @@ schema = Schema((
             i18n_domain='urban',
         ),
         default_content_type='text/plain',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
 
 ),

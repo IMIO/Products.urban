@@ -176,7 +176,7 @@ schema = Schema((
         schemata='urban_analysis',
         default_method='getDefaultText',
         default_content_type='text/html',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     BooleanField(
         name='townshipCouncilFolder',
@@ -222,7 +222,7 @@ schema = Schema((
         schemata='urban_peb',
         default_method='getDefaultText',
         default_content_type='text/html',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     BooleanField(
         name='pebStudy',
@@ -323,7 +323,7 @@ schema = Schema((
         default_method='getDefaultText',
         schemata='urban_road',
         default_content_type='text/html',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     TextField(
         name='roadMiscDescription',
@@ -334,7 +334,7 @@ schema = Schema((
         default_method='getDefaultText',
         schemata='urban_road',
         default_content_type='text/html',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     BooleanField(
         name='roadDgrneUnderground',
@@ -354,7 +354,7 @@ schema = Schema((
         default_method='getDefaultText',
         schemata='urban_road',
         default_content_type='text/html',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     BooleanField(
         name='locationDgrneUnderground',
@@ -374,7 +374,7 @@ schema = Schema((
         default_method='getDefaultText',
         schemata='urban_analysis',
         default_content_type='text/html',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     TextField(
         name='locationTechnicalConditions',
@@ -385,7 +385,7 @@ schema = Schema((
         default_method='getDefaultText',
         schemata='urban_analysis',
         default_content_type='text/html',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     TextField(
         name='pebTechnicalAdvice',
@@ -396,7 +396,7 @@ schema = Schema((
         default_method='getDefaultText',
         schemata='urban_peb',
         default_content_type='text/html',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     ReferenceField(
         name='architects',
@@ -433,7 +433,7 @@ schema = Schema((
             wild_card_search=True,
             show_results_without_query=True,
             restrict_browsing_to_startup_directory=False,
-            label=_('urban_label_representative_contacts', default='RepresentativeContacts(s)'),
+            label=_('urban_label_representative_contacts', default='RepresentativeContact(s)'),
             popup_name='contact_reference_popup',
         ),
         schemata='urban_description',
@@ -507,7 +507,7 @@ schema = Schema((
         schemata='urban_analysis',
         default_method='getDefaultText',
         default_content_type='text/html',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     BooleanField(
         name='water',

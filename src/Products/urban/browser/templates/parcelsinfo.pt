@@ -83,6 +83,7 @@
                                    <a class="link-overlay"
                                       tal:attributes="href python: licence['url']; class python: licence['class']"
                                       tal:content="python: licence['title']" i18n:translate="">lien vers les anciens permis</a>
+                                   <p class="discreet"><span tal:content="structure python: licence['description']">Result description</span></p>
                                </div>
                            </tal:licences>
                            </td>

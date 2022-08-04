@@ -34,6 +34,7 @@ from Products.urban.utils import setOptionalAttributes
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 
 from archetypes.referencebrowserwidget.widget import ReferenceBrowserWidget
+from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 
 from collective.datagridcolumns.ReferenceColumn import ReferenceColumn
 from collective.datagridcolumns.TextAreaColumn import TextAreaColumn
@@ -45,6 +46,22 @@ optional_fields = [
     'referenceSPE', 'referenceFT', 'claimsSynthesis',
     'conclusions', 'commentsOnSPWOpinion',
 ]
+
+slave_fields_procedurechoice = [
+    {
+        'name': 'annoncedDelay',
+        'action': 'value',
+        'vocab_method': 'getProcedureDelays',
+        'control_param': 'values',
+    },
+    {
+        'name': 'bound_licences',
+        'action': 'show',
+        'toggle_method': 'showBoundLicenceIfArticle65',
+        'control_param': 'values',
+    },
+]
+
 ##/code-section module-header
 
 schema = Schema((
@@ -106,6 +123,23 @@ schema = Schema((
         vocabulary=UrbanVocabulary('ftSolicitOpinionsTo', inUrbanConfig=True),
         default_method='getDefaultValue',
     ),
+    ReferenceField(
+        name='bound_licences',
+        widget=ReferenceBrowserWidget(
+            allow_search=True,
+            allow_browse=False,
+            force_close_on_insert=True,
+            startup_directory='urban',
+            show_indexes=False,
+            wild_card_search=True,
+            restrict_browsing_to_startup_directory=True,
+            label=_('urban_label_bound_licences', default='Bound licences'),
+        ),
+        allowed_types=URBAN_ENVIRONMENT_TYPES,
+        schemata='urban_description',
+        multiValued=True,
+        relationship="bound_licences",
+    ),
     TextField(
         name='claimsSynthesis',
         allowable_content_types=('text/html',),
@@ -115,7 +149,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_environment',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     TextField(
         name='environmentTechnicalAdviceAfterInquiry',
@@ -127,7 +161,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_environment',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     TextField(
         name='commentsOnSPWOpinion',
@@ -139,7 +173,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_environment',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     TextField(
         name='conclusions',
@@ -150,9 +184,8 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_environment',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
-
 ),
 )
 
@@ -233,11 +266,14 @@ class EnvironmentLicence(BaseFolder, EnvironmentBase, BrowserDefaultMixin):
         self.setTitle(title)
         self.reindexObject(idxs=('Title', 'applicantInfosIndex', 'sortable_title', ))
 
-    security.declarePublic('listLicenceParcels')
-    def listLicenceParcels(self):
-        parcels = self.objectValues('PortionOut')
-        vocabulary = [(parcel.UID(), parcel.Title()) for parcel in parcels]
-        return DisplayList(sorted(vocabulary, key=lambda name: name[1]))
+    def listProcedureChoices(self):
+        vocabulary = (
+            ('ukn', 'Non determiné'),
+            ('simple', 'Classique'),
+            ('temporary', 'Temporaire'),
+            ('article65', 'Article65'),
+        )
+        return DisplayList(vocabulary)
 
     security.declarePublic('previouslicencesBaseQuery')
     def previouslicencesBaseQuery(self):
@@ -294,8 +330,6 @@ class EnvironmentLicence(BaseFolder, EnvironmentBase, BrowserDefaultMixin):
         )
         return csv_adresses
 
-
-
 registerType(EnvironmentLicence, PROJECTNAME)
 # end of class EnvironmentLicence
 
@@ -310,6 +344,10 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     schema.moveField('natura2000Details', after='natura2000location')
     schema.moveField('description', after='validityDelay')
     schema.moveField('environmentTechnicalRemarks', after='conclusions')
+    schema.moveField('bound_licences', after='annoncedDelayDetails')
+    schema.moveField('natura2000', after='bound_licences')
+    schema['procedureChoice'].widget.slave_fields=slave_fields_procedurechoice
+
 
 finalizeSchema(EnvironmentLicence_schema)
 ##/code-section module-footer
