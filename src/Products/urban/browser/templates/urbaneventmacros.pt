@@ -38,7 +38,9 @@
                 </tal:manage_show_nc_if_needed>
             </tr>
         </tal:evtfield>
-        <tr tal:condition="python: context.getUrbaneventtypes().eventType[0] == 'Products.urban.interfaces.ITransferOfLicenceEvent'">
+        <tr tal:define="config python:context.getUrbaneventtypes();
+                        event_types python: config and config.getEventType()"
+            tal:condition="python: 'Products.urban.interfaces.ITransferOfLicenceEvent' in event_types">
                 <td>    
                     <metal:applicants_and_corporations_macro use-macro="here/../@@licencemacros/urbanApplicantsAndCorporationsMacro" />
                     <tal:show_disabled_applicants condition= "here/get_applicants_history">
