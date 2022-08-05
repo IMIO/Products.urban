@@ -321,10 +321,11 @@ class UrbanDocGenerationLicenceHelperView(UrbanDocGenerationHelperView):
                 if first_section != portionOutObj.getSection():
                     toreturn += 'section %s ' % portionOutObj.getSection()
             toreturn += ' %s' % portionOutObj.getRadical()
-            if portionOutObj.getBis() != '':
+            if portionOutObj.getBis() not in ['', '0']:
                 toreturn += '/%s' % portionOutObj.getBis()
             toreturn += portionOutObj.getExposant()
-            toreturn += portionOutObj.getPuissance()
+            if portionOutObj.getPuissance() not in ['', '0']:
+                toreturn += portionOutObj.getPuissance()
             isFirst = False
         return toreturn
 
