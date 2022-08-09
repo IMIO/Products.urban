@@ -92,6 +92,7 @@ import Products
 
 from Products.urban.content.licence import Article127  # noqa
 from Products.urban.content.licence import BuildLicence  # noqa
+from Products.urban.content.licence import BuildLicence  # noqa
 from Products.urban.content.licence import CODT_Article127  # noqa
 from Products.urban.content.licence import CODT_BuildLicence  # noqa
 from Products.urban.content.licence import CODT_CommercialLicence  # noqa
@@ -143,6 +144,7 @@ def initialize(context):
     import content.CODT_Inquiry
     import Contact
     import Corporation
+    import Couple
     import EnvironmentRubricTerm
     import FolderManager
     import content.FollowUpEventType

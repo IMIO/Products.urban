@@ -15,28 +15,13 @@ Jean-Michel Abe <jm.abe@la-bruyere.be>"""
 __docformat__ = 'plaintext'
 
 from datetime import date
+from DateTime import DateTime
 
 from imio.schedule.content.task import IAutomatedTask
 
 from Products.Archetypes.interfaces import IBaseFolder
 
-from Products.urban.interfaces import IApplicant
-from Products.urban.interfaces import IBaseBuildLicence
-from Products.urban.interfaces import ICODT_BaseBuildLicence
-from Products.urban.interfaces import ICorporation
-from Products.urban.interfaces import IEnvironmentLicence
-from Products.urban.interfaces import IGenericLicence
-from Products.urban.interfaces import IInspection
-from Products.urban.interfaces import IIsArchive
-from Products.urban.interfaces import IMiscDemand
-from Products.urban.interfaces import IParcellingTerm
-from Products.urban.interfaces import IPatrimonyCertificate
-from Products.urban.interfaces import IPortionOut
-from Products.urban.interfaces import IProprietary
-from Products.urban.interfaces import ITicket
-from Products.urban.interfaces import IUrbanDoc
-from Products.urban.interfaces import IUrbanEvent
-from Products.urban.interfaces import IUrbanEventType
+from Products.urban import interfaces
 from Products.urban.schedule.interfaces import ILicenceDeliveryTask
 from Products.urban.utils import get_ws_meetingitem_infos
 
@@ -48,7 +33,7 @@ from suds import WebFault
 from zope.component import queryAdapter
 
 
-@indexer(IApplicant)
+@indexer(interfaces.IApplicant)
 def applicant_applicantinfoindex(object):
     """
     Return the informations to index about the applicants
@@ -56,7 +41,7 @@ def applicant_applicantinfoindex(object):
     return _get_applicantsinfoindex(object)
 
 
-@indexer(IGenericLicence)
+@indexer(interfaces.IGenericLicence)
 def genericlicence_applicantinfoindex(object):
     """
     Return the informations to index about the applicants
@@ -68,7 +53,7 @@ def genericlicence_applicantinfoindex(object):
     return list(set(contacts_info))
 
 
-@indexer(IEnvironmentLicence)
+@indexer(interfaces.IEnvironmentLicence)
 def environmentlicence_applicantinfoindex(object):
     """
     Return the informations to index about the applicants
@@ -79,27 +64,37 @@ def environmentlicence_applicantinfoindex(object):
     return list(set(applicants_info))
 
 
-@indexer(IInspection)
-@indexer(ITicket)
+@indexer(interfaces.IInspection)
+@indexer(interfaces.ITicket)
 def inspection_applicantinfoindex(object):
     """
     Return the informations to index about the applicants
     """
     applicants_info = []
     contacts = object.getApplicants() + object.getProprietaries() +\
-               object.getPlaintiffs() + object.getTenants()
+        object.getPlaintiffs() + object.getTenants()
     for applicant in contacts:
         applicants_info.extend(_get_applicantsinfoindex(applicant))
     return list(set(applicants_info))
 
 
 def _get_applicantsinfoindex(applicant):
-    applicants_info = [
-        applicant.getName1(),
-        applicant.getName2(),
-        applicant.getSociety(),
-        applicant.getNationalRegister(),
-    ]
+    if applicant.meta_type == 'Couple':
+        applicants_info = [
+            applicant.getCouplePerson1Name(),
+            applicant.getCouplePerson1Firstname(),
+            applicant.getCouplePerson2Name(),
+            applicant.getCouplePerson2Firstname(),
+            applicant.getNationalRegisterPerson1(),
+            applicant.getNationalRegisterPerson2(),
+        ]
+    else:
+        applicants_info = [
+            applicant.getName1(),
+            applicant.getName2(),
+            applicant.getSociety(),
+            applicant.getNationalRegister(),
+        ]
     if hasattr(applicant, 'getDenomination'):
         applicants_info.append(applicant.getDenomination())
     if hasattr(applicant, 'getBceNumber'):
@@ -107,10 +102,10 @@ def _get_applicantsinfoindex(applicant):
     return [info for info in applicants_info if info]
 
 
-@indexer(IBaseBuildLicence)
-@indexer(ICODT_BaseBuildLicence)
-@indexer(IMiscDemand)
-@indexer(IPatrimonyCertificate)
+@indexer(interfaces.IBaseBuildLicence)
+@indexer(interfaces.ICODT_BaseBuildLicence)
+@indexer(interfaces.IMiscDemand)
+@indexer(interfaces.IPatrimonyCertificate)
 def licence_architectinfoindex(object):
     """
     Return the informations to index about the architects
@@ -122,28 +117,7 @@ def licence_architectinfoindex(object):
     return list(set(architects_info))
 
 
-@indexer(IPortionOut)
-def parcelinfoindex(obj):
-    """
-    Indexes some informations about the parcels of 'self'
-    Index parcels of a licence
-    It builds a list of parcels infos.  Parcels infos are :
-    - code divison
-    - division
-    - section
-    - radical
-    - bis
-    - exposant
-    - puissance
-    Separated by a ','
-    What we need to do is to do an 'exact' search on it
-    This index is a ZCTextIndex based on the plone_lexicon so we
-    are sure that indexed values are lowercase
-    """
-    return [obj.get_capakey()]
-
-
-@indexer(IGenericLicence)
+@indexer(interfaces.IGenericLicence)
 def genericlicence_parcelinfoindex(obj):
     parcels_infos = []
     if hasattr(obj, 'getParcels'):
@@ -151,43 +125,34 @@ def genericlicence_parcelinfoindex(obj):
     return parcels_infos
 
 
-@indexer(IParcellingTerm)
-def parcellingterm_parcelinfoindex(obj):
-    """
-    Index parcels of a parcelling term
-    """
-    parcels_infos = []
-    if hasattr(obj, 'getParcels'):
-        parcels_infos = list(set([p.get_capakey() for p in obj.getParcels()]))
-    return parcels_infos
-
-
-@indexer(IGenericLicence)
+@indexer(interfaces.IGenericLicence)
 def genericlicence_modified(licence):
-    wf_modification = licence.workflow_history[licence.workflow_history.keys()[0]][-1].get('time')
-    if wf_modification and wf_modification > licence.modified():
+    wf_modification = licence.workflow_history[licence.workflow_history.keys()[0]][-1]['time']
+    if wf_modification > licence.modified():
         return wf_modification
     return licence.modified()
 
 
-@indexer(IGenericLicence)
+@indexer(interfaces.IGenericLicence)
 def genericlicence_streetsuid(licence):
+    if licence.portal_type in ['EnvClassBordering']:
+        return []
     streets = [location['street'] for location in licence.getWorkLocations()]
     return streets
 
 
-@indexer(IGenericLicence)
+@indexer(interfaces.IGenericLicence)
 def genericlicence_streetnumber(licence):
     numbers = [location['number'] or '0' for location in licence.getWorkLocations()] or ['0']
     return numbers
 
 
-@indexer(IGenericLicence)
+@indexer(interfaces.IGenericLicence)
 def genericlicence_address(licence):
     return licence.getStreetAndNumber()
 
 
-@indexer(IGenericLicence)
+@indexer(interfaces.IGenericLicence)
 def genericlicence_lastkeyevent(object):
     for event in reversed(object.getUrbanEvents()):
         event_type = event.getUrbaneventtypes()
@@ -195,29 +160,22 @@ def genericlicence_lastkeyevent(object):
             return "%s,  %s" % (event.getEventDate().strftime("%d/%m/%y"), event_type.Title())
 
 
-# !!!!
-# We use this index to know if an event is schedulable or not.
-# Since it's not used for UrbanEventType, we use this one rather
-# than define a new index
-# !!!!
-@indexer(IUrbanEventType)
-def urbaneventtype_lastkeyevent(object):
-    if object.getDeadLineDelay() > 0:
-        return 'schedulable'
-    return ''
-
-
-@indexer(IGenericLicence)
+@indexer(interfaces.IGenericLicence)
 def genericlicence_foldermanager(object):
     return [foldermanager.UID() for foldermanager in object.getFoldermanagers()]
 
 
-@indexer(IUrbanEvent)
+@indexer(interfaces.IUrbanEvent)
 def urbanevent_foldermanager(object):
     return [foldermanager.UID() for foldermanager in object.aq_parent.getFoldermanagers()]
 
 
-@indexer(IBaseBuildLicence)
+@indexer(interfaces.IBaseBuildLicence)
+def licence_worktype(object):
+    return object.getWorkType()
+
+
+@indexer(interfaces.IBaseBuildLicence)
 def investigation_start_date(object):
     if object.getUrbanEventInquiries():
         event = object.getLastInquiry(use_catalog=False)
@@ -225,7 +183,7 @@ def investigation_start_date(object):
             return event.getInvestigationStart()
 
 
-@indexer(IBaseBuildLicence)
+@indexer(interfaces.IBaseBuildLicence)
 def investigation_end_date(object):
     if object.getUrbanEventInquiries():
         event = object.getLastInquiry(use_catalog=False)
@@ -242,23 +200,29 @@ def rubricsfolders_extravalue(object):
         return ['']
 
 
-@indexer(IGenericLicence)
+@indexer(interfaces.IGenericLicence)
 def genericlicence_representative(licence):
     representatives_uids = [rep.UID() for rep in licence.getRepresentatives()]
     return representatives_uids
 
 
-@indexer(IGenericLicence)
+@indexer(interfaces.IGenericLicence)
 def genericlicence_decisiondate(licence):
     decision_event = licence.getLastTheLicence()
+    linked_pm_items = None
     if decision_event:
         try:
             linked_pm_items = get_ws_meetingitem_infos(decision_event)
         except WebFault:
             catalog = api.portal.get_tool('portal_catalog')
             brain = catalog(UID=licence.UID())
-            if brain.getDecisionDate:
-                return brain.getDecisionDate
+            if brain and brain[0].getDecisionDate:
+                old_decision_date = brain[0].getDecisionDate
+                if type(old_decision_date) is DateTime:
+                    decision_date = date(old_decision_date.year(), old_decision_date.month(), old_decision_date.day())
+                else:
+                    decision_date = date(old_decision_date.year, old_decision_date.month, old_decision_date.day)
+                return decision_date
         if linked_pm_items:
             meeting_date = linked_pm_items[0]['meeting_date']
             if not (meeting_date.day == meeting_date.month == 1 and meeting_date.year == 1950):
@@ -266,45 +230,40 @@ def genericlicence_decisiondate(licence):
         return decision_event.getDecisionDate() or decision_event.getEventDate()
 
 
-@indexer(IGenericLicence)
+@indexer(interfaces.IGenericLicence)
 def genericlicence_depositdate(licence):
     deposit_event = licence.getFirstDeposit()
     if deposit_event:
         return deposit_event.getEventDate()
 
 
-@indexer(IGenericLicence)
+@indexer(interfaces.IGenericLicence)
 def genericlicence_archive(licence):
     is_archive = False
-    archive_adapter = queryAdapter(licence, IIsArchive)
+    archive_adapter = queryAdapter(licence, interfaces.IIsArchive)
     if archive_adapter:
         is_archive = archive_adapter.is_archive()
     return is_archive
 
 
-@indexer(IUrbanEvent)
+@indexer(interfaces.IUrbanEvent)
 def event_not_indexed(obj):
     raise AttributeError()
 
 
-@indexer(IUrbanDoc)
+@indexer(interfaces.IUrbanDoc)
 def doc_not_indexed(obj):
     raise AttributeError()
 
 
-@indexer(IApplicant)
-@indexer(IProprietary)
-@indexer(ICorporation)
+@indexer(interfaces.IApplicant)
+@indexer(interfaces.IProprietary)
+@indexer(interfaces.ICorporation)
 def contact_not_indexed(obj):
     raise AttributeError()
 
 
-@indexer(IPortionOut)
-def portion_not_indexed(obj):
-    raise AttributeError()
-
-
-@indexer(IGenericLicence)
+@indexer(interfaces.IGenericLicence)
 def genericlicence_final_duedate(licence):
     """
     Index licence reference on their tasks to be able
@@ -332,7 +291,8 @@ def inspection_task_followups(task):
     """
     licence = task.get_container()
     # only index Inspection and Ticket licence
-    if not IInspection.providedBy(licence) and not ITicket.providedBy(licence):
+    if not interfaces.IInspection.providedBy(licence) and \
+       not interfaces.ITicket.providedBy(licence):
         return []
     last_report = licence.getLastReportEvent()
     follow_ups = last_report and last_report.getFollowup_proposition() or []
@@ -352,15 +312,16 @@ def task_covid(task):
     return covid
 
 
-@indexer(IGenericLicence)
+@indexer(interfaces.IGenericLicence)
 def licence_covid(licence):
     """
+    commentators index store COVID value and opinion requests
     """
     covid = licence.getCovid() and ['COVID'] or None
     return covid
 
 
-@indexer(IUrbanEventType)
+@indexer(interfaces.IUrbanEventType)
 def eventconfig_urbaneventtype(event_config):
     """
     Index the portal_type of urban event created by this config.

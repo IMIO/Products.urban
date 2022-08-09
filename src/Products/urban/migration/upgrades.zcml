@@ -139,4 +139,12 @@
         handler=".migrate_to_250.migrate"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Install applicant couple type"
+        description="urban upgrade step"
+        source="1002"
+        destination="1003"
+        handler=".update_240.add_applicant_couple_type"
+        profile="Products.urban:default" />
+
 </configure>

@@ -75,6 +75,7 @@ ADD_CONTENT_PERMISSIONS = {
     'CODT_UrbanCertificateBase': 'urban: Add CODT_UrbanCertificateBase',
     'Contact': 'urban: Add Contact',
     'Corporation': 'urban: Add Corporation',
+    'Couple': 'urban: Add Couple',
     'City': 'urban: Add City',
     'Claimant': 'urban: Add Claimant',
     'ConfigTest': 'urban: Add ConfigTest',
@@ -143,6 +144,7 @@ setDefaultRoles('urban: Add CODT_UrbanCertificateTwo', ("Manager", "Contributor"
 setDefaultRoles('urban: Add CODT_UrbanCertificateBase', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add Contact', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add Corporation', ("Manager", "Contributor"))
+setDefaultRoles('urban: Add Couple', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add ConfigTest', ("Manager", ))
 setDefaultRoles('urban: Add Declaration', ("Manager", "Contributor"))
 setDefaultRoles('urban: Add EnvClassOne', ("Manager", "Contributor"))
@@ -284,7 +286,10 @@ VOCABULARY_TYPES = [
 ]
 
 # all types that can be used as a licence applicant
-APPLICANTS_TYPES = ['Applicant', 'Proprietary', 'Corporation', 'Tenant', 'Plaintiff']
+APPLICANTS_TYPES = [
+    'Applicant', 'Proprietary', 'Corporation', 'CorporationProprietary'
+    'Tenant', 'Plaintiff', 'Couple', 'ProprietaryCouple',
+]
 
 #the different templates used to structure a document
 GLOBAL_TEMPLATES = {

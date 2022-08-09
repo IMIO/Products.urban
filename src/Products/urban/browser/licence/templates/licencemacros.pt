@@ -67,7 +67,6 @@
     <div class="#" tal:define="proprietaries context/getProprietaries"
                    tal:attributes="class python: proprietaries and 'field' or 'field warning'">
         <p tal:condition="not: proprietaries" i18n:translate="warning_add_a_proprietary">
-            You must encode proprietary(ies)
         </p>
         <div>
             <tal:listing content="structure view/renderProprietaryListing" />
@@ -79,6 +78,14 @@
               i18n:domain="urban" name="quickAdd"  action="createObject" method="post" style="float: left">
             <input type="hidden" name="type_name" value="#" tal:attributes="value ctype/id" />
             <input type="submit" class="context apButton contenttype-proprietary" id="add-proprietary" value="add_a_proprietary" i18n:attributes="value" />
+        </form>
+        <form tal:define="ctype python: context.portal_types.getTypeInfo('ProprietaryCouple');
+                         member context/@@plone_portal_state/member;"
+              tal:condition="python: member.has_permission('urban: Add Contact', context)"
+              tal:attributes="action python: context.absolute_url() + '/createObject'"
+              i18n:domain="urban" name="quickAdd"  action="createObject" method="post" style="float: left">
+            <input type="hidden" name="type_name" value="#" tal:attributes="value ctype/id" />
+            <input type="submit" class="context apButton contenttype-applicant" id="add-couple" value="add_a_proprietary_couple" i18n:attributes="value" />
         </form>
         <form tal:define="ctype python: context.portal_types.getTypeInfo('CorporationProprietary');
                           member context/@@plone_portal_state/member;"
@@ -115,6 +122,14 @@
             <input type="hidden" name="type_name" value="#" tal:attributes="value ctype/id" />
             <input type="submit" class="context apButton contenttype-tenant" id="add-tenant" value="add_a_tenant" i18n:attributes="value" />
         </form>
+        <form tal:define="ctype python: context.portal_types.getTypeInfo('CorporationTenant');
+                         member context/@@plone_portal_state/member;"
+              tal:condition="python: member.has_permission('urban: Add Corporation', context)"
+              tal:attributes="action python: context.absolute_url() + '/createObject'"
+              i18n:domain="urban" name="quickAdd"  action="createObject" method="post" style="float: left">
+            <input type="hidden" name="type_name" value="#" tal:attributes="value ctype/id" />
+            <input type="submit" class="context apButton contenttype-corprorationtenant" id="add-corporationtenant" value="add_a_corporation_tenant" i18n:attributes="value" />
+        </form>
     </div>
 </fieldset>
 
@@ -123,7 +138,6 @@
     <div class="#" tal:define="applicants context/getApplicants"
                    tal:attributes="class python: applicants and 'field' or 'field warning'">
         <p tal:condition="python: not applicants" i18n:translate="warning_add_an_applicant">
-            You must encode applicant(s)
         </p>
         <tal:listing content="structure view/renderApplicantListing" />
         <form tal:define="ctype python: context.portal_types.getTypeInfo('Applicant');
@@ -133,6 +147,14 @@
               i18n:domain="urban" name="quickAdd"  action="createObject" method="post" style="float: left">
             <input type="hidden" name="type_name" value="#" tal:attributes="value ctype/id" />
             <input type="submit" class="context apButton contenttype-applicant" id="add-applicant" value="add_a_physical_applicant" i18n:attributes="value" />
+        </form>
+        <form tal:define="ctype python: context.portal_types.getTypeInfo('Couple');
+                         member context/@@plone_portal_state/member;"
+              tal:condition="python: member.has_permission('urban: Add Contact', context)"
+              tal:attributes="action python: context.absolute_url() + '/createObject'"
+              i18n:domain="urban" name="quickAdd"  action="createObject" method="post" style="float: left">
+            <input type="hidden" name="type_name" value="#" tal:attributes="value ctype/id" />
+            <input type="submit" class="context apButton contenttype-applicant" id="add-couple" value="add_a_couple" i18n:attributes="value" />
         </form>
         <form tal:define="ctype python: context.portal_types.getTypeInfo('Corporation');
                          member context/@@plone_portal_state/member;"
@@ -187,7 +209,6 @@
     <div class="#" tal:define="applicants context/getApplicants"
                    tal:attributes="class python: applicants and 'field' or 'field warning'">
         <p tal:condition="python: not applicants" i18n:translate="warning_add_an_applicant">
-            You must encode applicant(s)
         </p>
         <tal:listing content="structure view/renderApplicantListing" />
         <form tal:define="ctype python: context.portal_types.getTypeInfo('Applicant');
@@ -197,6 +218,14 @@
               i18n:domain="urban" name="quickAdd"  action="createObject" method="post" style="float: left">
             <input type="hidden" name="type_name" value="#" tal:attributes="value ctype/id" />
             <input type="submit" class="context apButton contenttype-applicant" id="add-applicant" value="add_a_physical_applicant" i18n:attributes="value" />
+        </form>
+        <form tal:define="ctype python: context.portal_types.getTypeInfo('Couple');
+                         member context/@@plone_portal_state/member;"
+              tal:condition="python: member.has_permission('urban: Add Contact', context)"
+              tal:attributes="action python: context.absolute_url() + '/createObject'"
+              i18n:domain="urban" name="quickAdd"  action="createObject" method="post" style="float: left">
+            <input type="hidden" name="type_name" value="#" tal:attributes="value ctype/id" />
+            <input type="submit" class="context apButton contenttype-applicant" id="add-couple" value="add_a_couple" i18n:attributes="value" />
         </form>
         <form tal:define="ctype python: context.portal_types.getTypeInfo('Corporation');
                          member context/@@plone_portal_state/member;"

@@ -43,3 +43,18 @@ def fix_external_edition_settings(context):
         values.append('MailingLoopTemplate')
     api.portal.set_registry_record('externaleditor.externaleditor_enabled_types', values)
     logger.info("upgrade done!")
+
+
+def add_applicant_couple_type(context):
+        """
+        """
+        logger = logging.getLogger('urban: add second default LO port')
+        logger.info("starting upgrade steps")
+        setup_tool = api.portal.get_tool('portal_setup')
+        setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'factorytool')
+        setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'typeinfo')
+        setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'workflow')
+        setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'update-workflow-rolemap')
+        wf_tool = api.portal.get_tool('portal_workflow')
+        wf_tool.updateRoleMappings()
+        logger.info("upgrade step done!")

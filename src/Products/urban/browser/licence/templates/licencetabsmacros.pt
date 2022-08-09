@@ -35,22 +35,6 @@
             <metal:worklocation use-macro="here/@@worklocation-macro/worklocations_macro" />
         </fieldset>
 
-
-        <fieldset tal:condition="view/has_bound_inspections">
-                <legend i18n:translate="urban_bound_inspections">Bound inspections</legend><br/><br/>
-            <tal:inspections repeat='inspection view/get_bound_inspections'>
-                <div><a tal:attributes="href python:inspection['url']" tal:content="python: inspection['title']"/>
-                </div>
-            </tal:inspections>
-        </fieldset>
-        <fieldset tal:condition="view/has_bound_roaddecrees">
-                <legend i18n:translate="urban_bound_roaddecrees">Bound roaddecrees</legend><br/><br/>
-            <tal:roaddecrees repeat='roaddecree view/get_bound_roaddecrees'>
-                <div><a tal:attributes="href python:roaddecree['url']" tal:content="python: roaddecree['title']"/>
-                </div>
-            </tal:roaddecrees>
-        </fieldset>
-
         <fieldset>
             <legend i18n:translate="legend_details">Details</legend>
             <table metal:define-slot="detail_slot" class="no-style-table" cellspacing=0 cellpadding=0 width=100%
@@ -75,6 +59,21 @@
     </div>
 
     <div class="licence-column">
+
+        <fieldset tal:condition="view/has_bound_inspections">
+                <legend i18n:translate="urban_bound_inspections">Bound inspections</legend><br/><br/>
+            <tal:inspections repeat='inspection view/get_bound_inspections'>
+                <div> <a tal:attributes="href python:inspection['url']" tal:content="python: inspection['title']"/>
+                </div>
+            </tal:inspections>
+        </fieldset>
+        <fieldset tal:condition="view/has_bound_roaddecrees">
+                <legend i18n:translate="urban_bound_roaddecrees">Bound roaddecrees</legend><br/><br/>
+            <tal:roaddecrees repeat='roaddecree view/get_bound_roaddecrees'>
+                <div> <a tal:attributes="href python:roaddecree['url']" tal:content="python: roaddecree['title']"/>
+                </div>
+            </tal:roaddecrees>
+        </fieldset>
         <fieldset>
             <legend i18n:translate="urban_description_key_dates_legend">Key dates</legend>
             <table tal:define="keyDates view/getKeyDates"
@@ -284,6 +283,7 @@
 </div>
 
 <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%
+       i18n:domain="urban"
        metal:define-macro="advices_table-macro"
        tal:define="exclude python: ['solicitOpinionsTo', 'solicitOpinionsToOptional']" >
     <tr tal:repeat="field view/getAdviceFields">
@@ -306,6 +306,7 @@
                     <thead>
                         <tr>
                             <th i18n:translate="urban_label_requestedOrganisation">Organisation</th>
+
                             <th i18n:translate="urban_label_askingDate">Asking Date</th>
                             <th i18n:translate="urban_label_receiptDate">Receipt date</th>
                             <th i18n:translate="urban_label_externalDecision">Advice</th>
@@ -418,7 +419,7 @@
                           inquiries python: roaddecree_inquiries[1]">
         <legend>
             <a tal:attributes="href python: roaddecree.absolute_url()">
-                <span i18n:translate="urban_bound_roaddecrees"/> : 
+                <span i18n:translate="urban_bound_roaddecrees">Bound roaddecrees</span> :
                 <tal:title replace="roaddecree/Title"/>
             </a>
         </legend>
@@ -436,6 +437,7 @@
 </div>
 
 <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%
+       i18n:domain="urban"
        metal:define-macro="inquiry_table-macro"
        tal:define="custom python: ['investigationArticles'];
                    default_exclude python: [];

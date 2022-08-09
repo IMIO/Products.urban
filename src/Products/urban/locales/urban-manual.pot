@@ -2124,6 +2124,36 @@ msgstr ""
 msgid "urban_label_personRole"
 msgstr ""
 
+#. Default: "couplePerson1Name"
+#: Couple.py
+msgid "urban_label_coupleperson1name"
+msgstr ""
+
+#. Default: "couplePerson1Firstname"
+#: Couple.py
+msgid "urban_label_coupleperson1firstname"
+msgstr ""
+
+#. Default: "NationalregisterPerson1"
+#: Couple.py
+msgid "urban_label_nationalRegisterPerson1"
+msgstr ""
+
+#. Default: "couplePerson2Name"
+#: Couple.py
+msgid "urban_label_coupleperson2name"
+msgstr ""
+
+#. Default: "couplePerson2Firstname"
+#: Couple.py
+msgid "urban_label_coupleperson2firstname"
+msgstr ""
+
+#. Default: "NationalregisterPerson2"
+#: Couple.py
+msgid "urban_label_nationalRegisterperson2"
+msgstr ""
+
 #. Default: "Persontitle"
 #: Contact.py
 msgid "urban_label_personTitle"
