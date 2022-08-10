@@ -100,9 +100,9 @@ class TitleColumn(UrbanColumn):
         state = urbanlist_item.getState()
         css_class = 'contenttype-%s state-%s' % (portal_type, state)
         url = urbanlist_item.getURL()
-        title = urbanlist_item.Title()
+        title = escape(urbanlist_item.Title())
 
-        title_words = escape(title.split())
+        title_words = title.split()
         for split in range(len(title_words) / 15):
             title_words.insert(15 * (split + 1), '<br />')
         title = ' '.join(title_words)
