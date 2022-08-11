@@ -580,9 +580,20 @@ def install_environment_article65(context):
             if not event_config.getTALCondition():
                 event_config.TALCondition = "python: licence.getProcedureChoice() != 'article65'"
                 logger.info("migrated eventconfig: {}".format(event_config))
+    logger.info("upgrade step done!")
+
+
+def install_environment_cession(context):
+    """
+    """
+    logger = logging.getLogger('urban: configure environment configs for cession')
+    logger.info("starting upgrade steps")
+    setup_tool = api.portal.get_tool('portal_setup')
+    setup_tool.runImportStepFromProfile('profile-Products.urban:extra', 'urban-updateAllUrbanTemplates')
+    portal_urban = api.portal.get_tool('portal_urban')
     for config_id in ['codt_uniquelicence', 'envclassone', 'envclasstwo', 'envclassthree']:
         config = getattr(portal_urban, config_id)
         cession_event = getattr(config.eventconfigs, 'cession-permis', None)
-        if cession_event and  api.content.get_state(cession_event) == 'disabled':
+        if api.content.get_state(cession_event) == 'disabled':
             api.content.transition(obj=cession_event, to_state='enabled')
     logger.info("upgrade step done!")

@@ -403,6 +403,14 @@
         handler=".update_250.install_environment_article65"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Install environment cession"
+        description="Install environment cession"
+        source="1122"
+        destination="1123"
+        handler=".update_250.install_environment_cession"
+        profile="Products.urban:default" />
+
 
     <!--gs:upgradeStep
         title="Add schedule config for env licences 1 and 2"
