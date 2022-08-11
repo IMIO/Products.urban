@@ -3,6 +3,7 @@
 from imio.dashboard.utils import _updateDefaultCollectionFor
 from plone import api
 from Products.urban.config import URBAN_TYPES
+from Products.urban.interfaces import IGenericLicence
 import logging
 
 logger = logging.getLogger('urban: migrations')
