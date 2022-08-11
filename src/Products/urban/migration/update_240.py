@@ -59,5 +59,14 @@ def add_applicant_couple_type(context):
         setup_tool.runImportStepFromProfile('profile-liege.urban:default', 'workflow')
         setup_tool.runImportStepFromProfile('profile-liege.urban:default', 'update-workflow-rolemap')
         wf_tool = api.portal.get_tool('portal_workflow')
-        wf_tool.updateRoleMappings()
+        catalog = api.portal.get_tool('portal_catalog')
+        brains = catalog(object_provides=IGenericLicence.__identifier__)
+        i = 0
+        for brain in brains:
+            licence = brain.getObject()
+            wf_chain = wf_tool._chains_by_type[licence.portal_type][0]
+            wf = getattr(wf_tool, wf_chain)
+            wf.updateRoleMappingsFor(licence)
+            i += 1
+            print i, brain.Title
         logger.info("upgrade step done!")
