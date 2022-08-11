@@ -591,7 +591,7 @@ def install_environment_cession(context):
     setup_tool = api.portal.get_tool('portal_setup')
     setup_tool.runImportStepFromProfile('profile-Products.urban:extra', 'urban-updateAllUrbanTemplates')
     portal_urban = api.portal.get_tool('portal_urban')
-    for config_id in ['codt_uniquelicence', 'envclassone', 'envclasstwo', 'envclassthree']:
+    for config_id in ['envclassone', 'envclasstwo', 'envclassthree']:
         config = getattr(portal_urban, config_id)
         cession_event = getattr(config.eventconfigs, 'cession-permis', None)
         if api.content.get_state(cession_event) == 'disabled':
