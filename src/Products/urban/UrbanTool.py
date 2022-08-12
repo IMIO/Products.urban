@@ -41,6 +41,7 @@ from plone import api
 from plone.memoize.request import cache
 from zope.i18n import translate
 from Products.CMFCore import permissions
+from Products.CMFCore.utils import _checkPermission
 from Products.CMFCore.Expression import Expression
 from Products.CMFPlone.i18nl10n import ulocalized_time
 from Products.PageTemplates.Expressions import getEngine
@@ -880,5 +881,16 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         ]
         return DisplayList(terms)
 
+    def can_edit(self):
+        """
+        """
+        if _checkPermission(permissions.ModifyPortalContent, self):
+            return True
+
+    def is_admin(self):
+        """
+        """
+        if _checkPermission(permissions.ManagePortal, self):
+            return True
 
 registerType(UrbanTool, PROJECTNAME)
