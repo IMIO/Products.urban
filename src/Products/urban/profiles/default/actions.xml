@@ -41,9 +41,8 @@
    <property name="url_expr">string:${globals_view/getCurrentFolderUrl}/folder_contents</property>
    <property name="link_target"/>
    <property name="icon_expr"/>
-   <property name="available_expr">object/displayContentsTab</property>
+   <property name="available_expr">python: context.portal_urban.is_admin() or ('portal_urban' in globals_view.getCurrentFolderUrl() and context.portal_urban.can_edit())</property>
    <property name="permissions">
-    <element value="Manage Site"/>
    </property>
    <property name="visible">True</property>
   </object>
