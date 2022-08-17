@@ -82,12 +82,11 @@ class isNotDuplicatedReferenceValidator:
                 _('error_reference_format', default=u"This reference does not match the expected format of {}".format(regex))
             )
 
-        ref_num = match.groups() or match.group()
+        ref_num = match.group() or match.groups()
         if not ref_num:
             return 1
 
         similar_licences = catalog(getReference=ref_num, portal_type=types_to_check)
-
         if not similar_licences or (len(similar_licences) == 1 and licence.UID() == similar_licences[0].UID):
             return 1
         return translate(
