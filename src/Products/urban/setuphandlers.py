@@ -1578,3 +1578,37 @@ def _create_task_configs(container, taskconfigs):
         task_config = getattr(container, task_config_id)
         for subtasks_kwargs in subtasks:
             _create_task_configs(container=task_config, taskconfigs=subtasks)
+
+
+def disable_templates_edition(context):
+    """
+    Set the registry ITemplatesExternalEdition.enabled param to 'False'.
+    """
+    try:
+        enabled = api.portal.get_registry_record(
+            'Products.urban.interfaces.ITemplatesExternalEdition.enabled'
+        )
+    except:
+        setup_tool = api.portal.get_tool('portal_setup')
+        setup_tool.runImportStepFromProfile('profile-Products.urban:default', 'plone.app.registry')
+    api.portal.set_registry_record(
+        'Products.urban.interfaces.ITemplatesExternalEdition.enabled',
+        False
+    )
+
+
+def enable_templates_edition(context):
+    """
+    Set the registry ITemplatesExternalEdition.enabled param to 'True'.
+    """
+    try:
+        enabled = api.portal.get_registry_record(
+            'Products.urban.interfaces.ITemplatesExternalEdition.enabled'
+        )
+    except:
+        setup_tool = api.portal.get_tool('portal_setup')
+        setup_tool.runImportStepFromProfile('profile-Products.urban:default', 'plone.app.registry')
+    api.portal.set_registry_record(
+        'Products.urban.interfaces.ITemplatesExternalEdition.enabled',
+        True
+    )

@@ -473,4 +473,11 @@
      permission="zope2.View"
   />
 
+  <browser:page
+      for="Products.urban.docgen.UrbanTemplate.IUrbanTemplate"
+      name="external_edit"
+      class=".external_edit.TemplatesExternalEditView"
+      permission="cmf.ModifyPortalContent"
+      />
+
 </configure>
