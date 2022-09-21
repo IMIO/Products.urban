@@ -19,5 +19,20 @@
    updates the workflow role mappings for urban
  </import-step>
 
+ <import-step 
+    id="urban-disable-template-edition" 
+    handler="Products.urban.setuphandlers.disable_templates_edition"
+    title="Disable urban templates edition"
+    version="2015-06-02T09:05:41.873479">
+   Disable urban templates edition
+ </import-step>
+
+ <import-step 
+    id="urban-enable-template-edition" 
+    handler="Products.urban.setuphandlers.enable_templates_edition"
+    title="Enable urban templates edition"
+    version="2015-06-02T09:05:41.873479">
+   Enable urban templates edition
+ </import-step>
 </import-steps>
  
