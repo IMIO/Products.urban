@@ -1084,7 +1084,7 @@ EventConfigs = {
         {
             'id': "avis-prealable-college",
             'title': "Avis préalable du Collège",
-            'activatedFields': ('externalDecision',),
+            'activatedFields': ('collegeDecision',),
             'deadLineDelay': 15,
             'eventDateLabel': "Date de notification",
             'eventType': ('Products.urban.interfaces.ICollegeReportEvent',),
@@ -2514,7 +2514,15 @@ EventConfigs = {
                 {'id': "codt_punq_entete_farde.odt", 'title': "Entête farde dossier"},
                 {'id': "codt_punq_transmis_demande_dgo3.odt", 'title': "Transmis de la demande à l'ARNE"},
                 {'id': "codt_punq_transmis_demande_dgo4.odt", 'title': "Transmis de la demande au SPW TLPE"},
-                {'id': "codt_punq_information_demandeur.odt", 'title': "Information au demandeur"},
+                {'id': "codt_punq_information_demandeur.odt",
+                 'title': "Information au demandeur",
+                 'context_variables': [
+                     {
+                         'name': 'publipostage',
+                         'value': 'demandeurs'
+                     }
+                 ]
+                 },
             ),
             'eventType': ('Products.urban.interfaces.IDepositEvent',),
             'TALCondition': "python: licence.getProcedureChoice() != 'article65'",
@@ -2543,7 +2551,15 @@ EventConfigs = {
                 {'id': "codt_punq_recepisse_complements_demande.odt", 'title': "Récépissé de compléments à la demande"},
                 {'id': "codt_punq_transmis_complements_demande_dgo3.odt", 'title': "Transmis des compléments à l'ARNE"},
                 {'id': "codt_punq_transmis_complements_demande_dgo4.odt", 'title': "Transmis des compléments au SPW TLPE"},
-                {'id': "codt_punq_complements_information_demandeur.odt", 'title': "Information au demandeur"},
+                {'id': "codt_punq_complements_information_demandeur.odt",
+                 'title': "Information au demandeur",
+                 'context_variables': [
+                     {
+                         'name': 'publipostage',
+                         'value': 'demandeurs'
+                     }
+                 ]
+                 },
             ),
             'eventType': ('Products.urban.interfaces.IMissingPartDepositEvent',),
             'TALCondition': "python: licence.getProcedureChoice() != 'article65'",
@@ -2628,7 +2644,7 @@ EventConfigs = {
             'id': "avis-college",
             'title': "Avis préalable du Collège",
             'eventDateLabel': "Date de notification",
-            'activatedFields': ('externalDecision', 'decisionDate', 'transmitDate',),
+            'activatedFields': ('collegeDecision', 'decisionDate', 'transmitDate',),
             'deadLineDelay': 15,
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
@@ -2661,7 +2677,15 @@ EventConfigs = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "codt_punq_demande_plans_modificatifs.odt", 'title': "Demande de plan modificatifs"},
+                {'id': "codt_punq_demande_plans_modificatifs.odt",
+                 'title': "Demande de plan modificatifs",
+                 'context_variables': [
+                     {
+                         'name': 'publipostage',
+                         'value': 'demandeurs'
+                     }
+                 ]
+                 },
                 {'id': "codt_punq_transmis_demande_modificatifs_dgo3.odt", 'title': "Transmis de la demande de plans modificatifs à l'ARNE"},
                 {'id': "codt_punq_transmis_demande_modificatifs_dgo4.odt", 'title': "Transmis de la demande de plans modificatifs au SPW TLPE"},
             ),
@@ -2693,7 +2717,15 @@ EventConfigs = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "codt_punq_transmis_decision_demandeur.odt", 'title': "Transmis de la décision au demandeur"},
+                {'id': "codt_punq_transmis_decision_demandeur.odt",
+                 'title': "Transmis de la décision au demandeur",
+                 'context_variables': [
+                     {
+                         'name': 'publipostage',
+                         'value': 'demandeurs'
+                     }
+                 ]
+                 },
                 {'id': "codt_punq_transmis_decision_dgo3.odt", 'title': "Transmis de la décision à l'ARNE"},
                 {'id': "codt_punq_transmis_decision_dgo4.odt", 'title': "Transmis de la décision au SPW TLPE"},
             ),
@@ -5477,7 +5509,14 @@ EventConfigs = {
             'deadLineDelay': 3,
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
-            'podTemplates': ({'id': "env1-recepisse.odt", 'title': "Récepissé du permis"},),
+            'podTemplates': ({'id': "env1-recepisse.odt", 'title': "Récepissé du permis",
+                              'context_variables': [
+                                  {
+                                      'name': 'publipostage',
+                                      'value': 'demandeurs'
+                                  }
+                              ]
+                              },),
             'eventType': ('Products.urban.interfaces.IDepositEvent',),
             'TALCondition': "python: licence.getProcedureChoice() != 'article65'",
         },
@@ -5509,7 +5548,15 @@ EventConfigs = {
             'activatedFields': (),
             'isKeyEvent': False,
             'podTemplates': (
-                {'id': "env1-recepisse-complement.odt", 'title': "Récépissé d'un complément"},
+                {'id': "env1-recepisse-complement.odt",
+                 'title': "Récépissé d'un complément",
+                 'context_variables': [
+                     {
+                         'name': 'publipostage',
+                         'value': 'demandeurs'
+                     }
+                 ]
+                 },
                 {'id': "env1-transmis-complement-ft.odt", 'title': "Transmis d'un complément au FT"},
             ),
             'eventType': (
@@ -5872,7 +5919,7 @@ EventConfigs = {
         {
             'id': "pre-decision",
             'title': "Avis préalable du collège",
-            'activatedFields': ('externalDecision',),
+            'activatedFields': ('collegeDecision',),
             'eventDateLabel': "Date de l'avis",
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
@@ -5906,7 +5953,16 @@ EventConfigs = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "env1-demande-plans-modificatifs.odt", 'title': "Demande de plans modificatifs"},
+                {
+                    'id': "env1-demande-plans-modificatifs.odt",
+                    'title': "Demande de plans modificatifs",
+                    'context_variables': [
+                        {
+                            'name':'publipostage',
+                            'value': 'demandeurs'
+                        }
+                    ]
+                },
                 {'id': "env1-transmis-demande-plans-modificatifs-ft.odt", 'title': "Transmis de la demande de plans modificatifs au FT"},
                 {'id': "env1-transmis-plans-modificatifs-ft.odt", 'title': "Transmis de plans modificatifs au FT"},
             ),
@@ -5920,9 +5976,25 @@ EventConfigs = {
             'keyDates': ('eventDate',),
             'TALCondition': "python: here.getAuthority() == 'college'",
             'podTemplates': (
-                {'id': "env1-transmis-decision.odt", 'title': "Transmis de la décision (demandeur)"},
+                {'id': "env1-transmis-decision.odt",
+                 'title': "Transmis de la décision (demandeur)",
+                          'context_variables':[
+                    {
+                        'name':'publipostage',
+                        'value': 'demandeurs'
+                    }
+                    ]
+            },
                 {'id': "env1-transmis-decision-FT.odt", 'title': "Transmis de la décision (FT)"},
-                {'id': "env1-transmis-decision-impetrants-ft.odt", 'title': "Transmis de la décision (Instances)"},
+                {'id': "env1-transmis-decision-impetrants-ft.odt",
+                 'title': "Transmis de la décision (Instances)",
+                 'context_variables': [
+                     {
+                         'name': 'publipostage',
+                         'value': 'organismes'
+                     }
+                 ]
+                 },
             ),
             'eventType': ('Products.urban.interfaces.ILicenceDeliveryEvent',),
             'eventPortalType': 'UrbanEventCollege',
@@ -6038,10 +6110,26 @@ EventConfigs = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "pe_recepisse_depot_demande.odt", 'title': "Récépissé du dépôt de la demande"},
+                {'id': "pe_recepisse_depot_demande.odt",
+                 'title': "Récépissé du dépôt de la demande",
+                 'context_variables': [
+                     {
+                         'name': 'publipostage',
+                         'value': 'demandeurs'
+                     }
+                 ]
+                 },
                 {'id': "pe_entete_farde_dossier.odt", 'title': "Entête farde dossier"},
                 {'id': "pe_transmis_demande_dgo3.odt", 'title': "Transmis de la demande à l'ARNE"},
-                {'id': "pe_info_demandeur.odt", 'title': "Information au demandeur"},
+                {'id': "pe_info_demandeur.odt",
+                 'title': "Information au demandeur",
+                 'context_variables': [
+                     {
+                         'name': 'publipostage',
+                         'value': 'demandeurs'
+                     }
+                 ]
+                 },
             ),
             'eventType': ('Products.urban.interfaces.IDepositEvent',),
             'TALCondition': "python: licence.getProcedureChoice() != 'article65'",
@@ -6078,7 +6166,15 @@ EventConfigs = {
             'podTemplates': (
                 {'id': "pe_complements_recepisse_depot_demande.odt", 'title': "Récépissé d'un dépôt de compléments"},
                 {'id': "pe_complements_transmis_demande_dgo3.odt", 'title': "Transmis à l'ARNE"},
-                {'id': "pe_complements_info_demandeur.odt", 'title': "Information au demandeur"},
+                {'id': "pe_complements_info_demandeur.odt",
+                 'title': "Information au demandeur",
+                 'context_variables': [
+                     {
+                         'name': 'publipostage',
+                         'value': 'demandeurs'
+                     }
+                 ]
+                 },
                 {'id': "pe_complements_transmis_demande_dgo3.odt", 'title': "Transmis d'un complément au FT"},
             ),
             'eventType': (
@@ -6474,7 +6570,15 @@ EventConfigs = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "pe_demande_plans_modificatifs.odt", 'title': "Demande de plans modificatifs"},
+                {'id': "pe_demande_plans_modificatifs.odt",
+                 'title': "Demande de plans modificatifs",
+                 'context_variables': [
+                     {
+                         'name': 'publipostage',
+                         'value': 'demandeurs'
+                     }
+                 ]
+                 },
                 {'id': "pe_transmis_plans_modificatifs_dgo3.odt", 'title': "Transmis de la demande de plans modificatifs à l'ARNE"},
             ),
             'eventType': ('Products.urban.interfaces.IAcknowledgmentEvent',),
@@ -6500,9 +6604,25 @@ EventConfigs = {
             'keyDates': ('eventDate',),
             'TALCondition': "python: here.getAuthority() == 'college'",
             'podTemplates': (
-                {'id': "pe_notification_decision_demandeur.odt", 'title': "Transmis de la décision au demandeur"},
+                {'id': "pe_notification_decision_demandeur.odt",
+                 'title': "Transmis de la décision au demandeur",
+                 'context_variables': [
+                     {
+                         'name': 'publipostage',
+                         'value': 'demandeurs'
+                     }
+                 ]
+                 },
                 {'id': "pe_transmis_decision_dgo3.odt", 'title': "Transmis de la décision à l'ARNE"},
-                {'id': "pe_transmis_decision_instances.odt", 'title': "Transmis de la décision aux instances"},
+                {'id': "pe_transmis_decision_instances.odt",
+                 'title': "Transmis de la décision aux instances",
+                 'context_variables': [
+                     {
+                         'name': 'publipostage',
+                         'value': 'organismes'
+                     }
+                 ]
+                 },
             ),
             'eventType': ('Products.urban.interfaces.ILicenceDeliveryEvent',),
             'eventPortalType': 'UrbanEventCollege',
@@ -6610,7 +6730,16 @@ EventConfigs = {
             'eventDateLabel': "Date de dépôt",
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
-            'podTemplates': ({'id': "dec3_recepisse_depot_demande.odt", 'title': "Récépissé de la déclaration"},),
+            'podTemplates': ({'id': "dec3_recepisse_depot_demande.odt",
+                              'title': "Récépissé de la déclaration",
+                              'context_variables': [
+                                  {
+                                      'name': 'publipostage',
+                                      'value': 'demandeurs'
+                                  }
+                              ]
+                              },
+                             ),
             'eventType': ('Products.urban.interfaces.IDepositEvent',),
         },
         {
@@ -6641,7 +6770,16 @@ EventConfigs = {
             'isKeyEvent': True,
             'eventDateLabel': "Date de notification",
             'keyDates': ('eventDate',),
-            'podTemplates': ({'id': "dec3_demande_paiement.odt", 'title': "Demande de paiement"},),
+            'podTemplates': ({'id': "dec3_demande_paiement.odt",
+                              'title': "Demande de paiement",
+                              'context_variables': [
+                                  {
+                                      'name': 'publipostage',
+                                      'value': 'demandeurs'
+                                  }
+                              ]
+                              },
+                             ),
             'eventType': ('Products.urban.interfaces.IAcknowledgmentEvent',),
         },
         {
@@ -6961,7 +7099,15 @@ EventConfigs = {
             'eventDateLabel': "Date de prise d'acte",
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "dec3_recevable_conditions_demandeur.odt", 'title': "Déclaration recevable avec conditions complémentaires - Lettre au demandeur"},
+                {'id': "dec3_recevable_conditions_demandeur.odt",
+                 'title': "Déclaration recevable avec conditions complémentaires - Lettre au demandeur",
+                 'context_variables': [
+                     {
+                         'name': 'publipostage',
+                         'value': 'demandeurs'
+                     }
+                 ]
+                 },
                 {'id': "dec3_recevable_conditions_dgo3dgo4.odt", 'title': "Déclaration recevable avec conditions complémentaires - Lettres ARNE et TLPE"},
             ),
             'eventType': ('Products.urban.interfaces.IAcknowledgmentEvent',),
@@ -6974,8 +7120,24 @@ EventConfigs = {
             'isKeyEvent': True,
             'keyDates': ('decisionDate',),
             'podTemplates': (
-                {'id': "dec3_transmis_sans_conditions_demandeur.odt", 'title': "Transmis décision sans conditions complémentaires (lettre au demandeur)"},
-                {'id': "dec3_transmis_conditions_demandeur.odt", 'title': "Transmis décision avec conditions complémentaires (lettre au demandeur)"},
+                {'id': "dec3_transmis_sans_conditions_demandeur.odt",
+                 'title': "Transmis décision sans conditions complémentaires (lettre au demandeur)",
+                 'context_variables': [
+                     {
+                         'name': 'publipostage',
+                         'value': 'demandeurs'
+                     }
+                 ]
+                 },
+                {'id': "dec3_transmis_conditions_demandeur.odt",
+                 'title': "Transmis décision avec conditions complémentaires (lettre au demandeur)",
+                 'context_variables': [
+                     {
+                         'name': 'publipostage',
+                         'value': 'demandeurs'
+                     }
+                 ]
+                 },
                 {'id': "dec3_transmis_sans_conditions_dgo3dgo4.odt", 'title': "Transmis décision sans conditions complémentaires (lettre au FD/FT)"},
                 {'id': "dec3_transmis_conditions_dgo3dgo4.odt", 'title': "Transmis décision avec conditions complémentaires (lettre au FD/FT)"},
             ),
