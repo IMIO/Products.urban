@@ -425,6 +425,28 @@ class Contact(BaseContent, BrowserDefaultMixin):
             personTitle = personTitle.extraValue
         return personTitle
 
+    def isMasculine(self):
+        """
+        """
+        answer = False
+        field = self.getField('personTitle')
+        titles = field.vocabulary.getAllVocTerms(self)
+        title = titles[self.getPersonTitle()]
+        if title.getGender() == 'male':
+            answer = True
+        return answer
+
+    def isFeminine(self):
+        """
+        """
+        answer = False
+        field = self.getField('personTitle')
+        titles = field.vocabulary.getAllVocTerms(self)
+        title = titles[self.getPersonTitle()]
+        if title.getGender() == 'female':
+            answer = True
+        return answer
+
     def isMasculineSingular(self):
         """
         """
@@ -433,6 +455,18 @@ class Contact(BaseContent, BrowserDefaultMixin):
         titles = field.vocabulary.getAllVocTerms(self)
         title = titles[self.getPersonTitle()]
         if title.getMultiplicity() == 'single':
+            if title.getGender() == 'male':
+                answer = True
+        return answer
+
+    def isMasculinePlural(self):
+        """
+        """
+        answer = False
+        field = self.getField('personTitle')
+        titles = field.vocabulary.getAllVocTerms(self)
+        title = titles[self.getPersonTitle()]
+        if title.getMultiplicity() == 'plural':
             if title.getGender() == 'male':
                 answer = True
         return answer
