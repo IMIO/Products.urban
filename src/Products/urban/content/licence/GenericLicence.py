@@ -42,6 +42,7 @@ from Products.urban import UrbanMessage as _
 # code-section module-header #fill in your manual code here
 from zope.i18n import translate
 from collective.datagridcolumns.ReferenceColumn import ReferenceColumn
+from Products.ATContentTypes.configuration import zconf
 from Products.Archetypes.Widget import RichWidget
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
@@ -125,7 +126,7 @@ optional_fields = [
     'preemption', 'preemptionDetails', 'SAR', 'sarDetails', 'enoughRoadEquipment', 'enoughRoadEquipmentDetails',
     'reparcelling', 'reparcellingDetails', 'noteworthyTrees', 'pipelines', 'pipelinesDetails', 'tax',
     'groundStateStatus', 'groundstatestatusDetails', 'covid', 'watercourse', 'watercourseCategories', 'trail',
-    'trailDetails', 'tax', 'taxDetails'
+    'trailDetails', 'tax', 'taxDetails', 'photo'
 ]
 # /code-section module-header
 
@@ -234,6 +235,23 @@ schema = Schema((
         default_method='getDefaultText',
         default_content_type='text/html',
         default_output_type='text/x-html-safe',
+    ),
+    ImageField(
+        name='photo',
+        max_size=zconf.ATImage.max_image_dimension,
+        pil_resize_algo=zconf.pil_config.resize_algo,
+        sizes={'large': (768, 768),
+               'preview': (400, 400),
+               'mini': (200, 200),
+               'thumb': (128, 128),
+               'tile': (64, 64),
+               'icon': (32, 32),
+               'listing': (16, 16),
+              },
+        widget=ImageWidget(
+            label=_('urban_label_photos', default='Photos'),
+        ),
+        schemata='urban_description',
     ),
     TextField(
         name='description',
