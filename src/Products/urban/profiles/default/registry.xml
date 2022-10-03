@@ -68,5 +68,4 @@
   </records>
   <records interface="Products.urban.browser.offdays_settings.IOffDays" />
   <records interface="Products.urban.browser.gig_coring_settings.IGigCoringLink"/>
-  <records interface="Products.urban.interfaces.ITemplatesExternalEdition"/>
 </registry>

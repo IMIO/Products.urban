@@ -796,11 +796,3 @@ class IFacetedCollection(Interface):
 
 class IUrbanWarningCondition(Interface):
     """ Adapts a licence into a warning message """
-
-
-class ITemplatesExternalEdition(Interface):
-    """ """
-    enabled = schema.Bool(
-        title=_(u"Disable external edition for temlates"),
-        default=True
-    )
