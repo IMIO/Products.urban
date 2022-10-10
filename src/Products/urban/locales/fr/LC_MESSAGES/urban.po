@@ -191,10 +191,6 @@ msgstr ""
 msgid "Coring"
 msgstr "Lien GIG"
 
-#: ../browser/external_edit.py:24
-msgid "DISABLED"
-msgstr ""
-
 #: ../browser/offdays_settings.py:54
 msgid "Date"
 msgstr "Date"
@@ -213,10 +209,6 @@ msgstr "Profile de démo urban"
 #: ../browser/licence/duplicate_licence.py:31
 msgid "Destination type"
 msgstr "Type de destination"
-
-#: ../interfaces.py:804
-msgid "Disable external edition for temlates"
-msgstr ""
 
 msgid "Division"
 msgstr "Division"
@@ -2133,6 +2125,9 @@ msgstr "Décisions d'un recours"
 
 msgid "regional_guide_folder_title"
 msgstr "Guide régional d'urbanisme"
+
+msgid "reorder_actions"
+msgstr "Ordre"
 
 msgid "reparcelling_folder_title"
 msgstr "Périmètre de Remembrement"

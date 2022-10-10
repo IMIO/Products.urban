@@ -7,7 +7,7 @@ from Products.Five import BrowserView
 from Products.urban import utils
 from Products.urban.browser.table.urbantable import ApplicantTable
 from Products.urban.browser.table.urbantable import ApplicantHistoryTable
-from Products.urban.browser.table.urbantable import AttachmentsTable
+from Products.urban.browser.table.urbantable import LicenceAttachmentsTable
 from Products.urban.browser.table.urbantable import EventsTable
 from Products.urban.browser.table.urbantable import NestedAttachmentsTable
 from Products.urban.browser.table.urbantable import ParcelsTable
@@ -131,21 +131,10 @@ class LicenceView(BrowserView):
 
     def renderAttachmentsListing(self):
         licence = aq_inner(self.context)
-        queryString = {
-            'portal_type': 'File',
-            'path': {
-                'query': '/'.join(licence.getPhysicalPath()),
-                'depth': 1,
-            },
-            'sort_on': 'created'
-        }
-        catalog = api.portal.get_tool('portal_catalog')
-        attachments = catalog(queryString)
+        attachments = licence.objectValues('ATBlob')
         if not attachments:
             return ''
-        attachment_objects = [b.getObject() for b in attachments]
-        attachment_objects.sort(lambda a, b: cmp(a.Title(), b.Title()))
-        table = AttachmentsTable(self.context, self.request, values=attachment_objects)
+        table = LicenceAttachmentsTable(self.context, self.request, values=attachments)
         return self.renderListing(table)
 
     def renderNestedAttachmentsListing(self):

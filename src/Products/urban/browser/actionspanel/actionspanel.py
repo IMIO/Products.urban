@@ -21,7 +21,7 @@ class UrbanDefaultActionsPanelView(ActionsPanelView):
     def __init__(self, context, request):
         super(UrbanDefaultActionsPanelView, self).__init__(context, request)
 
-        self.SECTIONS_TO_RENDER = ('renderTransitions', 'renderEdit', 'renderOwnDelete',)
+        self.SECTIONS_TO_RENDER = ('renderTransitions', 'renderEdit', 'renderOwnDelete')
         self.IGNORABLE_ACTIONS = ('cut', 'paste', 'rename', 'copy')
 
 
@@ -34,6 +34,22 @@ class EventActionsPanelView(ActionsPanelView):
         self.SECTIONS_TO_RENDER = ('renderEdit', 'renderOwnDelete', 'renderActions')
         self.ACCEPTABLE_ACTIONS = ('plonemeeting_wsclient_action_1', 'plonemeeting_wsclient_action_2',)
 
+
+class ReorderActionsPanelView(ActionsPanelView):
+    """
+    Actions panel view of Urban Events.
+    """
+    def __init__(self, context, request):
+        super(ReorderActionsPanelView, self).__init__(context, request)
+        self.SECTIONS_TO_RENDER = ('renderArrows',)
+
+    def __call__(self, **kwargs):
+        kwargs['showArrows']  = False,
+        kwargs['arrowsPortalTypeAware'] = False,
+
+        return super(ReorderActionsPanelView, self).__call__(
+            **kwargs
+        )
 
 class RecipientCadastreActionsPanelView(UrbanDefaultActionsPanelView):
     """

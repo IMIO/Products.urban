@@ -231,6 +231,18 @@ class AttachmentsTable(UrbanTable, SequenceTable):
     startBatchingAt = 9999
 
 
+class LicenceAttachmentsTable(UrbanTable, SequenceTable):
+    """
+    Documents and annexes use (almost) the same listing tables.
+    """
+    implements(interfaces.ILicenceAttachmentsTable)
+
+    sortOn = None
+    cssClasses = {'table': 'listing nosort largetable'}
+    batchSize = 9999
+    startBatchingAt = 9999
+
+
 class NestedAttachmentsTable(UrbanTable, SequenceTable):
     """
     Render nested attachments from subfolders.
