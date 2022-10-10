@@ -1509,3 +1509,6 @@ msgstr ""
 
 msgid "urban_label_notaryReference"
 msgstr ""
+
+msgid "reorder_actions"
+msgstr ""

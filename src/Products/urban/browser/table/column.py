@@ -426,6 +426,23 @@ class ActionsColumn(UrbanColumn):
         return portal.unrestrictedTraverse('{}/actions_panel'.format(path))(showActions=True)
 
 
+class ReorderActionsColumn(UrbanColumn):
+    """
+    """
+    implements(IActionsColumn)
+
+    weight = 100
+    cssClasses = {'th': 'actionsheader'}
+    header = 'reorder_actions'
+
+    def renderCell(self, urbanlist_item):
+        path = urbanlist_item.getPath()
+        portal = api.portal.get()
+        if urbanlist_item.id not in self.context.objectIds():
+            return ''
+        return portal.unrestrictedTraverse('{}/reorder_actions_panel'.format(path))(showActions=True)
+
+
 class LocalityColumn(GetAttrColumn):
     """  """
     implements(ILocalityColumn)

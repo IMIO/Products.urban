@@ -259,6 +259,15 @@
   <adapter
      for="zope.interface.Interface
           zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.table.interfaces.ILicenceAttachmentsTable"
+     factory=".column.ReorderActionsColumn"
+     provides="z3c.table.interfaces.IColumn"
+     name="reorderactionsColumn"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
           Products.urban.browser.table.interfaces.IInternalOpinionServicesTable"
      factory=".column.InternalServiceId"
      provides="z3c.table.interfaces.IColumn"

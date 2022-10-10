@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2022-09-30 11:19+0000\n"
+"POT-Creation-Date: 2022-10-10 14:14+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -194,10 +194,6 @@ msgstr ""
 msgid "Coring"
 msgstr ""
 
-#: ../browser/external_edit.py:24
-msgid "DISABLED"
-msgstr ""
-
 #: ../browser/offdays_settings.py:54
 msgid "Date"
 msgstr ""
@@ -215,10 +211,6 @@ msgstr ""
 
 #: ../browser/licence/duplicate_licence.py:31
 msgid "Destination type"
-msgstr ""
-
-#: ../interfaces.py:804
-msgid "Disable external edition for temlates"
 msgstr ""
 
 msgid "Division"
@@ -2105,6 +2097,9 @@ msgid "recoursedecisions_folder_title"
 msgstr ""
 
 msgid "regional_guide_folder_title"
+msgstr ""
+
+msgid "reorder_actions"
 msgstr ""
 
 msgid "reparcelling_folder_title"

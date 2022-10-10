@@ -1113,7 +1113,7 @@ schema = Schema((
 setOptionalAttributes(schema, optional_fields)
 # /code-section after-local-schema
 
-GenericLicence_schema = BaseFolderSchema.copy() + \
+GenericLicence_schema = OrderedBaseFolderSchema.copy() + \
     schema.copy()
 
 # code-section after-schema #fill in your manual code here
@@ -1122,7 +1122,7 @@ GenericLicence_schema['title'].widget.visible = False
 # /code-section after-schema
 
 
-class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
+class GenericLicence(OrderedBaseFolder, UrbanBase, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()
