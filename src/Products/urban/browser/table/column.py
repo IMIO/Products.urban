@@ -435,6 +435,10 @@ class ReorderActionsColumn(UrbanColumn):
     cssClasses = {'th': 'actionsheader'}
     header = 'reorder_actions'
 
+    def renderHeadCell(self):
+        """Header cell content."""
+        return translate(self.header, 'urban', context=self.request)
+
     def renderCell(self, urbanlist_item):
         path = urbanlist_item.getPath()
         portal = api.portal.get()
