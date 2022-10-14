@@ -8,6 +8,7 @@ from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone import api
 from Products.CMFPlone import PloneMessageFactory as _plone
 from Products.DCWorkflow.Transitions import TransitionDefinition
+from Products.urban.interfaces import IGenericLicence
 
 from zope.annotation import IAnnotations
 from zope.i18n import translate
@@ -50,6 +51,13 @@ class ReorderActionsPanelView(ActionsPanelView):
         return super(ReorderActionsPanelView, self).__call__(
             **kwargs
         )
+
+    def _returnTo(self, ):
+        """What URL should I return to after moving the element and page is refreshed."""
+        url = self.request.getURL()
+        if IGenericLicence.providedBy(self.context.aq_parent):
+            url = '{}/{}'.format(url, '#fieldsetlegend-attachments')
+        return url
 
 class RecipientCadastreActionsPanelView(UrbanDefaultActionsPanelView):
     """
