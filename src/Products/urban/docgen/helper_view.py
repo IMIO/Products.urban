@@ -22,6 +22,9 @@ from zope.schema.interfaces import IVocabularyFactory
 from plone import api
 from DateTime import DateTime
 
+from liege.urban.interfaces import IShore
+from zope.component import queryAdapter
+
 import re
 
 
@@ -229,6 +232,57 @@ class DXUrbanDocGenerationHelperView(DXDocumentGenerationHelperView, BaseHelperV
 class UrbanDocGenerationLicenceHelperView(UrbanDocGenerationHelperView):
     """
     """
+
+    def authorized(self):
+        return self.context.workflow_history['buildlicence_workflow'][-1]['review_state'] == 'authorized'
+
+    def getShore(self):
+        licence = self.real_context
+        to_shore = queryAdapter(licence, IShore)
+        return to_shore.display()
+
+    @property
+    def reference(self):
+        """
+        Append shore abbreviation to the base reference.
+        """
+        licence = self.context
+        if IEnvironmentBase.providedBy(licence):
+            return licence.reference
+        to_shore = queryAdapter(licence, IShore)
+        ref = '{} {}'.format(licence.reference, to_shore.display())
+        return ref
+
+    def get_first_folder_manager(self, group='', grade=''):
+        """
+        """
+        groups_mapping = {
+            'urban': [
+                'administrative_editors',
+                'administrative_validators',
+                'technical_editors',
+                'technical_validators'
+            ],
+            'environment': [
+                'administrative_editors_environment',
+                'administrative_validators_environment',
+                'technical_editors_environment',
+                'technical_validators_environment'
+            ],
+            'inspection': [
+                'inspection_editors',
+                'inspection_validators',
+            ],
+        }
+        folder_managers = [fm for fm in self.getFoldermanagers() if not grade or fm.getGrade() == grade]
+        for folder_manager in folder_managers:
+            if group:
+                groups = set([g.id for g in api.group.get_groups(username=folder_manager.getPloneUserId())])
+                if groups.intersection(groups_mapping.get(group, set())):
+                    return folder_manager
+
+            else:
+                return folder_manager
 
     def get_checked_specific_features_id_list(self):
         """
