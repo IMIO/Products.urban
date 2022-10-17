@@ -24,6 +24,7 @@ from DateTime import DateTime
 
 from liege.urban.interfaces import IShore
 from zope.component import queryAdapter
+from Products.urban.interfaces import IEnvironmentBase
 
 import re
 
