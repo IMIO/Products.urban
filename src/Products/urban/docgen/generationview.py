@@ -83,6 +83,10 @@ class UrbanDocGenerationView(PersistentDocumentGenerationView):
         bound_roaddecrees = [dec.restrictedTraverse('@@document_generation_helper_view')
                              for dec in licence.get_bound_roaddecrees()] or None
 
+        last_inquiry = licence.getAllInquiriesAndAnnouncements()[-1].restrictedTraverse(
+            '@@document_generation_helper_view'
+        )
+
 
         generation_context = {
             'this': licence,
@@ -104,6 +108,7 @@ class UrbanDocGenerationView(PersistentDocumentGenerationView):
             'inquiry_proprietaries': proprietaries_views,
             'roaddecrees': bound_roaddecrees,
             'roaddecree': bound_roaddecrees and bound_roaddecrees[-1],
+            'last_inquiry': last_inquiry
 
         }
 
