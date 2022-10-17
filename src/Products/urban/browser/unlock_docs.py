@@ -12,4 +12,3 @@ class Unlock(BrowserView):
         for obj in self.context.objectValues():
             if obj.wl_isLocked():
                 obj.wl_clearLocks()
-                print "cleared locks of {}".format(obj)
