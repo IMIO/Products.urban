@@ -28,6 +28,13 @@
       />
 
      <browser:page
+         for="Products.urban.interfaces.IInquiry"
+         class=".helper_view.UrbanDocGenerationLicenceHelperView"
+         permission="zope2.View"
+         name="document_generation_helper_view"
+      />
+
+     <browser:page
          for="Products.urban.interfaces.IUrbanEvent"
          class=".helper_view.UrbanDocGenerationEventHelperView"
          permission="zope2.View"
