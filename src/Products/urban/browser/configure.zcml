@@ -473,4 +473,11 @@
      permission="zope2.View"
   />
 
+  <browser:page
+     for="*"
+     name=".UNLOCK"
+     class=".unlock_docs.Unlock"
+     permission="cmf.ModifyPortalContent"
+  />
+
 </configure>
