@@ -312,7 +312,7 @@ class UrbanDocGenerationLicenceHelperView(UrbanDocGenerationHelperView):
            Return the list of proprietaries for the Licence
         """
         context = self.real_context
-        proprietaries = [pro for pro in context.objectValues('Applicant') if pro.portal_type == 'Proprietary']
+        proprietaries = [pro for pro in context.objectValues() if pro.portal_type.startswith('Proprietary')]
         return proprietaries
 
     def get_proprietaries_list_dict(self):
