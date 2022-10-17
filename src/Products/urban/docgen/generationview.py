@@ -83,9 +83,11 @@ class UrbanDocGenerationView(PersistentDocumentGenerationView):
         bound_roaddecrees = [dec.restrictedTraverse('@@document_generation_helper_view')
                              for dec in licence.get_bound_roaddecrees()] or None
 
-        last_inquiry = licence.getAllInquiriesAndAnnouncements()[-1].restrictedTraverse(
-            '@@document_generation_helper_view'
-        )
+        last_inquiry = None
+        if hasattr(licence, 'getAllInquiriesAndAnnouncements'):
+            last_inquiry = licence.getAllInquiriesAndAnnouncements()[-1].restrictedTraverse(
+                '@@document_generation_helper_view'
+            )
 
 
         generation_context = {
