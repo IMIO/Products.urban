@@ -166,14 +166,6 @@
        template="browser/actions_panel.pt"
        permission="zope2.View" />
 
-    <browser:page
-       for="imio.urban.core.contents.opinioneventconfig.content.IOpinionEventConfig"
-       name="actions_panel"
-       class="Products.urban.browser.actionspanel.FolderActionsPanelView"
-       layer="imio.actionspanel.interfaces.IActionsPanelLayer"
-       template="browser/actions_panel.pt"
-       permission="zope2.View" />
-
     <browser:viewlet
        for="Products.urban.interfaces.IUrbanConfigurationValue"
        name="imio.actionspanel"

@@ -3,6 +3,7 @@
 from imio.actionspanel.browser.views import ActionsPanelView
 from imio.actionspanel.browser.views import DEFAULT_CONFIRM_VIEW
 from imio.actionspanel import ActionsPanelMessageFactory as _actions
+from imio.urban.core.contents.eventconfig.content import IEventConfig
 
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone import api
@@ -223,6 +224,15 @@ class ConfigValueActionsPanelView(ActionsPanelView):
     def __init__(self, context, request):
         super(ConfigValueActionsPanelView, self).__init__(context, request)
         self.ACCEPTABLE_ACTIONS = ('rename', )
+
+    def __call__(self,  **kwargs):
+        kwargs['showOwnDelete'] = False
+        # handle case where event config is ALSO an urban config value
+        if IEventConfig.providedBy(self.context):
+            kwargs['showAddContent'] = True
+            kwargs['showTransitions'] = False
+            kwargs['showActions'] = False
+        return super(ConfigValueActionsPanelView, self).__call__(**kwargs)
 
 
 class AutomatedTaskActionsPanelView(ActionsPanelView):
