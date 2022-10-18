@@ -1169,7 +1169,6 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
         """
         vocab = (
             #we add an empty vocab value of type "choose a value"
-            ('',  translate(_(EMPTY_VOCAB_VALUE), context=self.REQUEST)),
             ('no', translate(_('flooding_level_no'), context=self.REQUEST)),
             ('very low', translate(_('flooding_level_verylow'), context=self.REQUEST)),
             ('low', translate(_('flooding_level_low'), context=self.REQUEST)),
