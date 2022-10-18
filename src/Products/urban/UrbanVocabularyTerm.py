@@ -105,6 +105,22 @@ class UrbanVocabularyTerm(BaseContent, UrbanConfigurationValue, BrowserDefaultMi
     _at_rename_after_creation = True
 
     schema = UrbanVocabularyTerm_schema
+    
+    security.declarePublic('getFormattedDescription')
+    def getFormattedDescription(self, linebyline=True, prefix=''):
+        """
+          This method can get the description in different formats
+        """
+        descr = self.Description().strip()
+        #add prefix only if description isn't empty
+        #    or is different from code like "<p> </p>" ??
+        if descr and prefix:
+            descr = prefix + descr
+        if linebyline:
+            return descr
+        else:
+            #we need to make a single string with everything we have in the HTML description
+            return re.sub(r'<[^>]*?>', ' ', descr).replace('  ', ' ')
 
     def __str__(self):
         return self.Title()
