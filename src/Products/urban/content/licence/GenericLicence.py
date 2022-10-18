@@ -442,10 +442,11 @@ schema = Schema((
         vocabulary_factory='urban.vocabulary.Natura2000',
         default_method='getDefaultValue',
     ),
-    StringField(
+    LinesField(
         name='floodingLevel',
-        widget=SelectionWidget(
+        widget=MultiSelectionWidget(
             label=_('urban_label_floodingLevel', default='Floodinglevel'),
+            format='checkbox',
         ),
         enforceVocabulary=True,
         schemata='urban_road',
@@ -619,11 +620,12 @@ schema = Schema((
         schemata='urban_location',
         default_output_type='text/html',
     ),
-    StringField(
+    LinesField(
         name='locationFloodingLevel',
-        widget=SelectionWidget(
+        widget=MultiSelectionWidget(
             label=_('urban_label_locationFloodingLevel',
                     default='Locationfloodinglevel'),
+            format='checkbox',
         ),
         enforceVocabulary=True,
         schemata='urban_location',
@@ -1174,6 +1176,9 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
             ('low', translate(_('flooding_level_low'), context=self.REQUEST)),
             ('moderate', translate(_('flooding_level_moderate'), context=self.REQUEST)),
             ('high', translate(_('flooding_level_high'), context=self.REQUEST)),
+            ('axis_under_10', translate(_('flooding_axis_under_10'), context=self.REQUEST)),
+            ('axis_over_10', translate(_('flooding_axis_over_10'), context=self.REQUEST)),
+            ('already_flooded', translate(_('flooding_already_flooded'), context=self.REQUEST)),
         )
 
         return DisplayList(vocab)

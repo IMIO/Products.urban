@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2022-08-08 12:33+0000\n"
+"POT-Creation-Date: 2022-10-18 12:37+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -926,10 +926,6 @@ msgstr "Ajouter un locataire (p.morale)"
 msgid "add_a_corporationproprietary"
 msgstr "Ajouter un propriétaire (p. morale)"
 
-#: ../browser/licence/templates/licencemacros.pt:157
-msgid "add_a_couple"
-msgstr "Ajouter un couple"
-
 msgid "add_a_lot"
 msgstr "Ajouter un lot"
 
@@ -944,10 +940,6 @@ msgstr "Ajouter un plaignant"
 #: ../browser/licence/templates/licencemacros.pt:80
 msgid "add_a_proprietary"
 msgstr "Ajouter un propriétaire"
-
-#: ../browser/licence/templates/licencemacros.pt:88
-msgid "add_a_proprietary_couple"
-msgstr "Ajouter un couple de propriétaires"
 
 #: ../browser/licence/templates/licencemacros.pt:123
 msgid "add_a_tenant"
@@ -1146,7 +1138,7 @@ msgid "close_inspection"
 msgstr "clôturer le dossier"
 
 #. Default: "Close prevention area"
-#: ../content/licence/GenericLicence.py:1155
+#: ../content/licence/GenericLicence.py:1157
 msgid "close_prevention_area"
 msgstr "Zone de prévention rapprochée"
 
@@ -1515,7 +1507,7 @@ msgid "externaldecisions_folder_title"
 msgstr "Décision des avis externes"
 
 #. Default: "Far prevention area"
-#: ../content/licence/GenericLicence.py:1156
+#: ../content/licence/GenericLicence.py:1158
 msgid "far_prevention_area"
 msgstr "Zone de prévention éloignée"
 
@@ -1563,29 +1555,41 @@ msgstr "Sécurisé, fiable et rapide, <a href='http://www.getfirefox.com'>Firefo
 msgid "firefox_viewlet_title"
 msgstr "Cette application fonctionne mieux avec Firefox."
 
+#: ../content/licence/GenericLicence.py:1182
+msgid "flooding_already_flooded"
+msgstr "bien ayant déjà été inondé"
+
+#: ../content/licence/GenericLicence.py:1181
+msgid "flooding_axis_over_10"
+msgstr "axe de ruisselement concentré - plus de 10 ha"
+
+#: ../content/licence/GenericLicence.py:1180
+msgid "flooding_axis_under_10"
+msgstr "axe de ruissellement concentré - moins de 10 ha"
+
 #. Default: "High risk"
-#: ../content/licence/GenericLicence.py:1177
+#: ../content/licence/GenericLicence.py:1179
 msgid "flooding_level_high"
-msgstr "Risque élevé"
+msgstr "aléa d'inondation élévé"
 
 #. Default: "Low risk"
-#: ../content/licence/GenericLicence.py:1175
+#: ../content/licence/GenericLicence.py:1177
 msgid "flooding_level_low"
-msgstr "Risque faible"
+msgstr "aléa d'inondation faible"
 
 #. Default: "Moderate risk"
-#: ../content/licence/GenericLicence.py:1176
+#: ../content/licence/GenericLicence.py:1178
 msgid "flooding_level_moderate"
-msgstr "Risque moyen"
+msgstr "aléa d'inondation moyen"
 
 #. Default: "No"
-#: ../content/licence/GenericLicence.py:1173
+#: ../content/licence/GenericLicence.py:1175
 msgid "flooding_level_no"
-msgstr "Non"
+msgstr "non"
 
-#: ../content/licence/GenericLicence.py:1174
+#: ../content/licence/GenericLicence.py:1176
 msgid "flooding_level_verylow"
-msgstr "Risque très faible"
+msgstr "aléa d'inondation très faible"
 
 #. Default: "Folder advices"
 #: ../browser/licence/templates/licencetabsmacros.pt:522
@@ -2168,7 +2172,7 @@ msgid "outdated_parcels_in_use"
 msgstr "Permis en cours contenant une parcelle à mettre jour"
 
 #. Default: "Outside catchment"
-#: ../content/licence/GenericLicence.py:1158
+#: ../content/licence/GenericLicence.py:1160
 msgid "outside_catchment"
 msgstr "Hors captage"
 
@@ -2476,7 +2480,7 @@ msgid "subdivision_fieldset_legend"
 msgstr "Lotissement"
 
 #. Default: "Supervision area"
-#: ../content/licence/GenericLicence.py:1157
+#: ../content/licence/GenericLicence.py:1159
 msgid "supervision_area"
 msgstr "Zone de surveillance"
 
@@ -2653,7 +2657,7 @@ msgid "urban_descr_states_to_end_all_tasks"
 msgstr "Sélectionnez les états pour lesquels toutes les tâches se terminent."
 
 #. Default: "Number of the lots, ..."
-#: ../content/licence/GenericLicence.py:612
+#: ../content/licence/GenericLicence.py:613
 msgid "urban_descr_subdivisionDetails"
 msgstr "Numéro des lots, ..."
 
@@ -2775,12 +2779,12 @@ msgid "urban_label_NotaryLetterNumerotation"
 msgstr "Numérotation des lettres de notaire"
 
 #. Default: "Prenu"
-#: ../content/licence/GenericLicence.py:808
+#: ../content/licence/GenericLicence.py:810
 msgid "urban_label_PRenU"
 msgstr "Périmètre de Rénovation Urbaine"
 
 #. Default: "Prevu"
-#: ../content/licence/GenericLicence.py:830
+#: ../content/licence/GenericLicence.py:832
 msgid "urban_label_PRevU"
 msgstr "Périmètre de Revitalisation Urbaine"
 
@@ -2790,12 +2794,12 @@ msgid "urban_label_ParcelOutLicenceNumerotation"
 msgstr "Numérotation des permis d'urbanisation"
 
 #. Default: "Rcu"
-#: ../content/licence/GenericLicence.py:786
+#: ../content/licence/GenericLicence.py:788
 msgid "urban_label_RCU"
 msgstr "Règlement Communal d'Urbanisme (R.C.U.)"
 
 #. Default: "sar"
-#: ../content/licence/GenericLicence.py:676
+#: ../content/licence/GenericLicence.py:678
 msgid "urban_label_SAR"
 msgstr "Périmètre d'un site à réaménager"
 
@@ -2822,7 +2826,7 @@ msgid "urban_label_SRS"
 msgstr "SRS"
 
 #. Default: "Ssc"
-#: ../content/licence/GenericLicence.py:764
+#: ../content/licence/GenericLicence.py:766
 msgid "urban_label_SSC"
 msgstr "Schéma de Structure Communal (S.S.C.)"
 
@@ -2912,12 +2916,12 @@ msgid "urban_label_adviceAgreementLevel"
 msgstr "Niveau de l'avis"
 
 #. Default: "Airportnoisezone"
-#: ../content/licence/GenericLicence.py:895
+#: ../content/licence/GenericLicence.py:897
 msgid "urban_label_airportNoiseZone"
 msgstr "Zones de bruit de l'aéroport"
 
 #. Default: "Airportnoisezonedetails"
-#: ../content/licence/GenericLicence.py:906
+#: ../content/licence/GenericLicence.py:908
 msgid "urban_label_airportNoiseZoneDetails"
 msgstr "Détails concernant les zones de bruit de l'aéroport"
 
@@ -2994,7 +2998,7 @@ msgid "urban_label_architects"
 msgstr "Architecte(s)"
 
 #. Default: "Areparcelsverified"
-#: ../content/licence/GenericLicence.py:941
+#: ../content/licence/GenericLicence.py:943
 msgid "urban_label_areParcelsVerified"
 msgstr "Les parcelles ont été vérifiées?"
 
@@ -3315,7 +3319,7 @@ msgid "urban_label_coupleperson2name"
 msgstr "Nom personne 2"
 
 #. Default: "COVID19"
-#: ../content/licence/GenericLicence.py:999
+#: ../content/licence/GenericLicence.py:1001
 msgid "urban_label_covid"
 msgstr ""
 
@@ -3518,12 +3522,12 @@ msgid "urban_label_endDate"
 msgstr "Date de fin d'utilisation"
 
 #. Default: "enoughRoadEquipment"
-#: ../content/licence/GenericLicence.py:695
+#: ../content/licence/GenericLicence.py:697
 msgid "urban_label_enoughRoadEquipment"
 msgstr "Voirie suffisamment équipée"
 
 #. Default: "Enoughroadequipmentdetails"
-#: ../content/licence/GenericLicence.py:704
+#: ../content/licence/GenericLicence.py:706
 msgid "urban_label_enoughRoadEquipmentDetails"
 msgstr "Détails concernant l'équipement suffisant de la voirie"
 
@@ -3542,7 +3546,7 @@ msgid "urban_label_environmentTechnicalRemarks"
 msgstr "Observations"
 
 #. Default: "Equipmentandroadrequirements"
-#: ../content/licence/GenericLicence.py:470
+#: ../content/licence/GenericLicence.py:471
 msgid "urban_label_equipmentAndRoadRequirements"
 msgstr "Prescriptions relatives à la voirie et aux équipements"
 
@@ -3622,12 +3626,12 @@ msgid "urban_label_exposant"
 msgstr "Exposant"
 
 #. Default: "expropriation"
-#: ../content/licence/GenericLicence.py:636
+#: ../content/licence/GenericLicence.py:638
 msgid "urban_label_expropriation"
 msgstr "Plan d'expropriation"
 
 #. Default: "Expropriationdetails"
-#: ../content/licence/GenericLicence.py:644
+#: ../content/licence/GenericLicence.py:646
 msgid "urban_label_expropriationDetails"
 msgstr "Détails concernant le plan d'expropriation"
 
@@ -3665,12 +3669,12 @@ msgstr "Garantie financière"
 #. Default: "Floodinglevel"
 #: ../content/licence/GenericLicence.py:448
 msgid "urban_label_floodingLevel"
-msgstr "Zone inondable (Fiche Voirie)"
+msgstr "Risque d'inondations (Fiche Voirie)"
 
 #. Default: "Floodingleveldetails"
-#: ../content/licence/GenericLicence.py:458
+#: ../content/licence/GenericLicence.py:459
 msgid "urban_label_floodingLevelDetails"
-msgstr "Détails concernant la zone inondable"
+msgstr "Détails concernant le risque d'inondations"
 
 #. Default: "Foldercategory"
 #: ../content/licence/GenericLicence.py:161
@@ -3678,7 +3682,7 @@ msgid "urban_label_folderCategory"
 msgstr "Type de dossier"
 
 #. Default: "Foldercategorytownship"
-#: ../content/licence/GenericLicence.py:929
+#: ../content/licence/GenericLicence.py:931
 msgid "urban_label_folderCategoryTownship"
 msgstr "Catégorie du dossier communal"
 
@@ -3696,17 +3700,17 @@ msgid "urban_label_folderTendency"
 msgstr "Tendance du dossier"
 
 #. Default: "Folderzone"
-#: ../content/licence/GenericLicence.py:540
+#: ../content/licence/GenericLicence.py:541
 msgid "urban_label_folderZone"
 msgstr "Zonage au plan de secteur"
 
 #. Default: "Folderzonedetails"
-#: ../content/licence/GenericLicence.py:551
+#: ../content/licence/GenericLicence.py:552
 msgid "urban_label_folderZoneDetails"
 msgstr "Détails concernant le zonage"
 
 #. Default: "Foldermanagers"
-#: ../content/licence/GenericLicence.py:955
+#: ../content/licence/GenericLicence.py:957
 msgid "urban_label_foldermanagers"
 msgstr "Agent(s) traitant(s)"
 
@@ -3767,12 +3771,12 @@ msgid "urban_label_grade"
 msgstr "Grade"
 
 #. Default: "Groundstatestatus"
-#: ../content/licence/GenericLicence.py:493
+#: ../content/licence/GenericLicence.py:494
 msgid "urban_label_groundStateStatus"
 msgstr "Repris à la banque de données d'état des sols"
 
 #. Default: "Groundstatestatusdetails"
-#: ../content/licence/GenericLicence.py:504
+#: ../content/licence/GenericLicence.py:505
 msgid "urban_label_groundStateStatusDetails"
 msgstr "Détails concernant les données d'état des sols"
 
@@ -3960,12 +3964,12 @@ msgid "urban_label_isEssayProject"
 msgstr "Le projet est d'essai"
 
 #. Default: "Isinpca"
-#: ../content/licence/GenericLicence.py:564
+#: ../content/licence/GenericLicence.py:565
 msgid "urban_label_isInPCA"
 msgstr "Le bien se situe dans un PCA"
 
 #. Default: "Isinsubdivision"
-#: ../content/licence/GenericLicence.py:604
+#: ../content/licence/GenericLicence.py:605
 msgid "urban_label_isInSubdivision"
 msgstr "Le bien se situe dans un lotissement"
 
@@ -4129,17 +4133,17 @@ msgid "urban_label_locationDgrneUnderground"
 msgstr "DGRNE Sous-sol (joindre annexe 2 et 3) (Fiche Urbanisme)"
 
 #. Default: "Locationfloodinglevel"
-#: ../content/licence/GenericLicence.py:625
+#: ../content/licence/GenericLicence.py:626
 msgid "urban_label_locationFloodingLevel"
-msgstr "Zone inondable (Fiche Urbanisme)"
+msgstr "Risque d'inondations (Fiche Urbanisme)"
 
 #. Default: "Locationmissingparts"
-#: ../content/licence/GenericLicence.py:516
+#: ../content/licence/GenericLicence.py:517
 msgid "urban_label_locationMissingParts"
 msgstr "Pièces manquantes (Fiche Urbanisme)"
 
 #. Default: "Locationmissingpartsdetails"
-#: ../content/licence/GenericLicence.py:528
+#: ../content/licence/GenericLicence.py:529
 msgid "urban_label_locationMissingPartsDetails"
 msgstr "Détails concernant pièces manquantes (Fiche Urbanisme)"
 
@@ -4171,7 +4175,7 @@ msgid "urban_label_locationTechnicalConditions"
 msgstr "Conditions d'octroi du permis"
 
 #. Default: "Locationtechnicalremarks"
-#: ../content/licence/GenericLicence.py:716
+#: ../content/licence/GenericLicence.py:718
 msgid "urban_label_locationTechnicalRemarks"
 msgstr "Remarques techniques (Fiche Urbanisme)"
 
@@ -4294,7 +4298,7 @@ msgid "urban_label_notaryContact"
 msgstr "Notaire(s)"
 
 #. Default: "Noteworthytrees"
-#: ../content/licence/GenericLicence.py:988
+#: ../content/licence/GenericLicence.py:990
 msgid "urban_label_noteworthyTrees"
 msgstr "Arbres et haies remarquables"
 
@@ -4391,7 +4395,7 @@ msgid "urban_label_owner"
 msgstr "Propriétaire"
 
 #. Default: "Parcellings"
-#: ../content/licence/GenericLicence.py:977
+#: ../content/licence/GenericLicence.py:979
 msgid "urban_label_parcellings"
 msgstr "Lotissement"
 
@@ -4484,17 +4488,17 @@ msgid "urban_label_paymentDeadline"
 msgstr "Date limite de paiement"
 
 #. Default: "Pca"
-#: ../content/licence/GenericLicence.py:571
+#: ../content/licence/GenericLicence.py:572
 msgid "urban_label_pca"
 msgstr "Plan Communal d'Aménagement"
 
 #. Default: "Pcadetails"
-#: ../content/licence/GenericLicence.py:581
+#: ../content/licence/GenericLicence.py:582
 msgid "urban_label_pcaDetails"
 msgstr "Détails concernant le Plan Communal d'Aménagement"
 
 #. Default: "Pcazone"
-#: ../content/licence/GenericLicence.py:592
+#: ../content/licence/GenericLicence.py:593
 msgid "urban_label_pcaZone"
 msgstr "Zone de pca"
 
@@ -4597,17 +4601,17 @@ msgid "urban_label_postcode_locality"
 msgstr "Code postal et localité"
 
 #. Default: "preemption"
-#: ../content/licence/GenericLicence.py:656
+#: ../content/licence/GenericLicence.py:658
 msgid "urban_label_preemption"
 msgstr "Droit de préemption"
 
 #. Default: "Preemptiondetails"
-#: ../content/licence/GenericLicence.py:664
+#: ../content/licence/GenericLicence.py:666
 msgid "urban_label_preemptionDetails"
 msgstr "Détails concernant le droit de préemption"
 
 #. Default: "Prenudetails"
-#: ../content/licence/GenericLicence.py:819
+#: ../content/licence/GenericLicence.py:821
 msgid "urban_label_prenuDetails"
 msgstr "Détails concernant le Périmètre de Rénovation Urbaine"
 
@@ -4617,7 +4621,7 @@ msgid "urban_label_previousLicences"
 msgstr "Permissions, enregistrements et déclarations existantes"
 
 #. Default: "Prevudetails"
-#: ../content/licence/GenericLicence.py:841
+#: ../content/licence/GenericLicence.py:843
 msgid "urban_label_prevuDetails"
 msgstr "Détails concernant le Périmètre de Revitalisation Urbaine"
 
@@ -4648,12 +4652,12 @@ msgid "urban_label_prorogationModifiedBp"
 msgstr "Prorogation avec plans modificatifs"
 
 #. Default: "Protectedbuilding"
-#: ../content/licence/GenericLicence.py:740
+#: ../content/licence/GenericLicence.py:742
 msgid "urban_label_protectedBuilding"
 msgstr "Bien classé ou assimilé"
 
 #. Default: "Protectedbuildingdetails"
-#: ../content/licence/GenericLicence.py:752
+#: ../content/licence/GenericLicence.py:754
 msgid "urban_label_protectedBuildingDetails"
 msgstr "Détails concernant le bien (classé ou assimilé)"
 
@@ -4684,7 +4688,7 @@ msgid "urban_label_radical"
 msgstr "Radical"
 
 #. Default: "Rcudetails"
-#: ../content/licence/GenericLicence.py:797
+#: ../content/licence/GenericLicence.py:799
 msgid "urban_label_rcuDetails"
 msgstr "Détails concernant le RCU"
 
@@ -4817,12 +4821,12 @@ msgid "urban_label_relatedFields"
 msgstr "Champs liés"
 
 #. Default: "Prevu"
-#: ../content/licence/GenericLicence.py:852
+#: ../content/licence/GenericLicence.py:854
 msgid "urban_label_reparcelling"
 msgstr "Périmètre de Remembrement"
 
 #. Default: "Reparcellingdetails"
-#: ../content/licence/GenericLicence.py:863
+#: ../content/licence/GenericLicence.py:865
 msgid "urban_label_reparcellingDetails"
 msgstr "Détails concernant le Périmètre de Remembrement"
 
@@ -4880,12 +4884,12 @@ msgid "urban_label_reverseTitle"
 msgstr "Titre inversé"
 
 #. Default: "Rgbsr"
-#: ../content/licence/GenericLicence.py:874
+#: ../content/licence/GenericLicence.py:876
 msgid "urban_label_rgbsr"
 msgstr "Règlement Général sur les Bâtisses en Site Rural"
 
 #. Default: "Rgbsrdetails"
-#: ../content/licence/GenericLicence.py:884
+#: ../content/licence/GenericLicence.py:886
 msgid "urban_label_rgbsrDetails"
 msgstr "Détails concernant le Règlement Général sur les Bâtisses en Site Rural"
 
@@ -4975,7 +4979,7 @@ msgid "urban_label_rubricsDetails"
 msgstr "Explications sur les rubriques"
 
 #. Default: "Sardetails"
-#: ../content/licence/GenericLicence.py:684
+#: ../content/licence/GenericLicence.py:686
 msgid "urban_label_sarDetails"
 msgstr "Détails concernant le périmètre du site à réaménager"
 
@@ -5076,7 +5080,7 @@ msgid "urban_label_sol_details"
 msgstr "Détails concernant le SOL"
 
 #. Default: "Solicitlocationopinionsto"
-#: ../content/licence/GenericLicence.py:918
+#: ../content/licence/GenericLicence.py:920
 msgid "urban_label_solicitLocationOpinionsTo"
 msgstr "Un avis sera sollicité par l'urbanisme à"
 
@@ -5092,7 +5096,7 @@ msgid "urban_label_solicitOpinionsToOptional"
 msgstr "Avis sollicité(s) facultatif(s)"
 
 #. Default: "Solicitroadopinionsto"
-#: ../content/licence/GenericLicence.py:728
+#: ../content/licence/GenericLicence.py:730
 msgid "urban_label_solicitRoadOpinionsTo"
 msgstr "Un avis sera sollicité par la voirie à"
 
@@ -5137,7 +5141,7 @@ msgid "urban_label_sqlUser"
 msgstr "Nom d'utilisateur de la connexion au serveur PostgreSQL"
 
 #. Default: "Sscdetails"
-#: ../content/licence/GenericLicence.py:775
+#: ../content/licence/GenericLicence.py:777
 msgid "urban_label_sscDetails"
 msgstr "Détails concernant le SSC"
 
@@ -5182,7 +5186,7 @@ msgid "urban_label_subdividerName"
 msgstr "Nom du lotisseur"
 
 #. Default: "Subdivisiondetails"
-#: ../content/licence/GenericLicence.py:614
+#: ../content/licence/GenericLicence.py:615
 msgid "urban_label_subdivisionDetails"
 msgstr "Détails sur le lotissement"
 
@@ -5232,7 +5236,7 @@ msgid "urban_label_technicalAdvice"
 msgstr "Avis technique"
 
 #. Default: "Technicalremarks"
-#: ../content/licence/GenericLicence.py:482
+#: ../content/licence/GenericLicence.py:483
 msgid "urban_label_technicalRemarks"
 msgstr "Remarques techniques"
 

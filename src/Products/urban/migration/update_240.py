@@ -71,3 +71,21 @@ def add_applicant_couple_type(context):
             i += 1
             print i, brain.Title
         logger.info("upgrade step done!")
+
+
+def migrate_flooding_level(context):
+    """
+    Migrate old text single value to tuple for multiselection for floodingLevel and locationFloodingLevel
+    """
+    logger = logging.getLogger('migrate flooding level to tuple type')
+    logger.info("starting migration step")
+    cat = api.portal.get_tool('portal_catalog')
+    licence_brains = cat(object_provides=IGenericLicence.__identifier__)
+    licences = [lic.getObject() for lic in licence_brains]
+    for licence in licences:
+        if licence.floodingLevel and isinstance(licence.floodingLevel, basestring):
+            licence.setFloodingLevel((licence.floodingLevel,))
+        if licence.locationFloodingLevel and isinstance(licence.locationFloodingLevel, basestring):
+            licence.setLocationFloodingLevel((licence.locationFloodingLevel,))
+
+    logger.info("migration step done!")
