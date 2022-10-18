@@ -787,7 +787,7 @@ class UrbanBase(object):
             return None
         displaylist = None
         if hasattr(vocabulary, 'getDisplayListForTemplate'):
-            displaylist = vocabulary.getDisplayListForTemplate(obj)
+            displaylist = vocabulary.getDisplayList(obj)
         elif type(vocabulary) is str:
             displaylist = getattr(obj, vocabulary)()
         elif type(vocabulary) in (list, tuple):
