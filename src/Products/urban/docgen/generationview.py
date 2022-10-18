@@ -88,6 +88,10 @@ class UrbanDocGenerationView(PersistentDocumentGenerationView):
             last_inquiry = licence.getAllInquiriesAndAnnouncements()[-1].restrictedTraverse(
                 '@@document_generation_helper_view'
             )
+        elif hasattr(licence, 'getAllInquiries'):
+            last_inquiry = licence.getAllInquiries()[-1].restrictedTraverse(
+                '@@document_generation_helper_view'
+            )
 
 
         generation_context = {
