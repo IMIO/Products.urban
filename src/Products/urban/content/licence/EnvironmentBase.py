@@ -412,7 +412,7 @@ class EnvironmentBase(BaseFolder, GenericLicence, CODT_UniqueLicenceInquiry, Bro
     def getLastWalloonRegionDecisionEvent(self):
         return self.getLastEvent(interfaces.IWalloonRegionDecisionEvent)
 
-    def getLastDecisionProjectFromSPWEvent(self):
+    def getLastDecisionProjectFromSPW(self):
         return self.getLastEvent(interfaces.IDecisionProjectFromSPWEvent)
 
     def getLastProprietaryChangeEvent(self):
