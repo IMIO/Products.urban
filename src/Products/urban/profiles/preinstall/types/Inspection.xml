@@ -26,6 +26,7 @@
    <element value="UrbanEvent"/>
    <element value="UrbanEventInspectionReport"/>
    <element value="UrbanEventFollowUp"/>
+   <element value="UrbanEventCollege"/>
    <element value="File"/>
    <element value="PortionOut"/>
    <element value="task"/>
