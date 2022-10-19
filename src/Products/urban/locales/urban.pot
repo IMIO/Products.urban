@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2022-10-10 14:14+0000\n"
+"POT-Creation-Date: 2022-10-19 09:31+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -391,7 +391,7 @@ msgstr ""
 msgid "IInquiry type marker interface"
 msgstr ""
 
-#: ../interfaces.py:619
+#: ../interfaces.py:623
 msgid "IInspectionReportEvent type marker interface"
 msgstr ""
 
@@ -443,11 +443,15 @@ msgstr ""
 msgid "IOpinionRequest type marker interface"
 msgstr ""
 
-#: ../interfaces.py:615
+#: ../interfaces.py:619
 msgid "IPatrimonyMeetingEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:627
+#: ../interfaces.py:615
+msgid "IPrelimaryWarning type marker interface"
+msgstr ""
+
+#: ../interfaces.py:631
 msgid "IProprietaryChangeEvent type marker interface"
 msgstr ""
 
@@ -471,7 +475,7 @@ msgstr ""
 msgid "ISentToArchivesEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:635
+#: ../interfaces.py:639
 msgid "ISettlementEvent type marker interface"
 msgstr ""
 
@@ -479,7 +483,7 @@ msgstr ""
 msgid "ISimpleCollegeEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:631
+#: ../interfaces.py:635
 msgid "ISuspensionEvent type marker interface"
 msgstr ""
 
@@ -499,7 +503,7 @@ msgstr ""
 msgid "ITheTicket type marker interface"
 msgstr ""
 
-#: ../interfaces.py:639
+#: ../interfaces.py:643
 msgid "ITransferOfLicence type marker interface"
 msgstr ""
 
@@ -515,7 +519,7 @@ msgstr ""
 msgid "IUrbanEventFollowUp type marker interface"
 msgstr ""
 
-#: ../interfaces.py:623
+#: ../interfaces.py:627
 msgid "IUrbanEventFollowUpWithDelay type marker interface"
 msgstr ""
 
@@ -557,7 +561,7 @@ msgstr ""
 msgid "IntegratedLicence"
 msgstr ""
 
-#: ../interfaces.py:738
+#: ../interfaces.py:742
 msgid "Internal opinion services"
 msgstr ""
 
@@ -565,7 +569,7 @@ msgstr ""
 msgid "Listing file"
 msgstr ""
 
-#: ../interfaces.py:761
+#: ../interfaces.py:765
 msgid "Mailing limit"
 msgstr ""
 
@@ -573,7 +577,7 @@ msgstr ""
 msgid "Map"
 msgstr ""
 
-#: ../interfaces.py:762
+#: ../interfaces.py:766
 msgid "Max items allowed for immediate mailing"
 msgstr ""
 
@@ -635,11 +639,11 @@ msgstr ""
 msgid "Period"
 msgstr ""
 
-#: ../interfaces.py:776
+#: ../interfaces.py:780
 msgid "Planned claimants imports"
 msgstr ""
 
-#: ../interfaces.py:751
+#: ../interfaces.py:755
 msgid "Planned mailings"
 msgstr ""
 
@@ -703,7 +707,7 @@ msgstr ""
 msgid "Service id"
 msgstr ""
 
-#: ../interfaces.py:739
+#: ../interfaces.py:743
 msgid "Services that can give their opinion directly through urban"
 msgstr ""
 
@@ -720,7 +724,7 @@ msgid "Submit"
 msgstr ""
 
 #: ../browser/offdays_settings.py:39
-#: ../interfaces.py:789
+#: ../interfaces.py:793
 msgid "Suspension period end date"
 msgstr ""
 
@@ -729,7 +733,7 @@ msgid "Suspension period from to: please check the end date"
 msgstr ""
 
 #: ../browser/offdays_settings.py:33
-#: ../interfaces.py:785
+#: ../interfaces.py:789
 msgid "Suspension period start date"
 msgstr ""
 
@@ -1619,7 +1623,7 @@ msgstr ""
 msgid "inadmissibilityreasons_folder_title"
 msgstr ""
 
-#: ../interfaces.py:777
+#: ../interfaces.py:781
 msgid "inquiries planned for claimants imports"
 msgstr ""
 
@@ -1840,11 +1844,11 @@ msgstr ""
 msgid "mail_gig"
 msgstr ""
 
-#: ../interfaces.py:752
+#: ../interfaces.py:756
 msgid "mailings planned"
 msgstr ""
 
-#: ../interfaces.py:767
+#: ../interfaces.py:771
 msgid "mailings planned for radius search"
 msgstr ""
 
@@ -1871,7 +1875,7 @@ msgstr ""
 msgid "manage_parcellings"
 msgstr ""
 
-#: ../browser/templates/globalmacros.pt:38
+#: ../browser/templates/globalmacros.pt:46
 msgid "manual_parcel"
 msgstr ""
 
@@ -2024,7 +2028,7 @@ msgid "patrimonycertificate_urbanconfig_title"
 msgstr ""
 
 #. Default: "Is key event"
-#: ../browser/templates/globalmacros.pt:109
+#: ../browser/templates/globalmacros.pt:117
 msgid "pca_fieldset_legend"
 msgstr ""
 
@@ -2163,7 +2167,7 @@ msgstr ""
 msgid "sdc_folder_title"
 msgstr ""
 
-#: ../browser/templates/globalmacros.pt:32
+#: ../browser/templates/globalmacros.pt:36
 msgid "search_parcels"
 msgstr ""
 

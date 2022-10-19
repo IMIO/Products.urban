@@ -393,7 +393,7 @@ msgstr "Prescription IILE"
 msgid "IInquiry type marker interface"
 msgstr "Enquête publique"
 
-#: ../interfaces.py:619
+#: ../interfaces.py:623
 msgid "IInspectionReportEvent type marker interface"
 msgstr ""
 
@@ -449,11 +449,15 @@ msgstr "Registre de modification"
 msgid "IOpinionRequest type marker interface"
 msgstr "Demande d'avis"
 
-#: ../interfaces.py:615
+#: ../interfaces.py:619
 msgid "IPatrimonyMeetingEvent type marker interface"
 msgstr "Réunion patrimoine"
 
-#: ../interfaces.py:627
+#: ../interfaces.py:615
+msgid "IPrelimaryWarning type marker interface"
+msgstr "Avertissement préalable"
+
+#: ../interfaces.py:631
 msgid "IProprietaryChangeEvent type marker interface"
 msgstr "Changement d'exploitant"
 
@@ -478,7 +482,7 @@ msgstr "Refus pour incomplétude"
 msgid "ISentToArchivesEvent type marker interface"
 msgstr "Envoi aux archives"
 
-#: ../interfaces.py:635
+#: ../interfaces.py:639
 msgid "ISettlementEvent type marker interface"
 msgstr "Règlement transactionnel"
 
@@ -486,7 +490,7 @@ msgstr "Règlement transactionnel"
 msgid "ISimpleCollegeEvent type marker interface"
 msgstr "Collège simple"
 
-#: ../interfaces.py:631
+#: ../interfaces.py:635
 msgid "ISuspensionEvent type marker interface"
 msgstr "Suspension"
 
@@ -508,7 +512,7 @@ msgstr "Délivrance du permis/certificat/..."
 msgid "ITheTicket type marker interface"
 msgstr "Procès verbal"
 
-#: ../interfaces.py:639
+#: ../interfaces.py:643
 msgid "ITransferOfLicence type marker interface"
 msgstr ""
 
@@ -524,7 +528,7 @@ msgstr "Événement commun à l'urbanisme et l'environnement (permis unique)"
 msgid "IUrbanEventFollowUp type marker interface"
 msgstr "Proposition de suivi (!uniquement pour Inspection!)"
 
-#: ../interfaces.py:623
+#: ../interfaces.py:627
 msgid "IUrbanEventFollowUpWithDelay type marker interface"
 msgstr "Proposition de suivi avec délai"
 
@@ -569,7 +573,7 @@ msgstr "Inspection"
 msgid "IntegratedLicence"
 msgstr "Permis intégré"
 
-#: ../interfaces.py:738
+#: ../interfaces.py:742
 msgid "Internal opinion services"
 msgstr "Avis de services internes à la ville"
 
@@ -577,7 +581,7 @@ msgstr "Avis de services internes à la ville"
 msgid "Listing file"
 msgstr "Importer un fichier de réclamants (csv)"
 
-#: ../interfaces.py:761
+#: ../interfaces.py:765
 msgid "Mailing limit"
 msgstr ""
 
@@ -585,7 +589,7 @@ msgstr ""
 msgid "Map"
 msgstr "Carte"
 
-#: ../interfaces.py:762
+#: ../interfaces.py:766
 msgid "Max items allowed for immediate mailing"
 msgstr ""
 
@@ -647,11 +651,11 @@ msgstr "Certificat de patrimoine"
 msgid "Period"
 msgstr "Période"
 
-#: ../interfaces.py:776
+#: ../interfaces.py:780
 msgid "Planned claimants imports"
 msgstr ""
 
-#: ../interfaces.py:751
+#: ../interfaces.py:755
 msgid "Planned mailings"
 msgstr ""
 
@@ -715,7 +719,7 @@ msgstr "Nom du service"
 msgid "Service id"
 msgstr "Identifiant du service"
 
-#: ../interfaces.py:739
+#: ../interfaces.py:743
 msgid "Services that can give their opinion directly through urban"
 msgstr "Services internes à la ville rendant des avis"
 
@@ -732,7 +736,7 @@ msgid "Submit"
 msgstr "Valider"
 
 #: ../browser/offdays_settings.py:39
-#: ../interfaces.py:789
+#: ../interfaces.py:793
 msgid "Suspension period end date"
 msgstr "Date de fin"
 
@@ -741,7 +745,7 @@ msgid "Suspension period from to: please check the end date"
 msgstr "Période de suspension du ${from} au ${to}: CORRIGEZ LA DATE DE FIN DE PUBLICITE."
 
 #: ../browser/offdays_settings.py:33
-#: ../interfaces.py:785
+#: ../interfaces.py:789
 msgid "Suspension period start date"
 msgstr "Date de début"
 
@@ -1645,7 +1649,7 @@ msgstr "Férié"
 msgid "inadmissibilityreasons_folder_title"
 msgstr "Motifs d'irrecevabilité"
 
-#: ../interfaces.py:777
+#: ../interfaces.py:781
 msgid "inquiries planned for claimants imports"
 msgstr ""
 
@@ -1866,11 +1870,11 @@ msgstr "Lien avec l'adresse du gig"
 msgid "mail_gig"
 msgstr "Adresse mail du compte gig"
 
-#: ../interfaces.py:752
+#: ../interfaces.py:756
 msgid "mailings planned"
 msgstr ""
 
-#: ../interfaces.py:767
+#: ../interfaces.py:771
 msgid "mailings planned for radius search"
 msgstr ""
 
@@ -1897,7 +1901,7 @@ msgstr "Gérer les notaires"
 msgid "manage_parcellings"
 msgstr "Gérer les lotissements"
 
-#: ../browser/templates/globalmacros.pt:38
+#: ../browser/templates/globalmacros.pt:46
 msgid "manual_parcel"
 msgstr "Ajouter manuellement"
 
@@ -2051,7 +2055,7 @@ msgid "patrimonycertificate_urbanconfig_title"
 msgstr "Paramètres des certificats de patrimoine"
 
 #. Default: "Is key event"
-#: ../browser/templates/globalmacros.pt:109
+#: ../browser/templates/globalmacros.pt:117
 msgid "pca_fieldset_legend"
 msgstr ""
 
@@ -2190,7 +2194,7 @@ msgstr "SCT"
 msgid "sdc_folder_title"
 msgstr "SDC"
 
-#: ../browser/templates/globalmacros.pt:32
+#: ../browser/templates/globalmacros.pt:36
 msgid "search_parcels"
 msgstr "Ajouter"
 
