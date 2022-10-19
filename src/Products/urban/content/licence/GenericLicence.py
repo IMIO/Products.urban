@@ -1345,6 +1345,9 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
     def getFirstDeposit(self):
         return self.getFirstEvent(interfaces.IDepositEvent)
 
+    def getLastDeposit(self):
+        return self.getLastEvent(interfaces.IDepositEvent)
+
     def getFirstPatrimonyMeeting(self):
         return self.getFirstEvent(interfaces.IPatrimonyMeetingEvent)
 
