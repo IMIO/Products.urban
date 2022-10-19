@@ -1478,6 +1478,9 @@ class GenericLicence(OrderedBaseFolder, UrbanBase, BrowserDefaultMixin):
     def getAllPatrimonyMeeting(self):
         return self.getAllEvents(interfaces.IPatrimonyMeetingEvent)
 
+    def getLastPreliminaryWarning(self):
+        return self.getLastEvent(interfaces.IPreliminaryWarningEvent)
+
     def getLastSimpleCollege(self):
         return self.getLastEvent(interfaces.ISimpleCollegeEvent)
 

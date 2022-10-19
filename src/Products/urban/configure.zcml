@@ -253,6 +253,10 @@
     type=".interfaces.IEventTypeType"/>
 
   <interface
+    interface=".interfaces.IPreliminaryWarningEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
     interface=".interfaces.IInspectionReportEvent"
     type=".interfaces.IEventTypeType"/>
 
