@@ -220,6 +220,7 @@
             <input type="submit" class="context apButton contenttype-applicant" id="add-applicant" value="add_a_physical_applicant" i18n:attributes="value" />
         </form>
         <!--form tal:define="ctype python: context.portal_types.getTypeInfo('Couple');
+        <form tal:define="ctype python: context.portal_types.getTypeInfo('Couple');
                          member context/@@plone_portal_state/member;"
               tal:condition="python: member.has_permission('urban: Add Contact', context)"
               tal:attributes="action python: context.absolute_url() + '/createObject'"
