@@ -80,16 +80,16 @@ class UrbanDocGenerationView(PersistentDocumentGenerationView):
                             for tenant in tenants or []]
             tenantobj = tenants_views and tenants_views[0] or None
 
-        bound_roaddecrees = [dec.restrictedTraverse('@@document_generation_helper_view')
+        bound_roaddecrees = [dec.unrestrictedTraverse('@@document_generation_helper_view')
                              for dec in licence.get_bound_roaddecrees()] or None
 
         last_inquiry = None
         if hasattr(licence, 'getAllInquiriesAndAnnouncements'):
-            last_inquiry = licence.getAllInquiriesAndAnnouncements()[-1].restrictedTraverse(
+            last_inquiry = licence.getAllInquiriesAndAnnouncements()[-1].unrestrictedTraverse(
                 '@@document_generation_helper_view'
             )
         elif hasattr(licence, 'getAllInquiries'):
-            last_inquiry = licence.getAllInquiries()[-1].restrictedTraverse(
+            last_inquiry = licence.getAllInquiries()[-1].unrestrictedTraverse(
                 '@@document_generation_helper_view'
             )
 
