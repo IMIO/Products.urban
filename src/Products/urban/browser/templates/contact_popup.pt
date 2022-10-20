@@ -124,8 +124,8 @@
             tal:attributes="value view/close_window" />
     </form>
     <!-- actual list of objects, either searchresults or folder contents -->
-    <div id="atrbResults" tal:define="batch view/getResult;">
-      <tal:quick-add repeat="portal_type view/allowed_types">
+    <div id="atrbResults" tal:define="batch view/getResult; a_types view/allowed_types">
+      <tal:quick-add repeat="portal_type python: type(a_types) in [list, tuple] and a_types or [a_types]">
           <span style="display: inline-block" class="field">
               <form name="quickAdd" action="" method="post" target="_blank"
                 tal:attributes="action python: view.get_creation_url(portal_type)">
