@@ -45,7 +45,7 @@ class AcknowledgmentLimitDate(StartDate):
 
     def start_date(self):
         licence = self.task_container
-        if not licence.getHasModifiedBlueprints():
+        if hasattr(licence, 'getHasModifiedBlueprints') and not licence.getHasModifiedBlueprints():
             deposit = licence.getLastDeposit()
             limit_date = deposit and deposit.getEventDate() + 20 or None
         else:
