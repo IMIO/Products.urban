@@ -928,7 +928,7 @@ msgstr "Ajouter un propriétaire (p. morale)"
 
 #: ../browser/licence/templates/licencemacros.pt:157
 msgid "add_a_couple"
-msgstr "Ajouter un demandeur (p. morale)"
+msgstr "Ajouter un couple"
 
 msgid "add_a_lot"
 msgstr "Ajouter un lot"
