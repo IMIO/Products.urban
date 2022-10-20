@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2022-10-18 12:37+0000\n"
+"POT-Creation-Date: 2022-10-20 09:46+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -926,6 +926,10 @@ msgstr "Ajouter un locataire (p.morale)"
 msgid "add_a_corporationproprietary"
 msgstr "Ajouter un propriétaire (p. morale)"
 
+#: ../browser/licence/templates/licencemacros.pt:157
+msgid "add_a_couple"
+msgstr "Ajouter un demandeur (p. morale)"
+
 msgid "add_a_lot"
 msgstr "Ajouter un lot"
 
@@ -940,6 +944,10 @@ msgstr "Ajouter un plaignant"
 #: ../browser/licence/templates/licencemacros.pt:80
 msgid "add_a_proprietary"
 msgstr "Ajouter un propriétaire"
+
+#: ../browser/licence/templates/licencemacros.pt:88
+msgid "add_a_proprietary_couple"
+msgstr "Ajouter un couple de propriétaires"
 
 #: ../browser/licence/templates/licencemacros.pt:123
 msgid "add_a_tenant"
@@ -1555,39 +1563,39 @@ msgstr "Sécurisé, fiable et rapide, <a href='http://www.getfirefox.com'>Firefo
 msgid "firefox_viewlet_title"
 msgstr "Cette application fonctionne mieux avec Firefox."
 
-#: ../content/licence/GenericLicence.py:1182
+#: ../content/licence/GenericLicence.py:1181
 msgid "flooding_already_flooded"
 msgstr "bien ayant déjà été inondé"
 
-#: ../content/licence/GenericLicence.py:1181
+#: ../content/licence/GenericLicence.py:1180
 msgid "flooding_axis_over_10"
 msgstr "axe de ruisselement concentré - plus de 10 ha"
 
-#: ../content/licence/GenericLicence.py:1180
+#: ../content/licence/GenericLicence.py:1179
 msgid "flooding_axis_under_10"
 msgstr "axe de ruissellement concentré - moins de 10 ha"
 
 #. Default: "High risk"
-#: ../content/licence/GenericLicence.py:1179
+#: ../content/licence/GenericLicence.py:1178
 msgid "flooding_level_high"
 msgstr "aléa d'inondation élévé"
 
 #. Default: "Low risk"
-#: ../content/licence/GenericLicence.py:1177
+#: ../content/licence/GenericLicence.py:1176
 msgid "flooding_level_low"
 msgstr "aléa d'inondation faible"
 
 #. Default: "Moderate risk"
-#: ../content/licence/GenericLicence.py:1178
+#: ../content/licence/GenericLicence.py:1177
 msgid "flooding_level_moderate"
 msgstr "aléa d'inondation moyen"
 
 #. Default: "No"
-#: ../content/licence/GenericLicence.py:1175
+#: ../content/licence/GenericLicence.py:1174
 msgid "flooding_level_no"
 msgstr "non"
 
-#: ../content/licence/GenericLicence.py:1176
+#: ../content/licence/GenericLicence.py:1175
 msgid "flooding_level_verylow"
 msgstr "aléa d'inondation très faible"
 

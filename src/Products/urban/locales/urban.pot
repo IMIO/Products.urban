@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2022-10-18 12:37+0000\n"
+"POT-Creation-Date: 2022-10-20 09:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -908,6 +908,10 @@ msgstr ""
 msgid "add_a_corporationproprietary"
 msgstr ""
 
+#: ../browser/licence/templates/licencemacros.pt:157
+msgid "add_a_couple"
+msgstr ""
+
 msgid "add_a_lot"
 msgstr ""
 
@@ -921,6 +925,10 @@ msgstr ""
 
 #: ../browser/licence/templates/licencemacros.pt:80
 msgid "add_a_proprietary"
+msgstr ""
+
+#: ../browser/licence/templates/licencemacros.pt:88
+msgid "add_a_proprietary_couple"
 msgstr ""
 
 #: ../browser/licence/templates/licencemacros.pt:123
@@ -1531,35 +1539,35 @@ msgstr ""
 msgid "firefox_viewlet_title"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1182
+#: ../content/licence/GenericLicence.py:1181
 msgid "flooding_already_flooded"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1181
+#: ../content/licence/GenericLicence.py:1180
 msgid "flooding_axis_over_10"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1180
+#: ../content/licence/GenericLicence.py:1179
 msgid "flooding_axis_under_10"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1179
+#: ../content/licence/GenericLicence.py:1178
 msgid "flooding_level_high"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1177
+#: ../content/licence/GenericLicence.py:1176
 msgid "flooding_level_low"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1178
+#: ../content/licence/GenericLicence.py:1177
 msgid "flooding_level_moderate"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1175
+#: ../content/licence/GenericLicence.py:1174
 msgid "flooding_level_no"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1176
+#: ../content/licence/GenericLicence.py:1175
 msgid "flooding_level_verylow"
 msgstr ""
 
