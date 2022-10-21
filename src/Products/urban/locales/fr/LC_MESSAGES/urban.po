@@ -969,6 +969,9 @@ msgstr "Demandeur(s)"
 msgid "applicants_history"
 msgstr "Demandeurs inactifs"
 
+msgid "label_colname_applicant_data"
+msgstr "Informations"
+
 msgid "applicationreasons_folder_title"
 msgstr "Motifs de la demande"
 

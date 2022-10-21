@@ -29,8 +29,7 @@ class FacetedTitleColumn(BaseColumn):
         state = item.review_state
         css_class = 'contenttype-%s state-%s' % (portal_type, state)
         url = item.getURL()
-        title = escape(item.Title)
-
+        title = item.Title
         title_words = title.split()
         for split in range(len(title_words) / 15):
             title_words.insert(15 * (split + 1), '<br />')
