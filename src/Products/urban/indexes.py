@@ -47,10 +47,10 @@ def genericlicence_applicantinfoindex(object):
     Return the informations to index about the applicants
     """
     contacts_info = []
-    contacts = object.getApplicants() + object.getProprietaries() +
-               object.get_applicants_history() + object.get_proprietaries_history() +
-               object.getCouples() + object.get_couples_history() +
-               object.getProprietaryCouples() + object.get_proprietary_couples_history()
+    contacts = object.getApplicants() + object.getProprietaries() +\
+        object.get_applicants_history() + object.get_proprietaries_history() +\
+        object.getCouples() + object.get_couples_history() +\
+        object.getProprietaryCouples() + object.get_proprietary_couples_history()
     for contact in contacts:
         contacts_info.extend(_get_applicantsinfoindex(contact))
     return list(set(contacts_info))
@@ -62,7 +62,7 @@ def environmentlicence_applicantinfoindex(object):
     Return the informations to index about the applicants
     """
     applicants_info = []
-    applicants = object.getApplicants() + object.get_applicants_history() +
+    applicants = object.getApplicants() + object.get_applicants_history()
     for applicant in applicants:
         applicants_info.extend(_get_applicantsinfoindex(applicant))
     return list(set(applicants_info))
@@ -76,10 +76,10 @@ def inspection_applicantinfoindex(object):
     """
     applicants_info = []
     contacts = object.getApplicants() + object.getProprietaries() +\
-               object.get_applicants_history() + object.get_proprietaries_history() +
-               object.getCouples() + object.get_couples_history() +
-               object.getProprietaryCouples() + object.get_proprietary_couples_history()
-               object.getPlaintiffs() + object.getTenants()
+        object.get_applicants_history() + object.get_proprietaries_history() +\
+        object.getCouples() + object.get_couples_history() +\
+        object.getProprietaryCouples() + object.get_proprietary_couples_history() +\
+        object.getPlaintiffs() + object.getTenants()
     for applicant in contacts:
         applicants_info.extend(_get_applicantsinfoindex(applicant))
     return list(set(applicants_info))
