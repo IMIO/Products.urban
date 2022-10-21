@@ -211,7 +211,7 @@ class UrbainXMLExport(BrowserView):
                     authority = 'REGION'
                 else:
                     if hasattr(licence, 'getAuthority'):
-                        auth_map = {'college': 'COM', 'ft': 'REGION'}
+                        auth_map = {'college': 'COM', 'ft': 'REGION', 'fd_ft': 'REGION' }
                         authority = auth_map[licence.getAuthority()]
                     elif licence.getLastRecourse():
                         authority = 'MINISTRE'
