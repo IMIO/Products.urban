@@ -1084,7 +1084,7 @@ EventConfigs = {
         {
             'id': "avis-prealable-college",
             'title': "Avis préalable du Collège",
-            'activatedFields': ('collegeDecision',),
+            'activatedFields': ('collegeOpinion',),
             'deadLineDelay': 15,
             'eventDateLabel': "Date de notification",
             'eventType': ('Products.urban.interfaces.ICollegeReportEvent',),
@@ -2644,7 +2644,7 @@ EventConfigs = {
             'id': "avis-college",
             'title': "Avis préalable du Collège",
             'eventDateLabel': "Date de notification",
-            'activatedFields': ('collegeDecision', 'decisionDate', 'transmitDate',),
+            'activatedFields': ('collegeOpinion', 'decisionDate', 'transmitDate',),
             'deadLineDelay': 15,
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
@@ -5919,7 +5919,7 @@ EventConfigs = {
         {
             'id': "pre-decision",
             'title': "Avis préalable du collège",
-            'activatedFields': ('collegeDecision',),
+            'activatedFields': ('collegeOpinion',),
             'eventDateLabel': "Date de l'avis",
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
