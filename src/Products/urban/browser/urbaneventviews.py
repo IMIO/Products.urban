@@ -157,7 +157,7 @@ class UrbanEventView(BrowserView):
 
         for generated_doc in context.objectValues():
             for template in template_list:
-                if generated_doc.id.startswith(template['name']):
+                if generated_doc.Title() == template['title']:
                     template['class'] = 'urban-document-already-created'
         return template_list
 
