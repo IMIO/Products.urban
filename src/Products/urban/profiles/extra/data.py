@@ -885,17 +885,207 @@ EventConfigs = {
     ),
     'codt_commerciallicences': (
         {
-            'id': "depo-demande",
-            'title': "Coucou !!",
-            'eventDateLabel': "Date de la réception",
+            'id': "depot-demande",
+            'title': "Dépôt de la demande",
+            'eventDateLabel': "Date de transmis",
+            'activatedFields': ('receiptDate',),
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+                {'id': "", 'title': "Récépissé d'introduction de demande"},
+            ),
+            'eventType': ('Products.urban.interfaces.IDepositEvent',),
+        },
+        {
+            'id': "evaluation-incidences",
+            'title': "Evaluation des incidences environnementales",
+            'eventDateLabel': "",
+            'activatedFields': (),
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+        },
+        {
+            'id': "transmis-fic",
+            'title': "Transmis de la demande au FIC",
+            'deadLineDelay': 10,
+            'eventDateLabel': "Date de transmis",
             'activatedFields': (),
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "codt_pp_recepisse_directeur_technique.odt", 'title': "Récépissé Directeur technique"},
+                {'id': "", 'title': "Transmis au FIC"},
+                {'id': "",
+                 'title': "Transmis aux demandeurs",
+                 'context_variables': [
+                     {
+                         'name': 'publipostage',
+                         'value': 'demandeurs'
+                     }
+                 ]
+                 },
             ),
-            'eventType': ('Products.urban.interfaces.IDepositEvent',),
+            'eventType': ('Products.urban.interfaces.IWalloonRegionPrimoEvent',),
         },
+        {
+            'id': "premier-dossier-incomplet",
+            'title': "Premier dossier incomplet",
+            'eventDateLabel': "",
+            'activatedFields': (),
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+                {'id': "",
+                 'title': "Dossier incomplet (lettre aux demandeurs)",
+                 'context_variables': [
+                     {
+                         'name': 'publipostage',
+                         'value': 'demandeurs'
+                     }
+                 ]
+                 },
+            ),
+            'eventType': ('Products.urban.interfaces.IMissingPartEvent',),
+        },
+        {
+            'id': "recepisse-complement",
+            'title': "Récépissé d'un complément",
+            'activatedFields': (),
+            'isKeyEvent': False,
+            'podTemplates': (
+                {'id': "",
+                 'title': "Récépissé d'un complément",
+                 'context_variables': [
+                     {
+                         'name': 'publipostage',
+                         'value': 'demandeurs'
+                     }
+                 ]
+                 },
+            ),
+            'eventType': ('Products.urban.interfaces.IMissingPartDepositEvent',),
+        },
+        {
+            'id': "dossier-irrecevable",
+            'title': "Dossier irrecevable",
+            'activatedFields': (),
+            'deadLineDelay': 0,
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+                {'id': "", 'title': "Transmis de l'irrecevabilité aux demandeurs",
+                 'context_variables': [
+                     {
+                         'name': 'publipostage',
+                         'value': 'demandeurs'
+                     }
+                 ]},
+            ),
+        },
+        {
+            'id': "dossier-complet-recevable",
+            'title': "Dossier complet et recevable",
+            'activatedFields': (),
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (),
+            'eventType': ('Products.urban.interfaces.IAcknowledgmentEvent',),
+        },
+        {
+            'id': "enquete-publique",
+            'title': "Enquête publique",
+            'activatedFields': ('investigationStart', 'investigationEnd', 'explanationEndSDate',),
+            'deadLineDelay': 15,
+            'specialFunctionName': "Rechercher les propriétaires situés dans un rayon de 50m",
+            'specialFunctionUrl': "addInvestigationPO",
+            'podTemplates': (
+                {'id': "env1-enq-avis.odt", 'title': "Avis d'enquête publique"},
+                {'id': "env1-enq-recommandes.odt", 'title': "Recommandé aux propriétaires (étiquette Poste)"},
+                {'id': "env1-enq-transmis-FT.odt", 'title': "PV enquête publique au FIC"},
+                {'id': "env1-enq-transmis-college.odt", 'title': "Transmis de l'avis d'enquête aux propriétaires"},
+                {'id': "env1-enq-ordre-mission.odt", 'title': "Ordre de mission"}
+            ),
+            'eventType': ('Products.urban.interfaces.IInquiryEvent',),
+            'eventPortalType': 'UrbanEventInquiry',
+        },
+        {
+            'id': "config-opinion-request",
+            'title': "*** Demande d'avis CONFIG ***",
+            'activatedFields': (),
+            'TALCondition': "python: False",
+            'podTemplates': ({'id': "env3-avis.odt", 'title': "Courrier de demande d'avis"},),
+            'eventType': ('Products.urban.interfaces.IOpinionRequestEvent',),
+            'eventPortalType': 'UrbanEventOpinionRequest',
+        },
+        {
+            'portal_type': 'OpinionEventConfig',
+            'id': "communes-limitrophes",
+            'title': "Demande d'avis (Communes limitrophes)",
+            'abbreviation': "Communes limitrophes",
+            'description': RichTextValue('<p>1, Rue xxx<br />xxxx Commune</p>'),
+            'activatedFields': (
+            'transmitDate', 'receiptDate', 'receivedDocumentReference', 'externalDecision',),
+            'deadLineDelay': 30,
+            'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
+            'podTemplates': (),
+            'eventType': ('Products.urban.interfaces.IOpinionRequestEvent',),
+            'eventPortalType': 'UrbanEventOpinionRequest',
+        },
+        {
+            'portal_type': 'OpinionEventConfig',
+            'id': "demande-avis-fic",
+            'title': "Demande d'avis (FIC)",
+            'abbreviation': "Fonctionnaire des Implantations Commerciales",
+            'description': RichTextValue('<p>Direction des Implantations Commerciales<br /> Place de la Wallonie, 1 <br /> 5100 Jambes</p>'),
+            'activatedFields': (
+            'transmitDate', 'receiptDate', 'receivedDocumentReference', 'externalDecision',),
+            'deadLineDelay': 30,
+            'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
+            'podTemplates': (),
+            'eventType': ('Products.urban.interfaces.IOpinionRequestEvent',),
+            'eventPortalType': 'UrbanEventOpinionRequest',
+        },
+        {
+            'portal_type': 'OpinionEventConfig',
+            'id': "demande-avis-observatoire-commerce",
+            'title': "Demande d'avis (Observatoire du Commerce)",
+            'abbreviation': "Observatoire du Commerce",
+            'description': RichTextValue('<p>Observatoire du Commerce<br /> Rue du Vertbois, 13 C <br /> 4000 Liège</p>'),
+            'activatedFields': (
+                'transmitDate', 'receiptDate', 'receivedDocumentReference', 'externalDecision',),
+            'deadLineDelay': 30,
+            'TALCondition': "python: event.mayAddOpinionRequestEvent(here)",
+            'podTemplates': (),
+            'eventType': ('Products.urban.interfaces.IOpinionRequestEvent',),
+            'eventPortalType': 'UrbanEventOpinionRequest',
+        },
+        {
+            'id': "plans-modificatifs",
+            'title': "Demande de plans modificatifs",
+            'activatedFields': ('transmitDate',),
+            'deadLineDelay': 15,
+            'eventType': ('Products.urban.interfaces.IAcknowledgmentEvent',),
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+                {'id': "pi_demande_plans_modificatifs.odt",
+                 'title': "Demande de plans modificatifs"},
+            ),
+        },
+        {
+            'id': "reception-plans-modificatifs",
+            'title': "Réception de plans modificatifs",
+            'activatedFields': (),
+            'deadLineDelay': 15,
+            'eventDateLabel': "Date de réception des plans modificatifs",
+            'eventType': ('Products.urban.interfaces.IModificationDepositEvent',),
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+                {'id': "",
+                 'title': "Réception des plans modificatifs"},
+            ),
+        },
+
     ),
     'codt_notaryletter': (
         {
