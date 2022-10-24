@@ -1583,5 +1583,7 @@ def reindex_catalog(context):
     """
     Clear and rebuild the calalog.
     """
+    if isNoturbanProfile(context):
+        return
     catalog = api.portal.get_tool('portal_catalog')
     catalog.clearFindAndRebuild()
