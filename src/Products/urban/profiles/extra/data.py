@@ -883,6 +883,20 @@ EventConfigs = {
             'eventType': ('Products.urban.interfaces.IPatrimonyMeetingEvent',),
         },
     ),
+    'codt_commerciallicences': (
+        {
+            'id': "depo-demande",
+            'title': "Coucou !!",
+            'eventDateLabel': "Date de la réception",
+            'activatedFields': (),
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+                {'id': "codt_pp_recepisse_directeur_technique.odt", 'title': "Récépissé Directeur technique"},
+            ),
+            'eventType': ('Products.urban.interfaces.IDepositEvent',),
+        },
+    ),
     'codt_notaryletter': (
         {
             'id': "notaryletter-codt",
