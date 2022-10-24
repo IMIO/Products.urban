@@ -597,3 +597,35 @@ def install_environment_cession(context):
         if api.content.get_state(cession_event) == 'disabled':
             api.content.transition(obj=cession_event, to_state='enabled')
     logger.info("upgrade step done!")
+
+
+def install_auto_page_style_for_mailing_templates(context):
+    """
+    """
+    logger = logging.getLogger('urban: enable auto page style for mailing templates')
+    logger.info("starting upgrade steps")
+    setup_tool = api.portal.get_tool('portal_setup')
+    setup_tool.runImportStepFromProfile('profile-collective.documentgenerator:default', 'plone.app.registry')
+    enable_auto_page_style = api.portal.set_registry_record(
+        'collective.documentgenerator.browser.controlpanel.IDocumentGeneratorControlPanelSchema.force_default_page_style_for_mailing',
+        True
+    )
+    logger.info("upgrade step done!")
+
+def activate_env_divergence_and_referenceFT_fields(context):
+    """
+    Enable divergence and divergenceDetails as they are now optionnals.
+    """
+    logger = logging.getLogger('urban: activate divergence')
+    logger.info("starting migration step")
+    portal_urban = api.portal.get_tool('portal_urban')
+    for config in portal_urban.objectValues('LicenceConfig'):
+        if 'divergences' in config.listUsedAttributes() and \
+           'divergences' not in config.getUsedAttributes():
+            to_set = ('divergences',)
+            config.setUsedAttributes(config.getUsedAttributes() + to_set)
+        if 'referenceFT' in config.listUsedAttributes() and \
+           'referenceFT' not in config.getUsedAttributes():
+            to_set = ('referenceFT',)
+            config.setUsedAttributes(config.getUsedAttributes() + to_set)
+    logger.info("migration step done!")
