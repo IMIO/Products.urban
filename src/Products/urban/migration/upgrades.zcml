@@ -411,6 +411,22 @@
         handler=".update_250.install_environment_cession"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Activate auto page style for mailing templates"
+        description="Activate auto page style for mailing templates"
+        source="1123"
+        destination="1124"
+        handler=".update_250.install_auto_page_style_for_mailing_templates"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Enable env divergences and referenceFT fields"
+        description="Enable env divergences and referenceFT fields"
+        source="1124"
+        destination="1125"
+        handler=".update_250.activate_env_divergence_and_referenceFT_fields"
+        profile="Products.urban:default" />
+
 
     <!--gs:upgradeStep
         title="Add schedule config for env licences 1 and 2"
