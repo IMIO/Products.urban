@@ -44,7 +44,7 @@ from plone import api
 optional_fields = [
     'roadTechnicalAdvice', 'locationTechnicalAdvice', 'additionalLegalConditions',
     'businessOldLocation', 'applicationReasons', 'validityDelay',
-    'environmentTechnicalRemarks', 'rubricsDetails', 'referenceFT'
+    'environmentTechnicalRemarks', 'rubricsDetails', 'referenceFT',
     'divergences', 'divergenceDetails'
 ]
 
