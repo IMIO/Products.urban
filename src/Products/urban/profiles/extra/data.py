@@ -1008,8 +1008,8 @@ EventConfigs = {
             'podTemplates': (
                 {'id': "pic-enq-avis.odt", 'title': "Avis d'enquête publique"},
                 {'id': "pic-enq-recommandes.odt", 'title': "Recommandé aux propriétaires (étiquette Poste)"},
-                {'id': "pic-enq-transmis-FT.odt", 'title': "PV enquête publique au FIC"},
-                {'id': "pic-enq-transmis-college.odt", 'title': "Transmis de l'avis d'enquête aux propriétaires"},
+                {'id': "pic-enq-transmis-FIC.odt", 'title': "PV enquête publique au FIC"},
+                {'id': "pic-enq-transmis-proprietaires.odt", 'title': "Transmis de l'avis d'enquête aux propriétaires"},
                 {'id': "pic-enq-ordre-mission.odt", 'title': "Ordre de mission"}
             ),
             'eventType': ('Products.urban.interfaces.IInquiryEvent',),
