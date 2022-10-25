@@ -35,6 +35,8 @@ from Products.DataGridField import DataGridField, DataGridWidget
 from Products.DataGridField.Column import Column
 from Products.DataGridField.SelectColumn import SelectColumn
 
+from collective.plonefinder.browser.interfaces import IFinderUploadCapable
+from collective.quickupload.interfaces import IQuickUploadCapable
 from Products.urban.config import *
 from Products.urban import UrbanMessage as _
 
@@ -442,10 +444,11 @@ schema = Schema((
         vocabulary_factory='urban.vocabulary.Natura2000',
         default_method='getDefaultValue',
     ),
-    StringField(
+    LinesField(
         name='floodingLevel',
-        widget=SelectionWidget(
+        widget=MultiSelectionWidget(
             label=_('urban_label_floodingLevel', default='Floodinglevel'),
+            format='checkbox',
         ),
         enforceVocabulary=True,
         schemata='urban_road',
@@ -619,11 +622,12 @@ schema = Schema((
         schemata='urban_location',
         default_output_type='text/html',
     ),
-    StringField(
+    LinesField(
         name='locationFloodingLevel',
-        widget=SelectionWidget(
+        widget=MultiSelectionWidget(
             label=_('urban_label_locationFloodingLevel',
                     default='Locationfloodinglevel'),
+            format='checkbox',
         ),
         enforceVocabulary=True,
         schemata='urban_location',
@@ -1024,7 +1028,9 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
     implements(
         interfaces.IGenericLicence,
         IFacetedTaskContainer,
-        IPossibleFacetedNavigable
+        IPossibleFacetedNavigable,
+        IFinderUploadCapable,
+        IQuickUploadCapable
     )
 
     meta_type = 'GenericLicence'
@@ -1169,12 +1175,14 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
         """
         vocab = (
             #we add an empty vocab value of type "choose a value"
-            ('',  translate(_(EMPTY_VOCAB_VALUE), context=self.REQUEST)),
             ('no', translate(_('flooding_level_no'), context=self.REQUEST)),
             ('very low', translate(_('flooding_level_verylow'), context=self.REQUEST)),
             ('low', translate(_('flooding_level_low'), context=self.REQUEST)),
             ('moderate', translate(_('flooding_level_moderate'), context=self.REQUEST)),
             ('high', translate(_('flooding_level_high'), context=self.REQUEST)),
+            ('axis_under_10', translate(_('flooding_axis_under_10'), context=self.REQUEST)),
+            ('axis_over_10', translate(_('flooding_axis_over_10'), context=self.REQUEST)),
+            ('already_flooded', translate(_('flooding_already_flooded'), context=self.REQUEST)),
         )
 
         return DisplayList(vocab)
