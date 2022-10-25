@@ -9,6 +9,9 @@ from plone import api
 from plone.app.textfield import RichTextValue
 from plone.app.uuid.utils import uuidToObject
 
+from zope.event import notify
+from zope.lifecycleevent import ObjectModifiedEvent
+
 from Products.urban.interfaces import IGenericLicence, IBaseBuildLicence
 import logging
 import re
@@ -629,3 +632,17 @@ def activate_env_divergence_and_referenceFT_fields(context):
             to_set = ('referenceFT',)
             config.setUsedAttributes(config.getUsedAttributes() + to_set)
     logger.info("migration step done!")
+
+
+def set_page_style_for_mailing_templates(context):
+    """
+    """
+    logger = logging.getLogger('urban: set page style for mailing templates')
+    logger.info("starting upgrade steps")
+    catalog = api.portal.get_tool('portal_catalog')
+    templates = [b.getObject() for b in catalog(object_provides=IConfigurablePODTemplate.__identifier__)]
+    for template in templates:
+        if template.mailing_loop_template:
+            notify(ObjectModifiedEvent(template))
+            logger.info("Set defaut page style for {}".format(template))
+    logger.info("upgrade step done!")
