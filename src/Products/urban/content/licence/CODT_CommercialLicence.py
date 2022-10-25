@@ -17,7 +17,6 @@ from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 from Products.urban import interfaces
-from Products.urban.content.licence.CODT_UniqueLicence import finalizeSchema
 from Products.urban.content.licence.CODT_UniqueLicence import CODT_UniqueLicence
 from Products.urban.utils import setOptionalAttributes
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
@@ -95,6 +94,23 @@ registerType(CODT_CommercialLicence, PROJECTNAME)
 # end of class CODT_CommercialLicence
 
 ##code-section module-footer #fill in your manual code here
+
+
+def finalizeSchema(schema):
+    """
+       Finalizes the type schema to alter some fields
+    """
+    schema.moveField('referenceSPE', after='reference')
+    schema.moveField('referenceFT', after='referenceDGATLP')
+    schema.moveField('authority', before='folderCategory')
+    schema.moveField('rubrics', after='folderCategory')
+    schema.moveField('rubricsDetails', after='rubrics')
+    schema.moveField('minimumLegalConditions', after='rubricsDetails')
+    schema.moveField('additionalLegalConditions', after='minimumLegalConditions')
+    schema.moveField('ftSolicitOpinionsTo', after='impactStudy')
+    schema.moveField('description', after='ftSolicitOpinionsTo')
+    schema.moveField('locationTechnicalAdviceAfterInquiry', after='locationTechnicalAdvice')
+
 finalizeSchema(CODT_CommercialLicence_schema)
 del CODT_CommercialLicence_schema['usage']
 CODT_CommercialLicence_schema['referenceDGATLP'].widget.label=_('urban_label_referenceDGO6')
