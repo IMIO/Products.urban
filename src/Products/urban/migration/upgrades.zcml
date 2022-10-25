@@ -427,6 +427,14 @@
         handler=".update_250.activate_env_divergence_and_referenceFT_fields"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Set page style for mailing templates"
+        description="Set page style for mailing templates"
+        source="1125"
+        destination="1126"
+        handler=".update_250.set_page_style_for_mailing_templates"
+        profile="Products.urban:default" />
+
 
     <!--gs:upgradeStep
         title="Add schedule config for env licences 1 and 2"
