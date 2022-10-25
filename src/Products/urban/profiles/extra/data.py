@@ -1020,7 +1020,14 @@ EventConfigs = {
             'title': "*** Demande d'avis CONFIG ***",
             'activatedFields': (),
             'TALCondition': "python: False",
-            'podTemplates': ({'id': "pic-avis.odt", 'title': "Courrier de demande d'avis"},),
+            'podTemplates': ({'id': "pic-avis.odt", 'title': "Courrier de demande d'avis",
+                             'context_variables':[
+                             {
+                             'name': 'publipostage',
+                             'value': 'organismes'
+                             }
+                             ]},
+                             ),
             'eventType': ('Products.urban.interfaces.IOpinionRequestEvent',),
             'eventPortalType': 'UrbanEventOpinionRequest',
         },

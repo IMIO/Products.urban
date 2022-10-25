@@ -10,16 +10,15 @@
 #
 
 __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEULETTE
-<stephan.geulette@uvcw.be>, Jean-Michel Abe <jm.abe@la-bruyere.be>"""
+<stephan.geulette@uvcw.be>, Jean-Michel Abe <jm.abe@la-bruyere.be>, Line et Mapi"""
 __docformat__ = 'plaintext'
 
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 from Products.urban import interfaces
-from Products.urban.content.licence.CODT_BaseBuildLicence import CODT_BaseBuildLicence
-from Products.urban.content.licence.CODT_BuildLicence import finalizeSchema
-from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
+from Products.urban.content.licence.CODT_UniqueLicence import finalizeSchema
+from Products.urban.content.licence.CODT_UniqueLicence import CODT_UniqueLicence
 from Products.urban.utils import setOptionalAttributes
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
@@ -27,20 +26,13 @@ from Products.urban.config import *
 from Products.urban import UrbanMessage as _
 
 ##code-section module-header #fill in your manual code here
+
+
 optional_fields = ['limitedImpact', 'SDC_divergence']
 ##/code-section module-header
 
 schema = Schema((
-    StringField(
-        name='authority',
-        widget=SelectionWidget(
-            format='select',
-            label=_('urban_label_authority', 'Authority'),
-        ),
-        schemata='urban_description',
-        vocabulary=UrbanVocabulary('authority', inUrbanConfig=True),
-        default_method='getDefaultValue',
-    ),
+
 
 ),
 )
@@ -50,14 +42,16 @@ setOptionalAttributes(schema, optional_fields)
 ##/code-section after-local-schema
 
 CODT_CommercialLicence_schema = BaseFolderSchema.copy() + \
-    getattr(CODT_BaseBuildLicence, 'schema', Schema(())).copy() + \
+    getattr(CODT_UniqueLicence, 'schema', Schema(())).copy() + \
     schema.copy()
 
-##code-section after-schema #fill in your manual code here
+##code-section after-schema
+# #fill in your manual code here
+CODT_CommercialLicence_schema.delField('folderTendency')
 ##/code-section after-schema
 
 
-class CODT_CommercialLicence(BaseFolder, CODT_BaseBuildLicence, BrowserDefaultMixin):
+class CODT_CommercialLicence(BaseFolder, CODT_UniqueLicence, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()
