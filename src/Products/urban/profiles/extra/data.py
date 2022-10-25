@@ -1130,9 +1130,9 @@ EventConfigs = {
                          'value': 'demandeurs'
                      }
                  ]},
-                {'id': "pic_transmis_decision_dgo3.odt", 'title': "Transmis de la décision du Collège au FIC"},
-                {'id': "pic_transmis_decision_dgo4.odt", 'title': "Transmis de la décision du Collège aux communes limitrophes"},
-                {'id': "pic_transmis_decision_dgo6.odt",
+                {'id': "pic_transmis_decision_fic.odt", 'title': "Transmis de la décision du Collège au FIC"},
+                {'id': "pic_transmis_decision_communes_limitrophes.odt", 'title': "Transmis de la décision du Collège aux communes limitrophes"},
+                {'id': "pic_transmis_decision_observatoire_commerce.odt",
                  'title': "Transmis de la décision du Collège à l'Observatoire du Commerce"},
             ),
             'eventType': ('Products.urban.interfaces.ITheLicenceEvent',),
