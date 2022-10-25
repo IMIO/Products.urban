@@ -19,6 +19,7 @@ from zope.interface import implements
 from Products.urban import interfaces
 from Products.urban.content.licence.CODT_BaseBuildLicence import CODT_BaseBuildLicence
 from Products.urban.content.licence.CODT_BuildLicence import finalizeSchema
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.utils import setOptionalAttributes
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
@@ -30,6 +31,16 @@ optional_fields = ['limitedImpact', 'SDC_divergence']
 ##/code-section module-header
 
 schema = Schema((
+    StringField(
+        name='authority',
+        widget=SelectionWidget(
+            format='select',
+            label=_('urban_label_authority', 'Authority'),
+        ),
+        schemata='urban_description',
+        vocabulary=UrbanVocabulary('authority', inUrbanConfig=True),
+        default_method='getDefaultValue',
+    ),
 
 ),
 )

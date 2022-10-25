@@ -883,7 +883,7 @@ EventConfigs = {
             'eventType': ('Products.urban.interfaces.IPatrimonyMeetingEvent',),
         },
     ),
-    'codt_commerciallicences': (
+    'codt_commerciallicence': (
         {
             'id': "depot-demande",
             'title': "Dépôt de la demande",
@@ -892,7 +892,7 @@ EventConfigs = {
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "", 'title': "Récépissé d'introduction de demande"},
+                {'id': "pic_recepisse_depot_demande.odt", 'title': "Récépissé d'introduction de demande"},
             ),
             'eventType': ('Products.urban.interfaces.IDepositEvent',),
         },
@@ -900,21 +900,24 @@ EventConfigs = {
             'id': "evaluation-incidences",
             'title': "Evaluation des incidences environnementales",
             'eventDateLabel': "",
+            'TALCondition': "python: licence.getFolderCategory() != 'dic'",
             'activatedFields': (),
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
+            'podTemplates': (),
         },
         {
             'id': "transmis-fic",
             'title': "Transmis de la demande au FIC",
             'deadLineDelay': 10,
             'eventDateLabel': "Date de transmis",
+            'TALCondition': "python: licence.getFolderCategory() != 'dic'",
             'activatedFields': (),
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "", 'title': "Transmis au FIC"},
-                {'id': "",
+                {'id': "pic_transmis_demande_fic.odt", 'title': "Transmis au FIC"},
+                {'id': "pic_information_demandeur.odt",
                  'title': "Transmis aux demandeurs",
                  'context_variables': [
                      {
@@ -930,11 +933,12 @@ EventConfigs = {
             'id': "premier-dossier-incomplet",
             'title': "Premier dossier incomplet",
             'eventDateLabel': "",
+            'TALCondition': "python: licence.getFolderCategory() != 'dic' and licence.getAuthority() == 'college'",
             'activatedFields': (),
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "",
+                {'id': "pic-dossier-incomplet-demandeur.odt",
                  'title': "Dossier incomplet (lettre aux demandeurs)",
                  'context_variables': [
                      {
@@ -950,9 +954,10 @@ EventConfigs = {
             'id': "recepisse-complement",
             'title': "Récépissé d'un complément",
             'activatedFields': (),
+            'TALCondition': "python: licence.getFolderCategory() != 'dic' and licence.getAuthority() == 'college'",
             'isKeyEvent': False,
             'podTemplates': (
-                {'id': "",
+                {'id': "pic_recepisse_complements_demande.odt",
                  'title': "Récépissé d'un complément",
                  'context_variables': [
                      {
@@ -968,11 +973,12 @@ EventConfigs = {
             'id': "dossier-irrecevable",
             'title': "Dossier irrecevable",
             'activatedFields': (),
+            'TALCondition': "python: licence.getAuthority() == 'college'",
             'deadLineDelay': 0,
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "", 'title': "Transmis de l'irrecevabilité aux demandeurs",
+                {'id': "pic-demande-irrecevable.odt", 'title': "Transmis de l'irrecevabilité aux demandeurs",
                  'context_variables': [
                      {
                          'name': 'publipostage',
@@ -985,6 +991,7 @@ EventConfigs = {
             'id': "dossier-complet-recevable",
             'title': "Dossier complet et recevable",
             'activatedFields': (),
+            'TALCondition': "python: licence.getAuthority() == 'college'",
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (),
@@ -994,15 +1001,16 @@ EventConfigs = {
             'id': "enquete-publique",
             'title': "Enquête publique",
             'activatedFields': ('investigationStart', 'investigationEnd', 'explanationEndSDate',),
+            'TALCondition': "python: licence.getFolderCategory() != 'dic'",
             'deadLineDelay': 15,
             'specialFunctionName': "Rechercher les propriétaires situés dans un rayon de 50m",
             'specialFunctionUrl': "addInvestigationPO",
             'podTemplates': (
-                {'id': "env1-enq-avis.odt", 'title': "Avis d'enquête publique"},
-                {'id': "env1-enq-recommandes.odt", 'title': "Recommandé aux propriétaires (étiquette Poste)"},
-                {'id': "env1-enq-transmis-FT.odt", 'title': "PV enquête publique au FIC"},
-                {'id': "env1-enq-transmis-college.odt", 'title': "Transmis de l'avis d'enquête aux propriétaires"},
-                {'id': "env1-enq-ordre-mission.odt", 'title': "Ordre de mission"}
+                {'id': "pic-enq-avis.odt", 'title': "Avis d'enquête publique"},
+                {'id': "pic-enq-recommandes.odt", 'title': "Recommandé aux propriétaires (étiquette Poste)"},
+                {'id': "pic-enq-transmis-FT.odt", 'title': "PV enquête publique au FIC"},
+                {'id': "pic-enq-transmis-college.odt", 'title': "Transmis de l'avis d'enquête aux propriétaires"},
+                {'id': "pic-enq-ordre-mission.odt", 'title': "Ordre de mission"}
             ),
             'eventType': ('Products.urban.interfaces.IInquiryEvent',),
             'eventPortalType': 'UrbanEventInquiry',
@@ -1012,7 +1020,7 @@ EventConfigs = {
             'title': "*** Demande d'avis CONFIG ***",
             'activatedFields': (),
             'TALCondition': "python: False",
-            'podTemplates': ({'id': "env3-avis.odt", 'title': "Courrier de demande d'avis"},),
+            'podTemplates': ({'id': "pic-avis.odt", 'title': "Courrier de demande d'avis"},),
             'eventType': ('Products.urban.interfaces.IOpinionRequestEvent',),
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
@@ -1059,33 +1067,99 @@ EventConfigs = {
             'eventPortalType': 'UrbanEventOpinionRequest',
         },
         {
-            'id': "plans-modificatifs",
+            'id': "demande-plans-modificatifs",
             'title': "Demande de plans modificatifs",
             'activatedFields': ('transmitDate',),
-            'deadLineDelay': 15,
+            'TALCondition': "python: licence.getFolderCategory() != 'dic' and licence.getAuthority() == 'college'",
             'eventType': ('Products.urban.interfaces.IAcknowledgmentEvent',),
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "pi_demande_plans_modificatifs.odt",
-                 'title': "Demande de plans modificatifs"},
+                {'id': "pic_demande_plans_modificatifs.odt",
+                 'title': "Demande de plans modificatifs",
+                 'context_variables': [
+                     {
+                         'name': 'publipostage',
+                         'value': 'demandeurs'
+                     }
+                 ]
+                },
             ),
         },
         {
             'id': "reception-plans-modificatifs",
             'title': "Réception de plans modificatifs",
-            'activatedFields': (),
-            'deadLineDelay': 15,
+            'activatedFields': ('transmitDate',),
+            'TALCondition': "python: licence.getFolderCategory() != 'dic' and licence.getAuthority() == 'college'",
             'eventDateLabel': "Date de réception des plans modificatifs",
             'eventType': ('Products.urban.interfaces.IModificationDepositEvent',),
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (
-                {'id': "",
-                 'title': "Réception des plans modificatifs"},
+                {'id': "pic_recepisse_depot_demande-plans-modificatifs.odt",
+                 'title': "Récépissé des plans modificatifs",
+                 'context_variables': [
+                     {
+                         'name': 'publipostage',
+                         'value': 'demandeurs'
+                     }
+                 ]},
             ),
         },
-
+        {
+            'id': "delivrance-du-permis-octroi-ou-refus-codt",
+            'title': "Délivrance du permis (octroi ou refus)",
+            'activatedFields': ('decisionDate', 'decision', 'transmitDate',),
+            'deadLineDelay': 80,
+            'eventDateLabel': "Date de notification",
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+                {'id': "pic_transmis_decision_demandeur.odt",
+                 'title': "Transmis de la décision du Collège aux demandeurs",
+                 'context_variables': [
+                     {
+                         'name': 'publipostage',
+                         'value': 'demandeurs'
+                     }
+                 ]},
+                {'id': "pic_transmis_decision_dgo3.odt", 'title': "Transmis de la décision du Collège au FIC"},
+                {'id': "pic_transmis_decision_dgo4.odt", 'title': "Transmis de la décision du Collège aux communes limitrophes"},
+                {'id': "pic_transmis_decision_dgo6.odt",
+                 'title': "Transmis de la décision du Collège à l'Observatoire du Commerce"},
+            ),
+            'eventType': ('Products.urban.interfaces.ITheLicenceEvent',),
+            'eventPortalType': 'UrbanEventCollege',
+        },
+        {
+            'id': "recours-contre-decision",
+            'title': "Recours contre la décision",
+            'activatedFields': ['receiptDate', 'recourseDecision',
+                                'recourseDecisionDisplayDate'],
+            'TALCondition': "python: licence.getFolderCategory() != 'dic' ",
+            'deadLineDelay': 20,
+            'eventDateLabel': "Date de notification",
+            'eventType': ('Products.urban.interfaces.IRecourseEvent',),
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+                {'id': "pic_attestation_affichage_recours.odt",
+                 'title': "Transmis décision recours"},
+            ),
+        },
+        {
+            'id': "affichage-decision",
+            'title': "Affichage de la décision",
+            'activatedFields': ['displayDateEnd',],
+            'TALCondition': "python: licence.getAuthority() == 'college'",
+            'eventDateLabel': "Date d'affichage",
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+                {'id': "pic_affichage_decision.odt", 'title': "Affiche travaux"},
+            ),
+            'eventType': ('Products.urban.interfaces.IDisplayingTheDecisionEvent',),
+        },
     ),
     'codt_notaryletter': (
         {

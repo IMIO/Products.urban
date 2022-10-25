@@ -391,6 +391,17 @@ default_values = {
             {'id': "attestation_archi", 'title': u"Attestation de l'architecte (annexe 21) en 2 exemplaires"},
             {'id': "attestation_ordre_archi", 'title': u"Attestation de l'architecte soumis au visa du conseil de l'ordre (annexe 22) en 2 exemplaires"},
         ],
+        'foldercategories': [
+            'UrbanVocabularyTerm',
+            {'id': "dic", 'title': u"Déclaration d'implantation commerciale"},
+            {'id': "pic", 'title': u"Permis d'implantation commerciale"},
+            {'id': "inc", 'title': u"Inconnu"},
+        ],
+        'authority': [
+            'UrbanVocabularyTerm',
+            {'id': 'fic', 'title': u"Fonctionnaire des Implantations Commerciales"},
+            {'id': "college", 'title': u"Collège"},
+        ],
     },
     'CODT_UniqueLicence': {
         'folderdelays': [
