@@ -125,7 +125,7 @@ class Couple(BaseContent, Applicant, BrowserDefaultMixin):
         """
            Generate the title...
         """
-        return "%s %s-%s %s et %s" % (self.getPersonTitle(short=True), self.getCouplePerson1Name(), self.getCouplePerson2Name(), self.getCouplePerson1Firstname(), self.getCouplePerson2Firstname())
+        return "%s %s %s %s et %s" % (self.getPersonTitle(short=True), self.getCouplePerson1Name(), self.getCouplePerson1Firstname(), self.getCouplePerson2Name(), self.getCouplePerson2Firstname())
 
     def _getNameSignaletic(self, short, linebyline, reverse=False, invertnames=False):
         title = self.getPersonTitleValue(short, False, reverse).decode('utf8')
@@ -134,9 +134,9 @@ class Couple(BaseContent, Applicant, BrowserDefaultMixin):
         lastNamePerson2 = self.getCouplePerson2Name().decode('utf-8')
         firstNamePerson2 = self.getCouplePerson2Firstname().decode('utf-8')
         namedefined = lastNamePerson1 or firstNamePerson1 or lastNamePerson2 or firstNamePerson2
-        names = u'%s-%s %s et %s' % (lastNamePerson1, lastNamePerson2, firstNamePerson1, firstNamePerson2)
+        names = u'%s %s et %s %s' % (lastNamePerson1, firstNamePerson1, lastNamePerson2, firstNamePerson2)
         if invertnames:
-            names = u'%s et %s %s-%s' % (firstNamePerson1, firstNamePerson2, lastNamePerson1, lastNamePerson2)
+            names = u'%s %s et %s %s %s' % (firstNamePerson1, lastNamePerson1, firstNamePerson2, lastNamePerson2)
         names = names.strip()
         if namedefined: namepart = names
         nameSignaletic = u'%s %s' % (title, namepart)
