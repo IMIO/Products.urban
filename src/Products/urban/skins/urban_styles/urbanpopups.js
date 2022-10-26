@@ -41,4 +41,8 @@ jQuery(function($){
     $('#inspection_other_followup a').prepOverlay({
        subtype: 'ajax',
     });
+    // Inspection report other followup
+    $('.link-overlay-urban-annex').prepOverlay({
+       subtype: 'ajax',
+    });
 });

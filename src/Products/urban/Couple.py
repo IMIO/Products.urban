@@ -22,7 +22,7 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.urban.config import *
 
-# import cgi
+import cgi
 
 ##code-section module-header #fill in your manual code here
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary

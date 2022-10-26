@@ -147,4 +147,12 @@
         handler=".update_240.add_applicant_couple_type"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Migrate flooding levels"
+        description="urban upgrade step"
+        source="1003"
+        destination="1004"
+        handler=".update_240.migrate_flooding_level"
+        profile="Products.urban:default" />
+
 </configure>
