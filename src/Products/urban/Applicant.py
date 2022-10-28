@@ -277,7 +277,7 @@ class Applicant(BaseContent, Contact, BrowserDefaultMixin):
 
     def _getNameSignaletic(self, short, linebyline, reverse=False, invertnames=False):
         title = self.getPersonTitleValue(short, linebyline, reverse)
-        name1 = self.getName1().decode('utf-8')
+        name1 = self.getName1().decode('utf-8').upper()
         name2 = self.getName2().decode('utf-8')
         namedefined = name1 or name2
         names = u'%s %s' % (name1, name2)
