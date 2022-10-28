@@ -125,7 +125,7 @@ class Couple(BaseContent, Applicant, BrowserDefaultMixin):
         """
            Generate the title...
         """
-        return "%s %s %s %s et %s" % (self.getPersonTitle(short=True), self.getCouplePerson1Name(), self.getCouplePerson1Firstname(), self.getCouplePerson2Name(), self.getCouplePerson2Firstname())
+        return "%s %s %s et %s %s" % (self.getPersonTitle(short=True), self.getCouplePerson1Name(), self.getCouplePerson1Firstname(), self.getCouplePerson2Name(), self.getCouplePerson2Firstname())
 
     def _getNameSignaletic(self, short, linebyline, reverse=False, invertnames=False):
         title = self.getPersonTitleValue(short, False, reverse).decode('utf8')
