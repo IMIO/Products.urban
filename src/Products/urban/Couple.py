@@ -129,9 +129,9 @@ class Couple(BaseContent, Applicant, BrowserDefaultMixin):
 
     def _getNameSignaletic(self, short, linebyline, reverse=False, invertnames=False):
         title = self.getPersonTitleValue(short, False, reverse).decode('utf8')
-        lastNamePerson1 = self.getCouplePerson1Name().decode('utf-8').upper()
+        lastNamePerson1 = self.getCouplePerson1Name().decode('utf-8')
         firstNamePerson1 = self.getCouplePerson1Firstname().decode('utf-8')
-        lastNamePerson2 = self.getCouplePerson2Name().decode('utf-8').upper()
+        lastNamePerson2 = self.getCouplePerson2Name().decode('utf-8')
         firstNamePerson2 = self.getCouplePerson2Firstname().decode('utf-8')
         namedefined = lastNamePerson1 or firstNamePerson1 or lastNamePerson2 or firstNamePerson2
         names = u'%s %s et %s %s' % (lastNamePerson1, firstNamePerson1, lastNamePerson2, firstNamePerson2)
