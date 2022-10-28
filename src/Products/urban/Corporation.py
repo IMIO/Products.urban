@@ -160,7 +160,7 @@ class Corporation(BaseContent, Applicant, BrowserDefaultMixin):
         title = self.getPersonTitleValue(short, False, reverse).decode('utf8')
         legalForm = self.getLegalForm().decode('utf8')
         denomination = self.getDenomination().decode('utf8')
-        lastName = self.getName1().decode('utf-8').upper()
+        lastName = self.getName1().decode('utf-8')
         firstName = self.getName2().decode('utf-8')
         personRole = self.getPersonRole().decode('utf8')
         nameSignaletic = u'{} {}'.format(legalForm, denomination)
