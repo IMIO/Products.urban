@@ -18,6 +18,7 @@
  <permission>urban: Add UrbanEventInspectionReport</permission>
  <permission>urban: Add UrbanEventOpinionRequest</permission>
  <permission>List folder contents</permission>
+ <permission>Manage properties</permission>
  <state state_id="creation" title="creation">
   <exit-transition transition_id="send_to_prosecutor"/>
   <permission-map name="ATContentTypes: Add File" acquired="False">
@@ -56,6 +57,11 @@
    <permission-role>Reader</permission-role>
   </permission-map>
   <permission-map name="Modify portal content" acquired="False">
+   <permission-role>Contributor</permission-role>
+   <permission-role>Editor</permission-role>
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Manage properties" acquired="False">
    <permission-role>Contributor</permission-role>
    <permission-role>Editor</permission-role>
    <permission-role>Manager</permission-role>
@@ -167,6 +173,11 @@
    <permission-role>Editor</permission-role>
    <permission-role>Manager</permission-role>
   </permission-map>
+  <permission-map name="Manage properties" acquired="False">
+   <permission-role>Contributor</permission-role>
+   <permission-role>Editor</permission-role>
+   <permission-role>Manager</permission-role>
+  </permission-map>
   <permission-map name="View" acquired="False">
    <permission-role>Contributor</permission-role>
    <permission-role>Editor</permission-role>
@@ -269,6 +280,11 @@
    <permission-role>Reader</permission-role>
   </permission-map>
   <permission-map name="Modify portal content" acquired="False">
+   <permission-role>Contributor</permission-role>
+   <permission-role>Editor</permission-role>
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Manage properties" acquired="False">
    <permission-role>Contributor</permission-role>
    <permission-role>Editor</permission-role>
    <permission-role>Manager</permission-role>
@@ -379,6 +395,11 @@
    <permission-role>Editor</permission-role>
    <permission-role>Manager</permission-role>
   </permission-map>
+  <permission-map name="Manage properties" acquired="False">
+   <permission-role>Contributor</permission-role>
+   <permission-role>Editor</permission-role>
+   <permission-role>Manager</permission-role>
+  </permission-map>
   <permission-map name="View" acquired="False">
    <permission-role>Contributor</permission-role>
    <permission-role>Editor</permission-role>
@@ -481,6 +502,11 @@
    <permission-role>Reader</permission-role>
   </permission-map>
   <permission-map name="Modify portal content" acquired="False">
+   <permission-role>Contributor</permission-role>
+   <permission-role>Editor</permission-role>
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Manage properties" acquired="False">
    <permission-role>Contributor</permission-role>
    <permission-role>Editor</permission-role>
    <permission-role>Manager</permission-role>

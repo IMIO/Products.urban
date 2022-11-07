@@ -13,6 +13,7 @@
  <permission>Add portal content</permission>
  <permission>Modify view template</permission>
  <permission>Access contents information</permission>
+ <permission>Manage properties</permission>
  <state state_id="creation"
         title="creation"
         i18n:attributes="title">
@@ -120,6 +121,11 @@
    <permission-role>Contributor</permission-role>
    <permission-role>Manager</permission-role>
   </permission-map>
+  <permission-map name="Manage properties" acquired="False">
+   <permission-role>Contributor</permission-role>
+   <permission-role>Editor</permission-role>
+   <permission-role>Manager</permission-role>
+  </permission-map>
  </state>
  <state state_id="administrative_answer"
         title="administrative_answer"
@@ -175,6 +181,11 @@
    <permission-role>Contributor</permission-role>
    <permission-role>Manager</permission-role>
   </permission-map>
+  <permission-map name="Manage properties" acquired="False">
+   <permission-role>Contributor</permission-role>
+   <permission-role>Editor</permission-role>
+   <permission-role>Manager</permission-role>
+  </permission-map>
  </state>
  <state state_id="ended"
         title="ended"
@@ -226,6 +237,11 @@
    <permission-role>Reader</permission-role>
    <permission-role>Editor</permission-role>
    <permission-role>Contributor</permission-role>
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Manage properties" acquired="False">
+   <permission-role>Contributor</permission-role>
+   <permission-role>Editor</permission-role>
    <permission-role>Manager</permission-role>
   </permission-map>
  </state>
