@@ -494,6 +494,10 @@ class ICollegeOpinionTransmitToSPWEvent(Interface):
     __doc__ = _("""ICollegeOpinionTransmitToSPWEvent type marker interface""")
 
 
+class ICollegeOpinionEvent(Interface):
+    __doc__ = _("""ICollegeOpinionEvent type marker interface""")
+
+
 class IDecisionProjectFromSPWEvent(Interface):
     __doc__ = _("""IDecisionProjectFromSPWEvent type marker interface""")
 
@@ -622,6 +626,10 @@ class ISuspensionEvent(Interface):
     __doc__ = _("""ISuspensionEvent type marker interface""")
 
 
+class ISettlementEvent(Interface):
+    __doc__ = _("""ISettlementEvent type marker interface""")
+
+
 class IUrbanBase(Interface):
     """Marker interface for .Base.UrbanBase
     """
@@ -660,6 +668,7 @@ class IContactFolder(Interface):
 class IUrbanDoc(Interface):
     """Marker interface for generated document.
     """
+
 
 # [DX] TO DELETE > 2.5 [DX]
 class ILicencePortionOut(Interface):
@@ -774,3 +783,7 @@ class IGlobalSuspensionPeriod(Interface):
 
 class IFacetedCollection(Interface):
     """ Adapts an object into a faceted collection """
+
+
+class IUrbanWarningCondition(Interface):
+    """ Adapts a licence into a warning message """

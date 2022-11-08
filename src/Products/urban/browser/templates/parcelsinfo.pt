@@ -2,13 +2,14 @@
 
 <tal:block define="tmpcapakeys request/capakey|nothing; capakeys python: hasattr(tmpcapakeys, 'isalpha') and [tmpcapakeys,] or tmpcapakeys" repeat="capakey capakeys">
 
-<div tal:define="parcel python: view.get_parcel(capakey);
+<div i18n:domain="urban"
+     tal:define="parcel python: view.get_parcel(capakey);
                  normalizeString nocall:context/@@plone/normalizeString;
 				 wtool context/portal_workflow">
       <dl class="collapsible expandedOnLoad" tal:condition="parcel">
         <dt class="collapsibleHeader" tal:content="python:parcel.display()">name</dt>
         <dd class="collapsibleContent">
-        <table i18n:domain="urban" border=0>
+        <table border=0>
             <tr>
                 <td><b><u i18n:translate="urban_label_address">address:</u></b> </td>
             </tr>
@@ -39,33 +40,60 @@
                 </td>
             </tr>
         </table>
-        <table tal:define="brains python: view.licences_of_parcel(parcel)" class="listing" width=100% border=0 cellspacing=0>
-          <thead>
-             <tr>
-                <th><strong><span i18n:translate="urban_label_concerned_elements">Concerned elements</span> :</strong></th>
-             </tr>
-          </thead>
-          <!-- Display 'no results' -->
-          <tbody tal:condition="not: brains">
-             <tr>
-                <td i18n:domain="atcontenttypes" i18n:translate="description_no_items_in_topic" class="discreet">No result found.
-                </td>
-             </tr>
-          </tbody>
-          <!-- Display the results body -->
-          <tbody>
-             <tr tal:repeat="brain brains">
-                <td tal:define="oddrow repeat/brain/odd;
-                                obj python:brain.getObject();
-                                obj_wf_state obj/review_state|python: wtool.getInfoFor(obj, 'review_state', '');
-                                obj_wf_state_class python:'state-' + normalizeString(obj_wf_state);" tal:attributes="class python: oddrow and 'even' or 'odd'">
-                  <img src="#" tal:attributes="src brain/getIcon" />
-                  <a href="#" tal:content="brain/Title" tal:attributes="href brain/getPath;class obj_wf_state_class">Result title</a>
-                  <p class="discreet"><span tal:content="structure brain/Description">Result description</span></p>
-               </td>
-             </tr>
-          </tbody>
-        </table>
+
+       <tal:display define="displays python: view.get_related_licences_displays(capakey);
+                            licences python: displays[0];
+                            parcel_historic python: displays[1];">
+          <tal:no_result condition="python: not licences">
+             <h2 i18n:translate="">No related licences</h2>
+          </tal:no_result>
+          <tal:result condition="licences">
+             <h2 i18n:translate="">Related licences</h2>
+             <br />
+             <div tal:repeat="licence_info licences">
+                 <a class="link-overlay"
+                    tal:attributes="href python: licence_info['url']; class python: licence_info['class']"
+                    tal:content="python: licence_info['title']" i18n:translate="">lien vers les anciens permis</a>
+             </div>
+          </tal:result>
+   
+          <span tal:condition="parcel_historic">
+             <h2 i18n:translate="">History of the parcel and related licences</h2>
+               <table class="listing" class="listing" border="0" cellspacing="0">
+                   <tal:lines repeat="line_result parcel_historic">
+                   <tr tal:define="oddrow repeat/line_result/odd;"
+                       tal:attributes="class python: oddrow and 'even' or 'odd'">
+                       <tal:line repeat="parcel line_result">
+                           <td fcolor="#FF0000"
+                               tal:define="old python: getattr(parcel, 'old', None);
+                                           root python: getattr(parcel, 'level', None) == 0;
+                                           licences python: getattr(parcel, 'licences', []);
+                                           center python: False;
+                                           is_parcel python: hasattr(parcel, 'division')"
+                               tal:attributes="style python: root and 'background-color:yellow' or '';
+                                               class  python: center and 'center-parcel' or 'left-parcel';
+                                               colspan python: parcel.width">
+                               <div class="parcel-name">
+                                   <span tal:attributes="class python: not old and 'leaf-parcel' or ''"
+                                         tal:content="parcel/display"></span>
+                                   <span tal:condition="licences">:</span>
+                               </div>
+                           <tal:licences condition="licences">
+                               <div tal:repeat="licence licences" style="text-align: left; padding-left: 1.6em">
+                                   <a class="link-overlay"
+                                      tal:attributes="href python: licence['url']; class python: licence['class']"
+                                      tal:content="python: licence['title']" i18n:translate="">lien vers les anciens permis</a>
+                                   <p class="discreet"><span tal:content="structure python: licence['description']">Result description</span></p>
+                               </div>
+                           </tal:licences>
+                           </td>
+                       </tal:line>
+                   </tr>
+                   </tal:lines>
+               </table>
+             <br />
+          </span>
+          </tal:display>
         </dd>
       </dl>
 </div>

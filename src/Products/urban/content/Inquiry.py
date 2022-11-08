@@ -84,7 +84,7 @@ schema = Schema((
         ),
         default_content_type='text/html',
         default_method='getDefaultText',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
         schemata='urban_inquiry'
     ),
     DateTimeField(
@@ -104,7 +104,7 @@ schema = Schema((
         ),
         default_content_type='text/html',
         default_method='getDefaultText',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
         schemata='urban_inquiry'
     ),
     TextField(
@@ -115,7 +115,7 @@ schema = Schema((
         ),
         default_content_type='text/html',
         default_method='getDefaultText',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
         schemata='urban_inquiry'
     ),
     TextField(
@@ -126,13 +126,13 @@ schema = Schema((
         ),
         default_content_type='text/html',
         default_method='getDefaultText',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
         schemata='urban_inquiry'
     ),
     LinesField(
         name='solicitOpinionsTo',
         widget=Select2Widget(
-            label=_('urban_label_solicitOpinionsTo', default='Solicitopinionsto'),
+            label=_('urban_label_solicitOpinionsTo', default='Solicit opinion to'),
             multiple=True,
         ),
         schemata='urban_advices',

@@ -205,7 +205,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_location',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     LinesField(
         name='SDC',
@@ -227,7 +227,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_location',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     LinesField(
         name='township_guide',
@@ -250,7 +250,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_location',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     LinesField(
         name='regional_guide',
@@ -271,7 +271,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_location',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     StringField(
         name='patrimony',
@@ -340,7 +340,7 @@ schema = Schema((
         allowable_content_types=('text/html',),
         schemata='urban_patrimony',
         default_method='getDefaultText',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
         accessor="PatrimonyAnalysis",
     ),
     BooleanField(
@@ -392,7 +392,7 @@ schema = Schema((
         allowable_content_types=('text/html',),
         schemata='urban_patrimony',
         default_method='getDefaultText',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
         accessor="PatrimonyObservation",
     ),
     LinesField(
@@ -412,7 +412,7 @@ schema = Schema((
             label=_('urban_label_general_disposition', default='General_disposition'),
         ),
         schemata='urban_patrimony',
-        vocabulary=UrbanVocabulary('general_disposition', inUrbanConfig=False, with_empty_value=False),
+        vocabulary=UrbanVocabulary('general_disposition', inUrbanConfig=False, with_empty_value=True),
     ),
     BooleanField(
         name='financial_caution',
@@ -452,7 +452,7 @@ schema = Schema((
             label=_('urban_label_exemptFDArticleModifiedBp', default='Exemptfdarticlemodifiedbp'),
         ),
         schemata='urban_analysis',
-        vocabulary=UrbanVocabulary('exemptfdarticle', with_empty_value=False),
+        vocabulary=UrbanVocabulary('exemptfdarticle', with_empty_value=True),
         default_method='getDefaultValue',
     ),
     BooleanField(
@@ -639,8 +639,8 @@ def finalizeSchema(schema):
        Finalizes the type schema to alter some fields
     """
     schema.moveField('roadAdaptation', before='roadTechnicalAdvice')
-    schema.moveField('architects', after='workLocations')
-    schema.moveField('foldermanagers', after='architects')
+    schema.moveField('representativeContacts', after='workLocations')
+    schema.moveField('foldermanagers', after='representativeContacts')
     schema.moveField('workType', after='folderCategory')
     schema.moveField('financial_caution', after='workType')
     schema.moveField('parcellings', after='isInSubdivision')

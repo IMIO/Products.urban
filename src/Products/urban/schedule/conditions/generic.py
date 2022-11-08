@@ -414,6 +414,38 @@ class CollegeOpinionTransmitToSPWDoneCondition(Condition):
         return college_opinion_transmit_done
 
 
+class CollegeOpinionDoneCondition(Condition):
+    """
+    Licence 'college opinion (pre-decision)' event is closed.
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+
+        college_opinion_done = False
+        college_opinion_event = licence.getLastCollegeOpinion()
+        if college_opinion_event:
+            college_opinion_done = api.content.get_state(college_opinion_event) == 'closed'
+
+        return college_opinion_done
+
+
+class CollegeOpinionInProgressCondition(Condition):
+    """
+    Licence 'college opinion (pre-decision)' event is in progress, the opinion is written.
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+
+        college_opinion_done = False
+        college_opinion_event = licence.getLastCollegeOpinion()
+        if college_opinion_event:
+            college_opinion_done = api.content.get_state(college_opinion_event) == 'decision_in_progress'
+
+        return college_opinion_done
+
+
 class SPWProjectReceivedCondition(Condition):
     """
     Licence SPW projetc receipt event is closed.
@@ -516,7 +548,8 @@ class FDOpinionAsked(FDCondition):
     def evaluate(self):
         if not self.FD_event:
             return False
-        return api.content.get_state(self.FD_event) == 'waiting_opinion'
+        # 'closed' => case where the FD event is a college event
+        return api.content.get_state(self.FD_event) in ['waiting_opinion', 'closed']
 
 
 class FDOpinionReceived(FDCondition):
@@ -526,7 +559,8 @@ class FDOpinionReceived(FDCondition):
     def evaluate(self):
         if not self.FD_event:
             return False
-        return api.content.get_state(self.FD_event) == 'opinion_given'
+        # 'closed' => case where the FD event is a college event
+        return api.content.get_state(self.FD_event) in ['opinion_given', 'closed']
 
 
 class LicenceDecisionCollegeEventCreated(Condition):
@@ -622,6 +656,20 @@ class DecisionNotified(Condition):
         decision_event = licence.getLastLicenceNotification()
         if decision_event:
             return api.content.get_state(decision_event) == 'closed'
+        return False
+
+
+class DecisionWritten(Condition):
+    """
+    Environment Licence decision was notified
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+
+        decision_event = licence.getLastLicenceDelivery()
+        if decision_event:
+            return api.content.get_state(decision_event) == 'decision_in_progress'
         return False
 
 

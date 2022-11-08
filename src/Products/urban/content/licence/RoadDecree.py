@@ -7,6 +7,8 @@ from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 from zope.interface import implements
 
+from plone import api
+
 from Products.urban import UrbanMessage as _
 from Products.urban import interfaces
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
@@ -97,7 +99,7 @@ schema = Schema((
         ),
         schemata='urban_analysis',
         multiValued=1,
-        vocabulary=TownshipVocabulary('townships', with_empty_value=False),
+        vocabulary=TownshipVocabulary('townships', with_empty_value=True),
     ),
     StringField(
         name='decisional_delay',

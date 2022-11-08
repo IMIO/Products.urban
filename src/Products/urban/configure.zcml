@@ -198,6 +198,10 @@
     type=".interfaces.IEventTypeType"/>
 
   <interface
+    interface=".interfaces.ICollegeOpinionEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
     interface=".interfaces.ISimpleCollegeEvent"
     type=".interfaces.IEventTypeType"/>
 
@@ -283,6 +287,10 @@
 
   <interface
     interface=".interfaces.ISuspensionEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.ISettlementEvent"
     type=".interfaces.IEventTypeType"/>
 
   <adapter

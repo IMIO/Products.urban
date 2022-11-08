@@ -84,7 +84,13 @@ schema = Schema((
         widget=RichWidget(
             label=_('urban_label_claimingText', default='Claimingtext'),
         ),
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
+    ),
+    BooleanField(
+        name='wantDecisionCopy',
+        widget=BooleanWidget(
+            label=_('urban_label_Wantdecisioncopy', default='Wantdecisioncopy'),
+        ),
     ),
 ),
 )

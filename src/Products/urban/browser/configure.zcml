@@ -8,6 +8,7 @@
   <include package=".cron" />
   <include package=".licence" />
   <include package=".table" />
+  <include package=".warnings" />
   <include file="portlets.zcml" />
 
   <browser:resourceDirectory
@@ -453,7 +454,7 @@
   <browser:page
       name="refbrowser_popup"
       permission="zope2.Public"
-      for="Products.urban.interfaces.IContactFolder"
+      for="Products.ATContentTypes.interfaces.folder.IATBTreeFolder"
       class=".referencebrowser_popup.UrbanReferenceBrowserPopup"
   />
 

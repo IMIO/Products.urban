@@ -17,8 +17,36 @@
    <property name="visible">True</property>
   </object>
  </object>
+ <object name="user" meta_type="CMF Action Category">
+  <object name="Documentation" meta_type="CMF Action" insert-before="logout">
+   <property name="title">Documentation</property>
+   <property name="description"></property>
+   <property
+      name="url_expr">string:https://docs.imio.be/imio-doc/ia.urban/</property>
+   <property
+      name="link_target">https://docs.imio.be/imio-doc/ia.urban/</property>
+   <property name="icon_expr"></property>
+   <property name="available_expr"></property>
+   <property name="permissions">
+    <element value="View"/>
+   </property>
+   <property name="visible">True</property>
+  </object>
+ </object>
  <object name="object" meta_type="CMF Action Category">
   <property name="title"></property>
+  <object name="folderContents" meta_type="CMF Action" i18n:domain="plone">
+   <property name="title" i18n:translate="">Contents</property>
+   <property name="description" i18n:translate=""/>
+   <property name="url_expr">string:${globals_view/getCurrentFolderUrl}/folder_contents</property>
+   <property name="link_target"/>
+   <property name="icon_expr"/>
+   <property name="available_expr">object/displayContentsTab</property>
+   <property name="permissions">
+    <element value="Manage Site"/>
+   </property>
+   <property name="visible">True</property>
+  </object>
   <object name="urbanmap" meta_type="CMF Action" i18n:domain="urban">
    <property name="title" i18n:translate="">Map</property>
    <property name="description" i18n:translate=""></property>

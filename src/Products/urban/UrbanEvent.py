@@ -135,6 +135,16 @@ schema = Schema((
         vocabulary=UrbanVocabulary('decisions', inUrbanConfig=True),
         default_method='getDefaultValue',
     ),
+    StringField(
+        name='collegeOpinion',
+        widget=SelectionWidget(
+            label=_('urban_label_collegeOpinion', default='Collegeopinion'),
+        ),
+        enforceVocabulary=True,
+        optional=True,
+        vocabulary=UrbanVocabulary('collegeopinions', inUrbanConfig=True),
+        default_method='getDefaultValue',
+    ),
     TextField(
         name='decisionText',
         allowable_content_types=('text/html',),
@@ -143,7 +153,7 @@ schema = Schema((
         ),
         default_method='getDefaultText',
         default_content_type='text/html',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
         optional=True,
     ),
     DateTimeField(
@@ -203,7 +213,7 @@ schema = Schema((
         ),
         default_method='getDefaultText',
         default_content_type='text/html',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
         optional=True,
     ),
     TextField(
@@ -214,7 +224,7 @@ schema = Schema((
         ),
         default_method='getDefaultText',
         default_content_type='text/html',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
         optional=True,
     ),
     ReferenceField(
@@ -262,7 +272,7 @@ schema = Schema((
         ),
         default_method='getDefaultText',
         default_content_type='text/html',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
         optional=True,
         pm_text_field=True,
     ),
@@ -275,7 +285,7 @@ schema = Schema((
         ),
         default_method='getDefaultText',
         default_content_type='text/html',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
         optional=True,
         pm_text_field=True,
     ),
@@ -287,7 +297,7 @@ schema = Schema((
         ),
         default_method='getDefaultText',
         default_content_type='text/html',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
         optional=True,
         pm_text_field=True,
     ),
@@ -299,7 +309,7 @@ schema = Schema((
         ),
         default_method='getDefaultText',
         default_content_type='text/html',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
         optional= True,
     ),
     TextField(
@@ -310,7 +320,7 @@ schema = Schema((
         ),
         default_method='getDefaultText',
         default_content_type='text/html',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
         optional=True,
     ),
     DateTimeField(
@@ -396,7 +406,7 @@ schema = Schema((
         ),
         default_method='getDefaultText',
         default_content_type='text/html',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
         optional=True,
     ),
     TextField(
@@ -407,7 +417,7 @@ schema = Schema((
         ),
         default_method='getDefaultText',
         default_content_type='text/html',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
         optional=True,
     ),
     DateTimeField(

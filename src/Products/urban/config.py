@@ -208,7 +208,7 @@ URBAN_TYPES = [
     'MiscDemand', 'Division',
     'NotaryLetter', 'CODT_NotaryLetter',
     'ProjectMeeting', 'ExplosivesPossession',
-    'RoadDecree',
+    # 'RoadDecree',
     'Inspection', 'Ticket'
 ]
 
@@ -271,6 +271,7 @@ LICENCE_FINAL_STATES = [
     'abandoned',
     'inacceptable',
     'need_parceloutlicence',
+    'ended',
 ]
 
 VOCABULARY_TYPES = [

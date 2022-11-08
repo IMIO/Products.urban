@@ -857,11 +857,16 @@ default_values = {
         ],
     },
     'shared_vocabularies': {
-
         'decisions': [
+            'UrbanVocabularyTerm', URBAN_TYPES,
+            {'id': "favorable", 'title': u"Octroi", 'extraValue': "Recevable"},
+            {'id': "defavorable", 'title': u"Refus", 'extraValue': "Irrecevable"},
+        ],
+        'collegeopinions': [
             'UrbanVocabularyTerm', URBAN_TYPES,
             {'id': "favorable", 'title': u"Favorable", 'extraValue': "Recevable"},
             {'id': "defavorable", 'title': u"Défavorable", 'extraValue': "Irrecevable"},
+            {'id': "favorable-cond", 'title': u"Favorable conditionné à", 'extraValue': "Recevable sous conditions"},
         ],
 
         'foldertendencies': [
@@ -1863,9 +1868,9 @@ default_values = {
 
         'airportnoisezone': [
             'UrbanVocabularyTerm',
-            {'id': "zone-expo-a", 'title': u"Zone A au plan d'Exposition au bruit"},
+            {'id': "zone-expo-a", 'title': u"Zone A' au plan d'Exposition au bruit"},
             {'id': "zone-devel-a", 'title': u"Zone A au plan de Développement à Long Terme"},
-            {'id': "zone-expo-b", 'title': u"Zone B au plan d'Exposition au bruit"},
+            {'id': "zone-expo-b", 'title': u"Zone B' au plan d'Exposition au bruit"},
             {'id': "zone-devel-b", 'title': u"Zone B au plan de Développement à Long Terme"},
         ],
 

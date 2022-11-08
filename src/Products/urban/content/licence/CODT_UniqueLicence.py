@@ -85,7 +85,7 @@ schema = Schema((
             label=_('urban_label_authority', default='Authority'),
         ),
         schemata='urban_description',
-        vocabulary=UrbanVocabulary('authority', inUrbanConfig=True, with_empty_value=False),
+        vocabulary=UrbanVocabulary('authority', inUrbanConfig=True, with_empty_value=True),
         default_method='getDefaultValue',
     ),
     StringField(
@@ -96,7 +96,7 @@ schema = Schema((
         ),
         enforceVocabulary=True,
         schemata='urban_description',
-        vocabulary=UrbanVocabulary('foldertendencies', with_empty_value=False),
+        vocabulary=UrbanVocabulary('foldertendencies', with_empty_value=True),
         default_method='getDefaultValue',
     ),
     LinesField(
@@ -137,7 +137,7 @@ schema = Schema((
         allowable_content_types=('text/html',),
         schemata='urban_environment',
         default_method='getDefaultText',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     ReferenceField(
         name='minimumLegalConditions',
@@ -175,7 +175,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_analysis',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     TextField(
         name='claimsSynthesis',
@@ -186,7 +186,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_environment',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     TextField(
         name='environmentTechnicalAdviceAfterInquiry',
@@ -198,7 +198,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_environment',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     TextField(
         name='commentsOnSPWOpinion',
@@ -210,7 +210,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_environment',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     TextField(
         name='conclusions',
@@ -221,7 +221,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_environment',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     TextField(
         name='environmentTechnicalRemarks',
@@ -233,18 +233,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_environment',
-        default_output_type='text/html',
-    ),
-    StringField(
-        name='road_decree_reference',
-        widget=UrbanBackReferenceWidget(
-            label=_('road_decree_reference', default='road_decree_reference'),
-            portal_types=['RoadDecree'],
-        ),
-        required=False,
-        schemata='urban_description',
-        default_method='getDefaultText',
-        validators=('isReference',),
+        default_output_type='text/x-html-safe',
     ),
 ),
 )

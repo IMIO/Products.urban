@@ -139,7 +139,7 @@ schema = Schema((
             restrict_browsing_to_startup_directory=1,
             popup_name='contact_reference_popup',
             wild_card_search=True,
-            label=_('urban_label_notaryContact', default='Notarycontact'),
+            label=_('urban_label_notaryContact', default='Notary(ies)'),
         ),
         required=False,
         schemata='urban_description',
@@ -259,7 +259,7 @@ schema = Schema((
             label=_('urban_label_annoncedDelay', default='Annonceddelay'),
         ),
         schemata='urban_description',
-        vocabulary=UrbanVocabulary('folderdelays', vocType='UrbanDelay', with_empty_value=False),
+        vocabulary=UrbanVocabulary('folderdelays', vocType='UrbanDelay', with_empty_value=True),
         default_method='getDefaultValue',
     ),
     TextField(
@@ -271,7 +271,7 @@ schema = Schema((
         schemata='urban_description',
         default_method='getDefaultText',
         default_content_type='text/html',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     LinesField(
         name='SCT',
@@ -293,7 +293,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_location',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     LinesField(
         name='SDC',
@@ -315,7 +315,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_location',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     LinesField(
         name='township_guide',
@@ -338,7 +338,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_location',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     LinesField(
         name='regional_guide',
@@ -359,7 +359,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_location',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     TextField(
         name='patrimony_analysis',
@@ -370,7 +370,7 @@ schema = Schema((
         allowable_content_types=('text/html',),
         schemata='urban_patrimony',
         default_method='getDefaultText',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
         accessor="PatrimonyAnalysis",
     ),
     BooleanField(
@@ -422,7 +422,7 @@ schema = Schema((
         allowable_content_types=('text/html',),
         schemata='urban_patrimony',
         default_method='getDefaultText',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
         accessor="PatrimonyObservation",
     ),
     LinesField(
@@ -442,7 +442,7 @@ schema = Schema((
             label=_('urban_label_general_disposition', default='General_disposition'),
         ),
         schemata='urban_patrimony',
-        vocabulary=UrbanVocabulary('general_disposition', inUrbanConfig=False, with_empty_value=False),
+        vocabulary=UrbanVocabulary('general_disposition', inUrbanConfig=False, with_empty_value=True),
     ),
     StringField(
         name='patrimony',
@@ -788,6 +788,7 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     schema.moveField('protectedBuildingDetails', after='protectedBuilding')
     schema.moveField('patrimony_analysis', after='protectedBuildingDetails')
     schema.moveField('patrimony_observation', after='patrimony_analysis')
+    schema['referenceDGATLP'].widget.label = _('urban_label_notaryReference')
     return schema
 
 finalizeSchema(UrbanCertificateBase_schema)

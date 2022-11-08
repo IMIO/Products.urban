@@ -24,11 +24,14 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.urban.config import *
 from Products.urban import UrbanMessage as _
 from Products.urban.content.Inquiry import Inquiry
+from Products.urban.utils import setOptionalAttributes
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
 
 ##code-section module-header #fill in your manual code here
 from zope.i18n import translate
+
+optional_fields = ['divergence', 'divergenceDetails']
 
 full_inquiry_slave_fields = (
     {
@@ -145,13 +148,14 @@ schema = Schema((
         ),
         default_content_type='text/html',
         default_method='getDefaultText',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
         schemata='urban_inquiry'
     ),
 ),
 )
 
 ##code-section after-local-schema #fill in your manual code here
+setOptionalAttributes(schema, optional_fields)
 ##/code-section after-local-schema
 
 CODT_Inquiry_schema = BaseSchema.copy() + \

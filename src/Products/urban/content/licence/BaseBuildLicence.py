@@ -164,7 +164,7 @@ schema = Schema((
             label=_('urban_label_annoncedDelay', default='Annonceddelay'),
         ),
         schemata='urban_analysis',
-        vocabulary=UrbanVocabulary('folderdelays', vocType='UrbanDelay', with_empty_value=False),
+        vocabulary=UrbanVocabulary('folderdelays', vocType='UrbanDelay', with_empty_value=True),
         default_method='getDefaultValue',
     ),
     TextField(
@@ -176,7 +176,7 @@ schema = Schema((
         schemata='urban_analysis',
         default_method='getDefaultText',
         default_content_type='text/html',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     BooleanField(
         name='townshipCouncilFolder',
@@ -222,7 +222,7 @@ schema = Schema((
         schemata='urban_peb',
         default_method='getDefaultText',
         default_content_type='text/html',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     BooleanField(
         name='pebStudy',
@@ -323,7 +323,7 @@ schema = Schema((
         default_method='getDefaultText',
         schemata='urban_road',
         default_content_type='text/html',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     TextField(
         name='roadMiscDescription',
@@ -334,7 +334,7 @@ schema = Schema((
         default_method='getDefaultText',
         schemata='urban_road',
         default_content_type='text/html',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     BooleanField(
         name='roadDgrneUnderground',
@@ -354,7 +354,7 @@ schema = Schema((
         default_method='getDefaultText',
         schemata='urban_road',
         default_content_type='text/html',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     BooleanField(
         name='locationDgrneUnderground',
@@ -374,7 +374,7 @@ schema = Schema((
         default_method='getDefaultText',
         schemata='urban_analysis',
         default_content_type='text/html',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     TextField(
         name='locationTechnicalConditions',
@@ -385,7 +385,7 @@ schema = Schema((
         default_method='getDefaultText',
         schemata='urban_analysis',
         default_content_type='text/html',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     TextField(
         name='pebTechnicalAdvice',
@@ -396,7 +396,7 @@ schema = Schema((
         default_method='getDefaultText',
         schemata='urban_peb',
         default_content_type='text/html',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     ReferenceField(
         name='architects',
@@ -411,13 +411,35 @@ schema = Schema((
             startup_directory="urban/architects",
             wild_card_search=True,
             restrict_browsing_to_startup_directory=1,
-            label=_('urban_label_architects', default='Architects'),
+            label=_('urban_label_architects', default='Architect(s)'),
             popup_name='contact_reference_popup',
+            visible=False
         ),
         allowed_types=('Architect',),
         schemata='urban_description',
         multiValued=1,
         relationship='licenceArchitects',
+    ),
+    ReferenceField(
+        name='representativeContacts',
+        widget=ReferenceBrowserWidget(
+            force_close_on_insert=1,
+            allow_search=1,
+            only_for_review_states='enabled',
+            allow_browse=0,
+            show_indexes=1,
+            available_indexes={'Title': 'Nom'},
+            startup_directory='urban',
+            wild_card_search=True,
+            show_results_without_query=True,
+            restrict_browsing_to_startup_directory=False,
+            label=_('urban_label_representative_contacts', default='RepresentativeContacts'),
+            popup_name='contact_reference_popup',
+        ),
+        schemata='urban_description',
+        multiValued=1,
+        relationship='basebuildlicenceRepresentativeContacts',
+        allowed_types=('Geometrician', 'Architect',),
     ),
     LinesField(
         name='procedureChoice',
@@ -449,7 +471,7 @@ schema = Schema((
             label=_('urban_label_exemptFDArticle', default='Exemptfdarticle'),
         ),
         schemata='urban_analysis',
-        vocabulary=UrbanVocabulary('exemptfdarticle', with_empty_value=False),
+        vocabulary=UrbanVocabulary('exemptfdarticle', with_empty_value=True),
         default_method='getDefaultValue',
     ),
     BooleanField(
@@ -470,7 +492,7 @@ schema = Schema((
             ),
         ),
         schemata='urban_analysis',
-        vocabulary=UrbanVocabulary('folderdelays', vocType='UrbanDelay', with_empty_value=False),
+        vocabulary=UrbanVocabulary('folderdelays', vocType='UrbanDelay', with_empty_value=True),
         default_method='getDefaultValue',
     ),
     TextField(
@@ -485,7 +507,7 @@ schema = Schema((
         schemata='urban_analysis',
         default_method='getDefaultText',
         default_content_type='text/html',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     BooleanField(
         name='water',
@@ -577,11 +599,23 @@ class BaseBuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin)
     # Manually created methods
 
     security.declarePublic('getRepresentatives')
-
     def getRepresentatives(self):
         """
         """
-        return self.getArchitects()
+        return self.getRepresentativeContacts()
+
+    security.declarePublic('getArchitects')
+    def getArchitects(self):
+        """
+        """
+        return [contact for contact in self.getRepresentativeContacts() if contact.portal_type == 'Architect']
+
+    security.declarePublic('getGeometricians')
+    def getGeometricians(self):
+        """
+        """
+        return [contact for contact in self.getRepresentativeContacts() if contact.portal_type == 'Geometrician']
+
 
     security.declarePublic('listRequirementsFromFD')
 
@@ -756,8 +790,8 @@ def finalizeSchema(schema):
        Finalizes the type schema to alter some fields
     """
     schema.moveField('roadAdaptation', before='roadTechnicalAdvice')
-    schema.moveField('architects', after='workLocations')
-    schema.moveField('foldermanagers', after='architects')
+    schema.moveField('representativeContacts', after='workLocations')
+    schema.moveField('foldermanagers', after='representativeContacts')
     schema.moveField('workType', after='folderCategory')
     schema.moveField('parcellings', after='isInSubdivision')
     schema.moveField('description', after='usage')

@@ -2,6 +2,7 @@
 <object name="portal_workflow" meta_type="Plone Workflow Tool">
  <object name="activation_workflow" meta_type="Workflow"/>
  <object name="urban_licence_workflow" meta_type="Workflow"/>
+ <object name="env_licence_workflow" meta_type="Workflow"/>
  <object name="codt_buildlicence_workflow" meta_type="Workflow"/>
  <object name="college_event_workflow" meta_type="Workflow"/>
  <object name="urbandivision_workflow" meta_type="Workflow"/>
@@ -58,16 +59,16 @@
      <bound-workflow workflow_id="activation_workflow" />
   </type>
   <type type_id="EnvClassOne">
-     <bound-workflow workflow_id="urban_licence_workflow" />
+     <bound-workflow workflow_id="env_licence_workflow" />
   </type>
   <type type_id="EnvClassBordering">
-     <bound-workflow workflow_id="urban_licence_workflow" />
+     <bound-workflow workflow_id="env_licence_workflow" />
   </type>
   <type type_id="EnvClassThree">
      <bound-workflow workflow_id="urban_licence_workflow" />
   </type>
   <type type_id="EnvClassTwo">
-     <bound-workflow workflow_id="urban_licence_workflow" />
+     <bound-workflow workflow_id="env_licence_workflow" />
   </type>
   <type type_id="EnvironmentBase">
      <bound-workflow workflow_id="urban_licence_workflow" />
@@ -187,14 +188,8 @@
 <type type_id="CorporationPlaintiff">
   <bound-workflow workflow_id="activation_workflow" />
 </type>
-<type type_id="EnvClassOne">
-  <bound-workflow workflow_id="urban_licence_workflow" />
-</type>
-<type type_id="EnvClassTwo">
-  <bound-workflow workflow_id="urban_licence_workflow" />
-</type>
-<type type_id="EnvClassThree">
-  <bound-workflow workflow_id="urban_licence_workflow" />
+<type type_id="CorporationTenant">
+  <bound-workflow workflow_id="activation_workflow" />
 </type>
 <type type_id="Geometrician">
    <bound-workflow workflow_id="activation_workflow" />

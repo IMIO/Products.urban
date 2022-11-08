@@ -9,7 +9,7 @@ from plone import api
 from plone.app.textfield import RichTextValue
 from plone.app.uuid.utils import uuidToObject
 
-from Products.urban.interfaces import IGenericLicence
+from Products.urban.interfaces import IGenericLicence, IBaseBuildLicence
 import logging
 import re
 
@@ -233,6 +233,7 @@ def update_POD_expressions(context):
             replace.replace(search_expr, replace_expr, is_regex=row["is_regex"])
     logger.info("upgrade done!")
 
+
 def add_all_applicants_in_title(context):
     """
     Adding all applicants or proprietaries or notaries in title
@@ -246,6 +247,7 @@ def add_all_applicants_in_title(context):
         licence.updateTitle()
     logger.info("upgrade done!")
 
+
 def add_trails_and_watercourses_to_global_vocabularies(context):
     """
     """
@@ -254,6 +256,7 @@ def add_trails_and_watercourses_to_global_vocabularies(context):
     portal_setup = api.portal.get_tool('portal_setup')
     portal_setup.runImportStepFromProfile('profile-Products.urban:extra', 'urban-update-vocabularies')
     logger.info("upgrade done!")
+
 
 def fix_PODTemplates_empty_filename(context):
     """
@@ -277,6 +280,7 @@ def fix_PODTemplates_empty_filename(context):
         if template.odt_file.contentType == 'applications/odt':
             template.odt_file.contentType = 'application/vnd.oasis.opendocument.text'
     logger.info("upgrade done!")
+
 
 def migrate_notaryletter_specificfeatures_texts(context):
     """
@@ -302,6 +306,7 @@ def migrate_notaryletter_specificfeatures_texts(context):
                 value.reindexObject()
     logger.info("upgrade done!")
 
+
 def migrate_add_tax_other_option(context):
     """
     Add 'other' tax vocabulary value for all licence type config
@@ -316,3 +321,233 @@ def migrate_add_tax_other_option(context):
             licence_config.tax.invokeFactory('UrbanVocabularyTerm', id='other', title="Autre")
 
     logger.info("migration step done!")
+
+
+def migrate_move_basebuildlicence_architects_and_geometricians_to_representative_contacts(context):
+    """
+    """
+    logger = logging.getLogger('urban: migrate migrate_move_basebuildlicence_architects_and_geometricians_to_representative_contacts')
+    logger.info("starting migration step")
+    catalog = api.portal.get_tool('portal_catalog')
+    licence_brains = catalog(object_provides=IBaseBuildLicence.__identifier__)
+    licences = [li.getObject() for li in licence_brains]
+    for licence in licences:
+        architects = licence.getField('architects')
+        if architects:
+            for architect in architects.get(licence):
+                print("{} : move architect {} in representativeContacts".format(licence.getReference(), architect.name1.encode("utf-8")))
+                rc_list = licence.getRepresentativeContacts()
+                rc_list.append(architect)
+                licence.setRepresentativeContacts(rc_list)
+                licence.setArchitects([])
+        geometricians = licence.getField('geometricians')
+        if geometricians:
+            for geometrician in geometricians.get(licence):
+                print("{} : move geometrician {} in representativeContacts".format(licence.getReference(), geometrician.name1.encode("utf-8")))
+                rc_list = licence.getRepresentativeContacts()
+                rc_list.append(geometrician)
+                licence.setRepresentativeContacts(rc_list)
+                licence.setGeometricians([])
+
+    logger.info("migration step done!")
+
+
+def reinstall_registry_and_vocabularies(context):
+    """
+    Add collegeopinions vocabulary for all licence type config
+    Reinstall plone registry with GIG coring settings.
+    """
+    logger = logging.getLogger('urban: reinstall_registry_and_vocabularies')
+    logger.info("starting migration step")
+    portal_setup = api.portal.get_tool('portal_setup')
+    portal_setup.runImportStepFromProfile('profile-Products.urban:extra', 'urban-update-vocabularies')
+    portal_setup.runImportStepFromProfile('profile-Products.urban:default', 'plone.app.registry')
+    logger.info("migration step done!")
+
+def activate_divergence_field(context):
+    """
+    Enable divergence and divergenceDetails as they are now optionnals.
+    """
+    logger = logging.getLogger('urban: activate divergence')
+    logger.info("starting migration step")
+    portal_urban = api.portal.get_tool('portal_urban')
+    for config in portal_urban.objectValues('LicenceConfig'):
+        if 'divergence' in config.listUsedAttributes() and \
+           'divergence' not in config.getUsedAttributes():
+            to_set = ('divergence', 'divergenceDetails')
+            config.setUsedAttributes(config.getUsedAttributes() + to_set)
+    logger.info("migration step done!")
+
+def remove_icons_from_transitions(context):
+    """
+    launch import step to remove transitions icons and show them in letters
+    """
+    logger = logging.getLogger('urban: remove icons from transitions')
+    logger.info("starting upgrade steps")
+    setup_tool = api.portal.get_tool('portal_setup')
+    setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'update-workflow-rolemap')
+    logger.info("upgrade done!")
+
+def add_and_active_corporation_tenant(context):
+    """
+    add corporation tenant content type and activate it
+    """
+    logger = logging.getLogger('urban: add and activate corporation tenant')
+    logger.info("starting upgrade step")
+    setup_tool = api.portal.get_tool('portal_setup')
+    setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'typeinfo')
+    setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'workflow')
+    logger.info("upgrade step done!")
+
+def addDocumentationLinkToUserPortalActionAndHideViewlet(context):
+    """
+    add documentation link to useractions and hide contact viewlet in footer
+    """
+    logger = logging.getLogger('urban: add documentation link to user portal_actions and hide contact viewlet in footer')
+    logger.info("starting upgrade steps")
+    setup_tool = api.portal.get_tool('portal_setup')
+    setup_tool.runImportStepFromProfile('profile-Products.urban:default', 'actions')
+    setup_tool.runImportStepFromProfile('profile-Products.urban:default', 'viewlets')
+    logger.info("upgrade step done!")
+
+def add_deposit_date_column_to_dashboards(context):
+    """
+    Activate deposit date column on all licence dashboards.
+    """
+    logger = logging.getLogger('urban: add deposit date to dashboards')
+    logger.info("starting upgrade steps")
+    site = api.portal.get()
+
+    old_fields = ('sortable_title', 'CreationDate', 'folder_manager', 'actions', 'select_row')
+    new_fields = ('sortable_title', 'CreationDate', 'getDepositDate', 'folder_manager', 'actions', 'select_row')
+
+    collection = site.urban.collection_all_licences
+    if collection.customViewFields == old_fields:
+        collection.setCustomViewFields(new_fields)
+
+    for folder in site.urban.objectValues('ATFolder'):
+        collection = folder.objectIds() and folder.objectValues()[0]
+        if not collection or folder.id in ['patrimonycertificates', 'inspections']:
+            continue
+        if collection.portal_type == 'DashboardCollection':
+            if collection.customViewFields == old_fields:
+                collection.setCustomViewFields(new_fields)
+    logger.info("upgrade step done!")
+
+
+def replace_mailing_loop_proprietaries(context):
+    """
+    Mailing typo: replace proprietaire by proprietaires (with 's')
+    """
+    logger = logging.getLogger('urban: replace mailing loop proprietaries')
+    logger.info("starting upgrade steps")
+    catalog = api.portal.get_tool('portal_catalog')
+    template_brains = catalog(object_provides=IConfigurablePODTemplate.__identifier__)
+    # get brains instead of all templates because brains are small
+    for brain in template_brains:
+        template = brain.getObject()
+        # get the template we need
+        if template.context_variables:
+            # false if template.context_variables is None or empty
+            new_value = []
+            for line in template.context_variables:
+                if line['value'] == 'proprietaire':
+                    logger.info("migrated template : {} ".format(template))
+                    line['value'] = 'proprietaires'
+                new_value.append(line)
+            template.context_variables = new_value
+    logger.info("upgrade done!")
+
+
+def set_default_warnings(context):
+    """
+    Set parcels warning on portal_urban warnings field.
+    """
+    logger = logging.getLogger('urban: replace mailing loop proprietaries')
+    logger.info("starting upgrade steps")
+    portal_urban = api.portal.get_tool('portal_urban')
+    portal_urban.setWarnings(
+        ({
+            'condition': 'urban.warnings.define_parcels',
+            'level': 'warning',
+            'message': 'Veuillez renseigner la ou les parcelle(s) concern\xc3\xa9e(s).'
+        },)
+    )
+    logger.info("upgrade done!")
+
+
+def update_tickets_title(context):
+    """
+    Recompute ticket title.
+    """
+    logger = logging.getLogger('urban: replace mailing loop proprietaries')
+    logger.info("starting upgrade steps")
+    catalog = api.portal.get_tool('portal_catalog')
+    brains = catalog(portal_type='Ticket')
+    for brain in brains:
+        ticket = brain.getObject()
+        ticket.updateTitle()
+    logger.info("upgrade done!")
+
+
+def update_env_licences_schedule(context):
+    """
+    Install default schedule config for env licences and adapts default events.
+    """
+    logger = logging.getLogger('urban: Add schedule for env licences 1 & 2')
+    logger.info("starting upgrade steps")
+    portal_urban = api.portal.get_tool('portal_urban')
+
+    # reinstall env licences workflows
+    portal_setup = api.portal.get_tool('portal_setup')
+    portal_setup.runImportStepFromProfile('profile-Products.urban:preinstall', 'workflow')
+    portal_setup.runImportStepFromProfile('profile-Products.urban:preinstall', 'update-workflow-rolemap')
+
+    # install schedule configs
+    portal_setup.runImportStepFromProfile('profile-Products.urban:extra', 'urban-update-schedule')
+    # reinstall event configs
+    portal_setup.runImportStepFromProfile('profile-Products.urban:extra', 'urban-updateAllUrbanTemplates')
+    catalog = api.portal.get_tool('portal_catalog')
+
+    # tag complement deposit event config with IMissingPartTransmitToSPWEvent
+    # marker interface
+    for licence_type in ['envclasstwo', 'envclassone']:
+        config = getattr(portal_urban, licence_type).eventconfigs
+        event_cfg = getattr(config, 'recepisse-complement')
+        new_marker = 'Products.urban.interfaces.IMissingPartTransmitToSPWEvent'
+        if new_marker not in event_cfg.getEventType():
+            event_cfg.eventType = tuple(list(event_cfg.getEventType()) + [new_marker])
+
+    # reindex everything
+    catalog.clearFindAndRebuild()
+
+    logger.info("upgrade done!")
+
+
+def hide_folder_contents_action(context):
+    """
+    """
+    logger = logging.getLogger('urban: hide folder_contents action')
+    logger.info("starting upgrade steps")
+    setup_tool = api.portal.get_tool('portal_setup')
+    setup_tool.runImportStepFromProfile('profile-Products.urban:default', 'actions')
+    logger.info("upgrade step done!")
+
+def add_default_LO_server_port(context):
+    """
+    """
+    logger = logging.getLogger('urban: add second default LO port')
+    logger.info("starting upgrade steps")
+    old_port = api.portal.get_registry_record(
+        'collective.documentgenerator.browser.controlpanel.IDocumentGeneratorControlPanelSchema.oo_port'
+    )
+    new_port = api.portal.get_registry_record(
+        'collective.documentgenerator.browser.controlpanel.IDocumentGeneratorControlPanelSchema.oo_port_list'
+    )
+    if "2002" not in new_port or unicode(old_port) not in new_port:
+        new_port = u"{};2002".format(old_port)
+        api.portal.set_registry_record(
+            'collective.documentgenerator.browser.controlpanel.IDocumentGeneratorControlPanelSchema.oo_port_list',
+            new_port
+        )
+    logger.info("upgrade step done!")

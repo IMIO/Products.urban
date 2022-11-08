@@ -20,4 +20,4 @@ class GigCoringView(BrowserView):
         gig_session = services.gig.new_session()
         gig_session.insert_parcels(capakeys)
         gig_session.close()
-        return self.request.RESPONSE.redirect('https://carto.luxembourg.be/')
+        return self.request.RESPONSE.redirect('https://www.gigwal.org/')

@@ -49,20 +49,20 @@ schema = Schema((
             allow_browse=1,
             show_indexes=1,
             show_index_selector=1,
-            available_indexes={'Title':'Nom'},
+            available_indexes={'Title': 'Nom'},
             startup_directory="urban/geometricians",
             wild_card_search=True,
             restrict_browsing_to_startup_directory=1,
-            label=_('urban_label_geometricians', default='Geometricians'),
+            label=_('urban_label_geometricians', default='Geometrician(s)'),
             popup_name='contact_reference_popup',
+            visible=False,
         ),
-        required=True,
+        required=False,
         schemata='urban_description',
         multiValued=1,
         relationship='parcelOutGeometricians',
         allowed_types=('Geometrician',),
     ),
-
 ),
 )
 
@@ -80,7 +80,6 @@ del CODT_ParcelOutLicence_schema['pebType']
 del CODT_ParcelOutLicence_schema['pebDetails']
 del CODT_ParcelOutLicence_schema['pebStudy']
 del CODT_ParcelOutLicence_schema['pebTechnicalAdvice']
-del CODT_ParcelOutLicence_schema['architects']
 del CODT_ParcelOutLicence_schema['usage']
 ##/code-section after-schema
 
@@ -105,11 +104,12 @@ class CODT_ParcelOutLicence(BaseFolder, CODT_BaseBuildLicence, BrowserDefaultMix
 
     # Manually created methods
 
-    security.declarePublic('getRepresentatives')
-    def getRepresentatives(self):
+    # Backward compatibility for pod template
+    security.declarePublic('getGeometricians')
+    def getGeometricians(self):
         """
         """
-        return self.getGeometricians()
+        return self.getRepresentativeContacts()
 
     security.declarePublic('generateReference')
     def generateReference(self):
@@ -193,7 +193,7 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     """
     schema.moveField('isModification', after='folderCategory')
     schema.moveField('description', after='impactStudy')
-    schema.moveField('geometricians', after='workLocations')
+    schema.moveField('representativeContacts', after='workLocations')
     return schema
 
 finalizeSchema(CODT_ParcelOutLicence_schema)

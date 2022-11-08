@@ -45,6 +45,7 @@ optional_fields = [
     'roadTechnicalAdvice', 'locationTechnicalAdvice', 'additionalLegalConditions',
     'businessOldLocation', 'applicationReasons', 'validityDelay',
     'environmentTechnicalRemarks', 'rubricsDetails', 'referenceFT'
+    'divergences', 'divergenceDetails'
 ]
 
 slave_fields_natura2000 = (
@@ -108,7 +109,7 @@ schema = Schema((
         allowable_content_types=('text/html',),
         schemata='urban_environment',
         default_method='getDefaultText',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     ReferenceField(
         name='minimumLegalConditions',
@@ -153,7 +154,7 @@ schema = Schema((
         widget=DataGridWidget(
             columns={'number': Column("Number"), 'street': ReferenceColumn("Street", surf_site=False, object_provides=('Products.urban.interfaces.IStreet', 'Products.urban.interfaces.ILocality',))},
             helper_js=('datagridwidget.js', 'datagridautocomplete.js'),
-            label=_('urban_label_businessOldLocation', default='Businessoldlocation'),
+            label=_('urban_label_businessOldLocation', default='Old business location'),
         ),
         allow_oddeven=True,
         columns=('number', 'street'),
@@ -168,7 +169,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_description',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     StringField(
         name='procedureChoice',
@@ -189,7 +190,7 @@ schema = Schema((
             label=_('urban_label_annoncedDelay', default='Annonceddelay'),
         ),
         schemata='urban_description',
-        vocabulary=UrbanVocabulary('folderdelays', vocType='UrbanDelay', with_empty_value=False),
+        vocabulary=UrbanVocabulary('folderdelays', vocType='UrbanDelay', with_empty_value=True),
         default_method='getDefaultValue',
     ),
     TextField(
@@ -201,7 +202,7 @@ schema = Schema((
         schemata='urban_analysis',
         default_method='getDefaultText',
         default_content_type='text/html',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     BooleanField(
         name='natura2000',
@@ -229,7 +230,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_description',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     IntegerField(
         name='validityDelay',
@@ -248,7 +249,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_road',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     TextField(
         name='locationTechnicalAdvice',
@@ -259,7 +260,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_location',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
     TextField(
         name='description',
@@ -270,7 +271,7 @@ schema = Schema((
         allowable_content_types=('text/html',),
         schemata='urban_description',
         default_method='getDefaultText',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
         accessor="Description",
     ),
     TextField(
@@ -283,7 +284,7 @@ schema = Schema((
         default_content_type='text/html',
         default_method='getDefaultText',
         schemata='urban_environment',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
 
 ),
@@ -310,7 +311,7 @@ for field in EnvironmentBase_schema.filterFields(isMetadata=False):
 
 # change translation of some fields
 EnvironmentBase_schema['referenceDGATLP'].widget.label = _('urban_label_referenceDGO3')
-EnvironmentBase_schema['workLocations'].widget.label = _('urban_label_situation')
+EnvironmentBase_schema['workLocations'].widget.label = _('urban_label_situation', default='Situation')
 
 ##/code-section after-schema
 
@@ -372,6 +373,9 @@ class EnvironmentBase(BaseFolder, GenericLicence, CODT_UniqueLicenceInquiry, Bro
 
     def getLastCollegeReport(self):
         return self.getLastEvent(interfaces.ICollegeReportEvent)
+
+    def getLastCollegeOpinion(self):
+        return self.getLastEvent(interfaces.ICollegeOpinionEvent)
 
     def getLastLicenceNotification(self):
         return self.getLastEvent(interfaces.ILicenceNotificationEvent)

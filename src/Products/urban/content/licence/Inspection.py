@@ -73,7 +73,7 @@ schema = Schema((
         ),
         enforceVocabulary=True,
         schemata='urban_description',
-        vocabulary=UrbanVocabulary('inspectioncontexts', with_empty_value=False),
+        vocabulary=UrbanVocabulary('inspectioncontexts', with_empty_value=True),
         default_method='getDefaultValue',
     ),
     TextField(
@@ -85,7 +85,7 @@ schema = Schema((
         allowable_content_types=('text/html',),
         schemata='urban_inspection',
         default_method='getDefaultText',
-        default_output_type='text/html',
+        default_output_type='text/x-html-safe',
     ),
 ),
 )

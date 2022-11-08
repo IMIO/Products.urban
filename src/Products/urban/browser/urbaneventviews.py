@@ -265,6 +265,7 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
             'outOfTime',
             'claimDate',
             'claimsText',
+            'wantDecisionCopy',
         ]
 
         titles_mapping = {'': ''}
@@ -290,10 +291,8 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
         else:
             reader = []
         try:
-            claimant_args = [row for row in reader if row['name2'] or row['name2'] or row['society']][1:]
+            claimant_args = [row for row in reader if row['name1'] or row['name2'] or row['society']][1:]
         except csv.Error, error:
-            # remove invalid files
-            del interfaces.IAnnotations(self.context)['urban.claimants_to_import']
             return
 
         for claimant_arg in claimant_args:
@@ -301,10 +300,9 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
             # default values
             if not claimant_arg['claimType']:
                 claimant_arg['claimType'] = 'Écrite'
-            if not claimant_arg['hasPetition']:
-                claimant_arg['hasPetition'] = False
-            if not claimant_arg['outOfTime']:
-                claimant_arg['outOfTime'] = False
+            claimant_arg['hasPetition'] = bool(claimant_arg['hasPetition'])
+            claimant_arg['outOfTime'] = bool(claimant_arg['outOfTime'])
+            claimant_arg['wantDecisionCopy'] = bool(claimant_arg['wantDecisionCopy'])
             # mappings
             claimant_arg['personTitle'] = titles_mapping[claimant_arg['personTitle']]
             claimant_arg['country'] = country_mapping[claimant_arg['country']]
