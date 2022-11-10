@@ -969,9 +969,6 @@ msgstr "Demandeur(s)"
 msgid "applicants_history"
 msgstr "Demandeurs inactifs"
 
-msgid "label_colname_applicant_data"
-msgstr "Informations"
-
 msgid "applicationreasons_folder_title"
 msgstr "Motifs de la demande"
 
@@ -1946,6 +1943,9 @@ msgstr "Singulier"
 
 msgid "natura_2000_folder_title"
 msgstr "Périmètre Natura 2000"
+
+msgid "no_address_found_on_licence"
+msgstr "aucune adresse définie sur le permis ${reference}"
 
 msgid "no_applicant_defined"
 msgstr "Aucun demandeur?"
@@ -4316,7 +4316,7 @@ msgstr "Référence FD (TLPE)"
 msgid "urban_label_referenceDGO3"
 msgstr "Référence ARNE"
 
-#: ../content/licence/CODT_CommercialLicence.py:95
+#: ../content/licence/CODT_CommercialLicence.py:116
 msgid "urban_label_referenceDGO6"
 msgstr "Référence SPW Economie, Emploi, Recherche"
 

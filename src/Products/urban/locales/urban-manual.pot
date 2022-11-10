@@ -609,6 +609,9 @@ msgstr ""
 msgid "no_parcels_found_on_licence"
 msgstr ""
 
+msgid "no_address_found_on_licence"
+msgstr ""
+
 msgid "title_encoding_error_label"
 msgstr ""
 
