@@ -55,7 +55,8 @@ class AcknowledgmentLimitDate(StartDate):
                 ICalculationDelay,
                 'urban.schedule.delay.annonced_delay'
             )
-            limit_date = ack and ack.getEventDate() + annonced_delay.calculate_delay(with_modified_blueprints=False)
+            annonced_delay = annonced_delay and annonced_delay.calculate_delay(with_modified_blueprints=False) or 0
+            limit_date = ack and ack.getEventDate() + annonced_delay
         return limit_date
 
 
