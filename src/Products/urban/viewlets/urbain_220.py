@@ -182,17 +182,19 @@ class UrbainXMLExport(BrowserView):
                 parcels = licence.getParcels()
                 if check(self, parcels, u'no_parcels_found_on_licence', {'reference': str(licence.getReference())}):
                     xml.append('      <Doc_Afd>%s</Doc_Afd>' % parcels[0].getDivisionCode())
-                street_info = getAdapter(licence, IToUrbain220Street)
-                number = street_info.street_number
-                street_name = street_info.street_name
-                street_code = street_info.street_code
-                if check(self, street_code, u'no_street_with_code_found_on_licence', {'reference':
-                    str(licence.getReference())}):
-                    xml.append('      <E_220_straatcode>%s</E_220_straatcode>' % str(street_code))
-                    if check(self, street_name, u'no_street_name_found_on_licence', {'reference': str(licence.getReference())}):
-                        xml.append('      <E_220_straatnaam>%s</E_220_straatnaam>' % str(street_name).decode('iso-8859-1').encode('iso-8859-1'))
-                if number:
-                    xml.append('      <E_220_huisnr>%s</E_220_huisnr>' % str(number))
+                 
+                if check(self, licence.getWorkLocations(), u'no address found on licence', {'reference': str(licence.getReference())}):
+                    street_info = getAdapter(licence, IToUrbain220Street)
+                    number = street_info.street_number
+                    street_name = street_info.street_name
+                    street_code = street_info.street_code
+                    if check(self, street_code, u'no_street_with_code_found_on_licence', {'reference':
+                        str(licence.getReference())}):
+                        xml.append('      <E_220_straatcode>%s</E_220_straatcode>' % str(street_code))
+                        if check(self, street_name, u'no_street_name_found_on_licence', {'reference': str(licence.getReference())}):
+                            xml.append('      <E_220_straatnaam>%s</E_220_straatnaam>' % str(street_name).decode('iso-8859-1').encode('iso-8859-1'))
+                    if number:
+                        xml.append('      <E_220_huisnr>%s</E_220_huisnr>' % str(number))
                 worktype = licence.getWorkType() and licence.getWorkType()[0] or ''
                 work_types = UrbanVocabulary('folderbuildworktypes').getAllVocTerms(licence)
                 worktype_map = {}
