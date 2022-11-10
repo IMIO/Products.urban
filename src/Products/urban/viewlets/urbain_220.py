@@ -182,8 +182,8 @@ class UrbainXMLExport(BrowserView):
                 parcels = licence.getParcels()
                 if check(self, parcels, u'no_parcels_found_on_licence', {'reference': str(licence.getReference())}):
                     xml.append('      <Doc_Afd>%s</Doc_Afd>' % parcels[0].getDivisionCode())
-                 
-                if check(self, licence.getWorkLocations(), u'no address found on licence', {'reference': str(licence.getReference())}):
+
+                if check(self, licence.getWorkLocations(), u'no_address_found_on_licence', {'reference': str(licence.getReference())}):
                     street_info = getAdapter(licence, IToUrbain220Street)
                     number = street_info.street_number
                     street_name = street_info.street_name
