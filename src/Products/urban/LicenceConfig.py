@@ -63,7 +63,7 @@ schema = Schema((
         widget=InAndOutWidget(
             description="Select the optional fields you want to use. Multiple selection or deselection when clicking with CTRL",
             description_msgid="urban_descr_usedAttributes",
-            size=10,
+            size='30',
             label='Usedattributes',
             label_msgid='urban_label_usedAttributes',
             i18n_domain='urban',
@@ -112,7 +112,7 @@ schema = Schema((
         name='textDefaultValues',
         allow_oddeven=True,
         widget=DataGridWidget(
-            columns={'fieldname': SelectColumn('FieldName', 'listTextFields'), 'text': TextAreaColumn('Text', rows=6, cols=60)},
+            columns={'fieldname': SelectColumn('FieldName', 'listTextFields'), 'text': TextAreaColumn('Text', rows=15, cols=60)},
             label='Textdefaultvalues',
             label_msgid='urban_label_textDefaultValues',
             i18n_domain='urban',
