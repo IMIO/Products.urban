@@ -112,7 +112,7 @@ schema = Schema((
         name='textDefaultValues',
         allow_oddeven=True,
         widget=DataGridWidget(
-            columns={'fieldname': SelectColumn('FieldName', 'listTextFields'), 'text': TextAreaColumn('Text', rows=15, cols=60)},
+            columns={'fieldname': SelectColumn('FieldName', 'listTextFields'), 'text': TextAreaColumn('Text', rows=30, cols=60)},
             label='Textdefaultvalues',
             label_msgid='urban_label_textDefaultValues',
             i18n_domain='urban',
