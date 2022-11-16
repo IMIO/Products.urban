@@ -57,6 +57,7 @@ schema = Schema((
             label_msgid='urban_label_ploneUserId',
             i18n_domain='urban',
         ),
+        required=True,
     ),
     LinesField(
         name='manageableLicences',
