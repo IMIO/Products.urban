@@ -12,7 +12,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.exc import NoSuchTableError
 from sqlalchemy.orm import scoped_session
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy.pool import NullPool
+from sqlalchemy.pool import QueuePool
 
 from zope.component import getAdapter
 from zope.interface import implements
@@ -73,7 +73,7 @@ class SQLService(object):
             ),
             echo=True,
             connect_args=connect_args,
-            poolclass=NullPool,
+            poolclass=QueuePool,
         )
 
         return engine
