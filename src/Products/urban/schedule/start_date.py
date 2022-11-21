@@ -47,7 +47,8 @@ class AcknowledgmentLimitDate(StartDate):
         licence = self.task_container
         if hasattr(licence, 'getHasModifiedBlueprints') and not licence.getHasModifiedBlueprints():
             deposit = licence.getLastDeposit()
-            limit_date = deposit and deposit.getEventDate() + 20 or None
+            date = deposit and deposit.getEventDate()
+            limit_date = date and date and + 20 or None
         else:
             ack = licence.getLastAcknowledgment(state='closed')
             annonced_delay = queryMultiAdapter(
