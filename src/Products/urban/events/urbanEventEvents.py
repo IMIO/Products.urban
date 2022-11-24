@@ -13,6 +13,7 @@ from zope.event import notify
 from zope.lifecycleevent import ObjectModifiedEvent
 
 from plone import api
+from plone.memoize.request import cache
 
 
 def setDefaultValuesEvent(urbanevent, event):
@@ -96,6 +97,7 @@ def updateDecisionDate(urban_event, event):
         licence.reindexObject(['getDecisionDate'])
 
 
+@cache(get_key=lambda method, urban_event, event: urban_event.UID(), get_request='urban_event.REQUEST')
 def notifyLicence(urban_event, event):
     """
     Notify the licence of changes so schedule events triggers.
