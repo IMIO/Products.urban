@@ -1157,17 +1157,10 @@ class UrbanDocGenerationEventHelperView(UrbanDocGenerationHelperView):
         """
           Return a specific title's UrbanEvent
         """
-        i = 0
-        found = False
-        licence = self.context.aq_parent
-        events = licence.getAllEvents()
-        event = None
-        while i < len(events) and not found:
-            if events[i].Title() == title:
-                found = True
-                event = events[i]
-            i = i + 1
-        return event
+        events = self.getAllEvents()
+        for event in events[::-1]:
+            if event.Title() == title:
+                return event
 
 
 class UrbanDocGenerationFacetedHelperView(ATDocumentGenerationHelperView):
