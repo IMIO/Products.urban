@@ -664,16 +664,10 @@ class UrbanDocGenerationLicenceHelperView(UrbanDocGenerationHelperView):
         """
           Return a specific title's UrbanEvent
         """
-        i = 0
-        found = False
-        events = self.context.getAllEvents()
-        event = None
-        while i < len(events) and not found:
-            if events[i].Title() == title:
-                found = True
-                event = events[i]
-            i = i + 1
-        return event
+        events = self.getAllEvents()
+        for event in events[::-1]:
+            if event.Title() == title:
+                return event
 
     def getExpirationDate(self, date=None, year=5):
         if not date:
