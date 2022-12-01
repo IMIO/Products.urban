@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from Products.Five import BrowserView
+from imio.schedule.interfaces import ICalculationDelay
 from imio.schedule.interfaces import IStartDate
 from plone import api
 from zope.component import queryMultiAdapter
@@ -56,15 +57,31 @@ class TaskDebugView(BrowserView):
         has_modified_blueprints = (
             hasattr(licence, "getHasModifiedBlueprints")
             and licence.getHasModifiedBlueprints()
+            or False
         )
+        ack = licence.getLastAcknowledgment(state="closed")
+        announced_delay = queryMultiAdapter(
+            (licence, self.context),
+            ICalculationDelay,
+            "urban.schedule.delay.announced_delay",
+        )
+        announced_delay = (
+            announced_delay
+            and announced_delay.calculate_delay(with_modified_blueprints=False)
+            or 0
+        )
+
         base.extend(
             [
                 ("adapter", adapter.__class__),
                 ("start date", adapter.start_date()),
-                ("task_config", adapter.task_config.absolute_url()),
+                ("task config", adapter.task_config.absolute_url()),
                 ("last deposit event", deposit.absolute_url() or ""),
                 ("last deposit date", deposit_date or ""),
-                ("Has modified blueprints", has_modified_blueprints),
+                ("has modified blueprints", has_modified_blueprints),
+                ("last acknowledgement event", ack and ack.absolute_url() or ""),
+                ("last acknowledgement date", ack and ack.getEventDate() or ""),
+                ("announced delay", announced_delay),
             ]
         )
         return base
