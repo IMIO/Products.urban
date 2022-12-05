@@ -54,6 +54,7 @@ class TaskDebugView(BrowserView):
         licence = adapter.task_container
         deposit = licence.getLastDeposit()
         deposit_date = deposit and deposit.getEventDate()
+        has_modified_blueprints_attr = hasattr(licence, "getHasModifiedBlueprints")
         has_modified_blueprints = (
             hasattr(licence, "getHasModifiedBlueprints")
             and licence.getHasModifiedBlueprints()
@@ -78,6 +79,7 @@ class TaskDebugView(BrowserView):
                 ("task config", adapter.task_config.absolute_url()),
                 ("last deposit event", deposit.absolute_url() or ""),
                 ("last deposit date", deposit_date or ""),
+                ("has modified blueprints attribute", has_modified_blueprints_attr),
                 ("has modified blueprints", has_modified_blueprints),
                 ("last acknowledgement event", ack and ack.absolute_url() or ""),
                 ("last acknowledgement date", ack and ack.getEventDate() or ""),
