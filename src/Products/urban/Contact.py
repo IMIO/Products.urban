@@ -54,7 +54,10 @@ class BelgianNationalRegValidator:
         if len(clean_value) != 11:
             return "Your National Register number must be 11 digits long !"
 
-        first_part = int(clean_value[0:9])
+        if clean_value.startswith('0'):
+            first_part = int('2{}'.format(clean_value[0:9]))
+        else:
+            first_part = int(clean_value[0:9])
         last_part = int(clean_value[9:11])
 
         #the two last digits is the result of 97 les the modulo by 97 of the 10 first digits
