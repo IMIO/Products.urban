@@ -45,6 +45,7 @@ import os
 import os.path
 from App.Common import package_home
 from plone.app.upgrade.utils import alias_module
+from plone.app.blob.content import ATBlob
 import Products.CMFPlone.interfaces
 from Products.Archetypes import listTypes
 from Products.Archetypes.atapi import *
@@ -244,3 +245,12 @@ for licence_type in URBAN_TYPES + ['UrbanCertificateBase']:
             'Products.urban.{}'.format(licence_type),
             getattr(content.licence, licence_type)
         )
+
+def check_id(self, id, **kwargs):
+    """
+    'photo' id is reserved for image field 'photo'.
+    """
+    if id == 'photo':
+        return True  # MUST return True if id is invalid !! (and None if valid)
+    if id in self.aq_parent.objectIds():
+       return True
