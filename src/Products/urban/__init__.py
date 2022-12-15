@@ -254,3 +254,5 @@ def check_id(self, id, **kwargs):
         return True  # MUST return True if id is invalid !! (and None if valid)
     if id in self.aq_parent.objectIds():
        return True
+
+ATBlob.check_id = check_id
