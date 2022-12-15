@@ -1146,6 +1146,13 @@ class GenericLicence(OrderedBaseFolder, UrbanBase, BrowserDefaultMixin):
 
     # Methods
 
+    def check_id(self, id, **kwargs):
+        """
+        'photo' id is reserved for image field 'photo'.
+        """
+        if id == 'photo':
+            return True  # MUST return True if id is invalid !! (and None if valid)
+
     security.declarePublic('getDefaultReference')
 
     def getDefaultReference(self):
