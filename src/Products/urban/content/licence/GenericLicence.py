@@ -1152,6 +1152,8 @@ class GenericLicence(OrderedBaseFolder, UrbanBase, BrowserDefaultMixin):
         """
         if id == 'photo':
             return True  # MUST return True if id is invalid !! (and None if valid)
+        if id in self.objectIds()
+            return True
 
     security.declarePublic('getDefaultReference')
 
