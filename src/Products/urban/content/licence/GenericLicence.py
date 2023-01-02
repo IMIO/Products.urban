@@ -1072,8 +1072,8 @@ schema = Schema((
 
     LinesField(
         name='watercourseCategories',
-        widget=MultiSelectionWidget(
-            size=3,
+        widget=MasterMultiSelectWidget(
+            format='checkbox',
             label=_('urban_label_watercourseCategories', default='WatercourseCategories'),
         ),
         schemata='urban_location',
