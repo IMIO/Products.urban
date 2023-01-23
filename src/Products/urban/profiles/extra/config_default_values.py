@@ -1712,7 +1712,6 @@ default_values = {
             {'id': "com", 'title': u"Communale"},
             {'id': "priv", 'title': u"Privée"},
             {'id': "reg", 'title': u"Régionale"},
-            {'id': "vic", 'title': u"Vicinale"},
         ],
 
         'folderprotectedbuildings': [
@@ -2059,13 +2058,14 @@ default_values = {
 
         'watercourses': [
             'UrbanVocabularyTerm',
-            {'id': "watercourses_expl", 'title': u"cours d'eau de la commune"},
-            {'id': "watercourses_expl2", 'title': u"autre cours d'eau de la commune"},
+            {'id': "watercourses_expl", 'title': u"traversé par un cours d'eau de la commune"},
+            {'id': "watercourses_expl2", 'title': u"longé par un cours d'eau de la commune"},
         ],
 
         'trails': [
             'UrbanVocabularyTerm',
-            {'id': "trail_expl", 'title': u"sentier ou chemin vicinal de la commune"},
+            {'id': "trail_expl", 'title': u"traversé par un sentier ou chemin communal"},
+            {'id': "trail_expl", 'title': u"longé par un sentier ou chemin communal"},
         ],
 
     },
