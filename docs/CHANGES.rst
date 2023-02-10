@@ -5,6 +5,8 @@ Changes
 2.5 (unreleased)
 ----------------
 
+- Add fields to legal aspect of generic licence [SUP-22944]
+  [jchandelle]
 
 - Update MailingPersistentDocumentGenerationView call with generated_doc_title param. [URB-1862]
   [jjaumotte]

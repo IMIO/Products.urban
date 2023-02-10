@@ -2068,6 +2068,12 @@ default_values = {
             {'id': "trail_expl", 'title': u"sentier ou chemin vicinal de la commune"},
         ],
 
+        'zoning': [
+            'UrbanVocabularyTerm',
+            {'id': 'zoning1', 'title': 'Zoning 1'},
+            {'id': 'zoning2', 'title': 'Zoning 2'},
+            {'id': 'zoning3', 'title': 'Zoning 3'},
+        ],
     },
     'Inspection': {
         'inspectioncontexts': [
