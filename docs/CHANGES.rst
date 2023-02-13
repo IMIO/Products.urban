@@ -5,6 +5,8 @@ Changes
 2.5 (unreleased)
 ----------------
 
+- Add national register number to corporation form [SUP-27165]
+  [jchandelle]
 
 - Update MailingPersistentDocumentGenerationView call with generated_doc_title param. [URB-1862]
   [jjaumotte]
