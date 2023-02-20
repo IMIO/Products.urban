@@ -27,12 +27,24 @@ from Products.urban.config import *
 ##code-section module-header #fill in your manual code here
 from Products.urban.utils import setOptionalAttributes
 from Products.urban.utils import setSchemataForInquiry
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 optional_fields = ['architects']
 ##/code-section module-header
 
 schema = Schema((
+
+    LinesField(
+        name='workType',
+        widget=MultiSelectionWidget(
+            label=_('urban_label_workType', default='Worktype'),
+        ),
+        schemata='urban_description',
+        multiValued=1,
+        vocabulary=UrbanVocabulary(path='folderbuildworktypes', sort_on='sortable_title'),
+        default_method='getDefaultValue',
+    ),
 
     ReferenceField(
         name='architects',
@@ -107,6 +119,22 @@ class MiscDemand(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
     def getLastTheLicence(self):
         return self.getLastEvent(interfaces.ITheLicenceEvent)
 
+    def getLastRecourse(self):
+        return self.getLastEvent(interfaces.IRecourseEvent)
+
+    def getProrogatedToDate(self, prorogation):
+        """
+          This method will calculate the 'prorogated to' date
+        """
+        lastTheLicenceDecisionDate = self.getLastTheLicence().getDecisionDate()
+        if not lastTheLicenceDecisionDate:
+            return ''
+        else:
+            #the prorogation gives one year more to the applicant
+            tool = getToolByName(self, 'portal_urban')
+            #relativedelta does not work with DateTime so use datetime
+            return tool.formatDate(lastTheLicenceDecisionDate.asdatetime() + relativedelta(years=+prorogation))
+
 
 registerType(MiscDemand, PROJECTNAME)
 # end of class MiscDemand
@@ -117,6 +145,7 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     """
        Finalizes the type schema to alter some fields
     """
+    schema.moveField('workType', after='folderCategory')
     schema.moveField('description', after='architects')
     schema['parcellings'].widget.label = _('urban_label_parceloutlicences')
     schema['isInSubdivision'].widget.label = _('urban_label_is_in_parceloutlicences')
