@@ -5,6 +5,8 @@ Changes
 2.5 (unreleased)
 ----------------
 
+- Migrate CWATUP field to CODT field [SUP-22150]
+  [jchandelle]
 
 - Update MailingPersistentDocumentGenerationView call with generated_doc_title param. [URB-1862]
   [jjaumotte]

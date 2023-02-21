@@ -435,6 +435,14 @@
         handler=".update_250.set_page_style_for_mailing_templates"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Migrate CWATUP field to CODT field"
+        description="Migrate CWATUP field to CODT field (SDC and township_guide)"
+        source="1126"
+        destination="1127"
+        handler=".update_250.migrate_cwatup_field_to_codt_field"
+        profile="Products.urban:default" />
+
 
     <!--gs:upgradeStep
         title="Add schedule config for env licences 1 and 2"
