@@ -5,6 +5,8 @@ Changes
 2.5 (unreleased)
 ----------------
 
+- Add external method for fixing corrupted description. [SUP-28740]
+  [jchandelle]
 
 - Update MailingPersistentDocumentGenerationView call with generated_doc_title param. [URB-1862]
   [jjaumotte]
