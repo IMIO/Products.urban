@@ -2065,7 +2065,7 @@ default_values = {
         'trails': [
             'UrbanVocabularyTerm',
             {'id': "trail_expl", 'title': u"traversé par un sentier ou chemin communal"},
-            {'id': "trail_expl", 'title': u"longé par un sentier ou chemin communal"},
+            {'id': "trail_expl2", 'title': u"longé par un sentier ou chemin communal"},
         ],
 
     },
