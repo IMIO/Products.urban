@@ -259,7 +259,13 @@ def add_element_to_tuple_config(obj, field, tuple):
     :param str field: Field name to override
     :param tuple tuple: Tuple of new value to be added
     """
-    old_values = getattr(obj, field, None)
+    accessor = getattr(obj, "get{}".format(field.capitalize()), None)
+    if not callable(accessor):
+        return
+    old_values = accessor()
     if not old_values:
         raise KeyError
-    setattr(obj, field, old_values + tuple)
+    mutator = getattr(obj, "set{}".format(field.capitalize()), None)
+    if not callable(mutator):
+        return
+    mutator(old_values + tuple)

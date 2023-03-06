@@ -699,7 +699,14 @@ def migrate_cwatup_field_to_codt_field(context):
 
     for licence in inspections + tickets:
         for field in map_migration:
-            from_value = getattr(licence, field["from"], None)
+            accessor = getattr(
+                licence,
+                "get{}".format(field["from"].capitalize()),
+                None
+            )
+            if not callable(accessor):
+                return
+            from_value = accessor()
             if not from_value:
                 continue
             change_prefx = field.get("change_prefix", False)
@@ -713,7 +720,9 @@ def migrate_cwatup_field_to_codt_field(context):
                     )
                     temp_values += (value,)
                 from_value = temp_values
-
-            setattr(licence, field["to"], from_value)
+            mutator = getattr(licence, "set{}".format(field["to"].capitalize()), None)
+            if not callable(mutator):
+                return
+            mutator(from_value)
 
     logger.info("upgrade step done!")
