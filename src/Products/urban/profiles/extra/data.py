@@ -339,7 +339,7 @@ EventConfigs = {
             ),
         },
         {
-            'id': "prorogation-codt",
+            'id': "prorogation-codt-pm",
             'title': "Prorogation du permis (Plans modificatifs)",
             'activatedFields': ('decisionDate', 'decision', 'decisionText',),
             'deadLineDelay': 15,
