@@ -6,7 +6,7 @@ import transaction
 def fix_corrupted_description():
     """
     To be used in case of error "maximum recursion depth exceeded"
-    the probleme come from a "corrupted" description on the object cause by a browser extenssion (fenetremailto) at edit time
+    the probleme come from a "corrupted" description on the object cause by a browser extension (fenetremailto) at edit time
     """
     portal = api.portal.get()
     request = portal.REQUEST
