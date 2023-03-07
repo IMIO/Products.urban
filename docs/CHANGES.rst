@@ -68,6 +68,10 @@ Changes
 - Add external method for fixing corrupted description. [SUP-28740]
   [jchandelle]
 
+
+- Add external method for fixing corrupted description. [SUP-28740]
+  [jchandelle]
+
 - Allow to encode dates going back to 1930
   [fngaha]
 
