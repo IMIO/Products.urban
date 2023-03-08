@@ -16,6 +16,9 @@ from plone.app.uuid.utils import uuidToObject
 from zope.event import notify
 from zope.lifecycleevent import ObjectModifiedEvent
 
+from Products.urban.config import URBAN_TYPES
+from Products.urban.profiles.extra.schedule_config import schedule_config as schedule_config_dict
+
 from Products.urban.interfaces import IGenericLicence, IBaseBuildLicence
 import logging
 import re
@@ -681,3 +684,33 @@ def add_new_vocabulary_for_zoning_field(context):
     )
 
     logger.info("migration step done!")
+
+
+def _update_collection(context):
+    dashboard_collection = getattr(context, 'dashboard_collection', None)
+    if "assigned_user_column" in dashboard_collection.customViewFields:
+        customViewFields = list(dashboard_collection.customViewFields)
+        customViewFields = ["assigned_user" if field == "assigned_user_column"
+                            else field  for field in customViewFields]
+        dashboard_collection.customViewFields = tuple(customViewFields)
+
+
+def update_collection_column(context):
+    logger = logging.getLogger('urban: Update Collection Column')
+    logger.info("starting upgrade steps")
+
+    portal_urban = api.portal.get_tool('portal_urban')
+    for urban_type in URBAN_TYPES:
+        config_folder = getattr(portal_urban, urban_type.lower())
+        schedule_config = getattr(config_folder, 'schedule')
+        _update_collection(schedule_config)
+
+        for task in schedule_config_dict.get(urban_type.lower(), []):
+            task_collection = getattr(schedule_config, task["id"])
+            _update_collection(task_collection)
+
+            for subtask in task.get("subtasks", []):
+                subtask_collection = getattr(task_collection, subtask["id"])
+                _update_collection(subtask_collection)
+
+    logger.info("upgrade step done!")

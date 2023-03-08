@@ -6,7 +6,8 @@ Changes
 2.5.4 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Change collection column name [URB-1537]
+  [jchandelle]
 
 
 2.5.3 (2023-06-23)
@@ -67,7 +68,6 @@ Changes
 
 - Add external method for fixing corrupted description. [SUP-28740]
   [jchandelle]
-
 
 - Add external method for fixing corrupted description. [SUP-28740]
   [jchandelle]
