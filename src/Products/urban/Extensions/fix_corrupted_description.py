@@ -11,7 +11,7 @@ def fix_corrupted_description():
     portal = api.portal.get()
     request = portal.REQUEST
     context = request['PARENTS'][0]
-    if not context.get("description", False):
+    if not getattr(context, "description", False):
         return
     
     context.description.raw = ""

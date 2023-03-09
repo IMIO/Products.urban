@@ -8,6 +8,9 @@ Changes
 - Add an import step to activate 'announcementArticlesText' optional field
   [fngaha]
 
+- Fix external method [SUP-28740]
+  [jchandelle]
+
 - Add external method for fixing corrupted description. [SUP-28740]
   [jchandelle]
 
