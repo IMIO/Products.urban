@@ -5,6 +5,8 @@ Changes
 2.5 (unreleased)
 ----------------
 
+- Fix external method [SUP-28740]
+  [jchandelle]
 
 - Add external method for fixing corrupted description. [SUP-28740]
   [jchandelle]
