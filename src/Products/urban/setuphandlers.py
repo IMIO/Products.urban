@@ -1587,3 +1587,13 @@ def reindex_catalog(context):
         return
     catalog = api.portal.get_tool('portal_catalog')
     catalog.clearFindAndRebuild()
+
+def activateAnnouncementArticlesText(context):
+    """ Activate 'announcementArticlesText' oprional field """
+    if context.readDataFile('fixes_marker.txt') is None:
+        return
+    portal_urban = api.portal.get_tool('portal_urban')
+    for licence_config in portal_urban.objectValues('LicenceConfig'):
+        if licence_config.id in ['codt_buildlicence', 'codt_parceloutlicence', 'codt_article127', 'codt_urbancertificatetwo']:
+            if 'announcementArticlesText' not in licence_config.usedAttributes:
+                licence_config.usedAttributes = licence_config.usedAttributes + ('announcementArticlesText',)

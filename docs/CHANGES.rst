@@ -5,6 +5,9 @@ Changes
 2.5 (unreleased)
 ----------------
 
+- Add an import step to activate 'announcementArticlesText' optional field
+  [fngaha]
+
 - Allow to encode dates going back to 1930
   [fngaha]
 
