@@ -5,6 +5,9 @@ Changes
 2.5 (unreleased)
 ----------------
 
+- Manage the display of licences linked to several applicants
+  [fngaha]
+
 - Add an import step to activate 'announcementArticlesText' optional field
   [fngaha]
 
