@@ -577,9 +577,13 @@ msgstr "Permis intégré"
 msgid "Internal opinion services"
 msgstr "Avis de services internes à la ville"
 
-#: ../browser/urbaneventviews.py:222
-msgid "Listing file"
+#: ../browser/urbaneventviews.py:224
+msgid "Listing file (claimants)"
 msgstr "Importer un fichier de réclamants (csv)"
+
+#: ../browser/urbaneventviews.py:259
+msgid "Listing file (recipients)"
+msgstr "Importer un fichier de destinataires (csv)"
 
 #: ../interfaces.py:765
 msgid "Mailing limit"
@@ -757,7 +761,11 @@ msgstr "Onglets à copier"
 msgid "Tests Extension profile for urban."
 msgstr ""
 
-#: ../browser/urbaneventviews.py:465
+#: ../browser/urbaneventviews.py:332
+msgid "The CSV file couldn't be read properly. Please verify its structure and try again."
+msgstr "Le fichier CSV n'a pas pu être lu correctement. Veuillez vérifier son contenu et réessayer."
+
+#: ../browser/urbaneventviews.py:707
 msgid "The claimants import will be ready tomorrow!"
 msgstr "L'import des réclamants a bien été enregistré et sera éxécuté cette nuit"
 
@@ -1251,6 +1259,16 @@ msgstr "Paramètres des Divisions"
 
 msgid "divisions"
 msgstr "Divisions"
+
+#. Default: "Some national registry numbers already exist in this list; please remove them from the CSV and try again.\n${ids}"
+#: ../browser/urbaneventviews.py:366
+msgid "duplicate_ids_found_msg"
+msgstr "Certains numéros de registre national sont déjà utilisés dans la liste; veuillez les retirer du fichier CSV et réessayer."
+
+#. Default: "Some national registry numbers are used multiple times in the CSV; please remove them and try again.\n${numbers}"
+#: ../browser/urbaneventviews.py:350
+msgid "duplicate_numbers_found_msg"
+msgstr "Certains numéros de registre national sont présents plusieurs fois dans le fichier CSV. Veuillez retirer les doublons et réessayer."
 
 msgid "envclassbordering_urbanconfig_title"
 msgstr "Paramètres des Permis d'environnement limitrophes"
@@ -2484,6 +2502,10 @@ msgstr "Si ce champ n'est pas rempli, l'identifiant de ce terme sera utilisé"
 #: BuildLicence.py
 msgid "urban_help_townshipCouncilFolder"
 msgstr "Si coché, un paragraphe supplémentaire apparaîtra dans le permis"
+
+#: ../browser/urbaneventviews.py:422
+msgid "urban_imported_recipients"
+msgstr "Destinataires importés"
 
 #. Default: "Dgo4reference"
 #: ParcellingTerm.py

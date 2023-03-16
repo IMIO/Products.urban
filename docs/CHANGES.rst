@@ -6,6 +6,9 @@ Changes
 ----------------
 
 
+- Add CSV import of recipients to an inquiry [URB-2573]
+  [ndemonte]
+
 - Update MailingPersistentDocumentGenerationView call with generated_doc_title param. [URB-1862]
   [jjaumotte]
 

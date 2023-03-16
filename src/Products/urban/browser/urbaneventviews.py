@@ -2,6 +2,7 @@
 
 from Acquisition import aq_inner
 from DateTime import DateTime
+from Products.statusmessages.interfaces import IStatusMessage
 from Products.urban import utils
 from Products.Five import BrowserView
 from Products.urban import UrbanMessage as _
@@ -27,6 +28,7 @@ from zope.annotation import interfaces
 from zope.interface import Interface
 
 import csv
+import collections
 
 
 class UrbanEventView(BrowserView):
@@ -219,7 +221,7 @@ class UrbanEventView(BrowserView):
 
 class IImportClaimantListingForm(Interface):
 
-    listing_file = NamedFile(title=_(u'Listing file'))
+    listing_file_claimants = NamedFile(title=_(u'Listing file (claimants)'))
 
 
 class ImportClaimantListingForm(form.Form):
@@ -228,7 +230,7 @@ class ImportClaimantListingForm(form.Form):
     fields = field.Fields(IImportClaimantListingForm)
     ignoreContext = True
 
-    @button.buttonAndHandler(_('Import'), name='import')
+    @button.buttonAndHandler(_('Import'), name='import-claimants')
     def handleImport(self, action):
         inquiry_UID = self.context.UID()
         planned_claimants_import = api.portal.get_registry_record(
@@ -240,7 +242,7 @@ class ImportClaimantListingForm(form.Form):
             if inquiry_UID in planned_claimants_import:
                 planned_claimants_import.remove(inquiry_UID)
         else:
-            csv_file = data['listing_file']
+            csv_file = data['listing_file_claimants']
             interfaces.IAnnotations(self.context)['urban.claimants_to_import'] = csv_file.data
             if csv_file and inquiry_UID not in planned_claimants_import:
                 planned_claimants_import.append(inquiry_UID)
@@ -251,6 +253,129 @@ class ImportClaimantListingForm(form.Form):
         return not bool(errors)
 
 
+class IImportRecipientListingForm(Interface):
+
+    listing_file_recipients = NamedFile(title=_(u'Listing file (recipients)'))
+
+
+class ImportRecipientListingForm(form.Form):
+
+    method = 'post'
+    fields = field.Fields(IImportRecipientListingForm)
+    ignoreContext = True
+
+    @button.buttonAndHandler(_('Import'), name='import-recipients')
+    def handleImport(self, action):
+        self.import_recipients_from_csv()
+        self.request.response.redirect(self.context.absolute_url() + '/#fieldsetlegend-urbaneventinquiry_recipients')
+    def import_recipients_from_csv(self):
+        data, errors = self.extractData()
+        if errors:
+            return False
+
+        fieldnames = [
+            'personTitle',
+            'name',
+            'firstname',
+            'street',
+            'number',
+            'zipcode',
+            'city',
+            'country',
+            'id',
+            'capakey',
+            'parcel_nature',
+            'parcel_street',
+            'parcel_police_number',
+        ]
+
+        csv_file = data['listing_file_recipients']
+        data = csv_file.data
+        if data:
+            reader = csv.DictReader(
+                StringIO(data), fieldnames, delimiter=',', quotechar='"'
+            )
+        else:
+            reader = []
+
+        try:
+            recipient_args = [row for row in reader if row['name']][1:]
+        except csv.Error, error:
+            IStatusMessage(self.request).addStatusMessage(
+                _(u'The CSV file couldn\'t be read properly. Please verify its structure and try again.'),
+                type='error'
+            )
+            return
+
+        portal_urban = api.portal.get_tool('portal_urban')
+        plone_utils = api.portal.get_tool('plone_utils')
+
+        new_national_reg_ids = [recipient_arg["id"] for recipient_arg in recipient_args if recipient_arg["id"]]
+
+        # look for national registry numbers present multiple times in CSV
+        # fail import if duplicates are found
+        counter = collections.Counter(new_national_reg_ids)
+        duplicate_numbers = [number for (number, count) in counter.most_common() if count > 1]
+        if duplicate_numbers:
+            msg = _(
+                u'duplicate_numbers_found_msg',
+                default=u'Some national registry numbers are used multiple times in the CSV; please remove them and try again.\n${numbers}',
+                mapping={u'numbers': ', '.join(duplicate_numbers)}
+            )
+            IStatusMessage(self.request).addStatusMessage(
+                msg,
+                type='error'
+            )
+            return
+
+        # look for national registry numbers already used as recipient object ids
+        # fail import if duplicates are found
+        existing_object_ids = list(self.context.objectIds())
+        duplicate_ids = set(new_national_reg_ids).intersection(existing_object_ids)
+        if duplicate_ids:
+            msg = _(
+                u'duplicate_ids_found_msg',
+                default=u'Some national registry numbers already exist in this list; please remove them from the CSV and try again.\n${ids}',
+                mapping={u'ids': ', '.join(duplicate_ids)}
+            )
+            IStatusMessage(self.request).addStatusMessage(
+                msg,
+                type='error'
+            )
+            return
+
+        country_mapping = {'': ''}
+        country_folder = portal_urban.country
+        for country_obj in country_folder.objectValues():
+            country_mapping[country_obj.Title()] = country_obj.id
+
+        for recipient_arg in recipient_args:
+            del recipient_arg['personTitle']  # no use for it yet
+
+            if not recipient_arg['id']:
+                recipient_arg['id'] = plone_utils.normalizeString(
+                    ' '.join([recipient_arg['name'], recipient_arg['firstname']])
+                )
+                if recipient_arg['id'] in self.context.objectIds():
+                    count = 1
+                    new_id = '{0}-{1}'.format(recipient_arg['id'], count)
+                    while new_id in self.context.objectIds():
+                        count += 1
+                        new_id = '{0}-{1}'.format(recipient_arg['id'], count)
+                    recipient_arg['id'] = new_id
+
+            recipient_arg['country'] = country_mapping[recipient_arg['country']]
+            recipient_arg['adr1'] = '{} {}'.format(recipient_arg['zipcode'], recipient_arg['city'])
+            recipient_arg['adr2'] = '{} {}'.format(recipient_arg['street'], recipient_arg['number'])
+            # create recipient
+            with api.env.adopt_roles(['Manager']):
+                recipient_id = self.context.invokeFactory('RecipientCadastre', **recipient_arg)
+                recipient_obj = getattr(self.context, recipient_id)
+
+        plone_utils.addPortalMessage(
+            _('urban_imported_recipients'),
+            type="info"
+        )
 class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
     """
     This manage the base view of UrbanEventInquiry
@@ -264,6 +389,8 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
         self.request.set('disable_plone.leftcolumn', 1)
         self.import_claimants_listing_form = ImportClaimantListingForm(context, request)
         self.import_claimants_listing_form.update()
+        self.import_recipients_listing_form = ImportRecipientListingForm(context, request)
+        self.import_recipients_listing_form.update()
 
     @property
     def has_planned_claimant_import(self):
