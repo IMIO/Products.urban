@@ -5,6 +5,20 @@ Changes
 2.5 (unreleased)
 ----------------
 
+- Manage the display of licences linked to several applicants
+  [fngaha]
+
+- Add an import step to activate 'announcementArticlesText' optional field
+  [fngaha]
+
+- Fix external method [SUP-28740]
+  [jchandelle]
+
+- Add external method for fixing corrupted description. [SUP-28740]
+  [jchandelle]
+
+- Allow to encode dates going back to 1930
+  [fngaha]
 
 - Update MailingPersistentDocumentGenerationView call with generated_doc_title param. [URB-1862]
   [jjaumotte]

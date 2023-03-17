@@ -325,7 +325,7 @@ class Division(BaseFolder, GenericLicence, BrowserDefaultMixin):
         notaries = ''
         proprietaries = ''
         if self.getProprietaries:
-            proprietaries = '; '.join([prop.Title() for prop in self.getProprietaries()])
+            proprietaries = ', '.join([prop.Title() for prop in self.getProprietaries()])
         else:
             proprietaries = translate('no_proprietary_defined', 'urban', context=self.REQUEST).encode('utf8')
         if self.getNotaryContact():

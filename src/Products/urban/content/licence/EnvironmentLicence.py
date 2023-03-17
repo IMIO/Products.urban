@@ -259,7 +259,7 @@ class EnvironmentLicence(BaseFolder, EnvironmentBase, BrowserDefaultMixin):
         """
         applicants = self.getCorporations() or self.getApplicants()
         if applicants:
-            applicantTitle = applicants[0].Title()
+            applicantTitle = ', '.join([applicant.Title() for applicant in self.getApplicants()])
         else:
             applicantTitle = translate('no_applicant_defined', 'urban', context=self.REQUEST).encode('utf8')
         title = "%s - %s - %s" % (self.getReference(), self.getLicenceSubject(), applicantTitle)

@@ -290,7 +290,7 @@ class CODT_UniqueLicence(BaseFolder, CODT_UniqueLicenceInquiry, CODT_BaseBuildLi
            Update the title to clearly identify the licence
         """
         if self.getApplicants():
-            applicantTitle = self.getApplicants()[0].Title()
+            applicantTitle = ', '.join([applicant.Title() for applicant in self.getApplicants()])
         else:
             applicantTitle = translate('no_applicant_defined', 'urban', context=self.REQUEST).encode('utf8')
         config = self.getLicenceConfig()

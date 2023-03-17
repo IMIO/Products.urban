@@ -60,7 +60,7 @@ schema = Schema((
             show_hm=False,
             format="%d/%m/%Y",
             label_method="eventDateLabel",
-            starting_year=1960,
+            starting_year=1930,
             ending_year=2100,
             label=_('urban_label_eventDate', default='Eventdate'),
         ),
@@ -81,7 +81,7 @@ schema = Schema((
         widget=DateTimeField._properties['widget'](
             show_hm=False,
             format="%d/%m/%Y",
-            starting_year=1960,
+            starting_year=1930,
             label=_('urban_label_transmitDate', default='Transmitdate'),
         ),
         optional=True,
@@ -91,7 +91,7 @@ schema = Schema((
         widget=DateTimeField._properties['widget'](
             show_hm=False,
             format="%d/%m/%Y",
-            starting_year=1960,
+            starting_year=1930,
             label=_('urban_label_transmitToClaimantsDate',
                     default='Transmittoclaimantsdate'),
         ),
@@ -102,7 +102,7 @@ schema = Schema((
         widget=DateTimeField._properties['widget'](
             show_hm=False,
             format="%d/%m/%Y",
-            starting_year=1960,
+            starting_year=1930,
             label=_('urban_label_receiptDate', default='Receipt date'),
         ),
         optional=True,
@@ -120,7 +120,7 @@ schema = Schema((
         widget=DateTimeField._properties['widget'](
             show_hm=False,
             format="%d/%m/%Y",
-            starting_year=1960,
+            starting_year=1930,
             label=_('urban_label_auditionDate', default='Auditiondate'),
         ),
         optional=True,
@@ -130,7 +130,7 @@ schema = Schema((
         widget=DateTimeField._properties['widget'](
             show_hm=False,
             format="%d/%m/%Y",
-            starting_year=1960,
+            starting_year=1930,
             label=_('urban_label_decisionDate', default='Decisiondate'),
         ),
         optional=True,
@@ -171,7 +171,7 @@ schema = Schema((
         widget=DateTimeField._properties['widget'](
             show_hm=False,
             format="%d/%m/%Y",
-            starting_year=1960,
+            starting_year=1930,
             label=_('urban_label_recourseDecisionDisplayDate',
                     default='Recoursedecisiondisplaydate'),
         ),
@@ -338,7 +338,7 @@ schema = Schema((
         widget=DateTimeField._properties['widget'](
             show_hm=False,
             format="%d/%m/%Y",
-            starting_year=1960,
+            starting_year=1930,
             label=_('urban_label_suspensionEndDate', default='suspensionEndDate'),
         ),
         optional= True,
@@ -393,7 +393,7 @@ schema = Schema((
         widget=DateTimeField._properties['widget'](
             show_hm=False,
             format="%d/%m/%Y",
-            starting_year=1960,
+            starting_year=1930,
             label=_('urban_label_displayDate', default='Displaydate'),
         ),
         optional=True,
@@ -403,7 +403,7 @@ schema = Schema((
         widget=DateTimeField._properties['widget'](
             show_hm=False,
             format="%d/%m/%Y",
-            starting_year=1960,
+            starting_year=1930,
             label=_('urban_label_displayDateEnd', default='Displaydateiend'),
         ),
         optional=True,
@@ -435,7 +435,7 @@ schema = Schema((
         widget=DateTimeField._properties['widget'](
             show_hm=False,
             format="%d/%m/%Y",
-            starting_year=2010,
+            starting_year=1930,
             label=_('urban_label_reportCreationDate', default='ReportCreationDate'),
         ),
         optional=True,
@@ -445,7 +445,7 @@ schema = Schema((
         widget=DateTimeField._properties['widget'](
             show_hm=False,
             format="%d/%m/%Y",
-            starting_year=2010,
+            starting_year=1930,
             label=_('urban_label_reportReceptionDate', default='ReportReceptionDate'),
         ),
         optional=True,
@@ -455,7 +455,7 @@ schema = Schema((
         widget=DateTimeField._properties['widget'](
             show_hm=False,
             format="%d/%m/%Y",
-            starting_year=2010,
+            starting_year=1930,
             label=_('urban_label_paymentDeadline', default='PaymentDeadline'),
         ),
         optional=True,
@@ -465,7 +465,7 @@ schema = Schema((
         widget=DateTimeField._properties['widget'](
             show_hm=False,
             format="%d/%m/%Y",
-            starting_year=2010,
+            starting_year=1930,
             label=_('urban_label_ultimeDate', default='UltimeDate'),
         ),
         optional=True,

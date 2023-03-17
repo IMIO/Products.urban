@@ -201,7 +201,7 @@ msgid "UrbanEventAnnouncement"
 msgstr "Evénement d'annonce de projet"
 
 msgid "UrbanEventFollowUp"
-msgstr "Evénement de proposion de suivi/réponse administrative"
+msgstr "Evénement de proposition de suivi/réponse administrative"
 
 msgid "UrbanEventInquiry"
 msgstr "Evénement lié à une enquête publique"
