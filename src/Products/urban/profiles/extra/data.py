@@ -339,6 +339,48 @@ EventConfigs = {
             ),
         },
         {
+            'id': "prorogation-codt-pm",
+            'title': "Prorogation du permis (Plans modificatifs)",
+            'activatedFields': ('decisionDate', 'decision', 'decisionText',),
+            'deadLineDelay': 15,
+            'eventDateLabel': "Date de notification",
+            'TALCondition': "python: here.getProrogationModifiedBp()",
+            'eventType': ('Products.urban.interfaces.ISimpleCollegeEvent',),
+            'eventPortalType': 'UrbanEventCollege',
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (
+                {
+                    'id': "codt_pu_prorogation_si_non_automatique_deliberation.odt",
+                    'title': "Délibération CODT - PROROGATION si non automatique",
+                },
+                {
+                    'id': "codt_pu_prorogation_info_demandeur.odt",
+                    'title': "Information au demandeur de la prorogation (Plans modificatifs)",
+                    'context_variables': [
+                        {
+                            'name': 'publipostage',
+                            'value': 'demandeurs'
+                        }
+                    ],
+                },
+                {
+                    'id': "codt_pu_prorogation_info_architecte.odt",
+                    'title': "Information à l'architecte de la prorogation (Plans modificatifs)",
+                    'context_variables': [
+                        {
+                            'name': 'publipostage',
+                            'value': 'architectes'
+                        }
+                    ],
+                },
+                {
+                    'id': "codt_pu_formulaire_envoi_prorogation_fd_grille.odt",
+                    'title': "Formulaire d'envoi de la prorogation au FD (Plans modificatifs) (GRILLE)",
+                },
+            ),
+        },
+        {
             'id': "delivrance-du-permis-octroi-ou-refus-codt",
             'title': "Délivrance du permis (octroi ou refus)",
             'activatedFields': ('decisionDate', 'decision',),
