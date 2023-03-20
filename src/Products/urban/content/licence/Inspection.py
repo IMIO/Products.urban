@@ -47,7 +47,7 @@ schema = Schema((
                 'ProjectMeeting',
                 'PatrimonyCertificate',
                 'CODT_NotaryLetter',
-                'CODT_UrbanCertificateOne'
+                'CODT_UrbanCertificateOne',
                 'NotaryLetter',
                 'UrbanCertificateOne',
             ]
