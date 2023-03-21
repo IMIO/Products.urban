@@ -55,7 +55,8 @@ class CODT_UrbanCertificateBase(BaseFolder, UrbanCertificateBase, BrowserDefault
     schema = CODT_UrbanCertificateBase_schema
 
     ##code-section class-header #fill in your manual code here
-    schemata_order = ['urban_description', 'urban_road', 'urban_location']
+    schemata_order = ['urban_description', 'urban_road', 'urban_location',
+                      'urban_coring']
     ##/code-section class-header
 
     # Methods

@@ -97,7 +97,7 @@ class CODT_ParcelOutLicence(BaseFolder, CODT_BaseBuildLicence, BrowserDefaultMix
     ##code-section class-header #fill in your manual code here
     archetype_name = 'CODT_ParcelOutLicence'
     schemata_order = ['urban_description', 'urban_road', 'urban_location',
-                      'urban_investigation_and_advices']
+                      'urban_investigation_and_advices', 'urban_corring']
     ##/code-section class-header
 
     # Methods

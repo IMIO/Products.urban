@@ -337,8 +337,8 @@ class EnvironmentBase(BaseFolder, GenericLicence, CODT_UniqueLicenceInquiry, Bro
     schema = EnvironmentBase_schema
 
     ##code-section class-header #fill in your manual code here
-    schemata_order = ['urban_description', 'urban_road', 'urban_location', \
-                      'urban_investigation_and_advices']
+    schemata_order = ['urban_description', 'urban_road', 'urban_location',
+                      'urban_investigation_and_advices', 'urban_coring']
     ##/code-section class-header
 
     # Methods
