@@ -3,7 +3,8 @@
 # from Acquisition import aq_inner
 
 from Products.Five import BrowserView
-from Products.urban import services
+
+import urllib
 
 
 class GigCoringView(BrowserView):
@@ -16,8 +17,23 @@ class GigCoringView(BrowserView):
 
     def open_gig_and_load_parcels(self):
         licence = self.context
-        capakeys = [parcel.capakey for parcel in licence.getParcels()]
-        gig_session = services.gig.new_session()
-        gig_session.insert_parcels(capakeys)
-        gig_session.close()
-        return self.request.RESPONSE.redirect('https://www.gigwal.org/')
+        capakeys = ['matrice={}'.format(urllib.quote(parcel.capakey, safe=''))
+                    for parcel in licence.getParcels()]
+        gig_url = "https://carto.luxembourg.be/matcad?{}&post_carottage={}/gig_coring_response".format(
+            '&'.join(capakeys),
+            urllib.quote(licence.absolute_url(), safe=''),
+        )
+        return self.request.RESPONSE.redirect(gig_url)
+
+
+class GigCoringResponse(BrowserView):
+    """
+    Store coring result on coringResult field of the licence.
+    """
+    def __init__(self, context, request):
+        self.context = context
+        self.request = request
+
+    def __call__(self, **kwargs):
+        self.context.setCoringResult(self.request['BODY'])
+        return self.request.RESPONSE.redirect(self.context.absolute_url())

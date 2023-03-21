@@ -1164,6 +1164,17 @@ schema = Schema((
         default_content_type='text/html',
         default_output_type='text/x-html-safe',
     ),
+    TextField(
+        name='coringResult',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            label=_('urban_label_coringResult',
+                    default='coringResult'),
+        ),
+        default_content_type='text/html',
+        schemata='urban_description',
+        default_output_type='text/x-html-safe',
+    ),
 ),
 )
 

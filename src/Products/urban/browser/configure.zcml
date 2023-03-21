@@ -467,11 +467,18 @@
   />
 
   <browser:page
-     for="*"
+     for="Products.urban.interfaces.IGenericLicence"
      name="gig_coring_view"
      class=".gig_coring_view.GigCoringView"
      attribute="open_gig_and_load_parcels"
      permission="zope2.View"
+  />
+
+  <browser:page
+     for="Products.urban.interfaces.IGenericLicence"
+     name="gig_coring_response"
+     class=".gig_coring_view.GigCoringResponse"
+     permission="cmf.ModifyPortalContent"
   />
 
   <browser:page
