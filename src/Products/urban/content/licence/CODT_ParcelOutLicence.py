@@ -107,6 +107,7 @@ class CODT_ParcelOutLicence(BaseFolder, CODT_BaseBuildLicence, BrowserDefaultMix
         "urban_road",
         "urban_location",
         "urban_investigation_and_advices",
+        "urban_corring",
     ]
     ##/code-section class-header
 

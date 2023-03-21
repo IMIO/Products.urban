@@ -556,3 +556,6 @@ msgstr ""
 
 msgid "ComplementaryDelayTerm"
 msgstr ""
+
+msgid "label_schema_urban_coring"
+msgstr ""

@@ -414,6 +414,7 @@ class EnvironmentBase(
         "urban_road",
         "urban_location",
         "urban_investigation_and_advices",
+        "urban_coring",
     ]
     ##/code-section class-header
 

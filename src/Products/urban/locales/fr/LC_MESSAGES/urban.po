@@ -289,7 +289,7 @@ msgstr "Créer comme réclamant"
 
 #: ../browser/templates/coring_update.pt:7
 msgid "Coring"
-msgstr "Lien GIG"
+msgstr "Carto GIG"
 
 #: ../browser/urbaneventviews.py:649
 msgid "Couldn't import this(these) owner(s): ${owners}"
@@ -745,7 +745,11 @@ msgstr "Date du dernier import depuis le WebService de NOTICe"
 msgid "Licence Files"
 msgstr "Fichiers du permis"
 
-#: ../browser/urbaneventviews.py:314
+#: ../browser/licence/templates/parcels_macro.pt:26
+msgid "Lien GIG"
+msgstr "Carto GIG"
+
+#: ../browser/urbaneventviews.py:224
 msgid "Listing file (claimants)"
 msgstr "Importer un fichier de réclamants (csv)"
 
@@ -764,6 +768,10 @@ msgstr "Limite d'envoi"
 #: ../profiles/default/actions.xml
 msgid "Map"
 msgstr "Carte"
+
+#: ../browser/licence/licenceview.py:237
+msgid "Map Coring"
+msgstr "Carottage carto"
 
 #: ../interfaces.py:686
 msgid "Max items allowed for immediate mailing"
@@ -894,6 +902,10 @@ msgstr "Profil pour pm.wsclient dans iA.Urban"
 #: ../profiles.zcml:91
 msgid "Profile for urban content types in urban"
 msgstr "Profil pour les types de contenu urban dans iA.Urban"
+
+#: ../profiles.zcml:91
+msgid "Profile for urban content types in urban"
+msgstr ""
 
 msgid "ProjectMeeting"
 msgstr "Réunion de projet"
@@ -1500,6 +1512,16 @@ msgstr "Attention, aucune adresse de travaux définie"
 #: ../browser/licence/templates/licencetabsmacros.pt:92
 msgid "content_none"
 msgstr "Aucun(e)"
+
+#. Default: "Map Coring"
+#: ../browser/licence/templates/licencetabsmacros.pt:541
+msgid "coring_details"
+msgstr "Carottage carto"
+
+#. Default: "<p style=\"text-decoration: underline;\">You made a request for a coring.</p> Please go to the GIG tab: <ol> <li>Select the parcel(s)</li> <li>Click on the iMio logo to export the result</li> </ol> Refresh this page to show the result."
+#: ../browser/licence/templates/parcels_macro.pt:6
+msgid "coring_message"
+msgstr "<p style=\"text-decoration: underline;\">Vous avez demandé un carottage</p>Dirigez-vous vers l'onglet GIG :<ol> <li>cochez la/les parcelle(s) </li> <li>cliquez sur \"image iMio\" pour exporter les données vers iA.Urban</li> </ol> Rafraichissez cette page pour voir le résultat."
 
 #. Default: "Contact person address / headoffice"
 #: ../browser/templates/contactmacros.pt:135
@@ -2817,6 +2839,10 @@ msgstr "urban-testsWithLicences"
 msgid "urban-types"
 msgstr "urban-types"
 
+#: ../profiles.zcml:91
+msgid "urban-types"
+msgstr ""
+
 msgid "urban.warnings.bound_ticket_settlement"
 msgstr "L'événement de règlement transactionnel du PV lié est terminé"
 
@@ -3469,6 +3495,11 @@ msgstr "Code postal"
 #: ../browser/templates/urbaneventinquiryview.pt:64
 msgid "urban_label_context"
 msgstr "Enquête liée"
+
+#. Default: "coringResult"
+#: ../content/licence/GenericLicence.py:1171
+msgid "urban_label_coringResult"
+msgstr "Résultat du carottage carto"
 
 #: UrbanVocabularyTerm.py
 msgid "urban_label_coring_id"
@@ -4163,6 +4194,11 @@ msgstr "Détails concernant les contraintes karstiques"
 #: ParcellingTerm.py
 msgid "urban_label_label"
 msgstr "Libellé"
+
+#. Default: "lastCoring"
+#: ../content/licence/GenericLicence.py:1184
+msgid "urban_label_lastCoring"
+msgstr "Date de dernier carottage"
 
 #. Default: "Legalform"
 #: Corporation.py

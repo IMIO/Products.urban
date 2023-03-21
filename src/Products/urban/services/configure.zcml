@@ -22,11 +22,6 @@
     factory="Products.urban.services.bestaddress.BestaddressSession" />
 
   <adapter
-    for="Products.urban.services.gig.GigService"
-    provides="Products.urban.services.interfaces.ISQLSession"
-    factory="Products.urban.services.gig.GigSession" />
-
-  <adapter
     factory=".notice.Notice"
     name="notice" />
 

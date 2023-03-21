@@ -59,3 +59,7 @@
     <metal:parent_call use-macro="here/@@licencetabs-macros/advices_macro" />
 </metal:advices>
 
+<metal:coring define-macro="coring_macro" i18n:domain="urban">
+    <metal:parent_call use-macro="here/@@licencetabs-macros/coring_macro">
+    </metal:parent_call>
+</metal:coring>

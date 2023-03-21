@@ -12,6 +12,8 @@ try:
     config_gig = ExternalConfig("gig")
 except:
     config = {}
+    config_gig = {}
+
 
 cadastre = CadastreService(**(config_cadastre and config_cadastre.cadastre))
 parcel_coring = ParcelCoringService(

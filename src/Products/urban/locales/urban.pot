@@ -738,6 +738,10 @@ msgstr ""
 msgid "Licence Files"
 msgstr ""
 
+#: ../browser/licence/templates/parcels_macro.pt:26
+msgid "Lien GIG"
+msgstr ""
+
 #: ../browser/urbaneventviews.py:314
 msgid "Listing file (claimants)"
 msgstr ""
@@ -756,6 +760,10 @@ msgstr ""
 
 #: ../profiles/default/actions.xml
 msgid "Map"
+msgstr ""
+
+#: ../browser/licence/licenceview.py:237
+msgid "Map Coring"
 msgstr ""
 
 #: ../interfaces.py:686
@@ -1488,6 +1496,16 @@ msgstr ""
 #: ../browser/licence/templates/licencemacros.pt:5
 #: ../browser/licence/templates/licencetabsmacros.pt:92
 msgid "content_none"
+msgstr ""
+
+#. Default: "Map Coring"
+#: ../browser/licence/templates/licencetabsmacros.pt:541
+msgid "coring_details"
+msgstr ""
+
+#. Default: "<p style=\"text-decoration: underline;\">You made a request for a coring.</p> Please go to the GIG tab: <ol> <li>Select the parcel(s)</li> <li>Click on the iMio logo to export the result</li> </ol> Refresh this page to show the result."
+#: ../browser/licence/templates/parcels_macro.pt:6
+msgid "coring_message"
 msgstr ""
 
 #. Default: "Contact person address / headoffice"
@@ -2741,6 +2759,7 @@ msgstr ""
 #: ../Extensions/add_deleted_items.py:55
 #: ../profiles.zcml:25
 #: ../profiles/default/actions.xml
+#: ../setuphandlers.py:204
 msgid "urban"
 msgstr ""
 
@@ -3448,6 +3467,11 @@ msgstr ""
 msgid "urban_label_context"
 msgstr ""
 
+#. Default: "coringResult"
+#: ../content/licence/GenericLicence.py:1171
+msgid "urban_label_coringResult"
+msgstr ""
+
 #: UrbanVocabularyTerm.py
 msgid "urban_label_coring_id"
 msgstr ""
@@ -4139,6 +4163,11 @@ msgstr ""
 #. Default: "Label"
 #: ParcellingTerm.py
 msgid "urban_label_label"
+msgstr ""
+
+#. Default: "lastCoring"
+#: ../content/licence/GenericLicence.py:1184
+msgid "urban_label_lastCoring"
 msgstr ""
 
 #. Default: "Legalform"

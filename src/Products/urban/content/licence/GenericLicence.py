@@ -1478,6 +1478,29 @@ schema = Schema(
             default_output_type="text/x-html-safe",
         ),
     ),
+    TextField(
+        name='coringResult',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            label=_('urban_label_coringResult',
+                    default='coringResult'),
+        ),
+        default_content_type='text/html',
+        schemata='urban_coring',
+        default_output_type='text/x-html-safe',
+    ),
+    DateTimeField(
+        name='lastCoring',
+        widget=DateTimeField._properties['widget'](
+            show_hm=True,
+            format="%d/%m/%Y %H:%M",
+            starting_year=2023,
+            label=_('urban_label_lastCoring',
+                    default='lastCoring'),
+        ),
+        schemata='urban_coring',
+    ),
+),
 )
 
 # code-section after-local-schema #fill in your manual code here

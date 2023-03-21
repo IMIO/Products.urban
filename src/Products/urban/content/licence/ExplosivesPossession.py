@@ -72,6 +72,7 @@ class ExplosivesPossession(BaseFolder, EnvironmentLicence, BrowserDefaultMixin):
     schemata_order = [
         "urban_description",
         "urban_investigation_and_advices",
+        "urban_coring",
     ]
 
     security.declarePublic("getApplicantsSignaletic")
