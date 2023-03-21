@@ -5,6 +5,9 @@ Changes
 2.5 (unreleased)
 ----------------
 
+- Added 'retired' transition to 'deposit' and 'incomplete' states for codt_buildlicence_workflow
+  [fngaha]
+
 - Manage the display of licences linked to several applicants
   [fngaha]
 
