@@ -5,6 +5,10 @@ Changes
 2.5 (unreleased)
 ----------------
 
+
+- Add an external method to update task delay [SUP-28870]
+  [jchandelle]
+
 - Manage the display of licences linked to several applicants
   [fngaha]
 
