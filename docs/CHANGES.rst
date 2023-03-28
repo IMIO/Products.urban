@@ -5,6 +5,9 @@ Changes
 2.5.2 (unreleased)
 ------------------
 
+- Add an external method to update task delay [SUP-28870]
+  [jchandelle]
+
 - Add external method to fix broken environmental declarations [SUP-29587]
   [daggelpop]
 
