@@ -8,6 +8,7 @@ from imio.schedule.content.object_factories import EndConditionObject
 from imio.schedule.content.object_factories import MacroEndConditionObject
 
 from Products.urban.config import LICENCE_FINAL_STATES
+from Products.urban.config import URBAN_TYPES
 from Products.urban.interfaces import IGenericLicence
 
 from zope.event import notify
@@ -74,6 +75,7 @@ def update_covid_tasks_deadline():
         interface_1 = 'Products.urban.schedule.interfaces.ITaskWithSuspensionDelay'
         interface_2 = 'Products.urban.schedule.interfaces.ITaskWithWholeSuspensionDelay'
         if interface_1 in (task_cfg.marker_interfaces or []) or interface_2 in (task_cfg.marker_interfaces or []):
+            __import__('pdb').set_trace()
             task_brains = catalog(
                 object_provides=IAutomatedTask.__identifier__,
                 task_config_UID=task_cfg.UID(),
@@ -82,6 +84,27 @@ def update_covid_tasks_deadline():
             for brain in task_brains:
                 task = brain.getObject()
                 licences_to_update.add(task.get_container())
+
+    for licence in licences_to_update:
+        notify(ObjectModifiedEvent(licence))
+        print "updated licence {}".format(licence.Title())
+
+
+def update_task_delay():
+    catalog = api.portal.get_tool('portal_catalog')
+
+    licences_to_update = set()
+
+    for brain in catalog(portal_type=['TaskConfig', 'MacroTaskConfig']):
+        task_cfg = brain.getObject()
+        task_brains = catalog(
+            object_provides=IAutomatedTask.__identifier__,
+            task_config_UID=task_cfg.UID(),
+            review_state=states_by_status[STARTED] + states_by_status[CREATION]
+        )
+        for brain in task_brains:
+            task = brain.getObject()
+            licences_to_update.add(task.get_container())
 
     for licence in licences_to_update:
         notify(ObjectModifiedEvent(licence))

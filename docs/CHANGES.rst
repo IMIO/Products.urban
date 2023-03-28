@@ -5,6 +5,9 @@ Changes
 2.5 (unreleased)
 ----------------
 
+- Add an external method to update task delay [SUP-28870]
+  [jchandelle]
+
 - Fix external method [SUP-28740]
   [jchandelle]
 
