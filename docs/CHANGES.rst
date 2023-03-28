@@ -5,8 +5,15 @@ Changes
 2.5 (unreleased)
 ----------------
 
+
 - Add an external method to update task delay [SUP-28870]
   [jchandelle]
+
+- Manage the display of licences linked to several applicants
+  [fngaha]
+
+- Add an import step to activate 'announcementArticlesText' optional field
+  [fngaha]
 
 - Fix external method [SUP-28740]
   [jchandelle]
