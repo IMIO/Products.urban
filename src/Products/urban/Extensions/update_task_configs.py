@@ -86,3 +86,24 @@ def update_covid_tasks_deadline():
     for licence in licences_to_update:
         notify(ObjectModifiedEvent(licence))
         print "updated licence {}".format(licence.Title())
+
+
+def update_task_delay():
+    catalog = api.portal.get_tool('portal_catalog')
+
+    licences_to_update = set()
+
+    for brain in catalog(portal_type=['TaskConfig', 'MacroTaskConfig']):
+        task_cfg = brain.getObject()
+        task_brains = catalog(
+            object_provides=IAutomatedTask.__identifier__,
+            task_config_UID=task_cfg.UID(),
+            review_state=states_by_status[STARTED] + states_by_status[CREATION]
+        )
+        for brain in task_brains:
+            task = brain.getObject()
+            licences_to_update.add(task.get_container())
+
+    for licence in licences_to_update:
+        notify(ObjectModifiedEvent(licence))
+        print "updated licence {}".format(licence.Title())
