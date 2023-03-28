@@ -8,7 +8,6 @@ from imio.schedule.content.object_factories import EndConditionObject
 from imio.schedule.content.object_factories import MacroEndConditionObject
 
 from Products.urban.config import LICENCE_FINAL_STATES
-from Products.urban.config import URBAN_TYPES
 from Products.urban.interfaces import IGenericLicence
 
 from zope.event import notify
@@ -75,7 +74,6 @@ def update_covid_tasks_deadline():
         interface_1 = 'Products.urban.schedule.interfaces.ITaskWithSuspensionDelay'
         interface_2 = 'Products.urban.schedule.interfaces.ITaskWithWholeSuspensionDelay'
         if interface_1 in (task_cfg.marker_interfaces or []) or interface_2 in (task_cfg.marker_interfaces or []):
-            __import__('pdb').set_trace()
             task_brains = catalog(
                 object_provides=IAutomatedTask.__identifier__,
                 task_config_UID=task_cfg.UID(),
