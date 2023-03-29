@@ -44,6 +44,7 @@ schema = Schema((
             t for t in URBAN_TYPES
             if t not in [
                 'Inspection',
+                'Ticket',
                 'ProjectMeeting',
                 'PatrimonyCertificate',
                 'CODT_NotaryLetter',
