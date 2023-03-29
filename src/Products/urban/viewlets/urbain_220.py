@@ -234,11 +234,11 @@ class UrbainXMLExport(BrowserView):
                         list_architects_terms = ["NON REQUIS", "lui-meme", "Eux-memes", "elle-meme", "lui-meme", "lui-même", "lui-meme ", "Lui-meme", "A COMPLETER "]
                         if architectObj.getName1() in list_architects_terms:
                             xml.append('      <PERSOON>')
-                            xml.append('        <naam>%s %s</naam>' % (firstname.encode('iso-8859-1'), lastname.encode('iso-8859-1')))
-                            xml.append('        <straatnaam>%s</straatnaam>' % applicantObj.getStreet().encode('iso-8859-1'))
+                            xml.append('        <naam>%s %s</naam>' % (firstname.decode('iso-8859-1').encode('iso-8859-1'), lastname.decode('iso-8859-1').encode('iso-8859-1')))
+                            xml.append('        <straatnaam>%s</straatnaam>' % applicantObj.getStreet().decode('iso-8859-1').encode('iso-8859-1'))
                             xml.append('        <huisnr>%s</huisnr>' % applicantObj.getNumber())
                             xml.append('        <postcode>%s</postcode>' % applicantObj.getZipcode())
-                            xml.append('        <gemeente>%s</gemeente>' % applicantObj.getCity().encode('iso-8859-1'))
+                            xml.append('        <gemeente>%s</gemeente>' % applicantObj.getCity().decode('iso-8859-1').encode('iso-8859-1'))
                             xml.append('        <hoedanig>ARCHITECTE</hoedanig>')
                             xml.append('      </PERSOON>')
                         else:
