@@ -409,6 +409,7 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
         env_inquiry_tabs_config = ['description', 'advices', 'inquiry', 'analysis', 'environment', 'location', 'road']
         inspection_tabs_config = ['description', 'advices', 'inspection', 'location']
         ticket_tabs_config = ['description', 'inspection', 'location']
+        preliminarynotice_tabs_config =  ['description', 'analysis', 'location', 'road', 'patrimony']
 
         types = {
             'buildlicence': buildlicence_tabs_config,
@@ -440,6 +441,7 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
             'ticket': ticket_tabs_config,
             'roaddecree': buildlicence_tabs_config,
             'division': certificatebase_tabs_config,
+            'preliminarynotice': preliminarynotice_tabs_config,
         }
         licence_type = self.id
 
