@@ -2,8 +2,8 @@
 
 Changes
 =======
-2.5 (unreleased)
-----------------
+2.5.1 (2023-04-06)
+------------------
 
 - Added 'retired' transition to 'deposit' and 'incomplete' states for codt_buildlicence_workflow
   [fngaha]
