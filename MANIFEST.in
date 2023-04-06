@@ -46,3 +46,5 @@
   recursive-include docs *.pickle
   recursive-include docs *.png
   recursive-include docs Makefile
+  recursive-include src *.cpy
+  recursive-include src *.ods
