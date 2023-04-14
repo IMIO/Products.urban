@@ -435,6 +435,14 @@
         handler=".update_250.set_page_style_for_mailing_templates"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Add new vocabulary for Zoning field"
+        description="Add new vocabulary for Zoning field"
+        source="1126"
+        destination="1127"
+        handler=".update_250.add_new_vocabulary_for_zoning_field"
+        profile="Products.urban:default" />
+
 
     <!--gs:upgradeStep
         title="Add schedule config for env licences 1 and 2"
