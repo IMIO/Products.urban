@@ -4493,12 +4493,12 @@ msgstr "Titre inversé"
 #. Default: "Rgbsr"
 #: ../content/licence/GenericLicence.py:930
 msgid "urban_label_rgbsr"
-msgstr "Règlement Général sur les Bâtisses en Site Rural"
+msgstr "Guide Régional d'Urbanisme"
 
 #. Default: "Rgbsrdetails"
 #: ../content/licence/GenericLicence.py:940
 msgid "urban_label_rgbsrDetails"
-msgstr "Détails concernant le Règlement Général sur les Bâtisses en Site Rural"
+msgstr "Détails concernant le Guide Régional d'Urbanisme"
 
 #. Default: "Roadadaptation"
 #: ../content/licence/BaseBuildLicence.py:296

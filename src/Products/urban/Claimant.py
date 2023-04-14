@@ -75,6 +75,7 @@ schema = Schema((
         widget=DateTimeField._properties['widget'](
             show_hm=False,
             format="%d/%m/%Y",
+            starting_year=1930,
             label=_('urban_label_claimDate', default='Claimdate'),
         ),
     ),

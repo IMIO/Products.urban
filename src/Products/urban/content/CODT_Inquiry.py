@@ -31,7 +31,7 @@ from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
 ##code-section module-header #fill in your manual code here
 from zope.i18n import translate
 
-optional_fields = ['divergence', 'divergenceDetails']
+optional_fields = ['divergence', 'divergenceDetails', 'announcementArticlesText']
 
 full_inquiry_slave_fields = (
     {

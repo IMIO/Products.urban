@@ -8,6 +8,27 @@ Changes
 - Add fields to legal aspect of generic licence [SUP-22944]
   [jchandelle]
 
+- Add national register number to corporation form [SUP-27165]
+  [jchandelle]
+
+- Add an external method to update task delay [SUP-28870]
+  [jchandelle]
+
+- Manage the display of licences linked to several applicants
+  [fngaha]
+
+- Add an import step to activate 'announcementArticlesText' optional field
+  [fngaha]
+
+- Fix external method [SUP-28740]
+  [jchandelle]
+
+- Add external method for fixing corrupted description. [SUP-28740]
+  [jchandelle]
+
+- Allow to encode dates going back to 1930
+  [fngaha]
+
 - Update MailingPersistentDocumentGenerationView call with generated_doc_title param. [URB-1862]
   [jjaumotte]
 
