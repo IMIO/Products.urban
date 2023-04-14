@@ -6,6 +6,9 @@ Changes
 2.5.2 (unreleased)
 ------------------
 
+- Add fields to legal aspect of generic licence [SUP-22944]
+  [jchandelle]
+
 - Add national register number to corporation form [SUP-27165]
   [jchandelle]
 

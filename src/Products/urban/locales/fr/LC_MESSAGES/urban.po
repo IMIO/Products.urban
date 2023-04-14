@@ -1035,15 +1035,15 @@ msgstr "Cartographie"
 msgid "cartography_map_descr"
 msgstr "Une carte sera affichée lorsque les parcelles concernées auront été définies."
 
-#: ../content/licence/GenericLicence.py:1454
+#: ../content/licence/GenericLicence.py:1499
 msgid "category1"
 msgstr "catégorie 1"
 
-#: ../content/licence/GenericLicence.py:1455
+#: ../content/licence/GenericLicence.py:1500
 msgid "category2"
 msgstr "catégorie 2"
 
-#: ../content/licence/GenericLicence.py:1456
+#: ../content/licence/GenericLicence.py:1501
 msgid "category3"
 msgstr "catégorie 3"
 
@@ -1081,7 +1081,7 @@ msgid "close_inspection"
 msgstr "clôturer le dossier"
 
 #. Default: "Close prevention area"
-#: ../content/licence/GenericLicence.py:1262
+#: ../content/licence/GenericLicence.py:1307
 msgid "close_prevention_area"
 msgstr "Zone de prévention rapprochée"
 
@@ -1425,7 +1425,7 @@ msgid "externaldecisions_folder_title"
 msgstr "Décision des avis externes"
 
 #. Default: "Far prevention area"
-#: ../content/licence/GenericLicence.py:1263
+#: ../content/licence/GenericLicence.py:1308
 msgid "far_prevention_area"
 msgstr "Zone de prévention éloignée"
 
@@ -1477,38 +1477,38 @@ msgid "firefox_viewlet_title"
 msgstr "Cette application fonctionne mieux avec Firefox."
 
 #. Default: "High risk"
-#: ../content/licence/GenericLicence.py:1285
+#: ../content/licence/GenericLicence.py:1330
 msgid "flooding_level_high"
 msgstr "Risque élevé"
 
 #. Default: "Low risk"
-#: ../content/licence/GenericLicence.py:1280
+#: ../content/licence/GenericLicence.py:1325
 msgid "flooding_level_low"
 msgstr "Risque faible"
 
-#: ../content/licence/GenericLicence.py:1282
+#: ../content/licence/GenericLicence.py:1327
 msgid "flooding_level_low_to_high"
 msgstr "Risque faible à élevé"
 
-#: ../content/licence/GenericLicence.py:1281
+#: ../content/licence/GenericLicence.py:1326
 msgid "flooding_level_low_to_moderate"
 msgstr "Risque faible à moyen"
 
 #. Default: "Moderate risk"
-#: ../content/licence/GenericLicence.py:1283
+#: ../content/licence/GenericLicence.py:1328
 msgid "flooding_level_moderate"
 msgstr "Risque moyen"
 
-#: ../content/licence/GenericLicence.py:1284
+#: ../content/licence/GenericLicence.py:1329
 msgid "flooding_level_moderate_to_high"
 msgstr "Risque moyen à élevé"
 
 #. Default: "No"
-#: ../content/licence/GenericLicence.py:1278
+#: ../content/licence/GenericLicence.py:1323
 msgid "flooding_level_no"
 msgstr "Non"
 
-#: ../content/licence/GenericLicence.py:1279
+#: ../content/licence/GenericLicence.py:1324
 msgid "flooding_level_verylow"
 msgstr "Risque très faible"
 
@@ -2029,7 +2029,7 @@ msgid "outdated_parcels_in_use"
 msgstr "Permis en cours contenant une parcelle à mettre jour"
 
 #. Default: "Outside catchment"
-#: ../content/licence/GenericLicence.py:1265
+#: ../content/licence/GenericLicence.py:1310
 msgid "outside_catchment"
 msgstr "Hors captage"
 
@@ -2247,7 +2247,7 @@ msgid "subdivision_fieldset_legend"
 msgstr "Lotissement"
 
 #. Default: "Supervision area"
-#: ../content/licence/GenericLicence.py:1264
+#: ../content/licence/GenericLicence.py:1309
 msgid "supervision_area"
 msgstr "Zone de surveillance"
 
@@ -3020,7 +3020,7 @@ msgid "urban_label_coupleperson2name"
 msgstr "Nom personne 2"
 
 #. Default: "COVID19"
-#: ../content/licence/GenericLicence.py:1055
+#: ../content/licence/GenericLicence.py:1100
 msgid "urban_label_covid"
 msgstr ""
 
@@ -3028,6 +3028,11 @@ msgstr ""
 #: ../content/licence/UrbanCertificateBase.py:196
 msgid "urban_label_customSpecificFeatures"
 msgstr "Particularité(s) diverse(s) du bien"
+
+#. Default: "DeadEndBuilding"
+#: ../content/licence/GenericLicence.py:1042
+msgid "urban_label_deadEndBuilding"
+msgstr "Immeuble en impasse"
 
 #. Default: "Decision"
 #: ../UrbanEvent.py:141
@@ -3139,6 +3144,11 @@ msgstr "Détails concernant les dérogations"
 #: ../content/licence/GenericLicence.py:259
 msgid "urban_label_description"
 msgstr "Observations"
+
+#. Default: "dgrim"
+#: ../content/licence/GenericLicence.py:1006
+msgid "urban_label_dgrim"
+msgstr "Puits de mines (DGRIM)"
 
 #. Default: "Dispatchsinformation"
 #: ../OpinionRequestEventType.py:69
@@ -3370,7 +3380,7 @@ msgid "urban_label_folderZoneDetails"
 msgstr "Détails concernant le zonage"
 
 #. Default: "Foldermanagers"
-#: ../content/licence/GenericLicence.py:1011
+#: ../content/licence/GenericLicence.py:1056
 msgid "urban_label_foldermanagers"
 msgstr "Agent(s) traitant(s)"
 
@@ -3498,6 +3508,11 @@ msgstr "Motifs d'irrecevabilité"
 #: ../content/licence/EnvClassThree.py:100
 msgid "urban_label_inadmissibilityreasonsDetails"
 msgstr "Détails concernant les motifs d'irrecevabilité"
+
+#. Default: "Infrabel"
+#: ../content/licence/GenericLicence.py:1033
+msgid "urban_label_infrabel"
+msgstr "Infrabel"
 
 #. Default: "Initials"
 #: FolderManager.py
@@ -3904,7 +3919,7 @@ msgid "urban_label_notaryReference"
 msgstr "Référence notaire"
 
 #. Default: "Noteworthytrees"
-#: ../content/licence/GenericLicence.py:1044
+#: ../content/licence/GenericLicence.py:1089
 msgid "urban_label_noteworthyTrees"
 msgstr "Arbres et haies remarquables"
 
@@ -3976,7 +3991,7 @@ msgid "urban_label_owner"
 msgstr "Propriétaire"
 
 #. Default: "Parcellings"
-#: ../content/licence/GenericLicence.py:1033
+#: ../content/licence/GenericLicence.py:1078
 msgid "urban_label_parcellings"
 msgstr "Permis d'urbanisation"
 
@@ -4250,6 +4265,11 @@ msgstr "Détails concernant le bien (classé ou assimilé)"
 #: ../content/licence/UrbanCertificateBase.py:468
 msgid "urban_label_protection_zone"
 msgstr "Zone de protection"
+
+#. Default: "PublicHealthRecord"
+#: ../content/licence/GenericLicence.py:1015
+msgid "urban_label_publicHealthRecord"
+msgstr "Concerné par un dossier de salubrités publique"
 
 #. Default: "Publicroadmodifications"
 #: ../content/licence/EnvironmentLicence.py:94
@@ -4577,6 +4597,11 @@ msgstr "Détails concernant le schéma de développement communal"
 msgid "urban_label_section"
 msgstr "Section"
 
+#. Default: "SetbackArea"
+#: ../content/licence/GenericLicence.py:1024
+msgid "urban_label_setbackArea"
+msgstr "Zone de recul"
+
 #. Default: "sevesosite"
 #: ../content/licence/GenericLicence.py:459
 msgid "urban_label_sevesoSite"
@@ -4826,12 +4851,12 @@ msgid "urban_label_townships_and_alignment"
 msgstr "Commune(s) concernée(s) et modification du plan d'alignement"
 
 #. Default: "Trail"
-#: ../content/licence/GenericLicence.py:1088
+#: ../content/licence/GenericLicence.py:1133
 msgid "urban_label_trail"
 msgstr "Sentiers et chemins vicinaux"
 
 #. Default: "TrailDetails"
-#: ../content/licence/GenericLicence.py:1101
+#: ../content/licence/GenericLicence.py:1146
 msgid "urban_label_trailDetails"
 msgstr "Détails concernant sentiers et chemins vicinaux"
 
@@ -4931,12 +4956,12 @@ msgid "urban_label_water"
 msgstr "Eau"
 
 #. Default: "Watercourse"
-#: ../content/licence/GenericLicence.py:1064
+#: ../content/licence/GenericLicence.py:1109
 msgid "urban_label_watercourse"
 msgstr "Cours d'eau"
 
 #. Default: "WatercourseCategories"
-#: ../content/licence/GenericLicence.py:1077
+#: ../content/licence/GenericLicence.py:1122
 msgid "urban_label_watercourseCategories"
 msgstr "Catégories de cours d'eau"
 
@@ -5111,3 +5136,6 @@ msgstr "ans"
 
 msgid "zip_folder_title"
 msgstr "Zone d'initiative privilégiée"
+
+msgid "zoning_folder_title"
+msgstr "Zoning"

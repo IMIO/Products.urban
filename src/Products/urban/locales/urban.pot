@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2022-11-10 13:02+0000\n"
+"POT-Creation-Date: 2023-02-08 14:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1022,15 +1022,15 @@ msgstr ""
 msgid "cartography_map_descr"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1454
+#: ../content/licence/GenericLicence.py:1499
 msgid "category1"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1455
+#: ../content/licence/GenericLicence.py:1500
 msgid "category2"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1456
+#: ../content/licence/GenericLicence.py:1501
 msgid "category3"
 msgstr ""
 
@@ -1067,7 +1067,7 @@ msgstr ""
 msgid "close_inspection"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1262
+#: ../content/licence/GenericLicence.py:1307
 msgid "close_prevention_area"
 msgstr ""
 
@@ -1407,7 +1407,7 @@ msgstr ""
 msgid "externaldecisions_folder_title"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1263
+#: ../content/licence/GenericLicence.py:1308
 msgid "far_prevention_area"
 msgstr ""
 
@@ -1458,35 +1458,35 @@ msgstr ""
 msgid "firefox_viewlet_title"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1285
+#: ../content/licence/GenericLicence.py:1330
 msgid "flooding_level_high"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1280
+#: ../content/licence/GenericLicence.py:1325
 msgid "flooding_level_low"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1282
+#: ../content/licence/GenericLicence.py:1327
 msgid "flooding_level_low_to_high"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1281
+#: ../content/licence/GenericLicence.py:1326
 msgid "flooding_level_low_to_moderate"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1283
+#: ../content/licence/GenericLicence.py:1328
 msgid "flooding_level_moderate"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1284
+#: ../content/licence/GenericLicence.py:1329
 msgid "flooding_level_moderate_to_high"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1278
+#: ../content/licence/GenericLicence.py:1323
 msgid "flooding_level_no"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1279
+#: ../content/licence/GenericLicence.py:1324
 msgid "flooding_level_verylow"
 msgstr ""
 
@@ -2002,7 +2002,7 @@ msgstr ""
 msgid "outdated_parcels_in_use"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1265
+#: ../content/licence/GenericLicence.py:1310
 msgid "outside_catchment"
 msgstr ""
 
@@ -2219,7 +2219,7 @@ msgstr ""
 msgid "subdivision_fieldset_legend"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1264
+#: ../content/licence/GenericLicence.py:1309
 msgid "supervision_area"
 msgstr ""
 
@@ -2991,13 +2991,18 @@ msgid "urban_label_coupleperson2name"
 msgstr ""
 
 #. Default: "COVID19"
-#: ../content/licence/GenericLicence.py:1055
+#: ../content/licence/GenericLicence.py:1100
 msgid "urban_label_covid"
 msgstr ""
 
 #. Default: "Customspecificfeatures"
 #: ../content/licence/UrbanCertificateBase.py:196
 msgid "urban_label_customSpecificFeatures"
+msgstr ""
+
+#. Default: "DeadEndBuilding"
+#: ../content/licence/GenericLicence.py:1042
+msgid "urban_label_deadEndBuilding"
 msgstr ""
 
 #. Default: "Decision"
@@ -3109,6 +3114,11 @@ msgstr ""
 #: ../content/licence/EnvironmentBase.py:269
 #: ../content/licence/GenericLicence.py:259
 msgid "urban_label_description"
+msgstr ""
+
+#. Default: "dgrim"
+#: ../content/licence/GenericLicence.py:1006
+msgid "urban_label_dgrim"
 msgstr ""
 
 #. Default: "Dispatchsinformation"
@@ -3340,7 +3350,7 @@ msgid "urban_label_folderZoneDetails"
 msgstr ""
 
 #. Default: "Foldermanagers"
-#: ../content/licence/GenericLicence.py:1011
+#: ../content/licence/GenericLicence.py:1056
 msgid "urban_label_foldermanagers"
 msgstr ""
 
@@ -3467,6 +3477,11 @@ msgstr ""
 #. Default: "Inadmissibilityreasonsdetails"
 #: ../content/licence/EnvClassThree.py:100
 msgid "urban_label_inadmissibilityreasonsDetails"
+msgstr ""
+
+#. Default: "Infrabel"
+#: ../content/licence/GenericLicence.py:1033
+msgid "urban_label_infrabel"
 msgstr ""
 
 #. Default: "Initials"
@@ -3874,7 +3889,7 @@ msgid "urban_label_notaryReference"
 msgstr ""
 
 #. Default: "Noteworthytrees"
-#: ../content/licence/GenericLicence.py:1044
+#: ../content/licence/GenericLicence.py:1089
 msgid "urban_label_noteworthyTrees"
 msgstr ""
 
@@ -3944,7 +3959,7 @@ msgid "urban_label_owner"
 msgstr ""
 
 #. Default: "Parcellings"
-#: ../content/licence/GenericLicence.py:1033
+#: ../content/licence/GenericLicence.py:1078
 msgid "urban_label_parcellings"
 msgstr ""
 
@@ -4217,6 +4232,11 @@ msgstr ""
 #: ../content/licence/Division.py:157
 #: ../content/licence/UrbanCertificateBase.py:468
 msgid "urban_label_protection_zone"
+msgstr ""
+
+#. Default: "PublicHealthRecord"
+#: ../content/licence/GenericLicence.py:1015
+msgid "urban_label_publicHealthRecord"
 msgstr ""
 
 #. Default: "Publicroadmodifications"
@@ -4545,6 +4565,11 @@ msgstr ""
 msgid "urban_label_section"
 msgstr ""
 
+#. Default: "SetbackArea"
+#: ../content/licence/GenericLicence.py:1024
+msgid "urban_label_setbackArea"
+msgstr ""
+
 #. Default: "sevesosite"
 #: ../content/licence/GenericLicence.py:459
 msgid "urban_label_sevesoSite"
@@ -4793,12 +4818,12 @@ msgid "urban_label_townships_and_alignment"
 msgstr ""
 
 #. Default: "Trail"
-#: ../content/licence/GenericLicence.py:1088
+#: ../content/licence/GenericLicence.py:1133
 msgid "urban_label_trail"
 msgstr ""
 
 #. Default: "TrailDetails"
-#: ../content/licence/GenericLicence.py:1101
+#: ../content/licence/GenericLicence.py:1146
 msgid "urban_label_trailDetails"
 msgstr ""
 
@@ -4897,12 +4922,12 @@ msgid "urban_label_water"
 msgstr ""
 
 #. Default: "Watercourse"
-#: ../content/licence/GenericLicence.py:1064
+#: ../content/licence/GenericLicence.py:1109
 msgid "urban_label_watercourse"
 msgstr ""
 
 #. Default: "WatercourseCategories"
-#: ../content/licence/GenericLicence.py:1077
+#: ../content/licence/GenericLicence.py:1122
 msgid "urban_label_watercourseCategories"
 msgstr ""
 
