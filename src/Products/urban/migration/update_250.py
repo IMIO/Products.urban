@@ -5,6 +5,10 @@ from collective.documentgenerator.content.pod_template import IConfigurablePODTe
 from collective.documentgenerator.content.vocabulary import AllPODTemplateWithFileVocabularyFactory
 from collective.documentgenerator.search_replace.pod_template import SearchAndReplacePODTemplates
 
+from Products.urban.profiles.extra.config_default_values import default_values
+from Products.urban.setuphandlers import createVocabularyFolder
+from Products.urban.setuphandlers import createFolderDefaultValues
+
 from plone import api
 from plone.app.textfield import RichTextValue
 from plone.app.uuid.utils import uuidToObject
@@ -657,3 +661,23 @@ def install_browserlayer(context):
         "profile-Products.urban:default", "browserlayer"
     )
     logger.info("upgrade step done!")
+
+
+def add_new_vocabulary_for_zoning_field(context):
+    """
+    """
+    logger = logging.getLogger('urban: Add new vocabulary for Zoning field')
+    logger.info("starting upgrade steps")
+
+    container = api.portal.get_tool('portal_urban')
+    vocabulary_name = 'zoning'
+    zoning_vocabularies_config = default_values['global'][vocabulary_name]
+    allowedtypes = zoning_vocabularies_config[0]
+    zoning_folder_config = createVocabularyFolder(container, vocabulary_name, context, allowedtypes)
+    createFolderDefaultValues(
+            zoning_folder_config,
+            default_values['global'][vocabulary_name][1:],
+            default_values['global'][vocabulary_name][0]
+    )
+
+    logger.info("migration step done!")
