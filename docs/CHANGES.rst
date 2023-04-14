@@ -5,6 +5,8 @@ Changes
 2.5 (unreleased)
 ----------------
 
+- Add national register number to corporation form [SUP-27165]
+  [jchandelle]
 
 - Add an external method to update task delay [SUP-28870]
   [jchandelle]
