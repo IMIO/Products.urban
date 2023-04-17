@@ -64,7 +64,7 @@ class TaskDebugView(BrowserView):
         announced_delay = queryMultiAdapter(
             (licence, self.context),
             ICalculationDelay,
-            "urban.schedule.delay.announced_delay",
+            "urban.schedule.delay.annonced_delay",
         )
         announced_delay = (
             announced_delay

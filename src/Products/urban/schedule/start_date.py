@@ -45,17 +45,20 @@ class AcknowledgmentLimitDate(StartDate):
 
     def start_date(self):
         licence = self.task_container
+        limit_date = None
         if hasattr(licence, 'getHasModifiedBlueprints') and not licence.getHasModifiedBlueprints():
             deposit = licence.getLastDeposit()
-            limit_date = deposit and deposit.getEventDate() + 20 or None
-        else:
+            date = deposit and deposit.getEventDate()
+            limit_date = date and date + 20 or None
+        elif hasattr(licence, 'getLastAcknowledgment'):
             ack = licence.getLastAcknowledgment(state='closed')
             annonced_delay = queryMultiAdapter(
                 (licence, self.task),
                 ICalculationDelay,
                 'urban.schedule.delay.annonced_delay'
             )
-            limit_date = ack and ack.getEventDate() + annonced_delay.calculate_delay(with_modified_blueprints=False)
+            annonced_delay = annonced_delay and annonced_delay.calculate_delay(with_modified_blueprints=False) or 0
+            limit_date = ack and ack.getEventDate() + annonced_delay
         return limit_date
 
 
@@ -90,7 +93,7 @@ class AcknowledgmentDate(StartDate):
 
     def start_date(self):
         licence = self.task_container
-        ack = licence.getLastAcknowledgment()
+        ack = hasattr(licence, 'getLastAcknowledgment') and licence.getLastAcknowledgment() or None
         ack_date = ack and ack.getEventDate() or None
         return ack_date
 
@@ -102,7 +105,7 @@ class AcknowledgmentTransmitDate(StartDate):
 
     def start_date(self):
         licence = self.task_container
-        ack = licence.getLastAcknowledgment()
+        ack = hasattr(licence, 'getLastAcknowledgment') and licence.getLastAcknowledgment() or None
         ack_transmit_date = ack and ack.getTransmitDate() or None
         return ack_transmit_date
 
