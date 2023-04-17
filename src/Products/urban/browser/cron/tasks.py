@@ -56,12 +56,31 @@ class UpdateOpenTasksLicences(BrowserView):
     def __call__(self):
         """ """
         catalog = api.portal.get_tool('portal_catalog')
+        known_parents = []
 
         open_tasks_brains = catalog(
             object_provides=IAutomatedTask.__identifier__,
             review_state=states_by_status[STARTED]
         )
         licences = list(set([t.getObject().get_container() for t in open_tasks_brains]))
+        filtered_licences = []
         for licence in licences:
+            if len([e for e in licence.getUrbanEvents() if ICollegeEvent.providedBy(e)]) > 0:
+                filtered_licences.append(licence)
+        from Products.urban import logger
+        #from imio.schedule.utils import get_task_configs
+        for licence in filtered_licences:
+            logger.info("UpdateOpenTasksLicences: %s" % str(licence.absolute_url()))
+            logger.info("getHasModifiedBlueprints: %s" % str(hasattr(licence, "getHasModifiedBlueprints") and licence.getHasModifiedBlueprints()))
+            logger.info("getLastAcknowledgment: %s" % str(hasattr(licence, "getLastAcknowledgment") and (licence.getLastAcknowledgment() and licence.getLastAcknowledgment() or "None")))
             notify(ObjectModifiedEvent(licence))
             licence.reindexObject()
+            #task_configs = licence.portal_type != 'CODT_BuildLicence' and get_task_configs(licence) or []
+            #for config in task_configs:
+                #task = config.get_open_task(licence)
+                #if task:
+                    #task.due_date = config.compute_due_date(licence, task)
+                    #task.reindexObject(idxs=('due_date',))
+            #if licence.id == "codt_buildlicence.2022-07-12.3145384997":
+            #    notify(ObjectModifiedEvent(licence))
+            #    licence.reindexObject()
