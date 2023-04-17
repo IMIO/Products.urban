@@ -29,6 +29,8 @@ from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import Reference
 from Products.ATContentTypes.interfaces.file import IATFile
 from Products.CMFCore.utils import getToolByName
 
+from collective.plonefinder.browser.interfaces import IFinderUploadCapable
+from collective.quickupload.interfaces import IQuickUploadCapable
 from Products.urban.interfaces import IUrbanDoc
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.utils import is_attachment
@@ -509,7 +511,11 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
     """
     """
     security = ClassSecurityInfo()
-    implements(interfaces.IUrbanEvent)
+    implements(
+        interfaces.IUrbanEvent,
+        IFinderUploadCapable,
+        IQuickUploadCapable
+    )
 
     meta_type = 'UrbanEvent'
     _at_rename_after_creation = False
