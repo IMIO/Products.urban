@@ -10,7 +10,12 @@ def list_missing_events():
     """
     """
     catalog = api.portal.get_tool('portal_catalog')
-    licences = [b.getObject() for b in catalog(object_provides=IGenericLicence.__identifier__)]
+    context_path = '/' + '/'.join(api.portal.get().REQUEST['PATH_INFO'].split('/')[4:-1]).replace('/VirtualHostRoot', '')
+    licences = [b.getObject() for b in
+               catalog(
+                   object_provides=IGenericLicence.__identifier__,
+                   path={'query': context_path, 'depth': 10}
+              )]
     all_broken_events = {}
     for licence in licences:
         broken_events = [obj for obj in licence.objectValues()
@@ -25,6 +30,7 @@ def list_missing_events():
                 events_by_licence[broken_event.Title()] = [licence]
 
     return all_broken_events
+
 
 def fix_missing_event_types():
     all_broken_events = list_missing_events()
