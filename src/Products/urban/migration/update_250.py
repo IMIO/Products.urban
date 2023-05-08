@@ -670,3 +670,9 @@ def add_new_vocabulary_for_zoning_field(context):
     )
 
     logger.info("migration step done!")
+
+
+def change_multiselect_widget(context):
+    portal_setup = api.portal.get_tool('portal_setup')
+    portal_setup.runImportStepFromProfile('profile-Products.urban:default', 'browserlayer')
+    portal_setup.runImportStepFromProfile('profile-Products.urban:default', 'jsregistry')

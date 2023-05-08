@@ -82,7 +82,9 @@
             </span>
         </label>
         <select multiple="multiple"
-                class="blurrable"
+                class="blurrable select2"
+                i18n:attributes="data-placeholder"
+                data-placeholder="Select one or more option"
                 tal:attributes="name string:${fieldName}:list;
                                 id fieldName;
                                 size widget/size;">

@@ -5,6 +5,9 @@ Changes
 2.5 (unreleased)
 ----------------
 
+- Change multiselect widget to select2 [URB-2575]
+  [jchandelle]
+
 - Add fields to legal aspect of generic licence [SUP-22944]
   [jchandelle]
 
