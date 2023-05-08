@@ -443,13 +443,6 @@
         handler=".update_250.add_new_vocabulary_for_zoning_field"
         profile="Products.urban:default" />
 
-    <gs:upgradeStep
-        title="Change multiselect widget"
-        description="Change multiselect widget"
-        source="1127"
-        destination="1128"
-        handler=".update_250.change_multiselect_widget"
-        profile="Products.urban:default" />
 
     <!--gs:upgradeStep
         title="Add schedule config for env licences 1 and 2"

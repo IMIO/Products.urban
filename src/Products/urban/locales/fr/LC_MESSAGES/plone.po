@@ -467,6 +467,3 @@ msgstr "Veuillez indiquer d'avantages de termes de recherche"
 
 msgid "workLocationStreet"
 msgstr "Rue"
-
-msgid "Select one or more option"
-msgstr "Sélectionnez une ou plusieurs options"

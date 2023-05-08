@@ -4,12 +4,6 @@
     xmlns:plone="http://namespaces.plone.org/plone"
     i18n_domain="urban">
 
-   <include package="z3c.jbot" file="meta.zcml" />
-   <browser:jbot
-      directory="overrides"
-      layer="Products.urban.interfaces.IProductUrbanLayer"
-      />
-
   <include package=".actionspanel" />
   <include package=".cron" />
   <include package=".licence" />
