@@ -6,6 +6,9 @@ Changes
 2.5.2 (unreleased)
 ------------------
 
+- Change MultiSelectionWidget to MultiSelect2Widget [URB-2575]
+  [jchandelle]
+
 - Add fields to legal aspect of generic licence [SUP-22944]
   [jchandelle]
 
