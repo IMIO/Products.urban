@@ -5,9 +5,6 @@ Changes
 2.5 (unreleased)
 ----------------
 
-- Fix archetype getter and setteur
-  [jchandelle]
-
 - Migrate CWATUP field to CODT field [SUP-22150]
   [jchandelle]
 
