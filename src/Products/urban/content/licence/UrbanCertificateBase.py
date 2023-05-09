@@ -760,7 +760,7 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     schema.moveField('notaryContact', after='workLocations')
     schema.moveField('foldermanagers', after='notaryContact')
     schema.moveField('description', after='opinionsToAskIfWorks')
-    schema.moveField('basement', after='township_guide')
+    schema.moveField('basement', after='RCU')
     schema.moveField('ZIP', after='basement')
     schema.moveField('pollution', after='ZIP')
     schema.moveField('folderCategoryTownship', after='pollution')
