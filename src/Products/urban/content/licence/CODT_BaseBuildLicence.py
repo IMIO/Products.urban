@@ -208,6 +208,51 @@ schema = Schema((
         default_output_type='text/x-html-safe',
     ),
     LinesField(
+        name='SDC',
+        widget=MultiSelectionWidget(
+            size=15,
+            label=_('urban_label_SDC', default='Sdc'),
+        ),
+        schemata='urban_location',
+        multiValued=1,
+        vocabulary=UrbanVocabulary('sdc', inUrbanConfig=False),
+        default_method='getDefaultValue',
+    ),
+    TextField(
+        name='sdcDetails',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            label=_('urban_label_sdcDetails', default='Sdcdetails'),
+        ),
+        default_content_type='text/html',
+        default_method='getDefaultText',
+        schemata='urban_location',
+        default_output_type='text/x-html-safe',
+    ),
+    LinesField(
+        name='township_guide',
+        widget=MultiSelectionWidget(
+            size=10,
+            label=_('urban_label_township_guide', default='Township_guide'),
+        ),
+        schemata='urban_location',
+        multiValued=1,
+        vocabulary=UrbanVocabulary('township_guide', inUrbanConfig=False),
+        default_method='getDefaultValue',
+    ),
+    TextField(
+        name='township_guide_details',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            label=_('urban_label_township_guide_details',
+                    default='Township_guide_details'),
+        ),
+        default_content_type='text/html',
+        default_method='getDefaultText',
+        schemata='urban_location',
+        default_output_type='text/x-html-safe',
+    ),
+    LinesField(
         name='regional_guide',
         widget=MultiSelectionWidget(
             label=_('urban_label_regional_guide', default='Regional_guide'),
@@ -432,11 +477,14 @@ CODT_BaseBuildLicence_schema = BaseFolderSchema.copy() + \
     getattr(GenericLicence, 'schema', Schema(())).copy() + \
     schema.copy()
 
-
 ##code-section after-schema #fill in your manual code here
 CODT_BaseBuildLicence_schema['title'].required = False
 CODT_BaseBuildLicence_schema.delField('rgbsr')
 CODT_BaseBuildLicence_schema.delField('rgbsrDetails')
+CODT_BaseBuildLicence_schema.delField('SSC')
+CODT_BaseBuildLicence_schema.delField('sscDetails')
+CODT_BaseBuildLicence_schema.delField('RCU')
+CODT_BaseBuildLicence_schema.delField('rcuDetails')
 CODT_BaseBuildLicence_schema.delField('composition')
 #put the the fields coming from Inquiry in a specific schemata
 setSchemataForCODT_Inquiry(CODT_BaseBuildLicence_schema)
@@ -619,16 +667,12 @@ def finalizeSchema(schema):
     schema.moveField('divergenceDetails', before='announcementArticles')
     schema.moveField('divergence', before='divergenceDetails')
     schema.moveField('inquiry_type', before='divergence')
-    if schema.get("SDC"):
-        schema.moveField('SDC', after='protectedBuildingDetails')
-    if schema.get("SDC"):
-        schema.moveField('sdcDetails', after='SDC')
+    schema.moveField('SDC', after='protectedBuildingDetails')
+    schema.moveField('sdcDetails', after='SDC')
     schema.moveField('regional_guide', after='reparcellingDetails')
     schema.moveField('regional_guide_details', after='regional_guide')
-    if schema.get('township_guide'):
-        schema.moveField('township_guide', after='sdcDetails')
-    if schema.get('township_guide_details'):
-        schema.moveField('township_guide_details', after='township_guide')
+    schema.moveField('township_guide', after='sdcDetails')
+    schema.moveField('township_guide_details', after='township_guide')
     schema.moveField('form_composition', before='missingParts')
     schema.moveField('patrimony', pos='top')
     schema.moveField('regional_inventory_building', after='patrimony')

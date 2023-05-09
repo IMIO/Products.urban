@@ -296,6 +296,51 @@ schema = Schema((
         default_output_type='text/x-html-safe',
     ),
     LinesField(
+        name='SDC',
+        widget=MultiSelectionWidget(
+            size=15,
+            label=_('urban_label_SDC', default='Sdc'),
+        ),
+        schemata='urban_location',
+        multiValued=1,
+        vocabulary=UrbanVocabulary('sdc', inUrbanConfig=False),
+        default_method='getDefaultValue',
+    ),
+    TextField(
+        name='sdcDetails',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            label=_('urban_label_sdcDetails', default='Sdcdetails'),
+        ),
+        default_content_type='text/html',
+        default_method='getDefaultText',
+        schemata='urban_location',
+        default_output_type='text/x-html-safe',
+    ),
+    LinesField(
+        name='township_guide',
+        widget=MultiSelectionWidget(
+            size=10,
+            label=_('urban_label_township_guide', default='Township_guide'),
+        ),
+        schemata='urban_location',
+        multiValued=1,
+        vocabulary=UrbanVocabulary('township_guide', inUrbanConfig=False),
+        default_method='getDefaultValue',
+    ),
+    TextField(
+        name='township_guide_details',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            label=_('urban_label_township_guide_details',
+                    default='Township_guide_details'),
+        ),
+        default_content_type='text/html',
+        default_method='getDefaultText',
+        schemata='urban_location',
+        default_output_type='text/x-html-safe',
+    ),
+    LinesField(
         name='regional_guide',
         widget=MultiSelectionWidget(
             label=_('urban_label_regional_guide', default='Regional_guide'),

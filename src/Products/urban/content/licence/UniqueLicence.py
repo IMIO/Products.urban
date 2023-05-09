@@ -224,10 +224,10 @@ UniqueLicence_schema = BaseFolderSchema.copy() + \
 UniqueLicence_schema['title'].required = False
 UniqueLicence_schema.delField('rgbsr')
 UniqueLicence_schema.delField('rgbsrDetails')
-UniqueLicence_schema.delField('SDC')
-UniqueLicence_schema.delField('sdcDetails')
-UniqueLicence_schema.delField('township_guide')
-UniqueLicence_schema.delField('township_guide_details')
+UniqueLicence_schema.delField('SSC')
+UniqueLicence_schema.delField('sscDetails')
+UniqueLicence_schema.delField('RCU')
+UniqueLicence_schema.delField('rcuDetails')
 ##/code-section after-schema
 
 
