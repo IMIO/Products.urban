@@ -126,7 +126,8 @@ optional_fields = [
     'preemption', 'preemptionDetails', 'SAR', 'sarDetails', 'enoughRoadEquipment', 'enoughRoadEquipmentDetails',
     'reparcelling', 'reparcellingDetails', 'noteworthyTrees', 'pipelines', 'pipelinesDetails', 'tax',
     'groundStateStatus', 'groundstatestatusDetails', 'covid', 'watercourse', 'watercourseCategories', 'trail',
-    'trailDetails', 'tax', 'taxDetails', 'photo'
+    'trailDetails', 'tax', 'taxDetails', 'photo', 'dgrim', 'publicHealthRecord', 'setbackArea', 'infrabel', 
+    'deadEndBuilding', 'zoning'
 ]
 # /code-section module-header
 
@@ -1049,6 +1050,63 @@ schema = Schema((
         default_method='getDefaultValue',
     ),
     BooleanField(
+        name='dgrim',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label=_('urban_label_dgrim',
+                    default='dgrim'),
+        ),
+        schemata='urban_location',
+    ),
+    LinesField(
+        name='zoning',
+        widget=MultiSelectionWidget(
+            format='checkbox',
+            label=_('urban_label_zoning',
+                    default='Zoning'),
+        ),
+        schemata='urban_location',
+        multiValued=True,
+        vocabulary=UrbanVocabulary(path='zoning', inUrbanConfig=False),
+        default_method='getDefaultValue',
+    ),
+    BooleanField(
+        name='publicHealthRecord',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label=_('urban_label_publicHealthRecord',
+                    default='PublicHealthRecord'),
+        ),
+        schemata='urban_location',
+    ),
+    BooleanField(
+        name='setbackArea',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label=_('urban_label_setbackArea',
+                    default='SetbackArea'),
+        ),
+        schemata='urban_location',
+    ),
+    BooleanField(
+        name='infrabel',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label=_('urban_label_infrabel',
+                    default='Infrabel'),
+        ),
+        schemata='urban_location',
+    ),
+    BooleanField(
+        name='deadEndBuilding',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label=_('urban_label_deadEndBuilding',
+                    default='DeadEndBuilding'),
+        ),
+        schemata='urban_location',
+    ),
+    BooleanField(
         name='covid',
         default=False,
         widget=BooleanField._properties['widget'](
@@ -1072,8 +1130,8 @@ schema = Schema((
 
     LinesField(
         name='watercourseCategories',
-        widget=MultiSelectionWidget(
-            size=3,
+        widget=MasterMultiSelectWidget(
+            format='checkbox',
             label=_('urban_label_watercourseCategories', default='WatercourseCategories'),
         ),
         schemata='urban_location',
