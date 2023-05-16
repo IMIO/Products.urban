@@ -90,7 +90,7 @@ class UrbanStreetsSuggest(SuggestView):
 
     label = 'Rues urban'
 
-    def compute_suggestions(self):
+    def compute_suggestions(self, exact_match=False):
         term = self.request.get('term')
         if not term:
             return
@@ -99,8 +99,13 @@ class UrbanStreetsSuggest(SuggestView):
         urban_config = api.portal.get_tool('portal_urban')
         path = '/'.join(urban_config.streets.getPhysicalPath())
 
+        title = ' AND '.join(["%s*" % x for x in terms])
+
+        if exact_match:
+            title = term
+
         kwargs = {
-            'Title': ' AND '.join(["%s*" % x for x in terms]),
+            'Title': title,
             'sort_on': 'sortable_title',
             'sort_order': 'reverse',
             'path': path,
