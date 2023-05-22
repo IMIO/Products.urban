@@ -565,8 +565,12 @@ msgstr ""
 msgid "Internal opinion services"
 msgstr ""
 
-#: ../browser/urbaneventviews.py:222
-msgid "Listing file"
+#: ../browser/urbaneventviews.py:224
+msgid "Listing file (claimants)"
+msgstr ""
+
+#: ../browser/urbaneventviews.py:259
+msgid "Listing file (recipients)"
 msgstr ""
 
 #: ../interfaces.py:765
@@ -745,7 +749,11 @@ msgstr ""
 msgid "Tests Extension profile for urban."
 msgstr ""
 
-#: ../browser/urbaneventviews.py:465
+#: ../browser/urbaneventviews.py:332
+msgid "The CSV file couldn't be read properly. Please verify its structure and try again."
+msgstr ""
+
+#: ../browser/urbaneventviews.py:707
 msgid "The claimants import will be ready tomorrow!"
 msgstr ""
 
@@ -1234,6 +1242,16 @@ msgid "division_urbanconfig_title"
 msgstr ""
 
 msgid "divisions"
+msgstr ""
+
+#. Default: "Some national registry numbers already exist in this list; please remove them from the CSV and try again.\n${ids}"
+#: ../browser/urbaneventviews.py:366
+msgid "duplicate_ids_found_msg"
+msgstr ""
+
+#. Default: "Some national registry numbers are used multiple times in the CSV; please remove them and try again.\n${numbers}"
+#: ../browser/urbaneventviews.py:350
+msgid "duplicate_numbers_found_msg"
 msgstr ""
 
 msgid "envclassbordering_urbanconfig_title"
@@ -2455,6 +2473,10 @@ msgstr ""
 #. Default: "If checked, an additional paragraph will be added in the licence document"
 #: BuildLicence.py
 msgid "urban_help_townshipCouncilFolder"
+msgstr ""
+
+#: ../browser/urbaneventviews.py:422
+msgid "urban_imported_recipients"
 msgstr ""
 
 #. Default: "Dgo4reference"

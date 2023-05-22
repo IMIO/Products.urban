@@ -202,6 +202,13 @@
                                 </form>
                                 <p>&nbsp;</p>
                             </tal:block>
+
+                            <tal:import_recipients_form define="form python: view.import_recipients_listing_form">
+                                <tal:with-form-as-view define="view nocall:form">
+                                    <metal:block use-macro="form/@@ploneform-macros/titlelessform"/>
+                                </tal:with-form-as-view>
+                            </tal:import_recipients_form>
+
                             <tal:block condition="python: context.REQUEST.get('template_uid') != None">
                                 <tal:block define="docObj python:context.uid_catalog(UID=context.REQUEST.get('template_uid'))[0]">
                                     <Script tal:content="python:'document.location = \''+docObj.getObject().absolute_url()+'/external_edit\';'" />

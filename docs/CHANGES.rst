@@ -49,6 +49,9 @@ Changes
 - Allow to encode dates going back to 1930
   [fngaha]
 
+- Add CSV import of recipients to an inquiry [URB-2573]
+  [ndemonte]
+
 - Update MailingPersistentDocumentGenerationView call with generated_doc_title param. [URB-1862]
   [jjaumotte]
 
