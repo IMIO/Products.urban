@@ -195,7 +195,15 @@ schema = Schema((
         ),
         validators=('isBelgianNR',),
     ),
-
+    StringField(
+        name='tvaNumber',
+        widget=StringField._properties['widget'](
+            condition="python: here.portal_type == 'Notary'",
+            label='Tvanumber',
+            label_msgid='urban_label_tvaNumber',
+            i18n_domain='urban',
+        ),
+    ),
 ),
 )
 

@@ -6,6 +6,9 @@ Changes
 2.5.2 (unreleased)
 ------------------
 
+- Add vat field to notary [SUP-29450]
+  [jchandelle]
+
 - Change MultiSelectionWidget to MultiSelect2Widget [URB-2575]
   [jchandelle]
 
