@@ -5,6 +5,10 @@ Changes
 2.5 (unreleased)
 ----------------
 
+- Fix extra profile setup causing too big transaction
+  Error was: "TypeError: Can't pickle objects in acquisition wrappers"
+  [laulaz]
+
 - provides organizations to consult based on external directions
   [fngaha]
 

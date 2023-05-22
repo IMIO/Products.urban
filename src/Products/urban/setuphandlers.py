@@ -67,6 +67,10 @@ from zope.lifecycleevent import ObjectModifiedEvent
 from zope import event
 
 import pickle
+import transaction
+
+OBJECTS_COUNT = 0
+
 ##/code-section HEAD
 
 def isNoturbanProfile(context):
@@ -93,6 +97,16 @@ def setupHideToolsFromNavigation(context):
                 kwargs = {'idsNotToList': current}
                 navtreeProperties.manage_changeProperties(**kwargs)
 
+
+def checkPoint():
+    """allows to create savepoints every 50 objects created to avoid having
+    a too huge transaction in memory"""
+    global OBJECTS_COUNT
+    OBJECTS_COUNT += 1
+    if OBJECTS_COUNT % 50 == 0:
+        logger.debug("Creating transaction savepoint ...")
+        trx = transaction.get()
+        trx.savepoint()
 
 
 def updateRoleMappings(context):
@@ -300,6 +314,7 @@ def createFolderDefaultValues(folder, objects_list, portal_type=''):
         if type(obj) is dict:
             if obj['id'] not in folder.objectIds():
                 folder.invokeFactory(portal_type, **obj)
+                checkPoint()
 
 
 def createVocabularyFolder(container, folder_id, site, allowedtypes='UrbanVocabularyTerm', foldertype='Folder'):
@@ -311,6 +326,7 @@ def createVocabularyFolder(container, folder_id, site, allowedtypes='UrbanVocabu
         new_folder = getattr(container, folder_id)
         new_folder.setTitle(_("%s_folder_title" % folder_id, 'urban'))
     alsoProvides(new_folder, IUrbanConfigurationFolder)
+    checkPoint()
     return new_folder
 
 
@@ -443,6 +459,7 @@ def addUrbanConfigFolders(context):
 
         shared_vocabularies = getSharedVocabularies(urban_type, default_values)
         createVocabularyFolders(container=config_folder, vocabularies=shared_vocabularies, site=site)
+        checkPoint()
 
 
 def set_file_system_configuration(context):
@@ -573,6 +590,7 @@ def addRubricValues(context, config_folder):
 
             rubric = getattr(rubric_folder, rubric_id)
             rubric.setExploitationCondition(conditions_uid)
+        checkPoint()
 
 
 def addExploitationConditions(context, config_folder):
@@ -613,6 +631,7 @@ def addExploitationConditions(context, config_folder):
                     field = old_condition.getField(fieldname)
                     mutator = field.getMutator(old_condition)
                     mutator(newvalue)
+            checkPoint()
 
 
 def addUrbanGroups(context):
@@ -889,6 +908,7 @@ def addApplicationFolders(context):
             if urban_type in ['EnvClassOne', 'EnvClassTwo', 'EnvClassBordering']:
                 licence_folder.manage_permission('urban: Add EnvironmentLicence', ['Manager', 'Contributor', ], acquire=0)
         newFolder.moveObjectsToBottom([licence_folder_id])
+        checkPoint()
 
     #add a folder that will contains architects
     if not hasattr(newFolder, "architects"):
@@ -1089,6 +1109,9 @@ def setupSchedule(context):
                 folder_id
             )
             _set_faceted_view(collection_folder, config_path, [schedule_config])
+
+        checkPoint()
+
     setFolderAllowedTypes(schedule_folder, [])
 
 
@@ -1549,3 +1572,5 @@ def _create_task_configs(container, taskconfigs):
         task_config = getattr(container, task_config_id)
         for subtasks_kwargs in subtasks:
             _create_task_configs(container=task_config, taskconfigs=subtasks)
+
+        checkPoint()
