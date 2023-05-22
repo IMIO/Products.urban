@@ -5,6 +5,9 @@ Changes
 2.5.2 (unreleased)
 ------------------
 
+- Add external method to fix broken environmental declarations [SUP-29587]
+  [daggelpop]
+
 - Fix export data with c.exportimport [URB-2733]
   [jchandelle]
 
