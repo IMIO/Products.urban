@@ -435,6 +435,14 @@
         handler=".update_250.set_page_style_for_mailing_templates"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Install browserlayer"
+        description="Install browserlayer"
+        source="1126"
+        destination="1127"
+        handler=".update_250.install_browserlayer"
+        profile="Products.urban:default" />
+
 
     <!--gs:upgradeStep
         title="Add schedule config for env licences 1 and 2"

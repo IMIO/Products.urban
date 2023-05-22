@@ -9,6 +9,7 @@
   <include package=".licence" />
   <include package=".table" />
   <include package=".warnings" />
+  <include package=".exportimport" />
   <include file="portlets.zcml" />
 
   <browser:resourceDirectory

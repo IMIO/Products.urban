@@ -4,6 +4,7 @@ from zope.interface import Interface
 from zope import schema
 
 from zope.interface.interfaces import IInterface
+from zope.publisher.interfaces.browser import IDefaultBrowserLayer
 
 from Products.urban import UrbanMessage as _
 
@@ -800,3 +801,7 @@ class IFacetedCollection(Interface):
 
 class IUrbanWarningCondition(Interface):
     """ Adapts a licence into a warning message """
+
+
+class IProductUrbanLayer(IDefaultBrowserLayer):
+    """Marker interface that defines a browser layer."""

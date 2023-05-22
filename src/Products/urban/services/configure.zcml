@@ -25,4 +25,6 @@
     provides="Products.urban.services.interfaces.ISQLSession"
     factory="Products.urban.services.gig.GigSession" />
 
+  <adapter factory=".serializer.UrbanDefaultFieldSerializer" />
+
 </configure>
