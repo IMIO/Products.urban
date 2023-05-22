@@ -5,7 +5,8 @@ Changes
 2.5.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix export data with c.exportimport [URB-2733]
+  [jchandelle]
 
 
 2.5.1 (2023-04-06)
