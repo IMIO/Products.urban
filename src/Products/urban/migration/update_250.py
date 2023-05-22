@@ -649,11 +649,11 @@ def set_page_style_for_mailing_templates(context):
 
 
 def install_browserlayer(context):
-    """
-    """
-    logger = logging.getLogger('urban: Install browserlayer')
+    """ """
+    logger = logging.getLogger("urban: Install browserlayer")
     logger.info("starting upgrade steps")
-    setup_tool = api.portal.get_tool('portal_setup')
-    setup_tool.runImportStepFromProfile('profile-Products.urban:default', 'browserlayer')
+    setup_tool = api.portal.get_tool("portal_setup")
+    setup_tool.runImportStepFromProfile(
+        "profile-Products.urban:default", "browserlayer"
+    )
     logger.info("upgrade step done!")
-    
