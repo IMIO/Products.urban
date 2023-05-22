@@ -836,6 +836,10 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
         )
         return DisplayList(vocab)
 
+    def getObjectPosition(self, id):
+        # !!! Fix to handle file exporting on Event with c.exportimport
+        return 0
+
 
 registerType(UrbanEvent, PROJECTNAME)
 # end of class UrbanEvent
