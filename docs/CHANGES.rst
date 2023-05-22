@@ -6,6 +6,9 @@ Changes
 2.5.2 (unreleased)
 ------------------
 
+- Add CSV import of recipients to an inquiry [URB-2573]
+  [ndemonte]
+
 - Fix bound licence allowed type [SUP-27062]
   [jchandelle]
 
@@ -25,7 +28,7 @@ Changes
   [jchandelle]
 
 - Add external method to fix broken environmental declarations [SUP-29587]
-  [daggelpop]
+  [ndemonte]
 
 - Fix export data with c.exportimport [URB-2733]
   [jchandelle]
@@ -51,9 +54,6 @@ Changes
 
 - Allow to encode dates going back to 1930
   [fngaha]
-
-- Add CSV import of recipients to an inquiry [URB-2573]
-  [ndemonte]
 
 - Update MailingPersistentDocumentGenerationView call with generated_doc_title param. [URB-1862]
   [jjaumotte]
