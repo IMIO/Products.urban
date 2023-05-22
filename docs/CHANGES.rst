@@ -5,6 +5,9 @@ Changes
 2.5 (unreleased)
 ----------------
 
+- Fix bound licence allowed type [SUP-27062]
+  [jchandelle]
+
 - Add vat field to notary [SUP-29450]
   [jchandelle]
 
