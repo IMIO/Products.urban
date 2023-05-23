@@ -9,6 +9,15 @@ Changes
 - Migrate CWATUP field to CODT field [SUP-22150]
   [jchandelle]
 
+- Fix bound licence allowed type [SUP-27062]
+  [jchandelle]
+
+- Add vat field to notary [SUP-29450]
+  [jchandelle]
+
+- Change MultiSelectionWidget to MultiSelect2Widget [URB-2575]
+  [jchandelle]
+
 - Add fields to legal aspect of generic licence [SUP-22944]
   [jchandelle]
 
@@ -32,6 +41,9 @@ Changes
 
 - Allow to encode dates going back to 1930
   [fngaha]
+
+- Add CSV import of recipients to an inquiry [URB-2573]
+  [ndemonte]
 
 - Update MailingPersistentDocumentGenerationView call with generated_doc_title param. [URB-1862]
   [jjaumotte]
