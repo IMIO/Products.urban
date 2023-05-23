@@ -20,6 +20,35 @@ import re
 logger = logging.getLogger('urban: migrations')
 
 
+def _add_widget(faceted, widget_type, widget_id=None, ignore_existing=False, **kwargs):
+    """Add a new faceted widget with the given parameters.
+    !! All the required parameters must be given or the faceted widget may be broken.
+    Raise and error if the widget id is already used.
+
+    Introduced in version 2.0
+
+    :param faceted: [required] Faceted view context
+    :type faceted: Plone Object
+    :param widget_type: [required] Faceted widget type (e.g. checkbox, select, ...)
+    :type widget_type: String
+    :param widget_id: Faceted widget id (e.g. c14 or c0)
+    :type widget_id: String
+    :param ignore_existing: Specify if an error must be raised when the widget id
+                            already exist (default: `False`)
+    :type ignore_existing: Boolean
+
+    :returns: None
+    """
+    criterion = ICriteria(faceted)
+    if widget_id and widget_id in criterion.keys():
+        if ignore_existing is False:
+            raise KeyError("widget id '{0}' already exist".format(widget_id))
+    else:
+        if widget_id is not None:
+            kwargs["_cid_"] = widget_id
+        criterion.add(widget_type, **kwargs)
+
+
 def add_new_default_personTitle(context):
     logger = logging.getLogger('urban: add new default personTitle')
     logger.info("starting upgrade steps")
@@ -671,35 +700,6 @@ def add_vocabulary_for_work_type_for_misc_demand(context):
     )
 
     logger.info("migration step done!")
-
-
-def _add_widget(faceted, widget_type, widget_id=None, ignore_existing=False, **kwargs):
-    """Add a new faceted widget with the given parameters.
-    !! All the required parameters must be given or the faceted widget may be broken.
-    Raise and error if the widget id is already used.
-
-    Introduced in version 2.0
-
-    :param faceted: [required] Faceted view context
-    :type faceted: Plone Object
-    :param widget_type: [required] Faceted widget type (e.g. checkbox, select, ...)
-    :type widget_type: String
-    :param widget_id: Faceted widget id (e.g. c14 or c0)
-    :type widget_id: String
-    :param ignore_existing: Specify if an error must be raised when the widget id
-                            already exist (default: `False`)
-    :type ignore_existing: Boolean
-
-    :returns: None
-    """
-    criterion = ICriteria(faceted)
-    if widget_id and widget_id in criterion.keys():
-        if ignore_existing is False:
-            raise KeyError("widget id '{0}' already exist".format(widget_id))
-    else:
-        if widget_id is not None:
-            kwargs["_cid_"] = widget_id
-        criterion.add(widget_type, **kwargs)
 
 
 def add_decision_date_to_deliberation_college_in_miscdemand(context):
