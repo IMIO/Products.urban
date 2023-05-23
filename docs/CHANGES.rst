@@ -5,6 +5,10 @@ Changes
 2.5 (unreleased)
 ----------------
 
+
+- SUP-19751. Add list 220 field, search and export to misc demand
+  [jchandelle]
+
 - Fix bound licence allowed type [SUP-27062]
   [jchandelle]
 

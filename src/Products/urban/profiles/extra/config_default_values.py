@@ -1487,7 +1487,7 @@ default_values = {
             'UrbanVocabularyTerm', [
                 'BuildLicence', 'Article127', 'UniqueLicence', 'IntegratedLicence', 'ParcelOutLicence', 'UrbanCertificateTwo',
                 'CODT_BuildLicence', 'CODT_ParcelOutLicence', 'CODT_UrbanCertificateTwo', 'CODT_UniqueLicence',
-                'CODT_IntegratedLicence', 'CODT_CommercialLicence',
+                'CODT_IntegratedLicence', 'CODT_CommercialLicence', 'MiscDemand'
             ],
             {'id': 'AUTRE', 'title': u"Autres", 'extraValue': 'AUTRE'},
             {'id': 'DEM', 'title': u"Démolition", 'extraValue': 'DEM'},

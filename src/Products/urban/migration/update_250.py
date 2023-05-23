@@ -15,12 +15,42 @@ from plone.app.uuid.utils import uuidToObject
 
 from zope.event import notify
 from zope.lifecycleevent import ObjectModifiedEvent
+from zope.interface import alsoProvides
 
 from Products.urban.interfaces import IGenericLicence, IBaseBuildLicence
 import logging
 import re
 
 logger = logging.getLogger('urban: migrations')
+
+
+def _add_widget(faceted, widget_type, widget_id=None, ignore_existing=False, **kwargs):
+    """Add a new faceted widget with the given parameters.
+    !! All the required parameters must be given or the faceted widget may be broken.
+    Raise and error if the widget id is already used.
+
+    Introduced in version 2.0
+
+    :param faceted: [required] Faceted view context
+    :type faceted: Plone Object
+    :param widget_type: [required] Faceted widget type (e.g. checkbox, select, ...)
+    :type widget_type: String
+    :param widget_id: Faceted widget id (e.g. c14 or c0)
+    :type widget_id: String
+    :param ignore_existing: Specify if an error must be raised when the widget id
+                            already exist (default: `False`)
+    :type ignore_existing: Boolean
+
+    :returns: None
+    """
+    criterion = ICriteria(faceted)
+    if widget_id and widget_id in criterion.keys():
+        if ignore_existing is False:
+            raise KeyError("widget id '{0}' already exist".format(widget_id))
+    else:
+        if widget_id is not None:
+            kwargs["_cid_"] = widget_id
+        criterion.add(widget_type, **kwargs)
 
 
 def add_new_default_personTitle(context):
@@ -670,3 +700,89 @@ def add_new_vocabulary_for_zoning_field(context):
     )
 
     logger.info("migration step done!")
+
+
+def add_vocabulary_for_work_type_for_misc_demand(context):
+    """
+    """
+    logger = logging.getLogger('urban: Add vocabulary for work type for misc demand')
+    logger.info("starting upgrade steps")
+
+    container = getattr(api.portal.get_tool('portal_urban'), "miscdemand", None)
+    if not container:
+        return
+    vocabulary_name = 'folderbuildworktypes'
+    zoning_vocabularies_config = default_values['shared_vocabularies'][vocabulary_name]
+    allowedtypes = zoning_vocabularies_config[0]
+    zoning_folder_config = createVocabularyFolder(
+        container, vocabulary_name, context, allowedtypes
+    )
+    createFolderDefaultValues(
+        zoning_folder_config,
+        default_values['shared_vocabularies'][vocabulary_name][1:],
+        default_values['shared_vocabularies'][vocabulary_name][0]
+    )
+
+    logger.info("migration step done!")
+
+
+def add_decision_date_to_deliberation_college_in_miscdemand(context):
+    logger = logging.getLogger('urban: Add decision date to deliberation college in misc demand')
+    logger.info("starting upgrade steps")
+
+    # Add field to event in urban config
+    miscdemand = getattr(api.portal.get_tool('portal_urban'), "miscdemand", None)
+    if not miscdemand:
+        return
+    eventconfigs = getattr(miscdemand, "eventconfigs", None)
+    if not eventconfigs:
+        return
+    deliberation_college = getattr(eventconfigs, "deliberation-college", None)
+    if not deliberation_college:
+        return
+
+    activatedFields = getattr(deliberation_college, "activatedFields", None)
+    if not activatedFields:
+        return
+
+    if "decisionDate" not in activatedFields:
+        activatedFields = ('decisionDate',) + activatedFields
+        setattr(deliberation_college, "activatedFields", activatedFields)
+
+    eventType = getattr(deliberation_college, "eventType", None)
+    if not eventType:
+        return
+    if "Products.urban.interfaces.ITheLicenceEvent" not in eventType:
+        eventType = eventType + ("Products.urban.interfaces.ITheLicenceEvent",)
+        setattr(deliberation_college, "eventType", eventType)
+
+    # Add facet to facetednavigation for misc demand folder
+
+    portal = api.portal.get()
+
+    urban = getattr(portal, "urban", None)
+    if not urban:
+        return
+
+    miscdemands = getattr(urban, "miscdemands", None)
+    if not miscdemands:
+        return
+
+    alsoProvides(miscdemands, IFacetedNavigable)
+    alsoProvides(miscdemands, IPossibleFacetedNavigable)
+
+    _add_widget(
+        miscdemands,
+        widget_type="daterange",
+        widget_id="c99",
+        ignore_existing=True,
+        title="Date de décision",
+        index="getDecisionDate",
+        default="",
+        position="top",
+        section="advanced",
+        hidden=False,
+        calYearRange="c-10:c+10"
+    )
+    logger.info("migration step done!")
+    
