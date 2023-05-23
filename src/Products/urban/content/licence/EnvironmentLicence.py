@@ -14,6 +14,7 @@ __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEUL
 __docformat__ = 'plaintext'
 
 from AccessControl import ClassSecurityInfo
+from collective.archetypes.select2.select2widget import MultiSelect2Widget
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 from Products.urban import interfaces
@@ -114,7 +115,7 @@ schema = Schema((
     ),
     LinesField(
         name='ftSolicitOpinionsTo',
-        widget=MultiSelectionWidget(
+        widget=MultiSelect2Widget(
             format='checkbox',
             label=_('urban_label_ftSolicitOpinionsTo', default='Ftsolicitopinionsto'),
         ),
@@ -259,7 +260,7 @@ class EnvironmentLicence(BaseFolder, EnvironmentBase, BrowserDefaultMixin):
         """
         applicants = self.getCorporations() or self.getApplicants()
         if applicants:
-            applicantTitle = applicants[0].Title()
+            applicantTitle = ', '.join([applicant.Title() for applicant in self.getApplicants()])
         else:
             applicantTitle = translate('no_applicant_defined', 'urban', context=self.REQUEST).encode('utf8')
         title = "%s - %s - %s" % (self.getReference(), self.getLicenceSubject(), applicantTitle)

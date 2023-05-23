@@ -14,6 +14,7 @@ __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEUL
 __docformat__ = 'plaintext'
 
 from AccessControl import ClassSecurityInfo
+from collective.archetypes.select2.select2widget import MultiSelect2Widget
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 from Products.urban import interfaces
@@ -31,7 +32,7 @@ from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
 ##code-section module-header #fill in your manual code here
 from zope.i18n import translate
 
-optional_fields = ['divergence', 'divergenceDetails']
+optional_fields = ['divergence', 'divergenceDetails', 'announcementArticlesText']
 
 full_inquiry_slave_fields = (
     {
@@ -109,7 +110,7 @@ schema = Schema((
     ),
     LinesField(
         name='divergence',
-        widget=MultiSelectionWidget(
+        widget=MultiSelect2Widget(
             format='checkbox',
             label=_('urban_label_divergence', default='Divergence'),
         ),
@@ -131,7 +132,7 @@ schema = Schema((
     ),
     LinesField(
         name='announcementArticles',
-        widget=MultiSelectionWidget(
+        widget=MultiSelect2Widget(
             size=10,
             label=_('urban_label_announcementArticles', default='Announcementarticles'),
         ),

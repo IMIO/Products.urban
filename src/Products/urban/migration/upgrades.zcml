@@ -436,21 +436,28 @@
         profile="Products.urban:default" />
 
     <gs:upgradeStep
-        title="Add vocabulary for work type for misc demand"
-        description="Add vocabulary for work type for misc demand"
+        title="Add new vocabulary for Zoning field"
+        description="Add new vocabulary for Zoning field"
         source="1126"
         destination="1127"
+        handler=".update_250.add_new_vocabulary_for_zoning_field"
+        profile="Products.urban:default" />
+ 
+    <gs:upgradeStep
+        title="Add vocabulary for work type for misc demand"
+        description="Add vocabulary for work type for misc demand"
+        source="1127"
+        destination="1128"
         handler=".update_250.add_vocabulary_for_work_type_for_misc_demand"
         profile="Products.urban:default" />
 
     <gs:upgradeStep
         title="Add decision date to deliberation college in misc demand"
         description="Add decision date to deliberation college in misc demand"
-        source="1127"
-        destination="1128"
+        source="1128"
+        destination="1129"
         handler=".update_250.add_decision_date_to_deliberation_college_in_miscdemand"
         profile="Products.urban:default" />
-
 
     <!--gs:upgradeStep
         title="Add schedule config for env licences 1 and 2"

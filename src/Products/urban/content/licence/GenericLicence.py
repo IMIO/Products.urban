@@ -22,6 +22,7 @@ from collective.faceted.task.interfaces import IFacetedTaskContainer
 
 from eea.facetednavigation.subtypes.interfaces import IPossibleFacetedNavigable
 
+from collective.archetypes.select2.select2widget import MultiSelect2Widget
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 from Products.urban import interfaces
@@ -126,7 +127,8 @@ optional_fields = [
     'preemption', 'preemptionDetails', 'SAR', 'sarDetails', 'enoughRoadEquipment', 'enoughRoadEquipmentDetails',
     'reparcelling', 'reparcellingDetails', 'noteworthyTrees', 'pipelines', 'pipelinesDetails', 'tax',
     'groundStateStatus', 'groundstatestatusDetails', 'covid', 'watercourse', 'watercourseCategories', 'trail',
-    'trailDetails', 'tax', 'taxDetails', 'photo'
+    'trailDetails', 'tax', 'taxDetails', 'photo', 'dgrim', 'publicHealthRecord', 'setbackArea', 'infrabel', 
+    'deadEndBuilding', 'zoning'
 ]
 # /code-section module-header
 
@@ -215,7 +217,7 @@ schema = Schema((
     ),
     LinesField(
         name='missingParts',
-        widget=MultiSelectionWidget(
+        widget=MultiSelect2Widget(
             format='checkbox',
             label=_('urban_label_missingParts', default='Missingparts'),
         ),
@@ -267,7 +269,7 @@ schema = Schema((
     ),
     LinesField(
         name='roadMissingParts',
-        widget=MultiSelectionWidget(
+        widget=MultiSelect2Widget(
             format='checkbox',
             label=_('urban_label_roadMissingParts', default='Roadmissingparts'),
         ),
@@ -290,7 +292,7 @@ schema = Schema((
     ),
     LinesField(
         name='roadType',
-        widget=MultiSelectionWidget(
+        widget=MultiSelect2Widget(
             format='checkbox',
             label=_('urban_label_roadType', default='Roadtype'),
         ),
@@ -301,7 +303,7 @@ schema = Schema((
     ),
     LinesField(
         name='roadAnalysis',
-        widget=MultiSelectionWidget(
+        widget=MultiSelect2Widget(
             format='checkbox',
             label=_('urban_label_roadAnalysis', default='Roadanalysis'),
         ),
@@ -364,7 +366,7 @@ schema = Schema((
     ),
     LinesField(
         name='pash',
-        widget=MultiSelectionWidget(
+        widget=MultiSelect2Widget(
             format='checkbox',
             label=_('urban_label_pash', default='Pash'),
         ),
@@ -386,7 +388,7 @@ schema = Schema((
     ),
     LinesField(
         name='catchmentArea',
-        widget=MultiSelectionWidget(
+        widget=MultiSelect2Widget(
             format='checkbox',
             label=_('urban_label_catchmentArea', default='Catchmentarea'),
         ),
@@ -408,7 +410,7 @@ schema = Schema((
     ),
     LinesField(
         name='karstConstraints',
-        widget=MultiSelectionWidget(
+        widget=MultiSelect2Widget(
             format='checkbox',
             label=_('urban_label_karstConstraints', default='Karstconstraints'),
         ),
@@ -431,7 +433,7 @@ schema = Schema((
     ),
     LinesField(
         name='concentratedRunoffSRisk',
-        widget=MultiSelectionWidget(
+        widget=MultiSelect2Widget(
             format='checkbox',
             label=_('urban_label_concentratedRunoffSRisk',
                     default='concentratedrunoffsrisk'),
@@ -454,7 +456,7 @@ schema = Schema((
     ),
     LinesField(
         name='sevesoSite',
-        widget=MultiSelectionWidget(
+        widget=MultiSelect2Widget(
             format='checkbox',
             label=_('urban_label_sevesoSite', default='sevesosite'),
         ),
@@ -465,7 +467,7 @@ schema = Schema((
     ),
     LinesField(
         name='pipelines',
-        widget=MultiSelectionWidget(
+        widget=MultiSelect2Widget(
             format='checkbox',
             label=_('urban_label_pipelines', default='pipelines'),
         ),
@@ -487,7 +489,7 @@ schema = Schema((
     ),
     LinesField(
         name='natura_2000',
-        widget=MultiSelectionWidget(
+        widget=MultiSelect2Widget(
             format='checkbox',
             label=_('urban_label_natura_2000', default='natura_2000'),
         ),
@@ -498,7 +500,7 @@ schema = Schema((
     ),
     LinesField(
         name='floodingLevel',
-        widget=MultiSelectionWidget(
+        widget=MultiSelect2Widget(
             format='checkbox',
             label=_('urban_label_floodingLevel', default='Floodinglevel'),
         ),
@@ -543,7 +545,7 @@ schema = Schema((
     ),
     LinesField(
         name='groundStateStatus',
-        widget=MultiSelectionWidget(
+        widget=MultiSelect2Widget(
             format='checkbox',
             label=_('urban_label_groundStateStatus',
                     default='Groundstatestatus'),
@@ -566,7 +568,7 @@ schema = Schema((
     ),
     LinesField(
         name='locationMissingParts',
-        widget=MultiSelectionWidget(
+        widget=MultiSelect2Widget(
             format='checkbox',
             label=_('urban_label_locationMissingParts',
                     default='Locationmissingparts'),
@@ -590,7 +592,7 @@ schema = Schema((
     ),
     LinesField(
         name='folderZone',
-        widget=MultiSelectionWidget(
+        widget=MultiSelect2Widget(
             size=10,
             label=_('urban_label_folderZone', default='Folderzone'),
         ),
@@ -642,7 +644,7 @@ schema = Schema((
     ),
     LinesField(
         name='pcaZone',
-        widget=MultiSelectionWidget(
+        widget=MultiSelect2Widget(
             size=10,
             label=_('urban_label_pcaZone', default='Pcazone'),
         ),
@@ -676,7 +678,7 @@ schema = Schema((
     ),
     LinesField(
         name='locationFloodingLevel',
-        widget=MultiSelectionWidget(
+        widget=MultiSelect2Widget(
             format='checkbox',
             label=_('urban_label_locationFloodingLevel',
                     default='Locationfloodinglevel'),
@@ -779,7 +781,7 @@ schema = Schema((
     ),
     LinesField(
         name='solicitRoadOpinionsTo',
-        widget=MultiSelectionWidget(
+        widget=MultiSelect2Widget(
             format='checkbox',
             label=_('urban_label_solicitRoadOpinionsTo',
                     default='Solicitroadopinionsto'),
@@ -815,7 +817,7 @@ schema = Schema((
     ),
     LinesField(
         name='SSC',
-        widget=MultiSelectionWidget(
+        widget=MultiSelect2Widget(
             size=15,
             label=_('urban_label_SSC', default='Ssc'),
         ),
@@ -837,7 +839,7 @@ schema = Schema((
     ),
     LinesField(
         name='RCU',
-        widget=MultiSelectionWidget(
+        widget=MultiSelect2Widget(
             size=10,
             label=_('urban_label_RCU', default='Rcu'),
         ),
@@ -859,7 +861,7 @@ schema = Schema((
     ),
     LinesField(
         name='PRenU',
-        widget=MultiSelectionWidget(
+        widget=MultiSelect2Widget(
             size=5,
             label=_('urban_label_PRenU', default='Prenu'),
         ),
@@ -881,7 +883,7 @@ schema = Schema((
     ),
     LinesField(
         name='PRevU',
-        widget=MultiSelectionWidget(
+        widget=MultiSelect2Widget(
             size=5,
             label=_('urban_label_PRevU', default='Prevu'),
         ),
@@ -903,7 +905,7 @@ schema = Schema((
     ),
     LinesField(
         name='reparcelling',
-        widget=MultiSelectionWidget(
+        widget=MultiSelect2Widget(
             size=5,
             label=_('urban_label_reparcelling', default='Prevu'),
         ),
@@ -946,7 +948,7 @@ schema = Schema((
     ),
     LinesField(
         name='airportNoiseZone',
-        widget=MultiSelectionWidget(
+        widget=MultiSelect2Widget(
             format='checkbox',
             label=_('urban_label_airportNoiseZone', default='Airportnoisezone'),
         ),
@@ -969,7 +971,7 @@ schema = Schema((
     ),
     LinesField(
         name='solicitLocationOpinionsTo',
-        widget=MultiSelectionWidget(
+        widget=MultiSelect2Widget(
             format='checkbox',
             label=_('urban_label_solicitLocationOpinionsTo',
                     default='Solicitlocationopinionsto'),
@@ -1039,7 +1041,7 @@ schema = Schema((
     ),
     LinesField(
         name='noteworthyTrees',
-        widget=MultiSelectionWidget(
+        widget=MultiSelect2Widget(
             format='checkbox',
             label=_('urban_label_noteworthyTrees', default='Noteworthytrees'),
         ),
@@ -1047,6 +1049,63 @@ schema = Schema((
         multiValued=True,
         vocabulary=UrbanVocabulary('noteworthytrees', inUrbanConfig=False),
         default_method='getDefaultValue',
+    ),
+    BooleanField(
+        name='dgrim',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label=_('urban_label_dgrim',
+                    default='dgrim'),
+        ),
+        schemata='urban_location',
+    ),
+    LinesField(
+        name='zoning',
+        widget=MultiSelect2Widget(
+            format='checkbox',
+            label=_('urban_label_zoning',
+                    default='Zoning'),
+        ),
+        schemata='urban_location',
+        multiValued=True,
+        vocabulary=UrbanVocabulary(path='zoning', inUrbanConfig=False),
+        default_method='getDefaultValue',
+    ),
+    BooleanField(
+        name='publicHealthRecord',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label=_('urban_label_publicHealthRecord',
+                    default='PublicHealthRecord'),
+        ),
+        schemata='urban_location',
+    ),
+    BooleanField(
+        name='setbackArea',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label=_('urban_label_setbackArea',
+                    default='SetbackArea'),
+        ),
+        schemata='urban_location',
+    ),
+    BooleanField(
+        name='infrabel',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label=_('urban_label_infrabel',
+                    default='Infrabel'),
+        ),
+        schemata='urban_location',
+    ),
+    BooleanField(
+        name='deadEndBuilding',
+        default=False,
+        widget=BooleanField._properties['widget'](
+            label=_('urban_label_deadEndBuilding',
+                    default='DeadEndBuilding'),
+        ),
+        schemata='urban_location',
     ),
     BooleanField(
         name='covid',
@@ -1072,8 +1131,8 @@ schema = Schema((
 
     LinesField(
         name='watercourseCategories',
-        widget=MultiSelectionWidget(
-            size=3,
+        widget=MasterMultiSelectWidget(
+            format='checkbox',
             label=_('urban_label_watercourseCategories', default='WatercourseCategories'),
         ),
         schemata='urban_location',

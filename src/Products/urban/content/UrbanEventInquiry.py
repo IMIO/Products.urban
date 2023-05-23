@@ -46,6 +46,7 @@ schema = Schema((
         widget=DateTimeField._properties['widget'](
             show_hm=False,
             format="%d/%m/%Y",
+            starting_year=1930,
             label=_('urban_label_investigationStart',
                     default='Investigationstart'),
         ),
@@ -55,6 +56,7 @@ schema = Schema((
         widget=DateTimeField._properties['widget'](
             show_hm=False,
             format="%d/%m/%Y",
+            starting_year=1930,
             label=_('urban_label_investigationEnd',
                     default='Investigationend'),
         ),
@@ -65,6 +67,7 @@ schema = Schema((
         widget=DateTimeField._properties['widget'](
             show_hm=True,
             format="%d/%m/%Y %H:%M",
+            starting_year=1930,
             label=_('urban_label_explanationStartSDate',
                     default='Explanationstartsdate'),
         ),
@@ -75,6 +78,7 @@ schema = Schema((
         widget=DateTimeField._properties['widget'](
             show_hm=True,
             format="%d/%m/%Y %H:%M",
+            starting_year=1930,
             label=_('urban_label_explanationEndSDate',
                     default='Explanationendsdate'),
         ),
@@ -85,6 +89,7 @@ schema = Schema((
         widget=DateTimeField._properties['widget'](
             show_hm=True,
             format="%d/%m/%Y %H:%M",
+            starting_year=1930,
             label=_('urban_label_claimsDate', default='Claimsdate'),
         ),
         optional=True,
@@ -94,6 +99,7 @@ schema = Schema((
         widget=DateTimeField._properties['widget'](
             show_hm=True,
             format="%d/%m/%Y %H:%M",
+            starting_year=1930,
             label=_('urban_label_claimEndSDate', default='Claimendsdate'),
         ),
         optional=True,
@@ -113,6 +119,7 @@ schema = Schema((
         widget=DateTimeField._properties['widget'](
             show_hm=False,
             format="%d/%m/%Y",
+            starting_year=1930,
             label=_('urban_label_concertationDate',
                     default='Concertationdate'),
         ),
