@@ -99,10 +99,10 @@ class UrbanStreetsSuggest(SuggestView):
         urban_config = api.portal.get_tool('portal_urban')
         path = '/'.join(urban_config.streets.getPhysicalPath())
 
-        title = ' AND '.join(["%s*" % x for x in terms])
-
-        if exact_match:
+        if exact_match is True:
             title = term
+        else:
+            title = ' AND '.join(["%s*" % x for x in terms])
 
         kwargs = {
             'Title': title,
