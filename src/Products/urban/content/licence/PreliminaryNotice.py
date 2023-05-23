@@ -233,7 +233,7 @@ schema = Schema((
     ),
     LinesField(
         name='classification_order_scope',
-        widget=MultiSelectionWidget(
+        widget=MultiSelect2Widget(
             format='checkbox',
             label=_('urban_label_classification_order_scope', default='Classification_order_scope'),
         ),
