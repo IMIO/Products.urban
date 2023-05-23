@@ -16,9 +16,12 @@ from plone.app.uuid.utils import uuidToObject
 from zope.event import notify
 from zope.lifecycleevent import ObjectModifiedEvent
 
+from Products.urban.utils import get_config_object
+from Products.urban.utils import add_element_to_tuple_config
 from Products.urban.interfaces import IGenericLicence, IBaseBuildLicence
 import logging
 import re
+import copy
 
 logger = logging.getLogger('urban: migrations')
 
@@ -652,6 +655,7 @@ def set_page_style_for_mailing_templates(context):
     logger.info("upgrade step done!")
 
 
+
 def add_new_vocabulary_for_zoning_field(context):
     """
     """
@@ -670,3 +674,80 @@ def add_new_vocabulary_for_zoning_field(context):
     )
 
     logger.info("migration step done!")
+
+
+def migrate_cwatup_field_to_codt_field(context):
+    """
+    """
+    logger = logging.getLogger('urban: Migrate CWATUP field to CODT field')
+    logger.info("starting upgrade steps")
+
+    inspection_config = get_config_object("/inspection")
+    ticket_config = get_config_object("/ticket")
+
+    add_element_to_tuple_config(
+        inspection_config,
+        "usedAttributes",
+        ("SDC", "sdcDetails", "township_guide", "township_guide_details",)
+    )
+    add_element_to_tuple_config(
+        ticket_config,
+        "usedAttributes",
+        ("SDC", "sdcDetails", "township_guide", "township_guide_details",)
+    )
+
+    catalog = api.portal.get_tool('portal_catalog')
+    inspections = [b.getObject() for b in catalog(portal_type="Inspection")]
+    tickets = [b.getObject() for b in catalog(portal_type="Ticket")]
+    map_migration = [
+        {
+            "from": "SSC",
+            "to": "SDC",
+            "change_prefix": {
+                "from": "ssc",
+                "to": "sdc",
+            },
+        },
+        {
+            "from": "sscDetails",
+            "to": "sdcDetails",
+        },
+        {
+            "from": "RCU",
+            "to": "township_guide",
+        },
+        {
+            "from": "rcuDetails",
+            "to": "township_guide_details",
+        },
+    ]
+
+    for licence in inspections + tickets:
+        for field in map_migration:
+            accessor = getattr(
+                licence,
+                "get{}".format(field["from"].capitalize()),
+                None
+            )
+            if not callable(accessor):
+                return
+            from_value = accessor()
+            if not from_value:
+                continue
+            change_prefx = field.get("change_prefix", False)
+            if change_prefx:
+                temp_values = ("",)
+                for value in from_value:
+                    value = value.replace(
+                        change_prefx["from"],
+                        change_prefx["to"],
+                        1
+                    )
+                    temp_values += (value,)
+                from_value = temp_values
+            mutator = getattr(licence, "set{}".format(field["to"].capitalize()), None)
+            if not callable(mutator):
+                return
+            mutator(from_value)
+
+    logger.info("upgrade step done!")

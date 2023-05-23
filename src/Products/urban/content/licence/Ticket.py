@@ -26,7 +26,7 @@ slave_fields_bound_inspection = (
     },
 )
 
-optional_fields = ['managed_by_prosecutor', 'inspectionDescription']
+optional_fields = ['managed_by_prosecutor', 'inspectionDescription', 'SDC', 'sdcDetails', 'township_guide', 'township_guide_details']
 
 schema = Schema((
     StringField(
@@ -117,6 +117,51 @@ schema = Schema((
         default_method='getDefaultText',
         default_output_type='text/x-html-safe',
     ),
+    LinesField(
+        name='SDC',
+        widget=MultiSelectionWidget(
+            size=15,
+            label=_('urban_label_SDC', default='Sdc'),
+        ),
+        schemata='urban_location',
+        multiValued=1,
+        vocabulary=UrbanVocabulary('sdc', inUrbanConfig=False),
+        default_method='getDefaultValue',
+    ),
+    TextField(
+        name='sdcDetails',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            label=_('urban_label_sdcDetails', default='Sdcdetails'),
+        ),
+        default_content_type='text/html',
+        default_method='getDefaultText',
+        schemata='urban_location',
+        default_output_type='text/x-html-safe',
+    ),
+    LinesField(
+        name='township_guide',
+        widget=MultiSelectionWidget(
+            size=10,
+            label=_('urban_label_township_guide', default='Township_guide'),
+        ),
+        schemata='urban_location',
+        multiValued=1,
+        vocabulary=UrbanVocabulary('township_guide', inUrbanConfig=False),
+        default_method='getDefaultValue',
+    ),
+    TextField(
+        name='township_guide_details',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            label=_('urban_label_township_guide_details',
+                    default='Township_guide_details'),
+        ),
+        default_content_type='text/html',
+        default_method='getDefaultText',
+        schemata='urban_location',
+        default_output_type='text/x-html-safe',
+    ),
 ),
 )
 
@@ -126,6 +171,10 @@ Ticket_schema = BaseFolderSchema.copy() + \
     getattr(GenericLicence, 'schema', Schema(())).copy() + \
     schema.copy()
 
+Ticket_schema.delField('SSC')
+Ticket_schema.delField('sscDetails')
+Ticket_schema.delField('RCU')
+Ticket_schema.delField('rcuDetails')
 
 class Ticket(BaseFolder, GenericLicence, BrowserDefaultMixin):
     """
@@ -331,6 +380,10 @@ def finalize_schema(schema, folderish=False, moveDiscussion=True):
     schema.moveField('bound_licences', after='use_bound_inspection_infos')
     schema.moveField('managed_by_prosecutor', after='foldermanagers')
     schema.moveField('description', after='managed_by_prosecutor')
+    schema.moveField('SDC', after='protectedBuildingDetails')
+    schema.moveField('sdcDetails', after='SDC')
+    schema.moveField('township_guide', after='sdcDetails')
+    schema.moveField('township_guide_details', after='township_guide')
     schema['parcellings'].widget.label = _('urban_label_parceloutlicences')
     schema['isInSubdivision'].widget.label = _('urban_label_is_in_parceloutlicences')
     schema['subdivisionDetails'].widget.label = _('urban_label_parceloutlicences_details')

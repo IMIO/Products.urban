@@ -11,6 +11,7 @@ from Products.urban.config import PROJECTNAME
 from Products.urban.config import URBAN_TYPES
 from Products.urban.content.licence.GenericLicence import GenericLicence
 from Products.urban.content.Inquiry import Inquiry
+from Products.urban.utils import setOptionalAttributes
 from Products.urban.utils import setSchemataForInquiry
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
@@ -26,6 +27,8 @@ slave_fields_bound_licence = (
         'hide_values': (True, ),
     },
 )
+
+optional_fields = ['SDC', 'sdcDetails', 'township_guide', 'township_guide_details']
 
 schema = Schema((
     ReferenceField(
@@ -85,12 +88,65 @@ schema = Schema((
         default_method='getDefaultText',
         default_output_type='text/x-html-safe',
     ),
+    LinesField(
+        name='SDC',
+        widget=MultiSelectionWidget(
+            size=15,
+            label=_('urban_label_SDC', default='Sdc'),
+        ),
+        schemata='urban_location',
+        multiValued=1,
+        vocabulary=UrbanVocabulary('sdc', inUrbanConfig=False),
+        default_method='getDefaultValue',
+    ),
+    TextField(
+        name='sdcDetails',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            label=_('urban_label_sdcDetails', default='Sdcdetails'),
+        ),
+        default_content_type='text/html',
+        default_method='getDefaultText',
+        schemata='urban_location',
+        default_output_type='text/x-html-safe',
+    ),
+    LinesField(
+        name='township_guide',
+        widget=MultiSelectionWidget(
+            size=10,
+            label=_('urban_label_township_guide', default='Township_guide'),
+        ),
+        schemata='urban_location',
+        multiValued=1,
+        vocabulary=UrbanVocabulary('township_guide', inUrbanConfig=False),
+        default_method='getDefaultValue',
+    ),
+    TextField(
+        name='township_guide_details',
+        allowable_content_types=('text/html',),
+        widget=RichWidget(
+            label=_('urban_label_township_guide_details',
+                    default='Township_guide_details'),
+        ),
+        default_content_type='text/html',
+        default_method='getDefaultText',
+        schemata='urban_location',
+        default_output_type='text/x-html-safe',
+    ),
 ),
 )
+
+setOptionalAttributes(schema, optional_fields)
+
 Inspection_schema = BaseFolderSchema.copy() + \
     getattr(GenericLicence, 'schema', Schema(())).copy() + \
     getattr(Inquiry, 'schema', Schema(())).copy() + \
     schema.copy()
+
+Inspection_schema.delField('SSC')
+Inspection_schema.delField('sscDetails')
+Inspection_schema.delField('RCU')
+Inspection_schema.delField('rcuDetails')
 
 setSchemataForInquiry(Inspection_schema)
 
@@ -367,6 +423,10 @@ def finalize_schema(schema, folderish=False, moveDiscussion=True):
     schema.moveField('description', after='inspection_context')
     schema.moveField('bound_licences', before='workLocations')
     schema.moveField('use_bound_licence_infos', after='bound_licences')
+    schema.moveField('SDC', after='protectedBuildingDetails')
+    schema.moveField('sdcDetails', after='SDC')
+    schema.moveField('township_guide', after='sdcDetails')
+    schema.moveField('township_guide_details', after='township_guide')
     schema['parcellings'].widget.label = _('urban_label_parceloutlicences')
     schema['isInSubdivision'].widget.label = _('urban_label_is_in_parceloutlicences')
     schema['subdivisionDetails'].widget.label = _('urban_label_parceloutlicences_details')

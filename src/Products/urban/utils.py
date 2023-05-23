@@ -20,6 +20,7 @@ import random
 import string
 import hashlib
 import pkg_resources
+import copy
 
 
 def getCurrentFolderManager():
@@ -226,3 +227,45 @@ def run_entry_points(group, name, *args, **kwargs):
     for entrypoint in pkg_resources.iter_entry_points(group=group, name=name):
         plugin = entrypoint.load()
         return plugin(*args, **kwargs)
+
+
+def get_config_object(path):
+    """
+    Get a config object from a path
+
+    :param str path: Path slash separeted from root to the config
+    :return: Config object
+    :rtype: LicenceConfig
+    """
+    path_list = path.split("/")
+    start = api.portal.get_tool('portal_urban')
+
+    for part in path_list:
+        if part == "":
+            continue
+        config = getattr(start, part, None)
+        if not config:
+            raise KeyError
+        start = config
+
+    return start
+
+
+def add_element_to_tuple_config(obj, field, tuple):
+    """
+    Add element to tuple field
+
+    :param obj: Object
+    :param str field: Field name to override
+    :param tuple tuple: Tuple of new value to be added
+    """
+    accessor = getattr(obj, "get{}{}".format(field[0].upper(),field[1:]), None)
+    if not callable(accessor):
+        return
+    old_values = accessor()
+    if not old_values:
+        raise KeyError
+    mutator = getattr(obj, "set{}{}".format(field[0].upper(),field[1:]), None)
+    if not callable(mutator):
+        return
+    mutator(old_values + tuple)

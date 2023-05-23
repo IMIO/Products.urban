@@ -5,6 +5,10 @@ Changes
 2.5 (unreleased)
 ----------------
 
+
+- Migrate CWATUP field to CODT field [SUP-22150]
+  [jchandelle]
+
 - Fix bound licence allowed type [SUP-27062]
   [jchandelle]
 
