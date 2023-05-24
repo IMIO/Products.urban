@@ -19,7 +19,7 @@ class RenderLicenceTermView(RenderTermView):
         self.category = category
         self.widget = widget
         self.collection = term.value
-        collection_id = self.collection.getId()
+        collection_id = self.collection.split("/")[-1]
         for urban_type in URBAN_TYPES:
             if 'collection_' + urban_type.lower() == collection_id:
                 self.licence_type = urban_type

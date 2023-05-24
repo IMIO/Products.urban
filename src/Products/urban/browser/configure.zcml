@@ -462,7 +462,7 @@
   <browser:view
       for="Products.ATContentTypes.interfaces.folder.IATBTreeFolder"
       name="faceted-table-view"
-      class="imio.dashboard.browser.overrides.IDFacetedTableView"
+      class="collective.eeafaceted.dashboard.browser.overrides.DashboardFacetedTableView"
       permission="zope2.View"
   />
 

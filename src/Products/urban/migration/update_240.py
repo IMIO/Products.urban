@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-from imio.dashboard.utils import _updateDefaultCollectionFor
+from collective.eeafaceted.collectionwidget.utils import _updateDefaultCollectionFor
 from plone import api
 from Products.urban.config import URBAN_TYPES
 from Products.urban.config import URBAN_TYPES_ACRONYM

@@ -4,8 +4,7 @@ from Products.Five import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 from eea.facetednavigation.interfaces import IFacetedNavigable
-
-from imio.dashboard.utils import getDashboardQueryResult
+from collective.eeafaceted.dashboard.utils import getDashboardQueryResult
 
 from plone import api
 from plone.app.layout.viewlets import ViewletBase

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from imio.dashboard.vocabulary import ConditionAwareCollectionVocabulary
+from collective.eeafaceted.collectionwidget.vocabulary import CachedCollectionVocabulary
 
 from plone import api
 
@@ -80,7 +80,7 @@ class CovidVocabulary(object):
         return vocabulary
 
 
-class DashboardCollections(ConditionAwareCollectionVocabulary):
+class DashboardCollections(CachedCollectionVocabulary):
 
     def _brains(self, context):
         """ """
@@ -91,17 +91,17 @@ class DashboardCollections(ConditionAwareCollectionVocabulary):
         brains.sort(key=lambda x: ids.index(x.id))
         return brains
 
-    def __call__(self, context, query=None):
+    def __call__(self, context, real_context):
         self.category = utils.get_procedure_category(
             context,
             self.get_request(context),
         )
         terms = super(DashboardCollections, self).__call__(
             context,
-            query=query,
+            real_context,
         )
         filtered_terms = [t for t in terms
-                          if t.value.id in self.get_collection_ids(context)]
+                          if t.value.split("/")[-1] in self.get_collection_ids(context)]
         return SimpleVocabulary(filtered_terms)
 
     def _compute_redirect_to(self, collection, criterion):
