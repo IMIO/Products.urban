@@ -49,9 +49,11 @@ class InquiryClaimantsImport(BrowserView):
 
         remaining_imports = list(planned_claimants_import)
         for inquiry_UID in planned_claimants_import:
-            inquiry = catalog.unrestrictedSearchResults(UID=inquiry_UID)[0].getObject()
-            inquiry_view = inquiry.restrictedTraverse('@@urbaneventinquiryview')
-            inquiry_view.import_claimants_from_csv()
+            result = catalog.unrestrictedSearchResults(UID=inquiry_UID)
+            if result:
+                inquiry = result[0].getObject()
+                inquiry_view = inquiry.restrictedTraverse('@@urbaneventinquiryview')
+                inquiry_view.import_claimants_from_csv()
             remaining_imports.remove(inquiry_UID)
             api.portal.set_registry_record(
                 'Products.urban.interfaces.IAsyncClaimantsImports.claimants_to_import',
