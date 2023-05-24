@@ -214,6 +214,8 @@ class TransitionsPanelView(ActionsPanelView):
         return to_confirm
 
     def showHistoryForContext(self):
+        # Ensure that self.content_history is initialized
+        super(self, TransitionsPanelView).showHistoryForContext()
         return True
 
 

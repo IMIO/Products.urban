@@ -42,7 +42,7 @@ from Products.urban.utils import moveElementAfter
 
 from datetime import date
 from eea.facetednavigation.layout.interfaces import IFacetedLayout
-from imio.dashboard.utils import _updateDefaultCollectionFor
+from collective.eeafaceted.collectionwidget.utils import _updateDefaultCollectionFor
 
 from plone import api
 from plone.portlets.interfaces import IPortletManager

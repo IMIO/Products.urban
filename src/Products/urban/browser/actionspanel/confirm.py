@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from imio.actionspanel.browser.transitions import ConfirmTransitionView
+from imio.actionspanel.browser.comments import ConfirmTransitionView
 
 from imio.schedule.config import STARTED
 from imio.schedule.utils import get_task_configs

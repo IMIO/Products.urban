@@ -6,7 +6,8 @@ Changes
 2.5.5 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Migrate to the latest version of `imio.dashboard`
+  [mpeeters]
 
 
 2.5.4 (2023-07-03)

@@ -3,7 +3,13 @@
 from collective.task.behaviors import ITask
 
 from eea.facetednavigation.search.catalog import FacetedCatalog
-from eea.facetednavigation.search.interfaces import ICollection
+# XXX Should be migrated
+try:
+    from plone.app.collection.interfaces import ICollection
+except ImportError:
+    class ICollection(Interface):
+        """ plone.app.collection not installed
+        """
 
 from Products.urban.interfaces import IFacetedCollection
 

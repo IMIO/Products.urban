@@ -8,7 +8,7 @@ from Products.urban.browser.table.column import FoldermanagerColumn
 from Products.urban.browser.table.interfaces import ITitleCell
 from Products.urban.browser.table.interfaces import ITitleColumn
 from Products.urban.interfaces import IGenericLicence
-from imio.dashboard.columns import ActionsColumn
+from collective.eeafaceted.z3ctable.columns import ActionsColumn
 
 from collective.eeafaceted.z3ctable.columns import BaseColumn
 

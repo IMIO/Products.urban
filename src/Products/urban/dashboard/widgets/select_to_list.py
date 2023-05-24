@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from eea.facetednavigation.widgets.select import widget
+from eea.facetednavigation.widgets.select.interfaces import ISelectSchema as ISchema
 from zope.component import getUtility
 from zope.schema.interfaces import IVocabularyFactory
 
@@ -10,6 +11,10 @@ from Products.urban import UrbanMessage as _
 
 
 logger = logging.getLogger('eea.facetednavigation.widgets.portlet')
+
+
+class ISelectSchema(ISchema):
+    pass
 
 
 class Widget(widget.Widget):
