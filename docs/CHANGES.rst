@@ -6,6 +6,9 @@ Changes
 2.5.5 (unreleased)
 ------------------
 
+- Avoid a traceback if an UID was not found for inquiry cron [URB-2721]
+  [mpeeters]
+
 - Migrate to the latest version of `imio.dashboard`
   [mpeeters]
 
