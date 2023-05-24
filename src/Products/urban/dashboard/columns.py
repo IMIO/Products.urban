@@ -24,6 +24,8 @@ class FacetedTitleColumn(BaseColumn):
     """ TitleColumn for imio.dashboard listings."""
     implements(ITitleColumn)
 
+    escape = False
+
     def renderTitleLink(self, item):
         portal_type = item.portal_type.lower()
         state = item.review_state
@@ -138,6 +140,8 @@ class ScheduleColumn(BaseColumn):
 class TaskLicenceTitleDisplay(TitleDisplay, ScheduleColumn):
     """ Adapts a task to a LicenceTitleCell """
 
+    escape = False
+
     def render(self):
         licence_brain = self.query_licence(self.brain)
         title = self.column.renderTitleLink(licence_brain)
@@ -169,4 +173,6 @@ class TaskActionsColumn(ActionsColumn):
     """Display actions for the task"""
     params = {
         'showChangeOwner': True,
+        'showActions': False,
+        'useIcons': True,
     }
