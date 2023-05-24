@@ -58,3 +58,9 @@ class UrbanConfirmTransitionView(ConfirmTransitionView):
             tasks.append((task, not_matched))
 
         return tasks
+
+    @property
+    def actions_panel_view(self):
+        view = self.context.restrictedTraverse("@@actions_panel")
+        view.forceRedirectAfterTransition = True
+        return view

@@ -153,6 +153,7 @@ class TransitionsPanelView(ActionsPanelView):
                  **kwargs):
         return super(TransitionsPanelView, self).__call__(
             showHistory=True,
+            forceRedirectAfterTransition=True,
             **kwargs
         )
 
