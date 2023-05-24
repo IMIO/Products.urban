@@ -215,7 +215,7 @@ class TransitionsPanelView(ActionsPanelView):
 
     def showHistoryForContext(self):
         # Ensure that self.content_history is initialized
-        super(self, TransitionsPanelView).showHistoryForContext()
+        super(TransitionsPanelView, self).showHistoryForContext()
         return True
 
 
