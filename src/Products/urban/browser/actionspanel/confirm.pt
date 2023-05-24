@@ -11,7 +11,11 @@
   <metal:fill fill-slot="main">
 
     <script type="text/javascript">
-      jQuery(document).ready(preventDefaultClickTransition);
+      jQuery(document).ready(function() {
+        $("input.trigger-transition-prevent-default").click(function(event) {
+          event.preventDefault();
+        });
+      });
     </script>
 
     <h1 class="documentFirstHeading" tal:content="context/Title">Title</h1>
@@ -39,7 +43,7 @@
     <label for="comment" i18n:translate="transition_comment"></label>
     <textarea name="comment" rows="4"></textarea>
     <div class="popupbuttons">
-      <input tal:attributes="onClick python: context.restrictedTraverse('@@actions_panel').computeTriggerTransitionOnClick(view.initTransition()) + '$(\'input.[name=\\\'form.buttons.cancel\\\']\').click();;';"
+      <input tal:attributes="onClick python: view.actions_panel_view.computeTriggerTransitionOnClick(view.init_transition()) + '$(\'div.overlay div.close a.hiddenStructure\').click();;';"
              type="submit"
              name="form.buttons.save"
              class="trigger-transition-prevent-default apButton"
