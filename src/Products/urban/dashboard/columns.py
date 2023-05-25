@@ -82,6 +82,7 @@ class AddressColumn(BaseColumn):
 
     # column not sortable
     sort_index = -1
+    escape = False
 
     def renderCell(self, item):
         task = item.getObject()
@@ -103,6 +104,7 @@ class ParcelReferencesColumn(BaseColumn):
 
     # column not sortable
     sort_index = -1
+    escape = False
 
     def renderCell(self, item):
         licence = item.getObject()

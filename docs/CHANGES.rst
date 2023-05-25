@@ -6,6 +6,9 @@ Changes
 2.5.5 (unreleased)
 ------------------
 
+- Fix render of columns with escape parameter
+  [mpeeters, sdelcourt]
+
 - Avoid a traceback if an UID was not found for inquiry cron [URB-2721]
   [mpeeters]
 
