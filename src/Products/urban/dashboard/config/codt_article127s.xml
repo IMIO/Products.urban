@@ -23,6 +23,7 @@
    <property
       name="vocabulary">imio.dashboard.conditionawarecollectionvocabulary</property>
    <property name="hidealloption">1</property>
+   <property name="hide_category">1</property>
    <property name="maxitems"></property>
    <property name="sortreversed"></property>
    <property name="default">b7b6f14a4a7c48a7aeb039e4c5185da9</property>

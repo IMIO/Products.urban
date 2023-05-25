@@ -6,6 +6,9 @@ Changes
 2.5.5 (unreleased)
 ------------------
 
+- Fix `hidealloption` and `hide_category` parameters for dashboard collections
+  [mpeeters]
+
 - Fix render of columns with escape parameter
   [mpeeters, sdelcourt]
 
