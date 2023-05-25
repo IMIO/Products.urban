@@ -278,11 +278,13 @@ class AutomatedTaskActionsPanelView(ActionsPanelView):
     def renderChangeOwner(self):
         """Render a link for the change owner view"""
         if self.showChangeOwner:
+            self.saveHasActions()
             return ViewPageTemplateFile('actions_panel_change_owner.pt')(self)
 
     def renderCloseTask(self):
         """Render a link  to close the task manually"""
         if self.showCloseTask:
+            self.saveHasActions()
             return ViewPageTemplateFile('actions_panel_close_task.pt')(self)
 
 
