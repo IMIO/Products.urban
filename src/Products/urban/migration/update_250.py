@@ -714,3 +714,24 @@ def update_collection_column(context):
                 _update_collection(subtask_collection)
 
     logger.info("upgrade step done!")
+
+
+def update_faceted_collection_widget(context):
+    from eea.facetednavigation.subtypes.interfaces import IFacetedNavigable
+    from eea.facetednavigation.interfaces import ICriteria
+
+    logger = logging.getLogger("Urban: Update collection widget")
+    logger.info("starting upgrade steps")
+
+    brains = api.content.find(object_provides=IFacetedNavigable.__identifier__)
+    for brain in brains:
+        faceted = brain.getObject()
+        criterion = ICriteria(faceted)
+        for criteria in criterion.values():
+            if criteria.widget == "collection-link":
+                setattr(criteria, "hide_category", True)
+                setattr(criteria, "hidealloption", True)
+                criteria._p_changed = 1
+                criterion.criteria._p_changed = 1
+
+    logger.info("migration step done!")

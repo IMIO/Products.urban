@@ -10,8 +10,10 @@
    <property name="count"></property>
    <property name="sortcountable"></property>
    <property name="hidezerocount"></property>
-   <property name="vocabulary">urban.schedule.collections</property>
+   <property
+      name="vocabulary">imio.dashboard.conditionawarecollectionvocabulary</property>
    <property name="hidealloption">1</property>
+   <property name="hide_category">1</property>
    <property name="maxitems"></property>
    <property name="sortreversed"></property>
    <property name="default"></property>

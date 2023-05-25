@@ -466,4 +466,12 @@
         handler=".update_250.update_env_licences_schedule"
         profile="Products.urban:default" /-->
 
+    <gs:upgradeStep
+        title="Update faceted criterion to hide collection widget category title"
+        description="Update faceted criterion to hide collection widget category title"
+        source="1129"
+        destination="1130"
+        handler=".update_250.update_faceted_collection_widget"
+        profile="Products.urban:default" />
+
 </configure>
