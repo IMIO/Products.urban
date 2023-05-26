@@ -5,6 +5,10 @@ Changes
 2.5 (unreleased)
 ----------------
 
+
+- Add parameter to autocomplete to search with exact match [URB-2696]
+  [jchandelle]
+
 - Fix bound licence allowed type [SUP-27062]
   [jchandelle]
 
