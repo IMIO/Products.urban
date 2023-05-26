@@ -7,12 +7,12 @@ Changes
 
 
 - Add parameter to autocomplete to search with exact match [URB-2696]
+  [jchandelle]
 
 - Fix bound licence allowed type [SUP-27062]
   [jchandelle]
 
 - Add vat field to notary [SUP-29450]
-
   [jchandelle]
 
 - Change MultiSelectionWidget to MultiSelect2Widget [URB-2575]
