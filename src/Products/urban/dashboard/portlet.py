@@ -40,6 +40,16 @@ class Renderer(base.Renderer):
     def url(self):
         return api.portal.get().absolute_url()
 
+    @property
+    def collection_uid(self):
+        brains = api.content.find(
+            id="collection_all_licences",
+            portal_type="DashboardCollection",
+        )
+        if not brains:
+            return ""
+        return brains[0].UID
+
 
 class AddForm(base.AddForm):
     form_fields = form.Fields(ICategorySwitchPortlet)
