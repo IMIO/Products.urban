@@ -91,6 +91,10 @@ class DashboardCollections(CachedCollectionVocabulary):
         brains.sort(key=lambda x: ids.index(x.id))
         return brains
 
+    def _cache_invalidation_key(self, context, real_context):
+        '''cachekey method for self.__call__.'''
+        return super(DashboardCollections, self)._cache_invalidation_key(context, real_context) + (self.category, )
+
     def __call__(self, context, real_context):
         self.category = utils.get_procedure_category(
             context,
