@@ -20,3 +20,6 @@ class PreliminaryNoticeView(LicenceView):
 
     def getMacroViewName(self):
         return 'preliminarynotice-macros'
+
+    def getPatrimonyFields(self):
+        return self.getSchemataFields(schemata='urban_patrimony')
