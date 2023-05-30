@@ -52,6 +52,7 @@ class UrbanWithUsersLayer(IntegrationTesting):
             portal.setupCurrentSkin(portal.REQUEST)
             from Products.urban.setuphandlers import addTestUsers
             addTestUsers(portal)
+            import ipdb; ipdb.set_trace()
 
 
 URBAN_TESTS_INTEGRATION = UrbanWithUsersLayer(
@@ -66,6 +67,7 @@ class UrbanConfigLayer(UrbanWithUsersLayer):
     Useful for performances: Plone site is instanciated only once
     """
     def setUp(self):
+        super(UrbanConfigLayer, self).setUp()
         with helpers.ploneSite() as portal:
             portal.setupCurrentSkin(portal.REQUEST)
             helpers.applyProfile(portal, 'Products.urban:testsWithConfig')
