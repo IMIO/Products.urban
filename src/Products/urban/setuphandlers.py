@@ -248,6 +248,22 @@ def extraPostInstall(context):
     logger.info('Setup default schedule configuration : Done')
 
 
+def testExtraPostInstall(context):
+    # all installation custom code not required for tests
+    if context.readDataFile('urban_extra_marker.txt') is None:
+        return
+    site = context.getSite()
+    logger.info("addUrbanVocabularies : starting...")
+    addUrbanVocabularies(context)
+    logger.info("addUrbanVocabularies : Done")
+    logger.info("addDefaultObjects : starting...")
+    addDefaultObjects(context)
+    logger.info("addDefaultObjects : Done")
+    logger.info("addEventTypesAndTemplates : starting...")
+    addEventTypesAndTemplates(context)
+    logger.info("addEventTypesAndTemplates : Done")
+
+
 def updateVocabularyConfig(context):
     logger.info("updateVocabularyConfig : starting...")
     if context.readDataFile('urban_extra_marker.txt') is None:
