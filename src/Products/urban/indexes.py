@@ -124,6 +124,7 @@ def licence_architectinfoindex(object):
     return list(set(architects_info))
 
 
+@indexer(interfaces.IParcellingTerm)
 @indexer(interfaces.IGenericLicence)
 def genericlicence_parcelinfoindex(obj):
     parcels_infos = []
