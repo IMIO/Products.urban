@@ -262,7 +262,7 @@ class TestGenericLicenceFields(SchemaFieldsTestCase):
     def test_floodingLevel(self):
         for licence in self.licences:
             msg = "field 'floodingLevel' not visible on {}".format(licence.getPortalTypeName())
-            self._is_field_visible("<span>Zone inondable (Fiche Voirie)</span>:", licence, msg)
+            self._is_field_visible("<span>Risque d'inondations (Fiche Voirie)</span>:", licence, msg)
 
     def test_has_attribute_floodingLevelDetails(self):
         field_name = 'floodingLevelDetails'
@@ -273,7 +273,7 @@ class TestGenericLicenceFields(SchemaFieldsTestCase):
     def test_floodingLevelDetails(self):
         for licence in self.licences:
             msg = "field 'floodingLevelDetails' not visible on {}".format(licence.getPortalTypeName())
-            self._is_field_visible("<span>Détails concernant la zone inondable</span>:", licence, msg)
+            self._is_field_visible("<span>Détails concernant le risque d'inondations</span>:", licence, msg)
 
     def test_has_attribute_equipmentAndRoadRequirements(self):
         field_name = 'equipmentAndRoadRequirements'
@@ -350,7 +350,7 @@ class TestGenericLicenceFields(SchemaFieldsTestCase):
     def test_locationFloodingLevel(self):
         for licence in self.licences:
             msg = "field 'locationFloodingLevel' not visible on {}".format(licence.getPortalTypeName())
-            self._is_field_visible("<span>Zone inondable (Fiche Urbanisme)</span>:", licence, msg)
+            self._is_field_visible("<span>Risque d'inondations (Fiche Urbanisme)</span>:", licence, msg)
 
     def test_has_attribute_locationTechnicalRemarks(self):
         field_name = 'locationTechnicalRemarks'

@@ -183,7 +183,7 @@ class TestContact(unittest.TestCase):
         applicant.setNumber(u'1')
         applicant.setCity(u'Sherwoodé')
         buildLicence.REQUEST.set('HTTP_ACCEPT_LANGUAGE', 'fr')
-        self.assertEquals(buildLicence.getApplicantsSignaletic(), u'Maître Robiné Hoodé')
+        self.assertEquals(buildLicence.getApplicantsSignaletic(), u'Maître ROBINÉ Hoodé')
         self.assertEquals(buildLicence.getApplicantsSignaletic(withaddress=True),
-                          u'Maître Robiné Hoodé, domicilié 1 Sherwoodé')
+                          u'Maître ROBINÉ Hoodé, domicilié 1 Sherwoodé')
         api.content.delete(buildLicence)
