@@ -19,12 +19,12 @@ class TestTemplateMethods(unittest.TestCase):
         licence_folders = [
             'buildlicences',
             'parceloutlicences',
-            'divisions',
+            # 'divisions',  #  divisions are disabled for liege
             'notaryletters',
             'urbancertificateones',
             'urbancertificatetwos',
             'declarations',
-            'miscdemands',
+            # 'miscdemands',  #  miscdemands are disabled for liege
         ]
 
         urban_folder = portal.urban

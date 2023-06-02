@@ -100,6 +100,7 @@ class UrbanImportsLayer(IntegrationTesting):
     Useful for performances: Plone site is instanciated only once
     """
     def setUp(self):
+        super(UrbanImportsLayer, self).setUp()
         with helpers.ploneSite() as portal:
             portal.setupCurrentSkin(portal.REQUEST)
             helpers.applyProfile(portal, 'Products.urban:tests-imports')
@@ -122,6 +123,7 @@ class UrbanWithUsersFunctionalLayer(FunctionalTesting):
     environment_default_password = 'environmenteditor'
 
     def setUp(self):
+        super(UrbanWithUsersFunctionalLayer, self).setUp()
         with helpers.ploneSite() as portal:
             portal.setupCurrentSkin(portal.REQUEST)
             from Products.urban.setuphandlers import addTestUsers
@@ -140,6 +142,7 @@ class UrbanConfigFunctionalLayer(UrbanWithUsersFunctionalLayer):
     Useful for performances: Plone site is instanciated only once
     """
     def setUp(self):
+        super(UrbanConfigFunctionalLayer, self).setUp()
         with helpers.ploneSite() as portal:
             portal.setupCurrentSkin(portal.REQUEST)
             helpers.applyProfile(portal, 'Products.urban:testsWithConfig')
@@ -157,6 +160,7 @@ class UrbanLicencesFunctionalLayer(UrbanConfigFunctionalLayer):
     Useful for performances: Plone site is instanciated only once
     """
     def setUp(self):
+        super(UrbanLicencesFunctionalLayer, self).setUp()
         with helpers.ploneSite() as portal:
             portal.setupCurrentSkin(portal.REQUEST)
             helpers.applyProfile(portal, 'Products.urban:testsWithLicences')
