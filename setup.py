@@ -6,8 +6,8 @@ version = '2.5.2.dev0'
 setup(name='Products.urban',
       version=version,
       description="Urban Certificate Management",
-      long_description=open("README.txt").read() + "\n" +
-                       open(os.path.join("docs", "HISTORY.txt")).read(),
+      long_description=open("README.rst").read() + "\n" +
+                       open(os.path.join("docs", "CHANGES.rst")).read(),
       classifiers=[
           "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
           "Programming Language :: Python",
