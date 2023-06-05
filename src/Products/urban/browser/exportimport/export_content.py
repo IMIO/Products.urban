@@ -9,7 +9,9 @@ from zope.component import getMultiAdapter
 class UrbanExportContent(ExportContent):
     def _serialize_event(self, obj):
         serializer = getMultiAdapter((obj, self.request), ISerializeToJson)
-        return self.update_data_for_migration(serializer(), obj)
+        item = serializer()
+        item["@id"] = obj.absolute_url()
+        return self.update_data_for_migration(item, obj)
 
     def global_dict_hook(self, item, obj):
         item = super(UrbanExportContent, self).global_dict_hook(item, obj)
