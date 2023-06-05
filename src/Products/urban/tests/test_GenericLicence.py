@@ -4,6 +4,7 @@ from Products.urban.config import URBAN_TYPES
 from Products.urban.config import URBAN_CODT_TYPES
 from Products.urban.testing import URBAN_TESTS_INTEGRATION
 from Products.urban.tests.helpers import SchemaFieldsTestCase
+from Products.urban import interfaces
 from Products.urban import utils
 
 from plone import api
@@ -375,6 +376,9 @@ class TestGenericLicenceFields(SchemaFieldsTestCase):
 
     def test_isInPCA(self):
         for licence in self.licences:
+            # CODT licence PCA is renamed to SOL
+            if interfaces.ICODT_BaseBuildLicence.providedBy(licence) or 'CODT' in licence.portal_type:
+                continue
             msg = "field 'isInPCA' not visible on {}".format(licence.getPortalTypeName())
             expected_field = "<span>Plan Communal d'Aménagement</span>"
             if licence.portal_type in URBAN_CODT_TYPES:
@@ -389,6 +393,9 @@ class TestGenericLicenceFields(SchemaFieldsTestCase):
 
     def test_pca(self):
         for licence in self.licences:
+            # CODT licence PCA is renamed to SOL
+            if interfaces.ICODT_BaseBuildLicence.providedBy(licence) or 'CODT' in licence.portal_type:
+                continue
             msg = "field 'pca' not visible on {}".format(licence.getPortalTypeName())
             expected_field = "<span>Plan Communal d'Aménagement</span>"
             if licence.portal_type in URBAN_CODT_TYPES:
@@ -414,6 +421,9 @@ class TestGenericLicenceFields(SchemaFieldsTestCase):
 
     def test_isInSubdivision(self):
         for licence in self.licences:
+            # CODT licence parcellings is renamed to urbanisation licence
+            if interfaces.ICODT_BaseBuildLicence.providedBy(licence) or 'CODT' in licence.portal_type:
+                continue
             msg = "field 'isInSubdivision' not visible on {}".format(licence.getPortalTypeName())
             if licence.portal_type in URBAN_CODT_TYPES:
                 self._is_field_visible("<span>Le bien se situe dans un permis d'urbanisation</span>:", licence, msg)
@@ -428,6 +438,9 @@ class TestGenericLicenceFields(SchemaFieldsTestCase):
 
     def test_subdivisionDetails(self):
         for licence in self.licences:
+            # CODT licence parcellings is renamed to urbanisation licence
+            if interfaces.ICODT_BaseBuildLicence.providedBy(licence) or 'CODT' in licence.portal_type:
+                continue
             msg = "field 'subdivisionDetails' not visible on {}".format(licence.getPortalTypeName())
             if licence.portal_type in URBAN_CODT_TYPES:
                 self._is_field_visible("<span>Le bien se situe dans un permis d'urbanisation</span>:", licence, msg)
@@ -445,9 +458,11 @@ class TestGenericLicenceFields(SchemaFieldsTestCase):
     def test_protectedBuilding(self):
         for licence in self.licences:
             config = licence.getLicenceConfig()
-            if 'patrimony' in [line['value'] for line in config.getActiveTabs()]:
-                msg = "field 'protectedBuilding' not visible on {}".format(licence.getPortalTypeName())
-                self._is_field_visible("<span>Bien classé ou assimilé</span>:", licence, msg)
+            tabs = [row['value'] for row in config.getActiveTabs()]
+            if 'patrimony' not in tabs:
+                continue
+            msg = "field 'protectedBuilding' not visible on {}".format(licence.getPortalTypeName())
+            self._is_field_visible("<span>Bien classé ou assimilé</span>:", licence, msg)
 
     def test_has_attribute_protectedBuildingDetails(self):
         field_name = 'protectedBuildingDetails'
@@ -460,9 +475,11 @@ class TestGenericLicenceFields(SchemaFieldsTestCase):
     def test_protectedBuildingDetails(self):
         for licence in self.licences:
             config = licence.getLicenceConfig()
-            if 'patrimony' in [line['value'] for line in config.getActiveTabs()]:
-                msg = "field 'protectedBuildingDetails' not visible on {}".format(licence.getPortalTypeName())
-                self._is_field_visible("<span>Détails concernant le bien (classé ou assimilé)</span>:", licence, msg)
+            tabs = [row['value'] for row in config.getActiveTabs()]
+            if 'patrimony' not in tabs:
+                continue
+            msg = "field 'protectedBuildingDetails' not visible on {}".format(licence.getPortalTypeName())
+            self._is_field_visible("<span>Détails concernant le bien (classé ou assimilé)</span>:", licence, msg)
 
     def test_has_attribute_solicitLocationOpinionsTo(self):
         field_name = 'solicitLocationOpinionsTo'
@@ -516,6 +533,9 @@ class TestGenericLicenceFields(SchemaFieldsTestCase):
 
     def test_parcellings(self):
         for licence in self.licences:
+            # CODT licence parcellings is renamed to urbanisation licence
+            if interfaces.ICODT_BaseBuildLicence.providedBy(licence) or 'CODT' in licence.portal_type:
+                continue
             msg = "field 'parcellings' not visible on {}".format(licence.getPortalTypeName())
             if licence.portal_type in URBAN_CODT_TYPES:
                 self._is_field_visible("<span>Le bien se situe dans un permis d'urbanisation</span>:", licence, msg)
