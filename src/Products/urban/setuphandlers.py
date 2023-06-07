@@ -1346,8 +1346,10 @@ def createLicence(site, licence_type, data):
             return str(date.today())
         return None
 
-    licence_folder = getattr(urban_folder, "%ss" % licence_type.lower())
-    # create the licence
+    licence_folder = getattr(urban_folder, "%ss" % licence_type.lower(), None)
+    if not licence_folder:
+        return
+    #create the licence
     licence_id = site.generateUniqueId('test_%s' % licence_type.lower())
     licence_folder.invokeFactory(licence_type, id=licence_id)
     logger.info('creating test %s' % licence_type)
