@@ -85,9 +85,9 @@ class TestGenericLicenceFields(SchemaFieldsTestCase):
             reference_is_visible = \
                 "<span>Référence FD (DGO4)</span>:" in contents \
                 or \
-                "<span>Référence DGO3</span>:" in contents \
+                "<span>Référence DGO6</span>:" in contents \
                 or \
-                "<span>Référence DGO6</span>:" in contents
+                "<span>Référence DGO4</span>:" in contents \
             self.assertTrue(reference_is_visible, msg)
 
     def test_has_attribute_workLocations(self):
