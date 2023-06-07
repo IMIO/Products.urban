@@ -11,6 +11,7 @@
   <include package="collective.datagridcolumns"/>
   <include package="collective.documentgenerator"/>
   <include package="collective.externaleditor"/>
+  <include package="collective.exportimport"/>
   <include package="collective.faceted.task"/>
   <include package="collective.iconifieddocumentactions"/>
   <include package="collective.js.jqueryui"/>
