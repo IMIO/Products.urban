@@ -117,9 +117,16 @@ def licence_architectinfoindex(object):
     return list(set(architects_info))
 
 
-@indexer(interfaces.IParcellingTerm)
 @indexer(interfaces.IGenericLicence)
 def genericlicence_parcelinfoindex(obj):
+    parcels_infos = []
+    if hasattr(obj, 'getParcels'):
+        parcels_infos = list(set([p.get_capakey() for p in obj.getParcels()]))
+    return parcels_infos
+
+
+@indexer(interfaces.IParcellingTerm)
+def parcelling_parcelinfoindex(obj):
     parcels_infos = []
     if hasattr(obj, 'getParcels'):
         parcels_infos = list(set([p.get_capakey() for p in obj.getParcels()]))
