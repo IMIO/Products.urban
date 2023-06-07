@@ -286,7 +286,7 @@ class TestBuildLicenceFields(SchemaFieldsTestCase):
     def test_impactStudy_is_visible(self):
         for licence in self.licences:
             msg = "field 'impactStudy' not visible on {}".format(licence.getPortalTypeName())
-            self._is_field_visible("<span>Étude d'incidences?</span>:", licence, msg)
+            self._is_field_visible("<span>Étude d'incidences ?</span>:", licence, msg)
 
     def test_has_attribute_implantation(self):
         field_name = 'implantation'
@@ -329,6 +329,6 @@ class TestBuildLicenceFields(SchemaFieldsTestCase):
 
     def test_representativeContacts_is_visible(self):
         msg = "field 'representativeContacts' not visible on CODT ParcelOutLicence"
-        self._is_field_visible("<legend>Représentant(s)</legend>", obj= self.licences[3], msg=msg)
+        self._is_field_visible("<legend>Architecte(s) ou géomètre(s)</legend>", obj= self.licences[3], msg=msg)
         msg = "field 'representativeContacts' not visible on CODT BuildLicence"
-        self._is_field_visible("<legend>Représentant(s)</legend>", obj= self.licences[2], msg=msg)
+        self._is_field_visible("<legend>Architecte(s) ou géomètre(s)</legend>", obj= self.licences[2], msg=msg)
