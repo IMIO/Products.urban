@@ -67,10 +67,10 @@ class TestEnvClassTwoInstall(BrowserTestCase):
         contents = self.browser.contents
         self.assertTrue("Permis d'environnement classe 2" in contents)
 
-    def test_EnvClassTwo_is_under_licence_workflow(self):
+    def test_EnvClassTwo_is_under_env_workflow(self):
         workflow_tool = api.portal.get_tool('portal_workflow')
         envclasstwo_workflow = workflow_tool.getChainForPortalType('EnvClassTwo')
-        self.assertTrue('urban_licence_workflow' in envclasstwo_workflow)
+        self.assertTrue('env_licence_workflow' in envclasstwo_workflow)
 
 
 class TestEnvClassTwoInstance(SchemaFieldsTestCase):
@@ -196,10 +196,10 @@ class TestEnvClassTwoInstance(SchemaFieldsTestCase):
 
     def test_envclasstwo_referenceDGATLP_translation(self):
         """
-        Field referenceDGATLP should be translated as 'reference DGO3'
+        Field referenceDGATLP should be translated as 'reference ARNE'
         """
-        self._is_field_visible("Référence DGO3")
-        self._is_field_visible_in_edit("Référence DGO3")
+        self._is_field_visible("Référence ARNE")
+        self._is_field_visible_in_edit("Référence ARNE")
 
     def test_envclasstwo_workLocation_translation(self):
         """
