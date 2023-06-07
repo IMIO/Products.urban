@@ -122,9 +122,8 @@ class TestUrbanConfigFunctional(BrowserTestCase):
     def test_foldermanagers_default_manageablelicences(self):
         fm_folder = self.portal.portal_urban.foldermanagers
         with api.env.adopt_roles(['Manager']):
-            foldermanagertest = fm_folder.invokeFactory(
-                'FolderManager', id='foldermanagertest',
+            foldermanagertest = api.content.create(
+                type='FolderManager', container=fm_folder, id='foldermanagertest',
                 name1='Dujardin', name2='Jan', grade='agent-technique'
             )
-            foldermanagertest = getattr(fm_folder, foldermanagertest)
             self.assertEqual(foldermanagertest.manageableLicences, tuple(URBAN_TYPES))

@@ -11,11 +11,7 @@ def setLinkedInquiry(ob, event):
     # we have to return inquiries AND announcement so we can tweak announcement
     # event config with the portal type "UrbanEventInquiry" to be able to do
     # the 50m radius search on announcement events. Source: trust me bro...
-    licence = ob.aq_inner.aq_parent
-    if hasattr(licence, 'getAllInquiriesAndAnnouncements'):
-        inquiries = licence.getAllInquiriesAndAnnouncements()
-    elif hasattr(licence, 'getAllInquiries'):
-        inquiries = licence.getAllInquiries()
+    inquiries = ob.aq_inner.aq_parent.getAllInquiriesAndAnnouncements()
     existingUrbanEventInquiries = ob.aq_inner.aq_parent.getUrbanEventInquiries()
     myinquiry = inquiries[len(existingUrbanEventInquiries) - 1]
     ob.setLinkedInquiry(myinquiry)
