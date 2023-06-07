@@ -4,9 +4,7 @@ from five import grok
 
 from plone import api
 
-from zope.lifecycleevent import ObjectCreatedEvent
 from zope.component import IFactory
-from zope import event
 
 
 class UrbanEventFactory(grok.GlobalUtility):
@@ -42,7 +40,6 @@ class UrbanEventFactory(grok.GlobalUtility):
         urban_event.setTitle(event_config.Title())
         urban_event._at_rename_after_creation = False
         urban_event.processForm()
-        event.notify(ObjectCreatedEvent(urban_event))
 
         return urban_event
 

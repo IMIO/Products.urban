@@ -39,15 +39,15 @@ class TestUrbanVocabularyTerm(unittest.TestCase):
         self.certificate.setFolderZone(('zh',))
         uvt = getattr(self.portal_urban.urbancertificateone.specificfeatures, 'situe-en-zone')
         #the expression is valid, it should render as expected...
-        self.assertEqual(self.portal_urban.renderText(uvt.Description(), self.certificate), expected)
+        self.assertEqual(uvt.getRenderedDescription(self.certificate), expected)
 
         #now change the description and remove a leading '['
         newDescription = "<p>est situé en [object.getValueForTemplate('folderZone')]] au plan de secteur de NAMUR adopté par Arrêté Ministériel du 14 mai 1986 et qui n'a pas cessé de produire ses effets pour le bien précité;</p>"
         uvt.setDescription(newDescription, mimetype='text/html')
         expected = "<p>est situé en [object.getValueForTemplate('folderZone')]] au plan de secteur de NAMUR adopté par Arrêté Ministériel du 14 mai 1986 et qui n'a pas cessé de produire ses effets pour le bien précité;</p>"
         #nothing rendered, the result is equal to the new description as no expression is detected...
-        self.assertEqual(self.portal_urban.renderText(uvt.Description(), self.certificate), newDescription)
-        self.assertEqual(self.portal_urban.renderText(uvt.Description(), self.certificate), expected)
+        self.assertEqual(uvt.getRenderedDescription(self.certificate), newDescription)
+        self.assertEqual(uvt.getRenderedDescription(self.certificate), expected)
 
         #now correctly define a wrong expression ;-)
         newDescription = "<p>est situé en [[object.getTralala()]] au plan de secteur de NAMUR adopté par Arrêté Ministériel du 14 mai 1986 et qui n'a pas cessé de produire ses effets pour le bien précité;</p>"
@@ -55,11 +55,11 @@ class TestUrbanVocabularyTerm(unittest.TestCase):
         expected = u"<p>est situé en %s au plan de secteur de NAMUR adopté par Arrêté Ministériel du 14 mai 1986 et qui n'a pas cessé de produire ses effets pour le bien précité;</p>" \
                    % translate('error_in_expr_contact_admin', domain='urban', mapping={'expr': '[[object.getTralala()]]'}, context=self.certificate.REQUEST)
         #a error message is rendered...
-        self.assertEqual(self.portal_urban.renderText(uvt.Description(), self.certificate), expected.encode('utf-8'))
+        self.assertEqual(uvt.getRenderedDescription(self.certificate), expected.encode('utf-8'))
 
         #we can also specify that we want the expressions to be replaced by a "null" value, aka "..."
         newDescription = "<p>est situé en [[object.getTralala()]] au plan de secteur de NAMUR adopté par Arrêté Ministériel du 14 mai 1986 et qui n'a pas cessé de produire ses effets pour le bien précité;</p>"
         uvt.setDescription(newDescription, mimetype='text/html')
         expected = "<p>est situé en ... au plan de secteur de NAMUR adopté par Arrêté Ministériel du 14 mai 1986 et qui n'a pas cessé de produire ses effets pour le bien précité;</p>"
         #expressions are replaced by the null value, aka "..."
-        self.assertEqual(self.portal_urban.renderText(uvt.Description(), self.certificate, renderToNull=True), expected)
+        self.assertEqual(uvt.getRenderedDescription(self.certificate, renderToNull=True), expected)
