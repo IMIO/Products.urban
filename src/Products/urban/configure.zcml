@@ -11,6 +11,7 @@
   <include package="collective.documentgenerator"/>
   <include package="collective.externaleditor"/>
   <include package="collective.faceted.task"/>
+  <include package="collective.fontawesome"/>
   <include package="collective.iconifieddocumentactions"/>
   <include package="collective.js.jqueryui"/>
   <include package="collective.z3cform.datagridfield"/>

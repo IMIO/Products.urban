@@ -8,10 +8,24 @@ from plone.app.testing import helpers
 from plone.testing import z2
 from Products.urban.utils import run_entry_points
 
+from zope.globalrequest import setLocal
+
 import Products.urban
+import transaction
 
 
-URBAN_TESTS_PROFILE_DEFAULT = PloneWithPackageLayer(
+class UrbanLayer(PloneWithPackageLayer):
+    """
+    """
+
+    def setUpPloneSite(self, portal):
+        setattr(portal.REQUEST, 'URL', '')
+        setLocal('request', portal.REQUEST)
+        transaction.commit()
+        super(UrbanLayer, self).setUpPloneSite(portal)
+
+
+URBAN_TESTS_PROFILE_DEFAULT = UrbanLayer(
     zcml_filename="testing.zcml",
     zcml_package=Products.urban,
     additional_z2_products=(
@@ -121,6 +135,12 @@ class UrbanWithUsersFunctionalLayer(FunctionalTesting):
     default_password = 'urbaneditor'
     environment_default_user = 'environmenteditor'
     environment_default_password = 'environmenteditor'
+
+    def setUpPloneSite(self, portal):
+        setattr(portal.REQUEST, 'URL', '')
+        setLocal('request', portal.REQUEST)
+        transaction.commit()
+        super(UrbanWithUsersLayer, self).setUpPloneSite(portal)
 
     def setUp(self):
         super(UrbanWithUsersFunctionalLayer, self).setUp()
