@@ -3,7 +3,7 @@
 Changes
 =======
 
-2.5.2 (unreleased)
+2.5.2 (2023-06-15)
 ------------------
 
 - Fix tests and update package metadata
