@@ -6,6 +6,9 @@ Changes
 2.5.2 (unreleased)
 ------------------
 
+- Fix tests and update package metadata
+  [sdelcourt, mpeeters]
+
 - Add CSV import of recipients to an inquiry [URB-2573]
   [ndemonte]
 
