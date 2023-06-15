@@ -138,7 +138,7 @@ Changes
 
 - Pre-check all manageable licences for foldermanager creation. [URB-1935]
   [jjaumotte]
-  
+
 - Add field to define final states closing all the urban events on a licence. [URB-2082]
   [sdelcourt]
 
@@ -184,16 +184,16 @@ Changes
 - Add default person title when creating applicant from a parcel search. [URB-2227]
   [mdhyne]
   [sdelcourt]
-  
-- Update vocabularies CODT Build Licence (folder categories, missing parts) 
+
+- Update vocabularies CODT Build Licence (folder categories, missing parts)
   [lmertens]
 
-- Add dashboard template 'listing permis' 
+- Add dashboard template 'listing permis'
   [lmertens]
 
 - Add translations [URB-1997]
   [mdhyne]
-  
+
 -add boolean field 'isModificationParceloutLicence'. [URB-2250]
   [mdhyne]
 
@@ -237,7 +237,7 @@ Changes
 
 - Fix format_date
   [fngaha]
-  
+
 - Update getLimitDate
   [fngaha]
 
@@ -304,7 +304,7 @@ Changes
   [jjaumotte]
 
 1.11.1 (unknown release date)
--------------------
+-----------------------------
 - add query_parcels_in_radius method to view
   [fngaha]
 
