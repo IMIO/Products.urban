@@ -7,7 +7,7 @@ from zope.component import getMultiAdapter
 
 
 class UrbanExportContent(ExportContent):
-    def _serialize_event(self, obj):
+    def _serializer(self, obj):
         serializer = getMultiAdapter((obj, self.request), ISerializeToJson)
         item = serializer()
         item["@id"] = obj.absolute_url()
@@ -16,13 +16,24 @@ class UrbanExportContent(ExportContent):
     def global_dict_hook(self, item, obj):
         item = super(UrbanExportContent, self).global_dict_hook(item, obj)
         if item["@type"] in URBAN_TYPES:
-            events = [
-                self._serialize_event(event)
+            item["events"] = [
+                self._serializer(event)
                 for event in obj.listFolderContents(
                     contentFilter={"portal_type": "UrbanEvent"}
                 )
             ]
-            item["events"] = events
+            item["parcels"] = [
+                self._serializer(event)
+                for event in obj.listFolderContents(
+                    contentFilter={"portal_type": "Parcel"}
+                )
+            ]
+            item["applicants"] = [
+                self._serializer(event)
+                for event in obj.listFolderContents(
+                    contentFilter={"portal_type": "Applicant"}
+                )
+            ]
         return item
 
     def update_data_for_migration(self, item, obj):
