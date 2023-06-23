@@ -3,7 +3,7 @@
 Changes
 =======
 
-2.5.3 (unreleased)
+2.5.3 (2023-06-23)
 ------------------
 
 - Add parcel and applicants contents to export content [URB-2733]
