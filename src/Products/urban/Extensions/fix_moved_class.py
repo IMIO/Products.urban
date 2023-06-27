@@ -39,6 +39,9 @@ def fix_labruyere_envclassthrees():
          Function Name:  fix_labruyere_envclassthrees
     4) run it
     5) undo steps 1 - 3
+
+    It can be run via instance-debug.
+    Restart instances to purge "old" object version from memory.
     """
 
     portal = api.portal.get()
@@ -54,7 +57,7 @@ def fix_labruyere_envclassthrees():
     for obj_id in sorted(missing_ids):
         obj = folder[obj_id]
         logger.info('fixing & reindexing {} ...'.format(obj_id))
-        set_new_class(obj, 'Products.urban.content.licence.EnvironmentBase.EnvironmentBase')
+        set_new_class(obj, 'Products.urban.content.licence.EnvClassThree.EnvClassThree')
         reindex_object(obj)
 
     logger.info("finished.")
