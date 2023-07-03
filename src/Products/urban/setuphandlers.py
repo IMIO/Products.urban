@@ -1091,7 +1091,7 @@ def setupSchedule(context):
             u'pretty_link',
             u'address_column',
             u'parcelreferences_column',
-            u'assigned_user_column',
+            u'assigned_user',
             u'status',
             u'due_date',
             u'task_actions_column',
@@ -1564,7 +1564,7 @@ def _create_task_configs(container, taskconfigs):
             task_config.dashboard_collection.customViewFields = (
                 u'sortable_title',
                 u'address_column',
-                u'assigned_user_column',
+                u'assigned_user',
                 u'status',
                 u'due_date',
                 u'task_actions_column',

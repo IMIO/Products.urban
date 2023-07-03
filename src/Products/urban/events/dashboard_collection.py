@@ -11,7 +11,7 @@ def set_dashboard_columns(dashboard_collection, event):
         columns = (
             u'sortable_title',
             u'address_column',
-            u'assigned_user_column',
+            u'assigned_user',
             u'status',
             u'due_date',
             u'licence_final_duedate',
@@ -22,7 +22,7 @@ def set_dashboard_columns(dashboard_collection, event):
             u'sortable_title',
             u'pretty_link',
             u'address_column',
-            u'assigned_user_column',
+            u'assigned_user',
             u'status',
             u'due_date',
             u'licence_final_duedate',
