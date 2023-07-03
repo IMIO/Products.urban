@@ -3,7 +3,7 @@
 Changes
 =======
 
-2.5.5 (unreleased)
+2.6.0 (2023-07-03)
 ------------------
 
 - Fix `hidealloption` and `hide_category` parameters for dashboard collections
