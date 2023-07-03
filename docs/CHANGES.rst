@@ -3,7 +3,7 @@
 Changes
 =======
 
-2.5.4 (unreleased)
+2.5.4 (2023-07-03)
 ------------------
 
 - Change collection column name [URB-1537]
