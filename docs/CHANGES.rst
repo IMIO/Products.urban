@@ -9,6 +9,9 @@ Changes
 - Change collection column name [URB-1537]
   [jchandelle]
 
+- Fix class name in external method fix_labruyere_envclassthrees [SUP-29587]
+  [ndemonte]
+
 
 2.5.3 (2023-06-23)
 ------------------
