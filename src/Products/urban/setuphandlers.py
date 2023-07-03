@@ -517,7 +517,7 @@ def addEnvironmentRubrics(context):
 
     rubrics_folder = getattr(tool, "rubrics")
     # add the rubrics subfolders
-    # addRubricValues(context, rubrics_folder)
+    addRubricValues(context, rubrics_folder)
 
 
 def addRubricValues(context, config_folder):
