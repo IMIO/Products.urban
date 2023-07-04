@@ -449,6 +449,7 @@
         source="1127"
         destination="1128"
         handler=".update_250.add_new_vocabulary_for_zoning_field"
+        profile="Products.urban:default" />
 
     <gs:upgradeStep
         title="Update Collection Column"
