@@ -3,7 +3,7 @@
 Changes
 =======
 
-2.6.2 (unreleased)
+2.6.2 (2023-07-04)
 ------------------
 
 - Explicitly include `urban.restapi` zcml dependency [URB-2790]
