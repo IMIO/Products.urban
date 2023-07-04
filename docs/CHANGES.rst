@@ -6,7 +6,8 @@ Changes
 2.6.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Explicitly include `urban.restapi` zcml dependency [URB-2790]
+  [mpeeters]
 
 
 2.6.1 (2023-07-04)

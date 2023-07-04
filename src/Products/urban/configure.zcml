@@ -43,6 +43,7 @@
   <include package="plone.z3ctable"/>
   <include package="plonetheme.imioapps"/>
   <include package="urban.vocabulary"/>
+  <include package="urban.restapi"/>
 
   <include file="grok.zcml" />
   <include file="permissions.zcml" />
