@@ -6,7 +6,8 @@ Changes
 2.5.6 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix zcml for migrations
+  [mpeeters]
 
 
 2.5.5 (2023-07-04)
