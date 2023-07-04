@@ -6,7 +6,8 @@ Changes
 2.5.5 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Explicitly include `urban.restapi` zcml dependency [URB-2790]
+  [mpeeters]
 
 
 2.5.4 (2023-07-03)
