@@ -6,7 +6,8 @@ Changes
 2.6.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add option to POST endpoint when creating a licence to disable check ref format [SUP-31043]
+  [jchandelle]
 
 
 2.6.2 (2023-07-04)
