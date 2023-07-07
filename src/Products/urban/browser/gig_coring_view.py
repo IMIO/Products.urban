@@ -17,10 +17,9 @@ class GigCoringView(BrowserView):
 
     def open_gig_and_load_parcels(self):
         licence = self.context
-        capakeys = ['matrice={}'.format(urllib.quote(parcel.capakey, safe=''))
-                    for parcel in licence.getParcels()]
-        gig_url = "https://carto.luxembourg.be/matcad?{}&post_carottage={}/gig_coring_response".format(
-            '&'.join(capakeys),
+        capakeys = [urllib.quote(parcel.capakey, safe='') for parcel in licence.getParcels()]
+        gig_url = "https://carto.luxembourg.be/matcad?matrices={}&post_carottage={}/gig_coring_response".format(
+            ','.join(capakeys),
             urllib.quote(licence.absolute_url(), safe=''),
         )
         return self.request.RESPONSE.redirect(gig_url)
