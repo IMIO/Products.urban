@@ -6,7 +6,8 @@ Changes
 2.6.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Change NN field position [SUP-27165]
+  [jchandelle]
 
 
 2.6.2 (2023-07-04)

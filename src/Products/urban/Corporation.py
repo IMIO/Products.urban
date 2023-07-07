@@ -96,6 +96,26 @@ schema = Schema((
         ),
     ),
     StringField(
+        name='personNationalRegister',
+        widget=StringField._properties['widget'](
+            size=30,
+            label='Nationalregister',
+            label_msgid='urban_label_nationalRegister',
+            i18n_domain='urban',
+        ),
+        validators=('isBelgianNR',),
+    ),
+    StringField(
+        name='contactNationalRegister',
+        widget=StringField._properties['widget'](
+            size=30,
+            label='Nationalregister',
+            label_msgid='urban_label_nationalRegister',
+            i18n_domain='urban',
+        ),
+        validators=('isBelgianNR',),
+    ),
+    StringField(
         name='contactPersonEmail',
         widget=StringField._properties['widget'](
             label='Email',
@@ -158,7 +178,7 @@ Corporation_schema = BaseSchema.copy() + \
 Corporation_schema['society'].widget.visible = False
 Corporation_schema['representedBySociety'].widget.visible = False
 Corporation_schema['representedBy'].widget.visible = False
-# Corporation_schema['nationalRegister'].widget.visible = False
+Corporation_schema['nationalRegister'].widget.visible = False
 #Corporation_schema['personTitle'].widget.visible = False
 ##/code-section after-schema
 
@@ -224,14 +244,15 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     schema.moveField('legalForm', after='denomination')
     schema.moveField('tvaNumber', after='fax')
     schema.moveField('bceNumber', after='tvaNumber')
-    schema.moveField('nationalRegister', after='bceNumber')
     schema.moveField('personTitle', after='nationalRegister')
     schema.moveField('personRole', after='personTitle')
     schema.moveField('name1', after='personRole')
     schema.moveField('name2', after='name1')
+    schema.moveField('personNationalRegister', after='name2')
     schema.moveField('contactPersonStreet', after='contactPersonPhone')
     schema.moveField('contactPersonNumber', after='contactPersonStreet')
     schema.moveField('contactPersonZipcode', after='contactPersonNumber')
+    schema.moveField('contactNationalRegister', after='contactPersonEmail')
     schema.moveField('contactPersonCity', after='contactPersonZipcode')
 
 
