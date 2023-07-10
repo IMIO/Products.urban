@@ -3,7 +3,7 @@
 Changes
 =======
 
-2.5.6 (unreleased)
+2.5.6 (2023-07-10)
 ------------------
 
 - Fix zcml for migrations
