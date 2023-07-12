@@ -6,6 +6,8 @@ Changes
 2.5.7 (unreleased)
 ------------------
 
+- Fix encoding error [URB-2805]
+
 - Add a explicit dependency to collective.exportimport
   [mpeeters]
 
