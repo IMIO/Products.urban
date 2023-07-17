@@ -467,4 +467,12 @@
         handler=".update_250.update_env_licences_schedule"
         profile="Products.urban:default" /-->
 
+    <gs:upgradeStep
+        title="Add Couple to Preliminary Notice"
+        description="Add Couple to Preliminary Notice"
+        source="1129"
+        destination="1130"
+        handler=".update_260.add_couple_to_preliminary_notice"
+        profile="Products.urban:default" />
+
 </configure>

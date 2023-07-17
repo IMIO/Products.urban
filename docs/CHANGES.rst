@@ -6,6 +6,8 @@ Changes
 2.5.7 (unreleased)
 ------------------
 
+- Add Couple to Preliminary Notice [URB-2824]
+  [ndemonte]
 
 - Fix Select2 view display [URB-2575]
   [jchandelle]
