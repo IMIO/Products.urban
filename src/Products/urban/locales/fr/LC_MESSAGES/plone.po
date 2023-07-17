@@ -64,6 +64,21 @@ msgstr "Réclamant"
 msgid "Contact"
 msgstr "Contact"
 
+msgid "Corporation"
+msgstr "Personne morale"
+
+msgid "CorporationPlaintiff"
+msgstr "Plaignant (p. morale)"
+
+msgid "CorporationProprietary"
+msgstr "Propriétaire (p.morale)"
+
+msgid "CorporationTenant"
+msgstr "Locataire (p. morale)"
+
+msgid "Couple"
+msgstr ""
+
 msgid "Declaration"
 msgstr "Déclaration"
 
@@ -136,6 +151,9 @@ msgstr "Certificat de patrimoine"
 msgid "PcaTerm"
 msgstr "Plan Communal d'Aménagement"
 
+msgid "Plaintiff"
+msgstr "Plaignant"
+
 msgid "Please, select a street from the list below!"
 msgstr "Sélectionnez la rue à chercher s'il vous plaît!"
 
@@ -154,6 +172,9 @@ msgstr "Réunion de projet"
 msgid "Proprietary"
 msgstr "Propriétaire"
 
+msgid "ProprietaryCouple"
+msgstr "Couple de propriétaire"
+
 msgid "Recipient"
 msgstr "Destinataire"
 
@@ -165,6 +186,9 @@ msgstr "Décret Voirie"
 
 msgid "Street"
 msgstr "Rue"
+
+msgid "Tenant"
+msgstr "Locataire"
 
 msgid "The field does not exist !!!"
 msgstr "Le champ ${field} n'existe pas !!!"
