@@ -6,6 +6,10 @@ Changes
 2.5.7 (unreleased)
 ------------------
 
+
+- Fix Select2 view display [URB-2575]
+  [jchandelle]
+
 - Provide getLastAcknowledgment method for all urbancertificates [SUP-30852]
   [fngaha]
 
