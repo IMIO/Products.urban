@@ -6,6 +6,12 @@ Changes
 2.6.3 (unreleased)
 ------------------
 
+- Add a explicit dependency to collective.exportimport
+  [mpeeters]
+
+- Cadastral historic memory error [SUP-30310]
+  [sdelcourt]
+
 - Add option to POST endpoint when creating a licence to disable check ref format [SUP-31043]
   [jchandelle]
 
