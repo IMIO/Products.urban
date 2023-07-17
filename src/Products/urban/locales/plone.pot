@@ -201,6 +201,30 @@ msgstr ""
 msgid "resume_thaw"
 msgstr ""
 
+msgid "Tenant"
+msgstr ""
+
+msgid "Corporation"
+msgstr ""
+
+msgid "CorporationPlaintiff"
+msgstr ""
+
+msgid "CorporationProprietary"
+msgstr ""
+
+msgid "CorporationTenant"
+msgstr ""
+
+msgid "Couple"
+msgstr ""
+
+msgid "Plaintiff"
+msgstr ""
+
+msgid "ProprietaryCouple"
+msgstr ""
+
 #status messages...
 msgid "db_connection_successfull"
 msgstr ""

@@ -1804,6 +1804,9 @@ msgstr "Coordonnées du destinataire"
 msgid "label_colname_street"
 msgstr "Rue"
 
+msgid "label_colname_tenant_data"
+msgstr "Coordonnées du locataire"
+
 msgid "label_colname_time_delay"
 msgstr "Retard (jours)"
 
