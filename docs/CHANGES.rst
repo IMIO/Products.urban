@@ -9,6 +9,9 @@ Changes
 - Add Couple to Preliminary Notice [URB-2824]
   [ndemonte]
 
+- Fix Select2 view display [URB-2575]
+  [jchandelle]
+
 - Provide getLastAcknowledgment method for all urbancertificates [SUP-30852]
   [fngaha]
 
