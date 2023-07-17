@@ -26,5 +26,6 @@
     factory="Products.urban.services.gig.GigSession" />
 
   <adapter factory=".serializer.UrbanDefaultFieldSerializer" />
+  <adapter factory=".deserializer.DeserializeFromJsonUrban" />
 
 </configure>
