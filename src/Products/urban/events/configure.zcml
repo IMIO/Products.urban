@@ -246,8 +246,8 @@
                    imio.pm.wsclient.interfaces.ISentToPMEvent"
               handler=".urbanEventEvents.notifyLicence" />
 
-  <subscriber for="imio.dashboard.interfaces.IDashboardCollection
-                   zope.lifecycleevent.interfaces.IObjectCreatedEvent"
+  <subscriber for="collective.eeafaceted.collectionwidget.interfaces.IDashboardCollection
+                   zope.lifecycleevent.IObjectAddedEvent"
               handler=".dashboard_collection.set_dashboard_columns" />
 
   <subscriber for="..interfaces.IUrbanTool
