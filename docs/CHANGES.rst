@@ -6,8 +6,23 @@ Changes
 2.6.3 (unreleased)
 ------------------
 
+
 - Fix Select2 view display [URB-2575]
   [jchandelle]
+
+- Provide getLastAcknowledgment method for all urbancertificates [SUP-30852]
+  [fngaha]
+
+- Fix encoding error [URB-2805]
+  [fngaha]
+
+- Add a explicit dependency to collective.exportimport
+  [mpeeters]
+
+- Cadastral historic memory error [SUP-30310]
+  [sdelcourt]
+
+- Add option to POST endpoint when creating a licence to disable check ref format [SUP-31043]
 
 
 2.6.2 (2023-07-04)

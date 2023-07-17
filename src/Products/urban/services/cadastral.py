@@ -10,7 +10,7 @@ from sqlalchemy import and_
 from sqlalchemy import or_
 from sqlalchemy.sql.expression import func
 
-import ast
+import json
 
 IGNORE = []
 
@@ -210,7 +210,11 @@ class CadastreSession(SQLSession):
         )
         records = query.distinct().all()
         if records:
-            historic = ParcelHistoric(capakey, ast.literal_eval(records[0][0]), ast.literal_eval(records[0][1]))
+            historic = ParcelHistoric(
+                capakey,
+                json.loads(records[0][0].replace("'", '"')),
+                json.loads(records[0][1].replace("'", '"'))
+            )
         else:
             historic = ParcelHistoric(capakey, {}, {})
         return historic
