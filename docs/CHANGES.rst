@@ -6,6 +6,9 @@ Changes
 2.6.3 (unreleased)
 ------------------
 
+- Add Couple to Preliminary Notice [URB-2824]
+  [ndemonte]
+
 - Provide getLastAcknowledgment method for all urbancertificates [SUP-30852]
   [fngaha]
 
