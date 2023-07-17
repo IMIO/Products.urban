@@ -1,5 +1,11 @@
 <?xml version="1.0"?>
-<dc-workflow workflow_id="college_event_workflow" title="college_event_workflow" description="" state_variable="review_state" initial_state="draft" manager_bypass="False">
+<dc-workflow
+  workflow_id="college_event_workflow"
+  title="college_event_workflow"
+  description=""
+  state_variable="review_state"
+  initial_state="draft"
+  manager_bypass="False">
  <permission>ATContentTypes: Add File</permission>
  <permission>ATContentTypes: Add Image</permission>
  <permission>Access contents information</permission>
@@ -167,22 +173,46 @@
    <permission-role>Manager</permission-role>
   </permission-map>
  </state>
- <transition transition_id="notify" title="notify" new_state="notification" trigger="USER" before_script="" after_script="">
+ <transition
+   transition_id="notify"
+   title="notify"
+   new_state="notification"
+   trigger="USER"
+   before_script=""
+   after_script="">
   <action url="" category="workflow" icon="">notify</action>
   <guard>
   </guard>
  </transition>
- <transition transition_id="propose" title="propose" new_state="decision_in_progress" trigger="USER" before_script="" after_script="">
+ <transition
+   transition_id="propose"
+   title="propose"
+   new_state="decision_in_progress"
+   trigger="USER"
+   before_script=""
+   after_script="">
   <action url="" category="workflow" icon="">propose</action>
   <guard>
   </guard>
  </transition>
- <transition transition_id="receive_college_decision" title="receive_college_decision" new_state="closed" trigger="USER" before_script="" after_script="">
+ <transition
+   transition_id="receive_college_decision"
+   title="receive_college_decision"
+   new_state="closed"
+   trigger="USER"
+   before_script=""
+   after_script="">
   <action url="" category="workflow" icon="">receive_college_decision</action>
   <guard>
   </guard>
  </transition>
- <transition transition_id="reopen" title="reopen" new_state="decision_in_progress" trigger="USER" before_script="" after_script="">
+ <transition
+   transition_id="reopen"
+   title="reopen"
+   new_state="decision_in_progress"
+   trigger="USER"
+   before_script=""
+   after_script="">
   <action url="" category="workflow" icon="">reopen</action>
   <guard>
   </guard>
@@ -190,7 +220,6 @@
  <variable variable_id="action" for_catalog="False" for_status="True" update_always="True">
   <description>The last transition</description>
   <default>
-   
    <expression>transition/getId|nothing</expression>
   </default>
   <guard>
@@ -199,7 +228,6 @@
  <variable variable_id="actor" for_catalog="False" for_status="True" update_always="True">
   <description>The ID of the user who performed the last transition</description>
   <default>
-   
    <expression>user/getId</expression>
   </default>
   <guard>
@@ -208,7 +236,6 @@
  <variable variable_id="comments" for_catalog="False" for_status="True" update_always="True">
   <description>Comments about the last transition</description>
   <default>
-   
    <expression>python:state_change.kwargs.get('comment', '')</expression>
   </default>
   <guard>
@@ -217,7 +244,6 @@
  <variable variable_id="review_history" for_catalog="False" for_status="False" update_always="False">
   <description>Provides access to workflow history</description>
   <default>
-   
    <expression>state_change/getHistory</expression>
   </default>
   <guard>
@@ -228,7 +254,6 @@
  <variable variable_id="time" for_catalog="False" for_status="True" update_always="True">
   <description>Time of the last transition</description>
   <default>
-   
    <expression>state_change/getDateTime</expression>
   </default>
   <guard>
