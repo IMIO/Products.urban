@@ -6,7 +6,8 @@ Changes
 2.6.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix Select2 view display [URB-2575]
+  [jchandelle]
 
 
 2.6.2 (2023-07-04)
