@@ -6,6 +6,12 @@ Changes
 2.6.3 (unreleased)
 ------------------
 
+- Provide getLastAcknowledgment method for all urbancertificates [SUP-30852]
+  [fngaha]
+
+- Fix encoding error [URB-2805]
+  [fngaha]
+
 - Add a explicit dependency to collective.exportimport
   [mpeeters]
 
