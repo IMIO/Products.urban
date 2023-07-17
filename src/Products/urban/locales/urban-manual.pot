@@ -1510,8 +1510,8 @@ msgstr ""
 msgid "urban.warnings.bound_ticket_settlement"
 msgstr ""
 
-msgid "urban_label_notaryReference"
+msgid "reorder_actions"
 msgstr ""
 
-msgid "reorder_actions"
+msgid "label_colname_tenant_data"
 msgstr ""
