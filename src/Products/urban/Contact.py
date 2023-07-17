@@ -315,12 +315,13 @@ class Contact(BaseContent, BrowserDefaultMixin):
         title = self.getPersonTitleValue(short, False, reverse)
         name1 = self.getName1().decode('utf-8')
         name2 = self.getName2().decode('utf-8')
+        society = self.getSociety().decode('utf-8')
         namedefined = name1 or name2
         names = u'%s %s' % (name1, name2)
         if invertnames:
             names = u'%s %s' % (name2, name1)
         names = names.strip()
-        namepart = namedefined and names or self.getSociety()
+        namepart = namedefined and names or society
         nameSignaletic = u'%s %s' % (title, namepart)
         nameSignaletic = nameSignaletic.strip()
         if linebyline:
