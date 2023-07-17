@@ -6,7 +6,11 @@ Changes
 2.5.7 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add a explicit dependency to collective.exportimport
+  [mpeeters]
+
+- Cadastral historic memory error [SUP-30310]
+  [sdelcourt]
 
 
 2.5.6 (2023-07-10)
