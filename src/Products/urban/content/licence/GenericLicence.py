@@ -16,13 +16,12 @@ __docformat__ = 'plaintext'
 from AccessControl import ClassSecurityInfo
 from zope.annotation import IAnnotations
 
-from collective.archetypes.select2.select2widget import MultiSelect2Widget
+from Products.urban.widget.select2widget import MultiSelect2Widget
 from Products.MasterSelectWidget.MasterMultiSelectWidget import MasterMultiSelectWidget
 from collective.faceted.task.interfaces import IFacetedTaskContainer
 
 from eea.facetednavigation.subtypes.interfaces import IPossibleFacetedNavigable
 
-from collective.archetypes.select2.select2widget import MultiSelect2Widget
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 from Products.urban import interfaces
