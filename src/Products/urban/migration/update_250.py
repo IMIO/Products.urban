@@ -1072,6 +1072,10 @@ def fix_config_wrong_class(context):
         schedule_cfg = getattr(licence_config, 'schedule', None)
 
         if schedule_cfg and hasattr(schedule_cfg, 'announcement-preparation'):
+            data = schedule_cfg.REQUEST.form
+            data['force_dashboard_creation'] = True
+            schedule_cfg.REQUEST.form = data
+
             unregister_schedule_collection_criterion(schedule_cfg, None)
 
             announcement_prep_task = getattr(schedule_cfg, 'announcement-preparation')
@@ -1081,5 +1085,7 @@ def fix_config_wrong_class(context):
             _replace_object(announcement_done_task, "MacroTaskConfig")
 
             register_schedule_collection_criterion(schedule_cfg, None)
+            data['force_dashboard_creation'] = False
+            schedule_cfg.REQUEST.form = data
 
     logger.info("Upgrade step done!")
