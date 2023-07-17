@@ -1043,8 +1043,10 @@ def _replace_object(obj, new_type, condition=None):
 
     dashboard_collection = new_obj['dashboard_collection']
 
-    dashboard_collection._setUID(collection_uid)
+    setattr(dashboard_collection, "_plone.uuid", collection_uid)
     dashboard_collection.reindexObject(idxs=["UID"])
+
+    dashboard_collection.showNumberOfItems = True
 
     query = [
         {
@@ -1057,9 +1059,7 @@ def _replace_object(obj, new_type, condition=None):
         for filter in dashboard_collection.query
     ]
 
-    dashboard_collection.query = query
-
-    pass
+    dashboard_collection.setQuery(query)
 
 
 def fix_config_wrong_class(context):
