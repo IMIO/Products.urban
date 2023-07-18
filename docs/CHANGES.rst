@@ -6,6 +6,9 @@ Changes
 2.5.7 (unreleased)
 ------------------
 
+- Fix different type of vocabulary [URB-2575]
+  [jchandelle]
+
 - Change NN field position [SUP-27165]
   [jchandelle]
   
