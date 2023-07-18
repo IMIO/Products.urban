@@ -12,13 +12,13 @@ def resolve_vocabulary(context, field, values):
         return ", ".join(
             [
                 field.vocabulary.getAllVocTerms(context)[value].title
-                for value in values
+                for value in values if value
             ]
         )
     elif type(field.vocabulary) == str:
         display_list = getattr(context, field.vocabulary)()
         return ", ".join(
-            [display_list.getValue(value) for value in values]
+            [display_list.getValue(value) for value in values if value]
         )
     elif (
         type(field.vocabulary) == tuple
@@ -28,7 +28,7 @@ def resolve_vocabulary(context, field, values):
         factory = getUtility(IVocabularyFactory, vocabulary_factory)
         vocabulary = factory(context)
         return ", ".join(
-            [vocabulary.by_token[value].title for value in values]
+            [vocabulary.by_token[value].title for value in values if value]
         )
 
 
