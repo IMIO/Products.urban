@@ -35,10 +35,10 @@ def resolve_vocabulary(context, field, values):
 class Select2Widget(CollectiveSelect2Widget):
     def view(self, context, field, request):
         values = super(Select2Widget, self).view(context, field, request)
-        return resolve_vacabulary(context, field, values)
+        return resolve_vocabulary(context, field, values)
 
 
 class MultiSelect2Widget(CollectiveMultiSelect2Widget):
     def view(self, context, field, request):
         values = super(MultiSelect2Widget, self).view(context, field, request)
-        return resolve_vacabulary(context, field, values)
+        return resolve_vocabulary(context, field, values)
