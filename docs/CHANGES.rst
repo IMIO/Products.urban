@@ -6,7 +6,8 @@ Changes
 2.6.4 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix inspection title [URB-2830]
+  [jchandelle]
 
 
 2.6.3 (2023-07-18)
