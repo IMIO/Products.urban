@@ -6,7 +6,8 @@ Changes
 2.5.8 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix an issue with some urban instances with lists that contains empty strings or `None` [URB-2575]
+  [mpeeters]
 
 
 2.5.7 (2023-07-18)
