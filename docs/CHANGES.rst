@@ -3,7 +3,7 @@
 Changes
 =======
 
-2.5.7 (unreleased)
+2.5.7 (2023-07-18)
 ------------------
 
 - Add missing translations [URB-2823]
