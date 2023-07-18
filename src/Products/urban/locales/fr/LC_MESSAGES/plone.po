@@ -344,6 +344,12 @@ msgstr "Terminé"
 msgid "final_decision_in_progress"
 msgstr "Décision finale"
 
+msgid "follow_with_prosecutor"
+msgstr ""
+
+msgid "follow_without_prosecutor"
+msgstr ""
+
 msgid "genericlicence_investigationstart_valdiation_error"
 msgstr "Un événement de type 'Enquête publique' est lié à cette enquête, vous devez donc définir une date valide.  Si vous souhaitez supprimer cette enquête, supprimez d'abord l'événement lié.  <a href='${linkedurbaneventurl}'>Cliquez ici pour y accéder</a>"
 
@@ -415,6 +421,9 @@ msgstr "Voirie"
 msgid "need_parceloutlicence"
 msgstr "Refusé"
 
+msgid "notify"
+msgstr ""
+
 msgid "opinion_given"
 msgstr "Avis rendu"
 
@@ -429,6 +438,9 @@ msgstr "Préparer l'avis du collège"
 
 msgid "prepare_final_decision"
 msgstr "Préparer la décision finale"
+
+msgid "propose"
+msgstr ""
 
 msgid "prosecution_analysis"
 msgstr "En analyse au parquet"
@@ -463,6 +475,9 @@ msgstr "Registre des modifications pour les rubriques"
 
 msgid "send_opinion"
 msgstr "Envoyer l'avis"
+
+msgid "send_to_prosecutor"
+msgstr ""
 
 msgid "suspend_freeze"
 msgstr "Suspendre (gel délais)"
