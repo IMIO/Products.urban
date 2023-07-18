@@ -6,6 +6,9 @@ Changes
 2.5.7 (unreleased)
 ------------------
 
+- Add missing translations [URB-2823]
+  [mpeeters, anagant]
+
 - Fix different type of vocabulary [URB-2575]
   [jchandelle]
 
