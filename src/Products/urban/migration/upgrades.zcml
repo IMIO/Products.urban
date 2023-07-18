@@ -729,4 +729,12 @@
         profile="Products.urban:default"
         />
 
+    <gs:upgradeStep
+        title="Remove covid from optional field"
+        description="Remove covid from optional field"
+        source="1159"
+        destination="1160"
+        handler=".update_270.remove_covid_from_optional_field"
+        profile="Products.urban:default" />
+
 </configure>
