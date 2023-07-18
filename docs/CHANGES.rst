@@ -6,6 +6,9 @@ Changes
 2.6.3 (unreleased)
 ------------------
 
+- Change NN field position [SUP-27165]
+  [jchandelle]
+  
 - Add Couple to Preliminary Notice [URB-2824]
   [ndemonte]
 
