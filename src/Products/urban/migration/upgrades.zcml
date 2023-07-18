@@ -507,4 +507,12 @@
         handler=".update_260.fix_opinion_workflow"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Remove covid from optional field"
+        description="Remove covid from optional field"
+        source="1134"
+        destination="1135"
+        handler=".update_260.remove_covid_from_optional_field"
+        profile="Products.urban:default" />
+
 </configure>

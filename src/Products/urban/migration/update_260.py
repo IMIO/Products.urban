@@ -60,4 +60,17 @@ def fix_opinion_workflow(context):
     logger.info("starting upgrade steps")
     setup_tool = api.portal.get_tool('portal_setup')
     setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'workflow')
+
+
+def remove_covid_from_optional_field(context):
+    logger = logging.getLogger('urban: Remove covid from optional field')
+    logger.info("starting upgrade steps")
+    portal_urban = api.portal.get_tool('portal_urban')
+    for licence_config in portal_urban.get_all_licence_configs():
+        used_attributes = licence_config.getUsedAttributes()
+        if 'covid' not in used_attributes:
+            continue
+        licence_config.setUsedAttributes(
+            tuple(attr for attr in used_attributes if attr != 'covid')
+        )
     logger.info("upgrade step done!")
