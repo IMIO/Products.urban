@@ -6,6 +6,9 @@ Changes
 2.6.3 (unreleased)
 ------------------
 
+- Fix different type of vocabulary [URB-2575]
+  [jchandelle]
+
 - Add Couple to Preliminary Notice [URB-2824]
   [ndemonte]
 
