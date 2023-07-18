@@ -5,7 +5,9 @@
   description=""
   state_variable="review_state"
   initial_state="draft"
-  manager_bypass="False">
+  manager_bypass="False"
+  xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+  i18n:domain="plone">
  <permission>ATContentTypes: Add File</permission>
  <permission>ATContentTypes: Add Image</permission>
  <permission>Access contents information</permission>
@@ -16,7 +18,7 @@
  <permission>View</permission>
  <permission>WebDAV Lock items</permission>
  <permission>WebDAV Unlock items</permission>
- <state state_id="closed" title="closed">
+ <state state_id="closed" title="closed" i18n:attributes="title">
   <exit-transition transition_id="reopen"/>
   <permission-map name="ATContentTypes: Add File" acquired="False">
    <permission-role>Manager</permission-role>
@@ -62,7 +64,7 @@
    <permission-role>Manager</permission-role>
   </permission-map>
  </state>
- <state state_id="decision_in_progress" title="decision_in_progress">
+ <state state_id="decision_in_progress" title="decision_in_progress" i18n:attributes="title">
   <exit-transition transition_id="receive_college_decision"/>
   <permission-map name="ATContentTypes: Add File" acquired="False">
    <permission-role>Editor</permission-role>
@@ -116,7 +118,7 @@
    <permission-role>Manager</permission-role>
   </permission-map>
  </state>
- <state state_id="draft" title="draft">
+ <state state_id="draft" title="draft" i18n:attributes="title">
   <exit-transition transition_id="propose"/>
   <permission-map name="ATContentTypes: Add File" acquired="False">
    <permission-role>Editor</permission-role>
@@ -176,6 +178,7 @@
  <transition
    transition_id="notify"
    title="notify"
+   i18n:attributes="title"
    new_state="notification"
    trigger="USER"
    before_script=""
@@ -187,6 +190,7 @@
  <transition
    transition_id="propose"
    title="propose"
+   i18n:attributes="title"
    new_state="decision_in_progress"
    trigger="USER"
    before_script=""
@@ -198,6 +202,7 @@
  <transition
    transition_id="receive_college_decision"
    title="receive_college_decision"
+   i18n:attributes="title"
    new_state="closed"
    trigger="USER"
    before_script=""
@@ -209,6 +214,7 @@
  <transition
    transition_id="reopen"
    title="reopen"
+   i18n:attributes="title"
    new_state="decision_in_progress"
    trigger="USER"
    before_script=""
