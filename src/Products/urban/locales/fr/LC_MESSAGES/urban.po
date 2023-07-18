@@ -2239,6 +2239,10 @@ msgstr "Particularités du bien"
 msgid "ssc_folder_title"
 msgstr "SSC"
 
+#: ../content/UrbanEventInspectionReport.py:152
+msgid "stop_worksite"
+msgstr "Arret de chantier"
+
 #. Default: "When adding manually a new street, please let the default value"
 #: Street.py
 msgid "street_best_address_key_descr"

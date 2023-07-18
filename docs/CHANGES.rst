@@ -6,6 +6,9 @@ Changes
 2.6.3 (unreleased)
 ------------------
 
+- Add stop worksite option to inspection report [URB-2827]
+  [jchandelle]
+
 - Add Couple to Preliminary Notice [URB-2824]
   [ndemonte]
 
