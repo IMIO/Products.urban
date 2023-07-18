@@ -9,6 +9,9 @@ Changes
 - Fix different type of vocabulary [URB-2575]
   [jchandelle]
 
+- Change NN field position [SUP-27165]
+  [jchandelle]
+  
 - Add Couple to Preliminary Notice [URB-2824]
   [ndemonte]
 
