@@ -5,7 +5,9 @@
   description=""
   state_variable="review_state"
   initial_state="creation"
-  manager_bypass="False">
+  manager_bypass="False"
+  xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+  i18n:domain="plone">
  <permission>ATContentTypes: Add File</permission>
  <permission>ATContentTypes: Add Image</permission>
  <permission>Access contents information</permission>
@@ -25,7 +27,7 @@
  <permission>urban: Add UrbanEventOpinionRequest</permission>
  <permission>List folder contents</permission>
  <permission>Manage properties</permission>
- <state state_id="creation" title="creation">
+ <state state_id="creation" title="creation" i18n:attributes="title">
   <exit-transition transition_id="send_to_prosecutor"/>
   <permission-map name="ATContentTypes: Add File" acquired="False">
    <permission-role>Contributor</permission-role>
@@ -136,7 +138,7 @@
    <permission-role>Manager</permission-role>
   </permission-map>
  </state>
- <state state_id="prosecution_analysis" title="prosecution_analysis">
+ <state state_id="prosecution_analysis" title="prosecution_analysis" i18n:attributes="title">
   <exit-transition transition_id="follow_with_prosecutor"/>
   <exit-transition transition_id="follow_without_prosecutor"/>
   <permission-map name="ATContentTypes: Add File" acquired="False">
@@ -248,7 +250,7 @@
    <permission-role>Manager</permission-role>
   </permission-map>
  </state>
- <state state_id="in_progress_with_prosecutor" title="in_progress_with_prosecutor">
+ <state state_id="in_progress_with_prosecutor" title="in_progress_with_prosecutor" i18n:attributes="title">
   <exit-transition transition_id="close"/>
   <permission-map name="ATContentTypes: Add File" acquired="False">
    <permission-role>Contributor</permission-role>
@@ -359,7 +361,7 @@
    <permission-role>Manager</permission-role>
   </permission-map>
  </state>
- <state state_id="in_progress_without_prosecutor" title="in_progress_without_prosecutor">
+ <state state_id="in_progress_without_prosecutor" title="in_progress_without_prosecutor" i18n:attributes="title">
   <exit-transition transition_id="close"/>
   <permission-map name="ATContentTypes: Add File" acquired="False">
    <permission-role>Contributor</permission-role>
@@ -470,7 +472,7 @@
    <permission-role>Manager</permission-role>
   </permission-map>
  </state>
- <state state_id="ended" title="ended">
+ <state state_id="ended" title="ended" i18n:attributes="title">
   <exit-transition transition_id="reopen"/>
   <permission-map name="ATContentTypes: Add File" acquired="False">
    <permission-role>Contributor</permission-role>
@@ -585,6 +587,7 @@
  <transition
    transition_id="send_to_prosecutor"
    title="send_to_prosecutor"
+   i18n:attributes="title"
    new_state="prosecution_analysis"
    trigger="USER"
    before_script=""
@@ -597,6 +600,7 @@
  <transition
    transition_id="follow_with_prosecutor"
    title="follow_with_prosecutor"
+   i18n:attributes="title"
    new_state="in_progress_with_prosecutor"
    trigger="USER"
    before_script=""
@@ -609,6 +613,7 @@
  <transition
    transition_id="follow_without_prosecutor"
    title="follow_without_prosecutor"
+   i18n:attributes="title"
    new_state="in_progress_without_prosecutor"
    trigger="USER"
    before_script=""
@@ -621,6 +626,7 @@
  <transition
    transition_id="close"
    title="close"
+   i18n:attributes="title"
    new_state="ended"
    trigger="USER"
    before_script=""
@@ -633,6 +639,7 @@
  <transition
    transition_id="reopen"
    title="reopen"
+   i18n:attributes="title"
    new_state="prosecution_analysis"
    trigger="USER"
    before_script=""
