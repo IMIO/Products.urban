@@ -293,6 +293,9 @@ msgstr ""
 msgid "draft"
 msgstr ""
 
+msgid "ended"
+msgstr ""
+
 #transitions
 msgid "retire"
 msgstr ""
@@ -342,6 +345,20 @@ msgstr ""
 msgid "administrative_answer"
 msgstr ""
 
+msgid "notify"
+msgstr ""
+
+msgid "propose"
+msgstr ""
+
+msgid "send_to_prosecutor"
+msgstr ""
+
+msgid "follow_without_prosecutor"
+msgstr ""
+
+msgid "follow_with_prosecutor"
+msgstr ""
 
 #control panel
 msgid "UrbanTool"
