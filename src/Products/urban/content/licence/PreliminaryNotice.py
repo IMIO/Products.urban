@@ -40,6 +40,7 @@ PreliminaryNotice_schema = BaseFolderSchema.copy() + \
     schema.copy()
 
 ##code-section after-schema #fill in your manual code here
+PreliminaryNotice_schema.delField('referenceDGATLP')
 ##/code-section after-schema
 
 
