@@ -6,6 +6,9 @@ Changes
 2.6.4 (unreleased)
 ------------------
 
+- Add vocabularies to preliminary notice foldercategories [URB-2832]
+  [jchandelle]
+
 - Fix inspection title [URB-2830]
   [jchandelle]
 

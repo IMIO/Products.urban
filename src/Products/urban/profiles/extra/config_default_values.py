@@ -681,6 +681,17 @@ default_values = {
             {'id': "autre", 'title': u"Autre"},
         ],
     },
+    'PreliminaryNotice': {
+        'foldercategories': [
+            'UrbanVocabularyTerm',
+            {'id': "uco", 'title': u"UCO: permis d’urbanisme du Collège avec AVIS du FD (sans «écart»)"},
+            {'id': "uco-d", 'title': u"UCO/D: permis d'urbanisme avec dérogation du FD pour Plan Secteur / norme GRU "},
+            {'id': "uco-a", 'title': u"UCO/A: permis d’urbanisme du Collège avec avis FACULTATIF du FD"},
+            {'id': "uco-pd", 'title': u"UCO/PD : permis d’urbanisme direct du Collège"},
+            {'id': "uco-fd", 'title': u"UCO/ED : permis avec écart et/ou dérogation Plan Secteur / norme GRU"},
+            {'id': "inconnu", 'title': u"Inconnu"},
+        ],
+    },
     'UrbanCertificateOne': {
         'foldercategories': [
             'UrbanVocabularyTerm',
