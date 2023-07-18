@@ -3,10 +3,26 @@
 Changes
 =======
 
-2.6.3 (unreleased)
+2.6.4 (unreleased)
 ------------------
 
 - Add stop worksite option to inspection report [URB-2827]
+  [jchandelle]
+
+- Fix inspection title [URB-2830]
+  [jchandelle]
+
+
+2.6.3 (2023-07-18)
+------------------
+
+- Add missing translations [URB-2823]
+  [mpeeters, anagant]
+
+- Fix different type of vocabulary [URB-2575]
+  [jchandelle]
+
+- Change NN field position [SUP-27165]
   [jchandelle]
 
 - Add Couple to Preliminary Notice [URB-2824]
