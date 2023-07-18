@@ -6,6 +6,9 @@ Changes
 2.6.3 (unreleased)
 ------------------
 
+- Fix inspection title [URB-2830]
+  [jchandelle]
+
 - Fix different type of vocabulary [URB-2575]
   [jchandelle]
 
