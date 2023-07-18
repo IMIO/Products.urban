@@ -483,12 +483,4 @@
         handler=".update_260.add_couple_to_preliminary_notice"
         profile="Products.urban:default" />
 
-    <gs:upgradeStep
-        title="Fix inspection title"
-        description="Fix inspection title"
-        source="1131"
-        destination="1132"
-        handler=".update_260.fix_inspection_title"
-        profile="Products.urban:default" />
-
 </configure>
