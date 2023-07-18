@@ -3,7 +3,10 @@
 from Acquisition import aq_parent
 from OFS.interfaces import IOrderedContainer
 from Products.urban.migration.utils import refresh_workflow_permissions
+from Products.urban.profiles.extra.config_default_values import default_values
 from Products.urban.setuphandlers import createFolderDefaultValues
+from Products.urban.setuphandlers import createVocabularies
+from Products.urban.setuphandlers import createVocabularyFolders
 from imio.schedule.content.object_factories import MacroCreationConditionObject
 from imio.schedule.content.object_factories import MacroEndConditionObject
 from imio.schedule.content.object_factories import MacroFreezeConditionObject
@@ -329,3 +332,15 @@ def fix_patrimony_certificate_class(context):
         licence.reindexObject()
 
     logger.info("upgrade step done!")
+
+
+def add_vocabularies_to_preliminary_notice_foldercategories(context):
+    portal_urban = api.portal.get_tool('portal_urban')
+    config_folder = getattr(portal_urban, 'preliminarynotice')
+    preliminary_notice_vocabularies = default_values['PreliminaryNotice']
+    createVocabularyFolders(
+        container=config_folder, vocabularies=preliminary_notice_vocabularies, site=None
+    )
+    createVocabularies(
+        container=config_folder, vocabularies=preliminary_notice_vocabularies
+    )
