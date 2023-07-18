@@ -6,6 +6,9 @@ Changes
 2.6.4 (unreleased)
 ------------------
 
+- Fix an issue with some urban instances with lists that contains empty strings or `None` [URB-2575]
+  [mpeeters]
+
 - Fix inspection title [URB-2830]
   [jchandelle]
 
