@@ -1,6 +1,5 @@
 from plone import api
 import logging
-from Products.urban.interfaces import IInspection
 
 
 def add_couple_to_preliminary_notice(context):
