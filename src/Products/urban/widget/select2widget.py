@@ -7,7 +7,7 @@ from zope.component import getUtility
 from zope.schema.interfaces import IVocabularyFactory
 
 
-def resolve_vacabulary(context, field, values):
+def resolve_vocabulary(context, field, values):
     if type(field.vocabulary) == UrbanVocabulary:
         return ", ".join(
             [
