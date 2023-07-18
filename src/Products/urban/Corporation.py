@@ -244,7 +244,7 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     schema.moveField('legalForm', after='denomination')
     schema.moveField('tvaNumber', after='fax')
     schema.moveField('bceNumber', after='tvaNumber')
-    schema.moveField('personTitle', after='nationalRegister')
+    schema.moveField('personTitle', after='bceNumber')
     schema.moveField('personRole', after='personTitle')
     schema.moveField('name1', after='personRole')
     schema.moveField('name2', after='name1')
