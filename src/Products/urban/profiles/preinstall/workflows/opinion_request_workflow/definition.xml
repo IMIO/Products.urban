@@ -5,7 +5,9 @@
   description=""
   state_variable="review_state"
   initial_state="creation"
-  manager_bypass="False">
+  manager_bypass="False"
+  xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+  i18n:domain="plone">
  <permission>ATContentTypes: Add File</permission>
  <permission>ATContentTypes: Add Image</permission>
  <permission>Access contents information</permission>
@@ -16,7 +18,7 @@
  <permission>WebDAV Lock items</permission>
  <permission>WebDAV Unlock items</permission>
  <permission>Products.urban: Validate</permission>
- <state state_id="creation" title="creation">
+ <state state_id="creation" title="creation" i18n:attributes="title">
   <exit-transition transition_id="ask_opinion"/>
   <permission-map name="ATContentTypes: Add File" acquired="False">
    <permission-role>Editor</permission-role>
@@ -77,7 +79,7 @@
    <permission-role>Manager</permission-role>
   </permission-map>
  </state>
- <state state_id="opinion_given" title="opinion_given">
+ <state state_id="opinion_given" title="opinion_given" i18n:attributes="title">
   <exit-transition transition_id="reopen"/>
   <permission-map name="ATContentTypes: Add File" acquired="False">
    <permission-role>Manager</permission-role>
@@ -127,7 +129,7 @@
    <permission-role>Manager</permission-role>
   </permission-map>
  </state>
- <state state_id="opinion_validation" title="opinion_validation">
+ <state state_id="opinion_validation" title="opinion_validation" i18n:attributes="title">
   <exit-transition transition_id="invalidate_opinion"/>
   <exit-transition transition_id="send_opinion"/>
   <permission-map name="ATContentTypes: Add File" acquired="False">
@@ -187,7 +189,7 @@
    <permission-role>Manager</permission-role>
   </permission-map>
  </state>
- <state state_id="waiting_opinion" title="waiting_opinion">
+ <state state_id="waiting_opinion" title="waiting_opinion" i18n:attributes="title">
   <exit-transition transition_id="ask_validation"/>
   <exit-transition transition_id="receive_opinion"/>
   <permission-map name="ATContentTypes: Add File" acquired="False">
@@ -250,6 +252,7 @@
  <transition
    transition_id="ask_opinion"
    title="ask_opinion"
+   i18n:attributes="title"
    new_state="waiting_opinion"
    trigger="USER"
    before_script=""
@@ -262,6 +265,7 @@
  <transition
    transition_id="ask_validation"
    title="ask_validation"
+   i18n:attributes="title"
    new_state="opinion_validation"
    trigger="USER"
    before_script=""
@@ -275,6 +279,7 @@
  <transition
    transition_id="invalidate_opinion"
    title="invalidate_opinion"
+   i18n:attributes="title"
    new_state="waiting_opinion"
    trigger="USER"
    before_script=""
@@ -287,6 +292,7 @@
  <transition
    transition_id="receive_opinion"
    title="receive_opinion"
+   i18n:attributes="title"
    new_state="opinion_given"
    trigger="USER"
    before_script=""
@@ -301,6 +307,7 @@
  <transition
    transition_id="reopen"
    title="reopen"
+   i18n:attributes="title"
    new_state="waiting_opinion"
    trigger="USER"
    before_script=""
@@ -313,6 +320,7 @@
  <transition
    transition_id="send_opinion"
    title="send_opinion"
+   i18n:attributes="title"
    new_state="opinion_given"
    trigger="USER"
    before_script=""
