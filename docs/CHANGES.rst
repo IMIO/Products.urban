@@ -8,6 +8,27 @@ Changelog
 
 .. towncrier release notes start
 
+2.6.4 (2023-07-24)
+------------------
+
+New features:
+
+
+- Add parameter to autocomplete to search with exact match
+  [jchandelle] (URB-2696)
+
+
+Bug fixes:
+
+
+- Fix an issue with some urban instances with lists that contains empty strings or `None`
+  [mpeeters] (URB-2575)
+- Fix inspection title
+  [jchandelle] (URB-2830)
+- Add an external method to set profile version for Products.urban
+  [mpeeters] (URB-2835)
+
+
 2.6.3 (2023-07-18)
 ------------------
 
