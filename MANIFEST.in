@@ -4,6 +4,7 @@
   include buildout.cfg
   include portals.cfg
   include versions.cfg
+  prune news
   recursive-include docs *.py
   recursive-include docs *.rst
   recursive-include docs *.txt
