@@ -1,17 +1,12 @@
-:orphan:
+Changelog
+=========
 
-Changes
-=======
+.. You should *NOT* be adding new change log entries to this file.
+   You should create a file in the news directory instead.
+   For helpful instructions, please see:
+   https://github.com/plone/plone.releaser/blob/master/ADD-A-NEWS-ITEM.rst
 
-2.6.4 (unreleased)
-------------------
-
-- Fix an issue with some urban instances with lists that contains empty strings or `None` [URB-2575]
-  [mpeeters]
-
-- Fix inspection title [URB-2830]
-  [jchandelle]
-
+.. towncrier release notes start
 
 2.6.3 (2023-07-18)
 ------------------
