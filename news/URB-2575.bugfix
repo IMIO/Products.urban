@@ -1,0 +1,2 @@
+Fix an issue with some urban instances with lists that contains empty strings or `None`
+[mpeeters]
