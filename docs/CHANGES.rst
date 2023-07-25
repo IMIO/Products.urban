@@ -6,9 +6,6 @@ Changes
 2.6.4 (unreleased)
 ------------------
 
-- Add stop worksite option to inspection report [URB-2827]
-  [jchandelle]
-
 - Fix inspection title [URB-2830]
   [jchandelle]
 
