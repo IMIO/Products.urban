@@ -478,7 +478,7 @@
      for="Products.urban.interfaces.IGenericLicence"
      name="gig_coring_response"
      class=".gig_coring_view.GigCoringResponse"
-     permission="cmf.ModifyPortalContent"
+     permission="zope.Public"
   />
 
   <browser:page
