@@ -6,9 +6,6 @@ Changes
 2.6.3 (unreleased)
 ------------------
 
-- Remove reference FD field from preliminary notice [URB-2831]
-  [jchandelle]
-
 - Add missing translations [URB-2823]
   [mpeeters, anagant]
 
