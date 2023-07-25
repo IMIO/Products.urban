@@ -7,6 +7,7 @@ from Products.Five import BrowserView
 from Products.urban.browser.table.urbantable import GeometriciansTable
 from Products.urban.browser.table.urbantable import NotariesTable
 from Products.urban.browser.table.urbantable import ArchitectsTable
+from Products.urban.browser.table.urbantable import JusticeContactTable
 from Products.urban.browser.table.urbantable import ParcellingsTable
 from Products.urban.browser.table.urbantable import UrbanTable
 from Products.urban import UrbanMessage as _
@@ -37,7 +38,7 @@ class SearchForm(form.Form):
     def updateWidgets(self):
         super(SearchForm, self).updateWidgets()
 
-    @button.buttonAndHandler(u'Search')
+    @button.buttonAndHandler(_(u'Search'))
     def handleSearch(self, action):
         data, errors = self.extractData()
         if errors:
@@ -132,6 +133,17 @@ class GeometriciansFolderView(ContactsFolderView):
     def getCSSClass(self):
         base_css = super(GeometriciansFolderView, self).getCSSClass()
         return '{} contenttype-geometrician'.format(base_css)
+
+
+class JusticeContactFolderView(ContactsFolderView):
+    """
+      This manage the people in charge of justice folder config view
+    """
+    table = JusticeContactTable
+
+    def getCSSClass(self):
+        base_css = super(JusticeContactFolderView, self).getCSSClass()
+        return '{} contenttype-justicecontact'.format(base_css)
 
 
 class NotariesFolderView(ContactsFolderView):

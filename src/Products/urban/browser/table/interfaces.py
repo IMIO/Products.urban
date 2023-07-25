@@ -118,6 +118,12 @@ class IArchitectsTable(IUrbanTable):
     """
 
 
+class IJusticeContactTable(IUrbanTable):
+    """
+    Marker interface for a table displaying people in charge of justice
+    """
+
+
 class IClaimantsTable(IUrbanTable):
     """
     Marker interface for a table displaying claimants

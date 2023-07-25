@@ -144,6 +144,8 @@
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="Geometrician"
          meta_type="Factory-based Type Information with dynamic views"/>
+  <object name="JusticeContact"
+         meta_type="Factory-based Type Information with dynamic views"/>
  <object name="Notary"
          meta_type="Factory-based Type Information with dynamic views"/>
  <object name="NotaryLetter"

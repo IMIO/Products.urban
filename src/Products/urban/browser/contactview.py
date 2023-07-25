@@ -13,7 +13,7 @@ from Products.urban.config import URBAN_TYPES
 class ContactView(BrowserView):
     """
       This manage the view of every Contacts :
-      Applicant, Architect, Geometrician, Notary
+      Applicant, Architect, Geometrician, Notary, JusticeContact
     """
     def __init__(self, context, request):
         self.context = context

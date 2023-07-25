@@ -144,6 +144,9 @@ msgstr ""
 msgid "Geometrician"
 msgstr ""
 
+msgid "JusticeContact"
+msgstr ""
+
 msgid "OpinionRequestEventType"
 msgstr ""
 

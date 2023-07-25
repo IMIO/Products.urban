@@ -200,6 +200,9 @@
 <type type_id="Geometrician">
    <bound-workflow workflow_id="activation_workflow" />
 </type>
+<type type_id="JusticeContact">
+   <bound-workflow workflow_id="activation_workflow" />
+</type>
 <type type_id="Inquiry">
   <bound-workflow workflow_id="" />
 </type>

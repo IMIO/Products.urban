@@ -88,6 +88,15 @@
   <adapter
      for="zope.interface.Interface
           zope.publisher.interfaces.browser.IBrowserRequest
+          Products.urban.browser.table.interfaces.IJusticeContactTable
+          Products.urban.browser.table.interfaces.ITitleColumn"
+     factory=".column.JusticeContactTitleColumnHeader"
+     provides="z3c.table.interfaces.IColumnHeader"
+  />
+
+  <adapter
+     for="zope.interface.Interface
+          zope.publisher.interfaces.browser.IBrowserRequest
           Products.urban.browser.table.interfaces.IClaimantsTable
           Products.urban.browser.table.interfaces.ITitleColumn"
      factory=".column.ClaimantTitleColumnHeader"

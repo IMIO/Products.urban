@@ -10,6 +10,7 @@
             <li><img src="../folder_icon.png" /> <a href="architects" i18n:translate="manage_architects">Manage architects</a></li>
             <li><img src="../folder_icon.png" /> <a href="notaries" i18n:translate="manage_notaries">Manage notaries</a></li>
             <li><img src="../folder_icon.png" /> <a href="geometricians" i18n:translate="manage_geometricians">Manage geometricians</a></li>
+            <li><img src="../folder_icon.png" /> <a href="justicecontacts" i18n:translate="manage_justice_contact">Manage people in charge of justice</a></li>
             <li><img src="../folder_icon.png" /> <a href="parcellings" i18n:translate="manage_parcellings">Manage parcellings</a></li>
             <li tal:condition="view/is_urban_manager">
                 <br />

@@ -25,7 +25,7 @@ def updateLicenceTitle(contact, event):
 
 
 def sortByAlphabeticalOrder(contact, event):
-    if not contact.portal_type in ['Notary', 'Architect', 'Geometrician', 'FolderManager']:
+    if not contact.portal_type in ['Notary', 'Architect', 'Geometrician', 'FolderManager', 'JusticeContact']:
         return
     container = contact.aq_inner.aq_parent
     name = contact.getName1() + contact.getName2()

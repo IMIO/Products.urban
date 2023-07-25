@@ -355,6 +355,14 @@
 
   <browser:page
      for="Products.ATContentTypes.interfaces.IATFolder"
+     name="justice_contact_folderview"
+     class=".urban_configfolderview.JusticeContactFolderView"
+     template="templates/urban_configfolderview.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="Products.ATContentTypes.interfaces.IATFolder"
      name="notaries_folderview"
      class=".urban_configfolderview.NotariesFolderView"
      template="templates/urban_configfolderview.pt"

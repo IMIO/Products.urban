@@ -86,6 +86,27 @@ schema = Schema((
         default_method='getDefaultText',
         default_output_type='text/x-html-safe',
     ),
+    ReferenceField(
+        name='representativeContacts',
+        widget=ReferenceBrowserWidget(
+            force_close_on_insert=1,
+            allow_search=1,
+            only_for_review_states='enabled',
+            allow_browse=0,
+            show_indexes=1,
+            available_indexes={'Title': 'Nom'},
+            startup_directory='urban',
+            wild_card_search=True,
+            show_results_without_query=True,
+            restrict_browsing_to_startup_directory=False,
+            label=_('urban_label_representative_contacts', default='RepresentativeContact(s)'),
+            popup_name='contact_reference_popup',
+        ),
+        schemata='urban_description',
+        multiValued=1,
+        relationship='basebuildlicenceRepresentativeContacts',
+        allowed_types=('Geometrician', 'Architect',),
+    ),
 ),
 )
 Inspection_schema = BaseFolderSchema.copy() + \
@@ -368,6 +389,7 @@ def finalize_schema(schema, folderish=False, moveDiscussion=True):
     schema.moveField('description', after='inspection_context')
     schema.moveField('bound_licences', before='workLocations')
     schema.moveField('use_bound_licence_infos', after='bound_licences')
+    schema.moveField('representativeContacts', before='foldermanagers')
     schema['parcellings'].widget.label = _('urban_label_parceloutlicences')
     schema['isInSubdivision'].widget.label = _('urban_label_is_in_parceloutlicences')
     schema['subdivisionDetails'].widget.label = _('urban_label_parceloutlicences_details')

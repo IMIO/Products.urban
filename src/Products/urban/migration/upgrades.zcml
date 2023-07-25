@@ -483,4 +483,12 @@
         handler=".update_260.add_couple_to_preliminary_notice"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Add justice contacts"
+        description="Add justice contacts"
+        source="1131"
+        destination="1132"
+        handler=".update_260.add_justice_contacts"
+        profile="Products.urban:default" />
+
 </configure>

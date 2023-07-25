@@ -17,6 +17,12 @@ default_objects = {
         {'id': "geometrician3", 'name1': "GeometricianName3", 'name2': "GeometricianSurname3"},
     ],
 
+    'justicecontacts': [
+        'JusticeContact',
+        {'id': "justice_contact1", 'name1': "JusticeContactName1", 'name2': "JusticeContactSurname1",
+         'email': 'justicier@justice.be'},
+    ],
+
     'parcellings': [
         'Parcelling',
         {

@@ -180,6 +180,12 @@ class GeometricianTitleColumnHeader(TitleColumnHeader):
         self.label = 'label_colname_geometrician_data'
 
 
+class JusticeContactTitleColumnHeader(TitleColumnHeader):
+
+    def update(self):
+        self.label = 'label_colname_justice_contact_data'
+
+
 class ClaimantTitleColumnHeader(TitleColumnHeader):
 
     def update(self):

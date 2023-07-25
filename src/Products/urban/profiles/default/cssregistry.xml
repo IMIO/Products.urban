@@ -20,7 +20,7 @@
              compression="safe"
              cookable="True"
              enabled="1"
-             expression="python: not context.restrictedTraverse('@@plone_portal_state').anonymous() and here.portal_type in context.portal_urban.getUrbanTypes() + ['UrbanEvent', 'UrbanEventInquiry', 'Applicant', 'Architect', 'Geometrician', 'FolderManager', 'Notary', 'Parcel', ] and not member.has_role('Manager')"
+             expression="python: not context.restrictedTraverse('@@plone_portal_state').anonymous() and here.portal_type in context.portal_urban.getUrbanTypes() + ['UrbanEvent', 'UrbanEventInquiry', 'Applicant', 'Architect', 'Geometrician', 'FolderManager', 'JusticeContact', 'Notary', 'Parcel', ] and not member.has_role('Manager')"
              id="urbanlicences.css"
              media="all"
              rel="stylesheet"

@@ -475,6 +475,9 @@ msgstr ""
 msgid "label_colname_foldermanager"
 msgstr ""
 
+msgid "label_colname_justice_contact_data"
+msgstr ""
+
 msgid "label_colname_geometrician_data"
 msgstr ""
 
@@ -1373,6 +1376,9 @@ msgid "add_Architect"
 msgstr ""
 
 msgid "add_Geometrician"
+msgstr ""
+
+msgid "add_JusticeContact"
 msgstr ""
 
 msgid "add_Notary"

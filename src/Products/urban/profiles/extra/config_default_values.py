@@ -1926,6 +1926,10 @@ default_values = {
                 'multiplicity': "plural", 'reverseTitle': "Mesdames"},
             {'id': "consorts", 'title': u"Consorts", 'extraValue': "Consorts", 'abbreviation': "Crts", 'gender': "male",
                 'multiplicity': "plural", 'reverseTitle': "Consorts"},
+            {'id': "inspector", 'title': u"Inspecteur", 'extraValue': "Inspecteur", 'abbreviation': "Insp",
+             'gender': "male", 'multiplicity': "single", 'reverseTitle': "Inspecteur"},
+            {'id': "substitute", 'title': u"Substitut du roi", 'extraValue': "Substitut du roi", 'abbreviation': "Subst",
+             'gender': "male", 'multiplicity': "single", 'reverseTitle': "Substitut du roi"},
         ],
 
         'persons_grades': [
