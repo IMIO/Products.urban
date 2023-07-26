@@ -29,10 +29,21 @@ class GigCoringResponse(BrowserView):
     """
     Store coring result on coringResult field of the licence.
     """
+
     def __init__(self, context, request):
         self.context = context
         self.request = request
 
     def __call__(self, **kwargs):
-        self.context.setCoringResult(self.request['BODY'])
-        return self.request.RESPONSE.redirect(self.context.absolute_url())
+        self.request.RESPONSE.setHeader(
+            "Access-Control-Allow-Origin", self.request.get("HTTP_ORIGIN")
+        )
+        self.request.RESPONSE.setHeader(
+            "Access-Control-Allow-Headers", "content-type,x-requested-with"
+        )
+        self.request.RESPONSE.setHeader("Access-Control-Allow-Methods", "POST, PATCH")
+        if self.request.get("REQUEST_METHOD") == "OPTIONS":
+            self.request.RESPONSE.setStatus(204, reason="No Content", lock=True)
+        else:
+            self.context.setCoringResult(self.request["BODY"])
+            return self.request.RESPONSE.redirect(self.context.absolute_url())
