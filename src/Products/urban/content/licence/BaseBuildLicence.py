@@ -17,6 +17,7 @@ from AccessControl import ClassSecurityInfo
 from Products.urban.widget.select2widget import MultiSelect2Widget
 from Products.Archetypes.atapi import *
 from zope.interface import implements
+from zope.i18n import translate
 from Products.urban import interfaces
 from Products.urban.content.Inquiry import Inquiry
 from Products.urban.content.licence.GenericLicence import GenericLicence
@@ -577,9 +578,9 @@ class BaseBuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin)
           road adaptations : no, yes modify, yes create
         """
         vocab = (
-            ('modify', _('road_adaptation_modify')),
-            ('create', _('road_adaptation_create')),
-            ('supress', _('road_adaptation_supress')),
+            ('modify', translate(_('road_adaptation_modify'), context=self.REQUEST)),
+            ('create', translate(_('road_adaptation_create'), context=self.REQUEST)),
+            ('supress', translate(_('road_adaptation_supress'), context=self.REQUEST)),
         )
         return DisplayList(vocab)
 
