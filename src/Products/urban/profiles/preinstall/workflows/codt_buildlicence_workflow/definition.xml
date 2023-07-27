@@ -235,6 +235,7 @@
         i18n:attributes="title">
   <exit-transition transition_id="iscomplete"/>
   <exit-transition transition_id="isinacceptable"/>
+  <exit-transition transition_id="retire"/>
   <exit-transition transition_id="reopen_incomplete"/>
   <exit-transition transition_id="retire"/>
   <permission-map name="Acces contents information"
