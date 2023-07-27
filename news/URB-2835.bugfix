@@ -1,0 +1,2 @@
+Avoid an error if a vocabulary does not exist, this can happen when multiple upgrade steps interract with vocabularies
+[mpeeters]

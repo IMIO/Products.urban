@@ -383,6 +383,10 @@ def getSharedVocabularies(urban_type, licence_vocabularies):
 
 def createVocabularies(container, vocabularies):
     for voc_name, vocabulary in vocabularies.iteritems():
+        if voc_name not in container:
+            # We are in a special usecase, nothing should be done
+            # This can happend when multiple upgrade steps have not be applied
+            continue
         voc_folder = getattr(container, voc_name)
         createFolderDefaultValues(voc_folder, vocabulary)
 
