@@ -8,6 +8,20 @@ Changelog
 
 .. towncrier release notes start
 
+2.6.5 (2023-07-27)
+------------------
+
+Bug fixes:
+
+
+- Avoid errors on inexpected values on licences and log them
+  [mpeeters] (SUP-31554)
+- Fix translation for road adaptation vocabulary values
+  [mpeeters] (URB-2575)
+- Avoid an error if a vocabulary does not exist, this can happen when multiple upgrade steps interract with vocabularies
+  [mpeeters] (URB-2835)
+
+
 2.6.4 (2023-07-24)
 ------------------
 
