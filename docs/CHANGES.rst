@@ -8,6 +8,16 @@ Changelog
 
 .. towncrier release notes start
 
+2.5.10 (2023-07-27)
+-------------------
+
+Bug fixes:
+
+
+- Avoid an error if a vocabulary does not exist, this can happen when multiple upgrade steps interract with vocabularies
+  [mpeeters] (URB-2835)
+
+
 2.5.9 (2023-07-26)
 ------------------
 
