@@ -46,4 +46,5 @@ class GigCoringResponse(BrowserView):
             self.request.RESPONSE.setStatus(204, reason="No Content", lock=True)
         else:
             self.context.setCoringResult(self.request["BODY"])
-            return self.request.RESPONSE.redirect(self.context.absolute_url())
+            self.request.RESPONSE.setStatus(204, reason="No Content", lock=True)
+            # return self.request.RESPONSE.redirect(self.context.absolute_url())
