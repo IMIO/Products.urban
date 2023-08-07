@@ -20,7 +20,7 @@ class SuggestView(BrowserView):
 
     def __call__(self):
 
-        suggestions = [{'label': '', 'value': ''}]
+        suggestions = [{'text': '', 'id': ''}]
         try:
             suggestions.extend(self.compute_suggestions() or [])
             return json.dumps(suggestions)
@@ -54,7 +54,7 @@ class RepresentativeSuggestView(SuggestView):
         catalog = api.portal.get_tool('portal_catalog')
         brains = catalog(**kwargs)
 
-        suggestions = [{'label': b.Title, 'value': [b.UID]} for b in brains]
+        suggestions = [{'text': b.Title, 'id': [b.UID]} for b in brains]
         return suggestions
 
 
@@ -119,7 +119,7 @@ class UrbanStreetsSuggest(SuggestView):
         catalog = api.portal.get_tool('portal_catalog')
         brains = catalog(**kwargs)
 
-        suggestions = [{'label': b.Title, 'value': b.UID} for b in brains]
+        suggestions = [{'text': b.Title, 'id': b.UID} for b in brains]
         return suggestions
 
 
@@ -146,7 +146,7 @@ class LicenceReferenceSuggest(SuggestView):
         catalog = api.portal.get_tool('portal_catalog')
         brains = catalog(**kwargs)
 
-        suggestions = [{'label': b.getReference, 'value': b.getReference} for b in brains]
+        suggestions = [{'text': b.getReference, 'id': b.getReference} for b in brains]
         return suggestions
 
 
@@ -188,5 +188,5 @@ class CadastralReferenceSuggest(SuggestView):
         terms = term.strip().split()
         all_parcels = self._all_parcels_values()
         raw_suggestions = [(prc, index) for prc, index in all_parcels if all([t.lower() in prc.lower() for t in terms])]
-        suggestions = [{'label': x[0], 'value': x[1]} for x in raw_suggestions]
+        suggestions = [{'text': x[0], 'id': x[1]} for x in raw_suggestions]
         return suggestions
