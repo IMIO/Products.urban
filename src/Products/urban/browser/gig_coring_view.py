@@ -6,7 +6,6 @@ from datetime import timedelta
 from zope.publisher.interfaces import IPublishTraverse
 from zope.interface import implementer
 
-
 import urllib
 import os
 import hashlib
