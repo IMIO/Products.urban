@@ -8,6 +8,16 @@ Changelog
 
 .. towncrier release notes start
 
+2.6.6 (2023-08-10)
+------------------
+
+Bug fixes:
+
+
+- Fix an issue with autocomplete view results format that was generating javascript errors
+  [mpeeters] (SUP-31682)
+
+
 2.6.5 (2023-07-27)
 ------------------
 
