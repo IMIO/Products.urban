@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 
 from Products.Five import BrowserView
+from Products.urban.services import gig
 from datetime import datetime
 from datetime import timedelta
-from zope.publisher.interfaces import IPublishTraverse
 from zope.interface import implementer
+from zope.publisher.interfaces import IPublishTraverse
 
 import urllib
 import os
@@ -34,16 +35,20 @@ class GigCoringView(BrowserView):
     """
     view to send parcels id and connect to gig interface
     """
+
     def __init__(self, context, request):
         self.context = context
         self.request = request
 
     def open_gig_and_load_parcels(self):
         licence = self.context
-        capakeys = [urllib.quote(parcel.capakey, safe='') for parcel in licence.getParcels()]
-        gig_url = "https://carto.luxembourg.be/matcad?matrices={}&post_carottage={}/gig_coring_response/{}".format(
-            ','.join(capakeys),
-            urllib.quote(licence.absolute_url(), safe=''),
+        capakeys = [
+            urllib.quote(parcel.capakey, safe="") for parcel in licence.getParcels()
+        ]
+        gig_url = "{}?matrices={}&post_carottage={}/gig_coring_response/{}".format(
+            gig.url,
+            ",".join(capakeys),
+            urllib.quote(licence.absolute_url(), safe=""),
             generate_tokens(self.context)[-1],
         )
         return self.request.RESPONSE.redirect(gig_url)
