@@ -8,6 +8,16 @@ Changelog
 
 .. towncrier release notes start
 
+2.6.7 (2023-08-14)
+------------------
+
+Bug fixes:
+
+
+- Hide old document generation links viewlet
+  [mpeeters] (URB-2864)
+
+
 2.6.6 (2023-08-10)
 ------------------
 
