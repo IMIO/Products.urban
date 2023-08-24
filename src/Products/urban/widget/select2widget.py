@@ -21,7 +21,10 @@ def resolve_vocabulary(context, field, values):
         ]
     elif type(field.vocabulary) == str:
         display_list = getattr(context, field.vocabulary)()
-        result = [display_list.getValue(value) for value in values if value]
+        if type(display_list) == list:
+            result = list(display_list)
+        else:
+            result = [display_list.getValue(value) for value in values if value]
     elif type(field.vocabulary) == tuple and getattr(
         field, "vocabulary_factory", False
     ):
@@ -41,7 +44,15 @@ def resolve_vocabulary(context, field, values):
 class Select2Widget(CollectiveSelect2Widget):
     def view(self, context, field, request):
         values = super(Select2Widget, self).view(context, field, request)
-        return resolve_vocabulary(context, field, values)
+        try:
+            vocabulary = resolve_vocabulary(context, field, values)
+        except AttributeError:
+            logger.error("{0} : Could not resolve vocabulary for field: {1}".format(
+                context.absolute_url(),
+                field.__name__,
+            ))
+            vocabulary = ", ".join(filter(None, values))
+        return vocabulary
 
 
 class MultiSelect2Widget(CollectiveMultiSelect2Widget):
@@ -58,4 +69,12 @@ class MultiSelect2Widget(CollectiveMultiSelect2Widget):
             value = getattr(context, field.__name__)
             if isinstance(value, six.string_types):
                 values = (value,)
-        return resolve_vocabulary(context, field, values)
+        try:
+            vocabulary = resolve_vocabulary(context, field, values)
+        except AttributeError:
+            logger.error("{0} : Could not resolve vocabulary for field: {1}".format(
+                context.absolute_url(),
+                field.__name__,
+            ))
+            vocabulary = ", ".join(filter(None, values))
+        return vocabulary
