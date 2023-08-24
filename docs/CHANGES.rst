@@ -8,6 +8,18 @@ Changelog
 
 .. towncrier release notes start
 
+2.6.8 (2023-08-24)
+------------------
+
+Bug fixes:
+
+
+- fix select2 widget on folder manager
+  [jchandelle] (SUP-31898)
+- Fix opinion schedules assigned user column
+  [mpeeters] (URB-2819)
+
+
 2.6.7 (2023-08-14)
 ------------------
 
