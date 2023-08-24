@@ -491,4 +491,12 @@
         handler=".update_260.remove_generation_link_viewlet"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Fix opinion schedule column"
+        description="Fix opinion schedule column"
+        source="1132"
+        destination="1133"
+        handler=".update_260.fix_opinion_schedule_column"
+        profile="Products.urban:default" />
+
 </configure>
