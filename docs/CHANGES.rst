@@ -15,7 +15,7 @@ Bug fixes:
 
 
 - Fix UnicodeDecodeError on getFolderManagersSignaletic(withGrade=True)
-  [fngaha] (URB-2872)
+  [fngaha] (URB-2871)
 
 
 2.6.8 (2023-08-24)
