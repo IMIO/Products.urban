@@ -8,6 +8,16 @@ Changelog
 
 .. towncrier release notes start
 
+2.6.9 (2023-08-27)
+------------------
+
+Bug fixes:
+
+
+- Fix UnicodeDecodeError on getFolderManagersSignaletic(withGrade=True)
+  [fngaha] (URB-2872)
+
+
 2.6.8 (2023-08-24)
 ------------------
 
