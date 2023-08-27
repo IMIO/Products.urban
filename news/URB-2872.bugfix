@@ -1,2 +1,0 @@
-Fix UnicodeDecodeError on getFolderManagersSignaletic(withGrade=True)
-[fngaha]
