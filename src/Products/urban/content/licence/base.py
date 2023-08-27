@@ -189,9 +189,9 @@ class UrbanBase(object):
                 signaletic = '<p><strong>%s</strong>' % fm.getSignaletic(short=True)
             if withGrade:
                 if withParenthesis:
-                    signaletic += ' (%s)' % self.displayValue(fm.Vocabulary('grade')[0], fm.getGrade()).encode('utf8')
+                    signaletic += ' (%s)' % self.displayValue(fm.Vocabulary('grade')[0], fm.getGrade())
                 else:
-                    signaletic += ' %s' % self.displayValue(fm.Vocabulary('grade')[0], fm.getGrade()).encode('utf8')
+                    signaletic += ' %s' % self.displayValue(fm.Vocabulary('grade')[0], fm.getGrade())
             if withEmail:
                 signaletic += '<br />%s' % fm.getEmail()
             if withTel:
