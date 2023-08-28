@@ -8,6 +8,16 @@ Changelog
 
 .. towncrier release notes start
 
+2.6.10 (2023-08-28)
+-------------------
+
+Bug fixes:
+
+
+- Avoid an error if a task was not correctly removed from catalog
+  [mpeeters] (URB-2873)
+
+
 2.6.9 (2023-08-27)
 ------------------
 
