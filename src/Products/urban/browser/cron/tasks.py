@@ -62,6 +62,14 @@ class UpdateOpenTasksLicences(BrowserView):
     Update all licences with at least an open tasks.
     """
 
+    @staticmethod
+    def _get_task_container(brain):
+        """Return the task object container"""
+        try:
+            return brain.getObject().get_container()
+        except AttributeError:
+            return
+
     def __call__(self):
         """ """
         catalog = api.portal.get_tool("portal_catalog")
@@ -70,8 +78,8 @@ class UpdateOpenTasksLicences(BrowserView):
             object_provides=IAutomatedTask.__identifier__,
             review_state=states_by_status[STARTED],
         )
-        licences = list(set([t.getObject().get_container() for t in open_tasks_brains]))
-        for licence in licences:
+        licences = list(set([self._get_task_container(t) for t in open_tasks_brains]))
+        for licence in filter(None, licences):
             try:
                 notify(ObjectModifiedEvent(licence))
             except Exception:
