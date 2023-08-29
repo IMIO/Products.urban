@@ -21,10 +21,9 @@
    <property name="sortcountable"></property>
    <property name="hidezerocount"></property>
    <property
-      name="vocabulary">imio.dashboard.conditionawarecollectionvocabulary</property>
+      name="vocabulary">collective.eeafaceted.collectionwidget.cachedcollectionvocabulary</property>
    <property name="hidealloption">1</property>
    <property name="hide_category">1</property>
-   <property name="maxitems"></property>
    <property name="sortreversed"></property>
    <property name="default">12ffe12f7dc04b3ba4e82906b83abfbc</property>
   </criterion>
@@ -131,7 +130,7 @@
    <property name="position">center</property>
    <property name="section">default</property>
    <property name="hidden">0</property>
-   <property name="start"></property>
+   <property name="start">0</property>
    <property name="end">50</property>
    <property name="step">10</property>
    <property name="default">20</property>

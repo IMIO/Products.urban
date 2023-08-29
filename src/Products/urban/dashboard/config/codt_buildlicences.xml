@@ -21,10 +21,9 @@
    <property name="sortcountable"></property>
    <property name="hidezerocount"></property>
    <property
-      name="vocabulary">imio.dashboard.conditionawarecollectionvocabulary</property>
+      name="vocabulary">collective.eeafaceted.collectionwidget.cachedcollectionvocabulary</property>
    <property name="hidealloption">1</property>
    <property name="hide_category">1</property>
-   <property name="maxitems"></property>
    <property name="sortreversed"></property>
    <property name="default">b0efd11e10b041d4b4f5141322a8a488</property>
   </criterion>
@@ -146,9 +145,7 @@
    <property name="operator_visible">0</property>
    <property name="vocabulary">urban.rootfolder_licence_state</property>
    <property name="catalog"></property>
-   <property name="maxitems"></property>
    <property name="sortreversed">0</property>
-   <property name="default"/>
   </criterion>
   <criterion name="c0">
    <property name="widget">resultsperpage</property>
@@ -156,7 +153,7 @@
    <property name="position">center</property>
    <property name="section">default</property>
    <property name="hidden">0</property>
-   <property name="start"></property>
+   <property name="start">0</property>
    <property name="end">50</property>
    <property name="step">10</property>
    <property name="default">20</property>

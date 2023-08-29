@@ -81,6 +81,14 @@
       description="Profile for fixes in urban"
       provides="Products.GenericSetup.interfaces.EXTENSION"
   />
+
+  <genericsetup:registerProfile
+      name="urbantypes"
+      title="urban-types"
+      directory="profiles/urban_types"
+      description="Profile for fixes in urban"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+  />
   <!-- ##/code-section profiles.zcml-bottom -->
 
 </configure>
