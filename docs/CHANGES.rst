@@ -8,6 +8,16 @@ Changelog
 
 .. towncrier release notes start
 
+2.6.11 (2023-08-29)
+-------------------
+
+Bug fixes:
+
+
+- Fix icon tag in table
+  [jchandelle] (SUP-31983)
+
+
 2.6.10 (2023-08-28)
 -------------------
 
