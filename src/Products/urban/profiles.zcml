@@ -86,7 +86,7 @@
       name="urbantypes"
       title="urban-types"
       directory="profiles/urban_types"
-      description="Profile for fixes in urban"
+      description="Profile for urban content types in urban"
       provides="Products.GenericSetup.interfaces.EXTENSION"
   />
   <!-- ##/code-section profiles.zcml-bottom -->
