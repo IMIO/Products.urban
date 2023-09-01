@@ -6,7 +6,7 @@
    <property name="title">Sort on</property>
    <property name="position">top</property>
    <property name="section">default</property>
-   <property name="hidden">1</property>
+   <property name="hidden">True</property>
    <property name="vocabulary"></property>
    <property name="default"></property>
   </criterion>
@@ -15,13 +15,13 @@
    <property name="title">Échéancier Avis Internes</property>
    <property name="position">top</property>
    <property name="section">default</property>
-   <property name="hidden">1</property>
+   <property name="hidden">True</property>
    <property name="count"></property>
    <property name="sortcountable"></property>
    <property name="hidezerocount"></property>
    <property name="vocabulary">imio.schedule.collections</property>
-   <property name="hidealloption">1</property>
-   <property name="hide_category">1</property>
+   <property name="hidealloption">True</property>
+   <property name="hide_category">True</property>
    <property name="maxitems"></property>
    <property name="sortreversed"></property>
    <property name="default">94597104123647e1a5a9603ec3510fab</property>
@@ -31,7 +31,7 @@
    <property name="title">Review state</property>
    <property name="position">top</property>
    <property name="section">advanced</property>
-   <property name="hidden">0</property>
+   <property name="hidden">False</property>
    <property name="count"></property>
    <property name="sortcountable"></property>
    <property name="hidezerocount"></property>
@@ -49,18 +49,18 @@
    <property name="title">Référence</property>
    <property name="position">center</property>
    <property name="section">default</property>
-   <property name="hidden">0</property>
+   <property name="hidden">False</property>
    <property name="index">getReference</property>
    <property name="default"></property>
-   <property name="onlyallelements">1</property>
-   <property name="wildcard">1</property>
+   <property name="onlyallelements">True</property>
+   <property name="wildcard">True</property>
   </criterion>
   <criterion name="c7">
    <property name="widget">select</property>
    <property name="title">Assigné à</property>
    <property name="position">center</property>
    <property name="section">default</property>
-   <property name="hidden">0</property>
+   <property name="hidden">False</property>
    <property name="count">0</property>
    <property name="sortcountable">0</property>
    <property name="hidezerocount">0</property>
@@ -75,7 +75,7 @@
    <property name="title">Résultats par page</property>
    <property name="position">center</property>
    <property name="section">default</property>
-   <property name="hidden">0</property>
+   <property name="hidden">False</property>
    <property name="start">20</property>
    <property name="end">1000</property>
    <property name="step">20</property>

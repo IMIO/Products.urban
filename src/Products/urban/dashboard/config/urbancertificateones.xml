@@ -6,7 +6,7 @@
    <property name="title">Tri</property>
    <property name="position">top</property>
    <property name="section">default</property>
-   <property name="hidden">1</property>
+   <property name="hidden">True</property>
    <property
       name="vocabulary">eea.faceted.vocabularies.SortingCatalogIndexes</property>
    <property name="default">created(reverse)</property>
@@ -16,15 +16,14 @@
    <property name="title">Procédures</property>
    <property name="position">top</property>
    <property name="section">default</property>
-   <property name="hidden">1</property>
+   <property name="hidden">True</property>
    <property name="count"></property>
    <property name="sortcountable"></property>
    <property name="hidezerocount"></property>
    <property
-      name="vocabulary">imio.dashboard.conditionawarecollectionvocabulary</property>
-   <property name="hidealloption">1</property>
-   <property name="hide_category">1</property>
-   <property name="maxitems"></property>
+      name="vocabulary">collective.eeafaceted.collectionwidget.cachedcollectionvocabulary</property>
+   <property name="hidealloption">True</property>
+   <property name="hide_category">True</property>
    <property name="sortreversed"></property>
    <property name="default">1d9a2c1805894e6d8217ff073c253b75</property>
   </criterion>
@@ -33,43 +32,43 @@
    <property name="title">Demandeur</property>
    <property name="position">top</property>
    <property name="section">advanced</property>
-   <property name="hidden">0</property>
+   <property name="hidden">False</property>
    <property name="index">applicantInfosIndex</property>
    <property name="default"></property>
-   <property name="onlyallelements">1</property>
-   <property name="wildcard">1</property>
+   <property name="onlyallelements">True</property>
+   <property name="wildcard">True</property>
   </criterion>
   <criterion name="c9">
    <property name="widget">autocomplete</property>
    <property name="title">Notaire</property>
    <property name="position">top</property>
    <property name="section">advanced</property>
-   <property name="hidden">0</property>
+   <property name="hidden">False</property>
    <property name="index">representatives</property>
    <property name="default"></property>
    <property name="autocomplete_view">notaries-autocomplete-suggest</property>
-   <property name="onlyallelements">1</property>
+   <property name="onlyallelements">True</property>
   </criterion>
   <criterion name="c4">
    <property name="widget">autocomplete</property>
    <property name="title">Rue</property>
    <property name="position">top</property>
    <property name="section">advanced</property>
-   <property name="hidden">0</property>
+   <property name="hidden">False</property>
    <property name="index">StreetsUID</property>
    <property name="default"></property>
    <property name="autocomplete_view">sreets-autocomplete-suggest</property>
-   <property name="onlyallelements">1</property>
+   <property name="onlyallelements">True</property>
   </criterion>
   <criterion name="c7">
    <property name="widget">text</property>
    <property name="title">N° de police</property>
    <property name="position">top</property>
    <property name="section">advanced</property>
-   <property name="hidden">0</property>
+   <property name="hidden">False</property>
    <property name="index">StreetNumber</property>
    <property name="default"></property>
-   <property name="onlyallelements">1</property>
+   <property name="onlyallelements">True</property>
    <property name="wildcard"></property>
   </criterion>
   <criterion name="c8">
@@ -77,30 +76,30 @@
    <property name="title">Référence cadastrale</property>
    <property name="position">top</property>
    <property name="section">advanced</property>
-   <property name="hidden">0</property>
+   <property name="hidden">False</property>
    <property name="index">parcelInfosIndex</property>
    <property name="default"></property>
    <property
       name="autocomplete_view">cadastral-autocomplete-suggest</property>
-   <property name="onlyallelements">1</property>
+   <property name="onlyallelements">True</property>
   </criterion>
   <criterion name="c5">
    <property name="widget">text</property>
    <property name="title">Titre, référence</property>
    <property name="position">center</property>
    <property name="section">default</property>
-   <property name="hidden">0</property>
+   <property name="hidden">False</property>
    <property name="index">Title</property>
    <property name="default"></property>
-   <property name="onlyallelements">1</property>
-   <property name="wildcard">1</property>
+   <property name="onlyallelements">True</property>
+   <property name="wildcard">True</property>
   </criterion>
   <criterion name="c6">
    <property name="widget">select</property>
    <property name="title">Agent traitant</property>
    <property name="position">center</property>
    <property name="section">default</property>
-   <property name="hidden">0</property>
+   <property name="hidden">False</property>
    <property name="count"></property>
    <property name="sortcountable"></property>
    <property name="hidezerocount"></property>
@@ -115,7 +114,7 @@
    <property name="title">État</property>
    <property name="position">center</property>
    <property name="section">default</property>
-   <property name="hidden">0</property>
+   <property name="hidden">False</property>
    <property name="count">0</property>
    <property name="sortcountable">0</property>
    <property name="hidezerocount">0</property>
@@ -124,17 +123,15 @@
    <property name="operator_visible">0</property>
    <property name="vocabulary">urban.rootfolder_licence_state</property>
    <property name="catalog"></property>
-   <property name="maxitems"></property>
    <property name="sortreversed">0</property>
-   <property name="default"/>
   </criterion>
   <criterion name="c0">
    <property name="widget">resultsperpage</property>
    <property name="title">Results per page</property>
    <property name="position">center</property>
    <property name="section">default</property>
-   <property name="hidden">0</property>
-   <property name="start"></property>
+   <property name="hidden">False</property>
+   <property name="start">0</property>
    <property name="end">50</property>
    <property name="step">10</property>
    <property name="default">20</property>
