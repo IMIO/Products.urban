@@ -12,7 +12,7 @@
                 category="context"
                 key="/urban"
                 manager="plone.leftcolumn"
-                type="imio.dashboard.FacetedCollectionPortlet" />
+                type="FacetedCollectionPortlet" />
 
     <assignment name="tools"
                 category="context"
@@ -36,7 +36,7 @@
                 category="context"
                 key="/urban/schedule"
                 manager="plone.leftcolumn"
-                type="imio.dashboard.FacetedCollectionPortlet" />
+                type="FacetedCollectionPortlet" />
 
     <assignment remove="True"
                 name="navigation"
