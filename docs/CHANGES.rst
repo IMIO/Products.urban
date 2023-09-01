@@ -8,6 +8,18 @@ Changelog
 
 .. towncrier release notes start
 
+2.6.12 (2023-09-01)
+-------------------
+
+Bug fixes:
+
+
+- Fix new urban instance install
+  [jchandelle] (URB-2868)
+- Fix facet xml configuration
+  [jchandelle] (URB-2870)
+
+
 2.6.11 (2023-08-29)
 -------------------
 
