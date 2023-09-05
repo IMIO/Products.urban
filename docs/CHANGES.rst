@@ -8,6 +8,18 @@ Changelog
 
 .. towncrier release notes start
 
+2.6.13 (2023-09-05)
+-------------------
+
+Bug fixes:
+
+
+- Move catalog import in urban type profile
+  [jchandelle] (URB-2868)
+- Fix facet config xml
+  [jchandelle] (URB-2870)
+
+
 2.6.12 (2023-09-01)
 -------------------
 
