@@ -26,6 +26,21 @@ from zope.i18n import translate
 from zope.component import queryAdapter
 
 
+inquiry_field_to_show_by_type = {
+    "none": [],
+    "announcement": [
+        "inquiry_type",
+        "divergence"
+    ],
+    "inquiry": [
+        "inquiry_type",
+        "derogation",
+        "announcementArticles",
+        "announcementArticlesText"
+    ]
+}
+
+
 class LicenceView(BrowserView):
     """
     Base class for licences browser views.
@@ -305,7 +320,11 @@ class LicenceView(BrowserView):
         return self.getSchemataFields('urban_inquiry', exclude)
 
     def getBoundInquiryFields(self, exclude=[], bound_context=None):
-        return self.getSchemataFields('urban_inquiry', exclude, bound_context)
+        fields = self.getSchemataFields('urban_inquiry', exclude, bound_context)
+        return [
+            filter(lambda Schematafield: Schematafield.getName() == field, fields)[0]
+            for field in inquiry_field_to_showny_type[self.context.getInquiry_type()]
+        ]
 
     def getDefaultFields(self, exclude=[], context=None):
         base_exclude = ['id', 'title']
