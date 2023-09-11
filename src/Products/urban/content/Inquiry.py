@@ -458,6 +458,14 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
 
         return suspension_delay
 
+    security.declarePublic('getAllInquiriesAndAnnouncements')
+    def getAllInquiriesAndAnnouncements(self):
+        """
+        Returns the existing inquiries
+        """
+        inqs = [inq for inq in self._get_inquiry_objs(all_=True)]
+        return inqs
+
 
 registerType(Inquiry, PROJECTNAME)
 # end of class Inquiry
