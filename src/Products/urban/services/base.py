@@ -71,7 +71,7 @@ class SQLService(object):
                 port=port or '5432',
                 db_name=db_name,
             ),
-            echo=True,
+            echo=False,
             connect_args=connect_args,
             poolclass=StaticPool
         )
