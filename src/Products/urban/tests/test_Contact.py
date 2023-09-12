@@ -1,15 +1,15 @@
 #-*- coding: utf-8 -*-
 
-from Products.urban.testing import URBAN_TESTS_LICENCES_FUNCTIONAL
 from Products.urban.testing import URBAN_TESTS_INTEGRATION
+from Products.urban.testing import URBAN_TESTS_LICENCES_FUNCTIONAL
 from Products.urban.tests.helpers import BrowserTestCase
 from Products.urban.tests.helpers import SchemaFieldsTestCase
-
 from plone import api
 from plone.app.testing import login
 from plone.testing.z2 import Browser
-
 from zope.event import notify
+from zope.globalrequest import getRequest
+from zope.globalrequest import setRequest
 from zope.lifecycleevent import ObjectModifiedEvent
 
 import transaction
@@ -41,8 +41,13 @@ class TestContactFields(SchemaFieldsTestCase):
         self.browser = Browser(self.portal)
         self.browserLogin(default_user, default_password)
 
+        if getRequest() is None:
+            setRequest(self.portal.REQUEST)
+
     def tearDown(self):
         with api.env.adopt_roles(['Manager']):
+            if getRequest() is None:
+                setRequest(self.portal.REQUEST)
             api.content.delete(self.licence)
         transaction.commit()
 
@@ -195,6 +200,9 @@ class TestContactEvents(unittest.TestCase):
         # create a test BuildLicence licence for Applicant contact
         login(self.portal, 'urbaneditor')
 
+        if getRequest() is None:
+            setRequest(self.portal.REQUEST)
+
     def test_licence_title_is_updated_when_applicant_modified(self):
         """
         """
@@ -225,8 +233,13 @@ class TestApplicantFields(SchemaFieldsTestCase):
         self.browser = Browser(self.portal)
         self.browserLogin(default_user, default_password)
 
+        if getRequest() is None:
+            setRequest(self.portal.REQUEST)
+
     def tearDown(self):
         with api.env.adopt_roles(['Manager']):
+            if getRequest() is None:
+                setRequest(self.portal.REQUEST)
             api.content.delete(self.licence)
         transaction.commit()
 
@@ -273,6 +286,9 @@ class TestApplicant(BrowserTestCase):
 
         self.browser = Browser(self.portal)
         self.browserLogin('urbaneditor')
+
+        if getRequest() is None:
+            setRequest(self.portal.REQUEST)
 
     def test_address_display_when_sameAddressAsWorks_is_checked(self):
         self.applicant.setStreet('Rue kikoulo')
@@ -357,8 +373,13 @@ class TestCorporationFields(SchemaFieldsTestCase):
         self.browser = Browser(self.portal)
         self.browserLogin(default_user, default_password)
 
+        if getRequest() is None:
+            setRequest(self.portal.REQUEST)
+
     def tearDown(self):
         with api.env.adopt_roles(['Manager']):
+            if getRequest() is None:
+                setRequest(self.portal.REQUEST)
             api.content.delete(self.licence)
         transaction.commit()
 
@@ -434,6 +455,9 @@ class TestCorporation(BrowserTestCase):
 
         self.browser = Browser(self.portal)
         self.browserLogin(default_user, default_password)
+
+        if getRequest() is None:
+            setRequest(self.portal.REQUEST)
 
     def test_address_display_when_sameAddressAsWorks_is_checked(self):
         self.corporation.setStreet('Rue kikoulo')
