@@ -1,0 +1,2 @@
+Avoid an error if a vocabulary value was removed, instead log the removed value and display the key to the user
+[mpeeters]
