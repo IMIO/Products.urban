@@ -31,7 +31,16 @@ def resolve_vocabulary(context, field, values):
         vocabulary_factory = field.vocabulary_factory
         factory = getUtility(IVocabularyFactory, vocabulary_factory)
         vocabulary = factory(context)
-        result = [vocabulary.by_token[value].title for value in values if value]
+        missing_values = [v for v in values if v not in vocabulary.by_token if v]
+        result = [vocabulary.by_token[v].title for v in values
+                  if v and v not in missing_values]
+        if len(missing_values) > 0:
+            logger.info("{0}: Missing vocabulary values '{2}' for field '{1}'".format(
+                context.absolute_url(),
+                field.__name__,
+                ", ".join(missing_values),
+            ))
+        result += missing_values
     if len(result) != len(filter(None, result)):
         logger.info(
             "{0}: Unknown value for field '{1}' in '{2}'".format(
