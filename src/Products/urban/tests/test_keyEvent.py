@@ -2,13 +2,14 @@
 
 from Products.urban.testing import URBAN_TESTS_CONFIG
 from Products.urban.tests.helpers import BrowserTestCase
-
 from plone import api
 from plone.app.testing import login
 from plone.testing.z2 import Browser
 from zope.event import notify
 from zope.lifecycleevent import ObjectModifiedEvent
 from zope.lifecycleevent import ObjectRemovedEvent
+from zope.globalrequest import getRequest
+from zope.globalrequest import setRequest
 
 import transaction
 
@@ -38,9 +39,13 @@ class TestKeyEvent(BrowserTestCase):
 
         self.browser = Browser(self.portal)
         self.browserLogin(default_user, default_password)
+        if not getRequest():
+            setRequest(self.portal.REQUEST)
 
     def tearDown(self):
         with api.env.adopt_roles(['Manager']):
+            if not getRequest():
+                setRequest(self.portal.REQUEST)
             api.content.delete(self.licence)
         transaction.commit()
 
@@ -137,6 +142,8 @@ class TestKeyEvent(BrowserTestCase):
         self.assertTrue(date_1 not in self.browser.contents)
         self.assertTrue(date_2 not in self.browser.contents)
 
+
+        setRequest(self.portal.REQUEST)
         buildlicence.createUrbanEvent(self.event_type)
         urban_event = buildlicence.objectValues()[-1]
         urban_event.setEventDate(date_1)

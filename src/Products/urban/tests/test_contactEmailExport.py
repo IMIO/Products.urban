@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
+from Products.urban import testing
+
 import unittest
-from Products.urban.testing import URBAN_TESTS_PROFILE_FUNCTIONAL
 
 
 class TestBuildLicence(unittest.TestCase):
 
-    layer = URBAN_TESTS_PROFILE_FUNCTIONAL
+    layer = testing.URBAN_TESTS_CONFIG
 
     def setUp(self):
         portal = self.layer['portal']
@@ -15,7 +16,7 @@ class TestBuildLicence(unittest.TestCase):
     def testGetNotariesEmail(self):
         notaries = self.portal.urban.notaries
         view = notaries.restrictedTraverse('getemails')
-        expected_email = 'NotaryName1 NotarySurname1 <maitre.duchnoque@notaire.be>'
+        expected_email = 'NotaryName1 NotarySurname1 <maitre.duchnoque@notaire.be>; André Sanfrapper <maitre.andre@notaire.be>'
         generated_email = view.getEmails()
         self.assertEqual(expected_email, generated_email)
 
