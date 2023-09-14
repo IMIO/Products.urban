@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from plone import api
-
 from Products.urban.testing import URBAN_TESTS_INTEGRATION
+from plone import api
 
 import unittest
 

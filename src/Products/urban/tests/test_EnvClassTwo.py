@@ -1,13 +1,14 @@
 #-*- coding: utf-8 -*-
 
+from Products.urban import utils
 from Products.urban.testing import URBAN_TESTS_INTEGRATION
 from Products.urban.tests.helpers import BrowserTestCase
 from Products.urban.tests.helpers import SchemaFieldsTestCase
-from Products.urban import utils
-
 from plone import api
 from plone.app.testing import login
 from plone.testing.z2 import Browser
+from zope.globalrequest import getRequest
+from zope.globalrequest import setRequest
 
 import transaction
 import urllib2
@@ -25,6 +26,8 @@ class TestEnvClassTwoInstall(BrowserTestCase):
         default_user = self.layer.environment_default_user
         default_password = self.layer.environment_default_password
         self.browserLogin(default_user, default_password)
+        if not getRequest():
+            setRequest(self.portal.REQUEST)
 
     def test_envclasstwo_config_folder_exists(self):
         msg = 'envclasstwo config folder not created'
@@ -67,10 +70,10 @@ class TestEnvClassTwoInstall(BrowserTestCase):
         contents = self.browser.contents
         self.assertTrue("Permis d'environnement classe 2" in contents)
 
-    def test_EnvClassTwo_is_under_licence_workflow(self):
+    def test_EnvClassTwo_is_under_env_licence_workflow(self):
         workflow_tool = api.portal.get_tool('portal_workflow')
         envclasstwo_workflow = workflow_tool.getChainForPortalType('EnvClassTwo')
-        self.assertTrue('urban_licence_workflow' in envclasstwo_workflow)
+        self.assertTrue('env_licence_workflow' in envclasstwo_workflow)
 
 
 class TestEnvClassTwoInstance(SchemaFieldsTestCase):
@@ -93,11 +96,15 @@ class TestEnvClassTwoInstance(SchemaFieldsTestCase):
 
         self.browser = Browser(self.portal)
         self.browserLogin(default_user, default_password)
+        if not getRequest():
+            setRequest(self.portal.REQUEST)
 
     def tearDown(self):
         if self.licence.wl_isLocked():
             self.licence.wl_clearLocks()
         with api.env.adopt_roles(['Manager']):
+            if not getRequest():
+                setRequest(self.portal.REQUEST)
             api.content.delete(self.licence)
         transaction.commit()
 
@@ -196,14 +203,11 @@ class TestEnvClassTwoInstance(SchemaFieldsTestCase):
 
     def test_envclasstwo_referenceDGATLP_translation(self):
         """
-        Field referenceDGATLP should be translated as 'reference DGO3'
+        Field referenceDGATLP should be translated as 'reference ARNE'
         """
-        self._is_field_visible("Référence DGO3")
-        self._is_field_visible_in_edit("Référence DGO3")
+        self._is_field_visible("Référence ARNE")
+        self._is_field_visible_in_edit("Référence ARNE")
 
     def test_envclasstwo_workLocation_translation(self):
-        """
-        Field referenceDGATLP should be translated as 'reference DGO3'
-        """
         self._is_field_visible("Situation")
         self._is_field_visible_in_edit("Situation")

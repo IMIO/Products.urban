@@ -9,6 +9,7 @@ from Products.CMFCore.utils import getToolByName
 from Products.urban.config import URBAN_TYPES
 from Products.urban.content import UrbanEventInquiry
 from Products.urban.interfaces import IUrbanEvent
+from zope.lifecycleevent import ObjectCreatedEvent
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from zope.event import notify
 from Products.Archetypes.event import EditBegunEvent
@@ -210,7 +211,7 @@ class TestEventDefaultValues(unittest.TestCase):
         # text field 'decisionText' should be empty by default
         event = self.licence.createUrbanEvent('rapport-du-college')
         decision_text = event.getDecisionText()
-        self.failUnless(decision_text == '<p></p>')
+        self.assertEqual(decision_text, '<p></p>')
 
     def testTextValueConfigured(self):
         eventtypes = self.portal_urban.buildlicence.eventconfigs
@@ -220,8 +221,9 @@ class TestEventDefaultValues(unittest.TestCase):
         event_type.textDefaultValues = [{'text': default_text, 'fieldname': 'decisionText'}]
         # the created event should have this text in its field 'decisionText'
         event = self.licence.createUrbanEvent(event_type)
+        notify(ObjectCreatedEvent(event))
         decision_text = event.getDecisionText()
-        self.failUnless(decision_text == default_text)
+        self.assertEqual(decision_text, default_text)
 
     def testTextValueConfiguredWithPythonExpression(self):
         eventtypes = self.portal_urban.buildlicence.eventconfigs
@@ -231,10 +233,11 @@ class TestEventDefaultValues(unittest.TestCase):
         event_type.textDefaultValues = [{'text': default_text, 'fieldname': 'decisionText'}]
         # the created event should have this text in its field 'decisionText'
         event = self.licence.createUrbanEvent(event_type)
+        notify(ObjectCreatedEvent(event))
         decision_text = event.getDecisionText()
 
         expected_text = '<p>Kill %s and %s </p>' % (self.licence.Title(), event.getId())
-        self.assertTrue(decision_text == expected_text)
+        self.assertEqual(decision_text, expected_text)
 
     def testDefaultTextMethodIsDefinedForEachTextField(self):
         # each text field  should have the 'getDefaultText' method defined on it, else the default value system wont

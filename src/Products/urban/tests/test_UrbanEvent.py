@@ -1,17 +1,17 @@
 # -*- coding: utf-8 -*-
 
-from Products.urban.testing import URBAN_TESTS_LICENCES
+from Products.urban import utils
 from Products.urban.testing import URBAN_TESTS_CONFIG
 from Products.urban.testing import URBAN_TESTS_CONFIG_FUNCTIONAL
+from Products.urban.testing import URBAN_TESTS_LICENCES
 from Products.urban.tests.helpers import BrowserTestCase
 from Products.urban.tests.helpers import SchemaFieldsTestCase
-from Products.urban import utils
-
 from plone import api
 from plone.app.testing import login
 from plone.testing.z2 import Browser
-
 from zope.event import notify
+from zope.globalrequest import getRequest
+from zope.globalrequest import setRequest
 from zope.lifecycleevent import ObjectCreatedEvent
 
 import transaction
@@ -28,6 +28,8 @@ class TestUrbanEvent(unittest.TestCase):
         self.portal_urban = portal.portal_urban
         self.licence = portal.urban.buildlicences.objectValues('BuildLicence')[0]
         login(portal, 'urbaneditor')
+        if not getRequest():
+            setRequest(self.portal.REQUEST)
 
     def testAutomaticallyGenerateSingletonDocument(self):
 
@@ -87,9 +89,13 @@ class TestUrbanEventInstance(SchemaFieldsTestCase):
 
         self.browser = Browser(self.portal)
         self.browserLogin(default_user, default_password)
+        if not getRequest():
+            setRequest(self.portal.REQUEST)
 
     def tearDown(self):
         with api.env.adopt_roles(['Manager']):
+            if not getRequest():
+                setRequest(self.portal.REQUEST)
             api.content.delete(self.licence)
         transaction.commit()
 
@@ -158,8 +164,12 @@ class TestUrbanEventInquiryView(BrowserTestCase):
 
         self.browser = Browser(self.portal)
         self.browserLogin(default_user, default_password)
+        if not getRequest():
+            setRequest(self.portal.REQUEST)
 
     def _create_test_licence_with_inquiry(self, portal_type):
+        if not getRequest():
+            setRequest(self.portal.REQUEST)
         licence_folder = utils.getLicenceFolder(portal_type)
         testlicence_id = 'test_{}'.format(portal_type.lower())
         licence_folder.invokeFactory(portal_type, id=testlicence_id)
