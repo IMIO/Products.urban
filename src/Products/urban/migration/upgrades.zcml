@@ -499,4 +499,12 @@
         handler=".update_260.fix_opinion_schedule_column"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Add configuration for notice settings"
+        description="Initialize registry for notice settings"
+        source="*"
+        destination="2700"
+        handler=".update_270.initialize_notice_settings"
+        profile="Products.urban:default" />
+
 </configure>
