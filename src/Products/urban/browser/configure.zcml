@@ -453,6 +453,13 @@
       permission="cmf.ManagePortal"
   />
 
+  <browser:page
+      name="notice_settings"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      class=".notice_settings.NoticeSettingsControlPanel"
+      permission="cmf.ManagePortal"
+      />
+
   <adapter
       for="Products.Five.BrowserView"
       factory=".referencebrowser_popup.contact_popup_template"
@@ -487,6 +494,21 @@
      name=".UNLOCK"
      class=".unlock_docs.Unlock"
      permission="cmf.ModifyPortalContent"
+  />
+
+  <browser:page
+     for="*"
+     name="can_transfer_folder_to_dpa"
+     class=".urbaneventviews.CanTransferFolderToDpaView"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="Products.urban.interfaces.IUrbanEvent"
+     name="transfer_folder_to_dpa"
+     class=".urbaneventviews.UrbanEventNoticeActionsView"
+     attribute="transfer_folder_to_dpa"
+     permission="zope2.View"
   />
 
 </configure>
