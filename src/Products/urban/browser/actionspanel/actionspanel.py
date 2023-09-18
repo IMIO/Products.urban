@@ -39,6 +39,7 @@ class EventActionsPanelView(ActionsPanelView):
             "plonemeeting_wsclient_action_1",
             "plonemeeting_wsclient_action_2",
             "send_mail_action",
+            "transfer_folder_to_dpa",
         )
 
 

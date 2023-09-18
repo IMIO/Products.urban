@@ -936,7 +936,12 @@ msgstr ""
 msgid "The imported file (${name}) doesn't appear to be a CSV file."
 msgstr ""
 
-#: ../browser/urbaneventviews.py:75
+#: ../browser/urbaneventviews.py:67
+#: ../browser/urbaneventviews.py:767
+msgid "The folder transfer to DPA is done."
+msgstr ""
+
+#: ../browser/urbaneventviews.py:43
 msgid "The mailings will be ready tomorrow!"
 msgstr ""
 
@@ -977,6 +982,10 @@ msgstr ""
 
 #: ../dashboard/templates/portlet_categoryswitch.pt:16
 msgid "To CWATUPE procedures"
+msgstr ""
+
+#: ../profiles/default/actions.xml
+msgid "Transfer folder to DPA"
 msgstr ""
 
 #: ../browser/licence/templates/licenceview.pt:27
@@ -2501,6 +2510,10 @@ msgstr ""
 msgid "trails_folder_title"
 msgstr ""
 
+#. Default: "Transfert du dossier vers le DPA"
+msgid "transfer_folder_to_dpa"
+msgstr ""
+
 msgid "uniquelicence_urbanconfig_title"
 msgstr ""
 
@@ -3119,6 +3132,11 @@ msgstr ""
 #. Default: "Comment"
 #: PcaTerm.py
 msgid "urban_label_comment"
+msgstr ""
+
+#. Default: "CommentForDPA"
+#: ../UrbanEventNotice.py:26
+msgid "urban_label_commentForDPA"
 msgstr ""
 
 #. Default: "Comments"

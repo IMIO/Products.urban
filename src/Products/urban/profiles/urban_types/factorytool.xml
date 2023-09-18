@@ -14,6 +14,7 @@
   <type portal_type="Contact"/>
   <type portal_type="Street"/>
   <type portal_type="UrbanEvent"/>
+  <type portal_type="UrbanEventNotice"/>
   <type portal_type="Recipient"/>
   <type portal_type="BuildLicence"/>
   <type portal_type="ParcelOutLicence"/>

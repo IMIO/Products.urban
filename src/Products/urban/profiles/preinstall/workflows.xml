@@ -146,6 +146,9 @@
       <type type_id="UrbanEvent">
          <bound-workflow workflow_id="urbanevent_workflow" />
       </type>
+      <type type_id="UrbanEventNotice">
+         <bound-workflow workflow_id="urbanevent_workflow" />
+      </type>
       <type type_id="UrbanEventAnnouncement">
          <bound-workflow workflow_id="urbanevent_workflow" />
       </type>
@@ -264,7 +267,5 @@
       <type type_id="RoadDecree">
          <bound-workflow workflow_id="codt_buildlicence_workflow" />
       </type>
-
-      <!-- ##/code-section workflowbindings -->
    </bindings>
 </object>

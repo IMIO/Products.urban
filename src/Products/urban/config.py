@@ -407,6 +407,7 @@ GLOBAL_TEMPLATES = {
 URBAN_EVENT_TYPES = [
     "UrbanEvent",
     "UrbanEventInquiry",
+    "UrbanEventNotice",
     "UrbanEventOpinionRequest",
     "UrbanEventAnnouncement",
     "UrbanEventCollege",
