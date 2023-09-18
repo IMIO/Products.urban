@@ -39,7 +39,8 @@ class EventActionsPanelView(ActionsPanelView):
         self.ACCEPTABLE_ACTIONS = (
             "plonemeeting_wsclient_action_1",
             "plonemeeting_wsclient_action_2",
-            "send_mail_action"
+            "send_mail_action",
+            "transfer_folder_to_dpa",
         )
 
 

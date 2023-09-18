@@ -313,7 +313,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         for prop in config.getTextDefaultValues():
             if "fieldname" in prop and prop["fieldname"] == fieldname:
                 return prop["text"]
-        return ""
+        return html and "<p></p>" or ""
 
     def listAllUsedAttributes(self):
         """ """

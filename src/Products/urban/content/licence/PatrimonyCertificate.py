@@ -396,7 +396,6 @@ class PatrimonyCertificate(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMi
         )
         return DisplayList(vocabulary)
 
-
 registerType(PatrimonyCertificate, PROJECTNAME)
 # end of class PatrimonyCertificate
 

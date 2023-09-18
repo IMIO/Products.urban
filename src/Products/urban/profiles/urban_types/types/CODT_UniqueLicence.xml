@@ -20,6 +20,7 @@
    <element value="Corporation"/>
    <element value="Parcel"/>
    <element value="UrbanEvent"/>
+   <element value="UrbanEventNotice"/>
    <element value="UrbanEventAnnouncement"/>
    <element value="UrbanEventInquiry"/>
    <element value="UrbanEventCollege"/>
