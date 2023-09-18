@@ -445,6 +445,13 @@
       permission="cmf.ManagePortal"
   />
 
+  <browser:page
+      name="notice_settings"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      class=".notice_settings.NoticeSettingsControlPanel"
+      permission="cmf.ManagePortal"
+      />
+
   <adapter
       for="Products.Five.BrowserView"
       factory=".referencebrowser_popup.contact_popup_template"

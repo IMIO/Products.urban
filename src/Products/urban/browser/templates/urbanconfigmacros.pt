@@ -163,3 +163,12 @@
    </tal:form>
 
 </div>
+<div metal:define-macro="notice_settings_macro" i18n:domain="urban">
+
+   <tal:form define="form python: getattr(view, 'notice_settings_form', None)">
+       <tal:with-form-as-view define="view nocall:form">
+           <metal:block use-macro="form/@@ploneform-macros/titlelessform" />
+       </tal:with-form-as-view>
+   </tal:form>
+
+</div>
