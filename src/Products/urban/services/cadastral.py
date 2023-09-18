@@ -8,6 +8,8 @@ from plone.memoize import ram
 from sqlalchemy import and_
 from sqlalchemy import or_
 from sqlalchemy.sql.expression import func
+from sqlalchemy.exc import InvalidRequestError
+from sqlalchemy.exc import OperationalError
 from time import time
 
 import json
@@ -137,8 +139,11 @@ class CadastreSession(SQLSession):
         query = self.session.query(
             self.tables.divisions.da, self.tables.divisions.divname
         )
-        result = query.all()
-
+        try:
+            result = query.all()
+        except (InvalidRequestError, OperationalError):
+            self.session.rollback()
+            result = query.all()
         return result
 
     def get_parcel_status(self, capakey):

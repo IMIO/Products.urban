@@ -2,6 +2,7 @@
 
 from Products.Five import BrowserView
 from Products.ZCTextIndex.ParseTree import ParseError
+from Products.urban import utils
 from Products.urban.services import cadastre
 from eea.faceted.vocabularies.autocomplete import IAutocompleteSuggest
 from plone import api

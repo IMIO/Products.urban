@@ -199,6 +199,7 @@ def initialize(context):
     import UrbanDelay
     import UrbanEvent
     import UrbanEventOpinionRequest
+    import UrbanEventNotice
     import UrbanEventType
     import UrbanTool
     import UrbanVocabularyTerm

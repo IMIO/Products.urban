@@ -1518,3 +1518,6 @@ msgstr ""
 
 msgid "label_colname_tenant_data"
 msgstr ""
+
+msgid "transfer_folder_to_dpa"
+msgstr ""
