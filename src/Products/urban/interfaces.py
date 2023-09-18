@@ -189,6 +189,10 @@ class IUrbanEventAnnouncement(IUrbanEventBaseInquiry):
     """Marker interface for .UrbanEventAnnouncement.UrbanEventAnnouncement"""
 
 
+class IUrbanEventNotice(Interface):
+    """Marker interface for .UrbanEventNotice.UrbanEventNotice"""
+
+
 class IUrbanEventOpinionRequest(Interface):
     """Marker interface for .UrbanEventOpinionRequest.UrbanEventOpinionRequest"""
 

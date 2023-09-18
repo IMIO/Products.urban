@@ -285,4 +285,36 @@ def cache_key_30min(func, *args, **kwargs):
     return (func.__name__, time.time() // (60 * 30), args, kwargs)
 
 
+def find_address(term, exact_match=False):
+    """Find an address based on a term"""
+    if not term:
+        return
+    terms = term.strip().split()
+    urban_config = api.portal.get_tool("portal_urban")
+    path = "/".join(urban_config.streets.getPhysicalPath())
+
+    if exact_match is True:
+        title = term
+    else:
+        title = " AND ".join(["%s*" % x for x in terms])
+
+    kwargs = {
+        "Title": title,
+        "sort_on": "sortable_title",
+        "sort_order": "reverse",
+        "path": path,
+        "object_provides": [
+            "Products.urban.interfaces.IStreet",
+            "Products.urban.interfaces.ILocality",
+        ],
+        "review_state": "enabled",
+    }
+
+    catalog = api.portal.get_tool("portal_catalog")
+    brains = catalog(**kwargs)
+
+    suggestions = [{"text": b.Title, "id": b.UID} for b in brains]
+    return suggestions
+
+
 WIDGET_DATE_END_YEAR = datetime.now().year + 25
