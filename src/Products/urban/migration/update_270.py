@@ -97,7 +97,6 @@ def add_event_config_types_notice(context):
                 missing_interfaces = set(uet.get('eventType', [])) - set(old_interfaces)
                 if missing_interfaces:
                     new_interfaces = list(old_fields) + list(missing_interfaces)
-                    folder_event.setEventType(new_interfaces)
                     setattr(folder_event, 'eventType', new_interfaces)
 
             last_urbaneventype_id = id
