@@ -145,6 +145,9 @@
   <type type_id="UrbanEvent">
      <bound-workflow workflow_id="urbanevent_workflow" />
   </type>
+  <type type_id="UrbanEventNotice">
+     <bound-workflow workflow_id="urbanevent_workflow" />
+  </type>
   <type type_id="UrbanEventAnnouncement">
      <bound-workflow workflow_id="urbanevent_workflow" />
   </type>

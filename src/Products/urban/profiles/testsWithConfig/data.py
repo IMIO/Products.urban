@@ -308,6 +308,18 @@ EventConfigs = {
             'podTemplates': (),
             'eventType': ('Products.urban.interfaces.ILicenceDeliveryEvent',),
         },
+        {
+            'id': "envoi-demande-FT",
+            'title': "Transmis du dossier au SPW",
+            'activatedFields': ('commentForDPA',),
+            'deadLineDelay': 0,
+            'isKeyEvent': True,
+            'keyDates': ('eventDate',),
+            'podTemplates': (),
+            'eventPortalType': 'UrbanEventNotice',
+            'eventType': ('Products.urban.interfaces.ITransmitToSPWEvent',),
+            'TALCondition': "python: licence.getProcedureChoice() != 'article65'",
+        },
     ),
     'inspection': (
         {

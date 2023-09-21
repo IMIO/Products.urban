@@ -6463,11 +6463,12 @@ EventConfigs = {
         {
             'id': "envoi-demande-FT",
             'title': "Transmis du dossier au SPW",
-            'activatedFields': (),
+            'activatedFields': ('commentForDPA',),
             'deadLineDelay': 0,
             'isKeyEvent': True,
             'keyDates': ('eventDate',),
             'podTemplates': (),
+            'eventPortalType': 'UrbanEventNotice',
             'eventType': ('Products.urban.interfaces.ITransmitToSPWEvent',),
             'TALCondition': "python: licence.getProcedureChoice() != 'article65'",
         },

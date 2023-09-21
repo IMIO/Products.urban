@@ -171,6 +171,7 @@ def initialize(context):
     import content.UrbanEventInspectionReport
     import content.UrbanEventFollowUp
     import UrbanEventOpinionRequest
+    import UrbanEventNotice
     import UrbanEventType
     import UrbanTool
     import UrbanVocabularyTerm

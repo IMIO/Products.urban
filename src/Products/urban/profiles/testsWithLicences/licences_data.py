@@ -73,6 +73,15 @@ licences_data = {
             'name2': 'Wesson',
         },
     },
+    'EnvClassTwo': {
+        'licenceSubject': 'Exemple Permis d\'environnement classe 2',
+        'contact_type': 'Corporation',
+        'contact_data': {
+            'denomination': 'Toha Heavy Industries',
+            'name1': 'Smith &',
+            'name2': 'Wesson',
+        },
+    },
     'Inspection': {
         'licenceSubject': 'Exemple Inspection',
         'contact_type': 'Proprietary',

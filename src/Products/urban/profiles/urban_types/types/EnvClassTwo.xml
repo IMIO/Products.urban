@@ -23,6 +23,7 @@
    <element value="Applicant"/>
    <element value="Couple"/>
    <element value="UrbanEvent"/>
+   <element value="UrbanEventNotice"/>
    <element value="File"/>
    <element value="Parcel"/>
    <element value="task"/>

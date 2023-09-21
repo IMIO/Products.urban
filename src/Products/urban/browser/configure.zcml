@@ -488,4 +488,12 @@
      permission="cmf.ModifyPortalContent"
   />
 
+  <browser:page
+     for="Products.urban.interfaces.IUrbanEvent"
+     name="transfer_folder_to_dpa"
+     class=".urbaneventviews.UrbanEventNoticeActionsView"
+     attribute="transfer_folder_to_dpa"
+     permission="zope2.View"
+  />
+
 </configure>

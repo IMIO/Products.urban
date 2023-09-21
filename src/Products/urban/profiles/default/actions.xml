@@ -115,4 +115,18 @@
    <property name="visible">True</property>
   </object>
  </object>
+ <object name="object_buttons" meta_type="CMF Action Category">
+  <property name="title"></property>
+  <object name="transfer_folder_to_dpa" meta_type="CMF Action" i18n:domain="urban">
+   <property name="title" i18n:translate="">Transfer folder to DPA</property>
+   <property name="description" i18n:translate=""></property>
+   <property name="url_expr">string:$object_url/@@transfer_folder_to_dpa</property>
+   <property name="icon_expr">string:$portal_url/copytoclaymants.png</property>
+   <property name="available_expr">python: context.portal_type == 'UrbanEventNotice' and 'Products.urban.interfaces.ITransmitToSPWEvent' in context.getUrbaneventtypes().getEventType()</property>
+   <property name="permissions">
+    <element value="View"/>
+   </property>
+   <property name="visible">True</property>
+  </object>
+ </object>
 </object>

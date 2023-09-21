@@ -34,7 +34,11 @@ class EventActionsPanelView(ActionsPanelView):
     def __init__(self, context, request):
         super(EventActionsPanelView, self).__init__(context, request)
         self.SECTIONS_TO_RENDER = ('renderEdit', 'renderOwnDelete', 'renderActions')
-        self.ACCEPTABLE_ACTIONS = ('plonemeeting_wsclient_action_1', 'plonemeeting_wsclient_action_2',)
+        self.ACCEPTABLE_ACTIONS = (
+            'plonemeeting_wsclient_action_1',
+            'plonemeeting_wsclient_action_2',
+            'transfer_folder_to_dpa',
+        )
 
 
 class ReorderActionsPanelView(ActionsPanelView):

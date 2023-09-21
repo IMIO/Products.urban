@@ -507,4 +507,12 @@
         handler=".update_270.initialize_notice_settings"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Add event config types for notice"
+        description="Add event config types for notice"
+        source="*"
+        destination="2701"
+        handler=".update_270.add_event_config_types_notice"
+        profile="Products.urban:default" />
+
 </configure>
