@@ -238,6 +238,16 @@ schema = Schema((
         schemata='urban_environment',
         default_output_type='text/x-html-safe',
     ),
+    StringField(
+        name='noticeId',
+        widget=StringField._properties['widget'](
+            size=60,
+            label=_('urban_label_noticeId', default='noticeId'),
+        ),
+        required=False,
+        schemata='urban_description',
+        default_method='getDefaultText',
+    ),
 
 ),
 )
@@ -390,6 +400,7 @@ def finalizeSchema(schema):
     """
        Finalizes the type schema to alter some fields
     """
+    schema['noticeId'].widget.visible = {'edit': 'invisible', 'view': 'visible'}
     schema.moveField('referenceSPE', after='reference')
     schema.moveField('referenceFT', after='referenceDGATLP')
     schema.moveField('authority', before='folderCategory')
@@ -401,6 +412,7 @@ def finalizeSchema(schema):
     schema.moveField('ftSolicitOpinionsTo', after='impactStudy')
     schema.moveField('description', after='ftSolicitOpinionsTo')
     schema.moveField('locationTechnicalAdviceAfterInquiry', after='locationTechnicalAdvice')
+    schema.moveField('noticeId', after='reference')
 
 #finalizeSchema comes from BuildLicence to be sure to have the same changes reflected
 firstBaseFinalizeSchema(CODT_UniqueLicence_schema)

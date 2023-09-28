@@ -49,6 +49,16 @@ schema = Schema((
         default_method='getDefaultText',
         validators=('isReference', ),
     ),
+    StringField(
+        name='noticeId',
+        widget=StringField._properties['widget'](
+            size=60,
+            label=_('urban_label_noticeId', default='noticeId'),
+        ),
+        required=False,
+        schemata='urban_description',
+        default_method='getDefaultText',
+    ),
 ),
 )
 
@@ -105,11 +115,13 @@ def finalizeSchema(schema):
     """
        Finalizes the type schema to alter some fields
     """
+    schema['noticeId'].widget.visible = {'edit': 'invisible', 'view': 'visible'}
     schema.moveField('businessOldLocation', after='workLocations')
     schema.moveField('foldermanagers', after='businessOldLocation')
     schema.moveField('rubrics', after='folderCategory')
     schema.moveField('description', after='additionalLegalConditions')
     schema.moveField('temporaryExploitation', after='natura2000Details')
+    schema.moveField('noticeId', after='reference')
     return schema
 
 finalizeSchema(EnvClassTwo_schema)
