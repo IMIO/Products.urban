@@ -53,4 +53,11 @@
     class=".tasks.UpdateOpenTasksLicences"
   />
 
+  <browser:page
+    name="import-from-notice"
+    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    permission="cmf.ManagePortal"
+    class=".notice.ImportFromNoticeView"
+    />
+
 </configure>
