@@ -1,13 +1,11 @@
 # encoding: utf-8
 
 from Products.Five import BrowserView
-from Products.urban.services import cadastre
 from Products.ZCTextIndex.ParseTree import ParseError
-
+from Products.urban import utils
+from Products.urban.services import cadastre
 from eea.faceted.vocabularies.autocomplete import IAutocompleteSuggest
-
 from plone import api
-
 from zope.interface import implements
 
 import json
@@ -95,32 +93,7 @@ class UrbanStreetsSuggest(SuggestView):
         if not term:
             return
 
-        terms = term.strip().split()
-        urban_config = api.portal.get_tool('portal_urban')
-        path = '/'.join(urban_config.streets.getPhysicalPath())
-
-        if exact_match is True:
-            title = term
-        else:
-            title = ' AND '.join(["%s*" % x for x in terms])
-
-        kwargs = {
-            'Title': title,
-            'sort_on': 'sortable_title',
-            'sort_order': 'reverse',
-            'path': path,
-            'object_provides': [
-                'Products.urban.interfaces.IStreet',
-                'Products.urban.interfaces.ILocality'
-            ],
-            'review_state': 'enabled',
-        }
-
-        catalog = api.portal.get_tool('portal_catalog')
-        brains = catalog(**kwargs)
-
-        suggestions = [{'text': b.Title, 'id': b.UID} for b in brains]
-        return suggestions
+        return utils.find_address(term, exact_match=exact_match)
 
 
 class LicenceReferenceSuggest(SuggestView):
