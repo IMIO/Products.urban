@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from Products.urban.services.base import WebService
+from Products.urban.notice import NoticeNotification
 from plone import api
 
 import requests
@@ -63,7 +64,10 @@ class WebserviceNotice(WebService):
         response = self._get_notifications(status=status)
         if response.status_code != 200:
             raise ValueError("Unexpected response '{}'".format(response.status_code))
-        return response.json()
+        result = response.json()
+        if result["status"]["value"] != "PROCESSED":
+            raise ValueError("Error in response '{}'".format(result["status"]["value"]))
+        return result["notices"]["notice"]
 
     def _get_notification(self, notification_id):
         """Get a notification informations response from REST API"""
@@ -76,7 +80,10 @@ class WebserviceNotice(WebService):
         response = self._get_notification(notification_id)
         if response.status_code != 200:
             raise ValueError("Unexpected response '{}'".format(response.status_code))
-        return response.json()
+        result = response.json()
+        if result["status"]["value"] != "PROCESSED":
+            raise ValueError("Error in response '{}'".format(result["status"]["value"]))
+        return NoticeNotification(self, result["notice"])
 
     def _get_notification_document(self, notification_id, document_id):
         """Get a document for a notification response from REST API"""
@@ -91,7 +98,10 @@ class WebserviceNotice(WebService):
         response = self._get_notification_document(notification_id, document_id)
         if response.status_code != 200:
             raise ValueError("Unexpected response '{}'".format(response.status_code))
-        return response.json()
+        result = response.json()
+        if result["status"]["value"] != "PROCESSED":
+            raise ValueError("Error in response '{}'".format(result["status"]["value"]))
+        return result["document"]
 
     def _post_notification_response(self, notification_id, data):
         """Post a response for a notification"""
