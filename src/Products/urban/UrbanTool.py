@@ -37,6 +37,7 @@ from Products.urban import UrbanMessage as _
 
 from zope.annotation import IAnnotations
 from zope.interface import implements
+from zope.deprecation import deprecate
 
 from AccessControl import getSecurityManager
 from plone import api
@@ -605,9 +606,9 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
 
         return res
 
-    security.declarePublic("getUrbanConfig")
+    security.declarePublic("getLicenceConfig")
 
-    def getUrbanConfig(self, context, urbanConfigId=None):
+    def getLicenceConfig(self, context, urbanConfigId=None):
         """
         Return the folder containing the necessary paramaters
         """
@@ -648,6 +649,15 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             return urbanConfig
         except AttributeError:
             return None
+
+    security.declarePublic("getUrbanConfig")
+
+    @deprecate("`getUrbanConfig` is deprecated, please use `getLicenceConfig` instead")
+    def getUrbanConfig(self, context, urbanConfigId=None):
+        """
+        Return the folder containing the necessary paramaters
+        """
+        return self.getLicenceConfig(context, urbanConfigId=urbanConfigId)
 
     def generatePrintMap(self, cqlquery, cqlquery2, zoneExtent=None):
         """ """

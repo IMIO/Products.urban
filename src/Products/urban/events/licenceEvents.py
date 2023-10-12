@@ -19,11 +19,17 @@ def setDefaultValuesEvent(licence, event):
     """
     set default values on licence fields
     """
+    request = event.object.REQUEST
     if licence.checkCreationFlag():
-        _setDefaultFolderManagers(licence)
-        _setDefaultSelectValues(licence)
-        _setDefaultTextValues(licence)
-        _setDefaultReference(licence)
+        if request and request.getURL().endswith("@@masterselect-jsonvalue-toggle"):
+            # This is a major performance improvment and default values are not
+            # necessary for this view
+            return
+        else:
+            _setDefaultFolderManagers(licence)
+            _setDefaultSelectValues(licence)
+            _setDefaultTextValues(licence)
+            _setDefaultReference(licence)
 
 
 def _setDefaultSelectValues(licence):
@@ -34,6 +40,8 @@ def _setDefaultSelectValues(licence):
     ]
     for field in select_fields:
         default_value = licence.getDefaultValue(licence, field)
+        if not default_value:
+            continue
         field_mutator = getattr(licence, field.mutator)
         field_mutator(default_value)
 
@@ -47,12 +55,18 @@ def _setDefaultTextValues(licence):
     for field in select_fields:
         is_html = "html" in field.default_content_type
         default_value = licence.getDefaultText(licence, field, is_html)
+        if not default_value:
+            continue
         field_mutator = getattr(licence, field.mutator)
         field_mutator(default_value)
 
 
 def _setDefaultFolderManagers(licence):
-    licence.setFoldermanagers(getCurrentFolderManager())
+    default_folder_manager = licence.getLicenceConfig().getDefault_foldermanager()
+    if default_folder_manager:
+        licence.setFoldermanagers(default_folder_manager)
+    else:
+        licence.setFoldermanagers(getCurrentFolderManager())
 
 
 def _setDefaultReference(licence):
