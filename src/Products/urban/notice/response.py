@@ -37,7 +37,7 @@ class NoticeResponse(NoticeElement):
 
 class NoticeOutgoingNotification(NoticeResponse):
     state = "FINAL"
-    type = "SimpleResponse"
+    type = "TwiceDefaultResponse"
 
     @property
     def _reference(self):
