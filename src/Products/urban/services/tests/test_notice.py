@@ -14,7 +14,7 @@ class TestNoticeService(unittest.TestCase):
         self.service = WebserviceNotice()
         api.portal.set_registry_record(
             "Products.urban.browser.notice_settings.INoticeSettings.municipality_id",
-            u"0206.524.876"
+            u"0206.524.876",
         )
 
     def test_get_notifications(self):

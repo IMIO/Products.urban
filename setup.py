@@ -26,11 +26,14 @@ setup(name='Products.urban',
       zip_safe=False,
       extras_require=dict(
           test=[
-              'unittest2', 'zope.testing', 'plone.testing',
-              'testfixtures',
-              'plone.app.testing',
-              'plone.app.robotframework[debug, test]',
               'ipdb',
+              'mock',
+              'plone.app.robotframework[debug, test]',
+              'plone.app.testing',
+              'plone.testing',
+              'testfixtures',
+              'unittest2',
+              'zope.testing',
           ],
           templates=[
               'Genshi',
