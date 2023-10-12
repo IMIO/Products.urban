@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from six import string_types
+
 
 class NoticeElement(object):
     _notice_keys = ()  # List of attributes that are usefull but specific to notice
