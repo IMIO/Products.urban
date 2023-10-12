@@ -6,6 +6,7 @@ from Products.urban.notice.document import NoticeDocument
 from Products.urban.notice.parcel import NoticeParcel
 from Products.urban.notice.party import NoticeParty
 from Products.urban.notice.sender import NoticeSender
+from Products.urban.notice.response import NoticeOutgoingNotification
 
 
 __all__ = (
@@ -15,4 +16,5 @@ __all__ = (
     "NoticeParcel",
     "NoticeParty",
     "NoticeSender",
+    "NoticeOutgoingNotification",
 )

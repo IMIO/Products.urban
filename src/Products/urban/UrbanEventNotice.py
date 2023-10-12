@@ -1,16 +1,16 @@
 # -*- coding: utf-8 -*-
 
-
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
-from zope.interface import implements
-import interfaces
-from Products.urban import UrbanMessage as _
-from Products.urban.UrbanEvent import UrbanEvent
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
-
+from Products.urban import UrbanMessage as _
+from Products.urban import interfaces
+from Products.urban.UrbanEvent import UrbanEvent
 from Products.urban.config import *
 from Products.urban.utils import setOptionalAttributes
+from Products.urban.notice import NoticeOutgoingNotification
+from Products.urban.services.notice import WebserviceNotice
+from zope.interface import implements
 
 ##code-section module-header #fill in your manual code here
 
@@ -62,7 +62,12 @@ class UrbanEventNotice(UrbanEvent, BrowserDefaultMixin):
     # Methods
 
     def transfer_folder_to_dpa(self):
-        print "transfer_folder_to_dpa from the content"
+        notification = NoticeOutgoingNotification(self)
+        service = WebserviceNotice()
+        service.post_notification_response(
+            notification.notice_id,
+            notification.serialize(),
+        )
 
     # Manually created methods
 

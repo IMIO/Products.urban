@@ -104,10 +104,20 @@ class WebserviceNotice(WebService):
         return result["document"]
 
     def _post_notification_response(self, notification_id, data):
-        """Post a response for a notification"""
+        """Post a response for a notification using REST API"""
         return self._post(
             "notifications/{notification_id}/responses".format(
                 notification_id=notification_id
             ),
-            data=data,
+            json=data,
         )
+
+    def post_notification_response(self, notification_id, data):
+        """Post a response for a notification"""
+        response = self._post_notification_response(notification_id, data)
+        if response.status_code != 200:
+            raise ValueError("Unexpected response '{}'".format(response.status_code))
+        result = response.json()
+        if result["status"]["value"] != "PROCESSED":
+            raise ValueError("Error in response '{}'".format(result["status"]["value"]))
+        return result
