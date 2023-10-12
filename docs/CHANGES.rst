@@ -8,6 +8,18 @@ Changelog
 
 .. towncrier release notes start
 
+2.6.15 (2023-10-12)
+-------------------
+
+Internal:
+
+
+- Fix tests
+  [mpeeters] (URB-2855)
+- Improve performances for add views
+  [mpeeters] (URB-2903)
+
+
 2.6.14 (2023-09-13)
 -------------------
 
