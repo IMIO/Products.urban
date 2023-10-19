@@ -64,4 +64,12 @@
       permission="zope2.View"
   />
 
+  <browser:viewlet
+     name="plone.belowcontenttitle.noticeTransmitState"
+     manager="plone.app.layout.viewlets.interfaces.IBelowContentBody"
+     class=".notice.NoticeTransmitState"
+     for="Products.urban.interfaces.IUrbanEventNotice"
+     permission="zope2.View"
+  />
+
 </configure>

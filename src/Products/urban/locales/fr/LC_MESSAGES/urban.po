@@ -777,6 +777,10 @@ msgstr "L'import des réclamants a bien été enregistré et sera éxécuté cet
 msgid "The field does not exist !!!"
 msgstr ""
 
+#: ../browser/urbaneventviews.py:767
+msgid "The folder transfer to DPA is done."
+msgstr "Le transfert vers le DPA est terminé."
+
 #: ../browser/urbaneventviews.py:43
 msgid "The mailings will be ready tomorrow!"
 msgstr "Le publipostage a bien été enregistré et sera éxécuté cette nuit"
@@ -819,6 +823,10 @@ msgstr "Vers les Procédures CODT"
 #: ../dashboard/templates/portlet_categoryswitch.pt:15
 msgid "To CWATUPE procedures"
 msgstr "Vers les Procédures CWATUP"
+
+#: ../profiles/default/actions.xml
+msgid "Transfer folder to DPA"
+msgstr "Transférer vers le DPA"
 
 #: ../browser/licence/templates/licenceview.pt:27
 #: ../browser/templates/urbaneventannouncementview.pt:31
@@ -2331,6 +2339,9 @@ msgstr "Particularités du bien communales"
 msgid "trails_folder_title"
 msgstr "Liste des sentiers et chemins vicinaux de la commune"
 
+msgid "transfer_folder_to_dpa"
+msgstr "Transfert du dossier vers le DPA"
+
 msgid "uniquelicence_urbanconfig_title"
 msgstr "Paramètres des permis uniques"
 
@@ -2937,6 +2948,11 @@ msgstr "Date de décision du collège"
 #: PcaTerm.py
 msgid "urban_label_comment"
 msgstr "Commentaire"
+
+#. Default: "CommentForDPA"
+#: ../UrbanEventNotice.py:26
+msgid "urban_label_commentForDPA"
+msgstr "Commentaire pour le DPA"
 
 #. Default: "Comments"
 #: Division.py

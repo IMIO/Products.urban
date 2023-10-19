@@ -756,6 +756,26 @@ class UrbanEventInquiryView(UrbanEventInquiryBaseView):
         return 50
 
 
+class CanTransferFolderToDpaView(BrowserView):
+
+    @property
+    def is_urban_event_notice(self):
+        return self.context.portal_type == 'UrbanEventNotice'
+
+    @property
+    def is_transmit_to_spw_event(self):
+        return 'Products.urban.interfaces.ITransmitToSPWEvent' in self.context.getUrbaneventtypes().getEventType()
+
+    @property
+    def no_transmit_yet(self):
+        annotations = interfaces.IAnnotations(self.context)
+        dates = annotations.get("notice_transmit_dates", {})
+        return len(dates) == 0
+
+    def __call__(self):
+        return self.is_urban_event_notice and self.is_transmit_to_spw_event and self.no_transmit_yet
+
+
 class UrbanEventNoticeActionsView(BrowserView):
     """
 

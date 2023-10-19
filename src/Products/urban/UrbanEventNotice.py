@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import datetime
 
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
@@ -10,6 +11,7 @@ from Products.urban.config import *
 from Products.urban.utils import setOptionalAttributes
 from Products.urban.notice import NoticeOutgoingNotification
 from Products.urban.services.notice import WebserviceNotice
+from zope.annotation.interfaces import IAnnotations
 from zope.interface import implements
 
 ##code-section module-header #fill in your manual code here
@@ -61,6 +63,13 @@ class UrbanEventNotice(UrbanEvent, BrowserDefaultMixin):
 
     # Methods
 
+    def store_transmit_date(self, event_type, date=None):
+        annotations = IAnnotations(self)
+        key = "notice_transmit_dates"
+        dates = annotations.get(key, OrderedDict())
+        dates[event_type] = date if date else datetime.date.today()
+        annotations[key] = dates
+
     def transfer_folder_to_dpa(self):
         notification = NoticeOutgoingNotification(self)
         service = WebserviceNotice()
@@ -68,6 +77,7 @@ class UrbanEventNotice(UrbanEvent, BrowserDefaultMixin):
             notification.notice_id,
             notification.serialize(),
         )
+        self.store_transmit_date("transfer_folder_to_dpa")
 
     # Manually created methods
 

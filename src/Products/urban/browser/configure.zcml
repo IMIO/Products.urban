@@ -489,6 +489,13 @@
   />
 
   <browser:page
+     for="*"
+     name="can_transfer_folder_to_dpa"
+     class=".urbaneventviews.CanTransferFolderToDpaView"
+     permission="zope2.View"
+  />
+
+  <browser:page
      for="Products.urban.interfaces.IUrbanEvent"
      name="transfer_folder_to_dpa"
      class=".urbaneventviews.UrbanEventNoticeActionsView"
