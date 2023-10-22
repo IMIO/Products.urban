@@ -505,3 +505,6 @@ msgstr ""
 
 msgid "receive_college_decision"
 msgstr ""
+
+msgid "label_schema_urban_coring"
+msgstr ""
