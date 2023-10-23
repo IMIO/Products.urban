@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-10-22 20:14+0000\n"
+"POT-Creation-Date: 2023-10-22 21:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -565,6 +565,10 @@ msgstr ""
 msgid "Internal opinion services"
 msgstr ""
 
+#: ../browser/licence/templates/parcels_macro.pt:26
+msgid "Lien GIG"
+msgstr ""
+
 #: ../browser/urbaneventviews.py:224
 msgid "Listing file (claimants)"
 msgstr ""
@@ -579,6 +583,10 @@ msgstr ""
 
 #: ../profiles/default/actions.xml
 msgid "Map"
+msgstr ""
+
+#: ../browser/licence/licenceview.py:237
+msgid "Map Coring"
 msgstr ""
 
 #: ../interfaces.py:767
@@ -1038,15 +1046,15 @@ msgstr ""
 msgid "cartography_map_descr"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1523
+#: ../content/licence/GenericLicence.py:1534
 msgid "category1"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1524
+#: ../content/licence/GenericLicence.py:1535
 msgid "category2"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1525
+#: ../content/licence/GenericLicence.py:1536
 msgid "category3"
 msgstr ""
 
@@ -1083,7 +1091,7 @@ msgstr ""
 msgid "close_inspection"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1331
+#: ../content/licence/GenericLicence.py:1342
 msgid "close_prevention_area"
 msgstr ""
 
@@ -1443,7 +1451,7 @@ msgstr ""
 msgid "externaldecisions_folder_title"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1332
+#: ../content/licence/GenericLicence.py:1343
 msgid "far_prevention_area"
 msgstr ""
 
@@ -1494,35 +1502,35 @@ msgstr ""
 msgid "firefox_viewlet_title"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1354
+#: ../content/licence/GenericLicence.py:1365
 msgid "flooding_level_high"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1349
+#: ../content/licence/GenericLicence.py:1360
 msgid "flooding_level_low"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1351
+#: ../content/licence/GenericLicence.py:1362
 msgid "flooding_level_low_to_high"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1350
+#: ../content/licence/GenericLicence.py:1361
 msgid "flooding_level_low_to_moderate"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1352
+#: ../content/licence/GenericLicence.py:1363
 msgid "flooding_level_moderate"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1353
+#: ../content/licence/GenericLicence.py:1364
 msgid "flooding_level_moderate_to_high"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1347
+#: ../content/licence/GenericLicence.py:1358
 msgid "flooding_level_no"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1348
+#: ../content/licence/GenericLicence.py:1359
 msgid "flooding_level_verylow"
 msgstr ""
 
@@ -2041,7 +2049,7 @@ msgstr ""
 msgid "outdated_parcels_in_use"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1334
+#: ../content/licence/GenericLicence.py:1345
 msgid "outside_catchment"
 msgstr ""
 
@@ -2258,7 +2266,7 @@ msgstr ""
 msgid "subdivision_fieldset_legend"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1333
+#: ../content/licence/GenericLicence.py:1344
 msgid "supervision_area"
 msgstr ""
 
@@ -3692,6 +3700,11 @@ msgstr ""
 #. Default: "Label"
 #: ParcellingTerm.py
 msgid "urban_label_label"
+msgstr ""
+
+#. Default: "lastCoring"
+#: ../content/licence/GenericLicence.py:1184
+msgid "urban_label_lastCoring"
 msgstr ""
 
 #. Default: "Legalform"

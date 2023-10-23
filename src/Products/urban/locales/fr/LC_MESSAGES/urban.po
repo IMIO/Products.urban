@@ -577,6 +577,10 @@ msgstr "Permis intégré"
 msgid "Internal opinion services"
 msgstr "Avis de services internes à la ville"
 
+#: ../browser/licence/templates/parcels_macro.pt:26
+msgid "Lien GIG"
+msgstr "Carto GIG"
+
 #: ../browser/urbaneventviews.py:224
 msgid "Listing file (claimants)"
 msgstr "Importer un fichier de réclamants (csv)"
@@ -592,6 +596,10 @@ msgstr ""
 #: ../profiles/default/actions.xml
 msgid "Map"
 msgstr "Carte"
+
+#: ../browser/licence/licenceview.py:237
+msgid "Map Coring"
+msgstr "Carottage carto"
 
 #: ../interfaces.py:767
 msgid "Max items allowed for immediate mailing"
@@ -1051,15 +1059,15 @@ msgstr "Cartographie"
 msgid "cartography_map_descr"
 msgstr "Une carte sera affichée lorsque les parcelles concernées auront été définies."
 
-#: ../content/licence/GenericLicence.py:1523
+#: ../content/licence/GenericLicence.py:1534
 msgid "category1"
 msgstr "catégorie 1"
 
-#: ../content/licence/GenericLicence.py:1524
+#: ../content/licence/GenericLicence.py:1535
 msgid "category2"
 msgstr "catégorie 2"
 
-#: ../content/licence/GenericLicence.py:1525
+#: ../content/licence/GenericLicence.py:1536
 msgid "category3"
 msgstr "catégorie 3"
 
@@ -1097,7 +1105,7 @@ msgid "close_inspection"
 msgstr "clôturer le dossier"
 
 #. Default: "Close prevention area"
-#: ../content/licence/GenericLicence.py:1331
+#: ../content/licence/GenericLicence.py:1342
 msgid "close_prevention_area"
 msgstr "Zone de prévention rapprochée"
 
@@ -1171,12 +1179,12 @@ msgstr "N.C."
 #. Default: "Map Coring"
 #: ../browser/licence/templates/licencetabsmacros.pt:541
 msgid "coring_details"
-msgstr ""
+msgstr "Carottage carto"
 
 #. Default: "<p style=\"text-decoration: underline;\">You made a request for a coring.</p> Please go to the GIG tab: <ol> <li>Select the parcel(s)</li> <li>Click on the iMio logo to export the result</li> </ol> Refresh this page to show the result."
 #: ../browser/licence/templates/parcels_macro.pt:6
 msgid "coring_message"
-msgstr ""
+msgstr "<p style=\"text-decoration: underline;\">Vous avez demandé un carottage</p>Dirigez-vous vers l'onglet GIG :<ol> <li>cochez la/les parcelle(s) </li> <li>cliquez sur \"image iMio\" pour exporter les données vers iA.Urban</li> </ol> Rafraichissez cette page pour voir le résultat."
 
 #. Default: "Contact person address / headoffice"
 #: ../browser/templates/contactmacros.pt:135
@@ -1461,7 +1469,7 @@ msgid "externaldecisions_folder_title"
 msgstr "Décision des avis externes"
 
 #. Default: "Far prevention area"
-#: ../content/licence/GenericLicence.py:1332
+#: ../content/licence/GenericLicence.py:1343
 msgid "far_prevention_area"
 msgstr "Zone de prévention éloignée"
 
@@ -1513,38 +1521,38 @@ msgid "firefox_viewlet_title"
 msgstr "Cette application fonctionne mieux avec Firefox."
 
 #. Default: "High risk"
-#: ../content/licence/GenericLicence.py:1354
+#: ../content/licence/GenericLicence.py:1365
 msgid "flooding_level_high"
 msgstr "Risque élevé"
 
 #. Default: "Low risk"
-#: ../content/licence/GenericLicence.py:1349
+#: ../content/licence/GenericLicence.py:1360
 msgid "flooding_level_low"
 msgstr "Risque faible"
 
-#: ../content/licence/GenericLicence.py:1351
+#: ../content/licence/GenericLicence.py:1362
 msgid "flooding_level_low_to_high"
 msgstr "Risque faible à élevé"
 
-#: ../content/licence/GenericLicence.py:1350
+#: ../content/licence/GenericLicence.py:1361
 msgid "flooding_level_low_to_moderate"
 msgstr "Risque faible à moyen"
 
 #. Default: "Moderate risk"
-#: ../content/licence/GenericLicence.py:1352
+#: ../content/licence/GenericLicence.py:1363
 msgid "flooding_level_moderate"
 msgstr "Risque moyen"
 
-#: ../content/licence/GenericLicence.py:1353
+#: ../content/licence/GenericLicence.py:1364
 msgid "flooding_level_moderate_to_high"
 msgstr "Risque moyen à élevé"
 
 #. Default: "No"
-#: ../content/licence/GenericLicence.py:1347
+#: ../content/licence/GenericLicence.py:1358
 msgid "flooding_level_no"
 msgstr "Non"
 
-#: ../content/licence/GenericLicence.py:1348
+#: ../content/licence/GenericLicence.py:1359
 msgid "flooding_level_verylow"
 msgstr "Risque très faible"
 
@@ -2068,7 +2076,7 @@ msgid "outdated_parcels_in_use"
 msgstr "Permis en cours contenant une parcelle à mettre jour"
 
 #. Default: "Outside catchment"
-#: ../content/licence/GenericLicence.py:1334
+#: ../content/licence/GenericLicence.py:1345
 msgid "outside_catchment"
 msgstr "Hors captage"
 
@@ -2286,7 +2294,7 @@ msgid "subdivision_fieldset_legend"
 msgstr "Lotissement"
 
 #. Default: "Supervision area"
-#: ../content/licence/GenericLicence.py:1333
+#: ../content/licence/GenericLicence.py:1344
 msgid "supervision_area"
 msgstr "Zone de surveillance"
 
@@ -3044,7 +3052,7 @@ msgstr "Enquête liée"
 #. Default: "coringResult"
 #: ../content/licence/GenericLicence.py:1171
 msgid "urban_label_coringResult"
-msgstr ""
+msgstr "Résultat du carottage carto"
 
 #: UrbanVocabularyTerm.py
 msgid "urban_label_coring_id"
@@ -3723,6 +3731,11 @@ msgstr "Détails concernant les contraintes karstiques"
 #: ParcellingTerm.py
 msgid "urban_label_label"
 msgstr "Libellé"
+
+#. Default: "lastCoring"
+#: ../content/licence/GenericLicence.py:1184
+msgid "urban_label_lastCoring"
+msgstr "Date de dernier carottage"
 
 #. Default: "Legalform"
 #: Corporation.py

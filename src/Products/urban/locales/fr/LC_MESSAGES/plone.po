@@ -400,7 +400,7 @@ msgid "label_schema_urban_carto"
 msgstr "Cartographie"
 
 msgid "label_schema_urban_coring"
-msgstr ""
+msgstr "Carottage carto"
 
 msgid "label_schema_urban_description"
 msgstr "Récapitulatif"
