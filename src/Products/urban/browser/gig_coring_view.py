@@ -103,4 +103,5 @@ class GigCoringResponse(BrowserView):
             self.request.RESPONSE.setStatus(204, reason="No Content", lock=True)
         else:
             self.context.setCoringResult(self.request["BODY"])
+            self.context.setLastCoring(datetime.now())
             self.request.RESPONSE.setStatus(204, reason="No Content", lock=True)

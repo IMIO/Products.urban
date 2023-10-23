@@ -1175,6 +1175,17 @@ schema = Schema((
         schemata='urban_coring',
         default_output_type='text/x-html-safe',
     ),
+    DateTimeField(
+        name='lastCoring',
+        widget=DateTimeField._properties['widget'](
+            show_hm=True,
+            format="%d/%m/%Y %H:%M",
+            starting_year=2023,
+            label=_('urban_label_lastCoring',
+                    default='lastCoring'),
+        ),
+        schemata='urban_coring',
+    ),
 ),
 )
 
