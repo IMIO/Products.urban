@@ -1,22 +1,38 @@
 <div metal:define-macro="parcels_macro" i18n:domain="urban">
     <fieldset>
         <legend i18n:translate="concerned_parcels">Concerned parcel(s)</legend>
+        <dl class="portalMessage info" id="gig-coring-info" style="display:none;">
+            <dt>Info</dt>
+            <dd i18n:translate="coring_message">
+                <p style="text-decoration: underline;">You made a request for a coring.</p>
+                Please go to the GIG tab:
+                <ol>
+                    <li>Select the parcel(s)</li>
+                    <li>Click on the iMio logo to export the result</li>
+
+                </ol>
+                Refresh this page to show the result.
+            </dd>
+        </dl>
         <div metal:use-macro="here/@@globalmacros/urbanParcelsMacro" />
-        <!--div id="urban-coring" class="parcel-action"
-             tal:condition="context/getOfficialParcels">
-            <a class="coring link-overlay"
-               tal:attributes="href python:context.absolute_url() + '/@@parcelcoring'">
-                <button class="context apButton">
-                    <img src="coring.png"/>
-                </button>
-            </a>
-        </div-->
+
     <div class="parcel-action">
      <form tal:condition="python: view.isGigCoringActive() "
-           tal:attributes="action python: context.absolute_url() + '/gig_coring_view'" name="gig_coring" action="gig_coring_view" method="post" target="_blank" >
-      <input type="submit" class="context apButton" id="gig_coring_link" value="Lien GIG" />
+           tal:attributes="action python: context.absolute_url() + '/gig_coring_view'"
+           name="gig_coring"
+           action="gig_coring_view"
+           method="post"
+           target="_blank" >
+      <input type="submit" class="context apButton" id="gig-coring-link" value="Lien GIG" i18n:attributes="value" />
      </form>
     </div>
+    <script type="text/javascript">
+        jQuery(document).ready(function($){
+            $("input#gig-coring-link").click(function(){
+                $("dl#gig-coring-info").show();
+            });
+        });
+    </script>
 
     </fieldset>
 </div>
