@@ -100,7 +100,7 @@ class ParcelOutLicence(BaseFolder, BaseBuildLicence, BrowserDefaultMixin):
     ##code-section class-header #fill in your manual code here
     archetype_name = 'ParcelOutLicence'
     schemata_order = ['urban_description', 'urban_road', 'urban_location',
-                      'urban_investigation_and_advices']
+                      'urban_investigation_and_advices', 'urban_coring']
     ##/code-section class-header
 
     # Methods

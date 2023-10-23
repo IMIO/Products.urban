@@ -83,7 +83,8 @@ class PatrimonyCertificate(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMi
     schema = PatrimonyCertificate_schema
 
     ##code-section class-header #fill in your manual code here
-    schemata_order = ['urban_description', 'urban_road', 'urban_location']
+    schemata_order = ['urban_description', 'urban_road', 'urban_location'
+                      'urban_coring']
     ##/code-section class-header
 
     # Methods

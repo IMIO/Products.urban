@@ -4,6 +4,7 @@ from Acquisition import aq_inner
 
 from Products.Five import BrowserView
 
+from Products.urban import UrbanMessage as _
 from Products.urban import utils
 from Products.urban.browser.table.urbantable import ApplicantTable
 from Products.urban.browser.table.urbantable import ApplicantHistoryTable
@@ -229,7 +230,16 @@ class LicenceView(BrowserView):
         return 'licencetabs-macros'
 
     def getTabs(self):
-        return self.getLicenceConfig().getActiveTabs()
+        tabs = self.getLicenceConfig().getActiveTabs()
+        if self.isGigCoringActive():
+            tabs.append(
+                {
+                    "display_name": _("Map Coring"),
+                    "display": "1",
+                    "value": "coring",
+                }
+            )
+        return tabs
 
     def getUseTabbing(self):
         return self.getLicenceConfig().getUseTabbingForDisplay()
@@ -313,6 +323,9 @@ class LicenceView(BrowserView):
 
     def getHabitationFields(self, exclude=[]):
         return self.getSchemataFields('urban_habitation', exclude)
+
+    def getCoringFields(self, exclude=[]):
+        return self.getSchemataFields('urban_coring', exclude)
 
     def getImpactStudyInfos(self):
         return {}

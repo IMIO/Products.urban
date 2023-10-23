@@ -1172,7 +1172,7 @@ schema = Schema((
                     default='coringResult'),
         ),
         default_content_type='text/html',
-        schemata='urban_description',
+        schemata='urban_coring',
         default_output_type='text/x-html-safe',
     ),
 ),

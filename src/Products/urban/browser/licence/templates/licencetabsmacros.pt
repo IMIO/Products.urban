@@ -535,3 +535,18 @@
         </fieldset>
      </div>
 </metal:add_all_advices>
+
+<div class="licence-column" metal:define-macro="coring_macro" i18n:domain="urban">
+    <fieldset>
+        <legend i18n:translate="coring_details">Map Coring</legend>
+        <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%
+               tal:define="default_custom python: [];
+                           custom custom | python: []; custom python: custom + default_custom">
+
+            <tal:loop repeat="field view/getCoringFields">
+                <metal:field_display use-macro="here/@@licencetabs-macros/field_display" />
+            </tal:loop>
+
+        </table>
+    </fieldset>
+</div>

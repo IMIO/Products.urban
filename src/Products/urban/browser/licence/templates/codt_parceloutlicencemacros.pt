@@ -45,3 +45,8 @@
 <metal:patrimony define-macro="patrimony_macro" i18n:domain="urban">
     <metal:parent_call use-macro="here/@@licencetabs-macros/patrimony_macro" />
 </metal:patrimony>
+
+<metal:coring define-macro="coring_macro" i18n:domain="urban">
+    <metal:parent_call use-macro="here/@@licencetabs-macros/coring_macro">
+    </metal:parent_call>
+</metal:coring>

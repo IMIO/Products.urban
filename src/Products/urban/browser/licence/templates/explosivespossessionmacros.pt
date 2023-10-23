@@ -37,3 +37,8 @@
 <metal:inquiry define-macro="inquiry_macro" i18n:domain="urban">
     <metal:parent_call use-macro="here/@@licencetabs-macros/inquiry_macro" />
 </metal:inquiry>
+
+<metal:coring define-macro="coring_macro" i18n:domain="urban">
+    <metal:parent_call use-macro="here/@@licencetabs-macros/coring_macro">
+    </metal:parent_call>
+</metal:coring>
