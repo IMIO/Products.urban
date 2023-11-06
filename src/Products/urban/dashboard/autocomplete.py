@@ -90,7 +90,7 @@ class UrbanStreetsSuggest(SuggestView):
 
     label = 'Rues urban'
 
-    def compute_suggestions(self, exact_match=False):
+    def compute_suggestions(self, exact_match=False, include_disable=False):
         term = self.request.get('term')
         if not term:
             return
@@ -115,6 +115,9 @@ class UrbanStreetsSuggest(SuggestView):
             ],
             'review_state': 'enabled',
         }
+
+        if include_disable:
+            del kwargs['review_state']
 
         catalog = api.portal.get_tool('portal_catalog')
         brains = catalog(**kwargs)
