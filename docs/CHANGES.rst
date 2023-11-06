@@ -8,6 +8,18 @@ Changelog
 
 .. towncrier release notes start
 
+2.6.16 (2023-11-06)
+-------------------
+
+Bug fixes:
+
+
+- Fix serializer to include disable street in uid resolver
+  [jchandelle] (MURBMSGA-37)
+- Fix street search to include disable street
+  [jchandelle] (URB-2696)
+
+
 2.6.15 (2023-10-12)
 -------------------
 
