@@ -53,3 +53,11 @@ def fix_opinion_schedule_column(context):
                 _update_collection_assigned_user(subtask)
 
     logger.info("upgrade step done!")
+
+
+def fix_opinion_workflow(context):
+    logger = logging.getLogger('urban: update opinion workflow')
+    logger.info("starting upgrade steps")
+    setup_tool = api.portal.get_tool('portal_setup')
+    setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'workflow')
+    logger.info("upgrade step done!")

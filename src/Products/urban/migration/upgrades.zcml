@@ -499,4 +499,12 @@
         handler=".update_260.fix_opinion_schedule_column"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Fix opinion workflow"
+        description="Fix opinion workflow"
+        source="1133"
+        destination="1134"
+        handler=".update_260.fix_opinion_workflow"
+        profile="Products.urban:default" />
+
 </configure>
