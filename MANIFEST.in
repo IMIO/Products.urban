@@ -5,6 +5,7 @@
   include portals.cfg
   include versions.cfg
   recursive-include docs *.py
+  recursive-include src *.cpy
   recursive-include docs *.rst
   recursive-include docs *.txt
   recursive-include src *.apache
