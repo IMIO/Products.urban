@@ -2,8 +2,8 @@
 
 Changes
 =======
-2.5 (unreleased)
-----------------
+2.5.0.dev0 (2023-11-09)
+-----------------------
 
 - Fix extra profile setup causing too big transaction
   Error was: "TypeError: Can't pickle objects in acquisition wrappers"
