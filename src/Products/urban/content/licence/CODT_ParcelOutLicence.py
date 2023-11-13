@@ -145,6 +145,9 @@ class CODT_ParcelOutLicence(BaseFolder, CODT_BaseBuildLicence, BrowserDefaultMix
     def getLastWalloonRegionOpinionRequest(self):
         return self.getLastEvent(interfaces.IWalloonRegionOpinionRequestEvent)
 
+    def getFirstAcknowledgment(self):
+        return self.getFirstEvent(interfaces.IAcknowledgmentEvent)
+
     def getLastAcknowledgment(self):
         return self.getLastEvent(interfaces.IAcknowledgmentEvent)
 
