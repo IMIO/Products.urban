@@ -685,6 +685,10 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
                 res.append(getattr(opinionsToAskIfWorksConfigFolder, elt))
         return res
 
+    security.declarePublic('getFirstAcknowledgment')
+    def getFirstAcknowledgment(self):
+        return self.getFirstEvent(interfaces.IAcknowledgmentEvent)
+
     security.declarePublic('getLastAcknowledgment')
     def getLastAcknowledgment(self):
         return self.getLastEvent(interfaces.IAcknowledgmentEvent)
