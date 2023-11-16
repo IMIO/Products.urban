@@ -8,6 +8,23 @@ Changelog
 
 .. towncrier release notes start
 
+2.6.17 (2023-11-16)
+-------------------
+
+Bug fixes:
+
+
+- Adapt opinion request worklflow to bypass guard check for managers
+  [mpeeters] (SUP-33308)
+
+
+Internal:
+
+
+- Provide getFirstAcknowledgment method
+  [fngaha] (SUP-32215)
+
+
 2.6.16 (2023-11-06)
 -------------------
 
