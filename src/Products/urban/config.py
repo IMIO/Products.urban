@@ -211,9 +211,9 @@ URBAN_TYPES = [
     'PatrimonyCertificate',
     'EnvClassOne', 'EnvClassTwo', 'EnvClassThree', 'EnvClassBordering',
     'ParcelOutLicence', 'CODT_ParcelOutLicence',
-#    'MiscDemand', 'Division',
+    'MiscDemand', 'Division',
     'NotaryLetter', 'CODT_NotaryLetter',
-#    'ProjectMeeting',
+    'ProjectMeeting',
     'ExplosivesPossession',
     'RoadDecree',
     'Inspection', 'Ticket'
