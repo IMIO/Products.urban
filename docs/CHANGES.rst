@@ -1,3 +1,13 @@
+Changelog
+=========
+
+.. You should *NOT* be adding new change log entries to this file.
+   You should create a file in the news directory instead.
+   For helpful instructions, please see:
+   https://github.com/plone/plone.releaser/blob/master/ADD-A-NEWS-ITEM.rst
+
+.. towncrier release notes start
+
 2.5.0.dev1 (2023-11-21)
 -----------------------
 
@@ -15,16 +25,6 @@ Internal:
 
 - Reduce logging for sql queries
   [mpeeters] (URB-2926)
-
-
-:orphan:
-
-Changes
-=======
-2.5.1 (unreleased)
-------------------
-
-- Nothing changed yet.
 
 
 2.5.0.dev0 (2023-11-09)
