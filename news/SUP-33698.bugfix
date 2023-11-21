@@ -1,0 +1,2 @@
+Fix url for exploitation conditions, `getRaw` is no longer accessible through urls
+[mpeeters]

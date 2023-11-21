@@ -464,7 +464,7 @@ class EnvironmentLicenceView(LicenceView):
             sorted_conditions[val].append(
                 {
                     'type': val,
-                    'url': cond.absolute_url() + '/description/getRaw',
+                    'url': cond.absolute_url() + '/description',
                     'title': cond.Title()
                 }
             )
