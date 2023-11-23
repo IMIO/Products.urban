@@ -8,6 +8,16 @@ Changelog
 
 .. towncrier release notes start
 
+2.6.18 (2023-11-23)
+-------------------
+
+Bug fixes:
+
+
+- Add `fix_schedule_config` external method ta fix class of condition objects
+  [mpeeters] (SUP-33739)
+
+
 2.6.17 (2023-11-16)
 -------------------
 
