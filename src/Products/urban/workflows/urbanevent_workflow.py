@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from Products.urban.content.licence.GenericLicence import GenericLicence
 from Products.urban.interfaces import ICODT_UniqueLicence
 from Products.urban.interfaces import IEnvironmentBase
 from Products.urban.interfaces import IEnvironmentOnlyEvent
@@ -18,6 +19,8 @@ class StateRolesMapping(LocalRoleAdapter):
         self.context = context
         self.event = context
         self.licence = self.context.aq_parent
+        if not isinstance(self.licence, GenericLicence):
+            self.licence = self.context.aq_inner.aq_parent
 
     def get_allowed_groups(self, licence, event):
         integrated_licence = IIntegratedLicence.providedBy(licence)
