@@ -1,0 +1,2 @@
+Fix an issue with Products.ZCTextIndex that was interpreting `NOT` as token instead of a word for notary letter references
+[mpeeters]

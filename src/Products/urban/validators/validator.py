@@ -86,7 +86,10 @@ class isNotDuplicatedReferenceValidator:
         if not ref_num:
             return 1
 
-        similar_licences = catalog(getReference=ref_num, portal_type=types_to_check)
+        similar_licences = catalog(
+            getReference="'{0}'".format(ref_num),  # Avoid an issue with NOT
+            portal_type=types_to_check,
+        )
         if not similar_licences or (len(similar_licences) == 1 and licence.UID() == similar_licences[0].UID):
             return 1
         return translate(
