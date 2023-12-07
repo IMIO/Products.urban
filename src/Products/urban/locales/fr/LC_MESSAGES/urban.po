@@ -179,6 +179,14 @@ msgstr "Changements enregistrés"
 msgid "Check parcels"
 msgstr "Vérifier les parcelles"
 
+#: ../browser/schedule_settings.py:22
+msgid "Color due date in orange if it comes close to X days"
+msgstr "Souligner l'échéance en ORANGE quand elle a atteint X jours restants"
+
+#: ../browser/schedule_settings.py:30
+msgid "Color due date in red if it comes close to X days"
+msgstr "Souligner l'échéance en ROUGE quand elle a atteint X jours restants"
+
 #: ../widget/historizereferencewidget.py:91
 msgid "Comment - {0}"
 msgstr "Commentaire - {0}"
@@ -248,7 +256,7 @@ msgstr ""
 #: ../browser/gig_coring_settings.py:79
 #: ../browser/offdays_settings.py:126
 msgid "Edit cancelled"
-msgstr ""
+msgstr "Edition annulée"
 
 #: ../profiles/default/actions.xml
 msgid "Emails"
@@ -577,6 +585,10 @@ msgstr "Permis intégré"
 msgid "Internal opinion services"
 msgstr "Avis de services internes à la ville"
 
+#: ../browser/schedule_settings.py:23
+msgid "Leave empty to disable"
+msgstr "Laissez le champ vide pour désactiver le surlignage"
+
 #: ../browser/urbaneventviews.py:224
 msgid "Listing file (claimants)"
 msgstr "Importer un fichier de réclamants (csv)"
@@ -645,6 +657,10 @@ msgstr "Jours de suspension"
 msgid "Off days period"
 msgstr "Périodes de suspension"
 
+#: ../browser/schedule_settings.py:31
+msgid "Overrides orange color, leave empty to disable"
+msgstr "Outrepasse la couleur orange; laissez le champ vide pour désactiver le surlignage"
+
 msgid "ParcelOutLicence"
 msgstr "Permis d'urbanisation"
 
@@ -697,6 +713,10 @@ msgstr "Décret Voirie"
 #: ../browser/offdays_settings.py:113
 msgid "Save"
 msgstr "Enregistrer"
+
+#: ../browser/schedule_settings.py:50
+msgid "Schedule alerts"
+msgstr "Alertes échéancier"
 
 #. Default: "imio.schedule"
 #: ../setuphandlers.py:338
@@ -780,6 +800,10 @@ msgstr ""
 #: ../browser/urbaneventviews.py:43
 msgid "The mailings will be ready tomorrow!"
 msgstr "Le publipostage a bien été enregistré et sera éxécuté cette nuit"
+
+#: ../browser/schedule_settings.py:42
+msgid "The orange value should be higher than the red one, as it is used as a first warning."
+msgstr "La limite pour l'orange doit être supérieure à la rouge, car l'orange est utilisé comme premier avertissement."
 
 #: ../browser/urbaneventviews.py:623
 msgid "The parcel radius search will be ready tomorrow!"

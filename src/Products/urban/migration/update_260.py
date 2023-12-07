@@ -1,3 +1,6 @@
+from plone.registry.interfaces import IRegistry
+from zope.component import getUtility
+
 from plone import api
 import logging
 
@@ -52,6 +55,33 @@ def fix_opinion_schedule_column(context):
                 subtask = getattr(schedule, subtask_id)
                 _update_collection_assigned_user(subtask)
 
+    logger.info("upgrade step done!")
+
+
+def add_schedule_control_panel(context):
+    from plone.registry import Record
+    from plone.registry import field
+    from Products.urban.browser.schedule_settings import ISchedule
+
+    logger = logging.getLogger("urban: Add schedule control panel")
+    logger.info("starting upgrade steps")
+    setup_tool = api.portal.get_tool("portal_setup")
+
+    registry = getUtility(IRegistry)
+
+    default_values = {
+        'color_orange_x_days_before_due_date': 10,
+        'color_red_x_days_before_due_date': 5,
+    }
+
+    base = 'Products.urban.browser.schedule_settings.ISchedule'
+    for key, default_value in default_values.items():
+        full_key = "{0}.{1}".format(base, key)
+        if full_key not in registry.records:
+            registry_field = field.Int(title=ISchedule[key].title, required=False, min=0)
+            registry_record = Record(registry_field)
+            registry_record.value = default_value
+            registry.records[full_key] = registry_record
     logger.info("upgrade step done!")
 
 
