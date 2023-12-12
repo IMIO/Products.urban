@@ -226,3 +226,12 @@ def run_entry_points(group, name, *args, **kwargs):
     for entrypoint in pkg_resources.iter_entry_points(group=group, name=name):
         plugin = entrypoint.load()
         return plugin(*args, **kwargs)
+
+
+def convert_to_utf8(string):
+    try:
+        output = string.encode("utf-8")
+    except UnicodeDecodeError as e:
+        output = string
+    return output
+ 
