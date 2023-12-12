@@ -234,4 +234,3 @@ def convert_to_utf8(string):
     except UnicodeDecodeError as e:
         output = string
     return output
- 
