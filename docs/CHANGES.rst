@@ -8,6 +8,16 @@ Changelog
 
 .. towncrier release notes start
 
+2.6.20 (2023-12-12)
+-------------------
+
+Bug fixes:
+
+
+- Fix street number with specia character in unicode
+  [jchandelle] (URB-2948)
+
+
 2.6.19 (2023-12-04)
 -------------------
 
