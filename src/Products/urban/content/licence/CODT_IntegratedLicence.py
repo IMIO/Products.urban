@@ -123,9 +123,9 @@ class CODT_IntegratedLicence(BaseFolder, CODT_UniqueLicence, BrowserDefaultMixin
 
     def listRegionalAuthorities(self):
         voc_terms = (
-            ('dgo3', 'DGO3/DPE : Fonctionnaire technique'),
-            ('dgo4', 'DGO4 : Fonctionnaire délégué'),
-            ('dgo6', 'DGO6 : Fonctionnaire des implantations commerciales'),
+            ('dgo3', u'DGO3/DPE : Fonctionnaire technique'),
+            ('dgo4', u'DGO4 : Fonctionnaire délégué'),
+            ('dgo6', u'DGO6 : Fonctionnaire des implantations commerciales'),
         )
         vocabulary = DisplayList(voc_terms)
         return vocabulary
