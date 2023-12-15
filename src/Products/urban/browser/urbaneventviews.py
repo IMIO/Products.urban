@@ -26,6 +26,29 @@ from zope.interface import Interface
 
 import csv
 
+claimants_csv_fieldnames = [
+    'numerotation',
+    'personTitle',
+    'name1',
+    'name2',
+    'society',
+    'street',
+    'number',
+    'zipcode',
+    'city',
+    'country',
+    'email',
+    'phone',
+    'gsm',
+    'nationalRegister',
+    'claimType',
+    'hasPetition',
+    'outOfTime',
+    'claimDate',
+    'claimsText',
+    'wantDecisionCopy',
+]
+
 
 class UrbanEventView(BrowserView):
     """
@@ -210,14 +233,39 @@ class ImportClaimantListingForm(form.Form):
                 planned_claimants_import.remove(inquiry_UID)
         else:
             csv_file = data['listing_file']
-            interfaces.IAnnotations(self.context)['urban.claimants_to_import'] = csv_file.data
-            if csv_file and inquiry_UID not in planned_claimants_import:
-                planned_claimants_import.append(inquiry_UID)
+            csv_integrity_error = self.validate_csv_integrity(csv_file)
+            if csv_integrity_error:
+                api.portal.show_message(csv_integrity_error, self.request, "error")
+            else:
+                interfaces.IAnnotations(self.context)['urban.claimants_to_import'] = csv_file.data
+                if inquiry_UID not in planned_claimants_import:
+                    planned_claimants_import.append(inquiry_UID)
         api.portal.set_registry_record(
             'Products.urban.interfaces.IAsyncClaimantsImports.claimants_to_import',
             planned_claimants_import
         )
         return not bool(errors)
+
+    def validate_csv_integrity(self, csv_file):
+        if csv_file.contentType not in ("text/csv"):
+            return _(
+                u'The imported file (${name}) doesn\'t appear to be a CSV file.',
+                mapping={u'name': csv_file.filename}
+            )
+
+        try:
+            # warning: extra or missing columns don't generate an error during CSV reading
+            reader = csv.DictReader(
+                StringIO(csv_file.data), claimants_csv_fieldnames, delimiter=',', quotechar='"'
+            )
+            claimant_args = [row for row in reader if row['name1'] or row['name2'] or row['society']][1:]
+        except csv.Error as error:
+            return _(
+                u'The imported file (${name}) couldn\'t be read properly. Please verify its structure and try again.',
+                mapping={u'name': csv_file.filename}
+            )
+
+        return None
 
 
 class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
@@ -245,28 +293,6 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
     def import_claimants_from_csv(self):
         portal_urban = api.portal.get_tool('portal_urban')
         site = api.portal.get()
-        fieldnames = [
-            'numerotation',
-            'personTitle',
-            'name1',
-            'name2',
-            'society',
-            'street',
-            'number',
-            'zipcode',
-            'city',
-            'country',
-            'email',
-            'phone',
-            'gsm',
-            'nationalRegister',
-            'claimType',
-            'hasPetition',
-            'outOfTime',
-            'claimDate',
-            'claimsText',
-            'wantDecisionCopy',
-        ]
 
         titles_mapping = {'': ''}
         titles_folder = portal_urban.persons_titles
@@ -286,7 +312,7 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
         claimants_file = interfaces.IAnnotations(self.context)['urban.claimants_to_import']
         if claimants_file:
             reader = csv.DictReader(
-                StringIO(claimants_file), fieldnames, delimiter=',', quotechar='"'
+                StringIO(claimants_file), claimants_csv_fieldnames, delimiter=',', quotechar='"'
             )
         else:
             reader = []
