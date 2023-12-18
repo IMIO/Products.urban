@@ -765,6 +765,14 @@ msgstr ""
 msgid "The field does not exist !!!"
 msgstr ""
 
+#: ../browser/urbaneventviews.py:263
+msgid "The imported file (${name}) couldn't be read properly. Please verify its structure and try again."
+msgstr ""
+
+#: ../browser/urbaneventviews.py:251
+msgid "The imported file (${name}) doesn't appear to be a CSV file."
+msgstr ""
+
 #: ../browser/urbaneventviews.py:43
 msgid "The mailings will be ready tomorrow!"
 msgstr ""

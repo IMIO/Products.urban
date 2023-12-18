@@ -777,6 +777,14 @@ msgstr "L'import des réclamants a bien été enregistré et sera éxécuté cet
 msgid "The field does not exist !!!"
 msgstr ""
 
+#: ../browser/urbaneventviews.py:263
+msgid "The imported file (${name}) couldn't be read properly. Please verify its structure and try again."
+msgstr "Le fichier importé (${name}) n'a pas pu être lu correctement. Veuillez vérifier sa structure et réessayer."
+
+#: ../browser/urbaneventviews.py:251
+msgid "The imported file (${name}) doesn't appear to be a CSV file."
+msgstr "Le fichier importé (${name}) ne semble pas être un fichier CSV."
+
 #: ../browser/urbaneventviews.py:43
 msgid "The mailings will be ready tomorrow!"
 msgstr "Le publipostage a bien été enregistré et sera éxécuté cette nuit"
