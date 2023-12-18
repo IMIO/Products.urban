@@ -2248,7 +2248,7 @@ msgstr "SSC"
 
 #: ../content/UrbanEventInspectionReport.py:152
 msgid "stop_worksite"
-msgstr "Arret de chantier"
+msgstr "Arrêt de chantier"
 
 #. Default: "When adding manually a new street, please let the default value"
 #: Street.py
