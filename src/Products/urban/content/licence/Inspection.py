@@ -28,6 +28,22 @@ slave_fields_bound_licence = (
 )
 
 schema = Schema((
+    StringField(
+        name='referenceProsecution',
+        widget=StringField._properties['widget'](
+            size=60,
+            label=_('urban_label_referenceProsecution', default='Referenceprosecution'),
+        ),
+        schemata='urban_description',
+    ),
+    StringField(
+        name='policeTicketReference',
+        widget=StringField._properties['widget'](
+            size=60,
+            label=_('urban_label_policeTicketReference', default='Policeticketreference'),
+        ),
+        schemata='urban_description',
+    ),
     ReferenceField(
         name='bound_licences',
         widget=ReferenceBrowserWidget(
@@ -365,6 +381,8 @@ def finalize_schema(schema, folderish=False, moveDiscussion=True):
        Finalizes the type schema to alter some fields
     """
     schema['folderCategory'].widget.visible = {'edit': 'invisible', 'view': 'invisible'}
+    schema.moveField('referenceProsecution', after='reference')
+    schema.moveField('policeTicketReference', after='referenceProsecution')
     schema.moveField('description', after='inspection_context')
     schema.moveField('bound_licences', before='workLocations')
     schema.moveField('use_bound_licence_infos', after='bound_licences')
