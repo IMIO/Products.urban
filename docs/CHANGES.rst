@@ -6,9 +6,6 @@ Changes
 2.6.3 (unreleased)
 ------------------
 
-- Add prosecution ref and ticket ref to Inspection [SUP-27127]
-  [ndemonte]
-
 - Fix different type of vocabulary [URB-2575]
   [jchandelle]
 
