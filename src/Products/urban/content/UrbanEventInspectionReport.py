@@ -149,6 +149,7 @@ class UrbanEventInspectionReport(BaseFolder, UrbanEvent, BrowserDefaultMixin):
         full_voc = [
             ('close', translate(_('close_inspection'), context=self.REQUEST)),
             ('ticket', translate(_('ticket'), context=self.REQUEST)),
+            ('stop_worksite', translate(_('stop_worksite'), context=self.REQUEST)),
         ]
         for key in config_voc.keys():
             full_voc.append((key, config_voc.getValue(key)))
