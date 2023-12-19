@@ -507,12 +507,4 @@
         handler=".update_260.fix_opinion_workflow"
         profile="Products.urban:default" />
 
-    <gs:upgradeStep
-        title="Add schedule control panel"
-        description="Add schedule control panel"
-        source="1134"
-        destination="1135"
-        handler=".update_260.add_schedule_control_panel"
-        profile="Products.urban:default" />
-
 </configure>

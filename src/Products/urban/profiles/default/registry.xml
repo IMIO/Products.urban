@@ -66,7 +66,6 @@
       <value key="css">True</value>
       <value key="patch">True</value>
   </records>
-  <records interface="Products.urban.browser.schedule_settings.ISchedule" />
   <records interface="Products.urban.browser.offdays_settings.IOffDays" />
   <records interface="Products.urban.browser.gig_coring_settings.IGigCoringLink"/>
 </registry>
