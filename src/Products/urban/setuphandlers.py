@@ -67,6 +67,7 @@ from zope.schema.interfaces import IVocabularyFactory
 from zope import event
 
 import pickle
+import transaction
 
 logger = logging.getLogger('urban: setuphandlers')
 
@@ -214,6 +215,7 @@ def extraPostInstall(context):
     logger.info("set_file_system_configuration : Done")
     logger.info("addUrbanVocabularies : starting...")
     addUrbanVocabularies(context)
+    transaction.commit()
     logger.info("addUrbanVocabularies : Done")
     logger.info("addEnvironmentRubrics : starting...")
     addEnvironmentRubrics(context)
@@ -383,6 +385,10 @@ def getSharedVocabularies(urban_type, licence_vocabularies):
 
 def createVocabularies(container, vocabularies):
     for voc_name, vocabulary in vocabularies.iteritems():
+        if voc_name not in container:
+            # We are in a special usecase, nothing should be done
+            # This can happend when multiple upgrade steps have not be applied
+            continue
         voc_folder = getattr(container, voc_name)
         createFolderDefaultValues(voc_folder, vocabulary)
 
@@ -537,8 +543,11 @@ def addRubricValues(context, config_folder):
         if category_id in config_folder.objectIds():
             rubric_folder = getattr(config_folder, category_id)
         else:
-            rubricfolder_id = config_folder.invokeFactory("Folder", **category)
-            rubric_folder = getattr(config_folder, rubricfolder_id)
+            rubric_folder = api.content.create(
+                container=config_folder,
+                type="Folder",
+                **category
+            )
             rubric_folder.setConstrainTypesMode(1)
             rubric_folder.setLocallyAllowedTypes(['EnvironmentRubricTerm'])
             rubric_folder.setImmediatelyAddableTypes(['EnvironmentRubricTerm'])
@@ -555,7 +564,11 @@ def addRubricValues(context, config_folder):
 
             rubric_id = rubric['id']
             if rubric_id not in rubric_folder:
-                rubric_id = rubric_folder.invokeFactory('EnvironmentRubricTerm', **rubric)
+                new_rubric = api.content.create(
+                    container=rubric_folder,
+                    type="EnvironmentRubricTerm",
+                    **rubric
+                )
                 print "created rubric %ss" % rubric_id
             else:
                 old_rubric = getattr(rubric_folder, rubric_id)
@@ -564,7 +577,7 @@ def addRubricValues(context, config_folder):
                     field = old_rubric.getField(fieldname)
                     mutator = field.getMutator(old_rubric)
                     mutator(newvalue)
-            new_rubric = getattr(rubric_folder, rubric_id)
+                new_rubric = getattr(rubric_folder, rubric_id)
             new_rubric.processForm()
 
             conditions_uid = []

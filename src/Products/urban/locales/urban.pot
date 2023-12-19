@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2023-07-25 09:14+0000\n"
+"POT-Creation-Date: 2023-07-18 07:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -767,6 +767,14 @@ msgstr ""
 
 #: ../browser/longtextview.py:30
 msgid "The field does not exist !!!"
+msgstr ""
+
+#: ../browser/urbaneventviews.py:263
+msgid "The imported file (${name}) couldn't be read properly. Please verify its structure and try again."
+msgstr ""
+
+#: ../browser/urbaneventviews.py:251
+msgid "The imported file (${name}) doesn't appear to be a CSV file."
 msgstr ""
 
 #: ../browser/urbaneventviews.py:43
@@ -2238,6 +2246,10 @@ msgstr ""
 #. Default: "SSC"
 #: setuphandlers.py
 msgid "ssc_folder_title"
+msgstr ""
+
+#: ../content/UrbanEventInspectionReport.py:152
+msgid "stop_worksite"
 msgstr ""
 
 #. Default: "When adding manually a new street, please let the default value"

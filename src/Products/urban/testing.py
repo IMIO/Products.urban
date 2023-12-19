@@ -1,18 +1,25 @@
 # -*- coding: utf-8 -*-
-from plone.app.robotframework.testing import REMOTE_LIBRARY_BUNDLE_FIXTURE
-from plone.app.testing import IntegrationTesting
-from plone.app.testing import FunctionalTesting
-from plone.app.testing import PloneWithPackageLayer
-from plone.app.testing import helpers
 
-from plone.testing import z2
 from Products.GenericSetup.tool import DEPENDENCY_STRATEGY_NEW
 from Products.urban.utils import run_entry_points
+from plone.app.robotframework.testing import REMOTE_LIBRARY_BUNDLE_FIXTURE
+from plone.app.testing import FunctionalTesting
+from plone.app.testing import IntegrationTesting
+from plone.app.testing import PloneWithPackageLayer
+from plone.app.testing import helpers
+from plone.testing import z2
+from zope.globalrequest import setRequest
 
 import Products.urban
 
 
-URBAN_TESTS_PROFILE_DEFAULT = PloneWithPackageLayer(
+class UrbanLayer(PloneWithPackageLayer):
+    def setUpPloneSite(self, portal):
+        setRequest(portal.REQUEST)
+        super(UrbanLayer, self).setUpPloneSite(portal)
+
+
+URBAN_TESTS_PROFILE_DEFAULT = UrbanLayer(
     zcml_filename="testing.zcml",
     zcml_package=Products.urban,
     additional_z2_products=(
@@ -53,6 +60,7 @@ class UrbanWithUsersLayer(IntegrationTesting):
             cache_view.reset_all_cache()
             Products.urban.config.NIS = '92000'  # mock NIS code
             portal.setupCurrentSkin(portal.REQUEST)
+            setRequest(portal.REQUEST)
             from Products.urban.setuphandlers import addTestUsers
             addTestUsers(portal)
 
@@ -72,6 +80,7 @@ class UrbanConfigLayer(UrbanWithUsersLayer):
         super(UrbanConfigLayer, self).setUp()
         with helpers.ploneSite() as portal:
             portal.setupCurrentSkin(portal.REQUEST)
+            setRequest(portal.REQUEST)
             helpers.applyProfile(portal, 'Products.urban:testsWithConfig')
 
 
@@ -90,6 +99,7 @@ class UrbanLicencesLayer(UrbanConfigLayer):
         super(UrbanLicencesLayer, self).setUp()
         with helpers.ploneSite() as portal:
             portal.setupCurrentSkin(portal.REQUEST)
+            setRequest(portal.REQUEST)
             helpers.applyProfile(portal, 'Products.urban:testsWithLicences')
 
 
@@ -105,6 +115,7 @@ class UrbanImportsLayer(IntegrationTesting):
     def setUp(self):
         with helpers.ploneSite() as portal:
             portal.setupCurrentSkin(portal.REQUEST)
+            setRequest(portal.REQUEST)
             Products.urban.config.NIS = '92000'  # mock NIS code
             helpers.applyProfile(portal, 'Products.urban:tests-imports')
 
@@ -131,6 +142,7 @@ class UrbanWithUsersFunctionalLayer(FunctionalTesting):
         Products.GenericSetup.tool.DEFAULT_DEPENDENCY_STRATEGY = DEPENDENCY_STRATEGY_NEW
         with helpers.ploneSite() as portal:
             portal.setupCurrentSkin(portal.REQUEST)
+            setRequest(portal.REQUEST)
             from Products.urban.setuphandlers import addTestUsers
             addTestUsers(portal)
 
@@ -150,6 +162,7 @@ class UrbanConfigFunctionalLayer(UrbanWithUsersFunctionalLayer):
         super(UrbanConfigFunctionalLayer, self).setUp()
         with helpers.ploneSite() as portal:
             portal.setupCurrentSkin(portal.REQUEST)
+            setRequest(portal.REQUEST)
             helpers.applyProfile(portal, 'Products.urban:testsWithConfig')
 
 
@@ -168,6 +181,7 @@ class UrbanLicencesFunctionalLayer(UrbanConfigFunctionalLayer):
         super(UrbanLicencesFunctionalLayer, self).setUp()
         with helpers.ploneSite() as portal:
             portal.setupCurrentSkin(portal.REQUEST)
+            setRequest(portal.REQUEST)
             helpers.applyProfile(portal, 'Products.urban:testsWithLicences')
 
 

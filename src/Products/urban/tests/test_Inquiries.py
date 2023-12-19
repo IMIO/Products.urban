@@ -1,13 +1,14 @@
 #  -*- coding: utf-8 -*-
+
 from OFS.ObjectManager import BeforeDeleteException
-
-from Products.urban.testing import URBAN_TESTS_LICENCES
 from Products.urban.testing import URBAN_TESTS_CONFIG_FUNCTIONAL
+from Products.urban.testing import URBAN_TESTS_LICENCES
 from Products.urban.tests.helpers import BrowserTestCase
-
 from plone import api
 from plone.app.testing import login
 from plone.testing.z2 import Browser
+from zope.globalrequest import getRequest
+from zope.globalrequest import setRequest
 
 import transaction
 import unittest
@@ -32,6 +33,8 @@ class TestBuildLicenceInquiries(unittest.TestCase):
         #  create un inquiry event
         self.licence.createUrbanEvent('enquete-publique')
         transaction.commit()
+        if not getRequest():
+            setRequest(self.portal.REQUEST)
 
     def _addInquiry(self):
         """
@@ -200,6 +203,8 @@ class TestCODTInquiries(BrowserTestCase):
         default_password = self.layer.default_password
         self.browser = Browser(self.portal)
         self.browserLogin(default_user, default_password)
+        if not getRequest():
+            setRequest(self.portal.REQUEST)
 
     def testInquiryAddButtonIsVisible(self):
         licence_types = ['codt_integratedlicences', 'codt_uniquelicences', 'codt_buildlicences']

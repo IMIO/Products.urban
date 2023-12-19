@@ -484,10 +484,34 @@
         profile="Products.urban:default" />
 
     <gs:upgradeStep
-        title="Add justice contacts"
-        description="Add justice contacts"
+        title="Remove generation link viewlet"
+        description="Remove generation link viewlet that are not longer usefull"
         source="1131"
         destination="1132"
+        handler=".update_260.remove_generation_link_viewlet"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Fix opinion schedule column"
+        description="Fix opinion schedule column"
+        source="1132"
+        destination="1133"
+        handler=".update_260.fix_opinion_schedule_column"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Fix opinion workflow"
+        description="Fix opinion workflow"
+        source="1133"
+        destination="1134"
+        handler=".update_260.fix_opinion_workflow"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Add justice contacts"
+        description="Add justice contacts"
+        source="1134"
+        destination="1135"
         handler=".update_260.add_justice_contacts"
         profile="Products.urban:default" />
 

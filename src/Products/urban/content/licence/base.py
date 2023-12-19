@@ -22,6 +22,7 @@ from Products.urban.interfaces import IWorklocationSignaletic
 from Products.urban.interfaces import IUrbanEvent
 from Products.urban.utils import getCurrentFolderManager as currentFolderManager
 from Products.urban.utils import removeItems
+from Products.urban.utils import convert_to_utf8
 from plone import api
 from zope.component import queryAdapter
 from zope.component import getUtility
@@ -189,9 +190,9 @@ class UrbanBase(object):
                 signaletic = '<p><strong>%s</strong>' % fm.getSignaletic(short=True)
             if withGrade:
                 if withParenthesis:
-                    signaletic += ' (%s)' % self.displayValue(fm.Vocabulary('grade')[0], fm.getGrade()).encode('utf8')
+                    signaletic += ' (%s)' % self.displayValue(fm.Vocabulary('grade')[0], fm.getGrade())
                 else:
-                    signaletic += ' %s' % self.displayValue(fm.Vocabulary('grade')[0], fm.getGrade()).encode('utf8')
+                    signaletic += ' %s' % self.displayValue(fm.Vocabulary('grade')[0], fm.getGrade())
             if withEmail:
                 signaletic += '<br />%s' % fm.getEmail()
             if withTel:
@@ -334,7 +335,7 @@ class UrbanBase(object):
             if street.portal_type == 'Locality':
                 signaletic += '%s ' % translate('locality_for_worklocation', 'urban', context=self.REQUEST, default='locality').encode('utf8')
             if number:
-                signaletic += "%s %s à %s %s" % (streetName, number, city.getZipCode(), city.Title())
+                signaletic += "%s %s à %s %s" % (streetName, convert_to_utf8(number), city.getZipCode(), city.Title())
             else:
                 signaletic += "%s - %s %s" % (streetName, city.getZipCode(), city.Title())
             if auto_back_to_the_line:
@@ -372,7 +373,7 @@ class UrbanBase(object):
             streetName = street.getStreetName()
             number = wl['number']
             if number:
-                signaletic = '{} {} {}'.format(signaletic, streetName, number)
+                signaletic = '{} {} {}'.format(signaletic, streetName, convert_to_utf8(number))
             else:
                 signaletic = '{} {}'.format(signaletic, streetName)
 

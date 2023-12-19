@@ -1,12 +1,16 @@
 # -*- coding: utf-8 -*-
+
 from Products.urban import URBAN_TYPES
 from Products.urban.testing import URBAN_TESTS_CONFIG
 from Products.urban.testing import URBAN_TESTS_CONFIG_FUNCTIONAL
 from Products.urban.tests.helpers import BrowserTestCase
-
 from plone import api
 from plone.app.testing import login
 from plone.testing.z2 import Browser
+from zope.event import notify
+from zope.globalrequest import getRequest
+from zope.globalrequest import setRequest
+from zope.lifecycleevent import ObjectCreatedEvent
 
 import re
 import transaction
@@ -15,6 +19,7 @@ import transaction
 class TestUrbanConfig(BrowserTestCase):
 
     layer = URBAN_TESTS_CONFIG
+    maxDiff = 999
 
     def setUp(self):
         portal = self.layer['portal']
@@ -27,6 +32,8 @@ class TestUrbanConfig(BrowserTestCase):
         self.browser = Browser(self.portal)
         self.browserLogin(default_user, default_password)
         self.browser.handleErrors = False
+        if not getRequest():
+            setRequest(self.portal.REQUEST)
 
     def test_urbanconfig_view_display(self):
         """
@@ -81,6 +88,8 @@ class TestUrbanConfigFunctional(BrowserTestCase):
         self.browser = Browser(self.portal)
         self.browserLogin(default_user, default_password)
         self.browser.handleErrors = False
+        if not getRequest():
+            setRequest(self.portal.REQUEST)
 
     def test_foldermanagers_view_sorting(self):
         fm_folder = self.portal.portal_urban.foldermanagers
@@ -122,8 +131,9 @@ class TestUrbanConfigFunctional(BrowserTestCase):
     def test_foldermanagers_default_manageablelicences(self):
         fm_folder = self.portal.portal_urban.foldermanagers
         with api.env.adopt_roles(['Manager']):
-            foldermanagertest = api.content.create(
-                type='FolderManager', container=fm_folder, id='foldermanagertest',
+            foldermanagertest = fm_folder.invokeFactory(
+                'FolderManager', id='foldermanagertest',
                 name1='Dujardin', name2='Jan', grade='agent-technique'
             )
+            foldermanagertest = getattr(fm_folder, foldermanagertest)
             self.assertEqual(foldermanagertest.manageableLicences, tuple(URBAN_TYPES))

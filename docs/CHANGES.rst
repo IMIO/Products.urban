@@ -8,6 +8,196 @@ Changelog
 
 .. towncrier release notes start
 
+2.6.20 (2023-12-12)
+-------------------
+
+Bug fixes:
+
+
+- Fix street number with specia character in unicode
+  [jchandelle] (URB-2948)
+
+
+2.6.19 (2023-12-04)
+-------------------
+
+Bug fixes:
+
+
+- Fix an issue with Products.ZCTextIndex that was interpreting `NOT` as token instead of a word for notary letter references
+  [mpeeters] (MURBARLA-25)
+
+
+2.6.18 (2023-11-23)
+-------------------
+
+Bug fixes:
+
+
+- Add `fix_schedule_config` external method ta fix class of condition objects
+  [mpeeters] (SUP-33739)
+
+
+2.6.17 (2023-11-16)
+-------------------
+
+Bug fixes:
+
+
+- Adapt opinion request worklflow to bypass guard check for managers
+  [mpeeters] (SUP-33308)
+
+
+Internal:
+
+
+- Provide getFirstAcknowledgment method
+  [fngaha] (SUP-32215)
+
+
+2.6.16 (2023-11-06)
+-------------------
+
+Bug fixes:
+
+
+- Fix serializer to include disable street in uid resolver
+  [jchandelle] (MURBMSGA-37)
+- Fix street search to include disable street
+  [jchandelle] (URB-2696)
+
+
+2.6.15 (2023-10-12)
+-------------------
+
+Internal:
+
+
+- Fix tests
+  [mpeeters] (URB-2855)
+- Improve performances for add views
+  [mpeeters] (URB-2903)
+
+
+2.6.14 (2023-09-13)
+-------------------
+
+Bug fixes:
+
+
+- Avoid an error if a vocabulary value was removed, instead log the removed value and display the key to the user
+  [mpeeters] (SUP-32338)
+
+
+Internal:
+
+
+- Reduce logging for sql queries
+  [mpeeters] (URB-2788)
+- Fix tests
+  [mpeeters] (URB-2855)
+
+
+2.6.13 (2023-09-05)
+-------------------
+
+Bug fixes:
+
+
+- Move catalog import in urban type profile
+  [jchandelle] (URB-2868)
+- Fix facet config xml
+  [jchandelle] (URB-2870)
+
+
+2.6.12 (2023-09-01)
+-------------------
+
+Bug fixes:
+
+
+- Fix new urban instance install
+  [jchandelle] (URB-2868)
+- Fix facet xml configuration
+  [jchandelle] (URB-2870)
+
+
+2.6.11 (2023-08-29)
+-------------------
+
+Bug fixes:
+
+
+- Fix icon tag in table
+  [jchandelle] (SUP-31983)
+
+
+2.6.10 (2023-08-28)
+-------------------
+
+Bug fixes:
+
+
+- Avoid an error if a task was not correctly removed from catalog
+  [mpeeters] (URB-2873)
+
+
+2.6.9 (2023-08-27)
+------------------
+
+Bug fixes:
+
+
+- Fix UnicodeDecodeError on getFolderManagersSignaletic(withGrade=True)
+  [fngaha] (URB-2871)
+
+
+2.6.8 (2023-08-24)
+------------------
+
+Bug fixes:
+
+
+- fix select2 widget on folder manager
+  [jchandelle] (SUP-31898)
+- Fix opinion schedules assigned user column
+  [mpeeters] (URB-2819)
+
+
+2.6.7 (2023-08-14)
+------------------
+
+Bug fixes:
+
+
+- Hide old document generation links viewlet
+  [mpeeters] (URB-2864)
+
+
+2.6.6 (2023-08-10)
+------------------
+
+Bug fixes:
+
+
+- Fix an issue with autocomplete view results format that was generating javascript errors
+  [mpeeters] (SUP-31682)
+
+
+2.6.5 (2023-07-27)
+------------------
+
+Bug fixes:
+
+
+- Avoid errors on inexpected values on licences and log them
+  [mpeeters] (SUP-31554)
+- Fix translation for road adaptation vocabulary values
+  [mpeeters] (URB-2575)
+- Avoid an error if a vocabulary does not exist, this can happen when multiple upgrade steps interract with vocabularies
+  [mpeeters] (URB-2835)
+
+
 2.6.4 (2023-07-24)
 ------------------
 

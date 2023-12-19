@@ -602,7 +602,13 @@ class GenerationColumn(LinkColumn):
     def renderCell(self, item):
         if not self.has_mailing(item):
             return ''
-        return super(GenerationColumn, self).renderCell(item)
+        return '<a href="%s"%s%s%s>%s</a>' % (
+            escape(self.getLinkURL(item)),
+            self.getLinkTarget(item),
+            self.getLinkCSS(item),
+            self.getLinkTitle(item),
+            self.getLinkContent(item),
+        )
 
 
 class InspectionReportVisitDate(UrbanColumn):

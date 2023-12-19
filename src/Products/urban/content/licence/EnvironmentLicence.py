@@ -292,6 +292,9 @@ class EnvironmentLicence(BaseFolder, EnvironmentBase, BrowserDefaultMixin):
     def getLastMissingPartTransmitToSPW(self):
         return self.getLastEvent(interfaces.IMissingPartTransmitToSPWEvent)
 
+    def getFirstAcknowledgment(self):
+        return self.getFirstEvent(interfaces.IAcknowledgmentEvent)
+
     def getLastAcknowledgment(self):
         return self.getLastEvent(interfaces.IAcknowledgmentEvent)
 

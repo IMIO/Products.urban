@@ -1,14 +1,16 @@
 # -*- coding: utf-8 -*-
+
 from Products.urban import utils
 from Products.urban.interfaces import ICODT_BaseBuildLicence
 from Products.urban.testing import URBAN_TESTS_INTEGRATION
 from Products.urban.testing import URBAN_TESTS_LICENCES_FUNCTIONAL
 from Products.urban.tests.helpers import SchemaFieldsTestCase
-
 from plone import api
 from plone.app.testing import login
 from plone.testing.z2 import Browser
 from time import sleep
+from zope.globalrequest import getRequest
+from zope.globalrequest import setRequest
 
 import transaction
 import unittest
@@ -24,6 +26,8 @@ class TestBuildLicence(unittest.TestCase):
         self.buildlicence = portal.urban.buildlicences.objectValues('BuildLicence')[0]
         self.portal_urban = portal.portal_urban
         login(portal, 'urbaneditor')
+        if not getRequest():
+            setRequest(self.portal.REQUEST)
 
     def testLicenceTitleUpdate(self):
         # verify that the licence title update correctly when we add or remove applicants/proprietaries
@@ -53,13 +57,13 @@ class TestBuildLicence(unittest.TestCase):
         # check that the licence updateTitle method add all proprietaries on inspections titles
         inspection_expl = self.portal.urban.inspections.objectValues('Inspection')[0]
         # for the inspection the proprietary is before inspection name
-        self.assertTrue(inspection_expl.Title().endswith('/1 - Mes Smith & Wesson - - Exemple Inspection'))
+        self.assertTrue(inspection_expl.Title().endswith('/1 - Mes Smith & Wesson - Exemple Inspection'))
         # add proprietary
         inspection_expl.invokeFactory('Proprietary', 'new_proprietary', name1='Chuck', name2='Norris')
         # call updateTitle()
         inspection_expl.updateTitle()
         self.assertTrue(inspection_expl.Title().endswith(
-            '/1 - Mes Smith & Wesson,  Chuck Norris - - Exemple Inspection'))
+            '/1 - Mes Smith & Wesson,  Chuck Norris - Exemple Inspection'))
 
     def test_LicenceUpdateTitleForNotaryLetter(self):
         # check that the licence updateTitle method add all proprietaries and notaries on notary letters titles
@@ -217,9 +221,13 @@ class TestBuildLicenceFields(SchemaFieldsTestCase):
 
         self.browser = Browser(self.portal)
         self.browserLogin(default_user, default_password)
+        if not getRequest():
+            setRequest(self.portal.REQUEST)
 
     def tearDown(self):
         with api.env.adopt_roles(['Manager']):
+            if not getRequest():
+                setRequest(self.portal.REQUEST)
             for licence in self.licences:
                 api.content.delete(licence)
         transaction.commit()
@@ -286,7 +294,7 @@ class TestBuildLicenceFields(SchemaFieldsTestCase):
     def test_impactStudy_is_visible(self):
         for licence in self.licences:
             msg = "field 'impactStudy' not visible on {}".format(licence.getPortalTypeName())
-            self._is_field_visible("<span>Étude d'incidences?</span>:", licence, msg)
+            self._is_field_visible("<span>Étude d'incidences ?</span>:", licence, msg)
 
     def test_has_attribute_implantation(self):
         field_name = 'implantation'
@@ -329,6 +337,6 @@ class TestBuildLicenceFields(SchemaFieldsTestCase):
 
     def test_representativeContacts_is_visible(self):
         msg = "field 'representativeContacts' not visible on CODT ParcelOutLicence"
-        self._is_field_visible("<legend>Représentant(s)</legend>", obj= self.licences[3], msg=msg)
+        self._is_field_visible("<legend>Architecte(s) ou géomètre(s)</legend>", obj= self.licences[3], msg=msg)
         msg = "field 'representativeContacts' not visible on CODT BuildLicence"
-        self._is_field_visible("<legend>Représentant(s)</legend>", obj= self.licences[2], msg=msg)
+        self._is_field_visible("<legend>Architecte(s) ou géomètre(s)</legend>", obj= self.licences[2], msg=msg)

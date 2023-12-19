@@ -141,6 +141,9 @@ class ParcelOutLicence(BaseFolder, BaseBuildLicence, BrowserDefaultMixin):
     def getLastWalloonRegionOpinionRequest(self):
         return self.getLastEvent(interfaces.IWalloonRegionOpinionRequestEvent)
 
+    def getFirstAcknowledgment(self):
+        return self.getFirstEvent(interfaces.IAcknowledgmentEvent)
+
     def getLastAcknowledgment(self):
         return self.getLastEvent(interfaces.IAcknowledgmentEvent)
 
