@@ -46,7 +46,7 @@ optional_fields = [
     'roadTechnicalAdvice', 'locationTechnicalAdvice', 'additionalLegalConditions',
     'businessOldLocation', 'applicationReasons', 'validityDelay',
     'environmentTechnicalRemarks', 'rubricsDetails', 'referenceFT',
-    'divergences', 'divergenceDetails'
+    'divergences', 'divergenceDetails', 'prorogation'
 ]
 
 slave_fields_natura2000 = (
@@ -70,6 +70,15 @@ slave_fields_procedurechoice = (
         'control_param': 'values',
     },
 
+)
+
+slave_fields_prorogation = (
+    {
+        'name': 'annoncedDelay',
+        'action': 'value',
+        'vocab_method': 'getProrogationDelays',
+        'control_param': 'values',
+    },
 )
 
 ##/code-section module-header
@@ -293,6 +302,15 @@ schema = Schema((
         default=False,
         widget=BooleanField._properties['widget'](
             label=_('urban_label_istransferoflicence', default='IsTransferOfLicence'),
+        ),
+        schemata='urban_description',
+    ),
+    BooleanField(
+        name='prorogation',
+        default=False,
+        widget=MasterBooleanWidget(
+            slave_fields=slave_fields_prorogation,
+            label=_('urban_label_prorogation', default='Prorogation'),
         ),
         schemata='urban_description',
     ),
@@ -523,6 +541,24 @@ class EnvironmentBase(BaseFolder, GenericLicence, CODT_UniqueLicenceInquiry, Bro
         selection = [v['val'] for v in values if v['selected']]
         show = 'article65' in selection
         return show
+
+    def getProrogationDelays(self, *values):
+        procedure_choice = [{'val': self.getProcedureChoice(), 'selected': True}]
+        base_delay = self.getProcedureDelays(*procedure_choice)
+        if self.prorogation:
+            base_delay = '{}j'.format(str(int(base_delay[:-1]) - 30))
+
+        return self._getProrogationDelays(base_delay, values)
+
+    def _getProrogationDelays(self, base_delay, values):
+        if False in values:
+            return base_delay
+
+        prorogated_delay = ''
+        if base_delay:
+            prorogated_delay = '{}j'.format(str(int(base_delay[:-1]) + 30))
+
+        return prorogated_delay
 
 
 registerType(EnvironmentBase, PROJECTNAME)
