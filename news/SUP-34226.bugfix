@@ -1,0 +1,2 @@
+Fix an issue with Postgis `ST_MemUnion` by using `ST_Union` instead that also improve performances
+[mpeeters]

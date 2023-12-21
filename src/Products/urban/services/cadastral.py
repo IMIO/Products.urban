@@ -225,7 +225,7 @@ class CadastreSession(SQLSession):
         """
         capa = self.tables.capa
 
-        query_geom = self.session.query(func.ST_AsText(func.ST_MemUnion(capa.the_geom).label('geo_union')))
+        query_geom = self.session.query(func.ST_AsText(func.ST_Union(capa.the_geom).label('geo_union')))
 
         parcel_filters = []
         for parcel in parcels:
@@ -244,7 +244,7 @@ class CadastreSession(SQLSession):
         capa = self.tables.capa
         parcels = self.tables.parcels
 
-        query_geom = self.session.query(func.ST_MemUnion(capa.the_geom).label('geo_union'))
+        query_geom = self.session.query(func.ST_Union(capa.the_geom).label('geo_union'))
 
         parcel_filters = []
         for parcel in center_parcels:
