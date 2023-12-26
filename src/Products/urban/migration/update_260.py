@@ -1,3 +1,6 @@
+from plone.registry.interfaces import IRegistry
+from zope.component import getUtility
+
 from plone import api
 import logging
 

@@ -248,7 +248,7 @@ msgstr ""
 #: ../browser/gig_coring_settings.py:79
 #: ../browser/offdays_settings.py:126
 msgid "Edit cancelled"
-msgstr ""
+msgstr "Edition annulée"
 
 #: ../profiles/default/actions.xml
 msgid "Emails"
@@ -697,6 +697,10 @@ msgstr "Décret Voirie"
 #: ../browser/offdays_settings.py:113
 msgid "Save"
 msgstr "Enregistrer"
+
+#: ../browser/schedule_settings.py:50
+msgid "Schedule alerts"
+msgstr "Alertes échéancier"
 
 #. Default: "imio.schedule"
 #: ../setuphandlers.py:338

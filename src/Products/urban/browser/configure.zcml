@@ -439,6 +439,13 @@
   />
 
   <browser:page
+      name="schedule-settings"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      class=".schedule_settings.ScheduleControlPanel"
+      permission="cmf.ManagePortal"
+  />
+
+  <browser:page
       name="gig_coring_settings"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       class=".gig_coring_settings.GigCoringLinkControlPanel"
