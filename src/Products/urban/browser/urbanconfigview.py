@@ -7,6 +7,7 @@ from Products.urban.setuphandlers import _create_task_configs
 from Products.urban.browser.table.urbantable import InternalOpinionServicesTable
 from Products.urban.browser.offdays_settings import OffDaysEditForm
 from Products.urban.browser.gig_coring_settings import GigCoringLinkEditForm
+from Products.urban.browser.schedule_settings import ScheduleEditForm
 
 from imio.schedule.content.object_factories import CreationConditionObject
 from imio.schedule.content.object_factories import RecurrenceConditionObject
@@ -33,6 +34,8 @@ class UrbanConfigView(BrowserView):
         self.internal_services_form.update()
         self.offdays_form = OffDaysEditForm(context, request)
         self.offdays_form.update()
+        self.schedule_form = ScheduleEditForm(context, request)
+        self.schedule_form.update()
         self.gig_coring_form = GigCoringLinkEditForm(context, request)
         self.gig_coring_form.update()
 
