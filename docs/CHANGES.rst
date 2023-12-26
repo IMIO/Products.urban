@@ -8,6 +8,33 @@ Changelog
 
 .. towncrier release notes start
 
+2.6.21 (2023-12-26)
+-------------------
+
+New features:
+
+
+- Add prosecution ref and ticket ref to Inspection
+  [ndemonte] (SUP-27127)
+- Underline close due dates
+  [ndemonte] (URB-2515)
+- Add stop worksite option to inspection report
+  [jchandelle] (URB-2827)
+- Remove reference FD field from preliminary notice
+  [jchandelle] (URB-2831)
+
+
+Bug fixes:
+
+
+- Validate CSV before claimant import
+  [daggelpop] (SUP-33538)
+- Fix an issue with Postgis `ST_MemUnion` by using `ST_Union` instead that also improve performances
+  [mpeeters] (SUP-34226)
+- Fix integrated licence creation by using unicode for regional authorities vocabulary
+  [jchandelle] (URB-2869)
+
+
 2.6.20 (2023-12-12)
 -------------------
 
