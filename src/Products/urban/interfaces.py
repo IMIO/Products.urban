@@ -29,11 +29,18 @@ class IGeometrician(Interface):
     """
 
 
+# not sure if it's used anywhere, may be related to removed code
+class IJusticeContact(Interface):
+    """Marker interface for JusticeContact
+    """
+
+
 CONTACT_INTERFACES = {
     'Architect': IArchitect,
     'Geometrician': IGeometrician,
     'Notary': INotary,  # to be taken into account if notary.py is removed
     'Proprietary': IProprietary,  # to be taken into account if proprietary.py is removed
+    'JusticeContact': IJusticeContact,
 }
 
 

@@ -25,6 +25,7 @@
           <element>notary</element>
           <element>parcelOutGeometricians</element>
           <element>basebuildlicenceRepresentativeContacts</element>
+          <element>ticketJusticeContacts</element>
           <element>recipients</element>
           <element>referenceableVocabularyTerm</element>
       </value>

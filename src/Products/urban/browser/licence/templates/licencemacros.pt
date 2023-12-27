@@ -79,6 +79,25 @@
 </fieldset>
 
 
+<fieldset metal:define-macro="urbanJusticeContactMacro" i18n:domain="urban" tal:define="justiceContacts here/getJusticeContacts">
+    <legend i18n:translate="urban_label_justiceContact">Justice contacts</legend>
+    <tal:loop repeat="justiceContact justiceContacts">
+        <div class="#" tal:attributes="class python: 'clear'">
+            <a href="#" tal:attributes="href python: justiceContact.absolute_url() + '?came_from_licence_uid=' + context.UID()">
+                <span tal:replace="python: justiceContact.getPersonTitle(short=True)" />
+                <span tal:replace="justiceContact/getName1|nothing" />
+                <span tal:replace="justiceContact/getName2|nothing" />
+                <span tal:condition="justiceContact/getSociety" tal:replace="justiceContact/getSociety|nothing" />
+            </a>
+            <br />
+            <span tal:content="python: justiceContact.getStreet()+' '+justiceContact.getNumber()" /><br />
+            <span tal:content="python: justiceContact.getZipcode()+' '+justiceContact.getCity()" /><br />
+            <span tal:content="python: justiceContact.getPhone()" /><br />
+        </div>
+    </tal:loop>
+</fieldset>
+
+
 <fieldset metal:define-macro="urbanProprietariesMacro" i18n:domain="urban">
     <legend i18n:translate="proprietaries">Proprietary(ies)</legend>
     <div class="#" tal:define="proprietaries context/getProprietaries"

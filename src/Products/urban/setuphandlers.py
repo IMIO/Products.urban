@@ -735,7 +735,7 @@ def setDefaultApplicationSecurity(context):
                 folder.manage_addLocalRoles("inspection_editors", ("Contributor", ))
 
     # objects application folder : "urban_readers" can read and "urban_editors" can edit...
-    objectsfolder_names = ['architects', 'geometricians', 'notaries', 'parcellings']
+    objectsfolder_names = ['architects', 'geometricians', 'notaries', 'parcellings', 'justicecontacts']
     for folder_name in objectsfolder_names:
         if hasattr(app_folder, folder_name):
             folder = getattr(app_folder, folder_name)
@@ -970,6 +970,20 @@ def addApplicationFolders(context):
         setFolderAllowedTypes(newSubFolder, 'Parcelling')
         newSubFolder.setLayout('parcellings_folderview')
     newFolder.moveObjectsToBottom(['parcellings'])
+
+    # add a folder that will contain justice contacts
+    if not hasattr(newFolder, "justicecontacts"):
+        newFolderid = newFolder.invokeFactory(
+            "Folder",
+            id="justicecontacts",
+            title=_("justice_contact_folder_title", 'urban')
+        )
+        newSubFolder = getattr(newFolder, newFolderid)
+        setFolderAllowedTypes(newSubFolder, 'JusticeContact')
+        newSubFolder.setLayout('justice_contact_folderview')
+        # manage the 'Add' permissions...
+        newSubFolder.manage_permission('urban: Add Contact', ['Manager', 'Editor', ], acquire=0)
+    newFolder.moveObjectsToBottom(['justicecontacts'])
 
 
 def disablePortletsFromConfiguration(context):
@@ -1230,6 +1244,14 @@ def addDefaultObjects(context):
         objects_list = default_objects['geometricians']
         createFolderDefaultValues(geoFolder, objects_list)
         logger.info("Geometricians examples have been added")
+
+    # add some justice contacts...
+    urbanFolder = getattr(site, "urban")
+    justiceFolder = getattr(urbanFolder, "justicecontacts")
+    if not justiceFolder.objectIds():
+        objects_list = default_objects['justicecontacts']
+        createFolderDefaultValues(justiceFolder, objects_list)
+        logger.info("Justice contact examples have been added")
 
     # add some parcellings...
     urbanFolder = getattr(site, "urban")

@@ -168,6 +168,18 @@ class ArchitectsTable(FolderContentTable, ContactTable):
     batchSize = 20
 
 
+class JusticeContactTable(FolderContentTable, ContactTable):
+    """
+     Same as a ContactTable.
+     We define our own class so we can implement a marker interface used to find
+     the correct translation for column headers
+    """
+    implements(interfaces.IJusticeContactTable)
+
+    batchSize = 20
+
+
+
 class ClaimantsTable(ContactTable):
     """
      Same as a ContactTable.
