@@ -134,14 +134,14 @@ class Couple(BaseContent, Applicant, BrowserDefaultMixin):
             self.getCouplePerson2Firstname(),
         )
 
-    def _getNameSignaletic(self, short, linebyline, reverse=False, invertnames=False):
+    def _getNameSignaletic(self, short, linebyline, reverse=False, invertnames=False, whithtitle=True):
         title = self.getPersonTitleValue(short, False, reverse).decode("utf8")
         lastNamePerson1 = self.getCouplePerson1Name().decode("utf-8")
         firstNamePerson1 = self.getCouplePerson1Firstname().decode("utf-8")
         lastNamePerson2 = self.getCouplePerson2Name().decode("utf-8")
         firstNamePerson2 = self.getCouplePerson2Firstname().decode("utf-8")
         namedefined = (
-            lastNamePerson1 or firstNamePerson1 or lastNamePerson2 or firstNamePerson2
+                lastNamePerson1 or firstNamePerson1 or lastNamePerson2 or firstNamePerson2
         )
         names = u"%s-%s %s et %s" % (
             lastNamePerson1,
@@ -159,7 +159,10 @@ class Couple(BaseContent, Applicant, BrowserDefaultMixin):
         names = names.strip()
         if namedefined:
             namepart = names
-        nameSignaletic = u"%s %s" % (title, namepart)
+        if whithtitle:
+            nameSignaletic = u"%s %s" % (title, namepart)
+        else:
+            nameSignaletic = u"%s" % (namepart)
         nameSignaletic = nameSignaletic.strip()
         if len(self.getRepresentedBy()) > 0:
             person_title = self.getPersonTitle(theObject=True)
@@ -177,12 +180,19 @@ class Couple(BaseContent, Applicant, BrowserDefaultMixin):
                     represented = u"représentée"
                 elif gender == "female" and multiplicity == "plural":
                     represented = u"représentées"
-            nameSignaletic = u"%s %s %s par %s" % (
-                title,
-                namepart,
-                represented,
-                representatives.decode("utf-8"),
-            )
+            if whithtitle:
+                nameSignaletic = u"%s %s %s par %s" % (
+                    title,
+                    namepart,
+                    represented,
+                    representatives.decode("utf-8"),
+                )
+            else:
+                nameSignaletic = u"%s %s par %s" % (
+                    namepart,
+                    represented,
+                    representatives.decode('utf-8'),
+                )
         if linebyline:
             # escape HTML special characters like HTML entities
             return cgi.escape(nameSignaletic)

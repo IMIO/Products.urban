@@ -216,7 +216,7 @@ class Corporation(BaseContent, Applicant, BrowserDefaultMixin):
         )
         return title
 
-    def _getNameSignaletic(self, short, linebyline, reverse=False, invertnames=False):
+    def _getNameSignaletic(self, short, linebyline, reverse=False, invertnames=False, whithtitle=True):
         title = self.getPersonTitleValue(short, False, reverse).decode("utf8")
         legalForm = self.getLegalForm().decode("utf8")
         denomination = self.getDenomination().decode("utf8")
@@ -226,19 +226,27 @@ class Corporation(BaseContent, Applicant, BrowserDefaultMixin):
         nameSignaletic = u"{} {}".format(legalForm, denomination)
         if linebyline:
             # escape HTML special characters like HTML entities
-            title = cgi.escape(title)
             legalForm = cgi.escape(legalForm)
             denomination = cgi.escape(denomination)
             firstName = cgi.escape(firstName)
             lastName = cgi.escape(lastName)
             personRole = cgi.escape(personRole)
-            nameSignaletic = u"%s %s<br />%s %s %s" % (
-                legalForm,
-                denomination,
-                title,
-                firstName,
-                lastName,
-            )
+            if whithtitle:
+                title = cgi.escape(title)
+                nameSignaletic = u"%s %s<br />%s %s %s" % (
+                    legalForm,
+                    denomination,
+                    title,
+                    firstName,
+                    lastName,
+                )
+            else:
+                nameSignaletic = u"%s %s<br />%s %s %s" % (
+                    legalForm,
+                    denomination,
+                    firstName,
+                    lastName,
+                )
         return nameSignaletic
 
 
