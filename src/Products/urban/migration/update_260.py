@@ -1,4 +1,5 @@
-from Products.urban.profiles.extra.config_default_values import default_values
+from plone.registry.interfaces import IRegistry
+from zope.component import getUtility
 
 from plone import api
 import logging
@@ -63,13 +64,3 @@ def fix_opinion_workflow(context):
     setup_tool = api.portal.get_tool('portal_setup')
     setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'workflow')
     logger.info("upgrade step done!")
-
-
-def update_delais_vocabularies(context):
-    """
-    """
-    logger = logging.getLogger('urban: update delais vocabularies')
-    logger.info("starting upgrade steps")
-    portal_setup = api.portal.get_tool('portal_setup')
-    portal_setup.runImportStepFromProfile('profile-Products.urban:extra', 'urban-update-vocabularies')
-    logger.info("upgrade done!")
