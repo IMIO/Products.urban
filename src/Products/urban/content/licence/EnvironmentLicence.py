@@ -240,7 +240,7 @@ class EnvironmentLicence(BaseFolder, EnvironmentBase, BrowserDefaultMixin):
             return selected_opinions
 
     security.declarePublic('getApplicantsSignaletic')
-    def getApplicantsSignaletic(self, withaddress=False):
+    def getApplicantsSignaletic(self, withaddress=False, whithtitle=True):
         """
           Returns a string representing the signaletic of every applicants
         """
@@ -250,7 +250,7 @@ class EnvironmentLicence(BaseFolder, EnvironmentBase, BrowserDefaultMixin):
             #if the signaletic is not empty, we are adding several applicants
             if signaletic:
                 signaletic += ' %s ' % translate('and', 'urban', context=self.REQUEST).encode('utf8')
-            signaletic += applicant.getSignaletic(withaddress=withaddress)
+            signaletic += applicant.getSignaletic(withaddress=withaddress, whithtitle=whithtitle)
         return signaletic
 
     security.declarePublic('updateTitle')

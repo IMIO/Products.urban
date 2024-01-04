@@ -250,13 +250,13 @@ class Contact(BaseContent, BrowserDefaultMixin):
             return "%s %s %s" % (self.getPersonTitle(short=True), name1, name2)
 
     security.declarePublic('getSignaletic')
-    def getSignaletic(self, short=False, withaddress=False, linebyline=False, reverse=False, remove_comma=False, inverted_address=False):
+    def getSignaletic(self, short=False, withaddress=False, linebyline=False, reverse=False, remove_comma=False, inverted_address=False, whithtitle=True):
         """
           Returns the contact base signaletic : title and names
         """
         urban_tool = api.portal.get_tool('portal_urban')
         invertnames = urban_tool.getInvertAddressNames()
-        nameSignaletic = self._getNameSignaletic(short, linebyline, reverse, invertnames)
+        nameSignaletic = self._getNameSignaletic(short, linebyline, reverse, invertnames, whithtitle=whithtitle)
         if not withaddress:
             if not linebyline:
                 return nameSignaletic
@@ -311,7 +311,7 @@ class Contact(BaseContent, BrowserDefaultMixin):
                 address = u'<p>%s<br />%s</p>' % (nameSignaletic, addressSignaletic)
                 return address
 
-    def _getNameSignaletic(self, short, linebyline, reverse=False, invertnames=False):
+    def _getNameSignaletic(self, short, linebyline, reverse=False, invertnames=False, whithtitle=True):
         title = self.getPersonTitleValue(short, False, reverse)
         name1 = self.getName1().decode('utf-8')
         name2 = self.getName2().decode('utf-8')
@@ -322,7 +322,10 @@ class Contact(BaseContent, BrowserDefaultMixin):
             names = u'%s %s' % (name2, name1)
         names = names.strip()
         namepart = namedefined and names or society
-        nameSignaletic = u'%s %s' % (title, namepart)
+        if whithtitle:
+            nameSignaletic = u'%s %s' % (title, namepart)
+        else:
+            nameSignaletic = u'%s' % (namepart)
         nameSignaletic = nameSignaletic.strip()
         if linebyline:
             #escape HTML special characters like HTML entities

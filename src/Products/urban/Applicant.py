@@ -276,7 +276,7 @@ class Applicant(BaseContent, Contact, BrowserDefaultMixin):
         vocabulary = [(contact.UID(), contact.Title(),) for contact in potential_contacts]
         return DisplayList(tuple(vocabulary))
 
-    def _getNameSignaletic(self, short, linebyline, reverse=False, invertnames=False):
+    def _getNameSignaletic(self, short, linebyline, reverse=False, invertnames=False, whithtitle=True):
         title = self.getPersonTitleValue(short, linebyline, reverse)
         name1 = self.getName1().decode('utf-8')
         name2 = self.getName2().decode('utf-8')
@@ -286,7 +286,10 @@ class Applicant(BaseContent, Contact, BrowserDefaultMixin):
             names = u'%s %s' % (name2, name1)
         names = names.strip()
         namepart = namedefined and names or self.getSociety().decode('utf-8')
-        nameSignaletic = u'%s %s' % (title, namepart)
+        if whithtitle:
+            nameSignaletic = u'%s %s' % (title, namepart)
+        else:
+            nameSignaletic = u'%s' % (namepart)
         if len(self.getRepresentedBy()) > 0 or self.getRepresentedBySociety():
             person_title = self.getPersonTitle(theObject=True)
             representatives = self.getRepresentedBySociety() and self.getSociety() or self.displayValue(self.Vocabulary('representedBy')[0], self.getRepresentedBy())
@@ -301,7 +304,10 @@ class Applicant(BaseContent, Contact, BrowserDefaultMixin):
                     represented = u'représentée'
                 elif gender == 'female' and multiplicity == 'plural':
                     represented = u'représentées'
-            nameSignaletic = u'%s %s %s par %s' % (title, namepart, represented, representatives.decode('utf-8'))
+            if whithtitle:
+                nameSignaletic = u'%s %s %s par %s' % (title, namepart, represented, representatives.decode('utf-8'))
+            else:
+                nameSignaletic = u'%s %s par %s' % (namepart, represented, representatives.decode('utf-8'))
         if linebyline:
             #escape HTML special characters like HTML entities
             return cgi.escape(nameSignaletic)
