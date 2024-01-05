@@ -504,7 +504,7 @@ class UrbanBase(object):
 
     security.declarePublic("getStreetAndNumber")
 
-    def getStreetAndNumber(self):
+    def getStreetAndNumber(self, separator=False):
         """
         Returns a string reprensenting the different streets and numbers
         """
@@ -513,11 +513,11 @@ class UrbanBase(object):
         if adress_signaletic_adapter:
             return adress_signaletic_adapter.get_street_and_number()
 
-        return self.getDefaultStreetAndNumber()
+        return self.getDefaultStreetAndNumber(separator)
 
     security.declarePublic("getDefaultStreetAndNumber")
 
-    def getDefaultStreetAndNumber(self):
+    def getDefaultStreetAndNumber(self, separator=False):
         """
         Returns a string reprensenting the different streets and numbers
         """
@@ -532,11 +532,33 @@ class UrbanBase(object):
             streetName = street.getStreetName()
             number = wl["number"]
             if number:
-                signaletic = "{} {} {}".format(
-                    signaletic, streetName, convert_to_utf8(number)
-                )
+                if separator:
+                    signaletic = "{} {}, {}".format(
+                        signaletic, streetName, convert_to_utf8(number)
+                    )
+                else:
+                    signaletic = "{} {} {}".format(
+                        signaletic, streetName, convert_to_utf8(number)
+                    )
             else:
                 signaletic = "{} {}".format(signaletic, streetName)
+
+        return signaletic
+
+    def getStreets(self):
+        """
+          Returns a string reprensenting the different streets
+        """
+        catalog = api.portal.get_tool("uid_catalog")
+        signaletic = ''
+
+        for wl in self.getWorkLocations():
+            street_brains = catalog(UID=wl['street'])
+            if not street_brains:
+                continue
+            street = street_brains[0].getObject()
+            streetName = street.getStreetName()
+            signaletic = '{} {}'.format(signaletic, streetName)
 
         return signaletic
 
