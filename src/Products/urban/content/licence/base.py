@@ -345,7 +345,7 @@ class UrbanBase(object):
 
     security.declarePublic('getStreetAndNumber')
 
-    def getStreetAndNumber(self, separator=False):
+    def getStreetAndNumber(self, separator=None):
         """
           Returns a string reprensenting the different streets and numbers
         """
@@ -358,7 +358,7 @@ class UrbanBase(object):
 
     security.declarePublic('getDefaultStreetAndNumber')
 
-    def getDefaultStreetAndNumber(self, separator=False):
+    def getDefaultStreetAndNumber(self, separator=None):
         """
           Returns a string reprensenting the different streets and numbers
         """
@@ -374,7 +374,7 @@ class UrbanBase(object):
             number = wl['number']
             if number:
                 if separator:
-                    signaletic = '{} {}, {}'.format(signaletic, streetName, convert_to_utf8(number))
+                    signaletic = '{} {}{} {}'.format(signaletic, streetName, separator, convert_to_utf8(number))
                 else:
                     signaletic = '{} {} {}'.format(signaletic, streetName, convert_to_utf8(number))
             else:
