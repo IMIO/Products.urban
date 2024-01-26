@@ -73,6 +73,7 @@ def add_streetcode_to_catalog(context):
     portal_setup.runImportStepFromProfile(
         "profile-Products.urban:urbantypes", "catalog"
     )
-    portal_catalog = api.portal.get_tool('portal_catalog')
-    portal_catalog.clearFindAndRebuild()
+    for brain in api.content.find(portal_type="Street"):
+        street = brain.getObject()
+        street.reindexObject(idxs=["getStreetCode"])
     logger.info("upgrade step done!")
