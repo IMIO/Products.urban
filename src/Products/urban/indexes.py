@@ -346,3 +346,11 @@ def eventconfig_urbaneventtype(event_config):
     """
     event_portal_type = event_config.getEventPortalType()
     return event_portal_type
+
+
+@indexer(interfaces.IStreet)
+def street_street_code(street):
+    street_code = getattr(street, "getStreetCode", None)
+    if not street_code:
+        raise AttributeError()
+    return street_code
