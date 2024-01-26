@@ -507,4 +507,12 @@
         handler=".update_260.fix_opinion_workflow"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Add streetcode to catalog"
+        description="Add streetcode to catalog"
+        source="1000"
+        destination="1001"
+        handler=".update_260.add_streetcode_to_catalog"
+        profile="Products.urban:urbantypes" />
+
 </configure>

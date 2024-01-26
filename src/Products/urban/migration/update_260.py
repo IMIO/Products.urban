@@ -64,3 +64,15 @@ def fix_opinion_workflow(context):
     setup_tool = api.portal.get_tool('portal_setup')
     setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'workflow')
     logger.info("upgrade step done!")
+
+
+def add_streetcode_to_catalog(context):
+    logger = logging.getLogger('urban: update opinion workflow')
+    logger.info("starting upgrade steps")
+    portal_setup = api.portal.get_tool("portal_setup")
+    portal_setup.runImportStepFromProfile(
+        "profile-Products.urban:urbantypes", "catalog"
+    )
+    portal_catalog = api.portal.get_tool('portal_catalog')
+    portal_catalog.clearFindAndRebuild()
+    logger.info("upgrade step done!")
