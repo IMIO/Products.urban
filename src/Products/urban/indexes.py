@@ -14,6 +14,7 @@ Stephan GEULETTE <stephan.geulette@uvcw.be>,
 Jean-Michel Abe <jm.abe@la-bruyere.be>"""
 __docformat__ = 'plaintext'
 
+from Acquisition import aq_inner
 from datetime import date
 from DateTime import DateTime
 
@@ -31,7 +32,7 @@ from plone.indexer import indexer
 from suds import WebFault
 
 from zope.component import queryAdapter
-
+from zope.interface import interface
 
 @indexer(interfaces.IApplicant)
 def applicant_applicantinfoindex(object):
@@ -348,9 +349,9 @@ def eventconfig_urbaneventtype(event_config):
     return event_portal_type
 
 
-@indexer(interfaces.IStreet)
-def street_street_code(street):
-    street_code = getattr(street, "getStreetCode", None)
+@indexer(interface)
+def streetcode_indexer(obj):
+    street_code = getattr(aq_inner(obj), "getStreetCode", None)
     if not street_code:
         raise AttributeError()
     return street_code
