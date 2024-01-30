@@ -532,14 +532,7 @@ class UrbanBase(object):
             streetName = street.getStreetName()
             number = wl["number"]
             if number:
-                if separator:
-                    signaletic = "{} {}{} {}".format(
-                        signaletic, streetName, separator, convert_to_utf8(number)
-                    )
-                else:
-                    signaletic = "{} {} {}".format(
-                        signaletic, streetName, convert_to_utf8(number)
-                    )
+                signaletic = "{} {}{} {}".format(signaletic, streetName, separator, convert_to_utf8(number))
             else:
                 signaletic = "{} {}".format(signaletic, streetName)
 
