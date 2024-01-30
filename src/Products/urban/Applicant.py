@@ -276,7 +276,7 @@ class Applicant(BaseContent, Contact, BrowserDefaultMixin):
         vocabulary = [(contact.UID(), contact.Title(),) for contact in potential_contacts]
         return DisplayList(tuple(vocabulary))
 
-    def _getNameSignaletic(self, short, linebyline, reverse=False, invertnames=False, whithtitle=True):
+    def _getNameSignaletic(self, short, linebyline, reverse=False, invertnames=False, withtitle=True):
         title = self.getPersonTitleValue(short, linebyline, reverse)
         name1 = self.getName1().decode('utf-8')
         name2 = self.getName2().decode('utf-8')
@@ -286,7 +286,7 @@ class Applicant(BaseContent, Contact, BrowserDefaultMixin):
             names = u'%s %s' % (name2, name1)
         names = names.strip()
         namepart = namedefined and names or self.getSociety().decode('utf-8')
-        if whithtitle:
+        if withtitle:
             nameSignaletic = u'%s %s' % (title, namepart)
         else:
             nameSignaletic = u'%s' % (namepart)
@@ -304,7 +304,7 @@ class Applicant(BaseContent, Contact, BrowserDefaultMixin):
                     represented = u'représentée'
                 elif gender == 'female' and multiplicity == 'plural':
                     represented = u'représentées'
-            if whithtitle:
+            if withtitle:
                 nameSignaletic = u'%s %s %s par %s' % (title, namepart, represented, representatives.decode('utf-8'))
             else:
                 nameSignaletic = u'%s %s par %s' % (namepart, represented, representatives.decode('utf-8'))
