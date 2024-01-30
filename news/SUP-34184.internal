@@ -1,4 +1,4 @@
-Improve merge fields SUP-34184
+Improve merge fields
 Provide a merge field that only returns streets
 Adapt the getStreetAndNumber method field to be able to receive a separation parameter between the street and the number
 [fngaha]
