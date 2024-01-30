@@ -517,7 +517,7 @@ class UrbanBase(object):
 
     security.declarePublic("getDefaultStreetAndNumber")
 
-    def getDefaultStreetAndNumber(self, separator=None):
+    def getDefaultStreetAndNumber(self, separator=''):
         """
         Returns a string reprensenting the different streets and numbers
         """
