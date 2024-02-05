@@ -32,7 +32,7 @@ from plone.indexer import indexer
 from suds import WebFault
 
 from zope.component import queryAdapter
-from zope.interface import interface
+from zope.interface import Interface
 
 @indexer(interfaces.IApplicant)
 def applicant_applicantinfoindex(object):
@@ -349,7 +349,7 @@ def eventconfig_urbaneventtype(event_config):
     return event_portal_type
 
 
-@indexer(interface)
+@indexer(Interface)
 def streetcode_indexer(obj):
     street_code = getattr(aq_inner(obj), "getStreetCode", None)
     if not street_code:
