@@ -8,6 +8,16 @@ Changelog
 
 .. towncrier release notes start
 
+2.6.22 (2024-02-05)
+-------------------
+
+New features:
+
+
+- Add index for street code
+  [jchandelle] (MURBFMAA-20)
+
+
 2.6.21 (2023-12-26)
 -------------------
 
