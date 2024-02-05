@@ -47,6 +47,12 @@
   </index>
   <column value="StreetsUID"/>
 
+  <index name="getStreetCode"
+           meta_type="KeywordIndex">
+    <indexed_attr value="getStreetCode"/>
+  </index>
+  <column value="getStreetCode"/>
+
   <column value="parcelInfosIndex"/>
   <index name="parcelInfosIndex" meta_type="KeywordIndex">
     <indexed_attr value="parcelInfosIndex"/>

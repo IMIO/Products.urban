@@ -28,6 +28,7 @@
   <adapter name="modified" factory=".indexes.genericlicence_modified" />
   <adapter name="Subject" factory=".indexes.licence_worktype" />
   <adapter name="cmf_uid" factory=".indexes.eventconfig_urbaneventtype" />
+  <adapter name="getStreetCode" factory=".indexes.streetcode_indexer" />
 
   <!-- Unindex UrbanEvent, UrbanDoc, Applicant and PortionOut -->
 
