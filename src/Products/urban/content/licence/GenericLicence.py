@@ -15,6 +15,7 @@ __docformat__ = "plaintext"
 
 from AccessControl import ClassSecurityInfo
 from zope.annotation import IAnnotations
+from datetime import datetime
 
 from Products.urban.widget.select2widget import MultiSelect2Widget
 from Products.MasterSelectWidget.MasterMultiSelectWidget import MasterMultiSelectWidget
@@ -1779,6 +1780,27 @@ class GenericLicence(OrderedBaseFolder, UrbanBase, BrowserDefaultMixin):
             return tickets
         return []
 
+    security.declarePublic("is_CODT2024")
+
+    def is_CODT2024(self):
+        """Return if we are in the new reform of CODT"""
+        deposit = self.getFirstDeposit()
+        if not deposit:
+            return False
+        if not deposit.eventDate:
+            return False
+        deposit_date = deposit.eventDate.asdatetime()
+        return deposit_date >= datetime(2024, 4, 1, tzinfo=deposit_date.tzinfo)
+
+    security.declarePublic("getProrogationDelay")
+
+    def getProrogationDelay(self):
+        """Return the delay in text based on the CODT reform"""
+        # Should filter on types as well
+        if self.is_CODT2024() is True:
+            return _("20 days")
+        else:
+            return _("30 days")
 
 registerType(GenericLicence, PROJECTNAME)
 # end of class GenericLicence
