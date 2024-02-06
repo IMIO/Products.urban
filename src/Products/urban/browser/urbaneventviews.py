@@ -891,3 +891,11 @@ class UrbanEventInquiryView(UrbanEventInquiryBaseView):
             if licence.getInquiry_category() == "B":
                 return 200
         return 50
+
+    def is_CODT2024(self):
+        licence = self.context.aq_parent
+        return licence.is_CODT2024()
+
+    def getProrogationDelay(self):
+        licence = self.context.aq_parent
+        return licence.getProrogationDelay()
