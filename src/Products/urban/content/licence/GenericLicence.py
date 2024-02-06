@@ -51,6 +51,7 @@ from Products.urban.interfaces import IUrbanEvent
 from Products.urban.utils import setOptionalAttributes
 from Products.urban.utils import get_interface_by_path
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
+from zope.globalrequest import getRequest
 
 from zope.component import createObject
 
@@ -1589,10 +1590,11 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
     def getProrogationDelay(self):
         """Return the delay in text based on the CODT reform"""
         # Should filter on types as well
+        request = getRequest()
         if self.is_CODT2024() is True:
-            return _("20 days")
+            return translate(_("20 days"), context=request)
         else:
-            return _("30 days")
+            return translate(_("30 days"), context=request)
 
 registerType(GenericLicence, PROJECTNAME)
 # end of class GenericLicence
