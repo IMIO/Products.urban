@@ -8,6 +8,16 @@ Changelog
 
 .. towncrier release notes start
 
+2.6.23 (2024-02-09)
+-------------------
+
+Bug fixes:
+
+
+- Fix reference validator for similar ref
+  [jchandelle] (URB-3012)
+
+
 2.6.22 (2024-02-05)
 -------------------
 
