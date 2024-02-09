@@ -67,6 +67,26 @@ class isNotDuplicatedReferenceValidator:
     def __init__(self, name):
         self.name = name
 
+    def _check_similar_licences_ref(
+        self,
+        context_ref,
+        context_licence,
+        similar_licences
+    ):
+        if not similar_licences:
+            return False
+
+        matching_references = []
+
+        for licence in similar_licences:
+            if licence.UID == context_licence.UID():
+                continue
+            if licence.getObject().getReference().lower() != context_ref.lower():
+                continue
+            matching_references.append(True)
+
+        return any(matching_references)
+
     def __call__(self, value, *args, **kwargs):
         licence = kwargs['instance']
         catalog = api.portal.get_tool('portal_catalog')
@@ -90,7 +110,7 @@ class isNotDuplicatedReferenceValidator:
             getReference="'{0}'".format(ref_num),  # Avoid an issue with NOT
             portal_type=types_to_check,
         )
-        if not similar_licences or (len(similar_licences) == 1 and licence.UID() == similar_licences[0].UID):
+        if not self._check_similar_licences_ref(value, licence, similar_licences):
             return 1
         return translate(
             _('error_reference', default=u"This reference has already been encoded")
