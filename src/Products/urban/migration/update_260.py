@@ -1,5 +1,6 @@
 from plone.registry.interfaces import IRegistry
 from zope.component import getUtility
+from imio.helpers.catalog import reindexIndexes
 
 from plone import api
 import logging
@@ -76,4 +77,12 @@ def add_streetcode_to_catalog(context):
     for brain in api.content.find(portal_type="Street"):
         street = brain.getObject()
         street.reindexObject(idxs=["getStreetCode"])
+    logger.info("upgrade step done!")
+
+
+def reindex_uid_catalog(context):
+    logger = logging.getLogger('urban: update opinion workflow')
+    logger.info("starting upgrade steps")
+    uid_catalog = api.portal.get_tool("uid_catalog")
+    reindexIndexes(None, idxs=uid_catalog.indexes(), catalog_id="uid_catalog")
     logger.info("upgrade step done!")
