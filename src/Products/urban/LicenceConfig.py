@@ -309,11 +309,12 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
                     res.append(
                         (
                             field.getName(),
-                            "%s%s" % (tab, self.utranslate(
+                            "%s%s" % (tab, translate(
                                 getattr(field.widget, 'label_msgid',
                                         field.widget.label),
                                 domain=getattr(field.widget, 'i18n_domain', None),
-                                default=field.widget.label)
+                                default=field.widget.label,
+                                context=self.REQUEST)
                             )
                         )
                     )
