@@ -8,6 +8,16 @@ Changelog
 
 .. towncrier release notes start
 
+2.6.24 (2024-02-13)
+-------------------
+
+Bug fixes:
+
+
+- Add upgrade step to reindex uid catalog
+  [jchandelle] (URB-3015)
+
+
 2.6.23 (2024-02-09)
 -------------------
 
