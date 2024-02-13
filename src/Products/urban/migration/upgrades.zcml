@@ -515,4 +515,12 @@
         handler=".update_260.add_streetcode_to_catalog"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Reindex uid in uid catalog"
+        description="Reindex uid in uid catalog"
+        source="1135"
+        destination="1136"
+        handler=".update_260.reindex_uid_catalog"
+        profile="Products.urban:default" />
+
 </configure>
