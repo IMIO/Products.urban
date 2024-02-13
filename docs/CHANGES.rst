@@ -8,6 +8,16 @@ Changelog
 
 .. towncrier release notes start
 
+2.6.25 (2024-02-13)
+-------------------
+
+Bug fixes:
+
+
+- Fix an issue with installation through collective.bigbang
+  [mpeeters] (URB-3016)
+
+
 2.6.24 (2024-02-13)
 -------------------
 
