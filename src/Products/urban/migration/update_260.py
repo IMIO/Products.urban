@@ -68,7 +68,7 @@ def fix_opinion_workflow(context):
 
 
 def add_streetcode_to_catalog(context):
-    logger = logging.getLogger('urban: update opinion workflow')
+    logger = logging.getLogger('urban: add getStreetCode index')
     logger.info("starting upgrade steps")
     portal_setup = api.portal.get_tool("portal_setup")
     portal_setup.runImportStepFromProfile(
@@ -81,7 +81,7 @@ def add_streetcode_to_catalog(context):
 
 
 def reindex_uid_catalog(context):
-    logger = logging.getLogger('urban: update opinion workflow')
+    logger = logging.getLogger('urban: reindex uid cataglog')
     logger.info("starting upgrade steps")
     uid_catalog = api.portal.get_tool("uid_catalog")
     reindexIndexes(None, idxs=uid_catalog.indexes(), catalog_id="uid_catalog")
