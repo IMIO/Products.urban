@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: urban\n"
-"POT-Creation-Date: 2024-02-06 09:40+0000\n"
+"POT-Creation-Date: 2024-02-14 20:02+0000\n"
 "PO-Revision-Date: Thu Jul 26 11:57:16 2007\n"
 "Last-Translator: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
 "Language-Team: Gauthier BASTIEN, Stephan GEULETTE, Jean-Michel Abe <gbastien@commune.sambreville.be, stephan.geulette@uvcw.be, jm.abe@la-bruyere.be>\n"
@@ -14,6 +14,10 @@ msgstr ""
 "Preferred-Encodings: utf-8\n"
 "Domain: urban\n"
 "X-is-fallback-for: fr-fr fr-be fr-ca\n"
+
+#: ../content/licence/GenericLicence.py:1606
+msgid "${nbr} days"
+msgstr "${nbr} jours"
 
 #: ../skins/urban_plone/create_UrbanEvent.cpy:56
 msgid "${tname} has been created."
@@ -40,10 +44,6 @@ msgstr "150 jours"
 msgid "1st class"
 msgstr "1ère classe : Collège provincial"
 
-#: ../content/licence/GenericLicence.py:1593
-msgid "20 days"
-msgstr "20 jours"
-
 #: ../content/licence/RoadDecree.py:289
 msgid "210 days"
 msgstr "210 jours"
@@ -51,10 +51,6 @@ msgstr "210 jours"
 #: ../content/licence/ExplosivesPossession.py:137
 msgid "2nd class"
 msgstr "2ème classe : Collège communal"
-
-#: ../content/licence/GenericLicence.py:1595
-msgid "30 days"
-msgstr "30 jours"
 
 #: ../content/licence/RoadDecree.py:286
 msgid "75 days"

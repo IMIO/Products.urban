@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2024-02-06 09:40+0000\n"
+"POT-Creation-Date: 2024-02-14 20:02+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -13,6 +13,10 @@ msgstr ""
 "Language-Name: English\n"
 "Preferred-Encodings: utf-8\n"
 "Domain: urban\n"
+
+#: ../content/licence/GenericLicence.py:1606
+msgid "${nbr} days"
+msgstr ""
 
 #: ../skins/urban_plone/create_UrbanEvent.cpy:56
 msgid "${tname} has been created."
@@ -39,20 +43,12 @@ msgstr ""
 msgid "1st class"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1593
-msgid "20 days"
-msgstr ""
-
 #: ../content/licence/RoadDecree.py:289
 msgid "210 days"
 msgstr ""
 
 #: ../content/licence/ExplosivesPossession.py:137
 msgid "2nd class"
-msgstr ""
-
-#: ../content/licence/GenericLicence.py:1595
-msgid "30 days"
 msgstr ""
 
 #: ../content/licence/RoadDecree.py:286
