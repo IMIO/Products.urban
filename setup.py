@@ -95,6 +95,7 @@ setup(
         "zope.sqlalchemy",
         "urban.restapi",
         "urban.vocabulary",
+        "urban.schedule",
         "python-dateutil",
         "PyMySQL",
     ],
