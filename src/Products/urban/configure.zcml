@@ -44,6 +44,7 @@
   <include package="plonetheme.imioapps"/>
   <include package="urban.vocabulary"/>
   <include package="urban.restapi"/>
+  <include package="urban.schedule"/>
 
   <include file="grok.zcml" />
   <include file="permissions.zcml" />
