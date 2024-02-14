@@ -1795,14 +1795,17 @@ class GenericLicence(OrderedBaseFolder, UrbanBase, BrowserDefaultMixin):
 
     security.declarePublic("getProrogationDelay")
 
-    def getProrogationDelay(self):
-        """Return the delay in text based on the CODT reform"""
+    def getProrogationDelay(self, text_format=True):
+        """Return the delay in text (default) or in integer based on the CODT reform"""
         # Should filter on types as well
         request = getRequest()
+        delay = 30
         if self.is_CODT2024() is True:
-            return translate(_("20 days"), context=request)
-        else:
-            return translate(_("30 days"), context=request)
+            delay = 20
+        if text_format is True:
+            return translate(_("${nbr} days", mapping={"nbr": delay}), context=request)
+        return delay
+
 
 registerType(GenericLicence, PROJECTNAME)
 # end of class GenericLicence
