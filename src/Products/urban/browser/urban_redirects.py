@@ -33,7 +33,10 @@ class UrbanRedirectsView(BrowserView):
             path = "urban"
 
         if user.getId() is not None:
-            user_groups = api.group.get_groups(user=user)
+            try:
+                user_groups = api.group.get_groups(user=user)
+            except AttributeError:  # This happen with admin user
+                user_groups = []
             group_ids = [g.id for g in user_groups]
             if "opinions_editors" in group_ids:
                 path = "urban/opinions_schedule"
