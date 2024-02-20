@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2024-02-14 20:02+0000\n"
+"POT-Creation-Date: 2024-02-20 15:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1132,7 +1132,7 @@ msgstr ""
 msgid "close_inspection"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1293
+#: ../content/licence/GenericLicence.py:1294
 msgid "close_prevention_area"
 msgstr ""
 
@@ -1498,7 +1498,7 @@ msgstr ""
 msgid "externaldecisions_folder_title"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1294
+#: ../content/licence/GenericLicence.py:1295
 msgid "far_prevention_area"
 msgstr ""
 
@@ -1546,35 +1546,35 @@ msgstr ""
 msgid "firefox_viewlet_title"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1325
+#: ../content/licence/GenericLicence.py:1326
 msgid "flooding_already_flooded"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1321
+#: ../content/licence/GenericLicence.py:1322
 msgid "flooding_axis_over_10"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1317
+#: ../content/licence/GenericLicence.py:1318
 msgid "flooding_axis_under_10"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1314
+#: ../content/licence/GenericLicence.py:1315
 msgid "flooding_level_high"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1312
+#: ../content/licence/GenericLicence.py:1313
 msgid "flooding_level_low"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1313
+#: ../content/licence/GenericLicence.py:1314
 msgid "flooding_level_moderate"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1310
+#: ../content/licence/GenericLicence.py:1311
 msgid "flooding_level_no"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1311
+#: ../content/licence/GenericLicence.py:1312
 msgid "flooding_level_verylow"
 msgstr ""
 
@@ -2154,7 +2154,7 @@ msgstr ""
 msgid "outdated_parcels_in_use"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1296
+#: ../content/licence/GenericLicence.py:1297
 msgid "outside_catchment"
 msgstr ""
 
@@ -2461,7 +2461,7 @@ msgstr ""
 msgid "subdivision_fieldset_legend"
 msgstr ""
 
-#: ../content/licence/GenericLicence.py:1295
+#: ../content/licence/GenericLicence.py:1296
 msgid "supervision_area"
 msgstr ""
 
@@ -2638,7 +2638,7 @@ msgid "urban_descr_states_to_end_all_tasks"
 msgstr ""
 
 #. Default: "Number of the lots, ..."
-#: ../content/licence/GenericLicence.py:719
+#: ../content/licence/GenericLicence.py:720
 msgid "urban_descr_subdivisionDetails"
 msgstr ""
 
@@ -2760,12 +2760,12 @@ msgid "urban_label_NotaryLetterNumerotation"
 msgstr ""
 
 #. Default: "Prenu"
-#: ../content/licence/GenericLicence.py:928
+#: ../content/licence/GenericLicence.py:929
 msgid "urban_label_PRenU"
 msgstr ""
 
 #. Default: "Prevu"
-#: ../content/licence/GenericLicence.py:950
+#: ../content/licence/GenericLicence.py:951
 msgid "urban_label_PRevU"
 msgstr ""
 
@@ -2775,12 +2775,12 @@ msgid "urban_label_ParcelOutLicenceNumerotation"
 msgstr ""
 
 #. Default: "Rcu"
-#: ../content/licence/GenericLicence.py:906
+#: ../content/licence/GenericLicence.py:907
 msgid "urban_label_RCU"
 msgstr ""
 
 #. Default: "sar"
-#: ../content/licence/GenericLicence.py:785
+#: ../content/licence/GenericLicence.py:786
 msgid "urban_label_SAR"
 msgstr ""
 
@@ -2807,7 +2807,7 @@ msgid "urban_label_SRS"
 msgstr ""
 
 #. Default: "Ssc"
-#: ../content/licence/GenericLicence.py:884
+#: ../content/licence/GenericLicence.py:885
 msgid "urban_label_SSC"
 msgstr ""
 
@@ -2898,12 +2898,12 @@ msgid "urban_label_adviceAgreementLevel"
 msgstr ""
 
 #. Default: "Airportnoisezone"
-#: ../content/licence/GenericLicence.py:1018
+#: ../content/licence/GenericLicence.py:1019
 msgid "urban_label_airportNoiseZone"
 msgstr ""
 
 #. Default: "Airportnoisezonedetails"
-#: ../content/licence/GenericLicence.py:1029
+#: ../content/licence/GenericLicence.py:1030
 msgid "urban_label_airportNoiseZoneDetails"
 msgstr ""
 
@@ -2980,7 +2980,7 @@ msgid "urban_label_architects"
 msgstr ""
 
 #. Default: "Areparcelsverified"
-#: ../content/licence/GenericLicence.py:1078
+#: ../content/licence/GenericLicence.py:1079
 msgid "urban_label_areParcelsVerified"
 msgstr ""
 
@@ -3099,12 +3099,12 @@ msgid "urban_label_businessOldLocation"
 msgstr ""
 
 #. Default: "Catchmentarea"
-#: ../content/licence/GenericLicence.py:427
+#: ../content/licence/GenericLicence.py:428
 msgid "urban_label_catchmentArea"
 msgstr ""
 
 #. Default: "Catchmentareadetails"
-#: ../content/licence/GenericLicence.py:437
+#: ../content/licence/GenericLicence.py:438
 msgid "urban_label_catchmentAreaDetails"
 msgstr ""
 
@@ -3234,12 +3234,12 @@ msgid "urban_label_composition"
 msgstr ""
 
 #. Default: "concentratedrunoffsrisk"
-#: ../content/licence/GenericLicence.py:475
+#: ../content/licence/GenericLicence.py:476
 msgid "urban_label_concentratedRunoffSRisk"
 msgstr ""
 
 #. Default: "concentratedrunoffsriskdetails"
-#: ../content/licence/GenericLicence.py:491
+#: ../content/licence/GenericLicence.py:492
 msgid "urban_label_concentratedRunoffSRiskDetails"
 msgstr ""
 
@@ -3301,7 +3301,7 @@ msgid "urban_label_coupleperson2name"
 msgstr ""
 
 #. Default: "COVID19"
-#: ../content/licence/GenericLicence.py:1135
+#: ../content/licence/GenericLicence.py:1136
 msgid "urban_label_covid"
 msgstr ""
 
@@ -3428,7 +3428,7 @@ msgstr ""
 #. Default: "Description"
 #: ../UrbanEvent.py:425
 #: ../content/licence/EnvironmentBase.py:311
-#: ../content/licence/GenericLicence.py:280
+#: ../content/licence/GenericLicence.py:281
 msgid "urban_label_description"
 msgstr ""
 
@@ -3502,13 +3502,18 @@ msgstr ""
 msgid "urban_label_endDate"
 msgstr ""
 
+#. Default: "EndValidity"
+#: ../UrbanVocabularyTerm.py:108
+msgid "urban_label_endValidity"
+msgstr ""
+
 #. Default: "enoughRoadEquipment"
-#: ../content/licence/GenericLicence.py:804
+#: ../content/licence/GenericLicence.py:805
 msgid "urban_label_enoughRoadEquipment"
 msgstr ""
 
 #. Default: "Enoughroadequipmentdetails"
-#: ../content/licence/GenericLicence.py:814
+#: ../content/licence/GenericLicence.py:815
 msgid "urban_label_enoughRoadEquipmentDetails"
 msgstr ""
 
@@ -3527,7 +3532,7 @@ msgid "urban_label_environmentTechnicalRemarks"
 msgstr ""
 
 #. Default: "Equipmentandroadrequirements"
-#: ../content/licence/GenericLicence.py:572
+#: ../content/licence/GenericLicence.py:573
 msgid "urban_label_equipmentAndRoadRequirements"
 msgstr ""
 
@@ -3606,12 +3611,12 @@ msgid "urban_label_exposant"
 msgstr ""
 
 #. Default: "expropriation"
-#: ../content/licence/GenericLicence.py:745
+#: ../content/licence/GenericLicence.py:746
 msgid "urban_label_expropriation"
 msgstr ""
 
 #. Default: "Expropriationdetails"
-#: ../content/licence/GenericLicence.py:753
+#: ../content/licence/GenericLicence.py:754
 msgid "urban_label_expropriationDetails"
 msgstr ""
 
@@ -3647,22 +3652,22 @@ msgid "urban_label_financial_caution"
 msgstr ""
 
 #. Default: "Floodinglevel"
-#: ../content/licence/GenericLicence.py:548
+#: ../content/licence/GenericLicence.py:549
 msgid "urban_label_floodingLevel"
 msgstr ""
 
 #. Default: "Floodingleveldetails"
-#: ../content/licence/GenericLicence.py:559
+#: ../content/licence/GenericLicence.py:560
 msgid "urban_label_floodingLevelDetails"
 msgstr ""
 
 #. Default: "Foldercategory"
-#: ../content/licence/GenericLicence.py:234
+#: ../content/licence/GenericLicence.py:235
 msgid "urban_label_folderCategory"
 msgstr ""
 
 #. Default: "Foldercategorytownship"
-#: ../content/licence/GenericLicence.py:1060
+#: ../content/licence/GenericLicence.py:1061
 msgid "urban_label_folderCategoryTownship"
 msgstr ""
 
@@ -3680,17 +3685,17 @@ msgid "urban_label_folderTendency"
 msgstr ""
 
 #. Default: "Folderzone"
-#: ../content/licence/GenericLicence.py:648
+#: ../content/licence/GenericLicence.py:649
 msgid "urban_label_folderZone"
 msgstr ""
 
 #. Default: "Folderzonedetails"
-#: ../content/licence/GenericLicence.py:659
+#: ../content/licence/GenericLicence.py:660
 msgid "urban_label_folderZoneDetails"
 msgstr ""
 
 #. Default: "Foldermanagers"
-#: ../content/licence/GenericLicence.py:1091
+#: ../content/licence/GenericLicence.py:1092
 msgid "urban_label_foldermanagers"
 msgstr ""
 
@@ -3718,7 +3723,7 @@ msgid "urban_label_function_department"
 msgstr ""
 
 #. Default: "Futureroadcoating"
-#: ../content/licence/GenericLicence.py:354
+#: ../content/licence/GenericLicence.py:355
 msgid "urban_label_futureRoadCoating"
 msgstr ""
 
@@ -3751,12 +3756,12 @@ msgid "urban_label_grade"
 msgstr ""
 
 #. Default: "Groundstatestatus"
-#: ../content/licence/GenericLicence.py:597
+#: ../content/licence/GenericLicence.py:598
 msgid "urban_label_groundStateStatus"
 msgstr ""
 
 #. Default: "Groundstatestatusdetails"
-#: ../content/licence/GenericLicence.py:607
+#: ../content/licence/GenericLicence.py:608
 msgid "urban_label_groundStateStatusDetails"
 msgstr ""
 
@@ -3944,12 +3949,12 @@ msgid "urban_label_isEssayProject"
 msgstr ""
 
 #. Default: "Isinpca"
-#: ../content/licence/GenericLicence.py:671
+#: ../content/licence/GenericLicence.py:672
 msgid "urban_label_isInPCA"
 msgstr ""
 
 #. Default: "Isinsubdivision"
-#: ../content/licence/GenericLicence.py:711
+#: ../content/licence/GenericLicence.py:712
 msgid "urban_label_isInSubdivision"
 msgstr ""
 
@@ -4007,12 +4012,12 @@ msgid "urban_label_is_internal_service"
 msgstr ""
 
 #. Default: "Karstconstraints"
-#: ../content/licence/GenericLicence.py:450
+#: ../content/licence/GenericLicence.py:451
 msgid "urban_label_karstConstraints"
 msgstr ""
 
 #. Default: "Karstconstraintsdetails"
-#: ../content/licence/GenericLicence.py:461
+#: ../content/licence/GenericLicence.py:462
 msgid "urban_label_karstConstraintsDetails"
 msgstr ""
 
@@ -4047,7 +4052,7 @@ msgid "urban_label_licencePortalType"
 msgstr ""
 
 #. Default: "Licencesubject"
-#: ../content/licence/GenericLicence.py:186
+#: ../content/licence/GenericLicence.py:187
 msgid "urban_label_licenceSubject"
 msgstr ""
 
@@ -4113,17 +4118,17 @@ msgid "urban_label_locationDgrneUnderground"
 msgstr ""
 
 #. Default: "Locationfloodinglevel"
-#: ../content/licence/GenericLicence.py:732
+#: ../content/licence/GenericLicence.py:733
 msgid "urban_label_locationFloodingLevel"
 msgstr ""
 
 #. Default: "Locationmissingparts"
-#: ../content/licence/GenericLicence.py:621
+#: ../content/licence/GenericLicence.py:622
 msgid "urban_label_locationMissingParts"
 msgstr ""
 
 #. Default: "Locationmissingpartsdetails"
-#: ../content/licence/GenericLicence.py:634
+#: ../content/licence/GenericLicence.py:635
 msgid "urban_label_locationMissingPartsDetails"
 msgstr ""
 
@@ -4155,7 +4160,7 @@ msgid "urban_label_locationTechnicalConditions"
 msgstr ""
 
 #. Default: "Locationtechnicalremarks"
-#: ../content/licence/GenericLicence.py:828
+#: ../content/licence/GenericLicence.py:829
 msgid "urban_label_locationTechnicalRemarks"
 msgstr ""
 
@@ -4205,12 +4210,12 @@ msgid "urban_label_missingPartDate"
 msgstr ""
 
 #. Default: "Missingparts"
-#: ../content/licence/GenericLicence.py:257
+#: ../content/licence/GenericLicence.py:258
 msgid "urban_label_missingParts"
 msgstr ""
 
 #. Default: "Missingpartsdetails"
-#: ../content/licence/GenericLicence.py:268
+#: ../content/licence/GenericLicence.py:269
 msgid "urban_label_missingPartsDetails"
 msgstr ""
 
@@ -4261,7 +4266,7 @@ msgid "urban_label_natura2000Details"
 msgstr ""
 
 #. Default: "natura_2000"
-#: ../content/licence/GenericLicence.py:538
+#: ../content/licence/GenericLicence.py:539
 msgid "urban_label_natura_2000"
 msgstr ""
 
@@ -4278,7 +4283,7 @@ msgid "urban_label_notaryContact"
 msgstr ""
 
 #. Default: "Noteworthytrees"
-#: ../content/licence/GenericLicence.py:1124
+#: ../content/licence/GenericLicence.py:1125
 msgid "urban_label_noteworthyTrees"
 msgstr ""
 
@@ -4375,7 +4380,7 @@ msgid "urban_label_owner"
 msgstr ""
 
 #. Default: "Parcellings"
-#: ../content/licence/GenericLicence.py:1113
+#: ../content/licence/GenericLicence.py:1114
 msgid "urban_label_parcellings"
 msgstr ""
 
@@ -4405,12 +4410,12 @@ msgid "urban_label_partie"
 msgstr ""
 
 #. Default: "Pash"
-#: ../content/licence/GenericLicence.py:405
+#: ../content/licence/GenericLicence.py:406
 msgid "urban_label_pash"
 msgstr ""
 
 #. Default: "Pashdetails"
-#: ../content/licence/GenericLicence.py:415
+#: ../content/licence/GenericLicence.py:416
 msgid "urban_label_pashDetails"
 msgstr ""
 
@@ -4468,17 +4473,17 @@ msgid "urban_label_paymentDeadline"
 msgstr ""
 
 #. Default: "Pca"
-#: ../content/licence/GenericLicence.py:678
+#: ../content/licence/GenericLicence.py:679
 msgid "urban_label_pca"
 msgstr ""
 
 #. Default: "Pcadetails"
-#: ../content/licence/GenericLicence.py:688
+#: ../content/licence/GenericLicence.py:689
 msgid "urban_label_pcaDetails"
 msgstr ""
 
 #. Default: "Pcazone"
-#: ../content/licence/GenericLicence.py:699
+#: ../content/licence/GenericLicence.py:700
 msgid "urban_label_pcaZone"
 msgstr ""
 
@@ -4523,12 +4528,12 @@ msgid "urban_label_phone"
 msgstr ""
 
 #. Default: "pipelines"
-#: ../content/licence/GenericLicence.py:516
+#: ../content/licence/GenericLicence.py:517
 msgid "urban_label_pipelines"
 msgstr ""
 
 #. Default: "Pipelinesdetails"
-#: ../content/licence/GenericLicence.py:527
+#: ../content/licence/GenericLicence.py:528
 msgid "urban_label_pipelinesDetails"
 msgstr ""
 
@@ -4581,17 +4586,17 @@ msgid "urban_label_postcode_locality"
 msgstr ""
 
 #. Default: "preemption"
-#: ../content/licence/GenericLicence.py:766
+#: ../content/licence/GenericLicence.py:767
 msgid "urban_label_preemption"
 msgstr ""
 
 #. Default: "Preemptiondetails"
-#: ../content/licence/GenericLicence.py:774
+#: ../content/licence/GenericLicence.py:775
 msgid "urban_label_preemptionDetails"
 msgstr ""
 
 #. Default: "Prenudetails"
-#: ../content/licence/GenericLicence.py:939
+#: ../content/licence/GenericLicence.py:940
 msgid "urban_label_prenuDetails"
 msgstr ""
 
@@ -4601,7 +4606,7 @@ msgid "urban_label_previousLicences"
 msgstr ""
 
 #. Default: "Prevudetails"
-#: ../content/licence/GenericLicence.py:961
+#: ../content/licence/GenericLicence.py:962
 msgid "urban_label_prevuDetails"
 msgstr ""
 
@@ -4632,12 +4637,12 @@ msgid "urban_label_prorogationModifiedBp"
 msgstr ""
 
 #. Default: "Protectedbuilding"
-#: ../content/licence/GenericLicence.py:859
+#: ../content/licence/GenericLicence.py:860
 msgid "urban_label_protectedBuilding"
 msgstr ""
 
 #. Default: "Protectedbuildingdetails"
-#: ../content/licence/GenericLicence.py:870
+#: ../content/licence/GenericLicence.py:871
 msgid "urban_label_protectedBuildingDetails"
 msgstr ""
 
@@ -4668,7 +4673,7 @@ msgid "urban_label_radical"
 msgstr ""
 
 #. Default: "Rcudetails"
-#: ../content/licence/GenericLicence.py:917
+#: ../content/licence/GenericLicence.py:918
 msgid "urban_label_rcuDetails"
 msgstr ""
 
@@ -4704,12 +4709,12 @@ msgid "urban_label_recourseDecisionDisplayDate"
 msgstr ""
 
 #. Default: "Reference"
-#: ../content/licence/GenericLicence.py:194
+#: ../content/licence/GenericLicence.py:195
 msgid "urban_label_reference"
 msgstr ""
 
 #. Default: "Referencedgatlp"
-#: ../content/licence/GenericLicence.py:203
+#: ../content/licence/GenericLicence.py:204
 msgid "urban_label_referenceDGATLP"
 msgstr ""
 
@@ -4801,12 +4806,12 @@ msgid "urban_label_relatedFields"
 msgstr ""
 
 #. Default: "Prevu"
-#: ../content/licence/GenericLicence.py:972
+#: ../content/licence/GenericLicence.py:973
 msgid "urban_label_reparcelling"
 msgstr ""
 
 #. Default: "Reparcellingdetails"
-#: ../content/licence/GenericLicence.py:983
+#: ../content/licence/GenericLicence.py:984
 msgid "urban_label_reparcellingDetails"
 msgstr ""
 
@@ -4864,12 +4869,12 @@ msgid "urban_label_reverseTitle"
 msgstr ""
 
 #. Default: "Rgbsr"
-#: ../content/licence/GenericLicence.py:995
+#: ../content/licence/GenericLicence.py:996
 msgid "urban_label_rgbsr"
 msgstr ""
 
 #. Default: "Rgbsrdetails"
-#: ../content/licence/GenericLicence.py:1007
+#: ../content/licence/GenericLicence.py:1008
 msgid "urban_label_rgbsrDetails"
 msgstr ""
 
@@ -4879,12 +4884,12 @@ msgid "urban_label_roadAdaptation"
 msgstr ""
 
 #. Default: "Roadanalysis"
-#: ../content/licence/GenericLicence.py:331
+#: ../content/licence/GenericLicence.py:332
 msgid "urban_label_roadAnalysis"
 msgstr ""
 
 #. Default: "Roadcoating"
-#: ../content/licence/GenericLicence.py:342
+#: ../content/licence/GenericLicence.py:343
 msgid "urban_label_roadCoating"
 msgstr ""
 
@@ -4894,7 +4899,7 @@ msgid "urban_label_roadDgrneUnderground"
 msgstr ""
 
 #. Default: "Roadequipments"
-#: ../content/licence/GenericLicence.py:373
+#: ../content/licence/GenericLicence.py:374
 msgid "urban_label_roadEquipments"
 msgstr ""
 
@@ -4904,12 +4909,12 @@ msgid "urban_label_roadMiscDescription"
 msgstr ""
 
 #. Default: "Roadmissingparts"
-#: ../content/licence/GenericLicence.py:293
+#: ../content/licence/GenericLicence.py:294
 msgid "urban_label_roadMissingParts"
 msgstr ""
 
 #. Default: "Roadmissingpartsdetails"
-#: ../content/licence/GenericLicence.py:304
+#: ../content/licence/GenericLicence.py:305
 msgid "urban_label_roadMissingPartsDetails"
 msgstr ""
 
@@ -4940,7 +4945,7 @@ msgid "urban_label_roadTechnicalAdvice"
 msgstr ""
 
 #. Default: "Roadtype"
-#: ../content/licence/GenericLicence.py:318
+#: ../content/licence/GenericLicence.py:319
 msgid "urban_label_roadType"
 msgstr ""
 
@@ -4959,7 +4964,7 @@ msgid "urban_label_rubricsDetails"
 msgstr ""
 
 #. Default: "Sardetails"
-#: ../content/licence/GenericLicence.py:793
+#: ../content/licence/GenericLicence.py:794
 msgid "urban_label_sarDetails"
 msgstr ""
 
@@ -4994,17 +4999,17 @@ msgid "urban_label_selectedField"
 msgstr ""
 
 #. Default: "sevesosite"
-#: ../content/licence/GenericLicence.py:505
+#: ../content/licence/GenericLicence.py:506
 msgid "urban_label_sevesoSite"
 msgstr ""
 
 #. Default: "Sewers"
-#: ../content/licence/GenericLicence.py:382
+#: ../content/licence/GenericLicence.py:383
 msgid "urban_label_sewers"
 msgstr ""
 
 #. Default: "Sewersdetails"
-#: ../content/licence/GenericLicence.py:393
+#: ../content/licence/GenericLicence.py:394
 msgid "urban_label_sewersDetails"
 msgstr ""
 
@@ -5060,7 +5065,7 @@ msgid "urban_label_sol_details"
 msgstr ""
 
 #. Default: "Solicitlocationopinionsto"
-#: ../content/licence/GenericLicence.py:1043
+#: ../content/licence/GenericLicence.py:1044
 msgid "urban_label_solicitLocationOpinionsTo"
 msgstr ""
 
@@ -5076,7 +5081,7 @@ msgid "urban_label_solicitOpinionsToOptional"
 msgstr ""
 
 #. Default: "Solicitroadopinionsto"
-#: ../content/licence/GenericLicence.py:842
+#: ../content/licence/GenericLicence.py:843
 msgid "urban_label_solicitRoadOpinionsTo"
 msgstr ""
 
@@ -5121,13 +5126,18 @@ msgid "urban_label_sqlUser"
 msgstr ""
 
 #. Default: "Sscdetails"
-#: ../content/licence/GenericLicence.py:895
+#: ../content/licence/GenericLicence.py:896
 msgid "urban_label_sscDetails"
 msgstr ""
 
 #. Default: "Startdate"
 #: Street.py
 msgid "urban_label_startDate"
+msgstr ""
+
+#. Default: "StartValidity"
+#: ../UrbanVocabularyTerm.py:99
+msgid "urban_label_startValidity"
 msgstr ""
 
 msgid "urban_label_states_to_end_all_tasks"
@@ -5166,7 +5176,7 @@ msgid "urban_label_subdividerName"
 msgstr ""
 
 #. Default: "Subdivisiondetails"
-#: ../content/licence/GenericLicence.py:722
+#: ../content/licence/GenericLicence.py:723
 msgid "urban_label_subdivisionDetails"
 msgstr ""
 
@@ -5206,7 +5216,7 @@ msgid "urban_label_tabsConfig"
 msgstr ""
 
 #. Default: "Tax"
-#: ../content/licence/GenericLicence.py:244
+#: ../content/licence/GenericLicence.py:245
 msgid "urban_label_tax"
 msgstr ""
 
@@ -5216,7 +5226,7 @@ msgid "urban_label_technicalAdvice"
 msgstr ""
 
 #. Default: "Technicalremarks"
-#: ../content/licence/GenericLicence.py:586
+#: ../content/licence/GenericLicence.py:587
 msgid "urban_label_technicalRemarks"
 msgstr ""
 
@@ -5278,7 +5288,7 @@ msgstr ""
 
 #. Default: "Title"
 #: ../UrbanTool.py:70
-#: ../content/licence/GenericLicence.py:175
+#: ../content/licence/GenericLicence.py:176
 msgid "urban_label_title"
 msgstr ""
 
@@ -5437,7 +5447,7 @@ msgstr ""
 #. Default: "Work locations"
 #: ../browser/licence/templates/worklocation_macro.pt:2
 #: ../content/licence/EnvClassBordering.py:29
-#: ../content/licence/GenericLicence.py:224
+#: ../content/licence/GenericLicence.py:225
 msgid "urban_label_workLocations"
 msgstr ""
 
