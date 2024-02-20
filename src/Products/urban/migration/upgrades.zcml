@@ -523,4 +523,13 @@
         handler=".update_260.reindex_uid_catalog"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Migrate vocabulary terms to include validity date"
+        description="Set validity end date for vocabulary that are deactivate"
+        source="1036"
+        destination="1037"
+        handler=".update_codt_2024.migrate_vocabulary_validity_date"
+        profile="Products.urban:default"
+        />
+
 </configure>
