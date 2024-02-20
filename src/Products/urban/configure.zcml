@@ -306,4 +306,11 @@
   <!-- ##code-section configure.zcml.core -->
   <!-- ##/code-section configure.zcml.core -->
 
+  <!-- subscribers -->
+  <subscriber
+    for=".interfaces.IUrbanVocabularyTerm
+           Products.DCWorkflow.interfaces.IAfterTransitionEvent"
+    handler=".wfsubscribers.after_term_deactivate"
+    />
+
 </configure>

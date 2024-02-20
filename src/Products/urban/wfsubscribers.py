@@ -16,6 +16,7 @@ __docformat__ = "plaintext"
 
 ##code-section module-header #fill in your manual code here
 from Products.CMFCore.utils import getToolByName
+from datetime import datetime
 
 ##/code-section module-header
 
@@ -85,9 +86,3 @@ def closeEveryUrbanEvents(obj):
     for urbanEvent in urbanEvents:
         if wft.getInfoFor(urbanEvent, "review_state") == "in_progress":
             wft.doActionFor(urbanEvent, "close")
-
-
-##/code-section module-header
-
-##code-section module-footer #fill in your manual code here
-##/code-section module-footer
