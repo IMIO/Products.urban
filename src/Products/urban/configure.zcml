@@ -318,4 +318,11 @@
 
   <i18n:registerTranslations directory="locales" />
 
+  <!-- subscribers -->
+  <subscriber
+    for=".interfaces.IUrbanVocabularyTerm
+           Products.DCWorkflow.interfaces.IAfterTransitionEvent"
+    handler=".wfsubscribers.after_term_deactivate"
+    />
+
 </configure>
