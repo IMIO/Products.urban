@@ -3683,6 +3683,14 @@ default_values = {
             {"id": "zoning2", "title": "Zoning 2"},
             {"id": "zoning3", "title": "Zoning 3"},
         ],
+
+        'investigations_radius': [
+            'UrbanVocabularyTerm',
+            {'id': "50m", 'title': u"50 m"},
+            {'id': "100m", 'title': u"100 m"},
+            {'id': "150m", 'title': u"150 m"},
+            {'id': "200m", 'title': u"200 m"},
+        ],
     },
     "Inspection": {
         "inspectioncontexts": [

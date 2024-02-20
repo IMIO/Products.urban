@@ -905,13 +905,4 @@ class UrbanEventInquiryView(UrbanEventInquiryBaseView):
 
     def getInquiryRadius(self):
         licence = self.context.aq_parent
-        if hasattr(licence, "hasEnvironmentImpactStudy"):
-            if licence.getHasEnvironmentImpactStudy():
-                return 200
-        if hasattr(licence, "impactStudy"):
-            if licence.getImpactStudy():
-                return 200
-        if hasattr(licence, "inquiry_category"):
-            if licence.getInquiry_category() == "B":
-                return 200
-        return 50
+        return int(licence.investigation_radius.split("m")[0])
