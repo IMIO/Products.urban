@@ -155,4 +155,13 @@
         handler=".update_240.migrate_flooding_level"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Migrate vocabulary terms to include validity date"
+        description="Set validity end date for vocabulary that are deactivate"
+        source="1004"
+        destination="1036"
+        handler=".update_codt_2024.migrate_vocabulary_validity_date"
+        profile="Products.urban:default"
+        />
+
 </configure>
