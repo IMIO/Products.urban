@@ -1573,6 +1573,14 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
             return roaddecrees
         return []
 
+    def get_first_deposit_date(self):
+        deposit = self.getFirstDeposit()
+        if not deposit:
+            return
+        if not deposit.eventDate:
+            return
+        return deposit.eventDate
+
     security.declarePublic("is_CODT2024")
 
     def is_CODT2024(self):

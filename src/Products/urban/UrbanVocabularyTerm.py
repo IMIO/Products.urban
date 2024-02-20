@@ -14,14 +14,26 @@ __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEUL
 __docformat__ = "plaintext"
 
 from AccessControl import ClassSecurityInfo
-from Products.Archetypes.atapi import *
+from Products.Archetypes.atapi import TextField
+from Products.Archetypes.atapi import RichWidget
+from Products.Archetypes.atapi import StringField
+from Products.Archetypes.atapi import Schema
+from Products.Archetypes.atapi import BaseSchema
+from Products.Archetypes.atapi import BaseContent
+from Products.Archetypes.atapi import registerType
+from Products.Archetypes.atapi import DisplayList
+from Products.Archetypes.atapi import DateTimeField
 from zope.interface import implements
-import interfaces
+from Products.urban import interfaces
 from Products.urban.UrbanConfigurationValue import UrbanConfigurationValue
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.Archetypes.interfaces import IVocabulary
+from Products.urban import UrbanMessage as _
+from datetime import datetime
+from DateTime import DateTime
 
-from Products.urban.config import *
+from Products.urban.config import PROJECTNAME
+from Products.urban.config import EMPTY_VOCAB_VALUE
 from zope.globalrequest import getRequest
 from zope.i18n import translate
 
@@ -78,6 +90,24 @@ schema = Schema(
                 description_msgid="urban_help_coring_id",
                 i18n_domain="urban",
             ),
+        ),
+        DateTimeField(
+            name="startValidity",
+            widget=DateTimeField._properties["widget"](
+                show_hm=False,
+                format="%d/%m/%Y",
+                label=_("urban_label_startValidity", default="StartValidity"),
+            ),
+            optional=True,
+        ),
+        DateTimeField(
+            name="endValidity",
+            widget=DateTimeField._properties["widget"](
+                show_hm=False,
+                format="%d/%m/%Y",
+                label=_("urban_label_endValidity", default="EndValidity"),
+            ),
+            optional=True,
         ),
     ),
 )
@@ -164,6 +194,21 @@ class UrbanVocabulary(object):
         self.datagridfield_key = datagridfield_key
         self._filter = _filter
 
+    def _validate_term(self, term, deposit_date):
+        if "startValidity" not in term or "endValidity" not in term:
+            return True
+        if term["startValidity"] is None and term["endValidity"] is None:
+            return True
+        if term["startValidity"] and term["endValidity"]:
+            return (
+                deposit_date >= term["startValidity"]
+                and deposit_date <= term["endValidity"]
+            )
+        if term["startValidity"]:
+            return deposit_date >= term["startValidity"]
+        if term["endValidity"]:
+            return deposit_date <= term["endValidity"]
+
     def get_raw_voc(self, context, licence_type="", _filter=None):
         portal_urban = api.portal.get_tool("portal_urban")
         raw_voc = portal_urban.get_vocabulary(
@@ -172,7 +217,19 @@ class UrbanVocabulary(object):
             licence_type=licence_type,
             name=self.path,
         )
-        voc = [v for v in raw_voc if v["portal_type"] in self.vocType]
+
+        deposit_date = None
+        if hasattr(context, "get_first_deposit_date"):
+            deposit_date = context.get_first_deposit_date()
+        if not deposit_date:
+            # by default we use the current date
+            deposit_date = DateTime(*datetime.now().date().timetuple()[0:3])
+        voc = [
+            v
+            for v in raw_voc
+            if v["portal_type"] in self.vocType
+            if self._validate_term(v, deposit_date)
+        ]
         if self._filter:
             voc = [v for v in voc if self._filter(v)]
         return voc
@@ -189,7 +246,6 @@ class UrbanVocabulary(object):
             result = [
                 (v["id"], u"{}{}".format(v.get("numbering", ""), v[self.value_to_use]))
                 for v in raw_voc
-                if v["enabled"]
             ]
         else:
             result = [(v["id"], v[self.value_to_use]) for v in raw_voc]
