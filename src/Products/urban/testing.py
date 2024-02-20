@@ -8,10 +8,24 @@ from plone.app.testing import helpers
 from plone.testing import z2
 from Products.urban.utils import run_entry_points
 
+from zope.globalrequest import setLocal
+
 import Products.urban
+import transaction
 
 
-URBAN_TESTS_PROFILE_DEFAULT = PloneWithPackageLayer(
+class UrbanLayer(PloneWithPackageLayer):
+    """
+    """
+
+    def setUpPloneSite(self, portal):
+        setattr(portal.REQUEST, 'URL', '')
+        setLocal('request', portal.REQUEST)
+        transaction.commit()
+        super(UrbanLayer, self).setUpPloneSite(portal)
+
+
+URBAN_TESTS_PROFILE_DEFAULT = UrbanLayer(
     zcml_filename="testing.zcml",
     zcml_package=Products.urban,
     additional_z2_products=(
@@ -48,7 +62,7 @@ class UrbanWithUsersLayer(IntegrationTesting):
             portal_urban = portal.portal_urban
             cache_view = portal_urban.unrestrictedTraverse('urban_vocabulary_cache')
             cache_view.reset_all_cache()
-            Products.urban.config.NIS = 92000  # mock NIS code
+            Products.urban.exportimport.NIS = '93088'  # mock NIS code
             portal.setupCurrentSkin(portal.REQUEST)
             from Products.urban.setuphandlers import addTestUsers
             addTestUsers(portal)
@@ -100,6 +114,7 @@ class UrbanImportsLayer(IntegrationTesting):
     Useful for performances: Plone site is instanciated only once
     """
     def setUp(self):
+        super(UrbanImportsLayer, self).setUp()
         with helpers.ploneSite() as portal:
             portal.setupCurrentSkin(portal.REQUEST)
             helpers.applyProfile(portal, 'Products.urban:tests-imports')
@@ -121,7 +136,14 @@ class UrbanWithUsersFunctionalLayer(FunctionalTesting):
     environment_default_user = 'environmenteditor'
     environment_default_password = 'environmenteditor'
 
+    def setUpPloneSite(self, portal):
+        setattr(portal.REQUEST, 'URL', '')
+        setLocal('request', portal.REQUEST)
+        transaction.commit()
+        super(UrbanWithUsersLayer, self).setUpPloneSite(portal)
+
     def setUp(self):
+        super(UrbanWithUsersFunctionalLayer, self).setUp()
         with helpers.ploneSite() as portal:
             portal.setupCurrentSkin(portal.REQUEST)
             from Products.urban.setuphandlers import addTestUsers
@@ -140,6 +162,7 @@ class UrbanConfigFunctionalLayer(UrbanWithUsersFunctionalLayer):
     Useful for performances: Plone site is instanciated only once
     """
     def setUp(self):
+        super(UrbanConfigFunctionalLayer, self).setUp()
         with helpers.ploneSite() as portal:
             portal.setupCurrentSkin(portal.REQUEST)
             helpers.applyProfile(portal, 'Products.urban:testsWithConfig')
@@ -157,6 +180,7 @@ class UrbanLicencesFunctionalLayer(UrbanConfigFunctionalLayer):
     Useful for performances: Plone site is instanciated only once
     """
     def setUp(self):
+        super(UrbanLicencesFunctionalLayer, self).setUp()
         with helpers.ploneSite() as portal:
             portal.setupCurrentSkin(portal.REQUEST)
             helpers.applyProfile(portal, 'Products.urban:testsWithLicences')

@@ -248,6 +248,22 @@ def extraPostInstall(context):
     logger.info('Setup default schedule configuration : Done')
 
 
+def testExtraPostInstall(context):
+    # all installation custom code not required for tests
+    if context.readDataFile('urban_extra_marker.txt') is None:
+        return
+    site = context.getSite()
+    logger.info("addUrbanVocabularies : starting...")
+    addUrbanVocabularies(context)
+    logger.info("addUrbanVocabularies : Done")
+    logger.info("addDefaultObjects : starting...")
+    addDefaultObjects(context)
+    logger.info("addDefaultObjects : Done")
+    logger.info("addEventTypesAndTemplates : starting...")
+    addEventTypesAndTemplates(context)
+    logger.info("addEventTypesAndTemplates : Done")
+
+
 def updateVocabularyConfig(context):
     logger.info("updateVocabularyConfig : starting...")
     if context.readDataFile('urban_extra_marker.txt') is None:
@@ -1357,7 +1373,9 @@ def createLicence(site, licence_type, data):
             return str(date.today())
         return None
 
-    licence_folder = getattr(urban_folder, "%ss" % licence_type.lower())
+    licence_folder = getattr(urban_folder, "%ss" % licence_type.lower(), None)
+    if not licence_folder:
+        return
     #create the licence
     licence_id = site.generateUniqueId('test_%s' % licence_type.lower())
     licence_folder.invokeFactory(licence_type, id=licence_id)

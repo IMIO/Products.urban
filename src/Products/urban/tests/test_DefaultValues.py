@@ -15,6 +15,9 @@ from Products.Archetypes.event import EditBegunEvent
 
 
 class TestDefaultValues(unittest.TestCase):
+    """
+    Tests for the configurable listing default values
+    """
 
     layer = URBAN_TESTS_CONFIG
 
@@ -29,10 +32,6 @@ class TestDefaultValues(unittest.TestCase):
         with api.env.adopt_roles(['Manager']):
             voc_cache = self.portal_urban.restrictedTraverse('urban_vocabulary_cache')
             voc_cache.update_procedure_all_vocabulary_cache(licence_config)
-
-    """
-    Tests for the configurable listing default values
-    """
 
     def createNewLicence(self):
         buildlicences = self.buildlicences

@@ -4,7 +4,9 @@ from five import grok
 
 from plone import api
 
+from zope.lifecycleevent import ObjectCreatedEvent
 from zope.component import IFactory
+from zope import event
 
 
 class UrbanEventFactory(grok.GlobalUtility):
@@ -15,12 +17,12 @@ class UrbanEventFactory(grok.GlobalUtility):
         portal_urban = api.portal.get_tool('portal_urban')
         catalog = api.portal.get_tool('portal_catalog')
 
-        #is event_type and UID?
+        # is event_type and UID?
         if type(event_type) is str:
             brains = catalog(UID=event_type)
             event_type = brains and brains[0].getObject() or event_type
 
-        #is event_type and id?
+        # is event_type and id?
         if type(event_type) is str:
             eventtypes = licence.getUrbanConfig().urbaneventtypes
             event_type = getattr(eventtypes, event_type, event_type)
@@ -40,6 +42,7 @@ class UrbanEventFactory(grok.GlobalUtility):
         urban_event.setTitle(event_type.Title())
         urban_event._at_rename_after_creation = False
         urban_event.processForm()
+        event.notify(ObjectCreatedEvent(urban_event))
 
         return urban_event
 

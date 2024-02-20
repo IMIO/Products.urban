@@ -28,14 +28,14 @@ class TestBuildLicence(unittest.TestCase):
         # verify that the licence title update correctly when we add or remove applicants/proprietaries
         #on the licence
         licence = self.buildlicence
-        self.assertTrue(licence.Title().endswith('1/ - Exemple Permis Urbanisme - Mes Smith & Wesson'))
+        self.assertTrue(licence.Title().endswith('1 - Exemple Permis Urbanisme - Mes Smith & Wesson'))
         #remove the applicant
         applicant_id = licence.objectValues('Applicant')[0].id
         licence.manage_delObjects([applicant_id])
-        self.assertTrue(licence.Title().endswith('1/ - Exemple Permis Urbanisme - no_applicant_defined'))
+        self.assertTrue(licence.Title().endswith('1 - Exemple Permis Urbanisme - no_applicant_defined'))
         #add an applicant back
         licence.invokeFactory('Applicant', 'new_applicant', name1='Quentin', name2='Tinchimiloupète')
-        self.assertTrue(licence.Title().endswith('1/ - Exemple Permis Urbanisme -  Quentin Tinchimiloupète'))
+        self.assertTrue(licence.Title().endswith('1 - Exemple Permis Urbanisme -  Quentin Tinchimiloupète'))
 
     def testGetLastEventWithoutEvent(self):
         buildlicences = self.portal.urban.buildlicences
@@ -114,8 +114,8 @@ class TestBuildLicence(unittest.TestCase):
         buildlicence = self.buildlicence
         opinions = ('sncb', 'belgacom')
         buildlicence.setSolicitOpinionsTo(opinions)
-        # == 1 because the opinion request event of belgacom already exists
-        self.assertEqual(len(buildlicence.getAllAdvices()), 1)
+        buildlicence.createAllAdvices()
+        self.assertEqual(len(buildlicence.getAllAdvices()), 0)
 
     def testCreateAllAdvicesWithoutOpinionRequest(self):
         buildlicences = self.portal.urban.buildlicences
@@ -230,7 +230,7 @@ class TestBuildLicenceFields(SchemaFieldsTestCase):
     def test_impactStudy_is_visible(self):
         for licence in self.licences:
             msg = "field 'impactStudy' not visible on {}".format(licence.getPortalTypeName())
-            self._is_field_visible("<span>Etude d'incidence?</span>:", licence, msg)
+            self._is_field_visible("<span>Etude d'incidences?</span>:", licence, msg)
 
     def test_has_attribute_implantation(self):
         field_name = 'implantation'

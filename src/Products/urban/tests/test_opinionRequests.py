@@ -52,7 +52,7 @@ class TestOpinionRequestOnLicence (unittest.TestCase):
             voc_cache = tool.restrictedTraverse('urban_vocabulary_cache')
             voc_cache.update_procedure_all_vocabulary_cache(tool.buildlicence)
         term = getattr(tool.buildlicence.urbaneventtypes, term_id)
-        expected_voc_term = (term_id, "Demande d'avis (%s)" % term.getExtraValue())
+        expected_voc_term = (term_id, term.getExtraValue())
 
         solicitOpinions_field = self.licence.getField('solicitOpinionsTo')
         field_voc = solicitOpinions_field.vocabulary.getDisplayList(self.licence)

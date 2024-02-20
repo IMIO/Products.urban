@@ -28,6 +28,7 @@ setup(name='Products.urban',
           test=[
               'unittest2', 'zope.testing', 'plone.testing',
               'testfixtures',
+              'plone.app.contenttypes',
               'plone.app.testing',
               'plone.app.robotframework[debug, test]',
               'ipdb',

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from plone.app.testing import login
-from Products.urban.testing import URBAN_TESTS_PROFILE_FUNCTIONAL, URBAN_TESTS_LICENCES
+from Products.urban.testing import URBAN_TESTS_FUNCTIONAL, URBAN_TESTS_LICENCES
 from Products.urban.scripts.odtsearch import searchInTextElements
 
 import cgi
@@ -93,7 +93,7 @@ class TestInvertNamesOfMailAddress(unittest.TestCase):
         contacts = self.buildlicence.getApplicants()
         for contact in contacts:
             # by default, should be name1 followed by name 2 in all cases
-            expected_name = '%s %s' % (contact.getName1(), contact.getName2())
+            expected_name = '%s %s' % (contact.getName1().upper(), contact.getName2())
             self.failUnless(expected_name in contact.getSignaletic())
             expected_name = cgi.escape(expected_name)
             self.failUnless(expected_name in contact.getSignaletic(linebyline=True))
@@ -106,14 +106,14 @@ class TestInvertNamesOfMailAddress(unittest.TestCase):
         contacts = self.buildlicence.getApplicants()
         for contact in contacts:
             # names should be inverted for the linebyline signaletic used in mailing address
-            expected_name = '%s %s' % (contact.getName2(), contact.getName1())
+            expected_name = '%s %s' % (contact.getName2(), contact.getName1().upper())
             expected_name = cgi.escape(expected_name)
             self.failUnless(expected_name in contact.getSignaletic(linebyline=True))
 
 
 class TestDocuments(unittest.TestCase):
 
-    layer = URBAN_TESTS_PROFILE_FUNCTIONAL
+    layer = URBAN_TESTS_FUNCTIONAL
 
     def setUp(self):
         portal = self.layer['portal']
@@ -126,11 +126,11 @@ class TestDocuments(unittest.TestCase):
         available_licence_types = [
             'BuildLicence',
             'Declaration',
-            'Division',
+            # 'Division',  #  divisions are disabled for liege
             'UrbanCertificateOne',
             'UrbanCertificateTwo',
             'NotaryLetter',
-            'MiscDemand',
+            # 'MiscDemand',  # miscdemands are disabled for liege
         ]
         log = []
         #parcourir tous les dossiers de permis

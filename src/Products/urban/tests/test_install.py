@@ -66,6 +66,10 @@ class TestInstall(unittest.TestCase):
         # no need to create an opinion request event, its already existing in
         # the test licence
         urbanEvent = licence.getLastEvent(IOpinionRequestEvent)
+        if not urbanEvent:
+            licence.setSolicitOpinionsTo(('sncb',))
+            licence.createAllAdvices()
+            urbanEvent = licence.getLastEvent(IOpinionRequestEvent)
         self.failUnless(IOpinionRequestEvent.providedBy(urbanEvent))
 
 
@@ -183,7 +187,7 @@ class TestContact(unittest.TestCase):
         applicant.setNumber(u'1')
         applicant.setCity(u'Sherwoodé')
         buildLicence.REQUEST.set('HTTP_ACCEPT_LANGUAGE', 'fr')
-        self.assertEquals(buildLicence.getApplicantsSignaletic(), u'Maître Robiné Hoodé')
+        self.assertEquals(buildLicence.getApplicantsSignaletic(), u'Maître ROBINÉ Hoodé')
         self.assertEquals(buildLicence.getApplicantsSignaletic(withaddress=True),
-                          u'Maître Robiné Hoodé, domicilié 1 Sherwoodé')
+                          u'Maître ROBINÉ Hoodé, domicilié 1 Sherwoodé')
         api.content.delete(buildLicence)

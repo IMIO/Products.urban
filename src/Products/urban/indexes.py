@@ -125,6 +125,14 @@ def genericlicence_parcelinfoindex(obj):
     return parcels_infos
 
 
+@indexer(interfaces.IParcellingTerm)
+def parcelling_parcelinfoindex(obj):
+    parcels_infos = []
+    if hasattr(obj, 'getParcels'):
+        parcels_infos = list(set([p.get_capakey() for p in obj.getParcels()]))
+    return parcels_infos
+
+
 @indexer(interfaces.IGenericLicence)
 def genericlicence_modified(licence):
     wf_modification = licence.workflow_history[licence.workflow_history.keys()[0]][-1]['time']
