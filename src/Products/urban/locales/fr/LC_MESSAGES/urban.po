@@ -3538,7 +3538,7 @@ msgstr "Date de fin d'utilisation"
 #. Default: "EndValidity"
 #: ../UrbanVocabularyTerm.py:108
 msgid "urban_label_endValidity"
-msgstr ""
+msgstr "Fin de validité"
 
 #. Default: "enoughRoadEquipment"
 #: ../content/licence/GenericLicence.py:805
@@ -5172,7 +5172,7 @@ msgstr "Date de début d'utilisation"
 #. Default: "StartValidity"
 #: ../UrbanVocabularyTerm.py:99
 msgid "urban_label_startValidity"
-msgstr ""
+msgstr "Début de validité"
 
 msgid "urban_label_states_to_end_all_tasks"
 msgstr "États terminant toutes les tâches du dossier"
