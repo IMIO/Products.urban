@@ -567,4 +567,12 @@
         profile="Products.urban:default"
         />
 
+    <gs:upgradeStep
+        title="Add new vocabulary for investigation_radius field"
+        description="Add new vocabulary for investigation_radius field"
+        source="1141"
+        destination="1142"
+        handler=".update_260.add_new_vocabulary_for_investigation_radius_field"
+        profile="Products.urban:default" />
+
 </configure>
