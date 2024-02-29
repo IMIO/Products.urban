@@ -11,7 +11,7 @@
 
 __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEULETTE
 <stephan.geulette@uvcw.be>, Jean-Michel Abe <jm.abe@la-bruyere.be>"""
-__docformat__ = 'plaintext'
+__docformat__ = "plaintext"
 
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
@@ -26,55 +26,56 @@ from Products.urban.config import *
 from Products.urban import UrbanMessage as _
 
 ##code-section module-header #fill in your manual code here
-optional_fields = ['limitedImpact', 'SDC_divergence']
+optional_fields = ["limitedImpact", "SDC_divergence"]
 ##/code-section module-header
 
-schema = Schema((
-
-),
+schema = Schema(
+    (),
 )
 
 ##code-section after-local-schema #fill in your manual code here
 setOptionalAttributes(schema, optional_fields)
 ##/code-section after-local-schema
 
-CODT_CommercialLicence_schema = BaseFolderSchema.copy() + \
-    getattr(CODT_BaseBuildLicence, 'schema', Schema(())).copy() + \
-    schema.copy()
+CODT_CommercialLicence_schema = (
+    BaseFolderSchema.copy()
+    + getattr(CODT_BaseBuildLicence, "schema", Schema(())).copy()
+    + schema.copy()
+)
 
 ##code-section after-schema #fill in your manual code here
 ##/code-section after-schema
 
 
 class CODT_CommercialLicence(BaseFolder, CODT_BaseBuildLicence, BrowserDefaultMixin):
-    """
-    """
+    """ """
+
     security = ClassSecurityInfo()
     implements(interfaces.ICODT_CommercialLicence)
 
-    meta_type = 'CODT_CommercialLicence'
+    meta_type = "CODT_CommercialLicence"
     _at_rename_after_creation = True
 
     schema = CODT_CommercialLicence_schema
 
     def listProcedureChoices(self):
         vocab = (
-            ('ukn', 'Non determiné'),
-            ('internal_opinions', 'Sollicitation d\'avis internes'),
-            ('external_opinions', 'Sollicitation d\'avis externes'),
-            ('inquiry', 'Enquête publique'),
-            ('big', 'Superficie >= 2500m²'),
+            ("ukn", "Non determiné"),
+            ("internal_opinions", "Sollicitation d'avis internes"),
+            ("external_opinions", "Sollicitation d'avis externes"),
+            ("inquiry", "Enquête publique"),
+            ("big", "Superficie >= 2500m²"),
         )
         return DisplayList(vocab)
 
     def getProcedureDelays(self, *values):
-        selection = [v['val'] for v in values if v['selected']]
-        unknown = 'ukn' in selection
-        big = 'big' in selection
+        selection = [v["val"] for v in values if v["selected"]]
+        unknown = "ukn" in selection
+        big = "big" in selection
         delay = 30
 
         if unknown:
-            return ''
+            return ""
         elif big:
             delay = 140
         else:
@@ -83,7 +84,7 @@ class CODT_CommercialLicence(BaseFolder, CODT_BaseBuildLicence, BrowserDefaultMi
         if self.prorogation:
             delay += 30
 
-        return '{}j'.format(str(delay))
+        return "{}j".format(str(delay))
 
 
 registerType(CODT_CommercialLicence, PROJECTNAME)
@@ -91,6 +92,8 @@ registerType(CODT_CommercialLicence, PROJECTNAME)
 
 ##code-section module-footer #fill in your manual code here
 finalizeSchema(CODT_CommercialLicence_schema)
-del CODT_CommercialLicence_schema['usage']
-CODT_CommercialLicence_schema['referenceDGATLP'].widget.label=_('urban_label_referenceDGO6')
+del CODT_CommercialLicence_schema["usage"]
+CODT_CommercialLicence_schema["referenceDGATLP"].widget.label = _(
+    "urban_label_referenceDGO6"
+)
 ##/code-section module-footer

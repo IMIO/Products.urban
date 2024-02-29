@@ -19,7 +19,7 @@ class SuspensionWorkflowAdaptation(object):
 
     def patch_workflow(self, workflow_name, **parameters):
 
-        wtool = api.portal.get_tool('portal_workflow')
+        wtool = api.portal.get_tool("portal_workflow")
         workflow = wtool[workflow_name]
 
         self.create_suspend_transition(workflow, **parameters)
@@ -33,48 +33,48 @@ class SuspensionWorkflowAdaptation(object):
 
     def create_resume_transition(self, workflow, **parameters):
         """
-         create a transition 'resume'
+        create a transition 'resume'
         """
-        if 'resume' not in workflow.transitions:
-            workflow.transitions.addTransition('resume')
+        if "resume" not in workflow.transitions:
+            workflow.transitions.addTransition("resume")
 
-        resume_transition = workflow.transitions['resume']
-        props = parameters.get('resume_transition_guard', None)
+        resume_transition = workflow.transitions["resume"]
+        props = parameters.get("resume_transition_guard", None)
         resume_transition.setProperties(
             title=resume_transition.id,
-            new_state_id=parameters['resuming_state'],
+            new_state_id=parameters["resuming_state"],
             actbox_name=resume_transition.id,
             props=props,
         )
         guard = Guard()
-        guard.groups = ('urban_editors',)
+        guard.groups = ("urban_editors",)
         resume_transition.guard = guard
 
     def create_suspension_state(self, workflow, **parameters):
         """
         create a 'suspension' state
         """
-        if 'suspension' not in workflow.states:
-            workflow.states.addState('suspension')
+        if "suspension" not in workflow.states:
+            workflow.states.addState("suspension")
 
-        suspension_state = workflow.states['suspension']
+        suspension_state = workflow.states["suspension"]
         default_mapping = workflow.states.objectValues()[0].permission_roles.copy()
-        suspension_state.title = 'suspension'
+        suspension_state.title = "suspension"
         suspension_state.permission_roles = default_mapping
         suspension_state.group_roles = PersistentMapping()
         suspension_state.var_values = PersistentMapping()
-        suspension_state.transitions = ('resume',)
+        suspension_state.transitions = ("resume",)
 
     def create_frozen_suspension_state(self, workflow, **parameters):
         """
         create a 'frozen_suspension' state
         """
-        if 'frozen_suspension' not in workflow.states:
-            workflow.states.addState('frozen_suspension')
+        if "frozen_suspension" not in workflow.states:
+            workflow.states.addState("frozen_suspension")
 
-        frozen_suspension_state = workflow.states['frozen_suspension']
-        default_mapping = workflow.states['suspension'].permission_roles.copy()
-        frozen_suspension_state.title = 'frozen_suspension'
+        frozen_suspension_state = workflow.states["frozen_suspension"]
+        default_mapping = workflow.states["suspension"].permission_roles.copy()
+        frozen_suspension_state.title = "frozen_suspension"
         frozen_suspension_state.permission_roles = default_mapping
         frozen_suspension_state.group_roles = PersistentMapping()
         frozen_suspension_state.var_values = PersistentMapping()
@@ -83,20 +83,20 @@ class SuspensionWorkflowAdaptation(object):
         """
         create a 'suspend' transition
         """
-        if 'suspend' not in workflow.transitions:
-            workflow.transitions.addTransition('suspend')
-        suspend_transition = workflow.transitions['suspend']
-        props = parameters.get('suspend_transition_guard', None)
+        if "suspend" not in workflow.transitions:
+            workflow.transitions.addTransition("suspend")
+        suspend_transition = workflow.transitions["suspend"]
+        props = parameters.get("suspend_transition_guard", None)
 
         # update transition settings
         suspend_transition.setProperties(
             title=suspend_transition.id,
-            new_state_id='suspension',
+            new_state_id="suspension",
             actbox_name=suspend_transition.id,
-            props=props
+            props=props,
         )
         guard = Guard()
-        guard.permissions = ('Modify portal content',)
+        guard.permissions = ("Modify portal content",)
         suspend_transition.guard = guard
 
     def set_suspend_transition(self, workflow, **parameters):
@@ -105,6 +105,6 @@ class SuspensionWorkflowAdaptation(object):
         """
         for state_name, state in workflow.states.objectItems():
             transitions = state.transitions
-            if state_name != 'suspension' and 'suspend' not in transitions:
-                new_transitions = transitions and transitions + ('suspend',) or ()
+            if state_name != "suspension" and "suspend" not in transitions:
+                new_transitions = transitions and transitions + ("suspend",) or ()
                 state.transitions = new_transitions

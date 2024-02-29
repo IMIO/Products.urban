@@ -11,7 +11,7 @@
 
 __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEULETTE
 <stephan.geulette@uvcw.be>, Jean-Michel Abe <jm.abe@la-bruyere.be>"""
-__docformat__ = 'plaintext'
+__docformat__ = "plaintext"
 
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
@@ -25,7 +25,9 @@ from Products.urban.config import *
 ##code-section module-header #fill in your manual code here
 from DateTime import DateTime
 
-from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
+from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import (
+    ReferenceBrowserWidget,
+)
 from Products.ATContentTypes.interfaces.file import IATFile
 from Products.CMFCore.utils import getToolByName
 
@@ -41,483 +43,496 @@ from plone import api
 
 from Products.MasterSelectWidget.MasterMultiSelectWidget import MasterMultiSelectWidget
 from zope.i18n import translate
+
 ##/code-section module-header
 
 slave_fields_followup_proposition = (
     {
-        'name': 'other_followup_proposition',
-        'action': 'show',
-        'toggle_method': 'showOtherFollowUp',
+        "name": "other_followup_proposition",
+        "action": "show",
+        "toggle_method": "showOtherFollowUp",
     },
 )
 
-schema = Schema((
-
-    DateTimeField(
-        name='eventDate',
-        widget=DateTimeField._properties['widget'](
-            show_hm=False,
-            format="%d/%m/%Y",
-            label_method="eventDateLabel",
-            starting_year=1960,
-            ending_year=2100,
-            label=_('urban_label_eventDate', default='Eventdate'),
+schema = Schema(
+    (
+        DateTimeField(
+            name="eventDate",
+            widget=DateTimeField._properties["widget"](
+                show_hm=False,
+                format="%d/%m/%Y",
+                label_method="eventDateLabel",
+                starting_year=1960,
+                ending_year=2100,
+                label=_("urban_label_eventDate", default="Eventdate"),
+            ),
+            default_method="getDefaultTime",
         ),
-        default_method='getDefaultTime',
-    ),
-    StringField(
-        name='depositType',
-        widget=SelectionWidget(
-            label=_('urban_label_depositType', default='Deposittype'),
+        StringField(
+            name="depositType",
+            widget=SelectionWidget(
+                label=_("urban_label_depositType", default="Deposittype"),
+            ),
+            enforceVocabulary=True,
+            optional=True,
+            vocabulary=UrbanVocabulary("deposittype", inUrbanConfig=False),
+            default_method="getDefaultValue",
         ),
-        enforceVocabulary=True,
-        optional=True,
-        vocabulary=UrbanVocabulary('deposittype', inUrbanConfig=False),
-        default_method='getDefaultValue',
-    ),
-    DateTimeField(
-        name='transmitDate',
-        widget=DateTimeField._properties['widget'](
-            show_hm=False,
-            format="%d/%m/%Y",
-            starting_year=1960,
-            label=_('urban_label_transmitDate', default='Transmitdate'),
+        DateTimeField(
+            name="transmitDate",
+            widget=DateTimeField._properties["widget"](
+                show_hm=False,
+                format="%d/%m/%Y",
+                starting_year=1960,
+                label=_("urban_label_transmitDate", default="Transmitdate"),
+            ),
+            optional=True,
         ),
-        optional=True,
-    ),
-    DateTimeField(
-        name='transmitToClaimantsDate',
-        widget=DateTimeField._properties['widget'](
-            show_hm=False,
-            format="%d/%m/%Y",
-            starting_year=1960,
-            label=_('urban_label_transmitToClaimantsDate',
-                    default='Transmittoclaimantsdate'),
+        DateTimeField(
+            name="transmitToClaimantsDate",
+            widget=DateTimeField._properties["widget"](
+                show_hm=False,
+                format="%d/%m/%Y",
+                starting_year=1960,
+                label=_(
+                    "urban_label_transmitToClaimantsDate",
+                    default="Transmittoclaimantsdate",
+                ),
+            ),
+            optional=True,
         ),
-        optional=True,
-    ),
-    DateTimeField(
-        name='receiptDate',
-        widget=DateTimeField._properties['widget'](
-            show_hm=False,
-            format="%d/%m/%Y",
-            starting_year=1960,
-            label=_('urban_label_receiptDate', default='Receipt date'),
+        DateTimeField(
+            name="receiptDate",
+            widget=DateTimeField._properties["widget"](
+                show_hm=False,
+                format="%d/%m/%Y",
+                starting_year=1960,
+                label=_("urban_label_receiptDate", default="Receipt date"),
+            ),
+            optional=True,
         ),
-        optional=True,
-    ),
-    StringField(
-        name='receivedDocumentReference',
-        widget=StringField._properties['widget'](
-            label=_('urban_label_receivedDocumentReference',
-                    default='Receiveddocumentreference'),
+        StringField(
+            name="receivedDocumentReference",
+            widget=StringField._properties["widget"](
+                label=_(
+                    "urban_label_receivedDocumentReference",
+                    default="Receiveddocumentreference",
+                ),
+            ),
+            optional=True,
         ),
-        optional=True,
-    ),
-    DateTimeField(
-        name='auditionDate',
-        widget=DateTimeField._properties['widget'](
-            show_hm=False,
-            format="%d/%m/%Y",
-            starting_year=1960,
-            label=_('urban_label_auditionDate', default='Auditiondate'),
+        DateTimeField(
+            name="auditionDate",
+            widget=DateTimeField._properties["widget"](
+                show_hm=False,
+                format="%d/%m/%Y",
+                starting_year=1960,
+                label=_("urban_label_auditionDate", default="Auditiondate"),
+            ),
+            optional=True,
         ),
-        optional=True,
-    ),
-    DateTimeField(
-        name='decisionDate',
-        widget=DateTimeField._properties['widget'](
-            show_hm=False,
-            format="%d/%m/%Y",
-            starting_year=1960,
-            label=_('urban_label_decisionDate', default='Decisiondate'),
+        DateTimeField(
+            name="decisionDate",
+            widget=DateTimeField._properties["widget"](
+                show_hm=False,
+                format="%d/%m/%Y",
+                starting_year=1960,
+                label=_("urban_label_decisionDate", default="Decisiondate"),
+            ),
+            optional=True,
         ),
-        optional=True,
-    ),
-    StringField(
-        name='decision',
-        widget=SelectionWidget(
-            label=_('urban_label_decision', default='Decision'),
+        StringField(
+            name="decision",
+            widget=SelectionWidget(
+                label=_("urban_label_decision", default="Decision"),
+            ),
+            enforceVocabulary=True,
+            optional=True,
+            vocabulary=UrbanVocabulary("decisions", inUrbanConfig=True),
+            default_method="getDefaultValue",
         ),
-        enforceVocabulary=True,
-        optional=True,
-        vocabulary=UrbanVocabulary('decisions', inUrbanConfig=True),
-        default_method='getDefaultValue',
-    ),
-    TextField(
-        name='decisionText',
-        allowable_content_types=('text/html',),
-        widget=RichWidget(
-            label=_('urban_label_decisionText', default='Decisiontext'),
+        TextField(
+            name="decisionText",
+            allowable_content_types=("text/html",),
+            widget=RichWidget(
+                label=_("urban_label_decisionText", default="Decisiontext"),
+            ),
+            default_method="getDefaultText",
+            default_content_type="text/html",
+            default_output_type="text/html",
+            optional=True,
         ),
-        default_method='getDefaultText',
-        default_content_type='text/html',
-        default_output_type='text/html',
-        optional=True,
-    ),
-    DateTimeField(
-        name='recourseDecisionDisplayDate',
-        widget=DateTimeField._properties['widget'](
-            show_hm=False,
-            format="%d/%m/%Y",
-            starting_year=1960,
-            label=_('urban_label_recourseDecisionDisplayDate',
-                    default='Recoursedecisiondisplaydate'),
+        DateTimeField(
+            name="recourseDecisionDisplayDate",
+            widget=DateTimeField._properties["widget"](
+                show_hm=False,
+                format="%d/%m/%Y",
+                starting_year=1960,
+                label=_(
+                    "urban_label_recourseDecisionDisplayDate",
+                    default="Recoursedecisiondisplaydate",
+                ),
+            ),
+            optional=True,
         ),
-        optional=True,
-    ),
-    StringField(
-        name='recourseDecision',
-        widget=SelectionWidget(
-            label=_('urban_label_recourseDecision', default='Recoursedecision'),
+        StringField(
+            name="recourseDecision",
+            widget=SelectionWidget(
+                label=_("urban_label_recourseDecision", default="Recoursedecision"),
+            ),
+            enforceVocabulary=True,
+            optional=True,
+            vocabulary=UrbanVocabulary("recoursedecisions", inUrbanConfig=False),
+            default_method="getDefaultValue",
         ),
-        enforceVocabulary=True,
-        optional=True,
-        vocabulary=UrbanVocabulary('recoursedecisions', inUrbanConfig=False),
-        default_method='getDefaultValue',
-    ),
-    StringField(
-        name='adviceAgreementLevel',
-        widget=SelectionWidget(
-            format='select',
-            label=_('urban_label_adviceAgreementLevel',
-                    default='Adviceagreementlevel'),
+        StringField(
+            name="adviceAgreementLevel",
+            widget=SelectionWidget(
+                format="select",
+                label=_(
+                    "urban_label_adviceAgreementLevel", default="Adviceagreementlevel"
+                ),
+            ),
+            enforceVocabulary=True,
+            optional=True,
+            vocabulary="listAdviceAgreementLevels",
         ),
-        enforceVocabulary=True,
-        optional=True,
-        vocabulary='listAdviceAgreementLevels',
-    ),
-    BooleanField(
-        name='isOptional',
-        default=False,
-        widget=BooleanField._properties['widget'](
-            label=_('urban_label_isOptional', default='Isoptional'),
+        BooleanField(
+            name="isOptional",
+            default=False,
+            widget=BooleanField._properties["widget"](
+                label=_("urban_label_isOptional", default="Isoptional"),
+            ),
+        ),
+        StringField(
+            name="externalDecision",
+            widget=SelectionWidget(
+                label=_("urban_label_externalDecision", default="Advice"),
+            ),
+            enforceVocabulary=True,
+            optional=True,
+            vocabulary=UrbanVocabulary("externaldecisions", inUrbanConfig=False),
+            default_method="getDefaultValue",
+        ),
+        TextField(
+            name="opinionText",
+            allowable_content_types=("text/html",),
+            widget=RichWidget(
+                label=_("urban_label_opinionText", default="Opiniontext"),
+            ),
+            default_method="getDefaultText",
+            default_content_type="text/html",
+            default_output_type="text/html",
+            optional=True,
+        ),
+        TextField(
+            name="analysis",
+            allowable_content_types=("text/html",),
+            widget=RichWidget(
+                label=_("urban_label_analysis", default="Analysis"),
+            ),
+            default_method="getDefaultText",
+            default_content_type="text/html",
+            default_output_type="text/html",
+            optional=True,
+        ),
+        ReferenceField(
+            name="eventRecipient",
+            widget=ReferenceBrowserWidget(
+                label=_("urban_label_eventRecipient", default="Destinataire"),
+                allow_search=1,
+                allow_browse=0,
+                show_indexes=1,
+                show_index_selector=1,
+                available_indexes={
+                    "getFirstname": "First name",
+                    "getSurname": "Surname",
+                },
+                wild_card_search=True,
+            ),
+            allowed_types=("Recipient", "Applicant", "Architect"),
+            optional=True,
+            relationship="recipients",
+        ),
+        ReferenceField(
+            name="urbaneventtypes",
+            widget=ReferenceBrowserWidget(
+                visible=False,
+                label=_("urban_label_urbaneventtypes", default="Urbaneventtypes"),
+            ),
+            allowed_types=("UrbanEventType", "OpinionRequestEventType"),
+            multiValued=0,
+            relationship="UrbanEventType",
+        ),
+        TextField(
+            name="pmTitle",
+            allowable_content_types=("text/plain",),
+            widget=TextAreaWidget(
+                label=_("urban_label_pmTitle", default="Pmtitle"),
+            ),
+            default_method="getDefaultText",
+            default_content_type="text/plain",
+            default_output_type="text/plain",
+            optional=True,
+            pm_text_field=True,
+        ),
+        TextField(
+            name="pmDescription",
+            allowable_content_types=("text/html",),
+            widget=RichWidget(
+                label=_("urban_label_pmDescription", default="Pmdescription"),
+            ),
+            default_method="getDefaultText",
+            default_content_type="text/html",
+            default_output_type="text/html",
+            optional=True,
+            pm_text_field=True,
+        ),
+        TextField(
+            name="pmMotivation",
+            allowable_content_types=("text/html",),
+            widget=RichWidget(
+                label=_("urban_label_pmMotivation", default="Pmmotivation"),
+                i18n_domain="urban",
+            ),
+            default_method="getDefaultText",
+            default_content_type="text/html",
+            default_output_type="text/html",
+            optional=True,
+            pm_text_field=True,
+        ),
+        TextField(
+            name="pmDecision",
+            allowable_content_types=("text/html",),
+            widget=RichWidget(
+                label=_("urban_label_pmDecision", default="Pmdecision"),
+            ),
+            default_method="getDefaultText",
+            default_content_type="text/html",
+            default_output_type="text/html",
+            optional=True,
+            pm_text_field=True,
+        ),
+        TextField(
+            name="officeCoordinate",
+            allowable_content_types=("text/html",),
+            widget=RichWidget(
+                label=_("urban_label_officeCoordinate", default="Officecoordinate"),
+            ),
+            default_method="getDefaultText",
+            default_content_type="text/html",
+            default_output_type="text/html",
+            optional=True,
+        ),
+        TextField(
+            name="suspensionReason",
+            allowable_content_types=("text/html",),
+            widget=RichWidget(
+                label=_("urban_label_suspensionReason", default="Suspensionreason"),
+            ),
+            default_method="getDefaultText",
+            default_content_type="text/html",
+            default_output_type="text/html",
+            optional=True,
+        ),
+        DateTimeField(
+            name="suspensionEndDate",
+            widget=DateTimeField._properties["widget"](
+                show_hm=False,
+                format="%d/%m/%Y",
+                starting_year=1960,
+                label=_("urban_label_suspensionEndDate", default="suspensionEndDate"),
+            ),
+            optional=True,
+        ),
+        StringField(
+            name="delegateSignatures",
+            widget=SelectionWidget(
+                format="radio",
+                label=_("urban_label_delegateSignatures", default="Delegatesignatures"),
+            ),
+            enforceVocabulary=True,
+            optional=True,
+            vocabulary=UrbanVocabulary("delegatesignatures", inUrbanConfig=False),
+            default_method="getDefaultValue",
+        ),
+        LinesField(
+            name="mainSignatures",
+            widget=MultiSelectionWidget(
+                format="checkbox",
+                label=_("urban_label_mainSignatures", default="Mainsignatures"),
+            ),
+            multiValued=True,
+            vocabulary=UrbanVocabulary("mainsignatures", inUrbanConfig=False),
+            default_method="getDefaultValue",
+        ),
+        StringField(
+            name="bank_account",
+            widget=StringField._properties["widget"](
+                label=_("urban_label_bank_account", default="Bank_account"),
+            ),
+            optional=True,
+        ),
+        StringField(
+            name="bank_account_owner",
+            widget=StringField._properties["widget"](
+                label=_("urban_label_bank_account_owner", default="Bank_account_owner"),
+            ),
+            optional=True,
+        ),
+        StringField(
+            name="amount_collected",
+            widget=StringField._properties["widget"](
+                label=_("urban_label_amount_collected", default="Amount_collected"),
+            ),
+            optional=True,
+        ),
+        DateTimeField(
+            name="displayDate",
+            widget=DateTimeField._properties["widget"](
+                show_hm=False,
+                format="%d/%m/%Y",
+                starting_year=1960,
+                label=_("urban_label_displayDate", default="Displaydate"),
+            ),
+            optional=True,
+        ),
+        DateTimeField(
+            name="displayDateEnd",
+            widget=DateTimeField._properties["widget"](
+                show_hm=False,
+                format="%d/%m/%Y",
+                starting_year=1960,
+                label=_("urban_label_displayDateEnd", default="Displaydateiend"),
+            ),
+            optional=True,
+        ),
+        TextField(
+            name="decisionProject",
+            allowable_content_types=("text/html",),
+            widget=RichWidget(
+                label=_("urban_label_decisionProject", default="Decisionproject"),
+            ),
+            default_method="getDefaultText",
+            default_content_type="text/html",
+            default_output_type="text/html",
+            optional=True,
+        ),
+        TextField(
+            name="misc_description",
+            allowable_content_types=("text/html",),
+            widget=RichWidget(
+                label=_("urban_label_description", default="Description"),
+            ),
+            default_method="getDefaultText",
+            default_content_type="text/html",
+            default_output_type="text/html",
+            optional=True,
+        ),
+        DateTimeField(
+            name="reportCreationDate",
+            widget=DateTimeField._properties["widget"](
+                show_hm=False,
+                format="%d/%m/%Y",
+                starting_year=2010,
+                label=_("urban_label_reportCreationDate", default="ReportCreationDate"),
+            ),
+            optional=True,
+        ),
+        DateTimeField(
+            name="reportReceptionDate",
+            widget=DateTimeField._properties["widget"](
+                show_hm=False,
+                format="%d/%m/%Y",
+                starting_year=2010,
+                label=_(
+                    "urban_label_reportReceptionDate", default="ReportReceptionDate"
+                ),
+            ),
+            optional=True,
+        ),
+        DateTimeField(
+            name="paymentDeadline",
+            widget=DateTimeField._properties["widget"](
+                show_hm=False,
+                format="%d/%m/%Y",
+                starting_year=2010,
+                label=_("urban_label_paymentDeadline", default="PaymentDeadline"),
+            ),
+            optional=True,
+        ),
+        DateTimeField(
+            name="ultimeDate",
+            widget=DateTimeField._properties["widget"](
+                show_hm=False,
+                format="%d/%m/%Y",
+                starting_year=2010,
+                label=_("urban_label_ultimeDate", default="UltimeDate"),
+            ),
+            optional=True,
+        ),
+        LinesField(
+            name="followup_proposition",
+            widget=MasterMultiSelectWidget(
+                format="checkbox",
+                slave_fields=slave_fields_followup_proposition,
+                label=_(
+                    "urban_label_followup_proposition", default="Followup_proposition"
+                ),
+            ),
+            multiValued=1,
+            vocabulary="listFollowupPropositions",
+        ),
+        TextField(
+            name="other_followup_proposition",
+            allowable_content_types=("text/html",),
+            widget=RichWidget(
+                label=_(
+                    "urban_label_other_followup_proposition",
+                    default="other_followup_proposition",
+                ),
+            ),
+            default_method="getDefaultText",
+            default_content_type="text/html",
+            default_output_type="text/html",
+        ),
+        StringField(
+            name="delay",
+            widget=StringField._properties["widget"](
+                size=15,
+                label=_("urban_label_delay", default="Delay"),
+            ),
+            default="0",
+            validators=("isInteger",),
         ),
     ),
-    StringField(
-        name='externalDecision',
-        widget=SelectionWidget(
-            label=_('urban_label_externalDecision', default='Advice'),
-        ),
-        enforceVocabulary=True,
-        optional=True,
-        vocabulary=UrbanVocabulary('externaldecisions', inUrbanConfig=False),
-        default_method='getDefaultValue',
-    ),
-    TextField(
-        name='opinionText',
-        allowable_content_types=('text/html',),
-        widget=RichWidget(
-            label=_('urban_label_opinionText', default='Opiniontext'),
-        ),
-        default_method='getDefaultText',
-        default_content_type='text/html',
-        default_output_type='text/html',
-        optional=True,
-    ),
-    TextField(
-        name='analysis',
-        allowable_content_types=('text/html',),
-        widget=RichWidget(
-            label=_('urban_label_analysis', default='Analysis'),
-        ),
-        default_method='getDefaultText',
-        default_content_type='text/html',
-        default_output_type='text/html',
-        optional=True,
-    ),
-    ReferenceField(
-        name='eventRecipient',
-        widget=ReferenceBrowserWidget(
-            label=_('urban_label_eventRecipient', default='Destinataire'),
-            allow_search=1,
-            allow_browse=0,
-            show_indexes=1,
-            show_index_selector=1,
-            available_indexes={'getFirstname': 'First name', 'getSurname': 'Surname'},
-            wild_card_search=True,
-        ),
-        allowed_types= ('Recipient', 'Applicant', 'Architect'),
-        optional=True,
-        relationship="recipients",
-    ),
-    ReferenceField(
-        name='urbaneventtypes',
-        widget=ReferenceBrowserWidget(
-            visible=False,
-            label=_('urban_label_urbaneventtypes', default='Urbaneventtypes'),
-        ),
-        allowed_types=('UrbanEventType', 'OpinionRequestEventType'),
-        multiValued=0,
-        relationship='UrbanEventType',
-    ),
-    TextField(
-        name='pmTitle',
-        allowable_content_types=('text/plain',),
-        widget=TextAreaWidget(
-            label=_('urban_label_pmTitle', default='Pmtitle'),
-        ),
-        default_method='getDefaultText',
-        default_content_type='text/plain',
-        default_output_type='text/plain',
-        optional=True,
-        pm_text_field=True,
-    ),
-    TextField(
-        name='pmDescription',
-        allowable_content_types=('text/html',),
-        widget=RichWidget(
-            label=_('urban_label_pmDescription', default='Pmdescription'),
-        ),
-        default_method='getDefaultText',
-        default_content_type='text/html',
-        default_output_type='text/html',
-        optional=True,
-        pm_text_field=True,
-    ),
-    TextField(
-        name='pmMotivation',
-        allowable_content_types=('text/html',),
-        widget=RichWidget(
-            label=_('urban_label_pmMotivation', default='Pmmotivation'),
-            i18n_domain='urban',
-        ),
-        default_method='getDefaultText',
-        default_content_type='text/html',
-        default_output_type='text/html',
-        optional=True,
-        pm_text_field=True,
-    ),
-    TextField(
-        name='pmDecision',
-        allowable_content_types=('text/html',),
-        widget=RichWidget(
-            label=_('urban_label_pmDecision', default='Pmdecision'),
-        ),
-        default_method='getDefaultText',
-        default_content_type='text/html',
-        default_output_type='text/html',
-        optional=True,
-        pm_text_field=True,
-    ),
-    TextField(
-        name='officeCoordinate',
-        allowable_content_types=('text/html',),
-        widget=RichWidget(
-            label=_('urban_label_officeCoordinate', default='Officecoordinate'),
-        ),
-        default_method='getDefaultText',
-        default_content_type='text/html',
-        default_output_type='text/html',
-        optional= True,
-    ),
-    TextField(
-        name='suspensionReason',
-        allowable_content_types=('text/html',),
-        widget=RichWidget(
-            label=_('urban_label_suspensionReason', default='Suspensionreason'),
-        ),
-        default_method='getDefaultText',
-        default_content_type='text/html',
-        default_output_type='text/html',
-        optional=True,
-    ),
-    DateTimeField(
-        name='suspensionEndDate',
-        widget=DateTimeField._properties['widget'](
-            show_hm=False,
-            format="%d/%m/%Y",
-            starting_year=1960,
-            label=_('urban_label_suspensionEndDate', default='suspensionEndDate'),
-        ),
-        optional= True,
-    ),
-    StringField(
-        name='delegateSignatures',
-        widget=SelectionWidget(
-            format='radio',
-            label=_('urban_label_delegateSignatures',
-                    default='Delegatesignatures'),
-        ),
-        enforceVocabulary=True,
-        optional=True,
-        vocabulary=UrbanVocabulary('delegatesignatures', inUrbanConfig=False),
-        default_method='getDefaultValue',
-    ),
-    LinesField(
-        name='mainSignatures',
-        widget=MultiSelectionWidget(
-            format='checkbox',
-            label=_('urban_label_mainSignatures',
-                    default='Mainsignatures'),
-        ),
-        multiValued=True,
-        vocabulary=UrbanVocabulary('mainsignatures', inUrbanConfig=False),
-        default_method='getDefaultValue',
-    ),
-    StringField(
-        name='bank_account',
-        widget=StringField._properties['widget'](
-            label=_('urban_label_bank_account', default='Bank_account'),
-        ),
-        optional=True,
-    ),
-    StringField(
-        name='bank_account_owner',
-        widget=StringField._properties['widget'](
-            label=_('urban_label_bank_account_owner',
-                    default='Bank_account_owner'),
-        ),
-        optional=True,
-    ),
-    StringField(
-        name='amount_collected',
-        widget=StringField._properties['widget'](
-            label=_('urban_label_amount_collected', default='Amount_collected'),
-        ),
-        optional=True,
-    ),
-    DateTimeField(
-        name='displayDate',
-        widget=DateTimeField._properties['widget'](
-            show_hm=False,
-            format="%d/%m/%Y",
-            starting_year=1960,
-            label=_('urban_label_displayDate', default='Displaydate'),
-        ),
-        optional=True,
-    ),
-    DateTimeField(
-        name='displayDateEnd',
-        widget=DateTimeField._properties['widget'](
-            show_hm=False,
-            format="%d/%m/%Y",
-            starting_year=1960,
-            label=_('urban_label_displayDateEnd', default='Displaydateiend'),
-        ),
-        optional=True,
-    ),
-    TextField(
-        name='decisionProject',
-        allowable_content_types=('text/html',),
-        widget=RichWidget(
-            label=_('urban_label_decisionProject', default='Decisionproject'),
-        ),
-        default_method='getDefaultText',
-        default_content_type='text/html',
-        default_output_type='text/html',
-        optional=True,
-    ),
-    TextField(
-        name='misc_description',
-        allowable_content_types=('text/html',),
-        widget=RichWidget(
-            label=_('urban_label_description', default='Description'),
-        ),
-        default_method='getDefaultText',
-        default_content_type='text/html',
-        default_output_type='text/html',
-        optional=True,
-    ),
-    DateTimeField(
-        name='reportCreationDate',
-        widget=DateTimeField._properties['widget'](
-            show_hm=False,
-            format="%d/%m/%Y",
-            starting_year=2010,
-            label=_('urban_label_reportCreationDate', default='ReportCreationDate'),
-        ),
-        optional=True,
-    ),
-    DateTimeField(
-        name='reportReceptionDate',
-        widget=DateTimeField._properties['widget'](
-            show_hm=False,
-            format="%d/%m/%Y",
-            starting_year=2010,
-            label=_('urban_label_reportReceptionDate', default='ReportReceptionDate'),
-        ),
-        optional=True,
-    ),
-    DateTimeField(
-        name='paymentDeadline',
-        widget=DateTimeField._properties['widget'](
-            show_hm=False,
-            format="%d/%m/%Y",
-            starting_year=2010,
-            label=_('urban_label_paymentDeadline', default='PaymentDeadline'),
-        ),
-        optional=True,
-    ),
-    DateTimeField(
-        name='ultimeDate',
-        widget=DateTimeField._properties['widget'](
-            show_hm=False,
-            format="%d/%m/%Y",
-            starting_year=2010,
-            label=_('urban_label_ultimeDate', default='UltimeDate'),
-        ),
-        optional=True,
-    ),
-    LinesField(
-        name='followup_proposition',
-        widget=MasterMultiSelectWidget(
-            format='checkbox',
-            slave_fields=slave_fields_followup_proposition,
-            label=_('urban_label_followup_proposition', default='Followup_proposition'),
-        ),
-        multiValued=1,
-        vocabulary='listFollowupPropositions',
-    ),
-    TextField(
-        name='other_followup_proposition',
-        allowable_content_types=('text/html',),
-        widget=RichWidget(
-            label=_('urban_label_other_followup_proposition', default='other_followup_proposition'),
-        ),
-        default_method='getDefaultText',
-        default_content_type='text/html',
-        default_output_type='text/html',
-    ),
-    StringField(
-        name='delay',
-        widget=StringField._properties['widget'](
-            size=15,
-            label=_('urban_label_delay', default='Delay'),
-        ),
-        default='0',
-        validators=('isInteger',),
-    ),
-
-),
 )
 
 ##code-section after-local-schema #fill in your manual code here
-optional_fields = [field.getName() for field in schema.filterFields(isMetadata=False) if field.getName() != 'eventDate']
+optional_fields = [
+    field.getName()
+    for field in schema.filterFields(isMetadata=False)
+    if field.getName() != "eventDate"
+]
 setOptionalAttributes(schema, optional_fields)
 ##/code-section after-local-schema
 
-UrbanEvent_schema = BaseFolderSchema.copy() + \
-    schema.copy()
+UrbanEvent_schema = BaseFolderSchema.copy() + schema.copy()
 
 ##code-section after-schema #fill in your manual code here
-UrbanEvent_schema['title'].widget.condition = "python:here.showTitle()"
-UrbanEvent_schema['title'].default_method = 'defaultTitle'
-UrbanEvent_schema['title'].required = False
+UrbanEvent_schema["title"].widget.condition = "python:here.showTitle()"
+UrbanEvent_schema["title"].default_method = "defaultTitle"
+UrbanEvent_schema["title"].required = False
 ##/code-section after-schema
 
 
 class UrbanEvent(BaseFolder, BrowserDefaultMixin):
-    """
-    """
-    security = ClassSecurityInfo()
-    implements(
-        interfaces.IUrbanEvent,
-        IFinderUploadCapable,
-        IQuickUploadCapable
-    )
+    """ """
 
-    meta_type = 'UrbanEvent'
+    security = ClassSecurityInfo()
+    implements(interfaces.IUrbanEvent, IFinderUploadCapable, IQuickUploadCapable)
+
+    meta_type = "UrbanEvent"
     _at_rename_after_creation = False
     __ac_local_roles_block__ = True
 
@@ -530,77 +545,103 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
 
     # Manually created methods
 
-    security.declarePublic('getDefaultValue')
+    security.declarePublic("getDefaultValue")
 
     def getDefaultValue(self, context=None, field=None):
         if not context or not field:
-            return ['']
+            return [""]
 
-        empty_value = getattr(field, 'multivalued', '') and [] or ''
-        if hasattr(field, 'vocabulary') and isinstance(field.vocabulary, UrbanVocabulary):
+        empty_value = getattr(field, "multivalued", "") and [] or ""
+        if hasattr(field, "vocabulary") and isinstance(
+            field.vocabulary, UrbanVocabulary
+        ):
             licence = context.aq_parent
             return field.vocabulary.get_default_values(licence)
         return empty_value
 
-    security.declarePublic('getDefaultText')
+    security.declarePublic("getDefaultText")
+
     def getDefaultText(self, context=None, field=None, html=False):
         if not context or not field:
             return ""
-        urban_tool = getToolByName(self, 'portal_urban')
-        return urban_tool.getTextDefaultValue(field.getName(), context, html=html, config=self.getUrbaneventtypes())
+        urban_tool = getToolByName(self, "portal_urban")
+        return urban_tool.getTextDefaultValue(
+            field.getName(), context, html=html, config=self.getUrbaneventtypes()
+        )
 
     def getKeyDate(self):
         event_type = self.getUrbaneventtypes()
-        keydate_field = 'eventDate'
+        keydate_field = "eventDate"
         if event_type:
             keydate_fields = [date for date in event_type.getKeyDates()]
-            keydate_field = keydate_fields and keydate_fields[0] or 'eventDate'
+            keydate_field = keydate_fields and keydate_fields[0] or "eventDate"
         keydate = self.getField(keydate_field).get(self)
 
         return keydate
 
-
     def getDefaultTime(self):
         return DateTime()
 
-    security.declarePublic('getTemplates')
+    security.declarePublic("getTemplates")
+
     def getTemplates(self):
         """
-          Returns contained templates (File)
+        Returns contained templates (File)
         """
         if not self.getUrbaneventtypes():
             return []
         return self.getUrbaneventtypes().getTemplates()
 
-    security.declarePublic('eventDateLabel')
+    security.declarePublic("eventDateLabel")
+
     def eventDateLabel(self):
         """
-         Returns the variable label
+        Returns the variable label
         """
         return self.getUrbaneventtypes().getEventDateLabel()
 
-    security.declarePublic('listAdviceAgreementLevels')
+    security.declarePublic("listAdviceAgreementLevels")
+
     def listAdviceAgreementLevels(self):
         """
-          Vocabulary for field 'adviceAgreementLevels'
+        Vocabulary for field 'adviceAgreementLevels'
         """
-        lst=[
-             ['agreementlevel_read_advice', translate('agreementlevel_read_advice', 'urban', context=self.REQUEST, default="Read advice")],
-             ['agreementlevel_respect_charges', translate('agreementlevel_respect_charges', 'urban', context=self.REQUEST, default="Respect charges")],
-            ]
+        lst = [
+            [
+                "agreementlevel_read_advice",
+                translate(
+                    "agreementlevel_read_advice",
+                    "urban",
+                    context=self.REQUEST,
+                    default="Read advice",
+                ),
+            ],
+            [
+                "agreementlevel_respect_charges",
+                translate(
+                    "agreementlevel_respect_charges",
+                    "urban",
+                    context=self.REQUEST,
+                    default="Respect charges",
+                ),
+            ],
+        ]
 
         vocab = []
-        #we add an empty vocab value of type "choose a value"
-        val = translate('urban', EMPTY_VOCAB_VALUE, context=self, default=EMPTY_VOCAB_VALUE)
-        vocab.append(('', val))
+        # we add an empty vocab value of type "choose a value"
+        val = translate(
+            "urban", EMPTY_VOCAB_VALUE, context=self, default=EMPTY_VOCAB_VALUE
+        )
+        vocab.append(("", val))
         for elt in lst:
             vocab.append((elt[0], elt[1]))
         return DisplayList(tuple(vocab))
 
-    security.declarePublic('isInt')
+    security.declarePublic("isInt")
+
     def isInt(self, s):
         """
-          Check if 's' is an integer, return True or False...
+        Check if 's' is an integer, return True or False...
         """
         try:
             int(s)
@@ -608,148 +649,184 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
         except ValueError:
             return False
 
-    security.declarePublic('parseCadastreStreet')
+    security.declarePublic("parseCadastreStreet")
+
     def parseCadastreStreet(self, street):
         """
-           Return a parsed version of data from Cadastre so we obtain something
-           more beautiful to display
+        Return a parsed version of data from Cadastre so we obtain something
+        more beautiful to display
         """
         if street == None:
-            return 'NO ADDRESS FOUND'
-        print '\n\n Street: '+street
-        i=0
-        toreturn=''
-        while (i < len(street)) and (street[i] !=','):
-            toreturn=toreturn+street[i]
-            i=i+1
+            return "NO ADDRESS FOUND"
+        print "\n\n Street: " + street
+        i = 0
+        toreturn = ""
+        while (i < len(street)) and (street[i] != ","):
+            toreturn = toreturn + street[i]
+            i = i + 1
         if i < len(street):
-            while (i<len(street)) and (not self.isInt(street[i])):
-                i=i+1
-            toreturn=toreturn+' '
+            while (i < len(street)) and (not self.isInt(street[i])):
+                i = i + 1
+            toreturn = toreturn + " "
         while i < len(street):
-            toreturn=toreturn+street[i]
-            i=i+1
+            toreturn = toreturn + street[i]
+            i = i + 1
         return toreturn
 
-    security.declarePublic('parseCadastreName')
-    def parseCadastreName(self, name):
-        """
-        """
-        print '\n\nName: '+name
-        i=0
-        nom1=''
-        prenom1=''
-        nom2=''
-        prenom2=''
-        toreturn=''
-        if name.rfind(',') > 0:
-            while (i<len(name)) and (name[i] != ','):
-                nom1=nom1+name[i]
-                i=i+1
-            if i<len(name):
-                i=i+1
-            while (i<len(name)) and (name[i] != ' '):
-                i=i+1
-            if i<len(name):
-                i=i+1
-            while (i<len(name)) and (name[i] not in ['&', ' ']):
-                prenom1=prenom1+name[i]
-                i=i+1
-            if i<len(name) and name[i] != '&':
-                i=i+1
-            toreturn=prenom1
-            if prenom1!='':
-                toreturn=toreturn+' '
-            toreturn=toreturn+nom1
-            if name.rfind('&') > 0 and i < name.rfind('&'):
-                while (i<len(name)) and (name[i] != '&'):
-                    i=i+1
-                if name[i]=='&':
-                    toreturn=toreturn+' - M. '
-                    i=i+1
-                while (i<len(name)) and (name[i] != ','):
-                    nom2=nom2+name[i]
-                    i=i+1
-                if i<len(name):
-                    i=i+1
-                while (i<len(name)) and (name[i] != ' '):
-                    i=i+1
-                if i<len(name):
-                    i=i+1
-                while (i<len(name)) and (name[i] != ' '):
-                    prenom2=prenom2+name[i]
-                    i=i+1
-                toreturn=toreturn+prenom2
-                if prenom2 != '':
-                    toreturn=toreturn+' '
-                toreturn=toreturn+nom2
-        else:
-            toreturn=name
-        return 'M. %s' % toreturn
+    security.declarePublic("parseCadastreName")
 
-    security.declarePublic('getDocuments')
+    def parseCadastreName(self, name):
+        """ """
+        print "\n\nName: " + name
+        i = 0
+        nom1 = ""
+        prenom1 = ""
+        nom2 = ""
+        prenom2 = ""
+        toreturn = ""
+        if name.rfind(",") > 0:
+            while (i < len(name)) and (name[i] != ","):
+                nom1 = nom1 + name[i]
+                i = i + 1
+            if i < len(name):
+                i = i + 1
+            while (i < len(name)) and (name[i] != " "):
+                i = i + 1
+            if i < len(name):
+                i = i + 1
+            while (i < len(name)) and (name[i] not in ["&", " "]):
+                prenom1 = prenom1 + name[i]
+                i = i + 1
+            if i < len(name) and name[i] != "&":
+                i = i + 1
+            toreturn = prenom1
+            if prenom1 != "":
+                toreturn = toreturn + " "
+            toreturn = toreturn + nom1
+            if name.rfind("&") > 0 and i < name.rfind("&"):
+                while (i < len(name)) and (name[i] != "&"):
+                    i = i + 1
+                if name[i] == "&":
+                    toreturn = toreturn + " - M. "
+                    i = i + 1
+                while (i < len(name)) and (name[i] != ","):
+                    nom2 = nom2 + name[i]
+                    i = i + 1
+                if i < len(name):
+                    i = i + 1
+                while (i < len(name)) and (name[i] != " "):
+                    i = i + 1
+                if i < len(name):
+                    i = i + 1
+                while (i < len(name)) and (name[i] != " "):
+                    prenom2 = prenom2 + name[i]
+                    i = i + 1
+                toreturn = toreturn + prenom2
+                if prenom2 != "":
+                    toreturn = toreturn + " "
+                toreturn = toreturn + nom2
+        else:
+            toreturn = name
+        return "M. %s" % toreturn
+
+    security.declarePublic("getDocuments")
+
     def getDocuments(self):
         """
-          Return the documents (File) of the UrbanEvent
+        Return the documents (File) of the UrbanEvent
         """
         documents = [obj for obj in self.objectValues() if IUrbanDoc.providedBy(obj)]
         return documents
 
-    security.declarePublic('getAttachments')
+    security.declarePublic("getAttachments")
+
     def getAttachments(self):
         """
-          Return the attachments (File) of the UrbanEvent
+        Return the attachments (File) of the UrbanEvent
         """
         attachments = [obj for obj in self.objectValues() if is_attachment(obj)]
         return attachments
 
     def getRecipients(self):
         """
-          Returns a list of recipients
+        Returns a list of recipients
         """
-        return self.objectValues('RecipientCadastre')
+        return self.objectValues("RecipientCadastre")
 
-    security.declarePublic('RecipientsCadastreCSV')
+    security.declarePublic("RecipientsCadastreCSV")
+
     def RecipientsCadastreCSV(self):
         """
-          Generates a fake CSV file used in POD templates
+        Generates a fake CSV file used in POD templates
         """
-        recipients=self.objectValues('RecipientCadastre')
-        toreturn='[CSV]TitreNomPrenom|AdresseLigne1|AdresseLigne2'
-        wft = getToolByName(self, 'portal_workflow')
+        recipients = self.objectValues("RecipientCadastre")
+        toreturn = "[CSV]TitreNomPrenom|AdresseLigne1|AdresseLigne2"
+        wft = getToolByName(self, "portal_workflow")
         for recipient in recipients:
-            #do not take "disabled" recipients into account
-            if wft.getInfoFor(recipient, 'review_state') == 'disabled':
+            # do not take "disabled" recipients into account
+            if wft.getInfoFor(recipient, "review_state") == "disabled":
                 continue
-            street = recipient.getStreet() and recipient.getStreet() or ''
-            number = recipient.getNumber() and recipient.getNumber() or ''
-            address = recipient.getAdr1() and recipient.getAdr1() or ''
-            toreturn=toreturn+'%'+recipient.getName()+'|'+street+', '+number+'|'+address
-        toreturn=toreturn+'[/CSV]'
+            street = recipient.getStreet() and recipient.getStreet() or ""
+            number = recipient.getNumber() and recipient.getNumber() or ""
+            address = recipient.getAdr1() and recipient.getAdr1() or ""
+            toreturn = (
+                toreturn
+                + "%"
+                + recipient.getName()
+                + "|"
+                + street
+                + ", "
+                + number
+                + "|"
+                + address
+            )
+        toreturn = toreturn + "[/CSV]"
         return toreturn
 
-    security.declarePublic('getFormattedDate')
-    def getFormattedDate(self, date=None, withCityNamePrefix=False, forDelivery=False, translatemonth=True):
+    security.declarePublic("getFormattedDate")
+
+    def getFormattedDate(
+        self,
+        date=None,
+        withCityNamePrefix=False,
+        forDelivery=False,
+        translatemonth=True,
+    ):
         """
-          Return the date
-          withCityNamePrefix and forDelivery are exclusive in the logic here above
+        Return the date
+        withCityNamePrefix and forDelivery are exclusive in the logic here above
         """
         if not date:
             date = self.getEventDate()
         elif type(date) == str:
             date = self.getField(date).getAccessor(self)()
-        tool = getToolByName(self, 'portal_urban')
+        tool = getToolByName(self, "portal_urban")
         formattedDate = tool.formatDate(date, translatemonth=translatemonth)
-        cityName = unicode(tool.getCityName(), 'utf-8')
+        cityName = unicode(tool.getCityName(), "utf-8")
         if withCityNamePrefix:
-            return translate('formatted_date_with_cityname', 'urban', context=self.REQUEST, mapping={'cityName': cityName, 'formattedDate': formattedDate.decode('utf8')}).encode('utf8')
+            return translate(
+                "formatted_date_with_cityname",
+                "urban",
+                context=self.REQUEST,
+                mapping={
+                    "cityName": cityName,
+                    "formattedDate": formattedDate.decode("utf8"),
+                },
+            ).encode("utf8")
         if forDelivery:
-            return translate('formatted_date_for_delivery', 'urban', context=self.REQUEST, mapping={'cityName': cityName, 'formattedDate': formattedDate.decode('utf8')}).encode('utf8')
+            return translate(
+                "formatted_date_for_delivery",
+                "urban",
+                context=self.REQUEST,
+                mapping={
+                    "cityName": cityName,
+                    "formattedDate": formattedDate.decode("utf8"),
+                },
+            ).encode("utf8")
         return formattedDate
 
     def attributeIsUsed(self, attrName):
-        """
-        """
+        """ """
         urbanEventType = self.getUrbaneventtypes()
         if urbanEventType:
             return attrName in self.getUrbaneventtypes().getActivatedFields()
@@ -757,8 +834,7 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
             return False
 
     def showTitle(self):
-        """
-        """
+        """ """
         urbanEventType = self.getUrbaneventtypes()
         if urbanEventType:
             return urbanEventType.getShowTitle()
@@ -766,43 +842,46 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
             return False
 
     def defaultTitle(self):
-        """
-        """
+        """ """
         urbanEventType = self.getUrbaneventtypes()
         if urbanEventType:
             return urbanEventType.Title()
         else:
-            return ''
+            return ""
 
-    security.declarePublic('getUrbaneventtypes')
+    security.declarePublic("getUrbaneventtypes")
+
     def getUrbaneventtypes(self):
-        """
-        """
-        event_config = self.getField('urbaneventtypes').get(self)
-        if not event_config and self.REQUEST.form.get('urbaneventtypes'):
-            uid_catalog = api.portal.get_tool('uid_catalog')
-            event_config = uid_catalog(UID=self.REQUEST.form['urbaneventtypes'])[0].getObject()
+        """ """
+        event_config = self.getField("urbaneventtypes").get(self)
+        if not event_config and self.REQUEST.form.get("urbaneventtypes"):
+            uid_catalog = api.portal.get_tool("uid_catalog")
+            event_config = uid_catalog(UID=self.REQUEST.form["urbaneventtypes"])[
+                0
+            ].getObject()
         return event_config
 
-    security.declarePublic('getDecision')
+    security.declarePublic("getDecision")
+
     def getDecision(self, theObject=False):
         """
-          Returns the decision value or the UrbanVocabularyTerm if theObject=True
+        Returns the decision value or the UrbanVocabularyTerm if theObject=True
         """
-        res = self.getField('decision').get(self)
+        res = self.getField("decision").get(self)
         if res and theObject:
-            tool = getToolByName(self, 'portal_urban')
+            tool = getToolByName(self, "portal_urban")
             res = getattr(tool.decisions, res)
         return res
 
-    security.declarePublic('getDecision')
+    security.declarePublic("getDecision")
+
     def getExternalDecision(self, theObject=False):
         """
-          Returns the external decision value or the UrbanVocabularyTerm if theObject=True
+        Returns the external decision value or the UrbanVocabularyTerm if theObject=True
         """
-        res = self.getField('externalDecision').get(self)
+        res = self.getField("externalDecision").get(self)
         if res and theObject:
-            tool = getToolByName(self, 'portal_urban')
+            tool = getToolByName(self, "portal_urban")
             res = getattr(tool.externaldecisions, res)
         return res
 
@@ -810,35 +889,38 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
         state = api.content.get_state(self)
         return state
 
-    security.declarePublic('listFollowupPropositions')
+    security.declarePublic("listFollowupPropositions")
 
     def listFollowupPropositions(self):
         """
-          This vocabulary for field floodingLevel returns a list of
-          flooding levels : no risk, low risk, moderated risk, high risk
+        This vocabulary for field floodingLevel returns a list of
+        flooding levels : no risk, low risk, moderated risk, high risk
         """
-        voc = UrbanVocabulary('urbaneventtypes', vocType="FollowUpEventType", value_to_use='title')
+        voc = UrbanVocabulary(
+            "urbaneventtypes", vocType="FollowUpEventType", value_to_use="title"
+        )
         config_voc = voc.getDisplayList(self)
         full_voc = []
-        if self.aq_parent.portal_type == 'Inspection':
+        if self.aq_parent.portal_type == "Inspection":
             full_voc = [
-                ('close', translate(_('close_inspection'), context=self.REQUEST)),
-                ('ticket', translate(_('ticket'), context=self.REQUEST)),
+                ("close", translate(_("close_inspection"), context=self.REQUEST)),
+                ("ticket", translate(_("ticket"), context=self.REQUEST)),
             ]
         for key in config_voc.keys():
             full_voc.append((key, config_voc.getValue(key)))
         return DisplayList(full_voc)
 
     def get_regular_followup_propositions(self):
-        """
-        """
-        ignore = ['ticket', 'close']
-        follow_ups = [fw_up for fw_up in self.getFollowup_proposition() if fw_up not in ignore]
+        """ """
+        ignore = ["ticket", "close"]
+        follow_ups = [
+            fw_up for fw_up in self.getFollowup_proposition() if fw_up not in ignore
+        ]
         return follow_ups
 
     def showOtherFollowUp(self, *values):
-        selection = [v['val'] for v in values if v['selected']]
-        show = 'other' in selection
+        selection = [v["val"] for v in values if v["selected"]]
+        show = "other" in selection
         return show
 
 
@@ -847,4 +929,3 @@ registerType(UrbanEvent, PROJECTNAME)
 
 ##code-section module-footer #fill in your manual code here
 ##/code-section module-footer
-

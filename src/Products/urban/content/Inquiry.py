@@ -11,7 +11,7 @@
 
 __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEULETTE
 <stephan.geulette@uvcw.be>, Jean-Michel Abe <jm.abe@la-bruyere.be>"""
-__docformat__ = 'plaintext'
+__docformat__ = "plaintext"
 
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
@@ -35,147 +35,175 @@ from plone import api
 from DateTime import DateTime
 
 optional_fields = [
-    'derogationDetails', 'investigationDetails', 'investigationReasons',
-    'investigationArticlesText', 'investigationArticles', 'demandDisplay',
-    'derogation', 'derogationDetails', 'roadModificationSubject'
+    "derogationDetails",
+    "investigationDetails",
+    "investigationReasons",
+    "investigationArticlesText",
+    "investigationArticles",
+    "demandDisplay",
+    "derogation",
+    "derogationDetails",
+    "roadModificationSubject",
 ]
 ##/code-section module-header
 
-schema = Schema((
-
-    LinesField(
-        name='derogation',
-        widget=MultiSelectionWidget(
-            format='checkbox',
-            label=_('urban_label_derogation', default='Derogation'),
+schema = Schema(
+    (
+        LinesField(
+            name="derogation",
+            widget=MultiSelectionWidget(
+                format="checkbox",
+                label=_("urban_label_derogation", default="Derogation"),
+            ),
+            schemata="urban_inquiry",
+            multiValued=1,
+            vocabulary=UrbanVocabulary("derogations"),
+            default_method="getDefaultValue",
         ),
-        schemata='urban_inquiry',
-        multiValued=1,
-        vocabulary=UrbanVocabulary('derogations'),
-        default_method='getDefaultValue',
-    ),
-    TextField(
-        name='derogationDetails',
-        allowable_content_types=('text/html',),
-        widget=RichWidget(
-            label=_('urban_label_derogationDetails', default='Derogationdetails'),
+        TextField(
+            name="derogationDetails",
+            allowable_content_types=("text/html",),
+            widget=RichWidget(
+                label=_("urban_label_derogationDetails", default="Derogationdetails"),
+            ),
+            schemata="urban_inquiry",
+            default_output_type="text/html",
+            default_content_type="text/html",
+            default_method="getDefaultText",
         ),
-        schemata='urban_inquiry',
-        default_output_type='text/html',
-        default_content_type='text/html',
-        default_method='getDefaultText',
-    ),
-    LinesField(
-        name='investigationArticles',
-        widget=MultiSelectionWidget(
-            size=10,
-            label=_('urban_label_investigationArticles', default='Investigationarticles'),
+        LinesField(
+            name="investigationArticles",
+            widget=MultiSelectionWidget(
+                size=10,
+                label=_(
+                    "urban_label_investigationArticles", default="Investigationarticles"
+                ),
+            ),
+            schemata="urban_inquiry",
+            multiValued=True,
+            vocabulary=UrbanVocabulary("investigationarticles"),
+            default_method="getDefaultValue",
         ),
-        schemata='urban_inquiry',
-        multiValued=True,
-        vocabulary=UrbanVocabulary('investigationarticles'),
-        default_method='getDefaultValue',
-    ),
-    TextField(
-        name='investigationArticlesText',
-        allowable_content_types=('text/html',),
-        widget=RichWidget(
-            label=_('urban_label_investigationArticlesText', default='Investigationarticlestext'),
+        TextField(
+            name="investigationArticlesText",
+            allowable_content_types=("text/html",),
+            widget=RichWidget(
+                label=_(
+                    "urban_label_investigationArticlesText",
+                    default="Investigationarticlestext",
+                ),
+            ),
+            schemata="urban_inquiry",
+            default_content_type="text/html",
+            default_method="getDefaultText",
+            default_output_type="text/html",
         ),
-        schemata='urban_inquiry',
-        default_content_type='text/html',
-        default_method='getDefaultText',
-        default_output_type='text/html',
-    ),
-    DateTimeField(
-        name='demandDisplay',
-        widget=DateTimeField._properties['widget'](
-            show_hm=False,
-            format="%d/%m/%Y",
-            label=_('urban_label_demandDisplay', default='Demanddisplay'),
+        DateTimeField(
+            name="demandDisplay",
+            widget=DateTimeField._properties["widget"](
+                show_hm=False,
+                format="%d/%m/%Y",
+                label=_("urban_label_demandDisplay", default="Demanddisplay"),
+            ),
+        ),
+        TextField(
+            name="investigationDetails",
+            allowable_content_types=("text/html",),
+            widget=RichWidget(
+                label=_(
+                    "urban_label_investigationDetails", default="Investigationdetails"
+                ),
+            ),
+            schemata="urban_inquiry",
+            default_content_type="text/html",
+            default_method="getDefaultText",
+            default_output_type="text/html",
+        ),
+        TextField(
+            name="investigationReasons",
+            allowable_content_types=("text/html",),
+            widget=RichWidget(
+                label=_(
+                    "urban_label_investigationReasons", default="Investigationreasons"
+                ),
+            ),
+            schemata="urban_inquiry",
+            default_content_type="text/html",
+            default_method="getDefaultText",
+            default_output_type="text/html",
+        ),
+        TextField(
+            name="roadModificationSubject",
+            allowable_content_types=("text/html",),
+            widget=RichWidget(
+                label=_(
+                    "urban_label_roadModificationSubject",
+                    default="Roadmodificationsubject",
+                ),
+            ),
+            schemata="urban_inquiry",
+            default_content_type="text/html",
+            default_method="getDefaultText",
+            default_output_type="text/html",
+        ),
+        LinesField(
+            name="solicitOpinionsTo",
+            widget=Select2Widget(
+                label=_("urban_label_solicitOpinionsTo", default="Solicitopinionsto"),
+                multiple=True,
+            ),
+            schemata="urban_advices",
+            multiValued=1,
+            vocabulary=UrbanVocabulary(
+                "urbaneventtypes",
+                vocType="OpinionRequestEventType",
+                value_to_use="extraValue",
+            ),
+            default_method="getDefaultValue",
+        ),
+        LinesField(
+            name="solicitOpinionsToOptional",
+            widget=Select2Widget(
+                label=_(
+                    "urban_label_solicitOpinionsToOptional",
+                    default="Solicitopinionstooptional",
+                ),
+                multiple=True,
+            ),
+            schemata="urban_advices",
+            multiValued=1,
+            vocabulary=UrbanVocabulary(
+                "urbaneventtypes",
+                vocType="OpinionRequestEventType",
+                value_to_use="extraValue",
+            ),
+            default_method="getDefaultValue",
         ),
     ),
-    TextField(
-        name='investigationDetails',
-        allowable_content_types=('text/html',),
-        widget=RichWidget(
-            label=_('urban_label_investigationDetails', default='Investigationdetails'),
-        ),
-        schemata='urban_inquiry',
-        default_content_type='text/html',
-        default_method='getDefaultText',
-        default_output_type='text/html',
-    ),
-    TextField(
-        name='investigationReasons',
-        allowable_content_types=('text/html',),
-        widget=RichWidget(
-            label=_('urban_label_investigationReasons', default='Investigationreasons'),
-        ),
-        schemata='urban_inquiry',
-        default_content_type='text/html',
-        default_method='getDefaultText',
-        default_output_type='text/html',
-    ),
-    TextField(
-        name='roadModificationSubject',
-        allowable_content_types=('text/html',),
-        widget=RichWidget(
-            label=_('urban_label_roadModificationSubject', default='Roadmodificationsubject'),
-        ),
-        schemata='urban_inquiry',
-        default_content_type='text/html',
-        default_method='getDefaultText',
-        default_output_type='text/html',
-    ),
-    LinesField(
-        name='solicitOpinionsTo',
-        widget=Select2Widget(
-            label=_('urban_label_solicitOpinionsTo', default='Solicitopinionsto'),
-            multiple=True,
-        ),
-        schemata='urban_advices',
-        multiValued=1,
-        vocabulary=UrbanVocabulary('urbaneventtypes', vocType="OpinionRequestEventType", value_to_use='extraValue'),
-        default_method='getDefaultValue',
-    ),
-    LinesField(
-        name='solicitOpinionsToOptional',
-        widget=Select2Widget(
-            label=_('urban_label_solicitOpinionsToOptional', default='Solicitopinionstooptional'),
-            multiple=True,
-        ),
-        schemata='urban_advices',
-        multiValued=1,
-        vocabulary=UrbanVocabulary('urbaneventtypes', vocType="OpinionRequestEventType", value_to_use='extraValue'),
-        default_method='getDefaultValue',
-    ),
-
-),
 )
 
 ##code-section after-local-schema #fill in your manual code here
 setOptionalAttributes(schema, optional_fields)
 ##/code-section after-local-schema
 
-Inquiry_schema = BaseSchema.copy() + \
-    schema.copy()
+Inquiry_schema = BaseSchema.copy() + schema.copy()
 
 ##code-section after-schema #fill in your manual code here
-Inquiry_schema['title'].widget.visible = False
-#implicitly rmove the not used description field because it is defined with default
-#values that are wrong for BuildLicence that heritates from self and GenericLicence
-#GenericLicence redefines 'description' and self too...  See ticket #3502
-del Inquiry_schema['description']
+Inquiry_schema["title"].widget.visible = False
+# implicitly rmove the not used description field because it is defined with default
+# values that are wrong for BuildLicence that heritates from self and GenericLicence
+# GenericLicence redefines 'description' and self too...  See ticket #3502
+del Inquiry_schema["description"]
 ##/code-section after-schema
 
+
 class Inquiry(BaseContent, BrowserDefaultMixin):
-    """
-    """
+    """ """
+
     security = ClassSecurityInfo()
     implements(interfaces.IInquiry)
 
-    meta_type = 'Inquiry'
+    meta_type = "Inquiry"
     _at_rename_after_creation = True
 
     schema = Inquiry_schema
@@ -187,77 +215,95 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
 
     # Manually created methods
 
-    security.declarePublic('getDefaultValue')
+    security.declarePublic("getDefaultValue")
+
     def getDefaultValue(self, context=None, field=None):
         if not context or not field:
-            return ['']
+            return [""]
 
-        empty_value = getattr(field, 'multivalued', '') and [] or ''
-        if hasattr(field, 'vocabulary') and isinstance(field.vocabulary, UrbanVocabulary):
+        empty_value = getattr(field, "multivalued", "") and [] or ""
+        if hasattr(field, "vocabulary") and isinstance(
+            field.vocabulary, UrbanVocabulary
+        ):
             return field.vocabulary.get_default_values(context)
         return empty_value
 
-    security.declarePublic('getDefaultText')
+    security.declarePublic("getDefaultText")
+
     def getDefaultText(self, context=None, field=None, html=False):
         if not context or not field:
             return ""
-        urban_tool = getToolByName(self, 'portal_urban')
+        urban_tool = getToolByName(self, "portal_urban")
         return urban_tool.getTextDefaultValue(field.getName(), context, html=html)
 
-    security.declarePrivate('manage_beforeDelete')
+    security.declarePrivate("manage_beforeDelete")
+
     def manage_beforeDelete(self, item, container):
         """
-          We can not remove an Inquiry if a linked UrbanEventInquiry exists
+        We can not remove an Inquiry if a linked UrbanEventInquiry exists
         """
         linkedUrbanEventInquiry = self.getLinkedUrbanEventInquiry()
         if linkedUrbanEventInquiry:
-            raise BeforeDeleteException, 'cannot_remove_inquiry_linkedurbaneventinquiry'
+            raise BeforeDeleteException, "cannot_remove_inquiry_linkedurbaneventinquiry"
         BaseContent.manage_beforeDelete(self, item, container)
 
-    security.declarePublic('getLinkedUrbanEventInquiry')
+    security.declarePublic("getLinkedUrbanEventInquiry")
+
     def getLinkedUrbanEventInquiry(self):
         """
-          Return the linked UrbanEventInquiry object if exists
+        Return the linked UrbanEventInquiry object if exists
         """
-        brefs = self.getBRefs('linkedInquiry')
+        brefs = self.getBRefs("linkedInquiry")
         if brefs:
-            #linkedInquiry may come from a UrbanEventInquiry or an UrbanEventOpinionRequest
+            # linkedInquiry may come from a UrbanEventInquiry or an UrbanEventOpinionRequest
             for bref in brefs:
-                if bref and bref.portal_type == 'UrbanEventInquiry':
+                if bref and bref.portal_type == "UrbanEventInquiry":
                     return bref
         else:
             return None
 
-    security.declarePublic('getCustomInvestigationArticles')
+    security.declarePublic("getCustomInvestigationArticles")
+
     def getCustomInvestigationArticles(self):
         items = []
         for article in self.getInvestigationArticles():
-            if self.displayValue(UrbanVocabulary('investigationarticles').getDisplayList(self), article):
-                items.append(self.displayValue(UrbanVocabulary('investigationarticles').getDisplayList(self), article))
+            if self.displayValue(
+                UrbanVocabulary("investigationarticles").getDisplayList(self), article
+            ):
+                items.append(
+                    self.displayValue(
+                        UrbanVocabulary("investigationarticles").getDisplayList(self),
+                        article,
+                    )
+                )
         return items
 
-    security.declarePublic('getLinkedUrbanEventOpinionRequest')
+    security.declarePublic("getLinkedUrbanEventOpinionRequest")
+
     def getLinkedUrbanEventOpinionRequest(self, organisation):
         """
-          Return the linked UrbanEventOpinionRequest objects if exist
+        Return the linked UrbanEventOpinionRequest objects if exist
         """
-        brefs = self.getBRefs('linkedInquiry')
+        brefs = self.getBRefs("linkedInquiry")
         if brefs:
-            #linkedInquiry may come from a UrbanEventInquiry or an UrbanEventOpinionRequest
+            # linkedInquiry may come from a UrbanEventInquiry or an UrbanEventOpinionRequest
             for bref in brefs:
-                if bref and bref.portal_type == 'UrbanEventOpinionRequest':
-                    if bref.getLinkedOrganisationTermId() == organisation and bref.getLinkedInquiry() == self:
+                if bref and bref.portal_type == "UrbanEventOpinionRequest":
+                    if (
+                        bref.getLinkedOrganisationTermId() == organisation
+                        and bref.getLinkedInquiry() == self
+                    ):
                         return bref
         return None
 
     def _getSelfPosition(self):
         """
-          Return the position of the self between every Inquiry objects
+        Return the position of the self between every Inquiry objects
         """
-        #get the existing Inquiries
-        #getInquiries is a method of GenericLicence
-        #so by acquisition, we get it on the parent or we get it on self
-        #as GenericLicence heritates from Inquiry
+        # get the existing Inquiries
+        # getInquiries is a method of GenericLicence
+        # so by acquisition, we get it on the parent or we get it on self
+        # as GenericLicence heritates from Inquiry
         inquiries = self.getInquiries()
         selfUID = self.UID()
         i = 0
@@ -267,30 +313,38 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
             i = i + 1
         return i
 
-    security.declarePublic('generateInquiryTitle')
+    security.declarePublic("generateInquiryTitle")
+
     def generateInquiryTitle(self):
         """
-          Generates a title for the inquiry
+        Generates a title for the inquiry
         """
-        #we need to generate the title as the number of the inquiry is into it
+        # we need to generate the title as the number of the inquiry is into it
         position = self._getSelfPosition()
-        return translate('inquiry_title_and_number', 'urban', mapping={'number': position + 1}, context=self.REQUEST)
+        return translate(
+            "inquiry_title_and_number",
+            "urban",
+            mapping={"number": position + 1},
+            context=self.REQUEST,
+        )
 
-    security.declarePublic('getInquiries')
+    security.declarePublic("getInquiries")
+
     def getInquiries(self):
         """
         Returns the existing inquiries
         """
         return self._get_inquiry_objs(all_=False)
 
-    security.declarePublic('getAllInquiries')
+    security.declarePublic("getAllInquiries")
+
     def getAllInquiries(self):
         """
         Returns the existing inquiries
         """
         return self._get_inquiry_objs(all_=True)
 
-    def _get_inquiry_objs(self, all_=False, portal_type='Inquiry'):
+    def _get_inquiry_objs(self, all_=False, portal_type="Inquiry"):
         """
         Returns the existing inquiries or announcements
         """
@@ -301,12 +355,13 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
         all_inquiries.extend(list(other_inquiries))
         return all_inquiries
 
-    security.declarePublic('getUrbanEventInquiries')
+    security.declarePublic("getUrbanEventInquiries")
+
     def getUrbanEventInquiries(self):
         """
-          Returns the existing UrbanEventInquiries
+        Returns the existing UrbanEventInquiries
         """
-        return self.listFolderContents({'portal_type': 'UrbanEventInquiry'})
+        return self.listFolderContents({"portal_type": "UrbanEventInquiry"})
 
     def getLastInquiry(self, use_catalog=True):
         return self.getLastEvent(interfaces.IInquiryEvent)
@@ -317,56 +372,67 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
     def getAllTechnicalServiceOpinionRequests(self):
         return self.getAllEvents(interfaces.ITechnicalServiceOpinionRequestEvent)
 
-    security.declarePublic('getSolicitOpinionValue')
+    security.declarePublic("getSolicitOpinionValue")
+
     def getSolicitOpinionValue(self, opinionId):
         """
-          Return the corresponding opinion value from the given opinionId
+        Return the corresponding opinion value from the given opinionId
         """
-        vocabulary = self.getField('solicitOpinionsTo').vocabulary
-        title = [v['title'] for v in vocabulary.get_raw_voc(self) if v['id'] == opinionId]
-        title = title and title[0] or ''
+        vocabulary = self.getField("solicitOpinionsTo").vocabulary
+        title = [
+            v["title"] for v in vocabulary.get_raw_voc(self) if v["id"] == opinionId
+        ]
+        title = title and title[0] or ""
         return title
 
-    security.declarePublic('getSolicitOpinionOptionalValue')
+    security.declarePublic("getSolicitOpinionOptionalValue")
+
     def getSolicitOpinionOptionalValue(self, opinionId):
         """
-          Return the corresponding opinion value from the given opinionId
+        Return the corresponding opinion value from the given opinionId
         """
-        vocabulary = self.getField('solicitOpinionsToOptional').vocabulary
-        title = [v['title'] for v in vocabulary.get_raw_voc(self) if v['id'] == opinionId]
-        title = title and title[0] or ''
+        vocabulary = self.getField("solicitOpinionsToOptional").vocabulary
+        title = [
+            v["title"] for v in vocabulary.get_raw_voc(self) if v["id"] == opinionId
+        ]
+        title = title and title[0] or ""
         return title
 
-    security.declarePublic('mayAddOpinionRequestEvent')
+    security.declarePublic("mayAddOpinionRequestEvent")
+
     def mayAddOpinionRequestEvent(self, organisation):
         """
-           This is used as TALExpression for the UrbanEventOpinionRequest
-           We may add an OpinionRequest if we asked one in an inquiry on the licence
-           We may add another if another inquiry defined on the licence ask for it and so on
+        This is used as TALExpression for the UrbanEventOpinionRequest
+        We may add an OpinionRequest if we asked one in an inquiry on the licence
+        We may add another if another inquiry defined on the licence ask for it and so on
         """
         opinions = self.getSolicitOpinionsTo()
         opinions += self.getSolicitOpinionsToOptional()
         limit = organisation in opinions and 1 or 0
         inquiries = [inq for inq in self.getInquiries() if inq != self]
         for inquiry in inquiries:
-            if organisation in inquiry.getSolicitOpinionsTo() or organisation in inquiry.getSolicitOpinionsToOptional():
+            if (
+                organisation in inquiry.getSolicitOpinionsTo()
+                or organisation in inquiry.getSolicitOpinionsToOptional()
+            ):
                 limit += 1
         limit = limit - len(self.getOpinionRequests(organisation))
         return limit > 0
 
-    security.declarePublic('mayAddInquiryEvent')
+    security.declarePublic("mayAddInquiryEvent")
+
     def mayAddInquiryEvent(self):
         """
-           This is used as TALExpression for the UrbanEventInquiry
-           We may add an inquiry if we defined one on the licence
-           We may add another if another is defined on the licence and so on
+        This is used as TALExpression for the UrbanEventInquiry
+        We may add an inquiry if we defined one on the licence
+        We may add another if another is defined on the licence and so on
         """
-        #first of all, we can add an InquiryEvent if an inquiry is defined on the licence at least
+        # first of all, we can add an InquiryEvent if an inquiry is defined on the licence at least
         inquiries = self.getAllInquiries()
         urbanEventInquiries = self.getUrbanEventInquiries()
-        #if we have only the inquiry defined on the licence and no start date is defined
-        #it means that no inquiryEvent can be added because no inquiry is defined...
-        #or if every UrbanEventInquiry have already been added
+        # if we have only the inquiry defined on the licence and no start date is defined
+        # it means that no inquiryEvent can be added because no inquiry is defined...
+        # or if every UrbanEventInquiry have already been added
         if len(urbanEventInquiries) >= len(inquiries):
             return False
         return True
@@ -382,7 +448,11 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
     def getAllOpinionRequests(self, organisation=""):
         if not organisation:
             return self.getAllEvents(interfaces.IOpinionRequestEvent)
-        opinion_requests = [op for op in self.getAllEvents(interfaces.IOpinionRequestEvent) if organisation in op.id]
+        opinion_requests = [
+            op
+            for op in self.getAllEvents(interfaces.IOpinionRequestEvent)
+            if organisation in op.id
+        ]
         return opinion_requests
 
     def getAllOpinionRequestsNoDup(self):
@@ -404,18 +474,23 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
                 claimsTexts.append(text)
         return claimsTexts
 
-    security.declarePublic('getFolderMakersCSV')
+    security.declarePublic("getFolderMakersCSV")
+
     def getFolderMakersCSV(self):
         """
-          Returns a formatted version of the folder maker address to be used in POD templates
+        Returns a formatted version of the folder maker address to be used in POD templates
         """
-        urban_tool = getToolByName(self, 'portal_urban')
+        urban_tool = getToolByName(self, "portal_urban")
         foldermakers_config = urban_tool.getUrbanConfig(self).urbaneventtypes
-        foldermakers = [fm for fm in foldermakers_config.objectValues('OpinionRequestEventType') if fm.id in self.getSolicitOpinionsTo()]
-        toreturn = '[CSV]Nom|Description|AdresseLigne1|AdresseLigne2'
+        foldermakers = [
+            fm
+            for fm in foldermakers_config.objectValues("OpinionRequestEventType")
+            if fm.id in self.getSolicitOpinionsTo()
+        ]
+        toreturn = "[CSV]Nom|Description|AdresseLigne1|AdresseLigne2"
         for foldermaker in foldermakers:
-            toreturn = toreturn + '%' + foldermaker.getAddressCSV()
-        toreturn = toreturn + '[/CSV]'
+            toreturn = toreturn + "%" + foldermaker.getAddressCSV()
+        toreturn = toreturn + "[/CSV]"
         return toreturn
 
     def get_suspension_delay(self):
@@ -427,19 +502,19 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
         if not start_date:
             return 0
 
-        portal_urban = api.portal.get_tool('portal_urban')
+        portal_urban = api.portal.get_tool("portal_urban")
         licence = IGenericLicence.providedBy(self) and self or self.aq_parent
         suspension_periods = portal_urban.getInquirySuspensionPeriods()
         suspension_delay = 0
         inquiry_duration = 15
-        if hasattr(licence, 'getRoadAdaptation'):
-            if self.getRoadAdaptation() and self.getRoadAdaptation() != ['']:
+        if hasattr(licence, "getRoadAdaptation"):
+            if self.getRoadAdaptation() and self.getRoadAdaptation() != [""]:
                 inquiry_duration = 30
         theorical_end_date = start_date + inquiry_duration
 
         for suspension_period in suspension_periods:
-            suspension_start = DateTime(suspension_period['from'])
-            suspension_end = DateTime(suspension_period['to'])
+            suspension_start = DateTime(suspension_period["from"])
+            suspension_end = DateTime(suspension_period["to"])
             if start_date < suspension_start and theorical_end_date >= suspension_start:
                 suspension_delay = suspension_end - suspension_start
                 return int(suspension_delay)
@@ -455,4 +530,3 @@ registerType(Inquiry, PROJECTNAME)
 
 ##code-section module-footer #fill in your manual code here
 ##/code-section module-footer
-

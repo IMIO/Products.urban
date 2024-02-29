@@ -6,37 +6,38 @@ from Products.CMFPlone import PloneMessageFactory as _
 
 class CODTUrbanCertificateTwoView(CODTUrbanCertificateBaseView):
     """
-      This manage the view of UrbanCertificateTwo
+    This manage the view of UrbanCertificateTwo
     """
+
     def __init__(self, context, request):
         super(CODTUrbanCertificateTwoView, self).__init__(context, request)
         self.context = context
         self.request = request
         # disable portlets on licences
-        self.request.set('disable_plone.rightcolumn', 1)
-        self.request.set('disable_plone.leftcolumn', 1)
-        plone_utils = getToolByName(context, 'plone_utils')
+        self.request.set("disable_plone.rightcolumn", 1)
+        self.request.set("disable_plone.leftcolumn", 1)
+        plone_utils = getToolByName(context, "plone_utils")
         if not self.context.getParcels():
-            plone_utils.addPortalMessage(_('warning_add_a_parcel'), type="warning")
+            plone_utils.addPortalMessage(_("warning_add_a_parcel"), type="warning")
         if not self.context.getProprietaries():
-            plone_utils.addPortalMessage(_('warning_add_an_applicant'), type="warning")
+            plone_utils.addPortalMessage(_("warning_add_an_applicant"), type="warning")
         if self.hasOutdatedParcels():
-            plone_utils.addPortalMessage(_('warning_outdated_parcel'), type="warning")
+            plone_utils.addPortalMessage(_("warning_outdated_parcel"), type="warning")
 
     def getInquiriesForDisplay(self):
         """
-          Returns the inquiries to display on the environmentlicence_view
+        Returns the inquiries to display on the environmentlicence_view
         """
         context = aq_inner(self.context)
         inquiries = context.getInquiriesAndAnnouncements()
         if not inquiries:
-            #we want to display at least the informations about the inquiry
-            #defined on the licence even if no data have been entered
+            # we want to display at least the informations about the inquiry
+            # defined on the licence even if no data have been entered
             inquiries.append(context)
         return inquiries
 
     def getMacroViewName(self):
-        return 'urbancertificatetwo-macros'
+        return "urbancertificatetwo-macros"
 
     def getPebFields(self):
-        return self.getSchemataFields(schemata='urban_peb')
+        return self.getSchemataFields(schemata="urban_peb")

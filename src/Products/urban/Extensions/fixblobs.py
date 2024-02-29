@@ -9,16 +9,16 @@ from plone.dexterity.content import DexterityContent
 from plone import api
 
 blob_fields = {
-    'SubTemplate': 'odt_file',
-    'DashboardPODTemplate': 'odt_file',
-    'StyleTemplate': 'odt_file',
-    'File': 'file',
-    'UrbanTemplate': 'odt_file'
+    "SubTemplate": "odt_file",
+    "DashboardPODTemplate": "odt_file",
+    "StyleTemplate": "odt_file",
+    "File": "file",
+    "UrbanTemplate": "odt_file",
 }
 
 
 def check_at_blobs(context):
-    """ Archetypes content checker.
+    """Archetypes content checker.
 
     Return True if purge needed
     """
@@ -32,14 +32,17 @@ def check_at_blobs(context):
                 try:
                     field.get_size(context)
                 except POSKeyError:
-                    print "Found damaged AT FileField %s on %s" % (id, context.absolute_url())
+                    print "Found damaged AT FileField %s on %s" % (
+                        id,
+                        context.absolute_url(),
+                    )
                     return field.getName()
 
     return False
 
 
 def check_dexterity_blobs(context):
-    """ Check Dexterity content for damaged blob fields
+    """Check Dexterity content for damaged blob fields
 
     XXX: NOT TESTED - THEORETICAL, GUIDELINING, IMPLEMENTATION
 
@@ -58,7 +61,10 @@ def check_dexterity_blobs(context):
                     try:
                         value.getSize()
                     except POSKeyError:
-                        print "Found damaged Dexterity plone.app.NamedFile %s on %s" % (key, context.absolute_url())
+                        print "Found damaged Dexterity plone.app.NamedFile %s on %s" % (
+                            key,
+                            context.absolute_url(),
+                        )
                         return key
     return False
 
@@ -74,12 +80,12 @@ def fix_blobs(context):
         print "Bad blobs found on %s" % context.absolute_url()
         return context.portal_type, corrupted_blob_field
 
-    return ('', '')
+    return ("", "")
 
 
 def catalog_search():
     portal_types = blob_fields.keys()
-    catalog = api.portal.get_tool('portal_catalog')
+    catalog = api.portal.get_tool("portal_catalog")
     brains = catalog(portal_type=portal_types)
 
     count = 0
@@ -94,7 +100,7 @@ def catalog_search():
 
 
 def check():
-    #plone = getMultiAdapter((self.context, self.request), name="plone_portal_state")
+    # plone = getMultiAdapter((self.context, self.request), name="plone_portal_state")
     print "Checking blobs"
     error_counts = catalog_search()
     print error_counts

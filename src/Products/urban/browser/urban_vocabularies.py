@@ -14,7 +14,6 @@ from zope.annotation import IAnnotations
 
 
 class UrbanVocabulariesCache(BrowserView):
-
     def update_all_cache(self):
         portal_urban = self.context
         self.update_procedure_all_vocabulary_cache(portal_urban)
@@ -24,7 +23,7 @@ class UrbanVocabulariesCache(BrowserView):
             self.update_procedure_all_vocabulary_cache(config)
 
     def _to_dict(self, list_of_dicts):
-        dict_ = OrderedDict([(v['id'], v) for v in list_of_dicts])
+        dict_ = OrderedDict([(v["id"], v) for v in list_of_dicts])
         return dict_
 
     def update_procedure_all_vocabulary_cache(self, config_folder):
@@ -40,20 +39,22 @@ class UrbanVocabulariesCache(BrowserView):
         if isinstance(config_folder, FactoryTool):
             config_folder = aq_parent(config_folder)
         annotations = IAnnotations(config_folder)
-        vocabularies = annotations.get('Products.urban.vocabulary_cache', {})
+        vocabularies = annotations.get("Products.urban.vocabulary_cache", {})
         for voc_folder in voc_folders:
             stored_value = self._to_dict(vocabularies.get(voc_folder.id, []))
-            updated_values = self._to_dict(self.voc_folder_to_vocabulary_list(voc_folder))
+            updated_values = self._to_dict(
+                self.voc_folder_to_vocabulary_list(voc_folder)
+            )
             # disable deleted voc terms but still keep them in the cache
-            updated_values_UIDS = set([v['UID'] for v in updated_values.values()])
+            updated_values_UIDS = set([v["UID"] for v in updated_values.values()])
             for k, v in stored_value.iteritems():
-                if k not in updated_values and v['UID'] not in updated_values_UIDS:
-                    v['enabled'] = False
+                if k not in updated_values and v["UID"] not in updated_values_UIDS:
+                    v["enabled"] = False
                     # use updated_values as the base for the result to ensures
                     # we also keep track of the values reordering
                     updated_values[k] = v
             vocabularies[voc_folder.id] = updated_values.values()
-        annotations['Products.urban.vocabulary_cache'] = vocabularies
+        annotations["Products.urban.vocabulary_cache"] = vocabularies
 
     def voc_folder_to_vocabulary_list(self, folder):
         vocabulary_list = []
@@ -69,4 +70,4 @@ class UrbanVocabulariesCache(BrowserView):
         configs = portal_urban.get_all_licence_configs() + [portal_urban]
         for config in configs:
             annotations = IAnnotations(config)
-            annotations['Products.urban.vocabulary_cache'] = {}
+            annotations["Products.urban.vocabulary_cache"] = {}

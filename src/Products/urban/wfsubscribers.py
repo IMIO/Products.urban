@@ -11,20 +11,23 @@
 
 __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEULETTE
 <stephan.geulette@uvcw.be>, Jean-Michel Abe <jm.abe@la-bruyere.be>"""
-__docformat__ = 'plaintext'
+__docformat__ = "plaintext"
 
 
 ##code-section module-header #fill in your manual code here
 from Products.CMFCore.utils import getToolByName
+
 ##/code-section module-header
 
 
 def afterAccept(obj, event):
     """generated workflow subscriber."""
     # do only change the code section inside this function.
-    if not event.transition \
-       or event.transition.id not in ['accept'] \
-       or obj != event.object:
+    if (
+        not event.transition
+        or event.transition.id not in ["accept"]
+        or obj != event.object
+    ):
         return
     ##code-section afterAccept #fill in your manual code here
     closeEveryUrbanEvents(obj)
@@ -34,9 +37,11 @@ def afterAccept(obj, event):
 def afterRetire(obj, event):
     """generated workflow subscriber."""
     # do only change the code section inside this function.
-    if not event.transition \
-       or event.transition.id not in ['retire'] \
-       or obj != event.object:
+    if (
+        not event.transition
+        or event.transition.id not in ["retire"]
+        or obj != event.object
+    ):
         return
     ##code-section afterRetire #fill in your manual code here
     closeEveryUrbanEvents(obj)
@@ -46,9 +51,11 @@ def afterRetire(obj, event):
 def afterIncomplete(obj, event):
     """generated workflow subscriber."""
     # do only change the code section inside this function.
-    if not event.transition \
-       or event.transition.id not in ['isincomplete'] \
-       or obj != event.object:
+    if (
+        not event.transition
+        or event.transition.id not in ["isincomplete"]
+        or obj != event.object
+    ):
         return
     ##code-section afterIncomplete #fill in your manual code here
     closeEveryUrbanEvents(obj)
@@ -58,9 +65,11 @@ def afterIncomplete(obj, event):
 def afterRefuse(obj, event):
     """generated workflow subscriber."""
     # do only change the code section inside this function.
-    if not event.transition \
-       or event.transition.id not in ['refuse'] \
-       or obj != event.object:
+    if (
+        not event.transition
+        or event.transition.id not in ["refuse"]
+        or obj != event.object
+    ):
         return
     ##code-section afterRefuse #fill in your manual code here
     closeEveryUrbanEvents(obj)
@@ -69,15 +78,16 @@ def afterRefuse(obj, event):
 
 def closeEveryUrbanEvents(obj):
     """
-      This look for every UrbanEvents and close them if they are not
+    This look for every UrbanEvents and close them if they are not
     """
-    wft = getToolByName(obj, 'portal_workflow')
+    wft = getToolByName(obj, "portal_workflow")
     urbanEvents = obj.getUrbanEvents()
     for urbanEvent in urbanEvents:
-        if wft.getInfoFor(urbanEvent, 'review_state') == 'in_progress':
-            wft.doActionFor(urbanEvent, 'close')
+        if wft.getInfoFor(urbanEvent, "review_state") == "in_progress":
+            wft.doActionFor(urbanEvent, "close")
+
+
 ##/code-section module-header
 
 ##code-section module-footer #fill in your manual code here
 ##/code-section module-footer
-

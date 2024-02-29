@@ -15,29 +15,31 @@ def retLines(filename):
 
 def makeContext(pif):
     import socket
+
     serverip = socket.gethostbyname(socket.gethostname())
 
-    nisre = re.compile(r'^ *INS *= *(\d+)', re.I)
+    nisre = re.compile(r"^ *INS *= *(\d+)", re.I)
     sqlurlre = re.compile(
-        r'^ *sqlalchemy.url *= *postgresql://(\w+):(\w+)@([\w\.]+):\d+/(\w+)',
-        re.I)
-    urbanmapre = re.compile(r'^ *urbanmap_url *= *(https?://[^ ]+)', re.I)
+        r"^ *sqlalchemy.url *= *postgresql://(\w+):(\w+)@([\w\.]+):\d+/(\w+)", re.I
+    )
+    urbanmapre = re.compile(r"^ *urbanmap_url *= *(https?://[^ ]+)", re.I)
 
     sites = {}
 
     for pifline in retLines(pif):
-        pifline = pifline.strip(' \n')
-        if not pifline: continue
-        if pifline.startswith('#'): continue
-        path, dbname, port = pifline.split(';')
+        pifline = pifline.strip(" \n")
+        if not pifline:
+            continue
+        if pifline.startswith("#"):
+            continue
+        path, dbname, port = pifline.split(";")
         sitename = dbname[4:]
-        nis = dbuser = dbpwd = pghost = pylonhost = ''
-        inifilename = os.path.join(
-                os.path.abspath(path), 'config', '%s.ini' % dbname)
+        nis = dbuser = dbpwd = pghost = pylonhost = ""
+        inifilename = os.path.join(os.path.abspath(path), "config", "%s.ini" % dbname)
         if not os.path.exists(inifilename):
             continue
         for line in retLines(inifilename):
-            line = line.strip('\n')
+            line = line.strip("\n")
             if nisre.match(line):
                 nis = nisre.match(line).group(1)
             elif sqlurlre.match(line):
@@ -47,16 +49,22 @@ def makeContext(pif):
                 pghost = matching.group(3)
             elif urbanmapre.match(line):
                 pylonhost = urbanmapre.match(line).group(1)
-        #geohost = "%s:8080" % serverip
+        # geohost = "%s:8080" % serverip
         geohost = "geoserver.communesplone.be"
-        sites[sitename] = dict(sitename=sitename, nis=nis, pghost=pghost,
-             dbname=dbname, dbuser=dbuser, dbpwd=dbpwd,
-             geohost=geohost, pylonhost=pylonhost)
+        sites[sitename] = dict(
+            sitename=sitename,
+            nis=nis,
+            pghost=pghost,
+            dbname=dbname,
+            dbuser=dbuser,
+            dbpwd=dbpwd,
+            geohost=geohost,
+            pylonhost=pylonhost,
+        )
     return sites
 
 
 class Sites(object):
-
     def __init__(self, input):
         self.input = input
         self.source = open(self.input).read()
@@ -72,7 +80,6 @@ class Sites(object):
 
 
 class PerSite(object):
-
     def __init__(self, input, directory, extension):
         self.extension = extension
         self.directory = os.path.abspath(directory)
@@ -90,7 +97,7 @@ class PerSite(object):
     def write(self, siteid):
         output = "%s.%s" % (siteid, self.extension)
         output = os.path.abspath(os.path.join(self.directory, output))
-        file = open(output, 'w')
+        file = open(output, "w")
         file.write(self.result)
         file.close()
 

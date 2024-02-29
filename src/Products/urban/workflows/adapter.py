@@ -37,6 +37,7 @@ class LocalRoleAdapter(object):
     """
     borg.localrole adapter to set localrole following type and state configuration.
     """
+
     implements(ILocalRoleProvider)
 
     mapping = {}
@@ -46,15 +47,17 @@ class LocalRoleAdapter(object):
         self.licence = self.context
 
     def get_allowed_groups(self, licence):
-        if IUniqueLicence.providedBy(licence) or\
-           ICODT_UniqueLicence.providedBy(licence) or \
-           IIntegratedLicence.providedBy(licence) or \
-           ICODT_IntegratedLicence.providedBy(licence):
-            return 'urban_and_environment'
+        if (
+            IUniqueLicence.providedBy(licence)
+            or ICODT_UniqueLicence.providedBy(licence)
+            or IIntegratedLicence.providedBy(licence)
+            or ICODT_IntegratedLicence.providedBy(licence)
+        ):
+            return "urban_and_environment"
         elif IEnvironmentBase.providedBy(licence):
-            return 'environment_only'
+            return "environment_only"
         else:
-            return 'urban_only'
+            return "urban_only"
 
     def get_opinion_editors(self):
         """
@@ -62,10 +65,10 @@ class LocalRoleAdapter(object):
         Thes groups should be to able to partially read the licence (
         'ExternalReader' role)
         """
-        portal_urban = api.portal.get_tool('portal_urban')
+        portal_urban = api.portal.get_tool("portal_urban")
         schedule_config = portal_urban.opinions_schedule
 
-        exceptions = ['Voirie_editors', 'Voirie_Validators']
+        exceptions = ["Voirie_editors", "Voirie_Validators"]
         opinion_editors = []
         all_opinion_request = self.context.getOpinionRequests()
 
@@ -73,9 +76,15 @@ class LocalRoleAdapter(object):
             task = None
             for task_config in schedule_config.get_all_task_configs():
                 for obj in opinion_request.objectValues():
-                    if IAutomatedTask.providedBy(obj) and obj.task_config_UID == task_config.UID():
+                    if (
+                        IAutomatedTask.providedBy(obj)
+                        and obj.task_config_UID == task_config.UID()
+                    ):
                         task = obj
-                        if task and status_by_state[api.content.get_state(task)] in [STARTED, DONE]:
+                        if task and status_by_state[api.content.get_state(task)] in [
+                            STARTED,
+                            DONE,
+                        ]:
                             group = task.assigned_group
                             if group not in exceptions:
                                 opinion_editors.append(group)
@@ -86,16 +95,16 @@ class LocalRoleAdapter(object):
         """ """
         licence = self.licence
         mapping = {
-            'urban_only': [
-                'urban_editors',
+            "urban_only": [
+                "urban_editors",
             ],
-            'environment_only': [
-                'environment_editors',
+            "environment_only": [
+                "environment_editors",
             ],
-            'urban_and_environment': [
-                'urban_editors',
-                'environment_editors',
-            ]
+            "urban_and_environment": [
+                "urban_editors",
+                "environment_editors",
+            ],
         }
         allowed_group = self.get_allowed_groups(licence)
         if allowed_group in mapping:
@@ -105,16 +114,16 @@ class LocalRoleAdapter(object):
         """ """
         licence = self.licence
         mapping = {
-            'urban_only': [
-                'urban_readers',
+            "urban_only": [
+                "urban_readers",
             ],
-            'environment_only': [
-                'environment_readers',
+            "environment_only": [
+                "environment_readers",
             ],
-            'urban_and_environment': [
-                'urban_readers',
-                'environment_readers',
-            ]
+            "urban_and_environment": [
+                "urban_readers",
+                "environment_readers",
+            ],
         }
         allowed_group = self.get_allowed_groups(licence)
         if allowed_group in mapping:
@@ -139,12 +148,12 @@ class LocalRoleAdapter(object):
         current_state = self.get_state()
         state_config = self.get_roles_mapping_for_state(current_state)
         if not state_config:
-            yield ('', ('', ))
+            yield ("", ("",))
             raise StopIteration
         for principal, roles in state_config.items():
             yield (principal, tuple(roles))
 
-    @cache(get_key=_get_rolemap_caching_key, get_request='self.context.REQUEST')
+    @cache(get_key=_get_rolemap_caching_key, get_request="self.context.REQUEST")
     def get_roles_mapping_for_state(self, state):
         """
         Return the group/roles mapping of a given state.
@@ -182,8 +191,7 @@ class LocalRoleAdapter(object):
             if not api.group.get(group_value):
                 if callable(group_name):
                     msg = "Group '{}' computed by '{}' method does not exist.".format(
-                        group_value,
-                        group_name.__name__
+                        group_value, group_name.__name__
                     )
                 else:
                     msg = "'{}' is neither an existing group nor a method on mapping object {}.".format(
@@ -203,8 +211,7 @@ class LocalRoleAdapter(object):
             if role_value not in registered_roles:
                 if callable(role_name):
                     msg = "Role '{}' computed by '{}' method does not exist.".format(
-                        role_value,
-                        role_name.__func__.__name__
+                        role_value, role_name.__func__.__name__
                     )
                 else:
                     msg = "'{}' is neither an existing role nor a method on mapping object {}.".format(
@@ -215,7 +222,7 @@ class LocalRoleAdapter(object):
         return role_values
 
     def get_state(self):
-        """ Return the state of the current object """
+        """Return the state of the current object"""
         try:
             return api.content.get_state(obj=self.context)
         except (WorkflowException, api.portal.CannotGetPortalError):

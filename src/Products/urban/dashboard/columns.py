@@ -15,24 +15,25 @@ from zope.interface import implements
 
 
 class FolderManagersColumn(FoldermanagerColumn, BaseColumn):
-    """ Turn the urban FoldermanagerColumn into a FacetedColumn."""
+    """Turn the urban FoldermanagerColumn into a FacetedColumn."""
 
 
 class FacetedTitleColumn(BaseColumn):
-    """ TitleColumn for imio.dashboard listings."""
+    """TitleColumn for imio.dashboard listings."""
+
     implements(ITitleColumn)
 
     def renderTitleLink(self, item):
         portal_type = item.portal_type.lower()
         state = item.review_state
-        css_class = 'contenttype-%s state-%s' % (portal_type, state)
+        css_class = "contenttype-%s state-%s" % (portal_type, state)
         url = item.getURL()
         title = item.Title
 
         title_words = title.split()
         for split in range(len(title_words) / 15):
-            title_words.insert(15 * (split + 1), '<br />')
-        title = ' '.join(title_words)
+            title_words.insert(15 * (split + 1), "<br />")
+        title = " ".join(title_words)
 
         title = '<a href="%s" class="%s">%s</a>' % (url, css_class, title)
         return title
@@ -44,11 +45,12 @@ class FacetedTitleColumn(BaseColumn):
             title = adapter.render()
         else:
             title = self.renderTitleLink(item)
-        return title.decode('utf-8')
+        return title.decode("utf-8")
 
 
-class TitleDisplay():
-    """ Base class for Title cell adapter """
+class TitleDisplay:
+    """Base class for Title cell adapter"""
+
     implements(ITitleCell)
 
     def __init__(self, context, column, brain, obj):
@@ -58,11 +60,11 @@ class TitleDisplay():
         self.obj = obj
 
     def render(self):
-        """ to implement """
+        """to implement"""
 
 
 class LicenceTitleDisplay(TitleDisplay):
-    """ Adapts a licence to a TitleCell """
+    """Adapts a licence to a TitleCell"""
 
     def render(self):
         title = self.column.renderTitleLink(self.brain)
@@ -75,7 +77,7 @@ class LicenceTitleDisplay(TitleDisplay):
 
 
 class AddressColumn(BaseColumn):
-    """ display licence address in SearchResultTable """
+    """display licence address in SearchResultTable"""
 
     # column not sortable
     sort_index = -1
@@ -85,18 +87,18 @@ class AddressColumn(BaseColumn):
         addresses = task.getWorkLocationSignaletic()
 
         address_render = []
-        for address in addresses.split(' et '):
-            render = '<span>%s</span>' % address
+        for address in addresses.split(" et "):
+            render = "<span>%s</span>" % address
             address_render.append(render)
 
-        address_render = '<br />'.join(address_render)
-        address_render = address_render.decode('utf-8')
+        address_render = "<br />".join(address_render)
+        address_render = address_render.decode("utf-8")
 
         return address_render
 
 
 class ParcelReferencesColumn(BaseColumn):
-    """ display licence parcel references in SearchResultTable """
+    """display licence parcel references in SearchResultTable"""
 
     # column not sortable
     sort_index = -1
@@ -107,11 +109,11 @@ class ParcelReferencesColumn(BaseColumn):
 
         parcel_render = []
         for parcel in parcels:
-            render = '<span>%s</span>' % parcel.Title()
+            render = "<span>%s</span>" % parcel.Title()
             parcel_render.append(render)
 
-        parcel_render = '<br />'.join(parcel_render)
-        parcel_render = parcel_render.decode('utf-8')
+        parcel_render = "<br />".join(parcel_render)
+        parcel_render = parcel_render.decode("utf-8")
 
         return parcel_render
 
@@ -125,7 +127,7 @@ class ScheduleColumn(BaseColumn):
     sort_index = -1
 
     def query_licence(self, item):
-        catalog = api.portal.get_tool('portal_catalog')
+        catalog = api.portal.get_tool("portal_catalog")
         task = item.getObject()
         licence = task.get_container()
         while not IGenericLicence.providedBy(licence):
@@ -135,7 +137,7 @@ class ScheduleColumn(BaseColumn):
 
 
 class TaskLicenceTitleDisplay(TitleDisplay, ScheduleColumn):
-    """ Adapts a task to a LicenceTitleCell """
+    """Adapts a task to a LicenceTitleCell"""
 
     def render(self):
         licence_brain = self.query_licence(self.brain)
@@ -144,18 +146,19 @@ class TaskLicenceTitleDisplay(TitleDisplay, ScheduleColumn):
 
 
 class LicenceFinalDueDateColumn(BaseColumn):
-    """ Licence final due date column for schedule listings."""
+    """Licence final due date column for schedule listings."""
 
     def renderCell(self, item):
         due_date = item.licence_final_duedate
         if due_date.year == 9999:
-            return u'\u221E'
+            return u"\u221E"
 
-        return due_date.strftime('%d/%m/%Y')
+        return due_date.strftime("%d/%m/%Y")
 
 
 class TaskActionsColumn(ActionsColumn):
     """Display actions for the task"""
+
     params = {
-        'showChangeOwner': True,
+        "showChangeOwner": True,
     }

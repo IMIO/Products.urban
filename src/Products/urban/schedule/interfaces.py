@@ -4,43 +4,43 @@ from zope.interface import Interface
 
 
 class ILicenceDeliveryTask(Interface):
-    """ Marker interface for the licence delivery task. """
+    """Marker interface for the licence delivery task."""
 
 
 class ICreateOpinionRequestsTask(Interface):
-    """ Marker interface for opinion requests creation task."""
+    """Marker interface for opinion requests creation task."""
 
 
 class ISendOpinionRequestsTask(Interface):
-    """ Marker interface for opinion requests sending task."""
+    """Marker interface for opinion requests sending task."""
 
 
 class IReceiveOpinionRequestsTask(Interface):
-    """ Marker interface for opinion requests reception task."""
+    """Marker interface for opinion requests reception task."""
 
 
 class IInspectionFollowUpTask(Interface):
-    """ Marker interface for inspection followup events task."""
+    """Marker interface for inspection followup events task."""
 
 
 class ICreateFollowupTask(Interface):
-    """ Marker interface for inspection followup events creation task."""
+    """Marker interface for inspection followup events creation task."""
 
 
 class IValidateFollowupTask(Interface):
-    """ Marker interface for inspection followup events validation task."""
+    """Marker interface for inspection followup events validation task."""
 
 
 class ISendFollowupTask(Interface):
-    """ Marker interface for inspection followup events send task."""
+    """Marker interface for inspection followup events send task."""
 
 
 class IFollowupDeadLineTask(Interface):
-    """ Marker interface for inspection followup deadline task."""
+    """Marker interface for inspection followup deadline task."""
 
 
 class ITaskToCheckDaily(Interface):
-    """ Marker interface for tasks that shold be re-evaluated every night """
+    """Marker interface for tasks that shold be re-evaluated every night"""
 
 
 class ITaskCron(Interface):
@@ -54,8 +54,8 @@ class ITaskCron(Interface):
 
 
 class ITaskWithSuspensionDelay(Interface):
-    """ Task where the delay should be prorogated by the suspension period prorata"""
+    """Task where the delay should be prorogated by the suspension period prorata"""
 
 
 class ITaskWithWholeSuspensionDelay(Interface):
-    """ Task where the delay should be prorogated by the whole suspension period """
+    """Task where the delay should be prorogated by the whole suspension period"""

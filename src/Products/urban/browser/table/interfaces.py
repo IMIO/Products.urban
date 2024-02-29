@@ -20,22 +20,22 @@ class IItemForUrbanTable(Interface):
     """
 
     def getRawValue(self):
-        """ return the raw item """
+        """return the raw item"""
 
     def getObject(self):
-        """ return an AT object """
+        """return an AT object"""
 
     def getPortalType(self):
-        """ return the object portal type """
+        """return the object portal type"""
 
     def getURL(self):
-        """ used here and there to generate html  links """
+        """used here and there to generate html  links"""
 
     def getState(self):
-        """ used for element title css class """
+        """used for element title css class"""
 
     def getWorkflowTransitions(self):
-        """ used in the Actions column """
+        """used in the Actions column"""
 
 
 class IBrainForUrbanTable(IItemForUrbanTable):
@@ -161,7 +161,7 @@ class IInternalOpinionServicesTable(Interface):
     """
 
 
-class INestedAttachmentsTable (IAttachmentsTable):
+class INestedAttachmentsTable(IAttachmentsTable):
     """
     Marker interface for a table displaying all attachments nested in licence events.
     """
@@ -219,16 +219,18 @@ class ICell(Interface):
     """
     Interface that describes a table cell behaviour
     """
+
     def render():
-        """ return the HTML render of an object's title """
+        """return the HTML render of an object's title"""
 
 
 class ITitleCell(ICell):
     """
     Interface that describes TitleCell behaviour
     """
+
     def render():
-        """ return the html rendering of Title Column cell """
+        """return the html rendering of Title Column cell"""
 
 
 class IInspectionReportsTable(Interface):

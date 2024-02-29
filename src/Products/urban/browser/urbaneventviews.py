@@ -27,42 +27,45 @@ from zope.interface import Interface
 import csv
 
 claimants_csv_fieldnames = [
-    'numerotation',
-    'personTitle',
-    'name1',
-    'name2',
-    'society',
-    'street',
-    'number',
-    'zipcode',
-    'city',
-    'country',
-    'email',
-    'phone',
-    'gsm',
-    'nationalRegister',
-    'claimType',
-    'hasPetition',
-    'outOfTime',
-    'claimDate',
-    'claimsText',
-    'wantDecisionCopy',
+    "numerotation",
+    "personTitle",
+    "name1",
+    "name2",
+    "society",
+    "street",
+    "number",
+    "zipcode",
+    "city",
+    "country",
+    "email",
+    "phone",
+    "gsm",
+    "nationalRegister",
+    "claimType",
+    "hasPetition",
+    "outOfTime",
+    "claimDate",
+    "claimsText",
+    "wantDecisionCopy",
 ]
 
 
 class UrbanEventView(BrowserView):
     """
-      This manage the view of UrbanEvent
+    This manage the view of UrbanEvent
     """
+
     def __init__(self, context, request):
         self.context = context
         self.request = request
-        plone_utils = api.portal.get_tool('plone_utils')
+        plone_utils = api.portal.get_tool("plone_utils")
         if self.is_planned_mailing:
-            plone_utils.addPortalMessage(_('The mailings will be ready tomorrow!'), type="warning")
+            plone_utils.addPortalMessage(
+                _("The mailings will be ready tomorrow!"), type="warning"
+            )
         # disable portlets
-        self.request.set('disable_plone.rightcolumn', 1)
-        self.request.set('disable_plone.leftcolumn', 1)
+        self.request.set("disable_plone.rightcolumn", 1)
+        self.request.set("disable_plone.leftcolumn", 1)
 
     def getActivatedFields(self):
         """
@@ -70,7 +73,14 @@ class UrbanEventView(BrowserView):
         """
         context = aq_inner(self.context)
         linkedUrbanEventType = context.getUrbaneventtypes()
-        fields = [i for i in context.schema.fields() if i.schemata == 'default' and not hasattr(i, 'optional') and i.widget.visible and i.widget.visible['view'] == 'visible']
+        fields = [
+            i
+            for i in context.schema.fields()
+            if i.schemata == "default"
+            and not hasattr(i, "optional")
+            and i.widget.visible
+            and i.widget.visible["view"] == "visible"
+        ]
         for activatedField in linkedUrbanEventType.getActivatedFields():
             if not activatedField:
                 continue  # in some case, there could be an empty value in activatedFields...
@@ -82,29 +92,28 @@ class UrbanEventView(BrowserView):
         """
         Return fields to display about the UrbanEvent
         """
-        fields = [f for f in self.getActivatedFields() if not hasattr(f, 'pm_text_field')]
+        fields = [
+            f for f in self.getActivatedFields() if not hasattr(f, "pm_text_field")
+        ]
         return fields
 
     def getDateCustomLabel(self):
-        """
-        """
+        """ """
         return self.context.getUrbaneventtypes().getEventDateLabel()
 
     def getPmFields(self):
         """
         Return activated pm fields to build the pm summary
         """
-        fields = [f for f in self.getActivatedFields() if hasattr(f, 'pm_text_field')]
+        fields = [f for f in self.getActivatedFields() if hasattr(f, "pm_text_field")]
         return fields
 
     def show_pm_summary(self):
-        """
-        """
+        """ """
         return bool(self.getPmFields())
 
     def empty_pm_summary(self):
-        """
-        """
+        """ """
         fields = self.getPmFields()
 
         for field_ in fields:
@@ -115,25 +124,25 @@ class UrbanEventView(BrowserView):
         return True
 
     def isTextField(self, field):
-        return field.type == 'text'
+        return field.type == "text"
 
     def mayAddUrbanEvent(self):
         """
-          Return True if the current user may add an UrbanEvent
+        Return True if the current user may add an UrbanEvent
         """
         context = aq_inner(self.context)
-        member = api.portal.get_tool('portal_membership').getAuthenticatedMember()
-        if member.has_permission('ATContentTypes: Add File', context):
+        member = api.portal.get_tool("portal_membership").getAuthenticatedMember()
+        if member.has_permission("ATContentTypes: Add File", context):
             return True
         return False
 
     def mayAddAttachment(self):
         """
-          Return True if the current user may add an attachment (File)
+        Return True if the current user may add an attachment (File)
         """
         context = aq_inner(self.context)
-        member = api.portal.get_tool('portal_membership').getAuthenticatedMember()
-        if member.has_permission('ATContentTypes: Add File', context):
+        member = api.portal.get_tool("portal_membership").getAuthenticatedMember()
+        if member.has_permission("ATContentTypes: Add File", context):
             return True
         return False
 
@@ -141,7 +150,7 @@ class UrbanEventView(BrowserView):
         event = aq_inner(self.context)
         documents = event.getDocuments()
         if not documents:
-            return ''
+            return ""
 
         documentlisting = DocumentsTable(self.context, self.request, values=documents)
         documentlisting.update()
@@ -151,7 +160,7 @@ class UrbanEventView(BrowserView):
         event = aq_inner(self.context)
         attachments = event.getAttachments()
         if not attachments:
-            return ''
+            return ""
 
         table = AttachmentsTable(self.context, self.request, values=attachments)
         table.update()
@@ -168,31 +177,29 @@ class UrbanEventView(BrowserView):
             if template.can_be_generated(context):
                 template_list.append(
                     {
-                        'name': template.id.split('.')[0],
-                        'title': template.Title(),
-                        'class': '',
-                        'href': self._generateDocumentHref(context, template),
+                        "name": template.id.split(".")[0],
+                        "title": template.Title(),
+                        "class": "",
+                        "href": self._generateDocumentHref(context, template),
                     }
                 )
 
         for generated_doc in context.objectValues():
             for template in template_list:
-                if generated_doc.id.startswith(template['name']):
-                    template['class'] = 'urban-document-already-created'
+                if generated_doc.id.startswith(template["name"]):
+                    template["class"] = "urban-document-already-created"
         return template_list
 
     def _generateDocumentHref(self, context, template):
-        """
-        """
+        """ """
         link = "{base_url}/urban-document-generation?template_uid={uid}".format(
-            base_url=context.absolute_url(),
-            uid=template.UID()
+            base_url=context.absolute_url(), uid=template.UID()
         )
         return link
 
     def getUrbaneventtypes(self):
         """
-          Return the accessor urbanEventTypes()
+        Return the accessor urbanEventTypes()
         """
         context = aq_inner(self.context)
         return context.getUrbaneventtypes()
@@ -202,67 +209,80 @@ class UrbanEventView(BrowserView):
 
     @property
     def is_planned_mailing(self):
-        planned_mailings = api.portal.get_registry_record(
-            'Products.urban.interfaces.IAsyncMailing.mailings_to_do'
-        ) or {}
+        planned_mailings = (
+            api.portal.get_registry_record(
+                "Products.urban.interfaces.IAsyncMailing.mailings_to_do"
+            )
+            or {}
+        )
         is_planned = self.context.UID() in planned_mailings
         return is_planned
 
 
 class IImportClaimantListingForm(Interface):
 
-    listing_file = NamedFile(title=_(u'Listing file'))
+    listing_file = NamedFile(title=_(u"Listing file"))
 
 
 class ImportClaimantListingForm(form.Form):
 
-    method = 'post'
+    method = "post"
     fields = field.Fields(IImportClaimantListingForm)
     ignoreContext = True
 
-    @button.buttonAndHandler(_('Import'), name='import')
+    @button.buttonAndHandler(_("Import"), name="import")
     def handleImport(self, action):
         inquiry_UID = self.context.UID()
-        planned_claimants_import = api.portal.get_registry_record(
-            'Products.urban.interfaces.IAsyncClaimantsImports.claimants_to_import'
-        ) or []
+        planned_claimants_import = (
+            api.portal.get_registry_record(
+                "Products.urban.interfaces.IAsyncClaimantsImports.claimants_to_import"
+            )
+            or []
+        )
         data, errors = self.extractData()
         if errors:
-            interfaces.IAnnotations(self.context)['urban.claimants_to_import'] = ''
+            interfaces.IAnnotations(self.context)["urban.claimants_to_import"] = ""
             if inquiry_UID in planned_claimants_import:
                 planned_claimants_import.remove(inquiry_UID)
         else:
-            csv_file = data['listing_file']
+            csv_file = data["listing_file"]
             csv_integrity_error = self.validate_csv_integrity(csv_file)
             if csv_integrity_error:
                 api.portal.show_message(csv_integrity_error, self.request, "error")
             else:
-                interfaces.IAnnotations(self.context)['urban.claimants_to_import'] = csv_file.data
+                interfaces.IAnnotations(self.context)[
+                    "urban.claimants_to_import"
+                ] = csv_file.data
                 if inquiry_UID not in planned_claimants_import:
                     planned_claimants_import.append(inquiry_UID)
         api.portal.set_registry_record(
-            'Products.urban.interfaces.IAsyncClaimantsImports.claimants_to_import',
-            planned_claimants_import
+            "Products.urban.interfaces.IAsyncClaimantsImports.claimants_to_import",
+            planned_claimants_import,
         )
         return not bool(errors)
 
     def validate_csv_integrity(self, csv_file):
         if csv_file.contentType not in ("text/csv"):
             return _(
-                u'The imported file (${name}) doesn\'t appear to be a CSV file.',
-                mapping={u'name': csv_file.filename}
+                u"The imported file (${name}) doesn't appear to be a CSV file.",
+                mapping={u"name": csv_file.filename},
             )
 
         try:
             # warning: extra or missing columns don't generate an error during CSV reading
             reader = csv.DictReader(
-                StringIO(csv_file.data), claimants_csv_fieldnames, delimiter=',', quotechar='"'
+                StringIO(csv_file.data),
+                claimants_csv_fieldnames,
+                delimiter=",",
+                quotechar='"',
             )
-            claimant_args = [row for row in reader if row['name1'] or row['name2'] or row['society']][1:]
+            claimant_args = [
+                row for row in reader if row["name1"] or row["name2"] or row["society"]
+            ][1:]
         except csv.Error as error:
             return _(
-                u'The imported file (${name}) couldn\'t be read properly. Please verify its structure and try again.',
-                mapping={u'name': csv_file.filename}
+                u"The imported file (${name}) couldn't be read properly. Please verify its structure and try again.",
+                mapping={u"name": csv_file.filename},
             )
 
         return None
@@ -277,76 +297,86 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
         super(BrowserView, self).__init__(context, request)
         self.context = context
         self.request = request
-        self.request.set('disable_plone.rightcolumn', 1)
-        self.request.set('disable_plone.leftcolumn', 1)
+        self.request.set("disable_plone.rightcolumn", 1)
+        self.request.set("disable_plone.leftcolumn", 1)
         self.import_claimants_listing_form = ImportClaimantListingForm(context, request)
         self.import_claimants_listing_form.update()
 
     @property
     def has_planned_claimant_import(self):
-        planned_claimants_import = api.portal.get_registry_record(
-            'Products.urban.interfaces.IAsyncClaimantsImports.claimants_to_import'
-        ) or []
+        planned_claimants_import = (
+            api.portal.get_registry_record(
+                "Products.urban.interfaces.IAsyncClaimantsImports.claimants_to_import"
+            )
+            or []
+        )
         is_planned = self.context.UID() in planned_claimants_import
         return is_planned
 
     def import_claimants_from_csv(self):
-        portal_urban = api.portal.get_tool('portal_urban')
+        portal_urban = api.portal.get_tool("portal_urban")
         site = api.portal.get()
 
-        titles_mapping = {'': ''}
+        titles_mapping = {"": ""}
         titles_folder = portal_urban.persons_titles
         for title_obj in titles_folder.objectValues():
             titles_mapping[title_obj.Title()] = title_obj.id
 
-        country_mapping = {'': ''}
+        country_mapping = {"": ""}
         country_folder = portal_urban.country
         for country_obj in country_folder.objectValues():
             country_mapping[country_obj.Title()] = country_obj.id
 
         claim_type_mapping = {
-            'Écrite': 'writedClaim',
-            'Orale': 'oralClaim',
+            "Écrite": "writedClaim",
+            "Orale": "oralClaim",
         }
 
-        claimants_file = interfaces.IAnnotations(self.context)['urban.claimants_to_import']
+        claimants_file = interfaces.IAnnotations(self.context)[
+            "urban.claimants_to_import"
+        ]
         if claimants_file:
             reader = csv.DictReader(
-                StringIO(claimants_file), claimants_csv_fieldnames, delimiter=',', quotechar='"'
+                StringIO(claimants_file),
+                claimants_csv_fieldnames,
+                delimiter=",",
+                quotechar='"',
             )
         else:
             reader = []
-        claimant_args = [row for row in reader if row['name1'] or row['name2'] or row['society']][1:]
+        claimant_args = [
+            row for row in reader if row["name1"] or row["name2"] or row["society"]
+        ][1:]
         for claimant_arg in claimant_args:
             claimant_arg.pop(None, None)
             # default values
-            if not claimant_arg['claimType']:
-                claimant_arg['claimType'] = 'Écrite'
-            claimant_arg['hasPetition'] = bool(claimant_arg['hasPetition'])
-            claimant_arg['outOfTime'] = bool(claimant_arg['outOfTime'])
-            claimant_arg['wantDecisionCopy'] = bool(claimant_arg['wantDecisionCopy'])
+            if not claimant_arg["claimType"]:
+                claimant_arg["claimType"] = "Écrite"
+            claimant_arg["hasPetition"] = bool(claimant_arg["hasPetition"])
+            claimant_arg["outOfTime"] = bool(claimant_arg["outOfTime"])
+            claimant_arg["wantDecisionCopy"] = bool(claimant_arg["wantDecisionCopy"])
             # mappings
-            claimant_arg['personTitle'] = titles_mapping[claimant_arg['personTitle']]
-            claimant_arg['country'] = country_mapping[claimant_arg['country']]
-            claimant_arg['id'] = site.plone_utils.normalizeString(
-                claimant_arg['name1'] + claimant_arg['name2'] + claimant_arg['society']
+            claimant_arg["personTitle"] = titles_mapping[claimant_arg["personTitle"]]
+            claimant_arg["country"] = country_mapping[claimant_arg["country"]]
+            claimant_arg["id"] = site.plone_utils.normalizeString(
+                claimant_arg["name1"] + claimant_arg["name2"] + claimant_arg["society"]
             )
-            claimant_arg['claimType'] = claim_type_mapping[claimant_arg['claimType']]
+            claimant_arg["claimType"] = claim_type_mapping[claimant_arg["claimType"]]
             count = 0
-            if claimant_arg['id'] in self.context.objectIds():
+            if claimant_arg["id"] in self.context.objectIds():
                 count += 1
-                new_id = claimant_arg['id'] + '-' + str(count)
+                new_id = claimant_arg["id"] + "-" + str(count)
                 while new_id in self.context.objectIds():
                     count += 1
-                    new_id = claimant_arg['id'] + '-' + str(count)
-                claimant_arg['id'] = new_id
+                    new_id = claimant_arg["id"] + "-" + str(count)
+                claimant_arg["id"] = new_id
             # create claimant
-            with api.env.adopt_roles(['Manager']):
-                self.context.invokeFactory('Claimant', **claimant_arg)
-            print 'imported claimant {id}, {name} {surname}'.format(
-                id=claimant_arg['id'],
-                name=claimant_arg['name1'],
-                surname=claimant_arg['name2'],
+            with api.env.adopt_roles(["Manager"]):
+                self.context.invokeFactory("Claimant", **claimant_arg)
+            print "imported claimant {id}, {name} {surname}".format(
+                id=claimant_arg["id"],
+                name=claimant_arg["name1"],
+                surname=claimant_arg["name2"],
             )
 
     def getParcels(self):
@@ -355,7 +385,7 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
 
     def renderClaimantsListing(self):
         if not self.context.getClaimants():
-            return ''
+            return ""
         contactlisting = ClaimantsTable(self.context, self.request)
         contactlisting.update()
         return contactlisting.render()
@@ -366,7 +396,7 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
 
     def getInquiryFields(self):
         """
-          This will return fields to display about the Inquiry
+        This will return fields to display about the Inquiry
         """
         context = aq_inner(self.context)
         linkedInquiry = context.getLinkedInquiry()
@@ -375,8 +405,12 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
             # this should not happen...
             return None
         displayed_fields = self.getUsedAttributes()
-        schemata = IGenericLicence.providedBy(linkedInquiry) and 'urban_inquiry' or 'default'
-        inquiry_fields = utils.getSchemataFields(linkedInquiry, displayed_fields, schemata)
+        schemata = (
+            IGenericLicence.providedBy(linkedInquiry) and "urban_inquiry" or "default"
+        )
+        inquiry_fields = utils.getSchemataFields(
+            linkedInquiry, displayed_fields, schemata
+        )
         for inquiry_field in inquiry_fields:
             if inquiry_field.__name__ == "claimsText":
                 # as this text can be very long, we do not want to show it with the other
@@ -394,9 +428,9 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
         totalWrite = 0
         if context.getClaimants():
             for claimant in context.getClaimants():
-                if claimant.getClaimType() == 'oralClaim':
+                if claimant.getClaimType() == "oralClaim":
                     totalOral += 1
-                elif claimant.getClaimType() == 'writedClaim':
+                elif claimant.getClaimType() == "writedClaim":
                     totalWrite += 1
 
         inquiryReclamationNumbers.append(totalOral)
@@ -405,19 +439,21 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
 
     def getLinkToTheInquiries(self):
         """
-          This will return a link to the inquiries on the linked licence
+        This will return a link to the inquiries on the linked licence
         """
         context = aq_inner(self.context)
-        return context.aq_inner.aq_parent.absolute_url() + '/#fieldsetlegend-urban_inquiry'
+        return (
+            context.aq_inner.aq_parent.absolute_url() + "/#fieldsetlegend-urban_inquiry"
+        )
 
     def getLinkedInquiryTitle(self):
         """
-          This will return the title of the linked Inquiry
+        This will return the title of the linked Inquiry
         """
         context = aq_inner(self.context)
         linkedInquiry = context.getLinkedInquiry()
         if linkedInquiry:
-            if not linkedInquiry.portal_type == 'Inquiry':
+            if not linkedInquiry.portal_type == "Inquiry":
                 # we do not use Title as this inquiry is the licence
                 return linkedInquiry.generateInquiryTitle()
             else:
@@ -428,26 +464,29 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
         start_date = inquiry_event.getInvestigationStart()
         end_date = inquiry_event.getInvestigationEnd()
         if not start_date or not end_date:
-            return True, '', ''
+            return True, "", ""
 
         licence = inquiry_event.aq_parent
-        portal_urban = api.portal.get_tool('portal_urban')
+        portal_urban = api.portal.get_tool("portal_urban")
         suspension_periods = portal_urban.getInquirySuspensionPeriods()
         suspension_delay = 0
         inquiry_duration = 15
-        if hasattr(licence, 'getRoadAdaptation'):
-            if licence.getRoadAdaptation() and licence.getRoadAdaptation() not in [[''], 'no']:
+        if hasattr(licence, "getRoadAdaptation"):
+            if licence.getRoadAdaptation() and licence.getRoadAdaptation() not in [
+                [""],
+                "no",
+            ]:
                 inquiry_duration = 30
         theorical_end_date = start_date + inquiry_duration
 
         for suspension_period in suspension_periods:
-            suspension_start = DateTime(suspension_period['from'])
-            suspension_end = DateTime(suspension_period['to'])
+            suspension_start = DateTime(suspension_period["from"])
+            suspension_end = DateTime(suspension_period["to"])
             if start_date >= suspension_start and start_date < suspension_end + 1:
                 suspension_delay = suspension_end - start_date
                 if end_date < theorical_end_date + suspension_delay:
-                    return False, suspension_period['from'], suspension_period['to']
-        return True, '', ''
+                    return False, suspension_period["from"], suspension_period["to"]
+        return True, "", ""
 
 
 class UrbanEventAnnouncementView(UrbanEventInquiryBaseView):
@@ -457,26 +496,39 @@ class UrbanEventAnnouncementView(UrbanEventInquiryBaseView):
 
     def __init__(self, context, request):
         super(UrbanEventAnnouncementView, self).__init__(context, request)
-        plone_utils = api.portal.get_tool('plone_utils')
+        plone_utils = api.portal.get_tool("plone_utils")
         self.linkedInquiry = self.context.getLinkedInquiry()
         if not self.linkedInquiry:
-            plone_utils.addPortalMessage(_('This UrbanEventInquiry is not linked to an existing Inquiry !  Define a new inquiry on the licence !'), type="error")
+            plone_utils.addPortalMessage(
+                _(
+                    "This UrbanEventInquiry is not linked to an existing Inquiry !  Define a new inquiry on the licence !"
+                ),
+                type="error",
+            )
         if self.has_planned_claimant_import:
-            plone_utils.addPortalMessage(_('The claimants import will be ready tomorrow!'), type="warning")
+            plone_utils.addPortalMessage(
+                _("The claimants import will be ready tomorrow!"), type="warning"
+            )
         if self.is_planned_mailing:
-            plone_utils.addPortalMessage(_('The mailings will be ready tomorrow!'), type="warning")
-        suspension_check, suspension_start, suspension_end = self.check_dates_for_suspension()
+            plone_utils.addPortalMessage(
+                _("The mailings will be ready tomorrow!"), type="warning"
+            )
+        (
+            suspension_check,
+            suspension_start,
+            suspension_end,
+        ) = self.check_dates_for_suspension()
         if not suspension_check:
             plone_utils.addPortalMessage(
                 _(
-                    'Suspension period from to: please check the end date',
-                    mapping={"from": suspension_start, "to": suspension_end}
+                    "Suspension period from to: please check the end date",
+                    mapping={"from": suspension_start, "to": suspension_end},
                 ),
-                type="warning"
+                type="warning",
             )
         # disable portlets
-        self.request.set('disable_plone.rightcolumn', 1)
-        self.request.set('disable_plone.leftcolumn', 1)
+        self.request.set("disable_plone.rightcolumn", 1)
+        self.request.set("disable_plone.leftcolumn", 1)
 
     def getInquiryFields(self):
         """
@@ -495,33 +547,53 @@ class UrbanEventInquiryView(UrbanEventInquiryBaseView):
 
     def __init__(self, context, request):
         super(UrbanEventInquiryView, self).__init__(context, request)
-        plone_utils = api.portal.get_tool('plone_utils')
+        plone_utils = api.portal.get_tool("plone_utils")
         self.linkedInquiry = self.context.getLinkedInquiry()
         if not self.linkedInquiry:
-            plone_utils.addPortalMessage(_('This UrbanEventInquiry is not linked to an existing Inquiry !  Define a new inquiry on the licence !'), type="error")
+            plone_utils.addPortalMessage(
+                _(
+                    "This UrbanEventInquiry is not linked to an existing Inquiry !  Define a new inquiry on the licence !"
+                ),
+                type="error",
+            )
         if self.hasPOWithoutAddress():
-            plone_utils.addPortalMessage(_('There are parcel owners without any address found! Desactivate them!'), type="warning")
+            plone_utils.addPortalMessage(
+                _(
+                    "There are parcel owners without any address found! Desactivate them!"
+                ),
+                type="warning",
+            )
         if self.is_planned_inquiry:
-            plone_utils.addPortalMessage(_('The parcel radius search will be ready tomorrow!'), type="warning")
+            plone_utils.addPortalMessage(
+                _("The parcel radius search will be ready tomorrow!"), type="warning"
+            )
         if self.is_planned_mailing:
-            plone_utils.addPortalMessage(_('The mailings will be ready tomorrow!'), type="warning")
+            plone_utils.addPortalMessage(
+                _("The mailings will be ready tomorrow!"), type="warning"
+            )
         if self.has_planned_claimant_import:
-            plone_utils.addPortalMessage(_('The claimants import will be ready tomorrow!'), type="warning")
-        suspension_check, suspension_start, suspension_end = self.check_dates_for_suspension()
+            plone_utils.addPortalMessage(
+                _("The claimants import will be ready tomorrow!"), type="warning"
+            )
+        (
+            suspension_check,
+            suspension_start,
+            suspension_end,
+        ) = self.check_dates_for_suspension()
         if not suspension_check:
             plone_utils.addPortalMessage(
                 _(
-                    'Suspension period from to: please check the end date',
-                    mapping={"from": suspension_start, "to": suspension_end}
+                    "Suspension period from to: please check the end date",
+                    mapping={"from": suspension_start, "to": suspension_end},
                 ),
-                type="warning"
+                type="warning",
             )
         # disable portlets
-        self.request.set('disable_plone.rightcolumn', 1)
-        self.request.set('disable_plone.leftcolumn', 1)
+        self.request.set("disable_plone.rightcolumn", 1)
+        self.request.set("disable_plone.leftcolumn", 1)
 
     def __call__(self):
-        if 'find_recipients_cadastre' in self.request.form:
+        if "find_recipients_cadastre" in self.request.form:
             radius = self.getInquiryRadius()
             return self.getInvestigationPOs(radius)
         return self.index()
@@ -529,8 +601,10 @@ class UrbanEventInquiryView(UrbanEventInquiryBaseView):
     def renderRecipientsCadastreListing(self):
         recipients = self.context.getRecipients()
         if not recipients:
-            return ''
-        contactlisting = RecipientsCadastreTable(self.context, self.request, values=recipients)
+            return ""
+        contactlisting = RecipientsCadastreTable(
+            self.context, self.request, values=recipients
+        )
         contactlisting.update()
         return contactlisting.render()
 
@@ -547,9 +621,12 @@ class UrbanEventInquiryView(UrbanEventInquiryBaseView):
 
     @property
     def is_planned_inquiry(self):
-        planned_inquiries = api.portal.get_registry_record(
-            'Products.urban.interfaces.IAsyncInquiryRadius.inquiries_to_do'
-        ) or {}
+        planned_inquiries = (
+            api.portal.get_registry_record(
+                "Products.urban.interfaces.IAsyncInquiryRadius.inquiries_to_do"
+            )
+            or {}
+        )
         is_planned = self.context.UID() in planned_inquiries
         return is_planned
 
@@ -560,42 +637,51 @@ class UrbanEventInquiryView(UrbanEventInquiryBaseView):
         # if we do the search again, we first delete old datas...
         # remove every RecipientCadastre
         context = aq_inner(self.context)
-        urban_tool = api.portal.get_tool('portal_urban')
+        urban_tool = api.portal.get_tool("portal_urban")
         recipients = context.getRecipients()
         if self.is_planned_inquiry and not force:
             return self.request.response.redirect(self.context.absolute_url())
         if recipients:
-            context.manage_delObjects([recipient.getId() for recipient in recipients if recipient.Title()])
+            context.manage_delObjects(
+                [recipient.getId() for recipient in recipients if recipient.Title()]
+            )
 
         licence = context.aq_inner.aq_parent
         cadastre = services.cadastre.new_session()
         neighbour_parcels = cadastre.query_parcels_in_radius(
-            center_parcels=licence.getParcels(),
-            radius=radius
+            center_parcels=licence.getParcels(), radius=radius
         )
 
-        if not force and urban_tool.getAsyncInquiryRadius() and len(neighbour_parcels) > 40:
-            planned_inquiries = api.portal.get_registry_record(
-                'Products.urban.interfaces.IAsyncInquiryRadius.inquiries_to_do'
-            ) or {}
+        if (
+            not force
+            and urban_tool.getAsyncInquiryRadius()
+            and len(neighbour_parcels) > 40
+        ):
+            planned_inquiries = (
+                api.portal.get_registry_record(
+                    "Products.urban.interfaces.IAsyncInquiryRadius.inquiries_to_do"
+                )
+                or {}
+            )
             planned_inquiries[self.context.UID()] = radius
             api.portal.set_registry_record(
-                'Products.urban.interfaces.IAsyncInquiryRadius.inquiries_to_do',
-                planned_inquiries
+                "Products.urban.interfaces.IAsyncInquiryRadius.inquiries_to_do",
+                planned_inquiries,
             )
             return self.request.response.redirect(
-                self.context.absolute_url() + '/#fieldsetlegend-urbaneventinquiry_recipients'
+                self.context.absolute_url()
+                + "/#fieldsetlegend-urbaneventinquiry_recipients"
             )
 
         for parcel in neighbour_parcels:
             for owner_id, owner in parcel.owners.iteritems():
-                name = str(owner['name'].encode('utf-8'))
-                firstname = str(owner['firstname'].encode('utf-8'))
-                country = str(owner['country'].encode('utf-8'))
-                zipcode = str(owner['zipcode'].encode('utf-8'))
-                city = str(owner['city'].encode('utf-8'))
-                street = str(owner['street'].encode('utf-8'))
-                number = str(owner['number'].encode('utf-8'))
+                name = str(owner["name"].encode("utf-8"))
+                firstname = str(owner["firstname"].encode("utf-8"))
+                country = str(owner["country"].encode("utf-8"))
+                zipcode = str(owner["zipcode"].encode("utf-8"))
+                city = str(owner["city"].encode("utf-8"))
+                street = str(owner["street"].encode("utf-8"))
+                number = str(owner["number"].encode("utf-8"))
                 print name, firstname
                 # to avoid having several times the same Recipient (that could for example be on several parcels
                 # we first look in portal_catalog where Recipients are catalogued
@@ -607,32 +693,38 @@ class UrbanEventInquiryView(UrbanEventInquiryBaseView):
                         name=name,
                         firstname=firstname,
                         # keep adr1 and adr2 fields for historical reasons.
-                        adr1='{} {}'.format(zipcode, city),
-                        adr2='{} {}'.format(street, number),
+                        adr1="{} {}".format(zipcode, city),
+                        adr2="{} {}".format(street, number),
                         number=number,
                         street=street,
                         zipcode=zipcode,
                         city=city,
                         country=country.lower(),
                         capakey=parcel.capakey,
-                        parcel_street=parcel.locations and parcel.locations.values()[0]['street_name'] or '',
-                        parcel_police_number=parcel.locations and parcel.locations.values()[0]['number'] or '',
-                        parcel_nature=', '.join(parcel.natures)
+                        parcel_street=parcel.locations
+                        and parcel.locations.values()[0]["street_name"]
+                        or "",
+                        parcel_police_number=parcel.locations
+                        and parcel.locations.values()[0]["number"]
+                        or "",
+                        parcel_nature=", ".join(parcel.natures),
                     )
                     owner_obj = getattr(context, new_owner_id)
-                    owner_obj.setTitle('{} {}'.format(name, firstname))
+                    owner_obj.setTitle("{} {}".format(name, firstname))
         cadastre.close()
-        return context.REQUEST.RESPONSE.redirect(context.absolute_url() + '/#fieldsetlegend-urbaneventinquiry_recipients')
+        return context.REQUEST.RESPONSE.redirect(
+            context.absolute_url() + "/#fieldsetlegend-urbaneventinquiry_recipients"
+        )
 
     def getInquiryRadius(self):
         licence = self.context.aq_parent
-        if hasattr(licence, 'hasEnvironmentImpactStudy'):
+        if hasattr(licence, "hasEnvironmentImpactStudy"):
             if licence.getHasEnvironmentImpactStudy():
                 return 200
-        if hasattr(licence, 'impactStudy'):
+        if hasattr(licence, "impactStudy"):
             if licence.getImpactStudy():
                 return 200
-        if hasattr(licence, 'inquiry_category'):
-            if licence.getInquiry_category() == 'B':
+        if hasattr(licence, "inquiry_category"):
+            if licence.getInquiry_category() == "B":
                 return 200
         return 50

@@ -28,7 +28,7 @@ class DepositDoneCondition(Condition):
         deposit_done = False
         deposit_event = licence.getLastDeposit()
         if deposit_event:
-            deposit_done = api.content.get_state(deposit_event) == 'closed'
+            deposit_done = api.content.get_state(deposit_event) == "closed"
 
         return deposit_done
 
@@ -45,7 +45,7 @@ class SingleComplementAsked(Condition):
         missing_part_event = licence.getLastMissingPart()
         if missing_part_event:
             recent = self.task.creation_date < missing_part_event.creation_date
-            complements_asked = api.content.get_state(missing_part_event) == 'closed'
+            complements_asked = api.content.get_state(missing_part_event) == "closed"
             complements_asked = complements_asked and recent
 
         return complements_asked
@@ -62,7 +62,7 @@ class SingleComplementReceived(Condition):
         complements_received = False
         deposit_part_event = licence.getLastMissingPartDeposit()
         if deposit_part_event:
-            complements_received = api.content.get_state(deposit_part_event) == 'closed'
+            complements_received = api.content.get_state(deposit_part_event) == "closed"
         else:
             return False
 
@@ -83,7 +83,7 @@ class ComplementsAsked(Condition):
         complements_asked = False
         missing_part_event = licence.getLastMissingPart()
         if missing_part_event:
-            complements_asked = api.content.get_state(missing_part_event) == 'closed'
+            complements_asked = api.content.get_state(missing_part_event) == "closed"
             recent = self.task.creation_date < missing_part_event.creation_date
             complements_asked = complements_asked and recent
 
@@ -101,14 +101,16 @@ class AcknowledgmentDoneOrComplementsAskedCondition(Condition):
         acknowledgment_done = False
         acknowledgment_event = licence.getLastAcknowledgment()
         if acknowledgment_event:
-            acknowledgment_done = api.content.get_state(acknowledgment_event) == 'closed'
+            acknowledgment_done = (
+                api.content.get_state(acknowledgment_event) == "closed"
+            )
             recent = self.task.creation_date < acknowledgment_event.creation_date
             acknowledgment_done = acknowledgment_done and recent
 
         complements_asked = False
         missing_part_event = licence.getLastMissingPart()
         if missing_part_event:
-            complements_asked = api.content.get_state(missing_part_event) == 'closed'
+            complements_asked = api.content.get_state(missing_part_event) == "closed"
             recent = self.task.creation_date < missing_part_event.creation_date
             complements_asked = complements_asked and recent
 
@@ -126,7 +128,7 @@ class ComplementsReceived(Condition):
         complements_received = False
         deposit_part_event = licence.getLastMissingPartDeposit()
         if deposit_part_event:
-            complements_received = api.content.get_state(deposit_part_event) == 'closed'
+            complements_received = api.content.get_state(deposit_part_event) == "closed"
             recent = self.task.creation_date < deposit_part_event.creation_date
             complements_received = complements_received and recent
 
@@ -144,7 +146,7 @@ class ComplementsTransmitToSPW(Condition):
         complements_transmit = False
         deposit_part_event = licence.getLastMissingPartTransmitToSPW()
         if deposit_part_event:
-            complements_transmit = api.content.get_state(deposit_part_event) == 'closed'
+            complements_transmit = api.content.get_state(deposit_part_event) == "closed"
 
         return complements_transmit
 
@@ -171,10 +173,13 @@ class ProcedureChoiceDone(Condition):
 
     def evaluate(self):
         licence = self.task_container
-        if hasattr(licence, 'getHasModifiedBlueprints') and licence.getHasModifiedBlueprints():
-            ukn = 'ukn' not in licence.getProcedureChoiceModifiedBlueprints()
+        if (
+            hasattr(licence, "getHasModifiedBlueprints")
+            and licence.getHasModifiedBlueprints()
+        ):
+            ukn = "ukn" not in licence.getProcedureChoiceModifiedBlueprints()
         else:
-            ukn = 'ukn' not in licence.getProcedureChoice()
+            ukn = "ukn" not in licence.getProcedureChoice()
         return ukn
 
 
@@ -185,16 +190,16 @@ class UrbanAnalysisDone(Condition):
 
     def evaluate(self):
         licence = self.task_container
-        catalog = api.portal.get_tool('portal_catalog')
+        catalog = api.portal.get_tool("portal_catalog")
 
         analysis_done = False
         analysis_event = catalog(
-            Title='Fiche technique urbanisme',
-            path={'query': '/'.join(licence.getPhysicalPath())}
+            Title="Fiche technique urbanisme",
+            path={"query": "/".join(licence.getPhysicalPath())},
         )
         if analysis_event:
             analysis_event = analysis_event[0].getObject()
-            analysis_done = api.content.get_state(analysis_event) == 'closed'
+            analysis_done = api.content.get_state(analysis_event) == "closed"
 
         return analysis_done
 
@@ -210,7 +215,7 @@ class TransmitSPWDoneCondition(Condition):
         transmit_done = False
         transmit_event = licence.getLastTransmitToSPW()
         if transmit_event:
-            transmit_done = api.content.get_state(transmit_event) == 'closed'
+            transmit_done = api.content.get_state(transmit_event) == "closed"
 
         return transmit_done
 
@@ -226,7 +231,9 @@ class AcknowledgmentCreatedCondition(Condition):
         acknowledgment_created = False
         acknowledgment_event = licence.getLastAcknowledgment()
         if acknowledgment_event:
-            acknowledgment_created = api.content.get_state(acknowledgment_event) != 'closed'
+            acknowledgment_created = (
+                api.content.get_state(acknowledgment_event) != "closed"
+            )
 
         return acknowledgment_created
 
@@ -242,7 +249,9 @@ class AcknowledgmentDoneCondition(Condition):
         acknowledgment_done = False
         acknowledgment_event = licence.getLastAcknowledgment()
         if acknowledgment_event:
-            acknowledgment_done = api.content.get_state(acknowledgment_event) == 'closed'
+            acknowledgment_done = (
+                api.content.get_state(acknowledgment_event) == "closed"
+            )
 
         return acknowledgment_done
 
@@ -254,10 +263,13 @@ class NoInquiryCondition(Condition):
 
     def evaluate(self):
         licence = self.task_container
-        if hasattr(licence, 'getHasModifiedBlueprints') and licence.getHasModifiedBlueprints():
-            no_inquiry = 'inquiry' not in licence.getProcedureChoiceModifiedBlueprints()
+        if (
+            hasattr(licence, "getHasModifiedBlueprints")
+            and licence.getHasModifiedBlueprints()
+        ):
+            no_inquiry = "inquiry" not in licence.getProcedureChoiceModifiedBlueprints()
         else:
-            no_inquiry = 'inquiry' not in licence.getProcedureChoice()
+            no_inquiry = "inquiry" not in licence.getProcedureChoice()
         return no_inquiry
 
 
@@ -289,7 +301,7 @@ class InquiryEventCreatedCondition(Condition):
         created = False
         inquiry_event = licence.getLastInquiry()
         if inquiry_event:
-            created = api.content.get_state(inquiry_event) != 'closed'
+            created = api.content.get_state(inquiry_event) != "closed"
 
         return created
 
@@ -305,7 +317,7 @@ class InquiryDoneCondition(Condition):
         inquiry_done = False
         inquiry_event = licence.getLastInquiry()
         if inquiry_event:
-            inquiry_done = api.content.get_state(inquiry_event) == 'closed'
+            inquiry_done = api.content.get_state(inquiry_event) == "closed"
 
         return inquiry_done
 
@@ -338,7 +350,7 @@ class AnnouncementEventCreatedCondition(Condition):
         created = False
         announcement_event = licence.getLastAnnouncement()
         if announcement_event:
-            created = api.content.get_state(announcement_event) != 'closed'
+            created = api.content.get_state(announcement_event) != "closed"
 
         return created
 
@@ -354,7 +366,7 @@ class AnnouncementDoneCondition(Condition):
         announcement_done = False
         announcement_event = licence.getLastAnnouncement()
         if announcement_event:
-            announcement_done = api.content.get_state(announcement_event) == 'closed'
+            announcement_done = api.content.get_state(announcement_event) == "closed"
 
         return announcement_done
 
@@ -396,7 +408,7 @@ class OpinionRequestsDone(Condition):
             return False
 
         for opinion in or_events:
-            if api.content.get_state(opinion) != 'opinion_given':
+            if api.content.get_state(opinion) != "opinion_given":
                 return False
 
         return True
@@ -423,7 +435,9 @@ class CollegeOpinionTransmitToSPWDoneCondition(Condition):
         college_opinion_transmit_done = False
         college_opinion_transmit_event = licence.getLastCollegeOpinionTransmitToSPW()
         if college_opinion_transmit_event:
-            college_opinion_transmit_done = api.content.get_state(college_opinion_transmit_event) == 'closed'
+            college_opinion_transmit_done = (
+                api.content.get_state(college_opinion_transmit_event) == "closed"
+            )
 
         return college_opinion_transmit_done
 
@@ -439,7 +453,7 @@ class SPWProjectReceivedCondition(Condition):
         receipt_done = False
         receipt_event = licence.getLastDecisionProjectFromSPW()
         if receipt_event:
-            receipt_done = api.content.get_state(receipt_event) == 'closed'
+            receipt_done = api.content.get_state(receipt_event) == "closed"
 
         return receipt_done
 
@@ -450,7 +464,7 @@ class LicenceSuspension(Condition):
     """
 
     def evaluate(self):
-        is_suspended = api.content.get_state(self.task_container) == 'suspension'
+        is_suspended = api.content.get_state(self.task_container) == "suspension"
         return is_suspended
 
 
@@ -460,7 +474,10 @@ class LicenceInCompletionState(Condition):
     """
 
     def evaluate(self):
-        checked_completion = api.content.get_state(self.task_container) in ['complete', 'incomplete']
+        checked_completion = api.content.get_state(self.task_container) in [
+            "complete",
+            "incomplete",
+        ]
         return checked_completion
 
 
@@ -475,7 +492,7 @@ class FDDecisionEventCreatedCondition(Condition):
         fd_decision_created = False
         fd_decision_event = licence.getLastWalloonRegionDecisionEvent()
         if fd_decision_event:
-            fd_decision_created = api.content.get_state(fd_decision_event) != 'closed'
+            fd_decision_created = api.content.get_state(fd_decision_event) != "closed"
 
         return fd_decision_created
 
@@ -491,7 +508,7 @@ class FDDecisionEventDoneCondition(Condition):
         fd_decision_done = False
         fd_decision_event = licence.getLastWalloonRegionDecisionEvent()
         if fd_decision_event:
-            fd_decision_done = api.content.get_state(fd_decision_event) == 'closed'
+            fd_decision_done = api.content.get_state(fd_decision_event) == "closed"
 
         return fd_decision_done
 
@@ -507,7 +524,7 @@ class WalloonRegionPrimoEventDone(Condition):
         primo_done = False
         primo_event = licence.getLastWalloonRegionPrimo()
         if primo_event:
-            primo_done = api.content.get_state(primo_event) == 'closed'
+            primo_done = api.content.get_state(primo_event) == "closed"
 
         return primo_done
 
@@ -577,7 +594,7 @@ class LicenceRefused(Condition):
 
         refused_event = licence.getLastRefusedNotification()
         if refused_event:
-            return api.content.get_state(refused_event) == 'closed'
+            return api.content.get_state(refused_event) == "closed"
         return False
 
 
@@ -591,7 +608,7 @@ class DecisionNotified(Condition):
 
         decision_event = licence.getLastLicenceNotification()
         if decision_event:
-            return api.content.get_state(decision_event) == 'closed'
+            return api.content.get_state(decision_event) == "closed"
         return False
 
 
@@ -605,7 +622,7 @@ class DecisionDelivered(Condition):
 
         decision_event = licence.getLastLicenceDelivery()
         if decision_event:
-            return api.content.get_state(decision_event) == 'closed'
+            return api.content.get_state(decision_event) == "closed"
         return False
 
 
@@ -627,7 +644,7 @@ class LicenceThawedCondition(Condition):
 
     def evaluate(self):
         licence = self.task_container
-        thawed = api.content.get_state(licence) != 'frozen_suspension'
+        thawed = api.content.get_state(licence) != "frozen_suspension"
         return thawed
 
 
@@ -659,7 +676,7 @@ class AllInspectionFollowupsAreDone(InspectionCondition):
             return False
 
         for follow_up_event in follow_up_events:
-            if api.content.get_state(follow_up_event) != 'closed':
+            if api.content.get_state(follow_up_event) != "closed":
                 return False
         return True
 
@@ -676,7 +693,7 @@ class AllInspectionFollowupsAreWritten(InspectionCondition):
             return False
 
         for follow_up_event in follow_up_events:
-            if api.content.get_state(follow_up_event) == 'draft':
+            if api.content.get_state(follow_up_event) == "draft":
                 return False
         return True
 
@@ -689,7 +706,7 @@ class SomeInspectionFollowupsAreWritten(InspectionCondition):
     def evaluate(self):
         follow_up_events = self.get_followup_events()
         for follow_up_event in follow_up_events:
-            if api.content.get_state(follow_up_event) == 'to_validate':
+            if api.content.get_state(follow_up_event) == "to_validate":
                 return True
         return False
 
@@ -702,7 +719,7 @@ class NoInspectionFollowupsToValidate(InspectionCondition):
     def evaluate(self):
         follow_up_events = self.get_followup_events()
         for follow_up_event in follow_up_events:
-            if api.content.get_state(follow_up_event) == 'to_validate':
+            if api.content.get_state(follow_up_event) == "to_validate":
                 return False
         return True
 
@@ -715,7 +732,7 @@ class NoInspectionFollowupsToSend(InspectionCondition):
     def evaluate(self):
         follow_up_events = self.get_followup_events()
         for follow_up_event in follow_up_events:
-            if api.content.get_state(follow_up_event) == 'to_send':
+            if api.content.get_state(follow_up_event) == "to_send":
                 return False
         return True
 
@@ -724,11 +741,12 @@ class FollowUpTicketCreated(InspectionCondition):
     """
     A ticket has been created as an inspection followup result.
     """
+
     def evaluate(self):
         followup_ticket = self.get_last_followup_ticket()
         if not followup_ticket:
             return False
-        created = api.content.get_state(followup_ticket) != 'ended'
+        created = api.content.get_state(followup_ticket) != "ended"
         return created
 
 
@@ -736,11 +754,12 @@ class FollowUpTicketClosed(InspectionCondition):
     """
     The ticket created as a followup action has been closed.
     """
+
     def evaluate(self):
         followup_ticket = self.get_last_followup_ticket()
         if not followup_ticket:
             return False
-        ended = api.content.get_state(followup_ticket) == 'ended'
+        ended = api.content.get_state(followup_ticket) == "ended"
         return ended
 
 
@@ -748,12 +767,16 @@ class FollowUpWithDelayOverdue(Condition):
     """
     The ticket created as a followup action has been closed.
     """
+
     def evaluate(self):
         inspection = self.task_container
         for obj in inspection.objectValues():
             if IFollowupDeadLineTask.providedBy(obj):
                 task = obj
-                if task.get_state() in states_by_status[STARTED] and task.due_date < date.today():
+                if (
+                    task.get_state() in states_by_status[STARTED]
+                    and task.due_date < date.today()
+                ):
                     return True
         return False
 
@@ -762,10 +785,11 @@ class TicketEventClosed(Condition):
     """
     The ticket event is closed.
     """
+
     def evaluate(self):
         licence = self.task_container
         ticket_event = licence.getLastTheTicket()
         if not ticket_event:
             return False
-        closed = api.content.get_state(ticket_event) == 'closed'
+        closed = api.content.get_state(ticket_event) == "closed"
         return closed

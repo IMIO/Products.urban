@@ -18,7 +18,7 @@ class MockTask(object):
         self.due_date = due_date
         self.end_date = end_date
         self.state = state
-        self.assigned_user = ''
+        self.assigned_user = ""
 
     def Title(self):
         return self.title
@@ -40,13 +40,12 @@ class OpinionRequestSentStatus(TaskEndSimpleStatusView):
 
         opinion_events = licence.getOpinionRequests()
         if not opinion_events:
-            not_matched.append('Créer les événements de demande d\'avis')
+            not_matched.append("Créer les événements de demande d'avis")
 
         for ask_opinion_event in opinion_events:
-            if api.content.get_state(ask_opinion_event) == 'creation':
+            if api.content.get_state(ask_opinion_event) == "creation":
                 msg = 'Passer l\'événement <strong>"{}"</strong> dans l\'état <strong>"{}"</strong>'.format(
-                    ask_opinion_event.Title(),
-                    'en attente d\'avis'
+                    ask_opinion_event.Title(), "en attente d'avis"
                 )
                 not_matched.append(msg)
             else:
@@ -62,9 +61,9 @@ class OpinionRequestReceivedStatus(TaskEndStatusView):
     Display if the ending state is matched or not.
     """
 
-    subtask_title_label = 'Avis reçus'
-    subtask_todo_title_label = 'Avis en attente de réponse'
-    end_date_label = 'Reçu le'
+    subtask_title_label = "Avis reçus"
+    subtask_todo_title_label = "Avis en attente de réponse"
+    end_date_label = "Reçu le"
 
     def get_state(self, context):
         """
@@ -88,14 +87,14 @@ class OpinionRequestReceivedStatus(TaskEndStatusView):
             due_date = ask_opinion_event.getTransmitDate()
             due_date = due_date and due_date + 15 or None
             end_date = ask_opinion_event.getReceiptDate()
-            if event_state == 'opinion_given':
-                opinion_task = MockTask(title, due_date, end_date, 'closed')
+            if event_state == "opinion_given":
+                opinion_task = MockTask(title, due_date, end_date, "closed")
                 done.append(opinion_task)
-            elif event_state == 'creation':
-                opinion_task = MockTask(title, due_date, end_date, 'creation')
+            elif event_state == "creation":
+                opinion_task = MockTask(title, due_date, end_date, "creation")
                 created.append(opinion_task)
             else:
-                opinion_task = MockTask(title, due_date, end_date, 'to_do')
+                opinion_task = MockTask(title, due_date, end_date, "to_do")
                 started.append(opinion_task)
 
         return created, started, done
@@ -109,8 +108,7 @@ class OpinionRequestReceivedStatus(TaskEndStatusView):
 
 
 class FollowupEventsRedactedStatus(TaskEndSimpleStatusView):
-    """
-    """
+    """ """
 
     def get_conditions_status(self):
         """
@@ -125,24 +123,28 @@ class FollowupEventsRedactedStatus(TaskEndSimpleStatusView):
 
         selected_followups = report_event.get_regular_followup_propositions()
         followup_events = licence.getCurrentFollowUpEvents()
-        followup_events_by_id = dict([(event.getUrbaneventtypes().id, event) for event in followup_events])
-        voc = UrbanVocabulary('urbaneventtypes', vocType="FollowUpEventType", value_to_use='title')
+        followup_events_by_id = dict(
+            [(event.getUrbaneventtypes().id, event) for event in followup_events]
+        )
+        voc = UrbanVocabulary(
+            "urbaneventtypes", vocType="FollowUpEventType", value_to_use="title"
+        )
         all_followups_voc = voc.getDisplayList(self)
         to_create = []
         to_propose = []
         for selected_followup in selected_followups:
             if selected_followup in followup_events_by_id:
                 follow_up_event = followup_events_by_id[selected_followup]
-                if api.content.get_state(follow_up_event) == 'draft':
+                if api.content.get_state(follow_up_event) == "draft":
                     to_propose.append(
                         u'Proposer l\'événement <strong>"{}"</strong>'.format(
-                            follow_up_event.Title().decode('utf-8')
+                            follow_up_event.Title().decode("utf-8")
                         )
                     )
                 else:
                     matched.append(
                         u'Evénement <strong>"{}"</strong> proposé'.format(
-                            follow_up_event.Title().decode('utf-8')
+                            follow_up_event.Title().decode("utf-8")
                         )
                     )
             else:
@@ -158,8 +160,7 @@ class FollowupEventsRedactedStatus(TaskEndSimpleStatusView):
 
 
 class FollowupEventsValidatedStatus(TaskEndSimpleStatusView):
-    """
-    """
+    """ """
 
     def get_conditions_status(self):
         """
@@ -170,16 +171,16 @@ class FollowupEventsValidatedStatus(TaskEndSimpleStatusView):
 
         followup_events = licence.getCurrentFollowUpEvents()
         for followup_event in followup_events:
-            if api.content.get_state(followup_event) == 'to_validate':
+            if api.content.get_state(followup_event) == "to_validate":
                 not_matched.append(
                     u'Valider l\'événement <strong>"{}"</strong>'.format(
-                        followup_event.Title().decode('utf-8')
+                        followup_event.Title().decode("utf-8")
                     )
                 )
-            elif api.content.get_state(followup_event) == 'to_send':
+            elif api.content.get_state(followup_event) == "to_send":
                 matched.append(
                     u'Evénement <strong>"{}"</strong> validé'.format(
-                        followup_event.Title().decode('utf-8')
+                        followup_event.Title().decode("utf-8")
                     )
                 )
 
@@ -187,8 +188,7 @@ class FollowupEventsValidatedStatus(TaskEndSimpleStatusView):
 
 
 class FollowupEventsSentStatus(TaskEndSimpleStatusView):
-    """
-    """
+    """ """
 
     def get_conditions_status(self):
         """
@@ -199,16 +199,16 @@ class FollowupEventsSentStatus(TaskEndSimpleStatusView):
 
         followup_events = licence.getCurrentFollowUpEvents()
         for followup_event in followup_events:
-            if api.content.get_state(followup_event) == 'to_send':
+            if api.content.get_state(followup_event) == "to_send":
                 not_matched.append(
                     u'Clôturer l\'événement <strong>"{}"</strong>'.format(
-                        followup_event.Title().decode('utf-8')
+                        followup_event.Title().decode("utf-8")
                     )
                 )
-            elif api.content.get_state(followup_event) == 'closed':
+            elif api.content.get_state(followup_event) == "closed":
                 matched.append(
                     u'Evénement <strong>"{}"</strong> clôturé'.format(
-                        followup_event.Title().decode('utf-8')
+                        followup_event.Title().decode("utf-8")
                     )
                 )
 

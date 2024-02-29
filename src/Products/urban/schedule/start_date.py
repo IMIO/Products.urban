@@ -46,18 +46,25 @@ class AcknowledgmentLimitDate(StartDate):
     def start_date(self):
         licence = self.task_container
         limit_date = None
-        if hasattr(licence, 'getHasModifiedBlueprints') and not licence.getHasModifiedBlueprints():
+        if (
+            hasattr(licence, "getHasModifiedBlueprints")
+            and not licence.getHasModifiedBlueprints()
+        ):
             deposit = licence.getLastDeposit()
             date = deposit and deposit.getEventDate()
             limit_date = date and date + 20 or None
-        elif hasattr(licence, 'getLastAcknowledgment'):
-            ack = licence.getLastAcknowledgment(state='closed')
+        elif hasattr(licence, "getLastAcknowledgment"):
+            ack = licence.getLastAcknowledgment(state="closed")
             annonced_delay = queryMultiAdapter(
                 (licence, self.task),
                 ICalculationDelay,
-                'urban.schedule.delay.annonced_delay'
+                "urban.schedule.delay.annonced_delay",
             )
-            annonced_delay = annonced_delay and annonced_delay.calculate_delay(with_modified_blueprints=False) or 0
+            annonced_delay = (
+                annonced_delay
+                and annonced_delay.calculate_delay(with_modified_blueprints=False)
+                or 0
+            )
             limit_date = ack and ack.getEventDate() + annonced_delay
         return limit_date
 
@@ -82,7 +89,9 @@ class ComplementsDepositDate(StartDate):
     def start_date(self):
         licence = self.task_container
         missing_part_deposit = licence.getLastMissingPartDeposit()
-        deposit_date = missing_part_deposit and missing_part_deposit.getEventDate() or None
+        deposit_date = (
+            missing_part_deposit and missing_part_deposit.getEventDate() or None
+        )
         return deposit_date
 
 
@@ -93,7 +102,11 @@ class AcknowledgmentDate(StartDate):
 
     def start_date(self):
         licence = self.task_container
-        ack = hasattr(licence, 'getLastAcknowledgment') and licence.getLastAcknowledgment() or None
+        ack = (
+            hasattr(licence, "getLastAcknowledgment")
+            and licence.getLastAcknowledgment()
+            or None
+        )
         ack_date = ack and ack.getEventDate() or None
         return ack_date
 
@@ -105,7 +118,11 @@ class AcknowledgmentTransmitDate(StartDate):
 
     def start_date(self):
         licence = self.task_container
-        ack = hasattr(licence, 'getLastAcknowledgment') and licence.getLastAcknowledgment() or None
+        ack = (
+            hasattr(licence, "getLastAcknowledgment")
+            and licence.getLastAcknowledgment()
+            or None
+        )
         ack_transmit_date = ack and ack.getTransmitDate() or None
         return ack_transmit_date
 
@@ -182,9 +199,11 @@ class AskOpinionDate(StartDate):
         # case where we just pushed the 'ask_opinion' button but the date has
         # no been set yet.
         if not ask_date:
-            for wf_action in opinion_request.workflow_history['opinion_request_workflow']:
-                if wf_action['action'] == 'ask_opinion':
-                    ask_date = wf_action['time']
+            for wf_action in opinion_request.workflow_history[
+                "opinion_request_workflow"
+            ]:
+                if wf_action["action"] == "ask_opinion":
+                    ask_date = wf_action["time"]
 
         return ask_date
 

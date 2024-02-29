@@ -11,7 +11,7 @@
 
 __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEULETTE
 <stephan.geulette@uvcw.be>, Jean-Michel Abe <jm.abe@la-bruyere.be>"""
-__docformat__ = 'plaintext'
+__docformat__ = "plaintext"
 
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
@@ -26,41 +26,43 @@ from Products.urban.config import *
 ##code-section module-header #fill in your manual code here
 ##/code-section module-header
 
-schema = Schema((
-
-    ReferenceField(
-        name='LinkedOpinionRequestEvent',
-        widget=ReferenceBrowserWidget(
-            label='Linkedopinionrequestevent',
-            label_msgid='urban_label_LinkedOpinionRequestEvent',
-            i18n_domain='urban',
+schema = Schema(
+    (
+        ReferenceField(
+            name="LinkedOpinionRequestEvent",
+            widget=ReferenceBrowserWidget(
+                label="Linkedopinionrequestevent",
+                label_msgid="urban_label_LinkedOpinionRequestEvent",
+                i18n_domain="urban",
+            ),
+            allowed_types=("UrbanEventType", "OpinionRequestEventType"),
+            multiValued=0,
+            relationship="LinkedOpinionRequestEvent",
+            write_permission="Manage portal",
         ),
-        allowed_types=('UrbanEventType', 'OpinionRequestEventType'),
-        multiValued=0,
-        relationship='LinkedOpinionRequestEvent',
-        write_permission="Manage portal",
     ),
-
-),
 )
 
 ##code-section after-local-schema #fill in your manual code here
 ##/code-section after-local-schema
 
-OrganisationTerm_schema = BaseSchema.copy() + \
-    getattr(UrbanVocabularyTerm, 'schema', Schema(())).copy() + \
-    schema.copy()
+OrganisationTerm_schema = (
+    BaseSchema.copy()
+    + getattr(UrbanVocabularyTerm, "schema", Schema(())).copy()
+    + schema.copy()
+)
 
 ##code-section after-schema #fill in your manual code here
 ##/code-section after-schema
 
+
 class OrganisationTerm(BaseContent, UrbanVocabularyTerm, BrowserDefaultMixin):
-    """
-    """
+    """ """
+
     security = ClassSecurityInfo()
     implements(interfaces.IOrganisationTerm)
 
-    meta_type = 'OrganisationTerm'
+    meta_type = "OrganisationTerm"
     _at_rename_after_creation = True
 
     schema = OrganisationTerm_schema
@@ -76,4 +78,3 @@ registerType(OrganisationTerm, PROJECTNAME)
 
 ##code-section module-footer #fill in your manual code here
 ##/code-section module-footer
-

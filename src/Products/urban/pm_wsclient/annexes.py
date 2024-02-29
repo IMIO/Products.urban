@@ -7,8 +7,8 @@ from zope.interface import implements
 
 
 class UrbanEventAnnexesToPM(object):
-    """
-    """
+    """ """
+
     implements(ISendableAnnexesToPM)
 
     def __init__(self, context):
@@ -16,36 +16,36 @@ class UrbanEventAnnexesToPM(object):
         self.licence = context.aq_parent
 
     def get(self):
-        """
-        """
+        """ """
         all_documents = [
-            ['', self.urban_event.getAttachments() + self.urban_event.getDocuments()],
-            ['dossier', self.licence.getAttachments()],
+            ["", self.urban_event.getAttachments() + self.urban_event.getDocuments()],
+            ["dossier", self.licence.getAttachments()],
         ]
         for urban_event in self.licence.getUrbanEvents():
             if urban_event != self.urban_event:
-                all_documents.append([urban_event.Title(), urban_event.getAttachments()])
+                all_documents.append(
+                    [urban_event.Title(), urban_event.getAttachments()]
+                )
         annexes = []
         for category, documents in all_documents:
             for doc in documents:
                 annexes.append(
                     {
-                        'title': '{}{}'.format(
-                            doc.title,
-                            category and ' ({})'.format(category) or ''
+                        "title": "{}{}".format(
+                            doc.title, category and " ({})".format(category) or ""
                         ),
-                        'UID': doc.UID(),
+                        "UID": doc.UID(),
                     }
                 )
         return annexes
 
 
 class UrbanReadFile(object):
-    """
-    """
+    """ """
+
     implements(IRawReadFile)
 
-    encoding = 'utf-8'
+    encoding = "utf-8"
     name = None
 
     def __init__(self, context):
@@ -89,7 +89,7 @@ class UrbanReadFile(object):
 
     @property
     def encoding(self):
-        return self._getMessage().get_charset() or 'utf-8'
+        return self._getMessage().get_charset() or "utf-8"
 
     @property
     def name(self):

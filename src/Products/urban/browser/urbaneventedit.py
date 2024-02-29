@@ -7,23 +7,25 @@ from zope.component import queryMultiAdapter
 
 class UrbanEventEdit(Edit):
     """
-      This manage the edit view of UrbanEvent
+    This manage the edit view of UrbanEvent
     """
 
     def get_editable_fields(self, schemata):
         portal_state = queryMultiAdapter(
-            (self.context, self.request),
-            name=u'plone_portal_state'
+            (self.context, self.request), name=u"plone_portal_state"
         )
         ws4pmSettings = queryMultiAdapter(
-            (portal_state.portal(), self.request),
-            name='ws4pmclient-settings'
+            (portal_state.portal(), self.request), name="ws4pmclient-settings"
         )
 
         fields = []
         for field in self.context.schema.fields():
-            if field.schemata == 'default' and not hasattr(field, 'optional')\
-               and field.widget.visible and field.widget.visible['view']:
+            if (
+                field.schemata == "default"
+                and not hasattr(field, "optional")
+                and field.widget.visible
+                and field.widget.visible["view"]
+            ):
                 fields.append(field)
 
         linkedUrbanEventType = self.context.getUrbaneventtypes()
@@ -35,7 +37,7 @@ class UrbanEventEdit(Edit):
             fields.append(field)
 
         if ws4pmSettings and ws4pmSettings.checkAlreadySentToPloneMeeting(self.context):
-            return [f for f in fields if not getattr(f, 'pm_text_field', False)]
+            return [f for f in fields if not getattr(f, "pm_text_field", False)]
         else:
             return fields
 

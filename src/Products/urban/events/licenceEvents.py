@@ -17,7 +17,7 @@ from zope.interface import alsoProvides
 
 def setDefaultValuesEvent(licence, event):
     """
-     set default values on licence fields
+    set default values on licence fields
     """
     if licence.checkCreationFlag():
         _setDefaultFolderManagers(licence)
@@ -27,7 +27,11 @@ def setDefaultValuesEvent(licence, event):
 
 
 def _setDefaultSelectValues(licence):
-    select_fields = [field for field in licence.schema.fields() if field.default_method == 'getDefaultValue']
+    select_fields = [
+        field
+        for field in licence.schema.fields()
+        if field.default_method == "getDefaultValue"
+    ]
     for field in select_fields:
         default_value = licence.getDefaultValue(licence, field)
         field_mutator = getattr(licence, field.mutator)
@@ -35,9 +39,13 @@ def _setDefaultSelectValues(licence):
 
 
 def _setDefaultTextValues(licence):
-    select_fields = [field for field in licence.schema.fields() if field.default_method == 'getDefaultText']
+    select_fields = [
+        field
+        for field in licence.schema.fields()
+        if field.default_method == "getDefaultText"
+    ]
     for field in select_fields:
-        is_html = 'html' in field.default_content_type
+        is_html = "html" in field.default_content_type
         default_value = licence.getDefaultText(licence, field, is_html)
         field_mutator = getattr(licence, field.mutator)
         field_mutator(default_value)
@@ -61,7 +69,7 @@ def postCreationActions(licence, event):
 
 def updateLicenceTitle(licence, event):
     licence.updateTitle()
-    licence.reindexObject(idxs=['Title', 'sortable_title'])
+    licence.reindexObject(idxs=["Title", "sortable_title"])
 
 
 def updateTaskIndexes(task_container, event):
@@ -70,11 +78,11 @@ def updateTaskIndexes(task_container, event):
     if not task_configs:
         return
 
-    with api.env.adopt_roles(['Manager']):
+    with api.env.adopt_roles(["Manager"]):
         for config in task_configs:
             tasks = config.get_task_instances(task_container)
             for task in tasks:
-                task.reindexObject(idxs=['commentators'])
+                task.reindexObject(idxs=["commentators"])
 
 
 def updateBoundLicences(licence, events):
@@ -83,39 +91,47 @@ def updateBoundLicences(licence, events):
     as the refered address and aplicants may have changed.
     """
     annotations = IAnnotations(licence)
-    ticket_uids = annotations.get('urban.bound_tickets') or set([])
-    inspection_uids = annotations.get('urban.bound_inspections') or set([])
-    roaddecree_uids = annotations.get('urban.bound_roaddecrees') or set([])
+    ticket_uids = annotations.get("urban.bound_tickets") or set([])
+    inspection_uids = annotations.get("urban.bound_inspections") or set([])
+    roaddecree_uids = annotations.get("urban.bound_roaddecrees") or set([])
     uids = inspection_uids.union(ticket_uids).union(roaddecree_uids)
-    catalog = api.portal.get_tool('portal_catalog')
+    catalog = api.portal.get_tool("portal_catalog")
     bound_licences_brains = catalog(UID=uids)
     for bound_licences_brain in bound_licences_brains:
         bound_licence = bound_licences_brain.getObject()
         bound_licence.updateTitle()
-        bound_licence.reindexObject(idxs=[
-            'Title',
-            'sortable_title',
-            'applicantInfosIndex',
-            'address',
-            'StreetNumber',
-            'StreetsUID',
-            'parcelInfosIndex'
-        ])
+        bound_licence.reindexObject(
+            idxs=[
+                "Title",
+                "sortable_title",
+                "applicantInfosIndex",
+                "address",
+                "StreetNumber",
+                "StreetsUID",
+                "parcelInfosIndex",
+            ]
+        )
         # make sure to update  the whole reference chain licence <- inspection <- ticket
         updateBoundLicences(bound_licence, events)
 
 
 def updateEventsFoldermanager(licence, event):
-    events = licence.objectValues('UrbanEvent')
-    events += licence.objectValues('UrbanEventOpinionRequest')
+    events = licence.objectValues("UrbanEvent")
+    events += licence.objectValues("UrbanEventOpinionRequest")
     for urban_event in events:
-        urban_event.reindexObject(idxs=['folder_manager'])
+        urban_event.reindexObject(idxs=["folder_manager"])
 
 
 def _setManagerPermissionOnLicence(licence):
     # there is no need for other users than Managers to List folder contents
     # set this permission here if we use the simple_publication_workflow...
-    licence.manage_permission('List folder contents', ['Manager', ], acquire=0)
+    licence.manage_permission(
+        "List folder contents",
+        [
+            "Manager",
+        ],
+        acquire=0,
+    )
 
 
 def _checkNumerotation(licence):
@@ -126,7 +142,7 @@ def _checkNumerotation(licence):
     if config.generateReference(licence) in licence.getReference():
         value = source_config.getNumerotation()
         if not str(value).isdigit():
-            value = '0'
+            value = "0"
         else:
             value = int(value)
             value = value + 1
@@ -136,8 +152,7 @@ def _checkNumerotation(licence):
 
 
 def setMarkerInterface(licence, event):
-    """
-    """
+    """ """
     portal_type = licence.portal_type
     marker_interface = URBAN_TYPES_INTERFACES.get(portal_type, None)
     if marker_interface and not marker_interface.providedBy(licence):
@@ -145,23 +160,22 @@ def setMarkerInterface(licence, event):
 
 
 def reindex_attachments_permissions(container, event):
-    """
-    """
-    if 'portal_factory' in container.REQUEST.getURL():
+    """ """
+    if "portal_factory" in container.REQUEST.getURL():
         return
     query = {
-        'portal_type': 'File',
-        'path': {
-            'query': '/'.join(container.getPhysicalPath()),
-            'depth': 1,
+        "portal_type": "File",
+        "path": {
+            "query": "/".join(container.getPhysicalPath()),
+            "depth": 1,
         },
     }
-    catalog = api.portal.get_tool('portal_catalog')
+    catalog = api.portal.get_tool("portal_catalog")
     attachments = catalog(query)
-    with api.env.adopt_roles(['Manager']):
+    with api.env.adopt_roles(["Manager"]):
         for attachment_brain in attachments:
             attachment = attachment_brain.getObject()
-            attachment.reindexObject(idxs=['allowedRolesAndUsers'])
+            attachment.reindexObject(idxs=["allowedRolesAndUsers"])
 
     if IUrbanEvent.providedBy(container):
         licence = container.aq_parent
@@ -174,7 +188,7 @@ def reindex_licence_permissions(container, event):
     """
     if IUrbanEvent.providedBy(container):
         licence = container.aq_parent
-        licence.reindexObject(idxs=['allowedRolesAndUsers'])
+        licence.reindexObject(idxs=["allowedRolesAndUsers"])
 
 
 def set_faceted_navigation(licence, event):

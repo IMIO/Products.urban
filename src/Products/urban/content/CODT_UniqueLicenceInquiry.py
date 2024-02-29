@@ -11,7 +11,7 @@
 
 __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEULETTE
 <stephan.geulette@uvcw.be>, Jean-Michel Abe <jm.abe@la-bruyere.be>"""
-__docformat__ = 'plaintext'
+__docformat__ = "plaintext"
 
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
@@ -28,40 +28,45 @@ from Products.urban.content.CODT_Inquiry import CODT_Inquiry
 ##code-section module-header #fill in your manual code here
 ##/code-section module-header
 
-schema = Schema((
-    StringField(
-        name='inquiry_category',
-        widget=SelectionWidget(
-            label=_('urban_label_inquiry_category',
-                    default='Inquiry_category'),
+schema = Schema(
+    (
+        StringField(
+            name="inquiry_category",
+            widget=SelectionWidget(
+                label=_("urban_label_inquiry_category", default="Inquiry_category"),
+            ),
+            schemata="urban_inquiry",
+            vocabulary="list_inquiry_category",
         ),
-        schemata='urban_inquiry',
-        vocabulary='list_inquiry_category',
     ),
-),
 )
 
 ##code-section after-local-schema #fill in your manual code here
 ##/code-section after-local-schema
 
-CODT_UniqueLicenceInquiry_schema = BaseSchema.copy() + \
-    getattr(CODT_Inquiry, 'schema', Schema(())).copy() + \
-    schema.copy()
+CODT_UniqueLicenceInquiry_schema = (
+    BaseSchema.copy()
+    + getattr(CODT_Inquiry, "schema", Schema(())).copy()
+    + schema.copy()
+)
 
 ##code-section after-schema #fill in your manual code here
-CODT_UniqueLicenceInquiry_schema['title'].widget.visible = False
-CODT_UniqueLicenceInquiry_schema['inquiry_type'].widget.visible = {'view': 'invisible', 'edit': 'invisible'}
-CODT_UniqueLicenceInquiry_schema['inquiry_type'].default = 'inquiry'
+CODT_UniqueLicenceInquiry_schema["title"].widget.visible = False
+CODT_UniqueLicenceInquiry_schema["inquiry_type"].widget.visible = {
+    "view": "invisible",
+    "edit": "invisible",
+}
+CODT_UniqueLicenceInquiry_schema["inquiry_type"].default = "inquiry"
 ##/code-section after-schema
 
 
 class CODT_UniqueLicenceInquiry(BaseContent, CODT_Inquiry, BrowserDefaultMixin):
-    """
-    """
+    """ """
+
     security = ClassSecurityInfo()
     implements(interfaces.ICODT_UniqueLicenceInquiry)
 
-    meta_type = 'CODT_UniqueLicenceInquiry'
+    meta_type = "CODT_UniqueLicenceInquiry"
     _at_rename_after_creation = True
 
     schema = CODT_UniqueLicenceInquiry_schema
@@ -72,20 +77,24 @@ class CODT_UniqueLicenceInquiry(BaseContent, CODT_Inquiry, BrowserDefaultMixin):
     # Methods
 
     def list_inquiry_category(self):
-        """
-        """
+        """ """
         vocabulary = (
-            ('B', 'Catégorie B, rayon 200m (attention publication)'),
-            ('C', 'Catégorie C, rayon 50m'),
+            ("B", "Catégorie B, rayon 200m (attention publication)"),
+            ("C", "Catégorie C, rayon 50m"),
         )
         return DisplayList(vocabulary)
 
-    def _get_inquiry_objs(self, all_=False, portal_type=['Inquiry', 'CODT_UniqueLicenceInquiry']):
+    def _get_inquiry_objs(
+        self, all_=False, portal_type=["Inquiry", "CODT_UniqueLicenceInquiry"]
+    ):
         """
         Returns the existing inquiries or announcements
         """
-        all_inquiries = super(CODT_UniqueLicenceInquiry, self)._get_inquiry_objs(all_=all_, portal_type=portal_type)
+        all_inquiries = super(CODT_UniqueLicenceInquiry, self)._get_inquiry_objs(
+            all_=all_, portal_type=portal_type
+        )
         return all_inquiries
+
 
 registerType(CODT_UniqueLicenceInquiry, PROJECTNAME)
 # end of class Inquiry
@@ -95,20 +104,20 @@ registerType(CODT_UniqueLicenceInquiry, PROJECTNAME)
 
 def finalizeSchema(schema):
     """
-       Finalizes the type schema to alter some fields
+    Finalizes the type schema to alter some fields
     """
-    schema.delField('announcementArticles')
-    schema.delField('announcementArticlesText')
-    schema.moveField('derogation', after='investigationArticlesText')
-    schema.moveField('derogationDetails', after='derogation')
-    schema.moveField('inquiry_category', after='derogationDetails')
-    schema.moveField('investigationReasons', after='inquiry_category')
-    schema.moveField('divergence', after='derogationDetails')
-    schema.moveField('divergenceDetails', after='divergence')
-    schema.moveField('demandDisplay', after='divergenceDetails')
-    schema.moveField('investigationDetails', after='roadModificationSubject')
+    schema.delField("announcementArticles")
+    schema.delField("announcementArticlesText")
+    schema.moveField("derogation", after="investigationArticlesText")
+    schema.moveField("derogationDetails", after="derogation")
+    schema.moveField("inquiry_category", after="derogationDetails")
+    schema.moveField("investigationReasons", after="inquiry_category")
+    schema.moveField("divergence", after="derogationDetails")
+    schema.moveField("divergenceDetails", after="divergence")
+    schema.moveField("demandDisplay", after="divergenceDetails")
+    schema.moveField("investigationDetails", after="roadModificationSubject")
     return schema
+
 
 finalizeSchema(CODT_UniqueLicenceInquiry_schema)
 ##/code-section module-footer
-

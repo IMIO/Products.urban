@@ -1,4 +1,4 @@
-#-*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 
 from Products.urban.testing import URBAN_TESTS_LICENCES_FUNCTIONAL
 from Products.urban.testing import URBAN_TESTS_INTEGRATION
@@ -21,7 +21,7 @@ class TestContactFields(SchemaFieldsTestCase):
     layer = URBAN_TESTS_INTEGRATION
 
     def setUp(self):
-        self.portal = self.layer['portal']
+        self.portal = self.layer["portal"]
         self.urban = self.portal.urban
         self.portal_urban = self.portal.portal_urban
 
@@ -29,12 +29,12 @@ class TestContactFields(SchemaFieldsTestCase):
         default_password = self.layer.default_password
         login(self.portal, default_user)
         buildlicence_folder = self.urban.buildlicences
-        testlicence_id = 'test_buildlicence'
-        buildlicence_folder.invokeFactory('BuildLicence', id=testlicence_id)
+        testlicence_id = "test_buildlicence"
+        buildlicence_folder.invokeFactory("BuildLicence", id=testlicence_id)
         self.licence = getattr(buildlicence_folder, testlicence_id)
 
-        contact_id = 'test_contact'
-        self.licence.invokeFactory('Applicant', id=contact_id)
+        contact_id = "test_contact"
+        self.licence.invokeFactory("Applicant", id=contact_id)
         transaction.commit()
         self.contact = getattr(self.licence, contact_id)
 
@@ -42,12 +42,12 @@ class TestContactFields(SchemaFieldsTestCase):
         self.browserLogin(default_user, default_password)
 
     def tearDown(self):
-        with api.env.adopt_roles(['Manager']):
+        with api.env.adopt_roles(["Manager"]):
             api.content.delete(self.licence)
         transaction.commit()
 
     def test_contact_has_attribute_personTitle(self):
-        self.assertTrue(self.contact.getField('personTitle'))
+        self.assertTrue(self.contact.getField("personTitle"))
 
     def test_contact_personTitle_is_visible(self):
         self._is_field_visible("Titre", obj=self.contact)
@@ -56,7 +56,7 @@ class TestContactFields(SchemaFieldsTestCase):
         self._is_field_visible_in_edit("Titre", obj=self.contact)
 
     def test_contact_has_attribute_name1(self):
-        self.assertTrue(self.contact.getField('name1'))
+        self.assertTrue(self.contact.getField("name1"))
 
     def test_contact_name1_is_visible(self):
         self._is_field_visible("Nom", obj=self.contact)
@@ -65,7 +65,7 @@ class TestContactFields(SchemaFieldsTestCase):
         self._is_field_visible_in_edit("Nom", obj=self.contact)
 
     def test_contact_has_attribute_name2(self):
-        self.assertTrue(self.contact.getField('name2'))
+        self.assertTrue(self.contact.getField("name2"))
 
     def test_contact_name2_is_visible(self):
         self._is_field_visible("Prénom", obj=self.contact)
@@ -74,7 +74,7 @@ class TestContactFields(SchemaFieldsTestCase):
         self._is_field_visible_in_edit("Prénom", obj=self.contact)
 
     def test_contact_has_attribute_society(self):
-        self.assertTrue(self.contact.getField('society'))
+        self.assertTrue(self.contact.getField("society"))
 
     def test_contact_society_is_visible(self):
         self._is_field_visible("Société", obj=self.contact)
@@ -83,22 +83,26 @@ class TestContactFields(SchemaFieldsTestCase):
         self._is_field_visible_in_edit("Société", obj=self.contact)
 
     def test_contact_has_attribute_representedBySociety(self):
-        self.assertTrue(self.contact.getField('representedBySociety'))
+        self.assertTrue(self.contact.getField("representedBySociety"))
 
     def test_contact_representedBySociety_is_visible_in_edit(self):
         self._is_field_visible_in_edit("Représenté par la société", obj=self.contact)
 
     def test_contact_has_attribute_isSameAddressAsWorks(self):
-        self.assertTrue(self.contact.getField('isSameAddressAsWorks'))
+        self.assertTrue(self.contact.getField("isSameAddressAsWorks"))
 
     def test_contact_isSameAddressAsWorks_is_visible(self):
-        self._is_field_visible("Adresse identique à l'adresse du bien", obj=self.contact)
+        self._is_field_visible(
+            "Adresse identique à l'adresse du bien", obj=self.contact
+        )
 
     def test_contact_isSameAddressAsWorks_is_visible_in_edit(self):
-        self._is_field_visible_in_edit("Adresse identique à l'adresse du bien", obj=self.contact)
+        self._is_field_visible_in_edit(
+            "Adresse identique à l'adresse du bien", obj=self.contact
+        )
 
     def test_contact_has_attribute_street(self):
-        self.assertTrue(self.contact.getField('street'))
+        self.assertTrue(self.contact.getField("street"))
 
     def test_contact_street_is_visible(self):
         self._is_field_visible("Rue", obj=self.contact)
@@ -107,7 +111,7 @@ class TestContactFields(SchemaFieldsTestCase):
         self._is_field_visible_in_edit("Rue", obj=self.contact)
 
     def test_contact_has_attribute_number(self):
-        self.assertTrue(self.contact.getField('number'))
+        self.assertTrue(self.contact.getField("number"))
 
     def test_contact_number_is_visible(self):
         self._is_field_visible("Numéro", obj=self.contact)
@@ -116,7 +120,7 @@ class TestContactFields(SchemaFieldsTestCase):
         self._is_field_visible_in_edit("Numéro", obj=self.contact)
 
     def test_contact_has_attribute_zipcode(self):
-        self.assertTrue(self.contact.getField('zipcode'))
+        self.assertTrue(self.contact.getField("zipcode"))
 
     def test_contact_zipcode_is_visible(self):
         self._is_field_visible("Code Postal", obj=self.contact)
@@ -125,7 +129,7 @@ class TestContactFields(SchemaFieldsTestCase):
         self._is_field_visible_in_edit("Code Postal", obj=self.contact)
 
     def test_contact_has_attribute_city(self):
-        self.assertTrue(self.contact.getField('city'))
+        self.assertTrue(self.contact.getField("city"))
 
     def test_contact_city_is_visible(self):
         self._is_field_visible("Localité", obj=self.contact)
@@ -134,7 +138,7 @@ class TestContactFields(SchemaFieldsTestCase):
         self._is_field_visible_in_edit("Localité", obj=self.contact)
 
     def test_contact_has_attribute_country(self):
-        self.assertTrue(self.contact.getField('country'))
+        self.assertTrue(self.contact.getField("country"))
 
     def test_contact_country_is_visible(self):
         self._is_field_visible("Pays", obj=self.contact)
@@ -143,7 +147,7 @@ class TestContactFields(SchemaFieldsTestCase):
         self._is_field_visible_in_edit("Pays", obj=self.contact)
 
     def test_contact_has_attribute_email(self):
-        self.assertTrue(self.contact.getField('email'))
+        self.assertTrue(self.contact.getField("email"))
 
     def test_contact_email_is_visible(self):
         self._is_field_visible("E-mail", obj=self.contact)
@@ -152,7 +156,7 @@ class TestContactFields(SchemaFieldsTestCase):
         self._is_field_visible_in_edit("E-mail", obj=self.contact)
 
     def test_contact_has_attribute_phone(self):
-        self.assertTrue(self.contact.getField('phone'))
+        self.assertTrue(self.contact.getField("phone"))
 
     def test_contact_phone_is_visible(self):
         self._is_field_visible("Téléphone", obj=self.contact)
@@ -161,7 +165,7 @@ class TestContactFields(SchemaFieldsTestCase):
         self._is_field_visible_in_edit("Téléphone", obj=self.contact)
 
     def test_contact_has_attribute_fax(self):
-        self.assertTrue(self.contact.getField('fax'))
+        self.assertTrue(self.contact.getField("fax"))
 
     def test_contact_fax_is_visible(self):
         self._is_field_visible("Fax", obj=self.contact)
@@ -170,7 +174,7 @@ class TestContactFields(SchemaFieldsTestCase):
         self._is_field_visible_in_edit("Fax", obj=self.contact)
 
     def test_contact_has_attribute_registrationNumber(self):
-        self.assertTrue(self.contact.getField('registrationNumber'))
+        self.assertTrue(self.contact.getField("registrationNumber"))
 
     def test_contact_registrationNumber_is_visible(self):
         self._is_field_visible("de registre national", obj=self.contact)
@@ -179,25 +183,23 @@ class TestContactFields(SchemaFieldsTestCase):
         self._is_field_visible_in_edit("de registre national", obj=self.contact)
 
     def test_contact_has_attribute_representedBy(self):
-        self.assertTrue(self.contact.getField('representedBy'))
+        self.assertTrue(self.contact.getField("representedBy"))
 
 
 class TestContactEvents(unittest.TestCase):
-    """
-    """
+    """ """
 
     layer = URBAN_TESTS_LICENCES_FUNCTIONAL
 
     def setUp(self):
-        self.portal = self.layer['portal']
+        self.portal = self.layer["portal"]
         self.urban = self.portal.urban
 
         # create a test BuildLicence licence for Applicant contact
-        login(self.portal, 'urbaneditor')
+        login(self.portal, "urbaneditor")
 
     def test_licence_title_is_updated_when_applicant_modified(self):
-        """
-        """
+        """ """
 
 
 class TestApplicantFields(SchemaFieldsTestCase):
@@ -205,7 +207,7 @@ class TestApplicantFields(SchemaFieldsTestCase):
     layer = URBAN_TESTS_INTEGRATION
 
     def setUp(self):
-        self.portal = self.layer['portal']
+        self.portal = self.layer["portal"]
         self.urban = self.portal.urban
         self.portal_urban = self.portal.portal_urban
 
@@ -213,12 +215,12 @@ class TestApplicantFields(SchemaFieldsTestCase):
         default_password = self.layer.default_password
         login(self.portal, default_user)
         buildlicence_folder = self.urban.buildlicences
-        testlicence_id = 'test_buildlicence'
-        buildlicence_folder.invokeFactory('BuildLicence', id=testlicence_id)
+        testlicence_id = "test_buildlicence"
+        buildlicence_folder.invokeFactory("BuildLicence", id=testlicence_id)
         self.licence = getattr(buildlicence_folder, testlicence_id)
 
-        applicant_id = 'test_applicant'
-        self.licence.invokeFactory('Applicant', id=applicant_id)
+        applicant_id = "test_applicant"
+        self.licence.invokeFactory("Applicant", id=applicant_id)
         transaction.commit()
         self.applicant = getattr(self.licence, applicant_id)
 
@@ -226,12 +228,12 @@ class TestApplicantFields(SchemaFieldsTestCase):
         self.browserLogin(default_user, default_password)
 
     def tearDown(self):
-        with api.env.adopt_roles(['Manager']):
+        with api.env.adopt_roles(["Manager"]):
             api.content.delete(self.licence)
         transaction.commit()
 
     def test_applicant_has_attribute_representedBySociety(self):
-        self.assertTrue(self.applicant.getField('representedBySociety'))
+        self.assertTrue(self.applicant.getField("representedBySociety"))
 
     def test_applicant_representedBySociety_is_visible(self):
         self._is_field_visible("Représenté par la société", obj=self.applicant)
@@ -240,16 +242,20 @@ class TestApplicantFields(SchemaFieldsTestCase):
         self._is_field_visible_in_edit("Représenté par la société", obj=self.applicant)
 
     def test_applicant_has_attribute_isSameAddressAsWorks(self):
-        self.assertTrue(self.applicant.getField('isSameAddressAsWorks'))
+        self.assertTrue(self.applicant.getField("isSameAddressAsWorks"))
 
     def test_applicant_isSameAddressAsWorks_is_visible(self):
-        self._is_field_visible("Adresse identique à l'adresse du bien", obj=self.applicant)
+        self._is_field_visible(
+            "Adresse identique à l'adresse du bien", obj=self.applicant
+        )
 
     def test_applicant_isSameAddressAsWorks_is_visible_in_edit(self):
-        self._is_field_visible_in_edit("Adresse identique à l'adresse du bien", obj=self.applicant)
+        self._is_field_visible_in_edit(
+            "Adresse identique à l'adresse du bien", obj=self.applicant
+        )
 
     def test_applicant_has_attribute_representedBy(self):
-        self.assertTrue(self.applicant.getField('representedBy'))
+        self.assertTrue(self.applicant.getField("representedBy"))
 
     def test_applicant_representedBy_is_visible(self):
         self._is_field_visible("Représenté par</span>", obj=self.applicant)
@@ -263,25 +269,25 @@ class TestApplicant(BrowserTestCase):
     layer = URBAN_TESTS_LICENCES_FUNCTIONAL
 
     def setUp(self):
-        self.portal = self.layer['portal']
+        self.portal = self.layer["portal"]
         self.urban = self.portal.urban
         self.portal_urban = self.portal.portal_urban
 
-        login(self.portal, 'urbaneditor')
+        login(self.portal, "urbaneditor")
         self.licence = self.portal.urban.buildlicences.objectValues()[-1]
         self.applicant = self.licence.getApplicants()[0]
 
         self.browser = Browser(self.portal)
-        self.browserLogin('urbaneditor')
+        self.browserLogin("urbaneditor")
 
     def test_address_display_when_sameAddressAsWorks_is_checked(self):
-        self.applicant.setStreet('Rue kikoulo')
-        self.applicant.setNumber('6969')
-        self.applicant.setZipcode('5000')
-        self.applicant.setCity('Namur')
+        self.applicant.setStreet("Rue kikoulo")
+        self.applicant.setNumber("6969")
+        self.applicant.setZipcode("5000")
+        self.applicant.setCity("Namur")
         transaction.commit()
 
-        address_fields = ['street', 'number', 'zipcode', 'city']
+        address_fields = ["street", "number", "zipcode", "city"]
 
         self.browser.open(self.applicant.absolute_url())
         contents = self.browser.contents
@@ -308,17 +314,20 @@ class TestApplicant(BrowserTestCase):
             self.assertTrue(field_content not in contents)
 
     def test_applicant_Title(self):
-        self.applicant.setName1('Alastair')
-        self.applicant.setName2('Ballcocke')
-        self.assertTrue(self.applicant.Title() == 'Mes Alastair Ballcocke')
+        self.applicant.setName1("Alastair")
+        self.applicant.setName2("Ballcocke")
+        self.assertTrue(self.applicant.Title() == "Mes Alastair Ballcocke")
 
         self.applicant.setRepresentedBySociety(True)
-        self.applicant.setSociety('Fletcher, Fletcher & Fletcher')
-        self.assertTrue(self.applicant.Title() == 'Mes Alastair Ballcocke repr. par Fletcher, Fletcher & Fletcher')
+        self.applicant.setSociety("Fletcher, Fletcher & Fletcher")
+        self.assertTrue(
+            self.applicant.Title()
+            == "Mes Alastair Ballcocke repr. par Fletcher, Fletcher & Fletcher"
+        )
 
     def test_licence_title_update_when_applicant_modified(self):
-        name_1 = 'Alastair'
-        name_2 = 'Ballcocke'
+        name_1 = "Alastair"
+        name_2 = "Ballcocke"
 
         self.assertTrue(name_1 not in self.licence.Title())
         self.assertTrue(name_2 not in self.licence.Title())
@@ -337,7 +346,7 @@ class TestCorporationFields(SchemaFieldsTestCase):
     layer = URBAN_TESTS_INTEGRATION
 
     def setUp(self):
-        self.portal = self.layer['portal']
+        self.portal = self.layer["portal"]
         self.urban = self.portal.urban
         self.portal_urban = self.portal.portal_urban
 
@@ -345,12 +354,12 @@ class TestCorporationFields(SchemaFieldsTestCase):
         default_password = self.layer.environment_default_password
         login(self.portal, default_user)
         envclassone_folder = self.urban.envclassones
-        testlicence_id = 'test_envclassone'
-        envclassone_folder.invokeFactory('EnvClassOne', id=testlicence_id)
+        testlicence_id = "test_envclassone"
+        envclassone_folder.invokeFactory("EnvClassOne", id=testlicence_id)
         self.licence = getattr(envclassone_folder, testlicence_id)
 
-        corporation_id = 'test_corporation'
-        self.licence.invokeFactory('Corporation', id=corporation_id)
+        corporation_id = "test_corporation"
+        self.licence.invokeFactory("Corporation", id=corporation_id)
         transaction.commit()
         self.corporation = getattr(self.licence, corporation_id)
 
@@ -358,21 +367,23 @@ class TestCorporationFields(SchemaFieldsTestCase):
         self.browserLogin(default_user, default_password)
 
     def tearDown(self):
-        with api.env.adopt_roles(['Manager']):
+        with api.env.adopt_roles(["Manager"]):
             api.content.delete(self.licence)
         transaction.commit()
 
     def test_corporation_has_attribute_denomination(self):
-        self.assertTrue(self.corporation.getField('denomination'))
+        self.assertTrue(self.corporation.getField("denomination"))
 
     def test_corporation_denomination_is_visible(self):
         self._is_field_visible("Dénomination ou raison sociale", obj=self.corporation)
 
     def test_corporation_denomination_is_visible_in_edit(self):
-        self._is_field_visible_in_edit("Dénomination ou raison sociale", obj=self.corporation)
+        self._is_field_visible_in_edit(
+            "Dénomination ou raison sociale", obj=self.corporation
+        )
 
     def test_corporation_has_attribute_personRole(self):
-        self.assertTrue(self.corporation.getField('personRole'))
+        self.assertTrue(self.corporation.getField("personRole"))
 
     def test_corporation_personRole_is_visible(self):
         self._is_field_visible("Qualité", obj=self.corporation)
@@ -381,7 +392,7 @@ class TestCorporationFields(SchemaFieldsTestCase):
         self._is_field_visible_in_edit("Qualité", obj=self.corporation)
 
     def test_corporation_has_attribute_tvaNumber(self):
-        self.assertTrue(self.corporation.getField('tvaNumber'))
+        self.assertTrue(self.corporation.getField("tvaNumber"))
 
     def test_corporation_tvaNumber_is_visible(self):
         self._is_field_visible("N° TVA", obj=self.corporation)
@@ -390,7 +401,7 @@ class TestCorporationFields(SchemaFieldsTestCase):
         self._is_field_visible_in_edit("N° TVA", obj=self.corporation)
 
     def test_corporation_has_attribute_bceNumber(self):
-        self.assertTrue(self.corporation.getField('bceNumber'))
+        self.assertTrue(self.corporation.getField("bceNumber"))
 
     def test_corporation_bceNumber_is_visible(self):
         self._is_field_visible("N° BCE", obj=self.corporation)
@@ -422,13 +433,13 @@ class TestCorporation(BrowserTestCase):
     layer = URBAN_TESTS_LICENCES_FUNCTIONAL
 
     def setUp(self):
-        self.portal = self.layer['portal']
+        self.portal = self.layer["portal"]
         self.urban = self.portal.urban
         self.portal_urban = self.portal.portal_urban
         default_user = self.layer.environment_default_user
         default_password = self.layer.environment_default_password
 
-        login(self.portal, 'environmenteditor')
+        login(self.portal, "environmenteditor")
         self.licence = self.portal.urban.envclassones.objectValues()[-1]
         self.corporation = self.licence.getCorporations()[0]
 
@@ -436,13 +447,13 @@ class TestCorporation(BrowserTestCase):
         self.browserLogin(default_user, default_password)
 
     def test_address_display_when_sameAddressAsWorks_is_checked(self):
-        self.corporation.setStreet('Rue kikoulo')
-        self.corporation.setNumber('6969')
-        self.corporation.setZipcode('5000')
-        self.corporation.setCity('Namur')
+        self.corporation.setStreet("Rue kikoulo")
+        self.corporation.setNumber("6969")
+        self.corporation.setZipcode("5000")
+        self.corporation.setCity("Namur")
         transaction.commit()
 
-        address_fields = ['street', 'number', 'zipcode', 'city']
+        address_fields = ["street", "number", "zipcode", "city"]
 
         self.browser.open(self.corporation.absolute_url())
         contents = self.browser.contents
@@ -469,11 +480,11 @@ class TestCorporation(BrowserTestCase):
             self.assertTrue(field_content not in contents)
 
     def test_corporation_Title(self):
-        self.corporation.setDenomination('Hyperion')
-        self.assertTrue(self.corporation.Title() == 'Hyperion')
+        self.corporation.setDenomination("Hyperion")
+        self.assertTrue(self.corporation.Title() == "Hyperion")
 
     def test_licence_title_update_when_corporation_modified(self):
-        company_name = 'Hyperion'
+        company_name = "Hyperion"
 
         self.assertTrue(company_name not in self.licence.Title())
 
