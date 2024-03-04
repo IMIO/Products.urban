@@ -83,15 +83,17 @@ class TestEnvEvent(unittest.TestCase):
         # update object
         testobj.setAttr_1([type("attr_1_object", (object,), {"id": "attr_1_value2"})()])
         envclassEvents.update_history_for_vocabulary_field(testobj, "attr_1")
+        history_key = "attr_1_history"
         historized_object_lastest = envclassEvents.get_value_history_by_index(
-            testobj, "attr_1_history", -1
+            testobj, history_key, -1
         )
         historized_object_previous = envclassEvents.get_value_history_by_index(
-            testobj, "attr_1_history", -2
+            testobj, history_key, -2
         )
         self.assertTrue(
             envclassEvents.has_changes(
-                historized_object_lastest, historized_object_previous
+                historized_object_lastest[history_key],
+                historized_object_previous[history_key],
             )
         )
 
