@@ -96,6 +96,7 @@ setup(
         "urban.restapi",
         "urban.vocabulary",
         "urban.schedule",
+        "urban.events",
         "python-dateutil",
         "PyMySQL",
     ],
