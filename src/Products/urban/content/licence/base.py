@@ -162,7 +162,7 @@ class UrbanBase(object):
         return couples
 
     security.declarePublic('getApplicantsSignaletic')
-    def getApplicantsSignaletic(self, withaddress=False, linebyline=False, remove_comma=False):
+    def getApplicantsSignaletic(self, withaddress=False, linebyline=False, remove_comma=False, whithtitle=True):
         """
           Returns a string representing the signaletic of every applicants
         """
@@ -172,7 +172,7 @@ class UrbanBase(object):
             #if the signaletic is not empty, we are adding several applicants
             if signaletic:
                 signaletic += ' %s ' % translate('and', 'urban', context=self.REQUEST).encode('utf8')
-            signaletic += applicant.getSignaletic(withaddress=withaddress, linebyline=linebyline, remove_comma=False)
+            signaletic += applicant.getSignaletic(withaddress=withaddress, linebyline=linebyline, remove_comma=False, whithtitle=whithtitle)
         return signaletic
 
     security.declarePublic('getFolderManagersSignaletic')
