@@ -1,0 +1,3 @@
+Update applicant mailing codes :
+Replace mailed_data.getPersonTitleValue(short=True), mailed_data.name1, mailed_data.name2 by mailed_data.getSignaletic()
+[fngaha]
