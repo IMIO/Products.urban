@@ -9,7 +9,7 @@ from plone import api
 
 class UrbanView(BrowserView):
     """
-      This manage the view of urban
+    This manage the view of urban
     """
 
     def __init__(self, context, request):
@@ -25,8 +25,8 @@ class MayAccessUrban(BrowserView):
     """
 
     def __call__(self):
-        """ Test if the current user can acess urban view."""
+        """Test if the current user can acess urban view."""
         portal = api.portal.get()
         sm = getSecurityManager()
-        may_access = sm.checkPermission('View', getattr(portal, 'urban'))
+        may_access = sm.checkPermission("View", getattr(portal, "urban"))
         return may_access

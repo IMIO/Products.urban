@@ -13,7 +13,7 @@ from zope.component import queryAdapter
 
 class UrbanRedirectsView(BrowserView):
     """
-      This manage the default redirection of urban view
+    This manage the default redirection of urban view
     """
 
     def __init__(self, context, request):
@@ -25,24 +25,26 @@ class UrbanRedirectsView(BrowserView):
         user = api.user.get_current()
         sm = getSecurityManager()
         portal = api.portal.get()
-        can_view = sm.checkPermission('View', getattr(portal, 'urban'))
+        can_view = sm.checkPermission("View", getattr(portal, "urban"))
 
         path = None
 
         if can_view:
-            path = 'urban'
+            path = "urban"
 
         if user.getId() is not None:
             user_groups = api.group.get_groups(user=user)
             group_ids = [g.id for g in user_groups]
-            if 'opinions_editors' in group_ids:
-                path = 'urban/opinions_schedule'
+            if "opinions_editors" in group_ids:
+                path = "urban/opinions_schedule"
 
         redirects_adapter = queryAdapter(user, IUrbanRootRedirects)
         if redirects_adapter:
             path = redirects_adapter.get_redirection_path()
 
         if path is not None:
-            return self.context.REQUEST.RESPONSE.redirect('{}/{}'.format(portal.absolute_url(), path))
+            return self.context.REQUEST.RESPONSE.redirect(
+                "{}/{}".format(portal.absolute_url(), path)
+            )
 
         return self.index()

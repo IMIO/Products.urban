@@ -10,5 +10,4 @@ class CheckOpinionsRequest(BrowserView):
     """
 
     def __call__(self):
-        """
-        """
+        """ """

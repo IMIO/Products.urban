@@ -19,45 +19,54 @@ def activate_optional_fields(portal_urban, event):
             cfg.setUsedAttributes(cfg.getUsedAttributes() + tuple(to_activate))
     portal_urban.setUsedAttributes([])
 
+
 def update_vocabulary_term_cache(config_obj, event):
-    portal_urban = api.portal.get_tool('portal_urban')
+    portal_urban = api.portal.get_tool("portal_urban")
     voc_folder = config_obj.aq_parent
     config_folder = voc_folder.aq_parent
-    if config_folder.getId() != 'portal_factory':
-        with api.env.adopt_roles(['Manager']):
-            cache_view = portal_urban.restrictedTraverse('urban_vocabulary_cache')
+    if config_folder.getId() != "portal_factory":
+        with api.env.adopt_roles(["Manager"]):
+            cache_view = portal_urban.restrictedTraverse("urban_vocabulary_cache")
             cache_view.update_procedure_vocabulary_cache(config_folder, voc_folder)
 
 
 def update_vocabulary_folder_cache(voc_folder, event):
-    portal_urban = api.portal.get_tool('portal_urban')
+    portal_urban = api.portal.get_tool("portal_urban")
     config_folder = voc_folder.aq_parent
-    if config_folder.getId() != 'portal_factory':
-        with api.env.adopt_roles(['Manager']):
-            cache_view = portal_urban.restrictedTraverse('urban_vocabulary_cache')
+    if config_folder.getId() != "portal_factory":
+        with api.env.adopt_roles(["Manager"]):
+            cache_view = portal_urban.restrictedTraverse("urban_vocabulary_cache")
             cache_view.update_procedure_vocabulary_cache(config_folder, voc_folder)
 
 
 def before_street_delete(current_street, event):
     """
-        Checks if the street can be deleted
+    Checks if the street can be deleted
     """
 
-    if event.object.meta_type == 'Plone Site':
+    if event.object.meta_type == "Plone Site":
         return
 
     street_uid = current_street.UID()
     request = getRequest()
-    catalog = api.portal.get_tool('portal_catalog')
+    catalog = api.portal.get_tool("portal_catalog")
     licence_brains = catalog(object_provides=IGenericLicence.__identifier__)
-    licences = [l.getObject() for l in licence_brains if IGenericLicence.providedBy(l.getObject())]
+    licences = [
+        l.getObject()
+        for l in licence_brains
+        if IGenericLicence.providedBy(l.getObject())
+    ]
     for licence in licences:
         address = licence.getWorkLocations()
         for wl in address:
-            if wl['street'] == street_uid:
-                raise BeforeDeleteException(u"{} {}"
-                                            .format(translate(_(u"can_not_delete_street_in_config"),
-                                                              domain='urban',
-                                                              context=request)
-                                                    ,
-                                                    " : {}".format(licence.reference)))
+            if wl["street"] == street_uid:
+                raise BeforeDeleteException(
+                    u"{} {}".format(
+                        translate(
+                            _(u"can_not_delete_street_in_config"),
+                            domain="urban",
+                            context=request,
+                        ),
+                        " : {}".format(licence.reference),
+                    )
+                )

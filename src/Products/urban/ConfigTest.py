@@ -7,16 +7,16 @@ from AccessControl import ClassSecurityInfo
 from zope.interface import implements
 import interfaces
 
-from Products.ATContentTypes.content.folder import ATBTreeFolder,ATBTreeFolderSchema
+from Products.ATContentTypes.content.folder import ATBTreeFolder, ATBTreeFolderSchema
 
 
 class ConfigTest(ATBTreeFolder, BrowserDefaultMixin):
-    """
-    """
+    """ """
+
     security = ClassSecurityInfo()
     implements(interfaces.ITestConfig)
 
-    meta_type = 'ConfigTest'
+    meta_type = "ConfigTest"
     _at_rename_after_creation = True
 
     schema = ATBTreeFolderSchema.copy()

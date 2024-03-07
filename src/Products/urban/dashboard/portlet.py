@@ -12,7 +12,7 @@ from Products.urban.dashboard import utils
 
 
 class ICategorySwitchPortlet(IPortletDataProvider):
-    """ A portlet that shows a switch button between procedure categories """
+    """A portlet that shows a switch button between procedure categories"""
 
 
 class Assignment(base.Assignment):
@@ -20,13 +20,12 @@ class Assignment(base.Assignment):
 
     @property
     def title(self):
-        return u'Category Switch'
+        return u"Category Switch"
 
 
 class Renderer(base.Renderer):
-
     def render(self):
-        return ViewPageTemplateFile('templates/portlet_categoryswitch.pt')(self)
+        return ViewPageTemplateFile("templates/portlet_categoryswitch.pt")(self)
 
     @property
     def available(self):

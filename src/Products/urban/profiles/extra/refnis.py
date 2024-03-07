@@ -8,7 +8,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": "01000",
         "Administratieve eenheden": "HET RIJK",
-        "Taal": ""
+        "Taal": "",
     },
     {
         "Code INS": "04000",
@@ -17,7 +17,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": "04000",
         "Administratieve eenheden": "BRUSSELS HOOFDSTEDELIJK GEWEST",
-        "Taal": ""
+        "Taal": "",
     },
     {
         "Code INS": 21000,
@@ -26,7 +26,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 21000,
         "Administratieve eenheden": "Arrondissement Brussel Hoofdstad",
-        "Taal": ""
+        "Taal": "",
     },
     {
         "Code INS": 21001,
@@ -35,7 +35,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 21001,
         "Administratieve eenheden": "Anderlecht",
-        "Taal": "NF"
+        "Taal": "NF",
     },
     {
         "Code INS": 21002,
@@ -44,7 +44,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 21002,
         "Administratieve eenheden": "Oudergem",
-        "Taal": "NF"
+        "Taal": "NF",
     },
     {
         "Code INS": 21003,
@@ -53,7 +53,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 21003,
         "Administratieve eenheden": "Sint-Agatha-Berchem",
-        "Taal": "NF"
+        "Taal": "NF",
     },
     {
         "Code INS": 21004,
@@ -62,7 +62,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 21004,
         "Administratieve eenheden": "Brussel",
-        "Taal": "NF"
+        "Taal": "NF",
     },
     {
         "Code INS": 21005,
@@ -71,7 +71,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 21005,
         "Administratieve eenheden": "Etterbeek",
-        "Taal": "NF"
+        "Taal": "NF",
     },
     {
         "Code INS": 21006,
@@ -80,7 +80,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 21006,
         "Administratieve eenheden": "Evere",
-        "Taal": "NF"
+        "Taal": "NF",
     },
     {
         "Code INS": 21007,
@@ -89,7 +89,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 21007,
         "Administratieve eenheden": "Vorst",
-        "Taal": "NF"
+        "Taal": "NF",
     },
     {
         "Code INS": 21008,
@@ -98,7 +98,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 21008,
         "Administratieve eenheden": "Ganshoren",
-        "Taal": "NF"
+        "Taal": "NF",
     },
     {
         "Code INS": 21009,
@@ -107,7 +107,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 21009,
         "Administratieve eenheden": "Elsene",
-        "Taal": "NF"
+        "Taal": "NF",
     },
     {
         "Code INS": 21010,
@@ -116,7 +116,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 21010,
         "Administratieve eenheden": "Jette",
-        "Taal": "NF"
+        "Taal": "NF",
     },
     {
         "Code INS": 21011,
@@ -125,7 +125,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 21011,
         "Administratieve eenheden": "Koekelberg",
-        "Taal": "NF"
+        "Taal": "NF",
     },
     {
         "Code INS": 21012,
@@ -134,7 +134,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 21012,
         "Administratieve eenheden": "Sint-Jans-Molenbeek",
-        "Taal": "NF"
+        "Taal": "NF",
     },
     {
         "Code INS": 21013,
@@ -143,7 +143,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 21013,
         "Administratieve eenheden": "Sint-Gillis",
-        "Taal": "NF"
+        "Taal": "NF",
     },
     {
         "Code INS": 21014,
@@ -152,7 +152,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 21014,
         "Administratieve eenheden": "Sint-Joost-ten-Node",
-        "Taal": "NF"
+        "Taal": "NF",
     },
     {
         "Code INS": 21015,
@@ -161,7 +161,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 21015,
         "Administratieve eenheden": "Schaarbeek",
-        "Taal": "NF"
+        "Taal": "NF",
     },
     {
         "Code INS": 21016,
@@ -170,7 +170,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 21016,
         "Administratieve eenheden": "Ukkel",
-        "Taal": "NF"
+        "Taal": "NF",
     },
     {
         "Code INS": 21017,
@@ -179,7 +179,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 21017,
         "Administratieve eenheden": "Watermaal-Bosvoorde",
-        "Taal": "NF"
+        "Taal": "NF",
     },
     {
         "Code INS": 21018,
@@ -188,7 +188,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 21018,
         "Administratieve eenheden": "Sint-Lambrechts-Woluwe",
-        "Taal": "NF"
+        "Taal": "NF",
     },
     {
         "Code INS": 21019,
@@ -197,7 +197,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 21019,
         "Administratieve eenheden": "Sint-Pieters-Woluwe",
-        "Taal": "NF"
+        "Taal": "NF",
     },
     {
         "Code INS": "02000",
@@ -206,7 +206,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": "02000",
         "Administratieve eenheden": "VLAAMS GEWEST",
-        "Taal": ""
+        "Taal": "",
     },
     {
         "Code INS": 10000,
@@ -215,7 +215,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 10000,
         "Administratieve eenheden": "Provincie Antwerpen",
-        "Taal": ""
+        "Taal": "",
     },
     {
         "Code INS": 11000,
@@ -224,7 +224,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 11000,
         "Administratieve eenheden": "Arrondissement Antwerpen",
-        "Taal": ""
+        "Taal": "",
     },
     {
         "Code INS": 11001,
@@ -233,7 +233,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 11001,
         "Administratieve eenheden": "Aartselaar",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 11002,
@@ -242,7 +242,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 11002,
         "Administratieve eenheden": "Antwerpen",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 11004,
@@ -251,7 +251,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 11004,
         "Administratieve eenheden": "Boechout",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 11005,
@@ -260,7 +260,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 11005,
         "Administratieve eenheden": "Boom",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 11007,
@@ -269,7 +269,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 11007,
         "Administratieve eenheden": "Borsbeek",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 11008,
@@ -278,7 +278,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 11008,
         "Administratieve eenheden": "Brasschaat",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 11009,
@@ -287,7 +287,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 11009,
         "Administratieve eenheden": "Brecht",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 11013,
@@ -296,7 +296,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 11013,
         "Administratieve eenheden": "Edegem",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 11016,
@@ -305,7 +305,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 11016,
         "Administratieve eenheden": "Essen",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 11018,
@@ -314,7 +314,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 11018,
         "Administratieve eenheden": "Hemiksem",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 11021,
@@ -323,7 +323,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 11021,
         "Administratieve eenheden": "Hove",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 11022,
@@ -332,7 +332,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 11022,
         "Administratieve eenheden": "Kalmthout",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 11023,
@@ -341,7 +341,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 11023,
         "Administratieve eenheden": "Kapellen",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 11024,
@@ -350,7 +350,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 11024,
         "Administratieve eenheden": "Kontich",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 11025,
@@ -359,7 +359,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 11025,
         "Administratieve eenheden": "Lint",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 11057,
@@ -368,7 +368,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 11057,
         "Administratieve eenheden": "Malle",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 11029,
@@ -377,7 +377,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 11029,
         "Administratieve eenheden": "Mortsel",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 11030,
@@ -386,7 +386,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 11030,
         "Administratieve eenheden": "Niel",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 11035,
@@ -395,7 +395,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 11035,
         "Administratieve eenheden": "Ranst",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 11037,
@@ -404,7 +404,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 11037,
         "Administratieve eenheden": "Rumst",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 11038,
@@ -413,7 +413,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 11038,
         "Administratieve eenheden": "Schelle",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 11039,
@@ -422,7 +422,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 11039,
         "Administratieve eenheden": "Schilde",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 11040,
@@ -431,7 +431,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 11040,
         "Administratieve eenheden": "Schoten",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 11044,
@@ -440,7 +440,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 11044,
         "Administratieve eenheden": "Stabroek",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 11050,
@@ -449,7 +449,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 11050,
         "Administratieve eenheden": "Wijnegem",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 11052,
@@ -458,7 +458,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 11052,
         "Administratieve eenheden": "Wommelgem",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 11053,
@@ -467,7 +467,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 11053,
         "Administratieve eenheden": "Wuustwezel",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 11054,
@@ -476,7 +476,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 11054,
         "Administratieve eenheden": "Zandhoven",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 11055,
@@ -485,7 +485,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 11055,
         "Administratieve eenheden": "Zoersel",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 11056,
@@ -494,7 +494,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 11056,
         "Administratieve eenheden": "Zwijndrecht",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 12000,
@@ -503,7 +503,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 12000,
         "Administratieve eenheden": "Arrondissement Mechelen",
-        "Taal": ""
+        "Taal": "",
     },
     {
         "Code INS": 12002,
@@ -512,7 +512,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 12002,
         "Administratieve eenheden": "Berlaar",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 12005,
@@ -521,7 +521,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 12005,
         "Administratieve eenheden": "Bonheiden",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 12007,
@@ -530,7 +530,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 12007,
         "Administratieve eenheden": "Bornem",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 12009,
@@ -539,7 +539,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 12009,
         "Administratieve eenheden": "Duffel",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 12014,
@@ -548,7 +548,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 12014,
         "Administratieve eenheden": "Heist-op-den-Berg",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 12021,
@@ -557,7 +557,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 12021,
         "Administratieve eenheden": "Lier",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 12025,
@@ -566,7 +566,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 12025,
         "Administratieve eenheden": "Mechelen",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 12026,
@@ -575,7 +575,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 12026,
         "Administratieve eenheden": "Nijlen",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 12029,
@@ -584,7 +584,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 12029,
         "Administratieve eenheden": "Putte",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 12041,
@@ -593,7 +593,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 12041,
         "Administratieve eenheden": "Puurs-Sint-Amands",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 12035,
@@ -602,7 +602,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 12035,
         "Administratieve eenheden": "Sint-Katelijne-Waver",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 12040,
@@ -611,7 +611,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 12040,
         "Administratieve eenheden": "Willebroek",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 13000,
@@ -620,7 +620,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 13000,
         "Administratieve eenheden": "Arrondissement Turnhout",
-        "Taal": ""
+        "Taal": "",
     },
     {
         "Code INS": 13001,
@@ -629,7 +629,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 13001,
         "Administratieve eenheden": "Arendonk",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 13002,
@@ -638,7 +638,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 13002,
         "Administratieve eenheden": "Baarle-Hertog",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 13003,
@@ -647,7 +647,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 13003,
         "Administratieve eenheden": "Balen",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 13004,
@@ -656,7 +656,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 13004,
         "Administratieve eenheden": "Beerse",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 13006,
@@ -665,7 +665,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 13006,
         "Administratieve eenheden": "Dessel",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 13008,
@@ -674,7 +674,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 13008,
         "Administratieve eenheden": "Geel",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 13010,
@@ -683,7 +683,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 13010,
         "Administratieve eenheden": "Grobbendonk",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 13011,
@@ -692,7 +692,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 13011,
         "Administratieve eenheden": "Herentals",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 13012,
@@ -701,7 +701,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 13012,
         "Administratieve eenheden": "Herenthout",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 13013,
@@ -710,7 +710,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 13013,
         "Administratieve eenheden": "Herselt",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 13014,
@@ -719,7 +719,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 13014,
         "Administratieve eenheden": "Hoogstraten",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 13016,
@@ -728,7 +728,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 13016,
         "Administratieve eenheden": "Hulshout",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 13017,
@@ -737,7 +737,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 13017,
         "Administratieve eenheden": "Kasterlee",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 13053,
@@ -746,7 +746,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 13053,
         "Administratieve eenheden": "Laakdal",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 13019,
@@ -755,7 +755,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 13019,
         "Administratieve eenheden": "Lille",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 13021,
@@ -764,7 +764,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 13021,
         "Administratieve eenheden": "Meerhout",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 13023,
@@ -773,7 +773,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 13023,
         "Administratieve eenheden": "Merksplas",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 13025,
@@ -782,7 +782,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 13025,
         "Administratieve eenheden": "Mol",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 13029,
@@ -791,7 +791,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 13029,
         "Administratieve eenheden": "Olen",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 13031,
@@ -800,7 +800,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 13031,
         "Administratieve eenheden": "Oud-Turnhout",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 13035,
@@ -809,7 +809,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 13035,
         "Administratieve eenheden": "Ravels",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 13036,
@@ -818,7 +818,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 13036,
         "Administratieve eenheden": "Retie",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 13037,
@@ -827,7 +827,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 13037,
         "Administratieve eenheden": "Rijkevorsel",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 13040,
@@ -836,7 +836,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 13040,
         "Administratieve eenheden": "Turnhout",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 13044,
@@ -845,7 +845,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 13044,
         "Administratieve eenheden": "Vorselaar",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 13046,
@@ -854,7 +854,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 13046,
         "Administratieve eenheden": "Vosselaar",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 13049,
@@ -863,7 +863,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 13049,
         "Administratieve eenheden": "Westerlo",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 20001,
@@ -872,7 +872,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 20001,
         "Administratieve eenheden": "Provincie Vlaams-Brabant",
-        "Taal": ""
+        "Taal": "",
     },
     {
         "Code INS": 23000,
@@ -881,7 +881,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 23000,
         "Administratieve eenheden": "Arrondissement Halle-Vilvoorde",
-        "Taal": ""
+        "Taal": "",
     },
     {
         "Code INS": 23105,
@@ -890,7 +890,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 23105,
         "Administratieve eenheden": "Affligem",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 23002,
@@ -899,7 +899,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 23002,
         "Administratieve eenheden": "Asse",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 23003,
@@ -908,7 +908,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 23003,
         "Administratieve eenheden": "Beersel",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 23009,
@@ -917,7 +917,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 23009,
         "Administratieve eenheden": "Bever",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 23016,
@@ -926,7 +926,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 23016,
         "Administratieve eenheden": "Dilbeek",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 23098,
@@ -935,7 +935,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 23098,
         "Administratieve eenheden": "Drogenbos",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 23023,
@@ -944,7 +944,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 23023,
         "Administratieve eenheden": "Galmaarden",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 23024,
@@ -953,7 +953,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 23024,
         "Administratieve eenheden": "Gooik",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 23025,
@@ -962,7 +962,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 23025,
         "Administratieve eenheden": "Grimbergen",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 23027,
@@ -971,7 +971,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 23027,
         "Administratieve eenheden": "Halle",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 23032,
@@ -980,7 +980,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 23032,
         "Administratieve eenheden": "Herne",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 23033,
@@ -989,7 +989,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 23033,
         "Administratieve eenheden": "Hoeilaart",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 23038,
@@ -998,7 +998,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 23038,
         "Administratieve eenheden": "Kampenhout",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 23039,
@@ -1007,7 +1007,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 23039,
         "Administratieve eenheden": "Kapelle-op-den-Bos",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 23099,
@@ -1016,7 +1016,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 23099,
         "Administratieve eenheden": "Kraainem",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 23104,
@@ -1025,7 +1025,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 23104,
         "Administratieve eenheden": "Lennik",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 23044,
@@ -1034,7 +1034,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 23044,
         "Administratieve eenheden": "Liedekerke",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 23100,
@@ -1043,7 +1043,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 23100,
         "Administratieve eenheden": "Linkebeek",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 23045,
@@ -1052,7 +1052,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 23045,
         "Administratieve eenheden": "Londerzeel",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 23047,
@@ -1061,7 +1061,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 23047,
         "Administratieve eenheden": "Machelen",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 23050,
@@ -1070,7 +1070,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 23050,
         "Administratieve eenheden": "Meise",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 23052,
@@ -1079,7 +1079,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 23052,
         "Administratieve eenheden": "Merchtem",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 23060,
@@ -1088,7 +1088,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 23060,
         "Administratieve eenheden": "Opwijk",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 23062,
@@ -1097,7 +1097,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 23062,
         "Administratieve eenheden": "Overijse",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 23064,
@@ -1106,7 +1106,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 23064,
         "Administratieve eenheden": "Pepingen",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 23101,
@@ -1115,7 +1115,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 23101,
         "Administratieve eenheden": "Sint-Genesius-Rode",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 23097,
@@ -1124,7 +1124,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 23097,
         "Administratieve eenheden": "Roosdaal",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 23077,
@@ -1133,7 +1133,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 23077,
         "Administratieve eenheden": "Sint-Pieters-Leeuw",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 23081,
@@ -1142,7 +1142,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 23081,
         "Administratieve eenheden": "Steenokkerzeel",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 23086,
@@ -1151,7 +1151,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 23086,
         "Administratieve eenheden": "Ternat",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 23088,
@@ -1160,7 +1160,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 23088,
         "Administratieve eenheden": "Vilvoorde",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 23102,
@@ -1169,7 +1169,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 23102,
         "Administratieve eenheden": "Wemmel",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 23103,
@@ -1178,7 +1178,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 23103,
         "Administratieve eenheden": "Wezembeek-Oppem",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 23094,
@@ -1187,7 +1187,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 23094,
         "Administratieve eenheden": "Zaventem",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 23096,
@@ -1196,7 +1196,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 23096,
         "Administratieve eenheden": "Zemst",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 24000,
@@ -1205,7 +1205,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 24000,
         "Administratieve eenheden": "Arrondissement Leuven",
-        "Taal": ""
+        "Taal": "",
     },
     {
         "Code INS": 24001,
@@ -1214,7 +1214,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 24001,
         "Administratieve eenheden": "Aarschot",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 24007,
@@ -1223,7 +1223,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 24007,
         "Administratieve eenheden": "Begijnendijk",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 24008,
@@ -1232,7 +1232,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 24008,
         "Administratieve eenheden": "Bekkevoort",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 24009,
@@ -1241,7 +1241,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 24009,
         "Administratieve eenheden": "Bertem",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 24011,
@@ -1250,7 +1250,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 24011,
         "Administratieve eenheden": "Bierbeek",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 24014,
@@ -1259,7 +1259,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 24014,
         "Administratieve eenheden": "Boortmeerbeek",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 24016,
@@ -1268,7 +1268,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 24016,
         "Administratieve eenheden": "Boutersem",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 24020,
@@ -1277,7 +1277,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 24020,
         "Administratieve eenheden": "Diest",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 24028,
@@ -1286,7 +1286,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 24028,
         "Administratieve eenheden": "Geetbets",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 24137,
@@ -1295,7 +1295,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 24137,
         "Administratieve eenheden": "Glabbeek",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 24033,
@@ -1304,7 +1304,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 24033,
         "Administratieve eenheden": "Haacht",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 24038,
@@ -1313,7 +1313,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 24038,
         "Administratieve eenheden": "Herent",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 24041,
@@ -1322,7 +1322,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 24041,
         "Administratieve eenheden": "Hoegaarden",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 24043,
@@ -1331,7 +1331,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 24043,
         "Administratieve eenheden": "Holsbeek",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 24045,
@@ -1340,7 +1340,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 24045,
         "Administratieve eenheden": "Huldenberg",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 24048,
@@ -1349,7 +1349,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 24048,
         "Administratieve eenheden": "Keerbergen",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 24054,
@@ -1358,7 +1358,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 24054,
         "Administratieve eenheden": "Kortenaken",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 24055,
@@ -1367,7 +1367,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 24055,
         "Administratieve eenheden": "Kortenberg",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 24059,
@@ -1376,7 +1376,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 24059,
         "Administratieve eenheden": "Landen",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 24130,
@@ -1385,7 +1385,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 24130,
         "Administratieve eenheden": "Zoutleeuw",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 24133,
@@ -1394,7 +1394,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 24133,
         "Administratieve eenheden": "Linter",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 24062,
@@ -1403,7 +1403,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 24062,
         "Administratieve eenheden": "Leuven",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 24066,
@@ -1412,7 +1412,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 24066,
         "Administratieve eenheden": "Lubbeek",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 24134,
@@ -1421,7 +1421,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 24134,
         "Administratieve eenheden": "Scherpenheuvel-Zichem",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 24086,
@@ -1430,7 +1430,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 24086,
         "Administratieve eenheden": "Oud-Heverlee",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 24094,
@@ -1439,7 +1439,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 24094,
         "Administratieve eenheden": "Rotselaar",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 24104,
@@ -1448,7 +1448,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 24104,
         "Administratieve eenheden": "Tervuren",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 24135,
@@ -1457,7 +1457,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 24135,
         "Administratieve eenheden": "Tielt-Winge",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 24107,
@@ -1466,7 +1466,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 24107,
         "Administratieve eenheden": "Tienen",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 24109,
@@ -1475,7 +1475,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 24109,
         "Administratieve eenheden": "Tremelo",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 30000,
@@ -1484,7 +1484,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 30000,
         "Administratieve eenheden": "Provincie West-Vlaanderen",
-        "Taal": ""
+        "Taal": "",
     },
     {
         "Code INS": 31000,
@@ -1493,7 +1493,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 31000,
         "Administratieve eenheden": "Arrondissement Brugge",
-        "Taal": ""
+        "Taal": "",
     },
     {
         "Code INS": 31003,
@@ -1502,7 +1502,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 31003,
         "Administratieve eenheden": "Beernem",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 31004,
@@ -1511,7 +1511,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 31004,
         "Administratieve eenheden": "Blankenberge",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 31005,
@@ -1520,7 +1520,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 31005,
         "Administratieve eenheden": "Brugge",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 31006,
@@ -1529,7 +1529,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 31006,
         "Administratieve eenheden": "Damme",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 31012,
@@ -1538,7 +1538,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 31012,
         "Administratieve eenheden": "Jabbeke",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 31043,
@@ -1547,7 +1547,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 31043,
         "Administratieve eenheden": "Knokke-Heist",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 31022,
@@ -1556,7 +1556,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 31022,
         "Administratieve eenheden": "Oostkamp",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 31033,
@@ -1565,7 +1565,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 31033,
         "Administratieve eenheden": "Torhout",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 31040,
@@ -1574,7 +1574,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 31040,
         "Administratieve eenheden": "Zedelgem",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 31042,
@@ -1583,7 +1583,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 31042,
         "Administratieve eenheden": "Zuienkerke",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 34000,
@@ -1592,7 +1592,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 34000,
         "Administratieve eenheden": "Arrondissement Kortrijk",
-        "Taal": ""
+        "Taal": "",
     },
     {
         "Code INS": 34002,
@@ -1601,7 +1601,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 34002,
         "Administratieve eenheden": "Anzegem",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 34003,
@@ -1610,7 +1610,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 34003,
         "Administratieve eenheden": "Avelgem",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 34022,
@@ -1619,7 +1619,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 34022,
         "Administratieve eenheden": "Kortrijk",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 34009,
@@ -1628,7 +1628,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 34009,
         "Administratieve eenheden": "Deerlijk",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 34043,
@@ -1637,7 +1637,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 34043,
         "Administratieve eenheden": "Spiere-Helkijn",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 34013,
@@ -1646,7 +1646,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 34013,
         "Administratieve eenheden": "Harelbeke",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 34023,
@@ -1655,7 +1655,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 34023,
         "Administratieve eenheden": "Kuurne",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 34025,
@@ -1664,7 +1664,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 34025,
         "Administratieve eenheden": "Lendelede",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 34027,
@@ -1673,7 +1673,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 34027,
         "Administratieve eenheden": "Menen",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 34040,
@@ -1682,7 +1682,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 34040,
         "Administratieve eenheden": "Waregem",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 34041,
@@ -1691,7 +1691,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 34041,
         "Administratieve eenheden": "Wevelgem",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 34042,
@@ -1700,7 +1700,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 34042,
         "Administratieve eenheden": "Zwevegem",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 32000,
@@ -1709,7 +1709,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 32000,
         "Administratieve eenheden": "Arrondissement Diksmuide",
-        "Taal": ""
+        "Taal": "",
     },
     {
         "Code INS": 32003,
@@ -1718,7 +1718,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 32003,
         "Administratieve eenheden": "Diksmuide",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 32006,
@@ -1727,7 +1727,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 32006,
         "Administratieve eenheden": "Houthulst",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 32010,
@@ -1736,7 +1736,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 32010,
         "Administratieve eenheden": "Koekelare",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 32011,
@@ -1745,7 +1745,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 32011,
         "Administratieve eenheden": "Kortemark",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 32030,
@@ -1754,7 +1754,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 32030,
         "Administratieve eenheden": "Lo-Reninge",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 38000,
@@ -1763,7 +1763,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 38000,
         "Administratieve eenheden": "Arrondissement Veurne",
-        "Taal": ""
+        "Taal": "",
     },
     {
         "Code INS": 38002,
@@ -1772,7 +1772,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 38002,
         "Administratieve eenheden": "Alveringem",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 38025,
@@ -1781,7 +1781,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 38025,
         "Administratieve eenheden": "Veurne",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 38014,
@@ -1790,7 +1790,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 38014,
         "Administratieve eenheden": "Koksijde",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 38008,
@@ -1799,7 +1799,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 38008,
         "Administratieve eenheden": "De Panne",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 38016,
@@ -1808,7 +1808,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 38016,
         "Administratieve eenheden": "Nieuwpoort",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 35000,
@@ -1817,7 +1817,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 35000,
         "Administratieve eenheden": "Arrondissement Oostende",
-        "Taal": ""
+        "Taal": "",
     },
     {
         "Code INS": 35002,
@@ -1826,7 +1826,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 35002,
         "Administratieve eenheden": "Bredene",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 35029,
@@ -1835,7 +1835,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 35029,
         "Administratieve eenheden": "De Haan",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 35005,
@@ -1844,7 +1844,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 35005,
         "Administratieve eenheden": "Gistel",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 35006,
@@ -1853,7 +1853,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 35006,
         "Administratieve eenheden": "Ichtegem",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 35011,
@@ -1862,7 +1862,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 35011,
         "Administratieve eenheden": "Middelkerke",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 35013,
@@ -1871,7 +1871,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 35013,
         "Administratieve eenheden": "Oostende",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 35014,
@@ -1880,7 +1880,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 35014,
         "Administratieve eenheden": "Oudenburg",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 36000,
@@ -1889,7 +1889,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 36000,
         "Administratieve eenheden": "Arrondissement Roeselare",
-        "Taal": ""
+        "Taal": "",
     },
     {
         "Code INS": 36006,
@@ -1898,7 +1898,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 36006,
         "Administratieve eenheden": "Hooglede",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 36007,
@@ -1907,7 +1907,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 36007,
         "Administratieve eenheden": "Ingelmunster",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 36008,
@@ -1916,7 +1916,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 36008,
         "Administratieve eenheden": "Izegem",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 36010,
@@ -1925,7 +1925,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 36010,
         "Administratieve eenheden": "Ledegem",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 36011,
@@ -1934,7 +1934,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 36011,
         "Administratieve eenheden": "Lichtervelde",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 36012,
@@ -1943,7 +1943,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 36012,
         "Administratieve eenheden": "Moorslede",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 36015,
@@ -1952,7 +1952,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 36015,
         "Administratieve eenheden": "Roeselare",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 36019,
@@ -1961,7 +1961,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 36019,
         "Administratieve eenheden": "Staden",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 37000,
@@ -1970,7 +1970,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 37000,
         "Administratieve eenheden": "Arrondissement Tielt",
-        "Taal": ""
+        "Taal": "",
     },
     {
         "Code INS": 37020,
@@ -1979,7 +1979,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 37020,
         "Administratieve eenheden": "Ardooie",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 37002,
@@ -1988,7 +1988,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 37002,
         "Administratieve eenheden": "Dentergem",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 37007,
@@ -1997,7 +1997,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 37007,
         "Administratieve eenheden": "Meulebeke",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 37010,
@@ -2006,7 +2006,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 37010,
         "Administratieve eenheden": "Oostrozebeke",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 37011,
@@ -2015,7 +2015,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 37011,
         "Administratieve eenheden": "Pittem",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 37012,
@@ -2024,7 +2024,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 37012,
         "Administratieve eenheden": "Ruiselede",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 37015,
@@ -2033,7 +2033,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 37015,
         "Administratieve eenheden": "Tielt",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 37017,
@@ -2042,7 +2042,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 37017,
         "Administratieve eenheden": "Wielsbeke",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 37018,
@@ -2051,7 +2051,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 37018,
         "Administratieve eenheden": "Wingene",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 33000,
@@ -2060,7 +2060,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 33000,
         "Administratieve eenheden": "Arrondissement Ieper",
-        "Taal": ""
+        "Taal": "",
     },
     {
         "Code INS": 33039,
@@ -2069,7 +2069,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 33039,
         "Administratieve eenheden": "Heuvelland",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 33040,
@@ -2078,7 +2078,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 33040,
         "Administratieve eenheden": "Langemark-Poelkapelle",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 33016,
@@ -2087,7 +2087,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 33016,
         "Administratieve eenheden": "Mesen",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 33021,
@@ -2096,7 +2096,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 33021,
         "Administratieve eenheden": "Poperinge",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 33041,
@@ -2105,7 +2105,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 33041,
         "Administratieve eenheden": "Vleteren",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 33029,
@@ -2114,7 +2114,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 33029,
         "Administratieve eenheden": "Wervik",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 33011,
@@ -2123,7 +2123,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 33011,
         "Administratieve eenheden": "Ieper",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 33037,
@@ -2132,7 +2132,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 33037,
         "Administratieve eenheden": "Zonnebeke",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 40000,
@@ -2141,7 +2141,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 40000,
         "Administratieve eenheden": "Provincie Oost-Vlaanderen",
-        "Taal": ""
+        "Taal": "",
     },
     {
         "Code INS": 41000,
@@ -2150,7 +2150,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 41000,
         "Administratieve eenheden": "Arrondissement Aalst",
-        "Taal": ""
+        "Taal": "",
     },
     {
         "Code INS": 41002,
@@ -2159,7 +2159,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 41002,
         "Administratieve eenheden": "Aalst",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 41011,
@@ -2168,7 +2168,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 41011,
         "Administratieve eenheden": "Denderleeuw",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 41082,
@@ -2177,7 +2177,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 41082,
         "Administratieve eenheden": "Erpe-Mere",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 41018,
@@ -2186,7 +2186,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 41018,
         "Administratieve eenheden": "Geraardsbergen",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 41024,
@@ -2195,7 +2195,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 41024,
         "Administratieve eenheden": "Haaltert",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 41027,
@@ -2204,7 +2204,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 41027,
         "Administratieve eenheden": "Herzele",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 41034,
@@ -2213,7 +2213,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 41034,
         "Administratieve eenheden": "Lede",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 41048,
@@ -2222,7 +2222,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 41048,
         "Administratieve eenheden": "Ninove",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 41063,
@@ -2231,7 +2231,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 41063,
         "Administratieve eenheden": "Sint-Lievens-Houtem",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 41081,
@@ -2240,7 +2240,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 41081,
         "Administratieve eenheden": "Zottegem",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 45000,
@@ -2249,7 +2249,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 45000,
         "Administratieve eenheden": "Arrondissement Oudenaarde",
-        "Taal": ""
+        "Taal": "",
     },
     {
         "Code INS": 45035,
@@ -2258,7 +2258,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 45035,
         "Administratieve eenheden": "Oudenaarde",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 45059,
@@ -2267,7 +2267,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 45059,
         "Administratieve eenheden": "Brakel",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 45062,
@@ -2276,7 +2276,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 45062,
         "Administratieve eenheden": "Horebeke",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 45060,
@@ -2285,7 +2285,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 45060,
         "Administratieve eenheden": "Kluisbergen",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 45068,
@@ -2294,7 +2294,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 45068,
         "Administratieve eenheden": "Kruisem",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 45063,
@@ -2303,7 +2303,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 45063,
         "Administratieve eenheden": "Lierde",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 45064,
@@ -2312,7 +2312,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 45064,
         "Administratieve eenheden": "Maarkedal",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 45041,
@@ -2321,7 +2321,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 45041,
         "Administratieve eenheden": "Ronse",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 45061,
@@ -2330,7 +2330,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 45061,
         "Administratieve eenheden": "Wortegem-Petegem",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 45065,
@@ -2339,7 +2339,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 45065,
         "Administratieve eenheden": "Zwalm",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 43000,
@@ -2348,7 +2348,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 43000,
         "Administratieve eenheden": "Arrondissement Eeklo",
-        "Taal": ""
+        "Taal": "",
     },
     {
         "Code INS": 43002,
@@ -2357,7 +2357,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 43002,
         "Administratieve eenheden": "Assenede",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 43005,
@@ -2366,7 +2366,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 43005,
         "Administratieve eenheden": "Eeklo",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 43007,
@@ -2375,7 +2375,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 43007,
         "Administratieve eenheden": "Kaprijke",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 43010,
@@ -2384,7 +2384,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 43010,
         "Administratieve eenheden": "Maldegem",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 43014,
@@ -2393,7 +2393,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 43014,
         "Administratieve eenheden": "Sint-Laureins",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 43018,
@@ -2402,7 +2402,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 43018,
         "Administratieve eenheden": "Zelzate",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 44000,
@@ -2411,7 +2411,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 44000,
         "Administratieve eenheden": "Arrondissement Gent",
-        "Taal": ""
+        "Taal": "",
     },
     {
         "Code INS": 44084,
@@ -2420,7 +2420,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 44084,
         "Administratieve eenheden": "Aalter",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 44012,
@@ -2429,7 +2429,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 44012,
         "Administratieve eenheden": "De Pinte",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 44083,
@@ -2438,7 +2438,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 44083,
         "Administratieve eenheden": "Deinze",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 44013,
@@ -2447,7 +2447,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 44013,
         "Administratieve eenheden": "Destelbergen",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 44019,
@@ -2456,7 +2456,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 44019,
         "Administratieve eenheden": "Evergem",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 44021,
@@ -2465,7 +2465,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 44021,
         "Administratieve eenheden": "Gent",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 44020,
@@ -2474,7 +2474,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 44020,
         "Administratieve eenheden": "Gavere",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 44085,
@@ -2483,7 +2483,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 44085,
         "Administratieve eenheden": "Lievegem",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 44034,
@@ -2492,7 +2492,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 44034,
         "Administratieve eenheden": "Lochristi",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 44040,
@@ -2501,7 +2501,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 44040,
         "Administratieve eenheden": "Melle",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 44043,
@@ -2510,7 +2510,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 44043,
         "Administratieve eenheden": "Merelbeke",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 44045,
@@ -2519,7 +2519,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 44045,
         "Administratieve eenheden": "Moerbeke",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 44048,
@@ -2528,7 +2528,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 44048,
         "Administratieve eenheden": "Nazareth",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 44052,
@@ -2537,7 +2537,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 44052,
         "Administratieve eenheden": "Oosterzele",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 44064,
@@ -2546,7 +2546,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 44064,
         "Administratieve eenheden": "Sint-Martens-Latem",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 44073,
@@ -2555,7 +2555,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 44073,
         "Administratieve eenheden": "Wachtebeke",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 44081,
@@ -2564,7 +2564,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 44081,
         "Administratieve eenheden": "Zulte",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 46000,
@@ -2573,7 +2573,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 46000,
         "Administratieve eenheden": "Arrondissement Sint-Niklaas",
-        "Taal": ""
+        "Taal": "",
     },
     {
         "Code INS": 46003,
@@ -2582,7 +2582,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 46003,
         "Administratieve eenheden": "Beveren",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 46013,
@@ -2591,7 +2591,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 46013,
         "Administratieve eenheden": "Kruibeke",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 46014,
@@ -2600,7 +2600,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 46014,
         "Administratieve eenheden": "Lokeren",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 46021,
@@ -2609,7 +2609,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 46021,
         "Administratieve eenheden": "Sint-Niklaas",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 46020,
@@ -2618,7 +2618,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 46020,
         "Administratieve eenheden": "Sint-Gillis-Waas",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 46024,
@@ -2627,7 +2627,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 46024,
         "Administratieve eenheden": "Stekene",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 46025,
@@ -2636,7 +2636,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 46025,
         "Administratieve eenheden": "Temse",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 42000,
@@ -2645,7 +2645,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 42000,
         "Administratieve eenheden": "Arrondissement Dendermonde",
-        "Taal": ""
+        "Taal": "",
     },
     {
         "Code INS": 42003,
@@ -2654,7 +2654,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 42003,
         "Administratieve eenheden": "Berlare",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 42004,
@@ -2663,7 +2663,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 42004,
         "Administratieve eenheden": "Buggenhout",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 42008,
@@ -2672,7 +2672,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 42008,
         "Administratieve eenheden": "Hamme",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 42010,
@@ -2681,7 +2681,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 42010,
         "Administratieve eenheden": "Laarne",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 42011,
@@ -2690,7 +2690,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 42011,
         "Administratieve eenheden": "Lebbeke",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 42006,
@@ -2699,7 +2699,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 42006,
         "Administratieve eenheden": "Dendermonde",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 42023,
@@ -2708,7 +2708,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 42023,
         "Administratieve eenheden": "Waasmunster",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 42025,
@@ -2717,7 +2717,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 42025,
         "Administratieve eenheden": "Wetteren",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 42026,
@@ -2726,7 +2726,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 42026,
         "Administratieve eenheden": "Wichelen",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 42028,
@@ -2735,7 +2735,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 42028,
         "Administratieve eenheden": "Zele",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 70000,
@@ -2744,7 +2744,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 70000,
         "Administratieve eenheden": "Provincie Limburg",
-        "Taal": ""
+        "Taal": "",
     },
     {
         "Code INS": 71000,
@@ -2753,7 +2753,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 71000,
         "Administratieve eenheden": "Arrondissement Hasselt",
-        "Taal": ""
+        "Taal": "",
     },
     {
         "Code INS": 71002,
@@ -2762,7 +2762,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 71002,
         "Administratieve eenheden": "As",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 71004,
@@ -2771,7 +2771,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 71004,
         "Administratieve eenheden": "Beringen",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 71034,
@@ -2780,7 +2780,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 71034,
         "Administratieve eenheden": "Leopoldsburg",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 71011,
@@ -2789,7 +2789,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 71011,
         "Administratieve eenheden": "Diepenbeek",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 71016,
@@ -2798,7 +2798,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 71016,
         "Administratieve eenheden": "Genk",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 71017,
@@ -2807,7 +2807,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 71017,
         "Administratieve eenheden": "Gingelom",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 71020,
@@ -2816,7 +2816,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 71020,
         "Administratieve eenheden": "Halen",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 71069,
@@ -2825,7 +2825,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 71069,
         "Administratieve eenheden": "Ham",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 71022,
@@ -2834,7 +2834,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 71022,
         "Administratieve eenheden": "Hasselt",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 71024,
@@ -2843,7 +2843,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 71024,
         "Administratieve eenheden": "Herk-de-Stad",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 71070,
@@ -2852,7 +2852,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 71070,
         "Administratieve eenheden": "Heusden-Zolder",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 71037,
@@ -2861,7 +2861,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 71037,
         "Administratieve eenheden": "Lummen",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 71045,
@@ -2870,7 +2870,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 71045,
         "Administratieve eenheden": "Nieuwerkerken",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 71053,
@@ -2879,7 +2879,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 71053,
         "Administratieve eenheden": "Sint-Truiden",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 71057,
@@ -2888,7 +2888,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 71057,
         "Administratieve eenheden": "Tessenderlo",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 71066,
@@ -2897,7 +2897,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 71066,
         "Administratieve eenheden": "Zonhoven",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 71067,
@@ -2906,7 +2906,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 71067,
         "Administratieve eenheden": "Zutendaal",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 72000,
@@ -2915,7 +2915,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 72000,
         "Administratieve eenheden": "Arrondissement Maaseik",
-        "Taal": ""
+        "Taal": "",
     },
     {
         "Code INS": 72003,
@@ -2924,7 +2924,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 72003,
         "Administratieve eenheden": "Bocholt",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 72004,
@@ -2933,7 +2933,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 72004,
         "Administratieve eenheden": "Bree",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 72041,
@@ -2942,7 +2942,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 72041,
         "Administratieve eenheden": "Dilsen-Stokkem",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 72037,
@@ -2951,7 +2951,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 72037,
         "Administratieve eenheden": "Hamont-Achel",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 72038,
@@ -2960,7 +2960,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 72038,
         "Administratieve eenheden": "Hechtel-Eksel",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 72039,
@@ -2969,7 +2969,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 72039,
         "Administratieve eenheden": "Houthalen-Helchteren",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 72018,
@@ -2978,7 +2978,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 72018,
         "Administratieve eenheden": "Kinrooi",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 72020,
@@ -2987,7 +2987,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 72020,
         "Administratieve eenheden": "Lommel",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 72021,
@@ -2996,7 +2996,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 72021,
         "Administratieve eenheden": "Maaseik",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 72042,
@@ -3005,7 +3005,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 72042,
         "Administratieve eenheden": "Oudsbergen",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 72030,
@@ -3014,7 +3014,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 72030,
         "Administratieve eenheden": "Peer",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 72043,
@@ -3023,7 +3023,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 72043,
         "Administratieve eenheden": "Pelt",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 73000,
@@ -3032,7 +3032,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 73000,
         "Administratieve eenheden": "Arrondissement Tongeren",
-        "Taal": ""
+        "Taal": "",
     },
     {
         "Code INS": 73001,
@@ -3041,7 +3041,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 73001,
         "Administratieve eenheden": "Alken",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 73006,
@@ -3050,7 +3050,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 73006,
         "Administratieve eenheden": "Bilzen",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 73109,
@@ -3059,7 +3059,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 73109,
         "Administratieve eenheden": "Voeren",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 73022,
@@ -3068,7 +3068,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 73022,
         "Administratieve eenheden": "Heers",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 73028,
@@ -3077,7 +3077,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 73028,
         "Administratieve eenheden": "Herstappe",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 73032,
@@ -3086,7 +3086,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 73032,
         "Administratieve eenheden": "Hoeselt",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 73040,
@@ -3095,7 +3095,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 73040,
         "Administratieve eenheden": "Kortessem",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 73042,
@@ -3104,7 +3104,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 73042,
         "Administratieve eenheden": "Lanaken",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 73009,
@@ -3113,7 +3113,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 73009,
         "Administratieve eenheden": "Borgloon",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 73107,
@@ -3122,7 +3122,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 73107,
         "Administratieve eenheden": "Maasmechelen",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 73066,
@@ -3131,7 +3131,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 73066,
         "Administratieve eenheden": "Riemst",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 73083,
@@ -3140,7 +3140,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 73083,
         "Administratieve eenheden": "Tongeren",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": 73098,
@@ -3149,7 +3149,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 73098,
         "Administratieve eenheden": "Wellen",
-        "Taal": "N"
+        "Taal": "N",
     },
     {
         "Code INS": "03000",
@@ -3158,7 +3158,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": "03000",
         "Administratieve eenheden": "WAALS GEWEST",
-        "Taal": ""
+        "Taal": "",
     },
     {
         "Code INS": 20002,
@@ -3167,7 +3167,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 20002,
         "Administratieve eenheden": "Provincie Waals-Brabant",
-        "Taal": ""
+        "Taal": "",
     },
     {
         "Code INS": 25000,
@@ -3176,7 +3176,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 25000,
         "Administratieve eenheden": "Arrondissement Nijvel",
-        "Taal": ""
+        "Taal": "",
     },
     {
         "Code INS": 25005,
@@ -3185,7 +3185,7 @@ REFNIS_2019 = [
         "Directions extérieures": "brabant_wallon",
         "Code NIS": 25005,
         "Administratieve eenheden": "Bevekom",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 25014,
@@ -3194,7 +3194,7 @@ REFNIS_2019 = [
         "Directions extérieures": "brabant_wallon",
         "Code NIS": 25014,
         "Administratieve eenheden": "Eigenbrakel",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 25015,
@@ -3203,7 +3203,7 @@ REFNIS_2019 = [
         "Directions extérieures": "brabant_wallon",
         "Code NIS": 25015,
         "Administratieve eenheden": "Kasteelbrakel",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 25117,
@@ -3212,7 +3212,7 @@ REFNIS_2019 = [
         "Directions extérieures": "brabant_wallon",
         "Code NIS": 25117,
         "Administratieve eenheden": "Chastre",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 25018,
@@ -3221,7 +3221,7 @@ REFNIS_2019 = [
         "Directions extérieures": "brabant_wallon",
         "Code NIS": 25018,
         "Administratieve eenheden": "Chaumont-Gistoux",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 25023,
@@ -3230,7 +3230,7 @@ REFNIS_2019 = [
         "Directions extérieures": "brabant_wallon",
         "Code NIS": 25023,
         "Administratieve eenheden": "Court-Saint-Etienne",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 25031,
@@ -3239,7 +3239,7 @@ REFNIS_2019 = [
         "Directions extérieures": "brabant_wallon",
         "Code NIS": 25031,
         "Administratieve eenheden": "Genepien",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 25037,
@@ -3248,7 +3248,7 @@ REFNIS_2019 = [
         "Directions extérieures": "brabant_wallon",
         "Code NIS": 25037,
         "Administratieve eenheden": "Graven",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 25118,
@@ -3257,7 +3257,7 @@ REFNIS_2019 = [
         "Directions extérieures": "brabant_wallon",
         "Code NIS": 25118,
         "Administratieve eenheden": "Hélécine",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 25043,
@@ -3266,7 +3266,7 @@ REFNIS_2019 = [
         "Directions extérieures": "brabant_wallon",
         "Code NIS": 25043,
         "Administratieve eenheden": "Incourt",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 25044,
@@ -3275,7 +3275,7 @@ REFNIS_2019 = [
         "Directions extérieures": "brabant_wallon",
         "Code NIS": 25044,
         "Administratieve eenheden": "Itter",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 25048,
@@ -3284,7 +3284,7 @@ REFNIS_2019 = [
         "Directions extérieures": "brabant_wallon",
         "Code NIS": 25048,
         "Administratieve eenheden": "Geldenaken",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 25050,
@@ -3293,7 +3293,7 @@ REFNIS_2019 = [
         "Directions extérieures": "brabant_wallon",
         "Code NIS": 25050,
         "Administratieve eenheden": "Terhulpen",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 25119,
@@ -3302,7 +3302,7 @@ REFNIS_2019 = [
         "Directions extérieures": "brabant_wallon",
         "Code NIS": 25119,
         "Administratieve eenheden": "Lasne",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 25068,
@@ -3311,7 +3311,7 @@ REFNIS_2019 = [
         "Directions extérieures": "brabant_wallon",
         "Code NIS": 25068,
         "Administratieve eenheden": "Mont-Saint-Guibert",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 25072,
@@ -3320,7 +3320,7 @@ REFNIS_2019 = [
         "Directions extérieures": "brabant_wallon",
         "Code NIS": 25072,
         "Administratieve eenheden": "Nijvel",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 25120,
@@ -3329,7 +3329,7 @@ REFNIS_2019 = [
         "Directions extérieures": "brabant_wallon",
         "Code NIS": 25120,
         "Administratieve eenheden": "Orp-Jauche",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 25121,
@@ -3338,7 +3338,7 @@ REFNIS_2019 = [
         "Directions extérieures": "brabant_wallon",
         "Code NIS": 25121,
         "Administratieve eenheden": "Ottignies-Louvain-la-Neuve",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 25084,
@@ -3347,7 +3347,7 @@ REFNIS_2019 = [
         "Directions extérieures": "brabant_wallon",
         "Code NIS": 25084,
         "Administratieve eenheden": "Perwijs",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 25122,
@@ -3356,7 +3356,7 @@ REFNIS_2019 = [
         "Directions extérieures": "brabant_wallon",
         "Code NIS": 25122,
         "Administratieve eenheden": "Ramillies",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 25123,
@@ -3365,7 +3365,7 @@ REFNIS_2019 = [
         "Directions extérieures": "brabant_wallon",
         "Code NIS": 25123,
         "Administratieve eenheden": "Rebecq",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 25091,
@@ -3374,7 +3374,7 @@ REFNIS_2019 = [
         "Directions extérieures": "brabant_wallon",
         "Code NIS": 25091,
         "Administratieve eenheden": "Rixensart",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 25105,
@@ -3383,7 +3383,7 @@ REFNIS_2019 = [
         "Directions extérieures": "brabant_wallon",
         "Code NIS": 25105,
         "Administratieve eenheden": "Tubeke",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 25107,
@@ -3392,7 +3392,7 @@ REFNIS_2019 = [
         "Directions extérieures": "brabant_wallon",
         "Code NIS": 25107,
         "Administratieve eenheden": "Villers-la-Ville",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 25124,
@@ -3401,7 +3401,7 @@ REFNIS_2019 = [
         "Directions extérieures": "brabant_wallon",
         "Code NIS": 25124,
         "Administratieve eenheden": "Walhain",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 25110,
@@ -3410,7 +3410,7 @@ REFNIS_2019 = [
         "Directions extérieures": "brabant_wallon",
         "Code NIS": 25110,
         "Administratieve eenheden": "Waterloo",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 25112,
@@ -3419,7 +3419,7 @@ REFNIS_2019 = [
         "Directions extérieures": "brabant_wallon",
         "Code NIS": 25112,
         "Administratieve eenheden": "Waver",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 50000,
@@ -3428,7 +3428,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 50000,
         "Administratieve eenheden": "Provincie Henegouwen",
-        "Taal": ""
+        "Taal": "",
     },
     {
         "Code INS": 51000,
@@ -3437,7 +3437,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 51000,
         "Administratieve eenheden": "Arrondissement Aat",
-        "Taal": ""
+        "Taal": "",
     },
     {
         "Code INS": 51004,
@@ -3446,7 +3446,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_1",
         "Code NIS": 51004,
         "Administratieve eenheden": "Aat",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 51008,
@@ -3455,7 +3455,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_1",
         "Code NIS": 51008,
         "Administratieve eenheden": "Beloeil",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 51009,
@@ -3464,7 +3464,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_1",
         "Code NIS": 51009,
         "Administratieve eenheden": "Bernissart",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 51012,
@@ -3473,7 +3473,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_1",
         "Code NIS": 51012,
         "Administratieve eenheden": "Brugelette",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 51014,
@@ -3482,7 +3482,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_1",
         "Code NIS": 51014,
         "Administratieve eenheden": "Chièvres",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 51017,
@@ -3491,7 +3491,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_1",
         "Code NIS": 51017,
         "Administratieve eenheden": "Elzele",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 51067,
@@ -3500,7 +3500,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_1",
         "Code NIS": 51067,
         "Administratieve eenheden": "Edingen",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 51019,
@@ -3509,7 +3509,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_1",
         "Code NIS": 51019,
         "Administratieve eenheden": "Vloesberg",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 51065,
@@ -3518,7 +3518,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_1",
         "Code NIS": 51065,
         "Administratieve eenheden": "Frasnes-lez-Anvaing",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 51069,
@@ -3527,7 +3527,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_1",
         "Code NIS": 51069,
         "Administratieve eenheden": "Lessen",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 51068,
@@ -3536,7 +3536,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_1",
         "Code NIS": 51068,
         "Administratieve eenheden": "Opzullik",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 52000,
@@ -3545,7 +3545,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 52000,
         "Administratieve eenheden": "Arrondissement Charleroi",
-        "Taal": ""
+        "Taal": "",
     },
     {
         "Code INS": 52074,
@@ -3554,7 +3554,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_2",
         "Code NIS": 52074,
         "Administratieve eenheden": "Aiseau-Presles",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 52010,
@@ -3563,7 +3563,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_2",
         "Code NIS": 52010,
         "Administratieve eenheden": "Chapelle-lez-Herlaimont",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 52011,
@@ -3572,7 +3572,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_2",
         "Code NIS": 52011,
         "Administratieve eenheden": "Charleroi",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 52012,
@@ -3581,7 +3581,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_2",
         "Code NIS": 52012,
         "Administratieve eenheden": "Châtelet",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 52015,
@@ -3590,7 +3590,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_2",
         "Code NIS": 52015,
         "Administratieve eenheden": "Courcelles",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 52018,
@@ -3599,7 +3599,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_2",
         "Code NIS": 52018,
         "Administratieve eenheden": "Farciennes",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 52021,
@@ -3608,7 +3608,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_2",
         "Code NIS": 52021,
         "Administratieve eenheden": "Fleurus",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 52022,
@@ -3617,7 +3617,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_2",
         "Code NIS": 52022,
         "Administratieve eenheden": "Fontaine-l'Evêque",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 52025,
@@ -3626,7 +3626,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_2",
         "Code NIS": 52025,
         "Administratieve eenheden": "Gerpinnes",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 52075,
@@ -3635,7 +3635,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_2",
         "Code NIS": 52075,
         "Administratieve eenheden": "Les Bons Villers",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 52048,
@@ -3644,7 +3644,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_2",
         "Code NIS": 52048,
         "Administratieve eenheden": "Montigny-le-Tilleul",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 52055,
@@ -3653,7 +3653,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_2",
         "Code NIS": 52055,
         "Administratieve eenheden": "Pont-à-celles",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 53000,
@@ -3662,7 +3662,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 53000,
         "Administratieve eenheden": "Arrondissement Bergen",
-        "Taal": ""
+        "Taal": "",
     },
     {
         "Code INS": 53014,
@@ -3671,7 +3671,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_1",
         "Code NIS": 53014,
         "Administratieve eenheden": "Boussu",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 53082,
@@ -3680,7 +3680,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_1",
         "Code NIS": 53082,
         "Administratieve eenheden": "Colfontaine",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 53020,
@@ -3689,7 +3689,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_1",
         "Code NIS": 53020,
         "Administratieve eenheden": "Dour",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 53028,
@@ -3698,7 +3698,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_1",
         "Code NIS": 53028,
         "Administratieve eenheden": "Frameries",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 53039,
@@ -3707,7 +3707,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_1",
         "Code NIS": 53039,
         "Administratieve eenheden": "Hensies",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 53083,
@@ -3716,7 +3716,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_1",
         "Code NIS": 53083,
         "Administratieve eenheden": "Honnelles",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 53044,
@@ -3725,7 +3725,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_1",
         "Code NIS": 53044,
         "Administratieve eenheden": "Jurbeke",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 53046,
@@ -3734,7 +3734,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_1",
         "Code NIS": 53046,
         "Administratieve eenheden": "Lens",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 53053,
@@ -3743,7 +3743,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_1",
         "Code NIS": 53053,
         "Administratieve eenheden": "Bergen",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 53065,
@@ -3752,7 +3752,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_1",
         "Code NIS": 53065,
         "Administratieve eenheden": "Quaregnon",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 53084,
@@ -3761,7 +3761,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_1",
         "Code NIS": 53084,
         "Administratieve eenheden": "Quévy",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 53068,
@@ -3770,7 +3770,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_1",
         "Code NIS": 53068,
         "Administratieve eenheden": "Quiévrain",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 53070,
@@ -3779,7 +3779,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_2",
         "Code NIS": 53070,
         "Administratieve eenheden": "Saint-Ghislain",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 55000,
@@ -3788,7 +3788,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 55000,
         "Administratieve eenheden": "Arrondissement Zinnik",
-        "Taal": ""
+        "Taal": "",
     },
     {
         "Code INS": 55004,
@@ -3797,7 +3797,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_2",
         "Code NIS": 55004,
         "Administratieve eenheden": "'s Gravenbrakel",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 55050,
@@ -3806,7 +3806,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_2",
         "Code NIS": 55050,
         "Administratieve eenheden": "Ecaussinnes",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 55035,
@@ -3815,7 +3815,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_2",
         "Code NIS": 55035,
         "Administratieve eenheden": "Le Roeulx",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 55086,
@@ -3824,7 +3824,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_2",
         "Code NIS": 55086,
         "Administratieve eenheden": "Manage",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 55085,
@@ -3833,7 +3833,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_2",
         "Code NIS": 55085,
         "Administratieve eenheden": "Seneffe",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 55040,
@@ -3842,7 +3842,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_2",
         "Code NIS": 55040,
         "Administratieve eenheden": "Zinnik",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 56000,
@@ -3851,7 +3851,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 56000,
         "Administratieve eenheden": "Arrondissement Thuin",
-        "Taal": ""
+        "Taal": "",
     },
     {
         "Code INS": 56001,
@@ -3860,7 +3860,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_2",
         "Code NIS": 56001,
         "Administratieve eenheden": "Anderlues",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 56005,
@@ -3869,7 +3869,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_2",
         "Code NIS": 56005,
         "Administratieve eenheden": "Beaumont",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 56016,
@@ -3878,7 +3878,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_2",
         "Code NIS": 56016,
         "Administratieve eenheden": "Chimay",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 56022,
@@ -3887,7 +3887,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_2",
         "Code NIS": 56022,
         "Administratieve eenheden": "Erquelinnes",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 56029,
@@ -3896,7 +3896,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_2",
         "Code NIS": 56029,
         "Administratieve eenheden": "Froidchapelle",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 56086,
@@ -3905,7 +3905,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_2",
         "Code NIS": 56086,
         "Administratieve eenheden": "Ham-sur-Heure-Nalinnes",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 56044,
@@ -3914,7 +3914,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_2",
         "Code NIS": 56044,
         "Administratieve eenheden": "Lobbes",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 56049,
@@ -3923,7 +3923,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_2",
         "Code NIS": 56049,
         "Administratieve eenheden": "Merbes-le-Château",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 56051,
@@ -3932,7 +3932,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_2",
         "Code NIS": 56051,
         "Administratieve eenheden": "Momignies",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 56088,
@@ -3941,7 +3941,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_2",
         "Code NIS": 56088,
         "Administratieve eenheden": "Sivry-Rance",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 56078,
@@ -3950,7 +3950,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_1",
         "Code NIS": 56078,
         "Administratieve eenheden": "Thuin",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 57000,
@@ -3959,7 +3959,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 57000,
         "Administratieve eenheden": "Arrondissement Doornik-Moeskroen",
-        "Taal": ""
+        "Taal": "",
     },
     {
         "Code INS": 57003,
@@ -3968,7 +3968,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_1",
         "Code NIS": 57003,
         "Administratieve eenheden": "Antoing",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 57093,
@@ -3977,7 +3977,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_1",
         "Code NIS": 57093,
         "Administratieve eenheden": "Brunehaut",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 57018,
@@ -3986,7 +3986,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_1",
         "Code NIS": 57018,
         "Administratieve eenheden": "Celles",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 57097,
@@ -3995,7 +3995,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_1",
         "Code NIS": 57097,
         "Administratieve eenheden": "Komen-Waasten",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 57027,
@@ -4004,7 +4004,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_1",
         "Code NIS": 57027,
         "Administratieve eenheden": "Estaimpuis",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 57094,
@@ -4013,7 +4013,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_1",
         "Code NIS": 57094,
         "Administratieve eenheden": "Leuze-en-Hainaut",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 57095,
@@ -4022,7 +4022,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_1",
         "Code NIS": 57095,
         "Administratieve eenheden": "Mont-de-l'Enclus",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 57096,
@@ -4031,7 +4031,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_1",
         "Code NIS": 57096,
         "Administratieve eenheden": "Moeskroen",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 57062,
@@ -4040,7 +4040,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_1",
         "Code NIS": 57062,
         "Administratieve eenheden": "Pecq",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 57064,
@@ -4049,7 +4049,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_1",
         "Code NIS": 57064,
         "Administratieve eenheden": "Péruwelz",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 57072,
@@ -4058,7 +4058,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_1",
         "Code NIS": 57072,
         "Administratieve eenheden": "Rumes",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 57081,
@@ -4067,7 +4067,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_1",
         "Code NIS": 57081,
         "Administratieve eenheden": "Doornik",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 58000,
@@ -4076,7 +4076,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 58000,
         "Administratieve eenheden": "Arrondissement La Louvière",
-        "Taal": ""
+        "Taal": "",
     },
     {
         "Code INS": 58001,
@@ -4085,7 +4085,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_2",
         "Code NIS": 58001,
         "Administratieve eenheden": "La Louvière",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 58002,
@@ -4094,7 +4094,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_2",
         "Code NIS": 58002,
         "Administratieve eenheden": "Binche",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 58003,
@@ -4103,7 +4103,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_2",
         "Code NIS": 58003,
         "Administratieve eenheden": "Estinnes",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 58004,
@@ -4112,7 +4112,7 @@ REFNIS_2019 = [
         "Directions extérieures": "hainaut_2",
         "Code NIS": 58004,
         "Administratieve eenheden": "Morlanwelz",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 60000,
@@ -4121,7 +4121,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 60000,
         "Administratieve eenheden": "Provincie Luik",
-        "Taal": ""
+        "Taal": "",
     },
     {
         "Code INS": 61000,
@@ -4130,7 +4130,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 61000,
         "Administratieve eenheden": "Arrondissement Hoei",
-        "Taal": ""
+        "Taal": "",
     },
     {
         "Code INS": 61003,
@@ -4139,7 +4139,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_2",
         "Code NIS": 61003,
         "Administratieve eenheden": "Amay",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 61079,
@@ -4148,7 +4148,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_2",
         "Code NIS": 61079,
         "Administratieve eenheden": "Anthisnes",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 61010,
@@ -4157,7 +4157,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_2",
         "Code NIS": 61010,
         "Administratieve eenheden": "Burdinne",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 61012,
@@ -4166,7 +4166,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_2",
         "Code NIS": 61012,
         "Administratieve eenheden": "Clavier",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 61080,
@@ -4175,7 +4175,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_2",
         "Code NIS": 61080,
         "Administratieve eenheden": "Engis",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 61019,
@@ -4184,7 +4184,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_2",
         "Code NIS": 61019,
         "Administratieve eenheden": "Ferrières",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 61024,
@@ -4193,7 +4193,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_2",
         "Code NIS": 61024,
         "Administratieve eenheden": "Hamoir",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 61028,
@@ -4202,7 +4202,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_2",
         "Code NIS": 61028,
         "Administratieve eenheden": "Héron",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 61031,
@@ -4211,7 +4211,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_2",
         "Code NIS": 61031,
         "Administratieve eenheden": "Hoei",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 61039,
@@ -4220,7 +4220,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_2",
         "Code NIS": 61039,
         "Administratieve eenheden": "Marchin",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 61041,
@@ -4229,7 +4229,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_2",
         "Code NIS": 61041,
         "Administratieve eenheden": "Modave",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 61043,
@@ -4238,7 +4238,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_2",
         "Code NIS": 61043,
         "Administratieve eenheden": "Nandrin",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 61048,
@@ -4247,7 +4247,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_2",
         "Code NIS": 61048,
         "Administratieve eenheden": "Ouffet",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 61081,
@@ -4256,7 +4256,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_2",
         "Code NIS": 61081,
         "Administratieve eenheden": "Tinlot",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 61063,
@@ -4265,7 +4265,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_2",
         "Code NIS": 61063,
         "Administratieve eenheden": "Verlaine",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 61068,
@@ -4274,7 +4274,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_2",
         "Code NIS": 61068,
         "Administratieve eenheden": "Villers-le-Bouillet",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 61072,
@@ -4283,7 +4283,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_2",
         "Code NIS": 61072,
         "Administratieve eenheden": "Wanze",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 62000,
@@ -4292,7 +4292,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 62000,
         "Administratieve eenheden": "Arrondissement Luik",
-        "Taal": ""
+        "Taal": "",
     },
     {
         "Code INS": 62003,
@@ -4301,7 +4301,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_1",
         "Code NIS": 62003,
         "Administratieve eenheden": "Ans",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 62006,
@@ -4310,7 +4310,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_1",
         "Code NIS": 62006,
         "Administratieve eenheden": "Awans",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 62009,
@@ -4319,7 +4319,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_2",
         "Code NIS": 62009,
         "Administratieve eenheden": "Aywaille",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 62011,
@@ -4328,7 +4328,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_1",
         "Code NIS": 62011,
         "Administratieve eenheden": "Bitsingen",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 62015,
@@ -4337,7 +4337,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_1",
         "Code NIS": 62015,
         "Administratieve eenheden": "Beyne-Heusay",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 62119,
@@ -4346,7 +4346,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_1",
         "Code NIS": 62119,
         "Administratieve eenheden": "Blégny",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 62022,
@@ -4355,7 +4355,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_1",
         "Code NIS": 62022,
         "Administratieve eenheden": "Chaudfontaine",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 62026,
@@ -4364,7 +4364,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_2",
         "Code NIS": 62026,
         "Administratieve eenheden": "Comblain-au-Pont",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 62027,
@@ -4373,7 +4373,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_2",
         "Code NIS": 62027,
         "Administratieve eenheden": "Dalhem",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 62032,
@@ -4382,7 +4382,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_1",
         "Code NIS": 62032,
         "Administratieve eenheden": "Esneux",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 62120,
@@ -4391,7 +4391,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_1",
         "Code NIS": 62120,
         "Administratieve eenheden": "Flémalle",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 62038,
@@ -4400,7 +4400,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_1",
         "Code NIS": 62038,
         "Administratieve eenheden": "Fléron",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 62118,
@@ -4409,7 +4409,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_1",
         "Code NIS": 62118,
         "Administratieve eenheden": "Grâce-Hollogne",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 62051,
@@ -4418,7 +4418,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_1",
         "Code NIS": 62051,
         "Administratieve eenheden": "Herstal",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 62060,
@@ -4427,7 +4427,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_1",
         "Code NIS": 62060,
         "Administratieve eenheden": "Juprelle",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 62063,
@@ -4436,7 +4436,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_1",
         "Code NIS": 62063,
         "Administratieve eenheden": "Luik",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 62121,
@@ -4445,7 +4445,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_1",
         "Code NIS": 62121,
         "Administratieve eenheden": "Neupré",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 62079,
@@ -4454,7 +4454,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_1",
         "Code NIS": 62079,
         "Administratieve eenheden": "Oupeye",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 62093,
@@ -4463,7 +4463,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_1",
         "Code NIS": 62093,
         "Administratieve eenheden": "Saint-Nicolas",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 62096,
@@ -4472,7 +4472,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_1",
         "Code NIS": 62096,
         "Administratieve eenheden": "Seraing",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 62099,
@@ -4481,7 +4481,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_1",
         "Code NIS": 62099,
         "Administratieve eenheden": "Soumagne",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 62100,
@@ -4490,7 +4490,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_2",
         "Code NIS": 62100,
         "Administratieve eenheden": "Sprimont",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 62122,
@@ -4499,7 +4499,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_1",
         "Code NIS": 62122,
         "Administratieve eenheden": "Trooz",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 62108,
@@ -4508,7 +4508,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_1",
         "Code NIS": 62108,
         "Administratieve eenheden": "Wezet",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 63000,
@@ -4517,7 +4517,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 63000,
         "Administratieve eenheden": "Arrondissement Verviers",
-        "Taal": ""
+        "Taal": "",
     },
     {
         "Code INS": 63001,
@@ -4526,7 +4526,7 @@ REFNIS_2019 = [
         "Directions extérieures": "eupen",
         "Code NIS": 63001,
         "Administratieve eenheden": "Amel",
-        "Taal": "D"
+        "Taal": "D",
     },
     {
         "Code INS": 63003,
@@ -4535,7 +4535,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_2",
         "Code NIS": 63003,
         "Administratieve eenheden": "Aubel",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 63004,
@@ -4544,7 +4544,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_2",
         "Code NIS": 63004,
         "Administratieve eenheden": "Baelen",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 63012,
@@ -4553,7 +4553,7 @@ REFNIS_2019 = [
         "Directions extérieures": "eupen",
         "Code NIS": 63012,
         "Administratieve eenheden": "Büllingen",
-        "Taal": "D"
+        "Taal": "D",
     },
     {
         "Code INS": 63087,
@@ -4562,7 +4562,7 @@ REFNIS_2019 = [
         "Directions extérieures": "eupen",
         "Code NIS": 63087,
         "Administratieve eenheden": "Burg-Reuland",
-        "Taal": "D"
+        "Taal": "D",
     },
     {
         "Code INS": 63013,
@@ -4571,7 +4571,7 @@ REFNIS_2019 = [
         "Directions extérieures": "eupen",
         "Code NIS": 63013,
         "Administratieve eenheden": "Bütgenbach",
-        "Taal": "D"
+        "Taal": "D",
     },
     {
         "Code INS": 63020,
@@ -4580,7 +4580,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_2",
         "Code NIS": 63020,
         "Administratieve eenheden": "Dison",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 63023,
@@ -4589,7 +4589,7 @@ REFNIS_2019 = [
         "Directions extérieures": "eupen",
         "Code NIS": 63023,
         "Administratieve eenheden": "Eupen",
-        "Taal": "D"
+        "Taal": "D",
     },
     {
         "Code INS": 63035,
@@ -4598,7 +4598,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_2",
         "Code NIS": 63035,
         "Administratieve eenheden": "Herve",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 63038,
@@ -4607,7 +4607,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_2",
         "Code NIS": 63038,
         "Administratieve eenheden": "Jalhay",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 63040,
@@ -4616,7 +4616,7 @@ REFNIS_2019 = [
         "Directions extérieures": "eupen",
         "Code NIS": 63040,
         "Administratieve eenheden": "Kelmis",
-        "Taal": "D"
+        "Taal": "D",
     },
     {
         "Code INS": 63045,
@@ -4625,7 +4625,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_2",
         "Code NIS": 63045,
         "Administratieve eenheden": "Lierneux",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 63046,
@@ -4634,7 +4634,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_2",
         "Code NIS": 63046,
         "Administratieve eenheden": "Limburg",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 63048,
@@ -4643,7 +4643,7 @@ REFNIS_2019 = [
         "Directions extérieures": "eupen",
         "Code NIS": 63048,
         "Administratieve eenheden": "Lontzen",
-        "Taal": "D"
+        "Taal": "D",
     },
     {
         "Code INS": 63049,
@@ -4652,7 +4652,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_2",
         "Code NIS": 63049,
         "Administratieve eenheden": "Malmedy",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 63057,
@@ -4661,7 +4661,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_2",
         "Code NIS": 63057,
         "Administratieve eenheden": "Olne",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 63058,
@@ -4670,7 +4670,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_2",
         "Code NIS": 63058,
         "Administratieve eenheden": "Pepinster",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 63088,
@@ -4679,7 +4679,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_2",
         "Code NIS": 63088,
         "Administratieve eenheden": "Plombières",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 63061,
@@ -4688,7 +4688,7 @@ REFNIS_2019 = [
         "Directions extérieures": "eupen",
         "Code NIS": 63061,
         "Administratieve eenheden": "Raeren",
-        "Taal": "D"
+        "Taal": "D",
     },
     {
         "Code INS": 63067,
@@ -4697,7 +4697,7 @@ REFNIS_2019 = [
         "Directions extérieures": "eupen",
         "Code NIS": 63067,
         "Administratieve eenheden": "Sankt Vith",
-        "Taal": "D"
+        "Taal": "D",
     },
     {
         "Code INS": 63072,
@@ -4706,7 +4706,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_2",
         "Code NIS": 63072,
         "Administratieve eenheden": "Spa",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 63073,
@@ -4715,7 +4715,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_2",
         "Code NIS": 63073,
         "Administratieve eenheden": "Stavelot",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 63075,
@@ -4724,7 +4724,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_2",
         "Code NIS": 63075,
         "Administratieve eenheden": "Stoumont",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 63076,
@@ -4733,7 +4733,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_2",
         "Code NIS": 63076,
         "Administratieve eenheden": "Theux",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 63089,
@@ -4742,7 +4742,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_2",
         "Code NIS": 63089,
         "Administratieve eenheden": "Thimister-Clermont",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 63086,
@@ -4751,7 +4751,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_2",
         "Code NIS": 63086,
         "Administratieve eenheden": "Trois-Ponts",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 63079,
@@ -4760,7 +4760,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_2",
         "Code NIS": 63079,
         "Administratieve eenheden": "Verviers",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 63080,
@@ -4769,7 +4769,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_2",
         "Code NIS": 63080,
         "Administratieve eenheden": "Weismes",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 63084,
@@ -4778,7 +4778,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_2",
         "Code NIS": 63084,
         "Administratieve eenheden": "Welkenraedt",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 64000,
@@ -4787,7 +4787,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 64000,
         "Administratieve eenheden": "Arrondissement Borgworm",
-        "Taal": ""
+        "Taal": "",
     },
     {
         "Code INS": 64008,
@@ -4796,7 +4796,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_2",
         "Code NIS": 64008,
         "Administratieve eenheden": "Berloz",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 64015,
@@ -4805,7 +4805,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_2",
         "Code NIS": 64015,
         "Administratieve eenheden": "Braives",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 64021,
@@ -4814,7 +4814,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_2",
         "Code NIS": 64021,
         "Administratieve eenheden": "Crisnée",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 64023,
@@ -4823,7 +4823,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_2",
         "Code NIS": 64023,
         "Administratieve eenheden": "Donceel",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 64076,
@@ -4832,7 +4832,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_2",
         "Code NIS": 64076,
         "Administratieve eenheden": "Faimes",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 64025,
@@ -4841,7 +4841,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_2",
         "Code NIS": 64025,
         "Administratieve eenheden": "Fexhe-le-Haut-Clocher",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 64029,
@@ -4850,7 +4850,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_2",
         "Code NIS": 64029,
         "Administratieve eenheden": "Geer",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 64034,
@@ -4859,7 +4859,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_2",
         "Code NIS": 64034,
         "Administratieve eenheden": "Hannuit",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 64047,
@@ -4868,7 +4868,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_2",
         "Code NIS": 64047,
         "Administratieve eenheden": "Lijsem",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 64056,
@@ -4877,7 +4877,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_2",
         "Code NIS": 64056,
         "Administratieve eenheden": "Oerle",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 64063,
@@ -4886,7 +4886,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_2",
         "Code NIS": 64063,
         "Administratieve eenheden": "Remicourt",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 64065,
@@ -4895,7 +4895,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_2",
         "Code NIS": 64065,
         "Administratieve eenheden": "Saint-Georges-sur-Meuse",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 64074,
@@ -4904,7 +4904,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_2",
         "Code NIS": 64074,
         "Administratieve eenheden": "Borgworm",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 64075,
@@ -4913,7 +4913,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_2",
         "Code NIS": 64075,
         "Administratieve eenheden": "Wasseiges",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 80000,
@@ -4922,7 +4922,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 80000,
         "Administratieve eenheden": "Provincie Luxemburg",
-        "Taal": ""
+        "Taal": "",
     },
     {
         "Code INS": 81000,
@@ -4931,7 +4931,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 81000,
         "Administratieve eenheden": "Arrondissement Aarlen",
-        "Taal": ""
+        "Taal": "",
     },
     {
         "Code INS": 81001,
@@ -4940,7 +4940,7 @@ REFNIS_2019 = [
         "Directions extérieures": "luxembourg",
         "Code NIS": 81001,
         "Administratieve eenheden": "Aarlen",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 81003,
@@ -4949,7 +4949,7 @@ REFNIS_2019 = [
         "Directions extérieures": "luxembourg",
         "Code NIS": 81003,
         "Administratieve eenheden": "Attert",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 81004,
@@ -4958,7 +4958,7 @@ REFNIS_2019 = [
         "Directions extérieures": "luxembourg",
         "Code NIS": 81004,
         "Administratieve eenheden": "Aubange",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 81013,
@@ -4967,7 +4967,7 @@ REFNIS_2019 = [
         "Directions extérieures": "luxembourg",
         "Code NIS": 81013,
         "Administratieve eenheden": "Martelange",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 81015,
@@ -4976,7 +4976,7 @@ REFNIS_2019 = [
         "Directions extérieures": "luxembourg",
         "Code NIS": 81015,
         "Administratieve eenheden": "Messancy",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 82000,
@@ -4985,7 +4985,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 82000,
         "Administratieve eenheden": "Arrondissement Bastenaken",
-        "Taal": ""
+        "Taal": "",
     },
     {
         "Code INS": 82003,
@@ -4994,7 +4994,7 @@ REFNIS_2019 = [
         "Directions extérieures": "luxembourg",
         "Code NIS": 82003,
         "Administratieve eenheden": "Bastenaken",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 82005,
@@ -5003,7 +5003,7 @@ REFNIS_2019 = [
         "Directions extérieures": "luxembourg",
         "Code NIS": 82005,
         "Administratieve eenheden": "Bertogne",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 82009,
@@ -5012,7 +5012,7 @@ REFNIS_2019 = [
         "Directions extérieures": "luxembourg",
         "Code NIS": 82009,
         "Administratieve eenheden": "Fauvillers",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 82037,
@@ -5021,7 +5021,7 @@ REFNIS_2019 = [
         "Directions extérieures": "luxembourg",
         "Code NIS": 82037,
         "Administratieve eenheden": "Gouvy",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 82014,
@@ -5030,7 +5030,7 @@ REFNIS_2019 = [
         "Directions extérieures": "luxembourg",
         "Code NIS": 82014,
         "Administratieve eenheden": "Houffalize",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 82038,
@@ -5039,7 +5039,7 @@ REFNIS_2019 = [
         "Directions extérieures": "luxembourg",
         "Code NIS": 82038,
         "Administratieve eenheden": "Sainte-Ode",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 82036,
@@ -5048,7 +5048,7 @@ REFNIS_2019 = [
         "Directions extérieures": "luxembourg",
         "Code NIS": 82036,
         "Administratieve eenheden": "Vaux-sur-Sûre",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 82032,
@@ -5057,7 +5057,7 @@ REFNIS_2019 = [
         "Directions extérieures": "luxembourg",
         "Code NIS": 82032,
         "Administratieve eenheden": "Vielsalm",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 83000,
@@ -5066,7 +5066,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 83000,
         "Administratieve eenheden": "Arrondissement Marche-en-Famenne",
-        "Taal": ""
+        "Taal": "",
     },
     {
         "Code INS": 83012,
@@ -5075,7 +5075,7 @@ REFNIS_2019 = [
         "Directions extérieures": "luxembourg",
         "Code NIS": 83012,
         "Administratieve eenheden": "Durbuy",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 83013,
@@ -5084,7 +5084,7 @@ REFNIS_2019 = [
         "Directions extérieures": "luxembourg",
         "Code NIS": 83013,
         "Administratieve eenheden": "Erezée",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 83028,
@@ -5093,7 +5093,7 @@ REFNIS_2019 = [
         "Directions extérieures": "luxembourg",
         "Code NIS": 83028,
         "Administratieve eenheden": "Hotton",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 83031,
@@ -5102,7 +5102,7 @@ REFNIS_2019 = [
         "Directions extérieures": "luxembourg",
         "Code NIS": 83031,
         "Administratieve eenheden": "La Roche-en-Ardenne",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 83055,
@@ -5111,7 +5111,7 @@ REFNIS_2019 = [
         "Directions extérieures": "luxembourg",
         "Code NIS": 83055,
         "Administratieve eenheden": "Manhay",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 83034,
@@ -5120,7 +5120,7 @@ REFNIS_2019 = [
         "Directions extérieures": "luxembourg",
         "Code NIS": 83034,
         "Administratieve eenheden": "Marche-en-Famenne",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 83040,
@@ -5129,7 +5129,7 @@ REFNIS_2019 = [
         "Directions extérieures": "luxembourg",
         "Code NIS": 83040,
         "Administratieve eenheden": "Nassogne",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 83044,
@@ -5138,7 +5138,7 @@ REFNIS_2019 = [
         "Directions extérieures": "liege_2",
         "Code NIS": 83044,
         "Administratieve eenheden": "Rendeux",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 83049,
@@ -5147,7 +5147,7 @@ REFNIS_2019 = [
         "Directions extérieures": "luxembourg",
         "Code NIS": 83049,
         "Administratieve eenheden": "Tenneville",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 84000,
@@ -5156,7 +5156,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 84000,
         "Administratieve eenheden": "Arrondissement Neufchâteau",
-        "Taal": ""
+        "Taal": "",
     },
     {
         "Code INS": 84009,
@@ -5165,7 +5165,7 @@ REFNIS_2019 = [
         "Directions extérieures": "luxembourg",
         "Code NIS": 84009,
         "Administratieve eenheden": "Bertrix",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 84010,
@@ -5174,7 +5174,7 @@ REFNIS_2019 = [
         "Directions extérieures": "luxembourg",
         "Code NIS": 84010,
         "Administratieve eenheden": "Bouillon",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 84016,
@@ -5183,7 +5183,7 @@ REFNIS_2019 = [
         "Directions extérieures": "luxembourg",
         "Code NIS": 84016,
         "Administratieve eenheden": "Daverdisse",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 84029,
@@ -5192,7 +5192,7 @@ REFNIS_2019 = [
         "Directions extérieures": "luxembourg",
         "Code NIS": 84029,
         "Administratieve eenheden": "Herbeumont",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 84033,
@@ -5201,7 +5201,7 @@ REFNIS_2019 = [
         "Directions extérieures": "luxembourg",
         "Code NIS": 84033,
         "Administratieve eenheden": "Léglise",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 84035,
@@ -5210,7 +5210,7 @@ REFNIS_2019 = [
         "Directions extérieures": "luxembourg",
         "Code NIS": 84035,
         "Administratieve eenheden": "Libin",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 84077,
@@ -5219,7 +5219,7 @@ REFNIS_2019 = [
         "Directions extérieures": "luxembourg",
         "Code NIS": 84077,
         "Administratieve eenheden": "Libramont-Chevigny",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 84043,
@@ -5228,7 +5228,7 @@ REFNIS_2019 = [
         "Directions extérieures": "luxembourg",
         "Code NIS": 84043,
         "Administratieve eenheden": "Neufchâteau",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 84050,
@@ -5237,7 +5237,7 @@ REFNIS_2019 = [
         "Directions extérieures": "luxembourg",
         "Code NIS": 84050,
         "Administratieve eenheden": "Paliseul",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 84059,
@@ -5246,7 +5246,7 @@ REFNIS_2019 = [
         "Directions extérieures": "luxembourg",
         "Code NIS": 84059,
         "Administratieve eenheden": "Saint-Hubert",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 84068,
@@ -5255,7 +5255,7 @@ REFNIS_2019 = [
         "Directions extérieures": "luxembourg",
         "Code NIS": 84068,
         "Administratieve eenheden": "Tellin",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 84075,
@@ -5264,7 +5264,7 @@ REFNIS_2019 = [
         "Directions extérieures": "luxembourg",
         "Code NIS": 84075,
         "Administratieve eenheden": "Wellin",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 85000,
@@ -5273,7 +5273,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 85000,
         "Administratieve eenheden": "Arrondissement Virton",
-        "Taal": ""
+        "Taal": "",
     },
     {
         "Code INS": 85007,
@@ -5282,7 +5282,7 @@ REFNIS_2019 = [
         "Directions extérieures": "luxembourg",
         "Code NIS": 85007,
         "Administratieve eenheden": "Chiny",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 85009,
@@ -5291,7 +5291,7 @@ REFNIS_2019 = [
         "Directions extérieures": "luxembourg",
         "Code NIS": 85009,
         "Administratieve eenheden": "Etalle",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 85011,
@@ -5300,7 +5300,7 @@ REFNIS_2019 = [
         "Directions extérieures": "luxembourg",
         "Code NIS": 85011,
         "Administratieve eenheden": "Florenville",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 85046,
@@ -5309,7 +5309,7 @@ REFNIS_2019 = [
         "Directions extérieures": "luxembourg",
         "Code NIS": 85046,
         "Administratieve eenheden": "Habay",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 85024,
@@ -5318,7 +5318,7 @@ REFNIS_2019 = [
         "Directions extérieures": "luxembourg",
         "Code NIS": 85024,
         "Administratieve eenheden": "Meix-devant-Virton",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 85026,
@@ -5327,7 +5327,7 @@ REFNIS_2019 = [
         "Directions extérieures": "luxembourg",
         "Code NIS": 85026,
         "Administratieve eenheden": "Musson",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 85047,
@@ -5336,7 +5336,7 @@ REFNIS_2019 = [
         "Directions extérieures": "luxembourg",
         "Code NIS": 85047,
         "Administratieve eenheden": "Rouvroy",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 85034,
@@ -5345,7 +5345,7 @@ REFNIS_2019 = [
         "Directions extérieures": "luxembourg",
         "Code NIS": 85034,
         "Administratieve eenheden": "Saint-Léger",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 85039,
@@ -5354,7 +5354,7 @@ REFNIS_2019 = [
         "Directions extérieures": "luxembourg",
         "Code NIS": 85039,
         "Administratieve eenheden": "Tintigny",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 85045,
@@ -5363,7 +5363,7 @@ REFNIS_2019 = [
         "Directions extérieures": "luxembourg",
         "Code NIS": 85045,
         "Administratieve eenheden": "Virton",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 90000,
@@ -5372,7 +5372,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 90000,
         "Administratieve eenheden": "Provincie Namen",
-        "Taal": ""
+        "Taal": "",
     },
     {
         "Code INS": 91000,
@@ -5381,7 +5381,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 91000,
         "Administratieve eenheden": "Arrondissement Dinant",
-        "Taal": ""
+        "Taal": "",
     },
     {
         "Code INS": 91005,
@@ -5390,7 +5390,7 @@ REFNIS_2019 = [
         "Directions extérieures": "namur",
         "Code NIS": 91005,
         "Administratieve eenheden": "Anhée",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 91013,
@@ -5399,7 +5399,7 @@ REFNIS_2019 = [
         "Directions extérieures": "namur",
         "Code NIS": 91013,
         "Administratieve eenheden": "Beauraing",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 91015,
@@ -5408,7 +5408,7 @@ REFNIS_2019 = [
         "Directions extérieures": "namur",
         "Code NIS": 91015,
         "Administratieve eenheden": "Bièvre",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 91030,
@@ -5417,7 +5417,7 @@ REFNIS_2019 = [
         "Directions extérieures": "namur",
         "Code NIS": 91030,
         "Administratieve eenheden": "Ciney",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 91034,
@@ -5426,7 +5426,7 @@ REFNIS_2019 = [
         "Directions extérieures": "namur",
         "Code NIS": 91034,
         "Administratieve eenheden": "Dinant",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 91054,
@@ -5435,7 +5435,7 @@ REFNIS_2019 = [
         "Directions extérieures": "namur",
         "Code NIS": 91054,
         "Administratieve eenheden": "Gedinne",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 91059,
@@ -5444,7 +5444,7 @@ REFNIS_2019 = [
         "Directions extérieures": "namur",
         "Code NIS": 91059,
         "Administratieve eenheden": "Hamois",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 91142,
@@ -5453,7 +5453,7 @@ REFNIS_2019 = [
         "Directions extérieures": "namur",
         "Code NIS": 91142,
         "Administratieve eenheden": "Hastière",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 91064,
@@ -5462,7 +5462,7 @@ REFNIS_2019 = [
         "Directions extérieures": "namur",
         "Code NIS": 91064,
         "Administratieve eenheden": "Havelange",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 91072,
@@ -5471,7 +5471,7 @@ REFNIS_2019 = [
         "Directions extérieures": "namur",
         "Code NIS": 91072,
         "Administratieve eenheden": "Houyet",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 91103,
@@ -5480,7 +5480,7 @@ REFNIS_2019 = [
         "Directions extérieures": "namur",
         "Code NIS": 91103,
         "Administratieve eenheden": "Onhaye",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 91114,
@@ -5489,7 +5489,7 @@ REFNIS_2019 = [
         "Directions extérieures": "namur",
         "Code NIS": 91114,
         "Administratieve eenheden": "Rochefort",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 91120,
@@ -5498,7 +5498,7 @@ REFNIS_2019 = [
         "Directions extérieures": "namur",
         "Code NIS": 91120,
         "Administratieve eenheden": "Somme-Leuze",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 91143,
@@ -5507,7 +5507,7 @@ REFNIS_2019 = [
         "Directions extérieures": "namur",
         "Code NIS": 91143,
         "Administratieve eenheden": "Vresse-sur-Semois",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 91141,
@@ -5516,7 +5516,7 @@ REFNIS_2019 = [
         "Directions extérieures": "namur",
         "Code NIS": 91141,
         "Administratieve eenheden": "Yvoir",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 92000,
@@ -5525,7 +5525,7 @@ REFNIS_2019 = [
         "Directions extérieures": "namur",
         "Code NIS": 92000,
         "Administratieve eenheden": "Arrondissement Namen",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 92003,
@@ -5534,7 +5534,7 @@ REFNIS_2019 = [
         "Directions extérieures": "namur",
         "Code NIS": 92003,
         "Administratieve eenheden": "Andenne",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 92006,
@@ -5543,7 +5543,7 @@ REFNIS_2019 = [
         "Directions extérieures": "namur",
         "Code NIS": 92006,
         "Administratieve eenheden": "Assesse",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 92035,
@@ -5552,7 +5552,7 @@ REFNIS_2019 = [
         "Directions extérieures": "namur",
         "Code NIS": 92035,
         "Administratieve eenheden": "Eghezée",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 92138,
@@ -5561,7 +5561,7 @@ REFNIS_2019 = [
         "Directions extérieures": "namur",
         "Code NIS": 92138,
         "Administratieve eenheden": "Fernelmont",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 92045,
@@ -5570,7 +5570,7 @@ REFNIS_2019 = [
         "Directions extérieures": "namur",
         "Code NIS": 92045,
         "Administratieve eenheden": "Floreffe",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 92048,
@@ -5579,7 +5579,7 @@ REFNIS_2019 = [
         "Directions extérieures": "namur",
         "Code NIS": 92048,
         "Administratieve eenheden": "Fosses-la-Ville",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 92142,
@@ -5588,7 +5588,7 @@ REFNIS_2019 = [
         "Directions extérieures": "namur",
         "Code NIS": 92142,
         "Administratieve eenheden": "Gembloux",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 92054,
@@ -5597,7 +5597,7 @@ REFNIS_2019 = [
         "Directions extérieures": "namur",
         "Code NIS": 92054,
         "Administratieve eenheden": "Gesves",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 92140,
@@ -5606,7 +5606,7 @@ REFNIS_2019 = [
         "Directions extérieures": "namur",
         "Code NIS": 92140,
         "Administratieve eenheden": "Jemeppe-sur-Sambre",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 92141,
@@ -5615,7 +5615,7 @@ REFNIS_2019 = [
         "Directions extérieures": "namur",
         "Code NIS": 92141,
         "Administratieve eenheden": "La Bruyère",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 92087,
@@ -5624,7 +5624,7 @@ REFNIS_2019 = [
         "Directions extérieures": "namur",
         "Code NIS": 92087,
         "Administratieve eenheden": "Mettet",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 92094,
@@ -5633,7 +5633,7 @@ REFNIS_2019 = [
         "Directions extérieures": "namur",
         "Code NIS": 92094,
         "Administratieve eenheden": "Namen",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 92097,
@@ -5642,7 +5642,7 @@ REFNIS_2019 = [
         "Directions extérieures": "namur",
         "Code NIS": 92097,
         "Administratieve eenheden": "Ohey",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 92101,
@@ -5651,7 +5651,7 @@ REFNIS_2019 = [
         "Directions extérieures": "namur",
         "Code NIS": 92101,
         "Administratieve eenheden": "Profondeville",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 92137,
@@ -5660,7 +5660,7 @@ REFNIS_2019 = [
         "Directions extérieures": "namur",
         "Code NIS": 92137,
         "Administratieve eenheden": "Sambreville",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 92114,
@@ -5669,7 +5669,7 @@ REFNIS_2019 = [
         "Directions extérieures": "namur",
         "Code NIS": 92114,
         "Administratieve eenheden": "Sombreffe",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 93000,
@@ -5678,7 +5678,7 @@ REFNIS_2019 = [
         "Directions extérieures": "",
         "Code NIS": 93000,
         "Administratieve eenheden": "Arrondissement Philippeville",
-        "Taal": ""
+        "Taal": "",
     },
     {
         "Code INS": 93010,
@@ -5687,7 +5687,7 @@ REFNIS_2019 = [
         "Directions extérieures": "namur",
         "Code NIS": 93010,
         "Administratieve eenheden": "Cerfontaine",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 93014,
@@ -5696,7 +5696,7 @@ REFNIS_2019 = [
         "Directions extérieures": "namur",
         "Code NIS": 93014,
         "Administratieve eenheden": "Couvin",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 93018,
@@ -5705,7 +5705,7 @@ REFNIS_2019 = [
         "Directions extérieures": "namur",
         "Code NIS": 93018,
         "Administratieve eenheden": "Doische",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 93022,
@@ -5714,7 +5714,7 @@ REFNIS_2019 = [
         "Directions extérieures": "namur",
         "Code NIS": 93022,
         "Administratieve eenheden": "Florennes",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 93056,
@@ -5723,7 +5723,7 @@ REFNIS_2019 = [
         "Directions extérieures": "namur",
         "Code NIS": 93056,
         "Administratieve eenheden": "Philippeville",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 93090,
@@ -5732,7 +5732,7 @@ REFNIS_2019 = [
         "Directions extérieures": "namur",
         "Code NIS": 93090,
         "Administratieve eenheden": "Viroinval",
-        "Taal": "F"
+        "Taal": "F",
     },
     {
         "Code INS": 93088,
@@ -5741,6 +5741,6 @@ REFNIS_2019 = [
         "Directions extérieures": "namur",
         "Code NIS": 93088,
         "Administratieve eenheden": "Walcourt",
-        "Taal": "F"
-    }
+        "Taal": "F",
+    },
 ]

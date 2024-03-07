@@ -16,7 +16,7 @@ class SimplifyWorkflowAdaptation(object):
 
     def patch_workflow(self, workflow_name, **parameters):
 
-        wtool = api.portal.get_tool('portal_workflow')
+        wtool = api.portal.get_tool("portal_workflow")
         workflow = wtool[workflow_name]
 
         for transition_id in self.transitions_to_remove:

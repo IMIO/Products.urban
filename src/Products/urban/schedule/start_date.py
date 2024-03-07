@@ -56,7 +56,9 @@ class ComplementsDepositDate(StartDate):
     def start_date(self):
         licence = self.task_container
         missing_part_deposit = licence.getLastMissingPartDeposit()
-        deposit_date = missing_part_deposit and missing_part_deposit.getEventDate() or None
+        deposit_date = (
+            missing_part_deposit and missing_part_deposit.getEventDate() or None
+        )
         return deposit_date
 
 
@@ -158,9 +160,11 @@ class AskOpinionDate(StartDate):
         # case where we just pushed the 'ask_opinion' button but the date has
         # no been set yet.
         if not ask_date:
-            for wf_action in opinion_request.workflow_history['opinion_request_workflow']:
-                if wf_action['action'] == 'ask_opinion':
-                    ask_date = wf_action['time']
+            for wf_action in opinion_request.workflow_history[
+                "opinion_request_workflow"
+            ]:
+                if wf_action["action"] == "ask_opinion":
+                    ask_date = wf_action["time"]
 
         return ask_date
 

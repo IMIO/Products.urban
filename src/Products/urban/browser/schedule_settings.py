@@ -10,14 +10,15 @@ from z3c.form import field
 
 
 class ScheduleEditForm(RegistryEditForm):
-    """"""
+    """ """
+
     schema = IDueDateSettings
     label = _(u"Schedule alerts")
     description = _(u"""""")
 
     fields = field.Fields(IDueDateSettings)
 
-    @button.buttonAndHandler(_('Save'), name=None)
+    @button.buttonAndHandler(_("Save"), name=None)
     def handleSave(self, action):
         data, errors = self.extractData()
         if errors:
@@ -27,12 +28,9 @@ class ScheduleEditForm(RegistryEditForm):
         self.applyChanges(data)
         IStatusMessage(self.request).addStatusMessage(_(u"Changes saved"), "info")
 
-    @button.buttonAndHandler(_('Cancel'), name='cancel')
+    @button.buttonAndHandler(_("Cancel"), name="cancel")
     def handleCancel(self, action):
-        IStatusMessage(self.request).addStatusMessage(
-            _(u"Edit cancelled"),
-            "info"
-        )
+        IStatusMessage(self.request).addStatusMessage(_(u"Edit cancelled"), "info")
         self.request.response.redirect(
             "%s/%s" % (self.context.absolute_url(), self.control_panel_view)
         )

@@ -3,11 +3,11 @@ import logging
 
 from plone import api
 
-logger = logging.getLogger('urban: fix moved class')
+logger = logging.getLogger("urban: fix moved class")
 
 
 def set_new_class(obj, new_class_name):
-    module_name, class_name = new_class_name.rsplit('.', 1)
+    module_name, class_name = new_class_name.rsplit(".", 1)
     module = importlib.import_module(module_name)
     new_class = getattr(module, class_name)
 
@@ -48,16 +48,16 @@ def fix_labruyere_envclassthrees():
     folder = portal.urban.envclassthrees
 
     # in this case, the broken objects are not in the catalog, it's an easy way to find them
-    cat = api.portal.get_tool('portal_catalog')
-    path = {'query': '/'.join(folder.getPhysicalPath()), 'depth': 1}
+    cat = api.portal.get_tool("portal_catalog")
+    path = {"query": "/".join(folder.getPhysicalPath()), "depth": 1}
     brains = cat(path=path)
     working_ids = [brain.id for brain in brains]
     missing_ids = set(folder.objectIds()).difference(working_ids)
 
     for obj_id in sorted(missing_ids):
         obj = folder[obj_id]
-        logger.info('fixing & reindexing {} ...'.format(obj_id))
-        set_new_class(obj, 'Products.urban.content.licence.EnvClassThree.EnvClassThree')
+        logger.info("fixing & reindexing {} ...".format(obj_id))
+        set_new_class(obj, "Products.urban.content.licence.EnvClassThree.EnvClassThree")
         reindex_object(obj)
 
     logger.info("finished.")

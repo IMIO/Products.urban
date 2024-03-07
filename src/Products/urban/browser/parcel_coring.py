@@ -13,10 +13,10 @@ from Products.urban import services
 
 
 class CoringUtility(object):
-    fieldname = ''
-    vocabulary_name = ''
-    valuetype = 'list'
-    coring_attribute = u''
+    fieldname = ""
+    vocabulary_name = ""
+    valuetype = "list"
+    coring_attribute = u""
 
     def __init__(self, values, context):
         self.values = values
@@ -28,9 +28,9 @@ class CoringUtility(object):
     def _coring_values(self):
         values = []
         normalizer = getUtility(IIDNormalizer)
-        if self.values.get('attributes', []):
-            for attributes in self.values.get('attributes', []):
-                values.append(attributes['attributes'][self.coring_attribute])
+        if self.values.get("attributes", []):
+            for attributes in self.values.get("attributes", []):
+                values.append(attributes["attributes"][self.coring_attribute])
         return map(normalizer.normalize, values)
 
     def _get_terms(self, values):
@@ -41,7 +41,7 @@ class CoringUtility(object):
 
     @staticmethod
     def _to_str(values):
-        return [u', '.join(values)]
+        return [u", ".join(values)]
 
     def _to_boolean(self, values):
         terms = self._get_terms(values)
@@ -52,16 +52,16 @@ class CoringUtility(object):
         return [t.title for t in terms]
 
     def _convert_to_value(self, values):
-        method = getattr(self, '_to_{0}'.format(self.valuetype), None)
+        method = getattr(self, "_to_{0}".format(self.valuetype), None)
         if method:
             return method(values)
         return values
 
     def _display_values(self, values, terms):
-        if self.valuetype == 'str':
+        if self.valuetype == "str":
             return values
-        if self.valuetype == 'reference':
-            catalog = api.portal.get_tool('portal_catalog')
+        if self.valuetype == "reference":
+            catalog = api.portal.get_tool("portal_catalog")
             return [b.Title for b in catalog(UID=values)]
         return [t.title for t in terms]
 
@@ -72,9 +72,9 @@ class CoringUtility(object):
         values = self._convert_to_value(values)
         display_values = self._display_values(values, terms)
         return self.fieldname, {
-            'values': values,
-            'display_values': display_values,
-            'type': self.valuetype,
+            "values": values,
+            "display_values": display_values,
+            "type": self.valuetype,
         }
 
 
@@ -88,92 +88,92 @@ class CoringReferenceUtility(CoringUtility):
         values = self._convert_to_value(values)
         display_values = self._display_values(values, terms)
         return self.fieldname, {
-            'values': values,
-            'display_values': display_values,
-            'type': self.valuetype,
+            "values": values,
+            "display_values": display_values,
+            "type": self.valuetype,
         }
 
 
 class CoringSOLZone(CoringUtility):
-    fieldname = 'pcaZone'
-    vocabulary_name = 'urban.vocabulary.SOLZones'
-    valuetype = 'list'
-    coring_attribute = u'CODECARTO'
+    fieldname = "pcaZone"
+    vocabulary_name = "urban.vocabulary.SOLZones"
+    valuetype = "list"
+    coring_attribute = u"CODECARTO"
 
 
 class CoringSOLBoolean(CoringSOLZone):
-    fieldname = 'isInPCA'
-    vocabulary_name = 'urban.vocabulary.SOLZonesBoolean'
-    valuetype = 'boolean'
+    fieldname = "isInPCA"
+    vocabulary_name = "urban.vocabulary.SOLZonesBoolean"
+    valuetype = "boolean"
 
 
 class CoringProtectedBuilding(CoringUtility):
-    fieldname = 'protectedBuilding'
-    vocabulary_name = 'urban.vocabulary.ProtectedBuilding'
-    valuetype = 'list'
-    coring_attribute = u'CODECARTO'
+    fieldname = "protectedBuilding"
+    vocabulary_name = "urban.vocabulary.ProtectedBuilding"
+    valuetype = "list"
+    coring_attribute = u"CODECARTO"
 
 
 class CoringNatura2000(CoringUtility):
-    fieldname = 'natura_2000'
-    vocabulary_name = 'urban.vocabulary.Natura2000'
-    valuetype = 'list'
-    coring_attribute = u'CODE_SITE'
+    fieldname = "natura_2000"
+    vocabulary_name = "urban.vocabulary.Natura2000"
+    valuetype = "list"
+    coring_attribute = u"CODE_SITE"
 
 
 class CoringParcellings(CoringReferenceUtility):
-    fieldname = 'parcellings'
-    vocabulary_name = 'urban.vocabulary.Parcellings'
-    valuetype = 'reference'
-    coring_attribute = u'CODEUNIQUE'
+    fieldname = "parcellings"
+    vocabulary_name = "urban.vocabulary.Parcellings"
+    valuetype = "reference"
+    coring_attribute = u"CODEUNIQUE"
 
 
 class CoringParcellingsBoolean(CoringParcellings):
-    fieldname = 'isInSubdivision'
-    vocabulary_name = 'urban.vocabulary.Parcellings'
-    valuetype = 'boolean'
+    fieldname = "isInSubdivision"
+    vocabulary_name = "urban.vocabulary.Parcellings"
+    valuetype = "boolean"
 
     def _to_boolean(self, values):
         return [bool(values)]
 
 
 class CoringReparcellings(CoringUtility):
-    fieldname = 'reparcellingDetails'
-    vocabulary_name = 'urban.vocabulary.Reparcelling'
-    valuetype = 'str'
-    coring_attribute = u'CODECARTO'
+    fieldname = "reparcellingDetails"
+    vocabulary_name = "urban.vocabulary.Reparcelling"
+    valuetype = "str"
+    coring_attribute = u"CODECARTO"
 
     def _to_str(self, values):
         terms = self._get_terms(values)
-        return [u', '.join([t.title for t in terms])]
+        return [u", ".join([t.title for t in terms])]
 
 
 class CoringNoteworthyTrees(CoringUtility):
-    fieldname = 'noteworthyTrees'
-    vocabulary_name = 'urban.vocabulary.NoteworthyTrees'
-    valuetype = 'list'
-    coring_attribute = u'SITEAR'
+    fieldname = "noteworthyTrees"
+    vocabulary_name = "urban.vocabulary.NoteworthyTrees"
+    valuetype = "list"
+    coring_attribute = u"SITEAR"
 
 
 class CoringFolderZone(CoringUtility):
-    fieldname = 'folderZone'
-    vocabulary_name = 'urban.vocabulary.AreaPlan'
-    valuetype = 'list'
-    coring_attribute = u'AFFECT'
+    fieldname = "folderZone"
+    vocabulary_name = "urban.vocabulary.AreaPlan"
+    valuetype = "list"
+    coring_attribute = u"AFFECT"
 
 
 class CoringFolderZonePIP(CoringUtility):
-    fieldname = 'folderZone'
-    vocabulary_name = 'urban.vocabulary.AreaPlan'
-    valuetype = 'list'
-    coring_attribute = u'STYPE'
+    fieldname = "folderZone"
+    vocabulary_name = "urban.vocabulary.AreaPlan"
+    valuetype = "list"
+    coring_attribute = u"STYPE"
 
 
 class CoringCatchmentArea(CoringUtility):
-    fieldname = 'catchmentArea'
-    vocabulary_name = 'urban.vocabulary.CatchmentArea'
-    valuetype = 'list'
-    coring_attribute = u'TYPE_CODE'
+    fieldname = "catchmentArea"
+    vocabulary_name = "urban.vocabulary.CatchmentArea"
+    valuetype = "list"
+    coring_attribute = u"TYPE_CODE"
 
 
 MATCH_CORING = {
@@ -199,20 +199,19 @@ MATCH_CORING = {
 
 
 class ParcelCoringView(BrowserView):
-    """
-    """
+    """ """
 
     def __init__(self, context, request):
-        """
-        """
+        """ """
         super(ParcelCoringView, self).__init__(context, request)
-        self.catalog = api.portal.get_tool('portal_catalog')
-        self.portal_urban = api.portal.get_tool('portal_urban')
-        self.helper = self.context.unrestrictedTraverse('@@document_generation_helper_view')
+        self.catalog = api.portal.get_tool("portal_catalog")
+        self.portal_urban = api.portal.get_tool("portal_urban")
+        self.helper = self.context.unrestrictedTraverse(
+            "@@document_generation_helper_view"
+        )
 
     def coring_result(self):
-        """
-        """
+        """ """
         status, data = self.core()
         if status != 200:
             return status, data
@@ -220,15 +219,14 @@ class ParcelCoringView(BrowserView):
         return status, fields_to_update
 
     def get_fields_to_update(self, coring_json):
-        """
-        """
+        """ """
         fields_to_update = []
         fields = {}
         for layer in coring_json:
-            print layer['layer_id']
-            if layer.get('layer_id') not in MATCH_CORING:
+            print layer["layer_id"]
+            if layer.get("layer_id") not in MATCH_CORING:
                 continue
-            classes = MATCH_CORING[layer['layer_id']]
+            classes = MATCH_CORING[layer["layer_id"]]
             if not isinstance(classes, collections.Iterable):
                 classes = [classes]
             for cls in classes:
@@ -242,13 +240,16 @@ class ParcelCoringView(BrowserView):
             if not context_field:
                 continue
             new_value, display_values = self._format_values(field_values)
-            fields_to_update.append({
-                'field': key,
-                'label': getattr(context_field.widget, 'label_msgid',
-                                    context_field.widget.label),
-                'new_value_display': ', '.join(display_values),
-                'new_value': new_value and json.dumps(new_value) or '',
-            })
+            fields_to_update.append(
+                {
+                    "field": key,
+                    "label": getattr(
+                        context_field.widget, "label_msgid", context_field.widget.label
+                    ),
+                    "new_value_display": ", ".join(display_values),
+                    "new_value": new_value and json.dumps(new_value) or "",
+                }
+            )
         return fields_to_update
 
     @staticmethod
@@ -260,34 +261,35 @@ class ParcelCoringView(BrowserView):
     @staticmethod
     def _cleanup_for_comparison(value):
         """cleanup value for comparison"""
-        if isinstance(value, collections.Iterable) and not isinstance(value, basestring):
+        if isinstance(value, collections.Iterable) and not isinstance(
+            value, basestring
+        ):
             value = [e for e in value if e]
         else:
             value = [value]
-        tags = ('<p>', '</p>', '<b>', '</b>', '<strong>', '</strong>')
+        tags = ("<p>", "</p>", "<b>", "</b>", "<strong>", "</strong>")
         result = []
         for v in value:
             for tag in tags:
                 if isinstance(v, basestring):
-                    v = v.replace(tag, '')
+                    v = v.replace(tag, "")
             result.append(v)
         return result
 
     def _format_values(self, field_values):
         values = []
-        map(values.extend, [e['values'] for e in field_values])
-        if field_values[0]['type'] == 'boolean':
+        map(values.extend, [e["values"] for e in field_values])
+        if field_values[0]["type"] == "boolean":
             values = True in values
-            return values, [{True: u'Oui', False: u'Non'}.get(values)]
+            return values, [{True: u"Oui", False: u"Non"}.get(values)]
         display_values = []
-        map(display_values.extend, [e['display_values'] for e in field_values])
-        if field_values[0]['type'] == 'str':
-            return ', '.join(values), display_values
+        map(display_values.extend, [e["display_values"] for e in field_values])
+        if field_values[0]["type"] == "str":
+            return ", ".join(values), display_values
         return tuple(values), display_values
 
     def core(self, coring_type=None):
-        """
-        """
+        """ """
         parcels = self.context.getOfficialParcels()
         cadastre = services.cadastre.new_session()
         parcels_wkt = cadastre.query_parcels_wkt(parcels)
@@ -295,16 +297,13 @@ class ParcelCoringView(BrowserView):
 
         parcel_coring = services.parcel_coring
         coring_response = parcel_coring.get_coring(
-            parcels_wkt,
-            self.request.get('st', coring_type)
+            parcels_wkt, self.request.get("st", coring_type)
         )
 
         status = coring_response.status_code
         if status != 200:
-            msg = u'<h1>{status}</h1><p>{error}</p><p>polygon:</p><p>{polygon}</p>'.format(
-                status=status,
-                error=coring_response.text,
-                polygon=parcels_wkt
+            msg = u"<h1>{status}</h1><p>{error}</p><p>polygon:</p><p>{polygon}</p>".format(
+                status=status, error=coring_response.text, polygon=parcels_wkt
             )
             return status, msg
 
@@ -312,15 +311,13 @@ class ParcelCoringView(BrowserView):
 
 
 class UpdateLicenceForm(BrowserView):
-    """
-    """
+    """ """
 
     def __call__(self):
-        """
-        """
+        """ """
         for field_name, value in self.request.form.iteritems():
             field = self.context.getField(field_name)
             value = json.loads(value)
             field.getMutator(self.context)(value)
 
-        self.request.RESPONSE.redirect(self.context.absolute_url() + '/view')
+        self.request.RESPONSE.redirect(self.context.absolute_url() + "/view")

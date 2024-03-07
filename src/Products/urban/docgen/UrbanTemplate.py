@@ -14,7 +14,8 @@ from zope.interface import implements
 from Products.urban.config import URBAN_EVENT_TYPES
 
 import logging
-logger = logging.getLogger('Products.urban: UrbanTemplate')
+
+logger = logging.getLogger("Products.urban: UrbanTemplate")
 
 
 class IUrbanTemplate(IConfigurablePODTemplate):
@@ -22,18 +23,20 @@ class IUrbanTemplate(IConfigurablePODTemplate):
     UrbanTemplate dexterity schema.
     """
 
-    form.widget('pod_portal_types', SelectWidget, multiple='multiple', size=15)
+    form.widget("pod_portal_types", SelectWidget, multiple="multiple", size=15)
     pod_portal_types = schema.List(
-        title=_(u'Allowed portal types'),
-        description=_(u'Select for which content types the template will be available.'),
-        value_type=schema.Choice(source='collective.documentgenerator.PortalTypes'),
+        title=_(u"Allowed portal types"),
+        description=_(
+            u"Select for which content types the template will be available."
+        ),
+        value_type=schema.Choice(source="collective.documentgenerator.PortalTypes"),
         required=False,
         default=URBAN_EVENT_TYPES,
     )
 
     # remove global styles from urban
-    form.omitted('style_template')
-    form.omitted('pod_portal_types')
+    form.omitted("style_template")
+    form.omitted("pod_portal_types")
 
 
 class UrbanTemplate(ConfigurablePODTemplate):

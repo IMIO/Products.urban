@@ -14,18 +14,27 @@ def setInterface(contact, event):
 
 
 def updateLicenceTitle(contact, event):
-    #only update parent's title if an applicant or a proprietary is added
+    # only update parent's title if an applicant or a proprietary is added
     if not contact.portal_type in APPLICANTS_TYPES:
         return
     parent = contact.aq_inner.aq_parent
     if parent.portal_type in URBAN_TYPES:
-        parent.reindexObject(idxs=['applicantInfosIndex',])
+        parent.reindexObject(
+            idxs=[
+                "applicantInfosIndex",
+            ]
+        )
         event = ObjectModifiedEvent(parent)
         notify(event)
 
 
 def sortByAlphabeticalOrder(contact, event):
-    if not contact.portal_type in ['Notary', 'Architect', 'Geometrician', 'FolderManager']:
+    if not contact.portal_type in [
+        "Notary",
+        "Architect",
+        "Geometrician",
+        "FolderManager",
+    ]:
         return
     container = contact.aq_inner.aq_parent
     name = contact.getName1() + contact.getName2()

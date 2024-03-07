@@ -26,7 +26,7 @@
 
 __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEULETTE
 <stephan.geulette@uvcw.be>, Jean-Michel Abe <jm.abe@la-bruyere.be>"""
-__docformat__ = 'plaintext'
+__docformat__ = "plaintext"
 
 
 ##code-section init-module-header #fill in your manual code here
@@ -40,4 +40,3 @@ __docformat__ = 'plaintext'
 
 ##code-section init-module-footer #fill in your manual code here
 ##/code-section init-module-footer
-

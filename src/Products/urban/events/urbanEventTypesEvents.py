@@ -12,26 +12,25 @@ def updateKeyEvent(event_config, event):
     is_key_event = event_config.getIsKeyEvent()
     # make sure to not trigger the reindex when setting the annotation for
     # the first time
-    previous_key_event_value = annotations.get('urban.is_key_event', is_key_event)
-    annotations['urban.is_key_event'] = is_key_event
+    previous_key_event_value = annotations.get("urban.is_key_event", is_key_event)
+    annotations["urban.is_key_event"] = is_key_event
     if previous_key_event_value == is_key_event:
         return
 
     for urban_event in event_config.getLinkedUrbanEvents():
         licence = urban_event.aq_parent
-        licence.reindexObject(['last_key_event'])
+        licence.reindexObject(["last_key_event"])
 
 
 def updateEventType(event_config, event):
-    """
-    """
+    """ """
     annotations = IAnnotations(event_config)
-    previous_eventconfig_interface = annotations.get('urban.eventtype', set([]))
+    previous_eventconfig_interface = annotations.get("urban.eventtype", set([]))
     new_eventconfig_interface = set(event_config.getEventType())
     if previous_eventconfig_interface == new_eventconfig_interface:
         return
 
-    annotations['urban.eventtype'] = set(new_eventconfig_interface)
+    annotations["urban.eventtype"] = set(new_eventconfig_interface)
 
     for urban_event in event_config.getLinkedUrbanEvents():
         if interfaces.IUrbanEvent.providedBy(urban_event):
@@ -47,16 +46,17 @@ def updateEventType(event_config, event):
 
 
 def forceEventTypeCollege(event_config, event):
-    """
-    """
+    """ """
 
-    college_event_interfaces = set([
-        interfaces.ISimpleCollegeEvent.__identifier__,
-        interfaces.IEnvironmentSimpleCollegeEvent.__identifier__,
-    ])
+    college_event_interfaces = set(
+        [
+            interfaces.ISimpleCollegeEvent.__identifier__,
+            interfaces.IEnvironmentSimpleCollegeEvent.__identifier__,
+        ]
+    )
     default_college_interface = interfaces.ISimpleCollegeEvent.__identifier__
 
-    if event_config.getEventPortalType().endswith('College'):
+    if event_config.getEventPortalType().endswith("College"):
         selected_interfaces = event_config.getEventType()
         if not college_event_interfaces.intersection(set(selected_interfaces)):
             new_marker_interfaces = [default_college_interface]

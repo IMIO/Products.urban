@@ -2,9 +2,9 @@ from plone import api
 
 
 def count():
-    cat = api.portal.get_tool('portal_catalog')
+    cat = api.portal.get_tool("portal_catalog")
 
-    all_streets = set([brain.getObject() for brain in cat(portal_type='Street')])
+    all_streets = set([brain.getObject() for brain in cat(portal_type="Street")])
     already_checked = set([])
     result = {}
     referenced_licences = {}
@@ -12,9 +12,13 @@ def count():
     for street in all_streets:
         if street not in already_checked:
             street_title = street.getStreetName()
-            doubles_street = cat(street_name=street_title, portal_type='Street')
-            doubles_street = [s.getObject() for s in doubles_street if s.UID != street.UID()]
-            doubles_street = [s for s in doubles_street if str_cpm(s.Title(), street.Title())]
+            doubles_street = cat(street_name=street_title, portal_type="Street")
+            doubles_street = [
+                s.getObject() for s in doubles_street if s.UID != street.UID()
+            ]
+            doubles_street = [
+                s for s in doubles_street if str_cpm(s.Title(), street.Title())
+            ]
             if doubles_street and street_title:
                 doubles = doubles_street + [street]
                 print street_title, len(doubles)
@@ -33,11 +37,11 @@ def count():
 
 
 def str_cpm(string_1, string_2):
-    return string_1.replace(' ', '') == string_2.replace(' ', '')
+    return string_1.replace(" ", "") == string_2.replace(" ", "")
 
 
 def get_licences(streets):
-    cat = api.portal.get_tool('portal_catalog')
+    cat = api.portal.get_tool("portal_catalog")
     referenced_licences = {}
 
     for street in streets:
@@ -45,7 +49,8 @@ def get_licences(streets):
         if licences:
             referenced_licences[street] = licences
             msg = "'{}' used by {}".format(
-                street.Title(), ', '.join(["'" + l.getReference() + "'" for l in licences])
+                street.Title(),
+                ", ".join(["'" + l.getReference() + "'" for l in licences]),
             )
             print msg
     return referenced_licences

@@ -9,11 +9,11 @@ from zope.component import IFactory
 
 class UrbanEventFactory(grok.GlobalUtility):
     grok.implements(IFactory)
-    grok.name('UrbanEvent')
+    grok.name("UrbanEvent")
 
-    def __call__(self, licence, event_config, id='', **kwargs):
-        portal_urban = api.portal.get_tool('portal_urban')
-        catalog = api.portal.get_tool('portal_catalog')
+    def __call__(self, licence, event_config, id="", **kwargs):
+        portal_urban = api.portal.get_tool("portal_urban")
+        catalog = api.portal.get_tool("portal_catalog")
 
         # is event_config and UID?
         if type(event_config) is str:
@@ -26,12 +26,10 @@ class UrbanEventFactory(grok.GlobalUtility):
             event_config = getattr(eventconfigs, event_config, event_config)
 
         event_config.checkCreationInLicence(licence)
-        portal_type = event_config.getEventPortalType() or 'UrbanEvent'
+        portal_type = event_config.getEventPortalType() or "UrbanEvent"
 
         urban_event_id = licence.invokeFactory(
-            portal_type,
-            id=id or portal_urban.generateUniqueId(portal_type),
-            **kwargs
+            portal_type, id=id or portal_urban.generateUniqueId(portal_type), **kwargs
         )
         urban_event = getattr(licence, urban_event_id)
         # 'urbaneventconfigs' is sometimes not initialized correctly with
@@ -46,18 +44,16 @@ class UrbanEventFactory(grok.GlobalUtility):
 
 class BuildLicenceFactory(grok.GlobalUtility):
     grok.implements(IFactory)
-    grok.name('BuildLicence')
+    grok.name("BuildLicence")
 
     def __call__(self, context, licenceId=None, **kwargs):
         portal = api.portal.getSite()
         urban = portal.urban
         buildLicences = urban.buildlicences
         if licenceId is None:
-            urbanTool = api.portal.get_tool('portal_urban')
-            licenceId = urbanTool.generateUniqueId('BuildLicence')
-        licenceId = buildLicences.invokeFactory("BuildLicence",
-                                                id=licenceId,
-                                                **kwargs)
+            urbanTool = api.portal.get_tool("portal_urban")
+            licenceId = urbanTool.generateUniqueId("BuildLicence")
+        licenceId = buildLicences.invokeFactory("BuildLicence", id=licenceId, **kwargs)
         licence = getattr(buildLicences, licenceId)
         licence._at_rename_after_creation = False
         licence.processForm()

@@ -11,9 +11,20 @@ class GigService(MySQLService):
     """
     Service specific to gig database, contain queries
     """
-    def __init__(self, dialect='mysql+pymysql', user='GIG_TRANS', host='', db_name='sigped', password='', timeout=''):
+
+    def __init__(
+        self,
+        dialect="mysql+pymysql",
+        user="GIG_TRANS",
+        host="",
+        db_name="sigped",
+        password="",
+        timeout="",
+    ):
         password = password or user
-        super(GigService, self).__init__(dialect, user, host, db_name, password, timeout)
+        super(GigService, self).__init__(
+            dialect, user, host, db_name, password, timeout
+        )
 
 
 class GigSession(MySQLSession):
@@ -25,21 +36,24 @@ class GigSession(MySQLSession):
         """
         Do the insert query of the parcel capakeys into gig db.
         """
-        parcels_keys = [c.replace('/', '') for c in capakeys]
+        parcels_keys = [c.replace("/", "") for c in capakeys]
         mail_record = api.portal.get_registry_record(
-                'Products.urban.browser.gig_coring_settings.IGigCoringLink.mail_mapping')
+            "Products.urban.browser.gig_coring_settings.IGigCoringLink.mail_mapping"
+        )
         user_current = api.user.get_current().id
-        user_mail = ''
+        user_mail = ""
         for the_user in mail_record:
-            if the_user.get('user_id') == user_current:
-                user_mail = the_user.get('mail_gig')
+            if the_user.get("user_id") == user_current:
+                user_mail = the_user.get("mail_gig")
         if not user_mail:
-            user_mail = api.user.get_current().getProperty('email')
-        map_cfg = ExternalConfig('urbanmap')
-        nis = map_cfg.urbanmap['nis']
+            user_mail = api.user.get_current().getProperty("email")
+        map_cfg = ExternalConfig("urbanmap")
+        nis = map_cfg.urbanmap["nis"]
         today = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
         for key in parcels_keys:
-            new_rec = "INSERT INTO GIG_TRANSIT (NUM_SIG, user_id, copy_time, work_id, INS) VALUES ('{cap}', '{user}', '{today}', 1, '{nis}');".format(cap=key, user=user_mail, today=today, nis=nis)
+            new_rec = "INSERT INTO GIG_TRANSIT (NUM_SIG, user_id, copy_time, work_id, INS) VALUES ('{cap}', '{user}', '{today}', 1, '{nis}');".format(
+                cap=key, user=user_mail, today=today, nis=nis
+            )
             query = self.session.execute(new_rec)
         self.session.commit()

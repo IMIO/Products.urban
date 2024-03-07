@@ -18,10 +18,10 @@ class ParcelsInfo(ParcelRecordsView):
         """
         Find licences with parcel paramaters
         """
-        catalog = api.portal.get_tool('portal_catalog')
+        catalog = api.portal.get_tool("portal_catalog")
         licence_brains = catalog(
             object_provides=IGenericLicence.__identifier__,
-            parcelInfosIndex=parcel.capakey
+            parcelInfosIndex=parcel.capakey,
         )
         return licence_brains
 

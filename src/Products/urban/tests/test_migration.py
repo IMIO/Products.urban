@@ -13,15 +13,15 @@ class TestDefaultValues(unittest.TestCase):
     layer = URBAN_TESTS_CONFIG
 
     def setUp(self):
-        portal = self.layer['portal']
+        portal = self.layer["portal"]
         self.portal_urban = portal.portal_urban
         self.site = portal
         self.buildlicences = portal.urban.codt_buildlicences
         login(portal, self.layer.default_user)
 
-    def createNewLicence(self, id='newlicence'):
+    def createNewLicence(self, id="newlicence"):
         buildlicences = self.buildlicences
-        buildlicences.invokeFactory('CODT_BuildLicence', id=id, title='blabla')
+        buildlicences.invokeFactory("CODT_BuildLicence", id=id, title="blabla")
         newlicence = getattr(buildlicences, id)
         return newlicence
 
@@ -30,12 +30,14 @@ class TestDefaultValues(unittest.TestCase):
         disable_licence_default_values()
         licence_config = self.site.portal_urban.codt_buildlicence
         # set the default text value fotr the fdescription field
-        default_text = '<p>Bla bla</p>'
-        licence_config.textDefaultValues = ({'text': default_text, 'fieldname': 'description'}, )
+        default_text = "<p>Bla bla</p>"
+        licence_config.textDefaultValues = (
+            {"text": default_text, "fieldname": "description"},
+        )
         # any new licence should have this text as value for the description field
         newlicence = self.createNewLicence()
-        self.assertEquals(newlicence.Description(), '')
+        self.assertEquals(newlicence.Description(), "")
         # re-enable default values
         restore_licence_default_values()
-        newlicence = self.createNewLicence(id='newlicence-2')
+        newlicence = self.createNewLicence(id="newlicence-2")
         self.assertEquals(newlicence.Description(), default_text)

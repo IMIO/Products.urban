@@ -11,7 +11,7 @@
 
 __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEULETTE
 <stephan.geulette@uvcw.be>, Jean-Michel Abe <jm.abe@la-bruyere.be>"""
-__docformat__ = 'plaintext'
+__docformat__ = "plaintext"
 
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
@@ -24,36 +24,35 @@ from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
 from Contact import Contact
+
 ##/code-section module-header
 
-schema = Schema((
-
-
-),
+schema = Schema(
+    (),
 )
 
 ##code-section after-local-schema #fill in your manual code here
 ##/code-section after-local-schema
 
-Recipient_schema = Contact.schema.copy() + \
-    schema.copy()
+Recipient_schema = Contact.schema.copy() + schema.copy()
 
 ##code-section after-schema #fill in your manual code here
 ##/code-section after-schema
 
+
 class Recipient(BaseContent, Contact, BrowserDefaultMixin):
-    """
-    """
+    """ """
+
     security = ClassSecurityInfo()
     implements(interfaces.IRecipient)
 
-    meta_type = 'Recipient'
+    meta_type = "Recipient"
     _at_rename_after_creation = True
 
     schema = Recipient_schema
 
     ##code-section class-header #fill in your manual code here
-    del schema['title']
+    del schema["title"]
     ##/code-section class-header
 
     # Methods
@@ -64,10 +63,8 @@ class Recipient(BaseContent, Contact, BrowserDefaultMixin):
         return self.getName1() + " " + self.getName2()
 
 
-
 registerType(Recipient, PROJECTNAME)
 # end of class Recipient
 
 ##code-section module-footer #fill in your manual code here
 ##/code-section module-footer
-

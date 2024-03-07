@@ -13,14 +13,13 @@ from zope.lifecycleevent import ObjectModifiedEvent
 
 
 class CheckTasks(TaskCron):
-
     def execute(self):
-        catalog = api.portal.get_tool('portal_catalog')
+        catalog = api.portal.get_tool("portal_catalog")
         containers_already_checked = set()
 
         tasks_brains = catalog(
             object_provides=ITaskToCheckDaily.__identifier__,
-            review_state=states_by_status[STARTED]
+            review_state=states_by_status[STARTED],
         )
         for brain in tasks_brains:
             task = brain.getObject()

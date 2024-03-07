@@ -28,8 +28,7 @@ class ParcelsWarning(WarningCondition):
 
 
 class BoundTicketSettlementEventDone(WarningCondition):
-    """
-    """
+    """ """
 
     def evaluate(self):
         bound_tickets = self.licence.get_bound_tickets()
@@ -40,6 +39,9 @@ class BoundTicketSettlementEventDone(WarningCondition):
         if bound_tickets:
             for ticket in bound_tickets:
                 settlement_event = ticket.getLastSettlement()
-                if settlement_event and api.content.get_state(settlement_event) == 'closed':
+                if (
+                    settlement_event
+                    and api.content.get_state(settlement_event) == "closed"
+                ):
                     return True
         return False

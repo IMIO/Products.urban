@@ -8,8 +8,8 @@ from imio.schedule.utils import get_task_configs
 
 class UrbanConfirmTransitionView(ConfirmTransitionView):
     """
-      This manage the overlay popup displayed when a transition needs to be confirmed.
-      For other transitions, this views is also used but the confirmation popup is not shown.
+    This manage the overlay popup displayed when a transition needs to be confirmed.
+    For other transitions, this views is also used but the confirmation popup is not shown.
     """
 
     def has_open_tasks(self):

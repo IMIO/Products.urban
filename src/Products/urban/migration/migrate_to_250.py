@@ -3,7 +3,9 @@
 from Acquisition import aq_base
 
 from collective.documentgenerator.content.pod_template import IConfigurablePODTemplate
-from collective.iconifieddocumentactions.upgrades import move_to_collective_iconifieddocumentactions
+from collective.iconifieddocumentactions.upgrades import (
+    move_to_collective_iconifieddocumentactions,
+)
 from collective.noindexing import patches
 
 from imio.schedule.content.object_factories import MacroCreationConditionObject
@@ -36,13 +38,17 @@ from plone import api
 
 import logging
 
-logger = logging.getLogger('urban: migrations')
+logger = logging.getLogger("urban: migrations")
 
 
 def clear_communesplone_iconifiedactions_layer(context):
-    logger = logging.getLogger('urban: clear communesplone.iconifieddocumentactions layer')
+    logger = logging.getLogger(
+        "urban: clear communesplone.iconifieddocumentactions layer"
+    )
     logger.info("starting migration step")
-    if queryUtility(ILocalBrowserLayerType, name='communesplone.iconified_document_actions.layer'):
+    if queryUtility(
+        ILocalBrowserLayerType, name="communesplone.iconified_document_actions.layer"
+    ):
         move_to_collective_iconifieddocumentactions(context)
         logger.info("cleared communesplone.iconifieddocumentactions layer")
         logger.info("rebuilding catalog...")
@@ -53,42 +59,42 @@ def migrate_codt_buildlicences_schedule(context):
     """
     Disbale recurrency for task 'deposit'
     """
-    logger = logging.getLogger('urban: migrate codt buildlicences schedule')
+    logger = logging.getLogger("urban: migrate codt buildlicences schedule")
     logger.info("starting migration step")
 
-    portal_urban = api.portal.get_tool('portal_urban')
+    portal_urban = api.portal.get_tool("portal_urban")
     schedule = portal_urban.codt_buildlicence.schedule
-    if hasattr(schedule.incomplet2, 'notify_refused'):
+    if hasattr(schedule.incomplet2, "notify_refused"):
         schedule.incomplet2.notify_refused.ending_states = ()
-    if hasattr(schedule.reception, 'deposit'):
+    if hasattr(schedule.reception, "deposit"):
         schedule.reception.deposit.ending_states = ()
         schedule.reception.deposit.recurrence_states = ()
         schedule.reception.deposit.activate_recurrency = False
-    if 'deposit' not in (schedule.incomplet.attente_complements.ending_states or ()):
+    if "deposit" not in (schedule.incomplet.attente_complements.ending_states or ()):
         old_states = schedule.incomplet.attente_complements.ending_states or ()
-        new_states = tuple(old_states) + ('deposit',)
+        new_states = tuple(old_states) + ("deposit",)
         schedule.incomplet.attente_complements.ending_states = new_states
-    if 'complete' not in (schedule.reception.ending_states or ()):
+    if "complete" not in (schedule.reception.ending_states or ()):
         old_states = schedule.reception.ending_states or ()
-        new_states = tuple(old_states) + ('deposit',)
+        new_states = tuple(old_states) + ("deposit",)
         schedule.reception.ending_states = new_states
-    if 'incomplete' not in (schedule.reception.ending_states or ()):
+    if "incomplete" not in (schedule.reception.ending_states or ()):
         old_states = schedule.reception.ending_states or ()
-        new_states = tuple(old_states) + ('incomplete',)
+        new_states = tuple(old_states) + ("incomplete",)
         schedule.reception.ending_states = new_states
 
     logger.info("migration step done!")
 
 
 def contentmigrationLogger(oldObject, **kwargs):
-    """ Generic logger method to be used with CustomQueryWalker """
-    kwargs['logger'].info('/'.join(kwargs['purl'].getRelativeContentPath(oldObject)))
+    """Generic logger method to be used with CustomQueryWalker"""
+    kwargs["logger"].info("/".join(kwargs["purl"].getRelativeContentPath(oldObject)))
     return True
 
 
 class CODT_NotaryLetterMigrator(InplaceATFolderMigrator):
-    """
-    """
+    """ """
+
     walker = CustomQueryWalker
     src_meta_type = "UrbanCertificateBase"
     src_portal_type = "CODT_NotaryLetter"
@@ -103,7 +109,9 @@ def migrate_CODT_NotaryLetter_to_CODT_UrbanCertificateBase(context):
     """
     Base class of CODT_NotaryLetter is now CODT_UrbanCertificateBase
     """
-    logger = logging.getLogger('urban: migrate CODT_NotaryLetter meta type to CODT_UrbanCertificateBase ->')
+    logger = logging.getLogger(
+        "urban: migrate CODT_NotaryLetter meta type to CODT_UrbanCertificateBase ->"
+    )
     logger.info("starting migration step")
 
     migrator = CODT_NotaryLetterMigrator
@@ -115,11 +123,11 @@ def migrate_CODT_NotaryLetter_to_CODT_UrbanCertificateBase(context):
     patches.apply()
 
     # Run the migrations
-    folder_path = '/'.join(portal.urban.codt_notaryletters.getPhysicalPath())
+    folder_path = "/".join(portal.urban.codt_notaryletters.getPhysicalPath())
     walker = migrator.walker(
         portal,
         migrator,
-        query={'path': folder_path},
+        query={"path": folder_path},
         callBefore=contentmigrationLogger,
         logger=logger,
         purl=portal.portal_url,
@@ -140,8 +148,8 @@ def migrate_CODT_NotaryLetter_to_CODT_UrbanCertificateBase(context):
 
 
 class CODT_UrbanCertificateOneMigrator(InplaceATFolderMigrator):
-    """
-    """
+    """ """
+
     walker = CustomQueryWalker
     src_meta_type = "UrbanCertificateBase"
     src_portal_type = "CODT_UrbanCertificateOne"
@@ -156,7 +164,9 @@ def migrate_CODT_UrbanCertificateOne_to_CODT_UrbanCertificateBase(context):
     """
     Base class of CODT_NotaryLetter is now CODT_UrbanCertificateBase
     """
-    logger = logging.getLogger('urban: migrate CODT_UrbanCertificateOne meta type to CODT_UrbanCertificateBase ->')
+    logger = logging.getLogger(
+        "urban: migrate CODT_UrbanCertificateOne meta type to CODT_UrbanCertificateBase ->"
+    )
     logger.info("starting migration step")
 
     migrator = CODT_UrbanCertificateOneMigrator
@@ -168,11 +178,11 @@ def migrate_CODT_UrbanCertificateOne_to_CODT_UrbanCertificateBase(context):
     patches.apply()
 
     # Run the migrations
-    folder_path = '/'.join(portal.urban.codt_urbancertificateones.getPhysicalPath())
+    folder_path = "/".join(portal.urban.codt_urbancertificateones.getPhysicalPath())
     walker = migrator.walker(
         portal,
         migrator,
-        query={'path': folder_path},
+        query={"path": folder_path},
         callBefore=contentmigrationLogger,
         logger=logger,
         purl=portal.portal_url,
@@ -193,8 +203,8 @@ def migrate_CODT_UrbanCertificateOne_to_CODT_UrbanCertificateBase(context):
 
 
 class CODT_UniqueLicenceInquiryMigrator(InplaceATFolderMigrator):
-    """
-    """
+    """ """
+
     walker = CustomQueryWalker
     src_meta_type = "Inquiry"
     src_portal_type = "Inquiry"
@@ -209,7 +219,9 @@ def migrate_Env_Inquiry_to_CODT_UniquelicenceInquiry(context):
     """
     Migrate env licences Inquiry to CODT_UniquelicenceInquiry.
     """
-    logger = logging.getLogger('urban: migrate Inquiry meta type to CODT_UniquelicenceInquiry ->')
+    logger = logging.getLogger(
+        "urban: migrate Inquiry meta type to CODT_UniquelicenceInquiry ->"
+    )
     logger.info("starting migration step")
 
     migrator = CODT_UniqueLicenceInquiryMigrator
@@ -221,11 +233,11 @@ def migrate_Env_Inquiry_to_CODT_UniquelicenceInquiry(context):
     patches.apply()
 
     # Run the migrations
-    folder_path = '/'.join(portal.urban.envclassones.getPhysicalPath())
+    folder_path = "/".join(portal.urban.envclassones.getPhysicalPath())
     walker = migrator.walker(
         portal,
         migrator,
-        query={'path': folder_path},
+        query={"path": folder_path},
         callBefore=contentmigrationLogger,
         logger=logger,
         purl=portal.portal_url,
@@ -237,11 +249,11 @@ def migrate_Env_Inquiry_to_CODT_UniquelicenceInquiry(context):
     # next use of CustomQueryWalker
     walker.__class__.additionalQuery = {}
 
-    folder_path = '/'.join(portal.urban.envclasstwos.getPhysicalPath())
+    folder_path = "/".join(portal.urban.envclasstwos.getPhysicalPath())
     walker = migrator.walker(
         portal,
         migrator,
-        query={'path': folder_path},
+        query={"path": folder_path},
         callBefore=contentmigrationLogger,
         logger=logger,
         purl=portal.portal_url,
@@ -262,101 +274,118 @@ def migrate_Env_Inquiry_to_CODT_UniquelicenceInquiry(context):
 
 
 def migrate_CODT_UrbanCertificateBase_add_permissions(context):
-    """
-    """
-    logger = logging.getLogger('urban: migrate CODT_UrbanCertificateBase add permission')
+    """ """
+    logger = logging.getLogger(
+        "urban: migrate CODT_UrbanCertificateBase add permission"
+    )
     logger.info("starting migration step")
 
     portal = api.portal.get()
     for urban_type in URBAN_TYPES:
         licence_folder_id = getLicenceFolderId(urban_type)
         licence_folder = getattr(portal.urban, licence_folder_id)
-        if urban_type in ['CODT_UrbanCertificateOne', 'CODT_NotaryLetter', ]:
+        if urban_type in [
+            "CODT_UrbanCertificateOne",
+            "CODT_NotaryLetter",
+        ]:
             licence_folder.manage_permission(
-                'urban: Add CODT_UrbanCertificateBase',
-                ['Manager', 'Contributor', ],
-                acquire=0
+                "urban: Add CODT_UrbanCertificateBase",
+                [
+                    "Manager",
+                    "Contributor",
+                ],
+                acquire=0,
             )
 
     logger.info("migration step done!")
 
 
 def migrate_opinion_request_TAL_expression(context):
-    """
-    """
-    logger = logging.getLogger('urban: migrate opinion request TAL expression')
+    """ """
+    logger = logging.getLogger("urban: migrate opinion request TAL expression")
     logger.info("starting migration step")
 
-    catalog = api.portal.get_tool('portal_catalog')
-    opinion_request_eventtypes = [b.getObject() for b in catalog(portal_type='OpinionRequestEventType')]
+    catalog = api.portal.get_tool("portal_catalog")
+    opinion_request_eventtypes = [
+        b.getObject() for b in catalog(portal_type="OpinionRequestEventType")
+    ]
     for opinion_request_eventtype in opinion_request_eventtypes:
         if opinion_request_eventtype.getTALCondition().strip():
-            opinion_request_eventtype.setTALCondition("python: event.mayAddOpinionRequestEvent(here)")
-            logger.info("migrated TAL condition of {}".format(opinion_request_eventtype))
+            opinion_request_eventtype.setTALCondition(
+                "python: event.mayAddOpinionRequestEvent(here)"
+            )
+            logger.info(
+                "migrated TAL condition of {}".format(opinion_request_eventtype)
+            )
 
     logger.info("migration step done!")
 
 
 def migrate_report_and_remove_urbandelay_portal_type(context):
-    """
-    """
-    logger = logging.getLogger('urban: report_and_remove_urbandelay_portal_type')
+    """ """
+    logger = logging.getLogger("urban: report_and_remove_urbandelay_portal_type")
     logger.info("starting migration step")
-    clean_obsolete_portal_type(portal_type_to_remove='UrbanDelay')
+    clean_obsolete_portal_type(portal_type_to_remove="UrbanDelay")
     logger.info("migration step done!")
 
 
 def migrate_default_states_to_close_tasks(context):
-    logger = logging.getLogger('urban: migrate default states to close all tasks')
+    logger = logging.getLogger("urban: migrate default states to close all tasks")
     logger.info("starting migration step")
-    urban_tool = api.portal.get_tool('portal_urban')
+    urban_tool = api.portal.get_tool("portal_urban")
     for licence_config in urban_tool.get_all_licence_configs():
-        states_voc = getUtility(IVocabularyFactory, 'urban.licence_state')(licence_config)
-        default_end_states = [st for st in states_voc.by_value.keys() if st in LICENCE_FINAL_STATES]
+        states_voc = getUtility(IVocabularyFactory, "urban.licence_state")(
+            licence_config
+        )
+        default_end_states = [
+            st for st in states_voc.by_value.keys() if st in LICENCE_FINAL_STATES
+        ]
         licence_config.setStates_to_end_all_tasks(default_end_states)
-        schedule_cfg = getattr(licence_config, 'schedule', None)
+        schedule_cfg = getattr(licence_config, "schedule", None)
         for task_cfg in schedule_cfg.get_all_task_configs():
             # remove 'licence_ended' from  the end conditions
             end_conditions = task_cfg.end_conditions or []
             end_condition_ids = end_conditions and [c.condition for c in end_conditions]
-            condition_id = 'urban.schedule.licence_ended'
+            condition_id = "urban.schedule.licence_ended"
             if end_condition_ids and condition_id in end_condition_ids:
                 old_end_conditions = task_cfg.end_conditions
-                new_end_conditions = [c for c in old_end_conditions if c.condition != condition_id]
+                new_end_conditions = [
+                    c for c in old_end_conditions if c.condition != condition_id
+                ]
                 task_cfg.end_conditions = tuple(new_end_conditions)
     logger.info("migration step done!")
 
 
 def migrate_parcellings_folder_allowed_type(context):
-    logger = logging.getLogger('migrate parcellings folder allowed type')
+    logger = logging.getLogger("migrate parcellings folder allowed type")
     logger.info("starting migration step")
     portal = api.portal.get()
     parcellings = portal.urban.parcellings
-    setFolderAllowedTypes(parcellings, 'Parcelling')
+    setFolderAllowedTypes(parcellings, "Parcelling")
 
 
 def migrate_urbaneventtypes_folder(context):
-    logger = logging.getLogger('migrate urbaneventtypes folder')
+    logger = logging.getLogger("migrate urbaneventtypes folder")
     logger.info("starting migration step")
-    urban_tool = api.portal.get_tool('portal_urban')
+    urban_tool = api.portal.get_tool("portal_urban")
     for config_folder in urban_tool.get_all_licence_configs():
-        if hasattr(aq_base(config_folder), 'urbaneventtypes'):
-            eventconfigs = getattr(config_folder, 'urbaneventtypes')
-            api.content.rename(obj=eventconfigs, new_id='eventconfigs', safe_id=False)
+        if hasattr(aq_base(config_folder), "urbaneventtypes"):
+            eventconfigs = getattr(config_folder, "urbaneventtypes")
+            api.content.rename(obj=eventconfigs, new_id="eventconfigs", safe_id=False)
     logger.info("migration step done!")
 
 
 def migrate_inquiry_parcels(context):
-    logger = logging.getLogger('migrate inquiry parcels')
+    logger = logging.getLogger("migrate inquiry parcels")
     logger.info("starting migration step")
     portal = api.portal.get()
     # to avoid link integrity problems, disable checks
     portal.portal_properties.site_properties.enable_link_integrity_checks = False
     # disable catalog
     patches.apply()
-    catalog = api.portal.get_tool('portal_catalog')
+    catalog = api.portal.get_tool("portal_catalog")
     cadastre = services.cadastre.new_session()
-    for rec_brain in catalog(portal_type='RecipientCadastre'):
+    for rec_brain in catalog(portal_type="RecipientCadastre"):
         recipient = rec_brain.getObject()
         parcels = recipient.objectValues()
         if parcels:
@@ -364,9 +393,15 @@ def migrate_inquiry_parcels(context):
             parcel = cadastre.query_parcel_by_capakey(parcel_ob.capakey)
             if parcel:
                 recipient.setCapakey(parcel_ob.capakey)
-                recipient.setParcel_street(parcel.locations and parcel.locations.values()[0]['street_name'] or '')
-                recipient.setParcel_police_number(parcel.locations and parcel.locations.values()[0]['number'] or '')
-                recipient.setParcel_nature(', '.join(parcel.natures))
+                recipient.setParcel_street(
+                    parcel.locations
+                    and parcel.locations.values()[0]["street_name"]
+                    or ""
+                )
+                recipient.setParcel_police_number(
+                    parcel.locations and parcel.locations.values()[0]["number"] or ""
+                )
+                recipient.setParcel_nature(", ".join(parcel.natures))
             api.content.delete(objects=parcels)
             logger.info("migrated recipient {}".format(recipient))
     # restore catalog
@@ -377,22 +412,22 @@ def migrate_inquiry_parcels(context):
 
 
 def migrate_remove_prov_in_folderroadtypes(context):
-    logger = logging.getLogger('migrate remove prov in folderroadtypes voc')
+    logger = logging.getLogger("migrate remove prov in folderroadtypes voc")
     logger.info("starting migration step")
-    urban_tool = api.portal.get_tool('portal_urban')
+    urban_tool = api.portal.get_tool("portal_urban")
     for folderroadtype in urban_tool.folderroadtypes.objectValues():
         if folderroadtype.id == "prov":
-            api.content.transition(obj=folderroadtype, to_state='disabled')
+            api.content.transition(obj=folderroadtype, to_state="disabled")
     logger.info("migration step done!")
 
 
 def migrate_disable_natura2000_folderzone(context):
-    logger = logging.getLogger('migrate disable natura2000 folderzone')
+    logger = logging.getLogger("migrate disable natura2000 folderzone")
     logger.info("starting migration step")
-    urban_tool = api.portal.get_tool('portal_urban')
+    urban_tool = api.portal.get_tool("portal_urban")
     for folderzone in urban_tool.folderzones.objectValues():
         if folderzone.id == "znatura2000":
-            api.content.transition(obj=folderzone, to_state='disabled')
+            api.content.transition(obj=folderzone, to_state="disabled")
     logger.info("migration step done!")
 
 
@@ -400,15 +435,20 @@ def migrate_inquiry_investigationStart_date(context):
     """
     investigationStart and investigationEnd are no longer optional fields
     """
-    logger = logging.getLogger('migrate inquiry start/end date')
+    logger = logging.getLogger("migrate inquiry start/end date")
     logger.info("starting migration step")
-    catalog = api.portal.get_tool('portal_catalog')
-    eventtypes = [b.getObject() for b in
-                  catalog(portal_type=['UrbanEventType', 'EventConfig'])]
+    catalog = api.portal.get_tool("portal_catalog")
+    eventtypes = [
+        b.getObject() for b in catalog(portal_type=["UrbanEventType", "EventConfig"])
+    ]
     for eventtype in eventtypes:
         active_fields = eventtype.getActivatedFields()
-        if 'investigationEnd' in active_fields or 'investigationStart' in active_fields:
-            new_value = [f for f in active_fields if f not in ['investigationStart', 'investigationEnd']]
+        if "investigationEnd" in active_fields or "investigationStart" in active_fields:
+            new_value = [
+                f
+                for f in active_fields
+                if f not in ["investigationStart", "investigationEnd"]
+            ]
             eventtype.activatedFields = new_value
             logger.info("migrated inquiry config {}".format(eventtype))
     logger.info("migration step done!")
@@ -418,132 +458,157 @@ def migrate_flooding_level(context):
     """
     Migrate old text single value to tuple for multiselection for floodingLevel and locationFloodingLevel
     """
-    logger = logging.getLogger('migrate flooding level to tuple type')
+    logger = logging.getLogger("migrate flooding level to tuple type")
     logger.info("starting migration step")
-    cat = api.portal.get_tool('portal_catalog')
+    cat = api.portal.get_tool("portal_catalog")
     licence_brains = cat(object_provides=IGenericLicence.__identifier__)
     licences = [lic.getObject() for lic in licence_brains]
     for licence in licences:
         if licence.floodingLevel and isinstance(licence.floodingLevel, basestring):
             licence.setFloodingLevel((licence.floodingLevel,))
-        if licence.locationFloodingLevel and isinstance(licence.locationFloodingLevel, basestring):
+        if licence.locationFloodingLevel and isinstance(
+            licence.locationFloodingLevel, basestring
+        ):
             licence.setLocationFloodingLevel((licence.locationFloodingLevel,))
 
     logger.info("migration step done!")
 
 
 def migrate_announcement_schedule_config(context):
-    """
-    """
-    logger = logging.getLogger('migrate announcement schedule config')
+    """ """
+    logger = logging.getLogger("migrate announcement schedule config")
     logger.info("starting migration step")
-    portal_urban = api.portal.get_tool('portal_urban')
-    for licence_config in portal_urban.objectValues('LicenceConfig'):
-        schedule_cfg = getattr(licence_config, 'schedule', None)
-        if schedule_cfg and hasattr(schedule_cfg, 'announcement-preparation'):
-            announcement_prep_task = getattr(schedule_cfg, 'announcement-preparation')
+    portal_urban = api.portal.get_tool("portal_urban")
+    for licence_config in portal_urban.objectValues("LicenceConfig"):
+        schedule_cfg = getattr(licence_config, "schedule", None)
+        if schedule_cfg and hasattr(schedule_cfg, "announcement-preparation"):
+            announcement_prep_task = getattr(schedule_cfg, "announcement-preparation")
             announcement_prep_task.creation_conditions = (
-                MacroCreationConditionObject('urban.schedule.condition.will_have_announcement', 'AND'),
+                MacroCreationConditionObject(
+                    "urban.schedule.condition.will_have_announcement", "AND"
+                ),
             )
             announcement_prep_task.end_conditions = (
-                MacroEndConditionObject('urban.schedule.condition.announcement_dates_defined', 'AND'),
+                MacroEndConditionObject(
+                    "urban.schedule.condition.announcement_dates_defined", "AND"
+                ),
             )
             announcement_prep_task.activate_recurrency = True
             announcement_prep_task.recurrence_conditions = (
-                MacroRecurrenceConditionObject('urban.schedule.condition.will_have_announcement', 'AND'),
+                MacroRecurrenceConditionObject(
+                    "urban.schedule.condition.will_have_announcement", "AND"
+                ),
             )
-            announcement_done_task = getattr(schedule_cfg, 'announcement')
+            announcement_done_task = getattr(schedule_cfg, "announcement")
             announcement_done_task.creation_conditions = (
-                MacroCreationConditionObject('urban.schedule.condition.announcement_dates_defined', 'AND'),
+                MacroCreationConditionObject(
+                    "urban.schedule.condition.announcement_dates_defined", "AND"
+                ),
             )
             announcement_done_task.end_conditions = (
-                MacroEndConditionObject('urban.schedule.condition.announcement_done', 'AND'),
+                MacroEndConditionObject(
+                    "urban.schedule.condition.announcement_done", "AND"
+                ),
             )
             announcement_done_task.activate_recurrency = True
             announcement_done_task.recurrence_conditions = (
-                MacroRecurrenceConditionObject('urban.schedule.condition.announcement_dates_defined', 'AND'),
+                MacroRecurrenceConditionObject(
+                    "urban.schedule.condition.announcement_dates_defined", "AND"
+                ),
             )
     logger.info("migration step done!")
 
 
 def migrate_styles_pod_templates(context):
-    """
-    """
-    logger = logging.getLogger('migrate pod templates styles')
+    """ """
+    logger = logging.getLogger("migrate pod templates styles")
     logger.info("starting migration step")
-    catalog = api.portal.get_tool('portal_catalog')
-    podt_template_brains = catalog(object_provides=IConfigurablePODTemplate.__identifier__)
+    catalog = api.portal.get_tool("portal_catalog")
+    podt_template_brains = catalog(
+        object_provides=IConfigurablePODTemplate.__identifier__
+    )
     # set style template to None on all POD templates
     for brain in podt_template_brains:
         pod_template = brain.getObject()
         pod_template.style_template = None
     # then delete all style templates
-    style_templates = [b.getObject() for b in catalog(portal_type='StyleTemplate')]
+    style_templates = [b.getObject() for b in catalog(portal_type="StyleTemplate")]
     api.content.delete(objects=style_templates)
     logger.info("migration step done!")
 
 
 def migrate_rich_texts(context):
-    logger = logging.getLogger('migrate rich text fields')
+    logger = logging.getLogger("migrate rich text fields")
     logger.info("starting migration step")
-    catalog = api.portal.get_tool('portal_catalog')
+    catalog = api.portal.get_tool("portal_catalog")
     to_migrate_brains = catalog(
-        object_provides=[ICODT_BaseBuildLicence.__identifier__, ICODT_UrbanCertificateBase.__identifier__]
+        object_provides=[
+            ICODT_BaseBuildLicence.__identifier__,
+            ICODT_UrbanCertificateBase.__identifier__,
+        ]
     )
     for brain in to_migrate_brains:
         licence = brain.getObject()
-        field = licence.getField('sdcDetails')
+        field = licence.getField("sdcDetails")
         raw_value = field.getRaw(licence)
-        if not raw_value.startswith('<p>'):
-            licence.setSdcDetails('<p>{}</p>'.format(raw_value))
+        if not raw_value.startswith("<p>"):
+            licence.setSdcDetails("<p>{}</p>".format(raw_value))
             logger.info("migrated rich text of licence: {}".format(licence))
 
     logger.info("migration step done!")
 
 
 def fix_missing_streets(context):
-    logger = logging.getLogger('urban: migrate to 2.5')
+    logger = logging.getLogger("urban: migrate to 2.5")
     logger.info("starting migration steps")
-    catalog = api.portal.get_tool('portal_catalog')
+    catalog = api.portal.get_tool("portal_catalog")
     licence_brains = catalog(object_provides=IGenericLicence.__identifier__)
-    portal_urban = api.portal.get_tool('portal_urban')
+    portal_urban = api.portal.get_tool("portal_urban")
     streets = portal_urban.streets
-    missing_street = api.content.create(type='Street', id='manquant', container=streets.objectValues()[0])
-    api.content.transition(missing_street, 'disable')
+    missing_street = api.content.create(
+        type="Street", id="manquant", container=streets.objectValues()[0]
+    )
+    api.content.transition(missing_street, "disable")
     for brain in licence_brains:
         licence = brain.getObject()
         address = licence.getWorkLocations()
         do_fix = False
         new_address = []
         for wl in address:
-            street_brains = catalog(UID=wl['street'])
+            street_brains = catalog(UID=wl["street"])
             if not street_brains:
                 do_fix = True
-                wl['street'] = missing_street.UID()
+                wl["street"] = missing_street.UID()
                 new_address.append(wl)
             if do_fix:
                 licence.setWorkLocations(new_address)
-                licence.reindexObject(idxs=['StreetsUID'])
-                logger.info('fixed street licence {}'.format(licence))
+                licence.reindexObject(idxs=["StreetsUID"])
+                logger.info("fixed street licence {}".format(licence))
 
 
 def migrate(context):
-    logger = logging.getLogger('urban: migrate to 2.5')
+    logger = logging.getLogger("urban: migrate to 2.5")
     logger.info("starting migration steps")
     # disable task creation/update
     disable_schedule()
-    setup_tool = api.portal.get_tool('portal_setup')
-    setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'workflow')
+    setup_tool = api.portal.get_tool("portal_setup")
+    setup_tool.runImportStepFromProfile("profile-Products.urban:preinstall", "workflow")
     fix_missing_streets(context)
     migrate_urbaneventtypes_folder(context)
     # reinstall pm.wsclient registry to add new registry record.
-    setup_tool.runImportStepFromProfile('profile-imio.pm.wsclient:default', 'content_type_registry')
-    setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'typeinfo')
-    setup_tool.runAllImportStepsFromProfile('profile-plonetheme.imioapps:urbanskin')
-    setup_tool.runAllImportStepsFromProfile('profile-Products.urban:default')
-    setup_tool.runImportStepFromProfile('profile-Products.urban:extra', 'urban-update-rubrics')
+    setup_tool.runImportStepFromProfile(
+        "profile-imio.pm.wsclient:default", "content_type_registry"
+    )
+    setup_tool.runImportStepFromProfile("profile-Products.urban:preinstall", "typeinfo")
+    setup_tool.runAllImportStepsFromProfile("profile-plonetheme.imioapps:urbanskin")
+    setup_tool.runAllImportStepsFromProfile("profile-Products.urban:default")
+    setup_tool.runImportStepFromProfile(
+        "profile-Products.urban:extra", "urban-update-rubrics"
+    )
     migrate_codt_buildlicences_schedule(context)
-    setup_tool.runImportStepFromProfile('profile-Products.urban:extra', 'urban-update-schedule')
+    setup_tool.runImportStepFromProfile(
+        "profile-Products.urban:extra", "urban-update-schedule"
+    )
     migrate_flooding_level(context)
     migrate_Env_Inquiry_to_CODT_UniquelicenceInquiry(context)
     migrate_CODT_NotaryLetter_to_CODT_UrbanCertificateBase(context)
@@ -562,11 +627,11 @@ def migrate(context):
     migrate_rich_texts(context)
     # Clearing iconified actions MUST be juste before the catalog reindex!!!
     clear_communesplone_iconifiedactions_layer(context)
-    catalog = api.portal.get_tool('portal_catalog')
+    catalog = api.portal.get_tool("portal_catalog")
     catalog.clearFindAndRebuild()
     logger.info("catalog rebuilt!")
     logger.info("refreshing reference catalog...")
     REQUEST = context.REQUEST
-    ref_catalog = api.portal.get_tool('reference_catalog')
+    ref_catalog = api.portal.get_tool("reference_catalog")
     ref_catalog.manage_catalogReindex(REQUEST, REQUEST.RESPONSE, REQUEST.URL)
     logger.info("migration done!")
