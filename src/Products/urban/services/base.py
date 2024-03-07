@@ -22,23 +22,20 @@ DB_NO_CONNECTION_ERROR = "No DB Connection"
 
 
 class WebService(object):
-    """
-    """
+    """ """
 
-    def __init__(self, url, user='', password=''):
+    def __init__(self, url, user="", password=""):
         self.url = url
         self.user = user
         self.password = password
 
 
 class SQLTables(object):
-    """
-    """
+    """ """
 
 
 class UnknownSQLTable(object):
-    """
-    """
+    """ """
 
     def __init__(self, name):
         self.name = name
@@ -52,23 +49,47 @@ class SQLService(object):
     Helper with sqlalchemy engine, metadata and session objects.
     """
 
-    def __init__(self, dialect='postgresql+psycopg2', user='', host='', port='', db_name='', password='', timeout='0'):
-        self.engine = self._init_engine(dialect, user, host, port, db_name, password, timeout)
+    def __init__(
+        self,
+        dialect="postgresql+psycopg2",
+        user="",
+        host="",
+        port="",
+        db_name="",
+        password="",
+        timeout="0",
+    ):
+        self.engine = self._init_engine(
+            dialect, user, host, port, db_name, password, timeout
+        )
         self.metadata = MetaData(self.engine)
-        self.tables = SQLTables()  # use _init_table to set sqlalchemy table objects on it
+        self.tables = (
+            SQLTables()
+        )  # use _init_table to set sqlalchemy table objects on it
 
-    def _init_engine(self, dialect='', username='', host='', port='', db_name='', password='', timeout=''):
+    def _init_engine(
+        self,
+        dialect="",
+        username="",
+        host="",
+        port="",
+        db_name="",
+        password="",
+        timeout="",
+    ):
         """
         Initialize the connection.
         """
-        connect_args = timeout and {"options": "-c statement_timeout={t}".format(t=timeout)} or {}
+        connect_args = (
+            timeout and {"options": "-c statement_timeout={t}".format(t=timeout)} or {}
+        )
         engine = create_engine(
-            '{dialect}://{username}{password}@{host}:{port}/{db_name}'.format(
+            "{dialect}://{username}{password}@{host}:{port}/{db_name}".format(
                 dialect=dialect,
                 username=username,
-                password=password and ':{}'.format(password) or '',
+                password=password and ":{}".format(password) or "",
                 host=host,
-                port=port or '5432',
+                port=port or "5432",
                 db_name=db_name,
             ),
             echo=False,
@@ -110,20 +131,17 @@ class SQLService(object):
         Check if the provided parameters are OK and set warning
         messages on the site depending on the result.
         """
-        plone_utils = api.portal.get_tool('plone_utils')
+        plone_utils = api.portal.get_tool("plone_utils")
         try:
             self.connect()
-            plone_utils.addPortalMessage(
-                _(u"db_connection_successfull"),
-                type='info'
-            )
+            plone_utils.addPortalMessage(_(u"db_connection_successfull"), type="info")
         except Exception, e:
             plone_utils.addPortalMessage(
                 _(
                     u"db_connection_error",
-                    mapping={u'error': unicode(e.__str__(), 'utf-8')}
+                    mapping={u"error": unicode(e.__str__(), "utf-8")},
                 ),
-                type='error'
+                type="error",
             )
             return False
         return True
@@ -142,15 +160,18 @@ class SQLSession(object):
     Base class wrapping a sqlalchemy query session.
     Group all query methods here.
     """
+
     implements(ISQLSession)
 
     def __init__(self, service):
         self.service = service
         self.tables = service.tables
-        self.session = scoped_session(sessionmaker(
-            bind=service.engine,
-            extension=ZopeTransactionExtension(),
-        ))
+        self.session = scoped_session(
+            sessionmaker(
+                bind=service.engine,
+                extension=ZopeTransactionExtension(),
+            )
+        )
 
     def execute(self, str_query):
         """

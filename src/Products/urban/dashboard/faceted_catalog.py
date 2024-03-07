@@ -3,13 +3,15 @@
 from collective.task.behaviors import ITask
 
 from eea.facetednavigation.search.catalog import FacetedCatalog
+
 # XXX Should be migrated
 try:
     from plone.app.collection.interfaces import ICollection
 except ImportError:
+
     class ICollection(Interface):
-        """ plone.app.collection not installed
-        """
+        """plone.app.collection not installed"""
+
 
 from Products.urban.interfaces import IFacetedCollection
 
@@ -18,7 +20,6 @@ from zope.interface import implements
 
 
 class UrbanFacetedCatalog(FacetedCatalog):
-
     def __call__(self, context, **query):
         """ """
         faceted_context = queryAdapter(context, IFacetedCollection) or context
@@ -38,14 +39,14 @@ class LicenceToFacetedCollection(object):
         """ """
         query = [
             {
-                'i': 'object_provides',
-                'o': 'plone.app.querystring.operation.selection.is',
-                'v': ITask.__identifier__
+                "i": "object_provides",
+                "o": "plone.app.querystring.operation.selection.is",
+                "v": ITask.__identifier__,
             },
             {
-                'i': 'path',
-                'o': 'plone.app.querystring.operation.string.relativePath',
-                'v': '.'
+                "i": "path",
+                "o": "plone.app.querystring.operation.string.relativePath",
+                "v": ".",
             },
         ]
         return query

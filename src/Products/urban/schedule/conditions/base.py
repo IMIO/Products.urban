@@ -34,14 +34,14 @@ class BaseInspection:
         # check the most recent report with 'ticket' in the followup
         # proposition
         for report in report_events:
-            if 'ticket' in report.getFollowup_proposition():
+            if "ticket" in report.getFollowup_proposition():
                 report_workflow_history = report.workflow_history.values()[0]
-                report_creation_date = report_workflow_history[0]['time']
+                report_creation_date = report_workflow_history[0]["time"]
                 # if a referring ticket has been created after this report
                 # return True
                 for ticket in tickets:
                     ticket_workflow_history = ticket.workflow_history.values()[0]
-                    ticket_creation_date = ticket_workflow_history[0]['time']
+                    ticket_creation_date = ticket_workflow_history[0]["time"]
                     if ticket_creation_date > report_creation_date:
                         return ticket
                     return None

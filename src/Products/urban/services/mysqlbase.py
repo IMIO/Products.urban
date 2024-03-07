@@ -25,23 +25,34 @@ class MySQLService(object):
     """
     Helper with sql alchemy engine, metadata and session object for mysql connections.
     """
-    def __init__(self, dialect='mysql+pymysql', user='', host='', db_name='', password='', timeout='120000'):
+
+    def __init__(
+        self,
+        dialect="mysql+pymysql",
+        user="",
+        host="",
+        db_name="",
+        password="",
+        timeout="120000",
+    ):
         self.engine = self._init_engine(dialect, user, host, db_name, password, timeout)
 
-    def _init_engine(self, dialect='', username='', host='', db_name='', password='', timeout=''):
+    def _init_engine(
+        self, dialect="", username="", host="", db_name="", password="", timeout=""
+    ):
         """
         Initialize the connection.
         """
         engine = create_engine(
-                '{dialect}://{username}{password}@{host}/{db_name}'.format(
-                 dialect=dialect,
-                 username=username,
-                 password=password and ':{}'.format(password) or '',
-                 host=host,
-                 db_name=db_name,
-                 ),
-                echo=True,
-                poolclass=NullPool
+            "{dialect}://{username}{password}@{host}/{db_name}".format(
+                dialect=dialect,
+                username=username,
+                password=password and ":{}".format(password) or "",
+                host=host,
+                db_name=db_name,
+            ),
+            echo=True,
+            poolclass=NullPool,
         )
 
         return engine
@@ -64,20 +75,17 @@ class MySQLService(object):
         Check if the provided parameters are OK and set warning
         messages on the site depending on the result.
         """
-        plone_utils = api.portal.get_tool('plone_utils')
+        plone_utils = api.portal.get_tool("plone_utils")
         try:
             self.connect()
-            plone_utils.addPortalMessage(
-                _(u"db_connection_successfull"),
-                type='info'
-            )
+            plone_utils.addPortalMessage(_(u"db_connection_successfull"), type="info")
         except Exception, e:
             plone_utils.addPortalMessage(
                 _(
                     u"db_connection_error",
-                    mapping={u'error': unicode(e.__str__(), 'utf-8')}
+                    mapping={u"error": unicode(e.__str__(), "utf-8")},
                 ),
-                type='error'
+                type="error",
             )
             return False
         return True
@@ -102,10 +110,11 @@ class MySQLSession(object):
     Base class wrapping a sqlalchemy query session.
     Group all query methods here.
     """
+
     implements(ISQLSession)
 
     def __init__(self, service):
-        print 'ENGINE {}'.format(service.engine)
+        print "ENGINE {}".format(service.engine)
         self.service = service
         factory = sessionmaker(bind=service.engine)
         self.session = factory()

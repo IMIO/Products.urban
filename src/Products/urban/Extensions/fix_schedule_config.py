@@ -6,11 +6,11 @@ from plone import api
 
 import logging
 
-logger = logging.getLogger('urban: fix schedule config')
+logger = logging.getLogger("urban: fix schedule config")
 
 
 def get_class(class_path):
-    module_name, class_name = class_path.rsplit('.', 1)
+    module_name, class_name = class_path.rsplit(".", 1)
     module = import_module(module_name)
     return getattr(module, class_name)
 
@@ -36,7 +36,7 @@ def fix_class_schedule(container, result):
         for attrname, factoryname in mapping.items():
             if not hasattr(item, attrname) or not getattr(item, attrname):
                 continue
-            
+
             if item.__class__.__name__ == "TaskConfig":
                 expected_class = class_basepath.format(factoryname)
             elif item.__class__.__name__ == "MacroTaskConfig":
@@ -59,10 +59,12 @@ def fix_class_schedule(container, result):
                         )
                     )
                     condition.__class__ = new_class
-                    new_conditions += (condition, )
+                    new_conditions += (condition,)
                 setattr(item, attrname, new_conditions)
             elif condition_errors:
-                result.append("Can not migrate condition on {0}".format(item.absolute_url()))
+                result.append(
+                    "Can not migrate condition on {0}".format(item.absolute_url())
+                )
         result = fix_class_schedule(item, result)
     return result
 
@@ -78,6 +80,7 @@ def fix_schedule_config():
         schedule_config = cfg_folder["schedule"]
         fix_class_schedule(schedule_config, result)
     return "\n".join(result)
+
 
 """
  'creation_conditions': (<imio.schedule.content.object_factories.MacroCreationConditionObject object at 0x7f806ae3ffd0>,),

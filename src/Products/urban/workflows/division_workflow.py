@@ -11,20 +11,16 @@ class StateRolesMapping(LocalRoleAdapter):
         self.licence = self.context
 
     mapping = {
-        'in_progress': {
-            LocalRoleAdapter.get_readers: ('Reader',),
-            LocalRoleAdapter.get_editors: ('Reader', 'Editor', 'Contributor'),
+        "in_progress": {
+            LocalRoleAdapter.get_readers: ("Reader",),
+            LocalRoleAdapter.get_editors: ("Reader", "Editor", "Contributor"),
         },
-
-        'need_parceloutlicence': {
-            LocalRoleAdapter.get_readers: ('Reader',),
-            LocalRoleAdapter.get_editors: ('Reader', 'Reviewer'),
+        "need_parceloutlicence": {
+            LocalRoleAdapter.get_readers: ("Reader",),
+            LocalRoleAdapter.get_editors: ("Reader", "Reviewer"),
         },
-
-        'accepted': {
-            LocalRoleAdapter.get_readers: ('Reader',),
-            LocalRoleAdapter.get_editors: ('Reader', 'Reviewer'),
+        "accepted": {
+            LocalRoleAdapter.get_readers: ("Reader",),
+            LocalRoleAdapter.get_editors: ("Reader", "Reviewer"),
         },
-
-
     }

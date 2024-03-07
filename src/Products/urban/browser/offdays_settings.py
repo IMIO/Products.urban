@@ -26,7 +26,7 @@ class IOffDayPeriod(Interface):
     period_type = schema.Choice(
         title=_(u"Type"),
         required=True,
-        vocabulary=u'urban.vocabularies.offdays_period_types'
+        vocabulary=u"urban.vocabularies.offdays_period_types",
     )
 
     start_date = schema.Date(
@@ -45,9 +45,7 @@ class IOffDay(Interface):
     """ """
 
     day_type = schema.Choice(
-        title=_(u"Type"),
-        required=True,
-        vocabulary=u'urban.vocabularies.offdays_types'
+        title=_(u"Type"), required=True, vocabulary=u"urban.vocabularies.offdays_types"
     )
 
     date = schema.Date(
@@ -65,19 +63,14 @@ class IOffDays(Interface):
         title=_(u"Week off days"),
         required=False,
         value_type=schema.Choice(
-            title=_('weekdays'),
-            vocabulary=u'urban.vocabularies.weekdays'
-        )
+            title=_("weekdays"), vocabulary=u"urban.vocabularies.weekdays"
+        ),
     )
 
     periods = schema.List(
         title=_("Off days period"),
         description=_(""),
-        value_type=DictRow(
-            title=_("Period"),
-            schema=IOffDayPeriod,
-            required=False
-        ),
+        value_type=DictRow(title=_("Period"), schema=IOffDayPeriod, required=False),
         default=[],
         required=False,
     )
@@ -85,11 +78,7 @@ class IOffDays(Interface):
     offdays = schema.List(
         title=_("Off days"),
         description=_(""),
-        value_type=DictRow(
-            title=_("Day"),
-            schema=IOffDay,
-            required=False
-        ),
+        value_type=DictRow(title=_("Day"), schema=IOffDay, required=False),
         default=[],
         required=False,
     )
@@ -99,18 +88,19 @@ class OffDaysEditForm(RegistryEditForm):
     """
     Define form logic
     """
+
     schema = IOffDays
     label = _(u"Off days")
     description = _(u"""""")
 
     fields = field.Fields(IOffDays)
-    fields['offdays'].widgetFactory = DataGridFieldFactory
-    fields['periods'].widgetFactory = DataGridFieldFactory
+    fields["offdays"].widgetFactory = DataGridFieldFactory
+    fields["periods"].widgetFactory = DataGridFieldFactory
 
     def updateWidgets(self):
         super(OffDaysEditForm, self).updateWidgets()
 
-    @button.buttonAndHandler(_('Save'), name=None)
+    @button.buttonAndHandler(_("Save"), name=None)
     def handleSave(self, action):
         data, errors = self.extractData()
         if errors:
@@ -120,12 +110,9 @@ class OffDaysEditForm(RegistryEditForm):
         self.applyChanges(data)
         IStatusMessage(self.request).addStatusMessage(_(u"Changes saved"), "info")
 
-    @button.buttonAndHandler(_('Cancel'), name='cancel')
+    @button.buttonAndHandler(_("Cancel"), name="cancel")
     def handleCancel(self, action):
-        IStatusMessage(self.request).addStatusMessage(
-            _(u"Edit cancelled"),
-            "info"
-        )
+        IStatusMessage(self.request).addStatusMessage(_(u"Edit cancelled"), "info")
         self.request.response.redirect(
             "%s/%s" % (self.context.absolute_url(), self.control_panel_view)
         )
