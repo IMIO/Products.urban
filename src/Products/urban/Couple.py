@@ -127,7 +127,7 @@ class Couple(BaseContent, Applicant, BrowserDefaultMixin):
         """
         return "%s %s-%s %s et %s" % (self.getPersonTitle(short=True), self.getCouplePerson1Name(), self.getCouplePerson2Name(), self.getCouplePerson1Firstname(), self.getCouplePerson2Firstname())
 
-    def _getNameSignaletic(self, short, linebyline, reverse=False, invertnames=False, whithtitle=True):
+    def _getNameSignaletic(self, short, linebyline, reverse=False, invertnames=False, withtitle=True):
         title = self.getPersonTitleValue(short, False, reverse).decode('utf8')
         lastNamePerson1 = self.getCouplePerson1Name().decode('utf-8')
         firstNamePerson1 = self.getCouplePerson1Firstname().decode('utf-8')
@@ -139,7 +139,7 @@ class Couple(BaseContent, Applicant, BrowserDefaultMixin):
             names = u'%s et %s %s-%s' % (firstNamePerson1, firstNamePerson2, lastNamePerson1, lastNamePerson2)
         names = names.strip()
         if namedefined: namepart = names
-        if whithtitle:
+        if withtitle:
             nameSignaletic = u'%s %s' % (title, namepart)
         else:
             nameSignaletic = u'%s' % (namepart)
@@ -158,7 +158,7 @@ class Couple(BaseContent, Applicant, BrowserDefaultMixin):
                     represented = u'représentée'
                 elif gender == 'female' and multiplicity == 'plural':
                     represented = u'représentées'
-            if whithtitle:
+            if withtitle:
                 nameSignaletic = u'%s %s %s par %s' % (title, namepart, represented, representatives.decode('utf-8'))
             else:
                 nameSignaletic = u'%s %s par %s' % (namepart, represented, representatives.decode('utf-8'))
