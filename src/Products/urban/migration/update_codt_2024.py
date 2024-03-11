@@ -219,9 +219,4 @@ def migrate_vocabulary_contents(context):
     createFolderDefaultValues(
         licence_exemptfdarticle_folder, new_objects_list, portal_type="UrbanVocabularyTerm"
     )
-    for term in licence_exemptfdarticle_folder.objectValues():
-        api.content.delete(term)
-    createFolderDefaultValues(
-        licence_exemptfdarticle_folder, objects_list, portal_type="UrbanVocabularyTerm"
-    )
 
