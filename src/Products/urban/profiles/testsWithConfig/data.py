@@ -17,6 +17,19 @@ default_texts = {
 
 
 urbanEventTypes = {
+    "codt_buildlicence": (
+        {
+            "id": "depot-de-la-demande",
+            "title": "Dépôt de la demande",
+            "eventDateLabel": "Date de dépôt",
+            "activatedFields": [],
+            "deadLineDelay": 10,
+            "isKeyEvent": True,
+            "keyDates": ("eventDate",),
+            "podTemplates": (),
+            "eventTypeType": "Products.urban.interfaces.IDepositEvent",
+        },
+    ),
     "buildlicence": (
         {
             "id": "depot-de-la-demande",
