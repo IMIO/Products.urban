@@ -255,6 +255,9 @@ def close_all_events(licence, event):
                     workflow_state = portal_workflow.getStatusOf(
                         workflow_id, urban_event
                     )
+                    if not workflow_state:
+                        # This can happen with some workflows see SUP-35736
+                        continue
                     workflow_state["review_state"] = closing_state
                     portal_workflow.setStatusOf(
                         workflow_id, urban_event, workflow_state.copy()
