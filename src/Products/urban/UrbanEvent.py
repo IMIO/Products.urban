@@ -505,6 +505,27 @@ schema = Schema(
             default="0",
             validators=("isInteger",),
         ),
+        DateTimeField(
+            name="videoConferenceDate",
+            widget=DateTimeField._properties["widget"](
+                show_hm=False,
+                format="%d/%m/%Y",
+                starting_year=1960,
+                label=_("urban_label_videoConferenceDate", default="videoConferencedate"),
+            ),
+            optional=True,
+        ),
+        DateTimeField(
+            name="validityEndDate",
+            widget=DateTimeField._properties["widget"](
+                show_hm=False,
+                format="%d/%m/%Y",
+                starting_year=1960,
+                label=_("urban_label_validityEndDate", default="validityEndDate"),
+            ),
+            optional=True,
+        ),
+
     ),
 )
 
