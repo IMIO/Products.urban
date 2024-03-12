@@ -696,3 +696,7 @@ class IGlobalSuspensionPeriod(Interface):
 
 class IFacetedCollection(Interface):
     """Adapts an object into a faceted collection"""
+
+
+class IIntentionToSubmitAmendedPlans(Interface):
+    __doc__ = _("""IIntentionToSubmitAmendedPlans type marker interface""")

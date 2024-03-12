@@ -394,6 +394,10 @@ msgstr "Enquête publique"
 msgid "IInspectionReportEvent type marker interface"
 msgstr "Rapport d'inspection"
 
+#: ../interfaces.py:702
+msgid "IIntentionToSubmitAmendedPlans type marker interface"
+msgstr "Intention de dépôt de plans modifiés"
+
 #: ../interfaces.py:532
 msgid "IInternalPrelimaryAdvice type marker interface"
 msgstr "Avis préliminaire interne"
@@ -5453,6 +5457,16 @@ msgstr "Champs optionnels utilisés"
 #: ../content/licence/EnvironmentBase.py:277
 msgid "urban_label_validityDelay"
 msgstr "Durée de validité du permis"
+
+#. Default: "validityEndDate"
+#: ../UrbanEvent.py:524
+msgid "urban_label_validityEndDate"
+msgstr "Date de fin de validité"
+
+#. Default: "videoConferencedate"
+#: ../UrbanEvent.py:514
+msgid "urban_label_videoConferenceDate"
+msgstr "Date de vidéo-conférence"
 
 #. Default: "Visibility"
 #: Layer.py
