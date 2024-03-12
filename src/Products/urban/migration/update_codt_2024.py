@@ -2,6 +2,7 @@
 
 from Products.urban.setuphandlers import createFolderDefaultValues
 from plone import api
+from zope.publisher.interfaces.browser import IDefaultBrowserLayer
 from datetime import datetime
 
 import logging
@@ -220,3 +221,34 @@ def migrate_vocabulary_contents(context):
         licence_exemptfdarticle_folder, new_objects_list, portal_type="UrbanVocabularyTerm"
     )
 
+    logger.info("upgrade done!")
+
+
+class FakeLayer(IDefaultBrowserLayer):
+    pass
+
+
+def remove_broken_liege_browserlayer(context):
+    logger.info("starting : remove broken Liege browser layer")
+
+    from plone.browserlayer.interfaces import ILocalBrowserLayerType
+    from zope.component import getSiteManager
+    from zope.component import queryUtility
+    from zope.interface import alsoProvides
+    import transaction
+
+    portal = api.portal.get()
+    sm = getSiteManager(portal)
+    name = "Liege.urban.dataimport"
+
+    existing = queryUtility(ILocalBrowserLayerType, name=name)
+    if existing:
+        alsoProvides(FakeLayer, ILocalBrowserLayerType)
+        sm.registerUtility(component=FakeLayer, provided=ILocalBrowserLayerType, name=name)
+        transaction.commit()
+
+        # TODO: make sure it works (transaction.commit() seems to break Undo functionality)
+        # unregister_layer(name=name, site_manager=sm)
+        # transaction.commit()
+
+    logger.info("upgrade done!")
