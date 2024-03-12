@@ -173,4 +173,13 @@
         profile="Products.urban:default"
         />
 
+    <gs:upgradeStep
+        title="Remove broken Liege browser layer"
+        description=""
+        source="1137"
+        destination="1138"
+        handler=".update_codt_2024.remove_broken_liege_browserlayer"
+        profile="Products.urban:default"
+        />
+
 </configure>
