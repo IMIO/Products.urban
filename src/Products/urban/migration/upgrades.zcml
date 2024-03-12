@@ -540,4 +540,13 @@
         handler=".update_260.update_delais_vocabularies_and_activate_prorogation_field"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Migrate vocabulary content"
+        description=""
+        source="1138"
+        destination="1139"
+        handler=".update_codt_2024.migrate_vocabulary_contents"
+        profile="Products.urban:default"
+        />
+
 </configure>

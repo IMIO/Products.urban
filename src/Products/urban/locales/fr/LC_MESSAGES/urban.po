@@ -3327,12 +3327,12 @@ msgstr "Article 107"
 
 #: ../content/licence/CODT_BaseBuildLicence.py:782
 msgid "urban_label_exemptFDArticleCODT"
-msgstr "Article D IV.15"
+msgstr "Dispense d'avis FD"
 
 #. Default: "Exemptfdarticlemodifiedbp"
 #: ../content/licence/CODT_BaseBuildLicence.py:501
 msgid "urban_label_exemptFDArticleModifiedBp"
-msgstr "Article D IV.15 avec plans modificatifs"
+msgstr "Dispense d'avis FD avec plans modificatifs"
 
 #. Default: "Explanationendsdate"
 #: ../content/UrbanEventInquiry.py:81
