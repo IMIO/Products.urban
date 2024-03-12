@@ -17,6 +17,7 @@ from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 import interfaces
+from Products.urban import UrbanMessage as _
 from Products.urban.UrbanConfigurationValue import UrbanConfigurationValue
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
@@ -60,6 +61,22 @@ schema = Schema(
                 label="Delaycomputation",
                 label_msgid="urban_label_delayComputation",
                 i18n_domain="urban",
+            ),
+        ),
+        DateTimeField(
+            name="startValidity",
+            widget=DateTimeField._properties["widget"](
+                show_hm=False,
+                format="%d/%m/%Y",
+                label=_("urban_label_startValidity", default="StartValidity"),
+            ),
+        ),
+        DateTimeField(
+            name="endValidity",
+            widget=DateTimeField._properties["widget"](
+                show_hm=False,
+                format="%d/%m/%Y",
+                label=_("urban_label_endValidity", default="EndValidity"),
             ),
         ),
     ),
