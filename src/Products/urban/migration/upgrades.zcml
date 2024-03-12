@@ -164,4 +164,13 @@
         profile="Products.urban:default"
         />
 
+    <gs:upgradeStep
+        title="Migrate vocabulary content"
+        description=""
+        source="1136"
+        destination="1137"
+        handler=".update_codt_2024.migrate_vocabulary_contents"
+        profile="Products.urban:default"
+        />
+
 </configure>
