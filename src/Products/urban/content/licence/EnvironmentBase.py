@@ -58,6 +58,7 @@ optional_fields = [
     "environmentTechnicalRemarks",
     "rubricsDetails",
     "referenceFT",
+    "prorogation",
 ]
 
 slave_fields_natura2000 = (
@@ -78,6 +79,15 @@ slave_fields_procedurechoice = (
         "name": "annoncedDelay",
         "action": "value",
         "vocab_method": "getProcedureDelays",
+        "control_param": "values",
+    },
+)
+
+slave_fields_prorogation = (
+    {
+        "name": "annoncedDelay",
+        "action": "value",
+        "vocab_method": "getProrogationDelays",
         "control_param": "values",
     },
 )
@@ -331,6 +341,15 @@ schema = Schema(
             schemata="urban_environment",
             default_output_type="text/html",
         ),
+        BooleanField(
+            name="prorogation",
+            default=False,
+            widget=MasterBooleanWidget(
+                slave_fields=slave_fields_prorogation,
+                label=_("urban_label_prorogation", default="Prorogation"),
+            ),
+            schemata="urban_description",
+        ),
     ),
 )
 
@@ -541,6 +560,24 @@ class EnvironmentBase(
             date(displayDay.year(), displayDay.month(), displayDay.day()),
             periodForAppeal,
         )
+
+    def getProrogationDelays(self, *values):
+        procedure_choice = [{"val": self.getProcedureChoice(), "selected": True}]
+        base_delay = self.getProcedureDelays(*procedure_choice)
+        if self.prorogation:
+            base_delay = "{}j".format(str(int(base_delay[:-1]) - 30))
+
+        return self._getProrogationDelays(base_delay, values)
+
+    def _getProrogationDelays(self, base_delay, values):
+        if False in values:
+            return base_delay
+
+        prorogated_delay = ""
+        if base_delay:
+            prorogated_delay = "{}j".format(str(int(base_delay[:-1]) + 30))
+
+        return prorogated_delay
 
 
 registerType(EnvironmentBase, PROJECTNAME)
