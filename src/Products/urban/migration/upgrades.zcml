@@ -532,4 +532,12 @@
         profile="Products.urban:default"
         />
 
+    <gs:upgradeStep
+        title="update delais vocabularies and activate prorogation field"
+        description="update delais vocabulary and activate prorogation field"
+        source="1137"
+        destination="1138"
+        handler=".update_260.update_delais_vocabularies_and_activate_prorogation_field"
+        profile="Products.urban:default" />
+
 </configure>

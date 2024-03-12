@@ -1517,10 +1517,18 @@ default_values = {
             "UrbanDelay",
             {"id": "40j", "title": u"40 jours", "deadLineDelay": 40, "alertDelay": 20},
             {"id": "50j", "title": u"50 jours", "deadLineDelay": 50, "alertDelay": 20},
+            {"id": "70j", "title": u"70 jours", "deadLineDelay": 70, "alertDelay": 20},
+            {"id": "80j", "title": u"80 jours", "deadLineDelay": 80, "alertDelay": 20},
             {
                 "id": "140j",
                 "title": u"140 jours",
                 "deadLineDelay": 140,
+                "alertDelay": 20,
+            },
+            {
+                "id": "170j",
+                "title": u"170 jours",
+                "deadLineDelay": 170,
                 "alertDelay": 20,
             },
             {
@@ -1541,7 +1549,15 @@ default_values = {
             "UrbanDelay",
             {"id": "40j", "title": u"40 jours", "deadLineDelay": 40, "alertDelay": 20},
             {"id": "50j", "title": u"50 jours", "deadLineDelay": 50, "alertDelay": 20},
+            {"id": "70j", "title": u"70 jours", "deadLineDelay": 70, "alertDelay": 20},
+            {"id": "80j", "title": u"80 jours", "deadLineDelay": 80, "alertDelay": 20},
             {"id": "90j", "title": u"90 jours", "deadLineDelay": 90, "alertDelay": 20},
+            {
+                "id": "120j",
+                "title": u"120 jours",
+                "deadLineDelay": 120,
+                "alertDelay": 20,
+            },
             {
                 "id": "inconnu",
                 "title": u"Inconnu",
