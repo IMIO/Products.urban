@@ -403,7 +403,11 @@ msgstr ""
 msgid "IInspectionReportEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:541
+#: ../interfaces.py:702
+msgid "IIntentionToSubmitAmendedPlans type marker interface"
+msgstr ""
+
+#: ../interfaces.py:532
 msgid "IInternalPrelimaryAdvice type marker interface"
 msgstr ""
 
@@ -4982,6 +4986,24 @@ msgid "urban_label_validityDelay"
 msgstr ""
 
 msgid "urban_label_warnings"
+msgstr ""
+
+#. Default: "validityEndDate"
+#: ../UrbanEvent.py:524
+msgid "urban_label_validityEndDate"
+msgstr ""
+
+#. Default: "videoConferencedate"
+#: ../UrbanEvent.py:514
+msgid "urban_label_videoConferenceDate"
+msgstr ""
+
+#. Default: "Visibility"
+#: Layer.py
+msgid "urban_label_visibility"
+msgstr ""
+
+msgid "urban_label_walloonRegionPrimoDate"
 msgstr ""
 
 #. Default: "Water"
