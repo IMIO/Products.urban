@@ -404,7 +404,11 @@ msgstr "Enquête publique"
 msgid "IInspectionReportEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:541
+#: ../interfaces.py:702
+msgid "IIntentionToSubmitAmendedPlans type marker interface"
+msgstr "Intention de dépôt de plans modifiés"
+
+#: ../interfaces.py:532
 msgid "IInternalPrelimaryAdvice type marker interface"
 msgstr "Avis préliminaire interne"
 
@@ -5016,6 +5020,24 @@ msgstr "Durée de validité du permis"
 
 msgid "urban_label_warnings"
 msgstr "Avertissements"
+
+#. Default: "validityEndDate"
+#: ../UrbanEvent.py:524
+msgid "urban_label_validityEndDate"
+msgstr "Date de fin de validité"
+
+#. Default: "videoConferencedate"
+#: ../UrbanEvent.py:514
+msgid "urban_label_videoConferenceDate"
+msgstr "Date de vidéo-conférence"
+
+#. Default: "Visibility"
+#: Layer.py
+msgid "urban_label_visibility"
+msgstr "Visibilité?"
+
+msgid "urban_label_walloonRegionPrimoDate"
+msgstr "Date primo dossier"
 
 #. Default: "Water"
 #: ../content/licence/BaseBuildLicence.py:591

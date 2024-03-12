@@ -726,3 +726,7 @@ class IUrbanWarningCondition(Interface):
 
 class IProductUrbanLayer(IDefaultBrowserLayer):
     """Marker interface that defines a browser layer."""
+
+
+class IIntentionToSubmitAmendedPlans(Interface):
+    __doc__ = _("""IIntentionToSubmitAmendedPlans type marker interface""")
