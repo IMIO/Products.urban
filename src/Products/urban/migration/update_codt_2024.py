@@ -232,10 +232,9 @@ def remove_broken_liege_browserlayer(context):
     logger.info("starting : remove broken Liege browser layer")
 
     from plone.browserlayer.interfaces import ILocalBrowserLayerType
+    from plone.browserlayer.utils import unregister_layer
     from zope.component import getSiteManager
     from zope.component import queryUtility
-    from zope.interface import alsoProvides
-    import transaction
 
     portal = api.portal.get()
     sm = getSiteManager(portal)
@@ -243,12 +242,6 @@ def remove_broken_liege_browserlayer(context):
 
     existing = queryUtility(ILocalBrowserLayerType, name=name)
     if existing:
-        alsoProvides(FakeLayer, ILocalBrowserLayerType)
-        sm.registerUtility(component=FakeLayer, provided=ILocalBrowserLayerType, name=name)
-        transaction.commit()
-
-        # TODO: make sure it works (transaction.commit() seems to break Undo functionality)
-        # unregister_layer(name=name, site_manager=sm)
-        # transaction.commit()
+        unregister_layer(name=name, site_manager=sm)
 
     logger.info("upgrade done!")
