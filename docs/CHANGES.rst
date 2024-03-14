@@ -8,6 +8,41 @@ Changelog
 
 .. towncrier release notes start
 
+2.7.0 (2024-03-14)
+------------------
+
+New features:
+
+
+- Add `is_CODT2024` and `getProrogationDelay` methods that can be used in template
+  [mpeeters] (URB-2956)
+- Adapt vocabulary logic to include start and end validity dates
+  [mpeeters] (URB-3002)
+- Adapt vocabulary terms for 2024 CODT reform
+  [daggelpop] (URB-3003)
+- Add `urban.schedule` dependency
+  [mpeeters] (URB-3005)
+- Add event fields `videoConferenceDate`, `validityEndDate` & marker `IIntentionToSubmitAmendedPlans`
+  [daggelpop] (URB-3006)
+
+
+Bug fixes:
+
+
+- Avoid an error if the closing state is not a valid transition
+  [mpeeters] (SUP-35736)
+
+
+Internal:
+
+
+- Provided prorogation field for environment license
+  [fngaha] (URB-2924)
+- Update applicant mailing codes :
+  Replace mailed_data.getPersonTitleValue(short=True), mailed_data.name1, mailed_data.name2 by mailed_data.getSignaletic()
+  [fngaha] (URB-2947)
+
+
 2.6.25 (2024-02-13)
 -------------------
 
