@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 
+from Products.urban import URBAN_TYPES
 from Products.urban.setuphandlers import createFolderDefaultValues
+from datetime import datetime
 from plone import api
 from zope.publisher.interfaces.browser import IDefaultBrowserLayer
-from datetime import datetime
 
 import logging
 
@@ -218,7 +219,9 @@ def migrate_vocabulary_contents(context):
             term_obj.setTitle(term["title"])
     # create new terms
     createFolderDefaultValues(
-        licence_exemptfdarticle_folder, new_objects_list, portal_type="UrbanVocabularyTerm"
+        licence_exemptfdarticle_folder,
+        new_objects_list,
+        portal_type="UrbanVocabularyTerm",
     )
 
     logger.info("upgrade done!")
@@ -243,5 +246,29 @@ def remove_broken_liege_browserlayer(context):
     existing = queryUtility(ILocalBrowserLayerType, name=name)
     if existing:
         unregister_layer(name=name, site_manager=sm)
+
+    logger.info("upgrade done!")
+
+
+def sort_delay_vocabularies(context):
+    from functools import cmp_to_key
+
+    logger.info("starting : Sort delays vocabularies")
+    portal_urban = api.portal.get().portal_urban
+
+    def sort_delays(element):
+        if element.deadLineDelay != 0:
+            return element.deadLineDelay
+        return 99999
+
+    for urban_type in URBAN_TYPES:
+        type_config = portal_urban[urban_type.lower()]
+        if "folderdelays" not in type_config:
+            continue
+        folderdelays = type_config.folderdelays
+        if sorted(folderdelays.values(), key=sort_delays) != folderdelays.keys():
+            folderdelays.orderObjects(key="deadLineDelay")
+            if "inconnu" in folderdelays:
+                folderdelays.moveObjectsToBottom(["inconnu"])
 
     logger.info("upgrade done!")
