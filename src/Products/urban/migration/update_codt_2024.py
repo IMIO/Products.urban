@@ -223,6 +223,8 @@ def migrate_vocabulary_contents(context):
         portal_type="UrbanVocabularyTerm",
     )
 
+    logger.info("upgrade done!")
+
 
 def sort_delay_vocabularies(context):
     from functools import cmp_to_key
@@ -237,10 +239,12 @@ def sort_delay_vocabularies(context):
 
     for urban_type in URBAN_TYPES:
         type_config = portal_urban[urban_type.lower()]
-        if not "folderdelays" in type_config:
+        if "folderdelays" not in type_config:
             continue
         folderdelays = type_config.folderdelays
         if sorted(folderdelays.values(), key=sort_delays) != folderdelays.keys():
             folderdelays.orderObjects(key="deadLineDelay")
             if "inconnu" in folderdelays:
                 folderdelays.moveObjectsToBottom(["inconnu"])
+
+    logger.info("upgrade done!")
