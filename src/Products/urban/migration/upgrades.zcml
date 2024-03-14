@@ -549,4 +549,13 @@
         profile="Products.urban:default"
         />
 
+    <gs:upgradeStep
+        title="Sort delay vocabulary values"
+        description=""
+        source="1139"
+        destination="1140"
+        handler=".update_codt_2024.sort_delay_vocabularies"
+        profile="Products.urban:default"
+        />
+
 </configure>
