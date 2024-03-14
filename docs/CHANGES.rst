@@ -8,6 +8,16 @@ Changelog
 
 .. towncrier release notes start
 
+2.7.1 (2024-03-14)
+------------------
+
+Bug fixes:
+
+
+- Fix delay vocabularies value order
+  [mpeeters] (URB-3003)
+
+
 2.7.0 (2024-03-14)
 ------------------
 
