@@ -219,6 +219,7 @@ def migrate_vocabulary_contents(context):
             term_obj.setTitle(term["title"])
             if term["id"] in ("annexe9") and api.content.get_state(term_obj) == "enabled":
                 api.content.transition(obj=term_obj, to_state="disabled")
+            term_obj.reindexObject()
     # create new terms
     createFolderDefaultValues(
         licence_exemptfdarticle_folder,
