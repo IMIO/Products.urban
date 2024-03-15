@@ -505,3 +505,9 @@ msgstr ""
 
 msgid "receive_college_decision"
 msgstr ""
+
+msgid "obsolete"
+msgstr ""
+
+msgid "make_obsolete"
+msgstr ""
