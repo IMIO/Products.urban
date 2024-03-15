@@ -217,6 +217,8 @@ def migrate_vocabulary_contents(context):
         if term["id"] in licence_exemptfdarticle_folder:
             term_obj = getattr(licence_exemptfdarticle_folder, term["id"])
             term_obj.setTitle(term["title"])
+            if term["id"] in ("annexe9") and api.content.get_state(term_obj) == "enabled":
+                api.content.transition(obj=term_obj, to_state="disabled")
     # create new terms
     createFolderDefaultValues(
         licence_exemptfdarticle_folder,
