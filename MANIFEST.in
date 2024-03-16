@@ -4,7 +4,10 @@
   include buildout.cfg
   include portals.cfg
   include versions.cfg
+  include port.cfg
+  exclude pyvenv.cfg
   prune news
+  prune var
   recursive-include docs *.py
   recursive-include src *.cpy
   recursive-include docs *.rst
