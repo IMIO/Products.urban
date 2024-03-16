@@ -8,6 +8,44 @@ Changelog
 
 .. towncrier release notes start
 
+2.5.0.dev3 (2024-03-16)
+-----------------------
+
+New features:
+
+
+- Add `is_CODT2024` and `getProrogationDelay` methods that can be used in template
+  [mpeeters] (URB-2956)
+- Adapt vocabulary logic to include start and end validity dates
+  [mpeeters] (URB-3002)
+- Adapt vocabulary terms for 2024 CODT reform
+  [daggelpop] (URB-3003)
+- Add `urban.schedule` dependency
+  [mpeeters] (URB-3005)
+- Add event fields `videoConferenceDate`, `validityEndDate` & marker `IIntentionToSubmitAmendedPlans`
+  [daggelpop] (URB-3006)
+
+
+Bug fixes:
+
+
+- Fix delay vocabularies value order
+  [mpeeters] (URB-3003)
+- Fix an issue with zope users on urban homepage
+  [mpeeters] (URB-3004)
+- Remove broken Liege browser layer
+  [daggelpop] (URB-3006)
+
+
+Internal:
+
+
+- Provided prorogation field for environment license
+  [fngaha] (URB-2924)
+- Move some schedule logic into `urban.schedule`
+  [mpeeters] (URB-3005)
+
+
 2.5.0.dev2 (2024-01-11)
 -----------------------
 
