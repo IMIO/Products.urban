@@ -6,5 +6,6 @@
     <!-- password strength and fingerpoiting mess with the tests -->
     <dependency>profile-Products.PasswordStrength:default</dependency>
     <dependency>profile-collective.fingerpointing:default</dependency>
+    <dependency>profile-urban.events:default</dependency>
   </dependencies>
 </metadata>
