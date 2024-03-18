@@ -28,6 +28,8 @@ from ConfigParser import ConfigParser
 
 from Products.CMFCore.permissions import setDefaultRoles
 
+from datetime import datetime
+
 import os
 import importlib
 
@@ -481,6 +483,9 @@ DefaultTexts = {
 
 
 NULL_VALUE = "..."
+
+CODT_2024_REFORM_END_VALIDITY_DATE = datetime(2024, 3, 31)
+CODT_2024_REFORM_START_VALIDITY_DATE = datetime(2024, 4, 1)
 
 
 def registerClasses():
