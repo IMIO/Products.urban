@@ -8,6 +8,16 @@ Changelog
 
 .. towncrier release notes start
 
+2.5.0.dev4 (2024-03-18)
+-----------------------
+
+New features:
+
+
+- Add `getCompletenessDelay`, `getCompletenessDelay` and `getFDAdviceDelay` methods that can be used in templates
+  [mpeeters] (URB-3008)
+
+
 2.5.0.dev3 (2024-03-16)
 -----------------------
 
