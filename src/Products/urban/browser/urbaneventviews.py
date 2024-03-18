@@ -736,3 +736,15 @@ class UrbanEventInquiryView(UrbanEventInquiryBaseView):
     def getProrogationDelay(self):
         licence = self.context.aq_parent
         return licence.getProrogationDelay()
+
+    def getCompletenessDelay(self):
+        licence = self.context.aq_parent
+        return licence.getCompletenessDelay()
+
+    def getReferFDDelay(self):
+        licence = self.context.aq_parent
+        return licence.getReferFDDelay()
+
+    def getFDAdviceDelay(self):
+        licence = self.context.aq_parent
+        return licence.getFDAdviceDelay()
