@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-
+from Products.urban import CODT_2024_REFORM_END_VALIDITY_DATE
+from Products.urban import CODT_2024_REFORM_START_VALIDITY_DATE
 from Products.urban.config import URBAN_TYPES
 
 vocabularies_with_HTML_description = [
@@ -16,13 +17,20 @@ default_values = {
         "folderdelays": [
             "UrbanDelay",
             {"id": "30j", "title": u"30 jours", "deadLineDelay": 30, "alertDelay": 20},
-            {"id": "60j", "title": u"60 jours", "deadLineDelay": 60, "alertDelay": 20},
+            {
+                "id": "60j",
+                "title": u"60 jours",
+                "deadLineDelay": 60,
+                "alertDelay": 20,
+                "endValidity": CODT_2024_REFORM_END_VALIDITY_DATE,
+            },
             {"id": "75j", "title": u"75 jours", "deadLineDelay": 70, "alertDelay": 20},
             {
                 "id": "105j",
                 "title": u"105 jours",
                 "deadLineDelay": 105,
                 "alertDelay": 20,
+                "endValidity": CODT_2024_REFORM_END_VALIDITY_DATE,
             },
             {
                 "id": "115j",
@@ -35,6 +43,28 @@ default_values = {
                 "title": u"145 jours",
                 "deadLineDelay": 145,
                 "alertDelay": 20,
+                "endValidity": CODT_2024_REFORM_END_VALIDITY_DATE,
+            },
+            {
+                "id": "50j",
+                "title": u"50 jours",
+                "deadLineDelay": 50,
+                "alertDelay": 20,
+                "startValidity": CODT_2024_REFORM_START_VALIDITY_DATE,
+            },
+            {
+                "id": "95j",
+                "title": u"95 jours",
+                "deadLineDelay": 95,
+                "alertDelay": 20,
+                "startValidity": CODT_2024_REFORM_START_VALIDITY_DATE,
+            },
+            {
+                "id": "135j",
+                "title": u"135 jours",
+                "deadLineDelay": 135,
+                "alertDelay": 20,
+                "startValidity": CODT_2024_REFORM_START_VALIDITY_DATE,
             },
             {
                 "id": "inconnu",
@@ -119,6 +149,13 @@ default_values = {
                 "title": u"R.IV.40-1.§1.8° - Voiries régionales",
                 "description": u'<p>Article R.IV.40-1.§1.8° du CoD - " les voiries visées à l\'article R.II.21-1,1° pour autant que les actes et travaux impliquent une modification de leur gabarit"</p>',
             },
+            {
+                "id": "div_40_alinea_2_dash_1",
+                "title": u"D.IV.40 Alinéa 2/1",
+                "extraValue": u"D.IV.40 Alinéa 2/1",
+                "description": u"<p>Les demandes visant à implanter un commerce au sens de l'article D.IV.4, alinéa 1er, 8°, sont soumises à enquête publique, sauf lorsque la demande porte sur l'implantation d'un commerce de quatre-cents mètres carrés et moins soumis à permis en exécution de l'article D.IV.4, alinéa 4. </p>",
+                "startValidity": CODT_2024_REFORM_START_VALIDITY_DATE,
+            }
         ],
         "announcementarticles": [
             "UrbanVocabularyTerm",
@@ -219,19 +256,56 @@ default_values = {
                 "id": "annexe9",
                 "title": u"Annexe 9 - Permis d'urbanisme dispensé d'un architecte ou autre que les demandes visées aux annexes 5 à 8",
             },
+            {
+                "id": "div_16_1a",
+                "title": u"DIV.16 1° a) SD pluricommunal ou SDC qui vise l’optimisation spatiale (uniquement les actes et travaux entièrement dans une centralité)",
+                "startValidity": CODT_2024_REFORM_START_VALIDITY_DATE,
+            },
+            {
+                "id": "div_16_1b",
+                "title": u"DIV.16 1° b) une commission communale, un GCU et soit : (1) SD pluricommunal, (2) SDC, (3) SD pluricommunal et un SDC qui a partiellement cessé de produire ses effets",
+                "startValidity": CODT_2024_REFORM_START_VALIDITY_DATE,
+            },
+            {
+                "id": "div_16_1c",
+                "title": u"DIV.16 1° c) SOL",
+                "startValidity": CODT_2024_REFORM_START_VALIDITY_DATE,
+            },
+            {
+                "id": "div_16_1d",
+                "title": u"DIV.16 1° d) permis d’urbanisation non périmé",
+                "startValidity": CODT_2024_REFORM_START_VALIDITY_DATE,
+            },
+            {
+                "id": "div_16_2",
+                "title": u"DIV.16 2° pas d’écart par rapport aux schémas, à la carte d’affectation des sols, aux guides d’urbanisme ou au permis d’urbanisation, si entièrement dans une zone d’enjeu communal",
+                "startValidity": CODT_2024_REFORM_START_VALIDITY_DATE,
+            },
+            {
+                "id": "div_16_3",
+                "title": u"DIV 16 3° pas d’écart par rapport à la carte d’affectation des sols ou au GRU",
+                "startValidity": CODT_2024_REFORM_START_VALIDITY_DATE,
+            },
         ],
     },
     "CODT_ParcelOutLicence": {
         "folderdelays": [
             "UrbanDelay",
             {"id": "30j", "title": u"30 jours", "deadLineDelay": 30, "alertDelay": 20},
-            {"id": "60j", "title": u"60 jours", "deadLineDelay": 60, "alertDelay": 20},
+            {
+                "id": "60j",
+                "title": u"60 jours",
+                "deadLineDelay": 60,
+                "alertDelay": 20,
+                "endValidity": CODT_2024_REFORM_END_VALIDITY_DATE,
+            },
             {"id": "75j", "title": u"75 jours", "deadLineDelay": 70, "alertDelay": 20},
             {
                 "id": "105j",
                 "title": u"105 jours",
                 "deadLineDelay": 105,
                 "alertDelay": 20,
+                "endValidity": CODT_2024_REFORM_END_VALIDITY_DATE,
             },
             {
                 "id": "115j",
@@ -244,6 +318,28 @@ default_values = {
                 "title": u"145 jours",
                 "deadLineDelay": 145,
                 "alertDelay": 20,
+                "endValidity": CODT_2024_REFORM_END_VALIDITY_DATE,
+            },
+            {
+                "id": "50j",
+                "title": u"50 jours",
+                "deadLineDelay": 50,
+                "alertDelay": 20,
+                "startValidity": CODT_2024_REFORM_START_VALIDITY_DATE,
+            },
+            {
+                "id": "95j",
+                "title": u"95 jours",
+                "deadLineDelay": 95,
+                "alertDelay": 20,
+                "startValidity": CODT_2024_REFORM_START_VALIDITY_DATE,
+            },
+            {
+                "id": "135j",
+                "title": u"135 jours",
+                "deadLineDelay": 135,
+                "alertDelay": 20,
+                "startValidity": CODT_2024_REFORM_START_VALIDITY_DATE,
             },
             {
                 "id": "inconnu",
@@ -328,6 +424,13 @@ default_values = {
                 "title": u"R.IV.40-1.§1.8° - Voiries régionales",
                 "description": u'<p>Article R.IV.40-1.§1.8° du CoD - " les voiries visées à l\'article R.II.21-1,1° pour autant que les actes et travaux impliquent une modification de leur gabarit"</p>',
             },
+            {
+                "id": "div_40_alinea_2_dash_1",
+                "title": u"D.IV.40 Alinéa 2/1",
+                "extraValue": u"D.IV.40 Alinéa 2/1",
+                "description": u"<p>Les demandes visant à implanter un commerce au sens de l'article D.IV.4, alinéa 1er, 8°, sont soumises à enquête publique, sauf lorsque la demande porte sur l'implantation d'un commerce de quatre-cents mètres carrés et moins soumis à permis en exécution de l'article D.IV.4, alinéa 4. </p>",
+                "startValidity": CODT_2024_REFORM_START_VALIDITY_DATE,
+            }
         ],
         "announcementarticles": [
             "UrbanVocabularyTerm",
@@ -434,7 +537,13 @@ default_values = {
         "folderdelays": [
             "UrbanDelay",
             {"id": "60j", "title": u"60 jours", "deadLineDelay": 60, "alertDelay": 20},
-            {"id": "90j", "title": u"90 jours", "deadLineDelay": 90, "alertDelay": 20},
+            {
+                "id": "90j",
+                "title": u"90 jours",
+                "deadLineDelay": 90,
+                "alertDelay": 20,
+                "endValidity": CODT_2024_REFORM_END_VALIDITY_DATE,
+            },
             {
                 "id": "120j",
                 "title": u"120 jours",
@@ -446,6 +555,21 @@ default_values = {
                 "title": u"130 jours",
                 "deadLineDelay": 130,
                 "alertDelay": 20,
+                "endValidity": CODT_2024_REFORM_END_VALIDITY_DATE,
+            },
+            {
+                "id": "115j",
+                "title": u"115 jours",
+                "deadLineDelay": 115,
+                "alertDelay": 20,
+                "startValidity": CODT_2024_REFORM_START_VALIDITY_DATE,
+            },
+            {
+                "id": "75j",
+                "title": u"75 jours",
+                "deadLineDelay": 75,
+                "alertDelay": 20,
+                "endValidity": CODT_2024_REFORM_END_VALIDITY_DATE,
             },
             {
                 "id": "160j",
@@ -1086,13 +1210,20 @@ default_values = {
         "folderdelays": [
             "UrbanDelay",
             {"id": "30j", "title": u"30 jours", "deadLineDelay": 30, "alertDelay": 20},
-            {"id": "60j", "title": u"60 jours", "deadLineDelay": 60, "alertDelay": 20},
+            {
+                "id": "60j",
+                "title": u"60 jours",
+                "deadLineDelay": 60,
+                "alertDelay": 20,
+                "endValidity": CODT_2024_REFORM_END_VALIDITY_DATE,
+            },
             {"id": "75j", "title": u"75 jours", "deadLineDelay": 75, "alertDelay": 20},
             {
                 "id": "105j",
                 "title": u"105 jours",
                 "deadLineDelay": 105,
                 "alertDelay": 20,
+                "endValidity": CODT_2024_REFORM_END_VALIDITY_DATE,
             },
             {
                 "id": "115j",
@@ -1105,6 +1236,28 @@ default_values = {
                 "title": u"145 jours",
                 "deadLineDelay": 145,
                 "alertDelay": 20,
+                "endValidity": CODT_2024_REFORM_END_VALIDITY_DATE,
+            },
+            {
+                "id": "50j",
+                "title": u"50 jours",
+                "deadLineDelay": 50,
+                "alertDelay": 20,
+                "startValidity": CODT_2024_REFORM_START_VALIDITY_DATE,
+            },
+            {
+                "id": "95j",
+                "title": u"95 jours",
+                "deadLineDelay": 95,
+                "alertDelay": 20,
+                "startValidity": CODT_2024_REFORM_START_VALIDITY_DATE,
+            },
+            {
+                "id": "135j",
+                "title": u"135 jours",
+                "deadLineDelay": 135,
+                "alertDelay": 20,
+                "startValidity": CODT_2024_REFORM_START_VALIDITY_DATE,
             },
             {
                 "id": "inconnu",
@@ -1164,6 +1317,13 @@ default_values = {
                 "id": "R.IV.40-1.1.8",
                 "title": u"R.IV.40-1.§1.8° - Voiries régionales",
                 "description": u'<p>Article R.IV.40-1.§1.8° du CoD - " les voiries visées à l\'article R.II.21-1,1° pour autant que les actes et travaux impliquent une modification de leur gabarit"</p>',
+            },
+            {
+                "id": "div_40_alinea_2_dash_1",
+                "title": u"D.IV.40 Alinéa 2/1",
+                "extraValue": u"D.IV.40 Alinéa 2/1",
+                "description": u"<p>Les demandes visant à implanter un commerce au sens de l'article D.IV.4, alinéa 1er, 8°, sont soumises à enquête publique, sauf lorsque la demande porte sur l'implantation d'un commerce de quatre-cents mètres carrés et moins soumis à permis en exécution de l'article D.IV.4, alinéa 4. </p>",
+                "startValidity": CODT_2024_REFORM_START_VALIDITY_DATE,
             },
         ],
         "announcementarticles": [
@@ -1961,6 +2121,12 @@ default_values = {
             {"id": "demolition", "title": u"Démolition"},
             {"id": "divers", "title": u"Divers"},
             {"id": "enseigne", "title": u"Enseigne"},
+            {
+                "id": "EXT_COMMERCE",
+                "title": u"Extension d'un commerce de détail ou d'un ensemble commercial",
+                "extraValue": "EXT_COMMERCE",
+                "startValidity": CODT_2024_REFORM_START_VALIDITY_DATE,
+            },
             {"id": "immeuble-appartements", "title": u"Immeuble à appartements"},
             {"id": "modification-relief", "title": u"Modification du relief du sol"},
             {
