@@ -14,7 +14,7 @@ Changelog
 New features:
 
 
-- Add `getCompletenessDelay`, `getCompletenessDelay` and `getFDAdviceDelay` methods that can be used in templates
+- Add `getCompletenessDelay`, `getReferFDDelay` and `getFDAdviceDelay` methods that can be used in templates
   [mpeeters] (URB-3008)
 
 
