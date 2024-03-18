@@ -1814,6 +1814,41 @@ class GenericLicence(OrderedBaseFolder, UrbanBase, BrowserDefaultMixin):
             return translate(_("${nbr} days", mapping={"nbr": delay}), context=request)
         return delay
 
+    security.declarePublic("getCompletenessDelay")
+
+    def getCompletenessDelay(self, text_format=True):
+        """Return the delay in text (default) or in integer based on the CODT reform"""
+        request = getRequest()
+        delay = 20
+        if self.is_CODT2024() is True:
+            delay = 30
+        if text_format is True:
+            return translate(_("${nbr} days", mapping={"nbr": delay}), context=request)
+        return delay
+
+    security.declarePublic("getReferFDDelay")
+
+    def getReferFDDelay(self, text_format=True):
+        """Return the delay in text (default) or in integer based on the CODT reform"""
+        request = getRequest()
+        delay = 30
+        if self.is_CODT2024() is True:
+            delay = 40
+        if text_format is True:
+            return translate(_("${nbr} days", mapping={"nbr": delay}), context=request)
+        return delay
+
+    security.declarePublic("getFDAdviceDelay")
+
+    def getFDAdviceDelay(self, text_format=True):
+        """Return the delay in text (default) or in integer based on the CODT reform"""
+        request = getRequest()
+        delay = 35
+        if self.is_CODT2024() is True:
+            delay = 30
+        if text_format is True:
+            return translate(_("${nbr} days", mapping={"nbr": delay}), context=request)
+        return delay
 
 registerType(GenericLicence, PROJECTNAME)
 # end of class GenericLicence
