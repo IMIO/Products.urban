@@ -733,6 +733,10 @@ class UrbanEventInquiryView(UrbanEventInquiryBaseView):
         licence = self.context.aq_parent
         return licence.is_CODT2024()
 
+    def is_not_CODT2024(self):
+        licence = self.context.aq_parent
+        return licence.is_not_CODT2024()
+
     def getProrogationDelay(self):
         licence = self.context.aq_parent
         return licence.getProrogationDelay()
