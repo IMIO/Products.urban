@@ -90,3 +90,7 @@ class TestCODTBuildLicence(unittest.TestCase):
     def test_is_CODT2024(self):
         self.assertFalse(self.licence_1.is_CODT2024())
         self.assertTrue(self.licence_2.is_CODT2024())
+
+    def test_is_not_CODT2024(self):
+        self.assertTrue(self.licence_1.is_not_CODT2024())
+        self.assertFalse(self.licence_2.is_not_CODT2024())
