@@ -1801,6 +1801,12 @@ class GenericLicence(OrderedBaseFolder, UrbanBase, BrowserDefaultMixin):
         deposit_date = deposit.eventDate.asdatetime()
         return deposit_date >= datetime(2024, 4, 1, tzinfo=deposit_date.tzinfo)
 
+    security.declarePublic("is_not_CODT2024")
+
+    def is_not_CODT2024(self):
+        """Return if we are in the new reform of CODT"""
+        return not self.is_CODT2024()
+
     security.declarePublic("getProrogationDelay")
 
     def getProrogationDelay(self, text_format=True):
