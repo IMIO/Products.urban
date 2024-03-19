@@ -4,7 +4,8 @@ from Products.urban import URBAN_TYPES
 from Products.urban.setuphandlers import createFolderDefaultValues
 from datetime import datetime
 from plone import api
-from zope.publisher.interfaces.browser import IDefaultBrowserLayer
+from zope.event import notify
+from zope.lifecycleevent import ObjectModifiedEvent
 
 import logging
 
@@ -26,6 +27,7 @@ def migrate_vocabulary_validity_date(context):
         term = brain.getObject()
         if term.getEndValidity() is None:
             term.setEndValidity(datetime.now())
+            notify(ObjectModifiedEvent(term))
     logger.info("upgrade done!")
 
 
@@ -41,8 +43,10 @@ def migrate_vocabulary_contents(context):
     for existing_delay in codt_article127_delays_folder.objectValues():
         if existing_delay.getDeadLineDelay() == 130:
             existing_delay.setEndValidity(end_validity_date)
+            notify(ObjectModifiedEvent(existing_delay))
         if existing_delay.getDeadLineDelay() == 90:
             existing_delay.setEndValidity(end_validity_date)
+            notify(ObjectModifiedEvent(existing_delay))
 
     if "115j" not in codt_article127_delays_folder.objectIds():
         codt_article127_delays_folder.invokeFactory(
@@ -212,11 +216,14 @@ def migrate_vocabulary_contents(context):
     ]
 
     licence_exemptfdarticle_folder = portal_urban.codt_buildlicence.exemptfdarticle
+
     # rename old terms
     for term in existing_objects_list:
         if term["id"] in licence_exemptfdarticle_folder:
             term_obj = getattr(licence_exemptfdarticle_folder, term["id"])
             term_obj.setTitle(term["title"])
+            term_obj.setEndValidity(end_validity_date)
+            notify(ObjectModifiedEvent(term_obj))
     # create new terms
     createFolderDefaultValues(
         licence_exemptfdarticle_folder,
@@ -225,10 +232,6 @@ def migrate_vocabulary_contents(context):
     )
 
     logger.info("upgrade done!")
-
-
-class FakeLayer(IDefaultBrowserLayer):
-    pass
 
 
 def remove_broken_liege_browserlayer(context):
@@ -251,8 +254,6 @@ def remove_broken_liege_browserlayer(context):
 
 
 def sort_delay_vocabularies(context):
-    from functools import cmp_to_key
-
     logger.info("starting : Sort delays vocabularies")
     portal_urban = api.portal.get().portal_urban
 
