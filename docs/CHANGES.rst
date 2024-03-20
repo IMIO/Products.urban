@@ -8,6 +8,16 @@ Changelog
 
 .. towncrier release notes start
 
+2.7.4 (2024-03-20)
+------------------
+
+Bug fixes:
+
+
+- Invert Refer FD delay 30 <-> 40 days
+  [mpeeters] (URB-3008)
+
+
 2.7.3 (2024-03-20)
 ------------------
 
