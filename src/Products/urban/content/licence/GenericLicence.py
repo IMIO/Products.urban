@@ -1629,9 +1629,9 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
     def getReferFDDelay(self, text_format=True):
         """Return the delay in text (default) or in integer based on the CODT reform"""
         request = getRequest()
-        delay = 30
+        delay = 40
         if self.is_CODT2024() is True:
-            delay = 40
+            delay = 30
         if text_format is True:
             return translate(_("${nbr} days", mapping={"nbr": delay}), context=request)
         return delay
