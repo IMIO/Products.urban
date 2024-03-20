@@ -8,6 +8,23 @@ Changelog
 
 .. towncrier release notes start
 
+2.7.3 (2024-03-20)
+------------------
+
+New features:
+
+
+- Add `is_not_CODT2024` method that can be used in templates
+  [mpeeters] (URB-3008)
+
+
+Bug fixes:
+
+
+- Fix update of vocabularies
+  [mpeeters] (URB-3002)
+
+
 2.7.2 (2024-03-18)
 ------------------
 
