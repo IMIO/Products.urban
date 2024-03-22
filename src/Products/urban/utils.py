@@ -1,18 +1,13 @@
 # -*- coding: utf-8 -*-
 
 from Acquisition import aq_inner
-
-from imio.schedule.utils import tuple_to_interface
-
 from HTMLParser import HTMLParser
-
 from Products.ATContentTypes.interfaces.file import IATFile
-from Products.urban.config import URBAN_TYPES
 from Products.urban.config import URBAN_ENVIRONMENT_TYPES
+from Products.urban.config import URBAN_TYPES
 from Products.urban.interfaces import IUrbanDoc
-
+from imio.schedule.utils import tuple_to_interface
 from plone import api
-
 from zope.annotation import IAnnotations
 from zope.component import getMultiAdapter
 
