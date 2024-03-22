@@ -558,4 +558,13 @@
         profile="Products.urban:default"
         />
 
+    <gs:upgradeStep
+        title="Add new workflow state"
+        description=""
+        source="1140"
+        destination="1141"
+        handler=".update_codt_2024.add_new_workfow_state"
+        profile="Products.urban:default"
+        />
+
 </configure>

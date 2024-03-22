@@ -508,3 +508,9 @@ msgstr "Veuillez indiquer d'avantages de termes de recherche"
 
 msgid "workLocationStreet"
 msgstr "Rue"
+
+msgid "obsolete"
+msgstr "Caduc"
+
+msgid "make_obsolete"
+msgstr "Rendre caduc"

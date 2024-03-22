@@ -2,6 +2,7 @@
 
 from Products.urban import URBAN_TYPES
 from Products.urban.setuphandlers import createFolderDefaultValues
+from Products.urban.migration.utils import refresh_workflow_permissions
 from datetime import datetime
 from plone import api
 from zope.event import notify
@@ -252,4 +253,15 @@ def sort_delay_vocabularies(context):
             if "inconnu" in folderdelays:
                 folderdelays.moveObjectsToBottom(["inconnu"])
 
+    logger.info("upgrade done!")
+
+
+def add_new_workfow_state(context):
+    logger.info("starting : Add new workflow state")
+    setup_tool = api.portal.get_tool('portal_setup')
+    setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'workflow')
+    refresh_workflow_permissions(
+        "codt_buildlicence_workflow",
+        for_states=["deposit", "complete", "incomplete"],
+    )
     logger.info("upgrade done!")
