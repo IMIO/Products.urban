@@ -28,6 +28,7 @@ from Products.Archetypes.atapi import *
 from zope.interface import implements
 from Products.urban import interfaces
 from Products.urban.utils import is_attachment
+from Products.urban import utils
 
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
@@ -1585,7 +1586,10 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
 
     def is_CODT2024(self):
         """Return if we are in the new reform of CODT"""
+        now = utils.now()
         deposit = self.getFirstDeposit()
+        if not deposit and now >= datetime(2024, 4, 1):
+            return True
         if not deposit:
             return False
         if not deposit.eventDate:

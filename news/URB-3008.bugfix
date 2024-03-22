@@ -1,2 +1,4 @@
 Invert Refer FD delay 30 <-> 40 days
+Move method methods to be available for every events.
+Change `is_CODT2024` to be true if there is no deposit but current date is greater than 2024-03-31.
 [mpeeters]

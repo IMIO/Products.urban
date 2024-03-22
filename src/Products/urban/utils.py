@@ -6,6 +6,7 @@ from Products.ATContentTypes.interfaces.file import IATFile
 from Products.urban.config import URBAN_ENVIRONMENT_TYPES
 from Products.urban.config import URBAN_TYPES
 from Products.urban.interfaces import IUrbanDoc
+from datetime import datetime
 from imio.schedule.utils import tuple_to_interface
 from plone import api
 from zope.annotation import IAnnotations
@@ -239,3 +240,14 @@ def run_entry_points(group, name, *args, **kwargs):
     for entrypoint in pkg_resources.iter_entry_points(group=group, name=name):
         plugin = entrypoint.load()
         return plugin(*args, **kwargs)
+
+
+def convert_to_utf8(string):
+    try:
+        return string.encode("utf-8")
+    except UnicodeDecodeError:
+        return string
+
+
+def now():
+    return datetime.now()
