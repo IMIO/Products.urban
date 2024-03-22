@@ -260,5 +260,8 @@ def add_new_workfow_state(context):
     logger.info("starting : Add new workflow state")
     setup_tool = api.portal.get_tool('portal_setup')
     setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'workflow')
-    refresh_workflow_permissions(["codt_buildlicence_workflow"])
+    refresh_workflow_permissions(
+        "codt_buildlicence_workflow",
+        for_states=["deposit", "complete", "incomplete"],
+    )
     logger.info("upgrade done!")
