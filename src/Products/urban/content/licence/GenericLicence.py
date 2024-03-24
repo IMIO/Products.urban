@@ -1729,6 +1729,9 @@ class GenericLicence(OrderedBaseFolder, UrbanBase, BrowserDefaultMixin):
     def getAllSuspensionEvents(self):
         return self.getAllEvents(interfaces.ISuspensionEvent)
 
+    def getIntentionToSubmitAmendedPlans(self):
+        return self.getLastEvent(interfaces.IIntentionToSubmitAmendedPlans)
+
     def getAllEvents(self, eventInterface=IUrbanEvent):
         return self.getAllEventsByObjectValues(eventInterface)
 
