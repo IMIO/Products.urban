@@ -8,6 +8,28 @@ Changelog
 
 .. towncrier release notes start
 
+2.7.5 (2024-03-24)
+------------------
+
+New features:
+
+
+- Add caduc workflow state
+  [jchandelle] (URB-3007)
+- Add `getIntentionToSubmitAmendedPlans` method for documents
+  [mpeeters] (URB-3008)
+- Add a link field on CODT build licences
+  [mpeeters] (URB-3046)
+
+
+Bug fixes:
+
+
+- Move methods to be available for every events.
+  Change `is_CODT2024` to be true if there is no deposit but current date is greater than 2024-03-31.
+  [mpeeters] (URB-3008)
+
+
 2.7.4 (2024-03-20)
 ------------------
 
