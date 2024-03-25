@@ -526,8 +526,8 @@
     <gs:upgradeStep
         title="Migrate vocabulary terms to include validity date"
         description="Set validity end date for vocabulary that are deactivate"
-        source="1036"
-        destination="1037"
+        source="1136"
+        destination="1137"
         handler=".update_codt_2024.migrate_vocabulary_validity_date"
         profile="Products.urban:default"
         />
