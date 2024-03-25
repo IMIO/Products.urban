@@ -8,6 +8,16 @@ Changelog
 
 .. towncrier release notes start
 
+2.7.6 (2024-03-25)
+------------------
+
+Bug fixes:
+
+
+- Fix an issue with upgrade step numbers
+  [mpeeters] (URB-3002)
+
+
 2.7.5 (2024-03-24)
 ------------------
 
