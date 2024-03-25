@@ -42,6 +42,7 @@
   <include package="urban.vocabulary"/>
   <include package="urban.schedule"/>
   <include package="urban.events"/>
+  <include package="urban.restapi"/>
 
   <include file="grok.zcml" />
   <include file="permissions.zcml" />

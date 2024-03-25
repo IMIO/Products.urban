@@ -281,6 +281,9 @@ def testExtraPostInstall(context):
     logger.info("addEventTypesAndTemplates : starting...")
     addEventTypesAndTemplates(context)
     logger.info("addEventTypesAndTemplates : Done")
+    logger.info("Setup default schedule configuration: starting...")
+    addScheduleConfigs(context, profile_name="extra")
+    logger.info("Setup default schedule configuration : Done")
 
 
 def updateVocabularyConfig(context):
@@ -405,11 +408,12 @@ def createScheduleConfig(container, portal_type, id="schedule", title=""):
     return schedule_config
 
 
-def addScheduleConfigs(context):
+def addScheduleConfigs(context, profile_name=None):
     if context.readDataFile("urban_extra_marker.txt") is None:
         return
 
-    profile_name = context._profile_path.split("/")[-1]
+    if profile_name is None:
+        profile_name = context._profile_path.split("/")[-1]
     module_name = "Products.urban.profiles.%s.schedule_config" % profile_name
     attribute = "schedule_config"
     module = __import__(module_name, fromlist=[attribute])

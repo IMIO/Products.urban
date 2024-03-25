@@ -2,5 +2,7 @@
 <metadata>
   <dependencies>
      <dependency>profile-Products.urban:prod</dependency>
+     <dependency>profile-urban.events:default</dependency>
+     <dependency>profile-urban.schedule:default</dependency>
   </dependencies>
 </metadata>
