@@ -88,6 +88,7 @@ class UrbanConfigLayer(UrbanWithUsersLayer):
         super(UrbanConfigLayer, self).setUp()
         with helpers.ploneSite() as portal:
             portal.setupCurrentSkin(portal.REQUEST)
+            setLocal("request", portal.REQUEST)
             helpers.applyProfile(portal, "Products.urban:testsWithConfig")
 
 
@@ -108,6 +109,7 @@ class UrbanLicencesLayer(UrbanConfigLayer):
         super(UrbanLicencesLayer, self).setUp()
         with helpers.ploneSite() as portal:
             portal.setupCurrentSkin(portal.REQUEST)
+            setLocal("request", portal.REQUEST)
             helpers.applyProfile(portal, "Products.urban:testsWithLicences")
 
 
@@ -126,6 +128,7 @@ class UrbanImportsLayer(IntegrationTesting):
         super(UrbanImportsLayer, self).setUp()
         with helpers.ploneSite() as portal:
             portal.setupCurrentSkin(portal.REQUEST)
+            setLocal("request", portal.REQUEST)
             helpers.applyProfile(portal, "Products.urban:tests-imports")
 
 
@@ -179,6 +182,7 @@ class UrbanConfigFunctionalLayer(UrbanWithUsersFunctionalLayer):
         super(UrbanConfigFunctionalLayer, self).setUp()
         with helpers.ploneSite() as portal:
             portal.setupCurrentSkin(portal.REQUEST)
+            setLocal("request", portal.REQUEST)
             helpers.applyProfile(portal, "Products.urban:testsWithConfig")
 
 
@@ -199,6 +203,7 @@ class UrbanLicencesFunctionalLayer(UrbanConfigFunctionalLayer):
         super(UrbanLicencesFunctionalLayer, self).setUp()
         with helpers.ploneSite() as portal:
             portal.setupCurrentSkin(portal.REQUEST)
+            setLocal("request", portal.REQUEST)
             helpers.applyProfile(portal, "Products.urban:testsWithLicences")
 
 
