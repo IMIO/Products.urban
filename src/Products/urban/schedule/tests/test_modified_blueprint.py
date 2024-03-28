@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from Products.urban.testing import URBAN_TESTS_LICENCES_FUNCTIONAL
 from Products.urban.testing import URBAN_TESTS_CONFIG_FUNCTIONAL
-from Products.urban.tests.helpers import SchemaFieldsTestCase
 from datetime import datetime
 from plone import api
 from plone.app.testing import login
@@ -59,14 +57,18 @@ class TestScheduleModifiedBluePrint(unittest.TestCase):
         api.content.delete(self.licence_2)
 
     def test_no_modified_blueprint_completion(self):
-        # 20 days
-        self.assertTrue("TASK_reception" in self.licence_1)
-        self.assertTrue("TASK_check_completion" in self.licence_1.TASK_reception)
-        task = self.licence_1.TASK_reception.TASK_check_completion
-        self.assertEqual(datetime(2024, 4, 20).date(), self._get_due_date(task))
+        """
+        Warning: Liege deviates from standard (task namings, additional delay = -6)
+        """
 
-        # 30 days
-        self.assertTrue("TASK_reception" in self.licence_2)
-        self.assertTrue("TASK_check_completion" in self.licence_2.TASK_reception)
-        task = self.licence_2.TASK_reception.TASK_check_completion
-        self.assertEqual(datetime(2024, 5, 1).date(), self._get_due_date(task))
+        # 20 days (minus 6)
+        self.assertTrue("TASK_verif_complet" in self.licence_1)
+        task = self.licence_1.TASK_verif_complet
+
+        self.assertEqual(datetime(2024, 4, 14).date(), self._get_due_date(task))
+
+        # 30 days (minus 6)
+        self.assertTrue("TASK_verif_complet" in self.licence_2)
+        task = self.licence_2.TASK_verif_complet
+
+        self.assertEqual(datetime(2024, 4, 25).date(), self._get_due_date(task))
