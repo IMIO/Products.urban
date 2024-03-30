@@ -12,7 +12,7 @@ from zope.lifecycleevent import ObjectModifiedEvent
 import unittest
 
 
-class TestBuildLicenceSchedule(unittest.TestCase):
+class TestCU2Schedule(unittest.TestCase):
 
     layer = URBAN_TESTS_CONFIG_FUNCTIONAL
 
@@ -27,11 +27,11 @@ class TestBuildLicenceSchedule(unittest.TestCase):
         self.portal = portal
         login(self.portal, self.layer.default_user)
         self.portal_urban = portal.portal_urban
-        event_config = self.portal_urban.codt_buildlicence.eventconfigs["depot-de-la-demande-codt"]
+        event_config = self.portal_urban.codt_urbancertificatetwo.eventconfigs["depot-demande"]
 
         self.licence_1 = api.content.create(
-            type="CODT_BuildLicence",
-            container=self.portal.urban.codt_buildlicences,
+            type="CODT_UrbanCertificateTwo",
+            container=self.portal.urban.codt_urbancertificatetwos,
             title="Licence 1",
         )
         self.licence_1.setProcedureChoice("simple")
@@ -41,8 +41,8 @@ class TestBuildLicenceSchedule(unittest.TestCase):
         notify(ObjectModifiedEvent(self.licence_1))
 
         self.licence_2 = api.content.create(
-            type="CODT_BuildLicence",
-            container=self.portal.urban.codt_buildlicences,
+            type="CODT_UrbanCertificateTwo",
+            container=self.portal.urban.codt_urbancertificatetwos,
             title="Licence 2",
         )
         self.licence_2.creation_date = DateTime(2024, 4, 1)

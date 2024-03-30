@@ -30,6 +30,18 @@ EventConfigs = {
             "eventType": ("Products.urban.interfaces.IDepositEvent",),
         },
     ),
+    "codt_urbancertificatetwo": (
+        {
+            "id": "depot-demande",
+            "title": "Dépôt de la demande",
+            "deadLineDelay": 15,
+            "eventDateLabel": "Date de réception",
+            "isKeyEvent": True,
+            "keyDates": ("eventDate",),
+            "podTemplates": (),
+            "eventType": ("Products.urban.interfaces.IDepositEvent",),
+        },
+    ),
     "buildlicence": (
         {
             "id": "depot-de-la-demande",
