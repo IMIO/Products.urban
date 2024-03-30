@@ -17,6 +17,19 @@ default_texts = {
 
 
 EventConfigs = {
+    "codt_buildlicence": (
+        {
+            "id": "depot-de-la-demande-codt",
+            "title": "Dépôt de la demande",
+            "eventDateLabel": "Date de dépôt",
+            "activatedFields": (),
+            "deadLineDelay": 15,
+            "isKeyEvent": True,
+            "keyDates": ("eventDate",),
+            "podTemplates": (),
+            "eventType": ("Products.urban.interfaces.IDepositEvent",),
+        },
+    ),
     "buildlicence": (
         {
             "id": "depot-de-la-demande",
