@@ -8,6 +8,26 @@ Changelog
 
 .. towncrier release notes start
 
+2.5.0.dev6 (2024-04-01)
+-----------------------
+
+Bug fixes:
+
+
+- Move method methods to be available for every events.
+  Change `is_CODT2024` to be true if there is no deposit but current date is greater than 2024-03-31.
+  [mpeeters] (URB-3008)
+
+
+Internal:
+
+
+- Update setup for tests
+  [mpeeters]
+  Test checking completion task
+  [daggelpop] (URB-3005)
+
+
 2.5.0.dev5 (2024-03-20)
 -----------------------
 
