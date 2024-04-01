@@ -629,14 +629,14 @@ class CODT_BaseBuildLicence(
     def getProcedureDelays(self, *values):
         delay = self._getProcedureDelays(values)
         if self.getProrogation():
-            delay += 30
+            delay += self.getProrogationDelay(text_format=False)
 
         return "{}j".format(str(delay))
 
     def getProcedureDelaysModifiedBlueprints(self, *values):
         delay = self._getProcedureDelays(values)
         if self.getProrogationModifiedBp():
-            delay += 30
+            delay += self.getProrogationDelay(text_format=False)
 
         return "{}j".format(str(delay))
 
@@ -645,8 +645,9 @@ class CODT_BaseBuildLicence(
             return base_delay
 
         prorogated_delay = ""
+        prorogation_delay = self.getProrogationDelay(text_format=False)
         if base_delay:
-            prorogated_delay = "{}j".format(str(int(base_delay[:-1]) + 30))
+            prorogated_delay = "{}j".format(str(int(base_delay[:-1]) + prorogation_delay))
 
         return prorogated_delay
 
@@ -656,7 +657,8 @@ class CODT_BaseBuildLicence(
         ]
         base_delay = self.getProcedureDelays(*procedure_choice)
         if self.prorogation:
-            base_delay = "{}j".format(str(int(base_delay[:-1]) - 30))
+            prorogation_delay = self.getProrogationDelay(text_format=False)
+            base_delay = "{}j".format(str(int(base_delay[:-1]) - prorogation_delay))
 
         return self._getProrogationDelays(base_delay, values)
 
