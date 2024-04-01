@@ -8,6 +8,23 @@ Changelog
 
 .. towncrier release notes start
 
+2.7.7 (2024-04-01)
+------------------
+
+Bug fixes:
+
+
+- Fix an error in calculation of prorogated delays
+  [mpeeters] (URB-3008)
+
+
+Internal:
+
+
+- Add tests for buildlicence and CU2 completion schedule
+  [mpeeters] (URB-3005)
+
+
 2.7.6 (2024-03-25)
 ------------------
 
