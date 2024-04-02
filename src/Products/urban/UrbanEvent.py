@@ -900,6 +900,8 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
         Returns the external decision value or the UrbanVocabularyTerm if theObject=True
         """
         res = self.getField("externalDecision").get(self)
+        if res == [""]:
+            res = ""
         if res and theObject:
             tool = getToolByName(self, "portal_urban")
             res = getattr(tool.externaldecisions, res)
