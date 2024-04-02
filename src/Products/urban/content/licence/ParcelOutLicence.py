@@ -155,8 +155,8 @@ class ParcelOutLicence(BaseFolder, BaseBuildLicence, BrowserDefaultMixin):
     def getFirstAcknowledgment(self):
         return self.getFirstEvent(interfaces.IAcknowledgmentEvent)
 
-    def getLastAcknowledgment(self):
-        return self.getLastEvent(interfaces.IAcknowledgmentEvent)
+    def getLastAcknowledgment(self, state=None):
+        return self.getLastEvent(interfaces.IAcknowledgmentEvent, state)
 
     def getLastCommunalCouncil(self):
         return self.getLastEvent(interfaces.ICommunalCouncilEvent)

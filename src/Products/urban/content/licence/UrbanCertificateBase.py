@@ -831,8 +831,8 @@ class UrbanCertificateBase(BaseFolder, GenericLicence, BrowserDefaultMixin):
 
     security.declarePublic("getLastAcknowledgment")
 
-    def getLastAcknowledgment(self):
-        return self.getLastEvent(interfaces.IAcknowledgmentEvent)
+    def getLastAcknowledgment(self, state=None):
+        return self.getLastEvent(interfaces.IAcknowledgmentEvent, state)
 
     security.declarePublic("getLastDeposit")
 

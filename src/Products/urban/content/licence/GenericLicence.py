@@ -1732,18 +1732,21 @@ class GenericLicence(OrderedBaseFolder, UrbanBase, BrowserDefaultMixin):
     def getIntentionToSubmitAmendedPlans(self):
         return self.getLastEvent(interfaces.IIntentionToSubmitAmendedPlans)
 
-    def getAllEvents(self, eventInterface=IUrbanEvent):
-        return self.getAllEventsByObjectValues(eventInterface)
+    def getAllEvents(self, eventInterface=IUrbanEvent, state=None):
+        return self.getAllEventsByObjectValues(eventInterface, state=state)
 
-    def getAllEventsByObjectValues(self, eventInterface):
-        return [
+    def getAllEventsByObjectValues(self, eventInterface, state=None):
+        events = [
             evt
             for evt in self.objectValues()
             if not eventInterface or eventInterface.providedBy(evt)
         ]
+        if state:
+            events = [evt for evt in events if api.content.get_state(evt) == state]
+        return events
 
-    def getLastEvent(self, eventInterface=None):
-        events = self.getAllEvents(eventInterface)
+    def getLastEvent(self, eventInterface=None, state=None):
+        events = self.getAllEvents(eventInterface, state)
         if events:
             return events[-1]
 

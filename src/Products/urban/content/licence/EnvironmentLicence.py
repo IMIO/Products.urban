@@ -353,8 +353,8 @@ class EnvironmentLicence(BaseFolder, EnvironmentBase, BrowserDefaultMixin):
     def getFirstAcknowledgment(self):
         return self.getFirstEvent(interfaces.IAcknowledgmentEvent)
 
-    def getLastAcknowledgment(self):
-        return self.getLastEvent(interfaces.IAcknowledgmentEvent)
+    def getLastAcknowledgment(self, state=None):
+        return self.getLastEvent(interfaces.IAcknowledgmentEvent, state)
 
     def getLastCollegeOpinionTransmitToSPW(self):
         return self.getLastEvent(interfaces.ICollegeOpinionTransmitToSPWEvent)
