@@ -1,2 +1,0 @@
-Add `state` optional parameter to `getLastAcknowledgment` method to fix an issue with schedule start date
-[mpeeters]

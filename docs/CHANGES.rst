@@ -8,6 +8,18 @@ Changelog
 
 .. towncrier release notes start
 
+2.7.8 (2024-04-02)
+------------------
+
+Bug fixes:
+
+
+- Add `state` optional parameter to `getLastAcknowledgment` method to fix an issue with schedule start date
+  [mpeeters] (SUP-36274)
+- Avoid an error if an advice was not defined
+  [mpeeters] (SUP-36276)
+
+
 2.7.7 (2024-04-01)
 ------------------
 
