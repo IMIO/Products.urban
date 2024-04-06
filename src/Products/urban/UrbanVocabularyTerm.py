@@ -243,6 +243,7 @@ class UrbanVocabulary(object):
         return DisplayList(result)
 
     def getDisplayListForTemplate(self, content_instance):
+        """Return a DisplayList object with vocabulary terms"""
         portal_urban = api.portal.get_tool("portal_urban")
         result = DisplayList(
             portal_urban.listVocabulary(
@@ -274,6 +275,7 @@ class UrbanVocabulary(object):
         return result
 
     def getAllVocTerms(self, content_instance):
+        """Return a dict with vocabulary terms"""
         portal_urban = api.portal.get_tool("portal_urban")
         voc_terms = portal_urban.listVocabularyObjects(
             self.path,
@@ -288,6 +290,7 @@ class UrbanVocabulary(object):
         return voc_terms
 
     def listAllVocTerms(self, content_instance):
+        """Return a list of vocabulary terms"""
         portal_urban = api.portal.get_tool("portal_urban")
         voc_brains = portal_urban.listVocabularyBrains(
             self.path,
