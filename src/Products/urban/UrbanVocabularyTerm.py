@@ -161,7 +161,7 @@ class UrbanVocabulary(object):
         value_to_use="title",
         sort_on="getObjPositionInParent",
         inUrbanConfig=True,
-        allowedStates=["enabled"],
+        allowedStates=["enabled", "disabled"],
         with_empty_value=False,
         datagridfield_key="street",
         _filter=None,
@@ -178,8 +178,12 @@ class UrbanVocabulary(object):
         self._filter = _filter
 
     def _validate_term(self, term, deposit_date):
-        if "startValidity" not in term or "endValidity" not in term:
-            return True
+        if isinstance(term, dict):
+            if "startValidity" not in term or "endValidity" not in term:
+                return True
+        else:
+            if not hasattr(term, "startValidity") or not hasattr(term, "endValidity"):
+                return True
         if term["startValidity"] is None and term["endValidity"] is None:
             return True
         if term["startValidity"] and term["endValidity"]:
@@ -192,6 +196,17 @@ class UrbanVocabulary(object):
         if term["endValidity"]:
             return deposit_date <= term["endValidity"]
 
+    def _get_deposit_date(self, context):
+        deposit_date = None
+        if hasattr(context, "get_first_deposit_date"):
+            deposit_date = context.get_first_deposit_date()
+        if hasattr(context, "get_first_deposit_date") and not deposit_date:
+            deposit_date = context.creation_date
+        if not deposit_date:
+            # by default we use the current date
+            deposit_date = DateTime(*datetime.now().date().timetuple()[0:3])
+        return deposit_date
+
     def get_raw_voc(self, context, licence_type="", _filter=None):
         portal_urban = api.portal.get_tool("portal_urban")
         raw_voc = portal_urban.get_vocabulary(
@@ -201,12 +216,7 @@ class UrbanVocabulary(object):
             name=self.path,
         )
 
-        deposit_date = None
-        if hasattr(context, "get_first_deposit_date"):
-            deposit_date = context.get_first_deposit_date()
-        if not deposit_date:
-            # by default we use the current date
-            deposit_date = DateTime(*datetime.now().date().timetuple()[0:3])
+        deposit_date = self._get_deposit_date(context)
         voc = [
             v
             for v in raw_voc
@@ -245,21 +255,19 @@ class UrbanVocabulary(object):
     def getDisplayListForTemplate(self, content_instance):
         """Return a DisplayList object with vocabulary terms"""
         portal_urban = api.portal.get_tool("portal_urban")
-        result = DisplayList(
-            portal_urban.listVocabulary(
-                self.path,
-                content_instance,
-                vocType=self.vocType,
-                id_to_use=self.id_to_use,
-                value_to_use=self.value_to_use,
-                sort_on=self.sort_on,
-                inUrbanConfig=self.inUrbanConfig,
-                allowedStates=self.allowedStates,
-                with_empty_value=self.with_empty_value,
-                with_numbering=False,
-            )
+        voc_terms = portal_urban.listVocabulary(
+            self.path,
+            content_instance,
+            vocType=self.vocType,
+            id_to_use=self.id_to_use,
+            value_to_use=self.value_to_use,
+            sort_on=self.sort_on,
+            inUrbanConfig=self.inUrbanConfig,
+            allowedStates=self.allowedStates,
+            with_empty_value=self.with_empty_value,
+            with_numbering=False,
         )
-        return result
+        return DisplayList(voc_terms)
 
     def getObjectsSet(self, content_instance, values):
         if isinstance(values, str):
@@ -287,7 +295,12 @@ class UrbanVocabulary(object):
             allowedStates=self.allowedStates,
             with_empty_value=self.with_empty_value,
         )
-        return voc_terms
+        deposit_date = self._get_deposit_date(content_instance)
+        filtered_terms = {
+            k: v for k, v in voc_terms.items()
+            if self._validate_term(v, deposit_date)
+        }
+        return filtered_terms
 
     def listAllVocTerms(self, content_instance):
         """Return a list of vocabulary terms"""
@@ -301,7 +314,12 @@ class UrbanVocabulary(object):
             allowedStates=self.allowedStates,
         )
         voc_terms = [brain.getObject() for brain in voc_brains]
-        return voc_terms
+        deposit_date = self._get_deposit_date(content_instance)
+        filtered_terms = [
+            v for v in voc_terms
+            if self._validate_term(v, deposit_date)
+        ]
+        return filtered_terms
 
 
 ##/code-section module-footer
