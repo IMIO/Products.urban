@@ -18,11 +18,18 @@ logger = logging.getLogger("urban debug")
 
 def resolve_vocabulary(context, field, values):
     if type(field.vocabulary) == UrbanVocabulary:
-        result = [
-            field.vocabulary.getAllVocTerms(context)[value].title
-            for value in values
-            if value
-        ]
+        terms = field.vocabulary.getAllVocTerms(context)
+        missing_values = [v for v in values if v and v not in terms]
+        result = [terms[v].title for v in values if v and v not in missing_values]
+        if len(missing_values) > 0:
+            logger.info(
+                "{0}: Missing vocabulary values '{2}' for field '{1}'".format(
+                    context.absolute_url(),
+                    field.__name__,
+                    ", ".join(missing_values),
+                )
+            )
+        result += missing_values
     elif type(field.vocabulary) == str:
         display_list = getattr(context, field.vocabulary)()
         if type(display_list) == list:
@@ -35,7 +42,7 @@ def resolve_vocabulary(context, field, values):
         vocabulary_factory = field.vocabulary_factory
         factory = getUtility(IVocabularyFactory, vocabulary_factory)
         vocabulary = factory(context)
-        missing_values = [v for v in values if v not in vocabulary.by_token if v]
+        missing_values = [v for v in values if v and v not in vocabulary.by_token]
         result = [
             vocabulary.by_token[v].title
             for v in values
