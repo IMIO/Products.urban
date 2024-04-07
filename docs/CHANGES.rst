@@ -8,6 +8,25 @@ Changelog
 
 .. towncrier release notes start
 
+2.7.9 (2024-04-07)
+------------------
+
+Bug fixes:
+
+
+- Avoid an error if a vocabulary term was removed
+  [mpeeters] (SUP-36403,SUP-36406)
+- Fix logic on some methods to exclude invalid vocabulary entries
+  [mpeeters] (URB-3002)
+
+
+Internal:
+
+
+- Add tests for new vocabulary logic (start and end validity)
+  [mpeeters] (URB-3002)
+
+
 2.7.8 (2024-04-02)
 ------------------
 
