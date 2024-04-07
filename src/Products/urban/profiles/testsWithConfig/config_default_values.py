@@ -284,6 +284,15 @@ default_values = {
             "UrbanVocabularyTerm",
             ["UrbanCertificateOne", "UrbanCertificateTwo", "NotaryLetter"],
             {"id": "type-1", "title": u"Type 1: zone à forte pression foncière"},
+            {
+                "id": "type-2",
+                "title": u"Type 2: zone de requalification des noyaux d'habitat",
+            },
+            {
+                "id": "type-3",
+                "title": u"Type 3: zons de développement global de quartier",
+            },
+            {"id": "type-4", "title": u"Type 4: zones de cités sociales à requalifier"},
         ],
         "investigationarticles": [
             "UrbanVocabularyTerm",
