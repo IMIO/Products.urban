@@ -8,6 +8,16 @@ Changelog
 
 .. towncrier release notes start
 
+2.5.0.dev7 (2024-04-07)
+-----------------------
+
+Bug fixes:
+
+
+- Avoid an error if an advice was not defined
+  [mpeeters] (SUP-36385)
+
+
 2.5.0.dev6 (2024-04-01)
 -----------------------
 
