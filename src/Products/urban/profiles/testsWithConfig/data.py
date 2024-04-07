@@ -11,7 +11,7 @@ dashboardTemplates = DASHBOARD_TEMPLATES
 
 default_texts = {
     "claimsTextDefaultValue": """
-    <p>Je réclame le port obligatoire de la mini jupe à l'unif</p>
+    <p>Je réclame le port obligatoire de lunette de soleil à l'intérieur</p>
     """
 }
 
@@ -323,6 +323,18 @@ EventConfigs = {
                 "luxembourg",
                 "namur",
             ],
+        },
+    ),
+    "urbancertificateone": (
+        {
+            "id": "depot-de-la-demande",
+            "title": "Dépôt de la demande",
+            "activatedFields": ("receivedDocumentReference",),
+            "deadLineDelay": 15,
+            "isKeyEvent": True,
+            "keyDates": ("eventDate",),
+            "podTemplates": (),
+            "eventType": ("Products.urban.interfaces.IDepositEvent",),
         },
     ),
     "urbancertificatetwo": (
