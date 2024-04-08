@@ -29,6 +29,15 @@ urbanEventTypes = {
             "podTemplates": (),
             "eventTypeType": "Products.urban.interfaces.IDepositEvent",
         },
+        {
+            "id": "transmis-2eme-dossier-rw",
+            "title": "Transmis 2eme dossier RW",
+            "eventDateLabel": "Date de transmis",
+            "activatedFields": ["decisionDate", "decision", "receiptDate"],
+            "deadLineDelay": 0,
+            "podTemplates": (),
+            "eventTypeType": "Products.urban.interfaces.IWalloonRegionOpinionRequestEvent",
+        },
     ),
     "buildlicence": (
         {
