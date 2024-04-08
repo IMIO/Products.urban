@@ -14,19 +14,19 @@ from datetime import datetime
 from mock import Mock
 from DateTime import DateTime
 
-from urban.schedule.conditions.delay import CalculationDelayOpinionFd
+from urban.schedule.conditions.start_date import FDOpinionLimitDate
 from imio.schedule.testing import ExampleScheduleFunctionalTestCase
 from imio.schedule.tests.due_date import ContainerCreationDate
 
 import unittest
 
-CODT_BUILDLICENCE_WORKFLOWS = {
-    "ask_address_validation": None,
-    "validate_address":["AddressEditor"],
-    "check_completion": None,
-    "propose_procedure_choice": ["Editor", "Contributor","AddressEditor"],
-    "validate_procedure_choice": ["Contributor"]
-}
+CODT_BUILDLICENCE_TRANSITIONS_LIST = [
+    "ask_address_validation",
+    "validate_address",
+    "propose_complete",
+    "propose_procedure_choice",
+    "validate_procedure_choice",
+]
 
 
 class TestCalculationDelayOpinionFD(unittest.TestCase):
@@ -40,16 +40,19 @@ class TestCalculationDelayOpinionFD(unittest.TestCase):
         return config.compute_due_date(container, task)
 
     def _pass_workflow(self, licence):
-        api.user.grant_roles(obj=licence,roles=["Manager"], username=self.layer.default_user)
-        for workflow, roles in CODT_BUILDLICENCE_WORKFLOWS.items():
-            api.content.transition(obj=licence, transition=workflow)
+        api.user.grant_roles(
+            obj=licence, roles=["Manager"], username=self.layer.default_user
+        )
+        for transition in CODT_BUILDLICENCE_TRANSITIONS_LIST:
+            api.content.transition(obj=licence, transition=transition)
 
     def setUp(self):
         portal = self.layer["portal"]
         self.portal = portal
         login(self.portal, self.layer.default_user)
         self.portal_urban = portal.portal_urban
-        event_config = self.portal_urban.codt_buildlicence.urbaneventtypes["depot-de-la-demande"]
+        depot_event_config = self.portal_urban.codt_buildlicence.urbaneventtypes["depot-de-la-demande"]
+        rw_event_config = self.portal_urban.codt_buildlicence.urbaneventtypes["transmis-2eme-dossier-rw"]
 
         self.licence_1 = api.content.create(
             type="CODT_BuildLicence",
@@ -57,22 +60,25 @@ class TestCalculationDelayOpinionFD(unittest.TestCase):
             title="Licence 1",
         )
         self.licence_1.setProcedureChoice("FD")
-        event = self.licence_1.createUrbanEvent(event_config)
-        event.setEventDate(datetime(2024, 3, 31))
+        event_depot = self.licence_1.createUrbanEvent(depot_event_config)
+        event_depot.setEventDate(datetime(2024, 3, 31))
         notify(ObjectModifiedEvent(self.licence_1))
         self._pass_workflow(self.licence_1)
-        __import__('pdb').set_trace()
-
+        event_rw = self.licence_1.createUrbanEvent(rw_event_config)
+        event_rw.setEventDate(datetime(2024, 3, 31))
+        
         self.licence_2 = api.content.create(
             type="CODT_BuildLicence",
             container=self.portal.urban.codt_buildlicences,
             title="Licence 2",
         )
         self.licence_2.setProcedureChoice("FD")
-        event = self.licence_2.createUrbanEvent(event_config)
-        event.setEventDate(datetime(2024, 4, 1))
+        event_depot = self.licence_2.createUrbanEvent(depot_event_config)
+        event_depot.setEventDate(datetime(2024, 4, 1))
         notify(ObjectModifiedEvent(self.licence_2))
         self._pass_workflow(self.licence_2)
+        event_rw = self.licence_2.createUrbanEvent(rw_event_config)
+        event_rw.setEventDate(datetime(2024, 4, 1))
 
         logout()
         login(portal, "urbaneditor")
@@ -84,13 +90,13 @@ class TestCalculationDelayOpinionFD(unittest.TestCase):
 
     def test_delay_opinion_fd(self):
         # 35 days
-        self.assertTrue("TASK_avis_fd" in self.licence_1)
-        self.assertTrue("TASK_envoyer_avis_FD" in self.licence_1.TASK_avis_fd)
-        task = self.licence_1.TASK_avis_fd.TASK_envoyer_avis_FD
+        self.assertTrue("TASK_avis-fd" in self.licence_1)
+        self.assertTrue("TASK_envoyer-avis-FD" in self.licence_1["TASK_avis-fd"])
+        task = self.licence_1["TASK_avis-fd"]["TASK_envoyer-avis-FD"]
         self.assertEqual(datetime(2024, 5, 5).date(), self._get_due_date(task))
 
         # 30 days
-        self.assertTrue("TASK_avis_fd" in self.licence_2)
-        self.assertTrue("TASK_envoyer_avis_FD" in self.licence_2.TASK_avis_fd)
-        task = self.licence_2.TASK_avis_fd.TASK_envoyer_avis_FD
+        self.assertTrue("TASK_avis-fd" in self.licence_2)
+        self.assertTrue("TASK_envoyer-avis-FD" in self.licence_2["TASK_avis-fd"])
+        task = self.licence_2["TASK_avis-fd"]["TASK_envoyer-avis-FD"]
         self.assertEqual(datetime(2024, 5, 1).date(), self._get_due_date(task))
