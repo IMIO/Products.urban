@@ -1,22 +1,11 @@
 # -*- coding: utf-8 -*-
 
-from Products.urban.testing import URBAN_TESTS_LICENCES_FUNCTIONAL
-from Products.urban.testing import URBAN_TESTS_CONFIG_FUNCTIONAL
-from Products.urban.tests.helpers import SchemaFieldsTestCase
 from datetime import datetime
 from plone import api
-from plone.app.testing import login
-from plone.app.testing import logout
-from zope.lifecycleevent import ObjectModifiedEvent
+from plone.app.testing import login, logout
+from Products.urban.testing import URBAN_TESTS_CONFIG_FUNCTIONAL
 from zope.event import notify
-
-from datetime import datetime
-from mock import Mock
-from DateTime import DateTime
-
-from urban.schedule.conditions.start_date import FDOpinionLimitDate
-from imio.schedule.testing import ExampleScheduleFunctionalTestCase
-from imio.schedule.tests.due_date import ContainerCreationDate
+from zope.lifecycleevent import ObjectModifiedEvent
 
 import unittest
 
@@ -34,7 +23,7 @@ class TestCalculationDelayOpinionFD(unittest.TestCase):
     layer = URBAN_TESTS_CONFIG_FUNCTIONAL
 
     def _get_due_date(self, task):
-        """"Return the due date for a given task"""
+        """ "Return the due date for a given task"""
         container = task.get_container()
         config = task.get_task_config()
         return config.compute_due_date(container, task)
@@ -51,8 +40,12 @@ class TestCalculationDelayOpinionFD(unittest.TestCase):
         self.portal = portal
         login(self.portal, self.layer.default_user)
         self.portal_urban = portal.portal_urban
-        depot_event_config = self.portal_urban.codt_buildlicence.urbaneventtypes["depot-de-la-demande"]
-        rw_event_config = self.portal_urban.codt_buildlicence.urbaneventtypes["transmis-2eme-dossier-rw"]
+        depot_event_config = self.portal_urban.codt_buildlicence.urbaneventtypes[
+            "depot-de-la-demande"
+        ]
+        rw_event_config = self.portal_urban.codt_buildlicence.urbaneventtypes[
+            "transmis-2eme-dossier-rw"
+        ]
 
         self.licence_1 = api.content.create(
             type="CODT_BuildLicence",
@@ -66,7 +59,7 @@ class TestCalculationDelayOpinionFD(unittest.TestCase):
         self._pass_workflow(self.licence_1)
         event_rw = self.licence_1.createUrbanEvent(rw_event_config)
         event_rw.setEventDate(datetime(2024, 3, 31))
-        
+
         self.licence_2 = api.content.create(
             type="CODT_BuildLicence",
             container=self.portal.urban.codt_buildlicences,
