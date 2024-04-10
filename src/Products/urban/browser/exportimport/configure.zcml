@@ -12,4 +12,12 @@
       permission="cmf.ManagePortal"
       />
 
+  <browser:page
+      name="import_urban_config"
+      for="zope.interface.Interface"
+      class=".import_config.ConfigImportContent"
+      layer="Products.urban.interfaces.IProductUrbanLayer"
+      permission="cmf.ManagePortal"
+      />
+
 </configure>
