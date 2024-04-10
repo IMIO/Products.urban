@@ -8,6 +8,16 @@ Changelog
 
 .. towncrier release notes start
 
+2.7.10 (2024-04-10)
+-------------------
+
+New features:
+
+
+- Add view for import urban config
+  [jchandelle] (SUP-36419)
+
+
 2.7.9 (2024-04-07)
 ------------------
 
