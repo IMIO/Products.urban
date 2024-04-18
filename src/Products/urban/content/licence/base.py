@@ -517,7 +517,7 @@ class UrbanBase(object):
 
     security.declarePublic("getDefaultStreetAndNumber")
 
-    def getDefaultStreetAndNumber(self, separator=''):
+    def getDefaultStreetAndNumber(self, separator=""):
         """
         Returns a string reprensenting the different streets and numbers
         """
@@ -532,7 +532,9 @@ class UrbanBase(object):
             streetName = street.getStreetName()
             number = wl["number"]
             if number:
-                signaletic = "{} {}{} {}".format(signaletic, streetName, separator, convert_to_utf8(number))
+                signaletic = "{} {}{} {}".format(
+                    signaletic, streetName, separator, convert_to_utf8(number)
+                )
             else:
                 signaletic = "{} {}".format(signaletic, streetName)
 
@@ -540,18 +542,18 @@ class UrbanBase(object):
 
     def getStreets(self):
         """
-          Returns a string reprensenting the different streets
+        Returns a string reprensenting the different streets
         """
         catalog = api.portal.get_tool("uid_catalog")
-        signaletic = ''
+        signaletic = ""
 
         for wl in self.getWorkLocations():
-            street_brains = catalog(UID=wl['street'])
+            street_brains = catalog(UID=wl["street"])
             if not street_brains:
                 continue
             street = street_brains[0].getObject()
             streetName = unicode(street.getStreetName(), "utf-8")
-            signaletic = '{} {}'.format(signaletic, streetName)
+            signaletic = "{} {}".format(signaletic, streetName)
 
         return signaletic
 
