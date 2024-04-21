@@ -8,6 +8,18 @@ Changelog
 
 .. towncrier release notes start
 
+2.5.0.dev8 (2024-04-21)
+-----------------------
+
+Bug fixes:
+
+
+- Avoid to display disabled vocabulary entries with no start or end validity date
+  [mpeeters] (SUP-36742)
+- Fix logic on some methods to exclude invalid vocabulary entries
+  [mpeeters] (URB-3002)
+
+
 2.5.0.dev7 (2024-04-07)
 -----------------------
 
