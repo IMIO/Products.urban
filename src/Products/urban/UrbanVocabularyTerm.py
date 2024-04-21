@@ -197,12 +197,12 @@ class UrbanVocabulary(object):
     def _validate_term(self, term, deposit_date):
         if isinstance(term, dict):
             if "startValidity" not in term or "endValidity" not in term:
-                return True
+                return term.get("enabled", True)
         else:
             if not hasattr(term, "startValidity") or not hasattr(term, "endValidity"):
-                return True
+                return term.get("enabled", True)
         if term["startValidity"] is None and term["endValidity"] is None:
-            return True
+            return term.get("enabled", True)
         if term["startValidity"] and term["endValidity"]:
             return (
                 deposit_date >= term["startValidity"]
