@@ -1190,7 +1190,7 @@ msgstr "Attention, aucune adresse de travaux définie"
 #: ../browser/licence/templates/licencemacros.pt:5
 #: ../browser/licence/templates/licencetabsmacros.pt:92
 msgid "content_none"
-msgstr "N.C."
+msgstr "-"
 
 #. Default: "Contact person address / headoffice"
 #: ../browser/templates/contactmacros.pt:135
