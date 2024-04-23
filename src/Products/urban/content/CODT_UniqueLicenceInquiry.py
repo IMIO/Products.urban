@@ -104,7 +104,6 @@ class CODT_UniqueLicenceInquiry(BaseContent, CODT_Inquiry, BrowserDefaultMixin):
         )
         return all_inquiries
 
-
     def get_inquiry_category_radius(self, enquiry_type):
         """ """
         if enquiry_type == "B":
