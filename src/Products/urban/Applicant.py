@@ -316,7 +316,7 @@ class Applicant(BaseContent, Contact, BrowserDefaultMixin):
             names = u"%s %s" % (name2, name1)
         names = names.strip()
         namepart = namedefined and names or self.getSociety().decode("utf-8")
-        if whithtitle:
+        if withtitle:
             nameSignaletic = u"%s %s" % (title, namepart)
         else:
             nameSignaletic = u"%s" % (namepart)
@@ -340,7 +340,7 @@ class Applicant(BaseContent, Contact, BrowserDefaultMixin):
                     represented = u"représentée"
                 elif gender == "female" and multiplicity == "plural":
                     represented = u"représentées"
-            if whithtitle:
+            if withtitle:
                 nameSignaletic = u"%s %s %s par %s" % (
                     title,
                     namepart,
