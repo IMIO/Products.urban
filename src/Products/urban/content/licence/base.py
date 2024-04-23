@@ -540,9 +540,11 @@ class UrbanBase(object):
 
         return signaletic
 
+    security.declarePublic("getStreets")
+    
     def getStreets(self):
         """
-        Returns a string reprensenting the different streets
+        Returns a string representing the different streets
         """
         catalog = api.portal.get_tool("uid_catalog")
         signaletic = ""
