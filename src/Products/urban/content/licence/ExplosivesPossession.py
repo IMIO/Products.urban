@@ -89,7 +89,9 @@ class ExplosivesPossession(BaseFolder, EnvironmentLicence, BrowserDefaultMixin):
                 signaletic += " %s " % translate(
                     "and", "urban", context=self.REQUEST
                 ).encode("utf8")
-            signaletic += applicant.getSignaletic(withaddress=withaddress, withtitle=withtitle)
+            signaletic += applicant.getSignaletic(
+                withaddress=withaddress, withtitle=withtitle
+            )
         return signaletic
 
     security.declarePublic("updateTitle")

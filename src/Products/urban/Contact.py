@@ -286,17 +286,17 @@ class Contact(BaseContent, BrowserDefaultMixin):
         else:
             return "%s %s %s" % (self.getPersonTitle(short=True), name1, name2)
 
-    security.declarePublic('getSignaletic')
+    security.declarePublic("getSignaletic")
 
     def getSignaletic(
-            self,
-            short=False,
-            withaddress=False,
-            linebyline=False,
-            reverse=False,
-            remove_comma=False,
-            inverted_address=False,
-            withtitle=True
+        self,
+        short=False,
+        withaddress=False,
+        linebyline=False,
+        reverse=False,
+        remove_comma=False,
+        inverted_address=False,
+        withtitle=True,
     ):
         """
         Returns the contact base signaletic : title and names
@@ -365,7 +365,9 @@ class Contact(BaseContent, BrowserDefaultMixin):
                 address = u"<p>%s<br />%s</p>" % (nameSignaletic, addressSignaletic)
                 return address
 
-    def _getNameSignaletic(self, short, linebyline, reverse=False, invertnames=False, withtitle=True):
+    def _getNameSignaletic(
+        self, short, linebyline, reverse=False, invertnames=False, withtitle=True
+    ):
         title = self.getPersonTitleValue(short, False, reverse)
         name1 = self.getName1().decode("utf-8")
         name2 = self.getName2().decode("utf-8")

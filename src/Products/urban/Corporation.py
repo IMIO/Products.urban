@@ -216,7 +216,9 @@ class Corporation(BaseContent, Applicant, BrowserDefaultMixin):
         )
         return title
 
-    def _getNameSignaletic(self, short, linebyline, reverse=False, invertnames=False, withtitle=True):
+    def _getNameSignaletic(
+        self, short, linebyline, reverse=False, invertnames=False, withtitle=True
+    ):
         title = self.getPersonTitleValue(short, False, reverse).decode("utf8")
         legalForm = self.getLegalForm().decode("utf8")
         denomination = self.getDenomination().decode("utf8")

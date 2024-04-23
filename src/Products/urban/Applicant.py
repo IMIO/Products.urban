@@ -304,7 +304,9 @@ class Applicant(BaseContent, Contact, BrowserDefaultMixin):
         ]
         return DisplayList(tuple(vocabulary))
 
-    def _getNameSignaletic(self, short, linebyline, reverse=False, invertnames=False, withtitle=True):
+    def _getNameSignaletic(
+        self, short, linebyline, reverse=False, invertnames=False, withtitle=True
+    ):
         title = self.getPersonTitleValue(short, linebyline, reverse)
         name1 = self.getName1().decode("utf-8")
         name2 = self.getName2().decode("utf-8")
@@ -346,7 +348,11 @@ class Applicant(BaseContent, Contact, BrowserDefaultMixin):
                     representatives.decode("utf-8"),
                 )
             else:
-                nameSignaletic = u"%s %s par %s" % (namepart, represented, representatives.decode('utf-8'))
+                nameSignaletic = u"%s %s par %s" % (
+                    namepart,
+                    represented,
+                    representatives.decode("utf-8"),
+                )
         if linebyline:
             # escape HTML special characters like HTML entities
             return cgi.escape(nameSignaletic)

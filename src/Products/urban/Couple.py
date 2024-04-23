@@ -134,14 +134,16 @@ class Couple(BaseContent, Applicant, BrowserDefaultMixin):
             self.getCouplePerson2Firstname(),
         )
 
-    def _getNameSignaletic(self, short, linebyline, reverse=False, invertnames=False, withtitle=True):
+    def _getNameSignaletic(
+        self, short, linebyline, reverse=False, invertnames=False, withtitle=True
+    ):
         title = self.getPersonTitleValue(short, False, reverse).decode("utf8")
         lastNamePerson1 = self.getCouplePerson1Name().decode("utf-8")
         firstNamePerson1 = self.getCouplePerson1Firstname().decode("utf-8")
         lastNamePerson2 = self.getCouplePerson2Name().decode("utf-8")
         firstNamePerson2 = self.getCouplePerson2Firstname().decode("utf-8")
         namedefined = (
-                lastNamePerson1 or firstNamePerson1 or lastNamePerson2 or firstNamePerson2
+            lastNamePerson1 or firstNamePerson1 or lastNamePerson2 or firstNamePerson2
         )
         names = u"%s-%s %s et %s" % (
             lastNamePerson1,
@@ -191,7 +193,7 @@ class Couple(BaseContent, Applicant, BrowserDefaultMixin):
                 nameSignaletic = u"%s %s par %s" % (
                     namepart,
                     represented,
-                    representatives.decode('utf-8'),
+                    representatives.decode("utf-8"),
                 )
         if linebyline:
             # escape HTML special characters like HTML entities
