@@ -10,6 +10,14 @@ class UrbanExportContent(ExportContent):
     def _serializer(self, obj):
         serializer = getMultiAdapter((obj, self.request), ISerializeToJson)
         item = serializer()
+        sub_files = obj.listFolderContents(
+            contentFilter={"portal_type": "File"}
+        )
+        for file in sub_files:
+            file_serializer = getMultiAdapter((file, self.request), ISerializeToJson)
+            if "documents" not in item:
+                item["documents"] = []
+            item["documents"].append(self.update_data_for_migration(file_serializer(), obj))
         item["@id"] = obj.absolute_url()
         return self.update_data_for_migration(item, obj)
 
