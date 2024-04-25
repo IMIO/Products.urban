@@ -8,6 +8,16 @@ Changelog
 
 .. towncrier release notes start
 
+2.7.12 (2024-04-25)
+-------------------
+
+Bug fixes:
+
+
+- Fix wrong files export
+  [jchandelle] (MURBMONA-48)
+
+
 2.7.11 (2024-04-25)
 -------------------
 
