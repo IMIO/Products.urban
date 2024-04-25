@@ -8,6 +8,30 @@ Changelog
 
 .. towncrier release notes start
 
+2.7.11 (2024-04-25)
+-------------------
+
+Bug fixes:
+
+
+- Add event sub file in export content
+  Add missing portal_type to export sub content
+  [jchandelle] (MURBMONA-48)
+
+
+Internal:
+
+
+- Add `withtitle` parameter to the getApplicantsSignaletic method
+  [fngaha] (SUP-33759)
+- Improve merge fields
+  Provide a merge field that only returns streets
+  Adapt the getStreetAndNumber method field to be able to receive a separation parameter between the street and the number
+  [fngaha] (SUP-34184)
+- Update the translation of empty fields
+  [fngaha] (URB-3079)
+
+
 2.7.10 (2024-04-10)
 -------------------
 
