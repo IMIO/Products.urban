@@ -27,7 +27,20 @@ class UrbanExportContent(ExportContent):
             item["events"] = [
                 self._serializer(event)
                 for event in obj.listFolderContents(
-                    contentFilter={"portal_type": "UrbanEvent"}
+                    contentFilter={"portal_type": [
+                        "UrbanEvent",
+                        "UrbanEventAnnouncement",
+                        "UrbanEventCollege",
+                        "UrbanEventNotificationCollege",
+                        "UrbanEventOpinionRequest",
+                        "UrbanEventInquiry",
+                        "UrbanEventMayor",
+                        "CODT_Inquiry",
+                        "Inquiry",
+                        "CODT_UniqueLicenceInquiry",
+                        "UrbanEventInspectionReport",
+                        "UrbanEventFollowUp",
+                    ]}
                 )
             ]
             item["parcels"] = [
@@ -36,10 +49,26 @@ class UrbanExportContent(ExportContent):
                     contentFilter={"portal_type": "Parcel"}
                 )
             ]
+            item["notary_worklocation"] = [
+                self._serializer(event)
+                for event in obj.listFolderContents(
+                    contentFilter={"portal_type": "WorkLocation"}
+                )
+            ]
             item["applicants"] = [
                 self._serializer(event)
                 for event in obj.listFolderContents(
-                    contentFilter={"portal_type": "Applicant"}
+                    contentFilter={"portal_type": [
+                        "Applicant",
+                        "Couple",
+                        "Corporation",
+                        "Proprietary",
+                        "CorporationProprietary",
+                        "ProprietaryCouple",
+                        "Tenant",
+                        "Plaintiff",
+                        "CorporationPlaintiff",
+                    ]}
                 )
             ]
         return item
