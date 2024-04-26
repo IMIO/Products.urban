@@ -265,3 +265,11 @@ def add_new_workfow_state(context):
         for_states=["deposit", "complete", "incomplete"],
     )
     logger.info("upgrade done!")
+
+
+def add_frozen_workflow_state(context):
+    logger.info("starting : Add new workflow state")
+    setup_tool = api.portal.get_tool('portal_setup')
+    setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'workflow')
+    logger.info("upgrade done!")
+    

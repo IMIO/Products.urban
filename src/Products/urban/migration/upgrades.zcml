@@ -567,4 +567,13 @@
         profile="Products.urban:default"
         />
 
+    <gs:upgradeStep
+        title="Add frozen workflow state"
+        description=""
+        source="1141"
+        destination="1142"
+        handler=".update_codt_2024.add_frozen_workflow_state"
+        profile="Products.urban:default"
+        />
+
 </configure>
