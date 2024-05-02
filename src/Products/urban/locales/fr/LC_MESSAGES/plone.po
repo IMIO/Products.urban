@@ -420,11 +420,17 @@ msgstr "PEB"
 msgid "label_schema_urban_road"
 msgstr "Voirie"
 
+msgid "make_obsolete"
+msgstr "Rendre caduc"
+
 msgid "need_parceloutlicence"
 msgstr "Refusé"
 
 msgid "notify"
 msgstr "Notification"
+
+msgid "obsolete"
+msgstr "Caduc"
 
 msgid "opinion_given"
 msgstr "Avis rendu"
