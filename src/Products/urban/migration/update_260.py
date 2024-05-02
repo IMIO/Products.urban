@@ -112,18 +112,20 @@ def update_delais_vocabularies_and_activate_prorogation_field(context):
 
 
 def configure_ckeditor(context):
-    logger = logging.getLogger('urban: configure ckeditor')
+    logger = logging.getLogger("urban: configure ckeditor")
     logger.info("starting upgrade steps")
     configureCKEditor(context)
     logger.info("upgrade step done!")
 
 
 def create_plone_custom_css(context):
-    logger = logging.getLogger('urban: create plone custom css')
+    logger = logging.getLogger("urban: create plone custom css")
     logger.info("starting upgrade steps")
     portal = context.portal_url.getPortalObject()
-    if 'custom' not in portal.portal_skins.objectIds():
-        portal.portal_skins.manage_addProduct['OFSP'].manage_addFolder('custom', 'Custom Skins')
+    if "custom" not in portal.portal_skins.objectIds():
+        portal.portal_skins.manage_addProduct["OFSP"].manage_addFolder(
+            "custom", "Custom Skins"
+        )
     custom_folder = portal.portal_skins.custom
     css_content = """
     /*
@@ -152,6 +154,8 @@ def create_plone_custom_css(context):
 
     /* </dtml-with> */
     """
-    if 'ploneCustom.css' not in custom_folder.objectIds():
-        custom_folder.manage_addProduct['OFSP'].manage_addDTMLMethod('ploneCustom.css', '', css_content)
+    if "ploneCustom.css" not in custom_folder.objectIds():
+        custom_folder.manage_addProduct["OFSP"].manage_addDTMLMethod(
+            "ploneCustom.css", "", css_content
+        )
     logger.info("upgrade step done!")
