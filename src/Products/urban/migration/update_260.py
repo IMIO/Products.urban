@@ -1,3 +1,4 @@
+from Products.urban.setuphandlers import configureCKEditor
 from plone.registry.interfaces import IRegistry
 from zope.component import getUtility
 from imio.helpers.catalog import reindexIndexes
@@ -107,4 +108,50 @@ def update_delais_vocabularies_and_activate_prorogation_field(context):
         ):
             to_set = ("prorogation",)
             config.setUsedAttributes(config.getUsedAttributes() + to_set)
+    logger.info("upgrade step done!")
+
+
+def configure_ckeditor(context):
+    logger = logging.getLogger('urban: configure ckeditor')
+    logger.info("starting upgrade steps")
+    configureCKEditor(context)
+    logger.info("upgrade step done!")
+
+
+def create_plone_custom_css(context):
+    logger = logging.getLogger('urban: create plone custom css')
+    logger.info("starting upgrade steps")
+    portal = context.portal_url.getPortalObject()
+    if 'custom' not in portal.portal_skins.objectIds():
+        portal.portal_skins.manage_addProduct['OFSP'].manage_addFolder('custom', 'Custom Skins')
+    custom_folder = portal.portal_skins.custom
+    css_content = """
+    /*
+     *  This is the file where you put your CSS changes.
+     *  You should preferrably use this and override the
+     *  relevant properties you want to change here instead
+     *  of customizing plone.css to survive upgrades. Writing
+     *  your own plone.css only makes sense for very heavy
+     *  customizations. Useful variables from Plone are
+     *  documented at the bottom of this file.
+     */
+
+    /* <dtml-with imioapps_properties> (do not remove this :) */
+    /* <dtml-call "REQUEST.set('portal_url', portal_url())"> (not this either :) */
+
+    /* ADD YOUR CUSTOMIZATIONS HERE, IT USE imioapps_properties */
+    /* CKeditor styles */
+    .red-text {color: red;}
+    .blue-text {color: blue;}
+    .green-text {color: green;}
+    .highlight-rouge {background-color: #FF7F7F;}
+    .highlight-vert-claire {background-color: #83f28f;}
+    .highlight-orange {background-color:orange;}
+    .highlight-bleu {background-color:#34CCFF;}
+
+
+    /* </dtml-with> */
+    """
+    if 'ploneCustom.css' not in custom_folder.objectIds():
+        custom_folder.manage_addProduct['OFSP'].manage_addDTMLMethod('ploneCustom.css', '', css_content)
     logger.info("upgrade step done!")

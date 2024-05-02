@@ -246,6 +246,8 @@ def extraPostInstall(context):
     logger.info("Configure CKEditor: starting...")
     configureCKEditor(context)
     logger.info("Configure CKEditor: Done")
+    create_plone_custom_css(context)
+    logger.info('Create a Plone custom css: Done')
 
 
 def updateVocabularyConfig(context):
@@ -1764,16 +1766,51 @@ def configureCKEditor(context):
         from Products.CPUtils.Extensions.utils import configure_ckeditor
 
         portal = api.portal.get()
-        if (
-            not hasattr(portal.portal_properties, "ckeditor_properties")
-            or portal.portal_properties.site_properties.default_editor != "CKeditor"
-        ):
-            configure_ckeditor(portal, custom="urban")
-            custom_menu_style = u"[\n/* Styles Urban */\n{ name : 'Urban Body'\t\t, element : 'p', attributes : { 'class' : 'UrbanBody' } }, \n{ name : 'Urban title'\t       , element : 'p', attributes : { 'class' : 'UrbanTitle' } }, \n{ name : 'Urabn title 2'\t, element : 'p', attributes : { 'class' : 'UrbanTitle2' } }, \n{ name : 'Urban title 3'\t, element : 'p', attributes : { 'class' : 'UrbanTitle3' } }, \n{ name : 'Urban address'\t, element : 'p', attributes : { 'class' : 'UrbanAddress' } }, \n{ name : 'Urban table'\t       , element : 'p', attributes : { 'class' : 'UrbanTable' } }, \n/* Block Styles */\n{ name : 'Grey Title'\t\t, element : 'h2', styles : { 'color' : '# 888' } }, \n{ name : 'Grey Sub Title'\t, element : 'h3', styles : { 'color' : '# 888' } }, \n{ name : 'Discreet bloc'\t, element : 'p', attributes : { 'class' : 'discreet' } }, \n/* Inline styles */\n{ name : 'Discreet text'\t, element : 'span', attributes : { 'class' : 'discreet' } }, \n{ name : 'Marker: Yellow'\t, element : 'span', styles : { 'background-color' : 'Yellow' } }, \n{ name : 'Typewriter'\t\t, element : 'tt' }, \n{ name : 'Computer Code'\t, element : 'code' }, \n{ name : 'Keyboard Phrase'\t, element : 'kbd' }, \n{ name : 'Sample Text'\t\t, element : 'samp' }, \n{ name : 'Variable'\t\t, element : 'var' }, \n{ name : 'Deleted Text'\t\t, element : 'del' }, \n{ name : 'Inserted Text'\t, element : 'ins' }, \n{ name : 'Cited Work'\t\t, element : 'cite' }, \n{ name : 'Inline Quotation'\t, element : 'q' }, \n{ name : 'Language: RTL'\t, element : 'span', attributes : { 'dir' : 'rtl' } }, \n{ name : 'Language: LTR'\t, element : 'span', attributes : { 'dir' : 'ltr' } }, \n/* Objects styles */\n{ name : 'Image on right'\t, element : 'img', attributes : { 'class' : 'image-right' } }, \n{ name : 'Image on left'\t, element : 'img', attributes : { 'class' : 'image-left' } }, \n{ name : 'Image centered'\t, element : 'img', attributes : { 'class' : 'image-inline' } }, \n{ name : 'Borderless Table'    , element : 'table', styles: { 'border-style': 'hidden', 'background-color' : '# E6E6FA' } }, \n{ name : 'Square Bulleted List', element : 'ul', styles : { 'list-style-type' : 'square' } }\n\n]\n"
-            ckprops.manage_changeProperties(menuStyles=custom_menu_style)
+        configure_ckeditor(portal, custom='plonemeeting')
+        custom_menu_style = u"[\n{ name : 'Texte rouge'\t\t, element : 'span', attributes : { 'class' : 'red-text' } },\n{ name : 'Texte vert'\t\t, element : 'span', attributes : { 'class' : 'green-text' } },\n{ name : 'Texte bleu'\t\t, element : 'span', attributes : { 'class' : 'blue-text' } },\n/* Block Styles */\n{ name : 'Gris Titre'\t\t, element : 'h2', styles : { 'color' : '#888' } },\n{ name : 'Gris Sous-Titre'\t\t, element : 'h3', styles : { 'color' : '#888' } },\n{ name : 'Discret bloc'	\t, element : 'p', attributes : { 'class' : 'discreet' } },\n/* Inline styles */\n{ name : 'Discret'\t\t, element : 'span', attributes : { 'class' : 'discreet' } },\n{ name : 'Surligne Jaune'\t, element : 'span', styles : { 'background-color' : 'Yellow' } },\n{ name : 'Surligne Rouge'\t, element : 'span', attributes : { 'class' : 'highlight-rouge' } },\n{ name : 'Surligne Vert'\t, element : 'span', attributes : { 'class' : 'highlight-vert-claire' } },\n{ name : 'Surligne Orange'\t, element : 'span', attributes : { 'class' : 'highlight-orange' } },\n{ name : 'Surligne Bleu'\t, element : 'span', attributes : { 'class' : 'highlight-bleu' } },\n{ name : 'Typewriter'\t\t, element : 'tt' },\n{ name : 'Computer Code'	, element : 'code' },\n{ name : 'Keyboard Phrase'	, element : 'kbd' },\n{ name : 'Sample Text'\t\t, element : 'samp' },\n{ name : 'Variable'\t\t\t, element : 'var' },\n{ name : 'Texte barre'\t\t, element : 'del' },\n{ name : 'Texte souligne'\t, element : 'ins' },\n{ name : 'Cited Work'\t\t, element : 'cite' },\n{ name : 'Inline Quotation'\t, element : 'q' },\n{ name : 'Language: RTL'\t, element : 'span', attributes : { 'dir' : 'rtl' } },\n{ name : 'Language: LTR'\t, element : 'span', attributes : { 'dir' : 'ltr' } },\n/* Objects styles */\n{ name : 'Image on right'\t, element : 'img', attributes : { 'class' : 'image-right' } },\n{ name : 'Image on left'\t, element : 'img', attributes : { 'class' : 'image-left' } },\n{ name : 'Image centered'\t, element : 'img', attributes : { 'class' : 'image-inline' } },\n{ name : 'Borderless Table', element : 'table', styles: { 'border-style': 'hidden', 'background-color' : '#E6E6FA' } },\n{ name : 'Square Bulleted List', element : 'ul', styles : { 'list-style-type' : 'square' } }\n]"
+        ckprops.manage_changeProperties(menuStyles=custom_menu_style)
 
     except ImportError:
         pass
+
+
+def create_plone_custom_css(context):
+    logger = logging.getLogger('urban: create plone custom css')
+    logger.info("starting upgrade steps")
+    portal = api.portal.getSite()
+    if 'custom' not in portal.portal_skins.objectIds():
+        portal.portal_skins.manage_addProduct['OFSP'].manage_addFolder('custom', 'Custom Skins')
+    custom_folder = portal.portal_skins.custom
+    css_content = """
+    /*
+     *  This is the file where you put your CSS changes.
+     *  You should preferrably use this and override the
+     *  relevant properties you want to change here instead
+     *  of customizing plone.css to survive upgrades. Writing
+     *  your own plone.css only makes sense for very heavy
+     *  customizations. Useful variables from Plone are
+     *  documented at the bottom of this file.
+     */
+
+    /* <dtml-with imioapps_properties> (do not remove this :) */
+    /* <dtml-call "REQUEST.set('portal_url', portal_url())"> (not this either :) */
+
+    /* ADD YOUR CUSTOMIZATIONS HERE, IT USE imioapps_properties */
+    /* CKeditor styles */
+    .red-text {color: red;}
+    .blue-text {color: blue;}
+    .green-text {color: green;}
+    .highlight-rouge {background-color: #FF7F7F;}
+    .highlight-vert-claire {background-color: #83f28f;}
+    .highlight-orange {background-color:orange;}
+    .highlight-bleu {background-color:#34CCFF;}
+
+
+    /* </dtml-with> */
+    """
+    if 'ploneCustom.css' not in custom_folder.objectIds():
+        custom_folder.manage_addProduct['OFSP'].manage_addDTMLMethod('ploneCustom.css', '', css_content)
+    logger.info("upgrade step done!")
 
 
 def setHTMLContentType(folder, fieldName):
