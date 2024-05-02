@@ -108,3 +108,16 @@ def update_delais_vocabularies_and_activate_prorogation_field(context):
             to_set = ("prorogation",)
             config.setUsedAttributes(config.getUsedAttributes() + to_set)
     logger.info("upgrade step done!")
+
+
+def update_all_urban_templates(context):
+    """ """
+    logger = logging.getLogger(
+        "urban: update all urban templates"
+    )
+    logger.info("starting upgrade steps")
+    portal_setup = api.portal.get_tool("portal_setup")
+    portal_setup.runImportStepFromProfile(
+        "profile-Products.urban:extra", "urban-updateAllUrbanTemplates"
+    )
+    logger.info("upgrade step done!")
