@@ -2681,6 +2681,11 @@ msgstr ""
 msgid "urban_label_additionalLegalConditions"
 msgstr ""
 
+#. Default: "Additionalreference"
+#: ../content/licence/GenericLicence.py:249
+msgid "urban_label_additionalReference"
+msgstr ""
+
 #. Default: "address:"
 #: ../browser/templates/parcelsinfo.pt:14
 msgid "urban_label_address"

@@ -1,3 +1,6 @@
+import os
+
+from Products.urban import URBAN_TYPES
 from Products.urban.profiles.extra.config_default_values import default_values
 from Products.urban.setuphandlers import (
     createVocabularyFolder,
@@ -138,3 +141,27 @@ def add_new_vocabulary_for_investigation_radius_field(context):
     )
 
     logger.info("migration step done!")
+
+
+def update_faceted_dashboard(context):
+    """ """
+    logger = logging.getLogger("urban: update faceted dashboard")
+    logger.info("starting upgrade steps")
+    portal_setup = api.portal.get_tool("portal_setup")
+    portal_setup.runImportStepFromProfile(
+        "profile-Products.urban:urbantypes", "catalog"
+    )
+    catalog = api.portal.get_tool("portal_catalog")
+    catalog.clearFindAndRebuild()
+    site = api.portal.getSite()
+    urban_folder = getattr(site, "urban")
+    for urban_type in URBAN_TYPES:
+        folder = getattr(urban_folder, urban_type.lower() + "s")
+        path = (
+            os.path.dirname(__file__)[: -len("migration")]
+            + "dashboard/config/%ss.xml" % urban_type.lower()
+        )
+        folder.unrestrictedTraverse("@@faceted_exportimport").import_xml(
+            import_file=open(path)
+        )
+    logger.info("upgrade step done!")

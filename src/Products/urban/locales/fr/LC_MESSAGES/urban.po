@@ -2711,6 +2711,11 @@ msgstr "Nombre de logements octroyés"
 msgid "urban_label_additionalLegalConditions"
 msgstr "Conditions intégrales et sectorielles supplémentaires"
 
+#. Default: "Additionalreference"
+#: ../content/licence/GenericLicence.py:249
+msgid "urban_label_additionalReference"
+msgstr "Référence supplémentaire"
+
 # parcelsinfo.pt
 #. Default: "address:"
 #: ../browser/templates/parcelsinfo.pt:14

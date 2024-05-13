@@ -115,6 +115,17 @@
    <property name="calYearRange">c-10:c+10</property>
    <property name="index_end">investigationEnd</property>
   </criterion>
+  <criterion name="c13">
+   <property name="widget">text</property>
+   <property name="title">Référence supplémentaire</property>
+   <property name="position">top</property>
+   <property name="section">advanced</property>
+   <property name="hidden">False</property>
+   <property name="index">getAdditionalReference</property>
+   <property name="default"></property>
+   <property name="onlyallelements">True</property>
+   <property name="wildcard">True</property>
+  </criterion>
   <criterion name="c5">
    <property name="widget">text</property>
    <property name="title">Titre, référence</property>
