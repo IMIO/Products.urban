@@ -46,12 +46,14 @@ class TestAmendedPlansStartDate(unittest.TestCase):
         self.licence_1.setProcedureChoice("simple")
 
         event = self.licence_1.createUrbanEvent(event_config_deposit)
-        event.setReceiptDate(datetime(2024, 4, 10))
+        event.setEventDate(datetime(2024, 4, 10))
 
         event_config_intention = self.portal_urban.codt_buildlicence.urbaneventtypes["intention-de-depot-de-plans-modifies"]
         event = self.licence_1.createUrbanEvent(event_config_intention)
         event.setReceiptDate(datetime(2024, 4, 20))
         event.setUltimeDate(datetime(2024, 6, 23))
+
+        self.licence_1.setHasModifiedBlueprints(True)
 
         api.content.transition(self.licence_1, transition="ask_address_validation")
         api.content.transition(self.licence_1, transition="validate_address")
@@ -69,7 +71,7 @@ class TestAmendedPlansStartDate(unittest.TestCase):
         self.licence_2.setProcedureChoice("simple")
 
         event = self.licence_2.createUrbanEvent(event_config_deposit)
-        event.setReceiptDate(datetime(2024, 4, 10))
+        event.setEventDate(datetime(2024, 4, 10))
         api.content.transition(event, to_state="closed")
         event = self.licence_2.createUrbanEvent(event_config_intention)
         event.setReceiptDate(datetime(2024, 4, 20))
@@ -90,9 +92,12 @@ class TestAmendedPlansStartDate(unittest.TestCase):
         )
         self.licence_3.setProcedureChoice("simple")
         event = self.licence_3.createUrbanEvent(event_config_deposit)
-        event.setReceiptDate(datetime(2024, 4, 10))
+        event.setEventDate(datetime(2024, 4, 10))
         event_config_intention = self.portal_urban.codt_buildlicence.urbaneventtypes["intention-de-depot-de-plans-modifies"]
         event = self.licence_3.createUrbanEvent(event_config_intention)
+
+        self.licence_3.setHasModifiedBlueprints(True)
+
         api.content.transition(self.licence_3, transition="ask_address_validation")
         api.content.transition(self.licence_3, transition="validate_address")
         api.content.transition(self.licence_3, transition="propose_complete")
@@ -169,12 +174,12 @@ class TestAmendedPlansStartDate(unittest.TestCase):
         self.assertEqual(api.content.get_state(task), "to_do")
         self.assertEqual(datetime(2024, 11, 10).date(), self._get_due_date(task))
 
-        # api.content.transition(self.licence_3, transition="resume")
-        # notify(ObjectModifiedEvent(self.licence_3))
-        # self.assertTrue("TASK_verif_complet-1" in self.licence_3)
-        # task = self.licence_3["TASK_verif_complet-1"]
-        # self.assertEqual(api.content.get_state(task), "to_do")
-        # self.assertEqual(datetime(2024, 10, 17).date(), self._get_due_date(task))
+        api.content.transition(self.licence_3, transition="resume")
+        notify(ObjectModifiedEvent(self.licence_3))
+        self.assertTrue("TASK_verif_complet-1" in self.licence_3)
+        task = self.licence_3["TASK_verif_complet-1"]
+        self.assertEqual(api.content.get_state(task), "to_do")
+        self.assertEqual(datetime(2024, 5, 4).date(), self._get_due_date(task))
 
     def test_delay_resume_then_amend(self):
         login(self.portal, "urbanmanager")
