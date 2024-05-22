@@ -2652,7 +2652,7 @@ msgstr "Conditions intégrales et sectorielles supplémentaires"
 #. Default: "address:"
 #: ../browser/templates/parcelsinfo.pt:14
 msgid "urban_label_address"
-msgstr "Adresse"
+msgstr "Adresses"
 
 #. Default: "Adr1"
 #: RecipientCadastre.py
@@ -4055,9 +4055,8 @@ msgstr "Hors délai"
 # parcelsinfo.pt
 #. Default: "owner:"
 #: ../browser/templates/parcelsinfo.pt:23
-#, fuzzy
 msgid "urban_label_owner"
-msgstr "Propriétaire"
+msgstr "Propriétaires"
 
 #. Default: "Parcellings"
 #: ../content/licence/GenericLicence.py:1180
@@ -4958,9 +4957,8 @@ msgstr "N° TVA"
 
 #. Default: "type:"
 #: ../browser/templates/parcelsinfo.pt:35
-#, fuzzy
 msgid "urban_label_type"
-msgstr "Type"
+msgstr "Types"
 
 #. Default: "Typeandstreetname_number_box"
 #: ../OpinionRequestEventType.py:79
