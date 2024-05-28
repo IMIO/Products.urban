@@ -30,6 +30,7 @@ from Products.urban.config import *
 from Products.urban.interfaces import IContactFolder
 from Products.urban.interfaces import IUrbanVocabularyTerm
 from Products.urban.interfaces import IGenericLicence
+from Products.urban.interfaces import IUrbanEvent
 from Products.urban import UrbanMessage as _
 
 from zope.annotation import IAnnotations
@@ -51,7 +52,11 @@ from Products.DataGridField.FixedColumn import FixedColumn
 from Products.urban.utils import getCurrentFolderManager
 from Products.urban.utils import cache_key_30min
 from Products.urban import services
+from plone.contentrules.engine.interfaces import IRuleAssignmentManager
+from plone.contentrules.engine.interfaces import IRuleStorage
+from plone.contentrules.rule.interfaces import IExecutable
 from datetime import date as _date
+from zope.component import getUtility, getMultiAdapter
 
 import interfaces
 import logging
@@ -1071,14 +1076,9 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
 
     @ram.cache(cache_key_30min)
     def check_if_mail_content_rule_applied(self, context):
-        from Products.urban.interfaces import IUrbanEvent
+
         if not IUrbanEvent.providedBy(context):
             return False
-
-        from plone.contentrules.engine.interfaces import IRuleAssignmentManager
-        from zope.component import getUtility, getMultiAdapter
-        from plone.contentrules.engine.interfaces import IRuleStorage
-        from plone.contentrules.rule.interfaces import IExecutable
 
         portal = api.portal.get()
         assignable = IRuleAssignmentManager(portal)

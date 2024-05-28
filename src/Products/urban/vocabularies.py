@@ -393,16 +393,21 @@ GigCoringUserIdVocabularyFactory = GigCoringUserIdVocabulary()
 
 class LicenceDocumentsVocabulary(object):
     implements(IVocabularyFactory)
-    
+
     def __call__(self, context):
         contexts = get_licence_context(context, get_all_object=True)
         output = []
         if contexts is None:
             return SimpleVocabulary(output)
         for context in contexts:
-            docs = [SimpleTerm(doc.UID(), doc.UID(), doc.Title()) for doc in context.listFolderContents(
-                contentFilter={"portal_type" : ["ATFile","ATImage","File", "Image"]}
-            )]
+            docs = [
+                SimpleTerm(doc.UID(), doc.UID(), doc.Title())
+                for doc in context.listFolderContents(
+                    contentFilter={
+                        "portal_type": ["ATFile", "ATImage", "File", "Image"]
+                    }
+                )
+            ]
             output += docs
         return SimpleVocabulary(output)
 

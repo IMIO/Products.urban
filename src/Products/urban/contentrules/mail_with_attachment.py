@@ -3,39 +3,32 @@
 import base64
 import logging
 import traceback
+from email.mime.application import MIMEApplication
+from email.mime.image import MIMEImage
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 from smtplib import SMTPException
 
-from Products.urban.contentrules.interface import IGetDocumentToAttach
-
+from Acquisition import aq_inner
 from collective.exportimport.interfaces import IBase64BlobsMarker
 from plone import api
+from plone.app.contentrules import PloneMessageFactory as _
+from plone.app.contentrules.actions.mail import (IMailAction, MailAction,
+                                                 MailActionExecutor,
+                                                 MailAddForm, MailEditForm)
 from plone.contentrules.rule.interfaces import IRuleElementData
-from plone.stringinterp.interfaces import IStringInterpolator
 from plone.restapi.interfaces import ISerializeToJson
-from zope.component import adapts, getMultiAdapter, adapter
-from zope.component.interfaces import ComponentLookupError
-from zope.formlib import form
-from zope.interface import Interface, implements, alsoProvides, implementer
-from zope.globalrequest import getRequest
-
-from Acquisition import aq_inner
+from plone.stringinterp.interfaces import IStringInterpolator
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.MailHost.MailHost import MailHostError
 from Products.statusmessages.interfaces import IStatusMessage
-
-from plone.app.contentrules import PloneMessageFactory as _
-
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
-from email.mime.application import MIMEApplication
-from email.mime.image import MIMEImage
-
-from plone.app.contentrules.actions.mail import IMailAction
-from plone.app.contentrules.actions.mail import MailAction
-from plone.app.contentrules.actions.mail import MailActionExecutor
-from plone.app.contentrules.actions.mail import MailAddForm
-from plone.app.contentrules.actions.mail import MailEditForm
+from Products.urban.contentrules.interface import IGetDocumentToAttach
+from zope.component import adapter, adapts, getMultiAdapter
+from zope.component.interfaces import ComponentLookupError
+from zope.formlib import form
+from zope.globalrequest import getRequest
+from zope.interface import Interface, alsoProvides, implementer, implements
 
 logger = logging.getLogger("plone.contentrules")
 

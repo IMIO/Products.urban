@@ -1,22 +1,16 @@
 # -*- coding: utf-8 -*-
 
-from plone import api
-from plone.contentrules.rule.interfaces import IExecutable, IRuleElementData
-from zope.component import adapts
-from zope.interface import implements, Interface
-from zope.formlib import form
-from zope import schema
-
 from OFS.SimpleItem import SimpleItem
-from Products.CMFCore.utils import getToolByName
-
+from plone import api
 from plone.app.contentrules import PloneMessageFactory as _
 from plone.app.contentrules.browser.formhelper import AddForm, EditForm
-
-from Products.CMFCore.Expression import Expression, createExprContext
-from z3c.form.browser.orderedselect import OrderedSelectWidget
 from plone.autoform import directives
-from zope.component import getUtility
+from plone.contentrules.rule.interfaces import IExecutable, IRuleElementData
+from z3c.form.browser.orderedselect import OrderedSelectWidget
+from zope import schema
+from zope.component import adapts, getUtility
+from zope.formlib import form
+from zope.interface import Interface, implements
 from zope.schema.interfaces import IVocabularyFactory
 
 
@@ -25,17 +19,18 @@ class IEventTypeCondition(Interface):
 
     This is also used to create add and edit forms, below.
     """
-    directives.widget('event_type', OrderedSelectWidget, size=20)
+
+    directives.widget("event_type", OrderedSelectWidget, size=20)
     event_type = schema.Choice(
-        title=_(u'Event Type'),
-        vocabulary='urban.vocabularies.event_types',
+        title=_(u"Event Type"),
+        vocabulary="urban.vocabularies.event_types",
         required=True,
     )
 
 
 class EventTypeCondition(SimpleItem):
-    """The actual persistent implementation of the Event type condition element.
-    """
+    """The actual persistent implementation of the Event type condition element."""
+
     implements(IEventTypeCondition, IRuleElementData)
 
     event_type = []
@@ -45,9 +40,7 @@ class EventTypeCondition(SimpleItem):
     def summary(self):
         factory = getUtility(IVocabularyFactory, "urban.vocabularies.event_types")
         vocabulary = factory(api.portal.get())
-        return u"Event Type : {}".format(
-            vocabulary.by_value[self.event_type].title
-        )
+        return u"Event Type : {}".format(vocabulary.by_value[self.event_type].title)
 
 
 class EventTypeConditionExecutor(object):
@@ -55,6 +48,7 @@ class EventTypeConditionExecutor(object):
 
     This is registered as an adapter in configure.zcml
     """
+
     implements(IExecutable)
     adapts(Interface, IEventTypeCondition, Interface)
 
@@ -70,12 +64,14 @@ class EventTypeConditionExecutor(object):
 
 
 class EventTypeAddForm(AddForm):
-    """An add form for event type condition.
-    """
+    """An add form for event type condition."""
+
     form_fields = form.FormFields(IEventTypeCondition)
     label = _(u"Add Event type Condition")
-    description = _(u"A Event type condition makes the rule apply "
-                     "only if Event type correspond to the one from the context.")
+    description = _(
+        u"A Event type condition makes the rule apply "
+        "only if Event type correspond to the one from the context."
+    )
     form_name = _(u"Configure element")
 
     def create(self, data):
@@ -85,10 +81,12 @@ class EventTypeAddForm(AddForm):
 
 
 class EventTypeEditForm(EditForm):
-    """An edit form for Event type condition
-    """
+    """An edit form for Event type condition"""
+
     form_fields = form.FormFields(IEventTypeCondition)
     label = _(u"Edit Event type Condition")
-    description = _(u"A Event type condition makes the rule apply "
-                     "only if Event type correspond to the one from the context.")
+    description = _(
+        u"A Event type condition makes the rule apply "
+        "only if Event type correspond to the one from the context."
+    )
     form_name = _(u"Configure element")
