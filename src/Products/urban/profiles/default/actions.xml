@@ -115,4 +115,18 @@
    <property name="visible">True</property>
   </object>
  </object>
+ <object name="object_buttons" meta_type="CMF Action Category">
+  <property name="title"></property>
+  <object name="send_mail_action" meta_type="CMF Action" i18n:domain="urban">
+   <property name="title" i18n:translate="">Send mail</property>
+   <property name="description" i18n:translate=""></property>
+   <property name="url_expr">string:$object_url/@@send-email-to-inquiry-dept</property>
+   <property name="icon_expr">string:$portal_url/getemails.png</property>
+   <property name="available_expr">python: context.portal_urban.check_if_mail_content_rule_applied(context)</property>
+   <property name="permissions">
+    <element value="View"/>
+   </property>
+   <property name="visible">True</property>
+  </object>
+ </object>
 </object>

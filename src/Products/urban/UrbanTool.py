@@ -38,7 +38,8 @@ from zope.interface import implements
 
 from AccessControl import getSecurityManager
 from plone import api
-from plone.memoize.request import cache
+from plone.memoize import ram
+from plone.memoize.request  import cache
 from zope.i18n import translate
 from Products.CMFCore import permissions
 from Products.CMFCore.utils import _checkPermission
@@ -48,6 +49,7 @@ from Products.PageTemplates.Expressions import getEngine
 from Products.DataGridField.DataGridField import FixedRow
 from Products.DataGridField.FixedColumn import FixedColumn
 from Products.urban.utils import getCurrentFolderManager
+from Products.urban.utils import cache_key_30min
 from Products.urban import services
 from datetime import date as _date
 
@@ -1067,5 +1069,36 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         if _checkPermission(permissions.ManagePortal, self):
             return True
 
+    @ram.cache(cache_key_30min)
+    def check_if_mail_content_rule_applied(self, context):
+        from Products.urban.interfaces import IUrbanEvent
+        if not IUrbanEvent.providedBy(context):
+            return False
+
+        from plone.contentrules.engine.interfaces import IRuleAssignmentManager
+        from zope.component import getUtility, getMultiAdapter
+        from plone.contentrules.engine.interfaces import IRuleStorage
+        from plone.contentrules.rule.interfaces import IExecutable
+
+        portal = api.portal.get()
+        assignable = IRuleAssignmentManager(portal)
+        storage = getUtility(IRuleStorage)
+
+        rules = []
+        for key in [key for key in assignable]:
+            conditions = []
+            rule = storage.get(key, None)
+            if not rule.enabled:
+                rules.append(False)
+                continue
+            if rule is None:
+                continue
+            for condition in rule.conditions:
+                class EventTemp():
+                    object = context
+                executable = getMultiAdapter((context, condition, EventTemp), IExecutable)
+                conditions.append(executable())
+            rules.append(all(conditions))
+        return any(rules)
 
 registerType(UrbanTool, PROJECTNAME)

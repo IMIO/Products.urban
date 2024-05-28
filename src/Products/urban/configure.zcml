@@ -65,6 +65,8 @@
   <include package=".workflows" />
   <include package=".widget" />
   <include package=".history" />
+  <include package=".contentrules" />
+  <include package=".send_mail_action" />
 
   <!-- needed to migrate UrbanDoc type, to remove in next release -->
   <adapter name="plone.app.blob.subtypes.file"

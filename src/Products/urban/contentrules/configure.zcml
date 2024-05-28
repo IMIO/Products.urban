@@ -1,0 +1,68 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:plone="http://namespaces.plone.org/plone">
+
+    <!-- Email action definition -->
+
+     <adapter factory=".mail_with_attachment.MailWithAttachmentActionExecutor" />
+
+     <browser:page
+       for="plone.app.contentrules.browser.interfaces.IRuleActionAdding"
+       name="plone.actions.MailWithAttachement"
+       class=".mail_with_attachment.MailWithAttachmentAddForm"
+       permission="plone.app.contentrules.ManageContentRules"
+       />
+
+     <browser:page
+       for=".mail_with_attachment.IMailWithAttachmentAction"
+       name="edit"
+       class=".mail_with_attachment.MailWithAttachmentEditForm"
+       permission="plone.app.contentrules.ManageContentRules"
+       />
+
+     <plone:ruleAction
+         name="plone.actions.MailWithAttachement"
+         title="Send email with attachment"
+         description="Send an email with attachment on the triggering object"
+         for="*"
+         event="*"
+         addview="plone.actions.MailWithAttachement"
+         editview="edit"
+         schema=".mail_with_attachment.IMailWithAttachmentAction"
+         factory=".mail_with_attachment.MailWithAttachmentAction"
+         />
+
+    <adapter factory="Products.urban.contentrules.mail_with_attachment.GetDocumentToAttach"/>
+
+    <!-- eventType conditions -->
+
+    <adapter factory=".conditions.EventTypeConditionExecutor" />
+
+    <browser:page
+      for="plone.app.contentrules.browser.interfaces.IRuleConditionAdding"
+      name="urban.conditions.EventType"
+      class=".conditions.EventTypeAddForm"
+      permission="cmf.ManagePortal"
+      />
+
+    <browser:page
+      for=".conditions.IEventTypeCondition"
+      name="edit"
+      class=".conditions.EventTypeEditForm"
+      permission="cmf.ManagePortal"
+      />
+
+    <plone:ruleCondition
+        name="urban.conditions.EventType"
+        title="Event Type"
+        description="Apply only when the Event Type correspond to the one of the context"
+        for="*"
+        event="*"
+        addview="urban.conditions.EventType"
+        editview="edit"
+        schema=".conditions.IEventTypeCondition"
+        factory=".conditions.EventTypeCondition"
+        />
+
+</configure>

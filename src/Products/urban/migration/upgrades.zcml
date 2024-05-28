@@ -567,4 +567,13 @@
         profile="Products.urban:default"
         />
 
+    <gs:upgradeStep
+        title="Install send mail with attachment action"
+        description=""
+        source="1141"
+        destination="1142"
+        handler=".update_codt_2024.install_send_mail_with_attachement_action"
+        profile="Products.urban:default"
+        />
+
 </configure>

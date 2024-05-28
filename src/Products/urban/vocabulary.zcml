@@ -93,4 +93,10 @@
     provides="zope.schema.interfaces.IVocabularyFactory"
   />
 
+  <utility
+    component=".vocabularies.LicenceDocumentsVocabularyFactory"
+    name="urban.vocabularies.licence_documents"
+    provides="zope.schema.interfaces.IVocabularyFactory"
+  />
+
 </configure>

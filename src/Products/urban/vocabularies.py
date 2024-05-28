@@ -12,6 +12,7 @@ from Products.urban.interfaces import IFolderManager
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.utils import getCurrentFolderManager
+from Products.urban.utils import get_licence_context
 
 from zope.interface import implements
 from zope.i18n import translate
@@ -388,3 +389,22 @@ class GigCoringUserIdVocabulary(object):
 
 
 GigCoringUserIdVocabularyFactory = GigCoringUserIdVocabulary()
+
+
+class LicenceDocumentsVocabulary(object):
+    implements(IVocabularyFactory)
+    
+    def __call__(self, context):
+        contexts = get_licence_context(context, get_all_object=True)
+        output = []
+        if contexts is None:
+            return SimpleVocabulary(output)
+        for context in contexts:
+            docs = [SimpleTerm(doc.UID(), doc.UID(), doc.Title()) for doc in context.listFolderContents(
+                contentFilter={"portal_type" : ["ATFile","ATImage","File", "Image"]}
+            )]
+            output += docs
+        return SimpleVocabulary(output)
+
+
+LicenceDocumentsVocabularyFactory = LicenceDocumentsVocabulary()
