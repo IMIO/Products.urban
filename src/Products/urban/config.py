@@ -426,6 +426,11 @@ DASHBOARD_TEMPLATES = {
             "title": "Listing des permis",
             "use_objects": True,
         },
+        {
+            "id": "permis-par-village.odt",
+            "portal_type": "DashboardPODTemplate",
+            "title": "Ministère - permis par village",
+        },
         # {
         # 'id': 'folderlisting.odt',
         # 'portal_type': 'DashboardPODTemplate',
