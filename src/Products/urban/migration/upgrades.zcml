@@ -567,4 +567,20 @@
         profile="Products.urban:default"
         />
 
+    <gs:upgradeStep
+        title="update CKEditor MenuStyles"
+        description="update CKEditor MenuStyles"
+        source="1141"
+        destination="1142"
+        handler=".update_260.configure_ckeditor"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="create plone custom css"
+        description="create plone custom css"
+        source="1142"
+        destination="1143"
+        handler=".update_260.create_plone_custom_css"
+        profile="Products.urban:default" />
+
 </configure>
