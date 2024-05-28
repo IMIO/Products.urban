@@ -557,8 +557,8 @@ class UrbanBase(object):
             if not street_brains:
                 continue
             street = street_brains[0].getObject()
-            streetName = unicode(street.getStreetName(), "utf-8")
-            signaletic = "{} {}".format(signaletic, streetName)
+            street_name = street.getStreetName()
+            signaletic = "{} {}".format(signaletic, street_name)
 
         return signaletic
 
