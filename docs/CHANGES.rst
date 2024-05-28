@@ -8,6 +8,27 @@ Changelog
 
 .. towncrier release notes start
 
+2.7.13 (2024-05-28)
+-------------------
+
+New features:
+
+
+- Add external method to add back deleted licence folder
+  [jchandelle] (URB-3086)
+
+
+Bug fixes:
+
+
+- Fix unicode error on street name merge field 
+  [fngaha] (SUP-34184)
+- Avoid to display disabled vocabulary entries with no start or end validity date
+  [mpeeters] (SUP-36742)
+- Fix error at EnvClassBordering creation
+  [jchandelle] (URB-3108)
+
+
 2.7.12 (2024-04-25)
 -------------------
 
