@@ -128,7 +128,7 @@ class EnvClassBordering(EnvClassOne):
 
     security.declarePublic("getDefaultStreetAndNumber")
 
-    def getDefaultStreetAndNumber(self):
+    def getDefaultStreetAndNumber(self, separator=""):
         """
         Returns a string reprensenting the different streets and numbers
         """
@@ -138,7 +138,7 @@ class EnvClassBordering(EnvClassOne):
             street = wl["street"]
             number = wl["number"]
             if number:
-                signaletic = "{} {} {}".format(signaletic, street, number)
+                signaletic = "{} {}{} {}".format(signaletic, street, separator, number)
             else:
                 signaletic = "{} {}".format(signaletic, street)
 
