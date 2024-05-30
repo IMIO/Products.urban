@@ -20,7 +20,6 @@ class IEventTypeCondition(Interface):
     This is also used to create add and edit forms, below.
     """
 
-    directives.widget("event_type", OrderedSelectWidget, size=20)
     event_type = schema.Choice(
         title=_(u"Event Type"),
         vocabulary="urban.vocabularies.event_types",
@@ -33,7 +32,7 @@ class EventTypeCondition(SimpleItem):
 
     implements(IEventTypeCondition, IRuleElementData)
 
-    event_type = []
+    event_type = ""
     element = "urban.conditions.EventType"
 
     @property

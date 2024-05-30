@@ -37,19 +37,19 @@
 
     <!-- eventType conditions -->
 
-    <adapter factory=".conditions.EventTypeConditionExecutor" />
+    <adapter factory=".event_type.EventTypeConditionExecutor" />
 
     <browser:page
       for="plone.app.contentrules.browser.interfaces.IRuleConditionAdding"
       name="urban.conditions.EventType"
-      class=".conditions.EventTypeAddForm"
+      class=".event_type.EventTypeAddForm"
       permission="cmf.ManagePortal"
       />
 
     <browser:page
-      for=".conditions.IEventTypeCondition"
+      for=".event_type.IEventTypeCondition"
       name="edit"
-      class=".conditions.EventTypeEditForm"
+      class=".event_type.EventTypeEditForm"
       permission="cmf.ManagePortal"
       />
 
@@ -61,8 +61,8 @@
         event="*"
         addview="urban.conditions.EventType"
         editview="edit"
-        schema=".conditions.IEventTypeCondition"
-        factory=".conditions.EventTypeCondition"
+        schema=".event_type.IEventTypeCondition"
+        factory=".event_type.EventTypeCondition"
         />
 
 </configure>
