@@ -1088,10 +1088,10 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         for key in [key for key in assignable]:
             conditions = []
             rule = storage.get(key, None)
+            if rule is None:
+                continue
             if not rule.enabled:
                 rules.append(False)
-                continue
-            if rule is None:
                 continue
             for condition in rule.conditions:
                 class EventTemp():
