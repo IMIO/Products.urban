@@ -82,6 +82,12 @@
   />
 
   <utility
+    component=".vocabularies.AllOpinionsToAskVocabularyFactory"
+    name="urban.vocabularies.all_opinions_to_ask"
+    provides="zope.schema.interfaces.IVocabularyFactory"
+  />
+
+  <utility
     component=".vocabularies.WorkTypesVocabularyFactory"
     name="urban.vocabularies.work_types"
     provides="zope.schema.interfaces.IVocabularyFactory"

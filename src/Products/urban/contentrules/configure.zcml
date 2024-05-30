@@ -65,4 +65,35 @@
         factory=".event_type.EventTypeCondition"
         />
 
+
+    <!-- opinion conditions -->
+
+    <adapter factory=".opinions.OpinionsConditionExecutor" />
+
+    <browser:page
+      for="plone.app.contentrules.browser.interfaces.IRuleConditionAdding"
+      name="urban.conditions.Opinions"
+      class=".opinions.OpinionsAddForm"
+      permission="cmf.ManagePortal"
+      />
+
+    <browser:page
+      for=".opinions.IOpinionsCondition"
+      name="edit"
+      class=".opinions.OpinionsEditForm"
+      permission="cmf.ManagePortal"
+      />
+
+    <plone:ruleCondition
+        name="urban.conditions.Opinions"
+        title="Opinion to ask"
+        description="Apply only when one of the Opinion to ask slelected correspond to the one of the context"
+        for="*"
+        event="*"
+        addview="urban.conditions.Opinions"
+        editview="edit"
+        schema=".opinions.IOpinionsCondition"
+        factory=".opinions.OpinionsCondition"
+        />
+
 </configure>
