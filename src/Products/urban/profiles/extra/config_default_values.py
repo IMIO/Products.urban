@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
-
+from datetime import datetime
 from Products.urban.config import URBAN_TYPES
+
+codt_2024_start_validity_date = datetime(2024, 4, 1)
 
 vocabularies_with_HTML_description = [
     "specificfeatures",
@@ -61,6 +63,34 @@ default_values = {
             {
                 "id": "uco-fd",
                 "title": u"UCO/ED : permis avec écart et/ou dérogation Plan Secteur / norme GRU",
+            },
+            {
+                "id": "AO",
+                "title": u"/AO: Permis d’urbanisme communal avec avis obligatoire du FD",
+                "description": u"<p>/AO: Permis d’urbanisme communal avec avis obligatoire du FD<br />Pour le cas visé Art. D.IV.15, Al. 1er, et D.IV.17.</p>",
+                "extraValue": "AO",
+                "startValidity": codt_2024_start_validity_date,
+            },
+            {
+                "id": "AF",
+                "title": u"/AF: Permis d’urbanisme communal avec avis facultatif du FD",
+                "description": u"<p>/AF: Permis d’urbanisme communal avec avis facultatif du FD<br />Pour le cas visé à l’Art. D.IV.14, Al. 2 et à la demande du Co</p>",
+                "extraValue": "AF",
+                "startValidity": codt_2024_start_validity_date,
+            },
+            {
+                "id": "PIL",
+                "title": u"/PIL: Permis d’urbanisme communal RELATIF a DES PROJETS D’impact limité.",
+                "description": u"<p>/PIL: Permis d’urbanisme communal RELATIF a DES PROJETS D’impact limité<br />Pour le cas visé à l’Art. R.IV. 1-1 TABLEAU et DISPENSÉ AVIS obligatoire </p>",
+                "extraValue": "PIL",
+                "startValidity": codt_2024_start_validity_date,
+            },
+            {
+                "id": "SA",
+                "title": u"/SA: Permis d’urbanisme communal sans avis du FD (hors du champ d’application du R.IV. 1-1 tableau)",
+                "description": u"<p>/SA: Permis d’urbanisme communal sans avis du FD (hors du champ d’application du R.IV. 1-1 tableau)<br />DISPENSÉ AVIS obligatoire du FD, Art. D.IV. 16, Al. 1, 1° et 2°</p>",
+                "extraValue": "SA",
+                "startValidity": codt_2024_start_validity_date,
             },
             {"id": "inconnu", "title": u"Inconnu"},
         ],
