@@ -567,4 +567,13 @@
         profile="Products.urban:default"
         />
 
+    <gs:upgradeStep
+        title="Add new index and new filter for validity date"
+        description=""
+        source="1141"
+        destination="1142"
+        handler=".update_codt_2024.add_new_index_and_new_filter"
+        profile="Products.urban:default"
+        />
+
 </configure>
