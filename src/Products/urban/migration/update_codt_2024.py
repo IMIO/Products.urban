@@ -38,7 +38,7 @@ def migrate_vocabulary_contents(context):
     portal_urban = api.portal.get()["portal_urban"]
 
     # 1
-    # TODO: ZACC
+    # ZACC is added through a separate function: add_zacc_to_folderzones_vocabulary
 
     # 2
     codt_article127_delays_folder = portal_urban.codt_article127.folderdelays
@@ -235,6 +235,27 @@ def migrate_vocabulary_contents(context):
     logger.info("upgrade done!")
 
 
+def add_zacc_to_folderzones_vocabulary(context):
+    logger.info("starting : Update folderzones vocabulary contents")
+    portal_urban = api.portal.get()["portal_urban"]
+
+    start_validity_date = datetime(2024, 4, 1)
+
+    folder_zones_folder = portal_urban.folderzones
+    objects_list = [
+        {
+            "id": "zacc",
+            "title": u"zone d'aménagement communal concerté",
+            "startValidity": start_validity_date,
+        }
+    ]
+    createFolderDefaultValues(
+        folder_zones_folder,
+        objects_list,
+        portal_type="UrbanVocabularyTerm",
+    )
+
+
 def sort_delay_vocabularies(context):
     logger.info("starting : Sort delays vocabularies")
     portal_urban = api.portal.get().portal_urban
@@ -266,6 +287,48 @@ def add_new_workfow_state(context):
         for_states=["deposit", "complete", "incomplete"],
     )
     logger.info("upgrade done!")
+
+
+def add_folder_categories_terms(context):
+
+    portal_urban = api.portal.get()["portal_urban"]
+
+    objects_list = [
+        {
+            "id": "AO",
+            "title": u"/AO: Permis d’urbanisme communal avec avis obligatoire du FD",
+            "description": u"<p>/AO: Permis d’urbanisme communal avec avis obligatoire du FD<br />Pour le cas visé Art. D.IV.15, Al. 1er, et D.IV.17.</p>",
+            "extraValue": "AO",
+            "startValidity": start_validity_date,
+        },
+        {
+            "id": "AF",
+            "title": u"/AF: Permis d’urbanisme communal avec avis facultatif du FD",
+            "description": u"<p>/AF: Permis d’urbanisme communal avec avis facultatif du FD<br />Pour le cas visé à l’Art. D.IV.14, Al. 2 et à la demande du Co</p>",
+            "extraValue": "AF",
+            "startValidity": start_validity_date,
+        },
+        {
+            "id": "PIL",
+            "title": u"/PIL: Permis d’urbanisme communal RELATIF a DES PROJETS D’impact limité.",
+            "description": u"<p>/PIL: Permis d’urbanisme communal RELATIF a DES PROJETS D’impact limité<br />Pour le cas visé à l’Art. R.IV. 1-1 TABLEAU et DISPENSÉ AVIS obligatoire </p>",
+            "extraValue": "PIL",
+            "startValidity": start_validity_date,
+        },
+        {
+            "id": "SA",
+            "title": u"/SA: Permis d’urbanisme communal sans avis du FD (hors du champ d’application du R.IV. 1-1 tableau)",
+            "description": u"<p>/SA: Permis d’urbanisme communal sans avis du FD (hors du champ d’application du R.IV. 1-1 tableau)<br />DISPENSÉ AVIS obligatoire du FD, Art. D.IV. 16, Al. 1, 1° et 2°</p>",
+            "extraValue": "SA",
+            "startValidity": start_validity_date,
+        },
+    ]
+    licence_foldercategories_folder = portal_urban["codt_buildlicence"].foldercategories
+    createFolderDefaultValues(
+        licence_foldercategories_folder,
+        objects_list,
+        portal_type="UrbanVocabularyTerm",
+    )
 
 
 def add_new_index_and_new_filter(context):
