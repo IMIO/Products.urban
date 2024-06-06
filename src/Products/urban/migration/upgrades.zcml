@@ -567,4 +567,13 @@
         profile="Products.urban:default"
         />
 
+    <gs:upgradeStep
+        title="Add ZACC to folderzones vocabulary"
+        description=""
+        source="1141"
+        destination="1142"
+        handler=".update_codt_2024.add_zacc_to_folderzones_vocabulary"
+        profile="Products.urban:default"
+        />
+
 </configure>
