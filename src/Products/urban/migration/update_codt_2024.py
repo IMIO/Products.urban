@@ -37,7 +37,7 @@ def migrate_vocabulary_contents(context):
     portal_urban = api.portal.get()["portal_urban"]
 
     # 1
-    # TODO: ZACC
+    # ZACC is added through a separate function: add_zacc_to_folderzones_vocabulary
 
     # 2
     codt_article127_delays_folder = portal_urban.codt_article127.folderdelays
@@ -232,6 +232,27 @@ def migrate_vocabulary_contents(context):
     )
 
     logger.info("upgrade done!")
+
+
+def add_zacc_to_folderzones_vocabulary(context):
+    logger.info("starting : Update folderzones vocabulary contents")
+    portal_urban = api.portal.get()["portal_urban"]
+
+    start_validity_date = datetime(2024, 4, 1)
+
+    folder_zones_folder = portal_urban.folderzones
+    objects_list = [
+        {
+            "id": "zacc",
+            "title": u"zone d'aménagement communal concerté",
+            "startValidity": start_validity_date,
+        }
+    ]
+    createFolderDefaultValues(
+        folder_zones_folder,
+        objects_list,
+        portal_type="UrbanVocabularyTerm",
+    )
 
 
 def sort_delay_vocabularies(context):

@@ -568,10 +568,19 @@
         />
 
     <gs:upgradeStep
-        title="Add folder categories terms"
+        title="Add ZACC to folderzones vocabulary"
         description=""
         source="1141"
         destination="1142"
+        handler=".update_codt_2024.add_zacc_to_folderzones_vocabulary"
+        profile="Products.urban:default"
+        />
+
+    <gs:upgradeStep
+        title="Add folder categories terms"
+        description=""
+        source="1142"
+        destination="1143"
         handler=".update_codt_2024.add_folder_categories_terms"
         profile="Products.urban:default"
         />
