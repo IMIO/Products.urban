@@ -10,6 +10,11 @@
     <indexed_attr value="getDecisionDate"/>
   </index>
   <column value="getDecisionDate"/>
+  <index name="getValidityDate"
+         meta_type="DateIndex">
+    <indexed_attr value="getValidityDate"/>
+  </index>
+  <column value="getValidityDate"/>
   <index name="getRecourseDecisionDisplayDate"
          meta_type="DateIndex">
     <indexed_attr value="getRecourseDecisionDisplayDate"/>

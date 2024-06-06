@@ -17,6 +17,7 @@
   <adapter name="extraValue" factory=".indexes.rubricsfolders_extravalue" />
   <adapter name="representatives" factory=".indexes.genericlicence_representative" />
   <adapter name="getDecisionDate" factory=".indexes.genericlicence_decisiondate" />
+  <adapter name="getValidityDate" factory=".indexes.genericlicence_valdity_date" />
   <adapter name="getDepositDate" factory=".indexes.genericlicence_depositdate" />
   <adapter name="archive" factory=".indexes.genericlicence_archive" />
   <adapter name="licence_final_duedate" factory=".indexes.genericlicence_final_duedate" />

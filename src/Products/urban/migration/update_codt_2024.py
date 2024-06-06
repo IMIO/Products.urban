@@ -7,6 +7,7 @@ from datetime import datetime
 from plone import api
 from zope.event import notify
 from zope.lifecycleevent import ObjectModifiedEvent
+from imio.helpers.catalog import reindexIndexes
 
 import logging
 
@@ -328,3 +329,38 @@ def add_folder_categories_terms(context):
         objects_list,
         portal_type="UrbanVocabularyTerm",
     )
+
+
+def add_new_index_and_new_filter(context):
+    from eea.facetednavigation.interfaces import ICriteria
+    
+    logger.info("starting : Add new index and new filter for validity date")
+    setup_tool = api.portal.get_tool('portal_setup')
+    setup_tool.runImportStepFromProfile(
+        "profile-Products.urban:urbantypes", "catalog"
+    )
+    reindexIndexes(None, "getValidityDate")
+    
+    portal = api.portal.get()
+    urban_folder = portal.urban
+    folders = [getattr(urban_folder, urban_type.lower() + "s", None) for urban_type in URBAN_TYPES]
+    folders.append(urban_folder)
+    for folder in folders:
+        criterion = ICriteria(folder)
+        if criterion is None:
+            continue
+        data = {
+            "_cid_": u"c13",
+            "title": u"Date de validation",
+            "hidden": False,
+            "index": u"getValidityDate",
+            "calYearRange": u"c-10:c+10"
+        }
+        criterion.add(
+            wid="daterange",
+            position="top",
+            section="advanced",
+            **data
+        )
+
+    logger.info("upgrade done!")
