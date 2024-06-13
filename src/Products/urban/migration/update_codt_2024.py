@@ -364,3 +364,14 @@ def add_new_index_and_new_filter(context):
         )
 
     logger.info("upgrade done!")
+
+
+def add_frozen_workflow_state(context):
+    logger.info("starting : Add new workflow state")
+    setup_tool = api.portal.get_tool('portal_setup')
+    setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'workflow')
+    refresh_workflow_permissions(
+        "codt_buildlicence_workflow",
+        for_states=["deposit", "complete", "incomplete"],
+    )
+    logger.info("upgrade done!")
