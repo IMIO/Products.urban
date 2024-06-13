@@ -568,10 +568,37 @@
         />
 
     <gs:upgradeStep
-        title="Add frozen workflow state"
+        title="Add ZACC to folderzones vocabulary"
         description=""
         source="1141"
         destination="1142"
+        handler=".update_codt_2024.add_zacc_to_folderzones_vocabulary"
+        profile="Products.urban:default"
+        />
+
+    <gs:upgradeStep
+        title="Add folder categories terms"
+        description=""
+        source="1142"
+        destination="1143"
+        handler=".update_codt_2024.add_folder_categories_terms"
+        profile="Products.urban:default"
+        />
+
+    <gs:upgradeStep
+        title="Add new index and new filter for validity date"
+        description=""
+        source="1143"
+        destination="1144"
+        handler=".update_codt_2024.add_new_index_and_new_filter"
+        profile="Products.urban:default"
+        />
+      
+    <gs:upgradeStep
+        title="Add frozen workflow state"
+        description=""
+        source="1144"
+        destination="1145"
         handler=".update_codt_2024.add_frozen_workflow_state"
         profile="Products.urban:default"
         />
