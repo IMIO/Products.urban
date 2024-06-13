@@ -593,5 +593,14 @@
         handler=".update_codt_2024.add_new_index_and_new_filter"
         profile="Products.urban:default"
         />
+      
+    <gs:upgradeStep
+        title="Add frozen workflow state"
+        description=""
+        source="1144"
+        destination="1145"
+        handler=".update_codt_2024.add_frozen_workflow_state"
+        profile="Products.urban:default"
+        />
 
 </configure>
