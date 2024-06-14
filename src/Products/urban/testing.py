@@ -1,17 +1,17 @@
 # -*- coding: utf-8 -*-
+from Products.urban.utils import run_entry_points
+from plone import api
 from plone.app.robotframework.testing import REMOTE_LIBRARY_BUNDLE_FIXTURE
-from plone.app.testing import IntegrationTesting
 from plone.app.testing import FunctionalTesting
+from plone.app.testing import IntegrationTesting
 from plone.app.testing import PloneWithPackageLayer
 from plone.app.testing import helpers
-
 from plone.testing import z2
-from Products.urban.utils import run_entry_points
-
 from zope.globalrequest import setLocal
 
 import Products.urban
 import transaction
+import logging
 
 
 class UrbanLayer(PloneWithPackageLayer):
@@ -151,6 +151,7 @@ class UrbanWithUsersFunctionalLayer(FunctionalTesting):
     environment_default_password = "environmenteditor"
 
     def setUpPloneSite(self, portal):
+        logging.basicConfig(level=logging.DEBUG)
         setattr(portal.REQUEST, "URL", "")
         setLocal("request", portal.REQUEST)
         transaction.commit()
@@ -161,7 +162,11 @@ class UrbanWithUsersFunctionalLayer(FunctionalTesting):
         with helpers.ploneSite() as portal:
             portal.setupCurrentSkin(portal.REQUEST)
             from Products.urban.setuphandlers import addTestUsers
-
+            api.user.create(
+                email="adminurba@urban.be",
+                username="Admin_urba",
+                password="secret",
+            )
             addTestUsers(portal)
 
 
