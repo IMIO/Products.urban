@@ -555,8 +555,12 @@ msgstr ""
 msgid "Licence types"
 msgstr ""
 
-#: ../browser/urbaneventviews.py:224
-msgid "Listing file"
+#: ../browser/urbaneventviews.py:250
+msgid "Listing file (claimants)"
+msgstr ""
+
+#: ../browser/urbaneventviews.py:319
+msgid "Listing file (recipients)"
 msgstr ""
 
 #: ../interfaces.py:663
@@ -741,7 +745,11 @@ msgstr ""
 msgid "Tests Extension profile for urban."
 msgstr ""
 
-#: ../browser/urbaneventviews.py:510
+#: ../browser/urbaneventviews.py:367
+msgid "The CSV file couldn't be read properly. Please verify its structure and try again."
+msgstr ""
+
+#: ../browser/urbaneventviews.py:636
 msgid "The claimants import will be ready tomorrow!"
 msgstr ""
 
@@ -2716,6 +2724,10 @@ msgstr ""
 #. Default: "If checked, an additional paragraph will be added in the licence document"
 #: BuildLicence.py
 msgid "urban_help_townshipCouncilFolder"
+msgstr ""
+
+#: ../browser/urbaneventviews.py:412
+msgid "urban_imported_recipients"
 msgstr ""
 
 #. Default: "Buildlicencenumerotation"
