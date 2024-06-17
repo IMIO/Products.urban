@@ -399,9 +399,12 @@ class ImportRecipientListingForm(form.Form):
             recipient_arg["adr1"] = "{} {}".format(
                 recipient_arg["zipcode"], recipient_arg["city"]
             )
-            recipient_arg["adr2"] = "{} {}".format(
+            adr2 = "{} {}".format(
                 recipient_arg["street"], recipient_arg["number"]
             )
+            if recipient_arg["number_index"]:
+                adr2 = "{} ({})".format(adr2, recipient_arg["number_index"])
+            recipient_arg["adr2"] = adr2
             # create recipient
             with api.env.adopt_roles(["Manager"]):
                 recipient_id = self.context.invokeFactory(
