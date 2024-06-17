@@ -1376,6 +1376,7 @@ def addTestUsers(site):
         ("environmentreader", "environment_readers"),
         ("environmenteditor", "environment_editors", True),
         ("urbanmapreader", "urban_map_readers"),
+        ("to_assign", "AuthenticatedUsers"),
     ]
     for user_info in users:
         _addTestUser(site, *user_info)
