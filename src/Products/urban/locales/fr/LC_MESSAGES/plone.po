@@ -148,7 +148,7 @@ msgid "ParcellingTerm"
 msgstr "Lotissement"
 
 msgid "PatrimonyCertificate"
-msgstr "Certificat de patrimoine"
+msgstr "Patrimoine"
 
 msgid "PcaTerm"
 msgstr "Plan Communal d'Aménagement"
