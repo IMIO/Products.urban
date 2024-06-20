@@ -541,7 +541,6 @@ schema = Schema(
                     "Inspection",
                     "Ticket",
                     "ProjectMeeting",
-                    "PatrimonyCertificate",
                     "CODT_UrbanCertificateOne",
                     "UrbanCertificateOne",
                 ]
