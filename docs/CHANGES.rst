@@ -8,6 +8,25 @@ Changelog
 
 .. towncrier release notes start
 
+2.5.0.dev9 (2024-06-27)
+-----------------------
+
+New features:
+
+
+- Add recipient import to inquiries
+  [daggelpop] (SUP-36417)
+
+
+Internal:
+
+
+- Test checking opnion FD delay
+  [jchandelle]
+  Test completion due dates after amending plans
+  [daggelpop] (URB-3005)
+
+
 2.5.0.dev8 (2024-04-21)
 -----------------------
 
