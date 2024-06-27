@@ -572,9 +572,13 @@ msgstr "Etat du permis"
 msgid "Licence types"
 msgstr "Type de permis"
 
-#: ../browser/urbaneventviews.py:224
-msgid "Listing file"
-msgstr ""
+#: ../browser/urbaneventviews.py:250
+msgid "Listing file (claimants)"
+msgstr "Importer un fichier de réclamants (csv)"
+
+#: ../browser/urbaneventviews.py:319
+msgid "Listing file (recipients)"
+msgstr "Importer un fichier de destinataires (csv)"
 
 #: ../interfaces.py:663
 msgid "Mailing limit"
@@ -759,7 +763,11 @@ msgstr ""
 msgid "Tests Extension profile for urban."
 msgstr ""
 
-#: ../browser/urbaneventviews.py:510
+#: ../browser/urbaneventviews.py:367
+msgid "The CSV file couldn't be read properly. Please verify its structure and try again."
+msgstr "Le fichier CSV n'a pas pu être lu correctement. Veuillez vérifier son contenu et réessayer."
+
+#: ../browser/urbaneventviews.py:636
 msgid "The claimants import will be ready tomorrow!"
 msgstr "L'import des réclamants a bien été enregistré et sera éxécuté cette nuit"
 
@@ -2750,6 +2758,10 @@ msgstr "Si ce champ n'est pas rempli, l'identifiant de ce terme sera utilisé"
 #: BuildLicence.py
 msgid "urban_help_townshipCouncilFolder"
 msgstr "Si coché, un paragraphe supplémentaire apparaîtra dans le permis"
+
+#: ../browser/urbaneventviews.py:412
+msgid "urban_imported_recipients"
+msgstr "Destinataires importés"
 
 #. Default: "Buildlicencenumerotation"
 #: UrbanTool.py
