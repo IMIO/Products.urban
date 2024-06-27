@@ -8,6 +8,35 @@ Changelog
 
 .. towncrier release notes start
 
+2.7.14 (2024-06-27)
+-------------------
+
+New features:
+
+
+- Adapt vocabulary default config values for 2024 CODT reform
+  [daggelpop] (URB-3003)
+- Add frozen state
+  [jchandelle] (URB-3007)
+- Allow linking to patrimony certificates
+  [daggelpop] (URB-3063)
+- Add validity date filter and index
+  [jchandelle] (URB-3090)
+- Add new terms to foldercategories vocabulary
+  [daggelpop] (URB-3096)
+- Rename Patrimony certificate
+  [daggelpop] (URB-3116)
+- Add `get_bound_licences` and `get_bound_patrimonies` to CODT_BaseBuildLicence
+  [daggelpop] (URB-3125)
+
+
+Bug fixes:
+
+
+- Mark PatrimonyCertificate as allowed type for bound_licences field in CODT build licences
+  [daggelpop] (URB-3046)
+
+
 2.7.13 (2024-05-28)
 -------------------
 
