@@ -1,2 +1,0 @@
-Add frozen state
-[jchandelle]
