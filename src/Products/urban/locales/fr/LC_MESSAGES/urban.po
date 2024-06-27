@@ -660,7 +660,7 @@ msgid "ParcelOutLicence"
 msgstr "Permis d'urbanisation"
 
 msgid "PatrimonyCertificate"
-msgstr "Certificat de patrimoine"
+msgstr "Patrimoine"
 
 #: ../browser/offdays_settings.py:73
 msgid "Period"
@@ -2108,7 +2108,7 @@ msgid "pashs_folder_title"
 msgstr "PASH"
 
 msgid "patrimonycertificate_urbanconfig_title"
-msgstr "Paramètres des certificats de patrimoine"
+msgstr "Paramètres des patrimoines"
 
 #. Default: "Is key event"
 #: ../browser/templates/globalmacros.pt:117
