@@ -603,4 +603,13 @@
         profile="Products.urban:default"
         />
 
+    <gs:upgradeStep
+        title="Rename Patrimony certificate"
+        description=""
+        source="1145"
+        destination="1146"
+        handler=".update_270.rename_patrimony_certificate"
+        profile="Products.urban:default"
+        />
+
 </configure>
