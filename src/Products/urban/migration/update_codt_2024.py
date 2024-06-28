@@ -339,7 +339,6 @@ def add_new_index_and_new_filter(context):
     setup_tool.runImportStepFromProfile(
         "profile-Products.urban:urbantypes", "catalog"
     )
-    reindexIndexes(None, "getValidityDate")
     
     portal = api.portal.get()
     urban_folder = portal.urban
@@ -375,3 +374,7 @@ def add_frozen_workflow_state(context):
         for_states=["deposit", "complete", "incomplete"],
     )
     logger.info("upgrade done!")
+
+
+def reindex_getValidityDate(context):
+    reindexIndexes(None, ["getValidityDate"])
