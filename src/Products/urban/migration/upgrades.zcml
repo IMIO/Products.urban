@@ -612,4 +612,13 @@
         profile="Products.urban:default"
         />
 
+    <gs:upgradeStep
+        title="Reindex getValidityDate"
+        description=""
+        source="1146"
+        destination="1147"
+        handler=".update_codt_2024.reindex_getValidityDate"
+        profile="Products.urban:default"
+        />
+
 </configure>
