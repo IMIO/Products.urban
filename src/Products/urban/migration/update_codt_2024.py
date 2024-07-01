@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from eea.facetednavigation.interfaces import ICriteria
 from Products.urban import URBAN_TYPES
 from Products.urban.setuphandlers import createFolderDefaultValues
 from Products.urban.migration.utils import refresh_workflow_permissions
@@ -332,8 +333,6 @@ def add_folder_categories_terms(context):
 
 
 def add_new_index_and_new_filter(context):
-    from eea.facetednavigation.interfaces import ICriteria
-    
     logger.info("starting : Add new index and new filter for validity date")
     setup_tool = api.portal.get_tool('portal_setup')
     setup_tool.runImportStepFromProfile(
@@ -378,3 +377,19 @@ def add_frozen_workflow_state(context):
 
 def reindex_getValidityDate(context):
     reindexIndexes(None, ["getValidityDate"])
+
+
+def fix_validity_filter_title(context):
+    logger.info("starting : Fix validity filter title")
+    
+    portal = api.portal.get()
+    urban_folder = portal.urban
+    folders = [getattr(urban_folder, urban_type.lower() + "s", None) for urban_type in URBAN_TYPES]
+    folders.append(urban_folder)
+    for folder in folders:
+        criterion = ICriteria(folder)
+        if criterion is None:
+            continue
+        criterion.edit("c13", title="Date de validité")
+
+    logger.info("upgrade done!")

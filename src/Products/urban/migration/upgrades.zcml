@@ -621,4 +621,14 @@
         profile="Products.urban:default"
         />
 
+
+    <gs:upgradeStep
+        title="Fix validity filter title"
+        description=""
+        source="1147"
+        destination="1148"
+        handler=".update_codt_2024.fix_validity_filter_title"
+        profile="Products.urban:default"
+        />
+
 </configure>

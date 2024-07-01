@@ -39,7 +39,7 @@
   </criterion>
   <criterion name="c13">
    <property name="widget">daterange</property>
-   <property name="title">Date de validation</property>
+   <property name="title">Date de validité</property>
    <property name="position">top</property>
    <property name="section">advanced</property>
    <property name="hidden">False</property>
