@@ -25,6 +25,7 @@ from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 from zope.i18n import translate
 from Products.urban import UrbanMessage as _
+from Products.urban.utils import WIDGET_DATE_END_YEAR
 
 ##code-section module-header #fill in your manual code here
 ##/code-section module-header
@@ -75,6 +76,7 @@ schema = Schema(
                 show_hm=False,
                 format="%d/%m/%Y",
                 starting_year=1930,
+                ending_year=WIDGET_DATE_END_YEAR,
                 label=_("urban_label_claimDate", default="Claimdate"),
             ),
         ),

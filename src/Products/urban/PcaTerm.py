@@ -20,6 +20,7 @@ import interfaces
 from Products.urban.UrbanConfigurationValue import UrbanConfigurationValue
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
+from Products.urban.utils import WIDGET_DATE_END_YEAR
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
@@ -51,6 +52,7 @@ schema = Schema(
             widget=DateTimeField._properties["widget"](
                 show_hm=False,
                 starting_year=1930,
+                ending_year=WIDGET_DATE_END_YEAR,
                 future_years=False,
                 label="Decreedate",
                 label_msgid="urban_label_decreeDate",
