@@ -4,6 +4,7 @@
 # GNU General Public License (GPL)
 from Products.CMFPlone.i18nl10n import utranslate
 
+from Acquisition import aq_parent
 from plone import api
 from Products.urban.config import URBAN_CWATUPE_TYPES
 from Products.urban.config import URBAN_CODT_TYPES
@@ -14,6 +15,8 @@ from Products.urban.interfaces import IEventTypeType
 from Products.urban.interfaces import IFolderManager
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.utils import getCurrentFolderManager
+from Products.urban.utils import get_licence_context
+from Products.urban.utils import convert_to_utf8
 
 from zope.component import getGlobalSiteManager
 from zope.interface import implements
@@ -243,5 +246,60 @@ class DateIndexVocabulary(object):
 
         return SimpleVocabulary(terms)
 
-
 DateIndexVocabularyFactory = DateIndexVocabulary()
+
+
+
+def sorted_by_voc_term_title(value):
+    return value.title.lower()
+
+
+class AllOpinionsToAskVocabulary(object):
+    def __call__(self, context):
+        brains = api.content.find(portal_type="OpinionEventConfig")
+        items = []
+        for brain in brains:
+            obj = brain.getObject()
+            title = obj.Title()
+            uid = obj.UID()
+            portal_type = obj
+            while not ILicenceConfig.providedBy(portal_type):
+                portal_type = aq_parent(portal_type)
+
+            portal_type_title = portal_type.id
+
+            try:
+                items.append(SimpleTerm(uid, uid, ("{} ({})".format(
+                    convert_to_utf8(title), convert_to_utf8(portal_type_title)
+                )).decode("utf-8")))
+            except Exception as e:
+                __import__('pdb').set_trace()
+                print()
+
+        return SimpleVocabulary(sorted(items, key=sorted_by_voc_term_title))
+
+AllOpinionsToAskVocabularyFactory = AllOpinionsToAskVocabulary()
+
+
+class LicenceDocumentsVocabulary(object):
+    implements(IVocabularyFactory)
+
+    def __call__(self, context):
+        contexts = get_licence_context(context, get_all_object=True)
+        output = []
+        if contexts is None:
+            return SimpleVocabulary(output)
+        for context in contexts:
+            docs = [
+                SimpleTerm(doc.UID(), doc.UID(), doc.Title())
+                for doc in context.listFolderContents(
+                    contentFilter={
+                        "portal_type": ["ATFile", "ATImage", "File", "Image"]
+                    }
+                )
+            ]
+            output += docs
+        return SimpleVocabulary(output)
+
+
+LicenceDocumentsVocabularyFactory = LicenceDocumentsVocabulary()

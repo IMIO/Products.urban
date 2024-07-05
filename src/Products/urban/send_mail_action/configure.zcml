@@ -1,0 +1,50 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:plone="http://namespaces.plone.org/plone">
+
+    <include package="plone.app.z3cform" />
+
+
+    <adapter
+        for="zope.publisher.interfaces.browser.IBrowserRequest"
+        provides=".interface.IRedirect"
+        factory=".redirect.Redirect"
+        />
+
+    <browser:page
+        for="*"
+        layer="Products.urban.interfaces.IProductUrbanLayer"
+        name="redirect_view"
+        class=".redirect.RedirectView"
+        permission="zope2.View"
+        />
+
+  <browser:resourceDirectory
+      name="Products.urban.send_mail_action"
+      directory="static"
+      />
+
+    <interface
+      interface="Products.urban.send_mail_action.interface.ISendMailAction"
+      type="plone.contentrules.rule.interfaces.IRuleEventType"
+      name="Send mail action"
+      />
+
+    <adapter factory=".adapter.GetDocumentToAttach"/>
+
+      <browser:page
+        for="*"
+        layer="Products.urban.interfaces.IProductUrbanLayer"
+        name="send-email-to-inquiry-dept"
+        class=".forms.SendMailActionWrapper"
+        permission="zope2.View"
+        />
+
+    <subscriber
+      for="Products.urban.send_mail_action.interface.ISendMailAction"
+      handler=".handler.send_mail_action"
+    />
+
+
+</configure>

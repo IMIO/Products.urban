@@ -1,0 +1,99 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:plone="http://namespaces.plone.org/plone">
+
+    <!-- Email action definition -->
+
+     <adapter factory=".mail_with_attachment.MailWithAttachmentActionExecutor" />
+
+     <browser:page
+       for="plone.app.contentrules.browser.interfaces.IRuleActionAdding"
+       name="plone.actions.MailWithAttachement"
+       class=".mail_with_attachment.MailWithAttachmentAddForm"
+       permission="plone.app.contentrules.ManageContentRules"
+       />
+
+     <browser:page
+       for=".mail_with_attachment.IMailWithAttachmentAction"
+       name="edit"
+       class=".mail_with_attachment.MailWithAttachmentEditForm"
+       permission="plone.app.contentrules.ManageContentRules"
+       />
+
+     <plone:ruleAction
+         name="plone.actions.MailWithAttachement"
+         title="Send email with attachment"
+         description="Send an email with attachment on the triggering object"
+         for="*"
+         event="*"
+         addview="plone.actions.MailWithAttachement"
+         editview="edit"
+         schema=".mail_with_attachment.IMailWithAttachmentAction"
+         factory=".mail_with_attachment.MailWithAttachmentAction"
+         />
+
+    <adapter factory="Products.urban.contentrules.mail_with_attachment.GetDocumentToAttach"/>
+
+    <!-- eventType conditions -->
+
+    <adapter factory=".event_type.EventTypeConditionExecutor" />
+
+    <browser:page
+      for="plone.app.contentrules.browser.interfaces.IRuleConditionAdding"
+      name="urban.conditions.EventType"
+      class=".event_type.EventTypeAddForm"
+      permission="cmf.ManagePortal"
+      />
+
+    <browser:page
+      for=".event_type.IEventTypeCondition"
+      name="edit"
+      class=".event_type.EventTypeEditForm"
+      permission="cmf.ManagePortal"
+      />
+
+    <plone:ruleCondition
+        name="urban.conditions.EventType"
+        title="Event Type"
+        description="Apply only when the Event Type correspond to the one of the context"
+        for="*"
+        event="*"
+        addview="urban.conditions.EventType"
+        editview="edit"
+        schema=".event_type.IEventTypeCondition"
+        factory=".event_type.EventTypeCondition"
+        />
+
+
+    <!-- opinion conditions -->
+
+    <adapter factory=".opinions.OpinionsConditionExecutor" />
+
+    <browser:page
+      for="plone.app.contentrules.browser.interfaces.IRuleConditionAdding"
+      name="urban.conditions.Opinions"
+      class=".opinions.OpinionsAddForm"
+      permission="cmf.ManagePortal"
+      />
+
+    <browser:page
+      for=".opinions.IOpinionsCondition"
+      name="edit"
+      class=".opinions.OpinionsEditForm"
+      permission="cmf.ManagePortal"
+      />
+
+    <plone:ruleCondition
+        name="urban.conditions.Opinions"
+        title="Opinion to ask"
+        description="Apply only when one of the Opinion to ask slelected correspond to the one of the context"
+        for="*"
+        event="*"
+        addview="urban.conditions.Opinions"
+        editview="edit"
+        schema=".opinions.IOpinionsCondition"
+        factory=".opinions.OpinionsCondition"
+        />
+
+</configure>

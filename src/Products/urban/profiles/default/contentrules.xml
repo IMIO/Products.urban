@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<contentrules>
+ <rule name="rule-1" title="Envoie de mail pour enquete publique"
+    cascading="False" description="" enabled="True"
+    event="Products.urban.send_mail_action.interface.ISendMailAction"
+    stop-after="False">
+  <conditions>
+   <condition type="urban.conditions.EventType">
+    <property
+       name="event_type">Products.urban.interfaces.IInquiryEvent</property>
+   </condition>
+  </conditions>
+  <actions>
+   <action type="plone.actions.MailWithAttachement">
+    <property name="exclude_actor">False</property>
+    <property name="message">Madame, Monsieur, 
+Nous vous prions de trouver ci-joint les documents de publicité à publier sur le site internet de la Commune aux dates indiquées sur l'affiche.
+D'avance nous vous remercions.
+Le service Urbanisme</property>
+    <property name="subject">Demande de publication sur le site internet</property>
+    <property name="recipients"></property>
+    <property name="source"/>
+   </action>
+  </actions>
+ </rule>
+ <assignment name="rule-1" bubbles="True" enabled="True" location=""/>
+</contentrules>
