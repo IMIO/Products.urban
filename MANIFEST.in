@@ -49,3 +49,4 @@
   recursive-include docs Makefile
   recursive-include src *.cpy
   recursive-include src *.ods
+  exclude *.toml
