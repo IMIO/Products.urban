@@ -21,6 +21,7 @@ import interfaces
 
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
+from Products.urban.utils import WIDGET_DATE_END_YEAR
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
@@ -85,6 +86,7 @@ schema = Schema(
                 show_hm=False,
                 format="%d/%m/%Y",
                 starting_year=1930,
+                ending_year=WIDGET_DATE_END_YEAR,
                 label=_("urban_label_transmitDate", default="Transmitdate"),
             ),
             optional=True,
@@ -95,6 +97,7 @@ schema = Schema(
                 show_hm=False,
                 format="%d/%m/%Y",
                 starting_year=1930,
+                ending_year=WIDGET_DATE_END_YEAR,
                 label=_(
                     "urban_label_transmitToClaimantsDate",
                     default="Transmittoclaimantsdate",
@@ -108,6 +111,7 @@ schema = Schema(
                 show_hm=False,
                 format="%d/%m/%Y",
                 starting_year=1930,
+                ending_year=WIDGET_DATE_END_YEAR,
                 label=_("urban_label_receiptDate", default="Receipt date"),
             ),
             optional=True,
@@ -128,6 +132,7 @@ schema = Schema(
                 show_hm=False,
                 format="%d/%m/%Y",
                 starting_year=1930,
+                ending_year=WIDGET_DATE_END_YEAR,
                 label=_("urban_label_auditionDate", default="Auditiondate"),
             ),
             optional=True,
@@ -138,6 +143,7 @@ schema = Schema(
                 show_hm=False,
                 format="%d/%m/%Y",
                 starting_year=1930,
+                ending_year=WIDGET_DATE_END_YEAR,
                 label=_("urban_label_decisionDate", default="Decisiondate"),
             ),
             optional=True,
@@ -179,6 +185,7 @@ schema = Schema(
                 show_hm=False,
                 format="%d/%m/%Y",
                 starting_year=1930,
+                ending_year=WIDGET_DATE_END_YEAR,
                 label=_(
                     "urban_label_recourseDecisionDisplayDate",
                     default="Recoursedecisiondisplaydate",
@@ -352,6 +359,7 @@ schema = Schema(
                 show_hm=False,
                 format="%d/%m/%Y",
                 starting_year=1930,
+                ending_year=WIDGET_DATE_END_YEAR,
                 label=_("urban_label_suspensionEndDate", default="suspensionEndDate"),
             ),
             optional=True,
@@ -404,6 +412,7 @@ schema = Schema(
                 show_hm=False,
                 format="%d/%m/%Y",
                 starting_year=1930,
+                ending_year=WIDGET_DATE_END_YEAR,
                 label=_("urban_label_displayDate", default="Displaydate"),
             ),
             optional=True,
@@ -414,6 +423,7 @@ schema = Schema(
                 show_hm=False,
                 format="%d/%m/%Y",
                 starting_year=1930,
+                ending_year=WIDGET_DATE_END_YEAR,
                 label=_("urban_label_displayDateEnd", default="Displaydateiend"),
             ),
             optional=True,
@@ -446,6 +456,7 @@ schema = Schema(
                 show_hm=False,
                 format="%d/%m/%Y",
                 starting_year=1930,
+                ending_year=WIDGET_DATE_END_YEAR,
                 label=_("urban_label_reportCreationDate", default="ReportCreationDate"),
             ),
             optional=True,
@@ -456,6 +467,7 @@ schema = Schema(
                 show_hm=False,
                 format="%d/%m/%Y",
                 starting_year=1930,
+                ending_year=WIDGET_DATE_END_YEAR,
                 label=_(
                     "urban_label_reportReceptionDate", default="ReportReceptionDate"
                 ),
@@ -468,6 +480,7 @@ schema = Schema(
                 show_hm=False,
                 format="%d/%m/%Y",
                 starting_year=1930,
+                ending_year=WIDGET_DATE_END_YEAR,
                 label=_("urban_label_paymentDeadline", default="PaymentDeadline"),
             ),
             optional=True,
@@ -478,6 +491,7 @@ schema = Schema(
                 show_hm=False,
                 format="%d/%m/%Y",
                 starting_year=1930,
+                ending_year=WIDGET_DATE_END_YEAR,
                 label=_("urban_label_ultimeDate", default="UltimeDate"),
             ),
             optional=True,
