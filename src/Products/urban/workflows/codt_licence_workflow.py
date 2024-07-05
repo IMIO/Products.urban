@@ -58,4 +58,9 @@ class StateRolesMapping(BaseRoleMapping):
             BaseRoleMapping.get_readers: ("Reader",),
             BaseRoleMapping.get_editors: ("Reader", "Reviewer"),
         },
+        "obsolete": {
+            BaseRoleMapping.get_readers: ("Reader",),
+            BaseRoleMapping.get_editors: ("Reader", "Reviewer"),
+            BaseRoleMapping.get_opinion_editors: ("Reader",),
+        },
     }

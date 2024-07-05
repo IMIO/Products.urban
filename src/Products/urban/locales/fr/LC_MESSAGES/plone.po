@@ -148,7 +148,7 @@ msgid "ParcellingTerm"
 msgstr "Lotissement"
 
 msgid "PatrimonyCertificate"
-msgstr "Certificat de patrimoine"
+msgstr "Patrimoine"
 
 msgid "PcaTerm"
 msgstr "Plan Communal d'Aménagement"
@@ -420,11 +420,17 @@ msgstr "PEB"
 msgid "label_schema_urban_road"
 msgstr "Voirie"
 
+msgid "make_obsolete"
+msgstr "Rendre caduc"
+
 msgid "need_parceloutlicence"
 msgstr "Refusé"
 
 msgid "notify"
 msgstr "Notification"
+
+msgid "obsolete"
+msgstr "Caduc"
 
 msgid "opinion_given"
 msgstr "Avis rendu"
@@ -509,8 +515,14 @@ msgstr "Veuillez indiquer d'avantages de termes de recherche"
 msgid "workLocationStreet"
 msgstr "Rue"
 
-msgid "obsolete"
-msgstr "Caduc"
+msgid "suspend"
+msgstr "Suspendre"
 
-msgid "make_obsolete"
-msgstr "Rendre caduc"
+msgid "suspension"
+msgstr "Suspendus"
+
+msgid "frozen_suspension"
+msgstr "Gelé (délais suspendus)"
+
+msgid "resume"
+msgstr "Reprendre"

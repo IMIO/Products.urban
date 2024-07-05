@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
-
+from datetime import datetime
 from Products.urban.config import URBAN_TYPES
+
+codt_2024_start_validity_date = datetime(2024, 4, 1)
 
 vocabularies_with_HTML_description = [
     "specificfeatures",
@@ -61,6 +63,34 @@ default_values = {
             {
                 "id": "uco-fd",
                 "title": u"UCO/ED : permis avec écart et/ou dérogation Plan Secteur / norme GRU",
+            },
+            {
+                "id": "AO",
+                "title": u"/AO: Permis d’urbanisme communal avec avis obligatoire du FD",
+                "description": u"<p>/AO: Permis d’urbanisme communal avec avis obligatoire du FD<br />Pour le cas visé Art. D.IV.15, Al. 1er, et D.IV.17.</p>",
+                "extraValue": "AO",
+                "startValidity": codt_2024_start_validity_date,
+            },
+            {
+                "id": "AF",
+                "title": u"/AF: Permis d’urbanisme communal avec avis facultatif du FD",
+                "description": u"<p>/AF: Permis d’urbanisme communal avec avis facultatif du FD<br />Pour le cas visé à l’Art. D.IV.14, Al. 2 et à la demande du Co</p>",
+                "extraValue": "AF",
+                "startValidity": codt_2024_start_validity_date,
+            },
+            {
+                "id": "PIL",
+                "title": u"/PIL: Permis d’urbanisme communal RELATIF a DES PROJETS D’impact limité.",
+                "description": u"<p>/PIL: Permis d’urbanisme communal RELATIF a DES PROJETS D’impact limité<br />Pour le cas visé à l’Art. R.IV. 1-1 TABLEAU et DISPENSÉ AVIS obligatoire </p>",
+                "extraValue": "PIL",
+                "startValidity": codt_2024_start_validity_date,
+            },
+            {
+                "id": "SA",
+                "title": u"/SA: Permis d’urbanisme communal sans avis du FD (hors du champ d’application du R.IV. 1-1 tableau)",
+                "description": u"<p>/SA: Permis d’urbanisme communal sans avis du FD (hors du champ d’application du R.IV. 1-1 tableau)<br />DISPENSÉ AVIS obligatoire du FD, Art. D.IV. 16, Al. 1, 1° et 2°</p>",
+                "extraValue": "SA",
+                "startValidity": codt_2024_start_validity_date,
             },
             {"id": "inconnu", "title": u"Inconnu"},
         ],
@@ -196,6 +226,36 @@ default_values = {
             {
                 "id": "annexe9",
                 "title": u"Annexe 9 - Permis d'urbanisme dispensé d'un architecte ou autre que les demandes visées aux annexes 5 à 8",
+            },
+            {
+                "id": "div_16_1a",
+                "title": u"DIV.16 1° a) SD pluricommunal ou SDC qui vise l’optimisation spatiale (uniquement les actes et travaux entièrement dans une centralité)",
+                "startValidity": codt_2024_start_validity_date,
+            },
+            {
+                "id": "div_16_1b",
+                "title": u"DIV.16 1° b) une commission communale, un GCU et soit : (1) SD pluricommunal, (2) SDC, (3) SD pluricommunal et un SDC qui a partiellement cessé de produire ses effets",
+                "startValidity": codt_2024_start_validity_date,
+            },
+            {
+                "id": "div_16_1c",
+                "title": u"DIV.16 1° c) SOL",
+                "startValidity": codt_2024_start_validity_date,
+            },
+            {
+                "id": "div_16_1d",
+                "title": u"DIV.16 1° d) permis d’urbanisation non périmé",
+                "startValidity": codt_2024_start_validity_date,
+            },
+            {
+                "id": "div_16_2",
+                "title": u"DIV.16 2° pas d’écart par rapport aux schémas, à la carte d’affectation des sols, aux guides d’urbanisme ou au permis d’urbanisation, si entièrement dans une zone d’enjeu communal",
+                "startValidity": codt_2024_start_validity_date,
+            },
+            {
+                "id": "div_16_3",
+                "title": u"DIV 16 3° pas d’écart par rapport à la carte d’affectation des sols ou au GRU",
+                "startValidity": codt_2024_start_validity_date,
             },
         ],
     },
@@ -306,6 +366,13 @@ default_values = {
                 "title": u"R.IV.40-1.§1.8° - Voiries régionales",
                 "description": u'<p>Article R.IV.40-1.§1.8° du CoD - " les voiries visées à l\'article R.II.21-1,1° pour autant que les actes et travaux impliquent une modification de leur gabarit"</p>',
             },
+            {
+                "id": "div_40_alinea_2_dash_1",
+                "title": u"D.IV.40 Alinéa 2/1",
+                "extraValue": u"D.IV.40 Alinéa 2/1",
+                "description": u"""<p>Les demandes visant à implanter un commerce au sens de l'article D.IV.4, alinéa 1er, 8°, sont soumises à enquête publique, sauf lorsque la demande porte sur l'implantation d'un commerce de quatre-cents mètres carrés et moins soumis à permis en exécution de l'article D.IV.4, alinéa 4. </p>""",
+                "startValidity": codt_2024_start_validity_date,
+            }
         ],
         "announcementarticles": [
             "UrbanVocabularyTerm",
@@ -368,21 +435,24 @@ default_values = {
             "UrbanVocabularyTerm",
             {
                 "id": "annexe4",
-                "title": u"Annexe 4 - Demande de permis avec concours d'un architecte",
+                "title": u"D.IV.15. alinéa 1, 1° commune décentralisée",
             },
             {
                 "id": "annexe5",
-                "title": u"Annexe 5 - Modification de la destination ou modification de la répartition des surfaces de vente",
+                "title": u"D.IV.15. alinéa 1, 2° SOL",
             },
             {
                 "id": "annexe6",
-                "title": u"Annexe 6 - Modification sensible du relief du sol - dépôt de véhicules, de mitrailles, de matériaux ou de déchets - installations mobiles - travaux d'aménagement au sol aux abords d'une construction autorisée",
+                "title": u"D.IV.15. alinéa 1, 3° permis d'urbanisation non périmé",
             },
             {
                 "id": "annexe7",
-                "title": u"Annexe 7 - Boisement - déboisement - abattage - culture de sapins de Noël - modification de l'aspect d'un ou plusieurs arbres ou haies remarquables - défrichement - modification de la végétation",
+                "title": u"D.IV.15. alinéa 2, 1° zone d'enjeu communal",
             },
-            {"id": "annexe8", "title": u"Annexe 8 - Travaux techniques"},
+            {
+                "id": "annexe8",
+                "title": u"D.IV.15. alinéa 2, 2° enseigne, logement, abattage, travaux d'impact limité",
+            },
             {
                 "id": "annexe9",
                 "title": u"Annexe 9 - Permis d'urbanisme dispensé d'un architecte ou autre que les demandes visées aux annexes 5 à 8",
@@ -483,6 +553,13 @@ default_values = {
                 "title": u"R.IV.40-1.§1.8° - Voiries régionales",
                 "description": u'<p>Article R.IV.40-1.§1.8° du CoD - " les voiries visées à l\'article R.II.21-1,1° pour autant que les actes et travaux impliquent une modification de leur gabarit"</p>',
             },
+            {
+                "id": "div_40_alinea_2_dash_1",
+                "title": u"D.IV.40 Alinéa 2/1",
+                "extraValue": u"D.IV.40 Alinéa 2/1",
+                "description": u"""<p>Les demandes visant à implanter un commerce au sens de l'article D.IV.4, alinéa 1er, 8°, sont soumises à enquête publique, sauf lorsque la demande porte sur l'implantation d'un commerce de quatre-cents mètres carrés et moins soumis à permis en exécution de l'article D.IV.4, alinéa 4. </p>""",
+                "startValidity": codt_2024_start_validity_date,
+            }
         ],
         "announcementarticles": [
             "UrbanVocabularyTerm",
@@ -1124,6 +1201,13 @@ default_values = {
                 "title": u"R.IV.40-1.§1.8° - Voiries régionales",
                 "description": u'<p>Article R.IV.40-1.§1.8° du CoD - " les voiries visées à l\'article R.II.21-1,1° pour autant que les actes et travaux impliquent une modification de leur gabarit"</p>',
             },
+            {
+                "id": "div_40_alinea_2_dash_1",
+                "title": u"D.IV.40 Alinéa 2/1",
+                "extraValue": u"D.IV.40 Alinéa 2/1",
+                "description": u"""<p>Les demandes visant à implanter un commerce au sens de l'article D.IV.4, alinéa 1er, 8°, sont soumises à enquête publique, sauf lorsque la demande porte sur l'implantation d'un commerce de quatre-cents mètres carrés et moins soumis à permis en exécution de l'article D.IV.4, alinéa 4. </p>""",
+                "startValidity": codt_2024_start_validity_date,
+            }
         ],
         "announcementarticles": [
             "UrbanVocabularyTerm",
@@ -1818,6 +1902,12 @@ default_values = {
             {"id": "demolition", "title": u"Démolition"},
             {"id": "divers", "title": u"Divers"},
             {"id": "enseigne", "title": u"Enseigne"},
+            {
+                "id": "EXT_COMMERCE",
+                "title": u"Extension d'un commerce de détail ou d'un ensemble commercial",
+                "extraValue": "EXT_COMMERCE",
+                "startValidity": codt_2024_start_validity_date,
+            },
             {"id": "immeuble-appartements", "title": u"Immeuble à appartements"},
             {"id": "modification-relief", "title": u"Modification du relief du sol"},
             {
@@ -3183,6 +3273,7 @@ default_values = {
             {"id": "zev", "title": u"zone d'espaces verts"},
             {"id": "zn", "title": u"zone naturelle"},
             {"id": "zp", "title": u"zone de parc"},
+            {"id": "zacc", "title": u"zone d'aménagement communal concerté"},
         ],
         "rcu": [
             "UrbanVocabularyTerm",

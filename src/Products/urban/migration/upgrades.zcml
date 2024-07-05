@@ -568,10 +568,74 @@
         />
 
     <gs:upgradeStep
-        title="Install send mail with attachment action"
+        title="Add ZACC to folderzones vocabulary"
         description=""
         source="1141"
         destination="1142"
+        handler=".update_codt_2024.add_zacc_to_folderzones_vocabulary"
+        profile="Products.urban:default"
+        />
+
+    <gs:upgradeStep
+        title="Add folder categories terms"
+        description=""
+        source="1142"
+        destination="1143"
+        handler=".update_codt_2024.add_folder_categories_terms"
+        profile="Products.urban:default"
+        />
+
+    <gs:upgradeStep
+        title="Add new index and new filter for validity date"
+        description=""
+        source="1143"
+        destination="1144"
+        handler=".update_codt_2024.add_new_index_and_new_filter"
+        profile="Products.urban:default"
+        />
+      
+    <gs:upgradeStep
+        title="Add frozen workflow state"
+        description=""
+        source="1144"
+        destination="1145"
+        handler=".update_codt_2024.add_frozen_workflow_state"
+        profile="Products.urban:default"
+        />
+
+    <gs:upgradeStep
+        title="Rename Patrimony certificate"
+        description=""
+        source="1145"
+        destination="1146"
+        handler=".update_270.rename_patrimony_certificate"
+        profile="Products.urban:default"
+        />
+
+    <gs:upgradeStep
+        title="Reindex getValidityDate"
+        description=""
+        source="1146"
+        destination="1147"
+        handler=".update_codt_2024.reindex_getValidityDate"
+        profile="Products.urban:default"
+        />
+
+
+    <gs:upgradeStep
+        title="Fix validity filter title"
+        description=""
+        source="1147"
+        destination="1148"
+        handler=".update_codt_2024.fix_validity_filter_title"
+        profile="Products.urban:default"
+        />
+        
+    <gs:upgradeStep
+        title="Install send mail with attachment action"
+        description=""
+        source="1148"
+        destination="1149"
         handler=".update_codt_2024.install_send_mail_with_attachement_action"
         profile="Products.urban:default"
         />

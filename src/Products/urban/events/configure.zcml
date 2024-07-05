@@ -131,6 +131,10 @@
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".urbanEventEvents.updateDecisionDate" />
 
+  <subscriber for="..interfaces.IUrbanEvent
+                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+              handler=".urbanEventEvents.updateValidityDate" />
+
   <subscriber for="..interfaces.IUrbanEventInquiry
                    zope.lifecycleevent.interfaces.IObjectCreatedEvent"
               handler=".urbanEventInquiryEvents.setLinkedInquiry" />
