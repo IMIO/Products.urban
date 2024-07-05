@@ -393,3 +393,11 @@ def fix_validity_filter_title(context):
         criterion.edit("c13", title="Date de validité")
 
     logger.info("upgrade done!")
+
+def install_send_mail_with_attachement_action(context):
+    logger.info("starting : Install send mail with attachement action")
+    setup_tool = api.portal.get_tool("portal_setup")
+    setup_tool.runImportStepFromProfile("profile-Products.urban:default", "actions")
+    setup_tool.runImportStepFromProfile("profile-Products.urban:default", "jsregistry")
+    setup_tool.runImportStepFromProfile("profile-Products.urban:default", "contentrules")
+    logger.info("upgrade done!")
