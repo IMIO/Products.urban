@@ -82,6 +82,12 @@
   />
 
   <utility
+    component=".vocabularies.AllOpinionsToAskVocabularyFactory"
+    name="urban.vocabularies.all_opinions_to_ask"
+    provides="zope.schema.interfaces.IVocabularyFactory"
+  />
+
+  <utility
     component=".vocabularies.WorkTypesVocabularyFactory"
     name="urban.vocabularies.work_types"
     provides="zope.schema.interfaces.IVocabularyFactory"
@@ -90,6 +96,12 @@
   <utility
     component=".vocabularies.GigCoringUserIdVocabularyFactory"
     name="urban.vocabularies.gig_coring_user_id"
+    provides="zope.schema.interfaces.IVocabularyFactory"
+  />
+
+  <utility
+    component=".vocabularies.LicenceDocumentsVocabularyFactory"
+    name="urban.vocabularies.licence_documents"
     provides="zope.schema.interfaces.IVocabularyFactory"
   />
 

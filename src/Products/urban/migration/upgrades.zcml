@@ -630,5 +630,14 @@
         handler=".update_codt_2024.fix_validity_filter_title"
         profile="Products.urban:default"
         />
+        
+    <gs:upgradeStep
+        title="Install send mail with attachment action"
+        description=""
+        source="1148"
+        destination="1149"
+        handler=".update_codt_2024.install_send_mail_with_attachement_action"
+        profile="Products.urban:default"
+        />
 
 </configure>
