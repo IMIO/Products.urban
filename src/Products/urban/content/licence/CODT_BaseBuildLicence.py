@@ -15,6 +15,8 @@ __docformat__ = "plaintext"
 
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
+from plone import api
+from zope.component import getMultiAdapter
 from zope.interface import implements
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 from Products.urban import interfaces
@@ -28,7 +30,7 @@ from Products.urban import UrbanMessage as _
 
 ##code-section module-header #fill in your manual code here
 from Products.MasterSelectWidget.MasterMultiSelectWidget import MasterMultiSelectWidget
-from Products.urban.utils import setOptionalAttributes
+from Products.urban.utils import setOptionalAttributes, get_ws_meetingitem_infos
 from Products.urban.utils import setSchemataForCODT_Inquiry
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
@@ -685,6 +687,25 @@ class CODT_BaseBuildLicence(
         )
         return DisplayList(vocabulary)
 
+    def get_last_college_date(self):
+        college_event = self.getLastEvent(interfaces.ISimpleCollegeEvent)
+        ws4pmSettings = getMultiAdapter(
+            (api.portal.get(), self.REQUEST), name="ws4pmclient-settings"
+        )
+        brains = ws4pmSettings._rest_searchItems(
+            {"externalIdentifier": college_event.UID()}
+        )
+        if brains:
+            item = ws4pmSettings._rest_getItemInfos(
+                {"UID": brains[0]['UID'], "showExtraInfos": True,
+                 'extra_include': 'meeting,linked_items',
+                 'extra_include_meeting_additional_values': '*',
+                 'extra_include_linked_items_mode': 'every_successors'}
+            )
+        # TODO ADU: Work in progress...
+
+    def get_last_council_date(self):
+        pass
 
 # end of class CODT_BaseBuildLicence
 
