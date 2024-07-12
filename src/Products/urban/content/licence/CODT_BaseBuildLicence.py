@@ -13,6 +13,7 @@ __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEUL
 <stephan.geulette@uvcw.be>, Jean-Michel Abe <jm.abe@la-bruyere.be>"""
 __docformat__ = "plaintext"
 
+
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from plone import api
@@ -24,7 +25,7 @@ from Products.urban.content.licence.BaseBuildLicence import BaseBuildLicence
 from Products.urban.content.CODT_Inquiry import CODT_Inquiry
 from Products.urban.content.licence.GenericLicence import GenericLicence
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
-
+from datetime import datetime
 from Products.urban.config import *
 from Products.urban import UrbanMessage as _
 
@@ -687,25 +688,50 @@ class CODT_BaseBuildLicence(
         )
         return DisplayList(vocabulary)
 
-    def get_last_college_date(self):
-        college_event = self.getLastEvent(interfaces.ISimpleCollegeEvent)
+    def get_last_plonemeeting_date(self,
+                                   event=interfaces.ISimpleCollegeEvent,
+                                   item_portal_type="MeetingItemCollege",
+                                   decided_states=('accepted', 'accepted_but_modified', 'accepted_and_returned')):
+        """
+        Get the last date of a PloneMeeting meeting for a given event.
+        TODO: handle decided_states appropriately, fetching decided states from PloneMeeting configuration
+        """
+
+        meeting_event = self.getLastEvent(event)
+        if not meeting_event:
+            return
         ws4pmSettings = getMultiAdapter(
             (api.portal.get(), self.REQUEST), name="ws4pmclient-settings"
         )
         brains = ws4pmSettings._rest_searchItems(
-            {"externalIdentifier": college_event.UID()}
+            {"externalIdentifier": meeting_event.UID()}
         )
-        if brains:
-            item = ws4pmSettings._rest_getItemInfos(
-                {"UID": brains[0]['UID'], "showExtraInfos": True,
-                 'extra_include': 'meeting,linked_items',
-                 'extra_include_meeting_additional_values': '*',
-                 'extra_include_linked_items_mode': 'every_successors'}
-            )
-        # TODO ADU: Work in progress...
+        if not brains:
+            return  # Item has been deleted or has not been sent to PloneMeeting
+        item = ws4pmSettings._rest_getItemInfos(
+            {"UID": brains[0]['UID'], "showExtraInfos": True,
+             'extra_include': 'meeting,linked_items',
+             'extra_include_meeting_additional_values': '*',
+             'extra_include_linked_items_mode': 'every_successors'}
+        )[0]
+        if item_portal_type == item["@type"] and item['review_state'] in decided_states:
+            return datetime.strptime(item['extra_include_meeting']['date'], "%Y-%m-%dT%H:%M:%S")
+        elif item['extra_include_linked_items']:
+            for linked_item in item['extra_include_linked_items']:
+                if item_portal_type == linked_item["@type"] and linked_item['review_state'] in decided_states:
+                    item = ws4pmSettings._rest_getItemInfos({"UID": linked_item['UID'], "showExtraInfos": True, 'extra_include': 'meeting'})
+                    return datetime.strptime(item['extra_include_meeting']['date'], "%Y-%m-%dT%H:%M:%S")
 
-    def get_last_council_date(self):
-        pass
+    def get_last_college_date(self,
+                              event=interfaces.ISimpleCollegeEvent,
+                              decided_states=('accepted', 'accepted_but_modified', 'accepted_and_returned')):
+        return self.get_last_plonemeeting_date(event=event, item_portal_type='MeetingItemCollege', decided_states=decided_states)
+
+    def get_last_council_date(self,
+                              event=interfaces.ISimpleCollegeEvent,
+                              decided_states=('accepted', 'accepted_but_modified', 'accepted_and_returned')):
+        return self.get_last_plonemeeting_date(event=event, item_portal_type='MeetingItemCouncil', decided_states=decided_states)
+
 
 # end of class CODT_BaseBuildLicence
 
