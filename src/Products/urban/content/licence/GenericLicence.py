@@ -1765,6 +1765,16 @@ class GenericLicence(OrderedBaseFolder, UrbanBase, BrowserDefaultMixin):
             return None
         return events[-1]
 
+    def getValidityEndDate(self):
+        """
+        Get the last "validity end date" found in any of the licence's events, or nothing.
+        """
+        validity_event = self.getLastEventWithValidityDate()
+        if validity_event:
+            return validity_event.getValidityEndDate()
+        else:
+            return None
+
     def get_bound_roaddecrees(self):
         roaddecrees = []
         annotations = IAnnotations(self)
