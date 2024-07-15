@@ -13,7 +13,6 @@ __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEUL
 <stephan.geulette@uvcw.be>, Jean-Michel Abe <jm.abe@la-bruyere.be>"""
 __docformat__ = "plaintext"
 
-
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from plone import api

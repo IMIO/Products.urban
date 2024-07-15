@@ -17,6 +17,7 @@ import string
 import hashlib
 import pkg_resources
 
+
 def getCurrentFolderManager():
     """
     Returns the current FolderManager initials or object

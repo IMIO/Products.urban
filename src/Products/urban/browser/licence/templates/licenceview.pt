@@ -33,8 +33,7 @@
                          </div>
                          <div class="visualClear"></div>
                      </div>
-                    <!--? TODO ADU: Remove me !-->
-                    <span tal:content="python: context.get_last_college_date()">last_college_date</span>
+
                     <div id="urbanViewWithTabbing" tal:condition="useTabbing">
 
                         <dl class="formTabs enableFormTabbing">
