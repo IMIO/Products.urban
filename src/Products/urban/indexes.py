@@ -263,6 +263,14 @@ def genericlicence_decisiondate(licence):
 
 
 @indexer(interfaces.IGenericLicence)
+def genericlicence_valdity_date(licence):
+    validity_event = licence.getLastEventWithValidityDate()
+    if validity_event is None:
+        return AttributeError()
+    return validity_event.getValidityEndDate()
+
+
+@indexer(interfaces.IGenericLicence)
 def genericlicence_depositdate(licence):
     deposit_event = licence.getFirstDeposit()
     if deposit_event:

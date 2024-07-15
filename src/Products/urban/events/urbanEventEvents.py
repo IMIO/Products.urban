@@ -103,6 +103,11 @@ def updateDecisionDate(urban_event, event):
         licence.reindexObject(["getDecisionDate"])
 
 
+def updateValidityDate(urban_event, event):
+    licence = urban_event.aq_inner.aq_parent
+    licence.reindexObject(["getValidityDate"])
+
+
 @cache(
     get_key=lambda method, urban_event, event: urban_event.UID(),
     get_request="urban_event.REQUEST",
