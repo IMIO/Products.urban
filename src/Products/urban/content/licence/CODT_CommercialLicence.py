@@ -40,6 +40,39 @@ schema = Schema(
             schemata="urban_location",
             vocabulary="listCentralities",
         ),
+        IntegerField(
+            name="surfaceFoodBusiness",
+            default=0,
+            widget=IntegerField._properties["widget"](
+                label=_(
+                    "urban_label_surfaceFoodBusiness",
+                    default="surfaceFoodBusiness",
+                ),
+            ),
+            schemata="urban_location",
+        ),
+        IntegerField(
+            name="surfaceLightBusiness",
+            default=0,
+            widget=IntegerField._properties["widget"](
+                label=_(
+                    "urban_label_surfaceLightBusiness",
+                    default="surfaceLightBusiness",
+                ),
+            ),
+            schemata="urban_location",
+        ),
+        IntegerField(
+            name="surfaceHeavyBusiness",
+            default=0,
+            widget=IntegerField._properties["widget"](
+                label=_(
+                    "urban_label_surfaceHeavyBusiness",
+                    default="surfaceHeavyBusiness",
+                ),
+            ),
+            schemata="urban_location",
+        ),
     ),
 
 )

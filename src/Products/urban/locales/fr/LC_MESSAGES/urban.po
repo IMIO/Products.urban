@@ -4824,6 +4824,21 @@ msgstr "Rubriques"
 msgid "urban_label_submissionNumber"
 msgstr "N° de soumission"
 
+#. Default: "surfaceFoodBusiness"
+#: ../content/licence/CODT_CommercialLicence.py:49
+msgid "urban_label_surfaceFoodBusiness"
+msgstr "m² de commerce alimentaire"
+
+#. Default: "surfaceHeavyBusiness"
+#: ../content/licence/CODT_CommercialLicence.py:71
+msgid "urban_label_surfaceHeavyBusiness"
+msgstr "m² de commerce lourd"
+
+#. Default: "surfaceLightBusiness"
+#: ../content/licence/CODT_CommercialLicence.py:60
+msgid "urban_label_surfaceLightBusiness"
+msgstr "m² de commerce léger"
+
 #. Default: "Suspension"
 #: ../content/UrbanEventInquiry.py:132
 msgid "urban_label_suspension"
