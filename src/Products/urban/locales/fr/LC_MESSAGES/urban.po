@@ -2887,6 +2887,11 @@ msgstr "Détails concernant la zone de captage"
 msgid "urban_label_category"
 msgstr "Catégorie"
 
+#. Default: "Centrality"
+#: ../content/licence/CODT_CommercialLicence.py:39
+msgid "urban_label_centrality"
+msgstr "Centralité"
+
 #. Default: "Changes"
 #: PcaTerm.py
 msgid "urban_label_changes"

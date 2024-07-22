@@ -2859,6 +2859,11 @@ msgstr ""
 msgid "urban_label_category"
 msgstr ""
 
+#. Default: "Centrality"
+#: ../content/licence/CODT_CommercialLicence.py:39
+msgid "urban_label_centrality"
+msgstr ""
+
 #. Default: "Changes"
 #: PcaTerm.py
 msgid "urban_label_changes"
