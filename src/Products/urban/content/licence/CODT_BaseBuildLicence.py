@@ -693,33 +693,18 @@ class CODT_BaseBuildLicence(
                                    decided_states=('accepted', 'accepted_but_modified', 'accepted_and_returned')):
         """
         Get the last date of a PloneMeeting meeting for a given event.
-        TODO: handle decided_states appropriately, fetching decided states from PloneMeeting configuration
         """
-
         meeting_event = self.getLastEvent(event)
         if not meeting_event:
             return
         ws4pmSettings = getMultiAdapter(
             (api.portal.get(), self.REQUEST), name="ws4pmclient-settings"
         )
-        brains = ws4pmSettings._rest_searchItems(
-            {"externalIdentifier": meeting_event.UID()}
+        return ws4pmSettings._rest_getDecidedMeetingDate(
+            {"externalIdentifier": meeting_event.UID()},
+            item_portal_type=item_portal_type,
+            decided_states=decided_states,
         )
-        if not brains:
-            return  # Item has been deleted or has not been sent to PloneMeeting
-        item = ws4pmSettings._rest_getItemInfos(
-            {"UID": brains[0]['UID'], "showExtraInfos": True,
-             'extra_include': 'meeting,linked_items',
-             'extra_include_meeting_additional_values': '*',
-             'extra_include_linked_items_mode': 'every_successors'}
-        )[0]
-        if item_portal_type == item["@type"] and item['review_state'] in decided_states:
-            return datetime.strptime(item['extra_include_meeting']['date'], "%Y-%m-%dT%H:%M:%S")
-        elif item['extra_include_linked_items']:
-            for linked_item in item['extra_include_linked_items']:
-                if item_portal_type == linked_item["@type"] and linked_item['review_state'] in decided_states:
-                    item = ws4pmSettings._rest_getItemInfos({"UID": linked_item['UID'], "showExtraInfos": True, 'extra_include': 'meeting'})
-                    return datetime.strptime(item['extra_include_meeting']['date'], "%Y-%m-%dT%H:%M:%S")
 
     def get_last_college_date(self,
                               event=interfaces.ISimpleCollegeEvent,
