@@ -29,7 +29,7 @@ from Products.urban.utils import get_ws_meetingitem_infos
 from plone import api
 from plone.indexer import indexer
 
-from suds import WebFault
+from requests.exceptions import RequestException
 
 from zope.component import queryAdapter
 from zope.interface import Interface
@@ -244,7 +244,7 @@ def genericlicence_decisiondate(licence):
     if decision_event:
         try:
             linked_pm_items = get_ws_meetingitem_infos(decision_event)
-        except WebFault:
+        except RequestException:
             catalog = api.portal.get_tool("portal_catalog")
             brain = catalog(UID=licence.UID())
             if brain and brain[0].getDecisionDate:

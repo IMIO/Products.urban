@@ -230,11 +230,11 @@ def get_ws_meetingitem_infos(urban_event, extra_attributes=False):
         ws4pmSettings = getMultiAdapter(
             (portal_state.portal(), request), name="ws4pmclient-settings"
         )
-        items = ws4pmSettings._soap_searchItems(
+        items = ws4pmSettings._rest_searchItems(
             {"externalIdentifier": urban_event.UID()}
         )
         if extra_attributes and items:
-            items = ws4pmSettings._soap_getItemInfos(
+            items = ws4pmSettings._rest_getItemInfos(
                 {"UID": items[0].UID, "showExtraInfos": True}
             )
         return items
