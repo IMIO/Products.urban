@@ -24,13 +24,12 @@ from Products.urban.content.licence.BaseBuildLicence import BaseBuildLicence
 from Products.urban.content.CODT_Inquiry import CODT_Inquiry
 from Products.urban.content.licence.GenericLicence import GenericLicence
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
-from datetime import datetime
 from Products.urban.config import *
 from Products.urban import UrbanMessage as _
 
 ##code-section module-header #fill in your manual code here
 from Products.MasterSelectWidget.MasterMultiSelectWidget import MasterMultiSelectWidget
-from Products.urban.utils import setOptionalAttributes, get_ws_meetingitem_infos
+from Products.urban.utils import setOptionalAttributes
 from Products.urban.utils import setSchemataForCODT_Inquiry
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
