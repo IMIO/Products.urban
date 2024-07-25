@@ -8,6 +8,16 @@ Changelog
 
 .. towncrier release notes start
 
+2.7.16 (2024-07-25)
+-------------------
+
+Bug fixes:
+
+
+- Fix faceted widget id collision
+  [daggelpop] (URB-3090)
+
+
 2.7.15 (2024-07-05)
 -------------------
 
