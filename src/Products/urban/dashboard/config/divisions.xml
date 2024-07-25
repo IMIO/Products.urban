@@ -71,7 +71,7 @@
    <property name="onlyallelements">True</property>
    <property name="wildcard"></property>
   </criterion>
-  <criterion name="c13">
+  <criterion name="c99">
    <property name="widget">daterange</property>
    <property name="title">Date de validité</property>
    <property name="position">top</property>

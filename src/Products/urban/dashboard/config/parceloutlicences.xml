@@ -26,7 +26,7 @@
    <property name="vocabulary"></property>
    <property name="default"></property>
   </criterion>
-  <criterion name="c13">
+  <criterion name="c99">
    <property name="widget">daterange</property>
    <property name="title">Date de validité</property>
    <property name="position">top</property>
