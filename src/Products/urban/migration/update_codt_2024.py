@@ -348,7 +348,7 @@ def add_new_index_and_new_filter(context):
         if criterion is None:
             continue
         data = {
-            "_cid_": u"c13",
+            "_cid_": u"c99",
             "title": u"Date de validation",
             "hidden": False,
             "index": u"getValidityDate",
@@ -390,7 +390,7 @@ def fix_validity_filter_title(context):
         criterion = ICriteria(folder)
         if criterion is None:
             continue
-        criterion.edit("c13", title="Date de validité")
+        criterion.edit("c99", title="Date de validité")
 
     logger.info("upgrade done!")
 
