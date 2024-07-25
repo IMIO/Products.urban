@@ -640,4 +640,13 @@
         profile="Products.urban:default"
         />
 
+    <gs:upgradeStep
+        title="Fix validity filter widget cid collision"
+        description=""
+        source="1149"
+        destination="1150"
+        handler=".update_codt_2024.fix_c13_collision"
+        profile="Products.urban:default"
+        />
+
 </configure>

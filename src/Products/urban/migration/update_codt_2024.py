@@ -344,12 +344,14 @@ def add_new_index_and_new_filter(context):
     folders = [getattr(urban_folder, urban_type.lower() + "s", None) for urban_type in URBAN_TYPES]
     folders.append(urban_folder)
     for folder in folders:
+        if not folder:
+            continue
         criterion = ICriteria(folder)
         if criterion is None:
             continue
         data = {
-            "_cid_": u"c13",
-            "title": u"Date de validation",
+            "_cid_": u"c99",
+            "title": u"Date de validité",
             "hidden": False,
             "index": u"getValidityDate",
             "calYearRange": u"c-10:c+10"
@@ -390,7 +392,7 @@ def fix_validity_filter_title(context):
         criterion = ICriteria(folder)
         if criterion is None:
             continue
-        criterion.edit("c13", title="Date de validité")
+        criterion.edit("c99", title="Date de validité")
 
     logger.info("upgrade done!")
 
@@ -400,4 +402,43 @@ def install_send_mail_with_attachement_action(context):
     setup_tool.runImportStepFromProfile("profile-Products.urban:default", "actions")
     setup_tool.runImportStepFromProfile("profile-Products.urban:default", "jsregistry")
     setup_tool.runImportStepFromProfile("profile-Products.urban:default", "contentrules")
+    logger.info("upgrade done!")
+
+
+def fix_c13_collision(context):
+    logger.info("starting : Fix validity filter widget cid collision (c13 -> c99)")
+
+    old_cid = u"c13"
+    new_cid = u"c99"
+
+    portal = api.portal.get()
+    urban_folder = portal.urban
+    folders = [getattr(urban_folder, urban_type.lower() + "s", None) for urban_type in URBAN_TYPES]
+    folders.append(urban_folder)
+
+    for folder in folders:
+        if not folder:
+            continue
+        criteria = ICriteria(folder)
+        if criteria is None:
+            continue
+
+        criterion = criteria.get(old_cid)
+        if criterion and criterion.index == u"getValidityDate":
+            criteria.delete(old_cid)
+
+            data = {
+                "_cid_": new_cid,
+                "title": u"Date de validité",
+                "hidden": False,
+                "index": u"getValidityDate",
+                "calYearRange": u"c-10:c+10"
+            }
+            criteria.add(
+                wid="daterange",
+                position="top",
+                section="advanced",
+                **data
+            )
+
     logger.info("upgrade done!")
