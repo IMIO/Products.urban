@@ -19,7 +19,7 @@
     </script>
 
     <h1 class="documentFirstHeading" tal:content="context/Title">Title</h1>
-    <form id="confirmTransitionForm">
+    <form id="commentsForm">
     <tal:warning condition="view/has_open_tasks">
         <br />
        <table class="listing task_status_table" tal:define="tasks view/get_started_tasks"
