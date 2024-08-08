@@ -114,6 +114,9 @@ class EnvironmentRubricTerm(BaseContent, UrbanVocabularyTerm, BrowserDefaultMixi
         portal_urban = getToolByName(self, "portal_urban")
         return "/".join(portal_urban.exploitationconditions.getPhysicalPath())
 
+    def getObservations(self):
+        return self.description.getRaw()
+
 
 registerType(EnvironmentRubricTerm, PROJECTNAME)
 # end of class EnvironmentRubricTerm
