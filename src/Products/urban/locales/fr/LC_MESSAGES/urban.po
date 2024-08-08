@@ -2508,7 +2508,7 @@ msgstr "Entrez l'identifiant lié au carotage"
 #. Default: "If this field is used, you can insert special expressions between [[]] that will be rendered.  This can be something like \"My text [[object/getMyAttribute]] end of the text\".  Object is the licence the term is used in."
 #: UrbanVocabularyTerm.py
 msgid "urban_help_description"
-msgstr "This ce champ est utilisé, il peut contenir des expression entre [[]] qui seront interprétées.  Par exemple \"Mon texte [[object/getMonExpression]] la fin de mon texte\".  'object' est le permis danq lequel est utilisé le terme."
+msgstr "Ce champ est utilisé, il peut contenir des expression entre [[]] qui seront interprétées.  Par exemple \"Mon texte [[object/getMonExpression]] la fin de mon texte\".  'object' est le permis danq lequel est utilisé le terme."
 
 #. Default: "This field is made to store extra value if needed."
 #: UrbanVocabularyTerm.py
