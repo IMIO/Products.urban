@@ -4304,7 +4304,7 @@ EventConfigs = {
                 "investigationEnd",
                 "claimsDate",
                 "explanationStartSDate",
-                "explanationEndSDate ",
+                "explanationEndSDate",
                 "claimsText",
             ],
             "deadLineDelay": 15,
