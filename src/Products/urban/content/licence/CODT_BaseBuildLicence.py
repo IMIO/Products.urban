@@ -463,6 +463,14 @@ schema = Schema(
             ),
         ),
         BooleanField(
+            name="d67copat",
+            default=False,
+            widget=BooleanField._properties["widget"](
+                label=_("urban_label_d67copat", default="D.67 CoPat"),
+            ),
+            schemata="urban_patrimony",
+        ),
+        BooleanField(
             name="financial_caution",
             default=False,
             widget=BooleanField._properties["widget"](

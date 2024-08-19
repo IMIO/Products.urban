@@ -3070,6 +3070,11 @@ msgstr ""
 msgid "urban_label_customSpecificFeatures"
 msgstr ""
 
+#. Default: "D.67 CoPat"
+#: ../content/licence/CODT_BaseBuildLicence.py:469
+msgid "urban_label_d67copat"
+msgstr ""
+
 #. Default: "DeadEndBuilding"
 #: ../content/licence/GenericLicence.py:1245
 msgid "urban_label_deadEndBuilding"
