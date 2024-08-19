@@ -3358,6 +3358,11 @@ msgstr ""
 msgid "urban_label_customSpecificFeatures"
 msgstr "Particularité(s) diverse(s) du bien"
 
+#. Default: "D.67 CoPat"
+#: ../content/licence/CODT_BaseBuildLicence.py:462
+msgid "urban_label_d67copat"
+msgstr "D.67 CoPat"
+
 #. Default: "Data"
 #: Layer.py
 msgid "urban_label_data"
