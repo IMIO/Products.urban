@@ -1,0 +1,5 @@
+Set buildout cache directories.
+
+I had a network problem and I had to rerun from the beginning. Took a long time. I searched for a way to fasten and discovered that I could set the cache directories. I set the cache directories as the iA.Delib team does it at iMio.
+
+[dmshd]
