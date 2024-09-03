@@ -330,7 +330,7 @@ msgstr "Accusé de réception"
 
 #: ../interfaces.py:509
 msgid "IActivityEndedEvent type marker interface"
-msgstr "Cessastion d'activité"
+msgstr "Cessation d'activité"
 
 #: ../interfaces.py:425
 msgid "IAnnouncement type marker interface"
