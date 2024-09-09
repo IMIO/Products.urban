@@ -4,7 +4,7 @@
         <div tal:condition="workLocations">
             <metal:myfield use-macro="python:here.widget('workLocations', mode='view')" />
         </div>
-        <div tal:condition="not: workLocations" class="discreet clear" i18n:translate="content_none">None</div>
+        <div tal:condition="not: workLocations" class="discreet clear" i18n:translate="content_none">Aucun(e)</div>
     </tal:vars>
 </metal:address>
 
@@ -14,7 +14,7 @@
         <div tal:condition="workLocations">
             <metal:myfield use-macro="python:here.widget('workLocations', mode='view')" />
         </div>
-        <span tal:condition="not: workLocations" class="discreet" i18n:translate="content_none">None</span>
+        <span tal:condition="not: workLocations" class="discreet" i18n:translate="content_none">Aucun(e)</span>
     </fieldset>
 
     <fieldset tal:define="workLocations context/getBusinessOldLocation"
@@ -23,6 +23,6 @@
         <div tal:condition="workLocations">
             <metal:myfield use-macro="python:here.widget('businessOldLocation', mode='view')" />
         </div>
-        <span tal:condition="not: workLocations" class="discreet" i18n:translate="content_none">None</span>
+        <span tal:condition="not: workLocations" class="discreet" i18n:translate="content_none">Aucun(e)</span>
     </fieldset>
 </metal:env_address>

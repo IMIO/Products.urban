@@ -103,7 +103,7 @@
 <metal:spf_display define-macro="spf_display">
     <td width="10px"></td>
     <td tal:condition="not: specificfeatures" >
-        <span class="discreet" i18n:translate="content_none">None</span>
+        <span class="discreet" i18n:translate="content_none">Aucun(e)</span>
     </td>
     <td tal:condition="specificfeatures">
         <table>
@@ -156,7 +156,7 @@
         <td valign="top"><b><span i18n:translate="urban_label_rubrics">Rubrics</span>:</b></td>
         <td width="10px"></td>
         <td tal:condition="not: rubrics" >
-            <span class="discreet" i18n:translate="content_none">None</span>
+            <span class="discreet" i18n:translate="content_none">Aucun(e)</span>
         </td>
         <td tal:condition="rubrics">
             <ul>
@@ -174,7 +174,7 @@
         <td valign="top"><b><span i18n:translate="urban_label_minimumLegalConditions">Exploitation conditions</span>:</b></td>
         <td width="10px"></td>
         <td tal:condition="python: not min_conditions" valign="top">
-            <span class="discreet" i18n:translate="content_none">None</span>
+            <span class="discreet" i18n:translate="content_none">Aucun(e)</span>
         </td>
         <td id="urban-minimum-conditions" tal:condition="python: min_conditions">
             <ul>
@@ -230,7 +230,7 @@
             </ul>
         </td>
         <td tal:condition="python: not previousLicences" >
-            <span class="discreet" i18n:translate="content_none">None</span>
+            <span class="discreet" i18n:translate="content_none">Aucun(e)</span>
         </td>
     </tal:vars>
 </metal:previous_licences>
@@ -251,7 +251,7 @@
             <span tal:replace="validity_delay"></span> <span i18n:translate="">years</span>
         </td>
         <td tal:condition="python: not validity_delay">
-            <span class="discreet" i18n:translate="content_none">None</span>
+            <span class="discreet" i18n:translate="content_none">Aucun(e)</span>
         </td>
     </tal:vars>
 </metal:validity_duration>
