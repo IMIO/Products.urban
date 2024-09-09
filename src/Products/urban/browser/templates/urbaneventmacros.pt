@@ -20,9 +20,11 @@
                                 <span tal:condition="isTooLong" id="urban-claims-text">
                                     <span tal:replace="structure textToShow">Content...</span>
                                     <br />
-                                    <a class="link-overlay" href="@@longtextview"
-                                       tal:attributes="href python: context.absolute_url() + '/@@longtextview?field=' + field_name"
-                                       i18n:translate="">Voir...
+                                    <a
+                                        class="link-overlay"
+                                        href="@@longtextview"
+                                        tal:attributes="href python: context.absolute_url() + '/@@longtextview?field=' + field_name"
+                                        i18n:translate="read_more">Lire la suite
                                     </a>
                                 </span>
                                 <tal:block condition="not: isTooLong">
