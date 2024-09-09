@@ -1,10 +1,9 @@
-<fieldset metal:define-macro="urbanEventDataMacro"  height="100%">
-    <legend i18n:domain="urban" i18n:translate="event_data">Event data</legend>
+<fieldset metal:define-macro="urbanEventDataMacro"  height="100%" i18n:domain="urban">
+    <legend i18n:translate="event_data">Event data</legend>
     <table class="no-style-table; clear">
         <tal:evtfield repeat="field fields" define="fields view/getFieldsToShow;">
             <tr valign="top" tal:define="field_name python: field.__name__;
-                                         field_label python: field_name != 'eventDate' and field.widget.label or view.getDateCustomLabel();"
-                             i18n:domain="">
+                field_label python: field_name != 'eventDate' and field.widget.label or view.getDateCustomLabel();">
                 <td>
                     <strong tal:content="field_label">Optional field label</strong>:&nbsp;&nbsp;&nbsp;&nbsp;
                 </td>
@@ -16,8 +15,8 @@
                         <!-- For long text, just show the first words and add a link to see the entire text -->
                         <tal:long_text condition="python: view.isTextField(field)">
                             <tal:block define="infos python: context.portal_urban.getTextToShow(context, field_name);
-                                               isTooLong python: infos[0];
-                                               textToShow python: infos[1];">
+                                isTooLong python: infos[0];
+                                textToShow python: infos[1];">
                                 <span tal:condition="isTooLong" id="urban-claims-text">
                                     <span tal:replace="structure textToShow">Content...</span>
                                     <br />
@@ -41,13 +40,15 @@
         <tr tal:define="config python:context.getUrbaneventtypes();
                         event_types python: config and config.getEventType()"
             tal:condition="python: 'Products.urban.interfaces.ITransferOfLicenceEvent' in event_types">
-                <td>    
-                    <metal:applicants_and_corporations_macro use-macro="here/../@@licencemacros/urbanApplicantsAndCorporationsMacro" />
+                <td>
+                    <metal:applicants_and_corporations_macro
+                        use-macro="here/../@@licencemacros/urbanApplicantsAndCorporationsMacro" />
                     <tal:show_disabled_applicants condition= "here/get_applicants_history">
-                        <metal:disabled_applicants_and_corporations_macro use-macro="here/../@@licencemacros/urbanApplicantsHistoricAndCorporationsMacro" />
+                        <metal:disabled_applicants_and_corporations_macro
+                            use-macro="here/../@@licencemacros/urbanApplicantsHistoricAndCorporationsMacro" />
                     </tal:show_disabled_applicants>
                 </td>
-        </tr> 
+        </tr>
         <tr valign="top"
             tal:condition="view/show_pm_summary"
             tal:define="empty_pm_summary view/empty_pm_summary">
@@ -76,10 +77,11 @@
                 <tr>
                     <td tal:attributes="class python: template['class']">&nbsp</td><td>&nbsp</td>
                     <td>
-                        <a onclick="javascript:event.preventDefault();
-                           generate_document(generation_url=this.href);"
-                           href="#" tal:attributes="href python: template['href'];"
-                           tal:content="python: template['title']">Template Title
+                        <a
+                            onclick="javascript:event.preventDefault();
+                            generate_document(generation_url=this.href);"
+                            href="#" tal:attributes="href python: template['href'];"
+                            tal:content="python: template['title']">Template Title
                         </a>
                         <br/>
                     </td>
@@ -92,9 +94,15 @@
     </tal:no_templateObjs>
 </fieldset>
 
-<metal:add_attachment define-macro="urbanEventAddAttachmentMacro" i18n:domain="urban"
-                      tal:define="mayAddAttachment view/mayAddAttachment">
-    <a tal:condition="mayAddAttachment" href="@@quick_upload?typeupload=File" class="link-overlay-urban-annex link-overlay" style="cursor: pointer;">
+<metal:add_attachment
+    define-macro="urbanEventAddAttachmentMacro"
+    i18n:domain="urban"
+    tal:define="mayAddAttachment view/mayAddAttachment">
+    <a
+        tal:condition="mayAddAttachment"
+        href="@@quick_upload?typeupload=File"
+        class="link-overlay-urban-annex link-overlay"
+        style="cursor: pointer;">
         <img title="Ajouter plusieurs annexes" src="icon_add_big.png">
     </a>
     <tal:not_may_add_attachment condition="not: mayAddAttachment">
