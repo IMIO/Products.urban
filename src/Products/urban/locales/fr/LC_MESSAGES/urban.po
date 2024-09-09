@@ -2177,6 +2177,12 @@ msgstr "Arrêté de classement"
 msgid "rcu_folder_title"
 msgstr "RCU"
 
+#. Default: "Lire la suite"
+#: ../browser/templates/urbaneventmacros.pt:23
+msgid "read_more"
+msgstr "Lire la suite"
+
+
 msgid "recipients_folder_title"
 msgstr "Destinataires"
 
