@@ -2182,6 +2182,10 @@ msgstr "RCU"
 msgid "read_more"
 msgstr "Lire la suite"
 
+#. Default: "Read texts"
+#: ../browser/templates/urbaneventmacros.pt:61
+msgid "read_texts"
+msgstr "Lire les textes"
 
 msgid "recipients_folder_title"
 msgstr "Destinataires"

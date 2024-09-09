@@ -59,9 +59,8 @@
             </td>
             <td tal:condition="not: empty_pm_summary" id="pm-summary">
                 <a class="link-overlay" href="@@pmsummarytextview"
-                   tal:attributes="href python: context.absolute_url() + '/@@pmsummarytextview'"
-                   i18n:translate="">See more...
-                </a>
+                    tal:attributes="href python: context.absolute_url() + '/@@pmsummarytextview'"
+                    i18n:translate="read_texts">Read texts</a>
             </td>
             <td tal:condition="empty_pm_summary">
                 <span class="discreet" i18n:translate="content_none">Aucun(e)</span>
