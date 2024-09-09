@@ -32,7 +32,7 @@
                         </tal:long_text>
                     </td>
                     <td tal:condition="python: not bool(value)">
-                        <span tal:condition="not: value" class="discreet" i18n:translate="content_none">None</span>
+                        <span tal:condition="not: value" class="discreet" i18n:translate="content_none">Aucun(e)</span>
                     </td>
                 </tal:manage_show_nc_if_needed>
             </tr>
@@ -62,7 +62,7 @@
                 </a>
             </td>
             <td tal:condition="empty_pm_summary">
-                <span class="discreet" i18n:translate="content_none">None</span>
+                <span class="discreet" i18n:translate="content_none">Aucun(e)</span>
             </td>
         </tr>
     </table>
