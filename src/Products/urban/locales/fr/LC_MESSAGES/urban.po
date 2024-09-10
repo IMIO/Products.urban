@@ -21,16 +21,16 @@ msgstr "${nbr} jours"
 
 #: ../skins/urban_plone/create_UrbanEvent.cpy:56
 msgid "${tname} has been created."
-msgstr ""
+msgstr "${tname} a été créé(e)."
 
 #. Default: "urban"
 #: ../setuphandlers.py:334
 msgid "%s_folder_title"
-msgstr ""
+msgstr "%s_folder_title"
 
 #: ../setuphandlers.py:271
 msgid "%s_urbanconfig_title"
-msgstr ""
+msgstr "%s_urbanconfig_title"
 
 #: ../content/licence/RoadDecree.py:288
 msgid "105 days"
@@ -56,11 +56,19 @@ msgstr "2ème classe : Collège communal"
 msgid "75 days"
 msgstr "75 jours"
 
+#: ../contentrules/event_type.py:70
+msgid "A Event type condition makes the rule apply only if Event type correspond to the one from the context."
+msgstr "Une condition de type d'événement rend la règle applicable uniquement si le type d'événement correspond à celui du contexte."
+
+#: ../contentrules/opinions.py:77
+msgid "A opinion to ask condition makes the rule apply only when one of the Opinion to ask slelected correspond to the one of the context"
+msgstr "Une condition d'opinion à demander rend la règle applicable uniquement lorsqu'une des opinions à demander sélectionnées correspond à celle du contexte."
+
 #: ../browser/licence/templates/licenceview.pt:31
 #: ../browser/templates/urbaneventannouncementview.pt:35
 #: ../browser/templates/urbaneventinquiryview.pt:34
 msgid "Actions:"
-msgstr ""
+msgstr "Actions:"
 
 #: ../browser/templates/coring_update.pt:17
 msgid "Actual value"
@@ -68,19 +76,27 @@ msgstr "Valeur actuelle"
 
 #: ../dashboard/portlet.py:55
 msgid "Add Category Switch Portlet"
-msgstr ""
+msgstr "Ajouter un portlet de changement de catégorie"
+
+#: ../contentrules/event_type.py:69
+msgid "Add Event type Condition"
+msgstr "Ajouter une condition de type d'événement"
+
+#: ../contentrules/opinions.py:76
+msgid "Add Opinion to ask Condition"
+msgstr "Ajouter une condition de demande d'avis"
 
 #: ../browser/portlets.py:128
 msgid "Add Urban config Portlet"
-msgstr ""
+msgstr "Ajouter un portlet de configuration iA.Urban"
 
 #: ../browser/portlets.py:197
 msgid "Add Urban scheduled licences Portlet"
-msgstr ""
+msgstr "Ajouter un portlet de permis programés iA.Urban"
 
 #: ../browser/portlets.py:65
 msgid "Add Urban tools Portlet"
-msgstr ""
+msgstr "Ajouter un portlet d'outils iA.Urban"
 
 # street_referencedatagridwidget
 #: ../skins/urban_templates/street_referencedatagridwidget.pt:128
@@ -121,7 +137,7 @@ msgstr "Pièces jointes"
 
 #: ../profiles.zcml:17
 msgid "Base preinstall profile for urban."
-msgstr ""
+msgstr "Profil de préinstallation de base pour iA.Urban."
 
 msgid "BuildLicence"
 msgstr "Permis d'urbanisme"
@@ -189,9 +205,14 @@ msgstr "Vérifier les parcelles"
 msgid "Comment - {0}"
 msgstr "Commentaire - {0}"
 
+#: ../contentrules/event_type.py:74
+#: ../contentrules/opinions.py:81
+msgid "Configure element"
+msgstr "Configurer l'élément"
+
 #: ../profiles/default/actions.xml
 msgid "Copy to claimant"
-msgstr ""
+msgstr "Copier au demandeur"
 
 #: ../browser/templates/coring_update.pt:7
 msgid "Coring"
@@ -237,19 +258,27 @@ msgstr "Créer un nouveau permis en copiant les données."
 
 #: ../dashboard/portlet.py:64
 msgid "Edit Category Switch Portlet"
-msgstr ""
+msgstr "Modifier le portlet de changement de catégorie"
+
+#: ../contentrules/event_type.py:86
+msgid "Edit Event type Condition"
+msgstr "Modifier la condition de type d'événement"
+
+#: ../contentrules/opinions.py:93
+msgid "Edit Opinion to ask Condition"
+msgstr "Modifier la condition de demande d'avis"
 
 #: ../browser/portlets.py:137
 msgid "Edit Urban config Portlet"
-msgstr ""
+msgstr "Modifier le portlet de configuration iA.Urban"
 
 #: ../browser/portlets.py:206
 msgid "Edit Urban scheduled licences Portlet"
-msgstr ""
+msgstr "Modifier le portlet de permis programmés iA.Urban"
 
 #: ../browser/portlets.py:74
 msgid "Edit Urban tools Portlet"
-msgstr ""
+msgstr "Modifier le portlet d'outils iA.Urban"
 
 #: ../browser/gig_coring_settings.py:77
 #: ../browser/offdays_settings.py:115
@@ -259,7 +288,7 @@ msgstr "Edition annulée"
 
 #: ../profiles/default/actions.xml
 msgid "Emails"
-msgstr "Email"
+msgstr "Emails"
 
 #: ../browser/actionspanel/actions_panel_close_task.pt:2
 msgid "End"
@@ -278,6 +307,14 @@ msgstr "Déclaration environnementale"
 msgid "EnvClassTwo"
 msgstr "Permis d'environnement classe 2"
 
+#: ../contentrules/mail_with_attachment.py:82
+msgid "Error sending email from content rule. You must provide a source address for mail actions or enter an email in the portal properties"
+msgstr "Erreur lors de l'envoi de l'e-mail depuis la règle de contenu. Vous devez fournir une adresse source pour les actions par e-mail ou entrer une adresse e-mail dans les propriétés du portail."
+
+#: ../contentrules/event_type.py:24
+msgid "Event Type"
+msgstr "Type d'événement"
+
 #: ../browser/licence/templates/licencetabsmacros.pt:509
 msgid "Events"
 msgstr "Événements"
@@ -291,7 +328,7 @@ msgstr "Détention d'explosifs"
 
 #: ../profiles.zcml:25
 msgid "Extension profile for urban."
-msgstr ""
+msgstr "Profil d'extention pour iA.Urban."
 
 #: ../browser/templates/coring_update.pt:16
 msgid "Field"
@@ -299,15 +336,15 @@ msgstr "Champ"
 
 #: ../browser/templates/searchparcels.pt:171
 msgid "Found parcel(s)"
-msgstr ""
+msgstr "Parcelle(s) trouvée(s)"
 
 #: ../profiles.zcml:42
 msgid "Full config profile for urban."
-msgstr ""
+msgstr "Configuration complète pour iA.Urban"
 
 #: ../browser/templates/map_spw.pt:44
 msgid "Historique de la parcelle"
-msgstr ""
+msgstr "Historique de la parcelle"
 
 #: ../widget/templates/historizereferenceformview.pt:9
 msgid "History of changes"
@@ -402,7 +439,7 @@ msgstr "Enquête publique"
 
 #: ../interfaces.py:553
 msgid "IInspectionReportEvent type marker interface"
-msgstr ""
+msgstr "Rapport d'inspection"
 
 #: ../interfaces.py:702
 msgid "IIntentionToSubmitAmendedPlans type marker interface"
@@ -525,7 +562,7 @@ msgstr "Procès verbal"
 
 #: ../interfaces.py:573
 msgid "ITransferOfLicence type marker interface"
-msgstr ""
+msgstr "Transfert de permis"
 
 #: ../interfaces.py:381
 msgid "ITransmitToSPWEvent type marker interface"
@@ -576,7 +613,7 @@ msgstr "Étude d'incidence"
 
 #: ../browser/urbaneventviews.py:270
 msgid "Import"
-msgstr ""
+msgstr "Import"
 
 msgid "Inspection"
 msgstr "Inspection"
@@ -598,7 +635,7 @@ msgstr "Importer un fichier de destinataires (csv)"
 
 #: ../interfaces.py:685
 msgid "Mailing limit"
-msgstr ""
+msgstr "Limite d'envoi"
 
 #: ../profiles/default/actions.xml
 msgid "Map"
@@ -606,11 +643,11 @@ msgstr "Carte"
 
 #: ../interfaces.py:686
 msgid "Max items allowed for immediate mailing"
-msgstr ""
+msgstr "Nombre maximal d'éléments autorisés pour un envoi immédiat"
 
 #: ../profiles.zcml:59
 msgid "Migrations profile for urban."
-msgstr ""
+msgstr "Profil de migration pour iA.Urban"
 
 msgid "MiscDemand"
 msgstr "Demandes diverses"
@@ -621,7 +658,7 @@ msgstr "Nom"
 
 #: ../profiles.zcml:50
 msgid "New install profile for for urban."
-msgstr ""
+msgstr "Nouveau profil d'installation pour iA.Urban."
 
 #: ../browser/licence/duplicate_licence.py:37
 msgid "New licence subject"
@@ -638,7 +675,7 @@ msgstr "Aucun dossier lié"
 
 #: ../browser/templates/templatessummary.pt:20
 msgid "No template."
-msgstr ""
+msgstr "Pas de modèle."
 
 msgid "NotaryLetter"
 msgstr "Lettre de notaire"
@@ -646,7 +683,7 @@ msgstr "Lettre de notaire"
 #: ../browser/longtextview.py:20
 #: ../browser/parcelrecordsview.py:26
 msgid "Nothing to show !!!"
-msgstr ""
+msgstr "Rien à montrer."
 
 #: ../browser/offdays_settings.py:79
 msgid "Off days"
@@ -655,6 +692,8 @@ msgstr "Jours de suspension"
 #: ../browser/offdays_settings.py:71
 msgid "Off days period"
 msgstr "Périodes de suspension"
+msgid "Opinion to ask"
+msgstr "Avis à demander"
 
 msgid "ParcelOutLicence"
 msgstr "Permis d'urbanisation"
@@ -668,30 +707,30 @@ msgstr "Période"
 
 #: ../interfaces.py:701
 msgid "Planned claimants imports"
-msgstr ""
+msgstr "Importations de demandeurs prévues"
 
 #: ../interfaces.py:674
 msgid "Planned mailings"
-msgstr ""
+msgstr "Envois de mail prévus"
 
 msgid "PreliminaryNotice"
 msgstr "Demande d'avis préalable"
 
 #: ../profiles.zcml:33
 msgid "Production extension profile for urban."
-msgstr ""
+msgstr "Profil d'extension de production pour iA.Urban"
 
 #: ../profiles.zcml:83
 msgid "Profile for fixes in urban"
-msgstr ""
+msgstr "Profil des correctifs pour iA.Urban"
 
 #: ../profiles.zcml:75
 msgid "Profile for pm.wsclient in urban"
-msgstr ""
+msgstr "Profil pour pm.wsclient dans iA.Urban"
 
 #: ../profiles.zcml:91
 msgid "Profile for urban content types in urban"
-msgstr ""
+msgstr "Profil pour les types de contenu urban dans iA.Urban"
 
 msgid "ProjectMeeting"
 msgstr "Réunion de projet"
@@ -737,7 +776,15 @@ msgstr "Sélectionner les types de contenues autorisés pour ce modèle"
 
 #: ../dashboard/widgets/select_to_list.py:24
 msgid "Select to list"
-msgstr ""
+msgstr "Sélectionner pour lister"
+
+#: ../send_mail_action/forms.py:37
+msgid "Send"
+msgstr "Envoyer"
+
+#: ../profiles/default/actions.xml
+msgid "Send mail"
+msgstr "Envoyer l'email"
 
 #: ../browser/urbanconfigview.py:94
 msgid "Service full name"
@@ -753,11 +800,11 @@ msgstr "Services internes à la ville rendant des avis"
 
 #: ../browser/templates/map_spw.pt:78
 msgid "Show this parcel on map"
-msgstr ""
+msgstr "Afficher cette parcelle sur la carte"
 
 #: ../browser/templates/urbanstatsview.pt:99
 msgid "Statistics"
-msgstr ""
+msgstr "Statistiques"
 
 #: ../browser/templates/coring_update.pt:35
 msgid "Submit"
@@ -783,7 +830,7 @@ msgstr "Onglets à copier"
 
 #: ../testing.zcml:15
 msgid "Tests Extension profile for urban."
-msgstr ""
+msgstr "Profil d'extension de tests pour iA.Urban."
 
 #: ../browser/urbaneventviews.py:381
 msgid "The CSV file couldn't be read properly. Please verify its structure and try again."
@@ -795,7 +842,7 @@ msgstr "L'import des réclamants a bien été enregistré et sera éxécuté cet
 
 #: ../browser/longtextview.py:34
 msgid "The field does not exist !!!"
-msgstr ""
+msgstr "Le champ n'existe pas."
 
 #: ../browser/urbaneventviews.py:320
 msgid "The imported file (${name}) couldn't be read properly. Please verify its structure and try again."
@@ -815,27 +862,27 @@ msgstr "La recherche des propriétaires concernés par le rayon de cette enquêt
 
 #: ../browser/urbaneventviews.py:724
 msgid "There are parcel owners without any address found! Desactivate them!"
-msgstr ""
+msgstr "Il y a des propriétaires de parcelle sans adresse trouvée ! Désactivez-les !"
 
 #: ../browser/urbaneventviews.py:675
 msgid "This UrbanEventInquiry is not linked to an existing Inquiry !  Define a new inquiry on the licence !"
-msgstr ""
+msgstr "Cette UrbanEventInquiry n'est pas liée à une demande existante ! Définissez une nouvelle demande sur la licence !"
 
 #: ../browser/portlets.py:198
 msgid "This portlet lists scheduled licences."
-msgstr ""
+msgstr "Ce portlet liste les licences planifiées."
 
 #: ../browser/portlets.py:129
 msgid "This portlet lists urban configuration."
-msgstr ""
+msgstr "Ce portlet liste la configuration iA.Urban."
 
 #: ../browser/portlets.py:66
 msgid "This portlet lists various urban functionnalities."
-msgstr ""
+msgstr "Ce portlet liste diverses fonctionnalités iA.Urban."
 
 #: ../dashboard/portlet.py:56
 msgid "This portlet shows a switch button between procedure categories."
-msgstr ""
+msgstr "Ce portlet affiche un bouton de basculement entre les catégories de procédure."
 
 msgid "Ticket"
 msgstr "Procès-Verbal"
@@ -852,15 +899,15 @@ msgstr "Vers les Procédures CWATUP"
 #: ../browser/templates/urbaneventannouncementview.pt:31
 #: ../browser/templates/urbaneventinquiryview.pt:30
 msgid "Transitions:"
-msgstr ""
+msgstr "Transitions:"
 
 #: ../browser/offdays_settings.py:27
 msgid "Type"
-msgstr ""
+msgstr "Type"
 
 #: ../browser/templates/urbanstatsmacros.pt:10
-msgid "Types de permis \ &Eacute;tats"
-msgstr ""
+msgid "Types de permis / États"
+msgstr "Types de permis / États"
 
 msgid "UniqueLicence"
 msgstr "Permis unique"
@@ -872,7 +919,7 @@ msgstr "Mettre à jour"
 #. Default: "urban"
 #: ../setuphandlers.py:983
 msgid "Urban"
-msgstr ""
+msgstr "iA.Urban"
 
 #. Default: "Certificat d'urbanisme 1"
 msgid "UrbanCertificateOne"
@@ -884,7 +931,7 @@ msgstr "Certificat d'urbanisme 2"
 
 #: ../profiles/default/controlpanel.xml
 msgid "UrbanTool"
-msgstr ""
+msgstr "UrbanTool"
 
 #: ../browser/offdays_settings.py:63
 msgid "Week off days"
@@ -1053,15 +1100,15 @@ msgstr "Permis d'urbanisme"
 
 #: ../events/configuration_events.py:66
 msgid "can_not_delete_street_in_config"
-msgstr ""
+msgstr "Impossible de supprimer la rue dans la configuration"
 
 #: ../content/UrbanEventAnnouncement.py:80
 msgid "cannot_remove_urbaneventannouncement_notthelast"
-msgstr ""
+msgstr "Impossible de supprimer l'annonce d'événement urbain, ce n'est pas la dernière"
 
 #: ../content/UrbanEventInquiry.py:214
 msgid "cannot_remove_urbaneventinquiry_notthelast"
-msgstr ""
+msgstr "Impossible de supprimer l'enquête d'événement urbain, ce n'est pas la dernière"
 
 #. Default: "Cartography"
 #: ../browser/templates/map.pt:44
@@ -1217,7 +1264,7 @@ msgstr "Couple"
 
 #: ../dashboard/vocabularies.py:87
 msgid "covid"
-msgstr ""
+msgstr "COVID"
 
 msgid "create"
 msgstr "Créer un document"
@@ -1233,12 +1280,12 @@ msgstr "Modèles tableaux de bord"
 #: ../services/base.py:140
 #: ../services/mysqlbase.py:84
 msgid "db_connection_error"
-msgstr ""
+msgstr "Erreur de connexion à la base de données"
 
 #: ../services/base.py:137
 #: ../services/mysqlbase.py:81
 msgid "db_connection_successfull"
-msgstr ""
+msgstr "Connexion à la base de données réussie"
 
 msgid "decisions_folder_title"
 msgstr "Décisions du Collège"
@@ -1355,7 +1402,7 @@ msgstr "Le délai doit être un entier"
 #. Default: "Cannot select class 1 and class 2 toghether"
 #: ../validators/validator.py:172
 msgid "error_multiple_class_type"
-msgstr ""
+msgstr "Impossible de sélectionner la classe 1 et la classe 2 ensemble"
 
 #. Default: "Please select only ONE of the inquiry types"
 #: ../validators/validator.py:165
@@ -1365,12 +1412,12 @@ msgstr "Choisissez un seul type d'enquête"
 #. Default: "Cannot select 'simple' with another value"
 #: ../validators/validator.py:156
 msgid "error_procedure_choice_simple"
-msgstr ""
+msgstr "Impossible de sélectionner 'simple' avec une autre valeur"
 
 #. Default: "Cannot select 'unknown' with another value"
 #: ../validators/validator.py:149
 msgid "error_procedure_choice_unknown"
-msgstr ""
+msgstr "Impossible de sélectionner 'inconnu' avec une autre valeur"
 
 #. Default: "Puissance should be a number < 100"
 #: ../validators/validator.py:252
@@ -1390,12 +1437,12 @@ msgstr "La référence existe déjà sur un autre permis"
 #. Default: "The reference does not exist"
 #: ../validators/validator.py:273
 msgid "error_reference_does_not_exist"
-msgstr ""
+msgstr "La référence n'existe pas"
 
 #. Default: "This reference does not match the expected format of {}"
 #: ../validators/validator.py:112
 msgid "error_reference_format"
-msgstr ""
+msgstr "Cette référence ne correspond pas au format attendu '{}'"
 
 #. Default: "Section should be a single uppercase letter"
 #: ../validators/validator.py:194
@@ -1691,7 +1738,7 @@ msgstr "Repris à la banque de données d'état des sols"
 #. Default: "You can not search for parcels for now because there was a problem. Please contact your system administrator and give him the red error message here above"
 #: ../browser/templates/searchparcels.pt:35
 msgid "help_search_connection_problem"
-msgstr ""
+msgstr "Vous ne pouvez pas rechercher des parcelles pour le moment en raison d'un problème. Veuillez contacter votre administrateur système et lui fournir le message d'erreur rouge ci-dessus."
 
 msgid "holydays"
 msgstr "Férié"
@@ -1701,7 +1748,7 @@ msgstr "Motifs d'irrecevabilité"
 
 #: ../interfaces.py:702
 msgid "inquiries planned for claimants imports"
-msgstr ""
+msgstr "enquêtes prévues pour les importations de demandeurs"
 
 #. Default: "Inquiry data"
 #: ../browser/templates/urbaneventinquiryview.pt:55
@@ -1859,7 +1906,7 @@ msgstr "Non"
 #. Default: "Ok"
 #: ../browser/templates/fieldoverlay_edit.pt:36
 msgid "label_ok"
-msgstr ""
+msgstr "Ok"
 
 #: ../browser/licence/templates/licencetabsmacros.pt:400
 msgid "label_remove"
@@ -1925,11 +1972,11 @@ msgstr "Adresse mail du compte gig"
 
 #: ../interfaces.py:675
 msgid "mailings planned"
-msgstr ""
+msgstr "envois prévus"
 
 #: ../interfaces.py:691
 msgid "mailings planned for radius search"
-msgstr ""
+msgstr "envois prévus pour la recherche par rayon"
 
 msgid "mainsignatures_folder_title"
 msgstr "Signatures principales"
@@ -2068,7 +2115,7 @@ msgstr "Articles du CoDT visés"
 #. Default: "Old parcels historic"
 #: ../browser/templates/map_spw.pt:39
 msgid "old_parcels_history"
-msgstr ""
+msgstr "Historique des anciennes parcelles"
 
 msgid "opinionstoaskifworks_folder_title"
 msgstr "Avis à demander en cas de travaux"
@@ -2113,13 +2160,13 @@ msgstr "Paramètres des patrimoines"
 #. Default: "Is key event"
 #: ../browser/templates/globalmacros.pt:117
 msgid "pca_fieldset_legend"
-msgstr ""
+msgstr "Événement clé"
 
 msgid "pcas_folder_title"
 msgstr "Plan Communal d'Aménagement"
 
 msgid "pcaszone_folder_title"
-msgstr ""
+msgstr "Zone du Plan Communal d'Aménagement""
 
 msgid "pcazones_folder_title"
 msgstr "Zones PCA"
@@ -2399,7 +2446,7 @@ msgstr "Urbanisme extra (valeurs de config et modèles par defaut)"
 
 #: ../profiles.zcml:83
 msgid "urban-fixes"
-msgstr ""
+msgstr "urban-fixes"
 
 #: ../profiles.zcml:59
 msgid "urban-migrations"
@@ -2407,39 +2454,39 @@ msgstr "Urbanisme migrations"
 
 #: ../profiles.zcml:50
 msgid "urban-new-install"
-msgstr ""
+msgstr "urban-new-install"
 
 #: ../profiles.zcml:75
 msgid "urban-pm-wsclient"
-msgstr ""
+msgstr "urban-pm-wsclient"
 
 #: ../profiles.zcml:17
 msgid "urban-preinstall"
-msgstr ""
+msgstr "urban-preinstall"
 
 #: ../profiles.zcml:33
 msgid "urban-prod"
-msgstr ""
+msgstr "urban-prod"
 
 #: ../testing.zcml:15
 msgid "urban-tests"
-msgstr ""
+msgstr "urban-tests"
 
 #: ../testing.zcml:23
 msgid "urban-tests-imports"
-msgstr ""
+msgstr "urban-tests-imports"
 
 #: ../testing.zcml:31
 msgid "urban-testsWithConfig"
-msgstr ""
+msgstr "urban-testsWithConfig"
 
 #: ../testing.zcml:39
 msgid "urban-testsWithLicences"
-msgstr ""
+msgstr "urban-testsWithLicences"
 
 #: ../profiles.zcml:91
 msgid "urban-types"
-msgstr ""
+msgstr "urban-types"
 
 msgid "urban.warnings.bound_ticket_settlement"
 msgstr "L'événement de règlement transactionnel du PV lié est terminé"
@@ -2458,12 +2505,12 @@ msgstr "Dossiers d'inspections ou PV liés"
 
 #: ../browser/licence/templates/roaddecreemacros.pt:37
 msgid "urban_bound_licence"
-msgstr ""
+msgstr "urban_bound_licence"
 
 #. Default: "Bound roaddecrees"
 #: ../browser/licence/templates/licencetabsmacros.pt:71
 msgid "urban_bound_roaddecrees"
-msgstr ""
+msgstr "urban_bound_roaddecrees"
 
 #. Default: "Browse old parcels (Only works with the parcel reference)"
 #: ../browser/templates/searchparcels.pt:156
@@ -2483,7 +2530,7 @@ msgstr "Ce réclamant existe déjà!"
 #: ../browser/templates/urbaneventannouncementview.pt:57
 #: ../browser/templates/urbaneventinquiryview.pt:56
 msgid "urban_context_help"
-msgstr ""
+msgstr "urban_context_help"
 
 msgid "urban_descr_states_to_end_all_tasks"
 msgstr "Sélectionnez les états pour lesquels toutes les tâches se terminent."
@@ -2707,7 +2754,7 @@ msgstr "Montant perçu"
 #. Default: "Analysis"
 #: ../UrbanEvent.py:243
 msgid "urban_label_analysis"
-msgstr ""
+msgstr "Analyse"
 
 #. Default: "Annonceddelay"
 #: ../content/licence/BaseBuildLicence.py:190
@@ -2842,7 +2889,7 @@ msgstr "Clé BestAddress"
 #. Default: "Bis"
 #: ../browser/templates/searchparcels.pt:70
 msgid "urban_label_bis"
-msgstr ""
+msgstr "Bis"
 
 #. Default: "Bound inspection"
 #: ../content/licence/Ticket.py:65
@@ -3101,7 +3148,7 @@ msgstr "Nom personne 2"
 #. Default: "COVID19"
 #: ../content/licence/GenericLicence.py:1253
 msgid "urban_label_covid"
-msgstr ""
+msgstr "COVID-19"
 
 #. Default: "Customspecificfeatures"
 #: ../content/licence/UrbanCertificateBase.py:249
@@ -3293,6 +3340,12 @@ msgstr "E-mail"
 #: Street.py
 msgid "urban_label_endDate"
 msgstr "Date de fin d'utilisation"
+
+#. Default: "EndValidity"
+#: ../UrbanDelay.py:79
+#: ../UrbanVocabularyTerm.py:108
+msgid "urban_label_endValidity"
+msgstr "Fin de validité"
 
 #. Default: "enoughRoadEquipment"
 #: ../content/licence/GenericLicence.py:871
@@ -3898,7 +3951,7 @@ msgstr "Parcelles"
 #. Default: "Map Url"
 #: ../UrbanTool.py:155
 msgid "urban_label_mapUrl"
-msgstr ""
+msgstr "URL de la carte"
 
 #. Default: "Mayneedlocationlicence"
 #: ../content/licence/BaseBuildLicence.py:335
@@ -4781,6 +4834,12 @@ msgstr "Détails concernant le SDC"
 msgid "urban_label_startDate"
 msgstr "Date de début d'utilisation"
 
+#. Default: "StartValidity"
+#: ../UrbanDelay.py:71
+#: ../UrbanVocabularyTerm.py:99
+msgid "urban_label_startValidity"
+msgstr "Début de validité"
+
 msgid "urban_label_states_to_end_all_events"
 msgstr "États terminant tous les événements du dossier"
 
@@ -5028,9 +5087,6 @@ msgstr "Champs optionnels utilisés"
 msgid "urban_label_validityDelay"
 msgstr "Durée de validité du permis"
 
-msgid "urban_label_warnings"
-msgstr "Avertissements"
-
 #. Default: "validityEndDate"
 #: ../UrbanEvent.py:524
 msgid "urban_label_validityEndDate"
@@ -5041,13 +5097,8 @@ msgstr "Date de fin de validité"
 msgid "urban_label_videoConferenceDate"
 msgstr "Date de vidéo-conférence"
 
-#. Default: "Visibility"
-#: Layer.py
-msgid "urban_label_visibility"
-msgstr "Visibilité?"
-
-msgid "urban_label_walloonRegionPrimoDate"
-msgstr "Date primo dossier"
+msgid "urban_label_warnings"
+msgstr "Avertissements"
 
 #. Default: "Water"
 #: ../content/licence/BaseBuildLicence.py:591
@@ -5088,7 +5139,7 @@ msgstr "Code Postal"
 #. Default: "Zoning"
 #: ../content/licence/GenericLicence.py:1210
 msgid "urban_label_zoning"
-msgstr ""
+msgstr "Zoning"
 
 #. Default: "Click here to access the linked urban event inquiry"
 #: ../browser/licence/templates/licencetabsmacros.pt:457
