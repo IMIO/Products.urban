@@ -909,8 +909,8 @@ msgid "Type"
 msgstr "Type"
 
 #: ../browser/templates/urbanstatsmacros.pt:10
-msgid "Types de permis / États"
-msgstr "Types de permis / États"
+msgid "Types de permis \ &Eacute;tats"
+msgstr "Types de permis \ &Eacute;tats"
 
 msgid "UniqueLicence"
 msgstr "Permis unique"
