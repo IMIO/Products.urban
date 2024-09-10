@@ -514,15 +514,3 @@ msgstr "Veuillez indiquer d'avantages de termes de recherche"
 
 msgid "workLocationStreet"
 msgstr "Rue"
-
-msgid "suspend"
-msgstr "Suspendre"
-
-msgid "suspension"
-msgstr "Suspendus"
-
-msgid "frozen_suspension"
-msgstr "Gelé (délais suspendus)"
-
-msgid "resume"
-msgstr "Reprendre"
