@@ -1,12 +1,13 @@
-*****
-Urban
-*****
+*********
+iA. Urban
+*********
 
 .. topic:: Présentation
 
-    Urban est un logiciel de gestion des procédures d'urbanisme et d'environnement.
+    iA.Urban est un logiciel d'iMio (INTERCOMMUNALE DE MUTUALISATION INFORMATIQUE ET OPÉRATIONNELLE) qui a pour but de faciliter la gestion des dossiers d'urbanisme et d'environnement pour les pouvoirs locaux.
+
     Il se concentre sur trois grand aspects:
-    
+
     1. L'encodage structuré des dossiers. Ce qui permet:
 
     - de générer automatiquement les documents liés aux diverses procédures.
@@ -20,9 +21,9 @@ Urban
     - de pré-remplir les données d'un dossier en fonction des couches trouvées depuis
       ses références cadastrales.
 
-    3. La gestion des dossiers au jour le jour via un échéancier qui permet en seul coup 
-       d'oeil, d'embrasser les étapes prioritaires des dossiers en cours.
-    
-* `Documentation @ urban.imio.be <http://urban.imio.be>`_
-* `Code source @ svn <http://svn.communesplone.org/svn/communesplone/Products.urban/>`_
-* `Problèmes @ trac <http://trac.imio.be/>`_
+    3. La gestion des dossiers au jour le jour via un échéancier qui permet en seul coup d'oeil, d'embrasser les étapes prioritaires des dossiers en cours.
+
+* `Documentation interne <https://docs.imio.be/interne/iaurban/index.html>`_
+* `Documentation client <https://docs.imio.be/iaurban/>`_
+* `Code source GitHub <https://github.com/IMIO/Products.urban/>`_
+* `Support iMio (en cas de problèmes) <https://support.imio.be/>`_
