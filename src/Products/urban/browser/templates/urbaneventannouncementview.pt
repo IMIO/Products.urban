@@ -86,7 +86,7 @@
                                                                 <metal:myfield use-macro="python: context.widget(field_name, mode='view')" />
                                                             </td>
                                                             <td tal:condition="not: value">
-                                                                <span tal:condition="not: value" class="discreet" i18n:translate="content_none">None</span>
+                                                                <span tal:condition="not: value" class="discreet" i18n:translate="content_none">Aucun(e)</span>
                                                             </td>
                                                         </tal:manage_show_nc_if_needed>
                                                     </tr>

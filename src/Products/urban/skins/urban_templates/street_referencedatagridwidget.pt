@@ -19,7 +19,7 @@
 		    tal:define="oddrow repeat/data/odd;"
                     tal:attributes="class python:oddrow and 'odd' or 'even';"
 		    tal:condition="data/url">
-                    <strong><span i18n:translate="colnamenumero">Number</span>:</strong> <span tal:content="data/numero"/><span tal:condition="not: data/numero" class="discreet" i18n:translate="content_none">None</span>
+                    <strong><span i18n:translate="colnamenumero">Number</span>:</strong> <span tal:content="data/numero"/><span tal:condition="not: data/numero" class="discreet" i18n:translate="content_none">Aucun(e)</span>
                     <br /><strong><span i18n:translate="colnameTitle">Street</span>:</strong> <span tal:content="data/title"/>
 		</li></tal:loop>
             </ul>

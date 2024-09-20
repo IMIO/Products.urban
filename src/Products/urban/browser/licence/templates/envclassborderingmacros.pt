@@ -37,7 +37,7 @@
                 <tal:non_null_value condition="not: nullvalue">
                     <metal:myfield use-macro="python:context.widget(fieldname, mode='view')" />
                 </tal:non_null_value>
-                <span tal:condition="nullvalue" class="discreet" i18n:translate="content_none">None</span>
+                <span tal:condition="nullvalue" class="discreet" i18n:translate="content_none">Aucun(e)</span>
             </td>
                 </tal:vars>
             </tr>
@@ -47,7 +47,7 @@
         <div tal:condition="manual_parcels">
             <metal:myfield use-macro="python:here.widget('manualParcels', mode='view')" />
         </div>
-        <span tal:condition="python: not workLocations and not manual_parcels" class="discreet" i18n:translate="content_none">None</span>
+        <span tal:condition="python: not workLocations and not manual_parcels" class="discreet" i18n:translate="content_none">Aucun(e)</span>
     </fieldset>
 
 </div>
