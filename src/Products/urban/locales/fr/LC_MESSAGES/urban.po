@@ -3163,6 +3163,11 @@ msgstr "COVID-19"
 msgid "urban_label_customSpecificFeatures"
 msgstr "Particularité(s) diverse(s) du bien"
 
+#. Default: "D.67 CoPat"
+#: ../content/licence/CODT_BaseBuildLicence.py:469
+msgid "urban_label_d67copat"
+msgstr "D.67 CoPat"
+
 #. Default: "DeadEndBuilding"
 #: ../content/licence/GenericLicence.py:1246
 msgid "urban_label_deadEndBuilding"
