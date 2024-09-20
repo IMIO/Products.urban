@@ -31,7 +31,50 @@ optional_fields = ["limitedImpact", "SDC_divergence"]
 ##/code-section module-header
 
 schema = Schema(
-    (),
+    (
+        StringField(
+            name="centrality",
+            widget=SelectionWidget(
+                label=_("urban_label_centrality", default="Centrality"),
+            ),
+            schemata="urban_location",
+            vocabulary="listCentralities",
+        ),
+        IntegerField(
+            name="surfaceFoodBusiness",
+            default=0,
+            widget=IntegerField._properties["widget"](
+                label=_(
+                    "urban_label_surfaceFoodBusiness",
+                    default="surfaceFoodBusiness",
+                ),
+            ),
+            schemata="urban_location",
+        ),
+        IntegerField(
+            name="surfaceLightBusiness",
+            default=0,
+            widget=IntegerField._properties["widget"](
+                label=_(
+                    "urban_label_surfaceLightBusiness",
+                    default="surfaceLightBusiness",
+                ),
+            ),
+            schemata="urban_location",
+        ),
+        IntegerField(
+            name="surfaceHeavyBusiness",
+            default=0,
+            widget=IntegerField._properties["widget"](
+                label=_(
+                    "urban_label_surfaceHeavyBusiness",
+                    default="surfaceHeavyBusiness",
+                ),
+            ),
+            schemata="urban_location",
+        ),
+    ),
+
 )
 
 ##code-section after-local-schema #fill in your manual code here
@@ -88,6 +131,16 @@ class CODT_CommercialLicence(BaseFolder, CODT_UniqueLicence, BrowserDefaultMixin
             delay += 30
 
         return "{}j".format(str(delay))
+
+    def listCentralities(self):
+        vocab = (
+            ("ukn", "Non determiné"),
+            ("villageoise", "villageoise"),
+            ("urbaine", "urbaine"),
+            ("urbaine_de_pole", "urbaine de pôle"),
+            ("bordure_de_centralite", "bordure de centralité"),
+        )
+        return DisplayList(vocab)
 
 
 registerType(CODT_CommercialLicence, PROJECTNAME)

@@ -2919,6 +2919,11 @@ msgstr ""
 msgid "urban_label_category"
 msgstr ""
 
+#. Default: "Centrality"
+#: ../content/licence/CODT_CommercialLicence.py:39
+msgid "urban_label_centrality"
+msgstr ""
+
 #. Default: "Changes"
 #: PcaTerm.py
 msgid "urban_label_changes"
@@ -4859,6 +4864,21 @@ msgstr ""
 #. Default: "Submissionnumber"
 #: ../content/licence/EnvClassThree.py:69
 msgid "urban_label_submissionNumber"
+msgstr ""
+
+#. Default: "surfaceFoodBusiness"
+#: ../content/licence/CODT_CommercialLicence.py:49
+msgid "urban_label_surfaceFoodBusiness"
+msgstr ""
+
+#. Default: "surfaceHeavyBusiness"
+#: ../content/licence/CODT_CommercialLicence.py:71
+msgid "urban_label_surfaceHeavyBusiness"
+msgstr ""
+
+#. Default: "surfaceLightBusiness"
+#: ../content/licence/CODT_CommercialLicence.py:60
+msgid "urban_label_surfaceLightBusiness"
 msgstr ""
 
 #. Default: "Suspension"

@@ -2947,6 +2947,11 @@ msgstr "Détails concernant la zone de captage"
 msgid "urban_label_category"
 msgstr "Catégorie"
 
+#. Default: "Centrality"
+#: ../content/licence/CODT_CommercialLicence.py:39
+msgid "urban_label_centrality"
+msgstr "Centralité"
+
 #. Default: "Changes"
 #: PcaTerm.py
 msgid "urban_label_changes"
@@ -4891,6 +4896,21 @@ msgstr "Rubriques"
 #: ../content/licence/EnvClassThree.py:69
 msgid "urban_label_submissionNumber"
 msgstr "N° de soumission"
+
+#. Default: "surfaceFoodBusiness"
+#: ../content/licence/CODT_CommercialLicence.py:49
+msgid "urban_label_surfaceFoodBusiness"
+msgstr "m² de commerce alimentaire"
+
+#. Default: "surfaceHeavyBusiness"
+#: ../content/licence/CODT_CommercialLicence.py:71
+msgid "urban_label_surfaceHeavyBusiness"
+msgstr "m² de commerce lourd"
+
+#. Default: "surfaceLightBusiness"
+#: ../content/licence/CODT_CommercialLicence.py:60
+msgid "urban_label_surfaceLightBusiness"
+msgstr "m² de commerce léger"
 
 #. Default: "Suspension"
 #: ../content/UrbanEventInquiry.py:140
