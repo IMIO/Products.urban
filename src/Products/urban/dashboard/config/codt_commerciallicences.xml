@@ -9,7 +9,7 @@
    <property name="hidden">1</property>
    <property
       name="vocabulary">eea.faceted.vocabularies.SortingCatalogIndexes</property>
-   <property name="default">created(reverse)</property>
+   <property name="default">sortable_title</property>
   </criterion>
   <criterion name="c2">
    <property name="widget">collection-link</property>
@@ -25,7 +25,7 @@
    <property name="hidealloption">1</property>
    <property name="maxitems"></property>
    <property name="sortreversed"></property>
-   <property name="default">e52f951ad5264b74aa010f30375002e8</property>
+   <property name="default">b3e21ec3ade34e3f94e66526ad0e0f9e</property>
   </criterion>
   <criterion name="c11">
    <property name="widget">daterange</property>
@@ -94,9 +94,47 @@
       name="autocomplete_view">cadastral-autocomplete-suggest</property>
    <property name="onlyallelements">1</property>
   </criterion>
+  <criterion name="c15">
+   <property name="widget">daterange</property>
+   <property name="title">Date de début d'enquête</property>
+   <property name="position">top</property>
+   <property name="section">advanced</property>
+   <property name="hidden">0</property>
+   <property name="index">investigationStart</property>
+   <property name="default"></property>
+   <property name="calYearRange">c-10:c+10</property>
+  </criterion>
+  <criterion name="c14">
+   <property name="widget">daterange</property>
+   <property name="title">Date notif théorique</property>
+   <property name="position">top</property>
+   <property name="section">advanced</property>
+   <property name="hidden">0</property>
+   <property name="index">licence_final_duedate</property>
+   <property name="default"></property>
+   <property name="calYearRange">c-10:c+10</property>
+  </criterion>
+  <criterion name="c12">
+   <property name="widget">checkbox</property>
+   <property name="title">Rive</property>
+   <property name="position">center</property>
+   <property name="section">default</property>
+   <property name="hidden">0</property>
+   <property name="count"></property>
+   <property name="sortcountable"></property>
+   <property name="hidezerocount"></property>
+   <property name="index">shore</property>
+   <property name="operator">or</property>
+   <property name="operator_visible"></property>
+   <property name="vocabulary">liege.shore</property>
+   <property name="catalog"></property>
+   <property name="maxitems"></property>
+   <property name="sortreversed"></property>
+   <property name="default"></property>
+  </criterion>
   <criterion name="c5">
    <property name="widget">text</property>
-   <property name="title">Titre, référence</property>
+   <property name="title">Référence</property>
    <property name="position">center</property>
    <property name="section">default</property>
    <property name="hidden">0</property>
@@ -121,22 +159,19 @@
    <property name="default"></property>
   </criterion>
   <criterion name="c3">
-   <property name="widget">checkbox</property>
+   <property name="widget">select</property>
    <property name="title">État</property>
    <property name="position">center</property>
    <property name="section">default</property>
    <property name="hidden">0</property>
-   <property name="count">0</property>
-   <property name="sortcountable">0</property>
-   <property name="hidezerocount">0</property>
+   <property name="count"></property>
+   <property name="sortcountable"></property>
+   <property name="hidezerocount"></property>
    <property name="index">review_state</property>
-   <property name="operator">or</property>
-   <property name="operator_visible">0</property>
    <property name="vocabulary">urban.rootfolder_licence_state</property>
    <property name="catalog"></property>
-   <property name="maxitems"></property>
-   <property name="sortreversed">0</property>
-   <property name="default"/>
+   <property name="sortreversed"></property>
+   <property name="default"></property>
   </criterion>
   <criterion name="c0">
    <property name="widget">resultsperpage</property>
@@ -148,6 +183,31 @@
    <property name="end">50</property>
    <property name="step">10</property>
    <property name="default">20</property>
+  </criterion>
+  <criterion name="c13">
+   <property name="widget">daterange</property>
+   <property name="title">Date de dépôt</property>
+   <property name="position">center</property>
+   <property name="section">default</property>
+   <property name="hidden">0</property>
+   <property name="index">getDepositDate</property>
+   <property name="default"></property>
+   <property name="calYearRange">c-10:c+10</property>
+  </criterion>
+  <criterion name="c16">
+   <property name="widget">select</property>
+   <property name="title">COVID19</property>
+   <property name="position">center</property>
+   <property name="section">default</property>
+   <property name="hidden">0</property>
+   <property name="count"></property>
+   <property name="sortcountable"></property>
+   <property name="hidezerocount"></property>
+   <property name="index">commentators</property>
+   <property name="vocabulary">urban.covid</property>
+   <property name="catalog"></property>
+   <property name="sortreversed"></property>
+   <property name="default"></property>
   </criterion>
  </criteria>
 </object>
