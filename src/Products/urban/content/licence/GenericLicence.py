@@ -23,7 +23,6 @@ from collective.faceted.task.interfaces import IFacetedTaskContainer
 
 from eea.facetednavigation.subtypes.interfaces import IPossibleFacetedNavigable
 
-from collective.archetypes.select2.select2widget import MultiSelect2Widget
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 from Products.urban import interfaces

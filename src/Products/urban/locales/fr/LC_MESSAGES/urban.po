@@ -5320,6 +5320,3 @@ msgstr "ans"
 
 msgid "zip_folder_title"
 msgstr "Zone d'initiative privilégiée"
-
-msgid "zoning_folder_title"
-msgstr "Zoning"
