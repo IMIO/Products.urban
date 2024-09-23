@@ -1,15 +1,671 @@
-:orphan:
+Changelog
+=========
 
-Changes
-=======
-2.5 (unreleased)
-----------------
+.. You should *NOT* be adding new change log entries to this file.
+   You should create a file in the news directory instead.
+   For helpful instructions, please see:
+   https://github.com/plone/plone.releaser/blob/master/ADD-A-NEWS-ITEM.rst
 
-- Add patrimony tabs to preliminary notice [URB-2617]
+.. towncrier release notes start
+
+2.7.16 (2024-07-25)
+-------------------
+
+Bug fixes:
+
+
+- Fix faceted widget id collision
+  [daggelpop] (URB-3090)
+
+
+2.7.15 (2024-07-05)
+-------------------
+
+New features:
+
+
+- Add rule action for sending mail with attachments
+  Add rule condition for corresponding event type and opinion to ask
+  Add action for sending mail from event context with document in attachement
+  [jchandelle] (URB-3020)
+- Change limit year of date widget to current year + 25
+  [jchandelle] (URB-3153)
+
+
+Bug fixes:
+
+
+- Fix getValidityDate indexation
+  [jchandelle]
+  Fix validity filter title
+  [jchandelle] (URB-3090)
+- Give dynamic group reader roles for obsolete licences
+  [daggelpop] (URB-3131)
+
+
+2.7.14 (2024-06-27)
+-------------------
+
+New features:
+
+
+- Adapt vocabulary default config values for 2024 CODT reform
+  [daggelpop] (URB-3003)
+- Add frozen state
+  [jchandelle] (URB-3007)
+- Allow linking to patrimony certificates
+  [daggelpop] (URB-3063)
+- Add validity date filter and index
+  [jchandelle] (URB-3090)
+- Add new terms to foldercategories vocabulary
+  [daggelpop] (URB-3096)
+- Rename Patrimony certificate
+  [daggelpop] (URB-3116)
+- Add `get_bound_licences` and `get_bound_patrimonies` to CODT_BaseBuildLicence
+  [daggelpop] (URB-3125)
+
+
+Bug fixes:
+
+
+- Mark PatrimonyCertificate as allowed type for bound_licences field in CODT build licences
+  [daggelpop] (URB-3046)
+
+
+2.7.13 (2024-05-28)
+-------------------
+
+New features:
+
+
+- Add external method to add back deleted licence folder
+  [jchandelle] (URB-3086)
+
+
+Bug fixes:
+
+
+- Fix unicode error on street name merge field 
+  [fngaha] (SUP-34184)
+- Avoid to display disabled vocabulary entries with no start or end validity date
+  [mpeeters] (SUP-36742)
+- Fix error at EnvClassBordering creation
+  [jchandelle] (URB-3108)
+
+
+2.7.12 (2024-04-25)
+-------------------
+
+Bug fixes:
+
+
+- Fix wrong files export
+  [jchandelle] (MURBMONA-48)
+
+
+2.7.11 (2024-04-25)
+-------------------
+
+Bug fixes:
+
+
+- Add event sub file in export content
+  Add missing portal_type to export sub content
+  [jchandelle] (MURBMONA-48)
+
+
+Internal:
+
+
+- Add `withtitle` parameter to the getApplicantsSignaletic method
+  [fngaha] (SUP-33759)
+- Improve merge fields
+  Provide a merge field that only returns streets
+  Adapt the getStreetAndNumber method field to be able to receive a separation parameter between the street and the number
+  [fngaha] (SUP-34184)
+- Update the translation of empty fields
+  [fngaha] (URB-3079)
+
+
+2.7.10 (2024-04-10)
+-------------------
+
+New features:
+
+
+- Add view for import urban config
+  [jchandelle] (SUP-36419)
+
+
+2.7.9 (2024-04-07)
+------------------
+
+Bug fixes:
+
+
+- Avoid an error if a vocabulary term was removed
+  [mpeeters] (SUP-36403,SUP-36406)
+- Fix logic on some methods to exclude invalid vocabulary entries
+  [mpeeters] (URB-3002)
+
+
+Internal:
+
+
+- Add tests for new vocabulary logic (start and end validity)
+  [mpeeters] (URB-3002)
+
+
+2.7.8 (2024-04-02)
+------------------
+
+Bug fixes:
+
+
+- Add `state` optional parameter to `getLastAcknowledgment` method to fix an issue with schedule start date
+  [mpeeters] (SUP-36274)
+- Avoid an error if an advice was not defined
+  [mpeeters] (SUP-36276)
+
+
+2.7.7 (2024-04-01)
+------------------
+
+Bug fixes:
+
+
+- Fix an error in calculation of prorogated delays
+  [mpeeters] (URB-3008)
+
+
+Internal:
+
+
+- Add tests for buildlicence and CU2 completion schedule
+  [mpeeters] (URB-3005)
+
+
+2.7.6 (2024-03-25)
+------------------
+
+Bug fixes:
+
+
+- Fix an issue with upgrade step numbers
+  [mpeeters] (URB-3002)
+
+
+2.7.5 (2024-03-24)
+------------------
+
+New features:
+
+
+- Add caduc workflow state
+  [jchandelle] (URB-3007)
+- Add `getIntentionToSubmitAmendedPlans` method for documents
+  [mpeeters] (URB-3008)
+- Add a link field on CODT build licences
+  [mpeeters] (URB-3046)
+
+
+Bug fixes:
+
+
+- Move methods to be available for every events.
+  Change `is_CODT2024` to be true if there is no deposit but current date is greater than 2024-03-31.
+  [mpeeters] (URB-3008)
+
+
+2.7.4 (2024-03-20)
+------------------
+
+Bug fixes:
+
+
+- Invert Refer FD delay 30 <-> 40 days
+  [mpeeters] (URB-3008)
+
+
+2.7.3 (2024-03-20)
+------------------
+
+New features:
+
+
+- Add `is_not_CODT2024` method that can be used in templates
+  [mpeeters] (URB-3008)
+
+
+Bug fixes:
+
+
+- Fix update of vocabularies
+  [mpeeters] (URB-3002)
+
+
+2.7.2 (2024-03-18)
+------------------
+
+New features:
+
+
+- Add `getCompletenessDelay`, `getReferFDDelay` and `getFDAdviceDelay` methods that can be used in templates
+  [mpeeters] (URB-3008)
+
+
+2.7.1 (2024-03-14)
+------------------
+
+Bug fixes:
+
+
+- Fix delay vocabularies value order
+  [mpeeters] (URB-3003)
+
+
+2.7.0 (2024-03-14)
+------------------
+
+New features:
+
+
+- Add `is_CODT2024` and `getProrogationDelay` methods that can be used in template
+  [mpeeters] (URB-2956)
+- Adapt vocabulary logic to include start and end validity dates
+  [mpeeters] (URB-3002)
+- Adapt vocabulary terms for 2024 CODT reform
+  [daggelpop] (URB-3003)
+- Add `urban.schedule` dependency
+  [mpeeters] (URB-3005)
+- Add event fields `videoConferenceDate`, `validityEndDate` & marker `IIntentionToSubmitAmendedPlans`
+  [daggelpop] (URB-3006)
+
+
+Bug fixes:
+
+
+- Avoid an error if the closing state is not a valid transition
+  [mpeeters] (SUP-35736)
+
+
+Internal:
+
+
+- Provided prorogation field for environment license
+  [fngaha] (URB-2924)
+- Update applicant mailing codes :
+  Replace mailed_data.getPersonTitleValue(short=True), mailed_data.name1, mailed_data.name2 by mailed_data.getSignaletic()
+  [fngaha] (URB-2947)
+
+
+2.6.25 (2024-02-13)
+-------------------
+
+Bug fixes:
+
+
+- Fix an issue with installation through collective.bigbang
+  [mpeeters] (URB-3016)
+
+
+2.6.24 (2024-02-13)
+-------------------
+
+Bug fixes:
+
+
+- Add upgrade step to reindex uid catalog
+  [jchandelle] (URB-3015)
+
+
+2.6.23 (2024-02-09)
+-------------------
+
+Bug fixes:
+
+
+- Fix reference validator for similar ref
+  [jchandelle] (URB-3012)
+
+
+2.6.22 (2024-02-05)
+-------------------
+
+New features:
+
+
+- Add index for street code
+  [jchandelle] (MURBFMAA-20)
+
+
+2.6.21 (2023-12-26)
+-------------------
+
+New features:
+
+
+- Add prosecution ref and ticket ref to Inspection
+  [ndemonte] (SUP-27127)
+- Underline close due dates
+  [ndemonte] (URB-2515)
+- Add stop worksite option to inspection report
+  [jchandelle] (URB-2827)
+- Remove reference FD field from preliminary notice
+  [jchandelle] (URB-2831)
+
+
+Bug fixes:
+
+
+- Validate CSV before claimant import
+  [daggelpop] (SUP-33538)
+- Fix an issue with Postgis `ST_MemUnion` by using `ST_Union` instead that also improve performances
+  [mpeeters] (SUP-34226)
+- Fix integrated licence creation by using unicode for regional authorities vocabulary
+  [jchandelle] (URB-2869)
+
+
+2.6.20 (2023-12-12)
+-------------------
+
+Bug fixes:
+
+
+- Fix street number with specia character in unicode
+  [jchandelle] (URB-2948)
+
+
+2.6.19 (2023-12-04)
+-------------------
+
+Bug fixes:
+
+
+- Fix an issue with Products.ZCTextIndex that was interpreting `NOT` as token instead of a word for notary letter references
+  [mpeeters] (MURBARLA-25)
+
+
+2.6.18 (2023-11-23)
+-------------------
+
+Bug fixes:
+
+
+- Add `fix_schedule_config` external method ta fix class of condition objects
+  [mpeeters] (SUP-33739)
+
+
+2.6.17 (2023-11-16)
+-------------------
+
+Bug fixes:
+
+
+- Adapt opinion request worklflow to bypass guard check for managers
+  [mpeeters] (SUP-33308)
+
+
+Internal:
+
+
+- Provide getFirstAcknowledgment method
+  [fngaha] (SUP-32215)
+
+
+2.6.16 (2023-11-06)
+-------------------
+
+Bug fixes:
+
+
+- Fix serializer to include disable street in uid resolver
+  [jchandelle] (MURBMSGA-37)
+- Fix street search to include disable street
+  [jchandelle] (URB-2696)
+
+
+2.6.15 (2023-10-12)
+-------------------
+
+Internal:
+
+
+- Fix tests
+  [mpeeters] (URB-2855)
+- Improve performances for add views
+  [mpeeters] (URB-2903)
+
+
+2.6.14 (2023-09-13)
+-------------------
+
+Bug fixes:
+
+
+- Avoid an error if a vocabulary value was removed, instead log the removed value and display the key to the user
+  [mpeeters] (SUP-32338)
+
+
+Internal:
+
+
+- Reduce logging for sql queries
+  [mpeeters] (URB-2788)
+- Fix tests
+  [mpeeters] (URB-2855)
+
+
+2.6.13 (2023-09-05)
+-------------------
+
+Bug fixes:
+
+
+- Move catalog import in urban type profile
+  [jchandelle] (URB-2868)
+- Fix facet config xml
+  [jchandelle] (URB-2870)
+
+
+2.6.12 (2023-09-01)
+-------------------
+
+Bug fixes:
+
+
+- Fix new urban instance install
+  [jchandelle] (URB-2868)
+- Fix facet xml configuration
+  [jchandelle] (URB-2870)
+
+
+2.6.11 (2023-08-29)
+-------------------
+
+Bug fixes:
+
+
+- Fix icon tag in table
+  [jchandelle] (SUP-31983)
+
+
+2.6.10 (2023-08-28)
+-------------------
+
+Bug fixes:
+
+
+- Avoid an error if a task was not correctly removed from catalog
+  [mpeeters] (URB-2873)
+
+
+2.6.9 (2023-08-27)
+------------------
+
+Bug fixes:
+
+
+- Fix UnicodeDecodeError on getFolderManagersSignaletic(withGrade=True)
+  [fngaha] (URB-2871)
+
+
+2.6.8 (2023-08-24)
+------------------
+
+Bug fixes:
+
+
+- fix select2 widget on folder manager
+  [jchandelle] (SUP-31898)
+- Fix opinion schedules assigned user column
+  [mpeeters] (URB-2819)
+
+
+2.6.7 (2023-08-14)
+------------------
+
+Bug fixes:
+
+
+- Hide old document generation links viewlet
+  [mpeeters] (URB-2864)
+
+
+2.6.6 (2023-08-10)
+------------------
+
+Bug fixes:
+
+
+- Fix an issue with autocomplete view results format that was generating javascript errors
+  [mpeeters] (SUP-31682)
+
+
+2.6.5 (2023-07-27)
+------------------
+
+Bug fixes:
+
+
+- Avoid errors on inexpected values on licences and log them
+  [mpeeters] (SUP-31554)
+- Fix translation for road adaptation vocabulary values
+  [mpeeters] (URB-2575)
+- Avoid an error if a vocabulary does not exist, this can happen when multiple upgrade steps interract with vocabularies
+  [mpeeters] (URB-2835)
+
+
+2.6.4 (2023-07-24)
+------------------
+
+New features:
+
+
+- Add parameter to autocomplete to search with exact match
+  [jchandelle] (URB-2696)
+
+
+Bug fixes:
+
+
+- Fix an issue with some urban instances with lists that contains empty strings or `None`
+  [mpeeters] (URB-2575)
+- Fix inspection title
+  [jchandelle] (URB-2830)
+- Add an external method to set profile version for Products.urban
+  [mpeeters] (URB-2835)
+
+
+2.6.3 (2023-07-18)
+------------------
+
+- Add missing translations [URB-2823]
+  [mpeeters, anagant]
+
+- Fix different type of vocabulary [URB-2575]
   [jchandelle]
 
-- Add parameter to autocomplete to search with exact match [URB-2696]
+- Change NN field position [SUP-27165]
   [jchandelle]
+
+- Add Couple to Preliminary Notice [URB-2824]
+  [ndemonte]
+
+- Fix Select2 view display [URB-2575]
+  [jchandelle]
+
+- Provide getLastAcknowledgment method for all urbancertificates [SUP-30852]
+  [fngaha]
+
+- Fix encoding error [URB-2805]
+  [fngaha]
+
+- Add a explicit dependency to collective.exportimport
+  [mpeeters]
+
+- Cadastral historic memory error [SUP-30310]
+  [sdelcourt]
+
+- Add option to POST endpoint when creating a licence to disable check ref format [SUP-31043]
+  [jchandelle]
+
+
+2.6.2 (2023-07-04)
+------------------
+
+- Explicitly include `urban.restapi` zcml dependency [URB-2790]
+  [mpeeters]
+
+
+2.6.1 (2023-07-04)
+------------------
+
+- Fix zcml for migrations
+  [mpeeters]
+
+
+2.6.0 (2023-07-03)
+------------------
+
+- Fix `hidealloption` and `hide_category` parameters for dashboard collections
+  [mpeeters]
+
+- Fix render of columns with escape parameter
+  [mpeeters, sdelcourt]
+
+- Avoid a traceback if an UID was not found for inquiry cron [URB-2721]
+  [mpeeters]
+
+- Migrate to the latest version of `imio.dashboard`
+  [mpeeters]
+
+
+2.5.4 (2023-07-03)
+------------------
+
+- Change collection column name [URB-1537]
+  [jchandelle]
+
+- Fix class name in external method fix_labruyere_envclassthrees [SUP-29587]
+  [ndemonte]
+
+
+2.5.3 (2023-06-23)
+------------------
+
+- Add parcel and applicants contents to export content [URB-2733]
+  [jchandelle]
+
+
+2.5.2 (2023-06-15)
+------------------
+
+- Fix tests and update package metadata
+  [sdelcourt, mpeeters]
+
+- Add CSV import of recipients to an inquiry [URB-2573]
+  [ndemonte]
 
 - Fix bound licence allowed type [SUP-27062]
   [jchandelle]
@@ -29,6 +685,19 @@ Changes
 - Add an external method to update task delay [SUP-28870]
   [jchandelle]
 
+- Add external method to fix broken environmental declarations [SUP-29587]
+  [ndemonte]
+
+- Fix export data with c.exportimport [URB-2733]
+  [jchandelle]
+
+
+2.5.1 (2023-04-06)
+------------------
+
+- Added 'retired' transition to 'deposit' and 'incomplete' states for codt_buildlicence_workflow
+  [fngaha]
+
 - Manage the display of licences linked to several applicants
   [fngaha]
 
@@ -43,9 +712,6 @@ Changes
 
 - Allow to encode dates going back to 1930
   [fngaha]
-
-- Add CSV import of recipients to an inquiry [URB-2573]
-  [ndemonte]
 
 - Update MailingPersistentDocumentGenerationView call with generated_doc_title param. [URB-1862]
   [jjaumotte]
@@ -127,7 +793,7 @@ Changes
 
 - Pre-check all manageable licences for foldermanager creation. [URB-1935]
   [jjaumotte]
-  
+
 - Add field to define final states closing all the urban events on a licence. [URB-2082]
   [sdelcourt]
 
@@ -173,16 +839,16 @@ Changes
 - Add default person title when creating applicant from a parcel search. [URB-2227]
   [mdhyne]
   [sdelcourt]
-  
-- Update vocabularies CODT Build Licence (folder categories, missing parts) 
+
+- Update vocabularies CODT Build Licence (folder categories, missing parts)
   [lmertens]
 
-- Add dashboard template 'listing permis' 
+- Add dashboard template 'listing permis'
   [lmertens]
 
 - Add translations [URB-1997]
   [mdhyne]
-  
+
 -add boolean field 'isModificationParceloutLicence'. [URB-2250]
   [mdhyne]
 
@@ -226,7 +892,7 @@ Changes
 
 - Fix format_date
   [fngaha]
-  
+
 - Update getLimitDate
   [fngaha]
 
@@ -293,7 +959,7 @@ Changes
   [jjaumotte]
 
 1.11.1 (unknown release date)
--------------------
+-----------------------------
 - add query_parcels_in_radius method to view
   [fngaha]
 

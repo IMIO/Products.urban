@@ -10,6 +10,11 @@
     <indexed_attr value="getDecisionDate"/>
   </index>
   <column value="getDecisionDate"/>
+  <index name="getValidityDate"
+         meta_type="DateIndex">
+    <indexed_attr value="getValidityDate"/>
+  </index>
+  <column value="getValidityDate"/>
   <index name="getRecourseDecisionDisplayDate"
          meta_type="DateIndex">
     <indexed_attr value="getRecourseDecisionDisplayDate"/>
@@ -46,6 +51,12 @@
     <indexed_attr value="StreetsUID"/>
   </index>
   <column value="StreetsUID"/>
+
+  <index name="getStreetCode"
+           meta_type="KeywordIndex">
+    <indexed_attr value="getStreetCode"/>
+  </index>
+  <column value="getStreetCode"/>
 
   <column value="parcelInfosIndex"/>
   <index name="parcelInfosIndex" meta_type="KeywordIndex">

@@ -17,35 +17,54 @@ from zope.interface import alsoProvides
 
 def setDefaultValuesEvent(licence, event):
     """
-     set default values on licence fields
+    set default values on licence fields
     """
+    request = event.object.REQUEST
     if licence.checkCreationFlag():
-        _setDefaultFolderManagers(licence)
-        _setDefaultSelectValues(licence)
-        _setDefaultTextValues(licence)
-        _setDefaultReference(licence)
+        if request and request.getURL().endswith("@@masterselect-jsonvalue-toggle"):
+            # This is a major performance improvment and default values are not
+            # necessary for this view
+            return
+        else:
+            _setDefaultFolderManagers(licence)
+            _setDefaultSelectValues(licence)
+            _setDefaultTextValues(licence)
+            _setDefaultReference(licence)
 
 
 def _setDefaultSelectValues(licence):
-    select_fields = [field for field in licence.schema.fields() if field.default_method == 'getDefaultValue']
+    select_fields = [
+        field
+        for field in licence.schema.fields()
+        if field.default_method == "getDefaultValue"
+    ]
     for field in select_fields:
         default_value = licence.getDefaultValue(licence, field)
+        if not default_value:
+            continue
         field_mutator = getattr(licence, field.mutator)
         field_mutator(default_value)
 
 
 def _setDefaultTextValues(licence):
-    select_fields = [field for field in licence.schema.fields() if field.default_method == 'getDefaultText']
+    select_fields = [
+        field
+        for field in licence.schema.fields()
+        if field.default_method == "getDefaultText"
+    ]
     for field in select_fields:
-        is_html = 'html' in field.default_content_type
+        is_html = "html" in field.default_content_type
         default_value = licence.getDefaultText(licence, field, is_html)
+        if not default_value:
+            continue
         field_mutator = getattr(licence, field.mutator)
         field_mutator(default_value)
 
 
 def _setDefaultFolderManagers(licence):
-    if licence.getLicenceConfig().getDefault_foldermanager():
-        licence.setFoldermanagers(licence.getLicenceConfig().getDefault_foldermanager())
+    default_folder_manager = licence.getLicenceConfig().getDefault_foldermanager()
+    if default_folder_manager:
+        licence.setFoldermanagers(default_folder_manager)
     else:
         licence.setFoldermanagers(getCurrentFolderManager())
 
@@ -72,11 +91,11 @@ def updateTaskIndexes(task_container, event):
     if not task_configs:
         return
 
-    with api.env.adopt_roles(['Manager']):
+    with api.env.adopt_roles(["Manager"]):
         for config in task_configs:
             tasks = config.get_task_instances(task_container)
             for task in tasks:
-                task.reindexObject(idxs=['commentators'])
+                task.reindexObject(idxs=["commentators"])
 
 
 def updateBoundLicences(licence, events):
@@ -94,27 +113,33 @@ def _updateBoundLicencesIndexes(licence, events, indexes=[]):
     """
     if indexes == []:
         indexes = [
-            'Title',
-            'sortable_title',
-            'applicantInfosIndex',
-            'address',
-            'StreetNumber',
-            'StreetsUID',
-            'parcelInfosIndex'
+            "Title",
+            "sortable_title",
+            "applicantInfosIndex",
+            "address",
+            "StreetNumber",
+            "StreetsUID",
+            "parcelInfosIndex",
         ]
 
     annotations = IAnnotations(licence)
-    ticket_uids = annotations.get('urban.bound_tickets') or set([])
-    inspection_uids = annotations.get('urban.bound_inspections') or set([])
+    ticket_uids = annotations.get("urban.bound_tickets") or set([])
+    inspection_uids = annotations.get("urban.bound_inspections") or set([])
     uids = inspection_uids.union(ticket_uids)
-    catalog = api.portal.get_tool('portal_catalog')
+    catalog = api.portal.get_tool("portal_catalog")
     bound_licences_brains = catalog(UID=list(uids))
     for bound_licences_brain in bound_licences_brains:
         bound_licence = bound_licences_brain.getObject()
         to_reindex = False
-        if bound_licence.portal_type == 'Inspection' and bound_licence.getUse_bound_licence_infos():
+        if (
+            bound_licence.portal_type == "Inspection"
+            and bound_licence.getUse_bound_licence_infos()
+        ):
             to_reindex = True
-        if bound_licence.portal_type == 'Ticket' and bound_licence.getUse_bound_inspection_infos():
+        if (
+            bound_licence.portal_type == "Ticket"
+            and bound_licence.getUse_bound_inspection_infos()
+        ):
             to_reindex = True
         if to_reindex:
             bound_licence.updateTitle()
@@ -124,16 +149,22 @@ def _updateBoundLicencesIndexes(licence, events, indexes=[]):
 
 
 def updateEventsFoldermanager(licence, event):
-    events = licence.objectValues('UrbanEvent')
-    events += licence.objectValues('UrbanEventOpinionRequest')
+    events = licence.objectValues("UrbanEvent")
+    events += licence.objectValues("UrbanEventOpinionRequest")
     for urban_event in events:
-        urban_event.reindexObject(idxs=['folder_manager'])
+        urban_event.reindexObject(idxs=["folder_manager"])
 
 
 def _setManagerPermissionOnLicence(licence):
     # there is no need for other users than Managers to List folder contents
     # set this permission here if we use the simple_publication_workflow...
-    licence.manage_permission('List folder contents', ['Manager', ], acquire=0)
+    licence.manage_permission(
+        "List folder contents",
+        [
+            "Manager",
+        ],
+        acquire=0,
+    )
 
 
 def _checkNumerotation(licence):
@@ -144,7 +175,7 @@ def _checkNumerotation(licence):
     if config.generateReference(licence) in licence.getReference():
         value = source_config.getNumerotation()
         if not str(value).isdigit():
-            value = '0'
+            value = "0"
         else:
             value = int(value)
             value = value + 1
@@ -154,8 +185,7 @@ def _checkNumerotation(licence):
 
 
 def setMarkerInterface(licence, event):
-    """
-    """
+    """ """
     portal_type = licence.portal_type
     marker_interface = URBAN_TYPES_INTERFACES.get(portal_type, None)
     if marker_interface and not marker_interface.providedBy(licence):
@@ -163,23 +193,22 @@ def setMarkerInterface(licence, event):
 
 
 def reindex_attachments_permissions(container, event):
-    """
-    """
-    if 'portal_factory' in container.REQUEST.getURL():
+    """ """
+    if "portal_factory" in container.REQUEST.getURL():
         return
     query = {
-        'portal_type': 'File',
-        'path': {
-            'query': '/'.join(container.getPhysicalPath()),
-            'depth': 1,
+        "portal_type": "File",
+        "path": {
+            "query": "/".join(container.getPhysicalPath()),
+            "depth": 1,
         },
     }
-    catalog = api.portal.get_tool('portal_catalog')
+    catalog = api.portal.get_tool("portal_catalog")
     attachments = catalog(query)
-    with api.env.adopt_roles(['Manager']):
+    with api.env.adopt_roles(["Manager"]):
         for attachment_brain in attachments:
             attachment = attachment_brain.getObject()
-            attachment.reindexObject(idxs=['allowedRolesAndUsers'])
+            attachment.reindexObject(idxs=["allowedRolesAndUsers"])
 
     if IUrbanEvent.providedBy(container):
         licence = container.aq_parent
@@ -192,7 +221,7 @@ def reindex_licence_permissions(container, event):
     """
     if IUrbanEvent.providedBy(container):
         licence = container.aq_parent
-        licence.reindexObject(idxs=['allowedRolesAndUsers'])
+        licence.reindexObject(idxs=["allowedRolesAndUsers"])
 
 
 def set_faceted_navigation(licence, event):
@@ -213,16 +242,23 @@ def close_all_events(licence, event):
     """
     close all UrbanEvents that have the state 'closed' in their workflow.
     """
-    portal_workflow = api.portal.get_tool('portal_workflow')
+    portal_workflow = api.portal.get_tool("portal_workflow")
     config = licence.getLicenceConfig()
     licence_state = api.content.get_state(licence)
-    closing_states = ['closed', 'opinion_given']
+    closing_states = ["closed", "opinion_given"]
     if licence_state in (config.getStates_to_end_all_events() or []):
         for urban_event in licence.getAllEvents():
             workflow_def = portal_workflow.getWorkflowsFor(urban_event)[0]
             for closing_state in closing_states:
                 if closing_state in workflow_def.states.objectIds():
                     workflow_id = workflow_def.getId()
-                    workflow_state = portal_workflow.getStatusOf(workflow_id, urban_event)
-                    workflow_state['review_state'] = closing_state
-                    portal_workflow.setStatusOf(workflow_id, urban_event, workflow_state.copy())
+                    workflow_state = portal_workflow.getStatusOf(
+                        workflow_id, urban_event
+                    )
+                    if not workflow_state:
+                        # This can happen with some workflows see SUP-35736
+                        continue
+                    workflow_state["review_state"] = closing_state
+                    portal_workflow.setStatusOf(
+                        workflow_id, urban_event, workflow_state.copy()
+                    )

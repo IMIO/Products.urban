@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from imio.actionspanel.browser.transitions import ConfirmTransitionView
+from imio.actionspanel.browser.comments import ConfirmTransitionView
 
 from imio.schedule.config import STARTED
 from imio.schedule.utils import get_task_configs
@@ -8,8 +8,8 @@ from imio.schedule.utils import get_task_configs
 
 class UrbanConfirmTransitionView(ConfirmTransitionView):
     """
-      This manage the overlay popup displayed when a transition needs to be confirmed.
-      For other transitions, this views is also used but the confirmation popup is not shown.
+    This manage the overlay popup displayed when a transition needs to be confirmed.
+    For other transitions, this views is also used but the confirmation popup is not shown.
     """
 
     def has_open_tasks(self):
@@ -58,3 +58,9 @@ class UrbanConfirmTransitionView(ConfirmTransitionView):
             tasks.append((task, not_matched))
 
         return tasks
+
+    @property
+    def actions_panel_view(self):
+        view = self.context.restrictedTraverse("@@actions_panel")
+        view.forceRedirectAfterTransition = True
+        return view

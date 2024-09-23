@@ -436,13 +436,28 @@
         profile="Products.urban:default" />
 
     <gs:upgradeStep
-        title="Add new vocabulary for Zoning field"
-        description="Add new vocabulary for Zoning field"
+        title="Install browserlayer"
+        description="Install browserlayer"
         source="1126"
         destination="1127"
+        handler=".update_250.install_browserlayer"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Add new vocabulary for Zoning field"
+        description="Add new vocabulary for Zoning field"
+        source="1127"
+        destination="1128"
         handler=".update_250.add_new_vocabulary_for_zoning_field"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Update Collection Column"
+        description="Update Collection Column"
+        source="1128"
+        destination="1129"
+        handler=".update_250.update_collection_column"
+        profile="Products.urban:default" />
 
     <!--gs:upgradeStep
         title="Add schedule config for env licences 1 and 2"
@@ -451,5 +466,187 @@
         destination="1119"
         handler=".update_250.update_env_licences_schedule"
         profile="Products.urban:default" /-->
+
+    <gs:upgradeStep
+        title="Update faceted criterion to hide collection widget category title"
+        description="Update faceted criterion to hide collection widget category title"
+        source="1129"
+        destination="1130"
+        handler=".update_250.update_faceted_collection_widget"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Add Couple to Preliminary Notice"
+        description="Add Couple to Preliminary Notice"
+        source="1130"
+        destination="1131"
+        handler=".update_260.add_couple_to_preliminary_notice"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Remove generation link viewlet"
+        description="Remove generation link viewlet that are not longer usefull"
+        source="1131"
+        destination="1132"
+        handler=".update_260.remove_generation_link_viewlet"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Fix opinion schedule column"
+        description="Fix opinion schedule column"
+        source="1132"
+        destination="1133"
+        handler=".update_260.fix_opinion_schedule_column"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Fix opinion workflow"
+        description="Fix opinion workflow"
+        source="1133"
+        destination="1134"
+        handler=".update_260.fix_opinion_workflow"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Add streetcode to catalog"
+        description="Add streetcode to catalog"
+        source="1134"
+        destination="1135"
+        handler=".update_260.add_streetcode_to_catalog"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Reindex uid in uid catalog"
+        description="Reindex uid in uid catalog"
+        source="1135"
+        destination="1136"
+        handler=".update_260.reindex_uid_catalog"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Migrate vocabulary terms to include validity date"
+        description="Set validity end date for vocabulary that are deactivate"
+        source="1136"
+        destination="1137"
+        handler=".update_codt_2024.migrate_vocabulary_validity_date"
+        profile="Products.urban:default"
+        />
+
+    <gs:upgradeStep
+        title="update delais vocabularies and activate prorogation field"
+        description="update delais vocabulary and activate prorogation field"
+        source="1137"
+        destination="1138"
+        handler=".update_260.update_delais_vocabularies_and_activate_prorogation_field"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Migrate vocabulary content"
+        description=""
+        source="1138"
+        destination="1139"
+        handler=".update_codt_2024.migrate_vocabulary_contents"
+        profile="Products.urban:default"
+        />
+
+    <gs:upgradeStep
+        title="Sort delay vocabulary values"
+        description=""
+        source="1139"
+        destination="1140"
+        handler=".update_codt_2024.sort_delay_vocabularies"
+        profile="Products.urban:default"
+        />
+
+    <gs:upgradeStep
+        title="Add new workflow state"
+        description=""
+        source="1140"
+        destination="1141"
+        handler=".update_codt_2024.add_new_workfow_state"
+        profile="Products.urban:default"
+        />
+
+    <gs:upgradeStep
+        title="Add ZACC to folderzones vocabulary"
+        description=""
+        source="1141"
+        destination="1142"
+        handler=".update_codt_2024.add_zacc_to_folderzones_vocabulary"
+        profile="Products.urban:default"
+        />
+
+    <gs:upgradeStep
+        title="Add folder categories terms"
+        description=""
+        source="1142"
+        destination="1143"
+        handler=".update_codt_2024.add_folder_categories_terms"
+        profile="Products.urban:default"
+        />
+
+    <gs:upgradeStep
+        title="Add new index and new filter for validity date"
+        description=""
+        source="1143"
+        destination="1144"
+        handler=".update_codt_2024.add_new_index_and_new_filter"
+        profile="Products.urban:default"
+        />
+      
+    <gs:upgradeStep
+        title="Add frozen workflow state"
+        description=""
+        source="1144"
+        destination="1145"
+        handler=".update_codt_2024.add_frozen_workflow_state"
+        profile="Products.urban:default"
+        />
+
+    <gs:upgradeStep
+        title="Rename Patrimony certificate"
+        description=""
+        source="1145"
+        destination="1146"
+        handler=".update_270.rename_patrimony_certificate"
+        profile="Products.urban:default"
+        />
+
+    <gs:upgradeStep
+        title="Reindex getValidityDate"
+        description=""
+        source="1146"
+        destination="1147"
+        handler=".update_codt_2024.reindex_getValidityDate"
+        profile="Products.urban:default"
+        />
+
+
+    <gs:upgradeStep
+        title="Fix validity filter title"
+        description=""
+        source="1147"
+        destination="1148"
+        handler=".update_codt_2024.fix_validity_filter_title"
+        profile="Products.urban:default"
+        />
+        
+    <gs:upgradeStep
+        title="Install send mail with attachment action"
+        description=""
+        source="1148"
+        destination="1149"
+        handler=".update_codt_2024.install_send_mail_with_attachement_action"
+        profile="Products.urban:default"
+        />
+
+    <gs:upgradeStep
+        title="Fix validity filter widget cid collision"
+        description=""
+        source="1149"
+        destination="1150"
+        handler=".update_codt_2024.fix_c13_collision"
+        profile="Products.urban:default"
+        />
 
 </configure>

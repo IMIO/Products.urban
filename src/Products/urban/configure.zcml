@@ -43,6 +43,9 @@
   <include package="plone.z3ctable"/>
   <include package="plonetheme.imioapps"/>
   <include package="urban.vocabulary"/>
+  <include package="urban.restapi"/>
+  <include package="urban.schedule"/>
+  <include package="urban.events"/>
 
   <include file="grok.zcml" />
   <include file="permissions.zcml" />
@@ -62,6 +65,8 @@
   <include package=".workflows" />
   <include package=".widget" />
   <include package=".history" />
+  <include package=".contentrules" />
+  <include package=".send_mail_action" />
 
   <!-- needed to migrate UrbanDoc type, to remove in next release -->
   <adapter name="plone.app.blob.subtypes.file"
@@ -300,6 +305,10 @@
     interface=".interfaces.ITransferOfLicenceEvent"
     type=".interfaces.IEventTypeType"/>
 
+  <interface
+    interface=".interfaces.IIntentionToSubmitAmendedPlans"
+    type=".interfaces.IEventTypeType"/>
+
   <adapter
     for="Products.CMFCore.interfaces.ICatalogAware
         Products.Archetypes.interfaces.IUIDCatalog"
@@ -315,5 +324,12 @@
   <include file="index.zcml" />
 
   <i18n:registerTranslations directory="locales" />
+
+  <!-- subscribers -->
+  <subscriber
+    for=".interfaces.IUrbanVocabularyTerm
+           Products.DCWorkflow.interfaces.IAfterTransitionEvent"
+    handler=".subscribers.after_term_deactivate"
+    />
 
 </configure>

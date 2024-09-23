@@ -26,7 +26,7 @@
 
 __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEULETTE
 <stephan.geulette@uvcw.be>, Jean-Michel Abe <jm.abe@la-bruyere.be>"""
-__docformat__ = 'plaintext'
+__docformat__ = "plaintext"
 
 
 # There are three ways to inject custom code here:
@@ -38,8 +38,9 @@ __docformat__ = 'plaintext'
 #       use the protected code section at the bottom of initialize().
 
 import logging
-logger = logging.getLogger('urban')
-logger.debug('Installing Product')
+
+logger = logging.getLogger("urban")
+logger.debug("Installing Product")
 
 import os
 import os.path
@@ -56,35 +57,47 @@ from Products.CMFCore import utils as cmfutils
 from Products.CMFPlone.utils import ToolInit
 from config import *
 
-DirectoryView.registerDirectory('skins', product_globals)
+DirectoryView.registerDirectory("skins", product_globals)
 
 
 ##code-section custom-init-head #fill in your manual code here
 from zope.i18nmessageid import MessageFactory
+
 UrbanMessage = MessageFactory("urban")
 from Products.validation import validation
 from validators.validator import isTextFieldConfiguredValidator
-validation.register(isTextFieldConfiguredValidator('isTextFieldConfigured'))
+
+validation.register(isTextFieldConfiguredValidator("isTextFieldConfigured"))
 from validators.validator import isValidStreetNameValidator
-validation.register(isValidStreetNameValidator('isValidStreetName'))
+
+validation.register(isValidStreetNameValidator("isValidStreetName"))
 from validators.validator import procedureChoiceValidator
-validation.register(procedureChoiceValidator('isValidProcedureChoice'))
+
+validation.register(procedureChoiceValidator("isValidProcedureChoice"))
 from validators.validator import isValidSectionValidator
-validation.register(isValidSectionValidator('isValidSection'))
+
+validation.register(isValidSectionValidator("isValidSection"))
 from validators.validator import isValidRadicalValidator
-validation.register(isValidRadicalValidator('isValidRadical'))
+
+validation.register(isValidRadicalValidator("isValidRadical"))
 from validators.validator import isValidBisValidator
-validation.register(isValidBisValidator('isValidBis'))
+
+validation.register(isValidBisValidator("isValidBis"))
 from validators.validator import isValidExposantValidator
-validation.register(isValidExposantValidator('isValidExposant'))
+
+validation.register(isValidExposantValidator("isValidExposant"))
 from validators.validator import isValidPuissanceValidator
-validation.register(isValidPuissanceValidator('isValidPuissance'))
+
+validation.register(isValidPuissanceValidator("isValidPuissance"))
 from validators.validator import isNotDuplicatedReferenceValidator
-validation.register(isNotDuplicatedReferenceValidator('isNotDuplicatedReference'))
+
+validation.register(isNotDuplicatedReferenceValidator("isNotDuplicatedReference"))
 from validators.validator import isReferenceValidator
-validation.register(isReferenceValidator('isReference'))
+
+validation.register(isReferenceValidator("isReference"))
 from validators.validator import isInteger
-validation.register(isInteger('isInteger'))
+
+validation.register(isInteger("isInteger"))
 ##/code-section custom-init-head
 
 import Products
@@ -151,13 +164,17 @@ def initialize(context):
     import Locality
     import OpinionRequestEventType
     import OrganisationTerm
+
     # [DX] TO DELETE > 2.5 [DX]
     import ParcellingTerm
+
     # [DX] TO DELETE > 2.5 [DX]
     import PcaTerm
     import PersonTitleTerm
+
     # [DX] TO DELETE > 2.5 [DX]
     import PortionOut
+
     # [DX] TO DELETE > 2.5 [DX]
     import Recipient
     import RecipientCadastre
@@ -207,52 +224,53 @@ def initialize(context):
 
     # Initialize portal tools
     tools = [UrbanTool.UrbanTool]
-    ToolInit( PROJECTNAME +' Tools',
-                tools = tools,
-                icon='tool.gif'
-                ).initialize( context )
+    ToolInit(PROJECTNAME + " Tools", tools=tools, icon="tool.gif").initialize(context)
 
     # Initialize portal content
     all_content_types, all_constructors, all_ftis = process_types(
-        listTypes(PROJECTNAME),
-        PROJECTNAME)
+        listTypes(PROJECTNAME), PROJECTNAME
+    )
 
     cmfutils.ContentInit(
-        PROJECTNAME + ' Content',
-        content_types      = all_content_types,
-        permission         = DEFAULT_ADD_CONTENT_PERMISSION,
-        extra_constructors = all_constructors,
-        fti                = all_ftis,
-        ).initialize(context)
+        PROJECTNAME + " Content",
+        content_types=all_content_types,
+        permission=DEFAULT_ADD_CONTENT_PERMISSION,
+        extra_constructors=all_constructors,
+        fti=all_ftis,
+    ).initialize(context)
 
     # Give it some extra permissions to control them on a per class limit
-    for i in range(0,len(all_content_types)):
-        klassname=all_content_types[i].__name__
+    for i in range(0, len(all_content_types)):
+        klassname = all_content_types[i].__name__
         if not klassname in ADD_CONTENT_PERMISSIONS:
             continue
 
-        context.registerClass(meta_type   = all_ftis[i]['meta_type'],
-                              constructors= (all_constructors[i],),
-                              permission  = ADD_CONTENT_PERMISSIONS[klassname])
+        context.registerClass(
+            meta_type=all_ftis[i]["meta_type"],
+            constructors=(all_constructors[i],),
+            permission=ADD_CONTENT_PERMISSIONS[klassname],
+        )
 
     ##code-section custom-init-bottom #fill in your manual code here
     ##/code-section custom-init-bottom
 
 
-for licence_type in URBAN_TYPES + ['UrbanCertificateBase']:
+for licence_type in URBAN_TYPES + ["UrbanCertificateBase"]:
     if hasattr(content.licence, licence_type):
         alias_module(
-            'Products.urban.{}'.format(licence_type),
-            getattr(content.licence, licence_type)
+            "Products.urban.{}".format(licence_type),
+            getattr(content.licence, licence_type),
         )
+
 
 def check_id(self, id, **kwargs):
     """
     'photo' id is reserved for image field 'photo'.
     """
-    if id == 'photo':
+    if id == "photo":
         return True  # MUST return True if id is invalid !! (and None if valid)
     if id in self.aq_parent.objectIds():
-       return True
+        return True
+
 
 ATBlob.check_id = check_id

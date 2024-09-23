@@ -15,103 +15,257 @@ import Products.urban.Extensions as ext
 import os
 
 
-#utilities
+# utilities
 
-def check_role(self, role='Manager', context=None):
-    pms = api.portal.get_tool('portal_membership')
+
+def check_role(self, role="Manager", context=None):
+    pms = api.portal.get_tool("portal_membership")
     return pms.getAuthenticatedMember().has_role(role, context)
 
 
-def createStreet(city, zipcode, streetcode, streetname, bestAddresskey=0, startdate=None, enddate=None, regionalroad='', ex_streets={}, **kwargs):
+def createStreet(
+    city,
+    zipcode,
+    streetcode,
+    streetname,
+    bestAddresskey=0,
+    startdate=None,
+    enddate=None,
+    regionalroad="",
+    ex_streets={},
+    **kwargs
+):
     """
-      Creates a Street with given parameters
+    Creates a Street with given parameters
     """
     out = []
     site = api.portal.get()
-    wtool = api.portal.get_tool('portal_workflow')
-    utool = api.portal.get_tool('portal_urban')
-    #get the folder where we are going the create the streets in
-    streetFolder = getattr(utool, 'streets')
-    #first element is the city and second is the street
-    #check if we need to create the city
+    wtool = api.portal.get_tool("portal_workflow")
+    utool = api.portal.get_tool("portal_urban")
+    # get the folder where we are going the create the streets in
+    streetFolder = getattr(utool, "streets")
+    # first element is the city and second is the street
+    # check if we need to create the city
     cityId = site.plone_utils.normalizeString(city)
 
     if not city in ex_streets:
-        ex_streets[city] = {'cityId': '', 'zip': zipcode, 'streets': {}}
-    #we check if the city has always the same zip
-    if ex_streets[city]['zip'] != zipcode:
-        out.append("! Current record: city '%s', zip '%s', name '%s', streetcode '%s', bakey '%s', regroad '%s', startdate '%s', enddate '%s'" % (city, zipcode, streetname, streetcode, bestAddresskey, regionalroad, startdate, enddate))
-        out.append("&nbsp;&nbsp;... The existing city '%s' has zip '%s'" % (city, ex_streets[city]['zip']))
+        ex_streets[city] = {"cityId": "", "zip": zipcode, "streets": {}}
+    # we check if the city has always the same zip
+    if ex_streets[city]["zip"] != zipcode:
+        out.append(
+            "! Current record: city '%s', zip '%s', name '%s', streetcode '%s', bakey '%s', regroad '%s', startdate '%s', enddate '%s'"
+            % (
+                city,
+                zipcode,
+                streetname,
+                streetcode,
+                bestAddresskey,
+                regionalroad,
+                startdate,
+                enddate,
+            )
+        )
+        out.append(
+            "&nbsp;&nbsp;... The existing city '%s' has zip '%s'"
+            % (city, ex_streets[city]["zip"])
+        )
     cityTemp = cityId
     counter = 1
-    if ex_streets[city]['cityId'] == '':
+    if ex_streets[city]["cityId"] == "":
         while hasattr(streetFolder, cityId):
             cityId = "%s%d" % (cityTemp, counter)
             counter += 1
-        ex_streets[city]['cityId'] = cityId
-        #if the city doesnt exist we create it
-        streetFolder.invokeFactory('City', id=cityId, title=city, zipCode=zipcode)
+        ex_streets[city]["cityId"] = cityId
+        # if the city doesnt exist we create it
+        streetFolder.invokeFactory("City", id=cityId, title=city, zipCode=zipcode)
         cityObj = getattr(streetFolder, cityId)
         cityObj.reindexObject()
-    cityId = ex_streets[city]['cityId']
+    cityId = ex_streets[city]["cityId"]
     cityObj = getattr(streetFolder, cityId)
 
-    #transform dates into DateTimes
+    # transform dates into DateTimes
     if startdate:
         startdate = DateTime(startdate.__str__())
     if enddate:
         enddate = DateTime(enddate.__str__())
 
-    #some checks
+    # some checks
     create = True
     disable = False
-    for street in ex_streets[city]['streets'].keys():
-        streetdic = ex_streets[city]['streets'][street]
+    for street in ex_streets[city]["streets"].keys():
+        streetdic = ex_streets[city]["streets"][street]
         diff_reg_road = False
-        #current record is already existing
-        #not an historical record: bakey is not 0 and is unique
-        #historical record: bakey + begindate is unique
-        if (enddate is None and bestAddresskey and bestAddresskey == streetdic['bestAddressKey'] and streetdic['endDate'] is None) or (enddate is not None and bestAddresskey == streetdic['bestAddressKey'] and startdate.Date() == streetdic['startDate'].Date()):
-            #the current record already exists, we don't create it again
+        # current record is already existing
+        # not an historical record: bakey is not 0 and is unique
+        # historical record: bakey + begindate is unique
+        if (
+            enddate is None
+            and bestAddresskey
+            and bestAddresskey == streetdic["bestAddressKey"]
+            and streetdic["endDate"] is None
+        ) or (
+            enddate is not None
+            and bestAddresskey == streetdic["bestAddressKey"]
+            and startdate.Date() == streetdic["startDate"].Date()
+        ):
+            # the current record already exists, we don't create it again
             create = False
             #!!! TO BE DONE WHEN UPDATING
             #!!! WE NEED TO COMPARE EACH FIELD TO UPDATE INFO IN CASE OF DIFFERENCE
-            out.append("> Existing record: city '%s', name '%s', streetcode '%s', bakey '%s', regroad '%s', startdate '%s', enddate '%s'" % (city, streetname, streetcode, bestAddresskey, regionalroad, startdate, enddate))
+            out.append(
+                "> Existing record: city '%s', name '%s', streetcode '%s', bakey '%s', regroad '%s', startdate '%s', enddate '%s'"
+                % (
+                    city,
+                    streetname,
+                    streetcode,
+                    bestAddresskey,
+                    regionalroad,
+                    startdate,
+                    enddate,
+                )
+            )
         else:
-            #current record is not an historical record
+            # current record is not an historical record
             if enddate is None:
                 ### we check if the street name is already used !
-                #no comparison if existing street is disabled
-                if streetdic['state'] == 'enabled' and streetdic['streetName'] == streetname:
-                    #if the two records are identical except the regional road, we choose to disable record with reg road
-                    #already identicals: city, zipcode, commune, street
-                    #streetcode must be identicals, current reg road and existing reg road must be different
-                    #we disable the record with a regional road
-                    if streetcode == streetdic['streetCode'] and regionalroad != streetdic['regionalRoad']:
-                        if regionalroad and not streetdic['regionalRoad']:
+                # no comparison if existing street is disabled
+                if (
+                    streetdic["state"] == "enabled"
+                    and streetdic["streetName"] == streetname
+                ):
+                    # if the two records are identical except the regional road, we choose to disable record with reg road
+                    # already identicals: city, zipcode, commune, street
+                    # streetcode must be identicals, current reg road and existing reg road must be different
+                    # we disable the record with a regional road
+                    if (
+                        streetcode == streetdic["streetCode"]
+                        and regionalroad != streetdic["regionalRoad"]
+                    ):
+                        if regionalroad and not streetdic["regionalRoad"]:
                             disable = True
                             diff_reg_road = True
-                            out.append("! Disabled current record because <> reg road: city '%s', name '%s', streetcode '%s', bakey '%s', regroad '%s', startdate '%s', enddate '%s'" % (city, streetname, streetcode, bestAddresskey, regionalroad, startdate, enddate))
-                            out.append("&nbsp;&nbsp;... existing: city '%s', name '%s', streetcode '%s', bakey '%s', regroad '%s', startdate '%s', enddate '%s', state '%s', <a href='%s'>url</a>" % (city, streetname, streetdic['streetCode'], streetdic['bestAddressKey'], streetdic['regionalRoad'], streetdic['startDate'], streetdic['endDate'], streetdic['state'], streetdic['obj'].absolute_url()))
-                        elif not regionalroad and streetdic['regionalRoad']:
+                            out.append(
+                                "! Disabled current record because <> reg road: city '%s', name '%s', streetcode '%s', bakey '%s', regroad '%s', startdate '%s', enddate '%s'"
+                                % (
+                                    city,
+                                    streetname,
+                                    streetcode,
+                                    bestAddresskey,
+                                    regionalroad,
+                                    startdate,
+                                    enddate,
+                                )
+                            )
+                            out.append(
+                                "&nbsp;&nbsp;... existing: city '%s', name '%s', streetcode '%s', bakey '%s', regroad '%s', startdate '%s', enddate '%s', state '%s', <a href='%s'>url</a>"
+                                % (
+                                    city,
+                                    streetname,
+                                    streetdic["streetCode"],
+                                    streetdic["bestAddressKey"],
+                                    streetdic["regionalRoad"],
+                                    streetdic["startDate"],
+                                    streetdic["endDate"],
+                                    streetdic["state"],
+                                    streetdic["obj"].absolute_url(),
+                                )
+                            )
+                        elif not regionalroad and streetdic["regionalRoad"]:
                             diff_reg_road = True
-                            if api.content.get_state(streetdic['obj']) == 'enabled':
-                                api.content.transition(obj=streetdic['obj'], transition='disable')
-                                #wtool.doActionFor(streetdic['obj'], 'disable')
-                                out.append("! Disabled existing record because <> reg road: city '%s', name '%s', streetcode '%s', bakey '%s', regroad '%s', startdate '%s', enddate '%s', state '%s', <a href='%s'>url</a>" % (city, streetname, streetdic['streetCode'], streetdic['bestAddressKey'], streetdic['regionalRoad'], streetdic['startDate'], streetdic['endDate'], streetdic['state'], streetdic['obj'].absolute_url()))
-                                out.append("&nbsp;&nbsp;... Current record: city '%s', name '%s', streetcode '%s', bakey '%s', regroad '%s', startdate '%s', enddate '%s'" % (city, streetname, streetcode, bestAddresskey, regionalroad, startdate, enddate))
-                    #if we haven't found a different reg road case, we report an error
+                            if api.content.get_state(streetdic["obj"]) == "enabled":
+                                api.content.transition(
+                                    obj=streetdic["obj"], transition="disable"
+                                )
+                                # wtool.doActionFor(streetdic['obj'], 'disable')
+                                out.append(
+                                    "! Disabled existing record because <> reg road: city '%s', name '%s', streetcode '%s', bakey '%s', regroad '%s', startdate '%s', enddate '%s', state '%s', <a href='%s'>url</a>"
+                                    % (
+                                        city,
+                                        streetname,
+                                        streetdic["streetCode"],
+                                        streetdic["bestAddressKey"],
+                                        streetdic["regionalRoad"],
+                                        streetdic["startDate"],
+                                        streetdic["endDate"],
+                                        streetdic["state"],
+                                        streetdic["obj"].absolute_url(),
+                                    )
+                                )
+                                out.append(
+                                    "&nbsp;&nbsp;... Current record: city '%s', name '%s', streetcode '%s', bakey '%s', regroad '%s', startdate '%s', enddate '%s'"
+                                    % (
+                                        city,
+                                        streetname,
+                                        streetcode,
+                                        bestAddresskey,
+                                        regionalroad,
+                                        startdate,
+                                        enddate,
+                                    )
+                                )
+                    # if we haven't found a different reg road case, we report an error
                     if not diff_reg_road:
-                        out.append("! Current record: city '%s', name '%s', streetcode '%s', bakey '%s', regroad '%s', startdate '%s', enddate '%s'" % (city, streetname, streetcode, bestAddresskey, regionalroad, startdate, enddate))
-                        out.append("&nbsp;&nbsp;... Found same street name '%s' in city '%s': streetcode '%s', bakey '%s', regroad '%s', startdate '%s', enddate '%s', state '%s', <a href='%s'>url</a>" % (streetname, city, streetdic['streetCode'], streetdic['bestAddressKey'], streetdic['regionalRoad'], streetdic['startDate'], streetdic['endDate'], streetdic['state'], streetdic['obj'].absolute_url()))
+                        out.append(
+                            "! Current record: city '%s', name '%s', streetcode '%s', bakey '%s', regroad '%s', startdate '%s', enddate '%s'"
+                            % (
+                                city,
+                                streetname,
+                                streetcode,
+                                bestAddresskey,
+                                regionalroad,
+                                startdate,
+                                enddate,
+                            )
+                        )
+                        out.append(
+                            "&nbsp;&nbsp;... Found same street name '%s' in city '%s': streetcode '%s', bakey '%s', regroad '%s', startdate '%s', enddate '%s', state '%s', <a href='%s'>url</a>"
+                            % (
+                                streetname,
+                                city,
+                                streetdic["streetCode"],
+                                streetdic["bestAddressKey"],
+                                streetdic["regionalRoad"],
+                                streetdic["startDate"],
+                                streetdic["endDate"],
+                                streetdic["state"],
+                                streetdic["obj"].absolute_url(),
+                            )
+                        )
 
                 ### we check if the street code is already used !
-                #current streetcode can be '0', we don't check this street code.
-                if not diff_reg_road and streetcode and streetcode != '0':
-                    #no comparison if existing street is disabled
-                    if streetdic['state'] == 'enabled' and streetdic['streetCode'] == streetcode:
-                        out.append("! Current record: city '%s', name '%s', streetcode '%s', bakey '%s', regroad '%s', startdate '%s', enddate '%s'" % (city, streetname, streetcode, bestAddresskey, regionalroad, startdate, enddate))
-                        out.append("&nbsp;&nbsp;... Found same street code '%s' in city '%s': name '%s', bakey '%s', regroad '%s', startdate '%s', enddate '%s', state '%s', <a href='%s'>url</a>" % (streetcode, city, streetdic['streetName'], streetdic['bestAddressKey'], streetdic['regionalRoad'], streetdic['startDate'], streetdic['endDate'], streetdic['state'], streetdic['obj'].absolute_url()))
+                # current streetcode can be '0', we don't check this street code.
+                if not diff_reg_road and streetcode and streetcode != "0":
+                    # no comparison if existing street is disabled
+                    if (
+                        streetdic["state"] == "enabled"
+                        and streetdic["streetCode"] == streetcode
+                    ):
+                        out.append(
+                            "! Current record: city '%s', name '%s', streetcode '%s', bakey '%s', regroad '%s', startdate '%s', enddate '%s'"
+                            % (
+                                city,
+                                streetname,
+                                streetcode,
+                                bestAddresskey,
+                                regionalroad,
+                                startdate,
+                                enddate,
+                            )
+                        )
+                        out.append(
+                            "&nbsp;&nbsp;... Found same street code '%s' in city '%s': name '%s', bakey '%s', regroad '%s', startdate '%s', enddate '%s', state '%s', <a href='%s'>url</a>"
+                            % (
+                                streetcode,
+                                city,
+                                streetdic["streetName"],
+                                streetdic["bestAddressKey"],
+                                streetdic["regionalRoad"],
+                                streetdic["startDate"],
+                                streetdic["endDate"],
+                                streetdic["state"],
+                                streetdic["obj"].absolute_url(),
+                            )
+                        )
             else:
                 disable = True
 
@@ -121,105 +275,147 @@ def createStreet(city, zipcode, streetcode, streetname, bestAddresskey=0, startd
         while hasattr(aq_base(cityObj), streetTest):
             i += 1
             if not disable:  # no need to warn for an historical record: normal case
-                out.append("info: Found existing id '%s' in entity '%s'" % (streetTest, cityObj.Title().decode('utf-8')))
+                out.append(
+                    "info: Found existing id '%s' in entity '%s'"
+                    % (streetTest, cityObj.Title().decode("utf-8"))
+                )
             streetTest = streetId + str(i)
         streetId = streetTest
         try:
-            streetObjId = cityObj.invokeFactory('Street', id=streetId, streetCode=streetcode, streetName=streetname, bestAddressKey=bestAddresskey, startDate=startdate, endDate=enddate, regionalRoad=regionalroad)
+            streetObjId = cityObj.invokeFactory(
+                "Street",
+                id=streetId,
+                streetCode=streetcode,
+                streetName=streetname,
+                bestAddressKey=bestAddresskey,
+                startDate=startdate,
+                endDate=enddate,
+                regionalRoad=regionalroad,
+            )
             streetObj = getattr(cityObj, streetObjId)
-            #if a street has an endDate, we disable it as this should not be
-            #used anymore but present for history purpose
+            # if a street has an endDate, we disable it as this should not be
+            # used anymore but present for history purpose
             if disable or (enddate and enddate < DateTime()):
-                wtool.doActionFor(streetObj, 'disable')
-                out.append("! Disabled current record because historical: city '%s', name '%s', streetcode '%s', bakey '%s', regroad '%s', startdate '%s', enddate '%s'" % (city, streetname, streetcode, bestAddresskey, regionalroad, startdate, enddate))
+                wtool.doActionFor(streetObj, "disable")
+                out.append(
+                    "! Disabled current record because historical: city '%s', name '%s', streetcode '%s', bakey '%s', regroad '%s', startdate '%s', enddate '%s'"
+                    % (
+                        city,
+                        streetname,
+                        streetcode,
+                        bestAddresskey,
+                        regionalroad,
+                        startdate,
+                        enddate,
+                    )
+                )
             streetObj.reindexObject()
-            #we add the current record in the existing streets dictionary for next checks
-            ex_streets[city]['streets'][streetObjId] = {
-                'streetCode': streetcode,
-                'streetName': streetname,
-                'bestAddressKey': bestAddresskey,
-                'startDate': startdate,
-                'endDate': enddate,
-                'regionalRoad': regionalroad,
-                'state': wtool.getInfoFor(streetObj, 'review_state'),
-                'obj': streetObj,
+            # we add the current record in the existing streets dictionary for next checks
+            ex_streets[city]["streets"][streetObjId] = {
+                "streetCode": streetcode,
+                "streetName": streetname,
+                "bestAddressKey": bestAddresskey,
+                "startDate": startdate,
+                "endDate": enddate,
+                "regionalRoad": regionalroad,
+                "state": wtool.getInfoFor(streetObj, "review_state"),
+                "obj": streetObj,
             }
         except Exception, msg:
-            out.append("!! Problem during creation of street id '%s', code '%s' in city '%s': name '%s', bakey '%s': %s" % (streetId, streetcode, city, streetname, bestAddresskey, msg))
+            out.append(
+                "!! Problem during creation of street id '%s', code '%s' in city '%s': name '%s', bakey '%s': %s"
+                % (streetId, streetcode, city, streetname, bestAddresskey, msg)
+            )
 
     return out
 
 
 def load_existing_streets(self, dic):
     """
-      stores in a dictionnary informations about existing streets
+    stores in a dictionnary informations about existing streets
     """
-    tool = api.portal.get_tool('portal_urban')
-    wtool = api.portal.get_tool('portal_workflow')
-    out = ['Existing streets in Plone']
-    localities = tool.streets.objectValues('City')
+    tool = api.portal.get_tool("portal_urban")
+    wtool = api.portal.get_tool("portal_workflow")
+    out = ["Existing streets in Plone"]
+    localities = tool.streets.objectValues("City")
     for locality in localities:
         loc_title = locality.Title()
-        dic[loc_title] = {'cityId': locality.id, 'zip': locality.getZipCode(), 'streets': {}}
+        dic[loc_title] = {
+            "cityId": locality.id,
+            "zip": locality.getZipCode(),
+            "streets": {},
+        }
         cnt_ba = cnt_man = 0
-        streets = dic[loc_title]['streets']
-        for street in locality.objectValues('Street'):
+        streets = dic[loc_title]["streets"]
+        for street in locality.objectValues("Street"):
             id = street.getId()
             if id in streets:  # never, id is unique in a folder
-                out.append("Loading existing streets: existing id '%s' in locality '%s'" % (id, locality))
+                out.append(
+                    "Loading existing streets: existing id '%s' in locality '%s'"
+                    % (id, locality)
+                )
             if street.getBestAddressKey():
                 cnt_ba += 1
             else:
                 cnt_man += 1
             streets[id] = {
-                'streetCode': street.getStreetCode(),
-                'streetName': street.getStreetName(),
-                'bestAddressKey': street.getBestAddressKey(),
-                'startDate': street.getStartDate(),
-                'endDate': street.getEndDate(),
-                'regionalRoad': street.getRegionalRoad(),
-                'state': wtool.getInfoFor(street, 'review_state'),
-                'obj': street,
+                "streetCode": street.getStreetCode(),
+                "streetName": street.getStreetName(),
+                "bestAddressKey": street.getBestAddressKey(),
+                "startDate": street.getStartDate(),
+                "endDate": street.getEndDate(),
+                "regionalRoad": street.getRegionalRoad(),
+                "state": wtool.getInfoFor(street, "review_state"),
+                "obj": street,
             }
-            if street.getEndDate() is not None and wtool.getInfoFor(street, 'review_state') == 'enabled':
-                out.append("! Found an history street enabled! : locality '%s', street '%s', <a href='%s'>url</a>" % (loc_title, street.Title(), street.absolute_url()))
-        out.append("Locality: '%s', bestaddress streets:%d, manual streets:%d" % (loc_title, cnt_ba, cnt_man))
+            if (
+                street.getEndDate() is not None
+                and wtool.getInfoFor(street, "review_state") == "enabled"
+            ):
+                out.append(
+                    "! Found an history street enabled! : locality '%s', street '%s', <a href='%s'>url</a>"
+                    % (loc_title, street.Title(), street.absolute_url())
+                )
+        out.append(
+            "Locality: '%s', bestaddress streets:%d, manual streets:%d"
+            % (loc_title, cnt_ba, cnt_man)
+        )
     if out:
-        out[-1] += '<br />'
+        out[-1] += "<br />"
     return out
 
 
-def import_streets_fromdb(self, cityName=''):
+def import_streets_fromdb(self, cityName=""):
     """
-      Method for importing streets from a PostgreSQL db
-      We need the zipCode
-      CityName, ZipCode, StreetCode, StreetName
-      In the portal_urban.streets folder, we create a hierarchy of
-      'City's containing 'Street's
+    Method for importing streets from a PostgreSQL db
+    We need the zipCode
+    CityName, ZipCode, StreetCode, StreetName
+    In the portal_urban.streets folder, we create a hierarchy of
+    'City's containing 'Street's
     """
     if not check_role(self):
         return "You must have a manager role to run this script"
 
-    out = ['<html>']
-    lf = '<br />'
+    out = ["<html>"]
+    lf = "<br />"
     if not cityName:
-        #out.append("available properties:%s"%portal.portal_memberdata.propertyItems())
+        # out.append("available properties:%s"%portal.portal_memberdata.propertyItems())
         out.append("You must call the script followed by needed parameters:")
         out.append("-> cityName=... name of the commune")
         out.append("by example ...?cityName=La Bruyère<br/>")
         return lf.join(out)
 
-    tool = api.portal.get_tool('portal_urban')
+    tool = api.portal.get_tool("portal_urban")
     if tool is None:
         return "No portal_urban found on this site: is urban installed?"
-    if not hasattr(tool, 'streets'):
+    if not hasattr(tool, "streets"):
         return "The 'streets' folder does not exist in portal_urban!"
 
     ex_streets = {}
     ret = load_existing_streets(self, ex_streets)
     out += ret
 
-    config_bestaddress = ExternalConfig('bestaddress')
+    config_bestaddress = ExternalConfig("bestaddress")
     bestaddress = BestaddressService(**(config_bestaddress.bestaddress))
     session = bestaddress.new_session()
     results = session.query_streets(cityName)
@@ -241,39 +437,41 @@ def import_streets_fromdb(self, cityName=''):
             startdate=street.begin_date,
             enddate=street.end_date,
             regionalroad=street.regional_road,
-            ex_streets=ex_streets
+            ex_streets=ex_streets,
         )
         out += ret
         i = i + 1
-    return lf.join(out) + '</html>'
+    return lf.join(out) + "</html>"
 
 
-def import_streets_fromfile(self, filePath=None, separator=';'):
+def import_streets_fromfile(self, filePath=None, separator=";"):
     """
-      Method for importing streets from a file
-      The CSV needs to have the following format :
-      CityName, ZipCode, StreetCode, StreetName
-      An example is available in the Extensions/streets.txt file of Products.urban
-      In the portal_urban.streets folder, we create a hierarchy of
-      'City's containing 'Street's
+    Method for importing streets from a file
+    The CSV needs to have the following format :
+    CityName, ZipCode, StreetCode, StreetName
+    An example is available in the Extensions/streets.txt file of Products.urban
+    In the portal_urban.streets folder, we create a hierarchy of
+    'City's containing 'Street's
     """
-    if not self.portal_type == 'UrbanTool':
+    if not self.portal_type == "UrbanTool":
         raise Unauthorized("This script must be called on portal_urban!")
-    if not hasattr(self, 'streets'):
+    if not hasattr(self, "streets"):
         raise AttributeError("The streets folder does not exist in portal_urban!")
 
-    #if no filePath is defined, take the streets.txt file stored here
+    # if no filePath is defined, take the streets.txt file stored here
     if not filePath:
-        filePath = ext.__path__[0] + '/streets.txt'
+        filePath = ext.__path__[0] + "/streets.txt"
         if not os.path.isfile(filePath):
-            raise ImportError("The streets.txt file does not exist in Products.urban.Extensions.  Try using your own file by passing it as parameter to this ExternalMethod.")
+            raise ImportError(
+                "The streets.txt file does not exist in Products.urban.Extensions.  Try using your own file by passing it as parameter to this ExternalMethod."
+            )
 
     ex_streets = {}
     ret = load_existing_streets(self, ex_streets)
     if ret:
-        print '\n'.join(ret)
+        print "\n".join(ret)
 
-    file = open(filePath, 'r')
+    file = open(filePath, "r")
     numberOfRecords = len(file.readlines())
     file.seek(0)
     i = 1
@@ -282,105 +480,131 @@ def import_streets_fromfile(self, filePath=None, separator=';'):
         city, zipcode, streetcode, streetname = line.strip().split(separator)
         ret = createStreet(city, zipcode, streetcode, streetname, ex_streets=ex_streets)
         if ret:
-            print '\n'.join(ret)
+            print "\n".join(ret)
         i = i + 1
     file.close()
     return "%d streets have been imported" % numberOfRecords
 
 
-def import_localities_fromfile(self, filePath=None, separator=';'):
+def import_localities_fromfile(self, filePath=None, separator=";"):
     """
-      Method for importing localities from a file
-      The CSV needs to have the following format :
-      title and alsoCalled (with '\n' to separate the elements)
-      An example is available in the Extensions/localities.txt file of Products.urban
-      In the portal_urban.streets folder, we create a hierarchy of
-      'City's containing 'Locality's
+    Method for importing localities from a file
+    The CSV needs to have the following format :
+    title and alsoCalled (with '\n' to separate the elements)
+    An example is available in the Extensions/localities.txt file of Products.urban
+    In the portal_urban.streets folder, we create a hierarchy of
+    'City's containing 'Locality's
     """
-    if not self.portal_type == 'UrbanTool':
+    if not self.portal_type == "UrbanTool":
         raise Unauthorized("This script must be called on portal_urban!")
-    if not hasattr(self, 'streets'):
+    if not hasattr(self, "streets"):
         raise AttributeError("The streets folder does not exist in portal_urban!")
 
-    #if no filePath is defined, take the localities.txt file stored here
+    # if no filePath is defined, take the localities.txt file stored here
     if not filePath:
-        filePath = ext.__path__[0] + '/localities.txt'
+        filePath = ext.__path__[0] + "/localities.txt"
         if not os.path.isfile(filePath):
-            raise ImportError("The localities.txt file does not exist in Products.urban.Extensions.  Try using your own file by passing it as parameter to this ExternalMethod.")
+            raise ImportError(
+                "The localities.txt file does not exist in Products.urban.Extensions.  Try using your own file by passing it as parameter to this ExternalMethod."
+            )
 
-    file = open(filePath, 'r')
+    file = open(filePath, "r")
     numberOfRecords = len(file.readlines())
     file.seek(0)
     i = 1
-    streetFolder = getattr(self, 'streets')
+    streetFolder = getattr(self, "streets")
     for line in file.readlines():
         print "Importing locality %d of %d" % (i, numberOfRecords)
         i = i + 1
         city, zipcode, localityName, alsoCalled = line.strip().split(separator)
         cityId = self.plone_utils.normalizeString(city)
         if not hasattr(aq_base(streetFolder), cityId):
-            #if the city still does not exist, we create it
-            cityObjId = streetFolder.invokeFactory('City', id=cityId, title=city, zipCode=zipcode)
+            # if the city still does not exist, we create it
+            cityObjId = streetFolder.invokeFactory(
+                "City", id=cityId, title=city, zipCode=zipcode
+            )
             cityObj = getattr(streetFolder, cityObjId)
             cityObj.reindexObject()
         else:
             cityObj = getattr(streetFolder, cityId)
             try:
                 localityId = self.plone_utils.normalizeString(localityName)
-                cityObj.invokeFactory('Locality', id=localityId, localityName=localityName, alsoCalled='\n'.join(alsoCalled.split('|')))
+                cityObj.invokeFactory(
+                    "Locality",
+                    id=localityId,
+                    localityName=localityName,
+                    alsoCalled="\n".join(alsoCalled.split("|")),
+                )
             except BadRequest:
                 print ("The locality with id '%s' already exists!" % (localityId))
                 file.close()
     file.close()
 
 
-def import_architects(self, filePath=None, separator=';'):
+def import_architects(self, filePath=None, separator=";"):
     """
-      Method for importing streets
-      The CSV needs to have the following format :
-      Title (Gender), Name, Society, FirstName, AddressStreet, AddressHouseNumber, AddressZipCode, AddressCity, Email, Telephone, Fax, NRNumber
-      An example is available in the Extensions/architects.txt file of Products.urban
-      In the urban.architects folder, we create a list of 'Architect's
+    Method for importing streets
+    The CSV needs to have the following format :
+    Title (Gender), Name, Society, FirstName, AddressStreet, AddressHouseNumber, AddressZipCode, AddressCity, Email, Telephone, Fax, NRNumber
+    An example is available in the Extensions/architects.txt file of Products.urban
+    In the urban.architects folder, we create a list of 'Architect's
     """
-    if not self.portal_type == 'UrbanTool':
+    if not self.portal_type == "UrbanTool":
         raise Unauthorized("This script must be called on portal_urban!")
-    #check that the 'architects' folder exists at the upper level
-    if not hasattr(self.aq_parent.aq_inner.urban, 'architects'):
+    # check that the 'architects' folder exists at the upper level
+    if not hasattr(self.aq_parent.aq_inner.urban, "architects"):
         raise AttributeError("The architects folder does not exist in 'urban' folder!")
 
-    #if no filePath is defined, take the architects.txt file stored here
+    # if no filePath is defined, take the architects.txt file stored here
     if not filePath:
-        filePath = ext.__path__[0] + '/architects.txt'
+        filePath = ext.__path__[0] + "/architects.txt"
         if not os.path.isfile(filePath):
-            raise ImportError("The architects.txt file does not exist in Products.urban.Extensions.  Try using your own file by passing it as parameter to this ExternalMethod.")
+            raise ImportError(
+                "The architects.txt file does not exist in Products.urban.Extensions.  Try using your own file by passing it as parameter to this ExternalMethod."
+            )
 
-    file = open(filePath, 'r')
+    file = open(filePath, "r")
     numberOfRecords = len(file.readlines())
     file.seek(0)
     i = 1
-    #get the folder where we are going the create the architects in
-    architectsFolder = getattr(self.aq_inner.aq_parent.urban, 'architects')
+    # get the folder where we are going the create the architects in
+    architectsFolder = getattr(self.aq_inner.aq_parent.urban, "architects")
     for line in file.readlines():
         print "Importing architect %d of %d" % (i, numberOfRecords)
-        title, name, firstname, society, addressstreet, addresshousenumber, addresszipcode, addresscity, email, telephone, fax, nrnumber = line.strip().split(separator)
+        (
+            title,
+            name,
+            firstname,
+            society,
+            addressstreet,
+            addresshousenumber,
+            addresszipcode,
+            addresscity,
+            email,
+            telephone,
+            fax,
+            nrnumber,
+        ) = line.strip().split(separator)
         architectId = self.plone_utils.normalizeString("%s-%s" % (name, firstname))
         if not hasattr(architectsFolder, architectId):
-            #if the architect still does not exist, we create it
+            # if the architect still does not exist, we create it
             dict = {
-                'personTitle': title,
-                'name1': name,
-                'name2': firstname,
-                'society': society,
-                'street': addressstreet,
-                'number': addresshousenumber,
-                'zipcode': addresszipcode,
-                'city': addresscity,
-                'email': email,
-                'phone': telephone,
-                'fax': fax,
-                'nationalRegister': nrnumber,
+                "personTitle": title,
+                "name1": name,
+                "name2": firstname,
+                "society": society,
+                "street": addressstreet,
+                "number": addresshousenumber,
+                "zipcode": addresszipcode,
+                "city": addresscity,
+                "email": email,
+                "phone": telephone,
+                "fax": fax,
+                "nationalRegister": nrnumber,
             }
-            architectObjId = architectsFolder.invokeFactory('Architect', id=architectId, **dict)
+            architectObjId = architectsFolder.invokeFactory(
+                "Architect", id=architectId, **dict
+            )
             architectObj = getattr(architectsFolder, architectObjId)
             architectObj.reindexObject()
         i = i + 1

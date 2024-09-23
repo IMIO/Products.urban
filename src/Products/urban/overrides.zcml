@@ -24,14 +24,6 @@
         permission="cmf.ManagePortal"
         />
 
-    <configure package="collective.eeafaceted.collectionwidget">
-        <utility
-           factory="Products.urban.dashboard.vocabularies.CollectionCategory"
-           name="collective.eeafaceted.collectionwidget.collectioncategoryvocabulary"
-           provides="zope.schema.interfaces.IVocabularyFactory"
-        />
-    </configure>
-
     <configure package="imio.actionspanel">
         <browser:page
            for="*"
@@ -50,7 +42,7 @@
     <configure package="imio.dashboard">
         <utility
            factory="Products.urban.dashboard.vocabularies.DashboardCollections"
-           name="imio.dashboard.conditionawarecollectionvocabulary"
+           name="collective.eeafaceted.collectionwidget.cachedcollectionvocabulary"
            provides="zope.schema.interfaces.IVocabularyFactory"
         />
     </configure>

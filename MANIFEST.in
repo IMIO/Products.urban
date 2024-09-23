@@ -4,6 +4,7 @@
   include buildout.cfg
   include portals.cfg
   include versions.cfg
+  prune news
   recursive-include docs *.py
   recursive-include docs *.rst
   recursive-include docs *.txt
@@ -46,3 +47,6 @@
   recursive-include docs *.pickle
   recursive-include docs *.png
   recursive-include docs Makefile
+  recursive-include src *.cpy
+  recursive-include src *.ods
+  exclude *.toml

@@ -7,7 +7,7 @@ from Products.urban.interfaces import ITheLicenceEvent, ICommunalCouncilEvent
 
 
 class PMWSClientView(BrowserView):
-    """ adpats an urban event to provides all the methodis needed by pm.wsclient """
+    """adpats an urban event to provides all the methodis needed by pm.wsclient"""
 
     def __init__(self, context, request):
         super(PMWSClientView, self).__init__(context, request)

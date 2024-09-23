@@ -14,4 +14,4 @@ class LicenceFolderManager(AssignTaskUser):
         if licence.getFoldermanagers():
             folder_manager = licence.getFoldermanagers()[0]
             return folder_manager.getPloneUserId()
-        return 'to_assign'
+        return "to_assign"

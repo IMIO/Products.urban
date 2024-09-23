@@ -7,14 +7,16 @@
         <tal:if condition="python: category == 'CWATUPE'">
         <a href="#"
            class="tile"
-           tal:attributes="href string: ${view/url}?category=CODT"
+           id="switch-category"
+           tal:attributes="href string: ${view/url}?category=CODT#c11=codt&c2=${view/collection_uid}"
            i18n:translate="">
            To CODT procedures</a>
         </tal:if>
         <tal:if condition="not: python: category == 'CWATUPE'">
         <a href="#"
            class="tile"
-           tal:attributes="href string: ${view/url}/urban?category=CWATUPE"
+           id="switch-category"
+           tal:attributes="href string: ${view/url}/urban?category=CWATUPE#c11=cwatupe&c2=${view/collection_uid}"
            i18n:translate="">
            To CWATUPE procedures</a>
         </tal:if>
