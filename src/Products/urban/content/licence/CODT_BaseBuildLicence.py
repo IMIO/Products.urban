@@ -37,6 +37,8 @@ from Products.urban.utils import setSchemataForCODT_Inquiry
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
 
+from plone import api
+
 ##/code-section module-header
 
 optional_fields = [
@@ -461,6 +463,14 @@ schema = Schema(
             ),
         ),
         BooleanField(
+            name="d67copat",
+            default=False,
+            widget=BooleanField._properties["widget"](
+                label=_("urban_label_d67copat", default="D.67 CoPat"),
+            ),
+            schemata="urban_patrimony",
+        ),
+        BooleanField(
             name="financial_caution",
             default=False,
             widget=BooleanField._properties["widget"](
@@ -541,7 +551,6 @@ schema = Schema(
                     "Inspection",
                     "Ticket",
                     "ProjectMeeting",
-                    "PatrimonyCertificate",
                     "CODT_UrbanCertificateOne",
                     "UrbanCertificateOne",
                 ]
@@ -685,6 +694,25 @@ class CODT_BaseBuildLicence(
             ("optional", "Avis facultatif"),
         )
         return DisplayList(vocab)
+
+    security.declarePublic("get_bound_licences")
+
+    def get_bound_licences(self, licence_type=None):
+        bound_licences = []
+        bound_uids = self.getField("bound_licences").getRaw(self) or []
+        if bound_uids:
+            catalog = api.portal.get_tool("portal_catalog")
+            if licence_type:
+                brains = catalog(UID=bound_uids, portal_type=licence_type)
+            else:
+                brains = catalog(UID=bound_uids)
+            bound_licences = [b.getObject() for b in brains]
+        return bound_licences
+
+    security.declarePublic("get_bound_patrimonies")
+
+    def get_bound_patrimonies(self):
+        return self.get_bound_licences(licence_type="PatrimonyCertificate")
 
     def getCompositionMissingParts(self, *values):
         """ """

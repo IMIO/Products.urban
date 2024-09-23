@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 
 from Acquisition import aq_inner
+from Acquisition import aq_parent
 from HTMLParser import HTMLParser
 from Products.ATContentTypes.interfaces.file import IATFile
 from Products.urban.config import URBAN_ENVIRONMENT_TYPES
 from Products.urban.config import URBAN_TYPES
 from Products.urban.interfaces import IUrbanDoc
+from Products.urban.interfaces import IGenericLicence
 from datetime import datetime
 from imio.schedule.utils import tuple_to_interface
 from plone import api
@@ -16,6 +18,8 @@ import random
 import string
 import hashlib
 import pkg_resources
+import time
+
 
 
 def getCurrentFolderManager():
@@ -251,3 +255,34 @@ def convert_to_utf8(string):
 
 def now():
     return datetime.now()
+
+
+def get_licence_context(context, get_all_object=False, max_recurence = 5):
+    context_licence = IGenericLicence.providedBy(context)
+    parent = context
+    output = [context]
+    if context_licence:
+        return output
+    count = 0
+    error = False
+    while not context_licence:
+        parent = aq_parent(parent)
+        context_licence = IGenericLicence.providedBy(parent)
+        if get_all_object:
+            output.append(parent)
+        else:
+            output = [parent]
+        if count >= max_recurence:
+            error = True
+            break
+        count += 1
+    if error:
+        return None
+    return output
+
+
+def cache_key_30min(func, *args, **kwargs):
+    return (func.__name__, time.time() // (60 * 30), args, kwargs)
+
+
+WIDGET_DATE_END_YEAR = datetime.now().year + 25

@@ -60,7 +60,14 @@
              expression=""
              id="cwatupe_licence_breadcrumb.js"
              inline="False"/>
- -->
+
+ <javascript cacheable="True"
+             compression="safe"
+             cookable="True"
+             enabled="True"
+             expression=""
+             id="++resource++Products.urban.send_mail_action/popup.js"
+             inline="False"/>
  <!-- ##/code-section jsregistry.xml -->
 
 </object>

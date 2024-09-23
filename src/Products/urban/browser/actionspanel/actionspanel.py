@@ -39,6 +39,7 @@ class EventActionsPanelView(ActionsPanelView):
         self.ACCEPTABLE_ACTIONS = (
             "plonemeeting_wsclient_action_1",
             "plonemeeting_wsclient_action_2",
+            "send_mail_action"
         )
 
 
@@ -186,6 +187,12 @@ class TransitionsPanelView(ActionsPanelView):
             showHistory=True, forceRedirectAfterTransition=True, **kwargs
         )
 
+    def _check_if_transiton_present(self, transitions, transition_id):
+        return any([
+            transition["id"] == transition_id
+            for transition in transitions
+        ])
+
     def getTransitions(self):
         transitions = super(TransitionsPanelView, self).getTransitions()
         workflow = self.request.get(
@@ -194,60 +201,62 @@ class TransitionsPanelView(ActionsPanelView):
         if "frozen_suspension" in workflow.states:
             if api.content.get_state(self.context) == "frozen_suspension":
                 # add 'resume_thaw' fake transition
-                transitions.append(
-                    {
-                        "id": "resume_thaw",
-                        # if the transition.id is not translated, use translated transition.title...
-                        "title": translate(
-                            "resume_thaw", domain="plone", context=self.request
-                        ),
-                        "description": "",
-                        "name": "Resume_thaw",
-                        "may_trigger": True,
-                        "confirm": True,
-                        "confirmation_view": DEFAULT_CONFIRM_VIEW,
-                        "url": ""
-                        % {
-                            "content_url": self.context.absolute_url(),
-                            "portal_url": self.portal_url,
-                            "folder_url": "",
-                        },
-                        "icon": ""
-                        % {
-                            "content_url": self.context.absolute_url(),
-                            "portal_url": self.portal_url,
-                            "folder_url": "",
-                        },
-                    }
-                )
+                if not self._check_if_transiton_present(transitions, "resume_thaw"):
+                    transitions.append(
+                        {
+                            "id": "resume_thaw",
+                            # if the transition.id is not translated, use translated transition.title...
+                            "title": translate(
+                                "resume_thaw", domain="plone", context=self.request
+                            ),
+                            "description": "",
+                            "name": "Resume_thaw",
+                            "may_trigger": True,
+                            "confirm": True,
+                            "confirmation_view": DEFAULT_CONFIRM_VIEW,
+                            "url": ""
+                            % {
+                                "content_url": self.context.absolute_url(),
+                                "portal_url": self.portal_url,
+                                "folder_url": "",
+                            },
+                            "icon": ""
+                            % {
+                                "content_url": self.context.absolute_url(),
+                                "portal_url": self.portal_url,
+                                "folder_url": "",
+                            },
+                        }
+                    )
             else:
                 # add 'suspend_freeze' fake transition
-                transitions.append(
-                    {
-                        "id": "suspend_freeze",
-                        # if the transition.id is not translated, use translated transition.title...
-                        "title": translate(
-                            "suspend_freeze", domain="plone", context=self.request
-                        ),
-                        "description": "",
-                        "name": "Suspend_freeze",
-                        "may_trigger": True,
-                        "confirm": True,
-                        "confirmation_view": DEFAULT_CONFIRM_VIEW,
-                        "url": ""
-                        % {
-                            "content_url": self.context.absolute_url(),
-                            "portal_url": self.portal_url,
-                            "folder_url": "",
-                        },
-                        "icon": ""
-                        % {
-                            "content_url": self.context.absolute_url(),
-                            "portal_url": self.portal_url,
-                            "folder_url": "",
-                        },
-                    }
-                )
+                if not self._check_if_transiton_present(transitions, "suspend_freeze"):
+                    transitions.append(
+                        {
+                            "id": "suspend_freeze",
+                            # if the transition.id is not translated, use translated transition.title...
+                            "title": translate(
+                                "suspend_freeze", domain="plone", context=self.request
+                            ),
+                            "description": "",
+                            "name": "Suspend_freeze",
+                            "may_trigger": True,
+                            "confirm": True,
+                            "confirmation_view": DEFAULT_CONFIRM_VIEW,
+                            "url": ""
+                            % {
+                                "content_url": self.context.absolute_url(),
+                                "portal_url": self.portal_url,
+                                "folder_url": "",
+                            },
+                            "icon": ""
+                            % {
+                                "content_url": self.context.absolute_url(),
+                                "portal_url": self.portal_url,
+                                "folder_url": "",
+                            },
+                        }
+                    )
         return transitions
 
     def sortTransitions(self, lst):

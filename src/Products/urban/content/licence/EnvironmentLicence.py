@@ -289,7 +289,7 @@ class EnvironmentLicence(BaseFolder, EnvironmentBase, BrowserDefaultMixin):
 
     security.declarePublic("getApplicantsSignaletic")
 
-    def getApplicantsSignaletic(self, withaddress=False):
+    def getApplicantsSignaletic(self, withaddress=False, withtitle=True):
         """
         Returns a string representing the signaletic of every applicants
         """
@@ -301,7 +301,9 @@ class EnvironmentLicence(BaseFolder, EnvironmentBase, BrowserDefaultMixin):
                 signaletic += " %s " % translate(
                     "and", "urban", context=self.REQUEST
                 ).encode("utf8")
-            signaletic += applicant.getSignaletic(withaddress=withaddress)
+            signaletic += applicant.getSignaletic(
+                withaddress=withaddress, withtitle=withtitle
+            )
         return signaletic
 
     security.declarePublic("updateTitle")

@@ -20,6 +20,7 @@ import interfaces
 
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
+from Products.urban.utils import WIDGET_DATE_END_YEAR
 from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
@@ -71,6 +72,7 @@ schema = Schema(
                 description_msgid="street_start_date_descr",
                 format="%d/%m/%Y",
                 starting_year=1930,
+                ending_year=WIDGET_DATE_END_YEAR,
                 label="Startdate",
                 label_msgid="urban_label_startDate",
                 i18n_domain="urban",
@@ -85,6 +87,7 @@ schema = Schema(
                 description_msgid="street_end_date_descr",
                 format="%d/%m/%Y",
                 starting_year=1930,
+                ending_year=WIDGET_DATE_END_YEAR,
                 label="Enddate",
                 label_msgid="urban_label_endDate",
                 i18n_domain="urban",

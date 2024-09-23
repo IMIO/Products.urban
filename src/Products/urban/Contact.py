@@ -296,6 +296,7 @@ class Contact(BaseContent, BrowserDefaultMixin):
         reverse=False,
         remove_comma=False,
         inverted_address=False,
+        withtitle=True,
     ):
         """
         Returns the contact base signaletic : title and names
@@ -303,7 +304,7 @@ class Contact(BaseContent, BrowserDefaultMixin):
         urban_tool = api.portal.get_tool("portal_urban")
         invertnames = urban_tool.getInvertAddressNames()
         nameSignaletic = self._getNameSignaletic(
-            short, linebyline, reverse, invertnames
+            short, linebyline, reverse, invertnames, withtitle=withtitle
         )
         if not withaddress:
             if not linebyline:
@@ -364,7 +365,9 @@ class Contact(BaseContent, BrowserDefaultMixin):
                 address = u"<p>%s<br />%s</p>" % (nameSignaletic, addressSignaletic)
                 return address
 
-    def _getNameSignaletic(self, short, linebyline, reverse=False, invertnames=False):
+    def _getNameSignaletic(
+        self, short, linebyline, reverse=False, invertnames=False, withtitle=True
+    ):
         title = self.getPersonTitleValue(short, False, reverse)
         name1 = self.getName1().decode("utf-8")
         name2 = self.getName2().decode("utf-8")
@@ -375,7 +378,10 @@ class Contact(BaseContent, BrowserDefaultMixin):
             names = u"%s %s" % (name2, name1)
         names = names.strip()
         namepart = namedefined and names or society
-        nameSignaletic = u"%s %s" % (title, namepart)
+        if withtitle:
+            nameSignaletic = u"%s %s" % (title, namepart)
+        else:
+            nameSignaletic = u"%s" % (namepart)
         nameSignaletic = nameSignaletic.strip()
         if linebyline:
             # escape HTML special characters like HTML entities
