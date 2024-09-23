@@ -59,6 +59,8 @@ class EventTypeConditionExecutor(object):
     def __call__(self):
         event_type_condition = self.element.event_type
         config_event_types = self.event.object.getUrbaneventtypes().eventType
+        if not config_event_types:
+            config_event_types = []
         return event_type_condition in config_event_types
 
 
