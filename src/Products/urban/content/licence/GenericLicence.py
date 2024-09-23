@@ -1563,6 +1563,16 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
         if events:
             return events[0]
 
+    def getLastEventWithValidityDate(self):
+        events = [
+            event
+            for event in self.getAllEvents()
+            if getattr(event, "validityEndDate", None) is not None
+        ]
+        if len(events) == 0:
+            return None
+        return events[-1]
+
     def get_bound_roaddecrees(self):
         roaddecrees = []
         annotations = IAnnotations(self)

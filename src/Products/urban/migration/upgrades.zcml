@@ -199,4 +199,13 @@
         handler=".update_260.update_delais_vocabularies_and_activate_prorogation_field"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Add new index and new filter for validity date"
+        description=""
+        source="1140"
+        destination="1141"
+        handler=".update_codt_2024.add_new_index_and_new_filter"
+        profile="Products.urban:default"
+        />
+
 </configure>
