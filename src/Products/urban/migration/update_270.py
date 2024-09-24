@@ -23,3 +23,17 @@ def rename_patrimony_certificate(context):
     patrimony_config_folder.reindexObject(["Title"])
 
     logger.info("upgrade step done!")
+
+
+def allow_corporate_tenant_in_inspections(context):
+    """ """
+    logger = logging.getLogger("urban: Allow corporate tenant in inspections")
+    logger.info("starting upgrade steps")
+
+    portal_types_tool = api.portal.get_tool("portal_types")
+    isp_tool = portal_types_tool.get("Inspection")
+    if "CorporationTenant" not in isp_tool.allowed_content_types:
+        new_allowed_types = list(isp_tool.allowed_content_types) + ["CorporationTenant"]
+        isp_tool.allowed_content_types = tuple(new_allowed_types)
+
+    logger.info("upgrade step done!")
