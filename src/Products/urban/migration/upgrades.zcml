@@ -649,4 +649,13 @@
         profile="Products.urban:default"
         />
 
+    <gs:upgradeStep
+        title="Remove permission to create integrated licences"
+        description=""
+        source="1150"
+        destination="1151"
+        handler=".update_270.remove_permission_to_create_integrated_licences"
+        profile="Products.urban:default"
+        />
+
 </configure>
