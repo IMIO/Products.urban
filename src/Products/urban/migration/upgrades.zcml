@@ -208,4 +208,13 @@
         profile="Products.urban:default"
         />
 
+    <gs:upgradeStep
+        title="Allow corporate tenant in inspections"
+        description=""
+        source="1141"
+        destination="1142"
+        handler=".update_260.allow_corporate_tenant_in_inspections"
+        profile="Products.urban:default"
+        />
+
 </configure>
