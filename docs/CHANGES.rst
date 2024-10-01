@@ -8,6 +8,70 @@ Changelog
 
 .. towncrier release notes start
 
+2.7.17 (2024-10-01)
+-------------------
+
+New features:
+
+
+- Translate all untranslated & empty msgtr
+
+  While working on URB-2503 and while I was there, I took the opportunity to translate all untranslated and empty msgtr in the urban.po file. [dmshd] (URB-2503-Fill_all_untranslated_msgtr)
+- Replace None occurences by "Aucun(e)"
+
+  I replaced all "None" occurences and set "Aucun(e)" as the default value for translations instead of None or "-" for improved readability / accessibility / ux.
+
+  [dmshd] · URB-2503 (URB-2503-Replace_None_by_Aucun-e)
+- Improve / translate "See more..." link text
+
+  I had to translate "See more..." and decided that "Lire les textes" would be a better translation for better readability and accessibility.
+  The context is a link that follows "Textes du point Délib: See more...".
+  Now it reads "Textes du point Délib: Lire les textes".
+
+  [dmshd] · URB-2503 (URB-2503-Replace_See_more_dotdotdot_link_by_Lire_les_textes)
+- Improve truncated "Voir..." link text
+
+  While I had to translate the untranslated "See more..." link. I spotted that truncated long text had "Voir..." as a link text. I replaced it with "Lire la suite" for better readability and accessibility.
+
+  [dmshd] · URB-2503 (URB-2503-Replace_Voir_plus_dotdotdot_by_Lire_la_suite)
+- Add centrality to commercial licence
+  [daggelpop] (URB-3017)
+- Add 3 surface fields to commercial licence
+  [daggelpop] (URB-3117)
+- Add field `D.67 CoPat` to patrimony fieldset
+  daggelpop (URB-3167)
+
+
+Bug fixes:
+
+
+- Fix merge field getStreetAndNumber
+  [jchandelle] (SUP-38082)
+- Fix mail message encoding
+  [jchandelle] (SUP-39227)
+- Fix space causing bug
+  [dmshd] (URB-2676)
+- Fix typo in french translation
+
+  This is a bugfix for URB-3128. "Cessastion" -> "Cessation".
+
+  [dmshd] (URB-3128-Fix_typo_in_french_translation)
+- Fix event_type condition for content rules
+  [jchandelle] (URB-3182)
+
+
+Internal:
+
+
+- Set buildout cache directories.
+
+  I had a network problem and I had to rerun from the beginning. Took a long time. I searched for a way to fasten and discovered that I could set the cache directories. I set the cache directories as the iA.Delib team does it at iMio.
+
+  [dmshd] (URB-3135-define_buildout_cache_directories)
+- Ignore .python-version (pyenv file) and sort lines in .gitignore file.
+  [dmshd] (URB-3135-ignore-python-version-file-and-sort-lines)
+
+
 2.7.16 (2024-07-25)
 -------------------
 
