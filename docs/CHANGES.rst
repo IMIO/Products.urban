@@ -8,6 +8,18 @@ Changelog
 
 .. towncrier release notes start
 
+2.5.0.dev10 (2024-10-01)
+------------------------
+
+New features:
+
+
+- Add validity date filter and index
+  [jchandelle] (URB-3090)
+- Add field `D.67 CoPat` to patrimony fieldset
+  daggelpop (URB-3167)
+
+
 2.5.0.dev9 (2024-06-27)
 -----------------------
 
