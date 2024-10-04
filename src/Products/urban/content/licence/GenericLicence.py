@@ -241,6 +241,16 @@ schema = Schema(
             ),
             schemata="urban_description",
         ),
+        StringField(
+            name="additionalReference",
+            widget=StringField._properties["widget"](
+                size=60,
+                label=_(
+                    "urban_label_additionalReference", default="Additionalreference"
+                ),
+            ),
+            schemata="urban_description",
+        ),
         DataGridField(
             name="workLocations",
             schemata="urban_description",
@@ -1875,6 +1885,7 @@ class GenericLicence(OrderedBaseFolder, UrbanBase, BrowserDefaultMixin):
         if text_format is True:
             return translate(_("${nbr} days", mapping={"nbr": delay}), context=request)
         return delay
+
 
 registerType(GenericLicence, PROJECTNAME)
 # end of class GenericLicence

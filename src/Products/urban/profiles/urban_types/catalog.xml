@@ -29,6 +29,14 @@
 
   <column value="getReference"/>
 
+  <index name="getAdditionalReference"
+         meta_type="ZCTextIndex">
+    <indexed_attr value="getAdditionalReference"/>
+    <extra name="index_type" value="Okapi BM25 Rank"/>
+    <extra name="lexicon_id" value="plone_lexicon"/>
+  </index>
+  <column value="getAdditionalReference"/>
+
   <index name="folder_manager"
            meta_type="KeywordIndex">
     <indexed_attr value="folder_manager"/>

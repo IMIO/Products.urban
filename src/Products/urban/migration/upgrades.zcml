@@ -657,4 +657,13 @@
         handler=".update_260.add_new_vocabulary_for_investigation_radius_field"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Update faceted dashboard"
+        description=""
+        source="1151"
+        destination="1152"
+        handler=".update_260.update_faceted_dashboard"
+        profile="Products.urban:default"
+        />
+
 </configure>
