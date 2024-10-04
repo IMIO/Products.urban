@@ -407,3 +407,8 @@ def streetcode_indexer(obj):
     if not street_code:
         raise AttributeError()
     return street_code
+
+
+@indexer(interfaces.IGenericLicence)
+def additional_reference(object):
+    return object.getAdditionalReference()

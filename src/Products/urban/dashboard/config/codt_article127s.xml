@@ -104,6 +104,17 @@
       name="autocomplete_view">cadastral-autocomplete-suggest</property>
    <property name="onlyallelements">True</property>
   </criterion>
+  <criterion name="c98">
+   <property name="widget">text</property>
+   <property name="title">Référence supplémentaire</property>
+   <property name="position">top</property>
+   <property name="section">advanced</property>
+   <property name="hidden">False</property>
+   <property name="index">getAdditionalReference</property>
+   <property name="default"></property>
+   <property name="onlyallelements">True</property>
+   <property name="wildcard">True</property>
+  </criterion>
   <criterion name="c5">
    <property name="widget">text</property>
    <property name="title">Titre, référence</property>
