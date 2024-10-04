@@ -41,6 +41,10 @@ from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.utils import is_attachment
 from Products.urban.utils import setOptionalAttributes
 from Products.urban import UrbanMessage as _
+from plone.contentrules.engine.interfaces import IRuleAssignmentManager
+from zope.component import getUtility, getMultiAdapter
+from plone.contentrules.rule.interfaces import IExecutable
+from plone.contentrules.engine.interfaces import IRuleStorage
 
 from plone import api
 
@@ -942,6 +946,28 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
     def getObjectPosition(self, id):
         # !!! Fix to handle file exporting on Event with c.exportimport
         return 0
+
+    def get_all_rules_for_this_event(self):
+        portal = api.portal.get()
+        assignable = IRuleAssignmentManager(portal)
+        storage = getUtility(IRuleStorage)
+
+        rules = []
+        for key in [key for key in assignable]:
+            conditions = []
+            rule = storage.get(key, None)
+            if rule is None:
+                continue
+            if not rule.enabled:
+                continue
+            for condition in rule.conditions:
+                class EventTemp():
+                    object = self
+                executable = getMultiAdapter((self, condition, EventTemp), IExecutable)
+                conditions.append(executable())
+            if all(conditions):
+                rules.append(rule)
+        return rules
 
 
 registerType(UrbanEvent, PROJECTNAME)
