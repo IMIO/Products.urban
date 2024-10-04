@@ -1778,6 +1778,9 @@ msgstr "Contexte d'inspection"
 msgid "integratedlicence_urbanconfig_title"
 msgstr "Paramètres des permis intégrés"
 
+msgid "investigations_radius_folder_title"
+msgstr "Rayons d'enquête"
+
 msgid "investigationarticles_folder_title"
 msgstr "Articles pour les enquêtes"
 
@@ -3694,6 +3697,11 @@ msgstr "Service interne à la ville"
 #: ../UrbanTool.py:194
 msgid "urban_label_invertAddressNames"
 msgstr "Inverser le nom et prénom des destinataires de courriers"
+
+#. Default: "Investigation_radius"
+#: ../content/CODT_Inquiry.py:163
+msgid "urban_label_investigation_radius"
+msgstr "Rayon d'enquête"
 
 #. Default: "Investigationarticles"
 #: ../content/Inquiry.py:80
