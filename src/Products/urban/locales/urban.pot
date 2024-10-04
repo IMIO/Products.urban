@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2024-02-20 15:20+0000\n"
+"POT-Creation-Date: 2024-10-03 08:07+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -13,6 +13,16 @@ msgstr ""
 "Language-Name: English\n"
 "Preferred-Encodings: utf-8\n"
 "Domain: urban\n"
+
+#: ../browser/gig_coring_settings.py:57
+#: ../browser/offdays_settings.py:72
+#: ../browser/schedule_settings.py:17
+msgid ""
+msgstr ""
+
+#: ../send_mail_action/forms.py:42
+msgid " and ${last_rule}"
+msgstr ""
 
 #: ../content/licence/GenericLicence.py:1606
 msgid "${nbr} days"
@@ -549,13 +559,11 @@ msgstr ""
 msgid "Internal opinion services"
 msgstr ""
 
-msgid "Licence state"
+#: ../send_mail_action/forms.py:19
+msgid "Licence Files"
 msgstr ""
 
-msgid "Licence types"
-msgstr ""
-
-#: ../browser/urbaneventviews.py:250
+#: ../browser/urbaneventviews.py:285
 msgid "Listing file (claimants)"
 msgstr ""
 
@@ -691,7 +699,11 @@ msgstr ""
 msgid "Search parcel(s)"
 msgstr ""
 
-#: ../docgen/UrbanTemplate.py:27
+#: ../send_mail_action/forms.py:20
+msgid "Select all files from this event or the parent licence you whant to send"
+msgstr ""
+
+#: ../docgen/UrbanTemplate.py:29
 msgid "Select for which content types the template will be available."
 msgstr ""
 
