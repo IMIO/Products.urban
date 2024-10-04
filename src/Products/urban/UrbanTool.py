@@ -1080,25 +1080,8 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         if not IUrbanEvent.providedBy(context):
             return False
 
-        portal = api.portal.get()
-        assignable = IRuleAssignmentManager(portal)
-        storage = getUtility(IRuleStorage)
+        rules = context.get_all_rules_for_this_event()
 
-        rules = []
-        for key in [key for key in assignable]:
-            conditions = []
-            rule = storage.get(key, None)
-            if rule is None:
-                continue
-            if not rule.enabled:
-                rules.append(False)
-                continue
-            for condition in rule.conditions:
-                class EventTemp():
-                    object = context
-                executable = getMultiAdapter((context, condition, EventTemp), IExecutable)
-                conditions.append(executable())
-            rules.append(all(conditions))
-        return any(rules)
+        return len(rules) > 0
 
 registerType(UrbanTool, PROJECTNAME)

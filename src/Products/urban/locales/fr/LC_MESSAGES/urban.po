@@ -15,6 +15,10 @@ msgstr ""
 "Domain: urban\n"
 "X-is-fallback-for: fr-fr fr-be fr-ca\n"
 
+#: ../send_mail_action/forms.py:42
+msgid " and ${last_rule}"
+msgstr " et ${last_rule}"
+
 #: ../content/licence/GenericLicence.py:1840
 msgid "${nbr} days"
 msgstr "${nbr} jours"
@@ -626,6 +630,10 @@ msgstr "Permis intégré"
 msgid "Internal opinion services"
 msgstr "Avis de services internes à la ville"
 
+#: ../send_mail_action/forms.py:19
+msgid "Licence Files"
+msgstr "Fichiers du permis"
+
 #: ../browser/urbaneventviews.py:285
 msgid "Listing file (claimants)"
 msgstr "Importer un fichier de réclamants (csv)"
@@ -772,6 +780,10 @@ msgstr "Échéancier par procédure"
 #: ../browser/templates/searchparcels.pt:34
 msgid "Search parcel(s)"
 msgstr "Chercher des références cadastrales."
+
+#: ../send_mail_action/forms.py:20
+msgid "Select all files from this event or the parent licence you whant to send"
+msgstr "Sélectionnez tous les fichiers de cet évènement ou du permis que vous voulez envoyer."
 
 #: ../docgen/UrbanTemplate.py:29
 msgid "Select for which content types the template will be available."

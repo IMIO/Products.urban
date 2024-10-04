@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from imio.pm.wsclient import WS4PMClientMessageFactory as _
+from Products.urban import UrbanMessage as _
 from imio.pm.wsclient.interfaces import IRedirect
 from plone.z3cform.layout import wrap_form
 from z3c.form import button, field
@@ -9,14 +9,15 @@ from z3c.form.form import Form
 from zope import schema
 from zope.event import notify
 from zope.interface import Interface
+from zope.i18n import translate
 
 from .event import SendMailAction
 
 
 class ISendMailActionForm(Interface):
     files = schema.List(
-        title=u"Licence Files",
-        description=u"Select all files from the parent licence you whant to send",
+        title=_(u"Licence Files"),
+        description=_(u"Select all files from this event or the parent licence you whant to send"),
         required=False,
         value_type=schema.Choice(vocabulary="urban.vocabularies.licence_documents"),
     )
@@ -32,7 +33,18 @@ class SendMailActionForm(Form):
     def __init__(self, context, request):
         self.context = context
         self.request = request
-        self.label = "Send"
+
+        rules = [rule.title for rule in self.context.get_all_rules_for_this_event()]
+        last_rule = None
+        if len(rules) > 1:
+            last_rule = rules.pop()
+        label = ", ".join(rules)
+        if last_rule is not None:
+            label += translate(
+                _(" and ${last_rule}", mapping={"last_rule":last_rule}),
+                context=request
+            )
+        self.label = label
 
     @button.buttonAndHandler(_("Send"), name="send_mail_action")
     def handleSendToPloneMeeting(self, action):
