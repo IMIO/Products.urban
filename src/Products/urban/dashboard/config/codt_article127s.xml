@@ -104,7 +104,7 @@
       name="autocomplete_view">cadastral-autocomplete-suggest</property>
    <property name="onlyallelements">True</property>
   </criterion>
-  <criterion name="c13">
+  <criterion name="c98">
    <property name="widget">text</property>
    <property name="title">Référence supplémentaire</property>
    <property name="position">top</property>

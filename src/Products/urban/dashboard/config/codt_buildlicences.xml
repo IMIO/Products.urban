@@ -115,7 +115,7 @@
    <property name="calYearRange">c-10:c+10</property>
    <property name="index_end">investigationEnd</property>
   </criterion>
-  <criterion name="c13">
+  <criterion name="c98">
    <property name="widget">text</property>
    <property name="title">Référence supplémentaire</property>
    <property name="position">top</property>

@@ -152,7 +152,7 @@ def update_faceted_dashboard(context):
         "profile-Products.urban:urbantypes", "catalog"
     )
     catalog = api.portal.get_tool("portal_catalog")
-    catalog.clearFindAndRebuild()
+    reindexIndexes(None, ["getAdditionalReference"])
     site = api.portal.getSite()
     urban_folder = getattr(site, "urban")
     for urban_type in URBAN_TYPES:
