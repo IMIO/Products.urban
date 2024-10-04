@@ -8,6 +8,32 @@ Changelog
 
 .. towncrier release notes start
 
+2.7.18 (2024-10-04)
+-------------------
+
+New features:
+
+
+- Add translation and add contextual title to the form from send email action
+  [jchandelle] (URB-3020)
+
+
+Bug fixes:
+
+
+- Fix missing extending validity date
+  [jchandelle] (URB-3153)
+
+
+Internal:
+
+
+- Add a new field "additional reference" and configure faceteed navigation
+  [fngaha] (URB-2595)
+- improve the functionality of searching for owners within a defined radius.
+  [fngaha] (URB-2983)
+
+
 2.7.17 (2024-10-01)
 -------------------
 
