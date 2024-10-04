@@ -15,6 +15,7 @@ __docformat__ = "plaintext"
 
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
+from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
 from zope.interface import implements
 from Products.urban import interfaces
 from Products.urban import utils
@@ -25,6 +26,14 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.urban.config import *
 from Products.urban.content.CODT_Inquiry import CODT_Inquiry
 
+slave_fields_inquiry_category = (
+    {
+        "name": "investigation_radius",
+        "action": "value",
+        "vocab_method": "get_inquiry_category_radius",
+        "control_param": "enquiry_type",
+    },
+)
 ##code-section module-header #fill in your manual code here
 ##/code-section module-header
 
@@ -32,7 +41,8 @@ schema = Schema(
     (
         StringField(
             name="inquiry_category",
-            widget=SelectionWidget(
+            widget=MasterSelectWidget(
+                slave_fields=slave_fields_inquiry_category,
                 label=_("urban_label_inquiry_category", default="Inquiry_category"),
             ),
             vocabulary="list_inquiry_category",
@@ -93,6 +103,12 @@ class CODT_UniqueLicenceInquiry(BaseContent, CODT_Inquiry, BrowserDefaultMixin):
             all_=all_, portal_type=portal_type
         )
         return all_inquiries
+
+    def get_inquiry_category_radius(self, enquiry_type):
+        """ """
+        if enquiry_type == "B":
+            return "200m"
+        return "50m"
 
 
 registerType(CODT_UniqueLicenceInquiry, PROJECTNAME)

@@ -159,6 +159,15 @@ slave_fields_composition = (
         "control_param": "composition",
     },
 )
+
+slave_fields_impact_study = (
+    {
+        "name": "investigation_radius",
+        "action": "value",
+        "vocab_method": "get_impact_study_radius",
+        "control_param": "has_impact_study",
+    },
+)
 ##/code-section module-header
 
 schema = Schema(
@@ -222,7 +231,8 @@ schema = Schema(
         BooleanField(
             name="impactStudy",
             default=False,
-            widget=BooleanField._properties["widget"](
+            widget=MasterBooleanWidget(
+                slave_fields=slave_fields_impact_study,
                 label=_("urban_label_impactStudy", default="Impactstudy"),
             ),
             schemata="urban_description",

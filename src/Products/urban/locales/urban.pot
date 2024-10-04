@@ -3666,6 +3666,11 @@ msgstr ""
 msgid "urban_label_invertAddressNames"
 msgstr ""
 
+#. Default: "Investigation_radius"
+#: ../content/CODT_Inquiry.py:163
+msgid "urban_label_investigation_radius"
+msgstr ""
+
 #. Default: "Investigationarticles"
 #: ../content/Inquiry.py:80
 msgid "urban_label_investigationArticles"
