@@ -905,4 +905,16 @@ class UrbanEventInquiryView(UrbanEventInquiryBaseView):
 
     def getInquiryRadius(self):
         licence = self.context.aq_parent
-        return int(licence.investigation_radius.split("m")[0])
+        investigation_radius = getattr(licence, 'investigation_radius', None)
+
+        if investigation_radius is None:
+            return 50
+        if isinstance(investigation_radius, list):
+            investigation_radius = investigation_radius[0]
+
+        try:
+            output = int(investigation_radius.split("m")[0])
+        except Exception as e:
+            output = 50
+        
+        return output
