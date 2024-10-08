@@ -666,4 +666,13 @@
         profile="Products.urban:default"
         />
 
+    <gs:upgradeStep
+        title="Rename a content rules"
+        description=""
+        source="1152"
+        destination="1153"
+        handler=".update_270.rename_content_rule"
+        profile="Products.urban:default"
+        />
+
 </configure>

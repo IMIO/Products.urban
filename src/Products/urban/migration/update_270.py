@@ -23,3 +23,14 @@ def rename_patrimony_certificate(context):
     patrimony_config_folder.reindexObject(["Title"])
 
     logger.info("upgrade step done!")
+
+
+def rename_content_rule(context):
+    """ """
+    logger = logging.getLogger("urban: Rename a content rules")
+    logger.info("starting upgrade steps")
+
+    setup_tool = api.portal.get_tool("portal_setup")
+    setup_tool.runImportStepFromProfile("profile-Products.urban:default", "contentrules")
+
+    logger.info("upgrade step done!")
