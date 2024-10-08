@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <contentrules>
- <rule name="rule-1" title="Envoie de mail pour enquete publique"
+ <rule name="rule-1" title="Demande de publication d'une enquête publique sur le site internet"
     cascading="False" description="" enabled="True"
     event="Products.urban.send_mail_action.interface.ISendMailAction"
     stop-after="False">
