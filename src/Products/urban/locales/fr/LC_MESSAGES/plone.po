@@ -490,6 +490,9 @@ msgstr "Envoi au procureur"
 msgid "suspend_freeze"
 msgstr "Suspendre (gel délais)"
 
+msgid "suspend"
+msgstr "Suspendre"
+
 msgid "update_additionalLegalConditions"
 msgstr "Mise à jour des Registre des conditions intégrales et sectorielles supplémentaires"
 
