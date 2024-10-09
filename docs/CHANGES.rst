@@ -8,6 +8,20 @@ Changelog
 
 .. towncrier release notes start
 
+2.7.21 (2024-10-09)
+-------------------
+
+Bug fixes:
+
+
+- Handle null value in `EventTypeConditionExecutor`
+  [daggelpop] (SUP-39901)
+- Translate `suspend` in French
+  [daggelpop] (URB-3007)
+- Update content rule title
+  [dmshd] (URB-3198)
+
+
 2.7.19 (2024-10-04)
 -------------------
 
