@@ -114,6 +114,14 @@ class CODT_CommercialLicence(BaseFolder, CODT_UniqueLicence, BrowserDefaultMixin
         )
         return DisplayList(vocab)
 
+    def _get_inquiry_objs(
+        self, all_=False, portal_type=["CODT_Inquiry"]
+    ):
+        all_inquiries = super(CODT_CommercialLicence, self)._get_inquiry_objs(
+            all_=all_, portal_type=portal_type
+        )
+        return all_inquiries
+
     def getProcedureDelays(self, *values):
         selection = [v["val"] for v in values if v["selected"]]
         unknown = "ukn" in selection
