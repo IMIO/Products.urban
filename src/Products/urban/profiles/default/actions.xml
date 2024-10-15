@@ -22,9 +22,9 @@
    <property name="title">Documentation</property>
    <property name="description"></property>
    <property
-      name="url_expr">string:https://docs.imio.be/imio-doc/ia.urban/</property>
+      name="url_expr">string:https://docs.imio.be/iaurban/</property>
    <property
-      name="link_target">https://docs.imio.be/imio-doc/ia.urban/</property>
+      name="link_target">https://docs.imio.be/iaurban/</property>
    <property name="icon_expr"></property>
    <property name="available_expr"></property>
    <property name="permissions">
