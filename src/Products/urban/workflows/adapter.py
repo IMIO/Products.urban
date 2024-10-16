@@ -10,14 +10,18 @@ from imio.schedule.content.task import IAutomatedTask
 from plone import api
 from plone.memoize.request import cache
 
+from Products.Archetypes.config import REFERENCE_CATALOG
 from Products.CMFCore.WorkflowCore import WorkflowException
+from Products.CMFCore.utils import getToolByName
 
+from Products.urban.content.licence.RoadDecree import RoadDecree
 from Products.urban.interfaces import ICODT_IntegratedLicence
 from Products.urban.interfaces import ICODT_UniqueLicence
 from Products.urban.interfaces import IEnvironmentBase
 from Products.urban.interfaces import IIntegratedLicence
 from Products.urban.interfaces import IUniqueLicence
 
+from zope.component import getAdapters
 from zope.interface import implements
 
 
@@ -59,6 +63,22 @@ class LocalRoleAdapter(object):
         else:
             return "urban_only"
 
+    def get_linked_opinion_editors(self):
+        linked_opinion_editors = []
+        if self.context.portal_type in RoadDecree.schema['bound_licence'].allowed_types:
+            reference_catalog = getToolByName(self.context, REFERENCE_CATALOG)
+            back_refs = reference_catalog.getBackReferences(self.context, 'bound_licence')
+            if back_refs:
+                back_obj = [ref.getSourceObject() for ref in back_refs][0]
+                back_obj_local_role_adapters = [
+                    adapter for name, adapter in getAdapters((back_obj,), ILocalRoleProvider)
+                    if hasattr(adapter, 'get_opinion_editors')
+                ]
+                for back_obj_local_role_adapter in back_obj_local_role_adapters:
+                    f = back_obj_local_role_adapter.get_opinion_editors()
+                    linked_opinion_editors.extend(f)
+        return linked_opinion_editors
+
     def get_opinion_editors(self):
         """
         Return groups who have external opinion to give on the licence.
@@ -89,7 +109,10 @@ class LocalRoleAdapter(object):
                             if group not in exceptions:
                                 opinion_editors.append(group)
 
-        return opinion_editors
+        back_ref_opinion_editors = self.get_linked_opinion_editors()
+        opinion_editors.extend(back_ref_opinion_editors)
+
+        return list(set(opinion_editors))
 
     def get_editors(self):
         """ """
