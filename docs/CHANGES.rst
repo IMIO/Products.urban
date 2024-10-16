@@ -8,6 +8,18 @@ Changelog
 
 .. towncrier release notes start
 
+2.5.0.dev11 (2024-10-16)
+------------------------
+
+New features:
+
+
+- Use imio.pm.wsclient 2.x version (REST).
+  [aduchene]
+  Add `get_last_plonemeeting_date`, `get_last_college_date` and `get_last_college_date` to CODT_BaseBuildLicence.
+  [aduchene] (URB-3148)
+
+
 2.5.0.dev10 (2024-10-01)
 ------------------------
 
