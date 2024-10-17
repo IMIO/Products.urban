@@ -59,11 +59,23 @@ class EventTypeConditionExecutor(object):
     def __call__(self):
         config_event_types = []
         event_type_condition = self.element.event_type
+        if not event_type_condition:
+            return False
         event_config = self.event.object.getUrbaneventtypes()
-        if event_config:
+        if event_config and event_config.eventType:
             config_event_types = event_config.eventType
+        if not self.check_if_iterrable(config_event_types):
+            return False
         return event_type_condition in config_event_types
 
+    def check_if_iterrable(self, value):
+        if isinstance(value, list) or isinstance(value, tuple):
+            return True
+        try:
+            _ = iter(value)
+            return True
+        except TypeError:
+            return False
 
 class EventTypeAddForm(AddForm):
     """An add form for event type condition."""
