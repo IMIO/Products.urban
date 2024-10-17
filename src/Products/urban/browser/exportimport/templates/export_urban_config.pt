@@ -1,0 +1,120 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      i18n:domain="collective.exportimport"
+      metal:use-macro="context/main_template/macros/master">
+
+<div metal:fill-slot="main">
+    <tal:main-macro metal:define-macro="main">
+
+      <h1 class="documentFirstHeading" i18n:translate="">Export Urban Config</h1>
+
+      <p class="documentDescription" i18n:translate="">Select which urban config to export as a json-file.</p>
+
+        <form id="export_content" action="@@export_content" tal:attributes="action request/URL" method="post" enctype="multipart/form-data">
+
+            <div class="field mb-3">
+              <label for="portal_type">
+                <span i18n:translate="">Content Types to export</span>
+              </label>
+              <div class="widget" id="portal_type">
+                <input type="checkbox" class="checkboxType" name="checkall" id="checkall"
+                       title="Toggle all" i18n:attributes="title label_toggle" />
+                <label for="checkall"><i i18n:translate="">Select all/none</i></label><br />
+                <script type="text/javascript">
+                   // Check or Uncheck All checkboxes
+                   $("#checkall").change(function(){
+                     var checked = $(this).is(':checked');
+                     if(checked){
+                       $("form#export_content #portal_type input[type='checkbox']").each(function(){
+                         $(this).prop("checked",true);
+                       });
+                     }else{
+                       $("form#export_content #portal_type input[type='checkbox']").each(function(){
+                         $(this).prop("checked",false);
+                       });
+                     }
+                   });
+
+                  // Changing state of CheckAll checkbox
+                  $("form#export_content").on("click", "form#export_content #portal_type input[name='portal_type']", function(){
+                    if($("form#export_content #portal_type input[type='checkbox']").length == $("form#export_content #portal_type input[type='checkbox']:checked").length) {
+                      $("#checkall").prop("checked", true);
+                    } else {
+                      $("#checkall").prop("checked", false);
+                    }
+
+                  });
+                </script>
+                <tal:types tal:repeat="ptype python: view.portal_types()">
+                  <input type="checkbox"
+                         name="portal_type"
+                         class="checkboxType"
+                         tal:attributes="value ptype/value; id ptype/value;">
+                  <label tal:attributes="for ptype/value"
+                         tal:content="string:${ptype/title} - ${ptype/value} (${ptype/number})"></label>
+                         <br />
+                </tal:types>
+              </div>
+            </div>
+
+            <div class="field mb-3">
+              <label for="path" i18n:translate="">Path</label>
+              <div class="widget">
+                <input type="text" name="path" id="path" value=""
+                       tal:attributes="value python:view.path">
+              </div>
+            </div>
+
+            <div class="field mb-3">
+              <label for="depth" i18n:translate="">Depth</label>
+              <span class="formHelp" i18n:translate="">Unlimited: this item and all children, 0: this object only, 1: only direct children of this object, 2-x: children of this object up to the specified level</span>
+              <div class="widget">
+                <select name="depth" class="">
+                  <option value="1"
+                          tal:repeat="current python:view.depth_options"
+                          tal:attributes="value python: current[0];
+                                          selected python:'selected' if int(current[0]) == view.depth else False"
+                          tal:content="python:current[1]">
+                        1
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field mb-3">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="download_to_server:int" value="0" id="download_local" checked="checked">
+                <label for="download_local" class="form-check-label" i18n:translate="">
+                  Download to local machine
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="download_to_server:int" value="1" id="download_server">
+                <label for="download_server" class="form-check-label" i18n:translate="">
+                  Save to file on server
+                </label>
+              </div>
+            </div>
+
+
+            <div class="formControls" class="form-group">
+                <input type="hidden" name="form.submitted" value="1"/>
+
+                <button class="btn btn-primary submit-widget button-field context"
+                        type="submit" name="submit" value="export" i18n:attributes="value" i18n:translate="">Export
+                </button>
+
+            </div>
+
+            <div metal:use-macro="context/@@exportimport_urban_config_links/links">
+              Links to all exports and imports
+            </div>
+
+        </form>
+
+    </tal:main-macro>
+</div>
+
+</html>
