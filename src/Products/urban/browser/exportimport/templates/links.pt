@@ -1,0 +1,31 @@
+<tal:main-macro metal:define-macro="links"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      i18n:domain="collective.exportimport">
+
+  <div class="formControls" class="form-group">
+      <h3 i18n:translate="">Exports</h3>
+      <ul>
+         <li><a class=""
+            tal:attributes="href python: context.absolute_url() + '/@@export_urban_config'" i18n:translate="">Export Urban Config
+         </a></li>
+
+         <li><a class=""
+            tal:attributes="href python: context.absolute_url() + '/@@export_urban_config_ordering'" i18n:translate="">Export object positions in parent 
+         </a></li>
+      </ul>
+
+      <h3 i18n:translate="">Imports</h3>
+      <ul>
+      <li><a class=""
+         tal:attributes="href python: context.absolute_url() + '/@@import_urban_config'" i18n:translate="">Import Urban Config
+      </a></li>
+
+      <li><a class=""
+         tal:attributes="href python: context.absolute_url() + '/@@import_urban_config_ordering'" i18n:translate="">Import object positions in parent
+      </a></li>
+   </ul>
+   </div>
+
+</tal:main-macro>

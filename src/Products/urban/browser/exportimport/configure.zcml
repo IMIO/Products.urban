@@ -20,4 +20,43 @@
       permission="cmf.ManagePortal"
       />
 
+  <browser:page
+      name="export_urban_config"
+      for="zope.interface.Interface"
+      class=".export_config.UrbanExportConfig"
+      layer="Products.urban.interfaces.IProductUrbanLayer"
+      permission="cmf.ManagePortal"
+      />
+
+  <browser:page
+      name="export_urban_config_ordering"
+      for="zope.interface.Interface"
+      class=".export_ordering.UrbanConfigExportOrdering"
+      layer="Products.urban.interfaces.IProductUrbanLayer"
+      template="templates/export_ordering.pt"
+      permission="cmf.ManagePortal"
+      />
+
+  <browser:page
+    name="import_urban_config_ordering"
+    for="zope.interface.Interface"
+    class="collective.exportimport.import_other.ImportOrdering"
+    template="templates/import_ordering.pt"
+    layer="Products.urban.interfaces.IProductUrbanLayer"
+    permission="cmf.ManagePortal"
+    />
+
+  <browser:page
+    name="exportimport_urban_config_links"
+    for="zope.interface.Interface"
+    layer="Products.urban.interfaces.IProductUrbanLayer"
+    template="templates/links.pt"
+    permission="cmf.ManagePortal"
+    />
+
+  <adapter factory=".serializer.UrbanConfigChoiceFieldSerializer" />
+  <adapter factory=".serializer.UrbanConfigCollectionFieldSerializer" />
+  <adapter factory=".deserializer.UrbanConfigCollectionFieldDeserializer" />
+  <adapter factory=".deserializer.UrbanConfigChoiceFieldDeserializer" />
+
 </configure>
