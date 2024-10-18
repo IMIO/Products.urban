@@ -46,7 +46,7 @@ class OpinionsCondition(SimpleItem):
         factory = getUtility(IVocabularyFactory, "urban.vocabularies.all_opinions_to_ask")
         vocabulary = factory(api.portal.get())
         values = [vocabulary.by_value[opinion].title for opinion in list(self.opinions_to_ask)]
-        return u"Event Type : {}".format(", ".join(values))
+        return u"Opinion to ask : {}".format(", ".join(values))
 
 
 class OpinionsConditionExecutor(object):
