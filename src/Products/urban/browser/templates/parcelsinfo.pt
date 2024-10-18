@@ -5,7 +5,12 @@
 <div i18n:domain="urban"
      tal:define="parcel python: view.get_parcel(capakey);
                  normalizeString nocall:context/@@plone/normalizeString;
-				 wtool context/portal_workflow">
+				 wtool context/portal_workflow;
+				 displays python: view.get_related_licences_displays(capakey);
+				 licences python: displays[0];
+				 parcel_historic python: displays[1];
+				 line_result parcel_historic;
+				 ">
       <dl class="collapsible expandedOnLoad" tal:condition="parcel">
         <dt class="collapsibleHeader" tal:content="python:parcel.display()">name</dt>
         <dd class="collapsibleContent">
@@ -20,7 +25,7 @@
                 </td>
             </tr>
             <tr>
-                <td><b><u i18n:translate="urban_label_owner">owner:</u></b> </td>
+                <td><b><u i18n:translate="urban_label_owner">owners:</u></b> </td>
             </tr>
             <tr tal:repeat="owner python: parcel.owners.values()">
                 <td>
@@ -32,68 +37,56 @@
                 </td>
             </tr>
             <tr>
-                <td><b><u i18n:translate="urban_label_type">type:</u></b> </td>
+                <td><b><u i18n:translate="urban_label_type">types:</u></b> </td>
             </tr>
             <tr tal:repeat="nature python: parcel.natures">
                 <td>
                     <span tal:content="nature"/><br>
                 </td>
             </tr>
+            <tr>
+                <td><b><u i18n:translate="">History of the parcel and related licences</u></b></td>
+            </tr>
+            <table class="listing" class="listing" border="0" cellspacing="0">
+                <tal:lines repeat="line_result parcel_historic">
+                    <tr tal:define="oddrow repeat/line_result/odd;"
+                        tal:attributes="class python: oddrow and 'even' or 'odd'">
+                        <tal:line repeat="parcel line_result">
+                            <td fcolor="#FF0000"
+                                tal:define="old python: getattr(parcel, 'old', None);
+                                    root python: getattr(parcel, 'level', None) == 0;
+                                    licences python: getattr(parcel, 'licences', []);
+                                    center python: False;
+                                    is_parcel python: hasattr(parcel, 'division')"
+                                tal:attributes="style python: root and 'background-color:yellow' or '';
+                                    class  python: center and 'center-parcel' or 'left-parcel';
+                                    colspan python: parcel.width">
+                                <div class="parcel-name">
+                                    <span tal:attributes="class python: not old and 'leaf-parcel' or ''"
+                                        tal:content="parcel/display">
+                                    </span>
+                                    <span tal:condition="licences">:</span>
+                                </div>
+                                <tal:licences condition="licences">
+                                    <div tal:repeat="licence licences">
+                                        <a class="link-overlay"
+                                            tal:attributes="href python: licence['url']; class python: licence['class']"
+                                            tal:content="python: licence['title']" i18n:translate="">
+                                            lien vers les anciens permis
+                                        </a>
+                                        <p class="discreet">
+                                            <span tal:content="structure python: licence['description']">
+                                                Result description
+                                            </span>
+                                        </p>
+                                    </div>
+                                </tal:licences>
+                            </td>
+                        </tal:line>
+                    </tr>
+                </tal:lines>
+            </table>
         </table>
-
-       <tal:display define="displays python: view.get_related_licences_displays(capakey);
-                            licences python: displays[0];
-                            parcel_historic python: displays[1];">
-          <tal:no_result condition="python: not licences">
-             <h2 i18n:translate="">No related licences</h2>
-          </tal:no_result>
-          <tal:result condition="licences">
-             <h2 i18n:translate="">Related licences</h2>
-             <br />
-             <div tal:repeat="licence_info licences">
-                 <a class="link-overlay"
-                    tal:attributes="href python: licence_info['url']; class python: licence_info['class']"
-                    tal:content="python: licence_info['title']" i18n:translate="">lien vers les anciens permis</a>
-             </div>
-          </tal:result>
-   
-          <span tal:condition="parcel_historic">
-             <h2 i18n:translate="">History of the parcel and related licences</h2>
-               <table class="listing" class="listing" border="0" cellspacing="0">
-                   <tal:lines repeat="line_result parcel_historic">
-                   <tr tal:define="oddrow repeat/line_result/odd;"
-                       tal:attributes="class python: oddrow and 'even' or 'odd'">
-                       <tal:line repeat="parcel line_result">
-                           <td fcolor="#FF0000"
-                               tal:define="old python: getattr(parcel, 'old', None);
-                                           root python: getattr(parcel, 'level', None) == 0;
-                                           licences python: getattr(parcel, 'licences', []);
-                                           center python: False;
-                                           is_parcel python: hasattr(parcel, 'division')"
-                               tal:attributes="style python: root and 'background-color:yellow' or '';
-                                               class  python: center and 'center-parcel' or 'left-parcel';
-                                               colspan python: parcel.width">
-                               <div class="parcel-name">
-                                   <span tal:attributes="class python: not old and 'leaf-parcel' or ''"
-                                         tal:content="parcel/display"></span>
-                                   <span tal:condition="licences">:</span>
-                               </div>
-                           <tal:licences condition="licences">
-                               <div tal:repeat="licence licences" style="text-align: left; padding-left: 1.6em">
-                                   <a class="link-overlay"
-                                      tal:attributes="href python: licence['url']; class python: licence['class']"
-                                      tal:content="python: licence['title']" i18n:translate="">lien vers les anciens permis</a>
-                                   <p class="discreet"><span tal:content="structure python: licence['description']">Result description</span></p>
-                               </div>
-                           </tal:licences>
-                           </td>
-                       </tal:line>
-                   </tr>
-                   </tal:lines>
-               </table>
-             <br />
-          </span>
-          </tal:display>
         </dd>
       </dl>
 </div>
