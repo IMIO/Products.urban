@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from plone import api
 from Products.urban import UrbanMessage as _
 from imio.pm.wsclient.interfaces import IRedirect
 from plone.z3cform.layout import wrap_form
@@ -10,9 +11,13 @@ from zope import schema
 from zope.event import notify
 from zope.interface import Interface
 from zope.i18n import translate
-
+from datetime import datetime
 from .event import SendMailAction
+from plone.app.event.base import default_timezone
+from zope.annotation.interfaces import IAnnotations
 
+
+MAIL_ACTION_KEY = "Products.urban.send_mail_action"
 
 class ISendMailActionForm(Interface):
     files = schema.List(
@@ -54,11 +59,29 @@ class SendMailActionForm(Form):
             return
         files = self.request.form.get("form.widgets.files", [])
         notify(SendMailAction(self.context, files))
+        self.add_notify_info_annotation()
         self._finishedSent = True
 
     @button.buttonAndHandler(_("Cancel"), name="cancel")
     def handleCancel(self, action):
         self._finishedSent = True
+
+    def add_notify_info_annotation(self):
+        user = api.user.get_current()
+        tz = default_timezone(as_tzinfo=True)
+        time = datetime.now(tz=tz)
+        annotations = IAnnotations(self.context)
+        notif = annotations.get(MAIL_ACTION_KEY, None)
+        if notif is None:
+            notif = []
+        if not isinstance(notif, list):
+            notif = [notif]
+        notif.append({
+            "title": self.label,
+            "user": user,
+            "time": time
+        })
+        annotations[MAIL_ACTION_KEY] = notif
 
     def render(self):
         if self._finishedSent:

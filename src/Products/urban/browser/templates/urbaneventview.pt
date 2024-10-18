@@ -15,7 +15,12 @@
             <metal:main_macro define-macro="main">
                 <metal:body define-macro="body_macro" tal:define="linkedUrbanEventType view/getUrbaneventtypes;
                                                                   member context/@@plone_portal_state/member;">
-
+                    <div id="messageWrapper" style="position: relative" tal:condition="view/mail_send" tal:define="mail_send view/mail_send">
+                        <dl class="portalMessage info">
+                        <dt i18n:domain="plone" i18n:translate="">Info</dt>
+                        <dd tal:content="mail_send"></dd>
+                        </dl>
+                    </div>
                     <div class="action-bar">
                     <span class=".action-bar-text">        
                         <metal:listing use-macro="here/@@globalmacros/goBackToMacro" />
