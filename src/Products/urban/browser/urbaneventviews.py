@@ -15,6 +15,7 @@ from Products.urban.browser.table.urbantable import AttachmentsTable
 from Products.urban.browser.table.urbantable import ClaimantsTable
 from Products.urban.browser.table.urbantable import RecipientsCadastreTable
 from Products.urban.interfaces import IGenericLicence
+from Products.urban.send_mail_action.forms import MAIL_ACTION_KEY
 from Products.urban import services
 from StringIO import StringIO
 
@@ -278,6 +279,30 @@ class UrbanEventView(BrowserView):
     def getFDAdviceDelay(self):
         licence = self.context.aq_parent
         return licence.getFDAdviceDelay()
+
+    def mail_send(self):
+        annotations = interfaces.IAnnotations(self.context)
+        notif = annotations.get(MAIL_ACTION_KEY, None)
+        if notif is None:
+            return False
+        notif.sort(key=lambda elem: elem["time"])
+
+        user = notif[-1]["user"]
+        username = user.id
+
+        try:
+            username = user.getProperty("fullname")
+        except AttributeError:
+            pass
+
+        return _(
+            "Mail already send for ${title} by ${user}, ${date}",
+            mapping={
+                "title": notif[-1]['title'].lower(),
+                "user": username,
+                "date": notif[-1]["time"].strftime("%d/%m/%Y, %H:%M:%S")
+            }
+        )
 
 
 class IImportClaimantListingForm(Interface):
