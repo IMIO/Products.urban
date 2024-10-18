@@ -13,6 +13,7 @@ __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEUL
 <stephan.geulette@uvcw.be>, Jean-Michel Abe <jm.abe@la-bruyere.be>"""
 __docformat__ = "plaintext"
 
+from Acquisition import aq_parent
 from AccessControl import ClassSecurityInfo
 from Products.urban.widget.select2widget import MultiSelect2Widget
 from Products.Archetypes.atapi import *
@@ -968,6 +969,9 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
             if all(conditions):
                 rules.append(rule)
         return rules
+
+    def get_parent_licence(self):
+        return aq_parent(self)
 
 
 registerType(UrbanEvent, PROJECTNAME)
