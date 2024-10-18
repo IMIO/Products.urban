@@ -1,0 +1,107 @@
+# -*- coding: utf-8 -*-
+
+from OFS.SimpleItem import SimpleItem
+from plone import api
+from plone.app.contentrules import PloneMessageFactory as _
+from plone.app.contentrules.browser.formhelper import AddForm, EditForm
+from plone.autoform import directives
+from plone.contentrules.rule.interfaces import IExecutable, IRuleElementData
+from z3c.form.browser.orderedselect import OrderedSelectWidget
+from collective.plonefinder.widgets.referencewidget import FinderSelectWidget
+from z3c.form.browser.orderedselect import SequenceChoiceSelectFieldWidget
+from zope import schema
+from zope.component import adapts, getUtility
+from zope.formlib import form
+from zope.interface import Interface, implements
+from zope.schema.interfaces import IVocabularyFactory
+
+
+class ILicenceTypeCondition(Interface):
+    """Interface for the configurable aspects of a Event type condition.
+
+    This is also used to create add and edit forms, below.
+    """
+
+    licence_type = schema.List(
+        title=_(u"Licence Type"),
+        required=True,
+        value_type=schema.Choice(
+            vocabulary="urban.vocabularies.licence_types",
+        )
+    )
+
+
+class LicenceTypeCondition(SimpleItem):
+    """The actual persistent implementation of the Event type condition element."""
+
+    implements(ILicenceTypeCondition, IRuleElementData)
+
+    licence_type = []
+    element = "urban.conditions.licence_type"
+
+    @property
+    def summary(self):
+        factory = getUtility(IVocabularyFactory, "urban.vocabularies.licence_types")
+        vocabulary = factory(api.portal.get())
+        values = [
+            vocabulary.by_value[opinion].title
+            for opinion in list(self.licence_type)
+        ]
+        return u"Licence Type : {}".format(", ".join(values))
+
+
+class LicenceTypeConditionExecutor(object):
+    """The executor for this condition.
+
+    This is registered as an adapter in configure.zcml
+    """
+
+    implements(IExecutable)
+    adapts(Interface, ILicenceTypeCondition, Interface)
+
+    def __init__(self, context, element, event):
+        self.context = context
+        self.element = element
+        self.event = event
+
+    def __call__(self):
+        parent_lic = getattr(self.context, "get_parent_licence", None)
+        if parent_lic is None:
+            return False
+        context_type = parent_lic().portal_type
+        if context_type is None:
+            return False
+        condition_types = getattr(self.element, 'licence_type', None)
+        if not condition_types and not isinstance(condition_types, list):
+            return False
+
+        return context_type in condition_types
+
+
+class LicenceTypeAddForm(AddForm):
+    """An add form for opinion to ask condition."""
+
+    form_fields = form.FormFields(ILicenceTypeCondition)
+    label = _(u"Add licence type Condition")
+    description = _(
+        u"A licence type condition makes the rule apply "
+        "only when one of the licence type slelected correspond to the one of the context"
+    )
+    form_name = _(u"Configure element")
+
+    def create(self, data):
+        c = LicenceTypeCondition()
+        form.applyChanges(c, self.form_fields, data)
+        return c
+
+
+class LicenceTypeEditForm(EditForm):
+    """An edit form for Opinion to ask condition"""
+
+    form_fields = form.FormFields(ILicenceTypeCondition)
+    label = _(u"Edit Opinion to ask Condition")
+    description = _(
+        u"A opinion to ask condition makes the rule apply "
+        "only when one of the Opinion to ask slelected correspond to the one of the context"
+    )
+    form_name = _(u"Configure element")
