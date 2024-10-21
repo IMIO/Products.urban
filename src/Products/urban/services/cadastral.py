@@ -237,6 +237,7 @@ class CadastreSession(SQLSession):
             query, division, section, radical, bis, exposant, puissance
         )
         records = query.distinct().all()
+        self.close()  # Close session to avoid queue limit error
         parcels = self.merge_parcel_results(records)
         if len(parcels) != 1:
             return
@@ -249,6 +250,7 @@ class CadastreSession(SQLSession):
         query = self._base_query_parcels()
         query = query.filter(self.tables.parcels.capakey == capakey)
         records = query.distinct().all()
+        self.close()  # Close session to avoid queue limit error
         parcels = self.merge_parcel_results(records)
         if len(parcels) != 1:
             return
@@ -261,6 +263,7 @@ class CadastreSession(SQLSession):
         query = self._base_query_old_parcels()
         query = query.filter(self.tables.parcels.capakey == capakey)
         records = query.distinct().all()
+        self.close()  # Close session to avoid queue limit error
         parcels = self.merge_parcel_results(records)
         if len(parcels) != 1:
             return
@@ -274,6 +277,7 @@ class CadastreSession(SQLSession):
         )
         query = query.filter(parcels_genealogy.capakey == capakey)
         records = query.distinct().all()
+        self.close()  # Close session to avoid queue limit error
         if records:
             historic = ParcelHistoric(
                 capakey,
@@ -299,6 +303,7 @@ class CadastreSession(SQLSession):
             parcel_filters.append(and_(capa.capakey == parcel.get_capakey()))
         query_geom = query_geom.filter(or_(*parcel_filters))
         records = query_geom.all()
+        self.close()  # Close session to avoid queue limit error
         records = records and records[0][0] or records
         return records
 
@@ -324,6 +329,7 @@ class CadastreSession(SQLSession):
         )
 
         records = query.all()
+        self.close()  # Close session to avoid queue limit error
         parcels_in_radius = self.merge_parcel_results(records)
         return parcels_in_radius
 
@@ -341,6 +347,7 @@ class CadastreSession(SQLSession):
             func.ST_Ymax(ST_Extent(coordinates)),
         )
         result = query.first()
+        self.close()  # Close session to avoid queue limit error
 
         return result
 
