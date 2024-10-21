@@ -166,9 +166,14 @@ class SQLSession(object):
     def __init__(self, service):
         self.service = service
         self.tables = service.tables
+        self._init_session()
+
+    def _init_session(self):
+        """Initialize the sqlalchemy session that are bound
+        to the zope transaction"""
         self.session = scoped_session(
             sessionmaker(
-                bind=service.engine,
+                bind=self.service.engine,
                 extension=ZopeTransactionExtension(),
             )
         )
