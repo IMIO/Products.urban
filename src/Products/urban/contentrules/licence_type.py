@@ -65,10 +65,9 @@ class LicenceTypeConditionExecutor(object):
         self.event = event
 
     def __call__(self):
-        parent_lic = getattr(self.context, "get_parent_licence", None)
-        if parent_lic is None:
+        if not hasattr(self.context, "get_parent_licence",):
             return False
-        context_type = parent_lic().portal_type
+        context_type = self.context.get_parent_licence().portal_type
         if context_type is None:
             return False
         condition_types = getattr(self.element, 'licence_type', None)
@@ -90,9 +89,9 @@ class LicenceTypeAddForm(AddForm):
     form_name = _(u"Configure element")
 
     def create(self, data):
-        c = LicenceTypeCondition()
-        form.applyChanges(c, self.form_fields, data)
-        return c
+        condition = LicenceTypeCondition()
+        form.applyChanges(condition, self.form_fields, data)
+        return condition
 
 
 class LicenceTypeEditForm(EditForm):
