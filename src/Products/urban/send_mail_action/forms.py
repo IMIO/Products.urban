@@ -76,9 +76,12 @@ class SendMailActionForm(Form):
             notif = []
         if not isinstance(notif, list):
             notif = [notif]
+        user_id = user.id
+        username = user.getProperty("fullname", None)
         notif.append({
             "title": self.label,
-            "user": user,
+            "user": user_id,
+            "username": username,
             "time": time
         })
         annotations[MAIL_ACTION_KEY] = notif

@@ -283,18 +283,14 @@ class UrbanEventView(BrowserView):
     def mail_send(self):
         annotations = interfaces.IAnnotations(self.context)
         notif = annotations.get(MAIL_ACTION_KEY, None)
-        if notif is None:
+        if notif is None or len(notif) == 0:
             return False
+
         notif.sort(key=lambda elem: elem["time"])
-
-        user = notif[-1]["user"]
-        username = user.id
-
-        try:
-            username = user.getProperty("fullname")
-        except AttributeError:
-            pass
-
+        user = notif[-1].get("user")
+        username = notif[-1].get("username", None)
+        if username is None or username == "":
+            username = user
         return _(
             "Mail already send for ${title} by ${user}, ${date}",
             mapping={
