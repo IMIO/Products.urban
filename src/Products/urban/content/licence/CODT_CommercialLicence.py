@@ -31,14 +31,6 @@ optional_fields = ["limitedImpact", "SDC_divergence"]
 
 schema = Schema(
     (
-        StringField(
-            name="centrality",
-            widget=SelectionWidget(
-                label=_("urban_label_centrality", default="Centrality"),
-            ),
-            schemata="urban_location",
-            vocabulary="listCentralities",
-        ),
         IntegerField(
             name="surfaceFoodBusiness",
             default=0,
@@ -128,16 +120,6 @@ class CODT_CommercialLicence(BaseFolder, CODT_BaseBuildLicence, BrowserDefaultMi
             delay += 30
 
         return "{}j".format(str(delay))
-
-    def listCentralities(self):
-        vocab = (
-            ("ukn", "Non determiné"),
-            ("villageoise", "villageoise"),
-            ("urbaine", "urbaine"),
-            ("urbaine_de_pole", "urbaine de pôle"),
-            ("bordure_de_centralite", "bordure de centralité"),
-        )
-        return DisplayList(vocab)
 
 
 registerType(CODT_CommercialLicence, PROJECTNAME)
