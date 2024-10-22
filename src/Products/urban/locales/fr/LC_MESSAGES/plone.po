@@ -471,8 +471,11 @@ msgstr "Refusé"
 msgid "reopen"
 msgstr "Réouvrir"
 
-msgid "resume_thaw"
+msgid "resume"
 msgstr "Reprendre"
+
+msgid "resume_thaw"
+msgstr "Dégeler"
 
 # transitions
 msgid "retire"
@@ -491,13 +494,13 @@ msgid "send_to_prosecutor"
 msgstr "Envoi au procureur"
 
 msgid "suspend"
-msgstr "Suspendre"
+msgstr "Interrompre"
 
 msgid "suspend_freeze"
 msgstr "Suspendre (gel délais)"
 
 msgid "suspension"
-msgstr "Suspension"
+msgstr "Interrompu"
 
 msgid "update_additionalLegalConditions"
 msgstr "Mise à jour des Registre des conditions intégrales et sectorielles supplémentaires"

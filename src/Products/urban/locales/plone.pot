@@ -521,6 +521,9 @@ msgstr ""
 msgid "suspension"
 msgstr ""
 
+msgid "resume"
+msgstr ""
+
 msgid "resume_thaw"
 msgstr ""
 
