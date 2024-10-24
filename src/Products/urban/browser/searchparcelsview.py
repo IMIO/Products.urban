@@ -280,6 +280,9 @@ class SearchParcelsView(BrowserView):
                 street_b = street.getStreetName().decode("utf8")
             number_b = wl["number"]
 
+        if not all([street_a, street_b, number_a, number_b]):
+            return False
+
         same_street = Levenshtein.ratio(street_a, street_b) > 0.8
         same_number = self._haveSameNumbers(number_a, number_b)
 
