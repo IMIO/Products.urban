@@ -352,6 +352,9 @@ msgstr "Suivi avec procureur"
 msgid "follow_without_prosecutor"
 msgstr "Suivi sans procureur"
 
+msgid "frozen_suspension"
+msgstr "Gelé (délais suspendus)"
+
 msgid "genericlicence_investigationstart_valdiation_error"
 msgstr "Un événement de type 'Enquête publique' est lié à cette enquête, vous devez donc définir une date valide.  Si vous souhaitez supprimer cette enquête, supprimez d'abord l'événement lié.  <a href='${linkedurbaneventurl}'>Cliquez ici pour y accéder</a>"
 
@@ -468,8 +471,11 @@ msgstr "Refusé"
 msgid "reopen"
 msgstr "Réouvrir"
 
-msgid "resume_thaw"
+msgid "resume"
 msgstr "Reprendre"
+
+msgid "resume_thaw"
+msgstr "Dégeler"
 
 # transitions
 msgid "retire"
@@ -487,11 +493,14 @@ msgstr "Envoyer l'avis"
 msgid "send_to_prosecutor"
 msgstr "Envoi au procureur"
 
+msgid "suspend"
+msgstr "Interrompre"
+
 msgid "suspend_freeze"
 msgstr "Suspendre (gel délais)"
 
-msgid "suspend"
-msgstr "Suspendre"
+msgid "suspension"
+msgstr "Interrompu"
 
 msgid "update_additionalLegalConditions"
 msgstr "Mise à jour des Registre des conditions intégrales et sectorielles supplémentaires"
