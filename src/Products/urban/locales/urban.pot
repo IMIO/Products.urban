@@ -571,6 +571,10 @@ msgstr ""
 msgid "Listing file (recipients)"
 msgstr ""
 
+#: ../browser/urbaneventviews.py:297
+msgid "Mail already send for ${title} by ${user}, ${date}"
+msgstr ""
+
 #: ../interfaces.py:663
 msgid "Mailing limit"
 msgstr ""
