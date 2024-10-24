@@ -8,19 +8,20 @@ from zope.annotation.interfaces import IAnnotations
 from zope.component import getMultiAdapter, getUtility
 from zope.schema.interfaces import IVocabularyFactory
 from zope.interface import alsoProvides
-from .interfaces import IConfigImportMarker
 from zope.interface import noLongerProvides
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from Products.urban.browser.exportimport.interfaces import IConfigImportMarker
 from Products.urban.interfaces import IUrbanTool
 from OFS.interfaces import IApplication
 from Products.urban.interfaces import ILicenceConfig
+
 import logging
 
 logger = logging.getLogger("Import Urban Config")
 
 DEFERRED_KEY = "exportimport.deferred"
 DEFERRED_FIELD_MAPPING = {
-    "EventConfig": ["keyDates"],
+    "EventConfig": ["keyDates", "textDefaultValues"],
 }
 SIMPLE_SETTER_FIELDS = {"EventConfig": ["eventPortalType"]}
 
@@ -97,6 +98,7 @@ class ConfigImportContent(ImportContent):
         item = self.handle_template_urbantemplate(item)
         item = self.handle_scheduled_contenttype(item)
         item = self.handle_wrong_type(item)
+        item = self.handle_textDefaultValues(item)
 
         if self.import_to_current_lic_config_folder:
             item = self.handle_change_id(item)
@@ -225,6 +227,23 @@ class ConfigImportContent(ImportContent):
                     item[key] = correct_type(item[key])
                 else:
                     item[key] = adapter(item[key])
+        return item
+
+    def handle_textDefaultValues(self, item):
+        if "textDefaultValues" not in item:
+            return item
+        text_default_values = item["textDefaultValues"]
+        if not text_default_values:
+            return item
+        output = []
+        for value in text_default_values:
+            text = value["text"]
+            fieldname = value["fieldname"]
+            output.append({
+                "text": text,
+                "fieldname": fieldname,
+            })
+        item["textDefaultValues"] = output
         return item
 
     def global_obj_hook_before_deserializing(self, obj, item):

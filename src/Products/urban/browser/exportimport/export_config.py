@@ -3,9 +3,9 @@
 from Acquisition import aq_parent
 from collective.exportimport.export_content import ExportContent
 from zope.interface import alsoProvides
-from .interfaces import IConfigExportMarker
 from zope.interface import noLongerProvides
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from Products.urban.browser.exportimport.interfaces import IConfigExportMarker
 from Products.urban.interfaces import ILicenceConfig
 from Products.urban.interfaces import IUrbanTool
 

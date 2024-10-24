@@ -58,5 +58,7 @@
   <adapter factory=".serializer.UrbanConfigCollectionFieldSerializer" />
   <adapter factory=".deserializer.UrbanConfigCollectionFieldDeserializer" />
   <adapter factory=".deserializer.UrbanConfigChoiceFieldDeserializer" />
+  <adapter factory=".deserializer.DatagridRowDeserializer" />
+  <adapter factory=".deserializer.DatagridDatetimeDeserializer" />
 
 </configure>

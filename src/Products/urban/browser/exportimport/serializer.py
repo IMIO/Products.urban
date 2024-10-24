@@ -8,7 +8,7 @@ from zope.component import adapter
 from zope.interface import implementer
 from zope.schema.interfaces import IChoice
 from zope.schema.interfaces import ICollection
-from .interfaces import IConfigExportMarker
+from Products.urban.browser.exportimport.interfaces import IConfigExportMarker
 from zope.schema.interfaces import IVocabularyTokenized
 from plone.restapi.serializer.converters import json_compatible
 

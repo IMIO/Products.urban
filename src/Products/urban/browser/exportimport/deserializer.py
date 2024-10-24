@@ -11,15 +11,27 @@ from zope.schema.interfaces import IField
 from zope.schema.interfaces import IVocabularyTokenized
 from plone.restapi.deserializer.dxfields import CollectionFieldDeserializer
 from plone.restapi.deserializer.dxfields import ChoiceFieldDeserializer
-from .interfaces import IConfigImportMarker
-from zope.schema.interfaces import ConstraintNotSatisfied
-from zope.schema.interfaces import RequiredMissing
+from Products.urban.browser.exportimport.interfaces import IConfigImportMarker
 from zope.schema import ValidationError
-from plone.restapi.interfaces import IDeserializeFromJson
-from Products.Archetypes.interfaces import IBaseObject
-from plone.restapi.deserializer.atcontent import DeserializeFromJson
-from zope.schema.interfaces import IObject
-from imio.schedule.deserializer import ObjectDeserializer
+from collective.z3cform.datagridfield.interfaces import IRow
+from plone.restapi.deserializer.dxfields import DatetimeFieldDeserializer
+from plone.restapi.deserializer.dxfields import DefaultFieldDeserializer
+from pytz import timezone
+from pytz import utc
+from zope.component import queryMultiAdapter
+from zope.publisher.interfaces.browser import IBrowserRequest
+from zope.schema import getFields
+from zope.schema.interfaces import IDatetime
+from Products.CMFPlone.utils import safe_unicode
+from zope.component import getUtility
+from zope.schema.interfaces import IVocabularyFactory
+from zope import schema
+
+import dateutil
+import logging
+import six
+
+logger = logging.getLogger("Import Urban Config")
 
 
 @implementer(IFieldDeserializer)
@@ -32,7 +44,6 @@ class UrbanConfigCollectionFieldDeserializer(CollectionFieldDeserializer):
             deserializer = getMultiAdapter(
                 (self.field.value_type, self.context, self.request), IFieldDeserializer
             )
-
             values = [
                 self._deserialize(value, deserializer)
                 for value in values
@@ -49,11 +60,12 @@ class UrbanConfigCollectionFieldDeserializer(CollectionFieldDeserializer):
             output = self._deserialize(value, deserializer)
             if output is None:
                 return False
-        except ConstraintNotSatisfied:
-            return False
-        except RequiredMissing:
-            return False
-        except ValidationError:
+        except ValidationError as error:
+            logger.warn(
+                "Error '{}' for value '{}', as been removed because of a ValidationError for {}".format(
+                    error.doc(), error.message , "/".join(self.context.getPhysicalPath())
+                )
+            )
             return False
         return True
 
@@ -80,6 +92,89 @@ class UrbanConfigChoiceFieldDeserializer(ChoiceFieldDeserializer):
                 value = self.field.vocabulary.getTerm(value).value
             except LookupError:
                 return None
+
+        self.field.validate(value)
+        return value
+
+
+@implementer(IFieldDeserializer)
+@adapter(IRow, IDexterityContent, IConfigImportMarker)
+class DatagridRowDeserializer(DefaultFieldDeserializer):
+    def __call__(self, value):
+        row_data = {}
+
+        for name, field in getFields(self.field.schema).items():
+            if field.readonly:
+                continue
+
+            if IDatetime.providedBy(field):
+                # use the overriden deserializer to get the right
+                # datamanager context
+                context = self.field
+            else:
+                context = self.context
+
+            deserializer = queryMultiAdapter(
+                (field, context, self.request), IFieldDeserializer
+            )
+            if deserializer is None:
+                # simply add value
+                if name in value:
+                    row_data[name] = value[name]
+                continue
+            if not isinstance(value[name], six.text_type):
+                value[name] = safe_unicode(value[name])
+
+            if isinstance(field, schema.Choice):
+                self._set_vocabulary(field)
+
+            row_data[name] = deserializer(value[name])
+
+        return row_data
+
+    def _set_vocabulary(self, field):
+        """Ensure that vocabularies have the right values
+        to avoid errors during validation"""
+        vocabulary_factory = getUtility(
+            IVocabularyFactory,
+            name=field.vocabularyName,
+        )
+        field.vocabulary = vocabulary_factory(self.context)
+
+
+# We override DatetimeDeserializer because of the IDatamanager context
+# in a DatagridField the context is the field not the dexterity type
+@implementer(IFieldDeserializer)
+@adapter(IDatetime, IRow, IConfigImportMarker)
+class DatagridDatetimeDeserializer(DatetimeFieldDeserializer):
+    def __call__(self, value):
+        # TODO: figure out how to get tsinfo from current context
+        tzinfo = None
+
+        # see plone.restapi.deserializer.dxfields
+        # This happens when a 'null' is posted for a non-required field.
+        if value is None:
+            self.field.validate(value)
+            return
+
+        # Parse ISO 8601 string with dateutil
+        try:
+            dt = dateutil.parser.parse(value)
+        except ValueError:
+            raise ValueError("Invalid date: {}".format(value))
+
+        # Convert to TZ aware in UTC
+        if dt.tzinfo is not None:
+            dt = dt.astimezone(utc)
+        else:
+            dt = utc.localize(dt)
+
+        # Convert to local TZ aware or naive UTC
+        if tzinfo is not None:
+            tz = timezone(tzinfo.zone)
+            value = tz.normalize(dt.astimezone(tz))
+        else:
+            value = utc.normalize(dt.astimezone(utc)).replace(tzinfo=None)
 
         self.field.validate(value)
         return value
