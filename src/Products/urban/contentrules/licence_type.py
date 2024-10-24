@@ -16,47 +16,48 @@ from zope.interface import Interface, implements
 from zope.schema.interfaces import IVocabularyFactory
 
 
-class IOpinionsCondition(Interface):
+class ILicenceTypeCondition(Interface):
     """Interface for the configurable aspects of a Event type condition.
 
     This is also used to create add and edit forms, below.
     """
 
-    opinions_to_ask = schema.List(
-        title=_(u"Opinion to ask"),
+    licence_type = schema.List(
+        title=_(u"Licence Type"),
         required=True,
         value_type=schema.Choice(
-            vocabulary="urban.vocabularies.all_opinions_to_ask",
+            vocabulary="urban.vocabularies.licence_types",
         )
     )
-    
-    
 
 
-class OpinionsCondition(SimpleItem):
+class LicenceTypeCondition(SimpleItem):
     """The actual persistent implementation of the Event type condition element."""
 
-    implements(IOpinionsCondition, IRuleElementData)
+    implements(ILicenceTypeCondition, IRuleElementData)
 
-    opinions_to_ask = []
-    element = "urban.conditions.Opinions"
+    licence_type = []
+    element = "urban.conditions.licence_type"
 
     @property
     def summary(self):
-        factory = getUtility(IVocabularyFactory, "urban.vocabularies.all_opinions_to_ask")
+        factory = getUtility(IVocabularyFactory, "urban.vocabularies.licence_types")
         vocabulary = factory(api.portal.get())
-        values = [vocabulary.by_value[opinion].title for opinion in list(self.opinions_to_ask)]
-        return u"Opinion to ask : {}".format(", ".join(values))
+        values = [
+            vocabulary.by_value[opinion].title
+            for opinion in list(self.licence_type)
+        ]
+        return u"Licence Type : {}".format(", ".join(values))
 
 
-class OpinionsConditionExecutor(object):
+class LicenceTypeConditionExecutor(object):
     """The executor for this condition.
 
     This is registered as an adapter in configure.zcml
     """
 
     implements(IExecutable)
-    adapts(Interface, IOpinionsCondition, Interface)
+    adapts(Interface, ILicenceTypeCondition, Interface)
 
     def __init__(self, context, element, event):
         self.context = context
@@ -64,32 +65,39 @@ class OpinionsConditionExecutor(object):
         self.event = event
 
     def __call__(self):
-        opinions_to_ask_condition = list(self.element.opinions_to_ask)
-        context_uid = self.event.object.getUrbaneventtypes().UID()
-        return any([opinion == context_uid for opinion in opinions_to_ask_condition])
+        if not hasattr(self.context, "get_parent_licence",):
+            return False
+        context_type = self.context.get_parent_licence().portal_type
+        if context_type is None:
+            return False
+        condition_types = getattr(self.element, 'licence_type', None)
+        if not condition_types and not isinstance(condition_types, list):
+            return False
+
+        return context_type in condition_types
 
 
-class OpinionsAddForm(AddForm):
+class LicenceTypeAddForm(AddForm):
     """An add form for opinion to ask condition."""
 
-    form_fields = form.FormFields(IOpinionsCondition)
-    label = _(u"Add Opinion to ask Condition")
+    form_fields = form.FormFields(ILicenceTypeCondition)
+    label = _(u"Add licence type Condition")
     description = _(
-        u"A opinion to ask condition makes the rule apply "
-        "only when one of the Opinion to ask slelected correspond to the one of the context"
+        u"A licence type condition makes the rule apply "
+        "only when one of the licence type slelected correspond to the one of the context"
     )
     form_name = _(u"Configure element")
 
     def create(self, data):
-        c = OpinionsCondition()
-        form.applyChanges(c, self.form_fields, data)
-        return c
+        condition = LicenceTypeCondition()
+        form.applyChanges(condition, self.form_fields, data)
+        return condition
 
 
-class OpinionsEditForm(EditForm):
+class LicenceTypeEditForm(EditForm):
     """An edit form for Opinion to ask condition"""
 
-    form_fields = form.FormFields(IOpinionsCondition)
+    form_fields = form.FormFields(ILicenceTypeCondition)
     label = _(u"Edit Opinion to ask Condition")
     description = _(
         u"A opinion to ask condition makes the rule apply "
