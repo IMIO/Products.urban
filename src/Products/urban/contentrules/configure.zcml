@@ -96,4 +96,34 @@
         factory=".opinions.OpinionsCondition"
         />
 
+    <!-- event type conditions -->
+
+    <adapter factory=".licence_type.LicenceTypeConditionExecutor" />
+
+    <browser:page
+      for="plone.app.contentrules.browser.interfaces.IRuleConditionAdding"
+      name="urban.conditions.licence_type"
+      class=".licence_type.LicenceTypeAddForm"
+      permission="cmf.ManagePortal"
+      />
+
+    <browser:page
+      for=".licence_type.LicenceTypeCondition"
+      name="edit"
+      class=".licence_type.LicenceTypeEditForm"
+      permission="cmf.ManagePortal"
+      />
+
+    <plone:ruleCondition
+        name="urban.conditions.licence_type"
+        title="Licence type"
+        description="Apply only when one of the licence type slelected correspond to the one of the context"
+        for="*"
+        event="*"
+        addview="urban.conditions.licence_type"
+        editview="edit"
+        schema=".licence_type.ILicenceTypeCondition"
+        factory=".licence_type.LicenceTypeCondition"
+        />
+
 </configure>
