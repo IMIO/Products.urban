@@ -116,7 +116,7 @@ class TitleColumn(UrbanColumn):
             title_words.insert(15 * (split + 1), "<br />")
         title = " ".join(title_words)
 
-        title = '<a href="%s" class="%s">%s</a>' % (url, css_class, title)
+        title = '<a href="{}" class="{}">{}</a>'.format(url, css_class, title)
         return title
 
     def renderCell(self, urbanlist_item):
@@ -236,7 +236,7 @@ class ContacTitleDisplay(TitleDisplay):
         if tel:
             address = "%s<br /><span>%s</span>" % (address, tel)
 
-        title = "%s%s" % (title, address)
+        title = "{}{}".format(title, address)
         return title
 
 
