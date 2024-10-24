@@ -16,7 +16,12 @@
                                                                   member context/@@plone_portal_state/member;
                                                                   recipients context/getRecipients;
                                                                   global parcels view/getParcels;">
-
+                    <div id="messageWrapper" style="position: relative" tal:condition="view/mail_send" tal:define="mail_send view/mail_send">
+                        <dl class="portalMessage info">
+                        <dt i18n:domain="plone" i18n:translate="">Info</dt>
+                        <dd tal:content="mail_send"></dd>
+                        </dl>
+                    </div>
                     <div class="action-bar">
                     <metal:listing use-macro="here/@@globalmacros/goBackToMacro" />
                         <div class="action-bar-text" i18n:domain="plone"
