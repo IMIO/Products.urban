@@ -511,3 +511,21 @@ msgstr ""
 
 msgid "make_obsolete"
 msgstr ""
+
+msgid "suspend"
+msgstr ""
+
+msgid "suspend_freeze"
+msgstr ""
+
+msgid "suspension"
+msgstr ""
+
+msgid "resume"
+msgstr ""
+
+msgid "resume_thaw"
+msgstr ""
+
+msgid "frozen_suspension"
+msgstr ""
