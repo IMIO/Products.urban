@@ -1,11 +1,19 @@
 # -*- coding: utf-8 -*-
 
+from Acquisition import aq_parent
 from collective.exportimport.import_content import ImportContent
 from plone import api
 from plone.restapi.interfaces import IDeserializeFromJson
 from zope.annotation.interfaces import IAnnotations
 from zope.component import getMultiAdapter, getUtility
 from zope.schema.interfaces import IVocabularyFactory
+from zope.interface import alsoProvides
+from zope.interface import noLongerProvides
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from Products.urban.browser.exportimport.interfaces import IConfigImportMarker
+from Products.urban.interfaces import IUrbanTool
+from OFS.interfaces import IApplication
+from Products.urban.interfaces import ILicenceConfig
 
 import logging
 
@@ -13,12 +21,17 @@ logger = logging.getLogger("Import Urban Config")
 
 DEFERRED_KEY = "exportimport.deferred"
 DEFERRED_FIELD_MAPPING = {
-    "EventConfig": ["keyDates"],
+    "EventConfig": ["keyDates", "textDefaultValues"],
 }
 SIMPLE_SETTER_FIELDS = {"EventConfig": ["eventPortalType"]}
 
 
+def to_str_utf8(value):
+    return str(value).decode("utf-8")
+
+
 class ConfigImportContent(ImportContent):
+    template = ViewPageTemplateFile("templates/import_urban_config.pt")
 
     title = "Import Urban Config data"
     DROP_FIELDS = {
@@ -27,11 +40,72 @@ class ConfigImportContent(ImportContent):
             "mailing_loop_template",
         ],
     }
-    default_value_none = {"EventConfig": {"activatedFields": []}}
+    default_value_none = {
+        "EventConfig": {"activatedFields": []},
+        "TaskConfig": {
+            "calculation_delay": [],
+            "additional_delay_type": "absolute",
+            "additional_delay": u"0"
+        },
+        "MacroTaskConfig": {
+            "calculation_delay": [],
+            "additional_delay_type": "absolute",
+            "additional_delay": u"0"
+        }
+    }
+    wrong_type = {
+        "TaskConfig": {"additional_delay": {"type": str, "adapter": to_str_utf8}},
+        "MacroTaskConfig": {"additional_delay": {"type": str, "adapter": to_str_utf8}}
+    }
+
+    def __call__(
+        self,
+        jsonfile=None,
+        return_json=False,
+        limit=None,
+        server_file=None,
+        iterator=None,
+        import_to_current_lic_config_folder=False,
+        import_in_same_instance=False
+    ):
+        self.import_to_current_lic_config_folder = import_to_current_lic_config_folder
+        self.import_in_same_instance = import_in_same_instance
+        if not self.check_in_portal_urban():
+            self.context = api.portal.get_tool("portal_urban")
+        alsoProvides(self.request, IConfigImportMarker)
+        output = super(ConfigImportContent, self).__call__(
+            jsonfile,
+            return_json,
+            limit,
+            server_file,
+            iterator
+        )
+        noLongerProvides(self.request, IConfigImportMarker)
+        return output
+
+    def check_in_portal_urban(self):
+        if IUrbanTool.providedBy(self.context):
+            return True
+        current = self.context
+        while not IApplication.providedBy(current):
+            if IUrbanTool.providedBy(current):
+                return True
+            current = aq_parent(current)
+        return False
 
     def global_dict_hook(self, item):
         item = self.handle_default_value_none(item)
         item = self.handle_template_urbantemplate(item)
+        item = self.handle_scheduled_contenttype(item)
+        item = self.handle_wrong_type(item)
+        item = self.handle_textDefaultValues(item)
+
+        if self.import_to_current_lic_config_folder:
+            item = self.handle_change_id(item)
+
+        if self.import_in_same_instance:
+            del item["UID"]
+            del item["parent"]["UID"]
 
         item[DEFERRED_KEY] = {}
         for fieldname in DEFERRED_FIELD_MAPPING.get(item["@type"], []):
@@ -84,6 +158,26 @@ class ConfigImportContent(ImportContent):
         # cleanup
         del annotations[DEFERRED_KEY]
 
+    def check_in_licence_config(self):
+        if ILicenceConfig.providedBy(self.context):
+            return True, self.context
+        current = self.context
+        while not IUrbanTool.providedBy(current):
+            if ILicenceConfig.providedBy(current):
+                return True, current
+            current = aq_parent(current)
+        return False, None
+
+    def handle_change_id(self, item):
+        check, context_licence = self.check_in_licence_config()
+        licence_url = item.get("licence_url", None)
+        if not check or not licence_url:
+            return item
+        context_path = context_licence.absolute_url()
+        item["@id"] = item["@id"].replace(licence_url, context_path)
+        item["parent"]["@id"] = item["parent"]["@id"].replace(licence_url, context_path)
+        return item
+
     def handle_default_value_none(self, item):
         for key in self.default_value_none.get(item["@type"], {}):
             if item[key] is None:
@@ -104,6 +198,52 @@ class ConfigImportContent(ImportContent):
             merge_template["template"] = "--NOVALUE--"
             new_merge_templates.append(merge_template)
         item["merge_templates"] = new_merge_templates
+        return item
+
+    def handle_scheduled_contenttype(self, item):
+        scheduled_contenttype = item.get("scheduled_contenttype", None)
+        if scheduled_contenttype is None:
+            return item
+
+        scheduled_contenttype = (
+            scheduled_contenttype[0],
+            tuple(tuple(inner_list) for inner_list in scheduled_contenttype[1])
+        )
+        factory_kwargs = item.get("factory_kwargs", {})
+        factory_kwargs["scheduled_contenttype"] = scheduled_contenttype
+
+        item["factory_kwargs"] = factory_kwargs
+        return item
+
+    def handle_wrong_type(self, item):
+        config = self.wrong_type.get(item["@type"], {})
+        for key in config:
+            if key not in item:
+                continue
+            correct_type = config[key]["type"]
+            if not isinstance(item[key], correct_type):
+                adapter = config[key].get("adapter", None)
+                if adapter is None:
+                    item[key] = correct_type(item[key])
+                else:
+                    item[key] = adapter(item[key])
+        return item
+
+    def handle_textDefaultValues(self, item):
+        if "textDefaultValues" not in item:
+            return item
+        text_default_values = item["textDefaultValues"]
+        if not text_default_values:
+            return item
+        output = []
+        for value in text_default_values:
+            text = value["text"]
+            fieldname = value["fieldname"]
+            output.append({
+                "text": text,
+                "fieldname": fieldname,
+            })
+        item["textDefaultValues"] = output
         return item
 
     def global_obj_hook_before_deserializing(self, obj, item):
