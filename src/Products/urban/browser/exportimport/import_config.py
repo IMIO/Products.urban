@@ -1,21 +1,23 @@
 # -*- coding: utf-8 -*-
 
 from Acquisition import aq_parent
+from OFS.interfaces import IApplication
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from Products.urban.browser.exportimport.interfaces import IConfigImportMarker
+from Products.urban.interfaces import ILicenceConfig
+from Products.urban.interfaces import IUrbanTool
 from collective.exportimport.import_content import ImportContent
 from plone import api
 from plone.restapi.interfaces import IDeserializeFromJson
 from zope.annotation.interfaces import IAnnotations
-from zope.component import getMultiAdapter, getUtility
-from zope.schema.interfaces import IVocabularyFactory
+from zope.component import getMultiAdapter
+from zope.component import getUtility
 from zope.interface import alsoProvides
 from zope.interface import noLongerProvides
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from Products.urban.browser.exportimport.interfaces import IConfigImportMarker
-from Products.urban.interfaces import IUrbanTool
-from OFS.interfaces import IApplication
-from Products.urban.interfaces import ILicenceConfig
+from zope.schema.interfaces import IVocabularyFactory
 
 import logging
+
 
 logger = logging.getLogger("Import Urban Config")
 
@@ -45,17 +47,17 @@ class ConfigImportContent(ImportContent):
         "TaskConfig": {
             "calculation_delay": [],
             "additional_delay_type": "absolute",
-            "additional_delay": u"0"
+            "additional_delay": u"0",
         },
         "MacroTaskConfig": {
             "calculation_delay": [],
             "additional_delay_type": "absolute",
-            "additional_delay": u"0"
-        }
+            "additional_delay": u"0",
+        },
     }
     wrong_type = {
         "TaskConfig": {"additional_delay": {"type": str, "adapter": to_str_utf8}},
-        "MacroTaskConfig": {"additional_delay": {"type": str, "adapter": to_str_utf8}}
+        "MacroTaskConfig": {"additional_delay": {"type": str, "adapter": to_str_utf8}},
     }
 
     def __call__(
@@ -66,7 +68,7 @@ class ConfigImportContent(ImportContent):
         server_file=None,
         iterator=None,
         import_to_current_lic_config_folder=False,
-        import_in_same_instance=False
+        import_in_same_instance=False,
     ):
         self.import_to_current_lic_config_folder = import_to_current_lic_config_folder
         self.import_in_same_instance = import_in_same_instance
@@ -74,11 +76,7 @@ class ConfigImportContent(ImportContent):
             self.context = api.portal.get_tool("portal_urban")
         alsoProvides(self.request, IConfigImportMarker)
         output = super(ConfigImportContent, self).__call__(
-            jsonfile,
-            return_json,
-            limit,
-            server_file,
-            iterator
+            jsonfile, return_json, limit, server_file, iterator
         )
         noLongerProvides(self.request, IConfigImportMarker)
         return output
@@ -207,7 +205,7 @@ class ConfigImportContent(ImportContent):
 
         scheduled_contenttype = (
             scheduled_contenttype[0],
-            tuple(tuple(inner_list) for inner_list in scheduled_contenttype[1])
+            tuple(tuple(inner_list) for inner_list in scheduled_contenttype[1]),
         )
         factory_kwargs = item.get("factory_kwargs", {})
         factory_kwargs["scheduled_contenttype"] = scheduled_contenttype
@@ -239,10 +237,12 @@ class ConfigImportContent(ImportContent):
         for value in text_default_values:
             text = value["text"]
             fieldname = value["fieldname"]
-            output.append({
-                "text": text,
-                "fieldname": fieldname,
-            })
+            output.append(
+                {
+                    "text": text,
+                    "fieldname": fieldname,
+                }
+            )
         item["textDefaultValues"] = output
         return item
 

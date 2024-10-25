@@ -1,35 +1,36 @@
 # -*- coding: utf-8 -*-
 
-from plone.dexterity.interfaces import IDexterityContent
-from plone.restapi.interfaces import IFieldDeserializer
-from zope.component import adapter
-from zope.component import getMultiAdapter
-from zope.interface import implementer
-from zope.schema.interfaces import IChoice
-from zope.schema.interfaces import ICollection
-from zope.schema.interfaces import IField
-from zope.schema.interfaces import IVocabularyTokenized
-from plone.restapi.deserializer.dxfields import CollectionFieldDeserializer
-from plone.restapi.deserializer.dxfields import ChoiceFieldDeserializer
+from Products.CMFPlone.utils import safe_unicode
 from Products.urban.browser.exportimport.interfaces import IConfigImportMarker
-from zope.schema import ValidationError
 from collective.z3cform.datagridfield.interfaces import IRow
+from plone.dexterity.interfaces import IDexterityContent
+from plone.restapi.deserializer.dxfields import ChoiceFieldDeserializer
+from plone.restapi.deserializer.dxfields import CollectionFieldDeserializer
 from plone.restapi.deserializer.dxfields import DatetimeFieldDeserializer
 from plone.restapi.deserializer.dxfields import DefaultFieldDeserializer
+from plone.restapi.interfaces import IFieldDeserializer
 from pytz import timezone
 from pytz import utc
+from zope import schema
+from zope.component import adapter
+from zope.component import getMultiAdapter
+from zope.component import getUtility
 from zope.component import queryMultiAdapter
+from zope.interface import implementer
 from zope.publisher.interfaces.browser import IBrowserRequest
 from zope.schema import getFields
+from zope.schema import ValidationError
+from zope.schema.interfaces import IChoice
+from zope.schema.interfaces import ICollection
 from zope.schema.interfaces import IDatetime
-from Products.CMFPlone.utils import safe_unicode
-from zope.component import getUtility
+from zope.schema.interfaces import IField
 from zope.schema.interfaces import IVocabularyFactory
-from zope import schema
+from zope.schema.interfaces import IVocabularyTokenized
 
 import dateutil
 import logging
 import six
+
 
 logger = logging.getLogger("Import Urban Config")
 
@@ -63,7 +64,7 @@ class UrbanConfigCollectionFieldDeserializer(CollectionFieldDeserializer):
         except ValidationError as error:
             logger.warn(
                 "Error '{}' for value '{}', as been removed because of a ValidationError for {}".format(
-                    error.doc(), error.message , "/".join(self.context.getPhysicalPath())
+                    error.doc(), error.message, "/".join(self.context.getPhysicalPath())
                 )
             )
             return False
@@ -83,10 +84,7 @@ class UrbanConfigChoiceFieldDeserializer(ChoiceFieldDeserializer):
             value = value["token"]
         if self.field.getName() == "scheduled_contenttype" and isinstance(value, list):
 
-            value = (
-                value[0],
-                tuple(tuple(inner_list) for inner_list in value[1])
-            )
+            value = (value[0], tuple(tuple(inner_list) for inner_list in value[1]))
         if IVocabularyTokenized.providedBy(self.field.vocabulary):
             try:
                 value = self.field.vocabulary.getTerm(value).value

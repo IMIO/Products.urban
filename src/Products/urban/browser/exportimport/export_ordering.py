@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
 from OFS.interfaces import IOrderedContainer
+from collective.exportimport.export_other import ExportOrdering
 from operator import itemgetter
 from plone import api
 from plone.uuid.interfaces import IUUID
-from collective.exportimport.export_other import ExportOrdering
 
 
 class UrbanConfigExportOrdering(ExportOrdering):

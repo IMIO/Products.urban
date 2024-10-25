@@ -1,16 +1,16 @@
 # -*- coding: utf-8 -*-
 
-from collective.exportimport.serializer import CollectionFieldSerializer
+from Products.urban.browser.exportimport.interfaces import IConfigExportMarker
 from collective.exportimport.serializer import ChoiceFieldSerializer
+from collective.exportimport.serializer import CollectionFieldSerializer
 from plone.dexterity.interfaces import IDexterityContent
 from plone.restapi.interfaces import IFieldSerializer
+from plone.restapi.serializer.converters import json_compatible
 from zope.component import adapter
 from zope.interface import implementer
 from zope.schema.interfaces import IChoice
 from zope.schema.interfaces import ICollection
-from Products.urban.browser.exportimport.interfaces import IConfigExportMarker
 from zope.schema.interfaces import IVocabularyTokenized
-from plone.restapi.serializer.converters import json_compatible
 
 
 @adapter(ICollection, IDexterityContent, IConfigExportMarker)
@@ -41,14 +41,8 @@ class UrbanConfigChoiceFieldSerializer(ChoiceFieldSerializer):
     def __call__(self):
         value = super(UrbanConfigChoiceFieldSerializer, self).__call__()
         if self.field.getName() == "scheduled_contenttype" and isinstance(value, list):
-            value = (
-                value[0],
-                tuple(tuple(inner_list) for inner_list in value[1])
-            )
-        if (
-            value is not None
-            and IVocabularyTokenized.providedBy(self.field.vocabulary)
-        ):
+            value = (value[0], tuple(tuple(inner_list) for inner_list in value[1]))
+        if value is not None and IVocabularyTokenized.providedBy(self.field.vocabulary):
             try:
                 self.field.vocabulary.getTerm(value)
             except LookupError:
