@@ -8,7 +8,7 @@
 <div metal:fill-slot="main">
     <tal:main-macro metal:define-macro="main">
 
-      <h1 class="documentFirstHeading" i18n:translate="">Import Urban Config</h1>
+      <h1 class="documentFirstHeading" i18n:translate="">Import Content</h1>
 
       <p class="documentDescription" i18n:translate="">Here you can upload a json-file.</p>
 
@@ -33,7 +33,6 @@
                 </select>
               </div>
             </tal:block>
-
 
             <div class="field mb-3">
               <label for="include_blobs" i18n:translate="">Handle existing content</label>
@@ -65,35 +64,26 @@
               <label>
                 <input
                     type="checkbox"
-                    name="import_in_same_instance:boolean"
-                    id="import_in_same_instance"
-                    tal:attributes="checked python:'checked' if view.import_in_same_instance else None"
-                    />
-                <span i18n:translate="">Import in the same instance from export</span>
-              </label>
-            </div>
-
-            <div class="field">
-              <label>
-                <input
-                    type="checkbox"
-                    name="import_to_current_lic_config_folder:boolean"
-                    id="import_to_current_lic_config_folder"
-                    tal:attributes="checked python:'checked' if view.import_to_current_lic_config_folder else None"
-                    />
-                <span i18n:translate="">Import all items into the current licence config folder</span>
-              </label>
-            </div>
-
-            <div class="field">
-              <label>
-                <input
-                    type="checkbox"
                     name="import_to_current_folder:boolean"
                     id="import_to_current_folder"
                     tal:attributes="checked python:'checked' if view.import_to_current_folder else None"
                     />
                 <span i18n:translate="">Import all items into the current folder</span>
+              </label>
+            </div>
+
+            <div class="field">
+              <label>
+                <input
+                    type="checkbox"
+                    name="import_old_revisions:boolean"
+                    id="import_old_revisions"
+                    tal:attributes="checked python:'checked' if view.import_old_revisions else None"
+                    />
+                <span i18n:translate="">Import all old revisions</span>
+                <span class="formHelp" i18n:translate="">
+                  This will import the content-history (versioning) for each item that has revisions. Warning: This can significantly slow down the import!
+                </span>
               </label>
             </div>
 
@@ -106,7 +96,7 @@
 
         </form>
 
-        <div metal:use-macro="context/@@exportimport_urban_config_links/links">
+        <div metal:use-macro="context/@@exportimport_links/links">
           Links to all exports and imports
         </div>
 
