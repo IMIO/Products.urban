@@ -35,7 +35,7 @@
             </div>
         </form>
 
-        <div metal:use-macro="context/@@exportimport_links/links">
+        <div metal:use-macro="context/@@exportimport_urban_config_links/links">
           Links to all exports and imports
         </div>
 
