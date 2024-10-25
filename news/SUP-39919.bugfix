@@ -1,2 +1,0 @@
-Fix an issue when there was too many connection open that raised a SQLAlchemy error
-[laulaz]
