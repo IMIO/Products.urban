@@ -3710,12 +3710,24 @@ default_values = {
         "form_composition": [
             "UrbanVocabularyTerm",
             {
+                "id": "10",
+                "title": u"1/1 Formulaire général permis environnement et unique"
+            },
+            {
+                "id": "11",
+                "title": u"1/2 Élevage et détention d'animaux"
+            },
+            {
                 "id": "4",
                 "title": u"Annexe IV - Demande de permis avec concours d'un architecte",
             },
             {
                 "id": "5",
                 "title": u"Annexe V - Modification de la destination ou modification de la répartition des surfaces de vente",
+            },
+            {
+                "id": "12",
+                "title": u"Annexe V/1 - Implantation d'un commerce",
             },
             {
                 "id": "6",
@@ -3730,6 +3742,23 @@ default_values = {
                 "id": "9",
                 "title": u"Annexe IX - Permis d'urbanisme dispensé d'un architecte ou autre que les demandes visées aux annexes 5 à 8",
             },
+            {
+                "id": "13",
+                "title": u"Annexe IX - Permis d'urbanisme dispensé d'un architecte ou autre que les demandes visées aux annexes 5 à 8",
+            },
+            {
+                "id": "14",
+                "title": u"Annexe X - Demande de permis d'urbanisation ou de modification de permis d'urbanisation"
+            },
+            {
+                "id": "15",
+                "title": u"Annexe XI - Demande de permis d'urbanisation ou de modification de permis d'urbanisation avec contenu simplifié"
+            },
+            {
+                "id": "16",
+                "title": u"Annexe XV - Demande de certificat d'urbanisme n°2"
+            },
+
         ],
         "classification_order_scope": [
             "UrbanVocabularyTerm",
