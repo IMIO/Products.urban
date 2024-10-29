@@ -413,7 +413,7 @@
   />
 
   <browser:page
-     for="Products.urban.interfaces.IMiscDemand"
+     for="Products.urban.interfaces.IPatrimonyCertificate"
      name="patrimonycertificateview"
      class=".patrimonycertificateview.PatrimonyCertificateView"
      template="templates/patrimonycertificateview.pt"
@@ -422,7 +422,7 @@
 
   <browser:page
      name="patrimonycertificate-macros"
-     for="Products.urban.interfaces.IMiscDemand"
+     for="Products.urban.interfaces.IPatrimonyCertificate"
      template="templates/patrimonycertificatemacros.pt"
      permission="zope2.View"
   />
