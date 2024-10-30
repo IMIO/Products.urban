@@ -358,6 +358,9 @@ class Ticket(BaseFolder, GenericLicence, BrowserDefaultMixin):
     def getLastSettlement(self):
         return self.getLastEvent(interfaces.ISettlementEvent)
 
+    def getLastReportEvent(self):
+        return self.getLastEvent(interfaces.IUrbanEventInspectionReport)
+
 
 registerType(Ticket, PROJECTNAME)
 
