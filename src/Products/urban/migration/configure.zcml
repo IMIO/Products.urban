@@ -14,8 +14,4 @@
       name="clean-csvreplicata"
   />
 
-  <adapter factory=".update_250.macro_end_condition_object_converter" />
-  <adapter factory=".update_250.macro_creation_condition_object_converter" />
-  <adapter factory=".update_250.macro_recurence_condition_object_converter" />
-
 </configure>
