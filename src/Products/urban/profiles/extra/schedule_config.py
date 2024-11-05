@@ -261,6 +261,7 @@ schedule_config = {
             'start_date': 'urban.schedule.start_date.deposit_date',
             'creation_conditions': (
                 MacroCreationConditionObject('urban.schedule.condition.will_have_announcement', 'AND'),
+            ),
             "type_name": "TaskConfig",
             "id": "announcement-preparation",
             "title": "Préparer l'annonce de projet",
@@ -276,6 +277,7 @@ schedule_config = {
             ),
             'end_conditions': (
                 MacroEndConditionObject('urban.schedule.condition.announcement_dates_defined', 'AND'),
+            ),
             "end_conditions": (
                 EndConditionObject(
                     "urban.schedule.condition.announcement_dates_defined", "AND"
@@ -285,6 +287,7 @@ schedule_config = {
             'recurrence_states': ('complete', ),
             'recurrence_conditions': (
                 MacroRecurrenceConditionObject('urban.schedule.condition.will_have_announcement', 'AND'),
+            ),
             "activate_recurrency": True,
             "recurrence_states": ("complete",),
             "recurrence_conditions": (
@@ -305,6 +308,7 @@ schedule_config = {
             'starting_states': ('complete',),
             'creation_conditions': (
                 MacroCreationConditionObject('urban.schedule.condition.announcement_dates_defined', 'AND'),
+            ),
             "type_name": "TaskConfig",
             "id": "announcement",
             "title": "Annonce de projet en cours",
@@ -319,6 +323,7 @@ schedule_config = {
             ),
             'end_conditions': (
                 MacroEndConditionObject('urban.schedule.condition.announcement_done', 'AND'),
+            ),
             "end_conditions": (
                 EndConditionObject("urban.schedule.condition.announcement_done", "AND"),
             ),
@@ -326,6 +331,7 @@ schedule_config = {
             'recurrence_states': ('complete', ),
             'recurrence_conditions': (
                 MacroRecurrenceConditionObject('urban.schedule.condition.announcement_dates_defined', 'AND'),
+            ),
             "activate_recurrency": True,
             "recurrence_states": ("complete",),
             "recurrence_conditions": (
@@ -491,7 +497,7 @@ schedule_config = {
                     "urban.schedule.condition.FD_opinion_received", "AND"
                 ),
             ),
-            "start_date": "urban.schedule.start_date.task_starting_date",
+            "start_date": "schedule.start_date.task_starting_date",
             "additional_delay": 0,
         },
         {
