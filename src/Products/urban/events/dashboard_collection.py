@@ -1,14 +1,12 @@
 # -*- coding: utf-8 -*-
 
-from Acquisition import aq_parent
 from imio.schedule.content.schedule_config import IScheduleConfig
 from imio.schedule.content.task_config import ITaskConfig
 
 
 def set_dashboard_columns(dashboard_collection, event):
-    """
-    """
-    if ITaskConfig.providedBy(aq_parent(dashboard_collection)):
+    """ """
+    if ITaskConfig.providedBy(dashboard_collection.aq_parent):
         columns = (
             u"sortable_title",
             u"address_column",
@@ -18,7 +16,7 @@ def set_dashboard_columns(dashboard_collection, event):
             u"licence_final_duedate",
             u"task_actions_column",
         )
-    elif IScheduleConfig.providedBy(aq_parent(dashboard_collection)):
+    elif IScheduleConfig.providedBy(dashboard_collection.aq_parent):
         columns = (
             u"sortable_title",
             u"pretty_link",
@@ -31,4 +29,5 @@ def set_dashboard_columns(dashboard_collection, event):
         )
     else:
         return
-    dashboard_collection.customViewFields = columns
+
+    dashboard_collection.setCustomViewFields(columns)
