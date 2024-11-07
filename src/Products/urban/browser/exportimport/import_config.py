@@ -9,15 +9,15 @@ from Products.urban.interfaces import IUrbanTool
 from collective.exportimport.import_content import ImportContent
 from plone import api
 from plone.restapi.interfaces import IDeserializeFromJson
+from six.moves.urllib.parse import unquote
+from six.moves.urllib.parse import urlparse
+from zExceptions import NotFound
 from zope.annotation.interfaces import IAnnotations
 from zope.component import getMultiAdapter
 from zope.component import getUtility
 from zope.interface import alsoProvides
 from zope.interface import noLongerProvides
 from zope.schema.interfaces import IVocabularyFactory
-from six.moves.urllib.parse import unquote
-from six.moves.urllib.parse import urlparse
-from zExceptions import NotFound
 
 import logging
 
@@ -57,9 +57,7 @@ class ConfigImportContent(ImportContent):
             "additional_delay_type": "absolute",
             "additional_delay": u"0",
         },
-        "UrbanTemplate": {
-            "style_modification_md5": u"no_md5"
-        }
+        "UrbanTemplate": {"style_modification_md5": u"no_md5"},
     }
     wrong_type = {
         "TaskConfig": {"additional_delay": {"type": str, "adapter": to_str_utf8}},
@@ -77,7 +75,7 @@ class ConfigImportContent(ImportContent):
         import_in_same_instance=False,
     ):
         self.handle_missing_parent = int(self.request.get("handle_missing_parent", 0))
-        self.handle_missing_parent_options=(
+        self.handle_missing_parent_options = (
             ("0", "Raise error"),
             ("1", "Ignore error"),
         )
