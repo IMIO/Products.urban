@@ -26,8 +26,6 @@ from Products.urban.profiles.extra.schedule_config import (
 )
 
 from Products.urban.interfaces import IGenericLicence, IBaseBuildLicence
-from Products.urban.Extensions.fix_moved_class import set_new_class
-from Products.urban.Extensions.fix_moved_class import reindex_object
 import logging
 import re
 
@@ -860,11 +858,3 @@ def update_faceted_collection_widget(context):
                 criterion.criteria._p_changed = 1
 
     logger.info("migration step done!")
-
-
-def macro_condition_converter(value):
-    return {
-        'condition': value.condition,
-        'display_status': value.display_status,
-        'operator': value.operator
-    }
