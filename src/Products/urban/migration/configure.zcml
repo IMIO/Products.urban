@@ -13,5 +13,4 @@
       class=".fix_csv_replicata.CleanCSVReplicata"
       name="clean-csvreplicata"
   />
-
 </configure>
