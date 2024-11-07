@@ -1,5 +1,6 @@
 # encoding: utf-8
 
+from Products.urban.migration.utils import refresh_workflow_permissions
 from plone import api
 import logging
 
@@ -34,3 +35,16 @@ def rename_content_rule(context):
     setup_tool.runImportStepFromProfile("profile-Products.urban:default", "contentrules")
 
     logger.info("upgrade step done!")
+
+
+def fix_supended_state_licence(context):
+    logger = logging.getLogger("urban: Fix supended state licence")
+    logger.info("starting upgrade steps")
+    portal = api.portal.get()
+    urban_path = "/".join(portal["urban"].getPhysicalPath())
+    refresh_workflow_permissions(
+        "codt_buildlicence_workflow",
+        folder_path=urban_path,
+        for_states=["suspension", "frozen_suspension"]
+    )
+    logger.info("upgrade done!")
