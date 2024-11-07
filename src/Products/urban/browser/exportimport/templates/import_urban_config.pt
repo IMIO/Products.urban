@@ -54,6 +54,24 @@
             </div>
 
             <div class="field mb-3">
+              <label for="include_blobs" i18n:translate="">Handle in case of missing parrent</label>
+              <span class="formHelp" i18n:translate="">
+                  How should content be handled if the parent is missing?
+              </span>
+              <div class="widget">
+                <select name="handle_missing_parent" class="">
+                  <option value="0"
+                          tal:repeat="current python:view.handle_missing_parent_options"
+                          tal:attributes="value python: current[0];
+                                          selected python:'selected' if int(current[0]) == view.handle_missing_parent else False"
+                          tal:content="python:current[1]">
+                        0
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field mb-3">
               <label for="commit" i18n:translate="">Do a commit after each number of items</label>
               <div class="widget">
                 <input type="text" size="5" name="commit" id="commit" value=""
