@@ -15,6 +15,9 @@ from zope.component import getUtility
 from zope.interface import alsoProvides
 from zope.interface import noLongerProvides
 from zope.schema.interfaces import IVocabularyFactory
+from six.moves.urllib.parse import unquote
+from six.moves.urllib.parse import urlparse
+from zExceptions import NotFound
 
 import logging
 
@@ -54,6 +57,9 @@ class ConfigImportContent(ImportContent):
             "additional_delay_type": "absolute",
             "additional_delay": u"0",
         },
+        "UrbanTemplate": {
+            "style_modification_md5": u"no_md5"
+        }
     }
     wrong_type = {
         "TaskConfig": {"additional_delay": {"type": str, "adapter": to_str_utf8}},
@@ -70,6 +76,11 @@ class ConfigImportContent(ImportContent):
         import_to_current_lic_config_folder=False,
         import_in_same_instance=False,
     ):
+        self.handle_missing_parent = int(self.request.get("handle_missing_parent", 0))
+        self.handle_missing_parent_options=(
+            ("0", "Raise error"),
+            ("1", "Ignore error"),
+        )
         self.import_to_current_lic_config_folder = import_to_current_lic_config_folder
         self.import_in_same_instance = import_in_same_instance
         if not self.check_in_portal_urban():
@@ -80,6 +91,37 @@ class ConfigImportContent(ImportContent):
         )
         noLongerProvides(self.request, IConfigImportMarker)
         return output
+
+    def get_parent_as_container(self, item):
+        if self.handle_missing_parent == 0:
+            return super(ConfigImportContent, self).get_parent_as_container(item)
+
+        if item["parent"].get("UID"):
+            # For some reason api.content.get(UID=xxx) does not work sometimes...
+            brains = api.content.find(UID=item["parent"]["UID"])
+            if brains:
+                return super(ConfigImportContent, self).get_parent_as_container(item)
+
+        if item["parent"]["@type"] == "Plone Site":
+            return super(ConfigImportContent, self).get_parent_as_container(item)
+
+        # If the item is missing look for a item with the path of the old parent
+        parent_url = unquote(item["parent"]["@id"])
+        parent_path = urlparse(parent_url).path
+        # physical path is bytes in Zope 2 (not in Zope 4)
+        # so we need to encode parent_path before using plone.api.content.get
+        if isinstance(self.context.getPhysicalPath()[0], bytes):
+            parent_path = parent_path.encode("utf8")
+        parent = None
+        try:
+            parent = api.content.get(path=parent_path)
+        except NotFound:
+            pass
+
+        if parent:
+            return super(ConfigImportContent, self).get_parent_as_container(item)
+
+        return None
 
     def check_in_portal_urban(self):
         if IUrbanTool.providedBy(self.context):
