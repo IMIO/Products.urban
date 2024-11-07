@@ -1,22 +1,30 @@
 # encoding: utf-8
 
-from imio.schedule.events.zope_registration import subscribe_task_configs_for_content_type
-from imio.schedule.events.zope_registration import unsubscribe_task_configs_for_content_type
-from imio.schedule.events.zope_registration import register_schedule_collection_criterion
-from imio.schedule.events.zope_registration import unregister_schedule_collection_criterion
-from imio.schedule.events.zope_registration import register_task_collection_criterion
-from imio.schedule.events.zope_registration import unregister_task_collection_criterion
+from Acquisition import aq_parent
 from OFS.interfaces import IOrderedContainer
-from zope.component import getMultiAdapter
-from plone.restapi.interfaces import ISerializeToJson
-from imio.schedule.content.object_factories import MacroEndConditionObject
 from imio.schedule.content.object_factories import MacroCreationConditionObject
+from imio.schedule.content.object_factories import MacroEndConditionObject
+from imio.schedule.content.object_factories import MacroFreezeConditionObject
 from imio.schedule.content.object_factories import MacroRecurrenceConditionObject
 from imio.schedule.content.object_factories import MacroStartConditionObject
 from imio.schedule.content.object_factories import MacroThawConditionObject
-from imio.schedule.content.object_factories import MacroFreezeConditionObject
-from Acquisition import aq_parent
+from imio.schedule.events.zope_registration import (
+    register_schedule_collection_criterion,
+)
+from imio.schedule.events.zope_registration import register_task_collection_criterion
+from imio.schedule.events.zope_registration import (
+    subscribe_task_configs_for_content_type,
+)
+from imio.schedule.events.zope_registration import (
+    unregister_schedule_collection_criterion,
+)
+from imio.schedule.events.zope_registration import unregister_task_collection_criterion
+from imio.schedule.events.zope_registration import (
+    unsubscribe_task_configs_for_content_type,
+)
 from plone import api
+from plone.restapi.interfaces import ISerializeToJson
+from zope.component import getMultiAdapter
 
 import logging
 
@@ -69,23 +77,23 @@ def _replace_object(obj, new_type, condition=None, logger=None):
 
     serializer = getMultiAdapter((obj, request), ISerializeToJson)
     old_obj_data = serializer()
-    collection_uid = obj['dashboard_collection'].UID()
+    collection_uid = obj["dashboard_collection"].UID()
     log_info(logger, "{} deleted".format("/".join(obj.getPhysicalPath())))
     api.content.delete(obj)
 
     new_obj = api.content.create(
         container=container,
         type=new_type,
-        id=old_obj_data['id'],
-        title=old_obj_data['title'],
-        start_date=old_obj_data['start_date']['token'],
+        id=old_obj_data["id"],
+        title=old_obj_data["title"],
+        start_date=old_obj_data["start_date"]["token"],
         enabled=old_obj_data["enabled"],
-        default_assigned_group=old_obj_data["default_assigned_group"]['token'],
-        default_assigned_user=old_obj_data["default_assigned_user"]['token'],
+        default_assigned_group=old_obj_data["default_assigned_group"]["token"],
+        default_assigned_user=old_obj_data["default_assigned_user"]["token"],
         warning_delay=old_obj_data["warning_delay"],
         additional_delay=old_obj_data["additional_delay"],
         additional_delay_type=old_obj_data["additional_delay_type"],
-        round_to_day=old_obj_data["round_to_day"]['token'],
+        round_to_day=old_obj_data["round_to_day"]["token"],
         activate_recurrency=old_obj_data["activate_recurrency"],
     )
     log_info(logger, "{} created".format("/".join(obj.getPhysicalPath())))
@@ -98,13 +106,16 @@ def _replace_object(obj, new_type, condition=None, logger=None):
         "ending_states",
         "freeze_states",
         "thaw_states",
-        "recurrence_states"
+        "recurrence_states",
     ]
 
     for key in state_keys:
         if key in old_obj_data and old_obj_data[key]:
-            setattr(new_obj, key, [item['token'] for item in old_obj_data["calculation_delay"]])
-            
+            setattr(
+                new_obj,
+                key,
+                [item["token"] for item in old_obj_data["calculation_delay"]],
+            )
 
     conditions = {
         "creation_conditions": MacroCreationConditionObject,
@@ -112,7 +123,7 @@ def _replace_object(obj, new_type, condition=None, logger=None):
         "end_conditions": MacroEndConditionObject,
         "freeze_conditions": MacroFreezeConditionObject,
         "thaw_conditions": MacroThawConditionObject,
-        "recurrence_conditions": MacroRecurrenceConditionObject
+        "recurrence_conditions": MacroRecurrenceConditionObject,
     }
 
     for key, value in conditions.items():
@@ -120,20 +131,22 @@ def _replace_object(obj, new_type, condition=None, logger=None):
             setattr(
                 new_obj,
                 key,
-                set([
+                set(
+                    [
                     value(
                         condition=item["condition"],
                         operator=item["operator"],
-                        display_status=item["display_status"]
+                            display_status=item["display_status"],
                     )
                     for item in old_obj_data[key]
-                ])
+                    ]
+                ),
             )
 
     unsubscribe_task_configs_for_content_type(new_obj, None)
     unregister_task_collection_criterion(new_obj, None)
 
-    setattr(new_obj, "_plone.uuid", old_obj_data['UID'])
+    setattr(new_obj, "_plone.uuid", old_obj_data["UID"])
     new_obj.reindexObject(idxs=["UID"])
 
     if ordered:
@@ -143,7 +156,7 @@ def _replace_object(obj, new_type, condition=None, logger=None):
     subscribe_task_configs_for_content_type(new_obj, None)
     register_task_collection_criterion(new_obj, None)
 
-    dashboard_collection = new_obj['dashboard_collection']
+    dashboard_collection = new_obj["dashboard_collection"]
 
     setattr(dashboard_collection, "_plone.uuid", collection_uid)
     dashboard_collection.reindexObject(idxs=["UID"])
@@ -151,12 +164,8 @@ def _replace_object(obj, new_type, condition=None, logger=None):
     dashboard_collection.showNumberOfItems = True
 
     query = [
-        {
-            'i': filter['i'],
-            'o': filter['o'],
-            'v': old_obj_data['UID']
-        }
-        if filter['i'] == 'CompoundCriterion'
+        {"i": filter["i"], "o": filter["o"], "v": old_obj_data["UID"]}
+        if filter["i"] == "CompoundCriterion"
         else filter
         for filter in dashboard_collection.query
     ]
@@ -165,29 +174,28 @@ def _replace_object(obj, new_type, condition=None, logger=None):
 
 
 def fix_config_wrong_class(context):
-    """
-    """
-    logger = logging.getLogger('migrate announcement schedule config')
+    """ """
+    logger = logging.getLogger("migrate announcement schedule config")
     logger.info("starting upgrade steps")
-    portal_urban = api.portal.get_tool('portal_urban')
-    for licence_config in portal_urban.objectValues('LicenceConfig'):
-        schedule_cfg = getattr(licence_config, 'schedule', None)
+    portal_urban = api.portal.get_tool("portal_urban")
+    for licence_config in portal_urban.objectValues("LicenceConfig"):
+        schedule_cfg = getattr(licence_config, "schedule", None)
 
-        if schedule_cfg and hasattr(schedule_cfg, 'announcement-preparation'):
+        if schedule_cfg and hasattr(schedule_cfg, "announcement-preparation"):
             data = schedule_cfg.REQUEST.form
-            data['force_dashboard_creation'] = True
+            data["force_dashboard_creation"] = True
             schedule_cfg.REQUEST.form = data
 
             unregister_schedule_collection_criterion(schedule_cfg, None)
 
-            announcement_prep_task = getattr(schedule_cfg, 'announcement-preparation')
+            announcement_prep_task = getattr(schedule_cfg, "announcement-preparation")
             _replace_object(announcement_prep_task, "MacroTaskConfig", logger)
 
-            announcement_done_task = getattr(schedule_cfg, 'announcement')
+            announcement_done_task = getattr(schedule_cfg, "announcement")
             _replace_object(announcement_done_task, "MacroTaskConfig", logger)
 
             register_schedule_collection_criterion(schedule_cfg, None)
-            data['force_dashboard_creation'] = False
+            data["force_dashboard_creation"] = False
             schedule_cfg.REQUEST.form = data
 
     logger.info("Upgrade step done!")
