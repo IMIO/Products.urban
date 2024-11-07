@@ -476,14 +476,6 @@
         profile="Products.urban:default" />
 
     <gs:upgradeStep
-        title="Fix config wrong class"
-        description="Fix config wrong class"
-        source="1130"
-        destination="1131"
-        handler=".update_250.fix_config_wrong_class"
-        profile="Products.urban:default" />
-
-    <gs:upgradeStep
         title="Add Couple to Preliminary Notice"
         description="Add Couple to Preliminary Notice"
         source="1130"
@@ -680,6 +672,15 @@
         source="1152"
         destination="1153"
         handler=".update_270.rename_content_rule"
+        profile="Products.urban:default"
+        />
+
+    <gs:upgradeStep
+        title="Fix config wrong class"
+        description="Fix config wrong class"
+        source="1153"
+        destination="1154"
+        handler=".update_270.fix_config_wrong_class"
         profile="Products.urban:default"
         />
 
