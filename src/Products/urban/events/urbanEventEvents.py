@@ -15,6 +15,8 @@ from zope.lifecycleevent import ObjectModifiedEvent
 from plone import api
 from plone.memoize.request import cache
 
+import logging
+
 
 def setDefaultValuesEvent(urbanevent, event):
     """
@@ -101,6 +103,10 @@ def updateKeyEvent(urban_event, event):
 
 def updateDecisionDate(urban_event, event):
     if ITheLicenceEvent.providedBy(urban_event):
+        logger = logging.getLogger('updateDecisionDate')
+        logger.info("reindex 'getDecisionDate' trigger by {}".format(
+            str(event.__class__).replace("<class '", "").replace("'>", "")
+        ))
         licence = urban_event.aq_inner.aq_parent
         licence.reindexObject(["getDecisionDate"])
 
