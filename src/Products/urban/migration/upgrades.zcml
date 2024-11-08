@@ -675,4 +675,13 @@
         profile="Products.urban:default"
         />
 
+    <gs:upgradeStep
+        title="Fix supended state licence"
+        description=""
+        source="1153"
+        destination="1154"
+        handler=".update_270.fix_supended_state_licence"
+        profile="Products.urban:default"
+        />
+
 </configure>
