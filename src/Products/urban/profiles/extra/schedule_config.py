@@ -7,7 +7,7 @@ from imio.schedule.content.object_factories import MacroCreationConditionObject
 from imio.schedule.content.object_factories import MacroEndConditionObject
 from imio.schedule.content.object_factories import MacroStartConditionObject
 from imio.schedule.content.object_factories import RecurrenceConditionObject
-
+from imio.schedule.content.object_factories import MacroRecurrenceConditionObject
 
 schedule_config = {
     "codt_buildlicence": [
@@ -250,7 +250,7 @@ schedule_config = {
             ],
         },
         {
-            "type_name": "TaskConfig",
+            "type_name": "MacroTaskConfig",
             "id": "announcement-preparation",
             "title": "Préparer l'annonce de projet",
             "default_assigned_group": "urban_editors",
@@ -259,19 +259,19 @@ schedule_config = {
             "starting_states": ("complete",),
             "start_date": "urban.schedule.start_date.deposit_date",
             "creation_conditions": (
-                CreationConditionObject(
+                MacroCreationConditionObject(
                     "urban.schedule.condition.will_have_announcement", "AND"
                 ),
             ),
             "end_conditions": (
-                EndConditionObject(
+                MacroEndConditionObject(
                     "urban.schedule.condition.announcement_dates_defined", "AND"
                 ),
             ),
             "activate_recurrency": True,
             "recurrence_states": ("complete",),
             "recurrence_conditions": (
-                RecurrenceConditionObject(
+                MacroRecurrenceConditionObject(
                     "urban.schedule.condition.will_have_announcement", "AND"
                 ),
             ),
@@ -279,7 +279,7 @@ schedule_config = {
             "additional_delay": 20,
         },
         {
-            "type_name": "TaskConfig",
+            "type_name": "MacroTaskConfig",
             "id": "announcement",
             "title": "Annonce de projet en cours",
             "default_assigned_group": "urban_editors",
@@ -287,17 +287,17 @@ schedule_config = {
             "creation_state": ("complete",),
             "starting_states": ("complete",),
             "creation_conditions": (
-                CreationConditionObject(
+                MacroCreationConditionObject(
                     "urban.schedule.condition.announcement_dates_defined", "AND"
                 ),
             ),
             "end_conditions": (
-                EndConditionObject("urban.schedule.condition.announcement_done", "AND"),
+                MacroEndConditionObject("urban.schedule.condition.announcement_done", "AND"),
             ),
             "activate_recurrency": True,
             "recurrence_states": ("complete",),
             "recurrence_conditions": (
-                RecurrenceConditionObject(
+                MacroRecurrenceConditionObject(
                     "urban.schedule.condition.announcement_dates_defined", "AND"
                 ),
             ),
