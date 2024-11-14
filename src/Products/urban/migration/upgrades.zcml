@@ -678,8 +678,8 @@
     <gs:upgradeStep
         title="Fix config wrong class"
         description="Fix config wrong class"
-        source="1153"
-        destination="1154"
+        source="1154"
+        destination="1155"
         handler=".update_270.fix_config_wrong_class"
         profile="Products.urban:default"
         />
