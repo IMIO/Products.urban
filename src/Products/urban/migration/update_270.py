@@ -2,6 +2,7 @@
 
 from Acquisition import aq_parent
 from OFS.interfaces import IOrderedContainer
+from Products.urban.migration.utils import refresh_workflow_permissions
 from imio.schedule.content.object_factories import MacroCreationConditionObject
 from imio.schedule.content.object_factories import MacroEndConditionObject
 from imio.schedule.content.object_factories import MacroFreezeConditionObject
@@ -59,6 +60,19 @@ def rename_content_rule(context):
     setup_tool.runImportStepFromProfile("profile-Products.urban:default", "contentrules")
 
     logger.info("upgrade step done!")
+
+
+def fix_supended_state_licence(context):
+    logger = logging.getLogger("urban: Fix supended state licence")
+    logger.info("starting upgrade steps")
+    portal = api.portal.get()
+    urban_path = "/".join(portal["urban"].getPhysicalPath())
+    refresh_workflow_permissions(
+        "codt_buildlicence_workflow",
+        folder_path=urban_path,
+        for_states=["suspension", "frozen_suspension"]
+    )
+    logger.info("upgrade done!")
 
 
 def log_info(logger, msg):
