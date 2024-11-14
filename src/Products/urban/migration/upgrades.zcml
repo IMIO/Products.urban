@@ -683,5 +683,14 @@
         handler=".update_270.fix_supended_state_licence"
         profile="Products.urban:default"
         />
+  
+    <gs:upgradeStep
+        title="Fix config wrong class"
+        description="Fix config wrong class"
+        source="1154"
+        destination="1155"
+        handler=".update_270.fix_config_wrong_class"
+        profile="Products.urban:default"
+        />
 
 </configure>
