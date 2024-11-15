@@ -389,10 +389,11 @@ def fix_validity_filter_title(context):
     folders = [getattr(urban_folder, urban_type.lower() + "s", None) for urban_type in URBAN_TYPES]
     folders.append(urban_folder)
     for folder in folders:
-        criterion = ICriteria(folder)
-        if criterion is None:
-            continue
-        criterion.edit("c99", title="Date de validité")
+        criteria = ICriteria(folder)
+        if criteria:
+            criterion = criteria.get("c13")
+            if criterion and criterion.index == u"getValidityDate":
+                criteria.edit("c13", title="Date de validité")
 
     logger.info("upgrade done!")
 
