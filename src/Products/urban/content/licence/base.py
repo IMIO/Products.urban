@@ -30,16 +30,18 @@ from zope.schema.interfaces import IVocabularyFactory
 from zope.interface import implements
 from Products.urban import interfaces
 from urban.vocabulary.vocabularies.base import BaseVocabulary
+from OFS.interfaces import IOrderedContainer
+from Products.Archetypes.OrderedBaseFolder import OrderedContainer
 
 
-class UrbanBase(object):
+class UrbanBase(OrderedContainer):
     """
     This class manage every methods shared cross different licences
     """
 
     security = ClassSecurityInfo()
 
-    implements(interfaces.IUrbanBase)
+    implements(interfaces.IUrbanBase, IOrderedContainer)
 
     security.declarePublic("getLicenceConfig")
 
