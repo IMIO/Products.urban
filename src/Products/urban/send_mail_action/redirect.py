@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from imio.pm.wsclient.interfaces import IRedirect
 from Products.Five import BrowserView
+from imio.pm.wsclient.interfaces import IRedirect
 from zope.component.hooks import getSite
 from zope.interface import implements
 

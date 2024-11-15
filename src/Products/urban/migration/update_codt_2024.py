@@ -323,5 +323,7 @@ def install_send_mail_with_attachement_action(context):
     )
     setup_tool.runImportStepFromProfile("profile-Products.urban:default", "actions")
     setup_tool.runImportStepFromProfile("profile-Products.urban:default", "jsregistry")
-    setup_tool.runImportStepFromProfile("profile-Products.urban:default", "contentrules")
+    setup_tool.runImportStepFromProfile(
+        "profile-Products.urban:default", "contentrules"
+    )
     logger.info("upgrade done!")

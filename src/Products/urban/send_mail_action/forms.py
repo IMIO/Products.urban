@@ -1,23 +1,25 @@
 # -*- coding: utf-8 -*-
 
+from .event import SendMailAction
 from Products.urban import UrbanMessage as _
 from imio.pm.wsclient.interfaces import IRedirect
 from plone.z3cform.layout import wrap_form
-from z3c.form import button, field
+from z3c.form import button
+from z3c.form import field
 from z3c.form.browser.checkbox import CheckBoxFieldWidget
 from z3c.form.form import Form
 from zope import schema
 from zope.event import notify
-from zope.interface import Interface
 from zope.i18n import translate
-
-from .event import SendMailAction
+from zope.interface import Interface
 
 
 class ISendMailActionForm(Interface):
     files = schema.List(
         title=_(u"Licence Files"),
-        description=_(u"Select all files from this event or the parent licence you whant to send"),
+        description=_(
+            u"Select all files from this event or the parent licence you whant to send"
+        ),
         required=False,
         value_type=schema.Choice(vocabulary="urban.vocabularies.licence_documents"),
     )
@@ -41,8 +43,8 @@ class SendMailActionForm(Form):
         label = ", ".join(rules)
         if last_rule is not None:
             label += translate(
-                _(" and ${last_rule}", mapping={"last_rule":last_rule}),
-                context=request
+                _(" and ${last_rule}", mapping={"last_rule": last_rule}),
+                context=request,
             )
         self.label = label
 
