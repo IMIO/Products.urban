@@ -46,8 +46,15 @@
   />
 
   <utility
-    component=".vocabularies.AllOpinionsToAskVocabularyFactory"
-    name="urban.vocabularies.all_opinions_to_ask"
+    component=".vocabularies.LicenceDocumentsVocabularyFactory"
+    name="urban.vocabularies.licence_documents"
     provides="zope.schema.interfaces.IVocabularyFactory"
   />
+
+  <utility
+    component=".vocabularies.EventTypesFactory"
+    name="urban.vocabularies.event_types"
+    provides="zope.schema.interfaces.IVocabularyFactory"
+  />
+
 </configure>

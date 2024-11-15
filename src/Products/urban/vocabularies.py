@@ -246,8 +246,8 @@ class DateIndexVocabulary(object):
 
         return SimpleVocabulary(terms)
 
-DateIndexVocabularyFactory = DateIndexVocabulary()
 
+DateIndexVocabularyFactory = DateIndexVocabulary()
 
 
 def sorted_by_voc_term_title(value):
@@ -278,6 +278,7 @@ class AllOpinionsToAskVocabulary(object):
 
         return SimpleVocabulary(sorted(items, key=sorted_by_voc_term_title))
 
+
 AllOpinionsToAskVocabularyFactory = AllOpinionsToAskVocabulary()
 
 
@@ -303,3 +304,35 @@ class LicenceDocumentsVocabulary(object):
 
 
 LicenceDocumentsVocabularyFactory = LicenceDocumentsVocabulary()
+
+
+class EventTypes(object):
+    """
+    List all the evenType marker interfaces.
+    """
+
+    def __call__(self, context):
+        gsm = getGlobalSiteManager()
+        interfaces = gsm.getUtilitiesFor(IEventTypeType)
+
+        event_types = []
+        for name, interface in interfaces:
+            event_types.append(
+                (
+                    name,
+                    interface.__doc__,
+                    translate(
+                        msgid=interface.__doc__,
+                        domain='urban',
+                        context=context.REQUEST,
+                        default=interface.__doc__
+                    )
+                )
+            )
+        # sort elements by title
+        event_types = sorted(event_types, key=lambda name: name[2])
+        vocabulary = SimpleVocabulary([SimpleTerm(t[0], t[1], t[2]) for t in event_types])
+        return vocabulary
+
+
+EventTypesFactory = EventTypes()
