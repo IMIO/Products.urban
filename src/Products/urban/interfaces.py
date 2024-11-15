@@ -4,6 +4,7 @@ from zope.interface import Interface
 from zope import schema
 
 from zope.interface.interfaces import IInterface
+from zope.publisher.interfaces.browser import IDefaultBrowserLayer
 
 from Products.urban import UrbanMessage as _
 
@@ -696,6 +697,10 @@ class IGlobalSuspensionPeriod(Interface):
 
 class IFacetedCollection(Interface):
     """Adapts an object into a faceted collection"""
+
+
+class IProductUrbanLayer(IDefaultBrowserLayer):
+    """Marker interface that defines a browser layer."""
 
 
 class IIntentionToSubmitAmendedPlans(Interface):

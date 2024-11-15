@@ -318,6 +318,9 @@ def add_new_index_and_new_filter(context):
 def install_send_mail_with_attachement_action(context):
     logger.info("starting : Install send mail with attachement action")
     setup_tool = api.portal.get_tool("portal_setup")
+    setup_tool.runImportStepFromProfile(
+        "profile-Products.urban:default", "browserlayer"
+    )
     setup_tool.runImportStepFromProfile("profile-Products.urban:default", "actions")
     setup_tool.runImportStepFromProfile("profile-Products.urban:default", "jsregistry")
     setup_tool.runImportStepFromProfile("profile-Products.urban:default", "contentrules")
