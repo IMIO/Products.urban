@@ -105,7 +105,7 @@ execute this action"
         # prepend interpolated message with \n to avoid interpretation
         # of first line as header
         body = "\n%s" % interpolator(self.element.message)
-        body_part = MIMEText(body)
+        body_part = MIMEText(body.encode("utf-8"))
         message.attach(body_part)
 
         message = self.attach_document(message)
