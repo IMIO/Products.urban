@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 
+from .interface import ISendMailAction
 from zope.component.interfaces import ObjectEvent
 from zope.interface import implements
-
-from .interface import ISendMailAction
 
 
 class SendMailAction(ObjectEvent):

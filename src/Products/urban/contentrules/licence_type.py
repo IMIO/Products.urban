@@ -3,16 +3,16 @@
 from OFS.SimpleItem import SimpleItem
 from plone import api
 from plone.app.contentrules import PloneMessageFactory as _
-from plone.app.contentrules.browser.formhelper import AddForm, EditForm
-from plone.autoform import directives
-from plone.contentrules.rule.interfaces import IExecutable, IRuleElementData
-from z3c.form.browser.orderedselect import OrderedSelectWidget
-from collective.plonefinder.widgets.referencewidget import FinderSelectWidget
-from z3c.form.browser.orderedselect import SequenceChoiceSelectFieldWidget
+from plone.app.contentrules.browser.formhelper import AddForm
+from plone.app.contentrules.browser.formhelper import EditForm
+from plone.contentrules.rule.interfaces import IExecutable
+from plone.contentrules.rule.interfaces import IRuleElementData
 from zope import schema
-from zope.component import adapts, getUtility
+from zope.component import adapts
+from zope.component import getUtility
 from zope.formlib import form
-from zope.interface import Interface, implements
+from zope.interface import implements
+from zope.interface import Interface
 from zope.schema.interfaces import IVocabularyFactory
 
 
@@ -27,7 +27,7 @@ class ILicenceTypeCondition(Interface):
         required=True,
         value_type=schema.Choice(
             vocabulary="urban.vocabularies.licence_types",
-        )
+        ),
     )
 
 
@@ -44,8 +44,7 @@ class LicenceTypeCondition(SimpleItem):
         factory = getUtility(IVocabularyFactory, "urban.vocabularies.licence_types")
         vocabulary = factory(api.portal.get())
         values = [
-            vocabulary.by_value[opinion].title
-            for opinion in list(self.licence_type)
+            vocabulary.by_value[opinion].title for opinion in list(self.licence_type)
         ]
         return u"Licence Type : {}".format(", ".join(values))
 
@@ -65,12 +64,15 @@ class LicenceTypeConditionExecutor(object):
         self.event = event
 
     def __call__(self):
-        if not hasattr(self.context, "get_parent_licence",):
+        if not hasattr(
+            self.context,
+            "get_parent_licence",
+        ):
             return False
         context_type = self.context.get_parent_licence().portal_type
         if context_type is None:
             return False
-        condition_types = getattr(self.element, 'licence_type', None)
+        condition_types = getattr(self.element, "licence_type", None)
         if not condition_types and not isinstance(condition_types, list):
             return False
 

@@ -1,28 +1,32 @@
 # -*- coding: utf-8 -*-
 
-from plone import api
+from .event import SendMailAction
 from Products.urban import UrbanMessage as _
+from datetime import datetime
 from imio.pm.wsclient.interfaces import IRedirect
+from plone import api
+from plone.app.event.base import default_timezone
 from plone.z3cform.layout import wrap_form
-from z3c.form import button, field
+from z3c.form import button
+from z3c.form import field
 from z3c.form.browser.checkbox import CheckBoxFieldWidget
 from z3c.form.form import Form
 from zope import schema
-from zope.event import notify
-from zope.interface import Interface
-from zope.i18n import translate
-from datetime import datetime
-from .event import SendMailAction
-from plone.app.event.base import default_timezone
 from zope.annotation.interfaces import IAnnotations
+from zope.event import notify
+from zope.i18n import translate
+from zope.interface import Interface
 
 
 MAIL_ACTION_KEY = "Products.urban.send_mail_action"
 
+
 class ISendMailActionForm(Interface):
     files = schema.List(
         title=_(u"Licence Files"),
-        description=_(u"Select all files from this event or the parent licence you whant to send"),
+        description=_(
+            u"Select all files from this event or the parent licence you whant to send"
+        ),
         required=False,
         value_type=schema.Choice(vocabulary="urban.vocabularies.licence_documents"),
     )
@@ -46,8 +50,8 @@ class SendMailActionForm(Form):
         label = ", ".join(rules)
         if last_rule is not None:
             label += translate(
-                _(" and ${last_rule}", mapping={"last_rule":last_rule}),
-                context=request
+                _(" and ${last_rule}", mapping={"last_rule": last_rule}),
+                context=request,
             )
         self.label = label
 
@@ -78,12 +82,9 @@ class SendMailActionForm(Form):
             notif = [notif]
         user_id = user.id
         username = user.getProperty("fullname", None)
-        notif.append({
-            "title": self.label,
-            "user": user_id,
-            "username": username,
-            "time": time
-        })
+        notif.append(
+            {"title": self.label, "user": user_id, "username": username, "time": time}
+        )
         annotations[MAIL_ACTION_KEY] = notif
 
     def render(self):
