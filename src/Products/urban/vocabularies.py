@@ -257,7 +257,7 @@ def sorted_by_voc_term_title(value):
 
 class AllOpinionsToAskVocabulary(object):
     def __call__(self, context):
-        brains = api.content.find(portal_type="OpinionEventConfig")
+        brains = api.content.find(portal_type="OpinionRequestEventType")
         items = []
         for brain in brains:
             obj = brain.getObject()
