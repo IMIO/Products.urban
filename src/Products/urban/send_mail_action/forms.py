@@ -14,9 +14,10 @@ from zope.event import notify
 from zope.i18n import translate
 from zope.interface import Interface
 from datetime import datetime
-from plone.app.event.base import default_timezone
 from zope.annotation.interfaces import IAnnotations
 
+
+import pytz
 
 MAIL_ACTION_KEY = "Products.urban.send_mail_action"
 
@@ -71,7 +72,7 @@ class SendMailActionForm(Form):
 
     def add_notify_info_annotation(self):
         user = api.user.get_current()
-        tz = default_timezone(as_tzinfo=True)
+        tz = pytz.timezone("Europe/Brussels")
         time = datetime.now(tz=tz)
         annotations = IAnnotations(self.context)
         notif = annotations.get(MAIL_ACTION_KEY, None)
