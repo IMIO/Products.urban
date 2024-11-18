@@ -62,7 +62,8 @@ class EventTypeConditionExecutor(object):
         if not event_type_condition:
             return False
         event_config = self.event.object.getUrbaneventtypes()
-        if event_config and event_config.eventType:
+        config_event_types = None
+        if event_config and hasattr(event_config, "eventType"):
             config_event_types = event_config.eventType
         if not self.check_if_iterrable(config_event_types):
             return False
