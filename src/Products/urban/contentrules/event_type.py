@@ -61,11 +61,11 @@ class EventTypeConditionExecutor(object):
         self.event = event
 
     def __call__(self):
+        config_event_types = []
         event_type_condition = self.element.event_type
         if not event_type_condition:
             return False
         event_config = self.event.object.getUrbaneventtypes()
-        config_event_types = None
         if event_config and hasattr(event_config, "eventTypeType"):
             config_event_types = event_config.eventTypeType
         if not self.check_if_iterrable(config_event_types):
