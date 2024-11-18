@@ -269,13 +269,9 @@ class AllOpinionsToAskVocabulary(object):
 
             portal_type_title = portal_type.id
 
-            try:
-                items.append(SimpleTerm(uid, uid, ("{} ({})".format(
-                    convert_to_utf8(title), convert_to_utf8(portal_type_title)
-                )).decode("utf-8")))
-            except Exception as e:
-                __import__('pdb').set_trace()
-                print()
+            items.append(SimpleTerm(uid, uid, ("{} ({})".format(
+                convert_to_utf8(title), convert_to_utf8(portal_type_title)
+            )).decode("utf-8")))
 
         return SimpleVocabulary(sorted(items, key=sorted_by_voc_term_title))
 
