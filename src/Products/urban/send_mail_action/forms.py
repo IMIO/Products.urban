@@ -1,25 +1,26 @@
 # -*- coding: utf-8 -*-
 
 from .event import SendMailAction
-from plone import api
 from Products.urban import UrbanMessage as _
+from datetime import datetime
 from imio.pm.wsclient.interfaces import IRedirect
+from plone import api
 from plone.z3cform.layout import wrap_form
 from z3c.form import button
 from z3c.form import field
 from z3c.form.browser.checkbox import CheckBoxFieldWidget
 from z3c.form.form import Form
 from zope import schema
+from zope.annotation.interfaces import IAnnotations
 from zope.event import notify
 from zope.i18n import translate
 from zope.interface import Interface
-from datetime import datetime
-from zope.annotation.interfaces import IAnnotations
-
 
 import pytz
 
+
 MAIL_ACTION_KEY = "Products.urban.send_mail_action"
+
 
 class ISendMailActionForm(Interface):
     files = schema.List(
@@ -82,12 +83,9 @@ class SendMailActionForm(Form):
             notif = [notif]
         user_id = user.id
         username = user.getProperty("fullname", None)
-        notif.append({
-            "title": self.label,
-            "user": user_id,
-            "username": username,
-            "time": time
-        })
+        notif.append(
+            {"title": self.label, "user": user_id, "username": username, "time": time}
+        )
         annotations[MAIL_ACTION_KEY] = notif
 
     def render(self):

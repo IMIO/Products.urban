@@ -2,29 +2,27 @@
 #
 # Copyright (c) 2011 by CommunesPlone
 # GNU General Public License (GPL)
-from Products.CMFPlone.i18nl10n import utranslate
-
 from Acquisition import aq_parent
-from plone import api
-from Products.urban.config import URBAN_CWATUPE_TYPES
+from Products.CMFPlone.i18nl10n import utranslate
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
+from Products.urban.config import EMPTY_VOCAB_VALUE
 from Products.urban.config import URBAN_CODT_TYPES
+from Products.urban.config import URBAN_CWATUPE_TYPES
 from Products.urban.config import URBAN_ENVIRONMENT_TYPES
 from Products.urban.config import URBAN_TYPES
-from Products.urban.config import EMPTY_VOCAB_VALUE
 from Products.urban.interfaces import IEventTypeType
 from Products.urban.interfaces import IFolderManager
 from Products.urban.interfaces import ILicenceConfig
-from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
-from Products.urban.utils import getCurrentFolderManager
-from Products.urban.utils import get_licence_context
 from Products.urban.utils import convert_to_utf8
-
+from Products.urban.utils import get_licence_context
+from Products.urban.utils import getCurrentFolderManager
+from plone import api
 from zope.component import getGlobalSiteManager
-from zope.interface import implements
 from zope.i18n import translate
+from zope.interface import implements
+from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
-from zope.schema.interfaces import IVocabularyFactory
 
 import grokcore.component as grok
 
@@ -269,9 +267,17 @@ class AllOpinionsToAskVocabulary(object):
 
             portal_type_title = portal_type.id
 
-            items.append(SimpleTerm(uid, uid, ("{} ({})".format(
-                convert_to_utf8(title), convert_to_utf8(portal_type_title)
-            )).decode("utf-8")))
+            items.append(
+                SimpleTerm(
+                    uid,
+                    uid,
+                    (
+                        "{} ({})".format(
+                            convert_to_utf8(title), convert_to_utf8(portal_type_title)
+                        )
+                    ).decode("utf-8"),
+                )
+            )
 
         return SimpleVocabulary(sorted(items, key=sorted_by_voc_term_title))
 
@@ -320,15 +326,17 @@ class EventTypes(object):
                     interface.__doc__,
                     translate(
                         msgid=interface.__doc__,
-                        domain='urban',
+                        domain="urban",
                         context=context.REQUEST,
-                        default=interface.__doc__
-                    )
+                        default=interface.__doc__,
+                    ),
                 )
             )
         # sort elements by title
         event_types = sorted(event_types, key=lambda name: name[2])
-        vocabulary = SimpleVocabulary([SimpleTerm(t[0], t[1], t[2]) for t in event_types])
+        vocabulary = SimpleVocabulary(
+            [SimpleTerm(t[0], t[1], t[2]) for t in event_types]
+        )
         return vocabulary
 
 

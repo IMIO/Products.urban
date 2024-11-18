@@ -5,10 +5,8 @@ from plone import api
 from plone.app.contentrules import PloneMessageFactory as _
 from plone.app.contentrules.browser.formhelper import AddForm
 from plone.app.contentrules.browser.formhelper import EditForm
-from plone.autoform import directives
 from plone.contentrules.rule.interfaces import IExecutable
 from plone.contentrules.rule.interfaces import IRuleElementData
-from z3c.form.browser.orderedselect import OrderedSelectWidget
 from zope import schema
 from zope.component import adapts
 from zope.component import getUtility
