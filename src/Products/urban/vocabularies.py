@@ -13,6 +13,7 @@ from Products.urban.config import URBAN_TYPES
 from Products.urban.config import EMPTY_VOCAB_VALUE
 from Products.urban.interfaces import IEventTypeType
 from Products.urban.interfaces import IFolderManager
+from Products.urban.interfaces import ILicenceConfig
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.utils import getCurrentFolderManager
 from Products.urban.utils import get_licence_context
