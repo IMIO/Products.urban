@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from Acquisition import aq_parent
 from Products.urban.browser.default_text import DefaultTextRenderer
 from Products.urban.events.licenceEvents import _setDefaultSelectValues
 from Products.urban.interfaces import IEventTypeType
@@ -105,12 +104,11 @@ def updateKeyEvent(urban_event, event):
 def updateDecisionDate(urban_event, event):
     if ITheLicenceEvent.providedBy(urban_event):
         logger = logging.getLogger('updateDecisionDate')
-        parent = aq_parent(urban_event)
+        licence = urban_event.aq_inner.aq_parent
         logger.info("reindex 'getDecisionDate' trigger by {} for licence : {}".format(
             event.__class__.__name__,
-            parent.absolute_url()
+            licence.absolute_url()
         ))
-        licence = urban_event.aq_inner.aq_parent
         licence.reindexObject(["getDecisionDate"])
 
 
