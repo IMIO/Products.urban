@@ -693,4 +693,13 @@
         profile="Products.urban:default"
         />
 
+    <gs:upgradeStep
+        title="Migrate rgbsr field to multiple lines"
+        description="Migrate rgbsr field to multiple lines"
+        source="1155"
+        destination="1156"
+        handler=".update_270.migrate_rgbsr_multiple_lines"
+        profile="Products.urban:default"
+        />
+
 </configure>
