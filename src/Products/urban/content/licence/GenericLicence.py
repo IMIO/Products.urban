@@ -646,6 +646,16 @@ schema = Schema(
             default_output_type="text/html",
         ),
         LinesField(
+            name="centrality",
+            widget=MasterMultiSelectWidget(
+                format="checkbox",
+                label=_("urban_label_centrality", default="Centrality"),
+            ),
+            schemata="urban_location",
+            multiValued=1,
+            vocabulary="listCentralities",
+        ),
+        LinesField(
             name="folderZone",
             widget=MultiSelectionWidget(
                 size=10,
@@ -1139,16 +1149,6 @@ schema = Schema(
                 label=_("urban_label_covid", default="COVID19"),
             ),
             schemata="urban_description",
-        ),
-        LinesField(
-            name="centrality",
-            widget=MasterMultiSelectWidget(
-                format="checkbox",
-                label=_("urban_label_centrality", default="Centrality"),
-            ),
-            schemata="urban_location",
-            multiValued=1,
-            vocabulary="listCentralities",
         ),
     ),
 )
