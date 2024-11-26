@@ -693,4 +693,13 @@
         profile="Products.urban:default"
         />
 
+    <gs:upgradeStep
+        title="Add new voc terms for form_composition"
+        description="Add latest new vocabulary terms for form_composition"
+        source="1155"
+        destination="1156"
+        handler=".update_270.add_new_voc_terms_for_form_composition"
+        profile="Products.urban:default"
+        />
+
 </configure>
