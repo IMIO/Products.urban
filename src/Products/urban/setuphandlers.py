@@ -797,10 +797,12 @@ def setDefaultApplicationSecurity(context):
             folder.manage_delLocalRoles(["environment_editors"])
             if folder_name in urban_folder_names:
                 folder.manage_addLocalRoles("urban_readers", ("Reader",))
-                folder.manage_addLocalRoles("urban_editors", ("Contributor",))
+                if folder_name != getLicenceFolderId("CODT_IntegratedLicence"):
+                    folder.manage_addLocalRoles("urban_editors", ("Contributor",))
             if folder_name in environment_folder_names:
                 folder.manage_addLocalRoles("environment_readers", ("Reader",))
-                folder.manage_addLocalRoles("environment_editors", ("Contributor",))
+                if folder_name != getLicenceFolderId("CODT_IntegratedLicence"):
+                    folder.manage_addLocalRoles("environment_editors", ("Contributor",))
             if folder_name == getLicenceFolderId("Inspection"):
                 folder.manage_addLocalRoles("inspection_editors", ("Contributor",))
 
@@ -1004,14 +1006,15 @@ def addApplicationFolders(context):
         setFolderAllowedTypes(licence_folder, urban_type)
         # manage the 'Add' permissions...
         try:
-            licence_folder.manage_permission(
-                "urban: Add %s" % urban_type,
-                [
-                    "Manager",
-                    "Contributor",
-                ],
-                acquire=0,
-            )
+            if urban_type != "CODT_IntegratedLicence":
+                licence_folder.manage_permission(
+                    "urban: Add %s" % urban_type,
+                    [
+                        "Manager",
+                        "Contributor",
+                    ],
+                    acquire=0,
+                )
         except ValueError:
             # exception for some portal_types having a different meta_type
             if urban_type in [
