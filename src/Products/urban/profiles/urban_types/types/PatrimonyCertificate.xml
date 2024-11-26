@@ -7,9 +7,9 @@
  <property name="title" i18n:translate="">PatrimonyCertificate</property>
  <property name="description" i18n:translate=""></property>
  <property name="icon_expr">string:${portal_url}/PatrimonyCertificate.png</property>
- <property name="content_meta_type">MiscDemand</property>
+ <property name="content_meta_type">PatrimonyCertificate</property>
  <property name="product">urban</property>
- <property name="factory">addMiscDemand</property>
+ <property name="factory">addPatrimonyCertificate</property>
  <property name="immediate_view">patrimonycertificateview</property>
  <property name="global_allow">True</property>
  <property name="filter_content_types">True</property>
