@@ -208,4 +208,13 @@
         profile="Products.urban:default"
         />
 
+    <gs:upgradeStep
+        title="Fix supended state licence"
+        description=""
+        source="1141"
+        destination="1142"
+        handler=".update_codt_2024.py.fix_supended_state_licence"
+        profile="Products.urban:default"
+        />
+
 </configure>
