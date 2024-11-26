@@ -394,6 +394,9 @@ class Division(BaseFolder, GenericLicence, BrowserDefaultMixin):
     def getLastTheLicence(self):
         return self.getLastEvent(interfaces.ITheLicenceEvent)
 
+    def getLastAcknowledgment(self, state=None):
+        return self.getLastEvent(interfaces.IAcknowledgmentEvent, state)
+
     def list_patrimony_types(self):
         """ """
         vocabulary = (
