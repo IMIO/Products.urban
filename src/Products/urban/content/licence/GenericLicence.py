@@ -1730,6 +1730,9 @@ class GenericLicence(OrderedBaseFolder, UrbanBase, BrowserDefaultMixin):
 
     def getFirstDeposit(self):
         return self.getFirstEvent(interfaces.IDepositEvent)
+    
+    def getSecondDeposit(self):
+        return self.getSecondEvent(interfaces.IDepositEvent)
 
     def getLastDeposit(self):
         return self.getLastEvent(interfaces.IDepositEvent)
@@ -1786,6 +1789,11 @@ class GenericLicence(OrderedBaseFolder, UrbanBase, BrowserDefaultMixin):
         events = self.getAllEvents(eventInterface)
         if events:
             return events[0]
+        
+    def getSecondEvent(self, eventInterface=None):
+        events = self.getAllEvents(eventInterface)
+        if len(events) > 1:
+            return events[1]
 
     def getLastEventWithValidityDate(self):
         events = [
