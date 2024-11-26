@@ -21,7 +21,6 @@ import pkg_resources
 import time
 
 
-
 def getCurrentFolderManager():
     """
     Returns the current FolderManager initials or object
@@ -257,7 +256,7 @@ def now():
     return datetime.now()
 
 
-def get_licence_context(context, get_all_object=False, max_recurence = 5):
+def get_licence_context(context, get_all_object=False, max_recurence=5):
     context_licence = IGenericLicence.providedBy(context)
     parent = context
     output = [context]
