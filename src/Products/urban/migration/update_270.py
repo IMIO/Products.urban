@@ -2,6 +2,7 @@
 
 from Acquisition import aq_parent
 from OFS.interfaces import IOrderedContainer
+from Products.urban.interfaces import IGenericLicence
 from Products.urban.migration.utils import refresh_workflow_permissions
 from imio.schedule.content.object_factories import MacroCreationConditionObject
 from imio.schedule.content.object_factories import MacroEndConditionObject
@@ -28,6 +29,7 @@ from plone.restapi.interfaces import ISerializeToJson
 from zope.component import getMultiAdapter
 
 import logging
+import six
 
 
 def rename_patrimony_certificate(context):
@@ -211,5 +213,28 @@ def fix_config_wrong_class(context):
             register_schedule_collection_criterion(schedule_cfg, None)
             data["force_dashboard_creation"] = False
             schedule_cfg.REQUEST.form = data
+
+    logger.info("Upgrade step done!")
+
+
+def migrate_rgbsr_multiple_lines(context):
+    """
+    Migrate rgbsr field from StringField to LinesField
+    """
+    logger = logging.getLogger("Migrate rgbsr field to multiple lines")
+    logger.info("starting upgrade steps")
+
+    catalog = api.portal.get_tool("portal_catalog")
+    licence_brains = catalog(object_provides=IGenericLicence.__identifier__)
+
+    for brain in licence_brains:
+        licence = brain.getObject()
+
+        if not hasattr(licence, "rgbsr") or licence.rgbsr is None or type(licence.rgbsr) is tuple:
+            continue
+
+        if isinstance(licence.rgbsr, six.string_types):
+            new_value = () if not licence.rgbsr else (licence.rgbsr,)
+            licence.setRgbsr(new_value)
 
     logger.info("Upgrade step done!")

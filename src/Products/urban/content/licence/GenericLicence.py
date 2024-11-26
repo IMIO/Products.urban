@@ -1067,9 +1067,9 @@ schema = Schema(
             schemata="urban_location",
             default_output_type="text/x-html-safe",
         ),
-        StringField(
+        LinesField(
             name="rgbsr",
-            widget=SelectionWidget(
+            widget=MultiSelect2Widget(
                 label=_("urban_label_rgbsr", default="Rgbsr"),
             ),
             schemata="urban_location",
