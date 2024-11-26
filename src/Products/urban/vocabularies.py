@@ -2,25 +2,27 @@
 #
 # Copyright (c) 2011 by CommunesPlone
 # GNU General Public License (GPL)
+from Acquisition import aq_parent
 from Products.CMFPlone.i18nl10n import utranslate
-
-from plone import api
-from Products.urban.config import URBAN_CWATUPE_TYPES
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
+from Products.urban.config import EMPTY_VOCAB_VALUE
 from Products.urban.config import URBAN_CODT_TYPES
+from Products.urban.config import URBAN_CWATUPE_TYPES
 from Products.urban.config import URBAN_ENVIRONMENT_TYPES
 from Products.urban.config import URBAN_TYPES
-from Products.urban.config import EMPTY_VOCAB_VALUE
 from Products.urban.interfaces import IEventTypeType
 from Products.urban.interfaces import IFolderManager
-from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
+from Products.urban.interfaces import ILicenceConfig
+from Products.urban.utils import convert_to_utf8
+from Products.urban.utils import get_licence_context
 from Products.urban.utils import getCurrentFolderManager
-
+from plone import api
 from zope.component import getGlobalSiteManager
-from zope.interface import implements
 from zope.i18n import translate
+from zope.interface import implements
+from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
-from zope.schema.interfaces import IVocabularyFactory
 
 import grokcore.component as grok
 
@@ -245,3 +247,97 @@ class DateIndexVocabulary(object):
 
 
 DateIndexVocabularyFactory = DateIndexVocabulary()
+
+
+def sorted_by_voc_term_title(value):
+    return value.title.lower()
+
+
+class AllOpinionsToAskVocabulary(object):
+    def __call__(self, context):
+        brains = api.content.find(portal_type="OpinionRequestEventType")
+        items = []
+        for brain in brains:
+            obj = brain.getObject()
+            title = obj.Title()
+            uid = obj.UID()
+            portal_type = obj
+            while not ILicenceConfig.providedBy(portal_type):
+                portal_type = aq_parent(portal_type)
+
+            portal_type_title = portal_type.id
+
+            items.append(
+                SimpleTerm(
+                    uid,
+                    uid,
+                    (
+                        "{} ({})".format(
+                            convert_to_utf8(title), convert_to_utf8(portal_type_title)
+                        )
+                    ).decode("utf-8"),
+                )
+            )
+
+        return SimpleVocabulary(sorted(items, key=sorted_by_voc_term_title))
+
+
+AllOpinionsToAskVocabularyFactory = AllOpinionsToAskVocabulary()
+
+
+class LicenceDocumentsVocabulary(object):
+    implements(IVocabularyFactory)
+
+    def __call__(self, context):
+        contexts = get_licence_context(context, get_all_object=True)
+        output = []
+        if contexts is None:
+            return SimpleVocabulary(output)
+        for context in contexts:
+            docs = [
+                SimpleTerm(doc.UID(), doc.UID(), doc.Title())
+                for doc in context.listFolderContents(
+                    contentFilter={
+                        "portal_type": ["ATFile", "ATImage", "File", "Image"]
+                    }
+                )
+            ]
+            output += docs
+        return SimpleVocabulary(output)
+
+
+LicenceDocumentsVocabularyFactory = LicenceDocumentsVocabulary()
+
+
+class EventTypes(object):
+    """
+    List all the evenType marker interfaces.
+    """
+
+    def __call__(self, context):
+        gsm = getGlobalSiteManager()
+        interfaces = gsm.getUtilitiesFor(IEventTypeType)
+
+        event_types = []
+        for name, interface in interfaces:
+            event_types.append(
+                (
+                    name,
+                    interface.__doc__,
+                    translate(
+                        msgid=interface.__doc__,
+                        domain="urban",
+                        context=context.REQUEST,
+                        default=interface.__doc__,
+                    ),
+                )
+            )
+        # sort elements by title
+        event_types = sorted(event_types, key=lambda name: name[2])
+        vocabulary = SimpleVocabulary(
+            [SimpleTerm(t[0], t[1], t[2]) for t in event_types]
+        )
+        return vocabulary
+
+
+EventTypesFactory = EventTypes()

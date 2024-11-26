@@ -13,6 +13,7 @@ __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEUL
 <stephan.geulette@uvcw.be>, Jean-Michel Abe <jm.abe@la-bruyere.be>"""
 __docformat__ = "plaintext"
 
+from Acquisition import aq_parent
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from zope.interface import implements
@@ -38,6 +39,10 @@ from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.utils import is_attachment
 from Products.urban.utils import setOptionalAttributes
 from Products.urban import UrbanMessage as _
+from plone.contentrules.engine.interfaces import IRuleAssignmentManager
+from zope.component import getUtility, getMultiAdapter
+from plone.contentrules.rule.interfaces import IExecutable
+from plone.contentrules.engine.interfaces import IRuleStorage
 
 from plone import api
 
@@ -945,6 +950,31 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
         selection = [v["val"] for v in values if v["selected"]]
         show = "other" in selection
         return show
+
+    def get_all_rules_for_this_event(self):
+        portal = api.portal.get()
+        assignable = IRuleAssignmentManager(portal)
+        storage = getUtility(IRuleStorage)
+
+        rules = []
+        for key in [key for key in assignable]:
+            conditions = []
+            rule = storage.get(key, None)
+            if rule is None:
+                continue
+            if not rule.enabled:
+                continue
+            for condition in rule.conditions:
+                class EventTemp():
+                    object = self
+                executable = getMultiAdapter((self, condition, EventTemp), IExecutable)
+                conditions.append(executable())
+            if all(conditions):
+                rules.append(rule)
+        return rules
+
+    def get_parent_licence(self):
+        return aq_parent(self)
 
 
 registerType(UrbanEvent, PROJECTNAME)
