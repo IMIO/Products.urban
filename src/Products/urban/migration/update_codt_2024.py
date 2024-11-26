@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from liege.urban.migration.utils import refresh_workflow_permissions
 from Products.urban import URBAN_TYPES
 from Products.urban.setuphandlers import createFolderDefaultValues
 from datetime import datetime
@@ -312,4 +313,17 @@ def add_new_index_and_new_filter(context):
             **data
         )
 
+    logger.info("upgrade done!")
+
+
+def fix_supended_state_licence(context):
+    logger = logging.getLogger("urban: Fix supended state licence")
+    logger.info("starting upgrade steps")
+    portal = api.portal.get()
+    urban_path = "/".join(portal["urban"].getPhysicalPath())
+    refresh_workflow_permissions(
+        "codt_buildlicence_workflow",
+        folder_path=urban_path,
+        for_states=["suspension", "frozen_suspension"]
+    )
     logger.info("upgrade done!")
