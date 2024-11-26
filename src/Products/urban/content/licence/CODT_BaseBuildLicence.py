@@ -18,6 +18,9 @@ from Products.Archetypes.atapi import *
 from plone import api
 from zope.component import getMultiAdapter
 from zope.interface import implements
+from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import (
+    ReferenceBrowserWidget,
+)
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 from Products.urban import interfaces
 from Products.urban.content.licence.BaseBuildLicence import BaseBuildLicence
@@ -525,6 +528,32 @@ schema = Schema(
             ),
             schemata="urban_analysis",
         ),
+        ReferenceField(
+            name="bound_licences",
+            widget=ReferenceBrowserWidget(
+                allow_search=True,
+                allow_browse=False,
+                force_close_on_insert=True,
+                startup_directory="urban",
+                show_indexes=False,
+                wild_card_search=True,
+                restrict_browsing_to_startup_directory=True,
+                label=_("urban_label_bound_licences", default="Bound licences"),
+            ),
+            allowed_types=[
+                t
+                for t in URBAN_TYPES
+                if t
+                not in [
+                    "Inspection",
+                    "Ticket",
+                    "ProjectMeeting",
+                ]
+            ],
+            schemata="urban_description",
+            multiValued=True,
+            relationship="bound_licences",
+        ),
     ),
 )
 
@@ -737,6 +766,7 @@ def finalizeSchema(schema):
     schema.moveField("roadAdaptation", before="roadTechnicalAdvice")
     schema.moveField("architects", after="workLocations")
     schema.moveField("foldermanagers", after="architects")
+    schema.moveField("bound_licences", after="foldermanagers")
     schema.moveField("workType", after="folderCategory")
     schema.moveField("financial_caution", after="workType")
     schema.moveField("parcellings", after="isInSubdivision")
