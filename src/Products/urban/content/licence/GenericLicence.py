@@ -1317,6 +1317,16 @@ schema = Schema(
             default_content_type="text/html",
             default_output_type="text/x-html-safe",
         ),
+        LinesField(
+            name="centrality",
+            widget=MasterMultiSelectWidget(
+                format="checkbox",
+                label=_("urban_label_centrality", default="Centrality"),
+            ),
+            schemata="urban_location",
+            multiValued=1,
+            vocabulary="listCentralities",
+        ),
     ),
 )
 
@@ -1507,6 +1517,18 @@ class GenericLicence(OrderedBaseFolder, UrbanBase, BrowserDefaultMixin):
         )
 
         return DisplayList(vocab)
+
+    security.declarePublic("listCentralities")
+
+    def listCentralities(self):
+        vocab = (
+            ("villageoise", "villageoise"),
+            ("urbaine", "urbaine"),
+            ("urbaine_de_pole", "urbaine de pôle"),
+            ("bordure_de_centralite", "bordure de centralité"),
+        )
+        return DisplayList(vocab)
+
 
     security.declarePublic("foldermanagersBaseQuery")
 
@@ -1708,6 +1730,9 @@ class GenericLicence(OrderedBaseFolder, UrbanBase, BrowserDefaultMixin):
 
     def getFirstDeposit(self):
         return self.getFirstEvent(interfaces.IDepositEvent)
+    
+    def getSecondDeposit(self):
+        return self.getSecondEvent(interfaces.IDepositEvent)
 
     def getLastDeposit(self):
         return self.getLastEvent(interfaces.IDepositEvent)
@@ -1764,6 +1789,11 @@ class GenericLicence(OrderedBaseFolder, UrbanBase, BrowserDefaultMixin):
         events = self.getAllEvents(eventInterface)
         if events:
             return events[0]
+        
+    def getSecondEvent(self, eventInterface=None):
+        events = self.getAllEvents(eventInterface)
+        if len(events) > 1:
+            return events[1]
 
     def getLastEventWithValidityDate(self):
         events = [

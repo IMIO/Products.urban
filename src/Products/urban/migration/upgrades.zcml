@@ -676,10 +676,28 @@
         />
 
     <gs:upgradeStep
-        title="Add new voc terms for form_composition"
-        description="Add latest new vocabulary terms for form_composition"
+        title="Fix supended state licence"
+        description=""
         source="1153"
         destination="1154"
+        handler=".update_270.fix_supended_state_licence"
+        profile="Products.urban:default"
+        />
+  
+    <gs:upgradeStep
+        title="Fix config wrong class"
+        description="Fix config wrong class"
+        source="1154"
+        destination="1155"
+        handler=".update_270.fix_config_wrong_class"
+        profile="Products.urban:default"
+        />
+
+    <gs:upgradeStep
+        title="Add new voc terms for form_composition"
+        description="Add latest new vocabulary terms for form_composition"
+        source="1155"
+        destination="1156"
         handler=".update_270.add_new_voc_terms_for_form_composition"
         profile="Products.urban:default"
         />

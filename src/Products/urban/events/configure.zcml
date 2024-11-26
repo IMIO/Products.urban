@@ -132,6 +132,10 @@
               handler=".urbanEventEvents.updateDecisionDate" />
 
   <subscriber for="..interfaces.IUrbanEvent
+                   Products.DCWorkflow.interfaces.ITransitionEvent"
+              handler=".urbanEventEvents.updateDecisionDate" />
+
+  <subscriber for="..interfaces.IUrbanEvent
                    zope.lifecycleevent.interfaces.IObjectModifiedEvent"
               handler=".urbanEventEvents.updateValidityDate" />
 
