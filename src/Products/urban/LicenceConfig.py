@@ -462,6 +462,13 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
             "road",
         ]
         inspection_tabs_config = ["description", "advices", "inspection", "location"]
+        patrimonycertificate_tabs_config = [
+            "description",
+            "analysis",
+            "location",
+            "road",
+            "patrimony",
+        ]
         ticket_tabs_config = ["description", "inspection", "location"]
 
         types = {
@@ -491,6 +498,7 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
             ],
             "envclassbordering": env_inquiry_tabs_config,
             "inspection": inspection_tabs_config,
+            "patrimonycertificate": patrimonycertificate_tabs_config,
             "ticket": ticket_tabs_config,
             "roaddecree": buildlicence_tabs_config,
         }

@@ -228,4 +228,13 @@
         profile="Products.urban:default"
         />
 
+    <gs:upgradeStep
+        title="Migrate patrimony certificates to their correct object class (instead of misc demand)"
+        description=""
+        source="1143"
+        destination="1144"
+        handler=".update_270.fix_patrimony_certificate_class"
+        profile="Products.urban:default"
+        />
+
 </configure>
