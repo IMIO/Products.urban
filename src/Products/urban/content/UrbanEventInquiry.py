@@ -23,6 +23,7 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from archetypes.referencebrowserwidget.widget import ReferenceBrowserWidget
 from Products.urban.config import *
 from Products.urban import UrbanMessage as _
+from Products.urban.utils import WIDGET_DATE_END_YEAR
 
 ##code-section module-header #fill in your manual code here
 from OFS.ObjectManager import BeforeDeleteException
@@ -46,6 +47,8 @@ schema = Schema(
             widget=DateTimeField._properties["widget"](
                 show_hm=False,
                 format="%d/%m/%Y",
+                starting_year=1930,
+                ending_year=WIDGET_DATE_END_YEAR,
                 label=_("urban_label_investigationStart", default="Investigationstart"),
             ),
             optional=True,
@@ -55,6 +58,8 @@ schema = Schema(
             widget=DateTimeField._properties["widget"](
                 show_hm=False,
                 format="%d/%m/%Y",
+                starting_year=1930,
+                ending_year=WIDGET_DATE_END_YEAR,
                 label=_("urban_label_investigationEnd", default="Investigationend"),
             ),
             validators=("isValidInvestigationEnd",),
@@ -65,6 +70,8 @@ schema = Schema(
             widget=DateTimeField._properties["widget"](
                 show_hm=True,
                 format="%d/%m/%Y %H:%M",
+                starting_year=1930,
+                ending_year=WIDGET_DATE_END_YEAR,
                 label=_(
                     "urban_label_explanationStartSDate", default="Explanationstartsdate"
                 ),
@@ -76,6 +83,8 @@ schema = Schema(
             widget=DateTimeField._properties["widget"](
                 show_hm=True,
                 format="%d/%m/%Y %H:%M",
+                starting_year=1930,
+                ending_year=WIDGET_DATE_END_YEAR,
                 label=_(
                     "urban_label_explanationEndSDate", default="Explanationendsdate"
                 ),
@@ -87,6 +96,8 @@ schema = Schema(
             widget=DateTimeField._properties["widget"](
                 show_hm=True,
                 format="%d/%m/%Y %H:%M",
+                starting_year=1930,
+                ending_year=WIDGET_DATE_END_YEAR,
                 label=_("urban_label_claimsDate", default="Claimsdate"),
             ),
             optional=True,
@@ -96,6 +107,8 @@ schema = Schema(
             widget=DateTimeField._properties["widget"](
                 show_hm=True,
                 format="%d/%m/%Y %H:%M",
+                starting_year=1930,
+                ending_year=WIDGET_DATE_END_YEAR,
                 label=_("urban_label_claimEndSDate", default="Claimendsdate"),
             ),
             optional=True,
@@ -115,6 +128,8 @@ schema = Schema(
             widget=DateTimeField._properties["widget"](
                 show_hm=False,
                 format="%d/%m/%Y",
+                starting_year=1930,
+                ending_year=WIDGET_DATE_END_YEAR,
                 label=_("urban_label_concertationDate", default="Concertationdate"),
             ),
             optional=True,
