@@ -8,6 +8,47 @@ Changelog
 
 .. towncrier release notes start
 
+2.7.24 (2024-12-03)
+-------------------
+
+New features:
+
+
+- Add merge field for rubric description
+  [jchandelle] (SUP-38659)
+- Create new trigger for decision date reindex
+  [jchandelle] (URB-2366)
+- Add bound licences field to patrimony certificates
+  [daggelpop] (URB-3046)
+- Add latest new vocabulary terms for form_composition
+  [dmshd] (URB-3126)
+- Use imio.pm.wsclient 2.x version (REST).
+  [aduchene]
+  Add `get_last_plonemeeting_date`, `get_last_college_date` and `get_last_college_date` to CODT_BaseBuildLicence.
+  [aduchene] (URB-3151)
+- Implement `.getSecondDeposit()`
+  [dmshd] (URB-3152)
+- Remove permission to create integrated licences
+  [daggelpop] (URB-3165)
+
+
+Bug fixes:
+
+
+- Allow corporate tenant in inspections
+  [daggelpop] (SUP-33621)
+- Fix follup event creation in ticket
+  [jchandelle] (SUP-36493)
+- Fix missing getLastAcknowledgment for division
+  [jchandelle] (SUP-37911)
+- Add centrality to every licence & make it a multiselect
+  [daggelpop] (URB-3017)
+- Add patrimony fieldset to patrimony certificate
+  [daggelpop]
+  Migrate patrimony certificates to their correct object class (instead of misc demand)
+  [daggelpop] (URB-3121)
+
+
 2.7.23 (2024-11-15)
 -------------------
 
