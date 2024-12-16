@@ -1,0 +1,14 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="urban">
+
+  <browser:page
+     for="*"
+     name="close-task-utils"
+     class=".close_task.CloseTaskView"
+     permission="cmf.ManagePortal"
+  />
+
+</configure>
