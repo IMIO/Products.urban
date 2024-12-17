@@ -558,7 +558,7 @@ optional_fields = [
 setOptionalAttributes(schema, optional_fields)
 ##/code-section after-local-schema
 
-UrbanEvent_schema = BaseFolderSchema.copy() + schema.copy()
+UrbanEvent_schema = OrderedBaseFolderSchema.copy() + schema.copy()
 
 ##code-section after-schema #fill in your manual code here
 UrbanEvent_schema["title"].widget.condition = "python:here.showTitle()"
@@ -567,7 +567,7 @@ UrbanEvent_schema["title"].required = False
 ##/code-section after-schema
 
 
-class UrbanEvent(BaseFolder, BrowserDefaultMixin):
+class UrbanEvent(OrderedBaseFolder, BrowserDefaultMixin):
     """ """
 
     security = ClassSecurityInfo()
