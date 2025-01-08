@@ -13,7 +13,7 @@ __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEUL
 <stephan.geulette@uvcw.be>, Jean-Michel Abe <jm.abe@la-bruyere.be>"""
 __docformat__ = "plaintext"
 
-
+import json
 import logging
 import os
 from Products.CMFCore.utils import getToolByName
@@ -41,8 +41,10 @@ from Products.urban.utils import moveElementAfter
 
 
 from datetime import date
-from eea.facetednavigation.layout.interfaces import IFacetedLayout
+
 from collective.eeafaceted.collectionwidget.utils import _updateDefaultCollectionFor
+from collective.exportimport.import_content import ImportContent
+from eea.facetednavigation.layout.interfaces import IFacetedLayout
 
 from plone import api
 from plone.portlets.interfaces import IPortletManager
@@ -392,6 +394,17 @@ def addScheduleConfigs(context):
             taskconfigs = schedule_config[licence_config_id]
             _create_task_configs(schedule_folder, taskconfigs)
 
+def addDefaultEventConfig(context):
+    """This will add some default event configs that were exported beforehand."""
+    if context.readDataFile("urban_new_install_marker.txt") is None:
+        return
+    _import_profile_content(context, "event_configs.json")
+
+def addDefaultTemplates(context):
+    """This will add some default pod templates that were exported beforehand."""
+    if context.readDataFile("urban_new_install_marker.txt") is None:
+        return
+    _import_profile_content(context, "templates.json")
 
 def getSharedVocabularies(urban_type, licence_vocabularies):
     shared_vocs = licence_vocabularies.get("shared_vocabularies")
@@ -1826,6 +1839,26 @@ def _create_task_configs(container, taskconfigs):
         for subtasks_kwargs in subtasks:
             _create_task_configs(container=task_config, taskconfigs=subtasks)
 
+def _import_profile_content(context, filepath):
+    """
+    Import content from a json file using collective.exportimport.
+    filepath must be inside the profile folder.
+    """
+    data = json.loads(context.readDataFile(filepath))
+    request = getattr(context, "REQUEST", None)
+    portal = api.portal.get()
+    if request is None:
+        request = portal.REQUEST
+
+    import_content = ImportContent(portal, request)
+    import_content.handle_existing_content = 1  # Replace
+    import_content.limit = None
+    import_content.commit = None
+    import_content.import_old_revisions = False
+    import_content.import_to_current_folder = False
+    # We need to use `import_new_content` instead of `do_import` to avoid commiting
+    # because it breaks test layers
+    return import_content.import_new_content(data)
 
 def reindex_catalog(context):
     """
@@ -1835,7 +1868,6 @@ def reindex_catalog(context):
         return
     catalog = api.portal.get_tool("portal_catalog")
     catalog.clearFindAndRebuild()
-
 
 def activateAnnouncementArticlesText(context):
     """Activate 'announcementArticlesText' oprional field"""

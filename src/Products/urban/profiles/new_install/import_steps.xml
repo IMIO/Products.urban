@@ -1,6 +1,22 @@
 <?xml version="1.0"?>
 <import-steps>
 
+ <import-step
+    id="add_default_events"
+    handler="Products.urban.setuphandlers.addDefaultEventConfig"
+    title="Add default event configs"
+    version="2025-01-09T09:05:41.873479">
+   Add default event configs
+ </import-step>
+
+ <import-step
+    id="add_default_templates"
+    handler="Products.urban.setuphandlers.addDefaultTemplates"
+    title="Add default templates"
+    version="2025-01-09T09:05:41.873479">
+   Add default templates
+ </import-step>
+
  <import-step 
     id="rebuild_catalog" 
     handler="Products.urban.setuphandlers.rebuildCatalog"
