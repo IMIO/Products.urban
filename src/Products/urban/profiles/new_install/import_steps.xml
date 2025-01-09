@@ -13,7 +13,7 @@
     id="add_default_templates"
     handler="Products.urban.setuphandlers.addDefaultTemplates"
     title="Add default templates"
-    version="2025-01-09T09:05:41.873479">
+    version="2025-01-14T09:05:41.873479">
    Add default templates
  </import-step>
 
