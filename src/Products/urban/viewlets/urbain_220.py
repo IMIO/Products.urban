@@ -2,6 +2,7 @@
 
 from DateTime import DateTime
 
+from Products.CMFPlone.utils import safe_unicode
 from Products.Five import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
@@ -52,7 +53,7 @@ class Urbain220Viewlet(ViewletBase):
         ]
         allowed = self.context.id in allowed_contexts
         faceted_context = bool(IFacetedNavigable.providedBy(self.context))
-        return faceted_context and allowed and self.get_date_range()
+        return True
 
     def get_date_range(self):
         """
@@ -104,7 +105,9 @@ class LicenceToUrbain220Street(object):
 
 class UrbainXMLExport(BrowserView):
     def __call__(self):
-        datefrom, dateto = self.get_date_range()
+        # datefrom, dateto = self.get_date_range()
+        datefrom = DateTime("2000/01/01")
+        dateto = DateTime("2050/01/01")
         brains = getDashboardQueryResult(self.context)
         return self.generateUrbainXML(brains, datefrom, dateto)
 
@@ -124,7 +127,9 @@ class UrbainXMLExport(BrowserView):
         """
         portal_urban = api.portal.get_tool("portal_urban")
         townshipname = portal_urban.getCityName()
-        from_date, to_date = self.get_date_range()
+        # from_date, to_date = self.get_date_range()
+        from_date = DateTime("2000/01/01")
+        to_date = DateTime("2050/01/01")
         response = self.request.RESPONSE
         response.setHeader("Content-type", "text/xml")
         response.setHeader(
@@ -159,7 +164,7 @@ class UrbainXMLExport(BrowserView):
         xml = []
         error = []
         html_list = []
-        xml.append('<?xml version="1.0" encoding="iso-8859-1"?>')
+        xml.append('<?xml version="1.0" encoding="utf-8"?>')
         xml.append("<dataroot>")
         xml.append("  <E_220_herkomst>")
         xml.append("    <E_220_NIS_Gem>%s</E_220_NIS_Gem>" % NIS)
@@ -175,16 +180,6 @@ class UrbainXMLExport(BrowserView):
         html_list.append("<HTML><TABLE>")
         for licence_brain in licence_brains:
             licence = licence_brain.getObject()
-            try:
-                licence.title.encode("iso-8859-1")
-            except UnicodeEncodeError:
-                check(
-                    self,
-                    False,
-                    u"title_encoding_error_label",
-                    {"reference": str(licence.getReference())},
-                )
-                continue
             applicantObj = (
                 licence.getApplicants() and licence.getApplicants()[0] or None
             )
@@ -196,7 +191,7 @@ class UrbainXMLExport(BrowserView):
                     "<TR><TD>%s  %s</TD><TD>%s</TD></TR>"
                     % (
                         str(licence.getReference()),
-                        licence.title.encode("iso-8859-1"),
+                        safe_unicode(licence.title),
                         str(licence_brain.getDecisionDate),
                     )
                 )
@@ -244,9 +239,7 @@ class UrbainXMLExport(BrowserView):
                         ):
                             xml.append(
                                 "      <E_220_straatnaam>%s</E_220_straatnaam>"
-                                % str(street_name)
-                                .decode("iso-8859-1")
-                                .encode("iso-8859-1")
+                                % safe_unicode(street_name)
                             )
                     if number:
                         xml.append(
@@ -270,7 +263,7 @@ class UrbainXMLExport(BrowserView):
                 xml.append("      <E_220_Typ>%s</E_220_Typ>" % xml_worktype)
                 xml.append(
                     "      <E_220_Werk>%s</E_220_Werk>"
-                    % licence.licenceSubject.encode("iso-8859-1")
+                    % safe_unicode(licence.licenceSubject)
                 )
                 strDecisionDate = str(licence_brain.getDecisionDate)
                 xml.append(
@@ -311,15 +304,13 @@ class UrbainXMLExport(BrowserView):
                     xml.append(
                         "        <naam>%s %s</naam>"
                         % (
-                            firstname.decode("iso-8859-1").encode("iso-8859-1"),
-                            lastname.decode("iso-8859-1").encode("iso-8859-1"),
+                            safe_unicode(firstname),
+                            safe_unicode(lastname),
                         )
                     )
                     xml.append(
                         "        <straatnaam>%s</straatnaam>"
-                        % applicantObj.getStreet()
-                        .decode("iso-8859-1")
-                        .encode("iso-8859-1")
+                        % safe_unicode(applicantObj.getStreet())
                     )
                     xml.append("        <huisnr>%s</huisnr>" % applicantObj.getNumber())
                     xml.append(
@@ -327,9 +318,7 @@ class UrbainXMLExport(BrowserView):
                     )
                     xml.append(
                         "        <gemeente>%s</gemeente>"
-                        % applicantObj.getCity()
-                        .decode("iso-8859-1")
-                        .encode("iso-8859-1")
+                        % safe_unicode(applicantObj.getCity())
                     )
                     xml.append("        <hoedanig>DEMANDEUR</hoedanig>")
                     xml.append("      </PERSOON>")
@@ -351,15 +340,13 @@ class UrbainXMLExport(BrowserView):
                             xml.append(
                                 "        <naam>%s %s</naam>"
                                 % (
-                                    firstname.decode("iso-8859-1").encode("iso-8859-1"),
-                                    lastname.decode("iso-8859-1").encode("iso-8859-1"),
+                                    safe_unicode(firstname),
+                                    safe_unicode(lastname),
                                 )
                             )
                             xml.append(
                                 "        <straatnaam>%s</straatnaam>"
-                                % applicantObj.getStreet()
-                                .decode("iso-8859-1")
-                                .encode("iso-8859-1")
+                                % safe_unicode(applicantObj.getStreet())
                             )
                             xml.append(
                                 "        <huisnr>%s</huisnr>" % applicantObj.getNumber()
@@ -370,9 +357,7 @@ class UrbainXMLExport(BrowserView):
                             )
                             xml.append(
                                 "        <gemeente>%s</gemeente>"
-                                % applicantObj.getCity()
-                                .decode("iso-8859-1")
-                                .encode("iso-8859-1")
+                                % safe_unicode(applicantObj.getCity())
                             )
                             xml.append("        <hoedanig>ARCHITECTE</hoedanig>")
                             xml.append("      </PERSOON>")
@@ -381,19 +366,13 @@ class UrbainXMLExport(BrowserView):
                             xml.append(
                                 "        <naam>%s %s</naam>"
                                 % (
-                                    architectObj.getName1()
-                                    .decode("iso-8859-1")
-                                    .encode("iso-8859-1"),
-                                    architectObj.getName2()
-                                    .decode("iso-8859-1")
-                                    .encode("iso-8859-1"),
+                                    safe_unicode(architectObj.getName1()),
+                                    safe_unicode(architectObj.getName2())
                                 )
                             )
                             xml.append(
                                 "        <straatnaam>%s</straatnaam>"
-                                % architectObj.getStreet()
-                                .decode("iso-8859-1")
-                                .encode("iso-8859-1")
+                                % safe_unicode(architectObj.getStreet())
                             )
                             xml.append(
                                 "        <huisnr>%s</huisnr>" % architectObj.getNumber()
@@ -404,9 +383,7 @@ class UrbainXMLExport(BrowserView):
                             )
                             xml.append(
                                 "        <gemeente>%s</gemeente>"
-                                % architectObj.getCity()
-                                .decode("iso-8859-1")
-                                .encode("iso-8859-1")
+                                % safe_unicode(architectObj.getCity())
                             )
                             xml.append("        <hoedanig>ARCHITECTE</hoedanig>")
                             xml.append("      </PERSOON>")
@@ -457,15 +434,12 @@ class UrbainXMLExport(BrowserView):
         else:
             site = api.portal.get()
             response = site.REQUEST.RESPONSE
-            response.setHeader("Content-type", "text/plain;;charset=iso-8859-1")
+            response.setHeader("Content-type", "text/plain;;charset=utf-8")
             output = StringIO()
             chain = []
             for line in xml:
-                chain.append(
-                    unicode(str(line).replace("&", "&amp;"), "iso-8859-1").encode(
-                        "iso-8859-1"
-                    )
-                )
-            output.write("\n".join(chain))
+                chain.append(safe_unicode(line))
+
+            output.write(u"\n".join(chain))
             self._set_header_response()
             return output.getvalue()
