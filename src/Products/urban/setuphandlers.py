@@ -404,6 +404,7 @@ def addDefaultTemplates(context):
     """This will add some default pod templates that were exported beforehand."""
     if context.readDataFile("urban_new_install_marker.txt") is None:
         return
+    _import_profile_content(context, "base_templates.json")
     _import_profile_content(context, "templates.json")
 
 def getSharedVocabularies(urban_type, licence_vocabularies):
