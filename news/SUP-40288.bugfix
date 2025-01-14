@@ -1,2 +1,5 @@
 Fix external decision values
 [daggelpop]
+
+Handle default vocabulary values for a non-array field
+[daggelpop]
