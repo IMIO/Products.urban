@@ -2,6 +2,7 @@
 
 from Acquisition import aq_parent
 from OFS.interfaces import IOrderedContainer
+from Products.urban.interfaces import IGenericLicence
 from Products.urban.migration.utils import refresh_workflow_permissions
 from Products.urban.setuphandlers import createFolderDefaultValues
 from imio.schedule.content.object_factories import MacroCreationConditionObject
@@ -327,5 +328,22 @@ def fix_patrimony_certificate_class(context):
         licence.meta_type = "PatrimonyCertificate"
         licence.schema = PatrimonyCertificate.schema
         licence.reindexObject()
+
+    logger.info("upgrade step done!")
+
+
+def fix_external_decision_values(context):
+    logger = logging.getLogger("urban: Fix external decision values")
+    logger.info("starting upgrade steps")
+
+    catalog = api.portal.get_tool("portal_catalog")
+    licence_brains = catalog(object_provides=IGenericLicence.__identifier__)
+
+    for licence_brain in licence_brains:
+        licence = licence_brain.getObject()
+        for opinion in licence.objectValues("UrbanEventOpinionRequest"):
+            external_decision = opinion.getField("externalDecision").get(opinion)
+            if type(external_decision) is list and len(external_decision) == 1:
+                opinion.setExternalDecision(external_decision[0])
 
     logger.info("upgrade step done!")
