@@ -15,6 +15,9 @@ from zope.component import getUtilitiesFor
 from zope.event import notify
 from zope.lifecycleevent import ObjectModifiedEvent
 
+import transaction
+
+COMMIT_INTERVAL = 100
 
 class TaskCronView(BrowserView):
     def __call__(self):
@@ -81,7 +84,7 @@ class UpdateOpenTasksLicences(BrowserView):
         from Products.urban import logger
 
         # from imio.schedule.utils import get_task_configs
-        for licence in filtered_licences:
+        for count, licence in enumerate(filtered_licences):
             logger.info("UpdateOpenTasksLicences: %s" % str(licence.absolute_url()))
             logger.info(
                 "getHasModifiedBlueprints: %s"
@@ -103,6 +106,8 @@ class UpdateOpenTasksLicences(BrowserView):
             )
             notify(ObjectModifiedEvent(licence))
             licence.reindexObject()
+            if count % COMMIT_INTERVAL == 0:
+                transaction.commit()
             # task_configs = licence.portal_type != 'CODT_BuildLicence' and get_task_configs(licence) or []
             # for config in task_configs:
             # task = config.get_open_task(licence)
