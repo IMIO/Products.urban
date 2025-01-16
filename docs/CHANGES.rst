@@ -8,6 +8,27 @@ Changelog
 
 .. towncrier release notes start
 
+2.5.0.dev12 (2025-01-16)
+------------------------
+
+New features:
+
+
+- Add interval commit to update_licences_open_tasks cron
+  [jchandelle] (SUP-41904)
+- Add action for sending mail from event context with document in attachement
+  [jchandelle] (URB-3020)
+- Add a link field on CODT build licences
+  [mpeeters, daggelpop] (URB-3063)
+
+
+Bug fixes:
+
+
+- Allow corporate tenant in inspections
+  [daggelpop] (SUP-33621)
+
+
 2.5.0.dev11 (2024-10-16)
 ------------------------
 
