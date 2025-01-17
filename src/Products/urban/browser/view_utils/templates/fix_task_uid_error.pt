@@ -14,7 +14,7 @@
 
          <li tal:repeat="task view/get_tasks">
            <label tal:attributes="for python:'{}-new_uid'.format(task.UID())" ><span tal:content="task/title">Title</span>
-           (<span tal:content="task/id">id</span>)
+           (<span tal:content="python:'/'.join(task.getPhysicalPath())">id</span>)
            Current task_config_UID: <span tal:content="task/task_config_UID">current UID</span></label>
 
            <div class="field">
