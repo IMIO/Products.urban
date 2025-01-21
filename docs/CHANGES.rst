@@ -8,6 +8,16 @@ Changelog
 
 .. towncrier release notes start
 
+2.7.25 (2025-01-21)
+-------------------
+
+Bug fixes:
+
+
+- Fix upgrade step
+  [jchandelle] (URB-2680)
+
+
 2.7.24 (2024-12-03)
 -------------------
 
