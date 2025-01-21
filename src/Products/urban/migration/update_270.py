@@ -149,9 +149,9 @@ def _replace_object(obj, new_type, condition=None, logger=None):
                 set(
                     [
                     value(
-                        condition=item["condition"],
-                        operator=item["operator"],
-                            display_status=item["display_status"],
+                        condition=item.get("condition", None),
+                        operator=item.get("operator", None),
+                        display_status=item.get("display_status", None),
                     )
                     for item in old_obj_data[key]
                     ]
