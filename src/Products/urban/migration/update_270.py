@@ -96,20 +96,34 @@ def _replace_object(obj, new_type, condition=None, logger=None):
     log_info(logger, "{} deleted".format("/".join(obj.getPhysicalPath())))
     api.content.delete(obj)
 
+    start_date = old_obj_data.get("start_date", None)
+    if isinstance(start_date, dict):
+        start_date = start_date.get("token", None)
+    default_assigned_group = old_obj_data.get("default_assigned_group", None)
+    if isinstance(default_assigned_group, dict):
+        default_assigned_group = default_assigned_group.get("token", None)
+    default_assigned_user = old_obj_data.get("default_assigned_user", None)
+    if isinstance(default_assigned_user, dict):
+        default_assigned_user = default_assigned_user.get("token", None)
+    round_to_day = old_obj_data.get("round_to_day", None)
+    if isinstance(round_to_day, dict):
+        round_to_day = round_to_day.get("token", None)
+
+
     new_obj = api.content.create(
         container=container,
         type=new_type,
         id=old_obj_data["id"],
         title=old_obj_data["title"],
-        start_date=old_obj_data["start_date"]["token"],
-        enabled=old_obj_data["enabled"],
-        default_assigned_group=old_obj_data["default_assigned_group"]["token"],
-        default_assigned_user=old_obj_data["default_assigned_user"]["token"],
-        warning_delay=old_obj_data["warning_delay"],
-        additional_delay=old_obj_data["additional_delay"],
-        additional_delay_type=old_obj_data["additional_delay_type"],
-        round_to_day=old_obj_data["round_to_day"]["token"],
-        activate_recurrency=old_obj_data["activate_recurrency"],
+        start_date=start_date,
+        enabled=old_obj_data.get("enabled",None),
+        default_assigned_group=default_assigned_group,
+        default_assigned_user=default_assigned_user,
+        warning_delay=old_obj_data.get("warning_delay",None),
+        additional_delay=old_obj_data.get("additional_delay",None),
+        additional_delay_type=old_obj_data.get("additional_delay_type",None),
+        round_to_day=round_to_day,
+        activate_recurrency=old_obj_data.get("activate_recurrency",None),
     )
     log_info(logger, "{} created".format("/".join(obj.getPhysicalPath())))
 
