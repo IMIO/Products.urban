@@ -8,6 +8,16 @@ Changelog
 
 .. towncrier release notes start
 
+2.7.26 (2025-01-23)
+-------------------
+
+Bug fixes:
+
+
+- Fix retrieval vocabulary in upgrade step
+  [jchandelle] (URB-2680)
+
+
 2.7.25 (2025-01-21)
 -------------------
 
