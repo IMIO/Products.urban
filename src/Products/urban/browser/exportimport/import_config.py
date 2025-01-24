@@ -20,6 +20,7 @@ from zope.interface import noLongerProvides
 from zope.schema.interfaces import IVocabularyFactory
 
 import logging
+import os
 
 
 logger = logging.getLogger("Import Urban Config")
@@ -73,6 +74,7 @@ class ConfigImportContent(ImportContent):
         iterator=None,
         import_to_current_lic_config_folder=False,
         import_in_same_instance=False,
+        fix_parent_path=False,
     ):
         self.handle_missing_parent = int(self.request.get("handle_missing_parent", 0))
         self.handle_missing_parent_options = (
@@ -81,6 +83,7 @@ class ConfigImportContent(ImportContent):
         )
         self.import_to_current_lic_config_folder = import_to_current_lic_config_folder
         self.import_in_same_instance = import_in_same_instance
+        self.fix_parent_path = fix_parent_path
         if not self.check_in_portal_urban():
             self.context = api.portal.get_tool("portal_urban")
         alsoProvides(self.request, IConfigImportMarker)
@@ -131,12 +134,88 @@ class ConfigImportContent(ImportContent):
             current = aq_parent(current)
         return False
 
+    def get_obj_from_path(self, path):
+        if "portal_urban" not in path:
+            return None
+        split_path = path.split("portal_urban")[-1].lstrip("/")
+        return api.content.get(path=os.path.join("/portal_urban/", split_path))
+
+    def get_uid_from_proximity_context(self, context, id):
+        brains = api.content.find(context=context, portal_type="UrbanTemplate")
+        for brain in brains:
+            obj = brain.getObject()
+            merge_templates = obj.merge_templates
+            for template in merge_templates:
+                template_obj = api.content.get(UID=template["template"])
+                if template_obj.id == id:
+                    return template["template"]
+        if ILicenceConfig.providedBy(context):
+            return None
+        return self.get_uid_from_proximity_context(aq_parent(context), id)
+
+    def get_template_uid(self, item, template):
+        if isinstance(template["template"], str):
+            obj = api.content.get(UID=template["template"])
+            if obj:
+                return template["template"]
+            else:
+                return None
+
+        uid = template["template"]["uid"]
+        obj = api.content.get(UID=uid)
+        if obj:
+            return uid
+
+        context = self.get_obj_from_path(item["parent"]["@id"])
+        if context:
+            template_uid = self.get_uid_from_proximity_context(
+                context, template["template"]["id"]
+            )
+            if template_uid:
+                return template_uid
+
+        path = template["template"]["path"]
+        obj = self.get_obj_from_path(path)
+        if not obj:
+            return None
+        return obj.UID()
+
+    def dict_hook_urbantemplate(self, item):
+        merge_templates = item.get("merge_templates", None)
+        if merge_templates is None:
+            return item
+        output_template = []
+        for template in merge_templates:
+            uid = self.get_template_uid(item, template)
+            if uid is None:
+                uid = "--NOVALUE--"
+            template["template"] = uid
+            output_template.append(template)
+        item["merge_templates"] = output_template
+        return item
+
+    def handle_fix_parent_path(self, item):
+        parent = item["parent"]
+        path = parent["@id"]
+        if "portal_urban" not in path:
+            return item
+        path_split = path.split("portal_urban")
+        portal = api.portal.get()
+        fix_path = os.path.join(
+            portal.absolute_url(), "portal_urban", path_split[-1].lstrip("/")
+        )
+        parent["@id"] = fix_path
+        item["parent"] = parent
+        return item
+
     def global_dict_hook(self, item):
         item = self.handle_default_value_none(item)
-        item = self.handle_template_urbantemplate(item)
         item = self.handle_scheduled_contenttype(item)
         item = self.handle_wrong_type(item)
         item = self.handle_textDefaultValues(item)
+
+        if self.fix_parent_path:
+            item = self.handle_fix_parent_path(item)
 
         if self.import_to_current_lic_config_folder:
             item = self.handle_change_id(item)
@@ -220,22 +299,6 @@ class ConfigImportContent(ImportContent):
         for key in self.default_value_none.get(item["@type"], {}):
             if item[key] is None:
                 item[key] = self.default_value_none[item["@type"]][key]
-        return item
-
-    def handle_template_urbantemplate(self, item):
-        if item["@type"] != "UrbanTemplate":
-            return item
-        context = api.portal.get_tool("portal_urban")
-        factory = getUtility(
-            IVocabularyFactory, "collective.documentgenerator.MergeTemplates"
-        )
-        vocabulary = factory(context)
-
-        new_merge_templates = []
-        for merge_template in item.get("merge_templates", []):
-            merge_template["template"] = "--NOVALUE--"
-            new_merge_templates.append(merge_template)
-        item["merge_templates"] = new_merge_templates
         return item
 
     def handle_scheduled_contenttype(self, item):
