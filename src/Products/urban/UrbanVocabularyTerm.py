@@ -300,10 +300,7 @@ class UrbanVocabulary(object):
         for k, v in voc_terms.items():
              if self._validate_term(v, deposit_date):
                 filtered_terms[k] = v
-            
-        #import ipdb; ipdb.set_trace()
       
-        
         return filtered_terms
 
     def listAllVocTerms(self, content_instance):
