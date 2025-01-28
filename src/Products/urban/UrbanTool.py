@@ -25,6 +25,7 @@ from Products.DataGridField.Column import Column
 from Products.DataGridField.SelectColumn import SelectColumn
 from collective.datagridcolumns.DateColumn import DateColumn
 from collective.datagridcolumns.TextAreaColumn import TextAreaColumn
+from collections import OrderedDict
 
 from Products.urban.config import *
 from Products.urban.interfaces import IContactFolder
@@ -444,7 +445,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             allowedStates=allowedStates,
             with_empty_value=with_empty_value,
         )
-        res = {}
+        res = OrderedDict()
         for brain in brains:
             res[getattr(brain, id_to_use)] = brain.getObject()
         return res
