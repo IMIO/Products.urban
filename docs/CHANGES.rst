@@ -8,6 +8,25 @@ Changelog
 
 .. towncrier release notes start
 
+2.7.27 (2025-01-31)
+-------------------
+
+New features:
+
+
+- Add compatibility with csv from carto to inquiry event
+  [jchandelle] (URB-3250)
+
+
+Bug fixes:
+
+
+- Fix sending zem document by mail
+  [jchandelle] (SUP-40979)
+- Revert "URB-3151 - imio.pm.wsclient 2.x + roaddecree (classic) (#258)"
+  [daggelpop] (SUP-42300)
+
+
 2.7.26 (2025-01-23)
 -------------------
 
