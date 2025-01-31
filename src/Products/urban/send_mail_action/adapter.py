@@ -13,4 +13,7 @@ from zope.interface import Interface
 @adapter(Interface, Interface, ISendMailAction)
 class GetDocumentToAttach(mail_with_attachment.GetDocumentToAttach):
     def __call__(self):
-        return [api.content.get(UID=file) for file in getattr(self.event, "files", [])]
+        return [
+            api.content.get(path=file.encode("utf-8"))
+            for file in getattr(self.event, "files", [])
+        ]
