@@ -6,19 +6,20 @@ from HTMLParser import HTMLParser
 from Products.ATContentTypes.interfaces.file import IATFile
 from Products.urban.config import URBAN_ENVIRONMENT_TYPES
 from Products.urban.config import URBAN_TYPES
-from Products.urban.interfaces import IGenericLicence
 from Products.urban.interfaces import IUrbanDoc
+from Products.urban.interfaces import IGenericLicence
 from datetime import datetime
 from imio.schedule.utils import tuple_to_interface
 from plone import api
 from zope.annotation import IAnnotations
 from zope.component import getMultiAdapter
 
-import hashlib
-import pkg_resources
 import random
 import string
+import hashlib
+import pkg_resources
 import time
+
 
 
 def getCurrentFolderManager():
@@ -229,11 +230,11 @@ def get_ws_meetingitem_infos(urban_event, extra_attributes=False):
         ws4pmSettings = getMultiAdapter(
             (portal_state.portal(), request), name="ws4pmclient-settings"
         )
-        items = ws4pmSettings._rest_searchItems(
+        items = ws4pmSettings._soap_searchItems(
             {"externalIdentifier": urban_event.UID()}
         )
         if extra_attributes and items:
-            items = ws4pmSettings._rest_getItemInfos(
+            items = ws4pmSettings._soap_getItemInfos(
                 {"UID": items[0].UID, "showExtraInfos": True}
             )
         return items
@@ -256,7 +257,7 @@ def now():
     return datetime.now()
 
 
-def get_licence_context(context, get_all_object=False, max_recurence=5):
+def get_licence_context(context, get_all_object=False, max_recurence = 5):
     context_licence = IGenericLicence.providedBy(context)
     parent = context
     output = [context]

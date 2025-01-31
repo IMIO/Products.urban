@@ -14,30 +14,30 @@ __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEUL
 __docformat__ = "plaintext"
 
 from AccessControl import ClassSecurityInfo
+from Products.urban.widget.select2widget import MultiSelect2Widget
+from Products.Archetypes.atapi import *
+from zope.interface import implements
+from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import (
     ReferenceBrowserWidget,
 )
-from Products.Archetypes.atapi import *
+from Products.urban import interfaces
+from Products.urban.content.licence.BaseBuildLicence import BaseBuildLicence
+from Products.urban.content.CODT_Inquiry import CODT_Inquiry
+from Products.urban.content.licence.GenericLicence import GenericLicence
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
-from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
+
+from Products.urban.config import *
+from Products.urban import UrbanMessage as _
 
 ##code-section module-header #fill in your manual code here
 from Products.MasterSelectWidget.MasterMultiSelectWidget import MasterMultiSelectWidget
-from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
-from Products.urban import interfaces
-from Products.urban import UrbanMessage as _
-from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
-from Products.urban.config import *
-from Products.urban.content.CODT_Inquiry import CODT_Inquiry
-from Products.urban.content.licence.BaseBuildLicence import BaseBuildLicence
-from Products.urban.content.licence.GenericLicence import GenericLicence
 from Products.urban.utils import setOptionalAttributes
 from Products.urban.utils import setSchemataForCODT_Inquiry
-from Products.urban.widget.select2widget import MultiSelect2Widget
-from plone import api
-from zope.component import getMultiAdapter
-from zope.interface import implements
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
+from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
 
+from plone import api
 
 ##/code-section module-header
 
@@ -656,9 +656,7 @@ class CODT_BaseBuildLicence(
         prorogated_delay = ""
         prorogation_delay = self.getProrogationDelay(text_format=False)
         if base_delay:
-            prorogated_delay = "{}j".format(
-                str(int(base_delay[:-1]) + prorogation_delay)
-            )
+            prorogated_delay = "{}j".format(str(int(base_delay[:-1]) + prorogation_delay))
 
         return prorogated_delay
 
@@ -749,49 +747,6 @@ class CODT_BaseBuildLicence(
             ("classified", "bien classé"),
         )
         return DisplayList(vocabulary)
-
-    def get_last_plonemeeting_date(
-        self,
-        event=interfaces.ISimpleCollegeEvent,
-        item_portal_type="MeetingItemCollege",
-        decided_states=("accepted", "accepted_but_modified", "accepted_and_returned"),
-    ):
-        """
-        Get the last date of a PloneMeeting meeting for a given event.
-        """
-        meeting_event = self.getLastEvent(event)
-        if not meeting_event:
-            return
-        ws4pmSettings = getMultiAdapter(
-            (api.portal.get(), self.REQUEST), name="ws4pmclient-settings"
-        )
-        return ws4pmSettings._rest_getDecidedMeetingDate(
-            {"externalIdentifier": meeting_event.UID()},
-            item_portal_type=item_portal_type,
-            decided_states=decided_states,
-        )
-
-    def get_last_college_date(
-        self,
-        event=interfaces.ISimpleCollegeEvent,
-        decided_states=("accepted", "accepted_but_modified", "accepted_and_returned"),
-    ):
-        return self.get_last_plonemeeting_date(
-            event=event,
-            item_portal_type="MeetingItemCollege",
-            decided_states=decided_states,
-        )
-
-    def get_last_council_date(
-        self,
-        event=interfaces.ISimpleCollegeEvent,
-        decided_states=("accepted", "accepted_but_modified", "accepted_and_returned"),
-    ):
-        return self.get_last_plonemeeting_date(
-            event=event,
-            item_portal_type="MeetingItemCouncil",
-            decided_states=decided_states,
-        )
 
 
 # end of class CODT_BaseBuildLicence
