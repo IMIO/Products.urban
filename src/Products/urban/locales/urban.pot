@@ -227,6 +227,10 @@ msgstr ""
 msgid "Coring"
 msgstr ""
 
+#: ../browser/urbaneventviews.py:562
+msgid "Couldn't import this(these) owner(s): ${owners}"
+msgstr ""
+
 #: ../browser/offdays_settings.py:52
 msgid "Date"
 msgstr ""

@@ -30,6 +30,7 @@ from zope.interface import Interface
 
 import csv
 import collections
+import re
 
 claimants_csv_fieldnames = [
     "personTitle",
@@ -52,6 +53,9 @@ claimants_csv_fieldnames = [
     "claimsText",
     "wantDecisionCopy",
 ]
+
+EXCEL_HEADER = "Titre (sel.),Nom,Prénom,Rue,N° de police,Code postal (num.),Localité,Pays (sel.),N° registre national,CAPAKEY,Nature parcelle,Rue parcelle,N° de police parcelle"
+CARTO_HEADER = '"CAPAKEY";"nature";"datesituation";"proprio"'
 
 
 class UrbanEventView(BrowserView):
@@ -389,46 +393,7 @@ class ImportRecipientListingForm(form.Form):
             + "/#fieldsetlegend-urbaneventinquiry_recipients"
         )
 
-    def import_recipients_from_csv(self):
-        data, errors = self.extractData()
-        if errors:
-            return False
-
-        fieldnames = [
-            "personTitle",
-            "name",
-            "firstname",
-            "street",
-            "number",
-            "zipcode",
-            "city",
-            "country",
-            "id",
-            "capakey",
-            "parcel_nature",
-            "parcel_street",
-            "parcel_police_number",
-        ]
-
-        csv_file = data["listing_file_recipients"]
-        data = csv_file.data
-        if data:
-            reader = csv.DictReader(
-                StringIO(data), fieldnames, delimiter=",", quotechar='"'
-            )
-        else:
-            reader = []
-
-        try:
-            recipient_args = [row for row in reader if row["name"]][1:]
-        except csv.Error, error:
-            IStatusMessage(self.request).addStatusMessage(
-                _(
-                    u"The CSV file couldn't be read properly. Please verify its structure and try again."
-                ),
-                type="error",
-            )
-            return
+    def handle_data_to_add_recipients(self, recipient_args):
 
         portal_urban = api.portal.get_tool("portal_urban")
         plone_utils = api.portal.get_tool("plone_utils")
@@ -473,6 +438,7 @@ class ImportRecipientListingForm(form.Form):
             country_mapping[country_obj.Title()] = country_obj.id
 
         for recipient_arg in recipient_args:
+            if "personTitle" in recipient_arg:
             del recipient_arg["personTitle"]  # no use for it yet
 
             if not recipient_arg["id"]:
@@ -502,6 +468,126 @@ class ImportRecipientListingForm(form.Form):
                 recipient_obj = getattr(self.context, recipient_id)
 
         plone_utils.addPortalMessage(_("urban_imported_recipients"), type="info")
+
+    def handle_data_from_excel(self, data):
+        fieldnames = [
+            "personTitle",
+            "name",
+            "firstname",
+            "street",
+            "number",
+            "zipcode",
+            "city",
+            "country",
+            "id",
+            "capakey",
+            "parcel_nature",
+            "parcel_street",
+            "parcel_police_number",
+        ]
+
+        if data:
+            reader = csv.DictReader(
+                StringIO(data), fieldnames, delimiter=",", quotechar='"'
+            )
+        else:
+            reader = []
+
+        try:
+            recipient_args = [row for row in reader if row["name"]][1:]
+        except csv.Error as error:
+            IStatusMessage(self.request).addStatusMessage(
+                _(
+                    u"The CSV file couldn't be read properly. Please verify its structure and try again."
+                ),
+                type="error",
+            )
+            return
+
+        self.handle_data_to_add_recipients(recipient_args)
+
+    def extract_proprio(self, proprios, capakey, parcel_nature):
+        proprio_list = proprios.split(";")
+        errors = []
+        proprios = []
+        for proprio in proprio_list:
+            pattern = "^(?P<id>\d{10,11})\s(?P<name>.*)\s\((?P<dob>(?:\d{4}-\d{2}-\d{2})?)\)\sAdr:\s(?P<country>[A-Z]{2})\s(?P<zipcode>\d{4,5})\s+(?P<city>[A-ZÈÉÁÀÖÔ\s-]+)\s+(?P<street>.+?)\s+(?P<number>\d+[\s\/]?[a-zA-Z]?)$"
+            match = re.match(pattern, proprio.strip())
+            if not match:
+                errors.append(proprio)
+                continue
+            match_dict = match.groupdict()
+            match_dict["capakey"] = capakey
+            match_dict["parcel_nature"] = parcel_nature
+            match_dict["name"] = match_dict["name"].strip()
+            country = match_dict.get("country", None)
+            if country:
+                country_mapping = {
+                    "BE": "Belgique",
+                    "FR": "France",
+                    "NL": "Pays Bas",
+                    "LU": "Luxembourg",
+                    "DE": "Allemagne",
+                }
+                match_dict["country"] = country_mapping.get(country, "")
+            if match_dict["dob"] != "":
+                names = match_dict["name"].split(" ")
+                match_dict["firstname"] = names.pop(0)
+                match_dict["name"] = " ".join(names)
+            del match_dict["dob"]
+            proprios.append(match_dict)
+        return proprios, errors
+
+    def handle_data_from_carto(self, data):
+        if data:
+            reader = csv.DictReader(StringIO(data), delimiter=";", quotechar='"')
+        else:
+            reader = []
+        recipient_args = []
+        errors = []
+        for parcel in reader:
+            capakey = parcel.get("CAPAKEY", None)
+            parcel_nature = parcel.get("nature", None)
+            proprios = parcel.get("proprio", None)
+            if not proprios:
+                continue
+            proprio_list, error = self.extract_proprio(proprios, capakey, parcel_nature)
+            if error:
+                errors += error
+            recipient_args += proprio_list
+        if errors:
+            msg = _(
+                "Couldn't import this(these) owner(s): ${owners}",
+                mapping={"owners": "; ".join(list(set(errors)))},
+            )
+            IStatusMessage(self.request).addStatusMessage(msg, type="warning")
+        id_numbers = []
+        new_recipient_args = []
+        for recipient in recipient_args:
+            if recipient["id"] in id_numbers:
+                continue
+            id_numbers.append(recipient["id"])
+            new_recipient_args.append(recipient)
+
+        self.handle_data_to_add_recipients(new_recipient_args)
+
+    def import_recipients_from_csv(self):
+        data, errors = self.extractData()
+        if errors:
+            return False
+
+        csv_file = data["listing_file_recipients"]
+        data = csv_file.data
+        if data.startswith(EXCEL_HEADER):
+            self.handle_data_from_excel(data)
+        elif data.startswith(CARTO_HEADER):
+            self.handle_data_from_carto(data)
+        else:
+            msg = u"The CSV file couldn't be read properly. Please verify its structure and try again."
+            IStatusMessage(self.request).addStatusMessage(
+                _(msg),
+                type="error",
+            )
 
 
 class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
