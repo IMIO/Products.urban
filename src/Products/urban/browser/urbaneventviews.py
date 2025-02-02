@@ -439,7 +439,7 @@ class ImportRecipientListingForm(form.Form):
 
         for recipient_arg in recipient_args:
             if "personTitle" in recipient_arg:
-            del recipient_arg["personTitle"]  # no use for it yet
+                del recipient_arg["personTitle"]  # no use for it yet
 
             if not recipient_arg["id"]:
                 recipient_arg["id"] = plone_utils.normalizeString(
