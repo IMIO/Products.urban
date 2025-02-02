@@ -8,6 +8,16 @@ Changelog
 
 .. towncrier release notes start
 
+2.7.28 (2025-02-02)
+-------------------
+
+Bug fixes:
+
+
+- Fix missing indentation
+  [jchandelle] (URB-3250)
+
+
 2.7.27 (2025-01-31)
 -------------------
 
