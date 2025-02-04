@@ -509,16 +509,47 @@ class ImportRecipientListingForm(form.Form):
 
         self.handle_data_to_add_recipients(recipient_args)
 
+    def secondary_extract_proprio(self, proprio):
+        country_pattern = (
+            r"^\d{10,11}\s.*\s\((?:\d{4}-\d{2}-\d{2})?\)\sAdr:\s(?P<country>[A-Z]{2})"
+        )
+        match_country = re.match(country_pattern, proprio)
+        if not match_country:
+            return None
+        pattern_mapping = {
+            "FR": (
+                r"^(?P<id>\d{10,11})\s(?P<name>.*)\s"
+                r"\((?P<dob>(?:\d{4}-\d{2}-\d{2})?)\)\s"
+                r"Adr:\s(?P<country>[A-Z]{2})\s+"
+                r"(?P<number>\d+[\s\/-]?[a-zA-Z]?(?:Bis)?\s?\d*),?\s+"
+                r"(?P<street>.+?)\s(?P<zipcode>\d{5})\s+(?P<city>.+)$"
+            )
+        }
+        country_code = match_country.groupdict()["country"]
+        if country_code not in pattern_mapping:
+            return None
+        match = re.match(pattern_mapping[country_code], proprio)
+        return match
+
     def extract_proprio(self, proprios, capakey, parcel_nature):
         proprio_list = proprios.split(";")
         errors = []
         proprios = []
         for proprio in proprio_list:
-            pattern = "^(?P<id>\d{10,11})\s(?P<name>.*)\s\((?P<dob>(?:\d{4}-\d{2}-\d{2})?)\)\sAdr:\s(?P<country>[A-Z]{2})\s(?P<zipcode>\d{4,5})\s+(?P<city>[A-ZÈÉÁÀÖÔ\s-]+)\s+(?P<street>.+?)\s+(?P<number>\d+[\s\/]?[a-zA-Z]?)$"
-            match = re.match(pattern, proprio.strip())
+            pattern_be = (
+                r"^(?P<id>\d{10,11})\s(?P<name>.*)\s"
+                r"\((?P<dob>(?:\d{4}-\d{2}-\d{2})?)\)\s"
+                r"Adr:\s(?P<country>[A-Z]{2})\s(?P<zipcode>\d{4,5})\s+"
+                r"(?P<city>[A-ZÈÉÊËÁÀÂÖÔÏÎÚÙÛÜŸÇ\s-]+)\s+"
+                r"(?P<street>.+?)\s+(?P<number>\d+[\s\/-]?[a-zA-Z]?\s?\d*)$"
+            )
+            match = re.match(pattern_be, proprio.strip())
             if not match:
-                errors.append(proprio)
-                continue
+                second_match = self.secondary_extract_proprio(proprio.strip())
+                if not second_match:
+                    errors.append(proprio)
+                    continue
+                match = second_match
             match_dict = match.groupdict()
             match_dict["capakey"] = capakey
             match_dict["parcel_nature"] = parcel_nature
