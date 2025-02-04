@@ -8,6 +8,17 @@ Changelog
 
 .. towncrier release notes start
 
+2.7.29 (2025-02-04)
+-------------------
+
+Bug fixes:
+
+
+- Fix encoding in error message for import csv from carto
+  Fix logic and pattern for import csv from carto
+  [jchandelle] (URB-3250)
+
+
 2.7.28 (2025-02-02)
 -------------------
 
