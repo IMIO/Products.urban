@@ -30,7 +30,10 @@ from zope.interface import Interface
 
 import csv
 import collections
+import logging
 import re
+
+logger = logging.getLogger("Urban Event")
 
 claimants_csv_fieldnames = [
     "personTitle",
@@ -556,9 +559,15 @@ class ImportRecipientListingForm(form.Form):
                 errors += error
             recipient_args += proprio_list
         if errors:
+            errors = [error.decode("utf-8") for error in errors]
             msg = _(
-                "Couldn't import this(these) owner(s): ${owners}",
+                u"Couldn't import this(these) owner(s): ${owners}",
                 mapping={"owners": "; ".join(list(set(errors)))},
+            )
+            logger.warning(
+                u"Couldn't import this(these) owner(s): \n\t{}".format(
+                    "\n\t".join(list(set(errors)))
+                )
             )
             IStatusMessage(self.request).addStatusMessage(msg, type="warning")
         id_numbers = []
