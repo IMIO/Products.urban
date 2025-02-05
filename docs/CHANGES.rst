@@ -8,6 +8,66 @@ Changelog
 
 .. towncrier release notes start
 
+2.7.29 (2025-02-04)
+-------------------
+
+Bug fixes:
+
+
+- Fix encoding in error message for import csv from carto
+  Fix logic and pattern for import csv from carto
+  [jchandelle] (URB-3250)
+
+
+2.7.28 (2025-02-02)
+-------------------
+
+Bug fixes:
+
+
+- Fix missing indentation
+  [jchandelle] (URB-3250)
+
+
+2.7.27 (2025-01-31)
+-------------------
+
+New features:
+
+
+- Add compatibility with csv from carto to inquiry event
+  [jchandelle] (URB-3250)
+
+
+Bug fixes:
+
+
+- Fix sending zem document by mail
+  [jchandelle] (SUP-40979)
+- Revert "URB-3151 - imio.pm.wsclient 2.x + roaddecree (classic) (#258)"
+  [daggelpop] (SUP-42300)
+
+
+2.7.26 (2025-01-23)
+-------------------
+
+Bug fixes:
+
+
+- Fix retrieval vocabulary in upgrade step
+  [jchandelle] (URB-2680)
+
+
+2.7.25 (2025-01-21)
+-------------------
+
+Bug fixes:
+
+
+- Fix upgrade step
+  [jchandelle] (URB-2680)
+
+
 2.7.24 (2024-12-03)
 -------------------
 

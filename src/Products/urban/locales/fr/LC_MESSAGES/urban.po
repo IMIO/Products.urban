@@ -223,6 +223,10 @@ msgstr "Copier au demandeur"
 msgid "Coring"
 msgstr "Lien GIG"
 
+#: ../browser/urbaneventviews.py:562
+msgid "Couldn't import this(these) owner(s): ${owners}"
+msgstr "Impossible d'importer ce(s) propriétaire(s): ${owners}"
+
 #: ../browser/offdays_settings.py:52
 msgid "Date"
 msgstr "Date"
