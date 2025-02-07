@@ -729,4 +729,13 @@
         profile="Products.urban:default"
         />
 
+    <gs:upgradeStep
+        title="Fix external decision values (list[str] -> str)"
+        description=""
+        source="1159"
+        destination="1160"
+        handler=".update_270.fix_external_decision_values"
+        profile="Products.urban:default"
+        />
+
 </configure>
