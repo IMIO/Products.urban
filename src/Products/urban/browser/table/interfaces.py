@@ -161,6 +161,12 @@ class ILicenceAttachmentsTable(IAttachmentsTable):
     """
 
 
+class IEventAttachmentsTable(IAttachmentsTable):
+    """
+    Marker interface for a table displaying all attachments nested in licence events.
+    """
+
+
 class IInternalOpinionServicesTable(Interface):
     """
     Marker interface for a table displaying internal services for opinion requests.
