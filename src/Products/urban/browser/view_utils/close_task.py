@@ -12,6 +12,7 @@ from z3c.form.form import Form
 from zope import schema
 from zope.interface import Interface
 
+import transaction
 import logging
 
 
@@ -75,28 +76,22 @@ class CloseTaskForm(Form):
             return False
         tasks = self.search_tasks(data)
         force_close_frozen = data.get("force_close_frozen", False)
-        closed_task = []
         for task in tasks:
+            closed_task = False
             if task.get_state() == "frozen" and force_close_frozen:
                 task._thaw()
-                closed_task.append(task)
+                closed_task = True
             task._end()
             task.reindex_parent_tasks(idxs=["is_solvable_task"])
             if task.get_state() != "frozen":
-                closed_task.append(task)
-        closed_task = [
-            u"{} ({})".format(
-                safe_unicode(task.Title()), task.get_container().absolute_url()
-            )
-            for task in closed_task
-        ]
-        msg = u"These tasks ({}) has been closed : {}".format(
-            len(closed_task), " - ".join(closed_task)
-        )
-        if len(closed_task) < 1:
-            msg = u"No task closed"
-        api.portal.show_message(message=msg, request=self.request)
-        logger.info(msg)
+                closed_task = True
+            if closed_task:
+                msg = u"Task closed : {} ({})".format(
+                    safe_unicode(task.Title()), task.get_container().absolute_url()
+                )
+                api.portal.show_message(message=msg, request=self.request)
+                logger.info(msg)
+        transaction.commit()
 
 
 class CloseTaskView(FormWrapper):
