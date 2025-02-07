@@ -200,11 +200,17 @@ class TransitionsPanelView(ActionsPanelView):
     def sortTransitions(self, lst):
         """Sort the list of transitions"""
         super(TransitionsPanelView, self).sortTransitions(lst)
-        end_transition_ids = ["abandon", "suspend"]
+        end_transition_ids = [
+            "abandon",
+            "suspend",
+            "make_obsolete_to_authorized",
+            "make_obsolete_to_accepct"
+        ]
         to_move = []
-        for transition in lst:
-            if transition["id"] in end_transition_ids:
-                to_move.append(lst.pop(lst.index(transition)))
+        lst_id = [trans["id"] for trans in lst]
+        for transition in end_transition_ids:
+            if transition in lst_id:
+                to_move.append(lst.pop(lst_id.index(transition)))
         lst.extend(to_move)
 
     def _transitionsToConfirm(self):
