@@ -8,6 +8,34 @@ Changelog
 
 .. towncrier release notes start
 
+2.7.30 (2025-02-07)
+-------------------
+
+New features:
+
+
+- Add utility view to fix task_config_UID on task
+  [jchandelle] (SUP-41619)
+- Add utils view to closed task depending filter
+  [jchandelle] (URB-3237)
+- Add reorder to event attachment
+  [jchandelle] (URBBDC-1111)
+
+
+Bug fixes:
+
+
+- Fix external decision values
+  [daggelpop]
+
+  Handle default vocabulary values for a non-array field
+  [daggelpop] (SUP-40288)
+- Fix urban vocabularies following configuration order 
+  [WBoudabous] (SUP-41929)
+- Add missing translation in schedule config
+  [WBoudabous] (URB-3142)
+
+
 2.7.29 (2025-02-04)
 -------------------
 
