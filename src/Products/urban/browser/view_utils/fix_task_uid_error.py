@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from Products.Five import BrowserView
-from eea.facetednavigation.widgets import ViewPageTemplateFile
+from zope.app.pagetemplate.viewpagetemplatefile import ViewPageTemplateFile
 from imio.schedule.interfaces import TaskConfigNotFound
 from imio.schedule.utils import get_container_tasks
 from plone import api
