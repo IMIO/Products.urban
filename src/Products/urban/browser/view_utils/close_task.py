@@ -3,7 +3,7 @@
 from Products.CMFPlone.utils import safe_unicode
 from Products.urban import UrbanMessage as _
 from Products.urban.interfaces import IGenericLicence
-from eea.facetednavigation.widgets import ViewPageTemplateFile
+from zope.app.pagetemplate.viewpagetemplatefile import ViewPageTemplateFile
 from plone import api
 from plone.z3cform.layout import FormWrapper
 from z3c.form import button
