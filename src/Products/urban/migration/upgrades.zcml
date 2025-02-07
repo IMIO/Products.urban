@@ -729,4 +729,12 @@
         profile="Products.urban:default"
         />
 
+    <gs:upgradeStep
+        title="Add vocabularies to preliminary notice foldercategories"
+        description="Add vocabularies to preliminary notice foldercategories"
+        source="1159"
+        destination="1160"
+        handler=".update_270.add_vocabularies_to_preliminary_notice_foldercategories"
+        profile="Products.urban:default" />
+
 </configure>
