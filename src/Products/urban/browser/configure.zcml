@@ -10,6 +10,7 @@
   <include package=".table" />
   <include package=".warnings" />
   <include package=".exportimport" />
+  <include package=".view_utils" />
   <include file="portlets.zcml" />
 
   <browser:resourceDirectory
