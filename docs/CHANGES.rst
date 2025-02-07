@@ -8,6 +8,25 @@ Changelog
 
 .. towncrier release notes start
 
+2.5.0.dev13 (2025-02-07)
+------------------------
+
+New features:
+
+
+- Modify obsolete state display order
+  [jchandelle] (SUP-36697)
+
+
+Bug fixes:
+
+
+- Fix sending zem document by mail
+  [jchandelle] (SUP-40979)
+- Add missing translation in schedule config
+  [WBoudabous] (URB-3277)
+
+
 2.5.0.dev12 (2025-01-16)
 ------------------------
 
