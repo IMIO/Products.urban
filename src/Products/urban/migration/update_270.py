@@ -2,6 +2,7 @@
 
 from Acquisition import aq_parent
 from OFS.interfaces import IOrderedContainer
+from Products.urban.interfaces import IGenericLicence
 from Products.urban.migration.utils import refresh_workflow_permissions
 from Products.urban.setuphandlers import createFolderDefaultValues
 from imio.schedule.content.object_factories import MacroCreationConditionObject
@@ -96,20 +97,34 @@ def _replace_object(obj, new_type, condition=None, logger=None):
     log_info(logger, "{} deleted".format("/".join(obj.getPhysicalPath())))
     api.content.delete(obj)
 
+    start_date = old_obj_data.get("start_date", None)
+    if isinstance(start_date, dict):
+        start_date = start_date.get("token", None)
+    default_assigned_group = old_obj_data.get("default_assigned_group", None)
+    if isinstance(default_assigned_group, dict):
+        default_assigned_group = default_assigned_group.get("token", None)
+    default_assigned_user = old_obj_data.get("default_assigned_user", None)
+    if isinstance(default_assigned_user, dict):
+        default_assigned_user = default_assigned_user.get("token", None)
+    round_to_day = old_obj_data.get("round_to_day", None)
+    if isinstance(round_to_day, dict):
+        round_to_day = round_to_day.get("token", None)
+
+
     new_obj = api.content.create(
         container=container,
         type=new_type,
         id=old_obj_data["id"],
         title=old_obj_data["title"],
-        start_date=old_obj_data["start_date"]["token"],
-        enabled=old_obj_data["enabled"],
-        default_assigned_group=old_obj_data["default_assigned_group"]["token"],
-        default_assigned_user=old_obj_data["default_assigned_user"]["token"],
-        warning_delay=old_obj_data["warning_delay"],
-        additional_delay=old_obj_data["additional_delay"],
-        additional_delay_type=old_obj_data["additional_delay_type"],
-        round_to_day=old_obj_data["round_to_day"]["token"],
-        activate_recurrency=old_obj_data["activate_recurrency"],
+        start_date=start_date,
+        enabled=old_obj_data.get("enabled",None),
+        default_assigned_group=default_assigned_group,
+        default_assigned_user=default_assigned_user,
+        warning_delay=old_obj_data.get("warning_delay",None),
+        additional_delay=old_obj_data.get("additional_delay",None),
+        additional_delay_type=old_obj_data.get("additional_delay_type",None),
+        round_to_day=round_to_day,
+        activate_recurrency=old_obj_data.get("activate_recurrency",None),
     )
     log_info(logger, "{} created".format("/".join(obj.getPhysicalPath())))
 
@@ -149,9 +164,9 @@ def _replace_object(obj, new_type, condition=None, logger=None):
                 set(
                     [
                     value(
-                        condition=item["condition"],
-                        operator=item["operator"],
-                            display_status=item["display_status"],
+                        condition=item.get("condition", None),
+                        operator=item.get("operator", None),
+                        display_status=item.get("display_status", None),
                     )
                     for item in old_obj_data[key]
                     ]
@@ -327,5 +342,22 @@ def fix_patrimony_certificate_class(context):
         licence.meta_type = "PatrimonyCertificate"
         licence.schema = PatrimonyCertificate.schema
         licence.reindexObject()
+
+    logger.info("upgrade step done!")
+
+
+def fix_external_decision_values(context):
+    logger = logging.getLogger("urban: Fix external decision values")
+    logger.info("starting upgrade steps")
+
+    catalog = api.portal.get_tool("portal_catalog")
+    licence_brains = catalog(object_provides=IGenericLicence.__identifier__)
+
+    for licence_brain in licence_brains:
+        licence = licence_brain.getObject()
+        for opinion in licence.objectValues("UrbanEventOpinionRequest"):
+            external_decision = opinion.getField("externalDecision").get(opinion)
+            if type(external_decision) is list and len(external_decision) == 1:
+                opinion.setExternalDecision(external_decision[0])
 
     logger.info("upgrade step done!")

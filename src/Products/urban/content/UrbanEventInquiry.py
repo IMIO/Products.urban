@@ -179,7 +179,7 @@ schema = Schema(
 ##/code-section after-local-schema
 
 UrbanEventInquiry_schema = (
-    BaseFolderSchema.copy()
+    OrderedBaseFolderSchema.copy()
     + getattr(UrbanEvent, "schema", Schema(())).copy()
     + schema.copy()
 )
@@ -190,7 +190,7 @@ UrbanEventInquiry_schema["eventDate"].widget.visible["view"] = "invisible"
 ##/code-section after-schema
 
 
-class UrbanEventInquiry(BaseFolder, UrbanEvent, BrowserDefaultMixin):
+class UrbanEventInquiry(OrderedBaseFolder, UrbanEvent, BrowserDefaultMixin):
     """ """
 
     security = ClassSecurityInfo()
@@ -226,7 +226,7 @@ class UrbanEventInquiry(BaseFolder, UrbanEvent, BrowserDefaultMixin):
                 },
                 default="You can not delete an UrbanEventInquiry if it is not the last!  Remove the last UrbanEventInquiries before being able to remove this one!",
             )
-        BaseFolder.manage_beforeDelete(self, item, container)
+        OrderedBaseFolder.manage_beforeDelete(self, item, container)
 
     def getRecipients(self, theObjects=True, onlyActive=False):
         """
