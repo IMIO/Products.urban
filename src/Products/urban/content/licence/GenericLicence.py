@@ -36,7 +36,7 @@ from Products.DataGridField import DataGridField, DataGridWidget
 from Products.DataGridField.Column import Column
 from Products.DataGridField.SelectColumn import SelectColumn
 
-from collective.task.behaviors import ITask
+from imio.schedule.content.task import IAutomatedTask
 from collective.plonefinder.browser.interfaces import IFinderUploadCapable
 from collective.quickupload.interfaces import IQuickUploadCapable
 from Products.urban.config import *
@@ -1781,10 +1781,10 @@ class GenericLicence(OrderedBaseFolder, UrbanBase, BrowserDefaultMixin):
             events = [evt for evt in events if api.content.get_state(evt) == state]
         return events
 
-    def getAllTasks(self, taskInterface=ITask, state=None):
-        return self.getAllTaskssByObjectValues(taskInterface, state)
+    def getAllTasks(self, taskInterface=IAutomatedTask, state=None):
+        return self.getAllTasksByObjectValues(taskInterface, state)
 
-    def getAllTaskssByObjectValues(self, taskInterface, state=None):
+    def getAllTasksByObjectValues(self, taskInterface, state=None):
         tasks = [
             tsk
             for tsk in self.objectValues()
