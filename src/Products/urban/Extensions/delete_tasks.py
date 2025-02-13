@@ -82,11 +82,13 @@ def delete_task(title, portal_type, after_date, licence_type, keep=1):
             objects[parent_path] = []
         objects[parent_path].append(id)
 
+    catalog = api.portal.get_tool("portal_catalog")
     for path, ids in objects.items():
         obj = api.content.get(path=path)
         ids.sort()
         for id in ids:
             obj._delObject(id=id, suppress_events=True)
+            catalog.uncatalog_object("{}/{}".format(path, id))
             msg = "Task deleted: {}/{}".format(path, id)
             logger.info(msg)
         notifyContainerModified(obj)
