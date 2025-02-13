@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 
 from Products.urban.browser.exportimport.interfaces import IConfigExportMarker
+from Products.urban.docgen.UrbanTemplate import IUrbanTemplate
 from collective.exportimport.serializer import ChoiceFieldSerializer
 from collective.exportimport.serializer import CollectionFieldSerializer
+from plone import api
 from plone.dexterity.interfaces import IDexterityContent
 from plone.restapi.interfaces import IFieldSerializer
 from plone.restapi.serializer.converters import json_compatible
@@ -13,8 +15,8 @@ from zope.schema.interfaces import ICollection
 from zope.schema.interfaces import IVocabularyTokenized
 
 
-@adapter(ICollection, IDexterityContent, IConfigExportMarker)
 @implementer(IFieldSerializer)
+@adapter(ICollection, IDexterityContent, IConfigExportMarker)
 class UrbanConfigCollectionFieldSerializer(CollectionFieldSerializer):
     def __call__(self):
         values = super(UrbanConfigCollectionFieldSerializer, self).__call__()
@@ -25,6 +27,11 @@ class UrbanConfigCollectionFieldSerializer(CollectionFieldSerializer):
             and IVocabularyTokenized.providedBy(value_type.vocabulary)
         ):
             values = [value for value in values if self._check_value(value, value_type)]
+        if (
+            IUrbanTemplate.providedBy(self.context)
+            and self.field.getName() == "merge_templates"
+        ):
+            values = self.handle_merge_templates(values)
         return values
 
     def _check_value(self, value, value_type):
@@ -34,9 +41,26 @@ class UrbanConfigCollectionFieldSerializer(CollectionFieldSerializer):
         except LookupError:
             return False
 
+    def handle_merge_templates(self, values):
+        output = []
+        for value in values:
+            template = value.get("template", None)
+            if template is None:
+                output.append(value)
+                continue
+            try:
+                template_obj = api.content.get(UID=template)
+            except ValueError:
+                output.append(value)
+                continue
+            path = "/".join(template_obj.getPhysicalPath())
+            value["template"] = {"uid": template, "path": path, "id": template_obj.id}
+            output.append(value)
+        return output
 
-@adapter(IChoice, IDexterityContent, IConfigExportMarker)
+
 @implementer(IFieldSerializer)
+@adapter(IChoice, IDexterityContent, IConfigExportMarker)
 class UrbanConfigChoiceFieldSerializer(ChoiceFieldSerializer):
     def __call__(self):
         value = super(UrbanConfigChoiceFieldSerializer, self).__call__()
