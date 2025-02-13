@@ -8,6 +8,16 @@ Changelog
 
 .. towncrier release notes start
 
+2.5.0.dev14 (2025-02-13)
+------------------------
+
+New features:
+
+
+- Add external method to delete duplicate task
+  [jchandelle] (SUP-42085)
+
+
 2.5.0.dev13 (2025-02-07)
 ------------------------
 
