@@ -140,18 +140,27 @@ class ConfigImportContent(ImportContent):
         split_path = path.split("portal_urban")[-1].lstrip("/")
         return api.content.get(path=os.path.join("/portal_urban/", split_path))
 
-    def get_uid_from_proximity_context(self, context, id):
+    def _get_uid_from_brain(self, brain):
+        catalog = api.portal.get_tool("portal_catalog")
+        rid = brain.getRID()
+        return catalog.getIndexDataForRID(rid)["UID"]
+
+    def get_uid_from_proximity_context(self, context, id, ignore_uid=[]):
         brains = api.content.find(context=context, portal_type="UrbanTemplate")
         for brain in brains:
+            brain_uid = self._get_uid_from_brain(brain)
+            if brain_uid in ignore_uid:
+                continue
             obj = brain.getObject()
             merge_templates = obj.merge_templates
             for template in merge_templates:
                 template_obj = api.content.get(UID=template["template"])
                 if template_obj.id == id:
                     return template["template"]
+            ignore_uid.append(brain_uid)
         if ILicenceConfig.providedBy(context):
             return None
-        return self.get_uid_from_proximity_context(aq_parent(context), id)
+        return self.get_uid_from_proximity_context(aq_parent(context), id, ignore_uid)
 
     def get_template_uid(self, item, template):
         if isinstance(template["template"], str):
