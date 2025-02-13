@@ -1,13 +1,14 @@
 #  -*- coding: utf-8 -*-
 from Products.CMFPlone.utils import base_hasattr
 from Products.urban.Extensions.imports import createStreet
+from Products.urban.browser.exportimport.import_config import ConfigImportContent
 from Products.urban.testing import URBAN_TESTS_CONFIG
 from plone import api
-from Products.urban.browser.exportimport.import_config import ConfigImportContent
 
 import json
 import os
 import unittest2 as unittest
+
 
 class TestStreetImports(unittest.TestCase):
 
@@ -239,9 +240,9 @@ class TestExportImportContent(unittest.TestCase):
             globaltemplate.reindexObject(idxs=["UID"])
             globaltemplates_parameter.append(
                 {
-                    "do_rendering": True, 
-                    "template" : globaltemplate.UID(),
-                    "pod_context_name" : id.split(".")[0]
+                    "do_rendering": True,
+                    "template": globaltemplate.UID(),
+                    "pod_context_name": id.split(".")[0],
                 }
             )
         return globaltemplates_parameter
@@ -256,7 +257,7 @@ class TestExportImportContent(unittest.TestCase):
 
     def get_data(self, file):
         directory_path = os.path.dirname(os.path.realpath(__file__))
-        json_file = os.path.normpath(os.path.join(directory_path, "json", file ))
+        json_file = os.path.normpath(os.path.join(directory_path, "json", file))
         data = None
         with open(json_file, "r") as f:
             data = json.load(f)
@@ -276,7 +277,7 @@ class TestExportImportContent(unittest.TestCase):
             import_urban_config.import_in_same_instance = False
             import_urban_config.import_to_current_lic_config_folder = False
             import_urban_config.handle_missing_parent = 0
-            
+
             import_urban_config.start()
             import_urban_config.do_import(data)
             import_urban_config.finish()
@@ -288,8 +289,12 @@ class TestExportImportContent(unittest.TestCase):
                 merge_template["pod_context_name"]: merge_template["template"]
                 for merge_template in merge_templates
             }
-            self.assertEquals(merge_templates["footer"], "9bc708e9-bbc7-4b1f-ac44-03e555885af0")
-            self.assertEquals(merge_templates["header"], "589d6268-1d93-416c-a8ac-271f6595c234")
+            self.assertEquals(
+                merge_templates["footer"], "9bc708e9-bbc7-4b1f-ac44-03e555885af0"
+            )
+            self.assertEquals(
+                merge_templates["header"], "589d6268-1d93-416c-a8ac-271f6595c234"
+            )
 
     def test_import_template_same_procedure_type(self):
         data = self.get_data("urban_template_test_same_procedure_type.json")
@@ -305,7 +310,7 @@ class TestExportImportContent(unittest.TestCase):
             import_urban_config.import_in_same_instance = False
             import_urban_config.import_to_current_lic_config_folder = False
             import_urban_config.handle_missing_parent = 0
-            
+
             import_urban_config.start()
             import_urban_config.do_import(data)
             import_urban_config.finish()
@@ -318,8 +323,12 @@ class TestExportImportContent(unittest.TestCase):
                 merge_template["pod_context_name"]: merge_template["template"]
                 for merge_template in merge_templates
             }
-            self.assertEquals(merge_templates["footer"], "9bc708e9-bbc7-4b1f-ac44-03e555885af0")
-            self.assertEquals(merge_templates["header"], "589d6268-1d93-416c-a8ac-271f6595c234")
+            self.assertEquals(
+                merge_templates["footer"], "9bc708e9-bbc7-4b1f-ac44-03e555885af0"
+            )
+            self.assertEquals(
+                merge_templates["header"], "589d6268-1d93-416c-a8ac-271f6595c234"
+            )
 
     def test_import_template_same_event(self):
         data = self.get_data("urban_template_test_same_event.json")
@@ -335,7 +344,7 @@ class TestExportImportContent(unittest.TestCase):
             import_urban_config.import_in_same_instance = False
             import_urban_config.import_to_current_lic_config_folder = False
             import_urban_config.handle_missing_parent = 0
-            
+
             import_urban_config.start()
             import_urban_config.do_import(data)
             import_urban_config.finish()
@@ -347,5 +356,9 @@ class TestExportImportContent(unittest.TestCase):
                 merge_template["pod_context_name"]: merge_template["template"]
                 for merge_template in merge_templates
             }
-            self.assertEquals(merge_templates["footer"], "9bc708e9-bbc7-4b1f-ac44-03e555885af0")
-            self.assertEquals(merge_templates["header"], "589d6268-1d93-416c-a8ac-271f6595c234")
+            self.assertEquals(
+                merge_templates["footer"], "9bc708e9-bbc7-4b1f-ac44-03e555885af0"
+            )
+            self.assertEquals(
+                merge_templates["header"], "589d6268-1d93-416c-a8ac-271f6595c234"
+            )
