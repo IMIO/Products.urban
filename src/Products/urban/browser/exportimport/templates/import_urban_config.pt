@@ -115,6 +115,18 @@
               </label>
             </div>
 
+            <div class="field">
+              <label>
+                <input
+                    type="checkbox"
+                    name="fix_parent_path:boolean"
+                    id="fix_parent_path"
+                    tal:attributes="checked python:'checked' if view.fix_parent_path else None"
+                    />
+                <span i18n:translate="">Fix parent path</span>
+              </label>
+            </div>
+
             <div class="formControls" class="form-group">
                 <input type="hidden" name="form.submitted" value="1"/>
                 <button class="btn btn-primary submit-widget button-field context"
