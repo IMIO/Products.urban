@@ -211,6 +211,7 @@ class TransitionsPanelView(ActionsPanelView):
         for transition in end_transition_ids:
             if transition in lst_id:
                 to_move.append(lst.pop(lst_id.index(transition)))
+                lst_id.remove(transition)
         lst.extend(to_move)
 
     def _transitionsToConfirm(self):
