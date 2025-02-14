@@ -8,6 +8,16 @@ Changelog
 
 .. towncrier release notes start
 
+2.5.0.dev15 (2025-02-14)
+------------------------
+
+Bug fixes:
+
+
+- Fix sort transition function logic
+  [jchandelle] (SUP-42697)
+
+
 2.5.0.dev14 (2025-02-13)
 ------------------------
 
