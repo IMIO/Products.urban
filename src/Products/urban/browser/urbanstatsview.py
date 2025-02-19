@@ -81,13 +81,16 @@ class UrbanStatsView(BrowserView):
                 ],
                 "range": "minmax",
             },
-            review_state=args["licence_state"],
         )
         if not brains:
             return {"sum": {"sum": "0"}}
         result = self.getEmptyResultTable(args)
         for brain in brains:
-            result[brain.portal_type][brain.review_state] += 1
+            # grouping states deposit and complete under in_progress
+            state = "in_progress" if "in_progress" in args["licence_state"] and brain.review_state in {"deposit", "complete"} else brain.review_state
+            if state in args["licence_state"]:  # ensure the state exists in the requested filter
+                result[brain.portal_type][state] += 1
+                
         self.sumPartialResults(result, total=len(brains))
         return result
 
