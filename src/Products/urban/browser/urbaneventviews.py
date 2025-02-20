@@ -2,36 +2,35 @@
 
 from Acquisition import aq_inner
 from DateTime import DateTime
-from Products.statusmessages.interfaces import IStatusMessage
-from Products.urban import utils
 from Products.Five import BrowserView
+from Products.statusmessages.interfaces import IStatusMessage
+from Products.urban import services
 from Products.urban import UrbanMessage as _
-from Products.urban.browser.mapview import MapView
+from Products.urban import utils
 from Products.urban.browser.licence.licenceview import LicenceView
-from Products.urban.browser.table.urbantable import ApplicantTable
+from Products.urban.browser.mapview import MapView
 from Products.urban.browser.table.urbantable import ApplicantHistoryTable
+from Products.urban.browser.table.urbantable import ApplicantTable
+from Products.urban.browser.table.urbantable import ClaimantsTable
 from Products.urban.browser.table.urbantable import DocumentsTable
 from Products.urban.browser.table.urbantable import EventAttachmentsTable
-from Products.urban.browser.table.urbantable import ClaimantsTable
 from Products.urban.browser.table.urbantable import RecipientsCadastreTable
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.send_mail_action.forms import MAIL_ACTION_KEY
-from Products.urban import services
 from StringIO import StringIO
-
 from plone import api
 from plone.namedfile.field import NamedFile
-
 from z3c.form import button
-from z3c.form import form, field
-
+from z3c.form import field
+from z3c.form import form
 from zope.annotation import interfaces
 from zope.interface import Interface
 
-import csv
 import collections
+import csv
 import logging
 import re
+
 
 logger = logging.getLogger("Urban Event")
 
@@ -302,10 +301,10 @@ class UrbanEventView(BrowserView):
         return _(
             "Mail already send for ${title} by ${user}, ${date}",
             mapping={
-                "title": notif[-1]['title'].lower(),
+                "title": notif[-1]["title"].lower(),
                 "user": username,
-                "date": notif[-1]["time"].strftime("%d/%m/%Y, %H:%M:%S")
-            }
+                "date": notif[-1]["time"].strftime("%d/%m/%Y, %H:%M:%S"),
+            },
         )
 
 
@@ -1090,7 +1089,7 @@ class UrbanEventInquiryView(UrbanEventInquiryBaseView):
 
     def getInquiryRadius(self):
         licence = self.context.aq_parent
-        investigation_radius = getattr(licence, 'investigation_radius', None)
+        investigation_radius = getattr(licence, "investigation_radius", None)
 
         if investigation_radius is None:
             return 50
@@ -1101,5 +1100,5 @@ class UrbanEventInquiryView(UrbanEventInquiryBaseView):
             output = int(investigation_radius.split("m")[0])
         except Exception as e:
             output = 50
-        
+
         return output
