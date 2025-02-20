@@ -753,7 +753,7 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
             # create claimant
             with api.env.adopt_roles(["Manager"]):
                 self.context.invokeFactory("Claimant", **claimant_arg)
-            print(
+            logger.info(
                 "imported claimant {id}, {name} {surname}".format(
                     id=claimant_arg["id"],
                     name=claimant_arg["name1"],
@@ -1053,7 +1053,7 @@ class UrbanEventInquiryView(UrbanEventInquiryBaseView):
                 city = str(owner["city"].encode("utf-8"))
                 street = str(owner["street"].encode("utf-8"))
                 number = str(owner["number"].encode("utf-8"))
-                print(name, firstname)
+                logger.info(name, firstname)
                 # to avoid having several times the same Recipient (that could for example be on several parcels
                 # we first look in portal_catalog where Recipients are catalogued
                 owner_obj = owner_id and getattr(context, owner_id, None)
