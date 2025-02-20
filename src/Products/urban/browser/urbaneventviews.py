@@ -53,12 +53,13 @@ claimants_csv_fieldnames = [
     "hasPetition",
     "outOfTime",
     "claimDate",
-    "claimsText",
+    "claimingText",
     "wantDecisionCopy",
 ]
 
-EXCEL_HEADER = "Titre (sel.),Nom,Prénom,Rue,N° de police,Code postal (num.),Localité,Pays (sel.),N° registre national,CAPAKEY,Nature parcelle,Rue parcelle,N° de police parcelle"
+EXCEL_HEADER_RECIPIENT = "Titre (sel.),Nom,Prénom,Rue,N° de police,Code postal (num.),Localité,Pays (sel.),N° registre national,CAPAKEY,Nature parcelle,Rue parcelle,N° de police parcelle"
 CARTO_HEADER = '"CAPAKEY";"nature";"datesituation";"proprio"'
+EXCEL_HEADER_CLAIMANT = '"Titre (sel.)","Nom","Prénom","Société","Rue","N° de police","Code postal (num.)","Localité","Pays (sel.)","E-mail","Téléphone","GSM","N° registre national","Type de réclamation","Pétition","Hors délai","Date de réception","Texte de la réclamation","Souhaite une copie de la décision"'
 
 
 class UrbanEventView(BrowserView):
@@ -310,7 +311,15 @@ class UrbanEventView(BrowserView):
 
 class IImportClaimantListingForm(Interface):
 
-    listing_file_claimants = NamedFile(title=_(u"Listing file (claimants)"))
+    listing_file_claimants = NamedFile(
+        title=_(u"Listing file (claimants)"),
+        description=_(
+            u"A specially formatted CSV file must be used for import. "
+            u"The CSV file can be created from the ODT template file "
+            u"(can be downloaded <a href='/++resource++Products.urban/reclamant_reimport.ods'>here</a>) "
+            u"by 'save as' in CSV format"
+        ),
+    )
 
 
 class ImportClaimantListingForm(form.Form):
@@ -357,8 +366,15 @@ class ImportClaimantListingForm(form.Form):
                 mapping={u"name": csv_file.filename},
             )
 
+        error = _(
+            u"The imported file (${name}) couldn't be read properly. Please verify its structure and try again.",
+            mapping={u"name": csv_file.filename},
+        )
+
+        if not csv_file.data.startswith(EXCEL_HEADER_CLAIMANT):
+            return error
+
         try:
-            # warning: extra or missing columns don't generate an error during CSV reading
             reader = csv.DictReader(
                 StringIO(csv_file.data),
                 claimants_csv_fieldnames,
@@ -369,17 +385,22 @@ class ImportClaimantListingForm(form.Form):
                 row for row in reader if row["name1"] or row["name2"] or row["society"]
             ][1:]
         except csv.Error as error:
-            return _(
-                u"The imported file (${name}) couldn't be read properly. Please verify its structure and try again.",
-                mapping={u"name": csv_file.filename},
-            )
+            return error
 
         return None
 
 
 class IImportRecipientListingForm(Interface):
 
-    listing_file_recipients = NamedFile(title=_(u"Listing file (recipients)"))
+    listing_file_recipients = NamedFile(
+        title=_(u"Listing file (recipients)"),
+        description=_(
+            u"A specially formatted CSV file must be used for import. "
+            u"The CSV file can be created from the ODT template file "
+            u"(can be downloaded <a href='/++resource++Products.urban/destinaires_reimport.ods'>here</a>) "
+            u"by 'save as' in CSV format"
+        ),
+    )
 
 
 class ImportRecipientListingForm(form.Form):
@@ -618,7 +639,7 @@ class ImportRecipientListingForm(form.Form):
 
         csv_file = data["listing_file_recipients"]
         data = csv_file.data
-        if data.startswith(EXCEL_HEADER):
+        if data.startswith(EXCEL_HEADER_RECIPIENT):
             self.handle_data_from_excel(data)
         elif data.startswith(CARTO_HEADER):
             self.handle_data_from_carto(data)
@@ -694,7 +715,7 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
             claimant_args = [
                 row for row in reader if row["name1"] or row["name2"] or row["society"]
             ][1:]
-        except csv.Error, error:
+        except csv.Error as error:
             return
 
         for claimant_arg in claimant_args:
@@ -702,12 +723,22 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
             # default values
             if not claimant_arg["claimType"]:
                 claimant_arg["claimType"] = "Écrite"
-            claimant_arg["hasPetition"] = bool(claimant_arg["hasPetition"])
-            claimant_arg["outOfTime"] = bool(claimant_arg["outOfTime"])
-            claimant_arg["wantDecisionCopy"] = bool(claimant_arg["wantDecisionCopy"])
+            claimant_arg["hasPetition"] = self.handle_boolean_value(
+                claimant_arg.get("hasPetition", False)
+            )
+            claimant_arg["outOfTime"] = self.handle_boolean_value(
+                claimant_arg.get("outOfTime", False)
+            )
+            claimant_arg["wantDecisionCopy"] = self.handle_boolean_value(
+                claimant_arg.get("wantDecisionCopy", False)
+            )
             # mappings
-            claimant_arg["personTitle"] = titles_mapping[claimant_arg["personTitle"]]
-            claimant_arg["country"] = country_mapping[claimant_arg["country"]]
+            claimant_arg["personTitle"] = titles_mapping.get(
+                claimant_arg["personTitle"], "notitle"
+            )
+            claimant_arg["country"] = country_mapping.get(
+                claimant_arg["country"], "belgium"
+            )
             claimant_arg["id"] = site.plone_utils.normalizeString(
                 claimant_arg["name1"] + claimant_arg["name2"] + claimant_arg["society"]
             )
@@ -723,11 +754,18 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
             # create claimant
             with api.env.adopt_roles(["Manager"]):
                 self.context.invokeFactory("Claimant", **claimant_arg)
-            print "imported claimant {id}, {name} {surname}".format(
-                id=claimant_arg["id"],
-                name=claimant_arg["name1"],
-                surname=claimant_arg["name2"],
+            print(
+                "imported claimant {id}, {name} {surname}".format(
+                    id=claimant_arg["id"],
+                    name=claimant_arg["name1"],
+                    surname=claimant_arg["name2"],
+                )
             )
+
+    def handle_boolean_value(self, value):
+        if value == "Vrai" or value is True:
+            return True
+        return False
 
     def getParcels(self):
         context = aq_inner(self.context)
@@ -1016,7 +1054,7 @@ class UrbanEventInquiryView(UrbanEventInquiryBaseView):
                 city = str(owner["city"].encode("utf-8"))
                 street = str(owner["street"].encode("utf-8"))
                 number = str(owner["number"].encode("utf-8"))
-                print name, firstname
+                print(name, firstname)
                 # to avoid having several times the same Recipient (that could for example be on several parcels
                 # we first look in portal_catalog where Recipients are catalogued
                 owner_obj = owner_id and getattr(context, owner_id, None)

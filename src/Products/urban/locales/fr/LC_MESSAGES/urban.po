@@ -68,6 +68,14 @@ msgstr "Une condition de type d'événement rend la règle applicable uniquement
 msgid "A opinion to ask condition makes the rule apply only when one of the Opinion to ask slelected correspond to the one of the context"
 msgstr "Une condition d'opinion à demander rend la règle applicable uniquement lorsqu'une des opinions à demander sélectionnées correspond à celle du contexte."
 
+#: ../browser/urbaneventviews.py:391
+msgid "A specially formatted CSV file must be used for import. The CSV file can be created from the ODT template file (can be downloaded <a href='/++resource++Products.urban/destinaires_reimport.ods'>here</a>) by 'save as' in CSV format"
+msgstr "Un fichier CSV spécialement formaté doit être utilisé pour l'importation. Le fichier CSV peut être créé à partir du fichier modèle ODT (téléchargeable <a href='/++resource++Products.urban/destinaires_reimport.ods'>ici</a>) en l'enregistrant sous le format CSV"
+
+#: ../browser/urbaneventviews.py:315
+msgid "A specially formatted CSV file must be used for import. The CSV file can be created from the ODT template file (can be downloaded <a href='/++resource++Products.urban/reclamant_reimport.ods'>here</a>) by 'save as' in CSV format"
+msgstr "Un fichier CSV spécialement formaté doit être utilisé pour l'importation. Le fichier CSV peut être créé à partir du fichier modèle ODT (téléchargeable <a href='/++resource++Products.urban/reclamant_reimport.ods'>ici</a>) en l'enregistrant sous le format CSV"
+
 #: ../browser/licence/templates/licenceview.pt:31
 #: ../browser/templates/urbaneventannouncementview.pt:35
 #: ../browser/templates/urbaneventinquiryview.pt:34
