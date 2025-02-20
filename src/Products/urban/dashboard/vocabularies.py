@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from Acquisition import aq_parent
 from imio.dashboard.vocabulary import ConditionAwareCollectionVocabulary
 
 from plone import api
@@ -130,7 +131,12 @@ class DashboardCollections(ConditionAwareCollectionVocabulary):
             query=query,
         )
         filtered_terms = [
-            t for t in terms if t.value.id in self.get_collection_ids(context)
+            t
+            for t in terms
+            if (
+                t.value.id in self.get_collection_ids(context)
+                and self.check_display(t.token)
+            )
         ]
         return SimpleVocabulary(filtered_terms)
 
@@ -151,6 +157,14 @@ class DashboardCollections(ConditionAwareCollectionVocabulary):
     def _format_id(self, type):
         """Format a UrbanType to the collection id"""
         return "collection_{0}".format(type.lower())
+
+    def check_display(self, uid):
+        folder = api.content.get(UID=uid)
+        parent = aq_parent(folder)
+        getRawExcludeFromNav = getattr(parent, "getRawExcludeFromNav", None)
+        if not getRawExcludeFromNav:
+            return True
+        return not getRawExcludeFromNav()
 
     def get_collection_ids(self, context):
         ids = ["collection_all_licences"]
