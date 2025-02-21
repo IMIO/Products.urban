@@ -53,7 +53,7 @@ class Urbain220Viewlet(ViewletBase):
         ]
         allowed = self.context.id in allowed_contexts
         faceted_context = bool(IFacetedNavigable.providedBy(self.context))
-        return True
+        return faceted_context and allowed and self.get_date_range()
 
     def get_date_range(self):
         """
@@ -105,9 +105,7 @@ class LicenceToUrbain220Street(object):
 
 class UrbainXMLExport(BrowserView):
     def __call__(self):
-        # datefrom, dateto = self.get_date_range()
-        datefrom = DateTime("2000/01/01")
-        dateto = DateTime("2050/01/01")
+        datefrom, dateto = self.get_date_range()
         brains = getDashboardQueryResult(self.context)
         return self.generateUrbainXML(brains, datefrom, dateto)
 
@@ -127,9 +125,7 @@ class UrbainXMLExport(BrowserView):
         """
         portal_urban = api.portal.get_tool("portal_urban")
         townshipname = portal_urban.getCityName()
-        # from_date, to_date = self.get_date_range()
-        from_date = DateTime("2000/01/01")
-        to_date = DateTime("2050/01/01")
+        from_date, to_date = self.get_date_range()
         response = self.request.RESPONSE
         response.setHeader("Content-type", "text/xml")
         response.setHeader(
@@ -163,21 +159,19 @@ class UrbainXMLExport(BrowserView):
 
         xml = []
         error = []
-        html_list = []
-        xml.append('<?xml version="1.0" encoding="utf-8"?>')
-        xml.append("<dataroot>")
-        xml.append("  <E_220_herkomst>")
-        xml.append("    <E_220_NIS_Gem>%s</E_220_NIS_Gem>" % NIS)
+        xml.append(u'<?xml version="1.0" encoding="utf-8"?>')
+        xml.append(u"<dataroot>")
+        xml.append(u"  <E_220_herkomst>")
+        xml.append(u"    <E_220_NIS_Gem>%s</E_220_NIS_Gem>" % NIS)
         xml.append(
-            "    <E_220_Periode_van>%s</E_220_Periode_van>"
+            u"    <E_220_Periode_van>%s</E_220_Periode_van>"
             % datefrom.strftime("%Y%m%d")
         )
         xml.append(
-            "    <E_220_Periode_tot>%s</E_220_Periode_tot>" % dateto.strftime("%Y%m%d")
+            u"    <E_220_Periode_tot>%s</E_220_Periode_tot>" % dateto.strftime("%Y%m%d")
         )
-        xml.append("    <E_220_ICT>COM</E_220_ICT>")
-        xml.append("  </E_220_herkomst>")
-        html_list.append("<HTML><TABLE>")
+        xml.append(u"    <E_220_ICT>COM</E_220_ICT>")
+        xml.append(u"  </E_220_herkomst>")
         for licence_brain in licence_brains:
             licence = licence_brain.getObject()
             applicantObj = (
@@ -187,17 +181,9 @@ class UrbainXMLExport(BrowserView):
                 licence.getField("architects") and licence.getArchitects() or []
             )
             if api.content.get_state(licence) in ["accepted", "authorized"]:
-                html_list.append(
-                    "<TR><TD>%s  %s</TD><TD>%s</TD></TR>"
-                    % (
-                        str(licence.getReference()),
-                        safe_unicode(licence.title),
-                        str(licence_brain.getDecisionDate),
-                    )
-                )
-                xml.append("  <Item220>")
+                xml.append(u"  <Item220>")
                 xml.append(
-                    "      <E_220_Ref_Toel>%s</E_220_Ref_Toel>"
+                    u"      <E_220_Ref_Toel>%s</E_220_Ref_Toel>"
                     % str(licence.getReference())
                 )
                 parcels = licence.getParcels()
@@ -208,7 +194,7 @@ class UrbainXMLExport(BrowserView):
                     {"reference": str(licence.getReference())},
                 ):
                     xml.append(
-                        "      <Doc_Afd>%s</Doc_Afd>" % parcels[0].getDivisionCode()
+                        u"      <Doc_Afd>%s</Doc_Afd>" % parcels[0].getDivisionCode()
                     )
 
                 if check(
@@ -228,7 +214,7 @@ class UrbainXMLExport(BrowserView):
                         {"reference": str(licence.getReference())},
                     ):
                         xml.append(
-                            "      <E_220_straatcode>%s</E_220_straatcode>"
+                            u"      <E_220_straatcode>%s</E_220_straatcode>"
                             % str(street_code)
                         )
                         if check(
@@ -238,12 +224,12 @@ class UrbainXMLExport(BrowserView):
                             {"reference": str(licence.getReference())},
                         ):
                             xml.append(
-                                "      <E_220_straatnaam>%s</E_220_straatnaam>"
+                                u"      <E_220_straatnaam>%s</E_220_straatnaam>"
                                 % safe_unicode(street_name)
                             )
                     if number:
                         xml.append(
-                            "      <E_220_huisnr>%s</E_220_huisnr>" % str(number)
+                            u"      <E_220_huisnr>%s</E_220_huisnr>" % str(number)
                         )
                 worktype = licence.getWorkType() and licence.getWorkType()[0] or ""
                 work_types = UrbanVocabulary("folderbuildworktypes").getAllVocTerms(
@@ -260,14 +246,14 @@ class UrbainXMLExport(BrowserView):
                     {"worktype": worktype, "reference": str(licence.getReference())},
                 ):
                     xml_worktype = worktype_map[worktype]
-                xml.append("      <E_220_Typ>%s</E_220_Typ>" % xml_worktype)
+                xml.append(u"      <E_220_Typ>%s</E_220_Typ>" % xml_worktype)
                 xml.append(
-                    "      <E_220_Werk>%s</E_220_Werk>"
+                    u"      <E_220_Werk>%s</E_220_Werk>"
                     % safe_unicode(licence.licenceSubject)
                 )
                 strDecisionDate = str(licence_brain.getDecisionDate)
                 xml.append(
-                    "      <E_220_Datum_Verg>%s%s%s</E_220_Datum_Verg>"
+                    u"      <E_220_Datum_Verg>%s%s%s</E_220_Datum_Verg>"
                     % (
                         strDecisionDate[0:4],
                         strDecisionDate[5:7],
@@ -283,7 +269,7 @@ class UrbainXMLExport(BrowserView):
                         authority = auth_map[licence.getAuthority()]
                     elif licence.getLastRecourse():
                         authority = "MINISTRE"
-                xml.append("      <E_220_Instan>%s</E_220_Instan>" % authority)
+                xml.append(u"      <E_220_Instan>%s</E_220_Instan>" % authority)
                 if check(
                     self,
                     applicantObj,
@@ -300,28 +286,28 @@ class UrbainXMLExport(BrowserView):
                         and applicantObj.getLegalForm()
                         or applicantObj.getName2()
                     )
-                    xml.append("      <PERSOON>")
+                    xml.append(u"      <PERSOON>")
                     xml.append(
-                        "        <naam>%s %s</naam>"
+                        u"        <naam>%s %s</naam>"
                         % (
                             safe_unicode(firstname),
                             safe_unicode(lastname),
                         )
                     )
                     xml.append(
-                        "        <straatnaam>%s</straatnaam>"
+                        u"        <straatnaam>%s</straatnaam>"
                         % safe_unicode(applicantObj.getStreet())
                     )
-                    xml.append("        <huisnr>%s</huisnr>" % applicantObj.getNumber())
+                    xml.append(u"        <huisnr>%s</huisnr>" % applicantObj.getNumber())
                     xml.append(
-                        "        <postcode>%s</postcode>" % applicantObj.getZipcode()
+                        u"        <postcode>%s</postcode>" % applicantObj.getZipcode()
                     )
                     xml.append(
-                        "        <gemeente>%s</gemeente>"
+                        u"        <gemeente>%s</gemeente>"
                         % safe_unicode(applicantObj.getCity())
                     )
-                    xml.append("        <hoedanig>DEMANDEUR</hoedanig>")
-                    xml.append("      </PERSOON>")
+                    xml.append(u"        <hoedanig>DEMANDEUR</hoedanig>")
+                    xml.append(u"      </PERSOON>")
                     if architects:
                         architectObj = architects[0]
                         list_architects_terms = [
@@ -336,59 +322,59 @@ class UrbainXMLExport(BrowserView):
                             "A COMPLETER ",
                         ]
                         if architectObj.getName1() in list_architects_terms:
-                            xml.append("      <PERSOON>")
+                            xml.append(u"      <PERSOON>")
                             xml.append(
-                                "        <naam>%s %s</naam>"
+                                u"        <naam>%s %s</naam>"
                                 % (
                                     safe_unicode(firstname),
                                     safe_unicode(lastname),
                                 )
                             )
                             xml.append(
-                                "        <straatnaam>%s</straatnaam>"
+                                u"        <straatnaam>%s</straatnaam>"
                                 % safe_unicode(applicantObj.getStreet())
                             )
                             xml.append(
-                                "        <huisnr>%s</huisnr>" % applicantObj.getNumber()
+                                u"        <huisnr>%s</huisnr>" % applicantObj.getNumber()
                             )
                             xml.append(
-                                "        <postcode>%s</postcode>"
+                                u"        <postcode>%s</postcode>"
                                 % applicantObj.getZipcode()
                             )
                             xml.append(
-                                "        <gemeente>%s</gemeente>"
+                                u"        <gemeente>%s</gemeente>"
                                 % safe_unicode(applicantObj.getCity())
                             )
-                            xml.append("        <hoedanig>ARCHITECTE</hoedanig>")
-                            xml.append("      </PERSOON>")
+                            xml.append(u"        <hoedanig>ARCHITECTE</hoedanig>")
+                            xml.append(u"      </PERSOON>")
                         else:
-                            xml.append("      <PERSOON>")
+                            xml.append(u"      <PERSOON>")
                             xml.append(
-                                "        <naam>%s %s</naam>"
+                                u"        <naam>%s %s</naam>"
                                 % (
                                     safe_unicode(architectObj.getName1()),
                                     safe_unicode(architectObj.getName2())
                                 )
                             )
                             xml.append(
-                                "        <straatnaam>%s</straatnaam>"
+                                u"        <straatnaam>%s</straatnaam>"
                                 % safe_unicode(architectObj.getStreet())
                             )
                             xml.append(
-                                "        <huisnr>%s</huisnr>" % architectObj.getNumber()
+                                u"        <huisnr>%s</huisnr>" % architectObj.getNumber()
                             )
                             xml.append(
-                                "        <postcode>%s</postcode>"
+                                u"        <postcode>%s</postcode>"
                                 % architectObj.getZipcode()
                             )
                             xml.append(
-                                "        <gemeente>%s</gemeente>"
+                                u"        <gemeente>%s</gemeente>"
                                 % safe_unicode(architectObj.getCity())
                             )
-                            xml.append("        <hoedanig>ARCHITECTE</hoedanig>")
-                            xml.append("      </PERSOON>")
+                            xml.append(u"        <hoedanig>ARCHITECTE</hoedanig>")
+                            xml.append(u"      </PERSOON>")
                 for prc in parcels:
-                    xml.append("      <PERCELEN>")
+                    xml.append(u"      <PERCELEN>")
                     try:
                         strRadical = "%04d" % float(prc.getRadical())
                     except:
@@ -402,7 +388,7 @@ class UrbainXMLExport(BrowserView):
                     except:
                         strBis = "00"
                     xml.append(
-                        "        <E_220_percid>%s_%s_%s_%s_%s_%s</E_220_percid>"
+                        u"        <E_220_percid>%s_%s_%s_%s_%s_%s</E_220_percid>"
                         % (
                             prc.getDivisionCode(),
                             prc.getSection(),
@@ -413,33 +399,23 @@ class UrbainXMLExport(BrowserView):
                         )
                     )
                     xml.append(
-                        "        <kadgemnr>%s</kadgemnr>" % prc.getDivisionCode()
+                        u"        <kadgemnr>%s</kadgemnr>" % prc.getDivisionCode()
                     )
-                    xml.append("        <sectie>%s</sectie>" % prc.getSection())
-                    xml.append("        <grondnr>%s</grondnr>" % prc.getRadical())
+                    xml.append(u"        <sectie>%s</sectie>" % prc.getSection())
+                    xml.append(u"        <grondnr>%s</grondnr>" % prc.getRadical())
                     if prc.getExposant() != "":
                         xml.append(
-                            "        <exponent>%s</exponent>" % prc.getExposant()
+                            u"        <exponent>%s</exponent>" % prc.getExposant()
                         )
                     if prc.getPuissance() != "":
-                        xml.append("        <macht>%s</macht>" % prc.getPuissance())
+                        xml.append(u"        <macht>%s</macht>" % prc.getPuissance())
                     if prc.getBis() != "":
-                        xml.append("        <bisnr>%s</bisnr>" % prc.getBis())
-                    xml.append("      </PERCELEN>")
-                xml.append("  </Item220>")
-        html_list.append("</TABLE></HTML>")
+                        xml.append(u"        <bisnr>%s</bisnr>" % prc.getBis())
+                    xml.append(u"      </PERCELEN>")
+                xml.append(u"  </Item220>")
         xml.append("</dataroot>")
         if error != []:
             return "Error in these licences: \n%s" % "\n".join(error)
         else:
-            site = api.portal.get()
-            response = site.REQUEST.RESPONSE
-            response.setHeader("Content-type", "text/plain;;charset=utf-8")
-            output = StringIO()
-            chain = []
-            for line in xml:
-                chain.append(safe_unicode(line))
-
-            output.write(u"\n".join(chain))
             self._set_header_response()
-            return output.getvalue()
+            return u"\n".join(xml)
