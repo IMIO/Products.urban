@@ -1285,7 +1285,12 @@ class UrbanDocGenerationEventHelperView(UrbanDocGenerationHelperView):
         return field
 
     def _get_wspm_text_field(self, field_name):
-        text = self._get_wspm_field(field_name)
+        field = self._get_wspm_field(field_name)
+        text = ""
+        if isinstance(field, dict):
+            text = field.get("data", "")
+        elif isinstance(field, str):
+            text = field
         corrected_text = re.sub("\n\s*\n", "\n<p>&nbsp;</p>\n", text)
         return corrected_text
 

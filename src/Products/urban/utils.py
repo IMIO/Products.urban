@@ -219,6 +219,7 @@ def get_ws_meetingitem_infos(urban_event, extra_attributes=False):
     """ """
     annotations = IAnnotations(urban_event)
     if "imio.pm.wsclient-sent_to" in annotations:
+        config_id = annotations["imio.pm.wsclient-sent_to"][0]
         request = api.portal.getRequest()
         portal_state = getMultiAdapter(
             (urban_event, request), name=u"plone_portal_state"
@@ -226,13 +227,17 @@ def get_ws_meetingitem_infos(urban_event, extra_attributes=False):
         ws4pmSettings = getMultiAdapter(
             (portal_state.portal(), request), name="ws4pmclient-settings"
         )
-        items = ws4pmSettings._rest_searchItems(
-            {"externalIdentifier": urban_event.UID()}
-        )
+
+        items = ws4pmSettings._rest_searchItems({"externalIdentifier": urban_event.UID(), "config_id": config_id})
+
         if extra_attributes and items:
-            items = ws4pmSettings._rest_getItemInfos(
-                {"UID": items[0].UID, "showExtraInfos": True}
-            )
+            items = ws4pmSettings._rest_getItemInfos({
+                "UID": items[0]['UID'],
+                "extra_include": "meeting,config",
+                "extra_include_config_metadata_fields": "title",
+                "fullobjects": "True"
+            })
+
         return items
 
 
