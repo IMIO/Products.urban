@@ -343,6 +343,10 @@ msgstr "Profil d'extention pour iA.Urban."
 msgid "Field"
 msgstr "Champ"
 
+#: ../contentrules/stringinterp.py:17
+msgid "Folder Manager E-mail"
+msgstr "L'e-mail de l'agent traitant"
+
 #: ../browser/templates/searchparcels.pt:171
 msgid "Found parcel(s)"
 msgstr "Parcelle(s) trouvée(s)"
