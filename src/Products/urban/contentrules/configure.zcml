@@ -129,4 +129,13 @@
         factory=".licence_type.LicenceTypeCondition"
         />
 
+    <!-- stringinterp -->
+
+    <adapter
+      for="*"
+      provides="plone.stringinterp.interfaces.IStringSubstitution"
+      factory=".stringinterp.FolderManagersMail"
+      name="folder_manager_email"
+    />
+
 </configure>

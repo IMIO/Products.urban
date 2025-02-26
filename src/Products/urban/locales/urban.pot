@@ -291,6 +291,10 @@ msgstr ""
 msgid "Filter"
 msgstr ""
 
+#: ../contentrules/stringinterp.py:17
+msgid "Folder Manager E-mail"
+msgstr ""
+
 msgid "FolderManager"
 msgstr ""
 
