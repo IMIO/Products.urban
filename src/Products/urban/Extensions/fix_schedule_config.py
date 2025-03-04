@@ -4,6 +4,7 @@ from Products.urban.config import URBAN_TYPES
 from importlib import import_module
 from plone import api
 
+import transaction
 import logging
 
 logger = logging.getLogger("urban: fix schedule config")
@@ -92,3 +93,27 @@ def fix_schedule_config():
  'description': '',
  'end_conditions': (<imio.schedule.content.object_factories.EndConditionObject object at 0x7f806ae3f450>,),
 """
+
+
+def fix_announcement_task(schedule_config):
+    if (
+        hasattr(schedule_config, "additional_delay_type")
+        and isinstance(schedule_config.additional_delay_type, dict)
+        and "token" in schedule_config.additional_delay_type
+    ):
+        schedule_config.additional_delay_type = schedule_config.additional_delay_type["token"]
+
+
+def fix_announcement_tasks():
+    portal = api.portal.get()
+    portal_urban = portal["portal_urban"]
+    for ptype in URBAN_TYPES:
+        cfg_folder = portal_urban[ptype.lower()]
+        if "schedule" not in cfg_folder:
+            continue
+        schedule_config = cfg_folder["schedule"]
+        if hasattr(schedule_config, "announcement-preparation"):
+            fix_announcement_task(schedule_config["announcement-preparation"])
+        if hasattr(schedule_config, "announcement"):
+            fix_announcement_task(schedule_config["announcement"])
+    transaction.commit
