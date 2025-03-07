@@ -19,6 +19,7 @@ import string
 import hashlib
 import pkg_resources
 import time
+import pytz
 
 
 
@@ -284,5 +285,11 @@ def get_licence_context(context, get_all_object=False, max_recurence = 5):
 def cache_key_30min(func, *args, **kwargs):
     return (func.__name__, time.time() // (60 * 30), args, kwargs)
 
+def formated_date(date_field):
+    original_datetime = date_field.asdatetime()
+    # Convert the datetime object to Europe/Brussels timezone
+    brussels_tz = pytz.timezone('Europe/Brussels')
+    date_field = original_datetime.astimezone(brussels_tz)
+    return date_field
 
 WIDGET_DATE_END_YEAR = datetime.now().year + 25
