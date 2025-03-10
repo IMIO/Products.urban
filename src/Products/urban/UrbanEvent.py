@@ -558,7 +558,7 @@ optional_fields = [
 setOptionalAttributes(schema, optional_fields)
 ##/code-section after-local-schema
 
-UrbanEvent_schema = BaseFolderSchema.copy() + schema.copy()
+UrbanEvent_schema = OrderedBaseFolderSchema.copy() + schema.copy()
 
 ##code-section after-schema #fill in your manual code here
 UrbanEvent_schema["title"].widget.condition = "python:here.showTitle()"
@@ -567,7 +567,7 @@ UrbanEvent_schema["title"].required = False
 ##/code-section after-schema
 
 
-class UrbanEvent(BaseFolder, BrowserDefaultMixin):
+class UrbanEvent(OrderedBaseFolder, BrowserDefaultMixin):
     """ """
 
     security = ClassSecurityInfo()
@@ -592,12 +592,19 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
         if not context or not field:
             return [""]
 
-        empty_value = getattr(field, "multivalued", "") and [] or ""
+        multivalued = bool(getattr(field, "multivalued", ""))
+        empty_value = multivalued and [] or ""
         if hasattr(field, "vocabulary") and isinstance(
             field.vocabulary, UrbanVocabulary
         ):
             licence = context.aq_parent
-            return field.vocabulary.get_default_values(licence)
+            default_values = field.vocabulary.get_default_values(licence)
+            # handle case of a list of default values (only one, in principle) for a string field
+            if not multivalued and type(default_values) == list and len(default_values) > 0:
+                return default_values[0]
+            else:
+                return default_values
+
         return empty_value
 
     security.declarePublic("getDefaultText")
