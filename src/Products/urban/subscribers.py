@@ -5,7 +5,7 @@ from plone import api
 import re
 from DateTime import DateTime
 from zope.lifecycleevent.interfaces import IObjectAddedEvent, IObjectModifiedEvent
-from .utils import formated_date
+from .utils import convert_to_europe_brussels
 
 def after_term_deactivate(obj, event):
     if (
@@ -25,42 +25,46 @@ def post_save_parceloutlicence(obj,event):
         reference = getattr(obj,  'reference', None)
         label = getattr(obj,  'licenceSubject', None)
         
-        if obj.getLastLicenceNotification() is not None:
-            is_favorable = obj.getLastLicenceNotification().getDecision()=="favorable"
+        notification = obj.getLastLicenceNotification()
+        
+        if notification is not None:
+            is_favorable = notification.getDecision().lower() == "favorable"
             
-            # get date decision and date notification
-            approbation_date = obj.getLastLicenceNotification().getEventDate()
-            autorisation_date = obj.getLastLicenceNotification().decisionDate
-            # forlmat dates
+            approbation_date = notification.getEventDate()
+            autorisation_date = notification.decisionDate
+            
+            # format dates
             if isinstance(approbation_date, DateTime):
-                approbation_date = formated_date(approbation_date)
+                approbation_date = convert_to_europe_brussels(approbation_date)
+                
             if isinstance(autorisation_date, DateTime):
-                autorisation_date = formated_date(autorisation_date)
+                autorisation_date = convert_to_europe_brussels(autorisation_date)
         else:
             approbation_date = autorisation_date = None
     
         # to update 
         match = re.search(r' - ([^-]+)$', title)
-        if match :
-            subdivider_name = match.group(1)
-        else: 
-            subdivider_name = ""
-        existing_object = api.content.find(
-            context=parent_container,
-            communalReference = reference
-    
-        )
         
-        if existing_object:
-            existing_object = existing_object[0].getObject()
-            # If the object exists, update its fields
-            existing_object.title = title
-            existing_object.label = label
-            existing_object.subdividerName = subdivider_name
-            existing_object.communalReference = reference
-            existing_object.DGO4Reference = reference_dgatlp
-            existing_object.approvalDate = approbation_date
-            existing_object.authorizationDate = autorisation_date
+        if match is not None:
+            
+            subdivider_name = match.group(1)
+            
+        else: 
+            
+            subdivider_name = ""
+            
+        found_parcelling = api.content.find(context=parent_container, communalReference=reference, portal_type="Parcelling")
+        if found_parcelling and len(found_parcelling) > 0:
+            found_parcelling = found_parcelling[0].getObject()
+            
+            #  Update fields
+            found_parcelling.title = title
+            found_parcelling.label = label
+            found_parcelling.subdividerName = subdivider_name
+            found_parcelling.communalReference = reference
+            found_parcelling.DGO4Reference = reference_dgatlp
+            found_parcelling.approvalDate = approbation_date
+            found_parcelling.authorizationDate = autorisation_date
             
         else:
             # If the object doesn't exist, create a new one
