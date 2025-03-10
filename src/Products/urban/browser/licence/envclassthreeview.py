@@ -1,9 +1,9 @@
-from Products.urban.browser.licence.licenceview import EnvironmentLicenceView
+from Products.urban.browser.licence.licenceview import LicenceView
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import PloneMessageFactory as _
 
 
-class EnvClassThreeView(EnvironmentLicenceView):
+class EnvClassThreeView(LicenceView):
     def __init__(self, context, request):
         """ """
 
