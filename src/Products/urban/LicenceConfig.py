@@ -522,7 +522,7 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin, OrderedContainer):
             "patrimony",
         ]
         ticket_tabs_config = ["description", "inspection", "location", "patrimony", "environment"]
-        miscdemand_tabs_config = ["description", "analysis", "environment", "location", "road", "patrimony"]
+        miscdemand_tabs_config = ["description", "analysis", "environment", "location", "road", "patrimony", "habitation"]
         explosivespossession_tabs_config = [
             "description",
             "advices",

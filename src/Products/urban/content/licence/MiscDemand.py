@@ -21,6 +21,7 @@ from Products.urban import interfaces
 from Products.urban.content.licence.GenericLicence import GenericLicence
 from Products.urban.content.Inquiry import Inquiry
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
+from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 
 from Products.urban import UrbanMessage as _
 from Products.urban.config import *
@@ -135,6 +136,41 @@ optional_fields = [
     "general_disposition",
 ]
 ##/code-section module-header
+
+
+slave_fields_habitation = (
+    {
+        "name": "shouldNumerotateBuildings",
+        "action": "hide",
+        "hide_values": (True,),
+    },
+    {
+        "name": "habitationsBeforeLicence",
+        "action": "hide",
+        "hide_values": (True,),
+    },
+    {
+        "name": "habitationsAfterLicence",
+        "action": "hide",
+        "hide_values": (True,),
+    },
+    {
+        "name": "additionalHabitationsAsked",
+        "action": "hide",
+        "hide_values": (True,),
+    },
+    {
+        "name": "additionalHabitationsGiven",
+        "action": "hide",
+        "hide_values": (True,),
+    },
+    {
+        "name": "mayNeedLocationLicence",
+        "action": "hide",
+        "hide_values": (True,),
+    },
+)
+
 
 schema = Schema(
     (
@@ -324,6 +360,81 @@ schema = Schema(
             vocabulary=UrbanVocabulary(
                 "general_disposition", inUrbanConfig=False, with_empty_value=True
             ),
+        ),
+        BooleanField(
+            name="noApplication",
+            default=True,
+            widget=MasterBooleanWidget(
+                slave_fields=slave_fields_habitation,
+                label=_("urban_label_noApplication", default="Noapplication"),
+            ),
+            schemata="urban_habitation",
+        ),
+        BooleanField(
+            name="shouldNumerotateBuildings",
+            default=False,
+            widget=BooleanField._properties["widget"](
+                label=_(
+                    "urban_label_shouldNumerotateBuilding",
+                    default="Shouldnumerotatebuildings",
+                ),
+            ),
+            schemata="urban_habitation",
+        ),
+        IntegerField(
+            name="habitationsBeforeLicence",
+            default=0,
+            widget=IntegerField._properties["widget"](
+                label=_(
+                    "urban_label_habitationsBeforeLicence",
+                    default="Habitationsbeforelicence",
+                ),
+            ),
+            schemata="urban_habitation",
+        ),
+        IntegerField(
+            name="additionalHabitationsAsked",
+            default=0,
+            widget=IntegerField._properties["widget"](
+                label=_(
+                    "urban_label_additionalHabitationsAsked",
+                    default="Additionalhabitationsasked",
+                ),
+            ),
+            schemata="urban_habitation",
+        ),
+        IntegerField(
+            name="additionalHabitationsGiven",
+            default=0,
+            widget=IntegerField._properties["widget"](
+                label=_(
+                    "urban_label_additionalHabitationsGiven",
+                    default="Additionalhabitationsgiven",
+                ),
+            ),
+            schemata="urban_habitation",
+        ),
+        IntegerField(
+            name="habitationsAfterLicence",
+            default=0,
+            widget=IntegerField._properties["widget"](
+                label=_(
+                    "urban_label_habitationsAfterLicence",
+                    default="Habitationsafterlicence",
+                ),
+            ),
+            schemata="urban_habitation",
+        ),
+        BooleanField(
+            name="mayNeedLocationLicence",
+            default=False,
+            widget=BooleanField._properties["widget"](
+                label=_(
+                    "urban_label_mayNeedLocationLicence",
+                    default="Mayneedlocationlicence",
+                ),
+            ),
+            schemata="urban_habitation",
         ),
     ),
 )
