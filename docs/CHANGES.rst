@@ -8,6 +8,36 @@ Changelog
 
 .. towncrier release notes start
 
+2.7.31 (2025-03-12)
+-------------------
+
+New features:
+
+
+- Add possibility to get template merged when import
+  [jchandelle] (SUP-39711)
+
+
+Bug fixes:
+
+
+- Ensure 'in_progress'state covers 'complete' and 'deposit' states in statistics calculation.
+  [WBoudabous] (SUP-42045)
+- Fix lost value in licence duplication
+  [jchandelle] (SUP-42578)
+- Clarify `Copy to claimant`
+  [daggelpop] (SUP-42931)
+- Add External method to fix annoncements tasks
+  [jchandelle] (URB-2680)
+
+
+Internal:
+
+
+- Fix ViewPageTemplateFile import
+  [jchandelle] (SUP-41619, URB-3237)
+
+
 2.7.30 (2025-02-07)
 -------------------
 
