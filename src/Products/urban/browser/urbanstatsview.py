@@ -85,15 +85,15 @@ class UrbanStatsView(BrowserView):
         catalog = getToolByName(context, "portal_catalog")
         
         brains = catalog(
-                portal_type=args["licence_type"],
-                created={
-                    "query": [
-                        DateTime("/".join(args["date_start"])),
-                        DateTime("/".join(args["date_end"])),
-                    ],
-                    "range": "minmax",
+            portal_type=args["licence_type"],
+            created={
+                "query": [
+                    DateTime("/".join(args["date_start"])),
+                    DateTime("/".join(args["date_end"])),
+                ],
+                "range": "minmax",
                 },
-                review_state=mapped_states
+            review_state=mapped_states
         )
         
         if not brains:
