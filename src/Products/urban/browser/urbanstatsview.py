@@ -84,7 +84,7 @@ class UrbanStatsView(BrowserView):
                     DateTime("/".join(args["date_end"])),
                 ],
                 "range": "minmax",
-                },
+            },
             review_state=mapped_states
         )
         
