@@ -1,0 +1,2 @@
+Ensure 'in_progress'state covers 'complete' and 'deposit' states in statistics calculation.
+[WBoudabous]
