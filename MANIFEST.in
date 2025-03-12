@@ -17,6 +17,7 @@
   recursive-include src *.gif
   recursive-include src *.ini
   recursive-include src *.js
+  recursive-include src *.json
   recursive-include src *.metadata
   recursive-include src *.odt
   recursive-include src *.oxt
