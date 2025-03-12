@@ -71,17 +71,9 @@ class UrbanStatsView(BrowserView):
                 ),
                 "date_end": self.getSearchArgument(["to_year", "to_month", "to_day"]),
             }
-        
-        def map_deposit_and_complete_state_to_in_progress(review_state):
-            """Map 'complete' and 'deposit' states to 'in_progress'."""
-            return 'in_progress' if review_state in ('complete', 'deposit') else review_state
-
-        def map_in_progress_state(licence_states):
-            """Ensure 'in_progress' covers 'complete' and 'deposit' in the filter."""
-            return licence_states + ["deposit", "complete"] if "in_progress" in licence_states else licence_states
 
         # Adjust licence_state to include 'deposit' and 'complete' if 'in_progress' is requested
-        mapped_states = map_in_progress_state(args["licence_state"])
+        mapped_states = self.map_in_progress_state(args["licence_state"])
         catalog = getToolByName(context, "portal_catalog")
         
         brains = catalog(
@@ -102,7 +94,7 @@ class UrbanStatsView(BrowserView):
         result = self.getEmptyResultTable(args)
 
         for brain in brains:
-            state = map_deposit_and_complete_state_to_in_progress(brain.review_state)
+            state = self.map_deposit_and_complete_state_to_in_progress(brain.review_state)
             result[brain.portal_type][state] += 1
             
         self.sumPartialResults(result, total=len(brains))
@@ -134,3 +126,11 @@ class UrbanStatsView(BrowserView):
             for licence_state in arguments["licence_state"]:
                 matrix_line[licence_state] = 0
         return matrix
+    
+    def map_deposit_and_complete_state_to_in_progress(self, review_state):
+            """Map 'complete' and 'deposit' states to 'in_progress'."""
+            return 'in_progress' if review_state in ('complete', 'deposit') else review_state
+
+    def map_in_progress_state(self, licence_states):
+            """Ensure 'in_progress' covers 'complete' and 'deposit' in the filter."""
+            return licence_states + ["deposit", "complete"] if "in_progress" in licence_states else licence_states
