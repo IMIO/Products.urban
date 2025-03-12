@@ -71,7 +71,11 @@ class UrbanStatsView(BrowserView):
                 ),
                 "date_end": self.getSearchArgument(["to_year", "to_month", "to_day"]),
             }
+
+        # Adjust licence_state to include 'deposit' and 'complete' if 'in_progress' is requested
+        mapped_states = self.map_in_progress_state(args["licence_state"])
         catalog = getToolByName(context, "portal_catalog")
+        
         brains = catalog(
             portal_type=args["licence_type"],
             created={
@@ -81,16 +85,22 @@ class UrbanStatsView(BrowserView):
                 ],
                 "range": "minmax",
             },
-            review_state=args["licence_state"],
+            review_state=mapped_states
         )
+        
         if not brains:
             return {"sum": {"sum": "0"}}
-        result = self.getEmptyResultTable(args)
-        for brain in brains:
-            result[brain.portal_type][brain.review_state] += 1
-        self.sumPartialResults(result, total=len(brains))
-        return result
 
+        result = self.getEmptyResultTable(args)
+
+        for brain in brains:
+            state = self.map_deposit_and_complete_state_to_in_progress(brain.review_state)
+            result[brain.portal_type][state] += 1
+            
+        self.sumPartialResults(result, total=len(brains))
+
+        return result
+    
     def sumPartialResults(self, table, total):
         # in case where no result is found, partials sums are useless
         sum_line = {}
@@ -116,3 +126,11 @@ class UrbanStatsView(BrowserView):
             for licence_state in arguments["licence_state"]:
                 matrix_line[licence_state] = 0
         return matrix
+    
+    def map_deposit_and_complete_state_to_in_progress(self, review_state):
+            """Map 'complete' and 'deposit' states to 'in_progress'."""
+            return 'in_progress' if review_state in ('complete', 'deposit') else review_state
+
+    def map_in_progress_state(self, licence_states):
+            """Ensure 'in_progress' covers 'complete' and 'deposit' in the filter."""
+            return licence_states + ["deposit", "complete"] if "in_progress" in licence_states else licence_states
