@@ -71,29 +71,44 @@ class UrbanStatsView(BrowserView):
                 ),
                 "date_end": self.getSearchArgument(["to_year", "to_month", "to_day"]),
             }
+        
+        def map_deposit_and_complete_state_to_in_progress(review_state):
+            """Map 'complete' and 'deposit' states to 'in_progress'."""
+            return 'in_progress' if review_state in ('complete', 'deposit') else review_state
+
+        def map_in_progress_state(licence_states):
+            """Ensure 'in_progress' covers 'complete' and 'deposit' in the filter."""
+            return licence_states + ["deposit", "complete"] if "in_progress" in licence_states else licence_states
+
+        # Adjust licence_state to include 'deposit' and 'complete' if 'in_progress' is requested
+        mapped_states = map_in_progress_state(args["licence_state"])
         catalog = getToolByName(context, "portal_catalog")
+        
         brains = catalog(
-            portal_type=args["licence_type"],
-            created={
-                "query": [
-                    DateTime("/".join(args["date_start"])),
-                    DateTime("/".join(args["date_end"])),
-                ],
-                "range": "minmax",
-            },
+                portal_type=args["licence_type"],
+                created={
+                    "query": [
+                        DateTime("/".join(args["date_start"])),
+                        DateTime("/".join(args["date_end"])),
+                    ],
+                    "range": "minmax",
+                },
+                review_state=mapped_states
         )
+        
         if not brains:
             return {"sum": {"sum": "0"}}
-        result = self.getEmptyResultTable(args)
-        for brain in brains:
-            # grouping states deposit and complete under in_progress
-            state = "in_progress" if "in_progress" in args["licence_state"] and brain.review_state in {"deposit", "complete"} else brain.review_state
-            if state in args["licence_state"]:  # ensure the state exists in the requested filter
-                result[brain.portal_type][state] += 1
-                
-        self.sumPartialResults(result, total=len(brains))
-        return result
 
+        result = self.getEmptyResultTable(args)
+
+        for brain in brains:
+            state = map_deposit_and_complete_state_to_in_progress(brain.review_state)
+            result[brain.portal_type][state] += 1
+            
+        self.sumPartialResults(result, total=len(brains))
+
+        return result
+    
     def sumPartialResults(self, table, total):
         # in case where no result is found, partials sums are useless
         sum_line = {}
