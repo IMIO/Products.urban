@@ -134,6 +134,13 @@ optional_fields = [
     "patrimony_observation",
     "classification_order_scope",
     "general_disposition",
+    "noApplication",
+    "shouldNumerotateBuildings",
+    "habitationsBeforeLicence",
+    "additionalHabitationsAsked",
+    "additionalHabitationsGiven",
+    "habitationsAfterLicence",
+    "mayNeedLocationLicence",
 ]
 ##/code-section module-header
 
