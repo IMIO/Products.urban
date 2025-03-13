@@ -423,7 +423,7 @@ def hide_tab_in_licence_config(context):
 
 
 def hide_habitation_tab_in_licence_config(context):
-    logger = logging.getLogger("urban: Hiding environment tab where newly available")
+    logger = logging.getLogger("urban: Hiding habitation tab where newly available")
     logger.info("starting upgrade steps")
 
     included = [
