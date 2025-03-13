@@ -218,25 +218,41 @@ def is_attachment(obj):
     return is_attachment
 
 
-def get_ws_meetingitem_infos(urban_event, extra_attributes=False):
-    """ """
+def get_ws_plonemeeting(obj):
+    """Get the PloneMeeting client for the given object.
+    Returns None if the object is not linked to a PloneMeeting's item."""
+    annotations = IAnnotations(obj)
+    if "imio.pm.wsclient-sent_to" not in annotations:
+        return
+    request = api.portal.getRequest()
+    portal_state = getMultiAdapter(
+        (obj, request), name=u"plone_portal_state"
+    )
+    ws4pmSettings = getMultiAdapter(
+        (portal_state.portal(), request), name="ws4pmclient-settings"
+    )
+    return ws4pmSettings
+
+def get_ws_meetingitem_infos(urban_event, extra_attributes=False, query_hook=None, first=False):
+    """Get the PloneMeeting's item linked to the given urban_event. Use extra_attributes
+    to get the full item (not recommended). query_hook is a function that can be used to customize the query.
+    If first is True, only the first item is returned."""
+    ws4pmSettings = get_ws_plonemeeting(urban_event)
+    if not ws4pmSettings:
+        return []
     annotations = IAnnotations(urban_event)
-    if "imio.pm.wsclient-sent_to" in annotations:
-        request = api.portal.getRequest()
-        portal_state = getMultiAdapter(
-            (urban_event, request), name=u"plone_portal_state"
-        )
-        ws4pmSettings = getMultiAdapter(
-            (portal_state.portal(), request), name="ws4pmclient-settings"
-        )
-        items = ws4pmSettings._rest_searchItems(
-            {"externalIdentifier": urban_event.UID()}
-        )
-        if extra_attributes and items:
-            items = ws4pmSettings._rest_getItemInfos(
-                {"UID": items[0].UID, "showExtraInfos": True}
-            )
-        return items
+    config_id = annotations["imio.pm.wsclient-sent_to"][0]
+    query = {"externalIdentifier": urban_event.UID(), "config_id": config_id}
+    if extra_attributes:
+        query.update({
+            "extra_include": "meeting,config",
+            "extra_include_config_metadata_fields": "title",
+            "fullobjects": "True"
+        })
+    if query_hook:
+        query_hook(query)
+    items = ws4pmSettings._rest_searchItems(query)
+    return items[0] if first else items
 
 
 def run_entry_points(group, name, *args, **kwargs):
