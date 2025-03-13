@@ -52,6 +52,22 @@ optional_fields = [
     "claimsSynthesis",
     "conclusions",
     "commentsOnSPWOpinion",
+    "patrimony",
+    "archeological_site",
+    "protection_zone",
+    "regional_inventory_building",
+    "small_popular_patrimony",
+    "communal_inventory",
+    "regional_inventory",
+    "patrimony_analysis",
+    "patrimony_architectural_complex",
+    "patrimony_site",
+    "patrimony_archaeological_map",
+    "patrimony_project_gtoret_1ha",
+    "patrimony_monument",
+    "patrimony_observation",
+    "classification_order_scope",
+    "general_disposition",
 ]
 
 

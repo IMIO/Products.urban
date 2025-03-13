@@ -12,6 +12,7 @@ from Products.urban.config import PROJECTNAME
 from Products.urban.config import URBAN_TYPES
 from Products.urban.content.licence.GenericLicence import GenericLicence
 from Products.urban.content.Inquiry import Inquiry
+from Products.urban.utils import setOptionalAttributes
 from Products.urban.utils import setSchemataForInquiry
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import (
     ReferenceBrowserWidget,
@@ -23,6 +24,26 @@ from plone import api
 from zope.annotation import IAnnotations
 
 from collective.archetypes.select2.select2widget import MultiSelect2Widget
+
+
+optional_fields = [
+    "patrimony",
+    "archeological_site",
+    "protection_zone",
+    "regional_inventory_building",
+    "small_popular_patrimony",
+    "communal_inventory",
+    "regional_inventory",
+    "patrimony_analysis",
+    "patrimony_architectural_complex",
+    "patrimony_site",
+    "patrimony_archaeological_map",
+    "patrimony_project_gtoret_1ha",
+    "patrimony_monument",
+    "patrimony_observation",
+    "classification_order_scope",
+    "general_disposition",
+]
 
 
 full_patrimony_slave_fields = (
@@ -375,6 +396,7 @@ Inspection_schema = (
     + schema.copy()
 )
 
+setOptionalAttributes(Inspection_schema, optional_fields)
 setSchemataForInquiry(Inspection_schema)
 
 
