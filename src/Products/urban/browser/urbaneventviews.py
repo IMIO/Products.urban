@@ -11,10 +11,11 @@ from Products.urban.browser.licence.licenceview import LicenceView
 from Products.urban.browser.table.urbantable import ApplicantTable
 from Products.urban.browser.table.urbantable import ApplicantHistoryTable
 from Products.urban.browser.table.urbantable import DocumentsTable
-from Products.urban.browser.table.urbantable import AttachmentsTable
+from Products.urban.browser.table.urbantable import EventAttachmentsTable
 from Products.urban.browser.table.urbantable import ClaimantsTable
 from Products.urban.browser.table.urbantable import RecipientsCadastreTable
 from Products.urban.interfaces import IGenericLicence
+from Products.urban.send_mail_action.forms import MAIL_ACTION_KEY
 from Products.urban import services
 from StringIO import StringIO
 
@@ -29,6 +30,10 @@ from zope.interface import Interface
 
 import csv
 import collections
+import logging
+import re
+
+logger = logging.getLogger("Urban Event")
 
 claimants_csv_fieldnames = [
     "personTitle",
@@ -51,6 +56,9 @@ claimants_csv_fieldnames = [
     "claimsText",
     "wantDecisionCopy",
 ]
+
+EXCEL_HEADER = "Titre (sel.),Nom,Prénom,Rue,N° de police,Code postal (num.),Localité,Pays (sel.),N° registre national,CAPAKEY,Nature parcelle,Rue parcelle,N° de police parcelle"
+CARTO_HEADER = '"CAPAKEY";"nature";"datesituation";"proprio"'
 
 
 class UrbanEventView(BrowserView):
@@ -166,7 +174,7 @@ class UrbanEventView(BrowserView):
         if not attachments:
             return ""
 
-        table = AttachmentsTable(self.context, self.request, values=attachments)
+        table = EventAttachmentsTable(self.context, self.request, values=attachments)
         table.update()
         return table.render()
 
@@ -279,6 +287,26 @@ class UrbanEventView(BrowserView):
         licence = self.context.aq_parent
         return licence.getFDAdviceDelay()
 
+    def mail_send(self):
+        annotations = interfaces.IAnnotations(self.context)
+        notif = annotations.get(MAIL_ACTION_KEY, None)
+        if notif is None or len(notif) == 0:
+            return False
+
+        notif.sort(key=lambda elem: elem["time"])
+        user = notif[-1].get("user")
+        username = notif[-1].get("username", None)
+        if username is None or username == "":
+            username = user
+        return _(
+            "Mail already send for ${title} by ${user}, ${date}",
+            mapping={
+                "title": notif[-1]['title'].lower(),
+                "user": username,
+                "date": notif[-1]["time"].strftime("%d/%m/%Y, %H:%M:%S")
+            }
+        )
+
 
 class IImportClaimantListingForm(Interface):
 
@@ -368,46 +396,7 @@ class ImportRecipientListingForm(form.Form):
             + "/#fieldsetlegend-urbaneventinquiry_recipients"
         )
 
-    def import_recipients_from_csv(self):
-        data, errors = self.extractData()
-        if errors:
-            return False
-
-        fieldnames = [
-            "personTitle",
-            "name",
-            "firstname",
-            "street",
-            "number",
-            "zipcode",
-            "city",
-            "country",
-            "id",
-            "capakey",
-            "parcel_nature",
-            "parcel_street",
-            "parcel_police_number",
-        ]
-
-        csv_file = data["listing_file_recipients"]
-        data = csv_file.data
-        if data:
-            reader = csv.DictReader(
-                StringIO(data), fieldnames, delimiter=",", quotechar='"'
-            )
-        else:
-            reader = []
-
-        try:
-            recipient_args = [row for row in reader if row["name"]][1:]
-        except csv.Error, error:
-            IStatusMessage(self.request).addStatusMessage(
-                _(
-                    u"The CSV file couldn't be read properly. Please verify its structure and try again."
-                ),
-                type="error",
-            )
-            return
+    def handle_data_to_add_recipients(self, recipient_args):
 
         portal_urban = api.portal.get_tool("portal_urban")
         plone_utils = api.portal.get_tool("plone_utils")
@@ -452,7 +441,8 @@ class ImportRecipientListingForm(form.Form):
             country_mapping[country_obj.Title()] = country_obj.id
 
         for recipient_arg in recipient_args:
-            del recipient_arg["personTitle"]  # no use for it yet
+            if "personTitle" in recipient_arg:
+                del recipient_arg["personTitle"]  # no use for it yet
 
             if not recipient_arg["id"]:
                 recipient_arg["id"] = plone_utils.normalizeString(
@@ -481,6 +471,163 @@ class ImportRecipientListingForm(form.Form):
                 recipient_obj = getattr(self.context, recipient_id)
 
         plone_utils.addPortalMessage(_("urban_imported_recipients"), type="info")
+
+    def handle_data_from_excel(self, data):
+        fieldnames = [
+            "personTitle",
+            "name",
+            "firstname",
+            "street",
+            "number",
+            "zipcode",
+            "city",
+            "country",
+            "id",
+            "capakey",
+            "parcel_nature",
+            "parcel_street",
+            "parcel_police_number",
+        ]
+
+        if data:
+            reader = csv.DictReader(
+                StringIO(data), fieldnames, delimiter=",", quotechar='"'
+            )
+        else:
+            reader = []
+
+        try:
+            recipient_args = [row for row in reader if row["name"]][1:]
+        except csv.Error as error:
+            IStatusMessage(self.request).addStatusMessage(
+                _(
+                    u"The CSV file couldn't be read properly. Please verify its structure and try again."
+                ),
+                type="error",
+            )
+            return
+
+        self.handle_data_to_add_recipients(recipient_args)
+
+    def secondary_extract_proprio(self, proprio):
+        country_pattern = (
+            r"^\d{10,11}\s.*\s\((?:\d{4}-\d{2}-\d{2})?\)\sAdr:\s(?P<country>[A-Z]{2})"
+        )
+        match_country = re.match(country_pattern, proprio)
+        if not match_country:
+            return None
+        pattern_mapping = {
+            "FR": (
+                r"^(?P<id>\d{10,11})\s(?P<name>.*)\s"
+                r"\((?P<dob>(?:\d{4}-\d{2}-\d{2})?)\)\s"
+                r"Adr:\s(?P<country>[A-Z]{2})\s+"
+                r"(?P<number>\d+[\s\/-]?[a-zA-Z]?(?:Bis)?\s?\d*),?\s+"
+                r"(?P<street>.+?)\s(?P<zipcode>\d{5})\s+(?P<city>.+)$"
+            )
+        }
+        country_code = match_country.groupdict()["country"]
+        if country_code not in pattern_mapping:
+            return None
+        match = re.match(pattern_mapping[country_code], proprio)
+        return match
+
+    def extract_proprio(self, proprios, capakey, parcel_nature):
+        proprio_list = proprios.split(";")
+        errors = []
+        proprios = []
+        for proprio in proprio_list:
+            pattern_be = (
+                r"^(?P<id>\d{10,11})\s(?P<name>.*)\s"
+                r"\((?P<dob>(?:\d{4}-\d{2}-\d{2})?)\)\s"
+                r"Adr:\s(?P<country>[A-Z]{2})\s(?P<zipcode>\d{4,5})\s+"
+                r"(?P<city>[A-ZÈÉÊËÁÀÂÖÔÏÎÚÙÛÜŸÇ\s-]+)\s+"
+                r"(?P<street>.+?)\s+(?P<number>\d+[\s\/-]?[a-zA-Z]?\s?\d*)$"
+            )
+            match = re.match(pattern_be, proprio.strip())
+            if not match:
+                second_match = self.secondary_extract_proprio(proprio.strip())
+                if not second_match:
+                    errors.append(proprio)
+                    continue
+                match = second_match
+            match_dict = match.groupdict()
+            match_dict["capakey"] = capakey
+            match_dict["parcel_nature"] = parcel_nature
+            match_dict["name"] = match_dict["name"].strip()
+            country = match_dict.get("country", None)
+            if country:
+                country_mapping = {
+                    "BE": "Belgique",
+                    "FR": "France",
+                    "NL": "Pays Bas",
+                    "LU": "Luxembourg",
+                    "DE": "Allemagne",
+                }
+                match_dict["country"] = country_mapping.get(country, "")
+            if match_dict["dob"] != "":
+                names = match_dict["name"].split(" ")
+                match_dict["firstname"] = names.pop(0)
+                match_dict["name"] = " ".join(names)
+            del match_dict["dob"]
+            proprios.append(match_dict)
+        return proprios, errors
+
+    def handle_data_from_carto(self, data):
+        if data:
+            reader = csv.DictReader(StringIO(data), delimiter=";", quotechar='"')
+        else:
+            reader = []
+        recipient_args = []
+        errors = []
+        for parcel in reader:
+            capakey = parcel.get("CAPAKEY", None)
+            parcel_nature = parcel.get("nature", None)
+            proprios = parcel.get("proprio", None)
+            if not proprios:
+                continue
+            proprio_list, error = self.extract_proprio(proprios, capakey, parcel_nature)
+            if error:
+                errors += error
+            recipient_args += proprio_list
+        if errors:
+            errors = [error.decode("utf-8") for error in errors]
+            msg = _(
+                u"Couldn't import this(these) owner(s): ${owners}",
+                mapping={"owners": "; ".join(list(set(errors)))},
+            )
+            logger.warning(
+                u"Couldn't import this(these) owner(s): \n\t{}".format(
+                    "\n\t".join(list(set(errors)))
+                )
+            )
+            IStatusMessage(self.request).addStatusMessage(msg, type="warning")
+        id_numbers = []
+        new_recipient_args = []
+        for recipient in recipient_args:
+            if recipient["id"] in id_numbers:
+                continue
+            id_numbers.append(recipient["id"])
+            new_recipient_args.append(recipient)
+
+        self.handle_data_to_add_recipients(new_recipient_args)
+
+    def import_recipients_from_csv(self):
+        data, errors = self.extractData()
+        if errors:
+            return False
+
+        csv_file = data["listing_file_recipients"]
+        data = csv_file.data
+        if data.startswith(EXCEL_HEADER):
+            self.handle_data_from_excel(data)
+        elif data.startswith(CARTO_HEADER):
+            self.handle_data_from_carto(data)
+        else:
+            msg = u"The CSV file couldn't be read properly. Please verify its structure and try again."
+            IStatusMessage(self.request).addStatusMessage(
+                _(msg),
+                type="error",
+            )
 
 
 class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
@@ -905,13 +1052,16 @@ class UrbanEventInquiryView(UrbanEventInquiryBaseView):
 
     def getInquiryRadius(self):
         licence = self.context.aq_parent
-        if hasattr(licence, "hasEnvironmentImpactStudy"):
-            if licence.getHasEnvironmentImpactStudy():
-                return 200
-        if hasattr(licence, "impactStudy"):
-            if licence.getImpactStudy():
-                return 200
-        if hasattr(licence, "inquiry_category"):
-            if licence.getInquiry_category() == "B":
-                return 200
-        return 50
+        investigation_radius = getattr(licence, 'investigation_radius', None)
+
+        if investigation_radius is None:
+            return 50
+        if isinstance(investigation_radius, list):
+            investigation_radius = investigation_radius[0]
+
+        try:
+            output = int(investigation_radius.split("m")[0])
+        except Exception as e:
+            output = 50
+        
+        return output

@@ -2,7 +2,7 @@
 <object name="UrbanTemplate" meta_type="Dexterity FTI" i18n:domain="plone"
    xmlns:i18n="http://xml.zope.org/namespaces/i18n">
  <property name="title" i18n:translate="">UrbanTemplate</property>
- <property name="description" i18n:translate="">None</property>
+ <property name="description" i18n:translate="content_none">Aucun(e)</property>
  <property name="icon_expr">string:${portal_url}/UrbanDoc.png</property>
  <property name="factory">UrbanTemplate</property>
  <property

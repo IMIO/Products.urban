@@ -31,7 +31,42 @@ optional_fields = ["limitedImpact", "SDC_divergence"]
 ##/code-section module-header
 
 schema = Schema(
-    (),
+    (
+        IntegerField(
+            name="surfaceFoodBusiness",
+            default=0,
+            widget=IntegerField._properties["widget"](
+                label=_(
+                    "urban_label_surfaceFoodBusiness",
+                    default="surfaceFoodBusiness",
+                ),
+            ),
+            schemata="urban_location",
+        ),
+        IntegerField(
+            name="surfaceLightBusiness",
+            default=0,
+            widget=IntegerField._properties["widget"](
+                label=_(
+                    "urban_label_surfaceLightBusiness",
+                    default="surfaceLightBusiness",
+                ),
+            ),
+            schemata="urban_location",
+        ),
+        IntegerField(
+            name="surfaceHeavyBusiness",
+            default=0,
+            widget=IntegerField._properties["widget"](
+                label=_(
+                    "urban_label_surfaceHeavyBusiness",
+                    default="surfaceHeavyBusiness",
+                ),
+            ),
+            schemata="urban_location",
+        ),
+    ),
+
 )
 
 ##code-section after-local-schema #fill in your manual code here
@@ -70,6 +105,14 @@ class CODT_CommercialLicence(BaseFolder, CODT_UniqueLicence, BrowserDefaultMixin
             ("big", "Superficie >= 2500m²"),
         )
         return DisplayList(vocab)
+
+    def _get_inquiry_objs(
+        self, all_=False, portal_type=["CODT_Inquiry"]
+    ):
+        all_inquiries = super(CODT_CommercialLicence, self)._get_inquiry_objs(
+            all_=all_, portal_type=portal_type
+        )
+        return all_inquiries
 
     def getProcedureDelays(self, *values):
         selection = [v["val"] for v in values if v["selected"]]

@@ -132,13 +132,13 @@ schema = Schema(
 
 
 UrbanEventInspectionReport_schema = (
-    BaseFolderSchema.copy()
+    OrderedBaseFolderSchema.copy()
     + getattr(UrbanEvent, "schema", Schema(())).copy()
     + schema.copy()
 )
 
 
-class UrbanEventInspectionReport(BaseFolder, UrbanEvent, BrowserDefaultMixin):
+class UrbanEventInspectionReport(OrderedBaseFolder, UrbanEvent, BrowserDefaultMixin):
     """ """
 
     security = ClassSecurityInfo()

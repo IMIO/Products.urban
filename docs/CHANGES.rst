@@ -8,6 +8,338 @@ Changelog
 
 .. towncrier release notes start
 
+2.7.31 (2025-03-12)
+-------------------
+
+New features:
+
+
+- Add possibility to get template merged when import
+  [jchandelle] (SUP-39711)
+
+
+Bug fixes:
+
+
+- Ensure 'in_progress'state covers 'complete' and 'deposit' states in statistics calculation.
+  [WBoudabous] (SUP-42045)
+- Fix lost value in licence duplication
+  [jchandelle] (SUP-42578)
+- Clarify `Copy to claimant`
+  [daggelpop] (SUP-42931)
+- Add External method to fix annoncements tasks
+  [jchandelle] (URB-2680)
+
+
+Internal:
+
+
+- Fix ViewPageTemplateFile import
+  [jchandelle] (SUP-41619, URB-3237)
+
+
+2.7.30 (2025-02-07)
+-------------------
+
+New features:
+
+
+- Add utility view to fix task_config_UID on task
+  [jchandelle] (SUP-41619)
+- Add utils view to closed task depending filter
+  [jchandelle] (URB-3237)
+- Add reorder to event attachment
+  [jchandelle] (URBBDC-1111)
+
+
+Bug fixes:
+
+
+- Fix external decision values
+  [daggelpop]
+
+  Handle default vocabulary values for a non-array field
+  [daggelpop] (SUP-40288)
+- Fix urban vocabularies following configuration order 
+  [WBoudabous] (SUP-41929)
+- Add missing translation in schedule config
+  [WBoudabous] (URB-3142)
+
+
+2.7.29 (2025-02-04)
+-------------------
+
+Bug fixes:
+
+
+- Fix encoding in error message for import csv from carto
+  Fix logic and pattern for import csv from carto
+  [jchandelle] (URB-3250)
+
+
+2.7.28 (2025-02-02)
+-------------------
+
+Bug fixes:
+
+
+- Fix missing indentation
+  [jchandelle] (URB-3250)
+
+
+2.7.27 (2025-01-31)
+-------------------
+
+New features:
+
+
+- Add compatibility with csv from carto to inquiry event
+  [jchandelle] (URB-3250)
+
+
+Bug fixes:
+
+
+- Fix sending zem document by mail
+  [jchandelle] (SUP-40979)
+- Revert "URB-3151 - imio.pm.wsclient 2.x + roaddecree (classic) (#258)"
+  [daggelpop] (SUP-42300)
+
+
+2.7.26 (2025-01-23)
+-------------------
+
+Bug fixes:
+
+
+- Fix retrieval vocabulary in upgrade step
+  [jchandelle] (URB-2680)
+
+
+2.7.25 (2025-01-21)
+-------------------
+
+Bug fixes:
+
+
+- Fix upgrade step
+  [jchandelle] (URB-2680)
+
+
+2.7.24 (2024-12-03)
+-------------------
+
+New features:
+
+
+- Add merge field for rubric description
+  [jchandelle] (SUP-38659)
+- Create new trigger for decision date reindex
+  [jchandelle] (URB-2366)
+- Add bound licences field to patrimony certificates
+  [daggelpop] (URB-3046)
+- Add latest new vocabulary terms for form_composition
+  [dmshd] (URB-3126)
+- Use imio.pm.wsclient 2.x version (REST).
+  [aduchene]
+  Add `get_last_plonemeeting_date`, `get_last_college_date` and `get_last_college_date` to CODT_BaseBuildLicence.
+  [aduchene] (URB-3151)
+- Implement `.getSecondDeposit()`
+  [dmshd] (URB-3152)
+- Remove permission to create integrated licences
+  [daggelpop] (URB-3165)
+
+
+Bug fixes:
+
+
+- Allow corporate tenant in inspections
+  [daggelpop] (SUP-33621)
+- Fix follup event creation in ticket
+  [jchandelle] (SUP-36493)
+- Fix missing getLastAcknowledgment for division
+  [jchandelle] (SUP-37911)
+- Add centrality to every licence & make it a multiselect
+  [daggelpop] (URB-3017)
+- Add patrimony fieldset to patrimony certificate
+  [daggelpop]
+  Migrate patrimony certificates to their correct object class (instead of misc demand)
+  [daggelpop] (URB-3121)
+
+
+2.7.23 (2024-11-15)
+-------------------
+
+Bug fixes:
+
+
+- Fix frozen_suspension state
+  [jchandelle] (SUP-39511)
+- Fix Task config
+  [jchandelle] (URB-2680)
+- Fix existing c13 title upgrade
+  [daggelpop] (URB-3090)
+- Fix import pod templates
+  [jchandelle] (URB-3190)
+
+
+2.7.22 (2024-10-25)
+-------------------
+
+New features:
+
+
+- Add new condition in content rules for licence type
+  [jchandelle] (URB-3020)
+- Add banner on top of event after mail send
+  [jchandelle] (URB-3204)
+
+
+Bug fixes:
+
+
+- Fix comment retrieval in transition form
+  [daggelpop] (SUP-35563)
+- Fix address comparison in _areSameAdresses
+  [dmshd] (SUP-39098)
+- Fix an issue when there was too many connection open that raised a SQLAlchemy error
+  [laulaz] (SUP-39919)
+- Fix content rules for event type
+  [jchandelle] (SUP-40117)
+- Translate `suspension` terms in French
+  [daggelpop] (URB-3007)
+- Fix opinion condition text
+  [jchandelle] (URB-3020)
+- Fix missing function to have multiple inquiry on CODT commercial licence
+  [jchandelle] (URB-3130)
+- Fix export import des config
+  [jchandelle] (URB-3190)
+
+
+2.7.21 (2024-10-09)
+-------------------
+
+Bug fixes:
+
+
+- Handle null value in `EventTypeConditionExecutor`
+  [daggelpop] (SUP-39901)
+- Translate `suspend` in French
+  [daggelpop] (URB-3007)
+- Update content rule title
+  [dmshd] (URB-3198)
+
+
+2.7.19 (2024-10-04)
+-------------------
+
+Bug fixes:
+
+
+- Fix getInquiryRadius method
+  [jchandelle] (URB-2983)
+
+
+2.7.18 (2024-10-04)
+-------------------
+
+New features:
+
+
+- Add translation and add contextual title to the form from send email action
+  [jchandelle] (URB-3020)
+
+
+Bug fixes:
+
+
+- Fix missing extending validity date
+  [jchandelle] (URB-3153)
+
+
+Internal:
+
+
+- Add a new field "additional reference" and configure faceteed navigation
+  [fngaha] (URB-2595)
+- improve the functionality of searching for owners within a defined radius.
+  [fngaha] (URB-2983)
+
+
+2.7.17 (2024-10-01)
+-------------------
+
+New features:
+
+
+- Translate all untranslated & empty msgtr
+
+  While working on URB-2503 and while I was there, I took the opportunity to translate all untranslated and empty msgtr in the urban.po file. [dmshd] (URB-2503-Fill_all_untranslated_msgtr)
+- Replace None occurences by "Aucun(e)"
+
+  I replaced all "None" occurences and set "Aucun(e)" as the default value for translations instead of None or "-" for improved readability / accessibility / ux.
+
+  [dmshd] · URB-2503 (URB-2503-Replace_None_by_Aucun-e)
+- Improve / translate "See more..." link text
+
+  I had to translate "See more..." and decided that "Lire les textes" would be a better translation for better readability and accessibility.
+  The context is a link that follows "Textes du point Délib: See more...".
+  Now it reads "Textes du point Délib: Lire les textes".
+
+  [dmshd] · URB-2503 (URB-2503-Replace_See_more_dotdotdot_link_by_Lire_les_textes)
+- Improve truncated "Voir..." link text
+
+  While I had to translate the untranslated "See more..." link. I spotted that truncated long text had "Voir..." as a link text. I replaced it with "Lire la suite" for better readability and accessibility.
+
+  [dmshd] · URB-2503 (URB-2503-Replace_Voir_plus_dotdotdot_by_Lire_la_suite)
+- Add centrality to commercial licence
+  [daggelpop] (URB-3017)
+- Add 3 surface fields to commercial licence
+  [daggelpop] (URB-3117)
+- Add field `D.67 CoPat` to patrimony fieldset
+  daggelpop (URB-3167)
+
+
+Bug fixes:
+
+
+- Fix merge field getStreetAndNumber
+  [jchandelle] (SUP-38082)
+- Fix mail message encoding
+  [jchandelle] (SUP-39227)
+- Fix space causing bug
+  [dmshd] (URB-2676)
+- Fix typo in french translation
+
+  This is a bugfix for URB-3128. "Cessastion" -> "Cessation".
+
+  [dmshd] (URB-3128-Fix_typo_in_french_translation)
+- Fix event_type condition for content rules
+  [jchandelle] (URB-3182)
+
+
+Internal:
+
+
+- Set buildout cache directories.
+
+  I had a network problem and I had to rerun from the beginning. Took a long time. I searched for a way to fasten and discovered that I could set the cache directories. I set the cache directories as the iA.Delib team does it at iMio.
+
+  [dmshd] (URB-3135-define_buildout_cache_directories)
+- Ignore .python-version (pyenv file) and sort lines in .gitignore file.
+  [dmshd] (URB-3135-ignore-python-version-file-and-sort-lines)
+
+
+2.7.16 (2024-07-25)
+-------------------
+
+Bug fixes:
+
+
+- Fix faceted widget id collision
+  [daggelpop] (URB-3090)
+
+
 2.7.15 (2024-07-05)
 -------------------
 

@@ -1,3 +1,11 @@
+import os
+
+from Products.urban import URBAN_TYPES
+from Products.urban.profiles.extra.config_default_values import default_values
+from Products.urban.setuphandlers import (
+    createVocabularyFolder,
+    createFolderDefaultValues,
+)
 from plone.registry.interfaces import IRegistry
 from zope.component import getUtility
 from imio.helpers.catalog import reindexIndexes
@@ -107,4 +115,53 @@ def update_delais_vocabularies_and_activate_prorogation_field(context):
         ):
             to_set = ("prorogation",)
             config.setUsedAttributes(config.getUsedAttributes() + to_set)
+    logger.info("upgrade step done!")
+
+
+def add_new_vocabulary_for_investigation_radius_field(context):
+    """ """
+    logger = logging.getLogger(
+        "urban: Add new vocabulary for investigation_radius field"
+    )
+    logger.info("starting upgrade steps")
+
+    container = api.portal.get_tool("portal_urban")
+    vocabulary_name = "investigations_radius"
+    investigations_radius_vocabularies_config = default_values["global"][
+        vocabulary_name
+    ]
+    allowedtypes = investigations_radius_vocabularies_config[0]
+    investigations_radius_folder_config = createVocabularyFolder(
+        container, vocabulary_name, context, allowedtypes
+    )
+    createFolderDefaultValues(
+        investigations_radius_folder_config,
+        default_values["global"][vocabulary_name][1:],
+        default_values["global"][vocabulary_name][0],
+    )
+
+    logger.info("migration step done!")
+
+
+def update_faceted_dashboard(context):
+    """ """
+    logger = logging.getLogger("urban: update faceted dashboard")
+    logger.info("starting upgrade steps")
+    portal_setup = api.portal.get_tool("portal_setup")
+    portal_setup.runImportStepFromProfile(
+        "profile-Products.urban:urbantypes", "catalog"
+    )
+    catalog = api.portal.get_tool("portal_catalog")
+    reindexIndexes(None, ["getAdditionalReference"])
+    site = api.portal.getSite()
+    urban_folder = getattr(site, "urban")
+    for urban_type in URBAN_TYPES:
+        folder = getattr(urban_folder, urban_type.lower() + "s")
+        path = (
+            os.path.dirname(__file__)[: -len("migration")]
+            + "dashboard/config/%ss.xml" % urban_type.lower()
+        )
+        folder.unrestrictedTraverse("@@faceted_exportimport").import_xml(
+            import_file=open(path)
+        )
     logger.info("upgrade step done!")

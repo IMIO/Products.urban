@@ -4,24 +4,23 @@
 # GNU General Public License (GPL)
 
 from Acquisition import aq_parent
-from plone import api
-from Products.urban.config import URBAN_CWATUPE_TYPES
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.config import URBAN_CODT_TYPES
+from Products.urban.config import URBAN_CWATUPE_TYPES
 from Products.urban.config import URBAN_ENVIRONMENT_TYPES
 from Products.urban.config import URBAN_TYPES
 from Products.urban.interfaces import IFolderManager
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.interfaces import ILicenceConfig
-from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
-from Products.urban.utils import getCurrentFolderManager
-from Products.urban.utils import get_licence_context
 from Products.urban.utils import convert_to_utf8
-
-from zope.interface import implements
+from Products.urban.utils import get_licence_context
+from Products.urban.utils import getCurrentFolderManager
+from plone import api
 from zope.i18n import translate
+from zope.interface import implements
+from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
-from zope.schema.interfaces import IVocabularyFactory
 
 import grokcore.component as grok
 
@@ -368,15 +367,20 @@ class AllOpinionsToAskVocabulary(object):
 
             portal_type_title = portal_type.id
 
-            try:
-                items.append(SimpleTerm(uid, uid, ("{} ({})".format(
-                    convert_to_utf8(title), convert_to_utf8(portal_type_title)
-                )).decode("utf-8")))
-            except Exception as e:
-                __import__('pdb').set_trace()
-                print()
+            items.append(
+                SimpleTerm(
+                    uid,
+                    uid,
+                    (
+                        "{} ({})".format(
+                            convert_to_utf8(title), convert_to_utf8(portal_type_title)
+                        )
+                    ).decode("utf-8"),
+                )
+            )
 
         return SimpleVocabulary(sorted(items, key=sorted_by_voc_term_title))
+
 
 AllOpinionsToAskVocabularyFactory = AllOpinionsToAskVocabulary()
 
@@ -428,6 +432,9 @@ GigCoringUserIdVocabularyFactory = GigCoringUserIdVocabulary()
 class LicenceDocumentsVocabulary(object):
     implements(IVocabularyFactory)
 
+    def get_path(sefl, obj):
+        return "/".join(obj.getPhysicalPath())
+
     def __call__(self, context):
         contexts = get_licence_context(context, get_all_object=True)
         output = []
@@ -435,7 +442,7 @@ class LicenceDocumentsVocabulary(object):
             return SimpleVocabulary(output)
         for context in contexts:
             docs = [
-                SimpleTerm(doc.UID(), doc.UID(), doc.Title())
+                SimpleTerm(self.get_path(doc), self.get_path(doc), doc.Title())
                 for doc in context.listFolderContents(
                     contentFilter={
                         "portal_type": ["ATFile", "ATImage", "File", "Image"]

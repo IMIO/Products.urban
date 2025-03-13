@@ -2,7 +2,7 @@
     <tal:loop repeat="folderManager folderManagers" tal:condition="folderManagers">
         <span tal:content="folderManager/Title">Treating agent name</span><br />
     </tal:loop>
-    <span tal:condition="not: folderManagers" class="discreet" i18n:translate="content_none">None</span>
+    <span tal:condition="not: folderManagers" class="discreet" i18n:translate="content_none">Aucun(e)</span>
 </div>
 
 

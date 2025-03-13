@@ -36,6 +36,7 @@ from Products.DataGridField import DataGridField, DataGridWidget
 from Products.DataGridField.Column import Column
 from Products.DataGridField.SelectColumn import SelectColumn
 
+from imio.schedule.content.task import IAutomatedTask
 from collective.plonefinder.browser.interfaces import IFinderUploadCapable
 from collective.quickupload.interfaces import IQuickUploadCapable
 from Products.urban.config import *
@@ -238,6 +239,16 @@ schema = Schema(
             widget=StringField._properties["widget"](
                 size=60,
                 label=_("urban_label_referenceDGATLP", default="Referencedgatlp"),
+            ),
+            schemata="urban_description",
+        ),
+        StringField(
+            name="additionalReference",
+            widget=StringField._properties["widget"](
+                size=60,
+                label=_(
+                    "urban_label_additionalReference", default="Additionalreference"
+                ),
             ),
             schemata="urban_description",
         ),
@@ -1307,6 +1318,16 @@ schema = Schema(
             default_content_type="text/html",
             default_output_type="text/x-html-safe",
         ),
+        LinesField(
+            name="centrality",
+            widget=MasterMultiSelectWidget(
+                format="checkbox",
+                label=_("urban_label_centrality", default="Centrality"),
+            ),
+            schemata="urban_location",
+            multiValued=1,
+            vocabulary="listCentralities",
+        ),
     ),
 )
 
@@ -1497,6 +1518,18 @@ class GenericLicence(OrderedBaseFolder, UrbanBase, BrowserDefaultMixin):
         )
 
         return DisplayList(vocab)
+
+    security.declarePublic("listCentralities")
+
+    def listCentralities(self):
+        vocab = (
+            ("villageoise", "villageoise"),
+            ("urbaine", "urbaine"),
+            ("urbaine_de_pole", "urbaine de pôle"),
+            ("bordure_de_centralite", "bordure de centralité"),
+        )
+        return DisplayList(vocab)
+
 
     security.declarePublic("foldermanagersBaseQuery")
 
@@ -1698,6 +1731,9 @@ class GenericLicence(OrderedBaseFolder, UrbanBase, BrowserDefaultMixin):
 
     def getFirstDeposit(self):
         return self.getFirstEvent(interfaces.IDepositEvent)
+    
+    def getSecondDeposit(self):
+        return self.getSecondEvent(interfaces.IDepositEvent)
 
     def getLastDeposit(self):
         return self.getLastEvent(interfaces.IDepositEvent)
@@ -1745,6 +1781,21 @@ class GenericLicence(OrderedBaseFolder, UrbanBase, BrowserDefaultMixin):
             events = [evt for evt in events if api.content.get_state(evt) == state]
         return events
 
+    def getAllTasks(self, taskInterface=IAutomatedTask, state=None):
+        return self.getAllTasksByObjectValues(taskInterface, state)
+
+    def getAllTasksByObjectValues(self, taskInterface, state=None):
+        tasks = [
+            tsk
+            for tsk in self.objectValues()
+            if not taskInterface or taskInterface.providedBy(tsk)
+        ]
+        subtasks = [subtask for task in tasks for subtask in task.get_subtasks()]
+        tasks += subtasks
+        if state:
+            tasks = [tsk for tsk in tasks if api.content.get_state(tsk) == state]
+        return tasks
+
     def getLastEvent(self, eventInterface=None, state=None):
         events = self.getAllEvents(eventInterface, state)
         if events:
@@ -1754,6 +1805,11 @@ class GenericLicence(OrderedBaseFolder, UrbanBase, BrowserDefaultMixin):
         events = self.getAllEvents(eventInterface)
         if events:
             return events[0]
+        
+    def getSecondEvent(self, eventInterface=None):
+        events = self.getAllEvents(eventInterface)
+        if len(events) > 1:
+            return events[1]
 
     def getLastEventWithValidityDate(self):
         events = [
@@ -1875,6 +1931,7 @@ class GenericLicence(OrderedBaseFolder, UrbanBase, BrowserDefaultMixin):
         if text_format is True:
             return translate(_("${nbr} days", mapping={"nbr": delay}), context=request)
         return delay
+
 
 registerType(GenericLicence, PROJECTNAME)
 # end of class GenericLicence

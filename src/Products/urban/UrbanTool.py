@@ -25,6 +25,7 @@ from Products.DataGridField.Column import Column
 from Products.DataGridField.SelectColumn import SelectColumn
 from collective.datagridcolumns.DateColumn import DateColumn
 from collective.datagridcolumns.TextAreaColumn import TextAreaColumn
+from collections import OrderedDict
 
 from Products.urban.config import *
 from Products.urban.interfaces import IContactFolder
@@ -444,7 +445,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             allowedStates=allowedStates,
             with_empty_value=with_empty_value,
         )
-        res = {}
+        res = OrderedDict()
         for brain in brains:
             res[getattr(brain, id_to_use)] = brain.getObject()
         return res
@@ -1080,25 +1081,8 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         if not IUrbanEvent.providedBy(context):
             return False
 
-        portal = api.portal.get()
-        assignable = IRuleAssignmentManager(portal)
-        storage = getUtility(IRuleStorage)
+        rules = context.get_all_rules_for_this_event()
 
-        rules = []
-        for key in [key for key in assignable]:
-            conditions = []
-            rule = storage.get(key, None)
-            if rule is None:
-                continue
-            if not rule.enabled:
-                rules.append(False)
-                continue
-            for condition in rule.conditions:
-                class EventTemp():
-                    object = context
-                executable = getMultiAdapter((context, condition, EventTemp), IExecutable)
-                conditions.append(executable())
-            rules.append(all(conditions))
-        return any(rules)
+        return len(rules) > 0
 
 registerType(UrbanTool, PROJECTNAME)

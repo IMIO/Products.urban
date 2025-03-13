@@ -15,6 +15,8 @@ __docformat__ = "plaintext"
 
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
+from OFS.interfaces import IOrderedContainer
+from Products.Archetypes.OrderedBaseFolder import OrderedContainer
 from zope.interface import implements
 import interfaces
 
@@ -254,11 +256,11 @@ for f in LicenceConfig_schema.filterFields(schemata="metadata"):
 ##/code-section after-schema
 
 
-class LicenceConfig(BaseFolder, BrowserDefaultMixin):
+class LicenceConfig(BaseFolder, BrowserDefaultMixin, OrderedContainer):
     """ """
 
     security = ClassSecurityInfo()
-    implements(interfaces.ILicenceConfig)
+    implements(interfaces.ILicenceConfig, IOrderedContainer)
 
     meta_type = "LicenceConfig"
     _at_rename_after_creation = True
@@ -497,6 +499,13 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
             "road",
         ]
         inspection_tabs_config = ["description", "advices", "inspection", "location"]
+        patrimonycertificate_tabs_config = [
+            "description",
+            "analysis",
+            "location",
+            "road",
+            "patrimony",
+        ]
         ticket_tabs_config = ["description", "inspection", "location"]
 
         types = {
@@ -526,6 +535,7 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin):
             ],
             "envclassbordering": env_inquiry_tabs_config,
             "inspection": inspection_tabs_config,
+            "patrimonycertificate": patrimonycertificate_tabs_config,
             "ticket": ticket_tabs_config,
             "roaddecree": buildlicence_tabs_config,
             "division": certificatebase_tabs_config,

@@ -11,7 +11,7 @@
                 <tal:non_null_value condition="not: nullvalue">
                     <metal:myfield use-macro="python:context.widget(fieldname, mode='view')" />
                 </tal:non_null_value>
-                <span tal:condition="nullvalue" class="discreet" i18n:translate="content_none">None</span>
+                <span tal:condition="nullvalue" class="discreet" i18n:translate="content_none">Aucun(e)</span>
             </td>
             <td valign="top" tal:condition="simpletext">
                 <tal:text replace="structure python: field.get(context)" />
@@ -89,7 +89,7 @@
                             <td valign="top"><b><span tal:content="python: first_date and first_date['date_label']">Receipt date</span>:</b></td>
                             <td valign="top" tal:define="date_value python: first_date and first_date['date']">
                                 <a href="#" tal:condition="date_value" tal:attributes="href python: first_date and first_date['url']" tal:content="python: date_value">Content</a>
-                                <span class="discreet" tal:condition="not: date_value" i18n:translate="content_none">None</span>
+                                <span class="discreet" tal:condition="not: date_value" i18n:translate="content_none">Aucun(e)</span>
                             </td>
                         </tr>
                         <tr tal:repeat="date dates">
@@ -97,7 +97,7 @@
                             <td valign="top"><b><span tal:content="python: date['date_label']">Receipt date</span>:</b></td>
                             <td valign="top" tal:define="date_value python: date['date']">
                                 <a href="#" tal:condition="date_value" tal:attributes="href python: date['url']" tal:content="python: date_value">Content</a>
-                                <span class="discreet" tal:condition="not: date_value" i18n:translate="content_none">None</span>
+                                <span class="discreet" tal:condition="not: date_value" i18n:translate="content_none">Aucun(e)</span>
                             </td>
                         </tr>
                     </tal:vars>
@@ -295,7 +295,7 @@
             <td valign="top"><b><span tal:content="string:urban_label_${fieldname}" i18n:translate=""></span>:</b></td>
             <td width="10px"></td>
             <td valign="top"><metal:myfield use-macro="python:here.widget(fieldname, mode='view')" />
-                <span tal:condition="nullvalue" class="discreet" i18n:translate="content_none">None</span>
+                <span tal:condition="nullvalue" class="discreet" i18n:translate="content_none">Aucun(e)</span>
             </td>
         </tal:normal_field>
 
@@ -348,9 +348,9 @@
                                 </tal:anEventIsLinked>
                                 <tal:noEventIsLinked condition="not: can_see">
                                     <td tal:content="python: inquiry.getSolicitOpinionValue(opinionId)">Opinion request</td>
-                                    <td><span class="discreet" i18n:translate="content_none">None</span></td>
-                                    <td><span class="discreet" i18n:translate="content_none">None</span></td>
-                                    <td><span class="discreet" i18n:translate="content_none">None</span></td>
+                                    <td><span class="discreet" i18n:translate="content_none">Aucun(e)</span></td>
+                                    <td><span class="discreet" i18n:translate="content_none">Aucun(e)</span></td>
+                                    <td><span class="discreet" i18n:translate="content_none">Aucun(e)</span></td>
                                 </tal:noEventIsLinked>
                             </tal:block>
                         </tr>

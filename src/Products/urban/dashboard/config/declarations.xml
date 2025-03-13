@@ -43,7 +43,7 @@
    <property name="maxitems">0</property>
    <property name="sortreversed"></property>
   </criterion>
-  <criterion name="c13">
+  <criterion name="c99">
    <property name="widget">daterange</property>
    <property name="title">Date de validité</property>
    <property name="position">top</property>

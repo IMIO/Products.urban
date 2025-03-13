@@ -13,7 +13,7 @@
                 <tal:non_null_value condition="not: nullvalue">
                     <metal:myfield use-macro="python:here.widget(fieldname, mode='view')" />
                 </tal:non_null_value>
-                <span tal:condition="nullvalue" class="discreet" i18n:translate="content_none">None</span>
+                <span tal:condition="nullvalue" class="discreet" i18n:translate="content_none">Aucun(e)</span>
             </td>
             <td valign="top" tal:condition="simpletext">
                 <tal:text replace="structure python: field.get(context)" />

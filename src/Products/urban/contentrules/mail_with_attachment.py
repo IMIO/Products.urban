@@ -1,34 +1,42 @@
 # -*- coding: utf-8 -*-
 
-import base64
-import logging
-import traceback
-from email.mime.application import MIMEApplication
-from email.mime.image import MIMEImage
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
-from smtplib import SMTPException
-
 from Acquisition import aq_inner
-from collective.exportimport.interfaces import IBase64BlobsMarker
-from plone import api
-from plone.app.contentrules import PloneMessageFactory as _
-from plone.app.contentrules.actions.mail import (IMailAction, MailAction,
-                                                 MailActionExecutor,
-                                                 MailAddForm, MailEditForm)
-from plone.contentrules.rule.interfaces import IRuleElementData
-from plone.restapi.interfaces import ISerializeToJson
-from plone.stringinterp.interfaces import IStringInterpolator
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.MailHost.MailHost import MailHostError
 from Products.statusmessages.interfaces import IStatusMessage
 from Products.urban.contentrules.interface import IGetDocumentToAttach
-from zope.component import adapter, adapts, getMultiAdapter
+from collective.exportimport.interfaces import IBase64BlobsMarker
+from email.mime.application import MIMEApplication
+from email.mime.image import MIMEImage
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from plone import api
+from plone.app.contentrules import PloneMessageFactory as _
+from plone.app.contentrules.actions.mail import IMailAction
+from plone.app.contentrules.actions.mail import MailAction
+from plone.app.contentrules.actions.mail import MailActionExecutor
+from plone.app.contentrules.actions.mail import MailAddForm
+from plone.app.contentrules.actions.mail import MailEditForm
+from plone.contentrules.rule.interfaces import IRuleElementData
+from plone.restapi.interfaces import ISerializeToJson
+from plone.stringinterp.interfaces import IStringInterpolator
+from smtplib import SMTPException
+from zope.component import adapter
+from zope.component import adapts
+from zope.component import getMultiAdapter
 from zope.component.interfaces import ComponentLookupError
 from zope.formlib import form
 from zope.globalrequest import getRequest
-from zope.interface import Interface, alsoProvides, implementer, implements
+from zope.interface import alsoProvides
+from zope.interface import implementer
+from zope.interface import implements
+from zope.interface import Interface
+
+import base64
+import logging
+import traceback
+
 
 logger = logging.getLogger("plone.contentrules")
 
@@ -105,7 +113,7 @@ execute this action"
         # prepend interpolated message with \n to avoid interpretation
         # of first line as header
         body = "\n%s" % interpolator(self.element.message)
-        body_part = MIMEText(body)
+        body_part = MIMEText(body.encode("utf-8"))
         message.attach(body_part)
 
         message = self.attach_document(message)

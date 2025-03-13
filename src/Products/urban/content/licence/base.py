@@ -516,6 +516,8 @@ class UrbanBase(object):
         if adress_signaletic_adapter:
             return adress_signaletic_adapter.get_street_and_number()
 
+        if separator is None:
+            separator = ""
         return self.getDefaultStreetAndNumber(separator=separator)
 
     security.declarePublic("getDefaultStreetAndNumber")

@@ -67,6 +67,14 @@ slave_fields_procedurechoice = [
     },
 ]
 
+slave_fields_has_environment_impact_study = (
+    {
+        "name": "investigation_radius",
+        "action": "value",
+        "vocab_method": "get_impact_study_radius",
+        "control_param": "has_impact_study",
+    },
+)
 ##/code-section module-header
 
 schema = Schema(
@@ -123,7 +131,8 @@ schema = Schema(
         BooleanField(
             name="hasEnvironmentImpactStudy",
             default=True,
-            widget=BooleanField._properties["widget"](
+            widget=MasterBooleanWidget(
+                slave_fields=slave_fields_has_environment_impact_study,
                 label=_(
                     "urban_label_hasEnvironmentImpactStudy",
                     default="Hasenvironmentimpactstudy",
