@@ -205,6 +205,15 @@ optional_fields = [
     "infrabel",
     "deadEndBuilding",
     "zoning",
+    "rubrics",
+    "rubricsDetails",
+    "minimumLegalConditions",
+    "additionalLegalConditions",
+    "claimsSynthesis",
+    "environmentTechnicalAdviceAfterInquiry",
+    "commentsOnSPWOpinion",
+    "conclusions",
+    "environmentTechnicalRemarks",
 ]
 # /code-section module-header
 
