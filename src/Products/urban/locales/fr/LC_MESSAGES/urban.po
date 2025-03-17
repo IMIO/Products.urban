@@ -5341,6 +5341,16 @@ msgstr "Veuillez renseigner le ou les demandeur(s)"
 msgid "warning_add_an_plaintiff"
 msgstr "Veuillez renseigner un plaignant "
 
+#. Default: "referenceIaDocs"
+#: ../UrbanEvent.py:537
+msgid "urban_label_referenceIaDocs"
+msgstr "Référence iA.Docs"
+
+#. Default: "urlIaDocs"
+#: ../UrbanEvent.py:537
+msgid "urban_label_urlIaDocs"
+msgstr "URL iA.Docs"
+
 msgid "watercourses_folder_title"
 msgstr "Liste des cours d'eau de la commune"
 

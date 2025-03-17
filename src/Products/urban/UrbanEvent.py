@@ -545,7 +545,22 @@ schema = Schema(
             ),
             optional=True,
         ),
-
+        StringField(
+            name="referenceIaDocs",
+            widget=StringField._properties["widget"](
+                label=_(
+                    "urban_label_referenceIaDocs", default="referenceIaDocs"
+                ),
+            ),
+            optional=True,
+        ),
+        StringField(
+            "website",
+            widget=StringWidget(
+                label="urban_label_urlIaDocs",
+            ),
+            validators=("isURL",),
+        ),
     ),
 )
 
