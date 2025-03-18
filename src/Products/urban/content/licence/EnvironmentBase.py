@@ -17,6 +17,7 @@ from AccessControl import ClassSecurityInfo
 from Products.urban.widget.select2widget import MultiSelect2Widget
 from Products.Archetypes.atapi import *
 from zope.interface import implements
+from zope.i18n import translate
 from Products.urban import interfaces
 from Products.urban.content.licence.GenericLicence import GenericLicence
 from Products.urban.content.CODT_UniqueLicenceInquiry import CODT_UniqueLicenceInquiry
@@ -48,8 +49,6 @@ from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 
 from plone import api
-from zope.i18n import translate
-
 
 optional_fields = [
     "roadTechnicalAdvice",
@@ -453,7 +452,7 @@ class EnvironmentBase(
 
     def listpartialTransferConcerning(self):
         """
-        This vocabulary for field partialTransferConcerning returns a list of
+        This vocabulary for field partialTransferConcerning 
         
         """
         vocab = (
@@ -482,8 +481,6 @@ class EnvironmentBase(
         return DisplayList(vocabulary)
     
     security.declarePublic("partialTransferConcerning")
-
-    
 
     def getProcedureDelays(self, *values):
         """
