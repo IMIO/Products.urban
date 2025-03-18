@@ -628,7 +628,7 @@ schema = Schema(
             ),
             multiValued=True,
             schemata="urban_road",
-            vocabulary="listFloodingLevels",
+            vocabulary=UrbanVocabulary('flooding_level', vocType='UrbanVocabularyTerm', inUrbanConfig=False),
         ),
         TextField(
             name="floodingLevelDetails",
@@ -814,7 +814,7 @@ schema = Schema(
             ),
             multiValued=True,
             schemata="urban_location",
-            vocabulary="listFloodingLevels",
+            vocabulary=UrbanVocabulary('flooding_level', vocType='UrbanVocabularyTerm', inUrbanConfig=False),
         ),
         BooleanField(
             name="expropriation",
@@ -1489,34 +1489,7 @@ class GenericLicence(OrderedBaseFolder, UrbanBase, BrowserDefaultMixin):
 
         return DisplayList(vocab)
 
-    security.declarePublic("listFloodingLevels")
-
-    def listFloodingLevels(self):
-        """
-        This vocabulary for field floodingLevel returns a list of
-        flooding levels : no risk, low risk, moderated risk, high risk
-        """
-        vocab = (
-            ("no", translate(_("flooding_level_no"), context=self.REQUEST)),
-            ("very low", translate(_("flooding_level_verylow"), context=self.REQUEST)),
-            ("low", translate(_("flooding_level_low"), context=self.REQUEST)),
-            (
-                "low_to_moderate",
-                translate(_("flooding_level_low_to_moderate"), context=self.REQUEST),
-            ),
-            (
-                "low_to_high",
-                translate(_("flooding_level_low_to_high"), context=self.REQUEST),
-            ),
-            ("moderate", translate(_("flooding_level_moderate"), context=self.REQUEST)),
-            (
-                "moderate_to_high",
-                translate(_("flooding_level_moderate_to_high"), context=self.REQUEST),
-            ),
-            ("high", translate(_("flooding_level_high"), context=self.REQUEST)),
-        )
-
-        return DisplayList(vocab)
+    
 
     security.declarePublic("listCentralities")
 

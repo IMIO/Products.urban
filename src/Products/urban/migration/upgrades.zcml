@@ -737,5 +737,13 @@
         handler=".update_270.add_new_voc_terms_for_flooding_level"
         profile="Products.urban:default"
         />
+     <gs:upgradeStep
+        title="Migrate locationFloodingLevel and floodingLevel vocabulary"
+        description=""
+        source="1160"
+        destination="1161"
+        handler=".update_270.migrate_locationFloodingLevel_and_flooding_level_vocabulary"
+        profile="Products.urban:default"
+        />
 
 </configure>

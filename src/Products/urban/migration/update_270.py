@@ -5,6 +5,8 @@ from OFS.interfaces import IOrderedContainer
 from Products.urban.migration.utils import refresh_workflow_permissions
 from Products.urban.setuphandlers import createFolderDefaultValues
 from Products.urban.setuphandlers import createVocabularyFolder
+from Products.urban.interfaces import IGenericLicence
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban import UrbanMessage as _
 
 from imio.schedule.content.object_factories import MacroCreationConditionObject
@@ -399,4 +401,27 @@ def add_new_voc_terms_for_flooding_level(context):
     )
     logger.info("migration step done!")
 
+def migrate_locationFloodingLevel_and_flooding_level_vocabulary(context):
+    logger = logging.getLogger("urban: migrate locationFloodingLevel vocabulary")
+    logger.info("starting migration step")
+    
+    container = api.portal.get_tool("portal_urban")
+    flooding_level_vocabulary = container.get("flooding_level", None)
+    catalog = api.portal.get_tool("portal_catalog")
+    licence_brains = catalog(object_provides=IGenericLicence.__identifier__)
+    licences = [li.getObject() for li in licence_brains]
+    
+    if flooding_level_vocabulary is None:
+        logger.error("Vocabulary 'flooding_level' not found!")
+        return
+    for licence in licences:
+        if hasattr(licence, "locationFloodingLevel") and hasattr(licence, "floodingLevel"):
+            fields = [licence.getField("locationFloodingLevel"), licence.getField("floodingLevel")]
+            for field in fields:
+                if field is not None:
+                    field.vocabulary = UrbanVocabulary('flooding_level', vocType='UrbanVocabularyTerm', inUrbanConfig=False)
+        else:
+            logger.error("Fields 'locationFloodingLevel' not found")
+    
+    logger.info("Migration step done!")
 
