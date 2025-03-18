@@ -728,5 +728,14 @@
         handler=".update_270.fix_patrimony_certificate_class"
         profile="Products.urban:default"
         />
+    
+    <gs:upgradeStep
+        title="Add new vocabulary terms for flooding level"
+        description=""
+        source="1159"
+        destination="1160"
+        handler=".update_270.add_new_voc_terms_for_flooding_level"
+        profile="Products.urban:default"
+        />
 
 </configure>
