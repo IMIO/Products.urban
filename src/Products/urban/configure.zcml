@@ -332,9 +332,9 @@
     handler=".subscribers.after_term_deactivate"
     />
      <subscriber
-      for=".interfaces.ICODT_ParcelOutLicence
+      for=".interfaces.ILicenceNotificationEvent
       zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-      handler=".subscribers.post_save_parceloutlicence"
+      handler=".subscribers.post_save_event_parceloutlicence"
     />
     
 
