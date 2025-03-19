@@ -5,6 +5,11 @@ from OFS.interfaces import IOrderedContainer
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.migration.utils import refresh_workflow_permissions
 from Products.urban.setuphandlers import createFolderDefaultValues
+from Products.urban.setuphandlers import createVocabularyFolder
+from Products.urban.interfaces import IGenericLicence
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
+from Products.urban import UrbanMessage as _
+
 from imio.schedule.content.object_factories import MacroCreationConditionObject
 from imio.schedule.content.object_factories import MacroEndConditionObject
 from imio.schedule.content.object_factories import MacroFreezeConditionObject
@@ -28,6 +33,7 @@ from imio.schedule.events.zope_registration import (
 from plone import api
 from plone.restapi.interfaces import ISerializeToJson
 from zope.component import getMultiAdapter
+from zope.i18n import translate
 
 import logging
 
@@ -344,6 +350,82 @@ def fix_patrimony_certificate_class(context):
         licence.reindexObject()
 
     logger.info("upgrade step done!")
+    
+def add_new_voc_terms_for_flooding_level(context):
+    logger = logging.getLogger("urban: migrate create_voc_flooding_level")
+    logger.info("starting migration step")
+    container = api.portal.get_tool("portal_urban")
+    vocabulary_name = "flooding_level"
+
+    flooding_level_vocabularies_config = [
+        {
+            "id": "no",
+            "title": translate(_("flooding_level_no"), context= context.REQUEST)
+        },
+        {
+            "id": "very_low",
+            "title": translate(_("flooding_level_verylow"),context =context.REQUEST)
+        },
+        {
+            "id": "low",
+            "title": translate(_("flooding_level_low"), context =context.REQUEST)
+        },
+        {
+            "id": "low_to_moderate",
+            "title":  translate(_("flooding_level_low_to_moderate"), context = context.REQUEST)
+        },
+        {
+            "id": "low_to_high",
+            "title": translate(_("flooding_level_low_to_high"), context =context.REQUEST)
+        },
+        {
+            "id": "moderate",
+            "title": translate(_("flooding_level_moderate"), context =context.REQUEST)
+        },
+        {
+            "id": "moderate_to_high",
+            "title": translate(_("flooding_level_moderate_to_high"), context =context.REQUEST)
+        },
+        {
+            "id": "high",
+            "title": translate(_("flooding_level_high"), context =context.REQUEST)
+        },
+        ]
+    flooding_level_config = createVocabularyFolder(
+        container, vocabulary_name, context, "UrbanVocabularyTerm"
+    )
+        
+    createFolderDefaultValues(
+        flooding_level_config,
+        flooding_level_vocabularies_config,
+        "UrbanVocabularyTerm"
+    )
+    logger.info("migration step done!")
+
+def migrate_locationFloodingLevel_and_flooding_level_vocabulary(context):
+    logger = logging.getLogger("urban: migrate locationFloodingLevel vocabulary")
+    logger.info("starting migration step")
+    
+    container = api.portal.get_tool("portal_urban")
+    flooding_level_vocabulary = container.get("flooding_level", None)
+    catalog = api.portal.get_tool("portal_catalog")
+    licence_brains = catalog(object_provides=IGenericLicence.__identifier__)
+    licences = [li.getObject() for li in licence_brains]
+    
+    if flooding_level_vocabulary is None:
+        logger.error("Vocabulary 'flooding_level' not found!")
+        return
+    for licence in licences:
+        if hasattr(licence, "locationFloodingLevel") and hasattr(licence, "floodingLevel"):
+            fields = [licence.getField("locationFloodingLevel"), licence.getField("floodingLevel")]
+            for field in fields:
+                if field is not None:
+                    field.vocabulary = UrbanVocabulary('flooding_level', vocType='UrbanVocabularyTerm', inUrbanConfig=False)
+        else:
+            logger.error("Fields 'locationFloodingLevel' not found")
+    
+    logger.info("Migration step done!")
+
 
 
 def fix_external_decision_values(context):

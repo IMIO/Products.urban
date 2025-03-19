@@ -5353,3 +5353,7 @@ msgstr "ans"
 
 msgid "zip_folder_title"
 msgstr "Zone d'initiative privilégiée"
+
+msgid "flooding_level_folder_title"
+msgstr "Flooding Level"
+
