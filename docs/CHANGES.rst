@@ -8,6 +8,64 @@ Changelog
 
 .. towncrier release notes start
 
+2.7.31 (2025-03-12)
+-------------------
+
+New features:
+
+
+- Add possibility to get template merged when import
+  [jchandelle] (SUP-39711)
+
+
+Bug fixes:
+
+
+- Ensure 'in_progress'state covers 'complete' and 'deposit' states in statistics calculation.
+  [WBoudabous] (SUP-42045)
+- Fix lost value in licence duplication
+  [jchandelle] (SUP-42578)
+- Clarify `Copy to claimant`
+  [daggelpop] (SUP-42931)
+- Add External method to fix annoncements tasks
+  [jchandelle] (URB-2680)
+
+
+Internal:
+
+
+- Fix ViewPageTemplateFile import
+  [jchandelle] (SUP-41619, URB-3237)
+
+
+2.7.30 (2025-02-07)
+-------------------
+
+New features:
+
+
+- Add utility view to fix task_config_UID on task
+  [jchandelle] (SUP-41619)
+- Add utils view to closed task depending filter
+  [jchandelle] (URB-3237)
+- Add reorder to event attachment
+  [jchandelle] (URBBDC-1111)
+
+
+Bug fixes:
+
+
+- Fix external decision values
+  [daggelpop]
+
+  Handle default vocabulary values for a non-array field
+  [daggelpop] (SUP-40288)
+- Fix urban vocabularies following configuration order 
+  [WBoudabous] (SUP-41929)
+- Add missing translation in schedule config
+  [WBoudabous] (URB-3142)
+
+
 2.7.29 (2025-02-04)
 -------------------
 
