@@ -217,7 +217,7 @@ msgstr "Configurer l'élément"
 
 #: ../profiles/default/actions.xml
 msgid "Copy to claimant"
-msgstr "Copier au demandeur"
+msgstr "Créer comme réclamant"
 
 #: ../browser/templates/coring_update.pt:7
 msgid "Coring"

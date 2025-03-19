@@ -11,7 +11,7 @@ from Products.urban.browser.licence.licenceview import LicenceView
 from Products.urban.browser.table.urbantable import ApplicantTable
 from Products.urban.browser.table.urbantable import ApplicantHistoryTable
 from Products.urban.browser.table.urbantable import DocumentsTable
-from Products.urban.browser.table.urbantable import AttachmentsTable
+from Products.urban.browser.table.urbantable import EventAttachmentsTable
 from Products.urban.browser.table.urbantable import ClaimantsTable
 from Products.urban.browser.table.urbantable import RecipientsCadastreTable
 from Products.urban.interfaces import IGenericLicence
@@ -174,7 +174,7 @@ class UrbanEventView(BrowserView):
         if not attachments:
             return ""
 
-        table = AttachmentsTable(self.context, self.request, values=attachments)
+        table = EventAttachmentsTable(self.context, self.request, values=attachments)
         table.update()
         return table.render()
 

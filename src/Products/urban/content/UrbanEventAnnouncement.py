@@ -37,7 +37,7 @@ schema = Schema(
 ##/code-section after-local-schema
 
 UrbanEventAnnouncement_schema = (
-    BaseFolderSchema.copy()
+    OrderedBaseFolderSchema.copy()
     + getattr(UrbanEventInquiry, "schema", Schema(())).copy()
     + schema.copy()
 )
@@ -48,7 +48,7 @@ UrbanEventAnnouncement_schema["eventDate"].widget.visible["view"] = "invisible"
 ##/code-section after-schema
 
 
-class UrbanEventAnnouncement(BaseFolder, UrbanEventInquiry, BrowserDefaultMixin):
+class UrbanEventAnnouncement(OrderedBaseFolder, UrbanEventInquiry, BrowserDefaultMixin):
     """ """
 
     security = ClassSecurityInfo()
@@ -84,7 +84,7 @@ class UrbanEventAnnouncement(BaseFolder, UrbanEventInquiry, BrowserDefaultMixin)
                 },
                 default="You can not delete an UrbanEventAnnouncement if it is not the last!  Remove the last UrbanEventAnnouncements before being able to remove this one!",
             )
-        BaseFolder.manage_beforeDelete(self, item, container)
+        OrderedBaseFolderSchema.manage_beforeDelete(self, item, container)
 
     security.declarePublic("getClaimants")
 
