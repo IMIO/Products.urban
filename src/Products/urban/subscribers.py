@@ -4,7 +4,8 @@ from datetime import datetime
 from plone import api
 import re
 from DateTime import DateTime
-from zope.lifecycleevent.interfaces import IObjectAddedEvent, IObjectModifiedEvent
+from zope.lifecycleevent.interfaces import IObjectModifiedEvent
+
 from .utils import convert_to_europe_brussels
 from .interfaces import ICODT_ParcelOutLicence
 
@@ -19,12 +20,23 @@ def after_term_deactivate(obj, event):
     obj.setEndValidity(datetime(*datetime.now().date().timetuple()[0:3]))
 
 
-def post_save_event_parceloutlicence(obj, event):
-    
+def post_save_event_parceloutlicence(obj, event):    
+    if not IObjectModifiedEvent.providedBy(event):
+        return  
+  
     if not ICODT_ParcelOutLicence.providedBy(obj.aq_parent):
         return
-
-    parent_container = api.content.get(path="/Urban/urban/parcellings")
+    urbaneventtypes = obj.getUrbaneventtypes()
+    is_event_type_valid = (
+        urbaneventtypes is not None and urbaneventtypes.id == "delivrance-du-permis-octroi-ou-refus-codt"
+    )
+    
+    if not is_event_type_valid:
+        return
+    site_root = api.portal.get() 
+    site_root_path = "/".join(site_root.getPhysicalPath())  
+    parent_container = api.content.get(path=site_root_path+"/urban/parcellings")
+    
     title = getattr(obj.aq_parent, "title", None)
     reference_dgatlp = getattr(obj.aq_parent, "referenceDGATLP", None)
     reference = getattr(obj.aq_parent, "reference", None)
@@ -36,6 +48,7 @@ def post_save_event_parceloutlicence(obj, event):
         subdivider_name = ""
 
     is_favorable = obj.getDecision() == "favorable"
+
     if not is_favorable:
         return
     else:
@@ -48,14 +61,13 @@ def post_save_event_parceloutlicence(obj, event):
 
         if isinstance(authorization_date, DateTime):
             authorization_date = convert_to_europe_brussels(authorization_date)
-
-        found_parcelling = api.content.find(
-            context=parent_container,
-            communalReference=reference,
-            portal_type="Parcelling",
-        )
-        if found_parcelling and len(found_parcelling) > 0:
-            found_parcelling = found_parcelling[0].getObject()
+        found_parcelling = None
+        for obj in parent_container.objectValues():
+            if obj.portal_type == "Parcelling" and getattr(obj, "communalReference", None) == reference:
+                found_parcelling = obj
+                break
+        
+        if found_parcelling :
             # Update fields
             found_parcelling.title = title
             found_parcelling.label = label
@@ -66,7 +78,6 @@ def post_save_event_parceloutlicence(obj, event):
             found_parcelling.authorizationDate = authorization_date
 
         else:
-            # If the object doesn't exist, create a new one
             api.content.create(
                 container=parent_container,
                 type="Parcelling",  # Type of content to create
