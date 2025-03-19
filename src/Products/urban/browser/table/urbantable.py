@@ -264,6 +264,19 @@ class NestedAttachmentsTable(UrbanTable, SequenceTable):
     startBatchingAt = 9999
 
 
+class EventAttachmentsTable(UrbanTable, SequenceTable):
+    """
+    Render nested attachments from subfolders.
+    """
+
+    implements(interfaces.IEventAttachmentsTable)
+
+    sortOn = None
+    cssClasses = {"table": "listing nosort largetable"}
+    batchSize = 9999
+    startBatchingAt = 9999
+
+
 class InternalOpinionServicesTable(SequenceTable):
     """
     Render nested attachments from subfolders.

@@ -31,7 +31,7 @@ from Products.Archetypes.interfaces import IVocabulary
 from Products.urban import UrbanMessage as _
 from datetime import datetime
 from DateTime import DateTime
-
+from collections import OrderedDict
 from Products.urban.config import PROJECTNAME
 from Products.urban.config import EMPTY_VOCAB_VALUE
 from zope.globalrequest import getRequest
@@ -296,10 +296,11 @@ class UrbanVocabulary(object):
             with_empty_value=self.with_empty_value,
         )
         deposit_date = self._get_deposit_date(content_instance)
-        filtered_terms = {
-            k: v for k, v in voc_terms.items()
-            if self._validate_term(v, deposit_date)
-        }
+        filtered_terms = OrderedDict()
+        for k, v in voc_terms.items():
+             if self._validate_term(v, deposit_date):
+                filtered_terms[k] = v
+      
         return filtered_terms
 
     def listAllVocTerms(self, content_instance):
