@@ -361,3 +361,13 @@ def fix_external_decision_values(context):
                 opinion.setExternalDecision(external_decision[0])
 
     logger.info("upgrade step done!")
+
+
+def reimport_registry_profil(context):
+    logger = logging.getLogger("urban: reimport registry profil")
+    logger.info("starting migration steps")
+    setup_tool = api.portal.get_tool("portal_setup")
+    setup_tool.runImportStepFromProfile(
+        "profile-Products.urban:default", "plone.app.registry"
+    )
+    logger.info("migration done!")

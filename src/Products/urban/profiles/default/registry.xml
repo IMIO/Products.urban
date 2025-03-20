@@ -7,6 +7,8 @@
   </records>
   <records interface="Products.urban.interfaces.IAsyncInquiryRadius" field="inquiries_to_do">
   </records>
+  <records interface="Products.urban.interfaces.IAsyncInquiryRadius" field="inquiries_address_to_do">
+  </records>
   <records interface="Products.urban.interfaces.IAsyncClaimantsImports" field="claimants_to_import">
   </records>
   <records interface="Products.urban.interfaces.IAsyncMailing">

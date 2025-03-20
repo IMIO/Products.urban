@@ -738,4 +738,13 @@
         profile="Products.urban:default"
         />
 
+    <gs:upgradeStep
+        title="Reimport registry profil"
+        description=""
+        source="1160"
+        destination="1161"
+        handler=".update_270.reimport_registry_profil"
+        profile="Products.urban:default"
+        />
+
 </configure>
