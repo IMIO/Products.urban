@@ -361,3 +361,13 @@ def fix_external_decision_values(context):
                 opinion.setExternalDecision(external_decision[0])
 
     logger.info("upgrade step done!")
+
+
+def update_documentation_link(context):
+    logger = logging.getLogger("urban: Update documentation link")
+    logger.info("starting upgrade steps")
+
+    setup_tool = api.portal.get_tool("portal_setup")
+    setup_tool.runImportStepFromProfile("profile-Products.urban:default", "actions")
+
+    logger.info("upgrade step done!")
