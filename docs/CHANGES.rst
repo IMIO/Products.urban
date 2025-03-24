@@ -8,6 +8,16 @@ Changelog
 
 .. towncrier release notes start
 
+2.7.32 (2025-03-24)
+-------------------
+
+Bug fixes:
+
+
+- Fix view for fixing task uid and add possiblity to call on licence folder
+  [jchandelle] (SUP-43189)
+
+
 2.7.31 (2025-03-12)
 -------------------
 
