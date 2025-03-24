@@ -5,7 +5,7 @@
     i18n_domain="urban">
 
   <browser:page
-     for="Products.urban.interfaces.IGenericLicence"
+     for="*"
      name="fix-task-uid-error"
      class=".fix_task_uid_error.FixTaskUidError"
      permission="cmf.ManagePortal"
