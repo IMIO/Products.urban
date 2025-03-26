@@ -23,7 +23,7 @@ class ILicenceTypeCondition(Interface):
     """
 
     licence_type = schema.List(
-        title=_(u"Licence Type"),
+        title=_(u"Licence type of event parent"),
         required=True,
         value_type=schema.Choice(
             vocabulary="urban.vocabularies.licence_types",
@@ -46,7 +46,7 @@ class LicenceTypeCondition(SimpleItem):
         values = [
             vocabulary.by_value[opinion].title for opinion in list(self.licence_type)
         ]
-        return u"Licence Type : {}".format(", ".join(values))
+        return u"Licence type of event parent : {}".format(", ".join(values))
 
 
 class LicenceTypeConditionExecutor(object):
@@ -65,28 +65,28 @@ class LicenceTypeConditionExecutor(object):
 
     def __call__(self):
         if not hasattr(
-            self.context,
+            self.event.object,
             "get_parent_licence",
         ):
             return False
-        context_type = self.context.get_parent_licence().portal_type
-        if context_type is None:
+        parent_type = self.event.object.get_parent_licence().portal_type
+        if parent_type is None:
             return False
         condition_types = getattr(self.element, "licence_type", None)
         if not condition_types and not isinstance(condition_types, list):
             return False
 
-        return context_type in condition_types
+        return parent_type in condition_types
 
 
 class LicenceTypeAddForm(AddForm):
-    """An add form for opinion to ask condition."""
+    """An add form for licence type of event parent condition."""
 
     form_fields = form.FormFields(ILicenceTypeCondition)
-    label = _(u"Add licence type Condition")
+    label = _(u"Add Licence type of event parent Condition")
     description = _(
-        u"A licence type condition makes the rule apply "
-        "only when one of the licence type slelected correspond to the one of the context"
+        u"A licence type of event parent condition makes the rule apply "
+        "only when one of the licence type of event parent slelected correspond to the one of the event parent"
     )
     form_name = _(u"Configure element")
 
@@ -97,12 +97,12 @@ class LicenceTypeAddForm(AddForm):
 
 
 class LicenceTypeEditForm(EditForm):
-    """An edit form for Opinion to ask condition"""
+    """An edit form for Licence type of event parent condition"""
 
     form_fields = form.FormFields(ILicenceTypeCondition)
-    label = _(u"Edit Opinion to ask Condition")
+    label = _(u"Edit licence type of event parent Condition")
     description = _(
-        u"A opinion to ask condition makes the rule apply "
-        "only when one of the Opinion to ask slelected correspond to the one of the context"
+        u"A licence type of event parent condition makes the rule apply "
+        "only when one of the licence type of event parent slelected correspond to the one of the event parent"
     )
     form_name = _(u"Configure element")

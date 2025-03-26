@@ -116,8 +116,8 @@
 
     <plone:ruleCondition
         name="urban.conditions.licence_type"
-        title="Licence type"
-        description="Apply only when one of the licence type slelected correspond to the one of the context"
+        title="Licence type of event parent"
+        description="Apply only when one of the licence type slelected correspond to the one of the event parent"
         for="*"
         event="*"
         addview="urban.conditions.licence_type"
