@@ -8,6 +8,16 @@ Changelog
 
 .. towncrier release notes start
 
+2.7.34 (2025-03-27)
+-------------------
+
+Bug fixes:
+
+
+- Fix licence type condition in content rules
+  [jchandelle] (SUP-43534)
+
+
 2.7.33 (2025-03-27)
 -------------------
 
