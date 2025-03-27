@@ -23,7 +23,7 @@ class ILicenceTypeCondition(Interface):
     """
 
     licence_type = schema.List(
-        title=_(u"Licence type of event parent"),
+        title=_(u"Event's parent licence types"),
         required=True,
         value_type=schema.Choice(
             vocabulary="urban.vocabularies.licence_types",
@@ -46,7 +46,7 @@ class LicenceTypeCondition(SimpleItem):
         values = [
             vocabulary.by_value[opinion].title for opinion in list(self.licence_type)
         ]
-        return u"Licence type of event parent : {}".format(", ".join(values))
+        return u"Event's parent licence types : {}".format(", ".join(values))
 
 
 class LicenceTypeConditionExecutor(object):
@@ -80,13 +80,13 @@ class LicenceTypeConditionExecutor(object):
 
 
 class LicenceTypeAddForm(AddForm):
-    """An add form for licence type of event parent condition."""
+    """An add form for event's parent licence types condition."""
 
     form_fields = form.FormFields(ILicenceTypeCondition)
-    label = _(u"Add Licence type of event parent Condition")
+    label = _(u"Add event's parent licence types condition")
     description = _(
-        u"A licence type of event parent condition makes the rule apply "
-        "only when one of the licence type of event parent slelected correspond to the one of the event parent"
+        u"An event's parent licence type condition causes the rule to apply "
+        "only when one of the selected event's parent licence types matches that of the parent event."
     )
     form_name = _(u"Configure element")
 
@@ -97,12 +97,12 @@ class LicenceTypeAddForm(AddForm):
 
 
 class LicenceTypeEditForm(EditForm):
-    """An edit form for Licence type of event parent condition"""
+    """An edit form for event's parent licence types condition"""
 
     form_fields = form.FormFields(ILicenceTypeCondition)
-    label = _(u"Edit licence type of event parent Condition")
+    label = _(u"Edit event's parent licence types condition")
     description = _(
-        u"A licence type of event parent condition makes the rule apply "
-        "only when one of the licence type of event parent slelected correspond to the one of the event parent"
+        u"An event's parent licence type condition causes the rule to apply "
+        "only when one of the selected event's parent licence types matches that of the parent event."
     )
     form_name = _(u"Configure element")
