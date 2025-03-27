@@ -8,6 +8,16 @@ Changelog
 
 .. towncrier release notes start
 
+2.7.33 (2025-03-27)
+-------------------
+
+Bug fixes:
+
+
+- Fix event send mail notification title encoding
+  [jchandelle] (SUP-43533)
+
+
 2.7.32 (2025-03-24)
 -------------------
 
