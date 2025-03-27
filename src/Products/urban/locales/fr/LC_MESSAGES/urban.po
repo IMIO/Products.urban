@@ -15,7 +15,7 @@ msgstr ""
 "Domain: urban\n"
 "X-is-fallback-for: fr-fr fr-be fr-ca\n"
 
-#: ../send_mail_action/forms.py:42
+#: ../send_mail_action/forms.py:53
 msgid " and ${last_rule}"
 msgstr " et ${last_rule}"
 
@@ -82,11 +82,11 @@ msgstr "Valeur actuelle"
 msgid "Add Category Switch Portlet"
 msgstr "Ajouter un portlet de changement de catégorie"
 
-#: ../contentrules/event_type.py:69
+#: ../contentrules/event_type.py:87
 msgid "Add Event type Condition"
 msgstr "Ajouter une condition de type d'événement"
 
-#: ../contentrules/opinions.py:76
+#: ../contentrules/opinions.py:78
 msgid "Add Opinion to ask Condition"
 msgstr "Ajouter une condition de demande d'avis"
 
@@ -115,7 +115,10 @@ msgstr "Ajouter tous les avis"
 msgid "Add an event"
 msgstr "Ajouter un événement"
 
-#: ../browser/templates/urbaneventinquiryview.pt:200
+#: ../contentrules/licence_type.py:86
+msgid "Add event's parent licence types condition"
+msgstr "Ajouter la condition des types de permis parentes de l'événement"
+
 msgid "Add recipientcadastre manually"
 msgstr "Ajouter un propriétaire"
 
@@ -131,6 +134,30 @@ msgstr "Tous"
 #: ../docgen/UrbanTemplate.py:28
 msgid "Allowed portal types"
 msgstr "Type de contenus autorisés"
+
+#: ../contentrules/event_type.py:88
+msgid "An Event type condition makes the rule apply only if Event type correspond to the one from the context."
+msgstr "Une condition de type d'événement fait que la règle s'applique uniquement si le type d'événement correspond à celui du contexte."
+
+#: ../contentrules/licence_type.py:87
+msgid "An event's parent licence type condition causes the rule to apply only when one of the selected event's parent licence types matches that of the parent event."
+msgstr "La condition de type de permis parent d'un événement entraîne l'application de la règle uniquement lorsque l'un des types de permis parent de l'événement sélectionné correspond à celui de l'événement parent."
+
+#: ../contentrules/opinions.py:79
+msgid "An opinion to ask condition makes the rule apply only when one of the Opinion to ask selected correspond to the one of the context."
+msgstr "Une condition de demande d'avis fait que la règle s'applique uniquement lorsque l'une des demande d'avis sélectionnés correspond à celle du contexte."
+
+#: ../contentrules/configure.zcml:99
+msgid "Apply only when one of the Opinion to ask selected corresponds to the one of the context"
+msgstr "Appliquer uniquement lorsque l'une des demande d'avis sélectionnée correspond à celle du contexte"
+
+#: ../contentrules/configure.zcml:129
+msgid "Apply only when one of the licence type selected correspond to the one of the event parent"
+msgstr "S'applique uniquement lorsque l'un des types de permis sélectionnés correspond à celui du parent de l'événement"
+
+#: ../contentrules/configure.zcml:68
+msgid "Apply only when the Event Type corresponds to the one of the context"
+msgstr "Appliquer uniquement lorsque le type d'événement correspond à celui du contexte"
 
 msgid "Article127"
 msgstr "Article 127"
@@ -210,8 +237,9 @@ msgstr "Vérifier les parcelles"
 msgid "Comment - {0}"
 msgstr "Commentaire - {0}"
 
-#: ../contentrules/event_type.py:74
-#: ../contentrules/opinions.py:81
+#: ../contentrules/event_type.py:92
+#: ../contentrules/licence_type.py:91
+#: ../contentrules/opinions.py:83
 msgid "Configure element"
 msgstr "Configurer l'élément"
 
@@ -269,11 +297,11 @@ msgstr "Créer un nouveau permis en copiant les données."
 msgid "Edit Category Switch Portlet"
 msgstr "Modifier le portlet de changement de catégorie"
 
-#: ../contentrules/event_type.py:86
+#: ../contentrules/event_type.py:104
 msgid "Edit Event type Condition"
 msgstr "Modifier la condition de type d'événement"
 
-#: ../contentrules/opinions.py:93
+#: ../contentrules/opinions.py:95
 msgid "Edit Opinion to ask Condition"
 msgstr "Modifier la condition de demande d'avis"
 
@@ -294,6 +322,10 @@ msgstr "Modifier le portlet d'outils iA.Urban"
 #: ../browser/schedule_settings.py:33
 msgid "Edit cancelled"
 msgstr "Edition annulée"
+
+#: ../contentrules/licence_type.py:103
+msgid "Edit event's parent licence types condition"
+msgstr "Modifier la condition des types de permis parent de l'événement"
 
 #: ../profiles/default/actions.xml
 msgid "Emails"
@@ -316,13 +348,19 @@ msgstr "Déclaration environnementale"
 msgid "EnvClassTwo"
 msgstr "Permis d'environnement classe 2"
 
-#: ../contentrules/mail_with_attachment.py:82
+#: ../contentrules/mail_with_attachment.py:90
 msgid "Error sending email from content rule. You must provide a source address for mail actions or enter an email in the portal properties"
 msgstr "Erreur lors de l'envoi de l'e-mail depuis la règle de contenu. Vous devez fournir une adresse source pour les actions par e-mail ou entrer une adresse e-mail dans les propriétés du portail."
 
-#: ../contentrules/event_type.py:24
+#: ../contentrules/configure.zcml:68
+#: ../contentrules/event_type.py:26
 msgid "Event Type"
 msgstr "Type d'événement"
+
+#: ../contentrules/configure.zcml:129
+#: ../contentrules/licence_type.py:26
+msgid "Event's parent licence types"
+msgstr "Types de permis parent de l'événement"
 
 #: ../browser/licence/templates/licencetabsmacros.pt:509
 msgid "Events"
@@ -634,7 +672,7 @@ msgstr "Permis intégré"
 msgid "Internal opinion services"
 msgstr "Avis de services internes à la ville"
 
-#: ../send_mail_action/forms.py:19
+#: ../send_mail_action/forms.py:26
 msgid "Licence Files"
 msgstr "Fichiers du permis"
 
@@ -710,6 +748,7 @@ msgstr "Jours de suspension"
 msgid "Off days period"
 msgstr "Périodes de suspension"
 
+#: ../contentrules/configure.zcml:99
 #: ../contentrules/opinions.py:26
 msgid "Opinion to ask"
 msgstr "Avis à demander"
@@ -789,9 +828,9 @@ msgstr "Échéancier par procédure"
 msgid "Search parcel(s)"
 msgstr "Chercher des références cadastrales."
 
-#: ../send_mail_action/forms.py:20
-msgid "Select all files from this event or the parent licence you whant to send"
-msgstr "Sélectionnez tous les fichiers de cet évènement ou du permis que vous voulez envoyer."
+#: ../send_mail_action/forms.py:27
+msgid "Select all files from this event or the parent licence you want to send."
+msgstr "Sélectionnez tous les fichiers de cet événement ou du permis parent que vous souhaitez envoyer."
 
 #: ../docgen/UrbanTemplate.py:29
 msgid "Select for which content types the template will be available."
@@ -801,9 +840,17 @@ msgstr "Sélectionner les types de contenues autorisés pour ce modèle"
 msgid "Select to list"
 msgstr "Sélectionner pour lister"
 
-#: ../send_mail_action/forms.py:37
+#: ../send_mail_action/forms.py:58
 msgid "Send"
 msgstr "Envoyer"
+
+#: ../contentrules/configure.zcml:36
+msgid "Send an email with attachments on the triggering object"
+msgstr "Envoyer un e-mail avec des pièces jointes sur l'objet déclencheur"
+
+#: ../contentrules/configure.zcml:36
+msgid "Send email with attachment"
+msgstr "Envoyer un e-mail avec pièce jointe"
 
 #: ../profiles/default/actions.xml
 msgid "Send mail"

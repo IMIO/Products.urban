@@ -25,7 +25,7 @@ class ISendMailActionForm(Interface):
     files = schema.List(
         title=_(u"Licence Files"),
         description=_(
-            u"Select all files from this event or the parent licence you whant to send"
+            u"Select all files from this event or the parent licence you want to send."
         ),
         required=False,
         value_type=schema.Choice(vocabulary="urban.vocabularies.licence_documents"),
