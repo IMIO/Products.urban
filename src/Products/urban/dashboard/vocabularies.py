@@ -4,6 +4,7 @@ from Acquisition import aq_parent
 from collective.eeafaceted.collectionwidget.vocabulary import CachedCollectionVocabulary
 
 from plone import api
+from plone.memoize import ram
 
 from Products.urban import UrbanMessage as _
 from Products.urban.config import URBAN_TYPES
@@ -12,6 +13,7 @@ from Products.urban.config import URBAN_CODT_TYPES
 from Products.urban.config import URBAN_ENVIRONMENT_TYPES
 from Products.urban.dashboard import utils
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
+from Products.urban.utils import cache_key_5min
 
 from zope.globalrequest import getRequest
 from zope.i18n import translate
@@ -145,10 +147,11 @@ class DashboardCollections(CachedCollectionVocabulary):
         """Format a UrbanType to the collection id"""
         return "collection_{0}".format(type.lower())
 
+    @ram.cache(cache_key_5min)
     def check_display(self, uid):
-        folder = api.content.get(UID=uid)
-        parent = aq_parent(folder)
-        getRawExcludeFromNav = getattr(parent, "getRawExcludeFromNav", None)
+        collection = api.content.get(UID=uid)
+        licences_folder = aq_parent(collection)
+        getRawExcludeFromNav = getattr(licences_folder, "getRawExcludeFromNav", None)
         if not getRawExcludeFromNav:
             return True
         return not getRawExcludeFromNav()
