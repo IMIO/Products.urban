@@ -77,8 +77,8 @@ class OpinionsAddForm(AddForm):
     form_fields = form.FormFields(IOpinionsCondition)
     label = _(u"Add Opinion to ask Condition")
     description = _(
-        u"A opinion to ask condition makes the rule apply "
-        "only when one of the Opinion to ask slelected correspond to the one of the context"
+        u"An opinion to ask condition makes the rule apply "
+        "only when one of the Opinion to ask selected correspond to the one of the context."
     )
     form_name = _(u"Configure element")
 
@@ -94,7 +94,7 @@ class OpinionsEditForm(EditForm):
     form_fields = form.FormFields(IOpinionsCondition)
     label = _(u"Edit Opinion to ask Condition")
     description = _(
-        u"A opinion to ask condition makes the rule apply "
-        "only when one of the Opinion to ask slelected correspond to the one of the context"
+        u"An opinion to ask condition makes the rule apply "
+        "only when one of the Opinion to ask selected correspond to the one of the context."
     )
     form_name = _(u"Configure element")
