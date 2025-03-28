@@ -764,6 +764,8 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
     def handle_boolean_value(self, value):
         if value == "Vrai" or value is True:
             return True
+        if value == "Faux" or value is False:
+            return False
         return False
 
     def getParcels(self):
