@@ -203,6 +203,35 @@ class ConfigImportContent(ImportContent):
         item["merge_templates"] = output_template
         return item
 
+    def handle_environmentrubricterm_description(self, item):
+        description = item.get("description", None)
+        if not description:
+            return item
+        data_description = description.get("data", "")
+        if not data_description.startswith("<p>"):
+            data_description = u"<p>{}".format(data_description)
+        if not data_description.endswith("</p>"):
+            data_description = u"{}</p>".format(data_description)
+        description["data"] = data_description
+        description["content-type"] = u"text/html"
+        item["description"] = description
+        return item
+
+    def dict_hook_environmentrubricterm(self, item):
+        item = self.handle_environmentrubricterm_description(item)
+        exploitation_condition = item.get("exploitationCondition", None)
+        if not exploitation_condition:
+            return item
+        exploitation_condition_list = []
+        for condition in exploitation_condition:
+            obj = self.get_obj_from_path(condition)
+            if not obj:
+                logger.error("Can't find object for exploitationCondition : {}".format(condition))
+                continue
+            exploitation_condition_list.append(obj.UID())
+        item["exploitationCondition"] = exploitation_condition_list
+        return item
+
     def handle_fix_parent_path(self, item):
         parent = item["parent"]
         path = parent["@id"]
