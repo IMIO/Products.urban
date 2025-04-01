@@ -2,6 +2,7 @@
 
 from Acquisition import aq_parent
 from OFS.interfaces import IOrderedContainer
+from Products.urban import UrbanMessage as _
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.migration.utils import refresh_workflow_permissions
 from Products.urban.setuphandlers import createFolderDefaultValues
@@ -26,8 +27,12 @@ from imio.schedule.events.zope_registration import (
     unsubscribe_task_configs_for_content_type,
 )
 from plone import api
+from plone.registry import Record
+from plone.registry.field import Dict
+from plone.registry.interfaces import IRegistry
 from plone.restapi.interfaces import ISerializeToJson
 from zope.component import getMultiAdapter
+from zope.component import getUtility
 
 import logging
 
@@ -363,11 +368,16 @@ def fix_external_decision_values(context):
     logger.info("upgrade step done!")
 
 
-def reimport_registry_profil(context):
+def add_new_registry_profil(context):
     logger = logging.getLogger("urban: reimport registry profil")
     logger.info("starting migration steps")
-    setup_tool = api.portal.get_tool("portal_setup")
-    setup_tool.runImportStepFromProfile(
-        "profile-Products.urban:default", "plone.app.registry"
-    )
+
+    registry = getUtility(IRegistry)
+    attributes = {"title": _(u"Planned address"), "description": _(u"address planned")}
+    key = "Products.urban.interfaces.IAsyncInquiryRadius.inquiries_address_to_do"
+    registry_field = Dict(**attributes)
+    registry_record = Record(registry_field)
+    registry_record.value = None
+    registry.records[key] = registry_record
+
     logger.info("migration done!")

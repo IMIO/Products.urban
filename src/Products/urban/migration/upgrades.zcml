@@ -739,11 +739,11 @@
         />
 
     <gs:upgradeStep
-        title="Reimport registry profil"
+        title="Add new registry record"
         description=""
         source="1160"
         destination="1161"
-        handler=".update_270.reimport_registry_profil"
+        handler=".update_270.add_new_registry_profil"
         profile="Products.urban:default"
         />
 
