@@ -68,7 +68,7 @@ msgstr "Une condition de type d'événement rend la règle applicable uniquement
 msgid "A opinion to ask condition makes the rule apply only when one of the Opinion to ask slelected correspond to the one of the context"
 msgstr "Une condition d'opinion à demander rend la règle applicable uniquement lorsqu'une des opinions à demander sélectionnées correspond à celle du contexte."
 
-#: ../browser/urbaneventviews.py:391
+#: ../browser/urbaneventviews.py:431
 msgid "A specially formatted CSV file must be used for import. The CSV file can be created from the ODT template file (can be downloaded <a href='/++resource++Products.urban/destinaires_reimport.ods'>here</a>) by 'save as' in CSV format"
 msgstr "Un fichier CSV spécialement formaté doit être utilisé pour l'importation. Le fichier CSV peut être créé à partir du fichier modèle ODT (téléchargeable <a href='/++resource++Products.urban/destinaires_reimport.ods'>ici</a>) en l'enregistrant sous le format CSV"
 
@@ -231,7 +231,7 @@ msgstr "Copier au demandeur"
 msgid "Coring"
 msgstr "Lien GIG"
 
-#: ../browser/urbaneventviews.py:562
+#: ../browser/urbaneventviews.py:649
 msgid "Couldn't import this(these) owner(s): ${owners}"
 msgstr "Impossible d'importer ce(s) propriétaire(s): ${owners}"
 
@@ -628,9 +628,13 @@ msgstr "Fin des travaux"
 msgid "ImpactStudy event type marker interface"
 msgstr "Étude d'incidence"
 
-#: ../browser/urbaneventviews.py:294
+#: ../browser/urbaneventviews.py:330
 msgid "Import"
 msgstr "Import"
+
+#: ../browser/urbaneventviews.py:394
+msgid "Import cancel : error with claimant ${claimant} on value ${value}"
+msgstr "Annulation d'importation : erreur avec le demandeur ${claimant} sur la valeur ${value}"
 
 msgid "Inspection"
 msgstr "Inspection"
@@ -646,15 +650,15 @@ msgstr "Avis de services internes à la ville"
 msgid "Licence Files"
 msgstr "Fichiers du permis"
 
-#: ../browser/urbaneventviews.py:285
+#: ../browser/urbaneventviews.py:314
 msgid "Listing file (claimants)"
 msgstr "Importer un fichier de réclamants (csv)"
 
-#: ../browser/urbaneventviews.py:354
+#: ../browser/urbaneventviews.py:430
 msgid "Listing file (recipients)"
 msgstr "Importer un fichier de destinataires (csv)"
 
-#: ../browser/urbaneventviews.py:297
+#: ../browser/urbaneventviews.py:301
 msgid "Mail already send for ${title} by ${user}, ${date}"
 msgstr "E-mail déjà envoyé pour ${title} par ${user}, le ${date}"
 
@@ -846,7 +850,7 @@ msgstr "Valider"
 msgid "Suspension period end date"
 msgstr "Date de fin"
 
-#: ../browser/urbaneventviews.py:719
+#: ../browser/urbaneventviews.py:976
 msgid "Suspension period from to: please check the end date"
 msgstr "Période de suspension du ${from} au ${to}: CORRIGEZ LA DATE DE FIN DE PUBLICITE."
 
@@ -863,11 +867,11 @@ msgstr "Onglets à copier"
 msgid "Tests Extension profile for urban."
 msgstr "Profil d'extension de tests pour iA.Urban."
 
-#: ../browser/urbaneventviews.py:405
+#: ../browser/urbaneventviews.py:558
 msgid "The CSV file couldn't be read properly. Please verify its structure and try again."
 msgstr "Le fichier CSV n'a pas pu être lu correctement. Veuillez vérifier son contenu et réessayer."
 
-#: ../browser/urbaneventviews.py:706
+#: ../browser/urbaneventviews.py:963
 msgid "The claimants import will be ready tomorrow!"
 msgstr "L'import des réclamants a bien été enregistré et sera éxécuté cette nuit"
 
@@ -875,27 +879,27 @@ msgstr "L'import des réclamants a bien été enregistré et sera éxécuté cet
 msgid "The field does not exist !!!"
 msgstr "Le champ n'existe pas."
 
-#: ../browser/urbaneventviews.py:344
+#: ../browser/urbaneventviews.py:368
 msgid "The imported file (${name}) couldn't be read properly. Please verify its structure and try again."
 msgstr "Le fichier importé (${name}) n'a pas pu être lu correctement. Veuillez vérifier sa structure et réessayer."
 
-#: ../browser/urbaneventviews.py:327
+#: ../browser/urbaneventviews.py:363
 msgid "The imported file (${name}) doesn't appear to be a CSV file."
 msgstr "Le fichier importé (${name}) ne semble pas être un fichier CSV."
 
-#: ../browser/urbaneventviews.py:67
+#: ../browser/urbaneventviews.py:75
 msgid "The mailings will be ready tomorrow!"
 msgstr "Le publipostage a bien été enregistré et sera éxécuté cette nuit"
 
-#: ../browser/urbaneventviews.py:755
+#: ../browser/urbaneventviews.py:1012
 msgid "The parcel radius search will be ready tomorrow!"
 msgstr "La recherche des propriétaires concernés par le rayon de cette enquête a bien été enregistrée et sera éxécutée cette nuit."
 
-#: ../browser/urbaneventviews.py:748
+#: ../browser/urbaneventviews.py:1005
 msgid "There are parcel owners without any address found! Desactivate them!"
 msgstr "Il y a des propriétaires de parcelle sans adresse trouvée ! Désactivez-les !"
 
-#: ../browser/urbaneventviews.py:699
+#: ../browser/urbaneventviews.py:956
 msgid "This UrbanEventInquiry is not linked to an existing Inquiry !  Define a new inquiry on the licence !"
 msgstr "Cette UrbanEventInquiry n'est pas liée à une demande existante ! Définissez une nouvelle demande sur la licence !"
 
@@ -1371,12 +1375,12 @@ msgid "divisions"
 msgstr "Divisions"
 
 #. Default: "Some national registry numbers already exist in this list; please remove them from the CSV and try again.\n${ids}"
-#: ../browser/urbaneventviews.py:441
+#: ../browser/urbaneventviews.py:485
 msgid "duplicate_ids_found_msg"
 msgstr "Certains numéros de registre national sont déjà utilisés dans la liste; veuillez les retirer du fichier CSV et réessayer."
 
 #. Default: "Some national registry numbers are used multiple times in the CSV; please remove them and try again.\n${numbers}"
-#: ../browser/urbaneventviews.py:428
+#: ../browser/urbaneventviews.py:472
 msgid "duplicate_numbers_found_msg"
 msgstr "Certains numéros de registre national sont présents plusieurs fois dans le fichier CSV. Veuillez retirer les doublons et réessayer."
 
@@ -2641,7 +2645,7 @@ msgstr "Si ce champ n'est pas rempli, l'identifiant de ce terme sera utilisé"
 msgid "urban_help_townshipCouncilFolder"
 msgstr "Si coché, un paragraphe supplémentaire apparaîtra dans le permis"
 
-#: ../browser/urbaneventviews.py:483
+#: ../browser/urbaneventviews.py:528
 msgid "urban_imported_recipients"
 msgstr "Destinataires importés"
 

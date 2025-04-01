@@ -386,7 +386,42 @@ class ImportClaimantListingForm(form.Form):
         except csv.Error as error:
             return error
 
+        try:
+            claimant_args = [
+                self.check_claimant_arg(row) for row in claimant_args
+            ]
+        except ValueError as err:
+            return _(
+                "Import cancel : error with claimant ${claimant} on value ${value}",
+                mapping={
+                    "claimant": err[0],
+                    "value": err[1]
+                }
+            )
+
         return None
+
+    def check_claimant_arg(self, row):
+        hasPetition = row.get("hasPetition", False)
+        outOfTime = row.get("outOfTime", False)
+        wantDecisionCopy = row.get("wantDecisionCopy", False)
+
+        try:
+            handle_boolean_value(hasPetition)
+        except ValueError as err:
+            raise ValueError(row["name1"], "hasPetition")
+
+        try:
+            handle_boolean_value(outOfTime)
+        except ValueError as err:
+            raise ValueError(row["name1"], "outOfTime")
+
+        try:
+            handle_boolean_value(wantDecisionCopy)
+        except ValueError as err:
+            raise ValueError(row["name1"], "wantDecisionCopy")
+        
+        return row
 
 
 class IImportRecipientListingForm(Interface):
@@ -649,6 +684,12 @@ class ImportRecipientListingForm(form.Form):
                 type="error",
             )
 
+def handle_boolean_value(value):
+    if value == "Vrai" or value is True:
+        return True
+    if value == "Faux" or value == "" or value is False:
+        return False
+    raise ValueError(value)
 
 class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
     """
@@ -681,6 +722,7 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
 
     def import_claimants_from_csv(self):
         portal_urban = api.portal.get_tool("portal_urban")
+        plone_utils = api.portal.get_tool("plone_utils")
         site = api.portal.get()
 
         titles_mapping = {"": ""}
@@ -708,48 +750,37 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
                 delimiter=",",
                 quotechar='"',
             )
+            # # todo: PDB to remove before commit
+            # __import__('pdb').set_trace()
+            # reader.next()
         else:
             reader = []
         try:
             claimant_args = [
-                row for row in reader if row["name1"] or row["name2"] or row["society"]
+                row
+                for row in reader
+                if row["name1"] or row["name2"] or row["society"]
             ][1:]
         except csv.Error as error:
             return
+        
+        try:
+            claimant_args = [
+                self.handle_claimant_arg(row, titles_mapping, country_mapping, site, claim_type_mapping)
+                for row in claimant_args
+            ]
+        except ValueError as err:
+            msg = _(
+                "Import cancel : error with claimant ${claimant} on value ${value}",
+                mapping={
+                    "claimant": err[0],
+                    "value": err[1]
+                }
+            )
+            plone_utils.addPortalMessage(msg, type="error")
+            return
 
         for claimant_arg in claimant_args:
-            claimant_arg.pop(None, None)
-            # default values
-            if not claimant_arg["claimType"]:
-                claimant_arg["claimType"] = "Écrite"
-            claimant_arg["hasPetition"] = self.handle_boolean_value(
-                claimant_arg.get("hasPetition", False)
-            )
-            claimant_arg["outOfTime"] = self.handle_boolean_value(
-                claimant_arg.get("outOfTime", False)
-            )
-            claimant_arg["wantDecisionCopy"] = self.handle_boolean_value(
-                claimant_arg.get("wantDecisionCopy", False)
-            )
-            # mappings
-            claimant_arg["personTitle"] = titles_mapping.get(
-                claimant_arg["personTitle"], "notitle"
-            )
-            claimant_arg["country"] = country_mapping.get(
-                claimant_arg["country"], "belgium"
-            )
-            claimant_arg["id"] = site.plone_utils.normalizeString(
-                claimant_arg["name1"] + claimant_arg["name2"] + claimant_arg["society"]
-            )
-            claimant_arg["claimType"] = claim_type_mapping[claimant_arg["claimType"]]
-            count = 0
-            if claimant_arg["id"] in self.context.objectIds():
-                count += 1
-                new_id = claimant_arg["id"] + "-" + str(count)
-                while new_id in self.context.objectIds():
-                    count += 1
-                    new_id = claimant_arg["id"] + "-" + str(count)
-                claimant_arg["id"] = new_id
             # create claimant
             with api.env.adopt_roles(["Manager"]):
                 self.context.invokeFactory("Claimant", **claimant_arg)
@@ -761,12 +792,52 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
                 )
             )
 
-    def handle_boolean_value(self, value):
-        if value == "Vrai" or value is True:
-            return True
-        if value == "Faux" or value is False:
-            return False
-        return False
+    def handle_claimant_arg(self, row, titles_mapping, country_mapping, site, claim_type_mapping):
+        # default values
+        if not row["claimType"]:
+            row["claimType"] = "Écrite"
+
+        try:
+            row["hasPetition"] = handle_boolean_value(
+                row.get("hasPetition", False)
+            )
+        except ValueError as err:
+            raise ValueError(row["name1"], "hasPetition")
+
+        try:
+            row["outOfTime"] = handle_boolean_value(
+                row.get("outOfTime", False)
+            )
+        except ValueError as err:
+            raise ValueError(row["name1"], "outOfTime")
+
+        try:
+            row["wantDecisionCopy"] = handle_boolean_value(
+                row.get("wantDecisionCopy", False)
+            )
+        except ValueError as err:
+            raise ValueError(row["name1"], "wantDecisionCopy")
+
+        # mappings
+        row["personTitle"] = titles_mapping.get(
+            row["personTitle"], "notitle"
+        )
+        row["country"] = country_mapping.get(
+            row["country"], "belgium"
+        )
+        row["id"] = site.plone_utils.normalizeString(
+            row["name1"] + row["name2"] + row["society"]
+        )
+        row["claimType"] = claim_type_mapping[row["claimType"]]
+        count = 0
+        if row["id"] in self.context.objectIds():
+            count += 1
+            new_id = row["id"] + "-" + str(count)
+            while new_id in self.context.objectIds():
+                count += 1
+                new_id = row["id"] + "-" + str(count)
+            row["id"] = new_id
+        return row
 
     def getParcels(self):
         context = aq_inner(self.context)
