@@ -750,9 +750,6 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
                 delimiter=",",
                 quotechar='"',
             )
-            # # todo: PDB to remove before commit
-            # __import__('pdb').set_trace()
-            # reader.next()
         else:
             reader = []
         try:
