@@ -706,6 +706,16 @@ schema = Schema(
             default_output_type="text/x-html-safe",
         ),
         LinesField(
+            name="centrality",
+            widget=MasterMultiSelectWidget(
+                format="checkbox",
+                label=_("urban_label_centrality", default="Centrality"),
+            ),
+            schemata="urban_location",
+            multiValued=1,
+            vocabulary="listCentralities",
+        ),
+        LinesField(
             name="locationMissingParts",
             widget=MultiSelect2Widget(
                 format="checkbox",
@@ -1329,16 +1339,6 @@ schema = Schema(
             default_method="getDefaultText",
             default_content_type="text/html",
             default_output_type="text/x-html-safe",
-        ),
-        LinesField(
-            name="centrality",
-            widget=MasterMultiSelectWidget(
-                format="checkbox",
-                label=_("urban_label_centrality", default="Centrality"),
-            ),
-            schemata="urban_location",
-            multiValued=1,
-            vocabulary="listCentralities",
         ),
         ReferenceField(
             name="rubrics",
