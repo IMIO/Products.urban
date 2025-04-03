@@ -29,6 +29,7 @@ from Products.urban.UrbanConfigurationValue import UrbanConfigurationValue
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.Archetypes.interfaces import IVocabulary
 from Products.urban import UrbanMessage as _
+from Products.urban.utils import WIDGET_DATE_END_YEAR
 from datetime import datetime
 from DateTime import DateTime
 
@@ -96,6 +97,8 @@ schema = Schema(
             widget=DateTimeField._properties["widget"](
                 show_hm=False,
                 format="%d/%m/%Y",
+                starting_year=1930,
+                ending_year=WIDGET_DATE_END_YEAR,
                 label=_("urban_label_startValidity", default="StartValidity"),
             ),
             optional=True,
@@ -105,6 +108,8 @@ schema = Schema(
             widget=DateTimeField._properties["widget"](
                 show_hm=False,
                 format="%d/%m/%Y",
+                starting_year=1930,
+                ending_year=WIDGET_DATE_END_YEAR,
                 label=_("urban_label_endValidity", default="EndValidity"),
             ),
             optional=True,

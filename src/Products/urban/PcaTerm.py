@@ -21,6 +21,7 @@ from Products.urban.UrbanConfigurationValue import UrbanConfigurationValue
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.urban.config import *
+from Products.urban.utils import WIDGET_DATE_END_YEAR
 
 ##code-section module-header #fill in your manual code here
 from zope.i18n import translate as _
@@ -50,8 +51,8 @@ schema = Schema(
             name="decreeDate",
             widget=DateTimeField._properties["widget"](
                 show_hm=False,
-                starting_year=1940,
-                future_years=False,
+                starting_year=1930,
+                ending_year=WIDGET_DATE_END_YEAR,
                 label="Decreedate",
                 label_msgid="urban_label_decreeDate",
                 i18n_domain="urban",
