@@ -1,10 +1,10 @@
-from Products.urban.browser.licence.licenceview import EnvironmentLicenceView
+from Products.urban.browser.licence.licenceview import LicenceView
 from Products.CMFPlone import PloneMessageFactory as _
 
 from plone import api
 
 
-class EnvClassOneView(EnvironmentLicenceView):
+class EnvClassOneView(LicenceView):
     """
     This manage the view of EnvClassOne
     """

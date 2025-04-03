@@ -747,4 +747,13 @@
         profile="Products.urban:default"
         />
 
+    <gs:upgradeStep
+        title="Hide environment tab newly added in some licence configs"
+        description=""
+        source="1161"
+        destination="1162"
+        handler=".update_270.hide_tab_in_licence_config"
+        profile="Products.urban:default"
+        />
+
 </configure>

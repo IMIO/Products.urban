@@ -1,14 +1,13 @@
 # -*- coding: utf-8 -*-
 
 from Products.urban.browser.licence.buildlicenceview import BuildLicenceView
-from Products.urban.browser.licence.licenceview import EnvironmentLicenceView
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import PloneMessageFactory as _
 
 from plone import api
 
 
-class UniqueLicenceView(BuildLicenceView, EnvironmentLicenceView):
+class UniqueLicenceView(BuildLicenceView):
     """
     This manage the view of BuildLicence
     """

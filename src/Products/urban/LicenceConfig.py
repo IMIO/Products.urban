@@ -412,10 +412,11 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin, OrderedContainer):
             "patrimony": "Patrimoine",
             "inspection": "Inspection",
         }
-        minimum_tabs_config = ["description", "analysis", "location", "road"]
+        minimum_tabs_config = ["description", "analysis", "environment", "location", "road"]
         certificatebase_tabs_config = [
             "description",
             "analysis",
+            "environment",
             "location",
             "road",
             "patrimony",
@@ -425,6 +426,7 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin, OrderedContainer):
             "advices",
             "inquiry",
             "analysis",
+            "environment",
             "location",
             "road",
         ]
@@ -433,6 +435,7 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin, OrderedContainer):
             "advices",
             "inquiry",
             "analysis",
+            "environment",
             "location",
             "road",
             "patrimony",
@@ -442,6 +445,7 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin, OrderedContainer):
             "advices",
             "inquiry",
             "analysis",
+            "environment",
             "location",
             "road",
             "habitation",
@@ -452,6 +456,7 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin, OrderedContainer):
             "advices",
             "inquiry",
             "analysis",
+            "environment",
             "location",
             "road",
             "habitation",
@@ -506,16 +511,18 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin, OrderedContainer):
             "inspection",
             "location",
             "patrimony",
+            "environment",
         ]
         patrimonycertificate_tabs_config = [
             "description",
             "analysis",
+            "environment",
             "location",
             "road",
             "patrimony",
         ]
-        ticket_tabs_config = ["description", "inspection", "location", "patrimony"]
-        miscdemand_tabs_config = ["description", "analysis", "location", "road", "patrimony"]
+        ticket_tabs_config = ["description", "inspection", "location", "patrimony", "environment"]
+        miscdemand_tabs_config = ["description", "analysis", "environment", "location", "road", "patrimony"]
         explosivespossession_tabs_config = [
             "description",
             "advices",
