@@ -1,9 +1,9 @@
-from Products.urban.browser.licence.licenceview import EnvironmentLicenceView
+from Products.urban.browser.licence.licenceview import LicenceView
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import PloneMessageFactory as _
 
 
-class EnvClassThreeView(EnvironmentLicenceView):
+class EnvClassThreeView(LicenceView):
     def __init__(self, context, request):
         """ """
 
@@ -19,3 +19,19 @@ class EnvClassThreeView(EnvironmentLicenceView):
 
     def getMacroViewName(self):
         return "envclassthree-macros"
+
+    def getPatrimonyFields(self):
+        return self.getSchemataFields(schemata="urban_patrimony")
+
+    def getRankingOrdinanceLink(self):
+        liendoc = "http://spw.wallonie.be/dgo4/index.php?thema=bc_pat&details=57081-CLT-0239-01"
+        return liendoc
+
+    def getRankingOrdinanceTitle(self):
+        code_dgo4 = "code dgo4"
+        libelle = "libelle"
+        historique_dossier = "historique_dossier"
+        liendoc = "liendoc"
+        return "{} - {} - {} - {}".format(
+            code_dgo4, libelle, historique_dossier, liendoc
+        )

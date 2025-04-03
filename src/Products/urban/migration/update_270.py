@@ -3,6 +3,7 @@
 from Acquisition import aq_parent
 from OFS.interfaces import IOrderedContainer
 from Products.urban import UrbanMessage as _
+from Products.CMFCore.utils import getToolByName
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.migration.utils import refresh_workflow_permissions
 from Products.urban.setuphandlers import createFolderDefaultValues
@@ -381,3 +382,60 @@ def add_new_registry_profil(context):
     registry.records[key] = registry_record
 
     logger.info("migration done!")
+
+
+def hide_patrimony_tab_in_licence_config(context):
+    logger = logging.getLogger("urban: Hiding patrimony tab where newly available")
+    logger.info("starting upgrade steps")
+
+    included = [
+        "preliminarynotice",
+        "envclassone",
+        "envclasstwo",
+        "envclassthree",
+        "envclassbordering",
+        "miscdemand",
+        "projectmeeting",
+        "explosivespossession",
+        "inspection",
+        "ticket",
+    ]
+    portal_urban = getToolByName(context, "portal_urban")
+    for licence_config in portal_urban.objectValues("LicenceConfig"):
+        if licence_config.id in included:
+            # add hidden tab config (unless there is one already)
+            if not [tab for tab in licence_config.tabsConfig if tab["value"] == "patrimony"]:
+                updated_config = licence_config.tabsConfig + (
+                    {"display": "", "display_name": "Patrimoine", "value": "patrimony"},
+                )
+                licence_config.setTabsConfig(updated_config)
+
+    logger.info("upgrade step done!")
+
+
+def hide_tab_in_licence_config(context):
+    logger = logging.getLogger("urban: Hiding environment tab where newly available")
+    logger.info("starting upgrade steps")
+
+    # ignore types that already had the environment tab
+    excluded = [
+        "uniquelicence",
+        "codt_uniquelicence",
+        "codt_integratedlicence",
+        "envclassthree",
+        "envclassone",
+        "envclasstwo",
+        "envclassbordering",
+        "explosivespossession",
+    ]
+    portal_urban = getToolByName(context, "portal_urban")
+    for licence_config in portal_urban.objectValues("LicenceConfig"):
+        if licence_config.id not in excluded:
+            # add hidden tab config (unless there is one already)
+            if not [tab for tab in licence_config.tabsConfig if tab["value"] == "environment"]:
+                updated_config = licence_config.tabsConfig + (
+                    {"display": "", "display_name": "Analyse Environnement", "value": "environment"},
+                )
+                licence_config.setTabsConfig(updated_config)
+
+    logger.info("upgrade step done!")

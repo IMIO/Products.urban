@@ -8,6 +8,36 @@ Changelog
 
 .. towncrier release notes start
 
+2.7.34 (2025-03-27)
+-------------------
+
+Bug fixes:
+
+
+- Fix licence type condition in content rules
+  [jchandelle] (SUP-43534)
+
+
+2.7.33 (2025-03-27)
+-------------------
+
+Bug fixes:
+
+
+- Fix event send mail notification title encoding
+  [jchandelle] (SUP-43533)
+
+
+2.7.32 (2025-03-24)
+-------------------
+
+Bug fixes:
+
+
+- Fix view for fixing task uid and add possiblity to call on licence folder
+  [jchandelle] (SUP-43189)
+
+
 2.7.31 (2025-03-12)
 -------------------
 

@@ -2,41 +2,40 @@
 
 from Acquisition import aq_inner
 from DateTime import DateTime
-from eea.faceted.vocabularies.autocomplete import IAutocompleteSuggest
-from Products.statusmessages.interfaces import IStatusMessage
-from Products.urban import utils
 from Products.Five import BrowserView
+from Products.statusmessages.interfaces import IStatusMessage
+from Products.urban import services
 from Products.urban import UrbanMessage as _
-from Products.urban.browser.mapview import MapView
+from Products.urban import utils
 from Products.urban.browser.licence.licenceview import LicenceView
-from Products.urban.browser.table.urbantable import ApplicantTable
+from Products.urban.browser.mapview import MapView
 from Products.urban.browser.table.urbantable import ApplicantHistoryTable
+from Products.urban.browser.table.urbantable import ApplicantTable
+from Products.urban.browser.table.urbantable import ClaimantsTable
 from Products.urban.browser.table.urbantable import DocumentsTable
 from Products.urban.browser.table.urbantable import EventAttachmentsTable
-from Products.urban.browser.table.urbantable import ClaimantsTable
 from Products.urban.browser.table.urbantable import RecipientsCadastreTable
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.send_mail_action.forms import MAIL_ACTION_KEY
-from Products.urban import services
 from StringIO import StringIO
-
+from eea.faceted.vocabularies.autocomplete import IAutocompleteSuggest
 from plone import api
-from plone.namedfile.field import NamedFile
 from plone.i18n.normalizer.interfaces import IIDNormalizer
-
+from plone.namedfile.field import NamedFile
 from z3c.form import button
-from z3c.form import form, field
-
+from z3c.form import field
+from z3c.form import form
 from zope.annotation import interfaces
 from zope.component import getMultiAdapter
 from zope.component import getUtility
 from zope.interface import Interface
 
-import csv
 import collections
+import csv
 import logging
 import re
 import json
+
 
 logger = logging.getLogger("Urban Event")
 
@@ -58,12 +57,13 @@ claimants_csv_fieldnames = [
     "hasPetition",
     "outOfTime",
     "claimDate",
-    "claimsText",
+    "claimingText",
     "wantDecisionCopy",
 ]
 
-EXCEL_HEADER = "Titre (sel.),Nom,Prénom,Rue,N° de police,Code postal (num.),Localité,Pays (sel.),N° registre national,CAPAKEY,Nature parcelle,Rue parcelle,N° de police parcelle"
+EXCEL_HEADER_RECIPIENT = "Titre (sel.),Nom,Prénom,Rue,N° de police,Code postal (num.),Localité,Pays (sel.),N° registre national,CAPAKEY,Nature parcelle,Rue parcelle,N° de police parcelle"
 CARTO_HEADER = '"CAPAKEY";"nature";"datesituation";"proprio"'
+EXCEL_HEADER_CLAIMANT = '"Titre (sel.)","Nom","Prénom","Société","Rue","N° de police","Code postal (num.)","Localité","Pays (sel.)","E-mail","Téléphone","GSM","N° registre national","Type de réclamation","Pétition","Hors délai","Date de réception","Texte de la réclamation","Souhaite une copie de la décision"'
 
 
 class UrbanEventView(BrowserView):
@@ -306,16 +306,24 @@ class UrbanEventView(BrowserView):
         return _(
             "Mail already send for ${title} by ${user}, ${date}",
             mapping={
-                "title": notif[-1]['title'].lower(),
-                "user": username,
-                "date": notif[-1]["time"].strftime("%d/%m/%Y, %H:%M:%S")
-            }
+                "title": notif[-1]["title"].lower().decode("utf-8"),
+                "user": username.decode("utf-8"),
+                "date": notif[-1]["time"].strftime("%d/%m/%Y, %H:%M:%S"),
+            },
         )
 
 
 class IImportClaimantListingForm(Interface):
 
-    listing_file_claimants = NamedFile(title=_(u"Listing file (claimants)"))
+    listing_file_claimants = NamedFile(
+        title=_(u"Listing file (claimants)"),
+        description=_(
+            u"A specially formatted CSV file must be used for import. "
+            u"The CSV file can be created from the ODT template file "
+            u"(can be downloaded <a href='/++resource++Products.urban/reclamant_reimport.ods'>here</a>) "
+            u"by 'save as' in CSV format"
+        ),
+    )
 
 
 class ImportClaimantListingForm(form.Form):
@@ -362,8 +370,15 @@ class ImportClaimantListingForm(form.Form):
                 mapping={u"name": csv_file.filename},
             )
 
+        error = _(
+            u"The imported file (${name}) couldn't be read properly. Please verify its structure and try again.",
+            mapping={u"name": csv_file.filename},
+        )
+
+        if not csv_file.data.startswith(EXCEL_HEADER_CLAIMANT):
+            return error
+
         try:
-            # warning: extra or missing columns don't generate an error during CSV reading
             reader = csv.DictReader(
                 StringIO(csv_file.data),
                 claimants_csv_fieldnames,
@@ -374,17 +389,57 @@ class ImportClaimantListingForm(form.Form):
                 row for row in reader if row["name1"] or row["name2"] or row["society"]
             ][1:]
         except csv.Error as error:
+            return error
+
+        try:
+            claimant_args = [
+                self.check_claimant_arg(row) for row in claimant_args
+            ]
+        except ValueError as err:
             return _(
-                u"The imported file (${name}) couldn't be read properly. Please verify its structure and try again.",
-                mapping={u"name": csv_file.filename},
+                "Import cancel : error with claimant ${claimant} on value ${value}",
+                mapping={
+                    "claimant": err[0],
+                    "value": err[1]
+                }
             )
 
         return None
 
+    def check_claimant_arg(self, row):
+        hasPetition = row.get("hasPetition", False)
+        outOfTime = row.get("outOfTime", False)
+        wantDecisionCopy = row.get("wantDecisionCopy", False)
+
+        try:
+            handle_boolean_value(hasPetition)
+        except ValueError as err:
+            raise ValueError(row["name1"], "hasPetition")
+
+        try:
+            handle_boolean_value(outOfTime)
+        except ValueError as err:
+            raise ValueError(row["name1"], "outOfTime")
+
+        try:
+            handle_boolean_value(wantDecisionCopy)
+        except ValueError as err:
+            raise ValueError(row["name1"], "wantDecisionCopy")
+        
+        return row
+
 
 class IImportRecipientListingForm(Interface):
 
-    listing_file_recipients = NamedFile(title=_(u"Listing file (recipients)"))
+    listing_file_recipients = NamedFile(
+        title=_(u"Listing file (recipients)"),
+        description=_(
+            u"A specially formatted CSV file must be used for import. "
+            u"The CSV file can be created from the ODT template file "
+            u"(can be downloaded <a href='/++resource++Products.urban/destinaires_reimport.ods'>here</a>) "
+            u"by 'save as' in CSV format"
+        ),
+    )
 
 
 class ImportRecipientListingForm(form.Form):
@@ -623,7 +678,7 @@ class ImportRecipientListingForm(form.Form):
 
         csv_file = data["listing_file_recipients"]
         data = csv_file.data
-        if data.startswith(EXCEL_HEADER):
+        if data.startswith(EXCEL_HEADER_RECIPIENT):
             self.handle_data_from_excel(data)
         elif data.startswith(CARTO_HEADER):
             self.handle_data_from_carto(data)
@@ -634,6 +689,12 @@ class ImportRecipientListingForm(form.Form):
                 type="error",
             )
 
+def handle_boolean_value(value):
+    if value == "Vrai" or value is True:
+        return True
+    if value == "Faux" or value == "" or value is False:
+        return False
+    raise ValueError(value)
 
 class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
     """
@@ -666,6 +727,7 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
 
     def import_claimants_from_csv(self):
         portal_urban = api.portal.get_tool("portal_urban")
+        plone_utils = api.portal.get_tool("plone_utils")
         site = api.portal.get()
 
         titles_mapping = {"": ""}
@@ -697,42 +759,87 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
             reader = []
         try:
             claimant_args = [
-                row for row in reader if row["name1"] or row["name2"] or row["society"]
+                row
+                for row in reader
+                if row["name1"] or row["name2"] or row["society"]
             ][1:]
-        except csv.Error, error:
+        except csv.Error as error:
+            return
+        
+        try:
+            claimant_args = [
+                self.handle_claimant_arg(row, titles_mapping, country_mapping, site, claim_type_mapping)
+                for row in claimant_args
+            ]
+        except ValueError as err:
+            msg = _(
+                "Import cancel : error with claimant ${claimant} on value ${value}",
+                mapping={
+                    "claimant": err[0],
+                    "value": err[1]
+                }
+            )
+            plone_utils.addPortalMessage(msg, type="error")
             return
 
         for claimant_arg in claimant_args:
-            claimant_arg.pop(None, None)
-            # default values
-            if not claimant_arg["claimType"]:
-                claimant_arg["claimType"] = "Écrite"
-            claimant_arg["hasPetition"] = bool(claimant_arg["hasPetition"])
-            claimant_arg["outOfTime"] = bool(claimant_arg["outOfTime"])
-            claimant_arg["wantDecisionCopy"] = bool(claimant_arg["wantDecisionCopy"])
-            # mappings
-            claimant_arg["personTitle"] = titles_mapping[claimant_arg["personTitle"]]
-            claimant_arg["country"] = country_mapping[claimant_arg["country"]]
-            claimant_arg["id"] = site.plone_utils.normalizeString(
-                claimant_arg["name1"] + claimant_arg["name2"] + claimant_arg["society"]
-            )
-            claimant_arg["claimType"] = claim_type_mapping[claimant_arg["claimType"]]
-            count = 0
-            if claimant_arg["id"] in self.context.objectIds():
-                count += 1
-                new_id = claimant_arg["id"] + "-" + str(count)
-                while new_id in self.context.objectIds():
-                    count += 1
-                    new_id = claimant_arg["id"] + "-" + str(count)
-                claimant_arg["id"] = new_id
             # create claimant
             with api.env.adopt_roles(["Manager"]):
                 self.context.invokeFactory("Claimant", **claimant_arg)
-            print "imported claimant {id}, {name} {surname}".format(
-                id=claimant_arg["id"],
-                name=claimant_arg["name1"],
-                surname=claimant_arg["name2"],
+            logger.info(
+                "imported claimant {id}, {name} {surname}".format(
+                    id=claimant_arg["id"],
+                    name=claimant_arg["name1"],
+                    surname=claimant_arg["name2"],
+                )
             )
+
+    def handle_claimant_arg(self, row, titles_mapping, country_mapping, site, claim_type_mapping):
+        # default values
+        if not row["claimType"]:
+            row["claimType"] = "Écrite"
+
+        try:
+            row["hasPetition"] = handle_boolean_value(
+                row.get("hasPetition", False)
+            )
+        except ValueError as err:
+            raise ValueError(row["name1"], "hasPetition")
+
+        try:
+            row["outOfTime"] = handle_boolean_value(
+                row.get("outOfTime", False)
+            )
+        except ValueError as err:
+            raise ValueError(row["name1"], "outOfTime")
+
+        try:
+            row["wantDecisionCopy"] = handle_boolean_value(
+                row.get("wantDecisionCopy", False)
+            )
+        except ValueError as err:
+            raise ValueError(row["name1"], "wantDecisionCopy")
+
+        # mappings
+        row["personTitle"] = titles_mapping.get(
+            row["personTitle"], "notitle"
+        )
+        row["country"] = country_mapping.get(
+            row["country"], "belgium"
+        )
+        row["id"] = site.plone_utils.normalizeString(
+            row["name1"] + row["name2"] + row["society"]
+        )
+        row["claimType"] = claim_type_mapping[row["claimType"]]
+        count = 0
+        if row["id"] in self.context.objectIds():
+            count += 1
+            new_id = row["id"] + "-" + str(count)
+            while new_id in self.context.objectIds():
+                count += 1
+                new_id = row["id"] + "-" + str(count)
+            row["id"] = new_id
+        return row
 
     def getParcels(self):
         context = aq_inner(self.context)
@@ -1160,7 +1267,7 @@ class UrbanEventInquiryView(UrbanEventInquiryBaseView):
                 city = str(owner["city"].encode("utf-8"))
                 street = str(owner["street"].encode("utf-8"))
                 number = str(owner["number"].encode("utf-8"))
-                print name, firstname
+                logger.info(name, firstname)
                 # to avoid having several times the same Recipient (that could for example be on several parcels
                 # we first look in portal_catalog where Recipients are catalogued
                 owner_obj = owner_id and getattr(context, owner_id, None)
@@ -1196,7 +1303,7 @@ class UrbanEventInquiryView(UrbanEventInquiryBaseView):
 
     def getInquiryRadius(self):
         licence = self.context.aq_parent
-        investigation_radius = getattr(licence, 'investigation_radius', None)
+        investigation_radius = getattr(licence, "investigation_radius", None)
 
         if investigation_radius is None:
             return 50
@@ -1207,5 +1314,5 @@ class UrbanEventInquiryView(UrbanEventInquiryBaseView):
             output = int(investigation_radius.split("m")[0])
         except Exception as e:
             output = 50
-        
+
         return output

@@ -86,7 +86,7 @@ class EventTypeAddForm(AddForm):
     form_fields = form.FormFields(IEventTypeCondition)
     label = _(u"Add Event type Condition")
     description = _(
-        u"A Event type condition makes the rule apply "
+        u"An Event type condition makes the rule apply "
         "only if Event type correspond to the one from the context."
     )
     form_name = _(u"Configure element")
@@ -103,7 +103,7 @@ class EventTypeEditForm(EditForm):
     form_fields = form.FormFields(IEventTypeCondition)
     label = _(u"Edit Event type Condition")
     description = _(
-        u"A Event type condition makes the rule apply "
+        u"An Event type condition makes the rule apply "
         "only if Event type correspond to the one from the context."
     )
     form_name = _(u"Configure element")
