@@ -2,6 +2,7 @@
 
 from Acquisition import aq_parent
 from OFS.interfaces import IOrderedContainer
+from Products.CMFCore.utils import getToolByName
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.migration.utils import refresh_workflow_permissions
 from Products.urban.setuphandlers import createFolderDefaultValues
@@ -359,5 +360,34 @@ def fix_external_decision_values(context):
             external_decision = opinion.getField("externalDecision").get(opinion)
             if type(external_decision) is list and len(external_decision) == 1:
                 opinion.setExternalDecision(external_decision[0])
+
+    logger.info("upgrade step done!")
+
+
+def hide_patrimony_tab_in_licence_config(context):
+    logger = logging.getLogger("urban: Hiding patrimony tab where newly available")
+    logger.info("starting upgrade steps")
+
+    included = [
+        "preliminarynotice",
+        "envclassone",
+        "envclasstwo",
+        "envclassthree",
+        "envclassbordering",
+        "miscdemand",
+        "projectmeeting",
+        "explosivespossession",
+        "inspection",
+        "ticket",
+    ]
+    portal_urban = getToolByName(context, "portal_urban")
+    for licence_config in portal_urban.objectValues("LicenceConfig"):
+        if licence_config.id in included:
+            # add hidden tab config (unless there is one already)
+            if not [tab for tab in licence_config.tabsConfig if tab["value"] == "patrimony"]:
+                updated_config = licence_config.tabsConfig + (
+                    {"display": "", "display_name": "Patrimoine", "value": "patrimony"},
+                )
+                licence_config.setTabsConfig(updated_config)
 
     logger.info("upgrade step done!")

@@ -488,6 +488,7 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin, OrderedContainer):
             "environment",
             "location",
             "road",
+            "patrimony",
         ]
         env_inquiry_tabs_config = [
             "description",
@@ -497,8 +498,15 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin, OrderedContainer):
             "environment",
             "location",
             "road",
+            "patrimony",
         ]
-        inspection_tabs_config = ["description", "advices", "inspection", "location"]
+        inspection_tabs_config = [
+            "description",
+            "advices",
+            "inspection",
+            "location",
+            "patrimony",
+        ]
         patrimonycertificate_tabs_config = [
             "description",
             "analysis",
@@ -506,7 +514,15 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin, OrderedContainer):
             "road",
             "patrimony",
         ]
-        ticket_tabs_config = ["description", "inspection", "location"]
+        ticket_tabs_config = ["description", "inspection", "location", "patrimony"]
+        miscdemand_tabs_config = ["description", "analysis", "location", "road", "patrimony"]
+        explosivespossession_tabs_config = [
+            "description",
+            "advices",
+            "inquiry",
+            "environment",
+            "patrimony",
+        ]
 
         types = {
             "buildlicence": buildlicence_tabs_config,
@@ -527,18 +543,16 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin, OrderedContainer):
             "envclassthree": env_advice_tabs_config,
             "envclassone": env_inquiry_tabs_config,
             "envclasstwo": env_inquiry_tabs_config,
-            "explosivespossession": [
-                "description",
-                "advices",
-                "inquiry",
-                "environment",
-            ],
+            "explosivespossession": explosivespossession_tabs_config,
             "envclassbordering": env_inquiry_tabs_config,
             "inspection": inspection_tabs_config,
             "patrimonycertificate": patrimonycertificate_tabs_config,
             "ticket": ticket_tabs_config,
             "roaddecree": buildlicence_tabs_config,
             "division": certificatebase_tabs_config,
+            "miscdemand": miscdemand_tabs_config,
+            "projectmeeting": miscdemand_tabs_config,
+            "preliminarynotice": miscdemand_tabs_config,
         }
         licence_type = self.id
 
