@@ -677,6 +677,12 @@ class IAsyncInquiryRadius(Interface):
         value_type=schema.Int(),
     )
 
+    inquiries_address_to_do = schema.Dict(
+        title=_(u"Planned address"),
+        description=_(u"address planned"),
+        key_type=schema.ASCIILine(),
+        value_type=schema.Int(),
+    )
 
 class IAsyncMailing(Interface):
     """ """
