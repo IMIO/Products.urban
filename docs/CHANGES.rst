@@ -8,6 +8,34 @@ Changelog
 
 .. towncrier release notes start
 
+2.7.35 (2025-04-03)
+-------------------
+
+New features:
+
+
+- Add environment fieldset to every licence type
+  Add habitation fieldset to `MiscDemand`, `PreliminaryNotice` and `ProjectMeeting`
+  [daggelpop] (SUP-33774)
+- Add message explaining how to format CSV for inquiry
+  [jchandelle] (URB-2876)
+- Move centrality in first position in the fieldset
+  [daggelpop] (URB-3017)
+- Add patrimony fieldset to multiple licence types
+  [daggelpop] (URB-3121)
+- Add stringinterp to get foldermanager email
+  [jchandelle] (URB-3283)
+- Add button to inquiry to get neighbors address
+  [jchandelle] (URB-3286)
+
+
+Bug fixes:
+
+
+- Fix handling EnvironmentRubricTerm in import config
+  [jchandelle] (URB-3296)
+
+
 2.7.34 (2025-03-27)
 -------------------
 
