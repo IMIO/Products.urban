@@ -757,12 +757,21 @@
         />
 
     <gs:upgradeStep
-        title="Add new registry record"
+        title="Hide habitation tab newly added in some licence configs"
         description=""
         source="1162"
         destination="1163"
-        handler=".update_270.add_new_registry_profil"
+        handler=".update_270.hide_habitation_tab_in_licence_config"
         profile="Products.urban:default"
         />
 
+    <gs:upgradeStep
+        title="Add new registry record"
+        description=""
+        source="1163"
+        destination="1164"
+        handler=".update_270.add_new_registry_profil"
+        profile="Products.urban:default"
+        />
+  
 </configure>

@@ -397,6 +397,10 @@ msgstr ""
 msgid "Field"
 msgstr ""
 
+#: ../contentrules/stringinterp.py:17
+msgid "Folder Manager E-mail"
+msgstr ""
+
 #: ../browser/templates/searchparcels.pt:171
 msgid "Found parcel(s)"
 msgstr ""
