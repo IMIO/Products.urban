@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 
-from Products.urban.browser.licence.licenceview import EnvironmentLicenceView
+from Products.urban.browser.licence.licenceview import LicenceView
 from Products.CMFPlone import PloneMessageFactory as _
 
 from plone import api
 
 
-class ExplosivesPossessionView(EnvironmentLicenceView):
+class ExplosivesPossessionView(LicenceView):
     def __init__(self, context, request):
         super(ExplosivesPossessionView, self).__init__(context, request)
         self.context = context

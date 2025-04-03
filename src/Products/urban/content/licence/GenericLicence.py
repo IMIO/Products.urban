@@ -54,6 +54,9 @@ from Products.urban.interfaces import IOpinionRequestEvent
 from Products.urban.interfaces import IUrbanEvent
 from Products.urban.utils import setOptionalAttributes
 from Products.urban.utils import get_interface_by_path
+from Products.urban.widget.historizereferencewidget import (
+    HistorizeReferenceBrowserWidget,
+)
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from zope.globalrequest import getRequest
 
@@ -202,6 +205,15 @@ optional_fields = [
     "infrabel",
     "deadEndBuilding",
     "zoning",
+    "rubrics",
+    "rubricsDetails",
+    "minimumLegalConditions",
+    "additionalLegalConditions",
+    "claimsSynthesis",
+    "environmentTechnicalAdviceAfterInquiry",
+    "commentsOnSPWOpinion",
+    "conclusions",
+    "environmentTechnicalRemarks",
 ]
 # /code-section module-header
 
@@ -1328,6 +1340,130 @@ schema = Schema(
             multiValued=1,
             vocabulary="listCentralities",
         ),
+        ReferenceField(
+            name="rubrics",
+            widget=HistorizeReferenceBrowserWidget(
+                allow_search=True,
+                allow_browse=True,
+                force_close_on_insert=True,
+                startup_directory="portal_urban/rubrics",
+                show_indexes=False,
+                wild_card_search=True,
+                restrict_browsing_to_startup_directory=True,
+                base_query="rubrics_base_query",
+                label=_("urban_label_rubrics", default="Rubrics"),
+            ),
+            allowed_types=("EnvironmentRubricTerm",),
+            schemata="urban_environment",
+            multiValued=True,
+            relationship="rubric",
+        ),
+        TextField(
+            name="rubricsDetails",
+            widget=RichWidget(
+                label=_("urban_label_rubricsDetails", default="Rubricsdetails"),
+            ),
+            default_content_type="text/html",
+            allowable_content_types=("text/html",),
+            schemata="urban_environment",
+            default_method="getDefaultText",
+            default_output_type="text/x-html-safe",
+        ),
+        ReferenceField(
+            name="minimumLegalConditions",
+            widget=ReferenceBrowserWidget(
+                label=_(
+                    "urban_label_minimumLegalConditions",
+                    default="Minimumlegalconditions",
+                ),
+            ),
+            schemata="urban_environment",
+            multiValued=True,
+            relationship="minimumconditions",
+        ),
+        ReferenceField(
+            name="additionalLegalConditions",
+            widget=HistorizeReferenceBrowserWidget(
+                allow_browse=True,
+                allow_search=True,
+                default_search_index="Title",
+                startup_directory="portal_urban/exploitationconditions",
+                restrict_browsing_to_startup_directory=True,
+                wild_card_search=True,
+                base_query="legalconditions_base_query",
+                label=_(
+                    "urban_label_additionalLegalConditions",
+                    default="Additionallegalconditions",
+                ),
+            ),
+            allowed_types=("UrbanVocabularyTerm",),
+            schemata="urban_environment",
+            multiValued=True,
+            relationship="additionalconditions",
+        ),
+        TextField(
+            name="claimsSynthesis",
+            allowable_content_types=("text/html",),
+            widget=RichWidget(
+                label=_("urban_label_claimsSynthesis", default="Claimssynthesis"),
+            ),
+            default_content_type="text/html",
+            default_method="getDefaultText",
+            schemata="urban_environment",
+            default_output_type="text/x-html-safe",
+        ),
+        TextField(
+            name="environmentTechnicalAdviceAfterInquiry",
+            allowable_content_types=("text/html",),
+            widget=RichWidget(
+                label=_(
+                    "urban_label_environmentTechnicalAdviceAfterInquiry",
+                    default="Environmenttechnicaladviceafterinquiry",
+                ),
+            ),
+            default_content_type="text/html",
+            default_method="getDefaultText",
+            schemata="urban_environment",
+            default_output_type="text/x-html-safe",
+        ),
+        TextField(
+            name="commentsOnSPWOpinion",
+            allowable_content_types=("text/html",),
+            widget=RichWidget(
+                label=_(
+                    "urban_label_commentsOnSPWOpinion", default="Commentsonspwopinion"
+                ),
+            ),
+            default_content_type="text/html",
+            default_method="getDefaultText",
+            schemata="urban_environment",
+            default_output_type="text/x-html-safe",
+        ),
+        TextField(
+            name="conclusions",
+            allowable_content_types=("text/html",),
+            widget=RichWidget(
+                label=_("urban_label_conclusions", default="Conclusions"),
+            ),
+            default_content_type="text/html",
+            default_method="getDefaultText",
+            schemata="urban_environment",
+            default_output_type="text/x-html-safe",
+        ),
+        TextField(
+            name="environmentTechnicalRemarks",
+            allowable_content_types=("text/html",),
+            widget=RichWidget(
+                label=_(
+                    "urban_label_environmentTechnicalRemarks",
+                    default="Environmenttechnicalremarks",
+                ),
+            ),
+            default_content_type="text/html",
+            default_method="getDefaultText",
+            schemata="urban_environment",
+            default_output_type="text/x-html-safe",
+        ),
     ),
 )
 
@@ -1931,6 +2067,14 @@ class GenericLicence(OrderedBaseFolder, UrbanBase, BrowserDefaultMixin):
         if text_format is True:
             return translate(_("${nbr} days", mapping={"nbr": delay}), context=request)
         return delay
+
+    def rubrics_base_query(self):
+        """to be overriden"""
+        return {"review_state": ["enabled", "private"]}
+
+    def legalconditions_base_query(self):
+        return {"review_state": ["enabled", "private"]}
+
 
 
 registerType(GenericLicence, PROJECTNAME)

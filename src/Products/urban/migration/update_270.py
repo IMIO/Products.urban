@@ -391,3 +391,32 @@ def hide_patrimony_tab_in_licence_config(context):
                 licence_config.setTabsConfig(updated_config)
 
     logger.info("upgrade step done!")
+
+
+def hide_tab_in_licence_config(context):
+    logger = logging.getLogger("urban: Hiding environment tab where newly available")
+    logger.info("starting upgrade steps")
+
+    # ignore types that already had the environment tab
+    excluded = [
+        "uniquelicence",
+        "codt_uniquelicence",
+        "codt_integratedlicence",
+        "envclassthree",
+        "envclassone",
+        "envclasstwo",
+        "envclassbordering",
+        "explosivespossession",
+    ]
+    portal_urban = getToolByName(context, "portal_urban")
+    for licence_config in portal_urban.objectValues("LicenceConfig"):
+        if licence_config.id not in excluded:
+            # add hidden tab config (unless there is one already)
+            if not [tab for tab in licence_config.tabsConfig if tab["value"] == "environment"]:
+                updated_config = licence_config.tabsConfig + (
+                    {"display": "", "display_name": "Analyse Environnement", "value": "environment"},
+                )
+                licence_config.setTabsConfig(updated_config)
+
+    logger.info("upgrade step done!")
+
