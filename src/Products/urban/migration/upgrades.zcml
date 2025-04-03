@@ -765,5 +765,13 @@
         profile="Products.urban:default"
         />
 
-
+    <gs:upgradeStep
+        title="Add new registry record"
+        description=""
+        source="1163"
+        destination="1164"
+        handler=".update_270.add_new_registry_profil"
+        profile="Products.urban:default"
+        />
+  
 </configure>

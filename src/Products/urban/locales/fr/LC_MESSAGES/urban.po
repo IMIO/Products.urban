@@ -221,6 +221,10 @@ msgstr "Conditions sectorielles Eau"
 msgid "CS_folder_title"
 msgstr "Conditions sectorielles"
 
+#: ../browser/urbaneventviews.py:1071
+msgid "Can't find the street : ${street}"
+msgstr "Cette rue est introuvable : ${street}"
+
 #: ../browser/gig_coring_settings.py:75
 #: ../browser/offdays_settings.py:113
 #: ../browser/schedule_settings.py:31

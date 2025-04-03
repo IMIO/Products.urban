@@ -18,18 +18,23 @@ from Products.urban.browser.table.urbantable import RecipientsCadastreTable
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.send_mail_action.forms import MAIL_ACTION_KEY
 from StringIO import StringIO
+from eea.faceted.vocabularies.autocomplete import IAutocompleteSuggest
 from plone import api
+from plone.i18n.normalizer.interfaces import IIDNormalizer
 from plone.namedfile.field import NamedFile
 from z3c.form import button
 from z3c.form import field
 from z3c.form import form
 from zope.annotation import interfaces
+from zope.component import getMultiAdapter
+from zope.component import getUtility
 from zope.interface import Interface
 
 import collections
 import csv
 import logging
 import re
+import json
 
 
 logger = logging.getLogger("Urban Event")
@@ -1037,6 +1042,9 @@ class UrbanEventInquiryView(UrbanEventInquiryBaseView):
         if "find_recipients_cadastre" in self.request.form:
             radius = self.getInquiryRadius()
             return self.getInvestigationPOs(radius)
+        if "find_address_cadastre" in self.request.form:
+            radius = self.getInquiryRadius()
+            return self.get_investigation_adress(radius)
         return self.index()
 
     def renderRecipientsCadastreListing(self):
@@ -1070,6 +1078,142 @@ class UrbanEventInquiryView(UrbanEventInquiryBaseView):
         )
         is_planned = self.context.UID() in planned_inquiries
         return is_planned
+
+    def create_recipient_cadastre(self, location, parcel, street_uid, zip_scope=None):
+        context = aq_inner(self.context)
+        number = location.get("number", "")
+        street_obj = api.content.get(UID=street_uid)
+        street = street_obj.streetName.encode("utf-8")
+        city_obj = street_obj.getCity()
+        city = city_obj.title
+        zipcode = city_obj.zipCode
+        if zip_scope is not None and zipcode not in zip_scope:
+            zip_scope.append(zipcode)
+        normalizer = getUtility(IIDNormalizer)
+        id = normalizer.normalize("{}-{}".format(street, number))
+        if id in context:
+            return zip_scope
+        new_owner_id = context.invokeFactory(
+            "RecipientCadastre",
+            id=id,
+            # keep adr1 and adr2 fields for historical reasons.
+            adr1="{} {}".format(zipcode, city),
+            adr2="{} {}".format(street, number),
+            number=number,
+            street=street,
+            zipcode=zipcode,
+            city=city,
+            capakey=parcel.capakey,
+            parcel_street=parcel.locations
+            and parcel.locations.values()[0]["street_name"]
+            or "",
+            parcel_police_number=parcel.locations
+            and parcel.locations.values()[0]["number"]
+            or "",
+            parcel_nature=", ".join(parcel.natures),
+        )
+        owner_obj = getattr(context, new_owner_id)
+        owner_obj.setTitle("{} {}".format(street, number))
+        return zip_scope
+
+    def get_investigation_adress(self, radius=0, force=False):
+        context = aq_inner(self.context)
+        urban_tool = api.portal.get_tool("portal_urban")
+        recipients = context.getRecipients()
+        if recipients:
+            context.manage_delObjects(
+                [recipient.getId() for recipient in recipients if recipient.Title()]
+            )
+
+        licence = context.aq_inner.aq_parent
+        cadastre = services.cadastre.new_session()
+        neighbour_parcels = cadastre.query_parcels_in_radius(
+            center_parcels=licence.getParcels(), radius=radius
+        )
+
+        if (
+            not force
+            and urban_tool.getAsyncInquiryRadius()
+            and len(neighbour_parcels) > 40
+        ):
+            planned_inquiries = (
+                api.portal.get_registry_record(
+                    "Products.urban.interfaces.IAsyncInquiryRadius.inquiries_address_to_do"
+                )
+                or {}
+            )
+            planned_inquiries[self.context.UID()] = radius
+            api.portal.set_registry_record(
+                "Products.urban.interfaces.IAsyncInquiryRadius.inquiries_address_to_do",
+                planned_inquiries,
+            )
+            return self.request.response.redirect(
+                self.context.absolute_url()
+                + "/#fieldsetlegend-urbaneventinquiry_recipients"
+            )
+
+        errors = []
+        zip_scope = []
+        too_many_result = []
+        cache = {}
+        for parcel in neighbour_parcels:
+            locations = parcel.locations
+            for location in locations.values():
+                address = location.get("street_name", None)
+                number = location.get("number", None)
+                if address is None or address == "" or number is None or number == "":
+                    continue
+                if address in cache:
+                    zip_scope = self.create_recipient_cadastre(
+                        location, parcel, cache[address], zip_scope
+                    )
+                self.request.set("term", address)
+                adapter = getMultiAdapter(
+                    (self.context, self.request),
+                    IAutocompleteSuggest,
+                    name="sreets-autocomplete-suggest",
+                )
+                results = adapter.compute_suggestions()
+                if len(results) == 0:
+                    msg = _(
+                        "Can't find the street : ${street}",
+                        mapping={"street": address},
+                    )
+                    logger.error("Can't find the street : {}".format(address))
+                    IStatusMessage(self.request).addStatusMessage(msg, type="error")
+                    continue
+                if len(results) > 1:
+                    too_many_result.append(
+                        {"results": results, "location": location, "parcel": parcel}
+                    )
+                    continue
+                cache[address] = results[0]["id"]
+                zip_scope = self.create_recipient_cadastre(
+                    location, parcel, results[0]["id"], zip_scope
+                )
+        cadastre.close()
+        self.check_too_many_result(too_many_result, zip_scope)
+        return context.REQUEST.RESPONSE.redirect(
+            context.absolute_url() + "/#fieldsetlegend-urbaneventinquiry_recipients"
+        )
+
+    def check_too_many_result(self, too_many_result, zip_scope):
+        cache = {}
+        for item in too_many_result:
+            street_name = item["location"]["street_name"]
+            if street_name in cache:
+                self.create_recipient_cadastre(
+                    item["location"], item["parcel"], cache[street_name]
+                )
+            for result in item["results"]:
+                street = api.content.get(UID=result["id"])
+                zip_code = street.getCity().zipCode
+                if zip_code in zip_scope:
+                    self.create_recipient_cadastre(
+                        item["location"], item["parcel"], result["id"]
+                    )
+                    cache[street_name] = result["id"]
+                    break
 
     def getInvestigationPOs(self, radius=0, force=False):
         """

@@ -22,6 +22,12 @@ class InquiryRadiusSearch(BrowserView):
             )
             or {}
         )
+        planned_adress_inquiries = (
+            api.portal.get_registry_record(
+                "Products.urban.interfaces.IAsyncInquiryRadius.inquiries_address_to_do"
+            )
+            or {}
+        )
 
         for inquiry_UID in planned_inquiries.keys():
             radius = planned_inquiries.pop(inquiry_UID)
@@ -31,6 +37,17 @@ class InquiryRadiusSearch(BrowserView):
             api.portal.set_registry_record(
                 "Products.urban.interfaces.IAsyncInquiryRadius.inquiries_to_do",
                 planned_inquiries,
+            )
+            transaction.commit()
+
+        for inquiry_UID in planned_adress_inquiries.keys():
+            radius = planned_adress_inquiries.pop(inquiry_UID)
+            inquiry = catalog.unrestrictedSearchResults(UID=inquiry_UID)[0].getObject()
+            inquiry_view = inquiry.restrictedTraverse("@@urbaneventinquiryview")
+            inquiry_view.get_investigation_adress(radius=radius, force=True)
+            api.portal.set_registry_record(
+                "Products.urban.interfaces.IAsyncInquiryRadius.inquiries_address_to_do",
+                planned_adress_inquiries,
             )
             transaction.commit()
 
