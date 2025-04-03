@@ -420,3 +420,25 @@ def hide_tab_in_licence_config(context):
 
     logger.info("upgrade step done!")
 
+
+
+def hide_habitation_tab_in_licence_config(context):
+    logger = logging.getLogger("urban: Hiding habitation tab where newly available")
+    logger.info("starting upgrade steps")
+
+    included = [
+        "miscdemand",
+        "preliminarynotice",
+        "projectmeeting",
+    ]
+    portal_urban = getToolByName(context, "portal_urban")
+    for licence_config in portal_urban.objectValues("LicenceConfig"):
+        if licence_config.id in included:
+            # add hidden tab config (unless there is one already)
+            if not [tab for tab in licence_config.tabsConfig if tab["value"] == "habitation"]:
+                updated_config = licence_config.tabsConfig + (
+                    {"display": "", "display_name": "Logement", "value": "habitation"},
+                )
+                licence_config.setTabsConfig(updated_config)
+
+    logger.info("upgrade step done!")
