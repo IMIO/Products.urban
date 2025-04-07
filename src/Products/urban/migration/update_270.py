@@ -461,3 +461,18 @@ def hide_habitation_tab_in_licence_config(context):
                 licence_config.setTabsConfig(updated_config)
 
     logger.info("upgrade step done!")
+
+
+def change_ticket_workflow_ended_state_out_permission(context):
+    logger = logging.getLogger("urban: Change ticket workflow ended state out permission")
+    logger.info("starting upgrade steps")
+    setup_tool = api.portal.get_tool("portal_setup")
+    setup_tool.runImportStepFromProfile("profile-Products.urban:preinstall", "workflow")
+    portal = api.portal.get()
+    urban_path = "/".join(portal["urban"].getPhysicalPath())
+    refresh_workflow_permissions(
+        "ticket_workflow",
+        folder_path=urban_path,
+        for_states=["ended"]
+    )
+    logger.info("upgrade done!")

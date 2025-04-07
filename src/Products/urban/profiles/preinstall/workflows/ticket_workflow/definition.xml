@@ -519,6 +519,10 @@
    <permission-role>Editor</permission-role>
    <permission-role>Manager</permission-role>
   </permission-map>
+  <permission-map name="Review portal content" acquired="False">
+   <permission-role>Reviewer</permission-role>
+   <permission-role>Manager</permission-role>
+  </permission-map>
   <permission-map name="View" acquired="False">
    <permission-role>Contributor</permission-role>
    <permission-role>Editor</permission-role>
@@ -646,7 +650,7 @@
    after_script="">
   <action url="" icon="" category="workflow">reopen</action>
   <guard>
-    <guard-permission>Modify portal content</guard-permission>
+    <guard-permission>Review portal content</guard-permission>
   </guard>
  </transition>
  <variable variable_id="action" for_catalog="False" for_status="True" update_always="True">
