@@ -56,7 +56,7 @@ class ImportFromNoticeView(BrowserView):
             self.notification_dates.append(notification_date)
         else:
             return
-        if notification["labelType"] != "Nouveau dossier à destination de la commune":
+        if notification["noticeType"]["code"] != "NOUVEAU_DOSSIER":
             return
         detailed_notification = self.notice_service.get_notification(
             notification["noticeId"]
