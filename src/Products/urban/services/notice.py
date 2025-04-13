@@ -2,6 +2,7 @@
 
 from Products.urban.services.base import WebService
 from Products.urban.notice import NoticeNotification
+from Products.urban import UrbanMessage as _
 from plone import api
 
 import requests
@@ -46,7 +47,7 @@ class WebserviceNotice(WebService):
         return requests.post(
             "{0}/{1}".format(self.url, endpoint),
             auth=self._auth,
-            data=data,
+            json=data,
             headers={"Accept": "application/json", "content-type": "application/json"},
         )
 
@@ -65,7 +66,7 @@ class WebserviceNotice(WebService):
         if response.status_code != 200:
             raise ValueError("Unexpected response '{}'".format(response.status_code))
         result = response.json()
-        if result["status"]["value"] != "PROCESSED":
+        if result["status"] != "PROCESSED":
             raise ValueError("Error in response '{}'".format(result["status"]["value"]))
         return result["notices"]["notice"]
 
@@ -81,7 +82,7 @@ class WebserviceNotice(WebService):
         if response.status_code != 200:
             raise ValueError("Unexpected response '{}'".format(response.status_code))
         result = response.json()
-        if result["status"]["value"] != "PROCESSED":
+        if result["status"] != "PROCESSED":
             raise ValueError("Error in response '{}'".format(result["status"]["value"]))
         return NoticeNotification(self, result["notice"])
 
@@ -98,10 +99,7 @@ class WebserviceNotice(WebService):
         response = self._get_notification_document(notification_id, document_id)
         if response.status_code != 200:
             raise ValueError("Unexpected response '{}'".format(response.status_code))
-        result = response.json()
-        if result["status"]["value"] != "PROCESSED":
-            raise ValueError("Error in response '{}'".format(result["status"]["value"]))
-        return result["document"]
+        return response.content
 
     def _post_notification_response(self, notification_id, data):
         """Post a response for a notification using REST API"""
@@ -109,15 +107,51 @@ class WebserviceNotice(WebService):
             "notifications/{notification_id}/responses".format(
                 notification_id=notification_id
             ),
-            json=data,
+            data=data,
         )
+
+    def _handle_error(self, response):
+        default_error = {
+            "error": True,
+            "error_type": "UNEXCEPECTED",
+            "message": _("An unexcepted error occured"),
+        }
+        try:
+            body = response.json()
+        except Exception:
+            return default_error
+        if body.get("status") == u"ERROR" and u"error" in body:
+            error = body["error"]
+            if error["code"]["code"] == u"00006":
+                return {
+                    "error": True,
+                    "error_type": "WRONG_STATUS",
+                    "message": _(
+                        u"Notification ${id} does not have the correct status in Notice",
+                        mapping={"id": error["information"]["informationValue"]},
+                    ),
+                }
+            elif error["code"]["code"] == u"00005":
+                return {
+                    "error": True,
+                    "error_type": "NOT_EXISTING",
+                    "message": _(
+                        u"Notification ${id} does not exist in Notice",
+                        mapping={"id": error["information"]["informationValue"]},
+                    ),
+                }
+        return default_error
 
     def post_notification_response(self, notification_id, data):
         """Post a response for a notification"""
         response = self._post_notification_response(notification_id, data)
         if response.status_code != 200:
-            raise ValueError("Unexpected response '{}'".format(response.status_code))
+            return self._handle_error(response)
         result = response.json()
-        if result["status"]["value"] != "PROCESSED":
-            raise ValueError("Error in response '{}'".format(result["status"]["value"]))
-        return result
+        if result["status"] != "PROCESSED":
+            return {
+                "error": True,
+                "error_type": "UNEXCEPECTED",
+                "message": _("An unexcepted error occured, please try again"),
+            }
+        return {"error": False, "body": result}
