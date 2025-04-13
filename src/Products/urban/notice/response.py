@@ -5,7 +5,10 @@ from Acquisition import aq_parent
 
 
 class NoticeResponse(NoticeElement):
-    _excluded_keys = ("notice_id",)
+    _excluded_keys = (
+        "notice_id",
+        "event",
+    )
 
     def __init__(self, event):
         self.event = event

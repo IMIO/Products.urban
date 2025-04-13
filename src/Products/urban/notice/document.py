@@ -26,13 +26,11 @@ class NoticeDocument(NoticeElement):
 
     @property
     def title(self):
-        if self.document:
-            return self.document["documentData"]["filename"]
+        return self.json["documentData"]["filename"]
 
     @property
     def description(self):
-        if self.document:
-            return self.document["documentData"]["description"]
+        return self.json["documentData"]["description"]
 
     @property
     def document_id(self):
@@ -51,8 +49,8 @@ class NoticeDocument(NoticeElement):
     def file(self):
         if self.document:
             _file = NamedBlobFile(
-                data=b64decode(self.document["content"]["documentContent"]),
-                filename=self.document["documentData"]["filename"].decode("utf8"),
-                contentType=self.document["documentData"]["mimeType"],
+                data=self.document,
+                filename=self.title.decode("utf8"),
+                contentType=self.json["documentData"]["mimeType"],
             )
             return _file.open()
