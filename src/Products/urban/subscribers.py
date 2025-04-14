@@ -2,6 +2,7 @@
 
 from datetime import datetime
 from plone import api
+from Products.CMFCore.utils import getToolByName
 import re
 from DateTime import DateTime
 from zope.lifecycleevent.interfaces import IObjectModifiedEvent
@@ -24,8 +25,8 @@ def post_save_event_parceloutlicence(obj, event):
 
     if not IObjectModifiedEvent.providedBy(event):
         return  
-  
-    if not ICODT_ParcelOutLicence.providedBy(obj.aq_parent):
+    parent_object = obj.aq_parent
+    if not ICODT_ParcelOutLicence.providedBy(parent_object):
         return
     
     is_event_eligible = (obj.getUrbaneventtypes().id == "delivrance-du-permis-octroi-ou-refus-codt" and obj.getDecision() == "favorable")
@@ -34,15 +35,14 @@ def post_save_event_parceloutlicence(obj, event):
         return
 
     site_root = api.portal.get() 
-    site_root_path = "/".join(site_root.getPhysicalPath())  
-    parent_container = api.content.get(path=site_root_path+"/urban/parcellings")
+    parcellings_folder = site_root['urban']['parcellings']
     
-    title = getattr(obj.aq_parent, "title", None)
-    reference_dgatlp = getattr(obj.aq_parent, "referenceDGATLP", None)
-    reference = getattr(obj.aq_parent, "reference", None)
-    label = getattr(obj.aq_parent, "licenceSubject", None)
+    title = getattr(parent_object, "title", None)
+    reference_dgatlp = getattr(parent_object, "referenceDGATLP", None)
+    reference = getattr(parent_object, "reference", None)
+    label = getattr(parent_object, "licenceSubject", None)
     match = re.search(r" - ([^-]+)$", title)
-    
+   
     if match is not None:
         subdivider_name = match.group(1)
     else:
@@ -58,12 +58,15 @@ def post_save_event_parceloutlicence(obj, event):
     if isinstance(authorization_date, DateTime):
         authorization_date = convert_to_europe_brussels(authorization_date)
         
-    found_parcelling = None
-    
-    for obj in parent_container.objectValues():
+    #found_parcelling = None
+    found_parcelling = next((
+        obj for obj in parcellings_folder.objectValues() 
+        if obj.portal_type == "Parcelling" and getattr(obj, "communalReference", None) == reference
+    ), None)
+    """for obj in parcellings_folder.objectValues():
         if obj.portal_type == "Parcelling" and getattr(obj, "communalReference", None) == reference:
             found_parcelling = obj
-            break
+            break"""
     
     if found_parcelling :
         # Update fields
@@ -77,7 +80,7 @@ def post_save_event_parceloutlicence(obj, event):
 
     else:
         api.content.create(
-            container=parent_container,
+            container=parcellings_folder,
             type="Parcelling",  # Type of content to create
             title=title,
             label=label,
