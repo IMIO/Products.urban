@@ -23,8 +23,6 @@ def after_term_deactivate(obj, event):
 
 def post_save_event_parceloutlicence(obj, event):
 
-    if not IObjectModifiedEvent.providedBy(event):
-        return  
     parent_object = obj.aq_parent
     if not ICODT_ParcelOutLicence.providedBy(parent_object):
         return
@@ -58,15 +56,10 @@ def post_save_event_parceloutlicence(obj, event):
     if isinstance(authorization_date, DateTime):
         authorization_date = convert_to_europe_brussels(authorization_date)
         
-    #found_parcelling = None
     found_parcelling = next((
         obj for obj in parcellings_folder.objectValues() 
         if obj.portal_type == "Parcelling" and getattr(obj, "communalReference", None) == reference
     ), None)
-    """for obj in parcellings_folder.objectValues():
-        if obj.portal_type == "Parcelling" and getattr(obj, "communalReference", None) == reference:
-            found_parcelling = obj
-            break"""
     
     if found_parcelling :
         # Update fields
