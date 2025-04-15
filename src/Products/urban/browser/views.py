@@ -16,6 +16,7 @@ import socket
 import urllib
 import urllib2
 import xml.etree.ElementTree as ET
+import os
 
 logger = logging.getLogger("urban: Views")
 
@@ -152,7 +153,19 @@ class ProxyController(BrowserView):
         "cartopro2.wallonie.be",
     ]
 
+    def handle_env(self):
+        env_var = os.environ.get("urban_activate_getProxy", False)
+        if not env_var:
+            return False
+        if env_var.lower() in ["false", "faux", "0", "no", "non", "n"]:
+            return False
+        if env_var.lower() in ["true", "vrai", "1", "yes", "oui", "o"]:
+            return True
+        return False
+
     def getProxy(self):
+        if not self.handle_env():
+            return
         try:
             url = self.request.get("url")
             # infos = urlparse(url)

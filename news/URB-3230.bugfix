@@ -1,2 +1,2 @@
-Fix getProxy security
+Disable getProxy function behind a env var
 [jchandelle]
