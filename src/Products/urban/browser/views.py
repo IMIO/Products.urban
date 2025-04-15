@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-from AccessControl import Unauthorized
-from Acquisition import aq_base
-from Acquisition import aq_inner
+from Products.Five import BrowserView
+from Acquisition import aq_inner, aq_base
 from Products.CMFPlone.utils import safe_hasattr
 from Products.Five import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
@@ -9,15 +8,14 @@ from Products.urban import config
 from Products.urban import services
 from Products.urban.cartography import config as carto_config
 from Products.urban.utils import getMd5Signature
+
 from plone import api
-from urlparse import urlparse
 
 import logging
 import socket
 import urllib
 import urllib2
 import xml.etree.ElementTree as ET
-
 
 logger = logging.getLogger("urban: Views")
 
@@ -147,86 +145,29 @@ class WMC(BrowserView):
 
 
 class ProxyController(BrowserView):
-    # todo check and put correct autorize domain
-    allowed_domains = [
+    urlList = [
         "localhost:8081",
-        "localhost:8082",
-        "localhost:8083",
-        "localhost:8084",
-        "localhost:8085",
-        "localhost:8086",
-        "geoservices.wallonie.be",
-        "ccff02.minfin.fgov.be",
-        "sig.spge.be",
+        "89.16.179.114:8008",
+        "89.16.179.114:5000",
+        "cartopro2.wallonie.be",
     ]
-    # todo check and put correct unautorize ip
-    blocked_networks = [
-        "127.",  # 127.0.0.0/8 (localhost)
-        "10.",  # 10.0.0.0/8 (private network)
-        "192.168.",  # 192.168.0.0/16 (private network)
-        "169.254.",  # 169.254.0.0/16 (link-local)
-        "172.16.",
-        "172.17.",
-        "172.18.",
-        "172.19.",
-        "172.20.",
-        "172.21.",
-        "172.22.",
-        "172.23.",
-        "172.24.",
-        "172.25.",
-        "172.26.",
-        "172.27.",
-        "172.28.",
-        "172.29.",
-        "172.30.",
-        "172.31.",
-    ]
-
-    def is_internal_address(self, host):
-        """Check if the hostname resolves to an internal/private IP."""
-        try:
-            ip = socket.gethostbyname(host)
-            return any(ip.startswith(prefix) for prefix in self.blocked_networks)
-        except Exception:
-            return False  # If we can't resolve the host, assume it's not internal
 
     def getProxy(self):
         try:
             url = self.request.get("url")
-            if not url:
-                return self.request.response.setStatus(400, "Bad Request: Missing URL")
+            # infos = urlparse(url)
+            params = self.request.form
 
-            parsed_url = urlparse(url)
-            # Ensure the domain is in the allowed list
-            if parsed_url.netloc not in self.allowed_domains:
-                logger.error("Blocked access to disallowed domain: %s" % url)
-                raise Unauthorized("Access denied")
-
-            # Prevent internal/private network access
-            if self.is_internal_address(parsed_url.hostname):
-                logger.error("Blocked access to internal IP: %s" % url)
-                raise Unauthorized("Access denied")
-
-            params = self.request.form.copy()
             params.pop("url")
-
             self.request.response.setHeader("content-type", "text/json")
-
             if params:
-                url = "{}?{}".format(url, urllib.urlencode(params))
-
+                url = url + "?%s" % urllib.urlencode(params)
             conn = urllib2.urlopen(url, timeout=6)
             data = conn.read()
             conn.close()
             return data
-
-        except Unauthorized as e:
-            return self.request.response.setStatus(403, "Forbidden: %s" % str(e))
-
-        except Exception as msg:
+        except Exception, msg:
             logger.error("Cannot open url '%s': %s" % (url, msg))
-            return self.request.response.setStatus(500, "Internal Server Error")
 
 
 class testmap(ProxyController):
