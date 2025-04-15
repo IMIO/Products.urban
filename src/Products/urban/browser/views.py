@@ -153,7 +153,7 @@ class ProxyController(BrowserView):
     ]
 
     def handle_env(self):
-        env_var = os.environ.get("urban_activate_getProxy", False)
+        env_var = os.environ.get("URBAN_ACTIVATE_GETPROXY", False)
         if not env_var:
             return False
         if env_var.lower() in ["false", "faux", "0", "no", "non", "n"]:
