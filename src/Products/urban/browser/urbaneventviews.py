@@ -303,11 +303,22 @@ class UrbanEventView(BrowserView):
         username = notif[-1].get("username", None)
         if username is None or username == "":
             username = user
+
+        try:
+            title = notif[-1]["title"].lower().decode("utf-8")
+        except UnicodeEncodeError:
+            title = notif[-1]["title"].lower().encode("utf-8").decode("utf-8")
+
+        try:
+            username = username.decode("utf-8")
+        except UnicodeEncodeError:
+            username = username.encode("utf-8").decode("utf-8")
+
         return _(
             "Mail already send for ${title} by ${user}, ${date}",
             mapping={
-                "title": notif[-1]["title"].lower().decode("utf-8"),
-                "user": username.decode("utf-8"),
+                "title": title,
+                "user": username,
                 "date": notif[-1]["time"].strftime("%d/%m/%Y, %H:%M:%S"),
             },
         )
