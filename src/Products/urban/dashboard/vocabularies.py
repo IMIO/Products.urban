@@ -124,7 +124,7 @@ class DashboardCollections(CachedCollectionVocabulary):
             for t in terms
             if (
                 t.value.split("/")[-1] in self.get_collection_ids(context)
-                and self.check_display(t.token)
+                and DashboardCollections.check_display(t.token)
             )
         ]
         return SimpleVocabulary(filtered_terms)
@@ -147,8 +147,9 @@ class DashboardCollections(CachedCollectionVocabulary):
         """Format a UrbanType to the collection id"""
         return "collection_{0}".format(type.lower())
 
+    @staticmethod
     @ram.cache(cache_key_5min)
-    def check_display(self, uid):
+    def check_display(uid):
         collection = api.content.get(UID=uid)
         licences_folder = aq_parent(collection)
         getRawExcludeFromNav = getattr(licences_folder, "getRawExcludeFromNav", None)
