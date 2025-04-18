@@ -137,7 +137,7 @@ class DashboardCollections(ConditionAwareCollectionVocabulary):
             for t in terms
             if (
                 t.value.id in self.get_collection_ids(context)
-                and self.check_display(t.token)
+                and DashboardCollections.check_display(t.token)
             )
         ]
         return SimpleVocabulary(filtered_terms)
@@ -160,8 +160,9 @@ class DashboardCollections(ConditionAwareCollectionVocabulary):
         """Format a UrbanType to the collection id"""
         return "collection_{0}".format(type.lower())
 
+    @staticmethod
     @ram.cache(cache_key_5min)
-    def check_display(self, uid):
+    def check_display(uid):
         folder = api.content.get(UID=uid)
         parent = aq_parent(folder)
         getRawExcludeFromNav = getattr(parent, "getRawExcludeFromNav", None)
