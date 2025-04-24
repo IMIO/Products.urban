@@ -415,6 +415,9 @@ msgstr ""
 msgid "inspection_urbanconfig_title"
 msgstr ""
 
+msgid "emptybuilding_urbanconfig_title"
+msgstr ""
+
 msgid "inspectioncontexts_folder_title"
 msgstr ""
 

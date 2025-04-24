@@ -1525,6 +1525,9 @@ msgstr ""
 msgid "explosivespossessions"
 msgstr ""
 
+msgid "EmptyBuilding"
+msgstr ""
+
 msgid "externaldecisions_folder_title"
 msgstr ""
 

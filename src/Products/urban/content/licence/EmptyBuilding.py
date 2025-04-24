@@ -16,7 +16,7 @@ EmptyBuilding_schema = (
     BaseFolderSchema.copy()
     + getattr(GenericLicence, "schema", Schema(())).copy()
     + getattr(Inspection, "schema", Schema(())).copy()
-    + schema.copy()
+    # + schema.copy()
 )
 
 class EmptyBuilding(Inspection):

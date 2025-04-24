@@ -206,6 +206,9 @@
 <type type_id="Inspection">
   <bound-workflow workflow_id="inspection_workflow" />
 </type>
+<type type_id="EmptyBuilding">
+  <bound-workflow workflow_id="inspection_workflow" />
+</type>
 <type type_id="Layer">
   <bound-workflow workflow_id="" />
 </type>
