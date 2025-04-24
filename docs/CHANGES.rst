@@ -8,6 +8,18 @@ Changelog
 
 .. towncrier release notes start
 
+2.7.36 (2025-04-24)
+-------------------
+
+Bug fixes:
+
+
+- Fix logging syntax error
+  [jchandelle] (SUP-44123)
+- Disable getProxy function behind a env var
+  [jchandelle] (URB-3230)
+
+
 2.7.35 (2025-04-03)
 -------------------
 
