@@ -1267,11 +1267,12 @@ class UrbanEventInquiryView(UrbanEventInquiryBaseView):
                 city = str(owner["city"].encode("utf-8"))
                 street = str(owner["street"].encode("utf-8"))
                 number = str(owner["number"].encode("utf-8"))
-                logger.info(name, firstname)
+
                 # to avoid having several times the same Recipient (that could for example be on several parcels
                 # we first look in portal_catalog where Recipients are catalogued
                 owner_obj = owner_id and getattr(context, owner_id, None)
                 if owner_id and not owner_obj:
+                    logger.info("Import owner {}{}".format(name, firstname))
                     new_owner_id = context.invokeFactory(
                         "RecipientCadastre",
                         id=owner_id,
