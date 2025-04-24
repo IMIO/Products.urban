@@ -773,5 +773,14 @@
         handler=".update_270.add_new_registry_profil"
         profile="Products.urban:default"
         />
+
+    <gs:upgradeStep
+        title="Move up 'en attente PM' schedule task config"
+        description=""
+        source="1164"
+        destination="1165"
+        handler=".update_270.move_up_schedule_task_config"
+        profile="Products.urban:default"
+        />
   
 </configure>
