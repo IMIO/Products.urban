@@ -2,6 +2,7 @@
 
 from Acquisition import aq_inner
 from DateTime import DateTime
+from Products.CMFPlone.utils import safe_unicode
 from Products.Five import BrowserView
 from Products.statusmessages.interfaces import IStatusMessage
 from Products.urban import services
@@ -303,11 +304,12 @@ class UrbanEventView(BrowserView):
         username = notif[-1].get("username", None)
         if username is None or username == "":
             username = user
+
         return _(
             "Mail already send for ${title} by ${user}, ${date}",
             mapping={
-                "title": notif[-1]["title"].lower().decode("utf-8"),
-                "user": username.decode("utf-8"),
+                "title": safe_unicode(notif[-1]["title"].lower()),
+                "user": safe_unicode(username),
                 "date": notif[-1]["time"].strftime("%d/%m/%Y, %H:%M:%S"),
             },
         )
