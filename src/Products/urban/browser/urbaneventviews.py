@@ -2,6 +2,7 @@
 
 from Acquisition import aq_inner
 from DateTime import DateTime
+from Products.CMFPlone.utils import safe_unicode
 from Products.Five import BrowserView
 from Products.statusmessages.interfaces import IStatusMessage
 from Products.urban import services
@@ -29,7 +30,6 @@ from zope.annotation import interfaces
 from zope.component import getMultiAdapter
 from zope.component import getUtility
 from zope.interface import Interface
-from Products.CMFPlone.utils import safe_unicode
 
 import collections
 import csv
