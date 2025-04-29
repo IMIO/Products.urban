@@ -2,10 +2,10 @@
 
 from Acquisition import aq_inner
 from DateTime import DateTime
+from Products.CMFPlone.utils import safe_unicode
 from Products.statusmessages.interfaces import IStatusMessage
 from Products.urban import utils
 from Products.Five import BrowserView
-from Products.CMFPlone.utils import safe_unicode
 from Products.urban import UrbanMessage as _
 from Products.urban.browser.mapview import MapView
 from Products.urban.browser.licence.licenceview import LicenceView
