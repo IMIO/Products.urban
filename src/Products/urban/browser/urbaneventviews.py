@@ -5,6 +5,7 @@ from DateTime import DateTime
 from Products.statusmessages.interfaces import IStatusMessage
 from Products.urban import utils
 from Products.Five import BrowserView
+from Products.CMFPlone.utils import safe_unicode
 from Products.urban import UrbanMessage as _
 from Products.urban.browser.mapview import MapView
 from Products.urban.browser.licence.licenceview import LicenceView
@@ -257,21 +258,11 @@ class UrbanEventView(BrowserView):
         if username is None or username == "":
             username = user
 
-        try:
-            title = notif[-1]["title"].lower().decode("utf-8")
-        except UnicodeEncodeError:
-            title = notif[-1]["title"].lower().encode("utf-8").decode("utf-8")
-
-        try:
-            username = username.decode("utf-8")
-        except UnicodeEncodeError:
-            username = username.encode("utf-8").decode("utf-8")
-
         return _(
             "Mail already send for ${title} by ${user}, ${date}",
             mapping={
-                "title": title,
-                "user": username,
+                "title": safe_unicode(notif[-1]["title"].lower()),
+                "user": safe_unicode(username),
                 "date": notif[-1]["time"].strftime("%d/%m/%Y, %H:%M:%S")
             }
         )
