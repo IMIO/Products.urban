@@ -32,7 +32,7 @@ from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import (
 )
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 
-optional_fields = ["architects","notaries"]
+optional_fields = ["architects"]
 ##/code-section module-header
 
 schema = Schema(
@@ -58,7 +58,7 @@ schema = Schema(
             allowed_types="Architect",
         ),
          ReferenceField(
-            name="noariess",
+            name="notaries",
             widget=ReferenceBrowserWidget(
                 allow_search=True,
                 only_for_review_states="enabled",
@@ -68,7 +68,7 @@ schema = Schema(
                 restrict_browsing_to_startup_directory=True,
                 wild_card_search=True,
                 show_index_selector=True,
-                label=_("urban_label_notariess", default="Notaries"),
+                label=_("urban_label_notaries", default="Notaire(s)"),
                 popup_name="contact_reference_popup",
             ),
             required=False,
