@@ -12,19 +12,25 @@
        <form action="@@fix-task-uid-error" method="post">
         <ul>
 
-         <li tal:repeat="task view/get_tasks">
-           <label tal:attributes="for python:'{}-new_uid'.format(task.UID())" ><span tal:content="task/title">Title</span>
-           (<span tal:content="python:'/'.join(task.getPhysicalPath())">id</span>)
-           Current task_config_UID: <span tal:content="task/task_config_UID">current UID</span></label>
+         <li tal:repeat="task python: view.get_tasks().items()">
+          <tal:define define="
+            task_value python: task[1];
+            form_id python: '-'.join(task_value['UIDs']);
+            display_id python: ', '.join(task_value['UIDs']);
+          ">
+            <label tal:attributes="for form_id" ><span tal:content="task_value/title">Title</span>
+            (<span tal:content="python: task[0]">id</span>)
+            Current task_config_UID: <span tal:content="task_value/current_uid">current UID</span></label>
 
-           <div class="field">
-              <label tal:attributes="for python:'{}-new_uid'.format(task.UID())">New task_config_UID</label>
-              <div class="widget">
-                <input type="text" value=""
-                tal:attributes="id python:'{}-new_uid'.format(task.UID());
-                                name python:'{}-new_uid'.format(task.UID());">
+            <div class="field">
+                <label tal:attributes="for form_id">New task_config_UID</label>
+                <div class="widget">
+                  <input type="text" value=""
+                  tal:attributes="id form_id;
+                                  name form_id;">
+                </div>
               </div>
-            </div>
+          </tal:define>
         </li>
         </ul>
         

@@ -8,6 +8,86 @@ Changelog
 
 .. towncrier release notes start
 
+2.7.37 (2025-04-29)
+-------------------
+
+Bug fixes:
+
+
+- Fix encoding in mail send notification
+  [jchandelle] (SUP-43917)
+
+
+2.7.36 (2025-04-24)
+-------------------
+
+Bug fixes:
+
+
+- Fix logging syntax error
+  [jchandelle] (SUP-44123)
+- Disable getProxy function behind a env var
+  [jchandelle] (URB-3230)
+
+
+2.7.35 (2025-04-03)
+-------------------
+
+New features:
+
+
+- Add environment fieldset to every licence type
+  Add habitation fieldset to `MiscDemand`, `PreliminaryNotice` and `ProjectMeeting`
+  [daggelpop] (SUP-33774)
+- Add message explaining how to format CSV for inquiry
+  [jchandelle] (URB-2876)
+- Move centrality in first position in the fieldset
+  [daggelpop] (URB-3017)
+- Add patrimony fieldset to multiple licence types
+  [daggelpop] (URB-3121)
+- Add stringinterp to get foldermanager email
+  [jchandelle] (URB-3283)
+- Add button to inquiry to get neighbors address
+  [jchandelle] (URB-3286)
+
+
+Bug fixes:
+
+
+- Fix handling EnvironmentRubricTerm in import config
+  [jchandelle] (URB-3296)
+
+
+2.7.34 (2025-03-27)
+-------------------
+
+Bug fixes:
+
+
+- Fix licence type condition in content rules
+  [jchandelle] (SUP-43534)
+
+
+2.7.33 (2025-03-27)
+-------------------
+
+Bug fixes:
+
+
+- Fix event send mail notification title encoding
+  [jchandelle] (SUP-43533)
+
+
+2.7.32 (2025-03-24)
+-------------------
+
+Bug fixes:
+
+
+- Fix view for fixing task uid and add possiblity to call on licence folder
+  [jchandelle] (SUP-43189)
+
+
 2.7.31 (2025-03-12)
 -------------------
 

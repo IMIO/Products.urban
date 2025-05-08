@@ -15,7 +15,7 @@ msgstr ""
 "Domain: urban\n"
 "X-is-fallback-for: fr-fr fr-be fr-ca\n"
 
-#: ../send_mail_action/forms.py:42
+#: ../send_mail_action/forms.py:53
 msgid " and ${last_rule}"
 msgstr " et ${last_rule}"
 
@@ -68,6 +68,14 @@ msgstr "Une condition de type d'événement rend la règle applicable uniquement
 msgid "A opinion to ask condition makes the rule apply only when one of the Opinion to ask slelected correspond to the one of the context"
 msgstr "Une condition d'opinion à demander rend la règle applicable uniquement lorsqu'une des opinions à demander sélectionnées correspond à celle du contexte."
 
+#: ../browser/urbaneventviews.py:431
+msgid "A specially formatted CSV file must be used for import. The CSV file can be created from the ODT template file (can be downloaded <a href='/++resource++Products.urban/destinaires_reimport.ods'>here</a>) by 'save as' in CSV format"
+msgstr "Un fichier CSV spécialement formaté doit être utilisé pour l'importation. Le fichier CSV peut être créé à partir du fichier modèle ODT (téléchargeable <a href='/++resource++Products.urban/destinaires_reimport.ods'>ici</a>) en l'enregistrant sous le format CSV"
+
+#: ../browser/urbaneventviews.py:315
+msgid "A specially formatted CSV file must be used for import. The CSV file can be created from the ODT template file (can be downloaded <a href='/++resource++Products.urban/reclamant_reimport.ods'>here</a>) by 'save as' in CSV format"
+msgstr "Un fichier CSV spécialement formaté doit être utilisé pour l'importation. Le fichier CSV peut être créé à partir du fichier modèle ODT (téléchargeable <a href='/++resource++Products.urban/reclamant_reimport.ods'>ici</a>) en l'enregistrant sous le format CSV"
+
 #: ../browser/licence/templates/licenceview.pt:31
 #: ../browser/templates/urbaneventannouncementview.pt:35
 #: ../browser/templates/urbaneventinquiryview.pt:34
@@ -82,11 +90,11 @@ msgstr "Valeur actuelle"
 msgid "Add Category Switch Portlet"
 msgstr "Ajouter un portlet de changement de catégorie"
 
-#: ../contentrules/event_type.py:69
+#: ../contentrules/event_type.py:87
 msgid "Add Event type Condition"
 msgstr "Ajouter une condition de type d'événement"
 
-#: ../contentrules/opinions.py:76
+#: ../contentrules/opinions.py:78
 msgid "Add Opinion to ask Condition"
 msgstr "Ajouter une condition de demande d'avis"
 
@@ -115,7 +123,10 @@ msgstr "Ajouter tous les avis"
 msgid "Add an event"
 msgstr "Ajouter un événement"
 
-#: ../browser/templates/urbaneventinquiryview.pt:200
+#: ../contentrules/licence_type.py:86
+msgid "Add event's parent licence types condition"
+msgstr "Ajouter la condition des types de permis parentes de l'événement"
+
 msgid "Add recipientcadastre manually"
 msgstr "Ajouter un propriétaire"
 
@@ -131,6 +142,30 @@ msgstr "Tous"
 #: ../docgen/UrbanTemplate.py:28
 msgid "Allowed portal types"
 msgstr "Type de contenus autorisés"
+
+#: ../contentrules/event_type.py:88
+msgid "An Event type condition makes the rule apply only if Event type correspond to the one from the context."
+msgstr "Une condition de type d'événement fait que la règle s'applique uniquement si le type d'événement correspond à celui du contexte."
+
+#: ../contentrules/licence_type.py:87
+msgid "An event's parent licence type condition causes the rule to apply only when one of the selected event's parent licence types matches that of the parent event."
+msgstr "La condition de type de permis parent d'un événement entraîne l'application de la règle uniquement lorsque l'un des types de permis parent de l'événement sélectionné correspond à celui de l'événement parent."
+
+#: ../contentrules/opinions.py:79
+msgid "An opinion to ask condition makes the rule apply only when one of the Opinion to ask selected correspond to the one of the context."
+msgstr "Une condition de demande d'avis fait que la règle s'applique uniquement lorsque l'une des demande d'avis sélectionnés correspond à celle du contexte."
+
+#: ../contentrules/configure.zcml:99
+msgid "Apply only when one of the Opinion to ask selected corresponds to the one of the context"
+msgstr "Appliquer uniquement lorsque l'une des demande d'avis sélectionnée correspond à celle du contexte"
+
+#: ../contentrules/configure.zcml:129
+msgid "Apply only when one of the licence type selected correspond to the one of the event parent"
+msgstr "S'applique uniquement lorsque l'un des types de permis sélectionnés correspond à celui du parent de l'événement"
+
+#: ../contentrules/configure.zcml:68
+msgid "Apply only when the Event Type corresponds to the one of the context"
+msgstr "Appliquer uniquement lorsque le type d'événement correspond à celui du contexte"
 
 msgid "Article127"
 msgstr "Article 127"
@@ -186,6 +221,10 @@ msgstr "Conditions sectorielles Eau"
 msgid "CS_folder_title"
 msgstr "Conditions sectorielles"
 
+#: ../browser/urbaneventviews.py:1071
+msgid "Can't find the street : ${street}"
+msgstr "Cette rue est introuvable : ${street}"
+
 #: ../browser/gig_coring_settings.py:75
 #: ../browser/offdays_settings.py:113
 #: ../browser/schedule_settings.py:31
@@ -210,8 +249,9 @@ msgstr "Vérifier les parcelles"
 msgid "Comment - {0}"
 msgstr "Commentaire - {0}"
 
-#: ../contentrules/event_type.py:74
-#: ../contentrules/opinions.py:81
+#: ../contentrules/event_type.py:92
+#: ../contentrules/licence_type.py:91
+#: ../contentrules/opinions.py:83
 msgid "Configure element"
 msgstr "Configurer l'élément"
 
@@ -223,7 +263,7 @@ msgstr "Créer comme réclamant"
 msgid "Coring"
 msgstr "Lien GIG"
 
-#: ../browser/urbaneventviews.py:562
+#: ../browser/urbaneventviews.py:649
 msgid "Couldn't import this(these) owner(s): ${owners}"
 msgstr "Impossible d'importer ce(s) propriétaire(s): ${owners}"
 
@@ -269,11 +309,11 @@ msgstr "Créer un nouveau permis en copiant les données."
 msgid "Edit Category Switch Portlet"
 msgstr "Modifier le portlet de changement de catégorie"
 
-#: ../contentrules/event_type.py:86
+#: ../contentrules/event_type.py:104
 msgid "Edit Event type Condition"
 msgstr "Modifier la condition de type d'événement"
 
-#: ../contentrules/opinions.py:93
+#: ../contentrules/opinions.py:95
 msgid "Edit Opinion to ask Condition"
 msgstr "Modifier la condition de demande d'avis"
 
@@ -294,6 +334,10 @@ msgstr "Modifier le portlet d'outils iA.Urban"
 #: ../browser/schedule_settings.py:33
 msgid "Edit cancelled"
 msgstr "Edition annulée"
+
+#: ../contentrules/licence_type.py:103
+msgid "Edit event's parent licence types condition"
+msgstr "Modifier la condition des types de permis parent de l'événement"
 
 #: ../profiles/default/actions.xml
 msgid "Emails"
@@ -316,13 +360,19 @@ msgstr "Déclaration environnementale"
 msgid "EnvClassTwo"
 msgstr "Permis d'environnement classe 2"
 
-#: ../contentrules/mail_with_attachment.py:82
+#: ../contentrules/mail_with_attachment.py:90
 msgid "Error sending email from content rule. You must provide a source address for mail actions or enter an email in the portal properties"
 msgstr "Erreur lors de l'envoi de l'e-mail depuis la règle de contenu. Vous devez fournir une adresse source pour les actions par e-mail ou entrer une adresse e-mail dans les propriétés du portail."
 
-#: ../contentrules/event_type.py:24
+#: ../contentrules/configure.zcml:68
+#: ../contentrules/event_type.py:26
 msgid "Event Type"
 msgstr "Type d'événement"
+
+#: ../contentrules/configure.zcml:129
+#: ../contentrules/licence_type.py:26
+msgid "Event's parent licence types"
+msgstr "Types de permis parent de l'événement"
 
 #: ../browser/licence/templates/licencetabsmacros.pt:509
 msgid "Events"
@@ -342,6 +392,10 @@ msgstr "Profil d'extention pour iA.Urban."
 #: ../browser/templates/coring_update.pt:16
 msgid "Field"
 msgstr "Champ"
+
+#: ../contentrules/stringinterp.py:17
+msgid "Folder Manager E-mail"
+msgstr "L'e-mail de l'agent traitant"
 
 #: ../browser/templates/searchparcels.pt:171
 msgid "Found parcel(s)"
@@ -620,9 +674,13 @@ msgstr "Fin des travaux"
 msgid "ImpactStudy event type marker interface"
 msgstr "Étude d'incidence"
 
-#: ../browser/urbaneventviews.py:294
+#: ../browser/urbaneventviews.py:330
 msgid "Import"
 msgstr "Import"
+
+#: ../browser/urbaneventviews.py:394
+msgid "Import cancel : error with claimant ${claimant} on value ${value}"
+msgstr "Annulation d'importation : erreur avec le demandeur ${claimant} sur la valeur ${value}"
 
 msgid "Inspection"
 msgstr "Inspection"
@@ -634,19 +692,19 @@ msgstr "Permis intégré"
 msgid "Internal opinion services"
 msgstr "Avis de services internes à la ville"
 
-#: ../send_mail_action/forms.py:19
+#: ../send_mail_action/forms.py:26
 msgid "Licence Files"
 msgstr "Fichiers du permis"
 
-#: ../browser/urbaneventviews.py:285
+#: ../browser/urbaneventviews.py:314
 msgid "Listing file (claimants)"
 msgstr "Importer un fichier de réclamants (csv)"
 
-#: ../browser/urbaneventviews.py:354
+#: ../browser/urbaneventviews.py:430
 msgid "Listing file (recipients)"
 msgstr "Importer un fichier de destinataires (csv)"
 
-#: ../browser/urbaneventviews.py:297
+#: ../browser/urbaneventviews.py:301
 msgid "Mail already send for ${title} by ${user}, ${date}"
 msgstr "E-mail déjà envoyé pour ${title} par ${user}, le ${date}"
 
@@ -710,6 +768,7 @@ msgstr "Jours de suspension"
 msgid "Off days period"
 msgstr "Périodes de suspension"
 
+#: ../contentrules/configure.zcml:99
 #: ../contentrules/opinions.py:26
 msgid "Opinion to ask"
 msgstr "Avis à demander"
@@ -789,9 +848,9 @@ msgstr "Échéancier par procédure"
 msgid "Search parcel(s)"
 msgstr "Chercher des références cadastrales."
 
-#: ../send_mail_action/forms.py:20
-msgid "Select all files from this event or the parent licence you whant to send"
-msgstr "Sélectionnez tous les fichiers de cet évènement ou du permis que vous voulez envoyer."
+#: ../send_mail_action/forms.py:27
+msgid "Select all files from this event or the parent licence you want to send."
+msgstr "Sélectionnez tous les fichiers de cet événement ou du permis parent que vous souhaitez envoyer."
 
 #: ../docgen/UrbanTemplate.py:29
 msgid "Select for which content types the template will be available."
@@ -801,9 +860,17 @@ msgstr "Sélectionner les types de contenues autorisés pour ce modèle"
 msgid "Select to list"
 msgstr "Sélectionner pour lister"
 
-#: ../send_mail_action/forms.py:37
+#: ../send_mail_action/forms.py:58
 msgid "Send"
 msgstr "Envoyer"
+
+#: ../contentrules/configure.zcml:36
+msgid "Send an email with attachments on the triggering object"
+msgstr "Envoyer un e-mail avec des pièces jointes sur l'objet déclencheur"
+
+#: ../contentrules/configure.zcml:36
+msgid "Send email with attachment"
+msgstr "Envoyer un e-mail avec pièce jointe"
 
 #: ../profiles/default/actions.xml
 msgid "Send mail"
@@ -838,7 +905,7 @@ msgstr "Valider"
 msgid "Suspension period end date"
 msgstr "Date de fin"
 
-#: ../browser/urbaneventviews.py:719
+#: ../browser/urbaneventviews.py:976
 msgid "Suspension period from to: please check the end date"
 msgstr "Période de suspension du ${from} au ${to}: CORRIGEZ LA DATE DE FIN DE PUBLICITE."
 
@@ -855,11 +922,11 @@ msgstr "Onglets à copier"
 msgid "Tests Extension profile for urban."
 msgstr "Profil d'extension de tests pour iA.Urban."
 
-#: ../browser/urbaneventviews.py:405
+#: ../browser/urbaneventviews.py:558
 msgid "The CSV file couldn't be read properly. Please verify its structure and try again."
 msgstr "Le fichier CSV n'a pas pu être lu correctement. Veuillez vérifier son contenu et réessayer."
 
-#: ../browser/urbaneventviews.py:706
+#: ../browser/urbaneventviews.py:963
 msgid "The claimants import will be ready tomorrow!"
 msgstr "L'import des réclamants a bien été enregistré et sera éxécuté cette nuit"
 
@@ -867,27 +934,27 @@ msgstr "L'import des réclamants a bien été enregistré et sera éxécuté cet
 msgid "The field does not exist !!!"
 msgstr "Le champ n'existe pas."
 
-#: ../browser/urbaneventviews.py:344
+#: ../browser/urbaneventviews.py:368
 msgid "The imported file (${name}) couldn't be read properly. Please verify its structure and try again."
 msgstr "Le fichier importé (${name}) n'a pas pu être lu correctement. Veuillez vérifier sa structure et réessayer."
 
-#: ../browser/urbaneventviews.py:327
+#: ../browser/urbaneventviews.py:363
 msgid "The imported file (${name}) doesn't appear to be a CSV file."
 msgstr "Le fichier importé (${name}) ne semble pas être un fichier CSV."
 
-#: ../browser/urbaneventviews.py:67
+#: ../browser/urbaneventviews.py:75
 msgid "The mailings will be ready tomorrow!"
 msgstr "Le publipostage a bien été enregistré et sera éxécuté cette nuit"
 
-#: ../browser/urbaneventviews.py:755
+#: ../browser/urbaneventviews.py:1012
 msgid "The parcel radius search will be ready tomorrow!"
 msgstr "La recherche des propriétaires concernés par le rayon de cette enquête a bien été enregistrée et sera éxécutée cette nuit."
 
-#: ../browser/urbaneventviews.py:748
+#: ../browser/urbaneventviews.py:1005
 msgid "There are parcel owners without any address found! Desactivate them!"
 msgstr "Il y a des propriétaires de parcelle sans adresse trouvée ! Désactivez-les !"
 
-#: ../browser/urbaneventviews.py:699
+#: ../browser/urbaneventviews.py:956
 msgid "This UrbanEventInquiry is not linked to an existing Inquiry !  Define a new inquiry on the licence !"
 msgstr "Cette UrbanEventInquiry n'est pas liée à une demande existante ! Définissez une nouvelle demande sur la licence !"
 
@@ -1363,12 +1430,12 @@ msgid "divisions"
 msgstr "Divisions"
 
 #. Default: "Some national registry numbers already exist in this list; please remove them from the CSV and try again.\n${ids}"
-#: ../browser/urbaneventviews.py:441
+#: ../browser/urbaneventviews.py:485
 msgid "duplicate_ids_found_msg"
 msgstr "Certains numéros de registre national sont déjà utilisés dans la liste; veuillez les retirer du fichier CSV et réessayer."
 
 #. Default: "Some national registry numbers are used multiple times in the CSV; please remove them and try again.\n${numbers}"
-#: ../browser/urbaneventviews.py:428
+#: ../browser/urbaneventviews.py:472
 msgid "duplicate_numbers_found_msg"
 msgstr "Certains numéros de registre national sont présents plusieurs fois dans le fichier CSV. Veuillez retirer les doublons et réessayer."
 
@@ -2633,7 +2700,7 @@ msgstr "Si ce champ n'est pas rempli, l'identifiant de ce terme sera utilisé"
 msgid "urban_help_townshipCouncilFolder"
 msgstr "Si coché, un paragraphe supplémentaire apparaîtra dans le permis"
 
-#: ../browser/urbaneventviews.py:483
+#: ../browser/urbaneventviews.py:528
 msgid "urban_imported_recipients"
 msgstr "Destinataires importés"
 

@@ -2,6 +2,8 @@
 
 from Acquisition import aq_parent
 from OFS.interfaces import IOrderedContainer
+from Products.urban import UrbanMessage as _
+from Products.CMFCore.utils import getToolByName
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.migration.utils import refresh_workflow_permissions
 from Products.urban.setuphandlers import createFolderDefaultValues
@@ -26,8 +28,12 @@ from imio.schedule.events.zope_registration import (
     unsubscribe_task_configs_for_content_type,
 )
 from plone import api
+from plone.registry import Record
+from plone.registry.field import Dict
+from plone.registry.interfaces import IRegistry
 from plone.restapi.interfaces import ISerializeToJson
 from zope.component import getMultiAdapter
+from zope.component import getUtility
 
 import logging
 
@@ -359,5 +365,99 @@ def fix_external_decision_values(context):
             external_decision = opinion.getField("externalDecision").get(opinion)
             if type(external_decision) is list and len(external_decision) == 1:
                 opinion.setExternalDecision(external_decision[0])
+
+    logger.info("upgrade step done!")
+
+
+def add_new_registry_profil(context):
+    logger = logging.getLogger("urban: reimport registry profil")
+    logger.info("starting migration steps")
+
+    registry = getUtility(IRegistry)
+    attributes = {"title": _(u"Planned address"), "description": _(u"address planned")}
+    key = "Products.urban.interfaces.IAsyncInquiryRadius.inquiries_address_to_do"
+    registry_field = Dict(**attributes)
+    registry_record = Record(registry_field)
+    registry_record.value = None
+    registry.records[key] = registry_record
+
+    logger.info("migration done!")
+
+
+def hide_patrimony_tab_in_licence_config(context):
+    logger = logging.getLogger("urban: Hiding patrimony tab where newly available")
+    logger.info("starting upgrade steps")
+
+    included = [
+        "preliminarynotice",
+        "envclassone",
+        "envclasstwo",
+        "envclassthree",
+        "envclassbordering",
+        "miscdemand",
+        "projectmeeting",
+        "explosivespossession",
+        "inspection",
+        "ticket",
+    ]
+    portal_urban = getToolByName(context, "portal_urban")
+    for licence_config in portal_urban.objectValues("LicenceConfig"):
+        if licence_config.id in included:
+            # add hidden tab config (unless there is one already)
+            if not [tab for tab in licence_config.tabsConfig if tab["value"] == "patrimony"]:
+                updated_config = licence_config.tabsConfig + (
+                    {"display": "", "display_name": "Patrimoine", "value": "patrimony"},
+                )
+                licence_config.setTabsConfig(updated_config)
+
+    logger.info("upgrade step done!")
+
+
+def hide_tab_in_licence_config(context):
+    logger = logging.getLogger("urban: Hiding environment tab where newly available")
+    logger.info("starting upgrade steps")
+
+    # ignore types that already had the environment tab
+    excluded = [
+        "uniquelicence",
+        "codt_uniquelicence",
+        "codt_integratedlicence",
+        "envclassthree",
+        "envclassone",
+        "envclasstwo",
+        "envclassbordering",
+        "explosivespossession",
+    ]
+    portal_urban = getToolByName(context, "portal_urban")
+    for licence_config in portal_urban.objectValues("LicenceConfig"):
+        if licence_config.id not in excluded:
+            # add hidden tab config (unless there is one already)
+            if not [tab for tab in licence_config.tabsConfig if tab["value"] == "environment"]:
+                updated_config = licence_config.tabsConfig + (
+                    {"display": "", "display_name": "Analyse Environnement", "value": "environment"},
+                )
+                licence_config.setTabsConfig(updated_config)
+
+    logger.info("upgrade step done!")
+
+
+def hide_habitation_tab_in_licence_config(context):
+    logger = logging.getLogger("urban: Hiding habitation tab where newly available")
+    logger.info("starting upgrade steps")
+
+    included = [
+        "miscdemand",
+        "preliminarynotice",
+        "projectmeeting",
+    ]
+    portal_urban = getToolByName(context, "portal_urban")
+    for licence_config in portal_urban.objectValues("LicenceConfig"):
+        if licence_config.id in included:
+            # add hidden tab config (unless there is one already)
+            if not [tab for tab in licence_config.tabsConfig if tab["value"] == "habitation"]:
+                updated_config = licence_config.tabsConfig + (
+                    {"display": "", "display_name": "Logement", "value": "habitation"},
+                )
+                licence_config.setTabsConfig(updated_config)
 
     logger.info("upgrade step done!")

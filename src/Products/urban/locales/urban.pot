@@ -20,7 +20,7 @@ msgstr ""
 msgid ""
 msgstr ""
 
-#: ../send_mail_action/forms.py:42
+#: ../send_mail_action/forms.py:53
 msgid " and ${last_rule}"
 msgstr ""
 
@@ -73,6 +73,14 @@ msgstr ""
 msgid "A opinion to ask condition makes the rule apply only when one of the Opinion to ask slelected correspond to the one of the context"
 msgstr ""
 
+#: ../browser/urbaneventviews.py:431
+msgid "A specially formatted CSV file must be used for import. The CSV file can be created from the ODT template file (can be downloaded <a href='/++resource++Products.urban/destinaires_reimport.ods'>here</a>) by 'save as' in CSV format"
+msgstr ""
+
+#: ../browser/urbaneventviews.py:315
+msgid "A specially formatted CSV file must be used for import. The CSV file can be created from the ODT template file (can be downloaded <a href='/++resource++Products.urban/reclamant_reimport.ods'>here</a>) by 'save as' in CSV format"
+msgstr ""
+
 #: ../browser/licence/templates/licenceview.pt:31
 #: ../browser/templates/urbaneventannouncementview.pt:35
 #: ../browser/templates/urbaneventinquiryview.pt:34
@@ -87,11 +95,11 @@ msgstr ""
 msgid "Add Category Switch Portlet"
 msgstr ""
 
-#: ../contentrules/event_type.py:69
+#: ../contentrules/event_type.py:87
 msgid "Add Event type Condition"
 msgstr ""
 
-#: ../contentrules/opinions.py:76
+#: ../contentrules/opinions.py:78
 msgid "Add Opinion to ask Condition"
 msgstr ""
 
@@ -119,7 +127,10 @@ msgstr ""
 msgid "Add an event"
 msgstr ""
 
-#: ../browser/templates/urbaneventinquiryview.pt:200
+#: ../contentrules/licence_type.py:86
+msgid "Add event's parent licence types condition"
+msgstr ""
+
 msgid "Add recipientcadastre manually"
 msgstr ""
 
@@ -134,6 +145,30 @@ msgstr ""
 
 #: ../docgen/UrbanTemplate.py:28
 msgid "Allowed portal types"
+msgstr ""
+
+#: ../contentrules/event_type.py:88
+msgid "An Event type condition makes the rule apply only if Event type correspond to the one from the context."
+msgstr ""
+
+#: ../contentrules/licence_type.py:87
+msgid "An event's parent licence type condition causes the rule to apply only when one of the selected event's parent licence types matches that of the parent event."
+msgstr ""
+
+#: ../contentrules/opinions.py:79
+msgid "An opinion to ask condition makes the rule apply only when one of the Opinion to ask selected correspond to the one of the context."
+msgstr ""
+
+#: ../contentrules/configure.zcml:99
+msgid "Apply only when one of the Opinion to ask selected corresponds to the one of the context"
+msgstr ""
+
+#: ../contentrules/configure.zcml:129
+msgid "Apply only when one of the licence type selected correspond to the one of the event parent"
+msgstr ""
+
+#: ../contentrules/configure.zcml:68
+msgid "Apply only when the Event Type corresponds to the one of the context"
 msgstr ""
 
 msgid "Article127"
@@ -190,6 +225,10 @@ msgstr ""
 msgid "CS_folder_title"
 msgstr ""
 
+#: ../browser/urbaneventviews.py:1071
+msgid "Can't find the street : ${street}"
+msgstr ""
+
 #: ../browser/gig_coring_settings.py:75
 #: ../browser/offdays_settings.py:113
 #: ../browser/schedule_settings.py:31
@@ -214,8 +253,9 @@ msgstr ""
 msgid "Comment - {0}"
 msgstr ""
 
-#: ../contentrules/event_type.py:74
-#: ../contentrules/opinions.py:81
+#: ../contentrules/event_type.py:92
+#: ../contentrules/licence_type.py:91
+#: ../contentrules/opinions.py:83
 msgid "Configure element"
 msgstr ""
 
@@ -273,11 +313,11 @@ msgstr ""
 msgid "Edit Category Switch Portlet"
 msgstr ""
 
-#: ../contentrules/event_type.py:86
+#: ../contentrules/event_type.py:104
 msgid "Edit Event type Condition"
 msgstr ""
 
-#: ../contentrules/opinions.py:93
+#: ../contentrules/opinions.py:95
 msgid "Edit Opinion to ask Condition"
 msgstr ""
 
@@ -297,6 +337,10 @@ msgstr ""
 #: ../browser/offdays_settings.py:115
 #: ../browser/schedule_settings.py:33
 msgid "Edit cancelled"
+msgstr ""
+
+#: ../contentrules/licence_type.py:103
+msgid "Edit event's parent licence types condition"
 msgstr ""
 
 #: ../profiles/default/actions.xml
@@ -320,12 +364,18 @@ msgstr ""
 msgid "EnvClassTwo"
 msgstr ""
 
-#: ../contentrules/mail_with_attachment.py:82
+#: ../contentrules/mail_with_attachment.py:90
 msgid "Error sending email from content rule. You must provide a source address for mail actions or enter an email in the portal properties"
 msgstr ""
 
-#: ../contentrules/event_type.py:24
+#: ../contentrules/configure.zcml:68
+#: ../contentrules/event_type.py:26
 msgid "Event Type"
+msgstr ""
+
+#: ../contentrules/configure.zcml:129
+#: ../contentrules/licence_type.py:26
+msgid "Event's parent licence types"
 msgstr ""
 
 #: ../browser/licence/templates/licencetabsmacros.pt:509
@@ -345,6 +395,10 @@ msgstr ""
 
 #: ../browser/templates/coring_update.pt:16
 msgid "Field"
+msgstr ""
+
+#: ../contentrules/stringinterp.py:17
+msgid "Folder Manager E-mail"
 msgstr ""
 
 #: ../browser/templates/searchparcels.pt:171
@@ -609,8 +663,12 @@ msgstr ""
 msgid "ImpactStudy event type marker interface"
 msgstr ""
 
-#: ../browser/urbaneventviews.py:294
+#: ../browser/urbaneventviews.py:330
 msgid "Import"
+msgstr ""
+
+#: ../browser/urbaneventviews.py:394
+msgid "Import cancel : error with claimant ${claimant} on value ${value}"
 msgstr ""
 
 msgid "Inspection"
@@ -623,19 +681,19 @@ msgstr ""
 msgid "Internal opinion services"
 msgstr ""
 
-#: ../send_mail_action/forms.py:19
+#: ../send_mail_action/forms.py:26
 msgid "Licence Files"
 msgstr ""
 
-#: ../browser/urbaneventviews.py:285
+#: ../browser/urbaneventviews.py:314
 msgid "Listing file (claimants)"
 msgstr ""
 
-#: ../browser/urbaneventviews.py:354
+#: ../browser/urbaneventviews.py:430
 msgid "Listing file (recipients)"
 msgstr ""
 
-#: ../browser/urbaneventviews.py:297
+#: ../browser/urbaneventviews.py:301
 msgid "Mail already send for ${title} by ${user}, ${date}"
 msgstr ""
 
@@ -699,6 +757,7 @@ msgstr ""
 msgid "Off days period"
 msgstr ""
 
+#: ../contentrules/configure.zcml:99
 #: ../contentrules/opinions.py:26
 msgid "Opinion to ask"
 msgstr ""
@@ -778,8 +837,8 @@ msgstr ""
 msgid "Search parcel(s)"
 msgstr ""
 
-#: ../send_mail_action/forms.py:20
-msgid "Select all files from this event or the parent licence you whant to send"
+#: ../send_mail_action/forms.py:27
+msgid "Select all files from this event or the parent licence you want to send."
 msgstr ""
 
 #: ../docgen/UrbanTemplate.py:29
@@ -790,8 +849,16 @@ msgstr ""
 msgid "Select to list"
 msgstr ""
 
-#: ../send_mail_action/forms.py:37
+#: ../send_mail_action/forms.py:58
 msgid "Send"
+msgstr ""
+
+#: ../contentrules/configure.zcml:36
+msgid "Send an email with attachments on the triggering object"
+msgstr ""
+
+#: ../contentrules/configure.zcml:36
+msgid "Send email with attachment"
 msgstr ""
 
 #: ../profiles/default/actions.xml
@@ -827,7 +894,7 @@ msgstr ""
 msgid "Suspension period end date"
 msgstr ""
 
-#: ../browser/urbaneventviews.py:719
+#: ../browser/urbaneventviews.py:976
 msgid "Suspension period from to: please check the end date"
 msgstr ""
 
@@ -844,11 +911,11 @@ msgstr ""
 msgid "Tests Extension profile for urban."
 msgstr ""
 
-#: ../browser/urbaneventviews.py:405
+#: ../browser/urbaneventviews.py:558
 msgid "The CSV file couldn't be read properly. Please verify its structure and try again."
 msgstr ""
 
-#: ../browser/urbaneventviews.py:706
+#: ../browser/urbaneventviews.py:963
 msgid "The claimants import will be ready tomorrow!"
 msgstr ""
 
@@ -856,27 +923,27 @@ msgstr ""
 msgid "The field does not exist !!!"
 msgstr ""
 
-#: ../browser/urbaneventviews.py:344
+#: ../browser/urbaneventviews.py:368
 msgid "The imported file (${name}) couldn't be read properly. Please verify its structure and try again."
 msgstr ""
 
-#: ../browser/urbaneventviews.py:327
+#: ../browser/urbaneventviews.py:363
 msgid "The imported file (${name}) doesn't appear to be a CSV file."
 msgstr ""
 
-#: ../browser/urbaneventviews.py:67
+#: ../browser/urbaneventviews.py:75
 msgid "The mailings will be ready tomorrow!"
 msgstr ""
 
-#: ../browser/urbaneventviews.py:755
+#: ../browser/urbaneventviews.py:1012
 msgid "The parcel radius search will be ready tomorrow!"
 msgstr ""
 
-#: ../browser/urbaneventviews.py:748
+#: ../browser/urbaneventviews.py:1005
 msgid "There are parcel owners without any address found! Desactivate them!"
 msgstr ""
 
-#: ../browser/urbaneventviews.py:699
+#: ../browser/urbaneventviews.py:956
 msgid "This UrbanEventInquiry is not linked to an existing Inquiry !  Define a new inquiry on the licence !"
 msgstr ""
 
@@ -1348,12 +1415,12 @@ msgid "divisions"
 msgstr ""
 
 #. Default: "Some national registry numbers already exist in this list; please remove them from the CSV and try again.\n${ids}"
-#: ../browser/urbaneventviews.py:441
+#: ../browser/urbaneventviews.py:485
 msgid "duplicate_ids_found_msg"
 msgstr ""
 
 #. Default: "Some national registry numbers are used multiple times in the CSV; please remove them and try again.\n${numbers}"
-#: ../browser/urbaneventviews.py:428
+#: ../browser/urbaneventviews.py:472
 msgid "duplicate_numbers_found_msg"
 msgstr ""
 
@@ -2603,7 +2670,7 @@ msgstr ""
 msgid "urban_help_townshipCouncilFolder"
 msgstr ""
 
-#: ../browser/urbaneventviews.py:483
+#: ../browser/urbaneventviews.py:528
 msgid "urban_imported_recipients"
 msgstr ""
 
