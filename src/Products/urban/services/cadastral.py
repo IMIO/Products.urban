@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from Products.urban.utils import add_missing_capakey_in_registry
 from Products.urban.services.base import SQLService
 from Products.urban.services.base import SQLSession
 from plone import api
@@ -541,6 +542,8 @@ class Parcel(object):
         ]
         portal_urban = api.portal.get_tool("portal_urban")
         self.divname = portal_urban.get_division_name(capakey[:5])
+        if self.divname is None:
+            add_missing_capakey_in_registry(capakey)
         self._init_reference(capakey)
         self.capakey = capakey
         self.locations = {}

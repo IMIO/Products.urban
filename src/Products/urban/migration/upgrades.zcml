@@ -237,4 +237,13 @@
         profile="Products.urban:default"
         />
 
+    <gs:upgradeStep
+        title="Add new registry for missing capakey"
+        description=""
+        source="1144"
+        destination="1145"
+        handler=".update_270.add_new_registry_for_missing_capakey"
+        profile="Products.urban:default"
+        />
+
 </configure>
