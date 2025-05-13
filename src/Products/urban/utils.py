@@ -286,3 +286,12 @@ def cache_key_30min(func, *args, **kwargs):
 
 
 WIDGET_DATE_END_YEAR = datetime.now().year + 25
+
+
+def add_missing_capakey_in_registry(capakey):
+    interface = "Products.urban.interfaces.IMissingCapakey"
+    registry = api.portal.get_registry_record(interface)
+    if capakey in registry:
+        return
+    registry.append(capakey.decode("utf-8"))
+    api.portal.set_registry_record(interface, registry)
