@@ -5420,3 +5420,9 @@ msgstr "ans"
 
 msgid "zip_folder_title"
 msgstr "Zone d'initiative privilégiée"
+
+msgid "has_attachments"
+msgstr "Pièces jointes ajoutées"
+
+msgid "no_attachments"
+msgstr "Pièces jointes non ajoutées"

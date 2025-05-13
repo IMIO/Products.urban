@@ -58,9 +58,16 @@
         <fieldset>
             <legend i18n:translate="">Attachments</legend>
             <div class="clear">
-                <tal:listing content="structure view/renderAttachmentsListing" />
+                <tal:block tal:define="has_attachments view/has_attachments">
+                    <input type="checkbox"
+                        tal:attributes="checked has_attachments; disabled string:disabled" />
+                    <span
+                        tal:content="python: 'has_attachments' if has_attachments else 'no_attachments'"
+                        i18n:translate=""></span>
+                </tal:block>
             </div>
         </fieldset>
+
 
         <metal:custom_left_fieldset define-slot="custom_left_fieldset">
         </metal:custom_left_fieldset>
