@@ -1,6 +1,6 @@
+from Products.urban import UrbanMessage as _
 from Products.urban.browser.licence.licenceview import CODTLicenceView
 from Products.CMFCore.utils import getToolByName
-from Products.CMFPlone import PloneMessageFactory as _
 
 
 class DivisionView(CODTLicenceView):

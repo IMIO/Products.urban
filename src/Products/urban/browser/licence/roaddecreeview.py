@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from Products.CMFPlone import PloneMessageFactory as _
+from Products.urban import UrbanMessage as _
 from Products.urban.browser.licence.buildlicenceview import BuildLicenceView
 from plone import api
 
