@@ -31,6 +31,8 @@
   <adapter name="cmf_uid" factory=".indexes.eventconfig_urbaneventtype" />
   <adapter name="getStreetCode" factory=".indexes.streetcode_indexer" />
   <adapter name="getAdditionalReference" factory=".indexes.additional_reference" />
+  <adapter name="getReferenceFT" factory=".indexes.reference_ft" />
+  <adapter name="getReferenceDgatlp" factory=".indexes.reference_dgatlp" />
 
   <!-- Unindex UrbanEvent, UrbanDoc, Applicant and PortionOut -->
 

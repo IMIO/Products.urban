@@ -773,5 +773,12 @@
         handler=".update_270.add_new_registry_profil"
         profile="Products.urban:default"
         />
-  
+    <gs:upgradeStep
+        title="Add index for all reference fields"
+        description=""
+        source="1164"
+        destination="1165"
+        handler=".update_270.add_index_all_reference_fields"
+        profile="Products.urban:default"
+        />
 </configure>

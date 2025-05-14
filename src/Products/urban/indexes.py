@@ -412,3 +412,13 @@ def streetcode_indexer(obj):
 @indexer(interfaces.IGenericLicence)
 def additional_reference(object):
     return object.getAdditionalReference()
+
+
+@indexer(interfaces.IGenericLicence)
+def reference_ft(object):
+    return object.getReferenceFI()
+
+
+@indexer(interfaces.IGenericLicence)
+def reference_dgatlp(object):
+    return object.getReferenceDgatlp()
