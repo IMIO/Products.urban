@@ -416,7 +416,7 @@ def additional_reference(object):
 
 @indexer(interfaces.IGenericLicence)
 def reference_ft(object):
-    return object.getReferenceFI()
+    return object.getReferenceFT()
 
 
 @indexer(interfaces.IGenericLicence)
