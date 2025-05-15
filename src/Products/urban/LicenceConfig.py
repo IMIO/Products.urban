@@ -499,6 +499,13 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin, OrderedContainer):
             "road",
         ]
         inspection_tabs_config = ["description", "advices", "inspection", "location"]
+        emptybuilding_tabs_config = [
+            "description",
+            "advices",
+            "inspection",
+            "habitation",
+            "location",
+        ]
         patrimonycertificate_tabs_config = [
             "description",
             "analysis",
@@ -535,6 +542,7 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin, OrderedContainer):
             ],
             "envclassbordering": env_inquiry_tabs_config,
             "inspection": inspection_tabs_config,
+            "emptybuilding": emptybuilding_tabs_config,
             "patrimonycertificate": patrimonycertificate_tabs_config,
             "ticket": ticket_tabs_config,
             "roaddecree": buildlicence_tabs_config,
@@ -543,6 +551,8 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin, OrderedContainer):
         licence_type = self.id
 
         def makeRow(tabname):
+            print tabname
+            print default_names
             return FixedRow(
                 keyColumn="value",
                 initialData={

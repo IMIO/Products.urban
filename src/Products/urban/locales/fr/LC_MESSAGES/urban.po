@@ -620,6 +620,10 @@ msgstr "Fin des travaux"
 msgid "ImpactStudy event type marker interface"
 msgstr "Étude d'incidence"
 
+#: ../interfaces.py:581
+msgid "IObservationEvent type marker interface"
+msgstr "Constat"
+
 #: ../browser/urbaneventviews.py:294
 msgid "Import"
 msgstr "Import"

@@ -609,6 +609,10 @@ msgstr ""
 msgid "ImpactStudy event type marker interface"
 msgstr ""
 
+#: ../interfaces.py:581
+msgid "IObservationEvent type marker interface"
+msgstr ""
+
 #: ../browser/urbaneventviews.py:294
 msgid "Import"
 msgstr ""

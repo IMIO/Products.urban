@@ -577,6 +577,10 @@ class ITransferOfLicenceEvent(Interface):
     __doc__ = _("""ITransferOfLicence type marker interface""")
 
 
+class IObservationEvent(Interface):
+    __doc__ = _("""IObservationEvent type marker interface""")
+
+
 class IUrbanBase(Interface):
     """Marker interface for .Base.UrbanBase"""
 
