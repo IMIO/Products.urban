@@ -3,6 +3,7 @@
 from Acquisition import aq_parent
 from OFS.interfaces import IOrderedContainer
 from Products.urban import UrbanMessage as _
+from Products.urban import URBAN_TYPES
 from Products.CMFCore.utils import getToolByName
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.migration.utils import refresh_workflow_permissions
@@ -34,6 +35,7 @@ from plone.registry.interfaces import IRegistry
 from plone.restapi.interfaces import ISerializeToJson
 from zope.component import getMultiAdapter
 from zope.component import getUtility
+from eea.facetednavigation.interfaces import ICriteria
 
 import logging
 
@@ -508,3 +510,53 @@ def add_index_all_reference_fields(context):
         logger.info("Reindexed index")
 
     logger.info("Upgrade step complete.")
+
+
+def add_new_filter(context):
+    logger = logging.getLogger("urban: Add new filters")
+    logger.info("starting : Add new filters for all procedures")
+    setup_tool = api.portal.get_tool("portal_setup")
+    setup_tool.runImportStepFromProfile("profile-Products.urban:urbantypes", "catalog")
+
+    portal = api.portal.get()
+    urban_folder = portal.urban
+    folders = [
+        getattr(urban_folder, urban_type.lower() + "s", None)
+        for urban_type in URBAN_TYPES
+    ]
+    folders.append(urban_folder)
+    for folder in folders:
+        if not folder:
+            continue
+        criterion = ICriteria(folder)
+        if criterion is None:
+            continue
+        existing_ids = [c.getId() for c in criterion.criteria]
+
+        # Filter 1: ReferenceDgatlp
+        if "c90" not in existing_ids:
+            data1 = {
+                "_cid_": "c90",
+                "title": "Référence FD (TLPE)",
+                "hidden": False,
+                "index": "getReferenceDgatlp",
+            }
+            criterion.add(wid="text", position="top", section="advanced", **data1)
+            logger.info("Added criterion c90 ")
+        else:
+            logger.info("Criterion c90 already exists")
+
+        # Filter 2: ReferenceFT
+        if "c80" not in existing_ids:
+            data2 = {
+                "_cid_": "c80",
+                "title": "Référence FT (ARNE)",
+                "hidden": False,
+                "index": "getReferenceFT",
+            }
+            criterion.add(wid="text", position="top", section="advanced", **data2)
+            logger.info("Added criterion c91")
+        else:
+            logger.info("Criterion c91 already exists ")
+
+    logger.info("upgrade done!")
