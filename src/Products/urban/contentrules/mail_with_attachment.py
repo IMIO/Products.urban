@@ -2,6 +2,7 @@
 
 from Acquisition import aq_inner
 from Products.CMFCore.utils import getToolByName
+from Products.CMFPlone.utils import safe_unicode
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.MailHost.MailHost import MailHostError
 from Products.statusmessages.interfaces import IStatusMessage
@@ -152,12 +153,13 @@ execute this action"
             item = serializer(include_items=False)
             data = item["file"]["data"].encode()
             content = base64.b64decode(data)
+            filename = item["file"]["filename"].encode("utf-8")
             if item["@type"] in ["ATFile", "File"]:
-                part = MIMEApplication(content, name=item["file"]["filename"])
-                part.add_header("Content-Disposition", 'attachment; filename="{}"'.format(item["file"]["filename"]))
+                part = MIMEApplication(content, name=filename)
+                part.add_header("Content-Disposition", 'attachment; filename="{}"'.format(filename))
                 message.attach(part)
             if item["@type"] in ["ATImage", "Image"]:
-                message.attach(MIMEImage(content, name=item["file"]["filename"]))
+                message.attach(MIMEImage(content, name=filename))
 
 
         return message
