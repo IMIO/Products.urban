@@ -31,9 +31,10 @@
   <adapter name="cmf_uid" factory=".indexes.eventconfig_urbaneventtype" />
   <adapter name="getStreetCode" factory=".indexes.streetcode_indexer" />
   <adapter name="getAdditionalReference" factory=".indexes.additional_reference" />
+  <adapter name="work_beginning" factory=".indexes.work_beginning_indexer" />
+  <adapter name="work_end" factory=".indexes.work_end_indexer" />
 
   <!-- Unindex UrbanEvent, UrbanDoc, Applicant and PortionOut -->
-
   <adapter name="sortable_title" factory=".indexes.event_not_indexed" />
   <adapter name="SearchableText" factory=".indexes.event_not_indexed" />
   <adapter name="Description" factory=".indexes.event_not_indexed" />

@@ -146,5 +146,25 @@
    <property name="step">10</property>
    <property name="default">20</property>
   </criterion>
+  <criterion name="c96">
+   <property name="widget">daterange</property>
+   <property name="title">Date de debut des travaux</property>
+   <property name="position">top</property>
+   <property name="section">advanced</property>
+   <property name="hidden">False</property>
+   <property name="index">work_beginning</property>
+   <property name="default"></property>
+   <property name="calYearRange">c-10:c+10</property>
+  </criterion>
+  <criterion name="c95">
+   <property name="widget">daterange</property>
+   <property name="title">Date de fin des travaux</property>
+   <property name="position">top</property>
+   <property name="section">advanced</property>
+   <property name="hidden">False</property>
+   <property name="index">work_end</property>
+   <property name="default"></property>
+   <property name="calYearRange">c-10:c+10</property>
+  </criterion>
  </criteria>
 </object>
