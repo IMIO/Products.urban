@@ -20,7 +20,6 @@ from Products.DataGridField.SelectColumn import SelectColumn
 from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
 
 schema = Schema((
-    
     DataGridField(
         name="dimensions",
         widget=DataGridWidget(
@@ -48,15 +47,15 @@ schema = Schema((
         ),
     ),
     LinesField(
-            name="observation_items",
-            widget=MultiSelectionWidget(
-                size=10,
-                format="checkbox",
-                label=_("urban_label_observation_items", default="Observation_items"),
-                ),
-            multiValued=True,
-            schemata="urban_description",
-            vocabulary=UrbanVocabulary('observationitems', inUrbanConfig=False),
+        name="observation_items",
+        widget=MultiSelectionWidget(
+            size=10,
+            format="checkbox",
+            label=_("urban_label_observation_items", default="Observation_items"),
+            ),
+        multiValued=True,
+        schemata="urban_description",
+        vocabulary=UrbanVocabulary('observationitems', inUrbanConfig=True),
         ),
    
 ))
