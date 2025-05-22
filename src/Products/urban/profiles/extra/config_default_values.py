@@ -3851,4 +3851,16 @@ default_values = {
             {"id": "externe", "title": u"Demande externe"},
         ],
     },
+    "EmptyBuilding": {
+        "observationitems": [
+            "UrbanVocabularyTerm",
+            {"id": "no_population_registration", "title": u"L’immeuble (ou partie d’immeuble) ne fait pas l’objet d’une inscription dans les registres de la population"},
+            {"id": "no_waiting_registration", "title": u"L’immeuble (ou partie d’immeuble) ne fait pas l’objet d’une inscription dans les registres d’attente"},
+            {"id": "no_bce_registration", "title": u"L’immeuble (ou partie d’immeuble) ne fait pas l’objet d’une inscription à la Banque-Carrefour des Entreprises"},
+            {"id": "subject_to_environmental_decree", "title": u"L’exploitation de l’immeuble (ou partie d’immeuble) relève du décret du 11 mars 1999 relatif au permis d’environnement"},
+            {"id": "expired_environmental_permit", "title": u"Le permis d’exploiter, d’environnement, unique ou la déclaration requise n’a pas été mis en œuvre et est périmé"},
+            {"id": "environmental_order_or_suspension", "title": u"L’établissement fait l’objet d’un ordre d’arrêter l’exploitation, d’un retrait ou d’une suspension d’autorisation prononcés en vertu du décret susmentionné"},
+            {"id": "commercial_closure_order", "title": u"L’occupation de l’immeuble (ou partie d’immeuble) relève d’une activité soumise à autorisation d’implantation en vertu de la loi du 29 juin 1975 ou du décret du 5 février 2015, or ladite implantation est frappée d’un ordre de fermeture, d’un retrait ou d’une suspension d’autorisation prononcés en vertu des dispositions de la loi du 13 août 2004 ou d’une mesure de sanction prévue par l’article 68 du décret précité"}    ]
+            
+    },
 }

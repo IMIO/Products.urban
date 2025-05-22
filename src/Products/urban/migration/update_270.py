@@ -364,17 +364,17 @@ def fix_external_decision_values(context):
 
     logger.info("upgrade step done!")
 
-def add_dimension_vocabulary(context):
-    logger = logging.getLogger("urban: Add dimension vocabulary")
+def add_building_procedure(context):
+    logger = logging.getLogger("urban: Add empty building procedure")
     logger.info("starting upgrade steps")
 
-    container = api.portal.get_tool("portal_urban")
+    portal_urban = api.portal.get_tool("portal_urban")
     dimension_type_vocabularies_config = default_values["global"][
         "dimensiontypes"
     ]
     allowedtypes = dimension_type_vocabularies_config[0]
     dimension_type_vocabularies_config = createVocabularyFolder(
-        container, "dimensiontypes", context, allowedtypes
+        portal_urban, "dimensiontypes", context, allowedtypes
     )
     createFolderDefaultValues(
         dimension_type_vocabularies_config,
@@ -386,12 +386,25 @@ def add_dimension_vocabulary(context):
     ]
     allowedtypes = units_vocabularies_config[0]
     units_vocabularies_config = createVocabularyFolder(
-        container, "units", context, allowedtypes
+        portal_urban, "units", context, allowedtypes
     )
     createFolderDefaultValues(
         units_vocabularies_config,
         default_values["global"]["units"][1:],
         default_values["global"]["units"][0],
     )
-
+    observation_items_vocabularies_config = default_values["EmptyBuilding"][
+        "observationitems"
+    ]
+    observation_items_vocabularies_config = createVocabularyFolder(
+        portal_urban.emptybuilding, "observationitems", context, allowedtypes
+    )
+    createFolderDefaultValues(
+        observation_items_vocabularies_config,
+        default_values["EmptyBuilding"]["observationitems"][1:],
+        default_values["EmptyBuilding"]["observationitems"][0],
+    )
+    
     logger.info("migration step done!")
+    
+    

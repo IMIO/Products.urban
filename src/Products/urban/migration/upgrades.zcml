@@ -739,11 +739,11 @@
         />
         
     <gs:upgradeStep
-        title="Add dimension vocabulary"
+        title="Add empty building procedure"
         description=""
         source="1160"
         destination="1161"
-        handler=".update_270.add_dimension_vocabulary"
+        handler=".update_270.add_building_procedure"
         profile="Products.urban:default"
         />
 </configure>

@@ -49,13 +49,14 @@ schema = Schema((
     ),
     LinesField(
             name="observation_items",
-            widget=MultiSelect2Widget(
+            widget=MultiSelectionWidget(
+                size=10,
                 format="checkbox",
                 label=_("urban_label_observation_items", default="Observation_items"),
-            ),
+                ),
             multiValued=True,
             schemata="urban_description",
-            vocabulary="listObservationItems",
+            vocabulary=UrbanVocabulary('observationitems', inUrbanConfig=False),
         ),
    
 ))
