@@ -12,6 +12,8 @@ from Products.urban.config import URBAN_TYPES
 from Products.urban.content.licence.GenericLicence import GenericLicence
 from Products.urban.content.Inquiry import Inquiry
 from Products.urban.utils import setSchemataForInquiry
+from Products.urban.utils import setOptionalAttributes
+
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import (
     ReferenceBrowserWidget,
 )
@@ -116,8 +118,21 @@ schema = Schema(
             default_method="getDefaultText",
             default_output_type="text/x-html-safe",
         ),
+        LinesField(
+            name="observationItems",
+            widget=MultiSelectionWidget(
+                format="checkbox",
+                label=_("urban_label_observationItems", default="ObservationItems"),
+                i18n_domain="urban"
+                ),
+            multiValued=True,
+            optional=True,
+            schemata="urban_inspection",
+            vocabulary=UrbanVocabulary('observationitems', inUrbanConfig=True),
+        ),
     ),
 )
+setOptionalAttributes(schema, ["observationItems"])
 Inspection_schema = (
     BaseFolderSchema.copy()
     + getattr(GenericLicence, "schema", Schema(())).copy()

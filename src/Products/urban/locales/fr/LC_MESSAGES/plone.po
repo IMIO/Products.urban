@@ -57,6 +57,9 @@ msgstr "Certificat d'urbanisme 1 (CODT)"
 msgid "CODT_UrbanCertificateTwo"
 msgstr "Certificats d'urbanisme 2 (CODT)"
 
+msgid "EmptyBuilding"
+msgstr "Bâtiment vide"
+
 msgid "City"
 msgstr "Localité"
 

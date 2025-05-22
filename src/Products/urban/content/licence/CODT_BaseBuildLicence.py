@@ -37,6 +37,11 @@ from Products.urban.utils import setSchemataForCODT_Inquiry
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
 
+from Products.DataGridField import DataGridField, DataGridWidget
+from Products.DataGridField.Column import Column
+from Products.DataGridField.SelectColumn import SelectColumn
+from collective.datagridcolumns.TextAreaColumn import TextAreaColumn
+
 from plone import api
 
 ##/code-section module-header
@@ -559,6 +564,32 @@ schema = Schema(
             multiValued=True,
             relationship="bound_licences",
         ),
+        DataGridField(
+            name="dimensions",
+            widget=DataGridWidget(
+                columns={
+                    "type": SelectColumn(_("Type"), "listDimensionType"),
+                    "value": Column(_("Value")),
+                    "unit": SelectColumn(_("Unit"), "listDimensionUnit"),
+                    "details": TextAreaColumn(_("Details"), rows=3, cols=40),
+                },
+                label="dimensions",
+                label_msgid="urban_label_dimensions",
+                i18n_domain="urban",
+            ),
+            # fixed_rows="getTabsConfigRows",
+            allow_insert=True,
+            allow_reorder=True,
+            allow_oddeven=True,
+            allow_delete=True,
+            schemata="urban_description",
+            columns=(
+                "type",
+                "value",
+                "unit",
+                "details"
+            ),
+    ),
     ),
 )
 
@@ -748,7 +779,22 @@ class CODT_BaseBuildLicence(
         )
         return DisplayList(vocabulary)
 
+    def listDimensionType(self):
+        """ Return a list of dimension types """
+        voc = UrbanVocabulary("dimensiontypes", inUrbanConfig=False)
+        return voc.getDisplayList(self)
 
+    def listDimensionUnit(self):
+        """ Return a list of dimension types """
+        voc = UrbanVocabulary("units", inUrbanConfig=False)
+        return voc.getDisplayList(self)
+
+    def getDimension(self, type):
+        """ Return the dimension of the given type """
+        for dimension in self.dimensions:
+            if dimension["type"] == type:
+                return dimension
+        return None
 # end of class CODT_BaseBuildLicence
 
 ##code-section module-footer #fill in your manual code here

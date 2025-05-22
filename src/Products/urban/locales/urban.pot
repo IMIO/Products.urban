@@ -5327,5 +5327,5 @@ msgstr ""
 msgid "units_folder_title"
 msgstr ""
 
-msgid "dimensions"
+msgid "urban_label_dimensions"
 msgstr ""

@@ -14,58 +14,13 @@ from Products.urban.content.licence.GenericLicence import GenericLicence
 
 from Products.urban import UrbanMessage as _
 
-from Products.DataGridField import DataGridField, DataGridWidget, FixedColumn
-from Products.DataGridField.Column import Column
-from Products.DataGridField.SelectColumn import SelectColumn
-from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
 
-schema = Schema((
-    DataGridField(
-        name="dimensions",
-        widget=DataGridWidget(
-            columns={
-                "type": SelectColumn("Type", "listDimensionType"),
-                "value": Column("Value"),
-                "unit": SelectColumn("Unit", "listDimensionUnit"),
-                "details": TextAreaColumn("Details", rows=3, cols=40),
-            },
-            label="dimensions",
-            label_msgid="urban_label_dimensions",
-            i18n_domain="urban",
-        ),
-        # fixed_rows="getTabsConfigRows",
-        allow_insert=True,
-        allow_reorder=True,
-        allow_oddeven=True,
-        allow_delete=True,
-        schemata="urban_description",
-        columns=(
-            "type",
-            "value",
-            "unit",
-            "details"
-        ),
-    ),
-    LinesField(
-        name="observation_items",
-        widget=MultiSelectionWidget(
-            size=10,
-            format="checkbox",
-            label=_("urban_label_observation_items", default="Observation_items"),
-            ),
-        multiValued=True,
-        schemata="urban_description",
-        vocabulary=UrbanVocabulary('observationitems', inUrbanConfig=True),
-        ),
-   
-))
 
 EmptyBuilding_schema = (
     BaseFolderSchema.copy()
     + getattr(GenericLicence, "schema", Schema(())).copy()
     + getattr(CODT_BaseBuildLicence, "schema", Schema(())).copy()
     + getattr(Inspection, "schema", Schema(())).copy()
-    + schema.copy()
 )
 
 class EmptyBuilding(Inspection, CODT_BaseBuildLicence):
@@ -76,30 +31,7 @@ class EmptyBuilding(Inspection, CODT_BaseBuildLicence):
 
     implements(interfaces.IEmptyBuilding)
 
-    def listDimensionType(self):
-        """ Return a list of dimension types """
-        voc = UrbanVocabulary("dimensiontypes", inUrbanConfig=False)
-        return voc.getDisplayList(self)
-
-    def listDimensionUnit(self):
-        """ Return a list of dimension types """
-        voc = UrbanVocabulary("units", inUrbanConfig=False)
-        return voc.getDisplayList(self)
-
-    def getDimension(self, type):
-        """ Return the dimension of the given type """
-        for dimension in self.dimensions:
-            if dimension["type"] == type:
-                return dimension
-        return None
     
-    def listObservationItems(self):
-       
-        vocab = (
-            ("opinion", "Avis simple"),
-            ("decision", "Avis conforme"),
-            ("optional", "Avis facultatif"),
-        )
-        return DisplayList(vocab)
+    
 
 registerType(EmptyBuilding, PROJECTNAME)
