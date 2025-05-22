@@ -12,12 +12,15 @@ from Products.urban import interfaces
 from Products.urban.config import PROJECTNAME
 from Products.urban.content.licence.GenericLicence import GenericLicence
 
+from Products.urban import UrbanMessage as _
+
 from Products.DataGridField import DataGridField, DataGridWidget, FixedColumn
 from Products.DataGridField.Column import Column
 from Products.DataGridField.SelectColumn import SelectColumn
 from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
 
 schema = Schema((
+    
     DataGridField(
         name="dimensions",
         widget=DataGridWidget(
@@ -45,14 +48,16 @@ schema = Schema((
         ),
     ),
     LinesField(
-            name="observationItems",
-            vocabulary="listObservationItems",
+            name="observation_items",
             widget=MultiSelect2Widget(
-                label="Observation items",
-                label_msgid="urban_label_observationItems",
-                i18n_domain="urban",
+                format="checkbox",
+                label=_("urban_label_observation_items", default="Observation_items"),
             ),
+            multiValued=True,
+            schemata="urban_description",
+            vocabulary="listObservationItems",
         ),
+   
 ))
 
 EmptyBuilding_schema = (
@@ -89,15 +94,11 @@ class EmptyBuilding(Inspection, CODT_BaseBuildLicence):
         return None
     
     def listObservationItems(self):
+       
         vocab = (
-            ("brabant_wallon", "Brabant wallon"),
-            ("eupen", "Eupen"),
-            ("hainaut_1", "Hainaut 1"),
-            ("hainaut_2", "Hainaut 2"),
-            ("liege_1", "Liège 1"),
-            ("liege_2", "Liège 2"),
-            ("luxembourg", "Luxembourg"),
-            ("namur", "Namur"),
+            ("opinion", "Avis simple"),
+            ("decision", "Avis conforme"),
+            ("optional", "Avis facultatif"),
         )
         return DisplayList(vocab)
 
