@@ -737,5 +737,13 @@
         handler=".update_270.fix_external_decision_values"
         profile="Products.urban:default"
         />
-
+        
+    <gs:upgradeStep
+        title="Add dimension vocabulary"
+        description=""
+        source="1160"
+        destination="1161"
+        handler=".update_270.add_dimension_vocabulary"
+        profile="Products.urban:default"
+        />
 </configure>

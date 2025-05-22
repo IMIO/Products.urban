@@ -5,6 +5,8 @@ from OFS.interfaces import IOrderedContainer
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.migration.utils import refresh_workflow_permissions
 from Products.urban.setuphandlers import createFolderDefaultValues
+from Products.urban.profiles.extra.config_default_values import default_values
+from Products.urban.setuphandlers import createVocabularyFolder
 from imio.schedule.content.object_factories import MacroCreationConditionObject
 from imio.schedule.content.object_factories import MacroEndConditionObject
 from imio.schedule.content.object_factories import MacroFreezeConditionObject
@@ -361,3 +363,35 @@ def fix_external_decision_values(context):
                 opinion.setExternalDecision(external_decision[0])
 
     logger.info("upgrade step done!")
+
+def add_dimension_vocabulary(context):
+    logger = logging.getLogger("urban: Add dimension vocabulary")
+    logger.info("starting upgrade steps")
+
+    container = api.portal.get_tool("portal_urban")
+    dimension_type_vocabularies_config = default_values["global"][
+        "dimensiontypes"
+    ]
+    allowedtypes = dimension_type_vocabularies_config[0]
+    dimension_type_vocabularies_config = createVocabularyFolder(
+        container, "dimensiontypes", context, allowedtypes
+    )
+    createFolderDefaultValues(
+        dimension_type_vocabularies_config,
+        default_values["global"]["dimensiontypes"][1:],
+        default_values["global"]["dimensiontypes"][0],
+    )
+    units_vocabularies_config = default_values["global"][
+        "units"
+    ]
+    allowedtypes = units_vocabularies_config[0]
+    units_vocabularies_config = createVocabularyFolder(
+        container, "units", context, allowedtypes
+    )
+    createFolderDefaultValues(
+        units_vocabularies_config,
+        default_values["global"]["units"][1:],
+        default_values["global"]["units"][0],
+    )
+
+    logger.info("migration step done!")

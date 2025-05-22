@@ -5320,3 +5320,12 @@ msgstr ""
 
 msgid "zip_folder_title"
 msgstr ""
+
+msgid "dimensiontypes_folder_title"
+msgstr ""
+
+msgid "units_folder_title"
+msgstr ""
+
+msgid "dimensions"
+msgstr ""

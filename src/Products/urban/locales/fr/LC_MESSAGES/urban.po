@@ -5363,3 +5363,12 @@ msgstr "ans"
 
 msgid "zip_folder_title"
 msgstr "Zone d'initiative privilégiée"
+
+msgid "dimensiontypes_folder_title"
+msgstr "Types de dimension"
+
+msgid "units_folder_title"
+msgstr "Unités"
+
+msgid "dimensions"
+msgstr "Dimensions"

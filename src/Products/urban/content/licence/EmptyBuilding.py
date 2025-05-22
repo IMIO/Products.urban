@@ -4,6 +4,7 @@ from Products.Archetypes.atapi import *
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.content.licence.CODT_BaseBuildLicence import CODT_BaseBuildLicence
 from Products.urban.content.licence.Inspection import Inspection
+from Products.urban.widget.select2widget import MultiSelect2Widget
 from collective.datagridcolumns.TextAreaColumn import TextAreaColumn
 from zope.interface import implements
 
@@ -43,6 +44,15 @@ schema = Schema((
             "details"
         ),
     ),
+    LinesField(
+            name="observationItems",
+            vocabulary="listObservationItems",
+            widget=MultiSelect2Widget(
+                label="Observation items",
+                label_msgid="urban_label_observationItems",
+                i18n_domain="urban",
+            ),
+        ),
 ))
 
 EmptyBuilding_schema = (
@@ -63,7 +73,7 @@ class EmptyBuilding(Inspection, CODT_BaseBuildLicence):
 
     def listDimensionType(self):
         """ Return a list of dimension types """
-        voc = UrbanVocabulary("dimensiontype", inUrbanConfig=False)
+        voc = UrbanVocabulary("dimensiontypes", inUrbanConfig=False)
         return voc.getDisplayList(self)
 
     def listDimensionUnit(self):
@@ -71,12 +81,24 @@ class EmptyBuilding(Inspection, CODT_BaseBuildLicence):
         voc = UrbanVocabulary("units", inUrbanConfig=False)
         return voc.getDisplayList(self)
 
-    def getDimensionForType(self, type):
+    def getDimension(self, type):
         """ Return the dimension of the given type """
         for dimension in self.dimensions:
             if dimension["type"] == type:
                 return dimension
         return None
-
+    
+    def listObservationItems(self):
+        vocab = (
+            ("brabant_wallon", "Brabant wallon"),
+            ("eupen", "Eupen"),
+            ("hainaut_1", "Hainaut 1"),
+            ("hainaut_2", "Hainaut 2"),
+            ("liege_1", "Liège 1"),
+            ("liege_2", "Liège 2"),
+            ("luxembourg", "Luxembourg"),
+            ("namur", "Namur"),
+        )
+        return DisplayList(vocab)
 
 registerType(EmptyBuilding, PROJECTNAME)
