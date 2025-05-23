@@ -476,22 +476,20 @@ def hide_habitation_tab_in_licence_config(context):
     logger.info("upgrade step done!")
 
 
-class Empty:
-    pass
+class IndexExtras:
+    """Helper class for configuring ZCTextIndex parameters."""
+    def __init__(self):
+        self.index_type = "Okapi BM25 Rank"
+        self.lexicon_id = "plone_lexicon"
 
-
-def add_index_all_reference_fields(context):
-
+def add_indexes_for_reference_fields(context):
     logger = logging.getLogger("urban: Add index all reference fields")
     logger.info("starting upgrade steps")
 
-    # migrate content
     catalog = api.portal.get_tool("portal_catalog")
     indexes = ["getReferenceFT", "getReferenceDgatlp"]
 
-    item_extras = Empty()
-    item_extras.index_type = "Okapi BM25 Rank"
-    item_extras.lexicon_id = "plone_lexicon"
+    item_extras = IndexExtras()
 
     for index_name in indexes:
         if index_name not in catalog.indexes():
@@ -504,7 +502,7 @@ def add_index_all_reference_fields(context):
             catalog.addColumn(index_name)
             logger.info("Added metadata column")
         else:
-            logger.info("ℹMetadata column already exists")
+            logger.info("Column already exists")
 
         catalog.reindexIndex(index_name, context.REQUEST)
         logger.info("Reindexed index")
@@ -512,9 +510,10 @@ def add_index_all_reference_fields(context):
     logger.info("Upgrade step complete.")
 
 
-def add_new_filter(context):
-    logger = logging.getLogger("urban: Add new filters")
-    logger.info("starting : Add new filters for all procedures")
+def add_reference_filters(context):
+    logger = logging.getLogger("urban: Add reference filters")
+    logger.info("starting : Add reference filters for all procedures")
+    
     setup_tool = api.portal.get_tool("portal_setup")
     setup_tool.runImportStepFromProfile("profile-Products.urban:urbantypes", "catalog")
 
@@ -525,38 +524,38 @@ def add_new_filter(context):
         for urban_type in URBAN_TYPES
     ]
     folders.append(urban_folder)
-    for folder in folders:
-        if not folder:
+    criteria_data = [
+        {
+            "_cid_": "c90",
+            "title": "Référence FD (TLPE)",
+            "index": "getReferenceDgatlp",
+        },
+        {
+            "_cid_": "c80",
+            "title": "Référence FT (ARNE)",
+            "index": "getReferenceFT",
+        },
+    ]
+    for folder in filter(None, folders):
+        criteria_adapter = ICriteria(folder)
+        if not criteria_adapter:
             continue
-        criterion = ICriteria(folder)
-        if criterion is None:
-            continue
-        existing_ids = [c.getId() for c in criterion.criteria]
 
-        # Filter 1: ReferenceDgatlp
-        if "c90" not in existing_ids:
-            data1 = {
-                "_cid_": "c90",
-                "title": "Référence FD (TLPE)",
-                "hidden": False,
-                "index": "getReferenceDgatlp",
-            }
-            criterion.add(wid="text", position="top", section="advanced", **data1)
-            logger.info("Added criterion c90 ")
-        else:
-            logger.info("Criterion c90 already exists")
+        existing_ids = {c.getId() for c in criteria_adapter.criteria}
 
-        # Filter 2: ReferenceFT
-        if "c80" not in existing_ids:
-            data2 = {
-                "_cid_": "c80",
-                "title": "Référence FT (ARNE)",
-                "hidden": False,
-                "index": "getReferenceFT",
-            }
-            criterion.add(wid="text", position="top", section="advanced", **data2)
-            logger.info("Added criterion c91")
-        else:
-            logger.info("Criterion c91 already exists ")
+        for criterion_data in criteria_data:
+            cid = criterion_data["_cid_"]
+            if cid not in existing_ids:
+                criteria_adapter.add(
+                    wid="text",
+                    position="top",
+                    section="advanced",
+                    hidden=False,
+                    **criterion_data
+                )
+                logger.info("Added criterion")
+            else:
+                logger.info("Criterion already exists")
 
-    logger.info("upgrade done!")
+    logger.info("Upgrade done!")
+    

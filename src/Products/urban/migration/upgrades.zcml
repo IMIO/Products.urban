@@ -774,19 +774,19 @@
         profile="Products.urban:default"
         />
     <gs:upgradeStep
-        title="Add index for all reference fields"
+        title="Add all reference field indexes"
         description=""
         source="1164"
         destination="1165"
-        handler=".update_270.add_index_all_reference_fields"
+        handler=".update_270.add_indexes_for_reference_fields"
         profile="Products.urban:default"
         />
         <gs:upgradeStep
-        title="Add all reference fields filter"
+        title="Add all reference fields filters"
         description=""
         source="1165"
         destination="1166"
-        handler=".update_270.add_new_filter"
+        handler=".update_270.add_reference_filters"
         profile="Products.urban:default"
         />
         
