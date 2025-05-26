@@ -1,0 +1,15 @@
+<configure
+  xmlns="http://namespaces.zope.org/zope"
+  xmlns:browser="http://namespaces.zope.org/browser"
+  xmlns:plone="http://namespaces.plone.org/plone"
+  i18n_domain="urban">
+
+  <browser:page
+    for="imio.schedule.content.task.IAutomatedTask"
+    name="debug"
+    class=".debug.TaskDebugView"
+    permission="cmf.ManagePortal"
+    template="templates/debug.pt"
+    />
+
+</configure>
