@@ -17,6 +17,7 @@ from AccessControl import ClassSecurityInfo
 from Products.urban.widget.select2widget import MultiSelect2Widget
 from Products.Archetypes.atapi import *
 from zope.interface import implements
+from zope.i18n import translate
 from Products.urban import interfaces
 from Products.urban.content.licence.GenericLicence import GenericLicence
 from Products.urban.content.CODT_UniqueLicenceInquiry import CODT_UniqueLicenceInquiry
@@ -432,8 +433,8 @@ class EnvironmentBase(
         Natura2000 locations
         """
         vocab = (
-            ("inside", "location_inside"),
-            ("near", "location_near"),
+           ("inside", translate(_("location_inside"),context=self.REQUEST)),
+        ("near", translate(_("location_near"),context=self.REQUEST)),
         )
         return DisplayList(vocab)
 
