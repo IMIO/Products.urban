@@ -433,9 +433,9 @@ class EnvironmentBase(
         Natura2000 locations
         """
         vocab = (
-           ("inside", translate(_("location_inside"),context=self.REQUEST)),
-        ("near", translate(_("location_near"),context=self.REQUEST)),
-        )
+            ("inside", translate(_("location_inside"),context=self.REQUEST)),
+            ("near", translate(_("location_near"),context=self.REQUEST)),
+            )
         return DisplayList(vocab)
 
     def rubrics_base_query(self):
