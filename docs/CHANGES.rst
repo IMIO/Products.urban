@@ -8,6 +8,29 @@ Changelog
 
 .. towncrier release notes start
 
+2.5.0.dev16 (2025-06-05)
+------------------------
+
+New features:
+
+
+- Change limit year of date widget to current year + 25 (liege)
+  [jchandelle] (URB-3153)
+- Add stringinterp to get foldermanager email
+  [jchandelle] (URB-3283)
+
+
+Bug fixes:
+
+
+- Migrate patrimony certificates to their correct object class (instead of misc demand)
+  [daggelpop] (URB-3121)
+- Fixed `get_ws_meetingitem_infos` and `_get_wspm_text_field`.
+  [aduchene] (URB-3211)
+- Add missing method for schedule calculation
+  [daggelpop] (URBBDC-3192)
+
+
 2.5.0.dev15 (2025-02-14)
 ------------------------
 
