@@ -1,2 +1,2 @@
-Add message in case can't link pod template
+Add a message in case we can't link pod template
 [jchandelle]
