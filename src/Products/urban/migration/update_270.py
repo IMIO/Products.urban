@@ -461,3 +461,18 @@ def hide_habitation_tab_in_licence_config(context):
                 licence_config.setTabsConfig(updated_config)
 
     logger.info("upgrade step done!")
+
+
+def move_up_schedule_task_config(context):
+    logger = logging.getLogger("urban: Move up 'en attente PM' schedule task config")
+    logger.info("starting upgrade steps")
+
+    portal = api.portal.get()
+    schedule_config_folder = portal.portal_urban.codt_buildlicence.schedule
+    reception_folder = getattr(schedule_config_folder, "reception", None)
+    if reception_folder:
+        attente_pm = getattr(reception_folder, "attente_plans_modifies", None)
+        if attente_pm:
+            api.content.move(attente_pm, schedule_config_folder)
+
+    logger.info("upgrade step done!")
