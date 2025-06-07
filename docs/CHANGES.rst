@@ -8,6 +8,35 @@ Changelog
 
 .. towncrier release notes start
 
+2.7.39 (2025-06-07)
+-------------------
+
+New features:
+
+
+- Add way to easily hide licence type
+  [jchandelle] (SUP-33793)
+- Change display of inquiry view
+  [jchandelle] (SUP-44199)
+- Add a message in case we can't link pod template
+  [jchandelle] (SUP-44861)
+
+
+Bug fixes:
+
+
+- Fix history parcel view when missing capakey
+  [jchandelle] (SUP-36370)
+- Fix filename encoding in mail sending
+  [jchandelle] (SUP-43946)
+- Fix recipient import in inquiry event
+  [jchandelle] (SUP-44583)
+- Fix 220 viewlet house number encoding
+  jchandelle (SUP-44642)
+- Fix link pod template in import config
+  [jchandelle] (SUP-44861)
+
+
 2.7.38 (2025-05-27)
 -------------------
 
