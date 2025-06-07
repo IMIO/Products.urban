@@ -285,4 +285,8 @@ def cache_key_30min(func, *args, **kwargs):
     return (func.__name__, time.time() // (60 * 30), args, kwargs)
 
 
+def cache_key_5min(func, *args, **kwargs):
+    return (func.__name__, time.time() // (60 * 5), args, kwargs)
+
+
 WIDGET_DATE_END_YEAR = datetime.now().year + 25
