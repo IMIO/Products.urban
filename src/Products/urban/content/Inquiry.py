@@ -51,15 +51,6 @@ optional_fields = [
 
 schema = Schema(
     (
-        StringField(
-            name="investigation_radius",
-            widget=SelectionWidget(
-                label=_("urban_label_investigation_radius", default="Investigation_radius"),
-            ),
-            vocabulary=UrbanVocabulary("investigations_radius", inUrbanConfig=False),
-            default_method="getDefaultValue",
-            schemata="urban_inquiry"
-        ),
         LinesField(
             name="derogation",
             widget=MultiSelect2Widget(
@@ -70,6 +61,15 @@ schema = Schema(
             vocabulary=UrbanVocabulary("derogations"),
             default_method="getDefaultValue",
             schemata="urban_inquiry",
+        ),
+        StringField(
+            name="investigation_radius",
+            widget=SelectionWidget(
+                label=_("urban_label_investigation_radius", default="Investigation_radius"),
+            ),
+            vocabulary=UrbanVocabulary("investigations_radius", inUrbanConfig=False),
+            default_method="getDefaultValue",
+            schemata="urban_inquiry"
         ),
         TextField(
             name="derogationDetails",

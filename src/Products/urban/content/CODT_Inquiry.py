@@ -41,6 +41,11 @@ full_inquiry_slave_fields = (
         "hide_values": ("none",),
     },
     {
+        "name": "investigation_radius",
+        "action": "hide",
+        "hide_values": ("none",),
+    },
+    {
         "name": "divergenceDetails",
         "action": "hide",
         "hide_values": ("none",),
@@ -407,7 +412,8 @@ def finalizeSchema(schema):
     schema.moveField("announcementArticles", before="announcementArticlesText")
     schema.moveField("divergenceDetails", before="announcementArticles")
     schema.moveField("divergence", before="divergenceDetails")
-    schema.moveField("inquiry_type", before="divergence")
+    schema.moveField("investigation_radius", before="divergence")
+    schema.moveField("inquiry_type", before="investigation_radius")
     return schema
 
 
