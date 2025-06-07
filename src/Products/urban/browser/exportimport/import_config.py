@@ -154,8 +154,10 @@ class ConfigImportContent(ImportContent):
             obj = brain.getObject()
             merge_templates = obj.merge_templates
             for template in merge_templates:
+                if template["template"] == "--NOVALUE--":
+                    continue
                 template_obj = api.content.get(UID=template["template"])
-                if template_obj.id == id:
+                if template_obj and template_obj.id == id:
                     return template["template"]
             ignore_uid.append(brain_uid)
         if ILicenceConfig.providedBy(context):
@@ -197,6 +199,12 @@ class ConfigImportContent(ImportContent):
         for template in merge_templates:
             uid = self.get_template_uid(item, template)
             if uid is None:
+                msg = "Can't link the pod template : {}, in document : {}".format(
+                    template.get("pod_context_name", "unknown"),
+                    item.get("@id", "unknown").split("portal_urban")[-1]
+                )
+                logger.warning(msg)
+                api.portal.show_message(msg, self.request, type="warning")
                 uid = "--NOVALUE--"
             template["template"] = uid
             output_template.append(template)
