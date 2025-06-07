@@ -30,6 +30,8 @@ from imio.schedule.events.zope_registration import (
 from plone import api
 from plone.registry import Record
 from plone.registry.field import Dict
+from plone.registry.field import TextLine
+from plone.registry.field import List
 from plone.registry.interfaces import IRegistry
 from plone.restapi.interfaces import ISerializeToJson
 from zope.component import getMultiAdapter
@@ -461,3 +463,22 @@ def hide_habitation_tab_in_licence_config(context):
                 licence_config.setTabsConfig(updated_config)
 
     logger.info("upgrade step done!")
+
+
+def add_new_registry_for_missing_capakey(context):
+    logger = logging.getLogger("urban: Add new registry for missing capakey")
+    logger.info("starting migration steps")
+
+    registry = getUtility(IRegistry)
+    key = "Products.urban.interfaces.IMissingCapakey"
+    registry_field = List(
+        title=u"Missing capakey",
+        description=u"List of missing capakey",
+        value_type=TextLine(),
+    )
+    registry_record = Record(registry_field)
+    registry_record.value = []
+    registry.records[key] = registry_record
+
+    logger.info("migration done!")
+    

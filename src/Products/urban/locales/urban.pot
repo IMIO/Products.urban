@@ -2085,6 +2085,16 @@ msgstr ""
 msgid "miscdemands"
 msgstr ""
 
+#. Default: "These plots cannot be found, perhaps they belong to a neighboring municipality."
+#: ../browser/templates/parcelrecordsview.pt:23
+msgid "missing_capakey_plural"
+msgstr ""
+
+#. Default: "This plot cannot be found, perhaps it belong to a neighboring municipality."
+#: ../browser/templates/parcelrecordsview.pt:22
+msgid "missing_capakey_single"
+msgstr ""
+
 msgid "missingparts_folder_title"
 msgstr ""
 
