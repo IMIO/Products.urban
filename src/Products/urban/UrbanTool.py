@@ -950,7 +950,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                 for l in self.getDivisionsRenaming()
             ]
         )
-        name = mapping[str(int(division_code))]
+        name = mapping.get(str(int(division_code)), None)
         return name
 
     def get_all_licence_configs(self):
