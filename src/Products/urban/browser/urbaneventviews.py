@@ -1083,12 +1083,12 @@ class UrbanEventInquiryView(UrbanEventInquiryBaseView):
 
     def create_recipient_cadastre(self, location, parcel, street_uid, zip_scope=None):
         context = aq_inner(self.context)
-        number = location.get("number", "")
+        number = location.get("number", "").encode("utf-8")
         street_obj = api.content.get(UID=street_uid)
         street = street_obj.streetName.encode("utf-8")
         city_obj = street_obj.getCity()
-        city = city_obj.title
-        zipcode = city_obj.zipCode
+        city = city_obj.title.encode("utf-8")
+        zipcode = city_obj.zipCode.encode("utf-8")
         if zip_scope is not None and zipcode not in zip_scope:
             zip_scope.append(zipcode)
         normalizer = getUtility(IIDNormalizer)
@@ -1121,11 +1121,6 @@ class UrbanEventInquiryView(UrbanEventInquiryBaseView):
     def get_investigation_adress(self, radius=0, force=False):
         context = aq_inner(self.context)
         urban_tool = api.portal.get_tool("portal_urban")
-        recipients = context.getRecipients()
-        if recipients:
-            context.manage_delObjects(
-                [recipient.getId() for recipient in recipients if recipient.Title()]
-            )
 
         licence = context.aq_inner.aq_parent
         cadastre = services.cadastre.new_session()
@@ -1225,13 +1220,8 @@ class UrbanEventInquiryView(UrbanEventInquiryBaseView):
         # remove every RecipientCadastre
         context = aq_inner(self.context)
         urban_tool = api.portal.get_tool("portal_urban")
-        recipients = context.getRecipients()
         if self.is_planned_inquiry and not force:
             return self.request.response.redirect(self.context.absolute_url())
-        if recipients:
-            context.manage_delObjects(
-                [recipient.getId() for recipient in recipients if recipient.Title()]
-            )
 
         licence = context.aq_inner.aq_parent
         cadastre = services.cadastre.new_session()
