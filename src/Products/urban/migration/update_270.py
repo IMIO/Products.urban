@@ -367,7 +367,8 @@ def fix_external_decision_values(context):
 def add_building_procedure(context):
     logger = logging.getLogger("urban: Add empty building procedure")
     logger.info("starting upgrade steps")
-
+    setup_tool = api.portal.get_tool("portal_setup")
+    setup_tool.runAllImportStepsFromProfile("profile-Products.urban:preinstall")
     portal_urban = api.portal.get_tool("portal_urban")
     dimension_type_vocabularies_config = default_values["global"][
         "dimensiontypes"
