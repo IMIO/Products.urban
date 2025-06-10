@@ -47,6 +47,7 @@ from plone import api
 ##/code-section module-header
 
 optional_fields = [
+    "dimensions",
     "SCT",
     "sctDetails",
     "SDC",
@@ -578,6 +579,7 @@ schema = Schema(
                 i18n_domain="urban",
             ),
             # fixed_rows="getTabsConfigRows",
+            optional=True,
             allow_insert=True,
             allow_reorder=True,
             allow_oddeven=True,
