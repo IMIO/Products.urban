@@ -7,6 +7,7 @@ from Products.CMFCore.utils import getToolByName
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.migration.utils import refresh_workflow_permissions
 from Products.urban.setuphandlers import createFolderDefaultValues
+from Products.urban.setuphandlers import createVocabularyFolder
 from imio.schedule.content.object_factories import MacroCreationConditionObject
 from imio.schedule.content.object_factories import MacroEndConditionObject
 from imio.schedule.content.object_factories import MacroFreezeConditionObject
@@ -481,4 +482,50 @@ def add_new_registry_for_missing_capakey(context):
     registry.records[key] = registry_record
 
     logger.info("migration done!")
-    
+
+
+def add_additional_delay_option(context):
+    logger = logging.getLogger("urban: Add complementary delay option")
+    logger.info("starting upgrade steps")
+
+    # Add new term type, workflow and index
+    logger.info("Add new term type, workflow and index")
+    setup_tool = api.portal.get_tool("portal_setup")
+    setup_tool.runImportStepFromProfile("profile-Products.urban:urbantypes", "typeinfo")
+    setup_tool.runImportStepFromProfile("profile-Products.urban:preinstall", "workflow")
+    setup_tool.runImportStepFromProfile("profile-Products.urban:urbantypes", "catalog")
+
+    # Add vocabulary
+    logger.info("Add vocabulary")
+    portal_urban = api.portal.get_tool("portal_urban")
+    complementary_delay_folder = createVocabularyFolder(
+        container=portal_urban,
+        folder_id="complementary_delay",
+        site=None,
+        allowedtypes="ComplementaryDelayTerm"
+    )
+    complementary_delay_term = [
+        {
+            "id": "cyberattaque_spw",
+            "title": u"Cyberattaque SPW - avril 2025",
+            "delay": 60
+        }
+    ]
+    createFolderDefaultValues(
+        complementary_delay_folder,
+        complementary_delay_term,
+        portal_type="ComplementaryDelayTerm"
+    )
+
+    # Add complementary_delay field to all default
+    logger.info("Add complementary_delay field to all default")
+    field = "complementary_delay"
+    for licence_config in portal_urban.objectValues("LicenceConfig"):
+        if not hasattr(licence_config, "getUsedAttributes"):
+            continue
+        used_attributes = licence_config.getUsedAttributes()
+        if field in used_attributes:
+            continue
+        licence_config.setUsedAttributes(used_attributes + (field, ))
+
+    logger.info("upgrade step done!")

@@ -529,3 +529,6 @@ msgstr ""
 
 msgid "frozen_suspension"
 msgstr ""
+
+msgid "ComplementaryDelayTerm"
+msgstr ""
