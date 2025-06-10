@@ -435,7 +435,7 @@ class EnvironmentBase(
         vocab = (
             ("inside", translate(_("location_inside"),context=self.REQUEST)),
             ("near", translate(_("location_near"),context=self.REQUEST)),
-            )
+        )
         return DisplayList(vocab)
 
     def rubrics_base_query(self):
