@@ -551,8 +551,6 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin, OrderedContainer):
         licence_type = self.id
 
         def makeRow(tabname):
-            print tabname
-            print default_names
             return FixedRow(
                 keyColumn="value",
                 initialData={
