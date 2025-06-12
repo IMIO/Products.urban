@@ -4,16 +4,25 @@
         <metal:parent_call use-macro="here/@@licencetabs-macros/description_macro">
 
             <metal:applicants fill-slot="applicant_slot">
+                <metal:applicants_and_corporations_macro
+                    use-macro="here/@@licencemacros/urbanApplicantsAndCorporationsMacro" />
+                <tal:show_disabled_applicants condition="here/get_applicants_history">
+                    <metal:disabled_applicants_and_corporations_macro
+                        use-macro="here/@@licencemacros/urbanApplicantsHistoricAndCorporationsMacro" />
+                </tal:show_disabled_applicants>
                 <metal:plaintiffs_macro use-macro="here/@@licencemacros/urbanPlaintiffsMacro" />
-                <tal:show_licence_applicants condition= "here/getBound_licences">
-                    <metal:applicants_and_corporations_macro use-macro="here/@@licencemacros/urbanBoundLicenceApplicants" />
+                <tal:show_licence_applicants condition="here/getBound_licences">
+                    <metal:applicants_and_corporations_macro
+                        use-macro="here/@@licencemacros/urbanBoundLicenceApplicants" />
                 </tal:show_licence_applicants>
-                <tal:show_disabled_applicants condition= "here/get_applicants_history">
-                    <metal:disabled_applicants_and_corporations_macro use-macro="here/@@licencemacros/urbanApplicantsHistoricAndCorporationsMacro" />
+                <tal:show_disabled_applicants condition="here/get_applicants_history">
+                    <metal:disabled_applicants_and_corporations_macro
+                        use-macro="here/@@licencemacros/urbanApplicantsHistoricAndCorporationsMacro" />
                 </tal:show_disabled_applicants>
                 <metal:proprietaries use-macro="here/@@licencemacros/urbanProprietariesMacro" />
-                <tal:show_disabled_proprietaries condition= "here/get_proprietaries_history">
-                    <metal:disabled_proprietaries_and_corporations_macro use-macro="here/@@licencemacros/urbanProprietariesHistoricAndCorporationsMacro" />
+                <tal:show_disabled_proprietaries condition="here/get_proprietaries_history">
+                    <metal:disabled_proprietaries_and_corporations_macro
+                        use-macro="here/@@licencemacros/urbanProprietariesHistoricAndCorporationsMacro" />
                 </tal:show_disabled_proprietaries>
                 <metal:tenants_macro use-macro="here/@@licencemacros/urbanTenantsMacro" />
             </metal:applicants>
