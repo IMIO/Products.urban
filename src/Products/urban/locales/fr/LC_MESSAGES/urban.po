@@ -5370,6 +5370,8 @@ msgstr "Types de dimension"
 msgid "units_folder_title"
 msgstr "Unités"
 
+msgid "observationitems_folder_title"
+msgstr "Eléments de constatation"
 msgid "urban_label_dimensions"
 msgstr "Dimensions"
 
