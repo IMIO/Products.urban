@@ -1529,7 +1529,7 @@ msgstr ""
 msgid "explosivespossessions"
 msgstr ""
 
-msgid "EmptyBuilding"
+msgid "Housing"
 msgstr ""
 
 msgid "externaldecisions_folder_title"

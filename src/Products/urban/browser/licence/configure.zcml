@@ -473,17 +473,17 @@
   />
 
   <browser:page
-          for="Products.urban.interfaces.IEmptyBuilding"
-          name="emptybuildingview"
-          class=".emptybuildingview.EmptyBuildingView"
-          template="templates/emptybuildingview.pt"
+          for="Products.urban.interfaces.IHousing"
+          name="housingview"
+          class=".housingview.HousingView"
+          template="templates/housingview.pt"
           permission="zope2.View"
   />
 
   <browser:page
-     name="emptybuilding-macros"
-     for="Products.urban.interfaces.IEmptyBuilding"
-     template="templates/emptybuildingmacros.pt"
+     name="housing-macros"
+     for="Products.urban.interfaces.IHousing"
+     template="templates/housingmacros.pt"
      permission="zope2.View"
   />
 

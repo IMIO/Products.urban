@@ -365,7 +365,7 @@ def fix_external_decision_values(context):
     logger.info("upgrade step done!")
 
 def add_building_procedure(context):
-    logger = logging.getLogger("urban: Add empty building procedure")
+    logger = logging.getLogger("urban: Add housing procedure")
     logger.info("starting upgrade steps")
     setup_tool = api.portal.get_tool("portal_setup")
     setup_tool.runAllImportStepsFromProfile("profile-Products.urban:preinstall")
@@ -394,16 +394,16 @@ def add_building_procedure(context):
         default_values["global"]["units"][1:],
         default_values["global"]["units"][0],
     )
-    observation_items_vocabularies_config = default_values["EmptyBuilding"][
+    observation_items_vocabularies_config = default_values["Housing"][
         "observationitems"
     ]
     observation_items_vocabularies_config = createVocabularyFolder(
-        portal_urban.emptybuilding, "observationitems", context, allowedtypes
+        portal_urban.housing, "observationitems", context, allowedtypes
     )
     createFolderDefaultValues(
         observation_items_vocabularies_config,
-        default_values["EmptyBuilding"]["observationitems"][1:],
-        default_values["EmptyBuilding"]["observationitems"][0],
+        default_values["Housing"]["observationitems"][1:],
+        default_values["Housing"]["observationitems"][0],
     )
     
     logger.info("migration step done!")

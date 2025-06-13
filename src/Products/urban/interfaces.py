@@ -328,7 +328,7 @@ class IInspection(IGenericLicence):
     Marker interface for inspection
     """
 
-class IEmptyBuilding(IGenericLicence):
+class IHousing(IGenericLicence):
     """
     Marker interface for inspection
     """

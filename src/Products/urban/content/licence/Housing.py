@@ -16,22 +16,22 @@ from Products.urban import UrbanMessage as _
 
 
 
-EmptyBuilding_schema = (
+Housing_schema = (
     BaseFolderSchema.copy()
     + getattr(GenericLicence, "schema", Schema(())).copy()
     + getattr(CODT_BaseBuildLicence, "schema", Schema(())).copy()
     + getattr(Inspection, "schema", Schema(())).copy()
 )
 
-class EmptyBuilding(Inspection, CODT_BaseBuildLicence):
-    meta_type = "EmptyBuilding"
-    portal_type = "EmptyBuilding"
+class Housing(Inspection, CODT_BaseBuildLicence):
+    meta_type = "Housing"
+    portal_type = "Housing"
     _at_rename_after_creation = True
-    schema = EmptyBuilding_schema
+    schema = Housing_schema
 
-    implements(interfaces.IEmptyBuilding)
+    implements(interfaces.IHousing)
 
     
     
 
-registerType(EmptyBuilding, PROJECTNAME)
+registerType(Housing, PROJECTNAME)

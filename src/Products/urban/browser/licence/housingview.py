@@ -9,9 +9,9 @@ from Products.CMFPlone import PloneMessageFactory as _
 from plone import api
 
 
-class EmptyBuildingView(LicenceView):
+class HousingView(LicenceView):
     def __init__(self, context, request):
-        super(EmptyBuildingView, self).__init__(context, request)
+        super(HousingView, self).__init__(context, request)
         self.context = context
         self.request = request
         # disable portlets on licences
@@ -19,7 +19,7 @@ class EmptyBuildingView(LicenceView):
         self.request.set("disable_plone.leftcolumn", 1)
 
     def getMacroViewName(self):
-        return "emptybuilding-macros"
+        return "housing-macros"
 
     def getExpirationDate(self):
         return None

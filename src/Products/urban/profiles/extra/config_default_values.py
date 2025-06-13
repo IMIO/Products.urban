@@ -3851,7 +3851,7 @@ default_values = {
             {"id": "externe", "title": u"Demande externe"},
         ],
     },
-    "EmptyBuilding": {
+    "Housing": {
         "observationitems": [
             "UrbanVocabularyTerm",
             {"id": "no_population_registration", "title": u"L’immeuble (ou partie d’immeuble) ne fait pas l’objet d’une inscription dans les registres de la population"},

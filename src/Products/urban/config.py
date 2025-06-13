@@ -226,7 +226,7 @@ URBAN_TYPES = [
     'RoadDecree',
     "Inspection",
     "Ticket",
-    "EmptyBuilding"
+    "Housing"
 ]
 
 URBAN_TYPES_ACRONYM = {
@@ -261,7 +261,7 @@ URBAN_TYPES_ACRONYM = {
     "RoadDecree": "DV",
     "Inspection": "INSP",
     "Ticket": "PV",
-    "EmptyBuilding": "BATV"
+    "Housing": "LOG"
 }
 
 URBAN_CWATUPE_TYPES = [
@@ -301,7 +301,7 @@ URBAN_CODT_TYPES = [
     "RoadDecree",
     "Inspection",
     "Ticket",
-    "EmptyBuilding"
+    "Housing"
 ]
 
 URBAN_ENVIRONMENT_TYPES = [

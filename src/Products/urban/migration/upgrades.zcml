@@ -739,7 +739,7 @@
         />
         
     <gs:upgradeStep
-        title="Add empty building procedure"
+        title="Add housing procedure"
         description=""
         source="1160"
         destination="1161"

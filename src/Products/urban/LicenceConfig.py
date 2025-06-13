@@ -499,7 +499,7 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin, OrderedContainer):
             "road",
         ]
         inspection_tabs_config = ["description", "advices", "inspection", "location"]
-        emptybuilding_tabs_config = [
+        housing_tabs_config = [
             "description",
             "advices",
             "inspection",
@@ -542,7 +542,7 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin, OrderedContainer):
             ],
             "envclassbordering": env_inquiry_tabs_config,
             "inspection": inspection_tabs_config,
-            "emptybuilding": emptybuilding_tabs_config,
+            "housing": housing_tabs_config,
             "patrimonycertificate": patrimonycertificate_tabs_config,
             "ticket": ticket_tabs_config,
             "roaddecree": buildlicence_tabs_config,

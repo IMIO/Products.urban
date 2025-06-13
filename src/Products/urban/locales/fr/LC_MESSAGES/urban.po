@@ -1545,8 +1545,8 @@ msgstr "Paramètres des détentions d'explosifs"
 msgid "explosivespossessions"
 msgstr "Détention d'explosifs"
 
-msgid "EmptyBuilding"
-msgstr "Bâtiment vide"
+msgid "Housing"
+msgstr "Logement"
 
 msgid "externaldecisions_folder_title"
 msgstr "Décision des avis externes"
@@ -1796,8 +1796,8 @@ msgstr "Périodes de suspension d'enquête"
 msgid "inquiry_title_and_number"
 msgstr "Enquête n°${number}"
 
-msgid "emptybuilding_urbanconfig_title"
-msgstr "Paramètres bâtiments vides"
+msgid "housing_urbanconfig_title"
+msgstr "Paramètres logements"
 
 msgid "inspection_urbanconfig_title"
 msgstr "Paramètres de l'inspection"
