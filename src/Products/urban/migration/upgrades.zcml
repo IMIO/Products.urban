@@ -782,5 +782,13 @@
         handler=".update_270.add_new_registry_for_missing_capakey"
         profile="Products.urban:default"
         />
+    <gs:upgradeStep
+        title="Add new vocabulary"
+        description=""
+        source="1165"
+        destination="1166"
+        handler=".update_270.add_municipal_directive_vocabulary"
+        profile="Products.urban:default"
+        />
   
 </configure>
