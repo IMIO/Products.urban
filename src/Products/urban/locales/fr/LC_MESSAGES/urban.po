@@ -5431,26 +5431,26 @@ msgstr "ans"
 msgid "zip_folder_title"
 msgstr "Zone d'initiative privilégiée"
 
-msgid "chapter_1_guiding_principles"
-msgstr "Chapitre 1 : principes directeurs"
+msgid "chapter_1"
+msgstr "Chapitre 1"
 
-msgid "chapter_2_density"
-msgstr "Chapitre 2 : densité"
+msgid "chapter_2"
+msgstr "Chapitre 2"
 
-msgid "chapter_3_surface_area"
-msgstr "Chapitre 3 : superficie"
+msgid "chapter_3"
+msgstr "Chapitre 3"
 
-msgid "chapter_4_parking"
-msgstr "Chapitre 4 : Stationnement"
+msgid "chapter_4"
+msgstr "Chapitre 4"
 
-msgid "chapter_5_stormwater_management"
-msgstr "Chapitre 5 : gestion des eaux pluviales"
+msgid "chapter_5"
+msgstr "Chapitre 5"
 
-msgid "chapter_6_service_premises"
-msgstr "Chapitre 6 : Locaux de service"
+msgid "chapter_6"
+msgstr "Chapitre 6"
 
-msgid "chapter_7_collective_housing"
-msgstr "Chapitre 7 : logement collectif"
+msgid "chapter_7"
+msgstr "Chapitre 7"
 
 msgid "municipal_directive_folder_title"
 msgstr "Directive communale"

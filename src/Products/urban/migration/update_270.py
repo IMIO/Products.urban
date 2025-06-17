@@ -494,32 +494,32 @@ def add_municipal_directive_vocabulary(context):
     municipal_directive_vocabulary_config = [
        
         {
-        "id": "guiding-principles",
-        "title": translate(_("chapter_1_guiding_principles"), context=context.REQUEST)
+        "id": "chapter_1",
+        "title": translate(_("chapter_1"), context=context.REQUEST)
     },
     {
-        "id": "density",
-        "title": translate(_("chapter_2_density"), context=context.REQUEST)
+        "id": "chapter_2",
+        "title": translate(_("chapter_2"), context=context.REQUEST)
     },
     {
-        "id": "surface-area",
-        "title": translate(_("chapter_3_surface_area"), context=context.REQUEST)
+        "id": "chapter_3",
+        "title": translate(_("chapter_3"), context=context.REQUEST)
     },
     {
-        "id": "parking",
-        "title": translate(_("chapter_4_parking"), context=context.REQUEST)
+        "id": "chapter_4",
+        "title": translate(_("chapter_4"), context=context.REQUEST)
     },
     {
-        "id": "stormwater-management",
-        "title": translate(_("chapter_5_stormwater_management"), context=context.REQUEST)
+        "id": "chapter_5",
+        "title": translate(_("chapter_5"), context=context.REQUEST)
     },
     {
-        "id": "service-premises",
-        "title": translate(_("chapter_6_service_premises"), context=context.REQUEST)
+        "id": "chapter_6",
+        "title": translate(_("chapter_6"), context=context.REQUEST)
     },
     {
-        "id": "collective-housing",
-        "title": translate(_("chapter_7_collective_housing"), context=context.REQUEST)
+        "id": "chapter_7",
+        "title": translate(_("chapter_7"), context=context.REQUEST)
     }
         ]
     municipal_directive_config = createVocabularyFolder(
