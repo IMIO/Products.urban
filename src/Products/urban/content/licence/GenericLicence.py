@@ -1477,6 +1477,17 @@ schema = Schema(
             schemata="urban_environment",
             default_output_type="text/x-html-safe",
         ),
+        LinesField(
+            name="municipalDirective",
+            widget=MultiSelect2Widget(
+                size=10,
+                label=_("urban_label_municipalDirective", default="municipalDirective"),
+            ),
+            schemata="urban_location",
+            multiValued=True,
+            vocabulary=UrbanVocabulary("municipal_directive",vocType='UrbanVocabularyTerm', inUrbanConfig=False),
+            default_method="getDefaultValue",
+        ),
     ),
 )
 

@@ -5459,3 +5459,6 @@ msgstr "Chapitre 7"
 
 msgid "municipal_directive_folder_title"
 msgstr "Directive communale"
+
+msgid "urban_label_municipalDirective"
+msgstr "Directive communale"
