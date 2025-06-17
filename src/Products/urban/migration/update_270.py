@@ -582,34 +582,34 @@ def add_municipal_directive_vocabulary(context):
     container = api.portal.get_tool("portal_urban")
     vocabulary_name = "municipal_directive"
 
-    municipal_directive_vocabulary_config = [
-       
-        {
-        "id": "guiding-principles",
+    municipal_directive_vocabulary_config = [ 
+    {
+
+        "id": "chapter_1",
         "title": translate(_("chapter_1"), context=context.REQUEST)
     },
     {
-        "id": "density",
+        "id": "chapter_2",
         "title": translate(_("chapter_2"), context=context.REQUEST)
     },
     {
-        "id": "surface-area",
+        "id": "chapter_3",
         "title": translate(_("chapter_3"), context=context.REQUEST)
     },
     {
-        "id": "parking",
+        "id": "chapter_4",
         "title": translate(_("chapter_4"), context=context.REQUEST)
     },
     {
-        "id": "stormwater-management",
+        "id": "chapter_5",
         "title": translate(_("chapter_5"), context=context.REQUEST)
     },
     {
-        "id": "service-premises",
+        "id": "chapter_6",
         "title": translate(_("chapter_6"), context=context.REQUEST)
     },
     {
-        "id": "collective-housing",
+        "id": "chapter_7",
         "title": translate(_("chapter_7"), context=context.REQUEST)
     }
         ]

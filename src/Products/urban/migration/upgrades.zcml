@@ -804,9 +804,10 @@
     <gs:upgradeStep
         title="Add new vocabulary"
         description=""
-        source="1167"
-        destination="1168"
+        source="1165"
+        destination="1166"
         handler=".update_270.add_municipal_directive_vocabulary"
         profile="Products.urban:default"
         />
+
 </configure>
