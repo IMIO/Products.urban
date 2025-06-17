@@ -5454,3 +5454,6 @@ msgstr "Chapitre 7 : logement collectif"
 
 msgid "municipal_directive_folder_title"
 msgstr "Directive communale"
+
+msgid "urban_label_municipalDirective"
+msgstr "Directive communale"
