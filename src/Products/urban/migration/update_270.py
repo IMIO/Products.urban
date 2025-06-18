@@ -49,13 +49,13 @@ def rename_patrimony_certificate(context):
     portal = api.portal.get()
 
     patrimony_folder = portal.urban.patrimonycertificates
-    patrimony_folder.setTitle("Patrimoines")
+    patrimony_folder.setTitle(u"Patrimoines")
     patrimony_folder.reindexObject(["Title"])
 
     patrimony_collection = (
         portal.urban.patrimonycertificates.collection_patrimonycertificate
     )
-    patrimony_collection.setTitle("Patrimoines")
+    patrimony_collection.setTitle(u"Patrimoines")
     patrimony_collection.reindexObject(["Title"])
 
     patrimony_config_folder = portal.portal_urban.patrimonycertificate
