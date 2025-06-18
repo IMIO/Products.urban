@@ -52,6 +52,7 @@ URBAN_TYPES_INTERFACES = {
     "UrbanEventOpinionRequest": interfaces.IUrbanEventOpinionRequest,
     "ExplosivesPossession": interfaces.IExplosivesPossession,
     "RoadDecree": interfaces.IRoadDecree,
+    "Housing": interfaces.IHousing,
 }
 
 

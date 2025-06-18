@@ -513,6 +513,13 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin, OrderedContainer):
             "patrimony",
             "environment",
         ]
+        housing_tabs_config = [
+            "description",
+            "advices",
+            "inspection",
+            "habitation",
+            "location",
+        ]
         patrimonycertificate_tabs_config = [
             "description",
             "analysis",
@@ -553,6 +560,7 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin, OrderedContainer):
             "explosivespossession": explosivespossession_tabs_config,
             "envclassbordering": env_inquiry_tabs_config,
             "inspection": inspection_tabs_config,
+            "housing": housing_tabs_config,
             "patrimonycertificate": patrimonycertificate_tabs_config,
             "ticket": ticket_tabs_config,
             "roaddecree": buildlicence_tabs_config,
