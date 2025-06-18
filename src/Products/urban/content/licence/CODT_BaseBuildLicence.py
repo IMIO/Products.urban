@@ -574,7 +574,9 @@ schema = Schema(
                     "unit": SelectColumn(_("Unit"), "listDimensionUnit"),
                     "details": TextAreaColumn(_("Details"), rows=3, cols=40),
                 },
-                label="dimensions",
+                label=_(
+                    "urban_label_dimensions", default="dimensions"
+                ),
             ),
             optional=True,
             allow_insert=True,

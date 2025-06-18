@@ -59,7 +59,7 @@ def rename_patrimony_certificate(context):
     patrimony_collection.reindexObject(["Title"])
 
     patrimony_config_folder = portal.portal_urban.patrimonycertificate
-    patrimony_config_folder.setTitle("Paramètres des patrimoines")
+    patrimony_config_folder.setTitle(u"Paramètres des patrimoines")
     patrimony_config_folder.reindexObject(["Title"])
 
     logger.info("upgrade step done!")
@@ -372,47 +372,6 @@ def fix_external_decision_values(context):
     logger.info("upgrade step done!")
 
 
-def add_building_procedure(context):
-    logger = logging.getLogger("urban: Add housing procedure")
-    logger.info("starting upgrade steps")
-    setup_tool = api.portal.get_tool("portal_setup")
-    setup_tool.runAllImportStepsFromProfile("profile-Products.urban:preinstall")
-    portal_urban = api.portal.get_tool("portal_urban")
-    dimension_type_vocabularies_config = default_values["global"]["dimensiontypes"]
-    allowedtypes = dimension_type_vocabularies_config[0]
-    dimension_type_vocabularies_config = createVocabularyFolder(
-        portal_urban, "dimensiontypes", context, allowedtypes
-    )
-    createFolderDefaultValues(
-        dimension_type_vocabularies_config,
-        default_values["global"]["dimensiontypes"][1:],
-        default_values["global"]["dimensiontypes"][0],
-    )
-    units_vocabularies_config = default_values["global"]["units"]
-    allowedtypes = units_vocabularies_config[0]
-    units_vocabularies_config = createVocabularyFolder(
-        portal_urban, "units", context, allowedtypes
-    )
-    createFolderDefaultValues(
-        units_vocabularies_config,
-        default_values["global"]["units"][1:],
-        default_values["global"]["units"][0],
-    )
-    observation_items_vocabularies_config = default_values["Housing"][
-        "observationitems"
-    ]
-    observation_items_vocabularies_config = createVocabularyFolder(
-        portal_urban.housing, "observationitems", context, allowedtypes
-    )
-    createFolderDefaultValues(
-        observation_items_vocabularies_config,
-        default_values["Housing"]["observationitems"][1:],
-        default_values["Housing"]["observationitems"][0],
-    )
-
-    logger.info("migration step done!")
-
-
 def add_new_registry_profil(context):
     logger = logging.getLogger("urban: reimport registry profil")
     logger.info("starting migration steps")
@@ -535,3 +494,44 @@ def add_new_registry_for_missing_capakey(context):
     registry.records[key] = registry_record
 
     logger.info("migration done!")
+
+
+def add_building_procedure(context):
+    logger = logging.getLogger("urban: Add housing procedure")
+    logger.info("starting upgrade steps")
+    setup_tool = api.portal.get_tool("portal_setup")
+    setup_tool.runAllImportStepsFromProfile("profile-Products.urban:preinstall")
+    portal_urban = api.portal.get_tool("portal_urban")
+    dimension_type_vocabularies_config = default_values["global"]["dimensiontypes"]
+    allowedtypes = dimension_type_vocabularies_config[0]
+    dimension_type_vocabularies_config = createVocabularyFolder(
+        portal_urban, "dimensiontypes", context, allowedtypes
+    )
+    createFolderDefaultValues(
+        dimension_type_vocabularies_config,
+        default_values["global"]["dimensiontypes"][1:],
+        default_values["global"]["dimensiontypes"][0],
+    )
+    units_vocabularies_config = default_values["global"]["units"]
+    allowedtypes = units_vocabularies_config[0]
+    units_vocabularies_config = createVocabularyFolder(
+        portal_urban, "units", context, allowedtypes
+    )
+    createFolderDefaultValues(
+        units_vocabularies_config,
+        default_values["global"]["units"][1:],
+        default_values["global"]["units"][0],
+    )
+    observation_items_vocabularies_config = default_values["Housing"][
+        "observationitems"
+    ]
+    observation_items_vocabularies_config = createVocabularyFolder(
+        portal_urban.housing, "observationitems", context, allowedtypes
+    )
+    createFolderDefaultValues(
+        observation_items_vocabularies_config,
+        default_values["Housing"]["observationitems"][1:],
+        default_values["Housing"]["observationitems"][0],
+    )
+
+    logger.info("migration step done!")
