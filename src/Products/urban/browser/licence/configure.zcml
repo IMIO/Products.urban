@@ -473,11 +473,11 @@
   />
 
   <browser:page
-          for="Products.urban.interfaces.IHousing"
-          name="housingview"
-          class=".housingview.HousingView"
-          template="templates/housingview.pt"
-          permission="zope2.View"
+      for="Products.urban.interfaces.IHousing"
+      name="housingview"
+      class=".housingview.HousingView"
+      template="templates/housingview.pt"
+      permission="zope2.View"
   />
 
   <browser:page
