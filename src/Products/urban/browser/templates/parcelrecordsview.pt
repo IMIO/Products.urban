@@ -14,10 +14,16 @@
 
     <tal:display define="displays view/get_related_licences_displays;
                          licences python: displays[0];
-                         parcel_historic python: displays[1];">
+                         parcel_historic python: displays[1];
+                         missing_capakey view/get_missing_capakey;">
        <tal:no_result condition="python: not licences">
           <h1 i18n:translate="">No related licences</h1>
        </tal:no_result>
+       <tal:missing_capakeys condition="missing_capakey">
+            <h1 i18n:translate="missing_capakey_single" tal:condition="python: len(missing_capakey) == 1">This plot cannot be found, perhaps it belong to a neighboring municipality.</h1>
+            <h1 i18n:translate="missing_capakey_plural" tal:condition="python: len(missing_capakey) > 1">These plots cannot be found, perhaps they belong to a neighboring municipality.</h1>
+            <span tal:content="python: ', '.join(missing_capakey)">List</span>
+       </tal:missing_capakeys>
        <tal:result condition="licences">
           <h1 i18n:translate="">Related licences</h1>
           <br />

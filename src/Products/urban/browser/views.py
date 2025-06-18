@@ -1,19 +1,21 @@
 # -*- coding: utf-8 -*-
-from Products.Five import BrowserView
-from Acquisition import aq_inner, aq_base
+from Acquisition import aq_base
+from Acquisition import aq_inner
 from Products.CMFPlone.utils import safe_hasattr
+from Products.Five import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.urban import config
-from Products.urban.cartography import config as carto_config
 from Products.urban import services
+from Products.urban.cartography import config as carto_config
 from Products.urban.utils import getMd5Signature
-
 from plone import api
 
 import logging
+import os
 import urllib
 import urllib2
 import xml.etree.ElementTree as ET
+
 
 logger = logging.getLogger("urban: Views")
 
@@ -150,7 +152,19 @@ class ProxyController(BrowserView):
         "cartopro2.wallonie.be",
     ]
 
+    def handle_env(self):
+        env_var = os.environ.get("URBAN_ACTIVATE_GETPROXY", False)
+        if not env_var:
+            return False
+        if env_var.lower() in ["false", "faux", "0", "no", "non", "n"]:
+            return False
+        if env_var.lower() in ["true", "vrai", "1", "yes", "oui", "o"]:
+            return True
+        return False
+
     def getProxy(self):
+        if not self.handle_env():
+            return
         try:
             url = self.request.get("url")
             # infos = urlparse(url)

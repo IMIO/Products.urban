@@ -350,7 +350,36 @@ class LicenceView(BrowserView):
         return self.getSchemataFields("urban_inquiry", exclude)
 
     def getBoundInquiryFields(self, exclude=[], bound_context=None):
-        return self.getSchemataFields("urban_inquiry", exclude, bound_context)
+        fields_display = {
+            "none": [
+                "divergence",
+                "investigation_radius",
+                "divergenceDetails",
+                "announcementArticles",
+                "announcementArticlesText",
+                "investigationDetails",
+                "derogation",
+                "derogationDetails",
+                "investigationArticles",
+                "investigationArticlesText",
+                "roadModificationSubject",
+                "demandDisplay",
+                "investigationReasons",
+            ],
+            "announcement" : [
+                "derogation",
+                "derogationDetails",
+                "investigationArticles",
+                "investigationArticlesText",
+                "roadModificationSubject",
+                "demandDisplay",
+                "investigationReasons",
+            ],
+        }
+        exclude_fields = []
+        if hasattr(bound_context, "getInquiry_type"):
+            exclude_fields = fields_display.get(bound_context.getInquiry_type(), [])
+        return self.getSchemataFields("urban_inquiry", list(set(exclude_fields + exclude)), bound_context)
 
     def getDefaultFields(self, exclude=[], context=None):
         base_exclude = ["id", "title"]
@@ -432,6 +461,71 @@ class LicenceView(BrowserView):
             all_inquiries.append(inquiries)
         return all_inquiries
 
+    def getInquiriesForDisplay(self):
+        """
+        Returns the inquiries to display on the buildlicence_view
+        This will move to the buildlicenceview when it will exist...
+        """
+        context = aq_inner(self.context)
+        inquiries = context.getInquiries()
+        if not inquiries:
+            # we want to display at least the informations about the inquiry
+            # defined on the licence even if no data have been entered
+            inquiries.append(context)
+        return inquiries
+
+    def getRubrics(self):
+        """
+        display the rubrics number, their class and then the text
+        """
+        context = aq_inner(self.context)
+        catalog = api.portal.get_tool("portal_catalog")
+        rubric_uids = context.getField("rubrics").getRaw(context)
+        rubric_brains = catalog(UID=rubric_uids)
+        rubrics = [brain.getObject() for brain in rubric_brains]
+        rubrics_display = [
+            "<p>classe %s, %s</p>%s"
+            % (rub.getExtraValue(), rub.getNumber(), rub.Description())
+            for rub in rubrics
+        ]
+        return rubrics_display
+
+    def _sortConditions(self, conditions):
+        """
+        sort exploitation conditions in this order: CI/CS, CI, CS
+        """
+        order = ["CI/CS", "CI", "CS", "CS-Eau", "Ville"]
+        sorted_conditions = dict(
+            [
+                (
+                    val,
+                    [],
+                )
+                for val in order
+            ]
+        )
+        for cond in conditions:
+            val = cond.getExtraValue()
+            sorted_conditions[val].append(
+                {
+                    "type": val,
+                    "url": cond.absolute_url() + "/description/getRaw",
+                    "title": cond.Title(),
+                }
+            )
+        sort = []
+        for val in order:
+            sort.extend(sorted_conditions[val])
+        return sort
+
+    def getMinimumConditions(self):
+        """
+        sort the conditions from the field 'minimumLegalConditions'  by type (integral, sectorial, ...)
+        """
+        context = aq_inner(self.context)
+        min_conditions = context.getMinimumLegalConditions()
+        return self._sortConditions(min_conditions)
+
 
 class CODTLicenceView(LicenceView):
     """ """
@@ -499,72 +593,6 @@ class EnvironmentLicenceView(LicenceView):
 
     def __init__(self, context, request):
         super(EnvironmentLicenceView, self).__init__(context, request)
-
-    def getInquiriesForDisplay(self):
-        """
-        Returns the inquiries to display on the buildlicence_view
-        This will move to the buildlicenceview when it will exist...
-        """
-        context = aq_inner(self.context)
-        inquiries = context.getInquiries()
-        if not inquiries:
-            # we want to display at least the informations about the inquiry
-            # defined on the licence even if no data have been entered
-            inquiries.append(context)
-        return inquiries
-
-    def getRubrics(self):
-        """
-        display the rubrics number, their class and then the text
-        """
-        context = aq_inner(self.context)
-        catalog = api.portal.get_tool("portal_catalog")
-        rubric_uids = context.getField("rubrics").getRaw(context)
-        rubric_brains = catalog(UID=rubric_uids)
-        rubrics = [brain.getObject() for brain in rubric_brains]
-        rubrics_display = [
-            "<p>classe %s, %s</p>%s"
-            % (rub.getExtraValue(), rub.getNumber(), rub.Description())
-            for rub in rubrics
-        ]
-        return rubrics_display
-
-    def _sortConditions(self, conditions):
-        """
-        sort exploitation conditions in this order: CI/CS, CI, CS
-        """
-        order = ["CI/CS", "CI", "CS", "CS-Eau", "Ville"]
-        sorted_conditions = dict(
-            [
-                (
-                    val,
-                    [],
-                )
-                for val in order
-            ]
-        )
-        for cond in conditions:
-            val = cond.getExtraValue()
-            sorted_conditions[val].append(
-                {
-                    "type": val,
-                    "url": cond.absolute_url() + "/description/getRaw",
-                    "title": cond.Title(),
-                }
-            )
-        sort = []
-        for val in order:
-            sort.extend(sorted_conditions[val])
-        return sort
-
-    def getMinimumConditions(self):
-        """
-        sort the conditions from the field 'minimumLegalConditions'  by type (integral, sectorial, ...)
-        """
-        context = aq_inner(self.context)
-        min_conditions = context.getMinimumLegalConditions()
-        return self._sortConditions(min_conditions)
-
 
 class ShowEditTabbing(BrowserView):
     """call this view to see if a licence should display the tabbing with edit icons"""

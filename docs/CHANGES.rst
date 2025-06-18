@@ -8,6 +8,149 @@ Changelog
 
 .. towncrier release notes start
 
+2.7.40 (2025-06-10)
+-------------------
+
+Bug fixes:
+
+
+- Revert "URB-3293 - Add RoadDecree to URBAN_TYPES (#340)"
+  [mpeeters] (URB-3293)
+
+
+2.7.39 (2025-06-07)
+-------------------
+
+New features:
+
+
+- Add way to easily hide licence type
+  [jchandelle] (SUP-33793)
+- Change display of inquiry view
+  [jchandelle] (SUP-44199)
+- Add a message in case we can't link pod template
+  [jchandelle] (SUP-44861)
+
+
+Bug fixes:
+
+
+- Fix history parcel view when missing capakey
+  [jchandelle] (SUP-36370)
+- Fix filename encoding in mail sending
+  [jchandelle] (SUP-43946)
+- Fix recipient import in inquiry event
+  [jchandelle] (SUP-44583)
+- Fix 220 viewlet house number encoding
+  jchandelle (SUP-44642)
+- Fix link pod template in import config
+  [jchandelle] (SUP-44861)
+
+
+2.7.38 (2025-05-27)
+-------------------
+
+New features:
+
+
+- Add debug functionality for schedule task
+  [mpeeters] (URB-3070)
+
+
+Bug fixes:
+
+
+- Add RoadDecree to URBAN_TYPES so it can be used in the tests.
+  [aduchene] (URB-3293)
+
+
+Internal:
+
+
+- Move `urban.schedule.condition.deposit_past_20days` into urban.schedule package
+  [mpeeters] (URB-3154)
+
+
+2.7.37 (2025-04-29)
+-------------------
+
+Bug fixes:
+
+
+- Fix encoding in mail send notification
+  [jchandelle] (SUP-43917)
+
+
+2.7.36 (2025-04-24)
+-------------------
+
+Bug fixes:
+
+
+- Fix logging syntax error
+  [jchandelle] (SUP-44123)
+- Disable getProxy function behind a env var
+  [jchandelle] (URB-3230)
+
+
+2.7.35 (2025-04-03)
+-------------------
+
+New features:
+
+
+- Add environment fieldset to every licence type
+  Add habitation fieldset to `MiscDemand`, `PreliminaryNotice` and `ProjectMeeting`
+  [daggelpop] (SUP-33774)
+- Add message explaining how to format CSV for inquiry
+  [jchandelle] (URB-2876)
+- Move centrality in first position in the fieldset
+  [daggelpop] (URB-3017)
+- Add patrimony fieldset to multiple licence types
+  [daggelpop] (URB-3121)
+- Add stringinterp to get foldermanager email
+  [jchandelle] (URB-3283)
+- Add button to inquiry to get neighbors address
+  [jchandelle] (URB-3286)
+
+
+Bug fixes:
+
+
+- Fix handling EnvironmentRubricTerm in import config
+  [jchandelle] (URB-3296)
+
+
+2.7.34 (2025-03-27)
+-------------------
+
+Bug fixes:
+
+
+- Fix licence type condition in content rules
+  [jchandelle] (SUP-43534)
+
+
+2.7.33 (2025-03-27)
+-------------------
+
+Bug fixes:
+
+
+- Fix event send mail notification title encoding
+  [jchandelle] (SUP-43533)
+
+
+2.7.32 (2025-03-24)
+-------------------
+
+Bug fixes:
+
+
+- Fix view for fixing task uid and add possiblity to call on licence folder
+  [jchandelle] (SUP-43189)
+
+
 2.7.31 (2025-03-12)
 -------------------
 
