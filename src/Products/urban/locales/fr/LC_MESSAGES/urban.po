@@ -4614,6 +4614,12 @@ msgstr "Référence SPW Economie, Emploi, Recherche"
 msgid "urban_label_referenceFT"
 msgstr "Référence FT (ARNE)"
 
+msgid "urban_label_referenceFT_custom"
+msgstr "Référence FT"
+
+msgid "urban_label_referenceDGO3_custom"
+msgstr "Référence FD"
+
 #. Default: "Referenceprosecution"
 #: ../content/licence/Inspection.py:38
 #: ../content/licence/Ticket.py:39
