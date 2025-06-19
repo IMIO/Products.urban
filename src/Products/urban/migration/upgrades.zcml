@@ -774,7 +774,6 @@
         profile="Products.urban:default"
         />
 
-
     <gs:upgradeStep
         title="Change ticket workflow ended state out permission"
         description=""
