@@ -122,5 +122,15 @@
 
   <index name="investigationStart" meta_type="DateIndex"/>
   <index name="investigationEnd" meta_type="DateIndex"/>
+
+  <index name="work_beginning" meta_type="DateIndex">
+    <indexed_attr value="work_beginning"/>
+  </index>
+  <column value="work_beginning"/>
+
+  <index name="work_end" meta_type="DateIndex">
+    <indexed_attr value="work_end"/>
+  </index>
+  <column value="work_end"/>
 <!-- ##/code-section FOOT -->
 </object>

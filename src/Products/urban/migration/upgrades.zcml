@@ -790,5 +790,14 @@
         handler=".update_270.add_building_procedure"
         profile="Products.urban:default"
         />
-  
+
+    <gs:upgradeStep
+        title="Add work related index"
+        description=""
+        source="1166"
+        destination="1167"
+        handler=".update_270.add_work_related_index"
+        profile="Products.urban:default"
+        />
+
 </configure>

@@ -1,7 +1,9 @@
 # encoding: utf-8
 
 from Acquisition import aq_parent
+from eea.facetednavigation.interfaces import ICriteria
 from OFS.interfaces import IOrderedContainer
+from Products.urban import URBAN_TYPES
 from Products.urban import UrbanMessage as _
 from Products.CMFCore.utils import getToolByName
 from Products.urban.interfaces import IGenericLicence
@@ -9,6 +11,7 @@ from Products.urban.migration.utils import refresh_workflow_permissions
 from Products.urban.setuphandlers import createFolderDefaultValues
 from Products.urban.profiles.extra.config_default_values import default_values
 from Products.urban.setuphandlers import createVocabularyFolder
+from imio.helpers.catalog import reindexIndexes
 from imio.schedule.content.object_factories import MacroCreationConditionObject
 from imio.schedule.content.object_factories import MacroEndConditionObject
 from imio.schedule.content.object_factories import MacroFreezeConditionObject
@@ -535,3 +538,52 @@ def add_building_procedure(context):
     )
 
     logger.info("migration step done!")
+
+
+def add_work_related_index(context):
+    logger = logging.getLogger("urban: Add work related index")
+    logger.info("starting upgrade steps")
+
+    setup_tool = api.portal.get_tool("portal_setup")
+    setup_tool.runImportStepFromProfile("profile-Products.urban:urbantypes", "catalog")
+
+    reindexIndexes(None, ["work_beginning", "work_end"])
+
+    portal = api.portal.get()
+    urban_folder = portal.urban
+    folders = [getattr(urban_folder, urban_type.lower() + "s", None) for urban_type in URBAN_TYPES]
+    folders.append(urban_folder)
+    for folder in folders:
+        if not folder:
+            continue
+        criterion = ICriteria(folder)
+        if criterion is None:
+            continue
+        data_start = {
+            "_cid_": u"c96",
+            "title": u"Date de debut des travaux",
+            "hidden": False,
+            "index": u"work_beginning",
+            "calYearRange": u"c-10:c+10"
+        }
+        data_end = {
+            "_cid_": u"c95",
+            "title": u"Date de fin des travaux",
+            "hidden": False,
+            "index": u"work_end",
+            "calYearRange": u"c-10:c+10"
+        }
+        criterion.add(
+            wid="daterange",
+            position="top",
+            section="advanced",
+            **data_start
+        )
+        criterion.add(
+            wid="daterange",
+            position="top",
+            section="advanced",
+            **data_end
+        )
+
+    logger.info("upgrade step done!")

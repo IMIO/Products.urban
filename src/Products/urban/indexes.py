@@ -412,3 +412,19 @@ def streetcode_indexer(obj):
 @indexer(interfaces.IGenericLicence)
 def additional_reference(object):
     return object.getAdditionalReference()
+
+
+@indexer(interfaces.IGenericLicence)
+def work_beginning_indexer(obj):
+    work_beginning = getattr(aq_inner(obj), "getLastWorkBeginning", None)
+    if work_beginning is None:
+        raise AttributeError()
+    return work_beginning().eventDate
+
+
+@indexer(interfaces.IGenericLicence)
+def work_end_indexer(obj):
+    work_end = getattr(aq_inner(obj), "getLastWorkEnd", None)
+    if work_end is None:
+        raise AttributeError()
+    return work_end().eventDate
