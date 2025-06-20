@@ -11,6 +11,7 @@ from Products.urban.migration.utils import refresh_workflow_permissions
 from Products.urban.setuphandlers import createFolderDefaultValues
 from Products.urban.profiles.extra.config_default_values import default_values
 from Products.urban.setuphandlers import createVocabularyFolder
+from imio.helpers.catalog import reindexIndexes
 from imio.schedule.content.object_factories import MacroCreationConditionObject
 from imio.schedule.content.object_factories import MacroEndConditionObject
 from imio.schedule.content.object_factories import MacroFreezeConditionObject
@@ -546,24 +547,15 @@ def add_work_related_index(context):
     setup_tool = api.portal.get_tool("portal_setup")
     setup_tool.runImportStepFromProfile("profile-Products.urban:urbantypes", "catalog")
 
-    catalog = api.portal.get_tool("portal_catalog")
-    licence_brains = catalog(object_provides=IGenericLicence.__identifier__)
-    for count, brain in enumerate(licence_brains):
-        licence = brain.getObject()
-        logger.info("{}/{} - Reindex :{}".format(
-            count+1,
-            len(licence_brains),
-            "/".join(licence.getPhysicalPath())
-        ))
-        licence.reindexObject(idxs=["work_beginning", "work_end"])
-
-    logger.info("upgrade step done!")
+    reindexIndexes(None, ["work_beginning", "work_end"])
 
     portal = api.portal.get()
     urban_folder = portal.urban
     folders = [getattr(urban_folder, urban_type.lower() + "s", None) for urban_type in URBAN_TYPES]
     folders.append(urban_folder)
     for folder in folders:
+        if not folder:
+            continue
         criterion = ICriteria(folder)
         if criterion is None:
             continue
@@ -593,3 +585,5 @@ def add_work_related_index(context):
             section="advanced",
             **data_end
         )
+
+    logger.info("upgrade step done!")
