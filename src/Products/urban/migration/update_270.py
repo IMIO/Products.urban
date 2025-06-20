@@ -7,6 +7,7 @@ from Products.CMFCore.utils import getToolByName
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.migration.utils import refresh_workflow_permissions
 from Products.urban.setuphandlers import createFolderDefaultValues
+from Products.urban.setuphandlers import add_new_urban_licence_type
 from Products.urban.profiles.extra.config_default_values import default_values
 from Products.urban.setuphandlers import createVocabularyFolder
 from imio.schedule.content.object_factories import MacroCreationConditionObject
@@ -485,8 +486,8 @@ def add_new_registry_for_missing_capakey(context):
     registry = getUtility(IRegistry)
     key = "Products.urban.interfaces.IMissingCapakey"
     registry_field = List(
-        title="Missing capakey",
-        description="List of missing capakey",
+        title=u"Missing capakey",
+        description=u"List of missing capakey",
         value_type=TextLine(),
     )
     registry_record = Record(registry_field)
