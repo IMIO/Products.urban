@@ -485,8 +485,8 @@ def add_new_registry_for_missing_capakey(context):
     registry = getUtility(IRegistry)
     key = "Products.urban.interfaces.IMissingCapakey"
     registry_field = List(
-        title="Missing capakey",
-        description="List of missing capakey",
+        title=u"Missing capakey",
+        description=u"List of missing capakey",
         value_type=TextLine(),
     )
     registry_record = Record(registry_field)
