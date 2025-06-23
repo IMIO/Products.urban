@@ -7,6 +7,7 @@ from Products.CMFCore.utils import getToolByName
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.migration.utils import refresh_workflow_permissions
 from Products.urban.setuphandlers import createFolderDefaultValues
+from Products.urban.setuphandlers import add_new_urban_licence_type
 from Products.urban.profiles.extra.config_default_values import default_values
 from Products.urban.setuphandlers import createVocabularyFolder
 from imio.schedule.content.object_factories import MacroCreationConditionObject
@@ -500,7 +501,12 @@ def add_building_procedure(context):
     logger = logging.getLogger("urban: Add housing procedure")
     logger.info("starting upgrade steps")
     setup_tool = api.portal.get_tool("portal_setup")
-    setup_tool.runAllImportStepsFromProfile("profile-Products.urban:preinstall")
+    setup_tool.runImportStepFromProfile("profile-Products.urban:preinstall", "workflow")
+    setup_tool.runImportStepFromProfile("profile-Products.urban:urbantypes", "typeinfo")
+
+    add_new_urban_licence_type("Housing")
+
+    # Add vocabularies
     portal_urban = api.portal.get_tool("portal_urban")
     dimension_type_vocabularies_config = default_values["global"]["dimensiontypes"]
     allowedtypes = dimension_type_vocabularies_config[0]
