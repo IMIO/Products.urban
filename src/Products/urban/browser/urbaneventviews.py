@@ -2,6 +2,7 @@
 
 from Acquisition import aq_inner
 from DateTime import DateTime
+from datetime import datetime
 from Products.statusmessages.interfaces import IStatusMessage
 from Products.urban import utils
 from Products.Five import BrowserView
@@ -512,6 +513,7 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
                 claimant_arg["name1"] + claimant_arg["name2"] + claimant_arg["society"]
             )
             claimant_arg["claimType"] = claim_type_mapping[claimant_arg["claimType"]]
+            claimant_arg["claimDate"] = self.change_date_str_from_eu_to_us(claimant_arg["claimDate"])
             count = 0
             if claimant_arg["id"] in self.context.objectIds():
                 count += 1
@@ -528,6 +530,12 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
                 name=claimant_arg["name1"],
                 surname=claimant_arg["name2"],
             )
+
+    def change_date_str_from_eu_to_us(self, date):
+        try:
+            return datetime.strptime(date, "%d/%m/%y").strftime("%m/%d/%y")
+        except ValueError as err:
+            return date
 
     def getParcels(self):
         context = aq_inner(self.context)
