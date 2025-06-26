@@ -782,13 +782,5 @@
         handler=".update_270.add_new_registry_for_missing_capakey"
         profile="Products.urban:default"
         />
-     <gs:upgradeStep
-        title="Add housing procedure"
-        description=""
-        source="1165"
-        destination="1166"
-        handler=".update_270.add_building_procedure"
-        profile="Products.urban:default"
-        />
   
 </configure>
