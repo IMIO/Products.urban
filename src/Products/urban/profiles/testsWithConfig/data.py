@@ -461,6 +461,38 @@ EventConfigs = {
     ),
     "envclasstwo": (
         {
+            "id": "depot-de-la-demande",
+            "title": "Dépôt de la demande",
+            "activatedFields": ("transmitDate",),
+            "deadLineDelay": 3,
+            "eventDateLabel": "Date de dépôt",
+            "isKeyEvent": True,
+            "keyDates": ("eventDate",),
+            "podTemplates": (
+                {
+                    "id": "pe_recepisse_depot_demande.odt",
+                    "title": "Récépissé du dépôt de la demande",
+                    "context_variables": [
+                        {"name": "publipostage", "value": "demandeurs"}
+                    ],
+                },
+                {"id": "pe_entete_farde_dossier.odt", "title": "Entête farde dossier"},
+                {
+                    "id": "pe_transmis_demande_dgo3.odt",
+                    "title": "Transmis de la demande à l'ARNE",
+                },
+                {
+                    "id": "pe_info_demandeur.odt",
+                    "title": "Information au demandeur",
+                    "context_variables": [
+                        {"name": "publipostage", "value": "demandeurs"}
+                    ],
+                },
+            ),
+            "eventType": ("Products.urban.interfaces.IDepositEvent",),
+            "TALCondition": "python: licence.getProcedureChoice() != 'article65'",
+        },
+        {
             "id": "enquete-publique",
             "title": "Enquête publique",
             "activatedFields": (
