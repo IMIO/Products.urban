@@ -787,7 +787,7 @@
         description=""
         source="1165"
         destination="1166"
-        handler=".update_270.add_building_procedure"
+        handler=".update_280.add_building_procedure"
         profile="Products.urban:default"
         />
   
