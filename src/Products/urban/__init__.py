@@ -134,7 +134,6 @@ from Products.urban.content.licence import UrbanCertificateTwo  # noqa
 from Products.urban.content.licence import UniqueLicence  # noqa
 from Products.urban.content.licence import ExplosivesPossession  # noqa
 from Products.urban.content.licence import RoadDecree  # noqa
-from Products.urban.content.licence import Housing  # noqa
 from Products.urban.content import CODT_Inquiry  # noqa
 from Products.urban.content import CODT_UniqueLicenceInquiry  # noqa
 from Products.urban.content import FollowUpEventType  # noqa
@@ -203,7 +202,6 @@ def initialize(context):
     import content.licence.CODT_UrbanCertificateTwo
     import content.licence.Declaration
     import content.licence.Division
-    import content.licence.Housing
     import content.licence.EnvClassThree
     import content.licence.EnvClassTwo
     import content.licence.EnvClassOne

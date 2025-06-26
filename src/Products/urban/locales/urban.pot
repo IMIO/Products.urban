@@ -663,11 +663,6 @@ msgstr ""
 msgid "ImpactStudy event type marker interface"
 msgstr ""
 
-#: ../interfaces.py:581
-msgid "IObservationEvent type marker interface"
-msgstr ""
-
-#: ../browser/urbaneventviews.py:294
 #: ../browser/urbaneventviews.py:330
 msgid "Import"
 msgstr ""
@@ -1595,9 +1590,6 @@ msgid "explosivespossession_urbanconfig_title"
 msgstr ""
 
 msgid "explosivespossessions"
-msgstr ""
-
-msgid "Housing"
 msgstr ""
 
 msgid "externaldecisions_folder_title"
@@ -5397,13 +5389,4 @@ msgid "years"
 msgstr ""
 
 msgid "zip_folder_title"
-msgstr ""
-
-msgid "dimensiontypes_folder_title"
-msgstr ""
-
-msgid "units_folder_title"
-msgstr ""
-
-msgid "urban_label_dimensions"
 msgstr ""

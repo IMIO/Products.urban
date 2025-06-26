@@ -7,8 +7,6 @@ from Products.CMFCore.utils import getToolByName
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.migration.utils import refresh_workflow_permissions
 from Products.urban.setuphandlers import createFolderDefaultValues
-from Products.urban.profiles.extra.config_default_values import default_values
-from Products.urban.setuphandlers import createVocabularyFolder
 from imio.schedule.content.object_factories import MacroCreationConditionObject
 from imio.schedule.content.object_factories import MacroEndConditionObject
 from imio.schedule.content.object_factories import MacroFreezeConditionObject
@@ -52,9 +50,7 @@ def rename_patrimony_certificate(context):
     patrimony_folder.setTitle(u"Patrimoines")
     patrimony_folder.reindexObject(["Title"])
 
-    patrimony_collection = (
-        portal.urban.patrimonycertificates.collection_patrimonycertificate
-    )
+    patrimony_collection = portal.urban.patrimonycertificates.collection_patrimonycertificate
     patrimony_collection.setTitle(u"Patrimoines")
     patrimony_collection.reindexObject(["Title"])
 
@@ -71,9 +67,7 @@ def rename_content_rule(context):
     logger.info("starting upgrade steps")
 
     setup_tool = api.portal.get_tool("portal_setup")
-    setup_tool.runImportStepFromProfile(
-        "profile-Products.urban:default", "contentrules"
-    )
+    setup_tool.runImportStepFromProfile("profile-Products.urban:default", "contentrules")
 
     logger.info("upgrade step done!")
 
@@ -86,7 +80,7 @@ def fix_supended_state_licence(context):
     refresh_workflow_permissions(
         "codt_buildlicence_workflow",
         folder_path=urban_path,
-        for_states=["suspension", "frozen_suspension"],
+        for_states=["suspension", "frozen_suspension"]
     )
     logger.info("upgrade done!")
 
@@ -124,20 +118,21 @@ def _replace_object(obj, new_type, condition=None, logger=None):
     if isinstance(round_to_day, dict):
         round_to_day = round_to_day.get("token", None)
 
+
     new_obj = api.content.create(
         container=container,
         type=new_type,
         id=old_obj_data["id"],
         title=old_obj_data["title"],
         start_date=start_date,
-        enabled=old_obj_data.get("enabled", None),
+        enabled=old_obj_data.get("enabled",None),
         default_assigned_group=default_assigned_group,
         default_assigned_user=default_assigned_user,
-        warning_delay=old_obj_data.get("warning_delay", None),
-        additional_delay=old_obj_data.get("additional_delay", None),
-        additional_delay_type=old_obj_data.get("additional_delay_type", None),
+        warning_delay=old_obj_data.get("warning_delay",None),
+        additional_delay=old_obj_data.get("additional_delay",None),
+        additional_delay_type=old_obj_data.get("additional_delay_type",None),
         round_to_day=round_to_day,
-        activate_recurrency=old_obj_data.get("activate_recurrency", None),
+        activate_recurrency=old_obj_data.get("activate_recurrency",None),
     )
     log_info(logger, "{} created".format("/".join(obj.getPhysicalPath())))
 
@@ -176,12 +171,12 @@ def _replace_object(obj, new_type, condition=None, logger=None):
                 key,
                 set(
                     [
-                        value(
-                            condition=item.get("condition", None),
-                            operator=item.get("operator", None),
-                            display_status=item.get("display_status", None),
-                        )
-                        for item in old_obj_data[key]
+                    value(
+                        condition=item.get("condition", None),
+                        operator=item.get("operator", None),
+                        display_status=item.get("display_status", None),
+                    )
+                    for item in old_obj_data[key]
                     ]
                 ),
             )
@@ -207,11 +202,9 @@ def _replace_object(obj, new_type, condition=None, logger=None):
     dashboard_collection.showNumberOfItems = True
 
     query = [
-        (
-            {"i": filter["i"], "o": filter["o"], "v": old_obj_data["UID"]}
-            if filter["i"] == "CompoundCriterion"
-            else filter
-        )
+        {"i": filter["i"], "o": filter["o"], "v": old_obj_data["UID"]}
+        if filter["i"] == "CompoundCriterion"
+        else filter
         for filter in dashboard_collection.query
     ]
 
@@ -247,9 +240,7 @@ def fix_config_wrong_class(context):
 
 
 def add_new_voc_terms_for_form_composition(context):
-    logger = logging.getLogger(
-        "urban: Add new vocabularies to portal_urban/form_composition"
-    )
+    logger = logging.getLogger("urban: Add new vocabularies to portal_urban/form_composition")
     logger.info("starting upgrade steps")
 
     portal_urban = api.portal.get()["portal_urban"]
@@ -260,25 +251,35 @@ def add_new_voc_terms_for_form_composition(context):
     # for the existing vocabulary terms
     # that will be initiated in each new instance
     form_composition_new_vocabulary_terms_to_add = [
-        {"id": "10", "title": "1/1 Formulaire général permis environnement et unique"},
-        {"id": "11", "title": "1/2 Élevage et détention d'animaux"},
+        {
+            "id": "10",
+            "title": u"1/1 Formulaire général permis environnement et unique"
+        },
+        {
+            "id": "11",
+            "title": u"1/2 Élevage et détention d'animaux"
+        },
         {
             "id": "12",
-            "title": "Annexe V/1 - Implantation d'un commerce",
+            "title": u"Annexe V/1 - Implantation d'un commerce",
         },
         {
             "id": "13",
-            "title": "Annexe IX - Permis d'urbanisme dispensé d'un architecte ou autre que les demandes visées aux annexes 5 à 8",
+            "title": u"Annexe IX - Permis d'urbanisme dispensé d'un architecte ou autre que les demandes visées aux annexes 5 à 8",
         },
         {
             "id": "14",
-            "title": "Annexe X - Demande de permis d'urbanisation ou de modification de permis d'urbanisation",
+            "title": u"Annexe X - Demande de permis d'urbanisation ou de modification de permis d'urbanisation"
         },
         {
             "id": "15",
-            "title": "Annexe XI - Demande de permis d'urbanisation ou de modification de permis d'urbanisation avec contenu simplifié",
+            "title": u"Annexe XI - Demande de permis d'urbanisation ou de modification de permis d'urbanisation avec contenu simplifié"
         },
-        {"id": "16", "title": "Annexe XV - Demande de certificat d'urbanisme n°2"},
+        {
+            "id": "16",
+            "title": u"Annexe XV - Demande de certificat d'urbanisme n°2"
+        },
+
     ]
 
     createFolderDefaultValues(
@@ -305,9 +306,7 @@ def remove_permission_to_create_integrated_licences(context):
             remaining_roles = tuple(set(roles).difference(["Contributor"]))
             codt_integratedlicences_folder.manage_delLocalRoles([principal_id])
             if remaining_roles:
-                codt_integratedlicences_folder.manage_addLocalRoles(
-                    principal_id, remaining_roles
-                )
+                codt_integratedlicences_folder.manage_addLocalRoles(principal_id, remaining_roles)
 
     codt_integratedlicences_folder.reindexObjectSecurity()
     logger.info("upgrade step done!")
@@ -377,7 +376,7 @@ def add_new_registry_profil(context):
     logger.info("starting migration steps")
 
     registry = getUtility(IRegistry)
-    attributes = {"title": _("Planned address"), "description": _("address planned")}
+    attributes = {"title": _(u"Planned address"), "description": _(u"address planned")}
     key = "Products.urban.interfaces.IAsyncInquiryRadius.inquiries_address_to_do"
     registry_field = Dict(**attributes)
     registry_record = Record(registry_field)
@@ -407,9 +406,7 @@ def hide_patrimony_tab_in_licence_config(context):
     for licence_config in portal_urban.objectValues("LicenceConfig"):
         if licence_config.id in included:
             # add hidden tab config (unless there is one already)
-            if not [
-                tab for tab in licence_config.tabsConfig if tab["value"] == "patrimony"
-            ]:
+            if not [tab for tab in licence_config.tabsConfig if tab["value"] == "patrimony"]:
                 updated_config = licence_config.tabsConfig + (
                     {"display": "", "display_name": "Patrimoine", "value": "patrimony"},
                 )
@@ -437,17 +434,9 @@ def hide_tab_in_licence_config(context):
     for licence_config in portal_urban.objectValues("LicenceConfig"):
         if licence_config.id not in excluded:
             # add hidden tab config (unless there is one already)
-            if not [
-                tab
-                for tab in licence_config.tabsConfig
-                if tab["value"] == "environment"
-            ]:
+            if not [tab for tab in licence_config.tabsConfig if tab["value"] == "environment"]:
                 updated_config = licence_config.tabsConfig + (
-                    {
-                        "display": "",
-                        "display_name": "Analyse Environnement",
-                        "value": "environment",
-                    },
+                    {"display": "", "display_name": "Analyse Environnement", "value": "environment"},
                 )
                 licence_config.setTabsConfig(updated_config)
 
@@ -467,9 +456,7 @@ def hide_habitation_tab_in_licence_config(context):
     for licence_config in portal_urban.objectValues("LicenceConfig"):
         if licence_config.id in included:
             # add hidden tab config (unless there is one already)
-            if not [
-                tab for tab in licence_config.tabsConfig if tab["value"] == "habitation"
-            ]:
+            if not [tab for tab in licence_config.tabsConfig if tab["value"] == "habitation"]:
                 updated_config = licence_config.tabsConfig + (
                     {"display": "", "display_name": "Logement", "value": "habitation"},
                 )
@@ -494,44 +481,4 @@ def add_new_registry_for_missing_capakey(context):
     registry.records[key] = registry_record
 
     logger.info("migration done!")
-
-
-def add_building_procedure(context):
-    logger = logging.getLogger("urban: Add housing procedure")
-    logger.info("starting upgrade steps")
-    setup_tool = api.portal.get_tool("portal_setup")
-    setup_tool.runAllImportStepsFromProfile("profile-Products.urban:preinstall")
-    portal_urban = api.portal.get_tool("portal_urban")
-    dimension_type_vocabularies_config = default_values["global"]["dimensiontypes"]
-    allowedtypes = dimension_type_vocabularies_config[0]
-    dimension_type_vocabularies_config = createVocabularyFolder(
-        portal_urban, "dimensiontypes", context, allowedtypes
-    )
-    createFolderDefaultValues(
-        dimension_type_vocabularies_config,
-        default_values["global"]["dimensiontypes"][1:],
-        default_values["global"]["dimensiontypes"][0],
-    )
-    units_vocabularies_config = default_values["global"]["units"]
-    allowedtypes = units_vocabularies_config[0]
-    units_vocabularies_config = createVocabularyFolder(
-        portal_urban, "units", context, allowedtypes
-    )
-    createFolderDefaultValues(
-        units_vocabularies_config,
-        default_values["global"]["units"][1:],
-        default_values["global"]["units"][0],
-    )
-    observation_items_vocabularies_config = default_values["Housing"][
-        "observationitems"
-    ]
-    observation_items_vocabularies_config = createVocabularyFolder(
-        portal_urban.housing, "observationitems", context, allowedtypes
-    )
-    createFolderDefaultValues(
-        observation_items_vocabularies_config,
-        default_values["Housing"]["observationitems"][1:],
-        default_values["Housing"]["observationitems"][0],
-    )
-
-    logger.info("migration step done!")
+    
