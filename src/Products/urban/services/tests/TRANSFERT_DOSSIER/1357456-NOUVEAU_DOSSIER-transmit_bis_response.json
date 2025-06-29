@@ -1,0 +1,31 @@
+{
+  "status": "ERROR",
+  "warning": null,
+  "error": {
+    "information": {
+      "informationField": "request.notice.noticeId",
+      "informationValue": "1357456"
+    },
+    "category": "600",
+    "code": {
+      "code": "00006",
+      "description": [
+        {
+          "_value_1": "Notification 1357456 must be in status #STATUT_NOTIFICATION#EN_ATTENTE_REPONSE#.",
+          "language": "en"
+        },
+        {
+          "_value_1": "La notification 1357456 doit être dans le statut #STATUT_NOTIFICATION#EN_ATTENTE_REPONSE#.",
+          "language": "fr"
+        }
+      ],
+      "origin": null
+    },
+    "cause": null,
+    "causes": null
+  },
+  "result": null,
+  "customerTicket": "54f79013-f591-42f4-9c00-53adb51d7d58",
+  "requestId": "351554f6-1389-b3e7-d24a-efa74cec375c",
+  "inscriptionReference": null
+}
