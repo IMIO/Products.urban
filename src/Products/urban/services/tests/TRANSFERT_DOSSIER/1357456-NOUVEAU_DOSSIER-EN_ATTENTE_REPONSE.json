@@ -1,0 +1,698 @@
+{
+    "status": "PROCESSED",
+    "warning": null,
+    "error": null,
+    "notice": {
+      "BO": {
+        "idBO": "10010726",
+        "typeBO": {
+          "code": "PE_PU",
+          "description": [
+            {
+              "_value_1": "DE_Permis PE/PU",
+              "language": "de"
+            },
+            {
+              "_value_1": "Demande PE/PU",
+              "language": "fr"
+            }
+          ],
+          "origin": null
+        },
+        "typeBOSubtype": {
+          "code": "PE",
+          "description": [
+            {
+              "_value_1": "PE",
+              "language": "de"
+            },
+            {
+              "_value_1": "PE",
+              "language": "fr"
+            }
+          ],
+          "origin": null
+        },
+        "noticeIdBO": "TRANSFERT_DOSSIER:48369306:10010726",
+        "codeTypeNoticeBO": "TRANSFERT_DOSSIER",
+        "applicationCodeBO": "TWICE",
+        "fileLanguage": {
+          "code": "FR",
+          "description": [
+            {
+              "_value_1": "FR",
+              "language": "de"
+            },
+            {
+              "_value_1": "FR",
+              "language": "fr"
+            }
+          ]
+        },
+        "fileDate": "2025-04-15T00:00:00+02:00",
+        "noticeLanguage": {
+          "code": "FR",
+          "description": [
+            {
+              "_value_1": "DE_Français",
+              "language": "de"
+            },
+            {
+              "_value_1": "Français",
+              "language": "fr"
+            }
+          ]
+        }
+      },
+      "sender": {
+        "noticeInstanceId": "O3080500",
+        "contactName": "GM",
+        "contactPhone": {
+          "phoneNumber": [
+            {
+              "_value_1": "+3212345678",
+              "type": null
+            }
+          ]
+        },
+        "contactMail": {
+          "email": [
+            {
+              "_value_1": "xxx@spw.wallonie.be",
+              "type": null
+            }
+          ]
+        },
+        "projectType": null,
+        "motivations": null
+      },
+      "receiver": {
+        "noticeInstanceId": "0206.524.876"
+      },
+      "noticeType": {
+        "code": "NOUVEAU_DOSSIER",
+        "description": [
+          {
+            "_value_1": "DE_Nouveau dossier à destination de la commune",
+            "language": "de"
+          },
+          {
+            "_value_1": "Nouveau dossier à destination de la commune",
+            "language": "fr"
+          }
+        ]
+      },
+      "subjectNotice": "Renouvellement du permis d'exploiter la station d'épuration de XYZ.",
+      "sendDate": "2025-04-15T00:00:00+02:00",
+      "deadline": 3,
+      "dueDate": null,
+      "fileDateMunicipality": null,
+      "comment": null,
+      "businessReference": null,
+      "addresses": {
+        "address": [
+          {
+            "country": "BE",
+            "addressId": {
+              "_value_1": null,
+              "source": null
+            },
+            "street": "CHAUSSÉE ROMAINE",
+            "houseNumber": null,
+            "boxNumber": null,
+            "postCode": "6700",
+            "municipality": "ARLON",
+            "state": null,
+            "plainText": null,
+            "locality": null,
+            "inceptionDate": null,
+            "modificationDate": null,
+            "addressType": null
+          }
+        ]
+      },
+      "parcels": {
+        "parcel": [
+          {
+            "identifier": "P0001",
+            "municipality": {
+              "code": "81001",
+              "description": [
+                {
+                  "_value_1": "81001",
+                  "language": "de"
+                },
+                {
+                  "_value_1": "81001",
+                  "language": "fr"
+                }
+              ],
+              "origin": null
+            },
+            "division": "ARLON 8 DIV/HACHY/",
+            "codeDivision": "81408",
+            "section": "D",
+            "radical": "0338",
+            "bisTer": "00",
+            "exponent": "C",
+            "power": "000",
+            "part": false,
+            "right": null,
+            "capakey": "81408D0338/00C000",
+            "comment": null
+          }
+        ]
+      },
+      "parties": {
+        "part": [
+          {
+            "enterpriseNumber": "204359994",
+            "enterpriseType": "personneMorale",
+            "legalForm": "Société coopérative",
+            "personNumber": null,
+            "title": null,
+            "lastname": null,
+            "firstname": null,
+            "language": {
+              "code": "FR",
+              "description": [
+                {
+                  "_value_1": "FR",
+                  "language": "de"
+                },
+                {
+                  "_value_1": "FR",
+                  "language": "fr"
+                }
+              ]
+            },
+            "denomination": "ABC Eau  ",
+            "mailingAddresses": {
+              "mailingAddress": [
+                {
+                  "country": "BE",
+                  "addressId": {
+                    "_value_1": null,
+                    "source": null
+                  },
+                  "street": "Schoppach,drève de l'Arc-en-Ciel",
+                  "houseNumber": "1",
+                  "boxNumber": null,
+                  "postCode": "6700",
+                  "municipality": "Arlon",
+                  "state": null,
+                  "plainText": null,
+                  "locality": null,
+                  "inceptionDate": null,
+                  "modificationDate": null,
+                  "addressType": null
+                }
+              ]
+            },
+            "phoneNumber": null,
+            "email": {
+              "email": [
+                {
+                  "_value_1": "yyy@spw.wallonie.be",
+                  "type": null
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "documents": {
+        "document": [
+          {
+            "documentData": {
+              "filename": "1321074-801675_Permis denvironnement",
+              "description": null,
+              "type": {
+                "code": "PJ_FORMULAIRE",
+                "description": [
+                  {
+                    "_value_1": "Pièces-jointes du formulaire",
+                    "language": "de"
+                  },
+                  {
+                    "_value_1": "Pièces-jointes du formulaire",
+                    "language": "fr"
+                  }
+                ]
+              },
+              "language": {
+                "code": "FR",
+                "description": [
+                  {
+                    "_value_1": "DE_Français",
+                    "language": "de"
+                  },
+                  {
+                    "_value_1": "Français",
+                    "language": "fr"
+                  }
+                ]
+              },
+              "documentId": "319e5467-dc48-40ec-85db-2bbd47052bc6",
+              "fileSize": 198310,
+              "mimeType": "application/xml",
+              "confidentiality": {
+                "code": "0",
+                "description": [
+                  {
+                    "_value_1": "Öffentlichkeit",
+                    "language": "de"
+                  },
+                  {
+                    "_value_1": "public",
+                    "language": "fr"
+                  }
+                ],
+                "domain": "NOTICE_GENERIC_CONFIDENTIALITE"
+              },
+              "principal": false
+            },
+            "content": {
+              "documentContentStorage": "BO"
+            }
+          },
+          {
+            "documentData": {
+              "filename": "1321074-801675_Permis denvironnement",
+              "description": null,
+              "type": {
+                "code": "FORMULAIRE",
+                "description": [
+                  {
+                    "_value_1": "Formulaire principal",
+                    "language": "de"
+                  },
+                  {
+                    "_value_1": "Formulaire principal",
+                    "language": "fr"
+                  }
+                ]
+              },
+              "language": {
+                "code": "FR",
+                "description": [
+                  {
+                    "_value_1": "DE_Français",
+                    "language": "de"
+                  },
+                  {
+                    "_value_1": "Français",
+                    "language": "fr"
+                  }
+                ]
+              },
+              "documentId": "0eb97ea9-559f-42a4-9bb0-61c0e73149c9",
+              "fileSize": 1013774,
+              "mimeType": "application/pdf",
+              "confidentiality": {
+                "code": "0",
+                "description": [
+                  {
+                    "_value_1": "Öffentlichkeit",
+                    "language": "de"
+                  },
+                  {
+                    "_value_1": "public",
+                    "language": "fr"
+                  }
+                ],
+                "domain": "NOTICE_GENERIC_CONFIDENTIALITE"
+              },
+              "principal": false
+            },
+            "content": {
+              "documentContentStorage": "BO"
+            }
+          },
+          {
+            "documentData": {
+              "filename": "tes notice5",
+              "description": "2.3.2 - Schéma des écoulements des eaux jusqu'à leurs rejets",
+              "type": {
+                "code": "E_SCHEMA_ECOULEMENT_EAUX",
+                "description": [
+                  {
+                    "_value_1": "Schéma d'écoulement des eaux",
+                    "language": "de"
+                  },
+                  {
+                    "_value_1": "Schéma d'écoulement des eaux",
+                    "language": "fr"
+                  }
+                ]
+              },
+              "language": {
+                "code": "FR",
+                "description": [
+                  {
+                    "_value_1": "DE_Français",
+                    "language": "de"
+                  },
+                  {
+                    "_value_1": "Français",
+                    "language": "fr"
+                  }
+                ]
+              },
+              "documentId": "77f5562f-ad46-4394-a038-c99253a93de0",
+              "fileSize": 175289,
+              "mimeType": "application/pdf",
+              "confidentiality": {
+                "code": "0",
+                "description": [
+                  {
+                    "_value_1": "Öffentlichkeit",
+                    "language": "de"
+                  },
+                  {
+                    "_value_1": "public",
+                    "language": "fr"
+                  }
+                ],
+                "domain": "NOTICE_GENERIC_CONFIDENTIALITE"
+              },
+              "principal": false
+            },
+            "content": {
+              "documentContentStorage": "BO"
+            }
+          },
+          {
+            "documentData": {
+              "filename": "tes notice2",
+              "description": "1.4.1 - Reportage photographique",
+              "type": {
+                "code": "PJ_FORMULAIRE",
+                "description": [
+                  {
+                    "_value_1": "Pièces-jointes du formulaire",
+                    "language": "de"
+                  },
+                  {
+                    "_value_1": "Pièces-jointes du formulaire",
+                    "language": "fr"
+                  }
+                ]
+              },
+              "language": {
+                "code": "FR",
+                "description": [
+                  {
+                    "_value_1": "DE_Français",
+                    "language": "de"
+                  },
+                  {
+                    "_value_1": "Français",
+                    "language": "fr"
+                  }
+                ]
+              },
+              "documentId": "44993c44-f421-418e-9853-3908cfb68881",
+              "fileSize": 175289,
+              "mimeType": "application/pdf",
+              "confidentiality": {
+                "code": "0",
+                "description": [
+                  {
+                    "_value_1": "Öffentlichkeit",
+                    "language": "de"
+                  },
+                  {
+                    "_value_1": "public",
+                    "language": "fr"
+                  }
+                ],
+                "domain": "NOTICE_GENERIC_CONFIDENTIALITE"
+              },
+              "principal": false
+            },
+            "content": {
+              "documentContentStorage": "BO"
+            }
+          },
+          {
+            "documentData": {
+              "filename": "tes notice3",
+              "description": "1.4.3 - Documents officiels liés à l'établissement",
+              "type": {
+                "code": "DOCUMENTS_OFFICIELS",
+                "description": [
+                  {
+                    "_value_1": "Permis et Autorisations",
+                    "language": "de"
+                  },
+                  {
+                    "_value_1": "Permis et Autorisations",
+                    "language": "fr"
+                  }
+                ]
+              },
+              "language": {
+                "code": "FR",
+                "description": [
+                  {
+                    "_value_1": "DE_Français",
+                    "language": "de"
+                  },
+                  {
+                    "_value_1": "Français",
+                    "language": "fr"
+                  }
+                ]
+              },
+              "documentId": "835ee512-34d9-4ca2-ab47-3222de75fafc",
+              "fileSize": 175289,
+              "mimeType": "application/pdf",
+              "confidentiality": {
+                "code": "0",
+                "description": [
+                  {
+                    "_value_1": "Öffentlichkeit",
+                    "language": "de"
+                  },
+                  {
+                    "_value_1": "public",
+                    "language": "fr"
+                  }
+                ],
+                "domain": "NOTICE_GENERIC_CONFIDENTIALITE"
+              },
+              "principal": false
+            },
+            "content": {
+              "documentContentStorage": "BO"
+            }
+          },
+          {
+            "documentData": {
+              "filename": "tes notice1",
+              "description": "1.3.5 - Schéma de procédé",
+              "type": {
+                "code": "SCHEMA_PROCEDE",
+                "description": [
+                  {
+                    "_value_1": "Schéma de procédé",
+                    "language": "de"
+                  },
+                  {
+                    "_value_1": "Schéma de procédé",
+                    "language": "fr"
+                  }
+                ]
+              },
+              "language": {
+                "code": "FR",
+                "description": [
+                  {
+                    "_value_1": "DE_Français",
+                    "language": "de"
+                  },
+                  {
+                    "_value_1": "Français",
+                    "language": "fr"
+                  }
+                ]
+              },
+              "documentId": "50bed1d5-892a-44d6-af8d-d77131dcb1a8",
+              "fileSize": 175289,
+              "mimeType": "application/pdf",
+              "confidentiality": {
+                "code": "0",
+                "description": [
+                  {
+                    "_value_1": "Öffentlichkeit",
+                    "language": "de"
+                  },
+                  {
+                    "_value_1": "public",
+                    "language": "fr"
+                  }
+                ],
+                "domain": "NOTICE_GENERIC_CONFIDENTIALITE"
+              },
+              "principal": false
+            },
+            "content": {
+              "documentContentStorage": "BO"
+            }
+          },
+          {
+            "documentData": {
+              "filename": "tes notice",
+              "description": "2.5.2 - Extrait conforme de la Banque de Données de l'État des Sols",
+              "type": {
+                "code": "E_SOL_EXTRAIT_BES",
+                "description": [
+                  {
+                    "_value_1": "Extrait BDES",
+                    "language": "de"
+                  },
+                  {
+                    "_value_1": "Extrait BDES",
+                    "language": "fr"
+                  }
+                ]
+              },
+              "language": {
+                "code": "FR",
+                "description": [
+                  {
+                    "_value_1": "DE_Français",
+                    "language": "de"
+                  },
+                  {
+                    "_value_1": "Français",
+                    "language": "fr"
+                  }
+                ]
+              },
+              "documentId": "e7abe0d7-ee6c-4f71-af12-5a4f58d3817d",
+              "fileSize": 175289,
+              "mimeType": "application/pdf",
+              "confidentiality": {
+                "code": "0",
+                "description": [
+                  {
+                    "_value_1": "Öffentlichkeit",
+                    "language": "de"
+                  },
+                  {
+                    "_value_1": "public",
+                    "language": "fr"
+                  }
+                ],
+                "domain": "NOTICE_GENERIC_CONFIDENTIALITE"
+              },
+              "principal": false
+            },
+            "content": {
+              "documentContentStorage": "BO"
+            }
+          },
+          {
+            "documentData": {
+              "filename": "tes notice4",
+              "description": "1.4.4 - Plan descriptif de l'établissement",
+              "type": {
+                "code": "PLAN_DESCRIPTIF",
+                "description": [
+                  {
+                    "_value_1": "Plan descriptif",
+                    "language": "de"
+                  },
+                  {
+                    "_value_1": "Plan descriptif",
+                    "language": "fr"
+                  }
+                ]
+              },
+              "language": {
+                "code": "FR",
+                "description": [
+                  {
+                    "_value_1": "DE_Français",
+                    "language": "de"
+                  },
+                  {
+                    "_value_1": "Français",
+                    "language": "fr"
+                  }
+                ]
+              },
+              "documentId": "1a731331-3ad6-4bec-9182-9fbccbd0cc43",
+              "fileSize": 175289,
+              "mimeType": "application/pdf",
+              "confidentiality": {
+                "code": "0",
+                "description": [
+                  {
+                    "_value_1": "Öffentlichkeit",
+                    "language": "de"
+                  },
+                  {
+                    "_value_1": "public",
+                    "language": "fr"
+                  }
+                ],
+                "domain": "NOTICE_GENERIC_CONFIDENTIALITE"
+              },
+              "principal": false
+            },
+            "content": {
+              "documentContentStorage": "BO"
+            }
+          }
+        ]
+      },
+      "mapSpecification": {
+        "mapStatus": null,
+        "area": "[{\"type\":\"FeatureCollection\",\"layer\":\"perimeter\",\"crs\":{\"type\":\"EPSG\",\"properties\":{\"code\":31370}},\"features\":[{\"type\":\"Feature\",\"geometry\":{\"type\":\"MultiPolygon\",\"crs\":{\"type\":\"EPSG\",\"properties\":{\"code\":31370}},\"coordinates\":[[[[246266.21909999847,42500.799400001764],[246243.36240000278,42489.49920000136],[246203.07069999725,42484.87260000035],[246200.7520999983,42484.606800001115],[246204.33799999952,42494.30680000037],[246198.6400000006,42504.45670000091],[246196.13599999994,42518.434799999],[246194.56289999932,42524.518399998546],[246305.51410000026,42576.87249999866],[246277.31759999692,42527.49120000005],[246269.22450000048,42510.577300000936],[246266.21909999847,42500.799400001764]]]],\"bbox\":[246194.56289999932,42484.606800001115,246305.51410000026,42576.87249999866]},\"properties\":{\"cadastre\":\"2018\"},\"crs\":{\"type\":\"EPSG\",\"properties\":{\"code\":31370}}}]}]"
+      },
+      "specific": {
+        "ns3:TwiceDefaultRequest": {
+          "@xmlns": "http://soa.spw.wallonie.be/data/common/code/v1",
+          "@xmlns:ns2": "http://soa.spw.wallonie.be/services/noticeExtensions/messages/v1",
+          "@xmlns:ns3": "http://soa.spw.wallonie.be/services/noticeTwiceExtensions/messages/v1",
+          "@xmlns:ns4": "http://soa.spw.wallonie.be/data/business/environmentalLicence/v2",
+          "@xmlns:ns5": "http://soa.spw.wallonie.be/services/noticeGesperExtensions/messages/v1",
+          "@xmlns:ns6": "http://soa.spw.wallonie.be/data/business/noticeGesperExtensions/v1",
+          "@xmlns:ns7": "http://soa.spw.wallonie.be/data/common/date/v1",
+          "ns2:acceptedResponseNoticeCodes": null,
+          "ns3:timeLimits": null,
+          "ns3:suspentionPeriods": null
+        }
+      },
+      "status": {
+        "status": [
+          {
+            "code": {
+              "code": "EN_ATTENTE_REPONSE",
+              "description": [
+                {
+                  "_value_1": "DE_En attende de réponse",
+                  "language": "de"
+                },
+                {
+                  "_value_1": "En attende de réponse",
+                  "language": "fr"
+                }
+              ]
+            },
+            "date": "2025-04-15T15:25:50.540000"
+          }
+        ]
+      },
+      "noticeIdentifier": {
+        "noticeId": "1357456"
+      },
+      "receptionDate": "2025-04-15T15:25:50.001000"
+    },
+    "customerTicket": "2f50bbb3-b900-43da-9bc6-a593161ec9e0",
+    "requestId": "4e85740b-c24b-5588-be5e-b893764be1b0",
+    "inscriptionReference": null
+  }
