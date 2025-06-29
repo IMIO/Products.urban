@@ -3,6 +3,7 @@
 licences_data = {
     "CODT_BuildLicence": {
         "licenceSubject": "Exemple Permis Urbanisme",
+        "annoncedDelay": "30j",
         "contact_type": "Applicant",
         "contact_data": {
             "personTitle": "masters",
