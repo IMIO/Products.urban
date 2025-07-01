@@ -18,6 +18,7 @@ class ParcelRecordsView(BrowserView):
         self.context = context
         self.request = request
         self.parcel_id = self.request.get("id", None)
+        self.capakeys = []
         if not self.parcel_id:
             plone_utils = api.portal.get_tool("plone_utils")
             plone_utils.addPortalMessage(_("Nothing to show !!!"), type="error")
@@ -26,7 +27,7 @@ class ParcelRecordsView(BrowserView):
         """
         Returns the licences related to a parcel
         """
-        licence_brains, capakeys, historic = self.search_licences()
+        licence_brains, self.capakeys, historic = self.search_licences()
         display = self.get_display(licence_brains)
         historic_display = self.get_historic_display(historic, licence_brains)
         return display, historic_display
@@ -85,3 +86,11 @@ class ParcelRecordsView(BrowserView):
                 licences = self.get_display(licence_brains, short=True)
                 setattr(parcel, "licences", licences)
         return table
+
+    def get_missing_capakey(self):
+        interface = "Products.urban.interfaces.IMissingCapakey"
+        registry = api.portal.get_registry_record(interface)
+        if len(registry) == 0:
+            return []
+        missing_capakey = [capakey for capakey in self.capakeys if capakey in registry]
+        return missing_capakey

@@ -705,3 +705,7 @@ class IProductUrbanLayer(IDefaultBrowserLayer):
 
 class IIntentionToSubmitAmendedPlans(Interface):
     __doc__ = _("""IIntentionToSubmitAmendedPlans type marker interface""")
+
+
+class IMissingCapakey(Interface):
+    """ """
