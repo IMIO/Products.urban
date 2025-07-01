@@ -46,6 +46,7 @@ from Products.urban import UrbanMessage as _
 from zope.i18n import translate
 from collective.datagridcolumns.ReferenceColumn import ReferenceColumn
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
+from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
 from Products.urban.content.licence.base import UrbanBase
 from Products.urban.interfaces import IOpinionRequestEvent
 from Products.urban.interfaces import IUrbanEvent
@@ -242,7 +243,7 @@ schema = Schema(
         ),
         StringField(
             name="tax",
-            widget=SelectionWidget(
+            widget=MasterSelectWidget(
                 label=_("urban_label_tax", default="Tax"),
             ),
             enforceVocabulary=True,
