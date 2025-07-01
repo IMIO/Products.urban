@@ -1,2 +1,4 @@
-Add centrality to commercial licence
+Add centrality to every licence & make it a multiselect
+[daggelpop]
+Move centrality in first position in the fieldset
 [daggelpop]
