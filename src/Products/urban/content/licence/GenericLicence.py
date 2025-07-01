@@ -46,11 +46,13 @@ from Products.urban import UrbanMessage as _
 from zope.i18n import translate
 from collective.datagridcolumns.ReferenceColumn import ReferenceColumn
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
+from Products.MasterSelectWidget.MasterMultiSelectWidget import MasterMultiSelectWidget
 from Products.urban.content.licence.base import UrbanBase
 from Products.urban.interfaces import IOpinionRequestEvent
 from Products.urban.interfaces import IUrbanEvent
 from Products.urban.utils import setOptionalAttributes
 from Products.urban.utils import get_interface_by_path
+
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from zope.globalrequest import getRequest
 
@@ -642,6 +644,16 @@ schema = Schema(
             default_method="getDefaultText",
             default_content_type="text/plain",
             default_output_type="text/html",
+        ),
+        LinesField(
+            name="centrality",
+            widget=MasterMultiSelectWidget(
+                format="checkbox",
+                label=_("urban_label_centrality", default="Centrality"),
+            ),
+            schemata="urban_location",
+            multiValued=1,
+            vocabulary="listCentralities",
         ),
         LinesField(
             name="folderZone",
@@ -1329,6 +1341,18 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
         )
 
         return DisplayList(vocab)
+
+    security.declarePublic("listCentralities")
+
+    def listCentralities(self):
+        vocab = (
+            ("villageoise", "villageoise"),
+            ("urbaine", "urbaine"),
+            ("urbaine_de_pole", "urbaine de pôle"),
+            ("bordure_de_centralite", "bordure de centralité"),
+        )
+        return DisplayList(vocab)
+
 
     security.declarePublic("foldermanagersBaseQuery")
 
