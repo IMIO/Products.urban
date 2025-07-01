@@ -55,6 +55,34 @@ schema = Schema(
             relationship="miscdemandarchitects",
             allowed_types="Architect",
         ),
+        ReferenceField(
+            name="bound_licences",
+            widget=ReferenceBrowserWidget(
+                allow_search=True,
+                allow_browse=False,
+                force_close_on_insert=True,
+                startup_directory="urban",
+                show_indexes=False,
+                wild_card_search=True,
+                restrict_browsing_to_startup_directory=True,
+                label=_("urban_label_bound_licences", default="Bound licences"),
+            ),
+            allowed_types=[
+                t
+                for t in URBAN_TYPES
+                if t
+                   not in [
+                       "Inspection",
+                       "Ticket",
+                       "ProjectMeeting",
+                       "CODT_UrbanCertificateOne",
+                       "UrbanCertificateOne",
+                   ]
+            ],
+            schemata="urban_description",
+            multiValued=True,
+            relationship="bound_licences",
+        ),
     ),
 )
 
@@ -119,6 +147,7 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     Finalizes the type schema to alter some fields
     """
     schema.moveField("description", after="architects")
+    schema.moveField("bound_licences", after="foldermanagers")
     return schema
 
 

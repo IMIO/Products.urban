@@ -289,7 +289,9 @@ def get_licence_context(context, get_all_object=False, max_recurence = 5):
 def cache_key_30min(func, *args, **kwargs):
     return (func.__name__, time.time() // (60 * 30), args, kwargs)
 
-WIDGET_DATE_END_YEAR = datetime.now().year + 25
+
+def cache_key_5min(func, *args, **kwargs):
+    return (func.__name__, time.time() // (60 * 5), args, kwargs)
 
 
 def add_missing_capakey_in_registry(capakey):
@@ -299,3 +301,6 @@ def add_missing_capakey_in_registry(capakey):
         return
     registry.append(capakey.decode("utf-8"))
     api.portal.set_registry_record(interface, registry)
+
+    
+WIDGET_DATE_END_YEAR = datetime.now().year + 25
