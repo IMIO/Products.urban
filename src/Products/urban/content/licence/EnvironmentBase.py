@@ -14,6 +14,7 @@ __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEUL
 __docformat__ = "plaintext"
 
 from AccessControl import ClassSecurityInfo
+from Products.urban.widget.select2widget import MultiSelect2Widget
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 from Products.urban import interfaces
@@ -131,7 +132,7 @@ schema = Schema(
             allowable_content_types=("text/html",),
             schemata="urban_environment",
             default_method="getDefaultText",
-            default_output_type="text/html",
+            default_output_type="text/x-html-safe",
         ),
         ReferenceField(
             name="minimumLegalConditions",
@@ -167,7 +168,7 @@ schema = Schema(
         ),
         LinesField(
             name="applicationReasons",
-            widget=MultiSelectionWidget(
+            widget=MultiSelect2Widget(
                 format="checkbox",
                 label=_("urban_label_applicationReasons", default="Applicationreasons"),
             ),
@@ -213,7 +214,7 @@ schema = Schema(
             default_content_type="text/html",
             default_method="getDefaultText",
             schemata="urban_description",
-            default_output_type="text/html",
+            default_output_type="text/x-html-safe",
         ),
         StringField(
             name="procedureChoice",
@@ -278,7 +279,7 @@ schema = Schema(
             default_content_type="text/html",
             default_method="getDefaultText",
             schemata="urban_description",
-            default_output_type="text/html",
+            default_output_type="text/x-html-safe",
         ),
         IntegerField(
             name="validityDelay",
@@ -299,7 +300,7 @@ schema = Schema(
             default_content_type="text/html",
             default_method="getDefaultText",
             schemata="urban_road",
-            default_output_type="text/html",
+            default_output_type="text/x-html-safe",
         ),
         TextField(
             name="locationTechnicalAdvice",
@@ -313,7 +314,7 @@ schema = Schema(
             default_content_type="text/html",
             default_method="getDefaultText",
             schemata="urban_location",
-            default_output_type="text/html",
+            default_output_type="text/x-html-safe",
         ),
         TextField(
             name="description",
@@ -324,7 +325,7 @@ schema = Schema(
             allowable_content_types=("text/html",),
             schemata="urban_description",
             default_method="getDefaultText",
-            default_output_type="text/html",
+            default_output_type="text/x-html-safe",
             accessor="Description",
         ),
         TextField(
@@ -378,7 +379,9 @@ for field in EnvironmentBase_schema.filterFields(isMetadata=False):
 
 # change translation of some fields
 EnvironmentBase_schema["referenceDGATLP"].widget.label = _("urban_label_referenceDGO3")
-EnvironmentBase_schema["workLocations"].widget.label = _("urban_label_situation")
+EnvironmentBase_schema["workLocations"].widget.label = _(
+    "urban_label_situation", default="Situation"
+)
 
 ##/code-section after-schema
 

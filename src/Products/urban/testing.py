@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+
+from Products.GenericSetup.tool import DEPENDENCY_STRATEGY_NEW
+from Products.urban.utils import run_entry_points
 from Products.urban.utils import run_entry_points
 from plone import api
 from plone.app.robotframework.testing import REMOTE_LIBRARY_BUNDLE_FIXTURE
@@ -7,6 +10,7 @@ from plone.app.testing import IntegrationTesting
 from plone.app.testing import PloneWithPackageLayer
 from plone.app.testing import helpers
 from plone.testing import z2
+from zope.globalrequest import setRequest
 from zope.globalrequest import setLocal
 
 import Products.urban
@@ -21,6 +25,12 @@ class UrbanLayer(PloneWithPackageLayer):
         setattr(portal.REQUEST, "URL", "")
         setLocal("request", portal.REQUEST)
         transaction.commit()
+        super(UrbanLayer, self).setUpPloneSite(portal)
+
+
+class UrbanLayer(PloneWithPackageLayer):
+    def setUpPloneSite(self, portal):
+        setRequest(portal.REQUEST)
         super(UrbanLayer, self).setUpPloneSite(portal)
 
 
@@ -64,8 +74,9 @@ class UrbanWithUsersLayer(IntegrationTesting):
             portal_urban = portal.portal_urban
             cache_view = portal_urban.unrestrictedTraverse("urban_vocabulary_cache")
             cache_view.reset_all_cache()
-            Products.urban.exportimport.NIS = "93088"  # mock NIS code
+            Products.urban.config.NIS = "92000"  # mock NIS code
             portal.setupCurrentSkin(portal.REQUEST)
+            setRequest(portal.REQUEST)
             from Products.urban.setuphandlers import addTestUsers
 
             addTestUsers(portal)
@@ -88,7 +99,7 @@ class UrbanConfigLayer(UrbanWithUsersLayer):
         super(UrbanConfigLayer, self).setUp()
         with helpers.ploneSite() as portal:
             portal.setupCurrentSkin(portal.REQUEST)
-            setLocal("request", portal.REQUEST)
+            setRequest(portal.REQUEST)
             helpers.applyProfile(portal, "Products.urban:testsWithConfig")
 
 
@@ -109,7 +120,7 @@ class UrbanLicencesLayer(UrbanConfigLayer):
         super(UrbanLicencesLayer, self).setUp()
         with helpers.ploneSite() as portal:
             portal.setupCurrentSkin(portal.REQUEST)
-            setLocal("request", portal.REQUEST)
+            setRequest(portal.REQUEST)
             helpers.applyProfile(portal, "Products.urban:testsWithLicences")
 
 
@@ -128,7 +139,8 @@ class UrbanImportsLayer(IntegrationTesting):
         super(UrbanImportsLayer, self).setUp()
         with helpers.ploneSite() as portal:
             portal.setupCurrentSkin(portal.REQUEST)
-            setLocal("request", portal.REQUEST)
+            setRequest(portal.REQUEST)
+            Products.urban.config.NIS = "92000"  # mock NIS code
             helpers.applyProfile(portal, "Products.urban:tests-imports")
 
 
@@ -158,9 +170,12 @@ class UrbanWithUsersFunctionalLayer(FunctionalTesting):
         super(UrbanWithUsersLayer, self).setUpPloneSite(portal)
 
     def setUp(self):
-        super(UrbanWithUsersFunctionalLayer, self).setUp()
+        Products.urban.config.NIS = "92000"  # mock NIS code
+        # monkey patch to avoid running upgrade steps when reisntalling urban
+        Products.GenericSetup.tool.DEFAULT_DEPENDENCY_STRATEGY = DEPENDENCY_STRATEGY_NEW
         with helpers.ploneSite() as portal:
             portal.setupCurrentSkin(portal.REQUEST)
+            setRequest(portal.REQUEST)
             from Products.urban.setuphandlers import addTestUsers
 
             api.user.create(
@@ -188,7 +203,7 @@ class UrbanConfigFunctionalLayer(UrbanWithUsersFunctionalLayer):
         super(UrbanConfigFunctionalLayer, self).setUp()
         with helpers.ploneSite() as portal:
             portal.setupCurrentSkin(portal.REQUEST)
-            setLocal("request", portal.REQUEST)
+            setRequest(portal.REQUEST)
             helpers.applyProfile(portal, "Products.urban:testsWithConfig")
 
 
@@ -209,7 +224,7 @@ class UrbanLicencesFunctionalLayer(UrbanConfigFunctionalLayer):
         super(UrbanLicencesFunctionalLayer, self).setUp()
         with helpers.ploneSite() as portal:
             portal.setupCurrentSkin(portal.REQUEST)
-            setLocal("request", portal.REQUEST)
+            setRequest(portal.REQUEST)
             helpers.applyProfile(portal, "Products.urban:testsWithLicences")
 
 

@@ -1,17 +1,6 @@
 # -*- coding: utf-8 -*-
 
 from DateTime import DateTime
-
-from plone import api
-
-from z3c.table.column import Column, GetAttrColumn, LinkColumn
-from z3c.table.interfaces import IColumnHeader
-
-from zope.annotation.interfaces import IAnnotations
-from zope.component import queryMultiAdapter
-from zope.interface import implements
-from zope.i18n import translate
-
 from Products.urban.setuphandlers import _ as _t
 from Products.urban.browser.table.interfaces import (
     ITitleColumn,
@@ -21,6 +10,14 @@ from Products.urban.browser.table.interfaces import (
     IUrbanColumn,
     ITitleCell,
 )
+from html import escape
+from plone import api
+from z3c.table.column import Column, GetAttrColumn, LinkColumn
+from z3c.table.interfaces import IColumnHeader
+from zope.annotation.interfaces import IAnnotations
+from zope.component import queryMultiAdapter
+from zope.i18n import translate
+from zope.interface import implements
 
 
 class UrbanColumn(Column):
@@ -216,8 +213,8 @@ class ContacTitleDisplay(TitleDisplay):
         title = self.column.renderTitleLink(self.urbanlist_item)
 
         address = ""
-        street = contact.getStreet()
-        number = contact.getNumber()
+        street = escape(contact.getStreet())
+        number = escape(contact.getNumber())
         if street or number:
             address = "<br /><span>%s %s</span>" % (street, number)
 
@@ -242,10 +239,11 @@ class ParcelTitleDisplay(TitleDisplay):
 
     def render(self):
         parcel = self.obj
-        css_class_span = parcel.getCSSClass()
-        title = self.column.renderTitleLink(self.urbanlist_item)
-        title = '<span class="%s">%s</span>' % (css_class_span, title)
-        return title
+        link = '<a class="link-overlay" href="{url}/@@parcelview">{title}</a>'.format(
+            url=parcel.absolute_url(), title=escape(parcel.Title())
+        )
+        cell = '<span id="urban-parcel-display">{}</span>'.format(link)
+        return cell
 
 
 class EventTitleDisplay(TitleDisplay):
@@ -259,7 +257,7 @@ class EventTitleDisplay(TitleDisplay):
 
         documents = []
         for doc in event.getDocuments():
-            doc_title = doc.Title()
+            doc_title = escape(doc.Title())
             doc_link = "%s%s" % (doc.absolute_url(), suffix)
             doc_link = (
                 '<br /><a href="%s" class="discreet" style="margin-left:20px">%s</a>'
@@ -271,7 +269,7 @@ class EventTitleDisplay(TitleDisplay):
         suffix = ""
         annexes = []
         for annex in event.getAttachments():
-            annex_title = annex.Title()
+            annex_title = escape(annex.Title())
             annex_link = "%s%s" % (annex.absolute_url(), suffix)
             annex_link = (
                 '<br /><a href="%s" class="discreet" style="margin-left:20px">%s</a>'
@@ -288,7 +286,7 @@ class DocumentTitleDisplay(TitleDisplay):
 
     def render(self):
         doc = self.obj
-        title = doc.Title()
+        title = escape(doc.Title())
         suffix = self.urbanlist_item.canBeEdited() and "/external_edit" or ""
         url = "%s%s" % (doc.absolute_url(), suffix)
         css_class = "contenttype-%s" % doc.portal_type.lower()
@@ -306,13 +304,17 @@ class RecipientCadastreTitleDisplay(TitleDisplay):
         portal_type = recipient.portal_type.lower()
         state = urbanlist_item.getState()
         css_class = "contenttype-%s state-%s" % (portal_type, state)
-        title = recipient.Title()
+        title = escape(recipient.Title())
         title = '<span class="%s">%s</span>' % (css_class, title)
         parcels_info = '<span class="discreet">%s %s</span>' % (
             recipient.getCapakey(),
             recipient.getParcel_nature(),
         )
-        title = "%s<br />%s" % (title, parcels_info)
+        parcels_info_street = '<span class="discreet">%s %s</span>' % (
+            recipient.getParcel_street(),
+            recipient.getParcel_police_number(),
+        )
+        title = "%s<br />%s<br />%s" % (title, parcels_info, parcels_info_street)
         return title
 
 
@@ -431,6 +433,29 @@ class ActionsColumn(UrbanColumn):
         if urbanlist_item.id not in self.context.objectIds():
             return ""
         return portal.unrestrictedTraverse("{}/actions_panel".format(path))(
+            showActions=True
+        )
+
+
+class ReorderActionsColumn(UrbanColumn):
+    """ """
+
+    implements(IActionsColumn)
+
+    weight = 100
+    cssClasses = {"th": "actionsheader"}
+    header = "reorder_actions"
+
+    def renderHeadCell(self):
+        """Header cell content."""
+        return translate(self.header, "urban", context=self.request)
+
+    def renderCell(self, urbanlist_item):
+        path = urbanlist_item.getPath()
+        portal = api.portal.get()
+        if urbanlist_item.id not in self.context.objectIds():
+            return ""
+        return portal.unrestrictedTraverse("{}/reorder_actions_panel".format(path))(
             showActions=True
         )
 
@@ -600,7 +625,13 @@ class GenerationColumn(LinkColumn):
     def renderCell(self, item):
         if not self.has_mailing(item):
             return ""
-        return super(GenerationColumn, self).renderCell(item)
+        return '<a href="%s"%s%s%s>%s</a>' % (
+            escape(self.getLinkURL(item)),
+            self.getLinkTarget(item),
+            self.getLinkCSS(item),
+            self.getLinkTitle(item),
+            self.getLinkContent(item),
+        )
 
 
 class InspectionReportVisitDate(UrbanColumn):

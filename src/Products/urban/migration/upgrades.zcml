@@ -246,4 +246,63 @@
         profile="Products.urban:default"
         />
 
+    <gs:upgradeStep
+        title="Add complementary delay option"
+        description=""
+        source="1145"
+        destination="1146"
+        handler=".update_270.add_additional_delay_option"
+        profile="Products.urban:default"
+        />
+
+    <gs:upgradeStep
+        title="Update faceted criterion to hide collection widget category title"
+        description="Update faceted criterion to hide collection widget category title"
+        source="*"
+        destination="1200"
+        handler=".update_classic.update_faceted_collection_widget"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Remove generation link viewlet"
+        description="Remove generation link viewlet that are not longer usefull"
+        source="1200"
+        destination="1201"
+        handler=".update_classic.remove_generation_link_viewlet"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Fix opinion schedule column"
+        description="Fix opinion schedule column"
+        source="1201"
+        destination="1202"
+        handler=".update_classic.fix_opinion_schedule_column"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Update Collection Column"
+        description="Update Collection Column"
+        source="1202"
+        destination="1203"
+        handler=".update_classic.update_collection_column"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Add additional reference index"
+        description=""
+        source="1203"
+        destination="1204"
+        handler=".update_classic.add_additional_reference_index"
+        profile="Products.urban:default"
+        />
+
+    <gs:upgradeStep
+        title="Update faceted dashboard"
+        description=""
+        source="1204"
+        destination="1205"
+        handler=".update_classic.update_faceted_dashboard"
+        profile="Products.urban:default"
+        />
+
 </configure>

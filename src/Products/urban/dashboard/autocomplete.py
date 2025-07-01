@@ -20,7 +20,7 @@ class SuggestView(BrowserView):
 
     def __call__(self):
 
-        suggestions = [{"label": "", "value": ""}]
+        suggestions = [{"text": "", "id": ""}]
         try:
             suggestions.extend(self.compute_suggestions())
             return json.dumps(suggestions)
@@ -54,7 +54,7 @@ class RepresentativeSuggestView(SuggestView):
         catalog = api.portal.get_tool("portal_catalog")
         brains = catalog(**kwargs)
 
-        suggestions = [{"label": b.Title, "value": [b.UID]} for b in brains]
+        suggestions = [{"text": b.Title, "id": [b.UID]} for b in brains]
         return suggestions
 
 
@@ -90,7 +90,7 @@ class UrbanStreetsSuggest(SuggestView):
 
     label = "Rues urban"
 
-    def compute_suggestions(self):
+    def compute_suggestions(self, exact_match=False, include_disable=False):
         term = self.request.get("term")
         if not term:
             return
@@ -99,8 +99,13 @@ class UrbanStreetsSuggest(SuggestView):
         urban_config = api.portal.get_tool("portal_urban")
         path = "/".join(urban_config.streets.getPhysicalPath())
 
+        if exact_match is True:
+            title = term
+        else:
+            title = " AND ".join(["%s*" % x for x in terms])
+
         kwargs = {
-            "Title": " AND ".join(["%s*" % x for x in terms]),
+            "Title": title,
             "sort_on": "sortable_title",
             "sort_order": "reverse",
             "path": path,
@@ -111,10 +116,13 @@ class UrbanStreetsSuggest(SuggestView):
             "review_state": "enabled",
         }
 
+        if include_disable:
+            del kwargs["review_state"]
+
         catalog = api.portal.get_tool("portal_catalog")
         brains = catalog(**kwargs)
 
-        suggestions = [{"label": b.Title, "value": b.UID} for b in brains]
+        suggestions = [{"text": b.Title, "id": b.UID} for b in brains]
         return suggestions
 
 
@@ -141,9 +149,7 @@ class LicenceReferenceSuggest(SuggestView):
         catalog = api.portal.get_tool("portal_catalog")
         brains = catalog(**kwargs)
 
-        suggestions = [
-            {"label": b.getReference, "value": b.getReference} for b in brains
-        ]
+        suggestions = [{"text": b.getReference, "id": b.getReference} for b in brains]
         return suggestions
 
 
@@ -154,7 +160,15 @@ class CadastralReferenceSuggest(SuggestView):
 
     def _all_parcels_values(self):
         cat = api.portal.get_tool("portal_catalog")
-        values = [v for v in cat.Indexes["parcelInfosIndex"].uniqueValues()]
+        values = []
+        for val in cat.Indexes["parcelInfosIndex"].uniqueValues():
+            try:
+                val.encode("ascii")
+            except Exception:
+                continue
+            if val:
+                values.append(val)
+
         session = cadastre.new_session()
         all_divisions = dict(session.get_all_divisions())
         session.close()
@@ -188,5 +202,5 @@ class CadastralReferenceSuggest(SuggestView):
             for prc, index in all_parcels
             if all([t.lower() in prc.lower() for t in terms])
         ]
-        suggestions = [{"label": x[0], "value": x[1]} for x in raw_suggestions]
+        suggestions = [{"text": x[0], "id": x[1]} for x in raw_suggestions]
         return suggestions

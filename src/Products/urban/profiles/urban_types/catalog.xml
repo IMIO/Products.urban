@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+<object name="portal_catalog" meta_type="Plone Catalog Tool">
+  <index name="getDepositDate"
+         meta_type="DateIndex">
+    <indexed_attr value="getDepositDate"/>
+  </index>
+  <column value="getDepositDate"/>
+  <index name="getDecisionDate"
+         meta_type="DateIndex">
+    <indexed_attr value="getDecisionDate"/>
+  </index>
+  <column value="getDecisionDate"/>
+  <index name="getRecourseDecisionDisplayDate"
+         meta_type="DateIndex">
+    <indexed_attr value="getRecourseDecisionDisplayDate"/>
+  </index>
+  <index name="getValidityDate"
+         meta_type="DateIndex">
+    <indexed_attr value="getValidityDate"/>
+  </index>
+  <column value="getValidityDate"/>
+<!-- ##code-section FOOT -->
+  <index name="getReference"
+         meta_type="ZCTextIndex">
+    <indexed_attr value="getReference"/>
+  <extra name="index_type" value="Okapi BM25 Rank"/>
+  <extra name="lexicon_id" value="plone_lexicon"/>
+  </index>
+
+  <column value="getReference"/>
+
+  <index name="getAdditionalReference"
+         meta_type="ZCTextIndex">
+    <indexed_attr value="getAdditionalReference"/>
+    <extra name="index_type" value="Okapi BM25 Rank"/>
+    <extra name="lexicon_id" value="plone_lexicon"/>
+  </index>
+  <column value="getAdditionalReference"/>
+
+  <index name="folder_manager"
+           meta_type="KeywordIndex">
+    <indexed_attr value="folder_manager"/>
+  </index>
+  <column value="folder_manager"/>
+
+  <index name="representatives"
+           meta_type="KeywordIndex">
+    <indexed_attr value="representatives"/>
+  </index>
+
+  <index name="last_key_event"
+           meta_type="KeywordIndex">
+    <indexed_attr value="last_key_event"/>
+  </index>
+  <column value="last_key_event"/>
+
+  <index name="StreetsUID"
+           meta_type="KeywordIndex">
+    <indexed_attr value="StreetsUID"/>
+  </index>
+  <column value="StreetsUID"/>
+
+  <column value="parcelInfosIndex"/>
+  <index name="parcelInfosIndex" meta_type="KeywordIndex">
+    <indexed_attr value="parcelInfosIndex"/>
+  </index>
+
+  <index name="address"
+         meta_type="ZCTextIndex">
+    <indexed_attr value="address"/>
+  <extra name="index_type" value="Okapi BM25 Rank"/>
+  <extra name="lexicon_id" value="plone_lexicon"/>
+  </index>
+
+  <column value="address"/>
+
+  <column value="eventDate"/>
+
+  <index name="applicantInfosIndex" meta_type="ZCTextIndex">
+    <indexed_attr value="applicantInfosIndex"/>
+    <extra name="index_type" value="Okapi BM25 Rank"/>
+    <extra name="lexicon_id" value="plone_lexicon"/>
+  </index>
+
+  <column value="applicantInfosIndex"/>
+
+  <index name="architectInfosIndex" meta_type="ZCTextIndex">
+    <indexed_attr value="architectInfosIndex"/>
+    <extra name="index_type" value="Okapi BM25 Rank"/>
+    <extra name="lexicon_id" value="plone_lexicon"/>
+  </index>
+
+  <column value="architectInfosIndex"/>
+
+  <index name="extraValue"
+           meta_type="KeywordIndex">
+    <indexed_attr value="extraValue"/>
+  </index>
+
+  <index name="StreetNumber" meta_type="ZCTextIndex">
+    <indexed_attr value="StreetNumber"/>
+    <extra name="index_type" value="Okapi BM25 Rank"/>
+    <extra name="lexicon_id" value="plone_lexicon"/>
+  </index>
+  <column value="StreetNumber"/>
+
+  <index name="licence_final_duedate" meta_type="DateIndex">
+      <property name="index_naive_time_as_local">True</property>
+  </index>
+  <column value="licence_final_duedate"/>
+
+  <index name="archive" meta_type="BooleanIndex">
+    <indexed_attr value="archive"/>
+  </index>
+  <column value="archive"/>
+
+  <index name="investigationStart" meta_type="DateIndex"/>
+  <index name="investigationEnd" meta_type="DateIndex"/>
+  
+  <index name="getComplementary_delay" meta_type="KeywordIndex">
+    <indexed_attr value="getComplementary_delay"/>
+  </index>
+  <column value="getComplementary_delay"/>
+<!-- ##/code-section FOOT -->
+</object>

@@ -15,6 +15,7 @@ __docformat__ = "plaintext"
 
 from Acquisition import aq_parent
 from AccessControl import ClassSecurityInfo
+from Products.urban.widget.select2widget import MultiSelect2Widget
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 import interfaces
@@ -30,6 +31,7 @@ from DateTime import DateTime
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import (
     ReferenceBrowserWidget,
 )
+from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
 from Products.ATContentTypes.interfaces.file import IATFile
 from Products.CMFCore.utils import getToolByName
 
@@ -51,6 +53,7 @@ from Products.MasterSelectWidget.MasterMultiSelectWidget import MasterMultiSelec
 from zope.i18n import translate
 
 ##/code-section module-header
+
 
 slave_fields_followup_proposition = (
     {
@@ -699,7 +702,7 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
         Return a parsed version of data from Cadastre so we obtain something
         more beautiful to display
         """
-        if street == None:
+        if street is None:
             return "NO ADDRESS FOUND"
         print "\n\n Street: " + street
         i = 0

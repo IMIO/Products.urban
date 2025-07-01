@@ -14,6 +14,7 @@ __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEUL
 __docformat__ = "plaintext"
 
 from AccessControl import ClassSecurityInfo
+from Products.urban.widget.select2widget import MultiSelect2Widget
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 from Products.urban import interfaces
@@ -31,7 +32,7 @@ from Products.CMFCore.utils import getToolByName
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.utils import setOptionalAttributes
-from collective.archetypes.select2.select2widget import Select2Widget
+from Products.urban.widget.select2widget import Select2Widget
 from plone import api
 from DateTime import DateTime
 
@@ -52,14 +53,14 @@ schema = Schema(
     (
         LinesField(
             name="derogation",
-            widget=MultiSelectionWidget(
+            widget=MultiSelect2Widget(
                 format="checkbox",
                 label=_("urban_label_derogation", default="Derogation"),
             ),
-            schemata="urban_inquiry",
             multiValued=1,
             vocabulary=UrbanVocabulary("derogations"),
             default_method="getDefaultValue",
+            schemata="urban_inquiry",
         ),
         TextField(
             name="derogationDetails",
@@ -67,23 +68,23 @@ schema = Schema(
             widget=RichWidget(
                 label=_("urban_label_derogationDetails", default="Derogationdetails"),
             ),
-            schemata="urban_inquiry",
             default_output_type="text/html",
             default_content_type="text/html",
             default_method="getDefaultText",
+            schemata="urban_inquiry",
         ),
         LinesField(
             name="investigationArticles",
-            widget=MultiSelectionWidget(
+            widget=MultiSelect2Widget(
                 size=10,
                 label=_(
                     "urban_label_investigationArticles", default="Investigationarticles"
                 ),
             ),
-            schemata="urban_inquiry",
             multiValued=True,
             vocabulary=UrbanVocabulary("investigationarticles"),
             default_method="getDefaultValue",
+            schemata="urban_inquiry",
         ),
         TextField(
             name="investigationArticlesText",
@@ -94,10 +95,10 @@ schema = Schema(
                     default="Investigationarticlestext",
                 ),
             ),
-            schemata="urban_inquiry",
             default_content_type="text/html",
             default_method="getDefaultText",
-            default_output_type="text/html",
+            default_output_type="text/x-html-safe",
+            schemata="urban_inquiry",
         ),
         DateTimeField(
             name="demandDisplay",
@@ -108,6 +109,7 @@ schema = Schema(
                 ending_year=WIDGET_DATE_END_YEAR,
                 label=_("urban_label_demandDisplay", default="Demanddisplay"),
             ),
+            schemata="urban_inquiry",
         ),
         TextField(
             name="investigationDetails",
@@ -117,10 +119,10 @@ schema = Schema(
                     "urban_label_investigationDetails", default="Investigationdetails"
                 ),
             ),
-            schemata="urban_inquiry",
             default_content_type="text/html",
             default_method="getDefaultText",
-            default_output_type="text/html",
+            default_output_type="text/x-html-safe",
+            schemata="urban_inquiry",
         ),
         TextField(
             name="investigationReasons",
@@ -130,10 +132,10 @@ schema = Schema(
                     "urban_label_investigationReasons", default="Investigationreasons"
                 ),
             ),
-            schemata="urban_inquiry",
             default_content_type="text/html",
             default_method="getDefaultText",
-            default_output_type="text/html",
+            default_output_type="text/x-html-safe",
+            schemata="urban_inquiry",
         ),
         TextField(
             name="roadModificationSubject",
@@ -144,10 +146,10 @@ schema = Schema(
                     default="Roadmodificationsubject",
                 ),
             ),
-            schemata="urban_inquiry",
             default_content_type="text/html",
             default_method="getDefaultText",
-            default_output_type="text/html",
+            default_output_type="text/x-html-safe",
+            schemata="urban_inquiry",
         ),
         LinesField(
             name="solicitOpinionsTo",
@@ -526,6 +528,15 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
                 return suspension_delay
 
         return suspension_delay
+
+    security.declarePublic("getAllInquiriesAndAnnouncements")
+
+    def getAllInquiriesAndAnnouncements(self):
+        """
+        Returns the existing inquiries
+        """
+        inqs = [inq for inq in self._get_inquiry_objs(all_=True)]
+        return inqs
 
 
 registerType(Inquiry, PROJECTNAME)

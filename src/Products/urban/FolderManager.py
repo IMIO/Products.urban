@@ -14,6 +14,7 @@ __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEUL
 __docformat__ = "plaintext"
 
 from AccessControl import ClassSecurityInfo
+from Products.urban.widget.select2widget import MultiSelect2Widget
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 import interfaces
@@ -61,13 +62,14 @@ schema = Schema(
         ),
         LinesField(
             name="manageableLicences",
-            widget=MultiSelectionWidget(
+            widget=MultiSelect2Widget(
                 format="checkbox",
                 label="Manageablelicences",
                 label_msgid="urban_label_manageableLicences",
                 i18n_domain="urban",
             ),
             multiValued=True,
+            default_method="listLicenceTypes",
             vocabulary="listLicenceTypes",
         ),
     ),

@@ -19,11 +19,17 @@ def setDefaultValuesEvent(licence, event):
     """
     set default values on licence fields
     """
+    request = event.object.REQUEST
     if licence.checkCreationFlag():
-        _setDefaultFolderManagers(licence)
-        _setDefaultSelectValues(licence)
-        _setDefaultTextValues(licence)
-        _setDefaultReference(licence)
+        if request and request.getURL().endswith("@@masterselect-jsonvalue-toggle"):
+            # This is a major performance improvment and default values are not
+            # necessary for this view
+            return
+        else:
+            _setDefaultFolderManagers(licence)
+            _setDefaultSelectValues(licence)
+            _setDefaultTextValues(licence)
+            _setDefaultReference(licence)
 
 
 def _setDefaultSelectValues(licence):
@@ -34,6 +40,8 @@ def _setDefaultSelectValues(licence):
     ]
     for field in select_fields:
         default_value = licence.getDefaultValue(licence, field)
+        if not default_value:
+            continue
         field_mutator = getattr(licence, field.mutator)
         field_mutator(default_value)
 
@@ -47,12 +55,18 @@ def _setDefaultTextValues(licence):
     for field in select_fields:
         is_html = "html" in field.default_content_type
         default_value = licence.getDefaultText(licence, field, is_html)
+        if not default_value:
+            continue
         field_mutator = getattr(licence, field.mutator)
         field_mutator(default_value)
 
 
 def _setDefaultFolderManagers(licence):
-    licence.setFoldermanagers(getCurrentFolderManager())
+    default_folder_manager = licence.getLicenceConfig().getDefault_foldermanager()
+    if default_folder_manager:
+        licence.setFoldermanagers(default_folder_manager)
+    else:
+        licence.setFoldermanagers(getCurrentFolderManager())
 
 
 def _setDefaultReference(licence):
@@ -68,8 +82,9 @@ def postCreationActions(licence, event):
 
 
 def updateLicenceTitle(licence, event):
-    licence.updateTitle()
-    licence.reindexObject(idxs=["Title", "sortable_title"])
+    if hasattr(licence, "updateTitle"):
+        licence.updateTitle()
+        licence.reindexObject(idxs=["Title", "sortable_title"])
 
 
 def updateTaskIndexes(task_container, event):
@@ -203,3 +218,26 @@ def close_all_tasks(licence, event):
     licence_state = api.content.get_state(licence)
     if licence_state in config.getStates_to_end_all_tasks() or []:
         end_all_open_tasks(licence)
+
+
+def close_all_events(licence, event):
+    """
+    close all UrbanEvents that have the state 'closed' in their workflow.
+    """
+    portal_workflow = api.portal.get_tool("portal_workflow")
+    config = licence.getLicenceConfig()
+    licence_state = api.content.get_state(licence)
+    closing_states = ["closed", "opinion_given"]
+    if licence_state in (config.getStates_to_end_all_events() or []):
+        for urban_event in licence.getAllEvents():
+            workflow_def = portal_workflow.getWorkflowsFor(urban_event)[0]
+            for closing_state in closing_states:
+                if closing_state in workflow_def.states.objectIds():
+                    workflow_id = workflow_def.getId()
+                    workflow_state = portal_workflow.getStatusOf(
+                        workflow_id, urban_event
+                    )
+                    workflow_state["review_state"] = closing_state
+                    portal_workflow.setStatusOf(
+                        workflow_id, urban_event, workflow_state.copy()
+                    )

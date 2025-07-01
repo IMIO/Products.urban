@@ -17,6 +17,7 @@ from zope.component import getMultiAdapter
 import random
 import string
 import hashlib
+import os
 import pkg_resources
 import time
 
@@ -117,6 +118,8 @@ def _setSchemataForInquiry(schema, inquiry_class):
     Put the the fields coming from Inquiry in a specific schemata
     """
     inquiryFields = inquiry_class.schema.filterFields(isMetadata=False)
+    # do not take the 2 first fields into account, this is 'id' and 'title'
+    inquiryFields = inquiryFields[2:]
     for inquiryField in inquiryFields:
         if inquiryField.__name__ in ["id", "title"]:
             continue
@@ -232,9 +235,11 @@ def get_ws_meetingitem_infos(urban_event, extra_attributes=False):
         )
 
         items = ws4pmSettings._rest_searchItems(
-            {"externalIdentifier": urban_event.UID(), "config_id": config_id}
+            {
+                "externalIdentifier": urban_event.UID(),
+                "config_id": config_id,
+            }
         )
-
         if extra_attributes and items:
             items = ws4pmSettings._rest_getItemInfos(
                 {
@@ -304,6 +309,11 @@ def add_missing_capakey_in_registry(capakey):
         return
     registry.append(capakey.decode("utf-8"))
     api.portal.set_registry_record(interface, registry)
+
+
+def get_env_variable_value(variable, default):
+    """Return the value defined in env variable"""
+    return os.environ.get(variable, default)
 
 
 WIDGET_DATE_END_YEAR = datetime.now().year + 25

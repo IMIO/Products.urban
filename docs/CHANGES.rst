@@ -8,6 +8,75 @@ Changelog
 
 .. towncrier release notes start
 
+2.5.0.dev22 (2025-10-13)
+------------------------
+
+Bug fixes:
+
+
+- Fix an issue with translation for Road adaptation vocabulary
+  [mpeeters] (URBBDC-3204)
+
+
+2.5.0.dev21 (2025-10-10)
+------------------------
+
+Bug fixes:
+
+
+- Fix default content type for modified plans details
+  Fix a edge case with validation of reference number
+  [mpeeters] (URBBDC-3204)
+
+
+2.5.0.dev20 (2025-10-08)
+------------------------
+
+New features:
+
+
+- Decode to `UTF-8` for `getSociety`
+  URB-2595: Add a new field "additional reference"
+  Add JSON Serializer and Deserializer for REST API
+  MURBARLA-25: Fix an issue with Products.ZCTextIndex that was interpreting `NOT` as token instead of a word for notary letter references
+  SUP-6566: Adapt validator for value "simple" for procedure choice of CODT_Buildlicence
+  Fix Exposant validator length
+  Update dashboard xml config
+  [mpeeters, jchandelle] (URBBDC-3204)
+- Add function to have multiple dashbaord config
+  [jchandelle] (URBBDC-3231)
+
+
+2.5.0.dev19 (2025-07-22)
+------------------------
+
+New features:
+
+
+- Add merge field for getting first or last opinion request event
+  [jchandelle] (SUP-45220)
+- Add option to add complementary delay to task
+  Add value for SPW cyberattack
+  [jchandelle] (URB-3337)
+
+
+Bug fixes:
+
+
+- Fix date format in claimant import
+  [jchandelle] (SUP-41210)
+
+
+2.5.0.dev18 (2025-07-14)
+------------------------
+
+Internal:
+
+
+- Improve performances for add views
+  [mpeeters] (URB-2903)
+
+
 2.5.0.dev17 (2025-07-01)
 ------------------------
 

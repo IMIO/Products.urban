@@ -57,4 +57,10 @@
     provides="zope.schema.interfaces.IVocabularyFactory"
   />
 
+  <utility
+    component=".vocabularies.ComplementaryDelayFactory"
+    name="urban.vocabularies.complementary_delay"
+    provides="zope.schema.interfaces.IVocabularyFactory"
+  />
+
 </configure>

@@ -28,11 +28,7 @@ class UrbanDefaultActionsPanelView(ActionsPanelView):
     def __init__(self, context, request):
         super(UrbanDefaultActionsPanelView, self).__init__(context, request)
 
-        self.SECTIONS_TO_RENDER = (
-            "renderTransitions",
-            "renderEdit",
-            "renderOwnDelete",
-        )
+        self.SECTIONS_TO_RENDER = ("renderTransitions", "renderEdit", "renderOwnDelete")
         self.IGNORABLE_ACTIONS = ("cut", "paste", "rename", "copy")
 
 
@@ -51,6 +47,62 @@ class EventActionsPanelView(ActionsPanelView):
         )
 
 
+class ReorderActionsPanelView(ActionsPanelView):
+    """
+    Actions panel view of Urban Events.
+    """
+
+    def __init__(self, context, request):
+        super(ReorderActionsPanelView, self).__init__(context, request)
+        self.SECTIONS_TO_RENDER = ("renderArrows",)
+
+    def __call__(self, **kwargs):
+        kwargs["showArrows"] = (False,)
+        kwargs["arrowsPortalTypeAware"] = (False,)
+
+        return super(ReorderActionsPanelView, self).__call__(**kwargs)
+
+    def _returnTo(
+        self,
+    ):
+        """What URL should I return to after moving the element and page is refreshed."""
+        url = self.request.getURL()
+        if IGenericLicence.providedBy(self.context.aq_parent):
+            url = "{}/{}".format(url, "#fieldsetlegend-attachments")
+        return url
+
+
+class RecipientCadastreActionsPanelView(UrbanDefaultActionsPanelView):
+    """
+    Actions panel view of Urban Inquiry Events.
+    """
+
+    def __init__(self, context, request):
+        super(RecipientCadastreActionsPanelView, self).__init__(context, request)
+        self.SECTIONS_TO_RENDER = (
+            "renderTransitions",
+            "renderActions",
+            "renderEdit",
+            "renderOwnDelete",
+        )
+        self.ACCEPTABLE_ACTIONS = ("copy_to_claimant",)
+
+
+class TransferOfLicenceActionsPanelView(UrbanDefaultActionsPanelView):
+    """
+    Actions panel view of Urban Transfer of licence event.
+    """
+
+    def __init__(self, context, request):
+        super(TransferOfLicenceActionsPanelView, self).__init__(context, request)
+        self.SECTIONS_TO_RENDER = (
+            "renderTransitions",
+            "renderActions",
+            "renderEdit",
+            "renderOwnDelete",
+        )
+
+
 class LicenceActionsPanelView(ActionsPanelView):
     """
     Actions panel view of Licences.
@@ -59,8 +111,9 @@ class LicenceActionsPanelView(ActionsPanelView):
     def __init__(self, context, request):
         super(LicenceActionsPanelView, self).__init__(context, request)
 
-        self.SECTIONS_TO_RENDER = ("renderEdit",)
+        self.SECTIONS_TO_RENDER = ("renderEdit", "renderActions")
         self.IGNORABLE_ACTIONS = ("cut", "paste", "rename", "copy")
+        self.ACCEPTABLE_ACTIONS = ("urban_duplicate_licence",)
 
     def triggerTransition(self, transition, comment, redirect=True):
         freeze_transition = "suspend_freeze"
@@ -134,10 +187,15 @@ class TransitionsPanelView(ActionsPanelView):
         )
 
     def __call__(self, **kwargs):
-        return super(TransitionsPanelView, self).__call__(showHistory=True, **kwargs)
+        return super(TransitionsPanelView, self).__call__(
+            showHistory=True, forceRedirectAfterTransition=True, **kwargs
+        )
 
-    def getTransitions(self):
-        transitions = super(TransitionsPanelView, self).getTransitions()
+    def getTransitions(self, caching=True):
+        if caching:
+            if getattr(self, '_transitions', None):
+                return self._transitions
+        transitions = super(TransitionsPanelView, self).getTransitions(caching=False)
         workflow = self.request.get(
             "imio.actionspanel_workflow_%s_cachekey" % self.context.portal_type, None
         )
@@ -195,6 +253,9 @@ class TransitionsPanelView(ActionsPanelView):
                             "icon": "",
                         }
                     )
+        if caching:
+            # store transitions in case getTransitions is called several times
+            setattr(self, '_transitions', transitions)
         return transitions
 
     def sortTransitions(self, lst):
@@ -229,6 +290,8 @@ class TransitionsPanelView(ActionsPanelView):
         return to_confirm
 
     def showHistoryForContext(self):
+        # Ensure that self.content_history is initialized
+        super(TransitionsPanelView, self).showHistoryForContext()
         return True
 
 
@@ -240,6 +303,15 @@ class ConfigValueActionsPanelView(ActionsPanelView):
     def __init__(self, context, request):
         super(ConfigValueActionsPanelView, self).__init__(context, request)
         self.ACCEPTABLE_ACTIONS = ("rename",)
+
+    def __call__(self, **kwargs):
+        kwargs["showOwnDelete"] = False
+        # handle case where event config is ALSO an urban config value
+        if IEventConfig.providedBy(self.context):
+            kwargs["showAddContent"] = True
+            kwargs["showTransitions"] = False
+            kwargs["showActions"] = False
+        return super(ConfigValueActionsPanelView, self).__call__(**kwargs)
 
 
 class AutomatedTaskActionsPanelView(ActionsPanelView):
@@ -284,11 +356,13 @@ class AutomatedTaskActionsPanelView(ActionsPanelView):
     def renderChangeOwner(self):
         """Render a link for the change owner view"""
         if self.showChangeOwner:
+            self.saveHasActions()
             return ViewPageTemplateFile("actions_panel_change_owner.pt")(self)
 
     def renderCloseTask(self):
         """Render a link  to close the task manually"""
         if self.showCloseTask:
+            self.saveHasActions()
             return ViewPageTemplateFile("actions_panel_close_task.pt")(self)
 
 

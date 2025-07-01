@@ -2,7 +2,7 @@
     <hidden manager="plone.belowcontenttitle" skinname="imioapps">
         <viewlet name="imio.history.documentbyline"/>
     </hidden>
-    <hidden manager="plone.belowcontenttitle" skinname="imioapps">
+    <hidden manager="plone.belowcontenttitle" skinname="*">
         <viewlet name="document-generation-link"/>
     </hidden>
     <hidden manager="plone.belowcontentbody" skinname="imioapps">

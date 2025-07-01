@@ -20,4 +20,7 @@
     provides="Products.urban.services.interfaces.ISQLSession"
     factory="Products.urban.services.bestaddress.BestaddressSession" />
 
+  <adapter factory=".serializer.UrbanDefaultFieldSerializer" />
+  <adapter factory=".deserializer.DeserializeFromJsonUrban" />
+
 </configure>

@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
+
 from Products.urban import utils
 from Products.urban.testing import URBAN_TESTS_INTEGRATION
 from Products.urban.testing import URBAN_TESTS_LICENCES_FUNCTIONAL
 from Products.urban.tests.helpers import SchemaFieldsTestCase
-
 from plone import api
 from plone.app.testing import login
 from plone.testing.z2 import Browser
 from time import sleep
+from zope.globalrequest import getRequest
+from zope.globalrequest import setRequest
 
 import transaction
 import unittest
@@ -23,6 +25,8 @@ class TestBuildLicence(unittest.TestCase):
         self.buildlicence = portal.urban.buildlicences.objectValues("BuildLicence")[0]
         self.portal_urban = portal.portal_urban
         login(portal, "urbaneditor")
+        if not getRequest():
+            setRequest(self.portal.REQUEST)
 
     def testLicenceTitleUpdate(self):
         # verify that the licence title update correctly when we add or remove applicants/proprietaries
@@ -30,7 +34,7 @@ class TestBuildLicence(unittest.TestCase):
         licence = self.buildlicence
         self.assertTrue(
             licence.Title().endswith(
-                "1 - Exemple Permis Urbanisme - Mes Smith & Wesson"
+                "/1 - Exemple Permis Urbanisme - Mes Smith & Wesson"
             )
         )
         # remove the applicant
@@ -38,7 +42,7 @@ class TestBuildLicence(unittest.TestCase):
         licence.manage_delObjects([applicant_id])
         self.assertTrue(
             licence.Title().endswith(
-                "1 - Exemple Permis Urbanisme - no_applicant_defined"
+                "/1 - Exemple Permis Urbanisme - no_applicant_defined"
             )
         )
         # add an applicant back
@@ -47,9 +51,76 @@ class TestBuildLicence(unittest.TestCase):
         )
         self.assertTrue(
             licence.Title().endswith(
-                "1 - Exemple Permis Urbanisme -  Quentin Tinchimiloupète"
+                "/1 - Exemple Permis Urbanisme -  Quentin Tinchimiloupète"
             )
         )
+
+    def test_LicenceUpdateTitleForCodt_buildlicence(self):
+        # check that the licence updateTitle method add all applicants or proprietaries or notaries to the Licence Title
+        licence = self.buildlicence
+        self.assertTrue(
+            licence.Title().endswith(
+                "/1 - Exemple Permis Urbanisme - Mes Smith & Wesson"
+            )
+        )
+        # add another applicant
+        licence.invokeFactory(
+            "Applicant", "new_applicant", name1="Chuck", name2="Norris"
+        )
+        # call updateTitle()
+        licence.updateTitle()
+        # add applicant with invokeFactory add a space before the name of the applicant => 2spaces
+        self.assertTrue(
+            licence.Title().endswith(
+                "/1 - Exemple Permis Urbanisme - Mes Smith & Wesson,  Chuck Norris"
+            )
+        )
+
+    def test_LicenceUpdateTitleForInspection(self):
+        # check that the licence updateTitle method add all proprietaries on inspections titles
+        inspection_expl = self.portal.urban.inspections.objectValues("Inspection")[0]
+        # for the inspection the proprietary is before inspection name
+        self.assertTrue(
+            inspection_expl.Title().endswith(
+                "/1 - Mes Smith & Wesson - Exemple Inspection"
+            )
+        )
+        # add proprietary
+        inspection_expl.invokeFactory(
+            "Proprietary", "new_proprietary", name1="Chuck", name2="Norris"
+        )
+        # call updateTitle()
+        inspection_expl.updateTitle()
+        self.assertTrue(
+            inspection_expl.Title().endswith(
+                "/1 - Mes Smith & Wesson,  Chuck Norris - Exemple Inspection"
+            )
+        )
+
+    def test_LicenceUpdateTitleForNotaryLetter(self):
+        # check that the licence updateTitle method add all proprietaries and notaries on notary letters titles
+        licence = self.portal.urban.notaryletters.objectValues()[1]
+        self.assertTrue(
+            licence.Title().endswith(
+                "/1 - Mes Smith & Wesson -  NotaryName1 NotarySurname1"
+            )
+        )
+        notaries = self.portal.urban.notaries.objectValues()
+        notaries = list(notaries)
+        # add all notaries to the licence and add a proprietary
+        licence.setNotaryContact(notaries)
+        licence.invokeFactory(
+            "Proprietary", id="proprietary2", name1="Aeron", name2="Lorelei"
+        )
+        licence.updateTitle()
+
+        titleparts = licence.Title().split(" - ")
+        notarieslist = titleparts[2].split(", ")
+        notariesset = set(notarieslist)
+        testnotariesset = set([" André Sanfrapper", " NotaryName1 NotarySurname1"])
+        self.assertEqual(notariesset, testnotariesset)
+        testproprietaries = "Mes Smith & Wesson,  Aeron Lorelei"
+        self.assertEqual(titleparts[1], testproprietaries)
 
     def testGetLastEventWithoutEvent(self):
         buildlicences = self.portal.urban.buildlicences
@@ -165,6 +236,7 @@ class TestBuildLicenceFields(SchemaFieldsTestCase):
         default_password = self.layer.default_password
         login(self.portal, default_user)
         self.licences = []
+        # create 'BuildLicence' and 'ParcelOutLicence'
         for content_type in ["BuildLicence", "ParcelOutLicence"]:
             licence_folder = utils.getLicenceFolder(content_type)
             testlicence_id = "test_{}".format(content_type.lower())
@@ -172,14 +244,45 @@ class TestBuildLicenceFields(SchemaFieldsTestCase):
             transaction.commit()
             test_licence = getattr(licence_folder, testlicence_id)
             self.licences.append(test_licence)
-        self.test_buildlicence = self.licences[0]
-        self.licence = self.test_buildlicence
+        self.licence = self.licences[0]
+        # create a CODT_BuildLicence
+        licence_folder_codtbuildlicences = utils.getLicenceFolder("CODT_BuildLicence")
+        codtbuildlicence_testlicence_id = "test_{}".format("CODT_BuildLicence".lower())
+        licence_folder_codtbuildlicences.invokeFactory(
+            "CODT_BuildLicence", id=codtbuildlicence_testlicence_id
+        )
+        transaction.commit()
+        self.licences.append(
+            getattr(licence_folder_codtbuildlicences, codtbuildlicence_testlicence_id)
+        )
+
+        # create a CODT_ParcelOutLicence
+        licence_folder_codtparceloutlicences = utils.getLicenceFolder(
+            "CODT_ParcelOutLicence"
+        )
+        codtparceloutlicence_testlicence_id = "test_{}".format(
+            "CODT_ParcelOutLicence".lower()
+        )
+        licence_folder_codtparceloutlicences.invokeFactory(
+            "CODT_ParcelOutLicence", id=codtparceloutlicence_testlicence_id
+        )
+        transaction.commit()
+        self.licences.append(
+            getattr(
+                licence_folder_codtparceloutlicences,
+                codtparceloutlicence_testlicence_id,
+            )
+        )
 
         self.browser = Browser(self.portal)
         self.browserLogin(default_user, default_password)
+        if not getRequest():
+            setRequest(self.portal.REQUEST)
 
     def tearDown(self):
         with api.env.adopt_roles(["Manager"]):
+            if not getRequest():
+                setRequest(self.portal.REQUEST)
             for licence in self.licences:
                 api.content.delete(licence)
         transaction.commit()
@@ -272,7 +375,7 @@ class TestBuildLicenceFields(SchemaFieldsTestCase):
             msg = "field 'impactStudy' not visible on {}".format(
                 licence.getPortalTypeName()
             )
-            self._is_field_visible("<span>Etude d'incidences?</span>:", licence, msg)
+            self._is_field_visible("<span>Étude d'incidences ?</span>:", licence, msg)
 
     def test_has_attribute_implantation(self):
         field_name = "implantation"
@@ -287,9 +390,14 @@ class TestBuildLicenceFields(SchemaFieldsTestCase):
             msg = "field 'implantation' not visible on {}".format(
                 licence.getPortalTypeName()
             )
-            self._is_field_visible(
-                "<span>Implantation (art. 137)</span>:", licence, msg
-            )
+            if ICODT_BaseBuildLicence.providedBy(licence):
+                self._is_field_visible(
+                    "<span>Implantation (art D.IV.72)</span>:", licence, msg
+                )
+            else:
+                self._is_field_visible(
+                    "<span>Implantation (art. 137)</span>:", licence, msg
+                )
 
     def test_has_attribute_pebType(self):
         field_name = "pebType"
@@ -308,3 +416,24 @@ class TestBuildLicenceFields(SchemaFieldsTestCase):
     def test_pebDetails_is_visible(self):
         msg = "field 'pebDetails' not visible on BuildLicence"
         self._is_field_visible("<span>Détails concernant le PEB</span>:", msg=msg)
+
+    def test_has_attribute_representativeContacts(self):
+        field_name = "representativeContacts"
+        msg = "field '{}' not on class ParcelOutLicence".format(field_name)
+        self.assertTrue(self.licences[1].getField("representativeContacts"), msg)
+        msg = "field '{}' not on class CODT ParcelOutLicence".format(field_name)
+        self.assertTrue(self.licences[3].getField("representativeContacts"), msg)
+
+    def test_representativeContacts_is_visible(self):
+        msg = "field 'representativeContacts' not visible on CODT ParcelOutLicence"
+        self._is_field_visible(
+            "<legend>Architecte(s) ou géomètre(s)</legend>",
+            obj=self.licences[3],
+            msg=msg,
+        )
+        msg = "field 'representativeContacts' not visible on CODT BuildLicence"
+        self._is_field_visible(
+            "<legend>Architecte(s) ou géomètre(s)</legend>",
+            obj=self.licences[2],
+            msg=msg,
+        )

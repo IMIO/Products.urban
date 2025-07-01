@@ -31,6 +31,7 @@ from Products.urban.config import URBAN_CFG_DIR
 from Products.urban.config import URBANMAP_CFG
 from Products.urban.config import URBAN_TYPES
 from Products.urban.config import URBAN_TYPES_ACRONYM
+from Products.urban.dashboard.utils import switch_config_folder
 from Products.urban.exportimport import updateAllUrbanTemplates
 from Products.urban.Extensions.update_task_configs import add_licence_ended_condition
 from Products.urban.interfaces import IContactFolder
@@ -46,7 +47,7 @@ from Products.urban.utils import getUrbanOnlyLicenceFolderIds
 
 from datetime import date
 from eea.facetednavigation.layout.interfaces import IFacetedLayout
-from imio.dashboard.utils import _updateDefaultCollectionFor
+from collective.eeafaceted.collectionwidget.utils import _updateDefaultCollectionFor
 
 from plone import api
 from plone.portlets.interfaces import IPortletManager
@@ -74,6 +75,8 @@ from zope import event
 
 import pickle
 import transaction
+
+logger = logging.getLogger("urban: setuphandlers")
 
 OBJECTS_COUNT = 0
 
@@ -252,6 +255,7 @@ def extraPostInstall(context):
     logger.info("set_file_system_configuration : Done")
     logger.info("addUrbanVocabularies : starting...")
     addUrbanVocabularies(context)
+    transaction.commit()
     logger.info("addUrbanVocabularies : Done")
     logger.info("addEnvironmentRubrics : starting...")
     addEnvironmentRubrics(context)
@@ -265,6 +269,9 @@ def extraPostInstall(context):
     logger.info("Setup default schedule configuration: starting...")
     addScheduleConfigs(context)
     logger.info("Setup default schedule configuration : Done")
+    logger.info("Configure CKEditor: starting...")
+    configureCKEditor(context)
+    logger.info("Configure CKEditor: Done")
 
 
 def testExtraPostInstall(context):
@@ -298,6 +305,10 @@ def updateVocabularyConfig(context):
     attribute = "default_values"
     module = __import__(module_name, fromlist=[attribute])
     default_values = getattr(module, attribute)
+
+    global_vocabularies = default_values["global"]
+    createVocabularyFolders(container=tool, vocabularies=global_vocabularies, site=site)
+    createVocabularies(container=tool, vocabularies=global_vocabularies)
 
     for urban_type in URBAN_TYPES:
         licenceConfigId = urban_type.lower()
@@ -447,6 +458,10 @@ def getSharedVocabularies(urban_type, licence_vocabularies):
 
 def createVocabularies(container, vocabularies):
     for voc_name, vocabulary in vocabularies.iteritems():
+        if voc_name not in container:
+            # We are in a special usecase, nothing should be done
+            # This can happend when multiple upgrade steps have not be applied
+            continue
         voc_folder = getattr(container, voc_name)
         createFolderDefaultValues(voc_folder, vocabulary)
 
@@ -481,6 +496,13 @@ def addUrbanConfigFolders(context):
             # no mutator available because the field is defined with 'read only' property
             config_folder.licencePortalType = urban_type
             config_folder.setUsedAttributes(config_folder.listUsedAttributes().keys())
+            states_voc = queryUtility(IVocabularyFactory, "urban.licence_state")(
+                config_folder
+            )
+            default_end_states = [
+                st for st in states_voc.by_value.keys() if st in LICENCE_FINAL_STATES
+            ]
+            config_folder.setStates_to_end_all_tasks(default_end_states)
             config_folder.reindexObject()
         else:
             config_folder = getattr(tool, licenceConfigId)
@@ -606,8 +628,9 @@ def addRubricValues(context, config_folder):
         if category_id in config_folder.objectIds():
             rubric_folder = getattr(config_folder, category_id)
         else:
-            rubricfolder_id = config_folder.invokeFactory("Folder", **category)
-            rubric_folder = getattr(config_folder, rubricfolder_id)
+            rubric_folder = api.content.create(
+                container=config_folder, type="Folder", **category
+            )
             rubric_folder.setConstrainTypesMode(1)
             rubric_folder.setLocallyAllowedTypes(["EnvironmentRubricTerm"])
             rubric_folder.setImmediatelyAddableTypes(["EnvironmentRubricTerm"])
@@ -624,8 +647,8 @@ def addRubricValues(context, config_folder):
 
             rubric_id = rubric["id"]
             if rubric_id not in rubric_folder:
-                rubric_id = rubric_folder.invokeFactory(
-                    "EnvironmentRubricTerm", **rubric
+                new_rubric = api.content.create(
+                    container=rubric_folder, type="EnvironmentRubricTerm", **rubric
                 )
                 print "created rubric %ss" % rubric_id
             else:
@@ -635,7 +658,7 @@ def addRubricValues(context, config_folder):
                     field = old_rubric.getField(fieldname)
                     mutator = field.getMutator(old_rubric)
                     mutator(newvalue)
-            new_rubric = getattr(rubric_folder, rubric_id)
+                new_rubric = getattr(rubric_folder, rubric_id)
             new_rubric.processForm()
 
             conditions_uid = []
@@ -755,6 +778,8 @@ def setDefaultApplicationSecurity(context):
     site.portal_urban.manage_addLocalRoles(
         "urban_managers",
         (
+            "Contributor",
+            "Reviewer",
             "Editor",
             "Reader",
         ),
@@ -860,6 +885,7 @@ def setDefaultApplicationSecurity(context):
             folder.manage_addLocalRoles("urban_editors", ("Editor", "Contributor"))
             folder.manage_addLocalRoles("environment_readers", ("Reader",))
             folder.manage_addLocalRoles("environment_editors", ("Contributor",))
+            folder.manage_addLocalRoles("opinions_editors", ("Reader",))
             # mark them with IContactFolder interface use some view methods, like 'getemails', on it
             alsoProvides(folder, IContactFolder)
 
@@ -989,6 +1015,15 @@ def adaptDefaultPortal(context):
     try:
         site.portal_actions.document_actions.sendto.manage_changeProperties(
             visible=False
+        )
+    except AttributeError:
+        # the 'front-page' object does not exist...
+        pass
+    # ignore acquisition for external edit action
+    # set visible = 0
+    try:
+        site.portal_actions.document_actions.extedit.manage_changeProperties(
+            available_expr="python: object.externalEditorEnabled()"
         )
     except AttributeError:
         # the 'front-page' object does not exist...
@@ -1190,7 +1225,7 @@ def setupImioDashboard(context):
     """
     site = context.getSite()
     urban_folder = getattr(site, "urban")
-    _activate_dashboard_navigation(urban_folder, "/dashboard/config/all.xml")
+    _activate_dashboard_navigation(urban_folder, switch_config_folder("all.xml"))
 
     all_licences_collection_id = "collection_all_licences"
     if all_licences_collection_id not in urban_folder.objectIds():
@@ -1203,14 +1238,24 @@ def setupImioDashboard(context):
 
     urban_folder.moveObjectToPosition(all_licences_collection_id, 0)
     all_licences_collection = getattr(urban_folder, all_licences_collection_id)
+    # always reupdate the listed types to URBAN_TYPES
+    all_licences_collection.query = [
+        {
+            "i": "portal_type",
+            "o": "plone.app.querystring.operation.selection.is",
+            "v": [type for type in URBAN_TYPES],
+        }
+    ]
     _updateDefaultCollectionFor(urban_folder, all_licences_collection.UID())
 
     for urban_type in URBAN_TYPES:
         folder = getattr(urban_folder, urban_type.lower() + "s")
         _activate_dashboard_navigation(
-            folder, "/dashboard/config/%ss.xml" % urban_type.lower()
+            folder, switch_config_folder("%ss.xml" % urban_type.lower())
         )
         collection_id = "collection_%s" % urban_type.lower()
+        no_deposit = ["PatrimonyCertificate", "Inspection"]
+        with_deposit_date = urban_type not in no_deposit
         if collection_id not in folder.objectIds():
             setFolderAllowedTypes(folder, "DashboardCollection")
             _create_dashboard_collection(
@@ -1225,7 +1270,26 @@ def setupImioDashboard(context):
         _updateDefaultCollectionFor(folder, collection.UID())
 
 
-def _create_dashboard_collection(container, id, title, filter_type):
+def _create_dashboard_collection(
+    container, id, title, filter_type, with_deposit_date=True
+):
+    if with_deposit_date:
+        fields = (
+            "sortable_title",
+            "CreationDate",
+            "getDepositDate",
+            "folder_manager",
+            "actions",
+            "select_row",
+        )
+    else:
+        fields = (
+            "sortable_title",
+            "CreationDate",
+            "folder_manager",
+            "actions",
+            "select_row",
+        )
     collection_id = container.invokeFactory(
         "DashboardCollection",
         id=id,
@@ -1237,13 +1301,7 @@ def _create_dashboard_collection(container, id, title, filter_type):
                 "v": filter_type,
             }
         ],
-        customViewFields=(
-            "sortable_title",
-            "CreationDate",
-            "folder_manager",
-            "actions",
-            "select_row",
-        ),
+        customViewFields=fields,
         sort_on=u"created",
         sort_reversed=True,
         b_size=30,
@@ -1275,6 +1333,7 @@ def setupSchedule(context):
     if not hasattr(urban_folder, "schedule"):
         urban_folder.invokeFactory("Folder", id="schedule")
     schedule_folder = getattr(urban_folder, "schedule")
+    schedule_folder.setTitle("Échéancier")
     # block parents portlet
     manager = queryUtility(IPortletManager, name="plone.leftcolumn")
     blacklist = getMultiAdapter(
@@ -1295,7 +1354,7 @@ def setupSchedule(context):
             u"pretty_link",
             u"address_column",
             u"parcelreferences_column",
-            u"assigned_user_column",
+            u"assigned_user",
             u"status",
             u"due_date",
             u"task_actions_column",
@@ -1382,7 +1441,7 @@ def addTestUsers(site):
         _addTestUser(site, *user_info)
 
 
-def _addTestUser(site, username, groupname, external_editor=False):
+def _addTestUser(site, username, groupnames, external_editor=False):
     is_mountpoint = len(site.absolute_url_path().split("/")) > 2
     try:
         password = username
@@ -1391,8 +1450,9 @@ def _addTestUser(site, username, groupname, external_editor=False):
         member = site.portal_registration.addMember(id=username, password=password)
         if external_editor:
             member.setMemberProperties({"ext_editor": True})
-        site.acl_users.source_groups.addPrincipalToGroup(username, groupname)
-    except:
+        for groupname in groupnames:
+            site.acl_users.source_groups.addPrincipalToGroup(username, groupname)
+    except Exception:
         # if something wrong happens (one object already exists), we pass...
         pass
 
@@ -1688,8 +1748,7 @@ def createLicence(site, licence_type, data):
         )
     ]
     for event_type in eventtypes:
-        licence.createUrbanEvent(event_type)
-    # fill each event with dummy data and generate all its documents
+        licence.createUrbanEvent(event_type)    # fill each event with dummy data and generate all its documents
     logger.info("   test %s --> generate all the documents" % licence_type)
     for urban_event in licence.objectValues(
         ["UrbanEvent", "UrbanEventInquiry", "UrbanEventOpinionRequest"]
@@ -1745,6 +1804,7 @@ def configurePMWSClientForUrban(context):
         {"expression": u"python:context.Title().upper()", "field_name": u"title"},
         {"expression": u"context/Title", "field_name": u"description"},
         {"expression": u"context/getDecisionText", "field_name": u"decision"},
+        {"expression": u"context/getMotivationText", "field_name": u"motivation"},
     ]
 
     # validation on vocabulary cannot be done since we are not connected to plone meeting yet
@@ -1789,19 +1849,22 @@ def setupExtra(context):
     else:
         logger.info("user password policy unchanged")
 
+
+def configureCKEditor(context):
     # we apply a method of CPUtils to configure CKeditor
-    logger.info("Configuring CKeditor")
+    properties_tool = api.portal.get_tool("portal_properties")
+    ckprops = properties_tool.ckeditor_properties
+    ckprops.manage_changeProperties(enableScaytOnStartup=True)
     try:
         from Products.CPUtils.Extensions.utils import configure_ckeditor
 
+        portal = api.portal.get()
         if (
             not hasattr(portal.portal_properties, "ckeditor_properties")
             or portal.portal_properties.site_properties.default_editor != "CKeditor"
         ):
             configure_ckeditor(portal, custom="urban")
-            properties_tool = api.portal.get_tool("portal_properties")
-            custom_menu_style = u"[\n/* Styles Urban */\n{ name : 'Urban Body'\t\t, element : 'p', attributes : { 'class' : 'UrbanBody' } }, \n{ name : 'Urban title'\t       , element : 'p', attributes : { 'class' : 'UrbanTitle' } }, \n{ name : 'Urabn title 2'\t, element : 'p', attributes : { 'class' : 'UrbanTitle2' } }, \n{ name : 'Urban title 3'\t, element : 'p', attributes : { 'class' : 'UrbanTitle3' } }, \n{ name : 'Urban address'\t, element : 'p', attributes : { 'class' : 'UrbanAddress' } }, \n{ name : 'Urban table'\t       , element : 'p', attributes : { 'class' : 'UrbanTable' } }, \n/* Block Styles */\n{ name : 'Grey Title'\t\t, element : 'h2', styles : { 'color' : '#888' } }, \n{ name : 'Grey Sub Title'\t, element : 'h3', styles : { 'color' : '#888' } }, \n{ name : 'Discreet bloc'\t, element : 'p', attributes : { 'class' : 'discreet' } }, \n/* Inline styles */\n{ name : 'Discreet text'\t, element : 'span', attributes : { 'class' : 'discreet' } }, \n{ name : 'Marker: Yellow'\t, element : 'span', styles : { 'background-color' : 'Yellow' } }, \n{ name : 'Typewriter'\t\t, element : 'tt' }, \n{ name : 'Computer Code'\t, element : 'code' }, \n{ name : 'Keyboard Phrase'\t, element : 'kbd' }, \n{ name : 'Sample Text'\t\t, element : 'samp' }, \n{ name : 'Variable'\t\t, element : 'var' }, \n{ name : 'Deleted Text'\t\t, element : 'del' }, \n{ name : 'Inserted Text'\t, element : 'ins' }, \n{ name : 'Cited Work'\t\t, element : 'cite' }, \n{ name : 'Inline Quotation'\t, element : 'q' }, \n{ name : 'Language: RTL'\t, element : 'span', attributes : { 'dir' : 'rtl' } }, \n{ name : 'Language: LTR'\t, element : 'span', attributes : { 'dir' : 'ltr' } }, \n/* Objects styles */\n{ name : 'Image on right'\t, element : 'img', attributes : { 'class' : 'image-right' } }, \n{ name : 'Image on left'\t, element : 'img', attributes : { 'class' : 'image-left' } }, \n{ name : 'Image centered'\t, element : 'img', attributes : { 'class' : 'image-inline' } }, \n{ name : 'Borderless Table'    , element : 'table', styles: { 'border-style': 'hidden', 'background-color' : '#E6E6FA' } }, \n{ name : 'Square Bulleted List', element : 'ul', styles : { 'list-style-type' : 'square' } }\n\n]\n"
-            ckprops = properties_tool.ckeditor_properties
+            custom_menu_style = u"[\n/* Styles Urban */\n{ name : 'Urban Body'\t\t, element : 'p', attributes : { 'class' : 'UrbanBody' } }, \n{ name : 'Urban title'\t       , element : 'p', attributes : { 'class' : 'UrbanTitle' } }, \n{ name : 'Urabn title 2'\t, element : 'p', attributes : { 'class' : 'UrbanTitle2' } }, \n{ name : 'Urban title 3'\t, element : 'p', attributes : { 'class' : 'UrbanTitle3' } }, \n{ name : 'Urban address'\t, element : 'p', attributes : { 'class' : 'UrbanAddress' } }, \n{ name : 'Urban table'\t       , element : 'p', attributes : { 'class' : 'UrbanTable' } }, \n/* Block Styles */\n{ name : 'Grey Title'\t\t, element : 'h2', styles : { 'color' : '# 888' } }, \n{ name : 'Grey Sub Title'\t, element : 'h3', styles : { 'color' : '# 888' } }, \n{ name : 'Discreet bloc'\t, element : 'p', attributes : { 'class' : 'discreet' } }, \n/* Inline styles */\n{ name : 'Discreet text'\t, element : 'span', attributes : { 'class' : 'discreet' } }, \n{ name : 'Marker: Yellow'\t, element : 'span', styles : { 'background-color' : 'Yellow' } }, \n{ name : 'Typewriter'\t\t, element : 'tt' }, \n{ name : 'Computer Code'\t, element : 'code' }, \n{ name : 'Keyboard Phrase'\t, element : 'kbd' }, \n{ name : 'Sample Text'\t\t, element : 'samp' }, \n{ name : 'Variable'\t\t, element : 'var' }, \n{ name : 'Deleted Text'\t\t, element : 'del' }, \n{ name : 'Inserted Text'\t, element : 'ins' }, \n{ name : 'Cited Work'\t\t, element : 'cite' }, \n{ name : 'Inline Quotation'\t, element : 'q' }, \n{ name : 'Language: RTL'\t, element : 'span', attributes : { 'dir' : 'rtl' } }, \n{ name : 'Language: LTR'\t, element : 'span', attributes : { 'dir' : 'ltr' } }, \n/* Objects styles */\n{ name : 'Image on right'\t, element : 'img', attributes : { 'class' : 'image-right' } }, \n{ name : 'Image on left'\t, element : 'img', attributes : { 'class' : 'image-left' } }, \n{ name : 'Image centered'\t, element : 'img', attributes : { 'class' : 'image-inline' } }, \n{ name : 'Borderless Table'    , element : 'table', styles: { 'border-style': 'hidden', 'background-color' : '# E6E6FA' } }, \n{ name : 'Square Bulleted List', element : 'ul', styles : { 'list-style-type' : 'square' } }\n\n]\n"
             ckprops.manage_changeProperties(menuStyles=custom_menu_style)
 
     except ImportError:
@@ -1823,8 +1886,9 @@ def setHTMLContentType(folder, fieldName):
 
 def _create_task_configs(container, taskconfigs):
     """ """
+    last_id = None
     for taskconfig_kwargs in taskconfigs:
-        subtasks = taskconfig_kwargs.pop("subtasks", [])
+        subtasks = taskconfig_kwargs.get("subtasks", [])
         task_config_id = taskconfig_kwargs["id"]
 
         if task_config_id not in container.objectIds():
@@ -1832,12 +1896,14 @@ def _create_task_configs(container, taskconfigs):
 
             task_config_id = container.invokeFactory(**taskconfig_kwargs)
             task_config = getattr(container, task_config_id)
+            if last_id:
+                moveElementAfter(task_config, container, "id", last_id)
 
             # set custom view fields
             task_config.dashboard_collection.customViewFields = (
                 u"sortable_title",
                 u"address_column",
-                u"assigned_user_column",
+                u"assigned_user",
                 u"status",
                 u"due_date",
                 u"task_actions_column",
@@ -1852,3 +1918,30 @@ def _create_task_configs(container, taskconfigs):
             _create_task_configs(container=task_config, taskconfigs=subtasks)
 
         checkPoint()
+
+def reindex_catalog(context):
+    """
+    Clear and rebuild the calalog.
+    """
+    if isNoturbanProfile(context):
+        return
+    catalog = api.portal.get_tool("portal_catalog")
+    catalog.clearFindAndRebuild()
+
+
+def activateAnnouncementArticlesText(context):
+    """Activate 'announcementArticlesText' oprional field"""
+    if context.readDataFile("fixes_marker.txt") is None:
+        return
+    portal_urban = api.portal.get_tool("portal_urban")
+    for licence_config in portal_urban.objectValues("LicenceConfig"):
+        if licence_config.id in [
+            "codt_buildlicence",
+            "codt_parceloutlicence",
+            "codt_article127",
+            "codt_urbancertificatetwo",
+        ]:
+            if "announcementArticlesText" not in licence_config.usedAttributes:
+                licence_config.usedAttributes = licence_config.usedAttributes + (
+                    "announcementArticlesText",
+                )

@@ -37,6 +37,7 @@ from Products.urban import UrbanMessage as _
 
 from zope.annotation import IAnnotations
 from zope.interface import implements
+from zope.deprecation import deprecate
 
 from AccessControl import getSecurityManager
 from plone import api
@@ -293,6 +294,15 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             if "fieldname" in prop and prop["fieldname"] == fieldname:
                 return prop["text"]
         return html and "<p></p>" or ""
+
+    def listAllUsedAttributes(self):
+        """ """
+        all_fields = {}
+        licences_configs = self.get_all_licence_configs()
+        for cfg in licences_configs:
+            all_fields.update(cfg.listUsedAttributes()._keys)
+        voc = DisplayList([(k, v[1]) for k, v in all_fields.iteritems()])
+        return voc.sortedByValue()
 
     security.declarePublic("listVocabulary")
 
@@ -605,9 +615,9 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
 
         return res
 
-    security.declarePublic("getUrbanConfig")
+    security.declarePublic("getLicenceConfig")
 
-    def getUrbanConfig(self, context, urbanConfigId=None):
+    def getLicenceConfig(self, context, urbanConfigId=None):
         """
         Return the folder containing the necessary paramaters
         """
@@ -648,6 +658,15 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             return urbanConfig
         except AttributeError:
             return None
+
+    security.declarePublic("getUrbanConfig")
+
+    @deprecate("`getUrbanConfig` is deprecated, please use `getLicenceConfig` instead")
+    def getUrbanConfig(self, context, urbanConfigId=None):
+        """
+        Return the folder containing the necessary paramaters
+        """
+        return self.getLicenceConfig(context, urbanConfigId=urbanConfigId)
 
     def generatePrintMap(self, cqlquery, cqlquery2, zoneExtent=None):
         """ """
@@ -1028,6 +1047,72 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                         )
                     )
                 )
+
+    def get_offdays(self, types=[]):
+        if type(types) not in [list, tuple]:
+            types = [types]
+        raw_offdays = (
+            api.portal.get_registry_record(
+                "Products.urban.browser.offdays_settings.IOffDays.offdays"
+            )
+            or []
+        )
+        offdays = [day["date"] for day in raw_offdays if day["day_type"] in types]
+        return offdays
+
+    def get_offday_periods(self, types=[]):
+        if type(types) not in [list, tuple]:
+            types = [types]
+        offday_periods = api.portal.get_registry_record(
+            "Products.urban.browser.offdays_settings.IOffDays.periods"
+        )
+        periods = [
+            period for period in offday_periods or [] if period["period_type"] in types
+        ]
+        return periods
+
+    def get_week_offdays(self, as_mask=False):
+        week_offdays = api.portal.get_registry_record(
+            "Products.urban.browser.offdays_settings.IOffDays.week_offdays"
+        )
+        if week_offdays is None:
+            week_offdays = [5, 6]
+        if as_mask:
+            weekmask = "".join([str(int(i not in week_offdays)) for i in range(7)])
+            return weekmask
+        return week_offdays
+
+    security.declarePublic("listWarningConditions")
+
+    def listWarningConditions(self):
+        gsm = getGlobalSiteManager()
+        terms = set([])
+        for adapter in gsm.registeredAdapters():
+            implements = issubclass(adapter.provided, interfaces.IUrbanWarningCondition)
+            specific_enough = issubclass(IGenericLicence, adapter.required[0])
+            if implements and specific_enough:
+                terms.add((adapter.name, _(adapter.name)))
+        return DisplayList(sorted(list(terms), key=lambda name: name[1]))
+
+    security.declarePublic("listWarningLevels")
+
+    def listWarningLevels(self):
+        terms = [
+            ("info", translate("Info", "plone", context=self.REQUEST)),
+            ("warning", translate("Warning", "plone", context=self.REQUEST)),
+            ("error", translate("Error", "plone", context=self.REQUEST)),
+        ]
+        return DisplayList(terms)
+
+    def can_edit(self):
+        """ """
+        if _checkPermission(permissions.ModifyPortalContent, self):
+            return True
+
+    def is_admin(self):
+        """ """
+        if _checkPermission(permissions.ManagePortal, self):
+            return True
 
     @ram.cache(cache_key_30min)
     def check_if_mail_content_rule_applied(self, context):
