@@ -1215,7 +1215,7 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
 
         empty_value = getattr(field, "multivalued", "") and [] or ""
         if hasattr(field, "vocabulary") and isinstance(
-                field.vocabulary, UrbanVocabulary
+            field.vocabulary, UrbanVocabulary
         ):
             return field.vocabulary.get_default_values(context)
         return empty_value
