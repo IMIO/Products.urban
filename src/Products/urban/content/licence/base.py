@@ -905,6 +905,41 @@ class UrbanBase(OrderedContainer):
         """
         return self.listFolderContents({"portal_type": ("UrbanEventOpinionRequest")})
 
+    security.declarePublic("getFirstUrbanEventOpinionRequests")
+
+    def getFirstUrbanEventOpinionRequests(self):
+        """
+        Return all UrbanEventOpinionRequests events selected in the first inquiry.
+        """
+        all_events = self.getUrbanEventOpinionRequests()
+        events = [
+            evt
+            for evt in all_events
+            if evt.getLinkedInquiry() == self._get_inquiry_objs(all_=True)[0]
+        ]
+        return events
+
+    security.declarePublic("getLastUrbanEventOpinionRequests")
+
+    def getLastUrbanEventOpinionRequests(self, ignore_if_one_inquiry=False):
+        """
+        Return all UrbanEventOpinionRequests events selected in the last inquiry.
+
+        :param ignore_if_one_inquiry: If there is only one inquiry the method will return a empty list, you can enable it by set to True, defaults to False
+        :type ignore_if_one_inquiry: bool, optional
+        :return: Return list of Opinion request event
+        :rtype: list
+        """
+        if ignore_if_one_inquiry and len(self._get_inquiry_objs(all_=True)) == 1:
+            return []
+        all_events = self.getUrbanEventOpinionRequests()
+        events = [
+            evt
+            for evt in all_events
+            if evt.getLinkedInquiry() == self._get_inquiry_objs(all_=True)[-1]
+        ]
+        return events
+
     security.declarePublic("getUrbanEvent")
 
     def getUrbanEvent(self, title=""):
