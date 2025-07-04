@@ -2061,6 +2061,16 @@ msgstr ""
 msgid "miscdemands"
 msgstr ""
 
+#. Default: "These plots cannot be found, perhaps they belong to a neighboring municipality."
+#: ../browser/templates/parcelrecordsview.pt:24
+msgid "missing_capakey_plural"
+msgstr ""
+
+#. Default: "This plot cannot be found, perhaps it belong to a neighboring municipality."
+#: ../browser/templates/parcelrecordsview.pt:23
+msgid "missing_capakey_single"
+msgstr ""
+
 msgid "missingparts_folder_title"
 msgstr ""
 
@@ -3147,6 +3157,11 @@ msgstr ""
 #. Default: "Category"
 #: MiscDemand.py
 msgid "urban_label_category"
+msgstr ""
+
+#. Default: "Centrality"
+#: ../content/licence/CODT_CommercialLicence.py:39
+msgid "urban_label_centrality"
 msgstr ""
 
 #. Default: "Changes"
@@ -5229,6 +5244,21 @@ msgstr ""
 #. Default: "Submissionnumber"
 #: ../content/licence/EnvClassThree.py:68
 msgid "urban_label_submissionNumber"
+msgstr ""
+
+#. Default: "surfaceFoodBusiness"
+#: ../content/licence/CODT_CommercialLicence.py:49
+msgid "urban_label_surfaceFoodBusiness"
+msgstr ""
+
+#. Default: "surfaceHeavyBusiness"
+#: ../content/licence/CODT_CommercialLicence.py:71
+msgid "urban_label_surfaceHeavyBusiness"
+msgstr ""
+
+#. Default: "surfaceLightBusiness"
+#: ../content/licence/CODT_CommercialLicence.py:60
+msgid "urban_label_surfaceLightBusiness"
 msgstr ""
 
 #. Default: "Suspension"

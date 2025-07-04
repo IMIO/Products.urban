@@ -2086,6 +2086,16 @@ msgstr "Paramètres des 'divers'"
 msgid "miscdemands"
 msgstr "Divers"
 
+#. Default: "These plots cannot be found, perhaps they belong to a neighboring municipality."
+#: ../browser/templates/parcelrecordsview.pt:24
+msgid "missing_capakey_plural"
+msgstr "Ces parcelles sont introuvables, peut-être qu'elles appartiennent à une commune voisine."
+
+#. Default: "This plot cannot be found, perhaps it belong to a neighboring municipality."
+#: ../browser/templates/parcelrecordsview.pt:23
+msgid "missing_capakey_single"
+msgstr "Cette parcelle est introuvable, peut-être qu'elle appartient à une commune voisine."
+
 msgid "missingparts_folder_title"
 msgstr "Liste des pièces nécessaires pour gérer les pièces manquantes"
 
@@ -3174,6 +3184,11 @@ msgstr "Détails concernant la zone de captage"
 #: MiscDemand.py
 msgid "urban_label_category"
 msgstr "Catégorie"
+
+#. Default: "Centrality"
+#: ../content/licence/CODT_CommercialLicence.py:39
+msgid "urban_label_centrality"
+msgstr "Centralité"
 
 #. Default: "Changes"
 #: PcaTerm.py
@@ -5258,6 +5273,21 @@ msgstr "Rubriques"
 #: ../content/licence/EnvClassThree.py:68
 msgid "urban_label_submissionNumber"
 msgstr "N° de soumission"
+
+#. Default: "surfaceFoodBusiness"
+#: ../content/licence/CODT_CommercialLicence.py:49
+msgid "urban_label_surfaceFoodBusiness"
+msgstr "m² de commerce alimentaire"
+
+#. Default: "surfaceHeavyBusiness"
+#: ../content/licence/CODT_CommercialLicence.py:71
+msgid "urban_label_surfaceHeavyBusiness"
+msgstr "m² de commerce lourd"
+
+#. Default: "surfaceLightBusiness"
+#: ../content/licence/CODT_CommercialLicence.py:60
+msgid "urban_label_surfaceLightBusiness"
+msgstr "m² de commerce léger"
 
 #. Default: "Suspension"
 #: ../content/UrbanEventInquiry.py:127

@@ -8,6 +8,35 @@ Changelog
 
 .. towncrier release notes start
 
+2.5.0.dev17 (2025-07-01)
+------------------------
+
+New features:
+
+
+- Give opinion editor roles on road decree's bound licence
+  [daggelpop] (SUP-29258)
+- Add way to easily hide licence type
+  [jchandelle] (SUP-33793)
+- Add centrality to every licence & make it a multiselect
+  [daggelpop]
+  Move centrality in first position in the fieldset
+  [daggelpop] (URB-3017)
+- Add bound licences field to patrimony certificates
+  [daggelpop] (URB-3046)
+- Add 3 surface fields to commercial licence
+  [daggelpop] (URB-3117)
+
+
+Bug fixes:
+
+
+- Fix history parcel view when missing capakey
+  [jchandelle] (SUP-36370)
+- Fix encoding in mail send notification
+  [jchandelle] (SUP-43917)
+
+
 2.5.0.dev16 (2025-06-05)
 ------------------------
 
