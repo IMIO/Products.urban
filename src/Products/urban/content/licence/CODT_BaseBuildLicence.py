@@ -826,6 +826,7 @@ def finalizeSchema(schema):
     schema.moveField("patrimony_observation", after="patrimony_analysis")
     schema.moveField("watercourse", after="locationFloodingLevel")
     schema.moveField("watercourseCategories", after="watercourse")
+    schema.moveField("complementary_delay", after="prorogation")
     schema.moveField("trail", after="roadEquipments")
     schema.moveField("trailDetails", after="trail")
     schema["missingParts"].widget.format = None
