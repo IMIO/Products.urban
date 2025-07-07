@@ -23,14 +23,12 @@ class UrbanBaseDelay(BaseCalculationDelay):
 
         licence = self.task_container
 
-        complementary_delay = self.get_complementary_delay()
-
         marked_suspension_1 = ITaskWithSuspensionDelay.providedBy(task)
         marked_suspension_2 = ITaskWithWholeSuspensionDelay.providedBy(task)
         if not licence.getCovid() or (
             not marked_suspension_1 and not marked_suspension_2
         ):
-            return complementary_delay
+            return 0
 
         suspension_start = api.portal.get_registry_record(
             "Products.urban.interfaces.IGlobalSuspensionPeriod.start_date"
@@ -42,15 +40,15 @@ class UrbanBaseDelay(BaseCalculationDelay):
 
         start_date = self.start_date
         if start_date < suspension_start:
-            return suspension_period.days + complementary_delay
+            return suspension_period.days
 
         elif start_date < suspension_end:
             if ITaskWithWholeSuspensionDelay.providedBy(task):
-                return suspension_period.days + complementary_delay
+                return suspension_period.days
             else:
                 suspension_prorata = suspension_end - start_date
-                return suspension_prorata.days + complementary_delay
-        return complementary_delay
+                return suspension_prorata.days
+        return 0
 
 
 class AnnoncedDelay(UrbanBaseDelay):
@@ -156,11 +154,10 @@ class InspectionFollowUpDelay(AnnoncedDelay):
 
     def calculate_delay(self):
         licence = self.task_container
-        complementary_delay = self.get_complementary_delay()
         followup = licence.getLastFollowUpEventWithDelay()
         report = followup.getLinkedReport()
         delay = report.getDelay() and int(report.getDelay()) or 0
-        return delay + complementary_delay
+        return delay
 
 
 class CouncildecisionDelay(UrbanBaseDelay):
