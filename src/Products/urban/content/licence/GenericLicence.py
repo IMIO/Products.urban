@@ -332,7 +332,7 @@ schema = Schema(
             ),
             enforceVocabulary=True,
             multiValued=True,
-            schemata="urban_description",
+            schemata="urban_analysis",
             vocabulary=UrbanVocabulary("complementary_delay", vocType="ComplementaryDelayTerm", inUrbanConfig=False),
             default_method="getDefaultValue",
         ),
