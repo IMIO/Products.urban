@@ -192,6 +192,7 @@ optional_fields = [
     "groundStateStatus",
     "groundstatestatusDetails",
     "covid",
+    "complementary_delay",
     "watercourse",
     "watercourseCategories",
     "trail",
@@ -322,6 +323,18 @@ schema = Schema(
             widget=TextAreaWidget(
                 label=_("urban_label_taxDetails", default="Taxdetails"),
             ),
+        ),
+        StringField(
+            name="complementary_delay",
+            widget=MultiSelect2Widget(
+                format="select",
+                label=_("urban_label_complementary_delay", default="Complementary Delay"),
+            ),
+            enforceVocabulary=True,
+            multiValued=True,
+            schemata="urban_analysis",
+            vocabulary=UrbanVocabulary("complementary_delay", vocType="ComplementaryDelayTerm", inUrbanConfig=False),
+            default_method="getDefaultValue",
         ),
         LinesField(
             name="missingParts",
@@ -1778,6 +1791,28 @@ class GenericLicence(OrderedBaseFolder, UrbanBase, BrowserDefaultMixin):
             if opinionRequest.getLinkedOrganisationTermId() == organisation:
                 res.append(opinionRequest)
         return res
+
+    security.declarePublic("get_complementary_delay")
+        
+    def get_complementary_delay(self):
+        complementary_delay = self.getComplementary_delay()
+        if not complementary_delay:
+            return []
+
+        portal_urban = api.portal.get_tool("portal_urban")
+        complementary_delay_vocabulary = portal_urban.listVocabularyObjects(
+            vocToReturn="complementary_delay",
+            context=self,
+            vocType="ComplementaryDelayTerm",
+            inUrbanConfig=False,
+            allowedStates=["disabled", "enabled"]
+        )
+
+        return [
+            complementary_delay_vocabulary.get(delay)
+            for delay in complementary_delay
+            if complementary_delay_vocabulary.get(delay, None)
+        ]
 
     security.declarePublic("createAllAdvices")
 

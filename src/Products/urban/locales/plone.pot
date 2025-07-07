@@ -532,3 +532,6 @@ msgstr ""
 
 msgid "nonapplicable"
 msgstr ""
+
+msgid "ComplementaryDelayTerm"
+msgstr ""

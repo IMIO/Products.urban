@@ -233,6 +233,10 @@ class IEnvironmentRubricTerm(Interface):
     """Marker interface for .EnvironmentRubricTerm.EnvironmentRubricTerm"""
 
 
+class IComplementaryDelayTerm(Interface):
+    """Marker interface for .ComplementaryDelayTerm.ComplementaryDelayTerm"""
+
+
 class ISpecificFeatureTerm(Interface):
     """Marker interface for .SpecificFeatureTerm.SpecificFeatureTerm"""
 

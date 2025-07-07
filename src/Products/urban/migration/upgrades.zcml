@@ -782,5 +782,14 @@
         handler=".update_270.add_new_registry_for_missing_capakey"
         profile="Products.urban:default"
         />
-  
+
+    <gs:upgradeStep
+        title="Add complementary delay option"
+        description=""
+        source="1165"
+        destination="1166"
+        handler=".update_270.add_additional_delay_option"
+        profile="Products.urban:default"
+        />
+
 </configure>
