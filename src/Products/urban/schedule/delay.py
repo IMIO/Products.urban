@@ -60,6 +60,7 @@ class AnnoncedDelay(UrbanBaseDelay):
         base_delay = super(AnnoncedDelay, self).calculate_delay()
         licence = self.task_container
         delay = licence.getAnnoncedDelay() or 0
+        get_complementary_delay = self.get_complementary_delay()
         if hasattr(licence, "decisional_delay"):
             delay = licence.getDecisional_delay()
         if with_modified_blueprints and licence.getHasModifiedBlueprints():
@@ -67,7 +68,15 @@ class AnnoncedDelay(UrbanBaseDelay):
         if delay and delay.endswith("j"):
             delay = int(delay[:-1])
             delay += self.inquiry_suspension_delay()
-        return delay + base_delay
+        return delay + base_delay + get_complementary_delay
+
+    def get_complementary_delay(self):
+        if not hasattr(self, "task_container"):
+            return 0
+        licence = self.task_container
+        if not hasattr(licence, "get_complementary_delay"):
+            return 0
+        return sum([delay.getDelay() for delay in licence.get_complementary_delay()])
 
     def inquiry_suspension_delay(self):
         licence = self.task_container
