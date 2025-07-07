@@ -530,5 +530,8 @@ msgstr ""
 msgid "frozen_suspension"
 msgstr ""
 
+msgid "nonapplicable"
+msgstr ""
+
 msgid "ComplementaryDelayTerm"
 msgstr ""

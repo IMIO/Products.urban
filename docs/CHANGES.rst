@@ -8,6 +8,28 @@ Changelog
 
 .. towncrier release notes start
 
+2.7.41 (2025-06-18)
+-------------------
+
+New features:
+
+
+- Add translation for nonapplicable state in Division
+  [jchandelle] (SUP-39760)
+- Add building procedure's
+  [WBoudabous, aduchene] (URBBDC-3142)
+
+
+2.7.40 (2025-06-10)
+-------------------
+
+Bug fixes:
+
+
+- Revert "URB-3293 - Add RoadDecree to URBAN_TYPES (#340)"
+  [mpeeters] (URB-3293)
+
+
 2.7.39 (2025-06-07)
 -------------------
 

@@ -223,7 +223,7 @@ URBAN_TYPES = [
     "CODT_NotaryLetter",
     "ProjectMeeting",
     "ExplosivesPossession",
-    'RoadDecree',
+    # 'RoadDecree',
     "Inspection",
     "Ticket",
 ]
