@@ -1,8 +1,10 @@
 # encoding: utf-8
 
 from Acquisition import aq_parent
+from eea.facetednavigation.interfaces import ICriteria
 from OFS.interfaces import IOrderedContainer
 from Products.urban import UrbanMessage as _
+from Products.urban.config import URBAN_TYPES
 from Products.CMFCore.utils import getToolByName
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.migration.utils import refresh_workflow_permissions
@@ -517,15 +519,56 @@ def add_additional_delay_option(context):
         portal_type="ComplementaryDelayTerm"
     )
 
+    # Add qery widget to 'all' folder 
+    urban_folder = api.portal.get().urban
+    data = {
+        "_cid_": u"c97",
+        "title": u"Prorogation complémentaire",
+        "hidden": False,
+        "index": u"getComplementary_delay",
+        "vocabulary": u"urban.vocabularies.complementary_delay"
+    }
+    urban_folder_criterion = ICriteria(urban_folder)
+    if urban_folder_criterion is not None:
+        urban_folder_criterion.add(
+            wid="select2",
+            position="top",
+            section="advanced",
+            **data
+        )
+
     # Add complementary_delay field to all default
     logger.info("Add complementary_delay field to all default")
     field = "complementary_delay"
-    for licence_config in portal_urban.objectValues("LicenceConfig"):
+    
+    for urban_type in URBAN_TYPES:
+        # Add complementary_delay field 
+        licence_config = portal_urban.get(urban_type.lower(), None)
+        if licence_config is None:
+            continue
         if not hasattr(licence_config, "getUsedAttributes"):
             continue
         used_attributes = licence_config.getUsedAttributes()
         if field in used_attributes:
             continue
         licence_config.setUsedAttributes(used_attributes + (field, ))
+        logger.info("Type {}, attribute add".format(urban_type))
+
+        #Add query widget
+        licence_folder = getattr(urban_folder, "{}s".format(urban_type.lower()), None)
+        if licence_folder is None:
+            continue
+        criterion = ICriteria(licence_folder)
+        if criterion is None:
+            continue
+
+        criterion.add(
+            wid="select2",
+            position="top",
+            section="advanced",
+            **data
+        )
+        logger.info("Type {}, query widget add".format(urban_type))
+        
 
     logger.info("upgrade step done!")
