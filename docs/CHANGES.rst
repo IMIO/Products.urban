@@ -8,6 +8,17 @@ Changelog
 
 .. towncrier release notes start
 
+2.7.42 (2025-07-08)
+-------------------
+
+New features:
+
+
+- Add option to add complementary delay to task
+  Add value for SPW cyberattack
+  [jchandelle] (URB-3337)
+
+
 2.7.41 (2025-06-18)
 -------------------
 
