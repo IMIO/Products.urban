@@ -19,6 +19,13 @@ New features:
   [jchandelle] (URB-3337)
 
 
+Bug fixes:
+
+
+- Revert: Add building procedure's
+  [WBoudabous, aduchene] (URBBDC-3142)
+
+
 2.7.41 (2025-06-18)
 -------------------
 
