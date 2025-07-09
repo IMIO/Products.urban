@@ -448,3 +448,8 @@ def additional_reference(object):
         return object.getAdditionalReference()
     except KeyError:
         raise AttributeError()
+
+
+@indexer(interfaces.IEnvironmentBase)
+def rubrics_indexer(context):
+    return context.getField("rubrics").getRaw(context)

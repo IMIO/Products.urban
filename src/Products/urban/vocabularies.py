@@ -456,3 +456,47 @@ class ComplementaryDelayVocabulary(object):
 
 
 ComplementaryDelayFactory = ComplementaryDelayVocabulary()
+
+
+class RubricsVocabulary(object):
+    implements(IVocabularyFactory)
+
+    def get_rubrics_vocabularies(self):
+        portal = api.portal.get()
+        rubrics_folder = portal.portal_urban.rubrics
+        return self.recursive_get_term(rubrics_folder)
+
+    def recursive_get_term(self, element, rubrics=[], check_id=[]):
+        if element.portal_type == "Folder":
+            for item in element.values():
+                rubrics = self.recursive_get_term(item, rubrics)
+        if element.portal_type == "EnvironmentRubricTerm":
+            if element.UID() in check_id:
+                return rubrics
+            rubrics.append(
+                {
+                    "id": element.UID(),
+                    "title": "Classe {}, {} : {}".format(
+                        element.getExtraValue(),
+                        element.getNumber(),
+                        element.description.getRaw(),
+                    ),
+                    "enabled": api.content.get_state(
+                        obj=element.values()[0].values()[0]
+                    )
+                    == "enabled",
+                }
+            )
+            check_id.append(element.UID())
+        return rubrics
+
+    def __call__(self, context):
+        terms = self.get_rubrics_vocabularies()
+        voc_terms = [
+            SimpleTerm(t["id"], t["id"], t["title"]) for t in terms if t["enabled"]
+        ]
+        voc_terms.sort(lambda a, b: cmp(a.title, b.title))
+        return SimpleVocabulary(voc_terms)
+
+
+RubricsFactory = RubricsVocabulary()

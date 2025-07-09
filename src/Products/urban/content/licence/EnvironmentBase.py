@@ -46,6 +46,10 @@ from plone import api
 from zope.interface import implements
 
 
+import logging
+
+logger = logging.getLogger("EnvironmentBase.py : ")
+
 optional_fields = [
     "roadTechnicalAdvice",
     "locationTechnicalAdvice",
@@ -544,6 +548,50 @@ class EnvironmentBase(
     def getRubricsConfigPath(self):
         config_path = "/".join(self.getLicenceConfig().rubrics.getPhysicalPath())[1:]
         return config_path
+
+    security.declarePublic("get_rubrics_display")
+
+    def get_rubrics_display(self, class_number=True, number=True, description=False):
+        """
+        Generate an HTML-formatted list of rubric information for the licence.
+
+        :param class_number: Whether to include the class number in the output, defaults to True
+        :type class_number: bool, optional
+        :param number: Whether to include the rubric number, defaults to True
+        :type number: bool, optional
+        :param description: Whether to include the rubric's description as a paragraph under the number, defaults to False
+        :type description: bool, optional
+        :return: An HTML string with the formatted rubric data, or an empty string if `getRubrics` is not available
+        :rtype: str
+        """
+        if not hasattr(self, "getRubrics"):
+            logger.warning("This licence has no getRubrics method")
+            return ""
+        rubrics = self.getRubrics()
+        output = []
+        for rubric in rubrics:
+            rubric_str = ""
+
+            if class_number:
+                rubric_str += "Classe {}".format(rubric.getExtraValue())
+            if class_number and number:
+                rubric_str += ", "
+            if number:
+                rubric_str += "{}".format(rubric.getNumber())
+
+            description_str = rubric.Description()
+            if (class_number or number) and description:
+                rubric_str = "<p>{} :</p>{}".format(rubric_str, description_str)
+            elif description:
+                rubric_str += description_str
+            else:
+                rubric_str = "<p>{}</p>".format(rubric_str)
+
+            if rubric_str:
+                rubric_str = "<li>{}</li>".format(rubric_str)
+                output.append(rubric_str)
+
+        return "<ul>{}</ul>".format("".join(output))
 
     security.declarePrivate("_getConditions")
 
