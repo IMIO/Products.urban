@@ -91,6 +91,19 @@ class NoticeNotification(NoticeElement):
         return getattr(urban_folder, "{0}s".format(self.type.lower()))
 
     @property
+    def licence(self):
+        """Return the licence, if there is already one"""
+
+        if not self.reference:
+            return
+        catalog = api.portal.get_tool("portal_catalog")
+        brains = catalog.unrestrictedSearchResults(getReference=self.reference)
+        if len(brains) != 1:
+            return
+        licence = brains[0].getObject()
+        return licence
+
+    @property
     def event_configs(self):
         portal_urban_folder = api.portal.get().urban.portal_urban
         licence_type_folder = getattr(portal_urban_folder, "{0}".format(self.type.lower()))
