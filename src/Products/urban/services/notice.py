@@ -31,6 +31,12 @@ class WebserviceNotice(WebService):
         )
 
     @property
+    def sent_on_behalf_of(self):
+        return api.portal.get_registry_record(
+            "Products.urban.browser.notice_settings.INoticeSettings.sent_on_behalf_of_municipality_id"
+        )
+
+    @property
     def _auth(self):
         if self.user and self.password:
             return (self.user, self.password)
@@ -39,7 +45,10 @@ class WebserviceNotice(WebService):
         return requests.get(
             "{0}/{1}".format(self.url, endpoint),
             auth=self._auth,
-            headers={"Accept": "application/json"},
+            headers={
+                "Accept": "application/json",
+                "X-Sent-On-Behalf-Of": self.sent_on_behalf_of,
+            },
             params=parameters,
         )
 
@@ -48,7 +57,11 @@ class WebserviceNotice(WebService):
             "{0}/{1}".format(self.url, endpoint),
             auth=self._auth,
             json=data,
-            headers={"Accept": "application/json", "content-type": "application/json"},
+            headers={
+                "Accept": "application/json",
+                "content-type": "application/json",
+                "X-Sent-On-Behalf-Of": self.sent_on_behalf_of,
+            },
         )
 
     def _get_notifications(self, status="EN_ATTENTE_REPONSE"):

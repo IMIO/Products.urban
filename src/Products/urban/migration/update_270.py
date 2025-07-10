@@ -488,6 +488,11 @@ def initialize_notice_settings(context):
         registry_record = Record(registry_field)
         registry_record.value = None
         registry.records["{0}.municipality_id".format(base)] = registry_record
+    if "{0}.sent_on_behalf_of_municipality_id".format(base) not in registry.records:
+        registry_field = field.TextLine(title=INoticeSettings["sent_on_behalf_of_municipality_id"].title)
+        registry_record = Record(registry_field)
+        registry_record.value = None
+        registry.records["{0}.sent_on_behalf_of_municipality_id".format(base)] = registry_record
     if "{0}.last_import_date".format(base) not in registry.records:
         registry_field = field.Datetime(title=INoticeSettings["last_import_date"].title)
         registry_record = Record(registry_field)
