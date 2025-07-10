@@ -77,6 +77,15 @@ class NoticeNotification(NoticeElement):
         return api.portal.get().generateUniqueId(self.type)
 
     @property
+    def reference(self):
+        """Return the URBAN reference, if present"""
+        specific = {
+            "TRANSFERT_DOSSIER": "ns3:TwiceDefaultRequest",
+            "DEMANDE_EP": "ns3:PublicSurveyRequest",
+        }
+        return self._get_data("specific", specific.get(self.notice_type), "ns3:municipalityReference")
+
+    @property
     def container(self):
         urban_folder = api.portal.get()["urban"]
         return getattr(urban_folder, "{0}s".format(self.type.lower()))
