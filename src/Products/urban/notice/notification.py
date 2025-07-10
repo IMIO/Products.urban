@@ -86,6 +86,12 @@ class NoticeNotification(NoticeElement):
         return self._get_data("specific", specific.get(self.notice_type), "ns3:municipalityReference")
 
     @property
+    def send_date(self):
+        """Return the send date"""
+        raw_date = self._get_data("sendDate")
+        return datetime.strptime(raw_date[:19], "%Y-%m-%dT%H:%M:%S").date()
+
+    @property
     def container(self):
         urban_folder = api.portal.get()["urban"]
         return getattr(urban_folder, "{0}s".format(self.type.lower()))
