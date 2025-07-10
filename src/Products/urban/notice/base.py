@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from DateTime import DateTime
 from six import string_types
 
 
@@ -34,11 +35,25 @@ class NoticeElement(object):
             k for k in dir(self) if k not in excluded_keys and not k.startswith("_")
         ]:
             value = getattr(self, key)
-            if isinstance(value, list):
-                if value and isinstance(value[0], NoticeElement):
-                    value = [v.serialize() for v in value]
-            elif isinstance(value, string_types):
-                value = value.strip()
+            value = self._serialize(value)
             if value is not None:
                 result[key] = value
         return result
+
+    def _serialize(self, value):
+        if isinstance(value, list):
+            if value and isinstance(value[0], NoticeElement):
+                value = [v.serialize() for v in value]
+            elif value:
+                value = [self._serialize(v) for v in value]
+        if isinstance(value, dict):
+            value = {
+                self._serialize(k): self._serialize(v)
+                for k, v in value.items()
+                if self._serialize(v) is not None
+            }
+        elif isinstance(value, string_types):
+            value = value.strip()
+        elif isinstance(value, DateTime):
+            value = value.ISO8601()
+        return value
