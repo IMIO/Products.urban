@@ -493,6 +493,18 @@ EventConfigs = {
             "TALCondition": "python: licence.getProcedureChoice() != 'article65'",
         },
         {
+            "id": "dossier-complet-recevable",
+            "title": "Dossier recevable",
+            "activatedFields": (),
+            "deadLineDelay": 5,
+            "eventDateLabel": "Date de notification",
+            "isKeyEvent": True,
+            "keyDates": ("eventDate",),
+            "podTemplates": (),
+            "eventType": ("Products.urban.interfaces.IAcknowledgmentEvent",),
+            "TALCondition": "python: licence.getProcedureChoice() != 'article65'",
+        },
+        {
             "id": "enquete-publique",
             "title": "Enquête publique",
             "activatedFields": (
