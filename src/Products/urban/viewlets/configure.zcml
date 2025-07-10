@@ -68,7 +68,7 @@
      name="plone.belowcontenttitle.noticeTransmitState"
      manager="plone.app.layout.viewlets.interfaces.IBelowContentBody"
      class=".notice.NoticeTransmitState"
-     for="Products.urban.interfaces.IUrbanEventNotice"
+     for="Products.urban.interfaces.ITransmitToSPWEvent"
      permission="zope2.View"
   />
 
