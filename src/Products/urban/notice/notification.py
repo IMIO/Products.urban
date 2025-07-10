@@ -41,12 +41,12 @@ class NoticeNotification(NoticeElement):
     @property
     def status(self):
         """Return the last notice notification status e.g. 'EN_ATTENTE_REPONSE'"""
-        return self._get_data("status", "status", -1, "code", "code")
+        return self._get_data("status", "status", 0, "code", "code")  # most recent is first
 
     @property
     def status_date(self):
         """Return the last notice notification date"""
-        raw_date = self._get_data("status", "status", -1, "date")
+        raw_date = self._get_data("status", "status", 0, "date")  # most recent is first
         return datetime.strptime(raw_date, "%Y-%m-%dT%H:%M:%S.%f").date()
 
     @property
