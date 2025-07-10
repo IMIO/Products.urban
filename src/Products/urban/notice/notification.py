@@ -82,6 +82,12 @@ class NoticeNotification(NoticeElement):
         return getattr(urban_folder, "{0}s".format(self.type.lower()))
 
     @property
+    def event_configs(self):
+        portal_urban_folder = api.portal.get().urban.portal_urban
+        licence_type_folder = getattr(portal_urban_folder, "{0}".format(self.type.lower()))
+        return getattr(licence_type_folder, "eventconfigs")
+
+    @property
     def licenceSubject(self):
         """Return subject of the folder"""
         return self._get_data("subjectNotice")
