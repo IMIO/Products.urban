@@ -3,14 +3,14 @@ import json
 from pathlib2 import Path
 
 
-def load_notif_json(filename):
-    full_path = Path(__file__).parent / filename
+def load_notif_json(folder, filename):
+    full_path = Path(__file__).parent / folder / filename
     notif = json.load(full_path.open("rb"))
     return notif
 
 
-def load_notif_content(filename):
-    full_path = Path(__file__).parent / filename
+def load_notif_content(folder, filename):
+    full_path = Path(__file__).parent / folder / filename
     content = full_path.read_bytes()
     return content
 
