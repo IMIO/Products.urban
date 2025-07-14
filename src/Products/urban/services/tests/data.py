@@ -1,4 +1,19 @@
 # -*- coding: utf-8 -*-
+import json
+from pathlib2 import Path
+
+
+def load_notif_json(filename):
+    full_path = Path(__file__).parent / filename
+    notif = json.load(full_path.open("rb"))
+    return notif
+
+
+def load_notif_content(filename):
+    full_path = Path(__file__).parent / filename
+    content = full_path.read_bytes()
+    return content
+
 
 notice_data = {
     "notifications_without_rubrics": [
