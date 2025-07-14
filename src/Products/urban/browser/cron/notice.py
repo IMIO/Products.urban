@@ -27,7 +27,7 @@ class ImportFromNoticeView(BrowserView):
         self.notification_dates = []
         notifications = self._get_notice_notifications()
         for notification in notifications:
-            self._create_content(notification)
+            self._handle_notification(notification)
         return "OK"
 
     def _get_notice_notifications(self):
@@ -47,7 +47,8 @@ class ImportFromNoticeView(BrowserView):
         licence.description.raw += translate(error, context=self.request)
         licence._p_changed = 1
 
-    def _create_content(self, notification):
+
+    def _handle_notification(self, notification):
         notification_date = datetime.strptime(
             notification["status"]["date"][0:26],
             "%Y-%m-%dT%H:%M:%S.%f",
@@ -56,11 +57,16 @@ class ImportFromNoticeView(BrowserView):
             self.notification_dates.append(notification_date)
         else:
             return
-        if notification["noticeType"]["code"] != "NOUVEAU_DOSSIER":
-            return
+
         detailed_notification = self.notice_service.get_notification(
             notification["noticeId"]
         )
+
+        if detailed_notification.notice_type == "TRANSFERT_DOSSIER":
+            self._transfert_dossier(detailed_notification)
+
+
+    def _transfert_dossier(self, detailed_notification):
         container = detailed_notification.container
         licence = api.content.create(
             container=container, **detailed_notification.serialize()
