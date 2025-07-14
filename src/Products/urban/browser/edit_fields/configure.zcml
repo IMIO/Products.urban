@@ -1,0 +1,21 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:plone="http://namespaces.plone.org/plone">
+
+    <include package="plone.app.z3cform" />
+
+  <browser:resourceDirectory
+      name="Products.urban.edit_fields"
+      directory="static"
+      />
+
+      <browser:page
+        for="*"
+        layer="Products.urban.interfaces.IProductUrbanLayer"
+        name="edit-fields"
+        class=".forms.SendMailActionWrapper"
+        permission="zope2.View"
+        />
+
+</configure>

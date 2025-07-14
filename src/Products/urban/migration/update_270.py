@@ -572,3 +572,11 @@ def add_additional_delay_option(context):
         
 
     logger.info("upgrade step done!")
+
+
+def import_js_registry_for_edit_field_popup(context):
+    logger = logging.getLogger("urban: Import js registry for edit field popup")
+    logger.info("starting upgrade steps")
+    setup_tool = api.portal.get_tool("portal_setup")
+    setup_tool.runImportStepFromProfile("profile-Products.urban:default", "jsregistry")
+    logger.info("upgrade step done!")

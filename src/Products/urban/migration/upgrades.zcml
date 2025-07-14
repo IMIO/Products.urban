@@ -792,4 +792,13 @@
         profile="Products.urban:default"
         />
 
+    <gs:upgradeStep
+        title="Import js registry for edit field popup"
+        description=""
+        source="1166"
+        destination="1167"
+        handler=".update_270.import_js_registry_for_edit_field_popup"
+        profile="Products.urban:default"
+        />
+
 </configure>

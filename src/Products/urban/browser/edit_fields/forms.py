@@ -1,0 +1,75 @@
+# -*- coding: utf-8 -*-
+
+from Products.urban import UrbanMessage as _
+from datetime import datetime
+from imio.pm.wsclient.interfaces import IRedirect
+from plone import api
+from plone.app.event.base import default_timezone
+from plone.app.textfield import RichText
+from plone.z3cform.layout import wrap_form
+from z3c.form import button
+from z3c.form import field
+from z3c.form.browser.checkbox import CheckBoxFieldWidget
+from z3c.form.form import Form
+from zope import schema
+from zope.annotation.interfaces import IAnnotations
+from zope.event import notify
+from zope.i18n import translate
+from zope.interface import Interface
+from plone.app.textfield.value import RichTextValue
+
+
+MAIL_ACTION_KEY = "Products.urban.send_mail_action"
+
+
+class IEditFieldsForm(Interface):
+    description = RichText(
+        title=u"Obervations",
+        required=False
+    )
+
+
+class EditFieldsForm(Form):
+    fields = field.Fields(IEditFieldsForm)
+    _finishedSent = False
+    _displayErrorsInOverlay = False
+    ignoreContext = True
+
+    def __init__(self, context, request):
+        self.context = context
+        self.request = request
+
+    @button.buttonAndHandler(_("Send"), name="edit_fields")
+    def handleSend(self, action):
+        data, errors = self.extractData()
+        if errors:
+            self.status = self.formErrorsMessage
+            return
+        description = self.request.form.get("form.widgets.description", "")
+        with api.env.adopt_roles(["Manager"]):
+            self.context.setDescription(description)
+        self._finishedSent = True
+
+    @button.buttonAndHandler(_("Cancel"), name="cancel")
+    def handleCancel(self, action):
+        self._finishedSent = True
+
+    def render(self):
+        if self._finishedSent:
+            IRedirect(self.request).redirect(self.context.absolute_url())
+            return ""
+        return super(EditFieldsForm, self).render()
+
+    def updateWidgets(self, prefix=None):
+        super(EditFieldsForm, self).updateWidgets(prefix=prefix)
+
+        # Confirm the widget exists
+        if 'description' in self.widgets:
+            self.widgets['description'].value = RichTextValue(
+                self.context.getRawDescription(),
+                'text/html',
+                'text/x-html-safe'
+            )
+
+
+SendMailActionWrapper = wrap_form(EditFieldsForm)
