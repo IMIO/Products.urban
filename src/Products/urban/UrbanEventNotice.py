@@ -90,7 +90,10 @@ class UrbanEventNotice(UrbanEvent, BrowserDefaultMixin):
                 return result
             else:
                 return result
-        self.store_transmit_date("transfer_folder_to_dpa")
+        reception_date_str = result["body"]["result"]["receptionDate"]
+        reception_date = datetime.datetime.strptime(reception_date_str[:10], "%Y-%m-%d")
+        self.store_transmit_date("transfer_folder_to_dpa", reception_date)
+
         return result
 
     # Manually created methods
