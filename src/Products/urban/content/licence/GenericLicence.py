@@ -2112,7 +2112,7 @@ class GenericLicence(OrderedBaseFolder, UrbanBase, BrowserDefaultMixin):
         return {"review_state": ["enabled", "private"]}
 
     @ram.cache(utils.cache_key_30min)
-    def get_user_from_workflow_history(self):
+    def get_users_from_workflow_history(self):
         output = []
         if not hasattr(self, "workflow_history"):
             return output
@@ -2124,7 +2124,7 @@ class GenericLicence(OrderedBaseFolder, UrbanBase, BrowserDefaultMixin):
         return output
 
     @ram.cache(utils.cache_key_30min)
-    def get_user_from_foldermanager(self):
+    def get_users_from_foldermanager(self):
         output = []
         if not hasattr(self, "getFoldermanagers"):
             return output
@@ -2138,8 +2138,8 @@ class GenericLicence(OrderedBaseFolder, UrbanBase, BrowserDefaultMixin):
         return output
 
     def get_description_edit_permission(self):
-        change_workflow_users = self.get_user_from_workflow_history()
-        folder_manager_users = self.get_user_from_foldermanager()
+        change_workflow_users = self.get_users_from_workflow_history()
+        folder_manager_users = self.get_users_from_foldermanager()
         current_user = api.user.get_current().id
         permissions = api.user.get_permissions(obj=self)
         modify_portal_content = permissions["Modify portal content"]
