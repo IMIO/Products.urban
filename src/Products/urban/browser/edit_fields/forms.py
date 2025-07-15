@@ -17,7 +17,7 @@ from zope.event import notify
 from zope.i18n import translate
 from zope.interface import Interface
 from plone.app.textfield.value import RichTextValue
-
+from Products.statusmessages.interfaces import IStatusMessage
 
 MAIL_ACTION_KEY = "Products.urban.send_mail_action"
 
@@ -46,8 +46,9 @@ class EditFieldsForm(Form):
             self.status = self.formErrorsMessage
             return
         description = self.request.form.get("form.widgets.description", "")
-        with api.env.adopt_roles(["Manager"]):
-            self.context.setDescription(description)
+        if self.context.get_description_edit_permission():
+            with api.env.adopt_roles(["Manager"]):
+                self.context.setDescription(description)
         self._finishedSent = True
 
     @button.buttonAndHandler(_("Cancel"), name="cancel")
@@ -55,6 +56,11 @@ class EditFieldsForm(Form):
         self._finishedSent = True
 
     def render(self):
+        if not self.context.get_description_edit_permission():
+            IStatusMessage(self.request).addStatusMessage(
+                u"You're not authorized to edit this field", "error"
+            )
+            return ""
         if self._finishedSent:
             IRedirect(self.request).redirect(self.context.absolute_url())
             return ""

@@ -6,8 +6,8 @@
 
         <tal:normal_field condition="python: fieldname not in custom">
             <td valign="top">
-                <a href="@@edit-fields" class="apButtonAction_edit_fields link-overlay" onclick target="_parent" rel="#pb_6" style="cursor: pointer;">
-                    <img tal:condition="python: view.getDescriptionEditCondition(fieldname)" src="edit.png" alt="edit" /> 
+                <a href="@@edit-fields" class="apButtonAction_edit_fields link-overlay" onclick target="_parent" rel="#pb_6" style="cursor: pointer;" tal:condition="python: view.get_description_edit_permission(fieldname)">
+                    <img src="edit.png" alt="edit" /> 
                 </a>
                 <b><span tal:content="field/widget/label | field/widget/label_msgid" i18n:translate=""></span>:</b>
             </td>

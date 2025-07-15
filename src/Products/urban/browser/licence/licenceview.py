@@ -21,7 +21,6 @@ from Products.urban.interfaces import IUrbanWarningCondition
 
 from plone import api
 from plone.memoize import view
-from plone.memoize import ram
 from zope.annotation import IAnnotations
 from zope.i18n import translate
 from zope.component import queryAdapter
@@ -527,43 +526,10 @@ class LicenceView(BrowserView):
         min_conditions = context.getMinimumLegalConditions()
         return self._sortConditions(min_conditions)
 
-    @ram.cache(utils.cache_key_30min)
-    def get_user_from_workflow_history(self, context):
-        output = []
-        if not hasattr(context, "workflow_history"):
-            return output
-        for workflow in context.workflow_history.values():
-            for step in list(workflow):
-                actor = step.get("actor", None)
-                if actor is not None:
-                    output.append(actor)
-        return output
-
-    @ram.cache(utils.cache_key_30min)
-    def get_user_from_foldermanager(self, context):
-        output = []
-        if not hasattr(context, "getFoldermanagers"):
-            return output
-        for folder_manager in context.getFoldermanagers():
-             if not hasattr(folder_manager, "getPloneUserId"):
-                 continue
-             user = folder_manager.getPloneUserId()
-             if user == "":
-                 continue
-             output.append(user)
-        return output
-
-    def getDescriptionEditCondition(self, fieldname):
-        change_workflow_users = self.get_user_from_workflow_history(self.context)
-        folder_manager_users = self.get_user_from_foldermanager(self.context)
-        current_user = api.user.get_current().id
-        permissions = api.user.get_permissions(obj=self.context)
-        modify_portal_content = permissions["Modify portal content"]
-        return (
-            (not modify_portal_content)
-            and fieldname == "description"
-            and current_user in set(change_workflow_users + folder_manager_users)
-        )
+    def get_description_edit_permission(self, fieldname):
+        return fieldname == "description" and self.context.get_description_edit_permission()
+          
+        
 
 class CODTLicenceView(LicenceView):
     """ """
