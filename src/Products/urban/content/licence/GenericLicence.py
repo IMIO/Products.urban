@@ -2137,14 +2137,26 @@ class GenericLicence(OrderedBaseFolder, UrbanBase, BrowserDefaultMixin):
             output.append(user)
         return output
 
+    @ram.cache(utils.cache_key_30min)
+    def get_users_from_event_and_document_generation(self):
+        output = []
+        if not hasattr(self, "getAllEvents"):
+            return output
+        for event in self.getAllEvents():
+            output += list(event.listCreators())
+            for file in event.values():
+                output += list(file.listCreators())
+        return output
+
     def get_description_edit_permission(self):
         change_workflow_users = self.get_users_from_workflow_history()
         folder_manager_users = self.get_users_from_foldermanager()
+        doc_generation_users = self.get_users_from_event_and_document_generation()
         current_user = api.user.get_current().id
         permissions = api.user.get_permissions(obj=self)
         modify_portal_content = permissions["Modify portal content"]
         return (not modify_portal_content) and current_user in set(
-            change_workflow_users + folder_manager_users
+            change_workflow_users + folder_manager_users + doc_generation_users
         )
 
 
