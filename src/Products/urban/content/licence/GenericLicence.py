@@ -2110,7 +2110,7 @@ class GenericLicence(OrderedBaseFolder, UrbanBase, BrowserDefaultMixin):
 
     def legalconditions_base_query(self):
         return {"review_state": ["enabled", "private"]}
-    
+
     @ram.cache(utils.cache_key_30min)
     def get_user_from_workflow_history(self):
         output = []
@@ -2129,12 +2129,12 @@ class GenericLicence(OrderedBaseFolder, UrbanBase, BrowserDefaultMixin):
         if not hasattr(self, "getFoldermanagers"):
             return output
         for folder_manager in self.getFoldermanagers():
-             if not hasattr(folder_manager, "getPloneUserId"):
-                 continue
-             user = folder_manager.getPloneUserId()
-             if user == "":
-                 continue
-             output.append(user)
+            if not hasattr(folder_manager, "getPloneUserId"):
+                continue
+            user = folder_manager.getPloneUserId()
+            if user == "":
+                continue
+            output.append(user)
         return output
 
     def get_description_edit_permission(self):
@@ -2143,10 +2143,10 @@ class GenericLicence(OrderedBaseFolder, UrbanBase, BrowserDefaultMixin):
         current_user = api.user.get_current().id
         permissions = api.user.get_permissions(obj=self)
         modify_portal_content = permissions["Modify portal content"]
-        return (
-            (not modify_portal_content)
-            and current_user in set(change_workflow_users + folder_manager_users)
+        return (not modify_portal_content) and current_user in set(
+            change_workflow_users + folder_manager_users
         )
+
 
 registerType(GenericLicence, PROJECTNAME)
 # end of class GenericLicence

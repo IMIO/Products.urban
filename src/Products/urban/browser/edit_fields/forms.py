@@ -1,32 +1,20 @@
 # -*- coding: utf-8 -*-
 
+from Products.statusmessages.interfaces import IStatusMessage
 from Products.urban import UrbanMessage as _
-from datetime import datetime
 from imio.pm.wsclient.interfaces import IRedirect
 from plone import api
-from plone.app.event.base import default_timezone
 from plone.app.textfield import RichText
+from plone.app.textfield.value import RichTextValue
 from plone.z3cform.layout import wrap_form
 from z3c.form import button
 from z3c.form import field
-from z3c.form.browser.checkbox import CheckBoxFieldWidget
 from z3c.form.form import Form
-from zope import schema
-from zope.annotation.interfaces import IAnnotations
-from zope.event import notify
-from zope.i18n import translate
 from zope.interface import Interface
-from plone.app.textfield.value import RichTextValue
-from Products.statusmessages.interfaces import IStatusMessage
-
-MAIL_ACTION_KEY = "Products.urban.send_mail_action"
 
 
 class IEditFieldsForm(Interface):
-    description = RichText(
-        title=u"Obervations",
-        required=False
-    )
+    description = RichText(title=u"Obervations", required=False)
 
 
 class EditFieldsForm(Form):
@@ -70,11 +58,9 @@ class EditFieldsForm(Form):
         super(EditFieldsForm, self).updateWidgets(prefix=prefix)
 
         # Confirm the widget exists
-        if 'description' in self.widgets:
-            self.widgets['description'].value = RichTextValue(
-                self.context.getRawDescription(),
-                'text/html',
-                'text/x-html-safe'
+        if "description" in self.widgets:
+            self.widgets["description"].value = RichTextValue(
+                self.context.getRawDescription(), "text/html", "text/x-html-safe"
             )
 
 
