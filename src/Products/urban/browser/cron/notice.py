@@ -5,6 +5,7 @@ from Products.Five import BrowserView
 from Products.urban import UrbanMessage as _
 from Products.urban.services import notice
 from datetime import datetime
+from DateTime import DateTime
 from plone import api
 from zope.event import notify
 from zope.i18n import translate
@@ -64,6 +65,8 @@ class ImportFromNoticeView(BrowserView):
 
         if detailed_notification.notice_type == "TRANSFERT_DOSSIER":
             self._transfert_dossier(detailed_notification)
+        if detailed_notification.notice_type == "NOTIF_COMPLETUDE1_INCOMPLET_COMMUNE":
+            self.process_incomplete_folder_notification(detailed_notification)
 
 
     def _transfert_dossier(self, detailed_notification):
@@ -103,3 +106,24 @@ class ImportFromNoticeView(BrowserView):
         notify(ObjectInitializedEvent(licence))
         # Change workflow and add deposit event
         transaction.commit()  # Usefull in case of an error
+    
+    def create_event_incomplete_folder(self, licence,detailed_notification):
+
+        event_configs = detailed_notification.event_configs
+        event_config_complete = event_configs["dossier-incomplet"]  
+        with api.env.adopt_roles(["Manager"]):
+            event = licence.createUrbanEvent(event_config_complete)
+            event_date = DateTime(str(detailed_notification.send_date))
+            event.setEventDate(event_date)
+            api.content.transition(event, "close")
+
+        # Transition the licence to 'incomplete'
+        api.content.transition(licence, "isincomplete")
+    def process_incomplete_folder_notification(self, detailed_notification):
+        
+        container = detailed_notification.container
+        licence = api.content.create(
+            container=container, **detailed_notification.serialize()
+        )
+        
+        self.create_event_incomplete_folder(licence, detailed_notification)
