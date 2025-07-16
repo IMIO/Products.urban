@@ -1,0 +1,393 @@
+{
+  "status": "PROCESSED",
+  "warning": null,
+  "error": null,
+  "notice": {
+    "BO": {
+      "idBO": "10010672",
+      "typeBO": {
+        "code": "PE_PU",
+        "description": [
+          {
+            "_value_1": "DE_Permis PE/PU",
+            "language": "de"
+          },
+          {
+            "_value_1": "Demande PE/PU",
+            "language": "fr"
+          }
+        ],
+        "origin": null
+      },
+      "typeBOSubtype": {
+        "code": "PE",
+        "description": [
+          {
+            "_value_1": "Umweltgenehmigung",
+            "language": "de"
+          },
+          {
+            "_value_1": "permis d'environnement",
+            "language": "fr"
+          }
+        ],
+        "origin": null
+      },
+      "noticeIdBO": "NOTIFICATION:50365014",
+      "codeTypeNoticeBO": "NOTIF_COMPLETUDE1_INCOMPLET_COMMUNE",
+      "applicationCodeBO": "TWICE",
+      "fileLanguage": {
+        "code": "FR",
+        "description": [
+          {
+            "_value_1": "FR",
+            "language": "de"
+          },
+          {
+            "_value_1": "FR",
+            "language": "fr"
+          }
+        ]
+      },
+      "fileDate": "2025-07-11T00:00:00+02:00",
+      "noticeLanguage": {
+        "code": "FR",
+        "description": [
+          {
+            "_value_1": "DE_Français",
+            "language": "de"
+          },
+          {
+            "_value_1": "Français",
+            "language": "fr"
+          }
+        ]
+      }
+    },
+    "sender": {
+      "noticeInstanceId": "O3080500",
+      "contactName": "Giuseppe MONACHINO",
+      "contactPhone": {
+        "phoneNumber": [
+          {
+            "_value_1": "+3281715344",
+            "type": null
+          }
+        ]
+      },
+      "contactMail": {
+        "email": [
+          {
+            "_value_1": "permis.environnement.namur@spw.wallonie.be",
+            "type": null
+          }
+        ]
+      },
+      "projectType": "Un renouvellement",
+      "motivations": null
+    },
+    "receiver": {
+      "noticeInstanceId": "0206.524.876"
+    },
+    "noticeType": {
+      "code": "PE_DEM_COM_NOTIF_COMPLETUDE1_INCOMPLET",
+      "description": [
+        {
+          "_value_1": "Demande PEPU - Notification à la commune que la demande est incomplète",
+          "language": "de"
+        },
+        {
+          "_value_1": "Demande PEPU - Notification à la commune que la demande est incomplète",
+          "language": "fr"
+        }
+      ]
+    },
+    "subjectNotice": "objet du DPA \"demande PE poulailler\"",
+    "sendDate": "2025-07-11T00:00:00+02:00",
+    "deadline": null,
+    "dueDate": null,
+    "fileDateMunicipality": "2023-10-13T00:00:00+02:00",
+    "comment": null,
+    "businessReference": null,
+    "addresses": null,
+    "parcels": {
+      "parcel": [
+        {
+          "identifier": "P001",
+          "municipality": {
+            "code": "81001",
+            "description": [
+              {
+                "_value_1": "ARLON",
+                "language": "de"
+              },
+              {
+                "_value_1": "ARLON",
+                "language": "fr"
+              }
+            ],
+            "origin": null
+          },
+          "division": "ARLON 4 DIV/BONNERT/",
+          "codeDivision": "81006",
+          "section": "C",
+          "radical": "0883",
+          "bisTer": "00",
+          "exponent": "A",
+          "power": "000",
+          "part": false,
+          "right": true,
+          "capakey": "81006C0883/00A000",
+          "comment": null
+        },
+        {
+          "identifier": "P002",
+          "municipality": {
+            "code": "81001",
+            "description": [
+              {
+                "_value_1": "ARLON",
+                "language": "de"
+              },
+              {
+                "_value_1": "ARLON",
+                "language": "fr"
+              }
+            ],
+            "origin": null
+          },
+          "division": "ARLON 4 DIV/BONNERT/",
+          "codeDivision": "81006",
+          "section": "C",
+          "radical": "0883",
+          "bisTer": "00",
+          "exponent": "B",
+          "power": "000",
+          "part": false,
+          "right": true,
+          "capakey": "81006C0883/00B000",
+          "comment": null
+        },
+        {
+          "identifier": "P003",
+          "municipality": {
+            "code": "81001",
+            "description": [
+              {
+                "_value_1": "ARLON",
+                "language": "de"
+              },
+              {
+                "_value_1": "ARLON",
+                "language": "fr"
+              }
+            ],
+            "origin": null
+          },
+          "division": "ARLON 4 DIV/BONNERT/",
+          "codeDivision": "81006",
+          "section": "C",
+          "radical": "0868",
+          "bisTer": "00",
+          "exponent": "D",
+          "power": "000",
+          "part": false,
+          "right": true,
+          "capakey": "81006C0868/00D000",
+          "comment": null
+        },
+        {
+          "identifier": "P004",
+          "municipality": {
+            "code": "81001",
+            "description": [
+              {
+                "_value_1": "ARLON",
+                "language": "de"
+              },
+              {
+                "_value_1": "ARLON",
+                "language": "fr"
+              }
+            ],
+            "origin": null
+          },
+          "division": "ARLON 4 DIV/BONNERT/",
+          "codeDivision": "81006",
+          "section": "C",
+          "radical": "0882",
+          "bisTer": "00",
+          "exponent": "E",
+          "power": "000",
+          "part": false,
+          "right": true,
+          "capakey": "81006C0882/00E000",
+          "comment": null
+        }
+      ]
+    },
+    "parties": {
+      "part": [
+        {
+          "enterpriseNumber": "0444406389",
+          "enterpriseType": "PERSONNEMORALE",
+          "legalForm": "SRL",
+          "personNumber": null,
+          "title": null,
+          "lastname": null,
+          "firstname": null,
+          "language": {
+            "code": "FR",
+            "description": [
+              {
+                "_value_1": "français",
+                "language": "de"
+              },
+              {
+                "_value_1": "français",
+                "language": "fr"
+              }
+            ]
+          },
+          "denomination": "AGRI - MAXIME",
+          "mailingAddresses": {
+            "mailingAddress": [
+              {
+                "country": "BE",
+                "addressId": {
+                  "_value_1": null,
+                  "source": "-1"
+                },
+                "street": "Halledet(Cle)",
+                "houseNumber": "10",
+                "boxNumber": null,
+                "postCode": "4480",
+                "municipality": "ENGIS",
+                "state": "actif",
+                "plainText": [],
+                "locality": {
+                  "code": "4480",
+                  "description": [
+                    {
+                      "_value_1": "ENGIS",
+                      "language": "de"
+                    },
+                    {
+                      "_value_1": "ENGIS",
+                      "language": "fr"
+                    }
+                  ]
+                },
+                "inceptionDate": null,
+                "modificationDate": null,
+                "addressType": null
+              }
+            ]
+          },
+          "phoneNumber": null,
+          "email": null
+        }
+      ]
+    },
+    "documents": {
+      "document": [
+        {
+          "documentData": {
+            "filename": "10010672-NOTIF_COMPLETUDE1_INCOMPLET_COMMUNE-Commune wallonne",
+            "description": null,
+            "type": {
+              "code": "NOTIF_COMPLETUDE1_INCOMPLET_COMMUNE",
+              "description": [
+                {
+                  "_value_1": "Notification complétude 1: incomplet, commune",
+                  "language": "de"
+                },
+                {
+                  "_value_1": "Notification complétude 1: incomplet, commune",
+                  "language": "fr"
+                }
+              ]
+            },
+            "language": {
+              "code": "FR",
+              "description": [
+                {
+                  "_value_1": "DE_Français",
+                  "language": "de"
+                },
+                {
+                  "_value_1": "Français",
+                  "language": "fr"
+                }
+              ]
+            },
+            "documentId": "64522350-eb03-4b9f-95bc-817b4c3fc3d8",
+            "fileSize": 144145,
+            "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+            "confidentiality": {
+              "code": "0",
+              "description": [
+                {
+                  "_value_1": "Öffentlichkeit",
+                  "language": "de"
+                },
+                {
+                  "_value_1": "public",
+                  "language": "fr"
+                }
+              ],
+              "domain": "NOTICE_GENERIC_CONFIDENTIALITE"
+            },
+            "principal": true
+          },
+          "content": {
+            "documentContentStorage": "BO"
+          }
+        }
+      ]
+    },
+    "mapSpecification": null,
+    "specific": {
+      "ns3:TwiceDefaultRequest": {
+        "@xmlns": "http://soa.spw.wallonie.be/data/common/code/v1",
+        "@xmlns:ns2": "http://soa.spw.wallonie.be/services/noticeExtensions/messages/v1",
+        "@xmlns:ns3": "http://soa.spw.wallonie.be/services/noticeTwiceExtensions/messages/v1",
+        "@xmlns:ns4": "http://soa.spw.wallonie.be/data/business/environmentalLicence/v2",
+        "@xmlns:ns5": "http://soa.spw.wallonie.be/services/noticeGesperExtensions/messages/v1",
+        "@xmlns:ns6": "http://soa.spw.wallonie.be/data/business/noticeGesperExtensions/v1",
+        "@xmlns:ns7": "http://soa.spw.wallonie.be/data/common/date/v1",
+        "ns2:acceptedResponseNoticeCodes": null,
+        "ns3:municipalityReference": "PE2/2025/5",
+        "ns3:timeLimits": null,
+        "ns3:suspentionPeriods": null
+      }
+    },
+    "status": {
+      "status": [
+        {
+          "code": {
+            "code": "EN_ATTENTE_REPONSE",
+            "description": [
+              {
+                "_value_1": "DE_En attende de réponse",
+                "language": "de"
+              },
+              {
+                "_value_1": "En attende de réponse",
+                "language": "fr"
+              }
+            ]
+          },
+          "date": "2025-07-11T13:50:14.549000"
+        }
+      ]
+    },
+    "noticeIdentifier": {
+      "noticeId": "1407578"
+    },
+    "receptionDate": "2025-07-11T13:50:14.479000"
+  },
+  "customerTicket": "49628afa-a787-4064-bf38-a973874097dc",
+  "requestId": "3f4bc59f-ebbc-adfc-bde2-55a661dc88ae",
+  "inscriptionReference": null
+}
