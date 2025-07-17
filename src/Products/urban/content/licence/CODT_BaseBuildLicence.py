@@ -792,8 +792,12 @@ class CODT_BaseBuildLicence(
 
     def getDimension(self, type):
         """ Return the dimension of the given type """
+        urban_tool = api.portal.get_tool("portal_urban")
         for dimension in self.dimensions:
             if dimension["type"] == type:
+                
+                dimension['unit_label'] = urban_tool.units[dimension["unit"]].Title()
+                dimension['type_label'] = urban_tool.dimensiontypes[dimension["type"]].Title()
                 return dimension
         return None
 # end of class CODT_BaseBuildLicence

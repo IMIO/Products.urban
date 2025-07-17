@@ -714,7 +714,15 @@ class Inspection(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
         )
         return DisplayList(vocabulary)
 
-
+    def listObservationsItems(self):
+        """ Return a list of observations items """
+        voc = UrbanVocabulary("observationitems", inUrbanConfig=False)
+        
+        return voc.getDisplayList(self)
+    def displayObservationItems(self):
+        """Return a list of selected observations items"""
+        return self.getValuesForTemplate("observationItems")
+    
 registerType(Inspection, PROJECTNAME)
 
 
