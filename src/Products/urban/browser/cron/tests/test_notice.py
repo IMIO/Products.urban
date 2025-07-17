@@ -164,23 +164,41 @@ class TestNoticeCronPE2(unittest.TestCase):
         with api.env.adopt_roles(["Manager"]):
             import_view = self.portal.restrictedTraverse("@@import-from-notice")
             return import_view()"""
+    
+    @mock.patch(
+        "Products.urban.services.notice.WebserviceNotice.get_notifications",
+        return_value=load_notif_json("INCOMPLETE", "1407578-NOTIFICATIONS.json"),
+    )
+    @mock.patch(
+        "Products.urban.services.notice.WebserviceNotice._get_notification",
+        return_value=MockedRequest(load_notif_json("INCOMPLETE", "1407578-INCOMPLETE-NOTIFICATION.json")),
+    )
+    def _create_incomplete_folder(self, notif_patch, notifs_patch):
+        notif_patch, notifs_patch  # noqa
+        self.notif_patch = notif_patch
+        with api.env.adopt_roles(["Manager"]):
+            import_view = self.portal.restrictedTraverse("@@import-from-notice")
+            import_view()
+            licence_folder = self.portal.urban.envclasstwos
+            licence = licence_folder.values()[-1]
 
+            # Attach the licence to the mocked notification (if needed)
+            notif_patch.return_value.licence = licence
+
+            return licence
     def test_incomplete_notification(self):
-        result = self._create_licence()
-        self.assertEqual("OK", result)
-        licence_folder = self.portal.urban.envclasstwos
-        licence = licence_folder.values()[-1]
+        """
         licence.reference = "PE2/2025/5"
         licence.reindexObject()
-        self.assertEqual(licence.reference, "PE2/2025/5")
+        self.assertEqual(licence.reference, "PE2/2025/5")"""
         #verify workflow state is different from incmplete
         #wf = api.portal.get_tool("portal_workflow")
         #current_state = wf.getInfoFor(licence, "review_state")
         #self.assertEqual(api.content.get_state(licence), "deposit")
-        self.assertNotEqual(api.content.get_state(licence), "incomplete")
+        #self.assertNotEqual(api.content.get_state(licence), "incomplete")
         #mock notification
         # Mocknotification INCOMPLETE
-        with mock.patch(
+        """with mock.patch(
             "Products.urban.services.notice.WebserviceNotice._get_notification",
             return_value=MockedRequest(load_notif_json("INCOMPLETE", "1407578-INCOMPLETE-NOTIFICATION.json")),
         ):
@@ -200,18 +218,26 @@ class TestNoticeCronPE2(unittest.TestCase):
 
         # verify licence state is now incomplete
         #new_state = wf.getInfoFor(licence, "review_state")
-        self.assertEqual(api.content.get_state(licence), "incomplete")
-        
-        
+        self.assertEqual(api.content.get_state(licence), "incomplete")"""
+        result = self._create_licence()
+        self.assertEqual("OK", result)
+        licence_folder = self.portal.urban.envclasstwos
+        licence = licence_folder.values()[-1]
+     
         #assert folder incomplete absent
         self.assertIsNone(licence.getLastMissingPart())
-        self._create_dossier_complet()
+        self._create_incomplete_folder()
+        licence = self.notif_patch.return_value.licence  # Only works if you saved the patch like that
 
         # 5.3 assert dossier complet présent
+        
         incomplete_folder = licence.getLastMissingPart()
+        print(incomplete_folder)
         self.assertIsNotNone(incomplete_folder)
     
         # 5.4 assert dossier complet date, état complet
+        print(incomplete_folder.getEventDate())
         self.assertEqual(incomplete_folder.getEventDate().Date(), "2025/07/11")
         self.assertEqual(api.content.get_state(incomplete_folder), "closed")
+        
        

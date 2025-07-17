@@ -120,10 +120,19 @@ class ImportFromNoticeView(BrowserView):
         # Transition the licence to 'incomplete'
         api.content.transition(licence, "isincomplete")
     def process_incomplete_folder_notification(self, detailed_notification):
-        
+        import ipdb; ipdb.set_trace()
         container = detailed_notification.container
         licence = api.content.create(
             container=container, **detailed_notification.serialize()
         )
-        
-        self.create_event_incomplete_folder(licence, detailed_notification)
+        event_configs = detailed_notification.event_configs
+        event_config_complete = event_configs["dossier-incomplet"]  
+        with api.env.adopt_roles(["Manager"]):
+            event = licence.createUrbanEvent(event_config_complete)
+            event_date = DateTime(str(detailed_notification.send_date))
+            event.setEventDate(event_date)
+            api.content.transition(event, "close")
+        #self.create_event_incomplete_folder(licence, detailed_notification)
+        notify(ObjectInitializedEvent(licence))
+        # Change workflow and add deposit event
+        transaction.commit() 
