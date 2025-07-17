@@ -246,4 +246,13 @@
         profile="Products.urban:default"
         />
 
+    <gs:upgradeStep
+        title="Add complementary delay option"
+        description=""
+        source="1145"
+        destination="1146"
+        handler=".update_270.add_additional_delay_option"
+        profile="Products.urban:default"
+        />
+
 </configure>

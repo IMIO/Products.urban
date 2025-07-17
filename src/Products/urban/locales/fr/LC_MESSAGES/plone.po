@@ -374,3 +374,6 @@ msgstr "Veuillez indiquer d'avantages de termes de recherche"
 
 msgid "workLocationStreet"
 msgstr "Rue"
+
+msgid "ComplementaryDelayTerm"
+msgstr "Prorogation complémentaire"
