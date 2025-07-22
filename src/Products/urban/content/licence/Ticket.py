@@ -460,6 +460,7 @@ def finalize_schema(schema, folderish=False, moveDiscussion=True):
     schema["pcaZone"].widget.label = _("urban_label_solZone")
     schema["isInPCA"].widget.label = _("urban_label_is_in_sol")
     schema["pcaDetails"].widget.label = _("urban_label_sol_details")
+    schema["complementary_delay"].schemata = "urban_description"
     return schema
 
 

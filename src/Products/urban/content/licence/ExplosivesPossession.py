@@ -182,6 +182,9 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     )
     for field in hidden_fields:
         schema[field].widget.visible = {"edit": "invisible"}
+
+    schema["complementary_delay"].schemata = "urban_description"
+    schema.moveField("complementary_delay", after="prorogation")
     return schema
 
 

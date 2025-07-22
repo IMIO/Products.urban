@@ -108,5 +108,10 @@
 
   <index name="investigationStart" meta_type="DateIndex"/>
   <index name="investigationEnd" meta_type="DateIndex"/>
+  
+  <index name="getComplementary_delay" meta_type="KeywordIndex">
+    <indexed_attr value="getComplementary_delay"/>
+  </index>
+  <column value="getComplementary_delay"/>
 <!-- ##/code-section FOOT -->
 </object>

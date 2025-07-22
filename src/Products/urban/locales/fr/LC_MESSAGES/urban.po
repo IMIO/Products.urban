@@ -3305,6 +3305,14 @@ msgstr "Compléments"
 msgid "urban_label_complete_parcel"
 msgstr "Merci de renseigner le numéro complet de la parcelle recherchée"
 
+#. Default: "Complementary Delay"
+#: ../content/licence/GenericLicence.py:331
+msgid "urban_label_complementary_delay"
+msgstr "Prorogation complémentaire"
+
+msgid "complementary_delay_folder_title"
+msgstr "Prorogation complémentaire"
+
 #. Default: "Composition"
 #: ../content/licence/BaseBuildLicence.py:549
 msgid "urban_label_composition"
