@@ -8,6 +8,26 @@ Changelog
 
 .. towncrier release notes start
 
+2.5.0.dev19 (2025-07-22)
+------------------------
+
+New features:
+
+
+- Add merge field for getting first or last opinion request event
+  [jchandelle] (SUP-45220)
+- Add option to add complementary delay to task
+  Add value for SPW cyberattack
+  [jchandelle] (URB-3337)
+
+
+Bug fixes:
+
+
+- Fix date format in claimant import
+  [jchandelle] (SUP-41210)
+
+
 2.5.0.dev18 (2025-07-14)
 ------------------------
 
