@@ -66,7 +66,7 @@ class ImportFromNoticeView(BrowserView):
         if detailed_notification.notice_type == "TRANSFERT_DOSSIER":
             self._transfert_dossier(detailed_notification)
         if detailed_notification.notice_type == "NOTIF_COMPLETUDE1_INCOMPLET_COMMUNE":
-            self.process_incomplete_folder_notification(detailed_notification)
+            self.process_incomplete_folder_notification(detailed_notification,event_type="dossier-incomplet")
 
 
     def _transfert_dossier(self, detailed_notification):
@@ -107,32 +107,29 @@ class ImportFromNoticeView(BrowserView):
         # Change workflow and add deposit event
         transaction.commit()  # Usefull in case of an error
     
-    def create_event_incomplete_folder(self, licence,detailed_notification):
+    def create_event_incomplete_folder(self, licence,detailed_notification,event_type):
 
         event_configs = detailed_notification.event_configs
-        event_config_complete = event_configs["dossier-incomplet"]  
+        event_config_complete = event_configs[event_type]  
+        event_type_to_transition = {
+        "dossier-incomplet": "isincomplete",
+        #"dossier-irrecevable": "isirrecevable",
+    }
         with api.env.adopt_roles(["Manager"]):
             event = licence.createUrbanEvent(event_config_complete)
             event_date = DateTime(str(detailed_notification.send_date))
             event.setEventDate(event_date)
             api.content.transition(event, "close")
-
-        # Transition the licence to 'incomplete'
-        api.content.transition(licence, "isincomplete")
-    def process_incomplete_folder_notification(self, detailed_notification):
-        import ipdb; ipdb.set_trace()
+        transition = event_type_to_transition.get(event_type)
+        if transition:
+            # Transition the licence to 'incomplete'
+            api.content.transition(licence, "isincomplete")
+    def process_incomplete_folder_notification(self, detailed_notification,event_type):
         container = detailed_notification.container
         licence = api.content.create(
             container=container, **detailed_notification.serialize()
         )
-        event_configs = detailed_notification.event_configs
-        event_config_complete = event_configs["dossier-incomplet"]  
-        with api.env.adopt_roles(["Manager"]):
-            event = licence.createUrbanEvent(event_config_complete)
-            event_date = DateTime(str(detailed_notification.send_date))
-            event.setEventDate(event_date)
-            api.content.transition(event, "close")
-        #self.create_event_incomplete_folder(licence, detailed_notification)
+        self.create_event_incomplete_folder(licence, detailed_notification,event_type)
         notify(ObjectInitializedEvent(licence))
         # Change workflow and add deposit event
         transaction.commit() 
