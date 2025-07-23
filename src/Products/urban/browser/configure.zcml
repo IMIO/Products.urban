@@ -11,6 +11,7 @@
   <include package=".warnings" />
   <include package=".exportimport" />
   <include package=".view_utils" />
+  <include package=".edit_fields" />
   <include file="portlets.zcml" />
 
   <browser:resourceDirectory

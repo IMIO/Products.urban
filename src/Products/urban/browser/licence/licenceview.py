@@ -526,6 +526,12 @@ class LicenceView(BrowserView):
         min_conditions = context.getMinimumLegalConditions()
         return self._sortConditions(min_conditions)
 
+    def get_description_edit_permission(self, fieldname):
+        return (
+            fieldname == "description"
+            and self.context.get_description_edit_permission()
+        )
+
 
 class CODTLicenceView(LicenceView):
     """ """

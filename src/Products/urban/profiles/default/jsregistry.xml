@@ -68,6 +68,14 @@
              expression=""
              id="++resource++Products.urban.send_mail_action/popup.js"
              inline="False"/>
+
+ <javascript cacheable="True"
+             compression="safe"
+             cookable="True"
+             enabled="True"
+             expression=""
+             id="++resource++Products.urban.edit_fields/popup.js"
+             inline="False"/>
  <!-- ##/code-section jsregistry.xml -->
 
 </object>

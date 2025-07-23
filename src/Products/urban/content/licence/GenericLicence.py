@@ -58,6 +58,7 @@ from Products.urban.widget.historizereferencewidget import (
     HistorizeReferenceBrowserWidget,
 )
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
+from plone.memoize import ram
 from zope.globalrequest import getRequest
 
 from zope.component import createObject
@@ -2110,6 +2111,53 @@ class GenericLicence(OrderedBaseFolder, UrbanBase, BrowserDefaultMixin):
     def legalconditions_base_query(self):
         return {"review_state": ["enabled", "private"]}
 
+    @ram.cache(utils.cache_key_30min)
+    def get_users_from_workflow_history(self):
+        output = []
+        if not hasattr(self, "workflow_history"):
+            return output
+        for workflow in self.workflow_history.values():
+            for step in list(workflow):
+                actor = step.get("actor", None)
+                if actor is not None:
+                    output.append(actor)
+        return output
+
+    @ram.cache(utils.cache_key_30min)
+    def get_users_from_foldermanager(self):
+        output = []
+        if not hasattr(self, "getFoldermanagers"):
+            return output
+        for folder_manager in self.getFoldermanagers():
+            if not hasattr(folder_manager, "getPloneUserId"):
+                continue
+            user = folder_manager.getPloneUserId()
+            if user == "":
+                continue
+            output.append(user)
+        return output
+
+    @ram.cache(utils.cache_key_30min)
+    def get_users_from_event_and_document_generation(self):
+        output = []
+        if not hasattr(self, "getAllEvents"):
+            return output
+        for event in self.getAllEvents():
+            output += list(event.listCreators())
+            for file in event.values():
+                output += list(file.listCreators())
+        return output
+
+    def get_description_edit_permission(self):
+        change_workflow_users = self.get_users_from_workflow_history()
+        folder_manager_users = self.get_users_from_foldermanager()
+        doc_generation_users = self.get_users_from_event_and_document_generation()
+        current_user = api.user.get_current().id
+        permissions = api.user.get_permissions(obj=self)
+        modify_portal_content = permissions["Modify portal content"]
+        return (not modify_portal_content) and current_user in set(
+            change_workflow_users + folder_manager_users + doc_generation_users
+        )
 
 
 registerType(GenericLicence, PROJECTNAME)
