@@ -230,10 +230,9 @@ Bug fixes:
 
 - Fix external decision values
   [daggelpop]
-
   Handle default vocabulary values for a non-array field
   [daggelpop] (SUP-40288)
-- Fix urban vocabularies following configuration order 
+- Fix urban vocabularies following configuration order
   [WBoudabous] (SUP-41929)
 - Add missing translation in schedule config
   [WBoudabous] (URB-3142)
@@ -580,7 +579,7 @@ New features:
 Bug fixes:
 
 
-- Fix unicode error on street name merge field 
+- Fix unicode error on street name merge field
   [fngaha] (SUP-34184)
 - Avoid to display disabled vocabulary entries with no start or end validity date
   [mpeeters] (SUP-36742)
