@@ -24,6 +24,10 @@ Housing_schema = (
     + getattr(Inspection, "schema", Schema(())).copy()
 )
 
+FIELDS_TO_DELETE = ["usage", "policeTicketReference", "referenceProsecution"]
+for field in FIELDS_TO_DELETE:
+    if field in Housing_schema:
+        del Housing_schema[field]
 
 class Housing(Inspection, CODT_BaseBuildLicence):
     meta_type = "Housing"
