@@ -3,25 +3,18 @@
 from Products.Archetypes.atapi import BaseFolderSchema
 from Products.Archetypes.atapi import Schema
 from Products.Archetypes.atapi import registerType
-from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
-from Products.urban.content.licence.CODT_BaseBuildLicence import CODT_BaseBuildLicence
-from Products.urban.content.licence.Inspection import Inspection
-from Products.urban.widget.select2widget import MultiSelect2Widget
-from collective.datagridcolumns.TextAreaColumn import TextAreaColumn
-from zope.interface import implements
-
 from Products.urban import interfaces
 from Products.urban.config import PROJECTNAME
+from Products.urban.content.licence.CODT_BaseBuildLicence import CODT_BaseBuildLicence
 from Products.urban.content.licence.GenericLicence import GenericLicence
-
-from Products.urban import UrbanMessage as _
-
+from Products.urban.content.licence.Inspection import Inspection
+from zope.interface import implements
 
 Housing_schema = (
-    BaseFolderSchema.copy()
-    + getattr(GenericLicence, "schema", Schema(())).copy()
-    + getattr(CODT_BaseBuildLicence, "schema", Schema(())).copy()
-    + getattr(Inspection, "schema", Schema(())).copy()
+        BaseFolderSchema.copy()
+        + getattr(GenericLicence, "schema", Schema(())).copy()
+        + getattr(CODT_BaseBuildLicence, "schema", Schema(())).copy()
+        + getattr(Inspection, "schema", Schema(())).copy()
 )
 
 
@@ -35,14 +28,27 @@ class Housing(Inspection, CODT_BaseBuildLicence):
 
     def getLastObservationEvent(self):
         return self.getLastEvent(interfaces.IObservationEvent)
-    
+
     def getFirstObservationEvent(self):
         return self.getFirstEvent(interfaces.IObservationEvent)
-    
-    def getNObservationEvent(self,n):
+
+    def getNObservationEvent(self, n):
         events = self.getAllEvent(interfaces.IObservationEvent)
         if len(events) >= n:
-            return events[n-1]
+            return events[n - 1]
         return None
 
+
 registerType(Housing, PROJECTNAME)
+
+
+def finalize_schema(schema, folderish=False, moveDiscussion=True):
+    """
+    Finalizes the type schema to alter some fields
+    """
+    schema.moveField("description", after="inspection_context")
+    schema.moveField("use_bound_licence_infos", after="bound_licences")
+    return schema
+
+
+finalize_schema(Housing_schema)
