@@ -66,11 +66,11 @@
     },
     "sender": {
       "noticeInstanceId": "O3080500",
-      "contactName": "Giuseppe MONACHINO",
+      "contactName": "XX YY",
       "contactPhone": {
         "phoneNumber": [
           {
-            "_value_1": "+3281715344",
+            "_value_1": "+328000000",
             "type": null
           }
         ]
@@ -78,7 +78,7 @@
       "contactMail": {
         "email": [
           {
-            "_value_1": "permis.environnement.namur@spw.wallonie.be",
+            "_value_1": "p.e.namur@s.wallonie.be",
             "type": null
           }
         ]
@@ -296,7 +296,7 @@
           "phoneNumber": {
             "phoneNumber": [
               {
-                "_value_1": "+3281337163",
+                "_value_1": "+320101010",
                 "type": null
               }
             ]
@@ -304,7 +304,7 @@
           "email": {
             "email": [
               {
-                "_value_1": "maxime.semer@spw.wallonie.be",
+                "_value_1": "ab.d@s.wallonie.be",
                 "type": null
               }
             ]

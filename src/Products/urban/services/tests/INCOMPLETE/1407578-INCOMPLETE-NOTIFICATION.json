@@ -66,11 +66,11 @@
     },
     "sender": {
       "noticeInstanceId": "O3080500",
-      "contactName": "Giuseppe MONACHINO",
+      "contactName": "XX YY",
       "contactPhone": {
         "phoneNumber": [
           {
-            "_value_1": "+3281715344",
+            "_value_1": "+3202020202",
             "type": null
           }
         ]
@@ -229,7 +229,7 @@
     "parties": {
       "part": [
         {
-          "enterpriseNumber": "0444406389",
+          "enterpriseNumber": "01212212",
           "enterpriseType": "PERSONNEMORALE",
           "legalForm": "SRL",
           "personNumber": null,
