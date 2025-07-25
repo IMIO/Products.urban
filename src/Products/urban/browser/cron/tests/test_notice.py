@@ -221,4 +221,16 @@ class TestNoticeCronPE2(unittest.TestCase):
 
        
      
-   
+    # def test_irrecevable_notification(self):
+    #     # mock notification.licence?
+        
+    #     self._create_irrecevebale_folder()
+    #     licence = self.notif_patch.return_value.licence  
+    #     # 5.3 assert dossier complet présent
+        
+    #     incomplete_folder = licence.getLastMissingPart()
+    #     self.assertIsNotNone(incomplete_folder)
+    
+    #     # 5.4 
+    #     self.assertEqual(incomplete_folder.getEventDate().Date(), "2025/07/")
+    #     self.assertEqual(api.content.get_state(incomplete_folder), "closed")

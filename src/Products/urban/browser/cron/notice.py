@@ -62,11 +62,14 @@ class ImportFromNoticeView(BrowserView):
         detailed_notification = self.notice_service.get_notification(
             notification["noticeId"]
         )
-
         if detailed_notification.notice_type == "TRANSFERT_DOSSIER":
-            self._transfert_dossier(detailed_notification)
+          self._transfert_dossier(detailed_notification)
         if detailed_notification.notice_type == "NOTIF_COMPLETUDE1_INCOMPLET_COMMUNE":
-            self.process_incomplete_folder_notification(detailed_notification,event_type="dossier-incomplet")
+            self.process_incomplete_folder_notification(detailed_notification)
+        # if detailed_notification.notice_type == "NOTIF_COMPLETUDE1_IRRECEVABLE_COMMUNE":
+        #     self.process_irrecevable_folder_notification(detailed_notification)
+        # if detailed_notification.notice_type == "NOTIF_COMPLETUDE1_NON_RECEVABLE_COMMUNE":
+        #     self.process_no_rrecevable_folder_notification(detailed_notification)
 
 
     def _transfert_dossier(self, detailed_notification):
@@ -107,14 +110,15 @@ class ImportFromNoticeView(BrowserView):
         # Change workflow and add deposit event
         transaction.commit()  # Usefull in case of an error
     
-    def create_event_incomplete_folder(self, licence,detailed_notification,event_type):
+    def update_licence(self, licence, detailed_notification, event_type):
 
         event_configs = detailed_notification.event_configs
         event_config_complete = event_configs[event_type]  
         event_type_to_transition = {
         "dossier-incomplet": "isincomplete",
         #"dossier-irrecevable": "isirrecevable",
-    }
+        }
+        
         with api.env.adopt_roles(["Manager"]):
             event = licence.createUrbanEvent(event_config_complete)
             event_date = DateTime(str(detailed_notification.send_date))
@@ -123,13 +127,25 @@ class ImportFromNoticeView(BrowserView):
         transition = event_type_to_transition.get(event_type)
         if transition:
             # Transition the licence to 'incomplete'
-            api.content.transition(licence, "isincomplete")
-    def process_incomplete_folder_notification(self, detailed_notification,event_type):
-        container = detailed_notification.container
-        licence = api.content.create(
-            container=container, **detailed_notification.serialize()
-        )
-        self.create_event_incomplete_folder(licence, detailed_notification,event_type)
+            api.content.transition(licence, transition)
+
+    def process_incomplete_folder_notification(self, detailed_notification):
+        
+        licence = detailed_notification.licence
+        self.update_licence(licence, detailed_notification, event_type="dossier-incomplet")
+        # Change workflow and add deposit event
+        transaction.commit() 
+    
+    def process_irrecevable_folder_notification(self, detailed_notification):
+        licence = detailed_notification.licence
+        self.update_licence(licence, detailed_notification, event_type="dossier-irrecevable")
         notify(ObjectInitializedEvent(licence))
         # Change workflow and add deposit event
         transaction.commit() 
+    
+    def process_no_rrecevable_folder_notification(self, detailed_notification):
+        licence = detailed_notification.licence
+        self.update_licence(licence, detailed_notification, event_type="dossier-incomplet")
+        notify(ObjectInitializedEvent(licence))
+        # Change workflow and add deposit event
+        transaction.commit()
