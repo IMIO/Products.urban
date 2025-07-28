@@ -35,3 +35,12 @@ class Housing(Inspection, CODT_BaseBuildLicence):
 
 
 registerType(Housing, PROJECTNAME)
+def finalize_schema(schema, folderish=False, moveDiscussion=True):
+    """
+    Finalizes the type schema to alter some fields
+    """
+    schema.moveField("description", after="inspection_context")
+    schema.moveField("use_bound_licence_infos", after="bound_licences")
+    return schema
+
+finalize_schema(Housing_schema)
