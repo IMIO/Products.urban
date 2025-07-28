@@ -5459,6 +5459,9 @@ msgstr "Dimensions"
 msgid "urban_label_observationItems"
 msgstr "Eléments de constatation"
 
+msgid "buildingtype_folder_title"
+msgstr "Nature de l'immeuble
+
 msgid "Unit"
 msgstr "Unité"
 
