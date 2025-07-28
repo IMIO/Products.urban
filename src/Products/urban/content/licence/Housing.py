@@ -33,5 +33,14 @@ class Housing(Inspection, CODT_BaseBuildLicence):
 
     implements(interfaces.IHousing)
 
+    def getLastObservationEvent(self):
+        return self.getLastEvent(interfaces.IObservationEvent)
+    def getFirstObservationEvent(self):
+        return self.getFirstEvent(interfaces.IObservationEvent)
+    def getNObservationEvent(self,n):
+        events = self.getAllEvent(interfaces.IObservationEvent)
+        if len(events) >= n:
+            return events[n-1]
+        return None
 
 registerType(Housing, PROJECTNAME)
