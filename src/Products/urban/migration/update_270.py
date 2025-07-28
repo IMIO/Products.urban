@@ -556,3 +556,15 @@ def add_building_procedure(context):
     )
 
     logger.info("migration step done!")
+    observation_items_vocabularies_config = default_values["Housing"][
+        "part_of_the_building_concerned"
+    ]
+    observation_items_vocabularies_config = createVocabularyFolder(
+        portal_urban.housing, "part_of_the_building_concerned", context, allowedtypes
+    )
+    createFolderDefaultValues(
+        observation_items_vocabularies_config,
+        default_values["Housing"]["part_of_the_building_concerned"][1:],
+        default_values["Housing"]["part_of_the_building_concerned"][0],
+    )
+    logger.info("migration step done!")

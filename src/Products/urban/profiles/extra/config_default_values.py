@@ -3885,5 +3885,8 @@ default_values = {
         "inspectioncontexts": [
             "UrbanVocabularyTerm",
         ],
+        "part_of_the_building_concerned": [
+            "UrbanVocabularyTerm",
+            ],
     },
 }
