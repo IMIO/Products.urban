@@ -13,7 +13,7 @@ from zope.interface import implements
 from Products.urban import interfaces
 from Products.urban.config import PROJECTNAME
 from Products.urban.content.licence.GenericLicence import GenericLicence
-
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban import UrbanMessage as _
 
 
@@ -55,6 +55,7 @@ def finalize_schema(schema, folderish=False, moveDiscussion=True):
     """
     schema.moveField("description", after="inspection_context")
     schema.moveField("use_bound_licence_infos", after="bound_licences")
+    schema["inspection_context"].schemata = "urban_inspection"
 
     FIELDS_TO_DELETE = ["usage", "policeTicketReference", "referenceProsecution"]
 
