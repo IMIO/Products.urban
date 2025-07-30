@@ -150,7 +150,7 @@ class TestNoticeCronPE2(unittest.TestCase):
             api.content.delete(obj=licence)
 
 
-    """@mock.patch(
+    @mock.patch(
         "Products.urban.services.notice.WebserviceNotice.get_notifications",
         return_value=load_notif_json("DEMANDE_EP", "1342038_notifications.json"),
     )
@@ -163,7 +163,7 @@ class TestNoticeCronPE2(unittest.TestCase):
 
         with api.env.adopt_roles(["Manager"]):
             import_view = self.portal.restrictedTraverse("@@import-from-notice")
-            return import_view()"""
+            return import_view()
     
     @mock.patch(
         "Products.urban.services.notice.WebserviceNotice.get_notifications",
@@ -210,27 +210,10 @@ class TestNoticeCronPE2(unittest.TestCase):
         licence.reindexObject()
         self.assertIsNone(licence.getLastMissingPart())
         self._create_incomplete_folder()
-        # 5.3 assert dossier complet présent
+        # 5.3 assert folder incomplet présent
         incomplete_folder = licence.getLastMissingPart()
         self.assertIsNotNone(incomplete_folder)
-        # 5.4 
+        # 5.4 assert folder is closed
         self.assertEqual(incomplete_folder.getEventDate().Date(), "2025/07/11")
         self.assertEqual(api.content.get_state(incomplete_folder), "closed")
         
-       
-
-       
-     
-    # def test_irrecevable_notification(self):
-    #     # mock notification.licence?
-        
-    #     self._create_irrecevebale_folder()
-    #     licence = self.notif_patch.return_value.licence  
-    #     # 5.3 assert dossier complet présent
-        
-    #     incomplete_folder = licence.getLastMissingPart()
-    #     self.assertIsNotNone(incomplete_folder)
-    
-    #     # 5.4 
-    #     self.assertEqual(incomplete_folder.getEventDate().Date(), "2025/07/")
-    #     self.assertEqual(api.content.get_state(incomplete_folder), "closed")
