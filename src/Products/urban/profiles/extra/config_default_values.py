@@ -3878,6 +3878,9 @@ default_values = {
                 "id": "commercial_closure_order",
                 "title": u"L’occupation de l’immeuble (ou partie d’immeuble) relève d’une activité soumise à autorisation d’implantation en vertu de la loi du 29 juin 1975 ou du décret du 5 février 2015, or ladite implantation est frappée d’un ordre de fermeture, d’un retrait ou d’une suspension d’autorisation prononcés en vertu des dispositions de la loi du 13 août 2004 ou d’une mesure de sanction prévue par l’article 68 du décret précité",
             },
-        ]
+        ],
+        "buildingtype": [
+            "UrbanVocabularyTerm",
+        ],
     },
 }
