@@ -3887,6 +3887,6 @@ default_values = {
         ],
         "part_of_the_building_concerned": [
             "UrbanVocabularyTerm",
-            ],
+        ],
     },
 }
