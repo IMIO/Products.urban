@@ -792,11 +792,11 @@
         profile="Products.urban:default"
         />
     <gs:upgradeStep
-        title="Add listing zip code"
+        title="Add listing zip code for notaries"
         description=""
         source="1166"
         destination="1167"
-        handler=".update_280.reimport_actions"
+        handler=".update_280.reimport_actions_for_listing_zip_code_notaries"
         profile="Products.urban:default"
         />
 

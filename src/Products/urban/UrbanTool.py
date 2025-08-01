@@ -939,14 +939,6 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         return renderedDescription
 
     def isContactFolder(self, folder):
-        from zope.interface import providedBy
-        interfaces = list(providedBy(folder))
-        for iface in interfaces:
-            print(iface)
-                
-        print(INotariesTable.providedBy(folder),"---------------------------------------------",folder,IContactFolder.providedBy(folder))
-        
-       
         return IContactFolder.providedBy(folder)
     def isNotaryFolder(self, folder):
         return INotariesTable.providedBy(folder)

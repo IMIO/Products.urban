@@ -397,7 +397,7 @@
      for="Products.ATContentTypes.interfaces.IATFolder"
      name="getpostal"
      class=".urban_configfolderview.NotariesFolderView"
-     attribute="getpostal"
+     attribute="getPostalCode"
      permission="zope2.View"
   />
   

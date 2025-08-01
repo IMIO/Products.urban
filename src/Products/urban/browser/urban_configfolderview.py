@@ -140,8 +140,8 @@ class GeometriciansFolderView(ContactsFolderView):
     def getCSSClass(self):
         base_css = super(GeometriciansFolderView, self).getCSSClass()
         return "{} contenttype-geometrician".format(base_css)
-class ContactsFolderViewMixin(UrbanConfigFolderView):
-     def getpostal(self):
+class PostalCodeListingView(UrbanConfigFolderView):
+     def getPostalCode(self):
         context = aq_inner(self.context)
         contacts = context.objectValues("Contact")
         raw_zipcode = [
@@ -150,7 +150,6 @@ class ContactsFolderViewMixin(UrbanConfigFolderView):
             if ct.getEmail()
         ]
         zip_code = "; ".join(raw_zipcode)
-        #zip_code = emails.replace(",", " ")
     
         self.request.response.setHeader("Content-type", "text/plain;charset=utf-8")
         self.request.response.setHeader(
@@ -159,7 +158,7 @@ class ContactsFolderViewMixin(UrbanConfigFolderView):
         self.request.response.setHeader("Content-Length", str(len(zip_code)))
         return zip_code
 
-class NotariesFolderView(ContactsFolderView,ContactsFolderViewMixin):
+class NotariesFolderView(ContactsFolderView,PostalCodeListingView):
     
     """
     This manage the notaries folder config view
