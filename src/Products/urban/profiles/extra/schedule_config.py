@@ -292,7 +292,9 @@ schedule_config = {
                 ),
             ),
             "end_conditions": (
-                MacroEndConditionObject("urban.schedule.condition.announcement_done", "AND"),
+                MacroEndConditionObject(
+                    "urban.schedule.condition.announcement_done", "AND"
+                ),
             ),
             "activate_recurrency": True,
             "recurrence_states": ("complete",),

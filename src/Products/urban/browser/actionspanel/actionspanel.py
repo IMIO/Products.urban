@@ -38,7 +38,7 @@ class EventActionsPanelView(ActionsPanelView):
         self.ACCEPTABLE_ACTIONS = (
             "plonemeeting_wsclient_action_1",
             "plonemeeting_wsclient_action_2",
-            "send_mail_action"
+            "send_mail_action",
         )
 
 
@@ -187,10 +187,7 @@ class TransitionsPanelView(ActionsPanelView):
         )
 
     def _check_if_transiton_present(self, transitions, transition_id):
-        return any([
-            transition["id"] == transition_id
-            for transition in transitions
-        ])
+        return any([transition["id"] == transition_id for transition in transitions])
 
     def getTransitions(self):
         transitions = super(TransitionsPanelView, self).getTransitions()

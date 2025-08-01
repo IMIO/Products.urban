@@ -574,9 +574,7 @@ schema = Schema(
                     "unit": SelectColumn(_("Unit"), "listDimensionUnit"),
                     "details": TextAreaColumn(_("Details"), rows=3, cols=40),
                 },
-                label=_(
-                    "urban_label_dimensions", default="dimensions"
-                ),
+                label=_("urban_label_dimensions", default="dimensions"),
             ),
             optional=True,
             allow_insert=True,
@@ -584,13 +582,8 @@ schema = Schema(
             allow_oddeven=True,
             allow_delete=True,
             schemata="urban_description",
-            columns=(
-                "type",
-                "value",
-                "unit",
-                "details"
-            ),
-    ),
+            columns=("type", "value", "unit", "details"),
+        ),
     ),
 )
 
@@ -688,7 +681,9 @@ class CODT_BaseBuildLicence(
         prorogated_delay = ""
         prorogation_delay = self.getProrogationDelay(text_format=False)
         if base_delay:
-            prorogated_delay = "{}j".format(str(int(base_delay[:-1]) + prorogation_delay))
+            prorogated_delay = "{}j".format(
+                str(int(base_delay[:-1]) + prorogation_delay)
+            )
 
         return prorogated_delay
 
@@ -781,24 +776,28 @@ class CODT_BaseBuildLicence(
         return DisplayList(vocabulary)
 
     def listDimensionType(self):
-        """ Return a list of dimension types """
+        """Return a list of dimension types"""
         voc = UrbanVocabulary("dimensiontypes", inUrbanConfig=False)
         return voc.getDisplayList(self)
 
     def listDimensionUnit(self):
-        """ Return a list of dimension types """
+        """Return a list of dimension types"""
         voc = UrbanVocabulary("units", inUrbanConfig=False)
         return voc.getDisplayList(self)
 
     def getDimension(self, type):
-        """ Return the dimension of the given type """
+        """Return the dimension of the given type"""
         urban_tool = api.portal.get_tool("portal_urban")
         for dimension in self.dimensions:
             if dimension["type"] == type:
-                dimension['unit_label'] = urban_tool.units[dimension["unit"]].Title()
-                dimension['type_label'] = urban_tool.dimensiontypes[dimension["type"]].Title()
+                dimension["unit_label"] = urban_tool.units[dimension["unit"]].Title()
+                dimension["type_label"] = urban_tool.dimensiontypes[
+                    dimension["type"]
+                ].Title()
                 return dimension
         return None
+
+
 # end of class CODT_BaseBuildLicence
 
 ##code-section module-footer #fill in your manual code here

@@ -328,10 +328,12 @@ class IInspection(IGenericLicence):
     Marker interface for inspection
     """
 
+
 class IHousing(IGenericLicence):
     """
     Marker interface for inspection
     """
+
 
 class ITicket(IGenericLicence):
     """
@@ -691,6 +693,7 @@ class IAsyncInquiryRadius(Interface):
         key_type=schema.ASCIILine(),
         value_type=schema.Int(),
     )
+
 
 class IAsyncMailing(Interface):
     """ """

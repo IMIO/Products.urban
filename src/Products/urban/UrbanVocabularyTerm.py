@@ -298,9 +298,9 @@ class UrbanVocabulary(object):
         deposit_date = self._get_deposit_date(content_instance)
         filtered_terms = OrderedDict()
         for k, v in voc_terms.items():
-             if self._validate_term(v, deposit_date):
+            if self._validate_term(v, deposit_date):
                 filtered_terms[k] = v
-      
+
         return filtered_terms
 
     def listAllVocTerms(self, content_instance):
@@ -316,10 +316,7 @@ class UrbanVocabulary(object):
         )
         voc_terms = [brain.getObject() for brain in voc_brains]
         deposit_date = self._get_deposit_date(content_instance)
-        filtered_terms = [
-            v for v in voc_terms
-            if self._validate_term(v, deposit_date)
-        ]
+        filtered_terms = [v for v in voc_terms if self._validate_term(v, deposit_date)]
         return filtered_terms
 
 

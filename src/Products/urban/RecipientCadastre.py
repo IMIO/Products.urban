@@ -171,9 +171,8 @@ class RecipientCadastre(BaseFolder, BrowserDefaultMixin):
         return self.getAdr1() + " " + self.getAdr2()
 
     def Title(self):
-        if (
-            (not self.getName() or self.getName().strip() == "")
-            and (not self.getFirstname() or self.getFirstname().strip() == "")
+        if (not self.getName() or self.getName().strip() == "") and (
+            not self.getFirstname() or self.getFirstname().strip() == ""
         ):
             return "{} {}".format(self.getStreet(), self.getNumber())
         return "{} {}".format(self.getName(), self.getFirstname())

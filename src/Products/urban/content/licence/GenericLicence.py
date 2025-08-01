@@ -1666,7 +1666,6 @@ class GenericLicence(OrderedBaseFolder, UrbanBase, BrowserDefaultMixin):
         )
         return DisplayList(vocab)
 
-
     security.declarePublic("foldermanagersBaseQuery")
 
     def foldermanagersBaseQuery(self):
@@ -1867,7 +1866,7 @@ class GenericLicence(OrderedBaseFolder, UrbanBase, BrowserDefaultMixin):
 
     def getFirstDeposit(self):
         return self.getFirstEvent(interfaces.IDepositEvent)
-    
+
     def getSecondDeposit(self):
         return self.getSecondEvent(interfaces.IDepositEvent)
 
@@ -1941,7 +1940,7 @@ class GenericLicence(OrderedBaseFolder, UrbanBase, BrowserDefaultMixin):
         events = self.getAllEvents(eventInterface)
         if events:
             return events[0]
-        
+
     def getSecondEvent(self, eventInterface=None):
         events = self.getAllEvents(eventInterface)
         if len(events) > 1:
@@ -2074,7 +2073,6 @@ class GenericLicence(OrderedBaseFolder, UrbanBase, BrowserDefaultMixin):
 
     def legalconditions_base_query(self):
         return {"review_state": ["enabled", "private"]}
-
 
 
 registerType(GenericLicence, PROJECTNAME)

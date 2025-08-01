@@ -412,7 +412,13 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin, OrderedContainer):
             "patrimony": "Patrimoine",
             "inspection": "Inspection",
         }
-        minimum_tabs_config = ["description", "analysis", "environment", "location", "road"]
+        minimum_tabs_config = [
+            "description",
+            "analysis",
+            "environment",
+            "location",
+            "road",
+        ]
         certificatebase_tabs_config = [
             "description",
             "analysis",
@@ -528,8 +534,22 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin, OrderedContainer):
             "road",
             "patrimony",
         ]
-        ticket_tabs_config = ["description", "inspection", "location", "patrimony", "environment"]
-        miscdemand_tabs_config = ["description", "analysis", "environment", "location", "road", "patrimony", "habitation"]
+        ticket_tabs_config = [
+            "description",
+            "inspection",
+            "location",
+            "patrimony",
+            "environment",
+        ]
+        miscdemand_tabs_config = [
+            "description",
+            "analysis",
+            "environment",
+            "location",
+            "road",
+            "patrimony",
+            "habitation",
+        ]
         explosivespossession_tabs_config = [
             "description",
             "advices",
