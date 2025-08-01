@@ -298,7 +298,10 @@ class UrbainXMLExport(BrowserView):
                         u"        <straatnaam>%s</straatnaam>"
                         % safe_unicode(applicantObj.getStreet())
                     )
-                    xml.append(u"        <huisnr>%s</huisnr>" % safe_unicode(applicantObj.getNumber()))
+                    xml.append(
+                        u"        <huisnr>%s</huisnr>"
+                        % safe_unicode(applicantObj.getNumber())
+                    )
                     xml.append(
                         u"        <postcode>%s</postcode>" % applicantObj.getZipcode()
                     )
@@ -335,7 +338,8 @@ class UrbainXMLExport(BrowserView):
                                 % safe_unicode(applicantObj.getStreet())
                             )
                             xml.append(
-                                u"        <huisnr>%s</huisnr>" % safe_unicode(applicantObj.getNumber())
+                                u"        <huisnr>%s</huisnr>"
+                                % safe_unicode(applicantObj.getNumber())
                             )
                             xml.append(
                                 u"        <postcode>%s</postcode>"
@@ -353,7 +357,7 @@ class UrbainXMLExport(BrowserView):
                                 u"        <naam>%s %s</naam>"
                                 % (
                                     safe_unicode(architectObj.getName1()),
-                                    safe_unicode(architectObj.getName2())
+                                    safe_unicode(architectObj.getName2()),
                                 )
                             )
                             xml.append(
@@ -361,7 +365,8 @@ class UrbainXMLExport(BrowserView):
                                 % safe_unicode(architectObj.getStreet())
                             )
                             xml.append(
-                                u"        <huisnr>%s</huisnr>" % safe_unicode(architectObj.getNumber())
+                                u"        <huisnr>%s</huisnr>"
+                                % safe_unicode(architectObj.getNumber())
                             )
                             xml.append(
                                 u"        <postcode>%s</postcode>"

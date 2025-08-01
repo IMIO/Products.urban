@@ -530,7 +530,9 @@ schema = Schema(
                 format="%d/%m/%Y",
                 starting_year=1960,
                 ending_year=WIDGET_DATE_END_YEAR,
-                label=_("urban_label_videoConferenceDate", default="videoConferencedate"),
+                label=_(
+                    "urban_label_videoConferenceDate", default="videoConferencedate"
+                ),
             ),
             optional=True,
         ),
@@ -545,7 +547,6 @@ schema = Schema(
             ),
             optional=True,
         ),
-
     ),
 )
 
@@ -600,7 +601,11 @@ class UrbanEvent(OrderedBaseFolder, BrowserDefaultMixin):
             licence = context.aq_parent
             default_values = field.vocabulary.get_default_values(licence)
             # handle case of a list of default values (only one, in principle) for a string field
-            if not multivalued and type(default_values) == list and len(default_values) > 0:
+            if (
+                not multivalued
+                and type(default_values) == list
+                and len(default_values) > 0
+            ):
                 return default_values[0]
             else:
                 return default_values
@@ -969,8 +974,10 @@ class UrbanEvent(OrderedBaseFolder, BrowserDefaultMixin):
             if not rule.enabled:
                 continue
             for condition in rule.conditions:
-                class EventTemp():
+
+                class EventTemp:
                     object = self
+
                 executable = getMultiAdapter((self, condition, EventTemp), IExecutable)
                 conditions.append(executable())
             if all(conditions):

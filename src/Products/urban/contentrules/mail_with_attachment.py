@@ -43,22 +43,22 @@ logger = logging.getLogger("plone.contentrules")
 
 
 class IMailWithAttachmentAction(IMailAction):
-    """Definition of the configuration available for a mail action
-    """
+    """Definition of the configuration available for a mail action"""
 
 
 class MailWithAttachmentAction(MailAction):
     """
     The implementation of the action defined before
     """
+
     implements(IMailWithAttachmentAction, IRuleElementData)
 
-    element = 'plone.actions.MailWithAttachement'
+    element = "plone.actions.MailWithAttachement"
 
 
 class MailWithAttachmentActionExecutor(MailActionExecutor):
-    """The executor for this action.
-    """
+    """The executor for this action."""
+
     adapts(Interface, IMailWithAttachmentAction, Interface)
 
     def __call__(self):
@@ -69,7 +69,7 @@ execute this action"
 
         urltool = getToolByName(aq_inner(self.context), "portal_url")
         portal = urltool.getPortalObject()
-        email_charset = portal.getProperty('email_charset')
+        email_charset = portal.getProperty("email_charset")
 
         obj = self.event.object
 
@@ -82,31 +82,34 @@ execute this action"
         if not source:
             # no source provided, looking for the site wide from email
             # address
-            from_address = portal.getProperty('email_from_address')
+            from_address = portal.getProperty("email_from_address")
             if not from_address:
                 # the mail can't be sent. Try to inform the user
                 request = getRequest()
                 if request:
                     messages = IStatusMessage(request)
-                    msg = _(u"Error sending email from content rule. You must "
-                            "provide a source address for mail "
-                            "actions or enter an email in the portal properties")
+                    msg = _(
+                        u"Error sending email from content rule. You must "
+                        "provide a source address for mail "
+                        "actions or enter an email in the portal properties"
+                    )
                     messages.add(msg, type=u"error")
                 return False
 
-            from_name = portal.getProperty('email_from_name').strip('"')
+            from_name = portal.getProperty("email_from_name").strip('"')
             source = '"%s" <%s>' % (from_name, from_address)
 
         recip_string = interpolator(self.element.recipients)
-        if recip_string: # check recipient is not None or empty string
-            recipients = set([str(mail.strip()) for mail in recip_string.split(',') \
-                              if mail.strip()])
+        if recip_string:  # check recipient is not None or empty string
+            recipients = set(
+                [str(mail.strip()) for mail in recip_string.split(",") if mail.strip()]
+            )
         else:
             recipients = set()
 
         if self.element.exclude_actor:
             mtool = getToolByName(aq_inner(self.context), "portal_membership")
-            actor_email = mtool.getAuthenticatedMember().getProperty('email', '')
+            actor_email = mtool.getAuthenticatedMember().getProperty("email", "")
             if actor_email in recipients:
                 recipients.remove(actor_email)
 
@@ -129,13 +132,19 @@ execute this action"
                 # AlecM thinks this wouldn't be a problem if mail queuing was
                 # always on -- but it isn't. (stevem)
                 # so we test if queue is not on to set immediate
-                mailhost.send(message, email_recipient, source,
-                              subject=subject, charset=email_charset,
-                              immediate=not mailhost.smtp_queue)
+                mailhost.send(
+                    message,
+                    email_recipient,
+                    source,
+                    subject=subject,
+                    charset=email_charset,
+                    immediate=not mailhost.smtp_queue,
+                )
             except (MailHostError, SMTPException):
                 logger.error(
-                    """mailing error: Attempt to send mail in content rule failed.\n%s""" %
-                    traceback.format_exc())
+                    """mailing error: Attempt to send mail in content rule failed.\n%s"""
+                    % traceback.format_exc()
+                )
 
         return True
 
@@ -156,11 +165,12 @@ execute this action"
             filename = item["file"]["filename"].encode("utf-8")
             if item["@type"] in ["ATFile", "File"]:
                 part = MIMEApplication(content, name=filename)
-                part.add_header("Content-Disposition", 'attachment; filename="{}"'.format(filename))
+                part.add_header(
+                    "Content-Disposition", 'attachment; filename="{}"'.format(filename)
+                )
                 message.attach(part)
             if item["@type"] in ["ATImage", "Image"]:
                 message.attach(MIMEImage(content, name=filename))
-
 
         return message
 
@@ -175,7 +185,7 @@ class GetDocumentToAttach(object):
 
     def __call__(self):
         return self.context.listFolderContents(
-            contentFilter={"portal_type" : ["ATFile","ATImage","File", "Image"]}
+            contentFilter={"portal_type": ["ATFile", "ATImage", "File", "Image"]}
         )
 
 
@@ -183,10 +193,11 @@ class MailWithAttachmentAddForm(MailAddForm):
     """
     An add form for the mail action
     """
+
     form_fields = form.FormFields(IMailWithAttachmentAction)
 
     # custom template will allow us to add help text
-    template = ViewPageTemplateFile('templates/mail.pt')
+    template = ViewPageTemplateFile("templates/mail.pt")
 
     def create(self, data):
         a = MailWithAttachmentAction()
@@ -198,7 +209,8 @@ class MailWithAttachmentEditForm(MailEditForm):
     """
     An edit form for the mail action
     """
+
     form_fields = form.FormFields(IMailWithAttachmentAction)
- 
+
     # custom template will allow us to add help text
-    template = ViewPageTemplateFile('templates/mail.pt')
+    template = ViewPageTemplateFile("templates/mail.pt")

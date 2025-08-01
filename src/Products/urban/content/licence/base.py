@@ -546,7 +546,7 @@ class UrbanBase(object):
         return signaletic
 
     security.declarePublic("getStreets")
-    
+
     def getStreets(self):
         """
         Returns a string representing the different streets

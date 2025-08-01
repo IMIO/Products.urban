@@ -66,7 +66,6 @@ schema = Schema(
             schemata="urban_location",
         ),
     ),
-
 )
 
 ##code-section after-local-schema #fill in your manual code here
@@ -106,9 +105,7 @@ class CODT_CommercialLicence(BaseFolder, CODT_UniqueLicence, BrowserDefaultMixin
         )
         return DisplayList(vocab)
 
-    def _get_inquiry_objs(
-        self, all_=False, portal_type=["CODT_Inquiry"]
-    ):
+    def _get_inquiry_objs(self, all_=False, portal_type=["CODT_Inquiry"]):
         all_inquiries = super(CODT_CommercialLicence, self)._get_inquiry_objs(
             all_=all_, portal_type=portal_type
         )

@@ -101,7 +101,9 @@ def fix_announcement_task(schedule_config):
         and isinstance(schedule_config.additional_delay_type, dict)
         and "token" in schedule_config.additional_delay_type
     ):
-        schedule_config.additional_delay_type = schedule_config.additional_delay_type["token"]
+        schedule_config.additional_delay_type = schedule_config.additional_delay_type[
+            "token"
+        ]
 
 
 def fix_announcement_tasks():

@@ -35,15 +35,20 @@ class Housing(Inspection, CODT_BaseBuildLicence):
 
     def getLastObservationEvent(self):
         return self.getLastEvent(interfaces.IObservationEvent)
+
     def getFirstObservationEvent(self):
         return self.getFirstEvent(interfaces.IObservationEvent)
-    def getNObservationEvent(self,n):
+
+    def getNObservationEvent(self, n):
         events = self.getAllEvent(interfaces.IObservationEvent)
         if len(events) >= n:
-            return events[n-1]
+            return events[n - 1]
         return None
 
+
 registerType(Housing, PROJECTNAME)
+
+
 def finalize_schema(schema, folderish=False, moveDiscussion=True):
     """
     Finalizes the type schema to alter some fields
@@ -57,5 +62,6 @@ def finalize_schema(schema, folderish=False, moveDiscussion=True):
         if field in Housing_schema:
             del Housing_schema[field]
     return schema
+
 
 finalize_schema(Housing_schema)

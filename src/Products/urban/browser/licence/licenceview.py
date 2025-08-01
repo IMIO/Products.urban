@@ -366,7 +366,7 @@ class LicenceView(BrowserView):
                 "demandDisplay",
                 "investigationReasons",
             ],
-            "announcement" : [
+            "announcement": [
                 "derogation",
                 "derogationDetails",
                 "investigationArticles",
@@ -379,7 +379,9 @@ class LicenceView(BrowserView):
         exclude_fields = []
         if hasattr(bound_context, "getInquiry_type"):
             exclude_fields = fields_display.get(bound_context.getInquiry_type(), [])
-        return self.getSchemataFields("urban_inquiry", list(set(exclude_fields + exclude)), bound_context)
+        return self.getSchemataFields(
+            "urban_inquiry", list(set(exclude_fields + exclude)), bound_context
+        )
 
     def getDefaultFields(self, exclude=[], context=None):
         base_exclude = ["id", "title"]
@@ -593,6 +595,7 @@ class EnvironmentLicenceView(LicenceView):
 
     def __init__(self, context, request):
         super(EnvironmentLicenceView, self).__init__(context, request)
+
 
 class ShowEditTabbing(BrowserView):
     """call this view to see if a licence should display the tabbing with edit icons"""

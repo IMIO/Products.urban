@@ -394,16 +394,11 @@ class ImportClaimantListingForm(form.Form):
             return error
 
         try:
-            claimant_args = [
-                self.check_claimant_arg(row) for row in claimant_args
-            ]
+            claimant_args = [self.check_claimant_arg(row) for row in claimant_args]
         except ValueError as err:
             return _(
                 "Import cancel : error with claimant ${claimant} on value ${value}",
-                mapping={
-                    "claimant": err[0],
-                    "value": err[1]
-                }
+                mapping={"claimant": err[0], "value": err[1]},
             )
 
         return None
@@ -427,7 +422,7 @@ class ImportClaimantListingForm(form.Form):
             handle_boolean_value(wantDecisionCopy)
         except ValueError as err:
             raise ValueError(row["name1"], "wantDecisionCopy")
-        
+
         return row
 
 
@@ -691,12 +686,14 @@ class ImportRecipientListingForm(form.Form):
                 type="error",
             )
 
+
 def handle_boolean_value(value):
     if value == "Vrai" or value is True:
         return True
     if value == "Faux" or value == "" or value is False:
         return False
     raise ValueError(value)
+
 
 class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
     """
@@ -761,25 +758,22 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
             reader = []
         try:
             claimant_args = [
-                row
-                for row in reader
-                if row["name1"] or row["name2"] or row["society"]
+                row for row in reader if row["name1"] or row["name2"] or row["society"]
             ][1:]
         except csv.Error as error:
             return
-        
+
         try:
             claimant_args = [
-                self.handle_claimant_arg(row, titles_mapping, country_mapping, site, claim_type_mapping)
+                self.handle_claimant_arg(
+                    row, titles_mapping, country_mapping, site, claim_type_mapping
+                )
                 for row in claimant_args
             ]
         except ValueError as err:
             msg = _(
                 "Import cancel : error with claimant ${claimant} on value ${value}",
-                mapping={
-                    "claimant": err[0],
-                    "value": err[1]
-                }
+                mapping={"claimant": err[0], "value": err[1]},
             )
             plone_utils.addPortalMessage(msg, type="error")
             return
@@ -796,22 +790,20 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
                 )
             )
 
-    def handle_claimant_arg(self, row, titles_mapping, country_mapping, site, claim_type_mapping):
+    def handle_claimant_arg(
+        self, row, titles_mapping, country_mapping, site, claim_type_mapping
+    ):
         # default values
         if not row["claimType"]:
             row["claimType"] = "Écrite"
 
         try:
-            row["hasPetition"] = handle_boolean_value(
-                row.get("hasPetition", False)
-            )
+            row["hasPetition"] = handle_boolean_value(row.get("hasPetition", False))
         except ValueError as err:
             raise ValueError(row["name1"], "hasPetition")
 
         try:
-            row["outOfTime"] = handle_boolean_value(
-                row.get("outOfTime", False)
-            )
+            row["outOfTime"] = handle_boolean_value(row.get("outOfTime", False))
         except ValueError as err:
             raise ValueError(row["name1"], "outOfTime")
 
@@ -823,12 +815,8 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
             raise ValueError(row["name1"], "wantDecisionCopy")
 
         # mappings
-        row["personTitle"] = titles_mapping.get(
-            row["personTitle"], "notitle"
-        )
-        row["country"] = country_mapping.get(
-            row["country"], "belgium"
-        )
+        row["personTitle"] = titles_mapping.get(row["personTitle"], "notitle")
+        row["country"] = country_mapping.get(row["country"], "belgium")
         row["id"] = site.plone_utils.normalizeString(
             row["name1"] + row["name2"] + row["society"]
         )

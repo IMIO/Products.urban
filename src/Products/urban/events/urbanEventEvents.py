@@ -103,12 +103,13 @@ def updateKeyEvent(urban_event, event):
 
 def updateDecisionDate(urban_event, event):
     if ITheLicenceEvent.providedBy(urban_event):
-        logger = logging.getLogger('updateDecisionDate')
+        logger = logging.getLogger("updateDecisionDate")
         licence = urban_event.aq_inner.aq_parent
-        logger.info("reindex 'getDecisionDate' trigger by {} for licence : {}".format(
-            event.__class__.__name__,
-            licence.absolute_url()
-        ))
+        logger.info(
+            "reindex 'getDecisionDate' trigger by {} for licence : {}".format(
+                event.__class__.__name__, licence.absolute_url()
+            )
+        )
         licence.reindexObject(["getDecisionDate"])
 
 
