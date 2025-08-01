@@ -36,6 +36,12 @@ class Housing(Inspection, CODT_BaseBuildLicence):
 
 registerType(Housing, PROJECTNAME)
 def finalize_schema(schema, folderish=False, moveDiscussion=True):
+    """
+    Finalizes the type schema to alter some fields
+    """
+    schema.moveField("description", after="inspection_context")
+    schema.moveField("use_bound_licence_infos", after="bound_licences")
+
     FIELDS_TO_DELETE = ["usage", "policeTicketReference", "referenceProsecution"]
 
     for field in FIELDS_TO_DELETE:
