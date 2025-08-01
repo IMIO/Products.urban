@@ -41,6 +41,12 @@ def finalize_schema(schema, folderish=False, moveDiscussion=True):
     """
     schema.moveField("description", after="inspection_context")
     schema.moveField("use_bound_licence_infos", after="bound_licences")
+
+    FIELDS_TO_DELETE = ["usage", "policeTicketReference", "referenceProsecution"]
+
+    for field in FIELDS_TO_DELETE:
+        if field in Housing_schema:
+            del Housing_schema[field]
     return schema
 
 finalize_schema(Housing_schema)
