@@ -5450,6 +5450,7 @@ msgstr "Unités"
 
 msgid "observationitems_folder_title"
 msgstr "Eléments de constatation"
+
 msgid "urban_label_dimensions"
 msgstr "Dimensions"
 
@@ -5460,7 +5461,10 @@ msgid "urban_label_observationItems"
 msgstr "Eléments de constatation"
 
 msgid "buildingtype_folder_title"
-msgstr "Nature de l'immeuble
+msgstr "Nature de l'immeuble"
+
+msgid "part_of_the_building_concerned_folder_title"
+msgstr "Partie pertinente du bâtiment"
 
 msgid "Unit"
 msgstr "Unité"
@@ -5470,6 +5474,3 @@ msgstr "Détails"
 
 msgid "Value"
 msgstr "Valeur"
-
-msgid "urban_label_dimensions"
-msgstr "Dimensions"
