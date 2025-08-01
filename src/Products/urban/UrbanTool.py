@@ -29,7 +29,6 @@ from collections import OrderedDict
 
 from Products.urban.config import *
 from Products.urban.interfaces import IContactFolder
-from Products.urban.browser.table.interfaces import INotariesTable
 from Products.urban.interfaces import IUrbanVocabularyTerm
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.interfaces import IUrbanEvent
@@ -940,8 +939,6 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
 
     def isContactFolder(self, folder):
         return IContactFolder.providedBy(folder)
-    def isNotaryFolder(self, folder):
-        return INotariesTable.providedBy(folder)
 
     def isLicence(self, context):
         return IGenericLicence.providedBy(context)
