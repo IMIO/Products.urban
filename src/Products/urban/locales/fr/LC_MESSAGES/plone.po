@@ -532,3 +532,24 @@ msgstr "Rue"
 
 msgid "nonapplicable"
 msgstr "Refuser"
+
+msgid "analyse"
+msgstr "Analyse"
+
+msgid "to_1st_observation"
+msgstr "1ère observation"
+
+msgid "to_2nd_observation"
+msgstr "2ème observation"
+
+msgid "to_annual_observation"
+msgstr "Observation annuelle"
+
+msgid "1st_observation"
+msgstr "1ère observation"
+
+msgid "2nd_observation"
+msgstr "2ème observation"
+
+msgid "annual_observation"
+msgstr "Observation annuelle"
