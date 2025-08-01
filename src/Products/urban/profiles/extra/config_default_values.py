@@ -3881,6 +3881,6 @@ default_values = {
         ],
         "buildingtype": [
             "UrbanVocabularyTerm",
-            ]
+        ],
     },
 }
