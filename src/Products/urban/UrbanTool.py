@@ -29,6 +29,7 @@ from collections import OrderedDict
 
 from Products.urban.config import *
 from Products.urban.interfaces import IContactFolder
+from Products.urban.browser.table.interfaces import INotariesTable
 from Products.urban.interfaces import IUrbanVocabularyTerm
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.interfaces import IUrbanEvent
@@ -938,7 +939,17 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         return renderedDescription
 
     def isContactFolder(self, folder):
+        from zope.interface import providedBy
+        interfaces = list(providedBy(folder))
+        for iface in interfaces:
+            print(iface)
+                
+        print(INotariesTable.providedBy(folder),"---------------------------------------------",folder,IContactFolder.providedBy(folder))
+        
+       
         return IContactFolder.providedBy(folder)
+    def isNotaryFolder(self, folder):
+        return INotariesTable.providedBy(folder)
 
     def isLicence(self, context):
         return IGenericLicence.providedBy(context)
