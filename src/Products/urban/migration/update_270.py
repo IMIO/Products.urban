@@ -543,14 +543,14 @@ def add_building_procedure(context):
         building_type_vocabularies_config,
         default_values["Housing"]["buildingtype"][1:],
         default_values["Housing"]["buildingtype"][0],)
-    observation_items_vocabularies_config = default_values["Housing"][
+    inspection_contexts_vocabularies_config = default_values["Housing"][
         "inspectioncontexts"
     ]
-    observation_items_vocabularies_config = createVocabularyFolder(
+    inspection_contexts_vocabularies_config = createVocabularyFolder(
         portal_urban.housing, "inspectioncontexts", context, allowedtypes
     )
     createFolderDefaultValues(
-        observation_items_vocabularies_config,
+        inspection_contexts_vocabularies_config,
         default_values["Housing"]["inspectioncontexts"][1:],
         default_values["Housing"]["inspectioncontexts"][0],
     )
