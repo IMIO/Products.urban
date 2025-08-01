@@ -38,7 +38,6 @@ registerType(Housing, PROJECTNAME)
 def finalize_schema(schema, folderish=False, moveDiscussion=True):
     FIELDS_TO_DELETE = ["usage", "policeTicketReference", "referenceProsecution"]
 
-
     for field in FIELDS_TO_DELETE:
         if field in Housing_schema:
             del Housing_schema[field]
