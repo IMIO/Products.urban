@@ -392,6 +392,15 @@
      attribute="getEmails"
      permission="zope2.View"
   />
+   
+   <!--<browser:page
+     for="Products.ATContentTypes.interfaces.IATFolder"
+     name="getpostal"
+     class=".urban_configfolderview.NotariesFolderView"
+     attribute="getpostal"
+     permission="zope2.View"
+  />-->
+  
 
   <browser:page
      for="*"

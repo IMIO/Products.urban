@@ -791,5 +791,13 @@
         handler=".update_270.add_additional_delay_option"
         profile="Products.urban:default"
         />
+    <gs:upgradeStep
+        title="Add listing zip code"
+        description=""
+        source="1166"
+        destination="1167"
+        handler=".update_280.reimport_actions"
+        profile="Products.urban:default"
+        />
 
 </configure>
