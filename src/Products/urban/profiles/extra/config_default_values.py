@@ -3882,7 +3882,8 @@ default_values = {
         "buildingtype": [
             "UrbanVocabularyTerm",
         ],
-        "inspectioncontexts":[ 
-            "UrbanVocabularyTerm",],
+        "inspectioncontexts": [
+            "UrbanVocabularyTerm",
+        ],
     },
 }
