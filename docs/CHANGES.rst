@@ -29,8 +29,8 @@ New features:
 - Reorder fields description, use_bound_licence_infos in the housing shema.
   [WBoudabous] (URBBDC-3226)
 - Updated the "inspection_context" field for the Housing procedure:
-    - Moved it to the "urban_inspection" schemata.
-    - Switched to a new dynamic vocabulary: "inspectioncontexts".
+  Moved it to the "urban_inspection" schemata.
+  Switched to a new dynamic vocabulary: "inspectioncontexts".
   [WBoudabous] (URBBDC-3227)
 - Update housing workflow.
   [WBoudabous] (URBBDC-3229)
