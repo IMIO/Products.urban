@@ -8,6 +8,48 @@ Changelog
 
 .. towncrier release notes start
 
+2.8.0a1 (2025-08-03)
+--------------------
+
+New features:
+
+
+- Add translation for nonapplicable state in Division
+  [jchandelle] (SUP-39760)
+- Added merge fields for observation and Vocabulary events.
+  Added merge fields for dimension.
+  Deactivated the "Road Decree" licence type.
+  [WBoudabous] (URBBDC-3218)
+- Add nature of the building vocabulary.
+  [WBoudabous] (URBBDC-3221)
+- Add part of the building vocabulary.
+  [WBoudabous] (URBBDC-3222)
+- Remove the fields "usage", "policeTicketReference", and "referenceProsecution" from the Housing schema.
+  [WBoudabous] (URBBDC-3224)
+- Reorder fields description, use_bound_licence_infos in the housing shema.
+  [WBoudabous] (URBBDC-3226)
+- Updated the "inspection_context" field for the Housing procedure:
+    - Moved it to the "urban_inspection" schemata.
+    - Switched to a new dynamic vocabulary: "inspectioncontexts".
+  [WBoudabous] (URBBDC-3227)
+- Update housing workflow.
+  [WBoudabous] (URBBDC-3229)
+
+
+Bug fixes:
+
+
+- Add RoadDecree to URBAN_TYPES to be able to use it in the tests.
+  [aduchene] (URB-3293)
+
+
+Internal:
+
+
+- Black
+  [mpeeters] (URBBDC-3142)
+
+
 2.7.40 (2025-06-10)
 -------------------
 
