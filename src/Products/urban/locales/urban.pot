@@ -5407,3 +5407,6 @@ msgstr ""
 
 msgid "urban_label_dimensions"
 msgstr ""
+
+msgid "urban_label_taxation"
+msgstr ""
