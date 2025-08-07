@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = "2.8.0a2"
+version = "2.8.0a3.dev0"
 
 setup(
     name="Products.urban",
