@@ -6,8 +6,6 @@ from Products.Archetypes.atapi import registerType
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.content.licence.CODT_BaseBuildLicence import CODT_BaseBuildLicence
 from Products.urban.content.licence.Inspection import Inspection
-from Products.urban.widget.select2widget import MultiSelect2Widget
-from collective.datagridcolumns.TextAreaColumn import TextAreaColumn
 from zope.interface import implements
 
 from Products.urban import interfaces
@@ -49,6 +47,7 @@ Housing_schema += Schema((
         ),
 ))
 
+
 class Housing(Inspection, CODT_BaseBuildLicence):
     meta_type = "Housing"
     portal_type = "Housing"
@@ -68,9 +67,11 @@ class Housing(Inspection, CODT_BaseBuildLicence):
         if len(events) >= n:
             return events[n - 1]
         return None
+        
     def displayBuildingType(self):
         """Return a list of selected buildingType items"""
         return self.getValuesForTemplate("buildingType")
+
 
 registerType(Housing, PROJECTNAME)
 
