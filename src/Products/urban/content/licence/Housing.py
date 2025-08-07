@@ -15,7 +15,7 @@ from Products.urban.config import PROJECTNAME
 from Products.urban.content.licence.GenericLicence import GenericLicence
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban import UrbanMessage as _
-from Products.Archetypes.atapi import StringField
+from Products.Archetypes.atapi import StringField, LinesField, MultiSelectionWidget
 
 
 Housing_schema = (
@@ -35,8 +35,19 @@ Housing_schema += Schema((
             ),
         schemata="urban_description",
     ),
+    LinesField(
+            name="buildingType",
+            widget=MultiSelectionWidget(
+                format="checkbox",
+                label=_("urban_label_buildingType", default="buildingType"),
+                i18n_domain="urban",
+            ),
+            multiValued=True,
+            optional=True,
+            schemata="urban_inspection",
+            vocabulary=UrbanVocabulary("buildingtype", inUrbanConfig=True),
+        ),
 ))
-
 
 class Housing(Inspection, CODT_BaseBuildLicence):
     meta_type = "Housing"
@@ -57,7 +68,9 @@ class Housing(Inspection, CODT_BaseBuildLicence):
         if len(events) >= n:
             return events[n - 1]
         return None
-
+    def displayBuildingType(self):
+        """Return a list of selected buildingType items"""
+        return self.getValuesForTemplate("buildingType")
 
 registerType(Housing, PROJECTNAME)
 
