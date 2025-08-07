@@ -15,6 +15,7 @@ from Products.urban.config import PROJECTNAME
 from Products.urban.content.licence.GenericLicence import GenericLicence
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban import UrbanMessage as _
+from Products.Archetypes.atapi import StringField
 
 
 Housing_schema = (
@@ -23,6 +24,18 @@ Housing_schema = (
     + getattr(CODT_BaseBuildLicence, "schema", Schema(())).copy()
     + getattr(Inspection, "schema", Schema(())).copy()
 )
+Housing_schema += Schema((
+    StringField(
+        name="taxation",
+        widget=StringField._properties["widget"](
+                label=_(
+                    "urban_label_taxation",
+                    default="taxation",
+                ),
+            ),
+        schemata="urban_description",
+    ),
+))
 
 
 class Housing(Inspection, CODT_BaseBuildLicence):
