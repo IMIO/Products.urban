@@ -122,7 +122,7 @@ ADD_CONTENT_PERMISSIONS = {
     "UrbanConfigurationValue": "urban: Add UrbanConfigurationValue",
     "ExplosivesPossession": "urban: Add ExplosivesPossession",
     "Inspection": "urban: Add Inspection",
-    "RoadDecree": "urban: Add RoadDecree",
+    # "RoadDecree": "urban: Add RoadDecree",
 }
 
 setDefaultRoles("urban: Add Applicant", ("Manager", "Contributor"))
@@ -185,7 +185,7 @@ setDefaultRoles("urban: Add UrbanEventOpinionRequest", ("Manager", "Contributor"
 setDefaultRoles("urban: Add UrbanConfigurationValue", ("Manager",))
 setDefaultRoles("urban: Add UrbanVocabularyTerm", ("Manager", "Contributor"))
 setDefaultRoles("urban: Add ExplosivesPossession", ("Manager", "Contributor"))
-setDefaultRoles("urban: Add RoadDecree", ("Manager", "Contributor"))
+# setDefaultRoles("urban: Add RoadDecree", ("Manager", "Contributor"))
 
 product_globals = globals()
 
@@ -223,9 +223,10 @@ URBAN_TYPES = [
     "CODT_NotaryLetter",
     "ProjectMeeting",
     "ExplosivesPossession",
-    # 'RoadDecree',
+    #'RoadDecree',
     "Inspection",
     "Ticket",
+    "Housing",
 ]
 
 URBAN_TYPES_ACRONYM = {
@@ -257,9 +258,10 @@ URBAN_TYPES_ACRONYM = {
     "CODT_NotaryLetter": "NOT",
     "ProjectMeeting": "R",
     "ExplosivesPossession": "EXP",
-    "RoadDecree": "DV",
+    # "RoadDecree": "DV",
     "Inspection": "INSP",
     "Ticket": "PV",
+    "Housing": "LOG",
 }
 
 URBAN_CWATUPE_TYPES = [
@@ -276,7 +278,7 @@ URBAN_CWATUPE_TYPES = [
     "MiscDemand",
     "Division",
     "NotaryLetter",
-    "RoadDecree",
+    # "RoadDecree",
     "Inspection",
     "Ticket",
 ]
@@ -296,9 +298,10 @@ URBAN_CODT_TYPES = [
     "PreliminaryNotice",
     "PatrimonyCertificate",
     "Division",
-    "RoadDecree",
+    # "RoadDecree",
     "Inspection",
     "Ticket",
+    "Housing",
 ]
 
 URBAN_ENVIRONMENT_TYPES = [

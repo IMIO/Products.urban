@@ -1,16 +1,20 @@
 # -*- coding: utf-8 -*-
 
-from collective.eeafaceted.collectionwidget.utils import \
-    _updateDefaultCollectionFor
+from collective.eeafaceted.collectionwidget.utils import _updateDefaultCollectionFor
 from plone import api
 from Products.urban.config import URBAN_TYPES
 from Products.urban.interfaces import ILicenceContainer
-from Products.urban.setuphandlers import (_, _activate_dashboard_navigation,
-                                          _create_dashboard_collection,
-                                          setFolderAllowedTypes)
-from Products.urban.utils import (getEnvironmentLicenceFolderIds,
-                                  getLicenceFolderId,
-                                  getUrbanOnlyLicenceFolderIds)
+from Products.urban.setuphandlers import (
+    _,
+    _activate_dashboard_navigation,
+    _create_dashboard_collection,
+    setFolderAllowedTypes,
+)
+from Products.urban.utils import (
+    getEnvironmentLicenceFolderIds,
+    getLicenceFolderId,
+    getUrbanOnlyLicenceFolderIds,
+)
 from zExceptions import BadRequest
 from zope.interface import alsoProvides
 

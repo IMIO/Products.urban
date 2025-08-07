@@ -1,16 +1,15 @@
 # -*- coding: utf-8 -*-
 
-from imio.actionspanel.browser.views import ActionsPanelView
-from imio.actionspanel.browser.views import DEFAULT_CONFIRM_VIEW
-from imio.actionspanel import ActionsPanelMessageFactory as _actions
-from imio.urban.core.contents.eventconfig.content import IEventConfig
-
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from plone import api
 from Products.CMFPlone import PloneMessageFactory as _plone
 from Products.DCWorkflow.Transitions import TransitionDefinition
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.urban.interfaces import IGenericLicence
-
+from imio.actionspanel import ActionsPanelMessageFactory as _actions
+from imio.actionspanel.browser.views import ActionsPanelView
+from imio.actionspanel.browser.views import DEFAULT_CONFIRM_VIEW
+from imio.urban.core.contents.eventconfig.content import IEventConfig
+from plone import api
+from plone.memoize.view import memoize
 from zope.annotation import IAnnotations
 from zope.i18n import translate
 
@@ -39,7 +38,7 @@ class EventActionsPanelView(ActionsPanelView):
         self.ACCEPTABLE_ACTIONS = (
             "plonemeeting_wsclient_action_1",
             "plonemeeting_wsclient_action_2",
-            "send_mail_action"
+            "send_mail_action",
         )
 
 
@@ -188,10 +187,7 @@ class TransitionsPanelView(ActionsPanelView):
         )
 
     def _check_if_transiton_present(self, transitions, transition_id):
-        return any([
-            transition["id"] == transition_id
-            for transition in transitions
-        ])
+        return any([transition["id"] == transition_id for transition in transitions])
 
     def getTransitions(self):
         transitions = super(TransitionsPanelView, self).getTransitions()
@@ -313,7 +309,15 @@ class AutomatedTaskActionsPanelView(ActionsPanelView):
 
     def __init__(self, context, request):
         super(AutomatedTaskActionsPanelView, self).__init__(context, request)
-        self.SECTIONS_TO_RENDER = ("renderChangeOwner", "renderCloseTask")
+        self.SECTIONS_TO_RENDER = (
+            "renderChangeOwner",
+            "renderCloseTask",
+            "renderDebugTask",
+        )
+
+    @memoize
+    def current_user_id(self):
+        return api.user.get_current().id
 
     def __call__(
         self,
@@ -328,11 +332,16 @@ class AutomatedTaskActionsPanelView(ActionsPanelView):
         showHistoryLastEventHasComments=False,
         showChangeOwner=True,
         showCloseTask=True,
+        showDebugTask=False,
         **kwargs
     ):
 
         self.showChangeOwner = showChangeOwner
         self.showCloseTask = showCloseTask
+        self.showDebugTask = showDebugTask
+        self.current_user_id = self.current_user_id()
+        if self.current_user_id == "admin":
+            self.showDebugTask = True
 
         return super(AutomatedTaskActionsPanelView, self).__call__(
             useIcons=useIcons,
@@ -358,6 +367,12 @@ class AutomatedTaskActionsPanelView(ActionsPanelView):
         if self.showCloseTask:
             self.saveHasActions()
             return ViewPageTemplateFile("actions_panel_close_task.pt")(self)
+
+    def renderDebugTask(self):
+        """Render a link  to close the task manually"""
+        if self.showDebugTask:
+            self.saveHasActions()
+            return ViewPageTemplateFile("actions_panel_debug_task.pt")(self)
 
 
 class SimpleTaskActionsPanelView(ActionsPanelView):

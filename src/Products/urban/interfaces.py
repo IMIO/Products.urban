@@ -329,6 +329,12 @@ class IInspection(IGenericLicence):
     """
 
 
+class IHousing(IGenericLicence):
+    """
+    Marker interface for inspection
+    """
+
+
 class ITicket(IGenericLicence):
     """
     Marker interface for inspection
@@ -573,6 +579,10 @@ class ITransferOfLicenceEvent(Interface):
     __doc__ = _("""ITransferOfLicence type marker interface""")
 
 
+class IObservationEvent(Interface):
+    __doc__ = _("""IObservationEvent type marker interface""")
+
+
 class IUrbanBase(Interface):
     """Marker interface for .Base.UrbanBase"""
 
@@ -677,6 +687,13 @@ class IAsyncInquiryRadius(Interface):
         value_type=schema.Int(),
     )
 
+    inquiries_address_to_do = schema.Dict(
+        title=_(u"Planned address"),
+        description=_(u"address planned"),
+        key_type=schema.ASCIILine(),
+        value_type=schema.Int(),
+    )
+
 
 class IAsyncMailing(Interface):
     """ """
@@ -730,3 +747,7 @@ class IProductUrbanLayer(IDefaultBrowserLayer):
 
 class IIntentionToSubmitAmendedPlans(Interface):
     __doc__ = _("""IIntentionToSubmitAmendedPlans type marker interface""")
+
+
+class IMissingCapakey(Interface):
+    """ """

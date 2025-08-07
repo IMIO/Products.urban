@@ -34,6 +34,14 @@ from Products.urban.content.licence.GenericLicence import GenericLicence
 from Products.urban.utils import setOptionalAttributes
 from Products.urban.utils import setSchemataForCODT_Inquiry
 from Products.urban.widget.select2widget import MultiSelect2Widget
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
+from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
+
+from Products.DataGridField import DataGridField, DataGridWidget
+from Products.DataGridField.Column import Column
+from Products.DataGridField.SelectColumn import SelectColumn
+from collective.datagridcolumns.TextAreaColumn import TextAreaColumn
+
 from plone import api
 from zope.component import getMultiAdapter
 from zope.interface import implements
@@ -42,6 +50,7 @@ from zope.interface import implements
 ##/code-section module-header
 
 optional_fields = [
+    "dimensions",
     "SCT",
     "sctDetails",
     "SDC",
@@ -559,6 +568,25 @@ schema = Schema(
             multiValued=True,
             relationship="bound_licences",
         ),
+        DataGridField(
+            name="dimensions",
+            widget=DataGridWidget(
+                columns={
+                    "type": SelectColumn(_("Type"), "listDimensionType"),
+                    "value": Column(_("Value")),
+                    "unit": SelectColumn(_("Unit"), "listDimensionUnit"),
+                    "details": TextAreaColumn(_("Details"), rows=3, cols=40),
+                },
+                label=_("urban_label_dimensions", default="dimensions"),
+            ),
+            optional=True,
+            allow_insert=True,
+            allow_reorder=True,
+            allow_oddeven=True,
+            allow_delete=True,
+            schemata="urban_description",
+            columns=("type", "value", "unit", "details"),
+        ),
     ),
 )
 
@@ -749,7 +777,7 @@ class CODT_BaseBuildLicence(
             ("classified", "bien classé"),
         )
         return DisplayList(vocabulary)
-
+      
     def get_last_plonemeeting_date(
         self,
         event=interfaces.ISimpleCollegeEvent,
@@ -792,6 +820,28 @@ class CODT_BaseBuildLicence(
             item_portal_type="MeetingItemCouncil",
             decided_states=decided_states,
         )
+
+    def listDimensionType(self):
+        """Return a list of dimension types"""
+        voc = UrbanVocabulary("dimensiontypes", inUrbanConfig=False)
+        return voc.getDisplayList(self)
+
+    def listDimensionUnit(self):
+        """Return a list of dimension types"""
+        voc = UrbanVocabulary("units", inUrbanConfig=False)
+        return voc.getDisplayList(self)
+
+    def getDimension(self, type):
+        """Return the dimension of the given type"""
+        urban_tool = api.portal.get_tool("portal_urban")
+        for dimension in self.dimensions:
+            if dimension["type"] == type:
+                dimension["unit_label"] = urban_tool.units[dimension["unit"]].Title()
+                dimension["type_label"] = urban_tool.dimensiontypes[
+                    dimension["type"]
+                ].Title()
+                return dimension
+        return None
 
 
 # end of class CODT_BaseBuildLicence

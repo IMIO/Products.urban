@@ -529,3 +529,27 @@ msgstr ""
 
 msgid "frozen_suspension"
 msgstr ""
+
+msgid "nonapplicable"
+msgstr ""
+
+msgid "analyse"
+msgstr ""
+
+msgid "to_1st_observation"
+msgstr ""
+
+msgid "to_2nd_observation"
+msgstr ""
+
+msgid "to_annual_observation"
+msgstr ""
+
+msgid "1st_observation"
+msgstr ""
+
+msgid "2nd_observation"
+msgstr ""
+
+msgid "annual_observation"
+msgstr ""

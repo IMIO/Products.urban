@@ -180,6 +180,9 @@
                                     <input type="submit" class="context" name="find_recipients_cadastre"
                                     tal:attributes="value python:'Rechercher les propriétaires situés dans un rayon de {radius}m'.format(
                                                                  radius=view.getInquiryRadius())" />
+                                    <input type="submit" class="context" name="find_address_cadastre"
+                                    tal:attributes="value python:'Rechercher les adresses situés dans un rayon de {radius}m'.format(
+                                                                 radius=view.getInquiryRadius())" />
                                 </form>
                             </tal:block>
                             <br />

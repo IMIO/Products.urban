@@ -41,7 +41,7 @@ from zope.interface import implements
 from AccessControl import getSecurityManager
 from plone import api
 from plone.memoize import ram
-from plone.memoize.request  import cache
+from plone.memoize.request import cache
 from zope.i18n import translate
 from Products.CMFCore import permissions
 from Products.CMFCore.utils import _checkPermission
@@ -950,7 +950,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
                 for l in self.getDivisionsRenaming()
             ]
         )
-        name = mapping[str(int(division_code))]
+        name = mapping.get(str(int(division_code)), None)
         return name
 
     def get_all_licence_configs(self):
@@ -1084,5 +1084,6 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         rules = context.get_all_rules_for_this_event()
 
         return len(rules) > 0
+
 
 registerType(UrbanTool, PROJECTNAME)

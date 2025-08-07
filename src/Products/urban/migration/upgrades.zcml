@@ -738,4 +738,57 @@
         profile="Products.urban:default"
         />
 
+    <gs:upgradeStep
+        title="Hide patrimony tab newly added in some licence configs"
+        description=""
+        source="1160"
+        destination="1161"
+        handler=".update_270.hide_patrimony_tab_in_licence_config"
+        profile="Products.urban:default"
+        />
+
+    <gs:upgradeStep
+        title="Hide environment tab newly added in some licence configs"
+        description=""
+        source="1161"
+        destination="1162"
+        handler=".update_270.hide_tab_in_licence_config"
+        profile="Products.urban:default"
+        />
+
+    <gs:upgradeStep
+        title="Hide habitation tab newly added in some licence configs"
+        description=""
+        source="1162"
+        destination="1163"
+        handler=".update_270.hide_habitation_tab_in_licence_config"
+        profile="Products.urban:default"
+        />
+
+    <gs:upgradeStep
+        title="Add new registry record"
+        description=""
+        source="1163"
+        destination="1164"
+        handler=".update_270.add_new_registry_profil"
+        profile="Products.urban:default"
+        />
+
+    <gs:upgradeStep
+        title="Add new registry for missing capakey"
+        description=""
+        source="1164"
+        destination="1165"
+        handler=".update_270.add_new_registry_for_missing_capakey"
+        profile="Products.urban:default"
+        />
+     <gs:upgradeStep
+        title="Add housing procedure"
+        description=""
+        source="1165"
+        destination="1166"
+        handler=".update_270.add_building_procedure"
+        profile="Products.urban:default"
+        />
+  
 </configure>

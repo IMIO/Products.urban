@@ -154,8 +154,10 @@ class ConfigImportContent(ImportContent):
             obj = brain.getObject()
             merge_templates = obj.merge_templates
             for template in merge_templates:
+                if template["template"] == "--NOVALUE--":
+                    continue
                 template_obj = api.content.get(UID=template["template"])
-                if template_obj.id == id:
+                if template_obj and template_obj.id == id:
                     return template["template"]
             ignore_uid.append(brain_uid)
         if ILicenceConfig.providedBy(context):
@@ -197,10 +199,47 @@ class ConfigImportContent(ImportContent):
         for template in merge_templates:
             uid = self.get_template_uid(item, template)
             if uid is None:
+                msg = "Can't link the pod template : {}, in document : {}".format(
+                    template.get("pod_context_name", "unknown"),
+                    item.get("@id", "unknown").split("portal_urban")[-1],
+                )
+                logger.warning(msg)
+                api.portal.show_message(msg, self.request, type="warning")
                 uid = "--NOVALUE--"
             template["template"] = uid
             output_template.append(template)
         item["merge_templates"] = output_template
+        return item
+
+    def handle_environmentrubricterm_description(self, item):
+        description = item.get("description", None)
+        if not description:
+            return item
+        data_description = description.get("data", "")
+        if not data_description.startswith("<p>"):
+            data_description = u"<p>{}".format(data_description)
+        if not data_description.endswith("</p>"):
+            data_description = u"{}</p>".format(data_description)
+        description["data"] = data_description
+        description["content-type"] = u"text/html"
+        item["description"] = description
+        return item
+
+    def dict_hook_environmentrubricterm(self, item):
+        item = self.handle_environmentrubricterm_description(item)
+        exploitation_condition = item.get("exploitationCondition", None)
+        if not exploitation_condition:
+            return item
+        exploitation_condition_list = []
+        for condition in exploitation_condition:
+            obj = self.get_obj_from_path(condition)
+            if not obj:
+                logger.error(
+                    "Can't find object for exploitationCondition : {}".format(condition)
+                )
+                continue
+            exploitation_condition_list.append(obj.UID())
+        item["exploitationCondition"] = exploitation_condition_list
         return item
 
     def handle_fix_parent_path(self, item):
