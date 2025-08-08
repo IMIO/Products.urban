@@ -3,6 +3,9 @@
 from Products.Archetypes.atapi import BaseFolderSchema
 from Products.Archetypes.atapi import Schema
 from Products.Archetypes.atapi import registerType
+from Products.Archetypes.atapi import StringField
+from Products.Archetypes.atapi import LinesField
+from Products.Archetypes.atapi import MultiSelectionWidget
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.content.licence.CODT_BaseBuildLicence import CODT_BaseBuildLicence
 from Products.urban.content.licence.Inspection import Inspection
@@ -13,7 +16,6 @@ from Products.urban.config import PROJECTNAME
 from Products.urban.content.licence.GenericLicence import GenericLicence
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban import UrbanMessage as _
-from Products.Archetypes.atapi import StringField, LinesField, MultiSelectionWidget
 
 
 Housing_schema = (
@@ -67,7 +69,7 @@ class Housing(Inspection, CODT_BaseBuildLicence):
         if len(events) >= n:
             return events[n - 1]
         return None
-        
+
     def displayBuildingType(self):
         """Return a list of selected buildingType items"""
         return self.getValuesForTemplate("buildingType")
