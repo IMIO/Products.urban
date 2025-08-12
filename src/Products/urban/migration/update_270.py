@@ -352,6 +352,7 @@ def fix_patrimony_certificate_class(context):
         licence.__class__ = PatrimonyCertificate
         licence.meta_type = "PatrimonyCertificate"
         licence.schema = PatrimonyCertificate.schema
+        licence._p_changed = 1
         licence.reindexObject()
 
     logger.info("upgrade step done!")
