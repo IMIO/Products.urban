@@ -8,6 +8,16 @@ Changelog
 
 .. towncrier release notes start
 
+2.7.43 (2025-08-12)
+-------------------
+
+Bug fixes:
+
+
+- Fix patrimony certificates interface 
+  [jchandelle] (SUP-46330)
+
+
 2.7.42 (2025-07-08)
 -------------------
 
