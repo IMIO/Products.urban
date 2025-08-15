@@ -1,2 +1,2 @@
-- Added buildingPart attribute to the housing procedure.
+Added buildingPart attribute to the housing procedure.
 [WBoudabous]
