@@ -3,11 +3,12 @@
 from Products.Archetypes.atapi import BaseFolderSchema
 from Products.Archetypes.atapi import Schema
 from Products.Archetypes.atapi import registerType
+from Products.Archetypes.atapi import StringField
+from Products.Archetypes.atapi import LinesField
+from Products.Archetypes.atapi import MultiSelectionWidget
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.content.licence.CODT_BaseBuildLicence import CODT_BaseBuildLicence
 from Products.urban.content.licence.Inspection import Inspection
-from Products.urban.widget.select2widget import MultiSelect2Widget
-from collective.datagridcolumns.TextAreaColumn import TextAreaColumn
 from zope.interface import implements
 
 from Products.urban import interfaces
@@ -15,7 +16,6 @@ from Products.urban.config import PROJECTNAME
 from Products.urban.content.licence.GenericLicence import GenericLicence
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban import UrbanMessage as _
-from Products.Archetypes.atapi import StringField
 
 
 Housing_schema = (
@@ -35,6 +35,18 @@ Housing_schema += Schema((
             ),
         schemata="urban_description",
     ),
+    LinesField(
+            name="buildingType",
+            widget=MultiSelectionWidget(
+                format="checkbox",
+                label=_("urban_label_buildingType", default="buildingType"),
+                i18n_domain="urban",
+            ),
+            multiValued=True,
+            optional=True,
+            schemata="urban_inspection",
+            vocabulary=UrbanVocabulary("buildingtype", inUrbanConfig=True),
+        ),
 ))
 
 
@@ -57,6 +69,10 @@ class Housing(Inspection, CODT_BaseBuildLicence):
         if len(events) >= n:
             return events[n - 1]
         return None
+
+    def displayBuildingType(self):
+        """Return a list of selected buildingType items"""
+        return self.getValuesForTemplate("buildingType")
 
 
 registerType(Housing, PROJECTNAME)
