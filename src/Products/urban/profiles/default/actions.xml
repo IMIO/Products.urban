@@ -1,132 +1,147 @@
 <?xml version="1.0"?>
 <object name="portal_actions" meta_type="Plone Actions Tool"
    xmlns:i18n="http://xml.zope.org/namespaces/i18n">
- <action-provider name="portal_actions" />
- <object name="portal_tabs" meta_type="CMF Action Category">
-  <property name="title"></property>
-  <object name="urban" meta_type="CMF Action" i18n:domain="urban">
-   <property name="title" i18n:translate="">urban</property>
-   <property name="description" i18n:translate=""></property>
-   <property name="url_expr">string:$portal_url/urban</property>
-   <property name="icon_expr"></property>
-   <property
+   <action-provider name="portal_actions" />
+   <object name="portal_tabs" meta_type="CMF Action Category">
+      <property name="title"></property>
+      <object name="urban" meta_type="CMF Action" i18n:domain="urban">
+         <property name="title" i18n:translate="">urban</property>
+         <property name="description" i18n:translate=""></property>
+         <property name="url_expr">string:$portal_url/urban</property>
+         <property name="icon_expr"></property>
+         <property
             name="available_expr">context/@@mayAccessUrban</property>
-   <property name="permissions">
-    <element value="View"/>
-   </property>
-   <property name="visible">True</property>
-  </object>
- </object>
- <object name="user" meta_type="CMF Action Category">
-  <object name="Documentation" meta_type="CMF Action" insert-before="logout">
-   <property name="title">Documentation</property>
-   <property name="description"></property>
-   <property
-      name="url_expr">string:https://docs.imio.be/imio-doc/ia.urban/</property>
-   <property
-      name="link_target">https://docs.imio.be/imio-doc/ia.urban/</property>
-   <property name="icon_expr"></property>
-   <property name="available_expr"></property>
-   <property name="permissions">
-    <element value="View"/>
-   </property>
-   <property name="visible">True</property>
-  </object>
- </object>
- <object name="object" meta_type="CMF Action Category">
-  <property name="title"></property>
-  <object name="folderContents" meta_type="CMF Action" i18n:domain="plone">
-   <property name="title" i18n:translate="">Contents</property>
-   <property name="description" i18n:translate=""/>
-   <property name="url_expr">string:${globals_view/getCurrentFolderUrl}/folder_contents</property>
-   <property name="link_target"/>
-   <property name="icon_expr"/>
-   <property name="available_expr">python: context.portal_urban.is_admin() or ('portal_urban' in globals_view.getCurrentFolderUrl() and context.portal_urban.can_edit())</property>
-   <property name="permissions">
-   </property>
-   <property name="visible">True</property>
-  </object>
-  <object name="urbanmap" meta_type="CMF Action" i18n:domain="urban">
-   <property name="title" i18n:translate="">Map</property>
-   <property name="description" i18n:translate=""></property>
-   <property name="url_expr">string:$object_url/map</property>
-   <property name="icon_expr"></property>
-   <property
-            name="available_expr">python: context.portal_type in context.portal_urban.getUrbanTypes()</property>
-   <property name="permissions">
-    <element value="View"/>
-   </property>
-   <property name="visible">True</property>
-  </object>
- </object>
- <object name="document_actions" meta_type="CMF Action Category">
-  <property name="title"></property>
-  <object name="urban_templates" meta_type="CMF Action" i18n:domain="urban">
-   <property name="title" i18n:translate="templates_summary_title">Templates summary</property>
-   <property name="description" i18n:translate=""></property>
-   <property name="url_expr">string:$object_url/@@templatessum</property>
-   <property name="icon_expr">string:$portal_url/warning.png</property>
-   <property name="available_expr">python: context.portal_type == 'UrbanTool'</property>
-   <property name="permissions">
-    <element value="View"/>
-   </property>
-   <property name="visible">True</property>
-  </object>
- </object>
- <object name="document_actions" meta_type="CMF Action Category">
-  <property name="title"></property>
-  <object name="urban_contact_emails" meta_type="CMF Action" i18n:domain="urban">
-   <property name="title" i18n:translate="">Emails</property>
-   <property name="description" i18n:translate=""></property>
-   <property name="url_expr">string:$object_url/getemails</property>
-   <property name="icon_expr">string:$portal_url/getemails.png</property>
-   <property name="available_expr">python: context.portal_urban.isContactFolder(context)</property>
-   <property name="permissions">
-    <element value="View"/>
-   </property>
-   <property name="visible">True</property>
-  </object>
- </object>
- <object name="object_buttons" meta_type="CMF Action Category">
-  <property name="title"></property>
-  <object name="urban_duplicate_licence" meta_type="CMF Action" i18n:domain="urban">
-   <property name="title" i18n:translate="">Duplicate licence</property>
-   <property name="description" i18n:translate=""></property>
-   <property name="url_expr">string:$object_url/duplicate_licence</property>
-   <property name="icon_expr">string:$portal_url/duplicate_licence.png</property>
-   <property name="available_expr">python: context.portal_urban.isLicence(context)</property>
-   <property name="permissions">
-    <element value="View"/>
-   </property>
-   <property name="visible">True</property>
-  </object>
- </object>
- <object name="object_buttons" meta_type="CMF Action Category">
-  <property name="title"></property>
-  <object name="copy_to_claimant" meta_type="CMF Action" i18n:domain="urban">
-   <property name="title" i18n:translate="">Copy to claimant</property>
-   <property name="description" i18n:translate=""></property>
-   <property name="url_expr">string:$object_url/copy_recipient_to_claimant</property>
-   <property name="icon_expr">string:$portal_url/copytoclaymants.png</property>
-   <property name="available_expr">python: context.portal_type == 'RecipientCadastre'</property>
-   <property name="permissions">
-    <element value="View"/>
-   </property>
-   <property name="visible">True</property>
-  </object>
- </object>
- <object name="object_buttons" meta_type="CMF Action Category">
-  <property name="title"></property>
-  <object name="send_mail_action" meta_type="CMF Action" i18n:domain="urban">
-   <property name="title" i18n:translate="">Send mail</property>
-   <property name="description" i18n:translate=""></property>
-   <property name="url_expr">string:$object_url/@@send-email-to-inquiry-dept</property>
-   <property name="icon_expr">string:$portal_url/getemails.png</property>
-   <property name="available_expr">python: context.portal_urban.check_if_mail_content_rule_applied(context)</property>
-   <property name="permissions">
-    <element value="View"/>
-   </property>
-   <property name="visible">True</property>
-  </object>
- </object>
+         <property name="permissions">
+            <element value="View" />
+         </property>
+         <property name="visible">True</property>
+      </object>
+   </object>
+   <object name="user" meta_type="CMF Action Category">
+      <object name="Documentation" meta_type="CMF Action" insert-before="logout">
+         <property name="title">Documentation</property>
+         <property name="description"></property>
+         <property
+            name="url_expr">string:https://docs.imio.be/imio-doc/ia.urban/</property>
+         <property
+            name="link_target">https://docs.imio.be/imio-doc/ia.urban/</property>
+         <property name="icon_expr"></property>
+         <property name="available_expr"></property>
+         <property name="permissions">
+            <element value="View" />
+         </property>
+         <property name="visible">True</property>
+      </object>
+   </object>
+   <object name="object" meta_type="CMF Action Category">
+      <property name="title"></property>
+      <object name="folderContents" meta_type="CMF Action" i18n:domain="plone">
+         <property name="title" i18n:translate="">Contents</property>
+         <property name="description" i18n:translate="" />
+         <property name="url_expr">string:${globals_view/getCurrentFolderUrl}/folder_contents</property>
+         <property name="link_target" />
+         <property name="icon_expr" />
+         <property name="available_expr">python: context.portal_urban.is_admin() or ('portal_urban'
+            in globals_view.getCurrentFolderUrl() and context.portal_urban.can_edit())</property>
+         <property name="permissions">
+         </property>
+         <property name="visible">True</property>
+      </object>
+      <object name="urbanmap" meta_type="CMF Action" i18n:domain="urban">
+         <property name="title" i18n:translate="">Map</property>
+         <property name="description" i18n:translate=""></property>
+         <property name="url_expr">string:$object_url/map</property>
+         <property name="icon_expr"></property>
+         <property
+            name="available_expr">python: context.portal_type in
+            context.portal_urban.getUrbanTypes()</property>
+         <property name="permissions">
+            <element value="View" />
+         </property>
+         <property name="visible">True</property>
+      </object>
+   </object>
+   <object name="document_actions" meta_type="CMF Action Category">
+      <property name="title"></property>
+      <object name="urban_templates" meta_type="CMF Action" i18n:domain="urban">
+         <property name="title" i18n:translate="templates_summary_title">Templates summary</property>
+         <property name="description" i18n:translate=""></property>
+         <property name="url_expr">string:$object_url/@@templatessum</property>
+         <property name="icon_expr">string:$portal_url/warning.png</property>
+         <property name="available_expr">python: context.portal_type == 'UrbanTool'</property>
+         <property name="permissions">
+            <element value="View" />
+         </property>
+         <property name="visible">True</property>
+      </object>
+   </object>
+   <object name="document_actions" meta_type="CMF Action Category">
+      <property name="title"></property>
+      <object name="urban_contact_emails" meta_type="CMF Action" i18n:domain="urban">
+         <property name="title" i18n:translate="">Emails</property>
+         <property name="description" i18n:translate=""></property>
+         <property name="url_expr">string:$object_url/getemails</property>
+         <property name="icon_expr">string:$portal_url/getemails.png</property>
+         <property name="available_expr">python: context.portal_urban.isContactFolder(context)</property>
+         <property name="permissions">
+            <element value="View" />
+         </property>
+         <property name="visible">True</property>
+      </object>
+      <object name="urban_contact_zipCode" meta_type="CMF Action" i18n:domain="urban">
+         <property name="title" i18n:translate="">Postal Codes</property>
+         <property name="description" i18n:translate=""></property>
+         <property name="url_expr">string:$object_url/getpostalcode</property>
+         <property name="icon_expr">string:$portal_url/getemails.png</property>
+         <property name="available_expr">python: context.getId() == "notaries"</property>
+
+         <property name="permissions">
+            <element value="View" />
+         </property>
+         <property name="visible">True</property>
+      </object>
+   </object>
+   <object name="object_buttons" meta_type="CMF Action Category">
+      <property name="title"></property>
+      <object name="urban_duplicate_licence" meta_type="CMF Action" i18n:domain="urban">
+         <property name="title" i18n:translate="">Duplicate licence</property>
+         <property name="description" i18n:translate=""></property>
+         <property name="url_expr">string:$object_url/duplicate_licence</property>
+         <property name="icon_expr">string:$portal_url/duplicate_licence.png</property>
+         <property name="available_expr">python: context.portal_urban.isLicence(context)</property>
+         <property name="permissions">
+            <element value="View" />
+         </property>
+         <property name="visible">True</property>
+      </object>
+   </object>
+   <object name="object_buttons" meta_type="CMF Action Category">
+      <property name="title"></property>
+      <object name="copy_to_claimant" meta_type="CMF Action" i18n:domain="urban">
+         <property name="title" i18n:translate="">Copy to claimant</property>
+         <property name="description" i18n:translate=""></property>
+         <property name="url_expr">string:$object_url/copy_recipient_to_claimant</property>
+         <property name="icon_expr">string:$portal_url/copytoclaymants.png</property>
+         <property name="available_expr">python: context.portal_type == 'RecipientCadastre'</property>
+         <property name="permissions">
+            <element value="View" />
+         </property>
+         <property name="visible">True</property>
+      </object>
+   </object>
+   <object name="object_buttons" meta_type="CMF Action Category">
+      <property name="title"></property>
+      <object name="send_mail_action" meta_type="CMF Action" i18n:domain="urban">
+         <property name="title" i18n:translate="">Send mail</property>
+         <property name="description" i18n:translate=""></property>
+         <property name="url_expr">string:$object_url/@@send-email-to-inquiry-dept</property>
+         <property name="icon_expr">string:$portal_url/getemails.png</property>
+         <property name="available_expr">python:
+            context.portal_urban.check_if_mail_content_rule_applied(context)</property>
+         <property name="permissions">
+            <element value="View" />
+         </property>
+         <property name="visible">True</property>
+      </object>
+   </object>
 </object>

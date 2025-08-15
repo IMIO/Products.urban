@@ -114,6 +114,8 @@ class ContactsFolderView(UrbanConfigFolderView):
         )
         self.request.response.setHeader("Content-Length", str(len(emails)))
         return emails
+    
+    
 
 
 class ArchitectsFolderView(ContactsFolderView):
@@ -138,9 +140,26 @@ class GeometriciansFolderView(ContactsFolderView):
     def getCSSClass(self):
         base_css = super(GeometriciansFolderView, self).getCSSClass()
         return "{} contenttype-geometrician".format(base_css)
+class PostalCodeListingView(UrbanConfigFolderView):
+     def getPostalCode(self):
+        context = aq_inner(self.context)
+        contacts = context.objectValues("Contact")
+        raw_zipcode = [
+            "%s %s <%s>" % (ct.getName1(), ct.getName2(), ct.getZipcode())
+            for ct in contacts
+            if ct.getEmail()
+        ]
+        zip_code = "; ".join(raw_zipcode)
+    
+        self.request.response.setHeader("Content-type", "text/plain;charset=utf-8")
+        self.request.response.setHeader(
+            "Content-Disposition", "attachment; filename=%s_code_postal.txt" % context.id
+        )
+        self.request.response.setHeader("Content-Length", str(len(zip_code)))
+        return zip_code
 
-
-class NotariesFolderView(ContactsFolderView):
+class NotariesFolderView(ContactsFolderView,PostalCodeListingView):
+    
     """
     This manage the notaries folder config view
     """
@@ -150,7 +169,7 @@ class NotariesFolderView(ContactsFolderView):
     def getCSSClass(self):
         base_css = super(NotariesFolderView, self).getCSSClass()
         return "{} contenttype-notary".format(base_css)
-
+   
 
 class SortedTitleFolderView(BrowserView):
     """
