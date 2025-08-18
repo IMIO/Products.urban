@@ -141,7 +141,7 @@ class GeometriciansFolderView(ContactsFolderView):
         base_css = super(GeometriciansFolderView, self).getCSSClass()
         return "{} contenttype-geometrician".format(base_css)
 class PostalCodeListingView(UrbanConfigFolderView):
-     def getPostalCode(self):
+    def getPostalCode(self):
         context = aq_inner(self.context)
         contacts = context.objectValues("Contact")
         raw_zipcode = [
@@ -150,7 +150,7 @@ class PostalCodeListingView(UrbanConfigFolderView):
             if ct.getEmail()
         ]
         zip_code = "; ".join(raw_zipcode)
-    
+
         self.request.response.setHeader("Content-type", "text/plain;charset=utf-8")
         self.request.response.setHeader(
             "Content-Disposition", "attachment; filename=%s_code_postal.txt" % context.id
@@ -169,7 +169,6 @@ class NotariesFolderView(ContactsFolderView,PostalCodeListingView):
     def getCSSClass(self):
         base_css = super(NotariesFolderView, self).getCSSClass()
         return "{} contenttype-notary".format(base_css)
-   
 
 class SortedTitleFolderView(BrowserView):
     """
