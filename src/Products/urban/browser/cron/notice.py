@@ -63,7 +63,7 @@ class ImportFromNoticeView(BrowserView):
             notification["noticeId"]
         )
         if detailed_notification.notice_type == "TRANSFERT_DOSSIER":
-          self._transfert_dossier(detailed_notification)
+            self._transfert_dossier(detailed_notification)
         if detailed_notification.notice_type == "NOTIF_COMPLETUDE1_INCOMPLET_COMMUNE":
             self.process_incomplete_folder_notification(detailed_notification)
 
@@ -106,26 +106,24 @@ class ImportFromNoticeView(BrowserView):
         # Change workflow and add deposit event
         transaction.commit()  # Usefull in case of an error
     
-    def update_licence(self, licence, detailed_notification, event_type):
-
+    def update_license(self, license, detailed_notification, event_type):
         event_configs = detailed_notification.event_configs
-        event_config_complete = event_configs[event_type]  
+        event_config_complete = event_configs[event_type]
         event_type_to_transition = {
-        "dossier-incomplet": "isincomplete",
+            "dossier-incomplete": "isIncomplete",
         }
-        
+
         with api.env.adopt_roles(["Manager"]):
-            event = licence.createUrbanEvent(event_config_complete)
+            event = license.createUrbanEvent(event_config_complete)
             event_date = DateTime(str(detailed_notification.send_date))
             event.setEventDate(event_date)
             api.content.transition(event, "close")
         transition = event_type_to_transition.get(event_type)
         if transition:
-            api.content.transition(licence, transition)
+            api.content.transition(license, transition)
 
     def process_incomplete_folder_notification(self, detailed_notification):
-        
-        licence = detailed_notification.licence
-        self.update_licence(licence, detailed_notification, event_type="dossier-incomplet")
+        license = detailed_notification.license
+        self.update_license(license, detailed_notification, event_type="dossier-incomplete")
         transaction.commit() 
     
