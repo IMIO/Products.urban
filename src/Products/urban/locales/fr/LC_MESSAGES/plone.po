@@ -537,19 +537,19 @@ msgid "analyse"
 msgstr "Analyse"
 
 msgid "to_1st_observation"
-msgstr "1ère observation"
+msgstr "1er constat"
 
 msgid "to_2nd_observation"
-msgstr "2ème observation"
+msgstr "2e constat"
 
 msgid "to_annual_observation"
-msgstr "Observation annuelle"
+msgstr "Constat annuel"
 
 msgid "1st_observation"
-msgstr "1ère observation"
+msgstr "1er constat"
 
 msgid "2nd_observation"
-msgstr "2ème observation"
+msgstr "2e constat"
 
 msgid "annual_observation"
-msgstr "Observation annuelle"
+msgstr "Constat annuel"
