@@ -1,2 +1,2 @@
-- Updated translations for workflow states in the housing procedure.
+Updated translations for workflow states in the housing procedure.
 [WBoudabous]
