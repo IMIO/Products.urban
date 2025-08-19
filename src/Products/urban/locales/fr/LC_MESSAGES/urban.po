@@ -5464,7 +5464,7 @@ msgid "buildingtype_folder_title"
 msgstr "Nature de l'immeuble"
 
 msgid "part_of_the_building_concerned_folder_title"
-msgstr "Partie pertinente du bâtiment"
+msgstr "Partie de l'immeuble concernée"
 
 msgid "Unit"
 msgstr "Unité"
@@ -5477,3 +5477,6 @@ msgstr "Valeur"
 
 msgid "urban_label_taxation"
 msgstr "Taxation"
+
+msgid "urban_label_buildingPart"
+msgstr "Partie de l'immeuble concernée"
