@@ -85,17 +85,12 @@ class Housing(Inspection, CODT_BaseBuildLicence):
             return events[n - 1]
         return None
 
-<<<<<<< HEAD
     def displayBuildingType(self):
         """Return a list of selected buildingType items"""
         return self.getValuesForTemplate("buildingType")
 
     def displayBuildingPart(self):
-        """Return a list of selected building part"""
-=======
-    def displayBuildingPart(self):
         """Return a list of selected buiding part"""
->>>>>>> 857ad2c76f7fc8bcd951211f2e9858af3343e2ae
         return self.getValuesForTemplate("buildingPart")
 
 
