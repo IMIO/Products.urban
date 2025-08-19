@@ -1,20 +1,19 @@
 # -*- coding: utf-8 -*-
 
 from Products.Archetypes.atapi import BaseFolderSchema
-from Products.Archetypes.atapi import Schema
-from Products.Archetypes.atapi import registerType
-from Products.Archetypes.atapi import StringField
 from Products.Archetypes.atapi import LinesField
 from Products.Archetypes.atapi import MultiSelectionWidget
+from Products.Archetypes.atapi import registerType
+from Products.Archetypes.atapi import Schema
+from Products.Archetypes.atapi import StringField
+from Products.urban import interfaces
+from Products.urban import UrbanMessage as _
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
+from Products.urban.config import PROJECTNAME
 from Products.urban.content.licence.CODT_BaseBuildLicence import CODT_BaseBuildLicence
+from Products.urban.content.licence.GenericLicence import GenericLicence
 from Products.urban.content.licence.Inspection import Inspection
 from zope.interface import implements
-
-from Products.urban import interfaces
-from Products.urban.config import PROJECTNAME
-from Products.urban.content.licence.GenericLicence import GenericLicence
-from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
-from Products.urban import UrbanMessage as _
 
 
 Housing_schema = (
@@ -65,7 +64,6 @@ Housing_schema += Schema(
 )
 
 
-
 class Housing(Inspection, CODT_BaseBuildLicence):
     meta_type = "Housing"
     portal_type = "Housing"
@@ -73,6 +71,7 @@ class Housing(Inspection, CODT_BaseBuildLicence):
     schema = Housing_schema
 
     implements(interfaces.IHousing)
+
     def getLastObservationEvent(self):
         return self.getLastEvent(interfaces.IObservationEvent)
 
