@@ -6,7 +6,6 @@ from Products.Archetypes.atapi import registerType
 from Products.Archetypes.atapi import StringField
 from Products.Archetypes.atapi import LinesField
 from Products.Archetypes.atapi import MultiSelectionWidget
-from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.content.licence.CODT_BaseBuildLicence import CODT_BaseBuildLicence
 from Products.urban.content.licence.Inspection import Inspection
 from zope.interface import implements
@@ -16,6 +15,7 @@ from Products.urban.config import PROJECTNAME
 from Products.urban.content.licence.GenericLicence import GenericLicence
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban import UrbanMessage as _
+
 
 
 Housing_schema = (
@@ -48,6 +48,20 @@ Housing_schema += Schema(
             schemata="urban_inspection",
             vocabulary=UrbanVocabulary("buildingtype", inUrbanConfig=True),
         ),
+        LinesField(
+            name="buildingPart",
+            widget=MultiSelectionWidget(
+                format="checkbox",
+                label=_("urban_label_buildingPart", default="buildingPart"),
+                i18n_domain="urban",
+            ),
+            multiValued=True,
+            optional=True,
+            schemata="urban_inspection",
+            vocabulary=UrbanVocabulary(
+                "part_of_the_building_concerned", inUrbanConfig=True
+            ),
+        ),
     )
 )
 
@@ -59,7 +73,6 @@ class Housing(Inspection, CODT_BaseBuildLicence):
     schema = Housing_schema
 
     implements(interfaces.IHousing)
-
     def getLastObservationEvent(self):
         return self.getLastEvent(interfaces.IObservationEvent)
 
@@ -75,6 +88,10 @@ class Housing(Inspection, CODT_BaseBuildLicence):
     def displayBuildingType(self):
         """Return a list of selected buildingType items"""
         return self.getValuesForTemplate("buildingType")
+
+    def displayBuildingPart(self):
+        """Return a list of selected building part"""
+        return self.getValuesForTemplate("buildingPart")
 
 
 registerType(Housing, PROJECTNAME)
