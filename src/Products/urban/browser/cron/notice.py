@@ -106,15 +106,17 @@ class ImportFromNoticeView(BrowserView):
         # Change workflow and add deposit event
         transaction.commit()  # Usefull in case of an error
     
-    def update_license(self, license, detailed_notification, event_type):
+    def update_license(self, license, detailed_notification, event_type=None):
+        if not event_type:
+            return
         event_configs = detailed_notification.event_configs
-        event_config_complete = event_configs[event_type]
-        event_type_to_transition = {
-            "dossier-incomplete": "isIncomplete",
-        }
+        event_config = event_configs.get(event_type)
+        if not event_config:
+            return
+        event_type_to_transition = {"dossier-incomplete": "isIncomplete"}
 
         with api.env.adopt_roles(["Manager"]):
-            event = license.createUrbanEvent(event_config_complete)
+            event = license.createUrbanEvent(event_config)
             event_date = DateTime(str(detailed_notification.send_date))
             event.setEventDate(event_date)
             api.content.transition(event, "close")
