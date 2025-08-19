@@ -6,6 +6,11 @@ from Products.Archetypes.atapi import registerType
 from Products.Archetypes.atapi import StringField
 from Products.Archetypes.atapi import LinesField
 from Products.Archetypes.atapi import MultiSelectionWidget
+<<<<<<< HEAD
+=======
+from Products.urban import UrbanMessage as _
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
+>>>>>>> 857ad2c76f7fc8bcd951211f2e9858af3343e2ae
 from Products.urban.content.licence.CODT_BaseBuildLicence import CODT_BaseBuildLicence
 from Products.urban.content.licence.Inspection import Inspection
 from zope.interface import implements
@@ -14,7 +19,10 @@ from Products.urban import interfaces
 from Products.urban.config import PROJECTNAME
 from Products.urban.content.licence.GenericLicence import GenericLicence
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
+<<<<<<< HEAD
 from Products.urban import UrbanMessage as _
+=======
+>>>>>>> 857ad2c76f7fc8bcd951211f2e9858af3343e2ae
 
 
 
@@ -48,7 +56,7 @@ Housing_schema += Schema(
             schemata="urban_inspection",
             vocabulary=UrbanVocabulary("buildingtype", inUrbanConfig=True),
         ),
-        LinesField(
+    LinesField(
             name="buildingPart",
             widget=MultiSelectionWidget(
                 format="checkbox",
@@ -64,6 +72,7 @@ Housing_schema += Schema(
         ),
     )
 )
+
 
 
 class Housing(Inspection, CODT_BaseBuildLicence):
@@ -85,12 +94,17 @@ class Housing(Inspection, CODT_BaseBuildLicence):
             return events[n - 1]
         return None
 
+<<<<<<< HEAD
     def displayBuildingType(self):
         """Return a list of selected buildingType items"""
         return self.getValuesForTemplate("buildingType")
 
     def displayBuildingPart(self):
         """Return a list of selected building part"""
+=======
+    def displayBuildingPart(self):
+        """Return a list of selected buiding part"""
+>>>>>>> 857ad2c76f7fc8bcd951211f2e9858af3343e2ae
         return self.getValuesForTemplate("buildingPart")
 
 
