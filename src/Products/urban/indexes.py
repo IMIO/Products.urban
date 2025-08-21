@@ -28,6 +28,9 @@ from requests.exceptions import RequestException
 from zope.component import queryAdapter
 from zope.interface import Interface
 
+import logging
+
+logger = logging.getLogger("urban")
 
 @indexer(interfaces.IApplicant)
 def applicant_applicantinfoindex(object):
@@ -237,8 +240,12 @@ def genericlicence_decisiondate(licence):
     linked_pm_items = None
     if decision_event:
         try:
-            linked_pm_items = get_ws_meetingitem_infos(decision_event)
+            linked_pm_items = get_ws_meetingitem_infos(decision_event, query_hook=lambda q: q.update({
+                "extra_include": "meeting",
+                "extra_include_meeting": "date",
+            }))
         except RequestException:
+            logger.warn("Could not retrieve linked PloneMeeting items for licence %s" % licence.getPhysicalPath())
             catalog = api.portal.get_tool("portal_catalog")
             brain = catalog(UID=licence.UID())
             if brain and brain[0].getDecisionDate:
@@ -257,12 +264,8 @@ def genericlicence_decisiondate(licence):
                     )
                 return decision_date
         if linked_pm_items:
-            meeting_date = linked_pm_items[0]["meeting_date"]
-            if not (
-                meeting_date.day == meeting_date.month == 1
-                and meeting_date.year == 1950
-            ):
-                return meeting_date
+            if "date" in linked_pm_items[0]["extra_include_meeting"].keys():
+                return linked_pm_items[0]["extra_include_meeting"]["date"]
         return decision_event.getDecisionDate() or decision_event.getEventDate()
 
 
