@@ -50,10 +50,8 @@ from Products.Archetypes.Widget import RichWidget
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
 from Products.urban.content.licence.base import UrbanBase
-from Products.urban.interfaces import IOpinionRequestEvent
 from Products.urban.interfaces import IUrbanEvent
 from Products.urban.utils import setOptionalAttributes
-from Products.urban.utils import get_interface_by_path
 from Products.urban.widget.historizereferencewidget import (
     HistorizeReferenceBrowserWidget,
 )
@@ -1036,17 +1034,6 @@ schema = Schema(
             default_output_type="text/x-html-safe",
         ),
         LinesField(
-            name="municipalDirective",
-            widget=MultiSelect2Widget(
-                size=10,
-                label=_("urban_label_municipalDirective", default="municipalDirective"),
-            ),
-            schemata="urban_location",
-            multiValued=True,
-            vocabulary=UrbanVocabulary("municipal_directive",vocType='UrbanVocabularyTerm', inUrbanConfig=False),
-            default_method="getDefaultValue",
-        ),
-        LinesField(
             name="PRenU",
             widget=MultiSelect2Widget(
                 size=5,
@@ -1488,7 +1475,6 @@ schema = Schema(
             schemata="urban_environment",
             default_output_type="text/x-html-safe",
         ),
-        
     ),
 )
 
@@ -1599,9 +1585,9 @@ class GenericLicence(OrderedBaseFolder, UrbanBase, BrowserDefaultMixin):
         part = len(list) / divider
         remain = len(list) % divider
         for i in range(part):
-            res.append(list[i * divider : (i + 1) * divider])
+            res.append(list[i * divider: (i + 1) * divider])
         if remain > 0:
-            res.append(list[divider * part : divider * part + remain])
+            res.append(list[divider * part: divider * part + remain])
         return tuple(res)
 
     def templateRoadEquipments(self, tup):
@@ -1690,7 +1676,6 @@ class GenericLicence(OrderedBaseFolder, UrbanBase, BrowserDefaultMixin):
             ("bordure_de_centralite", "bordure de centralité"),
         )
         return DisplayList(vocab)
-
 
     security.declarePublic("foldermanagersBaseQuery")
 
@@ -1805,7 +1790,7 @@ class GenericLicence(OrderedBaseFolder, UrbanBase, BrowserDefaultMixin):
         return res
 
     security.declarePublic("get_complementary_delay")
-        
+
     def get_complementary_delay(self):
         complementary_delay = self.getComplementary_delay()
         if not complementary_delay:
@@ -1914,7 +1899,7 @@ class GenericLicence(OrderedBaseFolder, UrbanBase, BrowserDefaultMixin):
 
     def getFirstDeposit(self):
         return self.getFirstEvent(interfaces.IDepositEvent)
-    
+
     def getSecondDeposit(self):
         return self.getSecondEvent(interfaces.IDepositEvent)
 
@@ -1988,7 +1973,7 @@ class GenericLicence(OrderedBaseFolder, UrbanBase, BrowserDefaultMixin):
         events = self.getAllEvents(eventInterface)
         if events:
             return events[0]
-        
+
     def getSecondEvent(self, eventInterface=None):
         events = self.getAllEvents(eventInterface)
         if len(events) > 1:
@@ -2123,9 +2108,7 @@ class GenericLicence(OrderedBaseFolder, UrbanBase, BrowserDefaultMixin):
         return {"review_state": ["enabled", "private"]}
 
 
-
 registerType(GenericLicence, PROJECTNAME)
 # end of class GenericLicence
-
 # code-section module-footer #fill in your manual code here
 # /code-section module-footer
