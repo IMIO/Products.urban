@@ -1,46 +1,38 @@
 # encoding: utf-8
 
+import logging
+
 from Acquisition import aq_parent
 from eea.facetednavigation.interfaces import ICriteria
-from OFS.interfaces import IOrderedContainer
-from Products.urban import UrbanMessage as _
-from Products.urban.config import URBAN_TYPES
-from Products.CMFCore.utils import getToolByName
-from Products.urban.interfaces import IGenericLicence
-from Products.urban.migration.utils import refresh_workflow_permissions
-from Products.urban.setuphandlers import createFolderDefaultValues
-from Products.urban.setuphandlers import createVocabularyFolder
 from imio.schedule.content.object_factories import MacroCreationConditionObject
 from imio.schedule.content.object_factories import MacroEndConditionObject
 from imio.schedule.content.object_factories import MacroFreezeConditionObject
 from imio.schedule.content.object_factories import MacroRecurrenceConditionObject
 from imio.schedule.content.object_factories import MacroStartConditionObject
 from imio.schedule.content.object_factories import MacroThawConditionObject
-from imio.schedule.events.zope_registration import (
-    register_schedule_collection_criterion,
-)
+from imio.schedule.events.zope_registration import register_schedule_collection_criterion
 from imio.schedule.events.zope_registration import register_task_collection_criterion
-from imio.schedule.events.zope_registration import (
-    subscribe_task_configs_for_content_type,
-)
-from imio.schedule.events.zope_registration import (
-    unregister_schedule_collection_criterion,
-)
+from imio.schedule.events.zope_registration import subscribe_task_configs_for_content_type
+from imio.schedule.events.zope_registration import unregister_schedule_collection_criterion
 from imio.schedule.events.zope_registration import unregister_task_collection_criterion
-from imio.schedule.events.zope_registration import (
-    unsubscribe_task_configs_for_content_type,
-)
+from imio.schedule.events.zope_registration import unsubscribe_task_configs_for_content_type
+
+from OFS.interfaces import IOrderedContainer
 from plone import api
 from plone.registry import Record
-from plone.registry.field import Dict
-from plone.registry.field import TextLine
-from plone.registry.field import List
+from plone.registry.field import Dict, List, TextLine
 from plone.registry.interfaces import IRegistry
 from plone.restapi.interfaces import ISerializeToJson
-from zope.component import getMultiAdapter
-from zope.component import getUtility
+from Products.CMFCore.utils import getToolByName
 
-import logging
+from Products.urban import UrbanMessage as _
+from Products.urban.config import URBAN_TYPES
+from Products.urban.interfaces import IGenericLicence
+from Products.urban.migration.utils import refresh_workflow_permissions
+from Products.urban.setuphandlers import createFolderDefaultValues
+from Products.urban.setuphandlers import  createVocabularyFolder
+
+from zope.component import getMultiAdapter, getUtility
 from zope.i18n import translate
 
 
