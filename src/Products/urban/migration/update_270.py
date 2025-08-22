@@ -41,6 +41,7 @@ from zope.component import getMultiAdapter
 from zope.component import getUtility
 
 import logging
+from zope.i18n import translate
 
 
 def rename_patrimony_certificate(context):
@@ -573,3 +574,53 @@ def add_additional_delay_option(context):
         
 
     logger.info("upgrade step done!")
+    
+def add_municipal_directive_vocabulary(context):
+    logger = logging.getLogger("urban: Add municipal directive vocabulary")
+    logger.info("starting migration steps")
+
+    container = api.portal.get_tool("portal_urban")
+    vocabulary_name = "municipal_directive"
+
+    municipal_directive_vocabulary_config = [
+       
+        {
+        "id": "guiding-principles",
+        "title": translate(_("chapter_1_guiding_principles"), context=context.REQUEST)
+    },
+    {
+        "id": "density",
+        "title": translate(_("chapter_2_density"), context=context.REQUEST)
+    },
+    {
+        "id": "surface-area",
+        "title": translate(_("chapter_3_surface_area"), context=context.REQUEST)
+    },
+    {
+        "id": "parking",
+        "title": translate(_("chapter_4_parking"), context=context.REQUEST)
+    },
+    {
+        "id": "stormwater-management",
+        "title": translate(_("chapter_5_stormwater_management"), context=context.REQUEST)
+    },
+    {
+        "id": "service-premises",
+        "title": translate(_("chapter_6_service_premises"), context=context.REQUEST)
+    },
+    {
+        "id": "collective-housing",
+        "title": translate(_("chapter_7_collective_housing"), context=context.REQUEST)
+    }
+        ]
+    municipal_directive_config = createVocabularyFolder(
+        container, vocabulary_name, context, "UrbanVocabularyTerm"
+    )
+
+    createFolderDefaultValues(
+        municipal_directive_config,
+        municipal_directive_vocabulary_config,
+        "UrbanVocabularyTerm"
+    )
+
+    logger.info("upgrade done!")
