@@ -582,37 +582,15 @@ def add_municipal_directive_vocabulary(context):
     container = api.portal.get_tool("portal_urban")
     vocabulary_name = "municipal_directive"
 
-    municipal_directive_vocabulary_config = [ 
-    {
-
-        "id": "chapter_1",
-        "title": translate(_("chapter_1"), context=context.REQUEST)
-    },
-    {
-        "id": "chapter_2",
-        "title": translate(_("chapter_2"), context=context.REQUEST)
-    },
-    {
-        "id": "chapter_3",
-        "title": translate(_("chapter_3"), context=context.REQUEST)
-    },
-    {
-        "id": "chapter_4",
-        "title": translate(_("chapter_4"), context=context.REQUEST)
-    },
-    {
-        "id": "chapter_5",
-        "title": translate(_("chapter_5"), context=context.REQUEST)
-    },
-    {
-        "id": "chapter_6",
-        "title": translate(_("chapter_6"), context=context.REQUEST)
-    },
-    {
-        "id": "chapter_7",
-        "title": translate(_("chapter_7"), context=context.REQUEST)
-    }
-        ]
+    municipal_directive_vocabulary_config = [
+        {"id": "chapter_1", "title": translate(_("chapter_1"), context=context.REQUEST)},
+        {"id": "chapter_2", "title": translate(_("chapter_2"), context=context.REQUEST)},
+        {"id": "chapter_3", "title": translate(_("chapter_3"), context=context.REQUEST)},
+        {"id": "chapter_4", "title": translate(_("chapter_4"), context=context.REQUEST)},
+        {"id": "chapter_5", "title": translate(_("chapter_5"), context=context.REQUEST)},
+        {"id": "chapter_6", "title": translate(_("chapter_6"), context=context.REQUEST)},
+        {"id": "chapter_7", "title": translate(_("chapter_7"), context=context.REQUEST)},
+    ]
     municipal_directive_config = createVocabularyFolder(
         container, vocabulary_name, context, "UrbanVocabularyTerm"
     )
@@ -620,7 +598,7 @@ def add_municipal_directive_vocabulary(context):
     createFolderDefaultValues(
         municipal_directive_config,
         municipal_directive_vocabulary_config,
-        "UrbanVocabularyTerm"
+        "UrbanVocabularyTerm",
     )
 
     logger.info("upgrade done!")
