@@ -574,7 +574,7 @@ def add_additional_delay_option(context):
         
 
     logger.info("upgrade step done!")
-    
+
 def add_municipal_directive_vocabulary(context):
     logger = logging.getLogger("urban: Add municipal directive vocabulary")
     logger.info("starting migration steps")
@@ -591,6 +591,7 @@ def add_municipal_directive_vocabulary(context):
         {"id": "chapter_6", "title": translate(_("chapter_6"), context=context.REQUEST)},
         {"id": "chapter_7", "title": translate(_("chapter_7"), context=context.REQUEST)},
     ]
+
     municipal_directive_config = createVocabularyFolder(
         container, vocabulary_name, context, "UrbanVocabularyTerm"
     )
@@ -600,5 +601,4 @@ def add_municipal_directive_vocabulary(context):
         municipal_directive_vocabulary_config,
         "UrbanVocabularyTerm",
     )
-
     logger.info("upgrade done!")
