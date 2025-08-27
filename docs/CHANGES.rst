@@ -8,6 +8,20 @@ Changelog
 
 .. towncrier release notes start
 
+2.8.0a3 (2025-08-27)
+--------------------
+
+New features:
+
+
+- Added buildingType attribute to the housing procedure.
+  [WBoudabous] (URBBDC-3221)
+- Added buildingPart attribute to the housing procedure.
+  [WBoudabous] (URBBDC-3222)
+- Updated translations for workflow states in the housing procedure.
+  [WBoudabous] (URBBDC-3229)
+
+
 2.8.0a2 (2025-08-07)
 --------------------
 
