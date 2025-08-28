@@ -40,7 +40,7 @@ schema = Schema(
             ),
             multiValued=0,
             relationship="linkedInquiry",
-            allowed_types=("Inquiry", "BuildLicence"),
+            allowed_types=("RequestForOpinion", "BuildLicence"),
             write_permission="Manage portal",
         ),
     ),

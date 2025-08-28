@@ -183,6 +183,9 @@ msgstr "Destinataire"
 msgid "RecipientCadastre"
 msgstr "Destinataire cadastre"
 
+msgid "RequestForOpinion"
+msgstr "Sollicitation d'avis"
+
 msgid "RoadDecree"
 msgstr "Décret Voirie"
 

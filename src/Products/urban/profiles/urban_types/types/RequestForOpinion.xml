@@ -1,45 +1,30 @@
 <?xml version="1.0"?>
-<object name="EnvironmentLicence"
+<object name="RequestForOpinion"
         meta_type="Factory-based Type Information with dynamic views"
         xmlns:i18n="http://xml.zope.org/namespaces/i18n"
         i18n:domain="plone">
 
- <property name="title" i18n:translate="">EnvironmentLicence</property>
+ <property name="title" i18n:translate="">RequestForOpinion</property>
  <property name="description" i18n:translate=""></property>
- <property name="icon_expr">string:${portal_url}/EnvironmentLicence.png</property>
- <property name="content_meta_type">EnvironmentLicence</property>
+ <property name="icon_expr">string:${portal_url}/RequestForOpinion.png</property>
+ <property name="content_meta_type">RequestForOpinion</property>
  <property name="product">urban</property>
- <property name="factory">addEnvironmentLicence</property>
- <property name="immediate_view">inquiryview</property>
+ <property name="factory">addRequestForOpinion</property>
+ <property name="immediate_view">requestforopinionview</property>
  <property name="global_allow">False</property>
- <property name="filter_content_types">True</property>
+ <property name="filter_content_types">False</property>
  <property name="allowed_content_types">
-   <element value="Corporation"/>
-   <element value="Inquiry"/>
-   <element value="RequestForOpinion"/>
-   <element value="UrbanEventInquiry"/>
-   <element value="UrbanEventOpinionRequest"/>
-   <element value="Applicant"/>
-   <element value="Couple"/>
-   <element value="UrbanEvent"/>
-   <element value="File"/>
-   <element value="Parcel"/>
-   <element value="task"/>
  </property>
  <property name="allow_discussion">False</property>
- <property name="default_view">inquiryview</property>
+ <property name="default_view">requestforopinionview</property>
  <property name="view_methods">
-  <element value="folder_summary_view"/>
-  <element value="folder_tabular_view"/>
-  <element value="atct_album_view"/>
-  <element value="folder_listing"/>
-  <element value="inquiryview"/>
+  <element value="requestforopinionview"/>
  </property>
  <property name="default_view_fallback">False</property>
  <alias from="(Default)" to="(dynamic view)"/>
+ <alias from="index.html" to="(dynamic view)"/>
  <alias from="view" to="(selected layout)"/>
  <alias from="edit" to="base_edit"/>
- <alias from="sharing" to="@@sharing"/>
  <action title="View"
          action_id="view"
          category="object"

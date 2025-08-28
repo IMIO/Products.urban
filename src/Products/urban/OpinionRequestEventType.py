@@ -185,13 +185,13 @@ class OpinionRequestEventType(
 
     security.declarePublic("mayAddOpinionRequestEvent")
 
-    def mayAddOpinionRequestEvent(self, inquiry):
+    def mayAddOpinionRequestEvent(self, request):
         """
         This is used as TALExpression for the UrbanEventOpinionRequest
-        We may add an OpinionRequest if we asked one in an inquiry on the licence
-        We may add another if another inquiry defined on the licence ask for it and so on
+        We may add an OpinionRequest if we asked one in an request on the licence
+        We may add another if another request defined on the licence ask for it and so on
         """
-        may_add = inquiry.mayAddOpinionRequestEvent(self.id)
+        may_add = request.mayAddOpinionRequestEvent(self.id)
         return may_add
 
     security.declarePublic("listConcernedOutsideDirections")

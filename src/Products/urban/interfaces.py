@@ -173,6 +173,10 @@ class ICODT_Inquiry(IInquiry):
     """Marker interface for .Inquiry.Inquiry"""
 
 
+class IRequestForOpinion(Interface):
+    """Marker interface for .Inquiry.Inquiry"""
+
+
 class ICODT_UniqueLicenceInquiry(IInquiry):
     """Marker interface for CODT_uniqueLicence inquiry"""
 

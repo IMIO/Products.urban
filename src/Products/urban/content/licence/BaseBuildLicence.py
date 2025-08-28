@@ -21,6 +21,7 @@ from zope.i18n import translate
 from Products.urban import interfaces
 from Products.urban.content.Inquiry import Inquiry
 from Products.urban.content.licence.GenericLicence import GenericLicence
+from Products.urban.content.RequestForOpinion import RequestForOpinion
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from plone import api
 
@@ -629,6 +630,7 @@ setOptionalAttributes(schema, optional_fields)
 BaseBuildLicence_schema = (
     BaseFolderSchema.copy()
     + getattr(Inquiry, "schema", Schema(())).copy()
+    + getattr(RequestForOpinion, "schema", Schema(())).copy()
     + getattr(GenericLicence, "schema", Schema(())).copy()
     + schema.copy()
 )
@@ -640,7 +642,7 @@ setSchemataForInquiry(BaseBuildLicence_schema)
 ##/code-section after-schema
 
 
-class BaseBuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin):
+class BaseBuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin, RequestForOpinion):
     """ """
 
     security = ClassSecurityInfo()

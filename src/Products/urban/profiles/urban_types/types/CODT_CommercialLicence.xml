@@ -23,6 +23,7 @@
    <element value="Couple"/>
    <element value="Corporation"/>
    <element value="CODT_Inquiry"/>
+   <element value="RequestForOpinion"/>
    <element value="UrbanEvent"/>
    <element value="File"/>
    <element value="Parcel"/>

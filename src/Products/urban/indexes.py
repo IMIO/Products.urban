@@ -375,11 +375,11 @@ def licence_covid_and_opinion_requests(licence):
     """
     indexes = licence.getCovid() and ["COVID"] or []
     if interfaces.IInquiry.providedBy(licence):
-        inquiries = licence._get_inquiry_objs(all_=True)
+        opinions_requests = licence.getAllRequestForOpinion()
         opinions_id = set()
-        for inquiry in inquiries:
-            opinions_id.update(set(inquiry.getSolicitOpinionsTo()))
-            opinions_id.update(set(inquiry.getSolicitOpinionsToOptional()))
+        for request in opinions_requests:
+            opinions_id.update(set(request.getSolicitOpinionsTo()))
+            opinions_id.update(set(request.getSolicitOpinionsToOptional()))
 
         vocabulary = licence.getField("solicitOpinionsTo").vocabulary
         opinions = [

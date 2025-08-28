@@ -962,7 +962,7 @@ class UrbanBase(object):
         events = [
             evt
             for evt in all_events
-            if evt.getLinkedInquiry() == self._get_inquiry_objs(all_=True)[-1]
+            if evt.getLinkedInquiry() == self.getLastRequestForOpinion()
         ]
         return events
 

@@ -616,10 +616,9 @@ class UrbanDocGenerationLicenceHelperView(UrbanDocGenerationHelperView):
 
     def _get_last_opinions(self, field_name):
         licence = self.context
-        inquiries = licence._get_inquiry_objs(all_=True)
-        if inquiries:
-            last_inquiry = inquiries[-1]
-            opinions = licence.getValuesForTemplate(field_name, obj=last_inquiry)
+        last_opinions = licence.getLastRequestForOpinion()
+        if last_opinions:
+            opinions = licence.getValuesForTemplate(field_name, obj=last_opinions)
             return opinions
         return []
 

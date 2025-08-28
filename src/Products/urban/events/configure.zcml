@@ -5,7 +5,19 @@
 
   <subscriber for="..interfaces.IUrbanEventOpinionRequest
                    zope.lifecycleevent.interfaces.IObjectCreatedEvent"
-              handler=".opinionRequestEvents.setDefaultLinkedInquiry" />
+              handler=".opinionRequest.setDefaultLinkedInquiry" />
+
+  <subscriber for="..interfaces.IRequestForOpinion
+                   zope.lifecycleevent.interfaces.IObjectCreatedEvent"
+              handler=".opinionRequest.set_opinion_round" />
+
+  <subscriber for="..interfaces.IRequestForOpinion
+                   zope.container.interfaces.IObjectRemovedEvent"
+              handler=".opinionRequest.afterDelete" />
+
+  <subscriber for="..interfaces.IRequestForOpinion
+               zope.lifecycleevent.interfaces.IObjectCreatedEvent"
+               handler=".opinionRequest.setGeneratedTitle" />
 
   <subscriber for="..interfaces.IRecipientCadastre
                    zope.lifecycleevent.interfaces.IObjectRemovedEvent"

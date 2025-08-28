@@ -20,6 +20,7 @@ from zope.interface import implements
 from Products.urban import interfaces
 from Products.urban.content.licence.GenericLicence import GenericLicence
 from Products.urban.content.Inquiry import Inquiry
+from Products.urban.content.RequestForOpinion import RequestForOpinion
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 
@@ -454,6 +455,7 @@ MiscDemand_schema = (
     BaseFolderSchema.copy()
     + getattr(GenericLicence, "schema", Schema(())).copy()
     + getattr(Inquiry, "schema", Schema(())).copy()
+    + getattr(RequestForOpinion, "schema", Schema(())).copy()
     + schema.copy()
 )
 
@@ -463,7 +465,7 @@ setSchemataForInquiry(MiscDemand_schema)
 ##/code-section after-schema
 
 
-class MiscDemand(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
+class MiscDemand(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin, RequestForOpinion):
     """ """
 
     security = ClassSecurityInfo()

@@ -25,6 +25,7 @@
    <element value="UrbanEventCollege"/>
    <element value="UrbanEventNotificationCollege"/>
    <element value="CODT_Inquiry"/>
+   <element value="RequestForOpinion"/>
    <element value="File"/>
    <element value="Task"/>
    <element value="ConfigTest"/>
