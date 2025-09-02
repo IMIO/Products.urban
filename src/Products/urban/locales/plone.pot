@@ -201,6 +201,30 @@ msgstr ""
 msgid "resume_thaw"
 msgstr ""
 
+msgid "Tenant"
+msgstr ""
+
+msgid "Corporation"
+msgstr ""
+
+msgid "CorporationPlaintiff"
+msgstr ""
+
+msgid "CorporationProprietary"
+msgstr ""
+
+msgid "CorporationTenant"
+msgstr ""
+
+msgid "Couple"
+msgstr ""
+
+msgid "Plaintiff"
+msgstr ""
+
+msgid "ProprietaryCouple"
+msgstr ""
+
 #status messages...
 msgid "db_connection_successfull"
 msgstr ""
@@ -269,6 +293,9 @@ msgstr ""
 msgid "draft"
 msgstr ""
 
+msgid "ended"
+msgstr ""
+
 #transitions
 msgid "retire"
 msgstr ""
@@ -318,6 +345,20 @@ msgstr ""
 msgid "administrative_answer"
 msgstr ""
 
+msgid "notify"
+msgstr ""
+
+msgid "propose"
+msgstr ""
+
+msgid "send_to_prosecutor"
+msgstr ""
+
+msgid "follow_without_prosecutor"
+msgstr ""
+
+msgid "follow_with_prosecutor"
+msgstr ""
 
 #control panel
 msgid "UrbanTool"
