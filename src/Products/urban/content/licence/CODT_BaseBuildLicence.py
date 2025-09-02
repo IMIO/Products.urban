@@ -14,6 +14,7 @@ __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEUL
 __docformat__ = "plaintext"
 
 from AccessControl import ClassSecurityInfo
+from Products.urban.widget.select2widget import MultiSelect2Widget
 from Products.Archetypes.atapi import *
 from plone import api
 from zope.component import getMultiAdapter
@@ -200,7 +201,7 @@ schema = Schema(
         ),
         LinesField(
             name="SCT",
-            widget=MultiSelectionWidget(
+            widget=MultiSelect2Widget(
                 size=15,
                 label=_("urban_label_SCT", default="Sct"),
             ),
@@ -222,7 +223,7 @@ schema = Schema(
         ),
         LinesField(
             name="SDC",
-            widget=MultiSelectionWidget(
+            widget=MultiSelect2Widget(
                 size=15,
                 label=_("urban_label_SDC", default="Sdc"),
             ),
@@ -244,7 +245,7 @@ schema = Schema(
         ),
         LinesField(
             name="township_guide",
-            widget=MultiSelectionWidget(
+            widget=MultiSelect2Widget(
                 size=10,
                 label=_("urban_label_township_guide", default="Township_guide"),
             ),
@@ -269,7 +270,7 @@ schema = Schema(
         ),
         LinesField(
             name="regional_guide",
-            widget=MultiSelectionWidget(
+            widget=MultiSelect2Widget(
                 label=_("urban_label_regional_guide", default="Regional_guide"),
             ),
             schemata="urban_location",
@@ -365,7 +366,7 @@ schema = Schema(
             allowable_content_types=("text/html",),
             schemata="urban_patrimony",
             default_method="getDefaultText",
-            default_output_type="text/html",
+            default_output_type="text/x-html-safe",
             accessor="PatrimonyAnalysis",
         ),
         BooleanField(
@@ -428,12 +429,12 @@ schema = Schema(
             allowable_content_types=("text/html",),
             schemata="urban_patrimony",
             default_method="getDefaultText",
-            default_output_type="text/html",
+            default_output_type="text/x-html-safe",
             accessor="PatrimonyObservation",
         ),
         LinesField(
             name="classification_order_scope",
-            widget=MultiSelectionWidget(
+            widget=MultiSelect2Widget(
                 format="checkbox",
                 label=_(
                     "urban_label_classification_order_scope",
@@ -493,7 +494,7 @@ schema = Schema(
         ),
         LinesField(
             name="requirementFromFDModifiedBp",
-            widget=MultiSelectionWidget(
+            widget=MultiSelect2Widget(
                 format="checkbox",
                 label=_(
                     "urban_label_requirementFromFDModifiedBp",

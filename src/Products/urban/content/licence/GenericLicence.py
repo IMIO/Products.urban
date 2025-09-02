@@ -17,7 +17,8 @@ from AccessControl import ClassSecurityInfo
 from zope.annotation import IAnnotations
 from datetime import datetime
 
-from collective.archetypes.select2.select2widget import MultiSelect2Widget
+from Products.urban.widget.select2widget import MultiSelect2Widget
+from Products.MasterSelectWidget.MasterMultiSelectWidget import MasterMultiSelectWidget
 from collective.faceted.task.interfaces import IFacetedTaskContainer
 
 from DateTime import DateTime
@@ -269,7 +270,7 @@ schema = Schema(
         ),
         LinesField(
             name="missingParts",
-            widget=MultiSelectionWidget(
+            widget=MultiSelect2Widget(
                 format="checkbox",
                 label=_("urban_label_missingParts", default="Missingparts"),
             ),
@@ -300,12 +301,12 @@ schema = Schema(
             allowable_content_types=("text/html",),
             schemata="urban_description",
             default_method="getDefaultText",
-            default_output_type="text/html",
+            default_output_type="text/x-html-safe",
             accessor="Description",
         ),
         LinesField(
             name="roadMissingParts",
-            widget=MultiSelectionWidget(
+            widget=MultiSelect2Widget(
                 format="checkbox",
                 label=_("urban_label_roadMissingParts", default="Roadmissingparts"),
             ),
@@ -325,12 +326,12 @@ schema = Schema(
             ),
             schemata="urban_road",
             default_method="getDefaultText",
-            default_content_type="text/plain",
-            default_output_type="text/html",
+            default_content_type="text/html",
+            default_output_type="text/x-html-safe",
         ),
         LinesField(
             name="roadType",
-            widget=MultiSelectionWidget(
+            widget=MultiSelect2Widget(
                 format="checkbox",
                 label=_("urban_label_roadType", default="Roadtype"),
             ),
@@ -343,7 +344,7 @@ schema = Schema(
         ),
         LinesField(
             name="roadAnalysis",
-            widget=MultiSelectionWidget(
+            widget=MultiSelect2Widget(
                 format="checkbox",
                 label=_("urban_label_roadAnalysis", default="Roadanalysis"),
             ),
@@ -413,11 +414,11 @@ schema = Schema(
             allowable_content_types=("text/html",),
             schemata="urban_road",
             default_method="getDefaultText",
-            default_output_type="text/html",
+            default_output_type="text/x-html-safe",
         ),
         LinesField(
             name="pash",
-            widget=MultiSelectionWidget(
+            widget=MultiSelect2Widget(
                 format="checkbox",
                 label=_("urban_label_pash", default="Pash"),
             ),
@@ -435,11 +436,11 @@ schema = Schema(
             allowable_content_types=("text/html",),
             schemata="urban_road",
             default_method="getDefaultText",
-            default_output_type="text/html",
+            default_output_type="text/x-html-safe",
         ),
         LinesField(
             name="catchmentArea",
-            widget=MultiSelectionWidget(
+            widget=MultiSelect2Widget(
                 format="checkbox",
                 label=_("urban_label_catchmentArea", default="Catchmentarea"),
             ),
@@ -462,7 +463,7 @@ schema = Schema(
         ),
         LinesField(
             name="karstConstraints",
-            widget=MultiSelectionWidget(
+            widget=MultiSelect2Widget(
                 format="checkbox",
                 label=_("urban_label_karstConstraints", default="Karstconstraints"),
             ),
@@ -487,7 +488,7 @@ schema = Schema(
         ),
         LinesField(
             name="concentratedRunoffSRisk",
-            widget=MultiSelectionWidget(
+            widget=MultiSelect2Widget(
                 format="checkbox",
                 label=_(
                     "urban_label_concentratedRunoffSRisk",
@@ -517,7 +518,7 @@ schema = Schema(
         ),
         LinesField(
             name="sevesoSite",
-            widget=MultiSelectionWidget(
+            widget=MultiSelect2Widget(
                 format="checkbox",
                 label=_("urban_label_sevesoSite", default="sevesosite"),
             ),
@@ -528,7 +529,7 @@ schema = Schema(
         ),
         LinesField(
             name="pipelines",
-            widget=MultiSelectionWidget(
+            widget=MultiSelect2Widget(
                 format="checkbox",
                 label=_("urban_label_pipelines", default="pipelines"),
             ),
@@ -550,7 +551,7 @@ schema = Schema(
         ),
         LinesField(
             name="natura_2000",
-            widget=MultiSelectionWidget(
+            widget=MultiSelect2Widget(
                 format="checkbox",
                 label=_("urban_label_natura_2000", default="natura_2000"),
             ),
@@ -561,10 +562,11 @@ schema = Schema(
         ),
         LinesField(
             name="floodingLevel",
-            widget=MultiSelectionWidget(
-                label=_("urban_label_floodingLevel", default="Floodinglevel"),
+            widget=MultiSelect2Widget(
                 format="checkbox",
+                label=_("urban_label_floodingLevel", default="Floodinglevel"),
             ),
+            multiValued=True,
             enforceVocabulary=True,
             schemata="urban_road",
             vocabulary="listFloodingLevels",
@@ -594,7 +596,7 @@ schema = Schema(
             default_content_type="text/html",
             default_method="getDefaultText",
             schemata="urban_road",
-            default_output_type="text/html",
+            default_output_type="text/x-html-safe",
         ),
         TextField(
             name="technicalRemarks",
@@ -605,11 +607,11 @@ schema = Schema(
             default_content_type="text/html",
             default_method="getDefaultText",
             schemata="urban_road",
-            default_output_type="text/html",
+            default_output_type="text/x-html-safe",
         ),
         LinesField(
             name="groundStateStatus",
-            widget=MultiSelectionWidget(
+            widget=MultiSelect2Widget(
                 format="checkbox",
                 label=_("urban_label_groundStateStatus", default="Groundstatestatus"),
             ),
@@ -633,7 +635,7 @@ schema = Schema(
         ),
         LinesField(
             name="locationMissingParts",
-            widget=MultiSelectionWidget(
+            widget=MultiSelect2Widget(
                 format="checkbox",
                 label=_(
                     "urban_label_locationMissingParts", default="Locationmissingparts"
@@ -670,7 +672,7 @@ schema = Schema(
         ),
         LinesField(
             name="folderZone",
-            widget=MultiSelectionWidget(
+            widget=MultiSelect2Widget(
                 size=10,
                 label=_("urban_label_folderZone", default="Folderzone"),
             ),
@@ -717,11 +719,11 @@ schema = Schema(
             default_content_type="text/html",
             default_method="getDefaultText",
             schemata="urban_location",
-            default_output_type="text/html",
+            default_output_type="text/x-html-safe",
         ),
         LinesField(
             name="pcaZone",
-            widget=MultiSelectionWidget(
+            widget=MultiSelect2Widget(
                 size=10,
                 label=_("urban_label_pcaZone", default="Pcazone"),
             ),
@@ -755,13 +757,14 @@ schema = Schema(
         ),
         LinesField(
             name="locationFloodingLevel",
-            widget=MultiSelectionWidget(
+            widget=MultiSelect2Widget(
                 label=_(
                     "urban_label_locationFloodingLevel", default="Locationfloodinglevel"
                 ),
                 format="checkbox",
             ),
             enforceVocabulary=True,
+            multiValued=True,
             schemata="urban_location",
             vocabulary="listFloodingLevels",
         ),
@@ -784,7 +787,7 @@ schema = Schema(
             default_content_type="text/html",
             default_method="getDefaultText",
             schemata="urban_location",
-            default_output_type="text/html",
+            default_output_type="text/x-html-safe",
         ),
         BooleanField(
             name="preemption",
@@ -803,7 +806,7 @@ schema = Schema(
             default_content_type="text/html",
             default_method="getDefaultText",
             schemata="urban_location",
-            default_output_type="text/html",
+            default_output_type="text/x-html-safe",
         ),
         BooleanField(
             name="SAR",
@@ -822,7 +825,7 @@ schema = Schema(
             default_content_type="text/html",
             default_method="getDefaultText",
             schemata="urban_location",
-            default_output_type="text/html",
+            default_output_type="text/x-html-safe",
         ),
         BooleanField(
             name="enoughRoadEquipment",
@@ -846,7 +849,7 @@ schema = Schema(
             default_content_type="text/html",
             default_method="getDefaultText",
             schemata="urban_location",
-            default_output_type="text/html",
+            default_output_type="text/x-html-safe",
         ),
         TextField(
             name="locationTechnicalRemarks",
@@ -860,11 +863,11 @@ schema = Schema(
             default_content_type="text/html",
             default_method="getDefaultText",
             schemata="urban_analysis",
-            default_output_type="text/html",
+            default_output_type="text/x-html-safe",
         ),
         LinesField(
             name="solicitRoadOpinionsTo",
-            widget=MultiSelectionWidget(
+            widget=MultiSelect2Widget(
                 format="checkbox",
                 label=_(
                     "urban_label_solicitRoadOpinionsTo", default="Solicitroadopinionsto"
@@ -906,7 +909,7 @@ schema = Schema(
         ),
         LinesField(
             name="SSC",
-            widget=MultiSelectionWidget(
+            widget=MultiSelect2Widget(
                 size=15,
                 label=_("urban_label_SSC", default="Ssc"),
             ),
@@ -928,7 +931,7 @@ schema = Schema(
         ),
         LinesField(
             name="RCU",
-            widget=MultiSelectionWidget(
+            widget=MultiSelect2Widget(
                 size=10,
                 label=_("urban_label_RCU", default="Rcu"),
             ),
@@ -950,7 +953,7 @@ schema = Schema(
         ),
         LinesField(
             name="PRenU",
-            widget=MultiSelectionWidget(
+            widget=MultiSelect2Widget(
                 size=5,
                 label=_("urban_label_PRenU", default="Prenu"),
             ),
@@ -972,7 +975,7 @@ schema = Schema(
         ),
         LinesField(
             name="PRevU",
-            widget=MultiSelectionWidget(
+            widget=MultiSelect2Widget(
                 size=5,
                 label=_("urban_label_PRevU", default="Prevu"),
             ),
@@ -994,7 +997,7 @@ schema = Schema(
         ),
         LinesField(
             name="reparcelling",
-            widget=MultiSelectionWidget(
+            widget=MultiSelect2Widget(
                 size=5,
                 label=_("urban_label_reparcelling", default="Prevu"),
             ),
@@ -1040,7 +1043,7 @@ schema = Schema(
         ),
         LinesField(
             name="airportNoiseZone",
-            widget=MultiSelectionWidget(
+            widget=MultiSelect2Widget(
                 format="checkbox",
                 label=_("urban_label_airportNoiseZone", default="Airportnoisezone"),
             ),
@@ -1065,7 +1068,7 @@ schema = Schema(
         ),
         LinesField(
             name="solicitLocationOpinionsTo",
-            widget=MultiSelectionWidget(
+            widget=MultiSelect2Widget(
                 format="checkbox",
                 label=_(
                     "urban_label_solicitLocationOpinionsTo",
@@ -1146,7 +1149,7 @@ schema = Schema(
         ),
         LinesField(
             name="noteworthyTrees",
-            widget=MultiSelectionWidget(
+            widget=MultiSelect2Widget(
                 format="checkbox",
                 label=_("urban_label_noteworthyTrees", default="Noteworthytrees"),
             ),
@@ -1720,6 +1723,7 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
         if text_format is True:
             return translate(_("${nbr} days", mapping={"nbr": delay}), context=request)
         return delay
+
 
 registerType(GenericLicence, PROJECTNAME)
 # end of class GenericLicence

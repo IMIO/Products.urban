@@ -40,6 +40,7 @@ PreliminaryNotice_schema = (
 )
 
 ##code-section after-schema #fill in your manual code here
+PreliminaryNotice_schema.delField("referenceDGATLP")
 ##/code-section after-schema
 
 

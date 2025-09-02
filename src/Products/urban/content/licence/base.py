@@ -22,6 +22,7 @@ from Products.urban.interfaces import IWorklocationSignaletic
 from Products.urban.interfaces import IUrbanEvent
 from Products.urban.utils import getCurrentFolderManager as currentFolderManager
 from Products.urban.utils import removeItems
+from Products.urban.utils import convert_to_utf8
 from plone import api
 from zope.component import queryAdapter
 from zope.component import getUtility

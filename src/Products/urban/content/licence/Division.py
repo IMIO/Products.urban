@@ -143,6 +143,15 @@ class Division(BaseFolder, GenericLicence, BrowserDefaultMixin):
     def getLastTheLicence(self):
         return self.getLastEvent(interfaces.ITheLicenceEvent)
 
+    def list_patrimony_types(self):
+        """ """
+        vocabulary = (
+            ("none", "aucune incidence"),
+            ("patrimonial", "incidence patrimoniale"),
+            ("classified", "bien classé"),
+        )
+        return DisplayList(vocabulary)
+
 
 registerType(Division, PROJECTNAME)
 # end of class Division

@@ -14,8 +14,10 @@ __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEUL
 __docformat__ = "plaintext"
 
 from AccessControl import ClassSecurityInfo
+from Products.urban.widget.select2widget import MultiSelect2Widget
 from Products.Archetypes.atapi import *
 from zope.interface import implements
+from zope.i18n import translate
 from Products.urban import interfaces
 from Products.urban.content.Inquiry import Inquiry
 from Products.urban.content.licence.GenericLicence import GenericLicence
@@ -160,7 +162,7 @@ schema = Schema(
     (
         LinesField(
             name="workType",
-            widget=MultiSelectionWidget(
+            widget=MultiSelect2Widget(
                 label=_("urban_label_workType", default="Worktype"),
             ),
             schemata="urban_description",
@@ -337,7 +339,7 @@ schema = Schema(
         ),
         StringField(
             name="roadAdaptation",
-            widget=MultiSelectionWidget(
+            widget=MultiSelect2Widget(
                 format="checkbox",
                 label=_("urban_label_roadAdaptation", default="Roadadaptation"),
             ),
@@ -523,8 +525,8 @@ schema = Schema(
             ),
             schemata="urban_analysis",
             default_method="getDefaultText",
-            default_content_type="text/plain",
-            default_output_type="text/html",
+            default_content_type="text/html",
+            default_output_type="text/x-html-safe",
         ),
         BooleanField(
             name="water",
