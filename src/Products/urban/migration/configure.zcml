@@ -5,6 +5,7 @@
     i18n_domain="urban">
 
   <include file="upgrades.zcml" />
+  <include file="upgrades_notice.zcml" />
   <include package=".to_DX" />
 
   <browser:page

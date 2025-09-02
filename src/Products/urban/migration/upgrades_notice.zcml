@@ -1,0 +1,22 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:gs="http://namespaces.zope.org/genericsetup"
+    i18n_domain="urban">
+
+    <gs:upgradeStep
+        title="Add configuration for notice settings"
+        description="Initialize registry for notice settings"
+        source="*"
+        destination="2900"
+        handler=".update_290.initialize_notice_settings"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Add event config types for notice"
+        description="Add event config types for notice"
+        source="2900"
+        destination="2901"
+        handler=".update_290.add_event_config_types_notice"
+        profile="Products.urban:default" />
+
+</configure>
