@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '2.5.5.dev0'
+version = '2.6.21'
 
 setup(name='Products.urban',
       version=version,
@@ -42,6 +42,7 @@ setup(name='Products.urban',
           'collective.delaycalculator',
           'collective.documentgenerator>=3.20',
           'collective.externaleditor',
+          'collective.exportimport',
           'collective.faceted.datewidget',
           'collective.fingerpointing',
           'collective.iconifieddocumentactions',

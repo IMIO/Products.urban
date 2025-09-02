@@ -449,6 +449,7 @@
         source="1127"
         destination="1128"
         handler=".update_250.add_new_vocabulary_for_zoning_field"
+        profile="Products.urban:default" />
 
     <gs:upgradeStep
         title="Update Collection Column"
@@ -465,5 +466,45 @@
         destination="1119"
         handler=".update_250.update_env_licences_schedule"
         profile="Products.urban:default" /-->
+
+    <gs:upgradeStep
+        title="Update faceted criterion to hide collection widget category title"
+        description="Update faceted criterion to hide collection widget category title"
+        source="1129"
+        destination="1130"
+        handler=".update_250.update_faceted_collection_widget"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Add Couple to Preliminary Notice"
+        description="Add Couple to Preliminary Notice"
+        source="1130"
+        destination="1131"
+        handler=".update_260.add_couple_to_preliminary_notice"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Remove generation link viewlet"
+        description="Remove generation link viewlet that are not longer usefull"
+        source="1131"
+        destination="1132"
+        handler=".update_260.remove_generation_link_viewlet"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Fix opinion schedule column"
+        description="Fix opinion schedule column"
+        source="1132"
+        destination="1133"
+        handler=".update_260.fix_opinion_schedule_column"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Fix opinion workflow"
+        description="Fix opinion workflow"
+        source="1133"
+        destination="1134"
+        handler=".update_260.fix_opinion_workflow"
+        profile="Products.urban:default" />
 
 </configure>

@@ -39,12 +39,12 @@ class UrbanDefaultFieldSerializer(DefaultFieldSerializer):
                     "Products.urban.interfaces.IStreet",
                     "Products.urban.interfaces.ILocality",
                 ],
-                "review_state": "enabled",
             }
 
             catalog = api.portal.get_tool("portal_catalog")
             brains = catalog(**kwargs)
-            result[u"street"] = brains[0].Title
+            if len(brains) > 0:
+                result[u"street"] = brains[0].Title
             result_process.append(result)
 
         self.result = result_process
