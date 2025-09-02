@@ -1,5 +1,13 @@
 <?xml version="1.0"?>
-<dc-workflow workflow_id="opinion_request_workflow" title="opinion_request_workflow" description="" state_variable="review_state" initial_state="creation" manager_bypass="False">
+<dc-workflow
+  workflow_id="opinion_request_workflow"
+  title="opinion_request_workflow"
+  description=""
+  state_variable="review_state"
+  initial_state="creation"
+  manager_bypass="True"
+  xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+  i18n:domain="plone">
  <permission>ATContentTypes: Add File</permission>
  <permission>ATContentTypes: Add Image</permission>
  <permission>Access contents information</permission>
@@ -10,7 +18,7 @@
  <permission>WebDAV Lock items</permission>
  <permission>WebDAV Unlock items</permission>
  <permission>Products.urban: Validate</permission>
- <state state_id="creation" title="creation">
+ <state state_id="creation" title="creation" i18n:attributes="title">
   <exit-transition transition_id="ask_opinion"/>
   <permission-map name="ATContentTypes: Add File" acquired="False">
    <permission-role>Editor</permission-role>
@@ -71,7 +79,7 @@
    <permission-role>Manager</permission-role>
   </permission-map>
  </state>
- <state state_id="opinion_given" title="opinion_given">
+ <state state_id="opinion_given" title="opinion_given" i18n:attributes="title">
   <exit-transition transition_id="reopen"/>
   <permission-map name="ATContentTypes: Add File" acquired="False">
    <permission-role>Manager</permission-role>
@@ -121,7 +129,7 @@
    <permission-role>Manager</permission-role>
   </permission-map>
  </state>
- <state state_id="opinion_validation" title="opinion_validation">
+ <state state_id="opinion_validation" title="opinion_validation" i18n:attributes="title">
   <exit-transition transition_id="invalidate_opinion"/>
   <exit-transition transition_id="send_opinion"/>
   <permission-map name="ATContentTypes: Add File" acquired="False">
@@ -181,7 +189,7 @@
    <permission-role>Manager</permission-role>
   </permission-map>
  </state>
- <state state_id="waiting_opinion" title="waiting_opinion">
+ <state state_id="waiting_opinion" title="waiting_opinion" i18n:attributes="title">
   <exit-transition transition_id="ask_validation"/>
   <exit-transition transition_id="receive_opinion"/>
   <permission-map name="ATContentTypes: Add File" acquired="False">
@@ -241,26 +249,54 @@
    <permission-role>Manager</permission-role>
   </permission-map>
  </state>
- <transition transition_id="ask_opinion" title="ask_opinion" new_state="waiting_opinion" trigger="USER" before_script="" after_script="">
+ <transition
+   transition_id="ask_opinion"
+   title="ask_opinion"
+   i18n:attributes="title"
+   new_state="waiting_opinion"
+   trigger="USER"
+   before_script=""
+   after_script="">
   <action url="" category="workflow" icon="">ask_opinion</action>
   <guard>
    <guard-permission>Modify portal content</guard-permission>
   </guard>
  </transition>
- <transition transition_id="ask_validation" title="ask_validation" new_state="opinion_validation" trigger="USER" before_script="" after_script="">
+ <transition
+   transition_id="ask_validation"
+   title="ask_validation"
+   i18n:attributes="title"
+   new_state="opinion_validation"
+   trigger="USER"
+   before_script=""
+   after_script="">
   <action url="" category="workflow" icon="">ask_validation</action>
   <guard>
    <guard-permission>Modify portal content</guard-permission>
    <guard-group>opinions_editors</guard-group>
   </guard>
  </transition>
- <transition transition_id="invalidate_opinion" title="invalidate_opinion" new_state="waiting_opinion" trigger="USER" before_script="" after_script="">
+ <transition
+   transition_id="invalidate_opinion"
+   title="invalidate_opinion"
+   i18n:attributes="title"
+   new_state="waiting_opinion"
+   trigger="USER"
+   before_script=""
+   after_script="">
   <action url="" category="workflow" icon="">invalidate_opinion</action>
   <guard>
    <guard-permission>Modify portal content</guard-permission>
   </guard>
  </transition>
- <transition transition_id="receive_opinion" title="receive_opinion" new_state="opinion_given" trigger="USER" before_script="" after_script="">
+ <transition
+   transition_id="receive_opinion"
+   title="receive_opinion"
+   i18n:attributes="title"
+   new_state="opinion_given"
+   trigger="USER"
+   before_script=""
+   after_script="">
   <action url="" category="workflow" icon="">receive_opinion</action>
   <guard>
    <guard-permission>Products.urban: Validate</guard-permission>
@@ -268,13 +304,27 @@
    <guard-group>environment_editors</guard-group>
   </guard>
  </transition>
- <transition transition_id="reopen" title="reopen" new_state="waiting_opinion" trigger="USER" before_script="" after_script="">
+ <transition
+   transition_id="reopen"
+   title="reopen"
+   i18n:attributes="title"
+   new_state="waiting_opinion"
+   trigger="USER"
+   before_script=""
+   after_script="">
   <action url="" category="workflow" icon="%(portal_url)s/reopen.png">reopen</action>
   <guard>
    <guard-permission>Products.urban: Validate</guard-permission>
   </guard>
  </transition>
- <transition transition_id="send_opinion" title="send_opinion" new_state="opinion_given" trigger="USER" before_script="" after_script="">
+ <transition
+   transition_id="send_opinion"
+   title="send_opinion"
+   i18n:attributes="title"
+   new_state="opinion_given"
+   trigger="USER"
+   before_script=""
+   after_script="">
   <action url="" category="workflow" icon="">send_opinion</action>
   <guard>
    <guard-permission>Modify portal content</guard-permission>
@@ -283,7 +333,6 @@
  <variable variable_id="action" for_catalog="False" for_status="True" update_always="True">
   <description>The last transition</description>
   <default>
-   
    <expression>transition/getId|nothing</expression>
   </default>
   <guard>
@@ -292,7 +341,6 @@
  <variable variable_id="actor" for_catalog="False" for_status="True" update_always="True">
   <description>The ID of the user who performed the last transition</description>
   <default>
-   
    <expression>user/getId</expression>
   </default>
   <guard>
@@ -301,7 +349,6 @@
  <variable variable_id="comments" for_catalog="False" for_status="True" update_always="True">
   <description>Comments about the last transition</description>
   <default>
-   
    <expression>python:state_change.kwargs.get('comment', '')</expression>
   </default>
   <guard>
@@ -310,7 +357,6 @@
  <variable variable_id="review_history" for_catalog="False" for_status="False" update_always="False">
   <description>Provides access to workflow history</description>
   <default>
-   
    <expression>state_change/getHistory</expression>
   </default>
   <guard>
@@ -321,7 +367,6 @@
  <variable variable_id="time" for_catalog="False" for_status="True" update_always="True">
   <description>Time of the last transition</description>
   <default>
-   
    <expression>state_change/getDateTime</expression>
   </default>
   <guard>
