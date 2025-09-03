@@ -31,6 +31,7 @@ from Products.urban.config import URBAN_CFG_DIR
 from Products.urban.config import URBANMAP_CFG
 from Products.urban.config import URBAN_TYPES
 from Products.urban.config import URBAN_TYPES_ACRONYM
+from Products.urban.dashboard.utils import switch_config_folder
 from Products.urban.exportimport import updateAllUrbanTemplates
 from Products.urban.Extensions.update_task_configs import add_licence_ended_condition
 from Products.urban.interfaces import IContactFolder
@@ -1190,7 +1191,7 @@ def setupImioDashboard(context):
     """
     site = context.getSite()
     urban_folder = getattr(site, "urban")
-    _activate_dashboard_navigation(urban_folder, "/dashboard/config/all.xml")
+    _activate_dashboard_navigation(urban_folder, switch_config_folder("all.xml"))
 
     all_licences_collection_id = "collection_all_licences"
     if all_licences_collection_id not in urban_folder.objectIds():
@@ -1208,7 +1209,7 @@ def setupImioDashboard(context):
     for urban_type in URBAN_TYPES:
         folder = getattr(urban_folder, urban_type.lower() + "s")
         _activate_dashboard_navigation(
-            folder, "/dashboard/config/%ss.xml" % urban_type.lower()
+            folder, switch_config_folder("%ss.xml" % urban_type.lower())
         )
         collection_id = "collection_%s" % urban_type.lower()
         if collection_id not in folder.objectIds():
