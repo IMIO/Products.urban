@@ -461,6 +461,16 @@ EventConfigs = {
     ),
     "envclasstwo": (
         {
+            "id": "dossier-incomplet",
+            "title": "Dossier incomplet (avec listing des pièces manquantes - article 116 § 1)",
+            "activatedFields": (),
+            "deadLineDelay": 15,
+            "eventType": ("Products.urban.interfaces.IMissingPartEvent",),
+            "isKeyEvent": True,
+            "keyDates": ("eventDate",),
+            "podTemplates": (),
+        },
+        {
             "id": "depot-de-la-demande",
             "title": "Dépôt de la demande",
             "activatedFields": ("transmitDate",),
