@@ -5,6 +5,7 @@ from Products.Five import BrowserView
 from Products.urban import UrbanMessage as _
 from Products.urban.services import notice
 from datetime import datetime
+from DateTime import DateTime
 from plone import api
 from zope.event import notify
 from zope.i18n import translate
@@ -61,9 +62,10 @@ class ImportFromNoticeView(BrowserView):
         detailed_notification = self.notice_service.get_notification(
             notification["noticeId"]
         )
-
         if detailed_notification.notice_type == "TRANSFERT_DOSSIER":
             self._transfert_dossier(detailed_notification)
+        if detailed_notification.notice_type == "NOTIF_COMPLETUDE1_INCOMPLET_COMMUNE":
+            self.process_incomplete_folder_notification(detailed_notification)
 
 
     def _transfert_dossier(self, detailed_notification):
@@ -103,3 +105,27 @@ class ImportFromNoticeView(BrowserView):
         notify(ObjectInitializedEvent(licence))
         # Change workflow and add deposit event
         transaction.commit()  # Usefull in case of an error
+    
+    def update_license(self, license, detailed_notification, event_type=None):
+        if not event_type:
+            return
+        event_configs = detailed_notification.event_configs
+        event_config = event_configs.get(event_type)
+        if not event_config:
+            return
+        event_type_to_transition = {"dossier-incomplete": "isIncomplete"}
+
+        with api.env.adopt_roles(["Manager"]):
+            event = license.createUrbanEvent(event_config)
+            event_date = DateTime(str(detailed_notification.send_date))
+            event.setEventDate(event_date)
+            api.content.transition(event, "close")
+        transition = event_type_to_transition.get(event_type)
+        if transition:
+            api.content.transition(license, transition)
+
+    def process_incomplete_folder_notification(self, detailed_notification):
+        license = detailed_notification.license
+        self.update_license(license, detailed_notification, event_type="dossier-incomplete")
+        transaction.commit() 
+    

@@ -164,4 +164,56 @@ class TestNoticeCronPE2(unittest.TestCase):
         with api.env.adopt_roles(["Manager"]):
             import_view = self.portal.restrictedTraverse("@@import-from-notice")
             return import_view()
+    
+    @mock.patch(
+        "Products.urban.services.notice.WebserviceNotice.get_notifications",
+        return_value=load_notif_json("INCOMPLETE", "1407578-NOTIFICATIONS.json"),
+    )
+    @mock.patch(
+        "Products.urban.services.notice.WebserviceNotice._get_notification",
+        return_value=MockedRequest(load_notif_json("INCOMPLETE", "1407578-INCOMPLETE-NOTIFICATION.json")),
+    )
+    def _create_incomplete_folder(self, notif_patch, notifs_patch):
+        notif_patch, notifs_patch  
+        self.notif_patch = notif_patch
+        
+        with api.env.adopt_roles(["Manager"]):
+            import_view = self.portal.restrictedTraverse("@@import-from-notice")
+            import_view()
+    
+    def test_incomplete_notification(self):
+        # 1) create licence
+        with mock.patch(
+            "Products.urban.services.notice.WebserviceNotice.get_notifications",
+            return_value=load_notif_json("INCOMPLETE", "959254_notifications.json"),
+        ) as mock_get_notifications, mock.patch(
+            "Products.urban.services.notice.WebserviceNotice._get_notification",
+            return_value=MockedRequest(
+                load_notif_json(
+                    "INCOMPLETE", "959254-TRANSFERT-DOSSIER-EN_ATTENTE_REPONSE.json"
+                )
+            ),
+        ) as mock_get_notification, mock.patch(
+            "Products.urban.notice.address.NoticeAddress._find_address",
+            return_value=[{"text": "street, 1 (1400 - Nivelles)", "id": "1234"}],
+        ) as mock_address, mock.patch(
+            "Products.urban.services.notice.WebserviceNotice._get_notification_document",
+            return_value=MockedRequest(load_notif_content("TRANSFERT_DOSSIER", "document.pdf")),
+        ) as mock_get_document:
+            with api.env.adopt_roles(["Manager"]):
+                import_view = self.portal.restrictedTraverse("@@import-from-notice")
+                import_view()
 
+        licence_folder = self.portal.urban.envclasstwos
+        licence = licence_folder.values()[-1]
+        licence.reference = "PE2/2025/5"  # force reference, already sent to NOTICE
+        licence.reindexObject()
+        self.assertIsNone(licence.getLastMissingPart())
+        self._create_incomplete_folder()
+        # 5.3 assert folder incomplet présent
+        incomplete_folder = licence.getLastMissingPart()
+        self.assertIsNotNone(incomplete_folder)
+        # 5.4 assert folder is closed
+        self.assertEqual(incomplete_folder.getEventDate().Date(), "2025/07/11")
+        self.assertEqual(api.content.get_state(incomplete_folder), "closed")
+        
