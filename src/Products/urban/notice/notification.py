@@ -82,6 +82,7 @@ class NoticeNotification(NoticeElement):
         specific = {
             "TRANSFERT_DOSSIER": "ns3:TwiceDefaultRequest",
             "DEMANDE_EP": "ns3:PublicSurveyRequest",
+            "NOTIF_COMPLETUDE1_INCOMPLET_COMMUNE":"ns3:TwiceDefaultRequest",
         }
         return self._get_data("specific", specific.get(self.notice_type), "ns3:municipalityReference")
 
@@ -99,7 +100,6 @@ class NoticeNotification(NoticeElement):
     @property
     def licence(self):
         """Return the licence, if there is already one"""
-
         if not self.reference:
             return
         catalog = api.portal.get_tool("portal_catalog")
