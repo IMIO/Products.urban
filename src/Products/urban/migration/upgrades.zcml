@@ -774,4 +774,31 @@
         profile="Products.urban:default"
         />
 
+    <gs:upgradeStep
+        title="Add new registry for missing capakey"
+        description=""
+        source="1164"
+        destination="1165"
+        handler=".update_270.add_new_registry_for_missing_capakey"
+        profile="Products.urban:default"
+        />
+
+    <gs:upgradeStep
+        title="Add complementary delay option"
+        description=""
+        source="1165"
+        destination="1166"
+        handler=".update_270.add_additional_delay_option"
+        profile="Products.urban:default"
+        />
+
+    <gs:upgradeStep
+        title="Fix patrimony certificates interface"
+        description=""
+        source="1166"
+        destination="1167"
+        handler=".update_270.fix_patrimony_certificate_class"
+        profile="Products.urban:default"
+        />
+
 </configure>

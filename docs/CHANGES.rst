@@ -8,6 +8,131 @@ Changelog
 
 .. towncrier release notes start
 
+2.7.43 (2025-08-12)
+-------------------
+
+Bug fixes:
+
+
+- Fix patrimony certificates interface 
+  [jchandelle] (SUP-46330)
+
+
+2.7.42 (2025-07-08)
+-------------------
+
+New features:
+
+
+- Add option to add complementary delay to task
+  Add value for SPW cyberattack
+  [jchandelle] (URB-3337)
+
+
+Bug fixes:
+
+
+- Revert: Add building procedure's
+  [WBoudabous, aduchene] (URBBDC-3142)
+
+
+2.7.41 (2025-06-18)
+-------------------
+
+New features:
+
+
+- Add translation for nonapplicable state in Division
+  [jchandelle] (SUP-39760)
+- Add building procedure's
+  [WBoudabous, aduchene] (URBBDC-3142)
+
+
+2.7.40 (2025-06-10)
+-------------------
+
+Bug fixes:
+
+
+- Revert "URB-3293 - Add RoadDecree to URBAN_TYPES (#340)"
+  [mpeeters] (URB-3293)
+
+
+2.7.39 (2025-06-07)
+-------------------
+
+New features:
+
+
+- Add way to easily hide licence type
+  [jchandelle] (SUP-33793)
+- Change display of inquiry view
+  [jchandelle] (SUP-44199)
+- Add a message in case we can't link pod template
+  [jchandelle] (SUP-44861)
+
+
+Bug fixes:
+
+
+- Fix history parcel view when missing capakey
+  [jchandelle] (SUP-36370)
+- Fix filename encoding in mail sending
+  [jchandelle] (SUP-43946)
+- Fix recipient import in inquiry event
+  [jchandelle] (SUP-44583)
+- Fix 220 viewlet house number encoding
+  jchandelle (SUP-44642)
+- Fix link pod template in import config
+  [jchandelle] (SUP-44861)
+
+
+2.7.38 (2025-05-27)
+-------------------
+
+New features:
+
+
+- Add debug functionality for schedule task
+  [mpeeters] (URB-3070)
+
+
+Bug fixes:
+
+
+- Add RoadDecree to URBAN_TYPES so it can be used in the tests.
+  [aduchene] (URB-3293)
+
+
+Internal:
+
+
+- Move `urban.schedule.condition.deposit_past_20days` into urban.schedule package
+  [mpeeters] (URB-3154)
+
+
+2.7.37 (2025-04-29)
+-------------------
+
+Bug fixes:
+
+
+- Fix encoding in mail send notification
+  [jchandelle] (SUP-43917)
+
+
+2.7.36 (2025-04-24)
+-------------------
+
+Bug fixes:
+
+
+- Fix logging syntax error
+  [jchandelle] (SUP-44123)
+- Disable getProxy function behind a env var
+  [jchandelle] (URB-3230)
+
+
 2.7.35 (2025-04-03)
 -------------------
 
@@ -115,10 +240,9 @@ Bug fixes:
 
 - Fix external decision values
   [daggelpop]
-
   Handle default vocabulary values for a non-array field
   [daggelpop] (SUP-40288)
-- Fix urban vocabularies following configuration order 
+- Fix urban vocabularies following configuration order
   [WBoudabous] (SUP-41929)
 - Add missing translation in schedule config
   [WBoudabous] (URB-3142)
@@ -465,7 +589,7 @@ New features:
 Bug fixes:
 
 
-- Fix unicode error on street name merge field 
+- Fix unicode error on street name merge field
   [fngaha] (SUP-34184)
 - Avoid to display disabled vocabulary entries with no start or end validity date
   [mpeeters] (SUP-36742)

@@ -1,0 +1,9 @@
+<td class="noPadding" i18n:domain="urban">
+  <input
+     tal:attributes="href string:${context/absolute_url}/@@debug"
+     type="button"
+     class="overlay-task-action debug_task"
+     value="Debug"
+     i18n:attributes="value"
+     />
+</td>
