@@ -350,7 +350,36 @@ class LicenceView(BrowserView):
         return self.getSchemataFields("urban_inquiry", exclude)
 
     def getBoundInquiryFields(self, exclude=[], bound_context=None):
-        return self.getSchemataFields("urban_inquiry", exclude, bound_context)
+        fields_display = {
+            "none": [
+                "divergence",
+                "investigation_radius",
+                "divergenceDetails",
+                "announcementArticles",
+                "announcementArticlesText",
+                "investigationDetails",
+                "derogation",
+                "derogationDetails",
+                "investigationArticles",
+                "investigationArticlesText",
+                "roadModificationSubject",
+                "demandDisplay",
+                "investigationReasons",
+            ],
+            "announcement" : [
+                "derogation",
+                "derogationDetails",
+                "investigationArticles",
+                "investigationArticlesText",
+                "roadModificationSubject",
+                "demandDisplay",
+                "investigationReasons",
+            ],
+        }
+        exclude_fields = []
+        if hasattr(bound_context, "getInquiry_type"):
+            exclude_fields = fields_display.get(bound_context.getInquiry_type(), [])
+        return self.getSchemataFields("urban_inquiry", list(set(exclude_fields + exclude)), bound_context)
 
     def getDefaultFields(self, exclude=[], context=None):
         base_exclude = ["id", "title"]

@@ -7,9 +7,11 @@ def setLinkedReport(urban_event, event):
     """
     if urban_event.portal_type != "UrbanEventFollowUp":
         return
-    if not hasattr(urban_event.aq_parent, "getLastReportEvent"):
+    inspection = urban_event.aq_parent
+    if not hasattr(inspection, "getLastReportEvent"):
+        # This can happen during the creation of the content
         return
-    last_report = urban_event.aq_parent.getLastReportEvent()
+    last_report = inspection.getLastReportEvent()
     if not last_report:
         return
     urban_event.setLinkedReport(last_report)

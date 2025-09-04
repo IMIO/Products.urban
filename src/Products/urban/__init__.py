@@ -192,6 +192,7 @@ def initialize(context):
     import UrbanEventType
     import UrbanTool
     import UrbanVocabularyTerm
+    import ComplementaryDelayTerm
     import content.licence.Article127
     import content.licence.BuildLicence
     import content.licence.CODT_Article127

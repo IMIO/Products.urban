@@ -166,6 +166,9 @@
   <type type_id="UrbanVocabularyTerm">
      <bound-workflow workflow_id="activation_workflow" />
   </type>
+  <type type_id="ComplementaryDelayTerm">
+     <bound-workflow workflow_id="activation_workflow" />
+  </type>
 <!-- ##code-section workflowbindings -->
 <type type_id="Applicant">
   <bound-workflow workflow_id="activation_workflow" />

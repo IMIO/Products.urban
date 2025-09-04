@@ -2,6 +2,7 @@
 
 from Acquisition import aq_inner
 from DateTime import DateTime
+from Products.CMFPlone.utils import safe_unicode
 from Products.Five import BrowserView
 from Products.statusmessages.interfaces import IStatusMessage
 from Products.urban import services
@@ -303,11 +304,12 @@ class UrbanEventView(BrowserView):
         username = notif[-1].get("username", None)
         if username is None or username == "":
             username = user
+
         return _(
             "Mail already send for ${title} by ${user}, ${date}",
             mapping={
-                "title": notif[-1]["title"].lower().decode("utf-8"),
-                "user": username.decode("utf-8"),
+                "title": safe_unicode(notif[-1]["title"].lower()),
+                "user": safe_unicode(username),
                 "date": notif[-1]["time"].strftime("%d/%m/%Y, %H:%M:%S"),
             },
         )
@@ -1081,12 +1083,12 @@ class UrbanEventInquiryView(UrbanEventInquiryBaseView):
 
     def create_recipient_cadastre(self, location, parcel, street_uid, zip_scope=None):
         context = aq_inner(self.context)
-        number = location.get("number", "")
+        number = location.get("number", "").encode("utf-8")
         street_obj = api.content.get(UID=street_uid)
         street = street_obj.streetName.encode("utf-8")
         city_obj = street_obj.getCity()
-        city = city_obj.title
-        zipcode = city_obj.zipCode
+        city = city_obj.title.encode("utf-8")
+        zipcode = city_obj.zipCode.encode("utf-8")
         if zip_scope is not None and zipcode not in zip_scope:
             zip_scope.append(zipcode)
         normalizer = getUtility(IIDNormalizer)
@@ -1119,11 +1121,6 @@ class UrbanEventInquiryView(UrbanEventInquiryBaseView):
     def get_investigation_adress(self, radius=0, force=False):
         context = aq_inner(self.context)
         urban_tool = api.portal.get_tool("portal_urban")
-        recipients = context.getRecipients()
-        if recipients:
-            context.manage_delObjects(
-                [recipient.getId() for recipient in recipients if recipient.Title()]
-            )
 
         licence = context.aq_inner.aq_parent
         cadastre = services.cadastre.new_session()
@@ -1223,13 +1220,8 @@ class UrbanEventInquiryView(UrbanEventInquiryBaseView):
         # remove every RecipientCadastre
         context = aq_inner(self.context)
         urban_tool = api.portal.get_tool("portal_urban")
-        recipients = context.getRecipients()
         if self.is_planned_inquiry and not force:
             return self.request.response.redirect(self.context.absolute_url())
-        if recipients:
-            context.manage_delObjects(
-                [recipient.getId() for recipient in recipients if recipient.Title()]
-            )
 
         licence = context.aq_inner.aq_parent
         cadastre = services.cadastre.new_session()
@@ -1267,11 +1259,12 @@ class UrbanEventInquiryView(UrbanEventInquiryBaseView):
                 city = str(owner["city"].encode("utf-8"))
                 street = str(owner["street"].encode("utf-8"))
                 number = str(owner["number"].encode("utf-8"))
-                logger.info(name, firstname)
+
                 # to avoid having several times the same Recipient (that could for example be on several parcels
                 # we first look in portal_catalog where Recipients are catalogued
                 owner_obj = owner_id and getattr(context, owner_id, None)
                 if owner_id and not owner_obj:
+                    logger.info("Import owner {}{}".format(name, firstname))
                     new_owner_id = context.invokeFactory(
                         "RecipientCadastre",
                         id=owner_id,
