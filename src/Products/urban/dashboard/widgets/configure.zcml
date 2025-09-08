@@ -3,6 +3,9 @@
   xmlns:faceted="http://namespaces.zope.org/faceted"
   i18n_domain="urban">
 
-  <faceted:widget factory=".select_to_list.Widget" />
+  <faceted:widget
+    factory=".select_to_list.Widget"
+    schema=".select_to_list.ISelectSchema"
+    />
 
 </configure>

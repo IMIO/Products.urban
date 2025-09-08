@@ -6,7 +6,7 @@ from Products.urban.browser.table.column import FoldermanagerColumn
 from Products.urban.browser.table.interfaces import ITitleCell
 from Products.urban.browser.table.interfaces import ITitleColumn
 from Products.urban.interfaces import IGenericLicence
-from imio.dashboard.columns import ActionsColumn
+from collective.eeafaceted.z3ctable.columns import ActionsColumn
 
 from collective.eeafaceted.z3ctable.columns import BaseColumn
 
@@ -22,6 +22,8 @@ class FacetedTitleColumn(BaseColumn):
     """TitleColumn for imio.dashboard listings."""
 
     implements(ITitleColumn)
+
+    escape = False
 
     def renderTitleLink(self, item):
         portal_type = item.portal_type.lower()
@@ -69,7 +71,7 @@ class LicenceTitleDisplay(TitleDisplay):
     def render(self):
         title = self.column.renderTitleLink(self.brain)
 
-        lastkeyevent = self.brain.last_key_event
+        lastkeyevent = escape(self.brain.last_key_event or "")
         if lastkeyevent:
             title = '%s<br/><span class="discreet">%s</span>' % (title, lastkeyevent)
 
@@ -81,6 +83,7 @@ class AddressColumn(BaseColumn):
 
     # column not sortable
     sort_index = -1
+    escape = False
 
     def renderCell(self, item):
         task = item.getObject()
@@ -102,6 +105,7 @@ class ParcelReferencesColumn(BaseColumn):
 
     # column not sortable
     sort_index = -1
+    escape = False
 
     def renderCell(self, item):
         licence = item.getObject()
@@ -139,6 +143,8 @@ class ScheduleColumn(BaseColumn):
 class TaskLicenceTitleDisplay(TitleDisplay, ScheduleColumn):
     """Adapts a task to a LicenceTitleCell"""
 
+    escape = False
+
     def render(self):
         licence_brain = self.query_licence(self.brain)
         title = self.column.renderTitleLink(licence_brain)
@@ -156,9 +162,21 @@ class LicenceFinalDueDateColumn(BaseColumn):
         return due_date.strftime("%d/%m/%Y")
 
 
+class LicenceDepositDateColumn(BaseColumn):
+    """Licence final due date column for schedule listings."""
+
+    def renderCell(self, item):
+        date = item.getDepositDate
+        if date:
+            return date.strftime("%d/%m/%Y")
+        return "-"
+
+
 class TaskActionsColumn(ActionsColumn):
     """Display actions for the task"""
 
     params = {
         "showChangeOwner": True,
+        "showActions": False,
+        "useIcons": True,
     }
