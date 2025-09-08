@@ -7,6 +7,7 @@ from Products.urban.notice.parcel import NoticeParcel
 from Products.urban.notice.party import NoticeParty
 from Products.urban.notice.sender import NoticeSender
 from datetime import datetime
+from lxml import etree
 from plone import api
 
 
@@ -67,9 +68,38 @@ class NoticeNotification(NoticeElement):
     @property
     def type(self):
         """Return the portal type corresponding to notice subtype"""
-        return {
-            "PE": "EnvClassTwo",
-        }.get(self.notification_subtype)
+
+        if not hasattr(self, "_licence_type"):
+            self._licence_type = None
+
+            if self.notice_type == "TRANSFERT_DOSSIER":
+                if self.notification_type == "PE_PU":
+                    if self.notification_subtype == "PU":
+                        self._licence_type = "UniqueLicence"
+                    elif self.notification_subtype == "PE":
+                        # PE class is not yet available in TRANSFERT_DOSSIER
+                        # => extract it from XML document
+                        penv_classe = None
+                        for document in self.documents:
+                            if (
+                                document.document_mimetype == "application/xml"
+                                and document.document_type_code == "PJ_FORMULAIRE"
+                            ):
+                                tree = etree.parse(document.file)
+                                classe_elements = tree.xpath("/dataStore/item/classe")
+                                if len(classe_elements) == 1:
+                                    penv_classe = classe_elements[0].text
+                        self._licence_type = {
+                            "1": "EnvClassOne",
+                            "2": "EnvClassTwo",
+                            "3": "EnvClassThree",
+                        }.get(penv_classe, None)
+            else:
+                existing_licence = self.licence
+                if existing_licence:
+                    self._licence_type = existing_licence.portal_type
+
+        return self._licence_type
 
     @property
     def id(self):

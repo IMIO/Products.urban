@@ -54,3 +54,11 @@ class NoticeDocument(NoticeElement):
                 contentType=self.json["documentData"]["mimeType"],
             )
             return _file.open()
+
+    @property
+    def document_type_code(self):
+        return self.json["documentData"]["type"]["code"]
+
+    @property
+    def document_mimetype(self):
+        return self.json["documentData"]["mimeType"]
