@@ -125,7 +125,7 @@ class ImportFromNoticeView(BrowserView):
             api.content.transition(license, transition)
 
     def process_incomplete_folder_notification(self, detailed_notification):
-        license = detailed_notification.license
+        license = detailed_notification.licence
         self.update_license(license, detailed_notification, event_type="dossier-incomplete")
         transaction.commit() 
     
