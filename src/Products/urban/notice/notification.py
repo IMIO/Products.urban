@@ -40,14 +40,23 @@ class NoticeNotification(NoticeElement):
         return self._get_data("noticeIdentifier", "noticeId")
 
     @property
+    def _last_status(self):
+        """
+        Return the last status
+        beware: random order !
+        """
+        sorted_status = sorted(self._get_data("status", "status"), key=lambda x: x["date"])
+        return sorted_status[-1]
+
+    @property
     def status(self):
         """Return the last notice notification status e.g. 'EN_ATTENTE_REPONSE'"""
-        return self._get_data("status", "status", 0, "code", "code")  # most recent is first
+        return self._last_status["code"]["code"]
 
     @property
     def status_date(self):
         """Return the last notice notification date"""
-        raw_date = self._get_data("status", "status", 0, "date")  # most recent is first
+        raw_date = self._last_status["date"]
         return datetime.strptime(raw_date, "%Y-%m-%dT%H:%M:%S.%f").date()
 
     @property
