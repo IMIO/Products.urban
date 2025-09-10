@@ -9,6 +9,7 @@ from Products.CMFCore.utils import getToolByName
 from Products.urban.config import URBAN_TYPES
 from Products.urban.content import UrbanEventInquiry
 from Products.urban.interfaces import IUrbanEvent
+from zope.lifecycleevent import ObjectCreatedEvent
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from zope.event import notify
 from Products.Archetypes.event import EditBegunEvent
@@ -142,8 +143,8 @@ class TestDefaultValues(unittest.TestCase):
         licence_config = self.site.portal_urban.buildlicence
         # set the default text value fotr the fdescription field
         default_text = "<p>Bla bla</p>"
-        licence_config.setTextDefaultValues(
-            ({"text": default_text, "fieldname": "description"},)
+        licence_config.textDefaultValues = (
+            {"text": default_text, "fieldname": "description"},
         )
         # any new licence should have this text as value for the description field
         newlicence = self.createNewLicence()
@@ -247,35 +248,37 @@ class TestEventDefaultValues(unittest.TestCase):
         # text field 'decisionText' should be empty by default
         event = self.licence.createUrbanEvent("rapport-du-college")
         decision_text = event.getDecisionText()
-        self.failUnless(decision_text == "<p></p>")
+        self.assertEqual(decision_text, "<p></p>")
 
     def testTextValueConfigured(self):
-        eventtypes = self.portal_urban.buildlicence.urbaneventtypes
+        eventtypes = self.portal_urban.buildlicence.eventconfigs
         event_type = getattr(eventtypes, "rapport-du-college")
         # set a a default text for the field 'decsionText'
         default_text = "<p>Kill bill!</p>"
-        event_type.setTextDefaultValues(
-            [{"text": default_text, "fieldname": "decisionText"}]
-        )
+        event_type.textDefaultValues = [
+            {"text": default_text, "fieldname": "decisionText"}
+        ]
         # the created event should have this text in its field 'decisionText'
         event = self.licence.createUrbanEvent(event_type)
+        notify(ObjectCreatedEvent(event))
         decision_text = event.getDecisionText()
-        self.failUnless(decision_text == default_text)
+        self.assertEqual(decision_text, default_text)
 
     def testTextValueConfiguredWithPythonExpression(self):
-        eventtypes = self.portal_urban.buildlicence.urbaneventtypes
+        eventtypes = self.portal_urban.buildlicence.eventconfigs
         event_type = getattr(eventtypes, "rapport-du-college")
         # set a a default text for the field 'decsionText'
         default_text = '<p>Kill <b tal:replace="self/Title"></b> and <b tal:replace="event/getId"></b> </p>'
-        event_type.setTextDefaultValues(
-            [{"text": default_text, "fieldname": "decisionText"}]
-        )
+        event_type.textDefaultValues = [
+            {"text": default_text, "fieldname": "decisionText"}
+        ]
         # the created event should have this text in its field 'decisionText'
         event = self.licence.createUrbanEvent(event_type)
+        notify(ObjectCreatedEvent(event))
         decision_text = event.getDecisionText()
 
         expected_text = "<p>Kill %s and %s </p>" % (self.licence.Title(), event.getId())
-        self.assertTrue(decision_text == expected_text)
+        self.assertEqual(decision_text, expected_text)
 
     def testDefaultTextMethodIsDefinedForEachTextField(self):
         # each text field  should have the 'getDefaultText' method defined on it, else the default value system wont
@@ -285,3 +288,57 @@ class TestEventDefaultValues(unittest.TestCase):
                 field, "defaut_content_type"
             ) and field.default_content_type.startswith("text"):
                 self.assertEquals(field.default_method, "getDefaultText")
+
+
+class TestParcelApplicantDefaultValue(unittest.TestCase):
+    """
+    Tests for the text default values
+    """
+
+    layer = URBAN_TESTS_CONFIG
+
+    def setUp(self):
+        portal = self.layer["portal"]
+        self.portal_urban = portal.portal_urban
+        self.site = portal
+        login(portal, self.layer.default_user)
+        # create a licence
+        buildlicences = portal.urban.buildlicences
+        buildlicences.invokeFactory(
+            "BuildLicence",
+            id="newlicence",
+            title="blabla",
+        )
+        buildlicence = buildlicences.newlicence
+        self.licence = buildlicence
+
+    def test_parcel_applicant_default_personTitle(self):
+        searchparcelview = self.licence.restrictedTraverse("searchparcels")
+        parcel_data = {
+            "puissance": "",
+            "division": "62006",
+            "worklocations": (),
+            "partie": "",
+            "radical": "552",
+            "section": "A",
+            "outdated": "False",
+            "bis": "",
+            "exposant": "V",
+        }
+        owners = {
+            u"64122514647": {
+                "city": u"AWANS",
+                "name": u"Macours",
+                "firstname": u"Jo\xeblle",
+                "country": u"BE",
+                "zipcode": u"4340",
+                "number": u"61",
+                "street": u"Rue de Bruxelles",
+            }
+        }
+        searchparcelview.createParcelAndProprietary(parcel_data, owners)
+        applicants = self.licence.getApplicants()
+        applicant = applicants[0]
+        self.assertEquals("madam_or_mister", applicant.getPersonTitle())
+        display_view = applicant.restrictedTraverse("document_generation_helper_view")
+        self.assertEquals(u"Madame/Monsieur", display_view.personTitle)
