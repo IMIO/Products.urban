@@ -21,5 +21,8 @@
     <dependency>profile-plone.app.referenceintegrity:default</dependency>
     <dependency>profile-Products.cron4plone:default</dependency>
     <dependency>profile-urban.vocabulary:default</dependency>
+    <dependency>profile-imio.urban.core:default</dependency>
+    <dependency>profile-imio.pm.wsclient:default</dependency>
+    <dependency>profile-Products.urban:urbantypes</dependency>
   </dependencies>
 </metadata>
