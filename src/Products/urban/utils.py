@@ -118,6 +118,8 @@ def _setSchemataForInquiry(schema, inquiry_class):
     Put the the fields coming from Inquiry in a specific schemata
     """
     inquiryFields = inquiry_class.schema.filterFields(isMetadata=False)
+    # do not take the 2 first fields into account, this is 'id' and 'title'
+    inquiryFields = inquiryFields[2:]
     for inquiryField in inquiryFields:
         if inquiryField.__name__ in ["id", "title"]:
             continue
@@ -232,8 +234,12 @@ def get_ws_meetingitem_infos(urban_event, extra_attributes=False):
             (portal_state.portal(), request), name="ws4pmclient-settings"
         )
 
-        items = ws4pmSettings._rest_searchItems({"externalIdentifier": urban_event.UID(), "config_id": config_id})
-
+        items = ws4pmSettings._rest_searchItems(
+            {
+                "externalIdentifier": urban_event.UID(),
+                "config_id": config_id
+            }
+        )
         if extra_attributes and items:
             items = ws4pmSettings._rest_getItemInfos({
                 "UID": items[0]['UID'],

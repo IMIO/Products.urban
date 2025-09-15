@@ -15,6 +15,7 @@ __docformat__ = "plaintext"
 
 from Acquisition import aq_parent
 from AccessControl import ClassSecurityInfo
+from Products.urban.widget.select2widget import MultiSelect2Widget
 from Products.Archetypes.atapi import *
 from zope.interface import implements
 import interfaces
@@ -30,6 +31,7 @@ from DateTime import DateTime
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import (
     ReferenceBrowserWidget,
 )
+from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
 from Products.ATContentTypes.interfaces.file import IATFile
 from Products.CMFCore.utils import getToolByName
 
@@ -51,6 +53,14 @@ from Products.MasterSelectWidget.MasterMultiSelectWidget import MasterMultiSelec
 from zope.i18n import translate
 
 ##/code-section module-header
+
+slave_fields_transfertype = (
+    {
+        "name": "transferDescription",
+        "action": "hide",
+        "hide_values": ("full",),
+    },
+)
 
 slave_fields_followup_proposition = (
     {
@@ -160,6 +170,16 @@ schema = Schema(
             enforceVocabulary=True,
             optional=True,
             vocabulary=UrbanVocabulary("decisions", inUrbanConfig=True),
+            default_method="getDefaultValue",
+        ),
+        StringField(
+            name="collegeOpinion",
+            widget=SelectionWidget(
+                label=_("urban_label_collegeOpinion", default="Collegeopinion"),
+            ),
+            enforceVocabulary=True,
+            optional=True,
+            vocabulary=UrbanVocabulary("collegeopinions", inUrbanConfig=True),
             default_method="getDefaultValue",
         ),
         TextField(
@@ -272,7 +292,7 @@ schema = Schema(
                 visible=False,
                 label=_("urban_label_urbaneventtypes", default="Urbaneventtypes"),
             ),
-            allowed_types=("UrbanEventType", "OpinionRequestEventType"),
+            allowed_types=("EventConfig", "OpinionEventConfig", "FollowUpEventConfig"),
             multiValued=0,
             relationship="UrbanEventType",
         ),
@@ -491,6 +511,28 @@ schema = Schema(
             optional=True,
         ),
         LinesField(
+            name="transferType",
+            widget=SelectionWidget(
+                format="select",
+                label=_("urban_label_transfertype", default="TransferType"),
+            ),
+            vocabulary="listTransferType",
+            optional=True,
+        ),
+        TextField(
+            name="transferDescription",
+            allowable_content_types=("text/html",),
+            widget=RichWidget(
+                label=_(
+                    "urban_label_transferdescription", default="TransferDescription"
+                ),
+            ),
+            default_method="getDefaultText",
+            default_content_type="text/html",
+            default_output_type="text/html",
+            optional=True,
+        ),
+        LinesField(
             name="followup_proposition",
             widget=MasterMultiSelectWidget(
                 format="checkbox",
@@ -554,7 +596,7 @@ schema = Schema(
 optional_fields = [
     field.getName()
     for field in schema.filterFields(isMetadata=False)
-    if field.getName() != "eventDate"
+    if field.getName() not in ["eventDate", "urbaneventtypes"]
 ]
 setOptionalAttributes(schema, optional_fields)
 ##/code-section after-local-schema
@@ -698,7 +740,7 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
         Return a parsed version of data from Cadastre so we obtain something
         more beautiful to display
         """
-        if street == None:
+        if street is None:
             return "NO ADDRESS FOUND"
         print "\n\n Street: " + street
         i = 0
@@ -932,6 +974,18 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
     def get_state(self):
         state = api.content.get_state(self)
         return state
+
+    security.declarePublic("listTransferType")
+
+    def listFollowupPropositions(self):
+        """
+        This vocabulary for field transferType returns the types of transfer (full, partial)
+        """
+        vocab = (
+            ("full", translate(_("full_transfer"), context=self.REQUEST)),
+            ("partial", translate(_("partial_transfer"), context=self.REQUEST)),
+        )
+        return DisplayList(vocab)
 
     security.declarePublic("listFollowupPropositions")
 

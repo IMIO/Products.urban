@@ -13,8 +13,8 @@ from StringIO import StringIO
 
 from eea.facetednavigation.interfaces import IFacetedNavigable
 
-from imio.dashboard.utils import getDashboardQueryResult
-from imio.dashboard.utils import getCriterionByIndex
+from collective.eeafaceted.dashboard.utils import getDashboardQueryResult
+from collective.eeafaceted.dashboard.utils import getCriterionByIndex
 
 from plone import api
 from plone.app.layout.viewlets import ViewletBase
@@ -175,6 +175,16 @@ class UrbainXMLExport(BrowserView):
         html_list.append("<HTML><TABLE>")
         for licence_brain in licence_brains:
             licence = licence_brain.getObject()
+            try:
+                licence.title.encode("iso-8859-1")
+            except UnicodeEncodeError:
+                check(
+                    self,
+                    False,
+                    u"title_encoding_error_label",
+                    {"reference": str(licence.getReference())},
+                )
+                continue
             applicantObj = (
                 licence.getApplicants() and licence.getApplicants()[0] or None
             )
@@ -205,32 +215,43 @@ class UrbainXMLExport(BrowserView):
                     xml.append(
                         "      <Doc_Afd>%s</Doc_Afd>" % parcels[0].getDivisionCode()
                     )
-                street_info = getAdapter(licence, IToUrbain220Street)
-                number = street_info.street_number
-                street_name = street_info.street_name
-                street_code = street_info.street_code
+
                 if check(
                     self,
-                    street_code,
-                    u"no_street_with_code_found_on_licence",
+                    licence.getWorkLocations(),
+                    u"no_address_found_on_licence",
                     {"reference": str(licence.getReference())},
                 ):
-                    xml.append(
-                        "      <E_220_straatcode>%s</E_220_straatcode>"
-                        % str(street_code)
-                    )
+                    street_info = getAdapter(licence, IToUrbain220Street)
+                    number = street_info.street_number
+                    street_name = street_info.street_name
+                    street_code = street_info.street_code
                     if check(
                         self,
-                        street_name,
-                        u"no_street_name_found_on_licence",
+                        street_code,
+                        u"no_street_with_code_found_on_licence",
                         {"reference": str(licence.getReference())},
                     ):
                         xml.append(
-                            "      <E_220_straatnaam>%s</E_220_straatnaam>"
-                            % str(street_name).decode("iso-8859-1").encode("iso-8859-1")
+                            "      <E_220_straatcode>%s</E_220_straatcode>"
+                            % str(street_code)
                         )
-                if number:
-                    xml.append("      <E_220_huisnr>%s</E_220_huisnr>" % str(number))
+                        if check(
+                            self,
+                            street_name,
+                            u"no_street_name_found_on_licence",
+                            {"reference": str(licence.getReference())},
+                        ):
+                            xml.append(
+                                "      <E_220_straatnaam>%s</E_220_straatnaam>"
+                                % str(street_name)
+                                .decode("iso-8859-1")
+                                .encode("iso-8859-1")
+                            )
+                    if number:
+                        xml.append(
+                            "      <E_220_huisnr>%s</E_220_huisnr>" % str(number)
+                        )
                 worktype = licence.getWorkType() and licence.getWorkType()[0] or ""
                 work_types = UrbanVocabulary("folderbuildworktypes").getAllVocTerms(
                     licence
@@ -265,7 +286,7 @@ class UrbainXMLExport(BrowserView):
                     authority = "REGION"
                 else:
                     if hasattr(licence, "getAuthority"):
-                        auth_map = {"college": "COM", "ft": "REGION"}
+                        auth_map = {"college": "COM", "ft": "REGION", "fd_ft": "REGION"}
                         authority = auth_map[licence.getAuthority()]
                     elif licence.getLastRecourse():
                         authority = "MINISTRE"
@@ -330,13 +351,15 @@ class UrbainXMLExport(BrowserView):
                             xml.append(
                                 "        <naam>%s %s</naam>"
                                 % (
-                                    firstname.encode("iso-8859-1"),
-                                    lastname.encode("iso-8859-1"),
+                                    firstname.decode("iso-8859-1").encode("iso-8859-1"),
+                                    lastname.decode("iso-8859-1").encode("iso-8859-1"),
                                 )
                             )
                             xml.append(
                                 "        <straatnaam>%s</straatnaam>"
-                                % applicantObj.getStreet().encode("iso-8859-1")
+                                % applicantObj.getStreet()
+                                .decode("iso-8859-1")
+                                .encode("iso-8859-1")
                             )
                             xml.append(
                                 "        <huisnr>%s</huisnr>" % applicantObj.getNumber()
@@ -347,7 +370,9 @@ class UrbainXMLExport(BrowserView):
                             )
                             xml.append(
                                 "        <gemeente>%s</gemeente>"
-                                % applicantObj.getCity().encode("iso-8859-1")
+                                % applicantObj.getCity()
+                                .decode("iso-8859-1")
+                                .encode("iso-8859-1")
                             )
                             xml.append("        <hoedanig>ARCHITECTE</hoedanig>")
                             xml.append("      </PERSOON>")
@@ -434,10 +459,13 @@ class UrbainXMLExport(BrowserView):
             response = site.REQUEST.RESPONSE
             response.setHeader("Content-type", "text/plain;;charset=iso-8859-1")
             output = StringIO()
-            output.write(
-                unicode("\n".join(xml).replace("&", "&amp;"), "iso-8859-1").encode(
-                    "iso-8859-1"
+            chain = []
+            for line in xml:
+                chain.append(
+                    unicode(str(line).replace("&", "&amp;"), "iso-8859-1").encode(
+                        "iso-8859-1"
+                    )
                 )
-            )
+            output.write("\n".join(chain))
             self._set_header_response()
             return output.getvalue()

@@ -226,6 +226,15 @@ schema = Schema(
             ),
             validators=("isBelgianNR",),
         ),
+        StringField(
+            name="tvaNumber",
+            widget=StringField._properties["widget"](
+                condition="python: here.portal_type == 'Notary'",
+                label="Tvanumber",
+                label_msgid="urban_label_tvaNumber",
+                i18n_domain="urban",
+            ),
+        ),
     ),
 )
 
@@ -359,12 +368,13 @@ class Contact(BaseContent, BrowserDefaultMixin):
         title = self.getPersonTitleValue(short, False, reverse)
         name1 = self.getName1().decode("utf-8")
         name2 = self.getName2().decode("utf-8")
+        society = self.getSociety().decode("utf-8")
         namedefined = name1 or name2
         names = u"%s %s" % (name1, name2)
         if invertnames:
             names = u"%s %s" % (name2, name1)
         names = names.strip()
-        namepart = namedefined and names or self.getSociety()
+        namepart = namedefined and names or society
         nameSignaletic = u"%s %s" % (title, namepart)
         nameSignaletic = nameSignaletic.strip()
         if linebyline:
@@ -402,8 +412,8 @@ class Contact(BaseContent, BrowserDefaultMixin):
         """
         number = self.getNumber().decode("utf-8")
         street = self.getStreet().decode("utf-8")
-        zip = (self.getZipcode() or "").decode("utf-8")
-        city = (self.getCity() or "").decode("utf-8")
+        zip = self.getZipcode().decode("utf-8")
+        city = self.getCity().decode("utf-8")
         country = (
             self.getField("country")
             .vocabulary.getAllVocTerms(self)[self.getCountry()]
@@ -493,6 +503,26 @@ class Contact(BaseContent, BrowserDefaultMixin):
             personTitle = personTitle.extraValue
         return personTitle
 
+    def isMasculine(self):
+        """ """
+        answer = False
+        field = self.getField("personTitle")
+        titles = field.vocabulary.getAllVocTerms(self)
+        title = titles[self.getPersonTitle()]
+        if title.getGender() == "male":
+            answer = True
+        return answer
+
+    def isFeminine(self):
+        """ """
+        answer = False
+        field = self.getField("personTitle")
+        titles = field.vocabulary.getAllVocTerms(self)
+        title = titles[self.getPersonTitle()]
+        if title.getGender() == "female":
+            answer = True
+        return answer
+
     def isMasculineSingular(self):
         """ """
         answer = False
@@ -500,6 +530,17 @@ class Contact(BaseContent, BrowserDefaultMixin):
         titles = field.vocabulary.getAllVocTerms(self)
         title = titles[self.getPersonTitle()]
         if title.getMultiplicity() == "single":
+            if title.getGender() == "male":
+                answer = True
+        return answer
+
+    def isMasculinePlural(self):
+        """ """
+        answer = False
+        field = self.getField("personTitle")
+        titles = field.vocabulary.getAllVocTerms(self)
+        title = titles[self.getPersonTitle()]
+        if title.getMultiplicity() == "plural":
             if title.getGender() == "male":
                 answer = True
         return answer
