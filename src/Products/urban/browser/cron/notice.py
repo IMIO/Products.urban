@@ -62,8 +62,8 @@ class ImportFromNoticeView(BrowserView):
         detailed_notification = self.notice_service.get_notification(
             notification["noticeId"]
         )
-        #if detailed_notification.notice_type == "TRANSFERT_DOSSIER":
-        #    self._transfert_dossier(detailed_notification)
+        if detailed_notification.notice_type == "TRANSFERT_DOSSIER":
+            self._transfert_dossier(detailed_notification)
         if detailed_notification.notice_type == "NOTIF_COMPLETUDE1_INCOMPLET_COMMUNE":
             self.process_incomplete_folder_notification(detailed_notification)
         if detailed_notification.notice_type == "NOTIF_COMPLETUDE2_IRRECEVABLE_COMMUNE":
@@ -105,19 +105,19 @@ class ImportFromNoticeView(BrowserView):
         # Set title and update reference number
         notify(ObjectInitializedEvent(licence))
         # Change workflow and add deposit event
-        transaction.commit()  # Usefull in case of an error
-    
+        transaction.commit()  # Usefull in case of an error    
+
     def update_license(self, license, detailed_notification, event_type=None):
-        
         if not event_type:
             return
         event_configs = detailed_notification.event_configs
-        print(event_configs,"-*-*-*-*-*lICENCEEVENTCONFIG")
         event_config = event_configs.get(event_type)
         if not event_config:
             return
-        event_type_to_transition = {"dossier-incomplete": "isIncomplete",
-                                    "dossier-irrecevable": "inacceptable"}
+        event_type_to_transition = {
+            "dossier-incomplet": "isincomplete",
+            "dossier-irrecevable": "isinacceptable",
+        }
 
         with api.env.adopt_roles(["Manager"]):
             event = license.createUrbanEvent(event_config)
@@ -131,10 +131,9 @@ class ImportFromNoticeView(BrowserView):
     def process_incomplete_folder_notification(self, detailed_notification):
         license = detailed_notification.licence
         self.update_license(license, detailed_notification, event_type="dossier-incomplete")
-        transaction.commit() 
-    
+        transaction.commit()
+
     def process_inadmissible_folder_notification(self, detailed_notification):
         license = detailed_notification.licence
-        print(license,"-*-*-*-*-*lICENCE")
         self.update_license(license, detailed_notification, event_type="dossier-irrecevable")
-        transaction.commit() 
+        transaction.commit()
