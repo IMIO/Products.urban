@@ -276,12 +276,14 @@ class TestNoticeCronPE2(unittest.TestCase):
     )
     @mock.patch(
         "Products.urban.services.notice.WebserviceNotice._get_notification",
-        return_value=MockedRequest(load_notif_json("INADMISSIBLE", "1443524-INADMISSIBLE-NOTIFICATION.json")),
+        return_value=MockedRequest(
+            load_notif_json("INADMISSIBLE", "1443524-INADMISSIBLE-NOTIFICATION.json")
+        ),
     )
     def _create_inadmissible_folder(self, notif_patch, notifs_patch):
-        notif_patch, notifs_patch  
+        notif_patch, notifs_patch
         self.notif_patch = notif_patch
-        
+
         with api.env.adopt_roles(["Manager"]):
             import_view = self.portal.restrictedTraverse("@@import-from-notice")
             import_view()
