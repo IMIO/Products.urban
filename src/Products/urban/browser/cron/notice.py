@@ -113,7 +113,7 @@ class ImportFromNoticeView(BrowserView):
         event_config = event_configs.get(event_type)
         if not event_config:
             return
-        event_type_to_transition = {"dossier-incomplete": "isIncomplete"}
+        event_type_to_transition = {"dossier-incomplet": "isincomplete"}
 
         with api.env.adopt_roles(["Manager"]):
             event = license.createUrbanEvent(event_config)
@@ -126,6 +126,6 @@ class ImportFromNoticeView(BrowserView):
 
     def process_incomplete_folder_notification(self, detailed_notification):
         license = detailed_notification.licence
-        self.update_license(license, detailed_notification, event_type="dossier-incomplete")
+        self.update_license(license, detailed_notification, event_type="dossier-incomplet")
         transaction.commit() 
     
