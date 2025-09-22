@@ -153,7 +153,7 @@ class ImportFromNoticeView(BrowserView):
         transaction.commit() 
     def process_not_admissible_folder_notification_second_tour(self, detailed_notification):
         licence = detailed_notification.licence
-        self.update_licence(licence, detailed_notification, event_type="dossier-irrecevable")
+        self.update_license(licence, detailed_notification, event_type="dossier-irrecevable")
         transaction.commit()
         
         
