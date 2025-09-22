@@ -116,7 +116,10 @@ class ImportFromNoticeView(BrowserView):
         event_config = event_configs.get(event_type)
         if not event_config:
             return
-        event_type_to_transition = {"dossier-incomplet": "isincomplete"}
+        event_type_to_transition = {
+            "dossier-incomplet": "isincomplete",
+            "dossier-irrecevable": "isinacceptable",
+        }
 
         with api.env.adopt_roles(["Manager"]):
             event = license.createUrbanEvent(event_config)
@@ -133,7 +136,7 @@ class ImportFromNoticeView(BrowserView):
         transaction.commit() 
     def process_not_admissible_folder_notification_second_tour(self, detailed_notification):
         licence = detailed_notification.licence
-        self.update_licence(licence, detailed_notification, event_type="dossier-irrecevable")
+        self.update_license(licence, detailed_notification, event_type="dossier-irrecevable")
         transaction.commit()
         
         
