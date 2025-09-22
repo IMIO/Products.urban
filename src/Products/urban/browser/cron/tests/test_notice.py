@@ -322,3 +322,16 @@ class TestNoticeCronPE2(unittest.TestCase):
         # assert folder is closed
         self.assertEqual(inadmissible_folder.getEventDate().Date(), "2025/09/16")
         self.assertEqual(api.content.get_state(inadmissible_folder), "closed")
+    
+    def test_not_admissible_notification_first_tour(self):
+        licence_folder = self.portal.urban.envclasstwos
+        licence = licence_folder.values()[-1]
+        licence.reference = "PE2/2025/4"
+        licence.reindexObject()
+        # Creation 1st tour not admissible folder
+        self._create_not_admissible_folder("1", "1443526")
+        # Assertions
+        not_admissible_folder = licence.getLastMissingPart()
+        self.assertIsNotNone(not_admissible_folder)
+        self.assertEqual(not_admissible_folder.getEventDate().Date(), "2025/09/19")
+        self.assertEqual(api.content.get_state(not_admissible_folder), "closed")
