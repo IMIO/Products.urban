@@ -17,9 +17,9 @@ from zope.component import getMultiAdapter
 import random
 import string
 import hashlib
+import os
 import pkg_resources
 import time
-
 
 
 def getCurrentFolderManager():
@@ -302,5 +302,10 @@ def add_missing_capakey_in_registry(capakey):
     registry.append(capakey.decode("utf-8"))
     api.portal.set_registry_record(interface, registry)
 
-    
+
+def get_env_variable_value(variable, default):
+    """Return the value defined in env variable"""
+    return os.environ.get(variable, default)
+
+
 WIDGET_DATE_END_YEAR = datetime.now().year + 25
