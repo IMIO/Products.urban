@@ -3182,6 +3182,11 @@ msgstr "Inventaire communal"
 msgid "urban_label_complement"
 msgstr "Compléments"
 
+#. Default: "Complementary Delay"
+#: ../content/licence/GenericLicence.py:331
+msgid "urban_label_complementary_delay"
+msgstr "Prorogation complémentaire"
+
 #. Default: "Composition"
 #: ../content/licence/BaseBuildLicence.py:607
 msgid "urban_label_composition"

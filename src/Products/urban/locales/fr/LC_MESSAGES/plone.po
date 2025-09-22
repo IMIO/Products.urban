@@ -553,3 +553,6 @@ msgstr "2e constat"
 
 msgid "annual_observation"
 msgstr "Constat annuel"
+
+msgid "ComplementaryDelayTerm"
+msgstr "Prorogation complémentaire"

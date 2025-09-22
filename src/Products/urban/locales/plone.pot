@@ -553,3 +553,6 @@ msgstr ""
 
 msgid "annual_observation"
 msgstr ""
+
+msgid "ComplementaryDelayTerm"
+msgstr ""
