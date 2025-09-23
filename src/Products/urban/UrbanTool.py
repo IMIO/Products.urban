@@ -127,23 +127,6 @@ schema = Schema(
             schemata="public_settings",
         ),
         DataGridField(
-            name="warnings",
-            allow_oddeven=True,
-            widget=DataGridWidget(
-                columns={
-                    "condition": SelectColumn("Condition", "listWarningConditions"),
-                    "message": TextAreaColumn("Message", rows=6, cols=60),
-                    "level": SelectColumn("Level", "listWarningLevels"),
-                },
-                label="Warnings",
-                label_msgid="urban_label_warnings",
-                i18n_domain="urban",
-            ),
-            schemata="public_settings",
-            columns=("condition", "message", "level"),
-            default=[],
-        ),
-        DataGridField(
             name="inquirySuspensionPeriods",
             widget=DataGridWidget(
                 helper_js=("datagridwidget.js", "datagriddatepicker.js"),
@@ -233,20 +216,6 @@ schema = Schema(
             ),
             schemata="admin_settings",
         ),
-        LinesField(
-            name="usedAttributes",
-            widget=InAndOutWidget(
-                description="Select the optional fields you want to use. Multiple selection or deselection when clicking with CTRL",
-                description_msgid="urban_descr_usedAttributes",
-                size=170,
-                label="Usedattributes",
-                label_msgid="urban_label_usedAttributes",
-                i18n_domain="urban",
-            ),
-            schemata="admin_settings",
-            multiValued=True,
-            vocabulary="listAllUsedAttributes",
-        ),
         BooleanField(
             name="usePloneMeetingWSClient",
             default=False,
@@ -298,16 +267,6 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             return rows
 
         cadastre = services.cadastre.new_session()
-        rows.append(
-            FixedRow(
-                keyColumn="division",
-                initialData={
-                    "division": "99999",
-                    "name": "99999",
-                    "alternative_name": "non cadastré",
-                },
-            )
-        )
         for division in cadastre.get_all_divisions():
             division_id = str(division[0])
             name = division[1]
@@ -364,8 +323,6 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         This return a list of elements that is used as a vocabulary
         by some fields of differents classes
         """
-        if value_to_use == "title":
-            value_to_use = "Title"
         brains = self.listVocabularyBrains(
             vocToReturn,
             context,
@@ -431,7 +388,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         if inUrbanConfig:
             vocPath = "%s/%s/%s" % (
                 "/".join(self.getPhysicalPath()),
-                self.getLicenceConfig(context).getId(),
+                self.getUrbanConfig(context).getId(),
                 vocToReturn,
             )
         else:
@@ -651,7 +608,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         """
         Return a list of topics to display in the portlet
         """
-        topics = self.getLicenceConfig(context).topics.objectValues("ATTopic")
+        topics = self.getUrbanConfig(context).topics.objectValues("ATTopic")
         res = []
         for topic in topics:
             res.append(topic)
@@ -979,27 +936,18 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         renderedDescription = text
         for expr in re.finditer("\[\[(.*?)\]\]", text):
             if not renderToNull:
-                helper_view = context.unrestrictedTraverse(
+                helper_view = context.restrictedTraverse(
                     "document_generation_helper_view"
                 )
                 data = {
                     "self": helper_view.context,
-                    "object": helper_view,
+                    "object": helper_view.real_context,
                     "event": context,
-                    "context": helper_view,
+                    "context": helper_view.real_context,
                     "tool": self,
                     "portal": api.portal.getSite(),
                     "view": helper_view,
                 }
-                helper_methods = dict(
-                    [
-                        (attr, getattr(helper_view, attr))
-                        for attr in dir(helper_view)
-                        if callable(getattr(helper_view, attr))
-                        and not attr.startswith("_")
-                    ]
-                )
-                data.update(helper_methods)
                 ctx = getEngine().getContext(data)
                 try:
                     # expr.groups()[0] is the expr without the [[]]

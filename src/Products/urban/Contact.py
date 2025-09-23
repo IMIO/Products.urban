@@ -226,15 +226,6 @@ schema = Schema(
             ),
             validators=("isBelgianNR",),
         ),
-        StringField(
-            name="tvaNumber",
-            widget=StringField._properties["widget"](
-                condition="python: here.portal_type == 'Notary'",
-                label="Tvanumber",
-                label_msgid="urban_label_tvaNumber",
-                i18n_domain="urban",
-            ),
-        ),
     ),
 )
 
@@ -503,26 +494,6 @@ class Contact(BaseContent, BrowserDefaultMixin):
             personTitle = personTitle.extraValue
         return personTitle
 
-    def isMasculine(self):
-        """ """
-        answer = False
-        field = self.getField("personTitle")
-        titles = field.vocabulary.getAllVocTerms(self)
-        title = titles[self.getPersonTitle()]
-        if title.getGender() == "male":
-            answer = True
-        return answer
-
-    def isFeminine(self):
-        """ """
-        answer = False
-        field = self.getField("personTitle")
-        titles = field.vocabulary.getAllVocTerms(self)
-        title = titles[self.getPersonTitle()]
-        if title.getGender() == "female":
-            answer = True
-        return answer
-
     def isMasculineSingular(self):
         """ """
         answer = False
@@ -530,17 +501,6 @@ class Contact(BaseContent, BrowserDefaultMixin):
         titles = field.vocabulary.getAllVocTerms(self)
         title = titles[self.getPersonTitle()]
         if title.getMultiplicity() == "single":
-            if title.getGender() == "male":
-                answer = True
-        return answer
-
-    def isMasculinePlural(self):
-        """ """
-        answer = False
-        field = self.getField("personTitle")
-        titles = field.vocabulary.getAllVocTerms(self)
-        title = titles[self.getPersonTitle()]
-        if title.getMultiplicity() == "plural":
             if title.getGender() == "male":
                 answer = True
         return answer

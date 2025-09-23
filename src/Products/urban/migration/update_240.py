@@ -7,11 +7,9 @@ from Products.urban.interfaces import IGenericLicence
 import logging
 
 logger = logging.getLogger("urban: migrations")
-logger = logging.getLogger("urban: migrations")
 
 
 def fix_licences_breadcrumb(context):
-    logger = logging.getLogger("urban: fix licence breadcrumb")
     logger = logging.getLogger("urban: fix licence breadcrumb")
     logger.info("starting upgrade steps")
 
@@ -20,15 +18,12 @@ def fix_licences_breadcrumb(context):
     for urban_type in URBAN_TYPES:
         folder = getattr(urban_folder, urban_type.lower() + "s")
         collection_id = "collection_%s" % urban_type.lower()
-        folder = getattr(urban_folder, urban_type.lower() + "s")
-        collection_id = "collection_%s" % urban_type.lower()
         collection = getattr(folder, collection_id)
         _updateDefaultCollectionFor(folder, collection.UID())
     logger.info("upgrade done!")
 
 
 def fix_external_edition_settings(context):
-    logger = logging.getLogger("urban: fix external edition settings")
     logger = logging.getLogger("urban: fix external edition settings")
     logger.info("starting upgrade steps")
 
