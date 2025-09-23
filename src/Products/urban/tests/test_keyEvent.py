@@ -2,13 +2,14 @@
 
 from Products.urban.testing import URBAN_TESTS_CONFIG
 from Products.urban.tests.helpers import BrowserTestCase
-
 from plone import api
 from plone.app.testing import login
 from plone.testing.z2 import Browser
 from zope.event import notify
 from zope.lifecycleevent import ObjectModifiedEvent
 from zope.lifecycleevent import ObjectRemovedEvent
+from zope.globalrequest import getRequest
+from zope.globalrequest import setRequest
 
 import transaction
 
@@ -32,7 +33,7 @@ class TestKeyEvent(BrowserTestCase):
         # create a test UrbanEvent in test_buildlicence
         self.catalog = api.portal.get_tool("portal_catalog")
         event_type_brain = self.catalog(
-            portal_type="UrbanEventType", id="accuse-de-reception"
+            portal_type="EventConfig", id="accuse-de-reception"
         )[0]
         self.event_type = event_type_brain.getObject()
         self.urban_event = self.licence.createUrbanEvent(self.event_type)
@@ -40,9 +41,13 @@ class TestKeyEvent(BrowserTestCase):
 
         self.browser = Browser(self.portal)
         self.browserLogin(default_user, default_password)
+        if not getRequest():
+            setRequest(self.portal.REQUEST)
 
     def tearDown(self):
         with api.env.adopt_roles(["Manager"]):
+            if not getRequest():
+                setRequest(self.portal.REQUEST)
             api.content.delete(self.licence)
         transaction.commit()
 
@@ -73,9 +78,9 @@ class TestKeyEvent(BrowserTestCase):
         catalog = self.catalog
 
         old_index_value = catalog(portal_type="BuildLicence")[0].last_key_event
-        event_type = self.catalog(
-            portal_type="UrbanEventType", id="depot-de-la-demande"
-        )[0].getObject()
+        event_type = self.catalog(portal_type="EventConfig", id="depot-de-la-demande")[
+            0
+        ].getObject()
         buildlicence.createUrbanEvent(event_type)
         urban_event = buildlicence.objectValues()[1]
         event = ObjectModifiedEvent(urban_event)
@@ -120,8 +125,8 @@ class TestKeyEvent(BrowserTestCase):
         self.assertTrue(date not in self.browser.contents)
 
         old_fields = self.event_type.getActivatedFields()
-        self.event_type.setActivatedFields(old_fields + ("decisionDate",))
-        self.event_type.setKeyDates(("decisionDate",))
+        self.event_type.activatedFields = old_fields + ("decisionDate",)
+        self.event_type.keyDates = ("decisionDate",)
         self.urban_event.setDecisionDate(date)
         transaction.commit()
 
@@ -143,6 +148,7 @@ class TestKeyEvent(BrowserTestCase):
         self.assertTrue(date_1 not in self.browser.contents)
         self.assertTrue(date_2 not in self.browser.contents)
 
+        setRequest(self.portal.REQUEST)
         buildlicence.createUrbanEvent(self.event_type)
         urban_event = buildlicence.objectValues()[-1]
         urban_event.setEventDate(date_1)
