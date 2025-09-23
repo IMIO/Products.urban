@@ -32,6 +32,7 @@ import csv
 import collections
 
 claimants_csv_fieldnames = [
+    "numerotation",
     "personTitle",
     "name1",
     "name2",
@@ -190,7 +191,7 @@ class UrbanEventView(BrowserView):
 
         for generated_doc in context.objectValues():
             for template in template_list:
-                if generated_doc.Title() == template["title"]:
+                if generated_doc.id.startswith(template["name"]):
                     template["class"] = "urban-document-already-created"
         return template_list
 
@@ -210,39 +211,6 @@ class UrbanEventView(BrowserView):
 
     def get_state(self):
         return api.content.get_state(self.context)
-
-    def getApplicants(self):
-        """ """
-        applicants = [
-            appl
-            for appl in self.context.ap_parent.objectValues("Applicant")
-            if appl.portal_type == "Applicant"
-            and api.content.get_state(appl) == "enabled"
-        ]
-        corporations = self.getCorporations()
-        applicants.extend(corporations)
-        return applicants
-
-    def get_applicants_history(self):
-        return [
-            appl
-            for appl in self.context.ap_parent.objectValues("Applicant")
-            if api.content.get_state(appl) == "disabled"
-        ]
-
-    def renderApplicantListing(self):
-        if not self.context.getApplicants():
-            return ""
-        contacttable = ApplicantTable(self.context, self.request)
-        contacttable.update()
-        return contacttable.render()
-
-    def renderApplicantHistoryListing(self):
-        if not self.context.getApplicants():
-            return ""
-        table = ApplicantHistoryTable(self.context, self.request)
-        table.update()
-        return table.render()
 
     @property
     def is_planned_mailing(self):
@@ -303,7 +271,7 @@ class UrbanEventView(BrowserView):
 
 class IImportClaimantListingForm(Interface):
 
-    listing_file_claimants = NamedFile(title=_(u"Listing file (claimants)"))
+    listing_file_claimants = NamedFile(title=_(u'Listing file (claimants)'))
 
 
 class ImportClaimantListingForm(form.Form):
@@ -312,7 +280,7 @@ class ImportClaimantListingForm(form.Form):
     fields = field.Fields(IImportClaimantListingForm)
     ignoreContext = True
 
-    @button.buttonAndHandler(_("Import"), name="import-claimants")
+    @button.buttonAndHandler(_('Import'), name='import-claimants')
     def handleImport(self, action):
         inquiry_UID = self.context.UID()
         planned_claimants_import = (
@@ -327,7 +295,7 @@ class ImportClaimantListingForm(form.Form):
             if inquiry_UID in planned_claimants_import:
                 planned_claimants_import.remove(inquiry_UID)
         else:
-            csv_file = data["listing_file_claimants"]
+            csv_file = data['listing_file_claimants']
             csv_integrity_error = self.validate_csv_integrity(csv_file)
             if csv_integrity_error:
                 api.portal.show_message(csv_integrity_error, self.request, "error")
@@ -395,7 +363,6 @@ class ImportRecipientListingForm(form.Form):
             return False
 
         fieldnames = [
-            "personTitle",
             "name",
             "firstname",
             "street",
@@ -405,11 +372,7 @@ class ImportRecipientListingForm(form.Form):
             "city",
             "country",
             "status",
-            "id",
-            "capakey",
-            "parcel_nature",
-            "parcel_street",
-            "parcel_police_number",
+            "id",  # extra, is read as an empty column
         ]
 
         csv_file = data["listing_file_recipients"]
@@ -435,47 +398,12 @@ class ImportRecipientListingForm(form.Form):
         portal_urban = api.portal.get_tool("portal_urban")
         plone_utils = api.portal.get_tool("plone_utils")
 
-        new_national_reg_ids = [
-            recipient_arg["id"]
-            for recipient_arg in recipient_args
-            if recipient_arg["id"]
-        ]
-
-        # look for national registry numbers present multiple times in CSV
-        # fail import if duplicates are found
-        counter = collections.Counter(new_national_reg_ids)
-        duplicate_numbers = [
-            number for (number, count) in counter.most_common() if count > 1
-        ]
-        if duplicate_numbers:
-            msg = _(
-                u"duplicate_numbers_found_msg",
-                default=u"Some national registry numbers are used multiple times in the CSV; please remove them and try again.\n${numbers}",
-                mapping={u"numbers": ", ".join(duplicate_numbers)},
-            )
-            IStatusMessage(self.request).addStatusMessage(msg, type="error")
-            return
-
-        # look for national registry numbers already used as recipient object ids
-        # fail import if duplicates are found
-        existing_object_ids = list(self.context.objectIds())
-        duplicate_ids = set(new_national_reg_ids).intersection(existing_object_ids)
-        if duplicate_ids:
-            msg = _(
-                u"duplicate_ids_found_msg",
-                default=u"Some national registry numbers already exist in this list; please remove them from the CSV and try again.\n${ids}",
-                mapping={u"ids": ", ".join(duplicate_ids)},
-            )
-            IStatusMessage(self.request).addStatusMessage(msg, type="error")
-            return
-
         country_mapping = {"": ""}
         country_folder = portal_urban.country
         for country_obj in country_folder.objectValues():
             country_mapping[country_obj.Title()] = country_obj.id
 
         for recipient_arg in recipient_args:
-            del recipient_arg["personTitle"]  # no use for it yet
 
             if not recipient_arg["id"]:
                 recipient_arg["id"] = plone_utils.normalizeString(
@@ -524,9 +452,7 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
         self.request.set("disable_plone.leftcolumn", 1)
         self.import_claimants_listing_form = ImportClaimantListingForm(context, request)
         self.import_claimants_listing_form.update()
-        self.import_recipients_listing_form = ImportRecipientListingForm(
-            context, request
-        )
+        self.import_recipients_listing_form = ImportRecipientListingForm(context, request)
         self.import_recipients_listing_form.update()
 
     @property
@@ -571,13 +497,9 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
             )
         else:
             reader = []
-        try:
-            claimant_args = [
-                row for row in reader if row["name1"] or row["name2"] or row["society"]
-            ][1:]
-        except csv.Error, error:
-            return
-
+        claimant_args = [
+            row for row in reader if row["name1"] or row["name2"] or row["society"]
+        ][1:]
         for claimant_arg in claimant_args:
             claimant_arg.pop(None, None)
             # default values
@@ -706,17 +628,24 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
 
         licence = inquiry_event.aq_parent
         portal_urban = api.portal.get_tool("portal_urban")
-        suspension_periods = portal_urban.get_offday_periods("inquiry_suspension")
+        suspension_periods = portal_urban.getInquirySuspensionPeriods()
+        suspension_delay = 0
+        inquiry_duration = 15
+        if hasattr(licence, "getRoadAdaptation"):
+            if licence.getRoadAdaptation() and licence.getRoadAdaptation() not in [
+                [""],
+                "no",
+            ]:
+                inquiry_duration = 30
+        theorical_end_date = start_date + inquiry_duration
 
         for suspension_period in suspension_periods:
-            suspension_start = DateTime(str(suspension_period["start_date"]))
-            suspension_end = DateTime(str(suspension_period["end_date"]))
-            if end_date >= suspension_start and end_date < suspension_end + 1:
-                return (
-                    False,
-                    suspension_start.strftime("%d/%m/%Y"),
-                    suspension_end.strftime("%d/%m/%Y"),
-                )
+            suspension_start = DateTime(suspension_period["from"])
+            suspension_end = DateTime(suspension_period["to"])
+            if start_date >= suspension_start and start_date < suspension_end + 1:
+                suspension_delay = suspension_end - start_date
+                if end_date < theorical_end_date + suspension_delay:
+                    return False, suspension_period["from"], suspension_period["to"]
         return True, "", ""
 
 
