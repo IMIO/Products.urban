@@ -4,6 +4,7 @@ from Products.Archetypes.event import ObjectInitializedEvent
 from Products.Five import BrowserView
 from Products.urban import UrbanMessage as _
 from Products.urban.services import notice
+from Products.urban.browser.cron.transitions import EVENT_TYPE_TO_TRANSITION
 from datetime import datetime
 from DateTime import DateTime
 from plone import api
@@ -110,7 +111,7 @@ class ImportFromNoticeView(BrowserView):
         if not event_type:
             return
         event_configs = detailed_notification.event_configs  
-        event_type_to_transition = {"dossier-incomplet": "isincomplete"} 
+        event_type_to_transition = EVENT_TYPE_TO_TRANSITION
         # Normalizing event_type to list
         if isinstance(event_type, (list, tuple)):
             event_types = event_type
