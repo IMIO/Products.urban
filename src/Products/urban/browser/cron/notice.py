@@ -104,7 +104,15 @@ class ImportFromNoticeView(BrowserView):
         # Set title and update reference number
         notify(ObjectInitializedEvent(licence))
         # Change workflow and add deposit event
-        transaction.commit()  # Usefull in case of an error
+        event_config_deposit = detailed_notification.event_config(
+            "Products.urban.interfaces.IDepositEvent"
+        )
+        event = licence.createUrbanEvent(event_config_deposit)
+        event_date = DateTime(str(detailed_notification.send_date))
+        event.setEventDate(event_date)
+        api.content.transition(event, "close")
+
+        transaction.commit()  # Useful in case of an error
     
     def update_license(self, license, detailed_notification, event_type=None):
         if not event_type:

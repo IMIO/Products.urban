@@ -19,6 +19,7 @@ class NoticeNotification(NoticeElement):
         "event_configs",
         "licence",
         "notice_type",
+        "send_date",
         "sender",
         "status",
         "notice_type",
