@@ -513,21 +513,21 @@ def addUrbanConfigFolders(context):
 
         # we just created the urbanConfig, proceed with other parameters...
         # parameters for every LicenceConfigs
-        # add EventConfigs folder
-        if not hasattr(aq_base(config_folder), "eventconfigs"):
+        # add UrbanEventTypes folder
+        if not hasattr(aq_base(config_folder), "urbaneventtypes"):
             config_folder.invokeFactory(
                 "Folder",
-                id="eventconfigs",
-                title=_("eventconfigs_folder_title", "urban"),
+                id="urbaneventtypes",
+                title=_("urbaneventtypes_folder_title", "urban"),
             )
-        eventconfigs_folder = getattr(config_folder, "eventconfigs")
+        eventtypes_folder = getattr(config_folder, "urbaneventtypes")
         if urban_type in ["Inspection", "Ticket"]:
             setFolderAllowedTypes(
-                eventconfigs_folder, ["EventConfig", "FollowUpEventConfig"]
+                eventtypes_folder, ["UrbanEventType", "FollowUpEventType"]
             )
         else:
             setFolderAllowedTypes(
-                eventconfigs_folder, ["EventConfig", "OpinionEventConfig"]
+                eventtypes_folder, ["UrbanEventType", "OpinionRequestEventType"]
             )
 
         licence_vocabularies = default_values.get(urban_type, {})
@@ -1715,36 +1715,39 @@ def createLicence(site, licence_type, data):
     # call post script
     licence.at_post_create_script()
     # add a dummy portion out
-    division = ""
+    division_code = division = ""
     if services.cadastre.can_connect():
         session = services.cadastre.new_session()
         division_code = division = str(session.get_all_divisions()[0][0])
         session.close()
-    parcel_data = {
+    portionout_data = {
+        "divisionCode": division_code,
         "division": division,
         "section": "A",
         "radical": "84",
         "exposant": "C",
         "partie": False,
     }
-    if "parcel_data" in data:
-        parcel_data = data["parcel_data"]
-    parcel = api.content.create(
-        container=licence,
-        type="Parcel",
-        id=site.generateUniqueId("parcelle"),
-        **parcel_data
+    if "portionout_data" in data:
+        portionout_data = data["portionout_data"]
+    portionout_id = licence.invokeFactory(
+        "PortionOut", id=site.generateUniqueId("parcelle"), **portionout_data
     )
-    parcel.updateTitle()
-    parcel.reindexObject()
+    portionout = getattr(licence, portionout_id)
+    # portionout._renameAfterCreation()
+    portionout.updateTitle()
+    portionout.reindexObject()
     licence.reindexObject(idxs=["parcelInfosIndex"])
     # generate all the urban events
     logger.info("   test %s --> create all the events" % licence_type)
-    event_configs = licence.getLicenceConfig().getEventConfigs()
-    for event_config in event_configs:
-        if event_config.canBeCreatedInLicence(licence):
-            licence.createUrbanEvent(event_config)
-    # fill each event with dummy data and generate all its documents
+    eventtypes = [
+        brain.getObject()
+        for brain in urban_tool.listEventTypes(
+            licence, urbanConfigId=licence_type.lower()
+        )
+    ]
+    for event_type in eventtypes:
+        licence.createUrbanEvent(event_type)    # fill each event with dummy data and generate all its documents
     logger.info("   test %s --> generate all the documents" % licence_type)
     for urban_event in licence.objectValues(
         ["UrbanEvent", "UrbanEventInquiry", "UrbanEventOpinionRequest"]
