@@ -10,7 +10,7 @@ from Products.Five import BrowserView
 from Products.urban.interfaces import ICollegeEvent
 from Products.urban.schedule.interfaces import ITaskCron
 
-from zope.component import getMultiAdapter
+from zope.component import queryMultiAdapter
 from zope.component import getUtilitiesFor
 from zope.event import notify
 from zope.lifecycleevent import ObjectModifiedEvent
@@ -33,9 +33,11 @@ class UpdateCollegeEventDoneTasks(BrowserView):
 
     def __call__(self):
         """ """
-        ws4pm = getMultiAdapter(
+        ws4pm = queryMultiAdapter(
             (api.portal.get(), self.request), name="ws4pmclient-settings"
         )
+        if not ws4pm:
+            return
 
         catalog = api.portal.get_tool("portal_catalog")
 
@@ -53,7 +55,8 @@ class UpdateCollegeEventDoneTasks(BrowserView):
             ]
             college_done = items and items[0]["review_state"] in accepted_states
             if college_done:
-                # udpate tasks by simulating an ObjectModifiedEvent on the college urban event
+                # udpate tasks by simulating an ObjectModifiedEvent on the college
+                # urban event
                 notify(ObjectModifiedEvent(college_event))
 
 
@@ -62,16 +65,23 @@ class UpdateOpenTasksLicences(BrowserView):
     Update all licences with at least an open tasks.
     """
 
+    @staticmethod
+    def _get_task_container(brain):
+        """Return the task object container"""
+        try:
+            return brain.getObject().get_container()
+        except AttributeError:
+            return
+
     def __call__(self):
         """ """
         catalog = api.portal.get_tool("portal_catalog")
-        known_parents = []
 
         open_tasks_brains = catalog(
             object_provides=IAutomatedTask.__identifier__,
             review_state=states_by_status[STARTED],
         )
-        licences = list(set([t.getObject().get_container() for t in open_tasks_brains]))
+        licences = list(set([self._get_task_container(t) for t in open_tasks_brains]))
         filtered_licences = []
         for licence in licences:
             if (
