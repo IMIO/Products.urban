@@ -5485,3 +5485,6 @@ msgstr "Taxation"
 
 msgid "urban_label_buildingPart"
 msgstr "Partie de l'immeuble concernée"
+
+msgid "urban_label_buildingType"
+msgstr "Nature de l'immeuble"
