@@ -1977,7 +1977,7 @@ def add_urban_config_folder(urban_type, tool=None, site=None):
 
     licenceConfigId = urban_type.lower()
     if hasattr(aq_base(tool), licenceConfigId):
-        return None
+        return getattr(tool, licenceConfigId)
 
     # Add folder
     config_folder_id = tool.invokeFactory(
