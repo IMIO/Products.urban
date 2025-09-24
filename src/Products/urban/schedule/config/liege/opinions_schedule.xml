@@ -60,7 +60,7 @@
    <property name="position">center</property>
    <property name="section">default</property>
    <property name="hidden">False</property>
-   <property name="count">0</property>
+   <property name="count">False</property>
    <property name="sortcountable">False</property>
    <property name="hidezerocount">False</property>
    <property name="index">assigned_user</property>
