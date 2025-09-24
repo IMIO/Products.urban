@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
-import re
 from Products.urban.notice.base import NoticeElement
 from Products.urban import utils
+
+import re
 
 
 class NoticeAddress(NoticeElement):
