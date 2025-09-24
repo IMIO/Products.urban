@@ -13,8 +13,8 @@ from StringIO import StringIO
 
 from eea.facetednavigation.interfaces import IFacetedNavigable
 
-from imio.dashboard.utils import getDashboardQueryResult
-from imio.dashboard.utils import getCriterionByIndex
+from collective.eeafaceted.dashboard.utils import getDashboardQueryResult
+from collective.eeafaceted.dashboard.utils import getCriterionByIndex
 
 from plone import api
 from plone.app.layout.viewlets import ViewletBase

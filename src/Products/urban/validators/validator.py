@@ -104,8 +104,10 @@ class isNotDuplicatedReferenceValidator:
         if not ref_num:
             return 1
 
-        similar_licences = catalog(getReference=ref_num, portal_type=types_to_check)
-
+        similar_licences = catalog(
+            getReference="'{0}'".format(ref_num),  # Avoid an issue with NOT
+            portal_type=types_to_check,
+        )
         if not similar_licences or (
             len(similar_licences) == 1 and licence.UID() == similar_licences[0].UID
         ):
@@ -132,6 +134,13 @@ class procedureChoiceValidator:
                 _(
                     "error_procedure_choice_unknown",
                     default=u"Cannot select 'unknown' with another value",
+                )
+            )
+        if "simple" in value and len(value) > 2:
+            return translate(
+                _(
+                    "error_procedure_choice_simple",
+                    default=u"Cannot select 'simple' with another value",
                 )
             )
         if ("light_inquiry" in value) + ("inquiry" in value) + (
@@ -222,7 +231,7 @@ class isValidPuissanceValidator:
         self.name = name
 
     def __call__(self, value, *args, **kwargs):
-        if value == "" or (len(value) < 3 and value.isdigit()):
+        if value == "" or (len(value) < 4 and value.isdigit()):
             return 1
         return translate(
             _("error_puissance", default=u"Puissance should be a number < 100")
