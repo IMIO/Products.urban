@@ -37,11 +37,11 @@ class ImportFromNoticeView(BrowserView):
     def _add_error(self, licence, msg, serialized_data):
         """Add an error"""
         error = _(
-            "<p>${msg} for informations: ${data}</p>",
+            u"<p>${msg} for informations: ${data}</p>",
             mapping={
                 "msg": msg,
-                "data": ", ".join(
-                    ["{0}: {1}".format(k, v) for k, v in serialized_data.items()]
+                "data": u", ".join(
+                    [u"{0}: {1}".format(k, v) for k, v in serialized_data.items()]
                 ),
             },
         )
