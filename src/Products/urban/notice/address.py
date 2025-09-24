@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
-
 from Products.urban.notice.base import NoticeElement
 from Products.urban import utils
+
+import re
 
 
 class NoticeAddress(NoticeElement):
@@ -37,10 +38,22 @@ class NoticeAddress(NoticeElement):
         if not self.notice_street:
             return
         term = self.notice_street
-        if self.postCode:
-            term = "{0} {1}".format(term, self.postCode)
+        # skip use of self.postCode; induces more errors than it solves
         if self.locality:
-            term = "{0} {1}".format(term, self.locality)
+            term = u"{0} {1}".format(term, self.locality)
+        elif self.municipality:
+            match = re.search("^(?P<commune>.+?) *\((?P<village>.*?)\)$", self.municipality)
+            if match:
+                term = u"{0} {1}".format(term, match.group("village"))
+            else:
+                term = u"{0} {1}".format(term, self.municipality)
+
+        if u"(" in term:
+            term = term.replace(u"(", u"")
+        if u")" in term:
+            term = term.replace(u")", u"")
+
+        return term  # must be unicode for utils.find_address
 
     @property
     def street(self):
@@ -64,7 +77,7 @@ class NoticeAddress(NoticeElement):
 
     @property
     def notice_street(self):
-        return self._get_data("notice_street")
+        return self._get_data("street")
 
     @property
     def number(self):
