@@ -15,7 +15,11 @@ class NoticeNotification(NoticeElement):
     """Class that represent a notification from Notice Webservice"""
 
     _notice_keys = (
+        "event_config",
+        "event_configs",
+        "licence",
         "notice_type",
+        "send_date",
         "sender",
         "status",
         "notice_type",
@@ -153,6 +157,24 @@ class NoticeNotification(NoticeElement):
         portal_urban_folder = api.portal.get().urban.portal_urban
         licence_type_folder = getattr(portal_urban_folder, "{0}".format(self.type.lower()))
         return getattr(licence_type_folder, "eventconfigs")
+
+    def event_config(self, interface_identifier):
+        """
+        Return the event config for a given marker interface identifier.
+        """
+        for brain in api.content.find(
+            context=self.event_configs, portal_type="EventConfig", review_state="enabled"
+        ):
+            config = brain.getObject()
+            config_event_types = config.eventType or []
+            if interface_identifier in config_event_types:
+                return config
+        raise ValueError(
+            "No enabled EventConfig found for marker {} of licence type {}".format(
+                interface_identifier,
+                self.type,
+            )
+        )
 
     @property
     def licenceSubject(self):
