@@ -4,6 +4,7 @@ from Products.Archetypes.event import ObjectInitializedEvent
 from Products.Five import BrowserView
 from Products.urban import UrbanMessage as _
 from Products.urban.services import notice
+from Products.urban.browser.cron.transitions import EVENT_TYPE_TO_TRANSITION
 from datetime import datetime
 from DateTime import DateTime
 from plone import api
@@ -118,19 +119,27 @@ class ImportFromNoticeView(BrowserView):
         if not event_type:
             return
         event_configs = detailed_notification.event_configs
-        event_config = event_configs.get(event_type)
-        if not event_config:
+        # Normalizing event_type to list
+        if isinstance(event_type, (list, tuple)):
+            event_types = event_type
+        else:
+            event_types = [event_type]   
+        configs = []
+        for etype in event_types:                                         
+            event_config = event_configs.get(etype)
+            if  event_config:
+                configs.append((etype,event_config))
+        if not configs:
             return
-        event_type_to_transition = {"dossier-incomplet": "isincomplete"}
-
         with api.env.adopt_roles(["Manager"]):
-            event = license.createUrbanEvent(event_config)
-            event_date = DateTime(str(detailed_notification.send_date))
-            event.setEventDate(event_date)
-            api.content.transition(event, "close")
-        transition = event_type_to_transition.get(event_type)
-        if transition:
-            api.content.transition(license, transition)
+            for etype, event_config in configs:
+                event = license.createUrbanEvent(event_config)
+                event_date = DateTime(str(detailed_notification.send_date))
+                event.setEventDate(event_date)
+                api.content.transition(event, "close")
+                transition = EVENT_TYPE_TO_TRANSITION.get(etype)
+                if transition:
+                    api.content.transition(license, transition)
 
     def process_incomplete_folder_notification(self, detailed_notification):
         license = detailed_notification.licence
