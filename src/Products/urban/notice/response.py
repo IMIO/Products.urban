@@ -64,17 +64,28 @@ class NoticeOutgoingSummaryReportNotification(NoticeResponse):
     def specific(self):
         return {
             "tns:municipalityReference": self._reference,
-            "tns:caracteristicsComment":,
+            "tns:caracteristicsComment":self._decision,
             "tns:decisionDate": self._display_decision_date,
-            "tns:displayDecisionStartDate": self._decision,
-            "tns:displayDecisionEndDate"
+            "tns:displayDecisionStartDate": self._display_decision_start_date,
+            "tns:displayDecisionEndDate": self._display_decision_end_date,
             
         }
         
     @property
     def _display_decision_date(self):
-        return self.event.getDisplayDate()
-    #return self._licence.getDecisionDate()
+        return self.event.getDecisionDate()
     @property
     def _decision(self):
         return self.event.getDecision()
+    @property
+    def _display_decision_start_date(self):
+        return self.event.getDisplayDate()
+    @property
+    def _display_decision_end_date(self):
+        return self.event.getDisplayDateEnd()
+    
+class NoticeOutgoingSummaryReportDecisionInfoNotification(NoticeOutgoingSummaryReportNotification):
+        state = "PARTIAL"
+    
+class NoticeOutgoingSummaryReportDisplayDecisionDateNotification(NoticeOutgoingSummaryReportNotification):
+        state = "FINAL"

@@ -1324,7 +1324,30 @@ class CanTransferFolderToDpaView(BrowserView):
             and self.no_transmit_yet
         )
 
+class CanTransferDecisionDtaeView(BrowserView):
+    @property
+    def is_urban_event_notice(self):
+        return self.context.portal_type == "UrbanEvent"
 
+    @property
+    def is_transmit_to_spw_event(self):
+        return (
+            "Products.urban.interfaces.ITransmitToSPWEvent"
+            in self.context.getUrbaneventtypes().getEventType()
+        )
+
+    @property
+    def no_transmit_yet(self):
+        annotations = interfaces.IAnnotations(self.context)
+        dates = annotations.get("notice_transmit_dates", {})
+        return len(dates) == 0
+
+    def __call__(self):
+        return (
+            self.is_urban_event_notice
+            and self.is_transmit_to_spw_event
+            and self.no_transmit_yet
+        )
 class UrbanEventNoticeActionsView(BrowserView):
     """ """
 
@@ -1332,6 +1355,18 @@ class UrbanEventNoticeActionsView(BrowserView):
         result = self.context.transfer_folder_to_dpa()
         if result["error"] is True:
             IStatusMessage(self.request).addStatusMessage(result["message"], "error")
+        else:
+            IStatusMessage(self.request).addStatusMessage(
+                _(u"The folder transfer to DPA is done."), "info"
+            )
+        self.request.response.redirect(self.context.absolute_url())
+    
+    def transfer_decision_date(self):
+        result = self.context.transfer_decision_date()
+        if result["error"] is True:
+            IStatusMessage(self.request).addStatusMessage(
+                result["message"], "error"
+            )
         else:
             IStatusMessage(self.request).addStatusMessage(
                 _(u"The folder transfer to DPA is done."), "info"

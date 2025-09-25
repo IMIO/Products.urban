@@ -7,6 +7,7 @@ from Products.urban import UrbanMessage as _
 from Products.urban.UrbanEvent import UrbanEvent
 from Products.urban.config import *
 from Products.urban.notice import NoticeOutgoingNotification
+from Products.urban.notice import NoticeOutgoingSummaryReportNotification
 from Products.urban.services.notice import WebserviceNotice
 from Products.urban.utils import setOptionalAttributes
 from zope.annotation.interfaces import IAnnotations
@@ -70,7 +71,16 @@ class UrbanEventNotice(UrbanEvent, BrowserDefaultMixin):
         dates = annotations.get(key, OrderedDict())
         dates[event_type] = date if date else datetime.date.today()
         annotations[key] = dates
-
+    def store_decision_info(self, event_type, date=None):
+        annotations = IAnnotations(self)
+        key = "notice_decision_info"
+        infos = annotations.get(key, OrderedDict())
+        infos[event_type] = {
+            "date": date if date else datetime.date.today(),
+            "decision": self.getDecision(),
+            
+        }
+        annotations[key] = infos
     def transfer_folder_to_dpa(self):
         notification = NoticeOutgoingNotification(self)
         service = WebserviceNotice()
@@ -96,7 +106,32 @@ class UrbanEventNotice(UrbanEvent, BrowserDefaultMixin):
         self.store_transmit_date("transfer_folder_to_dpa", reception_date)
 
         return result
+    
+    def transfer_decision_info(self):
+        notification = NoticeOutgoingSummaryReportNotification(self)
+        service = WebserviceNotice()
+        result = service.post_notification_response(
+            notification.notice_id,
+            notification.serialize(),
+        )
+        if result["error"] is True:
+            if result["error_type"] == "WRONG_STATUS":
+                # This can happen if there was an error with the WS
+                existing_notification = service.get_notification(notification.notice_id)
+                if existing_notification.status == u"TERMINE":
+                    self.store_decision_info(
+                        "decision",
+                        date=existing_notification.status_date,
+                    )
+                    return {"error": False}
+                return result
+            else:
+                return result
+        reception_date_str = result["body"]["result"]["receptionDate"]
+        reception_date = datetime.datetime.strptime(reception_date_str[:10], "%Y-%m-%d")
+        self.store_transmit_date("transfer_decision_date", reception_date)
 
+        return result
     # Manually created methods
 
 
