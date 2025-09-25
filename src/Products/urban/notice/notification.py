@@ -6,6 +6,7 @@ from Products.urban.notice.document import NoticeDocument
 from Products.urban.notice.parcel import NoticeParcel
 from Products.urban.notice.party import NoticeParty
 from Products.urban.notice.sender import NoticeSender
+from Products.urban.utils import get_rubric_obj
 from datetime import datetime
 from lxml import etree
 from plone import api
@@ -88,16 +89,12 @@ class NoticeNotification(NoticeElement):
                     elif self.notification_subtype == "PE":
                         # PE class is not yet available in TRANSFERT_DOSSIER
                         # => extract it from XML document
-                        penv_classe = None
-                        for document in self.documents:
-                            if (
-                                document.document_mimetype == "application/xml"
-                                and document.document_type_code == "PJ_FORMULAIRE"
-                            ):
-                                tree = etree.parse(document.file)
-                                classe_elements = tree.xpath("/dataStore/item/classe")
-                                if len(classe_elements) == 1:
-                                    penv_classe = classe_elements[0].text
+                        classe_elements = self._pj_formulaire_xml_tree.xpath(
+                            "/dataStore/item/classe"
+                        )
+                        penv_classe = (
+                            classe_elements[0].text if len(classe_elements) == 1 else None
+                        )
                         self._licence_type = {
                             "1": "EnvClassOne",
                             "2": "EnvClassTwo",
@@ -126,35 +123,34 @@ class NoticeNotification(NoticeElement):
         return self._get_data("specific", specific.get(self.notice_type), "ns3:municipalityReference")
 
     @property
+    def _pj_formulaire_xml_tree(self):
+        """Return XML tree with all data entered by residents in Mon Espace"""
+        for document in self.documents:
+            if (
+                document.document_mimetype == "application/xml"
+                and document.document_type_code == "PJ_FORMULAIRE"
+            ):
+                return etree.parse(document.file)
+        raise ValueError("No PJ_FORMULAIRE XML document found")
+
+    @property
     def rubrics(self):
         """Return the rubrics as a list of UIDs, if present"""
         found_uids = []
         missing_rubrics = []
-        if self.notice_type == "TRANSFERT_DOSSIER":
-            rubrics_folder = api.portal.get_tool("portal_urban").rubrics
 
-            for document in self.documents:
-                if (
-                    document.document_mimetype == "application/xml"
-                    and document.document_type_code == "PJ_FORMULAIRE"
-                ):
-                    tree = etree.parse(document.file)
-                    rubrique_elements = tree.xpath("/dataStore/projet/rubriques/item")
-    
-                    for rubrique in rubrique_elements:
-                        uid = None
-                        classe = rubrique.xpath("classe/text()")[0]
-                        number = rubrique.xpath("numRubrique")[0].text
-                        brains = api.content.find(context=rubrics_folder, id=number)
-                        for brain in brains:
-                            obj = brain.getObject()
-                            if obj.getNumber() == number and obj.getExtraValue() == classe:
-                                uid = obj.UID()
-                                break
-                        if uid:
-                            found_uids.append(uid)
-                        else:
-                            missing_rubrics.append("classe {}, {}".format(classe, number))
+        if self.notice_type == "TRANSFERT_DOSSIER":
+            rubrique_elements = self._pj_formulaire_xml_tree.xpath(
+                "/dataStore/projet/rubriques/item"
+            )
+            for rubrique in rubrique_elements:
+                classe = rubrique.xpath("classe/text()")[0]
+                number = rubrique.xpath("numRubrique")[0].text
+                rubric_obj = get_rubric_obj(classe, number)
+                if rubric_obj:
+                    found_uids.append(rubric_obj.UID())
+                else:
+                    missing_rubrics.append("classe {}, {}".format(classe, number))
 
         if missing_rubrics:
             raise ValueError(
