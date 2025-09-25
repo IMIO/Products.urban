@@ -110,27 +110,26 @@ class ImportFromNoticeView(BrowserView):
     def update_license(self, license, detailed_notification, event_type=None):
         if not event_type:
             return
-        event_configs = detailed_notification.event_configs  
-        event_type_to_transition = EVENT_TYPE_TO_TRANSITION
+        event_configs = detailed_notification.event_configs
         # Normalizing event_type to list
         if isinstance(event_type, (list, tuple)):
             event_types = event_type
         else:
             event_types = [event_type]   
         configs = []
-        for et in event_types:                                         
-            event_config = event_configs.get(et)
+        for etype in event_types:                                         
+            event_config = event_configs.get(etype)
             if  event_config:
-                configs.append((et,event_config))
+                configs.append((etype,event_config))
         if not configs:
             return
         with api.env.adopt_roles(["Manager"]):
-            for et, event_config in configs:
+            for etype, event_config in configs:
                 event = license.createUrbanEvent(event_config)
                 event_date = DateTime(str(detailed_notification.send_date))
                 event.setEventDate(event_date)
                 api.content.transition(event, "close")
-                transition = event_type_to_transition.get(et)
+                transition = EVENT_TYPE_TO_TRANSITION.get(etype)
                 if transition:
                     api.content.transition(license, transition)
 
