@@ -11,29 +11,128 @@ from plone import api
 from zope.event import notify
 from zope.i18n import translate
 
+import logging
 import transaction
+
+logger = logging.getLogger("urban: Notice Cron")
 
 
 class ImportFromNoticeView(BrowserView):
     """Get new notification from Notice API"""
 
     def __call__(self):
+
+        # initialization
+
         self.notice_service = notice.WebserviceNotice()
-        self.max_date = (
+        self.retry_failed_notifications = self.request.form.get("retry") == "1"
+        self.last_import_date = (
             api.portal.get_registry_record(
                 "Products.urban.browser.notice_settings.INoticeSettings.last_import_date",
                 default=datetime(2000, 1, 1),
             )
             or datetime(2000, 1, 1)
         )
-        self.notification_dates = []
-        notifications = self._get_notice_notifications()
-        for notification in notifications:
-            self._handle_notification(notification)
+        self.failed_notifications = (
+            api.portal.get_registry_record(
+            "Products.urban.browser.notice_settings.INoticeSettings.failed_notifications",
+            default=[],
+            )
+            or []
+        )
+        self.already_handled_notifications = []
+
+        # retry failed notifications, if requested
+
+        if self.retry_failed_notifications and self.failed_notifications:
+            logger.info(
+                u"Retrying %d failed notifications",
+                len(self.failed_notifications)
+            )
+            remaining_failed = []
+
+            for failed_notice_id in self.failed_notifications:
+                if failed_notice_id in self.already_handled_notifications:
+                    continue
+                self.already_handled_notifications.append(failed_notice_id)
+                try:
+                    self._handle_notification(failed_notice_id)
+                    logger.info(u"Retried notification %s succeeded", failed_notice_id)
+                except Exception as exc:
+                    logger.exception(
+                        u"Retried notification %s failed again: %s",
+                        failed_notice_id,
+                        exc,
+                    )
+                    remaining_failed.append(failed_notice_id)
+
+            api.portal.set_registry_record(
+                "Products.urban.browser.notice_settings.INoticeSettings.failed_notifications",
+                remaining_failed,
+            )
+            self.failed_notifications = remaining_failed
+
+        # try fresh notifications
+
+        latest_successful_date = self.last_import_date
+        fresh_notifications = self._get_notice_notifications()
+        for notification in fresh_notifications:
+
+            notice_id = notification["noticeId"]
+            notif_last_status_date = datetime.strptime(
+                notification["status"]["date"][0:26],
+                "%Y-%m-%dT%H:%M:%S.%f",
+            )
+
+            if notice_id in self.already_handled_notifications:
+                continue
+            self.already_handled_notifications.append(notice_id)
+
+            try:
+                self._handle_notification(notice_id)
+                if notif_last_status_date > latest_successful_date:
+                    latest_successful_date = notif_last_status_date
+                logger.info(u"Notification %s succeeded", notice_id)
+            except Exception as exc:
+                logger.exception(
+                    u"Error while processing notification %s: %s",
+                    notice_id,
+                    exc,
+                )
+                self.failed_notifications.append(notice_id)
+
+        # save progress markers
+
+        if latest_successful_date > self.last_import_date:
+            api.portal.set_registry_record(
+                "Products.urban.browser.notice_settings.INoticeSettings.last_import_date",
+                latest_successful_date,
+            )
+            logger.info(
+                u"Updated last_import_date to %s", latest_successful_date.isoformat()
+            )
+
+        api.portal.set_registry_record(
+            "Products.urban.browser.notice_settings.INoticeSettings.failed_notifications",
+            self.failed_notifications,
+        )
+        if self.failed_notifications:
+            logger.warning(
+                u"%d notification(s) recorded as failed", len(self.failed_notifications)
+            )
+
         return "OK"
 
     def _get_notice_notifications(self):
-        return self.notice_service.get_notifications()
+        notifications = []
+        try:
+            notifications = self.notice_service.get_notifications()
+        except Exception as exc:
+            logger.exception(
+                u"Failed getting the list of recent notifications: %s",
+                exc,
+            )
+        return notifications
 
     def _add_error(self, licence, msg, serialized_data):
         """Add an error"""
@@ -49,25 +148,14 @@ class ImportFromNoticeView(BrowserView):
         licence.description.raw += translate(error, context=self.request)
         licence._p_changed = 1
 
-
-    def _handle_notification(self, notification):
-        notification_date = datetime.strptime(
-            notification["status"]["date"][0:26],
-            "%Y-%m-%dT%H:%M:%S.%f",
-        )
-        if notification_date > self.max_date:
-            self.notification_dates.append(notification_date)
-        else:
-            return
-
+    def _handle_notification(self, notice_id):
         detailed_notification = self.notice_service.get_notification(
-            notification["noticeId"]
+            notice_id,
         )
         if detailed_notification.notice_type == "TRANSFERT_DOSSIER":
             self._transfert_dossier(detailed_notification)
         if detailed_notification.notice_type == "NOTIF_COMPLETUDE1_INCOMPLET_COMMUNE":
             self.process_incomplete_folder_notification(detailed_notification)
-
 
     def _transfert_dossier(self, detailed_notification):
         container = detailed_notification.container
