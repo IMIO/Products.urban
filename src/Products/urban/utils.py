@@ -172,6 +172,15 @@ def getLicenceFolder(licencetype):
     return licence_folder
 
 
+def get_rubric_obj(classe, number):
+    rubrics_folder = api.portal.get_tool("portal_urban").rubrics
+    brains = api.content.find(context=rubrics_folder, id=number)
+    for brain in brains:
+        obj = brain.getObject()
+        if obj.getNumber() == number and obj.getExtraValue() == classe:
+            return obj
+
+
 def removeItems(liste, items):
     [liste.remove(i) for i in items if liste.count(i)]
     return liste
