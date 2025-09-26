@@ -525,5 +525,19 @@
      attribute="transfer_decision_info"
      permission="zope2.View"
   />
+  <browser:page
+     for="*"
+     name="can_transfer_decision_date"
+     class=".urbaneventviews.CanTransferDecisionDisplayDateView"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="Products.urban.interfaces.IUrbanEvent"
+     name="transfer_decision_date"
+     class=".urbaneventviews.UrbanEventNoticeActionsView"
+     attribute="transfer_decision_date"
+     permission="zope2.View"
+  />
 
 </configure>

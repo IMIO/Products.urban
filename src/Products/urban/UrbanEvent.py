@@ -1014,7 +1014,7 @@ class UrbanEvent(OrderedBaseFolder, BrowserDefaultMixin):
             if result["error_type"] == "WRONG_STATUS":
                 # This can happen if there was an error with the WS
                 existing_notification = service.get_notification(notification.notice_id)
-                if existing_notification.status == u"TERMINE":
+                if existing_notification.status == u"PARCIAL":
                     self.store_decision_info(
                         "transfer_decision_info",
                         date=existing_notification.status_date,
@@ -1026,6 +1026,40 @@ class UrbanEvent(OrderedBaseFolder, BrowserDefaultMixin):
         reception_date_str = result["body"]["result"]["receptionDate"]
         reception_date = datetime.datetime.strptime(reception_date_str[:10], "%Y-%m-%d")
         self.store_transmit_date("transfer_decision_info", reception_date)
+
+        return result
+    def store_ddisplay_decision_dates(self, event_type, date=None):
+        annotations = IAnnotations(self)
+        key = "notice_decision_info"
+        dates = annotations.get(key, OrderedDict())
+        dates[event_type] = {
+            "start_date": self.getDisplayDate(),
+            "end_date": self.getDisplayEndDate(),
+            
+        }
+        annotations[key] = dates
+    def transfer_decision_date(self):
+        notification = NoticeOutgoingSummaryReportNotification(self)
+        service = WebserviceNotice()
+        result = service.post_notification_response(
+            notification.notice_id,
+            notification.serialize(),
+        )
+        if result["error"] is True:
+            if result["error_type"] == "WRONG_STATUS":
+                # This can happen if there was an error with the WS
+                existing_notification = service.get_notification(notification.notice_id)
+                if existing_notification.status == u"TERMINE":
+                    self.store_ddisplay_decision_dates(
+                        "transfer_decision_date",
+                    )
+                    return {"error": False}
+                return result
+            else:
+                return result
+        reception_date_str = result["body"]["result"]["receptionDate"]
+        reception_date = datetime.datetime.strptime(reception_date_str[:10], "%Y-%m-%d")
+        self.store_transmit_date("transfer_decision_date", reception_date)
 
         return result
     # Manually created methods
