@@ -143,8 +143,8 @@
          <property name="title" i18n:translate="">Transfer decision date</property>
          <property name="description" i18n:translate=""></property>
          <property name="url_expr">string:$object_url/@@transfer_decision_info</property>
-         <property name="icon_expr">string:$portal_url/copytoclaymants.png</property>
-         <property name="available_expr">context/@@transfer_decision_info</property>
+         <property name="icon_expr">string:$portal_url/Ticket.png</property>
+         <property name="available_expr">context/@@can_transfer_decision_info</property>
          <property name="permissions">
             <element value="View" />
          </property>

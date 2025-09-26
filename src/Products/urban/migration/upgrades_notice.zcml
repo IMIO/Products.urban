@@ -27,4 +27,14 @@
         handler=".update_290.add_folder_manager_notice"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+    title="Reload actions xml"
+    description="Reload actions to add transfer_decision_info."
+    source="2901"
+    destination="2902"
+    handler=".update_290.reload_actions"
+    profile="Products.urban:default"
+/>
+
+
 </configure>

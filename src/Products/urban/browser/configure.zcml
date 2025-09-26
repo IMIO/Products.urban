@@ -513,16 +513,16 @@
 
   <browser:page
      for="*"
-     name="can_transfer_decision_date"
+     name="can_transfer_decision_info"
      class=".urbaneventviews.CanTransferDecisionDtaeView"
      permission="zope2.View"
   />
 
   <browser:page
-     for="Products.urban.interfaces.ILicenceDeliveryEvent"
-     name="transfer_decision_date"
+     for="Products.urban.interfaces.IUrbanEvent"
+     name="transfer_decision_info"
      class=".urbaneventviews.UrbanEventNoticeActionsView"
-     attribute="transfer_decision_date"
+     attribute="transfer_decision_info"
      permission="zope2.View"
   />
 

@@ -1331,10 +1331,11 @@ class CanTransferDecisionDtaeView(BrowserView):
 
     @property
     def is_transmit_to_spw_event(self):
-        return (
-            "Products.urban.interfaces.ITransmitToSPWEvent"
-            in self.context.getUrbaneventtypes().getEventType()
-        )
+        allowed = ["Products.urban.interfaces.ILicenceNotificationEvent",
+                   "Products.urban.interfaces.ITheLicenceEvent"]
+       
+        event_type = self.context.getUrbaneventtypes().getEventType()
+        return any(e in event_type for e in allowed)
 
     @property
     def no_transmit_yet(self):
@@ -1361,8 +1362,8 @@ class UrbanEventNoticeActionsView(BrowserView):
             )
         self.request.response.redirect(self.context.absolute_url())
     
-    def transfer_decision_date(self):
-        result = self.context.transfer_decision_date()
+    def transfer_decision_info(self):
+        result = self.context.transfer_decision_info()
         if result["error"] is True:
             IStatusMessage(self.request).addStatusMessage(
                 result["message"], "error"
