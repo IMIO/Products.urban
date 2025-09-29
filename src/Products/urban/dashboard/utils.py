@@ -18,6 +18,7 @@ def get_procedure_category(context, request):
     return "CWATUPE"
 
 
-def switch_config_folder(config_file, base_folder="/dashboard/config"):
+def switch_config_folder(config_file, base_folder="config"):
+    current_path = os.path.dirname(os.path.abspath(__file__))
     config = get_env_variable_value("URBAN_DASHBOARD_CONFIGS", "classic")
-    return os.path.normpath(os.path.join(base_folder, config, config_file))
+    return os.path.join(current_path, base_folder, config, config_file)
