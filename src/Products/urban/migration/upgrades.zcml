@@ -288,10 +288,19 @@
         profile="Products.urban:default" />
 
     <gs:upgradeStep
-        title="Update faceted dashboard"
+        title="Add additional reference index"
         description=""
         source="1203"
         destination="1204"
+        handler=".update_classic.add_additional_reference_index"
+        profile="Products.urban:default"
+        />
+
+    <gs:upgradeStep
+        title="Update faceted dashboard"
+        description=""
+        source="1204"
+        destination="1205"
         handler=".update_classic.update_faceted_dashboard"
         profile="Products.urban:default"
         />

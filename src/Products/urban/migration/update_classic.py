@@ -96,7 +96,9 @@ def update_collection_column(context):
         _update_collection(schedule_config)
 
         for task in schedule_config_dict.get(urban_type.lower(), []):
-            task_collection = getattr(schedule_config, task["id"])
+            task_collection = getattr(schedule_config, task["id"], None)
+            if task_collection is None:
+                continue
             _update_collection(task_collection)
 
             for subtask in task.get("subtasks", []):
@@ -106,9 +108,8 @@ def update_collection_column(context):
     logger.info("upgrade step done!")
 
 
-def update_faceted_dashboard(context):
-    """ """
-    logger = logging.getLogger("urban: update faceted dashboard")
+def add_additional_reference_index(context):
+    logger = logging.getLogger("urban: Add additionnal reference index")
     logger.info("starting upgrade steps")
     portal_setup = api.portal.get_tool("portal_setup")
     portal_setup.runImportStepFromProfile(
@@ -116,15 +117,24 @@ def update_faceted_dashboard(context):
     )
     catalog = api.portal.get_tool("portal_catalog")
     reindexIndexes(None, ["getAdditionalReference"])
+    logger.info("upgrade step done!")
+
+
+def update_faceted_dashboard(context):
+    """ """
+    from Products.urban.dashboard.utils import switch_config_folder
+    logger = logging.getLogger(
+        "urban: update faceted dashboard"
+    )
+    logger.info("starting upgrade steps")
     site = api.portal.getSite()
     urban_folder = getattr(site, "urban")
     for urban_type in URBAN_TYPES:
-        folder = getattr(urban_folder, urban_type.lower() + "s")
-        path = (
-            os.path.dirname(__file__)[: -len("migration")]
-            + "dashboard/config/%ss.xml" % urban_type.lower()
-        )
+        config_path = switch_config_folder("{0}s.xml".format(urban_type.lower()))
+        folder = getattr(urban_folder, urban_type.lower() + "s", None)
+        if not folder:
+            continue
         folder.unrestrictedTraverse("@@faceted_exportimport").import_xml(
-            import_file=open(path)
+            import_file=open(config_path)
         )
     logger.info("upgrade step done!")
