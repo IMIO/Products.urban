@@ -374,3 +374,11 @@ def eventconfig_urbaneventtype(event_config):
     """
     event_portal_type = event_config.getEventPortalType()
     return event_portal_type
+
+
+@indexer(interfaces.IGenericLicence)
+def additional_reference(object):
+    try:
+        return object.getAdditionalReference()
+    except KeyError:
+        raise AttributeError()

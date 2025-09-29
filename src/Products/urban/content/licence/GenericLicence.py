@@ -210,6 +210,16 @@ schema = Schema(
             ),
             schemata="urban_description",
         ),
+        StringField(
+            name="additionalReference",
+            widget=StringField._properties["widget"](
+                size=60,
+                label=_(
+                    "urban_label_additionalReference", default="Additionalreference"
+                ),
+            ),
+            schemata="urban_description",
+        ),
         DataGridField(
             name="workLocations",
             schemata="urban_description",
