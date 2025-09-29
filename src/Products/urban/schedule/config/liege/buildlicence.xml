@@ -12,6 +12,7 @@
    <property name="hidezerocount"></property>
    <property name="vocabulary">imio.schedule.collections</property>
    <property name="hidealloption">True</property>
+   <property name="hide_category">True</property>
    <property name="maxitems"></property>
    <property name="sortreversed"></property>
    <property name="default">c467540e8bcb416a8dd2889d3a1b08a7</property>

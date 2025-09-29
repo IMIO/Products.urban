@@ -10,8 +10,9 @@
    <property name="count"></property>
    <property name="sortcountable"></property>
    <property name="hidezerocount"></property>
-   <property name="vocabulary">urban.schedule.collections</property>
+   <property name="vocabulary">imio.schedule.collections</property>
    <property name="hidealloption">True</property>
+   <property name="hide_category">True</property>
    <property name="maxitems"></property>
    <property name="sortreversed"></property>
    <property name="default">618b3300b81643599b5da1fe246cf8ad</property>
