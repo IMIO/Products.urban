@@ -13,7 +13,7 @@
    <property name="vocabulary">imio.schedule.collections</property>
    <property name="hidealloption">True</property>
    <property name="hide_category">True</property>
-   <property name="maxitems"></property>
+   <property name="maxitems">0</property>
    <property name="sortreversed"></property>
    <property name="default">a587404d02664bf9aa4973b32a53591e</property>
   </criterion>
@@ -91,8 +91,8 @@
    <property name="count">False</property>
    <property name="sortcountable">False</property>
    <property name="hidezerocount">False</property>
-   <property name="index">folder_manager</property>
-   <property name="vocabulary">urban.folder_managers</property>
+   <property name="index">assigned_user</property>
+   <property name="vocabulary">liege.schedule_users</property>
    <property name="catalog"></property>
    <property name="sortreversed">False</property>
    <property name="default"></property>
@@ -111,9 +111,8 @@
    <property name="operator_visible">False</property>
    <property name="vocabulary">urban.inspection_followups</property>
    <property name="catalog"></property>
-   <property name="maxitems"></property>
+   <property name="maxitems">0</property>
    <property name="sortreversed">False</property>
-   <property name="default"></property>
   </criterion>
   <criterion name="c4">
    <property name="widget">checkbox</property>
@@ -129,9 +128,11 @@
    <property name="operator_visible"></property>
    <property name="vocabulary">schedule.TaskWorkflowStates</property>
    <property name="catalog"></property>
-   <property name="maxitems"></property>
+   <property name="maxitems">0</property>
    <property name="sortreversed"></property>
-   <property name="default">to_do</property>
+   <property name="default">
+     <element value="to_do"/>
+   </property>
   </criterion>
  </criteria>
 </object>

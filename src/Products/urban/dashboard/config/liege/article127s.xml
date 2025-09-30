@@ -27,6 +27,17 @@
    <property name="sortreversed"></property>
    <property name="default">f07c0cc93c414ef4b627735c846ef2db</property>
   </criterion>
+  <criterion name="c12">
+   <property name="widget">text</property>
+   <property name="title">Demandeur</property>
+   <property name="position">center</property>
+   <property name="section">default</property>
+   <property name="hidden">False</property>
+   <property name="index">applicantInfosIndex</property>
+   <property name="default"></property>
+   <property name="onlyallelements">True</property>
+   <property name="wildcard">True</property>
+  </criterion>
   <criterion name="c9">
    <property name="widget">autocomplete</property>
    <property name="title">Architecte</property>
@@ -73,6 +84,17 @@
       name="autocomplete_view">cadastral-autocomplete-suggest</property>
    <property name="onlyallelements">True</property>
   </criterion>
+  <criterion name="c13">
+   <property name="widget">text</property>
+   <property name="title">Référence</property>
+   <property name="position">center</property>
+   <property name="section">default</property>
+   <property name="hidden">False</property>
+   <property name="index">Title</property>
+   <property name="default"></property>
+   <property name="onlyallelements">True</property>
+   <property name="wildcard">True</property>
+  </criterion>
   <criterion name="c10">
    <property name="widget">daterange</property>
    <property name="title">Date de dépôt</property>
@@ -81,15 +103,6 @@
    <property name="hidden">False</property>
    <property name="index">getDepositDate</property>
    <property name="default"></property>
-   <property name="calYearRange">c-10:c+10</property>
-  </criterion>
-  <criterion name="validity-date">
-   <property name="widget">daterange</property>
-   <property name="title">Date de validité</property>
-   <property name="position">top</property>
-   <property name="section">advanced</property>
-   <property name="hidden">False</property>
-   <property name="index">getValidityDate</property>
    <property name="calYearRange">c-10:c+10</property>
   </criterion>
   <criterion name="c11">
@@ -109,17 +122,6 @@
    <property name="maxitems"></property>
    <property name="sortreversed">False</property>
    <property name="default"/>
-  </criterion>
-  <criterion name="c13">
-   <property name="widget">text</property>
-   <property name="title">Référence</property>
-   <property name="position">center</property>
-   <property name="section">default</property>
-   <property name="hidden">False</property>
-   <property name="index">Title</property>
-   <property name="default"></property>
-   <property name="onlyallelements">True</property>
-   <property name="wildcard">True</property>
   </criterion>
   <criterion name="c6">
    <property name="widget">select</property>
@@ -162,16 +164,14 @@
    <property name="step">10</property>
    <property name="default">20</property>
   </criterion>
-  <criterion name="c12">
-   <property name="widget">text</property>
-   <property name="title">Demandeur</property>
-   <property name="position">center</property>
-   <property name="section">default</property>
+  <criterion name="validity-date">
+   <property name="widget">daterange</property>
+   <property name="title">Date de validité</property>
+   <property name="position">top</property>
+   <property name="section">advanced</property>
    <property name="hidden">False</property>
-   <property name="index">applicantInfosIndex</property>
-   <property name="default"></property>
-   <property name="onlyallelements">True</property>
-   <property name="wildcard">True</property>
+   <property name="index">getValidityDate</property>
+   <property name="calYearRange">c-10:c+10</property>
   </criterion>
  </criteria>
 </object>

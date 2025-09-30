@@ -114,15 +114,6 @@
    <property name="default"></property>
    <property name="calYearRange">c-10:c+10</property>
   </criterion>
-  <criterion name="validity-date">
-   <property name="widget">daterange</property>
-   <property name="title">Date de validité</property>
-   <property name="position">top</property>
-   <property name="section">advanced</property>
-   <property name="hidden">False</property>
-   <property name="index">getValidityDate</property>
-   <property name="calYearRange">c-10:c+10</property>
-  </criterion>
   <criterion name="c17">
    <property name="widget">checkbox</property>
    <property name="title">Rive</property>
@@ -201,6 +192,15 @@
    <property name="hidden">False</property>
    <property name="index">getDepositDate</property>
    <property name="default"></property>
+   <property name="calYearRange">c-10:c+10</property>
+  </criterion>
+  <criterion name="validity-date">
+   <property name="widget">daterange</property>
+   <property name="title">Date de validité</property>
+   <property name="position">top</property>
+   <property name="section">advanced</property>
+   <property name="hidden">False</property>
+   <property name="index">getValidityDate</property>
    <property name="calYearRange">c-10:c+10</property>
   </criterion>
   <criterion name="c16">

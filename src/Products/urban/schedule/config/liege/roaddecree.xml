@@ -1,6 +1,16 @@
 <?xml version="1.0"?>
 <object name="roaddecree" meta_type="ATFolder">
  <criteria>
+  <criterion name="c8">
+   <property name="widget">sorting</property>
+   <property name="title">Tri</property>
+   <property name="position">top</property>
+   <property name="section">default</property>
+   <property name="hidden">True</property>
+   <property
+      name="vocabulary">eea.faceted.vocabularies.SortingCatalogIndexes</property>
+   <property name="default"></property>
+  </criterion>
   <criterion name="c1">
    <property name="widget">collection-link</property>
    <property name="title">Échéancier</property>
@@ -16,16 +26,6 @@
    <property name="maxitems"></property>
    <property name="sortreversed"></property>
    <property name="default">59e86354225a4fac8ab0a1509247ed4d</property>
-  </criterion>
-  <criterion name="c8">
-   <property name="widget">sorting</property>
-   <property name="title">Tri</property>
-   <property name="position">top</property>
-   <property name="section">default</property>
-   <property name="hidden">True</property>
-   <property
-      name="vocabulary">eea.faceted.vocabularies.SortingCatalogIndexes</property>
-   <property name="default"></property>
   </criterion>
   <criterion name="c7">
    <property name="widget">checkbox</property>

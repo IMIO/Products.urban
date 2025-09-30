@@ -13,7 +13,7 @@
    <property name="vocabulary">imio.schedule.collections</property>
    <property name="hidealloption">True</property>
    <property name="hide_category">True</property>
-   <property name="maxitems"></property>
+   <property name="maxitems">0</property>
    <property name="sortreversed"></property>
    <property name="default">321d19f4f43c4126b459fef336083970</property>
   </criterion>
