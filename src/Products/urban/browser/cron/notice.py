@@ -22,7 +22,14 @@ class ImportFromNoticeView(BrowserView):
 
     def __call__(self):
 
-        # initialization
+        self._initialize()
+        self._retry_failed_notifications()
+        self._process_fresh_notifications()
+        self._save_progress()
+        return "OK"
+
+    def _initialize(self):
+        """Initialize service and configuration values."""
 
         self.notice_service = notice.WebserviceNotice()
         self.retry_failed_notifications = self.request.form.get("retry") == "1"
@@ -33,48 +40,48 @@ class ImportFromNoticeView(BrowserView):
             )
             or datetime(2000, 1, 1)
         )
+        self.latest_successful_date = self.last_import_date
         self.failed_notifications = (
             api.portal.get_registry_record(
-            "Products.urban.browser.notice_settings.INoticeSettings.failed_notifications",
-            default=[],
+                "Products.urban.browser.notice_settings.INoticeSettings.failed_notifications",
+                default=[],
             )
             or []
         )
         self.already_handled_notifications = []
 
-        # retry failed notifications, if requested
+    def _retry_failed_notifications(self):
+        """Retry processing of previously failed notifications, if requested."""
+        if not self.retry_failed_notifications or not self.failed_notifications:
+            return
 
-        if self.retry_failed_notifications and self.failed_notifications:
-            logger.info(
-                u"Retrying %d failed notifications",
-                len(self.failed_notifications)
-            )
-            remaining_failed = []
+        logger.info(u"Retrying %d failed notifications", len(self.failed_notifications))
+        remaining_failed = []
 
-            for failed_notice_id in self.failed_notifications:
-                if failed_notice_id in self.already_handled_notifications:
-                    continue
-                self.already_handled_notifications.append(failed_notice_id)
-                try:
-                    self._handle_notification(failed_notice_id)
-                    logger.info(u"Retried notification %s succeeded", failed_notice_id)
-                except Exception as exc:
-                    logger.exception(
-                        u"Retried notification %s failed again: %s",
-                        failed_notice_id,
-                        exc,
-                    )
-                    remaining_failed.append(failed_notice_id)
+        for failed_notice_id in self.failed_notifications:
+            if failed_notice_id in self.already_handled_notifications:
+                continue
+            self.already_handled_notifications.append(failed_notice_id)
+            try:
+                self._handle_notification(failed_notice_id)
+                logger.info(u"Retried notification %s succeeded", failed_notice_id)
+            except Exception as exc:
+                logger.exception(
+                    u"Retried notification %s failed again: %s",
+                    failed_notice_id,
+                    exc,
+                )
+                remaining_failed.append(failed_notice_id)
 
-            api.portal.set_registry_record(
-                "Products.urban.browser.notice_settings.INoticeSettings.failed_notifications",
-                remaining_failed,
-            )
-            self.failed_notifications = remaining_failed
+        api.portal.set_registry_record(
+            "Products.urban.browser.notice_settings.INoticeSettings.failed_notifications",
+            remaining_failed,
+        )
+        self.failed_notifications = remaining_failed
 
-        # try fresh notifications
+    def _process_fresh_notifications(self):
+        """Process new notifications from the Notice API."""
 
-        latest_successful_date = self.last_import_date
         fresh_notifications = self._get_notice_notifications()
         for notification in fresh_notifications:
 
@@ -90,8 +97,8 @@ class ImportFromNoticeView(BrowserView):
 
             try:
                 self._handle_notification(notice_id)
-                if notif_last_status_date > latest_successful_date:
-                    latest_successful_date = notif_last_status_date
+                if notif_last_status_date > self.latest_successful_date:
+                    self.latest_successful_date = notif_last_status_date
                 logger.info(u"Notification %s succeeded", notice_id)
             except Exception as exc:
                 logger.exception(
@@ -101,15 +108,17 @@ class ImportFromNoticeView(BrowserView):
                 )
                 self.failed_notifications.append(notice_id)
 
-        # save progress markers
+    def _save_progress(self):
+        """Save the progress markers and failed notifications."""
 
-        if latest_successful_date > self.last_import_date:
+        if self.latest_successful_date > self.last_import_date:
             api.portal.set_registry_record(
                 "Products.urban.browser.notice_settings.INoticeSettings.last_import_date",
-                latest_successful_date,
+                self.latest_successful_date,
             )
             logger.info(
-                u"Updated last_import_date to %s", latest_successful_date.isoformat()
+                u"Updated last_import_date to %s",
+                self.latest_successful_date.isoformat(),
             )
 
         api.portal.set_registry_record(
@@ -120,8 +129,6 @@ class ImportFromNoticeView(BrowserView):
             logger.warning(
                 u"%d notification(s) recorded as failed", len(self.failed_notifications)
             )
-
-        return "OK"
 
     def _get_notice_notifications(self):
         notifications = []
