@@ -274,5 +274,8 @@
                    OFS.interfaces.IObjectWillBeRemovedEvent"
               handler=".configuration_events.before_street_delete" />
 
+  <subscriber for="..interfaces.IFolderManager
+                   OFS.interfaces.IObjectWillBeMovedEvent"
+              handler=".configuration_events.folder_manager_object_will_be_moved" />
 
 </configure>
