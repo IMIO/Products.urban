@@ -191,8 +191,11 @@ class TransitionsPanelView(ActionsPanelView):
             showHistory=True, forceRedirectAfterTransition=True, **kwargs
         )
 
-    def getTransitions(self):
-        transitions = super(TransitionsPanelView, self).getTransitions()
+    def getTransitions(self, caching=True):
+        if caching:
+            if getattr(self, '_transitions', None):
+                return self._transitions
+        transitions = super(TransitionsPanelView, self).getTransitions(caching=False)
         workflow = self.request.get(
             "imio.actionspanel_workflow_%s_cachekey" % self.context.portal_type, None
         )
@@ -250,6 +253,9 @@ class TransitionsPanelView(ActionsPanelView):
                             "icon": "",
                         }
                     )
+        if caching:
+            # store transitions in case getTransitions is called several times
+            setattr(self, '_transitions', transitions)
         return transitions
 
     def sortTransitions(self, lst):
