@@ -82,8 +82,9 @@ def postCreationActions(licence, event):
 
 
 def updateLicenceTitle(licence, event):
-    licence.updateTitle()
-    licence.reindexObject(idxs=["Title", "sortable_title"])
+    if hasattr(licence, "updateTitle"):
+        licence.updateTitle()
+        licence.reindexObject(idxs=["Title", "sortable_title"])
 
 
 def updateTaskIndexes(task_container, event):
