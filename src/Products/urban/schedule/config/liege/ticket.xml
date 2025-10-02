@@ -44,6 +44,7 @@
    <property name="maxitems">0</property>
    <property name="sortreversed"></property>
   </criterion>
+<<<<<<< Updated upstream
   <criterion name="c7">
    <property name="widget">checkbox</property>
    <property name="title">Rive</property>
@@ -62,6 +63,8 @@
    <property name="sortreversed"></property>
    <property name="default"></property>
   </criterion>
+=======
+>>>>>>> Stashed changes
   <criterion name="c2">
    <property name="widget">text</property>
    <property name="title">Référence</property>
