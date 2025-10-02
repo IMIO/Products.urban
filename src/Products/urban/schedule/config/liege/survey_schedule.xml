@@ -21,7 +21,6 @@
    <property name="hidezerocount">False</property>
    <property name="vocabulary">imio.schedule.collections</property>
    <property name="hidealloption">True</property>
-   <property name="maxitems"></property>
    <property name="sortreversed">False</property>
    <property name="default">b98fc27318df480682664531b8cea9a7</property>
   </criterion>
@@ -39,7 +38,6 @@
    <property name="operator_visible">False</property>
    <property name="vocabulary">schedule.TaskWorkflowStates</property>
    <property name="catalog"></property>
-   <property name="maxitems"></property>
    <property name="sortreversed">Fasle</property>
    <property name="default"></property>
   </criterion>
@@ -56,7 +54,6 @@
    <property name="vocabulary"></property>
    <property name="catalog"></property>
    <property name="hidealloption">False</property>
-   <property name="maxitems"></property>
    <property name="sortreversed">False</property>
    <property name="default"></property>
   </criterion>
