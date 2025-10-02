@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<object name="schedule" meta_type="ATFolder">
+<object name="miscdemand" meta_type="ATFolder">
  <criteria>
   <criterion name="c1">
    <property name="widget">collection-link</property>
@@ -15,7 +15,7 @@
    <property name="hide_category">True</property>
    <property name="maxitems"></property>
    <property name="sortreversed"></property>
-   <property name="default"></property>
+   <property name="default">62e06b44b3784dca9b604f36047e91b1</property>
   </criterion>
   <criterion name="c0">
    <property name="widget">sorting</property>

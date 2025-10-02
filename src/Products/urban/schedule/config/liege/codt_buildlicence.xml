@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<object name="buildlicence" meta_type="ATFolder">
+<object name="codt_buildlicence" meta_type="ATFolder">
  <criteria>
   <criterion name="c1">
    <property name="widget">collection-link</property>
@@ -15,7 +15,7 @@
    <property name="hide_category">True</property>
    <property name="maxitems">0</property>
    <property name="sortreversed"></property>
-   <property name="default">e05c3fe88eab4a1bb798be13cf88420d</property>
+   <property name="default">59e86354225a4fac8ab0a1509247ed4d</property>
   </criterion>
   <criterion name="c8">
    <property name="widget">sorting</property>
@@ -38,12 +38,12 @@
    <property name="hidezerocount">False</property>
    <property name="index">shore</property>
    <property name="operator">or</property>
-   <property name="operator_visible">0</property>
+   <property name="operator_visible">False</property>
    <property name="vocabulary">liege.shore</property>
    <property name="catalog"></property>
    <property name="maxitems"></property>
    <property name="sortreversed">False</property>
-   <property name="default"/>
+   <property name="default"></property>
   </criterion>
   <criterion name="c2">
    <property name="widget">text</property>
@@ -55,6 +55,21 @@
    <property name="default"></property>
    <property name="onlyallelements">True</property>
    <property name="wildcard">True</property>
+  </criterion>
+  <criterion name="c0">
+   <property name="widget">select</property>
+   <property name="title">Dépendances</property>
+   <property name="position">center</property>
+   <property name="section">default</property>
+   <property name="hidden">False</property>
+   <property name="count">False</property>
+   <property name="sortcountable">False</property>
+   <property name="hidezerocount">False</property>
+   <property name="index">is_solvable_task</property>
+   <property name="vocabulary">schedule.boolen_vocabulary</property>
+   <property name="catalog"></property>
+   <property name="sortreversed">False</property>
+   <property name="default"></property>
   </criterion>
   <criterion name="c5">
    <property name="widget">select</property>
@@ -81,6 +96,21 @@
    <property name="end">1000</property>
    <property name="step">20</property>
    <property name="default">20</property>
+  </criterion>
+  <criterion name="c6">
+   <property name="widget">select</property>
+   <property name="title">COVID19</property>
+   <property name="position">center</property>
+   <property name="section">default</property>
+   <property name="hidden">False</property>
+   <property name="count">False</property>
+   <property name="sortcountable">False</property>
+   <property name="hidezerocount">False</property>
+   <property name="index">commentators</property>
+   <property name="vocabulary">urban.covid</property>
+   <property name="catalog"></property>
+   <property name="sortreversed">False</property>
+   <property name="default"></property>
   </criterion>
   <criterion name="c4">
    <property name="widget">checkbox</property>
