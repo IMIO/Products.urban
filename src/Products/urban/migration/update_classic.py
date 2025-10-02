@@ -2,12 +2,8 @@ from eea.facetednavigation.interfaces import ICriteria
 from imio.helpers.catalog import reindexIndexes
 from plone import api
 from Products.urban.config import URBAN_TYPES
-from Products.urban.profiles.extra.schedule_config import (
-    schedule_config as schedule_config_dict,
-)
 
 import logging
-import os
 
 
 def update_faceted_collection_widget(context):
@@ -39,7 +35,7 @@ def remove_generation_link_viewlet(context):
     logger.info("upgrade step done!")
 
 
-def _update_collection_assigned_user(context):
+def _update_collection_assigned_user(context, logger):
     dashboard_collection = getattr(context, "dashboard_collection", None)
     if "assigned_user_column" in dashboard_collection.customViewFields:
         customViewFields = list(dashboard_collection.customViewFields)
@@ -48,6 +44,16 @@ def _update_collection_assigned_user(context):
             for field in customViewFields
         ]
         dashboard_collection.customViewFields = tuple(customViewFields)
+        logger.info("{0} updated".format(dashboard_collection.absolute_url()))
+
+
+def _update_tasks_collection_assigned_user(context, logger):
+    _update_collection_assigned_user(context, logger)
+    for task_id in context.keys():
+        if task_id == "dashboard_collection":
+            continue
+        task_context = getattr(context, task_id)
+        _update_tasks_collection_assigned_user(task_context, logger)
 
 
 def fix_opinion_schedule_column(context):
@@ -57,32 +63,9 @@ def fix_opinion_schedule_column(context):
     portal_urban = api.portal.get_tool("portal_urban")
     if "opinions_schedule" in portal_urban:
         schedule = getattr(portal_urban, "opinions_schedule")
-        _update_collection_assigned_user(schedule)
-
-        for task_id in schedule.keys():
-            if task_id == "dashboard_collection":
-                continue
-            task = getattr(schedule, task_id)
-            _update_collection_assigned_user(task)
-
-            for subtask_id in task.keys():
-                if subtask_id == "dashboard_collection":
-                    continue
-                subtask = getattr(schedule, subtask_id)
-                _update_collection_assigned_user(subtask)
+        _update_tasks_collection_assigned_user(schedule, logger)
 
     logger.info("upgrade step done!")
-
-
-def _update_collection(context):
-    dashboard_collection = getattr(context, "dashboard_collection", None)
-    if "assigned_user_column" in dashboard_collection.customViewFields:
-        customViewFields = list(dashboard_collection.customViewFields)
-        customViewFields = [
-            "assigned_user" if field == "assigned_user_column" else field
-            for field in customViewFields
-        ]
-        dashboard_collection.customViewFields = tuple(customViewFields)
 
 
 def update_collection_column(context):
@@ -93,17 +76,7 @@ def update_collection_column(context):
     for urban_type in URBAN_TYPES:
         config_folder = getattr(portal_urban, urban_type.lower())
         schedule_config = getattr(config_folder, "schedule")
-        _update_collection(schedule_config)
-
-        for task in schedule_config_dict.get(urban_type.lower(), []):
-            task_collection = getattr(schedule_config, task["id"], None)
-            if task_collection is None:
-                continue
-            _update_collection(task_collection)
-
-            for subtask in task.get("subtasks", []):
-                subtask_collection = getattr(task_collection, subtask["id"])
-                _update_collection(subtask_collection)
+        _update_tasks_collection_assigned_user(schedule_config, logger)
 
     logger.info("upgrade step done!")
 
