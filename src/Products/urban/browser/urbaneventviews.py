@@ -1340,7 +1340,7 @@ class CanTransferDecisionDisplayDateView(BrowserView):
     @property
     def no_transmit_yet(self):
         annotations = interfaces.IAnnotations(self.context)
-        dates = annotations.get("notice_transmit_dates", {})
+        dates = annotations.get("notice_decision_dates", {})
         return len(dates) == 0
 
     def __call__(self):
@@ -1349,23 +1349,24 @@ class CanTransferDecisionDisplayDateView(BrowserView):
             and self.is_transmit_to_spw_event
             and self.no_transmit_yet
         )
-class CanTransferDecisionDtaeView(BrowserView):
+class CanTransferDecisionInfoView(BrowserView):
     @property
     def is_urban_event_notice(self):
-        return self.context.portal_type == "UrbanEvent"
+        return self.context.portal_type == "UrbanEventCollege"
 
     @property
     def is_transmit_to_spw_event(self):
         allowed = ["Products.urban.interfaces.ILicenceNotificationEvent",
-                   "Products.urban.interfaces.ITheLicenceEvent"]
-       
+            "Products.urban.interfaces.ITheLicenceEvent",
+            "Products.urban.interfaces.ISimpleCollegeEvent"]
+
         event_type = self.context.getUrbaneventtypes().getEventType()
         return any(e in event_type for e in allowed)
 
     @property
     def no_transmit_yet(self):
         annotations = interfaces.IAnnotations(self.context)
-        dates = annotations.get("notice_transmit_dates", {})
+        dates = annotations.get("notice_decision_info", {})
         return len(dates) == 0
 
     def __call__(self):
