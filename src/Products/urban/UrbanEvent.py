@@ -1025,12 +1025,12 @@ class UrbanEvent(OrderedBaseFolder, BrowserDefaultMixin):
                 return result
         reception_date_str = result["body"]["result"]["receptionDate"]
         reception_date = datetime.datetime.strptime(reception_date_str[:10], "%Y-%m-%d")
-        self.store_transmit_date("transfer_decision_info", reception_date)
+        self.store_decision_info("transfer_decision_info", reception_date)
 
         return result
     def store_ddisplay_decision_dates(self, event_type, date=None):
         annotations = IAnnotations(self)
-        key = "notice_decision_info"
+        key = "notice_decision_dates"
         dates = annotations.get(key, OrderedDict())
         dates[event_type] = {
             "start_date": self.getDisplayDate(),
@@ -1059,7 +1059,7 @@ class UrbanEvent(OrderedBaseFolder, BrowserDefaultMixin):
                 return result
         reception_date_str = result["body"]["result"]["receptionDate"]
         reception_date = datetime.datetime.strptime(reception_date_str[:10], "%Y-%m-%d")
-        self.store_transmit_date("transfer_decision_date", reception_date)
+        self.store_ddisplay_decision_dates("transfer_decision_date", reception_date)
 
         return result
     # Manually created methods
