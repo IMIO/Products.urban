@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from datetime import date
 from DateTime import DateTime
+from pathlib2 import Path
 
 from Products.urban import testing
 from Products.urban.services.notice import WebserviceNotice
@@ -9,6 +10,7 @@ from Products.urban.services.tests.data import load_notif_json
 from zope.annotation.interfaces import IAnnotations
 from plone import api
 
+import json
 import mock
 import unittest
 
@@ -24,6 +26,126 @@ class MockedRequest(object):
     @property
     def content(self):
         return self._response_data
+
+    @classmethod
+    def from_json(cls, folder, filename, status_code=200):
+        full_path = Path(__file__).parent / folder / filename
+        parsed_json = json.load(full_path.open("rb"))
+        return cls(parsed_json, status_code)
+
+    @classmethod
+    def from_document(cls, folder, filename, status_code=200):
+        full_path = Path(__file__).parent / folder / filename
+        file_content = full_path.read_bytes()
+        return cls(file_content, status_code)
+
+
+class TestNoticeBase(unittest.TestCase):
+    layer = testing.URBAN_TESTS_LICENCES_FUNCTIONAL
+
+    def setUp(self):
+        self.portal = self.layer["portal"]
+        api.portal.set_registry_record(
+            "Products.urban.browser.notice_settings.INoticeSettings.municipality_id",
+            u"0206.524.876",
+        )
+        api.portal.set_registry_record(
+            "Products.urban.browser.notice_settings.INoticeSettings.sent_on_behalf_of_municipality_id",
+            u"0216697802",
+        )
+        self.service = WebserviceNotice()
+        self.licence = None
+
+    def tearDown(self):
+        with api.env.adopt_roles(["Manager"]):
+            if self.licence:
+                api.content.delete(obj=self.licence)
+
+    def _mock_get_notifications(self, notification_type, step):
+        return mock.patch(
+            "Products.urban.services.notice.WebserviceNotice.get_notifications",
+            return_value=MockedRequest.from_json(
+                notification_type,
+                "notifications_{}".format(step),
+            ).json(),
+        )
+
+    def _mock_get_notification(self, notification_type, step, status_code=200):
+        return mock.patch(
+            "Products.urban.services.notice.WebserviceNotice._get_notification",
+            return_value=MockedRequest.from_json(
+                notification_type,
+                "notification_{}".format(step),
+                status_code=status_code,
+            ),
+        )
+
+    def _mock_get_notification_document(self, notification_type, step, status_code=200):
+        return mock.patch(
+            "Products.urban.services.notice.WebserviceNotice._get_notification_document",
+            return_value=MockedRequest.from_document(
+                notification_type,
+                "document_{}".format(step),
+                status_code=status_code,
+            ),
+        )
+
+    def _mock_post_notification_response(
+        self, notification_type, step, status_code=200
+    ):
+        return mock.patch(
+            "Products.urban.services.notice.WebserviceNotice._post_notification_response",
+            return_value=MockedRequest.from_json(
+                notification_type,
+                "response_{}".format(step),
+                status_code=status_code,
+            ),
+        )
+
+    def _mock_find_address(self):
+        return mock.patch(
+            "Products.urban.notice.address.NoticeAddress._find_address",
+            return_value=[{"text": "street, 1 (1400 - Nivelles)", "id": "1234"}],
+        )
+
+    def setup_transfert_dossier(self, notification_type):
+        with api.env.adopt_roles(["Manager"]), self._mock_get_notifications(
+            notification_type, "nouveau_dossier.json"
+        ), self._mock_get_notification(
+            notification_type, "nouveau_dossier.json"
+        ), self._mock_get_notification_document(
+            notification_type, "nouveau_dossier.xml"
+        ), self._mock_find_address():
+            import_view = self.portal.restrictedTraverse("@@import-from-notice")
+            result = import_view()
+        self.assertEqual("OK", result)
+        return result
+
+    def setup_incoming_notification(self, notification_type, step):
+        with api.env.adopt_roles(["Manager"]), self._mock_get_notifications(
+            notification_type,
+            step,
+        ), self._mock_get_notification(
+            notification_type,
+            step,
+        ):
+            import_view = self.portal.restrictedTraverse("@@import-from-notice")
+            return import_view()
+
+    def _create_licence_event(self, licence, event_type):
+        portal_urban_folder = self.portal.portal_urban
+        licence_type_folder = getattr(
+            portal_urban_folder, "{0}".format(licence.portal_type.lower())
+        )
+        event_config = licence_type_folder.eventconfigs[event_type]
+        with api.env.adopt_roles(["Manager"]):
+            event = licence.createUrbanEvent(event_config)
+        return event
+
+    def _get_notice_transmit_dates(self, event):
+        annotations = IAnnotations(event)
+        dates = annotations.get("notice_transmit_dates", {})
+        return dates
 
 
 class TestNoticeCronPE2(unittest.TestCase):
