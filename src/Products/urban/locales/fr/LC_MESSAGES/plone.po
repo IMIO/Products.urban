@@ -34,6 +34,9 @@ msgstr "Localité"
 msgid "Claimant"
 msgstr "Réclamant"
 
+msgid "ComplementaryDelayTerm"
+msgstr "Prorogation complémentaire"
+
 msgid "Contact"
 msgstr "Contact"
 
@@ -374,6 +377,3 @@ msgstr "Veuillez indiquer d'avantages de termes de recherche"
 
 msgid "workLocationStreet"
 msgstr "Rue"
-
-msgid "ComplementaryDelayTerm"
-msgstr "Prorogation complémentaire"
