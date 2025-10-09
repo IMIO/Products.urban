@@ -514,7 +514,7 @@
   <browser:page
      for="*"
      name="can_transfer_decision_info"
-     class=".urbaneventviews.CanTransferDecisionDtaeView"
+     class=".urbaneventviews.CanTransferDecisionInfoView"
      permission="zope2.View"
   />
 
