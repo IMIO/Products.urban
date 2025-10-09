@@ -64,7 +64,7 @@ class NoticeOutgoingSummaryReportNotification(NoticeResponse):
     def specific(self):
         return {
             "tns:municipalityReference": self._reference,
-            "tns:caracteristicsComment":self._decision,
+            "tns:caracteristicsComment":self._decision,#to be verified
             "tns:decisionDate": self._display_decision_date,
             "tns:displayDecisionStartDate": self._display_decision_start_date,
             "tns:displayDecisionEndDate": self._display_decision_end_date,
