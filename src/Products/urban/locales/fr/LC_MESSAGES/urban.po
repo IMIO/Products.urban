@@ -1003,6 +1003,14 @@ msgstr "Vers les Procédures CWATUP"
 msgid "Transfer folder to DPA"
 msgstr "Transférer vers le DPA"
 
+#: ../profiles/default/actions.xml
+msgid "Transfer display decision date"
+msgstr "Transférer les date d'affichage de décision"
+
+#: ../profiles/default/actions.xml
+msgid "Transfer display decision info"
+msgstr "Transférer les informations de décision"
+
 #: ../browser/licence/templates/licenceview.pt:27
 #: ../browser/templates/urbaneventannouncementview.pt:31
 #: ../browser/templates/urbaneventinquiryview.pt:30
