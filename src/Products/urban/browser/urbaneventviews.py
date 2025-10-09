@@ -1326,7 +1326,7 @@ class CanTransferFolderToDpaView(BrowserView):
 
 class CanTransferDecisionDisplayDateView(BrowserView):
     @property
-    def is_urban_event_notice(self):
+    def is_urban_event(self):
         return self.context.portal_type == "UrbanEvent"
 
     @property
@@ -1351,7 +1351,7 @@ class CanTransferDecisionDisplayDateView(BrowserView):
         )
 class CanTransferDecisionInfoView(BrowserView):
     @property
-    def is_urban_event_notice(self):
+    def is_urban_event_college(self):
         return self.context.portal_type == "UrbanEventCollege"
 
     @property
