@@ -525,7 +525,7 @@ schema = Schema(
             ),
             schemata="urban_analysis",
             default_method="getDefaultText",
-            default_content_type="text/html",
+            default_content_type="text/plain",
             default_output_type="text/x-html-safe",
         ),
         BooleanField(
