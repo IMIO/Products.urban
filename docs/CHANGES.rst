@@ -8,6 +8,17 @@ Changelog
 
 .. towncrier release notes start
 
+2.5.0.dev21 (2025-10-10)
+------------------------
+
+Bug fixes:
+
+
+- Fix default content type for modified plans details
+  Fix a edge case with validation of reference number
+  [mpeeters] (URBBDC-3204)
+
+
 2.5.0.dev20 (2025-10-08)
 ------------------------
 
