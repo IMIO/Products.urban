@@ -104,6 +104,8 @@ class isNotDuplicatedReferenceValidator:
         if not ref_num:
             return 1
 
+        if isinstance(ref_num, tuple):
+            ref_num = ref_num[0]
         similar_licences = catalog(
             getReference="'{0}'".format(ref_num),  # Avoid an issue with NOT
             portal_type=types_to_check,
