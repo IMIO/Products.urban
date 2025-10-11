@@ -56,6 +56,10 @@ class ToolsRenderer(base.Renderer):
             return True
 
         return False
+    
+    def is_notice_setup(self):
+        site = api.portal.get()
+        return "import-notice" in site.urban.objectIds()
 
 
 class ToolsAddForm(base.AddForm):

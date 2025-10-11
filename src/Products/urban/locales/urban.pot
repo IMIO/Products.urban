@@ -928,6 +928,10 @@ msgstr ""
 msgid "The field does not exist !!!"
 msgstr ""
 
+#: ../events/configuration_events.py:79
+msgid "The folder manager '${name}' can't be renamed or removed."
+msgstr ""
+
 #: ../browser/urbaneventviews.py:368
 msgid "The imported file (${name}) couldn't be read properly. Please verify its structure and try again."
 msgstr ""
@@ -2703,6 +2707,11 @@ msgstr ""
 
 #: ../browser/urbaneventviews.py:528
 msgid "urban_imported_recipients"
+msgstr ""
+
+#. Default: "Incoming Notice licences"
+#: ../browser/templates/portlet_urbantools.pt:28
+msgid "urban_incoming_notice_licences_descr"
 msgstr ""
 
 #. Default: "Dgo4reference"

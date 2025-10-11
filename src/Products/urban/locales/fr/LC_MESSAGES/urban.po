@@ -939,6 +939,10 @@ msgstr "L'import des réclamants a bien été enregistré et sera éxécuté cet
 msgid "The field does not exist !!!"
 msgstr "Le champ n'existe pas."
 
+#: ../events/configuration_events.py:79
+msgid "The folder manager '${name}' can't be renamed or removed."
+msgstr "L'agent traitant '${name}' ne peut pas être renommé ou supprimé."
+
 #: ../browser/urbaneventviews.py:368
 msgid "The imported file (${name}) couldn't be read properly. Please verify its structure and try again."
 msgstr "Le fichier importé (${name}) n'a pas pu être lu correctement. Veuillez vérifier sa structure et réessayer."
@@ -2736,6 +2740,11 @@ msgstr "Si coché, un paragraphe supplémentaire apparaîtra dans le permis"
 #: ../browser/urbaneventviews.py:528
 msgid "urban_imported_recipients"
 msgstr "Destinataires importés"
+
+#. Default: "Incoming Notice licences"
+#: ../browser/templates/portlet_urbantools.pt:28
+msgid "urban_incoming_notice_licences_descr"
+msgstr "Permis Notice à traiter"
 
 #. Default: "Dgo4reference"
 #: ParcellingTerm.py
