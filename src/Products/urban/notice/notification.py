@@ -215,6 +215,13 @@ class NoticeNotification(NoticeElement):
         return self._get_data("subjectNotice")
 
     @property
+    def foldermanagers(self):
+        urban_tool = api.portal.get_tool("portal_urban")
+        foldermanagers = getattr(urban_tool, "foldermanagers")
+        obj = getattr(foldermanagers, "notice")
+        return [obj] if obj else []
+
+    @property
     def sender(self):
         """Return sender"""
         return NoticeSender(self.service, self.json["sender"])

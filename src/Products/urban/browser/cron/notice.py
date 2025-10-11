@@ -75,6 +75,9 @@ class ImportFromNoticeView(BrowserView):
             container=container, **detailed_notification.serialize()
         )
         licence.noticeId = detailed_notification.noticeId
+        licence.setFoldermanagers(
+            detailed_notification.foldermanagers
+        )  # Must be set manually, serialized value is ignored at creation
         licence._p_changed = 1
         for party in detailed_notification.parties:
             api.content.create(container=licence, **party.serialize())
