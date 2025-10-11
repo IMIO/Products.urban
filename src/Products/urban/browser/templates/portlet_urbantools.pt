@@ -23,6 +23,11 @@
                 <img src="../engrenage.png" />
                 <a href="urbanstatsview" i18n:translate="urban_statistics">Statistics</a>
             </li>
+            <li tal:condition="view/is_notice_setup">
+                <img src="../GenericLicence.png"/>
+                <a href="" tal:attributes="href python: view.site_url() + '/urban/import-notice?no_redirect=1'" 
+                   i18n:translate="urban_incoming_notice_licences_descr">Incoming Notice licences</a>
+            </li>
         </ul>
     </dd>
 </dl>

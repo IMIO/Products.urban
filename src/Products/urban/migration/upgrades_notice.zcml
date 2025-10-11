@@ -18,5 +18,13 @@
         destination="2901"
         handler=".update_290.add_event_config_types_notice"
         profile="Products.urban:default" />
+    
+    <gs:upgradeStep
+        title="Add folder manager for notice import"
+        description=""
+        source="2901"
+        destination="2902"
+        handler=".update_290.add_folder_manager_notice"
+        profile="Products.urban:default" />
 
 </configure>
