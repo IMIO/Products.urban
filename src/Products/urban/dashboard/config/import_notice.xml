@@ -1,0 +1,165 @@
+<?xml version="1.0"?>
+<object name="urban" meta_type="ATFolder">
+ <criteria>
+  <criterion name="c1">
+   <property name="widget">sorting</property>
+   <property name="title">Tri</property>
+   <property name="position">top</property>
+   <property name="section">default</property>
+   <property name="hidden">True</property>
+   <property
+      name="vocabulary">eea.faceted.vocabularies.SortingCatalogIndexes</property>
+   <property name="default">created(reverse)</property>
+  </criterion>
+  <criterion name="c2">
+   <property name="widget">collection-link</property>
+   <property name="title">Procédures</property>
+   <property name="position">top</property>
+   <property name="section">default</property>
+   <property name="hidden">True</property>
+   <property name="count"></property>
+   <property name="sortcountable"></property>
+   <property name="hidezerocount"></property>
+   <property
+      name="vocabulary">collective.eeafaceted.collectionwidget.cachedcollectionvocabulary</property>
+   <property name="hidealloption">True</property>
+   <property name="hide_category">True</property>
+   <property name="sortreversed"></property>
+   <property name="default">12ffe12f7dc04b3ba4e82906b83abfbc</property>
+  </criterion>
+  <criterion name="c10">
+   <property name="widget">text</property>
+   <property name="title">Demandeur</property>
+   <property name="position">top</property>
+   <property name="section">advanced</property>
+   <property name="hidden">False</property>
+   <property name="index">applicantInfosIndex</property>
+   <property name="default"></property>
+   <property name="onlyallelements">True</property>
+   <property name="wildcard">True</property>
+  </criterion>
+  <criterion name="c4">
+   <property name="widget">autocomplete</property>
+   <property name="title">Rue</property>
+   <property name="position">top</property>
+   <property name="section">advanced</property>
+   <property name="hidden">False</property>
+   <property name="index">StreetsUID</property>
+   <property name="default"></property>
+   <property name="autocomplete_view">sreets-autocomplete-suggest</property>
+   <property name="onlyallelements">True</property>
+  </criterion>
+  <criterion name="c7">
+   <property name="widget">text</property>
+   <property name="title">N° de police</property>
+   <property name="position">top</property>
+   <property name="section">advanced</property>
+   <property name="hidden">False</property>
+   <property name="index">StreetNumber</property>
+   <property name="default"></property>
+   <property name="onlyallelements">True</property>
+   <property name="wildcard"></property>
+  </criterion>
+  <criterion name="c8">
+   <property name="widget">autocomplete</property>
+   <property name="title">Référence cadastrale</property>
+   <property name="position">top</property>
+   <property name="section">advanced</property>
+   <property name="hidden">False</property>
+   <property name="index">parcelInfosIndex</property>
+   <property name="default"></property>
+   <property
+      name="autocomplete_view">cadastral-autocomplete-suggest</property>
+   <property name="onlyallelements">True</property>
+  </criterion>
+  <criterion name="c9">
+   <property name="widget">daterange</property>
+   <property name="title">Date de décision</property>
+   <property name="position">top</property>
+   <property name="section">advanced</property>
+   <property name="hidden">False</property>
+   <property name="index">getDecisionDate</property>
+   <property name="default"></property>
+   <property name="calYearRange">c-10:c+10</property>
+  </criterion>
+  <criterion name="c99">
+   <property name="widget">daterange</property>
+   <property name="title">Date de validité</property>
+   <property name="position">top</property>
+   <property name="section">advanced</property>
+   <property name="hidden">False</property>
+   <property name="index">getValidityDate</property>
+   <property name="default"></property>
+   <property name="calYearRange">c-10:c+10</property>
+  </criterion>
+  <criterion name="c5">
+   <property name="widget">text</property>
+   <property name="title">Titre, référence</property>
+   <property name="position">center</property>
+   <property name="section">default</property>
+   <property name="hidden">False</property>
+   <property name="index">Title</property>
+   <property name="default"></property>
+   <property name="onlyallelements">True</property>
+   <property name="wildcard">True</property>
+  </criterion>
+  <criterion name="c6">
+   <property name="widget">select</property>
+   <property name="title">Agent traitant</property>
+   <property name="position">center</property>
+   <property name="section">default</property>
+   <property name="hidden">False</property>
+   <property name="count"></property>
+   <property name="sortcountable"></property>
+   <property name="hidezerocount"></property>
+   <property name="index">folder_manager</property>
+   <property name="vocabulary">urban.folder_managers</property>
+   <property name="catalog"></property>
+   <property name="sortreversed"></property>
+   <property name="default"></property>
+  </criterion>
+  <criterion name="c11">
+   <property name="widget">select_to_list</property>
+   <property name="title">Type</property>
+   <property name="position">center</property>
+   <property name="section">default</property>
+   <property name="hidden">False</property>
+   <property name="count"></property>
+   <property name="sortcountable"></property>
+   <property name="hidezerocount"></property>
+   <property name="index">portal_type</property>
+   <property
+      name="vocabulary">urban.vocabularies.procedure_category</property>
+   <property name="catalog"></property>
+   <property name="sortreversed"></property>
+   <property name="default">codt</property>
+  </criterion>
+  <criterion name="c0">
+   <property name="widget">resultsperpage</property>
+   <property name="title">Results per page</property>
+   <property name="position">center</property>
+   <property name="section">default</property>
+   <property name="hidden">False</property>
+   <property name="start">0</property>
+   <property name="end">50</property>
+   <property name="step">10</property>
+   <property name="default">20</property>
+  </criterion>
+ <criterion name="c97">
+   <property name="widget">select2</property>
+   <property name="title">Prorogation complémentaire</property>
+   <property name="index">getComplementary_delay</property>
+   <property
+      name="vocabulary">urban.vocabularies.complementary_delay</property>
+   <property name="catalog"></property>
+   <property name="hidealloption">False</property>
+   <property name="position">center</property>
+   <property name="section">default</property>
+   <property name="hidden">False</property>
+   <property name="count">False</property>
+   <property name="sortcountable">False</property>
+   <property name="hidezerocount">False</property>
+   <property name="sortreversed">False</property>
+  </criterion>
+ </criteria>
+</object>
