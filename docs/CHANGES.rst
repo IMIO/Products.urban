@@ -8,6 +8,16 @@ Changelog
 
 .. towncrier release notes start
 
+2.5.0.dev22 (2025-10-13)
+------------------------
+
+Bug fixes:
+
+
+- Fix an issue with translation for Road adaptation vocabulary
+  [mpeeters] (URBBDC-3204)
+
+
 2.5.0.dev21 (2025-10-10)
 ------------------------
 
