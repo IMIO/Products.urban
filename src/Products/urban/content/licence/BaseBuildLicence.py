@@ -597,9 +597,9 @@ class BaseBuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin)
         road adaptations : no, yes modify, yes create
         """
         vocab = (
-            ("modify", _("road_adaptation_modify")),
-            ("create", _("road_adaptation_create")),
-            ("supress", _("road_adaptation_supress")),
+            ("modify", translate(_("road_adaptation_modify"), context=self.REQUEST)),
+            ("create", translate(_("road_adaptation_create"), context=self.REQUEST)),
+            ("supress", translate(_("road_adaptation_supress"), context=self.REQUEST)),
         )
         return DisplayList(vocab)
 
