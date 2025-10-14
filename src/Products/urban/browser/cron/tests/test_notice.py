@@ -108,7 +108,7 @@ class TestNoticeBase(unittest.TestCase):
             return_value=[{"text": "street, 1 (1400 - Nivelles)", "id": "1234"}],
         )
 
-    def setup_transfert_dossier(self, notification_type):
+    def _setup_transfert_dossier(self, notification_type):
         with api.env.adopt_roles(["Manager"]), self._mock_get_notifications(
             notification_type, "nouveau_dossier.json"
         ), self._mock_get_notification(
@@ -121,7 +121,7 @@ class TestNoticeBase(unittest.TestCase):
         self.assertEqual("OK", result)
         return result
 
-    def setup_incoming_notification(self, notification_type, step):
+    def _setup_incoming_notification(self, notification_type, step):
         with api.env.adopt_roles(["Manager"]), self._mock_get_notifications(
             notification_type,
             step,
