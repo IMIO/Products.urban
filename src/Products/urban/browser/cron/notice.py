@@ -90,6 +90,8 @@ class ImportFromNoticeView(BrowserView):
                 notification["status"]["date"][0:26],
                 "%Y-%m-%dT%H:%M:%S.%f",
             )
+            if notif_last_status_date <= self.last_import_date:
+                continue
 
             if notice_id in self.already_handled_notifications:
                 continue
