@@ -82,6 +82,9 @@ class ImportFromNoticeView(BrowserView):
             self.process_not_admissible_folder_notification_first_tour(
                 detailed_notification
             )
+        if detailed_notification.notice_type == "NOTIFICATION_PROROGATION_COMMUNE":
+            self.process_extension_of_deadline_notification(detailed_notification)
+
 
     def _transfert_dossier(self, detailed_notification):
         container = detailed_notification.container
@@ -190,3 +193,8 @@ class ImportFromNoticeView(BrowserView):
             licence, detailed_notification, event_type="dossier-incomplet"
         )
         transaction.commit()
+        
+    def process_extension_of_deadline_notification(self, detailed_notification):
+        license = detailed_notification.licence
+        license.getField('prorogation').set(license, True)
+        license.reindexObject()
