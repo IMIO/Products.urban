@@ -150,7 +150,7 @@ class TestNoticeCronPE2(unittest.TestCase):
             api.content.delete(obj=licence)
 
 
-    """@mock.patch(
+    @mock.patch(
         "Products.urban.services.notice.WebserviceNotice.get_notifications",
         return_value=load_notif_json("DEMANDE_EP", "1342038_notifications.json"),
     )
@@ -163,7 +163,7 @@ class TestNoticeCronPE2(unittest.TestCase):
 
         with api.env.adopt_roles(["Manager"]):
             import_view = self.portal.restrictedTraverse("@@import-from-notice")
-            return import_view()"""
+            return import_view()
     
     @mock.patch(
         "Products.urban.services.notice.WebserviceNotice.get_notifications",
