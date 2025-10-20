@@ -150,7 +150,7 @@ class TestNoticeCronPE2(unittest.TestCase):
             api.content.delete(obj=licence)
 
 
-    @mock.patch(
+    """@mock.patch(
         "Products.urban.services.notice.WebserviceNotice.get_notifications",
         return_value=load_notif_json("DEMANDE_EP", "1342038_notifications.json"),
     )
@@ -163,7 +163,7 @@ class TestNoticeCronPE2(unittest.TestCase):
 
         with api.env.adopt_roles(["Manager"]):
             import_view = self.portal.restrictedTraverse("@@import-from-notice")
-            return import_view()
+            return import_view()"""
     
     @mock.patch(
         "Products.urban.services.notice.WebserviceNotice.get_notifications",
@@ -219,13 +219,13 @@ class TestNoticeCronPE2(unittest.TestCase):
     
     @mock.patch(
         "Products.urban.services.notice.WebserviceNotice.get_notifications",
-        return_value=load_notif_json("INADMISSIBLE", "xx-NOTIFICATIONS.json"),
+        return_value=load_notif_json("INADMISSIBLE", "1443524-NOTIFICATIONS.json"),
     )
     @mock.patch(
         "Products.urban.services.notice.WebserviceNotice._get_notification",
-        return_value=MockedRequest(load_notif_json("INADMISSIBLE", "xx-INADMISSIBLE-NOTIFICATION.json")),
+        return_value=MockedRequest(load_notif_json("INADMISSIBLE", "1443524-INADMISSIBLE-NOTIFICATION.json")),
     )
-    def _create_incomplete_folder(self, notif_patch, notifs_patch):
+    def _create_inadmissible_folder(self, notif_patch, notifs_patch):
         notif_patch, notifs_patch  
         self.notif_patch = notif_patch
         
@@ -237,12 +237,12 @@ class TestNoticeCronPE2(unittest.TestCase):
         # 1) create licence
         with mock.patch(
             "Products.urban.services.notice.WebserviceNotice.get_notifications",
-            return_value=load_notif_json("INADMISSIBLE", "959254_notifications.json"),
+            return_value=load_notif_json("INADMISSIBLE", "1425632_notifications.json"),
         ) as mock_get_notifications, mock.patch(
             "Products.urban.services.notice.WebserviceNotice._get_notification",
             return_value=MockedRequest(
                 load_notif_json(
-                    "INADMISSIBLE", "959254-TRANSFERT-DOSSIER-EN_ATTENTE_REPONSE.json"
+                    "INADMISSIBLE", "1425632-TRANSFERT-DOSSIER-EN_ATTENTE_REPONSE.json"
                 )
             ),
         ) as mock_get_notification, mock.patch(
@@ -256,15 +256,16 @@ class TestNoticeCronPE2(unittest.TestCase):
                 import_view = self.portal.restrictedTraverse("@@import-from-notice")
                 import_view()
 
-        licence_folder = self.portal.urban.envclasstwos
+        licence_folder = self.portal.urban.codt_uniquelicences
         licence = licence_folder.values()[-1]
-        licence.reference = "xx"
+        licence.reference = "PUN/2025/08261437"
         licence.reindexObject()
-        self.assertIsNone(licence.getLastMissingPart())
-        self._create_incomplete_folder()
+        self.assertIsNone(licence.getLastRefusedNotification())
+        self._create_inadmissible_folder()
         # 5.3 assert folder incomplet présent
-        incomplete_folder = licence.getLastMissingPart()
-        self.assertIsNotNone(incomplete_folder)
+        inadmissible_folder = licence.getLastRefusedNotification()
+        print(inadmissible_folder,"-*-*-*-*-*inadmissible_folder")
+        self.assertIsNotNone(inadmissible_folder)
         # 5.4 assert folder is closed
-        self.assertEqual(incomplete_folder.getEventDate().Date(), "2025/09/11")
-        self.assertEqual(api.content.get_state(incomplete_folder), "closed")
+        self.assertEqual(inadmissible_folder.getEventDate().Date(), "2025/09/16")
+        self.assertEqual(api.content.get_state(inadmissible_folder), "closed")
