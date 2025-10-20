@@ -216,6 +216,7 @@ class TestNoticeCronPE2(unittest.TestCase):
         # 5.4 assert folder is closed
         self.assertEqual(incomplete_folder.getEventDate().Date(), "2025/07/11")
         self.assertEqual(api.content.get_state(incomplete_folder), "closed")
+    
     def _create_not_admissible_folder(self, suffix, notif_id):
         folder_name = "NOT_ADMISSIBLE{0}".format(suffix)
         notif_file = "{0}_notifications.json".format(notif_id)

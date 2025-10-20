@@ -470,13 +470,12 @@ EventConfigs = {
             "keyDates": ("eventDate",),
             "podTemplates": (
             ),
-
         },
         {
             "id": "dossier-incomplet",
             "title": "Dossier incomplet (avec listing des pièces manquantes - article 116 § 1)",
             "activatedFields": (),
-            "deadLineDelay": 15 ,
+            "deadLineDelay": 15,
             "eventType": ("Products.urban.interfaces.IMissingPartEvent",),
             "isKeyEvent": True,
             "keyDates": ("eventDate",),

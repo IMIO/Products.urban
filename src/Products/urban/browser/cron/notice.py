@@ -134,9 +134,8 @@ class ImportFromNoticeView(BrowserView):
         license = detailed_notification.licence
         self.update_license(license, detailed_notification, event_type="dossier-incomplet")
         transaction.commit() 
+
     def process_not_admissible_folder_notification_second_tour(self, detailed_notification):
         licence = detailed_notification.licence
         self.update_license(licence, detailed_notification, event_type="dossier-irrecevable")
         transaction.commit()
-        
-        
