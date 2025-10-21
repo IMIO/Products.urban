@@ -415,9 +415,8 @@ class TestNotificationSummaryReport(unittest.TestCase):
         self.setup_transfert_dossier("TRANSFERT_DOSSIER")
         licence_folder = self.portal.urban.envclasstwos
         self.licence = licence_folder.values()[-1]
-    
+
     def test_notification_summary_report(self):
-        
         self._create_complete_folder()
         # 5.3 assert folder incomplet présent
         summary_folder = self.licence.getLastDecisionProjectFromSPW()
@@ -425,35 +424,30 @@ class TestNotificationSummaryReport(unittest.TestCase):
         # 5.4 assert folder is closed
         self.assertEqual(summary_folder.getEventDate().Date(), "2025/07/11")
         self.assertEqual(api.content.get_state(summary_folder), "closed")
-        
+
     def test_notification_decision(self):
-        
         # Create the event
         event = self._create_licence_event(self.licence, "délivrance-du-permis")
         event.setEventDate(DateTime(2025, 6, 19))
-        #simulate pressing button send date and decision of the College
+        # simulate pressing button send date and decision of the College
         event.restrictedTraverse("@@transfer_decision_info")
-        #simulate pressing button send decision dates
+        # simulate pressing button send decision dates
         view = event.restrictedTraverse("@@transfer_decision_date")
         response = view()
 
         self.assertFalse(response["error"])
         self.assertEqual(response["body"]["status"], "PROCESSED")
 
-        dates = self._get_notice_data(event,"notice_decision_dates")
+        dates = self._get_notice_data(event, "notice_decision_dates")
         self.assertIn("send_final_notification_to_spw", dates)
-        #self.assertEqual(dates["send_final_notification_to_spw"].date(), date(2025, 7, 1))
-        
         # Simulate get_notification
-            
         with self._mock_get_notification("TRANSFERT_DOSSIER", "final.json"):
             updated_notification = self.service.get_notification("xx")
             self.assertIn("decisionDate", updated_notification)
             self.assertIn("displayDateEnd", updated_notification)
             self.assertIn("displayDate", updated_notification)
         self.assertEqual(updated_notification.status, "TERMINE")
-        
-        
+
     def _get_notice_data(self, event, key):
         annotations = IAnnotations(event)
         dates = annotations.get(key, {})
