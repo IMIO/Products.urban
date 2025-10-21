@@ -354,12 +354,12 @@ class TestNoticeCronPE2(unittest.TestCase):
         return_value=MockedRequest(load_notif_json("EXTENSION_DEADLINE", "1471027-NOTIFICATION.json")),
     )
     def _create_extension_folder(self, notif_patch, notifs_patch):
-        notif_patch, notifs_patch  
+        notif_patch, notifs_patch
         self.notif_patch = notif_patch
-        
         with api.env.adopt_roles(["Manager"]):
             import_view = self.portal.restrictedTraverse("@@import-from-notice")
             import_view()
+
     def test_extension_of_deadline_notification(self):
         # 1) create licence
         with mock.patch(
@@ -382,3 +382,15 @@ class TestNoticeCronPE2(unittest.TestCase):
             with api.env.adopt_roles(["Manager"]):
                 import_view = self.portal.restrictedTraverse("@@import-from-notice")
                 import_view()
+
+        licence_folder = self.portal.urban.envclasstwos
+        licence = licence_folder.values()[-1]
+        licence.reference = "PE2/2025/4"  # force reference, already sent to NOTICE
+        licence.reindexObject()
+        self._create_extension_folder()
+        # 5.3 assert prorogation is set to True
+        self.assertTrue(licence.getProrogation())
+        # verify delay modified
+        delay = licence.getProrogationDelays(True)
+        self.assertEqual(delay, "90j")
+        
