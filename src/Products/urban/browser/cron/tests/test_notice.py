@@ -385,7 +385,7 @@ class TestNoticeCronPE2(unittest.TestCase):
 
         licence_folder = self.portal.urban.envclasstwos
         licence = licence_folder.values()[-1]
-        licence.reference = "PE2/2025/4"  # force reference, already sent to NOTICE
+        licence.reference = "PE2/2025/4"
         licence.reindexObject()
         self._create_extension_folder()
         # 5.3 assert prorogation is set to True
@@ -393,4 +393,3 @@ class TestNoticeCronPE2(unittest.TestCase):
         # verify delay modified
         delay = licence.getProrogationDelays(True)
         self.assertEqual(delay, "90j")
-        
