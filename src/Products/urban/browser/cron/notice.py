@@ -10,6 +10,7 @@ from datetime import datetime
 from plone import api
 from zope.event import notify
 from zope.i18n import translate
+from zope.lifecycleevent import ObjectModifiedEvent
 
 import transaction
 
@@ -197,4 +198,6 @@ class ImportFromNoticeView(BrowserView):
     def process_extension_of_deadline_notification(self, detailed_notification):
         license = detailed_notification.licence
         license.getField('prorogation').set(license, True)
+        notify(ObjectModifiedEvent(license))
+        
         license.reindexObject()
