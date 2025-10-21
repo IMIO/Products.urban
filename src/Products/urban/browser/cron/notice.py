@@ -201,3 +201,5 @@ class ImportFromNoticeView(BrowserView):
         notify(ObjectModifiedEvent(license))
         
         license.reindexObject()
+        self.update_license(license, detailed_notification, event_type="dossier-incomplet")
+        transaction.commit()
