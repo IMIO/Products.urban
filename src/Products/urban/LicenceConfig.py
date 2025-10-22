@@ -14,36 +14,35 @@ __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEUL
 __docformat__ = "plaintext"
 
 from AccessControl import ClassSecurityInfo
+from DateTime import DateTime
+from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
+    ReferenceBrowserWidget
 from Products.Archetypes.atapi import *
-from zope.interface import implements
-import interfaces
-
-from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import (
-    ReferenceBrowserWidget,
-)
-from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
-from Products.DataGridField import DataGridField, DataGridWidget
-from Products.DataGridField.Column import Column
-from Products.DataGridField.SelectColumn import SelectColumn
-
-from Products.urban.config import *
-
+from Products.Archetypes.public import DisplayList
+from Products.CMFCore.Expression import Expression
 ##code-section module-header #fill in your manual code here
 from Products.CMFCore.utils import getToolByName
-from zope.i18n import translate
-from Products.Archetypes.public import DisplayList
-from collective.datagridcolumns.TextAreaColumn import TextAreaColumn
+from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
+from Products.DataGridField import DataGridField
+from Products.DataGridField import DataGridWidget
+from Products.DataGridField.CheckboxColumn import CheckboxColumn
+from Products.DataGridField.Column import Column
 from Products.DataGridField.DataGridField import FixedRow
 from Products.DataGridField.FixedColumn import FixedColumn
-from Products.DataGridField.CheckboxColumn import CheckboxColumn
+from Products.DataGridField.SelectColumn import SelectColumn
+from Products.PageTemplates.Expressions import getEngine
+from Products.urban import UrbanMessage as _
+from Products.urban.config import *
 from Products.urban.config import VOCABULARY_TYPES
 from Products.urban.utils import getLicenceSchema
-from Products.urban import UrbanMessage as _
-from zope.interface import Interface
-from Products.PageTemplates.Expressions import getEngine
-from Products.CMFCore.Expression import Expression
+from collective.datagridcolumns.TextAreaColumn import TextAreaColumn
 from plone import api
-from DateTime import DateTime
+from zope.i18n import translate
+from zope.interface import implements
+from zope.interface import Interface
+
+import interfaces
+
 
 ##/code-section module-header
 

@@ -6,6 +6,7 @@ from Products.urban.browser.actionspanel.actionspanel import FolderActionsPanelV
 from Products.urban.browser.actionspanel.actionspanel import LicenceActionsPanelView
 from Products.urban.browser.actionspanel.actionspanel import TransitionsPanelView
 
+
 ConfigValueActionsPanelView
 EventActionsPanelView
 FolderActionsPanelView

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from Products.Five import BrowserView
 from Acquisition import aq_inner
+from Products.Five import BrowserView
 from plone import api
 
 

@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 from Products.urban.interfaces import IGenericLicence
-
 from imio.schedule.content.task import ConfigurableMacroTask
 from imio.schedule.content.task import ConfigurableTask
 

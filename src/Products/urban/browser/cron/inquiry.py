@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from plone import api
-
 from Products.Five import BrowserView
+from plone import api
 
 import transaction
 

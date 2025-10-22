@@ -3,17 +3,14 @@
 from Acquisition import aq_inner
 from Products.Five import BrowserView
 from Products.urban import UrbanMessage as _
-from Products.urban.setuphandlers import _create_task_configs
 from Products.urban.browser.table.urbantable import InternalOpinionServicesTable
-
+from Products.urban.setuphandlers import _create_task_configs
 from imio.schedule.content.object_factories import CreationConditionObject
 from imio.schedule.content.object_factories import RecurrenceConditionObject
-
 from plone import api
-
 from z3c.form import button
-from z3c.form import form, field
-
+from z3c.form import field
+from z3c.form import form
 from zope.interface import Interface
 from zope.schema import TextLine
 

@@ -1,7 +1,6 @@
 # encoding: utf-8
-from Products.urban.browser.licence.licenceview import EnvironmentLicenceView
 from Products.CMFPlone import PloneMessageFactory as _
-
+from Products.urban.browser.licence.licenceview import EnvironmentLicenceView
 from plone import api
 
 

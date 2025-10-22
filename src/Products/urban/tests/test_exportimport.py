@@ -1,9 +1,10 @@
 #  -*- coding: utf-8 -*-
-import unittest2 as unittest
 from Products.CMFPlone.utils import base_hasattr
 from Products.urban.Extensions.imports import createStreet
 from Products.urban.testing import URBAN_TESTS_CONFIG
 from plone import api
+
+import unittest2 as unittest
 
 
 class TestStreetImports(unittest.TestCase):

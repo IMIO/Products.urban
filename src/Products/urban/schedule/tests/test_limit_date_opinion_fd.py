@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
 
+from Products.urban.testing import URBAN_TESTS_CONFIG_FUNCTIONAL
 from datetime import datetime
 from plone import api
-from plone.app.testing import login, logout
-from Products.urban.testing import URBAN_TESTS_CONFIG_FUNCTIONAL
+from plone.app.testing import login
+from plone.app.testing import logout
 from zope.event import notify
 from zope.lifecycleevent import ObjectModifiedEvent
 
 import unittest
+
 
 CODT_BUILDLICENCE_TRANSITIONS_LIST = [
     "ask_address_validation",

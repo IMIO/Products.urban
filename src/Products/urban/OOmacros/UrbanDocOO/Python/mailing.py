@@ -1,7 +1,11 @@
+from com.sun.star.style.BreakType import NONE
+from com.sun.star.style.BreakType import PAGE_AFTER
+from com.sun.star.style.BreakType import PAGE_BEFORE
+from com.sun.star.style.BreakType import PAGE_BOTH
+from com.sun.star.text.ControlCharacter import PARAGRAPH_BREAK
+
 import uno
 import unohelper
-from com.sun.star.style.BreakType import PAGE_BEFORE, PAGE_AFTER, PAGE_BOTH, NONE
-from com.sun.star.text.ControlCharacter import PARAGRAPH_BREAK
 
 
 def Mailing(self):

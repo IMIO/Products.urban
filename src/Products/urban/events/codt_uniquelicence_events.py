@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from plone import api
-
 from Products.urban.events.licenceEvents import postCreationActions
+from plone import api
 
 
 def UniqueLicencePostCreationActions(licence, event):

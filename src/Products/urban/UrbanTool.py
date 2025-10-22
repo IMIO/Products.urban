@@ -14,57 +14,54 @@ __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEUL
 __docformat__ = "plaintext"
 
 from AccessControl import ClassSecurityInfo
-
-from persistent.mapping import PersistentMapping
-
+from AccessControl import getSecurityManager
 from Products.Archetypes.atapi import *
-
+from Products.CMFCore import permissions
+from Products.CMFCore.Expression import Expression
+from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.utils import UniqueObject
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
-
-from Products.DataGridField import DataGridField, DataGridWidget
+from Products.CMFPlone.i18nl10n import ulocalized_time
+from Products.DataGridField import DataGridField
+from Products.DataGridField import DataGridWidget
 from Products.DataGridField.Column import Column
-from collective.datagridcolumns.DateColumn import DateColumn
-
+from Products.DataGridField.DataGridField import FixedRow
+from Products.DataGridField.FixedColumn import FixedColumn
+from Products.PageTemplates.Expressions import getEngine
+from Products.urban import services
+from Products.urban import UrbanMessage as _
+from Products.urban.config import *
+from Products.urban.config import GENERATED_DOCUMENT_FORMATS
 from Products.urban.config import NIS
 from Products.urban.config import URBANMAP_CFG
 from Products.urban.config import VOCABULARY_TYPES
-from Products.urban.config import *
-from Products.urban.interfaces import IUrbanEventType
+from Products.urban.interfaces import IContactFolder
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.interfaces import IUrbanEvent
-from Products.urban import UrbanMessage as _
-
-from zope.annotation import IAnnotations
-from zope.interface import implements
-from zope.deprecation import deprecate
-
-from AccessControl import getSecurityManager
-from plone import api
-from plone.memoize import ram
-from plone.memoize.request import cache
-from zope.i18n import translate
-from Products.CMFCore import permissions
-from Products.CMFCore.utils import getToolByName
-from Products.CMFCore.Expression import Expression
-from Products.CMFPlone.i18nl10n import ulocalized_time
-from Products.PageTemplates.Expressions import getEngine
-from Products.DataGridField.DataGridField import FixedRow
-from Products.DataGridField.FixedColumn import FixedColumn
-from Products.urban.utils import getCurrentFolderManager
-from Products.urban.config import GENERATED_DOCUMENT_FORMATS
-from Products.urban.interfaces import IUrbanVocabularyTerm, IContactFolder
+from Products.urban.interfaces import IUrbanEventType
+from Products.urban.interfaces import IUrbanVocabularyTerm
 from Products.urban.utils import cache_key_30min
-from Products.urban import services
+from Products.urban.utils import getCurrentFolderManager
+from collective.datagridcolumns.DateColumn import DateColumn
+from datetime import date as _date
+from persistent.mapping import PersistentMapping
+from plone import api
 from plone.contentrules.engine.interfaces import IRuleAssignmentManager
 from plone.contentrules.engine.interfaces import IRuleStorage
 from plone.contentrules.rule.interfaces import IExecutable
-from datetime import date as _date
-from zope.component import getUtility, getMultiAdapter
+from plone.memoize import ram
+from plone.memoize.request import cache
+from zope.annotation import IAnnotations
+from zope.component import getMultiAdapter
+from zope.component import getUtility
+from zope.deprecation import deprecate
+from zope.i18n import translate
+from zope.interface import implements
 
 import interfaces
 import logging
 import re
+
 
 logger = logging.getLogger("urban: UrbanTool")
 
@@ -541,8 +538,8 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         """
         Proxy for WFS query
         """
-        import urllib2
         import cgi
+        import urllib2
 
         method = self.REQUEST["REQUEST_METHOD"]
         allowedHosts = URBANMAP_CFG.get("host", "")

@@ -4,16 +4,13 @@ from Products.urban.browser.default_text import DefaultTextRenderer
 from Products.urban.events.licenceEvents import _setDefaultSelectValues
 from Products.urban.interfaces import IEventTypeType
 from Products.urban.interfaces import ITheLicenceEvent
-
 from imio.schedule.utils import get_task_configs
-
-from zope.component.interface import getInterface
-from zope.interface import alsoProvides
-from zope.event import notify
-from zope.lifecycleevent import ObjectModifiedEvent
-
 from plone import api
 from plone.memoize.request import cache
+from zope.component.interface import getInterface
+from zope.event import notify
+from zope.interface import alsoProvides
+from zope.lifecycleevent import ObjectModifiedEvent
 
 
 def setDefaultValuesEvent(urbanevent, event):

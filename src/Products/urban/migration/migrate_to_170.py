@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
 
 from Acquisition import aq_base
-
-from Products.contentmigration.walker import CustomQueryWalker
 from Products.contentmigration.archetypes import InplaceATFolderMigrator
-
+from Products.contentmigration.walker import CustomQueryWalker
 from plone import api
 
 import logging
+
 
 logger = logging.getLogger("urban: migrations")
 

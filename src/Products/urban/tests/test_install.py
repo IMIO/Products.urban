@@ -1,23 +1,20 @@
 #  -*- coding: utf-8 -*-
-import unittest2 as unittest
-
 from Products.CMFCore.utils import getToolByName
-from Products.urban.interfaces import (
-    IUrbanEventType,
-    IAcknowledgmentEvent,
-    IOpinionRequestEvent,
-    IInquiryEvent,
-)
+from Products.urban.interfaces import IAcknowledgmentEvent
+from Products.urban.interfaces import IInquiryEvent
+from Products.urban.interfaces import IOpinionRequestEvent
+from Products.urban.interfaces import IUrbanEventType
 from Products.urban.testing import URBAN_TESTS_CONFIG
 from Products.urban.testing import URBAN_TESTS_LICENCES
-
 from plone import api
-from plone.app.testing import quickInstallProduct, login
+from plone.app.testing import login
+from plone.app.testing import quickInstallProduct
 from plone.app.testing import setRoles
-from plone.app.testing.interfaces import TEST_USER_NAME
 from plone.app.testing.interfaces import TEST_USER_ID
-
+from plone.app.testing.interfaces import TEST_USER_NAME
 from zope.component.interface import interfaceToName
+
+import unittest2 as unittest
 
 
 class TestInstall(unittest.TestCase):

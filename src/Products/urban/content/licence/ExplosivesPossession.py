@@ -4,19 +4,18 @@ from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import BaseFolder
 from Products.Archetypes.atapi import BaseFolderSchema
 from Products.Archetypes.atapi import DisplayList
+from Products.Archetypes.atapi import registerType
 from Products.Archetypes.atapi import Schema
 from Products.Archetypes.atapi import SelectionWidget
 from Products.Archetypes.atapi import StringField
-from Products.Archetypes.atapi import registerType
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
-from zope.i18n import translate
-from zope.interface import implements
-
-from Products.urban import UrbanMessage as _
 from Products.urban import interfaces
+from Products.urban import UrbanMessage as _
 from Products.urban.config import PROJECTNAME
 from Products.urban.content.licence.EnvironmentLicence import EnvironmentLicence
 from Products.urban.widget.urbanreferencewidget import UrbanReferenceWidget
+from zope.i18n import translate
+from zope.interface import implements
 
 
 schema = Schema(

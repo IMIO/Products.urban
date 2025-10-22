@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 from Products.urban.testing import URBAN_TESTS_LICENCES
-
 from plone.app.testing import login
 
 import unittest

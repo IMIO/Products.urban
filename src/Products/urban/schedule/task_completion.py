@@ -1,11 +1,9 @@
 # encoding: utf-8
 
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from imio.schedule.browser.task_completion import TaskEndSimpleStatusView
 from imio.schedule.browser.task_completion import TaskEndStatusView
-
 from plone import api
-
-from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 
 
 class MockTask(object):

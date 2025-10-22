@@ -4,7 +4,6 @@ from Products.urban.profiles import testsWithConfig
 from Products.urban.scripts import odtsearch
 
 import os
-
 import unittest
 
 

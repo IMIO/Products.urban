@@ -3,12 +3,13 @@
 from Products.urban import URBAN_TYPES
 from Products.urban.setuphandlers import createFolderDefaultValues
 from datetime import datetime
+from imio.helpers.catalog import reindexIndexes
 from plone import api
 from zope.event import notify
 from zope.lifecycleevent import ObjectModifiedEvent
-from imio.helpers.catalog import reindexIndexes
 
 import logging
+
 
 logger = logging.getLogger("urban: migrations")
 

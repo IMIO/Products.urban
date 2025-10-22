@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
-import unittest
-from zope import event
+from Products.Archetypes.event import ObjectEditedEvent
+from Products.urban.testing import URBAN_TESTS_LICENCES
 from plone import api
 from plone.app.testing import login
-from Products.urban.testing import URBAN_TESTS_LICENCES
-from Products.Archetypes.event import ObjectEditedEvent
+from zope import event
+
+import unittest
 
 
 class TestUrbanEventTypes(unittest.TestCase):

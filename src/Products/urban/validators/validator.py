@@ -1,16 +1,12 @@
 # -*- coding: utf-8 -*-
 
 from DateTime import DateTime
-
-from plone import api
-
 from Products.urban import UrbanMessage as _
 from Products.urban.config import URBAN_TYPES
-
 from Products.validation.interfaces.IValidator import IValidator
-
-from zope.interface import implements
+from plone import api
 from zope.i18n import translate
+from zope.interface import implements
 
 import re
 

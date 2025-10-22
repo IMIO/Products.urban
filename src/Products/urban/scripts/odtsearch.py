@@ -5,12 +5,12 @@ import logging
 import mimetypes
 import os
 import os.path
-import tempfile
-import zipfile
-import time
 import re
 import sys
+import tempfile
+import time
 import xml.dom.minidom
+import zipfile
 
 
 def unzip(f, folder, odf=False):

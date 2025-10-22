@@ -1,22 +1,19 @@
 # -*- coding: utf-8 -*-
 
 from Acquisition import aq_inner
-
 from Products.Five import BrowserView
-
 from Products.urban import utils
-from Products.urban.content.UrbanEventInquiry import UrbanEventInquiry_schema
-from Products.urban.browser.table.urbantable import ApplicantTable
 from Products.urban.browser.table.urbantable import ApplicantHistoryTable
+from Products.urban.browser.table.urbantable import ApplicantTable
 from Products.urban.browser.table.urbantable import AttachmentsTable
 from Products.urban.browser.table.urbantable import EventsTable
 from Products.urban.browser.table.urbantable import NestedAttachmentsTable
 from Products.urban.browser.table.urbantable import ParcelsTable
-from Products.urban.browser.table.urbantable import ProprietaryTable
 from Products.urban.browser.table.urbantable import ProprietaryHistoryTable
+from Products.urban.browser.table.urbantable import ProprietaryTable
+from Products.urban.content.UrbanEventInquiry import UrbanEventInquiry_schema
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.interfaces import IUrbanDoc
-
 from plone import api
 from plone.memoize import view
 from zope.annotation import IAnnotations

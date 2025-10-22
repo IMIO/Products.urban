@@ -1,18 +1,17 @@
 # -*- coding: utf-8 -*-
-import unittest
-
-from plone.app.testing import login
-from plone import api
-
-from Products.urban.testing import URBAN_TESTS_CONFIG
+from Products.Archetypes.event import EditBegunEvent
 from Products.CMFCore.utils import getToolByName
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.config import URBAN_TYPES
 from Products.urban.content import UrbanEventInquiry
 from Products.urban.interfaces import IUrbanEvent
-from zope.lifecycleevent import ObjectCreatedEvent
-from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
+from Products.urban.testing import URBAN_TESTS_CONFIG
+from plone import api
+from plone.app.testing import login
 from zope.event import notify
-from Products.Archetypes.event import EditBegunEvent
+from zope.lifecycleevent import ObjectCreatedEvent
+
+import unittest
 
 
 class TestDefaultValues(unittest.TestCase):

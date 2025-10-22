@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 from Products.Archetypes.browser.edit import Edit
-
 from zope.component import queryMultiAdapter
 
 

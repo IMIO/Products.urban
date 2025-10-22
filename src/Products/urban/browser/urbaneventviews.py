@@ -2,34 +2,33 @@
 
 from Acquisition import aq_inner
 from DateTime import DateTime
-from datetime import datetime
 from Products.CMFPlone.utils import safe_unicode
-from Products.statusmessages.interfaces import IStatusMessage
-from Products.urban import utils
 from Products.Five import BrowserView
+from Products.statusmessages.interfaces import IStatusMessage
+from Products.urban import services
 from Products.urban import UrbanMessage as _
-from Products.urban.browser.mapview import MapView
+from Products.urban import utils
 from Products.urban.browser.licence.licenceview import LicenceView
-from Products.urban.browser.table.urbantable import DocumentsTable
+from Products.urban.browser.mapview import MapView
 from Products.urban.browser.table.urbantable import AttachmentsTable
 from Products.urban.browser.table.urbantable import ClaimantsTable
+from Products.urban.browser.table.urbantable import DocumentsTable
 from Products.urban.browser.table.urbantable import RecipientsCadastreTable
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.send_mail_action.forms import MAIL_ACTION_KEY
-from Products.urban import services
 from StringIO import StringIO
-
+from datetime import datetime
 from plone import api
 from plone.namedfile.field import NamedFile
-
 from z3c.form import button
-from z3c.form import form, field
-
+from z3c.form import field
+from z3c.form import form
 from zope.annotation import interfaces
 from zope.interface import Interface
 
-import csv
 import collections
+import csv
+
 
 claimants_csv_fieldnames = [
     "numerotation",
@@ -515,7 +514,9 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
                 claimant_arg["name1"] + claimant_arg["name2"] + claimant_arg["society"]
             )
             claimant_arg["claimType"] = claim_type_mapping[claimant_arg["claimType"]]
-            claimant_arg["claimDate"] = self.change_date_str_from_eu_to_us(claimant_arg["claimDate"])
+            claimant_arg["claimDate"] = self.change_date_str_from_eu_to_us(
+                claimant_arg["claimDate"]
+            )
             count = 0
             if claimant_arg["id"] in self.context.objectIds():
                 count += 1

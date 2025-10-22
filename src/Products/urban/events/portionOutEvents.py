@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 
+from Products.urban import services
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.interfaces import ILicencePortionOut
-from Products.urban import services
-
 from zope.interface import alsoProvides
 
 

@@ -6,19 +6,19 @@ from HTMLParser import HTMLParser
 from Products.ATContentTypes.interfaces.file import IATFile
 from Products.urban.config import URBAN_ENVIRONMENT_TYPES
 from Products.urban.config import URBAN_TYPES
-from Products.urban.interfaces import IUrbanDoc
 from Products.urban.interfaces import IGenericLicence
+from Products.urban.interfaces import IUrbanDoc
 from datetime import datetime
 from imio.schedule.utils import tuple_to_interface
 from plone import api
 from zope.annotation import IAnnotations
 from zope.component import getMultiAdapter
 
-import random
-import string
 import hashlib
 import os
 import pkg_resources
+import random
+import string
 import time
 
 
@@ -106,9 +106,8 @@ def setSchemataForCODT_UniqueLicenceInquiry(schema):
     """
     Put the the fields coming from Inquiry in a specific schemata
     """
-    from Products.urban.content.CODT_UniqueLicenceInquiry import (
-        CODT_UniqueLicenceInquiry,
-    )
+    from Products.urban.content.CODT_UniqueLicenceInquiry import \
+        CODT_UniqueLicenceInquiry
 
     _setSchemataForInquiry(schema, CODT_UniqueLicenceInquiry)
 

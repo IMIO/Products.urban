@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
 from Products.urban import interfaces
+from Products.urban import utils
 from Products.urban.config import URBAN_TYPES
 from Products.urban.testing import URBAN_TESTS_INTEGRATION
 from Products.urban.tests.helpers import SchemaFieldsTestCase
-from Products.urban import utils
 from plone import api
 from plone.app.testing import login
 from plone.testing.z2 import Browser

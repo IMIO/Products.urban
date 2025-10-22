@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
-import unittest2 as unittest
 from Products.CMFCore.utils import getToolByName
-from plone.app.testing import login
 from Products.urban.testing import URBAN_TESTS_CONFIG
+from plone.app.testing import login
+
+import unittest2 as unittest
 
 
 class TestParcellingTerm(unittest.TestCase):

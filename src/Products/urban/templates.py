@@ -1,9 +1,10 @@
-import os
-import re
+from genshi.template import Context
+from genshi.template import NewTextTemplate
+from genshi.template.eval import UndefinedError
 from optparse import OptionParser
 
-from genshi.template import Context, NewTextTemplate
-from genshi.template.eval import UndefinedError
+import os
+import re
 
 
 def retLines(filename):

@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
-import unittest2 as unittest
-from zope.i18n import translate
-from plone.app.testing import login
 from Products.urban.testing import URBAN_TESTS_CONFIG_FUNCTIONAL
+from plone.app.testing import login
+from zope.i18n import translate
+
+import unittest2 as unittest
 
 
 class TestUrbanVocabularyTerm(unittest.TestCase):

@@ -1,14 +1,14 @@
+from Products.urban.config import URBAN_TYPES
 from eea.facetednavigation.interfaces import ICriteria
 from imio.helpers.catalog import reindexIndexes
 from plone import api
-from Products.urban.config import URBAN_TYPES
 
 import logging
 
 
 def update_faceted_collection_widget(context):
-    from eea.facetednavigation.subtypes.interfaces import IFacetedNavigable
     from eea.facetednavigation.interfaces import ICriteria
+    from eea.facetednavigation.subtypes.interfaces import IFacetedNavigable
 
     logger = logging.getLogger("Urban: Update collection widget")
     logger.info("starting upgrade steps")
@@ -96,9 +96,8 @@ def add_additional_reference_index(context):
 def update_faceted_dashboard(context):
     """ """
     from Products.urban.dashboard.utils import switch_config_folder
-    logger = logging.getLogger(
-        "urban: update faceted dashboard"
-    )
+
+    logger = logging.getLogger("urban: update faceted dashboard")
     logger.info("starting upgrade steps")
     site = api.portal.getSite()
     urban_folder = getattr(site, "urban")

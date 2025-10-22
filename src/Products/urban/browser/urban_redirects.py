@@ -1,13 +1,9 @@
 # -*- coding: utf-8 -*-
 
 from AccessControl import getSecurityManager
-
 from Products.Five import BrowserView
-
 from Products.urban.interfaces import IUrbanRootRedirects
-
 from plone import api
-
 from zope.component import queryAdapter
 
 

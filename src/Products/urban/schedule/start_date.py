@@ -2,7 +2,6 @@
 
 from imio.schedule.content.logic import StartDate
 from imio.schedule.interfaces import ICalculationDelay
-
 from zope.component import queryMultiAdapter
 
 

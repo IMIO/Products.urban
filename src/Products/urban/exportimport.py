@@ -1,15 +1,14 @@
 # -*- coding: utf-8 -*-
 
 from Products.CMFCore.utils import getToolByName
-
-from Products.urban.scripts.odtsearch import searchOneODT
 from Products.urban.config import NIS
-from Products.urban.utils import moveElementAfter
+from Products.urban.scripts.odtsearch import searchOneODT
 from Products.urban.utils import getMd5Signature
-
+from Products.urban.utils import moveElementAfter
 from plone.namedfile.file import NamedBlobFile
 
 import logging
+
 
 logger = logging.getLogger("urban: setuphandlers")
 

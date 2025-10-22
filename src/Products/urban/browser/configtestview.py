@@ -1,13 +1,13 @@
 # encoding: utf-8
-from Products.Five import BrowserView
-from Acquisition import aq_parent
 from Acquisition import aq_inner
+from Acquisition import aq_parent
+from DateTime import DateTime
+from Products.Five import BrowserView
+from Products.urban.browser.licence.licenceview import LicenceView
 from plone import api
 from zope.component import getUtility
-from zope.schema.interfaces import IVocabularyFactory
 from zope.i18n import translate
-from DateTime import DateTime
-from Products.urban.browser.licence.licenceview import LicenceView
+from zope.schema.interfaces import IVocabularyFactory
 
 
 class ConfigTestView(BrowserView):

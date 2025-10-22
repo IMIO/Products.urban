@@ -1,10 +1,10 @@
 # encoding: utf-8
 
+from Products.urban.profiles.extra.schedule_config import schedule_config
 from plone import api
 
-from Products.urban.profiles.extra.schedule_config import schedule_config
-
 import logging
+
 
 logger = logging.getLogger("urban: migrations")
 

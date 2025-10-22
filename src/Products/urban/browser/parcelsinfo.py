@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from Products.Five import BrowserView
-
-from Products.urban.interfaces import IGenericLicence
 from Products.urban import services
-
+from Products.urban.interfaces import IGenericLicence
 from plone import api
 
 

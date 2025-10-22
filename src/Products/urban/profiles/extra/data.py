@@ -2,6 +2,7 @@
 from Products.urban.config import DASHBOARD_TEMPLATES
 from Products.urban.config import GLOBAL_TEMPLATES
 
+
 globalTemplates = GLOBAL_TEMPLATES
 dashboardTemplates = DASHBOARD_TEMPLATES
 

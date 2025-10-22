@@ -1,8 +1,7 @@
 from Acquisition import aq_inner
-from Products.Five import BrowserView
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import PloneMessageFactory as _
-
+from Products.Five import BrowserView
 from zope.i18n import translate
 
 

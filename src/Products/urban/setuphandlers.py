@@ -16,65 +16,60 @@ __docformat__ = "plaintext"
 
 import logging
 
-logger = logging.getLogger("urban: setuphandlers")
-import os
-from Products.CMFCore.utils import getToolByName
 
+logger = logging.getLogger("urban: setuphandlers")
 ##code-section HEAD
 from Acquisition import aq_base
-from Products.Archetypes.event import ObjectInitializedEvent
 from Products.Archetypes.event import EditBegunEvent
+from Products.Archetypes.event import ObjectInitializedEvent
+from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.utils import base_hasattr
 from Products.cron4plone.browser.configlets.cron_configuration import ICronConfiguration
+from Products.urban import services
+from Products.urban.Extensions.update_task_configs import add_licence_ended_condition
 from Products.urban.config import DefaultTexts
 from Products.urban.config import URBAN_CFG_DIR
-from Products.urban.config import URBANMAP_CFG
 from Products.urban.config import URBAN_TYPES
 from Products.urban.config import URBAN_TYPES_ACRONYM
+from Products.urban.config import URBANMAP_CFG
 from Products.urban.dashboard.utils import switch_config_folder
 from Products.urban.exportimport import updateAllUrbanTemplates
-from Products.urban.Extensions.update_task_configs import add_licence_ended_condition
 from Products.urban.interfaces import IContactFolder
 from Products.urban.interfaces import ILicenceContainer
 from Products.urban.interfaces import IUrbanConfigurationFolder
 from Products.urban.schedule.vocabulary import URBAN_TYPES_INTERFACES
-from Products.urban import services
 from Products.urban.utils import generatePassword
 from Products.urban.utils import getAllLicenceFolderIds
 from Products.urban.utils import getEnvironmentLicenceFolderIds
 from Products.urban.utils import getLicenceFolderId
 from Products.urban.utils import getUrbanOnlyLicenceFolderIds
-
+from collective.eeafaceted.collectionwidget.utils import _updateDefaultCollectionFor
 from datetime import date
 from eea.facetednavigation.layout.interfaces import IFacetedLayout
-from collective.eeafaceted.collectionwidget.utils import _updateDefaultCollectionFor
-
+from imio.schedule.utils import _set_faceted_view
+from imio.schedule.utils import interface_to_tuple
+from imio.schedule.utils import set_schedule_view
 from plone import api
-from plone.portlets.interfaces import IPortletManager
+from plone.portlets.constants import CONTENT_TYPE_CATEGORY
+from plone.portlets.constants import CONTEXT_CATEGORY
+from plone.portlets.constants import GROUP_CATEGORY
 from plone.portlets.interfaces import ILocalPortletAssignable
 from plone.portlets.interfaces import ILocalPortletAssignmentManager
-from plone.portlets.constants import (
-    CONTEXT_CATEGORY,
-    GROUP_CATEGORY,
-    CONTENT_TYPE_CATEGORY,
-)
-
-from imio.schedule.utils import interface_to_tuple
-from imio.schedule.utils import _set_faceted_view
-from imio.schedule.utils import set_schedule_view
-
+from plone.portlets.interfaces import IPortletManager
 from zExceptions import BadRequest
-from zope.interface import alsoProvides
+from zope import event
 from zope.component import getMultiAdapter
 from zope.component import getUtilitiesFor
 from zope.component import queryUtility
 from zope.component.interface import getInterface
 from zope.i18n.interfaces import ITranslationDomain
+from zope.interface import alsoProvides
 from zope.lifecycleevent import ObjectModifiedEvent
-from zope import event
 
+import os
 import pickle
 import transaction
+
 
 logger = logging.getLogger("urban: setuphandlers")
 
@@ -1521,10 +1516,8 @@ def addDefaultObjects(context):
 
     # create some streets using the Extensions.imports script
     if not tool.streets.objectIds("City"):
-        from Products.urban.Extensions.imports import (
-            import_streets_fromfile,
-            import_localities_fromfile,
-        )
+        from Products.urban.Extensions.imports import import_localities_fromfile
+        from Products.urban.Extensions.imports import import_streets_fromfile
 
         import_streets_fromfile(tool)
         import_localities_fromfile(tool)
@@ -1748,7 +1741,9 @@ def createLicence(site, licence_type, data):
         )
     ]
     for event_type in eventtypes:
-        licence.createUrbanEvent(event_type)    # fill each event with dummy data and generate all its documents
+        licence.createUrbanEvent(
+            event_type
+        )  # fill each event with dummy data and generate all its documents
     logger.info("   test %s --> generate all the documents" % licence_type)
     for urban_event in licence.objectValues(
         ["UrbanEvent", "UrbanEventInquiry", "UrbanEventOpinionRequest"]
@@ -1918,6 +1913,7 @@ def _create_task_configs(container, taskconfigs):
             _create_task_configs(container=task_config, taskconfigs=subtasks)
 
         checkPoint()
+
 
 def reindex_catalog(context):
     """

@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from plone.app.testing import login
-from Products.urban.testing import URBAN_TESTS_FUNCTIONAL, URBAN_TESTS_LICENCES
 from Products.urban.scripts.odtsearch import searchInTextElements
+from Products.urban.testing import URBAN_TESTS_FUNCTIONAL
+from Products.urban.testing import URBAN_TESTS_LICENCES
+from plone.app.testing import login
 
 import cgi
 import unittest

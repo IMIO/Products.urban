@@ -1,14 +1,13 @@
 # -*- coding: utf-8 -*-
-from plone.app.testing import login
+from Products.CMFCore.utils import getToolByName
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.testing import URBAN_TESTS_LICENCES
 from Products.urban.tests.helpers import BrowserTestCase
-
-from plone.testing.z2 import Browser
-from Products.CMFCore.utils import getToolByName
-from testfixtures import compare, StringComparison as S
-
 from plone import api
+from plone.app.testing import login
+from plone.testing.z2 import Browser
+from testfixtures import compare
+from testfixtures import StringComparison as S
 
 
 class TestLicenceStatsView(BrowserTestCase):

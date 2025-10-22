@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
+from Products.Archetypes.interfaces import IBaseObject
+from Products.urban.interfaces import IProductUrbanLayer
 from plone.restapi.deserializer import json_body
 from plone.restapi.deserializer.atcontent import DeserializeFromJson
 from plone.restapi.interfaces import IDeserializeFromJson
-from Products.Archetypes.interfaces import IBaseObject
-from Products.urban.interfaces import IProductUrbanLayer
 from zope.component import adapter
 from zope.interface import implementer
 

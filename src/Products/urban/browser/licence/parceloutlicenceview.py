@@ -1,6 +1,6 @@
-from Products.urban.browser.licence.buildlicenceview import BuildLicenceView
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import PloneMessageFactory as _
+from Products.urban.browser.licence.buildlicenceview import BuildLicenceView
 
 
 class ParcelOutLicenceView(BuildLicenceView):

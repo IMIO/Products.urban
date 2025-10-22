@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 from Acquisition import aq_inner
-from Products.urban.browser.licence.licenceview import LicenceView
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import PloneMessageFactory as _
+from Products.urban.browser.licence.licenceview import LicenceView
 
 
 class BuildLicenceView(LicenceView):

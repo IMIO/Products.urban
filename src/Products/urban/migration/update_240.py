@@ -1,10 +1,12 @@
 # encoding: utf-8
 
-from collective.eeafaceted.collectionwidget.utils import _updateDefaultCollectionFor
-from plone import api
 from Products.urban.config import URBAN_TYPES
 from Products.urban.interfaces import IGenericLicence
+from collective.eeafaceted.collectionwidget.utils import _updateDefaultCollectionFor
+from plone import api
+
 import logging
+
 
 logger = logging.getLogger("urban: migrations")
 

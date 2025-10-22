@@ -13,44 +13,39 @@ __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEUL
 <stephan.geulette@uvcw.be>, Jean-Michel Abe <jm.abe@la-bruyere.be>"""
 __docformat__ = "plaintext"
 
-from Acquisition import aq_parent
 from AccessControl import ClassSecurityInfo
-from Products.urban.widget.select2widget import MultiSelect2Widget
-from Products.Archetypes.atapi import *
-from zope.interface import implements
-import interfaces
-
-from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
-
-from Products.urban.config import *
-from Products.urban.utils import WIDGET_DATE_END_YEAR
-
+from Acquisition import aq_parent
 ##code-section module-header #fill in your manual code here
 from DateTime import DateTime
-
-from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import (
-    ReferenceBrowserWidget,
-)
-from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
 from Products.ATContentTypes.interfaces.file import IATFile
+from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
+    ReferenceBrowserWidget
+from Products.Archetypes.atapi import *
 from Products.CMFCore.utils import getToolByName
-
-from collective.plonefinder.browser.interfaces import IFinderUploadCapable
-from collective.quickupload.interfaces import IQuickUploadCapable
-from Products.urban.interfaces import IUrbanDoc
+from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
+from Products.MasterSelectWidget.MasterMultiSelectWidget import MasterMultiSelectWidget
+from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
+from Products.urban import UrbanMessage as _
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
+from Products.urban.config import *
+from Products.urban.interfaces import IUrbanDoc
 from Products.urban.utils import is_attachment
 from Products.urban.utils import setOptionalAttributes
-from Products.urban import UrbanMessage as _
-from plone.contentrules.engine.interfaces import IRuleAssignmentManager
-from zope.component import getUtility, getMultiAdapter
-from plone.contentrules.rule.interfaces import IExecutable
-from plone.contentrules.engine.interfaces import IRuleStorage
-
+from Products.urban.utils import WIDGET_DATE_END_YEAR
+from Products.urban.widget.select2widget import MultiSelect2Widget
+from collective.plonefinder.browser.interfaces import IFinderUploadCapable
+from collective.quickupload.interfaces import IQuickUploadCapable
 from plone import api
-
-from Products.MasterSelectWidget.MasterMultiSelectWidget import MasterMultiSelectWidget
+from plone.contentrules.engine.interfaces import IRuleAssignmentManager
+from plone.contentrules.engine.interfaces import IRuleStorage
+from plone.contentrules.rule.interfaces import IExecutable
+from zope.component import getMultiAdapter
+from zope.component import getUtility
 from zope.i18n import translate
+from zope.interface import implements
+
+import interfaces
+
 
 ##/code-section module-header
 

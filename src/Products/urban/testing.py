@@ -2,20 +2,19 @@
 
 from Products.GenericSetup.tool import DEPENDENCY_STRATEGY_NEW
 from Products.urban.utils import run_entry_points
-from Products.urban.utils import run_entry_points
 from plone import api
 from plone.app.robotframework.testing import REMOTE_LIBRARY_BUNDLE_FIXTURE
 from plone.app.testing import FunctionalTesting
+from plone.app.testing import helpers
 from plone.app.testing import IntegrationTesting
 from plone.app.testing import PloneWithPackageLayer
-from plone.app.testing import helpers
 from plone.testing import z2
-from zope.globalrequest import setRequest
 from zope.globalrequest import setLocal
+from zope.globalrequest import setRequest
 
 import Products.urban
-import transaction
 import logging
+import transaction
 
 
 class UrbanLayer(PloneWithPackageLayer):

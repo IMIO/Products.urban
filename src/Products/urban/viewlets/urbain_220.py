@@ -1,28 +1,21 @@
 # -*- coding: utf-8 -*-
 
 from DateTime import DateTime
-
 from Products.Five import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-
+from Products.urban import UrbanMessage as _
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.config import NIS
 from Products.urban.interfaces import IToUrbain220Street
-from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
-
 from StringIO import StringIO
-
-from eea.facetednavigation.interfaces import IFacetedNavigable
-
-from collective.eeafaceted.dashboard.utils import getDashboardQueryResult
 from collective.eeafaceted.dashboard.utils import getCriterionByIndex
-
+from collective.eeafaceted.dashboard.utils import getDashboardQueryResult
+from eea.facetednavigation.interfaces import IFacetedNavigable
 from plone import api
 from plone.app.layout.viewlets import ViewletBase
-
 from zope.component import getAdapter
-from zope.interface import implements
 from zope.i18n import translate
-from Products.urban import UrbanMessage as _
+from zope.interface import implements
 
 import json
 import unidecode

@@ -1,23 +1,21 @@
 # -*- coding: utf-8 -*-
 #
 from AccessControl import ClassSecurityInfo
+from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
+    ReferenceBrowserWidget
 from Products.Archetypes.atapi import *
-from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import (
-    ReferenceBrowserWidget,
-)
-from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
-from zope.interface import implements
-
-from plone import api
-
-from Products.urban import UrbanMessage as _
+from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
 from Products.urban import interfaces
+from Products.urban import UrbanMessage as _
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.config import *
 from Products.urban.content.licence.CODT_BuildLicence import CODT_BuildLicence
+from plone import api
+from zope.interface import implements
 
 import copy
+
 
 slave_fields_bound_licence = (
     {

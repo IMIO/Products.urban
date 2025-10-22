@@ -1,15 +1,13 @@
 # -*- coding: utf-8 -*-
 
 from Acquisition import aq_base
-
-from zope.lifecycleevent import ObjectCreatedEvent
 from Products.CMFCore.utils import getToolByName
-from Products.urban.testing import URBAN_TESTS_PROFILE_FUNCTIONAL, URBAN_TESTS_LICENCES
-
-from plone.app.testing import login
+from Products.urban.testing import URBAN_TESTS_LICENCES
+from Products.urban.testing import URBAN_TESTS_PROFILE_FUNCTIONAL
 from plone import api
-
+from plone.app.testing import login
 from zope import event
+from zope.lifecycleevent import ObjectCreatedEvent
 
 import unittest
 

@@ -1,12 +1,10 @@
 # -*- coding: utf-8 -*-
 
 from five import grok
-
 from plone import api
-
-from zope.lifecycleevent import ObjectCreatedEvent
-from zope.component import IFactory
 from zope import event
+from zope.component import IFactory
+from zope.lifecycleevent import ObjectCreatedEvent
 
 
 class UrbanEventFactory(grok.GlobalUtility):

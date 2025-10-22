@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 from Products.Five import BrowserView
-
 from plone import api
 
 import base64

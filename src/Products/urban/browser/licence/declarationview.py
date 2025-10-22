@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from Products.urban.browser.licence.licenceview import LicenceView
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import PloneMessageFactory as _
+from Products.urban.browser.licence.licenceview import LicenceView
 
 
 class DeclarationView(LicenceView):

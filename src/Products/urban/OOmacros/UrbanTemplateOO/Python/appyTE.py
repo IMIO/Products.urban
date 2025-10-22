@@ -1,3 +1,10 @@
+from com.sun.star.awt import FontDescriptor
+from com.sun.star.awt import XActionListener
+from com.sun.star.awt import XItemListener
+from com.sun.star.awt import XMouseListener
+from com.sun.star.awt import XTextListener
+from com.sun.star.awt import XWindowListener
+
 import os
 import platform
 import uno
@@ -6,12 +13,6 @@ import urllib
 import urllib2
 import xml.etree.ElementTree as ET
 
-from com.sun.star.awt import XActionListener
-from com.sun.star.awt import XTextListener
-from com.sun.star.awt import XItemListener
-from com.sun.star.awt import XWindowListener
-from com.sun.star.awt import XMouseListener
-from com.sun.star.awt import FontDescriptor
 
 configurl = "http://svn.communesplone.org/svn/communesplone/Products.urban/trunk/src/Products/urban/scripts/config.xml"
 

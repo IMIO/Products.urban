@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from plone import api
-
 from Products.urban import UrbanMessage as _
 from Products.urban.config import URBAN_TYPES
 from Products.urban.interfaces import IGenericLicence
-
+from plone import api
 from zope.i18n import translate
 
 import json

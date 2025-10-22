@@ -5,8 +5,8 @@ from datetime import datetime
 from plone import api
 from plone.app.testing import login
 from plone.app.testing import logout
-from zope.lifecycleevent import ObjectModifiedEvent
 from zope.event import notify
+from zope.lifecycleevent import ObjectModifiedEvent
 
 import unittest
 

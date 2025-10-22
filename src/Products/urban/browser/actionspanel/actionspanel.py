@@ -1,20 +1,18 @@
 # -*- coding: utf-8 -*-
 
-from imio.actionspanel.browser.views import ActionsPanelView
-from imio.actionspanel.browser.views import DEFAULT_CONFIRM_VIEW
-from imio.actionspanel import ActionsPanelMessageFactory as _actions
-
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from plone import api
 from Products.CMFPlone import PloneMessageFactory as _plone
 from Products.DCWorkflow.Guard import Guard
 from Products.DCWorkflow.Transitions import TransitionDefinition
-
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.urban.interfaces import ICODT_UniqueLicence
 from Products.urban.interfaces import IEnvironmentLicence
-
+from imio.actionspanel import ActionsPanelMessageFactory as _actions
+from imio.actionspanel.browser.views import ActionsPanelView
+from imio.actionspanel.browser.views import DEFAULT_CONFIRM_VIEW
+from plone import api
 from zope.annotation import IAnnotations
 from zope.i18n import translate
+
 
 # from DateTime import DateTime
 
@@ -193,7 +191,7 @@ class TransitionsPanelView(ActionsPanelView):
 
     def getTransitions(self, caching=True):
         if caching:
-            if getattr(self, '_transitions', None):
+            if getattr(self, "_transitions", None):
                 return self._transitions
         transitions = super(TransitionsPanelView, self).getTransitions(caching=False)
         workflow = self.request.get(
@@ -255,7 +253,7 @@ class TransitionsPanelView(ActionsPanelView):
                     )
         if caching:
             # store transitions in case getTransitions is called several times
-            setattr(self, '_transitions', transitions)
+            setattr(self, "_transitions", transitions)
         return transitions
 
     def sortTransitions(self, lst):

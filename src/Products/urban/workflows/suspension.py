@@ -1,12 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from collective.wfadaptations.interfaces import IWorkflowAdaptation
-
 from Persistence import PersistentMapping
 from Products.DCWorkflow.Guard import Guard
-
+from collective.wfadaptations.interfaces import IWorkflowAdaptation
 from plone import api
-
 from zope.interface import implements
 
 
