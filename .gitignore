@@ -1,5 +1,8 @@
 *.py?
 *.mo
+*.swp
 *.egg-info
 **/docs/sphinx/build/
 **/docs/sphinx/_downloads/
+.vscode/
+pip-selfcheck.json
