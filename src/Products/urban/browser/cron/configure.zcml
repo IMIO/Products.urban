@@ -39,4 +39,18 @@
     permission="zope2.View"
     />
 
+  <browser:page
+    name="update_college_done_tasks"
+    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    permission="cmf.ManagePortal"
+    class=".tasks.UpdateCollegeEventDoneTasks"
+  />
+
+  <browser:page
+    name="update_licences_open_tasks"
+    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    permission="cmf.ManagePortal"
+    class=".tasks.UpdateOpenTasksLicences"
+  />
+
 </configure>
