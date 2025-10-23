@@ -11,45 +11,45 @@
 
 __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEULETTE
 <stephan.geulette@uvcw.be>, Jean-Michel Abe <jm.abe@la-bruyere.be>"""
-__docformat__ = 'plaintext'
+__docformat__ = "plaintext"
 
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
-from zope.interface import implements
+from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.urban import interfaces
+from Products.urban.config import *
 from Products.urban.content.licence.MiscDemand import finalizeSchema
 from Products.urban.content.licence.MiscDemand import MiscDemand
-from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
+from zope.interface import implements
 
-from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
 ##/code-section module-header
 
-schema = Schema((
-
-
-),
+schema = Schema(
+    (),
 )
 
 ##code-section after-local-schema #fill in your manual code here
 ##/code-section after-local-schema
 
-ProjectMeeting_schema = BaseFolderSchema.copy() + \
-    getattr(MiscDemand, 'schema', Schema(())).copy() + \
-    schema.copy()
+ProjectMeeting_schema = (
+    BaseFolderSchema.copy()
+    + getattr(MiscDemand, "schema", Schema(())).copy()
+    + schema.copy()
+)
 
 ##code-section after-schema #fill in your manual code here
 ##/code-section after-schema
 
 
 class ProjectMeeting(BaseFolder, MiscDemand, BrowserDefaultMixin):
-    """
-    """
+    """ """
+
     security = ClassSecurityInfo()
     implements(interfaces.IProjectMeeting)
 
-    meta_type = 'ProjectMeeting'
+    meta_type = "ProjectMeeting"
     _at_rename_after_creation = True
 
     schema = ProjectMeeting_schema
