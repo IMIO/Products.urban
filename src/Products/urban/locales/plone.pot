@@ -362,3 +362,14 @@ msgstr ""
 msgid "Ticket"
 msgstr ""
 
+msgid "suspend_freeze"
+msgstr ""
+
+msgid "resume_thaw"
+msgstr ""
+
+msgid "frozen_suspension"
+msgstr ""
+
+msgid "ComplementaryDelayTerm"
+msgstr ""
