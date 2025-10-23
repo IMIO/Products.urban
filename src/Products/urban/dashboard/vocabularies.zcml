@@ -16,6 +16,12 @@
     />
 
     <utility
+        factory=".vocabularies.TicketFollowupVocabulary"
+        name="urban.ticket_followups"
+        provides="zope.schema.interfaces.IVocabularyFactory"
+    />
+
+    <utility
         factory=".vocabularies.CovidVocabulary"
         name="urban.covid"
         provides="zope.schema.interfaces.IVocabularyFactory"

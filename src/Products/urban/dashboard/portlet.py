@@ -1,18 +1,17 @@
 # -*- coding: utf-8 -*-
 
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from Products.urban import UrbanMessage as _
+from Products.urban.dashboard import utils
 from plone import api
 from plone.app.portlets.portlets import base
 from plone.portlets.interfaces import IPortletDataProvider
 from zope.formlib import form
 from zope.interface import implements
 
-from Products.urban import UrbanMessage as _
-from Products.urban.dashboard import utils
-
 
 class ICategorySwitchPortlet(IPortletDataProvider):
-    """ A portlet that shows a switch button between procedure categories """
+    """A portlet that shows a switch button between procedure categories"""
 
 
 class Assignment(base.Assignment):
@@ -20,13 +19,12 @@ class Assignment(base.Assignment):
 
     @property
     def title(self):
-        return u'Category Switch'
+        return u"Category Switch"
 
 
 class Renderer(base.Renderer):
-
     def render(self):
-        return ViewPageTemplateFile('templates/portlet_categoryswitch.pt')(self)
+        return ViewPageTemplateFile("templates/portlet_categoryswitch.pt")(self)
 
     @property
     def available(self):
@@ -39,6 +37,16 @@ class Renderer(base.Renderer):
     @property
     def url(self):
         return api.portal.get().absolute_url()
+
+    @property
+    def collection_uid(self):
+        brains = api.content.find(
+            id="collection_all_licences",
+            portal_type="DashboardCollection",
+        )
+        if not brains:
+            return ""
+        return brains[0].UID
 
 
 class AddForm(base.AddForm):
