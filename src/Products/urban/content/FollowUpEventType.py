@@ -8,50 +8,53 @@
 
 __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEULETTE
 <stephan.geulette@uvcw.be>, Jean-Michel Abe <jm.abe@la-bruyere.be>"""
-__docformat__ = 'plaintext'
+__docformat__ = "plaintext"
 
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
-from zope.interface import implements
+from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
+from Products.urban import interfaces
 from Products.urban.UrbanEventType import UrbanEventType
 from Products.urban.UrbanVocabularyTerm import UrbanVocabularyTerm
-from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
-
-from Products.urban import interfaces
 from Products.urban.config import PROJECTNAME
+from zope.interface import implements
 
 
-schema = Schema((
-),
+schema = Schema(
+    (),
 )
 
-FollowUpEventType_schema = OrderedBaseFolderSchema.copy() + schema.copy() + \
-    getattr(UrbanEventType, 'schema', Schema(())).copy() + \
-    getattr(UrbanVocabularyTerm, 'schema', Schema(())).copy()
+FollowUpEventType_schema = (
+    OrderedBaseFolderSchema.copy()
+    + schema.copy()
+    + getattr(UrbanEventType, "schema", Schema(())).copy()
+    + getattr(UrbanVocabularyTerm, "schema", Schema(())).copy()
+)
 
 
-class FollowUpEventType(OrderedBaseFolder, UrbanEventType, UrbanVocabularyTerm, BrowserDefaultMixin):
-    """
-    """
+class FollowUpEventType(
+    OrderedBaseFolder, UrbanEventType, UrbanVocabularyTerm, BrowserDefaultMixin
+):
+    """ """
+
     security = ClassSecurityInfo()
     implements(interfaces.IFollowUpEventType)
 
-    meta_type = 'FollowUpEventType'
+    meta_type = "FollowUpEventType"
     _at_rename_after_creation = True
 
     schema = FollowUpEventType_schema
 
-    security.declarePublic('mayAddOpinionRequestEvent')
+    security.declarePublic("mayAddFollowUpEvent")
 
     def mayAddFollowUpEvent(self, licence):
         """
-           This is used as TALExpression for the UrbanEventOpinionRequest
-           We may add an OpinionRequest if we asked one in an inquiry on the licence
-           We may add another if another inquiry defined on the licence ask for it and so on
+        This is used as TALExpression for the UrbanEventOpinionRequest
+        We may add an OpinionRequest if we asked one in an inquiry on the licence
+        We may add another if another inquiry defined on the licence ask for it and so on
         """
         may_add = licence.mayAddFollowUpEvent(self.id)
         return may_add
-
 
 
 registerType(FollowUpEventType, PROJECTNAME)
