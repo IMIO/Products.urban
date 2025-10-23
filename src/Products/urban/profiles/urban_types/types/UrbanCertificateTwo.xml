@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<object name="UrbanCertificateTwo"
+        meta_type="Factory-based Type Information with dynamic views"
+        xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+        i18n:domain="plone">
+
+ <property name="title" i18n:translate="">UrbanCertificateTwo</property>
+ <property name="description" i18n:translate=""></property>
+ <property name="icon_expr">string:${portal_url}/UrbanCertificateTwo.png</property>
+ <property name="content_meta_type">UrbanCertificateTwo</property>
+ <property name="product">urban</property>
+ <property name="factory">addUrbanCertificateTwo</property>
+ <property name="immediate_view">urbancertificatetwoview</property>
+ <property name="global_allow">True</property>
+ <property name="filter_content_types">True</property>
+ <property name="allowed_content_types">
+   <element value="PortionOut"/>
+   <element value="UrbanEvent"/>
+   <element value="UrbanEventInquiry"/>
+   <element value="UrbanEventOpinionRequest"/>
+   <element value="UrbanEventCollege"/>
+   <element value="UrbanEventNotificationCollege"/>
+   <element value="Proprietary"/>
+   <element value="ProprietaryCouple"/>
+   <element value="CorporationProprietary"/>
+   <element value="Corporation"/>
+   <element value="Applicant"/>
+   <element value="Couple"/>
+   <element value="File"/>
+   <element value="task"/>
+ </property>
+ <property name="allow_discussion">False</property>
+ <property name="default_view">urbancertificatetwoview</property>
+ <property name="view_methods">
+  <element value="folder_summary_view"/>
+  <element value="folder_tabular_view"/>
+  <element value="atct_album_view"/>
+  <element value="folder_listing"/>
+  <element value="urbancertificatetwoview"/>
+ </property>
+ <property name="default_view_fallback">False</property>
+ <alias from="(Default)" to="(dynamic view)"/>
+ <alias from="view" to="urbancertificatetwoview"/>
+ <alias from="edit" to="base_edit"/>
+ <alias from="sharing" to="@@sharing"/>
+ <action title="View"
+         action_id="view"
+         category="object"
+         condition_expr=""
+         url_expr="string:${object_url}/view"
+         visible="True">
+  <permission value="View"/>
+ </action>
+ <action title="Edit"
+         action_id="edit"
+         category="object"
+         condition_expr="python:context.mayShowEditAction()"
+         url_expr="string:${object_url}/edit"
+         visible="True">
+  <permission value="Modify portal content"/>
+ </action>
+<!-- ##code-section FOOT -->
+<!-- ##/code-section FOOT -->
+</object>

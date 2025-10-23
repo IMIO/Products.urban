@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<object name="CODT_CommercialLicence"
+        meta_type="Factory-based Type Information with dynamic views"
+        xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+        i18n:domain="plone">
+
+ <property name="title" i18n:translate="">CODT_CommercialLicence</property>
+ <property name="description" i18n:translate=""></property>
+ <property name="icon_expr">string:${portal_url}/BuildLicence.png</property>
+ <property name="content_meta_type">CODT_CommercialLicence</property>
+ <property name="product">urban</property>
+ <property name="factory">addCODT_CommercialLicence</property>
+ <property name="immediate_view">codt_buildlicenceview</property>
+ <property name="global_allow">True</property>
+ <property name="filter_content_types">True</property>
+ <property name="allowed_content_types">
+   <element value="UrbanEventOpinionRequest"/>
+   <element value="UrbanEventAnnouncement"/>
+   <element value="UrbanEventInquiry"/>
+   <element value="UrbanEventCollege"/>
+   <element value="UrbanEventNotificationCollege"/>
+   <element value="Applicant"/>
+   <element value="Couple"/>
+   <element value="Corporation"/>
+   <element value="CODT_Inquiry"/>
+   <element value="UrbanEvent"/>
+   <element value="File"/>
+   <element value="PortionOut"/>
+   <element value="task"/>
+   <element value="ConfigTest"/>
+ </property>
+ <property name="allow_discussion">False</property>
+ <property name="default_view">codt_buildlicenceview</property>
+ <property name="view_methods">
+  <element value="folder_summary_view"/>
+  <element value="folder_tabular_view"/>
+  <element value="atct_album_view"/>
+  <element value="folder_listing"/>
+  <element value="codt_buildlicenceview"/>
+ </property>
+ <property name="default_view_fallback">False</property>
+ <alias from="(Default)" to="(dynamic view)"/>
+ <alias from="view" to="codt_buildlicenceview"/>
+ <alias from="edit" to="base_edit"/>
+ <alias from="sharing" to="@@sharing"/>
+ <action title="View"
+         action_id="view"
+         category="object"
+         condition_expr=""
+         url_expr="string:${object_url}/view"
+         visible="True">
+  <permission value="View"/>
+ </action>
+ <action title="Edit"
+         action_id="edit"
+         category="object"
+         condition_expr="python:context.mayShowEditAction()"
+         url_expr="string:${object_url}/edit"
+         visible="True">
+  <permission value="Modify portal content"/>
+ </action>
+<!-- ##code-section FOOT -->
+<!-- ##/code-section FOOT -->
+</object>

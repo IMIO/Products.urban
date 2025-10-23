@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<object name="CODT_UniqueLicence"
+        meta_type="Factory-based Type Information with dynamic views"
+        xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+        i18n:domain="plone">
+
+ <property name="title" i18n:translate="">CODT_UniqueLicence</property>
+ <property name="description" i18n:translate=""></property>
+ <property name="icon_expr">string:${portal_url}/UniqueLicence.png</property>
+ <property name="content_meta_type">CODT_UniqueLicence</property>
+ <property name="product">urban</property>
+ <property name="factory">addCODT_UniqueLicence</property>
+ <!-- not a mistake, article127 and buildlicence are the same -->
+ <property name="immediate_view">codt_uniquelicenceview</property>
+ <property name="global_allow">True</property>
+ <property name="filter_content_types">True</property>
+ <property name="allowed_content_types">
+   <element value="Applicant"/>
+   <element value="Couple"/>
+   <element value="Corporation"/>
+   <element value="PortionOut"/>
+   <element value="UrbanEvent"/>
+   <element value="UrbanEventAnnouncement"/>
+   <element value="UrbanEventInquiry"/>
+   <element value="UrbanEventCollege"/>
+   <element value="UrbanEventMayor"/>
+   <element value="UrbanEventNotificationCollege"/>
+   <element value="UrbanEventOpinionRequest"/>
+   <element value="CODT_UniqueLicenceInquiry"/>
+   <element value="File"/>
+   <element value="task"/>
+   <element value="ConfigTest"/>
+ </property>
+ <property name="allow_discussion">False</property>
+ <property name="default_view">codt_uniquelicenceview</property>
+ <property name="view_methods">
+  <element value="folder_summary_view"/>
+  <element value="folder_tabular_view"/>
+  <element value="atct_album_view"/>
+  <element value="folder_listing"/>
+  <!-- not a mistake, article127 and buildlicence are the same -->
+  <element value="codt_uniquelicenceview"/>
+ </property>
+ <property name="default_view_fallback">False</property>
+ <alias from="(Default)" to="(dynamic view)"/>
+ <!-- not a mistake, article127 and buildlicence are the same -->
+ <alias from="view" to="codt_uniquelicenceview"/>
+ <alias from="edit" to="base_edit"/>
+ <alias from="sharing" to="@@sharing"/>
+ <action title="View"
+         action_id="view"
+         category="object"
+         condition_expr=""
+         url_expr="string:${object_url}/view"
+         visible="True">
+  <permission value="View"/>
+ </action>
+ <action title="Edit"
+         action_id="edit"
+         category="object"
+         condition_expr="python:context.mayShowEditAction()"
+         url_expr="string:${object_url}/edit"
+         visible="True">
+  <permission value="Modify portal content"/>
+ </action>
+<!-- ##code-section FOOT -->
+<!-- ##/code-section FOOT -->
+</object>
