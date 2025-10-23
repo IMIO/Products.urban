@@ -2,6 +2,7 @@
 
 from Products.urban.interfaces import ICODT_Inquiry
 
+
 def setDefaultLinkedInquiry(opinionRequest, event):
     if opinionRequest.checkCreationFlag():
         licence = opinionRequest.aq_inner.aq_parent
