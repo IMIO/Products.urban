@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 #
-# File: OrganisationTerm.py
+# File: complementary_delay_term.py
 #
-# Copyright (c) 2015 by CommunesPlone
+# Copyright (c) 2025 by CommunesPlone
 # Generator: ArchGenXML Version 2.7
 #            http://plone.org/products/archgenxml
 #
@@ -16,30 +16,23 @@ __docformat__ = "plaintext"
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
+from Products.urban import UrbanMessage as _
 from Products.urban.UrbanVocabularyTerm import UrbanVocabularyTerm
 from Products.urban.config import *
-from archetypes.referencebrowserwidget.widget import ReferenceBrowserWidget
 from zope.interface import implements
 
 import interfaces
 
 
-##code-section module-header #fill in your manual code here
 ##/code-section module-header
 
 schema = Schema(
     (
-        ReferenceField(
-            name="LinkedOpinionRequestEvent",
-            widget=ReferenceBrowserWidget(
-                label="Linkedopinionrequestevent",
-                label_msgid="urban_label_LinkedOpinionRequestEvent",
-                i18n_domain="urban",
+        IntegerField(
+            name="delay",
+            widget=IntegerField._properties["widget"](
+                label=_("urban_label_delay", "Delay"),
             ),
-            allowed_types=("UrbanEventType", "OpinionRequestEventType"),
-            multiValued=0,
-            relationship="LinkedOpinionRequestEvent",
-            write_permission="Manage portal",
         ),
     ),
 )
@@ -47,7 +40,7 @@ schema = Schema(
 ##code-section after-local-schema #fill in your manual code here
 ##/code-section after-local-schema
 
-OrganisationTerm_schema = (
+ComplementaryDelayTerm_schema = (
     BaseSchema.copy()
     + getattr(UrbanVocabularyTerm, "schema", Schema(())).copy()
     + schema.copy()
@@ -57,25 +50,20 @@ OrganisationTerm_schema = (
 ##/code-section after-schema
 
 
-class OrganisationTerm(BaseContent, UrbanVocabularyTerm, BrowserDefaultMixin):
+class ComplementaryDelayTerm(BaseContent, UrbanVocabularyTerm, BrowserDefaultMixin):
     """ """
 
     security = ClassSecurityInfo()
-    implements(interfaces.IOrganisationTerm)
+    implements(interfaces.IComplementaryDelayTerm)
 
-    meta_type = "OrganisationTerm"
+    meta_type = "ComplementaryDelayTerm"
     _at_rename_after_creation = True
 
-    schema = OrganisationTerm_schema
-
-    ##code-section class-header #fill in your manual code here
-    ##/code-section class-header
-
-    # Methods
+    schema = ComplementaryDelayTerm_schema
 
 
-registerType(OrganisationTerm, PROJECTNAME)
-# end of class OrganisationTerm
+registerType(ComplementaryDelayTerm, PROJECTNAME)
+# end of class ComplementaryDelayTerm
 
 ##code-section module-footer #fill in your manual code here
 ##/code-section module-footer
