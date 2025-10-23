@@ -3,5 +3,7 @@
   <version>1</version>
     <dependencies>
       <dependency>profile-Products.urban:tests</dependency>
+      <dependency>profile-urban.events:default</dependency>
+      <dependency>profile-urban.schedule:default</dependency>
    </dependencies>
 </metadata>
