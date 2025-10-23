@@ -1,0 +1,22 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      i18n:domain="urban">
+<body>
+  <h1>Debug: <tal:block replace="context/Title"/></h1>
+  <h2>Properties</h2>
+  <div tal:repeat="value view/values">
+    <strong><tal:block replace="python: value[0]"/> :</strong>
+    <span tal:content="python: value[1]" />
+  </div>
+  <h2>Licence</h2>
+  <div tal:repeat="value view/licence_values">
+    <strong><tal:block replace="python: value[0]"/> :</strong>
+    <span tal:content="python: value[1]" />
+  </div>
+  <h2>Start Date Calculation</h2>
+  <div tal:repeat="value view/start_date_values">
+    <strong><tal:block replace="python: value[0]"/> :</strong>
+    <span tal:content="python: value[1]" />
+  </div>
+</body>
+</html>

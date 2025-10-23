@@ -1,20 +1,17 @@
 # -*- coding: utf-8 -*-
 
-from imio.schedule.content.task import IAutomatedTask
-
-from plone.indexer import indexer
-
 from Products.urban.indexes import genericlicence_applicantinfoindex
 from Products.urban.indexes import genericlicence_final_duedate
 from Products.urban.indexes import genericlicence_foldermanager
-from Products.urban.indexes import genericlicence_streetsuid
 from Products.urban.indexes import genericlicence_streetnumber
+from Products.urban.indexes import genericlicence_streetsuid
 from Products.urban.interfaces import IGenericLicence
+from imio.schedule.content.task import IAutomatedTask
+from plone.indexer import indexer
 
 
 def get_task_licence(task):
-    """
-    """
+    """ """
     container = task.get_container()
     while not IGenericLicence.providedBy(container):
         container = container.aq_parent

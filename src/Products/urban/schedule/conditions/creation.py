@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 
 from DateTime import DateTime
-from datetime import datetime
-from plone import api
-
-from imio.schedule.content.condition import CreationCondition
-
 from Products.urban.schedule.conditions.base import BaseInspection
+from Products.urban.schedule.interfaces import IFollowupDeadLineTask
+from datetime import date
+from datetime import datetime
+from imio.schedule.config import STARTED
+from imio.schedule.config import states_by_status
+from imio.schedule.content.condition import CreationCondition
+from plone import api
 
 
 class DepositDoneCondition(CreationCondition):
@@ -20,7 +22,7 @@ class DepositDoneCondition(CreationCondition):
         deposit_done = False
         deposit_event = licence.getLastDeposit()
         if deposit_event:
-            deposit_done = api.content.get_state(deposit_event) == 'closed'
+            deposit_done = api.content.get_state(deposit_event) == "closed"
 
         return deposit_done
 
@@ -36,7 +38,9 @@ class AcknowledgmentDoneCondition(CreationCondition):
         acknowledgment_done = False
         acknowledgment_event = licence.getLastAcknowledgment()
         if acknowledgment_event:
-            acknowledgment_done = api.content.get_state(acknowledgment_event) == 'closed'
+            acknowledgment_done = (
+                api.content.get_state(acknowledgment_event) == "closed"
+            )
 
         return acknowledgment_done
 
@@ -74,7 +78,7 @@ class SingleComplementAsked(CreationCondition):
         complements_asked = False
         missing_part_event = licence.getLastMissingPart()
         if missing_part_event:
-            complements_asked = api.content.get_state(missing_part_event) == 'closed'
+            complements_asked = api.content.get_state(missing_part_event) == "closed"
         else:
             return False
 
@@ -97,7 +101,7 @@ class SingleComplementReceived(CreationCondition):
         complements_received = False
         deposit_part_event = licence.getLastMissingPartDeposit()
         if deposit_part_event:
-            complements_received = api.content.get_state(deposit_part_event) == 'closed'
+            complements_received = api.content.get_state(deposit_part_event) == "closed"
 
         return complements_received
 
@@ -113,7 +117,7 @@ class ComplementsTransmitToSPW(CreationCondition):
         complements_transmit = False
         deposit_part_event = licence.getLastMissingPartTransmitToSPW()
         if deposit_part_event:
-            complements_transmit = api.content.get_state(deposit_part_event) == 'closed'
+            complements_transmit = api.content.get_state(deposit_part_event) == "closed"
 
         return complements_transmit
 
@@ -140,8 +144,17 @@ class WillHaveInquiry(CreationCondition):
 
     def evaluate(self):
         licence = self.task_container
-        initiative_inquiry = 'initiative_inquiry' in licence.getProcedureChoice()
-        inquiry = 'inquiry' in licence.getProcedureChoice()
+        if (
+            hasattr(licence, "getHasModifiedBlueprints")
+            and licence.getHasModifiedBlueprints()
+        ):
+            initiative_inquiry = (
+                "initiative_inquiry" in licence.getProcedureChoiceModifiedBlueprints()
+            )
+            inquiry = "inquiry" in licence.getProcedureChoiceModifiedBlueprints()
+        else:
+            initiative_inquiry = "initiative_inquiry" in licence.getProcedureChoice()
+            inquiry = "inquiry" in licence.getProcedureChoice()
         have_inquiry = initiative_inquiry or inquiry
         return have_inquiry
 
@@ -154,8 +167,22 @@ class WillHaveAnnouncement(CreationCondition):
 
     def evaluate(self):
         licence = self.task_container
-        light_inquiry = 'light_inquiry' in licence.getProcedureChoice()
-        initiative_light_inquiry = 'initiative_light_inquiry' in licence.getProcedureChoice()
+        if (
+            hasattr(licence, "getHasModifiedBlueprints")
+            and licence.getHasModifiedBlueprints()
+        ):
+            light_inquiry = (
+                "light_inquiry" in licence.getProcedureChoiceModifiedBlueprints()
+            )
+            initiative_light_inquiry = (
+                "initiative_light_inquiry"
+                in licence.getProcedureChoiceModifiedBlueprints()
+            )
+        else:
+            light_inquiry = "light_inquiry" in licence.getProcedureChoice()
+            initiative_light_inquiry = (
+                "initiative_light_inquiry" in licence.getProcedureChoice()
+            )
         announcement = light_inquiry or initiative_light_inquiry
         return announcement
 
@@ -189,7 +216,13 @@ class NoInquiryCondition(CreationCondition):
 
     def evaluate(self):
         licence = self.task_container
-        no_inquiry = 'inquiry' not in licence.getProcedureChoice()
+        if (
+            hasattr(licence, "getHasModifiedBlueprints")
+            and licence.getHasModifiedBlueprints()
+        ):
+            no_inquiry = "inquiry" not in licence.getProcedureChoiceModifiedBlueprints()
+        else:
+            no_inquiry = "inquiry" not in licence.getProcedureChoice()
         return no_inquiry
 
 
@@ -232,7 +265,7 @@ class AnnouncementDoneCondition(CreationCondition):
         announcement_done = False
         announcement_event = licence.getLastAnnouncement()
         if announcement_event:
-            announcement_done = api.content.get_state(announcement_event) == 'closed'
+            announcement_done = api.content.get_state(announcement_event) == "closed"
 
         return announcement_done
 
@@ -261,7 +294,7 @@ class OpinionRequestsDone(CreationCondition):
             return False
 
         for opinion in or_events:
-            if api.content.get_state(opinion) != 'opinion_given':
+            if api.content.get_state(opinion) != "opinion_given":
                 return False
 
         return True
@@ -273,8 +306,10 @@ class IsInternalOpinionRequest(CreationCondition):
     """
 
     def evaluate(self):
-        registry = api.portal.get_tool('portal_registry')
-        registry_field = registry['Products.urban.interfaces.IInternalOpinionServices.services']
+        registry = api.portal.get_tool("portal_registry")
+        registry_field = registry[
+            "Products.urban.interfaces.IInternalOpinionServices.services"
+        ]
         opinion_request = self.task_container
         opinion_config = opinion_request.getUrbaneventtypes()
 
@@ -282,7 +317,10 @@ class IsInternalOpinionRequest(CreationCondition):
             return False
 
         record = registry_field.get(opinion_config.getInternal_service(), None)
-        if record and self.task_config.id in [record['task_answer_id'], record['task_validate_id']]:
+        if record and self.task_config.id in [
+            record["task_answer_id"],
+            record["task_validate_id"],
+        ]:
             return True
 
         return False
@@ -295,7 +333,14 @@ class HasFDOpinionRequest(CreationCondition):
 
     def evaluate(self):
         licence = self.task_container
-        return 'FD' in licence.getProcedureChoice()
+        if (
+            hasattr(licence, "getHasModifiedBlueprints")
+            and licence.getHasModifiedBlueprints()
+        ):
+            FD = "FD" in licence.getProcedureChoiceModifiedBlueprints()
+        else:
+            FD = "FD" in licence.getProcedureChoice()
+        return FD
 
 
 class HasNoFDOpinionRequest(CreationCondition):
@@ -305,7 +350,14 @@ class HasNoFDOpinionRequest(CreationCondition):
 
     def evaluate(self):
         licence = self.task_container
-        return 'FD' not in licence.getProcedureChoice()
+        if (
+            hasattr(licence, "getHasModifiedBlueprints")
+            and licence.getHasModifiedBlueprints()
+        ):
+            no_FD = "FD" not in licence.getProcedureChoice()
+        else:
+            no_FD = "FD" not in licence.getProcedureChoiceModifiedBlueprints()
+        return no_FD
 
 
 class DepositDateIsPast20Days(CreationCondition):
@@ -370,17 +422,23 @@ class IncompleteForTheSecondTime(CreationCondition):
         missing_part_deposit = licence.getLastMissingPartDeposit()
         if missing_part_deposit is None:
             return False
-        incomplete_UID = self.task_config.aq_parent['incomplet'].UID()
+        incomplete_UID = self.task_config.aq_parent["incomplet"].UID()
         brains = api.content.find(
             context=licence,
             task_config_UID=incomplete_UID,
-            review_state='closed',
+            review_state="closed",
         )
         first_incomplete_done = len(brains) > 0
         if not first_incomplete_done:
             return False
         wf_history = licence.workflow_history
-        two_incomplete_transitions = 2 <= len([tr for tr in wf_history[wf_history.keys()[0]] if tr['action'] == 'isincomplete'])
+        incomplete_history = [
+            tr
+            for tr in wf_history[wf_history.keys()[0]]
+            if tr["action"] == "isincomplete"
+        ]
+        two_incomplete_transitions = 2 <= len(incomplete_history)
+
         if not two_incomplete_transitions:
             return False
         return True
@@ -397,7 +455,7 @@ class SPWProjectReceivedCondition(CreationCondition):
         receipt_done = False
         receipt_event = licence.getLastDecisionProjectFromSPW()
         if receipt_event:
-            receipt_done = api.content.get_state(receipt_event) == 'closed'
+            receipt_done = api.content.get_state(receipt_event) == "closed"
 
         return receipt_done
 
@@ -409,7 +467,7 @@ class LicenceAuthorityIsCollege(CreationCondition):
 
     def evaluate(self):
         licence = self.task_container
-        authority_is_college = licence.getAuthority() == 'college'
+        authority_is_college = licence.getAuthority() == "college"
         return authority_is_college
 
 
@@ -420,7 +478,7 @@ class IsNotTemporaryLicence(CreationCondition):
 
     def evaluate(self):
         licence = self.task_container
-        not_temporary = licence.getProcedureChoice() != 'temporary'
+        not_temporary = licence.getProcedureChoice() != "temporary"
         return not_temporary
 
 
@@ -456,7 +514,7 @@ class ShouldWriteOneInspectionFollowUp(InspectionCreationCondition):
             return True
 
         for follow_up_event in follow_up_events:
-            if api.content.get_state(follow_up_event) == 'draft':
+            if api.content.get_state(follow_up_event) == "draft":
                 return True
         return False
 
@@ -469,7 +527,7 @@ class SomeInspectionFollowupsAreWritten(InspectionCreationCondition):
     def evaluate(self):
         follow_up_events = self.get_followup_events()
         for follow_up_event in follow_up_events:
-            if api.content.get_state(follow_up_event) == 'to_validate':
+            if api.content.get_state(follow_up_event) == "to_validate":
                 return True
         return False
 
@@ -482,7 +540,7 @@ class SomeInspectionFollowupsToSend(InspectionCreationCondition):
     def evaluate(self):
         follow_up_events = self.get_followup_events()
         for follow_up_event in follow_up_events:
-            if api.content.get_state(follow_up_event) == 'to_send':
+            if api.content.get_state(follow_up_event) == "to_send":
                 return True
         return False
 
@@ -492,9 +550,10 @@ class ShouldEndInspection(InspectionCreationCondition):
     Should end inspection when 'close' is selected in the followup proposition of the
     last inspection report event.
     """
+
     def evaluate(self):
         report = self.get_current_inspection_report()
-        if report and 'close' in report.getFollowup_proposition():
+        if report and "close" in report.getFollowup_proposition():
             return True
         return False
 
@@ -504,9 +563,14 @@ class ShouldCreateTicket(InspectionCreationCondition):
     Should create Ticket when 'ticket' is selected in the followup proposition of the
     last inspection report event.
     """
+
     def evaluate(self):
         report = self.get_current_inspection_report()
-        if report and 'ticket' in report.getFollowup_proposition():
+        if (
+            report
+            and "ticket" in report.getFollowup_proposition()
+            and not self.get_last_followup_ticket()
+        ):
             return True
         return False
 
@@ -515,11 +579,12 @@ class FollowUpTicketCreated(InspectionCreationCondition):
     """
     A ticket has been created as an inspection followup result.
     """
+
     def evaluate(self):
         followup_ticket = self.get_last_followup_ticket()
         if not followup_ticket:
             return False
-        created = api.content.get_state(followup_ticket) != 'ended'
+        created = api.content.get_state(followup_ticket) != "ended"
         return created
 
 
@@ -527,19 +592,20 @@ class FollowUpTicketClosed(InspectionCreationCondition):
     """
     The ticket created as a followup action has been closed.
     """
+
     def evaluate(self):
         followup_ticket = self.get_last_followup_ticket()
         if not followup_ticket:
             return False
-        is_closed = api.content.get_state(followup_ticket) == 'ended'
+        is_closed = api.content.get_state(followup_ticket) == "ended"
         # do this task only once per ticket
         if is_closed:
             same_closed_tasks = self.task_config.get_closed_tasks(self.task_container)
             ticket_workflow_history = followup_ticket.workflow_history.values()[0]
-            ticket_creation_date = ticket_workflow_history[0]['time']
+            ticket_creation_date = ticket_workflow_history[0]["time"]
             for task in same_closed_tasks:
                 task_workflow_history = task.workflow_history.values()[0]
-                task_creation_date = task_workflow_history[0]['time']
+                task_creation_date = task_workflow_history[0]["time"]
                 if task_creation_date > ticket_creation_date:
                     return False
 
@@ -548,33 +614,55 @@ class FollowUpTicketClosed(InspectionCreationCondition):
 
 class FollowUpWithDelayClosed(InspectionCreationCondition):
     """
-    The ticket created as a followup action has been closed.
+    The followup event created as a followup action has been closed.
     """
+
     def evaluate(self):
         followup_event = self.task_container.getLastFollowUpEventWithDelay()
         if not followup_event:
             return False
-        is_closed = api.content.get_state(followup_event) == 'closed'
+        is_closed = api.content.get_state(followup_event) == "closed"
         # do this task only once per followup event
         if is_closed:
             same_closed_tasks = self.task_config.get_closed_tasks(self.task_container)
             event_workflow_history = followup_event.workflow_history.values()[0]
-            event_creation_date = event_workflow_history[0]['time']
+            event_creation_date = event_workflow_history[0]["time"]
             for task in same_closed_tasks:
                 task_workflow_history = task.workflow_history.values()[0]
-                task_creation_date = task_workflow_history[0]['time']
+                task_creation_date = task_workflow_history[0]["time"]
                 if task_creation_date > event_creation_date:
                     return False
 
         return is_closed
 
 
+class FollowUpWithDelayOverdue(CreationCondition):
+    """
+    The ticket created as a followup action has been closed.
+    """
+
+    def evaluate(self):
+        inspection = self.task_container
+        for obj in inspection.objectValues():
+            if IFollowupDeadLineTask.providedBy(obj):
+                task = obj
+                if (
+                    task.get_state() in states_by_status[STARTED]
+                    and task.due_date < date.today()
+                ):
+                    return True
+        return False
+
+
 class ProsecutionAnswerOverDeadline(CreationCondition):
     """
     The ticket event has been closed under 90 days.
     """
+
     def evaluate(self):
         licence = self.task_container
-        ticket_event = licence.getLastTheticket()
-        over_delay = DateTime() - ticket_event.getEventDate() > 90
-        return over_delay
+        ticket_event = licence.getLastTheTicket()
+        if ticket_event and ticket_event.getEventDate():
+            over_delay = DateTime() - ticket_event.getEventDate() > 90
+            return over_delay
+        return False
