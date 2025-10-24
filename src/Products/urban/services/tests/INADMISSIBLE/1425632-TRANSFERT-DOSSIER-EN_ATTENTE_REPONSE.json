@@ -1,0 +1,482 @@
+{
+  "status": "PROCESSED",
+  "warning": null,
+  "error": null,
+  "notice": {
+    "BO": {
+      "idBO": "10010781",
+      "typeBO": {
+        "code": "PE_PU",
+        "description": [
+          {
+            "_value_1": "Umweltgenehmigung oder Globalgenehmigung",
+            "language": "de"
+          },
+          {
+            "_value_1": "Permis d'environnement ou unique",
+            "language": "fr"
+          }
+        ],
+        "origin": null
+      },
+      "typeBOSubtype": {
+        "code": "PE",
+        "description": [
+          {
+            "_value_1": "PE",
+            "language": "de"
+          },
+          {
+            "_value_1": "PE",
+            "language": "fr"
+          }
+        ],
+        "origin": null
+      },
+      "noticeIdBO": "TRANSFERT_DOSSIER:51872954:10010781",
+      "codeTypeNoticeBO": "TRANSFERT_DOSSIER",
+      "applicationCodeBO": "TWICE",
+      "fileLanguage": {
+        "code": "FR",
+        "description": [
+          {
+            "_value_1": "FR",
+            "language": "de"
+          },
+          {
+            "_value_1": "FR",
+            "language": "fr"
+          }
+        ]
+      },
+      "fileDate": "2025-09-11T00:00:00+02:00",
+      "noticeLanguage": {
+        "code": "FR",
+        "description": [
+          {
+            "_value_1": "Französisch",
+            "language": "de"
+          },
+          {
+            "_value_1": "Français",
+            "language": "fr"
+          }
+        ]
+      }
+    },
+    "sender": {
+      "noticeInstanceId": "O3080500",
+      "contactName": "Giuseppe MONACHINO",
+      "contactPhone": {
+        "phoneNumber": [
+          {
+            "_value_1": "+3281715344",
+            "type": null
+          }
+        ]
+      },
+      "contactMail": {
+        "email": [
+          {
+            "_value_1": "permis.environnement.namur@spw.wallonie.be",
+            "type": null
+          }
+        ]
+      },
+      "projectType": null,
+      "motivations": null
+    },
+    "receiver": {
+      "noticeInstanceId": "0216.697.802"
+    },
+    "noticeType": {
+      "code": "NOUVEAU_DOSSIER",
+      "description": [
+        {
+          "_value_1": "DE_Nouveau dossier à destination de la commune",
+          "language": "de"
+        },
+        {
+          "_value_1": "Nouveau dossier à destination de la commune",
+          "language": "fr"
+        }
+      ]
+    },
+    "subjectNotice": "Renouvellement du permis d'exploiter la station d'épuration de Fouches.",
+    "sendDate": "2025-09-11T00:00:00+02:00",
+    "deadline": 3,
+    "dueDate": null,
+    "fileDateMunicipality": null,
+    "comment": null,
+    "businessReference": null,
+    "addresses": {
+      "address": [
+        {
+          "country": "BE",
+          "addressId": {
+            "_value_1": null,
+            "source": null
+          },
+          "street": "Lieu dit : rue du Lieu-Dit",
+          "houseNumber": null,
+          "boxNumber": null,
+          "postCode": "5080",
+          "municipality": "LA BRUYERE (Warisoulx)",
+          "state": null,
+          "plainText": null,
+          "locality": null,
+          "inceptionDate": null,
+          "modificationDate": null,
+          "addressType": null
+        }
+      ]
+    },
+    "parcels": {
+      "parcel": [
+        {
+          "identifier": "P0001",
+          "municipality": {
+            "code": "81001",
+            "description": [
+              {
+                "_value_1": "81001",
+                "language": "de"
+              },
+              {
+                "_value_1": "81001",
+                "language": "fr"
+              }
+            ],
+            "origin": null
+          },
+          "division": "ARLON 8 DIV/HACHY/",
+          "codeDivision": "81408",
+          "section": "D",
+          "radical": "0338",
+          "bisTer": "00",
+          "exponent": "C",
+          "power": "000",
+          "part": false,
+          "right": null,
+          "capakey": "81408D0338/00C000",
+          "comment": null
+        },
+        {
+          "identifier": "P002",
+          "municipality": {
+            "code": "92141",
+            "description": [
+              {
+                "_value_1": "92141",
+                "language": "de"
+              },
+              {
+                "_value_1": "92141",
+                "language": "fr"
+              }
+            ],
+            "origin": null
+          },
+          "division": "LA BRUYERE 2 DIV/RHISNES/",
+          "codeDivision": "92102",
+          "section": "B",
+          "radical": "0006",
+          "bisTer": "00",
+          "exponent": "_",
+          "power": "000",
+          "part": false,
+          "right": null,
+          "capakey": "92102B0006/00_000",
+          "comment": null
+        },
+        {
+          "identifier": "P003",
+          "municipality": {
+            "code": "92141",
+            "description": [
+              {
+                "_value_1": "92141",
+                "language": "de"
+              },
+              {
+                "_value_1": "92141",
+                "language": "fr"
+              }
+            ],
+            "origin": null
+          },
+          "division": "LA BRUYERE 1 DIV/EMINES/",
+          "codeDivision": "92036",
+          "section": "D",
+          "radical": "0069",
+          "bisTer": "00",
+          "exponent": "X",
+          "power": "000",
+          "part": false,
+          "right": null,
+          "capakey": "92036D0069/00X000",
+          "comment": null
+        }
+      ]
+    },
+    "parties": null,
+    "documents": {
+      "document": [
+        {
+          "documentData": {
+            "filename": "1891085-670547_Permis denvironnement",
+            "description": null,
+            "type": {
+              "code": "PJ_FORMULAIRE",
+              "description": [
+                {
+                  "_value_1": "Pièces-jointes du formulaire",
+                  "language": "de"
+                },
+                {
+                  "_value_1": "Pièces-jointes du formulaire",
+                  "language": "fr"
+                }
+              ]
+            },
+            "language": {
+              "code": "FR",
+              "description": [
+                {
+                  "_value_1": "Französisch",
+                  "language": "de"
+                },
+                {
+                  "_value_1": "Français",
+                  "language": "fr"
+                }
+              ]
+            },
+            "documentId": "d2495f88-2e02-4dca-8412-385f8f060ed2",
+            "fileSize": 268332,
+            "mimeType": "application/xml",
+            "confidentiality": {
+              "code": "0",
+              "description": [
+                {
+                  "_value_1": "Öffentlichkeit",
+                  "language": "de"
+                },
+                {
+                  "_value_1": "public",
+                  "language": "fr"
+                }
+              ],
+              "domain": "NOTICE_GENERIC_CONFIDENTIALITE"
+            },
+            "principal": false
+          },
+          "content": {
+            "documentContentStorage": "BO"
+          }
+        },
+        {
+          "documentData": {
+            "filename": "1891085-670547_Permis denvironnement",
+            "description": null,
+            "type": {
+              "code": "FORMULAIRE",
+              "description": [
+                {
+                  "_value_1": "Formulaire principal",
+                  "language": "de"
+                },
+                {
+                  "_value_1": "Formulaire principal",
+                  "language": "fr"
+                }
+              ]
+            },
+            "language": {
+              "code": "FR",
+              "description": [
+                {
+                  "_value_1": "Französisch",
+                  "language": "de"
+                },
+                {
+                  "_value_1": "Français",
+                  "language": "fr"
+                }
+              ]
+            },
+            "documentId": "10248d4f-6bf6-4f1f-b382-2ae07f282f93",
+            "fileSize": 1045472,
+            "mimeType": "application/pdf",
+            "confidentiality": {
+              "code": "0",
+              "description": [
+                {
+                  "_value_1": "Öffentlichkeit",
+                  "language": "de"
+                },
+                {
+                  "_value_1": "public",
+                  "language": "fr"
+                }
+              ],
+              "domain": "NOTICE_GENERIC_CONFIDENTIALITE"
+            },
+            "principal": false
+          },
+          "content": {
+            "documentContentStorage": "BO"
+          }
+        },
+        {
+          "documentData": {
+            "filename": "Doc Notice",
+            "description": "1.4.3 - Documents officiels liés à l'établissement",
+            "type": {
+              "code": "DOCUMENTS_OFFICIELS",
+              "description": [
+                {
+                  "_value_1": "Permis et Autorisations",
+                  "language": "de"
+                },
+                {
+                  "_value_1": "Permis et Autorisations",
+                  "language": "fr"
+                }
+              ]
+            },
+            "language": {
+              "code": "FR",
+              "description": [
+                {
+                  "_value_1": "Französisch",
+                  "language": "de"
+                },
+                {
+                  "_value_1": "Français",
+                  "language": "fr"
+                }
+              ]
+            },
+            "documentId": "c863685e-3ff0-4251-8bd3-7db9427cad6b",
+            "fileSize": 4349,
+            "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+            "confidentiality": {
+              "code": "0",
+              "description": [
+                {
+                  "_value_1": "Öffentlichkeit",
+                  "language": "de"
+                },
+                {
+                  "_value_1": "public",
+                  "language": "fr"
+                }
+              ],
+              "domain": "NOTICE_GENERIC_CONFIDENTIALITE"
+            },
+            "principal": false
+          },
+          "content": {
+            "documentContentStorage": "BO"
+          }
+        },
+        {
+          "documentData": {
+            "filename": "Doc Notice 1",
+            "description": "2.3.2 - Schéma des écoulements des eaux jusqu'à leurs rejets",
+            "type": {
+              "code": "E_SCHEMA_ECOULEMENT_EAUX",
+              "description": [
+                {
+                  "_value_1": "Schéma d'écoulement des eaux",
+                  "language": "de"
+                },
+                {
+                  "_value_1": "Schéma d'écoulement des eaux",
+                  "language": "fr"
+                }
+              ]
+            },
+            "language": {
+              "code": "FR",
+              "description": [
+                {
+                  "_value_1": "Französisch",
+                  "language": "de"
+                },
+                {
+                  "_value_1": "Français",
+                  "language": "fr"
+                }
+              ]
+            },
+            "documentId": "51e50b39-5122-4ea1-85bc-e98c4c5f8e69",
+            "fileSize": 4349,
+            "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+            "confidentiality": {
+              "code": "0",
+              "description": [
+                {
+                  "_value_1": "Öffentlichkeit",
+                  "language": "de"
+                },
+                {
+                  "_value_1": "public",
+                  "language": "fr"
+                }
+              ],
+              "domain": "NOTICE_GENERIC_CONFIDENTIALITE"
+            },
+            "principal": false
+          },
+          "content": {
+            "documentContentStorage": "BO"
+          }
+        }
+      ]
+    },
+    "mapSpecification": null,
+    "specific": {
+      "ns3:TwiceDefaultRequest": {
+        "@xmlns": "http://soa.spw.wallonie.be/data/common/code/v1",
+        "@xmlns:ns2": "http://soa.spw.wallonie.be/services/noticeExtensions/messages/v1",
+        "@xmlns:ns3": "http://soa.spw.wallonie.be/services/noticeTwiceExtensions/messages/v1",
+        "@xmlns:ns4": "http://soa.spw.wallonie.be/data/business/environmentalLicence/v2",
+        "@xmlns:ns5": "http://soa.spw.wallonie.be/services/noticeGesperExtensions/messages/v1",
+        "@xmlns:ns6": "http://soa.spw.wallonie.be/data/business/noticeGesperExtensions/v1",
+        "@xmlns:ns7": "http://soa.spw.wallonie.be/data/common/date/v1",
+        "ns2:acceptedResponseNoticeCodes": null,
+        "ns3:timeLimits": null,
+        "ns3:suspentionPeriods": null
+      }
+    },
+    "status": {
+      "status": [
+        {
+          "code": {
+            "code": "EN_ATTENTE_REPONSE",
+            "description": [
+              {
+                "_value_1": "Warten auf Antwort",
+                "language": "de"
+              },
+              {
+                "_value_1": "En attente de réponse",
+                "language": "fr"
+              }
+            ]
+          },
+          "date": "2025-09-11T15:55:13.208000"
+        }
+      ]
+    },
+    "noticeIdentifier": {
+      "noticeId": "1443516"
+    },
+    "receptionDate": "2025-09-11T15:55:13.032000"
+  },
+  "customerTicket": "74792c47-8c52-4ab1-827f-5c9c6b5c2686",
+  "requestId": "99debf48-c88c-a051-4aa5-09e3c3580d43",
+  "inscriptionReference": null
+}

@@ -1,0 +1,37 @@
+[
+    {
+        "noticeId": "1443516",
+        "noticeType": {
+            "code": "NOUVEAU_DOSSIER",
+            "description": [
+                {
+                    "_value_1": "DE_Nouveau dossier à destination de la commune",
+                    "language": "de"
+                },
+                {
+                    "_value_1": "Nouveau dossier à destination de la commune",
+                    "language": "fr"
+                }
+            ]
+        },
+        "receptionDate": "2025-09-11T15:55:13.032000",
+        "dueDate": null,
+        "noticeInstanceId": "0216.697.802",
+        "status": {
+            "code": {
+                "code": "EN_ATTENTE_REPONSE",
+                "description": [
+                    {
+                        "_value_1": "Warten auf Antwort",
+                        "language": "de"
+                    },
+                    {
+                        "_value_1": "En attente de réponse",
+                        "language": "fr"
+                    }
+                ]
+            },
+            "date": "2025-09-11T15:55:13.208000"
+        }
+    }
+]
