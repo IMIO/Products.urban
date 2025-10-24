@@ -59,7 +59,14 @@ class ToolsRenderer(base.Renderer):
     
     def is_notice_setup(self):
         site = api.portal.get()
-        return "import-notice" in site.urban.objectIds()
+        urban = getattr(site, "urban", None)
+        if not urban:
+            return False
+        notice = getattr(urban, "import-notice", None)
+        if not notice:
+            return False
+        municipality_id = getattr(notice, "municipality_id", None)
+        return bool(municipality_id)
 
 
 class ToolsAddForm(base.AddForm):

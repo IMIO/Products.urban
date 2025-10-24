@@ -608,6 +608,9 @@ class EnvironmentLicence(BaseFolder, EnvironmentBase, BrowserDefaultMixin):
 
     security.declarePublic("previouslicencesBaseQuery")
 
+    def getLastRefusedNotification(self):
+        return self.getLastEvent(interfaces.IRefusedIncompletenessEvent)
+
     def previouslicencesBaseQuery(self):
         return {"object_provides": IEnvironmentBase.__identifier__}
 
