@@ -586,24 +586,24 @@ def add_additional_delay_option(context):
 
     logger.info("upgrade step done!")
 
+
 def update_form_composition_vocabulary_terms(context):
-    logger = logging.getLogger("urban: Update form composition vocabulary terms")
+    logger = logging.getLogger("urban: Update form composition vocabulary value terms")
     logger.info("starting upgrade steps")
-    #Load data from JSON file using export urban view
+    # Load data from JSON file using eexport_urban_config
     with open("src/Products.urban/src/Products/urban/profiles/demo/form_composition_data.json", "r") as f:
         data = json.load(f)
-    #Extract only 'id' and 'title'
+    # Extract only 'id' and 'title'
     result = [{"id": item.get("id"), "title": item.get("title")} for item in data[1:]]
     portal_urban = api.portal.get()["portal_urban"]
     form_composition_folder = portal_urban.form_composition
-    
-     # --- Remove old vocabulary terms ---
+    # Remove old vocabulary terms
     logger.info("Deleting existing terms")
     for obj in list(form_composition_folder.objectValues()):
         if obj.portal_type == "UrbanVocabularyTerm":
             form_composition_folder.manage_delObjects(ids=[obj.getId()])
     logger.info("Old vocabulary terms removed")
-    
+
     form_composition_new_vocabulary_terms_to_add = result
     createFolderDefaultValues(
         form_composition_folder,

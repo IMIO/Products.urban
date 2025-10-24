@@ -801,7 +801,7 @@
         profile="Products.urban:default"
         />
 
-     <gs:upgradeStep
+    <gs:upgradeStep
         title="Add housing procedure"
         description=""
         source="*"
@@ -809,6 +809,7 @@
         handler=".update_280.add_building_procedure"
         profile="Products.urban:default"
         />
+
     <gs:upgradeStep
         title="Update form composition vocabulary terms"
         description=""
