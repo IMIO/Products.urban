@@ -99,6 +99,24 @@ def inspection_applicantinfoindex(object):
     return list(set(applicants_info))
 
 
+@indexer(interfaces.IInspection)
+@indexer(interfaces.ITicket)
+def inspection_applicantinfoindex(object):
+    """
+    Return the informations to index about the applicants
+    """
+    applicants_info = []
+    contacts = (
+        object.getApplicants()
+        + object.getProprietaries()
+        + object.getPlaintiffs()
+        + object.getTenants()
+    )
+    for applicant in contacts:
+        applicants_info.extend(_get_applicantsinfoindex(applicant))
+    return list(set(applicants_info))
+
+
 def _get_applicantsinfoindex(applicant):
     if applicant.meta_type == "Couple":
         applicants_info = [
@@ -140,6 +158,14 @@ def licence_architectinfoindex(object):
 
 @indexer(interfaces.IGenericLicence)
 def genericlicence_parcelinfoindex(obj):
+    parcels_infos = []
+    if hasattr(obj, "getParcels"):
+        parcels_infos = list(set([p.get_capakey() for p in obj.getParcels()]))
+    return parcels_infos
+
+
+@indexer(interfaces.IParcellingTerm)
+def parcelling_parcelinfoindex(obj):
     parcels_infos = []
     if hasattr(obj, "getParcels"):
         parcels_infos = list(set([p.get_capakey() for p in obj.getParcels()]))
@@ -418,4 +444,7 @@ def streetcode_indexer(obj):
 
 @indexer(interfaces.IGenericLicence)
 def additional_reference(object):
-    return object.getAdditionalReference()
+    try:
+        return object.getAdditionalReference()
+    except KeyError:
+        raise AttributeError()
