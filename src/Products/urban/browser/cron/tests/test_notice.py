@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from Acquisition import aq_base
 from datetime import date
 from DateTime import DateTime
 
@@ -6,6 +7,8 @@ from Products.urban import testing
 from Products.urban.services.notice import WebserviceNotice
 from Products.urban.services.tests.data import load_notif_content
 from Products.urban.services.tests.data import load_notif_json
+from Products.urban.interfaces import IRefusedIncompletenessEvent
+        
 from zope.annotation.interfaces import IAnnotations
 from plone import api
 
@@ -137,7 +140,6 @@ class TestNoticeCronPE2(unittest.TestCase):
         # assert good transmit date is back
         dates = self._get_notice_transmit_dates(transmit_event)
         self.assertEqual(dates.get("transfer_folder_to_dpa"), date(2025, 6, 19))
-
     def _get_notice_transmit_dates(self, event):
         annotations = IAnnotations(event)
         dates = annotations.get("notice_transmit_dates", {})
@@ -150,7 +152,7 @@ class TestNoticeCronPE2(unittest.TestCase):
             api.content.delete(obj=licence)
 
 
-    """@mock.patch(
+    @mock.patch(
         "Products.urban.services.notice.WebserviceNotice.get_notifications",
         return_value=load_notif_json("DEMANDE_EP", "1342038_notifications.json"),
     )
@@ -163,7 +165,7 @@ class TestNoticeCronPE2(unittest.TestCase):
 
         with api.env.adopt_roles(["Manager"]):
             import_view = self.portal.restrictedTraverse("@@import-from-notice")
-            return import_view()"""
+            return import_view()
     
     @mock.patch(
         "Products.urban.services.notice.WebserviceNotice.get_notifications",
@@ -283,7 +285,7 @@ class TestNoticeCronPE2(unittest.TestCase):
         with api.env.adopt_roles(["Manager"]):
             import_view = self.portal.restrictedTraverse("@@import-from-notice")
             import_view()
-    
+
     def test_inadmissible_notification_second_tour(self):
         # create licence
         licence_folder = self.portal.urban.envclasstwos
