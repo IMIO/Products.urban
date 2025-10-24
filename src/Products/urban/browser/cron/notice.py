@@ -67,10 +67,13 @@ class ImportFromNoticeView(BrowserView):
             self._transfert_dossier(detailed_notification)
         if detailed_notification.notice_type == "NOTIF_COMPLETUDE1_INCOMPLET_COMMUNE":
             self.process_incomplete_folder_notification(detailed_notification)
+<<<<<<< HEAD
         if detailed_notification.notice_type == "NOTIF_COMPLETUDE2_NON_RECEVABLE_COMMUNE":
             self.process_not_admissible_folder_notification_second_tour(
                 detailed_notification
             )
+=======
+>>>>>>> 405c0e39b (implement inadmissible notification secod tour)
         if detailed_notification.notice_type == "NOTIF_COMPLETUDE2_IRRECEVABLE_COMMUNE":
             self.process_inadmissible_folder_notification(detailed_notification)
 
@@ -139,6 +142,12 @@ class ImportFromNoticeView(BrowserView):
                 configs.append((etype,event_config))
         if not configs:
             return
+<<<<<<< HEAD
+=======
+        event_type_to_transition = {"dossier-incomplet": "isincomplete",
+                                    "dossier-irrecevable": "inacceptable"}
+
+>>>>>>> 405c0e39b (implement inadmissible notification secod tour)
         with api.env.adopt_roles(["Manager"]):
             for etype, event_config in configs:
                 event = license.createUrbanEvent(event_config)
@@ -153,13 +162,20 @@ class ImportFromNoticeView(BrowserView):
         license = detailed_notification.licence
         self.update_license(license, detailed_notification, event_type="dossier-incomplet")
         transaction.commit() 
+<<<<<<< HEAD
 
     def process_not_admissible_folder_notification_second_tour(self, detailed_notification):
         licence = detailed_notification.licence
         self.update_license(licence, detailed_notification, event_type="dossier-irrecevable")
         transaction.commit()
+=======
+>>>>>>> 405c0e39b (implement inadmissible notification secod tour)
     
     def process_inadmissible_folder_notification(self, detailed_notification):
         license = detailed_notification.licence
         self.update_license(license, detailed_notification, event_type="dossier-irrecevable")
+<<<<<<< HEAD
         transaction.commit()
+=======
+        transaction.commit() 
+>>>>>>> 405c0e39b (implement inadmissible notification secod tour)

@@ -267,6 +267,19 @@ class TestNoticeCronPE2(unittest.TestCase):
         notif_patch, notifs_patch
         self.notif_patch = notif_patch
 
+    
+    @mock.patch(
+        "Products.urban.services.notice.WebserviceNotice.get_notifications",
+        return_value=load_notif_json("INADMISSIBLE", "xx-NOTIFICATIONS.json"),
+    )
+    @mock.patch(
+        "Products.urban.services.notice.WebserviceNotice._get_notification",
+        return_value=MockedRequest(load_notif_json("INADMISSIBLE", "xx-INADMISSIBLE-NOTIFICATION.json")),
+    )
+    def _create_incomplete_folder(self, notif_patch, notifs_patch):
+        notif_patch, notifs_patch  
+        self.notif_patch = notif_patch
+        
         with api.env.adopt_roles(["Manager"]):
             import_view = self.portal.restrictedTraverse("@@import-from-notice")
             import_view()
