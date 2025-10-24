@@ -123,6 +123,7 @@ class NoticeNotification(NoticeElement):
             "TRANSFERT_DOSSIER": "ns3:TwiceDefaultRequest",
             "DEMANDE_EP": "ns3:PublicSurveyRequest",
             "NOTIF_COMPLETUDE1_INCOMPLET_COMMUNE":"ns3:TwiceDefaultRequest",
+            "NOTIF_COMPLETUDE2_NON_RECEVABLE_COMMUNE":"ns3:TwiceDefaultRequest",
         }
         return self._get_data("specific", specific.get(self.notice_type), "ns3:municipalityReference")
 

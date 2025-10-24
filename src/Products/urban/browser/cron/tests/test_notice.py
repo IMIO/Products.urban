@@ -216,4 +216,39 @@ class TestNoticeCronPE2(unittest.TestCase):
         # 5.4 assert folder is closed
         self.assertEqual(incomplete_folder.getEventDate().Date(), "2025/07/11")
         self.assertEqual(api.content.get_state(incomplete_folder), "closed")
-        
+
+    def _create_not_admissible_folder(self, suffix, notif_id):
+        folder_name = "NOT_ADMISSIBLE{0}".format(suffix)
+        notif_file = "{0}_notifications.json".format(notif_id)
+
+        if notif_id is None:
+            raise ValueError("Vous devez passer un notif_id pour ce test")
+        single_notif_file = "{0}-NOT-ADMISSIBLE-NOTIFICATION.json".format(notif_id)
+        # Load JSON
+        data = load_notif_json(folder_name, notif_file)
+
+        # Mock
+        with mock.patch(
+            "Products.urban.services.notice.WebserviceNotice.get_notifications",
+            return_value=data,
+        ), mock.patch(
+            "Products.urban.services.notice.WebserviceNotice._get_notification",
+            return_value=MockedRequest(load_notif_json(folder_name, single_notif_file)),
+        ):
+            with api.env.adopt_roles(["Manager"]):
+                import_view = self.portal.restrictedTraverse("@@import-from-notice")
+                import_view()
+    
+    def test_not_admissible_notification_second_tour(self):
+        licence_folder = self.portal.urban.envclasstwos
+        licence = licence_folder.values()[-1]
+        licence.reference = "PE2/2025/4"
+        licence.reindexObject()
+
+        # Création folder 2ème tour
+        self._create_not_admissible_folder("2","1443529")
+
+        not_admissible_folder = licence.getLastRefusedNotification()
+        self.assertIsNotNone(not_admissible_folder)
+        self.assertEqual(not_admissible_folder.getEventDate().Date(), "2025/09/19")
+        self.assertEqual(api.content.get_state(not_admissible_folder), "closed")
