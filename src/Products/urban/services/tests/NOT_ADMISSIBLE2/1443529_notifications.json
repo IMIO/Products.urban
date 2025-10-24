@@ -1,0 +1,37 @@
+[
+  {
+    "noticeId": "1443529",
+    "noticeType": {
+      "code": "PE_DEM_COM_NOTIF_COMPLETUDE2_NON_RECEVABLE",
+      "description": [
+        {
+          "_value_1": "Demande PEPU - Notification à la commune que la demande est non recevable (2e tour)",
+          "language": "de"
+        },
+        {
+          "_value_1": "Demande PEPU - Notification à la commune que la demande est non recevable (2e tour)",
+          "language": "fr"
+        }
+      ]
+    },
+    "receptionDate": "2025-09-19T10:38:03.384000",
+    "dueDate": null,
+    "noticeInstanceId": "0216.697.802",
+    "status": {
+      "code": {
+        "code": "EN_ATTENTE_REPONSE",
+        "description": [
+          {
+            "_value_1": "Warten auf Antwort",
+            "language": "de"
+          },
+          {
+            "_value_1": "En attente de réponse",
+            "language": "fr"
+          }
+        ]
+      },
+      "date": "2025-09-19T10:38:03.482000"
+    }
+  }
+]
