@@ -150,7 +150,7 @@ class TestNoticeCronPE2(unittest.TestCase):
             api.content.delete(obj=licence)
 
 
-    @mock.patch(
+    """@mock.patch(
         "Products.urban.services.notice.WebserviceNotice.get_notifications",
         return_value=load_notif_json("DEMANDE_EP", "1342038_notifications.json"),
     )
@@ -163,7 +163,7 @@ class TestNoticeCronPE2(unittest.TestCase):
 
         with api.env.adopt_roles(["Manager"]):
             import_view = self.portal.restrictedTraverse("@@import-from-notice")
-            return import_view()
+            return import_view()"""
     
     @mock.patch(
         "Products.urban.services.notice.WebserviceNotice.get_notifications",
@@ -270,13 +270,13 @@ class TestNoticeCronPE2(unittest.TestCase):
     
     @mock.patch(
         "Products.urban.services.notice.WebserviceNotice.get_notifications",
-        return_value=load_notif_json("INADMISSIBLE", "xx-NOTIFICATIONS.json"),
+        return_value=load_notif_json("INADMISSIBLE", "1443524-NOTIFICATIONS.json"),
     )
     @mock.patch(
         "Products.urban.services.notice.WebserviceNotice._get_notification",
-        return_value=MockedRequest(load_notif_json("INADMISSIBLE", "xx-INADMISSIBLE-NOTIFICATION.json")),
+        return_value=MockedRequest(load_notif_json("INADMISSIBLE", "1443524-INADMISSIBLE-NOTIFICATION.json")),
     )
-    def _create_incomplete_folder(self, notif_patch, notifs_patch):
+    def _create_inadmissible_folder(self, notif_patch, notifs_patch):
         notif_patch, notifs_patch  
         self.notif_patch = notif_patch
         
