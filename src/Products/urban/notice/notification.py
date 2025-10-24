@@ -124,6 +124,7 @@ class NoticeNotification(NoticeElement):
             "DEMANDE_EP": "ns3:PublicSurveyRequest",
             "NOTIF_COMPLETUDE1_INCOMPLET_COMMUNE":"ns3:TwiceDefaultRequest",
             "NOTIF_COMPLETUDE2_NON_RECEVABLE_COMMUNE":"ns3:TwiceDefaultRequest",
+            "NOTIF_COMPLETUDE2_IRRECEVABLE_COMMUNE":"ns3:TwiceDefaultRequest",
         }
         return self._get_data("specific", specific.get(self.notice_type), "ns3:municipalityReference")
 
@@ -189,6 +190,7 @@ class NoticeNotification(NoticeElement):
     @property
     def event_configs(self):
         portal_urban_folder = api.portal.get().urban.portal_urban
+        print(self.type,"TYPE////////////////////")
         licence_type_folder = getattr(portal_urban_folder, "{0}".format(self.type.lower()))
         return getattr(licence_type_folder, "eventconfigs")
 
