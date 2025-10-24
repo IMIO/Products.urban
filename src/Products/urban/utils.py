@@ -1,35 +1,35 @@
 # -*- coding: utf-8 -*-
 
 from Acquisition import aq_inner
-
-from imio.schedule.utils import tuple_to_interface
-
+from Acquisition import aq_parent
 from HTMLParser import HTMLParser
-
 from Products.ATContentTypes.interfaces.file import IATFile
-from Products.urban.config import URBAN_TYPES
 from Products.urban.config import URBAN_ENVIRONMENT_TYPES
+from Products.urban.config import URBAN_TYPES
+from Products.urban.interfaces import IGenericLicence
 from Products.urban.interfaces import IUrbanDoc
-
+from datetime import datetime
+from imio.schedule.utils import tuple_to_interface
 from plone import api
-
 from zope.annotation import IAnnotations
 from zope.component import getMultiAdapter
 
+import hashlib
+import os
+import pkg_resources
 import random
 import string
-import hashlib
-import pkg_resources
+import time
 
 
 def getCurrentFolderManager():
     """
-     Returns the current FolderManager initials or object
+    Returns the current FolderManager initials or object
     """
-    portal_urban = api.portal.get_tool('portal_urban')
+    portal_urban = api.portal.get_tool("portal_urban")
     foldermanagers = portal_urban.foldermanagers
     current_user_id = api.user.get_current().getId()
-    for foldermanager in foldermanagers.objectValues('FolderManager'):
+    for foldermanager in foldermanagers.objectValues("FolderManager"):
         if foldermanager.getPloneUserId() == current_user_id:
             return foldermanager
     return None
@@ -38,10 +38,10 @@ def getCurrentFolderManager():
 def getLicenceSchema(licencetype):
     if licencetype not in URBAN_TYPES:
         return None
-    types_tool = api.portal.get_tool('portal_types')
+    types_tool = api.portal.get_tool("portal_types")
     type_info = types_tool.getTypeInfo(licencetype)
-    metatype = type_info.getProperty('content_meta_type')
-    module_name = 'Products.urban.content.licence.%s' % metatype
+    metatype = type_info.getProperty("content_meta_type")
+    module_name = "Products.urban.content.licence.%s" % metatype
     attribute = "%s_schema" % metatype
     module = __import__(module_name, fromlist=[attribute])
     return getattr(module, attribute)
@@ -53,14 +53,19 @@ def moveElementAfter(object_to_move, container, attr_name, attr_value_to_match):
     indexes = range(len(contents))
     indexes.reverse()
     for i in indexes:
-        if getattr(contents[i], attr_name) == attr_value_to_match and object_to_move != contents[i]:
+        if (
+            getattr(contents[i], attr_name) == attr_value_to_match
+            and object_to_move != contents[i]
+        ):
             new_position = 1 + container.getObjectPosition(contents[i].getId())
             container.moveObjectToPosition(object_to_move.getId(), new_position)
             return
 
 
 def generatePassword(length):
-    return ''.join(random.choice(string.ascii_letters + string.digits) for x in range(length))
+    return "".join(
+        random.choice(string.ascii_letters + string.digits) for x in range(length)
+    )
 
 
 def getMd5Signature(data):
@@ -70,54 +75,59 @@ def getMd5Signature(data):
 
 def setOptionalAttributes(schema, optional_fields):
     """
-      This method set the optional attribute and widget condition on schema fields listed in optional_fields
+    This method set the optional attribute and widget condition on schema fields listed in optional_fields
     """
     for fieldname in optional_fields:
         field = schema.get(fieldname)
         if field is not None:
-            setattr(field, 'optional', True)
+            setattr(field, "optional", True)
             field.widget.setCondition("python: here.attributeIsUsed('%s')" % fieldname)
 
 
 def setSchemataForInquiry(schema):
     """
-      Put the the fields coming from Inquiry in a specific schemata
+    Put the the fields coming from Inquiry in a specific schemata
     """
     from Products.urban.content.Inquiry import Inquiry
+
     _setSchemataForInquiry(schema, Inquiry)
 
 
 def setSchemataForCODT_Inquiry(schema):
     """
-      Put the the fields coming from Inquiry in a specific schemata
+    Put the the fields coming from Inquiry in a specific schemata
     """
     from Products.urban.content.CODT_Inquiry import CODT_Inquiry
+
     _setSchemataForInquiry(schema, CODT_Inquiry)
 
 
 def setSchemataForCODT_UniqueLicenceInquiry(schema):
     """
-      Put the the fields coming from Inquiry in a specific schemata
+    Put the the fields coming from Inquiry in a specific schemata
     """
-    from Products.urban.content.CODT_UniqueLicenceInquiry import CODT_UniqueLicenceInquiry
+    from Products.urban.content.CODT_UniqueLicenceInquiry import \
+        CODT_UniqueLicenceInquiry
+
     _setSchemataForInquiry(schema, CODT_UniqueLicenceInquiry)
 
 
 def _setSchemataForInquiry(schema, inquiry_class):
     """
-      Put the the fields coming from Inquiry in a specific schemata
+    Put the the fields coming from Inquiry in a specific schemata
     """
     inquiryFields = inquiry_class.schema.filterFields(isMetadata=False)
-    #do not take the 2 first fields into account, this is 'id' and 'title'
+    # do not take the 2 first fields into account, this is 'id' and 'title'
     inquiryFields = inquiryFields[2:]
     for inquiryField in inquiryFields:
-        if schema[inquiryField.getName()].schemata == 'default':
-            schema[inquiryField.getName()].schemata = 'urban_inquiry'
+        if inquiryField.__name__ in ["id", "title"]:
+            continue
+        if schema[inquiryField.getName()].schemata == "default":
+            schema[inquiryField.getName()].schemata = "urban_inquiry"
 
 
-#class and function to strip a text from all its HTML tags
+# class and function to strip a text from all its HTML tags
 class MLStripper(HTMLParser):
-
     def __init__(self):
         self.reset()
         self.fed = []
@@ -126,7 +136,7 @@ class MLStripper(HTMLParser):
         self.fed.append(d)
 
     def get_data(self):
-        return ''.join(self.fed)
+        return "".join(self.fed)
 
 
 def strip_tags(html):
@@ -136,7 +146,7 @@ def strip_tags(html):
 
 
 def getLicenceFolderId(licencetype):
-    return '{}s'.format(licencetype.lower())
+    return "{}s".format(licencetype.lower())
 
 
 def getAllLicenceFolderIds():
@@ -144,7 +154,11 @@ def getAllLicenceFolderIds():
 
 
 def getUrbanOnlyLicenceFolderIds():
-    return [getLicenceFolderId(licencetype) for licencetype in URBAN_TYPES if licencetype not in URBAN_ENVIRONMENT_TYPES]
+    return [
+        getLicenceFolderId(licencetype)
+        for licencetype in URBAN_TYPES
+        if licencetype not in URBAN_ENVIRONMENT_TYPES
+    ]
 
 
 def getEnvironmentLicenceFolderIds():
@@ -164,59 +178,77 @@ def removeItems(liste, items):
     return liste
 
 
-def getSchemataFields(context, displayed_fields, schemata='', exclude=[]):
+def getSchemataFields(context, displayed_fields, schemata="", exclude=[]):
     def isDisplayable(field):
-        if hasattr(field, 'optional') and field.optional and field.getName() not in displayed_fields:
+        if (
+            hasattr(field, "optional")
+            and field.optional
+            and field.getName() not in displayed_fields
+        ):
             return False
         if field.getName() in exclude:
             return False
         if not field.widget.visible:
             return False
-        if field.widget.visible.get('view', None) not in [True, 'visible']:
+        if field.widget.visible.get("view", None) not in [True, "visible"]:
             return False
-        if not field.checkPermission('r', context):
+        if not field.checkPermission("r", context):
             return False
         return True
 
     context = aq_inner(context)
     schema = context.__class__.schema
-    fields = [field for field in schema.getSchemataFields(schemata) if isDisplayable(field)]
+    fields = [
+        field for field in schema.getSchemataFields(schemata) if isDisplayable(field)
+    ]
 
     return fields
 
 
 def get_interface_by_path(interface_path):
-    """
-    """
-    splitted_path = interface_path.split('.')
-    interface_tuple = ('.'.join(splitted_path[0:-1]), splitted_path[-1])
+    """ """
+    splitted_path = interface_path.split(".")
+    interface_tuple = (".".join(splitted_path[0:-1]), splitted_path[-1])
     return tuple_to_interface(interface_tuple)
 
 
 def is_attachment(obj):
-    """
-    """
+    """ """
     is_file = IATFile.providedBy(obj)
     is_doc = IUrbanDoc.providedBy(obj)
     is_attachment = is_file and not is_doc
     return is_attachment
 
 
-def get_ws_meetingitem_infos(urban_event):
-    """
-    """
+def get_ws_meetingitem_infos(urban_event, extra_attributes=False):
+    """ """
     annotations = IAnnotations(urban_event)
-    if 'imio.pm.wsclient-sent_to' in annotations:
+    if "imio.pm.wsclient-sent_to" in annotations:
+        config_id = annotations["imio.pm.wsclient-sent_to"][0]
         request = api.portal.getRequest()
         portal_state = getMultiAdapter(
-            (urban_event, request),
-            name=u'plone_portal_state'
+            (urban_event, request), name=u"plone_portal_state"
         )
         ws4pmSettings = getMultiAdapter(
-            (portal_state.portal(), request),
-            name='ws4pmclient-settings'
+            (portal_state.portal(), request), name="ws4pmclient-settings"
         )
-        items = ws4pmSettings._soap_searchItems({'externalIdentifier': urban_event.UID()})
+
+        items = ws4pmSettings._rest_searchItems(
+            {
+                "externalIdentifier": urban_event.UID(),
+                "config_id": config_id,
+            }
+        )
+        if extra_attributes and items:
+            items = ws4pmSettings._rest_getItemInfos(
+                {
+                    "UID": items[0]["UID"],
+                    "extra_include": "meeting,config",
+                    "extra_include_config_metadata_fields": "title",
+                    "fullobjects": "True",
+                }
+            )
+
         return items
 
 
@@ -224,3 +256,63 @@ def run_entry_points(group, name, *args, **kwargs):
     for entrypoint in pkg_resources.iter_entry_points(group=group, name=name):
         plugin = entrypoint.load()
         return plugin(*args, **kwargs)
+
+
+def convert_to_utf8(string):
+    try:
+        return string.encode("utf-8")
+    except UnicodeDecodeError:
+        return string
+
+
+def now():
+    return datetime.now()
+
+
+def get_licence_context(context, get_all_object=False, max_recurence=5):
+    context_licence = IGenericLicence.providedBy(context)
+    parent = context
+    output = [context]
+    if context_licence:
+        return output
+    count = 0
+    error = False
+    while not context_licence:
+        parent = aq_parent(parent)
+        context_licence = IGenericLicence.providedBy(parent)
+        if get_all_object:
+            output.append(parent)
+        else:
+            output = [parent]
+        if count >= max_recurence:
+            error = True
+            break
+        count += 1
+    if error:
+        return None
+    return output
+
+
+def cache_key_30min(func, *args, **kwargs):
+    return (func.__name__, time.time() // (60 * 30), args, kwargs)
+
+
+def cache_key_5min(func, *args, **kwargs):
+    return (func.__name__, time.time() // (60 * 5), args, kwargs)
+
+
+def add_missing_capakey_in_registry(capakey):
+    interface = "Products.urban.interfaces.IMissingCapakey"
+    registry = api.portal.get_registry_record(interface)
+    if capakey in registry:
+        return
+    registry.append(capakey.decode("utf-8"))
+    api.portal.set_registry_record(interface, registry)
+
+
+def get_env_variable_value(variable, default):
+    """Return the value defined in env variable"""
+    return os.environ.get(variable, default)
+
+
+WIDGET_DATE_END_YEAR = datetime.now().year + 25
