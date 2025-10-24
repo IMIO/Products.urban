@@ -470,6 +470,7 @@ EventConfigs = {
             "keyDates": ("eventDate",),
             "podTemplates": (
             ),
+            
         },
         {
             "id": "dossier-incomplet",
