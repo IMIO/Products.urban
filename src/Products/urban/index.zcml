@@ -29,6 +29,10 @@
       name="parcelInfosIndex"
       />
   <adapter
+      factory=".indexes.parcelling_parcelinfoindex"
+      name="parcelInfosIndex"
+      />
+  <adapter
       factory=".indexes.genericlicence_streetsuid"
       name="StreetsUID"
       />
