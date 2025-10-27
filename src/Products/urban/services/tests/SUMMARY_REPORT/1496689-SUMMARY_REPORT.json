@@ -1,0 +1,1765 @@
+{
+  "status": "PROCESSED",
+  "warning": null,
+  "error": null,
+  "notice": {
+    "BO": {
+      "idBO": "10010781",
+      "typeBO": {
+        "code": "PE_PU",
+        "description": [
+          {
+            "_value_1": "Umweltgenehmigung oder Globalgenehmigung",
+            "language": "de"
+          },
+          {
+            "_value_1": "Permis d'environnement ou unique",
+            "language": "fr"
+          }
+        ],
+        "origin": null
+      },
+      "typeBOSubtype": {
+        "code": "PE",
+        "description": [
+          {
+            "_value_1": "Umweltgenehmigung",
+            "language": "de"
+          },
+          {
+            "_value_1": "permis d'environnement",
+            "language": "fr"
+          }
+        ],
+        "origin": null
+      },
+      "noticeIdBO": "NOTIFICATION:53020854",
+      "codeTypeNoticeBO": "NOTIFICATION_RS_COMMUNE",
+      "applicationCodeBO": "TWICE",
+      "fileLanguage": {
+        "code": "FR",
+        "description": [
+          {
+            "_value_1": "FR",
+            "language": "de"
+          },
+          {
+            "_value_1": "FR",
+            "language": "fr"
+          }
+        ]
+      },
+      "fileDate": "2025-09-17T00:00:00+02:00",
+      "noticeLanguage": {
+        "code": "FR",
+        "description": [
+          {
+            "_value_1": "Französisch",
+            "language": "de"
+          },
+          {
+            "_value_1": "Français",
+            "language": "fr"
+          }
+        ]
+      }
+    },
+    "sender": {
+      "noticeInstanceId": "O3080500",
+      "contactName": "Giuseppe MONACHINO",
+      "contactPhone": {
+        "phoneNumber": [
+          {
+            "_value_1": "+3281715344",
+            "type": null
+          }
+        ]
+      },
+      "contactMail": {
+        "email": [
+          {
+            "_value_1": "permis.environnement.namur@spw.wallonie.be",
+            "type": null
+          }
+        ]
+      },
+      "projectType": "Un renouvellement",
+      "motivations": null
+    },
+    "receiver": {
+      "noticeInstanceId": "0216.697.802"
+    },
+    "noticeType": {
+      "code": "PE_DEM_COM_NOTIFICATION_RS",
+      "description": [
+        {
+          "_value_1": "Demande PEPU - Transmission du rapport de synthèse",
+          "language": "de"
+        },
+        {
+          "_value_1": "Demande PEPU - Transmission du rapport de synthèse",
+          "language": "fr"
+        }
+      ]
+    },
+    "subjectNotice": "Permis env classe 2 Collège",
+    "sendDate": "2025-10-24T00:00:00+02:00",
+    "deadline": 20,
+    "dueDate": "2025-10-30T00:00:00+01:00",
+    "fileDateMunicipality": "2025-09-11T00:00:00+02:00",
+    "comment": null,
+    "businessReference": {
+      "id": "10106444",
+      "denomination": "Ancienne ferme Saint Martin"
+    },
+    "addresses": {
+      "address": [
+        {
+          "country": "BE",
+          "addressId": {
+            "_value_1": null,
+            "source": "-1"
+          },
+          "street": "Saint Martin",
+          "houseNumber": "9",
+          "boxNumber": null,
+          "postCode": "5080",
+          "municipality": "LA BRUYÈRE",
+          "state": "actif",
+          "plainText": [],
+          "locality": {
+            "code": "5080",
+            "description": [
+              {
+                "_value_1": "LA BRUYERE (Emines)",
+                "language": "de"
+              },
+              {
+                "_value_1": "LA BRUYERE (Emines)",
+                "language": "fr"
+              }
+            ]
+          },
+          "inceptionDate": null,
+          "modificationDate": null,
+          "addressType": null
+        }
+      ]
+    },
+    "parcels": {
+      "parcel": [
+        {
+          "identifier": "P0001",
+          "municipality": {
+            "code": "81001",
+            "description": [
+              {
+                "_value_1": "ARLON",
+                "language": "de"
+              },
+              {
+                "_value_1": "ARLON",
+                "language": "fr"
+              }
+            ],
+            "origin": null
+          },
+          "division": "ARLON 8 DIV/HACHY/",
+          "codeDivision": "81408",
+          "section": "D",
+          "radical": "0338",
+          "bisTer": "00",
+          "exponent": "C",
+          "power": "000",
+          "part": false,
+          "right": true,
+          "capakey": "81408D0338/00C000",
+          "comment": null
+        },
+        {
+          "identifier": "P002",
+          "municipality": {
+            "code": "92141",
+            "description": [
+              {
+                "_value_1": "LA BRUYERE",
+                "language": "de"
+              },
+              {
+                "_value_1": "LA BRUYÈRE",
+                "language": "fr"
+              }
+            ],
+            "origin": null
+          },
+          "division": "LA BRUYERE 2 DIV/RHISNES/",
+          "codeDivision": "92102",
+          "section": "B",
+          "radical": "0006",
+          "bisTer": "00",
+          "exponent": "_",
+          "power": "000",
+          "part": false,
+          "right": false,
+          "capakey": "92102B0006/00_000",
+          "comment": null
+        },
+        {
+          "identifier": "P003",
+          "municipality": {
+            "code": "92141",
+            "description": [
+              {
+                "_value_1": "LA BRUYERE",
+                "language": "de"
+              },
+              {
+                "_value_1": "LA BRUYÈRE",
+                "language": "fr"
+              }
+            ],
+            "origin": null
+          },
+          "division": "LA BRUYERE 1 DIV/EMINES/",
+          "codeDivision": "92036",
+          "section": "D",
+          "radical": "0069",
+          "bisTer": "00",
+          "exponent": "X",
+          "power": "000",
+          "part": false,
+          "right": false,
+          "capakey": "92036D0069/00X000",
+          "comment": null
+        }
+      ]
+    },
+    "parties": {
+      "part": [
+        {
+          "enterpriseNumber": null,
+          "enterpriseType": null,
+          "legalForm": null,
+          "personNumber": "88010435423",
+          "title": null,
+          "lastname": "Nagant",
+          "firstname": "Aurore Edith Michèle",
+          "language": {
+            "code": "FR",
+            "description": [
+              {
+                "_value_1": "français",
+                "language": "de"
+              },
+              {
+                "_value_1": "français",
+                "language": "fr"
+              }
+            ]
+          },
+          "denomination": null,
+          "mailingAddresses": {
+            "mailingAddress": [
+              {
+                "country": "BE",
+                "addressId": {
+                  "_value_1": null,
+                  "source": "-1"
+                },
+                "street": "Rue Barbe d'Or(AIN)",
+                "houseNumber": "21",
+                "boxNumber": null,
+                "postCode": "4317",
+                "municipality": "FAIMES",
+                "state": "actif",
+                "plainText": [],
+                "locality": {
+                  "code": "4317",
+                  "description": [
+                    {
+                      "_value_1": "FAIMES",
+                      "language": "de"
+                    },
+                    {
+                      "_value_1": "FAIMES",
+                      "language": "fr"
+                    }
+                  ]
+                },
+                "inceptionDate": null,
+                "modificationDate": null,
+                "addressType": null
+              }
+            ]
+          },
+          "phoneNumber": null,
+          "email": null
+        }
+      ]
+    },
+    "documents": {
+      "document": [
+        {
+          "documentData": {
+            "filename": "10010781-NOTIFICATION_GENERATION_RS-DPA -",
+            "description": null,
+            "type": {
+              "code": "RS",
+              "description": [
+                {
+                  "_value_1": "RS/Projet décision",
+                  "language": "de"
+                },
+                {
+                  "_value_1": "RS/Projet décision",
+                  "language": "fr"
+                }
+              ]
+            },
+            "language": {
+              "code": "FR",
+              "description": [
+                {
+                  "_value_1": "Französisch",
+                  "language": "de"
+                },
+                {
+                  "_value_1": "Français",
+                  "language": "fr"
+                }
+              ]
+            },
+            "documentId": "998e0ac7-da4a-4b6d-876d-a419d6e22faf",
+            "fileSize": 58165,
+            "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+            "confidentiality": {
+              "code": "0",
+              "description": [
+                {
+                  "_value_1": "Öffentlichkeit",
+                  "language": "de"
+                },
+                {
+                  "_value_1": "public",
+                  "language": "fr"
+                }
+              ],
+              "domain": "NOTICE_GENERIC_CONFIDENTIALITE"
+            },
+            "principal": false
+          },
+          "content": {
+            "documentContentStorage": "BO"
+          }
+        },
+        {
+          "documentData": {
+            "filename": "10010781-NOTIFICATION_RS_COMMUNE-Commune wallonne",
+            "description": null,
+            "type": {
+              "code": "NOTIFICATION_RS_COMMUNE",
+              "description": [
+                {
+                  "_value_1": "Notification RS à la commune de dépôt",
+                  "language": "de"
+                },
+                {
+                  "_value_1": "Notification RS à la commune de dépôt",
+                  "language": "fr"
+                }
+              ]
+            },
+            "language": {
+              "code": "FR",
+              "description": [
+                {
+                  "_value_1": "Französisch",
+                  "language": "de"
+                },
+                {
+                  "_value_1": "Français",
+                  "language": "fr"
+                }
+              ]
+            },
+            "documentId": "01ec5272-a08a-48a2-9932-4b0b41d88a18",
+            "fileSize": 58165,
+            "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+            "confidentiality": {
+              "code": "0",
+              "description": [
+                {
+                  "_value_1": "Öffentlichkeit",
+                  "language": "de"
+                },
+                {
+                  "_value_1": "public",
+                  "language": "fr"
+                }
+              ],
+              "domain": "NOTICE_GENERIC_CONFIDENTIALITE"
+            },
+            "principal": true
+          },
+          "content": {
+            "documentContentStorage": "BO"
+          }
+        }
+      ]
+    },
+    "mapSpecification": null,
+    "specific": {
+      "ns3:SummaryReportRequest": {
+        "@xmlns": "http://soa.spw.wallonie.be/data/common/code/v1",
+        "@xmlns:ns2": "http://soa.spw.wallonie.be/services/noticeExtensions/messages/v1",
+        "@xmlns:ns3": "http://soa.spw.wallonie.be/services/noticeTwiceExtensions/messages/v1",
+        "@xmlns:ns4": "http://soa.spw.wallonie.be/data/business/environmentalLicence/v2",
+        "@xmlns:ns5": "http://soa.spw.wallonie.be/data/common/date/v1",
+        "@xmlns:ns6": "http://soa.spw.wallonie.be/services/noticeGesperExtensions/messages/v1",
+        "@xmlns:ns7": "http://soa.spw.wallonie.be/data/business/noticeGesperExtensions/v1",
+        "ns2:acceptedResponseNoticeCodes": {
+          "ns2:acceptedResponseNoticeCode": [
+            {
+              "code": "OCTROI",
+              "description": [
+                {
+                  "@language": "de",
+                  "#text": "Gewährung"
+                },
+                {
+                  "@language": "fr",
+                  "#text": "octroi"
+                }
+              ]
+            },
+            {
+              "code": "REFUS",
+              "description": [
+                {
+                  "@language": "de",
+                  "#text": "Ablehnung"
+                },
+                {
+                  "@language": "fr",
+                  "#text": "refus"
+                }
+              ]
+            }
+          ]
+        },
+        "ns3:municipalityReference": "PE2/2025/4",
+        "ns3:timeLimits": {
+          "ns3:timeLimit": [
+            {
+              "ns4:timeLimitCode": "DELAI_DECISION_APRES_RS",
+              "ns4:timeLimit": "20"
+            },
+            {
+              "ns4:timeLimitCode": "DELAI_AFFICHAGE_DECISION",
+              "ns4:timeLimit": "10"
+            },
+            {
+              "ns4:timeLimitCode": "DUREE_AFFICHAGE_DECISION",
+              "ns4:timeLimit": "20"
+            }
+          ]
+        },
+        "ns3:suspentionPeriods": null,
+        "ns3:parcels": {
+          "ns3:parcel": [
+            {
+              "ns4:currentStatus": {
+                "code": "OCTROYE",
+                "description": [
+                  {
+                    "@language": "de",
+                    "#text": "gewährt"
+                  },
+                  {
+                    "@language": "fr",
+                    "#text": "octroyé"
+                  }
+                ],
+                "ns4:domain": "STATUT_DECISION_CARACTERISTIQUE"
+              },
+              "ns4:formStatus": {
+                "code": "SUPPRIME",
+                "description": [
+                  {
+                    "@language": "de",
+                    "#text": "Gelöscht"
+                  },
+                  {
+                    "@language": "fr",
+                    "#text": "Supprimé"
+                  }
+                ],
+                "ns4:domain": "STATUT_FORMULAIRE_CARACTERISTIQUE"
+              },
+              "ns4:identifier": "P0001",
+              "ns4:municipality": {
+                "code": "81001",
+                "description": [
+                  {
+                    "@language": "de",
+                    "#text": "ARLON"
+                  },
+                  {
+                    "@language": "fr",
+                    "#text": "ARLON"
+                  }
+                ]
+              },
+              "ns4:division": "ARLON 8 DIV/HACHY/",
+              "ns4:codeDivision": "81408",
+              "ns4:section": "D",
+              "ns4:radical": "0338",
+              "ns4:bisTer": "00",
+              "ns4:exponent": "C",
+              "ns4:power": "000",
+              "ns4:part": "false",
+              "ns4:droitReel": "true",
+              "ns4:capakey": "81408D0338/00C000"
+            },
+            {
+              "ns4:formStatus": {
+                "code": "NOUVEAU",
+                "description": [
+                  {
+                    "@language": "de",
+                    "#text": "Neu"
+                  },
+                  {
+                    "@language": "fr",
+                    "#text": "Nouveau"
+                  }
+                ],
+                "ns4:domain": "STATUT_FORMULAIRE_CARACTERISTIQUE"
+              },
+              "ns4:identifier": "P002",
+              "ns4:municipality": {
+                "code": "92141",
+                "description": [
+                  {
+                    "@language": "de",
+                    "#text": "LA BRUYERE"
+                  },
+                  {
+                    "@language": "fr",
+                    "#text": "LA BRUYÈRE"
+                  }
+                ]
+              },
+              "ns4:division": "LA BRUYERE 2 DIV/RHISNES/",
+              "ns4:codeDivision": "92102",
+              "ns4:section": "B",
+              "ns4:radical": "0006",
+              "ns4:bisTer": "00",
+              "ns4:exponent": "_",
+              "ns4:power": "000",
+              "ns4:part": "false",
+              "ns4:droitReel": "false",
+              "ns4:capakey": "92102B0006/00_000"
+            },
+            {
+              "ns4:formStatus": {
+                "code": "NOUVEAU",
+                "description": [
+                  {
+                    "@language": "de",
+                    "#text": "Neu"
+                  },
+                  {
+                    "@language": "fr",
+                    "#text": "Nouveau"
+                  }
+                ],
+                "ns4:domain": "STATUT_FORMULAIRE_CARACTERISTIQUE"
+              },
+              "ns4:identifier": "P003",
+              "ns4:municipality": {
+                "code": "92141",
+                "description": [
+                  {
+                    "@language": "de",
+                    "#text": "LA BRUYERE"
+                  },
+                  {
+                    "@language": "fr",
+                    "#text": "LA BRUYÈRE"
+                  }
+                ]
+              },
+              "ns4:division": "LA BRUYERE 1 DIV/EMINES/",
+              "ns4:codeDivision": "92036",
+              "ns4:section": "D",
+              "ns4:radical": "0069",
+              "ns4:bisTer": "00",
+              "ns4:exponent": "X",
+              "ns4:power": "000",
+              "ns4:part": "false",
+              "ns4:droitReel": "false",
+              "ns4:capakey": "92036D0069/00X000"
+            }
+          ]
+        },
+        "ns3:buildings": {
+          "ns3:building": {
+            "ns4:currentStatus": {
+              "code": "OCTROYE",
+              "description": [
+                {
+                  "@language": "de",
+                  "#text": "gewährt"
+                },
+                {
+                  "@language": "fr",
+                  "#text": "octroyé"
+                }
+              ],
+              "ns4:domain": "STATUT_DECISION_CARACTERISTIQUE"
+            },
+            "ns4:formStatus": {
+              "code": "INCHANGE",
+              "description": [
+                {
+                  "@language": "de",
+                  "#text": "Unverändert"
+                },
+                {
+                  "@language": "fr",
+                  "#text": "Inchangé"
+                }
+              ],
+              "ns4:domain": "STATUT_FORMULAIRE_CARACTERISTIQUE"
+            },
+            "ns4:identifier": "B0001",
+            "ns4:parcelIdentifier": "P0001",
+            "ns4:naming": "Bâtiment technique"
+          }
+        },
+        "ns3:installations": {
+          "ns3:installation": [
+            {
+              "ns4:currentStatus": {
+                "code": "OCTROYE",
+                "description": [
+                  {
+                    "@language": "de",
+                    "#text": "gewährt"
+                  },
+                  {
+                    "@language": "fr",
+                    "#text": "octroyé"
+                  }
+                ],
+                "ns4:domain": "STATUT_DECISION_CARACTERISTIQUE"
+              },
+              "ns4:formStatus": {
+                "code": "ARENOUVELER",
+                "description": [
+                  {
+                    "@language": "de",
+                    "#text": "A renouveler"
+                  },
+                  {
+                    "@language": "fr",
+                    "#text": "A renouveler"
+                  }
+                ],
+                "ns4:domain": "STATUT_FORMULAIRE_CARACTERISTIQUE"
+              },
+              "ns4:identifier": "I0001",
+              "ns4:parcelIdentifier": "P0001",
+              "ns4:naming": "Relevage",
+              "ns4:nominalCapacity": "4.000",
+              "ns4:nominalUnity": {
+                "code": "KW",
+                "description": [
+                  {
+                    "@language": "de",
+                    "#text": "Kilowatt"
+                  },
+                  {
+                    "@language": "fr",
+                    "#text": "kW"
+                  }
+                ],
+                "ns4:domain": "UNITE"
+              },
+              "ns4:specifyProducedEnergy": null,
+              "ns4:usedEnergy": {
+                "code": "ELECTRICITE",
+                "description": [
+                  {
+                    "@language": "de",
+                    "#text": "Électricité"
+                  },
+                  {
+                    "@language": "fr",
+                    "#text": "Électricité"
+                  }
+                ],
+                "ns4:domain": "NATURE_ENERGIE"
+              },
+              "ns4:specifyUsedEnergy": null
+            },
+            {
+              "ns4:currentStatus": {
+                "code": "OCTROYE",
+                "description": [
+                  {
+                    "@language": "de",
+                    "#text": "gewährt"
+                  },
+                  {
+                    "@language": "fr",
+                    "#text": "octroyé"
+                  }
+                ],
+                "ns4:domain": "STATUT_DECISION_CARACTERISTIQUE"
+              },
+              "ns4:formStatus": {
+                "code": "ARENOUVELER",
+                "description": [
+                  {
+                    "@language": "de",
+                    "#text": "A renouveler"
+                  },
+                  {
+                    "@language": "fr",
+                    "#text": "A renouveler"
+                  }
+                ],
+                "ns4:domain": "STATUT_FORMULAIRE_CARACTERISTIQUE"
+              },
+              "ns4:identifier": "I0002",
+              "ns4:parcelIdentifier": "P0001",
+              "ns4:naming": "Dégrilleur",
+              "ns4:nominalCapacity": "0.550",
+              "ns4:nominalUnity": {
+                "code": "KW",
+                "description": [
+                  {
+                    "@language": "de",
+                    "#text": "Kilowatt"
+                  },
+                  {
+                    "@language": "fr",
+                    "#text": "kW"
+                  }
+                ],
+                "ns4:domain": "UNITE"
+              },
+              "ns4:specifyProducedEnergy": null,
+              "ns4:specifyUsedEnergy": null
+            },
+            {
+              "ns4:currentStatus": {
+                "code": "OCTROYE",
+                "description": [
+                  {
+                    "@language": "de",
+                    "#text": "gewährt"
+                  },
+                  {
+                    "@language": "fr",
+                    "#text": "octroyé"
+                  }
+                ],
+                "ns4:domain": "STATUT_DECISION_CARACTERISTIQUE"
+              },
+              "ns4:formStatus": {
+                "code": "ARENOUVELER",
+                "description": [
+                  {
+                    "@language": "de",
+                    "#text": "A renouveler"
+                  },
+                  {
+                    "@language": "fr",
+                    "#text": "A renouveler"
+                  }
+                ],
+                "ns4:domain": "STATUT_FORMULAIRE_CARACTERISTIQUE"
+              },
+              "ns4:identifier": "I0003",
+              "ns4:parcelIdentifier": "P0001",
+              "ns4:naming": "Dessableur",
+              "ns4:specifyProducedEnergy": null,
+              "ns4:specifyUsedEnergy": null
+            },
+            {
+              "ns4:currentStatus": {
+                "code": "OCTROYE",
+                "description": [
+                  {
+                    "@language": "de",
+                    "#text": "gewährt"
+                  },
+                  {
+                    "@language": "fr",
+                    "#text": "octroyé"
+                  }
+                ],
+                "ns4:domain": "STATUT_DECISION_CARACTERISTIQUE"
+              },
+              "ns4:formStatus": {
+                "code": "ARENOUVELER",
+                "description": [
+                  {
+                    "@language": "de",
+                    "#text": "A renouveler"
+                  },
+                  {
+                    "@language": "fr",
+                    "#text": "A renouveler"
+                  }
+                ],
+                "ns4:domain": "STATUT_FORMULAIRE_CARACTERISTIQUE"
+              },
+              "ns4:identifier": "I0004",
+              "ns4:parcelIdentifier": "P0001",
+              "ns4:naming": "Limiteur de débit",
+              "ns4:specifyProducedEnergy": null,
+              "ns4:specifyUsedEnergy": null
+            },
+            {
+              "ns4:currentStatus": {
+                "code": "OCTROYE",
+                "description": [
+                  {
+                    "@language": "de",
+                    "#text": "gewährt"
+                  },
+                  {
+                    "@language": "fr",
+                    "#text": "octroyé"
+                  }
+                ],
+                "ns4:domain": "STATUT_DECISION_CARACTERISTIQUE"
+              },
+              "ns4:formStatus": {
+                "code": "ARENOUVELER",
+                "description": [
+                  {
+                    "@language": "de",
+                    "#text": "A renouveler"
+                  },
+                  {
+                    "@language": "fr",
+                    "#text": "A renouveler"
+                  }
+                ],
+                "ns4:domain": "STATUT_FORMULAIRE_CARACTERISTIQUE"
+              },
+              "ns4:identifier": "I0005",
+              "ns4:buildingIdentifier": "B0001",
+              "ns4:naming": "Bassin d'aération + supresseurs - 16,5 kW",
+              "ns4:nominalCapacity": "305.000",
+              "ns4:nominalUnity": {
+                "code": "M3",
+                "description": [
+                  {
+                    "@language": "de",
+                    "#text": "Kubikmeter"
+                  },
+                  {
+                    "@language": "fr",
+                    "#text": "m³"
+                  }
+                ],
+                "ns4:domain": "UNITE"
+              },
+              "ns4:specifyProducedEnergy": null,
+              "ns4:usedEnergy": {
+                "code": "ELECTRICITE",
+                "description": [
+                  {
+                    "@language": "de",
+                    "#text": "Électricité"
+                  },
+                  {
+                    "@language": "fr",
+                    "#text": "Électricité"
+                  }
+                ],
+                "ns4:domain": "NATURE_ENERGIE"
+              },
+              "ns4:specifyUsedEnergy": null
+            },
+            {
+              "ns4:currentStatus": {
+                "code": "OCTROYE",
+                "description": [
+                  {
+                    "@language": "de",
+                    "#text": "gewährt"
+                  },
+                  {
+                    "@language": "fr",
+                    "#text": "octroyé"
+                  }
+                ],
+                "ns4:domain": "STATUT_DECISION_CARACTERISTIQUE"
+              },
+              "ns4:formStatus": {
+                "code": "ARENOUVELER",
+                "description": [
+                  {
+                    "@language": "de",
+                    "#text": "A renouveler"
+                  },
+                  {
+                    "@language": "fr",
+                    "#text": "A renouveler"
+                  }
+                ],
+                "ns4:domain": "STATUT_FORMULAIRE_CARACTERISTIQUE"
+              },
+              "ns4:identifier": "I0006",
+              "ns4:parcelIdentifier": "P0001",
+              "ns4:naming": "Décanteur d'orage - 1,74 kW",
+              "ns4:nominalCapacity": "60.000",
+              "ns4:nominalUnity": {
+                "code": "M3",
+                "description": [
+                  {
+                    "@language": "de",
+                    "#text": "Kubikmeter"
+                  },
+                  {
+                    "@language": "fr",
+                    "#text": "m³"
+                  }
+                ],
+                "ns4:domain": "UNITE"
+              },
+              "ns4:specifyProducedEnergy": null,
+              "ns4:usedEnergy": {
+                "code": "ELECTRICITE",
+                "description": [
+                  {
+                    "@language": "de",
+                    "#text": "Électricité"
+                  },
+                  {
+                    "@language": "fr",
+                    "#text": "Électricité"
+                  }
+                ],
+                "ns4:domain": "NATURE_ENERGIE"
+              },
+              "ns4:specifyUsedEnergy": null
+            },
+            {
+              "ns4:currentStatus": {
+                "code": "OCTROYE",
+                "description": [
+                  {
+                    "@language": "de",
+                    "#text": "gewährt"
+                  },
+                  {
+                    "@language": "fr",
+                    "#text": "octroyé"
+                  }
+                ],
+                "ns4:domain": "STATUT_DECISION_CARACTERISTIQUE"
+              },
+              "ns4:formStatus": {
+                "code": "ARENOUVELER",
+                "description": [
+                  {
+                    "@language": "de",
+                    "#text": "A renouveler"
+                  },
+                  {
+                    "@language": "fr",
+                    "#text": "A renouveler"
+                  }
+                ],
+                "ns4:domain": "STATUT_FORMULAIRE_CARACTERISTIQUE"
+              },
+              "ns4:identifier": "I0007",
+              "ns4:parcelIdentifier": "P0001",
+              "ns4:naming": "Décanteur secondaire - 2,95 kW",
+              "ns4:nominalCapacity": "110.000",
+              "ns4:nominalUnity": {
+                "code": "M3",
+                "description": [
+                  {
+                    "@language": "de",
+                    "#text": "Kubikmeter"
+                  },
+                  {
+                    "@language": "fr",
+                    "#text": "m³"
+                  }
+                ],
+                "ns4:domain": "UNITE"
+              },
+              "ns4:specifyProducedEnergy": null,
+              "ns4:usedEnergy": {
+                "code": "ELECTRICITE",
+                "description": [
+                  {
+                    "@language": "de",
+                    "#text": "Électricité"
+                  },
+                  {
+                    "@language": "fr",
+                    "#text": "Électricité"
+                  }
+                ],
+                "ns4:domain": "NATURE_ENERGIE"
+              },
+              "ns4:specifyUsedEnergy": null
+            },
+            {
+              "ns4:currentStatus": {
+                "code": "OCTROYE",
+                "description": [
+                  {
+                    "@language": "de",
+                    "#text": "gewährt"
+                  },
+                  {
+                    "@language": "fr",
+                    "#text": "octroyé"
+                  }
+                ],
+                "ns4:domain": "STATUT_DECISION_CARACTERISTIQUE"
+              },
+              "ns4:formStatus": {
+                "code": "ARENOUVELER",
+                "description": [
+                  {
+                    "@language": "de",
+                    "#text": "A renouveler"
+                  },
+                  {
+                    "@language": "fr",
+                    "#text": "A renouveler"
+                  }
+                ],
+                "ns4:domain": "STATUT_FORMULAIRE_CARACTERISTIQUE"
+              },
+              "ns4:identifier": "I0008",
+              "ns4:parcelIdentifier": "P0001",
+              "ns4:naming": "Epaississeur - 0.25 kW",
+              "ns4:nominalCapacity": "60.000",
+              "ns4:nominalUnity": {
+                "code": "M3",
+                "description": [
+                  {
+                    "@language": "de",
+                    "#text": "Kubikmeter"
+                  },
+                  {
+                    "@language": "fr",
+                    "#text": "m³"
+                  }
+                ],
+                "ns4:domain": "UNITE"
+              },
+              "ns4:specifyProducedEnergy": null,
+              "ns4:usedEnergy": {
+                "code": "ELECTRICITE",
+                "description": [
+                  {
+                    "@language": "de",
+                    "#text": "Électricité"
+                  },
+                  {
+                    "@language": "fr",
+                    "#text": "Électricité"
+                  }
+                ],
+                "ns4:domain": "NATURE_ENERGIE"
+              },
+              "ns4:specifyUsedEnergy": null
+            },
+            {
+              "ns4:currentStatus": {
+                "code": "OCTROYE",
+                "description": [
+                  {
+                    "@language": "de",
+                    "#text": "gewährt"
+                  },
+                  {
+                    "@language": "fr",
+                    "#text": "octroyé"
+                  }
+                ],
+                "ns4:domain": "STATUT_DECISION_CARACTERISTIQUE"
+              },
+              "ns4:formStatus": {
+                "code": "ARENOUVELER",
+                "description": [
+                  {
+                    "@language": "de",
+                    "#text": "A renouveler"
+                  },
+                  {
+                    "@language": "fr",
+                    "#text": "A renouveler"
+                  }
+                ],
+                "ns4:domain": "STATUT_FORMULAIRE_CARACTERISTIQUE"
+              },
+              "ns4:identifier": "I0009",
+              "ns4:parcelIdentifier": "P0001",
+              "ns4:naming": "Venturi",
+              "ns4:specifyProducedEnergy": null,
+              "ns4:usedEnergy": {
+                "code": "ELECTRICITE",
+                "description": [
+                  {
+                    "@language": "de",
+                    "#text": "Électricité"
+                  },
+                  {
+                    "@language": "fr",
+                    "#text": "Électricité"
+                  }
+                ],
+                "ns4:domain": "NATURE_ENERGIE"
+              },
+              "ns4:specifyUsedEnergy": null
+            }
+          ]
+        },
+        "ns3:substanceDeposits": null,
+        "ns3:wasteDeposits": {
+          "ns3:wasteDeposit": [
+            {
+              "ns4:currentStatus": {
+                "code": "OCTROYE",
+                "description": [
+                  {
+                    "@language": "de",
+                    "#text": "gewährt"
+                  },
+                  {
+                    "@language": "fr",
+                    "#text": "octroyé"
+                  }
+                ],
+                "ns4:domain": "STATUT_DECISION_CARACTERISTIQUE"
+              },
+              "ns4:formStatus": {
+                "code": "INCHANGE",
+                "description": [
+                  {
+                    "@language": "de",
+                    "#text": "Unverändert"
+                  },
+                  {
+                    "@language": "fr",
+                    "#text": "Inchangé"
+                  }
+                ],
+                "ns4:domain": "STATUT_FORMULAIRE_CARACTERISTIQUE"
+              },
+              "ns4:identifier": "DD0001",
+              "ns4:parcelIdentifier": "P0001",
+              "ns4:naming": "Déchets de dégrillage",
+              "ns4:maxQuantity": "1100.000",
+              "ns4:unityQuantity": {
+                "code": "L",
+                "description": [
+                  {
+                    "@language": "de",
+                    "#text": "Liter"
+                  },
+                  {
+                    "@language": "fr",
+                    "#text": "l"
+                  }
+                ],
+                "ns4:domain": "UNITE"
+              },
+              "ns4:storage": "Conteneur",
+              "ns4:physicalState": {
+                "code": "SOLIDE",
+                "description": [
+                  {
+                    "@language": "de",
+                    "#text": "Solide"
+                  },
+                  {
+                    "@language": "fr",
+                    "#text": "Solide"
+                  }
+                ],
+                "ns4:domain": "ETAT_PHYSIQUE"
+              }
+            },
+            {
+              "ns4:currentStatus": {
+                "code": "OCTROYE",
+                "description": [
+                  {
+                    "@language": "de",
+                    "#text": "gewährt"
+                  },
+                  {
+                    "@language": "fr",
+                    "#text": "octroyé"
+                  }
+                ],
+                "ns4:domain": "STATUT_DECISION_CARACTERISTIQUE"
+              },
+              "ns4:formStatus": {
+                "code": "INCHANGE",
+                "description": [
+                  {
+                    "@language": "de",
+                    "#text": "Unverändert"
+                  },
+                  {
+                    "@language": "fr",
+                    "#text": "Inchangé"
+                  }
+                ],
+                "ns4:domain": "STATUT_FORMULAIRE_CARACTERISTIQUE"
+              },
+              "ns4:identifier": "DD0002",
+              "ns4:parcelIdentifier": "P0001",
+              "ns4:naming": "Déchets de dessablage",
+              "ns4:maxQuantity": "5.000",
+              "ns4:unityQuantity": {
+                "code": "M3",
+                "description": [
+                  {
+                    "@language": "de",
+                    "#text": "Kubikmeter"
+                  },
+                  {
+                    "@language": "fr",
+                    "#text": "m³"
+                  }
+                ],
+                "ns4:domain": "UNITE"
+              },
+              "ns4:storage": "Dalle béton avec toit",
+              "ns4:physicalState": {
+                "code": "SOLIDE",
+                "description": [
+                  {
+                    "@language": "de",
+                    "#text": "Solide"
+                  },
+                  {
+                    "@language": "fr",
+                    "#text": "Solide"
+                  }
+                ],
+                "ns4:domain": "ETAT_PHYSIQUE"
+              }
+            },
+            {
+              "ns4:currentStatus": {
+                "code": "OCTROYE",
+                "description": [
+                  {
+                    "@language": "de",
+                    "#text": "gewährt"
+                  },
+                  {
+                    "@language": "fr",
+                    "#text": "octroyé"
+                  }
+                ],
+                "ns4:domain": "STATUT_DECISION_CARACTERISTIQUE"
+              },
+              "ns4:formStatus": {
+                "code": "INCHANGE",
+                "description": [
+                  {
+                    "@language": "de",
+                    "#text": "Unverändert"
+                  },
+                  {
+                    "@language": "fr",
+                    "#text": "Inchangé"
+                  }
+                ],
+                "ns4:domain": "STATUT_FORMULAIRE_CARACTERISTIQUE"
+              },
+              "ns4:identifier": "DD0003",
+              "ns4:parcelIdentifier": "P0001",
+              "ns4:naming": "Boues d'épuration",
+              "ns4:maxQuantity": "60.000",
+              "ns4:unityQuantity": {
+                "code": "M3",
+                "description": [
+                  {
+                    "@language": "de",
+                    "#text": "Kubikmeter"
+                  },
+                  {
+                    "@language": "fr",
+                    "#text": "m³"
+                  }
+                ],
+                "ns4:domain": "UNITE"
+              },
+              "ns4:storage": "Epaississeur",
+              "ns4:physicalState": {
+                "code": "LIQUIDE",
+                "description": [
+                  {
+                    "@language": "de",
+                    "#text": "Liquide"
+                  },
+                  {
+                    "@language": "fr",
+                    "#text": "Liquide"
+                  }
+                ],
+                "ns4:domain": "ETAT_PHYSIQUE"
+              }
+            }
+          ]
+        },
+        "ns3:waterDischarges": {
+          "ns3:waterDischarge": {
+            "ns4:currentStatus": {
+              "code": "OCTROYE",
+              "description": [
+                {
+                  "@language": "de",
+                  "#text": "gewährt"
+                },
+                {
+                  "@language": "fr",
+                  "#text": "octroyé"
+                }
+              ],
+              "ns4:domain": "STATUT_DECISION_CARACTERISTIQUE"
+            },
+            "ns4:formStatus": {
+              "code": "ARENOUVELER",
+              "description": [
+                {
+                  "@language": "de",
+                  "#text": "A renouveler"
+                },
+                {
+                  "@language": "fr",
+                  "#text": "A renouveler"
+                }
+              ],
+              "ns4:domain": "STATUT_FORMULAIRE_CARACTERISTIQUE"
+            },
+            "ns4:identifier": "RE0001",
+            "ns4:naming": null,
+            "ns4:destination": {
+              "code": "EAU_SURFACE",
+              "description": [
+                {
+                  "@language": "de",
+                  "#text": "Eau de surface ou voies artificielles d’écoulement"
+                },
+                {
+                  "@language": "fr",
+                  "#text": "Eau de surface ou voies artificielles d’écoulement"
+                }
+              ],
+              "ns4:domain": "TYPE_EAU"
+            }
+          }
+        },
+        "ns3:dumpings": {
+          "ns3:dumping": [
+            {
+              "ns4:currentStatus": {
+                "code": "OCTROYE",
+                "description": [
+                  {
+                    "@language": "de",
+                    "#text": "gewährt"
+                  },
+                  {
+                    "@language": "fr",
+                    "#text": "octroyé"
+                  }
+                ],
+                "ns4:domain": "STATUT_DECISION_CARACTERISTIQUE"
+              },
+              "ns4:formStatus": {
+                "code": "INCHANGE",
+                "description": [
+                  {
+                    "@language": "de",
+                    "#text": "Unverändert"
+                  },
+                  {
+                    "@language": "fr",
+                    "#text": "Inchangé"
+                  }
+                ],
+                "ns4:domain": "STATUT_FORMULAIRE_CARACTERISTIQUE"
+              },
+              "ns4:identifier": "DEV0001",
+              "ns4:waterDischargeIdentifier": "RE0001",
+              "ns4:installationIdentifier": "I0001",
+              "ns4:naming": null,
+              "ns4:surveillanceSystem": "Néant",
+              "ns4:analysisResult": {
+                "code": "NON",
+                "description": [
+                  {
+                    "@language": "de",
+                    "#text": "Non"
+                  },
+                  {
+                    "@language": "fr",
+                    "#text": "Non"
+                  }
+                ],
+                "ns4:domain": "OUI_NON"
+              },
+              "ns4:waterType": {
+                "code": "DOMESTIQUE",
+                "description": [
+                  {
+                    "@language": "de",
+                    "#text": "Eaux usées domestiques"
+                  },
+                  {
+                    "@language": "fr",
+                    "#text": "Eaux usées domestiques"
+                  }
+                ],
+                "ns4:domain": "TYPE_EAU"
+              },
+              "ns4:precision": null
+            },
+            {
+              "ns4:currentStatus": {
+                "code": "OCTROYE",
+                "description": [
+                  {
+                    "@language": "de",
+                    "#text": "gewährt"
+                  },
+                  {
+                    "@language": "fr",
+                    "#text": "octroyé"
+                  }
+                ],
+                "ns4:domain": "STATUT_DECISION_CARACTERISTIQUE"
+              },
+              "ns4:formStatus": {
+                "code": "INCHANGE",
+                "description": [
+                  {
+                    "@language": "de",
+                    "#text": "Unverändert"
+                  },
+                  {
+                    "@language": "fr",
+                    "#text": "Inchangé"
+                  }
+                ],
+                "ns4:domain": "STATUT_FORMULAIRE_CARACTERISTIQUE"
+              },
+              "ns4:identifier": "DEV0002",
+              "ns4:waterDischargeIdentifier": "RE0001",
+              "ns4:installationIdentifier": "I0006",
+              "ns4:naming": null,
+              "ns4:surveillanceSystem": "Néant",
+              "ns4:analysisResult": {
+                "code": "NON",
+                "description": [
+                  {
+                    "@language": "de",
+                    "#text": "Non"
+                  },
+                  {
+                    "@language": "fr",
+                    "#text": "Non"
+                  }
+                ],
+                "ns4:domain": "OUI_NON"
+              },
+              "ns4:waterType": {
+                "code": "DOMESTIQUE",
+                "description": [
+                  {
+                    "@language": "de",
+                    "#text": "Eaux usées domestiques"
+                  },
+                  {
+                    "@language": "fr",
+                    "#text": "Eaux usées domestiques"
+                  }
+                ],
+                "ns4:domain": "TYPE_EAU"
+              },
+              "ns4:precision": null
+            },
+            {
+              "ns4:currentStatus": {
+                "code": "OCTROYE",
+                "description": [
+                  {
+                    "@language": "de",
+                    "#text": "gewährt"
+                  },
+                  {
+                    "@language": "fr",
+                    "#text": "octroyé"
+                  }
+                ],
+                "ns4:domain": "STATUT_DECISION_CARACTERISTIQUE"
+              },
+              "ns4:formStatus": {
+                "code": "INCHANGE",
+                "description": [
+                  {
+                    "@language": "de",
+                    "#text": "Unverändert"
+                  },
+                  {
+                    "@language": "fr",
+                    "#text": "Inchangé"
+                  }
+                ],
+                "ns4:domain": "STATUT_FORMULAIRE_CARACTERISTIQUE"
+              },
+              "ns4:identifier": "DEV0003",
+              "ns4:waterDischargeIdentifier": "RE0001",
+              "ns4:installationIdentifier": "I0009",
+              "ns4:naming": null,
+              "ns4:surveillanceSystem": "Débitmètre fixe au rejet pour la surveillance en continu - 4 campagnes d'échantillonnage par an conformément à l'annexe XXXVI du code de l'Eau",
+              "ns4:analysisResult": {
+                "code": "OUI",
+                "description": [
+                  {
+                    "@language": "de",
+                    "#text": "Oui"
+                  },
+                  {
+                    "@language": "fr",
+                    "#text": "Oui"
+                  }
+                ],
+                "ns4:domain": "OUI_NON"
+              },
+              "ns4:dailyFlow": "227.000",
+              "ns4:hourlyFlow": "12.600",
+              "ns4:waterType": {
+                "code": "INDUSTRIELLES",
+                "description": [
+                  {
+                    "@language": "de",
+                    "#text": "Eaux usées industrielles"
+                  },
+                  {
+                    "@language": "fr",
+                    "#text": "Eaux usées industrielles"
+                  }
+                ],
+                "ns4:domain": "TYPE_EAU"
+              },
+              "ns4:precision": null
+            }
+          ]
+        },
+        "ns3:atmosphericRejections": null,
+        "ns3:rubrics": {
+          "ns3:rubric": {
+            "ns4:identifier": "1685",
+            "ns4:parentIdentifier": "1684",
+            "ns4:code": "90.10.01",
+            "ns4:category": {
+              "code": "RUBRIQUE",
+              "description": [
+                {
+                  "@language": "de",
+                  "#text": "RUBRIQUE"
+                },
+                {
+                  "@language": "fr",
+                  "#text": "Rubrique"
+                }
+              ],
+              "ns4:domain": "CATEGORIE_RUBRIQUE"
+            },
+            "ns4:validityPeriod": {
+              "ns5:beginDate": "2002-10-02+02:00"
+            },
+            "ns4:label": "Déversement d’eaux usées industrielles (eaux usées autres que les eaux usées domestiques) dans les eaux de surface, les égouts publics ou les collecteurs d’eaux usées : rejets > 100 équivalent-habitant/jour ou comportant des substances dangereuses visées aux annexes Ière et VII du Livre II du Code de l’environnement, contenant le Code de l’eau",
+            "ns4:simpleLabel": "rejets supérieurs à 100 équivalent-habitant/jour ou comportant des substances dangereuses visées aux annexes Ière et VII du Livre II du Code de l’environnement, contenant le Code de l’eau",
+            "ns4:completeLabel": "Déversement d’eaux usées industrielles telles que définies à l’article D.2, 42°, du Livre II du Code de l’environnement, contenant le Code de l’Eau, dans les eaux de surface, les égouts publics ou les collecteurs d’eaux usées : Rejets supérieurs à 100 équivalent-habitant par jour ou comportant des substances dangereuses visées aux annexes Ière et VII du Livre II du Code de l’environnement, contenant le Code de l’eau",
+            "ns4:officialLabel": "Rejets supérieurs à 100 équivalent-habitant par jour ou comportant des substances dangereuses visées aux annexes Ière et VII du Livre II du Code de l’environnement, contenant le Code de l’eau",
+            "ns4:classe": {
+              "code": "2",
+              "description": [
+                {
+                  "@language": "de",
+                  "#text": "2"
+                },
+                {
+                  "@language": "fr",
+                  "#text": "Classe 2"
+                }
+              ],
+              "ns4:domain": "CLASSE"
+            },
+            "ns4:toSum": {
+              "code": "OUI",
+              "description": [
+                {
+                  "@language": "de",
+                  "#text": "OUI"
+                },
+                {
+                  "@language": "fr",
+                  "#text": "Oui"
+                }
+              ],
+              "ns4:domain": "OUI_NON_PE"
+            },
+            "ns4:unity": {
+              "code": "MIXTE",
+              "description": [
+                {
+                  "@language": "de",
+                  "#text": "MIXTE"
+                },
+                {
+                  "@language": "fr",
+                  "#text": "seuil à plusieurs critères"
+                }
+              ],
+              "ns4:domain": "UNITE"
+            },
+            "ns4:preRubric": "false",
+            "ns4:lowThreshold": "100.000",
+            "ns4:lowThresholdOperator": {
+              "code": "PLUS_GRAND",
+              "description": [
+                {
+                  "@language": "de",
+                  "#text": "PLUS_GRAND"
+                },
+                {
+                  "@language": "fr",
+                  "#text": ">"
+                }
+              ],
+              "ns4:domain": "OPERATEURS"
+            },
+            "ns4:activityArea": {
+              "code": "TRAIT_EAUX",
+              "description": [
+                {
+                  "@language": "de",
+                  "#text": "TRAIT_EAUX"
+                },
+                {
+                  "@language": "fr",
+                  "#text": "Traitement des eaux"
+                }
+              ],
+              "ns4:domain": "SECTEUR_ACTIVITE"
+            },
+            "ns4:mainActivity": {
+              "code": "DEVERS_EAUX_USEES_INDUST",
+              "description": [
+                {
+                  "@language": "de",
+                  "#text": "DEVERS_EAUX_USEES_INDUST"
+                },
+                {
+                  "@language": "fr",
+                  "#text": "Déversement d’eaux usées industrielles"
+                }
+              ],
+              "ns4:domain": "CLASSE"
+            },
+            "ns4:activityType": {
+              "code": "EVACUATION",
+              "description": [
+                {
+                  "@language": "de",
+                  "#text": "EVACUATION"
+                },
+                {
+                  "@language": "fr",
+                  "#text": "Evacuations et rejets"
+                }
+              ],
+              "ns4:domain": "TYPE_ACTIVITE"
+            },
+            "ns4:object": "eau usée industrielle",
+            "ns4:detail": "Voir aussi :\nAGW du 25 septembre 2008 déterminant les conditions sectorielles relatives aux cabines de peinture ;\nAGW du 18 juin 2009 déterminant les conditions sectorielles relatives aux installations de compostage lorsque la quantité de matière entreposée est supérieure ou égale à 500 m3 et modifiant l’arrêté du Gouvernement wallon du 4 juillet 2002 relative à la procédure et à diverses mesures d’exécution du décret du 11 mars 1999 relatif au permis d’environnement.",
+            "ns4:keyword": {
+              "ns4:code": "EAU_USEE_INDUSTRIELLE",
+              "ns4:label": "eau usée industrielle",
+              "ns4:description": "-"
+            },
+            "ns4:createAt": "2025-10-24",
+            "ns4:updateAt": "2025-10-24"
+          }
+        },
+        "ns3:rankings": null,
+        "ns3:legalTexts": null,
+        "ns3:blocks": {
+          "ns3:block": {
+            "ns4:code": "BLOC_1",
+            "ns4:label": "Bloc 1",
+            "ns4:order": "1"
+          }
+        },
+        "ns3:specialConditions": null,
+        "ns3:proposedDecisionCode": {
+          "code": "FAVORABLE",
+          "description": [
+            {
+              "@language": "de",
+              "#text": "günstig"
+            },
+            {
+              "@language": "fr",
+              "#text": "favorable"
+            }
+          ]
+        }
+      }
+    },
+    "status": {
+      "status": [
+        {
+          "code": {
+            "code": "EN_ATTENTE_REPONSE",
+            "description": [
+              {
+                "_value_1": "Warten auf Antwort",
+                "language": "de"
+              },
+              {
+                "_value_1": "En attente de réponse",
+                "language": "fr"
+              }
+            ]
+          },
+          "date": "2025-10-24T11:07:57.154000"
+        }
+      ]
+    },
+    "noticeIdentifier": {
+      "noticeId": "1496689"
+    },
+    "receptionDate": "2025-10-24T11:07:57.070000"
+  },
+  "customerTicket": "5192e793-b0ca-4e29-8e1c-3a9fc506c41d",
+  "requestId": "2abfbbe2-db77-c9b6-bb1b-5ee9a0e4ccc5",
+  "inscriptionReference": null
+}

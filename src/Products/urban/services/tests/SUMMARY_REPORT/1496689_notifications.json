@@ -1,0 +1,37 @@
+[
+    {
+        "noticeId": "1496689",
+        "noticeType": {
+            "code": "PE_DEM_COM_NOTIFICATION_RS",
+            "description": [
+                {
+                    "_value_1": "Demande PEPU - Transmission du rapport de synthèse",
+                    "language": "de"
+                },
+                {
+                    "_value_1": "Demande PEPU - Transmission du rapport de synthèse",
+                    "language": "fr"
+                }
+            ]
+        },
+        "receptionDate": "2025-10-24T11:07:57.070000",
+        "dueDate": "2025-10-30T00:00:00+01:00",
+        "noticeInstanceId": "0216.697.802",
+        "status": {
+            "code": {
+                "code": "EN_ATTENTE_REPONSE",
+                "description": [
+                    {
+                        "_value_1": "Warten auf Antwort",
+                        "language": "de"
+                    },
+                    {
+                        "_value_1": "En attente de réponse",
+                        "language": "fr"
+                    }
+                ]
+            },
+            "date": "2025-10-24T11:07:57.154000"
+        }
+    }
+]
