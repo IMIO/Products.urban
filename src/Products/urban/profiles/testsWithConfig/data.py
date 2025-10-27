@@ -460,6 +460,20 @@ EventConfigs = {
         },
     ),
     "envclasstwo": (
+      {
+            "id": "delivrance-du-permis-octroi-ou-refus",
+            "title": "Délivrance du permis (octroi ou refus)",
+            "activatedFields": (
+                "decisionDate",
+                "decision",
+            ),
+            "deadLineDelay": 15,
+            "eventDateLabel": "Date de notification",
+            "isKeyEvent": True,
+            "keyDates": ("eventDate",),
+            "podTemplates": (),
+            "eventType": ("Products.urban.interfaces.ITheLicenceEvent",),
+        },
         {
             "id": "dossier-irrecevable",
             "title": "Dossier irrecevable",
