@@ -86,6 +86,8 @@ class ImportFromNoticeView(BrowserView):
         if detailed_notification.notice_type == "NOTIFICATION_PROROGATION_COMMUNE":
             self.process_extension_of_deadline_notification(detailed_notification)
 
+        if detailed_notification.notice_type == "NOTIFICATION_RS_COMMUNE":
+            self.process_transmission_summary_report_notification(detailed_notification)
 
     def _transfert_dossier(self, detailed_notification):
         container = detailed_notification.container
@@ -201,3 +203,6 @@ class ImportFromNoticeView(BrowserView):
         license.reindexObject()
         self.update_license(license, detailed_notification, event_type="prorogation-30-jours")
         notify(ObjectModifiedEvent(license))
+    
+    def process_transmission_summary_report_notification(self, detailed_notification):
+        license = detailed_notification.licence
