@@ -8,6 +8,16 @@ Changelog
 
 .. towncrier release notes start
 
+2.8.0b1 (2025-10-27)
+--------------------
+
+New features:
+
+
+- Activate `RoadDecree` in config.py.
+  [aduchene] (URB-3151)
+
+
 2.8.0a5 (2025-09-23)
 --------------------
 
