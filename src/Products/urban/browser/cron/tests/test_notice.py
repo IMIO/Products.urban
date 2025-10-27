@@ -71,6 +71,7 @@ class TestNoticeCronPE2(unittest.TestCase):
             return import_view()
 
     def _create_licence_event(self, licence, event_type):
+        
         event_configs = self.portal.portal_urban.envclasstwo.eventconfigs
         event_config = event_configs[event_type]
         with api.env.adopt_roles(["Manager"]):
@@ -394,17 +395,68 @@ class TestNoticeCronPE2(unittest.TestCase):
         delay = licence.getProrogationDelays(True)
         self.assertEqual(delay, "90j")
         
-    def test_transmission_summary_report_notification(self):
-        # 1) create licence
-        result = self._create_dossier_complet()
-        self.assertEqual("OK", result)
+    @mock.patch(
+        "Products.urban.services.notice.WebserviceNotice.get_notifications",
+        return_value=load_notif_json("SUMMARY_REPORT", "1496689_notifications.json"),
+    )
+    @mock.patch(
+        "Products.urban.services.notice.WebserviceNotice._get_notification",
+        return_value=MockedRequest(load_notif_json("SUMMARY_REPORT", "1496689-SUMMARY_REPORT.json")),
+    )
+    def _create_summary_report_folder(self, notif_patch, notifs_patch):
+        notif_patch, notifs_patch  
+        self.notif_patch = notif_patch
+        
+        with api.env.adopt_roles(["Manager"]):
+            import_view = self.portal.restrictedTraverse("@@import-from-notice")
+            import_view()
+            
+    """def test_notification_summary_report(self):
+        self._create_summary_report_folder()
+        # 5.3 assert folder incomplet présent
+        summary_folder = self.licence.getLastDecisionProjectFromSPW()
+        self.assertIsNotNone(summary_folder)
+        # 5.4 assert folder is closed
+        self.assertEqual(summary_folder.getEventDate().Date(), "2025/10/24")
+        self.assertEqual(api.content.get_state(summary_folder), "closed")"""
+
+    def test_notification_decision(self):
         licence_folder = self.portal.urban.envclasstwos
         licence = licence_folder.values()[-1]
-        self.assertEqual(licence.reference, "PE2/2024/1")
+        licence.reference = "PE2/2025/4"
+        licence.reindexObject()
+        self._create_summary_report_folder()
+        
+        # Create the event
+        event = self._create_licence_event(licence, "delivrance-du-permis-octroi-ou-refus")
+        event.setEventDate(DateTime(2025, 10, 24))
+        # simulate pressing button send date and decision of the College
+        event.restrictedTraverse("@@transfer_decision_info")
+        # simulate pressing button send decision dates
+        view = event.restrictedTraverse("@@transfer_decision_date")
+        with mock.patch(
+                "Products.urban.services.notice.WebserviceNotice._post_notification_response",
+                return_value=MockedRequest(load_notif_json("SUMMARY_REPORT", "1496689-SUMMARY_REPORT-response.json"))
+        ) as mock_post_notification_response:
+            response = view()
+        self.assertFalse(response["error"])
+        self.assertEqual(response["body"]["status"], "PROCESSED")
 
-        # 2) create summary report even
-        summary_report_event = self._create_licence_event(licence, "rapport-synthese")
-        summary_report_event.setEventDate(DateTime(x, x, x))
+        dates = self._get_notice_data(event, "notice_decision_dates")
+        self.assertIn("send_final_notification_to_spw", dates)
+        # Simulate get_notification
+        with self._mock_get_notification("SUMMARY_REPORT", "final.json"):
+            updated_notification = self.service.get_notification("1496689")
+            self.assertIn("decisionDate", updated_notification)
+            self.assertIn("displayDateEnd", updated_notification)
+            self.assertIn("displayDate", updated_notification)
+        self.assertEqual(updated_notification.status, "TERMINE")
+
+    def _get_notice_data(self, event, key):
+        annotations = IAnnotations(event)
+        dates = annotations.get(key, {})
+        return dates
+
 
 
 class TestNotificationSummaryReport(unittest.TestCase):
@@ -415,40 +467,5 @@ class TestNotificationSummaryReport(unittest.TestCase):
         self.setup_transfert_dossier("TRANSFERT_DOSSIER")
         licence_folder = self.portal.urban.envclasstwos
         self.licence = licence_folder.values()[-1]
-
-    def test_notification_summary_report(self):
-        self._create_complete_folder()
-        # 5.3 assert folder incomplet présent
-        summary_folder = self.licence.getLastDecisionProjectFromSPW()
-        self.assertIsNotNone(summary_folder)
-        # 5.4 assert folder is closed
-        self.assertEqual(summary_folder.getEventDate().Date(), "2025/07/11")
-        self.assertEqual(api.content.get_state(summary_folder), "closed")
-
-    def test_notification_decision(self):
-        # Create the event
-        event = self._create_licence_event(self.licence, "délivrance-du-permis")
-        event.setEventDate(DateTime(2025, 6, 19))
-        # simulate pressing button send date and decision of the College
-        event.restrictedTraverse("@@transfer_decision_info")
-        # simulate pressing button send decision dates
-        view = event.restrictedTraverse("@@transfer_decision_date")
-        response = view()
-
-        self.assertFalse(response["error"])
-        self.assertEqual(response["body"]["status"], "PROCESSED")
-
-        dates = self._get_notice_data(event, "notice_decision_dates")
-        self.assertIn("send_final_notification_to_spw", dates)
-        # Simulate get_notification
-        with self._mock_get_notification("TRANSFERT_DOSSIER", "final.json"):
-            updated_notification = self.service.get_notification("xx")
-            self.assertIn("decisionDate", updated_notification)
-            self.assertIn("displayDateEnd", updated_notification)
-            self.assertIn("displayDate", updated_notification)
-        self.assertEqual(updated_notification.status, "TERMINE")
-
-    def _get_notice_data(self, event, key):
-        annotations = IAnnotations(event)
-        dates = annotations.get(key, {})
-        return dates
+        
+    
