@@ -156,12 +156,12 @@ class ImportFromNoticeView(BrowserView):
         if not configs:
             return
         with api.env.adopt_roles(["Manager"]):
-            for etype, event_config in configs:
+            for et, event_config in configs:
                 event = license.createUrbanEvent(event_config)
                 event_date = DateTime(str(detailed_notification.send_date))
                 event.setEventDate(event_date)
                 api.content.transition(event, "close")
-                transition = EVENT_TYPE_TO_TRANSITION.get(etype)
+                transition = event_type_to_transition.get(et)
                 if transition:
                     api.content.transition(license, transition)
 
@@ -206,3 +206,6 @@ class ImportFromNoticeView(BrowserView):
     
     def process_transmission_summary_report_notification(self, detailed_notification):
         license = detailed_notification.licence
+        list_event = ["rapport-synthese","pre-decision","decision","affichage-decision"]
+        self.update_license(license, detailed_notification, event_type= list_event)
+        
