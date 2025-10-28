@@ -27,6 +27,7 @@ from Products.urban import UrbanMessage as _
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.config import *
 from Products.urban.content.licence.EnvironmentBase import EnvironmentBase
+
 ##code-section module-header #fill in your manual code here
 from Products.urban.interfaces import IEnvironmentBase
 from Products.urban.utils import setOptionalAttributes

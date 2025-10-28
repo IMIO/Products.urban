@@ -8,6 +8,7 @@ __docformat__ = "plaintext"
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from Products.Archetypes.utils import DisplayList
+
 ##code-section module-header #fill in your manual code here
 from Products.CMFCore.utils import getToolByName
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin

@@ -4,16 +4,19 @@ from Products.urban.config import URBAN_TYPES
 from Products.urban.interfaces import IBaseBuildLicence
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.profiles.extra.config_default_values import default_values
-from Products.urban.profiles.extra.schedule_config import \
-    schedule_config as schedule_config_dict
+from Products.urban.profiles.extra.schedule_config import (
+    schedule_config as schedule_config_dict,
+)
 from Products.urban.setuphandlers import createFolderDefaultValues
 from Products.urban.setuphandlers import createVocabularyFolder
 from collective.documentgenerator.content.pod_template import IConfigurablePODTemplate
 from collective.documentgenerator.content.pod_template import IPODTemplate
-from collective.documentgenerator.content.vocabulary import \
-    AllPODTemplateWithFileVocabularyFactory
-from collective.documentgenerator.search_replace.pod_template import \
-    SearchAndReplacePODTemplates
+from collective.documentgenerator.content.vocabulary import (
+    AllPODTemplateWithFileVocabularyFactory,
+)
+from collective.documentgenerator.search_replace.pod_template import (
+    SearchAndReplacePODTemplates,
+)
 from plone import api
 from plone.app.textfield import RichTextValue
 from plone.app.uuid.utils import uuidToObject

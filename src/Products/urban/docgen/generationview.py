@@ -2,10 +2,12 @@
 
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.interfaces import IUrbanDoc
-from collective.documentgenerator.browser.generation_view import \
-    MailingLoopPersistentDocumentGenerationView
-from collective.documentgenerator.browser.generation_view import \
-    PersistentDocumentGenerationView
+from collective.documentgenerator.browser.generation_view import (
+    MailingLoopPersistentDocumentGenerationView,
+)
+from collective.documentgenerator.browser.generation_view import (
+    PersistentDocumentGenerationView,
+)
 from plone import api
 from plone.app.uuid.utils import uuidToObject
 from zope.interface import alsoProvides

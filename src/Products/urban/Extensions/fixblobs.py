@@ -2,6 +2,7 @@
 from Products.Archetypes.interfaces import IBaseContent
 from ZODB.POSException import POSKeyError
 from plone import api
+
 # Plone imports
 from plone.app.blob.subtypes.file import ExtensionBlobField
 from plone.dexterity.content import DexterityContent

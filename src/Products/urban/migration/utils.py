@@ -2,8 +2,9 @@
 
 from Products.urban.events import licenceEvents
 from imio.schedule import utils
-from imio.schedule.events.zope_registration import \
-    unsubscribe_task_configs_for_content_type
+from imio.schedule.events.zope_registration import (
+    unsubscribe_task_configs_for_content_type,
+)
 from plone import api
 
 import logging

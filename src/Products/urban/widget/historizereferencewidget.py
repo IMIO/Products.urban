@@ -4,8 +4,9 @@ from Products.Archetypes.Registry import registerWidget
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.urban import UrbanMessage as _
 from Products.urban.events.envclassEvents import get_value_history_by_index
-from archetypes.referencebrowserwidget.browser.view import \
-    ReferenceBrowserHelperView  # noqa
+from archetypes.referencebrowserwidget.browser.view import (  # noqa
+    ReferenceBrowserHelperView,
+)
 from archetypes.referencebrowserwidget.widget import ReferenceBrowserWidget
 from imio.history.utils import add_event_to_history
 from plone.z3cform.layout import FormWrapper

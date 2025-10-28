@@ -16,12 +16,14 @@ __docformat__ = "plaintext"
 from AccessControl import ClassSecurityInfo
 from DateTime import DateTime
 from OFS.interfaces import IOrderedContainer
-from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
-    ReferenceBrowserWidget
+from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import (
+    ReferenceBrowserWidget,
+)
 from Products.Archetypes.OrderedBaseFolder import OrderedContainer
 from Products.Archetypes.atapi import *
 from Products.Archetypes.public import DisplayList
 from Products.CMFCore.Expression import Expression
+
 ##code-section module-header #fill in your manual code here
 from Products.CMFCore.utils import getToolByName
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin

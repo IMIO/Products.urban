@@ -14,10 +14,12 @@ __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEUL
 __docformat__ = "plaintext"
 
 from AccessControl import ClassSecurityInfo
-from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
-    ReferenceBrowserWidget
+from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import (
+    ReferenceBrowserWidget,
+)
 from Products.Archetypes.atapi import *
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
+
 ##code-section module-header #fill in your manual code here
 from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
 from Products.urban import interfaces

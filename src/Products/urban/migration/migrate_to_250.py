@@ -16,8 +16,9 @@ from Products.urban.migration.utils import restore_licence_default_values
 from Products.urban.setuphandlers import setFolderAllowedTypes
 from Products.urban.utils import getLicenceFolderId
 from collective.documentgenerator.content.pod_template import IConfigurablePODTemplate
-from collective.iconifieddocumentactions.upgrades import \
-    move_to_collective_iconifieddocumentactions
+from collective.iconifieddocumentactions.upgrades import (
+    move_to_collective_iconifieddocumentactions,
+)
 from collective.noindexing import patches
 from imio.schedule.content.object_factories import MacroCreationConditionObject
 from imio.schedule.content.object_factories import MacroEndConditionObject

@@ -75,8 +75,13 @@ class ImportFromNoticeView(BrowserView):
             )
         if detailed_notification.notice_type == "NOTIF_COMPLETUDE2_IRRECEVABLE_COMMUNE":
             self.process_inadmissible_folder_notification(detailed_notification)
-        if detailed_notification.notice_type == "NOTIF_COMPLETUDE1_NON_RECEVABLE_COMMUNE":
-            self.process_not_admissible_folder_notification_first_tour(detailed_notification)
+        if (
+            detailed_notification.notice_type
+            == "NOTIF_COMPLETUDE1_NON_RECEVABLE_COMMUNE"
+        ):
+            self.process_not_admissible_folder_notification_first_tour(
+                detailed_notification
+            )
 
     def _transfert_dossier(self, detailed_notification):
         container = detailed_notification.container
@@ -130,7 +135,7 @@ class ImportFromNoticeView(BrowserView):
     def update_license(self, license, detailed_notification, event_type=None):
         if not event_type:
             return
-        
+
         event_configs = detailed_notification.event_configs
         # Normalizing event_type to list
         if isinstance(event_type, (list, tuple)):
@@ -176,8 +181,12 @@ class ImportFromNoticeView(BrowserView):
             license, detailed_notification, event_type="dossier-irrecevable"
         )
         transaction.commit()
-    
-    def process_not_admissible_folder_notification_first_tour(self, detailed_notification):        
+
+    def process_not_admissible_folder_notification_first_tour(
+        self, detailed_notification
+    ):
         licence = detailed_notification.licence
-        self.update_licence(licence, detailed_notification, event_type="dossier-incomplet")
+        self.update_licence(
+            licence, detailed_notification, event_type="dossier-incomplet"
+        )
         transaction.commit()

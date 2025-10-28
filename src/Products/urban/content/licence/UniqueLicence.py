@@ -15,8 +15,9 @@ __docformat__ = "plaintext"
 
 from AccessControl import ClassSecurityInfo
 from DateTime import DateTime
-from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
-    ReferenceBrowserWidget
+from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import (
+    ReferenceBrowserWidget,
+)
 from Products.Archetypes.atapi import *
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.urban import interfaces
@@ -24,14 +25,17 @@ from Products.urban import UrbanMessage as _
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.config import *
 from Products.urban.content.licence.BaseBuildLicence import BaseBuildLicence
-from Products.urban.content.licence.BaseBuildLicence import \
-    finalizeSchema as firstBaseFinalizeSchema
-from Products.urban.content.licence.BuildLicence import \
-    finalizeSchema as secondBaseFinalizeSchema
+from Products.urban.content.licence.BaseBuildLicence import (
+    finalizeSchema as firstBaseFinalizeSchema,
+)
+from Products.urban.content.licence.BuildLicence import (
+    finalizeSchema as secondBaseFinalizeSchema,
+)
 from Products.urban.content.licence.EnvironmentBase import EnvironmentBase
 from Products.urban.utils import setOptionalAttributes
-from Products.urban.widget.historizereferencewidget import \
-    HistorizeReferenceBrowserWidget
+from Products.urban.widget.historizereferencewidget import (
+    HistorizeReferenceBrowserWidget,
+)
 from Products.urban.widget.select2widget import MultiSelect2Widget
 from plone import api
 from zope.i18n import translate

@@ -14,6 +14,7 @@ __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEUL
 __docformat__ = "plaintext"
 
 from AccessControl import ClassSecurityInfo
+
 ##code-section module-header #fill in your manual code here
 from Acquisition import aq_inner
 from Acquisition import aq_parent

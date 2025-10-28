@@ -16,16 +16,20 @@ from imio.schedule.content.object_factories import MacroFreezeConditionObject
 from imio.schedule.content.object_factories import MacroRecurrenceConditionObject
 from imio.schedule.content.object_factories import MacroStartConditionObject
 from imio.schedule.content.object_factories import MacroThawConditionObject
-from imio.schedule.events.zope_registration import \
-    register_schedule_collection_criterion
+from imio.schedule.events.zope_registration import (
+    register_schedule_collection_criterion,
+)
 from imio.schedule.events.zope_registration import register_task_collection_criterion
-from imio.schedule.events.zope_registration import \
-    subscribe_task_configs_for_content_type
-from imio.schedule.events.zope_registration import \
-    unregister_schedule_collection_criterion
+from imio.schedule.events.zope_registration import (
+    subscribe_task_configs_for_content_type,
+)
+from imio.schedule.events.zope_registration import (
+    unregister_schedule_collection_criterion,
+)
 from imio.schedule.events.zope_registration import unregister_task_collection_criterion
-from imio.schedule.events.zope_registration import \
-    unsubscribe_task_configs_for_content_type
+from imio.schedule.events.zope_registration import (
+    unsubscribe_task_configs_for_content_type,
+)
 from plone import api
 from plone.registry import Record
 from plone.registry.field import Dict

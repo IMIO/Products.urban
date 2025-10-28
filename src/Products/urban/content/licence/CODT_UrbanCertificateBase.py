@@ -21,9 +21,11 @@ from Products.urban import interfaces
 from Products.urban import UrbanMessage as _
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.config import *
-from Products.urban.content.licence.UrbanCertificateBase import \
-    finalizeSchema as UrbanCertificateBase_finalizeSchema
+from Products.urban.content.licence.UrbanCertificateBase import (
+    finalizeSchema as UrbanCertificateBase_finalizeSchema,
+)
 from Products.urban.content.licence.UrbanCertificateBase import UrbanCertificateBase
+
 ##code-section module-header #fill in your manual code here
 from zope.i18n import translate
 from zope.interface import implements

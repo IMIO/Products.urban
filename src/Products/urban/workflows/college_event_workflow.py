@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from Products.urban.workflows.urbanevent_workflow import \
-    StateRolesMapping as BaseRolesMapping
+from Products.urban.workflows.urbanevent_workflow import (
+    StateRolesMapping as BaseRolesMapping,
+)
 from collections import OrderedDict
 
 

@@ -36,8 +36,9 @@ from Products.urban.interfaces import IUrbanEvent
 from Products.urban.utils import get_interface_by_path
 from Products.urban.utils import is_attachment
 from Products.urban.utils import setOptionalAttributes
-from Products.urban.widget.historizereferencewidget import \
-    HistorizeReferenceBrowserWidget
+from Products.urban.widget.historizereferencewidget import (
+    HistorizeReferenceBrowserWidget,
+)
 from Products.urban.widget.select2widget import MultiSelect2Widget
 from archetypes.referencebrowserwidget.widget import ReferenceBrowserWidget
 from collective.datagridcolumns.ReferenceColumn import ReferenceColumn
@@ -52,6 +53,7 @@ from zope.annotation import IAnnotations
 from zope.component import createObject
 from zope.event import notify
 from zope.globalrequest import getRequest
+
 # code-section module-header #fill in your manual code here
 from zope.i18n import translate
 from zope.interface import implements

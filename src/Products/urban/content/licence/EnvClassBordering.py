@@ -3,6 +3,7 @@
 
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
+
 ##code-section module-header #fill in your manual code here
 from Products.DataGridField import DataGridField
 from Products.DataGridField import DataGridWidget
