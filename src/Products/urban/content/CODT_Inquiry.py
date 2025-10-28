@@ -25,6 +25,7 @@ from Products.urban.config import *
 from Products.urban.content.Inquiry import Inquiry
 from Products.urban.utils import setOptionalAttributes
 from Products.urban.widget.select2widget import MultiSelect2Widget
+
 ##code-section module-header #fill in your manual code here
 from zope.i18n import translate
 from zope.interface import implements

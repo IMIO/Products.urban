@@ -19,6 +19,7 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.urban.UrbanEvent import UrbanEvent
 from Products.urban.config import *
 from archetypes.referencebrowserwidget.widget import ReferenceBrowserWidget
+
 ##code-section module-header #fill in your manual code here
 from plone import api
 from zope.interface import implements

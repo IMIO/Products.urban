@@ -20,8 +20,9 @@ from Products.urban import interfaces
 from Products.urban import UrbanMessage as _
 from Products.urban.config import *
 from Products.urban.content.licence.CODT_UniqueLicence import CODT_UniqueLicence
-from Products.urban.content.licence.CODT_UniqueLicence import \
-    finalizeSchema as firstBaseFinalizeSchema
+from Products.urban.content.licence.CODT_UniqueLicence import (
+    finalizeSchema as firstBaseFinalizeSchema,
+)
 from Products.urban.utils import setOptionalAttributes
 from Products.urban.utils import setSchemataForCODT_UniqueLicenceInquiry
 from Products.urban.widget.select2widget import MultiSelect2Widget

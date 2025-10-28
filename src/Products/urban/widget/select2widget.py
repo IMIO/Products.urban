@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
-from collective.archetypes.select2.select2widget import \
-    MultiSelect2Widget as CollectiveMultiSelect2Widget
-from collective.archetypes.select2.select2widget import \
-    Select2Widget as CollectiveSelect2Widget
+from collective.archetypes.select2.select2widget import (
+    MultiSelect2Widget as CollectiveMultiSelect2Widget,
+)
+from collective.archetypes.select2.select2widget import (
+    Select2Widget as CollectiveSelect2Widget,
+)
 from zope.component import getUtility
 from zope.schema.interfaces import IVocabularyFactory
 

@@ -14,8 +14,9 @@ __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEUL
 __docformat__ = "plaintext"
 
 from AccessControl import ClassSecurityInfo
-from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
-    ReferenceBrowserWidget
+from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import (
+    ReferenceBrowserWidget,
+)
 from Products.Archetypes.atapi import *
 from Products.CMFCore.utils import getToolByName
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
@@ -34,6 +35,7 @@ from Products.urban.content.licence.GenericLicence import GenericLicence
 from Products.urban.utils import setOptionalAttributes
 from Products.urban.widget.select2widget import MultiSelect2Widget
 from collective.datagridcolumns.TextAreaColumn import TextAreaColumn
+
 ##code-section module-header #fill in your manual code here
 from zope.i18n import translate
 from zope.interface import implements

@@ -15,11 +15,13 @@ __docformat__ = "plaintext"
 
 from AccessControl import ClassSecurityInfo
 from Acquisition import aq_parent
+
 ##code-section module-header #fill in your manual code here
 from DateTime import DateTime
 from Products.ATContentTypes.interfaces.file import IATFile
-from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
-    ReferenceBrowserWidget
+from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import (
+    ReferenceBrowserWidget,
+)
 from Products.Archetypes.atapi import *
 from Products.CMFCore.utils import getToolByName
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
