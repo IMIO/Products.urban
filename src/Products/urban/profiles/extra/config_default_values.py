@@ -3058,6 +3058,39 @@ default_values = {
         ],
     },
     "global": {
+        "dimensiontypes": [
+            "UrbanVocabularyTerm",
+            {"id": "width", "title": u"Largeur"},
+            {"id": "height", "title": u"Hauteur"},
+            {"id": "depth", "title": u"Profondeur"},
+            {"id": "area", "title": u"Surface de plancher"},
+            {"id": "living_area", "title": u"Surface habitable"},
+            {"id": "built_area", "title": u"Surface bâtie"},
+            {"id": "unbuilt_area", "title": u"Surface non bâtie"},
+            {"id": "green_space_area", "title": u"Surface d'espaces verts"},
+            {"id": "roof_area", "title": u"Surface de toiture"},
+            {"id": "volume", "title": u"Volume"},
+            {"id": "building_footprint", "title": u"Emprise au sol"},
+            {"id": "number_of_floors", "title": u"Nombre d'étages"},
+            {
+                "id": "distance_to_property_line",
+                "title": u"Distance à la limite de propriété",
+            },
+            {"id": "front_length", "title": u"Longueur de façade"},
+            {"id": "front_height", "title": u"Hauteur de façade"},
+        ],
+        "units": [
+            "UrbanVocabularyTerm",
+            {"id": "m", "title": u"m"},
+            {"id": "m2", "title": u"m²"},
+            {"id": "m3", "title": u"m³"},
+            {"id": "km", "title": u"km"},
+            {"id": "ha", "title": u"ha"},
+            {"id": "floor", "title": u"étage(s)"},
+            {"id": "unit", "title": u"unité(s)"},
+            {"id": "percent", "title": u"%"},
+            {"id": "degree", "title": u"°"},
+        ],
         "deposittype": [
             "UrbanVocabularyTerm",
             {"id": "recommande", "title": u"Par recommandé postal"},
@@ -3813,6 +3846,48 @@ default_values = {
             {"id": "observation", "title": u"Observation"},
             {"id": "interne", "title": u"Demande interne"},
             {"id": "externe", "title": u"Demande externe"},
+        ],
+    },
+    "Housing": {
+        "observationitems": [
+            "UrbanVocabularyTerm",
+            {
+                "id": "no_population_registration",
+                "title": u"L’immeuble (ou partie d’immeuble) ne fait pas l’objet d’une inscription dans les registres de la population",
+            },
+            {
+                "id": "no_waiting_registration",
+                "title": u"L’immeuble (ou partie d’immeuble) ne fait pas l’objet d’une inscription dans les registres d’attente",
+            },
+            {
+                "id": "no_bce_registration",
+                "title": u"L’immeuble (ou partie d’immeuble) ne fait pas l’objet d’une inscription à la Banque-Carrefour des Entreprises",
+            },
+            {
+                "id": "subject_to_environmental_decree",
+                "title": u"L’exploitation de l’immeuble (ou partie d’immeuble) relève du décret du 11 mars 1999 relatif au permis d’environnement",
+            },
+            {
+                "id": "expired_environmental_permit",
+                "title": u"Le permis d’exploiter, d’environnement, unique ou la déclaration requise n’a pas été mis en œuvre et est périmé",
+            },
+            {
+                "id": "environmental_order_or_suspension",
+                "title": u"L’établissement fait l’objet d’un ordre d’arrêter l’exploitation, d’un retrait ou d’une suspension d’autorisation prononcés en vertu du décret susmentionné",
+            },
+            {
+                "id": "commercial_closure_order",
+                "title": u"L’occupation de l’immeuble (ou partie d’immeuble) relève d’une activité soumise à autorisation d’implantation en vertu de la loi du 29 juin 1975 ou du décret du 5 février 2015, or ladite implantation est frappée d’un ordre de fermeture, d’un retrait ou d’une suspension d’autorisation prononcés en vertu des dispositions de la loi du 13 août 2004 ou d’une mesure de sanction prévue par l’article 68 du décret précité",
+            },
+        ],
+        "buildingtype": [
+            "UrbanVocabularyTerm",
+        ],
+        "inspectioncontexts": [
+            "UrbanVocabularyTerm",
+        ],
+        "part_of_the_building_concerned": [
+            "UrbanVocabularyTerm",
         ],
     },
 }

@@ -1354,32 +1354,50 @@ class UrbanDocGenerationEventHelperView(UrbanDocGenerationHelperView):
         )
 
     def _get_wspm_field(self, field_name):
+        """Get the field value from the linked item"""
         field = "NO FIELD {} FOUND".format(field_name)
-        linked_pm_items = get_ws_meetingitem_infos(
-            self.real_context, extra_attributes=True
+        linked_item = get_ws_meetingitem_infos(
+            self.real_context, query_hook=lambda q: q.update({"metadata_fields": field_name}), first=True
         )
-        if linked_pm_items:
-            linked_item = linked_pm_items[0]
-            if field_name in linked_item:
-                field = linked_item[field_name]
-            elif field_name in linked_item.extraInfos:
-                field = linked_item.extraInfos[field_name]
+        if linked_item and field_name in linked_item:
+            field = linked_item[field_name]
+        return field
+
+    def _get_wspm_meeting_field(self, field_name):
+        """Get the field value from the linked item's meeting"""
+        field = "NO FIELD {} FOUND".format(field_name)
+        meeting_query = {"extra_include": "meeting",
+                         "extra_include_meeting_fullobjects": "True"}
+        linked_item = get_ws_meetingitem_infos(
+            self.real_context, query_hook=lambda q: q.update(meeting_query), first=True
+        )
+        if linked_item and field_name in linked_item["extra_include_meeting"]:
+            field = linked_item["extra_include_meeting"][field_name]
         return field
 
     def _get_wspm_text_field(self, field_name):
-        text = self._get_wspm_field(field_name)
-        corrected_text = re.sub("\n\s*\n", "\n<p>&nbsp;</p>\n", text)
-        return corrected_text
+        """Get the text field value from the linked item"""
+        field = self._get_wspm_field(field_name)
+        return field.get("data", "") if isinstance(field, dict) else field
 
-    def get_wspm_decision_date(self, translatemonth=True, long_format=False):
-        field_name = "meeting_date"
-        decision_date = "NO FIELD {} FOUND".format(field_name)
-        raw_date = self._get_wspm_field(field_name)
-        if raw_date != decision_date:
-            decision_date = self.helper_view.format_date(
-                date=raw_date, translatemonth=translatemonth, long_format=long_format
-            )
-        return decision_date
+    def get_wspm_decision_date(self, translatemonth=True, long_format=False, no_date="-"):
+        """
+        Get the actual decision date from the linked item, if any.
+        Use translatemonth and long_format to format the date.
+        no_date is used when no date is found.
+        """
+        linked_item = get_ws_meetingitem_infos(self.real_context, extra_attributes=False, first=True)
+        if not linked_item:
+            return no_date
+        ws4pmSettings = get_ws_plonemeeting(self.real_context)
+        raw_date = ws4pmSettings._rest_getDecidedMeetingDate(
+            {'externalIdentifier': self.real_context.UID()},
+            item_portal_type=linked_item["@type"]
+        )
+        if not raw_date:
+            return no_date
+        decided_date = self.helper_view.format_date(date=raw_date, translatemonth=translatemonth, long_format=long_format)
+        return decided_date
 
     def get_wspm_description_text(self):
         field_name = "description"
@@ -1398,8 +1416,9 @@ class UrbanDocGenerationEventHelperView(UrbanDocGenerationHelperView):
 
     def get_wspm_meeting_state(self):
         field_name = "review_state"
-        state = self._get_wspm_text_field(field_name)
-        return state
+        state = self._get_wspm_field(field_name)
+        self._get_wspm_meeting_field(field_name)
+        return state.get('title')
 
 
 class UrbanDocGenerationFacetedHelperView(ATDocumentGenerationHelperView):

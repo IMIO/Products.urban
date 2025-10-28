@@ -309,6 +309,10 @@
     interface=".interfaces.IIntentionToSubmitAmendedPlans"
     type=".interfaces.IEventTypeType"/>
 
+  <interface
+    interface=".interfaces.IObservationEvent"
+    type=".interfaces.IEventTypeType"/>
+
   <adapter
     for="Products.CMFCore.interfaces.ICatalogAware
         Products.Archetypes.interfaces.IUIDCatalog"

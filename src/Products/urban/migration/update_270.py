@@ -211,9 +211,11 @@ def _replace_object(obj, new_type, condition=None, logger=None):
     dashboard_collection.showNumberOfItems = True
 
     query = [
-        {"i": filter["i"], "o": filter["o"], "v": old_obj_data["UID"]}
-        if filter["i"] == "CompoundCriterion"
-        else filter
+        (
+            {"i": filter["i"], "o": filter["o"], "v": old_obj_data["UID"]}
+            if filter["i"] == "CompoundCriterion"
+            else filter
+        )
         for filter in dashboard_collection.query
     ]
 
@@ -380,7 +382,7 @@ def add_new_registry_profil(context):
     logger.info("starting migration steps")
 
     registry = getUtility(IRegistry)
-    attributes = {"title": _(u"Planned address"), "description": _(u"address planned")}
+    attributes = {"title": _("Planned address"), "description": _("address planned")}
     key = "Products.urban.interfaces.IAsyncInquiryRadius.inquiries_address_to_do"
     registry_field = Dict(**attributes)
     registry_record = Record(registry_field)
@@ -488,8 +490,8 @@ def add_new_registry_for_missing_capakey(context):
     registry = getUtility(IRegistry)
     key = "Products.urban.interfaces.IMissingCapakey"
     registry_field = List(
-        title=u"Missing capakey",
-        description=u"List of missing capakey",
+        title="Missing capakey",
+        description="List of missing capakey",
         value_type=TextLine(),
     )
     registry_record = Record(registry_field)
