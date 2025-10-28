@@ -16,6 +16,7 @@ __docformat__ = "plaintext"
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
+
 ##code-section module-header #fill in your manual code here
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 from Products.urban.Contact import Contact
