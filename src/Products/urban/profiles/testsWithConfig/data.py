@@ -468,9 +468,7 @@ EventConfigs = {
             "eventType": ("Products.urban.interfaces.IRefusedIncompletenessEvent",),
             "isKeyEvent": True,
             "keyDates": ("eventDate",),
-            "podTemplates": (
-            ),
-            
+            "podTemplates": (),
         },
         {
             "id": "dossier-incomplet",

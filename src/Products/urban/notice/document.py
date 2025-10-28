@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from Products.urban.notice.base import NoticeElement
-from plone.namedfile.file import NamedBlobFile
 from base64 import b64decode
+from plone.namedfile.file import NamedBlobFile
 
 
 class NoticeDocument(NoticeElement):

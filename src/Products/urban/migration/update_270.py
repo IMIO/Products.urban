@@ -16,20 +16,16 @@ from imio.schedule.content.object_factories import MacroFreezeConditionObject
 from imio.schedule.content.object_factories import MacroRecurrenceConditionObject
 from imio.schedule.content.object_factories import MacroStartConditionObject
 from imio.schedule.content.object_factories import MacroThawConditionObject
-from imio.schedule.events.zope_registration import (
-    register_schedule_collection_criterion,
-)
+from imio.schedule.events.zope_registration import \
+    register_schedule_collection_criterion
 from imio.schedule.events.zope_registration import register_task_collection_criterion
-from imio.schedule.events.zope_registration import (
-    subscribe_task_configs_for_content_type,
-)
-from imio.schedule.events.zope_registration import (
-    unregister_schedule_collection_criterion,
-)
+from imio.schedule.events.zope_registration import \
+    subscribe_task_configs_for_content_type
+from imio.schedule.events.zope_registration import \
+    unregister_schedule_collection_criterion
 from imio.schedule.events.zope_registration import unregister_task_collection_criterion
-from imio.schedule.events.zope_registration import (
-    unsubscribe_task_configs_for_content_type,
-)
+from imio.schedule.events.zope_registration import \
+    unsubscribe_task_configs_for_content_type
 from plone import api
 from plone.registry import Record
 from plone.registry.field import Dict
@@ -41,6 +37,7 @@ from zope.component import getMultiAdapter
 from zope.component import getUtility
 
 import logging
+
 
 logger = logging.getLogger("urban: migrations")
 
@@ -263,25 +260,25 @@ def add_new_voc_terms_for_form_composition(context):
     # for the existing vocabulary terms
     # that will be initiated in each new instance
     form_composition_new_vocabulary_terms_to_add = [
-        {"id": "10", "title": "1/1 Formulaire général permis environnement et unique"},
-        {"id": "11", "title": "1/2 Élevage et détention d'animaux"},
+        {"id": "10", "title": u"1/1 Formulaire général permis environnement et unique"},
+        {"id": "11", "title": u"1/2 Élevage et détention d'animaux"},
         {
             "id": "12",
-            "title": "Annexe V/1 - Implantation d'un commerce",
+            "title": u"Annexe V/1 - Implantation d'un commerce",
         },
         {
             "id": "13",
-            "title": "Annexe IX - Permis d'urbanisme dispensé d'un architecte ou autre que les demandes visées aux annexes 5 à 8",
+            "title": u"Annexe IX - Permis d'urbanisme dispensé d'un architecte ou autre que les demandes visées aux annexes 5 à 8",
         },
         {
             "id": "14",
-            "title": "Annexe X - Demande de permis d'urbanisation ou de modification de permis d'urbanisation",
+            "title": u"Annexe X - Demande de permis d'urbanisation ou de modification de permis d'urbanisation",
         },
         {
             "id": "15",
-            "title": "Annexe XI - Demande de permis d'urbanisation ou de modification de permis d'urbanisation avec contenu simplifié",
+            "title": u"Annexe XI - Demande de permis d'urbanisation ou de modification de permis d'urbanisation avec contenu simplifié",
         },
-        {"id": "16", "title": "Annexe XV - Demande de certificat d'urbanisme n°2"},
+        {"id": "16", "title": u"Annexe XV - Demande de certificat d'urbanisme n°2"},
     ]
 
     createFolderDefaultValues(

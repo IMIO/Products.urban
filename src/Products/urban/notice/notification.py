@@ -50,7 +50,9 @@ class NoticeNotification(NoticeElement):
         Return the last status
         beware: random order !
         """
-        sorted_status = sorted(self._get_data("status", "status"), key=lambda x: x["date"])
+        sorted_status = sorted(
+            self._get_data("status", "status"), key=lambda x: x["date"]
+        )
         return sorted_status[-1]
 
     @property
@@ -97,7 +99,9 @@ class NoticeNotification(NoticeElement):
                             "/dataStore/item/classe"
                         )
                         penv_classe = (
-                            classe_elements[0].text if len(classe_elements) == 1 else None
+                            classe_elements[0].text
+                            if len(classe_elements) == 1
+                            else None
                         )
                         self._licence_type = {
                             "1": "EnvClassOne",
@@ -122,11 +126,13 @@ class NoticeNotification(NoticeElement):
         specific = {
             "TRANSFERT_DOSSIER": "ns3:TwiceDefaultRequest",
             "DEMANDE_EP": "ns3:PublicSurveyRequest",
-            "NOTIF_COMPLETUDE1_INCOMPLET_COMMUNE":"ns3:TwiceDefaultRequest",
-            "NOTIF_COMPLETUDE2_NON_RECEVABLE_COMMUNE":"ns3:TwiceDefaultRequest",
-            "NOTIF_COMPLETUDE2_IRRECEVABLE_COMMUNE":"ns3:TwiceDefaultRequest",
+            "NOTIF_COMPLETUDE1_INCOMPLET_COMMUNE": "ns3:TwiceDefaultRequest",
+            "NOTIF_COMPLETUDE2_NON_RECEVABLE_COMMUNE": "ns3:TwiceDefaultRequest",
+            "NOTIF_COMPLETUDE2_IRRECEVABLE_COMMUNE": "ns3:TwiceDefaultRequest",
         }
-        return self._get_data("specific", specific.get(self.notice_type), "ns3:municipalityReference")
+        return self._get_data(
+            "specific", specific.get(self.notice_type), "ns3:municipalityReference"
+        )
 
     @property
     def _pj_formulaire_xml_tree(self):
@@ -190,7 +196,9 @@ class NoticeNotification(NoticeElement):
     @property
     def event_configs(self):
         portal_urban_folder = api.portal.get().urban.portal_urban
-        licence_type_folder = getattr(portal_urban_folder, "{0}".format(self.type.lower()))
+        licence_type_folder = getattr(
+            portal_urban_folder, "{0}".format(self.type.lower())
+        )
         return getattr(licence_type_folder, "eventconfigs")
 
     def event_config(self, interface_identifier):
@@ -198,7 +206,9 @@ class NoticeNotification(NoticeElement):
         Return the event config for a given marker interface identifier.
         """
         for brain in api.content.find(
-            context=self.event_configs, portal_type="EventConfig", review_state="enabled"
+            context=self.event_configs,
+            portal_type="EventConfig",
+            review_state="enabled",
         ):
             config = brain.getObject()
             config_event_types = config.eventType or []

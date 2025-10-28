@@ -1,16 +1,14 @@
 # -*- coding: utf-8 -*-
 from Acquisition import aq_base
-from datetime import date
 from DateTime import DateTime
-
 from Products.urban import testing
+from Products.urban.interfaces import IRefusedIncompletenessEvent
 from Products.urban.services.notice import WebserviceNotice
 from Products.urban.services.tests.data import load_notif_content
 from Products.urban.services.tests.data import load_notif_json
-from Products.urban.interfaces import IRefusedIncompletenessEvent
-        
-from zope.annotation.interfaces import IAnnotations
+from datetime import date
 from plone import api
+from zope.annotation.interfaces import IAnnotations
 
 import mock
 import unittest
@@ -43,14 +41,17 @@ class TestNoticeCronPE2(unittest.TestCase):
             u"0216697802",
         )
 
-
     @mock.patch(
         "Products.urban.services.notice.WebserviceNotice.get_notifications",
         return_value=load_notif_json("TRANSFERT_DOSSIER", "1357456_notifications.json"),
     )
     @mock.patch(
         "Products.urban.services.notice.WebserviceNotice._get_notification",
-        return_value=MockedRequest(load_notif_json("TRANSFERT_DOSSIER", "1357456-NOUVEAU_DOSSIER-EN_ATTENTE_REPONSE.json")),
+        return_value=MockedRequest(
+            load_notif_json(
+                "TRANSFERT_DOSSIER", "1357456-NOUVEAU_DOSSIER-EN_ATTENTE_REPONSE.json"
+            )
+        ),
     )
     @mock.patch(
         "Products.urban.notice.address.NoticeAddress._find_address",
@@ -58,7 +59,9 @@ class TestNoticeCronPE2(unittest.TestCase):
     )
     @mock.patch(
         "Products.urban.services.notice.WebserviceNotice._get_notification_document",
-        return_value=MockedRequest(load_notif_content("TRANSFERT_DOSSIER", "document.pdf")),
+        return_value=MockedRequest(
+            load_notif_content("TRANSFERT_DOSSIER", "document.pdf")
+        ),
     )
     def _create_licence(self, address_patch, doc_patch, notif_patch, notifs_patch):
         address_patch, doc_patch, notif_patch, notifs_patch  # noqa
@@ -67,14 +70,12 @@ class TestNoticeCronPE2(unittest.TestCase):
             import_view = self.portal.restrictedTraverse("@@import-from-notice")
             return import_view()
 
-
     def _create_licence_event(self, licence, event_type):
         event_configs = self.portal.portal_urban.envclasstwo.eventconfigs
         event_config = event_configs[event_type]
         with api.env.adopt_roles(["Manager"]):
             event = licence.createUrbanEvent(event_config)
         return event
-
 
     def test_transmit(self):
         # 1) create licence
@@ -96,8 +97,13 @@ class TestNoticeCronPE2(unittest.TestCase):
 
         # 4) mock NoticeOutgoingNotification / transmit
         with mock.patch(
-                "Products.urban.services.notice.WebserviceNotice._post_notification_response",
-                return_value=MockedRequest(load_notif_json("TRANSFERT_DOSSIER", "1357456-NOUVEAU_DOSSIER-transmit_response.json"))
+            "Products.urban.services.notice.WebserviceNotice._post_notification_response",
+            return_value=MockedRequest(
+                load_notif_json(
+                    "TRANSFERT_DOSSIER",
+                    "1357456-NOUVEAU_DOSSIER-transmit_response.json",
+                )
+            ),
         ) as mock_post_notification_response:
             transmit_response = transmit_event.transfer_folder_to_dpa()
         self.assertFalse(transmit_response["error"])
@@ -110,8 +116,10 @@ class TestNoticeCronPE2(unittest.TestCase):
         with mock.patch(
             "Products.urban.services.notice.WebserviceNotice._get_notification",
             return_value=MockedRequest(
-                load_notif_json("TRANSFERT_DOSSIER", "1357456-NOUVEAU_DOSSIER-TERMINE.json")
-            )
+                load_notif_json(
+                    "TRANSFERT_DOSSIER", "1357456-NOUVEAU_DOSSIER-TERMINE.json"
+                )
+            ),
         ) as mock_get_notification:
             service = WebserviceNotice()
             updated_notification = service.get_notification(1357456)
@@ -129,17 +137,26 @@ class TestNoticeCronPE2(unittest.TestCase):
         with mock.patch(
             "Products.urban.services.notice.WebserviceNotice._post_notification_response",
             return_value=MockedRequest(
-                load_notif_json("TRANSFERT_DOSSIER", "1357456-NOUVEAU_DOSSIER-transmit_bis_response.json"), status_code=400
+                load_notif_json(
+                    "TRANSFERT_DOSSIER",
+                    "1357456-NOUVEAU_DOSSIER-transmit_bis_response.json",
+                ),
+                status_code=400,
             ),
         ) as mock_post_notification_response, mock.patch(
             "Products.urban.services.notice.WebserviceNotice._get_notification",
-            return_value=MockedRequest(load_notif_json("TRANSFERT_DOSSIER", "1357456-NOUVEAU_DOSSIER-TERMINE.json")),
+            return_value=MockedRequest(
+                load_notif_json(
+                    "TRANSFERT_DOSSIER", "1357456-NOUVEAU_DOSSIER-TERMINE.json"
+                )
+            ),
         ) as mock_get_notification:
             transmit_response = transmit_event.transfer_folder_to_dpa()
 
         # assert good transmit date is back
         dates = self._get_notice_transmit_dates(transmit_event)
         self.assertEqual(dates.get("transfer_folder_to_dpa"), date(2025, 6, 19))
+
     def _get_notice_transmit_dates(self, event):
         annotations = IAnnotations(event)
         dates = annotations.get("notice_transmit_dates", {})
@@ -151,14 +168,15 @@ class TestNoticeCronPE2(unittest.TestCase):
             licence = licence_folder.values()[-1]
             api.content.delete(obj=licence)
 
-
     @mock.patch(
         "Products.urban.services.notice.WebserviceNotice.get_notifications",
         return_value=load_notif_json("DEMANDE_EP", "1342038_notifications.json"),
     )
     @mock.patch(
         "Products.urban.services.notice.WebserviceNotice._get_notification",
-        return_value=MockedRequest(load_notif_json("DEMANDE_EP", "1342038-DEMANDE_EP-EN_ATTENTE_REPONSE.json")),
+        return_value=MockedRequest(
+            load_notif_json("DEMANDE_EP", "1342038-DEMANDE_EP-EN_ATTENTE_REPONSE.json")
+        ),
     )
     def _create_dossier_complet(self, notif_patch, notifs_patch):
         notif_patch, notifs_patch  # noqa
@@ -166,23 +184,25 @@ class TestNoticeCronPE2(unittest.TestCase):
         with api.env.adopt_roles(["Manager"]):
             import_view = self.portal.restrictedTraverse("@@import-from-notice")
             return import_view()
-    
+
     @mock.patch(
         "Products.urban.services.notice.WebserviceNotice.get_notifications",
         return_value=load_notif_json("INCOMPLETE", "1407578-NOTIFICATIONS.json"),
     )
     @mock.patch(
         "Products.urban.services.notice.WebserviceNotice._get_notification",
-        return_value=MockedRequest(load_notif_json("INCOMPLETE", "1407578-INCOMPLETE-NOTIFICATION.json")),
+        return_value=MockedRequest(
+            load_notif_json("INCOMPLETE", "1407578-INCOMPLETE-NOTIFICATION.json")
+        ),
     )
     def _create_incomplete_folder(self, notif_patch, notifs_patch):
-        notif_patch, notifs_patch  
+        notif_patch, notifs_patch
         self.notif_patch = notif_patch
-        
+
         with api.env.adopt_roles(["Manager"]):
             import_view = self.portal.restrictedTraverse("@@import-from-notice")
             import_view()
-    
+
     def test_incomplete_notification(self):
         # 1) create licence
         with mock.patch(
@@ -200,7 +220,9 @@ class TestNoticeCronPE2(unittest.TestCase):
             return_value=[{"text": "street, 1 (1400 - Nivelles)", "id": "1234"}],
         ) as mock_address, mock.patch(
             "Products.urban.services.notice.WebserviceNotice._get_notification_document",
-            return_value=MockedRequest(load_notif_content("TRANSFERT_DOSSIER", "document.pdf")),
+            return_value=MockedRequest(
+                load_notif_content("TRANSFERT_DOSSIER", "document.pdf")
+            ),
         ) as mock_get_document:
             with api.env.adopt_roles(["Manager"]):
                 import_view = self.portal.restrictedTraverse("@@import-from-notice")
@@ -240,7 +262,7 @@ class TestNoticeCronPE2(unittest.TestCase):
             with api.env.adopt_roles(["Manager"]):
                 import_view = self.portal.restrictedTraverse("@@import-from-notice")
                 import_view()
-    
+
     def test_not_admissible_notification_second_tour(self):
         licence_folder = self.portal.urban.envclasstwos
         licence = licence_folder.values()[-1]
@@ -248,13 +270,13 @@ class TestNoticeCronPE2(unittest.TestCase):
         licence.reindexObject()
 
         # Création folder 2ème tour
-        self._create_not_admissible_folder("2","1443529")
+        self._create_not_admissible_folder("2", "1443529")
 
         not_admissible_folder = licence.getLastRefusedNotification()
         self.assertIsNotNone(not_admissible_folder)
         self.assertEqual(not_admissible_folder.getEventDate().Date(), "2025/09/19")
         self.assertEqual(api.content.get_state(not_admissible_folder), "closed")
-    
+
     @mock.patch(
         "Products.urban.services.notice.WebserviceNotice.get_notifications",
         return_value=load_notif_json("INADMISSIBLE", "1443524-NOTIFICATIONS.json"),
@@ -269,7 +291,6 @@ class TestNoticeCronPE2(unittest.TestCase):
         notif_patch, notifs_patch
         self.notif_patch = notif_patch
 
-    
     @mock.patch(
         "Products.urban.services.notice.WebserviceNotice.get_notifications",
         return_value=load_notif_json("INADMISSIBLE", "1443524-NOTIFICATIONS.json"),
