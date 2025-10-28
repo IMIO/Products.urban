@@ -28,14 +28,17 @@ from Products.urban import UrbanMessage as _
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.config import *
 from Products.urban.content.CODT_UniqueLicenceInquiry import CODT_UniqueLicenceInquiry
-from Products.urban.content.CODT_UniqueLicenceInquiry import \
-    finalizeSchema as thirdBaseFinalizeSchema
+from Products.urban.content.CODT_UniqueLicenceInquiry import (
+    finalizeSchema as thirdBaseFinalizeSchema,
+)
 from Products.urban.content.licence.BaseBuildLicence import BaseBuildLicence
 from Products.urban.content.licence.CODT_BaseBuildLicence import CODT_BaseBuildLicence
-from Products.urban.content.licence.CODT_BaseBuildLicence import \
-    finalizeSchema as firstBaseFinalizeSchema
-from Products.urban.content.licence.CODT_BuildLicence import \
-    finalizeSchema as secondBaseFinalizeSchema
+from Products.urban.content.licence.CODT_BaseBuildLicence import (
+    finalizeSchema as firstBaseFinalizeSchema,
+)
+from Products.urban.content.licence.CODT_BuildLicence import (
+    finalizeSchema as secondBaseFinalizeSchema,
+)
 from Products.urban.content.licence.EnvironmentBase import EnvironmentBase
 from Products.urban.content.licence.GenericLicence import GenericLicence
 from Products.urban.utils import setOptionalAttributes

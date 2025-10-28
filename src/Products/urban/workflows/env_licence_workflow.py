@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from Products.urban.workflows.licence_workflow import \
-    StateRolesMapping as BaseRoleMapping
+from Products.urban.workflows.licence_workflow import (
+    StateRolesMapping as BaseRoleMapping,
+)
 
 
 class StateRolesMapping(BaseRoleMapping):

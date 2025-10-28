@@ -105,8 +105,9 @@ def setSchemataForCODT_UniqueLicenceInquiry(schema):
     """
     Put the the fields coming from Inquiry in a specific schemata
     """
-    from Products.urban.content.CODT_UniqueLicenceInquiry import \
-        CODT_UniqueLicenceInquiry
+    from Products.urban.content.CODT_UniqueLicenceInquiry import (
+        CODT_UniqueLicenceInquiry,
+    )
 
     _setSchemataForInquiry(schema, CODT_UniqueLicenceInquiry)
 
