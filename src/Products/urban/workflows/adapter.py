@@ -1,22 +1,17 @@
 # encoding: utf-8
 
-from borg.localrole.interfaces import ILocalRoleProvider
-
-from imio.schedule.config import DONE
-from imio.schedule.config import STARTED
-from imio.schedule.config import status_by_state
-from imio.schedule.content.task import IAutomatedTask
-
-from plone import api
-from plone.memoize.request import cache
-
 from Products.CMFCore.WorkflowCore import WorkflowException
-
 from Products.urban.interfaces import ICODT_UniqueLicence
 from Products.urban.interfaces import IEnvironmentBase
 from Products.urban.interfaces import IIntegratedLicence
 from Products.urban.interfaces import IUniqueLicence
-
+from borg.localrole.interfaces import ILocalRoleProvider
+from imio.schedule.config import DONE
+from imio.schedule.config import STARTED
+from imio.schedule.config import status_by_state
+from imio.schedule.content.task import IAutomatedTask
+from plone import api
+from plone.memoize.request import cache
 from zope.interface import implements
 
 

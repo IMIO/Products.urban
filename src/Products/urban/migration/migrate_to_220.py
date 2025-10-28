@@ -1,20 +1,19 @@
 # encoding: utf-8
 
-from plone import api
-from plone.portlets.constants import (
-    CONTEXT_CATEGORY,
-    GROUP_CATEGORY,
-    CONTENT_TYPE_CATEGORY,
-)
-from plone.portlets.interfaces import IPortletManager
-from plone.portlets.interfaces import ILocalPortletAssignmentManager
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.interfaces import IInquiry
 from Products.urban.interfaces import IUrbanCertificateBase
+from plone import api
+from plone.portlets.constants import CONTENT_TYPE_CATEGORY
+from plone.portlets.constants import CONTEXT_CATEGORY
+from plone.portlets.constants import GROUP_CATEGORY
+from plone.portlets.interfaces import ILocalPortletAssignmentManager
+from plone.portlets.interfaces import IPortletManager
 from zope.component import getMultiAdapter
 from zope.component import getUtilitiesFor
 
 import logging
+
 
 logger = logging.getLogger("urban: migrations")
 

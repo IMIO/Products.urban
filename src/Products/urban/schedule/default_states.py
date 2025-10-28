@@ -2,9 +2,7 @@
 
 from imio.schedule.interfaces import IDefaultFreezeStates
 from imio.schedule.interfaces import IDefaultThawStates
-
 from plone import api
-
 from zope.interface import implements
 
 

@@ -14,34 +14,34 @@ __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEUL
 __docformat__ = "plaintext"
 
 from AccessControl import ClassSecurityInfo
-from Products.Archetypes.atapi import TextField
-from Products.Archetypes.atapi import RichWidget
-from Products.Archetypes.atapi import StringField
-from Products.Archetypes.atapi import Schema
-from Products.Archetypes.atapi import BaseSchema
-from Products.Archetypes.atapi import BaseContent
-from Products.Archetypes.atapi import registerType
-from Products.Archetypes.atapi import DisplayList
-from Products.Archetypes.atapi import DateTimeField
-from zope.interface import implements
-from Products.urban import interfaces
-from Products.urban.UrbanConfigurationValue import UrbanConfigurationValue
-from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
-from Products.Archetypes.interfaces import IVocabulary
-from Products.urban import UrbanMessage as _
-from datetime import datetime
 from DateTime import DateTime
-from collections import OrderedDict
-from Products.urban.config import PROJECTNAME
+from Products.Archetypes.atapi import BaseContent
+from Products.Archetypes.atapi import BaseSchema
+from Products.Archetypes.atapi import DateTimeField
+from Products.Archetypes.atapi import DisplayList
+from Products.Archetypes.atapi import registerType
+from Products.Archetypes.atapi import RichWidget
+from Products.Archetypes.atapi import Schema
+from Products.Archetypes.atapi import StringField
+from Products.Archetypes.atapi import TextField
+from Products.Archetypes.interfaces import IVocabulary
+from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
+from Products.urban import interfaces
+from Products.urban import UrbanMessage as _
+from Products.urban.UrbanConfigurationValue import UrbanConfigurationValue
 from Products.urban.config import EMPTY_VOCAB_VALUE
-from zope.globalrequest import getRequest
-from zope.i18n import translate
-
+from Products.urban.config import PROJECTNAME
+from collections import OrderedDict
+from datetime import datetime
 ##code-section module-header #fill in your manual code here
 from plone import api
+from zope.globalrequest import getRequest
+from zope.i18n import translate
+from zope.interface import implements
 
-import re
 import logging
+import re
+
 
 logger = logging.getLogger("urban: UrbanVocabularyTerm")
 ##/code-section module-header
@@ -298,9 +298,9 @@ class UrbanVocabulary(object):
         deposit_date = self._get_deposit_date(content_instance)
         filtered_terms = OrderedDict()
         for k, v in voc_terms.items():
-             if self._validate_term(v, deposit_date):
+            if self._validate_term(v, deposit_date):
                 filtered_terms[k] = v
-      
+
         return filtered_terms
 
     def listAllVocTerms(self, content_instance):
@@ -316,10 +316,7 @@ class UrbanVocabulary(object):
         )
         voc_terms = [brain.getObject() for brain in voc_brains]
         deposit_date = self._get_deposit_date(content_instance)
-        filtered_terms = [
-            v for v in voc_terms
-            if self._validate_term(v, deposit_date)
-        ]
+        filtered_terms = [v for v in voc_terms if self._validate_term(v, deposit_date)]
         return filtered_terms
 
 

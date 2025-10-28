@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from plone import api
-
 from Products.urban.interfaces import IUrbanWarningCondition
-
+from plone import api
 from zope.interface import implements
 
 

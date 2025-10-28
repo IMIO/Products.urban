@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from plone.app.textfield import RichTextValue
-
 from Products.urban.config import DASHBOARD_TEMPLATES
 from Products.urban.config import GLOBAL_TEMPLATES
+from plone.app.textfield import RichTextValue
+
 
 globalTemplates = GLOBAL_TEMPLATES
 dashboardTemplates = DASHBOARD_TEMPLATES
@@ -468,9 +468,7 @@ EventConfigs = {
             "eventType": ("Products.urban.interfaces.IRefusedIncompletenessEvent",),
             "isKeyEvent": True,
             "keyDates": ("eventDate",),
-            "podTemplates": (
-            ),
-            
+            "podTemplates": (),
         },
         {
             "id": "dossier-incomplet",

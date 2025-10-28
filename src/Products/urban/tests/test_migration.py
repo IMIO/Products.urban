@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
-import unittest
-
-from plone.app.testing import login
-
-from Products.urban.testing import URBAN_TESTS_CONFIG
 from Products.urban.migration.utils import disable_licence_default_values
 from Products.urban.migration.utils import restore_licence_default_values
+from Products.urban.testing import URBAN_TESTS_CONFIG
+from plone.app.testing import login
+
+import unittest
 
 
 class TestDefaultValues(unittest.TestCase):

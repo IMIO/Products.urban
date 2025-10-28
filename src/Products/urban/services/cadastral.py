@@ -1,19 +1,19 @@
 # -*- coding: utf-8 -*-
 
-from Products.urban.utils import add_missing_capakey_in_registry
 from Products.urban.services.base import SQLService
 from Products.urban.services.base import SQLSession
+from Products.urban.utils import add_missing_capakey_in_registry
 from plone import api
 from plone.memoize import ram
-from time import time
-
 from sqlalchemy import and_
 from sqlalchemy import or_
-from sqlalchemy.sql.expression import func
 from sqlalchemy.exc import InvalidRequestError
 from sqlalchemy.exc import OperationalError
+from sqlalchemy.sql.expression import func
+from time import time
 
 import json
+
 
 IGNORE = []
 

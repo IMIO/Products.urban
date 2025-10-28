@@ -3,7 +3,6 @@
 from Products.urban.interfaces import IEnvironmentBase
 from Products.urban.profiles.testsWithLicences.licences_data import licences_data
 from Products.urban.testing import URBAN_TESTS_LICENCES
-
 from plone import api
 from plone.app.testing import login
 

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-import unittest
+from Products.urban.events import envclassEvents
 from Products.urban.testing import URBAN_TESTS_INTEGRATION
 
-from Products.urban.events import envclassEvents
+import unittest
 
 
 class TestEnvEvent(unittest.TestCase):

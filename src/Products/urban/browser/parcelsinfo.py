@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
 
 from Products.Five import BrowserView
-
+from Products.urban import services
 from Products.urban.browser.parcelrecordsview import ParcelRecordsView
 from Products.urban.interfaces import IGenericLicence
-from Products.urban import services
-
 from plone import api
 
 

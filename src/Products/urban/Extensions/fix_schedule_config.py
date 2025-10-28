@@ -4,8 +4,9 @@ from Products.urban.config import URBAN_TYPES
 from importlib import import_module
 from plone import api
 
-import transaction
 import logging
+import transaction
+
 
 logger = logging.getLogger("urban: fix schedule config")
 
@@ -101,7 +102,9 @@ def fix_announcement_task(schedule_config):
         and isinstance(schedule_config.additional_delay_type, dict)
         and "token" in schedule_config.additional_delay_type
     ):
-        schedule_config.additional_delay_type = schedule_config.additional_delay_type["token"]
+        schedule_config.additional_delay_type = schedule_config.additional_delay_type[
+            "token"
+        ]
 
 
 def fix_announcement_tasks():

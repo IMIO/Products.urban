@@ -1,18 +1,18 @@
 # encoding: utf-8
+from Products.CMFCore.utils import getToolByName
 from Products.urban import URBAN_TYPES
 from Products.urban import UrbanMessage as _
-from Products.CMFCore.utils import getToolByName
 from Products.urban.utils import moveElementAfter
-
 from plone import api
 from plone.app.textfield import RichTextValue
-from plone.registry import Record
 from plone.registry import field
+from plone.registry import Record
 from plone.registry.interfaces import IRegistry
 from zope.component import getUtility
 from zope.event import notify
 
 import logging
+
 
 logger = logging.getLogger("urban: migrations")
 
@@ -34,10 +34,14 @@ def initialize_notice_settings(context):
         registry_record.value = None
         registry.records["{0}.municipality_id".format(base)] = registry_record
     if "{0}.sent_on_behalf_of_municipality_id".format(base) not in registry.records:
-        registry_field = field.TextLine(title=INoticeSettings["sent_on_behalf_of_municipality_id"].title)
+        registry_field = field.TextLine(
+            title=INoticeSettings["sent_on_behalf_of_municipality_id"].title
+        )
         registry_record = Record(registry_field)
         registry_record.value = None
-        registry.records["{0}.sent_on_behalf_of_municipality_id".format(base)] = registry_record
+        registry.records[
+            "{0}.sent_on_behalf_of_municipality_id".format(base)
+        ] = registry_record
     if "{0}.last_import_date".format(base) not in registry.records:
         registry_field = field.Datetime(title=INoticeSettings["last_import_date"].title)
         registry_record = Record(registry_field)

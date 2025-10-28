@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from collective.task.behaviors import ITask
-
 from eea.facetednavigation.search.catalog import FacetedCatalog
+
 
 # XXX Should be migrated
 try:
@@ -14,7 +14,6 @@ except ImportError:
 
 
 from Products.urban.interfaces import IFacetedCollection
-
 from zope.component import queryAdapter
 from zope.interface import implements
 

@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
 
+from Products.CMFPlone import PloneMessageFactory as _
 from Products.urban.browser.licence.licenceview import LicenceView
 from Products.urban.browser.table.urbantable import InspectionReportsTable
 from Products.urban.browser.table.urbantable import PlaintiffTable
 from Products.urban.browser.table.urbantable import TenantTable
-from Products.CMFPlone import PloneMessageFactory as _
-
 from plone import api
 
 

@@ -1,22 +1,16 @@
 # -*- coding: utf-8 -*-
 
 from Acquisition import aq_inner
-
-from Products.urban.config import URBAN_TYPES
-from Products.urban.browser.table.interfaces import IItemForUrbanTable
-from Products.urban.browser.table.interfaces import IBrainForUrbanTable
-from Products.urban.browser.table.interfaces import IObjectForUrbanTable
-
 from Products.ZCatalog.Lazy import LazyMap
-
-from plone.memoize import instance
-
-from z3c.table.value import ValuesMixin
-
-from zope.interface import implements
-from zope.component import queryAdapter
-
+from Products.urban.browser.table.interfaces import IBrainForUrbanTable
+from Products.urban.browser.table.interfaces import IItemForUrbanTable
+from Products.urban.browser.table.interfaces import IObjectForUrbanTable
+from Products.urban.config import URBAN_TYPES
 from plone import api
+from plone.memoize import instance
+from z3c.table.value import ValuesMixin
+from zope.component import queryAdapter
+from zope.interface import implements
 
 
 class ItemForUrbanTable:

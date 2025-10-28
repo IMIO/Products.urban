@@ -2,7 +2,6 @@
 
 from Products.urban.testing import URBAN_TESTS_CONFIG
 from Products.urban.tests.helpers import BrowserTestCase
-
 from plone.app.testing import login
 from plone.testing.z2 import Browser
 

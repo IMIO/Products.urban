@@ -1,14 +1,13 @@
 # -*- coding: utf-8 -*-
 
 from DateTime import DateTime
-
 from Products.urban.config import URBAN_TYPES
-
 from plone import api
 
 import os
 import shutil
 import zipfile
+
 
 VAR_DIR = "var"
 EXPORT_DIR = "{}/export".format(VAR_DIR)

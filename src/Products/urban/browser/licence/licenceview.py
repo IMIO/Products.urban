@@ -1,29 +1,26 @@
 # -*- coding: utf-8 -*-
 
 from Acquisition import aq_inner
-
 from Products.Five import BrowserView
-
 from Products.urban import utils
-from Products.urban.browser.table.urbantable import ApplicantTable
 from Products.urban.browser.table.urbantable import ApplicantHistoryTable
-from Products.urban.browser.table.urbantable import LicenceAttachmentsTable
+from Products.urban.browser.table.urbantable import ApplicantTable
 from Products.urban.browser.table.urbantable import EventsTable
+from Products.urban.browser.table.urbantable import LicenceAttachmentsTable
 from Products.urban.browser.table.urbantable import NestedAttachmentsTable
 from Products.urban.browser.table.urbantable import ParcelsTable
-from Products.urban.browser.table.urbantable import ProprietaryTable
 from Products.urban.browser.table.urbantable import ProprietaryHistoryTable
+from Products.urban.browser.table.urbantable import ProprietaryTable
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.interfaces import IUrbanDoc
 from Products.urban.interfaces import IUrbanEventAnnouncement
 from Products.urban.interfaces import IUrbanEventInquiry
 from Products.urban.interfaces import IUrbanWarningCondition
-
 from plone import api
 from plone.memoize import view
 from zope.annotation import IAnnotations
-from zope.i18n import translate
 from zope.component import queryAdapter
+from zope.i18n import translate
 
 
 class LicenceView(BrowserView):
@@ -366,7 +363,7 @@ class LicenceView(BrowserView):
                 "demandDisplay",
                 "investigationReasons",
             ],
-            "announcement" : [
+            "announcement": [
                 "derogation",
                 "derogationDetails",
                 "investigationArticles",
@@ -379,7 +376,9 @@ class LicenceView(BrowserView):
         exclude_fields = []
         if hasattr(bound_context, "getInquiry_type"):
             exclude_fields = fields_display.get(bound_context.getInquiry_type(), [])
-        return self.getSchemataFields("urban_inquiry", list(set(exclude_fields + exclude)), bound_context)
+        return self.getSchemataFields(
+            "urban_inquiry", list(set(exclude_fields + exclude)), bound_context
+        )
 
     def getDefaultFields(self, exclude=[], context=None):
         base_exclude = ["id", "title"]
@@ -593,6 +592,7 @@ class EnvironmentLicenceView(LicenceView):
 
     def __init__(self, context, request):
         super(EnvironmentLicenceView, self).__init__(context, request)
+
 
 class ShowEditTabbing(BrowserView):
     """call this view to see if a licence should display the tabbing with edit icons"""

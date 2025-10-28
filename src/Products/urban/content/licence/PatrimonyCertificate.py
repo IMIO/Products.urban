@@ -14,25 +14,22 @@ __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEUL
 __docformat__ = "plaintext"
 
 from AccessControl import ClassSecurityInfo
+from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
+    ReferenceBrowserWidget
 from Products.Archetypes.atapi import *
-from zope.interface import implements
-from Products.urban import interfaces
-from Products.urban.content.licence.GenericLicence import GenericLicence
-from Products.urban.content.Inquiry import Inquiry
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
-
-from Products.urban import UrbanMessage as _
-from Products.urban.config import *
-
 ##code-section module-header #fill in your manual code here
 from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
+from Products.urban import interfaces
+from Products.urban import UrbanMessage as _
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
+from Products.urban.config import *
+from Products.urban.content.Inquiry import Inquiry
+from Products.urban.content.licence.GenericLicence import GenericLicence
 from Products.urban.utils import setOptionalAttributes
 from Products.urban.utils import setSchemataForInquiry
 from Products.urban.widget.select2widget import MultiSelect2Widget
-from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import (
-    ReferenceBrowserWidget,
-)
+from zope.interface import implements
 
 
 optional_fields = ["architects"]
@@ -154,13 +151,13 @@ schema = Schema(
                 t
                 for t in URBAN_TYPES
                 if t
-                   not in [
-                       "Inspection",
-                       "Ticket",
-                       "ProjectMeeting",
-                       "CODT_UrbanCertificateOne",
-                       "UrbanCertificateOne",
-                   ]
+                not in [
+                    "Inspection",
+                    "Ticket",
+                    "ProjectMeeting",
+                    "CODT_UrbanCertificateOne",
+                    "UrbanCertificateOne",
+                ]
             ],
             schemata="urban_description",
             multiValued=True,
@@ -395,6 +392,7 @@ class PatrimonyCertificate(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMi
             ("classified", "bien classé"),
         )
         return DisplayList(vocabulary)
+
 
 registerType(PatrimonyCertificate, PROJECTNAME)
 # end of class PatrimonyCertificate

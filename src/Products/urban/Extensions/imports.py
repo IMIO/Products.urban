@@ -3,13 +3,10 @@
 from AccessControl import Unauthorized
 from Acquisition import aq_base
 from DateTime import DateTime
-
 from Products.urban.config import ExternalConfig
 from Products.urban.services.bestaddress import BestaddressService
-
-from zExceptions import BadRequest
-
 from plone import api
+from zExceptions import BadRequest
 
 import Products.urban.Extensions as ext
 import os

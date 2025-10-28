@@ -1,29 +1,22 @@
 # -*- coding: utf-8 -*-
 
 from DateTime import DateTime
-
 from Products.CMFPlone.utils import safe_unicode
 from Products.Five import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-
+from Products.urban import UrbanMessage as _
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.config import NIS
 from Products.urban.interfaces import IToUrbain220Street
-from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
-
 from StringIO import StringIO
-
-from eea.facetednavigation.interfaces import IFacetedNavigable
-
-from collective.eeafaceted.dashboard.utils import getDashboardQueryResult
 from collective.eeafaceted.dashboard.utils import getCriterionByIndex
-
+from collective.eeafaceted.dashboard.utils import getDashboardQueryResult
+from eea.facetednavigation.interfaces import IFacetedNavigable
 from plone import api
 from plone.app.layout.viewlets import ViewletBase
-
 from zope.component import getAdapter
-from zope.interface import implements
 from zope.i18n import translate
-from Products.urban import UrbanMessage as _
+from zope.interface import implements
 
 import json
 import unidecode
@@ -298,7 +291,10 @@ class UrbainXMLExport(BrowserView):
                         u"        <straatnaam>%s</straatnaam>"
                         % safe_unicode(applicantObj.getStreet())
                     )
-                    xml.append(u"        <huisnr>%s</huisnr>" % safe_unicode(applicantObj.getNumber()))
+                    xml.append(
+                        u"        <huisnr>%s</huisnr>"
+                        % safe_unicode(applicantObj.getNumber())
+                    )
                     xml.append(
                         u"        <postcode>%s</postcode>" % applicantObj.getZipcode()
                     )
@@ -335,7 +331,8 @@ class UrbainXMLExport(BrowserView):
                                 % safe_unicode(applicantObj.getStreet())
                             )
                             xml.append(
-                                u"        <huisnr>%s</huisnr>" % safe_unicode(applicantObj.getNumber())
+                                u"        <huisnr>%s</huisnr>"
+                                % safe_unicode(applicantObj.getNumber())
                             )
                             xml.append(
                                 u"        <postcode>%s</postcode>"
@@ -353,7 +350,7 @@ class UrbainXMLExport(BrowserView):
                                 u"        <naam>%s %s</naam>"
                                 % (
                                     safe_unicode(architectObj.getName1()),
-                                    safe_unicode(architectObj.getName2())
+                                    safe_unicode(architectObj.getName2()),
                                 )
                             )
                             xml.append(
@@ -361,7 +358,8 @@ class UrbainXMLExport(BrowserView):
                                 % safe_unicode(architectObj.getStreet())
                             )
                             xml.append(
-                                u"        <huisnr>%s</huisnr>" % safe_unicode(architectObj.getNumber())
+                                u"        <huisnr>%s</huisnr>"
+                                % safe_unicode(architectObj.getNumber())
                             )
                             xml.append(
                                 u"        <postcode>%s</postcode>"

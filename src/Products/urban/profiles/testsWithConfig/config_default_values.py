@@ -2,6 +2,7 @@
 
 from Products.urban.config import URBAN_TYPES
 
+
 vocabularies_with_HTML_description = [
     "specificfeatures",
     "roadspecificfeatures",

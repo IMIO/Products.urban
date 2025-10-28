@@ -14,32 +14,29 @@ __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEUL
 __docformat__ = "plaintext"
 
 from AccessControl import ClassSecurityInfo
-from Products.urban.widget.select2widget import MultiSelect2Widget
+from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
+    ReferenceBrowserWidget
 from Products.Archetypes.atapi import *
-from zope.interface import implements
-from Products.urban import interfaces
-from Products.urban.content.licence.GenericLicence import GenericLicence
+from Products.CMFCore.utils import getToolByName
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
-
-from Products.DataGridField import DataGridField, DataGridWidget
-
-from Products.urban.config import *
+from Products.DataGridField import DataGridField
+from Products.DataGridField import DataGridWidget
+from Products.DataGridField.CheckboxColumn import CheckboxColumn
+from Products.DataGridField.DataGridField import FixedRow
+from Products.DataGridField.FixedColumn import FixedColumn
+from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
+from Products.urban import interfaces
 from Products.urban import UrbanMessage as _
-
+from Products.urban.UrbanDataGridColumns.FormFocusColumn import FormFocusColumn
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
+from Products.urban.config import *
+from Products.urban.content.licence.GenericLicence import GenericLicence
+from Products.urban.utils import setOptionalAttributes
+from Products.urban.widget.select2widget import MultiSelect2Widget
+from collective.datagridcolumns.TextAreaColumn import TextAreaColumn
 ##code-section module-header #fill in your manual code here
 from zope.i18n import translate
-from Products.CMFCore.utils import getToolByName
-from Products.DataGridField.DataGridField import FixedRow
-from Products.DataGridField.CheckboxColumn import CheckboxColumn
-from Products.DataGridField.FixedColumn import FixedColumn
-from collective.datagridcolumns.TextAreaColumn import TextAreaColumn
-from Products.urban.utils import setOptionalAttributes
-from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
-from Products.urban.UrbanDataGridColumns.FormFocusColumn import FormFocusColumn
-from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import (
-    ReferenceBrowserWidget,
-)
-from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
+from zope.interface import implements
 
 
 optional_fields = [

@@ -1,5 +1,6 @@
 from Products.DataGridField.Column import Column
 
+
 """
 Monkey patch the call to the Column __init__: redturturtle use its own branch of DataGridField.Column which was modified
 to include the 'required' parameter but the Plone DataGridField.Column does not handle this parameter and crash when called

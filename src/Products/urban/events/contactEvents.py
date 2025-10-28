@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-from zope.interface import alsoProvides
-from Products.urban.interfaces import CONTACT_INTERFACES
 from Products.urban.config import APPLICANTS_TYPES
 from Products.urban.config import URBAN_TYPES
+from Products.urban.interfaces import CONTACT_INTERFACES
 from zope.event import notify
+from zope.interface import alsoProvides
 from zope.lifecycleevent import ObjectModifiedEvent
 
 

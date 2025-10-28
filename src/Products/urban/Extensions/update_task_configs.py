@@ -1,19 +1,16 @@
 # -*- coding: utf-8 -*-
 
+from Products.urban.config import LICENCE_FINAL_STATES
+from Products.urban.interfaces import IGenericLicence
 from imio.schedule.config import CREATION
 from imio.schedule.config import STARTED
 from imio.schedule.config import states_by_status
-from imio.schedule.content.task import IAutomatedTask
 from imio.schedule.content.object_factories import EndConditionObject
 from imio.schedule.content.object_factories import MacroEndConditionObject
-
-from Products.urban.config import LICENCE_FINAL_STATES
-from Products.urban.interfaces import IGenericLicence
-
+from imio.schedule.content.task import IAutomatedTask
+from plone import api
 from zope.event import notify
 from zope.lifecycleevent import ObjectModifiedEvent
-
-from plone import api
 
 
 def add_licence_ended_condition():

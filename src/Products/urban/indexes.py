@@ -15,22 +15,16 @@ Jean-Michel Abe <jm.abe@la-bruyere.be>"""
 __docformat__ = "plaintext"
 
 from Acquisition import aq_inner
-from datetime import date
 from DateTime import DateTime
-
-from imio.schedule.content.task import IAutomatedTask
-
 from Products.Archetypes.interfaces import IBaseFolder
-
 from Products.urban import interfaces
 from Products.urban.schedule.interfaces import ILicenceDeliveryTask
 from Products.urban.utils import get_ws_meetingitem_infos
-
+from datetime import date
+from imio.schedule.content.task import IAutomatedTask
 from plone import api
 from plone.indexer import indexer
-
 from suds import WebFault
-
 from zope.component import queryAdapter
 from zope.interface import Interface
 

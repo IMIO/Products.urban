@@ -1,6 +1,5 @@
-from optparse import OptionParser
-
 from OFS.Folder import manage_addFolder
+from optparse import OptionParser
 
 
 def makeMountPoint(app, id):

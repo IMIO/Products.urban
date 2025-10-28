@@ -2,9 +2,10 @@
 
 from Products.Archetypes.Registry import registerWidget
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from archetypes.referencebrowserwidget.browser.view import (
-    ReferenceBrowserHelperView,
-)  # noqa
+from Products.urban import UrbanMessage as _
+from Products.urban.events.envclassEvents import get_value_history_by_index
+from archetypes.referencebrowserwidget.browser.view import \
+    ReferenceBrowserHelperView  # noqa
 from archetypes.referencebrowserwidget.widget import ReferenceBrowserWidget
 from imio.history.utils import add_event_to_history
 from plone.z3cform.layout import FormWrapper
@@ -15,12 +16,9 @@ from z3c.form.form import EditForm
 from z3c.form.form import Form
 from zope import schema
 from zope.i18n import translate
-from zope.interface import Interface
 from zope.interface import implements
+from zope.interface import Interface
 from zope.interface.interface import InterfaceClass
-
-from Products.urban import UrbanMessage as _
-from Products.urban.events.envclassEvents import get_value_history_by_index
 
 
 class HistorizeReferenceBrowserWidget(ReferenceBrowserWidget):

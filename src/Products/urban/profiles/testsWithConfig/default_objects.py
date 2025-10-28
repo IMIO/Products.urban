@@ -2,6 +2,7 @@
 
 from datetime import date
 
+
 default_objects = {
     "notaries": [
         "Notary",

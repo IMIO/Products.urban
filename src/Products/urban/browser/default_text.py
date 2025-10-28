@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
 
+from plone import api
+from plone.memoize.request import cache
 from zope.pagetemplate.engine import TrustedAppPT
 from zope.pagetemplate.pagetemplate import PageTemplate
-
-from plone.memoize.request import cache
-
-from plone import api
 
 
 class DefaultTextRenderer(TrustedAppPT, PageTemplate):

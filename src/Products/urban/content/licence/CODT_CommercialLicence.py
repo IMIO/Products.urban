@@ -15,14 +15,14 @@ __docformat__ = "plaintext"
 
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
-from zope.interface import implements
+from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.urban import interfaces
+from Products.urban import UrbanMessage as _
+from Products.urban.config import *
 from Products.urban.content.licence.CODT_UniqueLicence import CODT_UniqueLicence
 from Products.urban.utils import setOptionalAttributes
-from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
+from zope.interface import implements
 
-from Products.urban.config import *
-from Products.urban import UrbanMessage as _
 
 ##code-section module-header #fill in your manual code here
 
@@ -66,7 +66,6 @@ schema = Schema(
             schemata="urban_location",
         ),
     ),
-
 )
 
 ##code-section after-local-schema #fill in your manual code here
@@ -106,9 +105,7 @@ class CODT_CommercialLicence(BaseFolder, CODT_UniqueLicence, BrowserDefaultMixin
         )
         return DisplayList(vocab)
 
-    def _get_inquiry_objs(
-        self, all_=False, portal_type=["CODT_Inquiry"]
-    ):
+    def _get_inquiry_objs(self, all_=False, portal_type=["CODT_Inquiry"]):
         all_inquiries = super(CODT_CommercialLicence, self)._get_inquiry_objs(
             all_=all_, portal_type=portal_type
         )

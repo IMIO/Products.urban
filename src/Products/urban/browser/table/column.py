@@ -1,28 +1,23 @@
 # -*- coding: utf-8 -*-
 
 from DateTime import DateTime
-
+from Products.urban.browser.table.interfaces import IActionsColumn
+from Products.urban.browser.table.interfaces import ILocalityColumn
+from Products.urban.browser.table.interfaces import IStreetColumn
+from Products.urban.browser.table.interfaces import ITitleCell
+from Products.urban.browser.table.interfaces import ITitleColumn
+from Products.urban.browser.table.interfaces import IUrbanColumn
+from Products.urban.setuphandlers import _ as _t
 from html import escape
-
 from plone import api
-
-from z3c.table.column import Column, GetAttrColumn, LinkColumn
+from z3c.table.column import Column
+from z3c.table.column import GetAttrColumn
+from z3c.table.column import LinkColumn
 from z3c.table.interfaces import IColumnHeader
-
 from zope.annotation.interfaces import IAnnotations
 from zope.component import queryMultiAdapter
-from zope.interface import implements
 from zope.i18n import translate
-
-from Products.urban.setuphandlers import _ as _t
-from Products.urban.browser.table.interfaces import (
-    ITitleColumn,
-    IActionsColumn,
-    ILocalityColumn,
-    IStreetColumn,
-    IUrbanColumn,
-    ITitleCell,
-)
+from zope.interface import implements
 
 
 class UrbanColumn(Column):

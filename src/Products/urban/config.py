@@ -23,13 +23,13 @@ __docformat__ = "plaintext"
 # AppConfig.py in your product's root directory. The items in there
 # will be included (by importing) in this file if found.
 
-from collections import OrderedDict
 from ConfigParser import ConfigParser
-
 from Products.CMFCore.permissions import setDefaultRoles
+from collections import OrderedDict
 
-import os
 import importlib
+import os
+
 
 PROJECTNAME = "urban"
 URBAN_CFG_DIR = "{}/var/urban".format(os.environ.get("PWD", os.getcwd()))
@@ -493,8 +493,9 @@ def registerClasses():
     """ArchGenXML generated code does not register Archetype classes at the
     right moment since model adaptations have been implemented. This method
     allows to perform class registration at the right moment."""
-    import Products.Archetypes
     from Products.Archetypes.atapi import registerType
+
+    import Products.Archetypes
 
     global ADD_CONTENT_PERMISSIONS
     classNames = ADD_CONTENT_PERMISSIONS.keys()

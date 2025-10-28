@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-from datetime import datetime
 from Products.urban.config import URBAN_TYPES
+from datetime import datetime
+
 
 codt_2024_start_validity_date = datetime(2024, 4, 1)
 
@@ -372,7 +373,7 @@ default_values = {
                 "extraValue": u"D.IV.40 Alinéa 2/1",
                 "description": u"""<p>Les demandes visant à implanter un commerce au sens de l'article D.IV.4, alinéa 1er, 8°, sont soumises à enquête publique, sauf lorsque la demande porte sur l'implantation d'un commerce de quatre-cents mètres carrés et moins soumis à permis en exécution de l'article D.IV.4, alinéa 4. </p>""",
                 "startValidity": codt_2024_start_validity_date,
-            }
+            },
         ],
         "announcementarticles": [
             "UrbanVocabularyTerm",
@@ -559,7 +560,7 @@ default_values = {
                 "extraValue": u"D.IV.40 Alinéa 2/1",
                 "description": u"""<p>Les demandes visant à implanter un commerce au sens de l'article D.IV.4, alinéa 1er, 8°, sont soumises à enquête publique, sauf lorsque la demande porte sur l'implantation d'un commerce de quatre-cents mètres carrés et moins soumis à permis en exécution de l'article D.IV.4, alinéa 4. </p>""",
                 "startValidity": codt_2024_start_validity_date,
-            }
+            },
         ],
         "announcementarticles": [
             "UrbanVocabularyTerm",
@@ -1207,7 +1208,7 @@ default_values = {
                 "extraValue": u"D.IV.40 Alinéa 2/1",
                 "description": u"""<p>Les demandes visant à implanter un commerce au sens de l'article D.IV.4, alinéa 1er, 8°, sont soumises à enquête publique, sauf lorsque la demande porte sur l'implantation d'un commerce de quatre-cents mètres carrés et moins soumis à permis en exécution de l'article D.IV.4, alinéa 4. </p>""",
                 "startValidity": codt_2024_start_validity_date,
-            }
+            },
         ],
         "announcementarticles": [
             "UrbanVocabularyTerm",
@@ -3711,12 +3712,9 @@ default_values = {
             "UrbanVocabularyTerm",
             {
                 "id": "10",
-                "title": u"1/1 Formulaire général permis environnement et unique"
+                "title": u"1/1 Formulaire général permis environnement et unique",
             },
-            {
-                "id": "11",
-                "title": u"1/2 Élevage et détention d'animaux"
-            },
+            {"id": "11", "title": u"1/2 Élevage et détention d'animaux"},
             {
                 "id": "4",
                 "title": u"Annexe IV - Demande de permis avec concours d'un architecte",
@@ -3748,17 +3746,13 @@ default_values = {
             },
             {
                 "id": "14",
-                "title": u"Annexe X - Demande de permis d'urbanisation ou de modification de permis d'urbanisation"
+                "title": u"Annexe X - Demande de permis d'urbanisation ou de modification de permis d'urbanisation",
             },
             {
                 "id": "15",
-                "title": u"Annexe XI - Demande de permis d'urbanisation ou de modification de permis d'urbanisation avec contenu simplifié"
+                "title": u"Annexe XI - Demande de permis d'urbanisation ou de modification de permis d'urbanisation avec contenu simplifié",
             },
-            {
-                "id": "16",
-                "title": u"Annexe XV - Demande de certificat d'urbanisme n°2"
-            },
-
+            {"id": "16", "title": u"Annexe XV - Demande de certificat d'urbanisme n°2"},
         ],
         "classification_order_scope": [
             "UrbanVocabularyTerm",

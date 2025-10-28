@@ -1,16 +1,15 @@
 # -*- coding: utf-8 -*-
 
-from Acquisition import aq_inner, aq_base
-
+from Acquisition import aq_base
+from Acquisition import aq_inner
 from Products.CMFPlone import PloneMessageFactory as _
 from Products.Five import BrowserView
+from Products.urban.browser.table.urbantable import ParcelsTable
 from Products.urban.config import MAP_VIEWER_CFG
-from Products.urban.config import URBANMAP_CFG
 from Products.urban.config import NIS
+from Products.urban.config import URBANMAP_CFG
 from Products.urban.fingerpointing import map_logger
 from Products.urban.interfaces import IInquiry
-from Products.urban.browser.table.urbantable import ParcelsTable
-
 from plone import api
 
 

@@ -15,21 +15,19 @@ __docformat__ = "plaintext"
 
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
-from zope.interface import implements
-from Products.urban import interfaces
-from Products.urban.content.licence.UrbanCertificateBase import UrbanCertificateBase
-from Products.urban.content.licence.UrbanCertificateBase import (
-    finalizeSchema as UrbanCertificateBase_finalizeSchema,
-)
+from Products.CMFCore.utils import getToolByName
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
-
-from Products.urban.config import *
+from Products.urban import interfaces
 from Products.urban import UrbanMessage as _
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
-
+from Products.urban.config import *
+from Products.urban.content.licence.UrbanCertificateBase import \
+    finalizeSchema as UrbanCertificateBase_finalizeSchema
+from Products.urban.content.licence.UrbanCertificateBase import UrbanCertificateBase
 ##code-section module-header #fill in your manual code here
 from zope.i18n import translate
-from Products.CMFCore.utils import getToolByName
+from zope.interface import implements
+
 
 schema = Schema()
 

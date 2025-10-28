@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
 
+from Products.urban import UrbanMessage as _
 from eea.facetednavigation.widgets.select import widget
 from eea.facetednavigation.widgets.select.interfaces import ISelectSchema as ISchema
 from zope.component import getUtility
 from zope.schema.interfaces import IVocabularyFactory
 
 import logging
-
-from Products.urban import UrbanMessage as _
 
 
 logger = logging.getLogger("eea.facetednavigation.widgets.portlet")

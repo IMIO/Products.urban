@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from Products.urban.notice.base import NoticeElement
 from Products.urban import services
+from Products.urban.notice.base import NoticeElement
 
 
 class NoticeParcel(NoticeElement):

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-import json
 from pathlib2 import Path
+
+import json
 
 
 def load_notif_json(folder, filename):

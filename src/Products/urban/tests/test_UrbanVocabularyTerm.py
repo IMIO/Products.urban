@@ -25,7 +25,9 @@ class TestUrbanVocabularyTerm(unittest.TestCase):
         self.urbancertificateones = urban.urbancertificateones
         default_user = self.layer.default_user
         login(portal, default_user)
-        event_config = self.portal_urban.urbancertificateone.eventconfigs["depot-de-la-demande"]
+        event_config = self.portal_urban.urbancertificateone.eventconfigs[
+            "depot-de-la-demande"
+        ]
 
         self.certificate = api.content.create(
             type="UrbanCertificateOne",

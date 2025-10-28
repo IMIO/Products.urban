@@ -1,16 +1,12 @@
 # -*- coding: utf-8 -*-
 
-from plone import api
-
 from Products.urban.interfaces import IUrbanEvent
-from Products.urban.utils import getCurrentFolderManager
 from Products.urban.schedule.vocabulary import URBAN_TYPES_INTERFACES
-
+from Products.urban.utils import getCurrentFolderManager
 from collective.faceted.task.events.task_events import activate_faceted_tasks_listing
-
 from imio.schedule.utils import end_all_open_tasks
 from imio.schedule.utils import get_task_configs
-
+from plone import api
 from zope.annotation import IAnnotations
 from zope.interface import alsoProvides
 

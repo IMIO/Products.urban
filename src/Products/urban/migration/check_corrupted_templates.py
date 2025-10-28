@@ -1,6 +1,6 @@
+from StringIO import StringIO
 from collective.documentgenerator.content import pod_template
 from plone import api
-from StringIO import StringIO
 
 import lxml
 import zipfile

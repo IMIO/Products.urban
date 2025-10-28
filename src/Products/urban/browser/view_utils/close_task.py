@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 from Products.CMFPlone.utils import safe_unicode
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.urban import UrbanMessage as _
 from Products.urban.interfaces import IGenericLicence
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone import api
 from plone.z3cform.layout import FormWrapper
 from z3c.form import button
@@ -12,8 +12,8 @@ from z3c.form.form import Form
 from zope import schema
 from zope.interface import Interface
 
-import transaction
 import logging
+import transaction
 
 
 logger = logging.getLogger("Closed task utils view")

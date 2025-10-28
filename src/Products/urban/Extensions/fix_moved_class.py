@@ -1,7 +1,8 @@
+from plone import api
+
 import importlib
 import logging
 
-from plone import api
 
 logger = logging.getLogger("urban: fix moved class")
 

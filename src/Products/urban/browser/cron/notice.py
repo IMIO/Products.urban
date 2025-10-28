@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 
+from DateTime import DateTime
 from Products.Archetypes.event import ObjectInitializedEvent
 from Products.Five import BrowserView
 from Products.urban import UrbanMessage as _
-from Products.urban.services import notice
 from Products.urban.browser.cron.transitions import EVENT_TYPE_TO_TRANSITION
+from Products.urban.services import notice
 from datetime import datetime
-from DateTime import DateTime
 from plone import api
 from zope.event import notify
 from zope.i18n import translate
@@ -49,7 +49,6 @@ class ImportFromNoticeView(BrowserView):
         licence.description.raw += translate(error, context=self.request)
         licence._p_changed = 1
 
-
     def _handle_notification(self, notification):
         notification_date = datetime.strptime(
             notification["status"]["date"][0:26],
@@ -67,7 +66,10 @@ class ImportFromNoticeView(BrowserView):
             self._transfert_dossier(detailed_notification)
         if detailed_notification.notice_type == "NOTIF_COMPLETUDE1_INCOMPLET_COMMUNE":
             self.process_incomplete_folder_notification(detailed_notification)
-        if detailed_notification.notice_type == "NOTIF_COMPLETUDE2_NON_RECEVABLE_COMMUNE":
+        if (
+            detailed_notification.notice_type
+            == "NOTIF_COMPLETUDE2_NON_RECEVABLE_COMMUNE"
+        ):
             self.process_not_admissible_folder_notification_second_tour(
                 detailed_notification
             )
@@ -122,7 +124,7 @@ class ImportFromNoticeView(BrowserView):
         api.content.transition(event, "close")
 
         transaction.commit()  # Useful in case of an error
-    
+
     def update_license(self, license, detailed_notification, event_type=None):
         if not event_type:
             return
@@ -131,12 +133,12 @@ class ImportFromNoticeView(BrowserView):
         if isinstance(event_type, (list, tuple)):
             event_types = event_type
         else:
-            event_types = [event_type]   
+            event_types = [event_type]
         configs = []
-        for etype in event_types:                                         
+        for etype in event_types:
             event_config = event_configs.get(etype)
-            if  event_config:
-                configs.append((etype,event_config))
+            if event_config:
+                configs.append((etype, event_config))
         if not configs:
             return
         with api.env.adopt_roles(["Manager"]):
@@ -151,15 +153,23 @@ class ImportFromNoticeView(BrowserView):
 
     def process_incomplete_folder_notification(self, detailed_notification):
         license = detailed_notification.licence
-        self.update_license(license, detailed_notification, event_type="dossier-incomplet")
-        transaction.commit() 
-
-    def process_not_admissible_folder_notification_second_tour(self, detailed_notification):
-        licence = detailed_notification.licence
-        self.update_license(licence, detailed_notification, event_type="dossier-irrecevable")
+        self.update_license(
+            license, detailed_notification, event_type="dossier-incomplet"
+        )
         transaction.commit()
-    
+
+    def process_not_admissible_folder_notification_second_tour(
+        self, detailed_notification
+    ):
+        licence = detailed_notification.licence
+        self.update_license(
+            licence, detailed_notification, event_type="dossier-irrecevable"
+        )
+        transaction.commit()
+
     def process_inadmissible_folder_notification(self, detailed_notification):
         license = detailed_notification.licence
-        self.update_license(license, detailed_notification, event_type="dossier-irrecevable")
+        self.update_license(
+            license, detailed_notification, event_type="dossier-irrecevable"
+        )
         transaction.commit()

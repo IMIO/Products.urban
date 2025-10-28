@@ -15,21 +15,18 @@ __docformat__ = "plaintext"
 
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
-from zope.interface import implements
-import interfaces
-
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
-
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.config import *
+from Products.validation import validation
+from Products.validation.interfaces.IValidator import IValidator
+from plone import api
+from zope.i18n import translate
+from zope.interface import implements
 
 ##code-section module-header #fill in your manual code here
 import cgi
-from zope.i18n import translate
-from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
-from Products.validation.interfaces.IValidator import IValidator
-from Products.validation import validation
-
-from plone import api
+import interfaces
 
 
 class BelgianNationalRegValidator:
@@ -286,7 +283,8 @@ class Contact(BaseContent, BrowserDefaultMixin):
         else:
             return "%s %s %s" % (self.getPersonTitle(short=True), name1, name2)
 
-    security.declarePublic('getSignaletic')
+    security.declarePublic("getSignaletic")
+
     def getSignaletic(
         self,
         short=False,
@@ -303,7 +301,11 @@ class Contact(BaseContent, BrowserDefaultMixin):
         urban_tool = api.portal.get_tool("portal_urban")
         invertnames = urban_tool.getInvertAddressNames()
         nameSignaletic = self._getNameSignaletic(
-            short, linebyline, reverse, invertnames, withtitle=withtitle,
+            short,
+            linebyline,
+            reverse,
+            invertnames,
+            withtitle=withtitle,
         )
         if not withaddress:
             if not linebyline:
@@ -377,7 +379,7 @@ class Contact(BaseContent, BrowserDefaultMixin):
             names = u"%s %s" % (name2, name1)
         names = names.strip()
         namepart = namedefined and names or society
-        nameSignaletic = u'%s %s' % (title, namepart)
+        nameSignaletic = u"%s %s" % (title, namepart)
         if withtitle:
             nameSignaletic = u"%s %s" % (title, namepart)
         else:

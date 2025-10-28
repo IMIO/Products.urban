@@ -1,21 +1,18 @@
 # -*- coding: utf-8 -*-
 
 from Acquisition import aq_inner
-
 from Products.Five import BrowserView
-
+from Products.urban import UrbanMessage as _
+from Products.urban.browser.table.urbantable import ArchitectsTable
 from Products.urban.browser.table.urbantable import GeometriciansTable
 from Products.urban.browser.table.urbantable import NotariesTable
-from Products.urban.browser.table.urbantable import ArchitectsTable
 from Products.urban.browser.table.urbantable import ParcellingsTable
 from Products.urban.browser.table.urbantable import UrbanTable
-from Products.urban import UrbanMessage as _
-
 from plone import api
 from plone.z3cform.layout import FormWrapper
 from z3c.form import button
-from z3c.form import form, field
-
+from z3c.form import field
+from z3c.form import form
 from zope.interface import Interface
 from zope.schema import TextLine
 

@@ -1,35 +1,29 @@
 # -*- coding: utf-8 -*-
 
-from collective.documentgenerator.helper.archetypes import ATDisplayProxyObject
-from collective.documentgenerator.helper.archetypes import (
-    ATDocumentGenerationHelperView,
-)
-from collective.documentgenerator.helper.dexterity import DXDocumentGenerationHelperView
-
-from datetime import date as _date, datetime
-from dateutil.relativedelta import relativedelta
-
-from plone.dexterity.interfaces import IDexterityContent
-
+from DateTime import DateTime
 from Products.Archetypes.interfaces import IBaseObject
 from Products.CMFPlone.i18nl10n import ulocalized_time
-from Products.urban.interfaces import (
-    IUrbanEventInquiry,
-    IEnvironmentBase,
-    ITicket,
-    IBaseBuildLicence,
-    IUrbanCertificateBase,
-)
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
-from Products.urban.utils import getCurrentFolderManager
-from Products.urban.utils import get_ws_meetingitem_infos
+from Products.urban.interfaces import IBaseBuildLicence
+from Products.urban.interfaces import IEnvironmentBase
+from Products.urban.interfaces import ITicket
+from Products.urban.interfaces import IUrbanCertificateBase
+from Products.urban.interfaces import IUrbanEventInquiry
 from Products.urban.services import cadastre
-
+from Products.urban.utils import get_ws_meetingitem_infos
+from Products.urban.utils import getCurrentFolderManager
+from collective.documentgenerator.helper.archetypes import ATDisplayProxyObject
+from collective.documentgenerator.helper.archetypes import \
+    ATDocumentGenerationHelperView
+from collective.documentgenerator.helper.dexterity import DXDocumentGenerationHelperView
+from datetime import date as _date
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
+from plone import api
+from plone.dexterity.interfaces import IDexterityContent
 from zope.component import getUtility
 from zope.i18n import translate
 from zope.schema.interfaces import IVocabularyFactory
-from plone import api
-from DateTime import DateTime
 
 import re
 
