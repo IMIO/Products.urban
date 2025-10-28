@@ -151,10 +151,22 @@ from Products.urban.content.licence import PatrimonyCertificate  # noqa
 from Products.urban.content.licence import PreliminaryNotice  # noqa
 from Products.urban.content.licence import ProjectMeeting  # noqa
 from Products.urban.content.licence import RoadDecree  # noqa
+from Products.urban.content.licence import Housing  # noqa
 from Products.urban.content.licence import Ticket  # noqa
 from Products.urban.content.licence import UniqueLicence  # noqa
 from Products.urban.content.licence import UrbanCertificateBase  # noqa
 from Products.urban.content.licence import UrbanCertificateTwo  # noqa
+from Products.urban.content.licence import ExplosivesPossession  # noqa
+from Products.urban.content.licence import RoadDecree  # noqa
+from Products.urban.content.licence import Housing  # noqa
+from Products.urban.content import CODT_Inquiry  # noqa
+from Products.urban.content import CODT_UniqueLicenceInquiry  # noqa
+from Products.urban.content import FollowUpEventType  # noqa
+from Products.urban.content import Inquiry  # noqa
+from Products.urban.content import UrbanEventAnnouncement  # noqa
+from Products.urban.content import UrbanEventInquiry  # noqa
+from Products.urban.content import UrbanEventInspectionReport  # noqa
+from Products.urban.content import UrbanEventFollowUp  # noq^
 
 import Products
 
@@ -222,6 +234,7 @@ def initialize(context):
     import content.licence.Division
     import content.licence.EnvClassBordering
     import content.licence.EnvClassOne
+    import content.licence.Housing
     import content.licence.EnvClassThree
     import content.licence.EnvClassTwo
     import content.licence.EnvironmentBase

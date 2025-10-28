@@ -801,4 +801,13 @@
         profile="Products.urban:default"
         />
 
+     <gs:upgradeStep
+        title="Add housing procedure"
+        description=""
+        source="*"
+        destination="2800"
+        handler=".update_280.add_building_procedure"
+        profile="Products.urban:default"
+        />
+
 </configure>

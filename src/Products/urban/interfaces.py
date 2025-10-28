@@ -335,6 +335,12 @@ class IInspection(IGenericLicence):
     """
 
 
+class IHousing(IGenericLicence):
+    """
+    Marker interface for inspection
+    """
+
+
 class ITicket(IGenericLicence):
     """
     Marker interface for inspection
@@ -577,6 +583,10 @@ class ISettlementEvent(Interface):
 
 class ITransferOfLicenceEvent(Interface):
     __doc__ = _("""ITransferOfLicence type marker interface""")
+
+
+class IObservationEvent(Interface):
+    __doc__ = _("""IObservationEvent type marker interface""")
 
 
 class IUrbanBase(Interface):

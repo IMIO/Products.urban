@@ -179,7 +179,6 @@ cmd.append(requirement)
 
 import subprocess
 
-
 if subprocess.call(cmd, env=dict(os.environ, PYTHONPATH=setuptools_path)) != 0:
     raise Exception("Failed to execute command:\n%s" % repr(cmd)[1:-1])
 
@@ -189,7 +188,6 @@ if subprocess.call(cmd, env=dict(os.environ, PYTHONPATH=setuptools_path)) != 0:
 ws.add_entry(tmpeggs)
 ws.require(requirement)
 import zc.buildout.buildout
-
 
 if not [a for a in args if "=" not in a]:
     args.append("bootstrap")

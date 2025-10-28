@@ -37,6 +37,8 @@ from Products.urban.utils import getLicenceFolderId
 from Products.urban.utils import getUrbanOnlyLicenceFolderIds
 from Products.urban.utils import moveElementAfter
 from collective.eeafaceted.collectionwidget.utils import _updateDefaultCollectionFor
+from Products.urban.profiles.extra.config_default_values import default_values
+from Products.urban.profiles.extra.config_default_values import vocabularies_with_HTML_description
 from datetime import date
 from eea.facetednavigation.layout.interfaces import IFacetedLayout
 from imio.schedule.utils import _set_faceted_view
@@ -1845,3 +1847,233 @@ def activateAnnouncementArticlesText(context):
                 licence_config.usedAttributes = licence_config.usedAttributes + (
                     "announcementArticlesText",
                 )
+
+
+def add_new_urban_licence_type(urban_type):
+    add_aplication_folder(urban_type)
+    add_imio_dashboard(urban_type)
+    config_folder = add_urban_config_folder(urban_type)
+    add_schedule(config_folder, urban_type)
+    add_vocabularies(config_folder, urban_type)
+
+
+def add_aplication_folder(urban_type, urban_folder=None):
+    if urban_folder is None:
+        site = api.portal.get()
+        urban_folder = getattr(site, "urban")
+    licence_folder_id = getLicenceFolderId(urban_type)
+    if not hasattr(urban_folder, licence_folder_id):
+        licence_folder_id = urban_folder.invokeFactory(
+            "Folder", id=licence_folder_id, title=_(urban_type, "urban")
+        )
+    licence_folder = getattr(urban_folder, licence_folder_id)
+    alsoProvides(licence_folder, ILicenceContainer)
+    setFolderAllowedTypes(licence_folder, urban_type)
+    # manage the 'Add' permissions...
+    try:
+        if urban_type != "CODT_IntegratedLicence":
+            licence_folder.manage_permission(
+                "urban: Add %s" % urban_type,
+                [
+                    "Manager",
+                    "Contributor",
+                ],
+                acquire=0,
+            )
+    except ValueError:
+        # exception for some portal_types having a different meta_type
+        if urban_type in [
+            "UrbanCertificateOne",
+            "NotaryLetter",
+        ]:
+            licence_folder.manage_permission(
+                "urban: Add UrbanCertificateBase",
+                [
+                    "Manager",
+                    "Contributor",
+                ],
+                acquire=0,
+            )
+        if urban_type in [
+            "CODT_UrbanCertificateOne",
+            "CODT_NotaryLetter",
+        ]:
+            licence_folder.manage_permission(
+                "urban: Add CODT_UrbanCertificateBase",
+                [
+                    "Manager",
+                    "Contributor",
+                ],
+                acquire=0,
+            )
+        if urban_type in [
+            "EnvClassThree",
+        ]:
+            licence_folder.manage_permission(
+                "urban: Add EnvironmentBase",
+                [
+                    "Manager",
+                    "Contributor",
+                ],
+                acquire=0,
+            )
+        if urban_type in ["EnvClassOne", "EnvClassTwo", "EnvClassBordering"]:
+            licence_folder.manage_permission(
+                "urban: Add EnvironmentLicence",
+                [
+                    "Manager",
+                    "Contributor",
+                ],
+                acquire=0,
+            )
+    urban_folder.moveObjectsToBottom([licence_folder_id])
+
+
+def add_imio_dashboard(urban_type, urban_folder=None):
+    if urban_folder is None:
+        site = api.portal.get()
+        urban_folder = getattr(site, "urban")
+
+    licence_folder = getattr(urban_folder, urban_type.lower() + "s")
+    _activate_dashboard_navigation(
+        licence_folder, "/dashboard/config/%ss.xml" % urban_type.lower()
+    )
+    collection_id = "collection_%s" % urban_type.lower()
+    no_deposit = ["PatrimonyCertificate", "Inspection"]
+    with_deposit_date = urban_type not in no_deposit
+
+    if collection_id in licence_folder.objectIds():
+        return getattr(licence_folder, collection_id)
+
+    setFolderAllowedTypes(licence_folder, "DashboardCollection")
+    _create_dashboard_collection(
+        licence_folder,
+        id=collection_id,
+        title=_(urban_type, "urban"),
+        filter_type=[urban_type],
+        with_deposit_date=with_deposit_date,
+    )
+    setFolderAllowedTypes(licence_folder, urban_type)
+    licence_folder.moveObjectToPosition(collection_id, 0)
+    collection = getattr(licence_folder, collection_id)
+
+    _updateDefaultCollectionFor(licence_folder, collection.UID())
+    
+    return collection
+
+
+def add_urban_config_folder(urban_type, tool=None, site=None):
+    if tool is None:
+        tool = api.portal.get_tool("portal_urban")
+    if site is None:
+        site = api.portal.get()
+
+    licenceConfigId = urban_type.lower()
+    if hasattr(aq_base(tool), licenceConfigId):
+        return getattr(tool, licenceConfigId)
+
+    # Add folder
+    config_folder_id = tool.invokeFactory(
+        "LicenceConfig",
+        id=licenceConfigId,
+        title=_("%s_urbanconfig_title" % urban_type.lower(), "urban"),
+        referenceTALExpression="python: '{}/' + date.strftime('%Y') + '/' + numerotation".format(
+            URBAN_TYPES_ACRONYM[urban_type]
+        ),
+    )
+    config_folder = getattr(tool, config_folder_id)
+    config_folder.licencePortalType = urban_type
+    config_folder.setUsedAttributes(config_folder.listUsedAttributes().keys())
+    states_voc = queryUtility(IVocabularyFactory, "urban.licence_state")(
+        config_folder
+    )
+    default_end_states = [
+        st for st in states_voc.by_value.keys() if st in LICENCE_FINAL_STATES
+    ]
+    config_folder.setStates_to_end_all_tasks(default_end_states)
+    config_folder.reindexObject()
+
+    # Add EventConfigs folder
+    if not hasattr(aq_base(config_folder), "eventconfigs"):
+        config_folder.invokeFactory(
+            "Folder",
+            id="eventconfigs",
+            title=_("eventconfigs_folder_title", "urban"),
+        )
+    eventconfigs_folder = getattr(config_folder, "eventconfigs")
+    if urban_type in ["Inspection", "Ticket"]:
+        setFolderAllowedTypes(
+            eventconfigs_folder, ["EventConfig", "FollowUpEventConfig"]
+        )
+    else:
+        setFolderAllowedTypes(
+            eventconfigs_folder, ["EventConfig", "OpinionEventConfig"]
+        )
+
+    licence_vocabularies = default_values.get(urban_type, {})
+    createVocabularyFolders(
+        container=config_folder, vocabularies=licence_vocabularies, site=site
+    )
+
+    shared_vocabularies = getSharedVocabularies(urban_type, default_values)
+    createVocabularyFolders(
+        container=config_folder, vocabularies=shared_vocabularies, site=site
+    )
+    return config_folder
+
+
+def add_schedule(config_folder, urban_type, schedule_folder=None):
+    # Add licence type folder in urban schedule folder
+    createScheduleConfig(container=config_folder, portal_type=urban_type)
+    schedule_config_folder = getattr(config_folder, "schedule")
+    dashboard_collection = getattr(schedule_config_folder, "dashboard_collection", None)
+    if not dashboard_collection:
+        event.notify(ObjectModifiedEvent(schedule_config_folder))
+    schedule_config_folder.dashboard_collection.customViewFields = (
+        u"sortable_title",
+        u"pretty_link",
+        u"address_column",
+        u"parcelreferences_column",
+        u"assigned_user",
+        u"status",
+        u"due_date",
+        u"task_actions_column",
+    )
+
+    folder_id = schedule_config_folder.get_scheduled_portal_type().lower()
+    licence_name = _(schedule_config_folder.get_scheduled_portal_type(), "urban")
+
+    if schedule_folder is None:
+        urban_folder = api.portal.get().urban
+        schedule_folder = getattr(urban_folder, "schedule")
+
+    if not hasattr(schedule_folder, folder_id):
+        setFolderAllowedTypes(schedule_folder, ["Folder"])
+        schedule_folder.invokeFactory("Folder", id=folder_id, title=licence_name)
+
+        # only apply faceted view if the the folder does not exist to keep
+        # custom changes
+        collection_folder = getattr(schedule_folder, folder_id)
+        config_path = "{}/schedule/config/{}.xml".format(
+            os.path.dirname(__file__), folder_id
+        )
+        _set_faceted_view(collection_folder, config_path, [schedule_config_folder])
+
+    from Products.urban.profiles.extra.schedule_config import schedule_config
+
+    taskconfigs = schedule_config.get(urban_type.lower(), None)
+    if taskconfigs is not None:
+        _create_task_configs(schedule_folder, taskconfigs)
+
+
+def add_vocabularies(config_folder, urban_type):
+    licence_vocabularies = default_values.get(urban_type, {})
+    createVocabularies(container=config_folder, vocabularies=licence_vocabularies)
+
+    shared_vocabularies = getSharedVocabularies(urban_type, default_values)
+    createVocabularies(container=config_folder, vocabularies=shared_vocabularies)
+
+    for voc_folder_id in config_folder.objectIds():
+        if voc_folder_id in vocabularies_with_HTML_description:
+            voc_folder = getattr(config_folder, voc_folder_id)
+            setHTMLContentType(voc_folder, "description")

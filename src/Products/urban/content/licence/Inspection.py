@@ -217,6 +217,18 @@ schema = Schema(
             default_method="getDefaultText",
             default_output_type="text/x-html-safe",
         ),
+        LinesField(
+            name="observationItems",
+            widget=MultiSelectionWidget(
+                format="checkbox",
+                label=_("urban_label_observationItems", default="ObservationItems"),
+                i18n_domain="urban",
+            ),
+            multiValued=True,
+            optional=True,
+            schemata="urban_inspection",
+            vocabulary=UrbanVocabulary("observationitems", inUrbanConfig=True),
+        ),
         StringField(
             name="patrimony",
             default="none",
@@ -386,6 +398,7 @@ schema = Schema(
         ),
     ),
 )
+setOptionalAttributes(schema, ["observationItems"])
 Inspection_schema = (
     BaseFolderSchema.copy()
     + getattr(GenericLicence, "schema", Schema(())).copy()
@@ -696,6 +709,15 @@ class Inspection(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
             ("classified", "bien classé"),
         )
         return DisplayList(vocabulary)
+
+    def listObservationsItems(self):
+        """Return a list of observations items"""
+        voc = UrbanVocabulary("observationitems", inUrbanConfig=False)
+        return voc.getDisplayList(self)
+
+    def displayObservationItems(self):
+        """Return a list of selected observations items"""
+        return self.getValuesForTemplate("observationItems")
 
 
 registerType(Inspection, PROJECTNAME)

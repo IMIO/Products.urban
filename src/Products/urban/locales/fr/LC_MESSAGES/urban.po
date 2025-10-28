@@ -674,6 +674,11 @@ msgstr "Fin des travaux"
 msgid "ImpactStudy event type marker interface"
 msgstr "Étude d'incidence"
 
+#: ../interfaces.py:581
+msgid "IObservationEvent type marker interface"
+msgstr "Constat"
+
+#: ../browser/urbaneventviews.py:294
 #: ../browser/urbaneventviews.py:330
 msgid "Import"
 msgstr "Import"
@@ -1621,6 +1626,9 @@ msgstr "Paramètres des détentions d'explosifs"
 msgid "explosivespossessions"
 msgstr "Détention d'explosifs"
 
+msgid "Housing"
+msgstr "Logement"
+
 msgid "externaldecisions_folder_title"
 msgstr "Décision des avis externes"
 
@@ -1868,6 +1876,9 @@ msgstr "Périodes de suspension d'enquête"
 #: ../browser/licence/templates/licencetabsmacros.pt:375
 msgid "inquiry_title_and_number"
 msgstr "Enquête n°${number}"
+
+msgid "housing_urbanconfig_title"
+msgstr "Paramètres logements"
 
 msgid "inspection_urbanconfig_title"
 msgstr "Paramètres de l'inspection"
@@ -5461,3 +5472,45 @@ msgstr "ans"
 
 msgid "zip_folder_title"
 msgstr "Zone d'initiative privilégiée"
+
+msgid "dimensiontypes_folder_title"
+msgstr "Types de dimension"
+
+msgid "units_folder_title"
+msgstr "Unités"
+
+msgid "observationitems_folder_title"
+msgstr "Eléments de constatation"
+
+msgid "urban_label_dimensions"
+msgstr "Dimensions"
+
+msgid "dimensions"
+msgstr "Dimensions"
+
+msgid "urban_label_observationItems"
+msgstr "Eléments de constatation"
+
+msgid "buildingtype_folder_title"
+msgstr "Nature de l'immeuble"
+
+msgid "part_of_the_building_concerned_folder_title"
+msgstr "Partie de l'immeuble concernée"
+
+msgid "Unit"
+msgstr "Unité"
+
+msgid "Details"
+msgstr "Détails"
+
+msgid "Value"
+msgstr "Valeur"
+
+msgid "urban_label_taxation"
+msgstr "Taxation"
+
+msgid "urban_label_buildingPart"
+msgstr "Partie de l'immeuble concernée"
+
+msgid "urban_label_buildingType"
+msgstr "Nature de l'immeuble"
