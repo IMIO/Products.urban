@@ -84,7 +84,6 @@ class NoticeNotification(NoticeElement):
     @property
     def type(self):
         """Return the portal type corresponding to notice subtype"""
-
         if not hasattr(self, "_licence_type"):
             self._licence_type = None
 

@@ -85,7 +85,6 @@ class ImportFromNoticeView(BrowserView):
             )
         if detailed_notification.notice_type == "NOTIFICATION_PROROGATION_COMMUNE":
             self.process_extension_of_deadline_notification(detailed_notification)
-
         if detailed_notification.notice_type == "NOTIFICATION_RS_COMMUNE":
             self.process_transmission_summary_report_notification(detailed_notification)
 
