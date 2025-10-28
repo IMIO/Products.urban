@@ -1,8 +1,8 @@
-import unittest
-
-import robotsuite
 from Products.urban.testing import URBAN_TEST_ROBOT
 from plone.testing import layered
+
+import robotsuite
+import unittest
 
 
 def test_suite():

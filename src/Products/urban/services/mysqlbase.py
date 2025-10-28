@@ -1,22 +1,19 @@
 # -*- coding: utf-8 -*-
 
 from Products.CMFPlone import PloneMessageFactory as _
-
 from Products.urban.services.interfaces import ISQLSession
-
 from plone import api
-
+from sqlalchemy import create_engine
 from sqlalchemy import MetaData
 from sqlalchemy import Table
-from sqlalchemy import create_engine
 from sqlalchemy.exc import NoSuchTableError
 from sqlalchemy.orm import scoped_session
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.pool import NullPool
-
 from zope.component import getAdapter
 from zope.interface import implements
 from zope.sqlalchemy import ZopeTransactionExtension
+
 
 DB_NO_CONNECTION_ERROR = "No DB Connection"
 

@@ -14,30 +14,29 @@ __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEUL
 __docformat__ = "plaintext"
 
 from AccessControl import ClassSecurityInfo
-from Products.urban.widget.select2widget import MultiSelect2Widget
+from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
+    ReferenceBrowserWidget
 from Products.Archetypes.atapi import *
-from zope.interface import implements
-from zope.i18n import translate
-from Products.urban import interfaces
-from Products.urban.content.Inquiry import Inquiry
-from Products.urban.content.licence.GenericLicence import GenericLicence
-from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
-from plone import api
-
-from Products.urban.config import *
-from Products.urban import UrbanMessage as _
-
 ##code-section module-header #fill in your manual code here
 from Products.CMFCore.utils import getToolByName
-from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import (
-    ReferenceBrowserWidget,
-)
+from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
-from Products.urban.utils import setOptionalAttributes, setSchemataForInquiry
-from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
-from dateutil.relativedelta import relativedelta
 from Products.MasterSelectWidget.MasterMultiSelectWidget import MasterMultiSelectWidget
 from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
+from Products.urban import interfaces
+from Products.urban import UrbanMessage as _
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
+from Products.urban.config import *
+from Products.urban.content.Inquiry import Inquiry
+from Products.urban.content.licence.GenericLicence import GenericLicence
+from Products.urban.utils import setOptionalAttributes
+from Products.urban.utils import setSchemataForInquiry
+from Products.urban.widget.select2widget import MultiSelect2Widget
+from dateutil.relativedelta import relativedelta
+from plone import api
+from zope.i18n import translate
+from zope.interface import implements
+
 
 optional_fields = [
     "implantation",

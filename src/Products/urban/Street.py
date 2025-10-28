@@ -14,18 +14,18 @@ __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEUL
 __docformat__ = "plaintext"
 
 from AccessControl import ClassSecurityInfo
+##code-section module-header #fill in your manual code here
+from Acquisition import aq_inner
+from Acquisition import aq_parent
 from Products.Archetypes.atapi import *
+from Products.CMFCore import permissions
+from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
+from Products.urban.config import *
+from Products.urban.utils import WIDGET_DATE_END_YEAR
 from zope.interface import implements
+
 import interfaces
 
-from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
-
-from Products.urban.utils import WIDGET_DATE_END_YEAR
-from Products.urban.config import *
-
-##code-section module-header #fill in your manual code here
-from Acquisition import aq_inner, aq_parent
-from Products.CMFCore import permissions
 
 ##/code-section module-header
 

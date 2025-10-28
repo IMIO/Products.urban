@@ -1,18 +1,15 @@
 # -*- coding: utf-8 -*-
 
-from collective.z3cform.datagridfield import DataGridFieldFactory
-from collective.z3cform.datagridfield.registry import DictRow
-from plone.app.registry.browser.controlpanel import RegistryEditForm
-from plone.app.registry.browser.controlpanel import ControlPanelFormWrapper
-
-from z3c.form import button
-from z3c.form import field
-
 from Products.statusmessages.interfaces import IStatusMessage
 from Products.urban import UrbanMessage as _
-
-from zope.interface import Interface
+from collective.z3cform.datagridfield import DataGridFieldFactory
+from collective.z3cform.datagridfield.registry import DictRow
+from plone.app.registry.browser.controlpanel import ControlPanelFormWrapper
+from plone.app.registry.browser.controlpanel import RegistryEditForm
+from z3c.form import button
+from z3c.form import field
 from zope import schema
+from zope.interface import Interface
 
 
 class IGigMapping(Interface):

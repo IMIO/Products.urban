@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
 
+from Products.Archetypes.interfaces import IBaseObject
+from Products.Archetypes.interfaces.field import IField
+from Products.urban.interfaces import IProductUrbanLayer
 from plone import api
 from plone.restapi.interfaces import IFieldSerializer
 from plone.restapi.serializer.atfields import DefaultFieldSerializer
 from plone.restapi.serializer.converters import json_compatible
-from Products.Archetypes.interfaces import IBaseObject
-from Products.Archetypes.interfaces.field import IField
-from Products.urban.interfaces import IProductUrbanLayer
 from zope.component import adapter
-from zope.interface import Interface, implementer
+from zope.interface import implementer
+from zope.interface import Interface
 
 
 @adapter(IField, IBaseObject, IProductUrbanLayer)

@@ -13,43 +13,37 @@ __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEUL
 <stephan.geulette@uvcw.be>, Jean-Michel Abe <jm.abe@la-bruyere.be>"""
 __docformat__ = "plaintext"
 
-from Acquisition import aq_parent
 from AccessControl import ClassSecurityInfo
-from Products.urban.widget.select2widget import MultiSelect2Widget
-from Products.Archetypes.atapi import *
-from zope.interface import implements
-import interfaces
-
-from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
-
-from Products.urban.utils import WIDGET_DATE_END_YEAR
-from Products.urban.config import *
-
+from Acquisition import aq_parent
 ##code-section module-header #fill in your manual code here
 from DateTime import DateTime
-
-from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import (
-    ReferenceBrowserWidget,
-)
-from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
 from Products.ATContentTypes.interfaces.file import IATFile
+from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
+    ReferenceBrowserWidget
+from Products.Archetypes.atapi import *
 from Products.CMFCore.utils import getToolByName
-
-from collective.plonefinder.browser.interfaces import IFinderUploadCapable
-from collective.quickupload.interfaces import IQuickUploadCapable
-from Products.urban.interfaces import IUrbanDoc
+from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
+from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
+from Products.urban import UrbanMessage as _
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
+from Products.urban.config import *
+from Products.urban.interfaces import IUrbanDoc
 from Products.urban.utils import is_attachment
 from Products.urban.utils import setOptionalAttributes
-from Products.urban import UrbanMessage as _
-from plone.contentrules.engine.interfaces import IRuleAssignmentManager
-from zope.component import getUtility, getMultiAdapter
-from plone.contentrules.rule.interfaces import IExecutable
-from plone.contentrules.engine.interfaces import IRuleStorage
-
+from Products.urban.utils import WIDGET_DATE_END_YEAR
+from Products.urban.widget.select2widget import MultiSelect2Widget
+from collective.plonefinder.browser.interfaces import IFinderUploadCapable
+from collective.quickupload.interfaces import IQuickUploadCapable
 from plone import api
-
+from plone.contentrules.engine.interfaces import IRuleAssignmentManager
+from plone.contentrules.engine.interfaces import IRuleStorage
+from plone.contentrules.rule.interfaces import IExecutable
+from zope.component import getMultiAdapter
+from zope.component import getUtility
 from zope.i18n import translate
+from zope.interface import implements
+
+import interfaces
 
 
 slave_fields_transfertype = (
@@ -530,7 +524,9 @@ schema = Schema(
                 format="%d/%m/%Y",
                 starting_year=1960,
                 ending_year=WIDGET_DATE_END_YEAR,
-                label=_("urban_label_videoConferenceDate", default="videoConferencedate"),
+                label=_(
+                    "urban_label_videoConferenceDate", default="videoConferencedate"
+                ),
             ),
             optional=True,
         ),
@@ -545,7 +541,6 @@ schema = Schema(
             ),
             optional=True,
         ),
-
     ),
 )
 
@@ -600,7 +595,11 @@ class UrbanEvent(OrderedBaseFolder, BrowserDefaultMixin):
             licence = context.aq_parent
             default_values = field.vocabulary.get_default_values(licence)
             # handle case of a list of default values (only one, in principle) for a string field
-            if not multivalued and type(default_values) == list and len(default_values) > 0:
+            if (
+                not multivalued
+                and type(default_values) == list
+                and len(default_values) > 0
+            ):
                 return default_values[0]
             else:
                 return default_values
@@ -969,8 +968,10 @@ class UrbanEvent(OrderedBaseFolder, BrowserDefaultMixin):
             if not rule.enabled:
                 continue
             for condition in rule.conditions:
-                class EventTemp():
+
+                class EventTemp:
                     object = self
+
                 executable = getMultiAdapter((self, condition, EventTemp), IExecutable)
                 conditions.append(executable())
             if all(conditions):

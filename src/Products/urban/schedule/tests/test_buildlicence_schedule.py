@@ -17,7 +17,7 @@ class TestBuildLicenceSchedule(unittest.TestCase):
     layer = URBAN_TESTS_CONFIG_FUNCTIONAL
 
     def _get_due_date(self, task):
-        """"Return the due date for a given task"""
+        """ "Return the due date for a given task"""
         container = task.get_container()
         config = task.get_task_config()
         return config.compute_due_date(container, task)
@@ -27,7 +27,9 @@ class TestBuildLicenceSchedule(unittest.TestCase):
         self.portal = portal
         login(self.portal, self.layer.default_user)
         self.portal_urban = portal.portal_urban
-        event_config = self.portal_urban.codt_buildlicence.eventconfigs["depot-de-la-demande-codt"]
+        event_config = self.portal_urban.codt_buildlicence.eventconfigs[
+            "depot-de-la-demande-codt"
+        ]
 
         self.licence_1 = api.content.create(
             type="CODT_BuildLicence",

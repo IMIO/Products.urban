@@ -1,21 +1,22 @@
 # -*- coding: utf-8 -*-
 
-import unittest2 as unittest
-from Products.urban.testing import URBAN_TESTS_CONFIG_FUNCTIONAL
-from Products.urban import utils
-from Products.urban.setuphandlers import setFolderAllowedTypes
-from Products.urban.contentrules.stringinterp import FolderManagersMail
 from Products.CMFPlone.interfaces.constrains import ISelectableConstrainTypes
-
-from plone.app.testing import login
+from Products.urban import utils
+from Products.urban.contentrules.stringinterp import FolderManagersMail
+from Products.urban.setuphandlers import setFolderAllowedTypes
+from Products.urban.testing import URBAN_TESTS_CONFIG_FUNCTIONAL
 from plone import api
+from plone.app.testing import login
 
 import transaction
+import unittest2 as unittest
+
 
 EMAIL = "urbanmanager@urban.be"
 
+
 class TestFolderManagersMail(unittest.TestCase):
-    layer=URBAN_TESTS_CONFIG_FUNCTIONAL
+    layer = URBAN_TESTS_CONFIG_FUNCTIONAL
 
     def setUp(self):
         portal = self.layer["portal"]
@@ -24,9 +25,7 @@ class TestFolderManagersMail(unittest.TestCase):
         default_user = self.layer.default_user
         login(portal, default_user)
         self.licence = api.content.create(
-            container=self.codt_buildlicences,
-            type="CODT_BuildLicence",
-            id="newlicence"
+            container=self.codt_buildlicences, type="CODT_BuildLicence", id="newlicence"
         )
         self.folder_manager = self.portal.portal_urban.foldermanagers.foldermanager1
         self.urbanmanager_user = api.user.get(username="urbanmanager")

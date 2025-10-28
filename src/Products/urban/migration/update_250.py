@@ -1,33 +1,28 @@
 # -*- coding: utf-8 -*-
 
-from collective.documentgenerator.content.pod_template import IPODTemplate
-from collective.documentgenerator.content.pod_template import IConfigurablePODTemplate
-from collective.documentgenerator.content.vocabulary import (
-    AllPODTemplateWithFileVocabularyFactory,
-)
-from collective.documentgenerator.search_replace.pod_template import (
-    SearchAndReplacePODTemplates,
-)
-
+from Products.urban.config import URBAN_TYPES
+from Products.urban.interfaces import IBaseBuildLicence
+from Products.urban.interfaces import IGenericLicence
 from Products.urban.profiles.extra.config_default_values import default_values
-from Products.urban.setuphandlers import createVocabularyFolder
+from Products.urban.profiles.extra.schedule_config import \
+    schedule_config as schedule_config_dict
 from Products.urban.setuphandlers import createFolderDefaultValues
-
+from Products.urban.setuphandlers import createVocabularyFolder
+from collective.documentgenerator.content.pod_template import IConfigurablePODTemplate
+from collective.documentgenerator.content.pod_template import IPODTemplate
+from collective.documentgenerator.content.vocabulary import \
+    AllPODTemplateWithFileVocabularyFactory
+from collective.documentgenerator.search_replace.pod_template import \
+    SearchAndReplacePODTemplates
 from plone import api
 from plone.app.textfield import RichTextValue
 from plone.app.uuid.utils import uuidToObject
-
 from zope.event import notify
 from zope.lifecycleevent import ObjectModifiedEvent
 
-from Products.urban.config import URBAN_TYPES
-from Products.urban.profiles.extra.schedule_config import (
-    schedule_config as schedule_config_dict,
-)
-
-from Products.urban.interfaces import IGenericLicence, IBaseBuildLicence
 import logging
 import re
+
 
 logger = logging.getLogger("urban: migrations")
 
@@ -840,8 +835,8 @@ def update_collection_column(context):
 
 
 def update_faceted_collection_widget(context):
-    from eea.facetednavigation.subtypes.interfaces import IFacetedNavigable
     from eea.facetednavigation.interfaces import ICriteria
+    from eea.facetednavigation.subtypes.interfaces import IFacetedNavigable
 
     logger = logging.getLogger("Urban: Update collection widget")
     logger.info("starting upgrade steps")

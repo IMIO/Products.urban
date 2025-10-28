@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
 
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from archetypes.referencebrowserwidget import utils
 from archetypes.referencebrowserwidget.browser.view import ReferenceBrowserPopup
-
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-
 from zope.i18n import translate
 from zope.i18nmessageid import MessageFactory
+
 
 _ = MessageFactory("plone")
 

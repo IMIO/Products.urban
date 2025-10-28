@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 
 
-from plone import api
-
-from imio.schedule.content.task_config import ITaskConfig
 from imio.schedule.content.schedule_config import IScheduleConfig
+from imio.schedule.content.task_config import ITaskConfig
+from plone import api
 
 
 def update_schedule_collections():

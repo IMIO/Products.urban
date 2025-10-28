@@ -188,10 +188,7 @@ class TransitionsPanelView(ActionsPanelView):
         )
 
     def _check_if_transiton_present(self, transitions, transition_id):
-        return any([
-            transition["id"] == transition_id
-            for transition in transitions
-        ])
+        return any([transition["id"] == transition_id for transition in transitions])
 
     def getTransitions(self):
         transitions = super(TransitionsPanelView, self).getTransitions()

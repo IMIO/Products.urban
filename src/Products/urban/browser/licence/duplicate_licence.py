@@ -1,23 +1,20 @@
 # -*- coding: utf-8 -*-
 
-from plone import api
-from plone.autoform import directives
-from plone.z3cform.layout import FormWrapper
-
-from zope.browserpage.viewpagetemplatefile import ViewPageTemplateFile
-from zope.component import getUtility
-
-from z3c.form import button
-from z3c.form import form, field
-from z3c.form.browser.orderedselect import OrderedSelectWidget
-
-from zope import schema
-from zope.interface import Interface
-from zope.schema.interfaces import IVocabularyFactory
-
 from Products.urban import UrbanMessage as _
 from Products.urban.events.licenceEvents import postCreationActions
 from Products.urban.utils import getLicenceFolder
+from plone import api
+from plone.autoform import directives
+from plone.z3cform.layout import FormWrapper
+from z3c.form import button
+from z3c.form import field
+from z3c.form import form
+from z3c.form.browser.orderedselect import OrderedSelectWidget
+from zope import schema
+from zope.browserpage.viewpagetemplatefile import ViewPageTemplateFile
+from zope.component import getUtility
+from zope.interface import Interface
+from zope.schema.interfaces import IVocabularyFactory
 
 
 class TabsToDuplicateField(schema.Tuple):

@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 from Products.urban.interfaces import IGenericLicence
-
 from zope.event import notify
 from zope.lifecycleevent import ObjectModifiedEvent
 

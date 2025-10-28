@@ -14,30 +14,27 @@ __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEUL
 __docformat__ = "plaintext"
 
 from AccessControl import ClassSecurityInfo
-from Products.urban.widget.select2widget import MultiSelect2Widget
+from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import \
+    ReferenceBrowserWidget
 from Products.Archetypes.atapi import *
-from zope.interface import implements
-from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
-from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import (
-    ReferenceBrowserWidget,
-)
-from Products.urban import interfaces
-from Products.urban.content.licence.BaseBuildLicence import BaseBuildLicence
-from Products.urban.content.CODT_Inquiry import CODT_Inquiry
-from Products.urban.content.licence.GenericLicence import GenericLicence
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
-
-from Products.urban.config import *
-from Products.urban import UrbanMessage as _
-
+from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 ##code-section module-header #fill in your manual code here
 from Products.MasterSelectWidget.MasterMultiSelectWidget import MasterMultiSelectWidget
+from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
+from Products.urban import interfaces
+from Products.urban import UrbanMessage as _
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
+from Products.urban.config import *
+from Products.urban.content.CODT_Inquiry import CODT_Inquiry
+from Products.urban.content.licence.BaseBuildLicence import BaseBuildLicence
+from Products.urban.content.licence.GenericLicence import GenericLicence
 from Products.urban.utils import setOptionalAttributes
 from Products.urban.utils import setSchemataForCODT_Inquiry
-from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
-from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
-
+from Products.urban.widget.select2widget import MultiSelect2Widget
 from plone import api
+from zope.interface import implements
+
 
 ##/code-section module-header
 
@@ -656,7 +653,9 @@ class CODT_BaseBuildLicence(
         prorogated_delay = ""
         prorogation_delay = self.getProrogationDelay(text_format=False)
         if base_delay:
-            prorogated_delay = "{}j".format(str(int(base_delay[:-1]) + prorogation_delay))
+            prorogated_delay = "{}j".format(
+                str(int(base_delay[:-1]) + prorogation_delay)
+            )
 
         return prorogated_delay
 
