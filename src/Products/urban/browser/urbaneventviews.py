@@ -1331,9 +1331,7 @@ class UrbanEventNoticeActionsView(BrowserView):
     def transfer_folder_to_dpa(self):
         result = self.context.transfer_folder_to_dpa()
         if result["error"] is True:
-            IStatusMessage(self.request).addStatusMessage(
-                result["message"], "error"
-            )
+            IStatusMessage(self.request).addStatusMessage(result["message"], "error")
         else:
             IStatusMessage(self.request).addStatusMessage(
                 _(u"The folder transfer to DPA is done."), "info"

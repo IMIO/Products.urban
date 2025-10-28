@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from Products.urban.notice.base import NoticeElement
 from Acquisition import aq_parent
+from Products.urban.notice.base import NoticeElement
 
 
 class NoticeResponse(NoticeElement):

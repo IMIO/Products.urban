@@ -7,9 +7,9 @@ from plone import api
 from plone.memoize import ram
 from sqlalchemy import and_
 from sqlalchemy import or_
-from sqlalchemy.sql.expression import func
 from sqlalchemy.exc import InvalidRequestError
 from sqlalchemy.exc import OperationalError
+from sqlalchemy.sql.expression import func
 from time import time
 
 import json

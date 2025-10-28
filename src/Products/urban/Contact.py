@@ -283,7 +283,8 @@ class Contact(BaseContent, BrowserDefaultMixin):
         else:
             return "%s %s %s" % (self.getPersonTitle(short=True), name1, name2)
 
-    security.declarePublic('getSignaletic')
+    security.declarePublic("getSignaletic")
+
     def getSignaletic(
         self,
         short=False,
@@ -300,7 +301,11 @@ class Contact(BaseContent, BrowserDefaultMixin):
         urban_tool = api.portal.get_tool("portal_urban")
         invertnames = urban_tool.getInvertAddressNames()
         nameSignaletic = self._getNameSignaletic(
-            short, linebyline, reverse, invertnames, withtitle=withtitle,
+            short,
+            linebyline,
+            reverse,
+            invertnames,
+            withtitle=withtitle,
         )
         if not withaddress:
             if not linebyline:
@@ -374,7 +379,7 @@ class Contact(BaseContent, BrowserDefaultMixin):
             names = u"%s %s" % (name2, name1)
         names = names.strip()
         namepart = namedefined and names or society
-        nameSignaletic = u'%s %s' % (title, namepart)
+        nameSignaletic = u"%s %s" % (title, namepart)
         if withtitle:
             nameSignaletic = u"%s %s" % (title, namepart)
         else:

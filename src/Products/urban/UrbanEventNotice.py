@@ -1,18 +1,19 @@
 # -*- coding: utf-8 -*-
-import datetime
-
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
-from Products.urban import UrbanMessage as _
 from Products.urban import interfaces
+from Products.urban import UrbanMessage as _
 from Products.urban.UrbanEvent import UrbanEvent
 from Products.urban.config import *
-from Products.urban.utils import setOptionalAttributes
 from Products.urban.notice import NoticeOutgoingNotification
 from Products.urban.services.notice import WebserviceNotice
+from Products.urban.utils import setOptionalAttributes
 from zope.annotation.interfaces import IAnnotations
 from zope.interface import implements
+
+import datetime
+
 
 ##code-section module-header #fill in your manual code here
 

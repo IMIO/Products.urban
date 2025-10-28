@@ -17,7 +17,6 @@ from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.urban.Applicant import Applicant
-
 ##code-section module-header #fill in your manual code here
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.config import *

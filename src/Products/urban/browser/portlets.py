@@ -56,7 +56,7 @@ class ToolsRenderer(base.Renderer):
             return True
 
         return False
-    
+
     def is_notice_setup(self):
         site = api.portal.get()
         urban = getattr(site, "urban", None)
