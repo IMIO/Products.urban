@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
 
-from imio.schedule.content.object_factories import EndConditionObject
-from imio.schedule.content.object_factories import StartConditionObject
 from imio.schedule.content.object_factories import CreationConditionObject
+from imio.schedule.content.object_factories import EndConditionObject
 from imio.schedule.content.object_factories import MacroCreationConditionObject
 from imio.schedule.content.object_factories import MacroEndConditionObject
+from imio.schedule.content.object_factories import MacroRecurrenceConditionObject
 from imio.schedule.content.object_factories import MacroStartConditionObject
 from imio.schedule.content.object_factories import RecurrenceConditionObject
-from imio.schedule.content.object_factories import MacroRecurrenceConditionObject
+from imio.schedule.content.object_factories import StartConditionObject
+
 
 schedule_config = {
     "codt_buildlicence": [

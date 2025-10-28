@@ -2,11 +2,8 @@
 
 from Products.urban import interfaces
 from Products.urban import UrbanMessage
-
 from imio.schedule.content.vocabulary import ScheduledContentTypeVocabulary
-
 from plone import api
-
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
 

@@ -3,9 +3,8 @@
 
 from OFS.ObjectManager import BeforeDeleteException
 from Products.urban.testing import URBAN_TESTS_LICENCES_FUNCTIONAL
-
-from plone.app.testing import login
 from plone import api
+from plone.app.testing import login
 
 import unittest
 

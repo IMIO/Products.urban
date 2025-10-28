@@ -2,11 +2,11 @@
 
 from Products.Five import BrowserView
 from Products.urban import UrbanMessage as _
+from datetime import date
 from imio.schedule.interfaces import ICalculationDelay
 from imio.schedule.interfaces import IStartDate
 from plone import api
 from zope.component import queryMultiAdapter
-from datetime import date
 
 
 class TaskDebugView(BrowserView):

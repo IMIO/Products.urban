@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from imio.pm.wsclient.interfaces import IPreferredMeetings
-
 from plone import api
-
 from zope.interface import implements
 
 

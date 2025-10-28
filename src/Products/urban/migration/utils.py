@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
 
 from Products.urban.events import licenceEvents
-from plone import api
 from imio.schedule import utils
 from imio.schedule.events.zope_registration import (
     unsubscribe_task_configs_for_content_type,
 )
+from plone import api
 
 import logging
+
 
 logger = logging.getLogger(__name__)
 

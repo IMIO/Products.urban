@@ -15,16 +15,17 @@ __docformat__ = "plaintext"
 
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
-from zope.interface import implements
-import interfaces
-from Products.urban.UrbanEvent import UrbanEvent
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
-
-from archetypes.referencebrowserwidget.widget import ReferenceBrowserWidget
+from Products.urban.UrbanEvent import UrbanEvent
 from Products.urban.config import *
+from archetypes.referencebrowserwidget.widget import ReferenceBrowserWidget
 
 ##code-section module-header #fill in your manual code here
 from plone import api
+from zope.interface import implements
+
+import interfaces
+
 
 ##/code-section module-header
 

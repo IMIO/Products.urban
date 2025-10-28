@@ -14,13 +14,12 @@ __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEUL
 __docformat__ = "plaintext"
 
 
-import logging
-import os
-from Products.CMFCore.utils import getToolByName
 from Acquisition import aq_base
-from Products.Archetypes.event import ObjectInitializedEvent
 from Products.Archetypes.event import EditBegunEvent
+from Products.Archetypes.event import ObjectInitializedEvent
+from Products.CMFCore.utils import getToolByName
 from Products.cron4plone.browser.configlets.cron_configuration import ICronConfiguration
+from Products.urban import services
 from Products.urban.config import DefaultTexts
 from Products.urban.config import LICENCE_FINAL_STATES
 from Products.urban.config import URBAN_CFG_DIR
@@ -30,49 +29,47 @@ from Products.urban.exportimport import updateAllUrbanTemplates
 from Products.urban.interfaces import IContactFolder
 from Products.urban.interfaces import ILicenceContainer
 from Products.urban.interfaces import IUrbanConfigurationFolder
+from Products.urban.profiles.extra.config_default_values import default_values
+from Products.urban.profiles.extra.config_default_values import (
+    vocabularies_with_HTML_description,
+)
 from Products.urban.schedule.vocabulary import URBAN_TYPES_INTERFACES
-from Products.urban import services
 from Products.urban.utils import generatePassword
 from Products.urban.utils import getAllLicenceFolderIds
 from Products.urban.utils import getEnvironmentLicenceFolderIds
 from Products.urban.utils import getLicenceFolderId
 from Products.urban.utils import getUrbanOnlyLicenceFolderIds
 from Products.urban.utils import moveElementAfter
-from Products.urban.profiles.extra.config_default_values import default_values
-from Products.urban.profiles.extra.config_default_values import vocabularies_with_HTML_description
-
+from collective.eeafaceted.collectionwidget.utils import _updateDefaultCollectionFor
 from datetime import date
 from eea.facetednavigation.layout.interfaces import IFacetedLayout
-from collective.eeafaceted.collectionwidget.utils import _updateDefaultCollectionFor
-
+from imio.schedule.utils import _set_faceted_view
+from imio.schedule.utils import interface_to_tuple
+from imio.schedule.utils import set_schedule_view
 from plone import api
-from plone.portlets.interfaces import IPortletManager
+from plone.portlets.constants import CONTENT_TYPE_CATEGORY
+from plone.portlets.constants import CONTEXT_CATEGORY
+from plone.portlets.constants import GROUP_CATEGORY
 from plone.portlets.interfaces import ILocalPortletAssignable
 from plone.portlets.interfaces import ILocalPortletAssignmentManager
-from plone.portlets.constants import (
-    CONTEXT_CATEGORY,
-    GROUP_CATEGORY,
-    CONTENT_TYPE_CATEGORY,
-)
-
-from imio.schedule.utils import interface_to_tuple
-from imio.schedule.utils import _set_faceted_view
-from imio.schedule.utils import set_schedule_view
-
+from plone.portlets.interfaces import IPortletManager
 from zExceptions import BadRequest
-from zope.interface import alsoProvides
+from zope import event
 from zope.component import getMultiAdapter
 from zope.component import getUtilitiesFor
 from zope.component import queryUtility
 from zope.component.interface import getInterface
-from zope.i18n.interfaces import ITranslationDomain
 from zope.i18n import translate
+from zope.i18n.interfaces import ITranslationDomain
+from zope.interface import alsoProvides
 from zope.lifecycleevent import ObjectModifiedEvent
 from zope.schema.interfaces import IVocabularyFactory
-from zope import event
 
+import logging
+import os
 import pickle
 import transaction
+
 
 logger = logging.getLogger("urban: setuphandlers")
 
@@ -1436,10 +1433,8 @@ def addDefaultObjects(context):
 
     # create some streets using the Extensions.imports script
     if not tool.streets.objectIds("City"):
-        from Products.urban.Extensions.imports import (
-            import_streets_fromfile,
-            import_localities_fromfile,
-        )
+        from Products.urban.Extensions.imports import import_localities_fromfile
+        from Products.urban.Extensions.imports import import_streets_fromfile
 
         import_streets_fromfile(tool)
         import_localities_fromfile(tool)
@@ -1965,7 +1960,7 @@ def add_imio_dashboard(urban_type, urban_folder=None):
     collection = getattr(licence_folder, collection_id)
 
     _updateDefaultCollectionFor(licence_folder, collection.UID())
-    
+
     return collection
 
 
@@ -1991,9 +1986,7 @@ def add_urban_config_folder(urban_type, tool=None, site=None):
     config_folder = getattr(tool, config_folder_id)
     config_folder.licencePortalType = urban_type
     config_folder.setUsedAttributes(config_folder.listUsedAttributes().keys())
-    states_voc = queryUtility(IVocabularyFactory, "urban.licence_state")(
-        config_folder
-    )
+    states_voc = queryUtility(IVocabularyFactory, "urban.licence_state")(config_folder)
     default_end_states = [
         st for st in states_voc.by_value.keys() if st in LICENCE_FINAL_STATES
     ]

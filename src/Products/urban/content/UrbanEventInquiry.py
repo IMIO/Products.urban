@@ -14,22 +14,22 @@ __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEUL
 __docformat__ = "plaintext"
 
 from AccessControl import ClassSecurityInfo
-from Products.Archetypes.atapi import *
-from zope.interface import implements
-from Products.urban import interfaces
-from Products.urban.UrbanEvent import UrbanEvent
-from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
-
-from archetypes.referencebrowserwidget.widget import ReferenceBrowserWidget
-from Products.urban.config import *
-from Products.urban import UrbanMessage as _
-from Products.urban.utils import WIDGET_DATE_END_YEAR
 
 ##code-section module-header #fill in your manual code here
 from OFS.ObjectManager import BeforeDeleteException
+from Products.Archetypes.atapi import *
+from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
+from Products.urban import interfaces
+from Products.urban import UrbanMessage as _
+from Products.urban.UrbanEvent import UrbanEvent
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
+from Products.urban.config import *
+from Products.urban.utils import WIDGET_DATE_END_YEAR
+from archetypes.referencebrowserwidget.widget import ReferenceBrowserWidget
 from plone import api
+from zope.interface import implements
+
 
 suspension_slave_fields = (
     {

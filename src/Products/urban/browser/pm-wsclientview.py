@@ -1,9 +1,9 @@
 ## -*- coding: utf-8 -*-
 
-from Products.Five import BrowserView
 from Acquisition import aq_inner
-
-from Products.urban.interfaces import ITheLicenceEvent, ICommunalCouncilEvent
+from Products.Five import BrowserView
+from Products.urban.interfaces import ICommunalCouncilEvent
+from Products.urban.interfaces import ITheLicenceEvent
 
 
 class PMWSClientView(BrowserView):

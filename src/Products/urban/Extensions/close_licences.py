@@ -1,7 +1,7 @@
 from DateTime import DateTime
-from plone import api
 from Products.urban import config
 from Products.urban.interfaces import IGenericLicence
+from plone import api
 
 
 def close_licences():

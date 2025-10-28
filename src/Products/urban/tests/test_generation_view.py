@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
+from Products.urban.docgen.helper_view import UrbanDocGenerationEventHelperView
 from Products.urban.testing import URBAN_TESTS_LICENCES_FUNCTIONAL
-
 from plone.app.testing import login
 
 import unittest
-from Products.urban.docgen.helper_view import UrbanDocGenerationEventHelperView
 
 
 class TestUrbanGenerationView(unittest.TestCase):

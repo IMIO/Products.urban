@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from Products.Archetypes.atapi import StringWidget
 from Products.Archetypes.Registry import registerWidget
+from Products.Archetypes.atapi import StringWidget
 from plone import api
 
 

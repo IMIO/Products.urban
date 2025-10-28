@@ -2,12 +2,12 @@
 
 from Products.urban.testing import URBAN_TESTS_CONFIG_FUNCTIONAL
 from datetime import datetime
+from dateutil.relativedelta import relativedelta
 from plone import api
 from plone.app.testing import login
 from plone.app.testing import logout
-from zope.lifecycleevent import ObjectModifiedEvent
 from zope.event import notify
-from dateutil.relativedelta import relativedelta
+from zope.lifecycleevent import ObjectModifiedEvent
 
 import unittest
 

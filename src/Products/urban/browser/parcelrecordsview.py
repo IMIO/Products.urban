@@ -1,12 +1,10 @@
 # encoding: utf-8
 
 from Acquisition import aq_inner
-from Products.Five import BrowserView
 from Products.CMFPlone import PloneMessageFactory as _
-
-from Products.urban.interfaces import IGenericLicence
+from Products.Five import BrowserView
 from Products.urban import services
-
+from Products.urban.interfaces import IGenericLicence
 from plone import api
 
 

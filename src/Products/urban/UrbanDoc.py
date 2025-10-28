@@ -15,20 +15,20 @@ __docformat__ = "plaintext"
 
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
-from zope.interface import implements
-import interfaces
-
-from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
-
-from plone.app.blob.content import ATBlob
-from plone.app.blob.content import ATBlobSchema
-from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
 from Products.CMFCore.Expression import Expression
 from Products.CMFCore.utils import getToolByName
+from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.PageTemplates.Expressions import getEngine
+from Products.urban.config import *
+from plone.app.blob.content import ATBlob
+from plone.app.blob.content import ATBlobSchema
+from zope.interface import implements
+
+import interfaces
 import logging
+
 
 logger = logging.getLogger("urban: UrbanDoc")
 ##/code-section module-header

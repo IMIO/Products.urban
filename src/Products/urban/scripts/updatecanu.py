@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-import os
 import glob
+import os
 import psycopg2
 import psycopg2.extras
 import sys

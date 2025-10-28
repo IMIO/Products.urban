@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 from imio.pm.wsclient.interfaces import ISendableAnnexesToPM
-
 from zope.filerepresentation.interfaces import IRawReadFile
 from zope.interface import implements
 

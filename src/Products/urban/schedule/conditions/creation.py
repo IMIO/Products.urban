@@ -1,15 +1,12 @@
 # -*- coding: utf-8 -*-
 
 from DateTime import DateTime
+from Products.urban.schedule.conditions.base import BaseInspection
 from datetime import date
 from datetime import datetime
-from plone import api
-
 from imio.schedule.content.condition import CreationCondition
-
 from numpy import busday_offset
-
-from Products.urban.schedule.conditions.base import BaseInspection
+from plone import api
 
 
 class DepositDoneCondition(CreationCondition):

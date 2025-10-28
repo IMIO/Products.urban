@@ -13,24 +13,23 @@ __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEUL
 <stephan.geulette@uvcw.be>, Jean-Michel Abe <jm.abe@la-bruyere.be>"""
 __docformat__ = "plaintext"
 
-from collective.delaycalculator import workday
-from datetime import date
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.public import DisplayList
-
-from Products.urban.interfaces import IWorklocationSignaletic
+from Products.urban import interfaces
 from Products.urban.interfaces import IUrbanEvent
+from Products.urban.interfaces import IWorklocationSignaletic
+from Products.urban.utils import convert_to_utf8
 from Products.urban.utils import getCurrentFolderManager as currentFolderManager
 from Products.urban.utils import removeItems
-from Products.urban.utils import convert_to_utf8
+from collective.delaycalculator import workday
+from datetime import date
 from plone import api
-from zope.component import queryAdapter
-from zope.component import getUtility
-from zope.i18n import translate
-from zope.schema.interfaces import IVocabularyFactory
-from zope.interface import implements
-from Products.urban import interfaces
 from urban.vocabulary.vocabularies.base import BaseVocabulary
+from zope.component import getUtility
+from zope.component import queryAdapter
+from zope.i18n import translate
+from zope.interface import implements
+from zope.schema.interfaces import IVocabularyFactory
 
 
 class UrbanBase(object):

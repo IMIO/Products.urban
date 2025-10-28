@@ -1,12 +1,10 @@
 # -*- coding: utf-8 -*-
 
-from zope.interface import Interface
+from Products.urban import UrbanMessage as _
 from zope import schema
-
+from zope.interface import Interface
 from zope.interface.interfaces import IInterface
 from zope.publisher.interfaces.browser import IDefaultBrowserLayer
-
-from Products.urban import UrbanMessage as _
 
 
 class IProprietary(Interface):

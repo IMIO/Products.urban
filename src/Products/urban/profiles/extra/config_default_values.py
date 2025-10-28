@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-from datetime import datetime
 from Products.urban.config import URBAN_TYPES
+from datetime import datetime
+
 
 codt_2024_start_validity_date = datetime(2024, 4, 1)
 

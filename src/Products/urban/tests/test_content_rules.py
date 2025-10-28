@@ -1,16 +1,16 @@
 # -*- coding: utf-8 -*-
 
-import unittest2 as unittest
-from Products.urban.testing import URBAN_TESTS_CONFIG_FUNCTIONAL
-from Products.urban import utils
-from Products.urban.setuphandlers import setFolderAllowedTypes
-from Products.urban.contentrules.stringinterp import FolderManagersMail
 from Products.CMFPlone.interfaces.constrains import ISelectableConstrainTypes
-
-from plone.app.testing import login
+from Products.urban import utils
+from Products.urban.contentrules.stringinterp import FolderManagersMail
+from Products.urban.setuphandlers import setFolderAllowedTypes
+from Products.urban.testing import URBAN_TESTS_CONFIG_FUNCTIONAL
 from plone import api
+from plone.app.testing import login
 
 import transaction
+import unittest2 as unittest
+
 
 EMAIL = "urbanmanager@urban.be"
 

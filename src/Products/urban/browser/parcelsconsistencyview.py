@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from Products.Five import BrowserView
 from Acquisition import aq_inner
-
+from Products.Five import BrowserView
 from Products.urban import services
-
 from plone import api
 
 

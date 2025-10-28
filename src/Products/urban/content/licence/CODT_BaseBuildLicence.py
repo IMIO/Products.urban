@@ -19,6 +19,10 @@ from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import (
 )
 from Products.Archetypes.atapi import *
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
+from Products.DataGridField import DataGridField
+from Products.DataGridField import DataGridWidget
+from Products.DataGridField.Column import Column
+from Products.DataGridField.SelectColumn import SelectColumn
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 
 ##code-section module-header #fill in your manual code here
@@ -34,14 +38,7 @@ from Products.urban.content.licence.GenericLicence import GenericLicence
 from Products.urban.utils import setOptionalAttributes
 from Products.urban.utils import setSchemataForCODT_Inquiry
 from Products.urban.widget.select2widget import MultiSelect2Widget
-from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
-from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
-
-from Products.DataGridField import DataGridField, DataGridWidget
-from Products.DataGridField.Column import Column
-from Products.DataGridField.SelectColumn import SelectColumn
 from collective.datagridcolumns.TextAreaColumn import TextAreaColumn
-
 from plone import api
 from zope.component import getMultiAdapter
 from zope.interface import implements
@@ -777,7 +774,7 @@ class CODT_BaseBuildLicence(
             ("classified", "bien classé"),
         )
         return DisplayList(vocabulary)
-      
+
     def get_last_plonemeeting_date(
         self,
         event=interfaces.ISimpleCollegeEvent,

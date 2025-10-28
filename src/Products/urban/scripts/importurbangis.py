@@ -2,6 +2,7 @@
 
 import sys
 
+
 sys.path[0:0] = [
     # replace the following line with the urbanmap psycopg2 egg path,
     # according you run this script with the urbanmap python
@@ -11,9 +12,10 @@ sys.path[0:0] = [
 import os
 import psycopg2
 import psycopg2.extras
+import re
 import sys
 import time
-import re
+
 
 virtualenv_dir = "/srv/urbanmap"
 urbanmap_dir = " % s/urbanMap" % virtualenv_dir  # directory where urbanmap is installed

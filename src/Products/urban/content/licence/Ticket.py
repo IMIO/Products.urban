@@ -1,27 +1,24 @@
 # -*- coding: utf-8 -*-
 #
 from AccessControl import ClassSecurityInfo
+from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import (
+    ReferenceBrowserWidget,
+)
 from Products.Archetypes.atapi import *
+from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
+from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
-from zope.interface import implements
-
-from Products.urban import UrbanMessage as _
 from Products.urban import interfaces
+from Products.urban import UrbanMessage as _
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.config import PROJECTNAME
 from Products.urban.config import URBAN_TYPES
 from Products.urban.content.licence.GenericLicence import GenericLicence
 from Products.urban.utils import setOptionalAttributes
-from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
-from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import (
-    ReferenceBrowserWidget,
-)
-from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
-from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
-from plone import api
-
-from zope.i18n import translate
-
 from collective.archetypes.select2.select2widget import MultiSelect2Widget
+from plone import api
+from zope.i18n import translate
+from zope.interface import implements
 
 
 full_patrimony_slave_fields = (
