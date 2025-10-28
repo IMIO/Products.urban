@@ -1,22 +1,19 @@
 from Products.Five import BrowserView
-
+from Products.urban import services
 from Products.urban.browser.table.urbantable import ParcelsTable
 from Products.urban.interfaces import IDivision
-from Products.urban.interfaces import IInspection
 from Products.urban.interfaces import IGenericLicence
+from Products.urban.interfaces import IInspection
 from Products.urban.interfaces import ITicket
 from Products.urban.interfaces import IUrbanCertificateBase
-from Products.urban import services
 from Products.urban.services.cadastral import IGNORE
-from zExceptions import BadRequest
-
 from plone import api
-
+from zExceptions import BadRequest
 from zope.i18n import translate
 
 import Levenshtein
-import re
 import ast
+import re
 
 
 class SearchParcelsView(BrowserView):

@@ -14,35 +14,32 @@ __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEUL
 __docformat__ = "plaintext"
 
 from AccessControl import ClassSecurityInfo
-from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
-from Products.urban.widget.select2widget import MultiSelect2Widget
 from Products.Archetypes.atapi import *
-from zope.interface import implements
-from Products.urban import interfaces
-from Products.urban.content.licence.EnvironmentBase import EnvironmentBase
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
-from plone import api
-
-from Products.DataGridField import DataGridField, DataGridWidget
+from Products.DataGridField import DataGridField
+from Products.DataGridField import DataGridWidget
 from Products.DataGridField.Column import Column
 from Products.DataGridField.SelectColumn import SelectColumn
-
-from Products.urban.config import *
+from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
+from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
+from Products.urban import interfaces
 from Products.urban import UrbanMessage as _
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
+from Products.urban.config import *
+from Products.urban.content.licence.EnvironmentBase import EnvironmentBase
 
 ##code-section module-header #fill in your manual code here
 from Products.urban.interfaces import IEnvironmentBase
 from Products.urban.utils import setOptionalAttributes
-from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
-
+from Products.urban.widget.select2widget import MultiSelect2Widget
 from archetypes.referencebrowserwidget.widget import ReferenceBrowserWidget
-from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
-
 from collective.archetypes.select2.select2widget import MultiSelect2Widget
 from collective.datagridcolumns.ReferenceColumn import ReferenceColumn
 from collective.datagridcolumns.TextAreaColumn import TextAreaColumn
-
+from plone import api
 from zope.i18n import translate
+from zope.interface import implements
+
 
 optional_fields = [
     "publicRoadModifications",

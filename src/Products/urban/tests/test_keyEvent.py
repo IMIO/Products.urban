@@ -6,10 +6,10 @@ from plone import api
 from plone.app.testing import login
 from plone.testing.z2 import Browser
 from zope.event import notify
-from zope.lifecycleevent import ObjectModifiedEvent
-from zope.lifecycleevent import ObjectRemovedEvent
 from zope.globalrequest import getRequest
 from zope.globalrequest import setRequest
+from zope.lifecycleevent import ObjectModifiedEvent
+from zope.lifecycleevent import ObjectRemovedEvent
 
 import transaction
 

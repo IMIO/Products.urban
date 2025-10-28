@@ -30,7 +30,9 @@ from zope.interface import Interface
 
 import logging
 
+
 logger = logging.getLogger("urban")
+
 
 @indexer(interfaces.IApplicant)
 def applicant_applicantinfoindex(object):
@@ -240,12 +242,20 @@ def genericlicence_decisiondate(licence):
     linked_pm_items = None
     if decision_event:
         try:
-            linked_pm_items = get_ws_meetingitem_infos(decision_event, query_hook=lambda q: q.update({
-                "extra_include": "meeting",
-                "extra_include_meeting": "date",
-            }))
+            linked_pm_items = get_ws_meetingitem_infos(
+                decision_event,
+                query_hook=lambda q: q.update(
+                    {
+                        "extra_include": "meeting",
+                        "extra_include_meeting": "date",
+                    }
+                ),
+            )
         except RequestException:
-            logger.warn("Could not retrieve linked PloneMeeting items for licence %s" % licence.getPhysicalPath())
+            logger.warn(
+                "Could not retrieve linked PloneMeeting items for licence %s"
+                % licence.getPhysicalPath()
+            )
             catalog = api.portal.get_tool("portal_catalog")
             brain = catalog(UID=licence.UID())
             if brain and brain[0].getDecisionDate:

@@ -33,9 +33,9 @@ from zope.interface import Interface
 
 import collections
 import csv
+import json
 import logging
 import re
-import json
 
 
 logger = logging.getLogger("Urban Event")

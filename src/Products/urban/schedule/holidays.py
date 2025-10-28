@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
 
-from zope.interface import implements
-from plone import api
-from datetime import timedelta
 from datetime import datetime
-
+from datetime import timedelta
 from imio.schedule.interfaces import ICalendarExtraHolidays
+from plone import api
+from zope.interface import implements
 
 
 class CollegeHolidays(object):

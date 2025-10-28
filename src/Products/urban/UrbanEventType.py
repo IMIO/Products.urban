@@ -14,34 +14,33 @@ __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEUL
 __docformat__ = "plaintext"
 
 from AccessControl import ClassSecurityInfo
-from Products.urban.widget.select2widget import MultiSelect2Widget
 from Products.Archetypes.atapi import *
-from zope.interface import implements
-import interfaces
-from Products.urban.UrbanConfigurationValue import UrbanConfigurationValue
-from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
-
-from Products.DataGridField import DataGridField, DataGridWidget
-from Products.DataGridField.SelectColumn import SelectColumn
-
-from Products.urban.config import *
-from Products.urban.interfaces import IOptionalFields
-
-##code-section module-header #fill in your manual code here
-from plone import api
 from Products.Archetypes.public import DisplayList
 from Products.CMFCore.Expression import Expression
 from Products.CMFCore.utils import getToolByName
+from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.CMFPlone import PloneMessageFactory as _
+from Products.DataGridField import DataGridField
+from Products.DataGridField import DataGridWidget
+from Products.DataGridField.SelectColumn import SelectColumn
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 from Products.PageTemplates.Expressions import getEngine
+from Products.urban.UrbanConfigurationValue import UrbanConfigurationValue
+from Products.urban.config import *
 from Products.urban.docgen.UrbanTemplate import IUrbanTemplate
+from Products.urban.interfaces import IOptionalFields
+from Products.urban.widget.select2widget import MultiSelect2Widget
 from collective.datagridcolumns.TextAreaColumn import TextAreaColumn
-from zope.i18n import translate
 
+##code-section module-header #fill in your manual code here
+from plone import api
 from zope.component import queryAdapter
+from zope.i18n import translate
+from zope.interface import implements
 
+import interfaces
 import logging
+
 
 logger = logging.getLogger("urban: UrbanEventType")
 

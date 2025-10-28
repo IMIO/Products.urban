@@ -4,8 +4,9 @@
     Can be run as a browser view or command line script.
 """
 
-import os
 import base64
+import os
+
 
 try:
     import json
@@ -14,9 +15,10 @@ except ImportError:
     # version > 2.3 < 3.0
     import simplejson as json
 
-from Products.Five.browser import BrowserView
-from Products.CMFCore.interfaces import IFolderish
 from DateTime import DateTime
+from Products.CMFCore.interfaces import IFolderish
+from Products.Five.browser import BrowserView
+
 
 #: Private attributes we add to the export list
 EXPORT_ATTRIBUTES = ["portal_type", "id"]
@@ -113,10 +115,8 @@ def spoof_request(app):
     """
     from AccessControl.SecurityManagement import newSecurityManager
     from AccessControl.SecurityManager import setSecurityPolicy
-    from Products.CMFCore.tests.base.security import (
-        PermissiveSecurityPolicy,
-        OmnipotentUser,
-    )
+    from Products.CMFCore.tests.base.security import OmnipotentUser
+    from Products.CMFCore.tests.base.security import PermissiveSecurityPolicy
 
     _policy = PermissiveSecurityPolicy()
     setSecurityPolicy(_policy)

@@ -2,19 +2,15 @@
 
 from Products.Five import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-
-from eea.facetednavigation.interfaces import IFacetedNavigable
-from collective.eeafaceted.dashboard.utils import getDashboardQueryResult
-
-from plone import api
-from plone.app.layout.viewlets import ViewletBase
-
-from Products.contentmigration.walker import CustomQueryWalker
 from Products.contentmigration.archetypes import InplaceATFolderMigrator
-
+from Products.contentmigration.walker import CustomQueryWalker
 from Products.urban.events.licenceEvents import postCreationActions
 from Products.urban.interfaces import IUrbanEvent
 from Products.urban.utils import getLicenceFolder
+from collective.eeafaceted.dashboard.utils import getDashboardQueryResult
+from eea.facetednavigation.interfaces import IFacetedNavigable
+from plone import api
+from plone.app.layout.viewlets import ViewletBase
 
 import logging
 

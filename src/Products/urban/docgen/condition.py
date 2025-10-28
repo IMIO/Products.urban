@@ -3,7 +3,6 @@
 from collective.documentgenerator.content.condition import (
     ConfigurablePODTemplateCondition,
 )
-
 from plone import api
 
 

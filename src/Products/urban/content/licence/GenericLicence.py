@@ -14,57 +14,51 @@ __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEUL
 __docformat__ = "plaintext"
 
 from AccessControl import ClassSecurityInfo
-from zope.annotation import IAnnotations
-from datetime import datetime
-
-from Products.urban.widget.select2widget import MultiSelect2Widget
-from Products.MasterSelectWidget.MasterMultiSelectWidget import MasterMultiSelectWidget
-from collective.faceted.task.interfaces import IFacetedTaskContainer
-
-from eea.facetednavigation.subtypes.interfaces import IPossibleFacetedNavigable
-
-from Products.Archetypes.atapi import *
-from zope.interface import implements
-from Products.urban import interfaces
-from Products.urban.utils import is_attachment
-from Products.urban import utils
-
-from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
-
-from archetypes.referencebrowserwidget.widget import ReferenceBrowserWidget
-from Products.DataGridField import DataGridField, DataGridWidget
-from Products.DataGridField.Column import Column
-from Products.DataGridField.SelectColumn import SelectColumn
-
-from imio.schedule.content.task import IAutomatedTask
-from collective.plonefinder.browser.interfaces import IFinderUploadCapable
-from collective.quickupload.interfaces import IQuickUploadCapable
-from Products.urban.config import *
-from Products.urban import UrbanMessage as _
-
-# code-section module-header #fill in your manual code here
-from zope.i18n import translate
-from collective.datagridcolumns.ReferenceColumn import ReferenceColumn
 from Products.ATContentTypes.configuration import zconf
 from Products.Archetypes.Widget import RichWidget
+from Products.Archetypes.atapi import *
+from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
+from Products.DataGridField import DataGridField
+from Products.DataGridField import DataGridWidget
+from Products.DataGridField.Column import Column
+from Products.DataGridField.SelectColumn import SelectColumn
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
+from Products.MasterSelectWidget.MasterMultiSelectWidget import MasterMultiSelectWidget
 from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
+from Products.urban import interfaces
+from Products.urban import UrbanMessage as _
+from Products.urban import utils
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
+from Products.urban.config import *
 from Products.urban.content.licence.base import UrbanBase
 from Products.urban.interfaces import IOpinionRequestEvent
 from Products.urban.interfaces import IUrbanEvent
-from Products.urban.utils import setOptionalAttributes
 from Products.urban.utils import get_interface_by_path
+from Products.urban.utils import is_attachment
+from Products.urban.utils import setOptionalAttributes
 from Products.urban.widget.historizereferencewidget import (
     HistorizeReferenceBrowserWidget,
 )
-from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
-from zope.globalrequest import getRequest
-
+from Products.urban.widget.select2widget import MultiSelect2Widget
+from archetypes.referencebrowserwidget.widget import ReferenceBrowserWidget
+from collective.datagridcolumns.ReferenceColumn import ReferenceColumn
+from collective.faceted.task.interfaces import IFacetedTaskContainer
+from collective.plonefinder.browser.interfaces import IFinderUploadCapable
+from collective.quickupload.interfaces import IQuickUploadCapable
+from datetime import datetime
+from eea.facetednavigation.subtypes.interfaces import IPossibleFacetedNavigable
+from imio.schedule.content.task import IAutomatedTask
+from plone import api
+from zope.annotation import IAnnotations
 from zope.component import createObject
 from zope.event import notify
+from zope.globalrequest import getRequest
+
+# code-section module-header #fill in your manual code here
+from zope.i18n import translate
+from zope.interface import implements
 from zope.lifecycleevent import ObjectModifiedEvent
 
-from plone import api
 
 slave_fields_subdivision = (
     # if in subdivision, display a textarea the fill some details
@@ -328,12 +322,18 @@ schema = Schema(
             name="complementary_delay",
             widget=MultiSelect2Widget(
                 format="select",
-                label=_("urban_label_complementary_delay", default="Complementary Delay"),
+                label=_(
+                    "urban_label_complementary_delay", default="Complementary Delay"
+                ),
             ),
             enforceVocabulary=True,
             multiValued=True,
             schemata="urban_analysis",
-            vocabulary=UrbanVocabulary("complementary_delay", vocType="ComplementaryDelayTerm", inUrbanConfig=False),
+            vocabulary=UrbanVocabulary(
+                "complementary_delay",
+                vocType="ComplementaryDelayTerm",
+                inUrbanConfig=False,
+            ),
             default_method="getDefaultValue",
         ),
         LinesField(
@@ -1792,7 +1792,7 @@ class GenericLicence(OrderedBaseFolder, UrbanBase, BrowserDefaultMixin):
         return res
 
     security.declarePublic("get_complementary_delay")
-        
+
     def get_complementary_delay(self):
         complementary_delay = self.getComplementary_delay()
         if not complementary_delay:
@@ -1804,7 +1804,7 @@ class GenericLicence(OrderedBaseFolder, UrbanBase, BrowserDefaultMixin):
             context=self,
             vocType="ComplementaryDelayTerm",
             inUrbanConfig=False,
-            allowedStates=["disabled", "enabled"]
+            allowedStates=["disabled", "enabled"],
         )
 
         return [

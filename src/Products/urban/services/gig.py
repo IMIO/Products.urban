@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
+from Products.urban.config import ExternalConfig
 from Products.urban.services.mysqlbase import MySQLService
 from Products.urban.services.mysqlbase import MySQLSession
-from Products.urban.config import ExternalConfig
 from datetime import datetime
 from plone import api
 

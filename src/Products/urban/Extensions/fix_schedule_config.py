@@ -4,8 +4,9 @@ from Products.urban.config import URBAN_TYPES
 from importlib import import_module
 from plone import api
 
-import transaction
 import logging
+import transaction
+
 
 logger = logging.getLogger("urban: fix schedule config")
 

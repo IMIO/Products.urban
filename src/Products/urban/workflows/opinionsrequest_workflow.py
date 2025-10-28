@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from collections import OrderedDict
-
 from Products.urban.interfaces import IEnvironmentBase
 from Products.urban.workflows.adapter import LocalRoleAdapter
-
+from collections import OrderedDict
 from plone import api
 
 

@@ -15,12 +15,12 @@ __docformat__ = "plaintext"
 
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
+from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
+from Products.urban.config import *
 from zope.interface import implements
+
 import interfaces
 
-from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
-
-from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
 ##/code-section module-header

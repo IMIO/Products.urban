@@ -1,12 +1,13 @@
 # Zope imports
+from Products.Archetypes.interfaces import IBaseContent
 from ZODB.POSException import POSKeyError
+from plone import api
 
 # Plone imports
 from plone.app.blob.subtypes.file import ExtensionBlobField
-from Products.Archetypes.interfaces import IBaseContent
-from plone.namedfile.interfaces import INamedFile
 from plone.dexterity.content import DexterityContent
-from plone import api
+from plone.namedfile.interfaces import INamedFile
+
 
 blob_fields = {
     "SubTemplate": "odt_file",

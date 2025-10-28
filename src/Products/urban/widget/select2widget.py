@@ -1,17 +1,18 @@
 # -*- coding: utf-8 -*-
 
-from collective.archetypes.select2.select2widget import (
-    Select2Widget as CollectiveSelect2Widget,
-)
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from collective.archetypes.select2.select2widget import (
     MultiSelect2Widget as CollectiveMultiSelect2Widget,
 )
-from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
+from collective.archetypes.select2.select2widget import (
+    Select2Widget as CollectiveSelect2Widget,
+)
 from zope.component import getUtility
 from zope.schema.interfaces import IVocabularyFactory
 
 import logging
 import six
+
 
 logger = logging.getLogger("urban debug")
 

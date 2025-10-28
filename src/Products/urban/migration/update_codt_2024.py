@@ -1,16 +1,17 @@
 # -*- coding: utf-8 -*-
 
-from eea.facetednavigation.interfaces import ICriteria
 from Products.urban import URBAN_TYPES
-from Products.urban.setuphandlers import createFolderDefaultValues
 from Products.urban.migration.utils import refresh_workflow_permissions
+from Products.urban.setuphandlers import createFolderDefaultValues
 from datetime import datetime
+from eea.facetednavigation.interfaces import ICriteria
+from imio.helpers.catalog import reindexIndexes
 from plone import api
 from zope.event import notify
 from zope.lifecycleevent import ObjectModifiedEvent
-from imio.helpers.catalog import reindexIndexes
 
 import logging
+
 
 logger = logging.getLogger("urban: migrations")
 

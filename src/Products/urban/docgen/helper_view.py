@@ -1,36 +1,31 @@
 # -*- coding: utf-8 -*-
 
+from DateTime import DateTime
+from Products.Archetypes.interfaces import IBaseObject
+from Products.CMFPlone.i18nl10n import ulocalized_time
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
+from Products.urban.interfaces import IBaseBuildLicence
+from Products.urban.interfaces import IEnvironmentBase
+from Products.urban.interfaces import ITicket
+from Products.urban.interfaces import IUrbanCertificateBase
+from Products.urban.interfaces import IUrbanEventInquiry
+from Products.urban.services import cadastre
+from Products.urban.utils import get_ws_meetingitem_infos
+from Products.urban.utils import get_ws_plonemeeting
+from Products.urban.utils import getCurrentFolderManager
 from collective.documentgenerator.helper.archetypes import ATDisplayProxyObject
 from collective.documentgenerator.helper.archetypes import (
     ATDocumentGenerationHelperView,
 )
 from collective.documentgenerator.helper.dexterity import DXDocumentGenerationHelperView
-
-from datetime import date as _date, datetime
+from datetime import date as _date
+from datetime import datetime
 from dateutil.relativedelta import relativedelta
-
+from plone import api
 from plone.dexterity.interfaces import IDexterityContent
-
-from Products.Archetypes.interfaces import IBaseObject
-from Products.CMFPlone.i18nl10n import ulocalized_time
-from Products.urban.interfaces import (
-    IUrbanEventInquiry,
-    IEnvironmentBase,
-    ITicket,
-    IBaseBuildLicence,
-    IUrbanCertificateBase,
-)
-from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
-from Products.urban.utils import getCurrentFolderManager
-from Products.urban.utils import get_ws_meetingitem_infos
-from Products.urban.utils import get_ws_plonemeeting
-from Products.urban.services import cadastre
-
 from zope.component import getUtility
 from zope.i18n import translate
 from zope.schema.interfaces import IVocabularyFactory
-from plone import api
-from DateTime import DateTime
 
 import re
 
@@ -1363,7 +1358,9 @@ class UrbanDocGenerationEventHelperView(UrbanDocGenerationHelperView):
         """Get the field value from the linked item"""
         field = "NO FIELD {} FOUND".format(field_name)
         linked_item = get_ws_meetingitem_infos(
-            self.real_context, query_hook=lambda q: q.update({"metadata_fields": field_name}), first=True
+            self.real_context,
+            query_hook=lambda q: q.update({"metadata_fields": field_name}),
+            first=True,
         )
         if linked_item and field_name in linked_item:
             field = linked_item[field_name]
@@ -1372,8 +1369,10 @@ class UrbanDocGenerationEventHelperView(UrbanDocGenerationHelperView):
     def _get_wspm_meeting_field(self, field_name):
         """Get the field value from the linked item's meeting"""
         field = "NO FIELD {} FOUND".format(field_name)
-        meeting_query = {"extra_include": "meeting",
-                         "extra_include_meeting_fullobjects": "True"}
+        meeting_query = {
+            "extra_include": "meeting",
+            "extra_include_meeting_fullobjects": "True",
+        }
         linked_item = get_ws_meetingitem_infos(
             self.real_context, query_hook=lambda q: q.update(meeting_query), first=True
         )
@@ -1386,23 +1385,29 @@ class UrbanDocGenerationEventHelperView(UrbanDocGenerationHelperView):
         field = self._get_wspm_field(field_name)
         return field.get("data", "") if isinstance(field, dict) else field
 
-    def get_wspm_decision_date(self, translatemonth=True, long_format=False, no_date="-"):
+    def get_wspm_decision_date(
+        self, translatemonth=True, long_format=False, no_date="-"
+    ):
         """
         Get the actual decision date from the linked item, if any.
         Use translatemonth and long_format to format the date.
         no_date is used when no date is found.
         """
-        linked_item = get_ws_meetingitem_infos(self.real_context, extra_attributes=False, first=True)
+        linked_item = get_ws_meetingitem_infos(
+            self.real_context, extra_attributes=False, first=True
+        )
         if not linked_item:
             return no_date
         ws4pmSettings = get_ws_plonemeeting(self.real_context)
         raw_date = ws4pmSettings._rest_getDecidedMeetingDate(
-            {'externalIdentifier': self.real_context.UID()},
-            item_portal_type=linked_item["@type"]
+            {"externalIdentifier": self.real_context.UID()},
+            item_portal_type=linked_item["@type"],
         )
         if not raw_date:
             return no_date
-        decided_date = self.helper_view.format_date(date=raw_date, translatemonth=translatemonth, long_format=long_format)
+        decided_date = self.helper_view.format_date(
+            date=raw_date, translatemonth=translatemonth, long_format=long_format
+        )
         return decided_date
 
     def get_wspm_description_text(self):
@@ -1424,7 +1429,7 @@ class UrbanDocGenerationEventHelperView(UrbanDocGenerationHelperView):
         field_name = "review_state"
         state = self._get_wspm_field(field_name)
         self._get_wspm_meeting_field(field_name)
-        return state.get('title')
+        return state.get("title")
 
 
 class UrbanDocGenerationFacetedHelperView(ATDocumentGenerationHelperView):

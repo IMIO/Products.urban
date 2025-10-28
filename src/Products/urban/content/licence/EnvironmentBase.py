@@ -14,40 +14,37 @@ __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEUL
 __docformat__ = "plaintext"
 
 from AccessControl import ClassSecurityInfo
-from Products.urban.widget.select2widget import MultiSelect2Widget
-from Products.Archetypes.atapi import *
-from zope.interface import implements
-from Products.urban import interfaces
-from Products.urban.content.licence.GenericLicence import GenericLicence
-from Products.urban.content.CODT_UniqueLicenceInquiry import CODT_UniqueLicenceInquiry
-from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
-
-from Products.DataGridField import DataGridField, DataGridWidget
-from Products.DataGridField.Column import Column
-from Products.DataGridField.SelectColumn import SelectColumn
-
-from Products.urban.config import *
-from Products.urban import UrbanMessage as _
-
-##code-section module-header #fill in your manual code here
-from collective.delaycalculator import workday
-from collective.datagridcolumns.ReferenceColumn import ReferenceColumn
-from datetime import date
-from Products.urban.utils import (
-    setOptionalAttributes,
-    setSchemataForCODT_UniqueLicenceInquiry,
-)
-from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
-from Products.urban.widget.historizereferencewidget import (
-    HistorizeReferenceBrowserWidget,
-)
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import (
     ReferenceBrowserWidget,
 )
-from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
+from Products.Archetypes.atapi import *
+from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
+from Products.DataGridField import DataGridField
+from Products.DataGridField import DataGridWidget
+from Products.DataGridField.Column import Column
+from Products.DataGridField.SelectColumn import SelectColumn
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
+from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
+from Products.urban import interfaces
+from Products.urban import UrbanMessage as _
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
+from Products.urban.config import *
+from Products.urban.content.CODT_UniqueLicenceInquiry import CODT_UniqueLicenceInquiry
+from Products.urban.content.licence.GenericLicence import GenericLicence
+from Products.urban.utils import setOptionalAttributes
+from Products.urban.utils import setSchemataForCODT_UniqueLicenceInquiry
+from Products.urban.widget.historizereferencewidget import (
+    HistorizeReferenceBrowserWidget,
+)
+from Products.urban.widget.select2widget import MultiSelect2Widget
+from collective.datagridcolumns.ReferenceColumn import ReferenceColumn
 
+##code-section module-header #fill in your manual code here
+from collective.delaycalculator import workday
+from datetime import date
 from plone import api
+from zope.interface import implements
+
 
 optional_fields = [
     "roadTechnicalAdvice",

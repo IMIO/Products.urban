@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from zope.interface import implementer
-
 from Products.urban.schedule.interfaces import ITaskCron
+from zope.interface import implementer
 
 
 @implementer(ITaskCron)

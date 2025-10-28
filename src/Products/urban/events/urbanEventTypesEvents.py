@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-from Products.urban.events.urbanEventEvents import setEventMarkerInterfaces
 from Products.urban import interfaces
-
+from Products.urban.events.urbanEventEvents import setEventMarkerInterfaces
 from zope.annotation import IAnnotations
 from zope.interface import noLongerProvides
 from zope.interface import providedBy

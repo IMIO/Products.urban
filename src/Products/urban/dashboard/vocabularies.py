@@ -1,20 +1,17 @@
 # -*- coding: utf-8 -*-
 
 from Acquisition import aq_parent
+from Products.urban import UrbanMessage as _
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
+from Products.urban.config import URBAN_CODT_TYPES
+from Products.urban.config import URBAN_CWATUPE_TYPES
+from Products.urban.config import URBAN_ENVIRONMENT_TYPES
+from Products.urban.config import URBAN_TYPES
+from Products.urban.dashboard import utils
+from Products.urban.utils import cache_key_5min
 from collective.eeafaceted.collectionwidget.vocabulary import CachedCollectionVocabulary
-
 from plone import api
 from plone.memoize import ram
-
-from Products.urban import UrbanMessage as _
-from Products.urban.config import URBAN_TYPES
-from Products.urban.config import URBAN_CWATUPE_TYPES
-from Products.urban.config import URBAN_CODT_TYPES
-from Products.urban.config import URBAN_ENVIRONMENT_TYPES
-from Products.urban.dashboard import utils
-from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
-from Products.urban.utils import cache_key_5min
-
 from zope.globalrequest import getRequest
 from zope.i18n import translate
 from zope.schema.vocabulary import SimpleTerm

@@ -1,5 +1,6 @@
-from plone import api
 from Products.Five import BrowserView
+from plone import api
+
 
 # !!! MUST INSTALL wildcard.fixpersistentutilities FOR THIS VIEW TO WORK !!!
 

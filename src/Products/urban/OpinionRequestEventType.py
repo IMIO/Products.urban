@@ -14,22 +14,21 @@ __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEUL
 __docformat__ = "plaintext"
 
 from AccessControl import ClassSecurityInfo
-from Products.urban.widget.select2widget import MultiSelect2Widget
 from Products.Archetypes.atapi import *
-from zope.interface import implements
-import interfaces
+from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
+from Products.urban import UrbanMessage as _
 from Products.urban.UrbanEventType import UrbanEventType
 from Products.urban.UrbanVocabularyTerm import UrbanVocabularyTerm
-from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
-
 from Products.urban.config import *
-from Products.urban import UrbanMessage as _
-
+from Products.urban.widget.select2widget import MultiSelect2Widget
 from plone import api
-
+from zope.interface import implements
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
+
+import interfaces
+
 
 ##code-section module-header #fill in your manual code here
 

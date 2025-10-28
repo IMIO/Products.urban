@@ -2,8 +2,8 @@
 
 from Products.urban.config import ExternalConfig
 from Products.urban.services.cadastral import CadastreService
-from Products.urban.services.parcel_coring import ParcelCoringService
 from Products.urban.services.gig import GigService
+from Products.urban.services.parcel_coring import ParcelCoringService
 
 
 try:

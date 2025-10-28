@@ -4,6 +4,7 @@ from Products.urban.interfaces import IBuildLicence
 from plone import api
 from zope.component import createObject
 
+
 try:
     from Products.urban.setuphandlers import setupTest
 except:
@@ -15,6 +16,7 @@ except:
 
 
 import logging
+
 
 logger = logging.getLogger("urban: migrations")
 

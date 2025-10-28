@@ -1,14 +1,10 @@
 # -*- coding: utf-8 -*-
 
 from Acquisition import aq_inner
-
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-
-from Products.urban.config import URBAN_TYPES
 from Products.urban import utils
-
+from Products.urban.config import URBAN_TYPES
 from collective.eeafaceted.collectionwidget.browser.views import RenderTermView
-
 from plone import api
 
 

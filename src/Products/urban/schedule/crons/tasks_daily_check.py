@@ -1,13 +1,10 @@
 # -*- coding: utf-8 -*-
 
-from imio.schedule.config import states_by_status
-from imio.schedule.config import STARTED
-
 from Products.urban.schedule.cron import TaskCron
-from plone import api
-
 from Products.urban.schedule.interfaces import ITaskToCheckDaily
-
+from imio.schedule.config import STARTED
+from imio.schedule.config import states_by_status
+from plone import api
 from zope.event import notify
 from zope.lifecycleevent import ObjectModifiedEvent
 

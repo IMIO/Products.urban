@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 
+from OFS.ObjectManager import BeforeDeleteException
+from Products.urban import UrbanMessage as _
+from Products.urban.interfaces import IGenericLicence
 from plone import api
 from zope.globalrequest import getRequest
 from zope.i18n import translate
-from OFS.ObjectManager import BeforeDeleteException
-from Products.urban.interfaces import IGenericLicence
-from Products.urban import UrbanMessage as _
 
 
 def activate_optional_fields(portal_urban, event):

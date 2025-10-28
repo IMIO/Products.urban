@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
 from Products.CMFCore.utils import getToolByName
-
 from plone import api
 
 import logging
+
 
 logger = logging.getLogger("urban: migrations")
 

@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from AccessControl import getSecurityManager
-
 from Products.Five import BrowserView
-
 from plone import api
 
 

@@ -4,13 +4,13 @@
 
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
+from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
+from Products.urban.config import *
+from Products.urban.utils import WIDGET_DATE_END_YEAR
 from zope.interface import implements
+
 import interfaces
 
-from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
-
-from Products.urban.utils import WIDGET_DATE_END_YEAR
-from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
 ##/code-section module-header

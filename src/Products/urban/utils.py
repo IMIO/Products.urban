@@ -225,15 +225,16 @@ def get_ws_plonemeeting(obj):
     if "imio.pm.wsclient-sent_to" not in annotations:
         return
     request = api.portal.getRequest()
-    portal_state = getMultiAdapter(
-        (obj, request), name=u"plone_portal_state"
-    )
+    portal_state = getMultiAdapter((obj, request), name=u"plone_portal_state")
     ws4pmSettings = getMultiAdapter(
         (portal_state.portal(), request), name="ws4pmclient-settings"
     )
     return ws4pmSettings
 
-def get_ws_meetingitem_infos(urban_event, extra_attributes=False, query_hook=None, first=False):
+
+def get_ws_meetingitem_infos(
+    urban_event, extra_attributes=False, query_hook=None, first=False
+):
     """Get the PloneMeeting's item linked to the given urban_event. Use extra_attributes
     to get the full item (not recommended). query_hook is a function that can be used to customize the query.
     If first is True, only the first item is returned."""
@@ -244,11 +245,13 @@ def get_ws_meetingitem_infos(urban_event, extra_attributes=False, query_hook=Non
     config_id = annotations["imio.pm.wsclient-sent_to"][0]
     query = {"externalIdentifier": urban_event.UID(), "config_id": config_id}
     if extra_attributes:
-        query.update({
-            "extra_include": "meeting,config",
-            "extra_include_config_metadata_fields": "title",
-            "fullobjects": "True"
-        })
+        query.update(
+            {
+                "extra_include": "meeting,config",
+                "extra_include_config_metadata_fields": "title",
+                "fullobjects": "True",
+            }
+        )
     if query_hook:
         query_hook(query)
     items = ws4pmSettings._rest_searchItems(query)

@@ -15,21 +15,18 @@ __docformat__ = "plaintext"
 
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
-from zope.interface import implements
-import interfaces
-
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
-
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.config import *
+from Products.validation import validation
+from Products.validation.interfaces.IValidator import IValidator
+from plone import api
+from zope.i18n import translate
+from zope.interface import implements
 
 ##code-section module-header #fill in your manual code here
 import cgi
-from zope.i18n import translate
-from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
-from Products.validation.interfaces.IValidator import IValidator
-from Products.validation import validation
-
-from plone import api
+import interfaces
 
 
 class BelgianNationalRegValidator:

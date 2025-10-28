@@ -3,11 +3,9 @@
 from Acquisition import aq_inner
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.urban import UrbanMessage as _
-
 from plone import api
 from plone.app.portlets.portlets import base
 from plone.portlets.interfaces import IPortletDataProvider
-
 from zope.formlib import form
 from zope.interface import implements
 

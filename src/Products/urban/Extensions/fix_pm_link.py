@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from plone import api
-from Products.urban.interfaces import ISimpleCollegeEvent
 from Products.urban.interfaces import ICollegeEvent
+from Products.urban.interfaces import ISimpleCollegeEvent
+from plone import api
 from zope.annotation import interfaces
 
 

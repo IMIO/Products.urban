@@ -14,27 +14,26 @@ __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEUL
 __docformat__ = "plaintext"
 
 from AccessControl import ClassSecurityInfo
-from Products.urban.widget.select2widget import MultiSelect2Widget
+from DateTime import DateTime
+from OFS.ObjectManager import BeforeDeleteException
 from Products.Archetypes.atapi import *
-from zope.interface import implements
-from Products.urban import interfaces
-
+from Products.CMFCore.utils import getToolByName
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
-
+from Products.urban import interfaces
 from Products.urban import UrbanMessage as _
-from Products.urban.utils import WIDGET_DATE_END_YEAR
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.config import *
+from Products.urban.interfaces import IGenericLicence
+from Products.urban.utils import setOptionalAttributes
+from Products.urban.utils import WIDGET_DATE_END_YEAR
+from Products.urban.widget.select2widget import MultiSelect2Widget
+from Products.urban.widget.select2widget import Select2Widget
+from plone import api
 
 ##code-section module-header #fill in your manual code here
 from zope.i18n import translate
-from OFS.ObjectManager import BeforeDeleteException
-from Products.CMFCore.utils import getToolByName
-from Products.urban.interfaces import IGenericLicence
-from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
-from Products.urban.utils import setOptionalAttributes
-from Products.urban.widget.select2widget import Select2Widget
-from plone import api
-from DateTime import DateTime
+from zope.interface import implements
+
 
 optional_fields = [
     "derogationDetails",

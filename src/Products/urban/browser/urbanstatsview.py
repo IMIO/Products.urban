@@ -1,10 +1,10 @@
 from Acquisition import aq_inner
+from DateTime import DateTime
+from Products.CMFCore.utils import getToolByName
+from Products.Five import BrowserView
+from Products.urban.config import URBAN_TYPES
 from datetime import date
 from datetime import timedelta
-from Products.Five import BrowserView
-from Products.CMFCore.utils import getToolByName
-from Products.urban.config import URBAN_TYPES
-from DateTime import DateTime
 
 
 class UrbanStatsView(BrowserView):

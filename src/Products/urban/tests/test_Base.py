@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
 
-import unittest2 as unittest
-from Products.urban.testing import URBAN_TESTS_CONFIG
 from Products.urban import utils
-
-from plone.app.testing import login
+from Products.urban.testing import URBAN_TESTS_CONFIG
 from plone import api
+from plone.app.testing import login
 
 import transaction
+import unittest2 as unittest
 
 
 class TestBase(unittest.TestCase):
