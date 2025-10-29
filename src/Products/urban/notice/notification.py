@@ -91,7 +91,7 @@ class NoticeNotification(NoticeElement):
             if self.notice_type == "TRANSFERT_DOSSIER":
                 if self.notification_type == "PE_PU":
                     if self.notification_subtype == "PU":
-                        self._licence_type = "UniqueLicence"
+                        self._licence_type = "CODT_UniqueLicence"
                     elif self.notification_subtype == "PE":
                         # PE class is not yet available in TRANSFERT_DOSSIER
                         # => extract it from XML document
