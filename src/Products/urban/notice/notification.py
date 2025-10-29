@@ -130,6 +130,7 @@ class NoticeNotification(NoticeElement):
             "NOTIF_COMPLETUDE2_NON_RECEVABLE_COMMUNE": "ns3:TwiceDefaultRequest",
             "NOTIF_COMPLETUDE2_IRRECEVABLE_COMMUNE": "ns3:TwiceDefaultRequest",
             "NOTIF_COMPLETUDE1_NON_RECEVABLE_COMMUNE": "ns3:TwiceDefaultRequest",
+            "NOTIFICATION_PROROGATION_COMMUNE": "ns3:TwiceDefaultRequest",
         }
         return self._get_data(
             "specific", specific.get(self.notice_type), "ns3:municipalityReference"
