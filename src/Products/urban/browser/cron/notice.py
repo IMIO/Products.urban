@@ -194,12 +194,10 @@ class ImportFromNoticeView(BrowserView):
             licence, detailed_notification, event_type="dossier-incomplet"
         )
         transaction.commit()
-        
+
     def process_extension_of_deadline_notification(self, detailed_notification):
         license = detailed_notification.licence
-        
         license.getField('prorogation').set(license, True)
         license.reindexObject()
         self.update_license(license, detailed_notification, event_type="prorogation-30-jours")
         notify(ObjectModifiedEvent(license))
-        
