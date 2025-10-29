@@ -335,3 +335,61 @@ class TestNoticeCronPE2(unittest.TestCase):
         self.assertIsNotNone(not_admissible_folder)
         self.assertEqual(not_admissible_folder.getEventDate().Date(), "2025/09/19")
         self.assertEqual(api.content.get_state(not_admissible_folder), "closed")
+
+        licence_folder = self.portal.urban.envclasstwos
+        licence = licence_folder.values()[-1]
+        licence.reference = "PE2/2025/4"  # force reference, already sent to NOTICE
+        licence.reindexObject()
+        #self.assertFalse(licence.getProrogation())
+        self._create_extension_folder()
+        # 5.3 assert prorogation is set to True
+        self.assertTrue(licence.getProrogation())
+
+    @mock.patch(
+        "Products.urban.services.notice.WebserviceNotice.get_notifications",
+        return_value=load_notif_json("EXTENSION_DEADLINE", "1471027-NOTIFICATIONS.json"),
+    )
+    @mock.patch(
+        "Products.urban.services.notice.WebserviceNotice._get_notification",
+        return_value=MockedRequest(load_notif_json("EXTENSION_DEADLINE", "1471027-NOTIFICATION.json")),
+    )
+    def _create_extension_folder(self, notif_patch, notifs_patch):
+        notif_patch, notifs_patch
+        self.notif_patch = notif_patch
+        with api.env.adopt_roles(["Manager"]):
+            import_view = self.portal.restrictedTraverse("@@import-from-notice")
+            import_view()
+
+    def test_extension_of_deadline_notification(self):
+        # 1) create licence
+        with mock.patch(
+            "Products.urban.services.notice.WebserviceNotice.get_notifications",
+            return_value=load_notif_json("INCOMPLETE", "959254_notifications.json"),
+        ) as mock_get_notifications, mock.patch(
+            "Products.urban.services.notice.WebserviceNotice._get_notification",
+            return_value=MockedRequest(
+                load_notif_json(
+                    "INCOMPLETE", "959254-TRANSFERT-DOSSIER-EN_ATTENTE_REPONSE.json"
+                )
+            ),
+        ) as mock_get_notification, mock.patch(
+            "Products.urban.notice.address.NoticeAddress._find_address",
+            return_value=[{"text": "street, 1 (1400 - Nivelles)", "id": "1234"}],
+        ) as mock_address, mock.patch(
+            "Products.urban.services.notice.WebserviceNotice._get_notification_document",
+            return_value=MockedRequest(load_notif_content("TRANSFERT_DOSSIER", "document.pdf")),
+        ) as mock_get_document:
+            with api.env.adopt_roles(["Manager"]):
+                import_view = self.portal.restrictedTraverse("@@import-from-notice")
+                import_view()
+
+        licence_folder = self.portal.urban.envclasstwos
+        licence = licence_folder.values()[-1]
+        licence.reference = "PE2/2025/4"
+        licence.reindexObject()
+        self._create_extension_folder()
+        # 5.3 assert prorogation is set to True
+        self.assertTrue(licence.getProrogation())
+        # verify delay modified
+        delay = licence.getProrogationDelays(True)
+        self.assertEqual(delay, "90j")
