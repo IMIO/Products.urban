@@ -1,0 +1,401 @@
+{
+  "status": "PROCESSED",
+  "warning": null,
+  "error": null,
+  "notice": {
+    "BO": {
+      "idBO": "10010781",
+      "typeBO": {
+        "code": "PE_PU",
+        "description": [
+          {
+            "_value_1": "Umweltgenehmigung oder Globalgenehmigung",
+            "language": "de"
+          },
+          {
+            "_value_1": "Permis d'environnement ou unique",
+            "language": "fr"
+          }
+        ],
+        "origin": null
+      },
+      "typeBOSubtype": {
+        "code": "PE",
+        "description": [
+          {
+            "_value_1": "Umweltgenehmigung",
+            "language": "de"
+          },
+          {
+            "_value_1": "permis d'environnement",
+            "language": "fr"
+          }
+        ],
+        "origin": null
+      },
+      "noticeIdBO": "NOTIFICATION:52344150",
+      "codeTypeNoticeBO": "NOTIFICATION_PROROGATION_COMMUNE",
+      "applicationCodeBO": "TWICE",
+      "fileLanguage": {
+        "code": "FR",
+        "description": [
+          {
+            "_value_1": "FR",
+            "language": "de"
+          },
+          {
+            "_value_1": "FR",
+            "language": "fr"
+          }
+        ]
+      },
+      "fileDate": "2025-09-17T00:00:00+02:00",
+      "noticeLanguage": {
+        "code": "FR",
+        "description": [
+          {
+            "_value_1": "Französisch",
+            "language": "de"
+          },
+          {
+            "_value_1": "Français",
+            "language": "fr"
+          }
+        ]
+      }
+    },
+    "sender": {
+      "noticeInstanceId": "O3080500",
+      "contactName": "Giuseppe MONACHINO",
+      "contactPhone": {
+        "phoneNumber": [
+          {
+            "_value_1": "+3281715344",
+            "type": null
+          }
+        ]
+      },
+      "contactMail": {
+        "email": [
+          {
+            "_value_1": "permis.environnement.namur@spw.wallonie.be",
+            "type": null
+          }
+        ]
+      },
+      "projectType": "Un renouvellement",
+      "motivations": null
+    },
+    "receiver": {
+      "noticeInstanceId": "0216.697.802"
+    },
+    "noticeType": {
+      "code": "PE_DEM_COM_NOTIFICATION_PROROGATION",
+      "description": [
+        {
+          "_value_1": "Demande PEPU - Notification à la commune de la prolongation du délai d'instruction",
+          "language": "de"
+        },
+        {
+          "_value_1": "Demande PEPU - Notification à la commune de la prolongation du délai d'instruction",
+          "language": "fr"
+        }
+      ]
+    },
+    "subjectNotice": "Permis env classe 2 Collège",
+    "sendDate": "2025-10-10T00:00:00+02:00",
+    "deadline": null,
+    "dueDate": null,
+    "fileDateMunicipality": "2025-09-11T00:00:00+02:00",
+    "comment": null,
+    "businessReference": {
+      "id": "10106444",
+      "denomination": "Ancienne ferme Saint Martin"
+    },
+    "addresses": {
+      "address": [
+        {
+          "country": "BE",
+          "addressId": {
+            "_value_1": null,
+            "source": "-1"
+          },
+          "street": "Saint Martin",
+          "houseNumber": "9",
+          "boxNumber": null,
+          "postCode": "5080",
+          "municipality": "LA BRUYÈRE",
+          "state": "actif",
+          "plainText": [],
+          "locality": {
+            "code": "5080",
+            "description": [
+              {
+                "_value_1": "LA BRUYERE (Emines)",
+                "language": "de"
+              },
+              {
+                "_value_1": "LA BRUYERE (Emines)",
+                "language": "fr"
+              }
+            ]
+          },
+          "inceptionDate": null,
+          "modificationDate": null,
+          "addressType": null
+        }
+      ]
+    },
+    "parcels": {
+      "parcel": [
+        {
+          "identifier": "P0001",
+          "municipality": {
+            "code": "81001",
+            "description": [
+              {
+                "_value_1": "ARLON",
+                "language": "de"
+              },
+              {
+                "_value_1": "ARLON",
+                "language": "fr"
+              }
+            ],
+            "origin": null
+          },
+          "division": "ARLON 8 DIV/HACHY/",
+          "codeDivision": "81408",
+          "section": "D",
+          "radical": "0338",
+          "bisTer": "00",
+          "exponent": "C",
+          "power": "000",
+          "part": false,
+          "right": true,
+          "capakey": "81408D0338/00C000",
+          "comment": null
+        },
+        {
+          "identifier": "P002",
+          "municipality": {
+            "code": "92141",
+            "description": [
+              {
+                "_value_1": "LA BRUYERE",
+                "language": "de"
+              },
+              {
+                "_value_1": "LA BRUYÈRE",
+                "language": "fr"
+              }
+            ],
+            "origin": null
+          },
+          "division": "LA BRUYERE 2 DIV/RHISNES/",
+          "codeDivision": "92102",
+          "section": "B",
+          "radical": "0006",
+          "bisTer": "00",
+          "exponent": "_",
+          "power": "000",
+          "part": false,
+          "right": false,
+          "capakey": "92102B0006/00_000",
+          "comment": null
+        },
+        {
+          "identifier": "P003",
+          "municipality": {
+            "code": "92141",
+            "description": [
+              {
+                "_value_1": "LA BRUYERE",
+                "language": "de"
+              },
+              {
+                "_value_1": "LA BRUYÈRE",
+                "language": "fr"
+              }
+            ],
+            "origin": null
+          },
+          "division": "LA BRUYERE 1 DIV/EMINES/",
+          "codeDivision": "92036",
+          "section": "D",
+          "radical": "0069",
+          "bisTer": "00",
+          "exponent": "X",
+          "power": "000",
+          "part": false,
+          "right": false,
+          "capakey": "92036D0069/00X000",
+          "comment": null
+        }
+      ]
+    },
+    "parties": {
+      "part": [
+        {
+          "enterpriseNumber": null,
+          "enterpriseType": null,
+          "legalForm": null,
+          "personNumber": "88010435423",
+          "title": null,
+          "lastname": "Nagant",
+          "firstname": "Aurore Edith Michèle",
+          "language": {
+            "code": "FR",
+            "description": [
+              {
+                "_value_1": "français",
+                "language": "de"
+              },
+              {
+                "_value_1": "français",
+                "language": "fr"
+              }
+            ]
+          },
+          "denomination": null,
+          "mailingAddresses": {
+            "mailingAddress": [
+              {
+                "country": "BE",
+                "addressId": {
+                  "_value_1": null,
+                  "source": "-1"
+                },
+                "street": "Rue Barbe d'Or(AIN)",
+                "houseNumber": "21",
+                "boxNumber": null,
+                "postCode": "4317",
+                "municipality": "FAIMES",
+                "state": "actif",
+                "plainText": [],
+                "locality": {
+                  "code": "4317",
+                  "description": [
+                    {
+                      "_value_1": "FAIMES",
+                      "language": "de"
+                    },
+                    {
+                      "_value_1": "FAIMES",
+                      "language": "fr"
+                    }
+                  ]
+                },
+                "inceptionDate": null,
+                "modificationDate": null,
+                "addressType": null
+              }
+            ]
+          },
+          "phoneNumber": null,
+          "email": null
+        }
+      ]
+    },
+    "documents": {
+      "document": [
+        {
+          "documentData": {
+            "filename": "10010781-NOTIFICATION_PROROGATION_COMMUNE-Commune wallonne",
+            "description": null,
+            "type": {
+              "code": "NOTIFICATION_PROROGATION_COMMUNE",
+              "description": [
+                {
+                  "_value_1": "Notification prorogation à la commune de dépôt",
+                  "language": "de"
+                },
+                {
+                  "_value_1": "Notification prorogation à la commune de dépôt",
+                  "language": "fr"
+                }
+              ]
+            },
+            "language": {
+              "code": "FR",
+              "description": [
+                {
+                  "_value_1": "Französisch",
+                  "language": "de"
+                },
+                {
+                  "_value_1": "Français",
+                  "language": "fr"
+                }
+              ]
+            },
+            "documentId": "301c7af8-ca02-4675-88e6-64de05015736",
+            "fileSize": 142951,
+            "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+            "confidentiality": {
+              "code": "0",
+              "description": [
+                {
+                  "_value_1": "Öffentlichkeit",
+                  "language": "de"
+                },
+                {
+                  "_value_1": "public",
+                  "language": "fr"
+                }
+              ],
+              "domain": "NOTICE_GENERIC_CONFIDENTIALITE"
+            },
+            "principal": true
+          },
+          "content": {
+            "documentContentStorage": "BO"
+          }
+        }
+      ]
+    },
+    "mapSpecification": null,
+    "specific": {
+      "ns3:TwiceDefaultRequest": {
+        "@xmlns": "http://soa.spw.wallonie.be/data/common/code/v1",
+        "@xmlns:ns2": "http://soa.spw.wallonie.be/services/noticeExtensions/messages/v1",
+        "@xmlns:ns3": "http://soa.spw.wallonie.be/services/noticeTwiceExtensions/messages/v1",
+        "@xmlns:ns4": "http://soa.spw.wallonie.be/data/business/environmentalLicence/v2",
+        "@xmlns:ns5": "http://soa.spw.wallonie.be/services/noticeGesperExtensions/messages/v1",
+        "@xmlns:ns6": "http://soa.spw.wallonie.be/data/business/noticeGesperExtensions/v1",
+        "@xmlns:ns7": "http://soa.spw.wallonie.be/data/common/date/v1",
+        "ns2:acceptedResponseNoticeCodes": null,
+        "ns3:municipalityReference": "PE2/2025/4",
+        "ns3:timeLimits": null,
+        "ns3:suspentionPeriods": null
+      }
+    },
+    "status": {
+      "status": [
+        {
+          "code": {
+            "code": "EN_ATTENTE_REPONSE",
+            "description": [
+              {
+                "_value_1": "Warten auf Antwort",
+                "language": "de"
+              },
+              {
+                "_value_1": "En attente de réponse",
+                "language": "fr"
+              }
+            ]
+          },
+          "date": "2025-10-10T10:01:47.975000"
+        }
+      ]
+    },
+    "noticeIdentifier": {
+      "noticeId": "1471027"
+    },
+    "receptionDate": "2025-10-10T10:01:47.892000"
+  },
+  "customerTicket": "b028a98c-b260-4118-afb7-6e0d2988088c",
+  "requestId": "a1db6e74-b5c2-4fc2-ac2c-f8bebae5c01b",
+  "inscriptionReference": null
+}
