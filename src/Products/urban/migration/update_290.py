@@ -1,17 +1,18 @@
 # encoding: utf-8
-
-from Products.urban import UrbanMessage as _
 from Products.CMFCore.utils import getToolByName
+from Products.urban import URBAN_TYPES
+from Products.urban import UrbanMessage as _
 from Products.urban.utils import moveElementAfter
-
 from plone import api
 from plone.app.textfield import RichTextValue
-from plone.registry import Record
 from plone.registry import field
+from plone.registry import Record
 from plone.registry.interfaces import IRegistry
 from zope.component import getUtility
+from zope.event import notify
 
 import logging
+
 
 logger = logging.getLogger("urban: migrations")
 
@@ -33,10 +34,14 @@ def initialize_notice_settings(context):
         registry_record.value = None
         registry.records["{0}.municipality_id".format(base)] = registry_record
     if "{0}.sent_on_behalf_of_municipality_id".format(base) not in registry.records:
-        registry_field = field.TextLine(title=INoticeSettings["sent_on_behalf_of_municipality_id"].title)
+        registry_field = field.TextLine(
+            title=INoticeSettings["sent_on_behalf_of_municipality_id"].title
+        )
         registry_record = Record(registry_field)
         registry_record.value = None
-        registry.records["{0}.sent_on_behalf_of_municipality_id".format(base)] = registry_record
+        registry.records[
+            "{0}.sent_on_behalf_of_municipality_id".format(base)
+        ] = registry_record
     if "{0}.last_import_date".format(base) not in registry.records:
         registry_field = field.Datetime(title=INoticeSettings["last_import_date"].title)
         registry_record = Record(registry_field)
@@ -124,3 +129,58 @@ def add_event_config_types_notice(context):
                     setattr(folder_event, "eventType", new_interfaces)
 
             last_urbaneventype_id = id
+
+
+def add_folder_manager_notice(context):
+    from Products.urban.setuphandlers import _activate_dashboard_navigation
+    from collective.eeafaceted.collectionwidget.utils import _updateDefaultCollectionFor
+    from eea.facetednavigation.criteria.interfaces import ICriteria
+    from eea.facetednavigation.events import FacetedGlobalSettingsChangedEvent
+
+    logger = logging.getLogger("urban: Add folder manager for notice import")
+
+    # create folder manager
+    urban_tool = api.portal.get_tool("portal_urban")
+    foldermanagers = getattr(urban_tool, "foldermanagers")
+    if "notice" not in foldermanagers.objectIds():
+        foldermanagers.invokeFactory(
+            "FolderManager",
+            "notice",
+            name1="Import NOTICE",
+            grade="agent-technique",
+            ploneUserId="",
+            manageableLicences=URBAN_TYPES,
+        )
+    notice_folder_manager = foldermanagers.notice
+    notice_folder_manager.reindexObject()
+
+    # create dashboard for incoming notice notifications
+    urban_folder = api.portal.get().urban
+
+    if "import-notice" not in urban_folder.objectIds():
+        import_notice_folder = api.content.create(
+            container=urban_folder,
+            type="Folder",
+            id="import-notice",
+            title="Import NOTICE",
+        )
+
+        _activate_dashboard_navigation(
+            import_notice_folder, "/dashboard/config/import_notice.xml"
+        )
+
+        # no need to create another collection, this one does the job
+        all_licences_collection = getattr(urban_folder, "collection_all_licences")
+        _updateDefaultCollectionFor(import_notice_folder, all_licences_collection.UID())
+
+        # set notice folder manager's UID as default in faceted filter widget
+        criteria = ICriteria(import_notice_folder).criteria
+        for criterion in criteria:
+            if criterion.index == "folder_manager":
+                ICriteria(import_notice_folder).edit(
+                    criterion.__name__,
+                    default=notice_folder_manager.UID(),
+                )
+        notify(FacetedGlobalSettingsChangedEvent(import_notice_folder))
+
+    logger.info("Upgrade done!")

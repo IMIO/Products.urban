@@ -1,29 +1,26 @@
 # -*- coding: utf-8 -*-
 
 from AccessControl import ClassSecurityInfo
-from Products.Archetypes.atapi import *
-from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
-from zope.interface import implements
-
-from Products.urban import UrbanMessage as _
-from Products.urban import interfaces
-from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
-from Products.urban.config import PROJECTNAME
-from Products.urban.config import URBAN_TYPES
-from Products.urban.content.licence.GenericLicence import GenericLicence
-from Products.urban.content.Inquiry import Inquiry
-from Products.urban.utils import setOptionalAttributes
-from Products.urban.utils import setSchemataForInquiry
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import (
     ReferenceBrowserWidget,
 )
+from Products.Archetypes.atapi import *
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
-from plone import api
-
-from zope.annotation import IAnnotations
-
+from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
+from Products.urban import interfaces
+from Products.urban import UrbanMessage as _
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
+from Products.urban.config import PROJECTNAME
+from Products.urban.config import URBAN_TYPES
+from Products.urban.content.Inquiry import Inquiry
+from Products.urban.content.licence.GenericLicence import GenericLicence
+from Products.urban.utils import setOptionalAttributes
+from Products.urban.utils import setSchemataForInquiry
 from collective.archetypes.select2.select2widget import MultiSelect2Widget
+from plone import api
+from zope.annotation import IAnnotations
+from zope.interface import implements
 
 
 optional_fields = [
@@ -220,6 +217,18 @@ schema = Schema(
             default_method="getDefaultText",
             default_output_type="text/x-html-safe",
         ),
+        LinesField(
+            name="observationItems",
+            widget=MultiSelectionWidget(
+                format="checkbox",
+                label=_("urban_label_observationItems", default="ObservationItems"),
+                i18n_domain="urban",
+            ),
+            multiValued=True,
+            optional=True,
+            schemata="urban_inspection",
+            vocabulary=UrbanVocabulary("observationitems", inUrbanConfig=True),
+        ),
         StringField(
             name="patrimony",
             default="none",
@@ -389,6 +398,7 @@ schema = Schema(
         ),
     ),
 )
+setOptionalAttributes(schema, ["observationItems"])
 Inspection_schema = (
     BaseFolderSchema.copy()
     + getattr(GenericLicence, "schema", Schema(())).copy()
@@ -699,6 +709,15 @@ class Inspection(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
             ("classified", "bien classé"),
         )
         return DisplayList(vocabulary)
+
+    def listObservationsItems(self):
+        """Return a list of observations items"""
+        voc = UrbanVocabulary("observationitems", inUrbanConfig=False)
+        return voc.getDisplayList(self)
+
+    def displayObservationItems(self):
+        """Return a list of selected observations items"""
+        return self.getValuesForTemplate("observationItems")
 
 
 registerType(Inspection, PROJECTNAME)

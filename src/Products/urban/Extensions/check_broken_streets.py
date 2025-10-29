@@ -1,5 +1,5 @@
-from plone import api
 from Products.urban.interfaces import IGenericLicence
+from plone import api
 
 
 def display():

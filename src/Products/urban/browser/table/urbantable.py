@@ -1,17 +1,12 @@
 # -*- coding: utf-8 -*-
 
-from plone import api
-
-from z3c.table.table import Table
-from z3c.table.table import SequenceTable
-
-from zope.interface import implements
-
-from plone.api import portal
-
 from Products.ZCatalog.Lazy import LazyMap
-
 from Products.urban.browser.table import interfaces
+from plone import api
+from plone.api import portal
+from z3c.table.table import SequenceTable
+from z3c.table.table import Table
+from zope.interface import implements
 
 
 def getSortMethod(idx):

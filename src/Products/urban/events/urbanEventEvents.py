@@ -4,16 +4,13 @@ from Products.urban.browser.default_text import DefaultTextRenderer
 from Products.urban.events.licenceEvents import _setDefaultSelectValues
 from Products.urban.interfaces import IEventTypeType
 from Products.urban.interfaces import ITheLicenceEvent
-
 from imio.schedule.utils import get_task_configs
-
-from zope.component.interface import getInterface
-from zope.interface import alsoProvides
-from zope.event import notify
-from zope.lifecycleevent import ObjectModifiedEvent
-
 from plone import api
 from plone.memoize.request import cache
+from zope.component.interface import getInterface
+from zope.event import notify
+from zope.interface import alsoProvides
+from zope.lifecycleevent import ObjectModifiedEvent
 
 import logging
 
@@ -103,12 +100,13 @@ def updateKeyEvent(urban_event, event):
 
 def updateDecisionDate(urban_event, event):
     if ITheLicenceEvent.providedBy(urban_event):
-        logger = logging.getLogger('updateDecisionDate')
+        logger = logging.getLogger("updateDecisionDate")
         licence = urban_event.aq_inner.aq_parent
-        logger.info("reindex 'getDecisionDate' trigger by {} for licence : {}".format(
-            event.__class__.__name__,
-            licence.absolute_url()
-        ))
+        logger.info(
+            "reindex 'getDecisionDate' trigger by {} for licence : {}".format(
+                event.__class__.__name__, licence.absolute_url()
+            )
+        )
         licence.reindexObject(["getDecisionDate"])
 
 

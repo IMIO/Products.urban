@@ -3,8 +3,8 @@
 from Products.statusmessages.interfaces import IStatusMessage
 from Products.urban import UrbanMessage as _
 from imio.schedule.interfaces import IDueDateSettings
-from plone.app.registry.browser.controlpanel import RegistryEditForm
 from plone.app.registry.browser.controlpanel import ControlPanelFormWrapper
+from plone.app.registry.browser.controlpanel import RegistryEditForm
 from z3c.form import button
 from z3c.form import field
 

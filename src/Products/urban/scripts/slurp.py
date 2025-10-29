@@ -8,10 +8,10 @@
     - a dictionnary representing the mapping bewteen the rubrics and conditions
 """
 
-import urllib2
-import re
-import pickle
 import bs4
+import pickle
+import re
+import urllib2
 
 
 encoding = "iso-8859-1"

@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 
+from OFS.ObjectManager import BeforeDeleteException
+from Products.urban import UrbanMessage as _
+from Products.urban.interfaces import IGenericLicence
 from plone import api
+from zExceptions import Redirect
 from zope.globalrequest import getRequest
 from zope.i18n import translate
-from OFS.ObjectManager import BeforeDeleteException
-from Products.urban.interfaces import IGenericLicence
-from Products.urban import UrbanMessage as _
 
 
 def activate_optional_fields(portal_urban, event):
@@ -70,3 +71,16 @@ def before_street_delete(current_street, event):
                         " : {}".format(licence.reference),
                     )
                 )
+
+
+def folder_manager_object_will_be_moved(folder_manager, event):
+    if event.oldName in ("notice",):
+        api.portal.show_message(
+            _(
+                u"The folder manager '${name}' can't be renamed or removed.",
+                mapping={u"name": event.oldName},
+            ),
+            folder_manager.REQUEST,
+            type="error",
+        )
+        raise Redirect(event.object.aq_parent.absolute_url())

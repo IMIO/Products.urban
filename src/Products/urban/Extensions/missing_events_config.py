@@ -2,7 +2,6 @@
 
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.interfaces import IUrbanEvent
-
 from plone import api
 
 

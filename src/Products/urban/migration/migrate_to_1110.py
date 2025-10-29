@@ -1,22 +1,20 @@
 # -*- coding: utf-8 -*-
 
-from Products.contentmigration.walker import CustomQueryWalker
 from Products.contentmigration.archetypes import InplaceATFolderMigrator
-
+from Products.contentmigration.walker import CustomQueryWalker
 from Products.urban.config import GLOBAL_TEMPLATES
 from Products.urban.interfaces import IPortionOut
 from Products.urban.interfaces import IUrbanDoc
 from Products.urban.profiles.extra.config_default_values import default_values
 from Products.urban.setuphandlers import createFolderDefaultValues
-
 from plone import api
 from plone.namedfile.file import NamedBlobFile
-
 from zope.event import notify
 from zope.interface import alsoProvides
 from zope.lifecycleevent import ObjectCreatedEvent
 
 import logging
+
 
 logger = logging.getLogger("urban: migrations")
 

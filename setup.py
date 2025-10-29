@@ -1,7 +1,9 @@
-from setuptools import setup, find_packages
+from setuptools import find_packages
+from setuptools import setup
+
 import os
 
-version = "2.7.44.dev0"
+version = "2.8.0b2.dev0"
 
 setup(
     name="Products.urban",
@@ -63,7 +65,7 @@ setup(
         "imio.actionspanel",
         "imio.dashboard",
         "imio.pm.locales",
-        "imio.pm.wsclient",
+        "imio.pm.wsclient>=2.0",
         "imio.restapi",
         "imio.schedule",
         "imio.urban.core",

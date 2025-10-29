@@ -1,12 +1,10 @@
 # -*- coding: utf-8 -*-
 
-from zope.interface import Interface
+from Products.urban import UrbanMessage as _
 from zope import schema
-
+from zope.interface import Interface
 from zope.interface.interfaces import IInterface
 from zope.publisher.interfaces.browser import IDefaultBrowserLayer
-
-from Products.urban import UrbanMessage as _
 
 
 class IProprietary(Interface):
@@ -337,6 +335,12 @@ class IInspection(IGenericLicence):
     """
 
 
+class IHousing(IGenericLicence):
+    """
+    Marker interface for inspection
+    """
+
+
 class ITicket(IGenericLicence):
     """
     Marker interface for inspection
@@ -581,6 +585,10 @@ class ITransferOfLicenceEvent(Interface):
     __doc__ = _("""ITransferOfLicence type marker interface""")
 
 
+class IObservationEvent(Interface):
+    __doc__ = _("""IObservationEvent type marker interface""")
+
+
 class IUrbanBase(Interface):
     """Marker interface for .Base.UrbanBase"""
 
@@ -691,6 +699,7 @@ class IAsyncInquiryRadius(Interface):
         key_type=schema.ASCIILine(),
         value_type=schema.Int(),
     )
+
 
 class IAsyncMailing(Interface):
     """ """

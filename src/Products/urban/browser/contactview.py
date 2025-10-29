@@ -1,13 +1,11 @@
 # -*- coding: utf-8 -*-
 
-from plone import api
-
 from Acquisition import aq_inner
-
 from Products.CMFCore.utils import getToolByName
 from Products.Five import BrowserView
 from Products.urban import UrbanMessage as _
 from Products.urban.config import URBAN_TYPES
+from plone import api
 
 
 class ContactView(BrowserView):

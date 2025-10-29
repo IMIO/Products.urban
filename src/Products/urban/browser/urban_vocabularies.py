@@ -1,11 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from collections import OrderedDict
-
 from Products.Five import BrowserView
-
 from Products.urban.interfaces import IUrbanConfigurationValue
-
+from collections import OrderedDict
 from zope.annotation import IAnnotations
 
 

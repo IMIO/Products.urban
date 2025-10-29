@@ -1,18 +1,18 @@
 # -*- coding: utf-8 -*-
-from plone.app.testing import login
+from DateTime import DateTime
+from Products.CMFCore.utils import getToolByName
 from Products.urban.interfaces import IGenericLicence
+from Products.urban.setuphandlers import createFolderDefaultValues
 from Products.urban.testing import URBAN_TESTS_LICENCES
 from Products.urban.tests.helpers import BrowserTestCase
-from Products.urban.setuphandlers import createFolderDefaultValues
-from plone.testing.z2 import Browser
-from Products.CMFCore.utils import getToolByName
-from testfixtures import compare, StringComparison as S
 from collective.eeafaceted.dashboard.utils import getDashboardQueryResult
-from DateTime import DateTime
-from zope.globalrequest.local import setLocal
+from mock import patch
 from plone import api
 from plone.app.testing import login
-from mock import patch
+from plone.testing.z2 import Browser
+from testfixtures import compare
+from testfixtures import StringComparison as S
+from zope.globalrequest.local import setLocal
 
 
 class TestExportViews(BrowserTestCase):

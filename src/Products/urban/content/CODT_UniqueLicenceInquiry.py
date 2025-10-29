@@ -15,16 +15,15 @@ __docformat__ = "plaintext"
 
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
-from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
-from zope.interface import implements
-from Products.urban import interfaces
-from Products.urban import utils
-from Products.urban import UrbanMessage as _
-
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
-
+from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
+from Products.urban import interfaces
+from Products.urban import UrbanMessage as _
+from Products.urban import utils
 from Products.urban.config import *
 from Products.urban.content.CODT_Inquiry import CODT_Inquiry
+from zope.interface import implements
+
 
 slave_fields_inquiry_category = (
     {

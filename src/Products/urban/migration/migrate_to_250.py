@@ -1,25 +1,11 @@
 # -*- coding: utf-8 -*-
 
 from Acquisition import aq_base
-
-from collective.documentgenerator.content.pod_template import IConfigurablePODTemplate
-from collective.iconifieddocumentactions.upgrades import (
-    move_to_collective_iconifieddocumentactions,
-)
-from collective.noindexing import patches
-
-from imio.schedule.content.object_factories import MacroCreationConditionObject
-from imio.schedule.content.object_factories import MacroEndConditionObject
-from imio.schedule.content.object_factories import MacroRecurrenceConditionObject
-
-from plone.browserlayer.interfaces import ILocalBrowserLayerType
-
-from Products.contentmigration.walker import CustomQueryWalker
 from Products.contentmigration.archetypes import InplaceATFolderMigrator
-
+from Products.contentmigration.walker import CustomQueryWalker
 from Products.urban import services
-from Products.urban.config import URBAN_TYPES
 from Products.urban.config import LICENCE_FINAL_STATES
+from Products.urban.config import URBAN_TYPES
 from Products.urban.interfaces import ICODT_BaseBuildLicence
 from Products.urban.interfaces import ICODT_UrbanCertificateBase
 from Products.urban.interfaces import IGenericLicence
@@ -29,14 +15,22 @@ from Products.urban.migration.utils import disable_schedule
 from Products.urban.migration.utils import restore_licence_default_values
 from Products.urban.setuphandlers import setFolderAllowedTypes
 from Products.urban.utils import getLicenceFolderId
-
+from collective.documentgenerator.content.pod_template import IConfigurablePODTemplate
+from collective.iconifieddocumentactions.upgrades import (
+    move_to_collective_iconifieddocumentactions,
+)
+from collective.noindexing import patches
+from imio.schedule.content.object_factories import MacroCreationConditionObject
+from imio.schedule.content.object_factories import MacroEndConditionObject
+from imio.schedule.content.object_factories import MacroRecurrenceConditionObject
+from plone import api
+from plone.browserlayer.interfaces import ILocalBrowserLayerType
 from zope.component import getUtility
 from zope.component import queryUtility
 from zope.schema.interfaces import IVocabularyFactory
 
-from plone import api
-
 import logging
+
 
 logger = logging.getLogger("urban: migrations")
 

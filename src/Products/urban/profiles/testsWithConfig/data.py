@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from plone.app.textfield import RichTextValue
-
 from Products.urban.config import DASHBOARD_TEMPLATES
 from Products.urban.config import GLOBAL_TEMPLATES
+from plone.app.textfield import RichTextValue
+
 
 globalTemplates = GLOBAL_TEMPLATES
 dashboardTemplates = DASHBOARD_TEMPLATES
@@ -460,6 +460,16 @@ EventConfigs = {
         },
     ),
     "envclasstwo": (
+        {
+            "id": "dossier-irrecevable",
+            "title": "Dossier irrecevable",
+            "activatedFields": ("transmitDate",),
+            "deadLineDelay": 0,
+            "eventType": ("Products.urban.interfaces.IRefusedIncompletenessEvent",),
+            "isKeyEvent": True,
+            "keyDates": ("eventDate",),
+            "podTemplates": (),
+        },
         {
             "id": "dossier-incomplet",
             "title": "Dossier incomplet (avec listing des pièces manquantes - article 116 § 1)",

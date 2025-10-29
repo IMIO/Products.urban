@@ -57,6 +57,9 @@ msgstr "Certificat d'urbanisme 1 (CODT)"
 msgid "CODT_UrbanCertificateTwo"
 msgstr "Certificats d'urbanisme 2 (CODT)"
 
+msgid "Housing"
+msgstr "Logement"
+
 msgid "City"
 msgstr "Localité"
 
@@ -529,6 +532,27 @@ msgstr "Rue"
 
 msgid "nonapplicable"
 msgstr "Refuser"
+
+msgid "analyse"
+msgstr "Analyse"
+
+msgid "to_1st_observation"
+msgstr "1er constat"
+
+msgid "to_2nd_observation"
+msgstr "2e constat"
+
+msgid "to_annual_observation"
+msgstr "Constat annuel"
+
+msgid "1st_observation"
+msgstr "1er constat"
+
+msgid "2nd_observation"
+msgstr "2e constat"
+
+msgid "annual_observation"
+msgstr "Constat annuel"
 
 msgid "ComplementaryDelayTerm"
 msgstr "Prorogation complémentaire"

@@ -201,7 +201,7 @@ class ConfigImportContent(ImportContent):
             if uid is None:
                 msg = "Can't link the pod template : {}, in document : {}".format(
                     template.get("pod_context_name", "unknown"),
-                    item.get("@id", "unknown").split("portal_urban")[-1]
+                    item.get("@id", "unknown").split("portal_urban")[-1],
                 )
                 logger.warning(msg)
                 api.portal.show_message(msg, self.request, type="warning")
@@ -234,7 +234,9 @@ class ConfigImportContent(ImportContent):
         for condition in exploitation_condition:
             obj = self.get_obj_from_path(condition)
             if not obj:
-                logger.error("Can't find object for exploitationCondition : {}".format(condition))
+                logger.error(
+                    "Can't find object for exploitationCondition : {}".format(condition)
+                )
                 continue
             exploitation_condition_list.append(obj.UID())
         item["exploitationCondition"] = exploitation_condition_list

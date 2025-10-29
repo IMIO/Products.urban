@@ -18,12 +18,13 @@ The script accepts buildout command-line options, so you can
 use the -c option to specify an alternate configuration file.
 """
 
+from optparse import OptionParser
+
 import os
 import shutil
 import sys
 import tempfile
 
-from optparse import OptionParser
 
 tmpeggs = tempfile.mkdtemp()
 
@@ -103,8 +104,9 @@ if not options.allow_site_packages:
 
 setup_args = dict(to_dir=tmpeggs, download_delay=0)
 ez["use_setuptools"](**setup_args)
-import setuptools
 import pkg_resources
+import setuptools
+
 
 # This does not (always?) update the default working set.  We will
 # do it.

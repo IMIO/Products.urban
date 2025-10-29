@@ -1,17 +1,14 @@
-import os
-
 from Products.urban import URBAN_TYPES
 from Products.urban.profiles.extra.config_default_values import default_values
-from Products.urban.setuphandlers import (
-    createVocabularyFolder,
-    createFolderDefaultValues,
-)
+from Products.urban.setuphandlers import createFolderDefaultValues
+from Products.urban.setuphandlers import createVocabularyFolder
+from imio.helpers.catalog import reindexIndexes
+from plone import api
 from plone.registry.interfaces import IRegistry
 from zope.component import getUtility
-from imio.helpers.catalog import reindexIndexes
 
-from plone import api
 import logging
+import os
 
 
 def add_couple_to_preliminary_notice(context):

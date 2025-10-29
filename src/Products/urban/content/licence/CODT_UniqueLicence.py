@@ -14,13 +14,19 @@ __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEUL
 __docformat__ = "plaintext"
 
 from AccessControl import ClassSecurityInfo
-from Products.urban.widget.select2widget import MultiSelect2Widget
-from Products.Archetypes.atapi import *
+from DateTime import DateTime
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import (
     ReferenceBrowserWidget,
 )
-from zope.interface import implements
+from Products.Archetypes.atapi import *
+from Products.CMFCore.Expression import Expression
+from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
+from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
+from Products.PageTemplates.Expressions import getEngine
 from Products.urban import interfaces
+from Products.urban import UrbanMessage as _
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
+from Products.urban.config import *
 from Products.urban.content.CODT_UniqueLicenceInquiry import CODT_UniqueLicenceInquiry
 from Products.urban.content.CODT_UniqueLicenceInquiry import (
     finalizeSchema as thirdBaseFinalizeSchema,
@@ -35,24 +41,17 @@ from Products.urban.content.licence.CODT_BuildLicence import (
 )
 from Products.urban.content.licence.EnvironmentBase import EnvironmentBase
 from Products.urban.content.licence.GenericLicence import GenericLicence
-from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.utils import setOptionalAttributes
 from Products.urban.utils import setSchemataForCODT_UniqueLicenceInquiry
 from Products.urban.widget.historizereferencewidget import (
     HistorizeReferenceBrowserWidget,
 )
-from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
+from Products.urban.widget.select2widget import MultiSelect2Widget
 from Products.urban.widget.urbanreferencewidget import UrbanBackReferenceWidget
-from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
-
-from Products.urban.config import *
-from Products.urban import UrbanMessage as _
-from Products.CMFCore.Expression import Expression
-from Products.PageTemplates.Expressions import getEngine
-
 from plone import api
-from DateTime import DateTime
 from zope.i18n import translate
+from zope.interface import implements
+
 
 ##code-section module-header #fill in your manual code here
 optional_fields = [
