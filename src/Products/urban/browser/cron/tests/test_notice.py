@@ -456,16 +456,3 @@ class TestNoticeCronPE2(unittest.TestCase):
         annotations = IAnnotations(event)
         dates = annotations.get(key, {})
         return dates
-
-
-
-class TestNotificationSummaryReport(unittest.TestCase):
-    layer = testing.URBAN_TESTS_LICENCES_FUNCTIONAL
-
-    def setUp(self):
-        super(TestNotificationSummaryReport, self).setUp()
-        self.setup_transfert_dossier("TRANSFERT_DOSSIER")
-        licence_folder = self.portal.urban.envclasstwos
-        self.licence = licence_folder.values()[-1]
-        
-    
