@@ -202,9 +202,8 @@ class ImportFromNoticeView(BrowserView):
         license.reindexObject()
         self.update_license(license, detailed_notification, event_type="prorogation-30-jours")
         notify(ObjectModifiedEvent(license))
-    
+
     def process_transmission_summary_report_notification(self, detailed_notification):
         license = detailed_notification.licence
         #list_event = ["rapport-synthese","pre-decision","decision","affichage-decision"]
         self.update_license(license, detailed_notification, event_type= "rapport-synthese")
-        
