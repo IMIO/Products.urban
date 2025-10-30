@@ -3,5 +3,10 @@
   <version>1</version>
   <dependencies>
     <dependency>profile-Products.urban:tests</dependency>
+<<<<<<< HEAD
+=======
+    <dependency>profile-urban.events:default</dependency>
+    <dependency>profile-urban.schedule:default</dependency>
+>>>>>>> ba641fc44 (zpretty)
   </dependencies>
 </metadata>
