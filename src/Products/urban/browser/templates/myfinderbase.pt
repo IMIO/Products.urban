@@ -4,7 +4,7 @@ finderSelectItem = function(selector, title, image_preview, fieldid) {
       image_preview = (typeof image_preview != "undefined") ? image_preview : false;
       if (image_preview) selector = selector + '/image_preview' ;
       addItem(selector, title, fieldid);
-      copyDataForSubmit(fieldid);   
+      copyDataForSubmit(fieldid);
 }
 
 function openFinder(url) {
@@ -29,7 +29,7 @@ function addItem(selector, title, name)
   if (!hasselector) {
       temp = new Option(title, selector);
       tgt.options[tgt.length] = temp;
-  } 
+  }
 }
 
 function swapFields(a, b)
@@ -137,26 +137,44 @@ function selectionError()
 
 </script>
 
-<table border="0" class="ordered-selection-field">
+<table class="ordered-selection-field"
+       border="0"
+>
   <tr>
     <td>
       <select id="to"
+              multiple
               name="to"
               size="10"
-              multiple=""
               style="min-width: 150px;"
-              tal:attributes="name string:${view/name}.to;
-                              id string:${view/name}.to">
+              tal:attributes="
+                name string:${view/name}.to;
+                id string:${view/name}.to;
+              "
+      >
         <option tal:repeat="entry view/selected"
-                tal:attributes="value entry/value"
-                tal:content="entry/text" i18n:translate=""/>
+                tal:content="entry/text"
+                tal:attributes="
+                  value entry/value;
+                "
+                i18n:translate=""
+        ></option>
       </select>
-      <input name="foo-empty-marker" type="hidden"
-        tal:attributes="name string:${view/name}-empty-marker"/>
+      <input name="foo-empty-marker"
+             type="hidden"
+             tal:attributes="
+               name string:${view/name}-empty-marker;
+             "
+      />
       <span id="toDataContainer"
-            tal:attributes="id string:${view/name}.toDataContainer">
-        <script type="text/javascript" tal:content="string:
-          copyDataForSubmit('${view/name}');">
+            tal:attributes="
+              id string:${view/name}.toDataContainer;
+            "
+      >
+        <script type="text/javascript"
+                tal:content="string:
+          copyDataForSubmit('${view/name}');"
+        >
           // initial copying of field "field.to" --> "field"
           copyDataForSubmit("<i tal:replace="${view/name}"/>");
         </script>
@@ -179,27 +197,36 @@ function selectionError()
                           title view/movedownlabel"
           >▼</button>
       <br />-->
-      <button
-          name="addButton" type="button" value="+"
-          style="width: 100px; text-align: center; font-weight: bold; margin-bottom: 5px"
-          tal:attributes="onClick view/finderlink;
-                          title view/finderlabel"
-          >ajouter une rue</button>
+      <button name="addButton"
+              style="width: 100px; text-align: center; font-weight: bold; margin-bottom: 5px"
+              type="button"
+              value="+"
+              tal:attributes="
+                onClick view/finderlink;
+                title view/finderlabel;
+              "
+      >ajouter une rue</button>
       <br />
-      <button
-          name="deleteButton" type="button" value="-"
-          onclick="javascript:moveDown()"
-          style="width: 100px; text-align: center; font-weight: bold; margin-bottom: 5px"
-          tal:attributes="onClick string:deleteEntry('${view/name}');
-                          title view/deleteentrylabel"
-          >retirer une rue</button>
+      <button name="deleteButton"
+              onclick="javascript:moveDown()"
+              style="width: 100px; text-align: center; font-weight: bold; margin-bottom: 5px"
+              type="button"
+              value="-"
+              tal:attributes="
+                onClick string:deleteEntry('${view/name}');
+                title view/deleteentrylabel;
+              "
+      >retirer une rue</button>
     </td>
   </tr>
 </table>
 
 <div class="finderlink">
-  <a tal:attributes="href string:javascript:${view/finderlink}"
-     tal:content="view/finderlabel">
+  <a tal:content="view/finderlabel"
+     tal:attributes="
+       href string:javascript:${view/finderlink};
+     "
+  >
      Browse for content
   </a>
 </div>

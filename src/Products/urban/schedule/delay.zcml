@@ -1,61 +1,62 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
-    i18n_domain="Products.urban">
+    i18n_domain="Products.urban"
+    >
 
-    <adapter
-        for="Products.urban.interfaces.IBaseBuildLicence
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.ICalculationDelay"
-        factory=".delay.AnnoncedDelay"
-        name="urban.schedule.delay.annonced_delay"
-    />
+  <adapter
+      factory=".delay.AnnoncedDelay"
+      provides="imio.schedule.interfaces.ICalculationDelay"
+      for="Products.urban.interfaces.IBaseBuildLicence
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.delay.annonced_delay"
+      />
 
-    <adapter
-        for="Products.urban.interfaces.ICODT_BaseBuildLicence
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.ICalculationDelay"
-        factory=".delay.AnnoncedDelay"
-        name="urban.schedule.delay.annonced_delay"
-    />
+  <adapter
+      factory=".delay.AnnoncedDelay"
+      provides="imio.schedule.interfaces.ICalculationDelay"
+      for="Products.urban.interfaces.ICODT_BaseBuildLicence
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.delay.annonced_delay"
+      />
 
-    <adapter
-        for="Products.urban.interfaces.ICODT_UniqueLicence
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.ICalculationDelay"
-        factory=".delay.UniqueLicenceAnnoncedDelay"
-        name="urban.schedule.delay.unique_licence_annonced_delay"
-    />
+  <adapter
+      factory=".delay.UniqueLicenceAnnoncedDelay"
+      provides="imio.schedule.interfaces.ICalculationDelay"
+      for="Products.urban.interfaces.ICODT_UniqueLicence
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.delay.unique_licence_annonced_delay"
+      />
 
-    <adapter
-        for="Products.urban.interfaces.ICODT_UniqueLicence
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.ICalculationDelay"
-        factory=".delay.UniqueLicenceNotificationDelay"
-        name="urban.schedule.delay.unique_licence_notification_delay"
-    />
+  <adapter
+      factory=".delay.UniqueLicenceNotificationDelay"
+      provides="imio.schedule.interfaces.ICalculationDelay"
+      for="Products.urban.interfaces.ICODT_UniqueLicence
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.delay.unique_licence_notification_delay"
+      />
 
-    <adapter
-        for="Products.urban.interfaces.IInspection
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.ICalculationDelay"
-        factory=".delay.InspectionFollowUpDelay"
-        name="urban.schedule.delay.inspection_followup_delay"
-    />
+  <adapter
+      factory=".delay.InspectionFollowUpDelay"
+      provides="imio.schedule.interfaces.ICalculationDelay"
+      for="Products.urban.interfaces.IInspection
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.delay.inspection_followup_delay"
+      />
 
-    <adapter
-        for="Products.urban.interfaces.IRoadDecree
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.ICalculationDelay"
-        factory=".delay.CouncildecisionDelay"
-        name="urban.schedule.delay.council_decision_delay"
-    />
+  <adapter
+      factory=".delay.CouncildecisionDelay"
+      provides="imio.schedule.interfaces.ICalculationDelay"
+      for="Products.urban.interfaces.IRoadDecree
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.delay.council_decision_delay"
+      />
 
-    <adapter
-        for="Products.urban.interfaces.IGenericLicence
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IFreezeDuration"
-        factory=".delay.UrbanFreezeDuration"
-        name="schedule.freeze_duration"
-    />
+  <adapter
+      factory=".delay.UrbanFreezeDuration"
+      provides="imio.schedule.interfaces.IFreezeDuration"
+      for="Products.urban.interfaces.IGenericLicence
+           imio.schedule.content.task.IAutomatedTask"
+      name="schedule.freeze_duration"
+      />
 
 </configure>

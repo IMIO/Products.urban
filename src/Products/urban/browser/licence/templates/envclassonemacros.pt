@@ -1,59 +1,79 @@
-<metal:description define-macro="description_macro" i18n:domain="urban">
+<metal:description define-macro="description_macro"
+                   i18n:domain="urban"
+>
 
-    <tal:vars define="exclude python:[
+  <tal:vars define="
+              exclude python:[
                           'title', 'workLocations', 'businessOldLocation',
                           'additionalLegalConditions', 'additionalConditions',
                           'additionalPreviousLicences',
                       ];
-                      custom python:[
+              custom python:[
                           'rubrics', 'minimumLegalConditions', 'hasAdditionalConditions',
                           'previousLicences', 'validityDelay', 'bound_licences'
-                      ];">
-        <metal:parent_call use-macro="here/@@licencetabs-macros/description_macro">
-            <metal:applicants fill-slot="applicant_slot">
-                <metal:applicants_and_corporations_macro use-macro="here/@@licencemacros/urbanApplicantsAndCorporationsMacro" />
-                <tal:show_disabled_applicants condition= "here/get_applicants_history">
-                    <metal:disabled_applicants_and_corporations_macro use-macro="here/@@licencemacros/urbanApplicantsHistoricAndCorporationsMacro" />
-                </tal:show_disabled_applicants>
-            </metal:applicants>
+                      ];
+            ">
+    <metal:parent_call use-macro="here/@@licencetabs-macros/description_macro">
+      <metal:applicants fill-slot="applicant_slot">
+        <metal:applicants_and_corporations_macro use-macro="here/@@licencemacros/urbanApplicantsAndCorporationsMacro" />
+        <tal:show_disabled_applicants condition="here/get_applicants_history">
+          <metal:disabled_applicants_and_corporations_macro use-macro="here/@@licencemacros/urbanApplicantsHistoricAndCorporationsMacro" />
+        </tal:show_disabled_applicants>
+      </metal:applicants>
 
-            <metal:worklocations fill-slot="worklocations">
-                <metal:worklocation use-macro="here/@@worklocation-macro/env_worklocations_macro" />
-            </metal:worklocations>
-        </metal:parent_call>
-    </tal:vars>
+      <metal:worklocations fill-slot="worklocations">
+        <metal:worklocation use-macro="here/@@worklocation-macro/env_worklocations_macro" />
+      </metal:worklocations>
+    </metal:parent_call>
+  </tal:vars>
 
 </metal:description>
 
-<metal:analysis define-macro="analysis_macro" i18n:domain="urban">
-    <metal:parent_call use-macro="here/@@licencetabs-macros/analysis_macro">
-    </metal:parent_call>
+<metal:analysis define-macro="analysis_macro"
+                i18n:domain="urban"
+>
+  <metal:parent_call use-macro="here/@@licencetabs-macros/analysis_macro">
+  </metal:parent_call>
 </metal:analysis>
 
-<metal:environment define-macro="environment_macro" i18n:domain="urban">
-    <tal:vars define="custom python:['rubrics', 'minimumLegalConditions', 'hasAdditionalConditions'];">
-        <metal:parent_call use-macro="here/@@licencetabs-macros/environment_macro">
-        </metal:parent_call>
-    </tal:vars>
+<metal:environment define-macro="environment_macro"
+                   i18n:domain="urban"
+>
+  <tal:vars define="
+              custom python:['rubrics', 'minimumLegalConditions', 'hasAdditionalConditions'];
+            ">
+    <metal:parent_call use-macro="here/@@licencetabs-macros/environment_macro">
+    </metal:parent_call>
+  </tal:vars>
 </metal:environment>
 
-<metal:road define-macro="road_macro" i18n:domain="urban">
-    <metal:parent_call use-macro="here/@@licencetabs-macros/road_macro" />
+<metal:road define-macro="road_macro"
+            i18n:domain="urban"
+>
+  <metal:parent_call use-macro="here/@@licencetabs-macros/road_macro" />
 </metal:road>
 
-<metal:location define-macro="location_macro" i18n:domain="urban">
-    <metal:parent_call use-macro="here/@@licencetabs-macros/location_macro" />
+<metal:location define-macro="location_macro"
+                i18n:domain="urban"
+>
+  <metal:parent_call use-macro="here/@@licencetabs-macros/location_macro" />
 </metal:location>
 
-<metal:advices define-macro="advices_macro" i18n:domain="urban">
-    <metal:parent_call use-macro="here/@@licencetabs-macros/advices_macro" />
+<metal:advices define-macro="advices_macro"
+               i18n:domain="urban"
+>
+  <metal:parent_call use-macro="here/@@licencetabs-macros/advices_macro" />
 </metal:advices>
 
-<metal:inquiry define-macro="inquiry_macro" i18n:domain="urban">
-    <metal:parent_call use-macro="here/@@licencetabs-macros/inquiry_macro" />
+<metal:inquiry define-macro="inquiry_macro"
+               i18n:domain="urban"
+>
+  <metal:parent_call use-macro="here/@@licencetabs-macros/inquiry_macro" />
 </metal:inquiry>
 
-<metal:patrimony define-macro="patrimony_macro" i18n:domain="urban">
-    <metal:parent_call use-macro="here/@@licencetabs-macros/patrimony_macro">
-    </metal:parent_call>
+<metal:patrimony define-macro="patrimony_macro"
+                 i18n:domain="urban"
+>
+  <metal:parent_call use-macro="here/@@licencetabs-macros/patrimony_macro">
+  </metal:parent_call>
 </metal:patrimony>

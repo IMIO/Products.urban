@@ -1,92 +1,131 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+<html xmlns="http://www.w3.org/1999/xhtml"
       lang="en"
       metal:use-macro="here/main_template/macros/master"
-      i18n:domain="urban">
+      xml:lang="en"
+      i18n:domain="urban"
+>
 
-    <body>
-        <metal:main fill-slot="main">
+  <body>
+    <metal:main fill-slot="main">
 
-            <metal:main_macro define-macro="main">
+      <metal:main_macro define-macro="main">
 
-                <metal:body define-macro="body_macro"
-                            tal:define="useTabbing view/getUseTabbing;
-                                        tabs view/getTabs;
-                                        usedAttributes view/getUsedAttributes">
+        <metal:body define-macro="body_macro"
+                    tal:define="
+                      useTabbing view/getUseTabbing;
+                      tabs view/getTabs;
+                      usedAttributes view/getUsedAttributes;
+                    "
+        >
 
-                    <metal:titleWithIcon use-macro="here/@@globalmacros/titleWithIcon" />
+          <metal:titlewithicon use-macro="here/@@globalmacros/titleWithIcon" />
 
-                    <div class="action-bar">
-                        <div class="action-bar-text" i18n:domain="plone"
-                          tal:define="state view/get_state">
-                             <span i18n:translate="">State</span>:
-                             <span  tal:attributes="class python: 'urban_state_%s' % state.replace(' ', '')">
-                                 <tal:state content="state" i18n:translate=""/>
-                             </span>
-                         </div>
-                         <div class="urban_transitions">
-                             <span i18n:translate="" class="urban_transitions_text">Transitions:</span>
-                             <tal:actions content="structure here/transitions_panel" />
-                         </div>
-                         <div class="urban_actions">
-                             <span i18n:translate="" class="urban_transitions_text">Actions:</span>
-                             <tal:actions content="structure here/actions_panel" />
-                         </div>
-                         <div class="visualClear"></div>
-                     </div>
+          <div class="action-bar">
+            <div class="action-bar-text"
+                 tal:define="
+                   state view/get_state;
+                 "
+                 i18n:domain="plone"
+            >
+              <span i18n:translate="">State</span>:
+              <span tal:attributes="
+                      class python: 'urban_state_%s' % state.replace(' ', '');
+                    ">
+                <tal:state content="state"
+                           i18n:translate=""
+                />
+              </span>
+            </div>
+            <div class="urban_transitions">
+              <span class="urban_transitions_text"
+                    i18n:translate=""
+              >Transitions:</span>
+              <tal:actions content="structure here/transitions_panel" />
+            </div>
+            <div class="urban_actions">
+              <span class="urban_transitions_text"
+                    i18n:translate=""
+              >Actions:</span>
+              <tal:actions content="structure here/actions_panel" />
+            </div>
+            <div class="visualClear"></div>
+          </div>
 
-                    <div id="urbanViewWithTabbing" tal:condition="useTabbing">
+          <div id="urbanViewWithTabbing"
+               tal:condition="useTabbing"
+          >
 
-                        <dl class="formTabs enableFormTabbing">
-                        <tal:tab_loop repeat="tab tabs">
-                            <dt class="formTab" tal:attributes="id python: 'fieldsetlegend-urban_%s' % tab['value']">
-                                <span tal:content="python: tab['display_name']">Tab name</span>
-                            </dt>
-                            <dd  tal:define="macro python: view.getTabMacro(tab['value'])" tal:attributes="id python: 'fieldset-urban_%s' % tab['value']">
-                                <metal:listing use-macro="macro" />
-                            </dd>
-                        </tal:tab_loop>
+            <dl class="formTabs enableFormTabbing">
+              <tal:tab_loop repeat="tab tabs">
+                <dt class="formTab"
+                    tal:attributes="
+                      id python: 'fieldsetlegend-urban_%s' % tab['value'];
+                    "
+                >
+                  <span tal:content="python: tab['display_name']">Tab name</span>
+                </dt>
+                <dd tal:define="
+                      macro python: view.getTabMacro(tab['value']);
+                    "
+                    tal:attributes="
+                      id python: 'fieldset-urban_%s' % tab['value'];
+                    "
+                >
+                  <metal:listing use-macro="macro" />
+                </dd>
+              </tal:tab_loop>
 
-                        <dt class="formTab" id="fieldsetlegend-attachments" i18n:domain="urban">
-                            <span i18n:translate="">Attachments</span>
-                        </dt>
-                        <dd id="fieldset-attachments">
-                            <div class="licence-column">
-                                <metal:events use-macro="here/@@licencetabs-macros/urbanAttachmentsMacro" />
-                            </div>
-                        </dd>
+              <dt class="formTab"
+                  id="fieldsetlegend-attachments"
+                  i18n:domain="urban"
+              >
+                <span i18n:translate="">Attachments</span>
+              </dt>
+              <dd id="fieldset-attachments">
+                <div class="licence-column">
+                  <metal:events use-macro="here/@@licencetabs-macros/urbanAttachmentsMacro" />
+                </div>
+              </dd>
 
-                        <dt class="formTab" id="fieldsetlegend-urban_events" i18n:domain="plone">
-                            <span i18n:translate="label_schema_urban_events">Events</span>
-                        </dt>
-                        <dd id="fieldset-urban_events">
-                            <div class="licence-column">
-                                <metal:events use-macro="here/@@licencetabs-macros/urbanEventsMacro" />
-                                <metal:advices use-macro="here/@@licencetabs-macros/urbanAdvicesEventsMacro" />
-                            </div>
-                        </dd>
+              <dt class="formTab"
+                  id="fieldsetlegend-urban_events"
+                  i18n:domain="plone"
+              >
+                <span i18n:translate="label_schema_urban_events">Events</span>
+              </dt>
+              <dd id="fieldset-urban_events">
+                <div class="licence-column">
+                  <metal:events use-macro="here/@@licencetabs-macros/urbanEventsMacro" />
+                  <metal:advices use-macro="here/@@licencetabs-macros/urbanAdvicesEventsMacro" />
+                </div>
+              </dd>
 
-                    </div>
+            </dl></div>
 
 
-                    <tal:notabbing condition="not: useTabbing">
-                        <tal:tab_loop repeat="tab tabs">
-                            <fieldset tal:define="macro python: view.getTabMacro(tab['value'])">
-                                <strong><legend tal:content="python: tab['display_name']">Description</legend></strong>
-                                <metal:description use-macro="macro" />
-                            </fieldset>
-                        </tal:tab_loop>
+          <tal:notabbing condition="not: useTabbing">
+            <tal:tab_loop repeat="tab tabs">
+              <fieldset tal:define="
+                          macro python: view.getTabMacro(tab['value']);
+                        ">
+                <strong><legend tal:content="python: tab['display_name']">Description</legend></strong>
+                <metal:description use-macro="macro" />
+              </fieldset>
+            </tal:tab_loop>
 
-                        <fieldset>
-                            <strong><legend i18n:domain="plone" i18n:translate="label_schema_urban_events">Events</legend></strong>
-                            <metal:events use-macro="here/@@licencetabs-macros/urbanEventsMacro" />
-                            <metal:advices use-macro="here/@@licencetabs-macros/urbanAdvicesEventsMacro" />
-                        </fieldset>
-                    </tal:notabbing>
+            <fieldset>
+              <strong><legend i18n:domain="plone"
+                        i18n:translate="label_schema_urban_events"
+                >Events</legend></strong>
+              <metal:events use-macro="here/@@licencetabs-macros/urbanEventsMacro" />
+              <metal:advices use-macro="here/@@licencetabs-macros/urbanAdvicesEventsMacro" />
+            </fieldset>
+          </tal:notabbing>
 
-                    <div tal:replace="structure provider:plone.belowcontentbody" />
+          <div tal:replace="structure provider:plone.belowcontentbody"></div>
 
-                </metal:body>
-            </metal:main_macro>
-        </metal:main>
-    </body>
+        </metal:body>
+      </metal:main_macro>
+    </metal:main>
+  </body>
 </html>

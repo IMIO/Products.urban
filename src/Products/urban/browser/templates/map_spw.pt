@@ -1,106 +1,194 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+<html xmlns="http://www.w3.org/1999/xhtml"
       lang="en"
       metal:use-macro="here/main_template/macros/master"
+      xml:lang="en"
+      tal:define="
+        urbanMapHost view/get_urbanmap_url;
+      "
       i18n:domain="urban"
-      tal:define="urbanMapHost view/get_urbanmap_url">
+>
 
-<metal:block fill-slot="top_slot"
-            tal:define="global parcels view/getParcels;" />
+  <metal:block fill-slot="top_slot"
+               tal:define="
+                 global parcels view/getParcels;
+               "
+  />
 
-<head>
+  <head>
 
-<tal:block condition="parcels">
-
-
-<div metal:fill-slot="style_slot" >
-    <metal:listing use-macro="here/@@map-macros/spwMapConfigParcel" />
-    <metal:listing use-macro="here/@@map-macros/imioSpwMapSetup" />
-    <metal:listing use-macro="here/@@map-macros/parcelmapCSS" />
-</div>
-</tal:block>
-</head>
-
-<body>
-<metal:main fill-slot="main">
-<metal:main_macro define-macro="main">
-    <metal:body define-macro="body_macro"
-                tal:define="applicants context/getApplicants|nothing;
-                            useTabbing view/isUsingTabbing;
-                            old_parcels view/getOldParcels" >
+    <tal:block condition="parcels">
 
 
-<metal:titleWithIcon use-macro="here/@@globalmacros/titleWithIcon" />
+      <div metal:fill-slot="style_slot">
+        <metal:listing use-macro="here/@@map-macros/spwMapConfigParcel" />
+        <metal:listing use-macro="here/@@map-macros/imioSpwMapSetup" />
+        <metal:listing use-macro="here/@@map-macros/parcelmapCSS" />
+      </div>
+    </tal:block>
+  </head>
 
-  <fieldset><strong><legend i18n:translate="concerned_parcels">Concerned parcel(s)</legend></strong>
-   <div metal:use-macro="here/@@globalmacros/urbanParcelsMacro" />
-  </fieldset>
+  <body>
+    <metal:main fill-slot="main">
+      <metal:main_macro define-macro="main">
+        <metal:body define-macro="body_macro"
+                    tal:define="
+                      applicants context/getApplicants|nothing;
+                      useTabbing view/isUsingTabbing;
+                      old_parcels view/getOldParcels;
+                    "
+        >
 
-  <tal:block condition="old_parcels">
-     <fieldset><strong><legend i18n:translate="old_parcels_history">Old parcels historic</legend></strong>
-      <div tal:repeat="parcel_historic old_parcels" style="display:inline-block; vertical-align: top">
-           <table class="listing" class="listing" border="0" cellspacing="0">
-               <thead>
-                   <tr>
-                       <th i18n:translate="" tal:attributes="colspan python: parcel_historic.width">
+
+          <metal:titlewithicon use-macro="here/@@globalmacros/titleWithIcon" />
+
+          <fieldset><strong><legend i18n:translate="concerned_parcels">Concerned parcel(s)</legend></strong>
+            <div metal:use-macro="here/@@globalmacros/urbanParcelsMacro"></div>
+          </fieldset>
+
+          <tal:block condition="old_parcels">
+            <fieldset><strong><legend i18n:translate="old_parcels_history">Old parcels historic</legend></strong>
+              <div style="display:inline-block; vertical-align: top"
+                   tal:repeat="parcel_historic old_parcels"
+              >
+                <table class="listing"
+                       border="0"
+                       cellspacing="0"
+                >
+                  <thead>
+                    <tr>
+                      <th tal:attributes="
+                            colspan python: parcel_historic.width;
+                          "
+                          i18n:translate=""
+                      >
                            Historique de la parcelle
-                       </th>
-                   </tr>
-               </thead>
-                   <tr tal:repeat="line_result parcel_historic/table_display">
-                       <!--tal:block define="oddrow repeat/resold/odd;" tal:attributes="class python: oddrow and 'even' or 'odd'"-->
-                       <tal:line repeat="parcel line_result">
-                           <td fcolor="#FF0000"
-                               tal:define="old python: getattr(parcel, 'old', None);
-                                           root python: getattr(parcel, 'level', None) == 0;
-                                           center python: parcel.width > 1;
-                                           is_parcel python: hasattr(parcel, 'division')"
-                               tal:attributes="style python: root and 'color:green' or '';
-                                               class  python: center and 'center-parcel' or 'left-parcel';
-                                               colspan python: parcel.width">
-                               <div class="parcel-name">
-                                   <img tal:condition="old" src="old.png" style="padding-right: 0.5em"/>
-                                   <span tal:attributes="class python: not old and 'leaf-parcel' or ''"
-                                         tal:content="parcel/display"></span>
-                               </div>
-                           </td>
-                       </tal:line>
-                   </tr>
-                   <tr>
-                       <td tal:attributes="colspan python: parcel_historic.width" style="text-align: center">
-                           <form i18n:domain="urban" name="showparcel">
-                               <input type="hidden" name="show_old_parcel" value="1"/>
-                               <input type="hidden" name="division" value="#" tal:attributes="value python: parcel_historic.division" />
-                               <input type="hidden" name="section" value="#" tal:attributes="value python: parcel_historic.section" />
-                               <input type="hidden" name="radical" value="#" tal:attributes="value python: parcel_historic.radical or 0" />
-                               <input type="hidden" name="bis" value="#" tal:attributes="value python: parcel_historic.bis or 0" />
-                               <input type="hidden" name="exposant" value="#" tal:attributes="value python: parcel_historic.exposant" />
-                               <input type="hidden" name="puissance" value="#" tal:attributes="value python: parcel_historic.puissance or 0" />
-                               <input type="submit" class="context" id="parcel" value="Show this parcel on map" i18n:attributes="value" />
-                           </form>
-                       </td>
-                   </tr>
-           </table>
-       </div>
-   </fieldset>
-  </tal:block>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tr tal:repeat="line_result parcel_historic/table_display">
+                    <!--tal:block define="oddrow repeat/resold/odd;" tal:attributes="class python: oddrow and 'even' or 'odd'"-->
+                    <tal:line repeat="parcel line_result">
+                      <td fcolor="#FF0000"
+                          tal:define="
+                            old python: getattr(parcel, 'old', None);
+                            root python: getattr(parcel, 'level', None) == 0;
+                            center python: parcel.width > 1;
+                            is_parcel python: hasattr(parcel, 'division');
+                          "
+                          tal:attributes="
+                            style python: root and 'color:green' or '';
+                            class  python: center and 'center-parcel' or 'left-parcel';
+                            colspan python: parcel.width;
+                          "
+                      >
+                        <div class="parcel-name">
+                          <img src="old.png"
+                               style="padding-right: 0.5em"
+                               tal:condition="old"
+                          />
+                          <span tal:content="parcel/display"
+                                tal:attributes="
+                                  class python: not old and 'leaf-parcel' or '';
+                                "
+                          ></span>
+                        </div>
+                      </td>
+                    </tal:line>
+                  </tr>
+                  <tr>
+                    <td style="text-align: center"
+                        tal:attributes="
+                          colspan python: parcel_historic.width;
+                        "
+                    >
+                      <form name="showparcel"
+                            i18n:domain="urban"
+                      >
+                        <input name="show_old_parcel"
+                               type="hidden"
+                               value="1"
+                        />
+                        <input name="division"
+                               type="hidden"
+                               value="#"
+                               tal:attributes="
+                                 value python: parcel_historic.division;
+                               "
+                        />
+                        <input name="section"
+                               type="hidden"
+                               value="#"
+                               tal:attributes="
+                                 value python: parcel_historic.section;
+                               "
+                        />
+                        <input name="radical"
+                               type="hidden"
+                               value="#"
+                               tal:attributes="
+                                 value python: parcel_historic.radical or 0;
+                               "
+                        />
+                        <input name="bis"
+                               type="hidden"
+                               value="#"
+                               tal:attributes="
+                                 value python: parcel_historic.bis or 0;
+                               "
+                        />
+                        <input name="exposant"
+                               type="hidden"
+                               value="#"
+                               tal:attributes="
+                                 value python: parcel_historic.exposant;
+                               "
+                        />
+                        <input name="puissance"
+                               type="hidden"
+                               value="#"
+                               tal:attributes="
+                                 value python: parcel_historic.puissance or 0;
+                               "
+                        />
+                        <input class="context"
+                               id="parcel"
+                               type="submit"
+                               value="Show this parcel on map"
+                               i18n:attributes="value"
+                        />
+                      </form>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </fieldset>
+          </tal:block>
 
-  <div tal:condition="not: parcels">
-   <p class="discreet" i18n:translate="cartography_map_descr">A map will be displayed when you will have defined concerned parcels</p>
-  </div>
+          <div tal:condition="not: parcels">
+            <p class="discreet"
+               i18n:translate="cartography_map_descr"
+            >A map will be displayed when you will have defined concerned parcels</p>
+          </div>
 
-  <tal:block condition="parcels">
-   <form>
-    <input type="hidden" id="map_initialized" value="0" />
-   </form>
-   <fieldset><strong><legend i18n:translate="cartography">Cartography</legend></strong>
-   <div id="spwViewerDiv" style="width:100%; height:800px" class="claro"></div>
-   </fieldset>
-  </tal:block>
+          <tal:block condition="parcels">
+            <form>
+              <input id="map_initialized"
+                     type="hidden"
+                     value="0"
+              />
+            </form>
+            <fieldset><strong><legend i18n:translate="cartography">Cartography</legend></strong>
+              <div class="claro"
+                   id="spwViewerDiv"
+                   style="width:100%; height:800px"
+              ></div>
+            </fieldset>
+          </tal:block>
 
-  <div tal:replace="structure provider:plone.belowcontentbody" />
+          <div tal:replace="structure provider:plone.belowcontentbody"></div>
 
-</metal:body>
-</metal:main_macro>
-</metal:main>
-</body>
+        </metal:body>
+      </metal:main_macro>
+    </metal:main>
+  </body>
 </html>

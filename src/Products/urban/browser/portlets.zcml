@@ -1,35 +1,36 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:plone="http://namespaces.plone.org/plone"
-    i18n_domain="urban">
+    i18n_domain="urban"
+    >
 
-    <include package="plone.app.portlets" />
+  <include package="plone.app.portlets" />
 
-    <plone:portlet
-        name="urban.portlet.urbantools"
-        interface=".portlets.IUrbanToolsPortlet"
-        assignment=".portlets.ToolsAssignment"
-        renderer=".portlets.ToolsRenderer"
-        addview=".portlets.ToolsAddForm"
-        editview=".portlets.ToolsEditForm"
-    />
+  <plone:portlet
+      name="urban.portlet.urbantools"
+      interface=".portlets.IUrbanToolsPortlet"
+      assignment=".portlets.ToolsAssignment"
+      renderer=".portlets.ToolsRenderer"
+      addview=".portlets.ToolsAddForm"
+      editview=".portlets.ToolsEditForm"
+      />
 
-    <plone:portlet
-        name="urban.portlet.urbanconfig"
-        interface=".portlets.IUrbanConfigPortlet"
-        assignment=".portlets.ConfigAssignment"
-        renderer=".portlets.ConfigRenderer"
-        addview=".portlets.ConfigAddForm"
-        editview=".portlets.ConfigEditForm"
-    />
+  <plone:portlet
+      name="urban.portlet.urbanconfig"
+      interface=".portlets.IUrbanConfigPortlet"
+      assignment=".portlets.ConfigAssignment"
+      renderer=".portlets.ConfigRenderer"
+      addview=".portlets.ConfigAddForm"
+      editview=".portlets.ConfigEditForm"
+      />
 
-    <plone:portlet
-        name="urban.portlet.scheduledlicences"
-        interface=".portlets.IUrbanScheduledLicencesPortlet"
-        assignment=".portlets.ScheduledLicencesAssignment"
-        renderer=".portlets.ScheduledLicencesRenderer"
-        addview=".portlets.ScheduledLicencesAddForm"
-        editview=".portlets.ScheduledLicencesEditForm"
-    />
+  <plone:portlet
+      name="urban.portlet.scheduledlicences"
+      interface=".portlets.IUrbanScheduledLicencesPortlet"
+      assignment=".portlets.ScheduledLicencesAssignment"
+      renderer=".portlets.ScheduledLicencesRenderer"
+      addview=".portlets.ScheduledLicencesAddForm"
+      editview=".portlets.ScheduledLicencesEditForm"
+      />
 
 </configure>

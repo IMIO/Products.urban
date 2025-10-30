@@ -1,9 +1,12 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="utf-8"?>
 <action-icons xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-              i18n:domain="plone">
-  <action-icon category="controlpanel"
-               action_id="UrbanTool"
-               title="UrbanTool" priority="0"
+              i18n:domain="plone"
+>
+  <action-icon action_id="UrbanTool"
+               category="controlpanel"
                icon_expr="UrbanTool.gif"
-               i18n:attributes="title"/>
+               priority="0"
+               title="UrbanTool"
+               i18n:attributes="title"
+  />
 </action-icons>

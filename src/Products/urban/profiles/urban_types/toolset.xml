@@ -1,8 +1,9 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="utf-8"?>
 <tool-setup>
- <required tool_id="portal_urban"
-           class="Products.urban.UrbanTool.UrbanTool"/>
+  <required class="Products.urban.UrbanTool.UrbanTool"
+            tool_id="portal_urban"
+  />
 
- <!-- ##code-section toolset.xml -->
- <!-- ##/code-section toolset.xml -->
+  <!-- ##code-section toolset.xml -->
+  <!-- ##/code-section toolset.xml -->
 </tool-setup>

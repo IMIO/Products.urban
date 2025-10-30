@@ -1,11 +1,19 @@
-<metal:noticeTransmitDates define-macro="noticeTransmitDates" i18n:domain="urban">
+<metal:noticetransmitdates define-macro="noticeTransmitDates"
+                           i18n:domain="urban"
+>
   <fieldset>
     <legend i18n:translate="">NOTICe transmits</legend>
-    <div class="clear" tal:define="transmits view/get_transmits">
+    <div class="clear"
+         tal:define="
+           transmits view/get_transmits;
+         "
+    >
       <div tal:repeat="transmit transmits">
-        <strong i18n:translate="" tal:content="transmit/label"></strong>&nbsp;
+        <strong tal:content="transmit/label"
+                i18n:translate=""
+        ></strong>&nbsp;
         <span tal:content="transmit/date"></span>
       </div>
     </div>
   </fieldset>
-</metal:noticeTransmitDates>
+</metal:noticetransmitdates>

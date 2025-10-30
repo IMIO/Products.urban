@@ -1,18 +1,19 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
-    i18n_domain="Products.urban">
+    i18n_domain="Products.urban"
+    >
 
-    <!-- Vocabulary of base searches for schedule faceted view -->
-    <utility
-        factory=".vocabulary.UsersFromGroupsVocabularyFactory"
-        name="urban.schedule_users"
-        provides="zope.schema.interfaces.IVocabularyFactory"
-    />
+  <!-- Vocabulary of base searches for schedule faceted view -->
+  <utility
+      factory=".vocabulary.UsersFromGroupsVocabularyFactory"
+      provides="zope.schema.interfaces.IVocabularyFactory"
+      name="urban.schedule_users"
+      />
 
-    <utility
-        factory=".vocabulary.OpinionUsersVocabularyFactory"
-        name="urban.internal_opinions_users"
-        provides="zope.schema.interfaces.IVocabularyFactory"
-    />
+  <utility
+      factory=".vocabulary.OpinionUsersVocabularyFactory"
+      provides="zope.schema.interfaces.IVocabularyFactory"
+      name="urban.internal_opinions_users"
+      />
 
 </configure>

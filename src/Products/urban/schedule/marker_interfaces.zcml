@@ -1,45 +1,56 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
-    i18n_domain="urban">
+    i18n_domain="urban"
+    >
 
   <interface
-    interface=".interfaces.ILicenceDeliveryTask"
-    type="imio.schedule.interfaces.ITaskMarkerInterface"/>
+      interface=".interfaces.ILicenceDeliveryTask"
+      type="imio.schedule.interfaces.ITaskMarkerInterface"
+      />
 
   <interface
-    interface=".interfaces.ICreateOpinionRequestsTask"
-    type="imio.schedule.interfaces.ITaskMarkerInterface"/>
+      interface=".interfaces.ICreateOpinionRequestsTask"
+      type="imio.schedule.interfaces.ITaskMarkerInterface"
+      />
 
   <interface
-    interface=".interfaces.ISendOpinionRequestsTask"
-    type="imio.schedule.interfaces.ITaskMarkerInterface"/>
+      interface=".interfaces.ISendOpinionRequestsTask"
+      type="imio.schedule.interfaces.ITaskMarkerInterface"
+      />
 
   <interface
-    interface=".interfaces.IReceiveOpinionRequestsTask"
-    type="imio.schedule.interfaces.ITaskMarkerInterface"/>
+      interface=".interfaces.IReceiveOpinionRequestsTask"
+      type="imio.schedule.interfaces.ITaskMarkerInterface"
+      />
 
   <interface
-    interface=".interfaces.ICreateFollowupTask"
-    type="imio.schedule.interfaces.ITaskMarkerInterface"/>
+      interface=".interfaces.ICreateFollowupTask"
+      type="imio.schedule.interfaces.ITaskMarkerInterface"
+      />
 
   <interface
-    interface=".interfaces.IValidateFollowupTask"
-    type="imio.schedule.interfaces.ITaskMarkerInterface"/>
+      interface=".interfaces.IValidateFollowupTask"
+      type="imio.schedule.interfaces.ITaskMarkerInterface"
+      />
 
   <interface
-    interface=".interfaces.ISendFollowupTask"
-    type="imio.schedule.interfaces.ITaskMarkerInterface"/>
+      interface=".interfaces.ISendFollowupTask"
+      type="imio.schedule.interfaces.ITaskMarkerInterface"
+      />
 
   <interface
-    interface=".interfaces.ITaskToCheckDaily"
-    type="imio.schedule.interfaces.ITaskMarkerInterface"/>
+      interface=".interfaces.ITaskToCheckDaily"
+      type="imio.schedule.interfaces.ITaskMarkerInterface"
+      />
 
   <interface
-    interface=".interfaces.ITaskWithSuspensionDelay"
-    type="imio.schedule.interfaces.ITaskMarkerInterface"/>
+      interface=".interfaces.ITaskWithSuspensionDelay"
+      type="imio.schedule.interfaces.ITaskMarkerInterface"
+      />
 
   <interface
-    interface=".interfaces.ITaskWithWholeSuspensionDelay"
-    type="imio.schedule.interfaces.ITaskMarkerInterface"/>
+      interface=".interfaces.ITaskWithWholeSuspensionDelay"
+      type="imio.schedule.interfaces.ITaskMarkerInterface"
+      />
 
 </configure>

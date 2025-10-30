@@ -1,74 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
 <registry>
   <records interface="Products.urban.interfaces.ICODT_UniqueLicence_spe_reference_config">
-      <value key="numerotation">0</value>
-      <value key="tal_expression">python: 'PU/2/' + numerotation</value>
+    <value key="numerotation">0</value>
+    <value key="tal_expression">python: 'PU/2/' + numerotation</value>
   </records>
-  <records interface="Products.urban.interfaces.IInternalOpinionServices" field="services">
+  <records field="services"
+           interface="Products.urban.interfaces.IInternalOpinionServices"
+  >
   </records>
-  <records interface="Products.urban.interfaces.IAsyncInquiryRadius" field="inquiries_to_do">
+  <records field="inquiries_to_do"
+           interface="Products.urban.interfaces.IAsyncInquiryRadius"
+  >
   </records>
-  <records interface="Products.urban.interfaces.IAsyncInquiryRadius" field="inquiries_address_to_do">
+  <records field="inquiries_address_to_do"
+           interface="Products.urban.interfaces.IAsyncInquiryRadius"
+  >
   </records>
-  <records interface="Products.urban.interfaces.IAsyncClaimantsImports" field="claimants_to_import">
+  <records field="claimants_to_import"
+           interface="Products.urban.interfaces.IAsyncClaimantsImports"
+  >
   </records>
   <records interface="Products.urban.interfaces.IAsyncMailing">
-      <value key="mailing_items_limit">0</value>
-      <value key="mailings_to_do"></value>
+    <value key="mailing_items_limit">0</value>
+    <value key="mailings_to_do" />
   </records>
   <records interface="Products.urban.interfaces.IGlobalSuspensionPeriod">
-      <value key="start_date"></value>
-      <value key="end_date"></value>
+    <value key="start_date" />
+    <value key="end_date" />
   </records>
   <records interface="plone.app.referenceintegrity.interfaces.ISettings">
-      <value key="reference_types">
-          <element>licenceArchitects</element>
-          <element>licenceFolderManagers</element>
-          <element>licenceParcelling</element>
-          <element>notary</element>
-          <element>parcelOutGeometricians</element>
-          <element>basebuildlicenceRepresentativeContacts</element>
-          <element>recipients</element>
-          <element>referenceableVocabularyTerm</element>
-      </value>
+    <value key="reference_types">
+      <element>licenceArchitects</element>
+      <element>licenceFolderManagers</element>
+      <element>licenceParcelling</element>
+      <element>notary</element>
+      <element>parcelOutGeometricians</element>
+      <element>basebuildlicenceRepresentativeContacts</element>
+      <element>recipients</element>
+      <element>referenceableVocabularyTerm</element>
+    </value>
   </records>
   <records interface="collective.js.jqueryui.controlpanel.IJQueryUIPlugins">
-      <value key="ui_core">False</value>
-      <value key="ui_widget">False</value>
-      <value key="ui_mouse">False</value>
-      <value key="ui_position">False</value>
-      <value key="ui_draggable">False</value>
-      <value key="ui_droppable">False</value>
-      <value key="ui_resizable">False</value>
-      <value key="ui_selectable">False</value>
-      <value key="ui_sortable">True</value>
-      <value key="ui_accordion">False</value>
-      <value key="ui_autocomplete">True</value>
-      <value key="ui_button">False</value>
-      <value key="ui_dialog">True</value>
-      <value key="ui_slider">False</value>
-      <value key="ui_tabs">False</value>
-      <value key="ui_datepicker">True</value>
-      <value key="ui_progressbar">False</value>
-      <value key="effects_core">False</value>
-      <value key="effects_blind">False</value>
-      <value key="effects_bounce">False</value>
-      <value key="effects_clip">False</value>
-      <value key="effects_drop">False</value>
-      <value key="effects_explode">False</value>
-      <value key="effects_fade">False</value>
-      <value key="effects_fold">False</value>
-      <value key="effects_highlight">False</value>
-      <value key="effects_pulsate">False</value>
-      <value key="effects_scale">False</value>
-      <value key="effects_shake">False</value>
-      <value key="effects_slide">False</value>
-      <value key="effects_transfer">False</value>
+    <value key="ui_core">False</value>
+    <value key="ui_widget">False</value>
+    <value key="ui_mouse">False</value>
+    <value key="ui_position">False</value>
+    <value key="ui_draggable">False</value>
+    <value key="ui_droppable">False</value>
+    <value key="ui_resizable">False</value>
+    <value key="ui_selectable">False</value>
+    <value key="ui_sortable">True</value>
+    <value key="ui_accordion">False</value>
+    <value key="ui_autocomplete">True</value>
+    <value key="ui_button">False</value>
+    <value key="ui_dialog">True</value>
+    <value key="ui_slider">False</value>
+    <value key="ui_tabs">False</value>
+    <value key="ui_datepicker">True</value>
+    <value key="ui_progressbar">False</value>
+    <value key="effects_core">False</value>
+    <value key="effects_blind">False</value>
+    <value key="effects_bounce">False</value>
+    <value key="effects_clip">False</value>
+    <value key="effects_drop">False</value>
+    <value key="effects_explode">False</value>
+    <value key="effects_fade">False</value>
+    <value key="effects_fold">False</value>
+    <value key="effects_highlight">False</value>
+    <value key="effects_pulsate">False</value>
+    <value key="effects_scale">False</value>
+    <value key="effects_shake">False</value>
+    <value key="effects_slide">False</value>
+    <value key="effects_transfer">False</value>
   </records>
   <records interface="collective.js.jqueryui.controlpanel.IJQueryUICSS">
-      <value key="css">True</value>
-      <value key="patch">True</value>
+    <value key="css">True</value>
+    <value key="patch">True</value>
   </records>
   <records interface="Products.urban.browser.offdays_settings.IOffDays" />
-  <records interface="Products.urban.browser.gig_coring_settings.IGigCoringLink"/>
-  <records interface="Products.urban.browser.notice_settings.INoticeSettings"/>
+  <records interface="Products.urban.browser.gig_coring_settings.IGigCoringLink" />
+  <records interface="Products.urban.browser.notice_settings.INoticeSettings" />
 </registry>

@@ -1,131 +1,188 @@
-<?xml version="1.0"?>
-<object name="portal_catalog" meta_type="Plone Catalog Tool">
-  <index name="getDepositDate"
-         meta_type="DateIndex">
-    <indexed_attr value="getDepositDate"/>
+<?xml version="1.0" encoding="utf-8"?>
+<object meta_type="Plone Catalog Tool"
+        name="portal_catalog"
+>
+  <index meta_type="DateIndex"
+         name="getDepositDate"
+  >
+    <indexed_attr value="getDepositDate" />
   </index>
-  <column value="getDepositDate"/>
-  <index name="getDecisionDate"
-         meta_type="DateIndex">
-    <indexed_attr value="getDecisionDate"/>
+  <column value="getDepositDate" />
+  <index meta_type="DateIndex"
+         name="getDecisionDate"
+  >
+    <indexed_attr value="getDecisionDate" />
   </index>
-  <column value="getDecisionDate"/>
-  <index name="getValidityDate"
-         meta_type="DateIndex">
-    <indexed_attr value="getValidityDate"/>
+  <column value="getDecisionDate" />
+  <index meta_type="DateIndex"
+         name="getValidityDate"
+  >
+    <indexed_attr value="getValidityDate" />
   </index>
-  <column value="getValidityDate"/>
-  <index name="getRecourseDecisionDisplayDate"
-         meta_type="DateIndex">
-    <indexed_attr value="getRecourseDecisionDisplayDate"/>
+  <column value="getValidityDate" />
+  <index meta_type="DateIndex"
+         name="getRecourseDecisionDisplayDate"
+  >
+    <indexed_attr value="getRecourseDecisionDisplayDate" />
   </index>
-<!-- ##code-section FOOT -->
-  <index name="getReference"
-         meta_type="ZCTextIndex">
-    <indexed_attr value="getReference"/>
-  <extra name="index_type" value="Okapi BM25 Rank"/>
-  <extra name="lexicon_id" value="plone_lexicon"/>
-  </index>
-
-  <column value="getReference"/>
-
-  <index name="getAdditionalReference"
-         meta_type="ZCTextIndex">
-    <indexed_attr value="getAdditionalReference"/>
-    <extra name="index_type" value="Okapi BM25 Rank"/>
-    <extra name="lexicon_id" value="plone_lexicon"/>
-  </index>
-  <column value="getAdditionalReference"/>
-
-  <index name="folder_manager"
-           meta_type="KeywordIndex">
-    <indexed_attr value="folder_manager"/>
-  </index>
-  <column value="folder_manager"/>
-
-  <index name="representatives"
-           meta_type="KeywordIndex">
-    <indexed_attr value="representatives"/>
+  <!-- ##code-section FOOT -->
+  <index meta_type="ZCTextIndex"
+         name="getReference"
+  >
+    <indexed_attr value="getReference" />
+    <extra name="index_type"
+           value="Okapi BM25 Rank"
+    />
+    <extra name="lexicon_id"
+           value="plone_lexicon"
+    />
   </index>
 
-  <index name="last_key_event"
-           meta_type="KeywordIndex">
-    <indexed_attr value="last_key_event"/>
-  </index>
-  <column value="last_key_event"/>
+  <column value="getReference" />
 
-  <index name="StreetsUID"
-           meta_type="KeywordIndex">
-    <indexed_attr value="StreetsUID"/>
+  <index meta_type="ZCTextIndex"
+         name="getAdditionalReference"
+  >
+    <indexed_attr value="getAdditionalReference" />
+    <extra name="index_type"
+           value="Okapi BM25 Rank"
+    />
+    <extra name="lexicon_id"
+           value="plone_lexicon"
+    />
   </index>
-  <column value="StreetsUID"/>
+  <column value="getAdditionalReference" />
 
-  <index name="getStreetCode"
-           meta_type="KeywordIndex">
-    <indexed_attr value="getStreetCode"/>
+  <index meta_type="KeywordIndex"
+         name="folder_manager"
+  >
+    <indexed_attr value="folder_manager" />
   </index>
-  <column value="getStreetCode"/>
+  <column value="folder_manager" />
 
-  <column value="parcelInfosIndex"/>
-  <index name="parcelInfosIndex" meta_type="KeywordIndex">
-    <indexed_attr value="parcelInfosIndex"/>
-  </index>
-
-  <index name="address"
-         meta_type="ZCTextIndex">
-    <indexed_attr value="address"/>
-  <extra name="index_type" value="Okapi BM25 Rank"/>
-  <extra name="lexicon_id" value="plone_lexicon"/>
+  <index meta_type="KeywordIndex"
+         name="representatives"
+  >
+    <indexed_attr value="representatives" />
   </index>
 
-  <column value="address"/>
+  <index meta_type="KeywordIndex"
+         name="last_key_event"
+  >
+    <indexed_attr value="last_key_event" />
+  </index>
+  <column value="last_key_event" />
 
-  <column value="eventDate"/>
+  <index meta_type="KeywordIndex"
+         name="StreetsUID"
+  >
+    <indexed_attr value="StreetsUID" />
+  </index>
+  <column value="StreetsUID" />
 
-  <index name="applicantInfosIndex" meta_type="ZCTextIndex">
-    <indexed_attr value="applicantInfosIndex"/>
-    <extra name="index_type" value="Okapi BM25 Rank"/>
-    <extra name="lexicon_id" value="plone_lexicon"/>
+  <index meta_type="KeywordIndex"
+         name="getStreetCode"
+  >
+    <indexed_attr value="getStreetCode" />
+  </index>
+  <column value="getStreetCode" />
+
+  <column value="parcelInfosIndex" />
+  <index meta_type="KeywordIndex"
+         name="parcelInfosIndex"
+  >
+    <indexed_attr value="parcelInfosIndex" />
   </index>
 
-  <column value="applicantInfosIndex"/>
-
-  <index name="architectInfosIndex" meta_type="ZCTextIndex">
-    <indexed_attr value="architectInfosIndex"/>
-    <extra name="index_type" value="Okapi BM25 Rank"/>
-    <extra name="lexicon_id" value="plone_lexicon"/>
+  <index meta_type="ZCTextIndex"
+         name="address"
+  >
+    <indexed_attr value="address" />
+    <extra name="index_type"
+           value="Okapi BM25 Rank"
+    />
+    <extra name="lexicon_id"
+           value="plone_lexicon"
+    />
   </index>
 
-  <column value="architectInfosIndex"/>
+  <column value="address" />
 
-  <index name="extraValue"
-           meta_type="KeywordIndex">
-    <indexed_attr value="extraValue"/>
+  <column value="eventDate" />
+
+  <index meta_type="ZCTextIndex"
+         name="applicantInfosIndex"
+  >
+    <indexed_attr value="applicantInfosIndex" />
+    <extra name="index_type"
+           value="Okapi BM25 Rank"
+    />
+    <extra name="lexicon_id"
+           value="plone_lexicon"
+    />
   </index>
 
-  <index name="StreetNumber" meta_type="ZCTextIndex">
-    <indexed_attr value="StreetNumber"/>
-    <extra name="index_type" value="Okapi BM25 Rank"/>
-    <extra name="lexicon_id" value="plone_lexicon"/>
-  </index>
-  <column value="StreetNumber"/>
+  <column value="applicantInfosIndex" />
 
-  <index name="licence_final_duedate" meta_type="DateIndex">
-      <property name="index_naive_time_as_local">True</property>
+  <index meta_type="ZCTextIndex"
+         name="architectInfosIndex"
+  >
+    <indexed_attr value="architectInfosIndex" />
+    <extra name="index_type"
+           value="Okapi BM25 Rank"
+    />
+    <extra name="lexicon_id"
+           value="plone_lexicon"
+    />
   </index>
-  <column value="licence_final_duedate"/>
 
-  <index name="archive" meta_type="BooleanIndex">
-    <indexed_attr value="archive"/>
-  </index>
-  <column value="archive"/>
+  <column value="architectInfosIndex" />
 
-  <index name="investigationStart" meta_type="DateIndex"/>
-  <index name="investigationEnd" meta_type="DateIndex"/>
-  
-  <index name="getComplementary_delay" meta_type="KeywordIndex">
-    <indexed_attr value="getComplementary_delay"/>
+  <index meta_type="KeywordIndex"
+         name="extraValue"
+  >
+    <indexed_attr value="extraValue" />
   </index>
-  <column value="getComplementary_delay"/>
-<!-- ##/code-section FOOT -->
+
+  <index meta_type="ZCTextIndex"
+         name="StreetNumber"
+  >
+    <indexed_attr value="StreetNumber" />
+    <extra name="index_type"
+           value="Okapi BM25 Rank"
+    />
+    <extra name="lexicon_id"
+           value="plone_lexicon"
+    />
+  </index>
+  <column value="StreetNumber" />
+
+  <index meta_type="DateIndex"
+         name="licence_final_duedate"
+  >
+    <property name="index_naive_time_as_local">True</property>
+  </index>
+  <column value="licence_final_duedate" />
+
+  <index meta_type="BooleanIndex"
+         name="archive"
+  >
+    <indexed_attr value="archive" />
+  </index>
+  <column value="archive" />
+
+  <index meta_type="DateIndex"
+         name="investigationStart"
+  />
+  <index meta_type="DateIndex"
+         name="investigationEnd"
+  />
+
+  <index meta_type="KeywordIndex"
+         name="getComplementary_delay"
+  >
+    <indexed_attr value="getComplementary_delay" />
+  </index>
+  <column value="getComplementary_delay" />
+  <!-- ##/code-section FOOT -->
 </object>

@@ -1,81 +1,91 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:gs="http://namespaces.zope.org/genericsetup"
-    i18n_domain="urban">
+    i18n_domain="urban"
+    >
 
-    <gs:upgradeStep
-        title="Upgrade urban to 1.1.9"
-        description="urban upgrade step"
-        source="1.1.8"
-        destination="1.1.9"
-        handler=".migrate_to_119.migrateToUrban119"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="Upgrade urban to 1.1.9"
+      description="urban upgrade step"
+      profile="Products.urban:default"
+      source="1.1.8"
+      destination="1.1.9"
+      handler=".migrate_to_119.migrateToUrban119"
+      />
 
-    <gs:upgradeStep
-        title="Upgrade urban to 1.2.0"
-        description="urban upgrade step"
-        source="1.1.9"
-        destination="1.2.0"
-        handler=".migrate_to_120.migrateToUrban120"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="Upgrade urban to 1.2.0"
+      description="urban upgrade step"
+      profile="Products.urban:default"
+      source="1.1.9"
+      destination="1.2.0"
+      handler=".migrate_to_120.migrateToUrban120"
+      />
 
-    <gs:upgradeStep
-        title="Upgrade urban to 1.3.0"
-        description="urban upgrade step"
-        source="1.2.0"
-        destination="1.3.0"
-        handler=".migrate_to_130.migrateToUrban130"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="Upgrade urban to 1.3.0"
+      description="urban upgrade step"
+      profile="Products.urban:default"
+      source="1.2.0"
+      destination="1.3.0"
+      handler=".migrate_to_130.migrateToUrban130"
+      />
 
-    <gs:upgradeStep
-        title="Upgrade urban to 1.6.0"
-        description="urban upgrade step"
-        source="1.3.0"
-        destination="1.6.0"
-        handler=".migrate_to_160.migrateToUrban160"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="Upgrade urban to 1.6.0"
+      description="urban upgrade step"
+      profile="Products.urban:default"
+      source="1.3.0"
+      destination="1.6.0"
+      handler=".migrate_to_160.migrateToUrban160"
+      />
 
-    <gs:upgradeStep
-        title="Upgrade urban to 1.7.0"
-        description="urban upgrade step"
-        source="1.6.0"
-        destination="1.7.0"
-        handler=".migrate_to_170.migrateToUrban170"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="Upgrade urban to 1.7.0"
+      description="urban upgrade step"
+      profile="Products.urban:default"
+      source="1.6.0"
+      destination="1.7.0"
+      handler=".migrate_to_170.migrateToUrban170"
+      />
 
-    <gs:upgradeStep
-        title="Upgrade urban to 1.11.0"
-        description="urban upgrade step"
-        source="1.10.0"
-        destination="1.11.0"
-        handler=".migrate_to_1110.migrate"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="Upgrade urban to 1.11.0"
+      description="urban upgrade step"
+      profile="Products.urban:default"
+      source="1.10.0"
+      destination="1.11.0"
+      handler=".migrate_to_1110.migrate"
+      />
 
-    <gs:upgradeStep
-        title="Upgrade urban to 1.11.1"
-        description="urban upgrade step"
-        source="1.11.0"
-        destination="1.11.1"
-        handler=".migrate_to_1111.migrate"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="Upgrade urban to 1.11.1"
+      description="urban upgrade step"
+      profile="Products.urban:default"
+      source="1.11.0"
+      destination="1.11.1"
+      handler=".migrate_to_1111.migrate"
+      />
 
-    <gs:upgradeStep
-        title="Upgrade urban to 2.0"
-        description="urban upgrade step"
-        source="1.11.0"
-        destination="2.0"
-        handler=".migrate_to_200.migrate"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="Upgrade urban to 2.0"
+      description="urban upgrade step"
+      profile="Products.urban:default"
+      source="1.11.0"
+      destination="2.0"
+      handler=".migrate_to_200.migrate"
+      />
 
-    <gs:upgradeStep
-        title="Upgrade urban to 2.1"
-        description="urban upgrade step"
-        source="2.0"
-        destination="2.1"
-        handler=".migrate_to_210.migrate"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="Upgrade urban to 2.1"
+      description="urban upgrade step"
+      profile="Products.urban:default"
+      source="2.0"
+      destination="2.1"
+      handler=".migrate_to_210.migrate"
+      />
 
-    <!--gs:upgradeStep
+  <!--gs:upgradeStep
         title="Upgrade urban to 2.1.1"
         description="urban upgrade step"
         source="2.1"
@@ -83,383 +93,430 @@
         handler=".migrate_to_211.migrate"
         profile="Products.urban:default" /-->
 
-    <gs:upgradeStep
-        title="Upgrade urban to 2.2.0"
-        description="urban upgrade step"
-        source="2.1"
-        destination="2.2.0"
-        handler=".migrate_to_220.migrate"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="Upgrade urban to 2.2.0"
+      description="urban upgrade step"
+      profile="Products.urban:default"
+      source="2.1"
+      destination="2.2.0"
+      handler=".migrate_to_220.migrate"
+      />
 
-    <gs:upgradeStep
-        title="Update urban 2.2.0"
-        description="urban upgrade step"
-        source="2.2.0"
-        destination="2.2.0"
-        handler=".update_220.migrate"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="Update urban 2.2.0"
+      description="urban upgrade step"
+      profile="Products.urban:default"
+      source="2.2.0"
+      destination="2.2.0"
+      handler=".update_220.migrate"
+      />
 
-    <gs:upgradeStep
-        title="Upgrade urban 2.3.0"
-        description="urban upgrade step"
-        source="2.2.0"
-        destination="2.3.0"
-        handler=".migrate_to_230.migrate"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="Upgrade urban 2.3.0"
+      description="urban upgrade step"
+      profile="Products.urban:default"
+      source="2.2.0"
+      destination="2.3.0"
+      handler=".migrate_to_230.migrate"
+      />
 
-    <gs:upgradeStep
-        title="Upgrade urban 2.4.0"
-        description="urban upgrade step"
-        source="2.3.0"
-        destination="2.4.0"
-        handler=".migrate_to_240.migrate"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="Upgrade urban 2.4.0"
+      description="urban upgrade step"
+      profile="Products.urban:default"
+      source="2.3.0"
+      destination="2.4.0"
+      handler=".migrate_to_240.migrate"
+      />
 
-    <gs:upgradeStep
-        title="Fix licences breadcrumb"
-        description="urban upgrade step"
-        source="2.4.0"
-        destination="2.4.0"
-        handler=".update_240.fix_licences_breadcrumb"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="Fix licences breadcrumb"
+      description="urban upgrade step"
+      profile="Products.urban:default"
+      source="2.4.0"
+      destination="2.4.0"
+      handler=".update_240.fix_licences_breadcrumb"
+      />
 
-    <gs:upgradeStep
-        title="Fix external edition"
-        description="urban upgrade step"
-        source="1001"
-        destination="1002"
-        handler=".update_240.fix_external_edition_settings"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="Fix external edition"
+      description="urban upgrade step"
+      profile="Products.urban:default"
+      source="1001"
+      destination="1002"
+      handler=".update_240.fix_external_edition_settings"
+      />
 
-    <gs:upgradeStep
-        title="Fix inquiry Add permission"
-        description="urban upgrade step"
-        source="1002"
-        destination="1003"
-        handler=".update_240.fix_add_inquiry_permissions"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="Fix inquiry Add permission"
+      description="urban upgrade step"
+      profile="Products.urban:default"
+      source="1002"
+      destination="1003"
+      handler=".update_240.fix_add_inquiry_permissions"
+      />
 
-    <gs:upgradeStep
-        title="Update automated reference expressions"
-        description="urban upgrade step"
-        source="1003"
-        destination="1004"
-        handler=".update_240.update_automated_reference_expression"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="Update automated reference expressions"
+      description="urban upgrade step"
+      profile="Products.urban:default"
+      source="1003"
+      destination="1004"
+      handler=".update_240.update_automated_reference_expression"
+      />
 
-    <gs:upgradeStep
-        title="Upgrade urban 2.5.0"
-        description="urban upgrade step"
-        source="1004"
-        destination="1005"
-        handler=".migrate_to_250.migrate"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="Upgrade urban 2.5.0"
+      description="urban upgrade step"
+      profile="Products.urban:default"
+      source="1004"
+      destination="1005"
+      handler=".migrate_to_250.migrate"
+      />
 
-    <gs:upgradeStep
-        title="Migrate AT PortionOut to DX Parcel"
-        description="urban upgrade step"
-        source="1005"
-        destination="1006"
-        handler=".migrate_to_DX.migrate_PortionOut_to_DX"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="Migrate AT PortionOut to DX Parcel"
+      description="urban upgrade step"
+      profile="Products.urban:default"
+      source="1005"
+      destination="1006"
+      handler=".migrate_to_DX.migrate_PortionOut_to_DX"
+      />
 
-    <gs:upgradeStep
-        title="Migrate AT ParcellingTerm to DX Parcelling"
-        description="urban upgrade step"
-        source="1006"
-        destination="1007"
-        handler=".migrate_to_DX.migrate_ParcellingTerm_to_DX"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="Migrate AT ParcellingTerm to DX Parcelling"
+      description="urban upgrade step"
+      profile="Products.urban:default"
+      source="1006"
+      destination="1007"
+      handler=".migrate_to_DX.migrate_ParcellingTerm_to_DX"
+      />
 
-    <gs:upgradeStep
-        title="Migrate AT UrbanEventType to DX EventConfig"
-        description="urban upgrade step"
-        source="1007"
-        destination="1008"
-        handler=".migrate_to_DX.migrate_UrbanEventType_to_DX"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="Migrate AT UrbanEventType to DX EventConfig"
+      description="urban upgrade step"
+      profile="Products.urban:default"
+      source="1007"
+      destination="1008"
+      handler=".migrate_to_DX.migrate_UrbanEventType_to_DX"
+      />
 
-    <gs:upgradeStep
-        title="Add new default person title"
-        description="urban upgrade step"
-        source="1008"
-        destination="1009"
-        handler=".update_250.add_new_default_personTitle"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="Add new default person title"
+      description="urban upgrade step"
+      profile="Products.urban:default"
+      source="1008"
+      destination="1009"
+      handler=".update_250.add_new_default_personTitle"
+      />
 
-    <gs:upgradeStep
-        title="Delete migrated miscdemands to Inspection"
-        description="urban upgrade step"
-        source="1009"
-        destination="1010"
-        handler=".update_250.delete_migrated_miscdemands"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="Delete migrated miscdemands to Inspection"
+      description="urban upgrade step"
+      profile="Products.urban:default"
+      source="1009"
+      destination="1010"
+      handler=".update_250.delete_migrated_miscdemands"
+      />
 
-    <gs:upgradeStep
-        title="Fix PODTemplate odt_file"
-        description="urban upgrade step"
-        source="1010"
-        destination="1011"
-        handler=".update_250.fix_POD_templates_odt_file"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="Fix PODTemplate odt_file"
+      description="urban upgrade step"
+      profile="Products.urban:default"
+      source="1010"
+      destination="1011"
+      handler=".update_250.fix_POD_templates_odt_file"
+      />
 
-    <gs:upgradeStep
-        title="replace mailing loop owners"
-        description="urban upgrade step"
-        source="1011"
-        destination="1012"
-        handler=".update_250.replace_mailing_loop_owners"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="replace mailing loop owners"
+      description="urban upgrade step"
+      profile="Products.urban:default"
+      source="1011"
+      destination="1012"
+      handler=".update_250.replace_mailing_loop_owners"
+      />
 
-    <gs:upgradeStep
-        title="fix type of eventtype in config"
-        description="urban upgrade step"
-        source="1012"
-        destination="1013"
-        handler=".update_250.fix_type_eventtype_in_config"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="fix type of eventtype in config"
+      description="urban upgrade step"
+      profile="Products.urban:default"
+      source="1012"
+      destination="1013"
+      handler=".update_250.fix_type_eventtype_in_config"
+      />
 
-    <gs:upgradeStep
-        title="add all applicants in title"
-        description="urban upgrade step"
-        source="1013"
-        destination="1014"
-        handler=".update_250.add_all_applicants_in_title"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="add all applicants in title"
+      description="urban upgrade step"
+      profile="Products.urban:default"
+      source="1013"
+      destination="1014"
+      handler=".update_250.add_all_applicants_in_title"
+      />
 
-    <gs:upgradeStep
-        title="migrate POD expressions"
-        description="urban upgrade step"
-        source="1014"
-        destination="1015"
-        handler=".update_250.update_POD_expressions"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="migrate POD expressions"
+      description="urban upgrade step"
+      profile="Products.urban:default"
+      source="1014"
+      destination="1015"
+      handler=".update_250.update_POD_expressions"
+      />
 
-    <gs:upgradeStep
-        title="migrate event configs Description field"
-        description="urban upgrade step"
-        source="1100"
-        destination="1101"
-        handler=".update_250.migrate_eventconfigs_description_field"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="migrate event configs Description field"
+      description="urban upgrade step"
+      profile="Products.urban:default"
+      source="1100"
+      destination="1101"
+      handler=".update_250.migrate_eventconfigs_description_field"
+      />
 
-    <gs:upgradeStep
-        title="Reinstall ticket workflow"
-        description="urban upgrade step"
-        source="1101"
-        destination="1102"
-        handler=".update_250.reinstall_ticket_workflow"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="Reinstall ticket workflow"
+      description="urban upgrade step"
+      profile="Products.urban:default"
+      source="1101"
+      destination="1102"
+      handler=".update_250.reinstall_ticket_workflow"
+      />
 
-    <gs:upgradeStep
-        title="Add trails and watercourses to global vocabularies"
-        description="urban upgrade step"
-        source="1102"
-        destination="1103"
-        handler=".update_250.add_trails_and_watercourses_to_global_vocabularies"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="Add trails and watercourses to global vocabularies"
+      description="urban upgrade step"
+      profile="Products.urban:default"
+      source="1102"
+      destination="1103"
+      handler=".update_250.add_trails_and_watercourses_to_global_vocabularies"
+      />
 
-    <gs:upgradeStep
-        title="Fix PODTemplates empty filename"
-        description="urban upgrade step"
-        source="1103"
-        destination="1104"
-        handler=".update_250.fix_PODTemplates_empty_filename"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="Fix PODTemplates empty filename"
+      description="urban upgrade step"
+      profile="Products.urban:default"
+      source="1103"
+      destination="1104"
+      handler=".update_250.fix_PODTemplates_empty_filename"
+      />
 
-    <gs:upgradeStep
-        title="Fix notary specificfeatures code"
-        description="urban upgrade step"
-        source="1104"
-        destination="1105"
-        handler=".update_250.migrate_notaryletter_specificfeatures_texts"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="Fix notary specificfeatures code"
+      description="urban upgrade step"
+      profile="Products.urban:default"
+      source="1104"
+      destination="1105"
+      handler=".update_250.migrate_notaryletter_specificfeatures_texts"
+      />
 
-    <gs:upgradeStep
-        title="Add Tax vocabulary 'Other' option"
-        description="urban upgrade step"
-        source="1105"
-        destination="1106"
-        handler=".update_250.migrate_add_tax_other_option"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="Add Tax vocabulary 'Other' option"
+      description="urban upgrade step"
+      profile="Products.urban:default"
+      source="1105"
+      destination="1106"
+      handler=".update_250.migrate_add_tax_other_option"
+      />
 
-    <gs:upgradeStep
-        title="Install GIG coring registry settings"
-        description="urban upgrade step"
-        source="1106"
-        destination="1107"
-        handler=".update_250.reinstall_registry_and_vocabularies"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="Install GIG coring registry settings"
+      description="urban upgrade step"
+      profile="Products.urban:default"
+      source="1106"
+      destination="1107"
+      handler=".update_250.reinstall_registry_and_vocabularies"
+      />
 
-    <gs:upgradeStep
-        title="Activate divergences field"
-        description="urban upgrade step"
-        source="1107"
-        destination="1108"
-        handler=".update_250.activate_divergence_field"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="Activate divergences field"
+      description="urban upgrade step"
+      profile="Products.urban:default"
+      source="1107"
+      destination="1108"
+      handler=".update_250.activate_divergence_field"
+      />
 
-    <gs:upgradeStep
-        title="Check corrupted models"
-        description="urban upgrade step"
-        source="1108"
-        destination="1109"
-        handler=".check_corrupted_templates.check_corrupted_templates"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="Check corrupted models"
+      description="urban upgrade step"
+      profile="Products.urban:default"
+      source="1108"
+      destination="1109"
+      handler=".check_corrupted_templates.check_corrupted_templates"
+      />
 
-    <gs:upgradeStep
-        title="remove icons from transitions"
-        description="urban upgrade step"
-        source="1109"
-        destination="1110"
-        handler=".update_250.remove_icons_from_transitions"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="remove icons from transitions"
+      description="urban upgrade step"
+      profile="Products.urban:default"
+      source="1109"
+      destination="1110"
+      handler=".update_250.remove_icons_from_transitions"
+      />
 
-    <gs:upgradeStep
-        title="Add and activate corporation tenant"
-        description="urban upgrade step"
-        source="1110"
-        destination="1111"
-        handler=".update_250.add_and_active_corporation_tenant"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="Add and activate corporation tenant"
+      description="urban upgrade step"
+      profile="Products.urban:default"
+      source="1110"
+      destination="1111"
+      handler=".update_250.add_and_active_corporation_tenant"
+      />
 
-    <gs:upgradeStep
-        title="add documentation link to user portal_actions and hide contact viewlet in footer"
-        description="urban upgrade step"
-        source="1112"
-        destination="1113"
-        handler=".update_250.addDocumentationLinkToUserPortalActionAndHideViewlet"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="add documentation link to user portal_actions and hide contact viewlet in footer"
+      description="urban upgrade step"
+      profile="Products.urban:default"
+      source="1112"
+      destination="1113"
+      handler=".update_250.addDocumentationLinkToUserPortalActionAndHideViewlet"
+      />
 
-    <gs:upgradeStep
-        title="Activate deposit date column on all licence dashboards."
-        description="urban upgrade step"
-        source="1113"
-        destination="1114"
-        handler=".update_250.add_deposit_date_column_to_dashboards"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="Activate deposit date column on all licence dashboards."
+      description="urban upgrade step"
+      profile="Products.urban:default"
+      source="1113"
+      destination="1114"
+      handler=".update_250.add_deposit_date_column_to_dashboards"
+      />
 
-    <gs:upgradeStep
-        title="Add a final 's' to mailing var 'proprietaire'"
-        description="urban upgrade step"
-        source="1114"
-        destination="1115"
-        handler=".update_250.replace_mailing_loop_proprietaries"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="Add a final 's' to mailing var 'proprietaire'"
+      description="urban upgrade step"
+      profile="Products.urban:default"
+      source="1114"
+      destination="1115"
+      handler=".update_250.replace_mailing_loop_proprietaries"
+      />
 
-    <gs:upgradeStep
-        title="Set default warnings"
-        description="urban upgrade step"
-        source="1115"
-        destination="1116"
-        handler=".update_250.set_default_warnings"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="Set default warnings"
+      description="urban upgrade step"
+      profile="Products.urban:default"
+      source="1115"
+      destination="1116"
+      handler=".update_250.set_default_warnings"
+      />
 
-    <gs:upgradeStep
-        title="Update tickets title"
-        description="urban upgrade step"
-        source="1116"
-        destination="1117"
-        handler=".update_250.update_tickets_title"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="Update tickets title"
+      description="urban upgrade step"
+      profile="Products.urban:default"
+      source="1116"
+      destination="1117"
+      handler=".update_250.update_tickets_title"
+      />
 
-    <gs:upgradeStep
-        title="Move architects and geometricians to representative contacts for base buildlicence"
-        description="urban upgrade step"
-        source="1117"
-        destination="1118"
-        handler=".update_250.migrate_move_basebuildlicence_architects_and_geometricians_to_representative_contacts"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="Move architects and geometricians to representative contacts for base buildlicence"
+      description="urban upgrade step"
+      profile="Products.urban:default"
+      source="1117"
+      destination="1118"
+      handler=".update_250.migrate_move_basebuildlicence_architects_and_geometricians_to_representative_contacts"
+      />
 
-    <gs:upgradeStep
-        title="Reinstall portal actions"
-        description="Hide content folder action from users"
-        source="1118"
-        destination="1119"
-        handler=".update_250.hide_folder_contents_action"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="Reinstall portal actions"
+      description="Hide content folder action from users"
+      profile="Products.urban:default"
+      source="1118"
+      destination="1119"
+      handler=".update_250.hide_folder_contents_action"
+      />
 
-    <gs:upgradeStep
-        title="Add second default OO port"
-        description="Hide content folder action from users"
-        source="1119"
-        destination="1120"
-        handler=".update_250.add_default_LO_server_port"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="Add second default OO port"
+      description="Hide content folder action from users"
+      profile="Products.urban:default"
+      source="1119"
+      destination="1120"
+      handler=".update_250.add_default_LO_server_port"
+      />
 
-    <gs:upgradeStep
-        title="Install applicant couple type"
-        description="Install applicant couple type"
-        source="1120"
-        destination="1121"
-        handler=".update_250.add_applicant_couple_type"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="Install applicant couple type"
+      description="Install applicant couple type"
+      profile="Products.urban:default"
+      source="1120"
+      destination="1121"
+      handler=".update_250.add_applicant_couple_type"
+      />
 
-    <gs:upgradeStep
-        title="Install environment article 65"
-        description="Install environment article 65"
-        source="1121"
-        destination="1122"
-        handler=".update_250.install_environment_article65"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="Install environment article 65"
+      description="Install environment article 65"
+      profile="Products.urban:default"
+      source="1121"
+      destination="1122"
+      handler=".update_250.install_environment_article65"
+      />
 
-    <gs:upgradeStep
-        title="Install environment cession"
-        description="Install environment cession"
-        source="1122"
-        destination="1123"
-        handler=".update_250.install_environment_cession"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="Install environment cession"
+      description="Install environment cession"
+      profile="Products.urban:default"
+      source="1122"
+      destination="1123"
+      handler=".update_250.install_environment_cession"
+      />
 
-    <gs:upgradeStep
-        title="Activate auto page style for mailing templates"
-        description="Activate auto page style for mailing templates"
-        source="1123"
-        destination="1124"
-        handler=".update_250.install_auto_page_style_for_mailing_templates"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="Activate auto page style for mailing templates"
+      description="Activate auto page style for mailing templates"
+      profile="Products.urban:default"
+      source="1123"
+      destination="1124"
+      handler=".update_250.install_auto_page_style_for_mailing_templates"
+      />
 
-    <gs:upgradeStep
-        title="Enable env divergences and referenceFT fields"
-        description="Enable env divergences and referenceFT fields"
-        source="1124"
-        destination="1125"
-        handler=".update_250.activate_env_divergence_and_referenceFT_fields"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="Enable env divergences and referenceFT fields"
+      description="Enable env divergences and referenceFT fields"
+      profile="Products.urban:default"
+      source="1124"
+      destination="1125"
+      handler=".update_250.activate_env_divergence_and_referenceFT_fields"
+      />
 
-    <gs:upgradeStep
-        title="Set page style for mailing templates"
-        description="Set page style for mailing templates"
-        source="1125"
-        destination="1126"
-        handler=".update_250.set_page_style_for_mailing_templates"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="Set page style for mailing templates"
+      description="Set page style for mailing templates"
+      profile="Products.urban:default"
+      source="1125"
+      destination="1126"
+      handler=".update_250.set_page_style_for_mailing_templates"
+      />
 
-    <gs:upgradeStep
-        title="Install browserlayer"
-        description="Install browserlayer"
-        source="1126"
-        destination="1127"
-        handler=".update_250.install_browserlayer"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="Install browserlayer"
+      description="Install browserlayer"
+      profile="Products.urban:default"
+      source="1126"
+      destination="1127"
+      handler=".update_250.install_browserlayer"
+      />
 
-    <gs:upgradeStep
-        title="Add new vocabulary for Zoning field"
-        description="Add new vocabulary for Zoning field"
-        source="1127"
-        destination="1128"
-        handler=".update_250.add_new_vocabulary_for_zoning_field"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="Add new vocabulary for Zoning field"
+      description="Add new vocabulary for Zoning field"
+      profile="Products.urban:default"
+      source="1127"
+      destination="1128"
+      handler=".update_250.add_new_vocabulary_for_zoning_field"
+      />
 
-    <gs:upgradeStep
-        title="Update Collection Column"
-        description="Update Collection Column"
-        source="1128"
-        destination="1129"
-        handler=".update_250.update_collection_column"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="Update Collection Column"
+      description="Update Collection Column"
+      profile="Products.urban:default"
+      source="1128"
+      destination="1129"
+      handler=".update_250.update_collection_column"
+      />
 
-    <!--gs:upgradeStep
+  <!--gs:upgradeStep
         title="Add schedule config for env licences 1 and 2"
         description="urban upgrade step"
         source="1118"
@@ -467,347 +524,356 @@
         handler=".update_250.update_env_licences_schedule"
         profile="Products.urban:default" /-->
 
-    <gs:upgradeStep
-        title="Update faceted criterion to hide collection widget category title"
-        description="Update faceted criterion to hide collection widget category title"
-        source="1129"
-        destination="1130"
-        handler=".update_250.update_faceted_collection_widget"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="Update faceted criterion to hide collection widget category title"
+      description="Update faceted criterion to hide collection widget category title"
+      profile="Products.urban:default"
+      source="1129"
+      destination="1130"
+      handler=".update_250.update_faceted_collection_widget"
+      />
 
-    <gs:upgradeStep
-        title="Add Couple to Preliminary Notice"
-        description="Add Couple to Preliminary Notice"
-        source="1130"
-        destination="1131"
-        handler=".update_260.add_couple_to_preliminary_notice"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="Add Couple to Preliminary Notice"
+      description="Add Couple to Preliminary Notice"
+      profile="Products.urban:default"
+      source="1130"
+      destination="1131"
+      handler=".update_260.add_couple_to_preliminary_notice"
+      />
 
-    <gs:upgradeStep
-        title="Remove generation link viewlet"
-        description="Remove generation link viewlet that are not longer usefull"
-        source="1131"
-        destination="1132"
-        handler=".update_260.remove_generation_link_viewlet"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="Remove generation link viewlet"
+      description="Remove generation link viewlet that are not longer usefull"
+      profile="Products.urban:default"
+      source="1131"
+      destination="1132"
+      handler=".update_260.remove_generation_link_viewlet"
+      />
 
-    <gs:upgradeStep
-        title="Fix opinion schedule column"
-        description="Fix opinion schedule column"
-        source="1132"
-        destination="1133"
-        handler=".update_260.fix_opinion_schedule_column"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="Fix opinion schedule column"
+      description="Fix opinion schedule column"
+      profile="Products.urban:default"
+      source="1132"
+      destination="1133"
+      handler=".update_260.fix_opinion_schedule_column"
+      />
 
-    <gs:upgradeStep
-        title="Fix opinion workflow"
-        description="Fix opinion workflow"
-        source="1133"
-        destination="1134"
-        handler=".update_260.fix_opinion_workflow"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="Fix opinion workflow"
+      description="Fix opinion workflow"
+      profile="Products.urban:default"
+      source="1133"
+      destination="1134"
+      handler=".update_260.fix_opinion_workflow"
+      />
 
-    <gs:upgradeStep
-        title="Add streetcode to catalog"
-        description="Add streetcode to catalog"
-        source="1134"
-        destination="1135"
-        handler=".update_260.add_streetcode_to_catalog"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="Add streetcode to catalog"
+      description="Add streetcode to catalog"
+      profile="Products.urban:default"
+      source="1134"
+      destination="1135"
+      handler=".update_260.add_streetcode_to_catalog"
+      />
 
-    <gs:upgradeStep
-        title="Reindex uid in uid catalog"
-        description="Reindex uid in uid catalog"
-        source="1135"
-        destination="1136"
-        handler=".update_260.reindex_uid_catalog"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="Reindex uid in uid catalog"
+      description="Reindex uid in uid catalog"
+      profile="Products.urban:default"
+      source="1135"
+      destination="1136"
+      handler=".update_260.reindex_uid_catalog"
+      />
 
-    <gs:upgradeStep
-        title="Migrate vocabulary terms to include validity date"
-        description="Set validity end date for vocabulary that are deactivate"
-        source="1136"
-        destination="1137"
-        handler=".update_codt_2024.migrate_vocabulary_validity_date"
-        profile="Products.urban:default"
-        />
+  <gs:upgradeStep
+      title="Migrate vocabulary terms to include validity date"
+      description="Set validity end date for vocabulary that are deactivate"
+      profile="Products.urban:default"
+      source="1136"
+      destination="1137"
+      handler=".update_codt_2024.migrate_vocabulary_validity_date"
+      />
 
-    <gs:upgradeStep
-        title="update delais vocabularies and activate prorogation field"
-        description="update delais vocabulary and activate prorogation field"
-        source="1137"
-        destination="1138"
-        handler=".update_260.update_delais_vocabularies_and_activate_prorogation_field"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="update delais vocabularies and activate prorogation field"
+      description="update delais vocabulary and activate prorogation field"
+      profile="Products.urban:default"
+      source="1137"
+      destination="1138"
+      handler=".update_260.update_delais_vocabularies_and_activate_prorogation_field"
+      />
 
-    <gs:upgradeStep
-        title="Migrate vocabulary content"
-        description=""
-        source="1138"
-        destination="1139"
-        handler=".update_codt_2024.migrate_vocabulary_contents"
-        profile="Products.urban:default"
-        />
+  <gs:upgradeStep
+      title="Migrate vocabulary content"
+      description=""
+      profile="Products.urban:default"
+      source="1138"
+      destination="1139"
+      handler=".update_codt_2024.migrate_vocabulary_contents"
+      />
 
-    <gs:upgradeStep
-        title="Sort delay vocabulary values"
-        description=""
-        source="1139"
-        destination="1140"
-        handler=".update_codt_2024.sort_delay_vocabularies"
-        profile="Products.urban:default"
-        />
+  <gs:upgradeStep
+      title="Sort delay vocabulary values"
+      description=""
+      profile="Products.urban:default"
+      source="1139"
+      destination="1140"
+      handler=".update_codt_2024.sort_delay_vocabularies"
+      />
 
-    <gs:upgradeStep
-        title="Add new workflow state"
-        description=""
-        source="1140"
-        destination="1141"
-        handler=".update_codt_2024.add_new_workfow_state"
-        profile="Products.urban:default"
-        />
+  <gs:upgradeStep
+      title="Add new workflow state"
+      description=""
+      profile="Products.urban:default"
+      source="1140"
+      destination="1141"
+      handler=".update_codt_2024.add_new_workfow_state"
+      />
 
-    <gs:upgradeStep
-        title="Add ZACC to folderzones vocabulary"
-        description=""
-        source="1141"
-        destination="1142"
-        handler=".update_codt_2024.add_zacc_to_folderzones_vocabulary"
-        profile="Products.urban:default"
-        />
+  <gs:upgradeStep
+      title="Add ZACC to folderzones vocabulary"
+      description=""
+      profile="Products.urban:default"
+      source="1141"
+      destination="1142"
+      handler=".update_codt_2024.add_zacc_to_folderzones_vocabulary"
+      />
 
-    <gs:upgradeStep
-        title="Add folder categories terms"
-        description=""
-        source="1142"
-        destination="1143"
-        handler=".update_codt_2024.add_folder_categories_terms"
-        profile="Products.urban:default"
-        />
+  <gs:upgradeStep
+      title="Add folder categories terms"
+      description=""
+      profile="Products.urban:default"
+      source="1142"
+      destination="1143"
+      handler=".update_codt_2024.add_folder_categories_terms"
+      />
 
-    <gs:upgradeStep
-        title="Add new index and new filter for validity date"
-        description=""
-        source="1143"
-        destination="1144"
-        handler=".update_codt_2024.add_new_index_and_new_filter"
-        profile="Products.urban:default"
-        />
-      
-    <gs:upgradeStep
-        title="Add frozen workflow state"
-        description=""
-        source="1144"
-        destination="1145"
-        handler=".update_codt_2024.add_frozen_workflow_state"
-        profile="Products.urban:default"
-        />
+  <gs:upgradeStep
+      title="Add new index and new filter for validity date"
+      description=""
+      profile="Products.urban:default"
+      source="1143"
+      destination="1144"
+      handler=".update_codt_2024.add_new_index_and_new_filter"
+      />
 
-    <gs:upgradeStep
-        title="Rename Patrimony certificate"
-        description=""
-        source="1145"
-        destination="1146"
-        handler=".update_270.rename_patrimony_certificate"
-        profile="Products.urban:default"
-        />
+  <gs:upgradeStep
+      title="Add frozen workflow state"
+      description=""
+      profile="Products.urban:default"
+      source="1144"
+      destination="1145"
+      handler=".update_codt_2024.add_frozen_workflow_state"
+      />
 
-    <gs:upgradeStep
-        title="Reindex getValidityDate"
-        description=""
-        source="1146"
-        destination="1147"
-        handler=".update_codt_2024.reindex_getValidityDate"
-        profile="Products.urban:default"
-        />
+  <gs:upgradeStep
+      title="Rename Patrimony certificate"
+      description=""
+      profile="Products.urban:default"
+      source="1145"
+      destination="1146"
+      handler=".update_270.rename_patrimony_certificate"
+      />
+
+  <gs:upgradeStep
+      title="Reindex getValidityDate"
+      description=""
+      profile="Products.urban:default"
+      source="1146"
+      destination="1147"
+      handler=".update_codt_2024.reindex_getValidityDate"
+      />
 
 
-    <gs:upgradeStep
-        title="Fix validity filter title"
-        description=""
-        source="1147"
-        destination="1148"
-        handler=".update_codt_2024.fix_validity_filter_title"
-        profile="Products.urban:default"
-        />
-        
-    <gs:upgradeStep
-        title="Install send mail with attachment action"
-        description=""
-        source="1148"
-        destination="1149"
-        handler=".update_codt_2024.install_send_mail_with_attachement_action"
-        profile="Products.urban:default"
-        />
+  <gs:upgradeStep
+      title="Fix validity filter title"
+      description=""
+      profile="Products.urban:default"
+      source="1147"
+      destination="1148"
+      handler=".update_codt_2024.fix_validity_filter_title"
+      />
 
-    <gs:upgradeStep
-        title="Fix validity filter widget cid collision"
-        description=""
-        source="1149"
-        destination="1150"
-        handler=".update_codt_2024.fix_c13_collision"
-        profile="Products.urban:default"
-        />
-  
-      <gs:upgradeStep
-        title="Add new vocabulary for investigation_radius field"
-        description="Add new vocabulary for investigation_radius field"
-        source="1150"
-        destination="1151"
-        handler=".update_260.add_new_vocabulary_for_investigation_radius_field"
-        profile="Products.urban:default" />
+  <gs:upgradeStep
+      title="Install send mail with attachment action"
+      description=""
+      profile="Products.urban:default"
+      source="1148"
+      destination="1149"
+      handler=".update_codt_2024.install_send_mail_with_attachement_action"
+      />
 
-    <gs:upgradeStep
-        title="Update faceted dashboard"
-        description=""
-        source="1151"
-        destination="1152"
-        handler=".update_260.update_faceted_dashboard"
-        profile="Products.urban:default"
-        />
+  <gs:upgradeStep
+      title="Fix validity filter widget cid collision"
+      description=""
+      profile="Products.urban:default"
+      source="1149"
+      destination="1150"
+      handler=".update_codt_2024.fix_c13_collision"
+      />
 
-    <gs:upgradeStep
-        title="Rename a content rules"
-        description=""
-        source="1152"
-        destination="1153"
-        handler=".update_270.rename_content_rule"
-        profile="Products.urban:default"
-        />
+  <gs:upgradeStep
+      title="Add new vocabulary for investigation_radius field"
+      description="Add new vocabulary for investigation_radius field"
+      profile="Products.urban:default"
+      source="1150"
+      destination="1151"
+      handler=".update_260.add_new_vocabulary_for_investigation_radius_field"
+      />
 
-    <gs:upgradeStep
-        title="Fix supended state licence"
-        description=""
-        source="1153"
-        destination="1154"
-        handler=".update_270.fix_supended_state_licence"
-        profile="Products.urban:default"
-        />
-  
-    <gs:upgradeStep
-        title="Fix config wrong class"
-        description="Fix config wrong class"
-        source="1154"
-        destination="1155"
-        handler=".update_270.fix_config_wrong_class"
-        profile="Products.urban:default"
-        />
+  <gs:upgradeStep
+      title="Update faceted dashboard"
+      description=""
+      profile="Products.urban:default"
+      source="1151"
+      destination="1152"
+      handler=".update_260.update_faceted_dashboard"
+      />
 
-    <gs:upgradeStep
-        title="Add new voc terms for form_composition"
-        description="Add latest new vocabulary terms for form_composition"
-        source="1155"
-        destination="1156"
-        handler=".update_270.add_new_voc_terms_for_form_composition"
-        profile="Products.urban:default"
-        />
+  <gs:upgradeStep
+      title="Rename a content rules"
+      description=""
+      profile="Products.urban:default"
+      source="1152"
+      destination="1153"
+      handler=".update_270.rename_content_rule"
+      />
 
-    <gs:upgradeStep
-        title="Remove permission to create integrated licences"
-        description=""
-        source="1156"
-        destination="1157"
-        handler=".update_270.remove_permission_to_create_integrated_licences"
-        profile="Products.urban:default"
-        />
+  <gs:upgradeStep
+      title="Fix supended state licence"
+      description=""
+      profile="Products.urban:default"
+      source="1153"
+      destination="1154"
+      handler=".update_270.fix_supended_state_licence"
+      />
 
-    <gs:upgradeStep
-        title="Allow corporate tenant in inspections"
-        description=""
-        source="1157"
-        destination="1158"
-        handler=".update_270.allow_corporate_tenant_in_inspections"
-        profile="Products.urban:default"
-        />
+  <gs:upgradeStep
+      title="Fix config wrong class"
+      description="Fix config wrong class"
+      profile="Products.urban:default"
+      source="1154"
+      destination="1155"
+      handler=".update_270.fix_config_wrong_class"
+      />
 
-    <gs:upgradeStep
-        title="Migrate patrimony certificates to their correct object class (instead of misc demand)"
-        description=""
-        source="1158"
-        destination="1159"
-        handler=".update_270.fix_patrimony_certificate_class"
-        profile="Products.urban:default"
-        />
+  <gs:upgradeStep
+      title="Add new voc terms for form_composition"
+      description="Add latest new vocabulary terms for form_composition"
+      profile="Products.urban:default"
+      source="1155"
+      destination="1156"
+      handler=".update_270.add_new_voc_terms_for_form_composition"
+      />
 
-    <gs:upgradeStep
-        title="Fix external decision values (list[str] -> str)"
-        description=""
-        source="1159"
-        destination="1160"
-        handler=".update_270.fix_external_decision_values"
-        profile="Products.urban:default"
-        />
+  <gs:upgradeStep
+      title="Remove permission to create integrated licences"
+      description=""
+      profile="Products.urban:default"
+      source="1156"
+      destination="1157"
+      handler=".update_270.remove_permission_to_create_integrated_licences"
+      />
 
-    <gs:upgradeStep
-        title="Hide patrimony tab newly added in some licence configs"
-        description=""
-        source="1160"
-        destination="1161"
-        handler=".update_270.hide_patrimony_tab_in_licence_config"
-        profile="Products.urban:default"
-        />
+  <gs:upgradeStep
+      title="Allow corporate tenant in inspections"
+      description=""
+      profile="Products.urban:default"
+      source="1157"
+      destination="1158"
+      handler=".update_270.allow_corporate_tenant_in_inspections"
+      />
 
-    <gs:upgradeStep
-        title="Hide environment tab newly added in some licence configs"
-        description=""
-        source="1161"
-        destination="1162"
-        handler=".update_270.hide_tab_in_licence_config"
-        profile="Products.urban:default"
-        />
+  <gs:upgradeStep
+      title="Migrate patrimony certificates to their correct object class (instead of misc demand)"
+      description=""
+      profile="Products.urban:default"
+      source="1158"
+      destination="1159"
+      handler=".update_270.fix_patrimony_certificate_class"
+      />
 
-    <gs:upgradeStep
-        title="Hide habitation tab newly added in some licence configs"
-        description=""
-        source="1162"
-        destination="1163"
-        handler=".update_270.hide_habitation_tab_in_licence_config"
-        profile="Products.urban:default"
-        />
+  <gs:upgradeStep
+      title="Fix external decision values (list[str] -&gt; str)"
+      description=""
+      profile="Products.urban:default"
+      source="1159"
+      destination="1160"
+      handler=".update_270.fix_external_decision_values"
+      />
 
-    <gs:upgradeStep
-        title="Add new registry record"
-        description=""
-        source="1163"
-        destination="1164"
-        handler=".update_270.add_new_registry_profil"
-        profile="Products.urban:default"
-        />
+  <gs:upgradeStep
+      title="Hide patrimony tab newly added in some licence configs"
+      description=""
+      profile="Products.urban:default"
+      source="1160"
+      destination="1161"
+      handler=".update_270.hide_patrimony_tab_in_licence_config"
+      />
 
-    <gs:upgradeStep
-        title="Add new registry for missing capakey"
-        description=""
-        source="1164"
-        destination="1165"
-        handler=".update_270.add_new_registry_for_missing_capakey"
-        profile="Products.urban:default"
-        />
+  <gs:upgradeStep
+      title="Hide environment tab newly added in some licence configs"
+      description=""
+      profile="Products.urban:default"
+      source="1161"
+      destination="1162"
+      handler=".update_270.hide_tab_in_licence_config"
+      />
 
-    <gs:upgradeStep
-        title="Add complementary delay option"
-        description=""
-        source="1165"
-        destination="1166"
-        handler=".update_270.add_additional_delay_option"
-        profile="Products.urban:default"
-        />
+  <gs:upgradeStep
+      title="Hide habitation tab newly added in some licence configs"
+      description=""
+      profile="Products.urban:default"
+      source="1162"
+      destination="1163"
+      handler=".update_270.hide_habitation_tab_in_licence_config"
+      />
 
-    <gs:upgradeStep
-        title="Fix patrimony certificates interface"
-        description=""
-        source="1166"
-        destination="1167"
-        handler=".update_270.fix_patrimony_certificate_class"
-        profile="Products.urban:default"
-        />
+  <gs:upgradeStep
+      title="Add new registry record"
+      description=""
+      profile="Products.urban:default"
+      source="1163"
+      destination="1164"
+      handler=".update_270.add_new_registry_profil"
+      />
 
-     <gs:upgradeStep
-        title="Add housing procedure"
-        description=""
-        source="*"
-        destination="2800"
-        handler=".update_280.add_building_procedure"
-        profile="Products.urban:default"
-        />
+  <gs:upgradeStep
+      title="Add new registry for missing capakey"
+      description=""
+      profile="Products.urban:default"
+      source="1164"
+      destination="1165"
+      handler=".update_270.add_new_registry_for_missing_capakey"
+      />
+
+  <gs:upgradeStep
+      title="Add complementary delay option"
+      description=""
+      profile="Products.urban:default"
+      source="1165"
+      destination="1166"
+      handler=".update_270.add_additional_delay_option"
+      />
+
+  <gs:upgradeStep
+      title="Fix patrimony certificates interface"
+      description=""
+      profile="Products.urban:default"
+      source="1166"
+      destination="1167"
+      handler=".update_270.fix_patrimony_certificate_class"
+      />
+
+  <gs:upgradeStep
+      title="Add housing procedure"
+      description=""
+      profile="Products.urban:default"
+      source="*"
+      destination="2800"
+      handler=".update_280.add_building_procedure"
+      />
 
 </configure>

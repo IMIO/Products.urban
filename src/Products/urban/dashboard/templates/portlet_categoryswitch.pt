@@ -1,25 +1,35 @@
 <dl class="portlet portletCategorySwitch"
+    tal:condition="view/available"
     i18n:domain="urban"
-    tal:condition="view/available">
-    <dt class="portletHeader"
-        tal:define="category view/category">
-        <span class="portletTopLeft"></span>
-        <tal:if condition="python: category == 'CWATUPE'">
-        <a href="#"
-           class="tile"
-           id="switch-category"
-           tal:attributes="href string: ${view/url}?category=CODT#c11=codt&c2=${view/collection_uid}"
-           i18n:translate="">
-           To CODT procedures</a>
-        </tal:if>
-        <tal:if condition="not: python: category == 'CWATUPE'">
-        <a href="#"
-           class="tile"
-           id="switch-category"
-           tal:attributes="href string: ${view/url}/urban?category=CWATUPE#c11=cwatupe&c2=${view/collection_uid}"
-           i18n:translate="">
-           To CWATUPE procedures</a>
-        </tal:if>
-        <span class="portletTopRight"></span>
-    </dt>
+>
+  <dt class="portletHeader"
+      tal:define="
+        category view/category;
+      "
+  >
+    <span class="portletTopLeft"></span>
+    <tal:if condition="python: category == 'CWATUPE'">
+      <a class="tile"
+         id="switch-category"
+         href="#"
+         tal:attributes="
+           href string: ${view/url}?category=CODT#c11=codt&c2=${view/collection_uid};
+         "
+         i18n:translate=""
+      >
+        To CODT procedures</a>
+    </tal:if>
+    <tal:if condition="not: python: category == 'CWATUPE'">
+      <a class="tile"
+         id="switch-category"
+         href="#"
+         tal:attributes="
+           href string: ${view/url}/urban?category=CWATUPE#c11=cwatupe&c2=${view/collection_uid};
+         "
+         i18n:translate=""
+      >
+        To CWATUPE procedures</a>
+    </tal:if>
+    <span class="portletTopRight"></span>
+  </dt>
 </dl>

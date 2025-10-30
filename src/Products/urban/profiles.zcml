@@ -1,9 +1,13 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
-    i18n_domain="urban">
+    i18n_domain="urban"
+    >
 
-  <include package="Products.GenericSetup" file="meta.zcml" />
+  <include
+      package="Products.GenericSetup"
+      file="meta.zcml"
+      />
 
   <!-- ##code-section profiles.zcml-top #fill in your manual code here -->
   <!-- ##/code-section profiles.zcml-top -->
@@ -11,84 +15,84 @@
   <genericsetup:registerProfile
       name="preinstall"
       title="urban-preinstall"
-      directory="profiles/preinstall"
       description="Base preinstall profile for urban."
       provides="Products.GenericSetup.interfaces.EXTENSION"
+      directory="profiles/preinstall"
       />
 
   <genericsetup:registerProfile
       name="default"
       title="urban"
-      directory="profiles/default"
       description="Extension profile for urban."
       provides="Products.GenericSetup.interfaces.EXTENSION"
+      directory="profiles/default"
       />
 
   <genericsetup:registerProfile
       name="prod"
       title="urban-prod"
-      directory="profiles/prod"
       description="Production extension profile for urban."
       provides="Products.GenericSetup.interfaces.EXTENSION"
+      directory="profiles/prod"
       />
-  
+
   <!-- ##code-section profiles.zcml-bottom #fill in your manual code here -->
   <genericsetup:registerProfile
       name="extra"
       title="urban-extra"
-      directory="profiles/extra"
       description="Full config profile for urban."
       provides="Products.GenericSetup.interfaces.EXTENSION"
-  />
+      directory="profiles/extra"
+      />
 
   <genericsetup:registerProfile
       name="new_install"
       title="urban-new-install"
-      directory="profiles/new_install"
       description="New install profile for for urban."
       provides="Products.GenericSetup.interfaces.EXTENSION"
-  />
+      directory="profiles/new_install"
+      />
 
   <genericsetup:registerProfile
       name="migrations"
       title="urban-migrations"
-      directory="profiles/migrations"
       description="Migrations profile for urban."
       provides="Products.GenericSetup.interfaces.EXTENSION"
       for="Products.urban.interfaces.IUrbanTool"
-  />
+      directory="profiles/migrations"
+      />
 
   <genericsetup:registerProfile
       name="demo"
       title="urban-demo"
-      directory="profiles/demo"
       description="Demo Extension profile for urban."
       provides="Products.GenericSetup.interfaces.EXTENSION"
-  />
+      directory="profiles/demo"
+      />
 
   <genericsetup:registerProfile
       name="pmwsclient"
       title="urban-pm-wsclient"
-      directory="profiles/pm-wsclient"
       description="Profile for pm.wsclient in urban"
       provides="Products.GenericSetup.interfaces.EXTENSION"
-  />
+      directory="profiles/pm-wsclient"
+      />
 
   <genericsetup:registerProfile
       name="fixes"
       title="urban-fixes"
-      directory="profiles/fixes"
       description="Profile for fixes in urban"
       provides="Products.GenericSetup.interfaces.EXTENSION"
-  />
+      directory="profiles/fixes"
+      />
 
   <genericsetup:registerProfile
       name="urbantypes"
       title="urban-types"
-      directory="profiles/urban_types"
       description="Profile for urban content types in urban"
       provides="Products.GenericSetup.interfaces.EXTENSION"
-  />
+      directory="profiles/urban_types"
+      />
   <!-- ##/code-section profiles.zcml-bottom -->
 
 </configure>

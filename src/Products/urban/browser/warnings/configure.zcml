@@ -2,20 +2,21 @@
     xmlns="http://namespaces.zope.org/zope"
     xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:plone="http://namespaces.plone.org/plone"
-    i18n_domain="urban">
+    i18n_domain="urban"
+    >
 
-    <adapter
-        for="Products.urban.interfaces.IGenericLicence"
-        provides="Products.urban.interfaces.IUrbanWarningCondition"
-        factory=".conditions.ParcelsWarning"
-        name="urban.warnings.define_parcels"
-    />
+  <adapter
+      factory=".conditions.ParcelsWarning"
+      provides="Products.urban.interfaces.IUrbanWarningCondition"
+      for="Products.urban.interfaces.IGenericLicence"
+      name="urban.warnings.define_parcels"
+      />
 
-    <adapter
-        for="Products.urban.interfaces.IGenericLicence"
-        provides="Products.urban.interfaces.IUrbanWarningCondition"
-        factory=".conditions.BoundTicketSettlementEventDone"
-        name="urban.warnings.bound_ticket_settlement"
-    />
+  <adapter
+      factory=".conditions.BoundTicketSettlementEventDone"
+      provides="Products.urban.interfaces.IUrbanWarningCondition"
+      for="Products.urban.interfaces.IGenericLicence"
+      name="urban.warnings.bound_ticket_settlement"
+      />
 
 </configure>

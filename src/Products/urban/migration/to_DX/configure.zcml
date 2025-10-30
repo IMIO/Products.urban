@@ -2,15 +2,15 @@
     xmlns="http://namespaces.zope.org/zope"
     xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:plone="http://namespaces.plone.org/plone"
-    i18n_domain="urban">
+    i18n_domain="urban"
+    >
 
-    <browser:page
-        for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-        name="portal_type_infos"
-        class=".utilsview.PortalTypesInfosView"
-        permission="zope2.View"
-    />
+  <browser:page
+      name="portal_type_infos"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      class=".utilsview.PortalTypesInfosView"
+      permission="zope2.View"
+      />
 
 </configure>
-
 

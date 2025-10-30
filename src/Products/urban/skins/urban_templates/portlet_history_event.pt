@@ -1,39 +1,53 @@
-<html xmlns:tal="http://xml.zope.org/namespaces/tal"
-      xmlns:metal="http://xml.zope.org/namespaces/metal"
-      i18n:domain="urban">
-<body>
+<html xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      i18n:domain="urban"
+>
+  <body>
 
-<div metal:define-macro="portlet">
+    <div metal:define-macro="portlet">
 
-<metal:block metal:use-macro="here/global_defines/macros/defines" />
+      <metal:block metal:use-macro="here/global_defines/macros/defines" />
 
-<dl class="portlet">
+      <dl class="portlet">
 
-    <!-- Portlet title -->
-    <dt class="portletHeader">
-    <span class="portletTopLeft"></span>
-        <div>Event history</div>
-    <span class="portletTopRight"></span>
-    </dt>
+        <!-- Portlet title -->
+        <dt class="portletHeader">
+          <span class="portletTopLeft"></span>
+          <div>Event history</div>
+          <span class="portletTopRight"></span>
+        </dt>
 
-   <div tal:define="tool python: getattr(context, 'portal_urban');
-                    searchEngine python: getattr(tool.topics, 'searchurbanevents');
-                    topicContents python: searchEngine.queryCatalog(batch=True, context=context)">
+        <div tal:define="
+               tool python: getattr(context, 'portal_urban');
+               searchEngine python: getattr(tool.topics, 'searchurbanevents');
+               topicContents python: searchEngine.queryCatalog(batch=True, context=context);
+             ">
 
-    <tal:block repeat="topic topicContents">
-    <dd class="portletItem" 
-        tal:define="oddrow repeat/topic/odd;"
-        tal:attributes="class python:oddrow and 'portletItem even' or 'portletItem odd'">
-        <span i18n:translate="" 
-              tal:define="colorEvent python:(topic.review_state=='closed') and 'green' or 'black';
-                          colorEvent python:(DateTime()>topic.getEndDate) and 'red' or colorEvent" 
-              tal:attributes="style string:color:$colorEvent" tal:content="topic/Title">Topic title</span>
-    </dd>
-    </tal:block>
+          <tal:block repeat="topic topicContents">
+            <dd class="portletItem"
+                tal:define="
+                  oddrow repeat/topic/odd;
+                "
+                tal:attributes="
+                  class python:oddrow and 'portletItem even' or 'portletItem odd';
+                "
+            >
+              <span tal:define="
+                      colorEvent python:(topic.review_state=='closed') and 'green' or 'black';
+                      colorEvent python:(DateTime()>topic.getEndDate) and 'red' or colorEvent;
+                    "
+                    tal:content="topic/Title"
+                    tal:attributes="
+                      style string:color:$colorEvent;
+                    "
+                    i18n:translate=""
+              >Topic title</span>
+            </dd>
+          </tal:block>
+        </div>
+
+      </dl>
+
     </div>
-
-</dl>
-
-</div>
-</body>
+  </body>
 </html>

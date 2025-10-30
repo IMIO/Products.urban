@@ -1,281 +1,419 @@
-<configure xmlns="http://namespaces.zope.org/zope"
-           xmlns:five="http://namespaces.zope.org/five"
-           xmlns:i18n="http://namespaces.zope.org/i18n"
-           i18n_domain="urban">
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    i18n_domain="urban"
+    >
 
-  <subscriber for="..interfaces.IUrbanEventOpinionRequest
-                   zope.lifecycleevent.interfaces.IObjectCreatedEvent"
-              handler=".opinionRequestEvents.setDefaultLinkedInquiry" />
+  <subscriber
+      for="..interfaces.IUrbanEventOpinionRequest
+           zope.lifecycleevent.interfaces.IObjectCreatedEvent"
+      handler=".opinionRequestEvents.setDefaultLinkedInquiry"
+      />
 
-  <subscriber for="..interfaces.IRecipientCadastre
-                   zope.lifecycleevent.interfaces.IObjectRemovedEvent"
-              handler=".inquiryEvents.delete_recipient_cadastre" />
+  <subscriber
+      for="..interfaces.IRecipientCadastre
+           zope.lifecycleevent.interfaces.IObjectRemovedEvent"
+      handler=".inquiryEvents.delete_recipient_cadastre"
+      />
 
-  <subscriber for="..interfaces.IContact
-                   zope.lifecycleevent.interfaces.IObjectCreatedEvent"
-              handler=".contactEvents.setInterface" />
+  <subscriber
+      for="..interfaces.IContact
+           zope.lifecycleevent.interfaces.IObjectCreatedEvent"
+      handler=".contactEvents.setInterface"
+      />
 
-  <subscriber for="..interfaces.IContact
-                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-              handler=".contactEvents.updateLicenceTitle" />
+  <subscriber
+      for="..interfaces.IContact
+           zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+      handler=".contactEvents.updateLicenceTitle"
+      />
 
-  <subscriber for="..interfaces.IContact
-                   zope.container.interfaces.IObjectRemovedEvent"
-              handler=".contactEvents.updateLicenceTitle" />
+  <subscriber
+      for="..interfaces.IContact
+           zope.container.interfaces.IObjectRemovedEvent"
+      handler=".contactEvents.updateLicenceTitle"
+      />
 
-  <subscriber for="..interfaces.IContact
-                   Products.DCWorkflow.interfaces.IAfterTransitionEvent"
-              handler=".contactEvents.updateLicenceTitle" />
+  <subscriber
+      for="..interfaces.IContact
+           Products.DCWorkflow.interfaces.IAfterTransitionEvent"
+      handler=".contactEvents.updateLicenceTitle"
+      />
 
-  <subscriber for="..interfaces.IContact
-                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-              handler=".contactEvents.sortByAlphabeticalOrder" />
+  <subscriber
+      for="..interfaces.IContact
+           zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+      handler=".contactEvents.sortByAlphabeticalOrder"
+      />
 
-  <subscriber for="..interfaces.IInquiry
-                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-              handler=".inquiryEvents.notifyLicence"/>
+  <subscriber
+      for="..interfaces.IInquiry
+           zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+      handler=".inquiryEvents.notifyLicence"
+      />
 
-  <subscriber for="..interfaces.IInquiry
-                   zope.lifecycleevent.interfaces.IObjectCreatedEvent"
-              handler=".inquiryEvents.setDefaultValuesEvent"/>
+  <subscriber
+      for="..interfaces.IInquiry
+           zope.lifecycleevent.interfaces.IObjectCreatedEvent"
+      handler=".inquiryEvents.setDefaultValuesEvent"
+      />
 
-  <subscriber for="..interfaces.IInquiry
-                   OFS.interfaces.IObjectWillBeRemovedEvent"
-              handler=".inquiryEvents.beforeDelete" />
+  <subscriber
+      for="..interfaces.IInquiry
+           OFS.interfaces.IObjectWillBeRemovedEvent"
+      handler=".inquiryEvents.beforeDelete"
+      />
 
-  <subscriber for="..interfaces.IInquiry
-                   zope.container.interfaces.IObjectRemovedEvent"
-              handler=".inquiryEvents.afterDelete" />
+  <subscriber
+      for="..interfaces.IInquiry
+           zope.container.interfaces.IObjectRemovedEvent"
+      handler=".inquiryEvents.afterDelete"
+      />
 
-  <subscriber for="..interfaces.IInquiry
-                   zope.lifecycleevent.interfaces.IObjectCreatedEvent"
-              handler=".inquiryEvents.setGeneratedTitle" />
+  <subscriber
+      for="..interfaces.IInquiry
+           zope.lifecycleevent.interfaces.IObjectCreatedEvent"
+      handler=".inquiryEvents.setGeneratedTitle"
+      />
 
-  <subscriber for="..interfaces.IGenericLicence
-                   zope.lifecycleevent.interfaces.IObjectCreatedEvent"
-              handler=".licenceEvents.setDefaultValuesEvent"/>
+  <subscriber
+      for="..interfaces.IGenericLicence
+           zope.lifecycleevent.interfaces.IObjectCreatedEvent"
+      handler=".licenceEvents.setDefaultValuesEvent"
+      />
 
-  <subscriber for="..interfaces.IGenericLicence
-                   Products.Archetypes.interfaces.IObjectInitializedEvent"
-              handler=".licenceEvents.postCreationActions"/>
+  <subscriber
+      for="..interfaces.IGenericLicence
+           Products.Archetypes.interfaces.IObjectInitializedEvent"
+      handler=".licenceEvents.postCreationActions"
+      />
 
-  <subscriber for="..interfaces.ICODT_UniqueLicence
-                   Products.Archetypes.interfaces.IObjectInitializedEvent"
-              handler=".codt_uniquelicence_events.UniqueLicencePostCreationActions"/>
+  <subscriber
+      for="..interfaces.ICODT_UniqueLicence
+           Products.Archetypes.interfaces.IObjectInitializedEvent"
+      handler=".codt_uniquelicence_events.UniqueLicencePostCreationActions"
+      />
 
-  <subscriber for="..interfaces.IGenericLicence
-                   zope.lifecycleevent.IObjectModifiedEvent"
-              handler=".licenceEvents.updateLicenceTitle"/>
+  <subscriber
+      for="..interfaces.IGenericLicence
+           zope.lifecycleevent.IObjectModifiedEvent"
+      handler=".licenceEvents.updateLicenceTitle"
+      />
 
-  <subscriber for="..interfaces.IGenericLicence
-                   zope.lifecycleevent.IObjectModifiedEvent"
-              handler=".licenceEvents.updateTaskIndexes"/>
+  <subscriber
+      for="..interfaces.IGenericLicence
+           zope.lifecycleevent.IObjectModifiedEvent"
+      handler=".licenceEvents.updateTaskIndexes"
+      />
 
-  <subscriber for="..interfaces.IGenericLicence
-                   zope.lifecycleevent.IObjectModifiedEvent"
-              handler=".licenceEvents.updateBoundLicences"/>
+  <subscriber
+      for="..interfaces.IGenericLicence
+           zope.lifecycleevent.IObjectModifiedEvent"
+      handler=".licenceEvents.updateBoundLicences"
+      />
 
-  <subscriber for="..interfaces.IGenericLicence
-                   zope.lifecycleevent.IObjectModifiedEvent"
-              handler=".licenceEvents.updateEventsFoldermanager"/>
+  <subscriber
+      for="..interfaces.IGenericLicence
+           zope.lifecycleevent.IObjectModifiedEvent"
+      handler=".licenceEvents.updateEventsFoldermanager"
+      />
 
-  <subscriber for="..interfaces.IGenericLicence
-                   zope.lifecycleevent.IObjectCreatedEvent"
-              handler=".licenceEvents.setMarkerInterface"/>
+  <subscriber
+      for="..interfaces.IGenericLicence
+           zope.lifecycleevent.IObjectCreatedEvent"
+      handler=".licenceEvents.setMarkerInterface"
+      />
 
-  <subscriber for="..interfaces.IGenericLicence
-                   Products.DCWorkflow.interfaces.IAfterTransitionEvent"
-              handler=".licenceEvents.reindex_attachments_permissions" />
+  <subscriber
+      for="..interfaces.IGenericLicence
+           Products.DCWorkflow.interfaces.IAfterTransitionEvent"
+      handler=".licenceEvents.reindex_attachments_permissions"
+      />
 
-  <subscriber for="..interfaces.IGenericLicence
-                   Products.DCWorkflow.interfaces.IAfterTransitionEvent"
-              handler=".licenceEvents.close_all_tasks" />
+  <subscriber
+      for="..interfaces.IGenericLicence
+           Products.DCWorkflow.interfaces.IAfterTransitionEvent"
+      handler=".licenceEvents.close_all_tasks"
+      />
 
-  <subscriber for="..interfaces.IGenericLicence
-                   Products.DCWorkflow.interfaces.IAfterTransitionEvent"
-              handler=".licenceEvents.close_all_events" />
+  <subscriber
+      for="..interfaces.IGenericLicence
+           Products.DCWorkflow.interfaces.IAfterTransitionEvent"
+      handler=".licenceEvents.close_all_events"
+      />
 
-  <subscriber for="..interfaces.IUrbanEvent
-                   Products.DCWorkflow.interfaces.IAfterTransitionEvent"
-              handler=".licenceEvents.reindex_attachments_permissions" />
+  <subscriber
+      for="..interfaces.IUrbanEvent
+           Products.DCWorkflow.interfaces.IAfterTransitionEvent"
+      handler=".licenceEvents.reindex_attachments_permissions"
+      />
 
-  <subscriber for="..interfaces.IUrbanEventOpinionRequest
-                   Products.DCWorkflow.interfaces.IAfterTransitionEvent"
-              handler=".licenceEvents.reindex_licence_permissions" />
+  <subscriber
+      for="..interfaces.IUrbanEventOpinionRequest
+           Products.DCWorkflow.interfaces.IAfterTransitionEvent"
+      handler=".licenceEvents.reindex_licence_permissions"
+      />
 
-  <subscriber for="..interfaces.IUrbanEvent
-                  zope.lifecycleevent.interfaces.IObjectCreatedEvent"
-              handler=".urbanEventEvents.setDefaultValuesEvent"/>
+  <subscriber
+      for="..interfaces.IUrbanEvent
+           zope.lifecycleevent.interfaces.IObjectCreatedEvent"
+      handler=".urbanEventEvents.setDefaultValuesEvent"
+      />
 
-  <subscriber for="..interfaces.IUrbanEvent
-                   Products.Archetypes.interfaces.IObjectInitializedEvent"
-              handler=".urbanEventEvents.setEventMarkerInterfaces"/>
+  <subscriber
+      for="..interfaces.IUrbanEvent
+           Products.Archetypes.interfaces.IObjectInitializedEvent"
+      handler=".urbanEventEvents.setEventMarkerInterfaces"
+      />
 
-  <subscriber for="..interfaces.IUrbanEvent
-                   Products.Archetypes.interfaces.IObjectInitializedEvent"
-              handler=".urbanEventEvents.setCreationDate"/>
+  <subscriber
+      for="..interfaces.IUrbanEvent
+           Products.Archetypes.interfaces.IObjectInitializedEvent"
+      handler=".urbanEventEvents.setCreationDate"
+      />
 
-  <subscriber for="..interfaces.IUrbanEvent
-                   Products.Archetypes.interfaces.IObjectInitializedEvent"
-              handler=".urbanEventEvents.generateSingletonDocument"/>
+  <subscriber
+      for="..interfaces.IUrbanEvent
+           Products.Archetypes.interfaces.IObjectInitializedEvent"
+      handler=".urbanEventEvents.generateSingletonDocument"
+      />
 
-  <subscriber for="..interfaces.IUrbanEvent
-                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-              handler=".urbanEventEvents.updateKeyEvent"/>
+  <subscriber
+      for="..interfaces.IUrbanEvent
+           zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+      handler=".urbanEventEvents.updateKeyEvent"
+      />
 
-  <subscriber for="..interfaces.IUrbanEvent
-                   zope.lifecycleevent.interfaces.IObjectRemovedEvent"
-              handler=".urbanEventEvents.updateKeyEvent" />
+  <subscriber
+      for="..interfaces.IUrbanEvent
+           zope.lifecycleevent.interfaces.IObjectRemovedEvent"
+      handler=".urbanEventEvents.updateKeyEvent"
+      />
 
-  <subscriber for="..interfaces.IUrbanEvent
-                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-              handler=".urbanEventEvents.updateDecisionDate" />
+  <subscriber
+      for="..interfaces.IUrbanEvent
+           zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+      handler=".urbanEventEvents.updateDecisionDate"
+      />
 
-  <subscriber for="..interfaces.IUrbanEvent
-                   Products.DCWorkflow.interfaces.ITransitionEvent"
-              handler=".urbanEventEvents.updateDecisionDate" />
+  <subscriber
+      for="..interfaces.IUrbanEvent
+           Products.DCWorkflow.interfaces.ITransitionEvent"
+      handler=".urbanEventEvents.updateDecisionDate"
+      />
 
-  <subscriber for="..interfaces.IUrbanEvent
-                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-              handler=".urbanEventEvents.updateValidityDate" />
+  <subscriber
+      for="..interfaces.IUrbanEvent
+           zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+      handler=".urbanEventEvents.updateValidityDate"
+      />
 
-  <subscriber for="..interfaces.IUrbanEventInquiry
-                   zope.lifecycleevent.interfaces.IObjectCreatedEvent"
-              handler=".urbanEventInquiryEvents.setLinkedInquiry" />
+  <subscriber
+      for="..interfaces.IUrbanEventInquiry
+           zope.lifecycleevent.interfaces.IObjectCreatedEvent"
+      handler=".urbanEventInquiryEvents.setLinkedInquiry"
+      />
 
-  <subscriber for="..interfaces.IUrbanEventAnnouncement
-                   zope.lifecycleevent.interfaces.IObjectCreatedEvent"
-              handler=".urbanEventInquiryEvents.setLinkedAnnouncement" />
+  <subscriber
+      for="..interfaces.IUrbanEventAnnouncement
+           zope.lifecycleevent.interfaces.IObjectCreatedEvent"
+      handler=".urbanEventInquiryEvents.setLinkedAnnouncement"
+      />
 
-  <subscriber for="..interfaces.IUrbanEventFollowUp
-                   zope.lifecycleevent.interfaces.IObjectCreatedEvent"
-              handler=".followupEvents.setLinkedReport" />
+  <subscriber
+      for="..interfaces.IUrbanEventFollowUp
+           zope.lifecycleevent.interfaces.IObjectCreatedEvent"
+      handler=".followupEvents.setLinkedReport"
+      />
 
   <!-- [DX] TO DELETE once all UrbanEventType subclasses are migrated to DX [DX] -->
-  <subscriber for="..interfaces.IUrbanEventType
-                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-              handler=".urbanEventTypesEvents.updateKeyEvent" />
+  <subscriber
+      for="..interfaces.IUrbanEventType
+           zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+      handler=".urbanEventTypesEvents.updateKeyEvent"
+      />
 
-  <subscriber for="..interfaces.IUrbanEventType
-                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-              handler=".urbanEventTypesEvents.updateEventType" />
+  <subscriber
+      for="..interfaces.IUrbanEventType
+           zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+      handler=".urbanEventTypesEvents.updateEventType"
+      />
 
-  <subscriber for="..interfaces.IUrbanEventType
-                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-              handler=".urbanEventTypesEvents.forceEventTypeCollege" />
+  <subscriber
+      for="..interfaces.IUrbanEventType
+           zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+      handler=".urbanEventTypesEvents.forceEventTypeCollege"
+      />
   <!-- [DX] TO DELETE once all UrbanEventType subclasses are migrated to DX [DX] -->
 
-  <subscriber for="imio.urban.core.contents.eventconfig.IEventConfig
-                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-              handler=".urbanEventTypesEvents.updateKeyEvent" />
+  <subscriber
+      for="imio.urban.core.contents.eventconfig.IEventConfig
+           zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+      handler=".urbanEventTypesEvents.updateKeyEvent"
+      />
 
-  <subscriber for="imio.urban.core.contents.eventconfig.IEventConfig
-                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-              handler=".urbanEventTypesEvents.updateEventType" />
+  <subscriber
+      for="imio.urban.core.contents.eventconfig.IEventConfig
+           zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+      handler=".urbanEventTypesEvents.updateEventType"
+      />
 
-  <subscriber for="imio.urban.core.contents.eventconfig.IEventConfig
-                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-              handler=".urbanEventTypesEvents.forceEventTypeCollege" />
+  <subscriber
+      for="imio.urban.core.contents.eventconfig.IEventConfig
+           zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+      handler=".urbanEventTypesEvents.forceEventTypeCollege"
+      />
 
-  <subscriber for="..interfaces.IEnvironmentRubricTerm
-                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-              handler=".rubricTermEvents.updateTitle" />
+  <subscriber
+      for="..interfaces.IEnvironmentRubricTerm
+           zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+      handler=".rubricTermEvents.updateTitle"
+      />
 
-  <subscriber for="..interfaces.IEnvironmentRubricTerm
-                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-              handler=".rubricTermEvents.updateIdAndSort" />
+  <subscriber
+      for="..interfaces.IEnvironmentRubricTerm
+           zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+      handler=".rubricTermEvents.updateIdAndSort"
+      />
 
-  <subscriber for="..interfaces.IEnvironmentBase
-                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-              handler=".envclassEvents.update_history"/>
+  <subscriber
+      for="..interfaces.IEnvironmentBase
+           zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+      handler=".envclassEvents.update_history"
+      />
 
-  <subscriber for="..interfaces.IUniqueLicence
-                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-              handler=".envclassEvents.update_history"/>
+  <subscriber
+      for="..interfaces.IUniqueLicence
+           zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+      handler=".envclassEvents.update_history"
+      />
 
-  <subscriber for="..interfaces.IEnvironmentBase
-                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-              handler=".environmentLicenceEvents.setExploitationConditions"/>
+  <subscriber
+      for="..interfaces.IEnvironmentBase
+           zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+      handler=".environmentLicenceEvents.setExploitationConditions"
+      />
 
-  <subscriber for="..interfaces.IPcaTerm
-                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-              handler=".PcaTermEvents.updateTitle" />
+  <subscriber
+      for="..interfaces.IPcaTerm
+           zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+      handler=".PcaTermEvents.updateTitle"
+      />
 
-  <subscriber for="..interfaces.IUrbanEvent
-                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-              handler=".urbanEventEvents.notifyLicence" />
+  <subscriber
+      for="..interfaces.IUrbanEvent
+           zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+      handler=".urbanEventEvents.notifyLicence"
+      />
 
-  <subscriber for="..interfaces.IUrbanEvent
-                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-              handler=".urbanEventEvents.updateTaskIndexes" />
+  <subscriber
+      for="..interfaces.IUrbanEvent
+           zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+      handler=".urbanEventEvents.updateTaskIndexes"
+      />
 
-  <subscriber for="..interfaces.IUrbanEvent
-                   Products.DCWorkflow.interfaces.IAfterTransitionEvent"
-              handler=".urbanEventEvents.notifyLicence" />
+  <subscriber
+      for="..interfaces.IUrbanEvent
+           Products.DCWorkflow.interfaces.IAfterTransitionEvent"
+      handler=".urbanEventEvents.notifyLicence"
+      />
 
-  <subscriber for="..interfaces.IExplosivesPossession
-                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-              handler=".explosive_possessions.update_reference" />
+  <subscriber
+      for="..interfaces.IExplosivesPossession
+           zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+      handler=".explosive_possessions.update_reference"
+      />
 
-  <subscriber for="..interfaces.IRoadDecree
-                   Products.Archetypes.interfaces.IObjectInitializedEvent"
-              handler=".roaddecreeEvents.copy_bound_licence_inquiry_fields" />
+  <subscriber
+      for="..interfaces.IRoadDecree
+           Products.Archetypes.interfaces.IObjectInitializedEvent"
+      handler=".roaddecreeEvents.copy_bound_licence_inquiry_fields"
+      />
 
-  <subscriber for="..interfaces.IRoadDecree
-                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-              handler=".roaddecreeEvents.setRoadDecreeBoundLicence" />
+  <subscriber
+      for="..interfaces.IRoadDecree
+           zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+      handler=".roaddecreeEvents.setRoadDecreeBoundLicence"
+      />
 
-  <subscriber for="..interfaces.IRoadDecree
-                   zope.container.interfaces.IObjectRemovedEvent"
-              handler=".roaddecreeEvents.clearBoundLicences" />
+  <subscriber
+      for="..interfaces.IRoadDecree
+           zope.container.interfaces.IObjectRemovedEvent"
+      handler=".roaddecreeEvents.clearBoundLicences"
+      />
 
-  <subscriber for="..interfaces.IInspection
-                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-              handler=".inspectionEvents.setInspectionBoundLicence" />
+  <subscriber
+      for="..interfaces.IInspection
+           zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+      handler=".inspectionEvents.setInspectionBoundLicence"
+      />
 
-  <subscriber for="..interfaces.ITicket
-                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-              handler=".ticketEvents.setTicketBoundInspection" />
+  <subscriber
+      for="..interfaces.ITicket
+           zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+      handler=".ticketEvents.setTicketBoundInspection"
+      />
 
-  <subscriber for="..interfaces.ITicket
-                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-              handler=".ticketEvents.setTicketBoundLicence" />
+  <subscriber
+      for="..interfaces.ITicket
+           zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+      handler=".ticketEvents.setTicketBoundLicence"
+      />
 
-  <subscriber for="..interfaces.ITicket
-                   Products.DCWorkflow.interfaces.IAfterTransitionEvent"
-              handler=".ticketEvents.notifyBoundInspections" />
+  <subscriber
+      for="..interfaces.ITicket
+           Products.DCWorkflow.interfaces.IAfterTransitionEvent"
+      handler=".ticketEvents.notifyBoundInspections"
+      />
 
   <!-- do this to update schedule tasks when sending a college event to PM -->
-  <subscriber for="..interfaces.IUrbanEvent
-                   imio.pm.wsclient.interfaces.ISentToPMEvent"
-              handler=".urbanEventEvents.notifyLicence" />
+  <subscriber
+      for="..interfaces.IUrbanEvent
+           imio.pm.wsclient.interfaces.ISentToPMEvent"
+      handler=".urbanEventEvents.notifyLicence"
+      />
 
-  <subscriber for="imio.dashboard.interfaces.IDashboardCollection
-                   zope.lifecycleevent.interfaces.IObjectCreatedEvent"
-              handler=".dashboard_collection.set_dashboard_columns" />
+  <subscriber
+      for="imio.dashboard.interfaces.IDashboardCollection
+           zope.lifecycleevent.interfaces.IObjectCreatedEvent"
+      handler=".dashboard_collection.set_dashboard_columns"
+      />
 
-  <subscriber for="..interfaces.IUrbanTool
-                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-              handler=".configuration_events.activate_optional_fields" />
+  <subscriber
+      for="..interfaces.IUrbanTool
+           zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+      handler=".configuration_events.activate_optional_fields"
+      />
 
-  <subscriber for="..interfaces.IUrbanConfigurationValue
-                   Products.DCWorkflow.interfaces.IAfterTransitionEvent"
-              handler=".configuration_events.update_vocabulary_term_cache" />
+  <subscriber
+      for="..interfaces.IUrbanConfigurationValue
+           Products.DCWorkflow.interfaces.IAfterTransitionEvent"
+      handler=".configuration_events.update_vocabulary_term_cache"
+      />
 
-  <subscriber for="..interfaces.IUrbanConfigurationValue
-                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-              handler=".configuration_events.update_vocabulary_term_cache" />
+  <subscriber
+      for="..interfaces.IUrbanConfigurationValue
+           zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+      handler=".configuration_events.update_vocabulary_term_cache"
+      />
 
-  <subscriber for="..interfaces.IUrbanConfigurationFolder
-                   zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-              handler=".configuration_events.update_vocabulary_folder_cache" />
+  <subscriber
+      for="..interfaces.IUrbanConfigurationFolder
+           zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+      handler=".configuration_events.update_vocabulary_folder_cache"
+      />
 
-  <subscriber for="..interfaces.IStreet
-                   OFS.interfaces.IObjectWillBeRemovedEvent"
-              handler=".configuration_events.before_street_delete" />
+  <subscriber
+      for="..interfaces.IStreet
+           OFS.interfaces.IObjectWillBeRemovedEvent"
+      handler=".configuration_events.before_street_delete"
+      />
 
-  <subscriber for="..interfaces.IFolderManager
-                   OFS.interfaces.IObjectWillBeMovedEvent"
-              handler=".configuration_events.folder_manager_object_will_be_moved" />
+  <subscriber
+      for="..interfaces.IFolderManager
+           OFS.interfaces.IObjectWillBeMovedEvent"
+      handler=".configuration_events.folder_manager_object_will_be_moved"
+      />
 
 </configure>

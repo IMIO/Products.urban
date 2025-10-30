@@ -1,114 +1,115 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:plone="http://namespaces.plone.org/plone"
-    i18n_domain="urban">
+    i18n_domain="urban"
+    >
 
   <utility
-    provides="zope.schema.interfaces.IVocabularyFactory"
-    component=".vocabularies.folderManagersVocabularyFactory"
-    name="urban.folder_managers"
-  />
+      provides="zope.schema.interfaces.IVocabularyFactory"
+      name="urban.folder_managers"
+      component=".vocabularies.folderManagersVocabularyFactory"
+      />
 
   <utility
-    factory=".vocabularies.LicenceStateVocabularyFactory"
-    name="urban.licence_state"
-    provides="zope.schema.interfaces.IVocabularyFactory"
-  />
+      factory=".vocabularies.LicenceStateVocabularyFactory"
+      provides="zope.schema.interfaces.IVocabularyFactory"
+      name="urban.licence_state"
+      />
 
   <utility
-    factory=".vocabularies.UrbanRootLicenceStateVocabularyFactory"
-    name="urban.rootfolder_licence_state"
-    provides="zope.schema.interfaces.IVocabularyFactory"
-  />
+      factory=".vocabularies.UrbanRootLicenceStateVocabularyFactory"
+      provides="zope.schema.interfaces.IVocabularyFactory"
+      name="urban.rootfolder_licence_state"
+      />
 
   <utility
-    component=".vocabularies.ProcedureCategoryVocabularyFactory"
-    name="urban.vocabularies.procedure_category"
-    provides="zope.schema.interfaces.IVocabularyFactory"
-  />
+      provides="zope.schema.interfaces.IVocabularyFactory"
+      name="urban.vocabularies.procedure_category"
+      component=".vocabularies.ProcedureCategoryVocabularyFactory"
+      />
 
   <utility
-    component=".vocabularies.LicenceTypeVocabularyFactory"
-    name="urban.vocabularies.licence_types"
-    provides="zope.schema.interfaces.IVocabularyFactory"
-  />
+      provides="zope.schema.interfaces.IVocabularyFactory"
+      name="urban.vocabularies.licence_types"
+      component=".vocabularies.LicenceTypeVocabularyFactory"
+      />
 
   <utility
-    component=".vocabularies.LicenceTabsVocabularyFactory"
-    name="urban.vocabularies.licence_tabs"
-    provides="zope.schema.interfaces.IVocabularyFactory"
-  />
+      provides="zope.schema.interfaces.IVocabularyFactory"
+      name="urban.vocabularies.licence_tabs"
+      component=".vocabularies.LicenceTabsVocabularyFactory"
+      />
 
   <utility
-    component=".vocabularies.DateIndexVocabularyFactory"
-    name="urban.vocabularies.licence_date_indexes"
-    provides="zope.schema.interfaces.IVocabularyFactory"
-  />
+      provides="zope.schema.interfaces.IVocabularyFactory"
+      name="urban.vocabularies.licence_date_indexes"
+      component=".vocabularies.DateIndexVocabularyFactory"
+      />
 
   <utility
-    component=".vocabularies.DivisionNamesVocabularyFactory"
-    name="urban.vocabularies.division_names"
-    provides="zope.schema.interfaces.IVocabularyFactory"
-  />
+      provides="zope.schema.interfaces.IVocabularyFactory"
+      name="urban.vocabularies.division_names"
+      component=".vocabularies.DivisionNamesVocabularyFactory"
+      />
 
   <utility
-    component=".vocabularies.DivisionAlternativeNamesVocabularyFactory"
-    name="urban.vocabularies.division_alternative_names"
-    provides="zope.schema.interfaces.IVocabularyFactory"
-  />
+      provides="zope.schema.interfaces.IVocabularyFactory"
+      name="urban.vocabularies.division_alternative_names"
+      component=".vocabularies.DivisionAlternativeNamesVocabularyFactory"
+      />
 
   <utility
-    component=".vocabularies.OffDaysTypeVocabularyFactory"
-    name="urban.vocabularies.offdays_types"
-    provides="zope.schema.interfaces.IVocabularyFactory"
-  />
+      provides="zope.schema.interfaces.IVocabularyFactory"
+      name="urban.vocabularies.offdays_types"
+      component=".vocabularies.OffDaysTypeVocabularyFactory"
+      />
 
   <utility
-    component=".vocabularies.OffDaysPeriodTypeVocabularyFactory"
-    name="urban.vocabularies.offdays_period_types"
-    provides="zope.schema.interfaces.IVocabularyFactory"
-  />
+      provides="zope.schema.interfaces.IVocabularyFactory"
+      name="urban.vocabularies.offdays_period_types"
+      component=".vocabularies.OffDaysPeriodTypeVocabularyFactory"
+      />
 
   <utility
-    component=".vocabularies.WeekDaysVocabularyFactory"
-    name="urban.vocabularies.weekdays"
-    provides="zope.schema.interfaces.IVocabularyFactory"
-  />
+      provides="zope.schema.interfaces.IVocabularyFactory"
+      name="urban.vocabularies.weekdays"
+      component=".vocabularies.WeekDaysVocabularyFactory"
+      />
 
   <utility
-    component=".vocabularies.OpinionsToAskVocabularyFactory"
-    name="urban.vocabularies.opinions_to_ask"
-    provides="zope.schema.interfaces.IVocabularyFactory"
-  />
+      provides="zope.schema.interfaces.IVocabularyFactory"
+      name="urban.vocabularies.opinions_to_ask"
+      component=".vocabularies.OpinionsToAskVocabularyFactory"
+      />
 
   <utility
-    component=".vocabularies.AllOpinionsToAskVocabularyFactory"
-    name="urban.vocabularies.all_opinions_to_ask"
-    provides="zope.schema.interfaces.IVocabularyFactory"
-  />
+      provides="zope.schema.interfaces.IVocabularyFactory"
+      name="urban.vocabularies.all_opinions_to_ask"
+      component=".vocabularies.AllOpinionsToAskVocabularyFactory"
+      />
 
   <utility
-    component=".vocabularies.WorkTypesVocabularyFactory"
-    name="urban.vocabularies.work_types"
-    provides="zope.schema.interfaces.IVocabularyFactory"
-  />
+      provides="zope.schema.interfaces.IVocabularyFactory"
+      name="urban.vocabularies.work_types"
+      component=".vocabularies.WorkTypesVocabularyFactory"
+      />
 
   <utility
-    component=".vocabularies.GigCoringUserIdVocabularyFactory"
-    name="urban.vocabularies.gig_coring_user_id"
-    provides="zope.schema.interfaces.IVocabularyFactory"
-  />
+      provides="zope.schema.interfaces.IVocabularyFactory"
+      name="urban.vocabularies.gig_coring_user_id"
+      component=".vocabularies.GigCoringUserIdVocabularyFactory"
+      />
 
   <utility
-    component=".vocabularies.LicenceDocumentsVocabularyFactory"
-    name="urban.vocabularies.licence_documents"
-    provides="zope.schema.interfaces.IVocabularyFactory"
-  />
+      provides="zope.schema.interfaces.IVocabularyFactory"
+      name="urban.vocabularies.licence_documents"
+      component=".vocabularies.LicenceDocumentsVocabularyFactory"
+      />
 
   <utility
-    component=".vocabularies.ComplementaryDelayFactory"
-    name="urban.vocabularies.complementary_delay"
-    provides="zope.schema.interfaces.IVocabularyFactory"
-  />
+      provides="zope.schema.interfaces.IVocabularyFactory"
+      name="urban.vocabularies.complementary_delay"
+      component=".vocabularies.ComplementaryDelayFactory"
+      />
 
 </configure>

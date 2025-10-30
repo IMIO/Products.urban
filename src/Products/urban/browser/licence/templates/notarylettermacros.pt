@@ -1,60 +1,79 @@
-<metal:description define-macro="description_macro" i18n:domain="urban">
+<metal:description define-macro="description_macro"
+                   i18n:domain="urban"
+>
 
-    <tal:vars define="exclude python:[
+  <tal:vars define="
+              exclude python:[
                                  'title', 'workLocations', 'notaryContact', 'specificFeatures',
                                  'customSpecificFeatures', 'townshipSpecificFeatures'
-                             ];">
-        <metal:parent_call use-macro="here/@@licencetabs-macros/description_macro">
+                             ];
+            ">
+    <metal:parent_call use-macro="here/@@licencetabs-macros/description_macro">
 
-            <metal:proprietaries fill-slot="applicant_slot">
-                <metal:proprietaries_macro use-macro="here/@@licencemacros/urbanProprietariesMacro" />
-                <tal:show_disabled_proprietaries condition= "here/get_proprietaries_history">
-                    <metal:disabled_proprietaries_and_corporations_macro use-macro="here/@@licencemacros/urbanProprietariesHistoricAndCorporationsMacro" />
-                </tal:show_disabled_proprietaries>
-            </metal:proprietaries>
+      <metal:proprietaries fill-slot="applicant_slot">
+        <metal:proprietaries_macro use-macro="here/@@licencemacros/urbanProprietariesMacro" />
+        <tal:show_disabled_proprietaries condition="here/get_proprietaries_history">
+          <metal:disabled_proprietaries_and_corporations_macro use-macro="here/@@licencemacros/urbanProprietariesHistoricAndCorporationsMacro" />
+        </tal:show_disabled_proprietaries>
+      </metal:proprietaries>
 
-            <metal:representatives fill-slot="representatives">
-                <metal:representatives_macro use-macro="here/@@licencemacros/urbanNotariesMacro" />
-            </metal:representatives>
+      <metal:representatives fill-slot="representatives">
+        <metal:representatives_macro use-macro="here/@@licencemacros/urbanNotariesMacro" />
+      </metal:representatives>
 
-            <fieldset metal:fill-slot="custom_left_fieldset"><legend i18n:translate="legend_specific_features">Specific features</legend>
-                <metal:spf_fieldset use-macro="here/@@fielddisplay-macros/spf_fieldset" />
-            </fieldset>
-        </metal:parent_call>
-    </tal:vars>
+      <fieldset metal:fill-slot="custom_left_fieldset"><legend i18n:translate="legend_specific_features">Specific features</legend>
+        <metal:spf_fieldset use-macro="here/@@fielddisplay-macros/spf_fieldset" />
+      </fieldset>
+    </metal:parent_call>
+  </tal:vars>
 
 </metal:description>
 
-<metal:analysis define-macro="analysis_macro" i18n:domain="urban">
-    <metal:parent_call use-macro="here/@@licencetabs-macros/analysis_macro">
-    </metal:parent_call>
+<metal:analysis define-macro="analysis_macro"
+                i18n:domain="urban"
+>
+  <metal:parent_call use-macro="here/@@licencetabs-macros/analysis_macro">
+  </metal:parent_call>
 </metal:analysis>
 
-<metal:environment define-macro="environment_macro" i18n:domain="urban">
-    <tal:vars define="custom python:['rubrics', 'minimumLegalConditions', 'hasAdditionalConditions'];">
-        <metal:parent_call use-macro="here/@@licencetabs-macros/environment_macro">
-        </metal:parent_call>
-    </tal:vars>
+<metal:environment define-macro="environment_macro"
+                   i18n:domain="urban"
+>
+  <tal:vars define="
+              custom python:['rubrics', 'minimumLegalConditions', 'hasAdditionalConditions'];
+            ">
+    <metal:parent_call use-macro="here/@@licencetabs-macros/environment_macro">
+    </metal:parent_call>
+  </tal:vars>
 </metal:environment>
 
-<metal:road define-macro="road_macro" i18n:domain="urban">
+<metal:road define-macro="road_macro"
+            i18n:domain="urban"
+>
 
-    <tal:vars define="custom python:['roadSpecificFeatures'];">
-        <metal:parent_call use-macro="here/@@licencetabs-macros/road_macro" />
-    </tal:vars>
+  <tal:vars define="
+              custom python:['roadSpecificFeatures'];
+            ">
+    <metal:parent_call use-macro="here/@@licencetabs-macros/road_macro" />
+  </tal:vars>
 
 </metal:road>
 
 
-<metal:location define-macro="location_macro" i18n:domain="urban">
+<metal:location define-macro="location_macro"
+                i18n:domain="urban"
+>
 
-    <tal:vars define="custom python:['locationSpecificFeatures'];">
-        <metal:parent_call use-macro="here/@@licencetabs-macros/location_macro" />
-    </tal:vars>
+  <tal:vars define="
+              custom python:['locationSpecificFeatures'];
+            ">
+    <metal:parent_call use-macro="here/@@licencetabs-macros/location_macro" />
+  </tal:vars>
 
 </metal:location>
 
-<metal:patrimony define-macro="patrimony_macro" i18n:domain="urban">
-    <metal:parent_call use-macro="here/@@licencetabs-macros/patrimony_macro" />
+<metal:patrimony define-macro="patrimony_macro"
+                 i18n:domain="urban"
+>
+  <metal:parent_call use-macro="here/@@licencetabs-macros/patrimony_macro" />
 </metal:patrimony>
-

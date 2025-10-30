@@ -1,59 +1,91 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xml:lang="en"
-      lang="en"
-      xmlns:tal="http://xml.zope.org/namespaces/tal"
-      xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      lang="en"
       metal:use-macro="here/main_template/macros/master"
-      i18n:domain="imio.actionspanel">
+      xml:lang="en"
+      i18n:domain="imio.actionspanel"
+>
 
   <body>
-  <metal:fill fill-slot="main">
+    <metal:fill fill-slot="main">
 
-    <script type="text/javascript">
+      <script type="text/javascript">
       jQuery(document).ready(function() {
         $("input.trigger-transition-prevent-default").click(function(event) {
           event.preventDefault();
         });
       });
-    </script>
+      </script>
 
-    <h1 class="documentFirstHeading" tal:content="context/Title">Title</h1>
-    <form id="commentsForm">
-    <tal:warning condition="view/has_open_tasks">
-        <br />
-       <table class="listing task_status_table" tal:define="tasks view/get_started_tasks"
-              tal:condition="tasks"  i18n:domain="imio.schedule">
-           <th i18n:translate="">Started tasks</th>
-           <th i18n:translate="">To do</th>
-           <tr tal:repeat= "task_infos tasks">
+      <h1 class="documentFirstHeading"
+          tal:content="context/Title"
+      >Title</h1>
+      <form id="commentsForm">
+        <tal:warning condition="view/has_open_tasks">
+          <br />
+          <table class="listing task_status_table"
+                 tal:define="
+                   tasks view/get_started_tasks;
+                 "
+                 tal:condition="tasks"
+                 i18n:domain="imio.schedule"
+          >
+            <th i18n:translate="">Started tasks</th>
+            <th i18n:translate="">To do</th>
+            <tr tal:repeat="task_infos tasks">
               <td>
-                 <span tal:content="python: task_infos[0].Title()"/>
+                <span tal:content="python: task_infos[0].Title()"></span>
               </td>
-              <td tal:define="task_conditions python: task_infos[1];
-                              status python: False">
-                <div metal:use-macro="here/@@taskmacros/conditions_status_macro" />
+              <td tal:define="
+                    task_conditions python: task_infos[1];
+                    status python: False;
+                  ">
+                <div metal:use-macro="here/@@taskmacros/conditions_status_macro"></div>
               </td>
-           </tr>
-        </table>
-        <p i18n:domain="liege.urban" class="popups_field_descr warning"><b i18n:translate="">The above listed tasks are not done yet !!!</b></p>
-    </tal:warning>
-    <tal:comment replace="nothing">Explanation comment</tal:comment>
-    <p class="popups_field_descr" i18n:translate="workflow_confirm">Confirm workflow transition <span style="text-transform: lowercase; font-weight: bold;" i18n:name="transition_name" i18n:domain="plone" tal:content="view/transition_title">transition name</span></p>
-    <label for="comment" i18n:translate="transition_comment"></label>
-    <textarea name="comment" rows="4"></textarea>
-    <div class="popupbuttons">
-      <input tal:attributes="onClick python: view.actions_panel_view.computeTriggerTransitionOnClick(view.init_transition()) + '$(\'div.overlay div.close a.hiddenStructure\').click();;';"
-             type="submit"
-             name="form.buttons.save"
-             class="trigger-transition-prevent-default apButton"
-             value="Save"
-             i18n:attributes="value"
-             i18n:domain="plone" />
-      <input type="submit" name="form.buttons.cancel" class="standalone apButton" value="Cancel" i18n:attributes="value" i18n:domain="plone" />
-    </div>
-    </form>
+            </tr>
+          </table>
+          <p class="popups_field_descr warning"
+             i18n:domain="liege.urban"
+          ><b i18n:translate="">The above listed tasks are not done yet !!!</b></p>
+        </tal:warning>
+        <tal:comment replace="nothing">Explanation comment</tal:comment>
+        <p class="popups_field_descr"
+           i18n:translate="workflow_confirm"
+        >Confirm workflow transition
+          <span style="text-transform: lowercase; font-weight: bold;"
+                tal:content="view/transition_title"
+                i18n:domain="plone"
+                i18n:name="transition_name"
+          >transition name</span></p>
+        <label for="comment"
+               i18n:translate="transition_comment"
+        ></label>
+        <textarea name="comment"
+                  rows="4"
+        ></textarea>
+        <div class="popupbuttons">
+          <input class="trigger-transition-prevent-default apButton"
+                 name="form.buttons.save"
+                 type="submit"
+                 value="Save"
+                 tal:attributes="
+                   onClick python: view.actions_panel_view.computeTriggerTransitionOnClick(view.init_transition()) + '$(\'div.overlay div.close a.hiddenStructure\').click();;';
+                 "
+                 i18n:attributes="value"
+                 i18n:domain="plone"
+          />
+          <input class="standalone apButton"
+                 name="form.buttons.cancel"
+                 type="submit"
+                 value="Cancel"
+                 i18n:attributes="value"
+                 i18n:domain="plone"
+          />
+        </div>
+      </form>
 
-  </metal:fill>
+    </metal:fill>
   </body>
 </html>

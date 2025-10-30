@@ -1,37 +1,38 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:browser="http://namespaces.zope.org/browser"
-    xmlns:plone="http://namespaces.plone.org/plone">
+    xmlns:plone="http://namespaces.plone.org/plone"
+    >
 
-    <include file="autocomplete.zcml" />
-    <include file="columns.zcml" />
-    <include file="vocabularies.zcml" />
-    <include package=".widgets" />
+  <include file="autocomplete.zcml" />
+  <include file="columns.zcml" />
+  <include file="vocabularies.zcml" />
+  <include package=".widgets" />
 
-    <configure package="collective.eeafaceted.collectionwidget">
-        <browser:page
-            for="OFS.interfaces.IItem"
-            name="render_collection_widget_term"
-            class="Products.urban.dashboard.overrides.RenderLicenceTermView"
-            template="browser/templates/term.pt"
-            permission="zope2.View"
-            />
-    </configure>
+  <configure package="collective.eeafaceted.collectionwidget">
+    <browser:page
+        name="render_collection_widget_term"
+        for="OFS.interfaces.IItem"
+        class="Products.urban.dashboard.overrides.RenderLicenceTermView"
+        template="browser/templates/term.pt"
+        permission="zope2.View"
+        />
+  </configure>
 
-    <!-- Register the portlet -->
-    <plone:portlet
-        name="Products.urban.dashboard.CategorySwitchPortlet"
-        interface=".portlet.ICategorySwitchPortlet"
-        assignment=".portlet.Assignment"
-        renderer=".portlet.Renderer"
-        addview=".portlet.AddForm"
-        editview=".portlet.EditForm"
-    />
+  <!-- Register the portlet -->
+  <plone:portlet
+      name="Products.urban.dashboard.CategorySwitchPortlet"
+      interface=".portlet.ICategorySwitchPortlet"
+      assignment=".portlet.Assignment"
+      renderer=".portlet.Renderer"
+      addview=".portlet.AddForm"
+      editview=".portlet.EditForm"
+      />
 
-    <adapter
-        for="Products.urban.interfaces.IGenericLicence"
-        factory=".faceted_catalog.LicenceToFacetedCollection"
-        provides="Products.urban.interfaces.IFacetedCollection"
-    />
+  <adapter
+      factory=".faceted_catalog.LicenceToFacetedCollection"
+      provides="Products.urban.interfaces.IFacetedCollection"
+      for="Products.urban.interfaces.IGenericLicence"
+      />
 
 </configure>

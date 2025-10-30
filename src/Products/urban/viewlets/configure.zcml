@@ -2,74 +2,75 @@
     xmlns="http://namespaces.zope.org/zope"
     xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:plone="http://namespaces.plone.org/plone"
-    i18n_domain="urban">
+    i18n_domain="urban"
+    >
 
   <browser:viewlet
-     name="plone.belowcontenttitle.workflowstate"
-     manager="plone.app.layout.viewlets.interfaces.IBelowContentTitle"
-     class=".workflow_state.WorkflowState"
-     for="Products.urban.interfaces.IGenericLicence"
-     permission="zope2.View"
-  />
+      name="plone.belowcontenttitle.workflowstate"
+      for="Products.urban.interfaces.IGenericLicence"
+      manager="plone.app.layout.viewlets.interfaces.IBelowContentTitle"
+      class=".workflow_state.WorkflowState"
+      permission="zope2.View"
+      />
 
   <browser:page
-     for="eea.facetednavigation.subtypes.interfaces.IFacetedNavigable"
-     name="generate_urbain_220xml"
-     class=".urbain_220.UrbainXMLExport"
-     permission="zope2.View"
-  />
+      name="generate_urbain_220xml"
+      for="eea.facetednavigation.subtypes.interfaces.IFacetedNavigable"
+      class=".urbain_220.UrbainXMLExport"
+      permission="zope2.View"
+      />
 
   <browser:viewlet
-      for="zope.interface.Interface"
       name="urbain220-link"
+      for="zope.interface.Interface"
       manager="collective.eeafaceted.z3ctable.interfaces.ITopAboveNavManager"
       class="Products.urban.viewlets.urbain_220.Urbain220Viewlet"
       permission="zope2.View"
-  />
+      />
 
   <browser:viewlet
       name="urban.firefox"
       manager="plone.app.layout.viewlets.interfaces.IAboveContentTitle"
       class=".firefox.FirefoxViewlet"
-      permission="zope2.View"
       template="templates/firefox.pt"
+      permission="zope2.View"
       />
 
   <adapter
-      for="Products.urban.interfaces.IGenericLicence"
-      provides="Products.urban.interfaces.IToUrbain220Street"
       factory=".urbain_220.LicenceToUrbain220Street"
+      provides="Products.urban.interfaces.IToUrbain220Street"
+      for="Products.urban.interfaces.IGenericLicence"
       permission="zope2.View"
       />
 
   <browser:page
-     for="eea.facetednavigation.subtypes.interfaces.IFacetedNavigable"
-     name="copy_to_inspections"
-     class=".licences_migration.MigrateToInspection"
-     permission="zope2.View"
-  />
+      name="copy_to_inspections"
+      for="eea.facetednavigation.subtypes.interfaces.IFacetedNavigable"
+      class=".licences_migration.MigrateToInspection"
+      permission="zope2.View"
+      />
 
   <browser:viewlet
-      for="zope.interface.Interface"
       name="move_to_inspections-link"
+      for="zope.interface.Interface"
       manager="collective.eeafaceted.z3ctable.interfaces.ITopAboveNavManager"
       class="Products.urban.viewlets.licences_migration.ToInspectionViewlet"
       permission="zope2.View"
-  />
+      />
 
   <browser:viewlet
       name="urbanfavicon"
       manager="plone.app.layout.viewlets.interfaces.IHtmlHeadLinks"
       class=".urbanfavicon.UrbanFaviconViewlet"
       permission="zope2.View"
-  />
+      />
 
   <browser:viewlet
-     name="plone.belowcontenttitle.noticeTransmitState"
-     manager="plone.app.layout.viewlets.interfaces.IBelowContentBody"
-     class=".notice.NoticeTransmitState"
-     for="Products.urban.interfaces.ITransmitToSPWEvent"
-     permission="zope2.View"
-  />
+      name="plone.belowcontenttitle.noticeTransmitState"
+      for="Products.urban.interfaces.ITransmitToSPWEvent"
+      manager="plone.app.layout.viewlets.interfaces.IBelowContentBody"
+      class=".notice.NoticeTransmitState"
+      permission="zope2.View"
+      />
 
 </configure>
