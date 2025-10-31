@@ -1,6 +1,10 @@
 # encoding: utf-8
 
+from Products.Archetypes.config import REFERENCE_CATALOG
 from Products.CMFCore.WorkflowCore import WorkflowException
+from Products.CMFCore.utils import getToolByName
+from Products.urban.content.licence.RoadDecree import RoadDecree
+from Products.urban.interfaces import ICODT_IntegratedLicence
 from Products.urban.interfaces import ICODT_UniqueLicence
 from Products.urban.interfaces import IEnvironmentBase
 from Products.urban.interfaces import IIntegratedLicence
@@ -12,6 +16,7 @@ from imio.schedule.config import status_by_state
 from imio.schedule.content.task import IAutomatedTask
 from plone import api
 from plone.memoize.request import cache
+from zope.component import getAdapters
 from zope.interface import implements
 
 
@@ -45,12 +50,32 @@ class LocalRoleAdapter(object):
             IUniqueLicence.providedBy(licence)
             or ICODT_UniqueLicence.providedBy(licence)
             or IIntegratedLicence.providedBy(licence)
+            or ICODT_IntegratedLicence.providedBy(licence)
         ):
             return "urban_and_environment"
         elif IEnvironmentBase.providedBy(licence):
             return "environment_only"
         else:
             return "urban_only"
+
+    def get_linked_opinion_editors(self):
+        linked_opinion_editors = []
+        if self.context.portal_type in RoadDecree.schema["bound_licence"].allowed_types:
+            reference_catalog = getToolByName(self.context, REFERENCE_CATALOG)
+            back_refs = reference_catalog.getBackReferences(
+                self.context, "bound_licence"
+            )
+            if back_refs:
+                back_obj = [ref.getSourceObject() for ref in back_refs][0]
+                back_obj_local_role_adapters = [
+                    adapter
+                    for name, adapter in getAdapters((back_obj,), ILocalRoleProvider)
+                    if hasattr(adapter, "get_opinion_editors")
+                ]
+                for back_obj_local_role_adapter in back_obj_local_role_adapters:
+                    f = back_obj_local_role_adapter.get_opinion_editors()
+                    linked_opinion_editors.extend(f)
+        return linked_opinion_editors
 
     def get_opinion_editors(self):
         """
@@ -61,6 +86,7 @@ class LocalRoleAdapter(object):
         portal_urban = api.portal.get_tool("portal_urban")
         schedule_config = portal_urban.opinions_schedule
 
+        exceptions = ["Voirie_editors", "Voirie_Validators"]
         opinion_editors = []
         all_opinion_request = self.context.getOpinionRequests()
 
@@ -80,7 +106,10 @@ class LocalRoleAdapter(object):
                             group = task.assigned_group
                             opinion_editors.append(group)
 
-        return opinion_editors
+        back_ref_opinion_editors = self.get_linked_opinion_editors()
+        opinion_editors.extend(back_ref_opinion_editors)
+
+        return list(set(opinion_editors))
 
     def get_editors(self):
         """ """
