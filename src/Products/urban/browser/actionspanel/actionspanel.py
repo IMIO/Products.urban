@@ -189,11 +189,15 @@ class TransitionsPanelView(ActionsPanelView):
     def _check_if_transiton_present(self, transitions, transition_id):
         return any([transition["id"] == transition_id for transition in transitions])
 
-    def getTransitions(self):
-        transitions = super(TransitionsPanelView, self).getTransitions()
+    def getTransitions(self, caching=True):
+        if caching:
+            if getattr(self, '_transitions', None):
+                return self._transitions
+        transitions = super(TransitionsPanelView, self).getTransitions(caching=False)
         workflow = self.request.get(
             "imio.actionspanel_workflow_%s_cachekey" % self.context.portal_type, None
         )
+
         if "frozen_suspension" in workflow.states:
             if api.content.get_state(self.context) == "frozen_suspension":
                 # add 'resume_thaw' fake transition
@@ -253,6 +257,9 @@ class TransitionsPanelView(ActionsPanelView):
                             },
                         }
                     )
+        if caching:
+            # store transitions in case getTransitions is called several times
+            setattr(self, '_transitions', transitions)
         return transitions
 
     def sortTransitions(self, lst):

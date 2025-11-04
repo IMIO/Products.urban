@@ -1,0 +1,2 @@
+URBBDC-3204: Fix a performance issue with rendering of actions when `suspend_freeze` is is the transitions
+[mpeeters]
