@@ -47,6 +47,11 @@ def initialize_notice_settings(context):
         registry_record = Record(registry_field)
         registry_record.value = None
         registry.records["{0}.last_import_date".format(base)] = registry_record
+    if "{0}.failed_notifications".format(base) not in registry.records:
+        registry_field = field.List(title=INoticeSettings["failed_notifications"].title)
+        registry_record = Record(registry_field)
+        registry_record.value = []
+        registry.records["{0}.failed_notifications".format(base)] = registry_record
     logger.info("Upgrade done!")
 
 
