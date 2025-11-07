@@ -65,14 +65,17 @@ class LocalRoleAdapter(object):
 
     def get_linked_opinion_editors(self):
         linked_opinion_editors = []
-        if self.context.portal_type in RoadDecree.schema['bound_licence'].allowed_types:
+        if self.context.portal_type in RoadDecree.schema["bound_licence"].allowed_types:
             reference_catalog = getToolByName(self.context, REFERENCE_CATALOG)
-            back_refs = reference_catalog.getBackReferences(self.context, 'bound_licence')
+            back_refs = reference_catalog.getBackReferences(
+                self.context, "bound_licence"
+            )
             if back_refs:
                 back_obj = [ref.getSourceObject() for ref in back_refs][0]
                 back_obj_local_role_adapters = [
-                    adapter for name, adapter in getAdapters((back_obj,), ILocalRoleProvider)
-                    if hasattr(adapter, 'get_opinion_editors')
+                    adapter
+                    for name, adapter in getAdapters((back_obj,), ILocalRoleProvider)
+                    if hasattr(adapter, "get_opinion_editors")
                 ]
                 for back_obj_local_role_adapter in back_obj_local_role_adapters:
                     f = back_obj_local_role_adapter.get_opinion_editors()

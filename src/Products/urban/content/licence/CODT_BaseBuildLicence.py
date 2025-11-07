@@ -651,7 +651,9 @@ class CODT_BaseBuildLicence(
         prorogated_delay = ""
         prorogation_delay = self.getProrogationDelay(text_format=False)
         if base_delay:
-            prorogated_delay = "{}j".format(str(int(base_delay[:-1]) + prorogation_delay))
+            prorogated_delay = "{}j".format(
+                str(int(base_delay[:-1]) + prorogation_delay)
+            )
 
         return prorogated_delay
 
@@ -724,10 +726,12 @@ class CODT_BaseBuildLicence(
         )
         return DisplayList(vocabulary)
 
-    def get_last_plonemeeting_date(self,
-                                   event=interfaces.ISimpleCollegeEvent,
-                                   item_portal_type="MeetingItemCollege",
-                                   decided_states=('accepted', 'accepted_but_modified', 'accepted_and_returned')):
+    def get_last_plonemeeting_date(
+        self,
+        event=interfaces.ISimpleCollegeEvent,
+        item_portal_type="MeetingItemCollege",
+        decided_states=("accepted", "accepted_but_modified", "accepted_and_returned"),
+    ):
         """
         Get the last date of a PloneMeeting meeting for a given event.
         """
@@ -743,15 +747,27 @@ class CODT_BaseBuildLicence(
             decided_states=decided_states,
         )
 
-    def get_last_college_date(self,
-                              event=interfaces.ISimpleCollegeEvent,
-                              decided_states=('accepted', 'accepted_but_modified', 'accepted_and_returned')):
-        return self.get_last_plonemeeting_date(event=event, item_portal_type='MeetingItemCollege', decided_states=decided_states)
+    def get_last_college_date(
+        self,
+        event=interfaces.ISimpleCollegeEvent,
+        decided_states=("accepted", "accepted_but_modified", "accepted_and_returned"),
+    ):
+        return self.get_last_plonemeeting_date(
+            event=event,
+            item_portal_type="MeetingItemCollege",
+            decided_states=decided_states,
+        )
 
-    def get_last_council_date(self,
-                              event=interfaces.ISimpleCollegeEvent,
-                              decided_states=('accepted', 'accepted_but_modified', 'accepted_and_returned')):
-        return self.get_last_plonemeeting_date(event=event, item_portal_type='MeetingItemCouncil', decided_states=decided_states)
+    def get_last_council_date(
+        self,
+        event=interfaces.ISimpleCollegeEvent,
+        decided_states=("accepted", "accepted_but_modified", "accepted_and_returned"),
+    ):
+        return self.get_last_plonemeeting_date(
+            event=event,
+            item_portal_type="MeetingItemCouncil",
+            decided_states=decided_states,
+        )
 
 
 # end of class CODT_BaseBuildLicence

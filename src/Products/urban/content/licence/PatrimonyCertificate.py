@@ -71,13 +71,13 @@ schema = Schema(
                 t
                 for t in URBAN_TYPES
                 if t
-                   not in [
-                       "Inspection",
-                       "Ticket",
-                       "ProjectMeeting",
-                       "CODT_UrbanCertificateOne",
-                       "UrbanCertificateOne",
-                   ]
+                not in [
+                    "Inspection",
+                    "Ticket",
+                    "ProjectMeeting",
+                    "CODT_UrbanCertificateOne",
+                    "UrbanCertificateOne",
+                ]
             ],
             schemata="urban_description",
             multiValued=True,

@@ -348,9 +348,11 @@ EventTypesFactory = EventTypes()
 
 class ComplementaryDelayVocabulary(object):
     implements(IVocabularyFactory)
-    
+
     def __call__(self, context):
-        vocabulary = UrbanVocabulary("complementary_delay", vocType="ComplementaryDelayTerm", inUrbanConfig=False)
+        vocabulary = UrbanVocabulary(
+            "complementary_delay", vocType="ComplementaryDelayTerm", inUrbanConfig=False
+        )
         terms = vocabulary.get_raw_voc(context)
         voc_terms = [
             SimpleTerm(t["id"], t["id"], t["title"]) for t in terms if t["enabled"]

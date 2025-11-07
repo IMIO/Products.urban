@@ -264,14 +264,14 @@ class UrbanEventView(BrowserView):
             mapping={
                 "title": safe_unicode(notif[-1]["title"].lower()),
                 "user": safe_unicode(username),
-                "date": notif[-1]["time"].strftime("%d/%m/%Y, %H:%M:%S")
-            }
+                "date": notif[-1]["time"].strftime("%d/%m/%Y, %H:%M:%S"),
+            },
         )
 
 
 class IImportClaimantListingForm(Interface):
 
-    listing_file_claimants = NamedFile(title=_(u'Listing file (claimants)'))
+    listing_file_claimants = NamedFile(title=_(u"Listing file (claimants)"))
 
 
 class ImportClaimantListingForm(form.Form):
@@ -280,7 +280,7 @@ class ImportClaimantListingForm(form.Form):
     fields = field.Fields(IImportClaimantListingForm)
     ignoreContext = True
 
-    @button.buttonAndHandler(_('Import'), name='import-claimants')
+    @button.buttonAndHandler(_("Import"), name="import-claimants")
     def handleImport(self, action):
         inquiry_UID = self.context.UID()
         planned_claimants_import = (
@@ -295,7 +295,7 @@ class ImportClaimantListingForm(form.Form):
             if inquiry_UID in planned_claimants_import:
                 planned_claimants_import.remove(inquiry_UID)
         else:
-            csv_file = data['listing_file_claimants']
+            csv_file = data["listing_file_claimants"]
             csv_integrity_error = self.validate_csv_integrity(csv_file)
             if csv_integrity_error:
                 api.portal.show_message(csv_integrity_error, self.request, "error")
@@ -423,9 +423,7 @@ class ImportRecipientListingForm(form.Form):
             recipient_arg["adr1"] = "{} {}".format(
                 recipient_arg["zipcode"], recipient_arg["city"]
             )
-            adr2 = "{} {}".format(
-                recipient_arg["street"], recipient_arg["number"]
-            )
+            adr2 = "{} {}".format(recipient_arg["street"], recipient_arg["number"])
             if recipient_arg["number_index"]:
                 adr2 = "{} ({})".format(adr2, recipient_arg["number_index"])
             recipient_arg["adr2"] = adr2
@@ -452,7 +450,9 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
         self.request.set("disable_plone.leftcolumn", 1)
         self.import_claimants_listing_form = ImportClaimantListingForm(context, request)
         self.import_claimants_listing_form.update()
-        self.import_recipients_listing_form = ImportRecipientListingForm(context, request)
+        self.import_recipients_listing_form = ImportRecipientListingForm(
+            context, request
+        )
         self.import_recipients_listing_form.update()
 
     @property
@@ -515,7 +515,9 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
                 claimant_arg["name1"] + claimant_arg["name2"] + claimant_arg["society"]
             )
             claimant_arg["claimType"] = claim_type_mapping[claimant_arg["claimType"]]
-            claimant_arg["claimDate"] = self.change_date_str_from_eu_to_us(claimant_arg["claimDate"])
+            claimant_arg["claimDate"] = self.change_date_str_from_eu_to_us(
+                claimant_arg["claimDate"]
+            )
             count = 0
             if claimant_arg["id"] in self.context.objectIds():
                 count += 1

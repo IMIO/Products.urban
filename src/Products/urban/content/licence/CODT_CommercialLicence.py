@@ -65,7 +65,6 @@ schema = Schema(
             schemata="urban_location",
         ),
     ),
-
 )
 
 ##code-section after-local-schema #fill in your manual code here

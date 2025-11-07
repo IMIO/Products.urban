@@ -42,7 +42,7 @@ from zope.deprecation import deprecate
 from AccessControl import getSecurityManager
 from plone import api
 from plone.memoize import ram
-from plone.memoize.request  import cache
+from plone.memoize.request import cache
 from zope.i18n import translate
 from Products.CMFCore import permissions
 from Products.CMFCore.utils import getToolByName
@@ -1113,7 +1113,6 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         """ """
         if _checkPermission(permissions.ManagePortal, self):
             return True
-
 
     @ram.cache(cache_key_30min)
     def check_if_mail_content_rule_applied(self, context):

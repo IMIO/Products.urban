@@ -19,7 +19,9 @@ class TestCODTBuildLicence(unittest.TestCase):
         self.portal = portal
         login(self.portal, self.layer.default_user)
         self.portal_urban = portal.portal_urban
-        event_config = self.portal_urban.codt_buildlicence.urbaneventtypes["depot-de-la-demande"]
+        event_config = self.portal_urban.codt_buildlicence.urbaneventtypes[
+            "depot-de-la-demande"
+        ]
 
         self.licence_1 = api.content.create(
             type="CODT_BuildLicence",

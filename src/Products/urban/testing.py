@@ -177,6 +177,7 @@ class UrbanWithUsersFunctionalLayer(FunctionalTesting):
             portal.setupCurrentSkin(portal.REQUEST)
             setRequest(portal.REQUEST)
             from Products.urban.setuphandlers import addTestUsers
+
             api.user.create(
                 email="adminurba@urban.be",
                 username="Admin_urba",

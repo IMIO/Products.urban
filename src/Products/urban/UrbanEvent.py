@@ -534,7 +534,9 @@ schema = Schema(
                 format="%d/%m/%Y",
                 starting_year=1930,
                 ending_year=WIDGET_DATE_END_YEAR,
-                label=_("urban_label_videoConferenceDate", default="videoConferencedate"),
+                label=_(
+                    "urban_label_videoConferenceDate", default="videoConferencedate"
+                ),
             ),
             optional=True,
         ),
@@ -549,7 +551,6 @@ schema = Schema(
             ),
             optional=True,
         ),
-
     ),
 )
 
@@ -984,8 +985,10 @@ class UrbanEvent(BaseFolder, BrowserDefaultMixin):
             if not rule.enabled:
                 continue
             for condition in rule.conditions:
-                class EventTemp():
+
+                class EventTemp:
                     object = self
+
                 executable = getMultiAdapter((self, condition, EventTemp), IExecutable)
                 conditions.append(executable())
             if all(conditions):

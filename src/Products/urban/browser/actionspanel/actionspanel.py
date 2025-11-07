@@ -43,7 +43,7 @@ class EventActionsPanelView(ActionsPanelView):
         self.ACCEPTABLE_ACTIONS = (
             "plonemeeting_wsclient_action_1",
             "plonemeeting_wsclient_action_2",
-            "send_mail_action"
+            "send_mail_action",
         )
 
 
@@ -193,7 +193,7 @@ class TransitionsPanelView(ActionsPanelView):
 
     def getTransitions(self, caching=True):
         if caching:
-            if getattr(self, '_transitions', None):
+            if getattr(self, "_transitions", None):
                 return self._transitions
         transitions = super(TransitionsPanelView, self).getTransitions(caching=False)
         workflow = self.request.get(
@@ -255,7 +255,7 @@ class TransitionsPanelView(ActionsPanelView):
                     )
         if caching:
             # store transitions in case getTransitions is called several times
-            setattr(self, '_transitions', transitions)
+            setattr(self, "_transitions", transitions)
         return transitions
 
     def sortTransitions(self, lst):
@@ -265,7 +265,7 @@ class TransitionsPanelView(ActionsPanelView):
             "abandon",
             "suspend",
             "make_obsolete_to_authorized",
-            "make_obsolete_to_accepct"
+            "make_obsolete_to_accepct",
         ]
         to_move = []
         lst_id = [trans["id"] for trans in lst]

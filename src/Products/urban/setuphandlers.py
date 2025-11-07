@@ -1748,7 +1748,9 @@ def createLicence(site, licence_type, data):
         )
     ]
     for event_type in eventtypes:
-        licence.createUrbanEvent(event_type)    # fill each event with dummy data and generate all its documents
+        licence.createUrbanEvent(
+            event_type
+        )  # fill each event with dummy data and generate all its documents
     logger.info("   test %s --> generate all the documents" % licence_type)
     for urban_event in licence.objectValues(
         ["UrbanEvent", "UrbanEventInquiry", "UrbanEventOpinionRequest"]
@@ -1918,6 +1920,7 @@ def _create_task_configs(container, taskconfigs):
             _create_task_configs(container=task_config, taskconfigs=subtasks)
 
         checkPoint()
+
 
 def reindex_catalog(context):
     """

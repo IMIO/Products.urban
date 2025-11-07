@@ -16,13 +16,15 @@ class TestAmendedPlansStartDate(unittest.TestCase):
     layer = URBAN_TESTS_CONFIG_FUNCTIONAL
 
     def _get_due_date(self, task):
-        """"Return the due date for a given task"""
+        """ "Return the due date for a given task"""
         container = task.get_container()
         config = task.get_task_config()
         return config.compute_due_date(container, task)
 
     def _create_recepisse_plans_modificatifs(self, licence, event_date):
-        event_config = self.portal_urban.codt_buildlicence.urbaneventtypes["recepisse-de-plans-modificatifs"]
+        event_config = self.portal_urban.codt_buildlicence.urbaneventtypes[
+            "recepisse-de-plans-modificatifs"
+        ]
         event = licence.createUrbanEvent(event_config)
         event.setEventDate(event_date)
         notify(ObjectModifiedEvent(licence))
@@ -34,8 +36,12 @@ class TestAmendedPlansStartDate(unittest.TestCase):
         api.group.add_user(username="urbanmanager", groupname="urban_editors")
         login(self.portal, "urbanmanager")
         self.portal_urban = portal.portal_urban
-        event_config_deposit = self.portal_urban.codt_buildlicence.urbaneventtypes["depot-de-la-demande"]
-        event_config_intention = self.portal_urban.codt_buildlicence.urbaneventtypes["intention-de-depot-de-plans-modifies"]
+        event_config_deposit = self.portal_urban.codt_buildlicence.urbaneventtypes[
+            "depot-de-la-demande"
+        ]
+        event_config_intention = self.portal_urban.codt_buildlicence.urbaneventtypes[
+            "intention-de-depot-de-plans-modifies"
+        ]
 
         # receipt date + ultimatum date
         self.licence_1 = api.content.create(
@@ -48,7 +54,9 @@ class TestAmendedPlansStartDate(unittest.TestCase):
         event = self.licence_1.createUrbanEvent(event_config_deposit)
         event.setEventDate(datetime(2024, 4, 10))
 
-        event_config_intention = self.portal_urban.codt_buildlicence.urbaneventtypes["intention-de-depot-de-plans-modifies"]
+        event_config_intention = self.portal_urban.codt_buildlicence.urbaneventtypes[
+            "intention-de-depot-de-plans-modifies"
+        ]
         event = self.licence_1.createUrbanEvent(event_config_intention)
         event.setReceiptDate(datetime(2024, 4, 20))
         event.setUltimeDate(datetime(2024, 6, 23))
@@ -93,7 +101,9 @@ class TestAmendedPlansStartDate(unittest.TestCase):
         self.licence_3.setProcedureChoice("simple")
         event = self.licence_3.createUrbanEvent(event_config_deposit)
         event.setEventDate(datetime(2024, 4, 10))
-        event_config_intention = self.portal_urban.codt_buildlicence.urbaneventtypes["intention-de-depot-de-plans-modifies"]
+        event_config_intention = self.portal_urban.codt_buildlicence.urbaneventtypes[
+            "intention-de-depot-de-plans-modifies"
+        ]
         event = self.licence_3.createUrbanEvent(event_config_intention)
 
         self.licence_3.setHasModifiedBlueprints(True)
@@ -103,7 +113,6 @@ class TestAmendedPlansStartDate(unittest.TestCase):
         api.content.transition(self.licence_3, transition="propose_complete")
         api.content.transition(self.licence_3, transition="suspend")
         notify(ObjectModifiedEvent(self.licence_3))
-
 
         logout()
         login(portal, "urbaneditor")
@@ -183,7 +192,7 @@ class TestAmendedPlansStartDate(unittest.TestCase):
 
     def test_delay_resume_then_amend(self):
         login(self.portal, "urbanmanager")
-        
+
         api.content.transition(self.licence_1, transition="resume")
         notify(ObjectModifiedEvent(self.licence_1))
         self._create_recepisse_plans_modificatifs(self.licence_1, datetime(2024, 5, 10))

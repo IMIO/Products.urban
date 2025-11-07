@@ -278,14 +278,12 @@ def sort_delay_vocabularies(context):
 
 def add_new_index_and_new_filter(context):
     from eea.facetednavigation.interfaces import ICriteria
-    
+
     logger.info("starting : Add new index and new filter for validity date")
-    setup_tool = api.portal.get_tool('portal_setup')
-    setup_tool.runImportStepFromProfile(
-        "profile-Products.urban:default", "catalog"
-    )
+    setup_tool = api.portal.get_tool("portal_setup")
+    setup_tool.runImportStepFromProfile("profile-Products.urban:default", "catalog")
     reindexIndexes(None, ["getValidityDate"])
-    
+
     portal = api.portal.get()
     urban_folder = portal.urban
     folders = [
@@ -303,14 +301,9 @@ def add_new_index_and_new_filter(context):
             "title": u"Date de validité",
             "hidden": False,
             "index": u"getValidityDate",
-            "calYearRange": u"c-10:c+10"
+            "calYearRange": u"c-10:c+10",
         }
-        criterion.add(
-            wid="daterange",
-            position="top",
-            section="advanced",
-            **data
-        )
+        criterion.add(wid="daterange", position="top", section="advanced", **data)
 
     logger.info("upgrade done!")
 

@@ -48,7 +48,7 @@ class FolderManagersMail(BaseSubstitution):
     def safe_call(self):
         folder_managers = self.get_folder_manager()
         if not folder_managers:
-            return ''
+            return ""
         output = ", ".join(
             list(
                 set(

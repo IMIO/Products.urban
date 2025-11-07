@@ -78,45 +78,42 @@ def add_additional_delay_option(context):
         container=portal_urban,
         folder_id="complementary_delay",
         site=None,
-        allowedtypes="ComplementaryDelayTerm"
+        allowedtypes="ComplementaryDelayTerm",
     )
     complementary_delay_term = [
         {
             "id": "cyberattaque_spw",
             "title": u"Cyberattaque SPW - avril 2025",
-            "delay": 60
+            "delay": 60,
         }
     ]
     createFolderDefaultValues(
         complementary_delay_folder,
         complementary_delay_term,
-        portal_type="ComplementaryDelayTerm"
+        portal_type="ComplementaryDelayTerm",
     )
 
-    # Add qery widget to 'all' folder 
+    # Add qery widget to 'all' folder
     urban_folder = api.portal.get().urban
     data = {
         "_cid_": u"c97",
         "title": u"Prorogation complémentaire",
         "hidden": False,
         "index": u"getComplementary_delay",
-        "vocabulary": u"urban.vocabularies.complementary_delay"
+        "vocabulary": u"urban.vocabularies.complementary_delay",
     }
     urban_folder_criterion = ICriteria(urban_folder)
     if urban_folder_criterion is not None:
         urban_folder_criterion.add(
-            wid="select2",
-            position="top",
-            section="advanced",
-            **data
+            wid="select2", position="top", section="advanced", **data
         )
 
     # Add complementary_delay field to all default
     logger.info("Add complementary_delay field to all default")
     field = "complementary_delay"
-    
+
     for urban_type in URBAN_TYPES:
-        # Add complementary_delay field 
+        # Add complementary_delay field
         licence_config = portal_urban.get(urban_type.lower(), None)
         if licence_config is None:
             continue
@@ -125,10 +122,10 @@ def add_additional_delay_option(context):
         used_attributes = licence_config.getUsedAttributes()
         if field in used_attributes:
             continue
-        licence_config.setUsedAttributes(used_attributes + (field, ))
+        licence_config.setUsedAttributes(used_attributes + (field,))
         logger.info("Type {}, attribute add".format(urban_type))
 
-        #Add query widget
+        # Add query widget
         licence_folder = getattr(urban_folder, "{}s".format(urban_type.lower()), None)
         if licence_folder is None:
             continue
@@ -136,13 +133,7 @@ def add_additional_delay_option(context):
         if criterion is None:
             continue
 
-        criterion.add(
-            wid="select2",
-            position="top",
-            section="advanced",
-            **data
-        )
+        criterion.add(wid="select2", position="top", section="advanced", **data)
         logger.info("Type {}, query widget add".format(urban_type))
-        
 
     logger.info("upgrade step done!")

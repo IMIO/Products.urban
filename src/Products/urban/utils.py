@@ -235,18 +235,17 @@ def get_ws_meetingitem_infos(urban_event, extra_attributes=False):
         )
 
         items = ws4pmSettings._rest_searchItems(
-            {
-                "externalIdentifier": urban_event.UID(),
-                "config_id": config_id
-            }
+            {"externalIdentifier": urban_event.UID(), "config_id": config_id}
         )
         if extra_attributes and items:
-            items = ws4pmSettings._rest_getItemInfos({
-                "UID": items[0]['UID'],
-                "extra_include": "meeting,config",
-                "extra_include_config_metadata_fields": "title",
-                "fullobjects": "True"
-            })
+            items = ws4pmSettings._rest_getItemInfos(
+                {
+                    "UID": items[0]["UID"],
+                    "extra_include": "meeting,config",
+                    "extra_include_config_metadata_fields": "title",
+                    "fullobjects": "True",
+                }
+            )
 
         return items
 
@@ -268,7 +267,7 @@ def now():
     return datetime.now()
 
 
-def get_licence_context(context, get_all_object=False, max_recurence = 5):
+def get_licence_context(context, get_all_object=False, max_recurence=5):
     context_licence = IGenericLicence.providedBy(context)
     parent = context
     output = [context]

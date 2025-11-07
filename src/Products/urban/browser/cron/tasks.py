@@ -19,6 +19,7 @@ import transaction
 
 COMMIT_INTERVAL = 100
 
+
 class TaskCronView(BrowserView):
     def __call__(self):
         for name, utility in getUtilitiesFor(ITaskCron):

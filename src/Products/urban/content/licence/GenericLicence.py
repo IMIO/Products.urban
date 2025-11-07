@@ -270,12 +270,18 @@ schema = Schema(
             name="complementary_delay",
             widget=MultiSelect2Widget(
                 format="select",
-                label=_("urban_label_complementary_delay", default="Complementary Delay"),
+                label=_(
+                    "urban_label_complementary_delay", default="Complementary Delay"
+                ),
             ),
             enforceVocabulary=True,
             multiValued=True,
             schemata="urban_analysis",
-            vocabulary=UrbanVocabulary("complementary_delay", vocType="ComplementaryDelayTerm", inUrbanConfig=False),
+            vocabulary=UrbanVocabulary(
+                "complementary_delay",
+                vocType="ComplementaryDelayTerm",
+                inUrbanConfig=False,
+            ),
             default_method="getDefaultValue",
         ),
         LinesField(
@@ -1379,7 +1385,6 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
         )
         return DisplayList(vocab)
 
-
     security.declarePublic("foldermanagersBaseQuery")
 
     def foldermanagersBaseQuery(self):
@@ -1493,7 +1498,7 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
         return res
 
     security.declarePublic("get_complementary_delay")
-        
+
     def get_complementary_delay(self):
         complementary_delay = self.getComplementary_delay()
         if not complementary_delay:
@@ -1505,7 +1510,7 @@ class GenericLicence(BaseFolder, UrbanBase, BrowserDefaultMixin):
             context=self,
             vocType="ComplementaryDelayTerm",
             inUrbanConfig=False,
-            allowedStates=["disabled", "enabled"]
+            allowedStates=["disabled", "enabled"],
         )
 
         return [

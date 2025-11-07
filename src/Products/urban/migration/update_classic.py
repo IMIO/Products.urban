@@ -96,9 +96,8 @@ def add_additional_reference_index(context):
 def update_faceted_dashboard(context):
     """ """
     from Products.urban.dashboard.utils import switch_config_folder
-    logger = logging.getLogger(
-        "urban: update faceted dashboard"
-    )
+
+    logger = logging.getLogger("urban: update faceted dashboard")
     logger.info("starting upgrade steps")
     site = api.portal.getSite()
     urban_folder = getattr(site, "urban")
