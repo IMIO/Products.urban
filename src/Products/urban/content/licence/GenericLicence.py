@@ -129,6 +129,7 @@ optional_fields = [
     "locationFloodingLevel",
     "licenceSubject",
     "referenceDGATLP",
+    "additionalReference",
     "roadMissingParts",
     "roadMissingPartsDetails",
     "locationMissingParts",
