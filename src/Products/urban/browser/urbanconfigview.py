@@ -5,6 +5,7 @@ from Products.Five import BrowserView
 from Products.urban import UrbanMessage as _
 from Products.urban.setuphandlers import _create_task_configs
 from Products.urban.browser.table.urbantable import InternalOpinionServicesTable
+from Products.urban.browser.schedule_settings import ScheduleEditForm
 
 from imio.schedule.content.object_factories import CreationConditionObject
 from imio.schedule.content.object_factories import RecurrenceConditionObject
@@ -29,6 +30,9 @@ class UrbanConfigView(BrowserView):
         self.default_values_form.update()
         self.internal_services_form = AddInternalServiceForm(context, request)
         self.internal_services_form.update()
+        self.schedule_form = ScheduleEditForm(context, request)
+        self.schedule_form.update()
+
 
     def getTabMacro(self, tab):
         context = aq_inner(self.context)
