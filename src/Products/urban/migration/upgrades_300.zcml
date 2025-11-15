@@ -1,0 +1,16 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:gs="http://namespaces.zope.org/genericsetup"
+    i18n_domain="urban"
+    >
+
+  <gs:upgradeStep
+      title="Set additionalReference as an optional field"
+      description="Activate additionalReference for all licences types"
+      profile="Products.urban:default"
+      source="*"
+      destination="3000"
+      handler=".update_300.set_additional_reference_as_default"
+      />
+
+</configure>
