@@ -74,7 +74,8 @@ def getMd5Signature(data):
 
 def setOptionalAttributes(schema, optional_fields):
     """
-    This method set the optional attribute and widget condition on schema fields listed in optional_fields
+    This method set the optional attribute and widget condition on schema fields listed
+    in optional_fields
     """
     for fieldname in optional_fields:
         field = schema.get(fieldname)

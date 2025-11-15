@@ -158,7 +158,6 @@ from Products.urban.content.licence import UrbanCertificateBase  # noqa
 from Products.urban.content.licence import UrbanCertificateTwo  # noqa
 from Products.urban.content.licence import ExplosivesPossession  # noqa
 from Products.urban.content.licence import RoadDecree  # noqa
-from Products.urban.content.licence import Housing  # noqa
 
 import Products
 
@@ -226,7 +225,6 @@ def initialize(context):
     import content.licence.Division
     import content.licence.EnvClassBordering
     import content.licence.EnvClassOne
-    import content.licence.Housing
     import content.licence.EnvClassThree
     import content.licence.EnvClassTwo
     import content.licence.EnvironmentBase
