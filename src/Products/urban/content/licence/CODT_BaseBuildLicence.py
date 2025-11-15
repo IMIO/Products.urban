@@ -19,14 +19,15 @@ from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import (
 )
 from Products.Archetypes.atapi import *
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
-from Products.DataGridField import DataGridField, DataGridWidget
+from Products.DataGridField import DataGridField
+from Products.DataGridField import DataGridWidget
 from Products.DataGridField.Column import Column
 from Products.DataGridField.SelectColumn import SelectColumn
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 from Products.MasterSelectWidget.MasterMultiSelectWidget import MasterMultiSelectWidget
 from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
-from Products.urban import UrbanMessage as _
 from Products.urban import interfaces
+from Products.urban import UrbanMessage as _
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.config import *
 from Products.urban.content.CODT_Inquiry import CODT_Inquiry
@@ -771,7 +772,7 @@ class CODT_BaseBuildLicence(
             ("classified", "bien classé"),
         )
         return DisplayList(vocabulary)
-      
+
     def get_last_plonemeeting_date(
         self,
         event=interfaces.ISimpleCollegeEvent,

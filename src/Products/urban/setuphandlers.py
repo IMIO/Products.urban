@@ -29,6 +29,10 @@ from Products.urban.exportimport import updateAllUrbanTemplates
 from Products.urban.interfaces import IContactFolder
 from Products.urban.interfaces import ILicenceContainer
 from Products.urban.interfaces import IUrbanConfigurationFolder
+from Products.urban.profiles.extra.config_default_values import default_values
+from Products.urban.profiles.extra.config_default_values import (
+    vocabularies_with_HTML_description,
+)
 from Products.urban.schedule.vocabulary import URBAN_TYPES_INTERFACES
 from Products.urban.utils import generatePassword
 from Products.urban.utils import getAllLicenceFolderIds
@@ -37,8 +41,6 @@ from Products.urban.utils import getLicenceFolderId
 from Products.urban.utils import getUrbanOnlyLicenceFolderIds
 from Products.urban.utils import moveElementAfter
 from collective.eeafaceted.collectionwidget.utils import _updateDefaultCollectionFor
-from Products.urban.profiles.extra.config_default_values import default_values
-from Products.urban.profiles.extra.config_default_values import vocabularies_with_HTML_description
 from datetime import date
 from eea.facetednavigation.layout.interfaces import IFacetedLayout
 from imio.schedule.utils import _set_faceted_view
@@ -1958,7 +1960,7 @@ def add_imio_dashboard(urban_type, urban_folder=None):
     collection = getattr(licence_folder, collection_id)
 
     _updateDefaultCollectionFor(licence_folder, collection.UID())
-    
+
     return collection
 
 
@@ -1984,9 +1986,7 @@ def add_urban_config_folder(urban_type, tool=None, site=None):
     config_folder = getattr(tool, config_folder_id)
     config_folder.licencePortalType = urban_type
     config_folder.setUsedAttributes(config_folder.listUsedAttributes().keys())
-    states_voc = queryUtility(IVocabularyFactory, "urban.licence_state")(
-        config_folder
-    )
+    states_voc = queryUtility(IVocabularyFactory, "urban.licence_state")(config_folder)
     default_end_states = [
         st for st in states_voc.by_value.keys() if st in LICENCE_FINAL_STATES
     ]

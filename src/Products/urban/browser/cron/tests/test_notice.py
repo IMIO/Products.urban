@@ -340,18 +340,22 @@ class TestNoticeCronPE2(unittest.TestCase):
         licence = licence_folder.values()[-1]
         licence.reference = "PE2/2025/4"  # force reference, already sent to NOTICE
         licence.reindexObject()
-        #self.assertFalse(licence.getProrogation())
+        # self.assertFalse(licence.getProrogation())
         self._create_extension_folder()
         # 5.3 assert prorogation is set to True
         self.assertTrue(licence.getProrogation())
 
     @mock.patch(
         "Products.urban.services.notice.WebserviceNotice.get_notifications",
-        return_value=load_notif_json("EXTENSION_DEADLINE", "1471027-NOTIFICATIONS.json"),
+        return_value=load_notif_json(
+            "EXTENSION_DEADLINE", "1471027-NOTIFICATIONS.json"
+        ),
     )
     @mock.patch(
         "Products.urban.services.notice.WebserviceNotice._get_notification",
-        return_value=MockedRequest(load_notif_json("EXTENSION_DEADLINE", "1471027-NOTIFICATION.json")),
+        return_value=MockedRequest(
+            load_notif_json("EXTENSION_DEADLINE", "1471027-NOTIFICATION.json")
+        ),
     )
     def _create_extension_folder(self, notif_patch, notifs_patch):
         notif_patch, notifs_patch
@@ -377,7 +381,9 @@ class TestNoticeCronPE2(unittest.TestCase):
             return_value=[{"text": "street, 1 (1400 - Nivelles)", "id": "1234"}],
         ) as mock_address, mock.patch(
             "Products.urban.services.notice.WebserviceNotice._get_notification_document",
-            return_value=MockedRequest(load_notif_content("TRANSFERT_DOSSIER", "document.pdf")),
+            return_value=MockedRequest(
+                load_notif_content("TRANSFERT_DOSSIER", "document.pdf")
+            ),
         ) as mock_get_document:
             with api.env.adopt_roles(["Manager"]):
                 import_view = self.portal.restrictedTraverse("@@import-from-notice")
