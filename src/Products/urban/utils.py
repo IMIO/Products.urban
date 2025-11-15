@@ -21,6 +21,9 @@ import string
 import time
 
 
+WIDGET_DATE_END_YEAR = datetime.now().year + 25
+
+
 def getCurrentFolderManager():
     """
     Returns the current FolderManager initials or object
@@ -350,9 +353,6 @@ def cache_key_5min(func, *args, **kwargs):
     return (func.__name__, time.time() // (60 * 5), args, kwargs)
 
 
-WIDGET_DATE_END_YEAR = datetime.now().year + 25
-
-
 def add_missing_capakey_in_registry(capakey):
     interface = "Products.urban.interfaces.IMissingCapakey"
     registry = api.portal.get_registry_record(interface)
@@ -360,3 +360,27 @@ def add_missing_capakey_in_registry(capakey):
         return
     registry.append(capakey.decode("utf-8"))
     api.portal.set_registry_record(interface, registry)
+
+
+def set_default_optional_field(fieldname):
+    """Set an optional field for all licences types"""
+    portal = api.portal.get()
+    portal_urban = portal.get("portal_urban")
+    updated = []
+    for urban_type in URBAN_TYPES:
+        licence_config = portal_urban.getLicenceConfig(
+            portal,
+            urbanConfigId=urban_type,
+        )
+        if licence_config is None:
+            # This can happen during developments
+            continue
+        allowed_values = licence_config.listUsedAttributes().keys()
+        if fieldname not in allowed_values:
+            continue
+        values = licence_config.getUsedAttributes()
+        if fieldname in values:
+            continue
+        licence_config.setUsedAttributes(values + (fieldname,))
+        updated.append(urban_type)
+    return updated
