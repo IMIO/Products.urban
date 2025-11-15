@@ -21,6 +21,9 @@ import string
 import time
 
 
+WIDGET_DATE_END_YEAR = datetime.now().year + 25
+
+
 def getCurrentFolderManager():
     """
     Returns the current FolderManager initials or object
@@ -358,36 +361,28 @@ def add_missing_capakey_in_registry(capakey):
     api.portal.set_registry_record(interface, registry)
 
 
-def find_address(term, exact_match=False):
-    """Find an address based on a term"""
-    if not term:
-        return
-    terms = term.strip().split()
-    urban_config = api.portal.get_tool("portal_urban")
-    path = "/".join(urban_config.streets.getPhysicalPath())
-
-    if exact_match is True:
-        title = term
-    else:
-        title = " AND ".join(["%s*" % x for x in terms])
-
-    kwargs = {
-        "Title": title,
-        "sort_on": "sortable_title",
-        "sort_order": "reverse",
-        "path": path,
-        "object_provides": [
-            "Products.urban.interfaces.IStreet",
-            "Products.urban.interfaces.ILocality",
-        ],
-        "review_state": "enabled",
-    }
-
-    catalog = api.portal.get_tool("portal_catalog")
-    brains = catalog(**kwargs)
-
-    suggestions = [{"text": b.Title, "id": b.UID} for b in brains]
-    return suggestions
+def set_default_optional_field(fieldname):
+    """Set an optional field for all licences types"""
+    portal = api.portal.get()
+    portal_urban = portal.get("portal_urban")
+    updated = []
+    for urban_type in URBAN_TYPES:
+        licence_config = portal_urban.getLicenceConfig(
+            portal,
+            urbanConfigId=urban_type,
+        )
+        if licence_config is None:
+            # This can happen during developments
+            continue
+        allowed_values = licence_config.listUsedAttributes().keys()
+        if fieldname not in allowed_values:
+            continue
+        values = licence_config.getUsedAttributes()
+        if fieldname in values:
+            continue
+        licence_config.setUsedAttributes(values + (fieldname,))
+        updated.append(urban_type)
+    return updated
 
 
 WIDGET_DATE_END_YEAR = datetime.now().year + 25
