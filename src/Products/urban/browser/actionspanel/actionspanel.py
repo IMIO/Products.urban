@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 
 from Products.CMFPlone import PloneMessageFactory as _plone
+from Products.DCWorkflow.Guard import Guard
 from Products.DCWorkflow.Transitions import TransitionDefinition
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from Products.urban.interfaces import IGenericLicence
+from Products.urban.interfaces import ICODT_UniqueLicence
+from Products.urban.interfaces import IEnvironmentLicence
 from imio.actionspanel import ActionsPanelMessageFactory as _actions
 from imio.actionspanel.browser.views import ActionsPanelView
 from imio.actionspanel.browser.views import DEFAULT_CONFIRM_VIEW
@@ -197,6 +199,16 @@ class TransitionsPanelView(ActionsPanelView):
         )
         if "frozen_suspension" in workflow.states:
             if api.content.get_state(self.context) == "frozen_suspension":
+                guard = Guard()
+                if ICODT_UniqueLicence.providedBy(self.context):
+                    guard.groups = ("urban_editors", "environment_editors")
+                elif IEnvironmentLicence.providedBy(self.context):
+                    guard.groups = ("environment_editors",)
+                else:
+                    guard.groups = ("urban_editors",)
+                may_trigger = self._checkTransitionGuard(
+                    guard, self.member, workflow, self.context
+                )
                 # add 'resume_thaw' fake transition
                 if not self._check_if_transiton_present(transitions, "resume_thaw"):
                     transitions.append(
@@ -226,6 +238,11 @@ class TransitionsPanelView(ActionsPanelView):
                         }
                     )
             else:
+                guard = Guard()
+                guard.groups = ("urban_editors",)
+                may_trigger = self._checkTransitionGuard(
+                    guard, self.member, workflow, self.context
+                )
                 # add 'suspend_freeze' fake transition
                 if not self._check_if_transiton_present(transitions, "suspend_freeze"):
                     transitions.append(
@@ -259,11 +276,18 @@ class TransitionsPanelView(ActionsPanelView):
     def sortTransitions(self, lst):
         """Sort the list of transitions"""
         super(TransitionsPanelView, self).sortTransitions(lst)
-        end_transition_ids = ["abandon", "suspend"]
+        end_transition_ids = [
+            "abandon",
+            "suspend",
+            "make_obsolete_to_authorized",
+            "make_obsolete_to_accepct",
+        ]
         to_move = []
-        for transition in lst:
-            if transition["id"] in end_transition_ids:
-                to_move.append(lst.pop(lst.index(transition)))
+        lst_id = [trans["id"] for trans in lst]
+        for transition in end_transition_ids:
+            if transition in lst_id:
+                to_move.append(lst.pop(lst_id.index(transition)))
+                lst_id.remove(transition)
         lst.extend(to_move)
 
     def _transitionsToConfirm(self):
