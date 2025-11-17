@@ -5,8 +5,12 @@ from Products.urban.schedule.conditions.base import BaseInspection
 from datetime import date
 from datetime import datetime
 from imio.schedule.content.condition import CreationCondition
-from numpy import busday_offset
 from plone import api
+
+try:
+    from numpy import busday_offset
+except ImportError:
+    busday_offset = None
 
 
 class DepositDoneCondition(CreationCondition):

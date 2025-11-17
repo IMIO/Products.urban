@@ -3,10 +3,15 @@
 from Products.Archetypes.browser.edit import Edit
 from datetime import datetime
 from datetime import timedelta
-from numpy import busday_offset
-from numpy import busdaycalendar
 from plone import api
 from zope.component import queryMultiAdapter
+
+try:
+    from numpy import busday_offset
+    from numpy import busdaycalendar
+except ImportError:
+    busday_offset = None
+    busdaycalendar = None
 
 
 class UrbanEventEdit(Edit):
