@@ -14,17 +14,26 @@ __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEUL
 __docformat__ = "plaintext"
 
 
+import logging
+
+
+logger = logging.getLogger("urban: setuphandlers")
+##code-section HEAD
 from Acquisition import aq_base
 from Products.Archetypes.event import EditBegunEvent
 from Products.Archetypes.event import ObjectInitializedEvent
 from Products.CMFCore.utils import getToolByName
+from Products.CMFPlone.utils import base_hasattr
 from Products.cron4plone.browser.configlets.cron_configuration import ICronConfiguration
 from Products.urban import services
+from Products.urban.Extensions.update_task_configs import add_licence_ended_condition
 from Products.urban.config import DefaultTexts
 from Products.urban.config import LICENCE_FINAL_STATES
 from Products.urban.config import URBAN_CFG_DIR
 from Products.urban.config import URBAN_TYPES
 from Products.urban.config import URBAN_TYPES_ACRONYM
+from Products.urban.config import URBANMAP_CFG
+from Products.urban.dashboard.utils import switch_config_folder
 from Products.urban.exportimport import updateAllUrbanTemplates
 from Products.urban.interfaces import IContactFolder
 from Products.urban.interfaces import ILicenceContainer
@@ -73,7 +82,9 @@ import transaction
 
 logger = logging.getLogger("urban: setuphandlers")
 
+OBJECTS_COUNT = 0
 
+##/code-section HEAD
 def isNoturbanProfile(context):
     return context.readDataFile("urban_marker.txt") is None
 
@@ -98,6 +109,17 @@ def setupHideToolsFromNavigation(context):
                 current.append(toolname)
                 kwargs = {"idsNotToList": current}
                 navtreeProperties.manage_changeProperties(**kwargs)
+
+
+def checkPoint():
+    """allows to create savepoints every 50 objects created to avoid having
+    a too huge transaction in memory"""
+    global OBJECTS_COUNT
+    OBJECTS_COUNT += 1
+    if OBJECTS_COUNT % 50 == 0:
+        logger.debug("Creating transaction savepoint ...")
+        trx = transaction.get()
+        trx.savepoint()
 
 
 def updateRoleMappings(context):
@@ -139,6 +161,7 @@ def postInstall(context):
             "UrbanTemplate",
             "ConfigurablePODTemplate",
             "SubTemplate",
+            "StyleTemplate",
             "DashboardPODTemplate",
             "MailingLoopTemplate",
         )
@@ -155,6 +178,8 @@ def postInstall(context):
         values.append("ConfigurablePODTemplate")
     if "SubTemplate" not in values:
         values.append("SubTemplate")
+    if "StyleTemplate" not in values:
+        values.append("StyleTemplate")
     if "DashboardPODTemplate" not in values:
         values.append("DashboardPODTemplate")
     if "MailingLoopTemplate" not in values:
@@ -213,6 +238,7 @@ def postInstall(context):
     logger.info("addDefaultCronJobs : Done")
 
 
+##code-section FOOT
 def _(msgid, default="", domain="urban"):
     translation_domain = queryUtility(ITranslationDomain, domain)
     return translation_domain.translate(msgid, target_language="fr", default=default)
@@ -244,6 +270,25 @@ def extraPostInstall(context):
     logger.info("Configure CKEditor: starting...")
     configureCKEditor(context)
     logger.info("Configure CKEditor: Done")
+
+
+def testExtraPostInstall(context):
+    # all installation custom code not required for tests
+    if context.readDataFile("urban_extra_marker.txt") is None:
+        return
+    site = context.getSite()
+    logger.info("addUrbanVocabularies : starting...")
+    addUrbanVocabularies(context)
+    logger.info("addUrbanVocabularies : Done")
+    logger.info("addDefaultObjects : starting...")
+    addDefaultObjects(context)
+    logger.info("addDefaultObjects : Done")
+    logger.info("addEventTypesAndTemplates : starting...")
+    addEventTypesAndTemplates(context)
+    logger.info("addEventTypesAndTemplates : Done")
+    logger.info("Setup default schedule configuration: starting...")
+    addScheduleConfigs(context, profile_name="extra")
+    logger.info("Setup default schedule configuration : Done")
 
 
 def updateVocabularyConfig(context):
@@ -322,6 +367,7 @@ def createFolderDefaultValues(folder, objects_list, portal_type=""):
         if type(obj) is dict:
             if obj["id"] not in folder.objectIds():
                 folder.invokeFactory(portal_type, **obj)
+                checkPoint()
 
 
 def createVocabularyFolder(
@@ -337,6 +383,7 @@ def createVocabularyFolder(
         new_folder = getattr(container, folder_id)
         new_folder.setTitle(_("%s_folder_title" % folder_id, "urban"))
     alsoProvides(new_folder, IUrbanConfigurationFolder)
+    checkPoint()
     return new_folder
 
 
@@ -370,11 +417,12 @@ def createScheduleConfig(container, portal_type, id="schedule", title=""):
     return schedule_config
 
 
-def addScheduleConfigs(context):
+def addScheduleConfigs(context, profile_name=None):
     if context.readDataFile("urban_extra_marker.txt") is None:
         return
 
-    profile_name = context._profile_path.split("/")[-1]
+    if profile_name is None:
+        profile_name = context._profile_path.split("/")[-1]
     module_name = "Products.urban.profiles.%s.schedule_config" % profile_name
     attribute = "schedule_config"
     module = __import__(module_name, fromlist=[attribute])
@@ -488,6 +536,7 @@ def addUrbanConfigFolders(context):
         createVocabularyFolders(
             container=config_folder, vocabularies=shared_vocabularies, site=site
         )
+        checkPoint()
 
 
 def set_file_system_configuration(context):
@@ -622,6 +671,7 @@ def addRubricValues(context, config_folder):
 
             rubric = getattr(rubric_folder, rubric_id)
             rubric.setExploitationCondition(conditions_uid)
+        checkPoint()
 
 
 def addExploitationConditions(context, config_folder):
@@ -664,6 +714,7 @@ def addExploitationConditions(context, config_folder):
                     field = old_condition.getField(fieldname)
                     mutator = field.getMutator(old_condition)
                     mutator(newvalue)
+            checkPoint()
 
 
 def addUrbanGroups(context):
@@ -880,8 +931,8 @@ def addGlobalFolders(context):
         )
     templates = getattr(tool, templates_id)
     templates.setConstrainTypesMode(1)
-    templates.setLocallyAllowedTypes(["UrbanTemplate", "Folder"])
-    templates.setImmediatelyAddableTypes(["UrbanTemplate", "Folder"])
+    templates.setLocallyAllowedTypes(["UrbanTemplate", "StyleTemplate", "Folder"])
+    templates.setImmediatelyAddableTypes(["UrbanTemplate", "StyleTemplate", "Folder"])
 
     folder = tool.globaltemplates
     templates_id = "urbantemplates"
@@ -893,8 +944,12 @@ def addGlobalFolders(context):
         )
     templates = getattr(folder, templates_id)
     templates.setConstrainTypesMode(1)
-    templates.setLocallyAllowedTypes(["SubTemplate", "MailingLoopTemplate"])
-    templates.setImmediatelyAddableTypes(["SubTemplate", "MailingLoopTemplate"])
+    templates.setLocallyAllowedTypes(
+        ["SubTemplate", "StyleTemplate", "MailingLoopTemplate"]
+    )
+    templates.setImmediatelyAddableTypes(
+        ["SubTemplate", "StyleTemplate", "MailingLoopTemplate"]
+    )
 
     templates_id = "environmenttemplates"
     if not hasattr(folder, templates_id):
@@ -905,8 +960,12 @@ def addGlobalFolders(context):
         )
     templates = getattr(folder, templates_id)
     templates.setConstrainTypesMode(1)
-    templates.setLocallyAllowedTypes(["SubTemplate", "MailingLoopTemplate"])
-    templates.setImmediatelyAddableTypes(["SubTemplate", "MailingLoopTemplate"])
+    templates.setLocallyAllowedTypes(
+        ["SubTemplate", "StyleTemplate", "MailingLoopTemplate"]
+    )
+    templates.setImmediatelyAddableTypes(
+        ["SubTemplate", "StyleTemplate", "MailingLoopTemplate"]
+    )
 
 
 def adaptDefaultPortal(context):
@@ -1060,6 +1119,7 @@ def addApplicationFolders(context):
                     acquire=0,
                 )
         newFolder.moveObjectsToBottom([licence_folder_id])
+        checkPoint()
 
     # add a folder that will contains architects
     if not hasattr(newFolder, "architects"):
@@ -1124,8 +1184,17 @@ def addApplicationFolders(context):
             "Folder", id="parcellings", title=_("parcellings_folder_title", "urban")
         )
         newSubFolder = getattr(newFolder, newFolderid)
-        setFolderAllowedTypes(newSubFolder, "Parcelling")
+        setFolderAllowedTypes(newSubFolder, "ParcellingTerm")
         newSubFolder.setLayout("parcellings_folderview")
+        # manage the 'Add' permissions...
+        newSubFolder.manage_permission(
+            "urban: Add ParcellingTerm",
+            [
+                "Manager",
+                "Editor",
+            ],
+            acquire=0,
+        )
     newFolder.moveObjectsToBottom(["parcellings"])
 
 
@@ -1155,7 +1224,7 @@ def setupImioDashboard(context):
     """
     site = context.getSite()
     urban_folder = getattr(site, "urban")
-    _activate_dashboard_navigation(urban_folder, "/dashboard/config/all.xml")
+    _activate_dashboard_navigation(urban_folder, switch_config_folder("all.xml"))
 
     all_licences_collection_id = "collection_all_licences"
     if all_licences_collection_id not in urban_folder.objectIds():
@@ -1181,7 +1250,7 @@ def setupImioDashboard(context):
     for urban_type in URBAN_TYPES:
         folder = getattr(urban_folder, urban_type.lower() + "s")
         _activate_dashboard_navigation(
-            folder, "/dashboard/config/%ss.xml" % urban_type.lower()
+            folder, switch_config_folder("%ss.xml" % urban_type.lower())
         )
         collection_id = "collection_%s" % urban_type.lower()
         no_deposit = ["PatrimonyCertificate", "Inspection"]
@@ -1308,6 +1377,9 @@ def setupSchedule(context):
                 os.path.dirname(__file__), folder_id
             )
             _set_faceted_view(collection_folder, config_path, [schedule_config])
+
+        checkPoint()
+
     setFolderAllowedTypes(schedule_folder, [])
 
 
@@ -1340,6 +1412,22 @@ def setupOpinionsSchedule(context):
     set_schedule_view(schedule_folder, config_path, schedule_config)
 
 
+def setupTest(context):
+    """
+    Enable schedule faceted navigation on schedule folder.
+    """
+    portal_urban = api.portal.get_tool("portal_urban")
+    for urban_type in URBAN_TYPES:
+        config_folder = getattr(portal_urban, urban_type.lower())
+        if "test" not in config_folder:
+            test_folder = api.content.create(
+                type="ConfigTest", title="Test", container=config_folder
+            )
+        else:
+            test_folder = config_folder["test"]
+        setFolderAllowedTypes(test_folder, [urban_type])
+
+
 def addTestUsers(site):
     users = [
         ("urbanmanager", ("urban_managers", "urban_editors", "urban_readers"), True),
@@ -1348,6 +1436,7 @@ def addTestUsers(site):
         ("environmentreader", ("environment_readers",)),
         ("environmenteditor", ("environment_editors",), True),
         ("urbanmapreader", ("urban_map_readers",)),
+        ("to_assign", "AuthenticatedUsers"),
     ]
     for user_info in users:
         _addTestUser(site, *user_info)
@@ -1490,6 +1579,7 @@ def addDemoLicences(context):
 
 def createLicence(site, licence_type, data):
     """ """
+    urban_tool = site.portal_urban
     urban_folder = site.urban
     catalog = api.portal.get_tool("portal_catalog")
 
@@ -1559,7 +1649,9 @@ def createLicence(site, licence_type, data):
             return str(date.today())
         return None
 
-    licence_folder = getattr(urban_folder, "%ss" % licence_type.lower())
+    licence_folder = getattr(urban_folder, "%ss" % licence_type.lower(), None)
+    if not licence_folder:
+        return
     # create the licence
     licence_id = site.generateUniqueId("test_%s" % licence_type.lower())
     licence_folder.invokeFactory(licence_type, id=licence_id)
@@ -1821,6 +1913,8 @@ def _create_task_configs(container, taskconfigs):
         task_config = getattr(container, task_config_id)
         for subtasks_kwargs in subtasks:
             _create_task_configs(container=task_config, taskconfigs=subtasks)
+
+        checkPoint()
 
 
 def reindex_catalog(context):
