@@ -43,6 +43,9 @@ setup(
         templates=[
             "Genshi",
         ],
+        numpy=[
+            "numpy",
+        ],
     ),
     install_requires=[
         "archetypes.referencebrowserwidget",
@@ -72,7 +75,6 @@ setup(
         "imio.schedule",
         "imio.urban.core",
         "imio.ws.register",
-        "numpy",
         "Pillow",
         "Plone",
         "Products.CMFPlacefulWorkflow",

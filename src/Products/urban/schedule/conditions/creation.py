@@ -8,8 +8,12 @@ from datetime import datetime
 from imio.schedule.config import STARTED
 from imio.schedule.config import states_by_status
 from imio.schedule.content.condition import CreationCondition
-from numpy import busday_offset
 from plone import api
+
+try:
+    from numpy import busday_offset
+except ImportError:
+    busday_offset = None
 
 
 class DepositDoneCondition(CreationCondition):
