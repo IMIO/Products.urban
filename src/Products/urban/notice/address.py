@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from Products.urban.notice.base import NoticeElement
 from Products.urban import utils
+from Products.urban.notice.base import NoticeElement
 
 import re
 
@@ -42,7 +42,9 @@ class NoticeAddress(NoticeElement):
         if self.locality:
             term = u"{0} {1}".format(term, self.locality)
         elif self.municipality:
-            match = re.search("^(?P<commune>.+?) *\((?P<village>.*?)\)$", self.municipality)
+            match = re.search(
+                "^(?P<commune>.+?) *\((?P<village>.*?)\)$", self.municipality
+            )
             if match:
                 term = u"{0} {1}".format(term, match.group("village"))
             else:

@@ -1,15 +1,14 @@
 # -*- coding: utf-8 -*-
 
 from Products.Five import BrowserView
-from plone.i18n.normalizer.interfaces import IIDNormalizer
+from Products.urban import services
 from plone import api
+from plone.i18n.normalizer.interfaces import IIDNormalizer
 from zope.component import getUtility
 from zope.schema.interfaces import IVocabularyFactory
 
 import collections
 import json
-
-from Products.urban import services
 
 
 class CoringUtility(object):

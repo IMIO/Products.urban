@@ -473,6 +473,21 @@
   />
 
   <browser:page
+      for="Products.urban.interfaces.IHousing"
+      name="housingview"
+      class=".housingview.HousingView"
+      template="templates/housingview.pt"
+      permission="zope2.View"
+  />
+
+  <browser:page
+     name="housing-macros"
+     for="Products.urban.interfaces.IHousing"
+     template="templates/housingmacros.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
      for="Products.urban.interfaces.ITicket"
      name="ticketview"
      class=".ticketview.TicketView"

@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 from plone import api
-
 from zope.annotation import IAnnotations
 from zope.event import notify
 from zope.lifecycleevent import ObjectModifiedEvent

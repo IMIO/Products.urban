@@ -3,21 +3,18 @@
 from Acquisition import aq_inner
 from Products.Five import BrowserView
 from Products.urban import UrbanMessage as _
-from Products.urban.setuphandlers import _create_task_configs
-from Products.urban.browser.table.urbantable import InternalOpinionServicesTable
-from Products.urban.browser.offdays_settings import OffDaysEditForm
 from Products.urban.browser.gig_coring_settings import GigCoringLinkEditForm
 from Products.urban.browser.notice_settings import NoticeSettingsEditForm
+from Products.urban.browser.offdays_settings import OffDaysEditForm
 from Products.urban.browser.schedule_settings import ScheduleEditForm
-
+from Products.urban.browser.table.urbantable import InternalOpinionServicesTable
+from Products.urban.setuphandlers import _create_task_configs
 from imio.schedule.content.object_factories import CreationConditionObject
 from imio.schedule.content.object_factories import RecurrenceConditionObject
-
 from plone import api
-
 from z3c.form import button
-from z3c.form import form, field
-
+from z3c.form import field
+from z3c.form import form
 from zope.interface import Interface
 from zope.schema import TextLine
 

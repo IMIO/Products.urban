@@ -1,39 +1,148 @@
 # -*- coding: utf-8 -*-
 
+from DateTime import DateTime
 from Products.Archetypes.event import ObjectInitializedEvent
 from Products.Five import BrowserView
 from Products.urban import UrbanMessage as _
-from Products.urban.services import notice
 from Products.urban.browser.cron.transitions import EVENT_TYPE_TO_TRANSITION
+from Products.urban.services import notice
 from datetime import datetime
-from DateTime import DateTime
 from plone import api
 from zope.event import notify
 from zope.i18n import translate
+from zope.lifecycleevent import ObjectModifiedEvent
 
+import logging
 import transaction
+
+logger = logging.getLogger("urban: Notice Cron")
 
 
 class ImportFromNoticeView(BrowserView):
     """Get new notification from Notice API"""
 
     def __call__(self):
+
+        self._initialize()
+        self._retry_failed_notifications()
+        self._process_fresh_notifications()
+        self._save_progress()
+        return "OK"
+
+    def _initialize(self):
+        """Initialize service and configuration values."""
+
         self.notice_service = notice.WebserviceNotice()
-        self.max_date = (
+        self.retry_failed_notifications = self.request.form.get("retry") == "1"
+        self.last_import_date = (
             api.portal.get_registry_record(
                 "Products.urban.browser.notice_settings.INoticeSettings.last_import_date",
                 default=datetime(2000, 1, 1),
             )
             or datetime(2000, 1, 1)
         )
-        self.notification_dates = []
-        notifications = self._get_notice_notifications()
-        for notification in notifications:
-            self._handle_notification(notification)
-        return "OK"
+        self.latest_successful_date = self.last_import_date
+        self.failed_notifications = (
+            api.portal.get_registry_record(
+                "Products.urban.browser.notice_settings.INoticeSettings.failed_notifications",
+                default=[],
+            )
+            or []
+        )
+        self.already_handled_notifications = []
+
+    def _retry_failed_notifications(self):
+        """Retry processing of previously failed notifications, if requested."""
+        if not self.retry_failed_notifications or not self.failed_notifications:
+            return
+
+        logger.info(u"Retrying %d failed notifications", len(self.failed_notifications))
+        remaining_failed = []
+
+        for failed_notice_id in self.failed_notifications:
+            if failed_notice_id in self.already_handled_notifications:
+                continue
+            self.already_handled_notifications.append(failed_notice_id)
+            try:
+                self._handle_notification(failed_notice_id)
+                logger.info(u"Retried notification %s succeeded", failed_notice_id)
+            except Exception as exc:
+                logger.exception(
+                    u"Retried notification %s failed again: %s",
+                    failed_notice_id,
+                    exc,
+                )
+                remaining_failed.append(failed_notice_id)
+
+        api.portal.set_registry_record(
+            "Products.urban.browser.notice_settings.INoticeSettings.failed_notifications",
+            remaining_failed,
+        )
+        self.failed_notifications = remaining_failed
+
+    def _process_fresh_notifications(self):
+        """Process new notifications from the Notice API."""
+
+        fresh_notifications = self._get_notice_notifications()
+        for notification in fresh_notifications:
+
+            notice_id = notification["noticeId"]
+            notif_last_status_date = datetime.strptime(
+                notification["status"]["date"][0:26],
+                "%Y-%m-%dT%H:%M:%S.%f",
+            )
+            if notif_last_status_date <= self.last_import_date:
+                continue
+
+            if notice_id in self.already_handled_notifications:
+                continue
+            self.already_handled_notifications.append(notice_id)
+
+            try:
+                self._handle_notification(notice_id)
+                if notif_last_status_date > self.latest_successful_date:
+                    self.latest_successful_date = notif_last_status_date
+                logger.info(u"Notification %s succeeded", notice_id)
+            except Exception as exc:
+                logger.exception(
+                    u"Error while processing notification %s: %s",
+                    notice_id,
+                    exc,
+                )
+                self.failed_notifications.append(notice_id)
+
+    def _save_progress(self):
+        """Save the progress markers and failed notifications."""
+
+        if self.latest_successful_date > self.last_import_date:
+            api.portal.set_registry_record(
+                "Products.urban.browser.notice_settings.INoticeSettings.last_import_date",
+                self.latest_successful_date,
+            )
+            logger.info(
+                u"Updated last_import_date to %s",
+                self.latest_successful_date.isoformat(),
+            )
+
+        api.portal.set_registry_record(
+            "Products.urban.browser.notice_settings.INoticeSettings.failed_notifications",
+            self.failed_notifications,
+        )
+        if self.failed_notifications:
+            logger.warning(
+                u"%d notification(s) recorded as failed", len(self.failed_notifications)
+            )
 
     def _get_notice_notifications(self):
-        return self.notice_service.get_notifications()
+        notifications = []
+        try:
+            notifications = self.notice_service.get_notifications()
+        except Exception as exc:
+            logger.exception(
+                u"Failed getting the list of recent notifications: %s",
+                exc,
+            )
+        return notifications
 
     def _add_error(self, licence, msg, serialized_data):
         """Add an error"""
@@ -49,25 +158,32 @@ class ImportFromNoticeView(BrowserView):
         licence.description.raw += translate(error, context=self.request)
         licence._p_changed = 1
 
-
-    def _handle_notification(self, notification):
-        notification_date = datetime.strptime(
-            notification["status"]["date"][0:26],
-            "%Y-%m-%dT%H:%M:%S.%f",
-        )
-        if notification_date > self.max_date:
-            self.notification_dates.append(notification_date)
-        else:
-            return
-
+    def _handle_notification(self, notice_id):
         detailed_notification = self.notice_service.get_notification(
-            notification["noticeId"]
+            notice_id,
         )
         if detailed_notification.notice_type == "TRANSFERT_DOSSIER":
             self._transfert_dossier(detailed_notification)
         if detailed_notification.notice_type == "NOTIF_COMPLETUDE1_INCOMPLET_COMMUNE":
             self.process_incomplete_folder_notification(detailed_notification)
-
+        if (
+            detailed_notification.notice_type
+            == "NOTIF_COMPLETUDE2_NON_RECEVABLE_COMMUNE"
+        ):
+            self.process_not_admissible_folder_notification_second_tour(
+                detailed_notification
+            )
+        if detailed_notification.notice_type == "NOTIF_COMPLETUDE2_IRRECEVABLE_COMMUNE":
+            self.process_inadmissible_folder_notification(detailed_notification)
+        if (
+            detailed_notification.notice_type
+            == "NOTIF_COMPLETUDE1_NON_RECEVABLE_COMMUNE"
+        ):
+            self.process_not_admissible_folder_notification_first_tour(
+                detailed_notification
+            )
+        if detailed_notification.notice_type == "NOTIFICATION_PROROGATION_COMMUNE":
+            self.process_extension_of_deadline_notification(detailed_notification)
 
     def _transfert_dossier(self, detailed_notification):
         container = detailed_notification.container
@@ -75,6 +191,9 @@ class ImportFromNoticeView(BrowserView):
             container=container, **detailed_notification.serialize()
         )
         licence.noticeId = detailed_notification.noticeId
+        licence.setFoldermanagers(
+            detailed_notification.foldermanagers
+        )  # Must be set manually, serialized value is ignored at creation
         licence._p_changed = 1
         for party in detailed_notification.parties:
             api.content.create(container=licence, **party.serialize())
@@ -114,21 +233,22 @@ class ImportFromNoticeView(BrowserView):
         api.content.transition(event, "close")
 
         transaction.commit()  # Useful in case of an error
-    
+
     def update_license(self, license, detailed_notification, event_type=None):
         if not event_type:
             return
+
         event_configs = detailed_notification.event_configs
         # Normalizing event_type to list
         if isinstance(event_type, (list, tuple)):
             event_types = event_type
         else:
-            event_types = [event_type]   
+            event_types = [event_type]
         configs = []
-        for etype in event_types:                                         
+        for etype in event_types:
             event_config = event_configs.get(etype)
-            if  event_config:
-                configs.append((etype,event_config))
+            if event_config:
+                configs.append((etype, event_config))
         if not configs:
             return
         with api.env.adopt_roles(["Manager"]):
@@ -143,6 +263,39 @@ class ImportFromNoticeView(BrowserView):
 
     def process_incomplete_folder_notification(self, detailed_notification):
         license = detailed_notification.licence
-        self.update_license(license, detailed_notification, event_type="dossier-incomplet")
-        transaction.commit() 
-    
+        self.update_license(
+            license, detailed_notification, event_type="dossier-incomplet"
+        )
+        transaction.commit()
+
+    def process_not_admissible_folder_notification_second_tour(
+        self, detailed_notification
+    ):
+        licence = detailed_notification.licence
+        self.update_license(
+            licence, detailed_notification, event_type="dossier-irrecevable"
+        )
+        transaction.commit()
+
+    def process_inadmissible_folder_notification(self, detailed_notification):
+        license = detailed_notification.licence
+        self.update_license(
+            license, detailed_notification, event_type="dossier-irrecevable"
+        )
+        transaction.commit()
+
+    def process_not_admissible_folder_notification_first_tour(
+        self, detailed_notification
+    ):
+        licence = detailed_notification.licence
+        self.update_licence(
+            licence, detailed_notification, event_type="dossier-incomplet"
+        )
+        transaction.commit()
+
+    def process_extension_of_deadline_notification(self, detailed_notification):
+        license = detailed_notification.licence
+        license.getField('prorogation').set(license, True)
+        license.reindexObject()
+        self.update_license(license, detailed_notification, event_type="prorogation-30-jours")
+        notify(ObjectModifiedEvent(license))

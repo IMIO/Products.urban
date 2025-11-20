@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 from collective.documentgenerator.adapters import GenerablePODTemplatesAdapter
-
 from plone import api
 
 

@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 
 from Products.CMFCore.utils import getToolByName
-import logging
-
+from Products.urban.interfaces import IContactFolder
 from zope import interface
 
-from Products.urban.interfaces import IContactFolder
+import logging
+
 
 logger = logging.getLogger("urban: migrations")
 

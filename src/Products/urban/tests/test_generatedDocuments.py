@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 
-from plone import api
-from plone.app.testing import login
 from DateTime import DateTime
 from Products.urban.profiles.testsWithLicences.licences_data import licences_data
-from Products.urban.testing import URBAN_TESTS_LICENCES
 from Products.urban.scripts.odtsearch import SearchPODTemplates
+from Products.urban.testing import URBAN_TESTS_LICENCES
+from plone import api
+from plone.app.testing import login
 
 import cgi
 import unittest

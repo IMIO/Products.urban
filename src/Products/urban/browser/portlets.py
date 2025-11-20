@@ -3,11 +3,9 @@
 from Acquisition import aq_inner
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.urban import UrbanMessage as _
-
 from plone import api
 from plone.app.portlets.portlets import base
 from plone.portlets.interfaces import IPortletDataProvider
-
 from zope.formlib import form
 from zope.interface import implements
 
@@ -58,6 +56,17 @@ class ToolsRenderer(base.Renderer):
             return True
 
         return False
+
+    def is_notice_setup(self):
+        site = api.portal.get()
+        urban = getattr(site, "urban", None)
+        if not urban:
+            return False
+        notice = getattr(urban, "import-notice", None)
+        if not notice:
+            return False
+        municipality_id = getattr(notice, "municipality_id", None)
+        return bool(municipality_id)
 
 
 class ToolsAddForm(base.AddForm):

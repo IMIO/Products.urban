@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from collective.wfadaptations.interfaces import IWorkflowAdaptation
-
 from plone import api
-
 from zope.interface import implements
 
 

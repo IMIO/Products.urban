@@ -1,16 +1,17 @@
 # -*- coding: utf-8 -*-
 
-from eea.facetednavigation.interfaces import ICriteria
 from Products.urban import URBAN_TYPES
-from Products.urban.setuphandlers import createFolderDefaultValues
 from Products.urban.migration.utils import refresh_workflow_permissions
+from Products.urban.setuphandlers import createFolderDefaultValues
 from datetime import datetime
+from eea.facetednavigation.interfaces import ICriteria
+from imio.helpers.catalog import reindexIndexes
 from plone import api
 from zope.event import notify
 from zope.lifecycleevent import ObjectModifiedEvent
-from imio.helpers.catalog import reindexIndexes
 
 import logging
+
 
 logger = logging.getLogger("urban: migrations")
 
@@ -281,8 +282,8 @@ def sort_delay_vocabularies(context):
 
 def add_new_workfow_state(context):
     logger.info("starting : Add new workflow state")
-    setup_tool = api.portal.get_tool('portal_setup')
-    setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'workflow')
+    setup_tool = api.portal.get_tool("portal_setup")
+    setup_tool.runImportStepFromProfile("profile-Products.urban:preinstall", "workflow")
     refresh_workflow_permissions(
         "codt_buildlicence_workflow",
         for_states=["deposit", "complete", "incomplete"],
@@ -334,14 +335,15 @@ def add_folder_categories_terms(context):
 
 def add_new_index_and_new_filter(context):
     logger.info("starting : Add new index and new filter for validity date")
-    setup_tool = api.portal.get_tool('portal_setup')
-    setup_tool.runImportStepFromProfile(
-        "profile-Products.urban:urbantypes", "catalog"
-    )
-    
+    setup_tool = api.portal.get_tool("portal_setup")
+    setup_tool.runImportStepFromProfile("profile-Products.urban:urbantypes", "catalog")
+
     portal = api.portal.get()
     urban_folder = portal.urban
-    folders = [getattr(urban_folder, urban_type.lower() + "s", None) for urban_type in URBAN_TYPES]
+    folders = [
+        getattr(urban_folder, urban_type.lower() + "s", None)
+        for urban_type in URBAN_TYPES
+    ]
     folders.append(urban_folder)
     for folder in folders:
         if not folder:
@@ -354,22 +356,17 @@ def add_new_index_and_new_filter(context):
             "title": u"Date de validité",
             "hidden": False,
             "index": u"getValidityDate",
-            "calYearRange": u"c-10:c+10"
+            "calYearRange": u"c-10:c+10",
         }
-        criterion.add(
-            wid="daterange",
-            position="top",
-            section="advanced",
-            **data
-        )
+        criterion.add(wid="daterange", position="top", section="advanced", **data)
 
     logger.info("upgrade done!")
 
 
 def add_frozen_workflow_state(context):
     logger.info("starting : Add new workflow state")
-    setup_tool = api.portal.get_tool('portal_setup')
-    setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'workflow')
+    setup_tool = api.portal.get_tool("portal_setup")
+    setup_tool.runImportStepFromProfile("profile-Products.urban:preinstall", "workflow")
     refresh_workflow_permissions(
         "codt_buildlicence_workflow",
         for_states=["deposit", "complete", "incomplete"],
@@ -383,10 +380,13 @@ def reindex_getValidityDate(context):
 
 def fix_validity_filter_title(context):
     logger.info("starting : Fix validity filter title")
-    
+
     portal = api.portal.get()
     urban_folder = portal.urban
-    folders = [getattr(urban_folder, urban_type.lower() + "s", None) for urban_type in URBAN_TYPES]
+    folders = [
+        getattr(urban_folder, urban_type.lower() + "s", None)
+        for urban_type in URBAN_TYPES
+    ]
     folders.append(urban_folder)
     for folder in folders:
         criteria = ICriteria(folder)
@@ -397,12 +397,15 @@ def fix_validity_filter_title(context):
 
     logger.info("upgrade done!")
 
+
 def install_send_mail_with_attachement_action(context):
     logger.info("starting : Install send mail with attachement action")
     setup_tool = api.portal.get_tool("portal_setup")
     setup_tool.runImportStepFromProfile("profile-Products.urban:default", "actions")
     setup_tool.runImportStepFromProfile("profile-Products.urban:default", "jsregistry")
-    setup_tool.runImportStepFromProfile("profile-Products.urban:default", "contentrules")
+    setup_tool.runImportStepFromProfile(
+        "profile-Products.urban:default", "contentrules"
+    )
     logger.info("upgrade done!")
 
 
@@ -414,7 +417,10 @@ def fix_c13_collision(context):
 
     portal = api.portal.get()
     urban_folder = portal.urban
-    folders = [getattr(urban_folder, urban_type.lower() + "s", None) for urban_type in URBAN_TYPES]
+    folders = [
+        getattr(urban_folder, urban_type.lower() + "s", None)
+        for urban_type in URBAN_TYPES
+    ]
     folders.append(urban_folder)
 
     for folder in folders:
@@ -433,13 +439,8 @@ def fix_c13_collision(context):
                 "title": u"Date de validité",
                 "hidden": False,
                 "index": u"getValidityDate",
-                "calYearRange": u"c-10:c+10"
+                "calYearRange": u"c-10:c+10",
             }
-            criteria.add(
-                wid="daterange",
-                position="top",
-                section="advanced",
-                **data
-            )
+            criteria.add(wid="daterange", position="top", section="advanced", **data)
 
     logger.info("upgrade done!")

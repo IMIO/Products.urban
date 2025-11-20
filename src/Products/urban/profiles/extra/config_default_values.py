@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-from datetime import datetime
 from Products.urban.config import URBAN_TYPES
+from datetime import datetime
+
 
 codt_2024_start_validity_date = datetime(2024, 4, 1)
 
@@ -372,7 +373,7 @@ default_values = {
                 "extraValue": u"D.IV.40 Alinéa 2/1",
                 "description": u"""<p>Les demandes visant à implanter un commerce au sens de l'article D.IV.4, alinéa 1er, 8°, sont soumises à enquête publique, sauf lorsque la demande porte sur l'implantation d'un commerce de quatre-cents mètres carrés et moins soumis à permis en exécution de l'article D.IV.4, alinéa 4. </p>""",
                 "startValidity": codt_2024_start_validity_date,
-            }
+            },
         ],
         "announcementarticles": [
             "UrbanVocabularyTerm",
@@ -559,7 +560,7 @@ default_values = {
                 "extraValue": u"D.IV.40 Alinéa 2/1",
                 "description": u"""<p>Les demandes visant à implanter un commerce au sens de l'article D.IV.4, alinéa 1er, 8°, sont soumises à enquête publique, sauf lorsque la demande porte sur l'implantation d'un commerce de quatre-cents mètres carrés et moins soumis à permis en exécution de l'article D.IV.4, alinéa 4. </p>""",
                 "startValidity": codt_2024_start_validity_date,
-            }
+            },
         ],
         "announcementarticles": [
             "UrbanVocabularyTerm",
@@ -1207,7 +1208,7 @@ default_values = {
                 "extraValue": u"D.IV.40 Alinéa 2/1",
                 "description": u"""<p>Les demandes visant à implanter un commerce au sens de l'article D.IV.4, alinéa 1er, 8°, sont soumises à enquête publique, sauf lorsque la demande porte sur l'implantation d'un commerce de quatre-cents mètres carrés et moins soumis à permis en exécution de l'article D.IV.4, alinéa 4. </p>""",
                 "startValidity": codt_2024_start_validity_date,
-            }
+            },
         ],
         "announcementarticles": [
             "UrbanVocabularyTerm",
@@ -3057,6 +3058,39 @@ default_values = {
         ],
     },
     "global": {
+        "dimensiontypes": [
+            "UrbanVocabularyTerm",
+            {"id": "width", "title": u"Largeur"},
+            {"id": "height", "title": u"Hauteur"},
+            {"id": "depth", "title": u"Profondeur"},
+            {"id": "area", "title": u"Surface de plancher"},
+            {"id": "living_area", "title": u"Surface habitable"},
+            {"id": "built_area", "title": u"Surface bâtie"},
+            {"id": "unbuilt_area", "title": u"Surface non bâtie"},
+            {"id": "green_space_area", "title": u"Surface d'espaces verts"},
+            {"id": "roof_area", "title": u"Surface de toiture"},
+            {"id": "volume", "title": u"Volume"},
+            {"id": "building_footprint", "title": u"Emprise au sol"},
+            {"id": "number_of_floors", "title": u"Nombre d'étages"},
+            {
+                "id": "distance_to_property_line",
+                "title": u"Distance à la limite de propriété",
+            },
+            {"id": "front_length", "title": u"Longueur de façade"},
+            {"id": "front_height", "title": u"Hauteur de façade"},
+        ],
+        "units": [
+            "UrbanVocabularyTerm",
+            {"id": "m", "title": u"m"},
+            {"id": "m2", "title": u"m²"},
+            {"id": "m3", "title": u"m³"},
+            {"id": "km", "title": u"km"},
+            {"id": "ha", "title": u"ha"},
+            {"id": "floor", "title": u"étage(s)"},
+            {"id": "unit", "title": u"unité(s)"},
+            {"id": "percent", "title": u"%"},
+            {"id": "degree", "title": u"°"},
+        ],
         "deposittype": [
             "UrbanVocabularyTerm",
             {"id": "recommande", "title": u"Par recommandé postal"},
@@ -3711,12 +3745,9 @@ default_values = {
             "UrbanVocabularyTerm",
             {
                 "id": "10",
-                "title": u"1/1 Formulaire général permis environnement et unique"
+                "title": u"1/1 Formulaire général permis environnement et unique",
             },
-            {
-                "id": "11",
-                "title": u"1/2 Élevage et détention d'animaux"
-            },
+            {"id": "11", "title": u"1/2 Élevage et détention d'animaux"},
             {
                 "id": "4",
                 "title": u"Annexe IV - Demande de permis avec concours d'un architecte",
@@ -3748,17 +3779,13 @@ default_values = {
             },
             {
                 "id": "14",
-                "title": u"Annexe X - Demande de permis d'urbanisation ou de modification de permis d'urbanisation"
+                "title": u"Annexe X - Demande de permis d'urbanisation ou de modification de permis d'urbanisation",
             },
             {
                 "id": "15",
-                "title": u"Annexe XI - Demande de permis d'urbanisation ou de modification de permis d'urbanisation avec contenu simplifié"
+                "title": u"Annexe XI - Demande de permis d'urbanisation ou de modification de permis d'urbanisation avec contenu simplifié",
             },
-            {
-                "id": "16",
-                "title": u"Annexe XV - Demande de certificat d'urbanisme n°2"
-            },
-
+            {"id": "16", "title": u"Annexe XV - Demande de certificat d'urbanisme n°2"},
         ],
         "classification_order_scope": [
             "UrbanVocabularyTerm",
@@ -3819,6 +3846,48 @@ default_values = {
             {"id": "observation", "title": u"Observation"},
             {"id": "interne", "title": u"Demande interne"},
             {"id": "externe", "title": u"Demande externe"},
+        ],
+    },
+    "Housing": {
+        "observationitems": [
+            "UrbanVocabularyTerm",
+            {
+                "id": "no_population_registration",
+                "title": u"L’immeuble (ou partie d’immeuble) ne fait pas l’objet d’une inscription dans les registres de la population",
+            },
+            {
+                "id": "no_waiting_registration",
+                "title": u"L’immeuble (ou partie d’immeuble) ne fait pas l’objet d’une inscription dans les registres d’attente",
+            },
+            {
+                "id": "no_bce_registration",
+                "title": u"L’immeuble (ou partie d’immeuble) ne fait pas l’objet d’une inscription à la Banque-Carrefour des Entreprises",
+            },
+            {
+                "id": "subject_to_environmental_decree",
+                "title": u"L’exploitation de l’immeuble (ou partie d’immeuble) relève du décret du 11 mars 1999 relatif au permis d’environnement",
+            },
+            {
+                "id": "expired_environmental_permit",
+                "title": u"Le permis d’exploiter, d’environnement, unique ou la déclaration requise n’a pas été mis en œuvre et est périmé",
+            },
+            {
+                "id": "environmental_order_or_suspension",
+                "title": u"L’établissement fait l’objet d’un ordre d’arrêter l’exploitation, d’un retrait ou d’une suspension d’autorisation prononcés en vertu du décret susmentionné",
+            },
+            {
+                "id": "commercial_closure_order",
+                "title": u"L’occupation de l’immeuble (ou partie d’immeuble) relève d’une activité soumise à autorisation d’implantation en vertu de la loi du 29 juin 1975 ou du décret du 5 février 2015, or ladite implantation est frappée d’un ordre de fermeture, d’un retrait ou d’une suspension d’autorisation prononcés en vertu des dispositions de la loi du 13 août 2004 ou d’une mesure de sanction prévue par l’article 68 du décret précité",
+            },
+        ],
+        "buildingtype": [
+            "UrbanVocabularyTerm",
+        ],
+        "inspectioncontexts": [
+            "UrbanVocabularyTerm",
+        ],
+        "part_of_the_building_concerned": [
+            "UrbanVocabularyTerm",
         ],
     },
 }

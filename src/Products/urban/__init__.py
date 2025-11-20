@@ -39,15 +39,11 @@ __docformat__ = "plaintext"
 
 import logging
 
+
 logger = logging.getLogger("urban")
 logger.debug("Installing Product")
 
-import os
-import os.path
 from App.Common import package_home
-from plone.app.upgrade.utils import alias_module
-from plone.app.blob.content import ATBlob
-import Products.CMFPlone.interfaces
 from Products.Archetypes import listTypes
 from Products.Archetypes.atapi import *
 from Products.Archetypes.utils import capitalize
@@ -56,6 +52,13 @@ from Products.CMFCore import permissions as cmfpermissions
 from Products.CMFCore import utils as cmfutils
 from Products.CMFPlone.utils import ToolInit
 from config import *
+from plone.app.blob.content import ATBlob
+from plone.app.upgrade.utils import alias_module
+
+import Products.CMFPlone.interfaces
+import os
+import os.path
+
 
 DirectoryView.registerDirectory("skins", product_globals)
 
@@ -63,45 +66,63 @@ DirectoryView.registerDirectory("skins", product_globals)
 ##code-section custom-init-head #fill in your manual code here
 from zope.i18nmessageid import MessageFactory
 
+
 UrbanMessage = MessageFactory("urban")
 from Products.validation import validation
 from validators.validator import isTextFieldConfiguredValidator
 
+
 validation.register(isTextFieldConfiguredValidator("isTextFieldConfigured"))
 from validators.validator import isValidStreetNameValidator
+
 
 validation.register(isValidStreetNameValidator("isValidStreetName"))
 from validators.validator import procedureChoiceValidator
 
+
 validation.register(procedureChoiceValidator("isValidProcedureChoice"))
 from validators.validator import isValidSectionValidator
+
 
 validation.register(isValidSectionValidator("isValidSection"))
 from validators.validator import isValidRadicalValidator
 
+
 validation.register(isValidRadicalValidator("isValidRadical"))
 from validators.validator import isValidBisValidator
+
 
 validation.register(isValidBisValidator("isValidBis"))
 from validators.validator import isValidExposantValidator
 
+
 validation.register(isValidExposantValidator("isValidExposant"))
 from validators.validator import isValidPuissanceValidator
+
 
 validation.register(isValidPuissanceValidator("isValidPuissance"))
 from validators.validator import isNotDuplicatedReferenceValidator
 
+
 validation.register(isNotDuplicatedReferenceValidator("isNotDuplicatedReference"))
 from validators.validator import isReferenceValidator
+
 
 validation.register(isReferenceValidator("isReference"))
 from validators.validator import isInteger
 
+
 validation.register(isInteger("isInteger"))
 ##/code-section custom-init-head
 
-import Products
-
+from Products.urban.content import CODT_Inquiry  # noqa
+from Products.urban.content import CODT_UniqueLicenceInquiry  # noqa
+from Products.urban.content import FollowUpEventType  # noqa
+from Products.urban.content import Inquiry  # noqa
+from Products.urban.content import UrbanEventAnnouncement  # noqa
+from Products.urban.content import UrbanEventFollowUp  # noqa
+from Products.urban.content import UrbanEventInquiry  # noqa
+from Products.urban.content import UrbanEventInspectionReport  # noqa
 from Products.urban.content.licence import Article127  # noqa
 from Products.urban.content.licence import BuildLicence  # noqa
 from Products.urban.content.licence import CODT_Article127  # noqa
@@ -114,12 +135,13 @@ from Products.urban.content.licence import CODT_UrbanCertificateBase  # noqa
 from Products.urban.content.licence import CODT_UrbanCertificateTwo  # noqa
 from Products.urban.content.licence import Declaration  # noqa
 from Products.urban.content.licence import Division  # noqa
+from Products.urban.content.licence import EnvClassBordering  # noqa
+from Products.urban.content.licence import EnvClassOne  # noqa
 from Products.urban.content.licence import EnvClassThree  # noqa
 from Products.urban.content.licence import EnvClassTwo  # noqa
-from Products.urban.content.licence import EnvClassOne  # noqa
-from Products.urban.content.licence import EnvClassBordering  # noqa
 from Products.urban.content.licence import EnvironmentBase  # noqa
 from Products.urban.content.licence import EnvironmentLicence  # noqa
+from Products.urban.content.licence import ExplosivesPossession  # noqa
 from Products.urban.content.licence import GenericLicence  # noqa
 from Products.urban.content.licence import Inspection  # noqa
 from Products.urban.content.licence import IntegratedLicence  # noqa
@@ -128,12 +150,15 @@ from Products.urban.content.licence import ParcelOutLicence  # noqa
 from Products.urban.content.licence import PatrimonyCertificate  # noqa
 from Products.urban.content.licence import PreliminaryNotice  # noqa
 from Products.urban.content.licence import ProjectMeeting  # noqa
+from Products.urban.content.licence import RoadDecree  # noqa
+from Products.urban.content.licence import Housing  # noqa
 from Products.urban.content.licence import Ticket  # noqa
+from Products.urban.content.licence import UniqueLicence  # noqa
 from Products.urban.content.licence import UrbanCertificateBase  # noqa
 from Products.urban.content.licence import UrbanCertificateTwo  # noqa
-from Products.urban.content.licence import UniqueLicence  # noqa
 from Products.urban.content.licence import ExplosivesPossession  # noqa
 from Products.urban.content.licence import RoadDecree  # noqa
+from Products.urban.content.licence import Housing  # noqa
 from Products.urban.content import CODT_Inquiry  # noqa
 from Products.urban.content import CODT_UniqueLicenceInquiry  # noqa
 from Products.urban.content import FollowUpEventType  # noqa
@@ -141,7 +166,9 @@ from Products.urban.content import Inquiry  # noqa
 from Products.urban.content import UrbanEventAnnouncement  # noqa
 from Products.urban.content import UrbanEventInquiry  # noqa
 from Products.urban.content import UrbanEventInspectionReport  # noqa
-from Products.urban.content import UrbanEventFollowUp  # noqa
+from Products.urban.content import UrbanEventFollowUp  # noq^
+
+import Products
 
 
 def initialize(context):
@@ -152,14 +179,13 @@ def initialize(context):
     import Applicant
     import City
     import Claimant
-    import content.CODT_Inquiry
+    import ComplementaryDelayTerm
+    import ConfigTest
     import Contact
     import Corporation
     import Couple
     import EnvironmentRubricTerm
     import FolderManager
-    import content.FollowUpEventType
-    import content.Inquiry
     import LicenceConfig
     import Locality
     import OpinionRequestEventType
@@ -183,16 +209,18 @@ def initialize(context):
     import UrbanConfigurationValue
     import UrbanDelay
     import UrbanEvent
-    import content.UrbanEventAnnouncement
-    import content.UrbanEventInquiry
-    import content.UrbanEventInspectionReport
-    import content.UrbanEventFollowUp
-    import UrbanEventOpinionRequest
     import UrbanEventNotice
+    import UrbanEventOpinionRequest
     import UrbanEventType
     import UrbanTool
     import UrbanVocabularyTerm
-    import ComplementaryDelayTerm
+    import content.CODT_Inquiry
+    import content.FollowUpEventType
+    import content.Inquiry
+    import content.UrbanEventAnnouncement
+    import content.UrbanEventFollowUp
+    import content.UrbanEventInquiry
+    import content.UrbanEventInspectionReport
     import content.licence.Article127
     import content.licence.BuildLicence
     import content.licence.CODT_Article127
@@ -204,12 +232,14 @@ def initialize(context):
     import content.licence.CODT_UrbanCertificateTwo
     import content.licence.Declaration
     import content.licence.Division
+    import content.licence.EnvClassBordering
+    import content.licence.EnvClassOne
+    import content.licence.Housing
     import content.licence.EnvClassThree
     import content.licence.EnvClassTwo
-    import content.licence.EnvClassOne
-    import content.licence.EnvClassBordering
     import content.licence.EnvironmentBase
     import content.licence.EnvironmentLicence
+    import content.licence.ExplosivesPossession
     import content.licence.GenericLicence
     import content.licence.IntegratedLicence
     import content.licence.MiscDemand
@@ -217,12 +247,10 @@ def initialize(context):
     import content.licence.PatrimonyCertificate
     import content.licence.PreliminaryNotice
     import content.licence.ProjectMeeting
+    import content.licence.RoadDecree
+    import content.licence.UniqueLicence
     import content.licence.UrbanCertificateBase
     import content.licence.UrbanCertificateTwo
-    import content.licence.UniqueLicence
-    import content.licence.ExplosivesPossession
-    import content.licence.RoadDecree
-    import ConfigTest
 
     # Initialize portal tools
     tools = [UrbanTool.UrbanTool]

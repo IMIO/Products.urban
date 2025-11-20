@@ -1,19 +1,16 @@
 # -*- coding: utf-8 -*-
 
+from Products.urban.config import URBAN_EVENT_TYPES
 from collective.documentgenerator import _
-from collective.documentgenerator.content.pod_template import IConfigurablePODTemplate
 from collective.documentgenerator.content.pod_template import ConfigurablePODTemplate
-
+from collective.documentgenerator.content.pod_template import IConfigurablePODTemplate
 from plone.autoform import directives as form
-
 from z3c.form.browser.select import SelectWidget
-
 from zope import schema
 from zope.interface import implements
 
-from Products.urban.config import URBAN_EVENT_TYPES
-
 import logging
+
 
 logger = logging.getLogger("Products.urban: UrbanTemplate")
 

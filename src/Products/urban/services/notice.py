@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from Products.urban.services.base import WebService
-from Products.urban.notice import NoticeNotification
 from Products.urban import UrbanMessage as _
+from Products.urban.notice import NoticeNotification
+from Products.urban.services.base import WebService
 from plone import api
 
 import requests

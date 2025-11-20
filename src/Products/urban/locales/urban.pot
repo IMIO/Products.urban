@@ -663,6 +663,11 @@ msgstr ""
 msgid "ImpactStudy event type marker interface"
 msgstr ""
 
+#: ../interfaces.py:581
+msgid "IObservationEvent type marker interface"
+msgstr ""
+
+#: ../browser/urbaneventviews.py:294
 #: ../browser/urbaneventviews.py:330
 msgid "Import"
 msgstr ""
@@ -921,6 +926,10 @@ msgstr ""
 
 #: ../browser/longtextview.py:34
 msgid "The field does not exist !!!"
+msgstr ""
+
+#: ../events/configuration_events.py:79
+msgid "The folder manager '${name}' can't be renamed or removed."
 msgstr ""
 
 #: ../browser/urbaneventviews.py:368
@@ -1599,6 +1608,9 @@ msgid "explosivespossession_urbanconfig_title"
 msgstr ""
 
 msgid "explosivespossessions"
+msgstr ""
+
+msgid "Housing"
 msgstr ""
 
 msgid "externaldecisions_folder_title"
@@ -2695,6 +2707,11 @@ msgstr ""
 
 #: ../browser/urbaneventviews.py:528
 msgid "urban_imported_recipients"
+msgstr ""
+
+#. Default: "Incoming Notice licences"
+#: ../browser/templates/portlet_urbantools.pt:28
+msgid "urban_incoming_notice_licences_descr"
 msgstr ""
 
 #. Default: "Dgo4reference"
@@ -5412,4 +5429,16 @@ msgid "years"
 msgstr ""
 
 msgid "zip_folder_title"
+msgstr ""
+
+msgid "dimensiontypes_folder_title"
+msgstr ""
+
+msgid "units_folder_title"
+msgstr ""
+
+msgid "urban_label_dimensions"
+msgstr ""
+
+msgid "urban_label_taxation"
 msgstr ""

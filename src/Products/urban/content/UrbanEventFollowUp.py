@@ -10,14 +10,13 @@ __docformat__ = "plaintext"
 
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
-from zope.interface import implements
+from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.urban import interfaces
 from Products.urban import UrbanMessage as _
 from Products.urban.UrbanEvent import UrbanEvent
-from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
-
-from archetypes.referencebrowserwidget.widget import ReferenceBrowserWidget
 from Products.urban.config import PROJECTNAME
+from archetypes.referencebrowserwidget.widget import ReferenceBrowserWidget
+from zope.interface import implements
 
 
 schema = Schema(

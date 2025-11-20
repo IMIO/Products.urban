@@ -1,14 +1,11 @@
 # -*- coding: utf-8 -*-
 
-from datetime import datetime
-from plone import api
-
-from imio.schedule.content.condition import Condition
-
+from DateTime import DateTime
 from Products.urban.config import LICENCE_FINAL_STATES
 from Products.urban.schedule.conditions.base import BaseInspection
-
-from DateTime import DateTime
+from datetime import datetime
+from imio.schedule.content.condition import Condition
+from plone import api
 
 
 class DepositDoneCondition(Condition):

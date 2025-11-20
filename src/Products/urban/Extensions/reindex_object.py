@@ -1,6 +1,5 @@
-from plone import api
-
 from Products.urban.interfaces import IOpinionRequestEventType
+from plone import api
 
 
 def reindex_object_by_uid(uid):

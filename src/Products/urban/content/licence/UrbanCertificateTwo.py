@@ -14,22 +14,21 @@ __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEUL
 __docformat__ = "plaintext"
 
 from AccessControl import ClassSecurityInfo
-from Products.Archetypes.atapi import *
-from zope.interface import implements
-from Products.urban import interfaces
-from Products.urban.content.licence.BaseBuildLicence import BaseBuildLicence
-from Products.urban.content.licence.BuildLicence import finalizeSchema
-from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
-
-from Products.urban import UrbanMessage as _
-from Products.urban.config import *
 
 ##code-section module-header #fill in your manual code here
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import (
     ReferenceBrowserWidget,
 )
+from Products.Archetypes.atapi import *
+from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
+from Products.urban import interfaces
+from Products.urban import UrbanMessage as _
+from Products.urban.config import *
+from Products.urban.content.licence.BaseBuildLicence import BaseBuildLicence
+from Products.urban.content.licence.BuildLicence import finalizeSchema
 from Products.urban.utils import setOptionalAttributes
 from plone import api
+from zope.interface import implements
 
 
 optional_fields = ["geometricians", "notaryContact"]
