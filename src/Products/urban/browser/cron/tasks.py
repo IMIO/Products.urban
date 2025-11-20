@@ -12,6 +12,11 @@ from zope.component import queryMultiAdapter
 from zope.event import notify
 from zope.lifecycleevent import ObjectModifiedEvent
 
+import transaction
+
+
+COMMIT_INTERVAL = 100
+
 
 class TaskCronView(BrowserView):
     def __call__(self):
@@ -76,9 +81,48 @@ class UpdateOpenTasksLicences(BrowserView):
             review_state=states_by_status[STARTED],
         )
         licences = list(set([self._get_task_container(t) for t in open_tasks_brains]))
-        for licence in filter(None, licences):
-            try:
-                notify(ObjectModifiedEvent(licence))
-            except Exception:
-                continue
+        filtered_licences = []
+        for licence in licences:
+            if (
+                len(
+                    [e for e in licence.getUrbanEvents() if ICollegeEvent.providedBy(e)]
+                )
+                > 0
+            ):
+                filtered_licences.append(licence)
+        from Products.urban import logger
+
+        # from imio.schedule.utils import get_task_configs
+        for count, licence in enumerate(filtered_licences):
+            logger.info("UpdateOpenTasksLicences: %s" % str(licence.absolute_url()))
+            logger.info(
+                "getHasModifiedBlueprints: %s"
+                % str(
+                    hasattr(licence, "getHasModifiedBlueprints")
+                    and licence.getHasModifiedBlueprints()
+                )
+            )
+            logger.info(
+                "getLastAcknowledgment: %s"
+                % str(
+                    hasattr(licence, "getLastAcknowledgment")
+                    and (
+                        licence.getLastAcknowledgment()
+                        and licence.getLastAcknowledgment()
+                        or "None"
+                    )
+                )
+            )
+            notify(ObjectModifiedEvent(licence))
             licence.reindexObject()
+            if count % COMMIT_INTERVAL == 0:
+                transaction.commit()
+            # task_configs = licence.portal_type != 'CODT_BuildLicence' and get_task_configs(licence) or []
+            # for config in task_configs:
+            # task = config.get_open_task(licence)
+            # if task:
+            # task.due_date = config.compute_due_date(licence, task)
+            # task.reindexObject(idxs=('due_date',))
+            # if licence.id == "codt_buildlicence.2022-07-12.3145384997":
+            #    notify(ObjectModifiedEvent(licence))
+            #    licence.reindexObject()
