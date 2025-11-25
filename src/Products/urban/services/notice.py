@@ -35,6 +35,10 @@ class WebserviceNotice(WebService):
         return api.portal.get_registry_record(
             "Products.urban.browser.notice_settings.INoticeSettings.sent_on_behalf_of_municipality_id"
         )
+    
+    @property
+    def is_setup(self):
+        return self.url and self.instance_code and self.sent_on_behalf_of
 
     @property
     def _auth(self):
