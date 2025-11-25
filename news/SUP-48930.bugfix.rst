@@ -1,0 +1,2 @@
+Fix an error with actions on vocabulary terms
+[mpeeters]

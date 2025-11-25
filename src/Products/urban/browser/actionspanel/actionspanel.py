@@ -307,6 +307,8 @@ class ConfigValueActionsPanelView(ActionsPanelView):
     def __call__(self, **kwargs):
         kwargs["showOwnDelete"] = False
         # handle case where event config is ALSO an urban config value
+        from Products.urban.interfaces import IUrbanEventType as IEventConfig
+
         if IEventConfig.providedBy(self.context):
             kwargs["showAddContent"] = True
             kwargs["showTransitions"] = False
