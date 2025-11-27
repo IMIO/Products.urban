@@ -3,7 +3,7 @@
     <tal:vars define="exclude python:[
                           'title', 'workLocations', 'businessOldLocation',
                           'additionalLegalConditions', 'additionalConditions',
-                          'additionalPreviousLicences',
+                          'additionalPreviousLicences', 'noticeId'
                       ];
                       custom python:[
                           'rubrics', 'minimumLegalConditions', 'hasAdditionalConditions',
