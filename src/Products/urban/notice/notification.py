@@ -160,6 +160,7 @@ class NoticeNotification(NoticeElement):
             for rubrique in rubrique_elements:
                 classe = rubrique.xpath("classe/text()")[0]
                 number = rubrique.xpath("numRubrique")[0].text
+                number = number.replace("-", "")  # special case: `COV-01.01` => `COV01.01`
                 rubric_obj = get_rubric_obj(classe, number)
                 if rubric_obj:
                     found_uids.append(rubric_obj.UID())
