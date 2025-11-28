@@ -8,6 +8,8 @@ import os.path
 import re
 import shutil
 import sys
+import tempfile
+import time
 import xml.dom.minidom
 import zipfile
 
@@ -329,6 +331,7 @@ if cur_version >= req_version:
 
     def main():
         arguments = parseArguments()
+        verbosity = arguments.__dict__.pop("verbose")
         verbosity = arguments.__dict__.pop("verbose")
         if verbosity:
             logging.basicConfig(level=logging.DEBUG)
