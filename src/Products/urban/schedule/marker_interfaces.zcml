@@ -34,9 +34,12 @@
       />
 
   <interface
-      interface=".interfaces.ISendFollowupTask"
-      type="imio.schedule.interfaces.ITaskMarkerInterface"
-      />
+    interface=".interfaces.ISendFollowupTask"
+    type="imio.schedule.interfaces.ITaskMarkerInterface"/>
+
+  <interface
+    interface=".interfaces.IFollowupDeadLineTask"
+    type="imio.schedule.interfaces.ITaskMarkerInterface"/>
 
   <interface
       interface=".interfaces.ITaskToCheckDaily"
