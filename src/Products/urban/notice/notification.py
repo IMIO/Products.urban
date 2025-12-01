@@ -82,6 +82,10 @@ class NoticeNotification(NoticeElement):
         return self._get_data("BO", "typeBOSubtype", "code")
 
     @property
+    def referenceFT(self):
+        return self._get_data("BO", "idBO")
+
+    @property
     def type(self):
         """Return the portal type corresponding to notice subtype"""
 
