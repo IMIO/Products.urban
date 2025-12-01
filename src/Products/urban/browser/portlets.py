@@ -3,6 +3,7 @@
 from Acquisition import aq_inner
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.urban import UrbanMessage as _
+from Products.urban.services.notice import WebserviceNotice
 from plone import api
 from plone.app.portlets.portlets import base
 from plone.portlets.interfaces import IPortletDataProvider
@@ -58,15 +59,19 @@ class ToolsRenderer(base.Renderer):
         return False
 
     def is_notice_setup(self):
+        """Checks for presence of:
+        - Notice dashboard for incoming notifications
+        - Parameters to connect to the Webservice
+        """
         site = api.portal.get()
         urban = getattr(site, "urban", None)
         if not urban:
             return False
-        notice = getattr(urban, "import-notice", None)
-        if not notice:
+        notice_dashboard = getattr(urban, "import-notice", None)
+        if not notice_dashboard:
             return False
-        municipality_id = getattr(notice, "municipality_id", None)
-        return bool(municipality_id)
+        webservice = WebserviceNotice()
+        return webservice.is_setup
 
 
 class ToolsAddForm(base.AddForm):
