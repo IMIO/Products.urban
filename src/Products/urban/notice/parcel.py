@@ -54,11 +54,11 @@ class NoticeParcel(NoticeElement):
 
     @property
     def radical(self):
-        return self._get_data("radical")
+        return self._get_data("radical").lstrip("0")
 
     @property
     def bis(self):
-        return self._get_data("bisTier")
+        return self._get_data("bisTer").lstrip("0")
 
     @property
     def exposant(self):
@@ -66,7 +66,7 @@ class NoticeParcel(NoticeElement):
 
     @property
     def puissance(self):
-        return self._get_data("power")
+        return self._get_data("power").lstrip("0")
 
     @property
     def partie(self):
