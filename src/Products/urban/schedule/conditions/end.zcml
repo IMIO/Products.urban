@@ -158,6 +158,14 @@
       name="urban.schedule.condition.acknowledgment_created"
       />
 
+    <adapter
+        for="Products.urban.interfaces.ITicket
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.AcknowledgmentDoneCondition"
+        name="urban.schedule.condition.acknowledgment_done"
+    />
+
   <adapter
       factory=".generic.AcknowledgmentDoneCondition"
       provides="imio.schedule.interfaces.IEndCondition"
@@ -165,6 +173,14 @@
            imio.schedule.content.task.IAutomatedTask"
       name="urban.schedule.condition.acknowledgment_done"
       />
+
+    <adapter
+        for="Products.urban.interfaces.IBaseAllBuildLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.AcknowledgmentDoneOrComplementsAskedCondition"
+        name="urban.schedule.condition.acknowledgment_or_incomplete"
+    />
 
   <adapter
       factory=".generic.RubricsChoiceDone"
@@ -553,6 +569,14 @@
       name="urban.schedule.condition.followup_ticket_is_closed"
       />
 
+    <adapter
+        for="Products.urban.interfaces.IInspection
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.FollowUpWithDelayOverdue"
+        name="urban.schedule.condition.followup_with_delay_overdue"
+    />
+
   <adapter
       factory=".generic.TicketEventClosed"
       provides="imio.schedule.interfaces.IEndCondition"
@@ -560,5 +584,38 @@
            imio.schedule.content.task.IAutomatedTask"
       name="urban.schedule.condition.ticket_redacted"
       />
+
+    <!-- Ticket conditions -->
+    <adapter
+        for="Products.urban.interfaces.ITicket
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.AllInspectionFollowupsAreDone"
+        name="urban.schedule.condition.all_followups_done"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.ITicket
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.AllInspectionFollowupsAreWritten"
+        name="urban.schedule.condition.all_followups_written"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.ITicket
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.NoInspectionFollowupsToValidate"
+        name="urban.schedule.condition.followups_validated"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.ITicket
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IEndCondition"
+        factory=".generic.NoInspectionFollowupsToSend"
+        name="urban.schedule.condition.followups_done"
+    />
 
 </configure>

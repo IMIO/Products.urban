@@ -3,7 +3,11 @@
 from DateTime import DateTime
 from Products.urban.config import LICENCE_FINAL_STATES
 from Products.urban.schedule.conditions.base import BaseInspection
+from Products.urban.schedule.interfaces import IFollowupDeadLineTask
+from datetime import date
 from datetime import datetime
+from imio.schedule.config import STARTED
+from imio.schedule.config import states_by_status
 from imio.schedule.content.condition import Condition
 from plone import api
 
@@ -46,7 +50,9 @@ class SingleComplementAsked(Condition):
         complements_asked = False
         missing_part_event = licence.getLastMissingPart()
         if missing_part_event:
+            recent = self.task.creation_date < missing_part_event.creation_date
             complements_asked = api.content.get_state(missing_part_event) == "closed"
+            complements_asked = complements_asked and recent
 
         return complements_asked
 
@@ -88,6 +94,33 @@ class ComplementsAsked(Condition):
             complements_asked = complements_asked and recent
 
         return complements_asked
+
+
+class AcknowledgmentDoneOrComplementsAskedCondition(Condition):
+    """
+    Licence acknowlegdment event is closed or we have asked recent complements.
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+
+        acknowledgment_done = False
+        acknowledgment_event = licence.getLastAcknowledgment()
+        if acknowledgment_event:
+            acknowledgment_done = (
+                api.content.get_state(acknowledgment_event) == "closed"
+            )
+            recent = self.task.creation_date < acknowledgment_event.creation_date
+            acknowledgment_done = acknowledgment_done and recent
+
+        complements_asked = False
+        missing_part_event = licence.getLastMissingPart()
+        if missing_part_event:
+            complements_asked = api.content.get_state(missing_part_event) == "closed"
+            recent = self.task.creation_date < missing_part_event.creation_date
+            complements_asked = complements_asked and recent
+
+        return acknowledgment_done or complements_asked
 
 
 class ComplementsReceived(Condition):
@@ -146,7 +179,14 @@ class ProcedureChoiceDone(Condition):
 
     def evaluate(self):
         licence = self.task_container
-        return "ukn" not in licence.getProcedureChoice()
+        if (
+            hasattr(licence, "getHasModifiedBlueprints")
+            and licence.getHasModifiedBlueprints()
+        ):
+            ukn = "ukn" not in licence.getProcedureChoiceModifiedBlueprints()
+        else:
+            ukn = "ukn" not in licence.getProcedureChoice()
+        return ukn
 
 
 class UrbanAnalysisDone(Condition):
@@ -229,7 +269,13 @@ class NoInquiryCondition(Condition):
 
     def evaluate(self):
         licence = self.task_container
-        no_inquiry = "inquiry" not in licence.getProcedureChoice()
+        if (
+            hasattr(licence, "getHasModifiedBlueprints")
+            and licence.getHasModifiedBlueprints()
+        ):
+            no_inquiry = "inquiry" not in licence.getProcedureChoiceModifiedBlueprints()
+        else:
+            no_inquiry = "inquiry" not in licence.getProcedureChoice()
         return no_inquiry
 
 
@@ -837,6 +883,24 @@ class FollowUpTicketClosed(InspectionCondition):
             return False
         ended = api.content.get_state(followup_ticket) == "ended"
         return ended
+
+
+class FollowUpWithDelayOverdue(Condition):
+    """
+    The ticket created as a followup action has been closed.
+    """
+
+    def evaluate(self):
+        inspection = self.task_container
+        for obj in inspection.objectValues():
+            if IFollowupDeadLineTask.providedBy(obj):
+                task = obj
+                if (
+                    task.get_state() in states_by_status[STARTED]
+                    and task.due_date < date.today()
+                ):
+                    return True
+        return False
 
 
 class TicketEventClosed(Condition):

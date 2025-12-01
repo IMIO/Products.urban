@@ -2,8 +2,11 @@
 
 from DateTime import DateTime
 from Products.urban.schedule.conditions.base import BaseInspection
+from Products.urban.schedule.interfaces import IFollowupDeadLineTask
 from datetime import date
 from datetime import datetime
+from imio.schedule.config import STARTED
+from imio.schedule.config import states_by_status
 from imio.schedule.content.condition import CreationCondition
 from plone import api
 
@@ -168,8 +171,17 @@ class WillHaveInquiry(CreationCondition):
 
     def evaluate(self):
         licence = self.task_container
-        initiative_inquiry = "initiative_inquiry" in licence.getProcedureChoice()
-        inquiry = "inquiry" in licence.getProcedureChoice()
+        if (
+            hasattr(licence, "getHasModifiedBlueprints")
+            and licence.getHasModifiedBlueprints()
+        ):
+            initiative_inquiry = (
+                "initiative_inquiry" in licence.getProcedureChoiceModifiedBlueprints()
+            )
+            inquiry = "inquiry" in licence.getProcedureChoiceModifiedBlueprints()
+        else:
+            initiative_inquiry = "initiative_inquiry" in licence.getProcedureChoice()
+            inquiry = "inquiry" in licence.getProcedureChoice()
         have_inquiry = initiative_inquiry or inquiry
 
         inquiry_objs = licence.getAllInquiries()
@@ -189,10 +201,22 @@ class WillHaveAnnouncement(CreationCondition):
 
     def evaluate(self):
         licence = self.task_container
-        light_inquiry = "light_inquiry" in licence.getProcedureChoice()
-        initiative_light_inquiry = (
-            "initiative_light_inquiry" in licence.getProcedureChoice()
-        )
+        if (
+            hasattr(licence, "getHasModifiedBlueprints")
+            and licence.getHasModifiedBlueprints()
+        ):
+            light_inquiry = (
+                "light_inquiry" in licence.getProcedureChoiceModifiedBlueprints()
+            )
+            initiative_light_inquiry = (
+                "initiative_light_inquiry"
+                in licence.getProcedureChoiceModifiedBlueprints()
+            )
+        else:
+            light_inquiry = "light_inquiry" in licence.getProcedureChoice()
+            initiative_light_inquiry = (
+                "initiative_light_inquiry" in licence.getProcedureChoice()
+            )
         announcement = light_inquiry or initiative_light_inquiry
 
         announcement_objs = licence.getAllAnnouncements()
@@ -291,7 +315,13 @@ class NoInquiryCondition(CreationCondition):
 
     def evaluate(self):
         licence = self.task_container
-        no_inquiry = "inquiry" not in licence.getProcedureChoice()
+        if (
+            hasattr(licence, "getHasModifiedBlueprints")
+            and licence.getHasModifiedBlueprints()
+        ):
+            no_inquiry = "inquiry" not in licence.getProcedureChoiceModifiedBlueprints()
+        else:
+            no_inquiry = "inquiry" not in licence.getProcedureChoice()
         return no_inquiry
 
 
@@ -424,7 +454,14 @@ class HasFDOpinionRequest(CreationCondition):
 
     def evaluate(self):
         licence = self.task_container
-        return "FD" in licence.getProcedureChoice()
+        if (
+            hasattr(licence, "getHasModifiedBlueprints")
+            and licence.getHasModifiedBlueprints()
+        ):
+            FD = "FD" in licence.getProcedureChoiceModifiedBlueprints()
+        else:
+            FD = "FD" in licence.getProcedureChoice()
+        return FD
 
 
 class HasNoFDOpinionRequest(CreationCondition):
@@ -434,7 +471,14 @@ class HasNoFDOpinionRequest(CreationCondition):
 
     def evaluate(self):
         licence = self.task_container
-        return "FD" not in licence.getProcedureChoice()
+        if (
+            hasattr(licence, "getHasModifiedBlueprints")
+            and licence.getHasModifiedBlueprints()
+        ):
+            no_FD = "FD" not in licence.getProcedureChoice()
+        else:
+            no_FD = "FD" not in licence.getProcedureChoiceModifiedBlueprints()
+        return no_FD
 
 
 class FDCreationCondition(CreationCondition):
@@ -529,13 +573,13 @@ class IncompleteForTheSecondTime(CreationCondition):
         if not first_incomplete_done:
             return False
         wf_history = licence.workflow_history
-        two_incomplete_transitions = 2 <= len(
-            [
-                tr
-                for tr in wf_history[wf_history.keys()[0]]
-                if tr["action"] == "isincomplete"
-            ]
-        )
+        incomplete_history = [
+            tr
+            for tr in wf_history[wf_history.keys()[0]]
+            if tr["action"] == "isincomplete"
+        ]
+        two_incomplete_transitions = 2 <= len(incomplete_history)
+
         if not two_incomplete_transitions:
             return False
         return True
@@ -711,7 +755,7 @@ class FollowUpTicketClosed(InspectionCreationCondition):
 
 class FollowUpWithDelayClosed(InspectionCreationCondition):
     """
-    The ticket created as a followup action has been closed.
+    The followup event created as a followup action has been closed.
     """
 
     def evaluate(self):
@@ -731,6 +775,24 @@ class FollowUpWithDelayClosed(InspectionCreationCondition):
                     return False
 
         return is_closed
+
+
+class FollowUpWithDelayOverdue(CreationCondition):
+    """
+    The ticket created as a followup action has been closed.
+    """
+
+    def evaluate(self):
+        inspection = self.task_container
+        for obj in inspection.objectValues():
+            if IFollowupDeadLineTask.providedBy(obj):
+                task = obj
+                if (
+                    task.get_state() in states_by_status[STARTED]
+                    and task.due_date < date.today()
+                ):
+                    return True
+        return False
 
 
 class ProsecutionAnswerOverDeadline(CreationCondition):
