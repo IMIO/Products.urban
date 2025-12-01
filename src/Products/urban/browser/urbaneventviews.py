@@ -1305,6 +1305,11 @@ class CanTransferFolderToDpaView(BrowserView):
         return self.context.portal_type == "UrbanEventNotice"
 
     @property
+    def has_notice_id(self):
+        licence = self.context.aq_parent
+        return bool(licence.getNoticeId())
+
+    @property
     def is_transmit_to_spw_event(self):
         return (
             "Products.urban.interfaces.ITransmitToSPWEvent"
@@ -1320,6 +1325,7 @@ class CanTransferFolderToDpaView(BrowserView):
     def __call__(self):
         return (
             self.is_urban_event_notice
+            and self.has_notice_id
             and self.is_transmit_to_spw_event
             and self.no_transmit_yet
         )
