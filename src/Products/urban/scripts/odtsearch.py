@@ -332,7 +332,6 @@ if cur_version >= req_version:
     def main():
         arguments = parseArguments()
         verbosity = arguments.__dict__.pop("verbose")
-        verbosity = arguments.__dict__.pop("verbose")
         if verbosity:
             logging.basicConfig(level=logging.DEBUG)
         arguments = vars(arguments)
