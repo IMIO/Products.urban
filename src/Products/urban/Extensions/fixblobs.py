@@ -12,6 +12,7 @@ from plone.namedfile.interfaces import INamedFile
 blob_fields = {
     "SubTemplate": "odt_file",
     "DashboardPODTemplate": "odt_file",
+    "StyleTemplate": "odt_file",
     "File": "file",
     "UrbanTemplate": "odt_file",
 }
