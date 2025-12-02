@@ -131,7 +131,10 @@ def _updateBoundLicencesIndexes(licence, events, indexes=[]):
         bound_licence = bound_licences_brain.getObject()
         to_reindex = False
         if (
-            bound_licence.portal_type == "Inspection"
+            (
+                bound_licence.portal_type == "Inspection"
+                or bound_licence.portal_type == "RoadDecree"
+            )
             and bound_licence.getUse_bound_licence_infos()
         ):
             to_reindex = True
