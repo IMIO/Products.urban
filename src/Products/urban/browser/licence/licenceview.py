@@ -5,12 +5,14 @@ from Products.Five import BrowserView
 from Products.urban import utils
 from Products.urban.browser.table.urbantable import ApplicantHistoryTable
 from Products.urban.browser.table.urbantable import ApplicantTable
+from Products.urban.browser.table.urbantable import AttachmentsTable
 from Products.urban.browser.table.urbantable import EventsTable
 from Products.urban.browser.table.urbantable import LicenceAttachmentsTable
 from Products.urban.browser.table.urbantable import NestedAttachmentsTable
 from Products.urban.browser.table.urbantable import ParcelsTable
 from Products.urban.browser.table.urbantable import ProprietaryHistoryTable
 from Products.urban.browser.table.urbantable import ProprietaryTable
+from Products.urban.content.UrbanEventInquiry import UrbanEventInquiry_schema
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.interfaces import IUrbanDoc
 from Products.urban.interfaces import IUrbanEventAnnouncement
@@ -592,6 +594,74 @@ class EnvironmentLicenceView(LicenceView):
 
     def __init__(self, context, request):
         super(EnvironmentLicenceView, self).__init__(context, request)
+
+    def getInquiriesForDisplay(self):
+        """
+        Returns the inquiries to display on the buildlicence_view
+        This will move to the buildlicenceview when it will exist...
+        """
+        context = aq_inner(self.context)
+        inquiries = context.getInquiries()
+        if not inquiries:
+            # we want to display at least the informations about the inquiry
+            # defined on the licence even if no data have been entered
+            inquiries.append(context)
+        return inquiries
+
+    def getRubrics(self):
+        """
+        display the rubrics number, their class and then the text
+        """
+        context = aq_inner(self.context)
+        catalog = api.portal.get_tool("portal_catalog")
+        rubric_uids = context.getField("rubrics").getRaw(context)
+        rubric_brains = catalog(UID=rubric_uids)
+        rubrics = [brain.getObject() for brain in rubric_brains]
+        rubrics_display = [
+            "<p>classe %s, %s</p>%s"
+            % (rub.getExtraValue(), rub.getNumber(), rub.Description())
+            for rub in rubrics
+        ]
+        return rubrics_display
+
+    def _sortConditions(self, conditions):
+        """
+        sort exploitation conditions in this order: CI/CS, CI, CS
+        """
+        order = ["CI/CS", "CI", "CS", "CS-Eau", "Ville"]
+        sorted_conditions = dict(
+            [
+                (
+                    val,
+                    [],
+                )
+                for val in order
+            ]
+        )
+        for cond in conditions:
+            val = cond.getExtraValue()
+            sorted_conditions[val].append(
+                {
+                    "type": val,
+                    "url": cond.absolute_url() + "/description",
+                    "title": cond.Title(),
+                    "type": val,
+                    "url": cond.absolute_url() + "/description/getRaw",
+                    "title": cond.Title(),
+                }
+            )
+        sort = []
+        for val in order:
+            sort.extend(sorted_conditions[val])
+        return sort
+
+    def getMinimumConditions(self):
+        """
+        sort the conditions from the field 'minimumLegalConditions'  by type (integral, sectorial, ...)
+        """
+        context = aq_inner(self.context)
+        min_conditions = context.getMinimumLegalConditions()
+        return self._sortConditions(min_conditions)
 
 
 class ShowEditTabbing(BrowserView):
