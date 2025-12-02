@@ -14,6 +14,8 @@ __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEUL
 __docformat__ = "plaintext"
 
 from AccessControl import ClassSecurityInfo
+from OFS.interfaces import IOrderedContainer
+from Products.Archetypes.OrderedBaseFolder import OrderedContainer
 from Products.Archetypes.public import DisplayList
 from Products.urban import interfaces
 from Products.urban.interfaces import IUrbanEvent
@@ -32,14 +34,14 @@ from zope.interface import implements
 from zope.schema.interfaces import IVocabularyFactory
 
 
-class UrbanBase(object):
+class UrbanBase(OrderedContainer):
     """
     This class manage every methods shared cross different licences
     """
 
     security = ClassSecurityInfo()
 
-    implements(interfaces.IUrbanBase)
+    implements(interfaces.IUrbanBase, IOrderedContainer)
 
     security.declarePublic("getLicenceConfig")
 
@@ -253,11 +255,11 @@ class UrbanBase(object):
                 if withParenthesis:
                     signaletic += " (%s)" % self.displayValue(
                         fm.Vocabulary("grade")[0], fm.getGrade()
-                    )
+                    ).encode("utf8")
                 else:
                     signaletic += " %s" % self.displayValue(
                         fm.Vocabulary("grade")[0], fm.getGrade()
-                    )
+                    ).encode("utf8")
             if withEmail:
                 signaletic += "<br />%s" % fm.getEmail()
             if withTel:
@@ -933,6 +935,43 @@ class UrbanBase(object):
         termFolderObj = getattr(urbanConfig, termFolder)
         return getattr(termFolderObj, termId)
 
+    security.declarePublic("getPortionOutsText")
+
+    def getPortionOutsText(self, linebyline=False):
+        """
+        Return a displayable version of the parcels
+        """
+        toreturn = ""
+        isFirst = True
+        first_div = None
+        first_section = None
+        for portionOutObj in self.getParcels():
+            # add a separator between every parcel
+            # either a '\n'
+            if not isFirst and linebyline:
+                toreturn += "\n"
+            # or an "and "
+            elif not isFirst:
+                toreturn += ", "
+            elif isFirst:
+                first_div = portionOutObj.getDivisionAlternativeName()
+                toreturn += "%s " % portionOutObj.getDivisionAlternativeName()
+                first_section = portionOutObj.getSection()
+                toreturn += "section %s" % portionOutObj.getSection()
+                toreturn += " n° ".decode("utf8")
+            else:
+                if first_div != portionOutObj.getDivisionAlternativeName():
+                    toreturn += "%s " % portionOutObj.getDivisionAlternativeName()
+                if first_section != portionOutObj.getSection():
+                    toreturn += "section %s " % portionOutObj.getSection()
+            toreturn += " %s" % portionOutObj.getRadical()
+            if portionOutObj.getBis() != "":
+                toreturn += "/%s" % portionOutObj.getBis()
+            toreturn += portionOutObj.getExposant()
+            toreturn += portionOutObj.getPuissance()
+            isFirst = False
+        return toreturn
+
     security.declarePublic("getUrbanEvents")
 
     def getUrbanEvents(self):
@@ -951,12 +990,33 @@ class UrbanBase(object):
         """
         return self.listFolderContents({"portal_type": ("UrbanEventOpinionRequest")})
 
+    security.declarePublic("getFirstUrbanEventOpinionRequests")
+
+    def getFirstUrbanEventOpinionRequests(self):
+        """
+        Return all UrbanEventOpinionRequests events selected in the first inquiry.
+        """
+        all_events = self.getUrbanEventOpinionRequests()
+        events = [
+            evt
+            for evt in all_events
+            if evt.getLinkedInquiry() == self._get_inquiry_objs(all_=True)[0]
+        ]
+        return events
+
     security.declarePublic("getLastUrbanEventOpinionRequests")
 
-    def getLastUrbanEventOpinionRequests(self):
+    def getLastUrbanEventOpinionRequests(self, ignore_if_one_inquiry=False):
         """
         Return all UrbanEventOpinionRequests events selected in the last inquiry.
+
+        :param ignore_if_one_inquiry: If there is only one inquiry the method will return a empty list, you can enable it by set to True, defaults to False
+        :type ignore_if_one_inquiry: bool, optional
+        :return: Return list of Opinion request event
+        :rtype: list
         """
+        if ignore_if_one_inquiry and len(self._get_inquiry_objs(all_=True)) == 1:
+            return []
         all_events = self.getUrbanEventOpinionRequests()
         events = [
             evt

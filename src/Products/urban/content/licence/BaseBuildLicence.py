@@ -222,6 +222,7 @@ schema = Schema(
             name="townshipCouncilFolder",
             default=False,
             widget=BooleanField._properties["widget"](
+                description="If checked, an additional paragraph will be added in the licence document",
                 label=_(
                     "urban_label_townshipCouncilFolder", default="Townshipcouncilfolder"
                 ),
@@ -403,6 +404,7 @@ schema = Schema(
             name="roadDgrneUnderground",
             default=False,
             widget=BooleanField._properties["widget"](
+                description="If checked, an additional paragraph will be added in the licence document",
                 label=_(
                     "urban_label_roadDgrneUnderground", default="Roaddgrneunderground"
                 ),
@@ -427,6 +429,7 @@ schema = Schema(
             name="locationDgrneUnderground",
             default=False,
             widget=BooleanField._properties["widget"](
+                description="If checked, an additional paragraph will be added in the licence document",
                 label=_(
                     "urban_label_locationDgrneUnderground",
                     default="Locationdgrneunderground",
@@ -765,6 +768,9 @@ class BaseBuildLicence(BaseFolder, Inquiry, GenericLicence, BrowserDefaultMixin)
 
     def getLastModificationDeposit(self):
         return self.getLastEvent(interfaces.IModificationDepositEvent)
+
+    def getLastDecisionProjectFromSPW(self):
+        return self.getLastEvent(interfaces.IDecisionProjectFromSPWEvent)
 
     def getLastTheLicence(self):
         return self.getLastEvent(interfaces.ITheLicenceEvent)
