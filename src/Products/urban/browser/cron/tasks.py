@@ -92,7 +92,6 @@ class UpdateOpenTasksLicences(BrowserView):
                 filtered_licences.append(licence)
         from Products.urban import logger
 
-        # from imio.schedule.utils import get_task_configs
         for count, licence in enumerate(filtered_licences):
             logger.info("UpdateOpenTasksLicences: %s" % str(licence.absolute_url()))
             logger.info(
@@ -117,12 +116,3 @@ class UpdateOpenTasksLicences(BrowserView):
             licence.reindexObject()
             if count % COMMIT_INTERVAL == 0:
                 transaction.commit()
-            # task_configs = licence.portal_type != 'CODT_BuildLicence' and get_task_configs(licence) or []
-            # for config in task_configs:
-            # task = config.get_open_task(licence)
-            # if task:
-            # task.due_date = config.compute_due_date(licence, task)
-            # task.reindexObject(idxs=('due_date',))
-            # if licence.id == "codt_buildlicence.2022-07-12.3145384997":
-            #    notify(ObjectModifiedEvent(licence))
-            #    licence.reindexObject()
