@@ -503,6 +503,9 @@ class EnvironmentBase(
         return self.getLastEvent(interfaces.IWalloonRegionDecisionEvent)
 
     def getLastDecisionProjectFromSPW(self):
+        return self.getLastDecisionProjectFromSPWEvent()
+
+    def getLastDecisionProjectFromSPWEvent(self):
         return self.getLastEvent(interfaces.IDecisionProjectFromSPWEvent)
 
     def getLastProprietaryChangeEvent(self):
