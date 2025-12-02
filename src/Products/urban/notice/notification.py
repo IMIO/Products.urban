@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+from Products.urban.interfaces import IGenericLicence
 from Products.urban.notice.address import NoticeAddress
 from Products.urban.notice.base import NoticeElement
 from Products.urban.notice.document import NoticeDocument
@@ -194,7 +194,10 @@ class NoticeNotification(NoticeElement):
         if not self.reference:
             return
         catalog = api.portal.get_tool("portal_catalog")
-        brains = catalog.unrestrictedSearchResults(getReference=self.reference)
+        brains = catalog.unrestrictedSearchResults(
+            getReference=self.reference,
+            object_provides=IGenericLicence.__identifier__,
+        )
         if len(brains) != 1:
             return
         licence = brains[0].getObject()
