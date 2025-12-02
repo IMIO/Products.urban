@@ -34,7 +34,7 @@ def delete_tasks():
 
 
 def check_id_digit(id, keep):
-    # If keep is 0 we keep nothing, everything is delelted
+    # If keep is 0 we keep nothing, everything is deleted
     if keep == 0:
         return False
     pattern = r"^TASK_.*-(?P<digit>\d+)$"
@@ -48,7 +48,7 @@ def check_id_digit(id, keep):
 
 def delete_task(title, portal_type, after_date, licence_type, keep=1):
     """
-    Funciton used to delete tasks
+    Function used to delete tasks
 
     :param title: Title of the task
     :type title: string
