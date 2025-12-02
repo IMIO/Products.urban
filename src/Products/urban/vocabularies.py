@@ -28,7 +28,6 @@ from zope.schema.vocabulary import SimpleVocabulary
 import grokcore.component as grok
 
 
-
 class AvailableStreets(grok.GlobalUtility):
     grok.provides(IVocabularyFactory)
     grok.name("availableStreets")
