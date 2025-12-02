@@ -31,6 +31,7 @@ from Products.urban import UrbanMessage as _
 from Products.urban.UrbanConfigurationValue import UrbanConfigurationValue
 from Products.urban.config import EMPTY_VOCAB_VALUE
 from Products.urban.config import PROJECTNAME
+from Products.urban.utils import WIDGET_DATE_END_YEAR
 from collections import OrderedDict
 from datetime import datetime
 
@@ -97,6 +98,8 @@ schema = Schema(
             widget=DateTimeField._properties["widget"](
                 show_hm=False,
                 format="%d/%m/%Y",
+                starting_year=1930,
+                ending_year=WIDGET_DATE_END_YEAR,
                 label=_("urban_label_startValidity", default="StartValidity"),
             ),
             optional=True,
@@ -106,6 +109,8 @@ schema = Schema(
             widget=DateTimeField._properties["widget"](
                 show_hm=False,
                 format="%d/%m/%Y",
+                starting_year=1930,
+                ending_year=WIDGET_DATE_END_YEAR,
                 label=_("urban_label_endValidity", default="EndValidity"),
             ),
             optional=True,
@@ -138,6 +143,23 @@ class UrbanVocabularyTerm(BaseContent, UrbanConfigurationValue, BrowserDefaultMi
     _at_rename_after_creation = True
 
     schema = UrbanVocabularyTerm_schema
+
+    security.declarePublic("getFormattedDescription")
+
+    def getFormattedDescription(self, linebyline=True, prefix=""):
+        """
+        This method can get the description in different formats
+        """
+        descr = self.Description().strip()
+        # add prefix only if description isn't empty
+        #    or is different from code like "<p> </p>" ??
+        if descr and prefix:
+            descr = prefix + descr
+        if linebyline:
+            return descr
+        else:
+            # we need to make a single string with everything we have in the HTML description
+            return re.sub(r"<[^>]*?>", " ", descr).replace("  ", " ")
 
     def __str__(self):
         return self.Title()

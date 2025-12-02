@@ -4,7 +4,9 @@
 # GNU General Public License (GPL)
 
 from Acquisition import aq_parent
+from Products.CMFPlone.i18nl10n import utranslate
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
+from Products.urban.config import EMPTY_VOCAB_VALUE
 from Products.urban.config import URBAN_CODT_TYPES
 from Products.urban.config import URBAN_CWATUPE_TYPES
 from Products.urban.config import URBAN_ENVIRONMENT_TYPES
@@ -16,6 +18,7 @@ from Products.urban.utils import convert_to_utf8
 from Products.urban.utils import get_licence_context
 from Products.urban.utils import getCurrentFolderManager
 from plone import api
+from zope.component import getGlobalSiteManager
 from zope.i18n import translate
 from zope.interface import implements
 from zope.schema.interfaces import IVocabularyFactory
