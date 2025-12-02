@@ -18,7 +18,6 @@ from Products.Archetypes.atapi import *
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.urban.UrbanVocabularyTerm import UrbanVocabularyTerm
 from Products.urban.config import *
-
 ##code-section module-header #fill in your manual code here
 from zope.i18n import translate
 from zope.interface import implements
