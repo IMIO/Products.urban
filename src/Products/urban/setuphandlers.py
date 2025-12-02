@@ -1184,11 +1184,11 @@ def addApplicationFolders(context):
             "Folder", id="parcellings", title=_("parcellings_folder_title", "urban")
         )
         newSubFolder = getattr(newFolder, newFolderid)
-        setFolderAllowedTypes(newSubFolder, "ParcellingTerm")
+        setFolderAllowedTypes(newSubFolder, "Parcelling")
         newSubFolder.setLayout("parcellings_folderview")
         # manage the 'Add' permissions...
         newSubFolder.manage_permission(
-            "urban: Add ParcellingTerm",
+            "Add portal content",
             [
                 "Manager",
                 "Editor",
