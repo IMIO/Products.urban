@@ -10,11 +10,17 @@
       name="urban.LicencesWorkflowStates"
       />
 
-  <utility
-      factory=".vocabularies.InspectionFollowupVocabulary"
-      provides="zope.schema.interfaces.IVocabularyFactory"
-      name="urban.inspection_followups"
-      />
+    <utility
+        factory=".vocabularies.InspectionFollowupVocabulary"
+        name="urban.inspection_followups"
+        provides="zope.schema.interfaces.IVocabularyFactory"
+    />
+
+    <utility
+        factory=".vocabularies.TicketFollowupVocabulary"
+        name="urban.ticket_followups"
+        provides="zope.schema.interfaces.IVocabularyFactory"
+    />
 
   <utility
       factory=".vocabularies.CovidVocabulary"
