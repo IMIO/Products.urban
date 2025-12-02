@@ -769,6 +769,15 @@ class UrbanDocGenerationLicenceHelperView(UrbanDocGenerationHelperView):
                         specific_features_text.append(specific_feature_text)
         return specific_features_text
 
+    def get_bound_licence_advices(self):
+        """
+        Adivces asked on bound licence.
+        """
+        context = self.context
+        advices = [ad.extraValue for ad in context.getBound_licence().getAllAdvices()]
+        advices_liste = u",\n".join(advices)
+        return advices_liste
+
     def getEvent(self, title=""):
         """
         Return a specific title's UrbanEvent
@@ -1429,6 +1438,15 @@ class UrbanDocGenerationEventHelperView(UrbanDocGenerationHelperView):
         state = self._get_wspm_field(field_name)
         self._get_wspm_meeting_field(field_name)
         return state.get("title")
+
+    def getEvent(self, title=""):
+        """
+        Return a specific title's UrbanEvent
+        """
+        events = self.getAllEvents()
+        for event in events[::-1]:
+            if event.Title() == title:
+                return event
 
 
 class UrbanDocGenerationFacetedHelperView(ATDocumentGenerationHelperView):
