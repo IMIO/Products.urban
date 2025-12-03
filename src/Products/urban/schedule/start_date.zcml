@@ -115,45 +115,29 @@
       name="urban.schedule.start_date.spw_decision_project_receipt_date_or_acknowledgment_date"
       />
 
-    <adapter
-        for="Products.urban.interfaces.IBaseAllBuildLicence
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IStartDate"
-        factory=".start_date.WalloonRegionDecisionDate"
-        name="urban.schedule.start_date.walloonregion_decision_date"
-    />
+  <adapter
+      factory=".start_date.WalloonRegionDecisionDate"
+      provides="imio.schedule.interfaces.IStartDate"
+      for="Products.urban.interfaces.IBaseAllBuildLicence
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.start_date.walloonregion_decision_date"
+      />
 
-    <adapter
-        for="Products.urban.interfaces.IEnvironmentLicence
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IStartDate"
-        factory=".start_date.SPWReceiptDate"
-        name="urban.schedule.start_date.spw_receipt_date"
-    />
+  <adapter
+      factory=".start_date.DecisionProjectFromSPWReceiptDateOrAcknowledgmentDate"
+      provides="imio.schedule.interfaces.IStartDate"
+      for="Products.urban.interfaces.IEnvironmentLicence
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.start_date.spw_decision_project_receipt_date_or_acknowledgment_date"
+      />
 
-    <adapter
-        for="Products.urban.interfaces.IEnvironmentLicence
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IStartDate"
-        factory=".start_date.DecisionProjectFromSPWReceiptDate"
-        name="urban.schedule.start_date.spw_decision_project_receipt_date"
-    />
-
-    <adapter
-        for="Products.urban.interfaces.IEnvironmentLicence
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IStartDate"
-        factory=".start_date.DecisionProjectFromSPWReceiptDateOrAcknowledgmentDate"
-        name="urban.schedule.start_date.spw_decision_project_receipt_date_or_acknowledgment_date"
-    />
-
-    <adapter
-        for="Products.urban.interfaces.IEnvironmentLicence
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IStartDate"
-        factory=".start_date.WalloonRegionDecisionDate"
-        name="urban.schedule.start_date.walloonregion_decision_date"
-    />
+  <adapter
+      factory=".start_date.WalloonRegionDecisionDate"
+      provides="imio.schedule.interfaces.IStartDate"
+      for="Products.urban.interfaces.IEnvironmentLicence
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.start_date.walloonregion_decision_date"
+      />
 
   <adapter
       factory=".start_date.AskOpinionDate"

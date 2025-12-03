@@ -61,11 +61,4 @@
       permission="cmf.ManagePortal"
       />
 
-  <browser:page
-    name="update_licences_open_tasks"
-    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-    permission="cmf.ManagePortal"
-    class=".tasks.UpdateOpenTasksLicences"
-  />
-
 </configure>
