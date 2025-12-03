@@ -56,4 +56,14 @@ default_objects = {
             "grade": "agent-technique",
         },
     ],
+    "foldermanagers": [
+        "FolderManager",
+        {
+            "id": "foldermanager1",
+            "name1": "Dumont",
+            "name2": "Jean",
+            "grade": "agent-technique",
+            "ploneUserId": "urbanmanager",
+        },
+    ],
 }
