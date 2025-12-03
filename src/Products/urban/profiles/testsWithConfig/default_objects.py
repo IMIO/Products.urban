@@ -49,4 +49,14 @@ default_objects = {
             "ploneUserId": "urbanmanager",
         },
     ],
+    "foldermanagers": [
+        "FolderManager",
+        {
+            "id": "foldermanager1",
+            "name1": "Dumont",
+            "name2": "Jean",
+            "grade": "agent-technique",
+            "ploneUserId": "urbanmanager",
+        },
+    ],
 }

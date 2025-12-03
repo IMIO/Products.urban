@@ -3,6 +3,7 @@ from Products.CMFCore.utils import getToolByName
 from Products.urban.interfaces import IAcknowledgmentEvent
 from Products.urban.interfaces import IInquiryEvent
 from Products.urban.interfaces import IOpinionRequestEvent
+from Products.urban.interfaces import IUrbanEventType
 from Products.urban.testing import URBAN_TESTS_CONFIG
 from Products.urban.testing import URBAN_TESTS_LICENCES
 from imio.urban.core.contents.eventconfig import IEventConfig
@@ -26,6 +27,10 @@ class TestInstall(unittest.TestCase):
         self.portal = portal
         login(portal, "urbaneditor")
         self.licence = portal.urban.buildlicences.objectValues()[-1]
+
+    def testReinstall(self):
+        quickInstallProduct(self.portal, "Products.urban")
+        quickInstallProduct(self.portal, "Products.urban")
 
     def testEventTypesCreated(self):
         catalog = getToolByName(self.portal, "portal_catalog")
