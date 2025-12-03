@@ -174,6 +174,18 @@
       />
 
   <subscriber
+      for="..interfaces.IPortionOut
+           zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+      handler=".licenceEvents.updateBoundLicences"
+      />
+
+  <subscriber
+      for="..interfaces.IUrbanEvent
+         zope.lifecycleevent.interfaces.IObjectCreatedEvent"
+      handler=".urbanEventEvents.setDefaultValuesEvent"
+      />
+
+  <subscriber
       for="..interfaces.IUrbanEvent
            Products.Archetypes.interfaces.IObjectInitializedEvent"
       handler=".urbanEventEvents.generateSingletonDocument"
@@ -302,6 +314,18 @@
       />
 
   <subscriber
+      for="..interfaces.IPortionOut
+           zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+      handler=".parcelEvents.updateParcellingTitle"
+      />
+
+  <subscriber
+      for="..interfaces.IParcellingTerm
+           zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+      handler=".parcellingtermEvents.updateTitle"
+      />
+
+  <subscriber
       for="..interfaces.IUrbanEvent
            zope.lifecycleevent.interfaces.IObjectModifiedEvent"
       handler=".urbanEventEvents.notifyLicence"
@@ -350,6 +374,12 @@
       />
 
   <subscriber
+      for="..interfaces.IInspection
+           zope.container.interfaces.IObjectRemovedEvent"
+      handler=".inspectionEvents.clearBoundLicences"
+      />
+
+  <subscriber
       for="..interfaces.ITicket
            zope.lifecycleevent.interfaces.IObjectModifiedEvent"
       handler=".ticketEvents.setTicketBoundInspection"
@@ -359,6 +389,12 @@
       for="..interfaces.ITicket
            zope.lifecycleevent.interfaces.IObjectModifiedEvent"
       handler=".ticketEvents.setTicketBoundLicence"
+      />
+
+  <subscriber
+      for="..interfaces.ITicket
+           zope.container.interfaces.IObjectRemovedEvent"
+      handler=".ticketEvents.clearBoundLicences"
       />
 
   <subscriber
