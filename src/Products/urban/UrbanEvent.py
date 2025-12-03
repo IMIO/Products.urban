@@ -25,6 +25,7 @@ from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import (
 from Products.Archetypes.atapi import *
 from Products.CMFCore.utils import getToolByName
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
+from Products.MasterSelectWidget.MasterMultiSelectWidget import MasterMultiSelectWidget
 from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
 from Products.urban import UrbanMessage as _
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
@@ -498,6 +499,40 @@ schema = Schema(
             optional=True,
         ),
         LinesField(
+            name="followup_proposition",
+            widget=MasterMultiSelectWidget(
+                format="checkbox",
+                slave_fields=slave_fields_followup_proposition,
+                label=_(
+                    "urban_label_followup_proposition", default="Followup_proposition"
+                ),
+            ),
+            multiValued=1,
+            vocabulary="listFollowupPropositions",
+        ),
+        TextField(
+            name="other_followup_proposition",
+            allowable_content_types=("text/html",),
+            widget=RichWidget(
+                label=_(
+                    "urban_label_other_followup_proposition",
+                    default="other_followup_proposition",
+                ),
+            ),
+            default_method="getDefaultText",
+            default_content_type="text/html",
+            default_output_type="text/html",
+        ),
+        StringField(
+            name="delay",
+            widget=StringField._properties["widget"](
+                size=15,
+                label=_("urban_label_delay", default="Delay"),
+            ),
+            default="0",
+            validators=("isInteger",),
+        ),
+        LinesField(
             name="transferType",
             widget=SelectionWidget(
                 format="select",
@@ -939,6 +974,40 @@ class UrbanEvent(OrderedBaseFolder, BrowserDefaultMixin):
     def get_state(self):
         state = api.content.get_state(self)
         return state
+
+    security.declarePublic("listFollowupPropositions")
+
+    def listFollowupPropositions(self):
+        """
+        This vocabulary for field floodingLevel returns a list of
+        flooding levels : no risk, low risk, moderated risk, high risk
+        """
+        voc = UrbanVocabulary(
+            "urbaneventtypes", vocType="FollowUpEventType", value_to_use="title"
+        )
+        config_voc = voc.getDisplayList(self)
+        full_voc = []
+        if self.aq_parent.portal_type == "Inspection":
+            full_voc = [
+                ("close", translate(_("close_inspection"), context=self.REQUEST)),
+                ("ticket", translate(_("ticket"), context=self.REQUEST)),
+            ]
+        for key in config_voc.keys():
+            full_voc.append((key, config_voc.getValue(key)))
+        return DisplayList(full_voc)
+
+    def get_regular_followup_propositions(self):
+        """ """
+        ignore = ["ticket", "close"]
+        follow_ups = [
+            fw_up for fw_up in self.getFollowup_proposition() if fw_up not in ignore
+        ]
+        return follow_ups
+
+    def showOtherFollowUp(self, *values):
+        selection = [v["val"] for v in values if v["selected"]]
+        show = "other" in selection
+        return show
 
     security.declarePublic("listTransferType")
 

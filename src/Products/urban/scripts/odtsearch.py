@@ -8,6 +8,8 @@ import os.path
 import re
 import shutil
 import sys
+import tempfile
+import time
 import xml.dom.minidom
 import zipfile
 
