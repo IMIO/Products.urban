@@ -43,7 +43,13 @@ licences_data = {
     "ParcelOutLicence": {
         "licenceSubject": "Exemple Permis d'urbanisation",
         "contact_type": "Applicant",
+    "ParcelOutLicence": {
+        "licenceSubject": "Exemple Permis d'urbanisation",
+        "contact_type": "Applicant",
     },
+    "Declaration": {
+        "licenceSubject": "Exemple Déclaration",
+        "contact_type": "Applicant",
     "Declaration": {
         "licenceSubject": "Exemple Déclaration",
         "contact_type": "Applicant",
@@ -51,11 +57,20 @@ licences_data = {
     "Division": {
         "licenceSubject": "Exemple Division",
         "contact_type": "Proprietary",
+    "Division": {
+        "licenceSubject": "Exemple Division",
+        "contact_type": "Proprietary",
     },
     "UrbanCertificateOne": {
         "licenceSubject": "Exemple Certificat Urbanisme 1",
         "contact_type": "Proprietary",
+    "UrbanCertificateOne": {
+        "licenceSubject": "Exemple Certificat Urbanisme 1",
+        "contact_type": "Proprietary",
     },
+    "UrbanCertificateTwo": {
+        "licenceSubject": "Exemple Certificat Urbanisme 2",
+        "contact_type": "Proprietary",
     "UrbanCertificateTwo": {
         "licenceSubject": "Exemple Certificat Urbanisme 2",
         "contact_type": "Proprietary",

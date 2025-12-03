@@ -714,6 +714,15 @@ class TestGenericLicenceFields(SchemaFieldsTestCase):
             )
             self.assertTrue(licence.getField(field_name), msg)
 
+    def test_areParcelsVerified(self):
+        for licence in self.licences:
+            msg = "field 'areParcelsVerified' not visible on {}".format(
+                licence.getPortalTypeName()
+            )
+            self._is_field_visible(
+                "<span>Les parcelles ont été vérifiées?</span>:", licence, msg
+            )
+
     def test_has_attribute_foldermanagers(self):
         field_name = "foldermanagers"
         for licence in self.licences:
@@ -740,11 +749,14 @@ class TestGenericLicenceFields(SchemaFieldsTestCase):
     def test_parcellings(self):
         for licence in self.licences:
             # CODT licence parcellings is renamed to urbanisation licence
+            if (
+                interfaces.ICODT_BaseBuildLicence.providedBy(licence)
+                or "CODT" in licence.portal_type
+            ):
+                continue
             msg = "field 'parcellings' not visible on {}".format(
                 licence.getPortalTypeName()
             )
             self._is_field_visible(
-                "<span>Le bien se situe dans un permis d'urbanisation</span>:",
-                licence,
-                msg,
+                "<span>Le bien se situe dans un lotissement</span>:", licence, msg
             )

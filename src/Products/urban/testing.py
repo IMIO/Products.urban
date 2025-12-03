@@ -2,20 +2,28 @@
 
 from Products.GenericSetup.tool import DEPENDENCY_STRATEGY_NEW
 from Products.urban.utils import run_entry_points
+from plone import api
 from plone.app.robotframework.testing import REMOTE_LIBRARY_BUNDLE_FIXTURE
 from plone.app.testing import FunctionalTesting
 from plone.app.testing import helpers
 from plone.app.testing import IntegrationTesting
 from plone.app.testing import PloneWithPackageLayer
 from plone.testing import z2
+from zope.globalrequest import setLocal
 from zope.globalrequest import setRequest
 
 import Products.urban
+import logging
+import transaction
 
 
 class UrbanLayer(PloneWithPackageLayer):
+    """ """
+
     def setUpPloneSite(self, portal):
-        setRequest(portal.REQUEST)
+        setattr(portal.REQUEST, "URL", "")
+        setLocal("request", portal.REQUEST)
+        transaction.commit()
         super(UrbanLayer, self).setUpPloneSite(portal)
 
 
@@ -123,6 +131,7 @@ class UrbanImportsLayer(IntegrationTesting):
     """
 
     def setUp(self):
+        super(UrbanImportsLayer, self).setUp()
         with helpers.ploneSite() as portal:
             portal.setupCurrentSkin(portal.REQUEST)
             setRequest(portal.REQUEST)
@@ -148,6 +157,13 @@ class UrbanWithUsersFunctionalLayer(FunctionalTesting):
     environment_default_user = "environmenteditor"
     environment_default_password = "environmenteditor"
 
+    def setUpPloneSite(self, portal):
+        logging.basicConfig(level=logging.DEBUG)
+        setattr(portal.REQUEST, "URL", "")
+        setLocal("request", portal.REQUEST)
+        transaction.commit()
+        super(UrbanWithUsersLayer, self).setUpPloneSite(portal)
+
     def setUp(self):
         Products.urban.config.NIS = "92000"  # mock NIS code
         # monkey patch to avoid running upgrade steps when reisntalling urban
@@ -157,6 +173,11 @@ class UrbanWithUsersFunctionalLayer(FunctionalTesting):
             setRequest(portal.REQUEST)
             from Products.urban.setuphandlers import addTestUsers
 
+            api.user.create(
+                email="adminurba@urban.be",
+                username="Admin_urba",
+                password="secret",
+            )
             addTestUsers(portal)
 
 

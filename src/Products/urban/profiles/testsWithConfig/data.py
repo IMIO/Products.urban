@@ -2,7 +2,9 @@
 
 from Products.urban.config import DASHBOARD_TEMPLATES
 from Products.urban.config import GLOBAL_TEMPLATES
+from Products.urban.profiles.extra.data import REFNIS_2019 as refnis
 from plone.app.textfield import RichTextValue
+
 
 
 globalTemplates = GLOBAL_TEMPLATES
@@ -44,6 +46,26 @@ EventConfigs = {
     ),
     "buildlicence": (
         {
+            "id": "transmis-2eme-dossier-rw",
+            "title": "Transmis 2eme dossier RW",
+            "eventDateLabel": "Date de transmis",
+            "activatedFields": ["decisionDate", "decision", "receiptDate"],
+            "deadLineDelay": 0,
+            "podTemplates": (),
+            "eventTypeType": "Products.urban.interfaces.IWalloonRegionOpinionRequestEvent",
+        },
+    ),
+    "buildlicence": (
+        {
+            "id": "depot-de-la-demande",
+            "title": "Dépôt de la demande (récépissé - article 115)",
+            "eventDateLabel": "Date de dépôt",
+            "activatedFields": [],
+            "deadLineDelay": 10,
+            "isKeyEvent": True,
+            "keyDates": ("eventDate",),
+            "podTemplates": (),
+            "eventTypeType": "Products.urban.interfaces.IDepositEvent",
             "id": "depot-de-la-demande",
             "title": "Dépôt de la demande (récépissé - article 115)",
             "eventDateLabel": "Date de dépôt",
