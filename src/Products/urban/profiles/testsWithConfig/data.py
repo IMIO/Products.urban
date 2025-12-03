@@ -2,6 +2,7 @@
 
 from Products.urban.config import DASHBOARD_TEMPLATES
 from Products.urban.config import GLOBAL_TEMPLATES
+from Products.urban.profiles.extra.data import REFNIS_2019 as refnis
 from plone.app.textfield import RichTextValue
 
 
