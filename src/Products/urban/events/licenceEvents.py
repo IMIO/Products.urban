@@ -78,7 +78,9 @@ def postCreationActions(licence, event):
 
 
 def updateLicenceTitle(licence, event):
-    licence.updateTitle()
+    if hasattr(licence, "updateTitle"):
+        licence.updateTitle()
+        licence.reindexObject(idxs=["Title", "sortable_title"])
 
 
 def updateTaskIndexes(task_container, event):
@@ -121,14 +123,18 @@ def _updateBoundLicencesIndexes(licence, events, indexes=[]):
     annotations = IAnnotations(licence)
     ticket_uids = annotations.get("urban.bound_tickets") or set([])
     inspection_uids = annotations.get("urban.bound_inspections") or set([])
-    uids = inspection_uids.union(ticket_uids)
+    roaddecree_uids = annotations.get("urban.bound_roaddecrees") or set([])
+    uids = inspection_uids.union(ticket_uids).union(roaddecree_uids)
     catalog = api.portal.get_tool("portal_catalog")
-    bound_licences_brains = catalog(UID=list(uids))
+    bound_licences_brains = catalog(UID=uids)
     for bound_licences_brain in bound_licences_brains:
         bound_licence = bound_licences_brain.getObject()
         to_reindex = False
         if (
-            bound_licence.portal_type == "Inspection"
+            (
+                bound_licence.portal_type == "Inspection"
+                or bound_licence.portal_type == "RoadDecree"
+            )
             and bound_licence.getUse_bound_licence_infos()
         ):
             to_reindex = True
