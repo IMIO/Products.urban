@@ -45,6 +45,9 @@ def migrate_to_richtext(src_obj, dst_obj, src_fieldname, dst_fieldname):
         new_value = textfield.RichTextValue(old_value)
     setattr(dst_obj, dst_fieldname, new_value)
 
+def migrate_to_shore(src_obj, dst_obj, src_fieldname, dst_fieldname):
+    value = src_obj.shore
+    setattr(dst_obj, "shore", value)
 
 def clean_obsolete_portal_type(portal_type_to_remove=None, report="print"):
 
@@ -132,7 +135,7 @@ def uid_catalog_reindex_objects(objects=[]):
 
 # reimplements migration method to be able to define savepoints threshold (transaction_size)
 def migrateCustomAT(
-    fields_mapping, src_type, dst_type, transaction_size=20, dry_run=False
+    fields_mapping, src_type, dst_type, transaction_size=20, dry_run=False, full_transaction=False, use_savepoint=False
 ):
     """
     Try to get types infos from archetype_tool, then set a migrator an pass it
@@ -197,7 +200,8 @@ def migrateCustomAT(
             "src_meta_type": src_meta_type,
             "dst_meta_type": "",
             "transaction_size": transaction_size,
-            "use_savepoint": True,
+            "full_transaction": full_transaction,
+            "use_savepoint": use_savepoint,
         }
         if dry_run:
             walker_settings["limit"] = 1
