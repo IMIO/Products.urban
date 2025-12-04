@@ -56,6 +56,15 @@ slave_fields_transfertype = (
         "hide_values": ("full",),
     },
 )
+
+slave_fields_followup_proposition = (
+    {
+        "name": "other_followup_proposition",
+        "action": "show",
+        "toggle_method": "showOtherFollowUp",
+    },
+)
+
 ##/code-section module-header
 
 schema = Schema(
