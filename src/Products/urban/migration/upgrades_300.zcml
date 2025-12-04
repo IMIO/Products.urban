@@ -13,4 +13,35 @@
       handler=".update_300.set_additional_reference_as_default"
       />
 
+  <gs:upgradeSteps
+      source="1205"
+      destination="1206"
+      profile="Products.urban:default"
+      >
+        <gs:upgradeStep
+          title="Install imio.urban.core"
+          handler=".update_300.install_urban_core"
+          />
+        <gs:upgradeStep
+          title="Migration to DX - PortionOut"
+          handler=".migrate_to_DX.migrate_PortionOut_to_DX"
+          />
+        <gs:upgradeStep
+          title="Migration to DX - ParcellingTerm"
+          handler=".migrate_to_DX.migrate_ParcellingTerm_to_DX"
+          />
+        <gs:upgradeStep
+          title="Migrate parcellings folder allowed type"
+          handler=".migrate_to_250.migrate_parcellings_folder_allowed_type"
+          />
+        <gs:upgradeStep
+          title="Migration to DX - UrbanEventType"
+          handler=".migrate_to_DX.migrate_UrbanEventType_to_DX"
+          />
+        <gs:upgradeStep
+          title="Migration urbaneventtypes folder"
+          handler=".migrate_to_250.migrate_urbaneventtypes_folder"
+          />
+      </gs:upgradeSteps>
+
 </configure>

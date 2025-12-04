@@ -3,6 +3,7 @@
 from Products.urban.migration.to_DX.migration_utils import migrate_date
 from Products.urban.migration.to_DX.migration_utils import migrate_to_richtext
 from Products.urban.migration.to_DX.migration_utils import migrate_to_tuple
+from Products.urban.migration.to_DX.migration_utils import migrate_to_shore
 from Products.urban.migration.to_DX.migration_utils import migrateCustomAT
 from Products.urban.migration.to_DX.migration_utils import uid_catalog_reindex_objects
 from Products.urban.migration.utils import disable_schedule
@@ -10,6 +11,7 @@ from collective.noindexing import patches
 from imio.urban.core.contents.eventconfig import IEventConfig
 from plone import api
 
+TRANSACTION_SIZE = 1000
 
 def migrate_PortionOut_to_DX(context):
     fields_mapping = (
@@ -49,6 +51,11 @@ def migrate_PortionOut_to_DX(context):
             "AT_field_name": "outdated",
             "DX_field_name": "outdated",
         },
+        {
+            "AT_field_name": "shore",
+            "DX_field_name": "shore",
+            "field_migrator": migrate_to_shore,
+        },
     )
     # disable linkintegrity, catalog and schedule
     patches.apply()
@@ -59,7 +66,8 @@ def migrate_PortionOut_to_DX(context):
         fields_mapping,
         src_type="PortionOut",
         dst_type="Parcel",
-        transaction_size=100000,
+        transaction_size=TRANSACTION_SIZE,
+        full_transaction=True
     )
     # restore catalog and linkintegrity
     patches.unapply()
@@ -111,7 +119,8 @@ def migrate_ParcellingTerm_to_DX(context):
         fields_mapping,
         src_type="ParcellingTerm",
         dst_type="Parcelling",
-        transaction_size=100000,
+        transaction_size=TRANSACTION_SIZE,
+        full_transaction=True
     )
     portal.portal_properties.site_properties.enable_link_integrity_checks = True
 
@@ -179,7 +188,8 @@ def migrate_UrbanEventType_to_DX(context):
         fields_mapping,
         src_type="UrbanEventType",
         dst_type="EventConfig",
-        transaction_size=100000,
+        transaction_size=TRANSACTION_SIZE,
+        full_transaction=True
     )
 
     fields_mapping.append(
@@ -193,7 +203,8 @@ def migrate_UrbanEventType_to_DX(context):
         fields_mapping,
         src_type="FollowUpEventType",
         dst_type="FollowUpEventConfig",
-        transaction_size=100000,
+        transaction_size=TRANSACTION_SIZE,
+        full_transaction=True
     )
 
     fields_mapping.pop()
@@ -250,7 +261,8 @@ def migrate_UrbanEventType_to_DX(context):
         fields_mapping,
         src_type="OpinionRequestEventType",
         dst_type="OpinionEventConfig",
-        transaction_size=100000,
+        transaction_size=TRANSACTION_SIZE,
+        full_transaction=True
     )
 
     # restore linkintegrity
