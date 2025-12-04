@@ -8,14 +8,14 @@
       title="Set additionalReference as an optional field"
       description="Activate additionalReference for all licences types"
       profile="Products.urban:default"
-      source="1205"
-      destination="1206"
+      source="*"
+      destination="3000"
       handler=".update_300.set_additional_reference_as_default"
       />
 
   <gs:upgradeSteps
-      source="*"
-      destination="3001"
+      source="1205"
+      destination="1206"
       profile="Products.urban:default"
       >
         <gs:upgradeStep
