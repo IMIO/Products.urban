@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from Products.urban.utils import get_env_variable_value
-
 import os
 
 
