@@ -700,6 +700,8 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
     This manage the base view of UrbanEventInquiry
     """
 
+    with_road_adaptation = False
+
     def __init__(self, context, request):
         super(BrowserView, self).__init__(context, request)
         self.context = context
@@ -922,6 +924,12 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
         portal_urban = api.portal.get_tool("portal_urban")
         suspension_periods = portal_urban.get_offday_periods("inquiry_suspension")
 
+        if self.with_road_adaptation:
+            return self.check_dates_for_suspension_method_with_road_adaptation(suspension_periods, start_date, end_date, licence)
+        else:
+            return self.check_dates_for_suspension_method_classic(suspension_periods, end_date)
+
+    def check_dates_for_suspension_method_classic(self, suspension_periods, end_date):
         for suspension_period in suspension_periods:
             suspension_start = DateTime(str(suspension_period["start_date"]))
             suspension_end = DateTime(str(suspension_period["end_date"]))
@@ -933,6 +941,25 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
                 )
         return True, "", ""
 
+    def check_dates_for_suspension_method_with_road_adaptation(self, suspension_periods, start_date, end_date, licence):
+        suspension_delay = 0
+        inquiry_duration = 15
+        if hasattr(licence, "getRoadAdaptation"):
+            if licence.getRoadAdaptation() and licence.getRoadAdaptation() not in [
+                [""],
+                "no",
+            ]:
+                inquiry_duration = 30
+        theorical_end_date = start_date + inquiry_duration
+
+        for suspension_period in suspension_periods:
+            suspension_start = DateTime(suspension_period["from"])
+            suspension_end = DateTime(suspension_period["to"])
+            if start_date >= suspension_start and start_date < suspension_end + 1:
+                suspension_delay = suspension_end - start_date
+                if end_date < theorical_end_date + suspension_delay:
+                    return False, suspension_period["from"], suspension_period["to"]
+        return True, "", ""
 
 class UrbanEventAnnouncementView(UrbanEventInquiryBaseView):
     """
@@ -974,6 +1001,10 @@ class UrbanEventAnnouncementView(UrbanEventInquiryBaseView):
         # disable portlets
         self.request.set("disable_plone.rightcolumn", 1)
         self.request.set("disable_plone.leftcolumn", 1)
+
+
+class UrbanEventAnnouncementWithRoadAdaptationView(UrbanEventAnnouncementView):
+    with_road_adaptation = True
 
 
 class UrbanEventInquiryView(UrbanEventInquiryBaseView):
@@ -1298,6 +1329,10 @@ class UrbanEventInquiryView(UrbanEventInquiryBaseView):
 
         return output
 
+
+class UrbanEventInquiryWithRoadAdaptationView(UrbanEventInquiryView):
+    with_road_adaptation = True
+   
 
 class CanTransferFolderToDpaView(BrowserView):
     @property
