@@ -94,6 +94,9 @@ class ImportFromNoticeView(BrowserView):
             if notif_last_status_date <= self.last_import_date:
                 continue
 
+            if notice_id in self.failed_notifications:
+                continue
+
             if notice_id in self.already_handled_notifications:
                 continue
             self.already_handled_notifications.append(notice_id)
