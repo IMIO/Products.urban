@@ -138,9 +138,9 @@ class Couple(BaseContent, Applicant, BrowserDefaultMixin):
         self, short, linebyline, reverse=False, invertnames=False, withtitle=True
     ):
         title = self.getPersonTitleValue(short, False, reverse).decode("utf8")
-        lastNamePerson1 = self.getCouplePerson1Name().decode("utf-8")
+        lastNamePerson1 = self.getCouplePerson1Name().decode("utf-8").upper()
         firstNamePerson1 = self.getCouplePerson1Firstname().decode("utf-8")
-        lastNamePerson2 = self.getCouplePerson2Name().decode("utf-8")
+        lastNamePerson2 = self.getCouplePerson2Name().decode("utf-8").upper()
         firstNamePerson2 = self.getCouplePerson2Firstname().decode("utf-8")
         namedefined = (
             lastNamePerson1 or firstNamePerson1 or lastNamePerson2 or firstNamePerson2

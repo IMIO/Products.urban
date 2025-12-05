@@ -16,7 +16,6 @@ __docformat__ = "plaintext"
 from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
-
 ##code-section module-header #fill in your manual code here
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.config import *
@@ -166,6 +165,21 @@ class RecipientCadastre(BaseFolder, BrowserDefaultMixin):
     schema = RecipientCadastre_schema
 
     # Manually created methods
+
+    def getParcels(self):
+        """
+        Return contained Parcels...
+        """
+        return self.objectValues("PortionOut")
+
+    def getParcelsForDisplay(self):
+        """
+        Return contained Parcels for being displayed...
+        """
+        res = []
+        for parcel in self.getParcels():
+            res.append(parcel.Title())
+        return "<br />".join(res)
 
     def getRecipientAddress(self):
         return self.getAdr1() + " " + self.getAdr2()

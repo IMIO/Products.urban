@@ -19,6 +19,7 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.urban import UrbanMessage as _
 from Products.urban.UrbanConfigurationValue import UrbanConfigurationValue
 from Products.urban.config import *
+from Products.urban.utils import WIDGET_DATE_END_YEAR
 from zope.interface import implements
 
 import interfaces
@@ -69,6 +70,8 @@ schema = Schema(
             widget=DateTimeField._properties["widget"](
                 show_hm=False,
                 format="%d/%m/%Y",
+                starting_year=1930,
+                ending_year=WIDGET_DATE_END_YEAR,
                 label=_("urban_label_startValidity", default="StartValidity"),
             ),
         ),
@@ -77,6 +80,8 @@ schema = Schema(
             widget=DateTimeField._properties["widget"](
                 show_hm=False,
                 format="%d/%m/%Y",
+                starting_year=1930,
+                ending_year=WIDGET_DATE_END_YEAR,
                 label=_("urban_label_endValidity", default="EndValidity"),
             ),
         ),
