@@ -606,7 +606,7 @@ class EnvironmentLicence(BaseFolder, EnvironmentBase, BrowserDefaultMixin):
         )
         return DisplayList(vocabulary)
 
-security.declarePublic("listLicenceParcels")
+    security.declarePublic("listLicenceParcels")
 
     def listLicenceParcels(self):
         parcels = self.objectValues("PortionOut")
