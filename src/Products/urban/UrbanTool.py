@@ -32,6 +32,10 @@ from Products.PageTemplates.Expressions import getEngine
 from Products.urban import services
 from Products.urban import UrbanMessage as _
 from Products.urban.config import *
+from Products.urban.config import GENERATED_DOCUMENT_FORMATS
+from Products.urban.config import NIS
+from Products.urban.config import URBANMAP_CFG
+from Products.urban.config import VOCABULARY_TYPES
 from Products.urban.interfaces import IContactFolder
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.interfaces import IUrbanEvent
@@ -43,15 +47,11 @@ from collective.datagridcolumns.DateColumn import DateColumn
 from collective.datagridcolumns.TextAreaColumn import TextAreaColumn
 from datetime import date as _date
 from plone import api
-from plone.contentrules.engine.interfaces import IRuleAssignmentManager
-from plone.contentrules.engine.interfaces import IRuleStorage
-from plone.contentrules.rule.interfaces import IExecutable
 from plone.memoize import ram
 from plone.memoize.request import cache
 from zope.annotation import IAnnotations
 from zope.component import getGlobalSiteManager
-from zope.component import getMultiAdapter
-from zope.component import getUtility
+from zope.deprecation import deprecate
 from zope.i18n import translate
 from zope.interface import implements
 
@@ -136,6 +136,24 @@ schema = Schema(
             schemata="public_settings",
             columns=("condition", "message", "level"),
             default=[],
+        ),
+        DataGridField(
+            name="inquirySuspensionPeriods",
+            widget=DataGridWidget(
+                helper_js=("datagridwidget.js", "datagriddatepicker.js"),
+                columns={
+                    "from": DateColumn("From", date_format="dd/mm/yy"),
+                    "to": DateColumn("To", date_format="dd/mm/yy"),
+                },
+                label=_(
+                    "urban_label_inquirySuspensionPeriods",
+                    default="Inquiry suspension periods",
+                ),
+            ),
+            allow_oddeven=True,
+            allow_reorder=False,
+            schemata="public_settings",
+            columns=("from", "to"),
         ),
         DataGridField(
             name="collegeHolidays",
@@ -636,6 +654,15 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             return urbanConfig
         except AttributeError:
             return None
+
+    security.declarePublic("getUrbanConfig")
+
+    @deprecate("`getUrbanConfig` is deprecated, please use `getLicenceConfig` instead")
+    def getUrbanConfig(self, context, urbanConfigId=None):
+        """
+        Return the folder containing the necessary paramaters
+        """
+        return self.getLicenceConfig(context, urbanConfigId=urbanConfigId)
 
     def generatePrintMap(self, cqlquery, cqlquery2, zoneExtent=None):
         """ """
