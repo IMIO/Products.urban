@@ -104,6 +104,7 @@ def updateTemplate(
         portal_type = template.pop("portal_type", "UrbanTemplate")
         if portal_type == "UrbanTemplate":
             template["merge_templates"] = getDefaultSubTemplates(context, template_id)
+            template["style_template"] = getDefaultStyleTemplate(context, template_id)
             template["mailing_loop_template"] = getDefaultMailingLoopTemplate(
                 context, template_id
             )
@@ -151,6 +152,15 @@ def getDefaultMailingLoopTemplate(context, template_id):
         getattr(globaltemplates, folder_name), "publipostage.odt"
     )
     return mailing_loop_template.UID()
+
+
+def getDefaultStyleTemplate(context, template_id):
+    globaltemplates = context.getSite().portal_urban.globaltemplates
+    folder_name = (
+        template_id.startswith("env") and "environmenttemplates" or "urbantemplates"
+    )
+    style_template = getattr(getattr(globaltemplates, folder_name), "styles.odt")
+    return [style_template.UID()]
 
 
 def getDefaultSubTemplates(context, template_id):
