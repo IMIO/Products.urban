@@ -624,9 +624,6 @@ class Ticket(BaseFolder, GenericLicence, BrowserDefaultMixin):
     def getLastSettlement(self):
         return self.getLastEvent(interfaces.ISettlementEvent)
 
-    def getLastReportEvent(self):
-        return self.getLastEvent(interfaces.IUrbanEventInspectionReport)
-
     def list_patrimony_types(self):
         """ """
         vocabulary = (
@@ -635,6 +632,115 @@ class Ticket(BaseFolder, GenericLicence, BrowserDefaultMixin):
             ("classified", "bien classé"),
         )
         return DisplayList(vocabulary)
+
+    def getLastAcknowledgment(self):
+        return self.getLastEvent(interfaces.IAcknowledgmentEvent)
+
+    def getLastTechnicalAnalysis(self):
+        return self.getLastEvent(interfaces.ITechnicalAnalysis)
+
+    security.declarePublic("mayAddFollowUpEvent")
+
+    def mayAddFollowUpEvent(self, followup_id):
+        """
+        This is used as TALExpression for the UrbanEventFollowUp
+        We may add an UrbanEventFollowUp only if the previous one is closed
+        """
+        report_events = self.getAllReportEvents()
+        if not report_events:
+            return False
+
+        limit = 0
+        for report_event in report_events:
+            if followup_id in report_event.getFollowup_proposition():
+                limit += 1
+        limit = limit - len(self.getFollowUpEventsById(followup_id))
+        return limit > 0
+
+    security.declarePublic("getLastReportEvent")
+
+    def getLastReportEvent(self):
+        return self.getLastEvent(interfaces.IInspectionReportEvent)
+
+    security.declarePublic("getAllReportEvents")
+
+    def getAllReportEvents(self):
+        return self.getAllEvents(interfaces.IInspectionReportEvent)
+
+    security.declarePublic("getCurrentReportEvent")
+
+    def getCurrentReportEvent(self):
+        last_analysis_date = None
+        for action in self.workflow_history.values()[0][::-1]:
+            if action["review_state"] == "technical_analysis":
+                last_analysis_date = action["time"]
+                break
+
+        if not last_analysis_date:
+            return
+
+        report_events = self.getAllReportEvents()
+        for report in report_events:
+            workflow_history = report.workflow_history.values()[0]
+            creation_date = workflow_history[0]["time"]
+            if creation_date > last_analysis_date:
+                return report
+
+    security.declarePublic("getFollowUpEventsById")
+
+    def getFollowUpEventsById(self, followup_id):
+        followup_events = self.objectValues("UrbanEventFollowUp")
+        if followup_id == "":
+            return followup_events
+        res = []
+        for followup_event in followup_events:
+            if followup_event.getFollowUpId() == followup_id:
+                res.append(followup_event)
+        return res
+
+    security.declarePublic("getLastFollowUpEvent")
+
+    def getLastFollowUpEvent(self):
+        return self.getLastEvent(interfaces.IUrbanEventFollowUp)
+
+    security.declarePublic("getAllFollowUpEvents")
+
+    def getAllFollowUpEvents(self):
+        return self.getAllEvents(interfaces.IUrbanEventFollowUp)
+
+    security.declarePublic("getCurrentFollowUpEvents")
+
+    def getCurrentFollowUpEvents(self):
+        last_answer_date = None
+        for action in self.workflow_history.values()[0][::-1]:
+            if action["review_state"] == "waiting_for_agreement":
+                last_answer_date = action["time"]
+                break
+        if not last_answer_date:
+            return []
+
+        report = self.getCurrentReportEvent()
+        if not report:
+            return []
+        selected_follow_ups = [fw_up for fw_up in report.getFollowup_proposition()]
+        if not selected_follow_ups:
+            return []
+
+        followup_events = self.getAllFollowUpEvents()
+        to_return = []
+        for followup in followup_events:
+            workflow_history = followup.workflow_history.values()[0]
+            creation_date = workflow_history[0]["time"]
+            if creation_date > last_answer_date:
+                uet = followup.getUrbaneventtypes()
+                if uet and uet.id in selected_follow_ups:
+                    to_return.append(followup)
+        return to_return
+
+    security.declarePublic("getLastFollowUpEventWithDelay")
+
+    def getLastFollowUpEventWithDelay(self):
+        return self.getLastEvent(interfaces.IUrbanEventFollowUpWithDelay)
 
 
 registerType(Ticket, PROJECTNAME)
