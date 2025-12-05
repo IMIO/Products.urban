@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from Products.urban.content.licence.GenericLicence import GenericLicence
 from Products.urban.interfaces import ICODT_UniqueLicence
 from Products.urban.interfaces import IEnvironmentBase
 from Products.urban.interfaces import IEnvironmentOnlyEvent
@@ -17,6 +18,8 @@ class StateRolesMapping(LocalRoleAdapter):
         self.context = context
         self.event = context
         self.licence = self.context.aq_parent
+        if not isinstance(self.licence, GenericLicence):
+            self.licence = self.context.aq_inner.aq_parent
 
     def get_allowed_groups(self, licence, event):
         integrated_licence = IIntegratedLicence.providedBy(licence)
@@ -26,13 +29,13 @@ class StateRolesMapping(LocalRoleAdapter):
             ):
                 if IEnvironmentOnlyEvent.providedBy(event):
                     return "environment_only"
+                elif IUrbanAndEnvironmentEvent.providedBy(event):
+                    return "urban_and_environment"
                 elif IUrbanOrEnvironmentEvent.providedBy(event):
                     if "urb" in licence.getFolderTendency():
                         return "urban_only"
                     elif "env" in licence.getFolderTendency():
                         return "environment_only"
-                elif IUrbanAndEnvironmentEvent.providedBy(event):
-                    return "urban_and_environment"
                 else:
                     return "urban_only"
             else:
