@@ -341,12 +341,18 @@ APPLICANTS_TYPES = [
     "Tenant",
     "Plaintiff",
     "Couple",
+    "ProprietaryCouple",
 ]
 
 # the different templates used to structure a document
 GLOBAL_TEMPLATES = {
     ".": [],
     "urbantemplates": [
+        {
+            "id": "styles.odt",
+            "portal_type": "StyleTemplate",
+            "title": "Styles urbanisme",
+        },
         {"id": "logo.odt", "portal_type": "SubTemplate", "title": "Logo urbanisme"},
         {
             "id": "header.odt",
@@ -375,6 +381,11 @@ GLOBAL_TEMPLATES = {
         },
     ],
     "environmenttemplates": [
+        {
+            "id": "styles.odt",
+            "portal_type": "StyleTemplate",
+            "title": "Styles environnement",
+        },
         {"id": "logo.odt", "portal_type": "SubTemplate", "title": "Logo environnement"},
         {
             "id": "header.odt",

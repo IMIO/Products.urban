@@ -117,6 +117,8 @@ class isNotDuplicatedReferenceValidator:
         if not ref_num:
             return 1
 
+        if isinstance(ref_num, tuple):
+            ref_num = ref_num[0]
         similar_licences = catalog(
             getReference="'{0}'".format(ref_num),  # Avoid an issue with NOT
             portal_type=types_to_check,
@@ -268,6 +270,38 @@ class isReferenceValidator(object):
         return translate(
             _("error_reference_does_not_exist", default=u"The reference does not exist")
         )
+
+
+class isValidInquiryEndDate(object):
+    """
+    Check that the reference is used by a licence
+    """
+
+    implements(IValidator)
+
+    def __init__(self, name):
+        self.name = name
+
+    def __call__(self, value, *args, **kwargs):
+        if not value:
+            return 1
+        portal_urban = api.portal.get_tool("portal_urban")
+        end_date = DateTime(value)
+        suspension_periods = portal_urban.getInquirySuspensionPeriods()
+        for suspension_period in suspension_periods:
+            suspension_start = DateTime(suspension_period["from"])
+            suspension_end = DateTime(suspension_period["to"])
+            if end_date >= suspension_start and end_date < suspension_end + 1:
+                return translate(
+                    _(
+                        "error_inquiry_suspension",
+                        default=u"The inquiry end date falls during suspension period from {} to {}".format(
+                            suspension_period["from"],
+                            suspension_period["to"],
+                        ),
+                    )
+                )
+        return 1
 
 
 class isInteger:

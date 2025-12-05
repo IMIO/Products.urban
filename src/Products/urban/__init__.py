@@ -109,6 +109,10 @@ from validators.validator import isReferenceValidator
 
 
 validation.register(isReferenceValidator("isReference"))
+from validators.validator import isValidInquiryEndDate
+
+
+validation.register(isValidInquiryEndDate("isValidInvestigationEnd"))
 from validators.validator import isInteger
 
 
