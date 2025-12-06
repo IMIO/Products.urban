@@ -556,3 +556,11 @@ msgstr ""
 
 msgid "ComplementaryDelayTerm"
 msgstr ""
+
+#: ../contentrules/event_type.py:70
+msgid "A Event type condition makes the rule apply only if Event type correspond to the one from the context."
+msgstr ""
+
+#: ../contentrules/opinions.py:77
+msgid "A opinion to ask condition makes the rule apply only when one of the Opinion to ask slelected correspond to the one of the context"
+msgstr ""
