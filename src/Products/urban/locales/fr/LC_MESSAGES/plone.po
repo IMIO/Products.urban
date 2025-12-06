@@ -20,6 +20,12 @@ msgstr ""
 "X-is-fallback-for: fr-ca fr-be fr-fr\n"
 "X-Generator: Poedit 3.3.2\n"
 
+msgid "1st_observation"
+msgstr "1er constat"
+
+msgid "2nd_observation"
+msgstr "2e constat"
+
 # content_types
 msgid "Applicant"
 msgstr "Demandeur"
@@ -57,14 +63,14 @@ msgstr "Certificat d'urbanisme 1 (CODT)"
 msgid "CODT_UrbanCertificateTwo"
 msgstr "Certificats d'urbanisme 2 (CODT)"
 
-msgid "Housing"
-msgstr "Logement"
-
 msgid "City"
 msgstr "Localité"
 
 msgid "Claimant"
 msgstr "Réclamant"
+
+msgid "ComplementaryDelayTerm"
+msgstr "Prorogation complémentaire"
 
 msgid "Contact"
 msgstr "Contact"
@@ -278,8 +284,14 @@ msgstr "Registre des modifications pour les conditions intégrales et sectoriell
 msgid "administrative_answer"
 msgstr "Réponse administrative"
 
+msgid "analyse"
+msgstr "Analyse"
+
 msgid "analysis"
 msgstr "Analyse"
+
+msgid "annual_observation"
+msgstr "Constat annuel"
 
 msgid "ask_opinion"
 msgstr "Demander l'avis"
@@ -432,6 +444,9 @@ msgstr "Rendre caduc"
 msgid "need_parceloutlicence"
 msgstr "Refusé"
 
+msgid "nonapplicable"
+msgstr "Refuser"
+
 msgid "notify"
 msgstr "Notification"
 
@@ -505,6 +520,15 @@ msgstr "Suspendre (gel délais)"
 msgid "suspension"
 msgstr "Interrompu"
 
+msgid "to_1st_observation"
+msgstr "1er constat"
+
+msgid "to_2nd_observation"
+msgstr "2e constat"
+
+msgid "to_annual_observation"
+msgstr "Constat annuel"
+
 msgid "update_additionalLegalConditions"
 msgstr "Mise à jour des Registre des conditions intégrales et sectorielles supplémentaires"
 
@@ -529,30 +553,3 @@ msgstr "Veuillez indiquer d'avantages de termes de recherche"
 
 msgid "workLocationStreet"
 msgstr "Rue"
-
-msgid "nonapplicable"
-msgstr "Refuser"
-
-msgid "analyse"
-msgstr "Analyse"
-
-msgid "to_1st_observation"
-msgstr "1er constat"
-
-msgid "to_2nd_observation"
-msgstr "2e constat"
-
-msgid "to_annual_observation"
-msgstr "Constat annuel"
-
-msgid "1st_observation"
-msgstr "1er constat"
-
-msgid "2nd_observation"
-msgstr "2e constat"
-
-msgid "annual_observation"
-msgstr "Constat annuel"
-
-msgid "ComplementaryDelayTerm"
-msgstr "Prorogation complémentaire"

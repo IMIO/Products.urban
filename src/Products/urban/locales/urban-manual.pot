@@ -1521,3 +1521,15 @@ msgstr ""
 
 msgid "transfer_folder_to_dpa"
 msgstr ""
+
+msgid "Housing"
+msgstr ""
+
+msgid "dimensiontypes_folder_title"
+msgstr ""
+
+msgid "units_folder_title"
+msgstr ""
+
+msgid "urban_label_dimensions"
+msgstr ""
