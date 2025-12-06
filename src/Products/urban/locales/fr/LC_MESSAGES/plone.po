@@ -26,6 +26,14 @@ msgstr "1er constat"
 msgid "2nd_observation"
 msgstr "2e constat"
 
+#: ../contentrules/event_type.py:70
+msgid "A Event type condition makes the rule apply only if Event type correspond to the one from the context."
+msgstr "Une condition de type d'événement rend la règle applicable uniquement si le type d'événement correspond à celui du contexte."
+
+#: ../contentrules/opinions.py:77
+msgid "A opinion to ask condition makes the rule apply only when one of the Opinion to ask slelected correspond to the one of the context"
+msgstr "Une condition d'opinion à demander rend la règle applicable uniquement lorsqu'une des opinions à demander sélectionnées correspond à celle du contexte."
+
 # content_types
 msgid "Applicant"
 msgstr "Demandeur"
