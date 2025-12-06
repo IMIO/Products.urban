@@ -14,8 +14,8 @@
       />
 
   <gs:upgradeSteps
-      source="1205"
-      destination="1206"
+      source="1206"
+      destination="1207"
       profile="Products.urban:default"
       >
         <gs:upgradeStep
