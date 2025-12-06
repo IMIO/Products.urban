@@ -52,6 +52,26 @@ def migrate_PortionOut_to_DX(context):
             "DX_field_name": "outdated",
         },
         {
+            "AT_field_name": "street_code",
+            "DX_field_name": "street_code",
+        },
+        {
+            "AT_field_name": "street_name",
+            "DX_field_name": "street_name",
+        },
+        {
+            "AT_field_name": "street_number",
+            "DX_field_name": "street_number",
+        },
+        {
+            "AT_field_name": "zip_code",
+            "DX_field_name": "zip_code",
+        },
+        {
+            "AT_field_name": "address_point",
+            "DX_field_name": "address_point",
+        },
+        {
             "AT_field_name": "shore",
             "DX_field_name": "shore",
             "field_migrator": migrate_to_shore,
