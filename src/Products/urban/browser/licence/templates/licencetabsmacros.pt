@@ -379,17 +379,17 @@
           <span i18n:translate="ranking_ordinance">
                         ranking_ordinance
           </span>
-          <th>
-            <td>
-              <a href="#"
-                 tal:content="python: view.getRankingOrdinanceTitle()"
-                 tal:attributes="
-                   href python: view.getRankingOrdinanceLink();
-                 "
-              >ranking_ordinance
-              </a>
-              <td>
-              </td></td></th></th></tr>
+        </th>
+        <td>
+          <a href="#"
+              tal:content="python: view.getRankingOrdinanceTitle()"
+              tal:attributes="
+                href python: view.getRankingOrdinanceLink();
+              "
+          >ranking_ordinance
+          </a>
+        </td>
+      </tr>
 
     </table>
   </fieldset>
