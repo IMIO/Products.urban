@@ -4,15 +4,6 @@
     i18n_domain="urban"
     >
 
-  <gs:upgradeStep
-      title="Set additionalReference as an optional field"
-      description="Activate additionalReference for all licences types"
-      profile="Products.urban:default"
-      source="*"
-      destination="3000"
-      handler=".update_300.set_additional_reference_as_default"
-      />
-
   <gs:upgradeSteps
       source="1206"
       destination="1207"
@@ -42,6 +33,24 @@
           title="Migration urbaneventtypes folder"
           handler=".migrate_to_250.migrate_urbaneventtypes_folder"
           />
-      </gs:upgradeSteps>
+  </gs:upgradeSteps>
+
+  <gs:upgradeStep
+      title="Set missing registry record for off days"
+      description=""
+      profile="Products.urban:default"
+      source="1207"
+      destination="1208"
+      handler=".update_300.add_missing_registry_record"
+      />
+
+  <gs:upgradeStep
+      title="Set additionalReference as an optional field"
+      description="Activate additionalReference for all licences types"
+      profile="Products.urban:default"
+      source="*"
+      destination="3000"
+      handler=".update_300.set_additional_reference_as_default"
+      />
 
 </configure>
