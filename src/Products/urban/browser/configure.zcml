@@ -448,13 +448,6 @@
       />
 
   <browser:page
-      name="gig_coring_settings"
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      class=".gig_coring_settings.GigCoringLinkControlPanel"
-      permission="cmf.ManagePortal"
-      />
-
-  <browser:page
       name="notice_settings"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       class=".notice_settings.NoticeSettingsControlPanel"
