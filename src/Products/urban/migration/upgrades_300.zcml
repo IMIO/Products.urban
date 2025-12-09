@@ -45,6 +45,15 @@
       />
 
   <gs:upgradeStep
+      title="Change event config folder allowed types"
+      description=""
+      profile="Products.urban:default"
+      source="1208"
+      destination="1209"
+      handler=".update_300.change_event_config_folder_allowed_types"
+      />
+
+  <gs:upgradeStep
       title="Set additionalReference as an optional field"
       description="Activate additionalReference for all licences types"
       profile="Products.urban:default"
