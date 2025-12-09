@@ -320,12 +320,6 @@
       />
 
   <subscriber
-      for="..interfaces.IParcellingTerm
-           zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-      handler=".parcellingtermEvents.updateTitle"
-      />
-
-  <subscriber
       for="..interfaces.IUrbanEvent
            zope.lifecycleevent.interfaces.IObjectModifiedEvent"
       handler=".urbanEventEvents.notifyLicence"
