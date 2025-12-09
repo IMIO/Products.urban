@@ -3,7 +3,6 @@
 from Acquisition import aq_inner
 from Products.Five import BrowserView
 from Products.urban import UrbanMessage as _
-from Products.urban.browser.gig_coring_settings import GigCoringLinkEditForm
 from Products.urban.browser.notice_settings import NoticeSettingsEditForm
 from Products.urban.browser.offdays_settings import OffDaysEditForm
 from Products.urban.browser.schedule_settings import ScheduleEditForm
@@ -34,8 +33,6 @@ class UrbanConfigView(BrowserView):
         self.offdays_form.update()
         self.schedule_form = ScheduleEditForm(context, request)
         self.schedule_form.update()
-        self.gig_coring_form = GigCoringLinkEditForm(context, request)
-        self.gig_coring_form.update()
         self.notice_settings_form = NoticeSettingsEditForm(context, request)
         self.notice_settings_form.update()
 
@@ -53,7 +50,6 @@ class UrbanConfigView(BrowserView):
             "schedule",
             "internal_services",
             "admin_settings",
-            "gig_coring",
             "notice_settings",
         ]
 
