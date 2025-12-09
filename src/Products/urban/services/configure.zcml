@@ -24,23 +24,6 @@
       for="Products.urban.services.bestaddress.BestaddressService"
       />
 
-  <adapter
-      factory="Products.urban.services.gig.GigSession"
-      provides="Products.urban.services.interfaces.ISQLSession"
-      for="Products.urban.services.gig.GigService"
-      />
-
-  <adapter
-    factory=".notice.Notice"
-    name="notice" />
-
-  <plone:service
-    method="GET"
-    factory=".notice.NoticeGet"
-    for="zope.interface.Interface"
-    permission="zope2.View"
-    name="@notice" />
-
   <adapter factory=".serializer.UrbanDefaultFieldSerializer" />
   <adapter factory=".deserializer.DeserializeFromJsonUrban" />
 

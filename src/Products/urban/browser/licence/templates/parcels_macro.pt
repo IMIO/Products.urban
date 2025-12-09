@@ -14,21 +14,6 @@
             </a>
         </div-->
     <div class="parcel-action">
-      <form action="gig_coring_view"
-            method="post"
-            name="gig_coring"
-            target="_blank"
-            tal:condition="python: view.isGigCoringActive() "
-            tal:attributes="
-              action python: context.absolute_url() + '/gig_coring_view';
-            "
-      >
-        <input class="context apButton"
-               id="gig_coring_link"
-               type="submit"
-               value="Lien GIG"
-        />
-      </form>
     </div>
 
   </fieldset>
