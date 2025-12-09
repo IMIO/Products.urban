@@ -448,13 +448,6 @@
       />
 
   <browser:page
-      name="gig_coring_settings"
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      class=".gig_coring_settings.GigCoringLinkControlPanel"
-      permission="cmf.ManagePortal"
-      />
-
-  <browser:page
       name="notice_settings"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       class=".notice_settings.NoticeSettingsControlPanel"
@@ -479,14 +472,6 @@
       name="faceted-table-view"
       for="Products.ATContentTypes.interfaces.folder.IATBTreeFolder"
       class="collective.eeafaceted.dashboard.browser.overrides.DashboardFacetedTableView"
-      permission="zope2.View"
-      />
-
-  <browser:page
-      name="gig_coring_view"
-      for="*"
-      class=".gig_coring_view.GigCoringView"
-      attribute="open_gig_and_load_parcels"
       permission="zope2.View"
       />
 

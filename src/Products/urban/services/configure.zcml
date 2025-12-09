@@ -25,12 +25,6 @@
       for="Products.urban.services.bestaddress.BestaddressService"
       />
 
-  <adapter
-      factory="Products.urban.services.gig.GigSession"
-      provides="Products.urban.services.interfaces.ISQLSession"
-      for="Products.urban.services.gig.GigService"
-      />
-
   <adapter factory=".serializer.UrbanDefaultFieldSerializer" />
   <adapter factory=".deserializer.DeserializeFromJsonUrban" />
 
