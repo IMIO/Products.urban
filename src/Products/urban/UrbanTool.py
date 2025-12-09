@@ -512,6 +512,43 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         found = bool(len(catalog(UID=object_uid, path={"query": path})))
         return found
 
+    def create_parcel(
+        self,
+        container,
+        division,
+        section="",
+        radical="",
+        bis="",
+        exposant="",
+        puissance="",
+        partie="",
+        outdated=False,
+    ):
+        parcel_id = "%05d%s%04d_%02d%s%03d_%s" % (
+            int(division),
+            section,
+            int(radical or 0),
+            int(bis or 0),
+            exposant,
+            int(puissance or 0),
+            partie and "1" or "0",
+        )
+        parcel_data = {
+            "division": division,
+            "section": section,
+            "radical": radical,
+            "bis": bis,
+            "exposant": exposant,
+            "puissance": puissance,
+            "partie": partie,
+            "outdated": outdated,
+        }
+        api.content.create(
+            container=self.context, type="Parcel", id=parcel_id, **parcel_data
+        )
+        self.context.reindexObject(idxs=["parcelInfosIndex"])
+        self.REQUEST.RESPONSE.redirect(container.absolute_url() + "/view")
+
     security.declarePublic("getParcelsFromTopic")
 
     def getParcelsFromTopic(self, topicName):
