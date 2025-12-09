@@ -96,12 +96,6 @@
 
   <utility
       provides="zope.schema.interfaces.IVocabularyFactory"
-      name="urban.vocabularies.gig_coring_user_id"
-      component=".vocabularies.GigCoringUserIdVocabularyFactory"
-      />
-
-  <utility
-      provides="zope.schema.interfaces.IVocabularyFactory"
       name="urban.vocabularies.licence_documents"
       component=".vocabularies.LicenceDocumentsVocabularyFactory"
       />
