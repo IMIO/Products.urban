@@ -72,3 +72,32 @@ def add_missing_registry_record(context):
     registry.records[key] = registry_record
 
     logger.info("migration done!")
+
+
+def change_event_config_folder_allowed_types(context):
+    from Products.urban.config import URBAN_TYPES
+    from Products.urban.setuphandlers import setFolderAllowedTypes
+
+    logger = logging.getLogger("urban: Change event config folder allowed types")
+    logger.info("starting migration steps")
+
+    portal_urban = api.portal.get_tool("portal_urban")
+    for urban_type in URBAN_TYPES:
+        type_config = getattr(portal_urban, urban_type.lower(), None)
+        if type_config is None:
+            logger.warning("Cannot find {} config folder".format(urban_type))
+            continue
+        event_configs_folder = getattr(type_config, "eventconfigs", None)
+        if event_configs_folder is None:
+            logger.warning("{} config has no eventconfigs folder")
+            continue
+        if urban_type in ["Inspection", "Ticket"]:
+            setFolderAllowedTypes(
+                event_configs_folder, ["EventConfig", "FollowUpEventConfig"]
+            )
+        else:
+            setFolderAllowedTypes(
+                event_configs_folder, ["EventConfig", "OpinionEventConfig"]
+            )
+
+    logger.info("migration done!")
