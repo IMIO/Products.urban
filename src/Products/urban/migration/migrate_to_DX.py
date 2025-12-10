@@ -11,7 +11,10 @@ from collective.noindexing import patches
 from imio.urban.core.contents.eventconfig import IEventConfig
 from plone import api
 
+import transaction
+
 TRANSACTION_SIZE = 1000
+
 
 def migrate_PortionOut_to_DX(context):
     fields_mapping = (
@@ -211,7 +214,7 @@ def migrate_UrbanEventType_to_DX(context):
         transaction_size=TRANSACTION_SIZE,
         full_transaction=True
     )
-
+    transaction.commit()
     fields_mapping.append(
         {
             "AT_field_name": "linkedReport",
@@ -226,7 +229,7 @@ def migrate_UrbanEventType_to_DX(context):
         transaction_size=TRANSACTION_SIZE,
         full_transaction=True
     )
-
+    transaction.commit()
     fields_mapping.pop()
     fields_mapping.extend(
         [
@@ -284,7 +287,7 @@ def migrate_UrbanEventType_to_DX(context):
         transaction_size=TRANSACTION_SIZE,
         full_transaction=True
     )
-
+    transaction.commit()
     # restore linkintegrity
     portal.portal_properties.site_properties.enable_link_integrity_checks = True
     # should at least recatalog them in the archetypes UID catalog
