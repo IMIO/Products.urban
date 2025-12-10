@@ -54,12 +54,12 @@
       />
 
   <gs:upgradeStep
-      title="Reimprot typeinfo profil"
+      title="Reimport typeinfo profil"
       description=""
       profile="Products.urban:default"
       source="1209"
       destination="1210"
-      handler=".update_300.repimport_typeinfo"
+      handler=".update_300.reimport_typeinfo"
       />
 
   <gs:upgradeStep
