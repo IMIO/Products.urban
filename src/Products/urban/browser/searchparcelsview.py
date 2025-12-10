@@ -194,20 +194,9 @@ class SearchParcelsView(BrowserView):
         self.createApplicantFromParcel(owners, worklocations)
 
     def createParcel(self, parcel_data):
-        parcel_id = "%05d%s%04d_%02d%s%03d_%s" % (
-            int(parcel_data["division"]),
-            parcel_data["section"],
-            int(parcel_data["radical"] or 0),
-            int(parcel_data["bis"] or 0),
-            parcel_data["exposant"],
-            int(parcel_data["puissance"] or 0),
-            parcel_data["partie"] and "1" or "0",
-        )
+        portal_urban = api.portal.get_tool("portal_urban")
         try:
-            api.content.create(
-                container=self.context, type="Parcel", id=parcel_id, **parcel_data
-            )
-            self.context.reindexObject(idxs=["parcelInfosIndex"])
+            portal_urban.create_parcel(container=self.context, **parcel_data)
         except BadRequest as already_created:
             if "is invalid - it is already in use." in already_created.message:
                 return
