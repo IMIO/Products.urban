@@ -544,9 +544,9 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             "outdated": outdated,
         }
         api.content.create(
-            container=self.context, type="Parcel", id=parcel_id, **parcel_data
+            container=container, type="Parcel", id=parcel_id, **parcel_data
         )
-        self.context.reindexObject(idxs=["parcelInfosIndex"])
+        container.reindexObject(idxs=["parcelInfosIndex"])
         self.REQUEST.RESPONSE.redirect(container.absolute_url() + "/view")
 
     security.declarePublic("getParcelsFromTopic")
