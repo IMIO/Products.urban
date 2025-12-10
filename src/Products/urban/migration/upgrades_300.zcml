@@ -54,6 +54,15 @@
       />
 
   <gs:upgradeStep
+      title="Reimprot typeinfo profil"
+      description=""
+      profile="Products.urban:default"
+      source="1209"
+      destination="1210"
+      handler=".update_300.repimport_typeinfo"
+      />
+
+  <gs:upgradeStep
       title="Set additionalReference as an optional field"
       description="Activate additionalReference for all licences types"
       profile="Products.urban:default"
