@@ -19,6 +19,7 @@ import pkg_resources
 import random
 import string
 import time
+import os
 
 
 WIDGET_DATE_END_YEAR = datetime.now().year + 25
@@ -384,3 +385,16 @@ def set_default_optional_field(fieldname):
         licence_config.setUsedAttributes(values + (fieldname,))
         updated.append(urban_type)
     return updated
+
+
+def switch_config_folder(config_file, base_folder="dashboard/config"):
+    current_path = os.path.dirname(os.path.abspath(__file__))
+    config = os.environ.get("URBAN_DASHBOARD_CONFIGS", "classic")
+    return os.path.normpath(
+        os.path.join(
+            current_path,
+            base_folder,
+            config,
+            str(config_file)
+        )
+    )

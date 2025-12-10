@@ -33,7 +33,7 @@ from Products.urban.config import URBAN_CFG_DIR
 from Products.urban.config import URBAN_TYPES
 from Products.urban.config import URBAN_TYPES_ACRONYM
 from Products.urban.config import URBANMAP_CFG
-from Products.urban.dashboard.utils import switch_config_folder
+from Products.urban.utils import switch_config_folder
 from Products.urban.exportimport import updateAllUrbanTemplates
 from Products.urban.interfaces import IContactFolder
 from Products.urban.interfaces import ILicenceContainer
@@ -1319,7 +1319,7 @@ def _activate_dashboard_navigation(context, config_path=""):
     context.restrictedTraverse("@@faceted_settings").toggle_left_column()
     IFacetedLayout(context).update_layout("faceted-table-items")
     context.unrestrictedTraverse("@@faceted_exportimport").import_xml(
-        import_file=open(os.path.dirname(__file__) + config_path)
+        import_file=open(config_path)
     )
 
 
@@ -1349,7 +1349,9 @@ def setupSchedule(context):
         schedule_config = getattr(config_folder, "schedule")
         dashboard_collection = getattr(schedule_config, "dashboard_collection", None)
         if not dashboard_collection:
+            api.portal.get().REQUEST.form["force_creation"] = True
             event.notify(ObjectModifiedEvent(schedule_config))
+            api.portal.get().REQUEST.form["force_creation"] = False
         schedule_config.dashboard_collection.customViewFields = (
             u"sortable_title",
             u"pretty_link",
@@ -2032,7 +2034,7 @@ def add_imio_dashboard(urban_type, urban_folder=None):
 
     licence_folder = getattr(urban_folder, urban_type.lower() + "s")
     _activate_dashboard_navigation(
-        licence_folder, "/dashboard/config/%ss.xml" % urban_type.lower()
+        licence_folder, switch_config_folder("%ss.xml" % urban_type.lower())
     )
     collection_id = "collection_%s" % urban_type.lower()
     no_deposit = ["PatrimonyCertificate", "Inspection"]
@@ -2122,7 +2124,9 @@ def add_schedule(config_folder, urban_type, schedule_folder=None):
     schedule_config_folder = getattr(config_folder, "schedule")
     dashboard_collection = getattr(schedule_config_folder, "dashboard_collection", None)
     if not dashboard_collection:
+        api.portal.get().REQUEST.form["force_creation"] = True
         event.notify(ObjectModifiedEvent(schedule_config_folder))
+        api.portal.get().REQUEST.form["force_creation"] = False
     schedule_config_folder.dashboard_collection.customViewFields = (
         u"sortable_title",
         u"pretty_link",
@@ -2147,11 +2151,11 @@ def add_schedule(config_folder, urban_type, schedule_folder=None):
 
         # only apply faceted view if the the folder does not exist to keep
         # custom changes
-        collection_folder = getattr(schedule_folder, folder_id)
-        config_path = "{}/schedule/config/{}.xml".format(
-            os.path.dirname(__file__), folder_id
+        _set_faceted_view(
+            getattr(schedule_folder, folder_id),
+            switch_config_folder("{}.xml".format(folder_id), "schedule/config"),
+            [schedule_config_folder]
         )
-        _set_faceted_view(collection_folder, config_path, [schedule_config_folder])
 
     from Products.urban.profiles.extra.schedule_config import schedule_config
 
