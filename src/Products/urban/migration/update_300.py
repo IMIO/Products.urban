@@ -103,7 +103,7 @@ def change_event_config_folder_allowed_types(context):
     logger.info("migration done!")
 
 
-def repimport_typeinfo(context):
+def reimport_typeinfo(context):
     logger.info("starting migration steps : Import type profile")
     setup_tool = api.portal.get_tool('portal_setup')
     setup_tool.runImportStepFromProfile('profile-Products.urban:urbantypes', 'typeinfo')
