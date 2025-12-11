@@ -13,6 +13,8 @@ __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEUL
 <stephan.geulette@uvcw.be>, Jean-Michel Abe <jm.abe@la-bruyere.be>"""
 __docformat__ = "plaintext"
 
+import datetime
+
 from AccessControl import ClassSecurityInfo
 
 ##code-section module-header #fill in your manual code here
@@ -25,9 +27,13 @@ from Products.urban import UrbanMessage as _
 from Products.urban.UrbanEvent import UrbanEvent
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.config import *
+from Products.urban.notice import NoticeOutgoingPublicSurveyDatesNotification
+from Products.urban.notice import NoticeOutgoingPublicSurveyPVNotification
+from Products.urban.services.notice import WebserviceNotice
 from Products.urban.utils import WIDGET_DATE_END_YEAR
 from archetypes.referencebrowserwidget.widget import ReferenceBrowserWidget
 from plone import api
+from zope.annotation.interfaces import IAnnotations
 from zope.interface import implements
 
 
@@ -116,6 +122,16 @@ schema = Schema(
             allowable_content_types=("text/html",),
             widget=RichWidget(
                 label=_("urban_label_claimsText", default="Claimstext"),
+            ),
+            default_method="getDefaultText",
+            default_output_type="text/x-html-safe",
+            optional=True,
+        ),
+        TextField(
+            name="reportText",
+            allowable_content_types=("text/html",),
+            widget=RichWidget(
+                label=_("urban_label_reportText", default="reporttext"),
             ),
             default_method="getDefaultText",
             default_output_type="text/x-html-safe",
@@ -325,6 +341,35 @@ class UrbanEventInquiry(OrderedBaseFolder, UrbanEvent, BrowserDefaultMixin):
             if claimant.hasSignatureComplaint():
                 number += claimant.getSignatureNumber()
         return number
+
+    def store_transmit_date(self, event_type, date=None):
+        annotations = IAnnotations(self)
+        key = "notice_transmit_dates"
+        dates = annotations.get(key, OrderedDict())
+        dates[event_type] = date if date else datetime.date.today()
+        annotations[key] = dates
+
+    def transfer_dates(self):
+        notification = NoticeOutgoingPublicSurveyDatesNotification(self)
+        service = WebserviceNotice()
+        result = service.post_notification_response(
+            notification.notice_id,
+            notification.serialize(),
+        )
+        reception_date_str = result["body"]["result"]["receptionDate"]
+        reception_date = datetime.datetime.strptime(reception_date_str[:10], "%Y-%m-%d")
+        self.store_transmit_date("transfer_dates", reception_date)
+
+        return result
+
+    def transfer_ticket(self):
+        notification = NoticeOutgoingPublicSurveyPVNotification(self)
+        service = WebserviceNotice()
+        result = service.post_notification_response(
+            notification.notice_id,
+            notification.serialize(),
+        )
+        return result
 
 
 registerType(UrbanEventInquiry, PROJECTNAME)

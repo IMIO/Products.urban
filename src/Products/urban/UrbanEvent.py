@@ -13,6 +13,9 @@ __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEUL
 <stephan.geulette@uvcw.be>, Jean-Michel Abe <jm.abe@la-bruyere.be>"""
 __docformat__ = "plaintext"
 
+
+import datetime
+
 from AccessControl import ClassSecurityInfo
 from Acquisition import aq_parent
 
@@ -30,6 +33,8 @@ from Products.urban import UrbanMessage as _
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.config import *
 from Products.urban.interfaces import IUrbanDoc
+from Products.urban.notice import NoticeOutgoingPublicSurveyOpinionNotification
+from Products.urban.services.notice import WebserviceNotice
 from Products.urban.utils import is_attachment
 from Products.urban.utils import setOptionalAttributes
 from Products.urban.utils import WIDGET_DATE_END_YEAR
@@ -40,6 +45,7 @@ from plone import api
 from plone.contentrules.engine.interfaces import IRuleAssignmentManager
 from plone.contentrules.engine.interfaces import IRuleStorage
 from plone.contentrules.rule.interfaces import IExecutable
+from zope.annotation.interfaces import IAnnotations
 from zope.component import getMultiAdapter
 from zope.component import getUtility
 from zope.i18n import translate
@@ -982,6 +988,23 @@ class UrbanEvent(OrderedBaseFolder, BrowserDefaultMixin):
 
     def get_parent_licence(self):
         return aq_parent(self)
+
+    def store_transmit_date(self, event_type, date=None):
+        annotations = IAnnotations(self)
+        key = "notice_transmit_dates"
+        dates = annotations.get(key, OrderedDict())
+        dates[event_type] = date if date else datetime.date.today()
+        annotations[key] = dates
+
+    def transfer_opinion(self):
+        notification = NoticeOutgoingPublicSurveyOpinionNotification(self)
+        service = WebserviceNotice()
+        result = service.post_notification_response(
+            notification.notice_id,
+            notification.serialize(),
+        )
+
+        return result
 
 
 registerType(UrbanEvent, PROJECTNAME)

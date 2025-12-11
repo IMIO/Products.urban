@@ -130,6 +130,8 @@ class NoticeNotification(NoticeElement):
         specific = {
             "TRANSFERT_DOSSIER": "ns3:TwiceDefaultRequest",
             "DEMANDE_EP": "ns3:PublicSurveyRequest",
+            "DEMANDE_EP_DOSSIER_PRECEDENT": "ns3:PublicSurveyRequest",
+            "DEMANDE_EP_EXTRA": "ns3:PublicSurveyRequest",
             "NOTIF_COMPLETUDE1_INCOMPLET_COMMUNE": "ns3:TwiceDefaultRequest",
             "NOTIF_COMPLETUDE2_NON_RECEVABLE_COMMUNE": "ns3:TwiceDefaultRequest",
             "NOTIF_COMPLETUDE2_IRRECEVABLE_COMMUNE": "ns3:TwiceDefaultRequest",
