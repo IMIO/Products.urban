@@ -161,6 +161,22 @@ class ImportFromNoticeView(BrowserView):
         licence.description.raw += translate(error, context=self.request)
         licence._p_changed = 1
 
+    def _demande_ep(self, detailed_notification):
+        licence = detailed_notification.licence
+        if not licence:
+            return  # TODO: possible case ?
+
+        event_config_complete = detailed_notification.event_config(
+            "Products.urban.interfaces.IAcknowledgmentEvent"
+        )
+        with api.env.adopt_roles(["Manager"]):
+            event = licence.createUrbanEvent(event_config_complete)
+            event_date = DateTime(str(detailed_notification.send_date))
+            event.setEventDate(event_date)
+            api.content.transition(event, "close")
+
+        api.content.transition(licence, "iscomplete")
+
     def _handle_notification(self, notice_id):
         detailed_notification = self.notice_service.get_notification(
             notice_id,
@@ -169,6 +185,12 @@ class ImportFromNoticeView(BrowserView):
             self._transfert_dossier(detailed_notification)
         elif detailed_notification.notice_type == "NOTIF_COMPLETUDE1_INCOMPLET_COMMUNE":
             self.process_incomplete_folder_notification(detailed_notification)
+        elif detailed_notification.notice_type in (
+            "DEMANDE_EP",
+            "DEMANDE_EP_DOSSIER_PRECEDENT",
+            "DEMANDE_EP_EXTRA",
+        ):
+            self._demande_ep(detailed_notification)
         elif detailed_notification.notice_type == "NOTIF_COMPLETUDE2_NON_RECEVABLE_COMMUNE":
             self.process_not_admissible_folder_notification_second_tour(
                 detailed_notification

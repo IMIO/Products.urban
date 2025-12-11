@@ -496,6 +496,8 @@
      permission="cmf.ModifyPortalContent"
   />
 
+  <!--  NOTICE actions-->
+
   <browser:page
      for="*"
      name="can_transfer_folder_to_dpa"
@@ -508,6 +510,51 @@
      name="transfer_folder_to_dpa"
      class=".urbaneventviews.UrbanEventNoticeActionsView"
      attribute="transfer_folder_to_dpa"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="*"
+     name="can_transfer_dates"
+     class=".urbaneventviews.CanTransferDatesView"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="Products.urban.interfaces.IUrbanEvent"
+     name="transfer_dates"
+     class=".urbaneventviews.UrbanEventNoticeActionsView"
+     attribute="transfer_dates"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="*"
+     name="can_transfer_ticket"
+     class=".urbaneventviews.CanTransferTicketView"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="Products.urban.interfaces.IUrbanEvent"
+     name="transfer_ticket"
+     class=".urbaneventviews.UrbanEventNoticeActionsView"
+     attribute="transfer_ticket"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="*"
+     name="can_transfer_opinion"
+     class=".urbaneventviews.CanTransferOpinionView"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="Products.urban.interfaces.IUrbanEvent"
+     name="transfer_opinion"
+     class=".urbaneventviews.UrbanEventNoticeActionsView"
+     attribute="transfer_opinion"
      permission="zope2.View"
   />
 

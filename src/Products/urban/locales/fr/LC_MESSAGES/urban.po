@@ -732,6 +732,10 @@ msgstr "Profil de migration pour iA.Urban"
 msgid "MiscDemand"
 msgstr "Demandes diverses"
 
+#: ../viewlets/templates/notice_transmit_state.pt:3
+msgid "NOTICe transmits"
+msgstr "Dates de transmission (NOTICe)"
+
 #: ../browser/urban_configfolderview.py:25
 msgid "Name"
 msgstr "Nom"

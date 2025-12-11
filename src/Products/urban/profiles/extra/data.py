@@ -4306,6 +4306,7 @@ EventConfigs = {
                 "explanationStartSDate",
                 "explanationEndSDate",
                 "claimsText",
+                "reportText",
             ],
             "deadLineDelay": 15,
             "isKeyEvent": True,
@@ -9521,6 +9522,7 @@ EventConfigs = {
                 "explanationStartSDate",
                 "explanationEndSDate",
                 "claimsText",
+                "reportText",
             ),
             "deadLineDelay": 15,
             "specialFunctionName": "Rechercher les propriétaires situés dans un rayon de 50m",
@@ -10528,6 +10530,7 @@ EventConfigs = {
                 "explanationStartSDate",
                 "explanationEndSDate",
                 "claimsText",
+                "reportText",
             ),
             "deadLineDelay": 15,
             "eventDateLabel": "Date de notification",
@@ -10566,7 +10569,10 @@ EventConfigs = {
                     "title": "Fichier réclamants pour réimport",
                 },
             ),
-            "eventType": ("Products.urban.interfaces.IInquiryEvent",),
+            "eventType": (
+                "Products.urban.interfaces.IInquiryEvent",
+                "Products.urban.interfaces.ITransmitToSPWEvent"
+            ),
             "eventPortalType": "UrbanEventInquiry",
             "textDefaultValues": [
                 {

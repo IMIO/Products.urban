@@ -18,6 +18,7 @@ from Products.urban.browser.table.urbantable import EventAttachmentsTable
 from Products.urban.browser.table.urbantable import RecipientsCadastreTable
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.send_mail_action.forms import MAIL_ACTION_KEY
+from Products.urban.services.notice import WebserviceNotice
 from StringIO import StringIO
 from eea.faceted.vocabularies.autocomplete import IAutocompleteSuggest
 from plone import api
@@ -1328,6 +1329,93 @@ class CanTransferFolderToDpaView(BrowserView):
             and self.has_notice_id
             and self.is_transmit_to_spw_event
             and self.no_transmit_yet
+            # TODO: is_notice_setup
+        )
+
+
+class CanTransferDatesView(BrowserView):
+    @property
+    def is_urban_event_inquiry(self):
+        return self.context.portal_type == "UrbanEventInquiry"
+
+    @property
+    def is_transmit_to_spw_event(self):
+        return (
+            "Products.urban.interfaces.ITransmitToSPWEvent"
+            in self.context.getUrbaneventtypes().getEventType()
+        )
+
+    @property
+    def is_notice_setup(self):
+        webservice = WebserviceNotice()
+        return webservice.is_setup
+
+    def __call__(self):
+        return (
+            self.is_urban_event_inquiry
+            and self.is_transmit_to_spw_event
+            and self.is_notice_setup
+            # TODO: and self.no_transmit_yet
+        )
+
+
+class CanTransferTicketView(BrowserView):
+    @property
+    def is_urban_event_inquiry(self):
+        return self.context.portal_type == "UrbanEventInquiry"
+
+    @property
+    def is_transmit_to_spw_event(self):
+        return (
+                "Products.urban.interfaces.ITransmitToSPWEvent"
+                in self.context.getUrbaneventtypes().getEventType()
+        )
+
+    @property
+    def is_notice_setup(self):
+        webservice = WebserviceNotice()
+        return webservice.is_setup
+
+    def __call__(self):
+        return (
+                self.is_urban_event_inquiry
+                and self.is_transmit_to_spw_event
+                and self.is_notice_setup
+                # TODO: and self.no_transmit_yet
+        )
+
+
+class CanTransferOpinionView(BrowserView):
+    @property
+    def is_urban_event_college(self):
+        return self.context.portal_type == "UrbanEventCollege"
+
+    @property
+    def is_college_opinion_event(self):
+        return (
+                "Products.urban.interfaces.ICollegeOpinionEvent"
+                in self.context.getUrbaneventtypes().getEventType()
+        )
+
+    @property
+    def is_transmit_to_spw_event(self):
+        return (
+                "Products.urban.interfaces.ITransmitToSPWEvent"
+                in self.context.getUrbaneventtypes().getEventType()
+        )
+
+    @property
+    def is_notice_setup(self):
+        webservice = WebserviceNotice()
+        return webservice.is_setup
+
+    def __call__(self):
+        return (
+                self.is_urban_event_college
+                and self.is_college_opinion_event
+                and self.is_transmit_to_spw_event
+                and self.is_notice_setup
+                # TODO: and self.no_transmit_yet
         )
 
 
@@ -1341,5 +1429,41 @@ class UrbanEventNoticeActionsView(BrowserView):
         else:
             IStatusMessage(self.request).addStatusMessage(
                 _(u"The folder transfer to DPA is done."), "info"
+            )
+        self.request.response.redirect(self.context.absolute_url())
+
+    def transfer_dates(self):
+        result = self.context.transfer_dates()
+        if result["error"] is True:
+            IStatusMessage(self.request).addStatusMessage(
+                result["message"], "error"
+            )
+        else:
+            IStatusMessage(self.request).addStatusMessage(
+                _(u"The transfer of dates is done."), "info"
+            )
+        self.request.response.redirect(self.context.absolute_url())
+
+    def transfer_ticket(self):
+        result = self.context.transfer_ticket()
+        if result["error"] is True:
+            IStatusMessage(self.request).addStatusMessage(
+                result["message"], "error"
+            )
+        else:
+            IStatusMessage(self.request).addStatusMessage(
+                _(u"The ticket transfer is done."), "info"
+            )
+        self.request.response.redirect(self.context.absolute_url())
+
+    def transfer_opinion(self):
+        result = self.context.transfer_opinion()
+        if result["error"] is True:
+            IStatusMessage(self.request).addStatusMessage(
+                result["message"], "error"
+            )
+        else:
+            IStatusMessage(self.request).addStatusMessage(
+                _(u"The opinion transfer is done."), "info"
             )
         self.request.response.redirect(self.context.absolute_url())
