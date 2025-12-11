@@ -6,6 +6,7 @@ from Products.DCWorkflow.Transitions import TransitionDefinition
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.urban.interfaces import ICODT_UniqueLicence
 from Products.urban.interfaces import IEnvironmentLicence
+from Products.urban.interfaces import IGenericLicence
 from imio.actionspanel import ActionsPanelMessageFactory as _actions
 from imio.actionspanel.browser.views import ActionsPanelView
 from imio.actionspanel.browser.views import DEFAULT_CONFIRM_VIEW
