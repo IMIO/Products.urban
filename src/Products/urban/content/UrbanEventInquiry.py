@@ -353,7 +353,7 @@ class UrbanEventInquiry(OrderedBaseFolder, UrbanEvent, BrowserDefaultMixin):
         notification = NoticeOutgoingPublicSurveyDatesNotification(self)
         service = WebserviceNotice()
         result = service.post_notification_response(
-            notification.notice_id,
+            notification.notice_id("DEMANDE_EP"),
             notification.serialize(),
         )
         reception_date_str = result["body"]["result"]["receptionDate"]
@@ -366,7 +366,7 @@ class UrbanEventInquiry(OrderedBaseFolder, UrbanEvent, BrowserDefaultMixin):
         notification = NoticeOutgoingPublicSurveyPVNotification(self)
         service = WebserviceNotice()
         result = service.post_notification_response(
-            notification.notice_id,
+            notification.notice_id("DEMANDE_EP"),
             notification.serialize(),
         )
         return result

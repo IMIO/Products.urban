@@ -1308,7 +1308,7 @@ class CanTransferFolderToDpaView(BrowserView):
     @property
     def has_notice_id(self):
         licence = self.context.aq_parent
-        return bool(licence.getNoticeId())
+        return bool(licence.get_notice_id("TRANSFERT_DOSSIER"))
 
     @property
     def is_transmit_to_spw_event(self):

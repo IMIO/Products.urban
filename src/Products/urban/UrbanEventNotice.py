@@ -73,15 +73,16 @@ class UrbanEventNotice(UrbanEvent, BrowserDefaultMixin):
 
     def transfer_folder_to_dpa(self):
         notification = NoticeOutgoingNotification(self)
+        notice_id = notification.notice_id("TRANSFERT_DOSSIER")
         service = WebserviceNotice()
         result = service.post_notification_response(
-            notification.notice_id,
+            notice_id,
             notification.serialize(),
         )
         if result["error"] is True:
             if result["error_type"] == "WRONG_STATUS":
                 # This can happen if there was an error with the WS
-                existing_notification = service.get_notification(notification.notice_id)
+                existing_notification = service.get_notification(notice_id)
                 if existing_notification.status == u"TERMINE":
                     self.store_transmit_date(
                         "transfer_folder_to_dpa",

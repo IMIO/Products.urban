@@ -19,10 +19,9 @@ class NoticeResponse(NoticeElement):
     def _licence(self):
         return aq_parent(self.event)
 
-    @property
-    def notice_id(self):
+    def notice_id(self, notification_type):
         """Notification ID from event parent"""
-        return self._licence.noticeId
+        return self._licence.get_notice_id(notification_type)
 
     @property
     def type(self):

@@ -177,6 +177,8 @@ class ImportFromNoticeView(BrowserView):
 
         api.content.transition(licence, "iscomplete")
 
+        licence.set_notice_id("DEMANDE_EP", detailed_notification.noticeId)
+
     def _handle_notification(self, notice_id):
         detailed_notification = self.notice_service.get_notification(
             notice_id,
@@ -214,7 +216,7 @@ class ImportFromNoticeView(BrowserView):
         licence = api.content.create(
             container=container, **detailed_notification.serialize()
         )
-        licence.noticeId = detailed_notification.noticeId
+        licence.set_notice_id("TRANSFERT_DOSSIER", detailed_notification.noticeId)
         licence.setFoldermanagers(
             detailed_notification.foldermanagers
         )  # Must be set manually, serialized value is ignored at creation
