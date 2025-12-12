@@ -1000,7 +1000,7 @@ class UrbanEvent(OrderedBaseFolder, BrowserDefaultMixin):
         notification = NoticeOutgoingPublicSurveyOpinionNotification(self)
         service = WebserviceNotice()
         result = service.post_notification_response(
-            notification.notice_id,
+            notification.notice_id("DEMANDE_EP"),
             notification.serialize(),
         )
 
