@@ -221,7 +221,15 @@ msgstr "Conditions sectorielles Eau"
 msgid "CS_folder_title"
 msgstr "Conditions sectorielles"
 
-#: ../browser/urbaneventviews.py:1071
+#: ../browser/cron/notice.py:266
+msgid "Can not find a parcel"
+msgstr "Parcelle introuvable"
+
+#: ../browser/cron/notice.py:280
+msgid "Can not find an address"
+msgstr "Adresse introuvable"
+
+#: ../browser/urbaneventviews.py:1164
 msgid "Can't find the street : ${street}"
 msgstr "Cette rue est introuvable : ${street}"
 
@@ -388,6 +396,10 @@ msgstr "Détention d'explosifs"
 #: ../profiles.zcml:25
 msgid "Extension profile for urban."
 msgstr "Profil d'extention pour iA.Urban."
+
+#: ../browser/notice_settings.py:38
+msgid "Failed notifications"
+msgstr "Notifications en erreur"
 
 #: ../browser/templates/coring_update.pt:16
 msgid "Field"
@@ -697,6 +709,10 @@ msgstr "Permis intégré"
 msgid "Internal opinion services"
 msgstr "Avis de services internes à la ville"
 
+#: ../browser/notice_settings.py:33
+msgid "Last import date from Notice Webservice"
+msgstr "Date du dernier import depuis le WebService de NOTICe"
+
 #: ../send_mail_action/forms.py:26
 msgid "Licence Files"
 msgstr "Fichiers du permis"
@@ -731,6 +747,14 @@ msgstr "Profil de migration pour iA.Urban"
 
 msgid "MiscDemand"
 msgstr "Demandes diverses"
+
+#: ../browser/cron/notice.py:283
+msgid "Multiple results for an address"
+msgstr "Plusieurs résultats trouvés pour une adresse"
+
+#: ../browser/notice_settings.py:23
+msgid "Municipality ID in Notice"
+msgstr "Identifiant de la commune dans NOTICe"
 
 #: ../viewlets/templates/notice_transmit_state.pt:3
 msgid "NOTICe transmits"
@@ -769,7 +793,19 @@ msgstr "Lettre de notaire"
 msgid "Nothing to show !!!"
 msgstr "Rien à montrer."
 
-#: ../browser/offdays_settings.py:79
+#: ../browser/notice_settings.py:48
+msgid "Notice settings"
+msgstr "Paramètres NOTICe"
+
+#: ../services/notice.py:155
+msgid "Notification ${id} does not exist in Notice"
+msgstr "La notification ${id} n'existe pas dans NOTICe"
+
+#: ../services/notice.py:146
+msgid "Notification ${id} does not have the correct status in Notice"
+msgstr "La notification ${id} n'a pas le bon statut dans NOTICe"
+
+#: ../browser/offdays_settings.py:74
 msgid "Off days"
 msgstr "Jours de suspension"
 
@@ -831,6 +867,14 @@ msgstr "Valeur proposée"
 msgid "Related licences"
 msgstr "Dossiers liés à la parcelle"
 
+#: ../browser/notice_settings.py:82
+msgid "Retry failed notifications"
+msgstr "Tenter d'importer les notifications en erreur"
+
+#: ../browser/notice_settings.py:88
+msgid "Retrying failed notifications"
+msgstr "Tentative d'import des notifications en erreur"
+
 msgid "RoadDecree"
 msgstr "Décret Voirie"
 
@@ -885,7 +929,11 @@ msgstr "Envoyer un e-mail avec pièce jointe"
 msgid "Send mail"
 msgstr "Envoyer l'email"
 
-#: ../browser/urbanconfigview.py:94
+#: ../browser/notice_settings.py:28
+msgid "Sent On Behalf Of Municipality ID in Notice"
+msgstr "Identifiant Sent-On-Behalf-Of de la commune dans NOTICe"
+
+#: ../browser/urbanconfigview.py:95
 msgid "Service full name"
 msgstr "Nom du service"
 
@@ -947,7 +995,11 @@ msgstr "Le champ n'existe pas."
 msgid "The folder manager '${name}' can't be renamed or removed."
 msgstr "L'agent traitant '${name}' ne peut pas être renommé ou supprimé."
 
-#: ../browser/urbaneventviews.py:368
+#: ../browser/urbaneventviews.py:1451
+msgid "The folder transfer to DPA is done."
+msgstr "Le transfert vers le DPA est terminé."
+
+#: ../browser/urbaneventviews.py:376
 msgid "The imported file (${name}) couldn't be read properly. Please verify its structure and try again."
 msgstr "Le fichier importé (${name}) n'a pas pu être lu correctement. Veuillez vérifier sa structure et réessayer."
 
@@ -964,11 +1016,23 @@ msgstr "Le transfert vers le DPA est terminé."
 msgid "The mailings will be ready tomorrow!"
 msgstr "Le publipostage a bien été enregistré et sera éxécuté cette nuit"
 
-#: ../browser/urbaneventviews.py:1012
+#: ../browser/urbaneventviews.py:1487
+msgid "The opinion transfer is done."
+msgstr "L'envoi de l'avis est terminé."
+
+#: ../browser/urbaneventviews.py:1005
 msgid "The parcel radius search will be ready tomorrow!"
 msgstr "La recherche des propriétaires concernés par le rayon de cette enquête a bien été enregistrée et sera éxécutée cette nuit."
 
-#: ../browser/urbaneventviews.py:1005
+#: ../browser/urbaneventviews.py:1475
+msgid "The ticket transfer is done."
+msgstr "L'envoi du PV est terminé."
+
+#: ../browser/urbaneventviews.py:1463
+msgid "The transfer of dates is done."
+msgstr "L'envoi des dates est terminé."
+
+#: ../browser/urbaneventviews.py:998
 msgid "There are parcel owners without any address found! Desactivate them!"
 msgstr "Il y a des propriétaires de parcelle sans adresse trouvée ! Désactivez-les !"
 
@@ -1004,8 +1068,20 @@ msgid "To CWATUPE procedures"
 msgstr "Vers les Procédures CWATUP"
 
 #: ../profiles/default/actions.xml
+msgid "Transfer dates"
+msgstr "Envoyer les dates"
+
+#: ../profiles/default/actions.xml
 msgid "Transfer folder to DPA"
 msgstr "Transférer vers le DPA"
+
+#: ../profiles/default/actions.xml
+msgid "Transfer opinion"
+msgstr "Envoyer l'avis"
+
+#: ../profiles/default/actions.xml
+msgid "Transfer ticket"
+msgstr "Envoyer le PV"
 
 #: ../browser/licence/templates/licenceview.pt:27
 #: ../browser/templates/urbaneventannouncementview.pt:31
@@ -1045,7 +1121,15 @@ msgstr "Certificat d'urbanisme 2"
 msgid "UrbanTool"
 msgstr "UrbanTool"
 
-#: ../browser/offdays_settings.py:63
+#: ../content/licence/CODT_BaseBuildLicence.py:570
+msgid "Value"
+msgstr "Valeur"
+
+#: ../browser/notice_settings.py:17
+msgid "Webservice URL"
+msgstr "URL du WebService"
+
+#: ../browser/offdays_settings.py:58
 msgid "Week off days"
 msgstr "Jours de fermeture en semaine"
 
@@ -4754,6 +4838,11 @@ msgstr "Date du rapport"
 #: ../UrbanEvent.py:471
 msgid "urban_label_reportReceptionDate"
 msgstr "Date de réception du PV"
+
+#. Default: "reporttext"
+#: ../content/UrbanEventInquiry.py:134
+msgid "urban_label_reportText"
+msgstr "PV de l'enquête (NOTICe)"
 
 msgid "urban_label_reportVisitDate"
 msgstr "Date de la visite"
