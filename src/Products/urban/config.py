@@ -426,6 +426,9 @@ URBAN_EVENT_TYPES = [
     "UrbanEventMayor",
     "UrbanEventInspectionReport",
     "UrbanEventNotificationCollege",
+    "UrbanEventAcknowledgment",
+    "UrbanEventWithEnvironmentValidation",
+    "UrbanEventPreliminaryAdvice"
 ]
 
 DASHBOARD_TEMPLATES = {
