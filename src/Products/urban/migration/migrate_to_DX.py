@@ -6,6 +6,7 @@ from Products.urban.migration.to_DX.migration_utils import migrate_to_tuple
 from Products.urban.migration.to_DX.migration_utils import migrate_to_shore
 from Products.urban.migration.to_DX.migration_utils import migrateCustomAT
 from Products.urban.migration.to_DX.migration_utils import uid_catalog_reindex_objects
+from Products.urban.migration.to_DX.migration_utils import migrateCustomAT_trough_licences
 from Products.urban.migration.utils import disable_schedule
 from collective.noindexing import patches
 from imio.urban.core.contents.eventconfig import IEventConfig
@@ -92,6 +93,14 @@ def migrate_PortionOut_to_DX(context):
         transaction_size=TRANSACTION_SIZE,
         full_transaction=True
     )
+    transaction.commit()
+    result = migrateCustomAT_trough_licences(
+        fields_mapping,
+        src_type="PortionOut",
+        dst_type="Parcel",
+        transaction_size=TRANSACTION_SIZE,
+        full_transaction=True
+    )
     # restore catalog and linkintegrity
     patches.unapply()
     portal.portal_properties.site_properties.enable_link_integrity_checks = True
@@ -134,6 +143,7 @@ def migrate_ParcellingTerm_to_DX(context):
         {
             "AT_field_name": "changesDescription",
             "DX_field_name": "changesDescription",
+            "field_migrator": migrate_to_richtext,
         },
     )
     portal = api.portal.get()

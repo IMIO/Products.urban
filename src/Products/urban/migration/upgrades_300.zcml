@@ -63,6 +63,15 @@
       />
 
   <gs:upgradeStep
+      title="Fix parcelling changesDescription field"
+      description=""
+      profile="Products.urban:default"
+      source="1210"
+      destination="1211"
+      handler=".update_300.fix_parcelling_changesDescription_field"
+      />
+
+  <gs:upgradeStep
       title="Set additionalReference as an optional field"
       description="Activate additionalReference for all licences types"
       profile="Products.urban:default"
