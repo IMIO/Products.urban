@@ -369,6 +369,10 @@ class UrbanEventInquiry(OrderedBaseFolder, UrbanEvent, BrowserDefaultMixin):
             notification.notice_id("DEMANDE_EP"),
             notification.serialize(),
         )
+        reception_date_str = result["body"]["result"]["receptionDate"]
+        reception_date = datetime.datetime.strptime(reception_date_str[:10], "%Y-%m-%d")
+        self.store_transmit_date("transfer_ticket", reception_date)
+
         return result
 
 
