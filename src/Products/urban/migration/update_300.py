@@ -7,6 +7,8 @@ from plone.registry.field import Choice
 from plone.registry.field import List
 from plone.registry.interfaces import IRegistry
 from zope.component import getUtility
+from plone.app.textfield import RichTextValue
+from Products.CMFPlone.utils import safe_unicode
 
 import logging
 
@@ -108,3 +110,16 @@ def reimport_typeinfo(context):
     setup_tool = api.portal.get_tool('portal_setup')
     setup_tool.runImportStepFromProfile('profile-Products.urban:urbantypes', 'typeinfo')
     logger.info("migration done!")
+
+
+def fix_parcelling_changesDescription_field(context):
+    brains = api.content.find(portal_type="Parcelling")
+    for brain in brains:
+        parcelling = brain.getObject()
+        changesDescription = ""
+        if hasattr(parcelling, "changesDescription"):
+            changesDescription = parcelling.changesDescription
+        if isinstance(changesDescription, RichTextValue):
+            continue
+        new_value = RichTextValue(safe_unicode(changesDescription))
+        setattr(parcelling, "changesDescription", new_value)
