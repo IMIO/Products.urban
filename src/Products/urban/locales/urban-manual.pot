@@ -1521,3 +1521,12 @@ msgstr ""
 
 msgid "transfer_folder_to_dpa"
 msgstr ""
+
+msgid "transfer_dates"
+msgstr ""
+
+msgid "transfer_ticket"
+msgstr ""
+
+msgid "transfer_opinion"
+msgstr ""

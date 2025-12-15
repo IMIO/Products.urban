@@ -2614,8 +2614,16 @@ msgstr ""
 msgid "trails_folder_title"
 msgstr ""
 
-#. Default: "Transfert du dossier vers le DPA"
+msgid "transfer_dates"
+msgstr ""
+
 msgid "transfer_folder_to_dpa"
+msgstr ""
+
+msgid "transfer_opinion"
+msgstr ""
+
+msgid "transfer_ticket"
 msgstr ""
 
 msgid "uniquelicence_urbanconfig_title"

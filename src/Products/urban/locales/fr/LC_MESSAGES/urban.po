@@ -2635,8 +2635,17 @@ msgstr "Particularités du bien communales"
 msgid "trails_folder_title"
 msgstr "Liste des sentiers et chemins vicinaux de la commune"
 
+msgid "transfer_dates"
+msgstr "Envoyer les dates"
+
 msgid "transfer_folder_to_dpa"
 msgstr "Transfert du dossier vers le DPA"
+
+msgid "transfer_opinion"
+msgstr "Envoyer l'avis"
+
+msgid "transfer_ticket"
+msgstr "Envoyer le PV"
 
 msgid "uniquelicence_urbanconfig_title"
 msgstr "Paramètres des permis uniques"
