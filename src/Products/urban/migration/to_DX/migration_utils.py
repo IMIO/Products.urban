@@ -3,6 +3,7 @@
 from Products.CMFCore.utils import getToolByName
 from Products.contentmigration.basemigrator.walker import registerWalker
 from Products.contentmigration.walker import CustomQueryWalker
+from Products.urban.interfaces import IGenericLicence
 from datetime import date
 from datetime import datetime
 from plone import api
@@ -13,7 +14,7 @@ from plone.dexterity.interfaces import IDexterityContent
 from plone.dexterity.interfaces import IDexterityFTI
 from zExceptions import NotFound
 from zope.component.hooks import getSite
-from Products.urban.interfaces import IGenericLicence
+
 import logging
 import transaction
 
