@@ -14,7 +14,7 @@ from plone import api
 
 import transaction
 
-TRANSACTION_SIZE = 100
+TRANSACTION_SIZE = 1000
 
 
 def migrate_PortionOut_to_DX(context):
