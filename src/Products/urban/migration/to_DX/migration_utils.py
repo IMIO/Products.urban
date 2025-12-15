@@ -7,11 +7,12 @@ from datetime import datetime
 from plone import api
 from plone.app import textfield
 from plone.app.contenttypes.migration.migration import makeCustomATMigrator
+from Products.contentmigration.basemigrator.walker import registerWalker
 from plone.dexterity.interfaces import IDexterityContent
 from plone.dexterity.interfaces import IDexterityFTI
 from zExceptions import NotFound
 from zope.component.hooks import getSite
-
+from Products.urban.interfaces import IGenericLicence
 import logging
 import transaction
 
@@ -206,6 +207,121 @@ def migrateCustomAT(
         if dry_run:
             walker_settings["limit"] = 1
         walker = CustomQueryWalker(**walker_settings)
+        walker.go()
+        walker_infos = {
+            "errors": walker.errors,
+            "msg": walker.getOutput().splitlines(),
+            "counter": walker.counter,
+        }
+        for error in walker.errors:
+            logger.error(error.get("message"))
+        if dry_run:
+            transaction.abort()
+        return walker_infos
+
+
+class UrbanLicenceWalker(CustomQueryWalker):
+    def walk(self):
+        catalog = self.catalog
+        brains = catalog(
+            object_provides=IGenericLicence.__identifier__
+        )
+
+        for brain in brains:
+            licence_obj = brain.getObject()
+            objs = licence_obj.listFolderContents(
+                contentFilter={"portal_type": self.src_portal_type}
+            )
+            for obj in objs:
+                if self.callBefore is not None and callable(self.callBefore):
+                    if self.callBefore(obj, **self.kwargs) == False:
+                        continue
+                try:
+                    state = obj._p_changed
+                except:
+                    state = 0
+                if obj is not None:
+                    yield obj
+                    # safe my butt
+                    if state is None:
+                        obj._p_deactivate()
+
+
+registerWalker(UrbanLicenceWalker)
+
+# reimplements migration method to be able to define savepoints threshold (transaction_size)
+def migrateCustomAT_trough_licences(
+    fields_mapping, src_type, dst_type, transaction_size=20, dry_run=False, full_transaction=False, use_savepoint=False
+):
+    """
+    Try to get types infos from archetype_tool, then set a migrator an pass it
+    given values. There is a dry_run mode that allows to check the success of
+    a migration without committing.
+    """
+    portal = getSite()
+
+    # if the type still exists get the src_meta_type from the portal_type
+    portal_types = getToolByName(portal, "portal_types")
+    fti = portal_types.get(src_type, None)
+    # Check if the fti was removed or replaced by a DX-implementation
+    if fti is None or IDexterityFTI.providedBy(fti):
+        # Get the needed info from an instance of the type
+        catalog = portal.portal_catalog
+        brains = catalog(portal_type=src_type, sort_limit=1)
+        if not brains:
+            # no item? assume stuff
+            is_folderish = False
+            src_meta_type = src_type
+        else:
+            try:
+                src_obj = brains[0].getObject()
+            except (KeyError, NotFound):
+                logger.error(
+                    "Could not find the object for brain at %s", brains[0].getURL()
+                )
+                return
+            if IDexterityContent.providedBy(src_obj):
+                logger.error(
+                    "%s should not be dexterity object!" % src_obj.absolute_url()
+                )
+            is_folderish = getattr(src_obj, "isPrincipiaFolderish", False)
+            src_meta_type = src_obj.meta_type
+    else:
+        # Get info from at-fti
+        src_meta_type = fti.content_meta_type
+        archetype_tool = getToolByName(portal, "archetype_tool", None)
+        for info in archetype_tool.listRegisteredTypes():
+            # lookup registered type in archetype_tool with meta_type
+            # because several portal_types can use same meta_type
+            if info.get("meta_type") == src_meta_type:
+                klass = info.get("klass", None)
+                is_folderish = klass.isPrincipiaFolderish
+
+    migrator = makeCustomATMigrator(
+        context=portal,
+        src_type=src_type,
+        dst_type=dst_type,
+        fields_mapping=fields_mapping,
+        is_folderish=is_folderish,
+        dry_run=dry_run,
+    )
+    if migrator:
+        migrator.src_meta_type = src_meta_type
+        migrator.dst_meta_type = ""
+        walker_settings = {
+            "portal": portal,
+            "migrator": migrator,
+            "src_portal_type": src_type,
+            "dst_portal_type": dst_type,
+            "src_meta_type": src_meta_type,
+            "dst_meta_type": "",
+            "transaction_size": transaction_size,
+            "full_transaction": full_transaction,
+            "use_savepoint": use_savepoint,
+        }
+        if dry_run:
+            walker_settings["limit"] = 1
+        walker = UrbanLicenceWalker(**walker_settings)
         walker.go()
         walker_infos = {
             "errors": walker.errors,
