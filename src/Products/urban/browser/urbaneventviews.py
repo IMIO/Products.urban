@@ -1409,13 +1409,19 @@ class CanTransferOpinionView(BrowserView):
         webservice = WebserviceNotice()
         return webservice.is_setup
 
+    @property
+    def no_transmit_yet(self):
+        annotations = interfaces.IAnnotations(self.context)
+        dates = annotations.get("notice_transmit_dates", {})
+        return "transfer_opinion" not in dates.keys()
+
     def __call__(self):
         return (
                 self.is_urban_event_college
                 and self.is_college_opinion_event
                 and self.is_transmit_to_spw_event
                 and self.is_notice_setup
-                # TODO: and self.no_transmit_yet
+                and self.no_transmit_yet
         )
 
 
