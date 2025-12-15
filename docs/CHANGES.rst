@@ -8,6 +8,16 @@ Changelog
 
 .. towncrier release notes start
 
+2.5.0.dev25 (2025-12-15)
+------------------------
+
+Bug fixes:
+
+
+- Fix comment retrieval in transition form
+  [daggelpop] (SUP-35563)
+
+
 2.5.0.dev24 (2025-11-25)
 ------------------------
 
