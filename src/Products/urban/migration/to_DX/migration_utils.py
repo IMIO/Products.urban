@@ -15,6 +15,7 @@ from zope.component.hooks import getSite
 from Products.urban.interfaces import IGenericLicence
 import logging
 import transaction
+from plone.app.uuid.utils import uuidToObject
 
 
 logger = logging.getLogger("urban: migrations utils")
@@ -223,12 +224,9 @@ def migrateCustomAT(
 class UrbanLicenceWalker(CustomQueryWalker):
     def walk(self):
         catalog = self.catalog
-        brains = catalog(
-            object_provides=IGenericLicence.__identifier__
-        )
 
-        for brain in brains:
-            licence_obj = brain.getObject()
+        for brain in catalog(object_provides=IGenericLicence.__identifier__):
+            licence_obj = uuidToObject(brain.UID)
             objs = licence_obj.listFolderContents(
                 contentFilter={"portal_type": self.src_portal_type}
             )
