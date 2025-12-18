@@ -17,7 +17,9 @@ from Products.urban.content.licence.GenericLicence import GenericLicence
 from Products.urban.content.licence.BaseInspection import BaseInspection
 from Products.urban.utils import setOptionalAttributes
 from Products.urban.utils import setSchemataForInquiry
-from collective.archetypes.select2.select2widget import MultiSelect2Widget
+from Products.urban.widget.select2widget import MultiSelect2Widget
+from plone import api
+from zope.annotation import IAnnotations
 from zope.interface import implements
 
 

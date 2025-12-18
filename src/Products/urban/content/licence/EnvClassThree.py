@@ -28,7 +28,6 @@ from Products.urban.content.licence.EnvironmentBase import EnvironmentBase
 from Products.urban.utils import setOptionalAttributes
 from Products.urban.utils import setSchemataForCODT_UniqueLicenceInquiry
 from Products.urban.widget.select2widget import MultiSelect2Widget
-from collective.archetypes.select2.select2widget import MultiSelect2Widget
 from zope.interface import implements
 
 

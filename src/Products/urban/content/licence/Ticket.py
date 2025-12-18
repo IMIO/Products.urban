@@ -15,7 +15,7 @@ from Products.urban.config import PROJECTNAME
 from Products.urban.config import URBAN_TYPES
 from Products.urban.content.licence.GenericLicence import GenericLicence
 from Products.urban.utils import setOptionalAttributes
-from collective.archetypes.select2.select2widget import MultiSelect2Widget
+from Products.urban.widget.select2widget import MultiSelect2Widget
 from plone import api
 from zope.i18n import translate
 from zope.interface import implements

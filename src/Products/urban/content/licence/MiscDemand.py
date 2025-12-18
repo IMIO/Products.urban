@@ -31,7 +31,7 @@ from Products.urban.content.licence.GenericLicence import GenericLicence
 ##code-section module-header #fill in your manual code here
 from Products.urban.utils import setOptionalAttributes
 from Products.urban.utils import setSchemataForInquiry
-from collective.archetypes.select2.select2widget import MultiSelect2Widget
+from Products.urban.widget.select2widget import MultiSelect2Widget
 from zope.interface import implements
 
 
