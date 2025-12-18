@@ -33,7 +33,6 @@ from Products.urban.interfaces import IEnvironmentBase
 from Products.urban.utils import setOptionalAttributes
 from Products.urban.widget.select2widget import MultiSelect2Widget
 from archetypes.referencebrowserwidget.widget import ReferenceBrowserWidget
-from collective.archetypes.select2.select2widget import MultiSelect2Widget
 from collective.datagridcolumns.ReferenceColumn import ReferenceColumn
 from collective.datagridcolumns.TextAreaColumn import TextAreaColumn
 from plone import api
