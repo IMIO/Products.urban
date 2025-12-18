@@ -517,6 +517,22 @@ class FDOpinionIsLate(FDCreationCondition):
         return is_late
 
 
+class DepositDateIsPast20Days(CreationCondition):
+    """
+    The deposit date is past by 20 days
+    """
+
+    def evaluate(self):
+        licence = self.task_container
+
+        deposit_event = licence.getLastDeposit()
+        if deposit_event:
+            date1 = deposit_event.eventDate.asdatetime()
+            date2 = datetime.now(date1.tzinfo)
+            return (date2.date() - date1.date()).days > 20
+        return False
+
+
 class DepositDateIsPast30Days(CreationCondition):
     """
     The deposit date is past by 30 days
