@@ -218,6 +218,7 @@ class UrbanVocabulary(object):
             return deposit_date >= term["startValidity"]
         if term["endValidity"]:
             return deposit_date <= term["endValidity"]
+        return term.get("enabled", True)
 
     def _get_deposit_date(self, context):
         deposit_date = None
