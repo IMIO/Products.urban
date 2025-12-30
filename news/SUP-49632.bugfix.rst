@@ -1,0 +1,2 @@
+Add `@@reindex-contenttype` view for administrator to reindex specific content types
+[mpeeters]
