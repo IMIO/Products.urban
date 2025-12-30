@@ -74,13 +74,13 @@ schema = Schema(
         ),
         TextField(
             name="derogationDetails",
-            allowable_content_types=("text/plain",),
+            allowable_content_types=("text/html",),
             widget=TextAreaWidget(
                 label=_("urban_label_derogationDetails", default="Derogationdetails"),
             ),
-            default_output_type="text/plain",
-            default_content_type="text/plain",
+            default_content_type="text/html",
             default_method="getDefaultText",
+            default_output_type="text/x-html-safe",
             schemata="urban_inquiry",
         ),
         LinesField(
