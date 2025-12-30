@@ -39,9 +39,7 @@
             </dl>
           </div>
           <div class="action-bar">
-            <span class=".action-bar-text">
-              <metal:listing use-macro="here/@@globalmacros/goBackToMacro" />
-            </span>
+            <metal:listing use-macro="here/@@globalmacros/goBackToMacro" />
             <div class="action-bar-text"
                  tal:define="
                    state view/get_state;
