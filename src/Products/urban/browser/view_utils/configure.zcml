@@ -19,4 +19,11 @@
       permission="cmf.ManagePortal"
       />
 
+  <browser:page
+      name="reindex-contenttype"
+      for="*"
+      class=".reindex.ReindexContentType"
+      permission="cmf.ManagePortal"
+      />
+
 </configure>
