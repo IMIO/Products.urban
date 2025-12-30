@@ -1,0 +1,2 @@
+Fix allowed type for field `derogationDetails`
+[mpeeters]
