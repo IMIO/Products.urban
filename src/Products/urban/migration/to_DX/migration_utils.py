@@ -12,16 +12,17 @@ from plone.app.contenttypes.migration.migration import makeCustomATMigrator
 from plone.app.uuid.utils import uuidToObject
 from plone.dexterity.interfaces import IDexterityContent
 from plone.dexterity.interfaces import IDexterityFTI
-from zExceptions import NotFound
-from zope.component.hooks import getSite
-from zope.component import getUtility
-from plone.registry.interfaces import IRegistry
-from plone.registry.field import Dict
 from plone.registry import Record
+from plone.registry.field import Dict
+from plone.registry.interfaces import IRegistry
+from zExceptions import NotFound
+from zope.component import getUtility
+from zope.component.hooks import getSite
 
 import logging
-import transaction
 import os
+import transaction
+
 
 logger = logging.getLogger("urban: migrations utils")
 
