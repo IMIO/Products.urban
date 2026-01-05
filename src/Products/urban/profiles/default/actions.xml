@@ -169,5 +169,16 @@
    </property>
    <property name="visible">True</property>
   </object>
+   <object name="finalize_inquiry_without_opinion" meta_type="CMF Action" i18n:domain="urban">
+   <property name="title" i18n:translate="">Finalize inquiry without opinion</property>
+   <property name="description" i18n:translate=""></property>
+   <property name="url_expr">string:$object_url/@@finalize_inquiry_without_opinion</property>
+   <property name="icon_expr">string:$portal_url/copytoclaymants.png</property>
+   <property name="available_expr">context/@@can_finalize_inquiry_without_opinion</property>
+   <property name="permissions">
+    <element value="View"/>
+   </property>
+   <property name="visible">True</property>
+  </object>
  </object>
 </object>

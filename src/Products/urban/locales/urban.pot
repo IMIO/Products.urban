@@ -409,6 +409,10 @@ msgstr ""
 msgid "Field"
 msgstr ""
 
+#: ../profiles/default/actions.xml
+msgid "Finalize inquiry without opinion"
+msgstr ""
+
 #: ../contentrules/stringinterp.py:17
 msgid "Folder Manager E-mail"
 msgstr ""
@@ -998,6 +1002,10 @@ msgstr ""
 
 #: ../browser/urbaneventviews.py:363
 msgid "The imported file (${name}) doesn't appear to be a CSV file."
+msgstr ""
+
+#: ../browser/urbaneventviews.py:1502
+msgid "The inquiry is final."
 msgstr ""
 
 #: ../browser/urbaneventviews.py:67
