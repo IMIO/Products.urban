@@ -183,3 +183,15 @@ class UrbanEventInspectionReport(OrderedBaseFolder, UrbanEvent, BrowserDefaultMi
 
 
 registerType(UrbanEventInspectionReport, PROJECTNAME)
+
+
+def finalizeSchema(schema):
+    """
+    Finalizes the type schema to alter some fields
+    """
+    schema.moveField("followup_proposition", after="offense_articles_details")
+    schema.moveField("other_followup_proposition", after="followup_proposition")
+    return schema
+
+
+finalizeSchema(UrbanEventInspectionReport_schema)

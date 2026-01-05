@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from Products.urban.utils import set_default_optional_field
+from Products.urban.utils import set_eventconfig_optional_field
 from plone import api
 from plone.registry import Record
 from plone.registry.field import Choice
@@ -123,3 +124,17 @@ def fix_parcelling_changesDescription_field(context):
             continue
         new_value = RichTextValue(safe_unicode(changesDescription))
         setattr(parcelling, "changesDescription", new_value)
+
+
+def set_eventconfig_optional_fields(context):
+    logger = logging.getLogger(
+        "urban: set event config default optional fields"
+    )
+    logger.info("starting upgrade steps")
+    updated_event_configs = set_eventconfig_optional_field(
+        "inspection",
+        "UrbanEventInspectionReport",
+        ["delay"],
+    )
+    logger.info("Config updated: {0}".format(", ".join(updated_event_configs)))
+    logger.info("migration step done!")

@@ -72,6 +72,15 @@
       />
 
   <gs:upgradeStep
+      title="Set event config optional fields"
+      description=""
+      profile="Products.urban:default"
+      source="1210"
+      destination="1211"
+      handler=".update_300.set_eventconfig_optional_fields"
+      />
+
+  <gs:upgradeStep
       title="Set additionalReference as an optional field"
       description="Activate additionalReference for all licences types"
       profile="Products.urban:default"
