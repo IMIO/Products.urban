@@ -384,3 +384,25 @@ def set_default_optional_field(fieldname):
         licence_config.setUsedAttributes(values + (fieldname,))
         updated.append(urban_type)
     return updated
+
+
+def set_eventconfig_optional_field(config_folder, event_portal_type, fieldnames):
+    """Set an optional field for all matching event config
+    fieldnames parameter must be a list of fieldname"""
+    portal = api.portal.get()
+    portal_urban = portal.get("portal_urban")
+    updated = []
+    if not isinstance(fieldnames, list):
+        raise ValueError("List expected for 'fieldnames'")
+    event_configs = portal_urban[config_folder]["eventconfigs"]
+    for event_config in event_configs.listFolderContents():
+        if event_config.eventPortalType != event_portal_type:
+            continue
+        added_values = ()
+        for fieldname in fieldnames:
+            if fieldname not in event_config.activatedFields:
+                added_values += (fieldname, )
+        if added_values:
+            event_config.activatedFields += added_values
+            updated.append(event_config.absolute_url())
+    return updated
