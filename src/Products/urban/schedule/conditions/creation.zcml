@@ -267,13 +267,6 @@
       />
 
   <!-- deposit date is past by x days -->
-    <adapter
-        for="Products.urban.interfaces.IBaseAllBuildLicence
-             imio.schedule.content.task_config.ITaskConfig"
-        provides="imio.schedule.interfaces.ICreationCondition"
-        factory=".creation.DepositDateIsPast20Days"
-        name="urban.schedule.condition.deposit_past_20days"
-    />
 
   <adapter
       factory=".creation.DepositDateIsPast30Days"
