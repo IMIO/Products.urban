@@ -132,3 +132,12 @@ class NoticeOutgoingPublicSurveyPVNotification(NoticeOutgoingPublicSurveyNotific
 
 class NoticeOutgoingPublicSurveyOpinionNotification(NoticeOutgoingPublicSurveyNotification):
     state = "FINAL"
+
+
+class NoticeOutgoingPublicSurveyFinalWithoutOpinionNotification(NoticeOutgoingPublicSurveyNotification):
+    state = "FINAL"
+
+    @property
+    def _notice_college(self):
+        return None
+
