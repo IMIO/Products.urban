@@ -283,7 +283,7 @@ class UrbanLicenceToFileWalker(CustomQueryWalker):
         for count, brain in enumerate(catalog(
             object_provides=IGenericLicence.__identifier__,
             sort_on="modified",
-            sort_order="descending"
+            sort_order="descending",
         )):
             if (not update) and count == 0:
                 self.init_registry_last_modified()
@@ -338,7 +338,7 @@ class UrbanLicenceToFileWalker(CustomQueryWalker):
     def get_index(self):
         values = api.portal.get_registry_record(
             self.index_key,
-            default=None
+            default=None,
         )
         if values is None:
             values = {}
@@ -347,7 +347,7 @@ class UrbanLicenceToFileWalker(CustomQueryWalker):
     def set_index(self, index):
         values = api.portal.get_registry_record(
             self.index_key,
-            default=None
+            default=None,
         )
         if values is None:
             values = {}
@@ -362,7 +362,7 @@ class UrbanLicenceToFileWalker(CustomQueryWalker):
     def get_last_modified(self):
         values = api.portal.get_registry_record(
             self.last_modified_key,
-            default=None
+            default=None,
         )
         if values is None:
             values = {}
@@ -371,7 +371,7 @@ class UrbanLicenceToFileWalker(CustomQueryWalker):
     def set_last_modified(self, last_modified):
         values = api.portal.get_registry_record(
             self.last_modified_key,
-            default=None
+            default=None,
         )
         if values is None:
             values = {}
