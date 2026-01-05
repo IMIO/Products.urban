@@ -12,10 +12,15 @@ from plone.app.contenttypes.migration.migration import makeCustomATMigrator
 from plone.app.uuid.utils import uuidToObject
 from plone.dexterity.interfaces import IDexterityContent
 from plone.dexterity.interfaces import IDexterityFTI
+from plone.registry import Record
+from plone.registry.field import Dict
+from plone.registry.interfaces import IRegistry
 from zExceptions import NotFound
+from zope.component import getUtility
 from zope.component.hooks import getSite
 
 import logging
+import os
 import transaction
 
 
@@ -245,8 +250,177 @@ class UrbanLicenceWalker(CustomQueryWalker):
                     if state is None:
                         obj._p_deactivate()
 
-
 registerWalker(UrbanLicenceWalker)
+
+class UrbanLicenceToFileWalker(CustomQueryWalker):
+    index_key = "Products.urban.interfaces.IMigrationIndex.indexes"
+    last_modified_key = "Products.urban.interfaces.IMigrationIndex.last_modified"
+
+    @property
+    def file(self):
+        instance_home = os.environ.get("INSTANCE_HOME", "")
+        if instance_home != "":
+            instance_home = "{}/var/".format(instance_home)
+        return "{}migration_{}.txt".format(instance_home, self.src_portal_type)
+
+    def write_element(self, element, update=False):
+        flag = "w"
+        if update:
+            flag = "a"
+        with open(self.file, flag) as f:
+            f.write("{}\n".format(element))
+
+    def check_if_path_already_register(self, path):
+        with open(self.file, "r") as f:
+            for line in f:
+                if path in line:
+                    return True
+        return False
+
+    def make_file(self, update=False):
+        catalog = self.catalog
+        paths = []
+        portion_out_count = 0
+        for count, brain in enumerate(catalog(
+            object_provides=IGenericLicence.__identifier__,
+            sort_on="modified",
+            sort_order="descending",
+        )):
+            if (not update) and count == 0:
+                self.init_registry_last_modified()
+                self.set_last_modified(brain.modified)
+            if update and (brain.modified < self.get_last_modified()):
+                break
+            if update and self.check_if_path_already_register(brain.getPath()):
+                continue
+            if count > 0 and count % 100 == 0:
+                logger.info("licence : {}".format(count))
+            licence_obj = uuidToObject(brain.UID)
+            for obj in licence_obj.objectValues():
+                if obj.portal_type == self.src_portal_type:
+                    if portion_out_count > 0 and portion_out_count % 10 == 0:
+                        logger.info("PortionOut : {}".format(portion_out_count))
+                    paths.append('/'.join(obj.getPhysicalPath()))
+                    portion_out_count += 1
+        self.write_element('\n'.join(paths), update)
+
+    def get_elements(self):
+        update = False
+        if os.path.isfile(self.file):
+            update = True
+        self.make_file(update)
+        with open(self.file, "r") as f:
+            for count, line in enumerate(f):
+                if count >= self.get_index():
+                    yield line.rstrip("\n")
+
+    def init_registry_indexes(self):
+        registry = getUtility(IRegistry)
+        if self.index_key in registry:
+            return
+        attributes = {"title": u"index migration"}
+        registry_field = Dict(**attributes)
+        registry_record = Record(registry_field)
+        registry_record.value = {}
+        registry.records[self.index_key] = registry_record
+        logger.info("index registry init")
+
+    def init_registry_last_modified(self):
+        registry = getUtility(IRegistry)
+        if self.last_modified_key in registry:
+            return
+        attributes = {"title": u"last modified migration"}
+        registry_field = Dict(**attributes)
+        registry_record = Record(registry_field)
+        registry_record.value = {}
+        registry.records[self.last_modified_key] = registry_record
+        logger.info("last_modified registry init")
+
+    def get_index(self):
+        values = api.portal.get_registry_record(
+            self.index_key,
+            default=None,
+        )
+        if values is None:
+            values = {}
+        return values.get(self.src_portal_type, 0)
+
+    def set_index(self, index):
+        values = api.portal.get_registry_record(
+            self.index_key,
+            default=None,
+        )
+        if values is None:
+            values = {}
+        values[self.src_portal_type] = index
+        api.portal.set_registry_record(
+            self.index_key,
+            values,
+        )
+        logger.info("index: {} added in registry".format(str(index)))
+        transaction.commit()
+
+    def get_last_modified(self):
+        values = api.portal.get_registry_record(
+            self.last_modified_key,
+            default=None,
+        )
+        if values is None:
+            values = {}
+        return values.get(self.src_portal_type, 0)
+
+    def set_last_modified(self, last_modified):
+        values = api.portal.get_registry_record(
+            self.last_modified_key,
+            default=None,
+        )
+        if values is None:
+            values = {}
+        values[self.src_portal_type] = last_modified
+        api.portal.set_registry_record(
+            self.last_modified_key,
+            values,
+        )
+        logger.info("date: {} added in registry".format(str(last_modified)))
+        transaction.commit()
+
+    def commit(self, current_index):
+        self.init_registry_indexes()
+        self.set_index(current_index + 1)
+
+    def clear(self):
+        registry = getUtility(IRegistry)
+        if self.index_key in registry:
+            del registry.records[self.index_key]
+        if self.last_modified_key in registry:
+            del registry.records[self.last_modified_key]
+        if os.path.isfile(self.file):
+            os.remove(self.file)
+
+    def walk(self):
+        start = self.get_index()
+        for local_count, element in enumerate(self.get_elements()):
+            global_count = start + local_count
+
+            obj = api.content.get(path=element)
+
+            if self.callBefore is not None and callable(self.callBefore):
+                if self.callBefore(obj, **self.kwargs) == False:
+                    continue
+            try:
+                state = obj._p_changed
+            except:
+                state = 0
+            if obj is not None:
+                yield obj
+                # safe my butt
+                if state is None:
+                    obj._p_deactivate()
+
+                if global_count != 0 and global_count % self.transaction_size == 0:
+                    self.commit(global_count)
+
+registerWalker(UrbanLicenceToFileWalker)
 
 # reimplements migration method to be able to define savepoints threshold (transaction_size)
 def migrateCustomAT_trough_licences(
@@ -320,7 +494,7 @@ def migrateCustomAT_trough_licences(
         }
         if dry_run:
             walker_settings["limit"] = 1
-        walker = UrbanLicenceWalker(**walker_settings)
+        walker = UrbanLicenceToFileWalker(**walker_settings)
         walker.go()
         walker_infos = {
             "errors": walker.errors,
