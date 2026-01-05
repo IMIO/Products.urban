@@ -558,4 +558,19 @@
      permission="zope2.View"
   />
 
+  <browser:page
+     for="*"
+     name="can_finalize_inquiry_without_opinion"
+     class=".urbaneventviews.CanFinalizeInquiryWithoutOpinionView"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="Products.urban.interfaces.IUrbanEvent"
+     name="finalize_inquiry_without_opinion"
+     class=".urbaneventviews.UrbanEventNoticeActionsView"
+     attribute="finalize_inquiry_without_opinion"
+     permission="zope2.View"
+  />
+
 </configure>

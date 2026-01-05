@@ -29,6 +29,7 @@ from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.config import *
 from Products.urban.notice import NoticeOutgoingPublicSurveyDatesNotification
 from Products.urban.notice import NoticeOutgoingPublicSurveyPVNotification
+from Products.urban.notice import NoticeOutgoingPublicSurveyFinalWithoutOpinionNotification
 from Products.urban.services.notice import WebserviceNotice
 from Products.urban.utils import WIDGET_DATE_END_YEAR
 from archetypes.referencebrowserwidget.widget import ReferenceBrowserWidget
@@ -364,6 +365,19 @@ class UrbanEventInquiry(OrderedBaseFolder, UrbanEvent, BrowserDefaultMixin):
 
     def transfer_ticket(self):
         notification = NoticeOutgoingPublicSurveyPVNotification(self)
+        service = WebserviceNotice()
+        result = service.post_notification_response(
+            notification.notice_id("DEMANDE_EP"),
+            notification.serialize(),
+        )
+        reception_date_str = result["body"]["result"]["receptionDate"]
+        reception_date = datetime.datetime.strptime(reception_date_str[:10], "%Y-%m-%d")
+        self.store_transmit_date("transfer_ticket", reception_date)
+
+        return result
+
+    def finalize_inquiry_without_opinion(self):
+        notification = NoticeOutgoingPublicSurveyFinalWithoutOpinionNotification(self)
         service = WebserviceNotice()
         result = service.post_notification_response(
             notification.notice_id("DEMANDE_EP"),

@@ -8,6 +8,7 @@ from Products.urban.notice.party import NoticeParty
 from Products.urban.notice.response import NoticeOutgoingNotification
 from Products.urban.notice.sender import NoticeSender
 from Products.urban.notice.response import NoticeOutgoingPublicSurveyDatesNotification
+from Products.urban.notice.response import NoticeOutgoingPublicSurveyFinalWithoutOpinionNotification
 from Products.urban.notice.response import NoticeOutgoingPublicSurveyPVNotification
 from Products.urban.notice.response import NoticeOutgoingPublicSurveyOpinionNotification
 
@@ -21,6 +22,7 @@ __all__ = (
     "NoticeSender",
     "NoticeOutgoingNotification",
     "NoticeOutgoingPublicSurveyDatesNotification",
+    "NoticeOutgoingPublicSurveyFinalWithoutOpinionNotification",
     "NoticeOutgoingPublicSurveyPVNotification",
     "NoticeOutgoingPublicSurveyOpinionNotification",
 )

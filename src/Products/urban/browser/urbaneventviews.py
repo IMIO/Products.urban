@@ -1385,6 +1385,10 @@ class CanTransferTicketView(BrowserView):
         )
 
 
+class CanFinalizeInquiryWithoutOpinionView(CanTransferTicketView):
+    """"""
+
+
 class CanTransferOpinionView(BrowserView):
     @property
     def is_urban_event_college(self):
@@ -1471,5 +1475,17 @@ class UrbanEventNoticeActionsView(BrowserView):
         else:
             IStatusMessage(self.request).addStatusMessage(
                 _(u"The opinion transfer is done."), "info"
+            )
+        self.request.response.redirect(self.context.absolute_url())
+
+    def finalize_inquiry_without_opinion(self):
+        result = self.context.finalize_inquiry_without_opinion()
+        if result["error"] is True:
+            IStatusMessage(self.request).addStatusMessage(
+                result["message"], "error"
+            )
+        else:
+            IStatusMessage(self.request).addStatusMessage(
+                _(u"The inquiry is final."), "info"
             )
         self.request.response.redirect(self.context.absolute_url())

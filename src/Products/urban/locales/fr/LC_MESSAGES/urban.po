@@ -405,6 +405,10 @@ msgstr "Notifications en erreur"
 msgid "Field"
 msgstr "Champ"
 
+#: ../profiles/default/actions.xml
+msgid "Finalize inquiry without opinion"
+msgstr "Finaliser sans avis préalable du collège"
+
 #: ../contentrules/stringinterp.py:17
 msgid "Folder Manager E-mail"
 msgstr "L'e-mail de l'agent traitant"
@@ -1006,6 +1010,10 @@ msgstr "Le fichier importé (${name}) n'a pas pu être lu correctement. Veuillez
 #: ../browser/urbaneventviews.py:363
 msgid "The imported file (${name}) doesn't appear to be a CSV file."
 msgstr "Le fichier importé (${name}) ne semble pas être un fichier CSV."
+
+#: ../browser/urbaneventviews.py:1502
+msgid "The inquiry is final."
+msgstr "L'enquête est finalisée sur NOTICe."
 
 #: ../browser/urbaneventviews.py:67
 #: ../browser/urbaneventviews.py:767
