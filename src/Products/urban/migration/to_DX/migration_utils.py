@@ -338,15 +338,19 @@ class UrbanLicenceToFileWalker(CustomQueryWalker):
     def get_index(self):
         values = api.portal.get_registry_record(
             self.index_key,
-            default={}
+            default=None
         )
+        if values is None:
+            values = {}
         return values.get(self.src_portal_type, 0)
 
     def set_index(self, index):
         values = api.portal.get_registry_record(
             self.index_key,
-            default={}
+            default=None
         )
+        if values is None:
+            values = {}
         values[self.src_portal_type] = index
         api.portal.set_registry_record(
             self.index_key,
@@ -358,15 +362,19 @@ class UrbanLicenceToFileWalker(CustomQueryWalker):
     def get_last_modified(self):
         values = api.portal.get_registry_record(
             self.last_modified_key,
-            default={}
+            default=None
         )
+        if values is None:
+            values = {}
         return values.get(self.src_portal_type, 0)
 
     def set_last_modified(self, last_modified):
         values = api.portal.get_registry_record(
             self.last_modified_key,
-            default={}
+            default=None
         )
+        if values is None:
+            values = {}
         values[self.src_portal_type] = last_modified
         api.portal.set_registry_record(
             self.last_modified_key,
