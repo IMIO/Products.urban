@@ -355,7 +355,7 @@ class UrbanLicenceToFileWalker(CustomQueryWalker):
         values[self.src_portal_type] = index
         api.portal.set_registry_record(
             self.index_key,
-            values
+            values,
         )
         logger.info("index: {} added in registry".format(str(index)))
         transaction.commit()
@@ -379,7 +379,7 @@ class UrbanLicenceToFileWalker(CustomQueryWalker):
         values[self.src_portal_type] = last_modified
         api.portal.set_registry_record(
             self.last_modified_key,
-            values
+            values,
         )
         logger.info("date: {} added in registry".format(str(last_modified)))
         transaction.commit()
@@ -496,7 +496,6 @@ def migrateCustomAT_trough_licences(
             walker_settings["limit"] = 1
         walker = UrbanLicenceToFileWalker(**walker_settings)
         walker.go()
-        walker.clear()
         walker_infos = {
             "errors": walker.errors,
             "msg": walker.getOutput().splitlines(),
