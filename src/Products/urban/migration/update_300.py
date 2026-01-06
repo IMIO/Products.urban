@@ -138,3 +138,18 @@ def set_eventconfig_optional_fields(context):
     )
     logger.info("Config updated: {0}".format(", ".join(updated_event_configs)))
     logger.info("migration step done!")
+
+
+def set_select_all_attachments_by_default_to_false(context):
+    logger = logging.getLogger(
+        "urban: Set select_all_attachments_by_default to false"
+    )
+    logger.info("starting upgrade steps")
+    api.portal.set_registry_record(
+        name=(
+            "imio.pm.wsclient.browser.settings.IWS4PMClientSettings."
+            "select_all_attachments_by_default"
+        ),
+        value=False
+    )
+    logger.info("migration step done!")
