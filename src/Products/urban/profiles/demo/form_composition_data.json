@@ -1,0 +1,1008 @@
+[{
+    "@id": "https://demo-urban.imio.be/portal_urban/form_composition", 
+    "@type": "Folder", 
+    "UID": "d262789c7d884f79ba31cb5a20dc65a3", 
+    "allowDiscussion": false, 
+    "constrainTypesMode": 1, 
+    "contributors": [], 
+    "creation_date": "2023-05-11T08:08:42+00:00", 
+    "creators": [
+        "admin"
+    ], 
+    "description": null, 
+    "effectiveDate": null, 
+    "excludeFromNav": false, 
+    "expirationDate": null, 
+    "exportimport.constrains": {
+        "immediately_addable_types": [
+            "UrbanVocabularyTerm"
+        ], 
+        "locally_allowed_types": [
+            "UrbanVocabularyTerm"
+        ]
+    }, 
+    "id": "form_composition", 
+    "is_folderish": true, 
+    "language": "fr", 
+    "layout": "folder_listing", 
+    "location": "", 
+    "modification_date": "2023-05-11T08:08:42+00:00", 
+    "nextPreviousEnabled": false, 
+    "parent": {
+        "@id": "https://demo-urban.imio.be/portal_urban", 
+        "@type": "UrbanTool", 
+        "UID": "bc7400ee294f4cc3a7c7fd43c3b5533f", 
+        "description": "", 
+        "review_state": "private", 
+        "title": "Urban configuration"
+    }, 
+    "relatedItems": [], 
+    "review_state": "private", 
+    "rights": null, 
+    "subject": [], 
+    "title": "Composition (formulaire(s) de demande)", 
+    "version": "current", 
+    "workflow_history": {
+        "simple_publication_workflow": [
+            {
+                "action": null, 
+                "actor": "admin", 
+                "comments": "", 
+                "review_state": "private", 
+                "time": "2023-05-11T08:08:42+00:00"
+            }
+        ]
+    }
+},{
+    "@id": "https://demo-urban.imio.be/portal_urban/form_composition/1-1-formulaire-general-permis-environnement-et-unique", 
+    "@type": "UrbanVocabularyTerm", 
+    "UID": "c1d7faff3b4d46ee9d01e720fbfffa79", 
+    "allowDiscussion": false, 
+    "contributors": [], 
+    "coring_id": "", 
+    "creation_date": "2024-08-29T19:06:39+00:00", 
+    "creators": [
+        "admin"
+    ], 
+    "description": null, 
+    "effectiveDate": null, 
+    "endValidity": null, 
+    "expirationDate": null, 
+    "extraValue": "", 
+    "id": "1-1-formulaire-general-permis-environnement-et-unique", 
+    "isDefaultValue": false, 
+    "is_folderish": false, 
+    "language": "fr", 
+    "layout": "base_view", 
+    "location": "", 
+    "modification_date": "2024-08-29T19:06:39+00:00", 
+    "numbering": "", 
+    "parent": {
+        "@id": "https://demo-urban.imio.be/portal_urban/form_composition", 
+        "@type": "Folder", 
+        "UID": "d262789c7d884f79ba31cb5a20dc65a3", 
+        "description": "", 
+        "review_state": "private", 
+        "title": "Composition (formulaire(s) de demande)"
+    }, 
+    "review_state": "enabled", 
+    "rights": null, 
+    "startValidity": null, 
+    "subject": [], 
+    "title": "1/1 Formulaire g\u00e9n\u00e9ral permis environnement et unique", 
+    "version": "current", 
+    "workflow_history": {
+        "activation_workflow": [
+            {
+                "action": null, 
+                "actor": "admin", 
+                "comments": "", 
+                "review_state": "enabled", 
+                "time": "2024-08-29T19:06:39+00:00"
+            }
+        ]
+    }
+},{
+    "@id": "https://demo-urban.imio.be/portal_urban/form_composition/1-2-elevage-et-detention-danimaux", 
+    "@type": "UrbanVocabularyTerm", 
+    "UID": "41750fdc1ce24f0593c6bd2a62d837f7", 
+    "allowDiscussion": false, 
+    "contributors": [], 
+    "coring_id": "", 
+    "creation_date": "2024-08-29T19:07:03+00:00", 
+    "creators": [
+        "admin"
+    ], 
+    "description": null, 
+    "effectiveDate": null, 
+    "endValidity": null, 
+    "expirationDate": null, 
+    "extraValue": "", 
+    "id": "1-2-elevage-et-detention-danimaux", 
+    "isDefaultValue": false, 
+    "is_folderish": false, 
+    "language": "fr", 
+    "layout": "base_view", 
+    "location": "", 
+    "modification_date": "2024-08-29T19:07:03+00:00", 
+    "numbering": "", 
+    "parent": {
+        "@id": "https://demo-urban.imio.be/portal_urban/form_composition", 
+        "@type": "Folder", 
+        "UID": "d262789c7d884f79ba31cb5a20dc65a3", 
+        "description": "", 
+        "review_state": "private", 
+        "title": "Composition (formulaire(s) de demande)"
+    }, 
+    "review_state": "enabled", 
+    "rights": null, 
+    "startValidity": null, 
+    "subject": [], 
+    "title": "1/2 Elevage et d\u00e9tention d'animaux", 
+    "version": "current", 
+    "workflow_history": {
+        "activation_workflow": [
+            {
+                "action": null, 
+                "actor": "admin", 
+                "comments": "", 
+                "review_state": "enabled", 
+                "time": "2024-08-29T19:07:03+00:00"
+            }
+        ]
+    }
+},{
+    "@id": "https://demo-urban.imio.be/portal_urban/form_composition/4", 
+    "@type": "UrbanVocabularyTerm", 
+    "UID": "98fad21b392443baa0de5f5e094a979e", 
+    "allowDiscussion": false, 
+    "contributors": [], 
+    "coring_id": "", 
+    "creation_date": "2023-05-11T08:10:44+00:00", 
+    "creators": [
+        "admin"
+    ], 
+    "description": null, 
+    "effectiveDate": "2025-10-06T08:02:05+00:00", 
+    "endValidity": "2025-10-05T22:00:00+00:00", 
+    "expirationDate": null, 
+    "extraValue": "", 
+    "id": "4", 
+    "isDefaultValue": false, 
+    "is_folderish": false, 
+    "language": "fr", 
+    "layout": "base_view", 
+    "location": "", 
+    "modification_date": "2025-10-06T08:02:05+00:00", 
+    "numbering": "", 
+    "parent": {
+        "@id": "https://demo-urban.imio.be/portal_urban/form_composition", 
+        "@type": "Folder", 
+        "UID": "d262789c7d884f79ba31cb5a20dc65a3", 
+        "description": "", 
+        "review_state": "private", 
+        "title": "Composition (formulaire(s) de demande)"
+    }, 
+    "review_state": "disabled", 
+    "rights": null, 
+    "startValidity": null, 
+    "subject": [], 
+    "title": "Annexe IV - Demande de permis avec concours d'un architecte", 
+    "version": "current", 
+    "workflow_history": {
+        "activation_workflow": [
+            {
+                "action": null, 
+                "actor": "admin", 
+                "comments": "", 
+                "review_state": "enabled", 
+                "time": "2023-05-11T08:10:44+00:00"
+            }, 
+            {
+                "action": "disable", 
+                "actor": "admin", 
+                "comments": "", 
+                "review_state": "disabled", 
+                "time": "2025-10-06T08:02:05+00:00"
+            }
+        ]
+    }
+},{
+    "@id": "https://demo-urban.imio.be/portal_urban/form_composition/5", 
+    "@type": "UrbanVocabularyTerm", 
+    "UID": "42ad920dcdab407195d670ce0f02d778", 
+    "allowDiscussion": false, 
+    "contributors": [], 
+    "coring_id": "", 
+    "creation_date": "2023-05-11T08:10:44+00:00", 
+    "creators": [
+        "admin"
+    ], 
+    "description": null, 
+    "effectiveDate": "2025-10-06T08:02:05+00:00", 
+    "endValidity": "2025-10-05T22:00:00+00:00", 
+    "expirationDate": null, 
+    "extraValue": "", 
+    "id": "5", 
+    "isDefaultValue": false, 
+    "is_folderish": false, 
+    "language": "fr", 
+    "layout": "base_view", 
+    "location": "", 
+    "modification_date": "2025-10-06T08:02:05+00:00", 
+    "numbering": "", 
+    "parent": {
+        "@id": "https://demo-urban.imio.be/portal_urban/form_composition", 
+        "@type": "Folder", 
+        "UID": "d262789c7d884f79ba31cb5a20dc65a3", 
+        "description": "", 
+        "review_state": "private", 
+        "title": "Composition (formulaire(s) de demande)"
+    }, 
+    "review_state": "disabled", 
+    "rights": null, 
+    "startValidity": null, 
+    "subject": [], 
+    "title": "Annexe V - Modification de la destination ou modification de la r\u00e9partition des surfaces de vente", 
+    "version": "current", 
+    "workflow_history": {
+        "activation_workflow": [
+            {
+                "action": null, 
+                "actor": "admin", 
+                "comments": "", 
+                "review_state": "enabled", 
+                "time": "2023-05-11T08:10:44+00:00"
+            }, 
+            {
+                "action": "disable", 
+                "actor": "admin", 
+                "comments": "", 
+                "review_state": "disabled", 
+                "time": "2025-10-06T08:02:05+00:00"
+            }
+        ]
+    }
+},{
+    "@id": "https://demo-urban.imio.be/portal_urban/form_composition/6", 
+    "@type": "UrbanVocabularyTerm", 
+    "UID": "1a21088a309b44fe9cea3bceaff51627", 
+    "allowDiscussion": false, 
+    "contributors": [], 
+    "coring_id": "", 
+    "creation_date": "2023-05-11T08:10:44+00:00", 
+    "creators": [
+        "admin"
+    ], 
+    "description": null, 
+    "effectiveDate": "2025-10-06T08:02:05+00:00", 
+    "endValidity": "2025-10-05T22:00:00+00:00", 
+    "expirationDate": null, 
+    "extraValue": "", 
+    "id": "6", 
+    "isDefaultValue": false, 
+    "is_folderish": false, 
+    "language": "fr", 
+    "layout": "base_view", 
+    "location": "", 
+    "modification_date": "2025-10-06T08:02:05+00:00", 
+    "numbering": "", 
+    "parent": {
+        "@id": "https://demo-urban.imio.be/portal_urban/form_composition", 
+        "@type": "Folder", 
+        "UID": "d262789c7d884f79ba31cb5a20dc65a3", 
+        "description": "", 
+        "review_state": "private", 
+        "title": "Composition (formulaire(s) de demande)"
+    }, 
+    "review_state": "disabled", 
+    "rights": null, 
+    "startValidity": null, 
+    "subject": [], 
+    "title": "Annexe VI - Modification sensible du relief du sol - d\u00e9p\u00f4t de v\u00e9hicules, de mitrailles, de mat\u00e9riaux ou de d\u00e9chets - installations mobiles - travaux d'am\u00e9nagement au sol aux abords d'une construction autoris\u00e9e", 
+    "version": "current", 
+    "workflow_history": {
+        "activation_workflow": [
+            {
+                "action": null, 
+                "actor": "admin", 
+                "comments": "", 
+                "review_state": "enabled", 
+                "time": "2023-05-11T08:10:44+00:00"
+            }, 
+            {
+                "action": "disable", 
+                "actor": "admin", 
+                "comments": "", 
+                "review_state": "disabled", 
+                "time": "2025-10-06T08:02:05+00:00"
+            }
+        ]
+    }
+},{
+    "@id": "https://demo-urban.imio.be/portal_urban/form_composition/7", 
+    "@type": "UrbanVocabularyTerm", 
+    "UID": "f268196ba717496ba8754b22d26c9043", 
+    "allowDiscussion": false, 
+    "contributors": [], 
+    "coring_id": "", 
+    "creation_date": "2023-05-11T08:10:44+00:00", 
+    "creators": [
+        "admin"
+    ], 
+    "description": null, 
+    "effectiveDate": "2025-10-06T08:02:05+00:00", 
+    "endValidity": "2025-10-05T22:00:00+00:00", 
+    "expirationDate": null, 
+    "extraValue": "", 
+    "id": "7", 
+    "isDefaultValue": false, 
+    "is_folderish": false, 
+    "language": "fr", 
+    "layout": "base_view", 
+    "location": "", 
+    "modification_date": "2025-10-06T08:02:05+00:00", 
+    "numbering": "", 
+    "parent": {
+        "@id": "https://demo-urban.imio.be/portal_urban/form_composition", 
+        "@type": "Folder", 
+        "UID": "d262789c7d884f79ba31cb5a20dc65a3", 
+        "description": "", 
+        "review_state": "private", 
+        "title": "Composition (formulaire(s) de demande)"
+    }, 
+    "review_state": "disabled", 
+    "rights": null, 
+    "startValidity": null, 
+    "subject": [], 
+    "title": "Annexe VII - Boisement - d\u00e9boisement - abattage - culture de sapins de No\u00ebl - modification de l'aspect d'un ou plusieurs arbres ou haies remarquables - d\u00e9frichement - modification de la v\u00e9g\u00e9tation", 
+    "version": "current", 
+    "workflow_history": {
+        "activation_workflow": [
+            {
+                "action": null, 
+                "actor": "admin", 
+                "comments": "", 
+                "review_state": "enabled", 
+                "time": "2023-05-11T08:10:44+00:00"
+            }, 
+            {
+                "action": "disable", 
+                "actor": "admin", 
+                "comments": "", 
+                "review_state": "disabled", 
+                "time": "2025-10-06T08:02:05+00:00"
+            }
+        ]
+    }
+},{
+    "@id": "https://demo-urban.imio.be/portal_urban/form_composition/8", 
+    "@type": "UrbanVocabularyTerm", 
+    "UID": "2c435fffa6bf458ab3c5ecbc463cd605", 
+    "allowDiscussion": false, 
+    "contributors": [], 
+    "coring_id": "", 
+    "creation_date": "2023-05-11T08:10:44+00:00", 
+    "creators": [
+        "admin"
+    ], 
+    "description": null, 
+    "effectiveDate": "2025-10-06T08:02:05+00:00", 
+    "endValidity": "2025-10-05T22:00:00+00:00", 
+    "expirationDate": null, 
+    "extraValue": "", 
+    "id": "8", 
+    "isDefaultValue": false, 
+    "is_folderish": false, 
+    "language": "fr", 
+    "layout": "base_view", 
+    "location": "", 
+    "modification_date": "2025-10-06T08:02:05+00:00", 
+    "numbering": "", 
+    "parent": {
+        "@id": "https://demo-urban.imio.be/portal_urban/form_composition", 
+        "@type": "Folder", 
+        "UID": "d262789c7d884f79ba31cb5a20dc65a3", 
+        "description": "", 
+        "review_state": "private", 
+        "title": "Composition (formulaire(s) de demande)"
+    }, 
+    "review_state": "disabled", 
+    "rights": null, 
+    "startValidity": null, 
+    "subject": [], 
+    "title": "Annexe VIII - Travaux techniques", 
+    "version": "current", 
+    "workflow_history": {
+        "activation_workflow": [
+            {
+                "action": null, 
+                "actor": "admin", 
+                "comments": "", 
+                "review_state": "enabled", 
+                "time": "2023-05-11T08:10:44+00:00"
+            }, 
+            {
+                "action": "disable", 
+                "actor": "admin", 
+                "comments": "", 
+                "review_state": "disabled", 
+                "time": "2025-10-06T08:02:05+00:00"
+            }
+        ]
+    }
+},{
+    "@id": "https://demo-urban.imio.be/portal_urban/form_composition/9", 
+    "@type": "UrbanVocabularyTerm", 
+    "UID": "97c96980c97f48d9a2bf9e30808c88b8", 
+    "allowDiscussion": false, 
+    "contributors": [], 
+    "coring_id": "", 
+    "creation_date": "2023-05-11T08:10:44+00:00", 
+    "creators": [
+        "admin"
+    ], 
+    "description": null, 
+    "effectiveDate": "2025-10-06T08:02:05+00:00", 
+    "endValidity": "2025-10-05T22:00:00+00:00", 
+    "expirationDate": null, 
+    "extraValue": "", 
+    "id": "9", 
+    "isDefaultValue": false, 
+    "is_folderish": false, 
+    "language": "fr", 
+    "layout": "base_view", 
+    "location": "", 
+    "modification_date": "2025-10-06T08:02:05+00:00", 
+    "numbering": "", 
+    "parent": {
+        "@id": "https://demo-urban.imio.be/portal_urban/form_composition", 
+        "@type": "Folder", 
+        "UID": "d262789c7d884f79ba31cb5a20dc65a3", 
+        "description": "", 
+        "review_state": "private", 
+        "title": "Composition (formulaire(s) de demande)"
+    }, 
+    "review_state": "disabled", 
+    "rights": null, 
+    "startValidity": null, 
+    "subject": [], 
+    "title": "Annexe IX - Permis d'urbanisme dispens\u00e9 d'un architecte ou autre que les demandes vis\u00e9es aux annexes 5 \u00e0 8", 
+    "version": "current", 
+    "workflow_history": {
+        "activation_workflow": [
+            {
+                "action": null, 
+                "actor": "admin", 
+                "comments": "", 
+                "review_state": "enabled", 
+                "time": "2023-05-11T08:10:44+00:00"
+            }, 
+            {
+                "action": "disable", 
+                "actor": "admin", 
+                "comments": "", 
+                "review_state": "disabled", 
+                "time": "2025-10-06T08:02:05+00:00"
+            }
+        ]
+    }
+},{
+    "@id": "https://demo-urban.imio.be/portal_urban/form_composition/annexe-14-certificat-durbanisme-ndeg1", 
+    "@type": "UrbanVocabularyTerm", 
+    "UID": "fd4038a38148430c9fa2458de60b6476", 
+    "allowDiscussion": false, 
+    "contributors": [], 
+    "coring_id": "", 
+    "creation_date": "2025-10-06T08:00:50+00:00", 
+    "creators": [
+        "admin"
+    ], 
+    "description": null, 
+    "effectiveDate": null, 
+    "endValidity": null, 
+    "expirationDate": null, 
+    "extraValue": "", 
+    "id": "annexe-14-certificat-durbanisme-ndeg1", 
+    "isDefaultValue": false, 
+    "is_folderish": false, 
+    "language": "fr", 
+    "layout": "base_view", 
+    "location": "", 
+    "modification_date": "2025-10-06T08:00:50+00:00", 
+    "numbering": "", 
+    "parent": {
+        "@id": "https://demo-urban.imio.be/portal_urban/form_composition", 
+        "@type": "Folder", 
+        "UID": "d262789c7d884f79ba31cb5a20dc65a3", 
+        "description": "", 
+        "review_state": "private", 
+        "title": "Composition (formulaire(s) de demande)"
+    }, 
+    "review_state": "enabled", 
+    "rights": null, 
+    "startValidity": null, 
+    "subject": [], 
+    "title": "Annexe 14 - Certificat d'urbanisme n\u00b01", 
+    "version": "current", 
+    "workflow_history": {
+        "activation_workflow": [
+            {
+                "action": null, 
+                "actor": "admin", 
+                "comments": "", 
+                "review_state": "enabled", 
+                "time": "2025-10-06T08:00:50+00:00"
+            }
+        ]
+    }
+},{
+    "@id": "https://demo-urban.imio.be/portal_urban/form_composition/annexe-4-permis-durbanisme-avec-architecte", 
+    "@type": "UrbanVocabularyTerm", 
+    "UID": "0129a19ce35c43c48e5d2580ef854144", 
+    "allowDiscussion": false, 
+    "contributors": [], 
+    "coring_id": "", 
+    "creation_date": "2025-10-06T07:59:14+00:00", 
+    "creators": [
+        "admin"
+    ], 
+    "description": null, 
+    "effectiveDate": null, 
+    "endValidity": null, 
+    "expirationDate": null, 
+    "extraValue": "", 
+    "id": "annexe-4-permis-durbanisme-avec-architecte", 
+    "isDefaultValue": false, 
+    "is_folderish": false, 
+    "language": "fr", 
+    "layout": "base_view", 
+    "location": "", 
+    "modification_date": "2025-10-06T07:59:15+00:00", 
+    "numbering": "", 
+    "parent": {
+        "@id": "https://demo-urban.imio.be/portal_urban/form_composition", 
+        "@type": "Folder", 
+        "UID": "d262789c7d884f79ba31cb5a20dc65a3", 
+        "description": "", 
+        "review_state": "private", 
+        "title": "Composition (formulaire(s) de demande)"
+    }, 
+    "review_state": "enabled", 
+    "rights": null, 
+    "startValidity": null, 
+    "subject": [], 
+    "title": "Annexe 4 - Permis d'urbanisme avec architecte", 
+    "version": "current", 
+    "workflow_history": {
+        "activation_workflow": [
+            {
+                "action": null, 
+                "actor": "admin", 
+                "comments": "", 
+                "review_state": "enabled", 
+                "time": "2025-10-06T07:59:14+00:00"
+            }
+        ]
+    }
+},{
+    "@id": "https://demo-urban.imio.be/portal_urban/form_composition/annexe-5-demande-permis-implantation-commerciale", 
+    "@type": "UrbanVocabularyTerm", 
+    "UID": "abddd67ef6154c818a1789c5b9f83616", 
+    "allowDiscussion": false, 
+    "contributors": [], 
+    "coring_id": "", 
+    "creation_date": "2025-10-06T07:59:31+00:00", 
+    "creators": [
+        "admin"
+    ], 
+    "description": null, 
+    "effectiveDate": null, 
+    "endValidity": null, 
+    "expirationDate": null, 
+    "extraValue": "", 
+    "id": "annexe-5-demande-permis-implantation-commerciale", 
+    "isDefaultValue": false, 
+    "is_folderish": false, 
+    "language": "fr", 
+    "layout": "base_view", 
+    "location": "", 
+    "modification_date": "2025-10-06T07:59:31+00:00", 
+    "numbering": "", 
+    "parent": {
+        "@id": "https://demo-urban.imio.be/portal_urban/form_composition", 
+        "@type": "Folder", 
+        "UID": "d262789c7d884f79ba31cb5a20dc65a3", 
+        "description": "", 
+        "review_state": "private", 
+        "title": "Composition (formulaire(s) de demande)"
+    }, 
+    "review_state": "enabled", 
+    "rights": null, 
+    "startValidity": null, 
+    "subject": [], 
+    "title": "Annexe 5 - Demande permis implantation commerciale", 
+    "version": "current", 
+    "workflow_history": {
+        "activation_workflow": [
+            {
+                "action": null, 
+                "actor": "admin", 
+                "comments": "", 
+                "review_state": "enabled", 
+                "time": "2025-10-06T07:59:31+00:00"
+            }
+        ]
+    }
+},{
+    "@id": "https://demo-urban.imio.be/portal_urban/form_composition/annexe-6-demande-de-permis-sans-architecte", 
+    "@type": "UrbanVocabularyTerm", 
+    "UID": "d09373e4fa1f4136954387adeeef7e2b", 
+    "allowDiscussion": false, 
+    "contributors": [], 
+    "coring_id": "", 
+    "creation_date": "2025-10-06T07:59:48+00:00", 
+    "creators": [
+        "admin"
+    ], 
+    "description": null, 
+    "effectiveDate": null, 
+    "endValidity": null, 
+    "expirationDate": null, 
+    "extraValue": "", 
+    "id": "annexe-6-demande-de-permis-sans-architecte", 
+    "isDefaultValue": false, 
+    "is_folderish": false, 
+    "language": "fr", 
+    "layout": "base_view", 
+    "location": "", 
+    "modification_date": "2025-10-06T07:59:48+00:00", 
+    "numbering": "", 
+    "parent": {
+        "@id": "https://demo-urban.imio.be/portal_urban/form_composition", 
+        "@type": "Folder", 
+        "UID": "d262789c7d884f79ba31cb5a20dc65a3", 
+        "description": "", 
+        "review_state": "private", 
+        "title": "Composition (formulaire(s) de demande)"
+    }, 
+    "review_state": "enabled", 
+    "rights": null, 
+    "startValidity": null, 
+    "subject": [], 
+    "title": "Annexe 6 - Demande de permis sans architecte", 
+    "version": "current", 
+    "workflow_history": {
+        "activation_workflow": [
+            {
+                "action": null, 
+                "actor": "admin", 
+                "comments": "", 
+                "review_state": "enabled", 
+                "time": "2025-10-06T07:59:48+00:00"
+            }
+        ]
+    }
+},{
+    "@id": "https://demo-urban.imio.be/portal_urban/form_composition/annexe-7-demande-de-permis-durbanisation", 
+    "@type": "UrbanVocabularyTerm", 
+    "UID": "c9aa727bf90247e4b140f6747f50ce88", 
+    "allowDiscussion": false, 
+    "contributors": [], 
+    "coring_id": "", 
+    "creation_date": "2025-10-06T08:00:03+00:00", 
+    "creators": [
+        "admin"
+    ], 
+    "description": null, 
+    "effectiveDate": null, 
+    "endValidity": null, 
+    "expirationDate": null, 
+    "extraValue": "", 
+    "id": "annexe-7-demande-de-permis-durbanisation", 
+    "isDefaultValue": false, 
+    "is_folderish": false, 
+    "language": "fr", 
+    "layout": "base_view", 
+    "location": "", 
+    "modification_date": "2025-10-06T08:00:03+00:00", 
+    "numbering": "", 
+    "parent": {
+        "@id": "https://demo-urban.imio.be/portal_urban/form_composition", 
+        "@type": "Folder", 
+        "UID": "d262789c7d884f79ba31cb5a20dc65a3", 
+        "description": "", 
+        "review_state": "private", 
+        "title": "Composition (formulaire(s) de demande)"
+    }, 
+    "review_state": "enabled", 
+    "rights": null, 
+    "startValidity": null, 
+    "subject": [], 
+    "title": "Annexe 7 - Demande de permis d'urbanisation", 
+    "version": "current", 
+    "workflow_history": {
+        "activation_workflow": [
+            {
+                "action": null, 
+                "actor": "admin", 
+                "comments": "", 
+                "review_state": "enabled", 
+                "time": "2025-10-06T08:00:03+00:00"
+            }
+        ]
+    }
+},{
+    "@id": "https://demo-urban.imio.be/portal_urban/form_composition/annexe-8-demande-de-certificat-d2019urbanisme-ndeg2", 
+    "@type": "UrbanVocabularyTerm", 
+    "UID": "62ac19e1256c4266a4a80d7b4e619592", 
+    "allowDiscussion": false, 
+    "contributors": [], 
+    "coring_id": "", 
+    "creation_date": "2025-10-06T08:00:19+00:00", 
+    "creators": [
+        "admin"
+    ], 
+    "description": null, 
+    "effectiveDate": null, 
+    "endValidity": null, 
+    "expirationDate": null, 
+    "extraValue": "", 
+    "id": "annexe-8-demande-de-certificat-d2019urbanisme-ndeg2", 
+    "isDefaultValue": false, 
+    "is_folderish": false, 
+    "language": "fr", 
+    "layout": "base_view", 
+    "location": "", 
+    "modification_date": "2025-10-06T08:00:19+00:00", 
+    "numbering": "", 
+    "parent": {
+        "@id": "https://demo-urban.imio.be/portal_urban/form_composition", 
+        "@type": "Folder", 
+        "UID": "d262789c7d884f79ba31cb5a20dc65a3", 
+        "description": "", 
+        "review_state": "private", 
+        "title": "Composition (formulaire(s) de demande)"
+    }, 
+    "review_state": "enabled", 
+    "rights": null, 
+    "startValidity": null, 
+    "subject": [], 
+    "title": "Annexe 8 - Demande de certificat d\u2019urbanisme n\u00b02", 
+    "version": "current", 
+    "workflow_history": {
+        "activation_workflow": [
+            {
+                "action": null, 
+                "actor": "admin", 
+                "comments": "", 
+                "review_state": "enabled", 
+                "time": "2025-10-06T08:00:19+00:00"
+            }
+        ]
+    }
+},{
+    "@id": "https://demo-urban.imio.be/portal_urban/form_composition/annexe-v-1", 
+    "@type": "UrbanVocabularyTerm", 
+    "UID": "321ad002e3384797b241bf19211657ec", 
+    "allowDiscussion": false, 
+    "contributors": [], 
+    "coring_id": "", 
+    "creation_date": "2024-08-28T09:33:03+00:00", 
+    "creators": [
+        "admin"
+    ], 
+    "description": null, 
+    "effectiveDate": "2025-10-06T08:02:05+00:00", 
+    "endValidity": "2025-10-05T22:00:00+00:00", 
+    "expirationDate": null, 
+    "extraValue": "", 
+    "id": "annexe-v-1", 
+    "isDefaultValue": false, 
+    "is_folderish": false, 
+    "language": "fr", 
+    "layout": "base_view", 
+    "location": "", 
+    "modification_date": "2025-10-06T08:02:05+00:00", 
+    "numbering": "", 
+    "parent": {
+        "@id": "https://demo-urban.imio.be/portal_urban/form_composition", 
+        "@type": "Folder", 
+        "UID": "d262789c7d884f79ba31cb5a20dc65a3", 
+        "description": "", 
+        "review_state": "private", 
+        "title": "Composition (formulaire(s) de demande)"
+    }, 
+    "review_state": "disabled", 
+    "rights": null, 
+    "startValidity": null, 
+    "subject": [], 
+    "title": "Annexe V/1 - Implantation d'un commerce", 
+    "version": "current", 
+    "workflow_history": {
+        "activation_workflow": [
+            {
+                "action": null, 
+                "actor": "admin", 
+                "comments": "", 
+                "review_state": "enabled", 
+                "time": "2024-08-28T09:33:03+00:00"
+            }, 
+            {
+                "action": "disable", 
+                "actor": "admin", 
+                "comments": "", 
+                "review_state": "disabled", 
+                "time": "2025-10-06T08:02:05+00:00"
+            }
+        ]
+    }
+},{
+    "@id": "https://demo-urban.imio.be/portal_urban/form_composition/copy2_of_9", 
+    "@type": "UrbanVocabularyTerm", 
+    "UID": "9058b9824832473da82d2b1c3c4f1cf5", 
+    "allowDiscussion": false, 
+    "contributors": [], 
+    "coring_id": "", 
+    "creation_date": "2024-02-28T09:51:12+00:00", 
+    "creators": [
+        "admin"
+    ], 
+    "description": null, 
+    "effectiveDate": "2025-10-06T08:02:05+00:00", 
+    "endValidity": "2025-10-05T22:00:00+00:00", 
+    "expirationDate": null, 
+    "extraValue": "", 
+    "id": "copy2_of_9", 
+    "isDefaultValue": false, 
+    "is_folderish": false, 
+    "language": "fr", 
+    "layout": "base_view", 
+    "location": "", 
+    "modification_date": "2025-10-06T08:02:05+00:00", 
+    "numbering": "", 
+    "parent": {
+        "@id": "https://demo-urban.imio.be/portal_urban/form_composition", 
+        "@type": "Folder", 
+        "UID": "d262789c7d884f79ba31cb5a20dc65a3", 
+        "description": "", 
+        "review_state": "private", 
+        "title": "Composition (formulaire(s) de demande)"
+    }, 
+    "review_state": "disabled", 
+    "rights": null, 
+    "startValidity": null, 
+    "subject": [], 
+    "title": "Annexe XI - Demande de permis d'urbanisation ou de modification de permis d'urbanisation avec contenu simplifi\u00e9 ", 
+    "version": "current", 
+    "workflow_history": {
+        "activation_workflow": [
+            {
+                "action": null, 
+                "actor": "admin", 
+                "comments": "", 
+                "review_state": "enabled", 
+                "time": "2024-02-28T09:51:12+00:00"
+            }, 
+            {
+                "action": "disable", 
+                "actor": "admin", 
+                "comments": "", 
+                "review_state": "disabled", 
+                "time": "2025-10-06T08:02:05+00:00"
+            }
+        ]
+    }
+},{
+    "@id": "https://demo-urban.imio.be/portal_urban/form_composition/copy3_of_9", 
+    "@type": "UrbanVocabularyTerm", 
+    "UID": "81833a7911ec4729a56a74fc17d754cd", 
+    "allowDiscussion": false, 
+    "contributors": [], 
+    "coring_id": "", 
+    "creation_date": "2024-02-28T09:51:16+00:00", 
+    "creators": [
+        "admin"
+    ], 
+    "description": null, 
+    "effectiveDate": "2025-10-06T08:02:05+00:00", 
+    "endValidity": "2025-10-05T22:00:00+00:00", 
+    "expirationDate": null, 
+    "extraValue": "", 
+    "id": "copy3_of_9", 
+    "isDefaultValue": false, 
+    "is_folderish": false, 
+    "language": "fr", 
+    "layout": "base_view", 
+    "location": "", 
+    "modification_date": "2025-10-06T08:02:05+00:00", 
+    "numbering": "", 
+    "parent": {
+        "@id": "https://demo-urban.imio.be/portal_urban/form_composition", 
+        "@type": "Folder", 
+        "UID": "d262789c7d884f79ba31cb5a20dc65a3", 
+        "description": "", 
+        "review_state": "private", 
+        "title": "Composition (formulaire(s) de demande)"
+    }, 
+    "review_state": "disabled", 
+    "rights": null, 
+    "startValidity": null, 
+    "subject": [], 
+    "title": "Annexe X - Demande de permis d\u2019urbanisation ou de modification de permis d\u2019urbanisation ", 
+    "version": "current", 
+    "workflow_history": {
+        "activation_workflow": [
+            {
+                "action": null, 
+                "actor": "admin", 
+                "comments": "", 
+                "review_state": "enabled", 
+                "time": "2024-02-28T09:51:16+00:00"
+            }, 
+            {
+                "action": "disable", 
+                "actor": "admin", 
+                "comments": "", 
+                "review_state": "disabled", 
+                "time": "2025-10-06T08:02:05+00:00"
+            }
+        ]
+    }
+},{
+    "@id": "https://demo-urban.imio.be/portal_urban/form_composition/copy_of_9", 
+    "@type": "UrbanVocabularyTerm", 
+    "UID": "d0491a7ecfe143e7b13b06b281dbce2d", 
+    "allowDiscussion": false, 
+    "contributors": [], 
+    "coring_id": "", 
+    "creation_date": "2024-02-28T09:49:12+00:00", 
+    "creators": [
+        "admin"
+    ], 
+    "description": null, 
+    "effectiveDate": "2025-10-06T08:02:05+00:00", 
+    "endValidity": "2025-10-05T22:00:00+00:00", 
+    "expirationDate": null, 
+    "extraValue": "", 
+    "id": "copy_of_9", 
+    "isDefaultValue": false, 
+    "is_folderish": false, 
+    "language": "fr", 
+    "layout": "base_view", 
+    "location": "", 
+    "modification_date": "2025-10-06T08:02:05+00:00", 
+    "numbering": "", 
+    "parent": {
+        "@id": "https://demo-urban.imio.be/portal_urban/form_composition", 
+        "@type": "Folder", 
+        "UID": "d262789c7d884f79ba31cb5a20dc65a3", 
+        "description": "", 
+        "review_state": "private", 
+        "title": "Composition (formulaire(s) de demande)"
+    }, 
+    "review_state": "disabled", 
+    "rights": null, 
+    "startValidity": null, 
+    "subject": [], 
+    "title": "Annexe XV - Demande de certificat d\u2019urbanisme n\u00b02", 
+    "version": "current", 
+    "workflow_history": {
+        "activation_workflow": [
+            {
+                "action": null, 
+                "actor": "admin", 
+                "comments": "", 
+                "review_state": "enabled", 
+                "time": "2024-02-28T09:49:11+00:00"
+            }, 
+            {
+                "action": "disable", 
+                "actor": "admin", 
+                "comments": "", 
+                "review_state": "disabled", 
+                "time": "2025-10-06T08:02:05+00:00"
+            }
+        ]
+    }
+}]
