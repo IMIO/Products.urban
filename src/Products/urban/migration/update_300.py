@@ -153,3 +153,40 @@ def set_select_all_attachments_by_default_to_false(context):
         value=False
     )
     logger.info("migration step done!")
+
+
+def _settransform(**kwargs):
+    # Cannot pass a dict to set transform parameters, it has
+    # to be separate keys and values
+    # Also the transform requires all dictionary values to be set
+    # at the same time: other values may be present but are not
+    # required.
+    transform = api.portal.get_tool("portal_transforms").safe_html
+    for k in ('valid_tags', 'nasty_tags'):
+        if k not in kwargs:
+            kwargs[k] = transform.get_parameter_value(k)
+
+    for k in list(kwargs):
+        if isinstance(kwargs[k], dict):
+            v = kwargs[k]
+            kwargs[k + '_key'] = v.keys()
+            kwargs[k + '_value'] = [str(s) for s in v.values()]
+            del kwargs[k]
+    transform.set_parameters(**kwargs)
+    transform._p_changed = True
+    transform.reload()
+
+
+def add_tags_to_filter_html(context):
+    logger = logging.getLogger(
+        "urban: Add tags to filter html"
+    )
+    logger.info("starting upgrade steps")
+    tag_to_add = "s"
+    transforms = api.portal.get_tool("portal_transforms").safe_html
+    valid_tags = transforms.get_parameter_value('valid_tags')
+    if tag_to_add in valid_tags:
+        return
+    valid_tags["s"] = 1
+    _settransform(valid_tags=valid_tags)
+    logger.info("migration step done!")
