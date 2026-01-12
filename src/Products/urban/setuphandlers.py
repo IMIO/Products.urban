@@ -2023,12 +2023,14 @@ def add_urban_config_folder(urban_type, tool=None, site=None):
 
 
 def add_schedule(config_folder, urban_type, schedule_folder=None):
+    from imio.schedule.utils import create_dashboard_collection
+
     # Add licence type folder in urban schedule folder
     createScheduleConfig(container=config_folder, portal_type=urban_type)
     schedule_config_folder = getattr(config_folder, "schedule")
     dashboard_collection = getattr(schedule_config_folder, "dashboard_collection", None)
     if not dashboard_collection:
-        event.notify(ObjectModifiedEvent(schedule_config_folder))
+        create_dashboard_collection(schedule_config_folder)
     schedule_config_folder.dashboard_collection.customViewFields = (
         u"sortable_title",
         u"pretty_link",
