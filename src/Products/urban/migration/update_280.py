@@ -54,3 +54,14 @@ def add_building_procedure(context):
     )
 
     logger.info("migration step done!")
+
+
+def add_roaddecree(context):
+    logger = logging.getLogger("urban: Add RoadDecree procedure")
+    logger.info("starting upgrade steps")
+    setup_tool = api.portal.get_tool("portal_setup")
+    setup_tool.runImportStepFromProfile("profile-Products.urban:preinstall", "workflow")
+    setup_tool.runImportStepFromProfile("profile-Products.urban:urbantypes", "typeinfo")
+    logger.info("migration step done!")
+
+    add_new_urban_licence_type("RoadDecree")

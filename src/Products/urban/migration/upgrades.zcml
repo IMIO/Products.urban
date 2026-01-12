@@ -810,4 +810,13 @@
         profile="Products.urban:default"
         />
 
+     <gs:upgradeStep
+        title="Add road decree procedure"
+        description=""
+        source="2800"
+        destination="2801"
+        handler=".update_280.add_roaddecree"
+        profile="Products.urban:default"
+        />
+
 </configure>
