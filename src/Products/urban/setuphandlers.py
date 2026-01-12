@@ -1406,10 +1406,11 @@ def setupOpinionsSchedule(context):
         title=u"Configuration d'échéances avis de services",
     )
 
-    config_path = "{}/schedule/config/opinions_schedule.xml".format(
-        os.path.dirname(__file__)
+    set_schedule_view(
+        schedule_folder,
+        switch_config_folder("opinions_schedule.xml", "schedule/config"),
+        schedule_config
     )
-    set_schedule_view(schedule_folder, config_path, schedule_config)
 
 
 def setupTest(context):
