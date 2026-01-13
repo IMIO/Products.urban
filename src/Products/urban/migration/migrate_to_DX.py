@@ -165,6 +165,31 @@ def migrate_ParcellingTerm_to_DX(context):
 
 
 def migrate_UrbanEventType_to_DX(context):
+    vocabulary_fields_mapping = [
+        {
+            "AT_field_name": "numbering",
+            "DX_field_name": "numbering",
+        },
+        {
+            "AT_field_name": "extraValue",
+            "DX_field_name": "extraValue",
+        },
+        {
+            "AT_field_name": "coring_id",
+            "DX_field_name": "coring_id",
+        },
+        {
+            "AT_field_name": "startValidity",
+            "DX_field_name": "startValidity",
+            "field_migrator": migrate_date,
+        },
+        {
+            "AT_field_name": "endValidity",
+            "DX_field_name": "endValidity",
+            "field_migrator": migrate_date,
+        },
+    ]
+
     fields_mapping = [
         {
             "AT_field_name": "title",
@@ -233,7 +258,7 @@ def migrate_UrbanEventType_to_DX(context):
     )
 
     result = migrateCustomAT(
-        fields_mapping,
+        fields_mapping + vocabulary_fields_mapping,
         src_type="FollowUpEventType",
         dst_type="FollowUpEventConfig",
         transaction_size=TRANSACTION_SIZE,
@@ -291,7 +316,7 @@ def migrate_UrbanEventType_to_DX(context):
         ]
     )
     result = migrateCustomAT(
-        fields_mapping,
+        fields_mapping + vocabulary_fields_mapping,
         src_type="OpinionRequestEventType",
         dst_type="OpinionEventConfig",
         transaction_size=TRANSACTION_SIZE,
