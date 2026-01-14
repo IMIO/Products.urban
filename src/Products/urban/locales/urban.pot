@@ -1744,6 +1744,9 @@ msgstr ""
 msgid "fieldsetlegend-urban_licences_config"
 msgstr ""
 
+msgid "fieldsetlegend-urban_notice_settings"
+msgstr ""
+
 msgid "fieldsetlegend-urban_public_settings"
 msgstr ""
 
