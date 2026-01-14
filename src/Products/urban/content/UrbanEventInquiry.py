@@ -343,13 +343,6 @@ class UrbanEventInquiry(OrderedBaseFolder, UrbanEvent, BrowserDefaultMixin):
                 number += claimant.getSignatureNumber()
         return number
 
-    def store_transmit_date(self, event_type, date=None):
-        annotations = IAnnotations(self)
-        key = "notice_transmit_dates"
-        dates = annotations.get(key, OrderedDict())
-        dates[event_type] = date if date else datetime.date.today()
-        annotations[key] = dates
-
     def transfer_dates(self):
         notification = NoticeOutgoingPublicSurveyDatesNotification(self)
         service = WebserviceNotice()

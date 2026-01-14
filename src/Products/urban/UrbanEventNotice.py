@@ -64,13 +64,6 @@ class UrbanEventNotice(UrbanEvent, BrowserDefaultMixin):
 
     # Methods
 
-    def store_transmit_date(self, event_type, date=None):
-        annotations = IAnnotations(self)
-        key = "notice_transmit_dates"
-        dates = annotations.get(key, OrderedDict())
-        dates[event_type] = date if date else datetime.date.today()
-        annotations[key] = dates
-
     def transfer_folder_to_dpa(self):
         notification = NoticeOutgoingNotification(self)
         notice_id = notification.notice_id("TRANSFERT_DOSSIER")
