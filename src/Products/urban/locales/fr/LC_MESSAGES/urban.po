@@ -1761,6 +1761,9 @@ msgstr "Services internes à la ville"
 msgid "fieldsetlegend-urban_licences_config"
 msgstr "Paramètres des procédures"
 
+msgid "fieldsetlegend-urban_notice_settings"
+msgstr "Paramètres de NOTICe"
+
 msgid "fieldsetlegend-urban_public_settings"
 msgstr "Options"
 

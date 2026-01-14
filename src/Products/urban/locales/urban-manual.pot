@@ -350,6 +350,9 @@ msgstr ""
 msgid "fieldsetlegend-urban_vocabulary_folders"
 msgstr ""
 
+msgid "fieldsetlegend-urban_notice_settings"
+msgstr ""
+
 msgid "folderbuildworktypes_folder_title"
 msgstr ""
 
