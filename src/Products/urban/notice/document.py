@@ -11,6 +11,9 @@ class NoticeDocument(NoticeElement):
     _notice_keys = (
         "notice_id",
         "document_id",
+        "document_type_code",
+        "document_mimetype",
+        "filename",
     )
     _excluded_keys = ("document",)
 
@@ -25,6 +28,10 @@ class NoticeDocument(NoticeElement):
         return "File"
 
     @property
+    def id(self):
+        return self.filename
+
+    @property
     def title(self):
         return self.json["documentData"]["filename"]
 
@@ -35,6 +42,21 @@ class NoticeDocument(NoticeElement):
     @property
     def document_id(self):
         return self.json["documentData"]["documentId"]
+
+    @property
+    def filename(self):
+        known_extensions = {
+            "application/xml": u".xml",
+            "application/pdf": u".pdf",
+            "application/vnd.openxmlformats-officedocument.wordprocessingml.document": u".docx",
+            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": u".xlsx",
+        }
+        extension = known_extensions.get(self.document_mimetype)
+        return (
+            self.title.decode("utf8") + extension
+            if extension
+            else self.title.decode("utf8")
+        )
 
     @property
     def document(self):
@@ -50,8 +72,8 @@ class NoticeDocument(NoticeElement):
         if self.document:
             _file = NamedBlobFile(
                 data=self.document,
-                filename=self.title.decode("utf8"),
-                contentType=self.json["documentData"]["mimeType"],
+                filename=self.filename,
+                contentType=self.document_mimetype,
             )
             return _file.open()
 

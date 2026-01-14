@@ -176,6 +176,9 @@ class ImportFromNoticeView(BrowserView):
 
         api.content.transition(licence, "iscomplete")
 
+        for document in detailed_notification.documents:
+            api.content.create(container=event, **document.serialize())
+
         licence.set_notice_id("DEMANDE_EP", detailed_notification.noticeId)
 
     def _handle_notification(self, notice_id):
@@ -272,6 +275,10 @@ class ImportFromNoticeView(BrowserView):
 
         if api.content.get_state(licence) == "deposit":
             api.content.transition(licence, "isincomplete")
+
+        for document in detailed_notification.documents:
+            api.content.create(container=event, **document.serialize())
+
         transaction.commit()
 
     def process_inadmissible_folder_notification(self, detailed_notification):
@@ -286,6 +293,9 @@ class ImportFromNoticeView(BrowserView):
         api.content.transition(event, "close")
 
         api.content.transition(licence, "isinacceptable")
+
+        for document in detailed_notification.documents:
+            api.content.create(container=event, **document.serialize())
 
         transaction.commit()
 
@@ -305,4 +315,8 @@ class ImportFromNoticeView(BrowserView):
         event_date = DateTime(str(detailed_notification.send_date))
         event.setEventDate(event_date)
         api.content.transition(event, "close")
+
+        for document in detailed_notification.documents:
+            api.content.create(container=event, **document.serialize())
+
         transaction.commit()
