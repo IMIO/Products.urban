@@ -199,14 +199,14 @@ class NoticeNotification(NoticeElement):
     def licence(self):
         """Return the licence, if there is already one"""
         if not self.reference:
-            return
+            raise ValueError("No reference found in notification {}".format(self.noticeId))
         catalog = api.portal.get_tool("portal_catalog")
         brains = catalog.unrestrictedSearchResults(
             getReference=self.reference,
             object_provides=IGenericLicence.__identifier__,
         )
-        if len(brains) != 1:
-            return
+        if len(brains) == 0:
+            raise ValueError("No licence found with reference number {}".format(self.reference))
         licence = brains[0].getObject()
         return licence
 
