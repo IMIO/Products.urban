@@ -12,12 +12,21 @@ class NoticeTransmitState(ViewletBase):
     def get_transmits(self):
         annotations = IAnnotations(self.context)
         dates = annotations.get("notice_transmit_dates", {})
-        return [
-            {
-                "label": translate(label, "urban", context=self.REQUEST),
-                "date": date.strftime("%d/%m/%Y"),
-            }
-            for (label, date) in dates.items()
-        ]
+
+        results = []
+        for (label, value) in dates.items():
+            if type(value) is dict:
+                results.append({
+                    "label": translate(label, "urban", context=self.request),
+                    "date": value.get("date").strftime("%d/%m/%Y"),
+                    "user": value.get("user"),
+                })
+            else:  # old style; before we also stored the user, "value" was the date
+                results.append({
+                    "label": translate(label, "urban", context=self.request),
+                    "date": value.strftime("%d/%m/%Y"),
+                    "user": "",
+                })
+        return results
 
     index = ViewPageTemplateFile("templates/notice_transmit_state.pt")

@@ -2,10 +2,20 @@
   <fieldset>
     <legend i18n:translate="">NOTICe transmits</legend>
     <div class="clear" tal:define="transmits view/get_transmits">
-      <div tal:repeat="transmit transmits">
-        <strong i18n:translate="" tal:content="transmit/label"></strong>&nbsp;
-        <span tal:content="transmit/date"></span>
-      </div>
+      <table class="listing" tal:condition="transmits">
+          <thead>
+            <th i18n:translate="transmit_action">Action</th>
+            <th i18n:translate="transmit_date">When</th>
+            <th i18n:translate="transmit_user">User</th>
+          </thead>
+          <tbody>
+            <tr tal:repeat="transmit transmits">
+                <td tal:content="transmit/label"></td>
+                <td tal:content="transmit/date"></td>
+                <td tal:content="transmit/user"></td>
+            </tr>
+          </tbody>
+      </table>
     </div>
   </fieldset>
 </metal:noticeTransmitDates>

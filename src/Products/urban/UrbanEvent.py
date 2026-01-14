@@ -15,6 +15,7 @@ __docformat__ = "plaintext"
 
 
 import datetime
+from collections import OrderedDict
 
 from AccessControl import ClassSecurityInfo
 from Acquisition import aq_parent
@@ -993,7 +994,10 @@ class UrbanEvent(OrderedBaseFolder, BrowserDefaultMixin):
         annotations = IAnnotations(self)
         key = "notice_transmit_dates"
         dates = annotations.get(key, OrderedDict())
-        dates[event_type] = date if date else datetime.date.today()
+        dates[event_type] = {
+            "date": date if date else datetime.today().date(),
+            "user": api.user.get_current().id,
+        }
         annotations[key] = dates
 
     def transfer_opinion(self):

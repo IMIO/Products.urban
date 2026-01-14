@@ -2658,6 +2658,21 @@ msgstr "Envoyer l'avis"
 msgid "transfer_ticket"
 msgstr "Envoyer le PV"
 
+#. Default: "Action"
+#: ../viewlets/templates/notice_transmit_state.pt:13
+msgid "transmit_action"
+msgstr "Action"
+
+#. Default: "When"
+#: ../viewlets/templates/notice_transmit_state.pt:14
+msgid "transmit_date"
+msgstr "Le"
+
+#. Default: "User"
+#: ../viewlets/templates/notice_transmit_state.pt:15
+msgid "transmit_user"
+msgstr "Par"
+
 msgid "uniquelicence_urbanconfig_title"
 msgstr "Paramètres des permis uniques"
 

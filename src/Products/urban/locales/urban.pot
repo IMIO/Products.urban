@@ -2637,6 +2637,21 @@ msgstr ""
 msgid "transfer_ticket"
 msgstr ""
 
+#. Default: "Action"
+#: ../viewlets/templates/notice_transmit_state.pt:13
+msgid "transmit_action"
+msgstr ""
+
+#. Default: "When"
+#: ../viewlets/templates/notice_transmit_state.pt:14
+msgid "transmit_date"
+msgstr ""
+
+#. Default: "User"
+#: ../viewlets/templates/notice_transmit_state.pt:15
+msgid "transmit_user"
+msgstr ""
+
 msgid "uniquelicence_urbanconfig_title"
 msgstr ""
 
