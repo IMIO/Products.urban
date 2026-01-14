@@ -1035,7 +1035,6 @@ class UrbanEvent(OrderedBaseFolder, BrowserDefaultMixin):
         return 0
 
     def get_all_rules_for_this_event(self):
-        # TODO: Add condition depending the event type of rules
         portal = api.portal.get()
         assignable = IRuleAssignmentManager(portal)
         storage = getUtility(IRuleStorage)
