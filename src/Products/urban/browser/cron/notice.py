@@ -4,7 +4,6 @@ from DateTime import DateTime
 from Products.Archetypes.event import ObjectInitializedEvent
 from Products.Five import BrowserView
 from Products.urban import UrbanMessage as _
-from Products.urban.browser.cron.transitions import EVENT_TYPE_TO_TRANSITION
 from Products.urban.services import notice
 from datetime import datetime
 from plone import api
@@ -183,26 +182,26 @@ class ImportFromNoticeView(BrowserView):
         detailed_notification = self.notice_service.get_notification(
             notice_id,
         )
+
         if detailed_notification.notice_type == "TRANSFERT_DOSSIER":
             self._transfert_dossier(detailed_notification)
-        elif detailed_notification.notice_type == "NOTIF_COMPLETUDE1_INCOMPLET_COMMUNE":
+        elif detailed_notification.notice_type in (
+                "NOTIF_COMPLETUDE1_INCOMPLET_COMMUNE",
+                "NOTIF_COMPLETUDE1_NON_RECEVABLE_COMMUNE",
+        ):
             self.process_incomplete_folder_notification(detailed_notification)
+        elif detailed_notification.notice_type in (
+            "NOTIF_COMPLETUDE1_IRRECEVABLE_COMMUNE",
+            "NOTIF_COMPLETUDE2_IRRECEVABLE_COMMUNE",
+            "NOTIF_COMPLETUDE2_NON_RECEVABLE_COMMUNE",
+        ):
+            self.process_inadmissible_folder_notification(detailed_notification)
         elif detailed_notification.notice_type in (
             "DEMANDE_EP",
             "DEMANDE_EP_DOSSIER_PRECEDENT",
             "DEMANDE_EP_EXTRA",
         ):
             self._demande_ep(detailed_notification)
-        elif detailed_notification.notice_type == "NOTIF_COMPLETUDE2_NON_RECEVABLE_COMMUNE":
-            self.process_not_admissible_folder_notification_second_tour(
-                detailed_notification
-            )
-        elif detailed_notification.notice_type == "NOTIF_COMPLETUDE2_IRRECEVABLE_COMMUNE":
-            self.process_inadmissible_folder_notification(detailed_notification)
-        elif detailed_notification.notice_type == "NOTIF_COMPLETUDE1_NON_RECEVABLE_COMMUNE":
-            self.process_not_admissible_folder_notification_first_tour(
-                detailed_notification
-            )
         elif detailed_notification.notice_type == "NOTIFICATION_PROROGATION_COMMUNE":
             self.process_extension_of_deadline_notification(detailed_notification)
         else:
@@ -260,68 +259,50 @@ class ImportFromNoticeView(BrowserView):
 
         transaction.commit()  # Useful in case of an error
 
-    def update_license(self, license, detailed_notification, event_type=None):
-        if not event_type:
-            return
-
-        event_configs = detailed_notification.event_configs
-        # Normalizing event_type to list
-        if isinstance(event_type, (list, tuple)):
-            event_types = event_type
-        else:
-            event_types = [event_type]
-        configs = []
-        for etype in event_types:
-            event_config = event_configs.get(etype)
-            if event_config:
-                configs.append((etype, event_config))
-        if not configs:
-            return
-        with api.env.adopt_roles(["Manager"]):
-            for etype, event_config in configs:
-                event = license.createUrbanEvent(event_config)
-                event_date = DateTime(str(detailed_notification.send_date))
-                event.setEventDate(event_date)
-                api.content.transition(event, "close")
-                transition = EVENT_TYPE_TO_TRANSITION.get(etype)
-                if transition:
-                    api.content.transition(license, transition)
-
     def process_incomplete_folder_notification(self, detailed_notification):
-        license = detailed_notification.licence
-        self.update_license(
-            license, detailed_notification, event_type="dossier-incomplet"
-        )
-        transaction.commit()
-
-    def process_not_admissible_folder_notification_second_tour(
-        self, detailed_notification
-    ):
         licence = detailed_notification.licence
-        self.update_license(
-            licence, detailed_notification, event_type="dossier-irrecevable"
+
+        event_config_incomplete = detailed_notification.event_config(
+            "Products.urban.interfaces.IMissingPartEvent"
         )
+        event = licence.createUrbanEvent(event_config_incomplete)
+        event_date = DateTime(str(detailed_notification.send_date))
+        event.setEventDate(event_date)
+        api.content.transition(event, "close")
+
+        if api.content.get_state(licence) == "deposit":
+            api.content.transition(licence, "isincomplete")
         transaction.commit()
 
     def process_inadmissible_folder_notification(self, detailed_notification):
-        license = detailed_notification.licence
-        self.update_license(
-            license, detailed_notification, event_type="dossier-irrecevable"
-        )
-        transaction.commit()
-
-    def process_not_admissible_folder_notification_first_tour(
-        self, detailed_notification
-    ):
         licence = detailed_notification.licence
-        self.update_licence(
-            licence, detailed_notification, event_type="dossier-incomplet"
+
+        event_config_refused_incompleteness = detailed_notification.event_config(
+            "Products.urban.interfaces.IRefusedIncompletenessEvent"
         )
+        event = licence.createUrbanEvent(event_config_refused_incompleteness)
+        event_date = DateTime(str(detailed_notification.send_date))
+        event.setEventDate(event_date)
+        api.content.transition(event, "close")
+
+        api.content.transition(licence, "isinacceptable")
+
         transaction.commit()
 
     def process_extension_of_deadline_notification(self, detailed_notification):
-        license = detailed_notification.licence
-        license.getField('prorogation').set(license, True)
-        license.reindexObject()
-        self.update_license(license, detailed_notification, event_type="prorogation-30-jours")
-        notify(ObjectModifiedEvent(license))
+        licence = detailed_notification.licence
+
+        # set prorogation field (if it's activated)
+        if licence.attributeIsUsed("prorogation"):
+            licence.getField("prorogation").set(licence, True)
+            notify(ObjectModifiedEvent(licence))
+            licence.reindexObject()
+
+        event_config_prorogation = detailed_notification.event_config(
+            "Products.urban.interfaces.IProrogationEvent"
+        )
+        event = licence.createUrbanEvent(event_config_prorogation)
+        event_date = DateTime(str(detailed_notification.send_date))
+        event.setEventDate(event_date)
+        api.content.transition(event, "close")
+        transaction.commit()
