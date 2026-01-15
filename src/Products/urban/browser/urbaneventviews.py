@@ -691,7 +691,7 @@ class ImportRecipientListingForm(form.Form):
 def handle_boolean_value(value):
     if value.lower() in ["vrai", "oui"] or value is True:
         return True
-    if value.lower() in ["Faux", "non", ""] or value is False:
+    if value.lower() in ["faux", "non", ""] or value is False:
         return False
     raise ValueError(value)
 
