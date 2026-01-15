@@ -17,7 +17,9 @@ def add_building_procedure(context):
     setup_tool.runImportStepFromProfile("profile-Products.urban:preinstall", "workflow")
     setup_tool.runImportStepFromProfile("profile-Products.urban:urbantypes", "typeinfo")
 
-    add_new_urban_licence_type("Housing")
+    result = add_new_urban_licence_type("Housing")
+    if not result:
+        return
 
     # Add vocabularies
     portal_urban = api.portal.get_tool("portal_urban")
