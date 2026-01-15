@@ -226,15 +226,8 @@
                         action python: context.absolute_url() + '/createObject';
                       "
                       i18n:domain="urban"
+                      class="contact-icon"
                 >
-                  <img src="#"
-                       title="#"
-                       tal:attributes="
-                         src python: ctype.getIconExprObject();
-                         title ctype/description;
-                       "
-                       i18n:attributes="title"
-                  />
                   <input name="type_name"
                          type="hidden"
                          value="#"

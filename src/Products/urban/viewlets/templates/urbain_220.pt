@@ -28,16 +28,11 @@
       <li tal:repeat="infos view/get_links_info">
         <a href="#"
            style="cursor: pointer"
+           class="xml-icon"
            tal:attributes="
              onclick string:event.preventDefault();;javascript:generatePodDocument('${infos/template_uid}','${infos/output_format}', this);
            "
         >
-          <img class="svg-icon"
-               src="#"
-               tal:attributes="
-                 src string:${view/portal_url}/${infos/output_format}.svg;
-               "
-          />
           <span tal:replace="infos/title">Template title</span>
         </a>
       </li>
