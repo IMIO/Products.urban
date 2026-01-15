@@ -159,7 +159,15 @@ msgstr ""
 msgid "An opinion to ask condition makes the rule apply only when one of the Opinion to ask selected correspond to the one of the context."
 msgstr ""
 
-#: ../contentrules/configure.zcml:99
+#: ../services/notice.py:134
+msgid "An unexcepted error occured"
+msgstr ""
+
+#: ../services/notice.py:174
+msgid "An unexcepted error occured, please try again"
+msgstr ""
+
+#: ../contentrules/configure.zcml:112
 msgid "Apply only when one of the Opinion to ask selected corresponds to the one of the context"
 msgstr ""
 
@@ -257,7 +265,11 @@ msgstr ""
 msgid "Check parcels"
 msgstr ""
 
-#: ../widget/historizereferencewidget.py:97
+#: ../browser/notice_forms.py:161
+msgid "College opinion"
+msgstr ""
+
+#: ../widget/historizereferencewidget.py:96
 msgid "Comment - {0}"
 msgstr ""
 
@@ -409,10 +421,6 @@ msgstr ""
 msgid "Field"
 msgstr ""
 
-#: ../profiles/default/actions.xml
-msgid "Finalize inquiry without opinion"
-msgstr ""
-
 #: ../contentrules/stringinterp.py:17
 msgid "Folder Manager E-mail"
 msgstr ""
@@ -447,7 +455,15 @@ msgstr ""
 msgid "History saved"
 msgstr ""
 
-#: ../interfaces.py:385
+#: ../browser/notice_forms.py:63
+msgid "I will create a college opinion"
+msgstr ""
+
+#: ../browser/notice_forms.py:67
+msgid "I will not send a college opinion and I am finalizing the response to the SPW now"
+msgstr ""
+
+#: ../interfaces.py:397
 msgid "IAcknowledgment type marker interface"
 msgstr ""
 
@@ -833,6 +849,10 @@ msgstr ""
 msgid "Planned mailings"
 msgstr ""
 
+#: ../browser/notice_forms.py:57
+msgid "Preliminary Opinion"
+msgstr ""
+
 msgid "PreliminaryNotice"
 msgstr ""
 
@@ -1008,12 +1028,7 @@ msgstr ""
 msgid "The inquiry is final."
 msgstr ""
 
-#: ../browser/urbaneventviews.py:67
-#: ../browser/urbaneventviews.py:767
-msgid "The folder transfer to DPA is done."
-msgstr ""
-
-#: ../browser/urbaneventviews.py:1487
+#: ../browser/notice_forms.py:240
 msgid "The opinion transfer is done."
 msgstr ""
 
@@ -1029,6 +1044,10 @@ msgstr ""
 msgid "The transfer of dates is done."
 msgstr ""
 
+#: ../browser/urbaneventviews.py:1598
+msgid "The transfer of decision display dates is done."
+msgstr ""
+
 #: ../browser/urbaneventviews.py:998
 msgid "There are parcel owners without any address found! Desactivate them!"
 msgstr ""
@@ -1037,7 +1056,11 @@ msgstr ""
 msgid "This UrbanEventInquiry is not linked to an existing Inquiry !  Define a new inquiry on the licence !"
 msgstr ""
 
-#: ../browser/portlets.py:198
+#: ../browser/notice_forms.py:58
+msgid "This action cannot be reversed."
+msgstr ""
+
+#: ../browser/portlets.py:212
 msgid "This portlet lists scheduled licences."
 msgstr ""
 
@@ -1066,6 +1089,15 @@ msgstr ""
 
 #: ../profiles/default/actions.xml
 msgid "Transfer dates to the SPW"
+msgstr ""
+
+#: ../profiles/default/actions.xml
+msgid "Transfer decision display to the SPW"
+msgstr ""
+
+#: ../browser/notice_forms.py:317
+#: ../profiles/default/actions.xml
+msgid "Transfer decision to the SPW"
 msgstr ""
 
 #: ../profiles/default/actions.xml
@@ -2628,6 +2660,12 @@ msgstr ""
 msgid "transfer_dates"
 msgstr ""
 
+msgid "transfer_decision"
+msgstr ""
+
+msgid "transfer_decision_display"
+msgstr ""
+
 msgid "transfer_folder_to_dpa"
 msgstr ""
 
@@ -2635,6 +2673,9 @@ msgid "transfer_opinion"
 msgstr ""
 
 msgid "transfer_ticket"
+msgstr ""
+
+msgid "transfer_ticket_final"
 msgstr ""
 
 #. Default: "Action"

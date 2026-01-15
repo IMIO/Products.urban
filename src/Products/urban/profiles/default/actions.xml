@@ -169,12 +169,23 @@
    </property>
    <property name="visible">True</property>
   </object>
-   <object name="finalize_inquiry_without_opinion" meta_type="CMF Action" i18n:domain="urban">
-   <property name="title" i18n:translate="">Finalize inquiry without opinion</property>
+  <object name="transfer_decision" meta_type="CMF Action" i18n:domain="urban">
+   <property name="title" i18n:translate="">Transfer decision to the SPW</property>
    <property name="description" i18n:translate=""></property>
-   <property name="url_expr">string:$object_url/@@finalize_inquiry_without_opinion</property>
-   <property name="icon_expr">string:$portal_url/copytoclaymants.png</property>
-   <property name="available_expr">context/@@can_finalize_inquiry_without_opinion</property>
+   <property name="url_expr">string:$object_url/@@transfer_decision_form</property>
+   <property name="icon_expr">string:$portal_url/++resource++Products.urban/coq_wallon.png</property>
+   <property name="available_expr">context/@@can_transfer_decision</property>
+   <property name="permissions">
+    <element value="View"/>
+   </property>
+   <property name="visible">True</property>
+  </object>
+  <object name="transfer_decision_display" meta_type="CMF Action" i18n:domain="urban">
+   <property name="title" i18n:translate="">Transfer decision display to the SPW</property>
+   <property name="description" i18n:translate=""></property>
+   <property name="url_expr">string:$object_url/@@transfer_decision_display</property>
+   <property name="icon_expr">string:$portal_url/++resource++Products.urban/coq_wallon.png</property>
+   <property name="available_expr">context/@@can_transfer_decision_display</property>
    <property name="permissions">
     <element value="View"/>
    </property>

@@ -155,7 +155,15 @@ msgstr "La condition de type de permis parent d'un événement entraîne l'appli
 msgid "An opinion to ask condition makes the rule apply only when one of the Opinion to ask selected correspond to the one of the context."
 msgstr "Une condition de demande d'avis fait que la règle s'applique uniquement lorsque l'une des demande d'avis sélectionnés correspond à celle du contexte."
 
-#: ../contentrules/configure.zcml:99
+#: ../services/notice.py:134
+msgid "An unexcepted error occured"
+msgstr "Une erreur s'est produite."
+
+#: ../services/notice.py:174
+msgid "An unexcepted error occured, please try again"
+msgstr "Une erreur s'est produite, veuillez réessayer."
+
+#: ../contentrules/configure.zcml:112
 msgid "Apply only when one of the Opinion to ask selected corresponds to the one of the context"
 msgstr "Appliquer uniquement lorsque l'une des demande d'avis sélectionnée correspond à celle du contexte"
 
@@ -253,7 +261,11 @@ msgstr "Changements enregistrés"
 msgid "Check parcels"
 msgstr "Vérifier les parcelles"
 
-#: ../widget/historizereferencewidget.py:97
+#: ../browser/notice_forms.py:161
+msgid "College opinion"
+msgstr "Avis collège"
+
+#: ../widget/historizereferencewidget.py:96
 msgid "Comment - {0}"
 msgstr "Commentaire - {0}"
 
@@ -405,10 +417,6 @@ msgstr "Notifications en erreur"
 msgid "Field"
 msgstr "Champ"
 
-#: ../profiles/default/actions.xml
-msgid "Finalize inquiry without opinion"
-msgstr "Finaliser sans avis préalable du collège"
-
 #: ../contentrules/stringinterp.py:17
 msgid "Folder Manager E-mail"
 msgstr "L'e-mail de l'agent traitant"
@@ -438,6 +446,14 @@ msgstr "Historique de la parcelle et dossiers liés"
 #: ../widget/historizereferencewidget.py:136
 msgid "History saved"
 msgstr "Historique sauvegardé"
+
+#: ../browser/notice_forms.py:63
+msgid "I will create a college opinion"
+msgstr "Je créerai une demande d'avis préalable du Collège"
+
+#: ../browser/notice_forms.py:67
+msgid "I will not send a college opinion and I am finalizing the response to the SPW now"
+msgstr "Je ne créerai pas de demande d'avis préalable du Collège, et je finalise la réponse vers le SPW maintenant"
 
 #. Default: "Acknowledgement"
 #: ../interfaces.py:385
@@ -840,6 +856,10 @@ msgstr "Importations de demandeurs prévues"
 msgid "Planned mailings"
 msgstr "Envois de mail prévus"
 
+#: ../browser/notice_forms.py:57
+msgid "Preliminary Opinion"
+msgstr "Demande d'avis préalable"
+
 msgid "PreliminaryNotice"
 msgstr "Demande d'avis préalable"
 
@@ -1011,16 +1031,7 @@ msgstr "Le fichier importé (${name}) n'a pas pu être lu correctement. Veuillez
 msgid "The imported file (${name}) doesn't appear to be a CSV file."
 msgstr "Le fichier importé (${name}) ne semble pas être un fichier CSV."
 
-#: ../browser/urbaneventviews.py:1502
-msgid "The inquiry is final."
-msgstr "L'enquête est finalisée sur NOTICe."
-
-#: ../browser/urbaneventviews.py:67
-#: ../browser/urbaneventviews.py:767
-msgid "The folder transfer to DPA is done."
-msgstr "Le transfert vers le DPA est terminé."
-
-#: ../browser/urbaneventviews.py:43
+#: ../browser/urbaneventviews.py:82
 msgid "The mailings will be ready tomorrow!"
 msgstr "Le publipostage a bien été enregistré et sera éxécuté cette nuit"
 
@@ -1040,6 +1051,10 @@ msgstr "L'envoi du PV est terminé."
 msgid "The transfer of dates is done."
 msgstr "L'envoi des dates est terminé."
 
+#: ../browser/urbaneventviews.py:1598
+msgid "The transfer of decision display dates is done."
+msgstr "L'envoi des dates d'affichage est terminé."
+
 #: ../browser/urbaneventviews.py:998
 msgid "There are parcel owners without any address found! Desactivate them!"
 msgstr "Il y a des propriétaires de parcelle sans adresse trouvée ! Désactivez-les !"
@@ -1048,7 +1063,11 @@ msgstr "Il y a des propriétaires de parcelle sans adresse trouvée ! Désactive
 msgid "This UrbanEventInquiry is not linked to an existing Inquiry !  Define a new inquiry on the licence !"
 msgstr "Cette UrbanEventInquiry n'est pas liée à une demande existante ! Définissez une nouvelle demande sur la licence !"
 
-#: ../browser/portlets.py:198
+#: ../browser/notice_forms.py:58
+msgid "This action cannot be reversed."
+msgstr "Cette action est irréversible"
+
+#: ../browser/portlets.py:212
 msgid "This portlet lists scheduled licences."
 msgstr "Ce portlet liste les licences planifiées."
 
@@ -1080,12 +1099,21 @@ msgid "Transfer dates to the SPW"
 msgstr "Envoyer les dates d'enquête vers le SPW"
 
 #: ../profiles/default/actions.xml
+msgid "Transfer decision display to the SPW"
+msgstr "Envoyer les dates d'affichage vers le SPW"
+
+#: ../browser/notice_forms.py:317
+#: ../profiles/default/actions.xml
+msgid "Transfer decision to the SPW"
+msgstr "Envoyer la décision vers le SPW"
+
+#: ../profiles/default/actions.xml
 msgid "Transfer folder to DPA"
 msgstr "Envoyer le dossier vers le SPW"
 
 #: ../profiles/default/actions.xml
 msgid "Transfer opinion to the SPW"
-msgstr "Envoyer les dates d'affichage vers le SPW"
+msgstr "Envoyer l'avis préalable du Collège vers le SPW"
 
 #: ../profiles/default/actions.xml
 msgid "Transfer ticket to the SPW"
@@ -2647,16 +2675,25 @@ msgid "trails_folder_title"
 msgstr "Liste des sentiers et chemins vicinaux de la commune"
 
 msgid "transfer_dates"
-msgstr "Envoyer les dates"
+msgstr "Envoyer les dates d'enquête vers le SPW"
+
+msgid "transfer_decision"
+msgstr "Envoyer la décision vers le SPW"
+
+msgid "transfer_decision_display"
+msgstr "Envoyer les dates d'affichage vers le SPW"
 
 msgid "transfer_folder_to_dpa"
-msgstr "Transfert du dossier vers le DPA"
+msgstr "Envoyer le dossier vers le SPW"
 
 msgid "transfer_opinion"
-msgstr "Envoyer l'avis"
+msgstr "Envoyer l'avis préalable du Collège vers le SPW"
 
 msgid "transfer_ticket"
-msgstr "Envoyer le PV"
+msgstr "Envoyer le PV et les réclamations vers le SPW"
+
+msgid "transfer_ticket_final"
+msgstr "Envoyer le PV et les réclamations vers le SPW (pas d'avis préalable du Collège)"
 
 #. Default: "Action"
 #: ../viewlets/templates/notice_transmit_state.pt:13

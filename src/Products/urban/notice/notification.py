@@ -33,6 +33,7 @@ class NoticeNotification(NoticeElement):
         "documents",
         "parcels",
         "parties",
+        "decision_code",
     )
 
     def __init__(self, service, json):
@@ -137,6 +138,12 @@ class NoticeNotification(NoticeElement):
             "DEMANDE_EP_DOSSIER_PRECEDENT": "ns3:PublicSurveyRequest",
             "DEMANDE_EP_EXTRA": "ns3:PublicSurveyRequest",
             "NOTIFICATION_PROROGATION_COMMUNE": "ns3:TwiceDefaultRequest",
+            "NOTIFICATION_RS_COMMUNE": "ns3:SummaryReportRequest",
+            "NOTIFICATION_RS_COMMUNE_RETARD": "ns3:SummaryReportRequest",
+            "NOTIFICATION_RS_COMMUNE_RETARD_SFD": "ns3:SummaryReportRequest",
+            "NOTIFICATION_PAS_ENVOI_RS": "ns3:SummaryReportRequest",
+            "NOTIFICATION_PAS_ENVOI_RS_SFD": "ns3:SummaryReportRequest",
+            "NOTIFICATION_DECISION_COMMUNE": "ns3:DecisionRequest",
         }
         return specific.get(self.notice_type)
 
@@ -287,3 +294,10 @@ class NoticeNotification(NoticeElement):
     def workLocations(self):
         """Initialize workLocations"""
         return []
+
+    @property
+    def decision_code(self):
+        """Return decision code from a DecisionRequest"""
+        return self._get_data(
+            "specific", self._specific_code, "ns3:decisionCode", "code"
+        )

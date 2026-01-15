@@ -181,6 +181,56 @@ class ImportFromNoticeView(BrowserView):
 
         licence.set_notice_id("DEMANDE_EP", detailed_notification.noticeId)
 
+    def _rapport_synthese(self, detailed_notification):
+        licence = detailed_notification.licence
+        if not licence:
+            return
+
+
+        event_config = detailed_notification.event_config(
+            "Products.urban.interfaces.IDecisionProjectFromSPWEvent"
+        )
+        event = licence.createUrbanEvent(event_config)
+        event_date = DateTime(str(detailed_notification.send_date))
+        event.setEventDate(event_date)
+        api.content.transition(event, "close")
+
+        for document in detailed_notification.documents:
+            api.content.create(container=event, **document.serialize())
+
+        licence.set_notice_id("NOTIFICATION_RS", detailed_notification.noticeId)
+
+    def _decision_spw(self, detailed_notification):
+        licence = detailed_notification.licence
+        if not licence:
+            return
+
+        event_config = detailed_notification.event_config(
+            "Products.urban.interfaces.IWalloonRegionDecisionEvent"
+        )
+        event = licence.createUrbanEvent(event_config)
+        event_date = DateTime(str(detailed_notification.send_date))
+        event.setEventDate(event_date)
+
+        # set decision (octroi / refus)
+        mapping_decision_terms = {"OCTROI": "favorable", "REFUS": "defavorable"}
+        urban_decision_term = mapping_decision_terms.get(
+            detailed_notification.decision_code
+        )
+        if urban_decision_term:
+            event.setDecision(urban_decision_term)
+        else:
+            event.setDescription(
+                u"Décision: {}".format(detailed_notification.decision_code)
+            )
+
+        api.content.transition(event, "close")
+
+        for document in detailed_notification.documents:
+            api.content.create(container=event, **document.serialize())
+
+        licence.set_notice_id("NOTIFICATION_DECISION", detailed_notification.noticeId)
+
     def _handle_notification(self, notice_id):
         detailed_notification = self.notice_service.get_notification(
             notice_id,
@@ -207,6 +257,16 @@ class ImportFromNoticeView(BrowserView):
             self._demande_ep(detailed_notification)
         elif detailed_notification.notice_type == "NOTIFICATION_PROROGATION_COMMUNE":
             self.process_extension_of_deadline_notification(detailed_notification)
+        elif detailed_notification.notice_type in (
+                "NOTIFICATION_RS_COMMUNE",
+                "NOTIFICATION_RS_COMMUNE_RETARD",
+                "NOTIFICATION_RS_COMMUNE_RETARD_SFD",
+                "NOTIFICATION_PAS_ENVOI_RS",
+                "NOTIFICATION_PAS_ENVOI_RS_SFD",
+        ):
+            self._rapport_synthese(detailed_notification)
+        elif detailed_notification.notice_type == "NOTIFICATION_DECISION_COMMUNE":
+            self._decision_spw(detailed_notification)
         else:
             raise NotImplementedError(
                 "No implementation found for notification type: %s"
@@ -259,6 +319,8 @@ class ImportFromNoticeView(BrowserView):
         event_date = DateTime(str(detailed_notification.send_date))
         event.setEventDate(event_date)
         api.content.transition(event, "close")
+        # Reindex licence
+        licence.reindexObject()
 
         transaction.commit()  # Useful in case of an error
 
