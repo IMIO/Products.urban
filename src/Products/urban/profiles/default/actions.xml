@@ -137,7 +137,7 @@
    <property name="visible">True</property>
   </object>
   <object name="transfer_dates" meta_type="CMF Action" i18n:domain="urban">
-   <property name="title" i18n:translate="">Transfer dates</property>
+   <property name="title" i18n:translate="">Transfer dates to the SPW</property>
    <property name="description" i18n:translate=""></property>
    <property name="url_expr">string:$object_url/@@transfer_dates</property>
    <property name="icon_expr">string:$portal_url/copytoclaymants.png</property>
@@ -148,7 +148,7 @@
    <property name="visible">True</property>
   </object>
   <object name="transfer_ticket" meta_type="CMF Action" i18n:domain="urban">
-   <property name="title" i18n:translate="">Transfer ticket</property>
+   <property name="title" i18n:translate="">Transfer ticket to the SPW</property>
    <property name="description" i18n:translate=""></property>
    <property name="url_expr">string:$object_url/@@transfer_ticket</property>
    <property name="icon_expr">string:$portal_url/copytoclaymants.png</property>
@@ -159,7 +159,7 @@
    <property name="visible">True</property>
   </object>
    <object name="transfer_opinion" meta_type="CMF Action" i18n:domain="urban">
-   <property name="title" i18n:translate="">Transfer opinion</property>
+   <property name="title" i18n:translate="">Transfer opinion to the SPW</property>
    <property name="description" i18n:translate=""></property>
    <property name="url_expr">string:$object_url/@@transfer_opinion</property>
    <property name="icon_expr">string:$portal_url/copytoclaymants.png</property>
