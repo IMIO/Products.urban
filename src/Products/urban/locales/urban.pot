@@ -1065,7 +1065,7 @@ msgid "To CWATUPE procedures"
 msgstr ""
 
 #: ../profiles/default/actions.xml
-msgid "Transfer dates"
+msgid "Transfer dates to the SPW"
 msgstr ""
 
 #: ../profiles/default/actions.xml
@@ -1073,11 +1073,11 @@ msgid "Transfer folder to DPA"
 msgstr ""
 
 #: ../profiles/default/actions.xml
-msgid "Transfer opinion"
+msgid "Transfer opinion to the SPW"
 msgstr ""
 
 #: ../profiles/default/actions.xml
-msgid "Transfer ticket"
+msgid "Transfer ticket to the SPW"
 msgstr ""
 
 #: ../browser/licence/templates/licenceview.pt:27
