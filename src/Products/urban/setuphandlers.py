@@ -27,6 +27,7 @@ from Products.urban.config import URBAN_TYPES
 from Products.urban.config import URBAN_TYPES_ACRONYM
 from Products.urban.exportimport import updateAllUrbanTemplates
 from Products.urban.interfaces import IContactFolder
+from Products.urban.interfaces import ILicenceConfig
 from Products.urban.interfaces import ILicenceContainer
 from Products.urban.interfaces import IUrbanConfigurationFolder
 from Products.urban.profiles.extra.config_default_values import default_values
@@ -1851,12 +1852,20 @@ def activateAnnouncementArticlesText(context):
                 )
 
 
+def check_if_type_already_install(urban_type):
+    portal_urban = api.portal.get_tool("portal_urban")
+    return urban_type.lower() in portal_urban and ILicenceConfig.providedBy(portal_urban[urban_type.lower()])
+
+
 def add_new_urban_licence_type(urban_type):
+    if check_if_type_already_install(urban_type):
+        return False
     add_aplication_folder(urban_type)
     add_imio_dashboard(urban_type)
     config_folder = add_urban_config_folder(urban_type)
     add_schedule(config_folder, urban_type)
     add_vocabularies(config_folder, urban_type)
+    return True
 
 
 def add_aplication_folder(urban_type, urban_folder=None):
