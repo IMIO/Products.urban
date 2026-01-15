@@ -378,7 +378,7 @@ class UrbanEventInquiry(OrderedBaseFolder, UrbanEvent, BrowserDefaultMixin):
         )
         reception_date_str = result["body"]["result"]["receptionDate"]
         reception_date = datetime.datetime.strptime(reception_date_str[:10], "%Y-%m-%d")
-        self.store_transmit_date("transfer_ticket", reception_date)
+        self.store_transmit_date("transfer_ticket_final", reception_date)
 
         return result
 

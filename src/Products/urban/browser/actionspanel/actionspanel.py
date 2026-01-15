@@ -43,7 +43,8 @@ class EventActionsPanelView(ActionsPanelView):
             "transfer_dates",
             "transfer_ticket",
             "transfer_opinion",
-            "finalize_inquiry_without_opinion",
+            "transfer_decision",
+            "transfer_decision_display",
         )
 
 

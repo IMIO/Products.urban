@@ -1533,3 +1533,12 @@ msgstr ""
 
 msgid "transfer_opinion"
 msgstr ""
+
+msgid "transfer_ticket_final"
+msgstr ""
+
+msgid "transfer_decision"
+msgstr ""
+
+msgid "transfer_decision_display"
+msgstr ""

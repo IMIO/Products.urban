@@ -34,7 +34,10 @@ from Products.urban import UrbanMessage as _
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.config import *
 from Products.urban.interfaces import IUrbanDoc
+from Products.urban.notice import NoticeOutgoingDecisionNotification
 from Products.urban.notice import NoticeOutgoingPublicSurveyOpinionNotification
+from Products.urban.notice import NoticeOutgoingSummaryReportDecisionNotification
+from Products.urban.notice import NoticeOutgoingSummaryReportDatesNotification
 from Products.urban.services.notice import WebserviceNotice
 from Products.urban.utils import is_attachment
 from Products.urban.utils import setOptionalAttributes
@@ -1000,16 +1003,71 @@ class UrbanEvent(OrderedBaseFolder, BrowserDefaultMixin):
         }
         annotations[key] = dates
 
-    def transfer_opinion(self):
-        notification = NoticeOutgoingPublicSurveyOpinionNotification(self)
+    def transfer_opinion(self, college_opinion):
+        notification = NoticeOutgoingPublicSurveyOpinionNotification(self, college_opinion)
         service = WebserviceNotice()
         result = service.post_notification_response(
             notification.notice_id("DEMANDE_EP"),
             notification.serialize(),
         )
-        reception_date_str = result["body"]["result"]["receptionDate"]
+
+        reception_date_str = result["body"]["result"][
+            "receptionDate"
+        ]  # TODO: handle exception in result (KeyError, no "body")
         reception_date = datetime.datetime.strptime(reception_date_str[:10], "%Y-%m-%d")
         self.store_transmit_date("transfer_opinion", reception_date)
+
+        return result
+
+    def transfer_decision(self, college_opinion):
+
+        # store college opinion for later use (final response, transfer decision display)
+        self._notice_opinion = college_opinion
+
+        notification = NoticeOutgoingSummaryReportDecisionNotification(self)
+        service = WebserviceNotice()
+        result = service.post_notification_response(
+            notification.notice_id("NOTIFICATION_RS"),
+            notification.serialize(),
+        )
+
+        reception_date_str = result["body"]["result"][
+            "receptionDate"
+        ]  # TODO: handle exception in result (KeyError, no "body")
+        reception_date = datetime.datetime.strptime(reception_date_str[:10], "%Y-%m-%d")
+        self.store_transmit_date("transfer_decision", reception_date)
+
+        return result
+
+    def transfer_decision_display(self):
+        licence = self.aq_parent
+
+        if licence.get_notice_id("NOTIFICATION_DECISION"):
+            notification = NoticeOutgoingDecisionNotification(self)
+            service = WebserviceNotice()
+            result = service.post_notification_response(
+                notification.notice_id("NOTIFICATION_DECISION"),
+                notification.serialize(),
+            )
+        elif licence.get_notice_id("NOTIFICATION_RS"):
+            notification = NoticeOutgoingSummaryReportDatesNotification(self)
+            service = WebserviceNotice()
+            result = service.post_notification_response(
+                notification.notice_id("NOTIFICATION_RS"),
+                notification.serialize(),
+            )
+        else:
+            raise ValueError(
+                "No Notice ID found (either RS or DECISION) for licence {}".format(
+                    licence.getReference()
+                )
+            )
+
+        reception_date_str = result["body"]["result"][
+            "receptionDate"
+        ]  # TODO: handle exception in result (KeyError, no "body")
+        reception_date = datetime.datetime.strptime(reception_date_str[:10], "%Y-%m-%d")
+        self.store_transmit_date("transfer_decision_display", reception_date)
 
         return result
 

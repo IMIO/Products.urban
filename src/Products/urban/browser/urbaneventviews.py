@@ -1350,12 +1350,21 @@ class CanTransferDatesView(BrowserView):
         webservice = WebserviceNotice()
         return webservice.is_setup
 
+    @property
+    def no_transmit_yet(self):
+        annotations = interfaces.IAnnotations(self.context)
+        dates = annotations.get("notice_transmit_dates", {})
+        return (
+            "transfer_opinion" not in dates.keys()
+            and "transfer_ticket_final" not in dates.keys()
+        )
+
     def __call__(self):
         return (
             self.is_urban_event_inquiry
             and self.is_transmit_to_spw_event
             and self.is_notice_setup
-            # TODO: and self.no_transmit_yet
+            and self.no_transmit_yet
         )
 
 
@@ -1376,17 +1385,22 @@ class CanTransferTicketView(BrowserView):
         webservice = WebserviceNotice()
         return webservice.is_setup
 
+    @property
+    def no_transmit_yet(self):
+        annotations = interfaces.IAnnotations(self.context)
+        dates = annotations.get("notice_transmit_dates", {})
+        return (
+            "transfer_opinion" not in dates.keys()
+            and "transfer_ticket_final" not in dates.keys()
+        )
+
     def __call__(self):
         return (
                 self.is_urban_event_inquiry
                 and self.is_transmit_to_spw_event
                 and self.is_notice_setup
-                # TODO: and self.no_transmit_yet
+                and self.no_transmit_yet
         )
-
-
-class CanFinalizeInquiryWithoutOpinionView(CanTransferTicketView):
-    """"""
 
 
 class CanTransferOpinionView(BrowserView):
@@ -1417,7 +1431,10 @@ class CanTransferOpinionView(BrowserView):
     def no_transmit_yet(self):
         annotations = interfaces.IAnnotations(self.context)
         dates = annotations.get("notice_transmit_dates", {})
-        return "transfer_opinion" not in dates.keys()
+        return (
+            "transfer_opinion" not in dates.keys()
+            and "transfer_ticket_final" not in dates.keys()
+        )
 
     def __call__(self):
         return (
@@ -1426,6 +1443,122 @@ class CanTransferOpinionView(BrowserView):
                 and self.is_transmit_to_spw_event
                 and self.is_notice_setup
                 and self.no_transmit_yet
+        )
+
+
+class CanTransferDecisionView(BrowserView):
+    @property
+    def is_urban_event_college(self):
+        return self.context.portal_type == "UrbanEventCollege"
+
+    @property
+    def is_college_decision_event(self):
+        event_types = self.context.getUrbaneventtypes().getEventType()
+        return (
+            "Products.urban.interfaces.ITheLicenceEvent" in event_types
+            or "Products.urban.interfaces.ILicenceDeliveryEvent" in event_types
+        )
+
+    @property
+    def is_transmit_to_spw_event(self):
+        return (
+                "Products.urban.interfaces.ITransmitToSPWEvent"
+                in self.context.getUrbaneventtypes().getEventType()
+        )
+
+    @property
+    def is_notice_setup(self):
+        webservice = WebserviceNotice()
+        return webservice.is_setup
+
+    @property
+    def no_transmit_yet(self):
+        annotations = interfaces.IAnnotations(self.context)
+        dates = annotations.get("notice_transmit_dates", {})
+        return "transfer_decision" not in dates.keys()
+
+    def __call__(self):
+        return (
+                self.is_urban_event_college
+                and self.is_college_decision_event
+                and self.is_transmit_to_spw_event
+                and self.is_notice_setup
+                and self.no_transmit_yet
+        )
+
+
+class CanTransferDecisionDisplayView(BrowserView):
+    @property
+    def is_urban_event(self):
+        return self.context.portal_type == "UrbanEvent"
+
+    @property
+    def is_decision_display_event(self):
+        event_types = self.context.getUrbaneventtypes().getEventType()
+        return "Products.urban.interfaces.IDisplayingTheDecisionEvent" in event_types
+
+    @property
+    def is_transmit_to_spw_event(self):
+        return (
+            "Products.urban.interfaces.ITransmitToSPWEvent"
+            in self.context.getUrbaneventtypes().getEventType()
+        )
+
+    @property
+    def is_notice_setup(self):
+        webservice = WebserviceNotice()
+        return webservice.is_setup
+
+    @property
+    def no_transmit_yet(self):
+        annotations = interfaces.IAnnotations(self.context)
+        dates = annotations.get("notice_transmit_dates", {})
+        return "transfer_decision_display" not in dates.keys()
+
+    @property
+    def can_send_decision_display(self):
+        # this action is valid for either a SummaryReportResponse or a DecisionResponse
+
+        licence = self.context.aq_parent
+
+        # look for a DecisionRequest first
+        # (the SPW can override the municipality if they're too slow to respond to a RS notification)
+        spw_decision_event = (
+            licence.getLastWalloonRegionDecisionEvent()
+        )  # created by the notice cron
+        spw_decision_notice_id = licence.get_notice_id("NOTIFICATION_DECISION")
+        if spw_decision_event and spw_decision_notice_id:
+            return True
+
+        # otherwise, look for a SummaryReportRequest
+        decision_project_event = (
+            licence.getLastDecisionProjectFromSPW()
+        )  # created by the notice cron
+        decision_project_notice_id = licence.get_notice_id("NOTIFICATION_RS")
+        if decision_project_event and decision_project_notice_id:
+            # look for a "Décision du collège" event, created by the municipality,
+            # from which a partial response has been sent
+            # (the opinion is stored on the event by the partial response form)
+            for event in licence.getAllEvents():
+                event_types = event.getUrbaneventtypes().getEventType()
+                is_a_college_decision_event = (
+                    "Products.urban.interfaces.ITheLicenceEvent" in event_types
+                    or "Products.urban.interfaces.ILicenceDeliveryEvent" in event_types
+                )
+                event_has_college_opinion_data = getattr(event, "_notice_opinion", None)
+                if is_a_college_decision_event and event_has_college_opinion_data:
+                    return True
+
+        return False
+
+    def __call__(self):
+        return (
+            self.is_urban_event
+            and self.is_decision_display_event
+            and self.is_transmit_to_spw_event
+            and self.is_notice_setup
+            and self.no_transmit_yet
+            and self.can_send_decision_display
         )
 
 
@@ -1454,38 +1587,14 @@ class UrbanEventNoticeActionsView(BrowserView):
             )
         self.request.response.redirect(self.context.absolute_url())
 
-    def transfer_ticket(self):
-        result = self.context.transfer_ticket()
+    def transfer_decision_display(self):
+        result = self.context.transfer_decision_display()
         if result["error"] is True:
             IStatusMessage(self.request).addStatusMessage(
                 result["message"], "error"
             )
         else:
             IStatusMessage(self.request).addStatusMessage(
-                _(u"The ticket transfer is done."), "info"
-            )
-        self.request.response.redirect(self.context.absolute_url())
-
-    def transfer_opinion(self):
-        result = self.context.transfer_opinion()
-        if result["error"] is True:
-            IStatusMessage(self.request).addStatusMessage(
-                result["message"], "error"
-            )
-        else:
-            IStatusMessage(self.request).addStatusMessage(
-                _(u"The opinion transfer is done."), "info"
-            )
-        self.request.response.redirect(self.context.absolute_url())
-
-    def finalize_inquiry_without_opinion(self):
-        result = self.context.finalize_inquiry_without_opinion()
-        if result["error"] is True:
-            IStatusMessage(self.request).addStatusMessage(
-                result["message"], "error"
-            )
-        else:
-            IStatusMessage(self.request).addStatusMessage(
-                _(u"The inquiry is final."), "info"
+                _(u"The transfer of decision display dates is done."), "info"
             )
         self.request.response.redirect(self.context.absolute_url())

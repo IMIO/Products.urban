@@ -1,9 +1,13 @@
 # -*- coding: utf-8 -*-
 
 from Acquisition import aq_parent
-from Products.urban.interfaces import ICollegeOpinionEvent
 from Products.urban.interfaces import IInquiryEvent
+from Products.urban.interfaces import ITheLicenceEvent
 from Products.urban.notice.base import NoticeElement
+
+
+def clean_accents(raw_string):
+    return raw_string.decode("utf8").encode("ascii", "xmlcharrefreplace")
 
 
 class NoticeResponse(NoticeElement):
@@ -55,10 +59,10 @@ class NoticeOutgoingNotification(NoticeResponse):
 
 
 class NoticeOutgoingPublicSurveyNotification(NoticeResponse):
-    def __init__(self, event):
+    def __init__(self, event, college_opinion=None):
         super(NoticeOutgoingPublicSurveyNotification, self).__init__(event)
         self._inquiry_event = self._licence.getLastEvent(IInquiryEvent)
-        self._college_opinion_event = self._licence.getLastEvent(ICollegeOpinionEvent)
+        self._college_opinion = college_opinion
 
     type = "PublicSurveyResponse"
 
@@ -72,15 +76,23 @@ class NoticeOutgoingPublicSurveyNotification(NoticeResponse):
 
     @property
     def _minute(self):
-        return self._inquiry_event.getReportText() if self._inquiry_event else None
+        return (
+            clean_accents(self._inquiry_event.getReportText())
+            if self._inquiry_event
+            else None
+        )
 
     @property
     def _observations(self):
-        return self._inquiry_event.getClaimsText() if self._inquiry_event else None
+        return (
+            clean_accents(self._inquiry_event.getClaimsText())
+            if self._inquiry_event
+            else None
+        )
 
     @property
     def _notice_college(self):
-        return "<p>TEST DATA FOR tns:noticeCollege</p><p><b>BOLD TEXT</b></p>"  # TODO: compose from DELIB data
+        return self._college_opinion
 
     @property
     def _display_start_date(self):
@@ -92,11 +104,15 @@ class NoticeOutgoingPublicSurveyNotification(NoticeResponse):
 
     @property
     def _organisation_start_date(self):
-        return self._inquiry_event.getInvestigationStart() if self._inquiry_event else None
+        return (
+            self._inquiry_event.getInvestigationStart() if self._inquiry_event else None
+        )
 
     @property
     def _organisation_end_date(self):
-        return self._inquiry_event.getInvestigationEnd() if self._inquiry_event else None
+        return (
+            self._inquiry_event.getInvestigationEnd() if self._inquiry_event else None
+        )
 
     @property
     def _suspension_start_date(self):
@@ -122,7 +138,9 @@ class NoticeOutgoingPublicSurveyNotification(NoticeResponse):
         }
 
 
-class NoticeOutgoingPublicSurveyDatesNotification(NoticeOutgoingPublicSurveyNotification):
+class NoticeOutgoingPublicSurveyDatesNotification(
+    NoticeOutgoingPublicSurveyNotification
+):
     state = "PARTIAL"
 
 
@@ -130,14 +148,118 @@ class NoticeOutgoingPublicSurveyPVNotification(NoticeOutgoingPublicSurveyNotific
     state = "PARTIAL"
 
 
-class NoticeOutgoingPublicSurveyOpinionNotification(NoticeOutgoingPublicSurveyNotification):
+class NoticeOutgoingPublicSurveyOpinionNotification(
+    NoticeOutgoingPublicSurveyNotification
+):
     state = "FINAL"
 
 
-class NoticeOutgoingPublicSurveyFinalWithoutOpinionNotification(NoticeOutgoingPublicSurveyNotification):
+class NoticeOutgoingPublicSurveyFinalWithoutOpinionNotification(
+    NoticeOutgoingPublicSurveyNotification
+):
+    state = "FINAL"
+
+
+class NoticeOutgoingSummaryReportNotification(NoticeResponse):
+
+    type = "SummaryReportResponse"
+
+    @property
+    def _reference(self):
+        return self._licence.getReference()
+
+    @property
+    def _caracteristics_comment(self):
+        return None
+
+    @property
+    def _display_decision_start_date(self):
+        return None
+
+    @property
+    def _display_decision_end_date(self):
+        return None
+
+    @property
+    def _decision_event(self):
+        raise NotImplementedError
+
+    @property
+    def _motivation(self):
+        return getattr(self._decision_event, "_notice_opinion", None)
+
+    @property
+    def _decision_date(self):
+        return self._decision_event.getDecisionDate()
+
+    @property
+    def specific(self):
+        return {
+            "not:motivation": self._motivation,
+            "tns:municipalityReference": self._reference,
+            "tns:caracteristicsComment": self._caracteristics_comment,
+            "tns:decisionDate": self._decision_date,
+            "tns:displayDecisionStartDate": self._display_decision_start_date,
+            "tns:displayDecisionEndDate": self._display_decision_end_date,
+        }
+
+
+class NoticeOutgoingSummaryReportDecisionNotification(
+    NoticeOutgoingSummaryReportNotification
+):
+    state = "PARTIAL"
+
+    @property
+    def _decision_event(self):
+        # self.event: ITheLicence or ILicenceDelivery
+        return self.event
+
+
+class NoticeOutgoingSummaryReportDatesNotification(
+    NoticeOutgoingSummaryReportNotification
+):
     state = "FINAL"
 
     @property
-    def _notice_college(self):
+    def _decision_event(self):
+        # self.event: IDisplayingTheDecisionEvent
+        licence = self.event.aq_parent
+        return (
+            licence.getLastEvent(ITheLicenceEvent) or licence.getLastLicenceDelivery()
+        )
+
+
+class NoticeOutgoingDecisionNotification(NoticeResponse):
+
+    type = "DecisionResponse"
+    state = "FINAL"
+
+    @property
+    def _motivation(self):
         return None
 
+    @property
+    def _reference(self):
+        return self._licence.getReference()
+
+    @property
+    def _decision_date(self):
+        return None
+
+    @property
+    def _display_decision_start_date(self):
+        return self.event.getDisplayDate()
+
+    @property
+    def _display_decision_end_date(self):
+        return self.event.getDisplayDateEnd()
+
+    @property
+    def specific(self):
+        return {
+            "not:motivation": self._motivation,
+            "tns:municipalityReference": self._reference,
+            "tns:decisionDate": self._decision_date,
+            "tns:displayDecisionStartDate": self._display_decision_start_date,
+            "tns:displayDecisionEndDate": self._display_decision_end_date,
+        }
