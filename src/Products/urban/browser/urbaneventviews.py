@@ -65,6 +65,7 @@ claimants_csv_fieldnames = [
 EXCEL_HEADER_RECIPIENT = "Titre (sel.),Nom,Prénom,Rue,N° de police,Code postal (num.),Localité,Pays (sel.),N° registre national,CAPAKEY,Nature parcelle,Rue parcelle,N° de police parcelle"
 CARTO_HEADER = '"CAPAKEY";"nature";"datesituation";"proprio"'
 EXCEL_HEADER_CLAIMANT = '"Titre (sel.)","Nom","Prénom","Société","Rue","N° de police","Code postal (num.)","Localité","Pays (sel.)","E-mail","Téléphone","GSM","N° registre national","Type de réclamation","Pétition","Hors délai","Date de réception","Texte de la réclamation","Souhaite une copie de la décision"'
+EXCEL_HEADER_CLAIMANT_WITHOUT_QUOT = "Titre (sel.),Nom,Prénom,Société,Rue,N° de police,Code postal (num.),Localité,Pays (sel.),E-mail,Téléphone,GSM,N° registre national,Type de réclamation,Pétition,Hors délai,Date de réception,Texte de la réclamation,Souhaite une copie de la décision"
 
 
 class UrbanEventView(BrowserView):
@@ -376,8 +377,8 @@ class ImportClaimantListingForm(form.Form):
             u"The imported file (${name}) couldn't be read properly. Please verify its structure and try again.",
             mapping={u"name": csv_file.filename},
         )
-
-        if not csv_file.data.startswith(EXCEL_HEADER_CLAIMANT):
+        
+        if not csv_file.data.startswith(EXCEL_HEADER_CLAIMANT) and not csv_file.data.startswith(EXCEL_HEADER_CLAIMANT_WITHOUT_QUOT):
             return error
 
         try:
@@ -688,9 +689,9 @@ class ImportRecipientListingForm(form.Form):
 
 
 def handle_boolean_value(value):
-    if value == "Vrai" or value is True:
+    if value.lower() in ["vrai", "oui"] or value is True:
         return True
-    if value == "Faux" or value == "" or value is False:
+    if value.lower() in ["faux", "non", ""] or value is False:
         return False
     raise ValueError(value)
 
