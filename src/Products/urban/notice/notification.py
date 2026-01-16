@@ -23,6 +23,7 @@ class NoticeNotification(NoticeElement):
         "send_date",
         "sender",
         "status",
+        "reception_date",
         "notice_type",
         "notification_subtype",
         "notification_type",
@@ -190,6 +191,13 @@ class NoticeNotification(NoticeElement):
                 "cannot find these rubrics: {}".format(" | ".join(missing_rubrics))
             )
         return found_uids
+
+    @property
+    def reception_date(self):
+        """Return the reception date"""
+        raw_date = self._get_data("receptionDate")
+        if raw_date:
+            return datetime.strptime(raw_date[:19], "%Y-%m-%dT%H:%M:%S")
 
     @property
     def send_date(self):

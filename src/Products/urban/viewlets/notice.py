@@ -18,15 +18,19 @@ class NoticeTransmitState(ViewletBase):
             if type(value) is dict:
                 results.append({
                     "label": translate(label, "urban", context=self.request),
-                    "date": value.get("date").strftime("%d/%m/%Y"),
+                    "date": value.get("date"),
                     "user": value.get("user"),
                 })
             else:  # old style; before we also stored the user, "value" was the date
                 results.append({
                     "label": translate(label, "urban", context=self.request),
-                    "date": value.strftime("%d/%m/%Y"),
+                    "date": value,
                     "user": "",
                 })
         return results
+
+    def get_reception_date(self):
+        annotations = IAnnotations(self.context)
+        return annotations.get("notice_reception_date", None)
 
     index = ViewPageTemplateFile("templates/notice_transmit_state.pt")

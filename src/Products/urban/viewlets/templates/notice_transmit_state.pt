@@ -1,7 +1,14 @@
 <metal:noticeTransmitDates define-macro="noticeTransmitDates" i18n:domain="urban">
-  <fieldset>
+  <fieldset tal:define="reception_date view/get_reception_date"
+            tal:condition="reception_date">
+    <legend i18n:translate="">NOTICe reception date</legend>
+    <strong tal:content="python: reception_date.strftime('%d/%m/%Y, %H:%M:%S')"
+    ></strong>
+  </fieldset>
+  <fieldset tal:define="transmits view/get_transmits"
+            tal:condition="transmits">
     <legend i18n:translate="">NOTICe transmits</legend>
-    <div class="clear" tal:define="transmits view/get_transmits">
+    <div class="clear">
       <table class="listing" tal:condition="transmits">
           <thead>
             <th i18n:translate="transmit_action">Action</th>
@@ -11,7 +18,7 @@
           <tbody>
             <tr tal:repeat="transmit transmits">
                 <td tal:content="transmit/label"></td>
-                <td tal:content="transmit/date"></td>
+                <td tal:content="python: transmit['date'].strftime('%d/%m/%Y, %H:%M:%S')"></td>
                 <td tal:content="transmit/user"></td>
             </tr>
           </tbody>

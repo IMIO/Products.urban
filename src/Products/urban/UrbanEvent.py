@@ -998,10 +998,15 @@ class UrbanEvent(OrderedBaseFolder, BrowserDefaultMixin):
         key = "notice_transmit_dates"
         dates = annotations.get(key, OrderedDict())
         dates[event_type] = {
-            "date": date if date else datetime.today().date(),
+            "date": date if date else datetime.datetime.now(),
             "user": api.user.get_current().id,
         }
         annotations[key] = dates
+
+    def store_reception_date(self, date=None):
+        annotations = IAnnotations(self)
+        key = "notice_reception_date"
+        annotations[key] = date
 
     def transfer_opinion(self, college_opinion):
         notification = NoticeOutgoingPublicSurveyOpinionNotification(self, college_opinion)
@@ -1014,7 +1019,7 @@ class UrbanEvent(OrderedBaseFolder, BrowserDefaultMixin):
         reception_date_str = result["body"]["result"][
             "receptionDate"
         ]  # TODO: handle exception in result (KeyError, no "body")
-        reception_date = datetime.datetime.strptime(reception_date_str[:10], "%Y-%m-%d")
+        reception_date = datetime.datetime.strptime(reception_date_str[:19], "%Y-%m-%dT%H:%M:%S")
         self.store_transmit_date("transfer_opinion", reception_date)
 
         return result
@@ -1034,7 +1039,7 @@ class UrbanEvent(OrderedBaseFolder, BrowserDefaultMixin):
         reception_date_str = result["body"]["result"][
             "receptionDate"
         ]  # TODO: handle exception in result (KeyError, no "body")
-        reception_date = datetime.datetime.strptime(reception_date_str[:10], "%Y-%m-%d")
+        reception_date = datetime.datetime.strptime(reception_date_str[:19], "%Y-%m-%dT%H:%M:%S")
         self.store_transmit_date("transfer_decision", reception_date)
 
         return result
@@ -1066,7 +1071,7 @@ class UrbanEvent(OrderedBaseFolder, BrowserDefaultMixin):
         reception_date_str = result["body"]["result"][
             "receptionDate"
         ]  # TODO: handle exception in result (KeyError, no "body")
-        reception_date = datetime.datetime.strptime(reception_date_str[:10], "%Y-%m-%d")
+        reception_date = datetime.datetime.strptime(reception_date_str[:19], "%Y-%m-%dT%H:%M:%S")
         self.store_transmit_date("transfer_decision_display", reception_date)
 
         return result

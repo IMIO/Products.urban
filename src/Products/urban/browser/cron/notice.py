@@ -168,11 +168,11 @@ class ImportFromNoticeView(BrowserView):
         event_config_complete = detailed_notification.event_config(
             "Products.urban.interfaces.IAcknowledgmentEvent"
         )
-        with api.env.adopt_roles(["Manager"]):
-            event = licence.createUrbanEvent(event_config_complete)
-            event_date = DateTime(str(detailed_notification.send_date))
-            event.setEventDate(event_date)
-            api.content.transition(event, "close")
+        event = licence.createUrbanEvent(event_config_complete)
+        event_date = DateTime(str(detailed_notification.send_date))
+        event.setEventDate(event_date)
+        event.store_reception_date(detailed_notification.reception_date)
+        api.content.transition(event, "close")
 
         api.content.transition(licence, "iscomplete")
 
@@ -195,6 +195,7 @@ class ImportFromNoticeView(BrowserView):
         event = licence.createUrbanEvent(event_config)
         event_date = DateTime(str(detailed_notification.send_date))
         event.setEventDate(event_date)
+        event.store_reception_date(detailed_notification.reception_date)
         api.content.transition(event, "close")
 
         for document in detailed_notification.documents:
@@ -215,6 +216,7 @@ class ImportFromNoticeView(BrowserView):
         event = licence.createUrbanEvent(event_config)
         event_date = DateTime(str(detailed_notification.send_date))
         event.setEventDate(event_date)
+        event.store_reception_date(detailed_notification.reception_date)
 
         # set decision (octroi / refus)
         mapping_decision_terms = {"OCTROI": "favorable", "REFUS": "defavorable"}
@@ -324,6 +326,7 @@ class ImportFromNoticeView(BrowserView):
         event = licence.createUrbanEvent(event_config_deposit)
         event_date = DateTime(str(detailed_notification.send_date))
         event.setEventDate(event_date)
+        event.store_reception_date(detailed_notification.reception_date)
         api.content.transition(event, "close")
         # Reindex licence
         licence.reindexObject()
@@ -339,6 +342,7 @@ class ImportFromNoticeView(BrowserView):
         event = licence.createUrbanEvent(event_config_incomplete)
         event_date = DateTime(str(detailed_notification.send_date))
         event.setEventDate(event_date)
+        event.store_reception_date(detailed_notification.reception_date)
         api.content.transition(event, "close")
 
         if api.content.get_state(licence) == "deposit":
@@ -358,6 +362,7 @@ class ImportFromNoticeView(BrowserView):
         event = licence.createUrbanEvent(event_config_refused_incompleteness)
         event_date = DateTime(str(detailed_notification.send_date))
         event.setEventDate(event_date)
+        event.store_reception_date(detailed_notification.reception_date)
         api.content.transition(event, "close")
 
         api.content.transition(licence, "isinacceptable")
@@ -382,6 +387,7 @@ class ImportFromNoticeView(BrowserView):
         event = licence.createUrbanEvent(event_config_prorogation)
         event_date = DateTime(str(detailed_notification.send_date))
         event.setEventDate(event_date)
+        event.store_reception_date(detailed_notification.reception_date)
         api.content.transition(event, "close")
 
         for document in detailed_notification.documents:

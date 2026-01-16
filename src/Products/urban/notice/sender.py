@@ -14,8 +14,8 @@ class NoticeSender(NoticeElement):
 
     @property
     def email(self):
-        return self._get_data("contactMail", "email", "_value_1")
+        return self._get_data("contactMail", "email", 0, "_value_1")
 
     @property
     def phone(self):
-        return self._get_data("contactPhone", "phoneNumber", "_valuel_1")
+        return self._get_data("contactPhone", "phoneNumber", 0, "_value_1")

@@ -777,6 +777,10 @@ msgid "Municipality ID in Notice"
 msgstr "Identifiant de la commune dans NOTICe"
 
 #: ../viewlets/templates/notice_transmit_state.pt:3
+msgid "NOTICe reception date"
+msgstr "Date de réception (NOTICe)"
+
+#: ../viewlets/templates/notice_transmit_state.pt:9
 msgid "NOTICe transmits"
 msgstr "Dates de transmission (NOTICe)"
 
