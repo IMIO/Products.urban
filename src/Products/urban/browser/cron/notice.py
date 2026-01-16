@@ -181,6 +181,8 @@ class ImportFromNoticeView(BrowserView):
 
         licence.set_notice_id("DEMANDE_EP", detailed_notification.noticeId)
 
+        transaction.commit()
+
     def _rapport_synthese(self, detailed_notification):
         licence = detailed_notification.licence
         if not licence:
@@ -199,6 +201,8 @@ class ImportFromNoticeView(BrowserView):
             api.content.create(container=event, **document.serialize())
 
         licence.set_notice_id("NOTIFICATION_RS", detailed_notification.noticeId)
+
+        transaction.commit()
 
     def _decision_spw(self, detailed_notification):
         licence = detailed_notification.licence
@@ -230,6 +234,8 @@ class ImportFromNoticeView(BrowserView):
             api.content.create(container=event, **document.serialize())
 
         licence.set_notice_id("NOTIFICATION_DECISION", detailed_notification.noticeId)
+
+        transaction.commit()
 
     def _handle_notification(self, notice_id):
         detailed_notification = self.notice_service.get_notification(
