@@ -956,7 +956,14 @@ class UrbanEvent(OrderedBaseFolder, BrowserDefaultMixin):
         # !!! Fix to handle file exporting on Event with c.exportimport
         return 0
 
-    def get_all_rules_for_this_event(self):
+    def check_obj_interface(self, obj, interface=None):
+        if obj is None:
+            return False
+        if interface is None:
+            return True
+        return interface is obj
+
+    def get_all_rules_for_this_event(self, interface=None):
         portal = api.portal.get()
         assignable = IRuleAssignmentManager(portal)
         storage = getUtility(IRuleStorage)
@@ -968,6 +975,8 @@ class UrbanEvent(OrderedBaseFolder, BrowserDefaultMixin):
             if rule is None:
                 continue
             if not rule.enabled:
+                continue
+            if not self.check_obj_interface(rule.event, interface):
                 continue
             for condition in rule.conditions:
 

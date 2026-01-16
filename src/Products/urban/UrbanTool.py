@@ -1078,7 +1078,8 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         if not IUrbanEvent.providedBy(context):
             return False
 
-        rules = context.get_all_rules_for_this_event()
+        from Products.urban.send_mail_action.interface import ISendMailAction
+        rules = context.get_all_rules_for_this_event(ISendMailAction)
 
         return len(rules) > 0
 
