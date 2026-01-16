@@ -770,6 +770,10 @@ msgid "Municipality ID in Notice"
 msgstr ""
 
 #: ../viewlets/templates/notice_transmit_state.pt:3
+msgid "NOTICe reception date"
+msgstr ""
+
+#: ../viewlets/templates/notice_transmit_state.pt:9
 msgid "NOTICe transmits"
 msgstr ""
 

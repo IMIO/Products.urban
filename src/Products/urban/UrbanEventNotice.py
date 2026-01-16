@@ -86,7 +86,7 @@ class UrbanEventNotice(UrbanEvent, BrowserDefaultMixin):
             else:
                 return result
         reception_date_str = result["body"]["result"]["receptionDate"]  # TODO: handle exception in result (KeyError, no "body")
-        reception_date = datetime.datetime.strptime(reception_date_str[:10], "%Y-%m-%d")
+        reception_date = datetime.datetime.strptime(reception_date_str[:19], "%Y-%m-%dT%H:%M:%S")
         self.store_transmit_date("transfer_folder_to_dpa", reception_date)
 
         return result

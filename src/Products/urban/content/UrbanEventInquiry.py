@@ -351,7 +351,7 @@ class UrbanEventInquiry(OrderedBaseFolder, UrbanEvent, BrowserDefaultMixin):
             notification.serialize(),
         )
         reception_date_str = result["body"]["result"]["receptionDate"]
-        reception_date = datetime.datetime.strptime(reception_date_str[:10], "%Y-%m-%d")
+        reception_date = datetime.datetime.strptime(reception_date_str[:19], "%Y-%m-%dT%H:%M:%S")
         self.store_transmit_date("transfer_dates", reception_date)
 
         return result
@@ -364,7 +364,7 @@ class UrbanEventInquiry(OrderedBaseFolder, UrbanEvent, BrowserDefaultMixin):
             notification.serialize(),
         )
         reception_date_str = result["body"]["result"]["receptionDate"]
-        reception_date = datetime.datetime.strptime(reception_date_str[:10], "%Y-%m-%d")
+        reception_date = datetime.datetime.strptime(reception_date_str[:19], "%Y-%m-%dT%H:%M:%S")
         self.store_transmit_date("transfer_ticket", reception_date)
 
         return result
@@ -377,7 +377,7 @@ class UrbanEventInquiry(OrderedBaseFolder, UrbanEvent, BrowserDefaultMixin):
             notification.serialize(),
         )
         reception_date_str = result["body"]["result"]["receptionDate"]
-        reception_date = datetime.datetime.strptime(reception_date_str[:10], "%Y-%m-%d")
+        reception_date = datetime.datetime.strptime(reception_date_str[:19], "%Y-%m-%dT%H:%M:%S")
         self.store_transmit_date("transfer_ticket_final", reception_date)
 
         return result
