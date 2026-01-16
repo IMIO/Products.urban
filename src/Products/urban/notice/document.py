@@ -29,7 +29,7 @@ class NoticeDocument(NoticeElement):
 
     @property
     def id(self):
-        return self.filename
+        return self.filename.encode("ascii", errors="ignore")
 
     @property
     def title(self):
@@ -53,9 +53,9 @@ class NoticeDocument(NoticeElement):
         }
         extension = known_extensions.get(self.document_mimetype)
         return (
-            self.title.decode("utf8") + extension
+            self.title + extension
             if extension
-            else self.title.decode("utf8")
+            else self.title
         )
 
     @property
