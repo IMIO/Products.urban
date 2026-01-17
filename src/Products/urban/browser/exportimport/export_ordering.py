@@ -20,7 +20,13 @@ class UrbanConfigExportOrdering(ExportOrdering):
             if ordered is not None:
                 order = ordered.getObjectPosition(obj.getId())
                 if order is not None:
-                    results.append({"uuid": uid, "order": order})
+                    results.append(
+                        {
+                            "uuid": uid,
+                            "order": order,
+                            "path": "/".join(obj.getPhysicalPath()),
+                        }
+                    )
             return
 
         portal = api.portal.get()

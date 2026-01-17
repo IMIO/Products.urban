@@ -40,7 +40,7 @@
   <browser:page
     name="import_urban_config_ordering"
     for="zope.interface.Interface"
-    class="collective.exportimport.import_other.ImportOrdering"
+    class=".import_ordering.UrbanConfigImportOrdering"
     template="templates/import_ordering.pt"
     layer="Products.urban.interfaces.IProductUrbanLayer"
     permission="cmf.ManagePortal"
