@@ -345,7 +345,7 @@ class ConfigImportContent(ImportContent):
 
     def handle_default_value_none(self, item):
         for key in self.default_value_none.get(item["@type"], {}):
-            if item[key] is None:
+            if key not in item or item[key] is None:
                 item[key] = self.default_value_none[item["@type"]][key]
         return item
 
