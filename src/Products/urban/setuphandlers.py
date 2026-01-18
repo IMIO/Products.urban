@@ -33,7 +33,7 @@ from Products.urban.config import URBAN_CFG_DIR
 from Products.urban.config import URBAN_TYPES
 from Products.urban.config import URBAN_TYPES_ACRONYM
 from Products.urban.config import URBANMAP_CFG
-from Products.urban.dashboard.utils import switch_config_folder
+from Products.urban.utils import switch_config_folder
 from Products.urban.exportimport import updateAllUrbanTemplates
 from Products.urban.interfaces import IContactFolder
 from Products.urban.interfaces import ILicenceConfig
@@ -54,6 +54,7 @@ from collective.eeafaceted.collectionwidget.utils import _updateDefaultCollectio
 from datetime import date
 from eea.facetednavigation.layout.interfaces import IFacetedLayout
 from imio.schedule.utils import _set_faceted_view
+from imio.schedule.utils import create_dashboard_collection
 from imio.schedule.utils import interface_to_tuple
 from imio.schedule.utils import set_schedule_view
 from plone import api
@@ -72,7 +73,6 @@ from zope.component.interface import getInterface
 from zope.i18n import translate
 from zope.i18n.interfaces import ITranslationDomain
 from zope.interface import alsoProvides
-from zope.lifecycleevent import ObjectModifiedEvent
 from zope.schema.interfaces import IVocabularyFactory
 
 import logging
@@ -1320,7 +1320,7 @@ def _activate_dashboard_navigation(context, config_path=""):
     context.restrictedTraverse("@@faceted_settings").toggle_left_column()
     IFacetedLayout(context).update_layout("faceted-table-items")
     context.unrestrictedTraverse("@@faceted_exportimport").import_xml(
-        import_file=open(os.path.dirname(__file__) + config_path)
+        import_file=open(config_path)
     )
 
 
@@ -1350,7 +1350,7 @@ def setupSchedule(context):
         schedule_config = getattr(config_folder, "schedule")
         dashboard_collection = getattr(schedule_config, "dashboard_collection", None)
         if not dashboard_collection:
-            event.notify(ObjectModifiedEvent(schedule_config))
+            create_dashboard_collection(schedule_config)
         schedule_config.dashboard_collection.customViewFields = (
             u"sortable_title",
             u"pretty_link",
@@ -1373,11 +1373,11 @@ def setupSchedule(context):
 
             # only apply faceted view if the the folder does not exist to keep
             # custom changes
-            collection_folder = getattr(schedule_folder, folder_id)
-            config_path = "{}/schedule/config/{}.xml".format(
-                os.path.dirname(__file__), folder_id
+            _set_faceted_view(
+                getattr(schedule_folder, folder_id),
+                switch_config_folder("{}.xml".format(folder_id), "schedule/config"),
+                [schedule_config]
             )
-            _set_faceted_view(collection_folder, config_path, [schedule_config])
 
         checkPoint()
 
@@ -1407,10 +1407,11 @@ def setupOpinionsSchedule(context):
         title=u"Configuration d'échéances avis de services",
     )
 
-    config_path = "{}/schedule/config/opinions_schedule.xml".format(
-        os.path.dirname(__file__)
+    set_schedule_view(
+        schedule_folder,
+        switch_config_folder("opinions_schedule.xml", "schedule/config"),
+        schedule_config
     )
-    set_schedule_view(schedule_folder, config_path, schedule_config)
 
 
 def setupTest(context):
@@ -2041,7 +2042,7 @@ def add_imio_dashboard(urban_type, urban_folder=None):
 
     licence_folder = getattr(urban_folder, urban_type.lower() + "s")
     _activate_dashboard_navigation(
-        licence_folder, "/dashboard/config/%ss.xml" % urban_type.lower()
+        licence_folder, switch_config_folder("%ss.xml" % urban_type.lower())
     )
     collection_id = "collection_%s" % urban_type.lower()
     no_deposit = ["PatrimonyCertificate", "Inspection"]
@@ -2158,11 +2159,11 @@ def add_schedule(config_folder, urban_type, schedule_folder=None):
 
         # only apply faceted view if the the folder does not exist to keep
         # custom changes
-        collection_folder = getattr(schedule_folder, folder_id)
-        config_path = "{}/schedule/config/{}.xml".format(
-            os.path.dirname(__file__), folder_id
+        _set_faceted_view(
+            getattr(schedule_folder, folder_id),
+            switch_config_folder("{}.xml".format(folder_id), "schedule/config"),
+            [schedule_config_folder]
         )
-        _set_faceted_view(collection_folder, config_path, [schedule_config_folder])
 
     from Products.urban.profiles.extra.schedule_config import schedule_config
 
