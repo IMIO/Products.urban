@@ -86,14 +86,6 @@ def migrate_PortionOut_to_DX(context):
     disable_schedule()
     portal = api.portal.get()
     portal.portal_properties.site_properties.enable_link_integrity_checks = False
-    result = migrateCustomAT(
-        fields_mapping,
-        src_type="PortionOut",
-        dst_type="Parcel",
-        transaction_size=TRANSACTION_SIZE,
-        full_transaction=True
-    )
-    transaction.commit()
     result = migrateCustomAT_trough_licences(
         fields_mapping,
         src_type="PortionOut",
