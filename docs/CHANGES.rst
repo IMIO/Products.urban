@@ -8,6 +8,31 @@ Changelog
 
 .. towncrier release notes start
 
+2.8.0 (2026-01-18)
+------------------
+
+Bug fixes:
+
+
+- Add an upgrade step to install RoadDecree type
+  [mpeeters]
+  Add check for new type install to avoid double install
+  [jchandelle] (URB-2658)
+- Fix import config and ordering content script
+  [jchandelle] (URBBDC-3142)
+- URBBDC-3204: Fix a performance issue with rendering of actions when `suspend_freeze` is is the transitions
+  [mpeeters] (URBBDC-3204)
+
+
+Internal:
+
+
+- Black & isort
+  [mpeeters] (URBBDC-3142)
+- Make dependency for numpy optional before a replacement
+  [mpeeters] (URBBDC-3257)
+
+
 2.8.0b1 (2025-10-27)
 --------------------
 
