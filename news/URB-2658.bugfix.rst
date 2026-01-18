@@ -1,4 +1,0 @@
-Add an upgrade step to install RoadDecree type
-[mpeeters]
-Add check for new type install to avoid double install
-[jchandelle]
