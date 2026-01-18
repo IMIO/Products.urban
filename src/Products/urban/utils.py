@@ -19,6 +19,7 @@ import pkg_resources
 import random
 import string
 import time
+import os
 
 
 WIDGET_DATE_END_YEAR = datetime.now().year + 25
@@ -386,6 +387,19 @@ def set_default_optional_field(fieldname):
     return updated
 
 
+def switch_config_folder(config_file, base_folder="dashboard/config"):
+    current_path = os.path.dirname(os.path.abspath(__file__))
+    config = os.environ.get("URBAN_DASHBOARD_CONFIGS", "classic")
+    return os.path.normpath(
+        os.path.join(
+            current_path,
+            base_folder,
+            config,
+            str(config_file)
+        )
+    )
+
+  
 def set_eventconfig_optional_field(config_folder, event_portal_type, fieldnames):
     """Set an optional field for all matching event config
     fieldnames parameter must be a list of fieldname"""
