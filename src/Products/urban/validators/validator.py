@@ -100,7 +100,8 @@ class isNotDuplicatedReferenceValidator:
         types_to_check = [
             t
             for t in URBAN_TYPES
-            if getattr(portal_urban, t.lower()).getNumerotationSource() == source
+            if getattr(portal_urban, t.lower(), None)
+            and getattr(portal_urban, t.lower()).getNumerotationSource() == source
         ]
         match = re.match(regex, value)
         if not match:

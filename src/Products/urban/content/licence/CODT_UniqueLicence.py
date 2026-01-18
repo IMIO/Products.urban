@@ -296,13 +296,17 @@ schema = Schema(
 setOptionalAttributes(schema, optional_fields)
 ##/code-section after-local-schema
 
+# Delete this field from EnvironmentBase to be sure that the one in BaseBuildLicence is taken
+EnvironmentBase_schema = getattr(EnvironmentBase, "schema", Schema(())).copy()
+EnvironmentBase_schema.delField("locationTechnicalAdvice")
+
 CODT_UniqueLicence_schema = (
     BaseFolderSchema.copy()
     + getattr(BaseBuildLicence, "schema", Schema(())).copy()
     + getattr(CODT_BaseBuildLicence, "schema", Schema(())).copy()
     + getattr(CODT_UniqueLicenceInquiry, "schema", Schema(())).copy()
     + getattr(GenericLicence, "schema", Schema(())).copy()
-    + getattr(EnvironmentBase, "schema", Schema(())).copy()
+    + EnvironmentBase_schema
     + schema.copy()
 )
 

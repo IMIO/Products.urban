@@ -738,6 +738,20 @@ class IGlobalSuspensionPeriod(Interface):
         title=_(u"Suspension period end date"),
     )
 
+class IMigrationIndex(Interface):
+
+    indexes = schema.Dict(
+        title=u"index migration",
+        key_type=schema.ASCIILine(),
+        value_type=schema.Int(),
+    )
+
+    last_modified = schema.Dict(
+        title=u"last modified migration",
+        key_type=schema.ASCIILine(),
+        value_type=schema.Datetime(),
+    )
+
 
 class IFacetedCollection(Interface):
     """Adapts an object into a faceted collection"""

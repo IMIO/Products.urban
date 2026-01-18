@@ -54,12 +54,57 @@
       />
 
   <gs:upgradeStep
+      title="Reimport typeinfo profil"
+      description=""
+      profile="Products.urban:default"
+      source="1209"
+      destination="1210"
+      handler=".update_300.reimport_typeinfo"
+      />
+
+  <gs:upgradeStep
+      title="Fix parcelling changesDescription field"
+      description=""
+      profile="Products.urban:default"
+      source="1210"
+      destination="1211"
+      handler=".update_300.fix_parcelling_changesDescription_field"
+      />
+
+  <gs:upgradeStep
+      title="Set event config optional fields"
+      description=""
+      profile="Products.urban:default"
+      source="1210"
+      destination="1211"
+      handler=".update_300.set_eventconfig_optional_fields"
+      />
+
+  <gs:upgradeStep
       title="Set additionalReference as an optional field"
       description="Activate additionalReference for all licences types"
       profile="Products.urban:default"
       source="*"
       destination="3000"
       handler=".update_300.set_additional_reference_as_default"
+      />  
+
+  <gs:upgradeStep
+      title="Set select_all_attachments_by_default to false"
+      description=""
+      profile="Products.urban:default"
+      source="3000"
+      destination="3001"
+      handler=".update_300.set_select_all_attachments_by_default_to_false"
+      />  
+
+  <gs:upgradeStep
+      title="Add tags to filter html"
+      description=""
+      profile="Products.urban:default"
+      source="3001"
+      destination="3002"
+      handler=".update_300.add_tags_to_filter_html"
       />
 
 </configure>
