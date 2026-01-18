@@ -95,6 +95,8 @@ class UrbanStatsView(BrowserView):
 
         for brain in brains:
             state = self.map_deposit_and_complete_state_to_in_progress(brain.review_state)
+            if state not in mapped_states:
+                continue
             result[brain.portal_type][state] += 1
             
         self.sumPartialResults(result, total=len(brains))
