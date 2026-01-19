@@ -3913,6 +3913,11 @@ msgstr "Réponse via service interne à la ville"
 msgid "urban_label_istransferoflicence"
 msgstr "Cession de permis"
 
+#. Default: "PartialTransferConcerning"
+#: ../content/licence/EnvironmentBase.py:361
+msgid "urban_label_partialTransferConcerning"
+msgstr "Cession partielle concernant"
+
 #. Default: "Karstconstraints"
 #: ../content/licence/GenericLicence.py:518
 msgid "urban_label_karstConstraints"
@@ -5435,3 +5440,24 @@ msgstr "ans"
 
 msgid "zip_folder_title"
 msgstr "Zone d'initiative privilégiée"
+
+msgid "partial_transfer_building"
+msgstr "Bâtiment(s)"
+
+msgid "partial_transfer_installation"
+msgstr "Installation(s)"
+
+msgid "partial_transfer_deposit_substance"
+msgstr "Dépôt(s) de substances et/ou mélanges"
+
+msgid "partial_transfer_waste_deposit"
+msgstr "Dépôt(s) de déchets"
+
+msgid "partial_transfer_water_discharge"
+msgstr "Rejet(s) d’eaux"
+
+msgid "partial_transfer_deversement"
+msgstr "Déversement(s)"
+
+msgid "partial_transfer_atmospheric_release"
+msgstr "Rejet(s) atmosphérique(s) canalisé(s)" 

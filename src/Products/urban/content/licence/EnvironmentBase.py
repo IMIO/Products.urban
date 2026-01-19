@@ -17,6 +17,7 @@ from AccessControl import ClassSecurityInfo
 from Products.urban.widget.select2widget import MultiSelect2Widget
 from Products.Archetypes.atapi import *
 from zope.interface import implements
+from zope.i18n import translate
 from Products.urban import interfaces
 from Products.urban.content.licence.GenericLicence import GenericLicence
 from Products.urban.content.CODT_UniqueLicenceInquiry import CODT_UniqueLicenceInquiry
@@ -354,6 +355,16 @@ schema = Schema(
             ),
             schemata="urban_description",
         ),
+        LinesField(
+            name="partialTransferConcerning",
+            widget=MultiSelect2Widget(
+                format="checkbox",
+                label=_("urban_label_partialTransferConcerning", default="PartialTransferConcerning"),
+            ),
+            multiValued=True,
+            schemata="urban_description",
+            vocabulary="listpartialTransferConcerning",
+        ),
         BooleanField(
             name="prorogation",
             default=False,
@@ -436,7 +447,24 @@ class EnvironmentBase(
             ("near", "location_near"),
         )
         return DisplayList(vocab)
+    
+    security.declarePublic("listpartialTransferConcerning")
 
+    def listpartialTransferConcerning(self):
+        """
+        This vocabulary for field partialTransferConcerning 
+        
+        """
+        vocab = (
+            ("building", translate(_("partial_transfer_building"), context=self.REQUEST)),
+            ("installation", translate(_("partial_transfer_installation"),context=self.REQUEST)),
+            ('partial_transfer_deposit_substance', translate(_('partial_transfer_deposit_substance'), context=self.REQUEST)),
+            ('waste_deposit', translate(_('partial_transfer_waste_deposit'), context=self.REQUEST)),
+            ('water_discharge', translate(_('partial_transfer_water_discharge'), context=self.REQUEST)),
+            ('deversement', translate(_('partial_transfer_deversement'), context=self.REQUEST)),
+            ('atmospheric_release',translate(_('partial_transfer_atmospheric_release'), context=self.REQUEST)),
+        )
+        return DisplayList(vocab)
     def rubrics_base_query(self):
         """to be overriden"""
         return {"review_state": ["enabled", "private"]}
@@ -451,6 +479,8 @@ class EnvironmentBase(
             ("temporary", "Temporaire"),
         )
         return DisplayList(vocabulary)
+    
+    security.declarePublic("partialTransferConcerning")
 
     def getProcedureDelays(self, *values):
         """
@@ -642,6 +672,7 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     schema.moveField("description", after="additionalLegalConditions")
     schema.moveField("referenceFT", after="referenceDGATLP")
     schema.moveField("isTransferOfLicence", after="referenceFT")
+    schema.moveField("partialTransferConcerning", after="isTransferOfLicence")
 
     return schema
 
