@@ -215,13 +215,13 @@ class UrbainXMLExport(BrowserView):
                     ):
                         xml.append(
                             u"      <E_220_straatcode>%s</E_220_straatcode>"
-                            % str(street_code)
+                            % safe_unicode(street_code)
                         )
                         if check(
                             self,
                             street_name,
                             u"no_street_name_found_on_licence",
-                            {"reference": str(licence.getReference())},
+                            {"reference": safe_unicode(licence.getReference())},
                         ):
                             xml.append(
                                 u"      <E_220_straatnaam>%s</E_220_straatnaam>"
@@ -229,7 +229,7 @@ class UrbainXMLExport(BrowserView):
                             )
                     if number:
                         xml.append(
-                            u"      <E_220_huisnr>%s</E_220_huisnr>" % str(number)
+                            u"      <E_220_huisnr>%s</E_220_huisnr>" % safe_unicode(number)
                         )
                 worktype = licence.getWorkType() and licence.getWorkType()[0] or ""
                 work_types = UrbanVocabulary("folderbuildworktypes").getAllVocTerms(
