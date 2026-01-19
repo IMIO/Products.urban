@@ -28,6 +28,9 @@ from Contact import Contact
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from zope.i18n import translate
 from Products.urban.config import URBAN_TYPES
+from zope.component import getUtility
+from zope.schema.interfaces import IVocabularyFactory
+
 
 ##/code-section module-header
 
@@ -126,7 +129,10 @@ class FolderManager(BaseContent, Contact, BrowserDefaultMixin):
         """
         Return all the licence types manageable
         """
-        return URBAN_TYPES
+        factory = getUtility(IVocabularyFactory, "urban.vocabularies.licence_types")
+        vocabulary = factory(self)
+
+        return DisplayList([(term.value, term.title) for term in vocabulary])
 
 
 registerType(FolderManager, PROJECTNAME)
