@@ -455,6 +455,8 @@ def finalizeSchema(schema):
     schema.moveField(
         "locationTechnicalAdviceAfterInquiry", after="locationTechnicalAdvice"
     )
+    schema["referenceDGATLP"].widget.label = _("urban_label_referenceDGO3_custom")
+    schema["referenceFT"].widget.label = _("urban_label_referenceFT_custom")
 
 
 # finalizeSchema comes from BuildLicence to be sure to have the same changes reflected
