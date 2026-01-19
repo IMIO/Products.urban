@@ -14,6 +14,16 @@ from zope.schema.interfaces import IChoice
 from zope.schema.interfaces import ICollection
 from zope.schema.interfaces import IVocabularyTokenized
 
+def handle_uid_field(value):
+    if not value:
+        return value
+    try:
+        template_obj = api.content.get(UID=value)
+    except ValueError:
+        return value
+    path = "/".join(template_obj.getPhysicalPath())
+    return {"uid": value, "path": path, "id": template_obj.id}
+
 
 @implementer(IFieldSerializer)
 @adapter(ICollection, IDexterityContent, IConfigExportMarker)
@@ -48,13 +58,7 @@ class UrbanConfigCollectionFieldSerializer(CollectionFieldSerializer):
             if template is None:
                 output.append(value)
                 continue
-            try:
-                template_obj = api.content.get(UID=template)
-            except ValueError:
-                output.append(value)
-                continue
-            path = "/".join(template_obj.getPhysicalPath())
-            value["template"] = {"uid": template, "path": path, "id": template_obj.id}
+            value["template"] = handle_uid_field(template)
             output.append(value)
         return output
 
@@ -71,4 +75,9 @@ class UrbanConfigChoiceFieldSerializer(ChoiceFieldSerializer):
                 self.field.vocabulary.getTerm(value)
             except LookupError:
                 return json_compatible(None)
+        if (
+            IUrbanTemplate.providedBy(self.context)
+            and self.field.getName() == "mailing_loop_template"
+        ):
+            value = handle_uid_field(value)
         return json_compatible(value)

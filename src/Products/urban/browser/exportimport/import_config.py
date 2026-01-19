@@ -42,9 +42,6 @@ class ConfigImportContent(ImportContent):
     title = "Import Urban Config data"
     DROP_FIELDS = {
         "OpinionEventConfig": ["internal_service"],
-        "UrbanTemplate": [
-            "mailing_loop_template",
-        ],
     }
     default_value_none = {
         "EventConfig": {"activatedFields": []},
@@ -145,59 +142,71 @@ class ConfigImportContent(ImportContent):
         rid = brain.getRID()
         return catalog.getIndexDataForRID(rid)["UID"]
 
-    def get_uid_from_proximity_context(self, context, id, ignore_uid=[]):
-        brains = api.content.find(context=context, portal_type="UrbanTemplate")
+    def getter_merge_templates(self, obj):
+        merge_templates = obj.merge_templates
+        for template in merge_templates:
+            if template["template"] == "--NOVALUE--":
+                continue
+            template_obj = api.content.get(UID=template["template"])
+            if template_obj and template_obj.id == id:
+                return template["template"]
+        return None
+
+    def get_uid_from_proximity_context(self, context, id, fn_attr_getter=None, ignore_uid=[], portal_type="UrbanTemplate"):
+        brains = api.content.find(context=context, portal_type=portal_type)
         for brain in brains:
             brain_uid = self._get_uid_from_brain(brain)
             if brain_uid in ignore_uid:
                 continue
             obj = brain.getObject()
-            merge_templates = obj.merge_templates
-            for template in merge_templates:
-                if template["template"] == "--NOVALUE--":
-                    continue
-                template_obj = api.content.get(UID=template["template"])
-                if template_obj and template_obj.id == id:
-                    return template["template"]
+            if fn_attr_getter:
+                result = fn_attr_getter(obj)
+                if result is not None:
+                    return result
             ignore_uid.append(brain_uid)
         if ILicenceConfig.providedBy(context):
             return None
-        return self.get_uid_from_proximity_context(aq_parent(context), id, ignore_uid)
+        return self.get_uid_from_proximity_context(aq_parent(context), id, fn_attr_getter, ignore_uid)
 
-    def get_template_uid(self, item, template):
-        if isinstance(template["template"], str):
-            obj = api.content.get(UID=template["template"])
+    def get_template_uid(self, item, info, fn_attr_getter=None, search_proximity=False):
+        if isinstance(info, str):
+            obj = api.content.get(UID=info)
             if obj:
-                return template["template"]
+                return info
             else:
                 return None
 
-        uid = template["template"]["uid"]
+        uid = info["uid"]
         obj = api.content.get(UID=uid)
         if obj:
             return uid
 
         context = self.get_obj_from_path(item["parent"]["@id"])
-        if context:
+        if context and search_proximity:
             template_uid = self.get_uid_from_proximity_context(
-                context, template["template"]["id"]
+                context, info["id"],
+                fn_attr_getter=fn_attr_getter
             )
             if template_uid:
                 return template_uid
 
-        path = template["template"]["path"]
+        path = info["path"]
         obj = self.get_obj_from_path(path)
         if not obj:
             return None
         return obj.UID()
 
-    def dict_hook_urbantemplate(self, item):
+    def handle_merge_templates(self, item):
         merge_templates = item.get("merge_templates", None)
         if merge_templates is None:
             return item
         output_template = []
         for template in merge_templates:
-            uid = self.get_template_uid(item, template)
+            uid = self.get_template_uid(
+                item, template["template"],
+                fn_attr_getter=self.getter_merge_templates,
+                search_proximity=True
+            )
             if uid is None:
                 msg = "Can't link the pod template : {}, in document : {}".format(
                     template.get("pod_context_name", "unknown"),
@@ -209,6 +218,26 @@ class ConfigImportContent(ImportContent):
             template["template"] = uid
             output_template.append(template)
         item["merge_templates"] = output_template
+        return item
+
+    def handle_mailing_loop_template(self, item):
+        mailing_loop_template = item.get("mailing_loop_template", None)
+        if mailing_loop_template is None:
+            return item
+        uid = self.get_template_uid(item, mailing_loop_template)
+        if uid is None:
+            msg = "Can't link the publipostage template in document : {}".format(
+                item.get("@id", "unknown").split("portal_urban")[-1]
+            )
+            logger.warning(msg)
+            api.portal.show_message(msg, self.request, type="warning")
+            uid = "--NOVALUE--"
+        item["mailing_loop_template"] = uid
+        return item
+
+    def dict_hook_urbantemplate(self, item):
+        item = self.handle_merge_templates(item)
+        item = self.handle_mailing_loop_template(item)
         return item
 
     def handle_environmentrubricterm_description(self, item):
