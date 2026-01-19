@@ -1099,6 +1099,7 @@ class UrbanEventInquiryView(UrbanEventInquiryBaseView):
             "RecipientCadastre",
             id=id,
             # keep adr1 and adr2 fields for historical reasons.
+            name="Aux occupants de",
             adr1="{} {}".format(zipcode, city),
             adr2="{} {}".format(street, number),
             number=number,
