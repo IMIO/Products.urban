@@ -5435,3 +5435,7 @@ msgstr "ans"
 
 msgid "zip_folder_title"
 msgstr "Zone d'initiative privilégiée"
+
+#. Default: "Notaire(s)"
+msgid "urban_label_notaries"
+msgstr "Notaire(s)
