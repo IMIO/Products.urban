@@ -331,5 +331,11 @@
            Products.DCWorkflow.interfaces.IAfterTransitionEvent"
     handler=".subscribers.after_term_deactivate"
     />
+     <subscriber
+      for=".interfaces.ILicenceNotificationEvent
+      zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+      handler=".subscribers.post_save_event_parceloutlicence"
+    />
+    
 
 </configure>
