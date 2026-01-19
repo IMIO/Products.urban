@@ -5435,3 +5435,30 @@ msgstr "ans"
 
 msgid "zip_folder_title"
 msgstr "Zone d'initiative privilégiée"
+
+msgid "chapter_1"
+msgstr "Chapitre 1"
+
+msgid "chapter_2"
+msgstr "Chapitre 2"
+
+msgid "chapter_3"
+msgstr "Chapitre 3"
+
+msgid "chapter_4"
+msgstr "Chapitre 4"
+
+msgid "chapter_5"
+msgstr "Chapitre 5"
+
+msgid "chapter_6"
+msgstr "Chapitre 6"
+
+msgid "chapter_7"
+msgstr "Chapitre 7"
+
+msgid "municipal_directive_folder_title"
+msgstr "Directive communale"
+
+msgid "urban_label_municipalDirective"
+msgstr "Directive communale"

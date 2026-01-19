@@ -782,7 +782,6 @@
         handler=".update_270.add_new_registry_for_missing_capakey"
         profile="Products.urban:default"
         />
-
     <gs:upgradeStep
         title="Add complementary delay option"
         description=""
@@ -790,7 +789,7 @@
         destination="1166"
         handler=".update_270.add_additional_delay_option"
         profile="Products.urban:default"
-        />
+    />
 
     <gs:upgradeStep
         title="Fix patrimony certificates interface"
@@ -799,6 +798,14 @@
         destination="1167"
         handler=".update_270.fix_patrimony_certificate_class"
         profile="Products.urban:default"
-        />
+    />
 
+    <gs:upgradeStep
+        title="Add new vocabulary Municipal Directive"
+        description=""
+        source="1167"
+        destination="1168"
+        handler=".update_270.add_municipal_directive_vocabulary"
+        profile="Products.urban:default"
+    />
 </configure>
