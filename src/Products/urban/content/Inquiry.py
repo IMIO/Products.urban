@@ -160,39 +160,6 @@ schema = Schema(
             default_output_type="text/x-html-safe",
             schemata="urban_inquiry",
         ),
-        LinesField(
-            name="solicitOpinionsTo",
-            widget=Select2Widget(
-                label=_("urban_label_solicitOpinionsTo", default="Solicit opinion to"),
-                multiple=True,
-            ),
-            schemata="urban_advices",
-            multiValued=1,
-            vocabulary=UrbanVocabulary(
-                "eventconfigs",
-                vocType="OpinionEventConfig",
-                value_to_use="abbreviation",
-            ),
-            default_method="getDefaultValue",
-        ),
-        LinesField(
-            name="solicitOpinionsToOptional",
-            widget=Select2Widget(
-                label=_(
-                    "urban_label_solicitOpinionsToOptional",
-                    default="Solicitopinionstooptional",
-                ),
-                multiple=True,
-            ),
-            schemata="urban_advices",
-            multiValued=1,
-            vocabulary=UrbanVocabulary(
-                "eventconfigs",
-                vocType="OpinionEventConfig",
-                value_to_use="abbreviation",
-            ),
-            default_method="getDefaultValue",
-        ),
     ),
 )
 
@@ -292,24 +259,6 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
                 )
         return items
 
-    security.declarePublic("getLinkedUrbanEventOpinionRequest")
-
-    def getLinkedUrbanEventOpinionRequest(self, organisation):
-        """
-        Return the linked UrbanEventOpinionRequest objects if exist
-        """
-        brefs = self.getBRefs("linkedInquiry")
-        if brefs:
-            # linkedInquiry may come from a UrbanEventInquiry or an UrbanEventOpinionRequest
-            for bref in brefs:
-                if bref and bref.portal_type == "UrbanEventOpinionRequest":
-                    if (
-                        bref.getLinkedOrganisationTermId() == organisation
-                        and bref.getLinkedInquiry() == self
-                    ):
-                        return bref
-        return None
-
     def _getSelfPosition(self):
         """
         Return the position of the self between every Inquiry objects
@@ -381,58 +330,8 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
     def getLastInquiry(self, use_catalog=True):
         return self.getLastEvent(interfaces.IInquiryEvent)
 
-    def getLastOpinionRequest(self):
-        return self.getLastEvent(interfaces.IOpinionRequestEvent)
-
     def getAllTechnicalServiceOpinionRequests(self):
         return self.getAllEvents(interfaces.ITechnicalServiceOpinionRequestEvent)
-
-    security.declarePublic("getSolicitOpinionValue")
-
-    def getSolicitOpinionValue(self, opinionId):
-        """
-        Return the corresponding opinion value from the given opinionId
-        """
-        vocabulary = self.getField("solicitOpinionsTo").vocabulary
-        title = [
-            v["title"] for v in vocabulary.get_raw_voc(self) if v["id"] == opinionId
-        ]
-        title = title and title[0] or ""
-        return title
-
-    security.declarePublic("getSolicitOpinionOptionalValue")
-
-    def getSolicitOpinionOptionalValue(self, opinionId):
-        """
-        Return the corresponding opinion value from the given opinionId
-        """
-        vocabulary = self.getField("solicitOpinionsToOptional").vocabulary
-        title = [
-            v["title"] for v in vocabulary.get_raw_voc(self) if v["id"] == opinionId
-        ]
-        title = title and title[0] or ""
-        return title
-
-    security.declarePublic("mayAddOpinionRequestEvent")
-
-    def mayAddOpinionRequestEvent(self, organisation):
-        """
-        This is used as TALExpression for the UrbanEventOpinionRequest
-        We may add an OpinionRequest if we asked one in an inquiry on the licence
-        We may add another if another inquiry defined on the licence ask for it and so on
-        """
-        opinions = self.getSolicitOpinionsTo()
-        opinions += self.getSolicitOpinionsToOptional()
-        limit = organisation in opinions and 1 or 0
-        inquiries = [inq for inq in self.getInquiries() if inq != self]
-        for inquiry in inquiries:
-            if (
-                organisation in inquiry.getSolicitOpinionsTo()
-                or organisation in inquiry.getSolicitOpinionsToOptional()
-            ):
-                limit += 1
-        limit = limit - len(self.getOpinionRequests(organisation))
-        return limit > 0
 
     security.declarePublic("mayAddInquiryEvent")
 
@@ -454,33 +353,6 @@ class Inquiry(BaseContent, BrowserDefaultMixin):
 
     def getAllTechnicalServiceOpinionRequestsNoDup(self):
         allOpinions = self.getAllTechnicalServiceOpinionRequests()
-        allOpinionsNoDup = {}
-        for opinion in allOpinions:
-            actor = opinion.getUrbaneventtypes().getId()
-            allOpinionsNoDup[actor] = opinion
-        return allOpinionsNoDup.values()
-
-    def getAllOpinionRequests(self, organisation=""):
-        if not organisation:
-            return self.getAllEvents(interfaces.IOpinionRequestEvent)
-        opinion_requests = [
-            op
-            for op in self.getAllEvents(interfaces.IOpinionRequestEvent)
-            if organisation in op.id
-        ]
-        return opinion_requests
-
-    def getAllLinkedOpinionRequests(self):
-        opinion_requests = [
-            op
-            for op in self.getAllEvents(interfaces.IOpinionRequestEvent)
-            if op.portal_type == "UrbanEventOpinionRequest"
-            and op.getLinkedInquiry() == self
-        ]
-        return opinion_requests
-
-    def getAllOpinionRequestsNoDup(self):
-        allOpinions = self.getAllOpinionRequests()
         allOpinionsNoDup = {}
         for opinion in allOpinions:
             actor = opinion.getUrbaneventtypes().getId()

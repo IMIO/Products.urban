@@ -26,6 +26,7 @@
    <element value="CorporationProprietary"/>
    <element value="Corporation"/>
    <element value="CODT_Inquiry"/>
+   <element value="RequestForOpinion"/>
    <element value="Applicant"/>
    <element value="Couple"/>
    <element value="File"/>

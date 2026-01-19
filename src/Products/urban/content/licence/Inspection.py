@@ -12,6 +12,7 @@ from Products.urban.config import PROJECTNAME
 from Products.urban.config import URBAN_TYPES
 from Products.urban.content.licence.GenericLicence import GenericLicence
 from Products.urban.content.Inquiry import Inquiry
+from Products.urban.content.RequestForOpinion import RequestForOpinion
 from Products.urban.utils import setOptionalAttributes
 from Products.urban.utils import setSchemataForInquiry
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import (
@@ -393,6 +394,7 @@ Inspection_schema = (
     BaseFolderSchema.copy()
     + getattr(GenericLicence, "schema", Schema(())).copy()
     + getattr(Inquiry, "schema", Schema(())).copy()
+    + getattr(RequestForOpinion, "schema", Schema(())).copy()
     + schema.copy()
 )
 
@@ -400,7 +402,7 @@ setOptionalAttributes(Inspection_schema, optional_fields)
 setSchemataForInquiry(Inspection_schema)
 
 
-class Inspection(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
+class Inspection(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin, RequestForOpinion):
     """ """
 
     security = ClassSecurityInfo()

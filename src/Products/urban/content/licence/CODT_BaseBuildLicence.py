@@ -24,6 +24,7 @@ from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import (
 from Products.urban import interfaces
 from Products.urban.content.licence.BaseBuildLicence import BaseBuildLicence
 from Products.urban.content.CODT_Inquiry import CODT_Inquiry
+from Products.urban.content.RequestForOpinion import RequestForOpinion
 from Products.urban.content.licence.GenericLicence import GenericLicence
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
@@ -570,6 +571,7 @@ CODT_BaseBuildLicence_schema = (
     BaseFolderSchema.copy()
     + getattr(BaseBuildLicence, "schema", Schema(())).copy()
     + getattr(CODT_Inquiry, "schema", Schema(())).copy()
+    + getattr(RequestForOpinion, "schema", Schema(())).copy()
     + getattr(GenericLicence, "schema", Schema(())).copy()
     + schema.copy()
 )
@@ -589,7 +591,7 @@ setSchemataForCODT_Inquiry(CODT_BaseBuildLicence_schema)
 
 
 class CODT_BaseBuildLicence(
-    BaseFolder, CODT_Inquiry, BaseBuildLicence, BrowserDefaultMixin
+    BaseFolder, CODT_Inquiry, BaseBuildLicence, BrowserDefaultMixin, RequestForOpinion
 ):
     """ """
 

@@ -38,9 +38,8 @@ class OpinionRequestSentStatus(TaskEndSimpleStatusView):
         matched, not_matched = [], []
         licence = self.task.get_container()
 
-        inquiry_objs = licence.getAllInquiriesAndAnnouncements()
-        inquiry_obj = inquiry_objs[-1]
-        opinion_events = inquiry_obj.getAllLinkedOpinionRequests()
+        opinion_obj = licence.getLastRequestForOpinion()
+        opinion_events = opinion_obj.get_all_linked_urban_event_opinion_request()
         if not opinion_events:
             not_matched.append("Créer les événements de demande d'avis")
 

@@ -1607,14 +1607,14 @@ class GenericLicence(OrderedBaseFolder, UrbanBase, BrowserDefaultMixin):
     def templateAllOpinions(self):
         all_opinions = list(self.getSolicitRoadOpinionsTo())
         location_opinions = self.getSolicitLocationOpinionsTo()
-        if hasattr(self, "getLastInquiry"):
-            inquiry = self.getLastInquiry()
+        if hasattr(self, "getLastRequestForOpinion"):
+            request = self.getLastRequestForOpinion()
         else:
-            inquiry = None
-        inquiry_opinions = None
-        if inquiry is not None:
-            inquiry_opinions = inquiry.getLinkedInquiry().getSolicitOpinionsTo()
-        opinion_tank_list = [location_opinions, inquiry_opinions]
+            request = None
+        request_opinions = None
+        if request is not None:
+            request_opinions = request.getSolicitOpinionsTo()
+        opinion_tank_list = [location_opinions, request_opinions]
         for opinion_tank in opinion_tank_list:
             if opinion_tank is not None:
                 for opinion in opinion_tank:

@@ -25,6 +25,7 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.urban.config import *
 from Products.urban.content.CODT_Inquiry import CODT_Inquiry
+from Products.urban.content.RequestForOpinion import RequestForOpinion
 
 slave_fields_inquiry_category = (
     {
@@ -56,6 +57,7 @@ schema = Schema(
 CODT_UniqueLicenceInquiry_schema = (
     BaseSchema.copy()
     + getattr(CODT_Inquiry, "schema", Schema(())).copy()
+    + getattr(RequestForOpinion, "schema", Schema(())).copy()
     + schema.copy()
 )
 
@@ -69,7 +71,7 @@ CODT_UniqueLicenceInquiry_schema["inquiry_type"].default = "inquiry"
 ##/code-section after-schema
 
 
-class CODT_UniqueLicenceInquiry(BaseContent, CODT_Inquiry, BrowserDefaultMixin):
+class CODT_UniqueLicenceInquiry(BaseContent, CODT_Inquiry, BrowserDefaultMixin, RequestForOpinion):
     """ """
 
     security = ClassSecurityInfo()

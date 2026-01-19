@@ -1,10 +1,10 @@
-<metal:edit define-macro="editInquiryMacro"
+<metal:edit define-macro="editRequestForOpinionyMacro"
                tal:define="member context/@@plone_portal_state/member;
                        border python: member.has_role('Manager') and 'enable_border' or 'disable_border';
                        dummy python:request.set(border, 1);
                        putils context/plone_utils;">
 
-      <tal:fieldsets repeat="fieldset python: ['urban_inquiry']">
+      <tal:fieldsets repeat="fieldset python: ['urban_advices']">
         <fieldset class="urbanEditWithTabbing" tal:define="fieldsetid python:putils.normalizeString(fieldset)"
                 tal:attributes="id string:fieldset-${fieldsetid}">
           <legend id="#"

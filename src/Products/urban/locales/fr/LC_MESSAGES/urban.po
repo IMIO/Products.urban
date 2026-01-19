@@ -1093,6 +1093,10 @@ msgstr "Ajouter un locataire"
 msgid "add_an_inquiry"
 msgstr "Ajouter une enquête supplémentaire"
 
+#: ../browser/licence/templates/licencetabsmacros.pt:316
+msgid "add_an_request_for_opinion"
+msgstr "Ajouter une nouvelle sollicitation d'avis"
+
 #. Default: "This will automatically generate following advices:"
 #: ../browser/licence/templates/licencetabsmacros.pt:529
 msgid "add_every_advices_descr"
@@ -2596,6 +2600,10 @@ msgstr "L'événement de règlement transactionnel du PV lié est terminé"
 
 msgid "urban.warnings.define_parcels"
 msgstr "Aucune parcelle définie sur le dossier"
+
+#: ../content/RequestForOpinion.py:45
+msgid "urban_advices"
+msgstr "Sollicitation d'avis"
 
 #. Default: Set the number of days the alert will be shown before the deadline delay
 msgid "urban_alertdelay_descr"
@@ -4733,6 +4741,11 @@ msgstr "Représenté par"
 msgid "urban_label_representedBySociety"
 msgstr "Représenté par la société"
 
+#. Default: "Solicit opinion to"
+#: ../browser/licence/templates/licencetabsmacros.pt:281
+msgid "urban_label_request_for_opinion_title"
+msgstr "Sollicitation d'avis"
+
 #. Default: "Organisation"
 #: ../browser/licence/templates/licencetabsmacros.pt:310
 msgid "urban_label_requestedOrganisation"
@@ -4933,18 +4946,19 @@ msgid "urban_label_solicitLocationOpinionsTo"
 msgstr "Un avis sera sollicité par l'urbanisme à"
 
 #. Default: "Solicit opinion to"
-#: ../browser/licence/templates/licencetabsmacros.pt:281
-#: ../content/Inquiry.py:157
+#: ../content/Inquiry.py:166
+#: ../content/RequestForOpinion.py:42
 msgid "urban_label_solicitOpinionsTo"
 msgstr "Avis sollicité(s) obligatoire(s)"
 
 #. Default: "Solicitopinionstooptional"
-#: ../content/Inquiry.py:172
+#: ../content/Inquiry.py:181
+#: ../content/RequestForOpinion.py:57
 msgid "urban_label_solicitOpinionsToOptional"
 msgstr "Avis sollicité(s) facultatif(s)"
 
 #. Default: "Solicitroadopinionsto"
-#: ../content/licence/GenericLicence.py:910
+#: ../content/licence/GenericLicence.py:956
 msgid "urban_label_solicitRoadOpinionsTo"
 msgstr "Un avis sera sollicité par la voirie à"
 
@@ -5435,3 +5449,13 @@ msgstr "ans"
 
 msgid "zip_folder_title"
 msgstr "Zone d'initiative privilégiée"
+
+msgid "request_title_and_number"
+msgstr "Sollicitation d'avis ${round}"
+
+msgid "fieldsetlegend_urban_inquiry"
+msgstr "Enquête"
+
+msgid "fieldsetlegend_urban_advices"
+msgstr "Sollicitation d'avis"
+

@@ -573,3 +573,92 @@ def add_additional_delay_option(context):
         
 
     logger.info("upgrade step done!")
+
+
+def get_link_urban_event_opinion(inquiry):
+    brefs = inquiry.getBRefs("linkedInquiry")
+    output = []
+    if brefs:
+        for bref in brefs:
+            if bref and bref.portal_type == "UrbanEventOpinionRequest":
+                if bref.getLinkedInquiry() == inquiry:
+                    output.append(bref)
+    return output
+
+
+def change_request_for_opinion_architecture(context):
+    logger = logging.getLogger("urban: Add new solicitOpinionsTo")
+    logger.info("starting upgrade steps")
+
+    # Add new term type, workflow and index
+    logger.info("Add new term type, workflow and index")
+    setup_tool = api.portal.get_tool("portal_setup")
+    setup_tool.runImportStepFromProfile("profile-Products.urban:urbantypes", "typeinfo")
+    setup_tool.runImportStepFromProfile("profile-Products.urban:preinstall", "workflow")
+
+    # migrate existing opinion request from inquiry to RequestForOpinion
+    licence_types = [
+        "Article127",
+        "BuildLicence",
+        "CODT_Article127",
+        "CODT_BuildLicence",
+        "CODT_CommercialLicence",
+        "CODT_ParcelOutLicence",
+        "CODT_UrbanCertificateTwo",
+        "EnvClassBordering",
+        "EnvClassOne",
+        "EnvClassTwo",
+        "IntegratedLicence",
+        "ParcelOutLicence",
+        "UniqueLicence",
+    ]
+    urban_folder = api.portal.get()["urban"]
+    for licence_type in licence_types:
+        licence_folder = getattr(urban_folder, "{}s".format(licence_type.lower()), None)
+        if licence_folder is None:
+            continue
+        for licence in licence_folder.values():
+            if not IGenericLicence.providedBy(licence):
+                continue
+            
+            inquiries = None
+
+            if hasattr(licence, "getAllInquiries"):
+                inquiries = licence.getAllInquiries()
+            if hasattr(licence, "getAllInquiriesAndAnnouncements"):
+                inquiries = licence.getAllInquiriesAndAnnouncements()
+
+            if inquiries is None:
+                continue
+
+            if len(inquiries) <= 1:
+                continue
+
+            round = 2
+            for inquiry in inquiries:
+                if IGenericLicence.providedBy(inquiry):
+                    continue
+
+                solicitOpinionsTo = inquiry.solicitOpinionsTo
+                solicitOpinionsToOptional = inquiry.solicitOpinionsToOptional
+
+                if len(solicitOpinionsTo) < 1 and len(solicitOpinionsToOptional) < 1:
+                    continue
+
+                logger.info("Licence with new RequestForOpinion created ({})".format(licence.absolute_url()))
+
+                request = api.content.create(
+                    licence,
+                    "RequestForOpinion",
+                    id="sollicitation_avis_{}".format(round)
+                )
+                request.setSolicitOpinionsTo(solicitOpinionsTo)
+                request.setSolicitOpinionsToOptional(solicitOpinionsToOptional)
+
+                link_events = get_link_urban_event_opinion(inquiry)
+                for link_event in link_events:
+                    link_event.setLinkedInquiry(request)
+
+                round += 1
+
+    logger.info("upgrade step done!")

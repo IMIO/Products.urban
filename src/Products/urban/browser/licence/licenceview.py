@@ -474,6 +474,10 @@ class LicenceView(BrowserView):
             inquiries.append(context)
         return inquiries
 
+    def getRequestForOpinionForDisplay(self):
+        context = aq_inner(self.context)
+        return context.getAllRequestForOpinion()
+
     def getRubrics(self):
         """
         display the rubrics number, their class and then the text

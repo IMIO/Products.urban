@@ -275,13 +275,47 @@
 
 <div class="licence-column" metal:define-macro="advices_macro" i18n:domain="urban"
      tal:define="bound_licence python: hasattr(context, 'getBound_licence') and context.getUse_bound_licence_infos() and context.getBound_licence();
-                 inquiries python: view.getInquiriesForDisplay();
+                 requests_for_opinion python: view.getRequestForOpinionForDisplay();
                  member context/@@plone_portal_state/member;">
-    <fieldset tal:repeat="inquiry inquiries">
-        <legend i18n:translate="urban_label_solicitOpinionsTo">Solicit opinion to</legend>
+    <fieldset tal:repeat="request_for_opinion requests_for_opinion">
+        <legend tal:content="python: request_for_opinion.get_title()"></legend>
+        <tal:actions condition="python: not repeatindex == 0" define="repeatindex repeat/request_for_opinion/index">
+            <div metal:define-macro="urbanAdvicesActionsMacro" i18n:domain="urban"
+                 tal:define="member context/@@plone_portal_state/member;
+                             actionsToHide actionsToHide|python:()">
+
+                <div align="right">
+                    <!-- Edit action -->
+                    <tal:edit_action condition="python: member.has_permission('Modify portal content', request_for_opinion)">
+                        <a class="noPadding" tal:attributes="href python: request_for_opinion.absolute_url() + '/edit'">
+                            <img src="#" tal:attributes="src string:${portal_url}/edit.png" title="label_edit" i18n:attributes="title" />
+                        </a>
+                    </tal:edit_action>
+
+                    <!-- Own management of the "delete" action -->
+                    <tal:delete_action condition="python: member.has_permission('Delete objects', request_for_opinion)">
+                        <a class="urbanDelete noPadding"
+                           tal:attributes="href python: request_for_opinion.absolute_url() + '/delete_confirmation'">
+                            <!-- Icon -->
+                            <img src="#" tal:attributes="src string:${portal_url}/delete_icon.png" i18n:attributes="title" title="label_remove"
+                                 onClick="javascript:confirmDeleteObject(this)" style="cursor:pointer"/>
+                        </a>
+                    </tal:delete_action>
+                </div>
+            </div>
+        </tal:actions>
         <metal:parent_call use-macro="here/@@licencetabs-macros/advices_table-macro" />
     </fieldset>
     <br />
+    <metal:custom_add_advice define-slot="custom_add_advice">
+        <form tal:condition="python: member.has_permission('urban: Add RequestForOpinion', context)"
+            i18n:domain="urban" name="quickAdd"
+            tal:attributes="action python: context.absolute_url() + '/createObject'"
+            action="createObject" method="post">
+            <input type="hidden" name="type_name" value="RequestForOpinion"/>
+            <input type="submit" class="context apButton contenttype-advice" id="event" value="add_an_request_for_opinion" i18n:attributes="value" />
+        </form>
+    </metal:custom_add_advice>
 </div>
 
 <table class="no-style-table" cellspacing=0 cellpadding=0 width=100%
@@ -298,9 +332,9 @@
                 <span tal:condition="nullvalue" class="discreet" i18n:translate="content_none">Aucun(e)</span>
             </td>
         </tal:normal_field>
-
+        
         <tal:opinions condition="python: fieldname in ['solicitOpinionsTo', 'solicitOpinionsToOptional']">
-            <td tal:define="opinionIds python:inquiry.getSolicitOpinionsTo() if fieldname == 'solicitOpinionsTo' else inquiry.getSolicitOpinionsToOptional();
+            <td tal:define="opinionIds python:request_for_opinion.getSolicitOpinionsTo() if fieldname == 'solicitOpinionsTo' else request_for_opinion.getSolicitOpinionsToOptional();
                             checkPermission python: here.portal_membership.checkPermission"
                 style="padding-top: 1em;" colspan="3">
                 <label tal:content="field/widget/label_msgid | field/widget/label" i18n:translate=""></label>
@@ -316,11 +350,11 @@
                     </thead>
                     <tbody tal:define="tool python: context.portal_urban">
                         <tr tal:repeat="opinionId opinionIds">
-                            <tal:block define="opinion python: inquiry.getLinkedUrbanEventOpinionRequest(opinionId);
+                            <tal:block define="opinion python: request_for_opinion.getLinkedUrbanEventOpinionRequest(opinionId);
                                                can_see python: opinion is not None and checkPermission('View', opinion)">
                                 <tal:anEventIsLinked condition="can_see">
                                     <td>
-                                        <a href="#" tal:attributes="href opinion/absolute_url" tal:content="python: inquiry.getSolicitOpinionValue(opinionId)">
+                                        <a href="#" tal:attributes="href opinion/absolute_url" tal:content="python: request_for_opinion.getSolicitOpinionValue(opinionId)">
                                             Opinion request
                                         </a>
                                     </td>
@@ -347,7 +381,7 @@
                                     </td>
                                 </tal:anEventIsLinked>
                                 <tal:noEventIsLinked condition="not: can_see">
-                                    <td tal:content="python: inquiry.getSolicitOpinionValue(opinionId)">Opinion request</td>
+                                    <td tal:content="python: request_for_opinion.getSolicitOpinionValue(opinionId)">Opinion request</td>
                                     <td><span class="discreet" i18n:translate="content_none">Aucun(e)</span></td>
                                     <td><span class="discreet" i18n:translate="content_none">Aucun(e)</span></td>
                                     <td><span class="discreet" i18n:translate="content_none">Aucun(e)</span></td>

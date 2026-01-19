@@ -142,6 +142,7 @@ from Products.urban.content import UrbanEventAnnouncement  # noqa
 from Products.urban.content import UrbanEventInquiry  # noqa
 from Products.urban.content import UrbanEventInspectionReport  # noqa
 from Products.urban.content import UrbanEventFollowUp  # noqa
+from Products.urban.content import RequestForOpinion  # noqa
 
 
 def initialize(context):

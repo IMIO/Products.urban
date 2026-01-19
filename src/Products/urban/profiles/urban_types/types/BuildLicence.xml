@@ -22,6 +22,7 @@
    <element value="Couple"/>
    <element value="Corporation"/>
    <element value="Inquiry"/>
+   <element value="RequestForOpinion"/>
    <element value="UrbanEvent"/>
    <element value="File"/>
    <element value="Parcel"/>
