@@ -1694,6 +1694,8 @@ class GenericLicence(OrderedBaseFolder, UrbanBase, BrowserDefaultMixin):
         dict = {}
         dict["path"] = {"query": "%s/portal_urban/foldermanagers" % (rootPath)}
         dict["id"] = ids
+        # add sort_on to sort the results of folder managers by the 'sortable_title' field 
+        dict["sort_on"] = "sortable_title"
         return dict
 
     security.declarePublic("getParcels")

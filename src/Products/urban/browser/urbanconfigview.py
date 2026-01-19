@@ -72,7 +72,10 @@ class UrbanConfigView(BrowserView):
             for folder in context.objectValues("ATFolder")
             if folder not in other_folders
         ]
-        return folders
+        # Sort folders by their title attribute
+        sorted_folders = sorted(folders, key=lambda folder: folder.Title())
+        
+        return sorted_folders
 
     def getScheduleConfigs(self):
         context = aq_inner(self.context)
