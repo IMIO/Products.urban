@@ -610,9 +610,17 @@ schema = Schema(
             ),
             schemata="urban_patrimony",
         ),
+        
     ),
 )
-
+notaryReference= StringField(
+            name="notaryReference",
+            widget=StringField._properties["widget"](
+                size=60,
+                label=_("urban_label_notaryReference", default="NotaryReference"),
+            ),
+            schemata="urban_description",
+        )
 ##code-section after-local-schema #fill in your manual code here
 setOptionalAttributes(schema, optional_fields)
 ##/code-section after-local-schema
@@ -621,8 +629,11 @@ UrbanCertificateBase_schema = (
     BaseFolderSchema.copy()
     + getattr(GenericLicence, "schema", Schema(())).copy()
     + schema.copy()
+    + Schema((
+    notaryReference.copy(), 
+))
+    
 )
-
 ##code-section after-schema #fill in your manual code here
 UrbanCertificateBase_schema["title"].required = False
 ##/code-section after-schema
@@ -915,7 +926,7 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     """
     Finalizes the type schema to alter some fields
     """
-    schema.moveField("referenceDGATLP", after="reference")
+    schema.moveField("notaryReference", after="reference")
     schema.moveField("notaryContact", after="workLocations")
     schema.moveField("foldermanagers", after="notaryContact")
     schema.moveField("description", after="opinionsToAskIfWorks")
@@ -951,7 +962,7 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     schema.moveField("protectedBuildingDetails", after="protectedBuilding")
     schema.moveField("patrimony_analysis", after="protectedBuildingDetails")
     schema.moveField("patrimony_observation", after="patrimony_analysis")
-    schema["referenceDGATLP"].widget.label = _("urban_label_notaryReference")
+    
     return schema
 
 

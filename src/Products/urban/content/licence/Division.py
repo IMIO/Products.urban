@@ -19,6 +19,7 @@ from Products.Archetypes.atapi import *
 from zope.interface import implements
 from Products.urban import interfaces
 from Products.urban.content.licence.GenericLicence import GenericLicence
+from Products.urban.content.licence.UrbanCertificateBase import notaryReference
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 
 from Products.urban.config import *
@@ -32,6 +33,7 @@ from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import (
 )
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
+from copy import deepcopy
 
 optional_fields = []
 ##/code-section module-header
@@ -302,6 +304,7 @@ schema = Schema(
                 "general_disposition", inUrbanConfig=False, with_empty_value=True
             ),
         ),
+        
     ),
 )
 
@@ -313,6 +316,9 @@ Division_schema = (
     BaseFolderSchema.copy()
     + getattr(GenericLicence, "schema", Schema(())).copy()
     + schema.copy()
+    + Schema((
+    notaryReference.copy(), 
+))
 )
 
 ##code-section after-schema #fill in your manual code here
@@ -416,6 +422,7 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     """
     Finalizes the type schema to alter some fields
     """
+    schema.moveField("notaryReference", after="reference")
     schema.moveField("description", after="notaryContact")
     schema.moveField("foldermanagers", after="workLocations")
     schema["parcellings"].widget.label = _("urban_label_parceloutlicences")

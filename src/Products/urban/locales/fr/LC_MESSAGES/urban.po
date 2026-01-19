@@ -4174,10 +4174,6 @@ msgstr "Non applicable"
 msgid "urban_label_notaryContact"
 msgstr "Notaire(s)"
 
-#: ../content/licence/UrbanCertificateBase.py:954
-msgid "urban_label_notaryReference"
-msgstr "Référence notaire"
-
 #. Default: "Noteworthytrees"
 #: ../content/licence/GenericLicence.py:1192
 msgid "urban_label_noteworthyTrees"
@@ -5435,3 +5431,6 @@ msgstr "ans"
 
 msgid "zip_folder_title"
 msgstr "Zone d'initiative privilégiée"
+
+msgid "urban_label_notaryReference"
+msgstr "Référence notaire"
