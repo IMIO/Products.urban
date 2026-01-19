@@ -322,6 +322,13 @@ class LicenceView(BrowserView):
 
         return ordered_dates
 
+    def has_attachments(self):
+        """
+        Check if the event has attachments
+        """
+        event = aq_inner(self.context)
+        return bool(event.getAttachments())
+
     def getSchemataFields(self, schemata="", exclude=[], context=None):
         displayed_fields = self.getUsedAttributes()
         return utils.getSchemataFields(
@@ -593,6 +600,7 @@ class EnvironmentLicenceView(LicenceView):
 
     def __init__(self, context, request):
         super(EnvironmentLicenceView, self).__init__(context, request)
+
 
 class ShowEditTabbing(BrowserView):
     """call this view to see if a licence should display the tabbing with edit icons"""
