@@ -17,6 +17,7 @@ from Products.urban.browser.table.urbantable import DocumentsTable
 from Products.urban.browser.table.urbantable import EventAttachmentsTable
 from Products.urban.browser.table.urbantable import RecipientsCadastreTable
 from Products.urban.interfaces import IGenericLicence
+from Products.urban.interfaces import IUrbanEvent
 from Products.urban.send_mail_action.forms import MAIL_ACTION_KEY
 from Products.urban.services.notice import WebserviceNotice
 from StringIO import StringIO
@@ -1405,8 +1406,8 @@ class CanTransferTicketView(BrowserView):
 
 class CanTransferOpinionView(BrowserView):
     @property
-    def is_urban_event_college(self):
-        return self.context.portal_type == "UrbanEventCollege"
+    def is_urban_event(self):
+        return IUrbanEvent.providedBy(self.context)
 
     @property
     def is_college_opinion_event(self):
@@ -1438,7 +1439,7 @@ class CanTransferOpinionView(BrowserView):
 
     def __call__(self):
         return (
-                self.is_urban_event_college
+                self.is_urban_event
                 and self.is_college_opinion_event
                 and self.is_transmit_to_spw_event
                 and self.is_notice_setup
@@ -1448,8 +1449,8 @@ class CanTransferOpinionView(BrowserView):
 
 class CanTransferDecisionView(BrowserView):
     @property
-    def is_urban_event_college(self):
-        return self.context.portal_type == "UrbanEventCollege"
+    def is_urban_event(self):
+        return IUrbanEvent.providedBy(self.context)
 
     @property
     def is_college_decision_event(self):
@@ -1479,7 +1480,7 @@ class CanTransferDecisionView(BrowserView):
 
     def __call__(self):
         return (
-                self.is_urban_event_college
+                self.is_urban_event
                 and self.is_college_decision_event
                 and self.is_transmit_to_spw_event
                 and self.is_notice_setup
