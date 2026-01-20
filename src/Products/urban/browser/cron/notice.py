@@ -62,10 +62,12 @@ class ImportFromNoticeView(BrowserView):
             if failed_notice_id in self.already_handled_notifications:
                 continue
             self.already_handled_notifications.append(failed_notice_id)
+            savepoint = transaction.savepoint()
             try:
                 self._handle_notification(failed_notice_id)
                 logger.info(u"Retried notification %s succeeded", failed_notice_id)
             except Exception as exc:
+                savepoint.rollback()
                 logger.exception(
                     u"Retried notification %s failed again: %s",
                     failed_notice_id,
@@ -100,12 +102,14 @@ class ImportFromNoticeView(BrowserView):
                 continue
             self.already_handled_notifications.append(notice_id)
 
+            savepoint = transaction.savepoint()
             try:
                 self._handle_notification(notice_id)
                 if notif_last_status_date > self.latest_successful_date:
                     self.latest_successful_date = notif_last_status_date
                 logger.info(u"Notification %s succeeded", notice_id)
             except Exception as exc:
+                savepoint.rollback()
                 logger.exception(
                     u"Error while processing notification %s: %s",
                     notice_id,
