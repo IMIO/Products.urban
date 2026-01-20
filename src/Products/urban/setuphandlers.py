@@ -42,6 +42,8 @@ from Products.urban.utils import getLicenceFolderId
 from Products.urban.utils import getUrbanOnlyLicenceFolderIds
 from Products.urban.utils import moveElementAfter
 from collective.eeafaceted.collectionwidget.utils import _updateDefaultCollectionFor
+from Products.urban.profiles.extra.config_default_values import default_values
+from Products.urban.profiles.extra.config_default_values import vocabularies_with_HTML_description
 from datetime import date
 from eea.facetednavigation.layout.interfaces import IFacetedLayout
 from imio.schedule.utils import _set_faceted_view

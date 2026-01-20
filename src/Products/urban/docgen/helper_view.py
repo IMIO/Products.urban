@@ -11,7 +11,6 @@ from Products.urban.interfaces import IUrbanCertificateBase
 from Products.urban.interfaces import IUrbanEventInquiry
 from Products.urban.services import cadastre
 from Products.urban.utils import get_ws_meetingitem_infos
-from Products.urban.utils import get_ws_plonemeeting
 from Products.urban.utils import getCurrentFolderManager
 from collective.documentgenerator.helper.archetypes import ATDisplayProxyObject
 from collective.documentgenerator.helper.archetypes import (

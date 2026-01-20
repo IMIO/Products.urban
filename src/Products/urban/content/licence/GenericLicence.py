@@ -2109,6 +2109,15 @@ class GenericLicence(OrderedBaseFolder, UrbanBase, BrowserDefaultMixin):
     def legalconditions_base_query(self):
         return {"review_state": ["enabled", "private"]}
 
+    def get_notice_id(self, notification_type):
+        notice_ids = getattr(self, "notice_ids", {})
+        return notice_ids.get(notification_type, None)
+
+    def set_notice_id(self, notification_type, notice_id):
+        notice_ids = getattr(self, "notice_ids", {})
+        notice_ids[notification_type] = notice_id
+        self.notice_ids = notice_ids
+
 
 registerType(GenericLicence, PROJECTNAME)
 # end of class GenericLicence

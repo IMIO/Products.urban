@@ -496,6 +496,8 @@
      permission="cmf.ModifyPortalContent"
   />
 
+  <!--  NOTICE actions-->
+
   <browser:page
      for="*"
      name="can_transfer_folder_to_dpa"
@@ -510,5 +512,83 @@
      attribute="transfer_folder_to_dpa"
      permission="zope2.View"
   />
+
+  <browser:page
+     for="*"
+     name="can_transfer_dates"
+     class=".urbaneventviews.CanTransferDatesView"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="Products.urban.interfaces.IUrbanEvent"
+     name="transfer_dates"
+     class=".urbaneventviews.UrbanEventNoticeActionsView"
+     attribute="transfer_dates"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="*"
+     name="can_transfer_ticket"
+     class=".urbaneventviews.CanTransferTicketView"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="*"
+     name="can_transfer_opinion"
+     class=".urbaneventviews.CanTransferOpinionView"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="*"
+     name="can_transfer_decision"
+     class=".urbaneventviews.CanTransferDecisionView"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="*"
+     name="can_transfer_decision_display"
+     class=".urbaneventviews.CanTransferDecisionDisplayView"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="Products.urban.interfaces.IUrbanEvent"
+     name="transfer_decision_display"
+     class=".urbaneventviews.UrbanEventNoticeActionsView"
+     attribute="transfer_decision_display"
+     permission="zope2.View"
+  />
+
+
+  <!--  NOTICE forms -->
+
+  <browser:page
+     for="Products.urban.interfaces.IUrbanEvent"
+     layer="Products.urban.interfaces.IProductUrbanLayer"
+     name="transfer_ticket_form"
+     class=".notice_forms.TransferTicketActionWrapper"
+     permission="zope2.View"
+     />
+
+  <browser:page
+     for="Products.urban.interfaces.IUrbanEvent"
+     layer="Products.urban.interfaces.IProductUrbanLayer"
+     name="transfer_opinion_form"
+     class=".notice_forms.TransferOpinionActionWrapper"
+     permission="zope2.View"
+     />
+
+  <browser:page
+     for="Products.urban.interfaces.IUrbanEvent"
+     layer="Products.urban.interfaces.IProductUrbanLayer"
+     name="transfer_decision_form"
+     class=".notice_forms.TransferDecisionActionWrapper"
+     permission="zope2.View"
+     />
 
 </configure>
