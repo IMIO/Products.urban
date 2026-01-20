@@ -3,6 +3,7 @@
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone.app.layout.viewlets import ViewletBase
 from zope.annotation.interfaces import IAnnotations
+from zope.i18n import translate
 
 
 class NoticeTransmitState(ViewletBase):
@@ -11,9 +12,25 @@ class NoticeTransmitState(ViewletBase):
     def get_transmits(self):
         annotations = IAnnotations(self.context)
         dates = annotations.get("notice_transmit_dates", {})
-        return [
-            {"label": label, "date": date.strftime("%d/%m/%Y")}
-            for (label, date) in dates.items()
-        ]
+
+        results = []
+        for (label, value) in dates.items():
+            if type(value) is dict:
+                results.append({
+                    "label": translate(label, "urban", context=self.request),
+                    "date": value.get("date"),
+                    "user": value.get("user"),
+                })
+            else:  # old style; before we also stored the user, "value" was the date
+                results.append({
+                    "label": translate(label, "urban", context=self.request),
+                    "date": value,
+                    "user": "",
+                })
+        return results
+
+    def get_reception_date(self):
+        annotations = IAnnotations(self.context)
+        return annotations.get("notice_reception_date", None)
 
     index = ViewPageTemplateFile("templates/notice_transmit_state.pt")

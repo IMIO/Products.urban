@@ -350,6 +350,9 @@ msgstr ""
 msgid "fieldsetlegend-urban_vocabulary_folders"
 msgstr ""
 
+msgid "fieldsetlegend-urban_notice_settings"
+msgstr ""
+
 msgid "folderbuildworktypes_folder_title"
 msgstr ""
 
@@ -1520,4 +1523,22 @@ msgid "label_colname_tenant_data"
 msgstr ""
 
 msgid "transfer_folder_to_dpa"
+msgstr ""
+
+msgid "transfer_dates"
+msgstr ""
+
+msgid "transfer_ticket"
+msgstr ""
+
+msgid "transfer_opinion"
+msgstr ""
+
+msgid "transfer_ticket_final"
+msgstr ""
+
+msgid "transfer_decision"
+msgstr ""
+
+msgid "transfer_decision_display"
 msgstr ""

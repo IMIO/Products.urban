@@ -24,12 +24,10 @@ from Products.DataGridField import DataGridWidget
 from Products.DataGridField.Column import Column
 from Products.DataGridField.SelectColumn import SelectColumn
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
-
-##code-section module-header #fill in your manual code here
 from Products.MasterSelectWidget.MasterMultiSelectWidget import MasterMultiSelectWidget
 from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
-from Products.urban import interfaces
 from Products.urban import UrbanMessage as _
+from Products.urban import interfaces
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.config import *
 from Products.urban.content.CODT_Inquiry import CODT_Inquiry

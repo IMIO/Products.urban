@@ -23,6 +23,7 @@ class NoticeNotification(NoticeElement):
         "send_date",
         "sender",
         "status",
+        "reception_date",
         "notice_type",
         "notification_subtype",
         "notification_type",
@@ -33,6 +34,7 @@ class NoticeNotification(NoticeElement):
         "documents",
         "parcels",
         "parties",
+        "decision_code",
     )
 
     def __init__(self, service, json):
@@ -125,19 +127,32 @@ class NoticeNotification(NoticeElement):
         return api.portal.get().generateUniqueId(self.type)
 
     @property
-    def reference(self):
-        """Return the URBAN reference, if present"""
+    def _specific_code(self):
         specific = {
             "TRANSFERT_DOSSIER": "ns3:TwiceDefaultRequest",
-            "DEMANDE_EP": "ns3:PublicSurveyRequest",
+            "NOTIF_COMPLETUDE1_IRRECEVABLE_COMMUNE": "ns3:TwiceDefaultRequest",
             "NOTIF_COMPLETUDE1_INCOMPLET_COMMUNE": "ns3:TwiceDefaultRequest",
-            "NOTIF_COMPLETUDE2_NON_RECEVABLE_COMMUNE": "ns3:TwiceDefaultRequest",
-            "NOTIF_COMPLETUDE2_IRRECEVABLE_COMMUNE": "ns3:TwiceDefaultRequest",
             "NOTIF_COMPLETUDE1_NON_RECEVABLE_COMMUNE": "ns3:TwiceDefaultRequest",
+            "NOTIF_COMPLETUDE2_IRRECEVABLE_COMMUNE": "ns3:TwiceDefaultRequest",
+            "NOTIF_COMPLETUDE2_NON_RECEVABLE_COMMUNE": "ns3:TwiceDefaultRequest",
+            "DEMANDE_EP": "ns3:PublicSurveyRequest",
+            "DEMANDE_EP_DOSSIER_PRECEDENT": "ns3:PublicSurveyRequest",
+            "DEMANDE_EP_EXTRA": "ns3:PublicSurveyRequest",
             "NOTIFICATION_PROROGATION_COMMUNE": "ns3:TwiceDefaultRequest",
+            "NOTIFICATION_RS_COMMUNE": "ns3:SummaryReportRequest",
+            "NOTIFICATION_RS_COMMUNE_RETARD": "ns3:SummaryReportRequest",
+            "NOTIFICATION_RS_COMMUNE_RETARD_SFD": "ns3:SummaryReportRequest",
+            "NOTIFICATION_PAS_ENVOI_RS": "ns3:SummaryReportRequest",
+            "NOTIFICATION_PAS_ENVOI_RS_SFD": "ns3:SummaryReportRequest",
+            "NOTIFICATION_DECISION_COMMUNE": "ns3:DecisionRequest",
         }
+        return specific.get(self.notice_type)
+
+    @property
+    def reference(self):
+        """Return the URBAN reference, if present"""
         return self._get_data(
-            "specific", specific.get(self.notice_type), "ns3:municipalityReference"
+            "specific", self._specific_code, "ns3:municipalityReference"
         )
 
     @property
@@ -178,6 +193,13 @@ class NoticeNotification(NoticeElement):
         return found_uids
 
     @property
+    def reception_date(self):
+        """Return the reception date"""
+        raw_date = self._get_data("receptionDate")
+        if raw_date:
+            return datetime.strptime(raw_date[:19], "%Y-%m-%dT%H:%M:%S")
+
+    @property
     def send_date(self):
         """Return the send date"""
         raw_date = self._get_data("sendDate")
@@ -192,14 +214,14 @@ class NoticeNotification(NoticeElement):
     def licence(self):
         """Return the licence, if there is already one"""
         if not self.reference:
-            return
+            raise ValueError("No reference found in notification {}".format(self.noticeId))
         catalog = api.portal.get_tool("portal_catalog")
         brains = catalog.unrestrictedSearchResults(
             getReference=self.reference,
             object_provides=IGenericLicence.__identifier__,
         )
-        if len(brains) != 1:
-            return
+        if len(brains) == 0:
+            raise ValueError("No licence found with reference number {}".format(self.reference))
         licence = brains[0].getObject()
         return licence
 
@@ -280,3 +302,10 @@ class NoticeNotification(NoticeElement):
     def workLocations(self):
         """Initialize workLocations"""
         return []
+
+    @property
+    def decision_code(self):
+        """Return decision code from a DecisionRequest"""
+        return self._get_data(
+            "specific", self._specific_code, "ns3:decisionCode", "code"
+        )

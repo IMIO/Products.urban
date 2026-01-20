@@ -159,7 +159,15 @@ msgstr ""
 msgid "An opinion to ask condition makes the rule apply only when one of the Opinion to ask selected correspond to the one of the context."
 msgstr ""
 
-#: ../contentrules/configure.zcml:99
+#: ../services/notice.py:134
+msgid "An unexcepted error occured"
+msgstr ""
+
+#: ../services/notice.py:174
+msgid "An unexcepted error occured, please try again"
+msgstr ""
+
+#: ../contentrules/configure.zcml:112
 msgid "Apply only when one of the Opinion to ask selected corresponds to the one of the context"
 msgstr ""
 
@@ -225,7 +233,15 @@ msgstr ""
 msgid "CS_folder_title"
 msgstr ""
 
-#: ../browser/urbaneventviews.py:1071
+#: ../browser/cron/notice.py:266
+msgid "Can not find a parcel"
+msgstr ""
+
+#: ../browser/cron/notice.py:280
+msgid "Can not find an address"
+msgstr ""
+
+#: ../browser/urbaneventviews.py:1164
 msgid "Can't find the street : ${street}"
 msgstr ""
 
@@ -249,7 +265,11 @@ msgstr ""
 msgid "Check parcels"
 msgstr ""
 
-#: ../widget/historizereferencewidget.py:97
+#: ../browser/notice_forms.py:161
+msgid "College opinion"
+msgstr ""
+
+#: ../widget/historizereferencewidget.py:96
 msgid "Comment - {0}"
 msgstr ""
 
@@ -393,12 +413,20 @@ msgstr ""
 msgid "Extension profile for urban."
 msgstr ""
 
+#: ../browser/notice_settings.py:38
+msgid "Failed notifications"
+msgstr ""
+
 #: ../browser/templates/coring_update.pt:16
 msgid "Field"
 msgstr ""
 
 #: ../contentrules/stringinterp.py:17
 msgid "Folder Manager E-mail"
+msgstr ""
+
+#: ../browser/view_utils/close_task.py:42
+msgid "Force close frozen task"
 msgstr ""
 
 #: ../browser/templates/searchparcels.pt:171
@@ -427,7 +455,15 @@ msgstr ""
 msgid "History saved"
 msgstr ""
 
-#: ../interfaces.py:385
+#: ../browser/notice_forms.py:63
+msgid "I will create a college opinion"
+msgstr ""
+
+#: ../browser/notice_forms.py:67
+msgid "I will not send a college opinion and I am finalizing the response to the SPW now"
+msgstr ""
+
+#: ../interfaces.py:397
 msgid "IAcknowledgment type marker interface"
 msgstr ""
 
@@ -686,6 +722,10 @@ msgstr ""
 msgid "Internal opinion services"
 msgstr ""
 
+#: ../browser/notice_settings.py:33
+msgid "Last import date from Notice Webservice"
+msgstr ""
+
 #: ../send_mail_action/forms.py:26
 msgid "Licence Files"
 msgstr ""
@@ -721,7 +761,23 @@ msgstr ""
 msgid "MiscDemand"
 msgstr ""
 
-#: ../browser/urban_configfolderview.py:25
+#: ../browser/cron/notice.py:283
+msgid "Multiple results for an address"
+msgstr ""
+
+#: ../browser/notice_settings.py:23
+msgid "Municipality ID in Notice"
+msgstr ""
+
+#: ../viewlets/templates/notice_transmit_state.pt:3
+msgid "NOTICe reception date"
+msgstr ""
+
+#: ../viewlets/templates/notice_transmit_state.pt:9
+msgid "NOTICe transmits"
+msgstr ""
+
+#: ../browser/urban_configfolderview.py:22
 msgid "Name"
 msgstr ""
 
@@ -754,7 +810,19 @@ msgstr ""
 msgid "Nothing to show !!!"
 msgstr ""
 
-#: ../browser/offdays_settings.py:79
+#: ../browser/notice_settings.py:48
+msgid "Notice settings"
+msgstr ""
+
+#: ../services/notice.py:155
+msgid "Notification ${id} does not exist in Notice"
+msgstr ""
+
+#: ../services/notice.py:146
+msgid "Notification ${id} does not have the correct status in Notice"
+msgstr ""
+
+#: ../browser/offdays_settings.py:74
 msgid "Off days"
 msgstr ""
 
@@ -783,6 +851,10 @@ msgstr ""
 
 #: ../interfaces.py:674
 msgid "Planned mailings"
+msgstr ""
+
+#: ../browser/notice_forms.py:57
+msgid "Preliminary Opinion"
 msgstr ""
 
 msgid "PreliminaryNotice"
@@ -814,6 +886,14 @@ msgstr ""
 #: ../browser/templates/parcelrecordsview.pt:22
 #: ../browser/templates/parcelsinfo.pt:51
 msgid "Related licences"
+msgstr ""
+
+#: ../browser/notice_settings.py:82
+msgid "Retry failed notifications"
+msgstr ""
+
+#: ../browser/notice_settings.py:88
+msgid "Retrying failed notifications"
 msgstr ""
 
 msgid "RoadDecree"
@@ -870,7 +950,11 @@ msgstr ""
 msgid "Send mail"
 msgstr ""
 
-#: ../browser/urbanconfigview.py:94
+#: ../browser/notice_settings.py:28
+msgid "Sent On Behalf Of Municipality ID in Notice"
+msgstr ""
+
+#: ../browser/urbanconfigview.py:95
 msgid "Service full name"
 msgstr ""
 
@@ -932,7 +1016,11 @@ msgstr ""
 msgid "The folder manager '${name}' can't be renamed or removed."
 msgstr ""
 
-#: ../browser/urbaneventviews.py:368
+#: ../browser/urbaneventviews.py:1451
+msgid "The folder transfer to DPA is done."
+msgstr ""
+
+#: ../browser/urbaneventviews.py:376
 msgid "The imported file (${name}) couldn't be read properly. Please verify its structure and try again."
 msgstr ""
 
@@ -940,20 +1028,31 @@ msgstr ""
 msgid "The imported file (${name}) doesn't appear to be a CSV file."
 msgstr ""
 
-#: ../browser/urbaneventviews.py:67
-#: ../browser/urbaneventviews.py:767
-msgid "The folder transfer to DPA is done."
+#: ../browser/urbaneventviews.py:1502
+msgid "The inquiry is final."
 msgstr ""
 
-#: ../browser/urbaneventviews.py:43
-msgid "The mailings will be ready tomorrow!"
+#: ../browser/notice_forms.py:240
+msgid "The opinion transfer is done."
 msgstr ""
 
 #: ../browser/urbaneventviews.py:1012
 msgid "The parcel radius search will be ready tomorrow!"
 msgstr ""
 
-#: ../browser/urbaneventviews.py:1005
+#: ../browser/urbaneventviews.py:1475
+msgid "The ticket transfer is done."
+msgstr ""
+
+#: ../browser/urbaneventviews.py:1463
+msgid "The transfer of dates is done."
+msgstr ""
+
+#: ../browser/urbaneventviews.py:1598
+msgid "The transfer of decision display dates is done."
+msgstr ""
+
+#: ../browser/urbaneventviews.py:998
 msgid "There are parcel owners without any address found! Desactivate them!"
 msgstr ""
 
@@ -961,7 +1060,11 @@ msgstr ""
 msgid "This UrbanEventInquiry is not linked to an existing Inquiry !  Define a new inquiry on the licence !"
 msgstr ""
 
-#: ../browser/portlets.py:198
+#: ../browser/notice_forms.py:58
+msgid "This action cannot be reversed."
+msgstr ""
+
+#: ../browser/portlets.py:212
 msgid "This portlet lists scheduled licences."
 msgstr ""
 
@@ -989,7 +1092,28 @@ msgid "To CWATUPE procedures"
 msgstr ""
 
 #: ../profiles/default/actions.xml
+msgid "Transfer dates to the SPW"
+msgstr ""
+
+#: ../profiles/default/actions.xml
+msgid "Transfer decision display to the SPW"
+msgstr ""
+
+#: ../browser/notice_forms.py:317
+#: ../profiles/default/actions.xml
+msgid "Transfer decision to the SPW"
+msgstr ""
+
+#: ../profiles/default/actions.xml
 msgid "Transfer folder to DPA"
+msgstr ""
+
+#: ../profiles/default/actions.xml
+msgid "Transfer opinion to the SPW"
+msgstr ""
+
+#: ../profiles/default/actions.xml
+msgid "Transfer ticket to the SPW"
 msgstr ""
 
 #: ../browser/licence/templates/licenceview.pt:27
@@ -1030,7 +1154,15 @@ msgstr ""
 msgid "UrbanTool"
 msgstr ""
 
-#: ../browser/offdays_settings.py:63
+#: ../content/licence/CODT_BaseBuildLicence.py:570
+msgid "Value"
+msgstr ""
+
+#: ../browser/notice_settings.py:17
+msgid "Webservice URL"
+msgstr ""
+
+#: ../browser/offdays_settings.py:58
 msgid "Week off days"
 msgstr ""
 
@@ -1648,6 +1780,9 @@ msgstr ""
 msgid "fieldsetlegend-urban_licences_config"
 msgstr ""
 
+msgid "fieldsetlegend-urban_notice_settings"
+msgstr ""
+
 msgid "fieldsetlegend-urban_public_settings"
 msgstr ""
 
@@ -2026,6 +2161,10 @@ msgstr ""
 msgid "legend_specific_features"
 msgstr ""
 
+#: ../browser/cron/notice.py:273
+msgid "locality"
+msgstr ""
+
 msgid "locality_for_worklocation"
 msgstr ""
 
@@ -2135,6 +2274,10 @@ msgstr ""
 #. Default: "Single"
 #: PersonTitleTerm.py
 msgid "multiplicity_single"
+msgstr ""
+
+#: ../browser/cron/notice.py:275
+msgid "municipality"
 msgstr ""
 
 msgid "natura_2000_folder_title"
@@ -2430,6 +2573,10 @@ msgstr ""
 msgid "stop_worksite"
 msgstr ""
 
+#: ../browser/cron/notice.py:272
+msgid "street"
+msgstr ""
+
 #. Default: "When adding manually a new street, please let the default value"
 #: Street.py
 msgid "street_best_address_key_descr"
@@ -2514,8 +2661,40 @@ msgstr ""
 msgid "trails_folder_title"
 msgstr ""
 
-#. Default: "Transfert du dossier vers le DPA"
+msgid "transfer_dates"
+msgstr ""
+
+msgid "transfer_decision"
+msgstr ""
+
+msgid "transfer_decision_display"
+msgstr ""
+
 msgid "transfer_folder_to_dpa"
+msgstr ""
+
+msgid "transfer_opinion"
+msgstr ""
+
+msgid "transfer_ticket"
+msgstr ""
+
+msgid "transfer_ticket_final"
+msgstr ""
+
+#. Default: "Action"
+#: ../viewlets/templates/notice_transmit_state.pt:13
+msgid "transmit_action"
+msgstr ""
+
+#. Default: "When"
+#: ../viewlets/templates/notice_transmit_state.pt:14
+msgid "transmit_date"
+msgstr ""
+
+#. Default: "User"
+#: ../viewlets/templates/notice_transmit_state.pt:15
+msgid "transmit_user"
 msgstr ""
 
 msgid "uniquelicence_urbanconfig_title"
@@ -4713,6 +4892,11 @@ msgstr ""
 #. Default: "ReportReceptionDate"
 #: ../UrbanEvent.py:471
 msgid "urban_label_reportReceptionDate"
+msgstr ""
+
+#. Default: "reporttext"
+#: ../content/UrbanEventInquiry.py:134
+msgid "urban_label_reportText"
 msgstr ""
 
 msgid "urban_label_reportVisitDate"

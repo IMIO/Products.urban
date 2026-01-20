@@ -69,7 +69,7 @@ setup(
         "imio.actionspanel",
         "imio.dashboard",
         "imio.pm.locales",
-        "imio.pm.wsclient>=2.0",
+        "imio-pm-wsclient>=2.0.5",
         "imio.restapi",
         "imio.schedule",
         "imio.urban.core",
