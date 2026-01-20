@@ -8,6 +8,25 @@ Changelog
 
 .. towncrier release notes start
 
+2.9.0 (2026-01-20)
+------------------
+
+New features:
+
+
+- Implement Notice MVP
+  [ndemonte, wboudabous, mpeeters] (URB-2652)
+
+
+Bug fixes:
+
+
+- Add external method to fix `subdividerName` in parcellings
+  [jchandelle] (SUP-46704)
+- Fix `get_all_rules_for_this_event` to filter on rule type
+  [jchandelle] (URB-3481)
+
+
 2.8.0 (2026-01-18)
 ------------------
 
