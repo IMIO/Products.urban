@@ -1,0 +1,2 @@
+Cleanup unwanted lines that were keeped by git merge
+[mpeeters]
