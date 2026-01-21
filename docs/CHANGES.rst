@@ -8,6 +8,16 @@ Changelog
 
 .. towncrier release notes start
 
+2.9.1 (2026-01-21)
+------------------
+
+Bug fixes:
+
+
+- Cleanup unwanted lines that were keeped by git merge
+  [mpeeters] (URB-2652)
+
+
 2.9.0 (2026-01-20)
 ------------------
 
