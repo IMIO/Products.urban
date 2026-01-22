@@ -8,6 +8,16 @@ Changelog
 
 .. towncrier release notes start
 
+2.9.2 (2026-01-22)
+------------------
+
+Bug fixes:
+
+
+- Fix a portlet error when notice WS url is not defined
+  [mpeeters] (URB-2652)
+
+
 2.9.1 (2026-01-21)
 ------------------
 
