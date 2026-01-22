@@ -18,8 +18,11 @@ class WebserviceNotice(WebService):
     @property
     def url(self):
         url = api.portal.get_registry_record(
-            "Products.urban.browser.notice_settings.INoticeSettings.url"
+            "Products.urban.browser.notice_settings.INoticeSettings.url",
+            default=None
         )
+        if not url:
+            return
         if url.endswith("/"):
             return url[:-1]
         return url
