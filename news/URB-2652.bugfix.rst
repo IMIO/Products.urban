@@ -1,2 +1,0 @@
-Fix a portlet error when notice WS url is not defined
-[mpeeters]
