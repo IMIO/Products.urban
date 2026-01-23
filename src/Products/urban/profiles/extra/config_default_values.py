@@ -3882,12 +3882,76 @@ default_values = {
         ],
         "buildingtype": [
             "UrbanVocabularyTerm",
+            {
+                "id": "annexe", 
+                "title": u"Annexe", 
+            },
+            {
+                "id": "commerce", 
+                "title": u"Commerce", 
+            },
+            {
+                "id": "industrie", 
+                "title": u"Industrie", 
+            },
+            {
+                "id": "infrastructure-publique", 
+                "title": u"Infrastructure publique", 
+            },
+            {
+                "id": "logement", 
+                "title": u"Logement", 
+            },
+            {
+                "id": "logement-et-commerce", 
+                "title": u"Logement et commerce", 
+            },
         ],
         "inspectioncontexts": [
             "UrbanVocabularyTerm",
+            {
+                "id": "constat", 
+                "title": u"Constat", 
+            },
+            {
+                "id": "logement-declare-inhabitable-depuis-au-moins-12-mois", 
+                "title": u"Logement déclaré inhabitable depuis au moins 12 mois", 
+            },
+            {
+                "id": "logement-dont-la-consommation-annuelle-est-inferieure-a-15-m3-d2019eau-ou-a-100-kwh-d2019electricite", 
+                "title": u"Logement dont la consommation annuelle est inférieure à 15 m³ d'eau ou à 100 kWh d'électricité", 
+            },
+            {
+                "id": "logement-inoccupe", 
+                "title": u"Logement pour lequel aucune personne n'est inscrite dans les registres de la population pendant une période d'au moins douze mois consécutifs", 
+            },
+            {
+                "id": "logement-qui-n2019est-pas-garni-du-mobilier-indispensable-a-son-affectation-pendant-une-periode-de-12-mois-consecutifs", 
+                "title": u"Logement qui n'est pas garni du mobilier indispensable à son affectation pendant une période de 12 mois consécutifs", 
+            },
+            {
+                "id": "plainte", 
+                "title": u"Plainte", 
+            },
         ],
         "part_of_the_building_concerned": [
             "UrbanVocabularyTerm",
+            {
+                "id": "1er-etage", 
+                "title": "1er étage",
+            },
+            {
+                "id": "2eme-etage", 
+                "title": "2éme étage",
+            },
+            {
+                "id": "entierte", 
+                "title": "Entierté",
+            },
+            {
+                "id": "rez-de-chaussee", 
+                "title": "Rez-de-chaussée",
+            },
         ],
     },
 }
