@@ -13,11 +13,16 @@ from imio.urban.core.contents.eventconfig import IEventConfig
 from plone import api
 
 import transaction
+import logging
 
+
+logger = logging.getLogger("urban: migrations")
 TRANSACTION_SIZE = 1000
 
 
 def migrate_PortionOut_to_DX(context):
+    logger = logging.getLogger("urban: migrate PortionOut to Dexterity")
+    logger.info("starting migration steps")
     fields_mapping = (
         {
             "AT_field_name": "division",
@@ -96,11 +101,13 @@ def migrate_PortionOut_to_DX(context):
     # restore catalog and linkintegrity
     patches.unapply()
     portal.portal_properties.site_properties.enable_link_integrity_checks = True
+    logger.info("migration done!")
     return result
 
 
 def migrate_ParcellingTerm_to_DX(context):
-
+    logger = logging.getLogger("urban: migrate ParcellingTerm to Dexterity")
+    logger.info("starting migration steps")
     fields_mapping = (
         {
             "AT_field_name": "label",
@@ -153,10 +160,13 @@ def migrate_ParcellingTerm_to_DX(context):
     portal = api.portal.get()
     parcellings = portal.urban.parcellings.objectValues()
     uid_catalog_reindex_objects(parcellings)
+    logger.info("migration done!")
     return result
 
 
 def migrate_UrbanEventType_to_DX(context):
+    logger = logging.getLogger("urban: migrate UrbanEventType to Dexterity")
+    logger.info("starting migration steps")
     vocabulary_fields_mapping = [
         {
             "AT_field_name": "numbering",
@@ -330,7 +340,15 @@ def migrate_UrbanEventType_to_DX(context):
     portal_urban = api.portal.get_tool("portal_urban")
     cache_view = portal_urban.unrestrictedTraverse("urban_vocabulary_cache")
     cache_view.update_all_cache()
-    # as its he last DX migration step -> recatalog evrything
+    logger.info("migration done!")
+    return result
+
+
+def rebuild_catalog(context):
+    logger = logging.getLogger("urban: Rebuild Catalog")
+    logger.info("starting migration steps")
+
     catalog = api.portal.get_tool("portal_catalog")
     catalog.clearFindAndRebuild()
-    return result
+
+    logger.info("migration done!")
