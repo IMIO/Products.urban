@@ -67,3 +67,53 @@ def add_roaddecree(context):
     logger.info("migration step done!")
 
     add_new_urban_licence_type("RoadDecree")
+
+
+def add_housing_vocabularies(context):
+    logger = logging.getLogger("urban: Add housing vocabularies")
+    logger.info("starting upgrade steps")
+    portal_urban = api.portal.get_tool("portal_urban")
+
+    # buildingtype
+    buildingtype_items_vocabulary_config = default_values["Housing"][
+        "buildingtype"
+    ]
+    allowedtypes = buildingtype_items_vocabulary_config[0]
+    buildingtype_vocabulary_folder = createVocabularyFolder(
+        portal_urban, "buildingtype", context, allowedtypes
+    )
+    createFolderDefaultValues(
+        buildingtype_vocabulary_folder,
+        buildingtype_items_vocabulary_config[1:],
+        allowedtypes,
+    )
+
+    # inspectioncontexts
+    inspectioncontexts_items_vocabulary_config = default_values["Housing"][
+        "inspectioncontexts"
+    ]
+    allowedtypes = inspectioncontexts_items_vocabulary_config[0]
+    inspectioncontexts_vocabulary_folder = createVocabularyFolder(
+        portal_urban, "inspectioncontexts", context, allowedtypes
+    )
+    createFolderDefaultValues(
+        inspectioncontexts_vocabulary_folder,
+        inspectioncontexts_items_vocabulary_config[1:],
+        allowedtypes,
+    )
+
+    # part_of_the_building_concerned
+    part_of_the_building_concerned_items_vocabulary_config = default_values["Housing"][
+        "part_of_the_building_concerned"
+    ]
+    allowedtypes = part_of_the_building_concerned_items_vocabulary_config[0]
+    part_of_the_building_concerned_vocabulary_folder = createVocabularyFolder(
+        portal_urban, "part_of_the_building_concerned", context, allowedtypes
+    )
+    createFolderDefaultValues(
+        part_of_the_building_concerned_vocabulary_folder,
+        part_of_the_building_concerned_items_vocabulary_config[1:],
+        allowedtypes,
+    )
+
+    logger.info("migration step done!")
