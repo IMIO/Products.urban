@@ -73,6 +73,10 @@ def add_housing_vocabularies(context):
     logger = logging.getLogger("urban: Add housing vocabularies")
     logger.info("starting upgrade steps")
     portal_urban = api.portal.get_tool("portal_urban")
+    housing_folder = getattr(portal_urban, "housing", None)
+
+    if housing_folder is None:
+        return
 
     # buildingtype
     buildingtype_items_vocabulary_config = default_values["Housing"][
@@ -80,7 +84,7 @@ def add_housing_vocabularies(context):
     ]
     allowedtypes = buildingtype_items_vocabulary_config[0]
     buildingtype_vocabulary_folder = createVocabularyFolder(
-        portal_urban, "buildingtype", context, allowedtypes
+        housing_folder, "buildingtype", context, allowedtypes=allowedtypes
     )
     createFolderDefaultValues(
         buildingtype_vocabulary_folder,
@@ -94,7 +98,7 @@ def add_housing_vocabularies(context):
     ]
     allowedtypes = inspectioncontexts_items_vocabulary_config[0]
     inspectioncontexts_vocabulary_folder = createVocabularyFolder(
-        portal_urban, "inspectioncontexts", context, allowedtypes
+        housing_folder, "inspectioncontexts", context, allowedtypes=allowedtypes
     )
     createFolderDefaultValues(
         inspectioncontexts_vocabulary_folder,
@@ -108,7 +112,7 @@ def add_housing_vocabularies(context):
     ]
     allowedtypes = part_of_the_building_concerned_items_vocabulary_config[0]
     part_of_the_building_concerned_vocabulary_folder = createVocabularyFolder(
-        portal_urban, "part_of_the_building_concerned", context, allowedtypes
+        housing_folder, "part_of_the_building_concerned", context, allowedtypes=allowedtypes
     )
     createFolderDefaultValues(
         part_of_the_building_concerned_vocabulary_folder,
