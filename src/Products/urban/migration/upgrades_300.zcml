@@ -30,6 +30,10 @@
           handler=".migrate_to_DX.migrate_UrbanEventType_to_DX"
           />
         <gs:upgradeStep
+          title="Rebuild Catalog"
+          handler=".migrate_to_DX.rebuild_catalog"
+          />
+        <gs:upgradeStep
           title="Migration urbaneventtypes folder"
           handler=".migrate_to_250.migrate_urbaneventtypes_folder"
           />

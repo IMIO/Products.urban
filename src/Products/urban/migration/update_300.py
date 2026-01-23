@@ -28,8 +28,11 @@ def set_additional_reference_as_default(context):
 
 
 def install_urban_core(context):
+    logger = logging.getLogger("urban: install imio.urban.core")
+    logger.info("starting migration steps")
     portal_setup = api.portal.get_tool('portal_setup')
     portal_setup.runAllImportStepsFromProfile('profile-imio.urban.core:default')
+    logger.info("migration done!")
 
 
 def add_missing_registry_record(context):
@@ -114,6 +117,10 @@ def reimport_typeinfo(context):
 
 
 def fix_parcelling_changesDescription_field(context):
+    logger = logging.getLogger(
+        "urban: Fix parcelling changesDirection"
+    )
+    logger.info("starting upgrade steps")
     brains = api.content.find(portal_type="Parcelling")
     for brain in brains:
         parcelling = brain.getObject()
@@ -124,6 +131,7 @@ def fix_parcelling_changesDescription_field(context):
             continue
         new_value = RichTextValue(safe_unicode(changesDescription))
         setattr(parcelling, "changesDescription", new_value)
+    logger.info("migration step done!")
 
 
 def set_eventconfig_optional_fields(context):
