@@ -7,14 +7,11 @@ from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import (
 from Products.Archetypes.atapi import *
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
-from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.urban import interfaces
 from Products.urban import UrbanMessage as _
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.config import *
 from Products.urban.content.licence.CODT_BuildLicence import CODT_BuildLicence
-from Products.urban.content.licence.CODT_BaseBuildLicence import CODT_BaseBuildLicence
-
 from plone import api
 from zope.interface import implements
 
@@ -138,17 +135,14 @@ del RoadDecree_schema["exemptFDArticle"]
 del RoadDecree_schema["requirementFromFD"]
 
 
-class RoadDecree(BaseFolder, CODT_BaseBuildLicence, BrowserDefaultMixin):
+class RoadDecree(CODT_BuildLicence):
     """ """
 
     security = ClassSecurityInfo()
     implements(interfaces.IRoadDecree)
 
     meta_type = "RoadDecree"
-    _at_rename_after_creation = True
-
     RoadDecree_schema["roadAdaptation"].schemata = "urban_road"
-
     schema = RoadDecree_schema
 
     security.declarePublic("getReferenceDGATLP")

@@ -11,7 +11,6 @@ from Products.urban import UrbanMessage as _
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.config import PROJECTNAME
 from Products.urban.content.licence.CODT_BaseBuildLicence import CODT_BaseBuildLicence
-from Products.urban.content.licence.BaseInspection import BaseInspection
 from Products.urban.content.licence.GenericLicence import GenericLicence
 from Products.urban.content.licence.Inspection import Inspection
 from zope.interface import implements
@@ -65,7 +64,7 @@ Housing_schema += Schema(
 )
 
 
-class Housing(BaseInspection, CODT_BaseBuildLicence):
+class Housing(Inspection, CODT_BaseBuildLicence):
     meta_type = "Housing"
     portal_type = "Housing"
     _at_rename_after_creation = True

@@ -39,10 +39,6 @@ class IBaseAllBuildLicence(IGenericLicence):
     """Marker interface for all the buildilicence likes procedures (cwatup and CODT)."""
 
 
-class IBaseInspection(IGenericLicence):
-    """Marker interface for all the buildilicence likes procedures (cwatup and CODT)."""
-
-
 class IBaseBuildLicence(IBaseAllBuildLicence):
     """Marker interface for all buildlicence procedures (cwatup)"""
 
