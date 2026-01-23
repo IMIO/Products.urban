@@ -819,4 +819,13 @@
         profile="Products.urban:default"
         />
 
+     <gs:upgradeStep
+        title="Add housing vocabularies"
+        description=""
+        source="2801"
+        destination="2802"
+        handler=".update_280.add_housing_vocabularies"
+        profile="Products.urban:default"
+        />
+
 </configure>
