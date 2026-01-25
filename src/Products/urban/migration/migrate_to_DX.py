@@ -16,7 +16,7 @@ import logging
 
 
 logger = logging.getLogger("urban: migrations")
-TRANSACTION_SIZE = 1000
+TRANSACTION_SIZE = 5000
 
 
 def migrate_PortionOut_to_DX(context):
@@ -96,6 +96,15 @@ def migrate_PortionOut_to_DX(context):
         transaction_size=TRANSACTION_SIZE,
         full_transaction=True
     )
+    # Ensure that some remaining contents are also migrated
+    result = migrateCustomAT(
+        fields_mapping,
+        src_type="PortionOut",
+        dst_type="Parcel",
+        transaction_size=TRANSACTION_SIZE,
+        full_transaction=True
+    )
+    transaction.commit()
     # restore catalog and linkintegrity
     patches.unapply()
     portal.portal_properties.site_properties.enable_link_integrity_checks = True
