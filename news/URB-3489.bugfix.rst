@@ -1,0 +1,2 @@
+Fix an issue with voirie group in config
+[mpeeters]
