@@ -359,13 +359,14 @@ def fix_voirie_opinion_group(context):
         "Products.urban.interfaces.IInternalOpinionServices.services"
     )
     if value["road"]["editor_group_id"] == "Road_editors":
-        value["road"]["editor_group_id"] == "Voirie_editors"
+        value["road"]["editor_group_id"] = "Voirie_editors"
     if value["road"]["validator_group_id"] == "Road_validators":
-        value["road"]["validator_group_id"] == "Voirie_validators"
+        value["road"]["validator_group_id"] = "Voirie_validators"
     api.portal.set_registry_record(
         "Products.urban.interfaces.IInternalOpinionServices.services",
         value,
     )
+    transaction.commit()
 
     logger.info("migration done!")
 
