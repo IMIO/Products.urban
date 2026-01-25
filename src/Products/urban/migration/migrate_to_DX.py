@@ -7,7 +7,6 @@ from Products.urban.migration.to_DX.migration_utils import migrate_to_shore
 from Products.urban.migration.to_DX.migration_utils import migrateCustomAT
 from Products.urban.migration.to_DX.migration_utils import uid_catalog_reindex_objects
 from Products.urban.migration.to_DX.migration_utils import migrateCustomAT_trough_licences
-from Products.urban.migration.utils import disable_schedule
 from collective.noindexing import patches
 from imio.urban.core.contents.eventconfig import IEventConfig
 from plone import api
@@ -86,9 +85,8 @@ def migrate_PortionOut_to_DX(context):
             "field_migrator": migrate_to_shore,
         },
     )
-    # disable linkintegrity, catalog and schedule
+    # disable linkintegrity, catalog
     patches.apply()
-    disable_schedule()
     portal = api.portal.get()
     portal.portal_properties.site_properties.enable_link_integrity_checks = False
     result = migrateCustomAT_trough_licences(
