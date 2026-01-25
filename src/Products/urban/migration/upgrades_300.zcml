@@ -30,6 +30,10 @@
           handler=".migrate_to_DX.migrate_UrbanEventType_to_DX"
           />
         <gs:upgradeStep
+          title="Fix voirie group"
+          handler=".migrate_to_DX.fix_voirie_opinion_group"
+          />
+        <gs:upgradeStep
           title="Rebuild Catalog"
           handler=".migrate_to_DX.rebuild_catalog"
           />
