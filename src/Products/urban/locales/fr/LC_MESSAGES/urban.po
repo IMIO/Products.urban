@@ -1796,15 +1796,15 @@ msgstr "Cette application fonctionne mieux avec Firefox."
 
 #: ../content/licence/GenericLicence.py:1679
 msgid "flooding_already_flooded"
-msgstr ""
+msgstr "Bien ayant déjà été inondé"
 
 #: ../content/licence/GenericLicence.py:1675
 msgid "flooding_axis_over_10"
-msgstr ""
+msgstr "Axe de ruisselement concentré - plus de 10 ha"
 
 #: ../content/licence/GenericLicence.py:1671
 msgid "flooding_axis_under_10"
-msgstr ""
+msgstr "Axe de ruissellement concentré - moins de 10 ha"
 
 #. Default: "High risk"
 #: ../content/licence/GenericLicence.py:1668
