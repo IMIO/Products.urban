@@ -1,0 +1,2 @@
+Ensure that if we have datetime they are converted to Zope DateTime before comparison
+[mpeeters]
