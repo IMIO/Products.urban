@@ -33,6 +33,7 @@ from Products.urban.config import EMPTY_VOCAB_VALUE
 from Products.urban.config import PROJECTNAME
 from Products.urban.utils import WIDGET_DATE_END_YEAR
 from collections import OrderedDict
+from datetime import date
 from datetime import datetime
 
 ##code-section module-header #fill in your manual code here
@@ -201,24 +202,48 @@ class UrbanVocabulary(object):
         self._filter = _filter
 
     def _validate_term(self, term, deposit_date):
-        if isinstance(term, dict):
-            if "startValidity" not in term or "endValidity" not in term:
-                return term.get("enabled", True)
-        else:
-            if not hasattr(term, "startValidity") or not hasattr(term, "endValidity"):
-                return term.get("enabled", True)
-        if term["startValidity"] is None and term["endValidity"] is None:
+        start_validity = self._get_start_validity(term)
+        end_validity = self._get_end_validity(term)
+        if start_validity is None and end_validity is None:
             return term.get("enabled", True)
-        if term["startValidity"] and term["endValidity"]:
+        if start_validity and end_validity:
             return (
-                deposit_date >= term["startValidity"]
-                and deposit_date <= term["endValidity"]
+                deposit_date >= start_validity
+                and deposit_date <= end_validity
             )
-        if term["startValidity"]:
-            return deposit_date >= term["startValidity"]
-        if term["endValidity"]:
-            return deposit_date <= term["endValidity"]
+        if start_validity:
+            return deposit_date >= start_validity
+        if end_validity:
+            return deposit_date <= end_validity
         return term.get("enabled", True)
+
+    def _get_start_validity(self, term):
+        if isinstance(term, dict):
+            if "startValidity" not in term:
+                return None
+        else:
+            if not hasattr(term, "startValidity"):
+                return None
+        value = term["startValidity"]
+        if isinstance(value, date):
+            value = DateTime(*value.timetuple()[0:3])
+        if isinstance(value, datetime):
+            value = DateTime(*value.date().timetuple()[0:3])
+        return value
+
+    def _get_end_validity(self, term):
+        if isinstance(term, dict):
+            if "endValidity" not in term:
+                return None
+        else:
+            if not hasattr(term, "endValidity"):
+                return None
+        value = term["endValidity"]
+        if isinstance(value, date):
+            value = DateTime(*value.timetuple()[0:3])
+        if isinstance(value, datetime):
+            value = DateTime(*value.date().timetuple()[0:3])
+        return value
 
     def _get_deposit_date(self, context):
         deposit_date = None
