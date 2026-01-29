@@ -89,6 +89,15 @@
       />
 
   <gs:upgradeStep
+      title="Add new registry record for inquiry address to do"
+      description=""
+      profile="Products.urban:default"
+      source="1211"
+      destination="1212"
+      handler=".update_270.add_new_registry_profil"
+      />
+
+  <gs:upgradeStep
       title="Set additionalReference as an optional field"
       description="Activate additionalReference for all licences types"
       profile="Products.urban:default"
