@@ -265,7 +265,11 @@ msgstr ""
 msgid "Check parcels"
 msgstr ""
 
-#: ../browser/notice_forms.py:161
+#: ../browser/notice_forms.py:423
+msgid "College decision"
+msgstr ""
+
+#: ../browser/notice_forms.py:279
 msgid "College opinion"
 msgstr ""
 
