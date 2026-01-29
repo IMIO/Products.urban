@@ -261,7 +261,11 @@ msgstr "Changements enregistrés"
 msgid "Check parcels"
 msgstr "Vérifier les parcelles"
 
-#: ../browser/notice_forms.py:161
+#: ../browser/notice_forms.py:423
+msgid "College decision"
+msgstr "Décision du collège"
+
+#: ../browser/notice_forms.py:279
 msgid "College opinion"
 msgstr "Avis collège"
 
