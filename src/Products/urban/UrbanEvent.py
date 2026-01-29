@@ -1033,10 +1033,10 @@ class UrbanEvent(OrderedBaseFolder, BrowserDefaultMixin):
 
         return result
 
-    def transfer_decision(self, college_opinion):
+    def transfer_decision(self, college_decision):
 
-        # store college opinion for later use (final response, transfer decision display)
-        self._notice_opinion = college_opinion
+        # store college decision for later use (final response, transfer decision display)
+        self._notice_decision = college_decision
 
         notification = NoticeOutgoingSummaryReportDecisionNotification(self)
         service = WebserviceNotice()

@@ -186,7 +186,7 @@ class NoticeOutgoingSummaryReportNotification(NoticeResponse):
 
     @property
     def _motivation(self):
-        return getattr(self._decision_event, "_notice_opinion", None)
+        return getattr(self._decision_event, "_notice_decision", None)
 
     @property
     def _decision_date(self):

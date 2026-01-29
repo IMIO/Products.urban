@@ -1546,8 +1546,8 @@ class CanTransferDecisionDisplayView(BrowserView):
                     "Products.urban.interfaces.ITheLicenceEvent" in event_types
                     or "Products.urban.interfaces.ILicenceDeliveryEvent" in event_types
                 )
-                event_has_college_opinion_data = getattr(event, "_notice_opinion", None)
-                if is_a_college_decision_event and event_has_college_opinion_data:
+                event_has_college_decision_data = getattr(event, "_notice_decision", None)
+                if is_a_college_decision_event and event_has_college_decision_data:
                     return True
 
         return False

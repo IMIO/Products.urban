@@ -20,7 +20,7 @@ from plone.z3cform.layout import wrap_form
 
 
 class NoticeResponseActionForm(Form):
-    def _fetch_iadelib_opinion(self):
+    def _fetch_iadelib_opinion(self, field_to_fill):
         motivation = self._get_iadelib_field(self.context, "motivation") or ""
         decision = self._get_iadelib_field(self.context, "decision") or ""
         if motivation or decision:
@@ -30,7 +30,7 @@ class NoticeResponseActionForm(Form):
                 )
             )
             full_text = clean_accents(full_text)
-            self.widgets["college_opinion"].value = RichTextValue(
+            self.widgets[field_to_fill].value = RichTextValue(
                 full_text,
                 "text/html",
                 "text/html",
@@ -129,7 +129,7 @@ class TransferOpinionActionForm(NoticeResponseActionForm):
 
     def updateWidgets(self):
         super(TransferOpinionActionForm, self).updateWidgets()
-        self._fetch_iadelib_opinion()
+        self._fetch_iadelib_opinion("college_opinion")
 
     @button.buttonAndHandler(_("Send"), name="send_response")
     def handleSendResponse(self, action):
@@ -166,8 +166,8 @@ TransferOpinionActionWrapper = wrap_form(TransferOpinionActionForm)
 
 class ITransferDecisionActionForm(Interface):
 
-    college_opinion = RichText(
-        title=_(u"College opinion"),
+    college_decision = RichText(
+        title=_(u"College decision"),
         default=u"<h1>Motivation:</h1>\r\n\r\n<h1>Décision:</h1>\r\n\r\n",
         required=False,
     )
@@ -182,7 +182,7 @@ class TransferDecisionActionForm(NoticeResponseActionForm):
 
     def updateWidgets(self):
         super(TransferDecisionActionForm, self).updateWidgets()
-        self._fetch_iadelib_opinion()
+        self._fetch_iadelib_opinion("college_decision")
 
     @button.buttonAndHandler(_("Send"), name="send_response")
     def handleSendResponse(self, action):
@@ -191,15 +191,18 @@ class TransferDecisionActionForm(NoticeResponseActionForm):
             self.status = self.formErrorsMessage
             return
 
-        college_opinion = data.get("college_opinion", "")
+        college_decision = data.get("college_decision", "")
 
-        result = self.context.transfer_decision(college_opinion.output)
+        result = self.context.transfer_decision(college_decision.output)
 
-        if result["error"] is True:
-            IStatusMessage(self.request).addStatusMessage(result["message"], "error")
-        else:
-            IStatusMessage(self.request).addStatusMessage(
-                _(u"The opinion transfer is done."), "info"
+        notice_id = self.context.aq_parent.get_notice_id(self.response_id_code)
+        if not notice_id:
+            raise ValueError(
+                _(
+                    u"Can't send response to event '{}': no Notice ID found for '{}'".format(
+                        self.context.absolute_url, self.response_id_code
+                    )
+                )
             )
 
         self._finishedSent = True
