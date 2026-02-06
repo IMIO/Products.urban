@@ -1,11 +1,52 @@
 # -*- coding: utf-8 -*-
 
+import requests
+
 from Products.urban import UrbanMessage as _
+from Products.urban.interfaces import IGenericLicence
+from Products.urban.interfaces import IUrbanEvent
 from Products.urban.notice import NoticeNotification
 from Products.urban.services.base import WebService
 from plone import api
+from plone.restapi.interfaces import IExpandableElement
+from plone.restapi.serializer.converters import json_compatible
+from plone.restapi.services import Service
+from zope.annotation.interfaces import IAnnotations
+from zope.component import adapter
+from zope.interface import implementer
+from zope.interface import Interface
 
-import requests
+
+@implementer(IExpandableElement)
+@adapter(Interface, Interface)
+class Notice(object):
+    def __init__(self, context, request):
+        self.context = context
+        self.request = request
+
+    def __call__(self, expand=False):
+        result = {"notice": {"@id": "{}/@notice".format(self.context.absolute_url())}}
+        if not expand:
+            return result
+
+        data = {}
+
+        if IGenericLicence.providedBy(self.context):
+            notice_ids = getattr(self.context, "notice_ids", {})
+            data["notice_ids"] = notice_ids
+
+        if IUrbanEvent.providedBy(self.context):
+            annotations = IAnnotations(self.context)
+            for key in ("notice_transmit_dates", "notice_reception_date"):
+                data[key] = annotations.get(key, None)
+
+        return json_compatible({"notice": data})
+
+
+class NoticeGet(Service):
+    def reply(self):
+        notice = Notice(self.context, self.request)
+        return notice(expand=True)["notice"]
 
 
 class WebserviceNotice(WebService):
