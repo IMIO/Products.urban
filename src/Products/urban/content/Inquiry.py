@@ -75,7 +75,7 @@ schema = Schema(
         TextField(
             name="derogationDetails",
             allowable_content_types=("text/html",),
-            widget=TextAreaWidget(
+            widget=RichWidget(
                 label=_("urban_label_derogationDetails", default="Derogationdetails"),
             ),
             default_content_type="text/html",
