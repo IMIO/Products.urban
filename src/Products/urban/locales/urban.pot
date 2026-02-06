@@ -65,8 +65,8 @@ msgstr ""
 msgid "75 days"
 msgstr ""
 
-#: ../contentrules/event_type.py:70
-msgid "A Event type condition makes the rule apply only if Event type correspond to the one from the context."
+#: ../browser/cron/notice.py:171
+msgid "<p>${msg} for informations: ${data}</p>"
 msgstr ""
 
 #: ../contentrules/opinions.py:77
@@ -245,9 +245,13 @@ msgstr ""
 msgid "Can't find the street : ${street}"
 msgstr ""
 
-#: ../browser/gig_coring_settings.py:75
-#: ../browser/offdays_settings.py:113
-#: ../browser/schedule_settings.py:31
+#: ../browser/notice_forms.py:106
+msgid "Can't send response to event '{}': no Notice ID found for '{}'"
+msgstr ""
+
+#: ../browser/gig_coring_settings.py:72
+#: ../browser/notice_settings.py:67
+#: ../browser/offdays_settings.py:108
 msgid "Cancel"
 msgstr ""
 
@@ -834,7 +838,11 @@ msgstr ""
 msgid "Off days period"
 msgstr ""
 
-#: ../contentrules/configure.zcml:99
+#: ../browser/notice_forms.py:132
+msgid "One file is not available anymore, and couldn't be sent."
+msgstr ""
+
+#: ../contentrules/configure.zcml:112
 #: ../contentrules/opinions.py:26
 msgid "Opinion to ask"
 msgstr ""
@@ -930,7 +938,11 @@ msgstr ""
 msgid "Select all files from this event or the parent licence you want to send."
 msgstr ""
 
-#: ../docgen/UrbanTemplate.py:29
+#: ../browser/notice_forms.py:29
+msgid "Select files from this event or the parent licence you want to send (PDF, XLSX or PNG)."
+msgstr ""
+
+#: ../docgen/UrbanTemplate.py:26
 msgid "Select for which content types the template will be available."
 msgstr ""
 
@@ -1012,7 +1024,11 @@ msgstr ""
 msgid "The claimants import will be ready tomorrow!"
 msgstr ""
 
-#: ../browser/longtextview.py:34
+#: ../browser/notice_forms.py:284
+msgid "The decision transfer is done."
+msgstr ""
+
+#: ../browser/longtextview.py:35
 msgid "The field does not exist !!!"
 msgstr ""
 
@@ -1430,7 +1446,13 @@ msgstr ""
 msgid "codt_urbancertificatetwo_urbanconfig_title"
 msgstr ""
 
+msgid "college_decision"
+msgstr ""
+
 msgid "college_holydays"
+msgstr ""
+
+msgid "college_opinion"
 msgstr ""
 
 msgid "collegeopinions_folder_title"
@@ -2694,6 +2716,11 @@ msgstr ""
 #. Default: "When"
 #: ../viewlets/templates/notice_transmit_state.pt:14
 msgid "transmit_date"
+msgstr ""
+
+#. Default: "Form data"
+#: ../viewlets/templates/notice_transmit_state.pt:17
+msgid "transmit_form_data"
 msgstr ""
 
 #. Default: "User"

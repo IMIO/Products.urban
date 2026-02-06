@@ -1542,3 +1542,9 @@ msgstr ""
 
 msgid "transfer_decision_display"
 msgstr ""
+
+msgid "college_opinion"
+msgstr ""
+
+msgid "college_decision"
+msgstr ""

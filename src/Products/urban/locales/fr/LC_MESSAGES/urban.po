@@ -241,9 +241,13 @@ msgstr "Adresse introuvable"
 msgid "Can't find the street : ${street}"
 msgstr "Cette rue est introuvable : ${street}"
 
-#: ../browser/gig_coring_settings.py:75
-#: ../browser/offdays_settings.py:113
-#: ../browser/schedule_settings.py:31
+#: ../browser/notice_forms.py:106
+msgid "Can't send response to event '{}': no Notice ID found for '{}'"
+msgstr ""
+
+#: ../browser/gig_coring_settings.py:72
+#: ../browser/notice_settings.py:67
+#: ../browser/offdays_settings.py:108
 msgid "Cancel"
 msgstr "Annuler"
 
@@ -841,7 +845,11 @@ msgstr "Jours de suspension"
 msgid "Off days period"
 msgstr "Périodes de suspension"
 
-#: ../contentrules/configure.zcml:99
+#: ../browser/notice_forms.py:132
+msgid "One file is not available anymore, and couldn't be sent."
+msgstr "Un fichier n'est plus disponible et n'a pas pu être envoyé"
+
+#: ../contentrules/configure.zcml:112
 #: ../contentrules/opinions.py:26
 msgid "Opinion to ask"
 msgstr "Avis à demander"
@@ -937,7 +945,11 @@ msgstr "Chercher des références cadastrales."
 msgid "Select all files from this event or the parent licence you want to send."
 msgstr "Sélectionnez tous les fichiers de cet événement ou du permis parent que vous souhaitez envoyer."
 
-#: ../docgen/UrbanTemplate.py:29
+#: ../browser/notice_forms.py:29
+msgid "Select files from this event or the parent licence you want to send (PDF, XLSX or PNG)."
+msgstr "Sélectionnez tous les fichiers de cet événement ou du permis parent que vous souhaitez envoyer (PDF, XLSX ou PNG)."
+
+#: ../docgen/UrbanTemplate.py:26
 msgid "Select for which content types the template will be available."
 msgstr "Sélectionner les types de contenues autorisés pour ce modèle"
 
@@ -1019,7 +1031,11 @@ msgstr "Le fichier CSV n'a pas pu être lu correctement. Veuillez vérifier son 
 msgid "The claimants import will be ready tomorrow!"
 msgstr "L'import des réclamants a bien été enregistré et sera éxécuté cette nuit"
 
-#: ../browser/longtextview.py:34
+#: ../browser/notice_forms.py:284
+msgid "The decision transfer is done."
+msgstr "L'envoi de la décision est terminé."
+
+#: ../browser/longtextview.py:35
 msgid "The field does not exist !!!"
 msgstr "Le champ n'existe pas."
 
@@ -1439,8 +1455,14 @@ msgstr "Paramètres des certificats d'urbanisme 1 (CODT)"
 msgid "codt_urbancertificatetwo_urbanconfig_title"
 msgstr "Paramètres des certificats d'urbanisme 2 (CODT)"
 
+msgid "college_decision"
+msgstr "Décision du collège"
+
 msgid "college_holydays"
 msgstr "Vacances du collège"
+
+msgid "college_opinion"
+msgstr "Avis du collège"
 
 msgid "collegeopinions_folder_title"
 msgstr "Avis du collège"
@@ -2597,6 +2619,10 @@ msgstr "SSC"
 msgid "stop_worksite"
 msgstr "Arrêt de chantier"
 
+#: ../browser/cron/notice.py:369
+msgid "street"
+msgstr "rue"
+
 #. Default: "When adding manually a new street, please let the default value"
 #: Street.py
 msgid "street_best_address_key_descr"
@@ -2712,6 +2738,11 @@ msgstr "Action"
 #: ../viewlets/templates/notice_transmit_state.pt:14
 msgid "transmit_date"
 msgstr "Le"
+
+#. Default: "Form data"
+#: ../viewlets/templates/notice_transmit_state.pt:17
+msgid "transmit_form_data"
+msgstr "Données du formulaire"
 
 #. Default: "User"
 #: ../viewlets/templates/notice_transmit_state.pt:15

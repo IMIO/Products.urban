@@ -1003,15 +1003,6 @@ class UrbanEvent(OrderedBaseFolder, BrowserDefaultMixin):
     def get_parent_licence(self):
         return aq_parent(self)
 
-    def store_transmit_date(self, event_type, date=None):
-        annotations = IAnnotations(self)
-        key = "notice_transmit_dates"
-        dates = annotations.get(key, OrderedDict())
-        dates[event_type] = {
-            "date": date if date else datetime.datetime.now(),
-            "user": api.user.get_current().id,
-        }
-        annotations[key] = dates
     def transfer_notice_file(self, notice_id, file_path):
         notification = NoticeOutgoingFileNotification(file_path)
         service = WebserviceNotice()
@@ -1033,13 +1024,6 @@ class UrbanEvent(OrderedBaseFolder, BrowserDefaultMixin):
             notification.notice_id("DEMANDE_EP"),
             notification.serialize(),
         )
-
-        reception_date_str = result["body"]["result"][
-            "receptionDate"
-        ]  # TODO: handle exception in result (KeyError, no "body")
-        reception_date = datetime.datetime.strptime(reception_date_str[:19], "%Y-%m-%dT%H:%M:%S")
-        self.store_transmit_date("transfer_opinion", reception_date)
-
         return result
 
     def transfer_decision(self, college_decision):
@@ -1053,13 +1037,6 @@ class UrbanEvent(OrderedBaseFolder, BrowserDefaultMixin):
             notification.notice_id("NOTIFICATION_RS"),
             notification.serialize(),
         )
-
-        reception_date_str = result["body"]["result"][
-            "receptionDate"
-        ]  # TODO: handle exception in result (KeyError, no "body")
-        reception_date = datetime.datetime.strptime(reception_date_str[:19], "%Y-%m-%dT%H:%M:%S")
-        self.store_transmit_date("transfer_decision", reception_date)
-
         return result
 
     def transfer_decision_display(self):
@@ -1085,13 +1062,6 @@ class UrbanEvent(OrderedBaseFolder, BrowserDefaultMixin):
                     licence.getReference()
                 )
             )
-
-        reception_date_str = result["body"]["result"][
-            "receptionDate"
-        ]  # TODO: handle exception in result (KeyError, no "body")
-        reception_date = datetime.datetime.strptime(reception_date_str[:19], "%Y-%m-%dT%H:%M:%S")
-        self.store_transmit_date("transfer_decision_display", reception_date)
-
         return result
 
 

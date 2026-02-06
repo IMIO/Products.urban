@@ -350,10 +350,6 @@ class UrbanEventInquiry(OrderedBaseFolder, UrbanEvent, BrowserDefaultMixin):
             notification.notice_id("DEMANDE_EP"),
             notification.serialize(),
         )
-        reception_date_str = result["body"]["result"]["receptionDate"]
-        reception_date = datetime.datetime.strptime(reception_date_str[:19], "%Y-%m-%dT%H:%M:%S")
-        self.store_transmit_date("transfer_dates", reception_date)
-
         return result
 
     def transfer_ticket(self):
@@ -363,10 +359,6 @@ class UrbanEventInquiry(OrderedBaseFolder, UrbanEvent, BrowserDefaultMixin):
             notification.notice_id("DEMANDE_EP"),
             notification.serialize(),
         )
-        reception_date_str = result["body"]["result"]["receptionDate"]
-        reception_date = datetime.datetime.strptime(reception_date_str[:19], "%Y-%m-%dT%H:%M:%S")
-        self.store_transmit_date("transfer_ticket", reception_date)
-
         return result
 
     def finalize_inquiry_without_opinion(self):
@@ -376,10 +368,6 @@ class UrbanEventInquiry(OrderedBaseFolder, UrbanEvent, BrowserDefaultMixin):
             notification.notice_id("DEMANDE_EP"),
             notification.serialize(),
         )
-        reception_date_str = result["body"]["result"]["receptionDate"]
-        reception_date = datetime.datetime.strptime(reception_date_str[:19], "%Y-%m-%dT%H:%M:%S")
-        self.store_transmit_date("transfer_ticket_final", reception_date)
-
         return result
 
 
