@@ -94,5 +94,12 @@ default_objects = {
             "name2": "Patrick",
             "grade": "responsable-administratif",
         },
+        {
+            "id": "notice",
+            "personTitle": "mister",
+            "name1": "Import NOTICE",
+            "name2": "",
+            "grade": "agent-technique",
+        },
     ],
 }

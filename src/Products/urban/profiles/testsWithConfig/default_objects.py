@@ -48,5 +48,12 @@ default_objects = {
             "grade": "agent-technique",
             "ploneUserId": "urbanmanager",
         },
+        {
+            "id": "notice",
+            "personTitle": "mister",
+            "name1": "Import NOTICE",
+            "name2": "",
+            "grade": "agent-technique",
+        },
     ],
 }
