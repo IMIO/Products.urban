@@ -200,10 +200,6 @@ class NoticeOutgoingSummaryReportNotification(NoticeResponse):
         return self._licence.getReference()
 
     @property
-    def _caracteristics_comment(self):
-        return None
-
-    @property
     def _display_decision_start_date(self):
         return None
 
@@ -216,6 +212,19 @@ class NoticeOutgoingSummaryReportNotification(NoticeResponse):
         raise NotImplementedError
 
     @property
+    def _decision_code(self):
+        if self._decision_event:
+            decision_codes = {
+                "favorable": "OCTROI",
+                "defavorable": "REFUS",
+                "octroi": "OCTROI",
+                "refus": "REFUS",
+            }
+            return {"cod:code": decision_codes.get(self._decision_event.getDecision())}
+        else:
+            return None
+
+    @property
     def _motivation(self):
         return getattr(self._decision_event, "_notice_decision", None)
 
@@ -226,9 +235,9 @@ class NoticeOutgoingSummaryReportNotification(NoticeResponse):
     @property
     def specific(self):
         return {
+            "not:notice": self._decision_code,
             "not:motivation": self._motivation,
             "tns:municipalityReference": self._reference,
-            "tns:caracteristicsComment": self._caracteristics_comment,
             "tns:decisionDate": self._decision_date,
             "tns:displayDecisionStartDate": self._display_decision_start_date,
             "tns:displayDecisionEndDate": self._display_decision_end_date,
