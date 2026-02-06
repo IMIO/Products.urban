@@ -35,6 +35,7 @@ from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.config import *
 from Products.urban.interfaces import IUrbanDoc
 from Products.urban.notice import NoticeOutgoingDecisionNotification
+from Products.urban.notice import NoticeOutgoingFileNotification
 from Products.urban.notice import NoticeOutgoingPublicSurveyOpinionNotification
 from Products.urban.notice import NoticeOutgoingSummaryReportDecisionNotification
 from Products.urban.notice import NoticeOutgoingSummaryReportDatesNotification
@@ -1011,6 +1012,14 @@ class UrbanEvent(OrderedBaseFolder, BrowserDefaultMixin):
             "user": api.user.get_current().id,
         }
         annotations[key] = dates
+    def transfer_notice_file(self, notice_id, file_path):
+        notification = NoticeOutgoingFileNotification(file_path)
+        service = WebserviceNotice()
+        result = service.post_notification_document(
+            notice_id,
+            notification.serialize(),
+        )
+        return result
 
     def store_reception_date(self, date=None):
         annotations = IAnnotations(self)
