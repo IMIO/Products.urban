@@ -72,23 +72,6 @@ class UrbanEventNotice(UrbanEvent, BrowserDefaultMixin):
             notice_id,
             notification.serialize(),
         )
-        if result["error"] is True:
-            if result["error_type"] == "WRONG_STATUS":
-                # This can happen if there was an error with the WS
-                existing_notification = service.get_notification(notice_id)
-                if existing_notification.status == u"TERMINE":
-                    self.store_transmit_date(
-                        "transfer_folder_to_dpa",
-                        date=existing_notification.status_date,
-                    )
-                    return {"error": False}
-                return result
-            else:
-                return result
-        reception_date_str = result["body"]["result"]["receptionDate"]  # TODO: handle exception in result (KeyError, no "body")
-        reception_date = datetime.datetime.strptime(reception_date_str[:19], "%Y-%m-%dT%H:%M:%S")
-        self.store_transmit_date("transfer_folder_to_dpa", reception_date)
-
         return result
 
     # Manually created methods

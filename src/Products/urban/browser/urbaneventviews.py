@@ -1322,7 +1322,7 @@ class CanTransferFolderToDpaView(BrowserView):
     def no_transmit_yet(self):
         annotations = interfaces.IAnnotations(self.context)
         dates = annotations.get("notice_transmit_dates", {})
-        return len(dates) == 0
+        return "transfer_folder_to_dpa" not in dates.keys()
 
     def __call__(self):
         return (
@@ -1356,7 +1356,8 @@ class CanTransferDatesView(BrowserView):
         annotations = interfaces.IAnnotations(self.context)
         dates = annotations.get("notice_transmit_dates", {})
         return (
-            "transfer_opinion" not in dates.keys()
+            "transfer_dates" not in dates.keys()
+            and "transfer_opinion" not in dates.keys()
             and "transfer_ticket_final" not in dates.keys()
         )
 
@@ -1391,7 +1392,8 @@ class CanTransferTicketView(BrowserView):
         annotations = interfaces.IAnnotations(self.context)
         dates = annotations.get("notice_transmit_dates", {})
         return (
-            "transfer_opinion" not in dates.keys()
+            "transfer_ticket" not in dates.keys()
+            and "transfer_opinion" not in dates.keys()
             and "transfer_ticket_final" not in dates.keys()
         )
 
@@ -1561,41 +1563,3 @@ class CanTransferDecisionDisplayView(BrowserView):
             and self.no_transmit_yet
             and self.can_send_decision_display
         )
-
-
-class UrbanEventNoticeActionsView(BrowserView):
-    """ """
-
-    def transfer_folder_to_dpa(self):
-        result = self.context.transfer_folder_to_dpa()
-        if result["error"] is True:
-            IStatusMessage(self.request).addStatusMessage(result["message"], "error")
-        else:
-            IStatusMessage(self.request).addStatusMessage(
-                _(u"The folder transfer to DPA is done."), "info"
-            )
-        self.request.response.redirect(self.context.absolute_url())
-
-    def transfer_dates(self):
-        result = self.context.transfer_dates()
-        if result["error"] is True:
-            IStatusMessage(self.request).addStatusMessage(
-                result["message"], "error"
-            )
-        else:
-            IStatusMessage(self.request).addStatusMessage(
-                _(u"The transfer of dates is done."), "info"
-            )
-        self.request.response.redirect(self.context.absolute_url())
-
-    def transfer_decision_display(self):
-        result = self.context.transfer_decision_display()
-        if result["error"] is True:
-            IStatusMessage(self.request).addStatusMessage(
-                result["message"], "error"
-            )
-        else:
-            IStatusMessage(self.request).addStatusMessage(
-                _(u"The transfer of decision display dates is done."), "info"
-            )
-        self.request.response.redirect(self.context.absolute_url())

@@ -128,7 +128,7 @@
   <object name="transfer_folder_to_dpa" meta_type="CMF Action" i18n:domain="urban">
    <property name="title" i18n:translate="">Transfer folder to DPA</property>
    <property name="description" i18n:translate=""></property>
-   <property name="url_expr">string:$object_url/@@transfer_folder_to_dpa</property>
+   <property name="url_expr">string:$object_url/@@transfer_folder_to_dpa_form</property>
    <property name="icon_expr">string:$portal_url/++resource++Products.urban/coq_wallon.png</property>
    <property name="available_expr">context/@@can_transfer_folder_to_dpa</property>
    <property name="permissions">
@@ -139,7 +139,7 @@
   <object name="transfer_dates" meta_type="CMF Action" i18n:domain="urban">
    <property name="title" i18n:translate="">Transfer dates to the SPW</property>
    <property name="description" i18n:translate=""></property>
-   <property name="url_expr">string:$object_url/@@transfer_dates</property>
+   <property name="url_expr">string:$object_url/@@transfer_dates_form</property>
    <property name="icon_expr">string:$portal_url/++resource++Products.urban/coq_wallon.png</property>
    <property name="available_expr">context/@@can_transfer_dates</property>
    <property name="permissions">
@@ -183,7 +183,7 @@
   <object name="transfer_decision_display" meta_type="CMF Action" i18n:domain="urban">
    <property name="title" i18n:translate="">Transfer decision display to the SPW</property>
    <property name="description" i18n:translate=""></property>
-   <property name="url_expr">string:$object_url/@@transfer_decision_display</property>
+   <property name="url_expr">string:$object_url/@@transfer_decision_display_form</property>
    <property name="icon_expr">string:$portal_url/++resource++Products.urban/coq_wallon.png</property>
    <property name="available_expr">context/@@can_transfer_decision_display</property>
    <property name="permissions">
