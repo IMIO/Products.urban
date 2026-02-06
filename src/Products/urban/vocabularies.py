@@ -466,6 +466,34 @@ class LicenceDocumentsVocabulary(object):
 LicenceDocumentsVocabularyFactory = LicenceDocumentsVocabulary()
 
 
+class ValidNoticeLicenceDocumentsVocabulary(LicenceDocumentsVocabulary):
+    acceptable_content_types = {
+        "application/pdf": "Document PDF",
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": "Document Excel",
+        "image/png": "Image PNG",
+    }
+
+    def filter_document(self, doc):
+        """
+        Keep only document types that are viewable in TWICE,
+        and hide documents created by user admin (= documents received from Notice)
+        """
+        content_type = getattr(doc, "content_type", None)
+        creator = doc.Creator()
+        return content_type in self.acceptable_content_types and creator != "admin"
+
+    def make_term(self, doc):
+        """
+        Display doc title and file type
+        """
+        extension = self.acceptable_content_types.get(doc.content_type, "")
+        title = "{} ({})".format(doc.Title(), extension)
+        return SimpleTerm(self.get_path(doc), self.get_path(doc), title)
+
+
+ValidNoticeLicenceDocumentsVocabularyFactory = ValidNoticeLicenceDocumentsVocabulary()
+
+
 class ComplementaryDelayVocabulary(object):
     implements(IVocabularyFactory)
 

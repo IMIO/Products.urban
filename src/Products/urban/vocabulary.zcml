@@ -106,6 +106,12 @@
   />
 
   <utility
+    component=".vocabularies.ValidNoticeLicenceDocumentsVocabularyFactory"
+    name="urban.vocabularies.valid_notice_licence_documents"
+    provides="zope.schema.interfaces.IVocabularyFactory"
+  />
+
+  <utility
     component=".vocabularies.ComplementaryDelayFactory"
     name="urban.vocabularies.complementary_delay"
     provides="zope.schema.interfaces.IVocabularyFactory"
