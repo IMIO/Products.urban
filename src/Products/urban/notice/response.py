@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
 
+import base64
+
 from Acquisition import aq_parent
 from Products.urban.interfaces import IInquiryEvent
 from Products.urban.interfaces import ITheLicenceEvent
 from Products.urban.notice.base import NoticeElement
+from plone import api
 
 
 def clean_accents(raw_string):
@@ -41,6 +44,34 @@ class NoticeResponse(NoticeElement):
     def specific(self):
         """Response specific data"""
         raise NotImplementedError
+
+
+class NoticeOutgoingFileNotification(NoticeElement):
+    def __init__(self, file_path):
+        self._file = api.content.get(path=file_path)
+
+    @property
+    def file(self):
+        return {
+            "name": self._file.id,
+            "mime": self._file.content_type,
+            "content": base64.encodestring(self._file.data),
+        }
+
+    @property
+    def type(self):
+        return {
+            "code": "PIECE_JOINTE_URBAN",
+            "label": u"Pièce jointe venant d'iA.Urban",
+        }
+
+    @property
+    def language(self):
+        return "FR"
+
+    @property
+    def description(self):
+        return self._file.title
 
 
 class NoticeOutgoingNotification(NoticeResponse):
