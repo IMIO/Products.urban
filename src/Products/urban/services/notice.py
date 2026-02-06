@@ -84,7 +84,9 @@ class WebserviceNotice(WebService):
         """Get notifications for the current instance"""
         response = self._get_notifications(status=status)
         if response.status_code != 200:
-            raise ValueError("Unexpected response '{}'".format(response.status_code))
+            raise ValueError(
+                "Unexpected response {}: '{}'".format(response.status_code, response.content)
+            )
         result = response.json()
         if result["status"] != "PROCESSED":
             raise ValueError("Error in response '{}'".format(result["status"]["value"]))
@@ -125,6 +127,15 @@ class WebserviceNotice(WebService):
         """Post a response for a notification using REST API"""
         return self._post(
             "notifications/{notification_id}/responses".format(
+                notification_id=notification_id
+            ),
+            data=data,
+        )
+
+    def _post_notification_document(self, notification_id, data):
+        """Post a document for a notification using REST API"""
+        return self._post(
+            "notifications/{notification_id}/documents".format(
                 notification_id=notification_id
             ),
             data=data,
@@ -175,3 +186,10 @@ class WebserviceNotice(WebService):
                 "message": _("An unexcepted error occured, please try again"),
             }
         return {"error": False, "body": result}
+
+    def post_notification_document(self, notification_id, data):
+        """Post a document for a notification"""
+        response = self._post_notification_document(notification_id, data)
+        if response.status_code != 204:
+            return self._handle_error(response)
+        return "OK"
