@@ -17,12 +17,14 @@ class NoticeTransmitState(ViewletBase):
         for (label, value) in dates.items():
             if type(value) is dict:
                 results.append({
+                    "action_code": label,
                     "label": translate(label, "urban", context=self.request),
                     "date": value.get("date"),
                     "user": value.get("user"),
                 })
             else:  # old style; before we also stored the user, "value" was the date
                 results.append({
+                    "action_code": label,
                     "label": translate(label, "urban", context=self.request),
                     "date": value,
                     "user": "",

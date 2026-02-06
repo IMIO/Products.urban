@@ -45,4 +45,8 @@ jQuery(function($){
     $('.link-overlay-urban-annex').prepOverlay({
        subtype: 'ajax',
     });
+    // Notice form data
+    $('.urban-form-data a').prepOverlay({
+       subtype: 'ajax',
+    });
 });
