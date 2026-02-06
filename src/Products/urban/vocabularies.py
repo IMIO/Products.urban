@@ -435,22 +435,32 @@ class LicenceDocumentsVocabulary(object):
     def get_path(sefl, obj):
         return "/".join(obj.getPhysicalPath())
 
-    def __call__(self, context):
-        contexts = get_licence_context(context, get_all_object=True)
-        output = []
+    def list_documents(self, base_context):
+        documents = []
+        contexts = get_licence_context(base_context, get_all_object=True)
         if contexts is None:
-            return SimpleVocabulary(output)
+            return documents
         for context in contexts:
-            docs = [
-                SimpleTerm(self.get_path(doc), self.get_path(doc), doc.Title())
-                for doc in context.listFolderContents(
-                    contentFilter={
-                        "portal_type": ["ATFile", "ATImage", "File", "Image"]
-                    }
-                )
-            ]
-            output += docs
-        return SimpleVocabulary(output)
+            for doc in context.listFolderContents(
+                contentFilter={"portal_type": ["ATFile", "ATImage", "File", "Image"]}
+            ):
+                if self.filter_document(doc):
+                    documents.append(doc)
+        return documents
+
+    def filter_document(self, doc):
+        """Can be subclassed to filter documents based on their attributes"""
+        return True
+
+    def make_term(self, doc):
+        return SimpleTerm(self.get_path(doc), self.get_path(doc), doc.Title())
+
+    def __call__(self, context):
+        terms = [
+            self.make_term(doc)
+            for doc in self.list_documents(context)
+        ]
+        return SimpleVocabulary(terms)
 
 
 LicenceDocumentsVocabularyFactory = LicenceDocumentsVocabulary()
