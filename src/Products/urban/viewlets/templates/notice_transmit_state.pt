@@ -14,12 +14,22 @@
             <th i18n:translate="transmit_action">Action</th>
             <th i18n:translate="transmit_date">When</th>
             <th i18n:translate="transmit_user">User</th>
+            <th i18n:translate="transmit_form_data">Form data</th>
           </thead>
           <tbody>
             <tr tal:repeat="transmit transmits">
                 <td tal:content="transmit/label"></td>
                 <td tal:content="python: transmit['date'].strftime('%d/%m/%Y, %H:%M:%S')"></td>
                 <td tal:content="transmit/user"></td>
+                <td tal:define="action_code transmit/action_code">
+                    <span class="urban-form-data">
+                        <a class="link-overlay"
+                           href="@@noticeformdatatextview"
+                           tal:attributes="href python: context.absolute_url() + '/@@noticeformdatatextview?action_code=' + action_code"
+                           i18n:translate="read_more">Lire la suite
+                        </a>
+                    </span>
+                </td>
             </tr>
           </tbody>
       </table>
