@@ -17,6 +17,9 @@ msgstr ""
 msgid "urban.schedule.condition.acknowledgment_created"
 msgstr ""
 
+msgid "urban.schedule.condition.acknowledgment_or_incomplete"
+msgstr ""
+
 msgid "urban.schedule.condition.acknowledgment_done"
 msgstr ""
 
