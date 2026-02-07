@@ -1,2 +1,0 @@
-Add housing vocabulary
-[jchandelle]
