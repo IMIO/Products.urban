@@ -8,6 +8,23 @@ Changelog
 
 .. towncrier release notes start
 
+2.9.3 (2026-02-07)
+------------------
+
+New features:
+
+
+- Add housing vocabulary
+  [jchandelle] (URBBDC-3221, URBBDC-3222, URBBDC-3271)
+
+
+Bug fixes:
+
+
+- Fix base class for housing and roaddecree
+  [jchandelle] (SUP-50162)
+
+
 2.9.2 (2026-01-22)
 ------------------
 
