@@ -4,9 +4,12 @@
   <dependencies>
     <dependency>profile-Products.urban:tests</dependency>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     <dependency>profile-urban.events:default</dependency>
     <dependency>profile-urban.schedule:default</dependency>
 >>>>>>> ba641fc44 (zpretty)
+=======
+>>>>>>> 4a4dae166 (URB-3522: Fix initialization of tests)
   </dependencies>
 </metadata>
