@@ -1,2 +1,2 @@
-Fix history view for missing parameter
+Fix history view with missing `site_url` required parameter
 [jchandelle]
