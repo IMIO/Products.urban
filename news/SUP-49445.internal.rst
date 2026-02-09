@@ -1,0 +1,2 @@
+Fix dashboard configs that are required to run tests
+[mpeeters]
