@@ -8,6 +8,18 @@ Changelog
 
 .. towncrier release notes start
 
+2.9.4 (2026-02-10)
+------------------
+
+Bug fixes:
+
+
+- Fix broken release
+  [mpeeters] (PR-509)
+- Fix history view with missing `site_url` required parameter
+  [jchandelle] (SUP-50324)
+
+
 2.9.3 (2026-02-07)
 ------------------
 
