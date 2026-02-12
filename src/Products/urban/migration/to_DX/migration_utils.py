@@ -3,6 +3,7 @@
 from Products.CMFCore.utils import getToolByName
 from Products.contentmigration.basemigrator.walker import registerWalker
 from Products.contentmigration.walker import CustomQueryWalker
+from Products.Five import BrowserView
 from Products.urban.interfaces import IGenericLicence
 from datetime import date
 from datetime import datetime
@@ -252,9 +253,16 @@ class UrbanLicenceWalker(CustomQueryWalker):
 
 registerWalker(UrbanLicenceWalker)
 
-class UrbanLicenceToFileWalker(CustomQueryWalker):
-    index_key = "Products.urban.interfaces.IMigrationIndex.indexes"
+
+class GenerateCotentTypeList(BrowserView):
     last_modified_key = "Products.urban.interfaces.IMigrationIndex.last_modified"
+    src_portal_type = None
+
+    def __call__(self):
+        update = False
+        if os.path.isfile(self.file):
+            update = True
+        self.make_file(update=update)
 
     @property
     def file(self):
@@ -270,6 +278,14 @@ class UrbanLicenceToFileWalker(CustomQueryWalker):
         with open(self.file, flag) as f:
             f.write("{}\n".format(element))
 
+    def get_first_element_modified(self):
+        with open(self.file, "r") as f:
+            first_element = f.readline().strip('\n')
+        obj = api.content.get(path=first_element)
+        if obj is None:
+            return
+        return obj.modified
+
     def check_if_path_already_register(self, path):
         with open(self.file, "r") as f:
             for line in f:
@@ -278,18 +294,28 @@ class UrbanLicenceToFileWalker(CustomQueryWalker):
         return False
 
     def make_file(self, update=False):
-        catalog = self.catalog
+        self.init_registry_last_modified()
+        catalog = api.portal.get_tool("portal_catalog")
         paths = []
         portion_out_count = 0
+        temp_last_modifed = None
         for count, brain in enumerate(catalog(
             object_provides=IGenericLicence.__identifier__,
             sort_on="modified",
             sort_order="descending",
         )):
+            if update and count == 0:
+                temp_last_modifed = brain.modified
+            if (
+                update
+                and count == 0
+                and self.get_last_modified() is None
+            ):
+                self.set_last_modified()
             if (not update) and count == 0:
-                self.init_registry_last_modified()
                 self.set_last_modified(brain.modified)
-            if update and (brain.modified < self.get_last_modified()):
+            if update and (brain.modified >= self.get_last_modified()):
+                self.set_last_modified(temp_last_modifed)
                 break
             if update and self.check_if_path_already_register(brain.getPath()):
                 continue
@@ -299,17 +325,74 @@ class UrbanLicenceToFileWalker(CustomQueryWalker):
             for obj in licence_obj.objectValues():
                 if obj.portal_type == self.src_portal_type:
                     if portion_out_count > 0 and portion_out_count % 10 == 0:
-                        logger.info("PortionOut : {}".format(portion_out_count))
+                        logger.info("{} : {}".format(
+                            self.src_portal_type, portion_out_count
+                        ))
                     paths.append('/'.join(obj.getPhysicalPath()))
                     portion_out_count += 1
         self.write_element('\n'.join(paths), update)
 
+    def init_registry_last_modified(self):
+        registry = getUtility(IRegistry)
+        if self.last_modified_key in registry:
+            return
+        attributes = {"title": u"last modified migration"}
+        registry_field = Dict(**attributes)
+        registry_record = Record(registry_field)
+        registry_record.value = {}
+        registry.records[self.last_modified_key] = registry_record
+        logger.info("last_modified registry init")
+
+    def get_last_modified(self):
+        values = api.portal.get_registry_record(
+            self.last_modified_key,
+            default=None,
+        )
+        if values is None:
+            values = {}
+        return values.get(self.src_portal_type, 0)
+
+    def set_last_modified(self, last_modified=None):
+        values = api.portal.get_registry_record(
+            self.last_modified_key,
+            default=None,
+        )
+        if values is None:
+            values = {}
+        if last_modified is None:
+            last_modified = self.get_first_element_modified
+        if last_modified is None:
+            return
+        values[self.src_portal_type] = last_modified
+        api.portal.set_registry_record(
+            self.last_modified_key,
+            values,
+        )
+        logger.info("date: {} added in registry".format(str(last_modified)))
+        transaction.commit()
+
+    def clear(self):
+        registry = getUtility(IRegistry)
+        if self.last_modified_key in registry:
+            del registry.records[self.last_modified_key]
+        if os.path.isfile(self.file):
+            os.remove(self.file)
+
+
+class UrbanLicenceToFileWalker(CustomQueryWalker):
+    index_key = "Products.urban.interfaces.IMigrationIndex.indexes"
+    generate_file = GenerateCotentTypeList(None, None)
+
     def get_elements(self):
         update = False
-        if os.path.isfile(self.file):
+
+        self.generate_file.src_portal_type = self.src_portal_type
+        if os.path.isfile(self.generate_file.file):
             update = True
-        self.make_file(update)
-        with open(self.file, "r") as f:
+
+        self.generate_file.make_file(update)
+
+        with open(self.generate_file.file, "r") as f:
             for count, line in enumerate(f):
                 if count >= self.get_index():
                     yield line.rstrip("\n")
@@ -324,17 +407,6 @@ class UrbanLicenceToFileWalker(CustomQueryWalker):
         registry_record.value = {}
         registry.records[self.index_key] = registry_record
         logger.info("index registry init")
-
-    def init_registry_last_modified(self):
-        registry = getUtility(IRegistry)
-        if self.last_modified_key in registry:
-            return
-        attributes = {"title": u"last modified migration"}
-        registry_field = Dict(**attributes)
-        registry_record = Record(registry_field)
-        registry_record.value = {}
-        registry.records[self.last_modified_key] = registry_record
-        logger.info("last_modified registry init")
 
     def get_index(self):
         values = api.portal.get_registry_record(
@@ -360,30 +432,6 @@ class UrbanLicenceToFileWalker(CustomQueryWalker):
         logger.info("index: {} added in registry".format(str(index)))
         transaction.commit()
 
-    def get_last_modified(self):
-        values = api.portal.get_registry_record(
-            self.last_modified_key,
-            default=None,
-        )
-        if values is None:
-            values = {}
-        return values.get(self.src_portal_type, 0)
-
-    def set_last_modified(self, last_modified):
-        values = api.portal.get_registry_record(
-            self.last_modified_key,
-            default=None,
-        )
-        if values is None:
-            values = {}
-        values[self.src_portal_type] = last_modified
-        api.portal.set_registry_record(
-            self.last_modified_key,
-            values,
-        )
-        logger.info("date: {} added in registry".format(str(last_modified)))
-        transaction.commit()
-
     def commit(self, current_index):
         self.init_registry_indexes()
         self.set_index(current_index + 1)
@@ -392,10 +440,7 @@ class UrbanLicenceToFileWalker(CustomQueryWalker):
         registry = getUtility(IRegistry)
         if self.index_key in registry:
             del registry.records[self.index_key]
-        if self.last_modified_key in registry:
-            del registry.records[self.last_modified_key]
-        if os.path.isfile(self.file):
-            os.remove(self.file)
+        self.generate_file.clear()
 
     def walk(self):
         start = self.get_index()
