@@ -813,4 +813,11 @@
      permission="zope2.View"
      />
 
+  <browser:page
+      name="generate-portionOut-list"
+      for="*"
+      class=".portionOut_migration.GeneratePortioOutList"
+      permission="cmf.ManagePortal"
+      />
+
 </configure>
