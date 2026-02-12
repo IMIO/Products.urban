@@ -36,8 +36,6 @@ class ITransferBaseActionForm(Interface):
 
 
 class NoticeResponseActionForm(Form):
-    _finishedSent = False
-    _displayErrorsInOverlay = False
     ignoreContext = True
 
     # FIELDS TO BE OVERRIDDEN IN SUBCLASSES
@@ -149,7 +147,7 @@ class NoticeResponseActionForm(Form):
             field_values=self.field_values_to_store,
         )
 
-        self._finishedSent = True
+        self.request.response.redirect(self.context.absolute_url())
 
 
 class TransferFolderToDPAActionForm(NoticeResponseActionForm):
