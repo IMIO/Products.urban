@@ -27,4 +27,12 @@
         handler=".update_290.add_folder_manager_notice"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Cook javascript resources"
+        description=""
+        source="2902"
+        destination="2903"
+        handler=".update_290.refresh_javascript"
+        profile="Products.urban:default" />
+
 </configure>

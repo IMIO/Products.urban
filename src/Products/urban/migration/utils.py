@@ -85,3 +85,14 @@ def refresh_workflow_permissions(workflow_id, folder_path=None, for_states=None)
                 workflow.updateRoleMappingsFor(obj)
                 obj.reindexObjectSecurity()
                 obj.reindexObject(idxs=["allowedRolesAndUsers"])
+
+
+def cook_javascript_resources():
+    """
+    Needed when modifying code in cacheable JavaScript resources.
+
+    Temporary fix in a hurry:
+    activate & deactivate `Development mode` on page `portal_javascripts`
+    """
+    js_tool = api.portal.get_tool('portal_javascripts')
+    js_tool.cookResources()
