@@ -1352,6 +1352,11 @@ class CanTransferDatesView(BrowserView):
         return webservice.is_setup
 
     @property
+    def has_notice_id(self):
+        licence = self.context.aq_parent
+        return bool(licence.get_notice_id("DEMANDE_EP"))
+
+    @property
     def no_transmit_yet(self):
         annotations = interfaces.IAnnotations(self.context)
         dates = annotations.get("notice_transmit_dates", {})
@@ -1366,6 +1371,7 @@ class CanTransferDatesView(BrowserView):
             self.is_urban_event_inquiry
             and self.is_transmit_to_spw_event
             and self.is_notice_setup
+            and self.has_notice_id
             and self.no_transmit_yet
         )
 
@@ -1388,6 +1394,11 @@ class CanTransferTicketView(BrowserView):
         return webservice.is_setup
 
     @property
+    def has_notice_id(self):
+        licence = self.context.aq_parent
+        return bool(licence.get_notice_id("DEMANDE_EP"))
+
+    @property
     def no_transmit_yet(self):
         annotations = interfaces.IAnnotations(self.context)
         dates = annotations.get("notice_transmit_dates", {})
@@ -1402,6 +1413,7 @@ class CanTransferTicketView(BrowserView):
                 self.is_urban_event_inquiry
                 and self.is_transmit_to_spw_event
                 and self.is_notice_setup
+                and self.has_notice_id
                 and self.no_transmit_yet
         )
 
@@ -1431,6 +1443,11 @@ class CanTransferOpinionView(BrowserView):
         return webservice.is_setup
 
     @property
+    def has_notice_id(self):
+        licence = self.context.aq_parent
+        return bool(licence.get_notice_id("DEMANDE_EP"))
+
+    @property
     def no_transmit_yet(self):
         annotations = interfaces.IAnnotations(self.context)
         dates = annotations.get("notice_transmit_dates", {})
@@ -1445,6 +1462,7 @@ class CanTransferOpinionView(BrowserView):
                 and self.is_college_opinion_event
                 and self.is_transmit_to_spw_event
                 and self.is_notice_setup
+                and self.has_notice_id
                 and self.no_transmit_yet
         )
 
@@ -1475,6 +1493,11 @@ class CanTransferDecisionView(BrowserView):
         return webservice.is_setup
 
     @property
+    def has_notice_id(self):
+        licence = self.context.aq_parent
+        return bool(licence.get_notice_id("NOTIFICATION_RS"))
+
+    @property
     def no_transmit_yet(self):
         annotations = interfaces.IAnnotations(self.context)
         dates = annotations.get("notice_transmit_dates", {})
@@ -1486,6 +1509,7 @@ class CanTransferDecisionView(BrowserView):
                 and self.is_college_decision_event
                 and self.is_transmit_to_spw_event
                 and self.is_notice_setup
+                and self.has_notice_id
                 and self.no_transmit_yet
         )
 
