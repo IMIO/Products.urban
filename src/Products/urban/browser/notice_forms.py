@@ -87,6 +87,10 @@ class NoticeResponseActionForm(Form):
     def updateWidgets(self):
         super(NoticeResponseActionForm, self).updateWidgets()
 
+        # disable portlets
+        self.request.set("disable_plone.rightcolumn", 1)
+        self.request.set("disable_plone.leftcolumn", 1)
+
         self.widgets["file_paths"].value = []
 
     @button.buttonAndHandler(_("Send"), name="send_response")
