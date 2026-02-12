@@ -2,6 +2,7 @@
 from Products.CMFCore.utils import getToolByName
 from Products.urban import URBAN_TYPES
 from Products.urban import UrbanMessage as _
+from Products.urban.migration.utils import cook_javascript_resources
 from Products.urban.utils import moveElementAfter
 from plone import api
 from plone.app.textfield import RichTextValue
@@ -183,4 +184,10 @@ def add_folder_manager_notice(context):
                 )
         notify(FacetedGlobalSettingsChangedEvent(import_notice_folder))
 
+    logger.info("Upgrade done!")
+
+
+def refresh_javascript(context):
+    logger = logging.getLogger("urban: Cook javascript resources")
+    cook_javascript_resources()
     logger.info("Upgrade done!")
