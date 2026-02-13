@@ -114,6 +114,11 @@ class NoticeNotification(NoticeElement):
                             "2": "EnvClassTwo",
                             "3": "EnvClassThree",
                         }.get(penv_classe, None)
+            elif self.notice_type == "DEMANDE_EP_EXTRA":
+                self._licence_type = {
+                    "PU": "CODT_UniqueBorderingLicence",
+                    "PE": "EnvClassBordering",
+                }.get(self.notification_subtype)
             else:
                 existing_licence = self.licence
                 if existing_licence:

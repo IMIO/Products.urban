@@ -213,6 +213,55 @@ class ImportFromNoticeView(BrowserView):
             licence.setReferenceFT(notification_ref)
             licence.reindexObject(idxs=["referenceFT"])
 
+    def _demande_ep_extra(self, detailed_notification):
+        container = detailed_notification.container
+        licence = api.content.create(
+            container=container, **detailed_notification.serialize()
+        )
+        licence.set_notice_id("DEMANDE_EP", detailed_notification.noticeId)
+        licence.setFoldermanagers(
+            detailed_notification.foldermanagers
+        )  # Must be set manually, serialized value is ignored at creation
+
+        licence.setManualParcels(
+            [{"ref": "", "capakey": parcel.capakey} for parcel in detailed_notification.parcels]
+        )
+        addresses = detailed_notification.addresses
+        if addresses:
+            first_address = addresses[0]
+            licence.setZipcode(first_address.postCode)
+            licence.setCity(first_address.municipality)
+            licence.setWorkLocations(
+                [
+                    {"number": address.number, "street": address.notice_street}
+                    for address in addresses
+                ]
+            )
+
+        licence._p_changed = 1
+        for party in detailed_notification.parties:
+            api.content.create(container=licence, **party.serialize())
+        for document in detailed_notification.documents:
+            api.content.create(container=licence, **document.serialize())
+        # Set title and update reference number
+        notify(ObjectInitializedEvent(licence))
+
+        event_config_complete = detailed_notification.event_config(
+            "Products.urban.interfaces.IAcknowledgmentEvent"
+        )
+        event = licence.createUrbanEvent(event_config_complete)
+        event_date = DateTime(str(detailed_notification.send_date))
+        event.setEventDate(event_date)
+        event.store_reception_date(detailed_notification.reception_date)
+        api.content.transition(event, "close")
+
+        api.content.transition(licence, "iscomplete")
+
+        # Reindex licence
+        licence.reindexObject()
+
+        transaction.commit()  # Useful in case of an error
+
     def _demande_ep(self, detailed_notification):
         licence = detailed_notification.licence
         if not licence:
@@ -325,9 +374,10 @@ class ImportFromNoticeView(BrowserView):
         elif detailed_notification.notice_type in (
             "DEMANDE_EP",
             "DEMANDE_EP_DOSSIER_PRECEDENT",
-            "DEMANDE_EP_EXTRA",
         ):
             self._demande_ep(detailed_notification)
+        elif detailed_notification.notice_type == "DEMANDE_EP_EXTRA":
+            self._demande_ep_extra(detailed_notification)
         elif detailed_notification.notice_type == "NOTIFICATION_PROROGATION_COMMUNE":
             self.process_extension_of_deadline_notification(detailed_notification)
         elif detailed_notification.notice_type in (
