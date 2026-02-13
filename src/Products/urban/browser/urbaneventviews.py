@@ -62,10 +62,35 @@ claimants_csv_fieldnames = [
     "wantDecisionCopy",
 ]
 
+claimants_columns = (
+    "Titre (sel.)",
+    "Nom",
+    "Prénom",
+    "Société",
+    "Rue",
+    "N° de police",
+    "Code postal (num.)",
+    "Localité",
+    "Pays (sel.)",
+    "E-mail",
+    "Téléphone",
+    "GSM",
+    "N° registre national",
+    "Type de réclamation",
+    "Pétition",
+    "Hors délai",
+    "Date de réception",
+    "Texte de la réclamation",
+    "Souhaite une copie de la décision",
+)
+
+EXCEL_HEADER_CLAIMANT_WITHOUT_QUOT = ",".join(claimants_columns)
+EXCEL_HEADER_CLAIMANT = ",".join(['{0}'.format(c) for c in claimants_columns])
+EXCEL_HEADER_CLAIMANT_WITHOUT_QUOT_NUM = ",".join(("Numérotation", ) + claimants_columns)
+EXCEL_HEADER_CLAIMANT_NUM = ",".join(['{0}'.format(c) for c in ("Numérotation", ) + claimants_columns])
+
 EXCEL_HEADER_RECIPIENT = "Titre (sel.),Nom,Prénom,Rue,N° de police,Code postal (num.),Localité,Pays (sel.),N° registre national,CAPAKEY,Nature parcelle,Rue parcelle,N° de police parcelle"
 CARTO_HEADER = '"CAPAKEY";"nature";"datesituation";"proprio"'
-EXCEL_HEADER_CLAIMANT = '"Titre (sel.)","Nom","Prénom","Société","Rue","N° de police","Code postal (num.)","Localité","Pays (sel.)","E-mail","Téléphone","GSM","N° registre national","Type de réclamation","Pétition","Hors délai","Date de réception","Texte de la réclamation","Souhaite une copie de la décision"'
-EXCEL_HEADER_CLAIMANT_WITHOUT_QUOT = "Titre (sel.),Nom,Prénom,Société,Rue,N° de police,Code postal (num.),Localité,Pays (sel.),E-mail,Téléphone,GSM,N° registre national,Type de réclamation,Pétition,Hors délai,Date de réception,Texte de la réclamation,Souhaite une copie de la décision"
 
 
 class UrbanEventView(BrowserView):
@@ -377,14 +402,34 @@ class ImportClaimantListingForm(form.Form):
             u"The imported file (${name}) couldn't be read properly. Please verify its structure and try again.",
             mapping={u"name": csv_file.filename},
         )
-        
-        if not csv_file.data.startswith(EXCEL_HEADER_CLAIMANT) and not csv_file.data.startswith(EXCEL_HEADER_CLAIMANT_WITHOUT_QUOT):
+
+        headers = (
+            EXCEL_HEADER_CLAIMANT,
+            EXCEL_HEADER_CLAIMANT_WITHOUT_QUOT,
+        )
+        headers_numbering = (
+            EXCEL_HEADER_CLAIMANT_NUM,
+            EXCEL_HEADER_CLAIMANT_WITHOUT_QUOT_NUM,
+        )
+        header_match = False
+        with_number = False
+        for header in headers + headers_numbering:
+            if csv_file.data.startswith(header):
+                if header in headers_numbering:
+                    with_number = True
+                header_match = True
+                break
+        if header_match is False:
             return error
+
+        fieldnames = claimants_csv_fieldnames
+        if with_number is True:
+            fieldnames = ["numbering"] + fieldnames
 
         try:
             reader = csv.DictReader(
                 StringIO(csv_file.data),
-                claimants_csv_fieldnames,
+                fieldnames,
                 delimiter=",",
                 quotechar='"',
             )
@@ -743,17 +788,33 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
             country_mapping[country_obj.Title()] = country_obj.id
 
         claim_type_mapping = {
+            "écrite": "writedClaim",
             "Écrite": "writedClaim",
+            "ecrite": "writedClaim",
+            "Ecrite": "writedClaim",
+            "orale": "oralClaim",
             "Orale": "oralClaim",
         }
 
         claimants_file = interfaces.IAnnotations(self.context)[
             "urban.claimants_to_import"
         ]
+        headers_numbering = (
+            EXCEL_HEADER_CLAIMANT_NUM,
+            EXCEL_HEADER_CLAIMANT_WITHOUT_QUOT_NUM,
+        )
+        with_number = False
+        for header in headers_numbering:
+            if claimants_file.startswith(header):
+                with_number = True
+                break
+        fieldnames = claimants_csv_fieldnames
+        if with_number is True:
+            fieldnames = ["numbering"] + fieldnames
         if claimants_file:
             reader = csv.DictReader(
                 StringIO(claimants_file),
-                claimants_csv_fieldnames,
+                fieldnames,
                 delimiter=",",
                 quotechar='"',
             )
