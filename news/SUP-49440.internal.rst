@@ -1,0 +1,2 @@
+Add an upgrade step to fix incorrect tal expressions for yellow highlights
+[mpeeters]
