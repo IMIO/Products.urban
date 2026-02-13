@@ -83,8 +83,8 @@
       title="Set event config optional fields"
       description=""
       profile="Products.urban:default"
-      source="1210"
-      destination="1211"
+      source="1211"
+      destination="1212"
       handler=".update_300.set_eventconfig_optional_fields"
       />
 
@@ -92,9 +92,18 @@
       title="Add new registry record for inquiry address to do"
       description=""
       profile="Products.urban:default"
-      source="1211"
-      destination="1212"
+      source="1212"
+      destination="1213"
       handler=".update_270.add_new_registry_profil"
+      />
+
+  <gs:upgradeStep
+      title="Fix TAL Style background yellow on events"
+      description=""
+      profile="Products.urban:default"
+      source="1213"
+      destination="1214"
+      handler=".update_300.fix_tal_style_background_yellow"
       />
 
   <gs:upgradeStep

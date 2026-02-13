@@ -148,6 +148,34 @@ def set_eventconfig_optional_fields(context):
     logger.info("migration step done!")
 
 
+def fix_tal_style_background_yellow(context):
+    logger = logging.getLogger(
+        "urban: Fix TAL Style background yellow on events"
+    )
+    logger.info("starting upgrade steps")
+    brains = api.content.find(portal_type=["EventConfig", "OpinionEventConfig"])
+    for brain in brains:
+        conf = brain.getObject()
+        if not conf.textDefaultValues:
+            continue
+        values = conf.textDefaultValues
+        new_values = tuple()
+        update = False
+        for line in values:
+            if '<span style="background-color:Yellow">' in line["text"]:
+                update = True
+                line["text"] = line["text"].replace(
+                    '<span style="background-color:Yellow">',
+                    '<span class="highlight-yellow">'
+                )
+            new_values += (line, )
+        if update is True:
+            logger.info("{0} Updated".format(conf.absolute_url()))
+            conf.textDefaultValues = new_values
+            conf._p_changed = 1
+    logger.info("migration step done!")
+
+
 def set_select_all_attachments_by_default_to_false(context):
     logger = logging.getLogger(
         "urban: Set select_all_attachments_by_default to false"
