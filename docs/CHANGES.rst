@@ -8,6 +8,23 @@ Changelog
 
 .. towncrier release notes start
 
+2.9.7 (2026-02-16)
+------------------
+
+Bug fixes:
+
+
+- Fix encoding in table column
+  [jchandelle] (URB-3484)
+
+
+Internal:
+
+
+- Remove unused vocabulary
+  [jchandelle] (URB-3520)
+
+
 2.9.6 (2026-02-16)
 ------------------
 
