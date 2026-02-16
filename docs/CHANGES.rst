@@ -8,6 +8,20 @@ Changelog
 
 .. towncrier release notes start
 
+2.9.5 (2026-02-16)
+------------------
+
+New features:
+
+
+- Add upgrade step to cook javascript resources
+  Handle redirect on Notice response forms
+  Hide portlets on Notice response forms
+  Condition Notice response actions' visibility on presence of notice ID on licence
+  Remove `noticeId` fields
+  [daggelpop] (URB-2524)
+
+
 2.9.4 (2026-02-10)
 ------------------
 
