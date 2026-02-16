@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from DateTime import DateTime
+from Products.CMFPlone.utils import safe_unicode
 from Products.urban.browser.table.interfaces import IActionsColumn
 from Products.urban.browser.table.interfaces import ILocalityColumn
 from Products.urban.browser.table.interfaces import IStreetColumn
@@ -111,7 +112,11 @@ class TitleColumn(UrbanColumn):
             title_words.insert(15 * (split + 1), "<br />")
         title = " ".join(title_words)
 
-        title = '<a href="%s" class="%s">%s</a>' % (url, css_class, title)
+        title = '<a href="%s" class="%s">%s</a>' % (
+            safe_unicode(url),
+            safe_unicode(css_class),
+            safe_unicode(title)
+        )
         return title
 
     def renderCell(self, urbanlist_item):
@@ -123,7 +128,7 @@ class TitleColumn(UrbanColumn):
             title = adapter.render()
         else:
             title = self.renderTitleLink(urbanlist_item)
-        return title.decode("utf-8")
+        return safe_unicode(title)
 
     def getSortKey(self, urbanlist_item):
         return urbanlist_item.Title()
@@ -231,7 +236,7 @@ class ContacTitleDisplay(TitleDisplay):
         if tel:
             address = "%s<br /><span>%s</span>" % (address, tel)
 
-        title = "%s%s" % (title, address)
+        title = "%s%s" % (safe_unicode(title), safe_unicode(address))
         return title
 
 
