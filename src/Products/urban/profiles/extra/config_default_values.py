@@ -2687,11 +2687,6 @@ default_values = {
             },
             {"id": "aide-opinion", "title": u"Avis AIDE sollicité"},
         ],
-        "townroaddecree": [
-            "UrbanVocabularyTerm",
-            ["RoadDecree"],
-            {"id": "commune", "title": u"Commune"},
-        ],
         "folderdelays": [
             "UrbanDelay",
             ["BuildLicence", "ParcelOutLicence", "UrbanCertificateTwo"],
