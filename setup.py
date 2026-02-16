@@ -4,7 +4,7 @@ from setuptools import setup
 import os
 
 
-version = "2.9.6"
+version = "2.9.7.dev0"
 
 setup(
     name="Products.urban",
