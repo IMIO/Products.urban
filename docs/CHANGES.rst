@@ -8,6 +8,16 @@ Changelog
 
 .. towncrier release notes start
 
+2.9.6 (2026-02-16)
+------------------
+
+Bug fixes:
+
+
+- Fix unicode error
+  [jchandelle] (SUP-36370)
+
+
 2.9.5 (2026-02-16)
 ------------------
 
