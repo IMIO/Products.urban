@@ -130,7 +130,7 @@ class LocalRoleAdapter(object):
         if allowed_group in mapping:
             return mapping.get(allowed_group)
 
-    def get_readers(self):
+    def get_readers(self, add_opinion_editor=True):
         """ """
         licence = self.licence
         mapping = {
@@ -148,7 +148,8 @@ class LocalRoleAdapter(object):
         allowed_group = self.get_allowed_groups(licence)
         if allowed_group in mapping:
             groups = mapping.get(allowed_group)
-            groups.extend(self.get_opinion_editors())
+            if add_opinion_editor:
+                groups.extend(self.get_opinion_editors())
             return groups
 
     def getRoles(self, principal):
