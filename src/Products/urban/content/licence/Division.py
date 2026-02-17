@@ -32,6 +32,8 @@ from Products.urban.widget.select2widget import MultiSelect2Widget
 from zope.i18n import translate
 from zope.interface import implements
 
+from zope.interface import implements
+
 
 optional_fields = []
 ##/code-section module-header

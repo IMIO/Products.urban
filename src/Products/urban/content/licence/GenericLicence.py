@@ -1648,6 +1648,7 @@ class GenericLicence(OrderedBaseFolder, UrbanBase, BrowserDefaultMixin):
         flooding levels : no risk, low risk, moderated risk, high risk
         """
         vocab = (
+            # we add an empty vocab value of type "choose a value"
             ("no", translate(_("flooding_level_no"), context=self.REQUEST)),
             ("very low", translate(_("flooding_level_verylow"), context=self.REQUEST)),
             ("low", translate(_("flooding_level_low"), context=self.REQUEST)),
@@ -1665,6 +1666,18 @@ class GenericLicence(OrderedBaseFolder, UrbanBase, BrowserDefaultMixin):
                 translate(_("flooding_level_moderate_to_high"), context=self.REQUEST),
             ),
             ("high", translate(_("flooding_level_high"), context=self.REQUEST)),
+            (
+                "axis_under_10",
+                translate(_("flooding_axis_under_10"), context=self.REQUEST),
+            ),
+            (
+                "axis_over_10",
+                translate(_("flooding_axis_over_10"), context=self.REQUEST),
+            ),
+            (
+                "already_flooded",
+                translate(_("flooding_already_flooded"), context=self.REQUEST),
+            ),
         )
 
         return DisplayList(vocab)
@@ -1972,8 +1985,8 @@ class GenericLicence(OrderedBaseFolder, UrbanBase, BrowserDefaultMixin):
         if events:
             return events[-1]
 
-    def getFirstEvent(self, eventInterface=None):
-        events = self.getAllEvents(eventInterface)
+    def getFirstEvent(self, eventInterface=None, state=None):
+        events = self.getAllEvents(eventInterface, state)
         if events:
             return events[0]
 
