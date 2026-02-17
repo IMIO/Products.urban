@@ -268,6 +268,17 @@ schema = Schema(
             schemata="urban_environment",
             default_output_type="text/x-html-safe",
         ),
+        StringField(
+            name="road_decree_reference",
+            widget=UrbanBackReferenceWidget(
+                label=_("road_decree_reference", default="road_decree_reference"),
+                portal_types=["RoadDecree"],
+            ),
+            required=False,
+            schemata="urban_description",
+            default_method="getDefaultText",
+            validators=("isReference",),
+        ),
     ),
 )
 

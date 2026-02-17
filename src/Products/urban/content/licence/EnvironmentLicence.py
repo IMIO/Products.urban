@@ -606,6 +606,13 @@ class EnvironmentLicence(BaseFolder, EnvironmentBase, BrowserDefaultMixin):
         )
         return DisplayList(vocabulary)
 
+security.declarePublic("listLicenceParcels")
+
+    def listLicenceParcels(self):
+        parcels = self.objectValues("PortionOut")
+        vocabulary = [(parcel.UID(), parcel.Title()) for parcel in parcels]
+        return DisplayList(sorted(vocabulary, key=lambda name: name[1]))
+
     security.declarePublic("previouslicencesBaseQuery")
 
     def getLastRefusedNotification(self):

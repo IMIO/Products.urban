@@ -26,6 +26,7 @@ from Products.urban.content.licence.CODT_UniqueLicence import (
 from Products.urban.utils import setOptionalAttributes
 from Products.urban.utils import setSchemataForCODT_UniqueLicenceInquiry
 from Products.urban.widget.select2widget import MultiSelect2Widget
+from Products.urban.widget.urbanreferencewidget import UrbanBackReferenceWidget
 from zope.interface import implements
 
 
@@ -63,6 +64,17 @@ schema = Schema(
                 label=_("urban_label_reference_dgo6", default="Reference_dgo6"),
             ),
             schemata="urban_description",
+        ),
+        StringField(
+            name="road_decree_reference",
+            widget=UrbanBackReferenceWidget(
+                label=_("road_decree_reference", default="road_decree_reference"),
+                portal_types=["RoadDecree"],
+            ),
+            required=False,
+            schemata="urban_description",
+            default_method="getDefaultText",
+            validators=("isReference",),
         ),
     ),
 )
