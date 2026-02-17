@@ -84,7 +84,7 @@ class ComputeInquiryDelay(object):
             if licence.getRoadAdaptation() and licence.getRoadAdaptation() != [""]:
                 inquiry_delay = 29
 
-        if licence.portal_type in ["EnvClassOne"]:
+        if licence.portal_type in ["EnvClassOne", "RoadDecree"]:
             inquiry_delay = 29
         if licence.portal_type == "CODT_UniqueLicence":
             if licence.getInquiry_category() == "B":
