@@ -2,91 +2,93 @@
     xmlns="http://namespaces.zope.org/zope"
     xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:plone="http://namespaces.plone.org/plone"
-    i18n_domain="Products.urban">
+    i18n_domain="Products.urban"
+    >
 
-    <include file="renderer.zcml"/>
+  <include file="renderer.zcml" />
 
-    <browser:page
-        for="*"
-        name="urban-document-generation"
-        class="Products.urban.docgen.generationview.UrbanDocGenerationView"
-        permission="zope2.View"
-        />
-
-    <browser:page
-        for="Products.urban.interfaces.IUrbanEvent"
-        name="mailing-loop-persistent-document-generation"
-        class="Products.urban.docgen.generationview.UrbanMailingLoopGenerationView"
-        permission="zope2.View"
-        />
-
-     <browser:page
-         for="Products.urban.interfaces.IGenericLicence"
-         class=".helper_view.UrbanDocGenerationLicenceHelperView"
-         permission="zope2.View"
-         name="document_generation_helper_view"
+  <browser:page
+      name="urban-document-generation"
+      for="*"
+      class="Products.urban.docgen.generationview.UrbanDocGenerationView"
+      permission="zope2.View"
       />
 
-     <browser:page
-         for="Products.urban.interfaces.IInquiry"
-         class=".helper_view.UrbanDocGenerationLicenceHelperView"
-         permission="zope2.View"
-         name="document_generation_helper_view"
+  <browser:page
+      name="mailing-loop-persistent-document-generation"
+      for="Products.urban.interfaces.IUrbanEvent"
+      class="Products.urban.docgen.generationview.UrbanMailingLoopGenerationView"
+      permission="zope2.View"
       />
 
-     <browser:page
-         for="Products.urban.interfaces.IUrbanEvent"
-         class=".helper_view.UrbanDocGenerationEventHelperView"
-         permission="zope2.View"
-         name="document_generation_helper_view"
+  <browser:page
+      name="document_generation_helper_view"
+      for="Products.urban.interfaces.IGenericLicence"
+      class=".helper_view.UrbanDocGenerationLicenceHelperView"
+      permission="zope2.View"
       />
 
-     <browser:page
-         for="Products.urban.interfaces.IContact"
-         class=".helper_view.UrbanDocGenerationEventHelperView"
-         permission="zope2.View"
-         name="document_generation_helper_view"
+  <browser:page
+      name="document_generation_helper_view"
+      for="Products.urban.interfaces.IInquiry"
+      class=".helper_view.UrbanDocGenerationLicenceHelperView"
+      permission="zope2.View"
       />
 
-     <browser:page
-         for="Products.urban.interfaces.IRecipientCadastre"
-         class=".helper_view.UrbanDocGenerationEventHelperView"
-         permission="zope2.View"
-         name="document_generation_helper_view"
+  <browser:page
+      name="document_generation_helper_view"
+      for="Products.urban.interfaces.IUrbanEvent"
+      class=".helper_view.UrbanDocGenerationEventHelperView"
+      permission="zope2.View"
       />
 
-     <browser:page
-         for="Products.urban.interfaces.IUrbanVocabularyTerm"
-         class=".helper_view.UrbanDocGenerationEventHelperView"
-         permission="zope2.View"
-         name="document_generation_helper_view"
+  <browser:page
+      name="document_generation_helper_view"
+      for="Products.urban.interfaces.IContact"
+      class=".helper_view.UrbanDocGenerationEventHelperView"
+      permission="zope2.View"
       />
 
-    <browser:page
-        for="Products.ATContentTypes.interfaces.IATFolder"
-        name="document_generation_helper_view"
-        class=".helper_view.UrbanDocGenerationFacetedHelperView"
-        permission="zope2.View"
-        />
+  <browser:page
+      name="document_generation_helper_view"
+      for="Products.urban.interfaces.IRecipientCadastre"
+      class=".helper_view.UrbanDocGenerationEventHelperView"
+      permission="zope2.View"
+      />
 
-    <adapter
+  <browser:page
+      name="document_generation_helper_view"
+      for="Products.urban.interfaces.IUrbanVocabularyTerm"
+      class=".helper_view.UrbanDocGenerationEventHelperView"
+      permission="zope2.View"
+      />
+
+  <browser:page
+      name="document_generation_helper_view"
+      for="Products.ATContentTypes.interfaces.IATFolder"
+      class=".helper_view.UrbanDocGenerationFacetedHelperView"
+      permission="zope2.View"
+      />
+
+  <adapter
+      factory=".condition.UrbanTemplateCondition"
       for="Products.urban.docgen.UrbanTemplate.IUrbanTemplate
            zope.interface.Interface"
-      factory=".condition.UrbanTemplateCondition"
-    />
+      />
 
-    <adapter
-      for="OFS.interfaces.IItem"
+  <adapter
+      factory=".adapter.GenerableDashboardPODTemplatesAdapter"
       provides="collective.documentgenerator.interfaces.IGenerablePODTemplates"
-      factory=".adapter.GenerableDashboardPODTemplatesAdapter"/>
+      for="OFS.interfaces.IItem"
+      />
 
-    <adapter
-        for="Products.Archetypes.interfaces.field.IObjectField
-             Products.Archetypes.Widget.CalendarWidget
-             Products.urban.interfaces.IUrbanEvent"
-        provides="collective.documentgenerator.interfaces.IFieldRendererForDocument"
-        factory="Products.urban.docgen.fields_renderer.DateATFieldRenderer"
-        permission="zope2.View"
-     />
+  <adapter
+      factory="Products.urban.docgen.fields_renderer.DateATFieldRenderer"
+      provides="collective.documentgenerator.interfaces.IFieldRendererForDocument"
+      for="Products.Archetypes.interfaces.field.IObjectField
+           Products.Archetypes.Widget.CalendarWidget
+           Products.urban.interfaces.IUrbanEvent"
+      permission="zope2.View"
+      />
 
 </configure>

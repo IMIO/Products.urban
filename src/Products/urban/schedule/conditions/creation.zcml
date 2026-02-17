@@ -1,411 +1,412 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
-    i18n_domain="Products.urban">
+    i18n_domain="Products.urban"
+    >
 
-    <adapter
-        for="Products.urban.interfaces.IGenericLicence
-             imio.schedule.content.task_config.ITaskConfig"
-        provides="imio.schedule.interfaces.ICreationCondition"
-        factory=".creation.DepositEventCreated"
-        name="urban.schedule.condition.deposit_event_created"
-    />
+  <adapter
+      factory=".creation.DepositEventCreated"
+      provides="imio.schedule.interfaces.ICreationCondition"
+      for="Products.urban.interfaces.IGenericLicence
+           imio.schedule.content.task_config.ITaskConfig"
+      name="urban.schedule.condition.deposit_event_created"
+      />
 
-    <adapter
-        for="Products.urban.interfaces.IGenericLicence
-             imio.schedule.content.task_config.ITaskConfig"
-        provides="imio.schedule.interfaces.ICreationCondition"
-        factory=".creation.DepositDoneCondition"
-        name="urban.schedule.condition.deposit_done"
-    />
+  <adapter
+      factory=".creation.DepositDoneCondition"
+      provides="imio.schedule.interfaces.ICreationCondition"
+      for="Products.urban.interfaces.IGenericLicence
+           imio.schedule.content.task_config.ITaskConfig"
+      name="urban.schedule.condition.deposit_done"
+      />
 
-    <adapter
-        for="Products.urban.interfaces.ITicket
-             imio.schedule.content.task_config.ITaskConfig"
-        provides="imio.schedule.interfaces.ICreationCondition"
-        factory=".creation.SingleComplementAsked"
-        name="urban.schedule.condition.complements_asked"
-    />
+  <adapter
+      factory=".creation.SingleComplementAsked"
+      provides="imio.schedule.interfaces.ICreationCondition"
+      for="Products.urban.interfaces.ITicket
+           imio.schedule.content.task_config.ITaskConfig"
+      name="urban.schedule.condition.complements_asked"
+      />
 
-    <!-- unique licence incomplete conditions-->
+  <!-- unique licence incomplete conditions-->
 
-    <adapter
-        for="Products.urban.interfaces.IEnvironmentLicence
-             imio.schedule.content.task_config.ITaskConfig"
-        provides="imio.schedule.interfaces.ICreationCondition"
-        factory=".creation.SingleComplementAsked"
-        name="urban.schedule.condition.complements_asked"
-    />
+  <adapter
+      factory=".creation.SingleComplementAsked"
+      provides="imio.schedule.interfaces.ICreationCondition"
+      for="Products.urban.interfaces.IEnvironmentLicence
+           imio.schedule.content.task_config.ITaskConfig"
+      name="urban.schedule.condition.complements_asked"
+      />
 
-    <adapter
-        for="Products.urban.interfaces.IEnvironmentLicence
-             imio.schedule.content.task_config.ITaskConfig"
-        provides="imio.schedule.interfaces.ICreationCondition"
-        factory=".creation.SingleComplementReceived"
-        name="urban.schedule.condition.complements_received"
-    />
+  <adapter
+      factory=".creation.SingleComplementReceived"
+      provides="imio.schedule.interfaces.ICreationCondition"
+      for="Products.urban.interfaces.IEnvironmentLicence
+           imio.schedule.content.task_config.ITaskConfig"
+      name="urban.schedule.condition.complements_received"
+      />
 
-    <adapter
-        for="Products.urban.interfaces.IEnvironmentLicence
-             imio.schedule.content.task_config.ITaskConfig"
-             provides="imio.schedule.interfaces.ICreationCondition"
-        factory=".creation.ComplementsTransmitToSPW"
-        name="urban.schedule.condition.complements_transmit_to_spw"
-    />
+  <adapter
+      factory=".creation.ComplementsTransmitToSPW"
+      provides="imio.schedule.interfaces.ICreationCondition"
+      for="Products.urban.interfaces.IEnvironmentLicence
+           imio.schedule.content.task_config.ITaskConfig"
+      name="urban.schedule.condition.complements_transmit_to_spw"
+      />
 
-    <adapter
-        for="Products.urban.interfaces.IBaseAllBuildLicence
-             imio.schedule.content.task_config.ITaskConfig"
-        provides="imio.schedule.interfaces.ICreationCondition"
-        factory=".creation.IncompleteForSixMonths"
-        name="urban.schedule.condition.incomplete_for_6_months"
-    />
+  <adapter
+      factory=".creation.IncompleteForSixMonths"
+      provides="imio.schedule.interfaces.ICreationCondition"
+      for="Products.urban.interfaces.IBaseAllBuildLicence
+           imio.schedule.content.task_config.ITaskConfig"
+      name="urban.schedule.condition.incomplete_for_6_months"
+      />
 
-    <adapter
-        for="Products.urban.interfaces.IEnvironmentLicence
-             imio.schedule.content.task_config.ITaskConfig"
-        provides="imio.schedule.interfaces.ICreationCondition"
-        factory=".creation.IncompleteForSixMonths"
-        name="urban.schedule.condition.incomplete_for_6_months"
-    />
+  <adapter
+      factory=".creation.IncompleteForSixMonths"
+      provides="imio.schedule.interfaces.ICreationCondition"
+      for="Products.urban.interfaces.IEnvironmentLicence
+           imio.schedule.content.task_config.ITaskConfig"
+      name="urban.schedule.condition.incomplete_for_6_months"
+      />
 
-    <adapter
-        for="Products.urban.interfaces.IEnvironmentLicence
-             imio.schedule.content.task_config.ITaskConfig"
-        provides="imio.schedule.interfaces.ICreationCondition"
-        factory=".creation.CollegeAuthority"
-        name="urban.schedule.condition.college_authority"
-    />
+  <adapter
+      factory=".creation.CollegeAuthority"
+      provides="imio.schedule.interfaces.ICreationCondition"
+      for="Products.urban.interfaces.IEnvironmentLicence
+           imio.schedule.content.task_config.ITaskConfig"
+      name="urban.schedule.condition.college_authority"
+      />
 
 
-    <!-- acknowlegdment conditions-->
-    <adapter
-        for="Products.urban.interfaces.IBaseAllBuildLicence
-             imio.schedule.content.task_config.ITaskConfig"
-        provides="imio.schedule.interfaces.ICreationCondition"
-        factory=".creation.AcknowledgmentDoneCondition"
-        name="urban.schedule.condition.acknowledgment_done"
-    />
+  <!-- acknowlegdment conditions-->
+  <adapter
+      factory=".creation.AcknowledgmentDoneCondition"
+      provides="imio.schedule.interfaces.ICreationCondition"
+      for="Products.urban.interfaces.IBaseAllBuildLicence
+           imio.schedule.content.task_config.ITaskConfig"
+      name="urban.schedule.condition.acknowledgment_done"
+      />
 
-    <adapter
-        for="Products.urban.interfaces.IEnvironmentLicence
-             imio.schedule.content.task_config.ITaskConfig"
-        provides="imio.schedule.interfaces.ICreationCondition"
-        factory=".creation.AcknowledgmentDoneCondition"
-        name="urban.schedule.condition.acknowledgment_done"
-    />
+  <adapter
+      factory=".creation.AcknowledgmentDoneCondition"
+      provides="imio.schedule.interfaces.ICreationCondition"
+      for="Products.urban.interfaces.IEnvironmentLicence
+           imio.schedule.content.task_config.ITaskConfig"
+      name="urban.schedule.condition.acknowledgment_done"
+      />
 
-    <adapter
-        for="Products.urban.interfaces.IBaseAllBuildLicence
-             imio.schedule.content.task_config.ITaskConfig"
-        provides="imio.schedule.interfaces.ICreationCondition"
-        factory=".creation.DefaultAcknowledgmentCondition"
-        name="urban.schedule.condition.default_acknowledgement"
-    />
+  <adapter
+      factory=".creation.DefaultAcknowledgmentCondition"
+      provides="imio.schedule.interfaces.ICreationCondition"
+      for="Products.urban.interfaces.IBaseAllBuildLicence
+           imio.schedule.content.task_config.ITaskConfig"
+      name="urban.schedule.condition.default_acknowledgement"
+      />
 
-    <!-- inquiry conditions-->
-    <adapter
-        for="Products.urban.interfaces.IBaseAllBuildLicence
-             imio.schedule.content.task_config.ITaskConfig"
-        provides="imio.schedule.interfaces.ICreationCondition"
-        factory=".creation.WillHaveInquiry"
-        name="urban.schedule.condition.will_have_inquiry"
-    />
+  <!-- inquiry conditions-->
+  <adapter
+      factory=".creation.WillHaveInquiry"
+      provides="imio.schedule.interfaces.ICreationCondition"
+      for="Products.urban.interfaces.IBaseAllBuildLicence
+           imio.schedule.content.task_config.ITaskConfig"
+      name="urban.schedule.condition.will_have_inquiry"
+      />
 
-    <adapter
-        for="Products.urban.interfaces.IEnvironmentLicence
-             imio.schedule.content.task_config.ITaskConfig"
-        provides="imio.schedule.interfaces.ICreationCondition"
-        factory=".creation.WillHaveInquiry"
-        name="urban.schedule.condition.will_have_inquiry"
-    />
+  <adapter
+      factory=".creation.WillHaveInquiry"
+      provides="imio.schedule.interfaces.ICreationCondition"
+      for="Products.urban.interfaces.IEnvironmentLicence
+           imio.schedule.content.task_config.ITaskConfig"
+      name="urban.schedule.condition.will_have_inquiry"
+      />
 
-    <adapter
-        for="Products.urban.interfaces.ICODT_BaseBuildLicence
-             imio.schedule.content.task_config.ITaskConfig"
-        provides="imio.schedule.interfaces.ICreationCondition"
-        factory=".creation.InquiryDatesDefinedCondition"
-        name="urban.schedule.condition.inquiry_dates_defined"
-    />
+  <adapter
+      factory=".creation.InquiryDatesDefinedCondition"
+      provides="imio.schedule.interfaces.ICreationCondition"
+      for="Products.urban.interfaces.ICODT_BaseBuildLicence
+           imio.schedule.content.task_config.ITaskConfig"
+      name="urban.schedule.condition.inquiry_dates_defined"
+      />
 
-    <adapter
-        for="Products.urban.interfaces.IEnvironmentLicence
-             imio.schedule.content.task_config.ITaskConfig"
-        provides="imio.schedule.interfaces.ICreationCondition"
-        factory=".creation.InquiryDatesDefinedCondition"
-        name="urban.schedule.condition.inquiry_dates_defined"
-    />
+  <adapter
+      factory=".creation.InquiryDatesDefinedCondition"
+      provides="imio.schedule.interfaces.ICreationCondition"
+      for="Products.urban.interfaces.IEnvironmentLicence
+           imio.schedule.content.task_config.ITaskConfig"
+      name="urban.schedule.condition.inquiry_dates_defined"
+      />
 
-    <adapter
-        for="Products.urban.interfaces.ICODT_BaseBuildLicence
-             imio.schedule.content.task_config.ITaskConfig"
-        provides="imio.schedule.interfaces.ICreationCondition"
-        factory=".creation.WillHaveAnnouncement"
-        name="urban.schedule.condition.will_have_announcement"
-    />
+  <adapter
+      factory=".creation.WillHaveAnnouncement"
+      provides="imio.schedule.interfaces.ICreationCondition"
+      for="Products.urban.interfaces.ICODT_BaseBuildLicence
+           imio.schedule.content.task_config.ITaskConfig"
+      name="urban.schedule.condition.will_have_announcement"
+      />
 
-    <adapter
-        for="Products.urban.interfaces.ICODT_BaseBuildLicence
-             imio.schedule.content.task_config.ITaskConfig"
-        provides="imio.schedule.interfaces.ICreationCondition"
-        factory=".creation.AnnouncementDatesDefinedCondition"
-        name="urban.schedule.condition.announcement_dates_defined"
-    />
+  <adapter
+      factory=".creation.AnnouncementDatesDefinedCondition"
+      provides="imio.schedule.interfaces.ICreationCondition"
+      for="Products.urban.interfaces.ICODT_BaseBuildLicence
+           imio.schedule.content.task_config.ITaskConfig"
+      name="urban.schedule.condition.announcement_dates_defined"
+      />
 
-    <adapter
-        for="Products.urban.interfaces.IBaseAllBuildLicence
-             imio.schedule.content.task_config.ITaskConfig"
-        provides="imio.schedule.interfaces.ICreationCondition"
-        factory=".creation.NoInquiryCondition"
-        name="urban.schedule.condition.no_inquiry"
-    />
+  <adapter
+      factory=".creation.NoInquiryCondition"
+      provides="imio.schedule.interfaces.ICreationCondition"
+      for="Products.urban.interfaces.IBaseAllBuildLicence
+           imio.schedule.content.task_config.ITaskConfig"
+      name="urban.schedule.condition.no_inquiry"
+      />
 
-    <adapter
-        for="Products.urban.interfaces.IBaseAllBuildLicence
-             imio.schedule.content.task_config.ITaskConfig"
-        provides="imio.schedule.interfaces.ICreationCondition"
-        factory=".creation.InquiryCondition"
-        name="urban.schedule.condition.has_inquiry"
-    />
+  <adapter
+      factory=".creation.InquiryCondition"
+      provides="imio.schedule.interfaces.ICreationCondition"
+      for="Products.urban.interfaces.IBaseAllBuildLicence
+           imio.schedule.content.task_config.ITaskConfig"
+      name="urban.schedule.condition.has_inquiry"
+      />
 
-    <adapter
-        for="Products.urban.interfaces.ICODT_BaseBuildLicence
-             imio.schedule.content.task_config.ITaskConfig"
-        provides="imio.schedule.interfaces.ICreationCondition"
-        factory=".creation.AnnouncementCondition"
-        name="urban.schedule.condition.has_announcement"
-    />
+  <adapter
+      factory=".creation.AnnouncementCondition"
+      provides="imio.schedule.interfaces.ICreationCondition"
+      for="Products.urban.interfaces.ICODT_BaseBuildLicence
+           imio.schedule.content.task_config.ITaskConfig"
+      name="urban.schedule.condition.has_announcement"
+      />
 
-    <adapter
-        for="Products.urban.interfaces.ICODT_BaseBuildLicence
-             imio.schedule.content.task_config.ITaskConfig"
-        provides="imio.schedule.interfaces.ICreationCondition"
-        factory=".creation.AnnouncementDoneCondition"
-        name="urban.schedule.condition.announcement_done"
-    />
+  <adapter
+      factory=".creation.AnnouncementDoneCondition"
+      provides="imio.schedule.interfaces.ICreationCondition"
+      for="Products.urban.interfaces.ICODT_BaseBuildLicence
+           imio.schedule.content.task_config.ITaskConfig"
+      name="urban.schedule.condition.announcement_done"
+      />
 
-    <!-- opinion requests conditions-->
-    <adapter
-        for="Products.urban.interfaces.ICODT_BaseBuildLicence
-             imio.schedule.content.task_config.ITaskConfig"
-        provides="imio.schedule.interfaces.ICreationCondition"
-        factory=".creation.HasOpinionRequests"
-        name="urban.schedule.condition.has_opinion_requests"
-    />
+  <!-- opinion requests conditions-->
+  <adapter
+      factory=".creation.HasOpinionRequests"
+      provides="imio.schedule.interfaces.ICreationCondition"
+      for="Products.urban.interfaces.ICODT_BaseBuildLicence
+           imio.schedule.content.task_config.ITaskConfig"
+      name="urban.schedule.condition.has_opinion_requests"
+      />
 
-    <adapter
-        for="Products.urban.interfaces.IEnvironmentLicence
-             imio.schedule.content.task_config.ITaskConfig"
-        provides="imio.schedule.interfaces.ICreationCondition"
-        factory=".creation.HasOpinionRequests"
-        name="urban.schedule.condition.has_opinion_requests"
-    />
+  <adapter
+      factory=".creation.HasOpinionRequests"
+      provides="imio.schedule.interfaces.ICreationCondition"
+      for="Products.urban.interfaces.IEnvironmentLicence
+           imio.schedule.content.task_config.ITaskConfig"
+      name="urban.schedule.condition.has_opinion_requests"
+      />
 
-    <adapter
-        for="Products.urban.interfaces.ICODT_BaseBuildLicence
-             imio.schedule.content.task_config.ITaskConfig"
-        provides="imio.schedule.interfaces.ICreationCondition"
-        factory=".creation.OpinionRequestsInprogress"
-        name="urban.schedule.condition.opinion_requests_in_progress"
-    />
+  <adapter
+      factory=".creation.OpinionRequestsInprogress"
+      provides="imio.schedule.interfaces.ICreationCondition"
+      for="Products.urban.interfaces.ICODT_BaseBuildLicence
+           imio.schedule.content.task_config.ITaskConfig"
+      name="urban.schedule.condition.opinion_requests_in_progress"
+      />
 
-    <adapter
-        for="Products.urban.interfaces.IEnvironmentLicence
-             imio.schedule.content.task_config.ITaskConfig"
-        provides="imio.schedule.interfaces.ICreationCondition"
-        factory=".creation.OpinionRequestsInprogress"
-        name="urban.schedule.condition.opinion_requests_in_progress"
-    />
+  <adapter
+      factory=".creation.OpinionRequestsInprogress"
+      provides="imio.schedule.interfaces.ICreationCondition"
+      for="Products.urban.interfaces.IEnvironmentLicence
+           imio.schedule.content.task_config.ITaskConfig"
+      name="urban.schedule.condition.opinion_requests_in_progress"
+      />
 
-    <adapter
-        for="Products.urban.interfaces.ICODT_BaseBuildLicence
-             imio.schedule.content.task_config.ITaskConfig"
-        provides="imio.schedule.interfaces.ICreationCondition"
-        factory=".creation.OpinionRequestsDone"
-        name="urban.schedule.condition.opinion_requests_done"
-    />
+  <adapter
+      factory=".creation.OpinionRequestsDone"
+      provides="imio.schedule.interfaces.ICreationCondition"
+      for="Products.urban.interfaces.ICODT_BaseBuildLicence
+           imio.schedule.content.task_config.ITaskConfig"
+      name="urban.schedule.condition.opinion_requests_done"
+      />
 
-    <adapter
-        for="Products.urban.interfaces.IEnvironmentLicence
-             imio.schedule.content.task_config.ITaskConfig"
-        provides="imio.schedule.interfaces.ICreationCondition"
-        factory=".creation.OpinionRequestsDone"
-        name="urban.schedule.condition.opinion_requests_done"
-    />
+  <adapter
+      factory=".creation.OpinionRequestsDone"
+      provides="imio.schedule.interfaces.ICreationCondition"
+      for="Products.urban.interfaces.IEnvironmentLicence
+           imio.schedule.content.task_config.ITaskConfig"
+      name="urban.schedule.condition.opinion_requests_done"
+      />
 
-    <adapter
-        for="Products.urban.interfaces.IUrbanEventOpinionRequest
-             imio.schedule.content.task_config.ITaskConfig"
-        provides="imio.schedule.interfaces.ICreationCondition"
-        factory=".creation.IsInternalOpinionRequest"
-        name="urban.schedule.condition.is_internal_opinion"
-    />
+  <adapter
+      factory=".creation.IsInternalOpinionRequest"
+      provides="imio.schedule.interfaces.ICreationCondition"
+      for="Products.urban.interfaces.IUrbanEventOpinionRequest
+           imio.schedule.content.task_config.ITaskConfig"
+      name="urban.schedule.condition.is_internal_opinion"
+      />
 
-    <!-- FD opinions conditions-->
-    <adapter
-        for="Products.urban.interfaces.IBaseAllBuildLicence
-             imio.schedule.content.task_config.ITaskConfig"
-        provides="imio.schedule.interfaces.ICreationCondition"
-        factory=".creation.HasFDOpinionRequest"
-        name="urban.schedule.condition.need_FD_opinion"
-    />
+  <!-- FD opinions conditions-->
+  <adapter
+      factory=".creation.HasFDOpinionRequest"
+      provides="imio.schedule.interfaces.ICreationCondition"
+      for="Products.urban.interfaces.IBaseAllBuildLicence
+           imio.schedule.content.task_config.ITaskConfig"
+      name="urban.schedule.condition.need_FD_opinion"
+      />
 
-    <adapter
-        for="Products.urban.interfaces.IBaseAllBuildLicence
-             imio.schedule.content.task_config.ITaskConfig"
-        provides="imio.schedule.interfaces.ICreationCondition"
-        factory=".creation.HasNoFDOpinionRequest"
-        name="urban.schedule.condition.dont_need_FD_opinion"
-    />
+  <adapter
+      factory=".creation.HasNoFDOpinionRequest"
+      provides="imio.schedule.interfaces.ICreationCondition"
+      for="Products.urban.interfaces.IBaseAllBuildLicence
+           imio.schedule.content.task_config.ITaskConfig"
+      name="urban.schedule.condition.dont_need_FD_opinion"
+      />
 
-    <adapter
-        for="Products.urban.interfaces.IBaseAllBuildLicence
-             imio.schedule.content.task_config.ITaskConfig"
-        provides="imio.schedule.interfaces.ICreationCondition"
-        factory=".creation.FDOpinionIsLate"
-        name="urban.schedule.condition.FD_opinion_overdue"
-    />
+  <adapter
+      factory=".creation.FDOpinionIsLate"
+      provides="imio.schedule.interfaces.ICreationCondition"
+      for="Products.urban.interfaces.IBaseAllBuildLicence
+           imio.schedule.content.task_config.ITaskConfig"
+      name="urban.schedule.condition.FD_opinion_overdue"
+      />
 
-    <!-- deposit date is past by x days -->
+  <!-- deposit date is past by x days -->
 
-    <adapter
-        for="Products.urban.interfaces.IBaseAllBuildLicence
-             imio.schedule.content.task_config.ITaskConfig"
-        provides="imio.schedule.interfaces.ICreationCondition"
-        factory=".creation.DepositDateIsPast30Days"
-        name="urban.schedule.condition.deposit_past_30days"
-    />
+  <adapter
+      factory=".creation.DepositDateIsPast30Days"
+      provides="imio.schedule.interfaces.ICreationCondition"
+      for="Products.urban.interfaces.IBaseAllBuildLicence
+           imio.schedule.content.task_config.ITaskConfig"
+      name="urban.schedule.condition.deposit_past_30days"
+      />
 
-    <adapter
-        for="Products.urban.interfaces.IBaseAllBuildLicence
-             imio.schedule.content.task_config.ITaskConfig"
-        provides="imio.schedule.interfaces.ICreationCondition"
-        factory=".creation.DepositDateIsUnder30Days"
-        name="urban.schedule.condition.deposit_under_30days"
-    />
+  <adapter
+      factory=".creation.DepositDateIsUnder30Days"
+      provides="imio.schedule.interfaces.ICreationCondition"
+      for="Products.urban.interfaces.IBaseAllBuildLicence
+           imio.schedule.content.task_config.ITaskConfig"
+      name="urban.schedule.condition.deposit_under_30days"
+      />
 
-    <!-- incomplete -->
+  <!-- incomplete -->
 
-    <adapter
-        for="Products.urban.interfaces.IBaseAllBuildLicence
-             imio.schedule.content.task_config.ITaskConfig"
-        provides="imio.schedule.interfaces.ICreationCondition"
-        factory=".creation.IncompleteForTheFirstTime"
-        name="urban.schedule.condition.incomplete_first_time"
-    />
+  <adapter
+      factory=".creation.IncompleteForTheFirstTime"
+      provides="imio.schedule.interfaces.ICreationCondition"
+      for="Products.urban.interfaces.IBaseAllBuildLicence
+           imio.schedule.content.task_config.ITaskConfig"
+      name="urban.schedule.condition.incomplete_first_time"
+      />
 
-    <adapter
-        for="Products.urban.interfaces.IBaseAllBuildLicence
-             imio.schedule.content.task_config.ITaskConfig"
-        provides="imio.schedule.interfaces.ICreationCondition"
-        factory=".creation.IncompleteForTheSecondTime"
-        name="urban.schedule.condition.incomplete_second_time"
-    />
+  <adapter
+      factory=".creation.IncompleteForTheSecondTime"
+      provides="imio.schedule.interfaces.ICreationCondition"
+      for="Products.urban.interfaces.IBaseAllBuildLicence
+           imio.schedule.content.task_config.ITaskConfig"
+      name="urban.schedule.condition.incomplete_second_time"
+      />
 
-    <!-- SPW project receipt for unique licences -->
-    <adapter
-        for="Products.urban.interfaces.IBaseAllBuildLicence
-             imio.schedule.content.task_config.ITaskConfig"
-        provides="imio.schedule.interfaces.ICreationCondition"
-        factory=".creation.SPWProjectReceivedCondition"
-        name="urban.schedule.condition.spw_project_receipt_done"
-    />
+  <!-- SPW project receipt for unique licences -->
+  <adapter
+      factory=".creation.SPWProjectReceivedCondition"
+      provides="imio.schedule.interfaces.ICreationCondition"
+      for="Products.urban.interfaces.IBaseAllBuildLicence
+           imio.schedule.content.task_config.ITaskConfig"
+      name="urban.schedule.condition.spw_project_receipt_done"
+      />
 
-    <adapter
-        for="Products.urban.interfaces.IEnvironmentLicence
-             imio.schedule.content.task_config.ITaskConfig"
-        provides="imio.schedule.interfaces.ICreationCondition"
-        factory=".creation.LicenceAuthorityIsCollege"
-        name="urban.schedule.condition.authority_is_college"
-    />
+  <adapter
+      factory=".creation.LicenceAuthorityIsCollege"
+      provides="imio.schedule.interfaces.ICreationCondition"
+      for="Products.urban.interfaces.IEnvironmentLicence
+           imio.schedule.content.task_config.ITaskConfig"
+      name="urban.schedule.condition.authority_is_college"
+      />
 
-    <!-- Env class 2 temporary licences dont have public inquiries -->
-    <adapter
-        for="Products.urban.interfaces.IEnvironmentLicence
-             imio.schedule.content.task_config.ITaskConfig"
-        provides="imio.schedule.interfaces.ICreationCondition"
-        factory=".creation.IsNotTemporaryLicence"
-        name="urban.schedule.condition.is_not_temporary_licence"
-    />
+  <!-- Env class 2 temporary licences dont have public inquiries -->
+  <adapter
+      factory=".creation.IsNotTemporaryLicence"
+      provides="imio.schedule.interfaces.ICreationCondition"
+      for="Products.urban.interfaces.IEnvironmentLicence
+           imio.schedule.content.task_config.ITaskConfig"
+      name="urban.schedule.condition.is_not_temporary_licence"
+      />
 
-    <!-- Inspection conditions -->
-    <adapter
-        for="Products.urban.interfaces.IInspection
-             imio.schedule.content.task_config.ITaskConfig"
-        provides="imio.schedule.interfaces.ICreationCondition"
-        factory=".creation.ShouldDoInspectionFollowups"
-        name="urban.schedule.condition.should_do_followups"
-    />
+  <!-- Inspection conditions -->
+  <adapter
+      factory=".creation.ShouldDoInspectionFollowups"
+      provides="imio.schedule.interfaces.ICreationCondition"
+      for="Products.urban.interfaces.IInspection
+           imio.schedule.content.task_config.ITaskConfig"
+      name="urban.schedule.condition.should_do_followups"
+      />
 
-    <adapter
-        for="Products.urban.interfaces.IInspection
-             imio.schedule.content.task_config.ITaskConfig"
-        provides="imio.schedule.interfaces.ICreationCondition"
-        factory=".creation.ShouldWriteOneInspectionFollowUp"
-        name="urban.schedule.condition.should_write_one_followup"
-    />
+  <adapter
+      factory=".creation.ShouldWriteOneInspectionFollowUp"
+      provides="imio.schedule.interfaces.ICreationCondition"
+      for="Products.urban.interfaces.IInspection
+           imio.schedule.content.task_config.ITaskConfig"
+      name="urban.schedule.condition.should_write_one_followup"
+      />
 
-    <adapter
-        for="Products.urban.interfaces.IInspection
-             imio.schedule.content.task_config.ITaskConfig"
-        provides="imio.schedule.interfaces.ICreationCondition"
-        factory=".creation.SomeInspectionFollowupsAreWritten"
-        name="urban.schedule.condition.followups_written"
-    />
+  <adapter
+      factory=".creation.SomeInspectionFollowupsAreWritten"
+      provides="imio.schedule.interfaces.ICreationCondition"
+      for="Products.urban.interfaces.IInspection
+           imio.schedule.content.task_config.ITaskConfig"
+      name="urban.schedule.condition.followups_written"
+      />
 
-    <adapter
-        for="Products.urban.interfaces.IInspection
-             imio.schedule.content.task_config.ITaskConfig"
-        provides="imio.schedule.interfaces.ICreationCondition"
-        factory=".creation.SomeInspectionFollowupsToSend"
-        name="urban.schedule.condition.followups_to_send"
-    />
+  <adapter
+      factory=".creation.SomeInspectionFollowupsToSend"
+      provides="imio.schedule.interfaces.ICreationCondition"
+      for="Products.urban.interfaces.IInspection
+           imio.schedule.content.task_config.ITaskConfig"
+      name="urban.schedule.condition.followups_to_send"
+      />
 
-    <adapter
-        for="Products.urban.interfaces.IInspection
-             imio.schedule.content.task_config.ITaskConfig"
-        provides="imio.schedule.interfaces.ICreationCondition"
-        factory=".creation.ShouldEndInspection"
-        name="urban.schedule.condition.should_end_inspection"
-    />
+  <adapter
+      factory=".creation.ShouldEndInspection"
+      provides="imio.schedule.interfaces.ICreationCondition"
+      for="Products.urban.interfaces.IInspection
+           imio.schedule.content.task_config.ITaskConfig"
+      name="urban.schedule.condition.should_end_inspection"
+      />
 
-    <adapter
-        for="Products.urban.interfaces.IInspection
-             imio.schedule.content.task_config.ITaskConfig"
-        provides="imio.schedule.interfaces.ICreationCondition"
-        factory=".creation.ShouldCreateTicket"
-        name="urban.schedule.condition.should_create_ticket"
-    />
+  <adapter
+      factory=".creation.ShouldCreateTicket"
+      provides="imio.schedule.interfaces.ICreationCondition"
+      for="Products.urban.interfaces.IInspection
+           imio.schedule.content.task_config.ITaskConfig"
+      name="urban.schedule.condition.should_create_ticket"
+      />
 
-    <adapter
-        for="Products.urban.interfaces.IInspection
-             imio.schedule.content.task_config.ITaskConfig"
-        provides="imio.schedule.interfaces.ICreationCondition"
-        factory=".creation.FollowUpTicketCreated"
-        name="urban.schedule.condition.followup_ticket_created"
-    />
+  <adapter
+      factory=".creation.FollowUpTicketCreated"
+      provides="imio.schedule.interfaces.ICreationCondition"
+      for="Products.urban.interfaces.IInspection
+           imio.schedule.content.task_config.ITaskConfig"
+      name="urban.schedule.condition.followup_ticket_created"
+      />
 
-    <adapter
-        for="Products.urban.interfaces.IInspection
-             imio.schedule.content.task_config.ITaskConfig"
-        provides="imio.schedule.interfaces.ICreationCondition"
-        factory=".creation.FollowUpTicketClosed"
-        name="urban.schedule.condition.followup_ticket_is_closed"
-    />
+  <adapter
+      factory=".creation.FollowUpTicketClosed"
+      provides="imio.schedule.interfaces.ICreationCondition"
+      for="Products.urban.interfaces.IInspection
+           imio.schedule.content.task_config.ITaskConfig"
+      name="urban.schedule.condition.followup_ticket_is_closed"
+      />
 
-    <adapter
-        for="Products.urban.interfaces.IInspection
-             imio.schedule.content.task_config.ITaskConfig"
-        provides="imio.schedule.interfaces.ICreationCondition"
-        factory=".creation.FollowUpWithDelayClosed"
-        name="urban.schedule.condition.followup_with_delay_written"
-    />
+  <adapter
+      factory=".creation.FollowUpWithDelayClosed"
+      provides="imio.schedule.interfaces.ICreationCondition"
+      for="Products.urban.interfaces.IInspection
+           imio.schedule.content.task_config.ITaskConfig"
+      name="urban.schedule.condition.followup_with_delay_written"
+      />
 
-    <adapter
-        for="Products.urban.interfaces.ITicket
-             imio.schedule.content.task_config.ITaskConfig"
-        provides="imio.schedule.interfaces.ICreationCondition"
-        factory=".creation.ProsecutionAnswerOverDeadline"
-        name="urban.schedule.condition.prosecution_answer_over_deadline"
-    />
+  <adapter
+      factory=".creation.ProsecutionAnswerOverDeadline"
+      provides="imio.schedule.interfaces.ICreationCondition"
+      for="Products.urban.interfaces.ITicket
+           imio.schedule.content.task_config.ITaskConfig"
+      name="urban.schedule.condition.prosecution_answer_over_deadline"
+      />
 
 </configure>

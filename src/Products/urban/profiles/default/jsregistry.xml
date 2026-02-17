@@ -1,6 +1,8 @@
-<?xml version="1.0"?>
-<object name="portal_javascripts" meta_type="JavaScripts Registry">
- <!-- EXAMPLE DEFINITION
+<?xml version="1.0" encoding="utf-8"?>
+<object meta_type="JavaScripts Registry"
+        name="portal_javascripts"
+>
+  <!-- EXAMPLE DEFINITION
  <javascript cacheable="True"
              compression="safe"
              cookable="True"
@@ -10,64 +12,71 @@
              inline="False"/>
  -->
 
- <!-- ##code-section jsregistry.xml -->
- <javascript cacheable="True"
-             compression="safe"
-             cookable="True"
-             enabled="True"
-             expression=""
-             id="urbanpopups.js"
-             inline="False"/>
+  <!-- ##code-section jsregistry.xml -->
+  <javascript id="urbanpopups.js"
+              cacheable="True"
+              compression="safe"
+              cookable="True"
+              enabled="True"
+              expression=""
+              inline="False"
+  />
 
- <javascript cacheable="True"
-             compression="safe"
-             cookable="True"
-             enabled="True"
-             expression=""
-             id="max_tabs_form.js"
-             inline="False"
-             insert-after="form_tabbing.js"/>
+  <javascript id="max_tabs_form.js"
+              cacheable="True"
+              compression="safe"
+              cookable="True"
+              enabled="True"
+              expression=""
+              inline="False"
+              insert-after="form_tabbing.js"
+  />
 
- <javascript cacheable="True"
-             compression="safe"
-             cookable="True"
-             enabled="True"
-             expression="context/showEditTabbing"
-             id="urbanedittabbing.js"
-             inline="False"
-             insert-after="max_tabs_form.js"/>
+  <javascript id="urbanedittabbing.js"
+              cacheable="True"
+              compression="safe"
+              cookable="True"
+              enabled="True"
+              expression="context/showEditTabbing"
+              inline="False"
+              insert-after="max_tabs_form.js"
+  />
 
- <javascript cacheable="True"
-             compression="safe"
-             cookable="True"
-             enabled="True"
-             expression=""
-             id="callview.js"
-             inline="False"/>
+  <javascript id="callview.js"
+              cacheable="True"
+              compression="safe"
+              cookable="True"
+              enabled="True"
+              expression=""
+              inline="False"
+  />
 
- <javascript cacheable="True"
-             compression="safe"
-             cookable="True"
-             enabled="True"
-             expression=""
-             id="++resource++Products.urban/actionspanel.js"
-             inline="False"/>
+  <javascript id="++resource++Products.urban/actionspanel.js"
+              cacheable="True"
+              compression="safe"
+              cookable="True"
+              enabled="True"
+              expression=""
+              inline="False"
+  />
 
- <javascript cacheable="True"
-             compression="safe"
-             cookable="True"
-             enabled="True"
-             expression=""
-             id="cwatupe_licence_breadcrumb.js"
-             inline="False"/>
+  <javascript id="cwatupe_licence_breadcrumb.js"
+              cacheable="True"
+              compression="safe"
+              cookable="True"
+              enabled="True"
+              expression=""
+              inline="False"
+  />
 
- <javascript cacheable="True"
-             compression="safe"
-             cookable="True"
-             enabled="True"
-             expression=""
-             id="++resource++Products.urban.send_mail_action/popup.js"
-             inline="False"/>
- <!-- ##/code-section jsregistry.xml -->
+  <javascript id="++resource++Products.urban.send_mail_action/popup.js"
+              cacheable="True"
+              compression="safe"
+              cookable="True"
+              enabled="True"
+              expression=""
+              inline="False"
+  />
+  <!-- ##/code-section jsregistry.xml -->
 
 </object>

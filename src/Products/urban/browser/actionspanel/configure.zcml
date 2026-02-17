@@ -2,275 +2,288 @@
     xmlns="http://namespaces.zope.org/zope"
     xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:plone="http://namespaces.plone.org/plone"
-    i18n_domain="urban">
+    i18n_domain="urban"
+    >
 
   <browser:page
-      for="*"
       name="simpleconfirm_view"
+      for="*"
       class=".confirm.UrbanConfirmTransitionView"
+      template="confirm.pt"
       permission="zope2.View"
       layer="imio.actionspanel.interfaces.IActionsPanelLayer"
-      template="confirm.pt"
-  />
+      />
 
   <configure package="imio.actionspanel">
 
     <browser:viewlet
-       name="imio.actionspanel"
-       for="Products.urban.interfaces.IUrbanEvent"
-       manager="plone.app.layout.viewlets.interfaces.IBelowContentBody"
-       layer="imio.actionspanel.interfaces.IActionsPanelLayer"
-       class=".browser.viewlets.ActionsPanelViewlet"
-       template="browser/actions_panel_viewlet.pt"
-       permission="zope2.View"
-     />
+        name="imio.actionspanel"
+        for="Products.urban.interfaces.IUrbanEvent"
+        manager="plone.app.layout.viewlets.interfaces.IBelowContentBody"
+        class=".browser.viewlets.ActionsPanelViewlet"
+        template="browser/actions_panel_viewlet.pt"
+        permission="zope2.View"
+        layer="imio.actionspanel.interfaces.IActionsPanelLayer"
+        />
 
     <browser:page
-        for="Products.urban.interfaces.IUrbanEvent"
         name="actions_panel"
+        for="Products.urban.interfaces.IUrbanEvent"
         class="Products.urban.browser.actionspanel.EventActionsPanelView"
-        layer="imio.actionspanel.interfaces.IActionsPanelLayer"
-        template="browser/actions_panel.pt"
         allowed_attributes="render"
-        permission="zope2.View" />
+        template="browser/actions_panel.pt"
+        permission="zope2.View"
+        layer="imio.actionspanel.interfaces.IActionsPanelLayer"
+        />
 
     <browser:page
+        name="transitions_panel"
         for="Products.urban.interfaces.IUrbanEvent"
-        name="transitions_panel"
         class="Products.urban.browser.actionspanel.TransitionsPanelView"
-        layer="imio.actionspanel.interfaces.IActionsPanelLayer"
-        template="browser/actions_panel.pt"
         allowed_attributes="render"
+        template="browser/actions_panel.pt"
         permission="zope2.View"
-     />
+        layer="imio.actionspanel.interfaces.IActionsPanelLayer"
+        />
 
     <browser:page
-        for="Products.ATContentTypes.interfaces.file.IATFile"
         name="reorder_actions_panel"
+        for="Products.ATContentTypes.interfaces.file.IATFile"
         class="Products.urban.browser.actionspanel.ReorderActionsPanelView"
-        layer="imio.actionspanel.interfaces.IActionsPanelLayer"
-        template="browser/actions_panel.pt"
         allowed_attributes="render"
-        permission="zope2.View" />
-
-    <browser:viewlet
-       name="imio.actionspanel"
-       for="Products.urban.interfaces.IGenericLicence"
-       manager="plone.app.layout.viewlets.interfaces.IBelowContentBody"
-       layer="imio.actionspanel.interfaces.IActionsPanelLayer"
-       class=".browser.viewlets.ActionsPanelViewlet"
-       template="browser/actions_panel_viewlet.pt"
-       permission="zope2.View"
-     />
-
-    <browser:page
-        for="Products.urban.interfaces.IGenericLicence"
-        name="actions_panel"
-        class="Products.urban.browser.actionspanel.LicenceActionsPanelView"
-        layer="imio.actionspanel.interfaces.IActionsPanelLayer"
         template="browser/actions_panel.pt"
-        allowed_attributes="render"
-        permission="zope2.View" />
-
-    <browser:page
-        for="Products.urban.interfaces.IRecipientCadastre"
-        name="actions_panel"
-        class="Products.urban.browser.actionspanel.actionspanel.RecipientCadastreActionsPanelView"
-        layer="imio.actionspanel.interfaces.IActionsPanelLayer"
-        template="browser/actions_panel.pt"
-        allowed_attributes="render"
-        permission="zope2.View" />
-
-    <browser:page
-        for="Products.urban.interfaces.IGenericLicence"
-        name="transitions_panel"
-        class="Products.urban.browser.actionspanel.TransitionsPanelView"
-        layer="imio.actionspanel.interfaces.IActionsPanelLayer"
-        template="browser/actions_panel.pt"
-        allowed_attributes="render"
         permission="zope2.View"
-     />
+        layer="imio.actionspanel.interfaces.IActionsPanelLayer"
+        />
 
     <browser:viewlet
-       for="plone.app.folder.folder.IATUnifiedFolder"
-       name="imio.actionspanel"
-       manager="plone.app.layout.viewlets.interfaces.IContentViews"
-       layer="imio.actionspanel.interfaces.IActionsPanelLayer"
-       class=".browser.viewlets.ActionsPanelViewlet"
-       template="browser/actions_panel_viewlet.pt"
-       permission="zope2.View"
-     />
+        name="imio.actionspanel"
+        for="Products.urban.interfaces.IGenericLicence"
+        manager="plone.app.layout.viewlets.interfaces.IBelowContentBody"
+        class=".browser.viewlets.ActionsPanelViewlet"
+        template="browser/actions_panel_viewlet.pt"
+        permission="zope2.View"
+        layer="imio.actionspanel.interfaces.IActionsPanelLayer"
+        />
 
     <browser:page
+        name="actions_panel"
+        for="Products.urban.interfaces.IGenericLicence"
+        class="Products.urban.browser.actionspanel.LicenceActionsPanelView"
+        allowed_attributes="render"
+        template="browser/actions_panel.pt"
+        permission="zope2.View"
+        layer="imio.actionspanel.interfaces.IActionsPanelLayer"
+        />
+
+    <browser:page
+        name="actions_panel"
+        for="Products.urban.interfaces.IRecipientCadastre"
+        class="Products.urban.browser.actionspanel.actionspanel.RecipientCadastreActionsPanelView"
+        allowed_attributes="render"
+        template="browser/actions_panel.pt"
+        permission="zope2.View"
+        layer="imio.actionspanel.interfaces.IActionsPanelLayer"
+        />
+
+    <browser:page
+        name="transitions_panel"
+        for="Products.urban.interfaces.IGenericLicence"
+        class="Products.urban.browser.actionspanel.TransitionsPanelView"
+        allowed_attributes="render"
+        template="browser/actions_panel.pt"
+        permission="zope2.View"
+        layer="imio.actionspanel.interfaces.IActionsPanelLayer"
+        />
+
+    <browser:viewlet
+        name="imio.actionspanel"
         for="plone.app.folder.folder.IATUnifiedFolder"
-        name="actions_panel"
-        class="Products.urban.browser.actionspanel.FolderActionsPanelView"
+        manager="plone.app.layout.viewlets.interfaces.IContentViews"
+        class=".browser.viewlets.ActionsPanelViewlet"
+        template="browser/actions_panel_viewlet.pt"
+        permission="zope2.View"
         layer="imio.actionspanel.interfaces.IActionsPanelLayer"
-        template="browser/actions_panel.pt"
-        allowed_attributes="render"
-        permission="zope2.View" />
-
-    <browser:viewlet
-       for="Products.urban.interfaces.ICity"
-       name="imio.actionspanel"
-       manager="plone.app.layout.viewlets.interfaces.IContentViews"
-       layer="imio.actionspanel.interfaces.IActionsPanelLayer"
-       class=".browser.viewlets.ActionsPanelViewlet"
-       template="browser/actions_panel_viewlet.pt"
-       permission="zope2.View"
-     />
+        />
 
     <browser:page
+        name="actions_panel"
+        for="plone.app.folder.folder.IATUnifiedFolder"
+        class="Products.urban.browser.actionspanel.FolderActionsPanelView"
+        allowed_attributes="render"
+        template="browser/actions_panel.pt"
+        permission="zope2.View"
+        layer="imio.actionspanel.interfaces.IActionsPanelLayer"
+        />
+
+    <browser:viewlet
+        name="imio.actionspanel"
         for="Products.urban.interfaces.ICity"
-        name="actions_panel"
-        class="Products.urban.browser.actionspanel.FolderActionsPanelView"
+        manager="plone.app.layout.viewlets.interfaces.IContentViews"
+        class=".browser.viewlets.ActionsPanelViewlet"
+        template="browser/actions_panel_viewlet.pt"
+        permission="zope2.View"
         layer="imio.actionspanel.interfaces.IActionsPanelLayer"
-        template="browser/actions_panel.pt"
-        allowed_attributes="render"
-        permission="zope2.View" />
-
-    <browser:viewlet
-       for="Products.urban.interfaces.IUrbanEventType"
-       name="imio.actionspanel"
-       manager="plone.app.layout.viewlets.interfaces.IBelowContentBody"
-       layer="imio.actionspanel.interfaces.IActionsPanelLayer"
-       class=".browser.viewlets.ActionsPanelViewlet"
-       template="browser/actions_panel_viewlet.pt"
-       permission="zope2.View"
-     />
-
-    <browser:viewlet
-       for="imio.urban.core.contents.eventconfig.content.IEventConfig"
-       name="imio.actionspanel"
-       manager="plone.app.layout.viewlets.interfaces.IBelowContentBody"
-       layer="imio.actionspanel.interfaces.IActionsPanelLayer"
-       class=".browser.viewlets.ActionsPanelViewlet"
-       template="browser/actions_panel_viewlet.pt"
-       permission="zope2.View"
-     />
+        />
 
     <browser:page
+        name="actions_panel"
+        for="Products.urban.interfaces.ICity"
+        class="Products.urban.browser.actionspanel.FolderActionsPanelView"
+        allowed_attributes="render"
+        template="browser/actions_panel.pt"
+        permission="zope2.View"
+        layer="imio.actionspanel.interfaces.IActionsPanelLayer"
+        />
+
+    <browser:viewlet
+        name="imio.actionspanel"
         for="Products.urban.interfaces.IUrbanEventType"
+        manager="plone.app.layout.viewlets.interfaces.IBelowContentBody"
+        class=".browser.viewlets.ActionsPanelViewlet"
+        template="browser/actions_panel_viewlet.pt"
+        permission="zope2.View"
+        layer="imio.actionspanel.interfaces.IActionsPanelLayer"
+        />
+
+    <browser:viewlet
+        name="imio.actionspanel"
+        for="imio.urban.core.contents.eventconfig.content.IEventConfig"
+        manager="plone.app.layout.viewlets.interfaces.IBelowContentBody"
+        class=".browser.viewlets.ActionsPanelViewlet"
+        template="browser/actions_panel_viewlet.pt"
+        permission="zope2.View"
+        layer="imio.actionspanel.interfaces.IActionsPanelLayer"
+        />
+
+    <browser:page
         name="actions_panel"
+        for="Products.urban.interfaces.IUrbanEventType"
         class="Products.urban.browser.actionspanel.FolderActionsPanelView"
-        layer="imio.actionspanel.interfaces.IActionsPanelLayer"
-        template="browser/actions_panel.pt"
         allowed_attributes="render"
-        permission="zope2.View" />
+        template="browser/actions_panel.pt"
+        permission="zope2.View"
+        layer="imio.actionspanel.interfaces.IActionsPanelLayer"
+        />
 
     <browser:page
-       for="imio.urban.core.contents.eventconfig.content.IEventConfig"
-       name="actions_panel"
-       class="Products.urban.browser.actionspanel.FolderActionsPanelView"
-       layer="imio.actionspanel.interfaces.IActionsPanelLayer"
-       template="browser/actions_panel.pt"
-       permission="zope2.View" />
+        name="actions_panel"
+        for="imio.urban.core.contents.eventconfig.content.IEventConfig"
+        class="Products.urban.browser.actionspanel.FolderActionsPanelView"
+        template="browser/actions_panel.pt"
+        permission="zope2.View"
+        layer="imio.actionspanel.interfaces.IActionsPanelLayer"
+        />
 
     <browser:viewlet
-       for="Products.urban.interfaces.IUrbanConfigurationValue"
-       name="imio.actionspanel"
-       manager="plone.app.layout.viewlets.interfaces.IBelowContentBody"
-       layer="imio.actionspanel.interfaces.IActionsPanelLayer"
-       class=".browser.viewlets.ActionsPanelViewlet"
-       template="browser/actions_panel_viewlet.pt"
-       permission="zope2.View"
-     />
-
-    <browser:page
+        name="imio.actionspanel"
         for="Products.urban.interfaces.IUrbanConfigurationValue"
-        name="actions_panel"
-        class="Products.urban.browser.actionspanel.ConfigValueActionsPanelView"
+        manager="plone.app.layout.viewlets.interfaces.IBelowContentBody"
+        class=".browser.viewlets.ActionsPanelViewlet"
+        template="browser/actions_panel_viewlet.pt"
+        permission="zope2.View"
         layer="imio.actionspanel.interfaces.IActionsPanelLayer"
-        template="browser/actions_panel.pt"
-        allowed_attributes="render"
-        permission="zope2.View" />
-
-    <browser:viewlet
-       for="Products.urban.interfaces.IStreet"
-       name="imio.actionspanel"
-       manager="plone.app.layout.viewlets.interfaces.IBelowContentBody"
-       layer="imio.actionspanel.interfaces.IActionsPanelLayer"
-       class=".browser.viewlets.ActionsPanelViewlet"
-       template="browser/actions_panel_viewlet.pt"
-       permission="zope2.View"
-     />
+        />
 
     <browser:page
+        name="actions_panel"
+        for="Products.urban.interfaces.IUrbanConfigurationValue"
+        class="Products.urban.browser.actionspanel.ConfigValueActionsPanelView"
+        allowed_attributes="render"
+        template="browser/actions_panel.pt"
+        permission="zope2.View"
+        layer="imio.actionspanel.interfaces.IActionsPanelLayer"
+        />
+
+    <browser:viewlet
+        name="imio.actionspanel"
         for="Products.urban.interfaces.IStreet"
-        name="actions_panel"
-        class="Products.urban.browser.actionspanel.ConfigValueActionsPanelView"
+        manager="plone.app.layout.viewlets.interfaces.IBelowContentBody"
+        class=".browser.viewlets.ActionsPanelViewlet"
+        template="browser/actions_panel_viewlet.pt"
+        permission="zope2.View"
         layer="imio.actionspanel.interfaces.IActionsPanelLayer"
-        template="browser/actions_panel.pt"
-        allowed_attributes="render"
-        permission="zope2.View" />
-
-    <browser:viewlet
-       for="collective.documentgenerator.content.pod_template.IPODTemplate"
-       name="imio.actionspanel"
-       manager="plone.app.layout.viewlets.interfaces.IBelowContentBody"
-       layer="imio.actionspanel.interfaces.IActionsPanelLayer"
-       class=".browser.viewlets.ActionsPanelViewlet"
-       template="browser/actions_panel_viewlet.pt"
-       permission="zope2.View"
-     />
+        />
 
     <browser:page
+        name="actions_panel"
+        for="Products.urban.interfaces.IStreet"
+        class="Products.urban.browser.actionspanel.ConfigValueActionsPanelView"
+        allowed_attributes="render"
+        template="browser/actions_panel.pt"
+        permission="zope2.View"
+        layer="imio.actionspanel.interfaces.IActionsPanelLayer"
+        />
+
+    <browser:viewlet
+        name="imio.actionspanel"
         for="collective.documentgenerator.content.pod_template.IPODTemplate"
-        name="actions_panel"
-        class="Products.urban.browser.actionspanel.ConfigValueActionsPanelView"
+        manager="plone.app.layout.viewlets.interfaces.IBelowContentBody"
+        class=".browser.viewlets.ActionsPanelViewlet"
+        template="browser/actions_panel_viewlet.pt"
+        permission="zope2.View"
         layer="imio.actionspanel.interfaces.IActionsPanelLayer"
-        template="browser/actions_panel.pt"
+        />
+
+    <browser:page
+        name="actions_panel"
+        for="collective.documentgenerator.content.pod_template.IPODTemplate"
+        class="Products.urban.browser.actionspanel.ConfigValueActionsPanelView"
         allowed_attributes="render"
-        permission="zope2.View" />
+        template="browser/actions_panel.pt"
+        permission="zope2.View"
+        layer="imio.actionspanel.interfaces.IActionsPanelLayer"
+        />
 
     <browser:viewlet
-       for="Products.urban.interfaces.IFolderManager"
-       name="imio.actionspanel"
-       manager="plone.app.layout.viewlets.interfaces.IBelowContentBody"
-       layer="imio.actionspanel.interfaces.IActionsPanelLayer"
-       class=".browser.viewlets.ActionsPanelViewlet"
-       template="browser/actions_panel_viewlet.pt"
-       permission="zope2.View"
-     />
-
-    <browser:page
+        name="imio.actionspanel"
         for="Products.urban.interfaces.IFolderManager"
-        name="actions_panel"
-        class="Products.urban.browser.actionspanel.ConfigValueActionsPanelView"
+        manager="plone.app.layout.viewlets.interfaces.IBelowContentBody"
+        class=".browser.viewlets.ActionsPanelViewlet"
+        template="browser/actions_panel_viewlet.pt"
+        permission="zope2.View"
         layer="imio.actionspanel.interfaces.IActionsPanelLayer"
-        template="browser/actions_panel.pt"
+        />
+
+    <browser:page
+        name="actions_panel"
+        for="Products.urban.interfaces.IFolderManager"
+        class="Products.urban.browser.actionspanel.ConfigValueActionsPanelView"
         allowed_attributes="render"
-        permission="zope2.View" />
+        template="browser/actions_panel.pt"
+        permission="zope2.View"
+        layer="imio.actionspanel.interfaces.IActionsPanelLayer"
+        />
 
     <browser:page
-      for="collective.task.behaviors.ITask"
-      name="actions_panel"
-      class="Products.urban.browser.actionspanel.actionspanel.SimpleTaskActionsPanelView"
-      layer="imio.actionspanel.interfaces.IActionsPanelLayer"
-      template="browser/actions_panel.pt"
-      allowed_attributes="render"
-      permission="zope2.View"
-      />
+        name="actions_panel"
+        for="collective.task.behaviors.ITask"
+        class="Products.urban.browser.actionspanel.actionspanel.SimpleTaskActionsPanelView"
+        allowed_attributes="render"
+        template="browser/actions_panel.pt"
+        permission="zope2.View"
+        layer="imio.actionspanel.interfaces.IActionsPanelLayer"
+        />
 
     <browser:page
-      for="imio.schedule.content.task.IAutomatedTask"
-      name="actions_panel"
-      class="Products.urban.browser.actionspanel.actionspanel.AutomatedTaskActionsPanelView"
-      layer="imio.actionspanel.interfaces.IActionsPanelLayer"
-      template="browser/actions_panel.pt"
-      allowed_attributes="render"
-      permission="zope2.View"
-      />
+        name="actions_panel"
+        for="imio.schedule.content.task.IAutomatedTask"
+        class="Products.urban.browser.actionspanel.actionspanel.AutomatedTaskActionsPanelView"
+        allowed_attributes="render"
+        template="browser/actions_panel.pt"
+        permission="zope2.View"
+        layer="imio.actionspanel.interfaces.IActionsPanelLayer"
+        />
 
     <browser:page
-      for="imio.schedule.content.task.IAutomatedMacroTask"
-      name="actions_panel"
-      class="Products.urban.browser.actionspanel.actionspanel.AutomatedTaskActionsPanelView"
-      layer="imio.actionspanel.interfaces.IActionsPanelLayer"
-      template="browser/actions_panel.pt"
-      allowed_attributes="render"
-      permission="zope2.View"
-      />
+        name="actions_panel"
+        for="imio.schedule.content.task.IAutomatedMacroTask"
+        class="Products.urban.browser.actionspanel.actionspanel.AutomatedTaskActionsPanelView"
+        allowed_attributes="render"
+        template="browser/actions_panel.pt"
+        permission="zope2.View"
+        layer="imio.actionspanel.interfaces.IActionsPanelLayer"
+        />
 
   </configure>
 

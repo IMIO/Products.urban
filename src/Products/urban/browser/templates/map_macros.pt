@@ -1,79 +1,283 @@
-<div metal:define-macro="urbanMapCSS" tal:define="staticUrbanMapHost view/get_urbanmap_url">
-   <link rel="stylesheet" type="text/css" tal:attributes="href python:'%s/lib/ext/Ext/resources/css/ext-all.css'%staticUrbanMapHost"/>
-   <link rel="stylesheet" type="text/css" tal:attributes="href python:'%s/lib/ext/Ext/resources/css/xtheme-gray.css'%staticUrbanMapHost"/>
-   <link rel="stylesheet" type="text/css" tal:attributes="href python:'%s/lib/openlayers/theme/default/style.css'%staticUrbanMapHost"/>
-   <link rel="stylesheet" type="text/css" tal:attributes="href python:'%s/lib/ext/Ext/ux/grid.RowActions.css'%staticUrbanMapHost"/>
-   <link rel="stylesheet" type="text/css" tal:attributes="href python:'%s/app/css/main.css'%staticUrbanMapHost"/>
+<div metal:define-macro="urbanMapCSS"
+     tal:define="
+       staticUrbanMapHost view/get_urbanmap_url;
+     "
+>
+  <link rel="stylesheet"
+        type="text/css"
+        tal:attributes="
+          href python:'%s/lib/ext/Ext/resources/css/ext-all.css'%staticUrbanMapHost;
+        "
+  />
+  <link rel="stylesheet"
+        type="text/css"
+        tal:attributes="
+          href python:'%s/lib/ext/Ext/resources/css/xtheme-gray.css'%staticUrbanMapHost;
+        "
+  />
+  <link rel="stylesheet"
+        type="text/css"
+        tal:attributes="
+          href python:'%s/lib/openlayers/theme/default/style.css'%staticUrbanMapHost;
+        "
+  />
+  <link rel="stylesheet"
+        type="text/css"
+        tal:attributes="
+          href python:'%s/lib/ext/Ext/ux/grid.RowActions.css'%staticUrbanMapHost;
+        "
+  />
+  <link rel="stylesheet"
+        type="text/css"
+        tal:attributes="
+          href python:'%s/app/css/main.css'%staticUrbanMapHost;
+        "
+  />
 </div>
 
-<div metal:define-macro="urbanMapScriptBase" tal:define="staticUrbanMapHost view/get_urbanmap_url">
-    <script type="text/javascript" tal:attributes="src python:'%s/lib/ext/Ext/adapter/ext/ext-base.js'%staticUrbanMapHost"></script>
-    <script type="text/javascript" tal:attributes="src python:'%s/lib/ext/Ext/ext-all.js'%staticUrbanMapHost"></script>
-    <script type="text/javascript" tal:attributes="src python:'%s/lib/openlayers/SingleFile.js'%staticUrbanMapHost"></script>
-    <script type="text/javascript" tal:attributes="src python:'%s/lib/geoext/script/GeoExt.js'%staticUrbanMapHost"></script>
-    <script type="text/javascript" tal:attributes="src python:'%s/lib/jsts/javascript.util.min.js'%staticUrbanMapHost"></script>
-    <script type="text/javascript" tal:attributes="src python:'%s/lib/jsts/jsts.min.js'%staticUrbanMapHost"></script>
+<div metal:define-macro="urbanMapScriptBase"
+     tal:define="
+       staticUrbanMapHost view/get_urbanmap_url;
+     "
+>
+  <script type="text/javascript"
+          tal:attributes="
+            src python:'%s/lib/ext/Ext/adapter/ext/ext-base.js'%staticUrbanMapHost;
+          "
+  ></script>
+  <script type="text/javascript"
+          tal:attributes="
+            src python:'%s/lib/ext/Ext/ext-all.js'%staticUrbanMapHost;
+          "
+  ></script>
+  <script type="text/javascript"
+          tal:attributes="
+            src python:'%s/lib/openlayers/SingleFile.js'%staticUrbanMapHost;
+          "
+  ></script>
+  <script type="text/javascript"
+          tal:attributes="
+            src python:'%s/lib/geoext/script/GeoExt.js'%staticUrbanMapHost;
+          "
+  ></script>
+  <script type="text/javascript"
+          tal:attributes="
+            src python:'%s/lib/jsts/javascript.util.min.js'%staticUrbanMapHost;
+          "
+  ></script>
+  <script type="text/javascript"
+          tal:attributes="
+            src python:'%s/lib/jsts/jsts.min.js'%staticUrbanMapHost;
+          "
+  ></script>
 
-        <!-- The script below will load the configuration of the application -->
-    <script type="text/javascript" tal:attributes="src string:${staticUrbanMapHost}/config/index"></script>
-    <!-- The script below will load the capabilities of the print service
+  <!-- The script below will load the configuration of the application -->
+  <script type="text/javascript"
+          tal:attributes="
+            src string:${staticUrbanMapHost}/config/index;
+          "
+  ></script>
+  <!-- The script below will load the capabilities of the print service
          and save them into the global printCapabilities variable. Instead
          of this, the PrintProvider can be configured with a url and take
          care of fetching the capabilities. -->
-    <script type="text/javascript" tal:attributes="src string:${urbanMapHost}/print/info.json?var=printCapabilities"></script>
+  <script type="text/javascript"
+          tal:attributes="
+            src string:${urbanMapHost}/print/info.json?var=printCapabilities;
+          "
+  ></script>
 
-    <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/ClickControl.js'%staticUrbanMapHost"></script>
-    <script type="text/javascript" tal:attributes="src python:'%s/lib/ext/Ext/ux/grid.RowActions.js'%staticUrbanMapHost"></script>
-    <script type="text/javascript" tal:attributes="src python:'%s/lib/ext/Ext/ux/grid.RowExpander.js'%staticUrbanMapHost"></script>
+  <script type="text/javascript"
+          tal:attributes="
+            src python:'%s/app/lib/App/ClickControl.js'%staticUrbanMapHost;
+          "
+  ></script>
+  <script type="text/javascript"
+          tal:attributes="
+            src python:'%s/lib/ext/Ext/ux/grid.RowActions.js'%staticUrbanMapHost;
+          "
+  ></script>
+  <script type="text/javascript"
+          tal:attributes="
+            src python:'%s/lib/ext/Ext/ux/grid.RowExpander.js'%staticUrbanMapHost;
+          "
+  ></script>
 
-    <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/UrbanMap.PrintForm.js'%staticUrbanMapHost"></script>
-    <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/UrbanMap.ParcelleGrid.js'%staticUrbanMapHost"></script>
-    <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/UrbanMap.SearchForm.js'%staticUrbanMapHost"></script>
-    <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/UrbanMap.SearchForm.Proprietaire.js'%staticUrbanMapHost"></script>
-    <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/UrbanMap.SearchForm.Parcelle.js'%staticUrbanMapHost"></script>
-    <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/UrbanMap.ParamForm.js'%staticUrbanMapHost"></script>
+  <script type="text/javascript"
+          tal:attributes="
+            src python:'%s/app/lib/App/UrbanMap.PrintForm.js'%staticUrbanMapHost;
+          "
+  ></script>
+  <script type="text/javascript"
+          tal:attributes="
+            src python:'%s/app/lib/App/UrbanMap.ParcelleGrid.js'%staticUrbanMapHost;
+          "
+  ></script>
+  <script type="text/javascript"
+          tal:attributes="
+            src python:'%s/app/lib/App/UrbanMap.SearchForm.js'%staticUrbanMapHost;
+          "
+  ></script>
+  <script type="text/javascript"
+          tal:attributes="
+            src python:'%s/app/lib/App/UrbanMap.SearchForm.Proprietaire.js'%staticUrbanMapHost;
+          "
+  ></script>
+  <script type="text/javascript"
+          tal:attributes="
+            src python:'%s/app/lib/App/UrbanMap.SearchForm.Parcelle.js'%staticUrbanMapHost;
+          "
+  ></script>
+  <script type="text/javascript"
+          tal:attributes="
+            src python:'%s/app/lib/App/UrbanMap.ParamForm.js'%staticUrbanMapHost;
+          "
+  ></script>
 
-    <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/GEOB_util.js'%staticUrbanMapHost"></script>
-    <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/GEOB_waiter.js'%staticUrbanMapHost"></script>
-    <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/GEOB_ows.js'%staticUrbanMapHost"></script>
-    <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/GEOB_managelayers.js'%staticUrbanMapHost"></script>
-    <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/GEOB_FeatureDataModel.js'%staticUrbanMapHost"></script>
-    <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/GEOB_resultspanel.js'%staticUrbanMapHost"></script>
-    <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/GEOB_getfeatureinfo.js'%staticUrbanMapHost"></script>
+  <script type="text/javascript"
+          tal:attributes="
+            src python:'%s/app/lib/App/GEOB_util.js'%staticUrbanMapHost;
+          "
+  ></script>
+  <script type="text/javascript"
+          tal:attributes="
+            src python:'%s/app/lib/App/GEOB_waiter.js'%staticUrbanMapHost;
+          "
+  ></script>
+  <script type="text/javascript"
+          tal:attributes="
+            src python:'%s/app/lib/App/GEOB_ows.js'%staticUrbanMapHost;
+          "
+  ></script>
+  <script type="text/javascript"
+          tal:attributes="
+            src python:'%s/app/lib/App/GEOB_managelayers.js'%staticUrbanMapHost;
+          "
+  ></script>
+  <script type="text/javascript"
+          tal:attributes="
+            src python:'%s/app/lib/App/GEOB_FeatureDataModel.js'%staticUrbanMapHost;
+          "
+  ></script>
+  <script type="text/javascript"
+          tal:attributes="
+            src python:'%s/app/lib/App/GEOB_resultspanel.js'%staticUrbanMapHost;
+          "
+  ></script>
+  <script type="text/javascript"
+          tal:attributes="
+            src python:'%s/app/lib/App/GEOB_getfeatureinfo.js'%staticUrbanMapHost;
+          "
+  ></script>
 
-    <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/UrbanMap.MapPanel.js'%staticUrbanMapHost"></script>
-    <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/UrbanMap.WMSLegend.js'%staticUrbanMapHost"></script>
-    <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/UrbanMap.TreePanel.js'%staticUrbanMapHost"></script>
-    <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/UrbanMap.WMSCapabilitiesWindow.js'%staticUrbanMapHost"></script>
-    <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/UrbanMap.WMCReader.js'%staticUrbanMapHost"></script>
-    <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/UrbanMap.LayerStore.js'%staticUrbanMapHost"></script>
+  <script type="text/javascript"
+          tal:attributes="
+            src python:'%s/app/lib/App/UrbanMap.MapPanel.js'%staticUrbanMapHost;
+          "
+  ></script>
+  <script type="text/javascript"
+          tal:attributes="
+            src python:'%s/app/lib/App/UrbanMap.WMSLegend.js'%staticUrbanMapHost;
+          "
+  ></script>
+  <script type="text/javascript"
+          tal:attributes="
+            src python:'%s/app/lib/App/UrbanMap.TreePanel.js'%staticUrbanMapHost;
+          "
+  ></script>
+  <script type="text/javascript"
+          tal:attributes="
+            src python:'%s/app/lib/App/UrbanMap.WMSCapabilitiesWindow.js'%staticUrbanMapHost;
+          "
+  ></script>
+  <script type="text/javascript"
+          tal:attributes="
+            src python:'%s/app/lib/App/UrbanMap.WMCReader.js'%staticUrbanMapHost;
+          "
+  ></script>
+  <script type="text/javascript"
+          tal:attributes="
+            src python:'%s/app/lib/App/UrbanMap.LayerStore.js'%staticUrbanMapHost;
+          "
+  ></script>
 </div>
 
-<div metal:define-macro="urbanMapScript" tal:define="staticUrbanMapHost view/get_urbanmap_url">
-	<script tal:content="string:var NIS='${view/get_NIS}';var urbanProrietariesCapakeyArray=${view/getListProprietariesCapaKey};var urbanCapakeyArray=${view/getListCapaKey};var proxyUrl='${context/portal_url}/portal_urban/getProxy?url=';var urbanMapWMCUrl='${context/absolute_url}/wmc';">
-	</script>
-    <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/urban-layout.js'%staticUrbanMapHost"></script>
-    <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/urban-map.js'%staticUrbanMapHost"></script>
+<div metal:define-macro="urbanMapScript"
+     tal:define="
+       staticUrbanMapHost view/get_urbanmap_url;
+     "
+>
+  <script tal:content="string:var NIS='${view/get_NIS}';var urbanProrietariesCapakeyArray=${view/getListProprietariesCapaKey};var urbanCapakeyArray=${view/getListCapaKey};var proxyUrl='${context/portal_url}/portal_urban/getProxy?url=';var urbanMapWMCUrl='${context/absolute_url}/wmc';">
+  </script>
+  <script type="text/javascript"
+          tal:attributes="
+            src python:'%s/app/lib/App/urban-layout.js'%staticUrbanMapHost;
+          "
+  ></script>
+  <script type="text/javascript"
+          tal:attributes="
+            src python:'%s/app/lib/App/urban-map.js'%staticUrbanMapHost;
+          "
+  ></script>
 </div>
 
-<div metal:define-macro="urbanFullMapScript" tal:define="staticUrbanMapHost view/get_urbanmap_url">
-	<script tal:content="string:var NIS='${view/get_NIS}';var urbanCapakeyArray=${view/getListCapaKey};var proxyUrl='${context/portal_url}/portal_urban/getProxy?url=';var urbanMapWMCUrl='${context/absolute_url}/wmc';">
-    </script>
-    <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/main-layout.js'%staticUrbanMapHost"></script>
-    <script type="text/javascript" tal:attributes="src python:'%s/app/lib/App/main-map.js'%staticUrbanMapHost"></script>
+<div metal:define-macro="urbanFullMapScript"
+     tal:define="
+       staticUrbanMapHost view/get_urbanmap_url;
+     "
+>
+  <script tal:content="string:var NIS='${view/get_NIS}';var urbanCapakeyArray=${view/getListCapaKey};var proxyUrl='${context/portal_url}/portal_urban/getProxy?url=';var urbanMapWMCUrl='${context/absolute_url}/wmc';">
+  </script>
+  <script type="text/javascript"
+          tal:attributes="
+            src python:'%s/app/lib/App/main-layout.js'%staticUrbanMapHost;
+          "
+  ></script>
+  <script type="text/javascript"
+          tal:attributes="
+            src python:'%s/app/lib/App/main-map.js'%staticUrbanMapHost;
+          "
+  ></script>
 </div>
 
-<div metal:define-macro="imioSpwMapSetup" tal:define="staticUrbanMapHost view/get_urbanmap_url">
-        <script type="text/javascript" tal:attributes="src python: 'https://{}/?t={}'.format(view.get_mapviewer_url(), view.get_mapviewer_js_id())" src=""></script>
-		<link rel="stylesheet" type="text/css" tal:attributes="href python: '//%s/static/geoviewer4.css' % staticUrbanMapHost"/>
-        <link rel="stylesheet" type="text/css" tal:attributes="href python:'//%s/static/spwfix.css'%staticUrbanMapHost"/>
-        <script type="text/javascript" tal:attributes="src python:'//%s/static/imiomapspw.js'%staticUrbanMapHost"></script>
-        <script tal:content="string:var NIS='${view/get_NIS}';var urbanProrietariesCapakeyArray=${view/getListProprietariesCapaKey};var urbanCapakeyArray=${view/getListCapaKey};var proxyUrl='${context/portal_url}/portal_urban/getProxy?url=';var urbanMapWMCUrl='${context/absolute_url}/wmc';">
-	    </script>
+<div metal:define-macro="imioSpwMapSetup"
+     tal:define="
+       staticUrbanMapHost view/get_urbanmap_url;
+     "
+>
+  <script src=""
+          type="text/javascript"
+          tal:attributes="
+            src python: 'https://{}/?t={}'.format(view.get_mapviewer_url(), view.get_mapviewer_js_id());
+          "
+  ></script>
+  <link rel="stylesheet"
+        type="text/css"
+        tal:attributes="
+          href python: '//%s/static/geoviewer4.css' % staticUrbanMapHost;
+        "
+  />
+  <link rel="stylesheet"
+        type="text/css"
+        tal:attributes="
+          href python:'//%s/static/spwfix.css'%staticUrbanMapHost;
+        "
+  />
+  <script type="text/javascript"
+          tal:attributes="
+            src python:'//%s/static/imiomapspw.js'%staticUrbanMapHost;
+          "
+  ></script>
+  <script tal:content="string:var NIS='${view/get_NIS}';var urbanProrietariesCapakeyArray=${view/getListProprietariesCapaKey};var urbanCapakeyArray=${view/getListCapaKey};var proxyUrl='${context/portal_url}/portal_urban/getProxy?url=';var urbanMapWMCUrl='${context/absolute_url}/wmc';">
+  </script>
 </div>
 
-<div metal:define-macro="fullmapCSS" tal:define="staticUrbanMapHost view/get_urbanmap_url">
-		<style>
+<div metal:define-macro="fullmapCSS"
+     tal:define="
+       staticUrbanMapHost view/get_urbanmap_url;
+     "
+>
+  <style>
             #spwViewerDiv {
                 position: absolute;
                 top: 0px;
@@ -93,12 +297,16 @@
 				text-align: center;
 				padding: 10px;
 			}
-		</style>
+  </style>
 
 </div>
 
-<div metal:define-macro="parcelmapCSS" tal:define="staticUrbanMapHost view/get_urbanmap_url">
-		<style>
+<div metal:define-macro="parcelmapCSS"
+     tal:define="
+       staticUrbanMapHost view/get_urbanmap_url;
+     "
+>
+  <style>
             #spwViewerDiv {
                 position: relative;
                 top: 0px;
@@ -111,11 +319,14 @@
 				text-align: center;
 				padding: 10px;
 			}
-		</style>
+  </style>
 
 </div>
 
-<div metal:define-macro="spwMapConfigParcel" tal:define="staticUrbanMapHost view/get_urbanmap_url">
-		<script tal:content='python: view.getMapConfig()'></script>
+<div metal:define-macro="spwMapConfigParcel"
+     tal:define="
+       staticUrbanMapHost view/get_urbanmap_url;
+     "
+>
+  <script tal:content="python: view.getMapConfig()"></script>
 </div>
-

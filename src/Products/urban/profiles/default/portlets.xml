@@ -1,62 +1,72 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="utf-8"?>
 <portlets xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-    i18n:domain="urban">
+          i18n:domain="urban"
+>
 
-    <assignment name="category_switch"
-                category="context"
-                key="/urban"
-                manager="plone.leftcolumn"
-                type="Products.urban.dashboard.CategorySwitchPortlet" />
+  <assignment category="context"
+              key="/urban"
+              manager="plone.leftcolumn"
+              name="category_switch"
+              type="Products.urban.dashboard.CategorySwitchPortlet"
+  />
 
-    <assignment name="licences"
-                category="context"
-                key="/urban"
-                manager="plone.leftcolumn"
-                type="FacetedCollectionPortlet" />
+  <assignment category="context"
+              key="/urban"
+              manager="plone.leftcolumn"
+              name="licences"
+              type="FacetedCollectionPortlet"
+  />
 
-    <assignment name="tools"
-                category="context"
-                key="/urban"
-                manager="plone.leftcolumn"
-                type="urban.portlet.urbantools" />
+  <assignment category="context"
+              key="/urban"
+              manager="plone.leftcolumn"
+              name="tools"
+              type="urban.portlet.urbantools"
+  />
 
-    <assignment name="config"
-                category="context"
-                key="/urban"
-                manager="plone.leftcolumn"
-                type="urban.portlet.urbanconfig" />
+  <assignment category="context"
+              key="/urban"
+              manager="plone.leftcolumn"
+              name="config"
+              type="urban.portlet.urbanconfig"
+  />
 
-    <assignment name="schedule"
-                category="context"
-                key="/urban/schedule"
-                manager="plone.leftcolumn"
-                type="urban.portlet.scheduledlicences" />
+  <assignment category="context"
+              key="/urban/schedule"
+              manager="plone.leftcolumn"
+              name="schedule"
+              type="urban.portlet.scheduledlicences"
+  />
 
-    <assignment name="config"
-                category="context"
-                key="/urban/schedule"
-                manager="plone.leftcolumn"
-                type="FacetedCollectionPortlet" />
+  <assignment category="context"
+              key="/urban/schedule"
+              manager="plone.leftcolumn"
+              name="config"
+              type="FacetedCollectionPortlet"
+  />
 
-    <assignment remove="True"
-                name="navigation"
-                category="context"
-                key="/"
-                manager="plone.leftcolumn"
-                type="portlets.Navigation" />
+  <assignment category="context"
+              key="/"
+              manager="plone.leftcolumn"
+              name="navigation"
+              remove="True"
+              type="portlets.Navigation"
+  />
 
-    <assignment remove="True"
-                name="news"
-                category="context"
-                key="/"
-                manager="plone.rightcolumn"
-                type="portlets.News" />
+  <assignment category="context"
+              key="/"
+              manager="plone.rightcolumn"
+              name="news"
+              remove="True"
+              type="portlets.News"
+  />
 
-    <assignment remove="True"
-                name="events"
-                category="context"
-                key="/"
-                manager="plone.rightcolumn"
-                type="portlets.Events" />
+  <assignment category="context"
+              key="/"
+              manager="plone.rightcolumn"
+              name="events"
+              remove="True"
+              type="portlets.Events"
+  />
 
 </portlets>

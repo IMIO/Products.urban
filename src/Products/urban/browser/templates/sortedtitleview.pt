@@ -1,17 +1,19 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+<html xmlns="http://www.w3.org/1999/xhtml"
       lang="en"
       metal:use-macro="here/main_template/macros/master"
-      i18n:domain="urban">
+      xml:lang="en"
+      i18n:domain="urban"
+>
 
-   <body>
-     <metal:main fill-slot="main">
-       <metal:main_macro define-macro="main">
-         <metal:body define-macro="body_macro">
-            <div>
-                <tal:listing content="structure view/renderListing" />
-            </div>
-         </metal:body>
-       </metal:main_macro>
-     </metal:main>
+  <body>
+    <metal:main fill-slot="main">
+      <metal:main_macro define-macro="main">
+        <metal:body define-macro="body_macro">
+          <div>
+            <tal:listing content="structure view/renderListing" />
+          </div>
+        </metal:body>
+      </metal:main_macro>
+    </metal:main>
   </body>
 </html>

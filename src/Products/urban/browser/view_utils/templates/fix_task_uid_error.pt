@@ -1,50 +1,68 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
-      xmlns:tal="http://xml.zope.org/namespaces/tal">
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+>
 
-<div>
-    
+  <div>
 
 
-       <h1 class="documentFirstHeading" >
+
+    <h1 class="documentFirstHeading">
            Fix task uid error
-       </h1>
-       <form action="@@fix-task-uid-error" method="post">
-        <ul>
+    </h1>
+    <form action="@@fix-task-uid-error"
+          method="post"
+    >
+      <ul>
 
-         <li tal:repeat="task python: view.get_tasks().items()">
+        <li tal:repeat="task python: view.get_tasks().items()">
           <tal:define define="
-            task_value python: task[1];
-            form_id python: '-'.join(task_value['UIDs']);
-            display_id python: ', '.join(task_value['UIDs']);
-          ">
-            <label tal:attributes="for form_id" ><span tal:content="task_value/title">Title</span>
-            (<span tal:content="python: task[0]">id</span>)
-            Current task_config_UID: <span tal:content="task_value/current_uid">current UID</span></label>
+                        task_value python: task[1];
+                        form_id python: '-'.join(task_value['UIDs']);
+                        display_id python: ', '.join(task_value['UIDs']);
+                      ">
+            <label tal:attributes="
+                     for form_id;
+                   "><span tal:content="task_value/title">Title</span>
+              (<span tal:content="python: task[0]">id</span>)
+            Current task_config_UID:
+              <span tal:content="task_value/current_uid">current UID</span></label>
 
             <div class="field">
-                <label tal:attributes="for form_id">New task_config_UID</label>
-                <div class="widget">
-                  <input type="text" value=""
-                  tal:attributes="id form_id;
-                                  name form_id;">
-                </div>
+              <label tal:attributes="
+                       for form_id;
+                     ">New task_config_UID</label>
+              <div class="widget">
+                <input type="text"
+                       value=""
+                       tal:attributes="
+                         id form_id;
+                         name form_id;
+                       "
+                />
               </div>
+            </div>
           </tal:define>
         </li>
-        </ul>
-        
-        <div class="formControls" class="form-group">
-            <input type="hidden" name="form.submitted" value="1"/>
+      </ul>
 
-            <button class="btn btn-primary submit-widget button-field context"
-                    type="submit" name="submit" value="fix">Fix Task
-            </button>
+      <div class="form-group">
+        <input name="form.submitted"
+               type="hidden"
+               value="1"
+        />
 
-        </div>
+        <button class="btn btn-primary submit-widget button-field context"
+                name="submit"
+                type="submit"
+                value="fix"
+        >Fix Task
+        </button>
 
-      </form>
+      </div>
 
-</div>
+    </form>
+
+  </div>
 
 </html>

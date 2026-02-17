@@ -1,29 +1,30 @@
 <configure
-    xmlns:zcml="http://namespaces.zope.org/zcml"
     xmlns="http://namespaces.zope.org/zope"
     xmlns:browser="http://namespaces.zope.org/browser"
-    i18n_domain="urban">
+    xmlns:zcml="http://namespaces.zope.org/zcml"
+    i18n_domain="urban"
+    >
 
   <browser:view
-          for="Products.urban.interfaces.IEnvironmentBase"
-          name="specificcontenthistory"
-          class=".view.SpecificHistoryView"
-          layer="imio.history.interfaces.IImioHistoryLayer"
-          permission="zope.Public"
-          />
+      name="specificcontenthistory"
+      for="Products.urban.interfaces.IEnvironmentBase"
+      class=".view.SpecificHistoryView"
+      permission="zope.Public"
+      layer="imio.history.interfaces.IImioHistoryLayer"
+      />
 
   <adapter
-    for="Products.urban.interfaces.IEnvironmentBase"
-    factory=".environment.EnvironmentRubricsHistory"
-    name="rubrics_history"
-    provides="imio.history.interfaces.IImioHistory"
-    />
+      factory=".environment.EnvironmentRubricsHistory"
+      provides="imio.history.interfaces.IImioHistory"
+      for="Products.urban.interfaces.IEnvironmentBase"
+      name="rubrics_history"
+      />
 
   <adapter
-    for="Products.urban.interfaces.IEnvironmentBase"
-    factory=".environment.EnvironmentAdditionalLegalConditionsHistory"
-    name="additionalLegalConditions_history"
-    provides="imio.history.interfaces.IImioHistory"
-    />
+      factory=".environment.EnvironmentAdditionalLegalConditionsHistory"
+      provides="imio.history.interfaces.IImioHistory"
+      for="Products.urban.interfaces.IEnvironmentBase"
+      name="additionalLegalConditions_history"
+      />
 
 </configure>

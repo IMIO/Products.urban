@@ -1,6 +1,6 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="utf-8"?>
 <metadata>
   <dependencies>
-     <dependency>profile-Products.urban:prod</dependency>
+    <dependency>profile-Products.urban:prod</dependency>
   </dependencies>
 </metadata>

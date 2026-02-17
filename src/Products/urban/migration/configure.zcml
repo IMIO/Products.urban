@@ -2,16 +2,17 @@
     xmlns="http://namespaces.zope.org/zope"
     xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:plone="http://namespaces.plone.org/plone"
-    i18n_domain="urban">
+    i18n_domain="urban"
+    >
 
   <include file="upgrades.zcml" />
   <include file="upgrades_notice.zcml" />
   <include package=".to_DX" />
 
   <browser:page
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      permission="cmf.ManagePortal"
-      class=".fix_csv_replicata.CleanCSVReplicata"
       name="clean-csvreplicata"
-  />
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      class=".fix_csv_replicata.CleanCSVReplicata"
+      permission="cmf.ManagePortal"
+      />
 </configure>

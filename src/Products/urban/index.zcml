@@ -1,94 +1,345 @@
-<configure xmlns="http://namespaces.zope.org/zope"
-           xmlns:i18n="http://namespaces.zope.org/i18n"
-           i18n_domain="urban">
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    i18n_domain="urban"
+    >
 
-  <adapter name="applicantInfosIndex" factory=".indexes.applicant_applicantinfoindex" />
-  <adapter name="applicantInfosIndex" factory=".indexes.genericlicence_applicantinfoindex" />
-  <adapter name="applicantInfosIndex" factory=".indexes.environmentlicence_applicantinfoindex" />
-  <adapter name="applicantInfosIndex" factory=".indexes.inspection_applicantinfoindex" />
-  <adapter name="architectInfosIndex" factory=".indexes.licence_architectinfoindex" />
-  <adapter name="parcelInfosIndex" factory=".indexes.genericlicence_parcelinfoindex" />
-  <adapter name="StreetsUID" factory=".indexes.genericlicence_streetsuid" />
-  <adapter name="StreetNumber" factory=".indexes.genericlicence_streetnumber" />
-  <adapter name="address" factory=".indexes.genericlicence_address" />
-  <adapter name="last_key_event" factory=".indexes.genericlicence_lastkeyevent" />
-  <adapter name="folder_manager" factory=".indexes.genericlicence_foldermanager" />
-  <adapter name="folder_manager" factory=".indexes.urbanevent_foldermanager" />
-  <adapter name="extraValue" factory=".indexes.rubricsfolders_extravalue" />
-  <adapter name="representatives" factory=".indexes.genericlicence_representative" />
-  <adapter name="getDecisionDate" factory=".indexes.genericlicence_decisiondate" />
-  <adapter name="getValidityDate" factory=".indexes.genericlicence_valdity_date" />
-  <adapter name="getDepositDate" factory=".indexes.genericlicence_depositdate" />
-  <adapter name="archive" factory=".indexes.genericlicence_archive" />
-  <adapter name="licence_final_duedate" factory=".indexes.genericlicence_final_duedate" />
-  <adapter name="investigationStart" factory=".indexes.investigation_start_date" />
-  <adapter name="investigationEnd" factory=".indexes.investigation_end_date" />
-  <adapter name="Subject" factory=".indexes.inspection_task_followups" />
-  <adapter name="commentators" factory=".indexes.licence_covid_and_opinion_requests" />
-  <adapter name="commentators" factory=".indexes.task_covid" />
-  <adapter name="modified" factory=".indexes.genericlicence_modified" />
-  <adapter name="Subject" factory=".indexes.licence_worktype" />
-  <adapter name="cmf_uid" factory=".indexes.eventconfig_urbaneventtype" />
-  <adapter name="getStreetCode" factory=".indexes.streetcode_indexer" />
-  <adapter name="getAdditionalReference" factory=".indexes.additional_reference" />
+  <adapter
+      factory=".indexes.applicant_applicantinfoindex"
+      name="applicantInfosIndex"
+      />
+  <adapter
+      factory=".indexes.genericlicence_applicantinfoindex"
+      name="applicantInfosIndex"
+      />
+  <adapter
+      factory=".indexes.environmentlicence_applicantinfoindex"
+      name="applicantInfosIndex"
+      />
+  <adapter
+      factory=".indexes.inspection_applicantinfoindex"
+      name="applicantInfosIndex"
+      />
+  <adapter
+      factory=".indexes.licence_architectinfoindex"
+      name="architectInfosIndex"
+      />
+  <adapter
+      factory=".indexes.genericlicence_parcelinfoindex"
+      name="parcelInfosIndex"
+      />
+  <adapter
+      factory=".indexes.genericlicence_streetsuid"
+      name="StreetsUID"
+      />
+  <adapter
+      factory=".indexes.genericlicence_streetnumber"
+      name="StreetNumber"
+      />
+  <adapter
+      factory=".indexes.genericlicence_address"
+      name="address"
+      />
+  <adapter
+      factory=".indexes.genericlicence_lastkeyevent"
+      name="last_key_event"
+      />
+  <adapter
+      factory=".indexes.genericlicence_foldermanager"
+      name="folder_manager"
+      />
+  <adapter
+      factory=".indexes.urbanevent_foldermanager"
+      name="folder_manager"
+      />
+  <adapter
+      factory=".indexes.rubricsfolders_extravalue"
+      name="extraValue"
+      />
+  <adapter
+      factory=".indexes.genericlicence_representative"
+      name="representatives"
+      />
+  <adapter
+      factory=".indexes.genericlicence_decisiondate"
+      name="getDecisionDate"
+      />
+  <adapter
+      factory=".indexes.genericlicence_valdity_date"
+      name="getValidityDate"
+      />
+  <adapter
+      factory=".indexes.genericlicence_depositdate"
+      name="getDepositDate"
+      />
+  <adapter
+      factory=".indexes.genericlicence_archive"
+      name="archive"
+      />
+  <adapter
+      factory=".indexes.genericlicence_final_duedate"
+      name="licence_final_duedate"
+      />
+  <adapter
+      factory=".indexes.investigation_start_date"
+      name="investigationStart"
+      />
+  <adapter
+      factory=".indexes.investigation_end_date"
+      name="investigationEnd"
+      />
+  <adapter
+      factory=".indexes.inspection_task_followups"
+      name="Subject"
+      />
+  <adapter
+      factory=".indexes.licence_covid_and_opinion_requests"
+      name="commentators"
+      />
+  <adapter
+      factory=".indexes.task_covid"
+      name="commentators"
+      />
+  <adapter
+      factory=".indexes.genericlicence_modified"
+      name="modified"
+      />
+  <adapter
+      factory=".indexes.licence_worktype"
+      name="Subject"
+      />
+  <adapter
+      factory=".indexes.eventconfig_urbaneventtype"
+      name="cmf_uid"
+      />
+  <adapter
+      factory=".indexes.streetcode_indexer"
+      name="getStreetCode"
+      />
+  <adapter
+      factory=".indexes.additional_reference"
+      name="getAdditionalReference"
+      />
 
   <!-- Unindex UrbanEvent, UrbanDoc, Applicant and PortionOut -->
 
-  <adapter name="sortable_title" factory=".indexes.event_not_indexed" />
-  <adapter name="SearchableText" factory=".indexes.event_not_indexed" />
-  <adapter name="Description" factory=".indexes.event_not_indexed" />
-  <adapter name="Title" factory=".indexes.event_not_indexed" />
-  <adapter name="Type" factory=".indexes.event_not_indexed" />
-  <adapter name="portal_type" factory=".indexes.event_not_indexed" />
-  <adapter name="meta_type" factory=".indexes.event_not_indexed" />
-  <adapter name="created" factory=".indexes.event_not_indexed" />
-  <adapter name="modified" factory=".indexes.event_not_indexed" />
-  <adapter name="Date" factory=".indexes.event_not_indexed" />
-  <adapter name="Creator" factory=".indexes.event_not_indexed" />
-  <adapter name="object_provides" factory=".indexes.event_not_indexed" />
-  <adapter name="review_state" factory=".indexes.event_not_indexed" />
-  <adapter name="effectiveRange" factory=".indexes.event_not_indexed" />
-  <adapter name="effective" factory=".indexes.event_not_indexed" />
-  <adapter name="getReference" factory=".indexes.event_not_indexed" />
-  <adapter name="extraValue" factory=".indexes.event_not_indexed" />
-  <adapter name="allowedRolesAndUsers" factory=".indexes.event_not_indexed" />
+  <adapter
+      factory=".indexes.event_not_indexed"
+      name="sortable_title"
+      />
+  <adapter
+      factory=".indexes.event_not_indexed"
+      name="SearchableText"
+      />
+  <adapter
+      factory=".indexes.event_not_indexed"
+      name="Description"
+      />
+  <adapter
+      factory=".indexes.event_not_indexed"
+      name="Title"
+      />
+  <adapter
+      factory=".indexes.event_not_indexed"
+      name="Type"
+      />
+  <adapter
+      factory=".indexes.event_not_indexed"
+      name="portal_type"
+      />
+  <adapter
+      factory=".indexes.event_not_indexed"
+      name="meta_type"
+      />
+  <adapter
+      factory=".indexes.event_not_indexed"
+      name="created"
+      />
+  <adapter
+      factory=".indexes.event_not_indexed"
+      name="modified"
+      />
+  <adapter
+      factory=".indexes.event_not_indexed"
+      name="Date"
+      />
+  <adapter
+      factory=".indexes.event_not_indexed"
+      name="Creator"
+      />
+  <adapter
+      factory=".indexes.event_not_indexed"
+      name="object_provides"
+      />
+  <adapter
+      factory=".indexes.event_not_indexed"
+      name="review_state"
+      />
+  <adapter
+      factory=".indexes.event_not_indexed"
+      name="effectiveRange"
+      />
+  <adapter
+      factory=".indexes.event_not_indexed"
+      name="effective"
+      />
+  <adapter
+      factory=".indexes.event_not_indexed"
+      name="getReference"
+      />
+  <adapter
+      factory=".indexes.event_not_indexed"
+      name="extraValue"
+      />
+  <adapter
+      factory=".indexes.event_not_indexed"
+      name="allowedRolesAndUsers"
+      />
 
-  <adapter name="sortable_title" factory=".indexes.doc_not_indexed" />
-  <adapter name="SearchableText" factory=".indexes.doc_not_indexed" />
-  <adapter name="Description" factory=".indexes.doc_not_indexed" />
-  <adapter name="Title" factory=".indexes.doc_not_indexed" />
-  <adapter name="Type" factory=".indexes.doc_not_indexed" />
-  <adapter name="portal_type" factory=".indexes.doc_not_indexed" />
-  <adapter name="meta_type" factory=".indexes.doc_not_indexed" />
-  <adapter name="created" factory=".indexes.doc_not_indexed" />
-  <adapter name="modified" factory=".indexes.doc_not_indexed" />
-  <adapter name="Date" factory=".indexes.doc_not_indexed" />
-  <adapter name="Creator" factory=".indexes.doc_not_indexed" />
-  <adapter name="object_provides" factory=".indexes.doc_not_indexed" />
-  <adapter name="review_state" factory=".indexes.doc_not_indexed" />
-  <adapter name="effectiveRange" factory=".indexes.doc_not_indexed" />
-  <adapter name="effective" factory=".indexes.doc_not_indexed" />
-  <adapter name="getReference" factory=".indexes.doc_not_indexed" />
-  <adapter name="extraValue" factory=".indexes.doc_not_indexed" />
-  <adapter name="allowedRolesAndUsers" factory=".indexes.doc_not_indexed" />
+  <adapter
+      factory=".indexes.doc_not_indexed"
+      name="sortable_title"
+      />
+  <adapter
+      factory=".indexes.doc_not_indexed"
+      name="SearchableText"
+      />
+  <adapter
+      factory=".indexes.doc_not_indexed"
+      name="Description"
+      />
+  <adapter
+      factory=".indexes.doc_not_indexed"
+      name="Title"
+      />
+  <adapter
+      factory=".indexes.doc_not_indexed"
+      name="Type"
+      />
+  <adapter
+      factory=".indexes.doc_not_indexed"
+      name="portal_type"
+      />
+  <adapter
+      factory=".indexes.doc_not_indexed"
+      name="meta_type"
+      />
+  <adapter
+      factory=".indexes.doc_not_indexed"
+      name="created"
+      />
+  <adapter
+      factory=".indexes.doc_not_indexed"
+      name="modified"
+      />
+  <adapter
+      factory=".indexes.doc_not_indexed"
+      name="Date"
+      />
+  <adapter
+      factory=".indexes.doc_not_indexed"
+      name="Creator"
+      />
+  <adapter
+      factory=".indexes.doc_not_indexed"
+      name="object_provides"
+      />
+  <adapter
+      factory=".indexes.doc_not_indexed"
+      name="review_state"
+      />
+  <adapter
+      factory=".indexes.doc_not_indexed"
+      name="effectiveRange"
+      />
+  <adapter
+      factory=".indexes.doc_not_indexed"
+      name="effective"
+      />
+  <adapter
+      factory=".indexes.doc_not_indexed"
+      name="getReference"
+      />
+  <adapter
+      factory=".indexes.doc_not_indexed"
+      name="extraValue"
+      />
+  <adapter
+      factory=".indexes.doc_not_indexed"
+      name="allowedRolesAndUsers"
+      />
 
-  <adapter name="sortable_title" factory=".indexes.contact_not_indexed" />
-  <adapter name="SearchableText" factory=".indexes.contact_not_indexed" />
-  <adapter name="Description" factory=".indexes.contact_not_indexed" />
-  <adapter name="Title" factory=".indexes.contact_not_indexed" />
-  <adapter name="Type" factory=".indexes.contact_not_indexed" />
-  <adapter name="portal_type" factory=".indexes.contact_not_indexed" />
-  <adapter name="meta_type" factory=".indexes.contact_not_indexed" />
-  <adapter name="created" factory=".indexes.contact_not_indexed" />
-  <adapter name="modified" factory=".indexes.contact_not_indexed" />
-  <adapter name="Date" factory=".indexes.contact_not_indexed" />
-  <adapter name="Creator" factory=".indexes.contact_not_indexed" />
-  <adapter name="object_provides" factory=".indexes.contact_not_indexed" />
-  <adapter name="review_state" factory=".indexes.contact_not_indexed" />
-  <adapter name="effectiveRange" factory=".indexes.contact_not_indexed" />
-  <adapter name="effective" factory=".indexes.contact_not_indexed" />
-  <adapter name="getReference" factory=".indexes.contact_not_indexed" />
-  <adapter name="extraValue" factory=".indexes.contact_not_indexed" />
-  <adapter name="allowedRolesAndUsers" factory=".indexes.contact_not_indexed" />
+  <adapter
+      factory=".indexes.contact_not_indexed"
+      name="sortable_title"
+      />
+  <adapter
+      factory=".indexes.contact_not_indexed"
+      name="SearchableText"
+      />
+  <adapter
+      factory=".indexes.contact_not_indexed"
+      name="Description"
+      />
+  <adapter
+      factory=".indexes.contact_not_indexed"
+      name="Title"
+      />
+  <adapter
+      factory=".indexes.contact_not_indexed"
+      name="Type"
+      />
+  <adapter
+      factory=".indexes.contact_not_indexed"
+      name="portal_type"
+      />
+  <adapter
+      factory=".indexes.contact_not_indexed"
+      name="meta_type"
+      />
+  <adapter
+      factory=".indexes.contact_not_indexed"
+      name="created"
+      />
+  <adapter
+      factory=".indexes.contact_not_indexed"
+      name="modified"
+      />
+  <adapter
+      factory=".indexes.contact_not_indexed"
+      name="Date"
+      />
+  <adapter
+      factory=".indexes.contact_not_indexed"
+      name="Creator"
+      />
+  <adapter
+      factory=".indexes.contact_not_indexed"
+      name="object_provides"
+      />
+  <adapter
+      factory=".indexes.contact_not_indexed"
+      name="review_state"
+      />
+  <adapter
+      factory=".indexes.contact_not_indexed"
+      name="effectiveRange"
+      />
+  <adapter
+      factory=".indexes.contact_not_indexed"
+      name="effective"
+      />
+  <adapter
+      factory=".indexes.contact_not_indexed"
+      name="getReference"
+      />
+  <adapter
+      factory=".indexes.contact_not_indexed"
+      name="extraValue"
+      />
+  <adapter
+      factory=".indexes.contact_not_indexed"
+      name="allowedRolesAndUsers"
+      />
 
 </configure>

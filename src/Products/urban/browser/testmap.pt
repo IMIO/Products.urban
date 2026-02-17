@@ -1,10 +1,16 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-        <meta http-equiv="content-language" content="fr" />
-        <title>URBAN Map</title>
-        <style type="text/css" media="screen">
+  <head>
+    <meta http-equiv="content-type"
+          content="text/html; charset=utf-8"
+    />
+    <meta http-equiv="content-language"
+          content="fr"
+    />
+    <title>URBAN Map</title>
+    <style media="screen"
+           type="text/css"
+    >
 	        #loading-mask{
 		        background-color:white;
 		        height:100%;
@@ -43,86 +49,153 @@
 		    	font-size: 2em;
 		    	font-weight: bold;
 		    }
-        </style>
-        <link rel="stylesheet" type="text/css" href="http://89.16.179.114:5000/lib/ext/Ext/resources/css/ext-all.css"/>
-	    <link rel="stylesheet" type="text/css" href="http://89.16.179.114:5000/lib/ext/Ext/resources/css/xtheme-gray.css"/>
+    </style>
+    <link href="http://89.16.179.114:5000/lib/ext/Ext/resources/css/ext-all.css"
+          rel="stylesheet"
+          type="text/css"
+    />
+    <link href="http://89.16.179.114:5000/lib/ext/Ext/resources/css/xtheme-gray.css"
+          rel="stylesheet"
+          type="text/css"
+    />
 
-	    <link rel="stylesheet" type="text/css" href="http://89.16.179.114:5000/lib/openlayers/theme/default/style.css"/>
-	    <link rel="stylesheet" type="text/css" href="http://89.16.179.114:5000/lib/ext/Ext/ux/grid.RowActions.css"/>
-	    <link rel="stylesheet" type="text/css" href="http://89.16.179.114:5000/app/css/main.css"/>
-    </head>
+    <link href="http://89.16.179.114:5000/lib/openlayers/theme/default/style.css"
+          rel="stylesheet"
+          type="text/css"
+    />
+    <link href="http://89.16.179.114:5000/lib/ext/Ext/ux/grid.RowActions.css"
+          rel="stylesheet"
+          type="text/css"
+    />
+    <link href="http://89.16.179.114:5000/app/css/main.css"
+          rel="stylesheet"
+          type="text/css"
+    />
+  </head>
 
-    <body>
-    <div id="loading-mask" style=""></div> 
-	<div id="loading"> 
-	    <div class="loading-indicator">
-	    	<img src="app/img/geode_small.png" alt="geode" width="50" style="margin-right:8px;float:left;vertical-align:top;"/>
+  <body>
+    <div id="loading-mask"
+         style=""
+    ></div>
+    <div id="loading">
+      <div class="loading-indicator">
+        <img alt="geode"
+             src="app/img/geode_small.png"
+             style="margin-right:8px;float:left;vertical-align:top;"
+             width="50"
+        />
 
-	    	<span id="loading-title">UrbanMap</span><br/>
-	    	<!--<br style="clear: both"/>-->
-	    	<a href="http://www.communesplone.org/">Communes&nbsp;Plone</a>
-	    	<br style="clear: both"/>
-	    	<span id="loading-msg">Chargement des styles et images...</span>
-	    </div> 
-	</div> 
-    <script type="text/javascript">var proxyUrl="http://localhost:8081/urbanisme/portal_urban/getProxy?url=";</script>      
-    <script type="text/javascript">document.getElementById('loading-msg').innerHTML = "Chargement de l'API principale...";</script>      
-    <script type="text/javascript" src="http://89.16.179.114:5000/lib/ext/Ext/adapter/ext/ext-base.js"></script>
+        <span id="loading-title">UrbanMap</span><br />
+        <!--<br style="clear: both"/>-->
+        <a href="http://www.communesplone.org/">Communes&nbsp;Plone</a>
+        <br style="clear: both" />
+        <span id="loading-msg">Chargement des styles et images...</span>
+      </div>
+    </div>
+    <script type="text/javascript">var proxyUrl="http://localhost:8081/urbanisme/portal_urban/getProxy?url=";</script>
+    <script type="text/javascript">document.getElementById('loading-msg').innerHTML = "Chargement de l'API principale...";</script>
+    <script src="http://89.16.179.114:5000/lib/ext/Ext/adapter/ext/ext-base.js"
+            type="text/javascript"
+    ></script>
 
-    
+
     <!--Debug mode (begin) -->
     <!--<script type="text/javascript" src="lib/openlayers/lib/OpenLayers.js"></script>-->
     <!--<script type="text/javascript" src="lib/geoext/lib/GeoExt.js"></script>-->
     <!--<script type="text/javascript" src="lib/ext/Ext/ext-all-debug.js"></script>-->
     <!--Debug mode (end) -->
-    
-    <!-- non debug mode (begin) -->
-    <script type="text/javascript" src="http://89.16.179.114:5000/lib/ext/Ext/ext-all.js"></script>
-    <script type="text/javascript" src="http://89.16.179.114:5000/lib/openlayers/SingleFile.js"></script>
 
-    <script type="text/javascript" src="http://89.16.179.114:5000/lib/geoext/script/GeoExt.js"></script>    
+    <!-- non debug mode (begin) -->
+    <script src="http://89.16.179.114:5000/lib/ext/Ext/ext-all.js"
+            type="text/javascript"
+    ></script>
+    <script src="http://89.16.179.114:5000/lib/openlayers/SingleFile.js"
+            type="text/javascript"
+    ></script>
+
+    <script src="http://89.16.179.114:5000/lib/geoext/script/GeoExt.js"
+            type="text/javascript"
+    ></script>
     <!-- non debug mode (end) -->
-     
-    <script type="text/javascript">document.getElementById('loading-msg').innerHTML = "Chargement de la configuration...";</script>      
+
+    <script type="text/javascript">document.getElementById('loading-msg').innerHTML = "Chargement de la configuration...";</script>
     <!-- The script below will load the configuration of the application -->
-    <script type="text/javascript" src="http://89.16.179.114:5000/config/index"></script>
+    <script src="http://89.16.179.114:5000/config/index"
+            type="text/javascript"
+    ></script>
     <!-- The script below will load the capabilities of the print service
          and save them into the global printCapabilities variable. Instead
          of this, the PrintProvider can be configured with a url and take
-         care of fetching the capabilities. --> 
-    <script type="text/javascript" src="http://89.16.179.114:5000/print/info.json?var=printCapabilities"></script>
-       
-    <script type="text/javascript">document.getElementById('loading-msg').innerHTML = "Chargement de l'application...";</script> 
+         care of fetching the capabilities. -->
+    <script src="http://89.16.179.114:5000/print/info.json?var=printCapabilities"
+            type="text/javascript"
+    ></script>
+
+    <script type="text/javascript">document.getElementById('loading-msg').innerHTML = "Chargement de l'application...";</script>
     <!-- debug mode (begin) -->
 
-    <script type="text/javascript" src="http://89.16.179.114:5000/app/lib/App/ClickControl.js"></script>
-    <script type="text/javascript" src="http://89.16.179.114:5000/lib/ext/Ext/ux/grid.RowActions.js"></script>
-    <script type="text/javascript" src="http://89.16.179.114:5000/app/lib/App/UrbanMap.PrintForm.js"></script> 
-    <script type="text/javascript" src="http://89.16.179.114:5000/app/lib/App/UrbanMap.ParcelleGrid.js"></script>     
-    <script type="text/javascript" src="http://89.16.179.114:5000/app/lib/App/UrbanMap.SearchForm.js"></script>
-    <script type="text/javascript" src="http://89.16.179.114:5000/app/lib/App/UrbanMap.SearchForm.Proprietaire.js"></script>
-    <script type="text/javascript" src="http://89.16.179.114:5000/app/lib/App/UrbanMap.SearchForm.Parcelle.js"></script>
+    <script src="http://89.16.179.114:5000/app/lib/App/ClickControl.js"
+            type="text/javascript"
+    ></script>
+    <script src="http://89.16.179.114:5000/lib/ext/Ext/ux/grid.RowActions.js"
+            type="text/javascript"
+    ></script>
+    <script src="http://89.16.179.114:5000/app/lib/App/UrbanMap.PrintForm.js"
+            type="text/javascript"
+    ></script>
+    <script src="http://89.16.179.114:5000/app/lib/App/UrbanMap.ParcelleGrid.js"
+            type="text/javascript"
+    ></script>
+    <script src="http://89.16.179.114:5000/app/lib/App/UrbanMap.SearchForm.js"
+            type="text/javascript"
+    ></script>
+    <script src="http://89.16.179.114:5000/app/lib/App/UrbanMap.SearchForm.Proprietaire.js"
+            type="text/javascript"
+    ></script>
+    <script src="http://89.16.179.114:5000/app/lib/App/UrbanMap.SearchForm.Parcelle.js"
+            type="text/javascript"
+    ></script>
 
-    <script type="text/javascript" src="http://89.16.179.114:5000/app/lib/App/UrbanMap.ParamForm.js"></script>
-    <script type="text/javascript" src="http://89.16.179.114:5000/app/lib/App/UrbanMap.MapPanel.js"></script>
-    <script type="text/javascript" src="http://89.16.179.114:5000/app/lib/App/UrbanMap.WMSLegend.js"></script>
-    <script type="text/javascript" src="http://89.16.179.114:5000/app/lib/App/UrbanMap.TreePanel.js"></script>
-    <script type="text/javascript" src="http://89.16.179.114:5000/app/lib/App/UrbanMap.WMSCapabilitiesWindow.js"></script>
-    <script type="text/javascript" src="http://89.16.179.114:5000/app/lib/App/UrbanMap.UrbanLayerNode.js"></script>
-    <script type="text/javascript" src="http://89.16.179.114:5000/app/lib/App/UrbanMap.WMCReader.js"></script>
-       
-    <script type="text/javascript">document.getElementById('loading-msg').innerHTML = "Initialisation...";</script>         
-    <script type="text/javascript" src="http://89.16.179.114:5000/app/lib/App/urban-layout.js"></script>
-    <script type="text/javascript" src="http://89.16.179.114:5000/app/lib/App/urban-map.js"></script>   
+    <script src="http://89.16.179.114:5000/app/lib/App/UrbanMap.ParamForm.js"
+            type="text/javascript"
+    ></script>
+    <script src="http://89.16.179.114:5000/app/lib/App/UrbanMap.MapPanel.js"
+            type="text/javascript"
+    ></script>
+    <script src="http://89.16.179.114:5000/app/lib/App/UrbanMap.WMSLegend.js"
+            type="text/javascript"
+    ></script>
+    <script src="http://89.16.179.114:5000/app/lib/App/UrbanMap.TreePanel.js"
+            type="text/javascript"
+    ></script>
+    <script src="http://89.16.179.114:5000/app/lib/App/UrbanMap.WMSCapabilitiesWindow.js"
+            type="text/javascript"
+    ></script>
+    <script src="http://89.16.179.114:5000/app/lib/App/UrbanMap.UrbanLayerNode.js"
+            type="text/javascript"
+    ></script>
+    <script src="http://89.16.179.114:5000/app/lib/App/UrbanMap.WMCReader.js"
+            type="text/javascript"
+    ></script>
+
+    <script type="text/javascript">document.getElementById('loading-msg').innerHTML = "Initialisation...";</script>
+    <script src="http://89.16.179.114:5000/app/lib/App/urban-layout.js"
+            type="text/javascript"
+    ></script>
+    <script src="http://89.16.179.114:5000/app/lib/App/urban-map.js"
+            type="text/javascript"
+    ></script>
     <!-- debug mode (end) -->
-        
+
     <!-- non debug mode (begin) -->
     <!--
     <script type="text/javascript" src="build/app.js"></script>
    -->
     <!-- non debug mode (end) -->
 
-	<div id="urbanmapctn" style="width:600px; height:800px"></div>
+    <div id="urbanmapctn"
+         style="width:600px; height:800px"
+    ></div>
 
-    </body>
+  </body>
 </html>

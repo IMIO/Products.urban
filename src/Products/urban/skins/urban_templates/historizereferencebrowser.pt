@@ -1,8 +1,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:tal="http://xml.zope.org/namespaces/tal"
-      xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-      i18n:domain="atreferencebrowserwidget">
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      i18n:domain="atreferencebrowserwidget"
+>
 
   <head><title></title></head>
 
@@ -10,143 +11,207 @@
 
     <metal:view_macro define-macro="view">
       <tal:define define="
-          image_portal_types field/widget/image_portal_types|string:;
-          image_method       field/widget/image_method|string:;
-          show_path          field/widget/show_path|nothing;
-          hide_inaccessible  field/widget/hide_inaccessible | nothing;
-          multiValued        field/multiValued;
-          helper             nocall:here/refbrowserhelper;
-          portal             context/@@plone_portal_state/portal;
-          portal_path        helper/getPortalPath;
-          value              python: field.getEditAccessor(context)();
-          refs               python:helper.getFieldRelations(field, value);"
-          condition="refs">
+                    image_portal_types field/widget/image_portal_types|string:;
+                    image_method       field/widget/image_method|string:;
+                    show_path          field/widget/show_path|nothing;
+                    hide_inaccessible  field/widget/hide_inaccessible | nothing;
+                    multiValued        field/multiValued;
+                    helper             nocall:here/refbrowserhelper;
+                    portal             context/@@plone_portal_state/portal;
+                    portal_path        helper/getPortalPath;
+                    value              python: field.getEditAccessor(context)();
+                    refs               python:helper.getFieldRelations(field, value);
+                  "
+                  condition="refs"
+      >
 
         <ul tal:omit-tag="not:multiValued">
-        <tal:items tal:repeat="obj refs">
-        <tal:check tal:define="can_view python:helper.canView(obj)">
-        <li tal:condition="can_view" tal:omit-tag="not:multiValued">
-        <tal:item define="obj_path python: '/'.join(obj.getPhysicalPath());
-                    obj_interface_info nocall:obj/@@plone_interface_info;">
-          <img src="#" alt="Image"
-              tal:condition="python: obj.portal_type in image_portal_types"
-              tal:attributes="src string:${obj/absolute_url}/$image_method"
-              />
+          <tal:items tal:repeat="obj refs">
+            <tal:check tal:define="
+                         can_view python:helper.canView(obj);
+                       ">
+              <li tal:condition="can_view"
+                  tal:omit-tag="not:multiValued"
+              >
+                <tal:item define="
+                            obj_path python: '/'.join(obj.getPhysicalPath());
+                            obj_interface_info nocall:obj/@@plone_interface_info;
+                          ">
+                  <img alt="Image"
+                       src="#"
+                       tal:condition="python: obj.portal_type in image_portal_types"
+                       tal:attributes="
+                         src string:${obj/absolute_url}/$image_method;
+                       "
+                  />
 
-          <a href="#"
-              tal:attributes="href obj/absolute_url;
-                              class python:obj.portal_type.replace(' ', '_')"
-              tal:content="python:obj.Title() or obj.absolute_url(relative=1)"
-              >Sole target object's title</a>
+                  <a href="#"
+                     tal:content="python:obj.Title() or obj.absolute_url(relative=1)"
+                     tal:attributes="
+                       href obj/absolute_url;
+                       class python:obj.portal_type.replace(' ', '_');
+                     "
+                  >Sole target object's title</a>
 
-            <a href="#"
-               tal:condition="python:obj_interface_info.provides('Products.Archetypes.interfaces.referenceengine.IContentReference')"
-               tal:attributes="href python:ref.getContentObject().absolute_url();
-                               class python:obj.portal_type.replace(' ', '_')"
-               tal:content="field/relationship"
-               >reference object link</a>
+                  <a href="#"
+                     tal:condition="python:obj_interface_info.provides('Products.Archetypes.interfaces.referenceengine.IContentReference')"
+                     tal:content="field/relationship"
+                     tal:attributes="
+                       href python:ref.getContentObject().absolute_url();
+                       class python:obj.portal_type.replace(' ', '_');
+                     "
+                  >reference object link</a>
 
-            <tal:if condition="show_path" i18n:translate="label_directory">
-              (Directory: <span i18n:name="directory"
-                                 tal:replace="python: obj_path.replace(portal_path + '/', '')"
-                                 >directory</span>)
-            </tal:if>
+                  <tal:if condition="show_path"
+                          i18n:translate="label_directory"
+                  >
+              (Directory:
+                    <span tal:replace="python: obj_path.replace(portal_path + '/', '')"
+                          i18n:name="directory"
+                    >directory</span>)
+                  </tal:if>
 
-        </tal:item>
-        </li>
-        <li tal:condition="not:can_view" tal:omit-tag="not:multiValued">
-          <span i18n:translate="">Undisclosed</span>
-        </li>
-        </tal:check>
-        </tal:items>
+                </tal:item>
+              </li>
+              <li tal:condition="not:can_view"
+                  tal:omit-tag="not:multiValued"
+              >
+                <span i18n:translate="">Undisclosed</span>
+              </li>
+            </tal:check>
+          </tal:items>
         </ul>
 
       </tal:define>
     </metal:view_macro>
 
-    <metal:reference_edit
-        define-macro="reference_edit"
-        tal:define="show_path          field/widget/show_path|nothing;
-                    image_portal_types widget/image_portal_types|string:;
-                    image_method       widget/image_method|string:;
-                    helper nocall:here/refbrowserhelper;
-                    portal_path        helper/getPortalPath;
-                    multiValued python:test(field.multiValued, 1, 0);
-                    refs python:helper.getFieldRelations(field, value);
-                    overlay_id string:atrb_${fieldName}">
+    <metal:reference_edit define-macro="reference_edit"
+                          tal:define="
+                            show_path          field/widget/show_path|nothing;
+                            image_portal_types widget/image_portal_types|string:;
+                            image_method       widget/image_method|string:;
+                            helper nocall:here/refbrowserhelper;
+                            portal_path        helper/getPortalPath;
+                            multiValued python:test(field.multiValued, 1, 0);
+                            refs python:helper.getFieldRelations(field, value);
+                            overlay_id string:atrb_${fieldName};
+                          "
+    >
 
-      <input type="hidden" value=""
-          tal:condition="multiValued"
-          tal:attributes="name string:$fieldName:default:list"
-          />
+      <input type="hidden"
+             value=""
+             tal:condition="multiValued"
+             tal:attributes="
+               name string:$fieldName:default:list;
+             "
+      />
 
-      <tal:single tal:condition="not:multiValued" >
+      <tal:single tal:condition="not:multiValued">
         <tal:value tal:condition="refs">
           <tal:block tal:define="
-              obj python:refs[0];
-              obj_path python: '/'.join(obj.getPhysicalPath())" >
+                       obj python:refs[0];
+                       obj_path python: '/'.join(obj.getPhysicalPath());
+                     ">
 
-            <input size="" type="text" value="" id="" readonly="readonly"
-                tal:attributes="
-                    value obj/title_or_id;
-                    size python:test(widget.size=='', 30, widget.size);
-                    id string:ref_browser_${fieldName}_label"
-                    />
+            <input id=""
+                   readonly="readonly"
+                   size=""
+                   type="text"
+                   value=""
+                   tal:attributes="
+                     value obj/title_or_id;
+                     size python:test(widget.size=='', 30, widget.size);
+                     id string:ref_browser_${fieldName}_label;
+                   "
+            />
 
             <img tal:condition="python: obj.portal_type in image_portal_types"
-                 tal:attributes="src string:${obj/absolute_url}/$image_method"
-                 />
+                 tal:attributes="
+                   src string:${obj/absolute_url}/$image_method;
+                 "
+            />
 
-            <tal:if condition="show_path" i18n:translate="label_directory">
-                (Directory: <span i18n:name="directory"
-                                  tal:replace="python: obj_path.replace(portal_path + '/', '')"
-                                  >directory</span>)
+            <tal:if condition="show_path"
+                    i18n:translate="label_directory"
+            >
+                (Directory:
+              <span tal:replace="python: obj_path.replace(portal_path + '/', '')"
+                    i18n:name="directory"
+              >directory</span>)
             </tal:if>
 
           </tal:block>
         </tal:value>
-        <input id="" size="50" type="text" readonly="readonly"
+        <input id=""
+               readonly="readonly"
+               size="50"
+               type="text"
                value="No reference set. Click the add button to select."
-               i18n:attributes="value label_no_reference_set;"
                tal:condition="not:value"
-               tal:attributes="id string:ref_browser_${fieldName}_label"
-               />
-        <input type="hidden" value="" name=""
-               tal:attributes="name fieldName;
-                               value value;
-                               id string:ref_browser_${fieldName}"
-              />
+               tal:attributes="
+                 id string:ref_browser_${fieldName}_label;
+               "
+               i18n:attributes="value label_no_reference_set;"
+        />
+        <input name=""
+               type="hidden"
+               value=""
+               tal:attributes="
+                 name fieldName;
+                 value value;
+                 id string:ref_browser_${fieldName};
+               "
+        />
 
       </tal:single>
       <tal:multi tal:condition="multiValued">
 
-        <input type="hidden" value="0"
-            tal:attributes="name string:$fieldName-sortable;
-                            value python:test(widget.allow_sorting, 1, 0);"
-            />
+        <input type="hidden"
+               value="0"
+               tal:attributes="
+                 name string:$fieldName-sortable;
+                 value python:test(widget.allow_sorting, 1, 0);
+               "
+        />
 
-        <div style="float: left"> <!-- don't remove this. it is needed for DOM traversal -->
+        <div style="float: left">
+          <!-- don't remove this. it is needed for DOM traversal -->
           <ul class="visualNoMarker"
-              tal:attributes="id string:ref_browser_items_${fieldName};"
-              tal:condition="refs">
+              tal:condition="refs"
+              tal:attributes="
+                id string:ref_browser_items_${fieldName};
+              "
+          >
             <li tal:repeat="set refs"
                 tal:attributes="
-                  id string:ref-${fieldName}-${repeat/set/index};">
+                  id string:ref-${fieldName}-${repeat/set/index};
+                "
+            >
               <label tal:define="
-                   title set/title_or_id | string:Undisclosed;
-                   obj_path python: '/'.join(set.getPhysicalPath());">
-                <input type="checkbox"
-                       tal:attributes="name string:${fieldName}:list;
-                                       value python:helper.getUidFromReference(set);"
-                       checked="checked" />
+                       title set/title_or_id | string:Undisclosed;
+                       obj_path python: '/'.join(set.getPhysicalPath());
+                     ">
+                <input checked="checked"
+                       type="checkbox"
+                       tal:attributes="
+                         name string:${fieldName}:list;
+                         value python:helper.getUidFromReference(set);
+                       "
+                />
                 <tal:block replace="python: show_path and '%s (%s)' % (title, obj_path.replace(portal_path, '')) or title" />
               </label>
 
               <tal:sorting condition="widget/allow_sorting">
-                <a href="" title="Move up" data-move-direction="up"
-                   i18n:attributes="title">&#x25b2;</a>
-                <a href="" title="Move down" data-move-direction="down"
-                   i18n:attributes="title">&#x25bc;</a>
+                <a href=""
+                   title="Move up"
+                   data-move-direction="up"
+                   i18n:attributes="title"
+                >&#x25b2;</a>
+                <a href=""
+                   title="Move down"
+                   data-move-direction="down"
+                   i18n:attributes="title"
+                >&#x25bc;</a>
               </tal:sorting>
 
             </li>
@@ -154,46 +219,88 @@
         </div>
       </tal:multi>
       <div style="clear: both"
-          tal:define="
-              at_url helper/getAtURL;
-              startup_directory python:helper.getStartupDirectory(field)">
-        <input type="button" class="searchButton addreference" value="Add..."
+           tal:define="
+             at_url helper/getAtURL;
+             startup_directory python:helper.getStartupDirectory(field);
+           "
+      >
+        <input class="searchButton addreference"
+               type="button"
+               value="Add..."
+               tal:define="
+                 popup_width widget/popup_width|string:500;
+                 popup_height widget/popup_height|string:550;
+               "
+               tal:attributes="
+                 src string:${startup_directory}/refbrowser_popup?fieldName=${fieldName}&amp;fieldRealName=${field/getName}&amp;at_url=${at_url}&amp;_authenticator=${context/@@authenticator/token|nothing};
+                 rel string:#${overlay_id};
+               "
                i18n:attributes="value label_add;"
-               tal:define="popup_width widget/popup_width|string:500;
-                           popup_height widget/popup_height|string:550;"
-               tal:attributes="src string:${startup_directory}/refbrowser_popup?fieldName=${fieldName}&amp;fieldRealName=${field/getName}&amp;at_url=${at_url}&amp;_authenticator=${context/@@authenticator/token|nothing};
-                           rel string:#${overlay_id}" />
-        <input type="button" class="destructive removereference" value="Clear reference"
-               i18n:attributes="value label_remove_reference"
+        />
+        <input class="destructive removereference"
+               type="button"
+               value="Clear reference"
                tal:condition="not:multiValued"
-               tal:attributes="data-fieldname fieldName;
-                               data-multivalued multiValued"/>
-        <input type="button" class="searchButton addHistory" value="History register"
-               i18n:domain="urban"
+               tal:attributes="
+                 data-fieldname fieldName;
+                 data-multivalued multiValued;
+               "
+               i18n:attributes="value label_remove_reference"
+        />
+        <input class="searchButton addHistory"
+               type="button"
+               value="History register"
+               tal:define="
+                 popup_width widget/popup_width|string:500;
+                 popup_height widget/popup_height|string:550;
+               "
+               tal:attributes="
+                 src string:${context/absolute_url}/refhistorybrowser_popup?form.widgets.field=${field/getName}&amp;at_url=${at_url}&amp;_authenticator=${context/@@authenticator/token|nothing};
+                 rel string:#history_${overlay_id};
+               "
                i18n:attributes="value label_history"
-               tal:define="popup_width widget/popup_width|string:500;
-                           popup_height widget/popup_height|string:550;"
-               tal:attributes="src string:${context/absolute_url}/refhistorybrowser_popup?form.widgets.field=${field/getName}&amp;at_url=${at_url}&amp;_authenticator=${context/@@authenticator/token|nothing};
-                           rel string:#history_${overlay_id}" />
-          <input type="button" class="searchButton showHistory" value="History"
-                 i18n:domain="urban"
-                 i18n:attributes="value label_show_history"
-                 tal:define="popup_width widget/popup_width|string:500;
-                           popup_height widget/popup_height|string:550;"
-                 tal:attributes="src string:${context/absolute_url}/specificcontenthistory?item=${field/getName}&amp;at_url=${at_url}&amp;_authenticator=${context/@@authenticator/token|nothing};
-                           rel string:#history_${overlay_id}" />
-           </div><div id="atrb" tal:attributes="id overlay_id" class="overlay overlay-ajax"><div class="close"><span>Close</span></div>
-           <div class="pb-ajax">
-             <!-- <a href="" i18n:translate="referencebrowser_back" class="refbrowser_back">Back</a> -->
-             <div class="overlaycontent" style="font-size: 125%"></div>
-             <!-- <a href="" i18n:translate="referencebrowser_back" class="refbrowser_back">Back</a> -->
-           </div>
-           </div>
-           <div id="atrb" tal:attributes="id string:history_${overlay_id}" class="overlay overlay-ajax overlay-history"><div class="close"><span>Close</span></div>
-           <div class="pb-ajax">
-             <div class="overlaycontent" style="font-size: 125%"></div>
-           </div>
-           <script type="text/javascript">
+               i18n:domain="urban"
+        />
+        <input class="searchButton showHistory"
+               type="button"
+               value="History"
+               tal:define="
+                 popup_width widget/popup_width|string:500;
+                 popup_height widget/popup_height|string:550;
+               "
+               tal:attributes="
+                 src string:${context/absolute_url}/specificcontenthistory?item=${field/getName}&amp;at_url=${at_url}&amp;_authenticator=${context/@@authenticator/token|nothing};
+                 rel string:#history_${overlay_id};
+               "
+               i18n:attributes="value label_show_history"
+               i18n:domain="urban"
+        />
+      </div><div class="overlay overlay-ajax"
+           id="atrb"
+           tal:attributes="
+             id overlay_id;
+           "
+      ><div class="close"><span>Close</span></div>
+        <div class="pb-ajax">
+          <!-- <a href="" i18n:translate="referencebrowser_back" class="refbrowser_back">Back</a> -->
+          <div class="overlaycontent"
+               style="font-size: 125%"
+          ></div>
+          <!-- <a href="" i18n:translate="referencebrowser_back" class="refbrowser_back">Back</a> -->
+        </div>
+      </div>
+      <div class="overlay overlay-ajax overlay-history"
+           id="atrb"
+           tal:attributes="
+             id string:history_${overlay_id};
+           "
+      ><div class="close"><span>Close</span></div>
+        <div class="pb-ajax">
+          <div class="overlaycontent"
+               style="font-size: 125%"
+          ></div>
+        </div>
+        <script type="text/javascript">
               jQuery(document).ready(function($) {
                 $('input.addHistory, input.showHistory').prepOverlay({
                   subtype: 'ajax',
@@ -201,11 +308,11 @@
                   noform: 'reload',
                 });
               });
-           </script>
-           </div>
+        </script>
+      </div>
 
       <!-- Todo? -->
-      <metal:addable metal:use-macro="here/widgets/addable_support/macros/addable"/>
+      <metal:addable metal:use-macro="here/widgets/addable_support/macros/addable" />
     </metal:reference_edit>
 
     <metal:edit_macro define-macro="edit">

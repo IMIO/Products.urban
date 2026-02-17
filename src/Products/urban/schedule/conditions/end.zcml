@@ -1,563 +1,564 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
-    i18n_domain="Products.urban">
-
-    <adapter
-        for="Products.urban.interfaces.IGenericLicence
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.DepositDoneCondition"
-        name="urban.schedule.condition.deposit_done"
-    />
-
-    <adapter
-        for="Products.urban.interfaces.IGenericLicence
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.DepositEventCreated"
-        name="urban.schedule.condition.deposit_event_created"
-    />
-
-    <adapter
-        for="Products.urban.interfaces.IGenericLicence
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.DecisionEventClosed"
-        name="urban.schedule.condition.decision_event_closed"
-    />
-
-    <adapter
-        for="Products.urban.interfaces.IBaseBuildLicence
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.ProcedureChoiceDone"
-        name="urban.schedule.condition.procedure_choice_done"
-    />
-
-    <adapter
-        for="Products.urban.interfaces.ICODT_BaseBuildLicence
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.ProcedureChoiceDone"
-        name="urban.schedule.condition.procedure_choice_done"
-    />
-
-    <adapter
-        for="Products.urban.interfaces.IBaseBuildLicence
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.LicenceInCompletionState"
-        name="urban.schedule.condition.set_completion_state"
-    />
-
-    <!-- folder complete conditions-->
-    <adapter
-        for="Products.urban.interfaces.IBaseBuildLicence
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.ComplementsAsked"
-        name="urban.schedule.condition.complements_asked"
-    />
-
-    <adapter
-        for="Products.urban.interfaces.ICODT_BaseBuildLicence
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.SingleComplementAsked"
-        name="urban.schedule.condition.complements_asked"
-    />
-
-    <adapter
-        for="Products.urban.interfaces.IEnvironmentBase
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.SingleComplementAsked"
-        name="urban.schedule.condition.complements_asked"
-    />
-
-    <adapter
-        for="Products.urban.interfaces.ITicket
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.SingleComplementAsked"
-        name="urban.schedule.condition.complements_asked"
-    />
-
-    <adapter
-        for="Products.urban.interfaces.IBaseBuildLicence
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.ComplementsReceived"
-        name="urban.schedule.condition.complements_received"
-    />
-
-    <adapter
-        for="Products.urban.interfaces.ICODT_BaseBuildLicence
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.SingleComplementReceived"
-        name="urban.schedule.condition.complements_received"
-    />
-
-    <adapter
-        for="Products.urban.interfaces.ITicket
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.SingleComplementReceived"
-        name="urban.schedule.condition.complements_received"
-    />
-
-    <adapter
-        for="Products.urban.interfaces.IEnvironmentBase
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.SingleComplementReceived"
-        name="urban.schedule.condition.complements_received"
-    />
-
-    <adapter
-        for="Products.urban.interfaces.IEnvironmentBase
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.ComplementsTransmitToSPW"
-        name="urban.schedule.condition.complements_transmit_to_spw"
-    />
-
-    <adapter
-        for="Products.urban.interfaces.IEnvironmentBase
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.SingleComplementReceived"
-        name="urban.schedule.condition.incomplete_for_6_months"
-    />
-
-    <!-- SPW transmit conditions-->
-    <adapter
-        for="Products.urban.interfaces.IEnvironmentBase
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.TransmitSPWDoneCondition"
-        name="urban.schedule.condition.transmit_to_spw_done"
-    />
-
-    <adapter
-        for="Products.urban.interfaces.ICODT_UniqueLicence
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.TransmitSPWDoneCondition"
-        name="urban.schedule.condition.transmit_to_spw_done"
-    />
-
-    <!-- acknowlegdment conditions-->
-    <adapter
-        for="Products.urban.interfaces.IBaseBuildLicence
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.AcknowledgmentCreatedCondition"
-        name="urban.schedule.condition.acknowledgment_created"
-    />
-
-    <adapter
-        for="Products.urban.interfaces.IBaseAllBuildLicence
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.AcknowledgmentDoneCondition"
-        name="urban.schedule.condition.acknowledgment_done"
-    />
-
-    <adapter
-        for="Products.urban.interfaces.IEnvironmentBase
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.RubricsChoiceDone"
-        name="urban.schedule.condition.rubrics_choice_done"
-    />
-
-    <adapter
-        for="Products.urban.interfaces.IEnvironmentLicence
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.AcknowledgmentDoneCondition"
-        name="urban.schedule.condition.acknowledgment_done"
-    />
-
-    <adapter
-        for="Products.urban.interfaces.ICODT_BaseBuildLicence
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.ProcedureChoiceNotified"
-        name="urban.schedule.condition.procedure_choice_notified"
-    />
-
-    <adapter
-        for="Products.urban.interfaces.ICODT_BaseBuildLicence
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.ProcedureChoiceNotified"
-        name="urban.schedule.condition.procedure_choice_received_from_FD"
-    />
-
-    <!-- opinion requests conditions-->
-    <adapter
-        for="Products.urban.interfaces.ICODT_BaseBuildLicence
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.OpinionRequestsEventsCreated"
-        name="urban.schedule.condition.opinion_requests_created"
-    />
-
-    <adapter
-        for="Products.urban.interfaces.ICODT_BaseBuildLicence
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.OpinionRequestsDone"
-        name="urban.schedule.condition.opinion_requests_done"
-    />
-
-    <adapter
-        for="Products.urban.interfaces.IEnvironmentBase
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.OpinionRequestsEventsCreated"
-        name="urban.schedule.condition.opinion_requests_created"
-    />
-
-    <adapter
-        for="Products.urban.interfaces.IEnvironmentBase
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.OpinionRequestsDone"
-        name="urban.schedule.condition.opinion_requests_done"
-    />
-
-    <!-- FD opinion -->
-    <adapter
-        for="Products.urban.interfaces.IBaseAllBuildLicence
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.FDOpinionAsked"
-        name="urban.schedule.condition.FD_opinion_asked"
-    />
-
-    <adapter
-        for="Products.urban.interfaces.IBaseAllBuildLicence
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.FDOpinionReceived"
-        name="urban.schedule.condition.FD_opinion_received"
-    />
-
-    <!-- College opinion transmit for unique licences -->
-    <adapter
-        for="Products.urban.interfaces.IBaseAllBuildLicence
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.CollegeOpinionTransmitToSPWDoneCondition"
-        name="urban.schedule.condition.college_opinion_transmit_done"
-    />
-
-    <adapter
-        for="Products.urban.interfaces.IEnvironmentBase
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.CollegeOpinionTransmitToSPWDoneCondition"
-        name="urban.schedule.condition.college_opinion_transmit_done"
-    />
-
-    <adapter
-        for="Products.urban.interfaces.IEnvironmentBase
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.CollegeOpinionDoneCondition"
-        name="urban.schedule.condition.college_opinion_done"
-    />
-
-    <adapter
-        for="Products.urban.interfaces.IEnvironmentBase
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.CollegeOpinionInProgressCondition"
-        name="urban.schedule.condition.college_opinion_in_progress"
-    />
-
-    <!-- SPW project receipt for unique licences -->
-    <adapter
-        for="Products.urban.interfaces.IBaseAllBuildLicence
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.SPWProjectReceivedCondition"
-        name="urban.schedule.condition.spw_project_receipt_done"
-    />
-
-    <adapter
-        for="Products.urban.interfaces.IEnvironmentBase
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.SPWProjectReceivedCondition"
-        name="urban.schedule.condition.spw_project_receipt_done"
-    />
-
-    <!-- inquiry conditions-->
-    <adapter
-        for="Products.urban.interfaces.IBaseAllBuildLicence
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.InquiryDatesDefinedCondition"
-        name="urban.schedule.condition.inquiry_dates_defined"
-    />
-
-    <adapter
-        for="Products.urban.interfaces.IBaseAllBuildLicence
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.InquiryEventCreatedCondition"
-        name="urban.schedule.condition.inquiry_event_created"
-    />
-
-    <adapter
-        for="Products.urban.interfaces.IBaseAllBuildLicence
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.InquiryDoneCondition"
-        name="urban.schedule.condition.inquiry_done"
-    />
-
-    <adapter
-        for="Products.urban.interfaces.IEnvironmentBase
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.InquiryDatesDefinedCondition"
-        name="urban.schedule.condition.inquiry_dates_defined"
-    />
-
-    <adapter
-        for="Products.urban.interfaces.IEnvironmentBase
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.InquiryDoneCondition"
-        name="urban.schedule.condition.inquiry_done"
-    />
-
-    <adapter
-        for="Products.urban.interfaces.ICODT_BaseBuildLicence
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.AnnouncementDatesDefinedCondition"
-        name="urban.schedule.condition.announcement_dates_defined"
-    />
-
-    <adapter
-        for="Products.urban.interfaces.ICODT_BaseBuildLicence
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.AnnouncementEventCreatedCondition"
-        name="urban.schedule.condition.announcement_event_created"
-    />
-
-    <adapter
-        for="Products.urban.interfaces.ICODT_BaseBuildLicence
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.AnnouncementDoneCondition"
-        name="urban.schedule.condition.announcement_done"
-    />
-
-    <adapter
-        for="Products.urban.interfaces.IBaseAllBuildLicence
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.WalloonRegionPrimoEventDone"
-        name="urban.schedule.condition.primo_done"
-    />
-
-    <!-- analysis conditions-->
-    <adapter
-        for="Products.urban.interfaces.IBaseBuildLicence
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.UrbanAnalysisDone"
-        name="urban.schedule.condition.analysis_done"
-    />
-
-    <!-- suspension conditions-->
-    <adapter
-        for="Products.urban.interfaces.IBaseBuildLicence
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.LicenceSuspension"
-        name="urban.schedule.condition.suspension"
-    />
-
-    <!-- fd decision conditions-->
-    <adapter
-        for="Products.urban.interfaces.IArticle127
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.FDDecisionEventCreatedCondition"
-        name="urban.schedule.condition.fd_decision_event_created"
-    />
-
-    <adapter
-        for="Products.urban.interfaces.IArticle127
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.FDDecisionEventDoneCondition"
-        name="urban.schedule.condition.fd_decision_received"
-    />
-
-    <adapter
-        for="Products.urban.interfaces.ICODT_Article127
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.FDDecisionEventCreatedCondition"
-        name="urban.schedule.condition.fd_decision_event_created"
-    />
-
-    <adapter
-        for="Products.urban.interfaces.ICODT_Article127
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.FDDecisionEventDoneCondition"
-        name="urban.schedule.condition.fd_decision_received"
-    />
-
-    <!-- deposit date is past by x days -->
-    <adapter
-        for="Products.urban.interfaces.ICODT_BaseBuildLicence
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.DepositDateIsPast20Days"
-        name="urban.schedule.condition.deposit_past_20days"
-    />
-
-    <adapter
-        for="Products.urban.interfaces.ICODT_BaseBuildLicence
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.DepositDateIsPast30Days"
-        name="urban.schedule.condition.deposit_past_30days"
-    />
-
-    <!-- refused conditions -->
-    <adapter
-        for="Products.urban.interfaces.IBaseBuildLicence
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.LicenceRefused"
-        name="urban.schedule.condition.refused"
-    />
-
-    <adapter
-        for="Products.urban.interfaces.ICODT_BaseBuildLicence
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.LicenceRefused"
-        name="urban.schedule.condition.refused"
-    />
-
-    <!-- decision college event conditions-->
-    <adapter
-        for="Products.urban.interfaces.IBaseAllBuildLicence
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.LicenceDecisionCollegeEventCreated"
-        name="urban.schedule.condition.licence_decision_college_event_created"
-    />
-    <adapter
-        for="Products.urban.interfaces.IBaseAllBuildLicence
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.DecisionNotified"
-        name="urban.schedule.condition.decision_notified"
-    />
-
-    <adapter
-        for="Products.urban.interfaces.IEnvironmentBase
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.DecisionWritten"
-        name="urban.schedule.condition.decision_written"
-    />
-
-    <adapter
-        for="Products.urban.interfaces.IEnvironmentBase
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.DecisionDelivered"
-        name="urban.schedule.condition.decision_delivered"
-    />
-
-    <adapter
-        for="Products.urban.interfaces.IGenericLicence
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.LicenceEndedCondition"
-        name="urban.schedule.licence_ended"
-    />
-
-    <adapter
-        for="Products.urban.interfaces.IGenericLicence
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.LicenceThawedCondition"
-        name="urban.schedule.condition.LicenceThawed"
-    />
-
-    <!-- Inspection conditions -->
-    <adapter
-        for="Products.urban.interfaces.IInspection
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.AllInspectionFollowupsAreDone"
-        name="urban.schedule.condition.all_followups_done"
-    />
-
-    <adapter
-        for="Products.urban.interfaces.IInspection
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.AllInspectionFollowupsAreWritten"
-        name="urban.schedule.condition.all_followups_written"
-    />
-
-    <adapter
-        for="Products.urban.interfaces.IInspection
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.NoInspectionFollowupsToValidate"
-        name="urban.schedule.condition.followups_validated"
-    />
-
-    <adapter
-        for="Products.urban.interfaces.IInspection
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.NoInspectionFollowupsToSend"
-        name="urban.schedule.condition.followups_done"
-    />
-
-    <adapter
-        for="Products.urban.interfaces.IInspection
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.FollowUpTicketCreated"
-        name="urban.schedule.condition.followup_ticket_created"
-    />
-
-    <adapter
-        for="Products.urban.interfaces.IInspection
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.FollowUpTicketClosed"
-        name="urban.schedule.condition.followup_ticket_is_closed"
-    />
-
-    <adapter
-        for="Products.urban.interfaces.ITicket
-             imio.schedule.content.task.IAutomatedTask"
-        provides="imio.schedule.interfaces.IEndCondition"
-        factory=".generic.TicketEventClosed"
-        name="urban.schedule.condition.ticket_redacted"
-    />
+    i18n_domain="Products.urban"
+    >
+
+  <adapter
+      factory=".generic.DepositDoneCondition"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.IGenericLicence
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.deposit_done"
+      />
+
+  <adapter
+      factory=".generic.DepositEventCreated"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.IGenericLicence
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.deposit_event_created"
+      />
+
+  <adapter
+      factory=".generic.DecisionEventClosed"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.IGenericLicence
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.decision_event_closed"
+      />
+
+  <adapter
+      factory=".generic.ProcedureChoiceDone"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.IBaseBuildLicence
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.procedure_choice_done"
+      />
+
+  <adapter
+      factory=".generic.ProcedureChoiceDone"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.ICODT_BaseBuildLicence
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.procedure_choice_done"
+      />
+
+  <adapter
+      factory=".generic.LicenceInCompletionState"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.IBaseBuildLicence
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.set_completion_state"
+      />
+
+  <!-- folder complete conditions-->
+  <adapter
+      factory=".generic.ComplementsAsked"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.IBaseBuildLicence
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.complements_asked"
+      />
+
+  <adapter
+      factory=".generic.SingleComplementAsked"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.ICODT_BaseBuildLicence
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.complements_asked"
+      />
+
+  <adapter
+      factory=".generic.SingleComplementAsked"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.IEnvironmentBase
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.complements_asked"
+      />
+
+  <adapter
+      factory=".generic.SingleComplementAsked"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.ITicket
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.complements_asked"
+      />
+
+  <adapter
+      factory=".generic.ComplementsReceived"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.IBaseBuildLicence
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.complements_received"
+      />
+
+  <adapter
+      factory=".generic.SingleComplementReceived"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.ICODT_BaseBuildLicence
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.complements_received"
+      />
+
+  <adapter
+      factory=".generic.SingleComplementReceived"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.ITicket
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.complements_received"
+      />
+
+  <adapter
+      factory=".generic.SingleComplementReceived"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.IEnvironmentBase
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.complements_received"
+      />
+
+  <adapter
+      factory=".generic.ComplementsTransmitToSPW"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.IEnvironmentBase
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.complements_transmit_to_spw"
+      />
+
+  <adapter
+      factory=".generic.SingleComplementReceived"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.IEnvironmentBase
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.incomplete_for_6_months"
+      />
+
+  <!-- SPW transmit conditions-->
+  <adapter
+      factory=".generic.TransmitSPWDoneCondition"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.IEnvironmentBase
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.transmit_to_spw_done"
+      />
+
+  <adapter
+      factory=".generic.TransmitSPWDoneCondition"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.ICODT_UniqueLicence
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.transmit_to_spw_done"
+      />
+
+  <!-- acknowlegdment conditions-->
+  <adapter
+      factory=".generic.AcknowledgmentCreatedCondition"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.IBaseBuildLicence
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.acknowledgment_created"
+      />
+
+  <adapter
+      factory=".generic.AcknowledgmentDoneCondition"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.IBaseAllBuildLicence
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.acknowledgment_done"
+      />
+
+  <adapter
+      factory=".generic.RubricsChoiceDone"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.IEnvironmentBase
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.rubrics_choice_done"
+      />
+
+  <adapter
+      factory=".generic.AcknowledgmentDoneCondition"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.IEnvironmentLicence
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.acknowledgment_done"
+      />
+
+  <adapter
+      factory=".generic.ProcedureChoiceNotified"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.ICODT_BaseBuildLicence
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.procedure_choice_notified"
+      />
+
+  <adapter
+      factory=".generic.ProcedureChoiceNotified"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.ICODT_BaseBuildLicence
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.procedure_choice_received_from_FD"
+      />
+
+  <!-- opinion requests conditions-->
+  <adapter
+      factory=".generic.OpinionRequestsEventsCreated"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.ICODT_BaseBuildLicence
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.opinion_requests_created"
+      />
+
+  <adapter
+      factory=".generic.OpinionRequestsDone"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.ICODT_BaseBuildLicence
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.opinion_requests_done"
+      />
+
+  <adapter
+      factory=".generic.OpinionRequestsEventsCreated"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.IEnvironmentBase
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.opinion_requests_created"
+      />
+
+  <adapter
+      factory=".generic.OpinionRequestsDone"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.IEnvironmentBase
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.opinion_requests_done"
+      />
+
+  <!-- FD opinion -->
+  <adapter
+      factory=".generic.FDOpinionAsked"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.IBaseAllBuildLicence
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.FD_opinion_asked"
+      />
+
+  <adapter
+      factory=".generic.FDOpinionReceived"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.IBaseAllBuildLicence
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.FD_opinion_received"
+      />
+
+  <!-- College opinion transmit for unique licences -->
+  <adapter
+      factory=".generic.CollegeOpinionTransmitToSPWDoneCondition"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.IBaseAllBuildLicence
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.college_opinion_transmit_done"
+      />
+
+  <adapter
+      factory=".generic.CollegeOpinionTransmitToSPWDoneCondition"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.IEnvironmentBase
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.college_opinion_transmit_done"
+      />
+
+  <adapter
+      factory=".generic.CollegeOpinionDoneCondition"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.IEnvironmentBase
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.college_opinion_done"
+      />
+
+  <adapter
+      factory=".generic.CollegeOpinionInProgressCondition"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.IEnvironmentBase
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.college_opinion_in_progress"
+      />
+
+  <!-- SPW project receipt for unique licences -->
+  <adapter
+      factory=".generic.SPWProjectReceivedCondition"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.IBaseAllBuildLicence
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.spw_project_receipt_done"
+      />
+
+  <adapter
+      factory=".generic.SPWProjectReceivedCondition"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.IEnvironmentBase
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.spw_project_receipt_done"
+      />
+
+  <!-- inquiry conditions-->
+  <adapter
+      factory=".generic.InquiryDatesDefinedCondition"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.IBaseAllBuildLicence
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.inquiry_dates_defined"
+      />
+
+  <adapter
+      factory=".generic.InquiryEventCreatedCondition"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.IBaseAllBuildLicence
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.inquiry_event_created"
+      />
+
+  <adapter
+      factory=".generic.InquiryDoneCondition"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.IBaseAllBuildLicence
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.inquiry_done"
+      />
+
+  <adapter
+      factory=".generic.InquiryDatesDefinedCondition"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.IEnvironmentBase
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.inquiry_dates_defined"
+      />
+
+  <adapter
+      factory=".generic.InquiryDoneCondition"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.IEnvironmentBase
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.inquiry_done"
+      />
+
+  <adapter
+      factory=".generic.AnnouncementDatesDefinedCondition"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.ICODT_BaseBuildLicence
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.announcement_dates_defined"
+      />
+
+  <adapter
+      factory=".generic.AnnouncementEventCreatedCondition"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.ICODT_BaseBuildLicence
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.announcement_event_created"
+      />
+
+  <adapter
+      factory=".generic.AnnouncementDoneCondition"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.ICODT_BaseBuildLicence
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.announcement_done"
+      />
+
+  <adapter
+      factory=".generic.WalloonRegionPrimoEventDone"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.IBaseAllBuildLicence
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.primo_done"
+      />
+
+  <!-- analysis conditions-->
+  <adapter
+      factory=".generic.UrbanAnalysisDone"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.IBaseBuildLicence
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.analysis_done"
+      />
+
+  <!-- suspension conditions-->
+  <adapter
+      factory=".generic.LicenceSuspension"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.IBaseBuildLicence
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.suspension"
+      />
+
+  <!-- fd decision conditions-->
+  <adapter
+      factory=".generic.FDDecisionEventCreatedCondition"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.IArticle127
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.fd_decision_event_created"
+      />
+
+  <adapter
+      factory=".generic.FDDecisionEventDoneCondition"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.IArticle127
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.fd_decision_received"
+      />
+
+  <adapter
+      factory=".generic.FDDecisionEventCreatedCondition"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.ICODT_Article127
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.fd_decision_event_created"
+      />
+
+  <adapter
+      factory=".generic.FDDecisionEventDoneCondition"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.ICODT_Article127
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.fd_decision_received"
+      />
+
+  <!-- deposit date is past by x days -->
+  <adapter
+      factory=".generic.DepositDateIsPast20Days"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.ICODT_BaseBuildLicence
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.deposit_past_20days"
+      />
+
+  <adapter
+      factory=".generic.DepositDateIsPast30Days"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.ICODT_BaseBuildLicence
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.deposit_past_30days"
+      />
+
+  <!-- refused conditions -->
+  <adapter
+      factory=".generic.LicenceRefused"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.IBaseBuildLicence
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.refused"
+      />
+
+  <adapter
+      factory=".generic.LicenceRefused"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.ICODT_BaseBuildLicence
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.refused"
+      />
+
+  <!-- decision college event conditions-->
+  <adapter
+      factory=".generic.LicenceDecisionCollegeEventCreated"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.IBaseAllBuildLicence
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.licence_decision_college_event_created"
+      />
+  <adapter
+      factory=".generic.DecisionNotified"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.IBaseAllBuildLicence
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.decision_notified"
+      />
+
+  <adapter
+      factory=".generic.DecisionWritten"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.IEnvironmentBase
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.decision_written"
+      />
+
+  <adapter
+      factory=".generic.DecisionDelivered"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.IEnvironmentBase
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.decision_delivered"
+      />
+
+  <adapter
+      factory=".generic.LicenceEndedCondition"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.IGenericLicence
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.licence_ended"
+      />
+
+  <adapter
+      factory=".generic.LicenceThawedCondition"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.IGenericLicence
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.LicenceThawed"
+      />
+
+  <!-- Inspection conditions -->
+  <adapter
+      factory=".generic.AllInspectionFollowupsAreDone"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.IInspection
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.all_followups_done"
+      />
+
+  <adapter
+      factory=".generic.AllInspectionFollowupsAreWritten"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.IInspection
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.all_followups_written"
+      />
+
+  <adapter
+      factory=".generic.NoInspectionFollowupsToValidate"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.IInspection
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.followups_validated"
+      />
+
+  <adapter
+      factory=".generic.NoInspectionFollowupsToSend"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.IInspection
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.followups_done"
+      />
+
+  <adapter
+      factory=".generic.FollowUpTicketCreated"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.IInspection
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.followup_ticket_created"
+      />
+
+  <adapter
+      factory=".generic.FollowUpTicketClosed"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.IInspection
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.followup_ticket_is_closed"
+      />
+
+  <adapter
+      factory=".generic.TicketEventClosed"
+      provides="imio.schedule.interfaces.IEndCondition"
+      for="Products.urban.interfaces.ITicket
+           imio.schedule.content.task.IAutomatedTask"
+      name="urban.schedule.condition.ticket_redacted"
+      />
 
 </configure>

@@ -1,25 +1,26 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
-    i18n_domain="Products.urban">
+    i18n_domain="Products.urban"
+    >
 
-    <include package=".browser" />
-    <include package=".conditions" />
-    <include package=".crons" />
+  <include package=".browser" />
+  <include package=".conditions" />
+  <include package=".crons" />
 
-    <include file="assign_principal.zcml" />
-    <include file="default_states.zcml" />
-    <include file="delay.zcml" />
-    <include file="events.zcml" />
-    <include file="indexes.zcml" />
-    <include file="marker_interfaces.zcml" />
-    <include file="start_date.zcml" />
-    <include file="task_completion.zcml" />
-    <include file="vocabulary.zcml" />
+  <include file="assign_principal.zcml" />
+  <include file="default_states.zcml" />
+  <include file="delay.zcml" />
+  <include file="events.zcml" />
+  <include file="indexes.zcml" />
+  <include file="marker_interfaces.zcml" />
+  <include file="start_date.zcml" />
+  <include file="task_completion.zcml" />
+  <include file="vocabulary.zcml" />
 
-    <utility
+  <utility
+      factory=".holidays.CollegeHolidays"
       provides="imio.schedule.interfaces.ICalendarExtraHolidays"
       name="urban.schedule.college_holidays"
-      factory=".holidays.CollegeHolidays"
       />
 
 </configure>

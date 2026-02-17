@@ -1,9 +1,12 @@
-<td class="noPadding" i18n:domain="urban">
-  <input 
-     tal:attributes="href string:${context/absolute_url}/@@change_owner"
-     type="button"
-     class="overlay-task-action assign_user"
-     value="Change Owner"
-     i18n:attributes="value"
-     />
+<td class="noPadding"
+    i18n:domain="urban"
+>
+  <input class="overlay-task-action assign_user"
+         type="button"
+         value="Change Owner"
+         tal:attributes="
+           href string:${context/absolute_url}/@@change_owner;
+         "
+         i18n:attributes="value"
+  />
 </td>

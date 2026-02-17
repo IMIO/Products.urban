@@ -1,7 +1,7 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="utf-8"?>
 <metadata>
   <version>1</version>
-    <dependencies>
-      <dependency>profile-Products.urban:default</dependency>
-   </dependencies>
+  <dependencies>
+    <dependency>profile-Products.urban:default</dependency>
+  </dependencies>
 </metadata>
