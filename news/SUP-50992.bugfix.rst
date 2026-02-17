@@ -1,2 +1,0 @@
-Avoid an error when event title contains special char
-[mpeeters]
