@@ -215,7 +215,7 @@ class ContacTitleDisplay(TitleDisplay):
 
     def render(self):
         contact = self.obj
-        title = self.column.renderTitleLink(self.urbanlist_item)
+        title = self.column.renderTitleLink(self.urbanlist_item).encode("utf8")
 
         address = ""
         street = escape(contact.getStreet())
@@ -257,7 +257,7 @@ class EventTitleDisplay(TitleDisplay):
 
     def render(self):
         event = self.obj
-        title = self.column.renderTitleLink(self.urbanlist_item)
+        title = self.column.renderTitleLink(self.urbanlist_item).encode("utf8")
 
         suffix = self.urbanlist_item.canBeEdited() and "/external_edit" or ""
 
