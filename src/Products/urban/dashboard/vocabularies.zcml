@@ -1,24 +1,25 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
-    i18n_domain="urban">
+    i18n_domain="urban"
+    >
 
-    <!-- Licence worfklow states vocabulary -->
-    <utility
-        factory=".vocabularies.LicencesWorkflowStates"
-        name="urban.LicencesWorkflowStates"
-        provides="zope.schema.interfaces.IVocabularyFactory"
-    />
+  <!-- Licence worfklow states vocabulary -->
+  <utility
+      factory=".vocabularies.LicencesWorkflowStates"
+      provides="zope.schema.interfaces.IVocabularyFactory"
+      name="urban.LicencesWorkflowStates"
+      />
 
-    <utility
-        factory=".vocabularies.InspectionFollowupVocabulary"
-        name="urban.inspection_followups"
-        provides="zope.schema.interfaces.IVocabularyFactory"
-    />
+  <utility
+      factory=".vocabularies.InspectionFollowupVocabulary"
+      provides="zope.schema.interfaces.IVocabularyFactory"
+      name="urban.inspection_followups"
+      />
 
-    <utility
-        factory=".vocabularies.CovidVocabulary"
-        name="urban.covid"
-        provides="zope.schema.interfaces.IVocabularyFactory"
-    />
+  <utility
+      factory=".vocabularies.CovidVocabulary"
+      provides="zope.schema.interfaces.IVocabularyFactory"
+      name="urban.covid"
+      />
 
 </configure>

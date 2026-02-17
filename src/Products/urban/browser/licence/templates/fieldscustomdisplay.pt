@@ -1,272 +1,373 @@
 <metal:foldermanagers define-macro="foldermanagers">
-    <td valign="top"><b><span i18n:translate="urban_label_foldermanagers">Treating agent</span>:</b></td>
-    <td width="10px"></td>
-    <td valign="top"><div metal:use-macro="here/@@licencemacros/urbanFolderManagerMacro" /></td>
+  <td valign="top"><b><span i18n:translate="urban_label_foldermanagers">Treating agent</span>:</b></td>
+  <td width="10px"></td>
+  <td valign="top"><div metal:use-macro="here/@@licencemacros/urbanFolderManagerMacro"></div></td>
 </metal:foldermanagers>
 
 
 <metal:subdivision define-macro="impactStudy">
-    <td valign="top"><b><span i18n:translate="urban_label_impactStudy">impact study</span>:</b></td>
-    <td width="10px"></td>
-    <td width="49%" valign="top" valign="top" tal:define="has_impact_study context/getImpactStudy; info view/getImpactStudyInfos">
-        <tal:has_impact_study condition="python: not info or not info['date']">
-            <metal:myfield use-macro="python:here.widget('impactStudy', mode='view')" />
-        </tal:has_impact_study>
-        <tal:has_impact_study condition="python: info and info['date']">
-            <a href="#" tal:condition="python: info and info['date']" tal:attributes="href python: info['url']" tal:content="python: info['date']">Content</a>
-        </tal:has_impact_study>
-    </td>
+  <td valign="top"><b><span i18n:translate="urban_label_impactStudy">impact study</span>:</b></td>
+  <td width="10px"></td>
+  <td valign="top"
+      width="49%"
+      tal:define="
+        has_impact_study context/getImpactStudy;
+        info view/getImpactStudyInfos;
+      "
+  >
+    <tal:has_impact_study condition="python: not info or not info['date']">
+      <metal:myfield use-macro="python:here.widget('impactStudy', mode='view')" />
+    </tal:has_impact_study>
+    <tal:has_impact_study condition="python: info and info['date']">
+      <a href="#"
+         tal:condition="python: info and info['date']"
+         tal:content="python: info['date']"
+         tal:attributes="
+           href python: info['url'];
+         "
+      >Content</a>
+    </tal:has_impact_study>
+  </td>
 </metal:subdivision>
 
 
 <metal:subdivision define-macro="isInSubdivision">
-    <td valign="top"><b><span tal:content="python: context.getField('isInSubdivision').widget.label" i18n:translate="">In subdivision?</span>:</b></td>
-    <td width="10px"></td>
-    <td width="49%" valign="top" valign="top" tal:define="isInSubdivision context/getIsInSubdivision">
-        <metal:myfield use-macro="python:here.widget('isInSubdivision', mode='view')" />
-        <tal:isInSubdivision condition="isInSubdivision">
-            <br />
-            <metal:myfield use-macro="python:here.widget('parcellings', mode='view')" />
-            <br />
-            <tal:block replace="structure context/getSubdivisionDetails" />
-        </tal:isInSubdivision>
-    </td>
+  <td valign="top"><b><span tal:content="python: context.getField('isInSubdivision').widget.label"
+            i18n:translate=""
+      >In subdivision?</span>:</b></td>
+  <td width="10px"></td>
+  <td valign="top"
+      width="49%"
+      tal:define="
+        isInSubdivision context/getIsInSubdivision;
+      "
+  >
+    <metal:myfield use-macro="python:here.widget('isInSubdivision', mode='view')" />
+    <tal:isinsubdivision condition="isInSubdivision">
+      <br />
+      <metal:myfield use-macro="python:here.widget('parcellings', mode='view')" />
+      <br />
+      <tal:block replace="structure context/getSubdivisionDetails" />
+    </tal:isinsubdivision>
+  </td>
 </metal:subdivision>
 
 
 <metal:pca define-macro="isInPCA">
-    <td valign="top">
-        <b>
-            <span i18n:translate="" tal:content="python: context.getField('pca').widget.label">In PCA?</span>:
-        </b>
-    </td>
-    <td width="10px"></td>
-    <td valign="top" tal:define="isInPCA context/getIsInPCA">
-        <metal:myfield use-macro="python:here.widget('isInPCA', mode='view')" />
-        <tal:isInPCA condition="isInPCA">
-            <br />
-            <metal:myfield use-macro="python:here.widget('pca', mode='view')" />
-            <br />
-            <tal:block replace="structure context/getPcaDetails" />
-        </tal:isInPCA>
-    </td>
+  <td valign="top">
+    <b>
+      <span tal:content="python: context.getField('pca').widget.label"
+            i18n:translate=""
+      >In PCA?</span>:
+    </b>
+  </td>
+  <td width="10px"></td>
+  <td valign="top"
+      tal:define="
+        isInPCA context/getIsInPCA;
+      "
+  >
+    <metal:myfield use-macro="python:here.widget('isInPCA', mode='view')" />
+    <tal:isinpca condition="isInPCA">
+      <br />
+      <metal:myfield use-macro="python:here.widget('pca', mode='view')" />
+      <br />
+      <tal:block replace="structure context/getPcaDetails" />
+    </tal:isinpca>
+  </td>
 </metal:pca>
 
 
 <metal:subdivision define-macro="delayAfterModifiedBlueprints">
-    <tal:modified_blueprints define="modified_blueprints context/getHasModifiedBlueprints" condition="modified_blueprints">
-        <td valign="top"><b><span i18n:translate="urban_label_delayAfterModifiedBlueprints">Modified blueprints?</span>:</b></td>
-        <td width="10px"></td>
-        <td width="49%" valign="top" valign="top">
-            <metal:myfield use-macro="python:here.widget('delayAfterModifiedBlueprints', mode='view')" />
-        </td>
-    </tal:modified_blueprints>
+  <tal:modified_blueprints define="
+                             modified_blueprints context/getHasModifiedBlueprints;
+                           "
+                           condition="modified_blueprints"
+  >
+    <td valign="top"><b><span i18n:translate="urban_label_delayAfterModifiedBlueprints">Modified blueprints?</span>:</b></td>
+    <td width="10px"></td>
+    <td valign="top"
+        width="49%"
+    >
+      <metal:myfield use-macro="python:here.widget('delayAfterModifiedBlueprints', mode='view')" />
+    </td>
+  </tal:modified_blueprints>
 </metal:subdivision>
 
 
 <metal:subdivision define-macro="delayAfterModifiedBlueprintsDetails">
-    <tal:modified_blueprints define="modified_blueprints context/getHasModifiedBlueprints" condition="modified_blueprints">
-        <td valign="top"><b><span i18n:translate="urban_label_delayAfterModifiedBlueprintsDetails">Modified blueprints?</span>:</b></td>
-        <td width="10px"></td>
-        <td width="49%" valign="top" valign="top">
-            <metal:myfield use-macro="python:here.widget('delayAfterModifiedBlueprintsDetails', mode='view')" />
-        </td>
-    </tal:modified_blueprints>
+  <tal:modified_blueprints define="
+                             modified_blueprints context/getHasModifiedBlueprints;
+                           "
+                           condition="modified_blueprints"
+  >
+    <td valign="top"><b><span i18n:translate="urban_label_delayAfterModifiedBlueprintsDetails">Modified blueprints?</span>:</b></td>
+    <td width="10px"></td>
+    <td valign="top"
+        width="49%"
+    >
+      <metal:myfield use-macro="python:here.widget('delayAfterModifiedBlueprintsDetails', mode='view')" />
+    </td>
+  </tal:modified_blueprints>
 </metal:subdivision>
 
 
-<metal:investigationArticles define-macro="investigationArticles">
+<metal:investigationarticles define-macro="investigationArticles">
 
-    <tr tal:define="investigationArticles context/getCustomInvestigationArticles" tal:repeat="investigationArticle investigationArticles">
-        <td><tal:firstLabel condition="python:repeat['investigationArticle'].index == 0"><b><span i18n:translate="urban_label_investigationArticles">investigationArticles</span>:</b></tal:firstLabel></td>
-        <td width="10px"></td>
-        <td tal:content="investigationArticle">Specific feature</td>
-    </tr>
+  <tr tal:define="
+        investigationArticles context/getCustomInvestigationArticles;
+      "
+      tal:repeat="investigationArticle investigationArticles"
+  >
+    <td><tal:firstlabel condition="python:repeat['investigationArticle'].index == 0"><b><span i18n:translate="urban_label_investigationArticles">investigationArticles</span>:</b></tal:firstlabel></td>
+    <td width="10px"></td>
+    <td tal:content="investigationArticle">Specific feature</td>
+  </tr>
 
-</metal:investigationArticles>
+</metal:investigationarticles>
 
 <metal:habitation define-macro="noApplication">
 
-    <tal:not_applicable condition="context/getNoApplication">
-        <td valign="top"><b><span i18n:translate="urban_label_noApplication">Not applicable</span></b></td>
-    </tal:not_applicable>
+  <tal:not_applicable condition="context/getNoApplication">
+    <td valign="top"><b><span i18n:translate="urban_label_noApplication">Not applicable</span></b></td>
+  </tal:not_applicable>
 
-    <tal:applicable condition="not: context/getNoApplication">
-        <tal:loop repeat="field python: view.getHabitationFields(default_custom)">
-            <metal:field_display use-macro="here/@@licencetabs-macros/field_display" />
-        </tal:loop>
-    </tal:applicable>
+  <tal:applicable condition="not: context/getNoApplication">
+    <tal:loop repeat="field python: view.getHabitationFields(default_custom)">
+      <metal:field_display use-macro="here/@@licencetabs-macros/field_display" />
+    </tal:loop>
+  </tal:applicable>
 
 </metal:habitation>
 
 
 <metal:spf_display define-macro="spf_display">
-    <td width="10px"></td>
-    <td tal:condition="not: specificfeatures" >
-        <span class="discreet" i18n:translate="content_none">Aucun(e)</span>
-    </td>
-    <td tal:condition="specificfeatures">
-        <table>
-            <tr tal:repeat="specificfeature specificfeatures">
-                <td tal:content="specificfeature">Specific feature</td>
-            </tr>
-        </table>
-    </td>
-    <td width="10px"></td>
+  <td width="10px"></td>
+  <td tal:condition="not: specificfeatures">
+    <span class="discreet"
+          i18n:translate="content_none"
+    >Aucun(e)</span>
+  </td>
+  <td tal:condition="specificfeatures">
+    <table>
+      <tr tal:repeat="specificfeature specificfeatures">
+        <td tal:content="specificfeature">Specific feature</td>
+      </tr>
+    </table>
+  </td>
+  <td width="10px"></td>
 </metal:spf_display>
 
 
 <metal:road_spf define-macro="roadSpecificFeatures">
-    <tal:vars define="specificfeatures python: view.getSpecificFeatures(subtype='road')">
-        <td valign="top">
-            <b><span i18n:translate="urban_label_roadSpecificFeatures">Specific features (road)</span>:</b>
-        </td>
-        <metal:spf_display use-macro="here/@@fielddisplay-macros/spf_display" />
-    </tal:vars>
+  <tal:vars define="
+              specificfeatures python: view.getSpecificFeatures(subtype='road');
+            ">
+    <td valign="top">
+      <b><span i18n:translate="urban_label_roadSpecificFeatures">Specific features (road)</span>:</b>
+    </td>
+    <metal:spf_display use-macro="here/@@fielddisplay-macros/spf_display" />
+  </tal:vars>
 </metal:road_spf>
 
 
 <metal:location_spf define-macro="locationSpecificFeatures">
-    <tal:vars define="specificfeatures python: view.getSpecificFeatures(subtype='location')">
-        <td valign="top">
-            <b><span i18n:translate="urban_label_locationSpecificFeatures">Specific features (location)</span>:</b>
-        </td>
-        <metal:spf_display use-macro="here/@@fielddisplay-macros/spf_display" />
-    </tal:vars>
+  <tal:vars define="
+              specificfeatures python: view.getSpecificFeatures(subtype='location');
+            ">
+    <td valign="top">
+      <b><span i18n:translate="urban_label_locationSpecificFeatures">Specific features (location)</span>:</b>
+    </td>
+    <metal:spf_display use-macro="here/@@fielddisplay-macros/spf_display" />
+  </tal:vars>
 </metal:location_spf>
 
 
 <metal:spf_fieldset define-macro="spf_fieldset">
-    <table tal:define="specificfeatures_types python: ['', 'custom', 'township',]"
-            class="no-style-table" cellspacing=0 cellpadding=0 width=100%>
-        <tal:specificfeatures repeat="subtype specificfeatures_types ">
-            <tr tal:condition="python: '%s%specificFeatures' % (subtype, subtype and 'S' or 's') in usedAttributes"
-                tal:define="specificfeatures python: view.getSpecificFeatures(subtype=subtype);
-                            translation python: 'urban_label_%s%specificFeatures' % (subtype, subtype and 'S' or 's')">
-                <td valign="top"><b><span   i18n:translate="" tal:content="translation">Specific features</span>:</b></td>
-                <metal:spf_display use-macro="here/@@fielddisplay-macros/spf_display" />
-            </tr>
-        </tal:specificfeatures>
-    </table>
+  <table class="no-style-table"
+         cellpadding="0"
+         cellspacing="0"
+         width="100%"
+         tal:define="
+           specificfeatures_types python: ['', 'custom', 'township',];
+         "
+  >
+    <tal:specificfeatures repeat="subtype specificfeatures_types ">
+      <tr tal:define="
+            specificfeatures python: view.getSpecificFeatures(subtype=subtype);
+            translation python: 'urban_label_%s%specificFeatures' % (subtype, subtype and 'S' or 's');
+          "
+          tal:condition="python: '%s%specificFeatures' % (subtype, subtype and 'S' or 's') in usedAttributes"
+      >
+        <td valign="top"><b><span tal:content="translation"
+                  i18n:translate=""
+            >Specific features</span>:</b></td>
+        <metal:spf_display use-macro="here/@@fielddisplay-macros/spf_display" />
+      </tr>
+    </tal:specificfeatures>
+  </table>
 </metal:spf_fieldset>
 
 
 <metal:rubrics define-macro="rubrics">
-    <tal:vars define="rubrics view/getRubrics">
-        <td valign="top"><b><span i18n:translate="urban_label_rubrics">Rubrics</span>:</b></td>
-        <td width="10px"></td>
-        <td tal:condition="not: rubrics" >
-            <span class="discreet" i18n:translate="content_none">Aucun(e)</span>
-        </td>
-        <td tal:condition="rubrics">
-            <ul>
-                <tal:rubric repeat="rubric rubrics">
-                    <li><tal:value tal:replace="structure python: rubric">Rubric</tal:value>
-                </tal:rubric>
-            </ul>
-        </td>
-    </tal:vars>
+  <tal:vars define="
+              rubrics view/getRubrics;
+            ">
+    <td valign="top"><b><span i18n:translate="urban_label_rubrics">Rubrics</span>:</b></td>
+    <td width="10px"></td>
+    <td tal:condition="not: rubrics">
+      <span class="discreet"
+            i18n:translate="content_none"
+      >Aucun(e)</span>
+    </td>
+    <td tal:condition="rubrics">
+      <ul>
+        <tal:rubric repeat="rubric rubrics">
+          <li><tal:value tal:replace="structure python: rubric">Rubric</tal:value>
+          </li></tal:rubric>
+      </ul>
+    </td>
+  </tal:vars>
 </metal:rubrics>
 
 
 <metal:legal_conditions define-macro="minimumLegalConditions">
-<tal:vars define="min_conditions view/getMinimumConditions;">
-        <td valign="top"><b><span i18n:translate="urban_label_minimumLegalConditions">Exploitation conditions</span>:</b></td>
-        <td width="10px"></td>
-        <td tal:condition="python: not min_conditions" valign="top">
-            <span class="discreet" i18n:translate="content_none">Aucun(e)</span>
-        </td>
-        <td id="urban-minimum-conditions" tal:condition="python: min_conditions">
-            <ul>
-                <tal:rubric repeat="cond min_conditions">
-                    <li><span tal:content="python: '%s :' % cond['type']">condition type</span>
-                    <a tal:attributes="href python: cond['url']; class python: 'link-overlay'" tal:content="python: cond['title']"></a>
-                </tal:rubric>
-            </ul>
-        </td>
-    </tal:vars>
+  <tal:vars define="
+              min_conditions view/getMinimumConditions;
+            ">
+    <td valign="top"><b><span i18n:translate="urban_label_minimumLegalConditions">Exploitation conditions</span>:</b></td>
+    <td width="10px"></td>
+    <td valign="top"
+        tal:condition="python: not min_conditions"
+    >
+      <span class="discreet"
+            i18n:translate="content_none"
+      >Aucun(e)</span>
+    </td>
+    <td id="urban-minimum-conditions"
+        tal:condition="python: min_conditions"
+    >
+      <ul>
+        <tal:rubric repeat="cond min_conditions">
+          <li><span tal:content="python: '%s :' % cond['type']">condition type</span>
+            <a tal:content="python: cond['title']"
+               tal:attributes="
+                 href python: cond['url'];
+                 class python: 'link-overlay';
+               "
+            ></a>
+          </li></tal:rubric>
+      </ul>
+    </td>
+  </tal:vars>
 </metal:legal_conditions>
 
 
 <metal:additional_conditions define-macro="hasAdditionalConditions">
-    <tal:vars define="field python: 'additionalConditions';
-                      hasAdditionalConditions context/getHasAdditionalConditions">
-        <td valign="top">
-            <b>
-                 <span i18n:translate="urban_label_additionalConditions">
+  <tal:vars define="
+              field python: 'additionalConditions';
+              hasAdditionalConditions context/getHasAdditionalConditions;
+            ">
+    <td valign="top">
+      <b>
+        <span i18n:translate="urban_label_additionalConditions">
                      Additional exploitation conditions
-                 </span>:
-            </b>
-        </td>
-        <td width="10px"></td>
-        <td valign="top" id="urban-additional-conditions"
-                tal:condition="hasAdditionalConditions">
-            <metal:myfield use-macro="python:here.widget('additionalConditions', mode='view')" />
-        </td>
-        <td valign="top" tal:condition="python: not hasAdditionalConditions">
-            <span i18n:translate="label_no">No</span>
-        </td>
-    </tal:vars>
+        </span>:
+      </b>
+    </td>
+    <td width="10px"></td>
+    <td id="urban-additional-conditions"
+        valign="top"
+        tal:condition="hasAdditionalConditions"
+    >
+      <metal:myfield use-macro="python:here.widget('additionalConditions', mode='view')" />
+    </td>
+    <td valign="top"
+        tal:condition="python: not hasAdditionalConditions"
+    >
+      <span i18n:translate="label_no">No</span>
+    </td>
+  </tal:vars>
 </metal:additional_conditions>
 
 
 <metal:previous_licences define-macro="previousLicences">
-    <tal:vars define="previousLicences context/getPreviousLicences">
-        <td valign="top">
-            <b>
-                 <span i18n:translate="urban_label_previousLicences">
+  <tal:vars define="
+              previousLicences context/getPreviousLicences;
+            ">
+    <td valign="top">
+      <b>
+        <span i18n:translate="urban_label_previousLicences">
                     Previous environment licences
-                 </span>:
-            </b>
-        </td>
-        <td width="10px"></td>
-        <td valign="top"
-            tal:condition="python: previousLicences">
-            <ul>
-                <tal:licence repeat="licence previousLicences">
-                    <li>
-                    <a tal:attributes="href licence/absolute_url" tal:content="licence/Title"></a>
-                </tal:licence>
-            </ul>
-        </td>
-        <td tal:condition="python: not previousLicences" >
-            <span class="discreet" i18n:translate="content_none">Aucun(e)</span>
-        </td>
-    </tal:vars>
+        </span>:
+      </b>
+    </td>
+    <td width="10px"></td>
+    <td valign="top"
+        tal:condition="python: previousLicences"
+    >
+      <ul>
+        <tal:licence repeat="licence previousLicences">
+          <li>
+            <a tal:content="licence/Title"
+               tal:attributes="
+                 href licence/absolute_url;
+               "
+            ></a>
+          </li></tal:licence>
+      </ul>
+    </td>
+    <td tal:condition="python: not previousLicences">
+      <span class="discreet"
+            i18n:translate="content_none"
+      >Aucun(e)</span>
+    </td>
+  </tal:vars>
 </metal:previous_licences>
 
 
 <metal:validity_duration define-macro="validityDelay">
-    <tal:vars define="validity_delay context/getValidityDelay">
-        <td valign="top">
-            <b>
-                 <span i18n:translate="urban_label_validityDelay">
+  <tal:vars define="
+              validity_delay context/getValidityDelay;
+            ">
+    <td valign="top">
+      <b>
+        <span i18n:translate="urban_label_validityDelay">
                     Validity delay
-                 </span>:
-            </b>
-        </td>
-        <td width="10px"></td>
-        <td valign="top"
-            tal:condition="python: validity_delay">
-            <span tal:replace="validity_delay"></span> <span i18n:translate="">years</span>
-        </td>
-        <td tal:condition="python: not validity_delay">
-            <span class="discreet" i18n:translate="content_none">Aucun(e)</span>
-        </td>
-    </tal:vars>
+        </span>:
+      </b>
+    </td>
+    <td width="10px"></td>
+    <td valign="top"
+        tal:condition="python: validity_delay"
+    >
+      <span tal:replace="validity_delay"></span>
+      <span i18n:translate="">years</span>
+    </td>
+    <td tal:condition="python: not validity_delay">
+      <span class="discreet"
+            i18n:translate="content_none"
+      >Aucun(e)</span>
+    </td>
+  </tal:vars>
 </metal:validity_duration>
 
-<metal:procedureChoiceIsArticle65 define-macro="bound_licences">
-    <tal:vars define="procedureChoice context/getProcedureChoice">
-        <tal:procedureChoice condition="python:procedureChoice == 'article65'">
-            <td valign="top"><b><span tal:content="python: context.getField('bound_licences').widget.label" i18n:translate="">Bound licences</span>:</b></td>
-            <td width="10px"></td>
-            <td width="49%" valign="top" valign="top">
-                <br />
-                <metal:myfield use-macro="python:here.widget('bound_licences', mode='view')" />
-                <br />
-            </td>
-        </tal:procedureChoice>
-    </tal:vars>
-</metal:procedureChoiceIsArticle65>
-
+<metal:procedurechoiceisarticle65 define-macro="bound_licences">
+  <tal:vars define="
+              procedureChoice context/getProcedureChoice;
+            ">
+    <tal:procedurechoice condition="python:procedureChoice == 'article65'">
+      <td valign="top"><b><span tal:content="python: context.getField('bound_licences').widget.label"
+                i18n:translate=""
+          >Bound licences</span>:</b></td>
+      <td width="10px"></td>
+      <td valign="top"
+          width="49%"
+      >
+        <br />
+        <metal:myfield use-macro="python:here.widget('bound_licences', mode='view')" />
+        <br />
+      </td>
+    </tal:procedurechoice>
+  </tal:vars>
+</metal:procedurechoiceisarticle65>

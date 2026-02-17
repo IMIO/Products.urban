@@ -1,17 +1,37 @@
-<configure xmlns="http://namespaces.zope.org/zope"
-           xmlns:i18n="http://namespaces.zope.org/i18n"
-           i18n_domain="urban">
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    i18n_domain="urban"
+    >
 
-  <adapter name="licence_final_duedate" factory=".indexes.licence_final_duedate" />
+  <adapter
+      factory=".indexes.licence_final_duedate"
+      name="licence_final_duedate"
+      />
 
-  <adapter name="getReference" factory=".indexes.licence_reference_index" />
+  <adapter
+      factory=".indexes.licence_reference_index"
+      name="getReference"
+      />
 
-  <adapter name="StreetsUID" factory=".indexes.licence_street_index" />
+  <adapter
+      factory=".indexes.licence_street_index"
+      name="StreetsUID"
+      />
 
-  <adapter name="StreetNumber" factory=".indexes.licence_streetnumber_index" />
+  <adapter
+      factory=".indexes.licence_streetnumber_index"
+      name="StreetNumber"
+      />
 
-  <adapter name="folder_manager" factory=".indexes.licence_foldermanager_index" />
+  <adapter
+      factory=".indexes.licence_foldermanager_index"
+      name="folder_manager"
+      />
 
-  <adapter name="applicantInfosIndex" factory=".indexes.licence_applicant_index" />
+  <adapter
+      factory=".indexes.licence_applicant_index"
+      name="applicantInfosIndex"
+      />
 
 </configure>

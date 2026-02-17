@@ -1,36 +1,64 @@
 <metal:edit define-macro="editUrbanEventInquiry"
-               tal:define="member context/@@plone_portal_state/member;
-                       border python: member.has_role('Manager') and 'enable_border' or 'disable_border';
-                       dummy python:request.set(border, 1);
-                       putils context/plone_utils;">
+            tal:define="
+              member context/@@plone_portal_state/member;
+              border python: member.has_role('Manager') and 'enable_border' or 'disable_border';
+              dummy python:request.set(border, 1);
+              putils context/plone_utils;
+            "
+>
 
-      <tal:fieldsets repeat="fieldset python: ['default',]">
-        <fieldset class="urbanEditWithTabbing" tal:define="fieldsetid python:putils.normalizeString(fieldset)"
-                tal:attributes="id string:fieldset-${fieldsetid}">
-          <legend id="#"
-                  tal:content="python: view.getTranslatedSchemaLabel(fieldset)"
-                  tal:attributes="id string:fieldsetlegend-${fieldsetid}"
-                  i18n:translate="" />
+  <tal:fieldsets repeat="fieldset python: ['default',]">
+    <fieldset class="urbanEditWithTabbing"
+              tal:define="
+                fieldsetid python:putils.normalizeString(fieldset);
+              "
+              tal:attributes="
+                id string:fieldset-${fieldsetid};
+              "
+    >
+      <legend id="#"
+              tal:content="python: view.getTranslatedSchemaLabel(fieldset)"
+              tal:attributes="
+                id string:fieldsetlegend-${fieldsetid};
+              "
+              i18n:translate=""
+      ></legend>
 
-          <script type="text/javascript"
-                  charset="iso-8859-1"
-                  tal:attributes="src string:$portal_url/inquiry_dates.js">
-          </script>
+      <script charset="iso-8859-1"
+              type="text/javascript"
+              tal:attributes="
+                src string:$portal_url/inquiry_dates.js;
+              "
+      >
+      </script>
 
-          <metal:fieldMacro use-macro="python:here.widget('investigationStart', mode='edit')" />
+      <metal:fieldmacro use-macro="python:here.widget('investigationStart', mode='edit')" />
 
-          <input type="button" value="Calculer la date de fin"
-                 tal:define="inquiry_url context/absolute_url"
-                 tal:attributes="onclick python: 'javascript:get_end_date(\'%s\')' % inquiry_url"
-                 i18n:attributes="value label_ok;" />
+      <input type="button"
+             value="Calculer la date de fin"
+             tal:define="
+               inquiry_url context/absolute_url;
+             "
+             tal:attributes="
+               onclick python: 'javascript:get_end_date(\'%s\')' % inquiry_url;
+             "
+             i18n:attributes="value label_ok;"
+      />
 
-          <metal:fieldMacro use-macro="python:here.widget('investigationEnd', mode='edit')" />
+      <metal:fieldmacro use-macro="python:here.widget('investigationEnd', mode='edit')" />
 
-          <tal:fields repeat="field python:view.get_editable_fields(schematas[fieldset])">
-           <metal:fieldMacro use-macro="python:here.widget(field.getName(), mode='edit')" />
-          </tal:fields>
-        </fieldset>
-      </tal:fieldsets>
-      <!-- Next hidden input is to be able to retrieve its event config by UID when the event is first created in a temp folder from portal_factory -->
-      <input type='hidden' name="urbaneventtypes" id=ref_browser_urbaneventtypes" tal:attributes="value view/get_event_config_uid" value=''>
+      <tal:fields repeat="field python:view.get_editable_fields(schematas[fieldset])">
+        <metal:fieldmacro use-macro="python:here.widget(field.getName(), mode='edit')" />
+      </tal:fields>
+    </fieldset>
+  </tal:fieldsets>
+  <!-- Next hidden input is to be able to retrieve its event config by UID when the event is first created in a temp folder from portal_factory -->
+  <input id='ref_browser_urbaneventtypes"'
+         name="urbaneventtypes"
+         type="hidden"
+         value=""
+         tal:attributes="
+           value view/get_event_config_uid;
+         "
+  />
 </metal:edit>

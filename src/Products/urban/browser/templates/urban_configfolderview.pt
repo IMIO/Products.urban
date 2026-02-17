@@ -1,67 +1,100 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+<html xmlns="http://www.w3.org/1999/xhtml"
       lang="en"
       metal:use-macro="here/main_template/macros/master"
-      i18n:domain="plone">
+      xml:lang="en"
+      i18n:domain="plone"
+>
 
-<body>
+  <body>
 
-<div metal:fill-slot="top_slot">
-<metal:block metal:use-macro="here/global_defines/macros/defines" />
-<div tal:define="member context/@@plone_portal_state/member;
-                 dummy python:request.set(member.has_permission('Manage portal', here) and 'enable_border' or 'disable_border', 1)" />
-</div>
+    <div metal:fill-slot="top_slot">
+      <metal:block metal:use-macro="here/global_defines/macros/defines" />
+      <div tal:define="
+             member context/@@plone_portal_state/member;
+             dummy python:request.set(member.has_permission('Manage portal', here) and 'enable_border' or 'disable_border', 1);
+           "></div>
+    </div>
 
-<div metal:fill-slot="main">
-<metal:main_macro define-macro="main">
-    <metal:body define-macro="body_macro"
-                tal:define="kssClassesView context/@@kss_field_decorator_view;
-                            getKssClasses nocall:kssClassesView/getKssClassesInlineEditable;
-                            templateId template/getId;
-                            isAnon python: context.portal_membership.isAnonymousUser()">
+    <div metal:fill-slot="main">
+      <metal:main_macro define-macro="main">
+        <metal:body define-macro="body_macro"
+                    tal:define="
+                      kssClassesView context/@@kss_field_decorator_view;
+                      getKssClasses nocall:kssClassesView/getKssClassesInlineEditable;
+                      templateId template/getId;
+                      isAnon python: context.portal_membership.isAnonymousUser();
+                    "
+        >
 
-        <div tal:replace="structure provider:plone.abovecontenttitle" />
+          <div tal:replace="structure provider:plone.abovecontenttitle"></div>
 
-        <h1 class="documentFirstHeading">
+          <h1 class="documentFirstHeading">
             <metal:field use-macro="python:here.widget('title', mode='view')">
             Title
             </metal:field>
-        </h1>
-        <div class="field">
-        <tal:addable_types define="acts context/allowedContentTypes" repeat="act acts" i18n:domain="urban">
-        <form tal:condition="python: not isAnon" name="quickAdd"
-              tal:define="is_DX python: 'DexterityFTI' in str(act)"                                   
-              tal:attributes="action python: '{}/{}'.format(context.absolute_url(), is_DX and '++add++{}'.format(act.id) or 'createObject')"
-              action="" method="post">
-          <input type="hidden" name="type_name" value="#" tal:attributes="value act/id" />
-          <input type="submit" id="event" value="#"
-                 tal:attributes="value python: 'add_' + act.id;
-                                 class view/getCSSClass"
-                 i18n:attributes="value" />
-         </form>
-        </tal:addable_types>
-        </div>
+          </h1>
+          <div class="field">
+            <tal:addable_types define="
+                                 acts context/allowedContentTypes;
+                               "
+                               repeat="act acts"
+                               i18n:domain="urban"
+            >
+              <form action=""
+                    method="post"
+                    name="quickAdd"
+                    tal:define="
+                      is_DX python: 'DexterityFTI' in str(act);
+                    "
+                    tal:condition="python: not isAnon"
+                    tal:attributes="
+                      action python: '{}/{}'.format(context.absolute_url(), is_DX and '++add++{}'.format(act.id) or 'createObject');
+                    "
+              >
+                <input name="type_name"
+                       type="hidden"
+                       value="#"
+                       tal:attributes="
+                         value act/id;
+                       "
+                />
+                <input id="event"
+                       type="submit"
+                       value="#"
+                       tal:attributes="
+                         value python: 'add_' + act.id;
+                         class view/getCSSClass;
+                       "
+                       i18n:attributes="value"
+                />
+              </form>
+            </tal:addable_types>
+          </div>
 
-        <div style="vertical-align:top; max-width: 45%; display:inline-block"
-            tal:define="form nocall:view/form">
+          <div style="vertical-align:top; max-width: 45%; display:inline-block"
+               tal:define="
+                 form nocall:view/form;
+               "
+          >
             <fieldset>
-            <legend i18n:translate="">Filter</legend>
-                <span tal:replace="structure view/contents" />
+              <legend i18n:translate="">Filter</legend>
+              <span tal:replace="structure view/contents"></span>
             </fieldset>
-        </div>
+          </div>
 
-        <div tal:replace="structure provider:plone.abovecontentbody" />
+          <div tal:replace="structure provider:plone.abovecontentbody"></div>
 
-        <div>
+          <div>
             <tal:listing content="structure view/search_result/render" />
             <tal:batch content="structure view/search_result/renderBatch" />
-        </div>
+          </div>
 
-    </metal:body>
-    <div tal:replace="structure provider:plone.belowcontentbody" />
+        </metal:body>
+        <div tal:replace="structure provider:plone.belowcontentbody"></div>
 
-</metal:main_macro>
+      </metal:main_macro>
 
-</div>
+    </div>
 
-</body>
+  </body>
 </html>

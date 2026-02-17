@@ -1,694 +1,944 @@
-<?xml version="1.0"?>
-<dc-workflow
-  workflow_id="inspection_workflow"
-  title="inspection_workflow"
-  description=""
-  state_variable="review_state"
-  initial_state="creation"
-  manager_bypass="False"
-  xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-  i18n:domain="plone">
- <permission>ATContentTypes: Add File</permission>
- <permission>ATContentTypes: Add Image</permission>
- <permission>Access contents information</permission>
- <permission>Add portal content</permission>
- <permission>Delete objects</permission>
- <permission>Modify portal content</permission>
- <permission>View</permission>
- <permission>liege.urban: External Reader</permission>
- <permission>liege.urban: Internal Editor</permission>
- <permission>liege.urban: Internal Reader</permission>
- <permission>liege.urban: Validate</permission>
- <permission>urban: Add Applicant</permission>
- <permission>urban: Add Contact</permission>
- <permission>urban: Add Corporation</permission>
- <permission>urban: Add UrbanEvent</permission>
- <permission>urban: Add UrbanEventInspectionReport</permission>
- <permission>urban: Add UrbanEventOpinionRequest</permission>
- <permission>List folder contents</permission>
- <permission>Manage properties</permission>
- <state state_id="creation" title="creation" i18n:attributes="title">
-  <exit-transition transition_id="send_to_prosecutor"/>
-  <permission-map name="ATContentTypes: Add File" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="ATContentTypes: Add Image" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="Access contents information" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>ExternalReader</permission-role>
-   <permission-role>Manager</permission-role>
-   <permission-role>Reader</permission-role>
-  </permission-map>
-  <permission-map name="Add portal content" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-   <permission-role>Reader</permission-role>
-  </permission-map>
-  <permission-map name="Delete objects" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="List folder contents" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>ExternalReader</permission-role>
-   <permission-role>Manager</permission-role>
-   <permission-role>Reader</permission-role>
-  </permission-map>
-  <permission-map name="Modify portal content" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="Manage properties" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="View" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>ExternalReader</permission-role>
-   <permission-role>Manager</permission-role>
-   <permission-role>Reader</permission-role>
-  </permission-map>
-  <permission-map name="liege.urban: External Reader" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-   <permission-role>Reader</permission-role>
-  </permission-map>
-  <permission-map name="liege.urban: Internal Editor" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="liege.urban: Internal Reader" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-   <permission-role>Reader</permission-role>
-  </permission-map>
-  <permission-map name="liege.urban: Validate" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add Applicant" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add Contact" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add Corporation" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add CODT_Inquiry" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add UrbanEvent" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add UrbanEventOpinionRequest" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add UrbanEventInspectionReport" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
- </state>
- <state state_id="prosecution_analysis" title="prosecution_analysis" i18n:attributes="title">
-  <exit-transition transition_id="follow_with_prosecutor"/>
-  <exit-transition transition_id="follow_without_prosecutor"/>
-  <permission-map name="ATContentTypes: Add File" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="ATContentTypes: Add Image" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="Access contents information" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>ExternalReader</permission-role>
-   <permission-role>Manager</permission-role>
-   <permission-role>Reader</permission-role>
-  </permission-map>
-  <permission-map name="Add portal content" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-   <permission-role>Reader</permission-role>
-  </permission-map>
-  <permission-map name="Delete objects" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="List folder contents" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>ExternalReader</permission-role>
-   <permission-role>Manager</permission-role>
-   <permission-role>Reader</permission-role>
-  </permission-map>
-  <permission-map name="Modify portal content" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="Manage properties" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="View" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>ExternalReader</permission-role>
-   <permission-role>Manager</permission-role>
-   <permission-role>Reader</permission-role>
-  </permission-map>
-  <permission-map name="liege.urban: External Reader" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-   <permission-role>Reader</permission-role>
-  </permission-map>
-  <permission-map name="liege.urban: Internal Editor" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="liege.urban: Internal Reader" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-   <permission-role>Reader</permission-role>
-  </permission-map>
-  <permission-map name="liege.urban: Validate" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add Applicant" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add Contact" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add Corporation" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add CODT_Inquiry" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add UrbanEvent" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add UrbanEventOpinionRequest" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add UrbanEventInspectionReport" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
- </state>
- <state state_id="in_progress_with_prosecutor" title="in_progress_with_prosecutor" i18n:attributes="title">
-  <exit-transition transition_id="close"/>
-  <permission-map name="ATContentTypes: Add File" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="ATContentTypes: Add Image" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="Access contents information" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>ExternalReader</permission-role>
-   <permission-role>Manager</permission-role>
-   <permission-role>Reader</permission-role>
-  </permission-map>
-  <permission-map name="Add portal content" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-   <permission-role>Reader</permission-role>
-  </permission-map>
-  <permission-map name="Delete objects" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="List folder contents" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>ExternalReader</permission-role>
-   <permission-role>Manager</permission-role>
-   <permission-role>Reader</permission-role>
-  </permission-map>
-  <permission-map name="Modify portal content" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="Manage properties" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="View" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>ExternalReader</permission-role>
-   <permission-role>Manager</permission-role>
-   <permission-role>Reader</permission-role>
-  </permission-map>
-  <permission-map name="liege.urban: External Reader" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-   <permission-role>Reader</permission-role>
-  </permission-map>
-  <permission-map name="liege.urban: Internal Editor" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="liege.urban: Internal Reader" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-   <permission-role>Reader</permission-role>
-  </permission-map>
-  <permission-map name="liege.urban: Validate" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add Applicant" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add Contact" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add Corporation" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add CODT_Inquiry" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add UrbanEvent" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add UrbanEventOpinionRequest" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add UrbanEventInspectionReport" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
- </state>
- <state state_id="in_progress_without_prosecutor" title="in_progress_without_prosecutor" i18n:attributes="title">
-  <exit-transition transition_id="close"/>
-  <permission-map name="ATContentTypes: Add File" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="ATContentTypes: Add Image" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="Access contents information" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>ExternalReader</permission-role>
-   <permission-role>Manager</permission-role>
-   <permission-role>Reader</permission-role>
-  </permission-map>
-  <permission-map name="Add portal content" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-   <permission-role>Reader</permission-role>
-  </permission-map>
-  <permission-map name="Delete objects" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="List folder contents" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>ExternalReader</permission-role>
-   <permission-role>Manager</permission-role>
-   <permission-role>Reader</permission-role>
-  </permission-map>
-  <permission-map name="Modify portal content" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="Manage properties" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="View" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>ExternalReader</permission-role>
-   <permission-role>Manager</permission-role>
-   <permission-role>Reader</permission-role>
-  </permission-map>
-  <permission-map name="liege.urban: External Reader" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-   <permission-role>Reader</permission-role>
-  </permission-map>
-  <permission-map name="liege.urban: Internal Editor" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="liege.urban: Internal Reader" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-   <permission-role>Reader</permission-role>
-  </permission-map>
-  <permission-map name="liege.urban: Validate" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add Applicant" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add Contact" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add Corporation" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add CODT_Inquiry" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add UrbanEvent" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add UrbanEventOpinionRequest" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add UrbanEventInspectionReport" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
- </state>
- <state state_id="ended" title="ended" i18n:attributes="title">
-  <exit-transition transition_id="reopen"/>
-  <permission-map name="ATContentTypes: Add File" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="ATContentTypes: Add Image" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="Access contents information" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>ExternalReader</permission-role>
-   <permission-role>Manager</permission-role>
-   <permission-role>Reader</permission-role>
-  </permission-map>
-  <permission-map name="Add portal content" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-   <permission-role>Reader</permission-role>
-  </permission-map>
-  <permission-map name="Delete objects" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="List folder contents" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>ExternalReader</permission-role>
-   <permission-role>Manager</permission-role>
-   <permission-role>Reader</permission-role>
-  </permission-map>
-  <permission-map name="Modify portal content" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="Manage properties" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="View" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>ExternalReader</permission-role>
-   <permission-role>Manager</permission-role>
-   <permission-role>Reader</permission-role>
-  </permission-map>
-  <permission-map name="liege.urban: External Reader" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>ExternalReader</permission-role>
-   <permission-role>Manager</permission-role>
-   <permission-role>Reader</permission-role>
-  </permission-map>
-  <permission-map name="liege.urban: Internal Editor" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="liege.urban: Internal Reader" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-   <permission-role>Reader</permission-role>
-  </permission-map>
-  <permission-map name="liege.urban: Validate" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add Applicant" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add Contact" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add Corporation" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add CODT_Inquiry" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add UrbanEvent" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add UrbanEventOpinionRequest" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
-  <permission-map name="urban: Add UrbanEventInspectionReport" acquired="False">
-   <permission-role>Contributor</permission-role>
-   <permission-role>Editor</permission-role>
-   <permission-role>Manager</permission-role>
-  </permission-map>
- </state>
- <transition
-   transition_id="send_to_prosecutor"
-   title="send_to_prosecutor"
-   i18n:attributes="title"
-   new_state="prosecution_analysis"
-   trigger="USER"
-   before_script=""
-   after_script="">
-  <action url="" category="workflow" icon="">analyse</action>
-  <guard>
-    <guard-permission>Modify portal content</guard-permission>
+<?xml version="1.0" encoding="utf-8"?>
+<dc-workflow xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+             description=""
+             initial_state="creation"
+             manager_bypass="False"
+             state_variable="review_state"
+             title="inspection_workflow"
+             workflow_id="inspection_workflow"
+             i18n:domain="plone"
+>
+  <permission>ATContentTypes: Add File</permission>
+  <permission>ATContentTypes: Add Image</permission>
+  <permission>Access contents information</permission>
+  <permission>Add portal content</permission>
+  <permission>Delete objects</permission>
+  <permission>Modify portal content</permission>
+  <permission>View</permission>
+  <permission>liege.urban: External Reader</permission>
+  <permission>liege.urban: Internal Editor</permission>
+  <permission>liege.urban: Internal Reader</permission>
+  <permission>liege.urban: Validate</permission>
+  <permission>urban: Add Applicant</permission>
+  <permission>urban: Add Contact</permission>
+  <permission>urban: Add Corporation</permission>
+  <permission>urban: Add UrbanEvent</permission>
+  <permission>urban: Add UrbanEventInspectionReport</permission>
+  <permission>urban: Add UrbanEventOpinionRequest</permission>
+  <permission>List folder contents</permission>
+  <permission>Manage properties</permission>
+  <state state_id="creation"
+         title="creation"
+         i18n:attributes="title"
+  >
+    <exit-transition transition_id="send_to_prosecutor" />
+    <permission-map acquired="False"
+                    name="ATContentTypes: Add File"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="ATContentTypes: Add Image"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="Access contents information"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>ExternalReader</permission-role>
+      <permission-role>Manager</permission-role>
+      <permission-role>Reader</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="Add portal content"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+      <permission-role>Reader</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="Delete objects"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="List folder contents"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>ExternalReader</permission-role>
+      <permission-role>Manager</permission-role>
+      <permission-role>Reader</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="Modify portal content"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="Manage properties"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="View"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>ExternalReader</permission-role>
+      <permission-role>Manager</permission-role>
+      <permission-role>Reader</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="liege.urban: External Reader"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+      <permission-role>Reader</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="liege.urban: Internal Editor"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="liege.urban: Internal Reader"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+      <permission-role>Reader</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="liege.urban: Validate"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="urban: Add Applicant"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="urban: Add Contact"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="urban: Add Corporation"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="urban: Add CODT_Inquiry"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="urban: Add UrbanEvent"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="urban: Add UrbanEventOpinionRequest"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="urban: Add UrbanEventInspectionReport"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+  </state>
+  <state state_id="prosecution_analysis"
+         title="prosecution_analysis"
+         i18n:attributes="title"
+  >
+    <exit-transition transition_id="follow_with_prosecutor" />
+    <exit-transition transition_id="follow_without_prosecutor" />
+    <permission-map acquired="False"
+                    name="ATContentTypes: Add File"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="ATContentTypes: Add Image"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="Access contents information"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>ExternalReader</permission-role>
+      <permission-role>Manager</permission-role>
+      <permission-role>Reader</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="Add portal content"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+      <permission-role>Reader</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="Delete objects"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="List folder contents"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>ExternalReader</permission-role>
+      <permission-role>Manager</permission-role>
+      <permission-role>Reader</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="Modify portal content"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="Manage properties"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="View"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>ExternalReader</permission-role>
+      <permission-role>Manager</permission-role>
+      <permission-role>Reader</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="liege.urban: External Reader"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+      <permission-role>Reader</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="liege.urban: Internal Editor"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="liege.urban: Internal Reader"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+      <permission-role>Reader</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="liege.urban: Validate"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="urban: Add Applicant"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="urban: Add Contact"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="urban: Add Corporation"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="urban: Add CODT_Inquiry"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="urban: Add UrbanEvent"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="urban: Add UrbanEventOpinionRequest"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="urban: Add UrbanEventInspectionReport"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+  </state>
+  <state state_id="in_progress_with_prosecutor"
+         title="in_progress_with_prosecutor"
+         i18n:attributes="title"
+  >
+    <exit-transition transition_id="close" />
+    <permission-map acquired="False"
+                    name="ATContentTypes: Add File"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="ATContentTypes: Add Image"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="Access contents information"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>ExternalReader</permission-role>
+      <permission-role>Manager</permission-role>
+      <permission-role>Reader</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="Add portal content"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+      <permission-role>Reader</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="Delete objects"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="List folder contents"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>ExternalReader</permission-role>
+      <permission-role>Manager</permission-role>
+      <permission-role>Reader</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="Modify portal content"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="Manage properties"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="View"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>ExternalReader</permission-role>
+      <permission-role>Manager</permission-role>
+      <permission-role>Reader</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="liege.urban: External Reader"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+      <permission-role>Reader</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="liege.urban: Internal Editor"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="liege.urban: Internal Reader"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+      <permission-role>Reader</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="liege.urban: Validate"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="urban: Add Applicant"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="urban: Add Contact"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="urban: Add Corporation"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="urban: Add CODT_Inquiry"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="urban: Add UrbanEvent"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="urban: Add UrbanEventOpinionRequest"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="urban: Add UrbanEventInspectionReport"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+  </state>
+  <state state_id="in_progress_without_prosecutor"
+         title="in_progress_without_prosecutor"
+         i18n:attributes="title"
+  >
+    <exit-transition transition_id="close" />
+    <permission-map acquired="False"
+                    name="ATContentTypes: Add File"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="ATContentTypes: Add Image"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="Access contents information"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>ExternalReader</permission-role>
+      <permission-role>Manager</permission-role>
+      <permission-role>Reader</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="Add portal content"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+      <permission-role>Reader</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="Delete objects"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="List folder contents"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>ExternalReader</permission-role>
+      <permission-role>Manager</permission-role>
+      <permission-role>Reader</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="Modify portal content"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="Manage properties"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="View"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>ExternalReader</permission-role>
+      <permission-role>Manager</permission-role>
+      <permission-role>Reader</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="liege.urban: External Reader"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+      <permission-role>Reader</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="liege.urban: Internal Editor"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="liege.urban: Internal Reader"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+      <permission-role>Reader</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="liege.urban: Validate"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="urban: Add Applicant"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="urban: Add Contact"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="urban: Add Corporation"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="urban: Add CODT_Inquiry"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="urban: Add UrbanEvent"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="urban: Add UrbanEventOpinionRequest"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="urban: Add UrbanEventInspectionReport"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+  </state>
+  <state state_id="ended"
+         title="ended"
+         i18n:attributes="title"
+  >
+    <exit-transition transition_id="reopen" />
+    <permission-map acquired="False"
+                    name="ATContentTypes: Add File"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="ATContentTypes: Add Image"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="Access contents information"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>ExternalReader</permission-role>
+      <permission-role>Manager</permission-role>
+      <permission-role>Reader</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="Add portal content"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+      <permission-role>Reader</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="Delete objects"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="List folder contents"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>ExternalReader</permission-role>
+      <permission-role>Manager</permission-role>
+      <permission-role>Reader</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="Modify portal content"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="Manage properties"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="View"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>ExternalReader</permission-role>
+      <permission-role>Manager</permission-role>
+      <permission-role>Reader</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="liege.urban: External Reader"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>ExternalReader</permission-role>
+      <permission-role>Manager</permission-role>
+      <permission-role>Reader</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="liege.urban: Internal Editor"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="liege.urban: Internal Reader"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+      <permission-role>Reader</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="liege.urban: Validate"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="urban: Add Applicant"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="urban: Add Contact"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="urban: Add Corporation"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="urban: Add CODT_Inquiry"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="urban: Add UrbanEvent"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="urban: Add UrbanEventOpinionRequest"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="urban: Add UrbanEventInspectionReport"
+    >
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Manager</permission-role>
+    </permission-map>
+  </state>
+  <transition after_script=""
+              before_script=""
+              new_state="prosecution_analysis"
+              title="send_to_prosecutor"
+              transition_id="send_to_prosecutor"
+              trigger="USER"
+              i18n:attributes="title"
+  >
+    <action category="workflow"
+            icon=""
+            url=""
+    >analyse</action>
+    <guard>
+      <guard-permission>Modify portal content</guard-permission>
+    </guard>
+  </transition>
+  <transition after_script=""
+              before_script=""
+              new_state="in_progress_with_prosecutor"
+              title="follow_with_prosecutor"
+              transition_id="follow_with_prosecutor"
+              trigger="USER"
+              i18n:attributes="title"
+  >
+    <action category="workflow"
+            icon=""
+            url=""
+    >analyse</action>
+    <guard>
+      <guard-permission>Modify portal content</guard-permission>
+    </guard>
+  </transition>
+  <transition after_script=""
+              before_script=""
+              new_state="in_progress_without_prosecutor"
+              title="follow_without_prosecutor"
+              transition_id="follow_without_prosecutor"
+              trigger="USER"
+              i18n:attributes="title"
+  >
+    <action category="workflow"
+            icon=""
+            url=""
+    >analyse</action>
+    <guard>
+      <guard-permission>Modify portal content</guard-permission>
+    </guard>
+  </transition>
+  <transition after_script=""
+              before_script=""
+              new_state="ended"
+              title="close"
+              transition_id="close"
+              trigger="USER"
+              i18n:attributes="title"
+  >
+    <action category="workflow"
+            icon=""
+            url=""
+    >close</action>
+    <guard>
+      <guard-permission>Modify portal content</guard-permission>
+    </guard>
+  </transition>
+  <transition after_script=""
+              before_script=""
+              new_state="prosecution_analysis"
+              title="reopen"
+              transition_id="reopen"
+              trigger="USER"
+              i18n:attributes="title"
+  >
+    <action category="workflow"
+            icon=""
+            url=""
+    >reopen</action>
+    <guard>
+      <guard-permission>Modify portal content</guard-permission>
+    </guard>
+  </transition>
+  <variable for_catalog="False"
+            for_status="True"
+            update_always="True"
+            variable_id="action"
+  >
+    <description>The last transition</description>
+    <default>
+      <expression>transition/getId|nothing</expression>
+    </default>
+    <guard>
   </guard>
- </transition>
- <transition
-   transition_id="follow_with_prosecutor"
-   title="follow_with_prosecutor"
-   i18n:attributes="title"
-   new_state="in_progress_with_prosecutor"
-   trigger="USER"
-   before_script=""
-   after_script="">
-  <action url="" category="workflow" icon="">analyse</action>
-  <guard>
-    <guard-permission>Modify portal content</guard-permission>
+  </variable>
+  <variable for_catalog="False"
+            for_status="True"
+            update_always="True"
+            variable_id="actor"
+  >
+    <description>The ID of the user who performed the last transition</description>
+    <default>
+      <expression>user/getId</expression>
+    </default>
+    <guard>
   </guard>
- </transition>
- <transition
-   transition_id="follow_without_prosecutor"
-   title="follow_without_prosecutor"
-   i18n:attributes="title"
-   new_state="in_progress_without_prosecutor"
-   trigger="USER"
-   before_script=""
-   after_script="">
-  <action url="" category="workflow" icon="">analyse</action>
-  <guard>
-    <guard-permission>Modify portal content</guard-permission>
+  </variable>
+  <variable for_catalog="False"
+            for_status="True"
+            update_always="True"
+            variable_id="comments"
+  >
+    <description>Comments about the last transition</description>
+    <default>
+      <expression>python:state_change.kwargs.get('comment', '')</expression>
+    </default>
+    <guard>
   </guard>
- </transition>
- <transition
-   transition_id="close"
-   title="close"
-   i18n:attributes="title"
-   new_state="ended"
-   trigger="USER"
-   before_script=""
-   after_script="">
-  <action url="" category="workflow" icon="">close</action>
-  <guard>
-    <guard-permission>Modify portal content</guard-permission>
+  </variable>
+  <variable for_catalog="False"
+            for_status="False"
+            update_always="False"
+            variable_id="review_history"
+  >
+    <description>Provides access to workflow history</description>
+    <default>
+      <expression>state_change/getHistory</expression>
+    </default>
+    <guard>
+      <guard-permission>Request review</guard-permission>
+      <guard-permission>Review portal content</guard-permission>
+    </guard>
+  </variable>
+  <variable for_catalog="False"
+            for_status="True"
+            update_always="True"
+            variable_id="time"
+  >
+    <description>Time of the last transition</description>
+    <default>
+      <expression>state_change/getDateTime</expression>
+    </default>
+    <guard>
   </guard>
- </transition>
- <transition
-   transition_id="reopen"
-   title="reopen"
-   i18n:attributes="title"
-   new_state="prosecution_analysis"
-   trigger="USER"
-   before_script=""
-   after_script="">
-  <action url="" icon="" category="workflow">reopen</action>
-  <guard>
-    <guard-permission>Modify portal content</guard-permission>
-  </guard>
- </transition>
- <variable variable_id="action" for_catalog="False" for_status="True" update_always="True">
-  <description>The last transition</description>
-  <default>
-   <expression>transition/getId|nothing</expression>
-  </default>
-  <guard>
-  </guard>
- </variable>
- <variable variable_id="actor" for_catalog="False" for_status="True" update_always="True">
-  <description>The ID of the user who performed the last transition</description>
-  <default>
-   <expression>user/getId</expression>
-  </default>
-  <guard>
-  </guard>
- </variable>
- <variable variable_id="comments" for_catalog="False" for_status="True" update_always="True">
-  <description>Comments about the last transition</description>
-  <default>
-   <expression>python:state_change.kwargs.get('comment', '')</expression>
-  </default>
-  <guard>
-  </guard>
- </variable>
- <variable variable_id="review_history" for_catalog="False" for_status="False" update_always="False">
-  <description>Provides access to workflow history</description>
-  <default>
-   <expression>state_change/getHistory</expression>
-  </default>
-  <guard>
-   <guard-permission>Request review</guard-permission>
-   <guard-permission>Review portal content</guard-permission>
-  </guard>
- </variable>
- <variable variable_id="time" for_catalog="False" for_status="True" update_always="True">
-  <description>Time of the last transition</description>
-  <default>
-   <expression>state_change/getDateTime</expression>
-  </default>
-  <guard>
-  </guard>
- </variable>
+  </variable>
 </dc-workflow>

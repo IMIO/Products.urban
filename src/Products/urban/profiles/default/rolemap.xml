@@ -1,16 +1,20 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="utf-8"?>
 <rolemap>
   <roles>
-    <role name="UrbanMapReader"/>
-    <role name="ClaimantEditor"/>
+    <role name="UrbanMapReader" />
+    <role name="ClaimantEditor" />
   </roles>
   <permissions>
-      <permission name="Products.urban: ViewUrbanMap" acquire="True">
-        <role name="UrbanMapReader"/>
-      </permission>
-      <permission name="imio.urban: Add Parcel" acquire="True">
-        <role name="Manager"/>
-        <role name="Contributor"/>
-      </permission>
+    <permission acquire="True"
+                name="Products.urban: ViewUrbanMap"
+    >
+      <role name="UrbanMapReader" />
+    </permission>
+    <permission acquire="True"
+                name="imio.urban: Add Parcel"
+    >
+      <role name="Manager" />
+      <role name="Contributor" />
+    </permission>
   </permissions>
 </rolemap>

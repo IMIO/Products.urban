@@ -1,83 +1,85 @@
-<configure xmlns="http://namespaces.zope.org/zope"
-           xmlns:five="http://namespaces.zope.org/five"
-           xmlns:i18n="http://namespaces.zope.org/i18n"
-           i18n_domain="urban">
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    i18n_domain="urban"
+    >
 
   <adapter
-     for="Products.urban.interfaces.IGenericLicence"
-     provides="borg.localrole.interfaces.ILocalRoleProvider"
-     factory=".licence_workflow.StateRolesMapping"
-     name="licence_local_roles"
-  />
+      factory=".licence_workflow.StateRolesMapping"
+      provides="borg.localrole.interfaces.ILocalRoleProvider"
+      for="Products.urban.interfaces.IGenericLicence"
+      name="licence_local_roles"
+      />
 
   <adapter
-     for="Products.urban.interfaces.ICODT_BaseBuildLicence"
-     provides="borg.localrole.interfaces.ILocalRoleProvider"
-     factory=".codt_licence_workflow.StateRolesMapping"
-     name="licence_local_roles"
-  />
+      factory=".codt_licence_workflow.StateRolesMapping"
+      provides="borg.localrole.interfaces.ILocalRoleProvider"
+      for="Products.urban.interfaces.ICODT_BaseBuildLicence"
+      name="licence_local_roles"
+      />
 
   <adapter
-     for="Products.urban.interfaces.IEnvironmentLicence"
-     provides="borg.localrole.interfaces.ILocalRoleProvider"
-     factory=".env_licence_workflow.StateRolesMapping"
-     name="env_licence_local_roles"
-  />
+      factory=".env_licence_workflow.StateRolesMapping"
+      provides="borg.localrole.interfaces.ILocalRoleProvider"
+      for="Products.urban.interfaces.IEnvironmentLicence"
+      name="env_licence_local_roles"
+      />
 
   <adapter
-     for="Products.urban.interfaces.IDivision"
-     provides="borg.localrole.interfaces.ILocalRoleProvider"
-     factory=".division_workflow.StateRolesMapping"
-     name="division_local_roles"
-  />
+      factory=".division_workflow.StateRolesMapping"
+      provides="borg.localrole.interfaces.ILocalRoleProvider"
+      for="Products.urban.interfaces.IDivision"
+      name="division_local_roles"
+      />
 
   <adapter
-     for="Products.urban.interfaces.IInspection"
-     provides="borg.localrole.interfaces.ILocalRoleProvider"
-     factory=".inspection_workflow.StateRolesMapping"
-     name="inspection_local_roles"
-  />
+      factory=".inspection_workflow.StateRolesMapping"
+      provides="borg.localrole.interfaces.ILocalRoleProvider"
+      for="Products.urban.interfaces.IInspection"
+      name="inspection_local_roles"
+      />
 
   <adapter
-     for="Products.urban.interfaces.ITicket"
-     provides="borg.localrole.interfaces.ILocalRoleProvider"
-     factory=".ticket_workflow.StateRolesMapping"
-     name="ticket_local_roles"
-  />
+      factory=".ticket_workflow.StateRolesMapping"
+      provides="borg.localrole.interfaces.ILocalRoleProvider"
+      for="Products.urban.interfaces.ITicket"
+      name="ticket_local_roles"
+      />
 
   <adapter
-     for="Products.urban.interfaces.IUrbanEvent"
-     provides="borg.localrole.interfaces.ILocalRoleProvider"
-     factory=".urbanevent_workflow.StateRolesMapping"
-     name="urbanevent_local_roles"
-  />
+      factory=".urbanevent_workflow.StateRolesMapping"
+      provides="borg.localrole.interfaces.ILocalRoleProvider"
+      for="Products.urban.interfaces.IUrbanEvent"
+      name="urbanevent_local_roles"
+      />
 
   <adapter
-     for="Products.urban.interfaces.ISimpleCollegeEvent"
-     provides="borg.localrole.interfaces.ILocalRoleProvider"
-     factory=".college_event_workflow.StateRolesMapping"
-     name="simplecollege_local_roles"
-  />
+      factory=".college_event_workflow.StateRolesMapping"
+      provides="borg.localrole.interfaces.ILocalRoleProvider"
+      for="Products.urban.interfaces.ISimpleCollegeEvent"
+      name="simplecollege_local_roles"
+      />
 
   <adapter
-     for="Products.urban.interfaces.IEnvironmentSimpleCollegeEvent"
-     provides="borg.localrole.interfaces.ILocalRoleProvider"
-     factory=".college_event_workflow.StateRolesMapping"
-     name="simplecollege_local_roles"
-  />
+      factory=".college_event_workflow.StateRolesMapping"
+      provides="borg.localrole.interfaces.ILocalRoleProvider"
+      for="Products.urban.interfaces.IEnvironmentSimpleCollegeEvent"
+      name="simplecollege_local_roles"
+      />
 
   <adapter
-     for="Products.urban.interfaces.IUrbanEventOpinionRequest"
-     provides="borg.localrole.interfaces.ILocalRoleProvider"
-     factory=".opinionsrequest_workflow.StateRolesMapping"
-     name="opinionrequest_local_roles"
-  />
+      factory=".opinionsrequest_workflow.StateRolesMapping"
+      provides="borg.localrole.interfaces.ILocalRoleProvider"
+      for="Products.urban.interfaces.IUrbanEventOpinionRequest"
+      name="opinionrequest_local_roles"
+      />
 
- <!-- register suspension workflow adaptation -->
- <utility
-      name="urban.wfadaptations.suspension"
-      provides="collective.wfadaptations.interfaces.IWorkflowAdaptation"
+  <!-- register suspension workflow adaptation -->
+  <utility
       factory=".suspension.SuspensionWorkflowAdaptation"
+      provides="collective.wfadaptations.interfaces.IWorkflowAdaptation"
+      name="urban.wfadaptations.suspension"
       />
 
 </configure>

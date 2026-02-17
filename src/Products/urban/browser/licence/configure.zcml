@@ -2,504 +2,505 @@
     xmlns="http://namespaces.zope.org/zope"
     xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:plone="http://namespaces.plone.org/plone"
-    i18n_domain="urban">
+    i18n_domain="urban"
+    >
 
   <browser:page
-     for="zope.interface.Interface"
-     name="showEditTabbing"
-     class=".licenceview.ShowEditTabbing"
-     permission="zope2.View"
-  />
+      name="showEditTabbing"
+      for="zope.interface.Interface"
+      class=".licenceview.ShowEditTabbing"
+      permission="zope2.View"
+      />
 
   <browser:page
-     for="Products.urban.interfaces.IGenericLicence"
-     name="duplicate_licence"
-     class=".duplicate_licence.DuplicateLicenceFormView"
-     permission="zope2.View"
-  />
+      name="duplicate_licence"
+      for="Products.urban.interfaces.IGenericLicence"
+      class=".duplicate_licence.DuplicateLicenceFormView"
+      permission="zope2.View"
+      />
 
   <adapter
-     for="Products.urban.interfaces.IGenericLicence
-          zope.publisher.interfaces.browser.IBrowserRequest
-          .duplicate_licence.DuplicateLicenceForm
-          .duplicate_licence.TabsToDuplicateField
-          z3c.form.interfaces.IFieldWidget"
-      provides="z3c.form.interfaces.IValue"
       factory=".duplicate_licence.DefaultTabsToDuplicate"
+      provides="z3c.form.interfaces.IValue"
+      for="Products.urban.interfaces.IGenericLicence
+           zope.publisher.interfaces.browser.IBrowserRequest
+           .duplicate_licence.DuplicateLicenceForm
+           .duplicate_licence.TabsToDuplicateField
+           z3c.form.interfaces.IFieldWidget"
       name="default"
-  />
+      />
 
   <browser:page
-     for="Products.urban.interfaces.IGenericLicence"
-     name="licencemacros"
-     template="templates/licencemacros.pt"
-     permission="zope2.View"
-  />
+      name="licencemacros"
+      for="Products.urban.interfaces.IGenericLicence"
+      template="templates/licencemacros.pt"
+      permission="zope2.View"
+      />
 
   <browser:page
-     for="Products.urban.interfaces.IUrbanEvent"
-     name="licencemacros"
-     template="templates/licencemacros.pt"
-     permission="zope2.View"
-  />
+      name="licencemacros"
+      for="Products.urban.interfaces.IUrbanEvent"
+      template="templates/licencemacros.pt"
+      permission="zope2.View"
+      />
 
 
   <browser:page
-     for="Products.urban.interfaces.IGenericLicence"
-     name="licenceedit"
-     class=".licenceedit.LicenceEditView"
-     template="templates/licenceedit.pt"
-     permission="zope2.View"
-  />
+      name="licenceedit"
+      for="Products.urban.interfaces.IGenericLicence"
+      class=".licenceedit.LicenceEditView"
+      template="templates/licenceedit.pt"
+      permission="zope2.View"
+      />
 
   <browser:page
-     for="Products.urban.interfaces.ICODT_IntegratedLicence"
-     name="licenceedit"
-     class=".licenceedit.CODT_IntegratedLicenceEditView"
-     template="templates/licenceedit.pt"
-     permission="zope2.View"
-  />
+      name="licenceedit"
+      for="Products.urban.interfaces.ICODT_IntegratedLicence"
+      class=".licenceedit.CODT_IntegratedLicenceEditView"
+      template="templates/licenceedit.pt"
+      permission="zope2.View"
+      />
 
   <browser:page
-     for="Products.urban.interfaces.IUrbanCertificateBase"
-     name="urbancertificatebase_edit"
-     class=".urbancertificatebaseedit.UrbanCertificateBaseEditView"
-     template="templates/urbancertificatebase_edit.pt"
-     permission="zope2.View"
-  />
+      name="urbancertificatebase_edit"
+      for="Products.urban.interfaces.IUrbanCertificateBase"
+      class=".urbancertificatebaseedit.UrbanCertificateBaseEditView"
+      template="templates/urbancertificatebase_edit.pt"
+      permission="zope2.View"
+      />
 
   <browser:page
-     for="Products.urban.interfaces.ICODT_Inquiry"
-     name="fielddisplay-macros"
-     template="templates/fieldscustomdisplay.pt"
-     permission="zope2.View"
-  />
+      name="fielddisplay-macros"
+      for="Products.urban.interfaces.ICODT_Inquiry"
+      template="templates/fieldscustomdisplay.pt"
+      permission="zope2.View"
+      />
 
   <browser:page
-     for="Products.urban.interfaces.IInquiry"
-     name="fielddisplay-macros"
-     template="templates/fieldscustomdisplay.pt"
-     permission="zope2.View"
-  />
+      name="fielddisplay-macros"
+      for="Products.urban.interfaces.IInquiry"
+      template="templates/fieldscustomdisplay.pt"
+      permission="zope2.View"
+      />
 
   <browser:page
-     for="Products.urban.interfaces.IGenericLicence"
-     name="fielddisplay-macros"
-     template="templates/fieldscustomdisplay.pt"
-     permission="zope2.View"
-  />
+      name="fielddisplay-macros"
+      for="Products.urban.interfaces.IGenericLicence"
+      template="templates/fieldscustomdisplay.pt"
+      permission="zope2.View"
+      />
 
   <browser:page
-     for="Products.urban.interfaces.IGenericLicence"
-     name="licencetabs-macros"
-     class=".licenceview.LicenceView"
-     template="templates/licencetabsmacros.pt"
-     permission="zope2.View"
-  />
+      name="licencetabs-macros"
+      for="Products.urban.interfaces.IGenericLicence"
+      class=".licenceview.LicenceView"
+      template="templates/licencetabsmacros.pt"
+      permission="zope2.View"
+      />
 
   <browser:page
-     for="Products.urban.interfaces.IGenericLicence"
-     name="licencemainmacro"
-     class=".licenceview.LicenceView"
-     template="templates/licenceview.pt"
-     permission="zope2.View"
-  />
+      name="licencemainmacro"
+      for="Products.urban.interfaces.IGenericLicence"
+      class=".licenceview.LicenceView"
+      template="templates/licenceview.pt"
+      permission="zope2.View"
+      />
 
   <browser:page
-     for="Products.urban.interfaces.IGenericLicence"
-     name="worklocation-macro"
-     template="templates/worklocation_macro.pt"
-     permission="zope2.View"
-  />
+      name="worklocation-macro"
+      for="Products.urban.interfaces.IGenericLicence"
+      template="templates/worklocation_macro.pt"
+      permission="zope2.View"
+      />
 
   <browser:page
-     for="Products.urban.interfaces.IGenericLicence"
-     name="parcels-macro"
-     template="templates/parcels_macro.pt"
-     permission="zope2.View"
-  />
+      name="parcels-macro"
+      for="Products.urban.interfaces.IGenericLicence"
+      template="templates/parcels_macro.pt"
+      permission="zope2.View"
+      />
 
   <browser:page
-     for="Products.urban.interfaces.IBaseBuildLicence"
-     name="buildlicenceview"
-     class=".buildlicenceview.BuildLicenceView"
-     template="templates/buildlicenceview.pt"
-     permission="zope2.View"
-  />
+      name="buildlicenceview"
+      for="Products.urban.interfaces.IBaseBuildLicence"
+      class=".buildlicenceview.BuildLicenceView"
+      template="templates/buildlicenceview.pt"
+      permission="zope2.View"
+      />
 
   <browser:page
-     for="Products.urban.interfaces.ICODT_BaseBuildLicence"
-     name="codt_buildlicenceview"
-     class=".codt_buildlicenceview.CODTBuildLicenceView"
-     template="templates/buildlicenceview.pt"
-     permission="zope2.View"
-  />
+      name="codt_buildlicenceview"
+      for="Products.urban.interfaces.ICODT_BaseBuildLicence"
+      class=".codt_buildlicenceview.CODTBuildLicenceView"
+      template="templates/buildlicenceview.pt"
+      permission="zope2.View"
+      />
 
   <browser:page
-     name="codt_buildlicence-macros"
-     for="Products.urban.interfaces.ICODT_BaseBuildLicence"
-     template="templates/codt_buildlicencemacros.pt"
-     permission="zope2.View"
-  />
+      name="codt_buildlicence-macros"
+      for="Products.urban.interfaces.ICODT_BaseBuildLicence"
+      template="templates/codt_buildlicencemacros.pt"
+      permission="zope2.View"
+      />
 
   <browser:page
-     for="Products.urban.interfaces.IUniqueLicence"
-     name="uniquelicenceview"
-     class=".uniquelicenceview.UniqueLicenceView"
-     template="templates/uniquelicenceview.pt"
-     permission="zope2.View"
-  />
+      name="uniquelicenceview"
+      for="Products.urban.interfaces.IUniqueLicence"
+      class=".uniquelicenceview.UniqueLicenceView"
+      template="templates/uniquelicenceview.pt"
+      permission="zope2.View"
+      />
 
   <browser:page
-     name="uniquelicence-macros"
-     for="Products.urban.interfaces.IUniqueLicence"
-     template="templates/uniquelicencemacros.pt"
-     permission="zope2.View"
-  />
+      name="uniquelicence-macros"
+      for="Products.urban.interfaces.IUniqueLicence"
+      template="templates/uniquelicencemacros.pt"
+      permission="zope2.View"
+      />
 
   <browser:page
-     for="Products.urban.interfaces.ICODT_UniqueLicence"
-     name="codt_uniquelicenceview"
-     class=".codt_uniquelicenceview.CODTUniqueLicenceView"
-     template="templates/codt_uniquelicenceview.pt"
-     permission="zope2.View"
-  />
+      name="codt_uniquelicenceview"
+      for="Products.urban.interfaces.ICODT_UniqueLicence"
+      class=".codt_uniquelicenceview.CODTUniqueLicenceView"
+      template="templates/codt_uniquelicenceview.pt"
+      permission="zope2.View"
+      />
 
   <browser:page
-     name="codt_uniquelicence-macros"
-     for="Products.urban.interfaces.ICODT_UniqueLicence"
-     template="templates/codt_uniquelicencemacros.pt"
-     permission="zope2.View"
-  />
+      name="codt_uniquelicence-macros"
+      for="Products.urban.interfaces.ICODT_UniqueLicence"
+      template="templates/codt_uniquelicencemacros.pt"
+      permission="zope2.View"
+      />
 
   <browser:page
-     for="Products.urban.interfaces.ICODT_IntegratedLicence"
-     name="codt_integratedlicenceview"
-     class=".codt_integratedlicenceview.CODTIntegratedLicenceView"
-     template="templates/codt_integratedlicenceview.pt"
-     permission="zope2.View"
-  />
+      name="codt_integratedlicenceview"
+      for="Products.urban.interfaces.ICODT_IntegratedLicence"
+      class=".codt_integratedlicenceview.CODTIntegratedLicenceView"
+      template="templates/codt_integratedlicenceview.pt"
+      permission="zope2.View"
+      />
 
   <browser:page
-     name="codt_integratedlicence-macros"
-     for="Products.urban.interfaces.ICODT_IntegratedLicence"
-     template="templates/codt_integratedlicencemacros.pt"
-     permission="zope2.View"
-  />
+      name="codt_integratedlicence-macros"
+      for="Products.urban.interfaces.ICODT_IntegratedLicence"
+      template="templates/codt_integratedlicencemacros.pt"
+      permission="zope2.View"
+      />
 
   <browser:page
-     name="buildlicence-macros"
-     for="Products.urban.interfaces.IBaseBuildLicence"
-     template="templates/buildlicencemacros.pt"
-     permission="zope2.View"
-  />
+      name="buildlicence-macros"
+      for="Products.urban.interfaces.IBaseBuildLicence"
+      template="templates/buildlicencemacros.pt"
+      permission="zope2.View"
+      />
 
   <browser:page
-     for="Products.urban.interfaces.IParcelOutLicence"
-     name="parceloutlicenceview"
-     class=".parceloutlicenceview.ParcelOutLicenceView"
-     template="templates/parceloutlicenceview.pt"
-     permission="zope2.View"
-  />
+      name="parceloutlicenceview"
+      for="Products.urban.interfaces.IParcelOutLicence"
+      class=".parceloutlicenceview.ParcelOutLicenceView"
+      template="templates/parceloutlicenceview.pt"
+      permission="zope2.View"
+      />
 
   <browser:page
-     name="parceloutlicence-macros"
-     for="Products.urban.interfaces.IParcelOutLicence"
-     template="templates/parceloutlicencemacros.pt"
-     permission="zope2.View"
-  />
+      name="parceloutlicence-macros"
+      for="Products.urban.interfaces.IParcelOutLicence"
+      template="templates/parceloutlicencemacros.pt"
+      permission="zope2.View"
+      />
 
   <browser:page
-     for="Products.urban.interfaces.ICODT_ParcelOutLicence"
-     name="parceloutlicenceview"
-     class=".codt_parceloutlicenceview.CODTParcelOutLicenceView"
-     template="templates/parceloutlicenceview.pt"
-     permission="zope2.View"
-  />
+      name="parceloutlicenceview"
+      for="Products.urban.interfaces.ICODT_ParcelOutLicence"
+      class=".codt_parceloutlicenceview.CODTParcelOutLicenceView"
+      template="templates/parceloutlicenceview.pt"
+      permission="zope2.View"
+      />
 
   <browser:page
-     name="parceloutlicence-macros"
-     for="Products.urban.interfaces.ICODT_ParcelOutLicence"
-     template="templates/codt_parceloutlicencemacros.pt"
-     permission="zope2.View"
-  />
+      name="parceloutlicence-macros"
+      for="Products.urban.interfaces.ICODT_ParcelOutLicence"
+      template="templates/codt_parceloutlicencemacros.pt"
+      permission="zope2.View"
+      />
 
   <browser:page
-     for="Products.urban.interfaces.IDeclaration"
-     name="declarationview"
-     class=".declarationview.DeclarationView"
-     template="templates/declarationview.pt"
-     permission="zope2.View"
-  />
+      name="declarationview"
+      for="Products.urban.interfaces.IDeclaration"
+      class=".declarationview.DeclarationView"
+      template="templates/declarationview.pt"
+      permission="zope2.View"
+      />
 
   <browser:page
-     name="declaration-macros"
-     for="Products.urban.interfaces.IDeclaration"
-     template="templates/declarationmacros.pt"
-     permission="zope2.View"
-  />
+      name="declaration-macros"
+      for="Products.urban.interfaces.IDeclaration"
+      template="templates/declarationmacros.pt"
+      permission="zope2.View"
+      />
 
   <browser:page
-     for="Products.urban.interfaces.IUrbanCertificateBase"
-     name="urbancertificateoneview"
-     class=".urbancertificateoneview.UrbanCertificateOneView"
-     template="templates/urbancertificateoneview.pt"
-     permission="zope2.View"
-  />
+      name="urbancertificateoneview"
+      for="Products.urban.interfaces.IUrbanCertificateBase"
+      class=".urbancertificateoneview.UrbanCertificateOneView"
+      template="templates/urbancertificateoneview.pt"
+      permission="zope2.View"
+      />
 
   <browser:page
-     name="urbancertificateone-macros"
-     for="Products.urban.interfaces.IUrbanCertificateBase"
-     template="templates/urbancertificateonemacros.pt"
-     permission="zope2.View"
-  />
+      name="urbancertificateone-macros"
+      for="Products.urban.interfaces.IUrbanCertificateBase"
+      template="templates/urbancertificateonemacros.pt"
+      permission="zope2.View"
+      />
 
   <browser:page
-     for="Products.urban.interfaces.IUrbanCertificateTwo"
-     name="urbancertificatetwoview"
-     class=".urbancertificatetwoview.UrbanCertificateTwoView"
-     template="templates/urbancertificatetwoview.pt"
-     permission="zope2.View"
-  />
+      name="urbancertificatetwoview"
+      for="Products.urban.interfaces.IUrbanCertificateTwo"
+      class=".urbancertificatetwoview.UrbanCertificateTwoView"
+      template="templates/urbancertificatetwoview.pt"
+      permission="zope2.View"
+      />
 
   <browser:page
-     name="urbancertificatetwo-macros"
-     for="Products.urban.interfaces.IUrbanCertificateTwo"
-     template="templates/urbancertificatetwomacros.pt"
-     permission="zope2.View"
-  />
+      name="urbancertificatetwo-macros"
+      for="Products.urban.interfaces.IUrbanCertificateTwo"
+      template="templates/urbancertificatetwomacros.pt"
+      permission="zope2.View"
+      />
 
   <browser:page
-     for="Products.urban.interfaces.ICODT_UrbanCertificateTwo"
-     name="urbancertificatetwoview"
-     class=".codt_urbancertificatetwoview.CODTUrbanCertificateTwoView"
-     template="templates/urbancertificatetwoview.pt"
-     permission="zope2.View"
-  />
+      name="urbancertificatetwoview"
+      for="Products.urban.interfaces.ICODT_UrbanCertificateTwo"
+      class=".codt_urbancertificatetwoview.CODTUrbanCertificateTwoView"
+      template="templates/urbancertificatetwoview.pt"
+      permission="zope2.View"
+      />
 
   <browser:page
-     for="Products.urban.interfaces.IUrbanCertificateBase"
-     name="notaryletterview"
-     class=".notaryletterview.NotaryLetterView"
-     template="templates/notaryletterview.pt"
-     permission="zope2.View"
-  />
+      name="notaryletterview"
+      for="Products.urban.interfaces.IUrbanCertificateBase"
+      class=".notaryletterview.NotaryLetterView"
+      template="templates/notaryletterview.pt"
+      permission="zope2.View"
+      />
 
   <browser:page
-     name="notaryletter-macros"
-     for="Products.urban.interfaces.IUrbanCertificateBase"
-     template="templates/notarylettermacros.pt"
-     permission="zope2.View"
-  />
+      name="notaryletter-macros"
+      for="Products.urban.interfaces.IUrbanCertificateBase"
+      template="templates/notarylettermacros.pt"
+      permission="zope2.View"
+      />
 
   <browser:page
-     for="Products.urban.interfaces.IDivision"
-     name="divisionview"
-     class=".divisionview.DivisionView"
-     template="templates/divisionview.pt"
-     permission="zope2.View"
-  />
+      name="divisionview"
+      for="Products.urban.interfaces.IDivision"
+      class=".divisionview.DivisionView"
+      template="templates/divisionview.pt"
+      permission="zope2.View"
+      />
 
   <browser:page
-     name="division-macros"
-     for="Products.urban.interfaces.IDivision"
-     template="templates/divisionmacros.pt"
-     permission="zope2.View"
-  />
+      name="division-macros"
+      for="Products.urban.interfaces.IDivision"
+      template="templates/divisionmacros.pt"
+      permission="zope2.View"
+      />
 
   <browser:page
-     for="Products.urban.interfaces.IEnvironmentBase"
-     name="envclassthreeview"
-     class=".envclassthreeview.EnvClassThreeView"
-     template="templates/envclassthreeview.pt"
-     permission="zope2.View"
-  />
+      name="envclassthreeview"
+      for="Products.urban.interfaces.IEnvironmentBase"
+      class=".envclassthreeview.EnvClassThreeView"
+      template="templates/envclassthreeview.pt"
+      permission="zope2.View"
+      />
 
   <browser:page
-     name="envclassthree-macros"
-     for="Products.urban.interfaces.IEnvironmentBase"
-     template="templates/envclassthreemacros.pt"
-     permission="zope2.View"
-  />
+      name="envclassthree-macros"
+      for="Products.urban.interfaces.IEnvironmentBase"
+      template="templates/envclassthreemacros.pt"
+      permission="zope2.View"
+      />
 
   <browser:page
-     for="Products.urban.interfaces.IEnvironmentLicence"
-     name="envclassoneview"
-     class=".envclassoneview.EnvClassOneView"
-     template="templates/envclassoneview.pt"
-     permission="zope2.View"
-  />
+      name="envclassoneview"
+      for="Products.urban.interfaces.IEnvironmentLicence"
+      class=".envclassoneview.EnvClassOneView"
+      template="templates/envclassoneview.pt"
+      permission="zope2.View"
+      />
 
   <browser:page
-    for="Products.urban.interfaces.IEnvironmentLicence"
-    name="envclassborderingview"
-    class=".envclassborderingview.EnvClassBorderingView"
-    template="templates/envclassborderingview.pt"
-    permission="zope2.View"
-  />
+      name="envclassborderingview"
+      for="Products.urban.interfaces.IEnvironmentLicence"
+      class=".envclassborderingview.EnvClassBorderingView"
+      template="templates/envclassborderingview.pt"
+      permission="zope2.View"
+      />
 
   <browser:page
-     name="envclasstwo-macros"
-     for="Products.urban.interfaces.IEnvironmentBase"
-     template="templates/envclasstwomacros.pt"
-     permission="zope2.View"
-  />
+      name="envclasstwo-macros"
+      for="Products.urban.interfaces.IEnvironmentBase"
+      template="templates/envclasstwomacros.pt"
+      permission="zope2.View"
+      />
 
   <browser:page
-     for="Products.urban.interfaces.IEnvironmentLicence"
-     name="envclasstwoview"
-     class=".envclasstwoview.EnvClassTwoView"
-     template="templates/envclasstwoview.pt"
-     permission="zope2.View"
-  />
+      name="envclasstwoview"
+      for="Products.urban.interfaces.IEnvironmentLicence"
+      class=".envclasstwoview.EnvClassTwoView"
+      template="templates/envclasstwoview.pt"
+      permission="zope2.View"
+      />
 
   <browser:page
-     name="envclassone-macros"
-     for="Products.urban.interfaces.IEnvironmentBase"
-     template="templates/envclassonemacros.pt"
-     permission="zope2.View"
-  />
+      name="envclassone-macros"
+      for="Products.urban.interfaces.IEnvironmentBase"
+      template="templates/envclassonemacros.pt"
+      permission="zope2.View"
+      />
 
   <browser:page
-     name="envclassbordering-macros"
-     for="Products.urban.interfaces.IEnvironmentBase"
-     template="templates/envclassborderingmacros.pt"
-     permission="zope2.View"
-  />
+      name="envclassbordering-macros"
+      for="Products.urban.interfaces.IEnvironmentBase"
+      template="templates/envclassborderingmacros.pt"
+      permission="zope2.View"
+      />
 
   <browser:page
-     for="Products.urban.interfaces.IMiscDemand"
-     name="miscdemandview"
-     class=".miscdemandview.MiscDemandView"
-     template="templates/miscdemandview.pt"
-     permission="zope2.View"
-  />
+      name="miscdemandview"
+      for="Products.urban.interfaces.IMiscDemand"
+      class=".miscdemandview.MiscDemandView"
+      template="templates/miscdemandview.pt"
+      permission="zope2.View"
+      />
 
   <browser:page
-     name="miscdemand-macros"
-     for="Products.urban.interfaces.IMiscDemand"
-     template="templates/miscdemandmacros.pt"
-     permission="zope2.View"
-  />
+      name="miscdemand-macros"
+      for="Products.urban.interfaces.IMiscDemand"
+      template="templates/miscdemandmacros.pt"
+      permission="zope2.View"
+      />
 
   <browser:page
-     for="Products.urban.interfaces.IPreliminaryNotice"
-     name="preliminarynoticeview"
-     class=".preliminarynoticeview.PreliminaryNoticeView"
-     template="templates/preliminarynoticeview.pt"
-     permission="zope2.View"
-  />
+      name="preliminarynoticeview"
+      for="Products.urban.interfaces.IPreliminaryNotice"
+      class=".preliminarynoticeview.PreliminaryNoticeView"
+      template="templates/preliminarynoticeview.pt"
+      permission="zope2.View"
+      />
 
   <browser:page
-     name="preliminarynotice-macros"
-     for="Products.urban.interfaces.IPreliminaryNotice"
-     template="templates/preliminarynoticemacros.pt"
-     permission="zope2.View"
-  />
+      name="preliminarynotice-macros"
+      for="Products.urban.interfaces.IPreliminaryNotice"
+      template="templates/preliminarynoticemacros.pt"
+      permission="zope2.View"
+      />
 
   <browser:page
-     for="Products.urban.interfaces.IProjectMeeting"
-     name="projectmeetingview"
-     class=".projectmeetingview.ProjectMeetingView"
-     template="templates/projectmeetingview.pt"
-     permission="zope2.View"
-  />
+      name="projectmeetingview"
+      for="Products.urban.interfaces.IProjectMeeting"
+      class=".projectmeetingview.ProjectMeetingView"
+      template="templates/projectmeetingview.pt"
+      permission="zope2.View"
+      />
 
   <browser:page
-     name="projectmeeting-macros"
-     for="Products.urban.interfaces.IProjectMeeting"
-     template="templates/projectmeetingmacros.pt"
-     permission="zope2.View"
-  />
+      name="projectmeeting-macros"
+      for="Products.urban.interfaces.IProjectMeeting"
+      template="templates/projectmeetingmacros.pt"
+      permission="zope2.View"
+      />
 
   <browser:page
-     for="Products.urban.interfaces.IPatrimonyCertificate"
-     name="patrimonycertificateview"
-     class=".patrimonycertificateview.PatrimonyCertificateView"
-     template="templates/patrimonycertificateview.pt"
-     permission="zope2.View"
-  />
+      name="patrimonycertificateview"
+      for="Products.urban.interfaces.IPatrimonyCertificate"
+      class=".patrimonycertificateview.PatrimonyCertificateView"
+      template="templates/patrimonycertificateview.pt"
+      permission="zope2.View"
+      />
 
   <browser:page
-     name="patrimonycertificate-macros"
-     for="Products.urban.interfaces.IPatrimonyCertificate"
-     template="templates/patrimonycertificatemacros.pt"
-     permission="zope2.View"
-  />
+      name="patrimonycertificate-macros"
+      for="Products.urban.interfaces.IPatrimonyCertificate"
+      template="templates/patrimonycertificatemacros.pt"
+      permission="zope2.View"
+      />
 
   <browser:page
-     for="Products.urban.interfaces.IExplosivesPossession"
-     name="explosivespossessionview"
-     class=".explosivespossessionview.ExplosivesPossessionView"
-     template="templates/explosivespossessionview.pt"
-     permission="zope2.View"
-  />
+      name="explosivespossessionview"
+      for="Products.urban.interfaces.IExplosivesPossession"
+      class=".explosivespossessionview.ExplosivesPossessionView"
+      template="templates/explosivespossessionview.pt"
+      permission="zope2.View"
+      />
 
   <browser:page
-     name="explosivespossession-macros"
-     for="Products.urban.interfaces.IExplosivesPossession"
-     template="templates/explosivespossessionmacros.pt"
-     permission="zope2.View"
-  />
+      name="explosivespossession-macros"
+      for="Products.urban.interfaces.IExplosivesPossession"
+      template="templates/explosivespossessionmacros.pt"
+      permission="zope2.View"
+      />
 
   <browser:page
-          for="Products.urban.interfaces.IRoadDecree"
-          name="roaddecreeview"
-          class=".roaddecreeview.RoadDecreeView"
-          template="templates/roaddecreeview.pt"
-          permission="zope2.View"
-  />
+      name="roaddecreeview"
+      for="Products.urban.interfaces.IRoadDecree"
+      class=".roaddecreeview.RoadDecreeView"
+      template="templates/roaddecreeview.pt"
+      permission="zope2.View"
+      />
 
   <browser:page
-          name="roaddecree-macros"
-          for="Products.urban.interfaces.IRoadDecree"
-          template="templates/roaddecreemacros.pt"
-          permission="zope2.View"
-  />
+      name="roaddecree-macros"
+      for="Products.urban.interfaces.IRoadDecree"
+      template="templates/roaddecreemacros.pt"
+      permission="zope2.View"
+      />
 
   <browser:page
-     for="Products.urban.interfaces.IInspection"
-     name="inspectionview"
-     class=".inspectionview.InspectionView"
-     template="templates/inspectionview.pt"
-     permission="zope2.View"
-  />
+      name="inspectionview"
+      for="Products.urban.interfaces.IInspection"
+      class=".inspectionview.InspectionView"
+      template="templates/inspectionview.pt"
+      permission="zope2.View"
+      />
 
   <browser:page
-     name="inspection-macros"
-     for="Products.urban.interfaces.IInspection"
-     template="templates/inspectionmacros.pt"
-     permission="zope2.View"
-  />
+      name="inspection-macros"
+      for="Products.urban.interfaces.IInspection"
+      template="templates/inspectionmacros.pt"
+      permission="zope2.View"
+      />
 
   <browser:page
-      for="Products.urban.interfaces.IHousing"
       name="housingview"
+      for="Products.urban.interfaces.IHousing"
       class=".housingview.HousingView"
       template="templates/housingview.pt"
       permission="zope2.View"
-  />
+      />
 
   <browser:page
-     name="housing-macros"
-     for="Products.urban.interfaces.IHousing"
-     template="templates/housingmacros.pt"
-     permission="zope2.View"
-  />
+      name="housing-macros"
+      for="Products.urban.interfaces.IHousing"
+      template="templates/housingmacros.pt"
+      permission="zope2.View"
+      />
 
   <browser:page
-     for="Products.urban.interfaces.ITicket"
-     name="ticketview"
-     class=".ticketview.TicketView"
-     template="templates/ticketview.pt"
-     permission="zope2.View"
-  />
+      name="ticketview"
+      for="Products.urban.interfaces.ITicket"
+      class=".ticketview.TicketView"
+      template="templates/ticketview.pt"
+      permission="zope2.View"
+      />
 
   <browser:page
-     name="ticket-macros"
-     for="Products.urban.interfaces.ITicket"
-     template="templates/ticketmacros.pt"
-     permission="zope2.View"
-  />
+      name="ticket-macros"
+      for="Products.urban.interfaces.ITicket"
+      template="templates/ticketmacros.pt"
+      permission="zope2.View"
+      />
 
 </configure>

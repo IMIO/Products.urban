@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <layers>
-  <layer
-    name="Products.urban"
-    interface="Products.urban.interfaces.IProductUrbanLayer"
-    />
+  <layer interface="Products.urban.interfaces.IProductUrbanLayer"
+         name="Products.urban"
+  />
 </layers>

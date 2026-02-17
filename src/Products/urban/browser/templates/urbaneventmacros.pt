@@ -1,112 +1,163 @@
-<fieldset metal:define-macro="urbanEventDataMacro"  height="100%" i18n:domain="urban">
-    <legend i18n:translate="event_data">Event data</legend>
-    <table class="no-style-table; clear">
-        <tal:evtfield repeat="field fields" define="fields view/getFieldsToShow;">
-            <tr valign="top" tal:define="field_name python: field.__name__;
-                field_label python: field_name != 'eventDate' and field.widget.label or view.getDateCustomLabel();">
-                <td>
-                    <strong tal:content="field_label">Optional field label</strong>:&nbsp;&nbsp;&nbsp;&nbsp;
-                </td>
-                <tal:manage_show_nc_if_needed define="value python: field.getAccessor(context)()">
-                    <td tal:condition="python: bool(value)">
-                        <tal:no_long_text condition="python: not view.isTextField(field)">
-                            <metal:myfield use-macro="python: context.widget(field_name, mode='view')" />
-                        </tal:no_long_text>
-                        <!-- For long text, just show the first words and add a link to see the entire text -->
-                        <tal:long_text condition="python: view.isTextField(field)">
-                            <tal:block define="infos python: context.portal_urban.getTextToShow(context, field_name);
-                                isTooLong python: infos[0];
-                                textToShow python: infos[1];">
-                                <span tal:condition="isTooLong" id="urban-claims-text">
-                                    <span tal:replace="structure textToShow">Content...</span>
-                                    <br />
-                                    <a
-                                        class="link-overlay"
-                                        href="@@longtextview"
-                                        tal:attributes="href python: context.absolute_url() + '/@@longtextview?field=' + field_name"
-                                        i18n:translate="read_more">Lire la suite
-                                    </a>
-                                </span>
-                                <tal:block condition="not: isTooLong">
-                                    <metal:myfield use-macro="python: context.widget(field_name, mode='view')" />
-                                </tal:block>
-                            </tal:block>
-                        </tal:long_text>
-                    </td>
-                    <td tal:condition="python: not bool(value)">
-                        <span tal:condition="not: value" class="discreet" i18n:translate="content_none">Aucun(e)</span>
-                    </td>
-                </tal:manage_show_nc_if_needed>
-            </tr>
-        </tal:evtfield>
-        <tr tal:define="config python:context.getUrbaneventtypes();
-                        event_types python: config and config.getEventType()"
-            tal:condition="python: 'Products.urban.interfaces.ITransferOfLicenceEvent' in event_types">
-                <td>
-                    <metal:applicants_and_corporations_macro
-                        use-macro="here/../@@licencemacros/urbanApplicantsAndCorporationsMacro" />
-                    <tal:show_disabled_applicants condition= "here/get_applicants_history">
-                        <metal:disabled_applicants_and_corporations_macro
-                            use-macro="here/../@@licencemacros/urbanApplicantsHistoricAndCorporationsMacro" />
-                    </tal:show_disabled_applicants>
-                </td>
-        </tr>
-        <tr valign="top"
-            tal:condition="view/show_pm_summary"
-            tal:define="empty_pm_summary view/empty_pm_summary">
-            <td>
-                <strong >Textes du point Délib</strong>:&nbsp;&nbsp;&nbsp;&nbsp;
-            </td>
-            <td tal:condition="not: empty_pm_summary" id="pm-summary">
-                <a class="link-overlay" href="@@pmsummarytextview"
-                    tal:attributes="href python: context.absolute_url() + '/@@pmsummarytextview'"
-                    i18n:translate="read_texts">Read texts</a>
-            </td>
-            <td tal:condition="empty_pm_summary">
-                <span class="discreet" i18n:translate="content_none">Aucun(e)</span>
-            </td>
-        </tr>
-    </table>
+<fieldset height="100%"
+          metal:define-macro="urbanEventDataMacro"
+          i18n:domain="urban"
+>
+  <legend i18n:translate="event_data">Event data</legend>
+  <table class="no-style-table; clear">
+    <tal:evtfield define="
+                    fields view/getFieldsToShow;
+                  "
+                  repeat="field fields"
+    >
+      <tr valign="top"
+          tal:define="
+            field_name python: field.__name__;
+            field_label python: field_name != 'eventDate' and field.widget.label or view.getDateCustomLabel();
+          "
+      >
+        <td>
+          <strong tal:content="field_label">Optional field label</strong>:&nbsp;&nbsp;&nbsp;&nbsp;
+        </td>
+        <tal:manage_show_nc_if_needed define="
+                                        value python: field.getAccessor(context)();
+                                      ">
+          <td tal:condition="python: bool(value)">
+            <tal:no_long_text condition="python: not view.isTextField(field)">
+              <metal:myfield use-macro="python: context.widget(field_name, mode='view')" />
+            </tal:no_long_text>
+            <!-- For long text, just show the first words and add a link to see the entire text -->
+            <tal:long_text condition="python: view.isTextField(field)">
+              <tal:block define="
+                           infos python: context.portal_urban.getTextToShow(context, field_name);
+                           isTooLong python: infos[0];
+                           textToShow python: infos[1];
+                         ">
+                <span id="urban-claims-text"
+                      tal:condition="isTooLong"
+                >
+                  <span tal:replace="structure textToShow">Content...</span>
+                  <br />
+                  <a class="link-overlay"
+                     href="@@longtextview"
+                     tal:attributes="
+                       href python: context.absolute_url() + '/@@longtextview?field=' + field_name;
+                     "
+                     i18n:translate="read_more"
+                  >Lire la suite
+                  </a>
+                </span>
+                <tal:block condition="not: isTooLong">
+                  <metal:myfield use-macro="python: context.widget(field_name, mode='view')" />
+                </tal:block>
+              </tal:block>
+            </tal:long_text>
+          </td>
+          <td tal:condition="python: not bool(value)">
+            <span class="discreet"
+                  tal:condition="not: value"
+                  i18n:translate="content_none"
+            >Aucun(e)</span>
+          </td>
+        </tal:manage_show_nc_if_needed>
+      </tr>
+    </tal:evtfield>
+    <tr tal:define="
+          config python:context.getUrbaneventtypes();
+          event_types python: config and config.getEventType();
+        "
+        tal:condition="python: 'Products.urban.interfaces.ITransferOfLicenceEvent' in event_types"
+    >
+      <td>
+        <metal:applicants_and_corporations_macro use-macro="here/../@@licencemacros/urbanApplicantsAndCorporationsMacro" />
+        <tal:show_disabled_applicants condition="here/get_applicants_history">
+          <metal:disabled_applicants_and_corporations_macro use-macro="here/../@@licencemacros/urbanApplicantsHistoricAndCorporationsMacro" />
+        </tal:show_disabled_applicants>
+      </td>
+    </tr>
+    <tr valign="top"
+        tal:define="
+          empty_pm_summary view/empty_pm_summary;
+        "
+        tal:condition="view/show_pm_summary"
+    >
+      <td>
+        <strong>Textes du point D&eacute;lib</strong>:&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+      <td id="pm-summary"
+          tal:condition="not: empty_pm_summary"
+      >
+        <a class="link-overlay"
+           href="@@pmsummarytextview"
+           tal:attributes="
+             href python: context.absolute_url() + '/@@pmsummarytextview';
+           "
+           i18n:translate="read_texts"
+        >Read texts</a>
+      </td>
+      <td tal:condition="empty_pm_summary">
+        <span class="discreet"
+              i18n:translate="content_none"
+        >Aucun(e)</span>
+      </td>
+    </tr>
+  </table>
 </fieldset>
 
-<fieldset metal:define-macro="urbanEventGenerateDocumentMacro" i18n:domain="urban"
-        tal:define="templates_list view/getListOfTemplatesToGenerate">
-    <legend i18n:translate="generate_a_linked_doc">Generate a linked document</legend>
-    <tal:templates_link condition="python: templates_list">
-        <table class="clear">
-            <tal:loopEventType repeat="template templates_list">
-                <tr>
-                    <td tal:attributes="class python: template['class']">&nbsp</td><td>&nbsp</td>
-                    <td>
-                        <a
-                            onclick="javascript:event.preventDefault();
+<fieldset metal:define-macro="urbanEventGenerateDocumentMacro"
+          tal:define="
+            templates_list view/getListOfTemplatesToGenerate;
+          "
+          i18n:domain="urban"
+>
+  <legend i18n:translate="generate_a_linked_doc">Generate a linked document</legend>
+  <tal:templates_link condition="python: templates_list">
+    <table class="clear">
+      <tal:loopeventtype repeat="template templates_list">
+        <tr>
+          <td tal:attributes="
+                class python: template['class'];
+              ">&nbsp</td><td>&nbsp</td>
+          <td>
+            <a href="#"
+               onclick="javascript:event.preventDefault();
                             generate_document(generation_url=this.href);"
-                            href="#" tal:attributes="href python: template['href'];"
-                            tal:content="python: template['title']">Template Title
-                        </a>
-                        <br/>
-                    </td>
-                </tr>
-            </tal:loopEventType>
-        </table>
-    </tal:templates_link>
-    <tal:no_templateObjs condition="not: templates_list">
-        <p class="discreet" i18n:translate="no_document_to_generate">No document to generate</p>
-    </tal:no_templateObjs>
+               tal:content="python: template['title']"
+               tal:attributes="
+                 href python: template['href'];
+               "
+            >Template Title
+            </a>
+            <br />
+          </td>
+        </tr>
+      </tal:loopeventtype>
+    </table>
+  </tal:templates_link>
+  <tal:no_templateobjs condition="not: templates_list">
+    <p class="discreet"
+       i18n:translate="no_document_to_generate"
+    >No document to generate</p>
+  </tal:no_templateobjs>
 </fieldset>
 
-<metal:add_attachment
-    define-macro="urbanEventAddAttachmentMacro"
-    i18n:domain="urban"
-    tal:define="mayAddAttachment view/mayAddAttachment">
-    <a
-        tal:condition="mayAddAttachment"
-        href="@@quick_upload?typeupload=File"
-        class="link-overlay-urban-annex link-overlay"
-        style="cursor: pointer;">
-        <img title="Ajouter plusieurs annexes" src="icon_add_big.png">
-    </a>
-    <tal:not_may_add_attachment condition="not: mayAddAttachment">
-        <p class="discreet" i18n:translate="not_permitted_to_add_attachment">You can not add an attachment</p>
-    </tal:not_may_add_attachment>
+<metal:add_attachment define-macro="urbanEventAddAttachmentMacro"
+                      tal:define="
+                        mayAddAttachment view/mayAddAttachment;
+                      "
+                      i18n:domain="urban"
+>
+  <a class="link-overlay-urban-annex link-overlay"
+     href="@@quick_upload?typeupload=File"
+     style="cursor: pointer;"
+     tal:condition="mayAddAttachment"
+  >
+    <img src="icon_add_big.png"
+         title="Ajouter plusieurs annexes"
+    />
+  </a>
+  <tal:not_may_add_attachment condition="not: mayAddAttachment">
+    <p class="discreet"
+       i18n:translate="not_permitted_to_add_attachment"
+    >You can not add an attachment</p>
+  </tal:not_may_add_attachment>
 </metal:add_attachment>

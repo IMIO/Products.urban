@@ -1,196 +1,292 @@
-<?xml version="1.0"?>
-<object name="portal_types"
-        meta_type="Plone Types Tool">
- <object name="GenericLicence"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="Contact"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="UrbanTool"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="Street"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="UrbanEvent"
-         meta_type="Factory-based Type Information with dynamic views"/>
-  <object name="UrbanEventNotice"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="UrbanEventType"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="Recipient"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="BuildLicence"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="CODT_BuildLicence"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="ParcelOutLicence"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="CODT_ParcelOutLicence"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="FolderManager"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="UrbanVocabularyTerm"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="PortionOut"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="RecipientCadastre"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="Declaration"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="PcaTerm"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="City"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="UrbanCertificateBase"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="CODT_UrbanCertificateBase"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="UrbanCertificateTwo"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="CODT_UrbanCertificateTwo"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="Division"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="UrbanDelay"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="Locality"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="LicenceConfig"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="PersonTitleTerm"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="Inquiry"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="CODT_Inquiry"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="CODT_UniqueLicenceInquiry"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="UrbanEventNotificationCollege"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="UrbanEventCollege"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="UrbanEventMayor"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="UrbanEventAnnouncement"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="UrbanEventInquiry"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="UrbanEventOpinionRequest"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="UrbanEventFollowUp"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="OrganisationTerm"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="MiscDemand"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="UrbanConfigurationValue"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="EnvironmentBase"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="EnvironmentRubricTerm"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="SpecificFeatureTerm"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="OpinionRequestEventType"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="FollowUpEventType"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="EnvironmentLicence"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="EnvClassThree"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="Corporation"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="CorporationProprietary"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="CorporationPlaintiff"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="CorporationTenant"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="Claimant"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="Plaintiff"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="Applicant"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="Couple"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="ProprietaryCouple"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="EnvClassTwo"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="EnvClassOne"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="EnvClassBordering"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="Article127"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="CODT_Article127"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="UniqueLicence"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="CODT_UniqueLicence"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="IntegratedLicence"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="CODT_IntegratedLicence"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="CODT_CommercialLicence"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <!-- ##code-section TYPES -->
- <object name="Applicant"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="Architect"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="Claimant"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="File"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="Geometrician"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="Notary"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="NotaryLetter"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="CODT_NotaryLetter"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="Proprietary"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="Tenant"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="UrbanCertificateOne"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="CODT_UrbanCertificateOne"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="EnvClassOne"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="EnvClassBordering"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="EnvClassTwo"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="UrbanTemplate"
-         meta_type="Dexterity FTI"/>
- <object name="UrbanEventInspectionReport"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="UrbanDoc"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="PreliminaryNotice"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="ProjectMeeting"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="PatrimonyCertificate"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="ConfigTest"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="ExplosivesPossession"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="RoadDecree"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="Inspection"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="Ticket"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="ComplementaryDelayTerm"
-         meta_type="Factory-based Type Information with dynamic views"/>
- <object name="Housing"
-         meta_type="Factory-based Type Information with dynamic views" />
- <!-- ##/code-section TYPES -->
+<?xml version="1.0" encoding="utf-8"?>
+<object meta_type="Plone Types Tool"
+        name="portal_types"
+>
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="GenericLicence"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="Contact"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="UrbanTool"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="Street"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="UrbanEvent"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="UrbanEventNotice"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="UrbanEventType"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="Recipient"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="BuildLicence"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="CODT_BuildLicence"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="ParcelOutLicence"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="CODT_ParcelOutLicence"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="FolderManager"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="UrbanVocabularyTerm"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="PortionOut"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="RecipientCadastre"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="Declaration"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="PcaTerm"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="City"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="UrbanCertificateBase"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="CODT_UrbanCertificateBase"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="UrbanCertificateTwo"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="CODT_UrbanCertificateTwo"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="Division"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="UrbanDelay"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="Locality"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="LicenceConfig"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="PersonTitleTerm"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="Inquiry"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="CODT_Inquiry"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="CODT_UniqueLicenceInquiry"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="UrbanEventNotificationCollege"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="UrbanEventCollege"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="UrbanEventMayor"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="UrbanEventAnnouncement"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="UrbanEventInquiry"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="UrbanEventOpinionRequest"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="UrbanEventFollowUp"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="OrganisationTerm"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="MiscDemand"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="UrbanConfigurationValue"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="EnvironmentBase"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="EnvironmentRubricTerm"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="SpecificFeatureTerm"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="OpinionRequestEventType"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="FollowUpEventType"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="EnvironmentLicence"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="EnvClassThree"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="Corporation"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="CorporationProprietary"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="CorporationPlaintiff"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="CorporationTenant"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="Claimant"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="Plaintiff"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="Applicant"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="Couple"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="ProprietaryCouple"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="EnvClassTwo"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="EnvClassOne"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="EnvClassBordering"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="Article127"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="CODT_Article127"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="UniqueLicence"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="CODT_UniqueLicence"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="IntegratedLicence"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="CODT_IntegratedLicence"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="CODT_CommercialLicence"
+  />
+  <!-- ##code-section TYPES -->
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="Applicant"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="Architect"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="Claimant"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="File"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="Geometrician"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="Notary"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="NotaryLetter"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="CODT_NotaryLetter"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="Proprietary"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="Tenant"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="UrbanCertificateOne"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="CODT_UrbanCertificateOne"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="EnvClassOne"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="EnvClassBordering"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="EnvClassTwo"
+  />
+  <object meta_type="Dexterity FTI"
+          name="UrbanTemplate"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="UrbanEventInspectionReport"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="UrbanDoc"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="PreliminaryNotice"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="ProjectMeeting"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="PatrimonyCertificate"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="ConfigTest"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="ExplosivesPossession"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="RoadDecree"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="Inspection"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="Ticket"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="ComplementaryDelayTerm"
+  />
+  <object meta_type="Factory-based Type Information with dynamic views"
+          name="Housing"
+  />
+  <!-- ##/code-section TYPES -->
 </object>
