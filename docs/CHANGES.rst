@@ -8,6 +8,16 @@ Changelog
 
 .. towncrier release notes start
 
+2.9.8 (2026-02-17)
+------------------
+
+Bug fixes:
+
+
+- Avoid an error when event title contains special char
+  [mpeeters] (SUP-50992)
+
+
 2.9.7 (2026-02-16)
 ------------------
 
