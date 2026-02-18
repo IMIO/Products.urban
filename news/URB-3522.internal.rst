@@ -1,2 +1,0 @@
-Fix initialization of tests
-[mpeeters]

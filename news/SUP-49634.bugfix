@@ -1,2 +1,0 @@
-Remove locationTechnicalAdvice field from EnvironmentBase in CODT_UniqueLicence to avoid conflict with BaseBuildLicence
-[jchandelle]
