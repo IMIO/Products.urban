@@ -8,6 +8,16 @@ Changelog
 
 .. towncrier release notes start
 
+2.9.9 (2026-02-18)
+------------------
+
+Bug fixes:
+
+
+- Add the key `pod_portal_types` in drop key in import config view
+  [jchandelle] (URB-3521)
+
+
 2.9.8 (2026-02-17)
 ------------------
 
