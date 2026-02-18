@@ -3,7 +3,7 @@ from setuptools import setup
 
 import os
 
-version = "3.0.0b1"
+version = "3.0.0b2.dev0"
 
 setup(
     name="Products.urban",
