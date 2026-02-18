@@ -44,6 +44,7 @@ class ConfigImportContent(ImportContent):
         "OpinionEventConfig": ["internal_service"],
         "UrbanTemplate": [
             "mailing_loop_template",
+            "pod_portal_types"
         ],
     }
     default_value_none = {
