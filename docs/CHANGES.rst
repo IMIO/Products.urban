@@ -8,6 +8,93 @@ Changelog
 
 .. towncrier release notes start
 
+3.0.0b1 (2026-02-18)
+--------------------
+
+New features:
+
+
+- URBBDC-3204: Make field `additionalReference` optional
+  [mpeeters] (SUP-47891)
+- Add Upgrade step to set select_all_attachments_by_default to false
+  [jchandelle] (SUP-49033)
+- Add option to in get_readers to add opinion editor
+  [jchandelle] (SUP-49445)
+- Allow more values for the type of claim and an extra "Numérotation" column
+  [mpeeters] (SUP-49898)
+- Change `derogationDetails` widget to RichWidget
+  [jchandelle] (SUP-50509)
+- Add view to generate PortionOut plain file list
+  [jchandelle] (URBBDC-3205)
+
+
+Bug fixes:
+
+
+- Fix missing interface import
+  [jchandelle] (SUP-49326)
+- Add new urban event from liege in config
+  [jchandelle] (SUP-49334)
+- Fix urban vocabulary validity check
+  [jchandelle] (SUP-49339)
+- Fix upgrade step for Parcel and Parcelling
+  [jchandelle] (SUP-49359)
+- Fix inspection and ticket followup event vocabularies
+  [jchandelle] (SUP-49368)
+- Fix MultiSelect2Widget list display
+  [jchandelle] (SUP-49483)
+- Add `s` tags to filter html
+  [jchandelle] (SUP-49595)
+- Fix field order and set delay field as a default field on inspection report event
+  [mpeeters] (SUP-49605)
+- Add `@@reindex-contenttype` view for administrator to reindex specific content types
+  [mpeeters] (SUP-49632)
+- Remove locationTechnicalAdvice field from EnvironmentBase in CODT_UniqueLicence to avoid conflict with BaseBuildLicence
+  [jchandelle] (SUP-49634)
+- Fix csv claimant import and add an upgrade step for missing registry record
+  [jchandelle, mpeeters] (SUP-49898)
+- Fix missing icon
+  [jchandelle] (SUP-49910)
+- Fix history view with missing `site_url` required parameter
+  [jchandelle] (SUP-50324)
+- Add missing translations for flood zone vocabulary values
+  [mpeeters] (SUP-50328)
+- Add missing environement procedure in config list
+  [jchandelle] (SUP-50356)
+- Add a missing translation for schedule tasks condition
+  [mpeeters] (SUP-50453)
+- Add condition for Roaddecree for inquiry delay compute
+  [jchandelle] (SUP-50904)
+- Fix allowed type for field `derogationDetails`
+  [mpeeters] (URB-3462)
+- Fix an issue with voirie group in config
+  [mpeeters] (URB-3489)
+- Ensure that if we have datetime they are converted to Zope DateTime before comparison
+  [mpeeters] (URB-3495)
+- Add new fields for vocabulary term in AT to DX migration
+  [jchandelle] (URBBDC-3205)
+- Remove a duplicate class on "go back" link
+  [mpeeters] (URBBDC-3217)
+
+
+Internal:
+
+
+- Add `set_default_optional_field` function to add a field to the activated field list on licence config
+  Make `additionalReference` field activated by default on every licence type config for Urban Classic
+  [mpeeters] (SUP-47891)
+- Add an upgrade step to fix incorrect tal expressions for yellow highlights
+  [mpeeters] (SUP-49440)
+- Fix dashboard configs that are required to run tests
+  [mpeeters] (SUP-49445)
+- Black & isort
+  [mpeeters] (URB-2652)
+- Fix initialization of tests
+  [mpeeters] (URB-3522)
+- Make dependency for numpy optional before a replacement
+  [mpeeters] (URBBDC-3257)
+
+
 2.8.0b1 (2025-10-27)
 --------------------
 

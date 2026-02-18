@@ -1,2 +1,0 @@
-Allow more values for the type of claim and an extra "Numérotation" column
-[mpeeters]

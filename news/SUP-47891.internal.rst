@@ -1,3 +1,0 @@
-Add `set_default_optional_field` function to add a field to the activated field list on licence config
-Make `additionalReference` field activated by default on every licence type config for Urban Classic
-[mpeeters]

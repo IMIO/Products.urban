@@ -1,2 +1,0 @@
-Add missing translations for flood zone vocabulary values
-[mpeeters]
