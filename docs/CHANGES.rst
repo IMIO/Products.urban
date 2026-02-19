@@ -8,6 +8,20 @@ Changelog
 
 .. towncrier release notes start
 
+2.9.10 (2026-02-19)
+-------------------
+
+Bug fixes:
+
+
+- Fix keydate getter in case date not found
+  [jchandelle] (SUP-51022)
+- Fix broken eventType data introduced by a previous upgrade step
+  [daggelpop]
+  Fix and add logger in external method to fix missing event types
+  [jchandelle] (SUP-51053)
+
+
 2.9.9 (2026-02-18)
 ------------------
 
