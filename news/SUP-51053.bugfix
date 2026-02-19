@@ -1,4 +1,0 @@
-Fix broken eventType data introduced by a previous upgrade step
-[daggelpop]
-Fix and add logger in external method to fix missing event types
-[jchandelle]
