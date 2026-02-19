@@ -35,4 +35,12 @@
         handler=".update_290.refresh_javascript"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Recover event config interfaces"
+        description=""
+        source="2903"
+        destination="2904"
+        handler=".update_290.recover_event_config_interfaces"
+        profile="Products.urban:default" />
+
 </configure>

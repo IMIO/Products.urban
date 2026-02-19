@@ -4,6 +4,7 @@ from Products.urban import URBAN_TYPES
 from Products.urban import UrbanMessage as _
 from Products.urban.migration.utils import cook_javascript_resources
 from Products.urban.utils import moveElementAfter
+from dm.historical import getHistory
 from plone import api
 from plone.app.textfield import RichTextValue
 from plone.registry import field
@@ -190,4 +191,68 @@ def add_folder_manager_notice(context):
 def refresh_javascript(context):
     logger = logging.getLogger("urban: Cook javascript resources")
     cook_javascript_resources()
+    logger.info("Upgrade done!")
+
+
+def recover_event_config_interfaces(context):
+    from Products.urban.profiles.extra.data import EventConfigs
+
+    logger = logging.getLogger("urban: Recover event config interfaces")
+
+    def get_previous_event_type_interfaces(event):
+        history = getHistory(event)
+        for version in history:
+            old_obj = version["obj"]
+            event_type_interfaces = old_obj.getEventType()
+            broken_data_present = any(
+                [
+                    ".interfaces." not in event_type
+                    for event_type in event_type_interfaces
+                ]
+            )
+            if not broken_data_present:
+                return event_type_interfaces
+
+    # migrate event configs
+    tool = getToolByName(context, "portal_urban")
+    for urban_config_id in EventConfigs:
+        try:
+            uet_folder = getattr(
+                tool.getLicenceConfig(None, urbanConfigId=urban_config_id),
+                "eventconfigs",
+            )
+        except AttributeError:
+            continue  # TODO: log ?
+
+        for uet in EventConfigs[urban_config_id]:
+            portal_type = uet.get("portal_type", "EventConfig")
+            if portal_type == "OpinionEventConfig":
+                continue
+            id = uet["id"]
+            folder_event = getattr(uet_folder, id, None)
+
+            if folder_event:  # patch existing eventConfig
+                # look for broken data in eventType field
+                event_type_interfaces = folder_event.getEventType()
+                broken_data_present = any(
+                    [
+                        ".interfaces." not in event_type
+                        for event_type in event_type_interfaces
+                    ]
+                )
+                if broken_data_present:
+                    old_interfaces = get_previous_event_type_interfaces(folder_event)
+                    if old_interfaces:
+                        # restore old interfaces
+                        setattr(folder_event, "eventType", old_interfaces)
+                        # continue treatment from add_event_config_types_notice
+                        missing_interfaces = set(uet.get("eventType", [])) - set(
+                            old_interfaces
+                        )
+                        if missing_interfaces:
+                            new_interfaces = tuple(
+                                list(old_interfaces) + list(missing_interfaces)
+                            )
+                            setattr(folder_event, "eventType", new_interfaces)
+
     logger.info("Upgrade done!")
