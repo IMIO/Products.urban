@@ -50,21 +50,21 @@ def fix_missing_event_types():
     all_broken_events = list_missing_events()
     logger.info("Start fix missing event types")
     fixed = []
-    for count, (licence_type, events_to_fix) in enumerate(
+    for count_licence_type, (licence_type, events_to_fix) in enumerate(
         all_broken_events.iteritems()
     ):
         logger.info("licence type : {} ({}/{})".format(
             licence_type,
-            count,
+            count_licence_type,
             len(all_broken_events)
         ))
         urban_config = api.portal.get_tool("portal_urban")
         licence_cfg = getattr(urban_config, licence_type.lower()).eventconfigs
         all_event_types = licence_cfg.objectValues()
-        for count, event_name in enumerate(events_to_fix):
+        for count_event, event_name in enumerate(events_to_fix):
             logger.info("event : {} ({}/{})".format(
                 event_name,
-                count,
+                count_event,
                 len(events_to_fix)
             ))
             event_types = [
@@ -81,11 +81,11 @@ def fix_missing_event_types():
             if len(event_types) == 1:
                 event_type = event_types[0]
                 licences_to_fix = events_to_fix[event_name]
-                for count, licence in enumerate(licences_to_fix):
+                for count_licence, licence in enumerate(licences_to_fix):
                     licence_path = "/".join(licence.getPhysicalPath())
                     logger.info("licence : {} ({}/{})".format(
                         licence_path,
-                        count,
+                        count_licence,
                         len(licences_to_fix)
                     ))
                     to_fixes = [
