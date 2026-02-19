@@ -1,0 +1,2 @@
+Fix keydate getter in case date not found
+[jchandelle]
