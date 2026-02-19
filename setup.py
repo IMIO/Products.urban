@@ -66,6 +66,7 @@ setup(
         "collective.wfadaptations",
         "collective.z3cform.datagridfield>=0.15",
         "collective.archetypes.select2",
+        "dm.historical",
         "five.grok",
         "grokcore.component",
         "imio.actionspanel",
