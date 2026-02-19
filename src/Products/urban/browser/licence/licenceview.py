@@ -297,7 +297,7 @@ class LicenceView(BrowserView):
                                     {
                                         "date_label": date[0],
                                         "date": urban_tool.formatDate(
-                                            getattr(event, date[1]),
+                                            getattr(event, date[1], None),
                                             translatemonth=False,
                                         ),
                                         "url": event.absolute_url(),
