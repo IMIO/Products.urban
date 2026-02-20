@@ -52,4 +52,12 @@
         profile="Products.urban:default"
         />
 
+    <gs:upgradeStep
+        title="Add architect folder view"
+        description=""
+        source="2905"
+        destination="2906"
+        handler=".update_290.add_architect_folder_view"
+        profile="Products.urban:default" />
+
 </configure>

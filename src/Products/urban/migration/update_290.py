@@ -269,3 +269,17 @@ def update_documentation_url(context):
     setup_tool = api.portal.get_tool("portal_setup")
     setup_tool.runImportStepFromProfile("profile-Products.urban:default", "actions")
     logger.info("upgrade step done!")
+
+
+def add_architect_folder_view(context):
+    """
+    Add architect folder view
+    """
+    logger = logging.getLogger(
+        "urban: Add architect folder view"
+    )
+    logger.info("starting upgrade steps")
+    portal = api.portal.get()
+    architects_folder = portal["urban"]["architects"]
+    architects_folder.setLayout("architects_folderview")
+    logger.info("upgrade step done!")
