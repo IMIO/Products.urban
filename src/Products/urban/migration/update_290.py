@@ -256,3 +256,16 @@ def recover_event_config_interfaces(context):
                             setattr(folder_event, "eventType", new_interfaces)
 
     logger.info("Upgrade done!")
+
+
+def update_documentation_url(context):
+    """
+    Update documentation url
+    """
+    logger = logging.getLogger(
+        "urban: Update documentation url"
+    )
+    logger.info("starting upgrade steps")
+    setup_tool = api.portal.get_tool("portal_setup")
+    setup_tool.runImportStepFromProfile("profile-Products.urban:default", "actions")
+    logger.info("upgrade step done!")
