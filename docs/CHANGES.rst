@@ -8,6 +8,17 @@ Changelog
 
 .. towncrier release notes start
 
+3.0.0b2 (2026-02-20)
+--------------------
+
+New features:
+
+
+- Add view to generate PortionOut plain file list
+  Change rebuild catalog upgrade to update catalog
+  [jchandelle] (URBBDC-3205)
+
+
 3.0.0b1 (2026-02-18)
 --------------------
 
