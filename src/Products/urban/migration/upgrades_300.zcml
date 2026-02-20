@@ -34,8 +34,8 @@
           handler=".migrate_to_DX.fix_voirie_opinion_group"
           />
         <gs:upgradeStep
-          title="Rebuild Catalog"
-          handler=".migrate_to_DX.rebuild_catalog"
+          title="Update Catalog"
+          handler=".migrate_to_DX.update_catalog"
           />
         <gs:upgradeStep
           title="Migration urbaneventtypes folder"
