@@ -43,4 +43,13 @@
         handler=".update_290.recover_event_config_interfaces"
         profile="Products.urban:default" />
 
+     <gs:upgradeStep
+        title="Update documentation url"
+        description=""
+        source="2904"
+        destination="2905"
+        handler=".update_290.update_documentation_url"
+        profile="Products.urban:default"
+        />
+
 </configure>
