@@ -7,6 +7,7 @@ from Products.urban.migration.to_DX.migration_utils import migrate_to_shore
 from Products.urban.migration.to_DX.migration_utils import migrateCustomAT
 from Products.urban.migration.to_DX.migration_utils import uid_catalog_reindex_objects
 from Products.urban.migration.to_DX.migration_utils import migrateCustomAT_trough_licences
+from Products.ZCatalog.ProgressHandler import ZLogHandler
 from collective.noindexing import patches
 from imio.urban.core.contents.eventconfig import IEventConfig
 from plone import api
@@ -376,7 +377,8 @@ def update_catalog(context):
     logger.info("starting migration steps")
 
     catalog = api.portal.get_tool("portal_catalog")
-    REQUEST = context.REQUEST
-    catalog.manage_catalogReindex(REQUEST, REQUEST.RESPONSE, REQUEST.URL)
+    pgthreshold = catalog._getProgressThreshold()
+    handler = (pgthreshold > 0) and ZLogHandler(pgthreshold) or None
+    catalog.refreshCatalog(clear=1, pghandler=handler)
 
     logger.info("migration done!")
