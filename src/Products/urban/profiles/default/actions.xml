@@ -27,7 +27,7 @@
       <property name="visible">True</property>
     </object>
   </object>
-  <object meta_type="CMF Action Category"
+ <object meta_type="CMF Action Category"
           name="user"
   >
     <object insert-before="logout"

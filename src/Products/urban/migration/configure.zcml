@@ -6,8 +6,9 @@
     >
 
   <include file="upgrades.zcml" />
-  <include file="upgrades_notice.zcml" />
+ <include file="upgrades_notice.zcml" />
   <include file="upgrades_300.zcml" />
+  <include file="upgrades_290.zcml" />
   <include package=".to_DX" />
 
   <browser:page
