@@ -371,11 +371,12 @@ def fix_voirie_opinion_group(context):
     logger.info("migration done!")
 
 
-def rebuild_catalog(context):
-    logger = logging.getLogger("urban: Rebuild Catalog")
+def update_catalog(context):
+    logger = logging.getLogger("urban: Update Catalog")
     logger.info("starting migration steps")
 
     catalog = api.portal.get_tool("portal_catalog")
-    catalog.clearFindAndRebuild()
+    REQUEST = context.REQUEST
+    catalog.manage_catalogReindex(REQUEST, REQUEST.RESPONSE, REQUEST.URL)
 
     logger.info("migration done!")
