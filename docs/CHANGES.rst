@@ -8,6 +8,18 @@ Changelog
 
 .. towncrier release notes start
 
+2.9.11 (2026-02-20)
+-------------------
+
+Bug fixes:
+
+
+- URB-3485 Add architect folder view
+  [jchandelle] (URB-3485)
+- Change documentation url
+  [jchandelle] (URB-3531)
+
+
 2.9.10 (2026-02-19)
 -------------------
 
