@@ -310,10 +310,6 @@ URBAN_ENVIRONMENT_TYPES = [
     "EnvClassThree",
     "ExplosivesPossession",
     "EnvClassBordering",
-    "UniqueLicence",
-    "CODT_UniqueLicence",
-    "IntegratedLicence"
-    "CODT_IntegratedLicence"
 ]
 
 LICENCE_FINAL_STATES = [
