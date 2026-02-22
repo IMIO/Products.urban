@@ -1,2 +1,0 @@
-Revert `Add missing environement procedure in config list`
-[mpeeters]
