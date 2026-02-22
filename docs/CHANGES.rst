@@ -8,6 +8,16 @@ Changelog
 
 .. towncrier release notes start
 
+3.0.0b3 (2026-02-22)
+--------------------
+
+Bug fixes:
+
+
+- Revert `Add missing environement procedure in config list`
+  [mpeeters] (SUP-50356)
+
+
 3.0.0b2 (2026-02-20)
 --------------------
 
