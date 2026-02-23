@@ -1,2 +1,0 @@
-Avoid rendering errors if some informations from applicant are missing
-[mpeeters]
