@@ -386,6 +386,10 @@
       type=".interfaces.IEventTypeType"
       />
 
+  <interface
+    interface=".interfaces.IUrbanEventWithEnvironmentValidation"
+    type=".interfaces.IEventTypeType"/>
+
   <adapter
       factory="plone.indexer.wrapper.IndexableObjectWrapper"
       provides="plone.indexer.interfaces.IIndexableObject"

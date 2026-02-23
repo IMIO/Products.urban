@@ -589,6 +589,9 @@ class IObservationEvent(Interface):
     __doc__ = _("""IObservationEvent type marker interface""")
 
 
+class IUrbanEventWithEnvironmentValidation(Interface):
+    __doc__ = _("""Environment validation type marker interface""")
+
 class IUrbanBase(Interface):
     """Marker interface for .Base.UrbanBase"""
 

@@ -708,6 +708,10 @@ msgstr "Fin des travaux"
 msgid "ImpactStudy event type marker interface"
 msgstr "Étude d'incidence"
 
+#: ../interfaces.py:37
+msgid "Environment validation type marker interface"
+msgstr "Validation environnement"
+
 #: ../browser/urbaneventviews.py:338
 msgid "Import"
 msgstr "Import"

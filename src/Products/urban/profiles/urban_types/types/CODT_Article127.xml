@@ -30,7 +30,9 @@
     <element value="UrbanEventCollege" />
     <element value="UrbanEventNotificationCollege" />
     <element value="UrbanEventOpinionRequest" />
+    <element value="UrbanEventAcknowledgment" />
     <element value="CODT_Inquiry" />
+    <element value="UrbanEventMayor" />
     <element value="File" />
     <element value="task" />
   </property>

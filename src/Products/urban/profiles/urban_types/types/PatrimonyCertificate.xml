@@ -25,6 +25,7 @@
     <element value="UrbanEventOpinionRequest" />
     <element value="UrbanEvent" />
     <element value="UrbanEventCollege" />
+    <element value="UrbanEventMayor" />
     <element value="File" />
     <element value="Parcel" />
     <element value="task" />

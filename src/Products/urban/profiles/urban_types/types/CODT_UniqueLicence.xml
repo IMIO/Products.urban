@@ -33,6 +33,9 @@
     <element value="UrbanEventNotificationCollege" />
     <element value="UrbanEventOpinionRequest" />
     <element value="CODT_UniqueLicenceInquiry" />
+    <element value="UrbanEventAcknowledgment" />
+    <element value="UrbanEventWithEnvironmentValidation" />
+    <element value="UrbanUrbanEventPreliminaryAdvice" />
     <element value="File" />
     <element value="task" />
     <element value="ConfigTest" />

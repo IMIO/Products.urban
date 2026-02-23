@@ -29,6 +29,8 @@
     <element value="UrbanEventCollege" />
     <element value="UrbanEventNotificationCollege" />
     <element value="UrbanEventOpinionRequest" />
+    <element value="UrbanEventAcknowledgment" />
+    <element value="UrbanEventMayor" />
     <element value="Inquiry" />
     <element value="File" />
     <element value="task" />
