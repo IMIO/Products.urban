@@ -48,7 +48,7 @@ class LicenceView(BrowserView):
         for warning in config.getWarnings():
             name = warning["condition"]
             condition = queryAdapter(self.context, IUrbanWarningCondition, name)
-            if condition.evaluate():
+            if condition and condition.evaluate():
                 level = warning["level"]
                 plone_utils.addPortalMessage(
                     warning["message"].decode("utf-8"), type=level
@@ -60,7 +60,7 @@ class LicenceView(BrowserView):
         for warning in urban_tool.getWarnings():
             name = warning["condition"]
             condition = queryAdapter(self.context, IUrbanWarningCondition, name)
-            if name not in warned and condition.evaluate():
+            if name not in warned and (condition and condition.evaluate()):
                 level = warning["level"]
                 plone_utils.addPortalMessage(
                     warning["message"].decode("utf-8"), type=level

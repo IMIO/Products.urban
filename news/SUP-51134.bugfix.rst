@@ -1,0 +1,2 @@
+Avoid a `NotFound` error on licence view if there is no condition to evaluate for warnings
+[mpeeters]
