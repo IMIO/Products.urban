@@ -175,9 +175,10 @@ class Applicant(BaseContent, Contact, BrowserDefaultMixin):
             if not workLocations:
                 return ""
             else:
-                return workLocations[0]["number"]
+                nbr =  workLocations[0]["number"]
         else:
-            return self.getField("number").get(self)
+            nbr = self.getField("number").get(self)
+        return nbr and nbr or ""
 
     security.declarePublic("getZipcode")
 
@@ -192,9 +193,10 @@ class Applicant(BaseContent, Contact, BrowserDefaultMixin):
             street = self._getStreetFromLicence()
             if not street:
                 return ""
-            return str(street.getCity().getZipCode())
+            zip_code = str(street.getCity().getZipCode())
         else:
-            return self.getField("zipcode").get(self)
+            zip_code = self.getField("zipcode").get(self)
+        return zip_code and zip_code or ""
 
     security.declarePublic("getCity")
 
@@ -209,9 +211,10 @@ class Applicant(BaseContent, Contact, BrowserDefaultMixin):
             street = self._getStreetFromLicence()
             if not street:
                 return ""
-            return street.getCity().Title()
+            city = street.getCity().Title()
         else:
-            return self.getField("city").get(self)
+            city = self.getField("city").get(self)
+        return city and city or ""
 
     def _getStreetFromLicence(self):
         """
@@ -240,9 +243,10 @@ class Applicant(BaseContent, Contact, BrowserDefaultMixin):
             street = self._getStreetFromLicence()
             if not street:
                 return ""
-            return street.getStreetName()
+            street = street.getStreetName()
         else:
-            return self.getField("street").get(self)
+            street = self.getField("street").get(self)
+        return street and street or ""
 
     security.declarePublic("showRepresentedByField")
 
