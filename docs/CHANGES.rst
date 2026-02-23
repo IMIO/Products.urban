@@ -8,6 +8,18 @@ Changelog
 
 .. towncrier release notes start
 
+3.0.0b4 (2026-02-23)
+--------------------
+
+Bug fixes:
+
+
+- Avoid rendering errors if some informations from applicant are missing
+  [mpeeters] (SUP-51108)
+- Avoid a `NotFound` error on licence view if there is no condition to evaluate for warnings
+  [mpeeters] (SUP-51134)
+
+
 3.0.0b3 (2026-02-22)
 --------------------
 
