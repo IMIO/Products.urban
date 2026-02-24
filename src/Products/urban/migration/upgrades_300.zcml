@@ -107,6 +107,15 @@
       />
 
   <gs:upgradeStep
+      title="Move architects and geometricians to representative contacts for base buildlicence"
+      description=""
+      profile="Products.urban:default"
+      source="1214"
+      destination="1215"
+      handler=".update_300.migrate_move_basebuildlicence_architects_and_geometricians_to_representative_contacts"
+      />
+
+  <gs:upgradeStep
       title="Set additionalReference as an optional field"
       description="Activate additionalReference for all licences types"
       profile="Products.urban:default"
