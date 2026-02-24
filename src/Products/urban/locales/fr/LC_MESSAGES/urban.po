@@ -214,6 +214,9 @@ msgstr "Lettre de notaire (CODT)"
 msgid "CODT_ParcelOutLicence"
 msgstr "Permis d'urbanisation (CODT)"
 
+msgid "CODT_UniqueBorderingLicence"
+msgstr "Permis Unique commune limitrophe (CODT)"
+
 msgid "CODT_UniqueLicence"
 msgstr "Permis Unique (CODT)"
 
@@ -1445,6 +1448,9 @@ msgstr "Paramètres des lettres de notaire (CODT)"
 
 msgid "codt_parceloutlicence_urbanconfig_title"
 msgstr "Paramètres des permis d'urbanisation (CODT)"
+
+msgid "codt_uniqueborderinglicence_urbanconfig_title"
+msgstr "Paramètres des permis uniques communes limitrophes (CODT)"
 
 msgid "codt_uniquelicence_urbanconfig_title"
 msgstr "Paramètres des permis uniques (CODT)"

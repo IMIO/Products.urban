@@ -17,6 +17,7 @@ URBAN_TYPES_INTERFACES = {
     "CODT_NotaryLetter": interfaces.ICODT_NotaryLetter,
     "CODT_ParcelOutLicence": interfaces.ICODT_ParcelOutLicence,
     "CODT_UniqueLicence": interfaces.ICODT_UniqueLicence,
+    "CODT_UniqueBorderingLicence": interfaces.ICODT_UniqueBorderingLicence,
     "CODT_UrbanCertificateOne": interfaces.ICODT_UrbanCertificateOne,
     "CODT_UrbanCertificateTwo": interfaces.ICODT_UrbanCertificateTwo,
     "Article127": interfaces.IArticle127,

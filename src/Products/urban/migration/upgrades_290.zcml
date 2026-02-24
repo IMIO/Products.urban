@@ -60,4 +60,12 @@
         handler=".update_290.add_architect_folder_view"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Add CODT unique bordering licences"
+        description=""
+        source="2906"
+        destination="2907"
+        handler=".update_290.add_codt_uniquebordering_licences"
+        profile="Products.urban:default" />
+
 </configure>
