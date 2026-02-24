@@ -173,6 +173,21 @@
   />
 
   <browser:page
+     for="Products.urban.interfaces.ICODT_UniqueBorderingLicence"
+     name="codt_uniqueborderinglicenceview"
+     class=".codt_uniqueborderinglicenceview.CODTUniqueBorderingLicenceView"
+     template="templates/codt_uniqueborderinglicenceview.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     name="codt_uniqueborderinglicence-macros"
+     for="Products.urban.interfaces.ICODT_UniqueBorderingLicence"
+     template="templates/codt_uniqueborderinglicencemacros.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
      for="Products.urban.interfaces.ICODT_IntegratedLicence"
      name="codt_integratedlicenceview"
      class=".codt_integratedlicenceview.CODTIntegratedLicenceView"
