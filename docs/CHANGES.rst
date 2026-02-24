@@ -8,6 +8,23 @@ Changelog
 
 .. towncrier release notes start
 
+3.0.0b5 (2026-02-24)
+--------------------
+
+New features:
+
+
+- Change couple title format to the one from liege
+  [jchandelle] (SUP-51121)
+
+
+Bug fixes:
+
+
+- Add upgrade step and External method for fixing missing architect
+  [jchandelle] (SUP-51119)
+
+
 3.0.0b4 (2026-02-23)
 --------------------
 
