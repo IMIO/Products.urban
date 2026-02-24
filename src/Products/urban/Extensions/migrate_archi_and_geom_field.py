@@ -17,7 +17,8 @@ def migrate_fields(self):
                 )
             )
             rc_list = licence.getRepresentativeContacts()
-            rc_list.append(architect)
+            if architect not in rc_list:
+                rc_list.append(architect)
             licence.setRepresentativeContacts(rc_list)
             licence.setArchitects([])
             change = True
@@ -30,7 +31,8 @@ def migrate_fields(self):
                 )
             )
             rc_list = licence.getRepresentativeContacts()
-            rc_list.append(geometrician)
+            if geometrician not in rc_list:
+                rc_list.append(geometrician)
             licence.setRepresentativeContacts(rc_list)
             licence.setGeometricians([])
             change = True
