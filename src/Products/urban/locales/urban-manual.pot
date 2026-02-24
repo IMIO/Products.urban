@@ -56,6 +56,9 @@ msgstr ""
 msgid "CODT_UniqueLicence"
 msgstr ""
 
+msgid "CODT_UniqueBorderingLicence"
+msgstr ""
+
 msgid "CODT_UrbanCertificateOne"
 msgstr ""
 
@@ -216,6 +219,9 @@ msgid "codt_parceloutlicence_urbanconfig_title"
 msgstr ""
 
 msgid "codt_uniquelicence_urbanconfig_title"
+msgstr ""
+
+msgid "codt_uniqueborderinglicence_urbanconfig_title"
 msgstr ""
 
 msgid "codt_urbancertificateone_urbanconfig_title"
