@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from Products.urban.interfaces import IBaseBuildLicence
 from Products.urban.utils import set_default_optional_field
 from Products.urban.utils import set_eventconfig_optional_field
 from plone import api
@@ -12,6 +13,7 @@ from plone.app.textfield import RichTextValue
 from Products.CMFPlone.utils import safe_unicode
 
 import logging
+import transaction
 
 
 logger = logging.getLogger("urban: migrations")
@@ -225,4 +227,36 @@ def add_tags_to_filter_html(context):
         return
     valid_tags["s"] = 1
     _settransform(valid_tags=valid_tags)
+    logger.info("migration step done!")
+
+
+def migrate_move_basebuildlicence_architects_and_geometricians_to_representative_contacts(
+    context,
+):
+    """ """
+    from Products.urban.Extensions.migrate_archi_and_geom_field import migrate_fields
+    logger = logging.getLogger(
+        "urban: migrate migrate_move_basebuildlicence_architects_and_geometricians_to_representative_contacts"
+    )
+    logger.info("starting migration step")
+    catalog = api.portal.get_tool("portal_catalog")
+    change_count = 0
+    brains = catalog(
+        object_provides=IBaseBuildLicence.__identifier__,
+        sort_on="modified",
+        sort_order="ascending",
+    )
+    total = len(brains)
+    for count, brain in enumerate(brains):
+        licence = brain.getObject()
+        change = migrate_fields(licence)
+        if change:
+            change_count += 1
+        if change_count > 0 and change_count % 10 == 0:
+            logger.info("Licence {}/{} commited".format(
+                count+1,
+                total
+            ))
+            transaction.commit()
+
     logger.info("migration step done!")
