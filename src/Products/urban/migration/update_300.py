@@ -241,12 +241,13 @@ def migrate_move_basebuildlicence_architects_and_geometricians_to_representative
     logger.info("starting migration step")
     catalog = api.portal.get_tool("portal_catalog")
     change_count = 0
-    total = len(catalog(object_provides=IBaseBuildLicence.__identifier__))
-    for count, brain in enumerate(catalog(
+    brains = catalog(
         object_provides=IBaseBuildLicence.__identifier__,
         sort_on="modified",
         sort_order="ascending",
-    )):
+    )
+    total = len(brains)
+    for count, brain in enumerate(brains):
         licence = brain.getObject()
         change = migrate_fields(licence)
         if change:
