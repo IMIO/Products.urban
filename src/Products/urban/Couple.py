@@ -126,11 +126,11 @@ class Couple(BaseContent, Applicant, BrowserDefaultMixin):
         """
         Generate the title...
         """
-        return "%s %s-%s %s et %s" % (
+        return "%s %s %s et %s %s" % (
             self.getPersonTitle(short=True),
             self.getCouplePerson1Name(),
-            self.getCouplePerson2Name(),
             self.getCouplePerson1Firstname(),
+            self.getCouplePerson2Name(),
             self.getCouplePerson2Firstname(),
         )
 
