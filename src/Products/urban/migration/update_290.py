@@ -283,3 +283,33 @@ def add_architect_folder_view(context):
     architects_folder = portal["urban"]["architects"]
     architects_folder.setLayout("architects_folderview")
     logger.info("upgrade step done!")
+
+
+def recover_event_config_portal_types(context):
+    from Products.urban.profiles.extra.data import EventConfigs
+
+    logger = logging.getLogger("urban: Recover `UrbanEventCollege` portal type in relevant EventConfig")
+
+    tool = getToolByName(context, "portal_urban")
+    for urban_config_id in EventConfigs:
+        try:
+            uet_folder = getattr(
+                tool.getLicenceConfig(None, urbanConfigId=urban_config_id),
+                "eventconfigs",
+            )
+        except AttributeError:
+            continue
+
+        for uet in EventConfigs[urban_config_id]:
+            portal_type = uet.get("portal_type", "EventConfig")
+            if portal_type == "OpinionEventConfig":
+                continue
+            id = uet["id"]
+            folder_event = getattr(uet_folder, id, None)
+
+            if folder_event:  # patch existing eventConfig
+                should_be_college = "pmTitle" in folder_event.getActivatedFields()
+                if should_be_college and folder_event.getEventPortalType() != "UrbanEventCollege":
+                    setattr(folder_event, "eventPortalType", "UrbanEventCollege")
+
+    logger.info("upgrade step done!")
