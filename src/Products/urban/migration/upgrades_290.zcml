@@ -60,4 +60,12 @@
         handler=".update_290.add_architect_folder_view"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Recover `UrbanEventCollege` portal type in relevant EventConfig"
+        description=""
+        source="2906"
+        destination="2907"
+        handler=".update_290.recover_event_config_portal_types"
+        profile="Products.urban:default" />
+
 </configure>
