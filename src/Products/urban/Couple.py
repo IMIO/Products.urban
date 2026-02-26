@@ -145,17 +145,17 @@ class Couple(BaseContent, Applicant, BrowserDefaultMixin):
         namedefined = (
             lastNamePerson1 or firstNamePerson1 or lastNamePerson2 or firstNamePerson2
         )
-        names = u"%s-%s %s et %s" % (
+        names = u"%s %s et %s %s" % (
             lastNamePerson1,
-            lastNamePerson2,
             firstNamePerson1,
+            lastNamePerson2,
             firstNamePerson2,
         )
         if invertnames:
-            names = u"%s et %s %s-%s" % (
+            names = u"%s %s et %s %s" % (
                 firstNamePerson1,
-                firstNamePerson2,
                 lastNamePerson1,
+                firstNamePerson2,
                 lastNamePerson2,
             )
         names = names.strip()
