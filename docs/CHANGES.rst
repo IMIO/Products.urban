@@ -8,6 +8,16 @@ Changelog
 
 .. towncrier release notes start
 
+3.0.0b6 (2026-02-26)
+--------------------
+
+Bug fixes:
+
+
+- Fix merge field dor document
+  [jchandelle] (SUP-51121)
+
+
 3.0.0b5 (2026-02-24)
 --------------------
 
