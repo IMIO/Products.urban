@@ -8,6 +8,16 @@ Changelog
 
 .. towncrier release notes start
 
+2.9.12 (2026-02-26)
+-------------------
+
+Bug fixes:
+
+
+- Recover `UrbanEventCollege` portal type in relevant EventConfig
+  [daggelpop] (URB-3540)
+
+
 2.9.11 (2026-02-20)
 -------------------
 
