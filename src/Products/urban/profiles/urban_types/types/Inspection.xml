@@ -28,6 +28,7 @@
     <element value="Tenant" />
     <element value="Plaintiff" />
     <element value="CorporationPlaintiff" />
+    <element value="CorporationTenant" />
     <element value="UrbanEvent" />
     <element value="UrbanEventCollege" />
     <element value="UrbanEventInspectionReport" />
