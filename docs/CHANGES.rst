@@ -8,6 +8,18 @@ Changelog
 
 .. towncrier release notes start
 
+3.0.0b7 (2026-03-02)
+--------------------
+
+Bug fixes:
+
+
+- Add `CorporationTenant` in Inspection `allowed_content_types`
+  [jchandelle] (SUP-51237)
+- Add an external method to reindex all licences dates that come from events
+  [mpeeters] (SUP-51321)
+
+
 3.0.0b6 (2026-02-26)
 --------------------
 
