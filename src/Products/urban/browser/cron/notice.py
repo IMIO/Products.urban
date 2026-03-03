@@ -157,21 +157,36 @@ class ImportFromNoticeView(BrowserView):
         return notifications
 
     def _notify_successful_import(self, detailed_notification, urban_event):
-        args = {
-            "notice_id": detailed_notification.noticeId,
-            "notice_type": detailed_notification.notice_type,
-        }
-        event_wrapper = IContextWrapper(urban_event)(**args)
-        notify(NoticeImportSucceededEvent(event_wrapper))
+        notice_id = ""
+        try:
+            notice_id = detailed_notification.noticeId
+            notice_type = detailed_notification.notice_type
+            args = {
+                "notice_id": notice_id,
+                "notice_type": notice_type,
+            }
+            event_wrapper = IContextWrapper(urban_event)(**args)
+            notify(NoticeImportSucceededEvent(event_wrapper))
+        except Exception:
+            logger.exception(
+                u"Failed to emit NoticeImportSucceededEvent for notice_id=%s",
+                notice_id,
+            )
 
     def _notify_import_error(self, notice_id="", notice_type=""):
-        args = {
-            "notice_id": notice_id,
-            "notice_type": notice_type,
-        }
-        urban_folder = api.portal.get().urban
-        event_wrapper = IContextWrapper(urban_folder)(**args)
-        notify(NoticeImportFailedEvent(event_wrapper))
+        try:
+            args = {
+                "notice_id": notice_id,
+                "notice_type": notice_type,
+            }
+            urban_folder = api.portal.get().urban
+            event_wrapper = IContextWrapper(urban_folder)(**args)
+            notify(NoticeImportFailedEvent(event_wrapper))
+        except Exception:
+            logger.exception(
+                u"Failed to emit NoticeImportFailedEvent for notice_id=%s",
+                notice_id,
+            )
 
     def _add_error(self, licence, msg, serialized_data):
         """Add an error"""
