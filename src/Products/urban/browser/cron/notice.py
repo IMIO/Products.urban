@@ -76,6 +76,7 @@ class ImportFromNoticeView(BrowserView):
                     failed_notice_id,
                     exc,
                 )
+                self._notify_import_error(failed_notice_id, "failed retry")
                 remaining_failed.append(failed_notice_id)
 
         api.portal.set_registry_record(
@@ -118,6 +119,7 @@ class ImportFromNoticeView(BrowserView):
                     notice_id,
                     exc,
                 )
+                self._notify_import_error(notice_id, "failed import")
                 self.failed_notifications.append(notice_id)
 
     def _save_progress(self):
@@ -151,6 +153,7 @@ class ImportFromNoticeView(BrowserView):
                 u"Failed getting the list of recent notifications: %s",
                 exc,
             )
+            self._notify_import_error("webservice", "can't get notifications")
         return notifications
 
     def _notify_successful_import(self, detailed_notification, urban_event):
