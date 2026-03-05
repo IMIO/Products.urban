@@ -5,6 +5,7 @@ from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import *
 
 ##code-section module-header #fill in your manual code here
+from Products.CMFPlone.utils import safe_unicode
 from Products.DataGridField import DataGridField
 from Products.DataGridField import DataGridWidget
 from Products.DataGridField.Column import Column
@@ -115,7 +116,7 @@ class EnvClassBordering(EnvClassOne):
             if number:
                 signaletic += "%s %s à %s %s" % (
                     streetName,
-                    number.encode("utf8"),
+                    safe_unicode(number).encode("utf8"),
                     zipcode,
                     city,
                 )
