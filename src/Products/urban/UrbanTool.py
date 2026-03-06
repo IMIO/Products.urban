@@ -523,6 +523,7 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         puissance="",
         partie="",
         outdated=False,
+        allow_duplicate=False,
     ):
         parcel_id = "%05d%s%04d_%02d%s%03d_%s" % (
             int(division),
@@ -533,6 +534,8 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
             int(puissance or 0),
             partie and "1" or "0",
         )
+        if allow_duplicate is True:
+            parcel_id = self._adapt_parcel_id(parcel_id, container)
         parcel_data = {
             "division": division,
             "section": section,
@@ -548,6 +551,18 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         )
         container.reindexObject(idxs=["parcelInfosIndex"])
         self.REQUEST.RESPONSE.redirect(container.absolute_url() + "/view")
+
+    def _adapt_parcel_id(self, parcel_id, container):
+        existing = True
+        index = 1
+        new_parcel_id = parcel_id
+        while existing is True:
+            if new_parcel_id not in container:
+                existing = False
+                break
+            new_parcel_id = "{0}-{1}".format(parcel_id, index)
+            index += 1
+        return new_parcel_id
 
     security.declarePublic("getParcelsFromTopic")
 
