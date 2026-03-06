@@ -8,6 +8,17 @@ Changelog
 
 .. towncrier release notes start
 
+3.0.0b8 (2026-03-06)
+--------------------
+
+Bug fixes:
+
+
+- Add `allow_duplicate` parameter for parcel creation to ensure that
+  multiple parcels can be created for the same capakey
+  [mpeeters] (SUP-51199)
+
+
 3.0.0b7 (2026-03-02)
 --------------------
 
