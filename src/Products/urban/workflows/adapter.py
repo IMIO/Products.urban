@@ -86,7 +86,6 @@ class LocalRoleAdapter(object):
         portal_urban = api.portal.get_tool("portal_urban")
         schedule_config = portal_urban.opinions_schedule
 
-        exceptions = ["Voirie_editors", "Voirie_Validators"]
         opinion_editors = []
         all_opinion_request = self.context.getOpinionRequests()
 
@@ -193,7 +192,9 @@ class LocalRoleAdapter(object):
             roles = list(set(roles))
 
             for group in groups:
-                generated_mapping[group] = roles
+                # Extend roles instead of replace them
+                existing_roles = generated_mapping.get(group, [])
+                generated_mapping[group] = list(set(existing_roles + roles))
 
         return generated_mapping
 
