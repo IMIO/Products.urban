@@ -164,6 +164,17 @@ class ImportFromNoticeView(BrowserView):
         licence.description.raw += translate(error, context=self.request)
         licence._p_changed = 1
 
+    def _store_referenceFT(self, detailed_notification, licence):
+        try:
+            licence_ref = licence.getReferenceFT()
+        except AttributeError:
+            return
+
+        notification_ref = detailed_notification.referenceFT
+        if notification_ref and licence_ref != notification_ref:
+            licence.setReferenceFT(notification_ref)
+            licence.reindexObject(idxs=["referenceFT"])
+
     def _demande_ep(self, detailed_notification):
         licence = detailed_notification.licence
         if not licence:
@@ -184,6 +195,8 @@ class ImportFromNoticeView(BrowserView):
             api.content.create(container=event, **document.serialize())
 
         licence.set_notice_id("DEMANDE_EP", detailed_notification.noticeId)
+
+        self._store_referenceFT(detailed_notification, licence)
 
         transaction.commit()
 
@@ -206,6 +219,8 @@ class ImportFromNoticeView(BrowserView):
             api.content.create(container=event, **document.serialize())
 
         licence.set_notice_id("NOTIFICATION_RS", detailed_notification.noticeId)
+
+        self._store_referenceFT(detailed_notification, licence)
 
         transaction.commit()
 
@@ -240,6 +255,8 @@ class ImportFromNoticeView(BrowserView):
             api.content.create(container=event, **document.serialize())
 
         licence.set_notice_id("NOTIFICATION_DECISION", detailed_notification.noticeId)
+
+        self._store_referenceFT(detailed_notification, licence)
 
         transaction.commit()
 
@@ -355,6 +372,8 @@ class ImportFromNoticeView(BrowserView):
         for document in detailed_notification.documents:
             api.content.create(container=event, **document.serialize())
 
+        self._store_referenceFT(detailed_notification, licence)
+
         transaction.commit()
 
     def process_inadmissible_folder_notification(self, detailed_notification):
@@ -373,6 +392,8 @@ class ImportFromNoticeView(BrowserView):
 
         for document in detailed_notification.documents:
             api.content.create(container=event, **document.serialize())
+
+        self._store_referenceFT(detailed_notification, licence)
 
         transaction.commit()
 
@@ -396,5 +417,7 @@ class ImportFromNoticeView(BrowserView):
 
         for document in detailed_notification.documents:
             api.content.create(container=event, **document.serialize())
+
+        self._store_referenceFT(detailed_notification, licence)
 
         transaction.commit()
