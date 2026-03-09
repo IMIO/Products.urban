@@ -18,6 +18,7 @@
   <permission>urban: Add Claimant</permission>
   <permission>ATContentTypes: Add Image</permission>
   <permission>Access contents information</permission>
+  <permission>Manage properties</permission^
   <state state_id="closed"
          title="closed"
          i18n:attributes="title"
@@ -93,6 +94,14 @@
                     name="urban: Add RecipientCadastre"
     >
       <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="Manage properties"
+    >
+      <permission-role>Manager</permission-role>
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Owner</permission-role>
     </permission-map>
   </state>
   <state state_id="in_progress"
@@ -181,6 +190,14 @@
     </permission-map>
     <permission-map acquired="False"
                     name="urban: Add RecipientCadastre"
+    >
+      <permission-role>Manager</permission-role>
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Owner</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="Manage properties"
     >
       <permission-role>Manager</permission-role>
       <permission-role>Contributor</permission-role>
