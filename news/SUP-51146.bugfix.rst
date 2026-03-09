@@ -1,2 +1,0 @@
-Fix an issue with local role adapter when a method was overriding previous roles
-[mpeeters]
