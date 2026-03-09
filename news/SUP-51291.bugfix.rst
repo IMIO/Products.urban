@@ -1,0 +1,2 @@
+SUP-51291: Fix typo in zcml
+[mpeeters]
