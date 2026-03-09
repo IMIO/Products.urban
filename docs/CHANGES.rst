@@ -8,6 +8,16 @@ Changelog
 
 .. towncrier release notes start
 
+3.0.0b10 (2026-03-09)
+---------------------
+
+Bug fixes:
+
+
+- SUP-51291: Fix typo in zcml
+  [mpeeters] (SUP-51291)
+
+
 3.0.0b9 (2026-03-09)
 --------------------
 
