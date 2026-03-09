@@ -122,7 +122,7 @@
       source="*"
       destination="3000"
       handler=".update_300.set_additional_reference_as_default"
-      />  
+      />
 
   <gs:upgradeStep
       title="Set select_all_attachments_by_default to false"
@@ -131,7 +131,7 @@
       source="3000"
       destination="3001"
       handler=".update_300.set_select_all_attachments_by_default_to_false"
-      />  
+      />
 
   <gs:upgradeStep
       title="Add tags to filter html"
@@ -146,8 +146,8 @@
       title="Update event workflow"
       source="3002"
       destination="3003"
-      handler=".upgrade_300.update_event_workflow"
-      profile="liege.urban:default"
+      handler=".update_300.update_event_workflow"
+      profile="Products.urban:default"
       />
 
 </configure>
