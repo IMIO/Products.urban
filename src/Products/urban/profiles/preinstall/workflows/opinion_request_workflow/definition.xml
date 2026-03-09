@@ -18,6 +18,7 @@
   <permission>WebDAV Lock items</permission>
   <permission>WebDAV Unlock items</permission>
   <permission>Products.urban: Validate</permission>
+  <permission>Manage properties</permission>
   <state state_id="creation"
          title="creation"
          i18n:attributes="title"
@@ -101,6 +102,14 @@
       <permission-role>Contributor</permission-role>
       <permission-role>Manager</permission-role>
     </permission-map>
+    <permission-map acquired="False"
+                    name="Manage properties"
+    >
+      <permission-role>Manager</permission-role>
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Owner</permission-role>
+    </permission-map>
   </state>
   <state state_id="opinion_given"
          title="opinion_given"
@@ -175,6 +184,14 @@
       <permission-role>Editor</permission-role>
       <permission-role>Contributor</permission-role>
       <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="Manage properties"
+    >
+      <permission-role>Manager</permission-role>
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Owner</permission-role>
     </permission-map>
   </state>
   <state state_id="opinion_validation"
@@ -261,6 +278,14 @@
       <permission-role>Contributor</permission-role>
       <permission-role>Manager</permission-role>
     </permission-map>
+    <permission-map acquired="False"
+                    name="Manage properties"
+    >
+      <permission-role>Manager</permission-role>
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Owner</permission-role>
+    </permission-map>
   </state>
   <state state_id="waiting_opinion"
          title="waiting_opinion"
@@ -345,6 +370,14 @@
     >
       <permission-role>Contributor</permission-role>
       <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="Manage properties"
+    >
+      <permission-role>Manager</permission-role>
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Owner</permission-role>
     </permission-map>
   </state>
   <transition after_script=""

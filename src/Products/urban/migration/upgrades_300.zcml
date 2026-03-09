@@ -142,4 +142,12 @@
       handler=".update_300.add_tags_to_filter_html"
       />
 
+  <gs:upgradeStep
+      title="Update event workflow"
+      source="3002"
+      destination="3003"
+      handler=".upgrade_300.update_event_workflow"
+      profile="liege.urban:default"
+      />
+
 </configure>

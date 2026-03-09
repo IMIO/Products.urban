@@ -18,6 +18,7 @@
   <permission>View</permission>
   <permission>WebDAV Lock items</permission>
   <permission>WebDAV Unlock items</permission>
+  <permission>Manage properties</permission>
   <state state_id="closed"
          title="closed"
          i18n:attributes="title"
@@ -83,6 +84,14 @@
       <permission-role>Editor</permission-role>
       <permission-role>Contributor</permission-role>
       <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="Manage properties"
+    >
+      <permission-role>Manager</permission-role>
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Owner</permission-role>
     </permission-map>
   </state>
   <state state_id="decision_in_progress"
@@ -161,6 +170,14 @@
       <permission-role>Contributor</permission-role>
       <permission-role>Manager</permission-role>
     </permission-map>
+    <permission-map acquired="False"
+                    name="Manage properties"
+    >
+      <permission-role>Manager</permission-role>
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Owner</permission-role>
+    </permission-map>
   </state>
   <state state_id="draft"
          title="draft"
@@ -238,6 +255,14 @@
       <permission-role>Editor</permission-role>
       <permission-role>Contributor</permission-role>
       <permission-role>Manager</permission-role>
+    </permission-map>
+    <permission-map acquired="False"
+                    name="Manage properties"
+    >
+      <permission-role>Manager</permission-role>
+      <permission-role>Contributor</permission-role>
+      <permission-role>Editor</permission-role>
+      <permission-role>Owner</permission-role>
     </permission-map>
   </state>
   <transition after_script=""
