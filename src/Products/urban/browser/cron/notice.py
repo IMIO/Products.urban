@@ -4,9 +4,12 @@ from DateTime import DateTime
 from Products.Archetypes.event import ObjectInitializedEvent
 from Products.Five import BrowserView
 from Products.urban import UrbanMessage as _
+from Products.urban.contentrules.notice import NoticeImportFailedEvent
+from Products.urban.contentrules.notice import NoticeImportSucceededEvent
 from Products.urban.services import notice
 from datetime import datetime
 from plone import api
+from plone.stringinterp.interfaces import IContextWrapper
 from zope.event import notify
 from zope.i18n import translate
 from zope.lifecycleevent import ObjectModifiedEvent
@@ -73,6 +76,7 @@ class ImportFromNoticeView(BrowserView):
                     failed_notice_id,
                     exc,
                 )
+                self._notify_import_error(failed_notice_id, "failed retry")
                 remaining_failed.append(failed_notice_id)
 
         api.portal.set_registry_record(
@@ -115,6 +119,7 @@ class ImportFromNoticeView(BrowserView):
                     notice_id,
                     exc,
                 )
+                self._notify_import_error(notice_id, "failed import")
                 self.failed_notifications.append(notice_id)
 
     def _save_progress(self):
@@ -148,7 +153,40 @@ class ImportFromNoticeView(BrowserView):
                 u"Failed getting the list of recent notifications: %s",
                 exc,
             )
+            self._notify_import_error("webservice", "can't get notifications")
         return notifications
+
+    def _notify_successful_import(self, detailed_notification, urban_event):
+        notice_id = ""
+        try:
+            notice_id = detailed_notification.noticeId
+            notice_type = detailed_notification.notice_type
+            args = {
+                "notice_id": notice_id,
+                "notice_type": notice_type,
+            }
+            event_wrapper = IContextWrapper(urban_event)(**args)
+            notify(NoticeImportSucceededEvent(event_wrapper))
+        except Exception:
+            logger.exception(
+                u"Failed to emit NoticeImportSucceededEvent for notice_id=%s",
+                notice_id,
+            )
+
+    def _notify_import_error(self, notice_id="", notice_type=""):
+        try:
+            args = {
+                "notice_id": notice_id,
+                "notice_type": notice_type,
+            }
+            urban_folder = api.portal.get().urban
+            event_wrapper = IContextWrapper(urban_folder)(**args)
+            notify(NoticeImportFailedEvent(event_wrapper))
+        except Exception:
+            logger.exception(
+                u"Failed to emit NoticeImportFailedEvent for notice_id=%s",
+                notice_id,
+            )
 
     def _add_error(self, licence, msg, serialized_data):
         """Add an error"""
@@ -194,6 +232,8 @@ class ImportFromNoticeView(BrowserView):
         for document in detailed_notification.documents:
             api.content.create(container=event, **document.serialize())
 
+        self._notify_successful_import(detailed_notification, event)
+
         licence.set_notice_id("DEMANDE_EP", detailed_notification.noticeId)
 
         self._store_referenceFT(detailed_notification, licence)
@@ -217,6 +257,8 @@ class ImportFromNoticeView(BrowserView):
 
         for document in detailed_notification.documents:
             api.content.create(container=event, **document.serialize())
+
+        self._notify_successful_import(detailed_notification, event)
 
         licence.set_notice_id("NOTIFICATION_RS", detailed_notification.noticeId)
 
@@ -253,6 +295,8 @@ class ImportFromNoticeView(BrowserView):
 
         for document in detailed_notification.documents:
             api.content.create(container=event, **document.serialize())
+
+        self._notify_successful_import(detailed_notification, event)
 
         licence.set_notice_id("NOTIFICATION_DECISION", detailed_notification.noticeId)
 
@@ -352,6 +396,8 @@ class ImportFromNoticeView(BrowserView):
         # Reindex licence
         licence.reindexObject()
 
+        self._notify_successful_import(detailed_notification, event)
+
         transaction.commit()  # Useful in case of an error
 
     def process_incomplete_folder_notification(self, detailed_notification):
@@ -374,6 +420,8 @@ class ImportFromNoticeView(BrowserView):
 
         self._store_referenceFT(detailed_notification, licence)
 
+        self._notify_successful_import(detailed_notification, event)
+
         transaction.commit()
 
     def process_inadmissible_folder_notification(self, detailed_notification):
@@ -394,6 +442,8 @@ class ImportFromNoticeView(BrowserView):
             api.content.create(container=event, **document.serialize())
 
         self._store_referenceFT(detailed_notification, licence)
+
+        self._notify_successful_import(detailed_notification, event)
 
         transaction.commit()
 
@@ -419,5 +469,7 @@ class ImportFromNoticeView(BrowserView):
             api.content.create(container=event, **document.serialize())
 
         self._store_referenceFT(detailed_notification, licence)
+
+        self._notify_successful_import(detailed_notification, event)
 
         transaction.commit()
