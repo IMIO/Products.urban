@@ -71,6 +71,7 @@ ADD_CONTENT_PERMISSIONS = {
     "CODT_IntegratedLicence": "urban: Add CODT_IntegratedLicence",
     "CODT_ParcelOutLicence": "urban: Add CODT_ParcelOutLicence",
     "CODT_UniqueLicence": "urban: Add CODT_UniqueLicence",
+    "CODT_UniqueBorderingLicence": "urban: Add CODT_UniqueBorderingLicence",
     "CODT_UrbanCertificateTwo": "urban: Add CODT_UrbanCertificateTwo",
     "CODT_UrbanCertificateBase": "urban: Add CODT_UrbanCertificateBase",
     "Contact": "urban: Add Contact",
@@ -137,6 +138,7 @@ setDefaultRoles("urban: Add CODT_IntegratedLicence", ("Manager", "Contributor"))
 setDefaultRoles("urban: Add CODT_NotaryLetter", ("Manager", "Contributor"))
 setDefaultRoles("urban: Add CODT_ParcelOutLicence", ("Manager", "Contributor"))
 setDefaultRoles("urban: Add CODT_UniqueLicence", ("Manager", "Contributor"))
+setDefaultRoles("urban: Add CODT_UniqueBorderingLicence", ("Manager", "Contributor"))
 setDefaultRoles("urban: Add CODT_UrbanCertificateOne", ("Manager", "Contributor"))
 setDefaultRoles("urban: Add CODT_UrbanCertificateTwo", ("Manager", "Contributor"))
 setDefaultRoles("urban: Add CODT_UrbanCertificateBase", ("Manager", "Contributor"))
@@ -204,6 +206,7 @@ URBAN_TYPES = [
     "CODT_IntegratedLicence",
     "UniqueLicence",
     "CODT_UniqueLicence",
+    "CODT_UniqueBorderingLicence",
     "Declaration",
     "UrbanCertificateOne",
     "CODT_UrbanCertificateOne",
@@ -239,6 +242,7 @@ URBAN_TYPES_ACRONYM = {
     "CODT_IntegratedLicence": "PI",
     "UniqueLicence": "PU",
     "CODT_UniqueLicence": "PU",
+    "CODT_UniqueBorderingLicence": "PUL",
     "Declaration": "D",
     "UrbanCertificateOne": "CU1",
     "CODT_UrbanCertificateOne": "CU1",
@@ -290,6 +294,7 @@ URBAN_CODT_TYPES = [
     "CODT_IntegratedLicence",
     "CODT_ParcelOutLicence",
     "CODT_UniqueLicence",
+    "CODT_UniqueBorderingLicence",
     "CODT_UrbanCertificateTwo",
     "CODT_UrbanCertificateOne",
     "CODT_NotaryLetter",

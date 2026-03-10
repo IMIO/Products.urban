@@ -220,6 +220,7 @@ def initialize(context):
     import content.licence.CODT_CommercialLicence
     import content.licence.CODT_IntegratedLicence
     import content.licence.CODT_ParcelOutLicence
+    import content.licence.CODT_UniqueBorderingLicence
     import content.licence.CODT_UniqueLicence
     import content.licence.CODT_UrbanCertificateTwo
     import content.licence.Declaration
