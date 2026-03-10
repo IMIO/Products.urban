@@ -1,0 +1,61 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal">
+
+<div>
+  <h1 class="documentFirstHeading" >
+      Fix event link
+  </h1>
+  <form action="@@fix-event-link" method="post">
+  <ul>
+
+    <li tal:repeat="event python: view.get_events()">
+      <label tal:attributes="for event/id" ><span tal:content="event/title">Title</span>
+      (<span tal:content="event/id">id</span>) <a tal:attributes="href python:event['url']+'/manage_main'" href="">manage_main</a>
+      <div>Current event config uid: <span tal:content="event/urbaneventtypes">current UID</span></div>
+      <div>
+        Config title: <span tal:condition="event/event_config_title" tal:content="event/event_config_title">
+          event title
+        </span>
+        (<span tal:condition="event/event_config_path" tal:content="event/event_config_path">event path</span>)
+      </div></label>
+      <div class="field">
+          <label tal:attributes="for event/id">New urbaneventtypes</label>
+          <div class="widget">
+            <input type="text" value=""
+            tal:attributes="id event/id;
+                            name event/id;">
+          </div>
+      </div>
+      <div class="field">
+        <ul>
+          <li tal:repeat="event_config python:view.get_potential_config_fix(event['event_config_title'])">
+            <a tal:attributes="href event_config/url" href="">
+              <span tal:content="event_config/title">title</span> (<span tal:content="event_config/path"></span>)
+            </a> 
+            <button tal:attributes="value event_config/uid;
+                                    name event/id"
+              class="btn btn-primary submit-widget button-field context"
+              type="submit" name="Fix" value="">
+              Link this config to the event
+            </button>
+          </li>
+        </ul>
+      </div>
+  </li>
+  </ul>
+  
+  <div class="formControls" class="form-group">
+      <input type="hidden" name="form.submitted" value="1"/>
+
+      <button class="btn btn-primary submit-widget button-field context"
+              type="submit" name="submit" value="fix">Fix Events
+      </button>
+
+  </div>
+
+</form>
+
+</div>
+
+</html>
