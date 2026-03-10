@@ -18,7 +18,9 @@ class UrbanConfigImportOrdering(ImportOrdering):
         for index, item in enumerate(data, start=1):
             obj = api.content.get(UID=item["uuid"])
             if not obj and "path" in item:
-                obj = api.content.get(path=item["path"])
+                path = str(item["path"])
+                # a unicode path would return nothing, even if the content exists !
+                obj = api.content.get(path=path)
             if not obj:
                 continue
             ordered = IOrderedContainer(obj.__parent__, None)

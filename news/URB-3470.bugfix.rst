@@ -1,0 +1,2 @@
+Avoid content lookup with a unicode path
+[ndemonte]
