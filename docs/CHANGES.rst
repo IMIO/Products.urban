@@ -8,6 +8,16 @@ Changelog
 
 .. towncrier release notes start
 
+3.0.0b11 (2026-03-12)
+---------------------
+
+Bug fixes:
+
+
+- Add external methods to add missing `Manage properties` permission to reorder uploaded files
+  [mpeeters] (SUP-51291)
+
+
 3.0.0b10 (2026-03-09)
 ---------------------
 
