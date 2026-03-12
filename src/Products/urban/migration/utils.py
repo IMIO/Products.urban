@@ -85,3 +85,18 @@ def refresh_workflow_permissions(workflow_id, folder_path=None, for_states=None)
                 workflow.updateRoleMappingsFor(obj)
                 obj.reindexObjectSecurity()
                 obj.reindexObject(idxs=["allowedRolesAndUsers"])
+
+
+def refresh_object_workflow_permissions(obj, workflow_id):
+    portal_workflow = api.portal.get_tool("portal_workflow")
+    workflow = None
+    for at_type, wf_ids in portal_workflow._chains_by_type.items():
+        if len(wf_ids) < 1:
+            continue
+        if wf_ids[0] == workflow_id:
+            workflow = portal_workflow.getWorkflowById(wf_ids[0])
+    if workflow is None:
+        raise ValueError("Unknown workflow '{0}'".format(workflow_id))
+    workflow.updateRoleMappingsFor(obj)
+    obj.reindexObjectSecurity()
+    obj.reindexObject(idxs=["allowedRolesAndUsers"])

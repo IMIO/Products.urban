@@ -18,7 +18,7 @@
   <permission>urban: Add Claimant</permission>
   <permission>ATContentTypes: Add Image</permission>
   <permission>Access contents information</permission>
-  <permission>Manage properties</permission^
+  <permission>Manage properties</permission>
   <state state_id="closed"
          title="closed"
          i18n:attributes="title"
