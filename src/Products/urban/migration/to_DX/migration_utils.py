@@ -254,7 +254,7 @@ class UrbanLicenceWalker(CustomQueryWalker):
 registerWalker(UrbanLicenceWalker)
 
 
-class GenerateCotentTypeList(BrowserView):
+class GenerateContentTypeList(BrowserView):
     last_modified_key = "Products.urban.interfaces.IMigrationIndex.last_modified"
     src_portal_type = None
     object_provides = IGenericLicence.__identifier__,
@@ -389,7 +389,7 @@ class GenerateCotentTypeList(BrowserView):
 
 class UrbanLicenceToFileWalker(CustomQueryWalker):
     index_key = "Products.urban.interfaces.IMigrationIndex.indexes"
-    generate_file = GenerateCotentTypeList(None, None)
+    generate_file = GenerateContentTypeList(None, None)
 
     def get_elements(self):
         update = False

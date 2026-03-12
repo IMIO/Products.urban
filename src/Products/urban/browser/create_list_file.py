@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 
-from Products.urban.migration.to_DX.migration_utils import GenerateCotentTypeList
+from Products.urban.migration.to_DX.migration_utils import GenerateContentTypeList
 
 
-class GeneratePortioOutList(GenerateCotentTypeList):
+class GeneratePortioOutList(GenerateContentTypeList):
     src_portal_type = "PortionOut"
 
 
-class GenerateParcelList(GenerateCotentTypeList):
+class GenerateParcelList(GenerateContentTypeList):
     src_portal_type = "Parcel"
     sort_order="ascending"
 
