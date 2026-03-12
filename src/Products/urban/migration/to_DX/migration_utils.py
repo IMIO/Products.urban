@@ -257,6 +257,12 @@ registerWalker(UrbanLicenceWalker)
 class GenerateCotentTypeList(BrowserView):
     last_modified_key = "Products.urban.interfaces.IMigrationIndex.last_modified"
     src_portal_type = None
+    object_provides = IGenericLicence.__identifier__,
+    sort_on = "modified",
+    sort_order = "descending",
+
+    def condition(self, data):
+        return None
 
     def __call__(self):
         update = False
@@ -297,12 +303,12 @@ class GenerateCotentTypeList(BrowserView):
         self.init_registry_last_modified()
         catalog = api.portal.get_tool("portal_catalog")
         paths = []
-        portion_out_count = 0
+        sub_object_count = 0
         temp_last_modifed = None
         for count, brain in enumerate(catalog(
-            object_provides=IGenericLicence.__identifier__,
-            sort_on="modified",
-            sort_order="descending",
+            object_provides=self.object_provides,
+            sort_on=self.sort_on,
+            sort_order=self.sort_order,
         )):
             if update and count == 0:
                 temp_last_modifed = brain.modified
@@ -324,12 +330,14 @@ class GenerateCotentTypeList(BrowserView):
             licence_obj = uuidToObject(brain.UID)
             for obj in licence_obj.objectValues():
                 if obj.portal_type == self.src_portal_type:
-                    if portion_out_count > 0 and portion_out_count % 10 == 0:
+                    if self.condition(obj) is not None and (not self.condition(obj)):
+                        continue
+                    if sub_object_count > 0 and sub_object_count % 10 == 0:
                         logger.info("{} : {}".format(
-                            self.src_portal_type, portion_out_count
+                            self.src_portal_type, sub_object_count
                         ))
                     paths.append('/'.join(obj.getPhysicalPath()))
-                    portion_out_count += 1
+                    sub_object_count += 1
         self.write_element('\n'.join(paths), update)
 
     def init_registry_last_modified(self):

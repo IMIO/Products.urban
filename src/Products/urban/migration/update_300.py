@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from Products.urban.interfaces import IBaseBuildLicence
+from Products.urban.browser.create_list_file import GenerateParcelList
+from Products.urban.migration.to_DX.migration_utils import UrbanLicenceToFileWalker
 from Products.urban.utils import set_default_optional_field
 from Products.urban.utils import set_eventconfig_optional_field
 from plone import api
@@ -268,3 +270,40 @@ def update_event_workflow(context):
     setup_tool = api.portal.get_tool('portal_setup')
     setup_tool.runImportStepFromProfile('profile-Products.urban:preinstall', 'workflow')
     logger.info("migration step done!")
+
+
+class ParcelMigrator():
+    src_portal_type = "Parcel"
+    src_portal_type = None
+    dst_portal_type = None
+    src_meta_type = None
+    dst_meta_type = None
+    dry_run_mode = None
+
+    def __init__(
+        self,
+        obj,
+        src_portal_type,
+        dst_portal_type,
+        **kwargs
+    ):
+        self.obj = obj
+
+    def migrate(self):
+        self.obj.street_number = str(int(self.obj.street_number))
+
+
+def fix_parcel_integer_number(context):
+    logger = logging.getLogger("urban: Fix parcel integer number")
+    walker_settings = {
+        "portal": api.portal.get(),
+        "migrator": ParcelMigrator,
+        "src_portal_type": "Parcel",
+        "transaction_size": 1000,
+        "full_transaction": True,
+        "use_savepoint": False,
+    }
+    walker = UrbanLicenceToFileWalker(**walker_settings)
+    walker.generate_file = GenerateParcelList(None, None)
+    walker.go()
+    logger.info("Upgrade done!")
