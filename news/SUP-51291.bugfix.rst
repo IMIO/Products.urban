@@ -1,0 +1,2 @@
+Add external methods to add missing `Manage properties` permission to reorder uploaded files
+[mpeeters]
