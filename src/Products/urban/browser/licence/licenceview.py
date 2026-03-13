@@ -640,8 +640,6 @@ class EnvironmentLicenceView(LicenceView):
                     "url": cond.absolute_url() + "/description",
                     "title": cond.Title(),
                     "type": val,
-                    "url": cond.absolute_url() + "/description/getRaw",
-                    "title": cond.Title(),
                 }
             )
         sort = []
