@@ -274,7 +274,6 @@ def update_event_workflow(context):
 
 class ParcelMigrator():
     src_portal_type = "Parcel"
-    src_portal_type = None
     dst_portal_type = None
     src_meta_type = None
     dst_meta_type = None

@@ -15,4 +15,4 @@ class GenerateParcelList(GenerateContentTypeList):
         number = getattr(data, "street_number", None)
         if number is None:
             return False
-        return isinstance(number ,int) or isinstance(number ,float)
+        return isinstance(number, int) or isinstance(number, float)
