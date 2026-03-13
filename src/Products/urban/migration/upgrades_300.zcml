@@ -116,6 +116,15 @@
       />
 
   <gs:upgradeStep
+      title="Fix parcel integer number"
+      description=""
+      profile="Products.urban:default"
+      source="1215"
+      destination="1216"
+      handler=".update_300.fix_parcel_integer_number"
+      />
+
+  <gs:upgradeStep
       title="Set additionalReference as an optional field"
       description="Activate additionalReference for all licences types"
       profile="Products.urban:default"
