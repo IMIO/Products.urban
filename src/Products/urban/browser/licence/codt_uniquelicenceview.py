@@ -3,11 +3,11 @@
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone import PloneMessageFactory as _
 from Products.urban.browser.licence.codt_buildlicenceview import CODTBuildLicenceView
-from Products.urban.browser.licence.licenceview import LicenceView
+from Products.urban.browser.licence.licenceview import EnvironmentLicenceView
 from plone import api
 
 
-class CODTUniqueLicenceView(CODTBuildLicenceView, LicenceView):
+class CODTUniqueLicenceView(CODTBuildLicenceView, EnvironmentLicenceView):
     """
     This manage the view of BuildLicence
     """
