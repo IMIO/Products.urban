@@ -8,6 +8,18 @@ Changelog
 
 .. towncrier release notes start
 
+3.0.0b12 (2026-03-14)
+---------------------
+
+Bug fixes:
+
+
+- Fix minimumLegalConditions link display
+  [jchandelle] (SUP-51225)
+- Add upgrade step to fix parcel street_number
+  [jchandelle] (SUP-51288)
+
+
 3.0.0b11 (2026-03-12)
 ---------------------
 
