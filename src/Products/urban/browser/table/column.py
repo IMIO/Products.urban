@@ -68,7 +68,7 @@ class RelatedLicencesColumn(Column):
         return translate(self.header, "urban", context=self.request)
 
     def renderCell(self, parcel):
-        url = parcel.aq_parent.absolute_url()
+        url = self.context.absolute_url()
         id = parcel.getId()
         img = '<img  src="linkedfolders.png" class="urban-linkedfolders-icon"/>'
         link = '<a class="link-overlay" href="%s/@@parcelrecordsview?id=%s">%s</a>' % (

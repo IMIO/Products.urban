@@ -18,11 +18,22 @@ class ParcelRecordsView(BrowserView):
         self.request = request
         parcel_id = self.request.get("id", "")
         parcel = getattr(context, parcel_id, None)
+        if not parcel:
+            # This happen with a link on related licence
+            parcel = self.get_bound_licences_parcel(parcel_id)
         self.capakey = parcel and parcel.get_capakey() or ""
         self.capakeys = []
         if not self.capakey:
             plone_utils = api.portal.get_tool("plone_utils")
             plone_utils.addPortalMessage(_("Nothing to show !!!"), type="error")
+
+    def get_bound_licences_parcel(self, parcel_id):
+        """Try to find a parcel based on his ID on bound licences"""
+        if not hasattr(self.context, "getBound_licences"):
+            return None
+        for licence in self.context.getBound_licences():
+            if parcel_id in licence:
+                return licence[parcel_id]
 
     def get_related_licences_displays(self, capakey=None):
         """
