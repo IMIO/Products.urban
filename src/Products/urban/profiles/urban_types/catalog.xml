@@ -185,4 +185,12 @@
   </index>
   <column value="getComplementary_delay" />
   <!-- ##/code-section FOOT -->
+  <column value="getComplementary_delay"/>
+
+  <index name="referenceFT" meta_type="FieldIndex">
+    <indexed_attr value="referenceFT"/>
+  </index>
+  <column value="referenceFT"/>
+
+<!-- ##/code-section FOOT -->
 </object>
