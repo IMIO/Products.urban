@@ -213,17 +213,31 @@ class NoticeNotification(NoticeElement):
     @property
     def licence(self):
         """Return the licence, if there is already one"""
-        if not self.reference:
-            raise ValueError("No reference found in notification {}".format(self.noticeId))
         catalog = api.portal.get_tool("portal_catalog")
-        brains = catalog.unrestrictedSearchResults(
-            getReference=self.reference,
-            object_provides=IGenericLicence.__identifier__,
+
+        if self.reference:
+            brains = catalog.unrestrictedSearchResults(
+                getReference=self.reference,
+                object_provides=IGenericLicence.__identifier__,
+            )
+            if brains:
+                licence = brains[0].getObject()
+                return licence
+
+        if self.referenceFT:
+            brains = catalog.unrestrictedSearchResults(
+                referenceFT=self.referenceFT,
+                object_provides=IGenericLicence.__identifier__,
+            )
+            if brains:
+                licence = brains[0].getObject()
+                return licence
+
+        raise ValueError(
+            "No licence found with reference number {} / reference FT {}".format(
+                self.reference, self.referenceFT
+            )
         )
-        if len(brains) == 0:
-            raise ValueError("No licence found with reference number {}".format(self.reference))
-        licence = brains[0].getObject()
-        return licence
 
     @property
     def event_configs(self):

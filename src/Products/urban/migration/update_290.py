@@ -5,6 +5,7 @@ from Products.urban import UrbanMessage as _
 from Products.urban.migration.utils import cook_javascript_resources
 from Products.urban.utils import moveElementAfter
 from dm.historical import getHistory
+from imio.helpers.catalog import reindexIndexes
 from plone import api
 from plone.app.textfield import RichTextValue
 from plone.registry import field
@@ -311,5 +312,16 @@ def recover_event_config_portal_types(context):
                 should_be_college = "pmTitle" in folder_event.getActivatedFields()
                 if should_be_college and folder_event.getEventPortalType() != "UrbanEventCollege":
                     setattr(folder_event, "eventPortalType", "UrbanEventCollege")
+
+    logger.info("upgrade step done!")
+
+
+def setup_index_referenceFT(context):
+    logger = logging.getLogger("urban: Set up `referenceFT` index")
+
+    setup_tool = api.portal.get_tool("portal_setup")
+    setup_tool.runImportStepFromProfile("profile-Products.urban:urbantypes", "catalog")
+
+    reindexIndexes(None, ["referenceFT"])
 
     logger.info("upgrade step done!")

@@ -68,4 +68,12 @@
         handler=".update_290.recover_event_config_portal_types"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Set up `referenceFT` index"
+        description=""
+        source="2907"
+        destination="2908"
+        handler=".update_290.setup_index_referenceFT"
+        profile="Products.urban:default" />
+
 </configure>
