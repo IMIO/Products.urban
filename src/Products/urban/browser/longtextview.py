@@ -51,7 +51,7 @@ class PmSummaryTextView(BrowserView):
             if not activatedField:
                 continue  # in some case, there could be an empty value in activatedFields...
             field = context.getField(activatedField)
-            if hasattr(field, "pm_text_field"):
+            if field and hasattr(field, "pm_text_field"):
                 fields.append(field)
         return fields
 
