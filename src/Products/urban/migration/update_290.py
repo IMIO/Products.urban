@@ -330,6 +330,8 @@ def setup_index_referenceFT(context):
 
 def fix_housing_roaddecree(context):
     logger = logging.getLogger("urban: Fix housing and roaddecree security")
+    setup_tool = api.portal.get_tool("portal_setup")
+    setup_tool.runImportStepFromProfile("profile-Products.urban:urbantypes", "factorytool")
     portal_types = ["Housing", "RoadDecree"]
     for portal_type in portal_types:
         set_licence_folder_security(portal_type)
