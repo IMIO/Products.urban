@@ -10,6 +10,13 @@
      class=".fix_task_uid_error.FixTaskUidError"
      permission="cmf.ManagePortal"
   />
+
+  <browser:page
+     for="Products.urban.interfaces.IGenericLicence"
+     name="fix-event-link"
+     class=".fix_event_link.FixEventLink"
+     permission="cmf.ManagePortal"
+  />
   
   <browser:page
      for="*"
