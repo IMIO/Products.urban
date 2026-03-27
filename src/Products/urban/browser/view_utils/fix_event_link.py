@@ -4,6 +4,7 @@ from Products.Five import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone import api
 
+import re
 import logging
 
 
@@ -53,7 +54,7 @@ class FixEventLink(BrowserView):
                 "url": event_config.absolute_url(),
             }
             for event_config in all_event_config
-            if event_config.title == event_title
+            if event_title == event_config.title or re.match(event_title, event_config.title)
         ]
 
     def fix_events(self):
