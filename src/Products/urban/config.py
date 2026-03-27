@@ -123,6 +123,7 @@ ADD_CONTENT_PERMISSIONS = {
     "ExplosivesPossession": "urban: Add ExplosivesPossession",
     "Inspection": "urban: Add Inspection",
     "RoadDecree": "urban: Add RoadDecree",
+    "Housing": "urban: Add Housing",
 }
 
 setDefaultRoles("urban: Add Applicant", ("Manager", "Contributor"))
@@ -186,6 +187,7 @@ setDefaultRoles("urban: Add UrbanConfigurationValue", ("Manager",))
 setDefaultRoles("urban: Add UrbanVocabularyTerm", ("Manager", "Contributor"))
 setDefaultRoles("urban: Add ExplosivesPossession", ("Manager", "Contributor"))
 setDefaultRoles("urban: Add RoadDecree", ("Manager", "Contributor"))
+setDefaultRoles("urban: Add Housing", ("Manager", "Contributor"))
 
 product_globals = globals()
 

@@ -46,6 +46,13 @@
   />
 
   <adapter
+     for="Products.urban.interfaces.IHousing"
+     provides="borg.localrole.interfaces.ILocalRoleProvider"
+     factory=".housing_workflow.StateRolesMapping"
+     name="housing_local_roles"
+  />
+
+  <adapter
      for="Products.urban.interfaces.IUrbanEvent"
      provides="borg.localrole.interfaces.ILocalRoleProvider"
      factory=".urbanevent_workflow.StateRolesMapping"

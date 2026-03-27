@@ -1862,7 +1862,8 @@ def check_if_type_already_install(urban_type):
 def add_new_urban_licence_type(urban_type):
     if check_if_type_already_install(urban_type):
         return False
-    add_aplication_folder(urban_type)
+    licence_folder = add_aplication_folder(urban_type)
+    set_licence_folder_security(urban_type, licence_folder)
     add_imio_dashboard(urban_type)
     config_folder = add_urban_config_folder(urban_type)
     add_schedule(config_folder, urban_type)
@@ -1940,6 +1941,40 @@ def add_aplication_folder(urban_type, urban_folder=None):
                 acquire=0,
             )
     urban_folder.moveObjectsToBottom([licence_folder_id])
+    return licence_folder
+
+def set_licence_folder_security(urban_type, urban_folder=None):
+    if urban_folder is None:
+        site = api.portal.get()
+        urban_folder = getattr(site, "urban")
+    licencesfolder_names = getAllLicenceFolderIds()
+    urban_folder_names = getUrbanOnlyLicenceFolderIds()
+    uniquelicences_names = [
+        getLicenceFolderId("UniqueLicence"),
+        getLicenceFolderId("CODT_UniqueLicence"),
+        getLicenceFolderId("IntegratedLicence"),
+        getLicenceFolderId("CODT_IntegratedLicence"),
+    ]
+    environment_folder_names = getEnvironmentLicenceFolderIds() + uniquelicences_names
+    try:
+        # we try in case we apply the profile again...
+        urban_folder.manage_addProperty(
+            "urbanConfigId", urban_type, "string"
+        )
+    except BadRequest:
+        pass
+    urban_folder.manage_delLocalRoles(["urban_editors"])
+    urban_folder.manage_delLocalRoles(["environment_editors"])
+    if getLicenceFolderId(urban_type) in urban_folder_names:
+        urban_folder.manage_addLocalRoles("urban_readers", ("Reader",))
+        if urban_type != "CODT_IntegratedLicence":
+            urban_folder.manage_addLocalRoles("urban_editors", ("Contributor",))
+    if getLicenceFolderId(urban_type) in environment_folder_names:
+        urban_folder.manage_addLocalRoles("environment_readers", ("Reader",))
+        if urban_type != "CODT_IntegratedLicence":
+            urban_folder.manage_addLocalRoles("environment_editors", ("Contributor",))
+    if urban_type == "Inspection":
+        urban_folder.manage_addLocalRoles("inspection_editors", ("Contributor",))
 
 
 def add_imio_dashboard(urban_type, urban_folder=None):
