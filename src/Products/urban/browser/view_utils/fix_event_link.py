@@ -47,7 +47,7 @@ class FixEventLink(BrowserView):
         all_event_config = licence_cfg.objectValues()
         return [
             {
-                "uid": event_config.UID,
+                "uid": event_config.UID(),
                 "path": "/".join(event_config.getPhysicalPath()),
                 "title": event_config.title,
                 "url": event_config.absolute_url(),
