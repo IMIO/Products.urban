@@ -35,6 +35,7 @@ class NoticeNotification(NoticeElement):
         "parcels",
         "parties",
         "decision_code",
+        "original_application",
     )
 
     def __init__(self, service, json):
@@ -86,6 +87,21 @@ class NoticeNotification(NoticeElement):
     @property
     def referenceFT(self):
         return self._get_data("BO", "idBO")
+        if self.original_application == "TWICE":
+            return self._get_data("BO", "idBO")
+        else:
+            return None
+
+    @property
+    def referenceDGATLP(self):
+        if self.original_application == "GESPER":
+            return self._get_data("BO", "idBO")
+        else:
+            return None
+
+    @property
+    def original_application(self):
+        return self._get_data("BO", "applicationCodeBO")
 
     @property
     def type(self):
@@ -243,6 +259,17 @@ class NoticeNotification(NoticeElement):
                 self.reference, self.referenceFT
             )
         )
+
+        if self.referenceDGATLP:
+            brains = catalog.unrestrictedSearchResults(
+                referenceDGATLP=self.referenceDGATLP,
+                object_provides=IGenericLicence.__identifier__,
+            )
+            if brains:
+                licence = brains[0].getObject()
+                return licence
+
+        return None
 
     @property
     def event_configs(self):
