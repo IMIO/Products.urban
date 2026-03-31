@@ -1639,3 +1639,13 @@ class CanTransferNoticeBaseView(BrowserView):
                 if x["incoming_notice_type"] in self.accepted_incoming_notice_types
             ]
         )
+
+
+class CanTransferDatesGesperEPView(CanTransferNoticeBaseView):
+    accepted_portal_types = ["UrbanEventInquiry"]
+    accepted_incoming_notice_types = [
+        "DEMANDE_ENQUETE_PUBLIQUE_PLAN_INITIAL_1_ERE_INSTANCE",
+        "DEMANDE_ENQUETE_PUBLIQUE_PLAN_MODIFIE_1_ERE_INSTANCE",
+        "DEMANDE_ENQUETE_PUBLIQUE_PLAN_INITIAL_2_EME_INSTANCE",
+        "DEMANDE_ENQUETE_PUBLIQUE_PLAN_MODIFIE_2_EME_INSTANCE",
+    ]
