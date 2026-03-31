@@ -3,6 +3,7 @@
 from Products.urban.notice.base import NoticeElement
 from base64 import b64decode
 from plone.namedfile.file import NamedBlobFile
+from plone.i18n.normalizer import filenamenormalizer
 
 
 class NoticeDocument(NoticeElement):
@@ -29,7 +30,7 @@ class NoticeDocument(NoticeElement):
 
     @property
     def id(self):
-        return self.filename.encode("ascii", errors="ignore")
+        return filenamenormalizer.normalize(self.filename)
 
     @property
     def title(self):
@@ -52,11 +53,11 @@ class NoticeDocument(NoticeElement):
             "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": u".xlsx",
         }
         extension = known_extensions.get(self.document_mimetype)
-        return (
-            self.title + extension
-            if extension
-            else self.title
-        )
+        # TWICE filenames have no extension; add one if mimetype is informative
+        if extension and not self.title.endswith(extension):
+            return self.title + extension
+        else:
+            return self.title
 
     @property
     def document(self):
