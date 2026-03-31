@@ -356,6 +356,7 @@ class ImportFromNoticeView(BrowserView):
         transaction.commit()
 
     def _handle_notification(self, notice_id):
+        handler = None
         detailed_notification = self.notice_service.get_notification(
             notice_id,
         )
@@ -397,6 +398,9 @@ class ImportFromNoticeView(BrowserView):
                 "No implementation found for notification type: %s"
                 % detailed_notification.notice_type
             )
+
+        if handler:
+            handler(detailed_notification, self.request).process()
 
     def _transfert_dossier(self, detailed_notification):
         container = detailed_notification.container
@@ -525,3 +529,142 @@ class ImportFromNoticeView(BrowserView):
         self._notify_successful_import(detailed_notification, event)
 
         transaction.commit()
+
+
+class IncomingNoticeHandler(object):
+    event_config_marker = None
+    licence_transition = None
+    create_licence_if_missing = False
+
+    def __init__(self, notification, request):
+        self.notification = notification
+        self.request = request
+        self.licence = notification.licence
+
+    def process(self):
+        if self.licence:
+            self.update_licence()
+        elif self.create_licence_if_missing:
+            self.create_licence()
+        else:
+            raise ValueError(
+                "No licence found with reference number {} / reference FT {} / reference DGATLP".format(
+                    self.notification.reference,
+                    self.notification.referenceFT,
+                    self.notification.referenceDGATLP,
+                )
+            )
+        self.create_incoming_event()
+        self.import_documents()
+        self.do_licence_transition()
+
+    def create_licence(self):
+        self.licence = api.content.create(
+            container=self.notification.container, **self.notification.serialize()
+        )
+        self.licence.setFoldermanagers(
+            self.notification.foldermanagers
+        )  # Must be set manually, serialized value is ignored at creation
+
+        self.import_parties()
+        self.import_parcels()
+        self.import_addresses()
+
+        self.licence._p_changed = 1
+        notify(ObjectInitializedEvent(self.licence))
+        self.licence.reindexObject()
+
+    def import_parties(self):
+        for party in self.notification.parties:
+            api.content.create(container=self.licence, **party.serialize())
+
+    def import_parcels(self):
+        for parcel in self.notification.parcels:
+            if not parcel.parcel:
+                self._add_error(_("Can not find a parcel"), parcel.serialize())
+                continue
+            api.content.create(container=self.licence, **parcel.serialize())
+
+    def import_addresses(self):
+        for address in self.notification.addresses:
+            data = {
+                translate(_("street"), context=self.request): address.notice_street,
+                translate(_("locality"), context=self.request): address.locality,
+                translate(
+                    _("municipality"), context=self.request
+                ): address.municipality,
+                translate(_("zipcode"), context=self.request): address.postCode,
+            }
+            if not address.address:
+                self._add_error(_("Can not find an address"), data)
+                continue
+            if len(address.address) > 1:
+                self._add_error(_("Multiple results for an address"), data)
+                continue
+            self.licence.workLocations += (address.serialize(),)
+            self.licence._p_changed = 1
+
+    def create_incoming_event(self):
+        event_config = self.notification.event_config(self.event_config_marker)
+        event = self.licence.createUrbanEvent(event_config)
+        self.fill_incoming_event(event)
+        api.content.transition(event, "close")
+
+    def fill_incoming_event(self, event):
+        event_date = DateTime(str(self.notification.send_date))
+        event.setEventDate(event_date)
+        event.store_incoming_notice(
+            self.notification.noticeId,
+            self.notification.notice_type,
+            self.notification.reception_date,
+        )
+
+    def import_documents(self):
+        for document in self.notification.documents:
+            api.content.create(container=self.licence, **document.serialize())
+
+    def licence_transition_guard(self):
+        return True
+
+    def do_licence_transition(self):
+        if self.licence_transition and self.licence_transition_guard():
+            api.content.transition(self.licence, self.licence_transition)
+
+    def update_licence(self):
+        self.set_reference_ft()
+        self.set_reference_dgatlp()
+
+    def set_reference_ft(self):
+        try:
+            licence_ref = self.licence.getReferenceFT()
+        except AttributeError:
+            return
+
+        notification_ref = self.notification.referenceFT
+        if notification_ref and licence_ref != notification_ref:
+            self.licence.setReferenceFT(notification_ref)
+            self.licence.reindexObject(idxs=["referenceFT"])
+
+    def set_reference_dgatlp(self):
+        try:
+            licence_ref = self.licence.getReferenceDGATLP()
+        except AttributeError:
+            return
+
+        notification_ref = self.notification.referenceDGATLP
+        if notification_ref and licence_ref != notification_ref:
+            self.licence.setReferenceDGATLP(notification_ref)
+            self.licence.reindexObject(idxs=["referenceDGATLP"])
+
+    def _add_error(self, msg, serialized_data):
+        error = _(
+            u"<p>${msg} for informations: ${data}</p>",
+            mapping={
+                "msg": msg,
+                "data": u", ".join(
+                    [u"{0}: {1}".format(k, v) for k, v in serialized_data.items()]
+                ),
+            },
+        )
+        self.licence.description.raw += translate(error, context=self.request)
+        self.licence._p_changed = 1

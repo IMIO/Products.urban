@@ -16,6 +16,7 @@ __docformat__ = "plaintext"
 
 import datetime
 from collections import OrderedDict
+from time import time
 
 from AccessControl import ClassSecurityInfo
 from Acquisition import aq_parent
@@ -1016,6 +1017,45 @@ class UrbanEvent(OrderedBaseFolder, BrowserDefaultMixin):
         annotations = IAnnotations(self)
         key = "notice_reception_date"
         annotations[key] = date
+
+    def store_incoming_notice(self, notice_id, notice_type, reception_date):
+        annotations = IAnnotations(self)
+        key = "notice_notification"
+
+        notice = annotations.get(key, {})
+        notice["incoming"] = {
+            "reception_date": reception_date,
+            "notice_id": notice_id,
+            "notice_type": notice_type,
+        }
+        annotations[key] = notice
+
+    def store_outgoing_notice(
+        self,
+        incoming_notice_id,
+        outgoing_notice_type,
+        partial_or_final,
+        send_date,
+        user,
+        field_values,
+    ):
+        annotations = IAnnotations(self)
+        key = "notice_notification"
+        notice = annotations.get(key, {})
+        outgoing = notice.get("outgoing", [])
+        outgoing.append(
+            {
+                "timestamp": "{:.6f}".format(time()),
+                "incoming_notice_id": incoming_notice_id,
+                "outgoing_notice_type": outgoing_notice_type,
+                "partial_or_final": partial_or_final,
+                "send_date": send_date,
+                "user": user,
+                "field_values": field_values,
+            }
+        )
+        notice["outgoing"] = outgoing
+        annotations[key] = notice
 
     def transfer_opinion(self, college_opinion):
         notification = NoticeOutgoingPublicSurveyOpinionNotification(self, college_opinion)
