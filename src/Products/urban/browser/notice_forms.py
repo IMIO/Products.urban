@@ -22,6 +22,41 @@ from plone.app.textfield.value import RichTextValue
 from plone.z3cform.layout import wrap_form
 
 
+def possible_outgoing_notice_notifications(licence):
+    result = []
+    all_incomings = []
+    all_outgoings = []
+
+    for event in licence.getAllEvents():
+        annotations = IAnnotations(event)
+        key = "notice_notification"
+        notice = annotations.get(key, {})
+        incoming = notice.get("incoming", {})
+        if incoming:
+            all_incomings.append((event, incoming))
+        outgoings = notice.get("outgoing", [])
+        all_outgoings.extend(outgoings)
+
+    for event, incoming in all_incomings:
+        already_final = False
+        for outgoing in all_outgoings:
+            if outgoing["incoming_notice_id"] != incoming["notice_id"]:
+                continue
+            if outgoing["partial_or_final"] == "FINAL":
+                already_final = True
+                break
+        if not already_final:
+            result.append(
+                {
+                    "incoming_notice_id": incoming["notice_id"],
+                    "incoming_notice_type": incoming["notice_type"],
+                    "incoming_event": event,
+                }
+            )
+
+    return result
+
+
 class ITransferBaseActionForm(Interface):
     file_paths = schema.List(
         title=_(u"Licence Files"),
