@@ -7,32 +7,46 @@ from zope.i18n import translate
 
 
 class NoticeTransmitState(ViewletBase):
-    """This viewlet displays the state of information sent to NOTICe."""
+    """This viewlet displays the state of information coming from / going to NOTICe."""
 
-    def get_transmits(self):
+    def _get_notifications(self, key, default):
         annotations = IAnnotations(self.context)
-        dates = annotations.get("notice_transmit_dates", {})
+        annotation_key = "notice_notification"
+        return annotations.get(annotation_key, {}).get(key, default)
 
+    @property
+    def incoming(self):
+        result = {}
+        incoming_params = self._get_notifications("incoming", {})
+        if incoming_params:
+            result["id"] = incoming_params["notice_id"]
+            result["date"] = incoming_params["reception_date"].strftime(
+                "%d/%m/%Y, %H:%M:%S"
+            )
+            result["type_label"] = translate(
+                incoming_params["notice_type"], "urban", context=self.request
+            )
+        return result
+
+    @property
+    def outgoings(self):
         results = []
-        for (label, value) in dates.items():
-            if type(value) is dict:
-                results.append({
-                    "action_code": label,
-                    "label": translate(label, "urban", context=self.request),
-                    "date": value.get("date"),
-                    "user": value.get("user"),
-                })
-            else:  # old style; before we also stored the user, "value" was the date
-                results.append({
-                    "action_code": label,
-                    "label": translate(label, "urban", context=self.request),
-                    "date": value,
-                    "user": "",
-                })
+        outgoing_params = self._get_notifications("outgoing", [])
+        if outgoing_params:
+            for outgoing in outgoing_params:
+                results.append(
+                    {
+                        "incoming_notice_id": outgoing["incoming_notice_id"],
+                        "timestamp": outgoing["timestamp"],
+                        "date": outgoing["send_date"].strftime("%d/%m/%Y, %H:%M:%S"),
+                        "type_label": translate(
+                            outgoing["outgoing_notice_type"],
+                            "urban",
+                            context=self.request,
+                        ),
+                        "user": outgoing["user"],
+                    }
+                )
         return results
-
-    def get_reception_date(self):
-        annotations = IAnnotations(self.context)
-        return annotations.get("notice_reception_date", None)
 
     index = ViewPageTemplateFile("templates/notice_transmit_state.pt")
