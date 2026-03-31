@@ -110,7 +110,10 @@ class NoticeNotification(NoticeElement):
         if not hasattr(self, "_licence_type"):
             self._licence_type = None
 
-            if self.notice_type == "TRANSFERT_DOSSIER":
+            if self.original_application == "GESPER":
+                if self.notification_type == "UFD2_GESPER":
+                    self._licence_type = "CODT_Article127"
+            elif self.notice_type == "TRANSFERT_DOSSIER":
                 if self.notification_type == "PE_PU":
                     if self.notification_subtype == "PU":
                         self._licence_type = "CODT_UniqueLicence"
