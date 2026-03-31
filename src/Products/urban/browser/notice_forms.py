@@ -8,7 +8,10 @@ from z3c.form.browser.radio import RadioFieldWidget
 from z3c.form.form import Form
 from zope import schema
 from zope.annotation.interfaces import IAnnotations
+from zope.i18n import translate
 from zope.interface import Interface
+from zope.interface import implementer
+from zope.schema.interfaces import IContextSourceBinder
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
 
@@ -55,6 +58,38 @@ def possible_outgoing_notice_notifications(licence):
             )
 
     return result
+
+
+@implementer(IContextSourceBinder)
+class OpenIncomingNotifications(object):
+    def __init__(self, accepted_incoming_types):
+        self.accepted_incoming_types = accepted_incoming_types
+
+    def __call__(self, context):
+        terms = []
+        licence = context.aq_parent
+        possible_notifs = possible_outgoing_notice_notifications(licence)
+        for possible_notif in possible_notifs:
+            if (
+                self.accepted_incoming_types
+                and possible_notif["incoming_notice_type"]
+                not in self.accepted_incoming_types
+            ):
+                continue
+            incoming_id = possible_notif["incoming_notice_id"]
+            incoming_notice_type = possible_notif["incoming_notice_type"]
+            incoming_event = possible_notif["incoming_event"]
+            description = u"{} - {} - {}".format(
+                incoming_event.title,
+                incoming_event.getFormattedDate(),
+                translate(incoming_notice_type, "urban", context=context.REQUEST),
+            )
+            terms.append(
+                SimpleVocabulary.createTerm(
+                    unicode(incoming_id), str(incoming_id), description
+                )
+            )
+        return SimpleVocabulary(terms)
 
 
 class ITransferBaseActionForm(Interface):
@@ -106,16 +141,20 @@ class NoticeResponseActionForm(Form):
     def transfer_response(self, data):
         raise NotImplementedError()
 
-    def store_sent_data(self, reception_date=None, field_values=None):
-        annotations = IAnnotations(self.context)
-        key = "notice_transmit_dates"
-        transmits = annotations.get(key, OrderedDict())
-        transmits[self.action_code] = {
-            "date": reception_date if reception_date else datetime.now(),
-            "user": api.user.get_current().id,
-            "field_values": field_values,
-        }
-        annotations[key] = transmits
+    def store_sent_data(
+        self,
+        incoming_notice_id,
+        reception_date=None,
+        field_values=None,
+    ):
+        self.context.store_outgoing_notice(
+            incoming_notice_id,
+            self.action_code,
+            self.partial_or_final,
+            reception_date if reception_date else datetime.now(),
+            api.user.get_current().id,
+            field_values,
+        )
 
     def updateWidgets(self):
         super(NoticeResponseActionForm, self).updateWidgets()
@@ -133,15 +172,7 @@ class NoticeResponseActionForm(Form):
             self.status = self.formErrorsMessage
             return
 
-        notice_id = self.context.aq_parent.get_notice_id(self.response_id_code)
-        if not notice_id:
-            raise ValueError(
-                _(
-                    u"Can't send response to event '{}': no Notice ID found for '{}'".format(
-                        self.context.absolute_url(), self.response_id_code
-                    )
-                )
-            )
+        incoming_notice_id = data["incoming_notification"]
 
         self.field_values_to_store = {}
         response_result = self.transfer_response(data)
@@ -172,12 +203,13 @@ class NoticeResponseActionForm(Form):
             )
             self.field_values_to_store["documents"] = sent_documents
 
-            file_result = self.context.transfer_notice_file(notice_id, file_path)
+            file_result = self.context.transfer_notice_file(incoming_notice_id, file_path)
 
         reception_date_str = response_result["body"]["result"]["receptionDate"]
         reception_date = datetime.strptime(reception_date_str[:19], "%Y-%m-%dT%H:%M:%S")
 
         self.store_sent_data(
+            incoming_notice_id,
             reception_date=reception_date,
             field_values=self.field_values_to_store,
         )
