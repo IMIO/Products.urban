@@ -10,6 +10,7 @@ from Products.urban import UrbanMessage as _
 from Products.urban import utils
 from Products.urban.browser.licence.licenceview import LicenceView
 from Products.urban.browser.mapview import MapView
+from Products.urban.browser.notice_forms import possible_outgoing_notice_notifications
 from Products.urban.browser.table.urbantable import ApplicantHistoryTable
 from Products.urban.browser.table.urbantable import ApplicantTable
 from Products.urban.browser.table.urbantable import ClaimantsTable
@@ -1586,4 +1587,55 @@ class CanTransferDecisionDisplayView(BrowserView):
             and self.is_notice_setup
             and self.no_transmit_yet
             and self.can_send_decision_display
+        )
+
+
+class CanTransferNoticeBaseView(BrowserView):
+    accepted_portal_types = []
+    accepted_event_markers = []
+    accepted_incoming_notice_types = []
+
+    def __call__(self):
+        return (
+            self.is_matching_portal_type
+            and self.event_has_any_matching_markers
+            and self.is_transmit_to_spw_event
+            and self.is_notice_setup
+            and self.licence_has_open_incoming_notifications
+        )
+
+    @property
+    def is_matching_portal_type(self):
+        return self.context.portal_type in self.accepted_portal_types
+
+    @property
+    def event_has_any_matching_markers(self):
+        if self.accepted_event_markers:
+            event_types = self.context.getUrbaneventtypes().getEventType()
+            return set(self.accepted_event_markers).intersection(event_types)
+        else:
+            return True
+
+    @property
+    def is_transmit_to_spw_event(self):
+        return (
+            "Products.urban.interfaces.ITransmitToSPWEvent"
+            in self.context.getUrbaneventtypes().getEventType()
+        )
+
+    @property
+    def is_notice_setup(self):
+        webservice = WebserviceNotice()
+        return webservice.is_setup
+
+    @property
+    def licence_has_open_incoming_notifications(self):
+        licence = self.context.aq_parent
+        possible_incomings = possible_outgoing_notice_notifications(licence)
+        return bool(
+            [
+                x
+                for x in possible_incomings
+                if x["incoming_notice_type"] in self.accepted_incoming_notice_types
+            ]
         )
