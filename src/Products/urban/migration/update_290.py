@@ -328,6 +328,17 @@ def setup_index_referenceFT(context):
     logger.info("upgrade step done!")
 
 
+def setup_index_referenceDGATLP(context):
+    logger = logging.getLogger("urban: Set up `referenceDGATLP` index")
+
+    setup_tool = api.portal.get_tool("portal_setup")
+    setup_tool.runImportStepFromProfile("profile-Products.urban:urbantypes", "catalog")
+
+    reindexIndexes(None, ["referenceDGATLP"])
+
+    logger.info("upgrade step done!")
+
+
 def add_codt_uniquebordering_licences(context):
     """
     Note: the events must be added by upgrade step in `urban.events`

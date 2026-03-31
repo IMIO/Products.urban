@@ -84,4 +84,12 @@
         handler=".update_290.add_codt_uniquebordering_licences"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Set up `referenceDGATLP` index"
+        description=""
+        source="2909"
+        destination="2910"
+        handler=".update_290.setup_index_referenceDGATLP"
+        profile="Products.urban:default" />
+
 </configure>
