@@ -379,3 +379,34 @@ class TransferDecisionDisplayActionForm(NoticeResponseActionForm):
 
 
 TransferDecisionDisplayActionWrapper = wrap_form(TransferDecisionDisplayActionForm)
+
+
+class ITransferDatesGesperEPActionForm(ITransferBaseActionForm):
+    incoming_notification = schema.Choice(
+        title=_(u"Incoming notification to answer to"),
+        source=OpenIncomingNotifications(
+            [
+                "DEMANDE_ENQUETE_PUBLIQUE_PLAN_INITIAL_1_ERE_INSTANCE",
+                "DEMANDE_ENQUETE_PUBLIQUE_PLAN_MODIFIE_1_ERE_INSTANCE",
+                "DEMANDE_ENQUETE_PUBLIQUE_PLAN_INITIAL_2_EME_INSTANCE",
+                "DEMANDE_ENQUETE_PUBLIQUE_PLAN_MODIFIE_2_EME_INSTANCE",
+            ]
+        ),
+    )
+
+
+class TransferDatesGesperEPActionForm(NoticeResponseActionForm):
+    label = _("Transfer dates to the SPW")
+    fields = field.Fields(ITransferDatesGesperEPActionForm)
+    fields["file_paths"].widgetFactory = CheckBoxFieldWidget
+    action_code = "transfer_dates_gesper_ep"
+    partial_or_final = "PARTIAL"
+    success_message = _(u"The transfer of dates is done.")
+
+    def transfer_response(self, data):
+        # result = self.context.transfer_dates()
+        result = {"body": {"result": {"receptionDate": "2026-04-01T12:34:56.789000"}}}  # TODO: remove fake data
+        return result
+
+
+TransferDatesGesperEPActionWrapper = wrap_form(TransferDatesGesperEPActionForm)

@@ -48,6 +48,7 @@ class EventActionsPanelView(ActionsPanelView):
             "transfer_opinion",
             "transfer_decision",
             "transfer_decision_display",
+            "transfer_dates_gesper_ep",
         )
 
 
