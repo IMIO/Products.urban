@@ -306,7 +306,61 @@ msgstr "Lien GIG"
 msgid "Couldn't import this(these) owner(s): ${owners}"
 msgstr "Impossible d'importer ce(s) propriétaire(s): ${owners}"
 
-#: ../browser/offdays_settings.py:52
+msgid "DECISION_GESPER_1_ERE_INSTANCE"
+msgstr "Décision 1ère instance"
+
+msgid "DECISION_GESPER_2_EME_INSTANCE"
+msgstr "Décision 2ème instance"
+
+msgid "DEMANDE_ANNONCE PROJET_PLAN_MODIFIE_1_ERE_INSTANCE"
+msgstr "Demande d'annonce projet sur plan modifié 1ère instance"
+
+msgid "DEMANDE_ANNONCE_PROJET_PLAN_INITIAL_1_ERE_INSTANCE"
+msgstr "Demande d'annonce projet sur plan initial 1ère instance"
+
+msgid "DEMANDE_ANNONCE_PROJET_PLAN_INITIAL_2_EME_INSTANCE"
+msgstr "Demande d'annonce projet sur plan initial 2ème instance"
+
+msgid "DEMANDE_ANNONCE_PROJET_PLAN_MODIFIE_2_EME_INSTANCE"
+msgstr "Demande d'annonce projet sur plan modifié 2ème instance"
+
+msgid "DEMANDE_AVIS_FACULTATIF_PLAN_INITIAL_1_ERE_INSTANCE"
+msgstr "Demande d'avis facultatif sur plan initial 1ère instance"
+
+msgid "DEMANDE_AVIS_FACULTATIF_PLAN_INITIAL_2_EME_INSTANCE"
+msgstr "Demande d'avis facultatif sur plan initial 2ème instance"
+
+msgid "DEMANDE_AVIS_FACULTATIF_PLAN_MODIFIE_1_ERE_INSTANCE"
+msgstr "Demande d'avis facultatif sur plan modifié 1ère instance"
+
+msgid "DEMANDE_AVIS_FACULTATIF_PLAN_MODIFIE_2_EME_INSTANCE"
+msgstr "Demande d'avis facultatif sur plan modifié 2ème instance"
+
+msgid "DEMANDE_AVIS_OBLIGATOIRE_PLAN_INITIAL_1_ERE_INSTANCE"
+msgstr "Demande d'avis obligatoire sur plan initial 1ère instance"
+
+msgid "DEMANDE_AVIS_OBLIGATOIRE_PLAN_INITIAL_2_EME_INSTANCE"
+msgstr "Demande d'avis obligatoire sur plan initial 2ème instance"
+
+msgid "DEMANDE_AVIS_OBLIGATOIRE_PLAN_MODIFIE_1_ERE_INSTANCE"
+msgstr "Demande d'avis obligatoire sur plan modifié 1ère instance"
+
+msgid "DEMANDE_AVIS_OBLIGATOIRE_PLAN_MODIFIE_2_EME_INSTANCE"
+msgstr "Demande d'avis obligatoire sur plan modifié 2ème instance"
+
+msgid "DEMANDE_ENQUETE_PUBLIQUE_PLAN_INITIAL_1_ERE_INSTANCE"
+msgstr "Demande d'enquête publique sur plan initial 1ère instance"
+
+msgid "DEMANDE_ENQUETE_PUBLIQUE_PLAN_INITIAL_2_EME_INSTANCE"
+msgstr "Demande d'enquête publique sur plan initial 2ème instance"
+
+msgid "DEMANDE_ENQUETE_PUBLIQUE_PLAN_MODIFIE_1_ERE_INSTANCE"
+msgstr "Demande d'enquête publique sur plan modifié 1ère instance"
+
+msgid "DEMANDE_ENQUETE_PUBLIQUE_PLAN_MODIFIE_2_EME_INSTANCE"
+msgstr "Demande d'enquête publique sur plan modifié 2ème instance"
+
+#: ../browser/offdays_settings.py:47
 msgid "Date"
 msgstr "Date"
 
@@ -737,6 +791,10 @@ msgstr "Import"
 #: ../browser/urbaneventviews.py:394
 msgid "Import cancel : error with claimant ${claimant} on value ${value}"
 msgstr "Annulation d'importation : erreur avec le demandeur ${claimant} sur la valeur ${value}"
+
+#: ../browser/notice_forms.py:157
+msgid "Incoming notification to answer to"
+msgstr "Notification NOTICe concernée"
 
 msgid "Inspection"
 msgstr "Inspection"
@@ -2737,6 +2795,12 @@ msgstr "Liste des sentiers et chemins vicinaux de la commune"
 msgid "transfer_dates"
 msgstr "Envoyer les dates d'enquête vers le SPW"
 
+msgid "transfer_dates_gesper_ap"
+msgstr "Envoyer les dates d'enquête vers le SPW"
+
+msgid "transfer_dates_gesper_ep"
+msgstr "Envoyer les dates d'enquête vers le SPW"
+
 msgid "transfer_decision"
 msgstr "Envoyer la décision vers le SPW"
 
@@ -2769,6 +2833,11 @@ msgstr "Le"
 #: ../viewlets/templates/notice_transmit_state.pt:17
 msgid "transmit_form_data"
 msgstr "Données du formulaire"
+
+#. Default: "Type"
+#: ../viewlets/templates/notice_transmit_state.pt:8
+msgid "transmit_type"
+msgstr "Type"
 
 #. Default: "User"
 #: ../viewlets/templates/notice_transmit_state.pt:15

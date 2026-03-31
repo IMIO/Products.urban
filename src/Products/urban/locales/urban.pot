@@ -308,6 +308,60 @@ msgstr ""
 msgid "Couldn't import this(these) owner(s): ${owners}"
 msgstr ""
 
+msgid "DECISION_GESPER_1_ERE_INSTANCE"
+msgstr ""
+
+msgid "DECISION_GESPER_2_EME_INSTANCE"
+msgstr ""
+
+msgid "DEMANDE_ANNONCE PROJET_PLAN_MODIFIE_1_ERE_INSTANCE"
+msgstr ""
+
+msgid "DEMANDE_ANNONCE_PROJET_PLAN_INITIAL_1_ERE_INSTANCE"
+msgstr ""
+
+msgid "DEMANDE_ANNONCE_PROJET_PLAN_INITIAL_2_EME_INSTANCE"
+msgstr ""
+
+msgid "DEMANDE_ANNONCE_PROJET_PLAN_MODIFIE_2_EME_INSTANCE"
+msgstr ""
+
+msgid "DEMANDE_AVIS_FACULTATIF_PLAN_INITIAL_1_ERE_INSTANCE"
+msgstr ""
+
+msgid "DEMANDE_AVIS_FACULTATIF_PLAN_INITIAL_2_EME_INSTANCE"
+msgstr ""
+
+msgid "DEMANDE_AVIS_FACULTATIF_PLAN_MODIFIE_1_ERE_INSTANCE"
+msgstr ""
+
+msgid "DEMANDE_AVIS_FACULTATIF_PLAN_MODIFIE_2_EME_INSTANCE"
+msgstr ""
+
+msgid "DEMANDE_AVIS_OBLIGATOIRE_PLAN_INITIAL_1_ERE_INSTANCE"
+msgstr ""
+
+msgid "DEMANDE_AVIS_OBLIGATOIRE_PLAN_INITIAL_2_EME_INSTANCE"
+msgstr ""
+
+msgid "DEMANDE_AVIS_OBLIGATOIRE_PLAN_MODIFIE_1_ERE_INSTANCE"
+msgstr ""
+
+msgid "DEMANDE_AVIS_OBLIGATOIRE_PLAN_MODIFIE_2_EME_INSTANCE"
+msgstr ""
+
+msgid "DEMANDE_ENQUETE_PUBLIQUE_PLAN_INITIAL_1_ERE_INSTANCE"
+msgstr ""
+
+msgid "DEMANDE_ENQUETE_PUBLIQUE_PLAN_INITIAL_2_EME_INSTANCE"
+msgstr ""
+
+msgid "DEMANDE_ENQUETE_PUBLIQUE_PLAN_MODIFIE_1_ERE_INSTANCE"
+msgstr ""
+
+msgid "DEMANDE_ENQUETE_PUBLIQUE_PLAN_MODIFIE_2_EME_INSTANCE"
+msgstr ""
+
 #: ../browser/offdays_settings.py:47
 msgid "Date"
 msgstr ""
@@ -734,6 +788,10 @@ msgstr ""
 
 #: ../browser/urbaneventviews.py:401
 msgid "Import cancel : error with claimant ${claimant} on value ${value}"
+msgstr ""
+
+#: ../browser/notice_forms.py:157
+msgid "Incoming notification to answer to"
 msgstr ""
 
 msgid "Inspection"
@@ -2761,6 +2819,12 @@ msgstr ""
 msgid "transfer_dates"
 msgstr ""
 
+msgid "transfer_dates_gesper_ap"
+msgstr ""
+
+msgid "transfer_dates_gesper_ep"
+msgstr ""
+
 msgid "transfer_decision"
 msgstr ""
 
@@ -2792,6 +2856,11 @@ msgstr ""
 #. Default: "Form data"
 #: ../viewlets/templates/notice_transmit_state.pt:17
 msgid "transmit_form_data"
+msgstr ""
+
+#. Default: "Type"
+#: ../viewlets/templates/notice_transmit_state.pt:8
+msgid "transmit_type"
 msgstr ""
 
 #. Default: "User"
