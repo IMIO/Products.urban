@@ -555,6 +555,12 @@
      permission="zope2.View"
   />
 
+  <browser:page
+     for="*"
+     name="can_transfer_dates_gesper_ap"
+     class=".urbaneventviews.CanTransferDatesGesperAPView"
+     permission="zope2.View"
+  />
   <!--  NOTICE forms -->
 
   <browser:page
@@ -613,5 +619,12 @@
      permission="zope2.View"
      />
 
+  <browser:page
+     for="Products.urban.interfaces.IUrbanEvent"
+     layer="Products.urban.interfaces.IProductUrbanLayer"
+     name="transfer_dates_gesper_ap_form"
+     class=".notice_forms.TransferDatesGesperAPActionWrapper"
+     permission="zope2.View"
+     />
 
 </configure>
