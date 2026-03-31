@@ -359,6 +359,8 @@ class ImportFromNoticeView(BrowserView):
             notice_id,
         )
 
+        # TWICE
+
         if detailed_notification.notice_type == "TRANSFERT_DOSSIER":
             self._transfert_dossier(detailed_notification)
         elif detailed_notification.notice_type in (
@@ -391,6 +393,34 @@ class ImportFromNoticeView(BrowserView):
             self._rapport_synthese(detailed_notification)
         elif detailed_notification.notice_type == "NOTIFICATION_DECISION_COMMUNE":
             self._decision_spw(detailed_notification)
+
+        # GESPER
+
+        elif detailed_notification.notice_type in (
+            "DEMANDE_AVIS_OBLIGATOIRE_PLAN_INITIAL_1_ERE_INSTANCE",
+            "DEMANDE_AVIS_OBLIGATOIRE_PLAN_MODIFIE_1_ERE_INSTANCE",
+            "DEMANDE_AVIS_OBLIGATOIRE_PLAN_INITIAL_2_EME_INSTANCE",
+            "DEMANDE_AVIS_OBLIGATOIRE_PLAN_MODIFIE_2_EME_INSTANCE",
+            "DEMANDE_AVIS_FACULTATIF_PLAN_INITIAL_1_ERE_INSTANCE",
+            "DEMANDE_AVIS_FACULTATIF_PLAN_MODIFIE_1_ERE_INSTANCE",
+            "DEMANDE_AVIS_FACULTATIF_PLAN_INITIAL_2_EME_INSTANCE",
+            "DEMANDE_AVIS_FACULTATIF_PLAN_MODIFIE_2_EME_INSTANCE",
+        ):
+            handler = GesperPublicSurveyHandler
+        elif detailed_notification.notice_type in (
+            "DEMANDE_ENQUETE_PUBLIQUE_PLAN_INITIAL_1_ERE_INSTANCE",
+            "DEMANDE_ENQUETE_PUBLIQUE_PLAN_MODIFIE_1_ERE_INSTANCE",
+            "DEMANDE_ENQUETE_PUBLIQUE_PLAN_INITIAL_2_EME_INSTANCE",
+            "DEMANDE_ENQUETE_PUBLIQUE_PLAN_MODIFIE_2_EME_INSTANCE",
+        ):
+            handler = GesperPublicSurveyHandler
+        elif detailed_notification.notice_type in (
+            "DEMANDE_ANNONCE_PROJET_PLAN_INITIAL_1_ERE_INSTANCE",
+            "DEMANDE_ANNONCE PROJET_PLAN_MODIFIE_1_ERE_INSTANCE",
+            "DEMANDE_ANNONCE_PROJET_PLAN_INITIAL_2_EME_INSTANCE",
+            "DEMANDE_ANNONCE_PROJET_PLAN_MODIFIE_2_EME_INSTANCE",
+        ):
+            handler = GesperPublicSurveyHandler
         else:
             raise NotImplementedError(
                 "No implementation found for notification type: %s"
@@ -663,3 +693,12 @@ class IncomingNoticeHandler(object):
         )
         self.licence.description.raw += translate(error, context=self.request)
         self.licence._p_changed = 1
+
+
+class PublicSurveyHandler(IncomingNoticeHandler):
+    event_config_marker = "Products.urban.interfaces.IAcknowledgmentEvent"
+    licence_transition = "iscomplete"
+
+
+class GesperPublicSurveyHandler(PublicSurveyHandler):
+    create_licence_if_missing = True
