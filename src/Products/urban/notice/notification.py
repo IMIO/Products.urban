@@ -86,7 +86,6 @@ class NoticeNotification(NoticeElement):
 
     @property
     def referenceFT(self):
-        return self._get_data("BO", "idBO")
         if self.original_application == "TWICE":
             return self._get_data("BO", "idBO")
         else:
@@ -256,12 +255,6 @@ class NoticeNotification(NoticeElement):
             if brains:
                 licence = brains[0].getObject()
                 return licence
-
-        raise ValueError(
-            "No licence found with reference number {} / reference FT {}".format(
-                self.reference, self.referenceFT
-            )
-        )
 
         if self.referenceDGATLP:
             brains = catalog.unrestrictedSearchResults(
