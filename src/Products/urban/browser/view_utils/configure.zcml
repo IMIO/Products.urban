@@ -12,7 +12,7 @@
   />
 
   <browser:page
-     for="Products.urban.interfaces.IGenericLicence"
+     for="*"
      name="fix-event-link"
      class=".fix_event_link.FixEventLink"
      permission="cmf.ManagePortal"
