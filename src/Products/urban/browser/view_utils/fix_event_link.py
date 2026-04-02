@@ -3,16 +3,30 @@
 from Products.CMFPlone.utils import safe_unicode
 from Products.Five import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from plone import api
 from Products.urban.interfaces import IGenericLicence
+from plone import api
 
-import unicodedata
-import re
 import logging
+import re
 import transaction
+import unicodedata
 
 
-STOPWORDS = {"et", "de", "le", "la", "les", "du", "des", "un", "une", "en", "a", "au", "aux"}
+STOPWORDS = {
+    "et",
+    "de",
+    "le",
+    "la",
+    "les",
+    "du",
+    "des",
+    "un",
+    "une",
+    "en",
+    "a",
+    "au",
+    "aux",
+}
 
 
 logger = logging.getLogger("Fix event link.py: ")
@@ -67,14 +81,12 @@ class FixEventLink(BrowserView):
         if not IGenericLicence.providedBy(self.context):
             events_list = self.gather_events_across_licences()
         else:
-            events_list = self.context.getAllEvents() 
+            events_list = self.context.getAllEvents()
         for event in events_list:
             event_key = event.title
             if self.check_broken_event(event):
                 event_key = u"{}-broken".format(event_key)
-            event_path = "/".join(
-                event.getPhysicalPath()
-            )
+            event_path = "/".join(event.getPhysicalPath())
             if event_key in events:
                 events[event_key]["path"].append(event_path)
                 continue
@@ -116,7 +128,7 @@ class FixEventLink(BrowserView):
                 "path": "/".join(event_config.getPhysicalPath()),
                 "title": event_config.title,
                 "url": event_config.absolute_url(),
-                "state": api.content.get_state(event_config)
+                "state": api.content.get_state(event_config),
             }
             for event_config in all_event_config
             if (
