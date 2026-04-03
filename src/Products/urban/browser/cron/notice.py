@@ -7,6 +7,7 @@ from Products.urban import UrbanMessage as _
 from Products.urban.contentrules.notice import NoticeImportFailedEvent
 from Products.urban.contentrules.notice import NoticeImportSucceededEvent
 from Products.urban.services import notice
+from StringIO import StringIO
 from datetime import datetime
 from plone import api
 from plone.stringinterp.interfaces import IContextWrapper
@@ -213,6 +214,13 @@ class ImportFromNoticeView(BrowserView):
             licence.setReferenceFT(notification_ref)
             licence.reindexObject(idxs=["referenceFT"])
 
+    def import_document(self, document, container):
+        at_file = api.content.create(container=container, **document.serialize())
+        data_wrapper = StringIO(document.document)
+        data_wrapper.filename = document.filename
+        at_file.setFile(data_wrapper)
+        at_file.setContentType(document.document_mimetype)
+
     def _demande_ep_extra(self, detailed_notification):
         container = detailed_notification.container
         licence = api.content.create(
@@ -241,8 +249,6 @@ class ImportFromNoticeView(BrowserView):
         licence._p_changed = 1
         for party in detailed_notification.parties:
             api.content.create(container=licence, **party.serialize())
-        for document in detailed_notification.documents:
-            api.content.create(container=licence, **document.serialize())
         # Set title and update reference number
         notify(ObjectInitializedEvent(licence))
 
@@ -254,6 +260,9 @@ class ImportFromNoticeView(BrowserView):
         event.setEventDate(event_date)
         event.store_reception_date(detailed_notification.reception_date)
         api.content.transition(event, "close")
+
+        for document in detailed_notification.documents:
+            self.import_document(document, event)
 
         api.content.transition(licence, "iscomplete")
 
@@ -281,7 +290,7 @@ class ImportFromNoticeView(BrowserView):
         api.content.transition(licence, "iscomplete")
 
         for document in detailed_notification.documents:
-            api.content.create(container=event, **document.serialize())
+            self.import_document(document, event)
 
         self._notify_successful_import(detailed_notification, event)
 
@@ -307,7 +316,7 @@ class ImportFromNoticeView(BrowserView):
         api.content.transition(event, "close")
 
         for document in detailed_notification.documents:
-            api.content.create(container=event, **document.serialize())
+            self.import_document(document, event)
 
         self._notify_successful_import(detailed_notification, event)
 
@@ -345,7 +354,7 @@ class ImportFromNoticeView(BrowserView):
         api.content.transition(event, "close")
 
         for document in detailed_notification.documents:
-            api.content.create(container=event, **document.serialize())
+            self.import_document(document, event)
 
         self._notify_successful_import(detailed_notification, event)
 
@@ -466,8 +475,6 @@ class ImportFromNoticeView(BrowserView):
                 continue
             licence.workLocations += (address.serialize(),)
             licence._p_changed = 1
-        for document in detailed_notification.documents:
-            api.content.create(container=licence, **document.serialize())
         # Set title and update reference number
         notify(ObjectInitializedEvent(licence))
         # Change workflow and add deposit event
@@ -479,6 +486,10 @@ class ImportFromNoticeView(BrowserView):
         event.setEventDate(event_date)
         event.store_reception_date(detailed_notification.reception_date)
         api.content.transition(event, "close")
+
+        for document in detailed_notification.documents:
+            self.import_document(document, event)
+
         # Reindex licence
         licence.reindexObject()
 
@@ -502,7 +513,7 @@ class ImportFromNoticeView(BrowserView):
             api.content.transition(licence, "isincomplete")
 
         for document in detailed_notification.documents:
-            api.content.create(container=event, **document.serialize())
+            self.import_document(document, event)
 
         self._store_referenceFT(detailed_notification, licence)
 
@@ -525,7 +536,7 @@ class ImportFromNoticeView(BrowserView):
         api.content.transition(licence, "isinacceptable")
 
         for document in detailed_notification.documents:
-            api.content.create(container=event, **document.serialize())
+            self.import_document(document, event)
 
         self._store_referenceFT(detailed_notification, licence)
 
@@ -552,7 +563,7 @@ class ImportFromNoticeView(BrowserView):
         api.content.transition(event, "close")
 
         for document in detailed_notification.documents:
-            api.content.create(container=event, **document.serialize())
+            self.import_document(document, event)
 
         self._store_referenceFT(detailed_notification, licence)
 
@@ -570,6 +581,7 @@ class IncomingNoticeHandler(object):
         self.notification = notification
         self.request = request
         self.licence = notification.licence
+        self.event = None
 
     def process(self):
         if self.licence:
@@ -636,14 +648,14 @@ class IncomingNoticeHandler(object):
 
     def create_incoming_event(self):
         event_config = self.notification.event_config(self.event_config_marker)
-        event = self.licence.createUrbanEvent(event_config)
-        self.fill_incoming_event(event)
-        api.content.transition(event, "close")
+        self.event = self.licence.createUrbanEvent(event_config)
+        self.fill_incoming_event()
+        api.content.transition(self.event, "close")
 
-    def fill_incoming_event(self, event):
+    def fill_incoming_event(self):
         event_date = DateTime(str(self.notification.send_date))
-        event.setEventDate(event_date)
-        event.store_incoming_notice(
+        self.event.setEventDate(event_date)
+        self.event.store_incoming_notice(
             self.notification.noticeId,
             self.notification.notice_type,
             self.notification.reception_date,
@@ -651,7 +663,11 @@ class IncomingNoticeHandler(object):
 
     def import_documents(self):
         for document in self.notification.documents:
-            api.content.create(container=self.licence, **document.serialize())
+            at_file = api.content.create(container=self.event, **document.serialize())
+            data_wrapper = StringIO(document.document)
+            data_wrapper.filename = document.filename
+            at_file.setFile(data_wrapper)
+            at_file.setContentType(document.document_mimetype)
 
     def licence_transition_guard(self):
         return True
