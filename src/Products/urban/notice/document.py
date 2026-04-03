@@ -69,16 +69,6 @@ class NoticeDocument(NoticeElement):
         return self._document
 
     @property
-    def file(self):
-        if self.document:
-            _file = NamedBlobFile(
-                data=self.document,
-                filename=self.filename,
-                contentType=self.document_mimetype,
-            )
-            return _file.open()
-
-    @property
     def document_type_code(self):
         return self.json["documentData"]["type"]["code"]
 
