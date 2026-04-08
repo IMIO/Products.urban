@@ -325,3 +325,28 @@ def setup_index_referenceFT(context):
     reindexIndexes(None, ["referenceFT"])
 
     logger.info("upgrade step done!")
+    
+UPDATED_URBAN_TYPES = [
+    "CODT_Article127",
+    "CODT_UniqueLicence",
+    "EnvClassOne",
+    "EnvClassTwo",
+    "EnvClassBordering",
+    
+]
+def update_folder_manager_notice(context):
+    
+    logger = logging.getLogger("urban: Update manageableLicences for notice")
+
+    urban_tool = api.portal.get_tool("portal_urban")
+    foldermanagers = getattr(urban_tool, "foldermanagers", None)
+
+    if not foldermanagers or "notice" not in foldermanagers.objectIds():
+        logger.warning("Notice FolderManager not found, skipping")
+        return
+
+    notice_folder_manager = foldermanagers.notice
+    notice_folder_manager.manageableLicences = UPDATED_URBAN_TYPES  
+    notice_folder_manager.reindexObject()
+
+    logger.info("manageableLicences updated for notice FolderManager")
