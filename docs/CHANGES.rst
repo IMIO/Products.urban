@@ -8,6 +8,16 @@ Changelog
 
 .. towncrier release notes start
 
+2.9.16 (2026-04-09)
+-------------------
+
+Bug fixes:
+
+
+- Fix housing security and local role
+  [jchandelle] (URB-3573)
+
+
 2.9.15 (2026-04-02)
 -------------------
 
