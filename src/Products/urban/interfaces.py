@@ -341,7 +341,7 @@ class IInspection(IGenericLicence):
 
 class IHousing(IGenericLicence):
     """
-    Marker interface for inspection
+    Marker interface for housing
     """
 
 
