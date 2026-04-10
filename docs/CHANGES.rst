@@ -8,6 +8,16 @@ Changelog
 
 .. towncrier release notes start
 
+2.9.17 (2026-04-10)
+-------------------
+
+Bug fixes:
+
+
+- Fix missing import
+  [jchandelle] (SUP-52327)
+
+
 2.9.16 (2026-04-09)
 -------------------
 
