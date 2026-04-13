@@ -121,7 +121,7 @@ schema = Schema(
                 label=_("urban_label_decisional_delay", default="DecisionalDelay"),
             ),
             schemata="urban_analysis",
-            vocabulary="list_decisional_delay",
+            vocabulary=UrbanVocabulary("decisionaldelay", inUrbanConfig=True),
             default_method="getDefaultValue",
         ),
     ),

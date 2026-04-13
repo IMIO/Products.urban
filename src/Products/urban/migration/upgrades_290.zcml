@@ -83,7 +83,7 @@
         destination="2909"
         handler=".update_290.fix_housing_roaddecree"
         profile="Products.urban:default" />
-    
+
     <gs:upgradeStep
         title="Update manageableLicences for notice FolderManager"
         description=""
@@ -91,5 +91,14 @@
         destination="2910"
         handler=".update_290.update_folder_manager_notice"
         profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Extract decision delay vocabulary from codes"
+        description=""
+        source="2910"
+        destination="2911"
+        handler=".update_290.extract_decision_delay_vocabulary"
+        profile="Products.urban:default"
+        />
 
 </configure>

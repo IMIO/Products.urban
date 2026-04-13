@@ -5718,3 +5718,6 @@ msgstr "Partie de l'immeuble concernée"
 
 msgid "urban_label_buildingType"
 msgstr "Nature de l'immeuble"
+
+msgid "decisionaldelay_folder_title"
+msgstr " Délai de décision du conseil "
