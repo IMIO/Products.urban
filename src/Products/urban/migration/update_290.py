@@ -4,6 +4,9 @@ from Products.urban import URBAN_TYPES
 from Products.urban import UrbanMessage as _
 from Products.urban.migration.utils import cook_javascript_resources
 from Products.urban.utils import moveElementAfter
+from Products.urban.profiles.extra.config_default_values import default_values
+from Products.urban.setuphandlers import createFolderDefaultValues
+from Products.urban.setuphandlers import createVocabularyFolder
 from dm.historical import getHistory
 from imio.helpers.catalog import reindexIndexes
 from plone import api
@@ -325,3 +328,32 @@ def setup_index_referenceFT(context):
     reindexIndexes(None, ["referenceFT"])
 
     logger.info("upgrade step done!")
+
+def extract_decision_delay_vocabulary(context):
+    """ """
+    logger = logging.getLogger(
+        "urban: Add new vocabulary for investigation_radius field"
+    )
+    logger.info("starting upgrade steps")
+
+    container = api.portal.get_tool("portal_urban")
+    
+    roaddecree_folder = getattr(container, "roaddecree", None)
+
+    if roaddecree_folder is None:
+        return
+    delay_config = default_values["RoadDecree"][
+        "decisionaldelay"
+    ]
+    allowedtypes = delay_config[0]
+    delay_config = createVocabularyFolder(
+        roaddecree_folder, "decisionaldelay", context, allowedtypes
+    )
+    createFolderDefaultValues(
+        delay_config,
+        default_values["RoadDecree"]["decisionaldelay"][1:],
+        default_values["RoadDecree"]["decisionaldelay"][0],
+    )
+    
+
+    logger.info("migration step done!")
