@@ -2,7 +2,7 @@
 
 from Products.urban import services
 from Products.urban.notice.base import NoticeElement
-
+from plone import api
 
 class NoticeParcel(NoticeElement):
     _excluded_keys = (
@@ -71,3 +71,26 @@ class NoticeParcel(NoticeElement):
     @property
     def partie(self):
         return self._get_data("part")
+
+    @property
+    def division_text(self):
+        return self._get_data("division")
+
+    @property
+    def resolved_division(self):
+        code = self._get_data("codeDivision")
+        if code:
+            return code
+        #do mapping 
+        division_name = division_name.strip().upper()
+        if not division_name:
+            return None
+        urban_tool = api.portal.get_tool("portal_urban")
+        divisions = urban_tool.getDivisionsRenaming()
+
+        mapping = {
+            div.get("alternative_name", "").strip().upper(): str(div.get("division"))
+            for div in divisions
+            if div.get("alternative_name") and div.get("division")
+        }
+        return mapping.get(division_name)
