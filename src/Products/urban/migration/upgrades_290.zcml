@@ -75,6 +75,7 @@
         destination="2908"
         handler=".update_290.setup_index_referenceFT"
         profile="Products.urban:default" />
+
     <gs:upgradeStep
         title="Update manageableLicences for notice FolderManager"
         description=""

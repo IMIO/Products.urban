@@ -336,17 +336,18 @@ def fix_housing_roaddecree(context):
     for portal_type in portal_types:
         set_licence_folder_security(portal_type)
     logger.info("upgrade step done!")
-    
-UPDATED_URBAN_TYPES = [
-    "CODT_Article127",
-    "CODT_UniqueLicence",
-    "EnvClassOne",
-    "EnvClassTwo",
-    "EnvClassBordering",
-    
-]
+
+
 def update_folder_manager_notice(context):
-    
+
+    UPDATED_URBAN_TYPES = [
+        "CODT_Article127",
+        "CODT_UniqueLicence",
+        "EnvClassOne",
+        "EnvClassTwo",
+        "EnvClassBordering",
+    ]
+
     logger = logging.getLogger("urban: Update manageableLicences for notice")
 
     urban_tool = api.portal.get_tool("portal_urban")
@@ -357,7 +358,7 @@ def update_folder_manager_notice(context):
         return
 
     notice_folder_manager = foldermanagers.notice
-    notice_folder_manager.manageableLicences = UPDATED_URBAN_TYPES  
+    notice_folder_manager.manageableLicences = UPDATED_URBAN_TYPES
     notice_folder_manager.reindexObject()
 
     logger.info("manageableLicences updated for notice FolderManager")
