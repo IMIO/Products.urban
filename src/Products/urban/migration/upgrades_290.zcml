@@ -75,21 +75,6 @@
         destination="2908"
         handler=".update_290.setup_index_referenceFT"
         profile="Products.urban:default" />
-    <gs:upgradeStep
-        title="Update manageableLicences for notice FolderManager"
-        description=""
-        source="2908"
-        destination="2909"
-        handler=".update_290.update_folder_manager_notice"
-        profile="Products.urban:default" />
-
-    <gs:upgradeStep
-        title="Update manageableLicences for notice FolderManager"
-        description=""
-        source="2908"
-        destination="2909"
-        handler=".update_290.update_folder_manager_notice"
-        profile="Products.urban:default" />
 
     <gs:upgradeStep
         title="Fix housing and roaddecree security"
@@ -97,6 +82,14 @@
         source="2908"
         destination="2909"
         handler=".update_290.fix_housing_roaddecree"
+        profile="Products.urban:default" />
+    
+    <gs:upgradeStep
+        title="Update manageableLicences for notice FolderManager"
+        description=""
+        source="2909"
+        destination="2910"
+        handler=".update_290.update_folder_manager_notice"
         profile="Products.urban:default" />
 
 </configure>
