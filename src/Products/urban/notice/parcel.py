@@ -82,6 +82,9 @@ class NoticeParcel(NoticeElement):
         if code:
             return code
         #do mapping 
+        division_name = self._get_data("division")
+        if not division_name:
+            return None
         division_name = division_name.strip().upper()
         if not division_name:
             return None
