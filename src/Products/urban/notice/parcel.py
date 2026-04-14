@@ -82,12 +82,10 @@ class NoticeParcel(NoticeElement):
         if code:
             return code
         #do mapping 
-        division_name = self._get_data("division")
+        division_name = self.division_text
         if not division_name:
             return None
         division_name = division_name.strip().upper()
-        if not division_name:
-            return None
         urban_tool = api.portal.get_tool("portal_urban")
         divisions = urban_tool.getDivisionsRenaming()
 
