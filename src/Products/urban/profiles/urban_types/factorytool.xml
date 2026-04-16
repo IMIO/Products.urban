@@ -71,5 +71,6 @@
   <type portal_type="RoadDecree"/>
   <type portal_type="Inspection"/>
   <type portal_type="Ticket"/>
+  <type portal_type="Housing"/>
  </factorytypes>
 </object>
