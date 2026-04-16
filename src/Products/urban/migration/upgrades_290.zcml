@@ -76,4 +76,12 @@
         handler=".update_290.setup_index_referenceFT"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Fix housing and roaddecree security"
+        description=""
+        source="2908"
+        destination="2909"
+        handler=".update_290.fix_housing_roaddecree"
+        profile="Products.urban:default" />
+
 </configure>

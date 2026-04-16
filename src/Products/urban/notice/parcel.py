@@ -4,6 +4,7 @@ from Products.urban import services
 from Products.urban.notice.base import NoticeElement
 from plone import api
 
+
 class NoticeParcel(NoticeElement):
     _excluded_keys = (
         "parcel",
@@ -81,7 +82,7 @@ class NoticeParcel(NoticeElement):
         code = self._get_data("codeDivision")
         if code:
             return code
-        #do mapping 
+        # do mapping
         division_name = self.division_text
         if not division_name:
             return None

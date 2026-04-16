@@ -4,6 +4,7 @@ from Products.urban import URBAN_TYPES
 from Products.urban import UrbanMessage as _
 from Products.urban.migration.utils import cook_javascript_resources
 from Products.urban.utils import moveElementAfter
+from Products.urban.setuphandlers import set_licence_folder_security
 from dm.historical import getHistory
 from imio.helpers.catalog import reindexIndexes
 from plone import api
@@ -324,4 +325,14 @@ def setup_index_referenceFT(context):
 
     reindexIndexes(None, ["referenceFT"])
 
+    logger.info("upgrade step done!")
+
+
+def fix_housing_roaddecree(context):
+    logger = logging.getLogger("urban: Fix housing and roaddecree security")
+    setup_tool = api.portal.get_tool("portal_setup")
+    setup_tool.runImportStepFromProfile("profile-Products.urban:urbantypes", "factorytool")
+    portal_types = ["Housing", "RoadDecree"]
+    for portal_type in portal_types:
+        set_licence_folder_security(portal_type)
     logger.info("upgrade step done!")
