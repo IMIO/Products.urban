@@ -10,6 +10,12 @@ Changelog
 
 2.9.17 (2026-04-10)
 -------------------
+Bug fixes:
+
+-- Fix decisionDate filter: ensure getDecisionDate indexer always 
+returns a DateTime (including PloneMeeting data).
+[WBoudabous] (SUP-52501)
+
 
 Bug fixes:
 

@@ -274,8 +274,9 @@ def genericlicence_decisiondate(licence):
                     )
                 return decision_date
         if linked_pm_items:
-            if "date" in linked_pm_items[0]["extra_include_meeting"].keys():
-                return linked_pm_items[0]["extra_include_meeting"]["date"]
+            date_str = linked_pm_items[0]["extra_include_meeting"].get("date")
+            if date_str:
+                return DateTime(date_str)
         return decision_event.getDecisionDate() or decision_event.getEventDate()
 
 
