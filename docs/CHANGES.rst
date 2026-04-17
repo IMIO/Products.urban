@@ -10,6 +10,10 @@ Changelog
 
 2.9.17 (2026-04-10)
 -------------------
+New features:
+
+-Add option to show or hide the representativeContacts field
+[WBoudabous] (SUP-51436)
 
 Bug fixes:
 
