@@ -1952,6 +1952,9 @@ class GenericLicence(OrderedBaseFolder, UrbanBase, BrowserDefaultMixin):
     def getIntentionToSubmitAmendedPlans(self):
         return self.getLastEvent(interfaces.IIntentionToSubmitAmendedPlans)
 
+    def getLastSentToArchives(self):
+        return self.getLastEvent(interfaces.ISentToArchivesEvent)
+
     def getAllEvents(self, eventInterface=IUrbanEvent, state=None):
         return self.getAllEventsByObjectValues(eventInterface, state=state)
 

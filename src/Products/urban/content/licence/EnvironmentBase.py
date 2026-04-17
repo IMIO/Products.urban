@@ -496,9 +496,6 @@ class EnvironmentBase(
     def getLastModificationRegistry(self):
         return self.getLastEvent(interfaces.IModificationRegistryEvent)
 
-    def getLastSentToArchives(self):
-        return self.getLastEvent(interfaces.ISentToArchivesEvent)
-
     def getLastWalloonRegionDecisionEvent(self):
         return self.getLastEvent(interfaces.IWalloonRegionDecisionEvent)
 
