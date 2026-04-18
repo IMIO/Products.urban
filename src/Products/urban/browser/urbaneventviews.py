@@ -772,6 +772,24 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
         is_planned = self.context.UID() in planned_claimants_import
         return is_planned
 
+    def getFieldsToShow(self):
+        """
+        Return fields to display about the Inquiry wiht specific order for dates
+        """
+        order_fields = [
+            "transmitDate",
+            "displayDate",
+            "investigationStart",
+            "investigationEnd",
+            "claimsDate",
+        ]
+        fields_to_show = super(UrbanEventInquiryBaseView, self).getFieldsToShow()
+        order_index = {name: i for i, name in enumerate(order_fields)}
+        return sorted(
+            fields_to_show,
+            key=lambda f: order_index.get(f.getName(), len(order_fields))
+        )
+
     def import_claimants_from_csv(self):
         portal_urban = api.portal.get_tool("portal_urban")
         plone_utils = api.portal.get_tool("plone_utils")
