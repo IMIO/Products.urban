@@ -8,6 +8,25 @@ Changelog
 
 .. towncrier release notes start
 
+3.0.0b13 (2026-04-18)
+---------------------
+
+New features:
+
+
+- Change inquiry date order
+  [jchandelle] (SUP-51116)
+
+
+Bug fixes:
+
+
+- Fix archive data for non env licence in activity report
+  [jchandelle] (SUP-46043)
+- Ensure that displayed parcels include linked parcels licences and not the current licence
+  [mpeeters] (SUP-51103)
+
+
 3.0.0b12 (2026-03-14)
 ---------------------
 

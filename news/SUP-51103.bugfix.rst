@@ -1,2 +1,0 @@
-Ensure that displayed parcels include linked parcels licences and not the current licence
-[mpeeters]
