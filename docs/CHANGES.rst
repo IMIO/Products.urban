@@ -8,6 +8,16 @@ Changelog
 
 .. towncrier release notes start
 
+2.9.18 (2026-04-19)
+-------------------
+
+Bug fixes:
+
+
+- Add migration for updating manageableLicences notice folder manager
+  [wboudabous] (URB-3600)
+
+
 2.9.17 (2026-04-10)
 -------------------
 
