@@ -1,0 +1,2 @@
+Add migration for updating manageableLicences notice folder manager
+[wboudabous]
