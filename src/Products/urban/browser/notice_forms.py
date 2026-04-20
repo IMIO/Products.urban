@@ -44,19 +44,27 @@ def possible_outgoing_notice_notifications(licence):
         all_outgoings.extend(outgoings)
 
     for event, incoming in all_incomings:
-        already_final = False
-        for outgoing in all_outgoings:
-            if outgoing["incoming_notice_id"] != incoming["notice_id"]:
-                continue
-            if outgoing["partial_or_final"] == "FINAL":
-                already_final = True
-                break
-        if not already_final:
+        linked_outgoings = [
+            outgoing
+            for outgoing in all_outgoings
+            if outgoing["incoming_notice_id"] == incoming["notice_id"]
+        ]
+
+        incoming_already_final = any(
+            [outgoing["partial_or_final"] == "FINAL" for outgoing in linked_outgoings]
+        )
+
+        linked_outgoing_notice_types = [
+            outgoing["outgoing_notice_type"] for outgoing in linked_outgoings
+        ]
+
+        if not incoming_already_final:
             result.append(
                 {
                     "incoming_notice_id": incoming["notice_id"],
                     "incoming_notice_type": incoming["notice_type"],
                     "incoming_event": event,
+                    "linked_outgoing_notice_types": linked_outgoing_notice_types,
                 }
             )
 
@@ -65,20 +73,33 @@ def possible_outgoing_notice_notifications(licence):
 
 @implementer(IContextSourceBinder)
 class OpenIncomingNotifications(object):
-    def __init__(self, accepted_incoming_types):
+    def __init__(self, accepted_incoming_types, avoided_outgoing_notice_types=None):
         self.accepted_incoming_types = accepted_incoming_types
+        self.avoided_outgoing_notice_types = (
+            []
+            if avoided_outgoing_notice_types is None
+            else avoided_outgoing_notice_types
+        )
 
     def __call__(self, context):
         terms = []
         licence = context.aq_parent
         possible_notifs = possible_outgoing_notice_notifications(licence)
         for possible_notif in possible_notifs:
+            # remove those not concerning our incoming type
             if (
                 self.accepted_incoming_types
                 and possible_notif["incoming_notice_type"]
                 not in self.accepted_incoming_types
             ):
                 continue
+
+            # remove those where the concerned outgoings already exist
+            if self.avoided_outgoing_notice_types and set(
+                self.avoided_outgoing_notice_types
+            ).intersection(possible_notif["linked_outgoing_notice_types"]):
+                continue
+
             incoming_id = possible_notif["incoming_notice_id"]
             incoming_notice_type = possible_notif["incoming_notice_type"]
             incoming_event = possible_notif["incoming_event"]
