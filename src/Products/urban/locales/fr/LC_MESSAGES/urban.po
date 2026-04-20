@@ -2823,6 +2823,12 @@ msgstr "Envoyer le PV et les réclamations vers le SPW"
 msgid "transfer_ticket_final"
 msgstr "Envoyer le PV et les réclamations vers le SPW (pas d'avis préalable du Collège)"
 
+msgid "transfer_ticket_final_gesper_ep"
+msgstr "Envoyer le PV et les réclamations vers le SPW (pas d'avis préalable du Collège)"
+
+msgid "transfer_ticket_gesper_ep"
+msgstr "Envoyer le PV et les réclamations vers le SPW"
+
 #. Default: "Action"
 #: ../viewlets/templates/notice_transmit_state.pt:13
 msgid "transmit_action"
