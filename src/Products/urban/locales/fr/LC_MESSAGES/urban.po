@@ -537,7 +537,11 @@ msgstr "Accusé de réception"
 msgid "IActivityEndedEvent type marker interface"
 msgstr "Cessation d'activité"
 
-#: ../interfaces.py:425
+#: ../interfaces.py:413
+msgid "IAmendedPlansAcknowledgmentEvent type marker interface"
+msgstr "Accusé de réception des plans modifiés"
+
+#: ../interfaces.py:449
 msgid "IAnnouncement type marker interface"
 msgstr "Annonce de projet"
 

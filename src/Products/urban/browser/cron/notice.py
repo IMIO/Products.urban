@@ -409,29 +409,32 @@ class ImportFromNoticeView(BrowserView):
 
         elif detailed_notification.notice_type in (
             "DEMANDE_AVIS_OBLIGATOIRE_PLAN_INITIAL_1_ERE_INSTANCE",
-            "DEMANDE_AVIS_OBLIGATOIRE_PLAN_MODIFIE_1_ERE_INSTANCE",
             "DEMANDE_AVIS_OBLIGATOIRE_PLAN_INITIAL_2_EME_INSTANCE",
             "DEMANDE_AVIS_OBLIGATOIRE_PLAN_MODIFIE_2_EME_INSTANCE",
             "DEMANDE_AVIS_FACULTATIF_PLAN_INITIAL_1_ERE_INSTANCE",
-            "DEMANDE_AVIS_FACULTATIF_PLAN_MODIFIE_1_ERE_INSTANCE",
             "DEMANDE_AVIS_FACULTATIF_PLAN_INITIAL_2_EME_INSTANCE",
             "DEMANDE_AVIS_FACULTATIF_PLAN_MODIFIE_2_EME_INSTANCE",
         ):
             handler = GesperPublicSurveyHandler
         elif detailed_notification.notice_type in (
             "DEMANDE_ENQUETE_PUBLIQUE_PLAN_INITIAL_1_ERE_INSTANCE",
-            "DEMANDE_ENQUETE_PUBLIQUE_PLAN_MODIFIE_1_ERE_INSTANCE",
             "DEMANDE_ENQUETE_PUBLIQUE_PLAN_INITIAL_2_EME_INSTANCE",
             "DEMANDE_ENQUETE_PUBLIQUE_PLAN_MODIFIE_2_EME_INSTANCE",
         ):
             handler = GesperPublicSurveyHandler
         elif detailed_notification.notice_type in (
             "DEMANDE_ANNONCE_PROJET_PLAN_INITIAL_1_ERE_INSTANCE",
-            "DEMANDE_ANNONCE PROJET_PLAN_MODIFIE_1_ERE_INSTANCE",
             "DEMANDE_ANNONCE_PROJET_PLAN_INITIAL_2_EME_INSTANCE",
             "DEMANDE_ANNONCE_PROJET_PLAN_MODIFIE_2_EME_INSTANCE",
         ):
             handler = GesperPublicSurveyHandler
+        elif detailed_notification.notice_type in (
+            "DEMANDE_AVIS_OBLIGATOIRE_PLAN_MODIFIE_1_ERE_INSTANCE",
+            "DEMANDE_AVIS_FACULTATIF_PLAN_MODIFIE_1_ERE_INSTANCE",
+            "DEMANDE_ENQUETE_PUBLIQUE_PLAN_MODIFIE_1_ERE_INSTANCE",
+            "DEMANDE_ANNONCE PROJET_PLAN_MODIFIE_1_ERE_INSTANCE",
+        ):
+            handler = GesperAmendedPlansSPWHandler
         else:
             raise NotImplementedError(
                 "No implementation found for notification type: %s"
@@ -722,4 +725,9 @@ class PublicSurveyHandler(IncomingNoticeHandler):
 
 
 class GesperPublicSurveyHandler(PublicSurveyHandler):
+    create_licence_if_missing = True
+
+
+class GesperAmendedPlansSPWHandler(IncomingNoticeHandler):
+    event_config_marker = "Products.urban.interfaces.IAmendedPlansAcknowledgmentEvent"
     create_licence_if_missing = True

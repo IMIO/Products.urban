@@ -313,6 +313,10 @@
     interface=".interfaces.IObservationEvent"
     type=".interfaces.IEventTypeType"/>
 
+  <interface
+    interface=".interfaces.IAmendedPlansAcknowledgmentEvent"
+    type=".interfaces.IEventTypeType"/> 
+
   <adapter
     for="Products.CMFCore.interfaces.ICatalogAware
         Products.Archetypes.interfaces.IUIDCatalog"
