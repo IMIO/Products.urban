@@ -455,3 +455,46 @@ class NoticeOutgoingGesperProjectAnnouncementFinalWithoutOpinionNotification(
     NoticeOutgoingGesperPublicSurveyFinalWithoutOpinionNotification
 ):
     type = "gns:GesperProjectAnnouncementResponse"
+
+
+class NoticeOutgoingGesperOpinionRequestNotification(NoticeResponse):
+    type = "gns:GesperLicenceNoticeResponse"
+    state = "FINAL"
+
+    def __init__(self, event, college_decision=None):
+        super(
+            NoticeOutgoingGesperOpinionRequestNotification, self
+        ).__init__(event)
+        self._college_decision = college_decision
+
+    @property
+    def _reference(self):
+        return self._licence.getReference()
+
+    @property
+    def _decision_code(self):
+        decision_codes = {
+            "favorable": "OCTROI",
+            "defavorable": "REFUS",
+            "octroi": "OCTROI",
+            "refus": "REFUS",
+        }
+        return {"cod:code": decision_codes.get(self.event.getDecision())}
+
+    @property
+    def _blocks(self):
+        return None
+
+    @property
+    def _special_conditions(self):
+        return None
+
+    @property
+    def specific(self):
+        return {
+            "not:notice": self._decision_code,
+            "not:motivation": self._college_decision,
+            "gns:iaReference": self._reference,
+            "gns:blocks": self._blocks,
+            "gns:specialConditions": self._special_conditions,
+        }
