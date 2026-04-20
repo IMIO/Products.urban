@@ -24,7 +24,7 @@ class NoticeNotification(NoticeElement):
         "sender",
         "status",
         "reception_date",
-        "notice_type",
+        "status_date",
         "notification_subtype",
         "notification_type",
     )
@@ -226,7 +226,8 @@ class NoticeNotification(NoticeElement):
     def send_date(self):
         """Return the send date"""
         raw_date = self._get_data("sendDate")
-        return datetime.strptime(raw_date[:19], "%Y-%m-%dT%H:%M:%S").date()
+        if raw_date:
+            return datetime.strptime(raw_date[:19], "%Y-%m-%dT%H:%M:%S").date()
 
     @property
     def container(self):
