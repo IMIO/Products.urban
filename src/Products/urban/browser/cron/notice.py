@@ -661,8 +661,16 @@ class IncomingNoticeHandler(object):
         api.content.transition(self.event, "close")
 
     def fill_incoming_event(self):
-        event_date = DateTime(str(self.notification.send_date))
-        self.event.setEventDate(event_date)
+        usable_date = None
+        if self.notification.send_date:
+            usable_date = self.notification.send_date
+        elif self.notification.status_date:
+            usable_date = self.notification.status_date
+
+        if usable_date:
+            event_date = DateTime(str(usable_date))
+            self.event.setEventDate(event_date)
+
         self.event.store_incoming_notice(
             self.notification.noticeId,
             self.notification.notice_type,
