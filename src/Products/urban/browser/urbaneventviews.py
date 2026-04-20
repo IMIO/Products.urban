@@ -1656,6 +1656,20 @@ class CanTransferDatesGesperEPView(CanTransferNoticeBaseView):
     avoided_outgoing_notice_types = ["transfer_dates_gesper_ep"]
 
 
+class CanTransferTicketGesperEPView(CanTransferNoticeBaseView):
+    accepted_portal_types = ["UrbanEventInquiry"]
+    accepted_incoming_notice_types = [
+        "DEMANDE_ENQUETE_PUBLIQUE_PLAN_INITIAL_1_ERE_INSTANCE",
+        "DEMANDE_ENQUETE_PUBLIQUE_PLAN_MODIFIE_1_ERE_INSTANCE",
+        "DEMANDE_ENQUETE_PUBLIQUE_PLAN_INITIAL_2_EME_INSTANCE",
+        "DEMANDE_ENQUETE_PUBLIQUE_PLAN_MODIFIE_2_EME_INSTANCE",
+    ]
+    avoided_outgoing_notice_types = [
+        "transfer_ticket_gesper_ep",
+        "transfer_ticket_final_gesper_ep",
+    ]
+
+
 class CanTransferDatesGesperAPView(CanTransferNoticeBaseView):
     accepted_portal_types = ["UrbanEventAnnouncement"]
     accepted_event_markers = ["Products.urban.interfaces.IAnnouncementEvent"]

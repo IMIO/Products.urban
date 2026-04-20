@@ -557,6 +557,13 @@
 
   <browser:page
      for="*"
+     name="can_transfer_ticket_gesper_ep"
+     class=".urbaneventviews.CanTransferTicketGesperEPView"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="*"
      name="can_transfer_dates_gesper_ap"
      class=".urbaneventviews.CanTransferDatesGesperAPView"
      permission="zope2.View"
@@ -618,6 +625,15 @@
      class=".notice_forms.TransferDatesGesperEPActionWrapper"
      permission="zope2.View"
      />
+
+  <browser:page
+     for="Products.urban.interfaces.IUrbanEvent"
+     layer="Products.urban.interfaces.IProductUrbanLayer"
+     name="transfer_ticket_gesper_ep_form"
+     class=".notice_forms.TransferTicketGesperEPActionWrapper"
+     permission="zope2.View"
+     />
+
 
   <browser:page
      for="Products.urban.interfaces.IUrbanEvent"

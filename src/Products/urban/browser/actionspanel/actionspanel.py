@@ -46,6 +46,7 @@ class EventActionsPanelView(ActionsPanelView):
             "transfer_decision",
             "transfer_decision_display",
             "transfer_dates_gesper_ep",
+            "transfer_ticket_gesper_ep",
             "transfer_dates_gesper_ap",
         )
 
