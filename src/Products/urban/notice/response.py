@@ -411,6 +411,17 @@ class NoticeOutgoingGesperPublicSurveyPVNotification(
         )
 
 
+class NoticeOutgoingGesperPublicSurveyOpinionNotification(
+    NoticeOutgoingGesperPublicSurveyNotification
+):
+    state = "FINAL"
+
+    def __init__(self, event, inquiry_event, college_opinion):
+        super(NoticeOutgoingGesperPublicSurveyOpinionNotification, self).__init__(
+            event, inquiry_event=inquiry_event, college_opinion=college_opinion
+        )
+
+
 class NoticeOutgoingGesperPublicSurveyFinalWithoutOpinionNotification(
     NoticeOutgoingGesperPublicSurveyNotification
 ):

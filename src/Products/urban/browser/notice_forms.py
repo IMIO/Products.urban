@@ -492,6 +492,74 @@ class TransferTicketGesperEPActionForm(NoticeResponseActionForm):
 TransferTicketGesperEPActionWrapper = wrap_form(TransferTicketGesperEPActionForm)
 
 
+class ITransferOpinionGesperEPActionForm(ITransferBaseActionForm):
+    incoming_notification = schema.Choice(
+        title=_(u"Incoming notification to answer to"),
+        source=OpenIncomingNotifications(
+            [
+                "DEMANDE_ENQUETE_PUBLIQUE_PLAN_INITIAL_1_ERE_INSTANCE",
+                "DEMANDE_ENQUETE_PUBLIQUE_PLAN_MODIFIE_1_ERE_INSTANCE",
+                "DEMANDE_ENQUETE_PUBLIQUE_PLAN_INITIAL_2_EME_INSTANCE",
+                "DEMANDE_ENQUETE_PUBLIQUE_PLAN_MODIFIE_2_EME_INSTANCE",
+            ],
+            ["transfer_opinion_gesper_ep", "transfer_ticket_final_gesper_ep"]
+        ),
+    )
+
+    college_opinion = RichText(
+        title=_(u"College opinion"),
+        default=u"<h1>Motivation:</h1>\r\n\r\n<h1>Décision:</h1>\r\n\r\n",
+        required=False,
+    )
+
+
+class TransferOpinionGesperEPActionForm(NoticeResponseActionForm):
+    label = _("Transfer opinion to the SPW")
+    fields = field.Fields(ITransferOpinionGesperEPActionForm)
+    fields["file_paths"].widgetFactory = CheckBoxFieldWidget
+    action_code = "transfer_opinion_gesper_ep"
+    partial_or_final = "FINAL"
+    success_message = _(u"The opinion transfer is done.")
+
+    def _get_inquiry_event(self, incoming_id):
+        licence = self.context.aq_parent
+        all_licence_events = sorted(
+            licence.getAllEvents(), key=lambda e: e.created(), reverse=True
+        )
+        for event in all_licence_events:
+            if event.portal_type != "UrbanEventInquiry":
+                continue
+            annotations = IAnnotations(event)
+            key = "notice_notification"
+            notice = annotations.get(key, {})
+            outgoings = notice.get("outgoing", [])
+            for outgoing in outgoings:
+                matching_notice_id = outgoing["incoming_notice_id"] == incoming_id
+                matching_action_code = outgoing["outgoing_notice_type"] in (
+                    "transfer_dates_gesper_ep",
+                    "transfer_ticket_gesper_ep",
+                )
+                if matching_notice_id and matching_action_code:
+                    return event
+
+        raise ValueError("No matching Inquiry event could be found on this licence.")
+
+    def _get_college_opinion_text(self, data):
+        college_opinion = data.get("college_opinion", "")
+        output = college_opinion.output if college_opinion else ""
+        self.field_values_to_store["college_opinion"] = output
+        return output
+
+    def transfer_response(self, data):
+        incoming_id = data.get("incoming_notification")
+        inquiry_event = self._get_inquiry_event(incoming_id)
+        college_opinion = self._get_college_opinion_text(data)
+        return self.context.transfer_opinion_gesper_ep(incoming_id, inquiry_event, college_opinion)
+
+
+TransferOpinionGesperEPActionWrapper = wrap_form(TransferOpinionGesperEPActionForm)
+
+
 class ITransferDatesGesperAPActionForm(ITransferBaseActionForm):
     incoming_notification = schema.Choice(
         title=_(u"Incoming notification to answer to"),
