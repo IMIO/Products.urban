@@ -4,13 +4,10 @@ from Products.urban import URBAN_TYPES
 from Products.urban import UrbanMessage as _
 from Products.urban.migration.utils import cook_javascript_resources
 from Products.urban.utils import moveElementAfter
-<<<<<<< HEAD
-from Products.urban.setuphandlers import set_licence_folder_security
-=======
 from Products.urban.profiles.extra.config_default_values import default_values
+from Products.urban.setuphandlers import set_licence_folder_security
 from Products.urban.setuphandlers import createFolderDefaultValues
 from Products.urban.setuphandlers import createVocabularyFolder
->>>>>>> 69bcb7885 ( Move decisional delay vocabulary from code to configuration)
 from dm.historical import getHistory
 from imio.helpers.catalog import reindexIndexes
 from plone import api
@@ -393,6 +390,6 @@ def extract_decision_delay_vocabulary(context):
         default_values["RoadDecree"]["decisionaldelay"][1:],
         default_values["RoadDecree"]["decisionaldelay"][0],
     )
-    
 
     logger.info("migration step done!")
+
