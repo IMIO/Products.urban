@@ -2864,6 +2864,12 @@ msgstr ""
 msgid "transfer_ticket_final"
 msgstr ""
 
+msgid "transfer_ticket_final_gesper_ep"
+msgstr ""
+
+msgid "transfer_ticket_gesper_ep"
+msgstr ""
+
 #. Default: "Action"
 #: ../viewlets/templates/notice_transmit_state.pt:13
 msgid "transmit_action"

@@ -28,6 +28,8 @@ from Products.urban.UrbanEvent import UrbanEvent
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.config import *
 from Products.urban.notice import NoticeOutgoingGesperPublicSurveyDatesNotification
+from Products.urban.notice import NoticeOutgoingGesperPublicSurveyFinalWithoutOpinionNotification
+from Products.urban.notice import NoticeOutgoingGesperPublicSurveyPVNotification
 from Products.urban.notice import NoticeOutgoingPublicSurveyDatesNotification
 from Products.urban.notice import NoticeOutgoingPublicSurveyPVNotification
 from Products.urban.notice import NoticeOutgoingPublicSurveyFinalWithoutOpinionNotification
@@ -373,6 +375,24 @@ class UrbanEventInquiry(OrderedBaseFolder, UrbanEvent, BrowserDefaultMixin):
 
     def transfer_dates_gesper_ep(self, incoming_id):
         notification = NoticeOutgoingGesperPublicSurveyDatesNotification(self)
+        service = WebserviceNotice()
+        result = service.post_notification_response(
+            incoming_id,
+            notification.serialize(),
+        )
+        return result
+
+    def transfer_ticket_gesper_ep(self, incoming_id):
+        notification = NoticeOutgoingGesperPublicSurveyPVNotification(self)
+        service = WebserviceNotice()
+        result = service.post_notification_response(
+            incoming_id,
+            notification.serialize(),
+        )
+        return result
+
+    def finalize_inquiry_without_opinion_gesper_ep(self, incoming_id):
+        notification = NoticeOutgoingGesperPublicSurveyFinalWithoutOpinionNotification(self)
         service = WebserviceNotice()
         result = service.post_notification_response(
             incoming_id,

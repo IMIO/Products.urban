@@ -10,6 +10,8 @@ from Products.urban.notice.sender import NoticeSender
 from Products.urban.notice.response import NoticeOutgoingDecisionNotification
 from Products.urban.notice.response import NoticeOutgoingFileNotification
 from Products.urban.notice.response import NoticeOutgoingGesperPublicSurveyDatesNotification
+from Products.urban.notice.response import NoticeOutgoingGesperPublicSurveyFinalWithoutOpinionNotification
+from Products.urban.notice.response import NoticeOutgoingGesperPublicSurveyPVNotification
 from Products.urban.notice.response import NoticeOutgoingPublicSurveyDatesNotification
 from Products.urban.notice.response import NoticeOutgoingPublicSurveyFinalWithoutOpinionNotification
 from Products.urban.notice.response import NoticeOutgoingPublicSurveyPVNotification
@@ -28,6 +30,8 @@ __all__ = (
     "NoticeOutgoingNotification",
     "NoticeOutgoingFileNotification",
     "NoticeOutgoingGesperPublicSurveyDatesNotification",
+    "NoticeOutgoingGesperPublicSurveyFinalWithoutOpinionNotification",
+    "NoticeOutgoingGesperPublicSurveyPVNotification",
     "NoticeOutgoingPublicSurveyDatesNotification",
     "NoticeOutgoingPublicSurveyFinalWithoutOpinionNotification",
     "NoticeOutgoingPublicSurveyPVNotification",

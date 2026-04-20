@@ -398,3 +398,25 @@ class NoticeOutgoingGesperPublicSurveyDatesNotification(
         )
 
     state = "PARTIAL"
+
+
+class NoticeOutgoingGesperPublicSurveyPVNotification(
+    NoticeOutgoingGesperPublicSurveyNotification
+):
+    state = "PARTIAL"
+
+    def __init__(self, event):
+        super(NoticeOutgoingGesperPublicSurveyPVNotification, self).__init__(
+            event, inquiry_event=event
+        )
+
+
+class NoticeOutgoingGesperPublicSurveyFinalWithoutOpinionNotification(
+    NoticeOutgoingGesperPublicSurveyNotification
+):
+    state = "FINAL"
+
+    def __init__(self, event):
+        super(
+            NoticeOutgoingGesperPublicSurveyFinalWithoutOpinionNotification, self
+        ).__init__(event, inquiry_event=event)
