@@ -552,11 +552,8 @@ schema = Schema(
                 for t in URBAN_TYPES
                 if t
                 not in [
-                    "Inspection",
+                    "RoadDecree",
                     "Ticket",
-                    "ProjectMeeting",
-                    "CODT_UrbanCertificateOne",
-                    "UrbanCertificateOne",
                 ]
             ],
             schemata="urban_description",
