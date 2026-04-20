@@ -591,6 +591,13 @@
      permission="zope2.View"
   />
 
+  <browser:page
+     for="*"
+     name="can_transfer_opinion_gesper_opinion_request"
+     class=".urbaneventviews.CanTransferOpinionGesperOpinionRequestView"
+     permission="zope2.View"
+  />
+
   <!--  NOTICE forms -->
 
   <browser:page
@@ -689,5 +696,12 @@
      permission="zope2.View"
      />
 
+  <browser:page
+     for="Products.urban.interfaces.IUrbanEvent"
+     layer="Products.urban.interfaces.IProductUrbanLayer"
+     name="transfer_opinion_gesper_opinion_request_form"
+     class=".notice_forms.TransferOpinionGesperOpinionRequestActionWrapper"
+     permission="zope2.View"
+     />
 
 </configure>

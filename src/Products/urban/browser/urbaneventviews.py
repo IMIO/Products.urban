@@ -1725,3 +1725,18 @@ class CanTransferOpinionGesperAPView(CanTransferNoticeBaseView):
         "transfer_opinion_gesper_ap",
         "transfer_ticket_final_gesper_ap",
     ]
+
+
+class CanTransferOpinionGesperOpinionRequestView(CanTransferNoticeBaseView):
+    accepted_portal_types = ["UrbanEvent"]
+    accepted_event_markers = ["Products.urban.interfaces.ICollegeOpinionEvent"]
+    accepted_incoming_notice_types = [
+        "DEMANDE_AVIS_OBLIGATOIRE_PLAN_INITIAL_1_ERE_INSTANCE",
+        "DEMANDE_AVIS_OBLIGATOIRE_PLAN_MODIFIE_1_ERE_INSTANCE",
+        "DEMANDE_AVIS_OBLIGATOIRE_PLAN_INITIAL_2_EME_INSTANCE",
+        "DEMANDE_AVIS_OBLIGATOIRE_PLAN_MODIFIE_2_EME_INSTANCE",
+        "DEMANDE_AVIS_FACULTATIF_PLAN_INITIAL_1_ERE_INSTANCE",
+        "DEMANDE_AVIS_FACULTATIF_PLAN_MODIFIE_1_ERE_INSTANCE",
+        "DEMANDE_AVIS_FACULTATIF_PLAN_INITIAL_2_EME_INSTANCE",
+        "DEMANDE_AVIS_FACULTATIF_PLAN_MODIFIE_2_EME_INSTANCE",
+    ]
