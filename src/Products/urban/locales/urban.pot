@@ -2841,6 +2841,9 @@ msgstr ""
 msgid "transfer_opinion"
 msgstr ""
 
+msgid "transfer_opinion_gesper_ap"
+msgstr ""
+
 msgid "transfer_opinion_gesper_ep"
 msgstr ""
 

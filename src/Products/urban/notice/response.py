@@ -445,6 +445,12 @@ class NoticeOutgoingGesperProjectAnnouncementPVNotification(
     type = "gns:GesperProjectAnnouncementResponse"
 
 
+class NoticeOutgoingGesperProjectAnnouncementOpinionNotification(
+    NoticeOutgoingGesperPublicSurveyOpinionNotification
+):
+    type = "gns:GesperProjectAnnouncementResponse"
+
+
 class NoticeOutgoingGesperProjectAnnouncementFinalWithoutOpinionNotification(
     NoticeOutgoingGesperPublicSurveyFinalWithoutOpinionNotification
 ):

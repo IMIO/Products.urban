@@ -583,6 +583,14 @@
      class=".urbaneventviews.CanTransferTicketGesperAPView"
      permission="zope2.View"
   />
+
+  <browser:page
+     for="*"
+     name="can_transfer_opinion_gesper_ap"
+     class=".urbaneventviews.CanTransferOpinionGesperAPView"
+     permission="zope2.View"
+  />
+
   <!--  NOTICE forms -->
 
   <browser:page
@@ -672,5 +680,14 @@
      class=".notice_forms.TransferTicketGesperAPActionWrapper"
      permission="zope2.View"
      />
+
+  <browser:page
+     for="Products.urban.interfaces.IUrbanEvent"
+     layer="Products.urban.interfaces.IProductUrbanLayer"
+     name="transfer_opinion_gesper_ap_form"
+     class=".notice_forms.TransferOpinionGesperAPActionWrapper"
+     permission="zope2.View"
+     />
+
 
 </configure>
