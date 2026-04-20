@@ -73,6 +73,7 @@ class NoticeOutgoingFileNotification(NoticeElement):
     def description(self):
         return self._file.title
 
+# TWICE
 
 class NoticeOutgoingNotification(NoticeResponse):
     state = "FINAL"
@@ -303,3 +304,97 @@ class NoticeOutgoingDecisionNotification(NoticeResponse):
             "tns:displayDecisionStartDate": self._display_decision_start_date,
             "tns:displayDecisionEndDate": self._display_decision_end_date,
         }
+
+
+# GESPER
+
+class NoticeOutgoingGesperPublicSurveyNotification(NoticeResponse):
+
+    type = "gns:GesperPublicSurveyResponse"
+
+    def __init__(self, event, inquiry_event=None, college_opinion=None):
+        super(NoticeOutgoingGesperPublicSurveyNotification, self).__init__(event)
+        self._inquiry_event = inquiry_event
+        self._college_opinion = college_opinion
+
+    @property
+    def _reference(self):
+        return self._licence.getReference()
+
+    @property
+    def state(self):
+        raise NotImplementedError
+
+    @property
+    def _minute(self):
+        return (
+            clean_accents(self._inquiry_event.getReportText())
+            if self._inquiry_event
+            else None
+        )
+
+    @property
+    def _observations(self):
+        return (
+            clean_accents(self._inquiry_event.getClaimsText())
+            if self._inquiry_event
+            else None
+        )
+
+    @property
+    def _notice_college(self):
+        return self._college_opinion
+
+    @property
+    def _display_start_date(self):
+        return self._inquiry_event.getDisplayDate() if self._inquiry_event else None
+
+    @property
+    def _display_end_date(self):
+        return self._inquiry_event.getDisplayDateEnd() if self._inquiry_event else None
+
+    @property
+    def _organisation_start_date(self):
+        return (
+            self._inquiry_event.getInvestigationStart() if self._inquiry_event else None
+        )
+
+    @property
+    def _organisation_end_date(self):
+        return (
+            self._inquiry_event.getInvestigationEnd() if self._inquiry_event else None
+        )
+
+    @property
+    def _suspension_start_date(self):
+        return None
+
+    @property
+    def _suspension_end_date(self):
+        return None
+
+    @property
+    def specific(self):
+        return {
+            "gns:iaReference": self._reference,
+            "gns:minute": self._minute,
+            "gns:observations": self._observations,
+            "gns:noticeCollege": self._notice_college,
+            "gns:displayStartDate": self._display_start_date,
+            "gns:displayEndDate": self._display_end_date,
+            "gns:organisationStartDate": self._organisation_start_date,
+            "gns:organisationEndDate": self._organisation_end_date,
+            "gns:suspensionStartDate": self._suspension_start_date,
+            "gns:suspensionEndDate": self._suspension_end_date,
+        }
+
+
+class NoticeOutgoingGesperPublicSurveyDatesNotification(
+    NoticeOutgoingGesperPublicSurveyNotification
+):
+    def __init__(self, event):
+        super(NoticeOutgoingGesperPublicSurveyDatesNotification, self).__init__(
+            event, inquiry_event=event
+        )
+
+    state = "PARTIAL"

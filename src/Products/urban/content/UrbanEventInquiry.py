@@ -27,6 +27,7 @@ from Products.urban import UrbanMessage as _
 from Products.urban.UrbanEvent import UrbanEvent
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.config import *
+from Products.urban.notice import NoticeOutgoingGesperPublicSurveyDatesNotification
 from Products.urban.notice import NoticeOutgoingPublicSurveyDatesNotification
 from Products.urban.notice import NoticeOutgoingPublicSurveyPVNotification
 from Products.urban.notice import NoticeOutgoingPublicSurveyFinalWithoutOpinionNotification
@@ -366,6 +367,15 @@ class UrbanEventInquiry(OrderedBaseFolder, UrbanEvent, BrowserDefaultMixin):
         service = WebserviceNotice()
         result = service.post_notification_response(
             notification.notice_id("DEMANDE_EP"),
+            notification.serialize(),
+        )
+        return result
+
+    def transfer_dates_gesper_ep(self, incoming_id):
+        notification = NoticeOutgoingGesperPublicSurveyDatesNotification(self)
+        service = WebserviceNotice()
+        result = service.post_notification_response(
+            incoming_id,
             notification.serialize(),
         )
         return result
