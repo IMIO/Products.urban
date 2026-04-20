@@ -30,7 +30,10 @@ def possible_outgoing_notice_notifications(licence):
     all_incomings = []
     all_outgoings = []
 
-    for event in licence.getAllEvents():
+    all_licence_events = sorted(
+        licence.getAllEvents(), key=lambda e: e.created(), reverse=True
+    )
+    for event in all_licence_events:
         annotations = IAnnotations(event)
         key = "notice_notification"
         notice = annotations.get(key, {})
