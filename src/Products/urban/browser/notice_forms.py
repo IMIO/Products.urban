@@ -414,7 +414,8 @@ class ITransferDatesGesperEPActionForm(ITransferBaseActionForm):
                 "DEMANDE_ENQUETE_PUBLIQUE_PLAN_MODIFIE_1_ERE_INSTANCE",
                 "DEMANDE_ENQUETE_PUBLIQUE_PLAN_INITIAL_2_EME_INSTANCE",
                 "DEMANDE_ENQUETE_PUBLIQUE_PLAN_MODIFIE_2_EME_INSTANCE",
-            ]
+            ],
+            ["transfer_dates_gesper_ep"]
         ),
     )
 
@@ -428,9 +429,8 @@ class TransferDatesGesperEPActionForm(NoticeResponseActionForm):
     success_message = _(u"The transfer of dates is done.")
 
     def transfer_response(self, data):
-        # result = self.context.transfer_dates()
-        result = {"body": {"result": {"receptionDate": "2026-04-01T12:34:56.789000"}}}  # TODO: remove fake data
-        return result
+        incoming_id = data.get("incoming_notification")
+        return self.context.transfer_dates_gesper_ep(incoming_id)
 
 
 TransferDatesGesperEPActionWrapper = wrap_form(TransferDatesGesperEPActionForm)

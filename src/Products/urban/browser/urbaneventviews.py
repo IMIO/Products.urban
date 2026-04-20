@@ -1653,6 +1653,7 @@ class CanTransferDatesGesperEPView(CanTransferNoticeBaseView):
         "DEMANDE_ENQUETE_PUBLIQUE_PLAN_INITIAL_2_EME_INSTANCE",
         "DEMANDE_ENQUETE_PUBLIQUE_PLAN_MODIFIE_2_EME_INSTANCE",
     ]
+    avoided_outgoing_notice_types = ["transfer_dates_gesper_ep"]
 
 
 class CanTransferDatesGesperAPView(CanTransferNoticeBaseView):
