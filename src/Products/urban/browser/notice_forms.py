@@ -589,3 +589,59 @@ class TransferDatesGesperAPActionForm(NoticeResponseActionForm):
 
 
 TransferDatesGesperAPActionWrapper = wrap_form(TransferDatesGesperAPActionForm)
+
+
+class ITransferTicketGesperAPActionForm(ITransferBaseActionForm):
+    incoming_notification = schema.Choice(
+        title=_(u"Incoming notification to answer to"),
+        source=OpenIncomingNotifications(
+            [
+                "DEMANDE_ANNONCE_PROJET_PLAN_INITIAL_1_ERE_INSTANCE",
+                "DEMANDE_ANNONCE PROJET_PLAN_MODIFIE_1_ERE_INSTANCE",
+                "DEMANDE_ANNONCE_PROJET_PLAN_INITIAL_2_EME_INSTANCE",
+                "DEMANDE_ANNONCE_PROJET_PLAN_MODIFIE_2_EME_INSTANCE",
+            ],
+            ["transfer_ticket_gesper_ap", "transfer_ticket_final_gesper_ap"],
+        ),
+    )
+
+    partial_or_final = schema.Choice(
+        title=_(u"Preliminary Opinion"),
+        description=_(u"This action cannot be reversed."),
+        required=True,
+        vocabulary=SimpleVocabulary(
+            [
+                SimpleTerm(
+                    value=u"PARTIAL", title=_(u"I will create a college opinion")
+                ),
+                SimpleTerm(
+                    value=u"FINAL",
+                    title=_(
+                        u"I will not send a college opinion and I am finalizing the response to the SPW now"
+                    ),
+                ),
+            ]
+        ),
+    )
+
+
+class TransferTicketGesperAPActionForm(NoticeResponseActionForm):
+    label = _("Transfer ticket to the SPW")
+    fields = field.Fields(ITransferTicketGesperAPActionForm)
+    fields["file_paths"].widgetFactory = CheckBoxFieldWidget
+    fields["partial_or_final"].widgetFactory = RadioFieldWidget
+    success_message = _(u"The ticket transfer is done.")
+
+    def transfer_response(self, data):
+        incoming_id = data.get("incoming_notification")
+        self.partial_or_final = data.get("partial_or_final")
+        if self.partial_or_final == "PARTIAL":
+            self.action_code = "transfer_ticket_gesper_ap"
+            return self.context.transfer_ticket_gesper_ap(incoming_id)
+
+        if self.partial_or_final == "FINAL":
+            self.action_code = "transfer_ticket_final_gesper_ap"
+            return self.context.finalize_inquiry_without_opinion_gesper_ap(incoming_id)
+
+
+TransferTicketGesperAPActionWrapper = wrap_form(TransferTicketGesperAPActionForm)

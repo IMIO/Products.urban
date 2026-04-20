@@ -235,5 +235,16 @@
    </property>
    <property name="visible">True</property>
   </object>
+  <object name="transfer_ticket_gesper_ap" meta_type="CMF Action" i18n:domain="urban">
+   <property name="title" i18n:translate="">Transfer ticket to the SPW</property>
+   <property name="description" i18n:translate=""></property>
+   <property name="url_expr">string:$object_url/@@transfer_ticket_gesper_ap_form</property>
+   <property name="icon_expr">string:$portal_url/++resource++Products.urban/coq_wallon.png</property>
+   <property name="available_expr">context/@@can_transfer_ticket_gesper_ap</property>
+   <property name="permissions">
+    <element value="View"/>
+   </property>
+   <property name="visible">True</property>
+  </object>
  </object>
 </object>

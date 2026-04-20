@@ -1564,6 +1564,12 @@ msgstr ""
 msgid "transfer_dates_gesper_ap"
 msgstr ""
 
+msgid "transfer_ticket_gesper_ap"
+msgstr ""
+
+msgid "transfer_ticket_final_gesper_ap"
+msgstr ""
+
 msgid "college_opinion"
 msgstr ""
 
