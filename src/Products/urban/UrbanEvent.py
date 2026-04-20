@@ -37,6 +37,7 @@ from Products.urban.config import *
 from Products.urban.interfaces import IUrbanDoc
 from Products.urban.notice import NoticeOutgoingDecisionNotification
 from Products.urban.notice import NoticeOutgoingFileNotification
+from Products.urban.notice import NoticeOutgoingGesperPublicSurveyOpinionNotification
 from Products.urban.notice import NoticeOutgoingPublicSurveyOpinionNotification
 from Products.urban.notice import NoticeOutgoingSummaryReportDecisionNotification
 from Products.urban.notice import NoticeOutgoingSummaryReportDatesNotification
@@ -1102,6 +1103,17 @@ class UrbanEvent(OrderedBaseFolder, BrowserDefaultMixin):
                     licence.getReference()
                 )
             )
+        return result
+
+    def transfer_opinion_gesper_ep(self, incoming_id, inquiry_event, college_opinion):
+        notification = NoticeOutgoingGesperPublicSurveyOpinionNotification(
+            self, inquiry_event, college_opinion
+        )
+        service = WebserviceNotice()
+        result = service.post_notification_response(
+            incoming_id,
+            notification.serialize(),
+        )
         return result
 
 

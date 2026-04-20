@@ -564,6 +564,13 @@
 
   <browser:page
      for="*"
+     name="can_transfer_opinion_gesper_ep"
+     class=".urbaneventviews.CanTransferOpinionGesperEPView"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="*"
      name="can_transfer_dates_gesper_ap"
      class=".urbaneventviews.CanTransferDatesGesperAPView"
      permission="zope2.View"
@@ -634,6 +641,13 @@
      permission="zope2.View"
      />
 
+  <browser:page
+     for="Products.urban.interfaces.IUrbanEvent"
+     layer="Products.urban.interfaces.IProductUrbanLayer"
+     name="transfer_opinion_gesper_ep_form"
+     class=".notice_forms.TransferOpinionGesperEPActionWrapper"
+     permission="zope2.View"
+     />
 
   <browser:page
      for="Products.urban.interfaces.IUrbanEvent"
