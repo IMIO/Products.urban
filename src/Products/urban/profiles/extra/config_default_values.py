@@ -3952,11 +3952,11 @@ default_values = {
     "RoadDecree":{
         "decisionaldelay": [
             "UrbanVocabularyTerm",
-            {"id": "ukn", "title": "unknown"},
-            {"id": "75j", "title": "75 days"},
-            {"id": "105j", "title": "105 days"},
-            {"id": "150j", "title": "150 days"},
-            {"id": "210j", "title": "210 days"},
+            {"id": "ukn", "title": "Non déterminé"},
+            {"id": "75j", "title": "75 jours"},
+            {"id": "105j", "title": "105 jours"},
+            {"id": "150j", "title": "150 jours"},
+            {"id": "210j", "title": "210 jours"},
             
             ],},
 }

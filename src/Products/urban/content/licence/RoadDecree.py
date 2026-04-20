@@ -284,17 +284,6 @@ class RoadDecree(BaseFolder, CODT_BaseBuildLicence, BrowserDefaultMixin):
         )
         return DisplayList(vocab)
 
-    security.declarePublic("list_decisional_delay")
-
-    def list_decisional_delay(self):
-        vocabulary = (
-            ("ukn", _("unknown")),
-            ("75j", _("75 days")),
-            ("105j", _("105 days")),
-            ("150j", _("150 days")),
-            ("210j", _("210 days")),
-        )
-        return DisplayList(vocabulary)
 
     def get_decisional_delays(self, *values):
         selection = [v["val"] for v in values if v["selected"]]
