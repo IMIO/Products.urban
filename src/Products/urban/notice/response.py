@@ -431,3 +431,9 @@ class NoticeOutgoingGesperPublicSurveyFinalWithoutOpinionNotification(
         super(
             NoticeOutgoingGesperPublicSurveyFinalWithoutOpinionNotification, self
         ).__init__(event, inquiry_event=event)
+
+
+class NoticeOutgoingGesperProjectAnnouncementDatesNotification(
+    NoticeOutgoingGesperPublicSurveyDatesNotification
+):
+    type = "gns:GesperProjectAnnouncementResponse"
