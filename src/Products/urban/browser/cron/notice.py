@@ -433,6 +433,11 @@ class ImportFromNoticeView(BrowserView):
             "DEMANDE_ANNONCE PROJET_PLAN_MODIFIE_1_ERE_INSTANCE",
         ):
             handler = GesperAmendedPlansSPWHandler
+        elif detailed_notification.notice_type in (
+            "DECISION_GESPER_1_ERE_INSTANCE",
+            "DECISION_GESPER_2_EME_INSTANCE",
+        ):
+            handler = GesperDecisionSPWHandler
         else:
             raise NotImplementedError(
                 "No implementation found for notification type: %s"
@@ -721,6 +726,39 @@ class PublicSurveyHandler(IncomingNoticeHandler):
 
 class GesperPublicSurveyHandler(PublicSurveyHandler):
     create_licence_if_missing = True
+
+
+class GesperDecisionSPWHandler(IncomingNoticeHandler):
+    event_config_marker = "Products.urban.interfaces.IWalloonRegionDecisionEvent"
+    create_licence_if_missing = True
+
+    def fill_incoming_event(self):
+        super(GesperDecisionSPWHandler, self).fill_incoming_event()
+
+        if self.notification.decision_code:
+            mapping_decision_terms = {
+                "UFD2_DEMAT_DECISION_FD": "favorable",
+                "UFD2_DECISION_FD_REFUSEE": "defavorable",
+            }
+            urban_decision_term = mapping_decision_terms.get(
+                self.notification.decision_code
+            )
+            if urban_decision_term:
+                self.event.setDecision(urban_decision_term)
+            else:
+                self.event.setDescription(
+                    u"Décision: {}".format(self.notification.decision_code)
+                )
+
+    def licence_transition_guard(self):
+        return api.content.get_state(self.licence) == "complete"
+
+    def do_licence_transition(self):
+        decision_code = self.notification.decision_code
+        if decision_code == "UFD2_DEMAT_DECISION_FD":
+            api.content.transition(self.licence, "accept")
+        elif decision_code == "UFD2_DECISION_FD_REFUSEE":
+            api.content.transition(self.licence, "refuse")
 
 
 class GesperAmendedPlansSPWHandler(IncomingNoticeHandler):

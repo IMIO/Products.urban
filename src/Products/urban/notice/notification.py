@@ -348,6 +348,20 @@ class NoticeNotification(NoticeElement):
     @property
     def decision_code(self):
         """Return decision code from a DecisionRequest"""
-        return self._get_data(
-            "specific", self._specific_code, "ns3:decisionCode", "code"
-        )
+
+        if self.original_application == "TWICE":
+            return self._get_data(
+                "specific", self._specific_code, "ns3:decisionCode", "code"
+            )
+        if self.original_application == "GESPER" and self.notice_type in (
+            "DECISION_GESPER_1_ERE_INSTANCE",
+            "DECISION_GESPER_2_EME_INSTANCE",
+        ):
+            for document in self.documents:
+                if document.document_type_code in (
+                    "UFD2_DEMAT_DECISION_FD",
+                    "UFD2_DECISION_FD_REFUSEE",
+                ):
+                    return document.document_type_code
+
+        return None
