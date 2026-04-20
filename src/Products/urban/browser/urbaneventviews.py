@@ -1690,7 +1690,8 @@ class CanTransferDatesGesperAPView(CanTransferNoticeBaseView):
     accepted_event_markers = ["Products.urban.interfaces.IAnnouncementEvent"]
     accepted_incoming_notice_types = [
         "DEMANDE_ANNONCE_PROJET_PLAN_INITIAL_1_ERE_INSTANCE",
-        "DEMANDE_ANNONCE PROJET_PLAN_MODIFIE_1_ERE_INSTANCE",
+        "DEMANDE_ANNONCE_PROJET_PLAN_MODIFIE_1_ERE_INSTANCE",
         "DEMANDE_ANNONCE_PROJET_PLAN_INITIAL_2_EME_INSTANCE",
         "DEMANDE_ANNONCE_PROJET_PLAN_MODIFIE_2_EME_INSTANCE",
     ]
+    avoided_outgoing_notice_types = ["transfer_dates_gesper_ap"]
