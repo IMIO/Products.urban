@@ -36,29 +36,13 @@ msgstr "%s_folder_title"
 msgid "%s_urbanconfig_title"
 msgstr "%s_urbanconfig_title"
 
-#: ../content/licence/RoadDecree.py:288
-msgid "105 days"
-msgstr "105 jours"
-
-#: ../content/licence/RoadDecree.py:289
-msgid "150 days"
-msgstr "150 jours"
-
 #: ../content/licence/ExplosivesPossession.py:140
 msgid "1st class"
 msgstr "1ère classe : Collège provincial"
 
-#: ../content/licence/RoadDecree.py:290
-msgid "210 days"
-msgstr "210 jours"
-
 #: ../content/licence/ExplosivesPossession.py:141
 msgid "2nd class"
 msgstr "2ème classe : Collège communal"
-
-#: ../content/licence/RoadDecree.py:287
-msgid "75 days"
-msgstr "75 jours"
 
 #: ../contentrules/event_type.py:70
 msgid "A Event type condition makes the rule apply only if Event type correspond to the one from the context."
@@ -2751,10 +2735,6 @@ msgstr "Par"
 
 msgid "uniquelicence_urbanconfig_title"
 msgstr "Paramètres des permis uniques"
-
-#: ../content/licence/RoadDecree.py:286
-msgid "unknown"
-msgstr "Non déterminé"
 
 msgid "unknown_worktype_on_licence"
 msgstr "nature des travaux ${worktype} inconnue sur le permis ${reference}"
@@ -5718,3 +5698,6 @@ msgstr "Partie de l'immeuble concernée"
 
 msgid "urban_label_buildingType"
 msgstr "Nature de l'immeuble"
+
+msgid "decisionaldelay_folder_title"
+msgstr " Délai de décision du conseil "
