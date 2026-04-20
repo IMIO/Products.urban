@@ -550,7 +550,11 @@ msgstr ""
 msgid "IActivityEndedEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:441
+#: ../interfaces.py:413
+msgid "IAmendedPlansAcknowledgmentEvent type marker interface"
+msgstr ""
+
+#: ../interfaces.py:449
 msgid "IAnnouncement type marker interface"
 msgstr ""
 

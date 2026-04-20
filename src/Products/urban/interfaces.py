@@ -409,6 +409,10 @@ class IDefaultCODTAcknowledgmentEvent(IAcknowledgmentEvent):
     __doc__ = _("""IDefaultCODTAcknowledgmentEvent type marker interface""")
 
 
+class IAmendedPlansAcknowledgmentEvent(IAcknowledgmentEvent):
+    __doc__ = _("""IAmendedPlansAcknowledgmentEvent type marker interface""")
+
+
 class ICommunalCouncilEvent(Interface):
     __doc__ = _("""ICommunalCouncil type marker interface""")
 
