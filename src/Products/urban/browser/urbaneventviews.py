@@ -1594,6 +1594,7 @@ class CanTransferNoticeBaseView(BrowserView):
     accepted_portal_types = []
     accepted_event_markers = []
     accepted_incoming_notice_types = []
+    avoided_outgoing_notice_types = []
 
     def __call__(self):
         return (
@@ -1632,11 +1633,14 @@ class CanTransferNoticeBaseView(BrowserView):
     def licence_has_open_incoming_notifications(self):
         licence = self.context.aq_parent
         possible_incomings = possible_outgoing_notice_notifications(licence)
-        return bool(
+
+        return any(
             [
-                x
+                x["incoming_notice_type"] in self.accepted_incoming_notice_types
+                and not set(self.avoided_outgoing_notice_types).intersection(
+                    x["linked_outgoing_notice_types"]
+                )
                 for x in possible_incomings
-                if x["incoming_notice_type"] in self.accepted_incoming_notice_types
             ]
         )
 
