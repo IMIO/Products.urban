@@ -869,6 +869,10 @@ msgstr "Identifiant NOTICe"
 msgid "NOTICe Type"
 msgstr "Type de notification NOTICe"
 
+#: ../browser/cron/notice.py:759
+msgid "NOTICe notification n° ${noticeId}"
+msgstr "Notification NOTICe n° ${noticeId}"
+
 #: ../viewlets/templates/notice_transmit_state.pt:4
 msgid "NOTICe reception date"
 msgstr "Date de réception (NOTICe)"

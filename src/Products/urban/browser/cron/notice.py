@@ -690,7 +690,11 @@ class IncomingNoticeHandler(object):
 
     def do_licence_transition(self):
         if self.licence_transition and self.licence_transition_guard():
-            api.content.transition(self.licence, self.licence_transition)
+            api.content.transition(
+                self.licence,
+                self.licence_transition,
+                comment=self._notification_transition_comment,
+            )
 
     def update_licence(self):
         self.set_reference_ft()
@@ -731,6 +735,16 @@ class IncomingNoticeHandler(object):
         self.licence.description.raw += translate(error, context=self.request)
         self.licence._p_changed = 1
 
+    @property
+    def _notification_transition_comment(self):
+        msg = _(
+            u"NOTICe notification n° ${noticeId}",
+            mapping={
+                "noticeId": self.notification.noticeId,
+            },
+        )
+        return translate(msg, context=self.request)
+
 
 class PublicSurveyHandler(IncomingNoticeHandler):
     event_config_marker = "Products.urban.interfaces.IAcknowledgmentEvent"
@@ -747,7 +761,11 @@ class GesperPublicSurveyHandler(IncomingNoticeHandler):
             "deposit",
             "incomplete",
         ):
-            api.content.transition(self.licence, "iscomplete")
+            api.content.transition(
+                self.licence,
+                "iscomplete",
+                comment=self._notification_transition_comment,
+            )
         elif licence_state in (
             "accepted",
             "inacceptable",
@@ -755,7 +773,9 @@ class GesperPublicSurveyHandler(IncomingNoticeHandler):
             "retired",
             "obsolete",
         ):
-            api.content.transition(self.licence, "reopen")
+            api.content.transition(
+                self.licence, "reopen", comment=self._notification_transition_comment
+            )
 
 
 class GesperDecisionSPWHandler(IncomingNoticeHandler):
@@ -786,9 +806,13 @@ class GesperDecisionSPWHandler(IncomingNoticeHandler):
     def do_licence_transition(self):
         decision_code = self.notification.decision_code
         if decision_code == "UFD2_DEMAT_DECISION_FD":
-            api.content.transition(self.licence, "accept")
+            api.content.transition(
+                self.licence, "accept", comment=self._notification_transition_comment
+            )
         elif decision_code == "UFD2_DECISION_FD_REFUSEE":
-            api.content.transition(self.licence, "refuse")
+            api.content.transition(
+                self.licence, "refuse", comment=self._notification_transition_comment
+            )
 
 
 class GesperAmendedPlansSPWHandler(IncomingNoticeHandler):
@@ -801,7 +825,11 @@ class GesperAmendedPlansSPWHandler(IncomingNoticeHandler):
             "deposit",
             "incomplete",
         ):
-            api.content.transition(self.licence, "iscomplete")
+            api.content.transition(
+                self.licence,
+                "iscomplete",
+                comment=self._notification_transition_comment,
+            )
         elif licence_state in (
             "accepted",
             "inacceptable",
@@ -809,4 +837,6 @@ class GesperAmendedPlansSPWHandler(IncomingNoticeHandler):
             "retired",
             "obsolete",
         ):
-            api.content.transition(self.licence, "reopen")
+            api.content.transition(
+                self.licence, "reopen", comment=self._notification_transition_comment
+            )
