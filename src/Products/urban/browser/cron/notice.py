@@ -409,23 +409,23 @@ class ImportFromNoticeView(BrowserView):
 
         elif detailed_notification.notice_type in (
             "DEMANDE_AVIS_OBLIGATOIRE_PLAN_INITIAL_1_ERE_INSTANCE",
-            "DEMANDE_AVIS_OBLIGATOIRE_PLAN_INITIAL_2_EME_INSTANCE",
-            "DEMANDE_AVIS_OBLIGATOIRE_PLAN_MODIFIE_2_EME_INSTANCE",
+            # "DEMANDE_AVIS_OBLIGATOIRE_PLAN_INITIAL_2_EME_INSTANCE",
+            # "DEMANDE_AVIS_OBLIGATOIRE_PLAN_MODIFIE_2_EME_INSTANCE",
             "DEMANDE_AVIS_FACULTATIF_PLAN_INITIAL_1_ERE_INSTANCE",
-            "DEMANDE_AVIS_FACULTATIF_PLAN_INITIAL_2_EME_INSTANCE",
-            "DEMANDE_AVIS_FACULTATIF_PLAN_MODIFIE_2_EME_INSTANCE",
+            # "DEMANDE_AVIS_FACULTATIF_PLAN_INITIAL_2_EME_INSTANCE",
+            # "DEMANDE_AVIS_FACULTATIF_PLAN_MODIFIE_2_EME_INSTANCE",
         ):
             handler = GesperPublicSurveyHandler
         elif detailed_notification.notice_type in (
             "DEMANDE_ENQUETE_PUBLIQUE_PLAN_INITIAL_1_ERE_INSTANCE",
-            "DEMANDE_ENQUETE_PUBLIQUE_PLAN_INITIAL_2_EME_INSTANCE",
-            "DEMANDE_ENQUETE_PUBLIQUE_PLAN_MODIFIE_2_EME_INSTANCE",
+            # "DEMANDE_ENQUETE_PUBLIQUE_PLAN_INITIAL_2_EME_INSTANCE",
+            # "DEMANDE_ENQUETE_PUBLIQUE_PLAN_MODIFIE_2_EME_INSTANCE",
         ):
             handler = GesperPublicSurveyHandler
         elif detailed_notification.notice_type in (
             "DEMANDE_ANNONCE_PROJET_PLAN_INITIAL_1_ERE_INSTANCE",
-            "DEMANDE_ANNONCE_PROJET_PLAN_INITIAL_2_EME_INSTANCE",
-            "DEMANDE_ANNONCE_PROJET_PLAN_MODIFIE_2_EME_INSTANCE",
+            # "DEMANDE_ANNONCE_PROJET_PLAN_INITIAL_2_EME_INSTANCE",
+            # "DEMANDE_ANNONCE_PROJET_PLAN_MODIFIE_2_EME_INSTANCE",
         ):
             handler = GesperPublicSurveyHandler
         elif detailed_notification.notice_type in (
@@ -437,7 +437,7 @@ class ImportFromNoticeView(BrowserView):
             handler = GesperAmendedPlansSPWHandler
         elif detailed_notification.notice_type in (
             "DECISION_GESPER_1_ERE_INSTANCE",
-            "DECISION_GESPER_2_EME_INSTANCE",
+            # "DECISION_GESPER_2_EME_INSTANCE",
         ):
             handler = GesperDecisionSPWHandler
         else:
