@@ -732,8 +732,25 @@ class PublicSurveyHandler(IncomingNoticeHandler):
     licence_transition = "iscomplete"
 
 
-class GesperPublicSurveyHandler(PublicSurveyHandler):
+class GesperPublicSurveyHandler(IncomingNoticeHandler):
+    event_config_marker = "Products.urban.interfaces.IAcknowledgmentEvent"
     create_licence_if_missing = True
+
+    def do_licence_transition(self):
+        licence_state = api.content.get_state(self.licence)
+        if licence_state in (
+            "deposit",
+            "incomplete",
+        ):
+            api.content.transition(self.licence, "iscomplete")
+        elif licence_state in (
+            "accepted",
+            "inacceptable",
+            "refused",
+            "retired",
+            "obsolete",
+        ):
+            api.content.transition(self.licence, "reopen")
 
 
 class GesperDecisionSPWHandler(IncomingNoticeHandler):
