@@ -880,6 +880,10 @@ msgstr ""
 msgid "NOTICe Type"
 msgstr ""
 
+#: ../browser/cron/notice.py:759
+msgid "NOTICe notification n° ${noticeId}"
+msgstr ""
+
 #: ../viewlets/templates/notice_transmit_state.pt:4
 msgid "NOTICe reception date"
 msgstr ""
