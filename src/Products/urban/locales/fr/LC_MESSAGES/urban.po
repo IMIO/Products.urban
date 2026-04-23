@@ -2804,7 +2804,7 @@ msgid "transfer_dates"
 msgstr "Envoyer les dates d'enquête vers le SPW"
 
 msgid "transfer_dates_gesper_ap"
-msgstr "Envoyer les dates d'enquête vers le SPW"
+msgstr "Envoyer les dates d'annonce vers le SPW"
 
 msgid "transfer_dates_gesper_ep"
 msgstr "Envoyer les dates d'enquête vers le SPW"
