@@ -199,19 +199,27 @@ class TransitionsPanelView(ActionsPanelView):
             "imio.actionspanel_workflow_%s_cachekey" % self.context.portal_type, None
         )
         if "frozen_suspension" in workflow.states:
+            guard_groups = Guard()
+            guard_roles = Guard()
+            guard_roles.roles = ("Manager",)
+            if ICODT_UniqueLicence.providedBy(self.context):
+                guard_groups.groups = ("urban_editors", "environment_editors")
+            elif IEnvironmentLicence.providedBy(self.context):
+                guard_groups.groups = ("environment_editors",)
+            else:
+                guard_groups.groups = ("urban_editors",)
+            may_trigger_roles = self._checkTransitionGuard(
+                guard_roles, self.member, workflow, self.context
+            )
+            may_trigger_group = self._checkTransitionGuard(
+                guard_groups, self.member, workflow, self.context
+            )
             if api.content.get_state(self.context) == "frozen_suspension":
-                guard = Guard()
-                if ICODT_UniqueLicence.providedBy(self.context):
-                    guard.groups = ("urban_editors", "environment_editors")
-                elif IEnvironmentLicence.providedBy(self.context):
-                    guard.groups = ("environment_editors",)
-                else:
-                    guard.groups = ("urban_editors",)
-                may_trigger = self._checkTransitionGuard(
-                    guard, self.member, workflow, self.context
-                )
                 # add 'resume_thaw' fake transition
-                if not self._check_if_transiton_present(transitions, "resume_thaw"):
+                if (
+                    (may_trigger_group or may_trigger_roles)
+                    and not self._check_if_transiton_present(transitions, "resume_thaw")
+                ):
                     transitions.append(
                         {
                             "id": "resume_thaw",
@@ -239,13 +247,13 @@ class TransitionsPanelView(ActionsPanelView):
                         }
                     )
             else:
-                guard = Guard()
-                guard.groups = ("urban_editors",)
-                may_trigger = self._checkTransitionGuard(
-                    guard, self.member, workflow, self.context
-                )
                 # add 'suspend_freeze' fake transition
-                if not self._check_if_transiton_present(transitions, "suspend_freeze"):
+                if (
+                    (may_trigger_group or may_trigger_roles)
+                    and not self._check_if_transiton_present(
+                        transitions, "suspend_freeze"
+                    )
+                ):
                     transitions.append(
                         {
                             "id": "suspend_freeze",
