@@ -8,6 +8,16 @@ Changelog
 
 .. towncrier release notes start
 
+3.0.0b14 (2026-04-26)
+---------------------
+
+New features:
+
+
+- Add guard for secure transtion to `frozen_suspension`
+  [jchandelle] (SUP-49174)
+
+
 3.0.0b13 (2026-04-18)
 ---------------------
 
