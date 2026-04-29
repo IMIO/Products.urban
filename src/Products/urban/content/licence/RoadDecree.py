@@ -4,21 +4,26 @@ from AccessControl import ClassSecurityInfo
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import (
     ReferenceBrowserWidget,
 )
+from Products.Archetypes import atapi
 from Products.Archetypes.atapi import *
+from Products.Archetypes.atapi import DisplayList
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
-from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.urban import interfaces
 from Products.urban import UrbanMessage as _
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.config import *
 from Products.urban.content.licence.CODT_BuildLicence import CODT_BuildLicence
-from Products.urban.content.licence.CODT_BaseBuildLicence import CODT_BaseBuildLicence
-
+from Products.urban.widget.select2widget import MultiSelect2Widget
 from plone import api
 from zope.interface import implements
+from zope.schema.interfaces import IVocabularyFactory
+from zope.component import getUtility
 
 import copy
+
+
+
 
 
 slave_fields_bound_licence = (
@@ -126,6 +131,7 @@ schema = Schema(
         ),
     ),
 )
+
 RoadDecree_schema = CODT_BuildLicence.schema.copy() + schema.copy()
 del RoadDecree_schema["usage"]
 del RoadDecree_schema["form_composition"]
@@ -136,23 +142,41 @@ del RoadDecree_schema["delayAfterModifiedBlueprintsDetails"]
 del RoadDecree_schema["financial_caution"]
 del RoadDecree_schema["exemptFDArticle"]
 del RoadDecree_schema["requirementFromFD"]
+if 'workType' in RoadDecree_schema:
+    del RoadDecree_schema['workType']
+RoadDecree_schema+= atapi.Schema((LinesField(
+            name="workType",
+            widget=MultiSelect2Widget(
+                label=_("urban_label_workType", default="Worktype"),
+            ),
+            schemata="urban_description",
+            multiValued=1,
+            vocabulary="getWorkTypesVocabulary",
+           
+        ),))
 
-
-class RoadDecree(BaseFolder, CODT_BaseBuildLicence, BrowserDefaultMixin):
+class RoadDecree(CODT_BuildLicence):
     """ """
 
     security = ClassSecurityInfo()
     implements(interfaces.IRoadDecree)
 
     meta_type = "RoadDecree"
-    _at_rename_after_creation = True
-
     RoadDecree_schema["roadAdaptation"].schemata = "urban_road"
-
     schema = RoadDecree_schema
 
     security.declarePublic("getReferenceDGATLP")
-
+   
+    def getWorkTypesVocabulary(self):
+        factory = getUtility(
+            IVocabularyFactory,
+            name="urban.vocabularies.work_types"
+        )
+        vocab = factory(self)
+        return DisplayList([
+            (term.value, term.title)
+            for term in vocab
+        ])
     def getReferenceDGATLP(self):
         if self.getUse_bound_licence_infos():
             bound_licence = self.getBound_licence()
@@ -313,7 +337,11 @@ class RoadDecree(BaseFolder, CODT_BaseBuildLicence, BrowserDefaultMixin):
     def getLastDisplayingTheDecision(self):
         return self.getLastEvent(interfaces.IDisplayingTheDecisionEvent)
 
+    def getWorktypes(self):
+        portal = self.portal_url.getPortalObject()
+        folder = portal.portal_urban.folderbuildworktypes
 
+        return [(obj.getId(), obj.Title()) for obj in folder.objectValues()]
 registerType(RoadDecree, PROJECTNAME)
 
 
