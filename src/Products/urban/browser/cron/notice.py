@@ -397,14 +397,18 @@ class ImportFromNoticeView(BrowserView):
         elif detailed_notification.notice_type == "NOTIFICATION_PROROGATION_COMMUNE":
             self.process_extension_of_deadline_notification(detailed_notification)
         elif detailed_notification.notice_type in (
-                "NOTIFICATION_RS_COMMUNE",
-                "NOTIFICATION_RS_COMMUNE_RETARD",
-                "NOTIFICATION_RS_COMMUNE_RETARD_SFD",
-                "NOTIFICATION_PAS_ENVOI_RS",
-                "NOTIFICATION_PAS_ENVOI_RS_SFD",
+            "NOTIFICATION_RS_COMMUNE",
+            "NOTIFICATION_RS_COMMUNE_RETARD",
+            "NOTIFICATION_RS_COMMUNE_RETARD_SFD",
+            "NOTIFICATION_PAS_ENVOI_RS",
+            "NOTIFICATION_PAS_ENVOI_RS_SFD",
         ):
             self._rapport_synthese(detailed_notification)
-        elif detailed_notification.notice_type == "NOTIFICATION_DECISION_COMMUNE":
+        elif detailed_notification.notice_type in (
+            "NOTIFICATION_DECISION_COMMUNE",
+            "NOTIFICATION_DEC_RS_COMMUNE",
+            "NOTIFICATION_DECRS_REFUS_TACITE_COMMUNE",
+        ):
             self._decision_spw(detailed_notification)
 
         # GESPER
