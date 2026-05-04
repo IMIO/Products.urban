@@ -75,7 +75,7 @@ class ImportFromNoticeView(BrowserView):
             except Exception as exc:
                 savepoint.rollback()
                 logger.exception(
-                    u"Retried notification %s failed again: %s",
+                    u"Retried notification %s failed again: %r",
                     failed_notice_id,
                     exc,
                 )
