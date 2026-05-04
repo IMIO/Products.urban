@@ -10,13 +10,13 @@ class NoticeParty(NoticeElement):
 
     @property
     def type(self):
-        if self.legalForm:
+        if self.legalForm or self.enterprise_type:
             return "Corporation"
         return "Applicant"
 
     @property
     def title(self):
-        if self.legalForm:
+        if self.type == "Corporation":
             return self.denomination
         return u" ".join(filter(None, [self.personTitle, self.name1, self.name2]))
 
@@ -84,6 +84,8 @@ class NoticeParty(NoticeElement):
     def country(self):
         mapping = {
             "BE": "belgium",
+            "BELGIQUE": "belgium",
+            "Belgique": "belgium",
             "FR": "france",
             "LU": "luxembourg",
             "DE": "germany",
