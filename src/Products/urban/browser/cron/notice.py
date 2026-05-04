@@ -11,6 +11,7 @@ from Products.urban.services import notice
 from StringIO import StringIO
 from datetime import datetime
 from plone import api
+from plone.api.exc import InvalidParameterError
 from plone.stringinterp.interfaces import IContextWrapper
 from zope.event import notify
 from zope.i18n import translate
@@ -578,7 +579,6 @@ class ImportFromNoticeView(BrowserView):
 
 class IncomingNoticeHandler(object):
     event_config_marker = None
-    licence_transition = None
     create_licence_if_missing = False
 
     def __init__(self, notification, request):
@@ -694,16 +694,26 @@ class IncomingNoticeHandler(object):
             at_file.setFile(data_wrapper)
             at_file.setContentType(document.document_mimetype)
 
-    def licence_transition_guard(self):
-        return True
+    @property
+    def desired_licence_state(self):
+        """Leave empty if the licence state is already appropriate"""
+        return ""
 
     def do_licence_transition(self):
-        if self.licence_transition and self.licence_transition_guard():
-            api.content.transition(
-                self.licence,
-                self.licence_transition,
-                comment=self._notification_transition_comment,
-            )
+        if self.desired_licence_state:
+            try:
+                api.content.transition(
+                    self.licence,
+                    to_state=self.desired_licence_state,
+                    comment=self._notification_transition_comment,
+                )
+            except InvalidParameterError:
+                logger.warning(
+                    "While handling notification %s, couldn't transition licence %s to state %s",
+                    self.notification.noticeId,
+                    self.licence.absolute_url_path(),
+                    self.desired_licence_state,
+                )
 
     def update_licence(self):
         self.set_reference_ft()
@@ -777,34 +787,19 @@ class IncomingNoticeHandler(object):
 
 class PublicSurveyHandler(IncomingNoticeHandler):
     event_config_marker = "Products.urban.interfaces.IAcknowledgmentEvent"
-    licence_transition = "iscomplete"
+
+    @property
+    def desired_licence_state(self):
+        return "complete"
 
 
 class GesperPublicSurveyHandler(IncomingNoticeHandler):
     event_config_marker = "Products.urban.interfaces.IAcknowledgmentEvent"
     create_licence_if_missing = True
 
-    def do_licence_transition(self):
-        licence_state = api.content.get_state(self.licence)
-        if licence_state in (
-            "deposit",
-            "incomplete",
-        ):
-            api.content.transition(
-                self.licence,
-                "iscomplete",
-                comment=self._notification_transition_comment,
-            )
-        elif licence_state in (
-            "accepted",
-            "inacceptable",
-            "refused",
-            "retired",
-            "obsolete",
-        ):
-            api.content.transition(
-                self.licence, "reopen", comment=self._notification_transition_comment
-            )
+    @property
+    def desired_licence_state(self):
+        return "complete"
 
 
 class GesperDecisionSPWHandler(IncomingNoticeHandler):
@@ -831,43 +826,24 @@ class GesperDecisionSPWHandler(IncomingNoticeHandler):
                     u"Décision: {}".format(decision_code)
                 )
 
-    def licence_transition_guard(self):
-        return api.content.get_state(self.licence) == "complete"
-
-    def do_licence_transition(self):
+    @property
+    def desired_licence_state(self):
         decision_code = self.notification.decision_code
-        if decision_code == "UFD2_DEMAT_DECISION_FD":
-            api.content.transition(
-                self.licence, "accept", comment=self._notification_transition_comment
-            )
-        elif decision_code == "UFD2_DECISION_FD_REFUSEE":
-            api.content.transition(
-                self.licence, "refuse", comment=self._notification_transition_comment
-            )
+        if decision_code:
+            mapping_decision_states = {
+                "UFD2_DEMAT_DECISION_FD": "accepted",
+                "UFD2_DECISION_FD_OCTROI": "accepted",
+                "UFD2_DECISION_FD_REFUSEE": "refused",
+            }
+            return mapping_decision_states.get(decision_code, "")
+        else:
+            return ""
 
 
 class GesperAmendedPlansSPWHandler(IncomingNoticeHandler):
     event_config_marker = "Products.urban.interfaces.IAmendedPlansAcknowledgmentEvent"
     create_licence_if_missing = True
 
-    def do_licence_transition(self):
-        licence_state = api.content.get_state(self.licence)
-        if licence_state in (
-            "deposit",
-            "incomplete",
-        ):
-            api.content.transition(
-                self.licence,
-                "iscomplete",
-                comment=self._notification_transition_comment,
-            )
-        elif licence_state in (
-            "accepted",
-            "inacceptable",
-            "refused",
-            "retired",
-            "obsolete",
-        ):
-            api.content.transition(
-                self.licence, "reopen", comment=self._notification_transition_comment
-            )
+    @property
+    def desired_licence_state(self):
+        return "complete"
