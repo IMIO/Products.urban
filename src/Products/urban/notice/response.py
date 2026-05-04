@@ -461,25 +461,24 @@ class NoticeOutgoingGesperOpinionRequestNotification(NoticeResponse):
     type = "gns:GesperLicenceNoticeResponse"
     state = "FINAL"
 
-    def __init__(self, event, college_decision=None):
+    def __init__(self, event, college_motivation=None):
         super(
             NoticeOutgoingGesperOpinionRequestNotification, self
         ).__init__(event)
-        self._college_decision = college_decision
+        self._college_motivation = college_motivation
 
     @property
     def _reference(self):
         return self._licence.getReference()
 
     @property
-    def _decision_code(self):
-        decision_codes = {
-            "favorable": "OCTROI",
-            "defavorable": "REFUS",
-            "octroi": "OCTROI",
-            "refus": "REFUS",
+    def _opinion_code(self):
+        opinion_codes = {
+            "favorable": "FAVORABLE",
+            "defavorable": "DEFAVORABLE",
+            "favorable-cond": "FAVORABLE_CONDITIONNEL",
         }
-        return {"cod:code": decision_codes.get(self.event.getDecision())}
+        return {"cod:code": opinion_codes.get(self.event.getCollegeOpinion())}
 
     @property
     def _blocks(self):
@@ -492,8 +491,8 @@ class NoticeOutgoingGesperOpinionRequestNotification(NoticeResponse):
     @property
     def specific(self):
         return {
-            "not:notice": self._decision_code,
-            "not:motivation": self._college_decision,
+            "not:notice": self._opinion_code,
+            "not:motivation": self._college_motivation,
             "gns:iaReference": self._reference,
             "gns:blocks": self._blocks,
             "gns:specialConditions": self._special_conditions,

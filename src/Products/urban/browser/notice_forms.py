@@ -768,8 +768,8 @@ class TransferOpinionGesperOpinionRequestActionForm(NoticeResponseActionForm):
 
     def transfer_response(self, data):
         incoming_id = data.get("incoming_notification")
-        college_opinion = self._get_college_opinion_text(data)
-        return self.context.transfer_opinion_gesper_opinion_request(incoming_id, college_opinion)
+        college_motivation = self._get_college_opinion_text(data)
+        return self.context.transfer_opinion_gesper_opinion_request(incoming_id, college_motivation)
 
 
 TransferOpinionGesperOpinionRequestActionWrapper = wrap_form(TransferOpinionGesperOpinionRequestActionForm)

@@ -1129,8 +1129,8 @@ class UrbanEvent(OrderedBaseFolder, BrowserDefaultMixin):
         )
         return result
 
-    def transfer_opinion_gesper_opinion_request(self, incoming_id, college_opinion):
-        notification = NoticeOutgoingGesperOpinionRequestNotification(self, college_opinion)
+    def transfer_opinion_gesper_opinion_request(self, incoming_id, college_motivation):
+        notification = NoticeOutgoingGesperOpinionRequestNotification(self, college_motivation)
         service = WebserviceNotice()
         result = service.post_notification_response(
             incoming_id,
