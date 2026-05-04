@@ -1302,294 +1302,6 @@ class UrbanEventInquiryView(UrbanEventInquiryBaseView):
         return output
 
 
-class CanTransferFolderToDpaView(BrowserView):
-    @property
-    def is_urban_event_notice(self):
-        return self.context.portal_type == "UrbanEventNotice"
-
-    @property
-    def has_notice_id(self):
-        licence = self.context.aq_parent
-        return bool(licence.get_notice_id("TRANSFERT_DOSSIER"))
-
-    @property
-    def is_transmit_to_spw_event(self):
-        return (
-            "Products.urban.interfaces.ITransmitToSPWEvent"
-            in self.context.getUrbaneventtypes().getEventType()
-        )
-
-    @property
-    def no_transmit_yet(self):
-        annotations = interfaces.IAnnotations(self.context)
-        dates = annotations.get("notice_transmit_dates", {})
-        return "transfer_folder_to_dpa" not in dates.keys()
-
-    def __call__(self):
-        return (
-            self.is_urban_event_notice
-            and self.has_notice_id
-            and self.is_transmit_to_spw_event
-            and self.no_transmit_yet
-            # TODO: is_notice_setup
-        )
-
-
-class CanTransferDatesView(BrowserView):
-    @property
-    def is_urban_event_inquiry(self):
-        return self.context.portal_type == "UrbanEventInquiry"
-
-    @property
-    def is_transmit_to_spw_event(self):
-        return (
-            "Products.urban.interfaces.ITransmitToSPWEvent"
-            in self.context.getUrbaneventtypes().getEventType()
-        )
-
-    @property
-    def is_notice_setup(self):
-        webservice = WebserviceNotice()
-        return webservice.is_setup
-
-    @property
-    def has_notice_id(self):
-        licence = self.context.aq_parent
-        return bool(licence.get_notice_id("DEMANDE_EP"))
-
-    @property
-    def no_transmit_yet(self):
-        annotations = interfaces.IAnnotations(self.context)
-        dates = annotations.get("notice_transmit_dates", {})
-        return (
-            "transfer_dates" not in dates.keys()
-            and "transfer_opinion" not in dates.keys()
-            and "transfer_ticket_final" not in dates.keys()
-        )
-
-    def __call__(self):
-        return (
-            self.is_urban_event_inquiry
-            and self.is_transmit_to_spw_event
-            and self.is_notice_setup
-            and self.has_notice_id
-            and self.no_transmit_yet
-        )
-
-
-class CanTransferTicketView(BrowserView):
-    @property
-    def is_urban_event_inquiry(self):
-        return self.context.portal_type == "UrbanEventInquiry"
-
-    @property
-    def is_transmit_to_spw_event(self):
-        return (
-                "Products.urban.interfaces.ITransmitToSPWEvent"
-                in self.context.getUrbaneventtypes().getEventType()
-        )
-
-    @property
-    def is_notice_setup(self):
-        webservice = WebserviceNotice()
-        return webservice.is_setup
-
-    @property
-    def has_notice_id(self):
-        licence = self.context.aq_parent
-        return bool(licence.get_notice_id("DEMANDE_EP"))
-
-    @property
-    def no_transmit_yet(self):
-        annotations = interfaces.IAnnotations(self.context)
-        dates = annotations.get("notice_transmit_dates", {})
-        return (
-            "transfer_ticket" not in dates.keys()
-            and "transfer_opinion" not in dates.keys()
-            and "transfer_ticket_final" not in dates.keys()
-        )
-
-    def __call__(self):
-        return (
-                self.is_urban_event_inquiry
-                and self.is_transmit_to_spw_event
-                and self.is_notice_setup
-                and self.has_notice_id
-                and self.no_transmit_yet
-        )
-
-
-class CanTransferOpinionView(BrowserView):
-    @property
-    def is_urban_event(self):
-        return IUrbanEvent.providedBy(self.context)
-
-    @property
-    def is_college_opinion_event(self):
-        return (
-                "Products.urban.interfaces.ICollegeOpinionEvent"
-                in self.context.getUrbaneventtypes().getEventType()
-        )
-
-    @property
-    def is_transmit_to_spw_event(self):
-        return (
-                "Products.urban.interfaces.ITransmitToSPWEvent"
-                in self.context.getUrbaneventtypes().getEventType()
-        )
-
-    @property
-    def is_notice_setup(self):
-        webservice = WebserviceNotice()
-        return webservice.is_setup
-
-    @property
-    def has_notice_id(self):
-        licence = self.context.aq_parent
-        return bool(licence.get_notice_id("DEMANDE_EP"))
-
-    @property
-    def no_transmit_yet(self):
-        annotations = interfaces.IAnnotations(self.context)
-        dates = annotations.get("notice_transmit_dates", {})
-        return (
-            "transfer_opinion" not in dates.keys()
-            and "transfer_ticket_final" not in dates.keys()
-        )
-
-    def __call__(self):
-        return (
-                self.is_urban_event
-                and self.is_college_opinion_event
-                and self.is_transmit_to_spw_event
-                and self.is_notice_setup
-                and self.has_notice_id
-                and self.no_transmit_yet
-        )
-
-
-class CanTransferDecisionView(BrowserView):
-    @property
-    def is_urban_event(self):
-        return IUrbanEvent.providedBy(self.context)
-
-    @property
-    def is_college_decision_event(self):
-        event_types = self.context.getUrbaneventtypes().getEventType()
-        return (
-            "Products.urban.interfaces.ITheLicenceEvent" in event_types
-            or "Products.urban.interfaces.ILicenceDeliveryEvent" in event_types
-        )
-
-    @property
-    def is_transmit_to_spw_event(self):
-        return (
-                "Products.urban.interfaces.ITransmitToSPWEvent"
-                in self.context.getUrbaneventtypes().getEventType()
-        )
-
-    @property
-    def is_notice_setup(self):
-        webservice = WebserviceNotice()
-        return webservice.is_setup
-
-    @property
-    def has_notice_id(self):
-        licence = self.context.aq_parent
-        return bool(licence.get_notice_id("NOTIFICATION_RS"))
-
-    @property
-    def no_transmit_yet(self):
-        annotations = interfaces.IAnnotations(self.context)
-        dates = annotations.get("notice_transmit_dates", {})
-        return "transfer_decision" not in dates.keys()
-
-    def __call__(self):
-        return (
-                self.is_urban_event
-                and self.is_college_decision_event
-                and self.is_transmit_to_spw_event
-                and self.is_notice_setup
-                and self.has_notice_id
-                and self.no_transmit_yet
-        )
-
-
-class CanTransferDecisionDisplayView(BrowserView):
-    @property
-    def is_urban_event(self):
-        return self.context.portal_type == "UrbanEvent"
-
-    @property
-    def is_decision_display_event(self):
-        event_types = self.context.getUrbaneventtypes().getEventType()
-        return "Products.urban.interfaces.IDisplayingTheDecisionEvent" in event_types
-
-    @property
-    def is_transmit_to_spw_event(self):
-        return (
-            "Products.urban.interfaces.ITransmitToSPWEvent"
-            in self.context.getUrbaneventtypes().getEventType()
-        )
-
-    @property
-    def is_notice_setup(self):
-        webservice = WebserviceNotice()
-        return webservice.is_setup
-
-    @property
-    def no_transmit_yet(self):
-        annotations = interfaces.IAnnotations(self.context)
-        dates = annotations.get("notice_transmit_dates", {})
-        return "transfer_decision_display" not in dates.keys()
-
-    @property
-    def can_send_decision_display(self):
-        # this action is valid for either a SummaryReportResponse or a DecisionResponse
-
-        licence = self.context.aq_parent
-
-        # look for a DecisionRequest first
-        # (the SPW can override the municipality if they're too slow to respond to a RS notification)
-        spw_decision_event = (
-            licence.getLastWalloonRegionDecisionEvent()
-        )  # created by the notice cron
-        spw_decision_notice_id = licence.get_notice_id("NOTIFICATION_DECISION")
-        if spw_decision_event and spw_decision_notice_id:
-            return True
-
-        # otherwise, look for a SummaryReportRequest
-        decision_project_event = (
-            licence.getLastDecisionProjectFromSPW()
-        )  # created by the notice cron
-        decision_project_notice_id = licence.get_notice_id("NOTIFICATION_RS")
-        if decision_project_event and decision_project_notice_id:
-            # look for a "Décision du collège" event, created by the municipality,
-            # from which a partial response has been sent
-            # (the opinion is stored on the event by the partial response form)
-            for event in licence.getAllEvents():
-                event_types = event.getUrbaneventtypes().getEventType()
-                is_a_college_decision_event = (
-                    "Products.urban.interfaces.ITheLicenceEvent" in event_types
-                    or "Products.urban.interfaces.ILicenceDeliveryEvent" in event_types
-                )
-                event_has_college_decision_data = getattr(event, "_notice_decision", None)
-                if is_a_college_decision_event and event_has_college_decision_data:
-                    return True
-
-        return False
-
-    def __call__(self):
-        return (
-            self.is_urban_event
-            and self.is_decision_display_event
-            and self.is_transmit_to_spw_event
-            and self.is_notice_setup
-            and self.no_transmit_yet
-            and self.can_send_decision_display
-        )
-
-
 class CanTransferNoticeBaseView(BrowserView):
     accepted_portal_types = []
     accepted_event_markers = []
@@ -1643,6 +1355,92 @@ class CanTransferNoticeBaseView(BrowserView):
                 for x in possible_incomings
             ]
         )
+
+
+class CanTransferFolderToDpaView(CanTransferNoticeBaseView):
+    accepted_portal_types = ["UrbanEventNotice"]
+    accepted_incoming_notice_types = [
+        "TRANSFERT_DOSSIER",
+    ]
+    avoided_outgoing_notice_types = ["transfer_folder_to_dpa"]
+
+
+class CanTransferDatesView(CanTransferNoticeBaseView):
+    accepted_portal_types = ["UrbanEventInquiry"]
+    accepted_incoming_notice_types = [
+        "DEMANDE_EP",
+        "DEMANDE_EP_DOSSIER_PRECEDENT",
+        "DEMANDE_EP_EXTRA",
+    ]
+    avoided_outgoing_notice_types = [
+        "transfer_dates",
+    ]
+
+
+class CanTransferTicketView(CanTransferNoticeBaseView):
+    accepted_portal_types = ["UrbanEventInquiry"]
+    accepted_incoming_notice_types = [
+        "DEMANDE_EP",
+        "DEMANDE_EP_DOSSIER_PRECEDENT",
+        "DEMANDE_EP_EXTRA",
+    ]
+    avoided_outgoing_notice_types = [
+        "transfer_ticket",
+        "transfer_opinion",
+        "transfer_ticket_final",
+    ]
+
+
+class CanTransferOpinionView(CanTransferNoticeBaseView):
+    accepted_portal_types = ["UrbanEvent", "UrbanEventCollege"]
+    accepted_event_markers = ["Products.urban.interfaces.ICollegeOpinionEvent"]
+    accepted_incoming_notice_types = [
+        "DEMANDE_EP",
+        "DEMANDE_EP_DOSSIER_PRECEDENT",
+        "DEMANDE_EP_EXTRA",
+    ]
+    avoided_outgoing_notice_types = [
+        "transfer_opinion",
+        "transfer_ticket_final",
+    ]
+
+
+class CanTransferDecisionView(CanTransferNoticeBaseView):
+    accepted_portal_types = ["UrbanEvent", "UrbanEventCollege"]
+    accepted_event_markers = [
+        "Products.urban.interfaces.ITheLicenceEvent",
+        "Products.urban.interfaces.ILicenceDeliveryEvent",
+    ]
+    accepted_incoming_notice_types = [
+        "NOTIFICATION_RS_COMMUNE",
+        "NOTIFICATION_RS_COMMUNE_RETARD",
+        "NOTIFICATION_RS_COMMUNE_RETARD_SFD",
+        "NOTIFICATION_PAS_ENVOI_RS",
+        "NOTIFICATION_PAS_ENVOI_RS_SFD",
+    ]
+    avoided_outgoing_notice_types = [
+        "transfer_decision",
+    ]
+
+
+class CanTransferDecisionDisplayView(CanTransferNoticeBaseView):
+    accepted_portal_types = ["UrbanEvent"]
+    accepted_event_markers = [
+        "Products.urban.interfaces.IDisplayingTheDecisionEvent",
+    ]
+    accepted_incoming_notice_types = [
+        "NOTIFICATION_RS_COMMUNE",
+        "NOTIFICATION_RS_COMMUNE_RETARD",
+        "NOTIFICATION_RS_COMMUNE_RETARD_SFD",
+        "NOTIFICATION_PAS_ENVOI_RS",
+        "NOTIFICATION_PAS_ENVOI_RS_SFD",
+        "NOTIFICATION_DECISION_COMMUNE",
+        "NOTIFICATION_DEC_RS_COMMUNE",
+        "NOTIFICATION_DECRS_REFUS_TACITE_COMMUNE",
+    ]
+    avoided_outgoing_notice_types = [
+        "transfer_decision_display",
+    ]
 
 
 class CanTransferDatesGesperEPView(CanTransferNoticeBaseView):
