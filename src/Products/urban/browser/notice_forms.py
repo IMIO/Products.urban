@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from collections import OrderedDict
 from datetime import datetime
 from z3c.form import button
 from z3c.form import field
@@ -132,9 +131,18 @@ class ITransferBaseActionForm(Interface):
 class NoticeResponseActionForm(Form):
     ignoreContext = True
 
-    # FIELDS TO BE OVERRIDDEN IN SUBCLASSES
-    response_id_code = None
     success_message = None
+
+    def _get_incoming_type(self, incoming_id):
+        licence = self.context.aq_parent
+        for event in licence.getAllEvents():
+            annotations = IAnnotations(event)
+            key = "notice_notification"
+            notice = annotations.get(key, {})
+            incoming = notice.get("incoming", [])
+            if incoming.get("notice_id") == incoming_id:
+                return incoming.get("notice_type")
+        return None
 
     def _fetch_iadelib_opinion(self, field_to_fill):
         motivation = self._get_iadelib_field(self.context, "motivation") or ""
@@ -241,32 +249,60 @@ class NoticeResponseActionForm(Form):
         self.request.response.redirect(self.context.absolute_url())
 
 
+class ITransferFolderToDPAActionForm(ITransferBaseActionForm):
+    incoming_notification = schema.Choice(
+        title=_(u"Incoming notification to answer to"),
+        source=OpenIncomingNotifications(
+            [
+                "TRANSFERT_DOSSIER",
+            ],
+            ["transfer_folder_to_dpa"]
+        ),
+    )
+
+
 class TransferFolderToDPAActionForm(NoticeResponseActionForm):
     label = _("Transfer folder to DPA")
-    fields = field.Fields(ITransferBaseActionForm)
+    fields = field.Fields(ITransferFolderToDPAActionForm)
     fields["file_paths"].widgetFactory = CheckBoxFieldWidget
-    response_id_code = "TRANSFERT_DOSSIER"
     action_code = "transfer_folder_to_dpa"
+    partial_or_final = "FINAL"
     success_message = _(u"The folder transfer to DPA is done.")
 
     def transfer_response(self, data):
-        result = self.context.transfer_folder_to_dpa()
+        incoming_id = data.get("incoming_notification")
+        result = self.context.transfer_folder_to_dpa(incoming_id)
         return result
 
 
 TransferFolderToDPAActionWrapper = wrap_form(TransferFolderToDPAActionForm)
 
 
+class ITransferDatesTicketActionForm(ITransferBaseActionForm):
+    incoming_notification = schema.Choice(
+        title=_(u"Incoming notification to answer to"),
+        source=OpenIncomingNotifications(
+            [
+                "DEMANDE_EP",
+                "DEMANDE_EP_DOSSIER_PRECEDENT",
+                "DEMANDE_EP_EXTRA",
+            ],
+            ["transfer_dates"]
+        ),
+    )
+
+
 class TransferDatesActionForm(NoticeResponseActionForm):
     label = _("Transfer dates to the SPW")
-    fields = field.Fields(ITransferBaseActionForm)
+    fields = field.Fields(ITransferDatesTicketActionForm)
     fields["file_paths"].widgetFactory = CheckBoxFieldWidget
-    response_id_code = "DEMANDE_EP"
     action_code = "transfer_dates"
+    partial_or_final = "PARTIAL"
     success_message = _(u"The transfer of dates is done.")
 
     def transfer_response(self, data):
-        result = self.context.transfer_dates()
+        incoming_id = data.get("incoming_notification")
+        result = self.context.transfer_dates(incoming_id)
         return result
 
 
@@ -274,6 +310,18 @@ TransferDatesActionWrapper = wrap_form(TransferDatesActionForm)
 
 
 class ITransferTicketActionForm(ITransferBaseActionForm):
+    incoming_notification = schema.Choice(
+        title=_(u"Incoming notification to answer to"),
+        source=OpenIncomingNotifications(
+            [
+                "DEMANDE_EP",
+                "DEMANDE_EP_DOSSIER_PRECEDENT",
+                "DEMANDE_EP_EXTRA",
+            ],
+            ["transfer_ticket", "transfer_ticket_final"]
+        ),
+    )
+
     partial_or_final = schema.Choice(
         title=_(u"Preliminary Opinion"),
         description=_(u"This action cannot be reversed."),
@@ -299,25 +347,38 @@ class TransferTicketActionForm(NoticeResponseActionForm):
     fields = field.Fields(ITransferTicketActionForm)
     fields["file_paths"].widgetFactory = CheckBoxFieldWidget
     fields["partial_or_final"].widgetFactory = RadioFieldWidget
-    response_id_code = "DEMANDE_EP"
     action_code = (
         None  # will be set in self.transfer_response, before it's actually needed
     )
     success_message = _(u"The ticket transfer is done.")
 
     def transfer_response(self, data):
-        if data.get("partial_or_final") == "PARTIAL":
+        incoming_id = data.get("incoming_notification")
+        self.partial_or_final = data.get("partial_or_final")
+        if self.partial_or_final == "PARTIAL":
             self.action_code = "transfer_ticket"
-            return self.context.transfer_ticket()
-        if data.get("partial_or_final") == "FINAL":
+            return self.context.transfer_ticket(incoming_id)
+        if self.partial_or_final == "FINAL":
             self.action_code = "transfer_ticket_final"
-            return self.context.finalize_inquiry_without_opinion()
+            return self.context.finalize_inquiry_without_opinion(incoming_id)
 
 
 TransferTicketActionWrapper = wrap_form(TransferTicketActionForm)
 
 
 class ITransferOpinionActionForm(ITransferBaseActionForm):
+    incoming_notification = schema.Choice(
+        title=_(u"Incoming notification to answer to"),
+        source=OpenIncomingNotifications(
+            [
+                "DEMANDE_EP",
+                "DEMANDE_EP_DOSSIER_PRECEDENT",
+                "DEMANDE_EP_EXTRA",
+            ],
+            ["transfer_opinion", "transfer_ticket_final"]
+        ),
+    )
+
     college_opinion = RichText(
         title=_(u"College opinion"),
         default=u"<h1>Motivation:</h1>\r\n\r\n<h1>Décision:</h1>\r\n\r\n",
@@ -329,15 +390,44 @@ class TransferOpinionActionForm(NoticeResponseActionForm):
     label = _("Transfer opinion to the SPW")
     fields = field.Fields(ITransferOpinionActionForm)
     fields["file_paths"].widgetFactory = CheckBoxFieldWidget
-    response_id_code = "DEMANDE_EP"
     action_code = "transfer_opinion"
+    partial_or_final = "FINAL"
     success_message = _(u"The opinion transfer is done.")
 
-    def transfer_response(self, data):
+    def _get_inquiry_event(self, incoming_id):
+        licence = self.context.aq_parent
+        all_licence_events = sorted(
+            licence.getAllEvents(), key=lambda e: e.created(), reverse=True
+        )
+        for event in all_licence_events:
+            if event.portal_type != "UrbanEventInquiry":
+                continue
+            annotations = IAnnotations(event)
+            key = "notice_notification"
+            notice = annotations.get(key, {})
+            outgoings = notice.get("outgoing", [])
+            for outgoing in outgoings:
+                matching_notice_id = outgoing["incoming_notice_id"] == incoming_id
+                matching_action_code = outgoing["outgoing_notice_type"] in (
+                    "transfer_dates",
+                    "transfer_ticket",
+                )
+                if matching_notice_id and matching_action_code:
+                    return event
+
+        raise ValueError("No matching Inquiry event could be found on this licence.")
+
+    def _get_college_opinion_text(self, data):
         college_opinion = data.get("college_opinion", "")
         output = college_opinion.output if college_opinion else ""
         self.field_values_to_store["college_opinion"] = output
-        result = self.context.transfer_opinion(output)
+        return output
+
+    def transfer_response(self, data):
+        incoming_id = data.get("incoming_notification")
+        inquiry_event = self._get_inquiry_event(incoming_id)
+        college_opinion = self._get_college_opinion_text(data)
+        result = self.context.transfer_opinion(incoming_id, inquiry_event, college_opinion)
         return result
 
     def updateWidgets(self):
@@ -349,6 +439,20 @@ TransferOpinionActionWrapper = wrap_form(TransferOpinionActionForm)
 
 
 class ITransferDecisionActionForm(ITransferBaseActionForm):
+    incoming_notification = schema.Choice(
+        title=_(u"Incoming notification to answer to"),
+        source=OpenIncomingNotifications(
+            [
+                "NOTIFICATION_RS_COMMUNE",
+                "NOTIFICATION_RS_COMMUNE_RETARD",
+                "NOTIFICATION_RS_COMMUNE_RETARD_SFD",
+                "NOTIFICATION_PAS_ENVOI_RS",
+                "NOTIFICATION_PAS_ENVOI_RS_SFD",
+            ],
+            ["transfer_decision"]
+        ),
+    )
+
     college_decision = RichText(
         title=_(u"College decision"),
         default=u"<h1>Motivation:</h1>\r\n\r\n<h1>Décision:</h1>\r\n\r\n",
@@ -360,15 +464,20 @@ class TransferDecisionActionForm(NoticeResponseActionForm):
     label = _("Transfer decision to the SPW")
     fields = field.Fields(ITransferDecisionActionForm)
     fields["file_paths"].widgetFactory = CheckBoxFieldWidget
-    response_id_code = "NOTIFICATION_RS"
     action_code = "transfer_decision"
+    partial_or_final = "PARTIAL"
     success_message = _(u"The decision transfer is done.")
 
-    def transfer_response(self, data):
+    def _get_college_decision_text(self, data):
         college_decision = data.get("college_decision", "")
         output = college_decision.output if college_decision else ""
         self.field_values_to_store["college_decision"] = output
-        result = self.context.transfer_decision(output)
+        return output
+
+    def transfer_response(self, data):
+        incoming_id = data.get("incoming_notification")
+        college_decision = self._get_college_decision_text(data)
+        result = self.context.transfer_decision(incoming_id, college_decision)
         return result
 
     def updateWidgets(self):
@@ -379,26 +488,77 @@ class TransferDecisionActionForm(NoticeResponseActionForm):
 TransferDecisionActionWrapper = wrap_form(TransferDecisionActionForm)
 
 
+class ITransferDecisionDisplayActionForm(ITransferBaseActionForm):
+    incoming_notification = schema.Choice(
+        title=_(u"Incoming notification to answer to"),
+        source=OpenIncomingNotifications(
+            [
+                "NOTIFICATION_RS_COMMUNE",
+                "NOTIFICATION_RS_COMMUNE_RETARD",
+                "NOTIFICATION_RS_COMMUNE_RETARD_SFD",
+                "NOTIFICATION_PAS_ENVOI_RS",
+                "NOTIFICATION_PAS_ENVOI_RS_SFD",
+                "NOTIFICATION_DECISION_COMMUNE",
+                "NOTIFICATION_DEC_RS_COMMUNE",
+                "NOTIFICATION_DECRS_REFUS_TACITE_COMMUNE",
+            ],
+            ["transfer_decision_display"]
+        ),
+    )
+
+
 class TransferDecisionDisplayActionForm(NoticeResponseActionForm):
     label = _(u"Transfer decision display to the SPW")
-    fields = field.Fields(ITransferBaseActionForm)
+    fields = field.Fields(ITransferDecisionDisplayActionForm)
     fields["file_paths"].widgetFactory = CheckBoxFieldWidget
-    action_code = "transfer_decision"
+    action_code = "transfer_decision_display"
+    partial_or_final = "FINAL"
     success_message = _(u"The transfer of decision display dates is done.")
 
-    @property
-    def response_id_code(self):
+    def _get_decision_data(self, incoming_id):
         licence = self.context.aq_parent
-        if licence.get_notice_id("NOTIFICATION_DECISION"):
-            return "NOTIFICATION_DECISION"
-        elif licence.get_notice_id("NOTIFICATION_RS"):
-            return "NOTIFICATION_RS"
-        else:
-            # should never happen; return useful value for debugging
-            return "NOTIFICATION_RS or NOTIFICATION_DECISION"
+        all_licence_events = sorted(
+            licence.getAllEvents(), key=lambda e: e.created(), reverse=True
+        )
+        for event in all_licence_events:
+            annotations = IAnnotations(event)
+            key = "notice_notification"
+            notice = annotations.get(key, {})
+            outgoings = notice.get("outgoing", [])
+            for outgoing in outgoings:
+                matching_notice_id = outgoing["incoming_notice_id"] == incoming_id
+                matching_action_code = outgoing["outgoing_notice_type"] == "transfer_decision"
+                if matching_notice_id and matching_action_code:
+                    college_decision = outgoing["field_values"]["college_decision"]
+                    return event, college_decision
+        return None, None
 
     def transfer_response(self, data):
-        result = self.context.transfer_decision_display()
+        incoming_id = data.get("incoming_notification")
+        incoming_type = self._get_incoming_type(incoming_id)
+        if incoming_type in (
+            "NOTIFICATION_RS_COMMUNE",
+            "NOTIFICATION_RS_COMMUNE_RETARD",
+            "NOTIFICATION_RS_COMMUNE_RETARD_SFD",
+            "NOTIFICATION_PAS_ENVOI_RS",
+            "NOTIFICATION_PAS_ENVOI_RS_SFD",
+        ):
+            decision_event, college_decision = self._get_decision_data(incoming_id)
+            if not decision_event:
+                raise ValueError(
+                    "No previous transfer of decision has been found for this summary report"
+                )
+            result = self.context.transfer_decision_display(
+                incoming_id,
+                decision_event=decision_event,
+                college_decision=college_decision,
+            )
+        if incoming_type in (
+            "NOTIFICATION_DECISION_COMMUNE",
+            "NOTIFICATION_DEC_RS_COMMUNE",
+            "NOTIFICATION_DECRS_REFUS_TACITE_COMMUNE",
+        ):
+            result = self.context.transfer_decision_display(incoming_id)
         return result
 
 
