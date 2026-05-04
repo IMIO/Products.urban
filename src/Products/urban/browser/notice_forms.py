@@ -521,6 +521,10 @@ class TransferOpinionGesperEPActionForm(NoticeResponseActionForm):
     partial_or_final = "FINAL"
     success_message = _(u"The opinion transfer is done.")
 
+    def updateWidgets(self):
+        super(TransferOpinionGesperEPActionForm, self).updateWidgets()
+        self._fetch_iadelib_opinion("college_opinion")
+
     def _get_inquiry_event(self, incoming_id):
         licence = self.context.aq_parent
         all_licence_events = sorted(
@@ -676,6 +680,10 @@ class TransferOpinionGesperAPActionForm(NoticeResponseActionForm):
     partial_or_final = "FINAL"
     success_message = _(u"The opinion transfer is done.")
 
+    def updateWidgets(self):
+        super(TransferOpinionGesperAPActionForm, self).updateWidgets()
+        self._fetch_iadelib_opinion("college_opinion")
+
     def _get_announcement_event(self, incoming_id):
         licence = self.context.aq_parent
         all_licence_events = sorted(
@@ -747,6 +755,10 @@ class TransferOpinionGesperOpinionRequestActionForm(NoticeResponseActionForm):
     action_code = "transfer_opinion_gesper_opinion_request"
     partial_or_final = "FINAL"
     success_message = _(u"The opinion transfer is done.")
+
+    def updateWidgets(self):
+        super(TransferOpinionGesperOpinionRequestActionForm, self).updateWidgets()
+        self._fetch_iadelib_opinion("college_opinion")
 
     def _get_college_opinion_text(self, data):
         college_opinion = data.get("college_opinion", "")
