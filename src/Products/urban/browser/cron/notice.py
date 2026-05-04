@@ -780,19 +780,21 @@ class GesperDecisionSPWHandler(IncomingNoticeHandler):
     def fill_incoming_event(self):
         super(GesperDecisionSPWHandler, self).fill_incoming_event()
 
-        if self.notification.decision_code:
+        decision_code = self.notification.decision_code
+        if decision_code:
             mapping_decision_terms = {
                 "UFD2_DEMAT_DECISION_FD": "favorable",
+                "UFD2_DECISION_FD_OCTROI": "favorable",
                 "UFD2_DECISION_FD_REFUSEE": "defavorable",
             }
             urban_decision_term = mapping_decision_terms.get(
-                self.notification.decision_code
+                decision_code
             )
             if urban_decision_term:
                 self.event.setDecision(urban_decision_term)
             else:
                 self.event.setDescription(
-                    u"Décision: {}".format(self.notification.decision_code)
+                    u"Décision: {}".format(decision_code)
                 )
 
     def licence_transition_guard(self):

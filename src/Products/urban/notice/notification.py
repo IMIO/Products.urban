@@ -366,6 +366,7 @@ class NoticeNotification(NoticeElement):
             for document in self.documents:
                 if document.document_type_code in (
                     "UFD2_DEMAT_DECISION_FD",
+                    "UFD2_DECISION_FD_OCTROI",
                     "UFD2_DECISION_FD_REFUSEE",
                 ):
                     return document.document_type_code
