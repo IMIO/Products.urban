@@ -1016,11 +1016,6 @@ class UrbanEvent(OrderedBaseFolder, BrowserDefaultMixin):
         )
         return result
 
-    def store_reception_date(self, date=None):
-        annotations = IAnnotations(self)
-        key = "notice_reception_date"
-        annotations[key] = date
-
     def store_incoming_notice(self, notice_id, notice_type, reception_date):
         annotations = IAnnotations(self)
         key = "notice_notification"
@@ -1060,51 +1055,39 @@ class UrbanEvent(OrderedBaseFolder, BrowserDefaultMixin):
         notice["outgoing"] = outgoing
         annotations[key] = notice
 
-    def transfer_opinion(self, college_opinion):
-        notification = NoticeOutgoingPublicSurveyOpinionNotification(self, college_opinion)
+    def transfer_opinion(self, incoming_id, inquiry_event, college_opinion):
+        notification = NoticeOutgoingPublicSurveyOpinionNotification(self, inquiry_event, college_opinion)
         service = WebserviceNotice()
         result = service.post_notification_response(
-            notification.notice_id("DEMANDE_EP"),
+            incoming_id,
             notification.serialize(),
         )
         return result
 
-    def transfer_decision(self, college_decision):
-
-        # store college decision for later use (final response, transfer decision display)
-        self._notice_decision = college_decision
-
-        notification = NoticeOutgoingSummaryReportDecisionNotification(self)
+    def transfer_decision(self, incoming_id, college_decision):
+        notification = NoticeOutgoingSummaryReportDecisionNotification(self, college_decision)
         service = WebserviceNotice()
         result = service.post_notification_response(
-            notification.notice_id("NOTIFICATION_RS"),
+            incoming_id,
             notification.serialize(),
         )
         return result
 
-    def transfer_decision_display(self):
-        licence = self.aq_parent
-
-        if licence.get_notice_id("NOTIFICATION_DECISION"):
-            notification = NoticeOutgoingDecisionNotification(self)
-            service = WebserviceNotice()
-            result = service.post_notification_response(
-                notification.notice_id("NOTIFICATION_DECISION"),
-                notification.serialize(),
-            )
-        elif licence.get_notice_id("NOTIFICATION_RS"):
-            notification = NoticeOutgoingSummaryReportDatesNotification(self)
-            service = WebserviceNotice()
-            result = service.post_notification_response(
-                notification.notice_id("NOTIFICATION_RS"),
-                notification.serialize(),
+    def transfer_decision_display(
+        self, incoming_id, decision_event=None, college_decision=None
+    ):
+        if decision_event is not None:
+            notification = NoticeOutgoingSummaryReportDatesNotification(
+                self, decision_event=decision_event, college_decision=college_decision
             )
         else:
-            raise ValueError(
-                "No Notice ID found (either RS or DECISION) for licence {}".format(
-                    licence.getReference()
-                )
-            )
+            notification = NoticeOutgoingDecisionNotification(self)
+
+        service = WebserviceNotice()
+        result = service.post_notification_response(
+            incoming_id,
+            notification.serialize(),
+        )
         return result
 
     def transfer_opinion_gesper_ep(self, incoming_id, inquiry_event, college_opinion):

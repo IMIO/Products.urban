@@ -349,29 +349,29 @@ class UrbanEventInquiry(OrderedBaseFolder, UrbanEvent, BrowserDefaultMixin):
                 number += claimant.getSignatureNumber()
         return number
 
-    def transfer_dates(self):
+    def transfer_dates(self, incoming_id):
         notification = NoticeOutgoingPublicSurveyDatesNotification(self)
         service = WebserviceNotice()
         result = service.post_notification_response(
-            notification.notice_id("DEMANDE_EP"),
+            incoming_id,
             notification.serialize(),
         )
         return result
 
-    def transfer_ticket(self):
+    def transfer_ticket(self, incoming_id):
         notification = NoticeOutgoingPublicSurveyPVNotification(self)
         service = WebserviceNotice()
         result = service.post_notification_response(
-            notification.notice_id("DEMANDE_EP"),
+            incoming_id,
             notification.serialize(),
         )
         return result
 
-    def finalize_inquiry_without_opinion(self):
+    def finalize_inquiry_without_opinion(self, incoming_id):
         notification = NoticeOutgoingPublicSurveyFinalWithoutOpinionNotification(self)
         service = WebserviceNotice()
         result = service.post_notification_response(
-            notification.notice_id("DEMANDE_EP"),
+            incoming_id,
             notification.serialize(),
         )
         return result
