@@ -105,7 +105,7 @@ class OpenIncomingNotifications(object):
             incoming_event = possible_notif["incoming_event"]
             description = u"{} - {} - {}".format(
                 incoming_event.title,
-                incoming_event.getFormattedDate(),
+                incoming_event.getFormattedDate().decode("utf8"),
                 translate(incoming_notice_type, "urban", context=context.REQUEST),
             )
             terms.append(
