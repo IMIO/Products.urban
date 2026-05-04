@@ -186,7 +186,7 @@ class NoticeNotification(NoticeElement):
                 document.document_mimetype == "application/xml"
                 and document.document_type_code == "PJ_FORMULAIRE"
             ):
-                return etree.parse(document.file)
+                return etree.fromstring(document.document)
         raise ValueError("No PJ_FORMULAIRE XML document found")
 
     @property
