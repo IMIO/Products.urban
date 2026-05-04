@@ -83,7 +83,7 @@
         destination="2909"
         handler=".update_290.fix_housing_roaddecree"
         profile="Products.urban:default" />
-    
+
     <gs:upgradeStep
         title="Update manageableLicences for notice FolderManager"
         description=""
@@ -93,11 +93,11 @@
         profile="Products.urban:default" />
 
     <gs:upgradeStep
-        title="Add RoadDecree vocabularies"
+        title="Add Missing RoadDecree vocabularies"
         description=""
         source="2910"
         destination="2911"
-        handler=".update_290.add_roaddecree_vocabularies"
+        handler=".update_290.add_missing_roaddecree_vocabularies"
         profile="Products.urban:default" />
 
 </configure>

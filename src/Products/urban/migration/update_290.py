@@ -372,7 +372,7 @@ def update_folder_manager_notice(context):
     logger.info("manageableLicences updated for notice FolderManager")
 
 
-def add_roaddecree_vocabularies(context):
+def add_missing_roaddecree_vocabularies(context):
     logger = logging.getLogger("urban: Add RoadDecree buildworktypes vocabulary")
     logger.info("starting upgrade steps")
     portal_urban = api.portal.get_tool("portal_urban")
@@ -401,6 +401,7 @@ def add_roaddecree_vocabularies(context):
         roaddecree_folder, "divergences", site, allowedtypes=portal_type
     )
     createFolderDefaultValues(divergences_folder, terms, portal_type)
+
     derogations_config = default_values["RoadDecree"]["derogations"]
     portal_type = derogations_config[0]
     terms = derogations_config[1:]
