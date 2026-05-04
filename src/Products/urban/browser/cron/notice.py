@@ -603,6 +603,7 @@ class IncomingNoticeHandler(object):
         self.create_incoming_event()
         self.import_documents()
         self.do_licence_transition()
+        self.notify_successful_import()
 
     def create_licence(self):
         self.licence = api.content.create(
@@ -755,6 +756,23 @@ class IncomingNoticeHandler(object):
             },
         )
         return translate(msg, context=self.request)
+
+    def notify_successful_import(self):
+        notice_id = ""
+        try:
+            notice_id = self.notification.noticeId
+            notice_type = self.notification.notice_type
+            args = {
+                "notice_id": notice_id,
+                "notice_type": notice_type,
+            }
+            event_wrapper = IContextWrapper(self.event)(**args)
+            notify(NoticeImportSucceededEvent(event_wrapper))
+        except Exception:
+            logger.exception(
+                u"Failed to emit NoticeImportSucceededEvent for notice_id=%s",
+                notice_id,
+            )
 
 
 class PublicSurveyHandler(IncomingNoticeHandler):
