@@ -91,9 +91,9 @@ class NoticeOutgoingNotification(NoticeResponse):
 
 
 class NoticeOutgoingPublicSurveyNotification(NoticeResponse):
-    def __init__(self, event, college_opinion=None):
+    def __init__(self, event, inquiry_event=None, college_opinion=None):
         super(NoticeOutgoingPublicSurveyNotification, self).__init__(event)
-        self._inquiry_event = self._licence.getLastEvent(IInquiryEvent)
+        self._inquiry_event = inquiry_event
         self._college_opinion = college_opinion
 
     type = "PublicSurveyResponse"
@@ -175,9 +175,19 @@ class NoticeOutgoingPublicSurveyDatesNotification(
 ):
     state = "PARTIAL"
 
+    def __init__(self, event):
+        super(NoticeOutgoingPublicSurveyDatesNotification, self).__init__(
+            event, inquiry_event=event
+        )
+
 
 class NoticeOutgoingPublicSurveyPVNotification(NoticeOutgoingPublicSurveyNotification):
     state = "PARTIAL"
+
+    def __init__(self, event):
+        super(NoticeOutgoingPublicSurveyPVNotification, self).__init__(
+            event, inquiry_event=event
+        )
 
 
 class NoticeOutgoingPublicSurveyOpinionNotification(
@@ -185,14 +195,30 @@ class NoticeOutgoingPublicSurveyOpinionNotification(
 ):
     state = "FINAL"
 
+    def __init__(self, event, inquiry_event, college_opinion):
+        super(NoticeOutgoingPublicSurveyOpinionNotification, self).__init__(
+            event, inquiry_event=inquiry_event, college_opinion=college_opinion
+        )
+
 
 class NoticeOutgoingPublicSurveyFinalWithoutOpinionNotification(
     NoticeOutgoingPublicSurveyNotification
 ):
     state = "FINAL"
 
+    def __init__(self, event):
+        super(NoticeOutgoingPublicSurveyFinalWithoutOpinionNotification, self).__init__(
+            event, inquiry_event=event
+        )
+
 
 class NoticeOutgoingSummaryReportNotification(NoticeResponse):
+
+    def __init__(self, event, decision_event=None, decision_display_event=None, college_decision=None):
+        super(NoticeOutgoingSummaryReportNotification, self).__init__(event)
+        self._decision_event = decision_event
+        self._decision_display_event = decision_display_event
+        self._college_decision = college_decision
 
     type = "SummaryReportResponse"
 
@@ -202,15 +228,11 @@ class NoticeOutgoingSummaryReportNotification(NoticeResponse):
 
     @property
     def _display_decision_start_date(self):
-        return None
+        return self._decision_display_event.getDisplayDate() if self._decision_display_event else None
 
     @property
     def _display_decision_end_date(self):
-        return None
-
-    @property
-    def _decision_event(self):
-        raise NotImplementedError
+        return self._decision_display_event.getDisplayDateEnd() if self._decision_display_event else None
 
     @property
     def _decision_code(self):
@@ -227,7 +249,7 @@ class NoticeOutgoingSummaryReportNotification(NoticeResponse):
 
     @property
     def _motivation(self):
-        return getattr(self._decision_event, "_notice_decision", None)
+        return self._college_decision
 
     @property
     def _decision_date(self):
@@ -250,24 +272,24 @@ class NoticeOutgoingSummaryReportDecisionNotification(
 ):
     state = "PARTIAL"
 
-    @property
-    def _decision_event(self):
-        # self.event: ITheLicence or ILicenceDelivery
-        return self.event
+    def __init__(self, event, college_decision=None):
+        super(NoticeOutgoingSummaryReportDecisionNotification, self).__init__(
+            event, decision_event=event, college_decision=college_decision
+        )
 
 
 class NoticeOutgoingSummaryReportDatesNotification(
     NoticeOutgoingSummaryReportNotification
 ):
-    state = "FINAL"
-
-    @property
-    def _decision_event(self):
-        # self.event: IDisplayingTheDecisionEvent
-        licence = self.event.aq_parent
-        return (
-            licence.getLastEvent(ITheLicenceEvent) or licence.getLastLicenceDelivery()
+    def __init__(self, event, decision_event=None, college_decision=None):
+        super(NoticeOutgoingSummaryReportDatesNotification, self).__init__(
+            event,
+            decision_event=decision_event,
+            decision_display_event=event,
+            college_decision=college_decision,
         )
+
+    state = "FINAL"
 
 
 class NoticeOutgoingDecisionNotification(NoticeResponse):
