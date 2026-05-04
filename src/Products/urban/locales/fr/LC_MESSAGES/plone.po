@@ -555,7 +555,7 @@ msgid "annual_observation"
 msgstr "Constat annuel"
 
 msgid "to_3rd_observation"
-msgstr "3ème constat et plus"
+msgstr "3ème constat ou +"
 
 msgid "3rd_observation"
 msgstr "3eme constat ou +"
