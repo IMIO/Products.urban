@@ -629,19 +629,29 @@ class IncomingNoticeHandler(object):
     def import_parcels(self):
         for parcel in self.notification.parcels:
             if not parcel.parcel:
-                self._add_error(_("Can not find a parcel"), parcel.serialize())
+                data = {
+                    translate(_("CaPaKey"), context=self.request): parcel.capakey,
+                    translate(_("urban_label_division"), context=self.request): parcel.division,
+                    translate(_("urban_label_section"), context=self.request): parcel.section,
+                    translate(_("urban_label_radical"), context=self.request): parcel.radical,
+                    translate(_("urban_label_bis"), context=self.request): parcel.bis,
+                    translate(_("urban_label_exposant"), context=self.request): parcel.exposant,
+                    translate(_("urban_label_puissance"), context=self.request): parcel.puissance,
+                }
+                self._add_error(_("Can not find a parcel"), data)
                 continue
             api.content.create(container=self.licence, **parcel.serialize())
 
     def import_addresses(self):
         for address in self.notification.addresses:
             data = {
-                translate(_("street"), context=self.request): address.notice_street,
-                translate(_("locality"), context=self.request): address.locality,
+                translate(_("urban_label_street"), context=self.request): address.notice_street,
+                translate(_("urban_label_locality"), context=self.request): address.locality,
                 translate(
                     _("municipality"), context=self.request
                 ): address.municipality,
-                translate(_("zipcode"), context=self.request): address.postCode,
+                translate(_("urban_label_zipCode"), context=self.request): address.postCode,
+                translate(_("urban_label_number"), context=self.request): address.number,
             }
             if not address.address:
                 self._add_error(_("Can not find an address"), data)
