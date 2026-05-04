@@ -92,4 +92,12 @@
         handler=".update_290.update_folder_manager_notice"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Add RoadDecree vocabularies"
+        description=""
+        source="2910"
+        destination="2911"
+        handler=".update_290.add_roaddecree_vocabularies"
+        profile="Products.urban:default" />
+
 </configure>

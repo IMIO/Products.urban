@@ -3,6 +3,9 @@ from Products.CMFCore.utils import getToolByName
 from Products.urban import URBAN_TYPES
 from Products.urban import UrbanMessage as _
 from Products.urban.migration.utils import cook_javascript_resources
+from Products.urban.profiles.extra.config_default_values import default_values
+from Products.urban.setuphandlers import createFolderDefaultValues
+from Products.urban.setuphandlers import createVocabularyFolder
 from Products.urban.utils import moveElementAfter
 from Products.urban.setuphandlers import set_licence_folder_security
 from dm.historical import getHistory
@@ -43,9 +46,9 @@ def initialize_notice_settings(context):
         )
         registry_record = Record(registry_field)
         registry_record.value = None
-        registry.records[
-            "{0}.sent_on_behalf_of_municipality_id".format(base)
-        ] = registry_record
+        registry.records["{0}.sent_on_behalf_of_municipality_id".format(base)] = (
+            registry_record
+        )
     if "{0}.last_import_date".format(base) not in registry.records:
         registry_field = field.Datetime(title=INoticeSettings["last_import_date"].title)
         registry_record = Record(registry_field)
@@ -129,7 +132,9 @@ def add_event_config_types_notice(context):
                 old_interfaces = folder_event.getEventType()
                 missing_interfaces = set(uet.get("eventType", [])) - set(old_interfaces)
                 if missing_interfaces:
-                    new_interfaces = tuple(list(old_interfaces) + list(missing_interfaces))
+                    new_interfaces = tuple(
+                        list(old_interfaces) + list(missing_interfaces)
+                    )
                     setattr(folder_event, "eventType", new_interfaces)
 
             last_urbaneventype_id = id
@@ -264,9 +269,7 @@ def update_documentation_url(context):
     """
     Update documentation url
     """
-    logger = logging.getLogger(
-        "urban: Update documentation url"
-    )
+    logger = logging.getLogger("urban: Update documentation url")
     logger.info("starting upgrade steps")
     setup_tool = api.portal.get_tool("portal_setup")
     setup_tool.runImportStepFromProfile("profile-Products.urban:default", "actions")
@@ -277,9 +280,7 @@ def add_architect_folder_view(context):
     """
     Add architect folder view
     """
-    logger = logging.getLogger(
-        "urban: Add architect folder view"
-    )
+    logger = logging.getLogger("urban: Add architect folder view")
     logger.info("starting upgrade steps")
     portal = api.portal.get()
     architects_folder = portal["urban"]["architects"]
@@ -290,7 +291,9 @@ def add_architect_folder_view(context):
 def recover_event_config_portal_types(context):
     from Products.urban.profiles.extra.data import EventConfigs
 
-    logger = logging.getLogger("urban: Recover `UrbanEventCollege` portal type in relevant EventConfig")
+    logger = logging.getLogger(
+        "urban: Recover `UrbanEventCollege` portal type in relevant EventConfig"
+    )
 
     tool = getToolByName(context, "portal_urban")
     for urban_config_id in EventConfigs:
@@ -311,7 +314,10 @@ def recover_event_config_portal_types(context):
 
             if folder_event:  # patch existing eventConfig
                 should_be_college = "pmTitle" in folder_event.getActivatedFields()
-                if should_be_college and folder_event.getEventPortalType() != "UrbanEventCollege":
+                if (
+                    should_be_college
+                    and folder_event.getEventPortalType() != "UrbanEventCollege"
+                ):
                     setattr(folder_event, "eventPortalType", "UrbanEventCollege")
 
     logger.info("upgrade step done!")
@@ -331,7 +337,9 @@ def setup_index_referenceFT(context):
 def fix_housing_roaddecree(context):
     logger = logging.getLogger("urban: Fix housing and roaddecree security")
     setup_tool = api.portal.get_tool("portal_setup")
-    setup_tool.runImportStepFromProfile("profile-Products.urban:urbantypes", "factorytool")
+    setup_tool.runImportStepFromProfile(
+        "profile-Products.urban:urbantypes", "factorytool"
+    )
     portal_types = ["Housing", "RoadDecree"]
     for portal_type in portal_types:
         set_licence_folder_security(portal_type)
@@ -358,7 +366,93 @@ def update_folder_manager_notice(context):
         return
 
     notice_folder_manager = foldermanagers.notice
-    notice_folder_manager.manageableLicences = UPDATED_URBAN_TYPES  
+    notice_folder_manager.manageableLicences = UPDATED_URBAN_TYPES
     notice_folder_manager.reindexObject()
 
     logger.info("manageableLicences updated for notice FolderManager")
+
+
+def add_roaddecree_vocabularies(context):
+    logger = logging.getLogger("urban: Add RoadDecree buildworktypes vocabulary")
+    logger.info("starting upgrade steps")
+    portal_urban = api.portal.get_tool("portal_urban")
+    roaddecree_folder = getattr(portal_urban, "roaddecree", None)
+
+    if roaddecree_folder is None:
+        logger.warning("RoadDecree config folder not found, skipping")
+        return
+
+    site = api.portal.get()
+
+    buildworktypes_config = default_values["shared_vocabularies"][
+        "folderbuildworktypes"
+    ]
+    portal_type = buildworktypes_config[0]
+    terms = buildworktypes_config[2:]
+    buildworktypes_folder = createVocabularyFolder(
+        roaddecree_folder, "folderbuildworktypes", site, allowedtypes=portal_type
+    )
+    createFolderDefaultValues(buildworktypes_folder, terms, portal_type)
+
+    divergences_config = default_values["RoadDecree"]["divergences"]
+    portal_type = divergences_config[0]
+    terms = divergences_config[1:]
+    divergences_folder = createVocabularyFolder(
+        roaddecree_folder, "divergences", site, allowedtypes=portal_type
+    )
+    createFolderDefaultValues(divergences_folder, terms, portal_type)
+    derogations_config = default_values["RoadDecree"]["derogations"]
+    portal_type = derogations_config[0]
+    terms = derogations_config[1:]
+    derogations_folder = createVocabularyFolder(
+        roaddecree_folder, "derogations", site, allowedtypes=portal_type
+    )
+    createFolderDefaultValues(derogations_folder, terms, portal_type)
+
+    investigationarticles_config = default_values["RoadDecree"]["investigationarticles"]
+    portal_type = investigationarticles_config[0]
+    terms = investigationarticles_config[1:]
+    investigationarticles_folder = createVocabularyFolder(
+        roaddecree_folder, "investigationarticles", site, allowedtypes=portal_type
+    )
+    createFolderDefaultValues(investigationarticles_folder, terms, portal_type)
+
+    townships_config = default_values["RoadDecree"]["townships"]
+    portal_type = townships_config[0]
+    terms = townships_config[1:]
+    createVocabularyFolder(
+        roaddecree_folder, "townships", site, allowedtypes=portal_type
+    )
+    exemptfdarticle_config = default_values["RoadDecree"]["exemptfdarticle"]
+    portal_type = exemptfdarticle_config[0]
+    terms = exemptfdarticle_config[1:]
+    exemptfdarticle_folder = createVocabularyFolder(
+        roaddecree_folder, "exemptfdarticle", site, allowedtypes=portal_type
+    )
+    createFolderDefaultValues(exemptfdarticle_folder, terms, portal_type)
+
+    pebcategories_config = default_values["shared_vocabularies"]["pebcategories"]
+    portal_type = pebcategories_config[0]
+    terms = pebcategories_config[2:]
+    pebcategories_folder = createVocabularyFolder(
+        roaddecree_folder, "pebcategories", site, allowedtypes=portal_type
+    )
+    createFolderDefaultValues(pebcategories_folder, terms, portal_type)
+
+    foldercategories_config = default_values["RoadDecree"]["foldercategories"]
+    portal_type = foldercategories_config[0]
+    terms = foldercategories_config[1:]
+    foldercategories_folder = createVocabularyFolder(
+        roaddecree_folder, "foldercategories", site, allowedtypes=portal_type
+    )
+    createFolderDefaultValues(foldercategories_folder, terms, portal_type)
+
+    missingparts_config = default_values["RoadDecree"]["missingparts"]
+    portal_type = missingparts_config[0]
+    terms = missingparts_config[1:]
+    missingparts_folder = createVocabularyFolder(
+        roaddecree_folder, "missingparts", site, allowedtypes=portal_type
+    )
+    createFolderDefaultValues(missingparts_folder, terms, portal_type)
+
+    logger.info("migration step done!")
