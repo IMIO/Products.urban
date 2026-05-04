@@ -36,6 +36,7 @@ class NoticeNotification(NoticeElement):
         "parties",
         "decision_code",
         "original_application",
+        "business_reference_denomination",
     )
 
     def __init__(self, service, json):
@@ -325,6 +326,10 @@ class NoticeNotification(NoticeElement):
             NoticeParty(self.service, p)
             for p in self._get_data("parties", "part") or []
         ]
+    
+    @property
+    def business_reference_denomination(self):
+        return self._get_data("businessReference", "denomination")
 
     @property
     def addresses(self):
