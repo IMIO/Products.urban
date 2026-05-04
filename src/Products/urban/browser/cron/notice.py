@@ -745,7 +745,10 @@ class IncomingNoticeHandler(object):
                 ),
             },
         )
-        self.licence.description.raw += translate(error, context=self.request)
+        description_field = self.licence.getField("description")
+        old_description = description_field.getRaw(self.licence)
+        new_description = old_description + translate(error, context=self.request).encode("utf8")
+        description_field.set(self.licence, new_description)
         self.licence._p_changed = 1
 
     @property
