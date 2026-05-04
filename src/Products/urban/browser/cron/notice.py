@@ -373,27 +373,27 @@ class ImportFromNoticeView(BrowserView):
         # TWICE
 
         if detailed_notification.notice_type == "TRANSFERT_DOSSIER":
-            self._transfert_dossier(detailed_notification)
+            handler = NewLicenceHandler
         elif detailed_notification.notice_type in (
                 "NOTIF_COMPLETUDE1_INCOMPLET_COMMUNE",
                 "NOTIF_COMPLETUDE1_NON_RECEVABLE_COMMUNE",
         ):
-            self.process_incomplete_folder_notification(detailed_notification)
+            handler = IncompleteHandler
         elif detailed_notification.notice_type in (
             "NOTIF_COMPLETUDE1_IRRECEVABLE_COMMUNE",
             "NOTIF_COMPLETUDE2_IRRECEVABLE_COMMUNE",
             "NOTIF_COMPLETUDE2_NON_RECEVABLE_COMMUNE",
         ):
-            self.process_inadmissible_folder_notification(detailed_notification)
+            handler = InadmissibleHandler
         elif detailed_notification.notice_type in (
             "DEMANDE_EP",
             "DEMANDE_EP_DOSSIER_PRECEDENT",
         ):
-            self._demande_ep(detailed_notification)
+            handler = PublicSurveyHandler
         elif detailed_notification.notice_type == "DEMANDE_EP_EXTRA":
-            self._demande_ep_extra(detailed_notification)
+            handler = BorderingPublicSurveyHandler
         elif detailed_notification.notice_type == "NOTIFICATION_PROROGATION_COMMUNE":
-            self.process_extension_of_deadline_notification(detailed_notification)
+            handler = DeadlineExtensionHandler
         elif detailed_notification.notice_type in (
             "NOTIFICATION_RS_COMMUNE",
             "NOTIFICATION_RS_COMMUNE_RETARD",
@@ -401,13 +401,13 @@ class ImportFromNoticeView(BrowserView):
             "NOTIFICATION_PAS_ENVOI_RS",
             "NOTIFICATION_PAS_ENVOI_RS_SFD",
         ):
-            self._rapport_synthese(detailed_notification)
+            handler = SummaryReportHandler
         elif detailed_notification.notice_type in (
             "NOTIFICATION_DECISION_COMMUNE",
             "NOTIFICATION_DEC_RS_COMMUNE",
             "NOTIFICATION_DECRS_REFUS_TACITE_COMMUNE",
         ):
-            self._decision_spw(detailed_notification)
+            handler = DecisionSPWHandler
 
         # GESPER
 
@@ -789,12 +789,129 @@ class IncomingNoticeHandler(object):
             )
 
 
+class NewLicenceHandler(IncomingNoticeHandler):
+    event_config_marker = "Products.urban.interfaces.IDepositEvent"
+    create_licence_if_missing = True
+
+
+class InadmissibleHandler(IncomingNoticeHandler):
+    event_config_marker = "Products.urban.interfaces.IRefusedIncompletenessEvent"
+
+    @property
+    def desired_licence_state(self):
+        return "inacceptable"
+
+
+class IncompleteHandler(IncomingNoticeHandler):
+    event_config_marker = "Products.urban.interfaces.IMissingPartEvent"
+    licence_transition = "isincomplete"
+
+    @property
+    def desired_licence_state(self):
+        return "incomplete"
+
+
 class PublicSurveyHandler(IncomingNoticeHandler):
     event_config_marker = "Products.urban.interfaces.IAcknowledgmentEvent"
 
     @property
     def desired_licence_state(self):
         return "complete"
+
+
+class BorderingPublicSurveyHandler(IncomingNoticeHandler):
+    event_config_marker = "Products.urban.interfaces.IAcknowledgmentEvent"
+    create_licence_if_missing = True
+
+    def import_parties(self):
+        super(BorderingPublicSurveyHandler, self).import_parties()
+
+        business_name = self.notification.business_reference_denomination
+        if business_name:
+            api.content.create(
+                container=self.licence,
+                type="Corporation",
+                title=business_name,
+                denomination=business_name,
+            )
+
+    def import_addresses(self):
+        addresses = self.notification.addresses
+        if addresses:
+            first_address = addresses[0]
+            self.licence.setZipcode(first_address.postCode)
+            self.licence.setCity(first_address.municipality)
+            self.licence.setWorkLocations(
+                [
+                    {"number": address.number, "street": address.notice_street}
+                    for address in addresses
+                ]
+            )
+            self.licence._p_changed = 1
+
+    def import_parcels(self):
+        self.licence.setManualParcels(
+            [
+                {"ref": "", "capakey": parcel.capakey}
+                for parcel in self.notification.parcels
+            ]
+        )
+
+    @property
+    def desired_licence_state(self):
+        return "complete"
+
+
+class DeadlineExtensionHandler(IncomingNoticeHandler):
+    event_config_marker = "Products.urban.interfaces.IProrogationEvent"
+
+    def update_licence(self):
+        super(DeadlineExtensionHandler, self).update_licence()
+
+        # set prorogation field (if it's activated)
+        if self.licence.attributeIsUsed("prorogation"):
+            self.licence.getField("prorogation").set(self.licence, True)
+            notify(ObjectModifiedEvent(self.licence))
+            self.licence.reindexObject()
+
+
+class SummaryReportHandler(IncomingNoticeHandler):
+    event_config_marker = "Products.urban.interfaces.IDecisionProjectFromSPWEvent"
+
+
+class DecisionSPWHandler(IncomingNoticeHandler):
+    event_config_marker = "Products.urban.interfaces.IWalloonRegionDecisionEvent"
+
+    def fill_incoming_event(self):
+        super(DecisionSPWHandler, self).fill_incoming_event()
+
+        if self.notification.decision_code:
+            # set decision (octroi / refus)
+            mapping_decision_terms = {
+                "OCTROI": "favorable",
+                "REFUS": "defavorable",
+            }
+            urban_decision_term = mapping_decision_terms.get(
+                self.notification.decision_code
+            )
+            if urban_decision_term:
+                self.event.setDecision(urban_decision_term)
+            else:
+                self.event.setDescription(
+                    u"Décision: {}".format(self.notification.decision_code)
+                )
+
+    @property
+    def desired_licence_state(self):
+        decision_code = self.notification.decision_code
+        if decision_code:
+            mapping_decision_states = {
+                "OCTROI": "accepted",
+                "REFUS": "refused",
+            }
+            return mapping_decision_states.get(decision_code, "")
+        else:
+            return ""
 
 
 class GesperPublicSurveyHandler(IncomingNoticeHandler):
