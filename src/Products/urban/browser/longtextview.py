@@ -110,6 +110,7 @@ class NoticeFormDataTextView(BrowserView):
             field_title = translate(
                 field_id,
                 context=self.request,
+                domain=u"urban",
             )
             html_blocks.append(u"<h2>{}</h2>".format(field_title))
             if field_id in ("college_opinion", "college_decision"):
