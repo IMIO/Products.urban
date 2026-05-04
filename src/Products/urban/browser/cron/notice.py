@@ -6,6 +6,7 @@ from Products.Five import BrowserView
 from Products.urban import UrbanMessage as _
 from Products.urban.contentrules.notice import NoticeImportFailedEvent
 from Products.urban.contentrules.notice import NoticeImportSucceededEvent
+from Products.urban.interfaces import IBaseBuildLicence
 from Products.urban.services import notice
 from StringIO import StringIO
 from datetime import datetime
@@ -612,6 +613,8 @@ class IncomingNoticeHandler(object):
         self.licence = api.content.create(
             container=self.notification.container, **self.notification.serialize()
         )
+        if IBaseBuildLicence.providedBy(self.licence):
+            self.licence.setUsage("not_applicable")
         self.licence.setFoldermanagers(
             self.notification.foldermanagers
         )  # Must be set manually, serialized value is ignored at creation
