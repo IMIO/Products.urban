@@ -360,6 +360,15 @@ msgstr "Demande d'enquête publique sur plan modifié 1ère instance"
 msgid "DEMANDE_ENQUETE_PUBLIQUE_PLAN_MODIFIE_2_EME_INSTANCE"
 msgstr "Demande d'enquête publique sur plan modifié 2ème instance"
 
+msgid "DEMANDE_EP"
+msgstr "Demande d'organisation d'une enquête publique (territoire)"
+
+msgid "DEMANDE_EP_DOSSIER_PRECEDENT"
+msgstr "Demande d'organisation d'une enquête publique (interrogée précédemment)"
+
+msgid "DEMANDE_EP_EXTRA"
+msgstr "Demande d'organisation d'une enquête publique (hors territoire)"
+
 #: ../browser/offdays_settings.py:47
 msgid "Date"
 msgstr "Date"
@@ -874,14 +883,50 @@ msgid "NOTICe notification n° ${noticeId}"
 msgstr "Notification NOTICe n° ${noticeId}"
 
 #: ../viewlets/templates/notice_transmit_state.pt:4
-msgid "NOTICe reception date"
-msgstr "Date de réception (NOTICe)"
+msgid "NOTICe reception"
+msgstr "Réception (NOTICe)"
 
 #: ../viewlets/templates/notice_transmit_state.pt:9
 msgid "NOTICe transmits"
-msgstr "Dates de transmission (NOTICe)"
+msgstr "Transmissions (NOTICe)"
 
-#: ../browser/urban_configfolderview.py:25
+msgid "NOTIFICATION_DECISION_COMMUNE"
+msgstr "Notification à la commune de la décision"
+
+msgid "NOTIFICATION_PAS_ENVOI_RS"
+msgstr "Impossibilité de transmettre un rapport de synthèse dans les délais impartis"
+
+msgid "NOTIFICATION_PAS_ENVOI_RS_SFD"
+msgstr "Impossibilité de transmettre un rapport de synthèse dans les délais impartis"
+
+msgid "NOTIFICATION_PROROGATION_COMMUNE"
+msgstr "Notification à la commune de la prolongation du délai d'instruction"
+
+msgid "NOTIFICATION_RS_COMMUNE"
+msgstr "Transmission du rapport de synthèse"
+
+msgid "NOTIFICATION_RS_COMMUNE_RETARD"
+msgstr "Transmission hors délai du rapport de synthèse"
+
+msgid "NOTIFICATION_RS_COMMUNE_RETARD_SFD"
+msgstr "Transmission hors délai du rapport de synthèse sans le volet urbanisme"
+
+msgid "NOTIF_COMPLETUDE1_INCOMPLET_COMMUNE"
+msgstr "Transmission hors délai du rapport de synthèse sans le volet urbanisme"
+
+msgid "NOTIF_COMPLETUDE1_IRRECEVABLE_COMMUNE"
+msgstr "Notification à la commune que la demande est irrecevable"
+
+msgid "NOTIF_COMPLETUDE1_NON_RECEVABLE_COMMUNE"
+msgstr "Notification à la commune que la demande est non recevable"
+
+msgid "NOTIF_COMPLETUDE2_IRRECEVABLE_COMMUNE"
+msgstr "Notification à la commune que la demande est irrecevable (2e tour)"
+
+msgid "NOTIF_COMPLETUDE2_NON_RECEVABLE_COMMUNE"
+msgstr "Notification à la commune que la demande est non recevable (2e tour)"
+
+#: ../browser/urban_configfolderview.py:22
 msgid "Name"
 msgstr "Nom"
 
@@ -1104,7 +1149,10 @@ msgstr "Période de suspension du ${from} au ${to}: CORRIGEZ LA DATE DE FIN DE P
 msgid "Suspension period start date"
 msgstr "Date de début"
 
-#: ../browser/licence/duplicate_licence.py:54
+msgid "TRANSFERT_DOSSIER"
+msgstr "Nouveau dossier à destination de la commune"
+
+#: ../browser/licence/duplicate_licence.py:51
 msgid "Tabs to duplicate"
 msgstr "Onglets à copier"
 

@@ -1582,6 +1582,54 @@ msgstr ""
 msgid "college_decision"
 msgstr ""
 
+msgid "TRANSFERT_DOSSIER"
+msgstr ""
+
+msgid "NOTIF_COMPLETUDE1_INCOMPLET_COMMUNE"
+msgstr ""
+
+msgid "NOTIF_COMPLETUDE1_NON_RECEVABLE_COMMUNE"
+msgstr ""
+
+msgid "NOTIF_COMPLETUDE1_IRRECEVABLE_COMMUNE"
+msgstr ""
+
+msgid "NOTIF_COMPLETUDE2_IRRECEVABLE_COMMUNE"
+msgstr ""
+
+msgid "NOTIF_COMPLETUDE2_NON_RECEVABLE_COMMUNE"
+msgstr ""
+
+msgid "DEMANDE_EP"
+msgstr ""
+
+msgid "DEMANDE_EP_DOSSIER_PRECEDENT"
+msgstr ""
+
+msgid "DEMANDE_EP_EXTRA"
+msgstr ""
+
+msgid "NOTIFICATION_PROROGATION_COMMUNE"
+msgstr ""
+
+msgid "NOTIFICATION_RS_COMMUNE"
+msgstr ""
+
+msgid "NOTIFICATION_RS_COMMUNE_RETARD"
+msgstr ""
+
+msgid "NOTIFICATION_RS_COMMUNE_RETARD_SFD"
+msgstr ""
+
+msgid "NOTIFICATION_PAS_ENVOI_RS"
+msgstr ""
+
+msgid "NOTIFICATION_PAS_ENVOI_RS_SFD"
+msgstr ""
+
+msgid "NOTIFICATION_DECISION_COMMUNE"
+msgstr ""
+
 msgid "DEMANDE_AVIS_OBLIGATOIRE_PLAN_INITIAL_1_ERE_INSTANCE"
 msgstr ""
 
