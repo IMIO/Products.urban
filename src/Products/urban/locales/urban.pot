@@ -227,6 +227,9 @@ msgstr ""
 msgid "CODT_ParcelOutLicence"
 msgstr ""
 
+msgid "CODT_UniqueBorderingLicence"
+msgstr ""
+
 msgid "CODT_UniqueLicence"
 msgstr ""
 
@@ -242,7 +245,11 @@ msgstr ""
 msgid "CS_folder_title"
 msgstr ""
 
-#: ../browser/cron/notice.py:330
+#: ../browser/cron/notice.py:659
+msgid "CaPaKey"
+msgstr ""
+
+#: ../browser/cron/notice.py:482
 msgid "Can not find a parcel"
 msgstr ""
 
@@ -252,10 +259,6 @@ msgstr ""
 
 #: ../browser/urbaneventviews.py:1165
 msgid "Can't find the street : ${street}"
-msgstr ""
-
-#: ../browser/notice_forms.py:104
-msgid "Can't send response to event '{}': no Notice ID found for '{}'"
 msgstr ""
 
 #: ../browser/gig_coring_settings.py:72
@@ -1621,6 +1624,9 @@ msgstr ""
 msgid "codt_parceloutlicence_urbanconfig_title"
 msgstr ""
 
+msgid "codt_uniqueborderinglicence_urbanconfig_title"
+msgstr ""
+
 msgid "codt_uniquelicence_urbanconfig_title"
 msgstr ""
 
@@ -2371,10 +2377,6 @@ msgstr ""
 msgid "legend_specific_features"
 msgstr ""
 
-#: ../browser/cron/notice.py:336
-msgid "locality"
-msgstr ""
-
 msgid "locality_for_worklocation"
 msgstr ""
 
@@ -2782,10 +2784,6 @@ msgstr ""
 
 #: ../content/UrbanEventInspectionReport.py:165
 msgid "stop_worksite"
-msgstr ""
-
-#: ../browser/cron/notice.py:335
-msgid "street"
 msgstr ""
 
 #. Default: "When adding manually a new street, please let the default value"
@@ -3506,7 +3504,8 @@ msgid "urban_label_changesDescription"
 msgstr ""
 
 #. Default: "City"
-#: ../content/licence/EnvClassBordering.py:45
+#: ../content/licence/CODT_UniqueBorderingLicence.py:43
+#: ../content/licence/EnvClassBordering.py:46
 msgid "urban_label_city"
 msgstr ""
 
@@ -3879,6 +3878,7 @@ msgid "urban_label_divergenceDetails"
 msgstr ""
 
 #. Default: "Division"
+#: ../browser/cron/notice.py:660
 #: ../browser/templates/searchparcels.pt:51
 msgid "urban_label_division"
 msgstr ""
@@ -4004,6 +4004,7 @@ msgid "urban_label_exponent"
 msgstr ""
 
 #. Default: "Exposant"
+#: ../browser/cron/notice.py:664
 #: ../browser/templates/searchparcels.pt:74
 msgid "urban_label_exposant"
 msgstr ""
@@ -4522,7 +4523,8 @@ msgid "urban_label_managed_by_prosecutor"
 msgstr ""
 
 #. Default: "Manualparcels"
-#: ../content/licence/EnvClassBordering.py:56
+#: ../content/licence/CODT_UniqueBorderingLicence.py:54
+#: ../content/licence/EnvClassBordering.py:57
 msgid "urban_label_manualParcels"
 msgstr ""
 
@@ -4637,6 +4639,7 @@ msgstr ""
 
 #. Default: "Number"
 #: ../EnvironmentRubricTerm.py:41
+#: ../browser/cron/notice.py:680
 msgid "urban_label_number"
 msgstr ""
 
@@ -4994,11 +4997,13 @@ msgid "urban_label_publicRoadModifications"
 msgstr ""
 
 #. Default: "Puissance"
+#: ../browser/cron/notice.py:665
 #: ../browser/templates/searchparcels.pt:78
 msgid "urban_label_puissance"
 msgstr ""
 
 #. Default: "Radical"
+#: ../browser/cron/notice.py:662
 #: ../browser/templates/searchparcels.pt:66
 msgid "urban_label_radical"
 msgstr ""
@@ -5316,6 +5321,7 @@ msgid "urban_label_sdcDetails"
 msgstr ""
 
 #. Default: "Section"
+#: ../browser/cron/notice.py:661
 #: ../browser/templates/searchparcels.pt:61
 msgid "urban_label_section"
 msgstr ""
@@ -5352,6 +5358,7 @@ msgid "urban_label_signatureNumber"
 msgstr ""
 
 #. Default: "Situation"
+#: ../browser/licence/templates/codt_uniqueborderinglicencemacros.pt:27
 #: ../browser/licence/templates/envclassborderingmacros.pt:25
 #: ../browser/licence/templates/worklocation_macro.pt:13
 #: ../content/licence/EnvironmentBase.py:391
@@ -5725,8 +5732,8 @@ msgstr ""
 
 #. Default: "Work locations"
 #: ../browser/licence/templates/worklocation_macro.pt:2
-#: ../content/licence/EnvClassBordering.py:29
-#: ../content/licence/GenericLicence.py:279
+#: ../content/licence/CODT_UniqueBorderingLicence.py:27
+#: ../content/licence/EnvClassBordering.py:30
 msgid "urban_label_workLocations"
 msgstr ""
 
@@ -5740,7 +5747,8 @@ msgid "urban_label_zipCode"
 msgstr ""
 
 #. Default: "Zipcode"
-#: ../content/licence/EnvClassBordering.py:38
+#: ../content/licence/CODT_UniqueBorderingLicence.py:36
+#: ../content/licence/EnvClassBordering.py:39
 msgid "urban_label_zipcode"
 msgstr ""
 
@@ -5894,8 +5902,4 @@ msgid "years"
 msgstr ""
 
 msgid "zip_folder_title"
-msgstr ""
-
-#: ../browser/cron/notice.py:340
-msgid "zipcode"
 msgstr ""

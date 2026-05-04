@@ -240,7 +240,11 @@ msgstr "Conditions sectorielles Eau"
 msgid "CS_folder_title"
 msgstr "Conditions sectorielles"
 
-#: ../browser/cron/notice.py:266
+#: ../browser/cron/notice.py:659
+msgid "CaPaKey"
+msgstr "CaPaKey"
+
+#: ../browser/cron/notice.py:482
 msgid "Can not find a parcel"
 msgstr "Parcelle introuvable"
 
@@ -251,10 +255,6 @@ msgstr "Adresse introuvable"
 #: ../browser/urbaneventviews.py:1164
 msgid "Can't find the street : ${street}"
 msgstr "Cette rue est introuvable : ${street}"
-
-#: ../browser/notice_forms.py:106
-msgid "Can't send response to event '{}': no Notice ID found for '{}'"
-msgstr ""
 
 #: ../browser/gig_coring_settings.py:72
 #: ../browser/notice_settings.py:67
@@ -823,6 +823,7 @@ msgstr "Avis de services internes à la ville"
 msgid "Last import date from Notice Webservice"
 msgstr "Date du dernier import depuis le WebService de NOTICe"
 
+#: ../browser/notice_forms.py:132
 #: ../send_mail_action/forms.py:26
 msgid "Licence Files"
 msgstr "Fichiers du permis"
@@ -871,6 +872,7 @@ msgid "NOTICe"
 msgstr "NOTICe"
 
 #: ../contentrules/notice.py:43
+#: ../viewlets/templates/notice_transmit_state.pt:9
 msgid "NOTICe ID"
 msgstr "Identifiant NOTICe"
 
@@ -1091,6 +1093,7 @@ msgstr "Sélectionner les types de contenues autorisés pour ce modèle"
 msgid "Select to list"
 msgstr "Sélectionner pour lister"
 
+#: ../browser/notice_forms.py:251
 #: ../send_mail_action/forms.py:58
 msgid "Send"
 msgstr "Envoyer"
@@ -1255,10 +1258,12 @@ msgstr "Vers les Procédures CODT"
 msgid "To CWATUPE procedures"
 msgstr "Vers les Procédures CWATUP"
 
+#: ../browser/notice_forms.py:320
 #: ../profiles/default/actions.xml
 msgid "Transfer dates to the SPW"
 msgstr "Envoyer les dates d'enquête vers le SPW"
 
+#: ../browser/notice_forms.py:443
 #: ../profiles/default/actions.xml
 msgid "Transfer decision display to the SPW"
 msgstr "Envoyer les dates d'affichage vers le SPW"
@@ -1268,14 +1273,17 @@ msgstr "Envoyer les dates d'affichage vers le SPW"
 msgid "Transfer decision to the SPW"
 msgstr "Envoyer la décision vers le SPW"
 
+#: ../browser/notice_forms.py:304
 #: ../profiles/default/actions.xml
 msgid "Transfer folder to DPA"
 msgstr "Envoyer le dossier vers le SPW"
 
+#: ../browser/notice_forms.py:389
 #: ../profiles/default/actions.xml
 msgid "Transfer opinion to the SPW"
 msgstr "Envoyer l'avis préalable du Collège vers le SPW"
 
+#: ../browser/notice_forms.py:358
 #: ../profiles/default/actions.xml
 msgid "Transfer ticket to the SPW"
 msgstr "Envoyer le PV et les réclamations vers le SPW"
@@ -2465,6 +2473,10 @@ msgstr "Pluriel"
 msgid "multiplicity_single"
 msgstr "Singulier"
 
+#: ../browser/cron/notice.py:490
+msgid "municipality"
+msgstr "Commune"
+
 msgid "natura_2000_folder_title"
 msgstr "Périmètre Natura 2000"
 
@@ -2650,6 +2662,7 @@ msgstr "RCU"
 
 #. Default: "Lire la suite"
 #: ../browser/templates/urbaneventmacros.pt:23
+#: ../viewlets/templates/notice_transmit_state.pt:40
 msgid "read_more"
 msgstr "Lire la suite"
 
@@ -2758,10 +2771,6 @@ msgstr "SSC"
 #: ../content/UrbanEventInspectionReport.py:166
 msgid "stop_worksite"
 msgstr "Arrêt de chantier"
-
-#: ../browser/cron/notice.py:369
-msgid "street"
-msgstr "rue"
 
 #. Default: "When adding manually a new street, please let the default value"
 #: Street.py
@@ -3398,6 +3407,7 @@ msgid "urban_label_bestAddressKey"
 msgstr "Clé BestAddress"
 
 #. Default: "Bis"
+#: ../browser/cron/notice.py:663
 #: ../browser/templates/searchparcels.pt:70
 msgid "urban_label_bis"
 msgstr "Bis"
@@ -3471,7 +3481,8 @@ msgid "urban_label_changesDescription"
 msgstr "Modifications du lotissement"
 
 #. Default: "City"
-#: ../content/licence/EnvClassBordering.py:45
+#: ../content/licence/CODT_UniqueBorderingLicence.py:43
+#: ../content/licence/EnvClassBordering.py:46
 msgid "urban_label_city"
 msgstr "Localité"
 
@@ -3838,6 +3849,7 @@ msgid "urban_label_divergenceDetails"
 msgstr "Détails concernant l'écart"
 
 #. Default: "Division"
+#: ../browser/cron/notice.py:660
 #: ../browser/templates/searchparcels.pt:51
 msgid "urban_label_division"
 msgstr "Division"
@@ -3964,6 +3976,7 @@ msgid "urban_label_exponent"
 msgstr "Exposant"
 
 #. Default: "Exposant"
+#: ../browser/cron/notice.py:664
 #: ../browser/templates/searchparcels.pt:74
 msgid "urban_label_exposant"
 msgstr "Exposant"
@@ -4480,7 +4493,8 @@ msgid "urban_label_managed_by_prosecutor"
 msgstr "Prise en charge procureur"
 
 #. Default: "Manualparcels"
-#: ../content/licence/EnvClassBordering.py:56
+#: ../content/licence/CODT_UniqueBorderingLicence.py:54
+#: ../content/licence/EnvClassBordering.py:57
 msgid "urban_label_manualParcels"
 msgstr "Parcelles"
 
@@ -4592,7 +4606,8 @@ msgid "urban_label_noteworthyTrees"
 msgstr "Arbres et haies remarquables"
 
 #. Default: "Number"
-#: ../EnvironmentRubricTerm.py:40
+#: ../EnvironmentRubricTerm.py:41
+#: ../browser/cron/notice.py:680
 msgid "urban_label_number"
 msgstr "Numéro"
 
@@ -4947,11 +4962,13 @@ msgid "urban_label_publicRoadModifications"
 msgstr "Modifications souhaitées au tracé et à l'équipement des voiries publiques"
 
 #. Default: "Puissance"
+#: ../browser/cron/notice.py:665
 #: ../browser/templates/searchparcels.pt:78
 msgid "urban_label_puissance"
 msgstr "Puissance"
 
 #. Default: "Radical"
+#: ../browser/cron/notice.py:662
 #: ../browser/templates/searchparcels.pt:66
 msgid "urban_label_radical"
 msgstr "Radical"
@@ -5269,6 +5286,7 @@ msgid "urban_label_sdcDetails"
 msgstr "Détails concernant le schéma de développement communal"
 
 #. Default: "Section"
+#: ../browser/cron/notice.py:661
 #: ../browser/templates/searchparcels.pt:61
 msgid "urban_label_section"
 msgstr "Section"
@@ -5304,6 +5322,7 @@ msgid "urban_label_signatureNumber"
 msgstr "Nombre de signature"
 
 #. Default: "Situation"
+#: ../browser/licence/templates/codt_uniqueborderinglicencemacros.pt:27
 #: ../browser/licence/templates/envclassborderingmacros.pt:25
 #: ../browser/licence/templates/worklocation_macro.pt:13
 #: ../content/licence/EnvironmentBase.py:394
@@ -5689,7 +5708,8 @@ msgid "urban_label_zipCode"
 msgstr "Code Postal"
 
 #. Default: "Zipcode"
-#: ../content/licence/EnvClassBordering.py:38
+#: ../content/licence/CODT_UniqueBorderingLicence.py:36
+#: ../content/licence/EnvClassBordering.py:39
 msgid "urban_label_zipcode"
 msgstr "Code Postal"
 
