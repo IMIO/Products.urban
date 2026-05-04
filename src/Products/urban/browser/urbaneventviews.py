@@ -1671,7 +1671,7 @@ class CanTransferTicketGesperEPView(CanTransferNoticeBaseView):
 
 
 class CanTransferOpinionGesperEPView(CanTransferNoticeBaseView):
-    accepted_portal_types = ["UrbanEvent"]
+    accepted_portal_types = ["UrbanEvent", "UrbanEventCollege"]
     accepted_event_markers = ["Products.urban.interfaces.ICollegeOpinionEvent"]
     accepted_incoming_notice_types = [
         "DEMANDE_ENQUETE_PUBLIQUE_PLAN_INITIAL_1_ERE_INSTANCE",
@@ -1713,7 +1713,7 @@ class CanTransferTicketGesperAPView(CanTransferNoticeBaseView):
 
 
 class CanTransferOpinionGesperAPView(CanTransferNoticeBaseView):
-    accepted_portal_types = ["UrbanEvent"]
+    accepted_portal_types = ["UrbanEvent", "UrbanEventCollege"]
     accepted_event_markers = ["Products.urban.interfaces.ICollegeOpinionEvent"]
     accepted_incoming_notice_types = [
         "DEMANDE_ANNONCE_PROJET_PLAN_INITIAL_1_ERE_INSTANCE",
@@ -1728,7 +1728,7 @@ class CanTransferOpinionGesperAPView(CanTransferNoticeBaseView):
 
 
 class CanTransferOpinionGesperOpinionRequestView(CanTransferNoticeBaseView):
-    accepted_portal_types = ["UrbanEvent"]
+    accepted_portal_types = ["UrbanEvent", "UrbanEventCollege"]
     accepted_event_markers = ["Products.urban.interfaces.ICollegeOpinionEvent"]
     accepted_incoming_notice_types = [
         "DEMANDE_AVIS_OBLIGATOIRE_PLAN_INITIAL_1_ERE_INSTANCE",
