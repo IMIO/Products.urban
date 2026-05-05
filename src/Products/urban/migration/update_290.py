@@ -530,3 +530,11 @@ def setup_notice_mailing_content_rules(context):
         ContentRulesUtils.enable_rule(portal, rule_id, bubbles=True)
 
     logger.info("Upgrade done!")
+
+
+def reindex_getDecisionDate(context):
+    logger = logging.getLogger("urban: Reindex getDecisionDate")
+
+    reindexIndexes(None, ["getDecisionDate"])
+
+    logger.info("upgrade step done!")

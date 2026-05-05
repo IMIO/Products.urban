@@ -21,6 +21,7 @@ from Products.urban import interfaces
 from Products.urban.schedule.interfaces import ILicenceDeliveryTask
 from Products.urban.utils import get_ws_meetingitem_infos
 from datetime import date
+from datetime import datetime
 from imio.schedule.content.task import IAutomatedTask
 from plone import api
 from plone.indexer import indexer
@@ -275,7 +276,13 @@ def genericlicence_decisiondate(licence):
                 return decision_date
         if linked_pm_items:
             if "date" in linked_pm_items[0]["extra_include_meeting"].keys():
-                return linked_pm_items[0]["extra_include_meeting"]["date"]
+                decision_date = linked_pm_items[0]["extra_include_meeting"]["date"]
+                if isinstance(decision_date, unicode):
+                    decision_date = datetime.strptime(
+                        decision_date,
+                        "%Y-%m-%dT%H:%M:%S"
+                    ).date()
+                return decision_date
         return decision_event.getDecisionDate() or decision_event.getEventDate()
 
 
