@@ -1158,7 +1158,7 @@ msgstr "Vers les Procédures CWATUP"
 
 #: ../profiles/default/actions.xml
 msgid "Transfer dates to the SPW"
-msgstr "Envoyer les dates d'enquête vers le SPW"
+msgstr "Envoyer les dates de publicité vers le SPW"
 
 #: ../profiles/default/actions.xml
 msgid "Transfer decision display to the SPW"
