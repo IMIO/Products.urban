@@ -93,6 +93,14 @@ class Housing(BaseInspection, CODT_BaseBuildLicence):
         """Return a list of selected buiding part"""
         return self.getValuesForTemplate("buildingPart")
 
+    def updateTitle(self):
+        licence_config = self.getLicenceConfig()
+        custom_title = licence_config.getCustomTitle()
+        if custom_title:
+            self.setTitle(custom_title)
+            self.reindexObject(idxs=("Title", "sortable_title"))
+        else:
+            super(Housing, self).updateTitle()
 
 registerType(Housing, PROJECTNAME)
 
