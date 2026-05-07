@@ -317,7 +317,9 @@ class NoticeNotification(NoticeElement):
     @property
     def parcels(self):
         """Return parcels"""
-        return [NoticeParcel(self.service, p) for p in self.json["parcels"]["parcel"]]
+        return [
+            NoticeParcel(self.service, p) for p in self._get_data("parcels", "parcel") or []
+        ]
 
     @property
     def parties(self):
@@ -335,7 +337,8 @@ class NoticeNotification(NoticeElement):
     def addresses(self):
         """Return work locations"""
         return [
-            NoticeAddress(self.service, a) for a in self.json["addresses"]["address"]
+            NoticeAddress(self.service, a)
+            for a in self._get_data("addresses", "address") or []
         ]
 
     @property
@@ -343,7 +346,7 @@ class NoticeNotification(NoticeElement):
         """Return documents"""
         return [
             NoticeDocument(self.service, d, self.noticeId)
-            for d in self.json["documents"]["document"]
+            for d in self._get_data("documents", "document") or []
         ]
 
     @property
