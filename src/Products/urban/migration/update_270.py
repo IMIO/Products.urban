@@ -9,7 +9,6 @@ from Products.urban.interfaces import IGenericLicence
 from Products.urban.migration.utils import refresh_workflow_permissions
 from Products.urban.setuphandlers import createFolderDefaultValues
 from Products.urban.setuphandlers import createVocabularyFolder
-from imio.helpers.catalog import reindexIndexes
 from eea.facetednavigation.interfaces import ICriteria
 from imio.schedule.content.object_factories import MacroCreationConditionObject
 from imio.schedule.content.object_factories import MacroEndConditionObject
@@ -578,51 +577,4 @@ def add_additional_delay_option(context):
         criterion.add(wid="select2", position="top", section="advanced", **data)
         logger.info("Type {}, query widget add".format(urban_type))
 
-    logger.info("upgrade step done!")
-
-
-def add_rubrics_index_and_filters(context):
-    logger = logging.getLogger("urban: Add rubrics index and filters")
-    logger.info("starting upgrade steps")
-    setup_tool = api.portal.get_tool("portal_setup")
-    setup_tool.runImportStepFromProfile("profile-Products.urban:urbantypes", "catalog")
-    reindexIndexes(None, ["rubrics"])
-    URBAN_ENVIRONMENT_TYPES = [
-        "EnvClassOne",
-        "EnvClassTwo",
-        "EnvClassThree",
-        "ExplosivesPossession",
-        "EnvClassBordering",
-        "CODT_UniqueLicence",
-        "CODT_IntegratedLicence",
-        "CODT_CommercialLicence",
-        "UniqueLicence",
-    ]
-    portal_urban = api.portal.get_tool("portal_urban")
-    urban_folder = api.portal.get().urban
-    data = {
-        "_cid_": u"c94",
-        "title": u"Rubriques",
-        "hidden": False,
-        "index": u"rubrics",
-        "vocabulary": u"urban.vocabularies.rubrics",
-    }
-    urban_folder_criterion = ICriteria(urban_folder)
-    if urban_folder_criterion is not None:
-        urban_folder_criterion.add(
-            wid="select2", position="top", section="advanced", **data
-        )
-    for urban_type in URBAN_ENVIRONMENT_TYPES:
-        licence_config = portal_urban.get(urban_type.lower(), None)
-        if licence_config is None:
-            continue
-        # Add query widget
-        licence_folder = getattr(urban_folder, "{}s".format(urban_type.lower()), None)
-        if licence_folder is None:
-            continue
-        criterion = ICriteria(licence_folder)
-        if criterion is None:
-            continue
-
-        criterion.add(wid="select2", position="top", section="advanced", **data)
     logger.info("upgrade step done!")

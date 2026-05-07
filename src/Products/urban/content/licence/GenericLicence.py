@@ -2126,6 +2126,66 @@ class GenericLicence(OrderedBaseFolder, UrbanBase, BrowserDefaultMixin):
     def legalconditions_base_query(self):
         return {"review_state": ["enabled", "private"]}
 
+    security.declarePublic("get_rubrics_display")
+
+    def get_rubrics_display(self, class_number=True, number=True, description=False, html_list=True):
+        """
+        Generate an HTML-formatted list of rubric information for the licence.
+
+        :param class_number: Whether to include the class number in the output, defaults to True
+        :type class_number: bool, optional
+        :param number: Whether to include the rubric number, defaults to True
+        :type number: bool, optional
+        :param description: Whether to include the rubric's description as a paragraph under
+            the number, defaults to False
+        :type description: bool, optional
+        :param html_list: Whether to wrap the output in HTML list tags, defaults to True
+        :type html_list: bool, optional
+        :return: An HTML string with the formatted rubric data, or an empty string if
+            `getRubrics` is not available
+        :rtype: str
+        """
+        if not hasattr(self, "getRubrics"):
+            logger.warning("This licence has no getRubrics method")
+            return ""
+
+        output = []
+        for rubric in self.getRubrics():
+            parts = []
+            if class_number:
+                parts.append("Classe {}".format(rubric.getExtraValue()))
+            if number:
+                parts.append(str(rubric.getNumber()))
+
+            rubric_str = " - ".join(parts)
+
+            if description:
+                desc = rubric.Description()
+                separator = " :" if rubric_str else ""
+                if html_list:
+                    if rubric_str:
+                        rubric_str = "<p>{}{}</p>{}".format(rubric_str, separator, desc)
+                    else:
+                        rubric_str = desc
+                else:
+                    if rubric_str:
+                        rubric_str = "{} - {}".format(rubric_str, desc)
+                    else:
+                        rubric_str = desc
+
+            if not rubric_str:
+                continue
+
+            if html_list:
+                if description:
+                    rubric_str = "<li>{}</li>".format(rubric_str)
+                else:
+                    rubric_str = "<li><p>{}</p></li>".format(rubric_str)
+            output.append(rubric_str)
+
+        if html_list:
+            return "<ul>{}</ul>".format("".join(output))
+        return ", ".join(output)
 
 registerType(GenericLicence, PROJECTNAME)
 # end of class GenericLicence
