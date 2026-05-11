@@ -384,6 +384,7 @@ class Division(BaseFolder, GenericLicence, BrowserDefaultMixin):
                 "Title",
                 "applicantInfosIndex",
                 "sortable_title",
+                "SearchableText",
             )
         )
 
