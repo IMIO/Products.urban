@@ -2,9 +2,11 @@
 from Products.CMFCore.utils import getToolByName
 from Products.urban import URBAN_TYPES
 from Products.urban import UrbanMessage as _
+from Products.urban.interfaces import IUrbanConfigurationFolder
 from Products.urban.migration.utils import cook_javascript_resources
 from Products.urban.utils import moveElementAfter
 from Products.urban.setuphandlers import set_licence_folder_security
+from Products.urban.setuphandlers import _ as title_translation
 from dm.historical import getHistory
 from imio.helpers.catalog import reindexIndexes
 from plone import api
@@ -362,3 +364,31 @@ def update_folder_manager_notice(context):
     notice_folder_manager.reindexObject()
 
     logger.info("manageableLicences updated for notice FolderManager")
+
+
+def fix_vocabulary_folder_title(parent_folder):
+    folders = parent_folder.listFolderContents(
+        contentFilter={"portal_type": "Folder"}
+    )
+    for folder in folders:
+        if (
+            not IUrbanConfigurationFolder.providedBy(folder)
+            or not folder.getRawTitle() == "urban"
+        ):
+            continue
+        folder_id = folder.getId()
+        folder.setTitle(title_translation("{}_folder_title".format(folder_id), "urban"))
+
+
+def fix_vocabularies_folder_title(context):
+    logger = logging.getLogger("urban: Fix vocabularies folder title")
+
+    portal_urban = api.portal.get_tool("portal_urban")
+    fix_vocabulary_folder_title(portal_urban)
+    for urban_type in URBAN_TYPES:
+        urban_type_folder = getattr(portal_urban, urban_type, None)
+        if urban_type_folder is None:
+            continue
+        fix_vocabulary_folder_title(urban_type_folder)
+
+    logger.info("upgrade step done!")
