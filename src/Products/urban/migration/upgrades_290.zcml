@@ -92,4 +92,12 @@
         handler=".update_290.update_folder_manager_notice"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Fix vocabularies folder title"
+        description=""
+        source="2910"
+        destination="2911"
+        handler=".update_290.fix_vocabularies_folder_title"
+        profile="Products.urban:default" />
+
 </configure>

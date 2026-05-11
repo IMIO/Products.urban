@@ -229,6 +229,12 @@ msgstr "Conditions sectorielles Eau"
 msgid "CS_folder_title"
 msgstr "Conditions sectorielles"
 
+msgid "zoning_folder_title"
+msgstr "Zoning"
+
+msgid "complementary_delay_folder_title"
+msgstr "Prorogation complémentaire"
+
 #: ../browser/cron/notice.py:266
 msgid "Can not find a parcel"
 msgstr "Parcelle introuvable"
