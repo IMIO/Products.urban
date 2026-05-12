@@ -8,6 +8,16 @@ Changelog
 
 .. towncrier release notes start
 
+2.9.20 (2026-05-12)
+-------------------
+
+Bug fixes:
+
+
+- Avoid content lookup with a unicode path
+  [ndemonte] (URB-3470)
+
+
 2.9.19 (2026-05-12)
 -------------------
 
