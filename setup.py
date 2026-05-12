@@ -4,7 +4,7 @@ from setuptools import setup
 import os
 
 
-version = "2.9.19"
+version = "[O[I[O.dev0"
 
 setup(
     name="Products.urban",
