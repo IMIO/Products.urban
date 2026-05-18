@@ -1286,8 +1286,8 @@ class UrbanEventInquiryView(UrbanEventInquiryBaseView):
         )
 
     def getInquiryRadius(self):
-        licence = self.context.aq_parent
-        investigation_radius = getattr(licence, "investigation_radius", None)
+        inquiry = self.context.getLinkedInquiry()
+        investigation_radius = getattr(inquiry, "investigation_radius", None)
 
         if investigation_radius is None:
             return 50
