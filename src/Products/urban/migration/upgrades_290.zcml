@@ -196,4 +196,11 @@
         handler=".update_290.add_article65_type"
         profile="Products.urban:default" />
 
+    <gs::upgradeStep
+        title="Add notice warning"
+        description=""
+        source="2923"
+        destination="2924"
+        handler=".update_290.add_notice_warning"
+        profile="Products.urban:default"/>
 </configure>

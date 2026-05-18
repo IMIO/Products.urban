@@ -6072,9 +6072,6 @@ msgstr "Taxation"
 msgid "urban_label_buildingPart"
 msgstr "Partie de l'immeuble concernée"
 
-msgid "urban_label_buildingType"
-msgstr "Nature de l'immeuble"
-
 msgid "PM_ENVOI_DECISION_FT_COURRIER_COMMUNE"
 msgstr "Plans Modificatifs - Notification à la commune de la décision"
 
@@ -6122,3 +6119,6 @@ msgstr "Libération de sûreté"
 
 msgid "NOTIFICATION_ABANDON_COMMUNE"
 msgstr "Notification à la commune de l'abandon (registre des modifications)"
+
+msgid "urban.warnings.notice"
+msgstr "Ce dossier a été encodé de manière dématérialisée"
