@@ -3,7 +3,7 @@
 from Products.urban.interfaces import IUrbanWarningCondition
 from plone import api
 from zope.interface import implements
-
+from zope.annotation.interfaces import IAnnotations
 
 class WarningCondition(object):
     """
@@ -42,4 +42,22 @@ class BoundTicketSettlementEventDone(WarningCondition):
                     and api.content.get_state(settlement_event) == "closed"
                 ):
                     return True
+        return False
+
+
+class NoticeWarning(WarningCondition):
+    """
+    Check if license is a notice folder.
+    """
+
+    def evaluate(self):
+        events = self.licence.getAllEvents()
+
+        for event in events:
+            annotations = IAnnotations(event)
+            notice = annotations.get("notice_notification", {})
+
+            if notice:
+                return True
+
         return False

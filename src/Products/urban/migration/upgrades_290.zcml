@@ -180,4 +180,11 @@
         handler=".update_290.set_pul_urbanConfigId"
         profile="Products.urban:default" />
 
+    <gs::upgradeStep
+        title="Add notice warning"
+        description=""
+        source="2922"
+        destination="2923"
+        handler=".update_290.add_notice_warning"
+        profile="Products.urban:default"/>
 </configure>

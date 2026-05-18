@@ -764,3 +764,24 @@ def set_pul_urbanConfigId(context):
         )
 
     logger.info("upgrade step done!")
+
+
+def add_notice_warning(context):
+    """
+    Add notice warning on portal_urban warnings field.
+    """
+    logger = logging.getLogger("urban: Add notice warning")
+    logger.info("starting upgrade steps")
+    portal_urban = api.portal.get_tool("portal_urban")
+    existing = list(portal_urban.getWarnings())
+    names = [w["condition"] for w in existing]
+    if "urban.warnings.notice" not in names:
+        existing.append(
+            {
+                "condition": "urban.warnings.notice",
+                "level": "warning",
+                "message": "Ce dossier a \xc3\xa9t\xc3\xa9 encod\xc3\xa9 de mani\xc3\xa8re d\xc3\xa9mat\xc3\xa9rialis\xc3\xa9e",
+            }
+        )
+        portal_urban.setWarnings(tuple(existing))
+    logger.info("upgrade done!")
