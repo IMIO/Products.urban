@@ -34,6 +34,7 @@ from Products.urban.content.licence.GenericLicence import GenericLicence
 from Products.urban.utils import setOptionalAttributes
 from Products.urban.utils import setSchemataForInquiry
 from Products.urban.widget.select2widget import MultiSelect2Widget
+from Products.urban.widget.select2widget import Select2Widget
 from dateutil.relativedelta import relativedelta
 from plone import api
 from zope.i18n import translate
@@ -196,7 +197,7 @@ schema = Schema(
         ),
         StringField(
             name="annoncedDelay",
-            widget=SelectionWidget(
+            widget=Select2Widget(
                 label=_("urban_label_annoncedDelay", default="Annonceddelay"),
             ),
             schemata="urban_analysis",
@@ -569,7 +570,7 @@ schema = Schema(
         ),
         StringField(
             name="delayAfterModifiedBlueprints",
-            widget=SelectionWidget(
+            widget=Select2Widget(
                 label=_(
                     "urban_label_delayAfterModifiedBlueprints",
                     default="Delayaftermodifiedblueprints",

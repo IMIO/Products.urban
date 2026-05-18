@@ -63,7 +63,7 @@ schema = Schema(
         ),
         StringField(
             name="investigation_radius",
-            widget=SelectionWidget(
+            widget=Select2Widget(
                 label=_(
                     "urban_label_investigation_radius", default="Investigation_radius"
                 ),
