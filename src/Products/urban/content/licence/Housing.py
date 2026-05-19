@@ -94,12 +94,7 @@ class Housing(BaseInspection, CODT_BaseBuildLicence):
         return self.getValuesForTemplate("buildingPart")
 
     def updateTitle(self):
-        licence_config = self.getLicenceConfig()
-        custom_title = licence_config.getCustomTitle()
-        if custom_title:
-            self.setTitle(custom_title)
-            self.reindexObject(idxs=("Title", "sortable_title"))
-        else:
+        if not self._apply_custom_title():
             super(Housing, self).updateTitle()
 
 registerType(Housing, PROJECTNAME)

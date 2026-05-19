@@ -91,12 +91,13 @@
         destination="2910"
         handler=".update_290.update_folder_manager_notice"
         profile="Products.urban:default" />
+
     <gs:upgradeStep
-        title="Update manageableLicences for notice FolderManager"
+        title="Update titles for Housing and Division"
         description=""
         source="2910"
         destination="2911"
-        handler=".update_290.update_housing_titles"
+        handler=".update_290.update_custom_titles"
         profile="Products.urban:default" />
 
 </configure>

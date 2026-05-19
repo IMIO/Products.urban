@@ -363,9 +363,10 @@ def update_folder_manager_notice(context):
 
     logger.info("manageableLicences updated for notice FolderManager")
 
-def update_housing_titles(context):
+
+def update_custom_titles(context):
     catalog = api.portal.get_tool("portal_catalog")
-    brains = catalog(portal_type="Housing")
+    brains = catalog(portal_type=["Housing", "Division"])
     for brain in brains:
         obj = brain.getObject()
         obj.updateTitle()

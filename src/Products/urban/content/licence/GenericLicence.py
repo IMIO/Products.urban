@@ -1564,6 +1564,15 @@ class GenericLicence(OrderedBaseFolder, UrbanBase, BrowserDefaultMixin):
 
         return config_folder
 
+    def _apply_custom_title(self):
+        licence_config = self.getLicenceConfig()
+        custom_title = licence_config.getCustomTitle()
+        if custom_title:
+            self.setTitle(custom_title)
+            self.reindexObject(idxs=("Title", "sortable_title"))
+            return True
+        return False
+
     security.declarePublic("attributeIsUsed")
 
     def attributeIsUsed(self, name):
