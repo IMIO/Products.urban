@@ -21,9 +21,15 @@ class NoticeAddress(NoticeElement):
 
     def _find_address(self):
         """Try to find an address"""
+        # by street and village
         result = utils.find_address(self.search_term, exact_match=True)
         if not result:
             result = utils.find_address(self.search_term, exact_match=False)
+        # just by street
+        if not result and self.notice_street:
+            result = utils.find_address(self.notice_street, exact_match=True)
+        if not result and self.notice_street:
+            result = utils.find_address(self.notice_street, exact_match=False)
         return result
 
     @property
