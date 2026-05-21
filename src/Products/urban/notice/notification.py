@@ -24,7 +24,7 @@ class NoticeNotification(NoticeElement):
         "sender",
         "status",
         "reception_date",
-        "notice_type",
+        "status_date",
         "notification_subtype",
         "notification_type",
     )
@@ -35,6 +35,8 @@ class NoticeNotification(NoticeElement):
         "parcels",
         "parties",
         "decision_code",
+        "original_application",
+        "business_reference_denomination",
     )
 
     def __init__(self, service, json):
@@ -85,7 +87,21 @@ class NoticeNotification(NoticeElement):
 
     @property
     def referenceFT(self):
-        return self._get_data("BO", "idBO")
+        if self.original_application == "TWICE":
+            return self._get_data("BO", "idBO")
+        else:
+            return None
+
+    @property
+    def referenceDGATLP(self):
+        if self.original_application == "GESPER":
+            return self._get_data("BO", "idBO")
+        else:
+            return None
+
+    @property
+    def original_application(self):
+        return self._get_data("BO", "applicationCodeBO")
 
     @property
     def type(self):
@@ -94,7 +110,10 @@ class NoticeNotification(NoticeElement):
         if not hasattr(self, "_licence_type"):
             self._licence_type = None
 
-            if self.notice_type == "TRANSFERT_DOSSIER":
+            if self.original_application == "GESPER":
+                if self.notification_type == "UFD2_GESPER":
+                    self._licence_type = "CODT_Article127"
+            elif self.notice_type == "TRANSFERT_DOSSIER":
                 if self.notification_type == "PE_PU":
                     if self.notification_subtype == "PU":
                         self._licence_type = "CODT_UniqueLicence"
@@ -114,6 +133,11 @@ class NoticeNotification(NoticeElement):
                             "2": "EnvClassTwo",
                             "3": "EnvClassThree",
                         }.get(penv_classe, None)
+            elif self.notice_type == "DEMANDE_EP_EXTRA":
+                self._licence_type = {
+                    "PU": "CODT_UniqueBorderingLicence",
+                    "PE": "EnvClassBordering",
+                }.get(self.notification_subtype)
             else:
                 existing_licence = self.licence
                 if existing_licence:
@@ -163,7 +187,7 @@ class NoticeNotification(NoticeElement):
                 document.document_mimetype == "application/xml"
                 and document.document_type_code == "PJ_FORMULAIRE"
             ):
-                return etree.parse(document.file)
+                return etree.fromstring(document.document)
         raise ValueError("No PJ_FORMULAIRE XML document found")
 
     @property
@@ -203,7 +227,8 @@ class NoticeNotification(NoticeElement):
     def send_date(self):
         """Return the send date"""
         raw_date = self._get_data("sendDate")
-        return datetime.strptime(raw_date[:19], "%Y-%m-%dT%H:%M:%S").date()
+        if raw_date:
+            return datetime.strptime(raw_date[:19], "%Y-%m-%dT%H:%M:%S").date()
 
     @property
     def container(self):
@@ -233,11 +258,16 @@ class NoticeNotification(NoticeElement):
                 licence = brains[0].getObject()
                 return licence
 
-        raise ValueError(
-            "No licence found with reference number {} / reference FT {}".format(
-                self.reference, self.referenceFT
+        if self.referenceDGATLP:
+            brains = catalog.unrestrictedSearchResults(
+                referenceDGATLP=self.referenceDGATLP,
+                object_provides=IGenericLicence.__identifier__,
             )
-        )
+            if brains:
+                licence = brains[0].getObject()
+                return licence
+
+        return None
 
     @property
     def event_configs(self):
@@ -287,7 +317,9 @@ class NoticeNotification(NoticeElement):
     @property
     def parcels(self):
         """Return parcels"""
-        return [NoticeParcel(self.service, p) for p in self.json["parcels"]["parcel"]]
+        return [
+            NoticeParcel(self.service, p) for p in self._get_data("parcels", "parcel") or []
+        ]
 
     @property
     def parties(self):
@@ -296,12 +328,17 @@ class NoticeNotification(NoticeElement):
             NoticeParty(self.service, p)
             for p in self._get_data("parties", "part") or []
         ]
+    
+    @property
+    def business_reference_denomination(self):
+        return self._get_data("businessReference", "denomination")
 
     @property
     def addresses(self):
         """Return work locations"""
         return [
-            NoticeAddress(self.service, a) for a in self.json["addresses"]["address"]
+            NoticeAddress(self.service, a)
+            for a in self._get_data("addresses", "address") or []
         ]
 
     @property
@@ -309,7 +346,7 @@ class NoticeNotification(NoticeElement):
         """Return documents"""
         return [
             NoticeDocument(self.service, d, self.noticeId)
-            for d in self.json["documents"]["document"]
+            for d in self._get_data("documents", "document") or []
         ]
 
     @property
@@ -320,6 +357,21 @@ class NoticeNotification(NoticeElement):
     @property
     def decision_code(self):
         """Return decision code from a DecisionRequest"""
-        return self._get_data(
-            "specific", self._specific_code, "ns3:decisionCode", "code"
-        )
+
+        if self.original_application == "TWICE":
+            return self._get_data(
+                "specific", self._specific_code, "ns3:decisionCode", "code"
+            )
+        if self.original_application == "GESPER" and self.notice_type in (
+            "DECISION_GESPER_1_ERE_INSTANCE",
+            "DECISION_GESPER_2_EME_INSTANCE",
+        ):
+            for document in self.documents:
+                if document.document_type_code in (
+                    "UFD2_DEMAT_DECISION_FD",
+                    "UFD2_DECISION_FD_OCTROI",
+                    "UFD2_DECISION_FD_REFUSEE",
+                ):
+                    return document.document_type_code
+
+        return None

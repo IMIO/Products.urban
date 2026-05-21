@@ -133,5 +133,10 @@
   </index>
   <column value="referenceFT"/>
 
+  <index name="referenceDGATLP" meta_type="FieldIndex">
+    <indexed_attr value="referenceDGATLP"/>
+  </index>
+  <column value="referenceDGATLP"/>
+
 <!-- ##/code-section FOOT -->
 </object>

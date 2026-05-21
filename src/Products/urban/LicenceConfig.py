@@ -578,6 +578,7 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin, OrderedContainer):
             "codt_article127": codt_buildlicence_tabs_config,
             "codt_parceloutlicence": codt_inquiry_tabs_config,
             "codt_uniquelicence": codt_uniquelicence_tabs_config,
+            "codt_uniqueborderinglicence": codt_uniquelicence_tabs_config,
             "codt_commerciallicence": codt_buildlicence_tabs_config,
             "codt_integratedlicence": codt_uniquelicence_tabs_config,
             "codt_urbancertificatetwo": codt_buildlicence_tabs_config,

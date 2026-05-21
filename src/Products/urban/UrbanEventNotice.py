@@ -64,12 +64,11 @@ class UrbanEventNotice(UrbanEvent, BrowserDefaultMixin):
 
     # Methods
 
-    def transfer_folder_to_dpa(self):
+    def transfer_folder_to_dpa(self, incoming_id):
         notification = NoticeOutgoingNotification(self)
-        notice_id = notification.notice_id("TRANSFERT_DOSSIER")
         service = WebserviceNotice()
         result = service.post_notification_response(
-            notice_id,
+            incoming_id,
             notification.serialize(),
         )
         return result

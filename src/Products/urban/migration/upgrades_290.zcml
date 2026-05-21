@@ -91,12 +91,28 @@
         destination="2910"
         handler=".update_290.update_folder_manager_notice"
         profile="Products.urban:default" />
+    
+    <gs:upgradeStep
+        title="Add CODT unique bordering licences"
+        description=""
+        source="2911"
+        destination="2912"
+        handler=".update_290.add_codt_uniquebordering_licences"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Set up `referenceDGATLP` index"
+        description=""
+        source="2912"
+        destination="2913"
+        handler=".update_290.setup_index_referenceDGATLP"
+        profile="Products.urban:default" />
 
     <gs:upgradeStep
         title="Update titles for Housing and Division"
         description=""
-        source="2910"
-        destination="2911"
+        source="2913"
+        destination="2914"
         handler=".update_290.update_custom_titles"
         profile="Products.urban:default" />
 

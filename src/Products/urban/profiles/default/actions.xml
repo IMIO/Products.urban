@@ -191,5 +191,82 @@
    </property>
    <property name="visible">True</property>
   </object>
+  <object name="transfer_dates_gesper_ep" meta_type="CMF Action" i18n:domain="urban">
+   <property name="title" i18n:translate="">Transfer dates to the SPW</property>
+   <property name="description" i18n:translate=""></property>
+   <property name="url_expr">string:$object_url/@@transfer_dates_gesper_ep_form</property>
+   <property name="icon_expr">string:$portal_url/++resource++Products.urban/coq_wallon.png</property>
+   <property name="available_expr">context/@@can_transfer_dates_gesper_ep</property>
+   <property name="permissions">
+    <element value="View"/>
+   </property>
+   <property name="visible">True</property>
+  </object>
+  <object name="transfer_ticket_gesper_ep" meta_type="CMF Action" i18n:domain="urban">
+   <property name="title" i18n:translate="">Transfer ticket to the SPW</property>
+   <property name="description" i18n:translate=""></property>
+   <property name="url_expr">string:$object_url/@@transfer_ticket_gesper_ep_form</property>
+   <property name="icon_expr">string:$portal_url/++resource++Products.urban/coq_wallon.png</property>
+   <property name="available_expr">context/@@can_transfer_ticket_gesper_ep</property>
+   <property name="permissions">
+    <element value="View"/>
+   </property>
+   <property name="visible">True</property>
+  </object>
+  <object name="transfer_opinion_gesper_ep" meta_type="CMF Action" i18n:domain="urban">
+   <property name="title" i18n:translate="">Transfer opinion to the SPW</property>
+   <property name="description" i18n:translate=""></property>
+   <property name="url_expr">string:$object_url/@@transfer_opinion_gesper_ep_form</property>
+   <property name="icon_expr">string:$portal_url/++resource++Products.urban/coq_wallon.png</property>
+   <property name="available_expr">context/@@can_transfer_opinion_gesper_ep</property>
+   <property name="permissions">
+    <element value="View"/>
+   </property>
+   <property name="visible">True</property>
+  </object>
+  <object name="transfer_dates_gesper_ap" meta_type="CMF Action" i18n:domain="urban">
+   <property name="title" i18n:translate="">Transfer dates to the SPW</property>
+   <property name="description" i18n:translate=""></property>
+   <property name="url_expr">string:$object_url/@@transfer_dates_gesper_ap_form</property>
+   <property name="icon_expr">string:$portal_url/++resource++Products.urban/coq_wallon.png</property>
+   <property name="available_expr">context/@@can_transfer_dates_gesper_ap</property>
+   <property name="permissions">
+    <element value="View"/>
+   </property>
+   <property name="visible">True</property>
+  </object>
+  <object name="transfer_ticket_gesper_ap" meta_type="CMF Action" i18n:domain="urban">
+   <property name="title" i18n:translate="">Transfer ticket to the SPW</property>
+   <property name="description" i18n:translate=""></property>
+   <property name="url_expr">string:$object_url/@@transfer_ticket_gesper_ap_form</property>
+   <property name="icon_expr">string:$portal_url/++resource++Products.urban/coq_wallon.png</property>
+   <property name="available_expr">context/@@can_transfer_ticket_gesper_ap</property>
+   <property name="permissions">
+    <element value="View"/>
+   </property>
+   <property name="visible">True</property>
+  </object>
+  <object name="transfer_opinion_gesper_ap" meta_type="CMF Action" i18n:domain="urban">
+   <property name="title" i18n:translate="">Transfer opinion to the SPW</property>
+   <property name="description" i18n:translate=""></property>
+   <property name="url_expr">string:$object_url/@@transfer_opinion_gesper_ap_form</property>
+   <property name="icon_expr">string:$portal_url/++resource++Products.urban/coq_wallon.png</property>
+   <property name="available_expr">context/@@can_transfer_opinion_gesper_ap</property>
+   <property name="permissions">
+    <element value="View"/>
+   </property>
+   <property name="visible">True</property>
+  </object>
+  <object name="transfer_opinion_gesper_opinion_request" meta_type="CMF Action" i18n:domain="urban">
+   <property name="title" i18n:translate="">Transfer opinion to the SPW</property>
+   <property name="description" i18n:translate=""></property>
+   <property name="url_expr">string:$object_url/@@transfer_opinion_gesper_opinion_request_form</property>
+   <property name="icon_expr">string:$portal_url/++resource++Products.urban/coq_wallon.png</property>
+   <property name="available_expr">context/@@can_transfer_opinion_gesper_opinion_request</property>
+   <property name="permissions">
+    <element value="View"/>
+   </property>
+   <property name="visible">True</property>
+  </object>
  </object>
 </object>

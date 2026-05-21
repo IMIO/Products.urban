@@ -64,11 +64,19 @@ msgstr "75 jours"
 msgid "A Event type condition makes the rule apply only if Event type correspond to the one from the context."
 msgstr "Une condition de type d'événement rend la règle applicable uniquement si le type d'événement correspond à celui du contexte."
 
+
 #: ../contentrules/opinions.py:77
 msgid "A opinion to ask condition makes the rule apply only when one of the Opinion to ask slelected correspond to the one of the context"
 msgstr "Une condition d'opinion à demander rend la règle applicable uniquement lorsqu'une des opinions à demander sélectionnées correspond à celle du contexte."
+#: ../contentrules/configure.zcml:20
+msgid "A NOTICe notification import failed"
+msgstr "Une notification NOTICe n'a pas pu être importée"
 
-#: ../browser/urbaneventviews.py:431
+#: ../contentrules/configure.zcml:14
+msgid "A NOTICe notification import succeeded"
+msgstr "Une notification NOTICe a été importée avec succès"
+
+#: ../browser/urbaneventviews.py:435
 msgid "A specially formatted CSV file must be used for import. The CSV file can be created from the ODT template file (can be downloaded <a href='/++resource++Products.urban/destinaires_reimport.ods'>here</a>) by 'save as' in CSV format"
 msgstr "Un fichier CSV spécialement formaté doit être utilisé pour l'importation. Le fichier CSV peut être créé à partir du fichier modèle ODT (téléchargeable <a href='/++resource++Products.urban/destinaires_reimport.ods'>ici</a>) en l'enregistrant sous le format CSV"
 
@@ -214,6 +222,9 @@ msgstr "Lettre de notaire (CODT)"
 msgid "CODT_ParcelOutLicence"
 msgstr "Permis d'urbanisation (CODT)"
 
+msgid "CODT_UniqueBorderingLicence"
+msgstr "Permis Unique commune limitrophe (CODT)"
+
 msgid "CODT_UniqueLicence"
 msgstr "Permis Unique (CODT)"
 
@@ -229,7 +240,11 @@ msgstr "Conditions sectorielles Eau"
 msgid "CS_folder_title"
 msgstr "Conditions sectorielles"
 
-#: ../browser/cron/notice.py:266
+#: ../browser/cron/notice.py:659
+msgid "CaPaKey"
+msgstr "CaPaKey"
+
+#: ../browser/cron/notice.py:482
 msgid "Can not find a parcel"
 msgstr "Parcelle introuvable"
 
@@ -240,10 +255,6 @@ msgstr "Adresse introuvable"
 #: ../browser/urbaneventviews.py:1164
 msgid "Can't find the street : ${street}"
 msgstr "Cette rue est introuvable : ${street}"
-
-#: ../browser/notice_forms.py:106
-msgid "Can't send response to event '{}': no Notice ID found for '{}'"
-msgstr ""
 
 #: ../browser/gig_coring_settings.py:72
 #: ../browser/notice_settings.py:67
@@ -295,7 +306,70 @@ msgstr "Lien GIG"
 msgid "Couldn't import this(these) owner(s): ${owners}"
 msgstr "Impossible d'importer ce(s) propriétaire(s): ${owners}"
 
-#: ../browser/offdays_settings.py:52
+msgid "DECISION_GESPER_1_ERE_INSTANCE"
+msgstr "Décision 1ère instance"
+
+msgid "DECISION_GESPER_2_EME_INSTANCE"
+msgstr "Décision 2ème instance"
+
+msgid "DEMANDE_ANNONCE PROJET_PLAN_MODIFIE_1_ERE_INSTANCE"
+msgstr "Demande d'annonce projet sur plan modifié 1ère instance"
+
+msgid "DEMANDE_ANNONCE_PROJET_PLAN_INITIAL_1_ERE_INSTANCE"
+msgstr "Demande d'annonce projet sur plan initial 1ère instance"
+
+msgid "DEMANDE_ANNONCE_PROJET_PLAN_INITIAL_2_EME_INSTANCE"
+msgstr "Demande d'annonce projet sur plan initial 2ème instance"
+
+msgid "DEMANDE_ANNONCE_PROJET_PLAN_MODIFIE_2_EME_INSTANCE"
+msgstr "Demande d'annonce projet sur plan modifié 2ème instance"
+
+msgid "DEMANDE_AVIS_FACULTATIF_PLAN_INITIAL_1_ERE_INSTANCE"
+msgstr "Demande d'avis facultatif sur plan initial 1ère instance"
+
+msgid "DEMANDE_AVIS_FACULTATIF_PLAN_INITIAL_2_EME_INSTANCE"
+msgstr "Demande d'avis facultatif sur plan initial 2ème instance"
+
+msgid "DEMANDE_AVIS_FACULTATIF_PLAN_MODIFIE_1_ERE_INSTANCE"
+msgstr "Demande d'avis facultatif sur plan modifié 1ère instance"
+
+msgid "DEMANDE_AVIS_FACULTATIF_PLAN_MODIFIE_2_EME_INSTANCE"
+msgstr "Demande d'avis facultatif sur plan modifié 2ème instance"
+
+msgid "DEMANDE_AVIS_OBLIGATOIRE_PLAN_INITIAL_1_ERE_INSTANCE"
+msgstr "Demande d'avis obligatoire sur plan initial 1ère instance"
+
+msgid "DEMANDE_AVIS_OBLIGATOIRE_PLAN_INITIAL_2_EME_INSTANCE"
+msgstr "Demande d'avis obligatoire sur plan initial 2ème instance"
+
+msgid "DEMANDE_AVIS_OBLIGATOIRE_PLAN_MODIFIE_1_ERE_INSTANCE"
+msgstr "Demande d'avis obligatoire sur plan modifié 1ère instance"
+
+msgid "DEMANDE_AVIS_OBLIGATOIRE_PLAN_MODIFIE_2_EME_INSTANCE"
+msgstr "Demande d'avis obligatoire sur plan modifié 2ème instance"
+
+msgid "DEMANDE_ENQUETE_PUBLIQUE_PLAN_INITIAL_1_ERE_INSTANCE"
+msgstr "Demande d'enquête publique sur plan initial 1ère instance"
+
+msgid "DEMANDE_ENQUETE_PUBLIQUE_PLAN_INITIAL_2_EME_INSTANCE"
+msgstr "Demande d'enquête publique sur plan initial 2ème instance"
+
+msgid "DEMANDE_ENQUETE_PUBLIQUE_PLAN_MODIFIE_1_ERE_INSTANCE"
+msgstr "Demande d'enquête publique sur plan modifié 1ère instance"
+
+msgid "DEMANDE_ENQUETE_PUBLIQUE_PLAN_MODIFIE_2_EME_INSTANCE"
+msgstr "Demande d'enquête publique sur plan modifié 2ème instance"
+
+msgid "DEMANDE_EP"
+msgstr "Demande d'organisation d'une enquête publique (territoire)"
+
+msgid "DEMANDE_EP_DOSSIER_PRECEDENT"
+msgstr "Demande d'organisation d'une enquête publique (interrogée précédemment)"
+
+msgid "DEMANDE_EP_EXTRA"
+msgstr "Demande d'organisation d'une enquête publique (hors territoire)"
+
+#: ../browser/offdays_settings.py:47
 msgid "Date"
 msgstr "Date"
 
@@ -472,7 +546,11 @@ msgstr "Accusé de réception"
 msgid "IActivityEndedEvent type marker interface"
 msgstr "Cessation d'activité"
 
-#: ../interfaces.py:425
+#: ../interfaces.py:413
+msgid "IAmendedPlansAcknowledgmentEvent type marker interface"
+msgstr "Accusé de réception des plans modifiés"
+
+#: ../interfaces.py:449
 msgid "IAnnouncement type marker interface"
 msgstr "Annonce de projet"
 
@@ -727,6 +805,10 @@ msgstr "Import"
 msgid "Import cancel : error with claimant ${claimant} on value ${value}"
 msgstr "Annulation d'importation : erreur avec le demandeur ${claimant} sur la valeur ${value}"
 
+#: ../browser/notice_forms.py:157
+msgid "Incoming notification to answer to"
+msgstr "Notification NOTICe concernée"
+
 msgid "Inspection"
 msgstr "Inspection"
 
@@ -741,6 +823,7 @@ msgstr "Avis de services internes à la ville"
 msgid "Last import date from Notice Webservice"
 msgstr "Date du dernier import depuis le WebService de NOTICe"
 
+#: ../browser/notice_forms.py:132
 #: ../send_mail_action/forms.py:26
 msgid "Licence Files"
 msgstr "Fichiers du permis"
@@ -784,15 +867,68 @@ msgstr "Plusieurs résultats trouvés pour une adresse"
 msgid "Municipality ID in Notice"
 msgstr "Identifiant de la commune dans NOTICe"
 
-#: ../viewlets/templates/notice_transmit_state.pt:3
-msgid "NOTICe reception date"
-msgstr "Date de réception (NOTICe)"
+#: ../contentrules/notice.py:42
+msgid "NOTICe"
+msgstr "NOTICe"
+
+#: ../contentrules/notice.py:43
+#: ../viewlets/templates/notice_transmit_state.pt:9
+msgid "NOTICe ID"
+msgstr "Identifiant NOTICe"
+
+#: ../contentrules/notice.py:53
+msgid "NOTICe Type"
+msgstr "Type de notification NOTICe"
+
+#: ../browser/cron/notice.py:759
+msgid "NOTICe notification n° ${noticeId}"
+msgstr "Notification NOTICe n° ${noticeId}"
+
+#: ../viewlets/templates/notice_transmit_state.pt:4
+msgid "NOTICe reception"
+msgstr "Réception (NOTICe)"
 
 #: ../viewlets/templates/notice_transmit_state.pt:9
 msgid "NOTICe transmits"
-msgstr "Dates de transmission (NOTICe)"
+msgstr "Transmissions (NOTICe)"
 
-#: ../browser/urban_configfolderview.py:25
+msgid "NOTIFICATION_DECISION_COMMUNE"
+msgstr "Notification à la commune de la décision"
+
+msgid "NOTIFICATION_PAS_ENVOI_RS"
+msgstr "Impossibilité de transmettre un rapport de synthèse dans les délais impartis"
+
+msgid "NOTIFICATION_PAS_ENVOI_RS_SFD"
+msgstr "Impossibilité de transmettre un rapport de synthèse dans les délais impartis"
+
+msgid "NOTIFICATION_PROROGATION_COMMUNE"
+msgstr "Notification à la commune de la prolongation du délai d'instruction"
+
+msgid "NOTIFICATION_RS_COMMUNE"
+msgstr "Transmission du rapport de synthèse"
+
+msgid "NOTIFICATION_RS_COMMUNE_RETARD"
+msgstr "Transmission hors délai du rapport de synthèse"
+
+msgid "NOTIFICATION_RS_COMMUNE_RETARD_SFD"
+msgstr "Transmission hors délai du rapport de synthèse sans le volet urbanisme"
+
+msgid "NOTIF_COMPLETUDE1_INCOMPLET_COMMUNE"
+msgstr "Transmission hors délai du rapport de synthèse sans le volet urbanisme"
+
+msgid "NOTIF_COMPLETUDE1_IRRECEVABLE_COMMUNE"
+msgstr "Notification à la commune que la demande est irrecevable"
+
+msgid "NOTIF_COMPLETUDE1_NON_RECEVABLE_COMMUNE"
+msgstr "Notification à la commune que la demande est non recevable"
+
+msgid "NOTIF_COMPLETUDE2_IRRECEVABLE_COMMUNE"
+msgstr "Notification à la commune que la demande est irrecevable (2e tour)"
+
+msgid "NOTIF_COMPLETUDE2_NON_RECEVABLE_COMMUNE"
+msgstr "Notification à la commune que la demande est non recevable (2e tour)"
+
+#: ../browser/urban_configfolderview.py:22
 msgid "Name"
 msgstr "Nom"
 
@@ -957,6 +1093,7 @@ msgstr "Sélectionner les types de contenues autorisés pour ce modèle"
 msgid "Select to list"
 msgstr "Sélectionner pour lister"
 
+#: ../browser/notice_forms.py:251
 #: ../send_mail_action/forms.py:58
 msgid "Send"
 msgstr "Envoyer"
@@ -1015,7 +1152,10 @@ msgstr "Période de suspension du ${from} au ${to}: CORRIGEZ LA DATE DE FIN DE P
 msgid "Suspension period start date"
 msgstr "Date de début"
 
-#: ../browser/licence/duplicate_licence.py:54
+msgid "TRANSFERT_DOSSIER"
+msgstr "Nouveau dossier à destination de la commune"
+
+#: ../browser/licence/duplicate_licence.py:51
 msgid "Tabs to duplicate"
 msgstr "Onglets à copier"
 
@@ -1118,10 +1258,12 @@ msgstr "Vers les Procédures CODT"
 msgid "To CWATUPE procedures"
 msgstr "Vers les Procédures CWATUP"
 
+#: ../browser/notice_forms.py:320
 #: ../profiles/default/actions.xml
 msgid "Transfer dates to the SPW"
-msgstr "Envoyer les dates d'enquête vers le SPW"
+msgstr "Envoyer les dates de publicité vers le SPW"
 
+#: ../browser/notice_forms.py:443
 #: ../profiles/default/actions.xml
 msgid "Transfer decision display to the SPW"
 msgstr "Envoyer les dates d'affichage vers le SPW"
@@ -1131,14 +1273,17 @@ msgstr "Envoyer les dates d'affichage vers le SPW"
 msgid "Transfer decision to the SPW"
 msgstr "Envoyer la décision vers le SPW"
 
+#: ../browser/notice_forms.py:304
 #: ../profiles/default/actions.xml
 msgid "Transfer folder to DPA"
 msgstr "Envoyer le dossier vers le SPW"
 
+#: ../browser/notice_forms.py:389
 #: ../profiles/default/actions.xml
 msgid "Transfer opinion to the SPW"
 msgstr "Envoyer l'avis préalable du Collège vers le SPW"
 
+#: ../browser/notice_forms.py:358
 #: ../profiles/default/actions.xml
 msgid "Transfer ticket to the SPW"
 msgstr "Envoyer le PV et les réclamations vers le SPW"
@@ -1445,6 +1590,9 @@ msgstr "Paramètres des lettres de notaire (CODT)"
 
 msgid "codt_parceloutlicence_urbanconfig_title"
 msgstr "Paramètres des permis d'urbanisation (CODT)"
+
+msgid "codt_uniqueborderinglicence_urbanconfig_title"
+msgstr "Paramètres des permis uniques communes limitrophes (CODT)"
 
 msgid "codt_uniquelicence_urbanconfig_title"
 msgstr "Paramètres des permis uniques (CODT)"
@@ -2325,6 +2473,10 @@ msgstr "Pluriel"
 msgid "multiplicity_single"
 msgstr "Singulier"
 
+#: ../browser/cron/notice.py:490
+msgid "municipality"
+msgstr "Commune"
+
 msgid "natura_2000_folder_title"
 msgstr "Périmètre Natura 2000"
 
@@ -2510,6 +2662,7 @@ msgstr "RCU"
 
 #. Default: "Lire la suite"
 #: ../browser/templates/urbaneventmacros.pt:23
+#: ../viewlets/templates/notice_transmit_state.pt:40
 msgid "read_more"
 msgstr "Lire la suite"
 
@@ -2619,10 +2772,6 @@ msgstr "SSC"
 msgid "stop_worksite"
 msgstr "Arrêt de chantier"
 
-#: ../browser/cron/notice.py:369
-msgid "street"
-msgstr "rue"
-
 #. Default: "When adding manually a new street, please let the default value"
 #: Street.py
 msgid "street_best_address_key_descr"
@@ -2711,6 +2860,12 @@ msgstr "Liste des sentiers et chemins vicinaux de la commune"
 msgid "transfer_dates"
 msgstr "Envoyer les dates d'enquête vers le SPW"
 
+msgid "transfer_dates_gesper_ap"
+msgstr "Envoyer les dates d'annonce vers le SPW"
+
+msgid "transfer_dates_gesper_ep"
+msgstr "Envoyer les dates d'enquête vers le SPW"
+
 msgid "transfer_decision"
 msgstr "Envoyer la décision vers le SPW"
 
@@ -2723,11 +2878,32 @@ msgstr "Envoyer le dossier vers le SPW"
 msgid "transfer_opinion"
 msgstr "Envoyer l'avis préalable du Collège vers le SPW"
 
+msgid "transfer_opinion_gesper_ap"
+msgstr "Envoyer l'avis préalable du Collège vers le SPW"
+
+msgid "transfer_opinion_gesper_ep"
+msgstr "Envoyer l'avis préalable du Collège vers le SPW"
+
+msgid "transfer_opinion_gesper_opinion_request"
+msgstr "Envoyer l'avis préalable du Collège vers le SPW"
+
 msgid "transfer_ticket"
 msgstr "Envoyer le PV et les réclamations vers le SPW"
 
 msgid "transfer_ticket_final"
 msgstr "Envoyer le PV et les réclamations vers le SPW (pas d'avis préalable du Collège)"
+
+msgid "transfer_ticket_final_gesper_ap"
+msgstr "Envoyer le PV et les réclamations vers le SPW (pas d'avis préalable du Collège)"
+
+msgid "transfer_ticket_final_gesper_ep"
+msgstr "Envoyer le PV et les réclamations vers le SPW (pas d'avis préalable du Collège)"
+
+msgid "transfer_ticket_gesper_ap"
+msgstr "Envoyer le PV et les réclamations vers le SPW"
+
+msgid "transfer_ticket_gesper_ep"
+msgstr "Envoyer le PV et les réclamations vers le SPW"
 
 #. Default: "Action"
 #: ../viewlets/templates/notice_transmit_state.pt:13
@@ -2743,6 +2919,11 @@ msgstr "Le"
 #: ../viewlets/templates/notice_transmit_state.pt:17
 msgid "transmit_form_data"
 msgstr "Données du formulaire"
+
+#. Default: "Type"
+#: ../viewlets/templates/notice_transmit_state.pt:8
+msgid "transmit_type"
+msgstr "Type"
 
 #. Default: "User"
 #: ../viewlets/templates/notice_transmit_state.pt:15
@@ -3226,6 +3407,7 @@ msgid "urban_label_bestAddressKey"
 msgstr "Clé BestAddress"
 
 #. Default: "Bis"
+#: ../browser/cron/notice.py:663
 #: ../browser/templates/searchparcels.pt:70
 msgid "urban_label_bis"
 msgstr "Bis"
@@ -3299,7 +3481,8 @@ msgid "urban_label_changesDescription"
 msgstr "Modifications du lotissement"
 
 #. Default: "City"
-#: ../content/licence/EnvClassBordering.py:45
+#: ../content/licence/CODT_UniqueBorderingLicence.py:43
+#: ../content/licence/EnvClassBordering.py:46
 msgid "urban_label_city"
 msgstr "Localité"
 
@@ -3666,6 +3849,7 @@ msgid "urban_label_divergenceDetails"
 msgstr "Détails concernant l'écart"
 
 #. Default: "Division"
+#: ../browser/cron/notice.py:660
 #: ../browser/templates/searchparcels.pt:51
 msgid "urban_label_division"
 msgstr "Division"
@@ -3792,6 +3976,7 @@ msgid "urban_label_exponent"
 msgstr "Exposant"
 
 #. Default: "Exposant"
+#: ../browser/cron/notice.py:664
 #: ../browser/templates/searchparcels.pt:74
 msgid "urban_label_exposant"
 msgstr "Exposant"
@@ -4308,7 +4493,8 @@ msgid "urban_label_managed_by_prosecutor"
 msgstr "Prise en charge procureur"
 
 #. Default: "Manualparcels"
-#: ../content/licence/EnvClassBordering.py:56
+#: ../content/licence/CODT_UniqueBorderingLicence.py:54
+#: ../content/licence/EnvClassBordering.py:57
 msgid "urban_label_manualParcels"
 msgstr "Parcelles"
 
@@ -4420,7 +4606,8 @@ msgid "urban_label_noteworthyTrees"
 msgstr "Arbres et haies remarquables"
 
 #. Default: "Number"
-#: ../EnvironmentRubricTerm.py:40
+#: ../EnvironmentRubricTerm.py:41
+#: ../browser/cron/notice.py:680
 msgid "urban_label_number"
 msgstr "Numéro"
 
@@ -4775,11 +4962,13 @@ msgid "urban_label_publicRoadModifications"
 msgstr "Modifications souhaitées au tracé et à l'équipement des voiries publiques"
 
 #. Default: "Puissance"
+#: ../browser/cron/notice.py:665
 #: ../browser/templates/searchparcels.pt:78
 msgid "urban_label_puissance"
 msgstr "Puissance"
 
 #. Default: "Radical"
+#: ../browser/cron/notice.py:662
 #: ../browser/templates/searchparcels.pt:66
 msgid "urban_label_radical"
 msgstr "Radical"
@@ -5097,6 +5286,7 @@ msgid "urban_label_sdcDetails"
 msgstr "Détails concernant le schéma de développement communal"
 
 #. Default: "Section"
+#: ../browser/cron/notice.py:661
 #: ../browser/templates/searchparcels.pt:61
 msgid "urban_label_section"
 msgstr "Section"
@@ -5132,6 +5322,7 @@ msgid "urban_label_signatureNumber"
 msgstr "Nombre de signature"
 
 #. Default: "Situation"
+#: ../browser/licence/templates/codt_uniqueborderinglicencemacros.pt:27
 #: ../browser/licence/templates/envclassborderingmacros.pt:25
 #: ../browser/licence/templates/worklocation_macro.pt:13
 #: ../content/licence/EnvironmentBase.py:394
@@ -5517,7 +5708,8 @@ msgid "urban_label_zipCode"
 msgstr "Code Postal"
 
 #. Default: "Zipcode"
-#: ../content/licence/EnvClassBordering.py:38
+#: ../content/licence/CODT_UniqueBorderingLicence.py:36
+#: ../content/licence/EnvClassBordering.py:39
 msgid "urban_label_zipcode"
 msgstr "Code Postal"
 

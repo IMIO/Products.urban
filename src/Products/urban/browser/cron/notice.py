@@ -4,9 +4,15 @@ from DateTime import DateTime
 from Products.Archetypes.event import ObjectInitializedEvent
 from Products.Five import BrowserView
 from Products.urban import UrbanMessage as _
+from Products.urban.contentrules.notice import NoticeImportFailedEvent
+from Products.urban.contentrules.notice import NoticeImportSucceededEvent
+from Products.urban.interfaces import IBaseBuildLicence
 from Products.urban.services import notice
+from StringIO import StringIO
 from datetime import datetime
 from plone import api
+from plone.api.exc import InvalidParameterError
+from plone.stringinterp.interfaces import IContextWrapper
 from zope.event import notify
 from zope.i18n import translate
 from zope.lifecycleevent import ObjectModifiedEvent
@@ -69,10 +75,11 @@ class ImportFromNoticeView(BrowserView):
             except Exception as exc:
                 savepoint.rollback()
                 logger.exception(
-                    u"Retried notification %s failed again: %s",
+                    u"Retried notification %s failed again: %r",
                     failed_notice_id,
                     exc,
                 )
+                self._notify_import_error(failed_notice_id, "failed retry")
                 remaining_failed.append(failed_notice_id)
 
         api.portal.set_registry_record(
@@ -115,6 +122,7 @@ class ImportFromNoticeView(BrowserView):
                     notice_id,
                     exc,
                 )
+                self._notify_import_error(notice_id, "failed import")
                 self.failed_notifications.append(notice_id)
 
     def _save_progress(self):
@@ -148,10 +156,279 @@ class ImportFromNoticeView(BrowserView):
                 u"Failed getting the list of recent notifications: %s",
                 exc,
             )
+            self._notify_import_error("webservice", "can't get notifications")
         return notifications
 
-    def _add_error(self, licence, msg, serialized_data):
-        """Add an error"""
+    def _notify_import_error(self, notice_id="", notice_type=""):
+        try:
+            args = {
+                "notice_id": notice_id,
+                "notice_type": notice_type,
+            }
+            urban_folder = api.portal.get().urban
+            event_wrapper = IContextWrapper(urban_folder)(**args)
+            notify(NoticeImportFailedEvent(event_wrapper))
+        except Exception:
+            logger.exception(
+                u"Failed to emit NoticeImportFailedEvent for notice_id=%s",
+                notice_id,
+            )
+
+    def _handle_notification(self, notice_id):
+        handler = None
+        detailed_notification = self.notice_service.get_notification(
+            notice_id,
+        )
+
+        # TWICE
+
+        if detailed_notification.notice_type == "TRANSFERT_DOSSIER":
+            handler = NewLicenceHandler
+        elif detailed_notification.notice_type in (
+                "NOTIF_COMPLETUDE1_INCOMPLET_COMMUNE",
+                "NOTIF_COMPLETUDE1_NON_RECEVABLE_COMMUNE",
+        ):
+            handler = IncompleteHandler
+        elif detailed_notification.notice_type in (
+            "NOTIF_COMPLETUDE1_IRRECEVABLE_COMMUNE",
+            "NOTIF_COMPLETUDE2_IRRECEVABLE_COMMUNE",
+            "NOTIF_COMPLETUDE2_NON_RECEVABLE_COMMUNE",
+        ):
+            handler = InadmissibleHandler
+        elif detailed_notification.notice_type in (
+            "DEMANDE_EP",
+            "DEMANDE_EP_DOSSIER_PRECEDENT",
+        ):
+            handler = PublicSurveyHandler
+        elif detailed_notification.notice_type == "DEMANDE_EP_EXTRA":
+            handler = BorderingPublicSurveyHandler
+        elif detailed_notification.notice_type == "NOTIFICATION_PROROGATION_COMMUNE":
+            handler = DeadlineExtensionHandler
+        elif detailed_notification.notice_type in (
+            "NOTIFICATION_RS_COMMUNE",
+            "NOTIFICATION_RS_COMMUNE_RETARD",
+            "NOTIFICATION_RS_COMMUNE_RETARD_SFD",
+            "NOTIFICATION_PAS_ENVOI_RS",
+            "NOTIFICATION_PAS_ENVOI_RS_SFD",
+        ):
+            handler = SummaryReportHandler
+        elif detailed_notification.notice_type in (
+            "NOTIFICATION_DECISION_COMMUNE",
+            "NOTIFICATION_DEC_RS_COMMUNE",
+            "NOTIFICATION_DECRS_REFUS_TACITE_COMMUNE",
+        ):
+            handler = DecisionSPWHandler
+
+        # GESPER
+
+        elif detailed_notification.notice_type in (
+            "DEMANDE_AVIS_OBLIGATOIRE_PLAN_INITIAL_1_ERE_INSTANCE",
+            # "DEMANDE_AVIS_OBLIGATOIRE_PLAN_INITIAL_2_EME_INSTANCE",
+            # "DEMANDE_AVIS_OBLIGATOIRE_PLAN_MODIFIE_2_EME_INSTANCE",
+            "DEMANDE_AVIS_FACULTATIF_PLAN_INITIAL_1_ERE_INSTANCE",
+            # "DEMANDE_AVIS_FACULTATIF_PLAN_INITIAL_2_EME_INSTANCE",
+            # "DEMANDE_AVIS_FACULTATIF_PLAN_MODIFIE_2_EME_INSTANCE",
+        ):
+            handler = GesperPublicSurveyHandler
+        elif detailed_notification.notice_type in (
+            "DEMANDE_ENQUETE_PUBLIQUE_PLAN_INITIAL_1_ERE_INSTANCE",
+            # "DEMANDE_ENQUETE_PUBLIQUE_PLAN_INITIAL_2_EME_INSTANCE",
+            # "DEMANDE_ENQUETE_PUBLIQUE_PLAN_MODIFIE_2_EME_INSTANCE",
+        ):
+            handler = GesperPublicSurveyHandler
+        elif detailed_notification.notice_type in (
+            "DEMANDE_ANNONCE_PROJET_PLAN_INITIAL_1_ERE_INSTANCE",
+            # "DEMANDE_ANNONCE_PROJET_PLAN_INITIAL_2_EME_INSTANCE",
+            # "DEMANDE_ANNONCE_PROJET_PLAN_MODIFIE_2_EME_INSTANCE",
+        ):
+            handler = GesperPublicSurveyHandler
+        elif detailed_notification.notice_type in (
+            "DEMANDE_AVIS_OBLIGATOIRE_PLAN_MODIFIE_1_ERE_INSTANCE",
+            "DEMANDE_AVIS_FACULTATIF_PLAN_MODIFIE_1_ERE_INSTANCE",
+            "DEMANDE_ENQUETE_PUBLIQUE_PLAN_MODIFIE_1_ERE_INSTANCE",
+            "DEMANDE_ANNONCE PROJET_PLAN_MODIFIE_1_ERE_INSTANCE",
+        ):
+            handler = GesperAmendedPlansSPWHandler
+        elif detailed_notification.notice_type in (
+            "DECISION_GESPER_1_ERE_INSTANCE",
+            # "DECISION_GESPER_2_EME_INSTANCE",
+        ):
+            handler = GesperDecisionSPWHandler
+        else:
+            raise NotImplementedError(
+                "No implementation found for notification type: %s"
+                % detailed_notification.notice_type
+            )
+
+        if handler:
+            handler(detailed_notification, self.request).process()
+
+
+class IncomingNoticeHandler(object):
+    event_config_marker = None
+    create_licence_if_missing = False
+
+    def __init__(self, notification, request):
+        self.notification = notification
+        self.request = request
+        self.licence = notification.licence
+        self.event = None
+
+    def process(self):
+        if self.licence:
+            self.update_licence()
+        elif self.create_licence_if_missing:
+            self.create_licence()
+        else:
+            raise ValueError(
+                "No licence found with reference number {} / reference FT {} / reference DGATLP".format(
+                    self.notification.reference,
+                    self.notification.referenceFT,
+                    self.notification.referenceDGATLP,
+                )
+            )
+        self.create_incoming_event()
+        self.import_documents()
+        self.do_licence_transition()
+        self.notify_successful_import()
+
+    def create_licence(self):
+        self.licence = api.content.create(
+            container=self.notification.container, **self.notification.serialize()
+        )
+        if IBaseBuildLicence.providedBy(self.licence):
+            self.licence.setUsage("not_applicable")
+        self.licence.setFoldermanagers(
+            self.notification.foldermanagers
+        )  # Must be set manually, serialized value is ignored at creation
+
+        self.import_parties()
+        self.import_parcels()
+        self.import_addresses()
+
+        self.licence._p_changed = 1
+        notify(ObjectInitializedEvent(self.licence))
+        self.licence.reindexObject()
+
+    def import_parties(self):
+        for party in self.notification.parties:
+            api.content.create(container=self.licence, **party.serialize())
+
+    def import_parcels(self):
+        for parcel in self.notification.parcels:
+            if not parcel.parcel:
+                data = {
+                    translate(_("CaPaKey"), context=self.request): parcel.capakey,
+                    translate(_("urban_label_division"), context=self.request): parcel.division,
+                    translate(_("urban_label_section"), context=self.request): parcel.section,
+                    translate(_("urban_label_radical"), context=self.request): parcel.radical,
+                    translate(_("urban_label_bis"), context=self.request): parcel.bis,
+                    translate(_("urban_label_exposant"), context=self.request): parcel.exposant,
+                    translate(_("urban_label_puissance"), context=self.request): parcel.puissance,
+                }
+                self._add_error(_("Can not find a parcel"), data)
+                continue
+            api.content.create(container=self.licence, **parcel.serialize())
+
+    def import_addresses(self):
+        for address in self.notification.addresses:
+            data = {
+                translate(_("urban_label_street"), context=self.request): address.notice_street,
+                translate(_("urban_label_locality"), context=self.request): address.locality,
+                translate(
+                    _("municipality"), context=self.request
+                ): address.municipality,
+                translate(_("urban_label_zipCode"), context=self.request): address.postCode,
+                translate(_("urban_label_number"), context=self.request): address.number,
+            }
+            if not address.address:
+                self._add_error(_("Can not find an address"), data)
+                continue
+            if len(address.address) > 1:
+                self._add_error(_("Multiple results for an address"), data)
+                continue
+            self.licence.workLocations += (address.serialize(),)
+            self.licence._p_changed = 1
+
+    def create_incoming_event(self):
+        event_config = self.notification.event_config(self.event_config_marker)
+        self.event = self.licence.createUrbanEvent(event_config)
+        self.fill_incoming_event()
+        api.content.transition(self.event, "close")
+
+    def fill_incoming_event(self):
+        usable_date = None
+        if self.notification.send_date:
+            usable_date = self.notification.send_date
+        elif self.notification.status_date:
+            usable_date = self.notification.status_date
+
+        if usable_date:
+            event_date = DateTime(str(usable_date))
+            self.event.setEventDate(event_date)
+
+        self.event.store_incoming_notice(
+            self.notification.noticeId,
+            self.notification.notice_type,
+            self.notification.reception_date,
+        )
+
+    def import_documents(self):
+        for document in self.notification.documents:
+            at_file = api.content.create(container=self.event, **document.serialize())
+            data_wrapper = StringIO(document.document)
+            data_wrapper.filename = document.filename
+            at_file.setFile(data_wrapper)
+            at_file.setContentType(document.document_mimetype)
+
+    @property
+    def desired_licence_state(self):
+        """Leave empty if the licence state is already appropriate"""
+        return ""
+
+    def do_licence_transition(self):
+        if self.desired_licence_state:
+            try:
+                api.content.transition(
+                    self.licence,
+                    to_state=self.desired_licence_state,
+                    comment=self._notification_transition_comment,
+                )
+            except InvalidParameterError:
+                logger.warning(
+                    "While handling notification %s, couldn't transition licence %s to state %s",
+                    self.notification.noticeId,
+                    self.licence.absolute_url_path(),
+                    self.desired_licence_state,
+                )
+
+    def update_licence(self):
+        self.set_reference_ft()
+        self.set_reference_dgatlp()
+
+    def set_reference_ft(self):
+        try:
+            licence_ref = self.licence.getReferenceFT()
+        except AttributeError:
+            return
+
+        notification_ref = self.notification.referenceFT
+        if notification_ref and licence_ref != notification_ref:
+            self.licence.setReferenceFT(notification_ref)
+            self.licence.reindexObject(idxs=["referenceFT"])
+
+    def set_reference_dgatlp(self):
+        try:
+            licence_ref = self.licence.getReferenceDGATLP()
+        except AttributeError:
+            return
+
+        notification_ref = self.notification.referenceDGATLP
+        if notification_ref and licence_ref != notification_ref:
+            self.licence.setReferenceDGATLP(notification_ref)
+            self.licence.reindexObject(idxs=["referenceDGATLP"])
+
+    def _add_error(self, msg, serialized_data):
         error = _(
             u"<p>${msg} for informations: ${data}</p>",
             mapping={
@@ -161,263 +438,216 @@ class ImportFromNoticeView(BrowserView):
                 ),
             },
         )
-        licence.description.raw += translate(error, context=self.request)
-        licence._p_changed = 1
+        description_field = self.licence.getField("description")
+        old_description = description_field.getRaw(self.licence)
+        new_description = old_description + translate(error, context=self.request).encode("utf8")
+        description_field.set(self.licence, new_description)
+        self.licence._p_changed = 1
 
-    def _store_referenceFT(self, detailed_notification, licence):
+    @property
+    def _notification_transition_comment(self):
+        msg = _(
+            u"NOTICe notification n° ${noticeId}",
+            mapping={
+                "noticeId": self.notification.noticeId,
+            },
+        )
+        return translate(msg, context=self.request)
+
+    def notify_successful_import(self):
+        notice_id = ""
         try:
-            licence_ref = licence.getReferenceFT()
-        except AttributeError:
-            return
-
-        notification_ref = detailed_notification.referenceFT
-        if notification_ref and licence_ref != notification_ref:
-            licence.setReferenceFT(notification_ref)
-            licence.reindexObject(idxs=["referenceFT"])
-
-    def _demande_ep(self, detailed_notification):
-        licence = detailed_notification.licence
-        if not licence:
-            return  # TODO: possible case ?
-
-        event_config_complete = detailed_notification.event_config(
-            "Products.urban.interfaces.IAcknowledgmentEvent"
-        )
-        event = licence.createUrbanEvent(event_config_complete)
-        event_date = DateTime(str(detailed_notification.send_date))
-        event.setEventDate(event_date)
-        event.store_reception_date(detailed_notification.reception_date)
-        api.content.transition(event, "close")
-
-        api.content.transition(licence, "iscomplete")
-
-        for document in detailed_notification.documents:
-            api.content.create(container=event, **document.serialize())
-
-        licence.set_notice_id("DEMANDE_EP", detailed_notification.noticeId)
-
-        self._store_referenceFT(detailed_notification, licence)
-
-        transaction.commit()
-
-    def _rapport_synthese(self, detailed_notification):
-        licence = detailed_notification.licence
-        if not licence:
-            return
-
-
-        event_config = detailed_notification.event_config(
-            "Products.urban.interfaces.IDecisionProjectFromSPWEvent"
-        )
-        event = licence.createUrbanEvent(event_config)
-        event_date = DateTime(str(detailed_notification.send_date))
-        event.setEventDate(event_date)
-        event.store_reception_date(detailed_notification.reception_date)
-        api.content.transition(event, "close")
-
-        for document in detailed_notification.documents:
-            api.content.create(container=event, **document.serialize())
-
-        licence.set_notice_id("NOTIFICATION_RS", detailed_notification.noticeId)
-
-        self._store_referenceFT(detailed_notification, licence)
-
-        transaction.commit()
-
-    def _decision_spw(self, detailed_notification):
-        licence = detailed_notification.licence
-        if not licence:
-            return
-
-        event_config = detailed_notification.event_config(
-            "Products.urban.interfaces.IWalloonRegionDecisionEvent"
-        )
-        event = licence.createUrbanEvent(event_config)
-        event_date = DateTime(str(detailed_notification.send_date))
-        event.setEventDate(event_date)
-        event.store_reception_date(detailed_notification.reception_date)
-
-        # set decision (octroi / refus)
-        mapping_decision_terms = {"OCTROI": "favorable", "REFUS": "defavorable"}
-        urban_decision_term = mapping_decision_terms.get(
-            detailed_notification.decision_code
-        )
-        if urban_decision_term:
-            event.setDecision(urban_decision_term)
-        else:
-            event.setDescription(
-                u"Décision: {}".format(detailed_notification.decision_code)
-            )
-
-        api.content.transition(event, "close")
-
-        for document in detailed_notification.documents:
-            api.content.create(container=event, **document.serialize())
-
-        licence.set_notice_id("NOTIFICATION_DECISION", detailed_notification.noticeId)
-
-        self._store_referenceFT(detailed_notification, licence)
-
-        transaction.commit()
-
-    def _handle_notification(self, notice_id):
-        detailed_notification = self.notice_service.get_notification(
-            notice_id,
-        )
-
-        if detailed_notification.notice_type == "TRANSFERT_DOSSIER":
-            self._transfert_dossier(detailed_notification)
-        elif detailed_notification.notice_type in (
-                "NOTIF_COMPLETUDE1_INCOMPLET_COMMUNE",
-                "NOTIF_COMPLETUDE1_NON_RECEVABLE_COMMUNE",
-        ):
-            self.process_incomplete_folder_notification(detailed_notification)
-        elif detailed_notification.notice_type in (
-            "NOTIF_COMPLETUDE1_IRRECEVABLE_COMMUNE",
-            "NOTIF_COMPLETUDE2_IRRECEVABLE_COMMUNE",
-            "NOTIF_COMPLETUDE2_NON_RECEVABLE_COMMUNE",
-        ):
-            self.process_inadmissible_folder_notification(detailed_notification)
-        elif detailed_notification.notice_type in (
-            "DEMANDE_EP",
-            "DEMANDE_EP_DOSSIER_PRECEDENT",
-            "DEMANDE_EP_EXTRA",
-        ):
-            self._demande_ep(detailed_notification)
-        elif detailed_notification.notice_type == "NOTIFICATION_PROROGATION_COMMUNE":
-            self.process_extension_of_deadline_notification(detailed_notification)
-        elif detailed_notification.notice_type in (
-                "NOTIFICATION_RS_COMMUNE",
-                "NOTIFICATION_RS_COMMUNE_RETARD",
-                "NOTIFICATION_RS_COMMUNE_RETARD_SFD",
-                "NOTIFICATION_PAS_ENVOI_RS",
-                "NOTIFICATION_PAS_ENVOI_RS_SFD",
-        ):
-            self._rapport_synthese(detailed_notification)
-        elif detailed_notification.notice_type == "NOTIFICATION_DECISION_COMMUNE":
-            self._decision_spw(detailed_notification)
-        else:
-            raise NotImplementedError(
-                "No implementation found for notification type: %s"
-                % detailed_notification.notice_type
-            )
-
-    def _transfert_dossier(self, detailed_notification):
-        container = detailed_notification.container
-        licence = api.content.create(
-            container=container, **detailed_notification.serialize()
-        )
-        licence.set_notice_id("TRANSFERT_DOSSIER", detailed_notification.noticeId)
-        licence.setFoldermanagers(
-            detailed_notification.foldermanagers
-        )  # Must be set manually, serialized value is ignored at creation
-        licence._p_changed = 1
-        for party in detailed_notification.parties:
-            api.content.create(container=licence, **party.serialize())
-        for parcel in detailed_notification.parcels:
-            if not parcel.parcel:
-                self._add_error(licence, _("Can not find a parcel"), parcel.serialize())
-                continue
-            api.content.create(container=licence, **parcel.serialize())
-        for address in detailed_notification.addresses:
-            data = {
-                translate(_("street"), context=self.request): address.notice_street,
-                translate(_("locality"), context=self.request): address.locality,
-                translate(
-                    _("municipality"), context=self.request
-                ): address.municipality,
-                translate(_("zipcode"), context=self.request): address.postCode,
+            notice_id = self.notification.noticeId
+            notice_type = self.notification.notice_type
+            args = {
+                "notice_id": notice_id,
+                "notice_type": notice_type,
             }
-            if not address.address:
-                self._add_error(licence, _("Can not find an address"), data)
-                continue
-            if len(address.address) > 1:
-                self._add_error(licence, _("Multiple results for an address"), data)
-                continue
-            licence.workLocations += (address.serialize(),)
-            licence._p_changed = 1
-        for document in detailed_notification.documents:
-            api.content.create(container=licence, **document.serialize())
-        # Set title and update reference number
-        notify(ObjectInitializedEvent(licence))
-        # Change workflow and add deposit event
-        event_config_deposit = detailed_notification.event_config(
-            "Products.urban.interfaces.IDepositEvent"
+            event_wrapper = IContextWrapper(self.event)(**args)
+            notify(NoticeImportSucceededEvent(event_wrapper))
+        except Exception:
+            logger.exception(
+                u"Failed to emit NoticeImportSucceededEvent for notice_id=%s",
+                notice_id,
+            )
+
+
+class NewLicenceHandler(IncomingNoticeHandler):
+    event_config_marker = "Products.urban.interfaces.IDepositEvent"
+    create_licence_if_missing = True
+
+
+class InadmissibleHandler(IncomingNoticeHandler):
+    event_config_marker = "Products.urban.interfaces.IRefusedIncompletenessEvent"
+
+    @property
+    def desired_licence_state(self):
+        return "inacceptable"
+
+
+class IncompleteHandler(IncomingNoticeHandler):
+    event_config_marker = "Products.urban.interfaces.IMissingPartEvent"
+    licence_transition = "isincomplete"
+
+    @property
+    def desired_licence_state(self):
+        return "incomplete"
+
+
+class PublicSurveyHandler(IncomingNoticeHandler):
+    event_config_marker = "Products.urban.interfaces.IAcknowledgmentEvent"
+
+    @property
+    def desired_licence_state(self):
+        return "complete"
+
+
+class BorderingPublicSurveyHandler(IncomingNoticeHandler):
+    event_config_marker = "Products.urban.interfaces.IAcknowledgmentEvent"
+    create_licence_if_missing = True
+
+    def import_parties(self):
+        super(BorderingPublicSurveyHandler, self).import_parties()
+
+        business_name = self.notification.business_reference_denomination
+        if business_name:
+            api.content.create(
+                container=self.licence,
+                type="Corporation",
+                title=business_name,
+                denomination=business_name,
+            )
+
+    def import_addresses(self):
+        addresses = self.notification.addresses
+        if addresses:
+            first_address = addresses[0]
+            self.licence.setZipcode(first_address.postCode)
+            self.licence.setCity(first_address.municipality)
+            self.licence.setWorkLocations(
+                [
+                    {"number": address.number, "street": address.notice_street}
+                    for address in addresses
+                ]
+            )
+            self.licence._p_changed = 1
+
+    def import_parcels(self):
+        self.licence.setManualParcels(
+            [
+                {"ref": "", "capakey": parcel.capakey}
+                for parcel in self.notification.parcels
+            ]
         )
-        event = licence.createUrbanEvent(event_config_deposit)
-        event_date = DateTime(str(detailed_notification.send_date))
-        event.setEventDate(event_date)
-        event.store_reception_date(detailed_notification.reception_date)
-        api.content.transition(event, "close")
-        # Reindex licence
-        licence.reindexObject()
 
-        transaction.commit()  # Useful in case of an error
+    @property
+    def desired_licence_state(self):
+        return "complete"
 
-    def process_incomplete_folder_notification(self, detailed_notification):
-        licence = detailed_notification.licence
 
-        event_config_incomplete = detailed_notification.event_config(
-            "Products.urban.interfaces.IMissingPartEvent"
-        )
-        event = licence.createUrbanEvent(event_config_incomplete)
-        event_date = DateTime(str(detailed_notification.send_date))
-        event.setEventDate(event_date)
-        event.store_reception_date(detailed_notification.reception_date)
-        api.content.transition(event, "close")
+class DeadlineExtensionHandler(IncomingNoticeHandler):
+    event_config_marker = "Products.urban.interfaces.IProrogationEvent"
 
-        if api.content.get_state(licence) == "deposit":
-            api.content.transition(licence, "isincomplete")
-
-        for document in detailed_notification.documents:
-            api.content.create(container=event, **document.serialize())
-
-        self._store_referenceFT(detailed_notification, licence)
-
-        transaction.commit()
-
-    def process_inadmissible_folder_notification(self, detailed_notification):
-        licence = detailed_notification.licence
-
-        event_config_refused_incompleteness = detailed_notification.event_config(
-            "Products.urban.interfaces.IRefusedIncompletenessEvent"
-        )
-        event = licence.createUrbanEvent(event_config_refused_incompleteness)
-        event_date = DateTime(str(detailed_notification.send_date))
-        event.setEventDate(event_date)
-        event.store_reception_date(detailed_notification.reception_date)
-        api.content.transition(event, "close")
-
-        api.content.transition(licence, "isinacceptable")
-
-        for document in detailed_notification.documents:
-            api.content.create(container=event, **document.serialize())
-
-        self._store_referenceFT(detailed_notification, licence)
-
-        transaction.commit()
-
-    def process_extension_of_deadline_notification(self, detailed_notification):
-        licence = detailed_notification.licence
+    def update_licence(self):
+        super(DeadlineExtensionHandler, self).update_licence()
 
         # set prorogation field (if it's activated)
-        if licence.attributeIsUsed("prorogation"):
-            licence.getField("prorogation").set(licence, True)
-            notify(ObjectModifiedEvent(licence))
-            licence.reindexObject()
+        if self.licence.attributeIsUsed("prorogation"):
+            self.licence.getField("prorogation").set(self.licence, True)
+            notify(ObjectModifiedEvent(self.licence))
+            self.licence.reindexObject()
 
-        event_config_prorogation = detailed_notification.event_config(
-            "Products.urban.interfaces.IProrogationEvent"
-        )
-        event = licence.createUrbanEvent(event_config_prorogation)
-        event_date = DateTime(str(detailed_notification.send_date))
-        event.setEventDate(event_date)
-        event.store_reception_date(detailed_notification.reception_date)
-        api.content.transition(event, "close")
 
-        for document in detailed_notification.documents:
-            api.content.create(container=event, **document.serialize())
+class SummaryReportHandler(IncomingNoticeHandler):
+    event_config_marker = "Products.urban.interfaces.IDecisionProjectFromSPWEvent"
 
-        self._store_referenceFT(detailed_notification, licence)
 
-        transaction.commit()
+class DecisionSPWHandler(IncomingNoticeHandler):
+    event_config_marker = "Products.urban.interfaces.IWalloonRegionDecisionEvent"
+
+    def fill_incoming_event(self):
+        super(DecisionSPWHandler, self).fill_incoming_event()
+
+        if self.notification.decision_code:
+            # set decision (octroi / refus)
+            mapping_decision_terms = {
+                "OCTROI": "favorable",
+                "REFUS": "defavorable",
+            }
+            urban_decision_term = mapping_decision_terms.get(
+                self.notification.decision_code
+            )
+            if urban_decision_term:
+                self.event.setDecision(urban_decision_term)
+            else:
+                self.event.setDescription(
+                    u"Décision: {}".format(self.notification.decision_code)
+                )
+
+    @property
+    def desired_licence_state(self):
+        decision_code = self.notification.decision_code
+        if decision_code:
+            mapping_decision_states = {
+                "OCTROI": "accepted",
+                "REFUS": "refused",
+            }
+            return mapping_decision_states.get(decision_code, "")
+        else:
+            return ""
+
+
+class GesperPublicSurveyHandler(IncomingNoticeHandler):
+    event_config_marker = "Products.urban.interfaces.IAcknowledgmentEvent"
+    create_licence_if_missing = True
+
+    @property
+    def desired_licence_state(self):
+        return "complete"
+
+
+class GesperDecisionSPWHandler(IncomingNoticeHandler):
+    event_config_marker = "Products.urban.interfaces.IWalloonRegionDecisionEvent"
+    create_licence_if_missing = True
+
+    def fill_incoming_event(self):
+        super(GesperDecisionSPWHandler, self).fill_incoming_event()
+
+        decision_code = self.notification.decision_code
+        if decision_code:
+            mapping_decision_terms = {
+                "UFD2_DEMAT_DECISION_FD": "favorable",
+                "UFD2_DECISION_FD_OCTROI": "favorable",
+                "UFD2_DECISION_FD_REFUSEE": "defavorable",
+            }
+            urban_decision_term = mapping_decision_terms.get(
+                decision_code
+            )
+            if urban_decision_term:
+                self.event.setDecision(urban_decision_term)
+            else:
+                self.event.setDescription(
+                    u"Décision: {}".format(decision_code)
+                )
+
+    @property
+    def desired_licence_state(self):
+        decision_code = self.notification.decision_code
+        if decision_code:
+            mapping_decision_states = {
+                "UFD2_DEMAT_DECISION_FD": "accepted",
+                "UFD2_DECISION_FD_OCTROI": "accepted",
+                "UFD2_DECISION_FD_REFUSEE": "refused",
+            }
+            return mapping_decision_states.get(decision_code, "")
+        else:
+            return ""
+
+
+class GesperAmendedPlansSPWHandler(IncomingNoticeHandler):
+    event_config_marker = "Products.urban.interfaces.IAmendedPlansAcknowledgmentEvent"
+    create_licence_if_missing = True
+
+    @property
+    def desired_licence_state(self):
+        return "complete"

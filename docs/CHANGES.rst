@@ -8,6 +8,29 @@ Changelog
 
 .. towncrier release notes start
 
+2.9.20 (2026-05-12)
+-------------------
+
+Bug fixes:
+
+
+- Avoid content lookup with a unicode path
+  [ndemonte] (URB-3470)
+
+
+2.9.19 (2026-05-12)
+-------------------
+
+New features:
+
+
+- Add new content type `CODT_UniqueBorderingLicence`
+  Handle `DEMANDE_EP_EXTRA` notification
+  [daggelpop] (URB-3470)
+- Add content rule events for successful and broken NOTICe handling
+  [daggelpop] (URB-3480)
+
+
 2.9.18 (2026-04-19)
 -------------------
 

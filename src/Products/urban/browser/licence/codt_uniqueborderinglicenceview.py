@@ -1,0 +1,22 @@
+# -*- coding: utf-8 -*-
+
+from Acquisition import aq_inner
+from Products.CMFCore.utils import getToolByName
+from Products.CMFPlone import PloneMessageFactory as _
+from Products.urban.browser.licence.codt_uniquelicenceview import CODTUniqueLicenceView
+
+
+class CODTUniqueBorderingLicenceView(CODTUniqueLicenceView):
+    def __init__(self, context, request):
+        super(CODTUniqueBorderingLicenceView, self).__init__(context, request)
+        self.context = context
+        self.request = request
+        # disable portlets on licences
+        self.request.set("disable_plone.rightcolumn", 1)
+        self.request.set("disable_plone.leftcolumn", 1)
+        plone_utils = getToolByName(context, "plone_utils")
+        if not self.context.getApplicants():
+            plone_utils.addPortalMessage(_("warning_add_an_applicant"), type="warning")
+
+    def getMacroViewName(self):
+        return "codt_uniqueborderinglicence-macros"

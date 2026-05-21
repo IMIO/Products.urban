@@ -5,6 +5,39 @@
     xmlns:i18n="http://namespaces.zope.org/i18n"
     i18n_domain="urban">
 
+    <!-- NOTICe -->
+
+    <interface
+      interface="Products.urban.contentrules.notice.INoticeImportSucceededEvent"
+      type="plone.contentrules.rule.interfaces.IRuleEventType"
+      name="A NOTICe notification import succeeded"
+      />
+
+    <interface
+      interface="Products.urban.contentrules.notice.INoticeImportFailedEvent"
+      type="plone.contentrules.rule.interfaces.IRuleEventType"
+      name="A NOTICe notification import failed"
+      />
+
+    <subscriber
+      for="Products.urban.contentrules.notice.INoticeImportEvent"
+      handler="Products.urban.contentrules.notice.notice_import"
+      />
+
+    <adapter
+      for="*"
+      provides="plone.stringinterp.interfaces.IStringSubstitution"
+      factory="Products.urban.contentrules.notice.NoticeIdSubstitution"
+      name="notice_id"
+      />
+
+    <adapter
+      for="*"
+      provides="plone.stringinterp.interfaces.IStringSubstitution"
+      factory="Products.urban.contentrules.notice.NoticeTypeSubstitution"
+      name="notice_type"
+      />
+
     <!-- Email action definition -->
 
      <adapter factory=".mail_with_attachment.MailWithAttachmentActionExecutor" />

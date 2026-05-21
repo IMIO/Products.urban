@@ -56,6 +56,9 @@ msgstr ""
 msgid "CODT_UniqueLicence"
 msgstr ""
 
+msgid "CODT_UniqueBorderingLicence"
+msgstr ""
+
 msgid "CODT_UrbanCertificateOne"
 msgstr ""
 
@@ -216,6 +219,9 @@ msgid "codt_parceloutlicence_urbanconfig_title"
 msgstr ""
 
 msgid "codt_uniquelicence_urbanconfig_title"
+msgstr ""
+
+msgid "codt_uniqueborderinglicence_urbanconfig_title"
 msgstr ""
 
 msgid "codt_urbancertificateone_urbanconfig_title"
@@ -1543,8 +1549,137 @@ msgstr ""
 msgid "transfer_decision_display"
 msgstr ""
 
+msgid "transfer_dates_gesper_ep"
+msgstr ""
+
+msgid "transfer_ticket_gesper_ep"
+msgstr ""
+
+msgid "transfer_ticket_final_gesper_ep"
+msgstr ""
+
+msgid "transfer_opinion_gesper_ep"
+msgstr ""
+
+msgid "transfer_dates_gesper_ap"
+msgstr ""
+
+msgid "transfer_ticket_gesper_ap"
+msgstr ""
+
+msgid "transfer_ticket_final_gesper_ap"
+msgstr ""
+
+msgid "transfer_opinion_gesper_ap"
+msgstr ""
+
+msgid "transfer_opinion_gesper_opinion_request"
+msgstr ""
+
 msgid "college_opinion"
 msgstr ""
 
 msgid "college_decision"
+msgstr ""
+
+msgid "TRANSFERT_DOSSIER"
+msgstr ""
+
+msgid "NOTIF_COMPLETUDE1_INCOMPLET_COMMUNE"
+msgstr ""
+
+msgid "NOTIF_COMPLETUDE1_NON_RECEVABLE_COMMUNE"
+msgstr ""
+
+msgid "NOTIF_COMPLETUDE1_IRRECEVABLE_COMMUNE"
+msgstr ""
+
+msgid "NOTIF_COMPLETUDE2_IRRECEVABLE_COMMUNE"
+msgstr ""
+
+msgid "NOTIF_COMPLETUDE2_NON_RECEVABLE_COMMUNE"
+msgstr ""
+
+msgid "DEMANDE_EP"
+msgstr ""
+
+msgid "DEMANDE_EP_DOSSIER_PRECEDENT"
+msgstr ""
+
+msgid "DEMANDE_EP_EXTRA"
+msgstr ""
+
+msgid "NOTIFICATION_PROROGATION_COMMUNE"
+msgstr ""
+
+msgid "NOTIFICATION_RS_COMMUNE"
+msgstr ""
+
+msgid "NOTIFICATION_RS_COMMUNE_RETARD"
+msgstr ""
+
+msgid "NOTIFICATION_RS_COMMUNE_RETARD_SFD"
+msgstr ""
+
+msgid "NOTIFICATION_PAS_ENVOI_RS"
+msgstr ""
+
+msgid "NOTIFICATION_PAS_ENVOI_RS_SFD"
+msgstr ""
+
+msgid "NOTIFICATION_DECISION_COMMUNE"
+msgstr ""
+
+msgid "DEMANDE_AVIS_OBLIGATOIRE_PLAN_INITIAL_1_ERE_INSTANCE"
+msgstr ""
+
+msgid "DEMANDE_AVIS_OBLIGATOIRE_PLAN_MODIFIE_1_ERE_INSTANCE"
+msgstr ""
+
+msgid "DEMANDE_AVIS_OBLIGATOIRE_PLAN_INITIAL_2_EME_INSTANCE"
+msgstr ""
+
+msgid "DEMANDE_AVIS_OBLIGATOIRE_PLAN_MODIFIE_2_EME_INSTANCE"
+msgstr ""
+
+msgid "DEMANDE_AVIS_FACULTATIF_PLAN_INITIAL_1_ERE_INSTANCE"
+msgstr ""
+
+msgid "DEMANDE_AVIS_FACULTATIF_PLAN_MODIFIE_1_ERE_INSTANCE"
+msgstr ""
+
+msgid "DEMANDE_AVIS_FACULTATIF_PLAN_INITIAL_2_EME_INSTANCE"
+msgstr ""
+
+msgid "DEMANDE_AVIS_FACULTATIF_PLAN_MODIFIE_2_EME_INSTANCE"
+msgstr ""
+
+msgid "DEMANDE_ENQUETE_PUBLIQUE_PLAN_INITIAL_1_ERE_INSTANCE"
+msgstr ""
+
+msgid "DEMANDE_ENQUETE_PUBLIQUE_PLAN_MODIFIE_1_ERE_INSTANCE"
+msgstr ""
+
+msgid "DEMANDE_ENQUETE_PUBLIQUE_PLAN_INITIAL_2_EME_INSTANCE"
+msgstr ""
+
+msgid "DEMANDE_ENQUETE_PUBLIQUE_PLAN_MODIFIE_2_EME_INSTANCE"
+msgstr ""
+
+msgid "DEMANDE_ANNONCE_PROJET_PLAN_INITIAL_1_ERE_INSTANCE"
+msgstr ""
+
+msgid "DEMANDE_ANNONCE PROJET_PLAN_MODIFIE_1_ERE_INSTANCE"
+msgstr ""
+
+msgid "DEMANDE_ANNONCE_PROJET_PLAN_INITIAL_2_EME_INSTANCE"
+msgstr ""
+
+msgid "DEMANDE_ANNONCE_PROJET_PLAN_MODIFIE_2_EME_INSTANCE"
+msgstr ""
+
+msgid "DECISION_GESPER_1_ERE_INSTANCE"
+msgstr ""
+
+msgid "DECISION_GESPER_2_EME_INSTANCE"
 msgstr ""

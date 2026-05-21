@@ -37,7 +37,11 @@ class Notice(object):
 
         if IUrbanEvent.providedBy(self.context):
             annotations = IAnnotations(self.context)
-            for key in ("notice_transmit_dates", "notice_reception_date"):
+            for key in (
+                "notice_notification",
+                "notice_transmit_dates",
+                "notice_reception_date",
+            ):
                 data[key] = annotations.get(key, None)
 
         return json_compatible({"notice": data})

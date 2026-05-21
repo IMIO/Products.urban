@@ -3,6 +3,7 @@ from Products.CMFCore.utils import getToolByName
 from Products.urban import URBAN_TYPES
 from Products.urban import UrbanMessage as _
 from Products.urban.migration.utils import cook_javascript_resources
+from Products.urban.setuphandlers import add_new_urban_licence_type
 from Products.urban.utils import moveElementAfter
 from Products.urban.setuphandlers import set_licence_folder_security
 from dm.historical import getHistory
@@ -370,3 +371,38 @@ def update_custom_titles(context):
     for brain in brains:
         obj = brain.getObject()
         obj.updateTitle()
+def setup_index_referenceDGATLP(context):
+    logger = logging.getLogger("urban: Set up `referenceDGATLP` index")
+
+    setup_tool = api.portal.get_tool("portal_setup")
+    setup_tool.runImportStepFromProfile("profile-Products.urban:urbantypes", "catalog")
+
+    reindexIndexes(None, ["referenceDGATLP"])
+
+    logger.info("upgrade step done!")
+
+
+def add_codt_uniquebordering_licences(context):
+    """
+    Note: the events must be added by upgrade step in `urban.events`
+    """
+
+    logger = logging.getLogger("urban: Add CODT unique bordering licences")
+
+    portal_setup = api.portal.get_tool("portal_setup")
+    portal_setup.runImportStepFromProfile(
+        "profile-Products.urban:preinstall", "workflow"
+    )
+    portal_setup.runImportStepFromProfile(
+        "profile-Products.urban:preinstall", "update-workflow-rolemap"
+    )
+    portal_setup.runImportStepFromProfile(
+        "profile-Products.urban:urbantypes", "typeinfo"
+    )
+    portal_setup.runImportStepFromProfile(
+        "profile-Products.urban:urbantypes", "factorytool"
+    )
+
+    add_new_urban_licence_type("CODT_UniqueBorderingLicence")
+
+    logger.info("Upgrade done!")

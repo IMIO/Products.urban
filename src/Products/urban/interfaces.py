@@ -315,6 +315,10 @@ class ICODT_IntegratedLicence(ICODT_BaseBuildLicence):
     """Marker interface for  CODT_ IntegratedLicence"""
 
 
+class ICODT_UniqueBorderingLicence(ICODT_UniqueLicence):
+    """Marker interface for CODT_UniqueLicenceBordering"""
+
+
 class ILicenceContainer(Interface):
     """
     Marker interface for a folder containing Licences
@@ -403,6 +407,10 @@ class IAcknowledgmentEvent(Interface):
 
 class IDefaultCODTAcknowledgmentEvent(IAcknowledgmentEvent):
     __doc__ = _("""IDefaultCODTAcknowledgmentEvent type marker interface""")
+
+
+class IAmendedPlansAcknowledgmentEvent(IAcknowledgmentEvent):
+    __doc__ = _("""IAmendedPlansAcknowledgmentEvent type marker interface""")
 
 
 class ICommunalCouncilEvent(Interface):

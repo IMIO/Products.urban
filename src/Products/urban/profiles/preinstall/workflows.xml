@@ -41,6 +41,9 @@
       <type type_id="CODT_UniqueLicence">
          <bound-workflow workflow_id="codt_buildlicence_workflow" />
       </type>
+      <type type_id="CODT_UniqueBorderingLicence">
+         <bound-workflow workflow_id="codt_buildlicence_workflow" />
+      </type>
       <type type_id="CODT_UrbanCertificateBase">
          <bound-workflow workflow_id="urban_licence_workflow" />
       </type>
