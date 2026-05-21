@@ -132,4 +132,12 @@
         handler=".update_290.add_digital_term_to_deposit_type"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Normalize external decisions vocabulary"
+        description=""
+        source="2916"
+        destination="2917"
+        handler=".update_290.normalize_externaldecisions_vocabulary"
+        profile="Products.urban:default" />
+
 </configure>
