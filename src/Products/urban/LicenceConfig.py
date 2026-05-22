@@ -240,6 +240,15 @@ schema = Schema(
             multiValued=True,
             vocabulary_factory="urban.licence_state",
         ),
+        StringField(
+            name="customTitle",
+            widget=StringField._properties["widget"](
+                size=100,
+                label=_("urban_label_customTitle", default="Custom title"),
+            ),
+            schemata="public_settings",
+),
+        
     ),
 )
 

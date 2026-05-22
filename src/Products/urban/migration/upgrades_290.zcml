@@ -108,4 +108,12 @@
         handler=".update_290.setup_index_referenceDGATLP"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Update titles for Housing, Division and Urbanncertificate"
+        description=""
+        source="2913"
+        destination="2914"
+        handler=".update_290.update_custom_titles"
+        profile="Products.urban:default" />
+
 </configure>

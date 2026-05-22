@@ -351,6 +351,8 @@ class Division(BaseFolder, GenericLicence, BrowserDefaultMixin):
         """
         Update the title to set a clearly identify the buildlicence
         """
+        if self._apply_custom_title():
+            return
         notaries = ""
         proprietaries = ""
         if self.getProprietaries:

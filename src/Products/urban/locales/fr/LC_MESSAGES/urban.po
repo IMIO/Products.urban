@@ -5910,3 +5910,6 @@ msgstr "Partie de l'immeuble concernée"
 
 msgid "urban_label_buildingType"
 msgstr "Nature de l'immeuble"
+
+msgid "urban_label_customTitle"
+msgstr "Libellé personnalisé"

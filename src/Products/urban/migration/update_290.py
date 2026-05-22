@@ -365,6 +365,12 @@ def update_folder_manager_notice(context):
     logger.info("manageableLicences updated for notice FolderManager")
 
 
+def update_custom_titles(context):
+    catalog = api.portal.get_tool("portal_catalog")
+    brains = catalog(portal_type=["Housing", "Division","CODT_UrbanCertificateBase"])
+    for brain in brains:
+        obj = brain.getObject()
+        obj.updateTitle()
 def setup_index_referenceDGATLP(context):
     logger = logging.getLogger("urban: Set up `referenceDGATLP` index")
 
