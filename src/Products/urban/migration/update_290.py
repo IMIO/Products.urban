@@ -367,7 +367,7 @@ def update_folder_manager_notice(context):
 
 def update_custom_titles(context):
     catalog = api.portal.get_tool("portal_catalog")
-    brains = catalog(portal_type=["Housing", "Division"])
+    brains = catalog(portal_type=["Housing", "Division","CODT_UrbanCertificateBase"])
     for brain in brains:
         obj = brain.getObject()
         obj.updateTitle()

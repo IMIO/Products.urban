@@ -109,7 +109,7 @@
         profile="Products.urban:default" />
 
     <gs:upgradeStep
-        title="Update titles for Housing and Division"
+        title="Update titles for Housing, Division and Urbanncertificate"
         description=""
         source="2913"
         destination="2914"
