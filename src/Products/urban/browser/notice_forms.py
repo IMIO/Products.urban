@@ -16,6 +16,8 @@ from zope.schema.vocabulary import SimpleVocabulary
 
 from Products.statusmessages.interfaces import IStatusMessage
 from Products.urban import UrbanMessage as _
+from Products.urban.notice.exceptions import NoMatchingEventFoundException
+from Products.urban.notice.exceptions import NoPreviousEventFoundException
 from Products.urban.notice.response import clean_accents
 from Products.urban.utils import get_ws_meetingitem_infos
 from plone import api
@@ -415,7 +417,7 @@ class TransferOpinionActionForm(NoticeResponseActionForm):
                 if matching_notice_id and matching_action_code:
                     return event
 
-        raise ValueError("No matching Inquiry event could be found on this licence.")
+        raise NoMatchingEventFoundException("Inquiry")
 
     def _get_college_opinion_text(self, data):
         college_opinion = data.get("college_opinion", "")
@@ -545,8 +547,8 @@ class TransferDecisionDisplayActionForm(NoticeResponseActionForm):
         ):
             decision_event, college_decision = self._get_decision_data(incoming_id)
             if not decision_event:
-                raise ValueError(
-                    "No previous transfer of decision has been found for this summary report"
+                raise NoPreviousEventFoundException(
+                    "transfer of decision", "this summary report"
                 )
             result = self.context.transfer_decision_display(
                 incoming_id,
@@ -706,7 +708,7 @@ class TransferOpinionGesperEPActionForm(NoticeResponseActionForm):
                 if matching_notice_id and matching_action_code:
                     return event
 
-        raise ValueError("No matching Inquiry event could be found on this licence.")
+        raise NoMatchingEventFoundException("Inquiry")
 
     def _get_college_opinion_text(self, data):
         college_opinion = data.get("college_opinion", "")
@@ -865,7 +867,7 @@ class TransferOpinionGesperAPActionForm(NoticeResponseActionForm):
                 if matching_notice_id and matching_action_code:
                     return event
 
-        raise ValueError("No matching Announcement event could be found on this licence.")
+        raise NoMatchingEventFoundException("Announcement")
 
     def _get_college_opinion_text(self, data):
         college_opinion = data.get("college_opinion", "")

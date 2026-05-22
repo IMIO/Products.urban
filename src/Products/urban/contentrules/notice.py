@@ -54,3 +54,13 @@ class NoticeTypeSubstitution(BaseSubstitution):
 
     def safe_call(self):
         return getattr(self.wrapper, "notice_type", "")
+
+
+@adapter(IContentish)
+class NoticeErrorSubstitution(BaseSubstitution):
+
+    category = _(u"NOTICe")
+    description = _(u"NOTICe Error")
+
+    def safe_call(self):
+        return getattr(self.wrapper, "notice_error", "")
