@@ -38,6 +38,13 @@
       name="notice_type"
       />
 
+    <adapter
+      for="*"
+      provides="plone.stringinterp.interfaces.IStringSubstitution"
+      factory="Products.urban.contentrules.notice.NoticeErrorSubstitution"
+      name="notice_error"
+      />
+
     <!-- Email action definition -->
 
      <adapter factory=".mail_with_attachment.MailWithAttachmentActionExecutor" />

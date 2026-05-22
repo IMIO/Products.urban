@@ -60,9 +60,9 @@ msgstr "2ème classe : Collège communal"
 msgid "75 days"
 msgstr "75 jours"
 
-#: ../contentrules/event_type.py:70
-msgid "A Event type condition makes the rule apply only if Event type correspond to the one from the context."
-msgstr "Une condition de type d'événement rend la règle applicable uniquement si le type d'événement correspond à celui du contexte."
+#: ../browser/cron/notice.py:505
+msgid "<p>${msg} for informations: ${data}</p>"
+msgstr "<p>${msg} avec ces données: ${data}</p>"
 
 
 #: ../contentrules/opinions.py:77
@@ -870,6 +870,10 @@ msgstr "Identifiant de la commune dans NOTICe"
 #: ../contentrules/notice.py:42
 msgid "NOTICe"
 msgstr "NOTICe"
+
+#: ../contentrules/notice.py:63
+msgid "NOTICe Error"
+msgstr "Erreur NOTICe"
 
 #: ../contentrules/notice.py:43
 #: ../viewlets/templates/notice_transmit_state.pt:9

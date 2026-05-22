@@ -3,6 +3,7 @@ from Products.urban.interfaces import IGenericLicence
 from Products.urban.notice.address import NoticeAddress
 from Products.urban.notice.base import NoticeElement
 from Products.urban.notice.document import NoticeDocument
+from Products.urban.notice.exceptions import NoEnabledEventConfigFoundException
 from Products.urban.notice.parcel import NoticeParcel
 from Products.urban.notice.party import NoticeParty
 from Products.urban.notice.sender import NoticeSender
@@ -292,11 +293,10 @@ class NoticeNotification(NoticeElement):
             config_event_types = config.eventType or []
             if interface_identifier in config_event_types:
                 return config
-        raise ValueError(
-            "No enabled EventConfig found for marker {} of licence type {}".format(
-                interface_identifier,
-                self.type,
-            )
+
+        raise NoEnabledEventConfigFoundException(
+            interface_identifier,
+            self.type,
         )
 
     @property

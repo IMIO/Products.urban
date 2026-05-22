@@ -884,7 +884,12 @@ msgstr ""
 msgid "NOTICe"
 msgstr ""
 
+#: ../contentrules/notice.py:63
+msgid "NOTICe Error"
+msgstr ""
+
 #: ../contentrules/notice.py:43
+#: ../viewlets/templates/notice_transmit_state.pt:9
 msgid "NOTICe ID"
 msgstr ""
 

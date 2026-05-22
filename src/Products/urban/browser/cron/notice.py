@@ -7,6 +7,10 @@ from Products.urban import UrbanMessage as _
 from Products.urban.contentrules.notice import NoticeImportFailedEvent
 from Products.urban.contentrules.notice import NoticeImportSucceededEvent
 from Products.urban.interfaces import IBaseBuildLicence
+from Products.urban.notice.exceptions import ErrorProcessingNotificationException
+from Products.urban.notice.exceptions import FailedGettingRecentNotificationsException
+from Products.urban.notice.exceptions import NoImplementationFoundException
+from Products.urban.notice.exceptions import NoLicenceFoundException
 from Products.urban.services import notice
 from StringIO import StringIO
 from datetime import datetime
@@ -74,12 +78,17 @@ class ImportFromNoticeView(BrowserView):
                 logger.info(u"Retried notification %s succeeded", failed_notice_id)
             except Exception as exc:
                 savepoint.rollback()
-                logger.exception(
-                    u"Retried notification %s failed again: %r",
-                    failed_notice_id,
-                    exc,
+                custom_exc = ErrorProcessingNotificationException(
+                    failed_notice_id, exc, retry=True
                 )
-                self._notify_import_error(failed_notice_id, "failed retry")
+                logger.exception(
+                    u"%s",
+                    custom_exc,
+                )
+                self._notify_import_error(
+                    failed_notice_id,
+                    error_message=custom_exc.get_error_report(),
+                )
                 remaining_failed.append(failed_notice_id)
 
         api.portal.set_registry_record(
@@ -117,12 +126,15 @@ class ImportFromNoticeView(BrowserView):
                 logger.info(u"Notification %s succeeded", notice_id)
             except Exception as exc:
                 savepoint.rollback()
+                custom_exc = ErrorProcessingNotificationException(notice_id, exc)
                 logger.exception(
-                    u"Error while processing notification %s: %s",
-                    notice_id,
-                    exc,
+                    u"%s",
+                    custom_exc,
                 )
-                self._notify_import_error(notice_id, "failed import")
+                self._notify_import_error(
+                    notice_id,
+                    error_message=custom_exc.get_error_report(),
+                )
                 self.failed_notifications.append(notice_id)
 
     def _save_progress(self):
@@ -152,18 +164,21 @@ class ImportFromNoticeView(BrowserView):
         try:
             notifications = self.notice_service.get_notifications()
         except Exception as exc:
+            custom_exc = FailedGettingRecentNotificationsException(exc)
             logger.exception(
-                u"Failed getting the list of recent notifications: %s",
-                exc,
+                u"%s",
+                custom_exc,
             )
-            self._notify_import_error("webservice", "can't get notifications")
+            self._notify_import_error(
+                error_message=custom_exc.get_error_report(),
+            )
         return notifications
 
-    def _notify_import_error(self, notice_id="", notice_type=""):
+    def _notify_import_error(self, notice_id="", error_message=""):
         try:
             args = {
                 "notice_id": notice_id,
-                "notice_type": notice_type,
+                "notice_error": error_message,
             }
             urban_folder = api.portal.get().urban
             event_wrapper = IContextWrapper(urban_folder)(**args)
@@ -255,10 +270,7 @@ class ImportFromNoticeView(BrowserView):
         ):
             handler = GesperDecisionSPWHandler
         else:
-            raise NotImplementedError(
-                "No implementation found for notification type: %s"
-                % detailed_notification.notice_type
-            )
+            raise NoImplementationFoundException(detailed_notification.notice_type)
 
         if handler:
             handler(detailed_notification, self.request).process()
@@ -280,12 +292,10 @@ class IncomingNoticeHandler(object):
         elif self.create_licence_if_missing:
             self.create_licence()
         else:
-            raise ValueError(
-                "No licence found with reference number {} / reference FT {} / reference DGATLP".format(
-                    self.notification.reference,
-                    self.notification.referenceFT,
-                    self.notification.referenceDGATLP,
-                )
+            raise NoLicenceFoundException(
+                self.notification.reference,
+                self.notification.referenceFT,
+                self.notification.referenceDGATLP,
             )
         self.create_incoming_event()
         self.import_documents()
@@ -461,7 +471,7 @@ class IncomingNoticeHandler(object):
             notice_type = self.notification.notice_type
             args = {
                 "notice_id": notice_id,
-                "notice_type": notice_type,
+                "notice_type": translate(notice_type, "urban", context=self.request),
             }
             event_wrapper = IContextWrapper(self.event)(**args)
             notify(NoticeImportSucceededEvent(event_wrapper))
