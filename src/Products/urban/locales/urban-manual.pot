@@ -1585,6 +1585,9 @@ msgstr ""
 msgid "TRANSFERT_DOSSIER"
 msgstr ""
 
+msgid "TRANSFERT_DOSSIER_DRC"
+msgstr ""
+
 msgid "NOTIF_COMPLETUDE1_INCOMPLET_COMMUNE"
 msgstr ""
 

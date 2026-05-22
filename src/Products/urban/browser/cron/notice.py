@@ -199,6 +199,8 @@ class ImportFromNoticeView(BrowserView):
 
         if detailed_notification.notice_type == "TRANSFERT_DOSSIER":
             handler = NewLicenceHandler
+        elif detailed_notification.notice_type == "TRANSFERT_DOSSIER_DRC":
+            handler = MissingPartDepositHandler
         elif detailed_notification.notice_type == "NOTIF_COMPLETUDE1_INCOMPLET_COMMUNE":
             handler = IncompleteHandler
         elif detailed_notification.notice_type in (
@@ -485,6 +487,14 @@ class NewLicenceHandler(IncomingNoticeHandler):
     create_licence_if_missing = True
 
 
+class MissingPartDepositHandler(IncomingNoticeHandler):
+    event_config_marker = "Products.urban.interfaces.IMissingPartDepositEvent"
+
+    @property
+    def desired_licence_state(self):
+        return "deposit"
+
+
 class InadmissibleHandler(IncomingNoticeHandler):
     event_config_marker = "Products.urban.interfaces.IRefusedIncompletenessEvent"
 
@@ -495,7 +505,6 @@ class InadmissibleHandler(IncomingNoticeHandler):
 
 class IncompleteHandler(IncomingNoticeHandler):
     event_config_marker = "Products.urban.interfaces.IMissingPartEvent"
-    licence_transition = "isincomplete"
 
     @property
     def desired_licence_state(self):
