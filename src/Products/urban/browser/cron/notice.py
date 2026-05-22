@@ -201,6 +201,8 @@ class ImportFromNoticeView(BrowserView):
             handler = NewLicenceHandler
         elif detailed_notification.notice_type == "TRANSFERT_DOSSIER_DRC":
             handler = MissingPartDepositHandler
+        elif detailed_notification.notice_type == "TRANSFERT_DOSSIER_PM":
+            handler = ModificationDepositHandler
         elif detailed_notification.notice_type == "NOTIF_COMPLETUDE1_INCOMPLET_COMMUNE":
             handler = IncompleteHandler
         elif detailed_notification.notice_type in (
@@ -489,6 +491,14 @@ class NewLicenceHandler(IncomingNoticeHandler):
 
 class MissingPartDepositHandler(IncomingNoticeHandler):
     event_config_marker = "Products.urban.interfaces.IMissingPartDepositEvent"
+
+    @property
+    def desired_licence_state(self):
+        return "deposit"
+
+
+class ModificationDepositHandler(IncomingNoticeHandler):
+    event_config_marker = "Products.urban.interfaces.IModificationDepositEvent"
 
     @property
     def desired_licence_state(self):
