@@ -1362,6 +1362,7 @@ class CanTransferFolderToDpaView(CanTransferNoticeBaseView):
     accepted_incoming_notice_types = [
         "TRANSFERT_DOSSIER",
         "TRANSFERT_DOSSIER_DRC",
+        "TRANSFERT_DOSSIER_PM",
     ]
     avoided_outgoing_notice_types = ["transfer_folder_to_dpa"]
 

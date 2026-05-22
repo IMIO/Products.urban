@@ -1184,6 +1184,9 @@ msgstr ""
 msgid "TRANSFERT_DOSSIER_DRC"
 msgstr ""
 
+msgid "TRANSFERT_DOSSIER_PM"
+msgstr ""
+
 #: ../browser/licence/duplicate_licence.py:51
 msgid "Tabs to duplicate"
 msgstr ""

@@ -1162,6 +1162,9 @@ msgstr "Nouveau dossier à destination de la commune"
 msgid "TRANSFERT_DOSSIER_DRC"
 msgstr "Compléments d'informations à destination de la commune"
 
+msgid "TRANSFERT_DOSSIER_PM"
+msgstr "Nouveaux Plans modificatifs à destination de la commune"
+
 #: ../browser/licence/duplicate_licence.py:51
 msgid "Tabs to duplicate"
 msgstr "Onglets à copier"
