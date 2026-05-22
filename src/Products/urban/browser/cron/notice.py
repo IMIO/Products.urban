@@ -199,13 +199,11 @@ class ImportFromNoticeView(BrowserView):
 
         if detailed_notification.notice_type == "TRANSFERT_DOSSIER":
             handler = NewLicenceHandler
-        elif detailed_notification.notice_type in (
-                "NOTIF_COMPLETUDE1_INCOMPLET_COMMUNE",
-                "NOTIF_COMPLETUDE1_NON_RECEVABLE_COMMUNE",
-        ):
+        elif detailed_notification.notice_type == "NOTIF_COMPLETUDE1_INCOMPLET_COMMUNE":
             handler = IncompleteHandler
         elif detailed_notification.notice_type in (
             "NOTIF_COMPLETUDE1_IRRECEVABLE_COMMUNE",
+            "NOTIF_COMPLETUDE1_NON_RECEVABLE_COMMUNE",
             "NOTIF_COMPLETUDE2_IRRECEVABLE_COMMUNE",
             "NOTIF_COMPLETUDE2_NON_RECEVABLE_COMMUNE",
         ):
