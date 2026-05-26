@@ -365,6 +365,13 @@ class NoticeNotification(NoticeElement):
         return []
 
     @property
+    def proposed_decision_code(self):
+        """Return proposed decision code from a SummaryReportRequest"""
+        return self._get_data(
+            "specific", "ns3:SummaryReportRequest", "ns3:proposedDecisionCode", "code"
+        )
+
+    @property
     def decision_code(self):
         """Return decision code from a DecisionRequest"""
 

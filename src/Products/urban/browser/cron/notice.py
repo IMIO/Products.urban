@@ -595,6 +595,11 @@ class DeadlineExtensionHandler(IncomingNoticeHandler):
 class SummaryReportHandler(IncomingNoticeHandler):
     event_config_marker = "Products.urban.interfaces.IDecisionProjectFromSPWEvent"
 
+    def fill_incoming_event(self):
+        super(SummaryReportHandler, self).fill_incoming_event()
+        if self.notification.proposed_decision_code:
+            self.event.setExternalDecision(self.notification.proposed_decision_code)
+
 
 class DecisionSPWHandler(IncomingNoticeHandler):
     event_config_marker = "Products.urban.interfaces.IWalloonRegionDecisionEvent"
