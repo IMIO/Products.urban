@@ -1422,6 +1422,7 @@ class CanTransferDecisionView(CanTransferNoticeBaseView):
         "PM_RS_PAS_ENVOYE",
         "PM_RS_PAS_ENVOYE_SFD",
         "PM_ENVOI_RS_HD_SFD_COMMUNE",
+        "PM_ENVOI_RS_COMMUNE",
     ]
     avoided_outgoing_notice_types = [
         "transfer_decision",
@@ -1442,6 +1443,7 @@ class CanTransferDecisionDisplayView(CanTransferNoticeBaseView):
         "PM_RS_PAS_ENVOYE",
         "PM_RS_PAS_ENVOYE_SFD",
         "PM_ENVOI_RS_HD_SFD_COMMUNE",
+        "PM_ENVOI_RS_COMMUNE",
         "NOTIFICATION_DECISION_COMMUNE",
         "NOTIFICATION_DEC_RS_COMMUNE",
         "NOTIFICATION_DECRS_REFUS_TACITE_COMMUNE",

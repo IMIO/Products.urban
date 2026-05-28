@@ -933,6 +933,9 @@ msgstr ""
 msgid "NOTIFICATION_RS_COMMUNE_RETARD_SFD"
 msgstr ""
 
+msgid "PM_ENVOI_RS_COMMUNE"
+msgstr ""
+
 msgid "NOTIF_COMPLETUDE1_INCOMPLET_COMMUNE"
 msgstr ""
 
