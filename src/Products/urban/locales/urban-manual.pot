@@ -1627,6 +1627,9 @@ msgstr ""
 msgid "NOTIFICATION_PAS_ENVOI_RS_SFD"
 msgstr ""
 
+msgid "PM_RS_PAS_ENVOYE"
+msgstr ""
+
 msgid "NOTIFICATION_DECISION_COMMUNE"
 msgstr ""
 

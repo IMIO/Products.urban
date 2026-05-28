@@ -448,6 +448,7 @@ class ITransferDecisionActionForm(ITransferBaseActionForm):
                 "NOTIFICATION_RS_COMMUNE_RETARD_SFD",
                 "NOTIFICATION_PAS_ENVOI_RS",
                 "NOTIFICATION_PAS_ENVOI_RS_SFD",
+                "PM_RS_PAS_ENVOYE",
             ],
             ["transfer_decision"]
         ),
@@ -498,6 +499,7 @@ class ITransferDecisionDisplayActionForm(ITransferBaseActionForm):
                 "NOTIFICATION_RS_COMMUNE_RETARD_SFD",
                 "NOTIFICATION_PAS_ENVOI_RS",
                 "NOTIFICATION_PAS_ENVOI_RS_SFD",
+                "PM_RS_PAS_ENVOYE",
                 "NOTIFICATION_DECISION_COMMUNE",
                 "NOTIFICATION_DEC_RS_COMMUNE",
                 "NOTIFICATION_DECRS_REFUS_TACITE_COMMUNE",
@@ -542,6 +544,7 @@ class TransferDecisionDisplayActionForm(NoticeResponseActionForm):
             "NOTIFICATION_RS_COMMUNE_RETARD_SFD",
             "NOTIFICATION_PAS_ENVOI_RS",
             "NOTIFICATION_PAS_ENVOI_RS_SFD",
+            "PM_RS_PAS_ENVOYE",
         ):
             decision_event, college_decision = self._get_decision_data(incoming_id)
             if not decision_event:

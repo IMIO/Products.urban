@@ -210,6 +210,7 @@ class ImportFromNoticeView(BrowserView):
             "NOTIFICATION_RS_COMMUNE_RETARD_SFD",
             "NOTIFICATION_PAS_ENVOI_RS",
             "NOTIFICATION_PAS_ENVOI_RS_SFD",
+            "PM_RS_PAS_ENVOYE",
         ):
             handler = SummaryReportHandler
         elif detailed_notification.notice_type in (

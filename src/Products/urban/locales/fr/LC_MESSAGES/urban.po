@@ -901,6 +901,9 @@ msgstr "Impossibilité de transmettre un rapport de synthèse dans les délais i
 msgid "NOTIFICATION_PAS_ENVOI_RS_SFD"
 msgstr "Impossibilité de transmettre un rapport de synthèse dans les délais impartis"
 
+msgid "PM_RS_PAS_ENVOYE"
+msgstr "Impossibilité de transmettre un rapport de synthèse suite aux plans modificatifs dans les délais impartis"
+
 msgid "NOTIFICATION_PROROGATION_COMMUNE"
 msgstr "Notification à la commune de la prolongation du délai d'instruction"
 
