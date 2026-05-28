@@ -369,9 +369,6 @@ msgstr "Demande d'organisation d'une enquête publique (interrogée précédemme
 msgid "DEMANDE_EP_EXTRA"
 msgstr "Demande d'organisation d'une enquête publique (hors territoire)"
 
-msgid "PM_EP_COURRIER_COMMUNE"
-msgstr "Demande d'organisation d'une enquête publique - Plans Modificatifs"
-
 #: ../browser/offdays_settings.py:47
 msgid "Date"
 msgstr "Date"
