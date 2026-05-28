@@ -193,6 +193,7 @@ class ImportFromNoticeView(BrowserView):
             "NOTIF_COMPLETUDE1_IRRECEVABLE_COMMUNE",
             "NOTIF_COMPLETUDE2_IRRECEVABLE_COMMUNE",
             "NOTIF_COMPLETUDE2_NON_RECEVABLE_COMMUNE",
+            "PM_NOTIF_IRRECEVABLE_COMMUNE",
         ):
             handler = InadmissibleHandler
         elif detailed_notification.notice_type in (
