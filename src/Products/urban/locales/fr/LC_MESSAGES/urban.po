@@ -931,6 +931,8 @@ msgstr "Transmission hors délai du rapport de synthèse sans le volet urbanisme
 
 msgid "PM_RS_PAS_ENVOYE_SFD"
 msgstr "Impossibilité de transmettre un rapport de synthèse dans les délais impartis - Plans Modificatifs"
+msgid "PM_ENVOI_RS_COMMUNE"
+msgstr "Transmission du rapport de synthèse suite aux plans modificatifs"
 
 msgid "NOTIF_COMPLETUDE1_INCOMPLET_COMMUNE"
 msgstr "Notification à la commune que la demande est incomplète"
