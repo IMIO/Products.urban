@@ -108,4 +108,12 @@
         handler=".update_290.setup_index_referenceDGATLP"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Set up NOTICE mailing content rules"
+        description=""
+        source="2913"
+        destination="2914"
+        handler=".update_290.setup_notice_mailing_content_rules"
+        profile="Products.urban:default" />
+
 </configure>
