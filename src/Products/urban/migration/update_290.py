@@ -1,7 +1,13 @@
 # encoding: utf-8
+
+from textwrap import dedent
+
 from Products.CMFCore.utils import getToolByName
 from Products.urban import URBAN_TYPES
 from Products.urban import UrbanMessage as _
+from Products.urban.contentrules.notice import INoticeImportFailedEvent
+from Products.urban.contentrules.notice import INoticeImportSucceededEvent
+from Products.urban.contentrules.utils import ContentRulesUtils
 from Products.urban.migration.utils import cook_javascript_resources
 from Products.urban.setuphandlers import add_new_urban_licence_type
 from Products.urban.utils import moveElementAfter
@@ -398,5 +404,129 @@ def add_codt_uniquebordering_licences(context):
     )
 
     add_new_urban_licence_type("CODT_UniqueBorderingLicence")
+
+    logger.info("Upgrade done!")
+
+
+def setup_notice_mailing_content_rules(context):
+    logger = logging.getLogger("urban: Set up NOTICE mailing content rules")
+
+    portal = api.portal.get()
+
+    success_template = dedent(
+        u"""
+        Bonjour,
+        
+        Une notification du SPW a été réceptionnée pour:
+        
+        - Dossier : ${parent_url}
+        - Type de notification : ${notice_type}
+        - Mail de l'agent traitant : ${folder_manager_email}
+        
+        Belle journée.
+        """
+    ).strip()
+
+    failure_template = dedent(
+        u"""
+        Créer un ticket JIRA à l'attention d'un développeur
+        (composant : Dématérialisation, sprint : En cours, état : Bloquant)
+
+        "Bonjour,
+        
+        Une erreur d'implémentation de notification du webservice Notice a été enregistrée.
+        Merci de prendre connaissance des raisons dans Kibana et de la débloquer.
+        
+        - commune / dossier : ${parent_url}
+        - identifiant NOTICE : ${notice_id}
+        
+        ```
+        ${notice_error}
+        ```
+        
+        Belle journée.
+        
+        Aurore"
+        """
+    ).strip()
+
+    rule_id = "notification_tlpe_imported_successfully"
+    if not ContentRulesUtils.rule_exists(rule_id):
+        ContentRulesUtils.create_content_rule(
+            title=u"Notification TLPE importée",
+            event_interface=INoticeImportSucceededEvent,
+            rule_id=rule_id,
+        )
+        ContentRulesUtils.add_condition(
+            rule_id=rule_id,
+            condition_name="urban.conditions.licence_type",
+            data={"licence_type": ["CODT_Article127"]},
+        )
+        ContentRulesUtils.add_action(
+            rule_id=rule_id,
+            action_name="plone.actions.Mail",
+            data={
+                "exclude_actor": False,
+                "subject": u"Notification importée",
+                "recipients": u"support-urban@imio.be",
+                "message": success_template,
+            },
+        )
+        ContentRulesUtils.assign_rule(portal, rule_id)
+        ContentRulesUtils.enable_rule(portal, rule_id, bubbles=True)
+
+    rule_id = "notification_arne_imported_successfully"
+    if not ContentRulesUtils.rule_exists(rule_id):
+        ContentRulesUtils.create_content_rule(
+            title=u"Notification ARNE importée",
+            event_interface=INoticeImportSucceededEvent,
+            rule_id=rule_id,
+        )
+        ContentRulesUtils.add_condition(
+            rule_id=rule_id,
+            condition_name="urban.conditions.licence_type",
+            data={
+                "licence_type": [
+                    "CODT_UniqueLicence",
+                    "CODT_UniqueBorderingLicence",
+                    "EnvClassOne",
+                    "EnvClassTwo",
+                    "EnvClassThree",
+                    "EnvClassBordering",
+                ]
+            },
+        )
+        ContentRulesUtils.add_action(
+            rule_id=rule_id,
+            action_name="plone.actions.Mail",
+            data={
+                "exclude_actor": False,
+                "subject": u"Notification importée",
+                "recipients": u"support-urban@imio.be",
+                "message": success_template,
+            },
+        )
+        ContentRulesUtils.assign_rule(portal, rule_id)
+        ContentRulesUtils.enable_rule(portal, rule_id, bubbles=True)
+
+    rule_id = "notification_import_failed"
+    if not ContentRulesUtils.rule_exists(rule_id):
+        ContentRulesUtils.create_content_rule(
+            title=u"Notification NOTICE en erreur",
+            event_interface=INoticeImportFailedEvent,
+            rule_id=rule_id,
+        )
+        ContentRulesUtils.add_action(
+            rule_id=rule_id,
+            action_name="plone.actions.Mail",
+            data={
+                "exclude_actor": False,
+                "subject": u"Notification Notice en erreur",
+                "recipients": u"support-urban@imio.be",
+                "message": failure_template,
+            },
+        )
+        ContentRulesUtils.assign_rule(portal, rule_id)
+        ContentRulesUtils.enable_rule(portal, rule_id, bubbles=True)
 
     logger.info("Upgrade done!")
