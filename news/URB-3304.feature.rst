@@ -1,0 +1,2 @@
+Handle `NOTIF_COMPLETUDE1_NON_RECEVABLE_COMMUNE` as inadmissible
+[ndemonte]
