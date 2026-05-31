@@ -1,2 +1,0 @@
-Search for NOTICE adresses by street name only, as a fallback
-[ndemonte]
