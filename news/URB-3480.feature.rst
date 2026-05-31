@@ -1,4 +1,0 @@
-Add utils class to manage content rules
-Handle context wrappers in Parent Licence Type rule condition
-Set up NOTICE mailing content rules
-[ndemonte]

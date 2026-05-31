@@ -1,2 +1,0 @@
-Use custom exceptions for common NOTICe errors
-[ndemonte]

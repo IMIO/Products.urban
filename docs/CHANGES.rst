@@ -8,6 +8,30 @@ Changelog
 
 .. towncrier release notes start
 
+2.9.21 (2026-05-31)
+-------------------
+
+New features:
+
+
+- Handle `NOTIF_COMPLETUDE1_NON_RECEVABLE_COMMUNE` as inadmissible
+  [ndemonte] (URB-3304)
+- Add specific code mapping for 2 types
+  [ndemonte] (URB-3448)
+- Add utils class to manage content rules
+  Handle context wrappers in Parent Licence Type rule condition
+  Set up NOTICE mailing content rules
+  [ndemonte] (URB-3480)
+- Handle `TRANSFERT_DOSSIER_PM` notification
+  [ndemonte] (URB-3562)
+- Handle `TRANSFERT_DOSSIER_DRC` notification
+  [ndemonte] (URB-3581)
+- Search for NOTICE adresses by street name only, as a fallback
+  [ndemonte] (URB-3611)
+- Use custom exceptions for common NOTICe errors
+  [ndemonte] (URB-3623)
+
+
 2.9.20 (2026-05-12)
 -------------------
 

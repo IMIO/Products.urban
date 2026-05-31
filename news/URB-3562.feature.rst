@@ -1,2 +1,0 @@
-Handle `TRANSFERT_DOSSIER_PM` notification
-[ndemonte]
