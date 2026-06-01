@@ -263,7 +263,7 @@ class ImportFromNoticeView(BrowserView):
             "DEMANDE_AVIS_OBLIGATOIRE_PLAN_MODIFIE_1_ERE_INSTANCE",
             "DEMANDE_AVIS_FACULTATIF_PLAN_MODIFIE_1_ERE_INSTANCE",
             "DEMANDE_ENQUETE_PUBLIQUE_PLAN_MODIFIE_1_ERE_INSTANCE",
-            "DEMANDE_ANNONCE PROJET_PLAN_MODIFIE_1_ERE_INSTANCE",
+            "DEMANDE_ANNONCE_PROJET_PLAN_MODIFIE_1_ERE_INSTANCE",
         ):
             handler = GesperAmendedPlansSPWHandler
         elif detailed_notification.notice_type in (

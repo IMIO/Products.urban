@@ -732,7 +732,7 @@ class ITransferDatesGesperAPActionForm(ITransferBaseActionForm):
         source=OpenIncomingNotifications(
             [
                 "DEMANDE_ANNONCE_PROJET_PLAN_INITIAL_1_ERE_INSTANCE",
-                "DEMANDE_ANNONCE PROJET_PLAN_MODIFIE_1_ERE_INSTANCE",
+                "DEMANDE_ANNONCE_PROJET_PLAN_MODIFIE_1_ERE_INSTANCE",
                 "DEMANDE_ANNONCE_PROJET_PLAN_INITIAL_2_EME_INSTANCE",
                 "DEMANDE_ANNONCE_PROJET_PLAN_MODIFIE_2_EME_INSTANCE",
             ],
@@ -763,7 +763,7 @@ class ITransferTicketGesperAPActionForm(ITransferBaseActionForm):
         source=OpenIncomingNotifications(
             [
                 "DEMANDE_ANNONCE_PROJET_PLAN_INITIAL_1_ERE_INSTANCE",
-                "DEMANDE_ANNONCE PROJET_PLAN_MODIFIE_1_ERE_INSTANCE",
+                "DEMANDE_ANNONCE_PROJET_PLAN_MODIFIE_1_ERE_INSTANCE",
                 "DEMANDE_ANNONCE_PROJET_PLAN_INITIAL_2_EME_INSTANCE",
                 "DEMANDE_ANNONCE_PROJET_PLAN_MODIFIE_2_EME_INSTANCE",
             ],
@@ -819,7 +819,7 @@ class ITransferOpinionGesperAPActionForm(ITransferBaseActionForm):
         source=OpenIncomingNotifications(
             [
                 "DEMANDE_ANNONCE_PROJET_PLAN_INITIAL_1_ERE_INSTANCE",
-                "DEMANDE_ANNONCE PROJET_PLAN_MODIFIE_1_ERE_INSTANCE",
+                "DEMANDE_ANNONCE_PROJET_PLAN_MODIFIE_1_ERE_INSTANCE",
                 "DEMANDE_ANNONCE_PROJET_PLAN_INITIAL_2_EME_INSTANCE",
                 "DEMANDE_ANNONCE_PROJET_PLAN_MODIFIE_2_EME_INSTANCE",
             ],
