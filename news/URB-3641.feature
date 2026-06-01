@@ -1,0 +1,1 @@
+Handle PM_PROROGATION_COURRIER_COMMUNE notification.

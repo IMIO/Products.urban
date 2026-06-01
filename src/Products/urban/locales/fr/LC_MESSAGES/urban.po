@@ -914,6 +914,9 @@ msgstr "Impossibilité de transmettre un rapport de synthèse suite aux plans mo
 msgid "NOTIFICATION_PROROGATION_COMMUNE"
 msgstr "Notification à la commune de la prolongation du délai d'instruction"
 
+msgid "PM_PROROGATION_COURRIER_COMMUNE"
+msgstr "Notification à la commune de la prolongation du délai d'instruction (Plans modificatifs)"
+
 msgid "NOTIFICATION_RS_COMMUNE"
 msgstr "Transmission du rapport de synthèse"
 
