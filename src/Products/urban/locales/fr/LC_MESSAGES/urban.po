@@ -312,14 +312,14 @@ msgstr "Décision 1ère instance"
 msgid "DECISION_GESPER_2_EME_INSTANCE"
 msgstr "Décision 2ème instance"
 
-msgid "DEMANDE_ANNONCE PROJET_PLAN_MODIFIE_1_ERE_INSTANCE"
-msgstr "Demande d'annonce projet sur plan modifié 1ère instance"
-
 msgid "DEMANDE_ANNONCE_PROJET_PLAN_INITIAL_1_ERE_INSTANCE"
 msgstr "Demande d'annonce projet sur plan initial 1ère instance"
 
 msgid "DEMANDE_ANNONCE_PROJET_PLAN_INITIAL_2_EME_INSTANCE"
 msgstr "Demande d'annonce projet sur plan initial 2ème instance"
+
+msgid "DEMANDE_ANNONCE_PROJET_PLAN_MODIFIE_1_ERE_INSTANCE"
+msgstr "Demande d'annonce projet sur plan modifié 1ère instance"
 
 msgid "DEMANDE_ANNONCE_PROJET_PLAN_MODIFIE_2_EME_INSTANCE"
 msgstr "Demande d'annonce projet sur plan modifié 2ème instance"
@@ -903,7 +903,7 @@ msgid "NOTIFICATION_PAS_ENVOI_RS"
 msgstr "Impossibilité de transmettre un rapport de synthèse dans les délais impartis"
 
 msgid "NOTIFICATION_PAS_ENVOI_RS_SFD"
-msgstr "Impossibilité de transmettre un rapport de synthèse dans les délais impartis"
+msgstr "Impossibilité de transmettre un rapport de synthèse dans les délais impartis (volet urbanistique manquant)"
 
 msgid "NOTIFICATION_PROROGATION_COMMUNE"
 msgstr "Notification à la commune de la prolongation du délai d'instruction"
@@ -918,7 +918,7 @@ msgid "NOTIFICATION_RS_COMMUNE_RETARD_SFD"
 msgstr "Transmission hors délai du rapport de synthèse sans le volet urbanisme"
 
 msgid "NOTIF_COMPLETUDE1_INCOMPLET_COMMUNE"
-msgstr "Transmission hors délai du rapport de synthèse sans le volet urbanisme"
+msgstr "Notification à la commune que la demande est incomplète"
 
 msgid "NOTIF_COMPLETUDE1_IRRECEVABLE_COMMUNE"
 msgstr "Notification à la commune que la demande est irrecevable"
