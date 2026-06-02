@@ -37,6 +37,7 @@ from Products.urban.widget.historizereferencewidget import (
     HistorizeReferenceBrowserWidget,
 )
 from Products.urban.widget.select2widget import MultiSelect2Widget
+from Products.urban.widget.select2widget import Select2Widget
 from collective.datagridcolumns.ReferenceColumn import ReferenceColumn
 
 ##code-section module-header #fill in your manual code here
@@ -229,7 +230,7 @@ schema = Schema(
         ),
         StringField(
             name="annoncedDelay",
-            widget=SelectionWidget(
+            widget=Select2Widget(
                 format="select",
                 label=_("urban_label_annoncedDelay", default="Annonceddelay"),
             ),
