@@ -34,6 +34,7 @@ from Products.urban.config import *
 from Products.urban.content.licence.GenericLicence import GenericLicence
 from Products.urban.utils import setOptionalAttributes
 from Products.urban.widget.select2widget import MultiSelect2Widget
+from Products.urban.widget.select2widget import Select2Widget
 from collective.datagridcolumns.TextAreaColumn import TextAreaColumn
 
 ##code-section module-header #fill in your manual code here
@@ -327,7 +328,7 @@ schema = Schema(
         ),
         StringField(
             name="annoncedDelay",
-            widget=SelectionWidget(
+            widget=Select2Widget(
                 label=_("urban_label_annoncedDelay", default="Annonceddelay"),
             ),
             schemata="urban_description",
