@@ -116,4 +116,12 @@
         handler=".update_290.setup_notice_mailing_content_rules"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Reindex getDecisionDate"
+        description=""
+        source="2914"
+        destination="2915"
+        handler=".update_290.reindex_getDecisionDate"
+        profile="Products.urban:default" />
+
 </configure>
