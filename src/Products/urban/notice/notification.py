@@ -204,14 +204,17 @@ class NoticeNotification(NoticeElement):
                 "/dataStore/projet/rubriques/item"
             )
             for rubrique in rubrique_elements:
-                classe = rubrique.xpath("classe/text()")[0]
-                number = rubrique.xpath("numRubrique")[0].text
-                number = number.replace("-", "")  # special case: `COV-01.01` => `COV01.01`
-                rubric_obj = get_rubric_obj(classe, number)
-                if rubric_obj:
-                    found_uids.append(rubric_obj.UID())
-                else:
-                    missing_rubrics.append("classe {}, {}".format(classe, number))
+                class_elements = rubrique.xpath("classe/text()")
+                number_elements = rubrique.xpath("numRubrique")
+                if class_elements and number_elements:
+                    classe = class_elements[0]
+                    number = number_elements[0].text
+                    number = number.replace("-", "")  # special case: `COV-01.01` => `COV01.01`
+                    rubric_obj = get_rubric_obj(classe, number)
+                    if rubric_obj:
+                        found_uids.append(rubric_obj.UID())
+                    else:
+                        missing_rubrics.append("classe {}, {}".format(classe, number))
 
         if missing_rubrics:
             raise ValueError(
