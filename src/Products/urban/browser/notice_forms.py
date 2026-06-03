@@ -239,8 +239,13 @@ class NoticeResponseActionForm(Form):
 
             file_result = self.context.transfer_notice_file(incoming_notice_id, file_path)
 
-        reception_date_str = response_result["body"]["result"]["receptionDate"]
-        reception_date = datetime.strptime(reception_date_str[:19], "%Y-%m-%dT%H:%M:%S")
+        response_body = response_result.get("body", {}) or {}
+        response_body_result = response_body.get("result", {}) or {}
+        reception_date_str = response_body_result.get("receptionDate")
+        if reception_date_str:
+            reception_date = datetime.strptime(reception_date_str[:19], "%Y-%m-%dT%H:%M:%S")
+        else:
+            reception_date = datetime.now()
 
         self.store_sent_data(
             incoming_notice_id,
