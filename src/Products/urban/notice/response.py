@@ -77,7 +77,7 @@ class NoticeOutgoingFileNotification(NoticeElement):
 
 class NoticeOutgoingNotification(NoticeResponse):
     state = "FINAL"
-    type = "TwiceDefaultResponse"
+    type = "tns:TwiceDefaultResponse"
 
     @property
     def _reference(self):
@@ -96,7 +96,7 @@ class NoticeOutgoingPublicSurveyNotification(NoticeResponse):
         self._inquiry_event = inquiry_event
         self._college_opinion = college_opinion
 
-    type = "PublicSurveyResponse"
+    type = "tns:PublicSurveyResponse"
 
     @property
     def _reference(self):
@@ -220,7 +220,7 @@ class NoticeOutgoingSummaryReportNotification(NoticeResponse):
         self._decision_display_event = decision_display_event
         self._college_decision = college_decision
 
-    type = "SummaryReportResponse"
+    type = "tns:SummaryReportResponse"
 
     @property
     def _reference(self):
@@ -294,7 +294,7 @@ class NoticeOutgoingSummaryReportDatesNotification(
 
 class NoticeOutgoingDecisionNotification(NoticeResponse):
 
-    type = "DecisionResponse"
+    type = "tns:DecisionResponse"
     state = "FINAL"
 
     @property
