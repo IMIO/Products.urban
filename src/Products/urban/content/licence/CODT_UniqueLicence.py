@@ -413,6 +413,9 @@ class CODT_UniqueLicence(
     def getLastImpactStudyEvent(self):
         return self.getLastEvent(interfaces.IImpactStudyEvent)
 
+    def getLastMissingPartTransmitToSPW(self):
+        return self.getLastEvent(interfaces.IMissingPartTransmitToSPWEvent)
+
     security.declarePublic("getDefaultSPEReference")
 
     def getDefaultSPEReference(self):
