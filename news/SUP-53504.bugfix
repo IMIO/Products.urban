@@ -1,0 +1,2 @@
+Fix TypeError in select2 widget when getDefaultValue returns a list instead of a string for non-multivalued fields
+[Wiemboudabous]
