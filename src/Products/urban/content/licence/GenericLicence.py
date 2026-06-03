@@ -1537,10 +1537,14 @@ class GenericLicence(OrderedBaseFolder, UrbanBase, BrowserDefaultMixin):
     security.declarePublic("getDefaultValue")
 
     def getDefaultValue(self, context=None, field=None):
-        if not context or not field:
-            return [""]
+        if not field:
+            return ""
 
         empty_value = getattr(field, "multivalued", "") and [] or ""
+
+        if not context:
+            return empty_value
+
         if hasattr(field, "vocabulary") and isinstance(
             field.vocabulary, UrbanVocabulary
         ):
