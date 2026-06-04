@@ -127,8 +127,8 @@
     <gs:upgradeStep
         title="Add 'Dématérialisé' deposit type and activate field on deposit event"
         description=""
-        source="2914"
-        destination="2915"
+        source="2915"
+        destination="2916"
         handler=".update_290.add_digital_term_to_deposit_type"
         profile="Products.urban:default" />
 
