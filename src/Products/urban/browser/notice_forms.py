@@ -262,6 +262,8 @@ class ITransferFolderToDPAActionForm(ITransferBaseActionForm):
         source=OpenIncomingNotifications(
             [
                 "TRANSFERT_DOSSIER",
+                "TRANSFERT_DOSSIER_DRC",
+                "TRANSFERT_DOSSIER_PM",
             ],
             ["transfer_folder_to_dpa"]
         ),

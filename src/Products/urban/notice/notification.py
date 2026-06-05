@@ -155,6 +155,8 @@ class NoticeNotification(NoticeElement):
     def _specific_code(self):
         specific = {
             "TRANSFERT_DOSSIER": "ns3:TwiceDefaultRequest",
+            "TRANSFERT_DOSSIER_PM": "ns3:TwiceDefaultRequest",
+            "TRANSFERT_DOSSIER_DRC": "ns3:TwiceDefaultRequest",
             "NOTIF_COMPLETUDE1_IRRECEVABLE_COMMUNE": "ns3:TwiceDefaultRequest",
             "NOTIF_COMPLETUDE1_INCOMPLET_COMMUNE": "ns3:TwiceDefaultRequest",
             "NOTIF_COMPLETUDE1_NON_RECEVABLE_COMMUNE": "ns3:TwiceDefaultRequest",
