@@ -8,6 +8,26 @@ Changelog
 
 .. towncrier release notes start
 
+2.9.23 (2026-06-10)
+-------------------
+
+Bug fixes:
+
+
+- Add getLastMissingPartTransmitToSPW method to fix broken merge fields in Avis préalable du Collège template
+  [Wiemboudabous] (SUP-53434)
+- Revert "SUP-53131: Change widget for prevent reset value when editing (#562)"
+  [jchandelle] (SUP-53692)
+- Add missing configuration values for transfer to DPA forms
+  [daggelpop] (URB-3562)
+- Fix missing result in TLPE response
+  [daggelpop] (URB-3645)
+- Handle empty XML rubrics
+  [daggelpop] (URB-3646)
+- Fix ARNE response types
+  [daggelpop] (URB-3647)
+
+
 2.9.22 (2026-06-02)
 -------------------
 
