@@ -69,8 +69,7 @@ def resolve_vocabulary(context, field, values):
 
 class Select2Widget(CollectiveSelect2Widget):
     def view(self, context, field, request):
-        value = super(Select2Widget, self).view(context, field, request)
-        values = [value]
+        values = super(Select2Widget, self).view(context, field, request)
         try:
             vocabulary = resolve_vocabulary(context, field, values)
         except AttributeError:
