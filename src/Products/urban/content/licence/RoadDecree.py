@@ -14,7 +14,6 @@ from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.config import *
 from Products.urban.content.licence.CODT_BuildLicence import CODT_BuildLicence
 from Products.urban.content.licence.CODT_BaseBuildLicence import CODT_BaseBuildLicence
-from Products.urban.widget.select2widget import Select2Widget
 
 from plone import api
 from zope.interface import implements
@@ -118,7 +117,7 @@ schema = Schema(
         ),
         StringField(
             name="decisional_delay",
-            widget=Select2Widget(
+            widget=SelectionWidget(
                 label=_("urban_label_decisional_delay", default="DecisionalDelay"),
             ),
             schemata="urban_analysis",
