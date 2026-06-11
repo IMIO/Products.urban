@@ -489,6 +489,19 @@ class TransferDecisionActionForm(NoticeResponseActionForm):
         self.field_values_to_store["college_decision"] = output
         return output
 
+    def do_additional_validation(self, data, errors):
+        college_decision_code = self.context.getDecision()
+        if type(college_decision_code) is list and len(college_decision_code) > 0:
+            college_decision_code = college_decision_code[0]
+        if not college_decision_code:
+            raise ActionExecutionError(
+                Invalid(
+                    _(
+                        u"No college decision code was provided in the event; please edit it and select a code first."
+                    )
+                )
+            )
+
     def transfer_response(self, data):
         incoming_id = data.get("incoming_notification")
         college_decision = self._get_college_decision_text(data)
