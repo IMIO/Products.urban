@@ -4,11 +4,13 @@ from z3c.form import button
 from z3c.form import field
 from z3c.form.browser.checkbox import CheckBoxFieldWidget
 from z3c.form.browser.radio import RadioFieldWidget
+from z3c.form.interfaces import ActionExecutionError
 from z3c.form.form import Form
 from zope import schema
 from zope.annotation.interfaces import IAnnotations
 from zope.i18n import translate
 from zope.interface import Interface
+from zope.interface import Invalid
 from zope.interface import implementer
 from zope.schema.interfaces import IContextSourceBinder
 from zope.schema.vocabulary import SimpleTerm
@@ -202,6 +204,7 @@ class NoticeResponseActionForm(Form):
     @button.buttonAndHandler(_("Send"), name="send_response")
     def handleSendResponse(self, action):
         data, errors = self.extractData()
+        self.do_additional_validation(data, errors)
         if errors:
             self.status = self.formErrorsMessage
             return
@@ -254,6 +257,9 @@ class NoticeResponseActionForm(Form):
         )
 
         self.request.response.redirect(self.context.absolute_url())
+
+    def do_additional_validation(self, data, errors):
+        pass
 
 
 class ITransferFolderToDPAActionForm(ITransferBaseActionForm):
@@ -881,6 +887,19 @@ class TransferOpinionGesperAPActionForm(NoticeResponseActionForm):
         output = college_opinion.output if college_opinion else ""
         self.field_values_to_store["college_opinion"] = output
         return output
+
+    def do_additional_validation(self, data, errors):
+        college_opinion_code = self.context.getCollegeOpinion()
+        if type(college_opinion_code) is list and len(college_opinion_code) > 0:
+            college_opinion_code = college_opinion_code[0]
+        if not college_opinion_code:
+            raise ActionExecutionError(
+                Invalid(
+                    _(
+                        u"No college opinion code was provided in the event; please edit it and select a code first."
+                    )
+                )
+            )
 
     def transfer_response(self, data):
         incoming_id = data.get("incoming_notification")

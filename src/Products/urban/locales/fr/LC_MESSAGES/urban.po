@@ -944,6 +944,10 @@ msgstr "Nouveau profil d'installation pour iA.Urban."
 msgid "New licence subject"
 msgstr "Nouvel objet"
 
+#: ../browser/notice_forms.py:911
+msgid "No college opinion code was provided in the event; please edit it and select a code first."
+msgstr "L'avis du collège n'a pas été coché dans cet événement; veuillez l'éditer avant de procéder à l'envoi."
+
 #: ../browser/templates/coring_update.pt:37
 msgid "No data to update"
 msgstr "Aucune donnée à mettre à jour"
