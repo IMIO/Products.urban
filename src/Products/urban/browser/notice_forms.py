@@ -204,7 +204,8 @@ class NoticeResponseActionForm(Form):
     @button.buttonAndHandler(_("Send"), name="send_response")
     def handleSendResponse(self, action):
         data, errors = self.extractData()
-        self.do_additional_validation(data, errors)
+        if not errors:
+            self.do_additional_validation(data, errors)
         if errors:
             self.status = self.formErrorsMessage
             return
