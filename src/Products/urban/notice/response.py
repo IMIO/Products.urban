@@ -364,6 +364,10 @@ class NoticeOutgoingGesperPublicSurveyNotification(NoticeResponse):
         )
 
     @property
+    def _opinion_code(self):
+        return None  # this field is only required for a FINAL response
+
+    @property
     def _notice_college(self):
         return self._college_opinion
 
@@ -398,6 +402,7 @@ class NoticeOutgoingGesperPublicSurveyNotification(NoticeResponse):
     @property
     def specific(self):
         return {
+            "not:notice": self._opinion_code,
             "gns:iaReference": self._reference,
             "gns:minute": self._minute,
             "gns:observations": self._observations,
@@ -443,6 +448,15 @@ class NoticeOutgoingGesperPublicSurveyOpinionNotification(
             event, inquiry_event=inquiry_event, college_opinion=college_opinion
         )
 
+    @property
+    def _opinion_code(self):
+        opinion_codes = {
+            "favorable": "FAVORABLE",
+            "defavorable": "DEFAVORABLE",
+            "favorable-cond": "FAVORABLE_CONDITIONNEL",
+        }
+        return {"cod:code": opinion_codes.get(self.event.getCollegeOpinion())}
+
 
 class NoticeOutgoingGesperPublicSurveyFinalWithoutOpinionNotification(
     NoticeOutgoingGesperPublicSurveyNotification
@@ -453,6 +467,10 @@ class NoticeOutgoingGesperPublicSurveyFinalWithoutOpinionNotification(
         super(
             NoticeOutgoingGesperPublicSurveyFinalWithoutOpinionNotification, self
         ).__init__(event, inquiry_event=event)
+
+    @property
+    def _opinion_code(self):
+        return {"cod:code": "SANS_OBJET"}
 
 
 class NoticeOutgoingGesperProjectAnnouncementDatesNotification(

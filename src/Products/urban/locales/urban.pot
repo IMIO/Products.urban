@@ -961,6 +961,14 @@ msgstr ""
 msgid "No"
 msgstr ""
 
+#: ../browser/notice_forms.py:499
+msgid "No college decision code was provided in the event; please edit it and select a code first."
+msgstr ""
+
+#: ../browser/notice_forms.py:911
+msgid "No college opinion code was provided in the event; please edit it and select a code first."
+msgstr ""
+
 #: ../browser/templates/coring_update.pt:37
 msgid "No data to update"
 msgstr ""
