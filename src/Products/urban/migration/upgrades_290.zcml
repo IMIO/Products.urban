@@ -164,4 +164,13 @@
         handler=".update_290.hide_CODT_UniqueBorderingLicences_for_none_notice_instance"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Add 3rd_observation state to housing workflow"
+        description=""
+        source="2920"
+        destination="2921"
+        handler=".update_290.add_3rd_observation_to_housing_workflow"
+        profile="Products.urban:default" />
+
+
 </configure>
