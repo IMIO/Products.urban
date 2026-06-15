@@ -712,6 +712,9 @@ msgid "ISentToArchivesEvent type marker interface"
 msgstr "Envoi aux archives"
 
 #: ../interfaces.py:569
+msgid "IFreeNotificationEvent type marker interface"
+msgstr "Notification libre"
+
 msgid "ISettlementEvent type marker interface"
 msgstr "Règlement transactionnel"
 

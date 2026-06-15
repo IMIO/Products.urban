@@ -302,6 +302,10 @@
     type=".interfaces.IEventTypeType"/>
 
   <interface
+    interface=".interfaces.IFreeNotificationEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
     interface=".interfaces.ITransferOfLicenceEvent"
     type=".interfaces.IEventTypeType"/>
 
