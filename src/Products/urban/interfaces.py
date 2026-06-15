@@ -593,6 +593,10 @@ class ISettlementEvent(Interface):
     __doc__ = _("""ISettlementEvent type marker interface""")
 
 
+class IFreeNotificationEvent(Interface):
+    __doc__ = _("""IFreeNotificationEvent type marker interface""")
+
+
 class ITransferOfLicenceEvent(Interface):
     __doc__ = _("""ITransferOfLicence type marker interface""")
 
