@@ -593,6 +593,10 @@ class DeadlineExtensionHandler(IncomingNoticeHandler):
 class SummaryReportHandler(IncomingNoticeHandler):
     event_config_marker = "Products.urban.interfaces.IDecisionProjectFromSPWEvent"
 
+    @property
+    def desired_licence_state(self):
+        return "prepare_final_decision"
+
     def fill_incoming_event(self):
         super(SummaryReportHandler, self).fill_incoming_event()
         if self.notification.proposed_decision_code:
