@@ -9,6 +9,7 @@ from z3c.form.interfaces import ActionExecutionError
 from z3c.form.form import Form
 from zope import schema
 from zope.annotation.interfaces import IAnnotations
+from zope.event import notify
 from zope.i18n import translate
 from zope.interface import Interface
 from zope.interface import Invalid
@@ -19,6 +20,7 @@ from zope.schema.vocabulary import SimpleVocabulary
 
 from Products.statusmessages.interfaces import IStatusMessage
 from Products.urban import UrbanMessage as _
+from Products.urban.contentrules.notice import NoticeResponseFailedEvent
 from Products.urban.notice.exceptions import NoMatchingEventFoundException
 from Products.urban.notice.exceptions import NoPreviousEventFoundException
 from Products.urban.notice.exceptions import NoticeResponseException
@@ -27,6 +29,7 @@ from Products.urban.utils import get_ws_meetingitem_infos
 from plone import api
 from plone.app.textfield import RichText
 from plone.app.textfield.value import RichTextValue
+from plone.stringinterp.interfaces import IContextWrapper
 from plone.z3cform.layout import wrap_form
 
 
@@ -206,6 +209,21 @@ class NoticeResponseActionForm(Form):
 
         self.widgets["file_paths"].value = []
 
+    def _notify_response_error(self, notice_id="", error_message=""):
+        try:
+            args = {
+                "notice_id": notice_id,
+                "notice_error": error_message,
+            }
+            urban_folder = api.portal.get().urban
+            event_wrapper = IContextWrapper(urban_folder)(**args)
+            notify(NoticeResponseFailedEvent(event_wrapper))
+        except Exception:
+            logger.exception(
+                u"Failed to emit NoticeResponseFailedEvent for notice_id=%s",
+                notice_id,
+            )
+
     @button.buttonAndHandler(_("Send"), name="send_response")
     def handleSendResponse(self, action):
         data, errors = self.extractData()
@@ -223,6 +241,7 @@ class NoticeResponseActionForm(Form):
         except NoticeResponseException as e:
             IStatusMessage(self.request).addStatusMessage(e.get_user_message(), "error")
             # NoticeResponseException have already been logged in the service layer
+            self._notify_response_error(incoming_notice_id, e.get_error_report())
             return
         except Exception as e:
             IStatusMessage(self.request).addStatusMessage(
@@ -230,6 +249,7 @@ class NoticeResponseActionForm(Form):
                 "error",
             )
             logger.exception(u"%s", e)
+            self._notify_response_error(incoming_notice_id, str(e))
             return
         else:
             IStatusMessage(self.request).addStatusMessage(self.success_message, "info")
@@ -254,6 +274,7 @@ class NoticeResponseActionForm(Form):
                     "error",
                 )
                 logger.exception(u"%s", e)
+                self._notify_response_error(incoming_notice_id, str(e))
             else:
                 sent_documents.append(
                     {

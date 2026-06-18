@@ -81,7 +81,11 @@ msgstr ""
 msgid "A NOTICe notification import succeeded"
 msgstr ""
 
-#: ../browser/urbaneventviews.py:435
+#: ../contentrules/configure.zcml:26
+msgid "A NOTICe notification response failed"
+msgstr ""
+
+#: ../browser/urbaneventviews.py:436
 msgid "A specially formatted CSV file must be used for import. The CSV file can be created from the ODT template file (can be downloaded <a href='/++resource++Products.urban/destinaires_reimport.ods'>here</a>) by 'save as' in CSV format"
 msgstr ""
 

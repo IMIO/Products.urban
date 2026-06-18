@@ -124,4 +124,12 @@
         handler=".update_290.reindex_getDecisionDate"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Set up NOTICE form error mailing content rule"
+        description=""
+        source="2915"
+        destination="2916"
+        handler=".update_290.setup_notice_form_error_mailing_content_rule"
+        profile="Products.urban:default" />
+
 </configure>
