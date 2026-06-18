@@ -4434,6 +4434,15 @@ EventConfigs = {
             "TALCondition": "python: licence.getProcedureChoice() != 'article65'",
         },
         {
+            "id": "dossier-abandonne",
+            "title": "Dossier abandonné",
+            "eventDateLabel": "Date de notification",
+            "eventType": ("Products.urban.interfaces.IForcedEndEvent",),
+            "isKeyEvent": True,
+            "keyDates": ("eventDate",),
+            "podTemplates": (),
+        },
+        {
             "id": "plans-modificatifs",
             "title": "Plans modificatifs",
             "eventDateLabel": "Date de notification",
@@ -10213,6 +10222,15 @@ EventConfigs = {
             "TALCondition": "python: licence.getProcedureChoice() != 'article65'",
         },
         {
+            "id": "dossier-abandonne",
+            "title": "Dossier abandonné",
+            "eventDateLabel": "Date de notification",
+            "eventType": ("Products.urban.interfaces.IForcedEndEvent",),
+            "isKeyEvent": True,
+            "keyDates": ("eventDate",),
+            "podTemplates": (),
+        },
+        {
             "id": "modified-blueprints",
             "title": "Plans modificatifs",
             "activatedFields": ("transmitDate",),
@@ -11232,6 +11250,15 @@ EventConfigs = {
             "podTemplates": (),
             "eventType": ("Products.urban.interfaces.IDecisionProjectFromSPWEvent",),
             "TALCondition": "python: licence.getProcedureChoice() != 'article65'",
+        },
+        {
+            "id": "dossier-abandonne",
+            "title": "Dossier abandonné",
+            "eventDateLabel": "Date de notification",
+            "eventType": ("Products.urban.interfaces.IForcedEndEvent",),
+            "isKeyEvent": True,
+            "keyDates": ("eventDate",),
+            "podTemplates": (),
         },
         {
             "id": "modified-blueprints",
