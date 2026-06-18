@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import logging
 from datetime import datetime
 from z3c.form import button
 from z3c.form import field
@@ -20,12 +21,16 @@ from Products.statusmessages.interfaces import IStatusMessage
 from Products.urban import UrbanMessage as _
 from Products.urban.notice.exceptions import NoMatchingEventFoundException
 from Products.urban.notice.exceptions import NoPreviousEventFoundException
+from Products.urban.notice.exceptions import NoticeResponseException
 from Products.urban.notice.response import clean_accents
 from Products.urban.utils import get_ws_meetingitem_infos
 from plone import api
 from plone.app.textfield import RichText
 from plone.app.textfield.value import RichTextValue
 from plone.z3cform.layout import wrap_form
+
+
+logger = logging.getLogger("urban: Notice Forms")
 
 
 def possible_outgoing_notice_notifications(licence):
@@ -213,11 +218,18 @@ class NoticeResponseActionForm(Form):
         incoming_notice_id = data["incoming_notification"]
 
         self.field_values_to_store = {}
-        response_result = self.transfer_response(data)
-        if type(response_result) == dict and response_result.get("error") is True:
+        try:
+            response_result = self.transfer_response(data)
+        except NoticeResponseException as e:
+            IStatusMessage(self.request).addStatusMessage(e.get_user_message(), "error")
+            # NoticeResponseException have already been logged in the service layer
+            return
+        except Exception as e:
             IStatusMessage(self.request).addStatusMessage(
-                response_result.get("message"), "error"
+                _(u"Couldn't process your request. Please contact an administrator."),
+                "error",
             )
+            logger.exception(u"%s", e)
             return
         else:
             IStatusMessage(self.request).addStatusMessage(self.success_message, "info")
@@ -233,15 +245,23 @@ class NoticeResponseActionForm(Form):
                 continue
             document_title = file_obj.Title().decode("utf8")
             sent_documents = self.field_values_to_store.get("documents", [])
-            sent_documents.append(
-                {
-                    "path": file_path,
-                    "title": document_title,
-                }
-            )
-            self.field_values_to_store["documents"] = sent_documents
 
-            file_result = self.context.transfer_notice_file(incoming_notice_id, file_path)
+            try:
+                self.context.transfer_notice_file(incoming_notice_id, file_path)
+            except Exception as e:
+                IStatusMessage(self.request).addStatusMessage(
+                    _(u"Couldn't send one of the files. Please contact an administrator."),
+                    "error",
+                )
+                logger.exception(u"%s", e)
+            else:
+                sent_documents.append(
+                    {
+                        "path": file_path,
+                        "title": document_title,
+                    }
+                )
+                self.field_values_to_store["documents"] = sent_documents
 
         response_body = response_result.get("body", {}) or {}
         response_body_result = response_body.get("result", {}) or {}

@@ -168,15 +168,7 @@ msgstr ""
 msgid "An opinion to ask condition makes the rule apply only when one of the Opinion to ask selected correspond to the one of the context."
 msgstr ""
 
-#: ../services/notice.py:189
-msgid "An unexcepted error occured"
-msgstr ""
-
-#: ../services/notice.py:227
-msgid "An unexcepted error occured, please try again"
-msgstr ""
-
-#: ../contentrules/configure.zcml:132
+#: ../contentrules/configure.zcml:145
 msgid "Apply only when one of the Opinion to ask selected corresponds to the one of the context"
 msgstr ""
 
@@ -309,6 +301,23 @@ msgstr ""
 
 #: ../browser/urbaneventviews.py:653
 msgid "Couldn't import this(these) owner(s): ${owners}"
+msgstr ""
+
+#: ../browser/notice_forms.py:228
+#: ../notice/exceptions.py:145
+msgid "Couldn't process your request. Please contact an administrator."
+msgstr ""
+
+#: ../notice/exceptions.py:188
+msgid "Couldn't process your request: this notification does not exist in Notice"
+msgstr ""
+
+#: ../notice/exceptions.py:174
+msgid "Couldn't process your request: this notification does not have the correct status in Notice"
+msgstr ""
+
+#: ../browser/notice_forms.py:260
+msgid "Couldn't send one of the files. Please contact an administrator."
 msgstr ""
 
 msgid "DECISION_GESPER_1_ERE_INSTANCE"
@@ -992,14 +1001,6 @@ msgstr ""
 
 #: ../browser/notice_settings.py:48
 msgid "Notice settings"
-msgstr ""
-
-#: ../services/notice.py:210
-msgid "Notification ${id} does not exist in Notice"
-msgstr ""
-
-#: ../services/notice.py:201
-msgid "Notification ${id} does not have the correct status in Notice"
 msgstr ""
 
 #: ../browser/offdays_settings.py:74

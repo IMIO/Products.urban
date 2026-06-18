@@ -163,15 +163,7 @@ msgstr "La condition de type de permis parent d'un événement entraîne l'appli
 msgid "An opinion to ask condition makes the rule apply only when one of the Opinion to ask selected correspond to the one of the context."
 msgstr "Une condition de demande d'avis fait que la règle s'applique uniquement lorsque l'une des demande d'avis sélectionnés correspond à celle du contexte."
 
-#: ../services/notice.py:134
-msgid "An unexcepted error occured"
-msgstr "Une erreur s'est produite."
-
-#: ../services/notice.py:174
-msgid "An unexcepted error occured, please try again"
-msgstr "Une erreur s'est produite, veuillez réessayer."
-
-#: ../contentrules/configure.zcml:112
+#: ../contentrules/configure.zcml:145
 msgid "Apply only when one of the Opinion to ask selected corresponds to the one of the context"
 msgstr "Appliquer uniquement lorsque l'une des demande d'avis sélectionnée correspond à celle du contexte"
 
@@ -305,6 +297,23 @@ msgstr "Lien GIG"
 #: ../browser/urbaneventviews.py:649
 msgid "Couldn't import this(these) owner(s): ${owners}"
 msgstr "Impossible d'importer ce(s) propriétaire(s): ${owners}"
+
+#: ../browser/notice_forms.py:228
+#: ../notice/exceptions.py:145
+msgid "Couldn't process your request. Please contact an administrator."
+msgstr "Votre requête n'a pas pu être traitée. Veuillez contacter un administrateur."
+
+#: ../notice/exceptions.py:188
+msgid "Couldn't process your request: this notification does not exist in Notice"
+msgstr "Votre requête n'a pas pu être traitée: cette notification n'existe pas dans NOTICe."
+
+#: ../notice/exceptions.py:174
+msgid "Couldn't process your request: this notification does not have the correct status in Notice"
+msgstr "Votre requête n'a pas pu être traitée: cette notification a un status inapproprié dans NOTICe."
+
+#: ../browser/notice_forms.py:260
+msgid "Couldn't send one of the files. Please contact an administrator."
+msgstr "Un des fichiers n'a pas pu être envoyé. Veuillez contacter un administrateur."
 
 msgid "DECISION_GESPER_1_ERE_INSTANCE"
 msgstr "Décision 1ère instance"
@@ -979,14 +988,6 @@ msgstr "Rien à montrer."
 #: ../browser/notice_settings.py:48
 msgid "Notice settings"
 msgstr "Paramètres NOTICe"
-
-#: ../services/notice.py:155
-msgid "Notification ${id} does not exist in Notice"
-msgstr "La notification ${id} n'existe pas dans NOTICe"
-
-#: ../services/notice.py:146
-msgid "Notification ${id} does not have the correct status in Notice"
-msgstr "La notification ${id} n'a pas le bon statut dans NOTICe"
 
 #: ../browser/offdays_settings.py:74
 msgid "Off days"
