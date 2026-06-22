@@ -1695,6 +1695,3 @@ msgstr ""
 
 msgid "DECISION_GESPER_2_EME_INSTANCE"
 msgstr ""
-
-msgid "PM_ENVOI_RS_HD_SFD_COMMUNE"
-msgstr ""
