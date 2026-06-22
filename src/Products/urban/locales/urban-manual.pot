@@ -1566,6 +1566,3 @@ msgstr ""
 
 msgid "urban_label_dimensions"
 msgstr ""
-
-msgid "PM_ENVOI_RS_HD_SFD_COMMUNE"
-msgstr ""
