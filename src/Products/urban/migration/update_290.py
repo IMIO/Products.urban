@@ -365,7 +365,7 @@ def update_folder_manager_notice(context):
         return
 
     notice_folder_manager = foldermanagers.notice
-    notice_folder_manager.manageableLicences = UPDATED_URBAN_TYPES  
+    notice_folder_manager.manageableLicences = UPDATED_URBAN_TYPES
     notice_folder_manager.reindexObject()
 
     logger.info("manageableLicences updated for notice FolderManager")
@@ -408,6 +408,7 @@ def add_codt_uniquebordering_licences(context):
     logger.info("Upgrade done!")
 
 
+<<<<<<< HEAD
 def setup_notice_mailing_content_rules(context):
     logger = logging.getLogger("urban: Set up NOTICE mailing content rules")
 
@@ -596,7 +597,18 @@ EXTERNALDECISIONS_MAPPING = {
 }
 
 
+=======
+>>>>>>> 8bdb91781 (Apply review comments)
 def normalize_externaldecisions_vocabulary(context):
+
+    VOCABULARY_TERMS = ["FAVORABLE", "DEFAVORABLE", "FAVORABLE_PARTIEL", "FAVORABLE_CONDITIONS"]
+
+    EXTERNALDECISIONS_MAPPING = {
+        "favorable": "FAVORABLE",
+        "defavorable": "DEFAVORABLE",
+        "favorable-conditionnel": "FAVORABLE_CONDITIONS",
+    }
+    DESCRIPTION = u"obligatoire pour la dématérialisation => NE PAS SUPPRIMER"
     portal_urban = api.portal.get_tool("portal_urban")
     voc_folder = portal_urban.externaldecisions
     term_objects = portal_urban.listVocabularyObjects(
@@ -611,20 +623,14 @@ def normalize_externaldecisions_vocabulary(context):
     for term_id, term_obj in term_objects.items():
         # 1st case: term already has vocabulary_term id
         if term_id in VOCABULARY_TERMS:
-            term_obj.setDescription(
-                "obligatoire pour la dématérialisation => NE PAS SUPPRIMER"
-            )
+            term_obj.setDescription(DESCRIPTION)
             found_terms.add(term_id)
             continue
 
         # 2nd case: term exists but needs mapping
         existing_vocabulary_term = EXTERNALDECISIONS_MAPPING.get(term_id)
         if existing_vocabulary_term in VOCABULARY_TERMS:
-            term_obj.setId(existing_vocabulary_term)
-            term_obj.reindexObject()
-            term_obj.setDescription(
-                "obligatoire pour la dématérialisation => NE PAS SUPPRIMER"
-            )
+            term_obj.setDescription(DESCRIPTION)
             found_terms.add(existing_vocabulary_term)
 
     # 3rd case: vocabulary_term term doesn't exist yet, must be added
@@ -632,7 +638,5 @@ def normalize_externaldecisions_vocabulary(context):
         if vocabulary_term not in found_terms:
             voc_folder.invokeFactory("UrbanVocabularyTerm", id=vocabulary_term, title=vocabulary_term.replace("_", " ").capitalize())
             new_term = getattr(voc_folder, vocabulary_term)
-            new_term.setDescription(
-                "obligatoire pour la dématérialisation => NE PAS SUPPRIMER"
-            )
+            new_term.setDescription(DESCRIPTION)
             logger.info("Created missing vocabulary term: %s", vocabulary_term)
