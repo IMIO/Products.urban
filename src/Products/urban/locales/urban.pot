@@ -5928,3 +5928,6 @@ msgstr ""
 
 msgid "zip_folder_title"
 msgstr ""
+
+msgid "PM_ENVOI_RS_HD_SFD_COMMUNE"
+msgstr ""
