@@ -11,12 +11,14 @@ from Products.urban.notice.exceptions import ErrorProcessingNotificationExceptio
 from Products.urban.notice.exceptions import FailedGettingRecentNotificationsException
 from Products.urban.notice.exceptions import NoImplementationFoundException
 from Products.urban.notice.exceptions import NoLicenceFoundException
+from Products.urban.notice.exceptions import NotificationAlreadyHandledException
 from Products.urban.services import notice
 from StringIO import StringIO
 from datetime import datetime
 from plone import api
 from plone.api.exc import InvalidParameterError
 from plone.stringinterp.interfaces import IContextWrapper
+from zope.annotation.interfaces import IAnnotations
 from zope.event import notify
 from zope.i18n import translate
 from zope.lifecycleevent import ObjectModifiedEvent
@@ -292,6 +294,7 @@ class IncomingNoticeHandler(object):
 
     def process(self):
         if self.licence:
+            self.ensure_no_duplicates()
             self.update_licence()
         elif self.create_licence_if_missing:
             self.create_licence()
@@ -441,6 +444,19 @@ class IncomingNoticeHandler(object):
         if notification_ref and licence_ref != notification_ref:
             self.licence.setReferenceDGATLP(notification_ref)
             self.licence.reindexObject(idxs=["referenceDGATLP"])
+
+    def ensure_no_duplicates(self):
+        """Make sure that no event pertaining to this notification already exists in this licence"""
+        all_licence_events = sorted(
+            self.licence.getAllEvents(), key=lambda e: e.created()
+        )
+        for event in all_licence_events:
+            annotations = IAnnotations(event)
+            key = "notice_notification"
+            notice = annotations.get(key, {})
+            incoming = notice.get("incoming", {})
+            if self.notification.noticeId == incoming.get("notice_id"):
+                raise NotificationAlreadyHandledException(event)
 
     def _add_error(self, msg, serialized_data):
         error = _(
