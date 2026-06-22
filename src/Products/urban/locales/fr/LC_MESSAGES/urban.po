@@ -313,7 +313,7 @@ msgstr "Votre requête n'a pas pu être traitée: cette notification n'existe pa
 
 #: ../notice/exceptions.py:174
 msgid "Couldn't process your request: this notification does not have the correct status in Notice"
-msgstr "Votre requête n'a pas pu être traitée: cette notification a un status inapproprié dans NOTICe."
+msgstr "Votre requête n'a pas pu être traitée: cette notification a un statut inapproprié dans NOTICe."
 
 #: ../browser/notice_forms.py:260
 msgid "Couldn't send one of the files. Please contact an administrator."
