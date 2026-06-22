@@ -162,6 +162,7 @@ class NoticeNotification(NoticeElement):
             "NOTIF_COMPLETUDE1_NON_RECEVABLE_COMMUNE": "ns3:TwiceDefaultRequest",
             "NOTIF_COMPLETUDE2_IRRECEVABLE_COMMUNE": "ns3:TwiceDefaultRequest",
             "NOTIF_COMPLETUDE2_NON_RECEVABLE_COMMUNE": "ns3:TwiceDefaultRequest",
+            "PM_NOTIF_IRRECEVABLE_COMMUNE": "ns3:TwiceDefaultRequest",
             "DEMANDE_EP": "ns3:PublicSurveyRequest",
             "DEMANDE_EP_DOSSIER_PRECEDENT": "ns3:PublicSurveyRequest",
             "DEMANDE_EP_EXTRA": "ns3:PublicSurveyRequest",
