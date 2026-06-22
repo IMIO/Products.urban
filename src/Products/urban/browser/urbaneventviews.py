@@ -30,6 +30,7 @@ from z3c.form import button
 from z3c.form import field
 from z3c.form import form
 from zope.annotation import interfaces
+from zope.annotation.interfaces import IAnnotations
 from zope.component import getMultiAdapter
 from zope.component import getUtility
 from zope.interface import Interface
@@ -1314,6 +1315,7 @@ class CanTransferNoticeBaseView(BrowserView):
             and self.event_has_any_matching_markers
             and self.is_transmit_to_spw_event
             and self.is_notice_setup
+            and self.event_has_no_final_outgoing_notification
             and self.licence_has_open_incoming_notifications
         )
 
@@ -1340,6 +1342,17 @@ class CanTransferNoticeBaseView(BrowserView):
     def is_notice_setup(self):
         webservice = WebserviceNotice()
         return webservice.is_setup
+
+    @property
+    def event_has_no_final_outgoing_notification(self):
+        annotations = IAnnotations(self.context)
+        key = "notice_notification"
+        notice = annotations.get(key, {})
+        outgoings = notice.get("outgoing", [])
+        for outgoing in outgoings:
+            if outgoing.get("partial_or_final") == "FINAL":
+                return False
+        return True
 
     @property
     def licence_has_open_incoming_notifications(self):
