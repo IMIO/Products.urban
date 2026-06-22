@@ -1725,3 +1725,5 @@ msgstr ""
 
 msgid "NOTIF_LIBRE_SANS_REPONSE_2_EME_INSTANCE"
 msgstr ""
+msgid "PM_EP_COURRIER_COMMUNE"
+msgstr ""

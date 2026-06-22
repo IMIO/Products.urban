@@ -5968,3 +5968,6 @@ msgstr ""
 
 msgid "PM_PROROGATION_COURRIER_COMMUNE"
 msgstr ""
+
+msgid "PM_EP_COURRIER_COMMUNE"
+msgstr ""
