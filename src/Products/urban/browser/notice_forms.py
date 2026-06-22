@@ -215,8 +215,7 @@ class NoticeResponseActionForm(Form):
                 "notice_id": notice_id,
                 "notice_error": error_message,
             }
-            urban_folder = api.portal.get().urban
-            event_wrapper = IContextWrapper(urban_folder)(**args)
+            event_wrapper = IContextWrapper(self.context)(**args)
             notify(NoticeResponseFailedEvent(event_wrapper))
         except Exception:
             logger.exception(
