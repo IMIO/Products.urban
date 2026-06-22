@@ -172,6 +172,7 @@ class NoticeNotification(NoticeElement):
             "NOTIFICATION_RS_COMMUNE_RETARD_SFD": "ns3:SummaryReportRequest",
             "NOTIFICATION_PAS_ENVOI_RS": "ns3:SummaryReportRequest",
             "NOTIFICATION_PAS_ENVOI_RS_SFD": "ns3:SummaryReportRequest",
+            "PM_RS_PAS_ENVOYE": "ns3:SummaryReportRequest",
             "NOTIFICATION_DECISION_COMMUNE": "ns3:DecisionRequest",
             "NOTIFICATION_DEC_RS_COMMUNE": "ns3:DecisionRequest",
             "NOTIFICATION_DECRS_REFUS_TACITE_COMMUNE": "ns3:DecisionRequest",
