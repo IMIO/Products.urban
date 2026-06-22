@@ -935,6 +935,9 @@ msgstr "Notification à la commune que la demande est irrecevable (2e tour)"
 msgid "NOTIF_COMPLETUDE2_NON_RECEVABLE_COMMUNE"
 msgstr "Notification à la commune que la demande est non recevable (2e tour)"
 
+msgid "PM_NOTIF_IRRECEVABLE_COMMUNE"
+msgstr "Notification à la commune que le Plan Modificatif est irrecevable"
+
 #: ../browser/urban_configfolderview.py:22
 msgid "Name"
 msgstr "Nom"

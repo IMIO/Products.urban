@@ -1606,6 +1606,9 @@ msgstr ""
 msgid "NOTIF_COMPLETUDE2_NON_RECEVABLE_COMMUNE"
 msgstr ""
 
+msgid "PM_NOTIF_IRRECEVABLE_COMMUNE"
+msgstr ""
+
 msgid "DEMANDE_EP"
 msgstr ""
 
