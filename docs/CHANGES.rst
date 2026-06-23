@@ -8,6 +8,16 @@ Changelog
 
 .. towncrier release notes start
 
+3.0.0b16 (2026-06-23)
+---------------------
+
+New features:
+
+
+- Add index and filter for rubrics field in env licence
+  [jchandelle] (SUP-44868)
+
+
 3.0.0b15 (2026-06-22)
 ---------------------
 
