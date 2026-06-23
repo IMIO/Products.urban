@@ -537,4 +537,53 @@ def reindex_getDecisionDate(context):
 
     reindexIndexes(None, ["getDecisionDate"])
 
+
+def add_digital_term_to_deposit_type(context):
+    """
+    Add 'digital' term to the global deposittype vocabulary
+    and activate depositType on the depot-de-la-demande event config for
+    licence types.
+    """
+    logger = logging.getLogger("urban: Add MonEspace deposit type")
+    tool = getToolByName(context, "portal_urban")
+
+    if hasattr(tool, "deposittype"):
+        deposittype_folder = tool.deposittype
+        if "digital" not in deposittype_folder.objectIds():
+            deposittype_folder.invokeFactory(
+                "UrbanVocabularyTerm", id="digital", title=u"Dématérialisé"
+            )
+            logger.info("Added 'digital' vocabulary term to global deposittype")
+
+    target_configs = {
+        "codt_uniquelicence": "depot-de-la-demande",
+        "envclassone": "depot-de-la-demande",
+        "envclasstwo": "depot-de-la-demande",
+        "envclassthree": "depot-de-la-demande",
+    }
+    for urban_config_id, event_config_id in target_configs.items():
+        try:
+            licence_config = tool.getLicenceConfig(None, urbanConfigId=urban_config_id)
+            event_config = getattr(licence_config.eventconfigs, event_config_id, None)
+        except AttributeError:
+            logger.warning("Could not find config for %s, skipping", urban_config_id)
+            continue
+
+        if event_config is None:
+            logger.warning(
+                "Event config '%s' not found for %s, skipping",
+                event_config_id,
+                urban_config_id,
+            )
+            continue
+
+        activated = list(event_config.getActivatedFields())
+        if "depositType" not in activated:
+            activated.insert(0, "depositType")
+            setattr(event_config, "activatedFields", activated)
+            logger.info(
+                "Activated depositType on '%s' for %s", event_config_id, urban_config_id
+            )
+
     logger.info("upgrade step done!")
+
