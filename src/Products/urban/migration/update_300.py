@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 
+from eea.facetednavigation.interfaces import ICriteria
+from imio.helpers.catalog import reindexIndexes
 from Products.urban.interfaces import IBaseBuildLicence
 from Products.urban.browser.create_list_file import GenerateParcelList
+from Products.urban.config import URBAN_TYPES
 from Products.urban.migration.to_DX.migration_utils import UrbanLicenceToFileWalker
 from Products.urban.utils import set_default_optional_field
 from Products.urban.utils import set_eventconfig_optional_field
@@ -306,3 +309,41 @@ def fix_parcel_integer_number(context):
     walker.generate_file = GenerateParcelList(None, None)
     walker.go()
     logger.info("Upgrade done!")
+
+
+def add_rubrics_index_and_filters(context):
+    logger = logging.getLogger("urban: Add rubrics index and filters")
+    logger.info("starting upgrade steps")
+    setup_tool = api.portal.get_tool("portal_setup")
+    setup_tool.runImportStepFromProfile("profile-Products.urban:urbantypes", "catalog")
+
+    reindexIndexes(None, ["rubrics"])
+
+    portal_urban = api.portal.get_tool("portal_urban")
+    urban_folder = api.portal.get().urban
+    data = {
+        "_cid_": u"c94",
+        "title": u"Rubriques",
+        "hidden": False,
+        "index": u"rubrics",
+        "vocabulary": u"urban.vocabularies.rubrics",
+    }
+    urban_folder_criterion = ICriteria(urban_folder)
+    if urban_folder_criterion is not None:
+        urban_folder_criterion.add(
+            wid="select2", position="top", section="advanced", **data
+        )
+    for urban_type in URBAN_TYPES:
+        licence_config = portal_urban.get(urban_type.lower(), None)
+        if licence_config is None:
+            continue
+        # Add query widget
+        licence_folder = getattr(urban_folder, "{}s".format(urban_type.lower()), None)
+        if licence_folder is None:
+            continue
+        criterion = ICriteria(licence_folder)
+        if criterion is None:
+            continue
+
+        criterion.add(wid="select2", position="top", section="advanced", **data)
+    logger.info("upgrade step done!")

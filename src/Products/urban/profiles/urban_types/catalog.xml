@@ -184,5 +184,10 @@
     <indexed_attr value="getComplementary_delay" />
   </index>
   <column value="getComplementary_delay" />
-  <!-- ##/code-section FOOT -->
+
+  <column value="rubrics"/>
+  <index name="rubrics" meta_type="KeywordIndex">
+    <indexed_attr value="rubrics"/>
+  </index>
+<!-- ##/code-section FOOT -->
 </object>
