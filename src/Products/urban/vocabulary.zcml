@@ -112,4 +112,9 @@
       provides="zope.schema.interfaces.IVocabularyFactory"
       />
 
+  <utility
+    component=".vocabularies.RubricsFactory"
+    name="urban.vocabularies.rubrics"
+    provides="zope.schema.interfaces.IVocabularyFactory"
+  />
 </configure>

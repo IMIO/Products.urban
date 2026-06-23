@@ -159,4 +159,13 @@
       profile="Products.urban:default"
       />
 
+  <gs:upgradeStep
+    title="Add rubrics index and filters"
+    description=""
+    source="3003"
+    destination="3004"
+    handler=".update_300.add_rubrics_index_and_filters"
+    profile="Products.urban:default"
+    />
+
 </configure>

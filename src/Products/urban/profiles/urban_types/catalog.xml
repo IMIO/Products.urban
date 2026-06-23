@@ -202,5 +202,9 @@
   </index>
   <column value="referenceDGATLP"/>
 
+  <index name="rubrics" meta_type="KeywordIndex">
+    <indexed_attr value="rubrics"/>
+  </index>
+  <column value="rubrics"/>
 <!-- ##/code-section FOOT -->
 </object>

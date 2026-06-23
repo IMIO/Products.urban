@@ -46,6 +46,10 @@ from plone import api
 from zope.interface import implements
 
 
+import logging
+
+logger = logging.getLogger("EnvironmentBase.py : ")
+
 optional_fields = [
     "roadTechnicalAdvice",
     "locationTechnicalAdvice",

@@ -124,6 +124,10 @@
       factory=".indexes.additional_reference"
       name="getAdditionalReference"
       />
+  <adapter
+      factory=".indexes.rubrics_indexer"
+      name="rubrics"
+      />
 
   <!-- Unindex UrbanEvent, UrbanDoc, Applicant and PortionOut -->
 
