@@ -536,6 +536,8 @@ def reindex_getDecisionDate(context):
     logger = logging.getLogger("urban: Reindex getDecisionDate")
 
     reindexIndexes(None, ["getDecisionDate"])
+
+
 def add_digital_term_to_deposit_type(context):
     """
     Add 'digital' term to the global deposittype vocabulary
