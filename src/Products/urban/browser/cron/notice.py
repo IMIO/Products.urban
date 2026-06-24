@@ -45,13 +45,10 @@ class ImportFromNoticeView(BrowserView):
 
         self.notice_service = notice.WebserviceNotice()
         self.retry_failed_notifications = self.request.form.get("retry") == "1"
-        self.last_import_date = (
-            api.portal.get_registry_record(
-                "Products.urban.browser.notice_settings.INoticeSettings.last_import_date",
-                default=datetime(2000, 1, 1),
-            )
-            or datetime(2000, 1, 1)
-        )
+        self.last_import_date = api.portal.get_registry_record(
+            "Products.urban.browser.notice_settings.INoticeSettings.last_import_date",
+            default=datetime(2000, 1, 1),
+        ) or datetime(2000, 1, 1)
         self.latest_successful_date = self.last_import_date
         self.failed_notifications = (
             api.portal.get_registry_record(
@@ -67,7 +64,7 @@ class ImportFromNoticeView(BrowserView):
         if not self.retry_failed_notifications or not self.failed_notifications:
             return
 
-        logger.info(u"Retrying %d failed notifications", len(self.failed_notifications))
+        logger.info("Retrying %d failed notifications", len(self.failed_notifications))
         remaining_failed = []
 
         for failed_notice_id in self.failed_notifications:
@@ -90,7 +87,7 @@ class ImportFromNoticeView(BrowserView):
                     failed_notice_id, exc, retry=True
                 )
                 logger.exception(
-                    u"%s",
+                    "%s",
                     custom_exc,
                 )
                 self._notify_import_error(
@@ -142,7 +139,7 @@ class ImportFromNoticeView(BrowserView):
                 savepoint.rollback()
                 custom_exc = ErrorProcessingNotificationException(notice_id, exc)
                 logger.exception(
-                    u"%s",
+                    "%s",
                     custom_exc,
                 )
                 self._notify_import_error(
@@ -160,7 +157,7 @@ class ImportFromNoticeView(BrowserView):
                 self.latest_successful_date,
             )
             logger.info(
-                u"Updated last_import_date to %s",
+                "Updated last_import_date to %s",
                 self.latest_successful_date.isoformat(),
             )
 
@@ -170,7 +167,7 @@ class ImportFromNoticeView(BrowserView):
         )
         if self.failed_notifications:
             logger.warning(
-                u"%d notification(s) recorded as failed", len(self.failed_notifications)
+                "%d notification(s) recorded as failed", len(self.failed_notifications)
             )
 
     def _get_notice_notifications(self):
@@ -180,7 +177,7 @@ class ImportFromNoticeView(BrowserView):
         except Exception as exc:
             custom_exc = FailedGettingRecentNotificationsException(exc)
             logger.exception(
-                u"%s",
+                "%s",
                 custom_exc,
             )
             self._notify_import_error(
@@ -199,7 +196,7 @@ class ImportFromNoticeView(BrowserView):
             notify(NoticeImportFailedEvent(event_wrapper))
         except Exception:
             logger.exception(
-                u"Failed to emit NoticeImportFailedEvent for notice_id=%s",
+                "Failed to emit NoticeImportFailedEvent for notice_id=%s",
                 notice_id,
             )
 
@@ -294,7 +291,7 @@ class ImportFromNoticeView(BrowserView):
             "DEMANDE_AVIS_OBLIGATOIRE_PLAN_MODIFIE_1_ERE_INSTANCE",
             "DEMANDE_AVIS_FACULTATIF_PLAN_MODIFIE_1_ERE_INSTANCE",
             "DEMANDE_ENQUETE_PUBLIQUE_PLAN_MODIFIE_1_ERE_INSTANCE",
-            "DEMANDE_ANNONCE PROJET_PLAN_MODIFIE_1_ERE_INSTANCE",
+            "DEMANDE_ANNONCE_PROJET_PLAN_MODIFIE_1_ERE_INSTANCE",
             "PM_EP_COURRIER_COMMUNE",
         ):
             handler = GesperAmendedPlansSPWHandler
@@ -372,12 +369,22 @@ class IncomingNoticeHandler(object):
             if not parcel.parcel:
                 data = {
                     translate(_("CaPaKey"), context=self.request): parcel.capakey,
-                    translate(_("urban_label_division"), context=self.request): parcel.division,
-                    translate(_("urban_label_section"), context=self.request): parcel.section,
-                    translate(_("urban_label_radical"), context=self.request): parcel.radical,
+                    translate(
+                        _("urban_label_division"), context=self.request
+                    ): parcel.division,
+                    translate(
+                        _("urban_label_section"), context=self.request
+                    ): parcel.section,
+                    translate(
+                        _("urban_label_radical"), context=self.request
+                    ): parcel.radical,
                     translate(_("urban_label_bis"), context=self.request): parcel.bis,
-                    translate(_("urban_label_exposant"), context=self.request): parcel.exposant,
-                    translate(_("urban_label_puissance"), context=self.request): parcel.puissance,
+                    translate(
+                        _("urban_label_exposant"), context=self.request
+                    ): parcel.exposant,
+                    translate(
+                        _("urban_label_puissance"), context=self.request
+                    ): parcel.puissance,
                 }
                 self._add_error(_("Can not find a parcel"), data)
                 continue
@@ -386,13 +393,21 @@ class IncomingNoticeHandler(object):
     def import_addresses(self):
         for address in self.notification.addresses:
             data = {
-                translate(_("urban_label_street"), context=self.request): address.notice_street,
-                translate(_("urban_label_locality"), context=self.request): address.locality,
+                translate(
+                    _("urban_label_street"), context=self.request
+                ): address.notice_street,
+                translate(
+                    _("urban_label_locality"), context=self.request
+                ): address.locality,
                 translate(
                     _("municipality"), context=self.request
                 ): address.municipality,
-                translate(_("urban_label_zipCode"), context=self.request): address.postCode,
-                translate(_("urban_label_number"), context=self.request): address.number,
+                translate(
+                    _("urban_label_zipCode"), context=self.request
+                ): address.postCode,
+                translate(
+                    _("urban_label_number"), context=self.request
+                ): address.number,
             }
             if not address.address:
                 self._add_error(_("Can not find an address"), data)
@@ -508,24 +523,26 @@ class IncomingNoticeHandler(object):
 
     def _add_error(self, msg, serialized_data):
         error = _(
-            u"<p>${msg} for informations: ${data}</p>",
+            "<p>${msg} for informations: ${data}</p>",
             mapping={
                 "msg": msg,
-                "data": u", ".join(
-                    [u"{0}: {1}".format(k, v) for k, v in serialized_data.items()]
+                "data": ", ".join(
+                    ["{0}: {1}".format(k, v) for k, v in serialized_data.items()]
                 ),
             },
         )
         description_field = self.licence.getField("description")
         old_description = description_field.getRaw(self.licence)
-        new_description = old_description + translate(error, context=self.request).encode("utf8")
+        new_description = old_description + translate(
+            error, context=self.request
+        ).encode("utf8")
         description_field.set(self.licence, new_description)
         self.licence._p_changed = 1
 
     @property
     def _notification_transition_comment(self):
         msg = _(
-            u"NOTICe notification n° ${noticeId}",
+            "NOTICe notification n° ${noticeId}",
             mapping={
                 "noticeId": self.notification.noticeId,
             },
@@ -545,7 +562,7 @@ class IncomingNoticeHandler(object):
             notify(NoticeImportSucceededEvent(event_wrapper))
         except Exception:
             logger.exception(
-                u"Failed to emit NoticeImportSucceededEvent for notice_id=%s",
+                "Failed to emit NoticeImportSucceededEvent for notice_id=%s",
                 notice_id,
             )
 
@@ -691,7 +708,7 @@ class DecisionSPWHandler(IncomingNoticeHandler):
                 self.event.setDecision(urban_decision_term)
             else:
                 self.event.setDescription(
-                    u"Décision: {}".format(self.notification.decision_code)
+                    "Décision: {}".format(self.notification.decision_code)
                 )
 
     @property
@@ -730,15 +747,11 @@ class GesperDecisionSPWHandler(IncomingNoticeHandler):
                 "UFD2_DECISION_FD_OCTROI": "favorable",
                 "UFD2_DECISION_FD_REFUSEE": "defavorable",
             }
-            urban_decision_term = mapping_decision_terms.get(
-                decision_code
-            )
+            urban_decision_term = mapping_decision_terms.get(decision_code)
             if urban_decision_term:
                 self.event.setDecision(urban_decision_term)
             else:
-                self.event.setDescription(
-                    u"Décision: {}".format(decision_code)
-                )
+                self.event.setDescription("Décision: {}".format(decision_code))
 
     @property
     def desired_licence_state(self):
