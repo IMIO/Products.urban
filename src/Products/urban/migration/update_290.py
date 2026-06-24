@@ -50,9 +50,9 @@ def initialize_notice_settings(context):
         )
         registry_record = Record(registry_field)
         registry_record.value = None
-        registry.records[
-            "{0}.sent_on_behalf_of_municipality_id".format(base)
-        ] = registry_record
+        registry.records["{0}.sent_on_behalf_of_municipality_id".format(base)] = (
+            registry_record
+        )
     if "{0}.last_import_date".format(base) not in registry.records:
         registry_field = field.Datetime(title=INoticeSettings["last_import_date"].title)
         registry_record = Record(registry_field)
@@ -136,7 +136,9 @@ def add_event_config_types_notice(context):
                 old_interfaces = folder_event.getEventType()
                 missing_interfaces = set(uet.get("eventType", [])) - set(old_interfaces)
                 if missing_interfaces:
-                    new_interfaces = tuple(list(old_interfaces) + list(missing_interfaces))
+                    new_interfaces = tuple(
+                        list(old_interfaces) + list(missing_interfaces)
+                    )
                     setattr(folder_event, "eventType", new_interfaces)
 
             last_urbaneventype_id = id
@@ -271,9 +273,7 @@ def update_documentation_url(context):
     """
     Update documentation url
     """
-    logger = logging.getLogger(
-        "urban: Update documentation url"
-    )
+    logger = logging.getLogger("urban: Update documentation url")
     logger.info("starting upgrade steps")
     setup_tool = api.portal.get_tool("portal_setup")
     setup_tool.runImportStepFromProfile("profile-Products.urban:default", "actions")
@@ -284,9 +284,7 @@ def add_architect_folder_view(context):
     """
     Add architect folder view
     """
-    logger = logging.getLogger(
-        "urban: Add architect folder view"
-    )
+    logger = logging.getLogger("urban: Add architect folder view")
     logger.info("starting upgrade steps")
     portal = api.portal.get()
     architects_folder = portal["urban"]["architects"]
@@ -297,7 +295,9 @@ def add_architect_folder_view(context):
 def recover_event_config_portal_types(context):
     from Products.urban.profiles.extra.data import EventConfigs
 
-    logger = logging.getLogger("urban: Recover `UrbanEventCollege` portal type in relevant EventConfig")
+    logger = logging.getLogger(
+        "urban: Recover `UrbanEventCollege` portal type in relevant EventConfig"
+    )
 
     tool = getToolByName(context, "portal_urban")
     for urban_config_id in EventConfigs:
@@ -318,7 +318,10 @@ def recover_event_config_portal_types(context):
 
             if folder_event:  # patch existing eventConfig
                 should_be_college = "pmTitle" in folder_event.getActivatedFields()
-                if should_be_college and folder_event.getEventPortalType() != "UrbanEventCollege":
+                if (
+                    should_be_college
+                    and folder_event.getEventPortalType() != "UrbanEventCollege"
+                ):
                     setattr(folder_event, "eventPortalType", "UrbanEventCollege")
 
     logger.info("upgrade step done!")
@@ -338,7 +341,9 @@ def setup_index_referenceFT(context):
 def fix_housing_roaddecree(context):
     logger = logging.getLogger("urban: Fix housing and roaddecree security")
     setup_tool = api.portal.get_tool("portal_setup")
-    setup_tool.runImportStepFromProfile("profile-Products.urban:urbantypes", "factorytool")
+    setup_tool.runImportStepFromProfile(
+        "profile-Products.urban:urbantypes", "factorytool"
+    )
     portal_types = ["Housing", "RoadDecree"]
     for portal_type in portal_types:
         set_licence_folder_security(portal_type)
@@ -414,38 +419,38 @@ def setup_notice_mailing_content_rules(context):
     portal = api.portal.get()
 
     success_template = dedent(
-        u"""
+        """
         Bonjour,
-        
+
         Une notification du SPW a été réceptionnée pour:
-        
+
         - Dossier : ${parent_url}
         - Type de notification : ${notice_type}
         - Mail de l'agent traitant : ${folder_manager_email}
-        
+
         Belle journée.
         """
     ).strip()
 
     failure_template = dedent(
-        u"""
+        """
         Créer un ticket JIRA à l'attention d'un développeur
         (composant : Dématérialisation, sprint : En cours, état : Bloquant)
 
         "Bonjour,
-        
+
         Une erreur d'implémentation de notification du webservice Notice a été enregistrée.
         Merci de prendre connaissance des raisons dans Kibana et de la débloquer.
-        
+
         - commune / dossier : ${parent_url}
         - identifiant NOTICE : ${notice_id}
-        
+
         ```
         ${notice_error}
         ```
-        
+
         Belle journée.
-        
+
         Aurore"
         """
     ).strip()
@@ -453,7 +458,7 @@ def setup_notice_mailing_content_rules(context):
     rule_id = "notification_tlpe_imported_successfully"
     if not ContentRulesUtils.rule_exists(rule_id):
         ContentRulesUtils.create_content_rule(
-            title=u"Notification TLPE importée",
+            title="Notification TLPE importée",
             event_interface=INoticeImportSucceededEvent,
             rule_id=rule_id,
         )
@@ -467,8 +472,8 @@ def setup_notice_mailing_content_rules(context):
             action_name="plone.actions.Mail",
             data={
                 "exclude_actor": False,
-                "subject": u"Notification importée",
-                "recipients": u"support-urban@imio.be",
+                "subject": "Notification importée",
+                "recipients": "support-urban@imio.be",
                 "message": success_template,
             },
         )
@@ -478,7 +483,7 @@ def setup_notice_mailing_content_rules(context):
     rule_id = "notification_arne_imported_successfully"
     if not ContentRulesUtils.rule_exists(rule_id):
         ContentRulesUtils.create_content_rule(
-            title=u"Notification ARNE importée",
+            title="Notification ARNE importée",
             event_interface=INoticeImportSucceededEvent,
             rule_id=rule_id,
         )
@@ -501,8 +506,8 @@ def setup_notice_mailing_content_rules(context):
             action_name="plone.actions.Mail",
             data={
                 "exclude_actor": False,
-                "subject": u"Notification importée",
-                "recipients": u"support-urban@imio.be",
+                "subject": "Notification importée",
+                "recipients": "support-urban@imio.be",
                 "message": success_template,
             },
         )
@@ -512,7 +517,7 @@ def setup_notice_mailing_content_rules(context):
     rule_id = "notification_import_failed"
     if not ContentRulesUtils.rule_exists(rule_id):
         ContentRulesUtils.create_content_rule(
-            title=u"Notification NOTICE en erreur",
+            title="Notification NOTICE en erreur",
             event_interface=INoticeImportFailedEvent,
             rule_id=rule_id,
         )
@@ -521,8 +526,8 @@ def setup_notice_mailing_content_rules(context):
             action_name="plone.actions.Mail",
             data={
                 "exclude_actor": False,
-                "subject": u"Notification Notice en erreur",
-                "recipients": u"support-urban@imio.be",
+                "subject": "Notification Notice en erreur",
+                "recipients": "support-urban@imio.be",
                 "message": failure_template,
             },
         )
@@ -551,7 +556,7 @@ def add_digital_term_to_deposit_type(context):
         deposittype_folder = tool.deposittype
         if "digital" not in deposittype_folder.objectIds():
             deposittype_folder.invokeFactory(
-                "UrbanVocabularyTerm", id="digital", title=u"Dématérialisé"
+                "UrbanVocabularyTerm", id="digital", title="Dématérialisé"
             )
             logger.info("Added 'digital' vocabulary term to global deposittype")
 
@@ -590,14 +595,19 @@ def add_digital_term_to_deposit_type(context):
 
 def normalize_externaldecisions_vocabulary(context):
 
-    VOCABULARY_TERMS = ["FAVORABLE", "DEFAVORABLE", "FAVORABLE_PARTIEL", "FAVORABLE_CONDITIONS"]
+    VOCABULARY_TERMS = [
+        "FAVORABLE",
+        "DEFAVORABLE",
+        "FAVORABLE_PARTIEL",
+        "FAVORABLE_CONDITIONS",
+    ]
 
     EXTERNALDECISIONS_MAPPING = {
         "favorable": "FAVORABLE",
         "defavorable": "DEFAVORABLE",
         "favorable-conditionnel": "FAVORABLE_CONDITIONS",
     }
-    DESCRIPTION = u"obligatoire pour la dématérialisation => NE PAS SUPPRIMER"
+    DESCRIPTION = "obligatoire pour la dématérialisation => NE PAS SUPPRIMER"
     portal_urban = api.portal.get_tool("portal_urban")
     voc_folder = portal_urban.externaldecisions
     term_objects = portal_urban.listVocabularyObjects(
@@ -625,7 +635,11 @@ def normalize_externaldecisions_vocabulary(context):
     # 3rd case: vocabulary_term term doesn't exist yet, must be added
     for vocabulary_term in VOCABULARY_TERMS:
         if vocabulary_term not in found_terms:
-            voc_folder.invokeFactory("UrbanVocabularyTerm", id=vocabulary_term, title=vocabulary_term.replace("_", " ").capitalize())
+            voc_folder.invokeFactory(
+                "UrbanVocabularyTerm",
+                id=vocabulary_term,
+                title=vocabulary_term.replace("_", " ").capitalize(),
+            )
             new_term = getattr(voc_folder, vocabulary_term)
             new_term.setDescription(DESCRIPTION)
             logger.info("Created missing vocabulary term: %s", vocabulary_term)
