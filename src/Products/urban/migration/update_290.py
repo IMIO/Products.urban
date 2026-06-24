@@ -408,7 +408,6 @@ def add_codt_uniquebordering_licences(context):
     logger.info("Upgrade done!")
 
 
-<<<<<<< HEAD
 def setup_notice_mailing_content_rules(context):
     logger = logging.getLogger("urban: Set up NOTICE mailing content rules")
 
@@ -588,17 +587,7 @@ def add_digital_term_to_deposit_type(context):
 
     logger.info("upgrade step done!")
 
-VOCABULARY_TERMS = ["FAVORABLE", "DEFAVORABLE", "FAVORABLE_PARTIEL", "FAVORABLE_CONDITIONS"]
 
-EXTERNALDECISIONS_MAPPING = {
-    "favorable": "FAVORABLE",
-    "defavorable": "DEFAVORABLE",
-    "favorable-conditionnel": "FAVORABLE_CONDITIONS",
-}
-
-
-=======
->>>>>>> 8bdb91781 (Apply review comments)
 def normalize_externaldecisions_vocabulary(context):
 
     VOCABULARY_TERMS = ["FAVORABLE", "DEFAVORABLE", "FAVORABLE_PARTIEL", "FAVORABLE_CONDITIONS"]
