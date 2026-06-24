@@ -1698,3 +1698,9 @@ msgstr ""
 
 msgid "PM_ENVOI_RS_HD_SFD_COMMUNE"
 msgstr ""
+
+msgid "NOTIFICATION_RS_COMMUNE_RETARD_SFD"
+msgstr ""
+
+msgid "PM_ENVOI_RS_COMMUNE"
+msgstr ""
