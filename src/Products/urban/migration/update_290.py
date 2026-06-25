@@ -136,7 +136,9 @@ def add_event_config_types_notice(context):
                 old_interfaces = folder_event.getEventType()
                 missing_interfaces = set(uet.get("eventType", [])) - set(old_interfaces)
                 if missing_interfaces:
-                    new_interfaces = tuple(list(old_interfaces) + list(missing_interfaces))
+                    new_interfaces = tuple(
+                        list(old_interfaces) + list(missing_interfaces)
+                    )
                     setattr(folder_event, "eventType", new_interfaces)
 
             last_urbaneventype_id = id
@@ -271,9 +273,7 @@ def update_documentation_url(context):
     """
     Update documentation url
     """
-    logger = logging.getLogger(
-        "urban: Update documentation url"
-    )
+    logger = logging.getLogger("urban: Update documentation url")
     logger.info("starting upgrade steps")
     setup_tool = api.portal.get_tool("portal_setup")
     setup_tool.runImportStepFromProfile("profile-Products.urban:default", "actions")
@@ -284,9 +284,7 @@ def add_architect_folder_view(context):
     """
     Add architect folder view
     """
-    logger = logging.getLogger(
-        "urban: Add architect folder view"
-    )
+    logger = logging.getLogger("urban: Add architect folder view")
     logger.info("starting upgrade steps")
     portal = api.portal.get()
     architects_folder = portal["urban"]["architects"]
@@ -297,7 +295,9 @@ def add_architect_folder_view(context):
 def recover_event_config_portal_types(context):
     from Products.urban.profiles.extra.data import EventConfigs
 
-    logger = logging.getLogger("urban: Recover `UrbanEventCollege` portal type in relevant EventConfig")
+    logger = logging.getLogger(
+        "urban: Recover `UrbanEventCollege` portal type in relevant EventConfig"
+    )
 
     tool = getToolByName(context, "portal_urban")
     for urban_config_id in EventConfigs:
@@ -318,7 +318,10 @@ def recover_event_config_portal_types(context):
 
             if folder_event:  # patch existing eventConfig
                 should_be_college = "pmTitle" in folder_event.getActivatedFields()
-                if should_be_college and folder_event.getEventPortalType() != "UrbanEventCollege":
+                if (
+                    should_be_college
+                    and folder_event.getEventPortalType() != "UrbanEventCollege"
+                ):
                     setattr(folder_event, "eventPortalType", "UrbanEventCollege")
 
     logger.info("upgrade step done!")
@@ -338,7 +341,9 @@ def setup_index_referenceFT(context):
 def fix_housing_roaddecree(context):
     logger = logging.getLogger("urban: Fix housing and roaddecree security")
     setup_tool = api.portal.get_tool("portal_setup")
-    setup_tool.runImportStepFromProfile("profile-Products.urban:urbantypes", "factorytool")
+    setup_tool.runImportStepFromProfile(
+        "profile-Products.urban:urbantypes", "factorytool"
+    )
     portal_types = ["Housing", "RoadDecree"]
     for portal_type in portal_types:
         set_licence_folder_security(portal_type)
@@ -365,7 +370,7 @@ def update_folder_manager_notice(context):
         return
 
     notice_folder_manager = foldermanagers.notice
-    notice_folder_manager.manageableLicences = UPDATED_URBAN_TYPES  
+    notice_folder_manager.manageableLicences = UPDATED_URBAN_TYPES
     notice_folder_manager.reindexObject()
 
     logger.info("manageableLicences updated for notice FolderManager")
@@ -416,13 +421,13 @@ def setup_notice_mailing_content_rules(context):
     success_template = dedent(
         u"""
         Bonjour,
-        
+
         Une notification du SPW a été réceptionnée pour:
-        
+
         - Dossier : ${parent_url}
         - Type de notification : ${notice_type}
         - Mail de l'agent traitant : ${folder_manager_email}
-        
+
         Belle journée.
         """
     ).strip()
@@ -433,19 +438,19 @@ def setup_notice_mailing_content_rules(context):
         (composant : Dématérialisation, sprint : En cours, état : Bloquant)
 
         "Bonjour,
-        
+
         Une erreur d'implémentation de notification du webservice Notice a été enregistrée.
         Merci de prendre connaissance des raisons dans Kibana et de la débloquer.
-        
+
         - commune / dossier : ${parent_url}
         - identifiant NOTICE : ${notice_id}
-        
+
         ```
         ${notice_error}
         ```
-        
+
         Belle journée.
-        
+
         Aurore"
         """
     ).strip()
@@ -587,3 +592,54 @@ def add_digital_term_to_deposit_type(context):
 
     logger.info("upgrade step done!")
 
+
+def normalize_externaldecisions_vocabulary(context):
+
+    VOCABULARY_TERMS = [
+        "FAVORABLE",
+        "DEFAVORABLE",
+        "FAVORABLE_PARTIEL",
+        "FAVORABLE_CONDITIONS",
+    ]
+
+    EXTERNALDECISIONS_MAPPING = {
+        "favorable": "FAVORABLE",
+        "defavorable": "DEFAVORABLE",
+        "favorable-conditionnel": "FAVORABLE_CONDITIONS",
+    }
+    DESCRIPTION = u"obligatoire pour la dématérialisation => NE PAS SUPPRIMER"
+    portal_urban = api.portal.get_tool("portal_urban")
+    voc_folder = portal_urban.externaldecisions
+    term_objects = portal_urban.listVocabularyObjects(
+        "externaldecisions",
+        context,
+        inUrbanConfig=False,
+        allowedStates=["enabled", "disabled"],
+    )
+
+    found_terms = set()
+
+    for term_id, term_obj in term_objects.items():
+        # 1st case: term already has vocabulary_term id
+        if term_id in VOCABULARY_TERMS:
+            term_obj.setDescription(DESCRIPTION)
+            found_terms.add(term_id)
+            continue
+
+        # 2nd case: term exists but needs mapping
+        existing_vocabulary_term = EXTERNALDECISIONS_MAPPING.get(term_id)
+        if existing_vocabulary_term in VOCABULARY_TERMS:
+            term_obj.setDescription(DESCRIPTION)
+            found_terms.add(existing_vocabulary_term)
+
+    # 3rd case: vocabulary_term term doesn't exist yet, must be added
+    for vocabulary_term in VOCABULARY_TERMS:
+        if vocabulary_term not in found_terms:
+            voc_folder.invokeFactory(
+                "UrbanVocabularyTerm",
+                id=vocabulary_term,
+                title=vocabulary_term.replace("_", " ").capitalize(),
+            )
+            new_term = getattr(voc_folder, vocabulary_term)
+            new_term.setDescription(DESCRIPTION)
+            logger.info("Created missing vocabulary term: %s", vocabulary_term)
