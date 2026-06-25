@@ -234,6 +234,7 @@ class ImportFromNoticeView(BrowserView):
             "PM_RS_PAS_ENVOYE",
             "PM_RS_PAS_ENVOYE_SFD",
             "PM_ENVOI_RS_HD_SFD_COMMUNE",
+            "PM_ENVOI_RS_COMMUNE",
         ):
             handler = SummaryReportHandler
         elif detailed_notification.notice_type in (
@@ -594,6 +595,15 @@ class DeadlineExtensionHandler(IncomingNoticeHandler):
 
 class SummaryReportHandler(IncomingNoticeHandler):
     event_config_marker = "Products.urban.interfaces.IDecisionProjectFromSPWEvent"
+
+    @property
+    def desired_licence_state(self):
+        return "prepare_final_decision"
+
+    def fill_incoming_event(self):
+        super(SummaryReportHandler, self).fill_incoming_event()
+        if self.notification.proposed_decision_code:
+            self.event.setExternalDecision(self.notification.proposed_decision_code)
 
 
 class DecisionSPWHandler(IncomingNoticeHandler):
