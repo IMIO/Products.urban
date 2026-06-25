@@ -220,7 +220,10 @@ class ImportFromNoticeView(BrowserView):
             handler = PublicSurveyHandler
         elif detailed_notification.notice_type == "DEMANDE_EP_EXTRA":
             handler = BorderingPublicSurveyHandler
-        elif detailed_notification.notice_type == "NOTIFICATION_PROROGATION_COMMUNE":
+        elif detailed_notification.notice_type in (
+            "NOTIFICATION_PROROGATION_COMMUNE",
+            "PM_PROROGATION_COURRIER_COMMUNE",
+        ):
             handler = DeadlineExtensionHandler
         elif detailed_notification.notice_type in (
             "NOTIFICATION_RS_COMMUNE",

@@ -167,6 +167,7 @@ class NoticeNotification(NoticeElement):
             "DEMANDE_EP_DOSSIER_PRECEDENT": "ns3:PublicSurveyRequest",
             "DEMANDE_EP_EXTRA": "ns3:PublicSurveyRequest",
             "NOTIFICATION_PROROGATION_COMMUNE": "ns3:TwiceDefaultRequest",
+            "PM_PROROGATION_COURRIER_COMMUNE": "ns3:TwiceDefaultRequest",
             "NOTIFICATION_RS_COMMUNE": "ns3:SummaryReportRequest",
             "NOTIFICATION_RS_COMMUNE_RETARD": "ns3:SummaryReportRequest",
             "NOTIFICATION_RS_COMMUNE_RETARD_SFD": "ns3:SummaryReportRequest",

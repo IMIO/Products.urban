@@ -5938,3 +5938,6 @@ msgstr ""
 #: ../browser/cron/notice.py:113
 msgid "zipcode"
 msgstr ""
+
+msgid "PM_PROROGATION_COURRIER_COMMUNE"
+msgstr ""
