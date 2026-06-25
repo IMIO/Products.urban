@@ -556,3 +556,6 @@ msgstr ""
 
 msgid "ComplementaryDelayTerm"
 msgstr ""
+
+msgid "warning_add_a_proprietary"
+msgstr ""
