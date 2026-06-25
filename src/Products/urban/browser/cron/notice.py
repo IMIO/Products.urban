@@ -241,6 +241,9 @@ class ImportFromNoticeView(BrowserView):
             "NOTIFICATION_DECISION_COMMUNE",
             "NOTIFICATION_DEC_RS_COMMUNE",
             "NOTIFICATION_DECRS_REFUS_TACITE_COMMUNE",
+            "PM_ENVOI_DECISION_FT_COURRIER_COMMUNE",
+            "PM_RS_DECISION_COMMUNE",
+            "PM_REFUS_TACITE_COMMUNE",
         ):
             handler = DecisionSPWHandler
 

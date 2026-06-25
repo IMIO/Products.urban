@@ -5949,3 +5949,12 @@ msgstr "Partie de l'immeuble concernée"
 
 msgid "urban_label_buildingType"
 msgstr "Nature de l'immeuble"
+
+msgid "PM_ENVOI_DECISION_FT_COURRIER_COMMUNE"
+msgstr "Plans Modificatifs - Notification à la commune de la décision"
+
+msgid "PM_RS_DECISION_COMMUNE"
+msgstr "Plans Modificatifs - Notification à la commune que le RS vaut décision"
+
+msgid "PM_REFUS_TACITE_COMMUNE"
+msgstr "Plans modificatifs - Notification à la commune du refus tacite"
