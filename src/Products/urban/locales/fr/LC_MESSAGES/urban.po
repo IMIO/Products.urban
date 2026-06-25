@@ -5980,3 +5980,12 @@ msgstr "Plans Modificatifs - Notification à la commune que le RS vaut décision
 
 msgid "PM_REFUS_TACITE_COMMUNE"
 msgstr "Plans modificatifs - Notification à la commune du refus tacite"
+
+msgid "ABANDON_COMMUNE_MANUELLE"
+msgstr "Notification à la commune de l'abandon de la procédure"
+
+msgid "PM_ABANDON_COMMUNE_EP"
+msgstr "Plans modificatifs - Notification à la commune de l'abandon de la procédure"
+
+msgid "PM_ABANDON_COMMUNE_EP_FTFD"
+msgstr "Plans modificatifs - Notification à la commune de l'abandon de la procédure (AC=FTFD)"
